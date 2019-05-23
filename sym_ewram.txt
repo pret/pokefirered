@@ -764,7 +764,7 @@ gUnknown_2037EFE: @ 2037EFE
 gUnknown_2037F00: @ 2037F00
 	.space 0x2
 
-gUnknown_2037F02: @ 2037F02
+gBattleAnimArgs: @ 2037F02
 	.space 0x10
 
 gUnknown_2037F12: @ 2037F12
@@ -782,10 +782,10 @@ gUnknown_2037F17: @ 2037F17
 gUnknown_2037F18: @ 2037F18
 	.space 0x2
 
-gUnknown_2037F1A: @ 2037F1A
+gBattleAnimAttacker: @ 2037F1A
 	.space 0x1
 
-gUnknown_2037F1B: @ 2037F1B
+gBattleAnimTarget: @ 2037F1B
 	.space 0x1
 
 gUnknown_2037F1C: @ 2037F1C

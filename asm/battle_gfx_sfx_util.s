@@ -417,10 +417,10 @@ _08034094:
 _080340D8: .4byte gSprites
 _080340DC: .4byte gUnknown_2023D44
 _080340E0:
-	ldr r0, _08034144 @ =gUnknown_2037F1A
+	ldr r0, _08034144 @ =gBattleAnimAttacker
 	mov r2, r10
 	strb r2, [r0]
-	ldr r0, _08034148 @ =gUnknown_2037F1B
+	ldr r0, _08034148 @ =gBattleAnimTarget
 	mov r1, sp
 	ldrb r1, [r1]
 	strb r1, [r0]
@@ -466,8 +466,8 @@ _08034132:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08034144: .4byte gUnknown_2037F1A
-_08034148: .4byte gUnknown_2037F1B
+_08034144: .4byte gBattleAnimAttacker
+_08034148: .4byte gBattleAnimTarget
 _0803414C: .4byte gUnknown_2024018
 _08034150: .4byte gUnknown_81C6EA8
 _08034154: .4byte Task_ClearBitWhenBattleTableAnimDone
@@ -551,9 +551,9 @@ InitAndLaunchSpecialAnimation: @ 80341D8
 	lsrs r4, 24
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r0, _08034230 @ =gUnknown_2037F1A
+	ldr r0, _08034230 @ =gBattleAnimAttacker
 	strb r1, [r0]
-	ldr r0, _08034234 @ =gUnknown_2037F1B
+	ldr r0, _08034234 @ =gBattleAnimTarget
 	strb r2, [r0]
 	ldr r0, _08034238 @ =gUnknown_81C6F18
 	adds r1, r3, 0
@@ -587,8 +587,8 @@ InitAndLaunchSpecialAnimation: @ 80341D8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08034230: .4byte gUnknown_2037F1A
-_08034234: .4byte gUnknown_2037F1B
+_08034230: .4byte gBattleAnimAttacker
+_08034234: .4byte gBattleAnimTarget
 _08034238: .4byte gUnknown_81C6F18
 _0803423C: .4byte Task_ClearBitWhenSpecialAnimDone
 _08034240: .4byte gTasks

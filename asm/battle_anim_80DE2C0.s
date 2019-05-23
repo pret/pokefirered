@@ -9,7 +9,7 @@
 sub_80DE2C0: @ 80DE2C0
 	push {lr}
 	adds r2, r0, 0
-	ldr r1, _080DE2E4 @ =gUnknown_2037F02
+	ldr r1, _080DE2E4 @ =gBattleAnimArgs
 	ldrh r0, [r1]
 	ldrh r3, [r2, 0x20]
 	adds r0, r3
@@ -25,7 +25,7 @@ sub_80DE2C0: @ 80DE2C0
 	ldrh r0, [r1, 0x4]
 	b _080DE2EC
 	.align 2, 0
-_080DE2E4: .4byte gUnknown_2037F02
+_080DE2E4: .4byte gBattleAnimArgs
 _080DE2E8:
 	ldrh r0, [r1, 0x4]
 	negs r0, r0
@@ -89,7 +89,7 @@ sub_80DE34C: @ 80DE34C
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r6, _080DE398 @ =gUnknown_2037F1B
+	ldr r6, _080DE398 @ =gBattleAnimTarget
 	ldrb r0, [r6]
 	movs r1, 0x2
 	bl sub_8074480
@@ -119,7 +119,7 @@ sub_80DE34C: @ 80DE34C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DE398: .4byte gUnknown_2037F1B
+_080DE398: .4byte gBattleAnimTarget
 	thumb_func_end sub_80DE34C
 
 	thumb_func_start sub_80DE39C
@@ -213,7 +213,7 @@ sub_80DE440: @ 80DE440
 	push {r4-r7,lr}
 	sub sp, 0x4
 	adds r5, r0, 0
-	ldr r4, _080DE4CC @ =gUnknown_2037F1B
+	ldr r4, _080DE4CC @ =gBattleAnimTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl sub_8074480
@@ -260,7 +260,7 @@ _080DE49E:
 	movs r1, 0
 	adds r2, r3, 0
 	bl sub_8075A1C
-	ldr r0, _080DE4D0 @ =gUnknown_2037F02
+	ldr r0, _080DE4D0 @ =gBattleAnimArgs
 	ldrh r0, [r0, 0x4]
 	strh r0, [r5, 0x2E]
 	strh r7, [r5, 0x32]
@@ -275,8 +275,8 @@ _080DE49E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DE4CC: .4byte gUnknown_2037F1B
-_080DE4D0: .4byte gUnknown_2037F02
+_080DE4CC: .4byte gBattleAnimTarget
+_080DE4D0: .4byte gBattleAnimArgs
 _080DE4D4: .4byte sub_8075590
 _080DE4D8: .4byte DestroyAnimSprite
 	thumb_func_end sub_80DE440
@@ -642,7 +642,7 @@ _080DE766:
 	add r0, r9
 	strh r1, [r0, 0x12]
 _080DE788:
-	ldr r0, _080DE7AC @ =gUnknown_2037F02
+	ldr r0, _080DE7AC @ =gBattleAnimArgs
 	ldrh r1, [r0, 0xE]
 	ldr r0, _080DE7B0 @ =0x0000ffff
 	cmp r1, r0
@@ -659,7 +659,7 @@ _080DE798:
 	.align 2, 0
 _080DE7A4: .4byte gTasks
 _080DE7A8: .4byte gPlttBufferFaded
-_080DE7AC: .4byte gUnknown_2037F02
+_080DE7AC: .4byte gBattleAnimArgs
 _080DE7B0: .4byte 0x0000ffff
 	thumb_func_end sub_80DE718
 
@@ -770,7 +770,7 @@ _080DE85A:
 	adds r0, r2
 	strh r1, [r0, 0x12]
 _080DE87E:
-	ldr r0, _080DE8A8 @ =gUnknown_2037F02
+	ldr r0, _080DE8A8 @ =gBattleAnimArgs
 	ldrh r1, [r0, 0xE]
 	ldr r0, _080DE8AC @ =0x0000ffff
 	cmp r1, r0
@@ -789,7 +789,7 @@ _080DE88E:
 _080DE89C: .4byte gTasks
 _080DE8A0: .4byte gPlttBufferFaded
 _080DE8A4: .4byte gPlttBufferUnfaded
-_080DE8A8: .4byte gUnknown_2037F02
+_080DE8A8: .4byte gBattleAnimArgs
 _080DE8AC: .4byte 0x0000ffff
 	thumb_func_end sub_80DE7DC
 
@@ -800,7 +800,7 @@ sub_80DE8B0: @ 80DE8B0
 	adds r4, r0, 0
 	movs r1, 0x1
 	bl sub_8075160
-	ldr r0, _080DE914 @ =gUnknown_2037F1B
+	ldr r0, _080DE914 @ =gBattleAnimTarget
 	ldrb r0, [r0]
 	mov r5, sp
 	adds r5, 0x2
@@ -808,18 +808,18 @@ sub_80DE8B0: @ 80DE8B0
 	mov r2, sp
 	adds r3, r5, 0
 	bl sub_8076D9C
-	ldr r0, _080DE918 @ =gUnknown_2037F1A
+	ldr r0, _080DE918 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DE8E4
-	ldr r1, _080DE91C @ =gUnknown_2037F02
+	ldr r1, _080DE91C @ =gBattleAnimArgs
 	ldrh r0, [r1, 0x4]
 	negs r0, r0
 	strh r0, [r1, 0x4]
 _080DE8E4:
-	ldr r1, _080DE91C @ =gUnknown_2037F02
+	ldr r1, _080DE91C @ =gBattleAnimArgs
 	ldrh r0, [r1, 0x8]
 	strh r0, [r4, 0x2E]
 	mov r2, sp
@@ -842,9 +842,9 @@ _080DE8E4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DE914: .4byte gUnknown_2037F1B
-_080DE918: .4byte gUnknown_2037F1A
-_080DE91C: .4byte gUnknown_2037F02
+_080DE914: .4byte gBattleAnimTarget
+_080DE918: .4byte gBattleAnimAttacker
+_080DE91C: .4byte gBattleAnimArgs
 _080DE920: .4byte 0x0000ffce
 _080DE924: .4byte sub_80DE928
 	thumb_func_end sub_80DE8B0
@@ -919,7 +919,7 @@ sub_80DE99C: @ 80DE99C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	bl sub_8074FCC
-	ldr r5, _080DE9CC @ =gUnknown_2037F02
+	ldr r5, _080DE9CC @ =gBattleAnimArgs
 	movs r0, 0
 	ldrsh r1, [r5, r0]
 	adds r0, r4, 0
@@ -937,7 +937,7 @@ sub_80DE99C: @ 80DE99C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DE9CC: .4byte gUnknown_2037F02
+_080DE9CC: .4byte gBattleAnimArgs
 _080DE9D0: .4byte sub_8074F6C
 _080DE9D4: .4byte DestroyAnimSprite
 	thumb_func_end sub_80DE99C
@@ -952,7 +952,7 @@ sub_80DE9D8: @ 80DE9D8
 	bne _080DEA38
 	adds r0, r4, 0
 	bl sub_8074FCC
-	ldr r5, _080DEA14 @ =gUnknown_2037F02
+	ldr r5, _080DEA14 @ =gBattleAnimArgs
 	movs r2, 0
 	ldrsh r1, [r5, r2]
 	adds r0, r4, 0
@@ -961,7 +961,7 @@ sub_80DE9D8: @ 80DE9D8
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DEA2C
-	ldr r0, _080DEA18 @ =gUnknown_2037F1A
+	ldr r0, _080DEA18 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
 	lsls r0, 24
@@ -970,8 +970,8 @@ sub_80DE9D8: @ 80DE9D8
 	ldrh r0, [r5, 0x4]
 	b _080DEA32
 	.align 2, 0
-_080DEA14: .4byte gUnknown_2037F02
-_080DEA18: .4byte gUnknown_2037F1A
+_080DEA14: .4byte gBattleAnimArgs
+_080DEA18: .4byte gBattleAnimAttacker
 _080DEA1C:
 	movs r1, 0x4
 	ldrsh r0, [r5, r1]
@@ -1061,21 +1061,21 @@ sub_80DEAB4: @ 80DEAB4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _080DEAD0 @ =gUnknown_2037F1B
+	ldr r0, _080DEAD0 @ =gBattleAnimTarget
 	ldrb r0, [r0]
 	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080DEAD8
-	ldr r1, _080DEAD4 @ =gUnknown_2037F02
+	ldr r1, _080DEAD4 @ =gBattleAnimArgs
 	movs r0, 0
 	b _080DEADC
 	.align 2, 0
-_080DEAD0: .4byte gUnknown_2037F1B
-_080DEAD4: .4byte gUnknown_2037F02
+_080DEAD0: .4byte gBattleAnimTarget
+_080DEAD4: .4byte gBattleAnimArgs
 _080DEAD8:
-	ldr r1, _080DEAEC @ =gUnknown_2037F02
+	ldr r1, _080DEAEC @ =gBattleAnimArgs
 	movs r0, 0x1
 _080DEADC:
 	strh r0, [r1, 0xE]
@@ -1085,7 +1085,7 @@ _080DEADC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DEAEC: .4byte gUnknown_2037F02
+_080DEAEC: .4byte gBattleAnimArgs
 	thumb_func_end sub_80DEAB4
 
 	thumb_func_start sub_80DEAF0
@@ -1097,14 +1097,14 @@ sub_80DEAF0: @ 80DEAF0
 	ldr r0, [r0]
 	cmp r0, 0
 	ble _080DEB0C
-	ldr r1, _080DEB08 @ =gUnknown_2037F02
+	ldr r1, _080DEB08 @ =gBattleAnimArgs
 	movs r0, 0
 	b _080DEB10
 	.align 2, 0
 _080DEB04: .4byte gUnknown_2037EE8
-_080DEB08: .4byte gUnknown_2037F02
+_080DEB08: .4byte gBattleAnimArgs
 _080DEB0C:
-	ldr r1, _080DEB1C @ =gUnknown_2037F02
+	ldr r1, _080DEB1C @ =gBattleAnimArgs
 	movs r0, 0x1
 _080DEB10:
 	strh r0, [r1, 0xE]
@@ -1113,7 +1113,7 @@ _080DEB10:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DEB1C: .4byte gUnknown_2037F02
+_080DEB1C: .4byte gBattleAnimArgs
 	thumb_func_end sub_80DEAF0
 
 	thumb_func_start sub_80DEB20
@@ -1303,12 +1303,12 @@ _080DEC8C: .4byte 0x00003f3f
 sub_80DEC90: @ 80DEC90
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	ldr r6, _080DED04 @ =gUnknown_2037F02
+	ldr r6, _080DED04 @ =gBattleAnimArgs
 	movs r1, 0x6
 	ldrsh r0, [r6, r1]
 	cmp r0, 0
 	bne _080DECBC
-	ldr r4, _080DED08 @ =gUnknown_2037F1A
+	ldr r4, _080DED08 @ =gBattleAnimAttacker
 	ldrb r0, [r4]
 	movs r1, 0
 	bl sub_8074480
@@ -1358,8 +1358,8 @@ _080DECBC:
 	movs r0, 0x2
 	b _080DED1E
 	.align 2, 0
-_080DED04: .4byte gUnknown_2037F02
-_080DED08: .4byte gUnknown_2037F1A
+_080DED04: .4byte gBattleAnimArgs
+_080DED08: .4byte gBattleAnimAttacker
 _080DED0C: .4byte 0x000003ff
 _080DED10: .4byte 0xfffffc00
 _080DED14: .4byte 0x0000fff4
@@ -1369,7 +1369,7 @@ _080DED18:
 	ldr r0, _080DED3C @ =0x0000fffe
 _080DED1E:
 	strh r0, [r5, 0x30]
-	ldr r1, _080DED40 @ =gUnknown_2037F02
+	ldr r1, _080DED40 @ =gBattleAnimArgs
 	ldrh r0, [r1, 0x8]
 	strh r0, [r5, 0x2E]
 	movs r2, 0x34
@@ -1386,7 +1386,7 @@ _080DED32:
 	bx r0
 	.align 2, 0
 _080DED3C: .4byte 0x0000fffe
-_080DED40: .4byte gUnknown_2037F02
+_080DED40: .4byte gBattleAnimArgs
 _080DED44: .4byte sub_80DED48
 	thumb_func_end sub_80DEC90
 
@@ -1575,18 +1575,18 @@ _080DEEB8: .4byte gUnknown_202298A
 sub_80DEEBC: @ 80DEEBC
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	ldr r6, _080DEED0 @ =gUnknown_2037F02
+	ldr r6, _080DEED0 @ =gBattleAnimArgs
 	movs r1, 0
 	ldrsh r0, [r6, r1]
 	cmp r0, 0
 	bne _080DEED8
-	ldr r4, _080DEED4 @ =gUnknown_2037F1A
+	ldr r4, _080DEED4 @ =gBattleAnimAttacker
 	b _080DEEDA
 	.align 2, 0
-_080DEED0: .4byte gUnknown_2037F02
-_080DEED4: .4byte gUnknown_2037F1A
+_080DEED0: .4byte gBattleAnimArgs
+_080DEED4: .4byte gBattleAnimAttacker
 _080DEED8:
-	ldr r4, _080DEF2C @ =gUnknown_2037F1B
+	ldr r4, _080DEF2C @ =gBattleAnimTarget
 _080DEEDA:
 	ldrb r0, [r4]
 	movs r1, 0
@@ -1602,7 +1602,7 @@ _080DEEDA:
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
-	ldr r2, _080DEF30 @ =gUnknown_2037F02
+	ldr r2, _080DEF30 @ =gBattleAnimArgs
 	ldrh r0, [r2, 0x4]
 	strh r0, [r5, 0x26]
 	movs r3, 0
@@ -1629,8 +1629,8 @@ _080DEF12:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DEF2C: .4byte gUnknown_2037F1B
-_080DEF30: .4byte gUnknown_2037F02
+_080DEF2C: .4byte gBattleAnimTarget
+_080DEF30: .4byte gBattleAnimArgs
 _080DEF34: .4byte sub_80DEF38
 	thumb_func_end sub_80DEEBC
 
@@ -1697,19 +1697,19 @@ sub_80DEF9C: @ 80DEF9C
 	lsls r1, 3
 	ldr r0, _080DEFBC @ =gTasks
 	adds r5, r1, r0
-	ldr r0, _080DEFC0 @ =gUnknown_2037F02
+	ldr r0, _080DEFC0 @ =gBattleAnimArgs
 	movs r1, 0
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _080DEFC8
-	ldr r4, _080DEFC4 @ =gUnknown_2037F1A
+	ldr r4, _080DEFC4 @ =gBattleAnimAttacker
 	b _080DEFCA
 	.align 2, 0
 _080DEFBC: .4byte gTasks
-_080DEFC0: .4byte gUnknown_2037F02
-_080DEFC4: .4byte gUnknown_2037F1A
+_080DEFC0: .4byte gBattleAnimArgs
+_080DEFC4: .4byte gBattleAnimAttacker
 _080DEFC8:
-	ldr r4, _080DF010 @ =gUnknown_2037F1B
+	ldr r4, _080DF010 @ =gBattleAnimTarget
 _080DEFCA:
 	ldrb r0, [r4]
 	bl sub_807492C
@@ -1735,7 +1735,7 @@ _080DEFF4:
 	strh r0, [r5, 0xE]
 	movs r0, 0x8
 	strh r0, [r5, 0x10]
-	ldr r1, _080DF014 @ =gUnknown_2037F02
+	ldr r1, _080DF014 @ =gBattleAnimArgs
 	ldrh r0, [r1, 0x2]
 	strh r0, [r5, 0x12]
 	strh r2, [r5, 0x14]
@@ -1745,8 +1745,8 @@ _080DEFF4:
 	ldr r0, _080DF018 @ =gBattle_BG1_X
 	b _080DF01E
 	.align 2, 0
-_080DF010: .4byte gUnknown_2037F1B
-_080DF014: .4byte gUnknown_2037F02
+_080DF010: .4byte gBattleAnimTarget
+_080DF014: .4byte gBattleAnimArgs
 _080DF018: .4byte gBattle_BG1_X
 _080DF01C:
 	ldr r0, _080DF03C @ =gBattle_BG2_X
@@ -2002,7 +2002,7 @@ sub_80DF1DC: @ 80DF1DC
 	movs r5, 0
 	strh r5, [r4, 0x8]
 	strh r5, [r4, 0xA]
-	ldr r6, _080DF234 @ =gUnknown_2037F1A
+	ldr r6, _080DF234 @ =gBattleAnimAttacker
 	ldrb r0, [r6]
 	movs r1, 0x2
 	bl sub_8074480
@@ -2032,7 +2032,7 @@ sub_80DF1DC: @ 80DF1DC
 	bx r0
 	.align 2, 0
 _080DF230: .4byte gTasks
-_080DF234: .4byte gUnknown_2037F1A
+_080DF234: .4byte gBattleAnimAttacker
 _080DF238: .4byte 0x0000ffec
 _080DF23C: .4byte sub_80DF240
 	thumb_func_end sub_80DF1DC
@@ -2391,7 +2391,7 @@ _080DF4C4:
 	strh r1, [r5, 0x26]
 	movs r0, 0x14
 	strh r0, [r5, 0x2E]
-	ldr r4, _080DF51C @ =gUnknown_2037F1B
+	ldr r4, _080DF51C @ =gBattleAnimTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl sub_8074480
@@ -2412,7 +2412,7 @@ _080DF510:
 	bx r0
 	.align 2, 0
 _080DF518: .4byte DestroyAnimSprite
-_080DF51C: .4byte gUnknown_2037F1B
+_080DF51C: .4byte gBattleAnimTarget
 _080DF520: .4byte sub_8075590
 	thumb_func_end sub_80DF468
 
@@ -2488,7 +2488,7 @@ _080DF5A0:
 	beq _080DF664
 	b _080DF682
 _080DF5AA:
-	ldr r4, _080DF5DC @ =gUnknown_2037F1A
+	ldr r4, _080DF5DC @ =gBattleAnimAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl sub_8074480
@@ -2510,7 +2510,7 @@ _080DF5AA:
 	strh r0, [r5, 0x32]
 	b _080DF658
 	.align 2, 0
-_080DF5DC: .4byte gUnknown_2037F1A
+_080DF5DC: .4byte gBattleAnimAttacker
 _080DF5E0:
 	ldrh r0, [r5, 0x30]
 	adds r0, 0x60
@@ -2602,7 +2602,7 @@ _080DF682:
 sub_80DF688: @ 80DF688
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, _080DF6A0 @ =gUnknown_2037F1A
+	ldr r0, _080DF6A0 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
 	lsls r0, 24
@@ -2611,7 +2611,7 @@ sub_80DF688: @ 80DF688
 	ldr r0, _080DF6A4 @ =0x0000fff0
 	b _080DF6AC
 	.align 2, 0
-_080DF6A0: .4byte gUnknown_2037F1A
+_080DF6A0: .4byte gBattleAnimAttacker
 _080DF6A4: .4byte 0x0000fff0
 _080DF6A8:
 	movs r0, 0x80
@@ -2636,7 +2636,7 @@ sub_80DF6C0: @ 80DF6C0
 	ldrh r0, [r4, 0x2E]
 	adds r0, 0x48
 	strh r0, [r4, 0x2E]
-	ldr r0, _080DF6E0 @ =gUnknown_2037F1A
+	ldr r0, _080DF6E0 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
 	lsls r0, 24
@@ -2647,7 +2647,7 @@ sub_80DF6C0: @ 80DF6C0
 	asrs r0, 20
 	b _080DF6EC
 	.align 2, 0
-_080DF6E0: .4byte gUnknown_2037F1A
+_080DF6E0: .4byte gBattleAnimAttacker
 _080DF6E4:
 	ldrh r0, [r4, 0x2E]
 	lsls r0, 16
@@ -2947,7 +2947,7 @@ _080DF90A:
 	movs r0, 0x90
 	lsls r0, 4
 	strh r0, [r4, 0x30]
-	ldr r0, _080DF930 @ =gUnknown_2037F1A
+	ldr r0, _080DF930 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	movs r1, 0x3
 	bl sub_8074480
@@ -2959,7 +2959,7 @@ _080DF90A:
 	strh r0, [r4, 0x2E]
 	b _080DF95C
 	.align 2, 0
-_080DF930: .4byte gUnknown_2037F1A
+_080DF930: .4byte gBattleAnimAttacker
 _080DF934:
 	ldrh r2, [r4, 0x30]
 	lsls r1, r2, 16
@@ -3067,7 +3067,7 @@ _080DFA00:
 	movs r0, 0x4C
 	movs r1, 0
 	bl SetGpuReg
-	ldr r0, _080DFA24 @ =gUnknown_2037F1A
+	ldr r0, _080DFA24 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl sub_80768B0
 	lsls r0, 24
@@ -3080,7 +3080,7 @@ _080DFA00:
 	bl SetAnimBgAttribute
 	b _080DFA32
 	.align 2, 0
-_080DFA24: .4byte gUnknown_2037F1A
+_080DFA24: .4byte gBattleAnimAttacker
 _080DFA28:
 	movs r0, 0x2
 	movs r1, 0x2
@@ -3092,13 +3092,13 @@ _080DFA32:
 	adds r1, r5
 	lsls r1, 3
 	adds r1, r0
-	ldr r0, _080DFA48 @ =gUnknown_2037F02
+	ldr r0, _080DFA48 @ =gBattleAnimArgs
 	ldrh r0, [r0]
 	strh r0, [r1, 0x1C]
 	b _080DFB00
 	.align 2, 0
 _080DFA44: .4byte gTasks
-_080DFA48: .4byte gUnknown_2037F02
+_080DFA48: .4byte gBattleAnimArgs
 _080DFA4C:
 	lsls r0, r5, 2
 	adds r0, r5
@@ -3131,9 +3131,9 @@ _080DFA64:
 _080DFA84:
 	b _080DFB50
 _080DFA86:
-	ldr r6, _080DFAB4 @ =gUnknown_2037F1A
+	ldr r6, _080DFAB4 @ =gBattleAnimAttacker
 	ldrb r0, [r6]
-	ldr r1, _080DFAB8 @ =gUnknown_2037F1B
+	ldr r1, _080DFAB8 @ =gBattleAnimTarget
 	ldrb r1, [r1]
 	lsls r4, r5, 2
 	adds r2, r4, r5
@@ -3151,8 +3151,8 @@ _080DFA86:
 	movs r1, 0
 	b _080DFAC6
 	.align 2, 0
-_080DFAB4: .4byte gUnknown_2037F1A
-_080DFAB8: .4byte gUnknown_2037F1B
+_080DFAB4: .4byte gBattleAnimAttacker
+_080DFAB8: .4byte gBattleAnimTarget
 _080DFABC:
 	ldrb r0, [r6]
 	bl GetBattlerPosition
@@ -3165,7 +3165,7 @@ _080DFAC6:
 	adds r2, 0x4
 	adds r2, r0
 	ldr r1, _080DFB0C @ =gBattleMonForms
-	ldr r0, _080DFB10 @ =gUnknown_2037F1A
+	ldr r0, _080DFB10 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r1, [r0]
@@ -3194,7 +3194,7 @@ _080DFB00:
 	.align 2, 0
 _080DFB08: .4byte gMonSpritesGfxPtr
 _080DFB0C: .4byte gBattleMonForms
-_080DFB10: .4byte gUnknown_2037F1A
+_080DFB10: .4byte gBattleAnimAttacker
 _080DFB14: .4byte 0x04000200
 _080DFB18: .4byte gTasks
 _080DFB1C:
@@ -3232,7 +3232,7 @@ _080DFB58:
 	movs r0, 0x4C
 	movs r1, 0
 	bl SetGpuReg
-	ldr r0, _080DFB7C @ =gUnknown_2037F1A
+	ldr r0, _080DFB7C @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl sub_80768B0
 	lsls r0, 24
@@ -3245,7 +3245,7 @@ _080DFB58:
 	bl SetAnimBgAttribute
 	b _080DFB8A
 	.align 2, 0
-_080DFB7C: .4byte gUnknown_2037F1A
+_080DFB7C: .4byte gBattleAnimAttacker
 _080DFB80:
 	movs r0, 0x2
 	movs r1, 0x2
@@ -3256,7 +3256,7 @@ _080DFB8A:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DFBC8
-	ldr r4, _080DFBD8 @ =gUnknown_2037F1A
+	ldr r4, _080DFBD8 @ =gBattleAnimAttacker
 	ldrb r0, [r4]
 	bl GetBattlerSide
 	lsls r0, 24
@@ -3289,7 +3289,7 @@ _080DFBCE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DFBD8: .4byte gUnknown_2037F1A
+_080DFBD8: .4byte gBattleAnimAttacker
 _080DFBDC: .4byte gTasks
 _080DFBE0: .4byte gUnknown_2024018
 	thumb_func_end sub_80DF9BC
@@ -3299,10 +3299,10 @@ c3_80DFBE4: @ 80DFBE4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r4, _080DFC14 @ =gUnknown_2037F02
+	ldr r4, _080DFC14 @ =gBattleAnimArgs
 	ldr r3, _080DFC18 @ =gSprites
 	ldr r2, _080DFC1C @ =gUnknown_2023D44
-	ldr r1, _080DFC20 @ =gUnknown_2037F1A
+	ldr r1, _080DFC20 @ =gBattleAnimAttacker
 	ldrb r1, [r1]
 	adds r1, r2
 	ldrb r2, [r1]
@@ -3320,10 +3320,10 @@ c3_80DFBE4: @ 80DFBE4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DFC14: .4byte gUnknown_2037F02
+_080DFC14: .4byte gBattleAnimArgs
 _080DFC18: .4byte gSprites
 _080DFC1C: .4byte gUnknown_2023D44
-_080DFC20: .4byte gUnknown_2037F1A
+_080DFC20: .4byte gBattleAnimAttacker
 	thumb_func_end c3_80DFBE4
 
 	thumb_func_start sub_80DFC24
@@ -3332,9 +3332,9 @@ sub_80DFC24: @ 80DFC24
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _080DFC48 @ =gUnknown_2037F1A
+	ldr r0, _080DFC48 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
-	ldr r1, _080DFC4C @ =gUnknown_2037F1B
+	ldr r1, _080DFC4C @ =gBattleAnimTarget
 	ldrb r1, [r1]
 	movs r2, 0x1
 	bl sub_8034BF4
@@ -3344,8 +3344,8 @@ sub_80DFC24: @ 80DFC24
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DFC48: .4byte gUnknown_2037F1A
-_080DFC4C: .4byte gUnknown_2037F1B
+_080DFC48: .4byte gBattleAnimAttacker
+_080DFC4C: .4byte gBattleAnimTarget
 	thumb_func_end sub_80DFC24
 
 	thumb_func_start sub_80DFC50
@@ -3445,7 +3445,7 @@ _080DFD24: .4byte gFile_graphics_battle_anims_masks_morning_sun_palette
 _080DFD28: .4byte gBattle_BG1_X
 _080DFD2C: .4byte 0x0000ffc8
 _080DFD30:
-	ldr r0, _080DFD48 @ =gUnknown_2037F1A
+	ldr r0, _080DFD48 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
 	lsls r0, 24
@@ -3456,7 +3456,7 @@ _080DFD30:
 	adds r0, r2, 0
 	b _080DFD5A
 	.align 2, 0
-_080DFD48: .4byte gUnknown_2037F1A
+_080DFD48: .4byte gBattleAnimAttacker
 _080DFD4C: .4byte gBattle_BG1_X
 _080DFD50: .4byte 0x0000ff79
 _080DFD54:
@@ -3675,7 +3675,7 @@ sub_80DFEDC: @ 80DFEDC
 	lsls r0, 16
 	lsrs r5, r0, 16
 _080DFF06:
-	ldr r4, _080E0000 @ =gUnknown_2037F1A
+	ldr r4, _080E0000 @ =gBattleAnimAttacker
 	ldrb r0, [r4]
 	movs r1, 0
 	bl sub_8074480
@@ -3690,7 +3690,7 @@ _080DFF06:
 	lsrs r0, 24
 	adds r0, 0x20
 	strh r0, [r7, 0x22]
-	ldr r1, _080E0004 @ =gUnknown_2037F02
+	ldr r1, _080E0004 @ =gBattleAnimArgs
 	ldrh r0, [r1]
 	strh r0, [r7, 0x30]
 	ldrh r0, [r1, 0x2]
@@ -3748,7 +3748,7 @@ _080DFF06:
 	adds r0, r4, 0
 	movs r1, 0x2
 	bl StartSpriteAnim
-	ldr r1, _080E0004 @ =gUnknown_2037F02
+	ldr r1, _080E0004 @ =gBattleAnimArgs
 	ldrh r0, [r1]
 	strh r0, [r5, 0x30]
 	ldrh r0, [r1, 0x2]
@@ -3794,8 +3794,8 @@ _080DFF06:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E0000: .4byte gUnknown_2037F1A
-_080E0004: .4byte gUnknown_2037F02
+_080E0000: .4byte gBattleAnimAttacker
+_080E0004: .4byte gBattleAnimArgs
 _080E0008: .4byte gUnknown_83FF26C
 _080E000C: .4byte gSprites
 _080E0010: .4byte 0x0000ffff
@@ -4089,7 +4089,7 @@ _080E0258: .4byte gFile_graphics_battle_anims_masks_morning_sun_palette
 _080E025C: .4byte gBattle_BG1_X
 _080E0260: .4byte 0x0000ffc8
 _080E0264:
-	ldr r0, _080E02A4 @ =gUnknown_2037F1B
+	ldr r0, _080E02A4 @ =gBattleAnimTarget
 	ldrb r0, [r0]
 	bl GetBattlerPosition
 	lsls r0, 24
@@ -4123,7 +4123,7 @@ _080E029A:
 	ldr r2, _080E02B4 @ =0x0000ffec
 	b _080E02CC
 	.align 2, 0
-_080E02A4: .4byte gUnknown_2037F1B
+_080E02A4: .4byte gBattleAnimTarget
 _080E02A8: .4byte gBattle_BG1_X
 _080E02AC: .4byte 0x0000ff65
 _080E02B0: .4byte 0x0000ff8d
@@ -4174,7 +4174,7 @@ _080E0304:
 	adds r5, r0, r1
 	movs r0, 0
 	strh r0, [r5, 0xE]
-	ldr r0, _080E033C @ =gUnknown_2037F1B
+	ldr r0, _080E033C @ =gBattleAnimTarget
 	ldrb r0, [r0]
 	bl GetBattlerSide
 	lsls r0, 24
@@ -4194,7 +4194,7 @@ _080E0304:
 	b _080E035A
 	.align 2, 0
 _080E0338: .4byte gTasks
-_080E033C: .4byte gUnknown_2037F1B
+_080E033C: .4byte gBattleAnimTarget
 _080E0340: .4byte gBattle_BG1_X
 _080E0344: .4byte gUnknown_83FF284
 _080E0348:
@@ -4426,7 +4426,7 @@ _080E04FE:
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x80
 	strh r0, [r4, 0x32]
-	ldr r0, _080E052C @ =gUnknown_2037F1A
+	ldr r0, _080E052C @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
 	lsls r0, 24
@@ -4438,7 +4438,7 @@ _080E04FE:
 	negs r0, r0
 	b _080E0536
 	.align 2, 0
-_080E052C: .4byte gUnknown_2037F1A
+_080E052C: .4byte gBattleAnimAttacker
 _080E0530:
 	ldrh r0, [r4, 0x30]
 	lsls r0, 16
@@ -4473,7 +4473,7 @@ sub_80E0558: @ 80E0558
 	lsls r0, 3
 	ldr r1, _080E057C @ =gTasks
 	adds r4, r0, r1
-	ldr r5, _080E0580 @ =gUnknown_2037F02
+	ldr r5, _080E0580 @ =gBattleAnimArgs
 	movs r1, 0x2
 	ldrsh r0, [r5, r1]
 	cmp r0, 0
@@ -4483,7 +4483,7 @@ sub_80E0558: @ 80E0558
 	b _080E0618
 	.align 2, 0
 _080E057C: .4byte gTasks
-_080E0580: .4byte gUnknown_2037F02
+_080E0580: .4byte gBattleAnimArgs
 _080E0584:
 	movs r1, 0x4
 	ldrsh r0, [r5, r1]
@@ -4531,12 +4531,12 @@ _080E059C:
 	ldrsh r0, [r5, r1]
 	cmp r0, 0
 	bne _080E05E8
-	ldr r0, _080E05E4 @ =gUnknown_2037F1A
+	ldr r0, _080E05E4 @ =gBattleAnimAttacker
 	b _080E05EA
 	.align 2, 0
-_080E05E4: .4byte gUnknown_2037F1A
+_080E05E4: .4byte gBattleAnimAttacker
 _080E05E8:
-	ldr r0, _080E0620 @ =gUnknown_2037F1B
+	ldr r0, _080E0620 @ =gBattleAnimTarget
 _080E05EA:
 	ldrb r0, [r0]
 	bl GetBattlerSide
@@ -4565,7 +4565,7 @@ _080E0618:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E0620: .4byte gUnknown_2037F1B
+_080E0620: .4byte gBattleAnimTarget
 _080E0624: .4byte sub_80E0628
 	thumb_func_end sub_80E0558
 
@@ -4754,7 +4754,7 @@ _080E0788:
 sub_80E0790: @ 80E0790
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, _080E07AC @ =gUnknown_2037F1A
+	ldr r0, _080E07AC @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
 	lsls r0, 24
@@ -4762,16 +4762,16 @@ sub_80E0790: @ 80E0790
 	cmp r0, 0
 	bne _080E07B4
 	strh r0, [r4, 0x20]
-	ldr r1, _080E07B0 @ =gUnknown_2037F02
+	ldr r1, _080E07B0 @ =gBattleAnimArgs
 	ldrh r0, [r1]
 	b _080E07BE
 	.align 2, 0
-_080E07AC: .4byte gUnknown_2037F1A
-_080E07B0: .4byte gUnknown_2037F02
+_080E07AC: .4byte gBattleAnimAttacker
+_080E07B0: .4byte gBattleAnimArgs
 _080E07B4:
 	movs r0, 0xF0
 	strh r0, [r4, 0x20]
-	ldr r1, _080E07D8 @ =gUnknown_2037F02
+	ldr r1, _080E07D8 @ =gBattleAnimArgs
 	ldrh r0, [r1]
 	subs r0, 0x1E
 _080E07BE:
@@ -4787,7 +4787,7 @@ _080E07BE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E07D8: .4byte gUnknown_2037F02
+_080E07D8: .4byte gBattleAnimArgs
 _080E07DC: .4byte sub_80E07E0
 	thumb_func_end sub_80E0790
 
@@ -4798,7 +4798,7 @@ sub_80E07E0: @ 80E07E0
 	ldrh r0, [r4, 0x2E]
 	adds r0, 0x3
 	strh r0, [r4, 0x2E]
-	ldr r0, _080E0820 @ =gUnknown_2037F1A
+	ldr r0, _080E0820 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
 	lsls r0, 24
@@ -4824,7 +4824,7 @@ _080E0812:
 	bl Sin
 	b _080E0848
 	.align 2, 0
-_080E0820: .4byte gUnknown_2037F1A
+_080E0820: .4byte gBattleAnimAttacker
 _080E0824:
 	ldrh r1, [r4, 0x20]
 	subs r1, 0x5
@@ -4872,7 +4872,7 @@ sub_80E0850: @ 80E0850
 	movs r0, 0x80
 	lsls r0, 4
 	strh r0, [r4, 0x24]
-	ldr r0, _080E089C @ =gUnknown_2037F02
+	ldr r0, _080E089C @ =gBattleAnimArgs
 	ldrb r0, [r0]
 	bl GetAnimBankSpriteId
 	lsls r0, 24
@@ -4887,7 +4887,7 @@ sub_80E0850: @ 80E0850
 	bx r0
 	.align 2, 0
 _080E0898: .4byte gTasks
-_080E089C: .4byte gUnknown_2037F02
+_080E089C: .4byte gBattleAnimArgs
 _080E08A0: .4byte sub_80E08A4
 	thumb_func_end sub_80E0850
 
@@ -5108,12 +5108,12 @@ sub_80E0A3C: @ 80E0A3C
 	ldrsh r0, [r5, r1]
 	cmp r0, 0
 	bne _080E0A9C
-	ldr r6, _080E0A94 @ =gUnknown_2037F02
+	ldr r6, _080E0A94 @ =gBattleAnimArgs
 	movs r2, 0x4
 	ldrsh r0, [r6, r2]
 	cmp r0, 0
 	bne _080E0A70
-	ldr r4, _080E0A98 @ =gUnknown_2037F1A
+	ldr r4, _080E0A98 @ =gBattleAnimAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl sub_8074480
@@ -5146,8 +5146,8 @@ _080E0A70:
 	strh r0, [r5, 0x2E]
 	b _080E0AFA
 	.align 2, 0
-_080E0A94: .4byte gUnknown_2037F02
-_080E0A98: .4byte gUnknown_2037F1A
+_080E0A94: .4byte gBattleAnimArgs
+_080E0A98: .4byte gBattleAnimAttacker
 _080E0A9C:
 	ldrh r1, [r5, 0x30]
 	lsls r0, r1, 16
@@ -5218,20 +5218,20 @@ sub_80E0B00: @ 80E0B00
 	ldrsh r0, [r2, r1]
 	cmp r0, 0
 	bne _080E0C0C
-	ldr r0, _080E0B34 @ =gUnknown_2037F02
+	ldr r0, _080E0B34 @ =gBattleAnimArgs
 	movs r3, 0
 	ldrsh r1, [r0, r3]
 	mov r8, r0
 	cmp r1, 0
 	bne _080E0B3C
-	ldr r0, _080E0B38 @ =gUnknown_2037F1A
+	ldr r0, _080E0B38 @ =gBattleAnimAttacker
 	b _080E0B3E
 	.align 2, 0
 _080E0B30: .4byte gTasks
-_080E0B34: .4byte gUnknown_2037F02
-_080E0B38: .4byte gUnknown_2037F1A
+_080E0B34: .4byte gBattleAnimArgs
+_080E0B38: .4byte gBattleAnimAttacker
 _080E0B3C:
-	ldr r0, _080E0B78 @ =gUnknown_2037F1B
+	ldr r0, _080E0B78 @ =gBattleAnimTarget
 _080E0B3E:
 	ldrb r0, [r0]
 	strh r0, [r2, 0x1E]
@@ -5261,7 +5261,7 @@ _080E0B3E:
 	lsls r2, r5, 4
 	b _080E0BE8
 	.align 2, 0
-_080E0B78: .4byte gUnknown_2037F1B
+_080E0B78: .4byte gBattleAnimTarget
 _080E0B7C: .4byte gTasks
 _080E0B80:
 	cmp r0, 0x2
@@ -5443,7 +5443,7 @@ _080E0CDA:
 	subs r0, r1
 _080E0CE2:
 	strh r0, [r4, 0x30]
-	ldr r0, _080E0CF4 @ =gUnknown_2037F02
+	ldr r0, _080E0CF4 @ =gBattleAnimArgs
 	ldrh r0, [r0]
 	strh r0, [r4, 0x32]
 	lsls r0, 16
@@ -5452,7 +5452,7 @@ _080E0CE2:
 	ldr r0, _080E0CF8 @ =0x0000fff8
 	b _080E0CFE
 	.align 2, 0
-_080E0CF4: .4byte gUnknown_2037F02
+_080E0CF4: .4byte gBattleAnimArgs
 _080E0CF8: .4byte 0x0000fff8
 _080E0CFC:
 	movs r0, 0xF8
@@ -5546,7 +5546,7 @@ sub_80E0D74: @ 80E0D74
 	ldrh r1, [r4]
 	movs r0, 0x44
 	bl SetGpuReg
-	ldr r0, _080E0DE4 @ =gUnknown_2037F02
+	ldr r0, _080E0DE4 @ =gBattleAnimArgs
 	ldrh r0, [r0, 0x4]
 	strh r0, [r5, 0x2E]
 	adds r0, r5, 0
@@ -5574,7 +5574,7 @@ sub_80E0D74: @ 80E0D74
 _080E0DD8: .4byte 0x00001f3f
 _080E0DDC: .4byte gUnknown_2022984
 _080E0DE0: .4byte gUnknown_2022986
-_080E0DE4: .4byte gUnknown_2037F02
+_080E0DE4: .4byte gBattleAnimArgs
 _080E0DE8: .4byte sub_80E0DEC
 	thumb_func_end sub_80E0D74
 
@@ -5672,7 +5672,7 @@ _080E0E90: .4byte 0x00003f3f
 sub_80E0E94: @ 80E0E94
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r5, _080E0ED0 @ =gUnknown_2037F1A
+	ldr r5, _080E0ED0 @ =gBattleAnimAttacker
 	ldrb r0, [r5]
 	movs r1, 0x2
 	bl sub_8074480
@@ -5685,7 +5685,7 @@ sub_80E0E94: @ 80E0E94
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x22]
-	ldr r1, _080E0ED4 @ =gUnknown_2037F02
+	ldr r1, _080E0ED4 @ =gBattleAnimArgs
 	ldrh r0, [r1]
 	strh r0, [r4, 0x2E]
 	ldrh r0, [r1, 0x2]
@@ -5698,8 +5698,8 @@ sub_80E0E94: @ 80E0E94
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E0ED0: .4byte gUnknown_2037F1A
-_080E0ED4: .4byte gUnknown_2037F02
+_080E0ED0: .4byte gBattleAnimAttacker
+_080E0ED4: .4byte gBattleAnimArgs
 _080E0ED8: .4byte sub_80E0EDC
 	thumb_func_end sub_80E0E94
 
@@ -5733,15 +5733,15 @@ sub_80E0EDC: @ 80E0EDC
 	cmp r0, 0xC3
 	ble _080E0F28
 _080E0F16:
-	ldr r0, _080E0F24 @ =gUnknown_2037F1A
+	ldr r0, _080E0F24 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl sub_807685C
 	subs r0, 0x1
 	b _080E0F32
 	.align 2, 0
-_080E0F24: .4byte gUnknown_2037F1A
+_080E0F24: .4byte gBattleAnimAttacker
 _080E0F28:
-	ldr r0, _080E0F74 @ =gUnknown_2037F1A
+	ldr r0, _080E0F74 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl sub_807685C
 	adds r0, 0x1
@@ -5779,7 +5779,7 @@ _080E0F32:
 	strh r0, [r4, 0x38]
 	b _080E0FA8
 	.align 2, 0
-_080E0F74: .4byte gUnknown_2037F1A
+_080E0F74: .4byte gBattleAnimAttacker
 _080E0F78:
 	cmp r2, 0x1
 	bne _080E0FA8
@@ -5826,7 +5826,7 @@ sub_80E0FB8: @ 80E0FB8
 	str r0, [sp, 0x18]
 	movs r0, 0
 	bl GetAnimBankSpriteId
-	ldr r0, _080E1040 @ =gUnknown_2037F1A
+	ldr r0, _080E1040 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
 	lsls r0, 24
@@ -5835,7 +5835,7 @@ sub_80E0FB8: @ 80E0FB8
 	movs r0, 0
 	str r0, [sp, 0x1C]
 	ldr r6, _080E1044 @ =gBattlerPartyIndexes
-	ldr r4, _080E1048 @ =gUnknown_2037F1B
+	ldr r4, _080E1048 @ =gBattleAnimTarget
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r6
@@ -5878,9 +5878,9 @@ sub_80E0FB8: @ 80E0FB8
 	adds r0, r7
 	b _080E1062
 	.align 2, 0
-_080E1040: .4byte gUnknown_2037F1A
+_080E1040: .4byte gBattleAnimAttacker
 _080E1044: .4byte gBattlerPartyIndexes
-_080E1048: .4byte gUnknown_2037F1B
+_080E1048: .4byte gBattleAnimTarget
 _080E104C: .4byte gPlayerParty
 _080E1050: .4byte gUnknown_2024018
 _080E1054:
@@ -5909,7 +5909,7 @@ _080E107C:
 	movs r2, 0x1
 	str r2, [sp, 0x1C]
 	ldr r6, _080E10E0 @ =gBattlerPartyIndexes
-	ldr r4, _080E10E4 @ =gUnknown_2037F1B
+	ldr r4, _080E10E4 @ =gBattleAnimTarget
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r6
@@ -5954,7 +5954,7 @@ _080E107C:
 	b _080E1100
 	.align 2, 0
 _080E10E0: .4byte gBattlerPartyIndexes
-_080E10E4: .4byte gUnknown_2037F1B
+_080E10E4: .4byte gBattleAnimTarget
 _080E10E8: .4byte gEnemyParty
 _080E10EC: .4byte gUnknown_2024018
 _080E10F0: .4byte gPlayerParty
@@ -5977,12 +5977,12 @@ _080E110E:
 	ldr r3, _080E11FC @ =0x0000ffec
 	mov r8, r3
 _080E1112:
-	ldr r0, _080E1200 @ =gUnknown_2037F1A
+	ldr r0, _080E1200 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl sub_8076884
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r5, _080E1200 @ =gUnknown_2037F1A
+	ldr r5, _080E1200 @ =gBattleAnimAttacker
 	ldrb r0, [r5]
 	movs r1, 0
 	bl sub_8074480
@@ -6007,7 +6007,7 @@ _080E1112:
 	str r3, [sp, 0x8]
 	mov r0, r9
 	str r0, [sp, 0xC]
-	ldr r0, _080E1204 @ =gUnknown_2037F1B
+	ldr r0, _080E1204 @ =gBattleAnimTarget
 	ldrb r0, [r0]
 	str r0, [sp, 0x10]
 	movs r0, 0x1
@@ -6089,8 +6089,8 @@ _080E1112:
 	bx r0
 	.align 2, 0
 _080E11FC: .4byte 0x0000ffec
-_080E1200: .4byte gUnknown_2037F1A
-_080E1204: .4byte gUnknown_2037F1B
+_080E1200: .4byte gBattleAnimAttacker
+_080E1204: .4byte gBattleAnimTarget
 _080E1208: .4byte gSprites
 _080E120C: .4byte 0x00007fff
 _080E1210: .4byte gTasks
@@ -6222,19 +6222,19 @@ sub_80E12F8: @ 80E12F8
 	lsls r1, 3
 	ldr r0, _080E1318 @ =gTasks
 	adds r4, r1, r0
-	ldr r0, _080E131C @ =gUnknown_2037F02
+	ldr r0, _080E131C @ =gBattleAnimArgs
 	movs r1, 0
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _080E1324
-	ldr r0, _080E1320 @ =gUnknown_2037F1A
+	ldr r0, _080E1320 @ =gBattleAnimAttacker
 	b _080E1326
 	.align 2, 0
 _080E1318: .4byte gTasks
-_080E131C: .4byte gUnknown_2037F02
-_080E1320: .4byte gUnknown_2037F1A
+_080E131C: .4byte gBattleAnimArgs
+_080E1320: .4byte gBattleAnimAttacker
 _080E1324:
-	ldr r0, _080E13A4 @ =gUnknown_2037F1B
+	ldr r0, _080E13A4 @ =gBattleAnimTarget
 _080E1326:
 	ldrb r5, [r0]
 	movs r6, 0
@@ -6274,7 +6274,7 @@ _080E136C:
 	ldrh r0, [r4, 0x22]
 	adds r0, 0x42
 	strh r0, [r4, 0x24]
-	ldr r0, _080E13A8 @ =gUnknown_2037F02
+	ldr r0, _080E13A8 @ =gBattleAnimArgs
 	ldrb r0, [r0]
 	bl GetAnimBankSpriteId
 	lsls r0, 24
@@ -6296,8 +6296,8 @@ _080E136C:
 	ldr r0, _080E13B8 @ =gBattle_BG1_Y
 	b _080E13CE
 	.align 2, 0
-_080E13A4: .4byte gUnknown_2037F1B
-_080E13A8: .4byte gUnknown_2037F02
+_080E13A4: .4byte gBattleAnimTarget
+_080E13A8: .4byte gBattleAnimArgs
 _080E13AC: .4byte 0x04000014
 _080E13B0: .4byte 0x00003f42
 _080E13B4: .4byte gBattle_BG1_X
@@ -6741,7 +6741,7 @@ sub_80E1704: @ 80E1704
 	adds r4, r0
 	movs r0, 0
 	strh r0, [r4, 0x8]
-	ldr r0, _080E1740 @ =gUnknown_2037F02
+	ldr r0, _080E1740 @ =gBattleAnimArgs
 	ldrb r0, [r0]
 	bl GetAnimBankSpriteId
 	adds r1, r0, 0
@@ -6758,7 +6758,7 @@ sub_80E1704: @ 80E1704
 	bx r0
 	.align 2, 0
 _080E173C: .4byte gTasks
-_080E1740: .4byte gUnknown_2037F02
+_080E1740: .4byte gBattleAnimArgs
 _080E1744: .4byte gUnknown_83FF3D0
 _080E1748: .4byte sub_80E174C
 	thumb_func_end sub_80E1704
@@ -6921,7 +6921,7 @@ sub_80E186C: @ 80E186C
 	ldrh r6, [r4, 0x20]
 	ldrh r5, [r4, 0x22]
 	bl sub_8074FCC
-	ldr r0, _080E18B4 @ =gUnknown_2037F02
+	ldr r0, _080E18B4 @ =gBattleAnimArgs
 	ldrb r1, [r0]
 	adds r0, r4, 0
 	bl StartSpriteAffineAnim
@@ -6948,7 +6948,7 @@ sub_80E186C: @ 80E186C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E18B4: .4byte gUnknown_2037F02
+_080E18B4: .4byte gBattleAnimArgs
 _080E18B8: .4byte sub_80E18BC
 	thumb_func_end sub_80E186C
 
@@ -7012,13 +7012,13 @@ _080E1922:
 sub_80E1928: @ 80E1928
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	ldr r6, _080E1980 @ =gUnknown_2037F02
+	ldr r6, _080E1980 @ =gBattleAnimArgs
 	ldrh r0, [r6, 0x6]
 	strh r0, [r5, 0x2E]
 	ldrb r1, [r6]
 	adds r0, r5, 0
 	bl StartSpriteAffineAnim
-	ldr r0, _080E1984 @ =gUnknown_2037F1B
+	ldr r0, _080E1984 @ =gBattleAnimTarget
 	ldrb r0, [r0]
 	bl GetBattlerSide
 	lsls r0, 24
@@ -7028,7 +7028,7 @@ sub_80E1928: @ 80E1928
 	negs r0, r0
 	strh r0, [r6, 0x2]
 _080E194E:
-	ldr r4, _080E1988 @ =gUnknown_2037F1A
+	ldr r4, _080E1988 @ =gBattleAnimAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl sub_8074480
@@ -7051,9 +7051,9 @@ _080E194E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E1980: .4byte gUnknown_2037F02
-_080E1984: .4byte gUnknown_2037F1B
-_080E1988: .4byte gUnknown_2037F1A
+_080E1980: .4byte gBattleAnimArgs
+_080E1984: .4byte gBattleAnimTarget
+_080E1988: .4byte gBattleAnimAttacker
 _080E198C: .4byte sub_80B1D3C
 	thumb_func_end sub_80E1928
 
@@ -7442,12 +7442,12 @@ sub_80E1C48: @ 80E1C48
 	mov r1, r8
 	adds r4, r0, r1
 	ldr r1, _080E1CAC @ =gUnknown_2023D44
-	ldr r2, _080E1CB0 @ =gUnknown_2037F1A
+	ldr r2, _080E1CB0 @ =gBattleAnimAttacker
 	ldrb r0, [r2]
 	adds r0, r1
 	ldrb r0, [r0]
 	strh r0, [r4, 0x26]
-	ldr r5, _080E1CB4 @ =gUnknown_2037F02
+	ldr r5, _080E1CB4 @ =gBattleAnimArgs
 	ldrh r0, [r5]
 	strh r0, [r4, 0x24]
 	ldrh r0, [r5]
@@ -7479,8 +7479,8 @@ _080E1C8C:
 	.align 2, 0
 _080E1CA8: .4byte gTasks
 _080E1CAC: .4byte gUnknown_2023D44
-_080E1CB0: .4byte gUnknown_2037F1A
-_080E1CB4: .4byte gUnknown_2037F02
+_080E1CB0: .4byte gBattleAnimAttacker
+_080E1CB4: .4byte gBattleAnimArgs
 _080E1CB8: .4byte 0xffff8000
 _080E1CBC:
 	movs r7, 0x2
@@ -7503,7 +7503,7 @@ _080E1CD8:
 	orrs r0, r1
 _080E1CE0:
 	strh r0, [r4, 0xC]
-	ldr r0, _080E1D0C @ =gUnknown_2037F02
+	ldr r0, _080E1D0C @ =gBattleAnimArgs
 	movs r3, 0x4
 	ldrsh r1, [r0, r3]
 	movs r2, 0x80
@@ -7523,7 +7523,7 @@ _080E1CE0:
 	b _080E1D2A
 	.align 2, 0
 _080E1D08: .4byte 0xffff8000
-_080E1D0C: .4byte gUnknown_2037F02
+_080E1D0C: .4byte gBattleAnimArgs
 _080E1D10: .4byte gTasks
 _080E1D14: .4byte 0x00007fff
 _080E1D18:
@@ -7572,7 +7572,7 @@ sub_80E1D5C: @ 80E1D5C
 	lsls r0, 3
 	ldr r1, _080E1D94 @ =gTasks
 	adds r5, r0, r1
-	ldr r4, _080E1D98 @ =gUnknown_2037F02
+	ldr r4, _080E1D98 @ =gBattleAnimArgs
 	movs r1, 0x2
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
@@ -7590,14 +7590,14 @@ _080E1D7C:
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	bne _080E1DA0
-	ldr r0, _080E1D9C @ =gUnknown_2037F1A
+	ldr r0, _080E1D9C @ =gBattleAnimAttacker
 	b _080E1DA2
 	.align 2, 0
 _080E1D94: .4byte gTasks
-_080E1D98: .4byte gUnknown_2037F02
-_080E1D9C: .4byte gUnknown_2037F1A
+_080E1D98: .4byte gBattleAnimArgs
+_080E1D9C: .4byte gBattleAnimAttacker
 _080E1DA0:
-	ldr r0, _080E1DF0 @ =gUnknown_2037F1B
+	ldr r0, _080E1DF0 @ =gBattleAnimTarget
 _080E1DA2:
 	ldrb r4, [r0]
 	adds r0, r4, 0
@@ -7617,7 +7617,7 @@ _080E1DA2:
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x14]
-	ldr r0, _080E1DF4 @ =gUnknown_2037F02
+	ldr r0, _080E1DF4 @ =gBattleAnimArgs
 	ldrb r0, [r0]
 	bl GetAnimBankSpriteId
 	adds r1, r0, 0
@@ -7633,8 +7633,8 @@ _080E1DA2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E1DF0: .4byte gUnknown_2037F1B
-_080E1DF4: .4byte gUnknown_2037F02
+_080E1DF0: .4byte gBattleAnimTarget
+_080E1DF4: .4byte gBattleAnimArgs
 _080E1DF8: .4byte gUnknown_83FF52C
 _080E1DFC: .4byte sub_80E1E00
 	thumb_func_end sub_80E1D5C
@@ -7888,7 +7888,7 @@ sub_80E1FC4: @ 80E1FC4
 	adds r4, r1
 	movs r0, 0
 	strh r0, [r4, 0x8]
-	ldr r1, _080E2010 @ =gUnknown_2037F02
+	ldr r1, _080E2010 @ =gBattleAnimArgs
 	ldrh r0, [r1, 0x2]
 	strh r0, [r4, 0xA]
 	ldrb r0, [r1]
@@ -7915,7 +7915,7 @@ sub_80E1FC4: @ 80E1FC4
 	bx r0
 	.align 2, 0
 _080E200C: .4byte gTasks
-_080E2010: .4byte gUnknown_2037F02
+_080E2010: .4byte gBattleAnimArgs
 _080E2014: .4byte gSprites
 _080E2018: .4byte sub_80E201C
 	thumb_func_end sub_80E1FC4
@@ -7983,9 +7983,9 @@ sub_80E2084: @ 80E2084
 	lsrs r0, 24
 	movs r2, 0xD0
 	lsls r2, 1
-	ldr r1, _080E20C0 @ =gUnknown_2037F1A
+	ldr r1, _080E20C0 @ =gBattleAnimAttacker
 	ldrb r3, [r1]
-	ldr r1, _080E20C4 @ =gUnknown_2037F02
+	ldr r1, _080E20C4 @ =gBattleAnimArgs
 	ldrb r1, [r1]
 	str r1, [sp]
 	movs r1, 0xA
@@ -8006,8 +8006,8 @@ sub_80E2084: @ 80E2084
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E20C0: .4byte gUnknown_2037F1A
-_080E20C4: .4byte gUnknown_2037F02
+_080E20C0: .4byte gBattleAnimAttacker
+_080E20C4: .4byte gBattleAnimArgs
 _080E20C8: .4byte gFile_graphics_battle_anims_masks_cure_bubbles_sheet
 _080E20CC: .4byte gFile_graphics_battle_anims_masks_cure_bubbles_tilemap
 _080E20D0: .4byte gFile_graphics_battle_anims_masks_cure_bubbles_palette
@@ -8017,14 +8017,14 @@ _080E20D0: .4byte gFile_graphics_battle_anims_masks_cure_bubbles_palette
 sub_80E20D4: @ 80E20D4
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	ldr r6, _080E212C @ =gUnknown_2037F1A
+	ldr r6, _080E212C @ =gBattleAnimAttacker
 	ldrb r0, [r6]
 	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080E20F0
-	ldr r1, _080E2130 @ =gUnknown_2037F02
+	ldr r1, _080E2130 @ =gBattleAnimArgs
 	ldrh r0, [r1]
 	negs r0, r0
 	strh r0, [r1]
@@ -8033,7 +8033,7 @@ _080E20F0:
 	movs r1, 0
 	bl sub_8074480
 	lsls r0, 24
-	ldr r4, _080E2130 @ =gUnknown_2037F02
+	ldr r4, _080E2130 @ =gBattleAnimArgs
 	lsrs r0, 24
 	ldrh r1, [r4]
 	adds r0, r1
@@ -8057,8 +8057,8 @@ _080E20F0:
 	strh r0, [r5, 0x30]
 	b _080E2160
 	.align 2, 0
-_080E212C: .4byte gUnknown_2037F1A
-_080E2130: .4byte gUnknown_2037F02
+_080E212C: .4byte gBattleAnimAttacker
+_080E2130: .4byte gBattleAnimArgs
 _080E2134: .4byte 0x0000fd80
 _080E2138:
 	cmp r0, 0x1
@@ -8082,7 +8082,7 @@ _080E2152:
 	lsls r0, 2
 	strh r0, [r5, 0x2E]
 _080E2160:
-	ldr r0, _080E218C @ =gUnknown_2037F1A
+	ldr r0, _080E218C @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
 	lsls r0, 24
@@ -8104,7 +8104,7 @@ _080E2180:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E218C: .4byte gUnknown_2037F1A
+_080E218C: .4byte gBattleAnimAttacker
 _080E2190: .4byte sub_80E2194
 	thumb_func_end sub_80E20D4
 
@@ -8156,7 +8156,7 @@ sub_80E21CC: @ 80E21CC
 	movs r0, 0x3
 	strh r0, [r6, 0x14]
 	strh r1, [r6, 0x16]
-	ldr r5, _080E2220 @ =gUnknown_2037F1A
+	ldr r5, _080E2220 @ =gBattleAnimAttacker
 	ldrb r0, [r5]
 	bl GetBattlerSide
 	lsls r0, 24
@@ -8182,7 +8182,7 @@ _080E2216:
 	b _080E2248
 	.align 2, 0
 _080E221C: .4byte gTasks
-_080E2220: .4byte gUnknown_2037F1A
+_080E2220: .4byte gBattleAnimAttacker
 _080E2224:
 	ldrb r0, [r5]
 	movs r1, 0x2
@@ -8203,7 +8203,7 @@ _080E2244:
 	subs r0, r4, r0
 _080E2248:
 	strh r0, [r6, 0x1E]
-	ldr r5, _080E229C @ =gUnknown_2037F1A
+	ldr r5, _080E229C @ =gBattleAnimAttacker
 	ldrb r0, [r5]
 	movs r1, 0x3
 	bl sub_8074480
@@ -8222,7 +8222,7 @@ _080E226C:
 	asrs r0, 2
 	subs r0, r4, r0
 	strh r0, [r6, 0x20]
-	ldr r4, _080E22A0 @ =gUnknown_2037F1B
+	ldr r4, _080E22A0 @ =gBattleAnimTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl sub_8074480
@@ -8241,8 +8241,8 @@ _080E226C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E229C: .4byte gUnknown_2037F1A
-_080E22A0: .4byte gUnknown_2037F1B
+_080E229C: .4byte gBattleAnimAttacker
+_080E22A0: .4byte gBattleAnimTarget
 _080E22A4: .4byte sub_80E22A8
 	thumb_func_end sub_80E21CC
 
@@ -8551,7 +8551,7 @@ _080E24DC: .4byte gTasks
 sub_80E24E0: @ 80E24E0
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r1, _080E250C @ =gUnknown_2037F02
+	ldr r1, _080E250C @ =gBattleAnimArgs
 	ldrh r0, [r1]
 	strh r0, [r4, 0x20]
 	ldrh r0, [r1, 0x2]
@@ -8571,7 +8571,7 @@ sub_80E24E0: @ 80E24E0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E250C: .4byte gUnknown_2037F02
+_080E250C: .4byte gBattleAnimArgs
 _080E2510: .4byte DestroyAnimSprite
 _080E2514: .4byte sub_8075764
 	thumb_func_end sub_80E24E0
@@ -8591,7 +8591,7 @@ sub_80E2518: @ 80E2518
 	lsls r0, 3
 	ldr r1, _080E2638 @ =gTasks
 	adds r7, r0, r1
-	ldr r0, _080E263C @ =gUnknown_2037F1A
+	ldr r0, _080E263C @ =gBattleAnimAttacker
 	mov r10, r0
 	ldrb r0, [r0]
 	movs r1, 0x2
@@ -8606,7 +8606,7 @@ sub_80E2518: @ 80E2518
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r7, 0x20]
-	ldr r0, _080E2640 @ =gUnknown_2037F1B
+	ldr r0, _080E2640 @ =gBattleAnimTarget
 	mov r8, r0
 	ldrb r0, [r0]
 	movs r1, 0x2
@@ -8716,8 +8716,8 @@ _080E2632:
 	b _080E265A
 	.align 2, 0
 _080E2638: .4byte gTasks
-_080E263C: .4byte gUnknown_2037F1A
-_080E2640: .4byte gUnknown_2037F1B
+_080E263C: .4byte gBattleAnimAttacker
+_080E2640: .4byte gBattleAnimTarget
 _080E2644: .4byte gUnknown_83FF62C
 _080E2648: .4byte gSprites
 _080E264C: .4byte 0x0000ffe0
@@ -8877,19 +8877,19 @@ _080E276E:
 sub_80E2774: @ 80E2774
 	push {r4-r6,lr}
 	adds r4, r0, 0
-	ldr r0, _080E2788 @ =gUnknown_2037F02
+	ldr r0, _080E2788 @ =gBattleAnimArgs
 	movs r2, 0
 	ldrsh r1, [r0, r2]
 	adds r6, r0, 0
 	cmp r1, 0
 	bne _080E2790
-	ldr r0, _080E278C @ =gUnknown_2037F1A
+	ldr r0, _080E278C @ =gBattleAnimAttacker
 	b _080E2792
 	.align 2, 0
-_080E2788: .4byte gUnknown_2037F02
-_080E278C: .4byte gUnknown_2037F1A
+_080E2788: .4byte gBattleAnimArgs
+_080E278C: .4byte gBattleAnimAttacker
 _080E2790:
-	ldr r0, _080E27F8 @ =gUnknown_2037F1B
+	ldr r0, _080E27F8 @ =gBattleAnimTarget
 _080E2792:
 	ldrb r5, [r0]
 	ldrh r2, [r4, 0x4]
@@ -8942,7 +8942,7 @@ _080E27C0:
 	subs r0, 0x8
 	b _080E280E
 	.align 2, 0
-_080E27F8: .4byte gUnknown_2037F1B
+_080E27F8: .4byte gBattleAnimTarget
 _080E27FC: .4byte 0x000003ff
 _080E2800: .4byte 0xfffffc00
 _080E2804:
@@ -9072,7 +9072,7 @@ sub_80E28DC: @ 80E28DC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r2, _080E28F4 @ =gUnknown_2037F02
+	ldr r2, _080E28F4 @ =gBattleAnimArgs
 	movs r3, 0
 	ldrsh r0, [r2, r3]
 	cmp r0, 0
@@ -9081,7 +9081,7 @@ sub_80E28DC: @ 80E28DC
 	bl DestroyAnimVisualTask
 	b _080E2920
 	.align 2, 0
-_080E28F4: .4byte gUnknown_2037F02
+_080E28F4: .4byte gBattleAnimArgs
 _080E28F8:
 	ldr r0, _080E2928 @ =gTasks
 	lsls r4, r1, 2
@@ -9210,18 +9210,18 @@ _080E29EA:
 sub_80E29F0: @ 80E29F0
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, _080E2A04 @ =gUnknown_2037F02
+	ldr r0, _080E2A04 @ =gBattleAnimArgs
 	movs r1, 0
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _080E2A0C
-	ldr r4, _080E2A08 @ =gUnknown_2037F1A
+	ldr r4, _080E2A08 @ =gBattleAnimAttacker
 	b _080E2A0E
 	.align 2, 0
-_080E2A04: .4byte gUnknown_2037F02
-_080E2A08: .4byte gUnknown_2037F1A
+_080E2A04: .4byte gBattleAnimArgs
+_080E2A08: .4byte gBattleAnimAttacker
 _080E2A0C:
-	ldr r4, _080E2A4C @ =gUnknown_2037F1B
+	ldr r4, _080E2A4C @ =gBattleAnimTarget
 _080E2A0E:
 	ldrb r0, [r4]
 	movs r1, 0x2
@@ -9242,7 +9242,7 @@ _080E2A0E:
 _080E2A32:
 	movs r2, 0
 	strh r2, [r5, 0x2E]
-	ldr r1, _080E2A50 @ =gUnknown_2037F02
+	ldr r1, _080E2A50 @ =gBattleAnimArgs
 	ldrh r0, [r1, 0x2]
 	strh r0, [r5, 0x30]
 	strh r2, [r5, 0x32]
@@ -9254,8 +9254,8 @@ _080E2A32:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E2A4C: .4byte gUnknown_2037F1B
-_080E2A50: .4byte gUnknown_2037F02
+_080E2A4C: .4byte gBattleAnimTarget
+_080E2A50: .4byte gBattleAnimArgs
 _080E2A54: .4byte sub_80E2A58
 	thumb_func_end sub_80E29F0
 
@@ -9311,7 +9311,7 @@ _080E2AAC:
 sub_80E2AB0: @ 80E2AB0
 	push {lr}
 	adds r3, r0, 0
-	ldr r0, _080E2ADC @ =gUnknown_2037F02
+	ldr r0, _080E2ADC @ =gBattleAnimArgs
 	movs r1, 0
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
@@ -9331,7 +9331,7 @@ sub_80E2AB0: @ 80E2AB0
 	movs r0, 0x1
 	b _080E2AE6
 	.align 2, 0
-_080E2ADC: .4byte gUnknown_2037F02
+_080E2ADC: .4byte gBattleAnimArgs
 _080E2AE0:
 	movs r0, 0x8C
 	strh r0, [r3, 0x20]
@@ -9622,7 +9622,7 @@ sub_80E2CE4: @ 80E2CE4
 	lsrs r7, r0, 24
 	cmp r7, 0x1
 	bne _080E2D44
-	ldr r5, _080E2D38 @ =gUnknown_2037F1A
+	ldr r5, _080E2D38 @ =gBattleAnimAttacker
 	ldrb r0, [r5]
 	movs r1, 0
 	bl sub_8074480
@@ -9642,14 +9642,14 @@ sub_80E2CE4: @ 80E2CE4
 	b _080E2D64
 	.align 2, 0
 _080E2D34: .4byte gTasks
-_080E2D38: .4byte gUnknown_2037F1A
+_080E2D38: .4byte gBattleAnimAttacker
 _080E2D3C:
 	ldr r0, _080E2D40 @ =0x0000ffff
 	b _080E2D62
 	.align 2, 0
 _080E2D40: .4byte 0x0000ffff
 _080E2D44:
-	ldr r0, _080E2D58 @ =gUnknown_2037F1A
+	ldr r0, _080E2D58 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
 	lsls r0, 24
@@ -9658,7 +9658,7 @@ _080E2D44:
 	ldr r0, _080E2D5C @ =0x0000ffff
 	b _080E2D62
 	.align 2, 0
-_080E2D58: .4byte gUnknown_2037F1A
+_080E2D58: .4byte gBattleAnimAttacker
 _080E2D5C: .4byte 0x0000ffff
 _080E2D60:
 	movs r0, 0x1
@@ -9895,7 +9895,7 @@ _080E2F10: .4byte gSprites
 sub_80E2F14: @ 80E2F14
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, _080E2F30 @ =gUnknown_2037F02
+	ldr r0, _080E2F30 @ =gBattleAnimArgs
 	movs r1, 0
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
@@ -9903,13 +9903,13 @@ sub_80E2F14: @ 80E2F14
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_8075160
-	ldr r0, _080E2F34 @ =gUnknown_2037F1A
+	ldr r0, _080E2F34 @ =gBattleAnimAttacker
 	b _080E2F3A
 	.align 2, 0
-_080E2F30: .4byte gUnknown_2037F02
-_080E2F34: .4byte gUnknown_2037F1A
+_080E2F30: .4byte gBattleAnimArgs
+_080E2F34: .4byte gBattleAnimAttacker
 _080E2F38:
-	ldr r0, _080E2F90 @ =gUnknown_2037F1B
+	ldr r0, _080E2F90 @ =gBattleAnimTarget
 _080E2F3A:
 	ldrb r0, [r0]
 	strh r0, [r4, 0x3C]
@@ -9954,7 +9954,7 @@ _080E2F5E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E2F90: .4byte gUnknown_2037F1B
+_080E2F90: .4byte gBattleAnimTarget
 _080E2F94: .4byte sub_80E2F98
 	thumb_func_end sub_80E2F14
 
@@ -10295,7 +10295,7 @@ _080E3218: .4byte gUnknown_83FF180
 sub_80E321C: @ 80E321C
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r4, _080E3250 @ =gUnknown_2037F1B
+	ldr r4, _080E3250 @ =gBattleAnimTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl sub_8074480
@@ -10307,7 +10307,7 @@ sub_80E321C: @ 80E321C
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E3258
-	ldr r2, _080E3254 @ =gUnknown_2037F02
+	ldr r2, _080E3254 @ =gBattleAnimArgs
 	ldrh r1, [r5, 0x20]
 	ldrh r0, [r2]
 	subs r0, r1, r0
@@ -10316,10 +10316,10 @@ sub_80E321C: @ 80E321C
 	subs r1, r0
 	b _080E3266
 	.align 2, 0
-_080E3250: .4byte gUnknown_2037F1B
-_080E3254: .4byte gUnknown_2037F02
+_080E3250: .4byte gBattleAnimTarget
+_080E3254: .4byte gBattleAnimArgs
 _080E3258:
-	ldr r2, _080E328C @ =gUnknown_2037F02
+	ldr r2, _080E328C @ =gBattleAnimArgs
 	ldrh r1, [r5, 0x20]
 	ldrh r0, [r2]
 	adds r0, r1, r0
@@ -10347,7 +10347,7 @@ _080E3266:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E328C: .4byte gUnknown_2037F02
+_080E328C: .4byte gBattleAnimArgs
 _080E3290: .4byte sub_80E319C
 	thumb_func_end sub_80E321C
 
@@ -10431,7 +10431,7 @@ _080E3328:
 	.align 2, 0
 _080E3330: .4byte gSprites
 _080E3334:
-	ldr r0, _080E336C @ =gUnknown_2037F1A
+	ldr r0, _080E336C @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	movs r1, 0
 	bl LoadBattleMonGfxAndAnimate
@@ -10461,7 +10461,7 @@ _080E3360:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E336C: .4byte gUnknown_2037F1A
+_080E336C: .4byte gBattleAnimAttacker
 _080E3370: .4byte sub_80E3374
 	thumb_func_end sub_80E3294
 
@@ -10647,7 +10647,7 @@ _080E34CC: .4byte gSprites
 sub_80E34D0: @ 80E34D0
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r4, _080E34F4 @ =gUnknown_2037F1B
+	ldr r4, _080E34F4 @ =gBattleAnimTarget
 	ldrb r0, [r4]
 	bl GetBattlerSide
 	lsls r0, 24
@@ -10662,7 +10662,7 @@ sub_80E34D0: @ 80E34D0
 	ldr r4, _080E34F8 @ =0x0000ff70
 	b _080E350C
 	.align 2, 0
-_080E34F4: .4byte gUnknown_2037F1B
+_080E34F4: .4byte gBattleAnimTarget
 _080E34F8: .4byte 0x0000ff70
 _080E34FC:
 	ldrb r0, [r4]
@@ -10673,7 +10673,7 @@ _080E34FC:
 	strb r0, [r1]
 	ldr r4, _080E3528 @ =0x0000ffa0
 _080E350C:
-	ldr r0, _080E352C @ =gUnknown_2037F1B
+	ldr r0, _080E352C @ =gBattleAnimTarget
 	ldrb r0, [r0]
 	movs r1, 0x3
 	bl sub_8074480
@@ -10688,7 +10688,7 @@ _080E350C:
 	bx r0
 	.align 2, 0
 _080E3528: .4byte 0x0000ffa0
-_080E352C: .4byte gUnknown_2037F1B
+_080E352C: .4byte gBattleAnimTarget
 _080E3530: .4byte sub_80E3534
 	thumb_func_end sub_80E34D0
 
@@ -10929,7 +10929,7 @@ _080E36B4:
 	strh r1, [r0, 0x8]
 	ldr r0, _080E3750 @ =gUnknown_2024018
 	ldr r1, [r0]
-	ldr r0, _080E3754 @ =gUnknown_2037F1B
+	ldr r0, _080E3754 @ =gBattleAnimTarget
 	ldrb r0, [r0]
 	ldr r1, [r1]
 	lsls r0, 2
@@ -10961,7 +10961,7 @@ _080E3744: .4byte gSprites
 _080E3748: .4byte 0x0000fff0
 _080E374C: .4byte gTasks
 _080E3750: .4byte gUnknown_2024018
-_080E3754: .4byte gUnknown_2037F1B
+_080E3754: .4byte gBattleAnimTarget
 _080E3758:
 	adds r1, r5, 0
 	adds r1, 0x3E
@@ -11065,7 +11065,7 @@ sub_80E37FC: @ 80E37FC
 	strh r0, [r4, 0x30]
 	ldr r0, _080E3870 @ =gUnknown_2024018
 	ldr r1, [r0]
-	ldr r0, _080E3874 @ =gUnknown_2037F1B
+	ldr r0, _080E3874 @ =gBattleAnimTarget
 	ldrb r0, [r0]
 	ldr r1, [r1]
 	lsls r0, 2
@@ -11112,7 +11112,7 @@ _080E3846:
 	b _080E38CE
 	.align 2, 0
 _080E3870: .4byte gUnknown_2024018
-_080E3874: .4byte gUnknown_2037F1B
+_080E3874: .4byte gBattleAnimTarget
 _080E3878:
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x1
@@ -11170,7 +11170,7 @@ sub_80E38D8: @ 80E38D8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r3, _080E3924 @ =gUnknown_2037F02
+	ldr r3, _080E3924 @ =gBattleAnimArgs
 	movs r2, 0
 	strh r2, [r3, 0xE]
 	ldr r1, _080E3928 @ =gUnknown_2037EFE
@@ -11208,7 +11208,7 @@ _080E3918:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E3924: .4byte gUnknown_2037F02
+_080E3924: .4byte gBattleAnimArgs
 _080E3928: .4byte gUnknown_2037EFE
 	thumb_func_end sub_80E38D8
 
@@ -11266,7 +11266,7 @@ _080E3978:
 	ldrh r1, [r6, 0xA]
 	adds r0, r1
 	strh r0, [r6, 0xA]
-	ldr r0, _080E39C8 @ =gUnknown_2037F1A
+	ldr r0, _080E39C8 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
 	lsls r0, 24
@@ -11287,7 +11287,7 @@ _080E3978:
 	b _080E39EA
 	.align 2, 0
 _080E39C4: .4byte gTasks
-_080E39C8: .4byte gUnknown_2037F1A
+_080E39C8: .4byte gBattleAnimAttacker
 _080E39CC: .4byte gSprites
 _080E39D0:
 	ldr r3, _080E3A24 @ =gSprites
@@ -11337,7 +11337,7 @@ _080E3A16:
 _080E3A24: .4byte gSprites
 _080E3A28: .4byte gTasks
 _080E3A2C:
-	ldr r4, _080E3A90 @ =gUnknown_2037F1A
+	ldr r4, _080E3A90 @ =gBattleAnimAttacker
 	ldrb r0, [r4]
 	bl GetBattlerSide
 	lsls r0, 24
@@ -11384,7 +11384,7 @@ _080E3A2C:
 	lsrs r5, r0, 16
 	b _080E3AA2
 	.align 2, 0
-_080E3A90: .4byte gUnknown_2037F1A
+_080E3A90: .4byte gBattleAnimAttacker
 _080E3A94: .4byte gBattlerPartyIndexes
 _080E3A98: .4byte gPlayerParty
 _080E3A9C: .4byte gUnknown_2024018
@@ -11476,7 +11476,7 @@ _080E3B32:
 	movs r7, 0x1
 	ldr r6, _080E3BD4 @ =0x0000ffe0
 _080E3B54:
-	ldr r0, _080E3BD8 @ =gUnknown_2037F1B
+	ldr r0, _080E3BD8 @ =gBattleAnimTarget
 	ldrb r0, [r0]
 	movs r1, 0x1
 	bl sub_8074480
@@ -11490,7 +11490,7 @@ _080E3B54:
 	str r2, [sp, 0x8]
 	mov r4, r9
 	str r4, [sp, 0xC]
-	ldr r4, _080E3BDC @ =gUnknown_2037F1A
+	ldr r4, _080E3BDC @ =gBattleAnimAttacker
 	ldrb r0, [r4]
 	str r0, [sp, 0x10]
 	movs r0, 0
@@ -11538,8 +11538,8 @@ _080E3BBE:
 	.align 2, 0
 _080E3BD0: .4byte gSprites
 _080E3BD4: .4byte 0x0000ffe0
-_080E3BD8: .4byte gUnknown_2037F1B
-_080E3BDC: .4byte gUnknown_2037F1A
+_080E3BD8: .4byte gBattleAnimTarget
+_080E3BDC: .4byte gBattleAnimAttacker
 _080E3BE0: .4byte gUnknown_2024018
 _080E3BE4: .4byte 0x00007fff
 _080E3BE8: .4byte gTasks
@@ -11559,7 +11559,7 @@ _080E3BEC:
 	ldrh r2, [r6, 0xA]
 	adds r0, r2
 	strh r0, [r6, 0xA]
-	ldr r0, _080E3C3C @ =gUnknown_2037F1A
+	ldr r0, _080E3C3C @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
 	lsls r0, 24
@@ -11582,7 +11582,7 @@ _080E3BEC:
 	b _080E3C5A
 	.align 2, 0
 _080E3C38: .4byte gTasks
-_080E3C3C: .4byte gUnknown_2037F1A
+_080E3C3C: .4byte gBattleAnimAttacker
 _080E3C40: .4byte gSprites
 _080E3C44:
 	ldr r2, _080E3CA8 @ =gSprites
@@ -11616,7 +11616,7 @@ _080E3C5A:
 	ldrsh r0, [r6, r1]
 	cmp r0, 0
 	bne _080E3CDA
-	ldr r0, _080E3CB0 @ =gUnknown_2037F1A
+	ldr r0, _080E3CB0 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
 	lsls r0, 24
@@ -11624,7 +11624,7 @@ _080E3C5A:
 	bne _080E3CB8
 	lsls r4, r5, 16
 	asrs r4, 16
-	ldr r0, _080E3CB4 @ =gUnknown_2037F1B
+	ldr r0, _080E3CB4 @ =gBattleAnimTarget
 	ldrb r0, [r0]
 	movs r1, 0
 	bl sub_8074480
@@ -11636,12 +11636,12 @@ _080E3C5A:
 	.align 2, 0
 _080E3CA8: .4byte gSprites
 _080E3CAC: .4byte gTasks
-_080E3CB0: .4byte gUnknown_2037F1A
-_080E3CB4: .4byte gUnknown_2037F1B
+_080E3CB0: .4byte gBattleAnimAttacker
+_080E3CB4: .4byte gBattleAnimTarget
 _080E3CB8:
 	lsls r4, r5, 16
 	asrs r4, 16
-	ldr r0, _080E3CFC @ =gUnknown_2037F1B
+	ldr r0, _080E3CFC @ =gBattleAnimTarget
 	ldrb r0, [r0]
 	movs r1, 0
 	bl sub_8074480
@@ -11653,7 +11653,7 @@ _080E3CCE:
 	ldrh r0, [r6, 0x24]
 	adds r0, 0x1
 	strh r0, [r6, 0x24]
-	ldr r1, _080E3D00 @ =gUnknown_2037F02
+	ldr r1, _080E3D00 @ =gBattleAnimArgs
 	ldr r0, _080E3D04 @ =0x0000ffff
 	strh r0, [r1, 0xE]
 _080E3CDA:
@@ -11676,8 +11676,8 @@ _080E3CEC:
 	strh r0, [r1, 0xA]
 	b _080E3D82
 	.align 2, 0
-_080E3CFC: .4byte gUnknown_2037F1B
-_080E3D00: .4byte gUnknown_2037F02
+_080E3CFC: .4byte gBattleAnimTarget
+_080E3D00: .4byte gBattleAnimArgs
 _080E3D04: .4byte 0x0000ffff
 _080E3D08: .4byte gTasks
 _080E3D0C:
@@ -11700,7 +11700,7 @@ _080E3D0C:
 	ldr r5, _080E3D5C @ =gSprites
 	adds r0, r5
 	bl sub_8076B20
-	ldr r0, _080E3D60 @ =gUnknown_2037F1A
+	ldr r0, _080E3D60 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
 	lsls r0, 24
@@ -11719,7 +11719,7 @@ _080E3D0C:
 	.align 2, 0
 _080E3D58: .4byte gTasks
 _080E3D5C: .4byte gSprites
-_080E3D60: .4byte gUnknown_2037F1A
+_080E3D60: .4byte gBattleAnimAttacker
 _080E3D64:
 	lsls r0, r7, 4
 	adds r0, r7
@@ -11761,7 +11761,7 @@ _080E3D90:
 	ldrh r3, [r2, 0xA]
 	adds r0, r3
 	strh r0, [r2, 0xA]
-	ldr r0, _080E3E08 @ =gUnknown_2037F1A
+	ldr r0, _080E3E08 @ =gBattleAnimAttacker
 	mov r10, r0
 	ldrb r0, [r0]
 	str r2, [sp, 0x18]
@@ -11801,7 +11801,7 @@ _080E3D90:
 	b _080E3E48
 	.align 2, 0
 _080E3E04: .4byte gTasks
-_080E3E08: .4byte gUnknown_2037F1A
+_080E3E08: .4byte gBattleAnimAttacker
 _080E3E0C: .4byte gSprites
 _080E3E10:
 	ldr r1, _080E3E7C @ =gSprites
@@ -11875,7 +11875,7 @@ sub_80E3E84: @ 80E3E84
 	beq _080E3F36
 	b _080E3FB8
 _080E3E96:
-	ldr r0, _080E3F14 @ =gUnknown_2037F02
+	ldr r0, _080E3F14 @ =gBattleAnimArgs
 	movs r2, 0xE
 	ldrsh r1, [r0, r2]
 	movs r0, 0x1
@@ -11889,7 +11889,7 @@ _080E3E96:
 	asrs r1, 24
 	movs r0, 0x73
 	bl PlaySE12WithPanning
-	ldr r0, _080E3F18 @ =gUnknown_2037F1B
+	ldr r0, _080E3F18 @ =gBattleAnimTarget
 	ldrb r0, [r0]
 	movs r1, 0x1
 	bl sub_8074480
@@ -11909,7 +11909,7 @@ _080E3E96:
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r2]
-	ldr r0, _080E3F20 @ =gUnknown_2037F1A
+	ldr r0, _080E3F20 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
 	lsls r0, 24
@@ -11933,10 +11933,10 @@ _080E3E96:
 	strb r0, [r1]
 	b _080E3FB8
 	.align 2, 0
-_080E3F14: .4byte gUnknown_2037F02
-_080E3F18: .4byte gUnknown_2037F1B
+_080E3F14: .4byte gBattleAnimArgs
+_080E3F18: .4byte gBattleAnimTarget
 _080E3F1C: .4byte 0x0000ffe0
-_080E3F20: .4byte gUnknown_2037F1A
+_080E3F20: .4byte gBattleAnimAttacker
 _080E3F24: .4byte gSprites
 _080E3F28:
 	adds r0, r4, 0
@@ -11979,7 +11979,7 @@ _080E3F6A:
 	ldrh r1, [r4, 0x32]
 	adds r0, r1
 	strh r0, [r4, 0x32]
-	ldr r0, _080E3F94 @ =gUnknown_2037F1A
+	ldr r0, _080E3F94 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
 	lsls r0, 24
@@ -11994,7 +11994,7 @@ _080E3F6A:
 	adds r1, r2, 0
 	b _080E3FA4
 	.align 2, 0
-_080E3F94: .4byte gUnknown_2037F1A
+_080E3F94: .4byte gBattleAnimAttacker
 _080E3F98:
 	ldrh r1, [r4, 0x32]
 	lsls r0, r1, 16
@@ -12051,14 +12051,14 @@ _080E3FF0:
 	.4byte _080E40C8
 	.4byte _080E412E
 _080E4004:
-	ldr r0, _080E4048 @ =gUnknown_2037F1A
+	ldr r0, _080E4048 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	movs r1, 0
 	bl sub_8074480
 	lsls r0, 24
 	lsrs r0, 24
 	adds r5, r0, 0
-	ldr r0, _080E404C @ =gUnknown_2037F1B
+	ldr r0, _080E404C @ =gBattleAnimTarget
 	ldrb r0, [r0]
 	movs r1, 0
 	bl sub_8074480
@@ -12084,12 +12084,12 @@ _080E403A:
 	strh r0, [r1, 0x26]
 	b _080E414C
 	.align 2, 0
-_080E4048: .4byte gUnknown_2037F1A
-_080E404C: .4byte gUnknown_2037F1B
+_080E4048: .4byte gBattleAnimAttacker
+_080E404C: .4byte gBattleAnimTarget
 _080E4050: .4byte gTasks
 _080E4054:
 	ldr r1, _080E4090 @ =gUnknown_2023D44
-	ldr r0, _080E4094 @ =gUnknown_2037F1A
+	ldr r0, _080E4094 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r2, [r0]
@@ -12120,7 +12120,7 @@ _080E4054:
 	b _080E4122
 	.align 2, 0
 _080E4090: .4byte gUnknown_2023D44
-_080E4094: .4byte gUnknown_2037F1A
+_080E4094: .4byte gBattleAnimAttacker
 _080E4098: .4byte gSprites
 _080E409C:
 	movs r3, 0x20
@@ -12148,7 +12148,7 @@ _080E40B0:
 	b _080E414C
 _080E40C8:
 	ldr r1, _080E4108 @ =gUnknown_2023D44
-	ldr r0, _080E410C @ =gUnknown_2037F1A
+	ldr r0, _080E410C @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r2, [r0]
@@ -12181,7 +12181,7 @@ _080E40C8:
 	b _080E4126
 	.align 2, 0
 _080E4108: .4byte gUnknown_2023D44
-_080E410C: .4byte gUnknown_2037F1A
+_080E410C: .4byte gBattleAnimAttacker
 _080E4110: .4byte gSprites
 _080E4114:
 	movs r3, 0x20
@@ -12201,7 +12201,7 @@ _080E4126:
 	b _080E414C
 _080E412E:
 	ldr r1, _080E4154 @ =gUnknown_2023D44
-	ldr r0, _080E4158 @ =gUnknown_2037F1A
+	ldr r0, _080E4158 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r2, [r0]
@@ -12220,7 +12220,7 @@ _080E414C:
 	bx r0
 	.align 2, 0
 _080E4154: .4byte gUnknown_2023D44
-_080E4158: .4byte gUnknown_2037F1A
+_080E4158: .4byte gBattleAnimAttacker
 _080E415C: .4byte gSprites
 	thumb_func_end sub_80E3FC0
 
@@ -12240,7 +12240,7 @@ sub_80E4160: @ 80E4160
 	lsrs r0, 24
 	movs r5, 0
 	strh r0, [r4, 0xE]
-	ldr r0, _080E41CC @ =gUnknown_2037F1A
+	ldr r0, _080E41CC @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
 	lsls r0, 24
@@ -12279,7 +12279,7 @@ _080E4194:
 	bx r0
 	.align 2, 0
 _080E41C8: .4byte gTasks
-_080E41CC: .4byte gUnknown_2037F1A
+_080E41CC: .4byte gBattleAnimAttacker
 _080E41D0: .4byte gSprites
 _080E41D4: .4byte sub_80E41D8
 	thumb_func_end sub_80E4160
@@ -12423,7 +12423,7 @@ _080E42D6:
 sub_80E42DC: @ 80E42DC
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, _080E4330 @ =gUnknown_2037F1B
+	ldr r0, _080E4330 @ =gBattleAnimTarget
 	ldrb r0, [r0]
 	bl GetBattlerSide
 	lsls r0, 24
@@ -12460,20 +12460,20 @@ _080E4322:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E4330: .4byte gUnknown_2037F1B
+_080E4330: .4byte gBattleAnimTarget
 	thumb_func_end sub_80E42DC
 
 	thumb_func_start sub_80E4334
 sub_80E4334: @ 80E4334
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, _080E436C @ =gUnknown_2037F1B
+	ldr r0, _080E436C @ =gBattleAnimTarget
 	ldrb r0, [r0]
 	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E4378
-	ldr r2, _080E4370 @ =gUnknown_2037F02
+	ldr r2, _080E4370 @ =gBattleAnimArgs
 	ldrh r0, [r4, 0x20]
 	ldrh r1, [r2]
 	subs r0, r1
@@ -12491,15 +12491,15 @@ sub_80E4334: @ 80E4334
 	bl StartSpriteAffineAnim
 	b _080E4392
 	.align 2, 0
-_080E436C: .4byte gUnknown_2037F1B
-_080E4370: .4byte gUnknown_2037F02
+_080E436C: .4byte gBattleAnimTarget
+_080E4370: .4byte gBattleAnimArgs
 _080E4374: .4byte 0x0000fff5
 _080E4378:
 	movs r0, 0xB
 	strh r0, [r4, 0x2E]
 	movs r0, 0xC0
 	strh r0, [r4, 0x30]
-	ldr r1, _080E439C @ =gUnknown_2037F02
+	ldr r1, _080E439C @ =gBattleAnimArgs
 	ldrh r0, [r1]
 	ldrh r2, [r4, 0x20]
 	adds r0, r2
@@ -12515,7 +12515,7 @@ _080E4392:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E439C: .4byte gUnknown_2037F02
+_080E439C: .4byte gBattleAnimArgs
 _080E43A0: .4byte sub_80E42DC
 	thumb_func_end sub_80E4334
 
@@ -12523,7 +12523,7 @@ _080E43A0: .4byte sub_80E42DC
 sub_80E43A4: @ 80E43A4
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r4, _080E43E8 @ =gUnknown_2037F1A
+	ldr r4, _080E43E8 @ =gBattleAnimAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl sub_8074480
@@ -12554,7 +12554,7 @@ _080E43CE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E43E8: .4byte gUnknown_2037F1A
+_080E43E8: .4byte gBattleAnimAttacker
 _080E43EC: .4byte sub_80E43F0
 	thumb_func_end sub_80E43A4
 
@@ -12700,7 +12700,7 @@ sub_80E44EC: @ 80E44EC
 	push {lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
-	ldr r2, _080E4508 @ =gUnknown_2037F02
+	ldr r2, _080E4508 @ =gBattleAnimArgs
 	movs r0, 0
 	strh r0, [r2, 0xE]
 	ldr r0, _080E450C @ =gUnknown_2037F00
@@ -12712,7 +12712,7 @@ sub_80E44EC: @ 80E44EC
 	movs r0, 0x1
 	b _080E4532
 	.align 2, 0
-_080E4508: .4byte gUnknown_2037F02
+_080E4508: .4byte gBattleAnimArgs
 _080E450C: .4byte gUnknown_2037F00
 _080E4510:
 	movs r0, 0x7
@@ -12755,7 +12755,7 @@ sub_80E4540: @ 80E4540
 	adds r4, r0
 	movs r0, 0
 	strh r0, [r4, 0x8]
-	ldr r0, _080E457C @ =gUnknown_2037F02
+	ldr r0, _080E457C @ =gBattleAnimArgs
 	ldrb r0, [r0]
 	bl GetAnimBankSpriteId
 	adds r1, r0, 0
@@ -12772,7 +12772,7 @@ sub_80E4540: @ 80E4540
 	bx r0
 	.align 2, 0
 _080E4578: .4byte gTasks
-_080E457C: .4byte gUnknown_2037F02
+_080E457C: .4byte gBattleAnimArgs
 _080E4580: .4byte gUnknown_83FF7A8
 _080E4584: .4byte sub_80E4588
 	thumb_func_end sub_80E4540

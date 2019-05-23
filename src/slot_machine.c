@@ -44,6 +44,21 @@ struct SlotMachineGfxManager
     vu16 * field_70;
 };
 
+struct SlotMachineReelActionTaskDataSub_0000
+{
+    u16 unk0;
+    u8 unk2;
+    u8 unk3;
+};
+
+struct SlotMachineReelActionTaskData
+{
+    struct SlotMachineReelActionTaskDataSub_0000 field_0000[8];
+    u8 filler_0020[8];
+    u32 field_0028;
+    u8 filler_002C[0x2830];
+};
+
 EWRAM_DATA struct SlotMachineState * sSlotMachineState = NULL;
 EWRAM_DATA struct SlotMachineGfxManager * sSlotMachineGfxManager = NULL;
 
@@ -76,6 +91,24 @@ void sub_8140C6C(struct SlotMachineGfxManager * manager);
 void sub_8140D7C(const s16 *, const s16 *);
 bool32 sub_814104C(void);
 void sub_8141094(void);
+struct SlotMachineReelActionTaskData * sub_814112C(void);
+void sub_81410CC(u8 taskId);
+bool8 sub_8141198(u8 *, struct SlotMachineReelActionTaskData *);
+bool8 sub_8141460(u8 *, struct SlotMachineReelActionTaskData *);
+bool8 sub_81414AC(u8 *, struct SlotMachineReelActionTaskData *);
+bool8 sub_81414EC(u8 *, struct SlotMachineReelActionTaskData *);
+bool8 sub_81414FC(u8 *, struct SlotMachineReelActionTaskData *);
+bool8 sub_8141518(u8 *, struct SlotMachineReelActionTaskData *);
+bool8 sub_8141558(u8 *, struct SlotMachineReelActionTaskData *);
+bool8 sub_8141568(u8 *, struct SlotMachineReelActionTaskData *);
+bool8 sub_8141578(u8 *, struct SlotMachineReelActionTaskData *);
+bool8 sub_8141584(u8 *, struct SlotMachineReelActionTaskData *);
+bool8 sub_81415C8(u8 *, struct SlotMachineReelActionTaskData *);
+bool8 sub_8141610(u8 *, struct SlotMachineReelActionTaskData *);
+bool8 sub_8141650(u8 *, struct SlotMachineReelActionTaskData *);
+bool8 sub_8141690(u8 *, struct SlotMachineReelActionTaskData *);
+bool8 sub_81416C8(u8 *, struct SlotMachineReelActionTaskData *);
+bool8 sub_8141764(u8 *, struct SlotMachineReelActionTaskData *);
 void sub_8141148(u16 a0, u8 a1);
 bool32 sub_8141180(u8 a0);
 void sub_8141C30(u8, u8);
@@ -431,6 +464,25 @@ const union AnimCmd *const gUnknown_84658C8[] = {
 
 const struct SpriteTemplate gUnknown_84658D8 = {
     1, 5, &gUnknown_8465894, gUnknown_84658C8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+bool8 (*const gUnknown_84658F0[])(u8 *, struct SlotMachineReelActionTaskData *) = {
+    sub_8141198,
+    sub_8141460,
+    sub_81414AC,
+    sub_81414EC,
+    sub_81414FC,
+    sub_8141518,
+    sub_8141558,
+    sub_8141568,
+    sub_8141578,
+    sub_8141584,
+    sub_81415C8,
+    sub_8141610,
+    sub_8141650,
+    sub_8141690,
+    sub_81416C8,
+    sub_8141764
 };
 
 void PlaySlotMachine(u16 machineIdx, MainCallback savedCallback)
@@ -1803,4 +1855,66 @@ void sub_8141020(u8 a0)
     {
         StartSpriteAnim(sSlotMachineGfxManager->field_68[i], a0);
     }
+}
+
+bool32 sub_814104C(void)
+{
+    s32 i;
+
+    struct SlotMachineReelActionTaskData * ptr = Alloc(sizeof(struct SlotMachineReelActionTaskData));
+    if (ptr == NULL)
+        return FALSE;
+    for (i = 0; i < 8; i++)
+        ptr->field_0000[i].unk3 = 0;
+    ptr->field_0028 = 0;
+    SetWordTaskArg(CreateTask(sub_81410CC, 2), 0, (uintptr_t)ptr);
+    return FALSE;
+}
+
+void sub_8141094(void)
+{
+    if (FuncIsActiveTask(sub_81410CC))
+    {
+        Free(sub_814112C());
+        DestroyTask(FindTaskIdByFunc(sub_81410CC));
+    }
+    sub_8140C50();
+    FreeAllWindowBuffers();
+}
+
+void sub_81410CC(u8 taskId)
+{
+    struct SlotMachineReelActionTaskData * ptr = (void *)GetWordTaskArg(taskId, 0);
+    s32 i;
+
+    for (i = 0; i < 8; i++)
+    {
+        if (ptr->field_0000[i].unk3)
+            ptr->field_0000[i].unk3 = gUnknown_84658F0[ptr->field_0000[i].unk0](&ptr->field_0000[i].unk2, ptr);
+    }
+}
+
+void sub_8141118(void)
+{
+    TransferPlttBuffer();
+    LoadOam();
+    ProcessSpriteCopyRequests();
+}
+
+struct SlotMachineReelActionTaskData * sub_814112C(void)
+{
+    return (void *)GetWordTaskArg(FindTaskIdByFunc(sub_81410CC), 0);
+}
+
+void sub_8141148(u16 a0, u8 a1)
+{
+    struct SlotMachineReelActionTaskData * ptr = sub_814112C();
+    ptr->field_0000[a1].unk0 = a0;
+    ptr->field_0000[a1].unk2 = 0;
+    ptr->field_0000[a1].unk3 = gUnknown_84658F0[a0](&ptr->field_0000[a1].unk2, ptr);
+}
+
+bool32 sub_8141180(u8 a0)
+{
+    return sub_814112C()->field_0000[a0].unk3;
 }

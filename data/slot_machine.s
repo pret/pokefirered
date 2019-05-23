@@ -4,24 +4,6 @@
 	.section .rodata
 	.align 2
 
-gUnknown_84658F0:: @ 84658F0
-	.4byte sub_8141198
-	.4byte sub_8141460
-	.4byte sub_81414AC
-	.4byte sub_81414EC
-	.4byte sub_81414FC
-	.4byte sub_8141518
-	.4byte sub_8141558
-	.4byte sub_8141568
-	.4byte sub_8141578
-	.4byte sub_8141584
-	.4byte sub_81415C8
-	.4byte sub_8141610
-	.4byte sub_8141650
-	.4byte sub_8141690
-	.4byte sub_81416C8
-	.4byte sub_8141764
-
 gUnknown_8465930:: @ 8465930
 	.incbin "graphics/slot_machine/unk_8465930.gbapal"
 

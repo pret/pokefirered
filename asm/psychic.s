@@ -286,7 +286,7 @@ sub_80B30B0: @ 80B30B0
 	cmp r0, 0
 	beq _080B3118
 	ldr r2, _080B315C @ =gSprites
-	ldr r0, _080B3160 @ =gUnknown_2023D44
+	ldr r0, _080B3160 @ =gBattlerSpriteIds
 	adds r0, r4, r0
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -309,7 +309,7 @@ _080B3118:
 	cmp r0, 0
 	beq _080B3146
 	ldr r2, _080B315C @ =gSprites
-	ldr r0, _080B3160 @ =gUnknown_2023D44
+	ldr r0, _080B3160 @ =gBattlerSpriteIds
 	adds r0, r4, r0
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -337,7 +337,7 @@ _080B3156:
 	bx r0
 	.align 2, 0
 _080B315C: .4byte gSprites
-_080B3160: .4byte gUnknown_2023D44
+_080B3160: .4byte gBattlerSpriteIds
 _080B3164: .4byte sub_80B3168
 	thumb_func_end sub_80B30B0
 

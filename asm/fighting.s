@@ -1492,7 +1492,7 @@ sub_80B13F8: @ 80B13F8
 	strh r0, [r5, 0x34]
 	ldrh r0, [r1, 0x4]
 	strh r0, [r5, 0x36]
-	ldr r0, _080B147C @ =gUnknown_2037F16
+	ldr r0, _080B147C @ =gAnimMoveTurn
 	ldrb r6, [r0]
 	ldrb r0, [r4]
 	bl GetBattlerSide
@@ -1531,7 +1531,7 @@ _080B1456:
 	.align 2, 0
 _080B1474: .4byte gBattleAnimTarget
 _080B1478: .4byte gBattleAnimArgs
-_080B147C: .4byte gUnknown_2037F16
+_080B147C: .4byte gAnimMoveTurn
 _080B1480: .4byte sub_80B13D4
 	thumb_func_end sub_80B13F8
 

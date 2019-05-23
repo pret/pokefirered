@@ -254,7 +254,7 @@ gUnknown_2023C30: @ 2023C30
 gUnknown_2023C34: @ 2023C34
 	.space 0x110
 
-gUnknown_2023D44: @ 2023D44
+gBattlerSpriteIds: @ 2023D44
 	.space 0x4
 
 gUnknown_2023D48: @ 2023D48
@@ -746,7 +746,7 @@ gUnknown_2037EE2: @ 2037EE2
 gUnknown_2037EE3: @ 2037EE3
 	.space 0x1
 
-gUnknown_2037EE4: @ 2037EE4
+gAnimDisableStructPtr: @ 2037EE4
 	.space 0x4
 
 gUnknown_2037EE8: @ 2037EE8
@@ -773,7 +773,7 @@ gUnknown_2037F12: @ 2037F12
 gUnknown_2037F14: @ 2037F14
 	.space 0x2
 
-gUnknown_2037F16: @ 2037F16
+gAnimMoveTurn: @ 2037F16
 	.space 0x1
 
 gUnknown_2037F17: @ 2037F17

@@ -394,7 +394,7 @@ _08034094:
 	cmp r5, 0x2
 	bne _080340E0
 	ldr r1, _080340D8 @ =gSprites
-	ldr r0, _080340DC @ =gUnknown_2023D44
+	ldr r0, _080340DC @ =gBattlerSpriteIds
 	adds r0, r6, r0
 	ldrb r2, [r0]
 	lsls r0, r2, 4
@@ -415,7 +415,7 @@ _08034094:
 	b _08034132
 	.align 2, 0
 _080340D8: .4byte gSprites
-_080340DC: .4byte gUnknown_2023D44
+_080340DC: .4byte gBattlerSpriteIds
 _080340E0:
 	ldr r0, _08034144 @ =gBattleAnimAttacker
 	mov r2, r10
@@ -1718,7 +1718,7 @@ CopyAllBattleSpritesInvisibilities: @ 8034B40
 	negs r0, r0
 	mov r8, r0
 	ldr r7, _08034BAC @ =gUnknown_2024018
-	ldr r6, _08034BB0 @ =gUnknown_2023D44
+	ldr r6, _08034BB0 @ =gBattlerSpriteIds
 _08034B64:
 	ldr r0, [r7]
 	ldr r0, [r0]
@@ -1756,7 +1756,7 @@ _08034B96:
 _08034BA4: .4byte gBattlersCount
 _08034BA8: .4byte gSprites
 _08034BAC: .4byte gUnknown_2024018
-_08034BB0: .4byte gUnknown_2023D44
+_08034BB0: .4byte gBattlerSpriteIds
 	thumb_func_end CopyAllBattleSpritesInvisibilities
 
 	thumb_func_start CopyBattleSpriteInvisibility
@@ -1769,7 +1769,7 @@ CopyBattleSpriteInvisibility: @ 8034BB4
 	lsls r3, r0, 2
 	adds r3, r1
 	ldr r2, _08034BEC @ =gSprites
-	ldr r1, _08034BF0 @ =gUnknown_2023D44
+	ldr r1, _08034BF0 @ =gBattlerSpriteIds
 	adds r0, r1
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -1790,7 +1790,7 @@ CopyBattleSpriteInvisibility: @ 8034BB4
 	.align 2, 0
 _08034BE8: .4byte gUnknown_2024018
 _08034BEC: .4byte gSprites
-_08034BF0: .4byte gUnknown_2023D44
+_08034BF0: .4byte gBattlerSpriteIds
 	thumb_func_end CopyBattleSpriteInvisibility
 
 	thumb_func_start sub_8034BF4
@@ -1869,7 +1869,7 @@ _08034C16:
 	adds r0, r5
 	ldr r2, [r0]
 	ldr r5, _08034D68 @ =gSprites
-	ldr r4, _08034D6C @ =gUnknown_2023D44
+	ldr r4, _08034D6C @ =gBattlerSpriteIds
 	add r4, r9
 	ldrb r1, [r4]
 	lsls r0, r1, 4
@@ -1964,7 +1964,7 @@ _08034D5C: .4byte gEnemyParty
 _08034D60: .4byte gMonFrontPicTable
 _08034D64: .4byte gMonSpritesGfxPtr
 _08034D68: .4byte gSprites
-_08034D6C: .4byte gUnknown_2023D44
+_08034D6C: .4byte gBattlerSpriteIds
 _08034D70: .4byte 0x06010000
 _08034D74: .4byte 0x040000d4
 _08034D78: .4byte 0x84000200
@@ -1974,7 +1974,7 @@ _08034D84: .4byte gUnknown_3004FF0
 _08034D88:
 	cmp r2, 0
 	beq _08034E4C
-	ldr r0, _08034E28 @ =gUnknown_2023D44
+	ldr r0, _08034E28 @ =gBattlerSpriteIds
 	mov r3, r9
 	adds r5, r3, r0
 	ldrb r1, [r5]
@@ -2048,7 +2048,7 @@ _08034E0E:
 	strh r0, [r1, 0x22]
 	b _08035062
 	.align 2, 0
-_08034E28: .4byte gUnknown_2023D44
+_08034E28: .4byte gBattlerSpriteIds
 _08034E2C: .4byte gSprites
 _08034E30: .4byte gUnknown_2024018
 _08034E34: .4byte gBattleStruct
@@ -2189,7 +2189,7 @@ _08034F5E:
 	adds r0, 0x4
 	adds r0, r5
 	ldr r2, [r0]
-	ldr r0, _08035088 @ =gUnknown_2023D44
+	ldr r0, _08035088 @ =gBattlerSpriteIds
 	add r0, r9
 	str r0, [sp, 0x10]
 	ldrb r1, [r0]
@@ -2318,7 +2318,7 @@ _08035078: .4byte gEnemyParty
 _0803507C: .4byte gMonFrontPicTable
 _08035080: .4byte gMonSpritesGfxPtr
 _08035084: .4byte gUnknown_2024008
-_08035088: .4byte gUnknown_2023D44
+_08035088: .4byte gBattlerSpriteIds
 _0803508C: .4byte gSprites
 _08035090: .4byte 0x06010000
 _08035094: .4byte 0x040000d4
@@ -2820,7 +2820,7 @@ _0803547C:
 	cmp r0, 0
 	beq _08035514
 	ldr r4, _080354E4 @ =gSprites
-	ldr r0, _080354E8 @ =gUnknown_2023D44
+	ldr r0, _080354E8 @ =gBattlerSpriteIds
 	adds r3, r5, r0
 	ldrb r1, [r3]
 	lsls r0, r1, 4
@@ -2864,7 +2864,7 @@ _0803547C:
 	.align 2, 0
 _080354E0: .4byte gBattlersCount
 _080354E4: .4byte gSprites
-_080354E8: .4byte gUnknown_2023D44
+_080354E8: .4byte gBattlerSpriteIds
 _080354EC: .4byte gUnknown_2024018
 _080354F0:
 	ldrb r0, [r3]
@@ -3026,7 +3026,7 @@ SpriteCB_EnemyShadow: @ 8035624
 	ldrh r0, [r5, 0x2E]
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _08035668 @ =gUnknown_2023D44
+	ldr r0, _08035668 @ =gBattlerSpriteIds
 	adds r0, r4, r0
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -3051,7 +3051,7 @@ _08035660:
 	str r0, [r5, 0x1C]
 	b _080356EA
 	.align 2, 0
-_08035668: .4byte gUnknown_2023D44
+_08035668: .4byte gBattlerSpriteIds
 _0803566C: .4byte gSprites
 _08035670: .4byte SpriteCB_SetInvisible
 _08035674:

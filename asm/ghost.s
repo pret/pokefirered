@@ -3929,7 +3929,7 @@ sub_80B7158: @ 80B7158
 	movs r2, 0x4
 	orrs r1, r2
 	strb r1, [r3]
-	ldr r2, _080B719C @ =gUnknown_2023D44
+	ldr r2, _080B719C @ =gBattlerSpriteIds
 	ldr r1, _080B71A0 @ =gBattleAnimAttacker
 	ldrb r1, [r1]
 	adds r1, r2
@@ -3958,7 +3958,7 @@ sub_80B7158: @ 80B7158
 	strh r1, [r0, 0x22]
 	bx lr
 	.align 2, 0
-_080B719C: .4byte gUnknown_2023D44
+_080B719C: .4byte gBattlerSpriteIds
 _080B71A0: .4byte gBattleAnimAttacker
 _080B71A4: .4byte gBattleAnimArgs
 _080B71A8: .4byte sub_80B71B0

@@ -2391,7 +2391,7 @@ _080ADB0E:
 	ldrh r0, [r2, 0x8]
 	adds r0, 0x1
 	strh r0, [r2, 0x8]
-	ldr r1, _080ADB38 @ =gUnknown_2023D44
+	ldr r1, _080ADB38 @ =gBattlerSpriteIds
 	ldr r0, _080ADB3C @ =gBattleAnimTarget
 	ldrb r0, [r0]
 	adds r0, r1
@@ -2407,7 +2407,7 @@ _080ADB0E:
 	.align 2, 0
 _080ADB30: .4byte gTasks
 _080ADB34: .4byte gBattleAnimArgs
-_080ADB38: .4byte gUnknown_2023D44
+_080ADB38: .4byte gBattlerSpriteIds
 _080ADB3C: .4byte gBattleAnimTarget
 _080ADB40: .4byte gUnknown_83E5EFC
 _080ADB44:

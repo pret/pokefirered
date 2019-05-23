@@ -16,7 +16,7 @@ sub_8078178: @ 8078178
 	lsrs r4, 24
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r0, _0807821C @ =gUnknown_2023D44
+	ldr r0, _0807821C @ =gBattlerSpriteIds
 	adds r0, r4, r0
 	ldrb r6, [r0]
 	ldr r0, _08078220 @ =sub_80782BC
@@ -88,7 +88,7 @@ _08078210:
 	bls _080781CC
 	b _08078298
 	.align 2, 0
-_0807821C: .4byte gUnknown_2023D44
+_0807821C: .4byte gBattlerSpriteIds
 _08078220: .4byte sub_80782BC
 _08078224: .4byte gUnknown_83AD048
 _08078228: .4byte gUnknown_83AD950

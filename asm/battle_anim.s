@@ -20,7 +20,7 @@ ClearBattleAnimationVars: @ 80724C0
 	strb r1, [r0]
 	ldr r0, _08072560 @ =gUnknown_2037EE3
 	strb r1, [r0]
-	ldr r0, _08072564 @ =gUnknown_2037EE4
+	ldr r0, _08072564 @ =gAnimDisableStructPtr
 	movs r1, 0
 	str r1, [r0]
 	ldr r0, _08072568 @ =gUnknown_2037EE8
@@ -31,7 +31,7 @@ ClearBattleAnimationVars: @ 80724C0
 	ldr r0, _08072570 @ =gUnknown_2037EFE
 	strb r2, [r0]
 	ldr r4, _08072574 @ =gUnknown_2037F14
-	ldr r5, _08072578 @ =gUnknown_2037F16
+	ldr r5, _08072578 @ =gAnimMoveTurn
 	ldr r6, _0807257C @ =gUnknown_2037F17
 	ldr r7, _08072580 @ =gUnknown_2037F18
 	ldr r0, _08072584 @ =gBattleAnimAttacker
@@ -88,12 +88,12 @@ _08072554: .4byte gUnknown_2037EE0
 _08072558: .4byte gUnknown_2037EE1
 _0807255C: .4byte gUnknown_2037EE2
 _08072560: .4byte gUnknown_2037EE3
-_08072564: .4byte gUnknown_2037EE4
+_08072564: .4byte gAnimDisableStructPtr
 _08072568: .4byte gUnknown_2037EE8
 _0807256C: .4byte gUnknown_2037EEC
 _08072570: .4byte gUnknown_2037EFE
 _08072574: .4byte gUnknown_2037F14
-_08072578: .4byte gUnknown_2037F16
+_08072578: .4byte gAnimMoveTurn
 _0807257C: .4byte gUnknown_2037F17
 _08072580: .4byte gUnknown_2037F18
 _08072584: .4byte gBattleAnimAttacker
@@ -1008,7 +1008,7 @@ _08072C88:
 	adds r0, r5, 0
 	adds r1, r7, 0
 	bl sub_8072E48
-	ldr r0, _08072CDC @ =gUnknown_2023D44
+	ldr r0, _08072CDC @ =gBattlerSpriteIds
 	adds r0, r5, r0
 	ldrb r4, [r0]
 	ldr r0, _08072CE0 @ =task_pA_ma0A_obj_to_bg_pal
@@ -1044,7 +1044,7 @@ _08072C88:
 	b _08072CFC
 	.align 2, 0
 _08072CD8: .4byte gBattleAnimTarget
-_08072CDC: .4byte gUnknown_2023D44
+_08072CDC: .4byte gBattlerSpriteIds
 _08072CE0: .4byte task_pA_ma0A_obj_to_bg_pal
 _08072CE4: .4byte gTasks
 _08072CE8: .4byte gSprites
@@ -1092,7 +1092,7 @@ _08072D3E:
 	adds r0, r5, 0
 	adds r1, r7, 0
 	bl sub_8072E48
-	ldr r0, _08072D9C @ =gUnknown_2023D44
+	ldr r0, _08072D9C @ =gBattlerSpriteIds
 	adds r0, r5, r0
 	ldrb r4, [r0]
 	ldr r0, _08072DA0 @ =task_pA_ma0A_obj_to_bg_pal
@@ -1131,7 +1131,7 @@ _08072D8C: .4byte gBattle_BG2_X
 _08072D90: .4byte gBattle_BG2_Y
 _08072D94: .4byte gTasks
 _08072D98: .4byte gUnknown_2037F14
-_08072D9C: .4byte gUnknown_2023D44
+_08072D9C: .4byte gBattlerSpriteIds
 _08072DA0: .4byte task_pA_ma0A_obj_to_bg_pal
 _08072DA4: .4byte gSprites
 _08072DA8: .4byte gBattle_BG1_X
@@ -1190,7 +1190,7 @@ sub_8072DF0: @ 8072DF0
 	cmp r0, 0
 	beq _08072E30
 	ldr r2, _08072E38 @ =gSprites
-	ldr r0, _08072E3C @ =gUnknown_2023D44
+	ldr r0, _08072E3C @ =gBattlerSpriteIds
 	adds r0, r4, r0
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -1208,7 +1208,7 @@ _08072E30:
 	.align 2, 0
 _08072E34: .4byte gUnknown_2024018
 _08072E38: .4byte gSprites
-_08072E3C: .4byte gUnknown_2023D44
+_08072E3C: .4byte gBattlerSpriteIds
 _08072E40:
 	movs r0, 0
 _08072E42:
@@ -1268,7 +1268,7 @@ _08072E5E:
 	movs r1, 0x1
 	movs r2, 0
 	bl SetAnimBgAttribute
-	ldr r2, _08072F6C @ =gUnknown_2023D44
+	ldr r2, _08072F6C @ =gBattlerSpriteIds
 	adds r2, r7, r2
 	ldrb r0, [r2]
 	ldr r5, _08072F70 @ =gBattle_BG1_X
@@ -1349,7 +1349,7 @@ _08072F5C: .4byte 0x06004000
 _08072F60: .4byte 0x0600e000
 _08072F64: .4byte 0x01000800
 _08072F68: .4byte 0x01000400
-_08072F6C: .4byte gUnknown_2023D44
+_08072F6C: .4byte gBattlerSpriteIds
 _08072F70: .4byte gBattle_BG1_X
 _08072F74: .4byte gSprites
 _08072F78: .4byte gBattle_BG1_Y
@@ -1401,7 +1401,7 @@ _08072F84:
 	movs r1, 0x1
 	movs r2, 0
 	bl SetAnimBgAttribute
-	ldr r2, _080730A4 @ =gUnknown_2023D44
+	ldr r2, _080730A4 @ =gBattlerSpriteIds
 	adds r2, r7, r2
 	ldrb r0, [r2]
 	ldr r5, _080730A8 @ =gBattle_BG2_X
@@ -1483,7 +1483,7 @@ _08073094: .4byte 0x06006000
 _08073098: .4byte 0x0600f000
 _0807309C: .4byte 0x01000800
 _080730A0: .4byte 0x01000400
-_080730A4: .4byte gUnknown_2023D44
+_080730A4: .4byte gBattlerSpriteIds
 _080730A8: .4byte gBattle_BG2_X
 _080730AC: .4byte gSprites
 _080730B0: .4byte gBattle_BG2_Y
@@ -1728,7 +1728,7 @@ _0807327E:
 	cmp r0, 0xFF
 	beq _080732A4
 	ldr r2, _080732DC @ =gSprites
-	ldr r0, _080732E0 @ =gUnknown_2023D44
+	ldr r0, _080732E0 @ =gBattlerSpriteIds
 	adds r0, r5, r0
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -1748,7 +1748,7 @@ _080732A4:
 	cmp r0, 0xFF
 	beq _080732E4
 	ldr r3, _080732DC @ =gSprites
-	ldr r2, _080732E0 @ =gUnknown_2023D44
+	ldr r2, _080732E0 @ =gBattlerSpriteIds
 	movs r1, 0x2
 	adds r0, r5, 0
 	eors r0, r1
@@ -1769,7 +1769,7 @@ _080732A4:
 _080732D4: .4byte gBattleAnimTarget
 _080732D8: .4byte gUnknown_2037F14
 _080732DC: .4byte gSprites
-_080732E0: .4byte gUnknown_2023D44
+_080732E0: .4byte gBattlerSpriteIds
 _080732E4:
 	movs r4, 0
 _080732E6:
@@ -1916,7 +1916,7 @@ _080733F4:
 	adds r0, r4, 0
 	bl sub_8072E48
 	ldr r2, _08073478 @ =gSprites
-	ldr r0, _0807347C @ =gUnknown_2023D44
+	ldr r0, _0807347C @ =gBattlerSpriteIds
 	adds r0, r4, r0
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -1954,7 +1954,7 @@ _08073442:
 	adds r0, r4, 0
 	bl sub_8072E48
 	ldr r2, _08073478 @ =gSprites
-	ldr r0, _0807347C @ =gUnknown_2023D44
+	ldr r0, _0807347C @ =gBattlerSpriteIds
 	adds r0, r4, r0
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -1978,7 +1978,7 @@ _08073464:
 	.align 2, 0
 _08073474: .4byte gBattleAnimTarget
 _08073478: .4byte gSprites
-_0807347C: .4byte gUnknown_2023D44
+_0807347C: .4byte gBattlerSpriteIds
 _08073480: .4byte gUnknown_2037ED4
 	thumb_func_end sub_807339C
 
@@ -2021,7 +2021,7 @@ _080734B6:
 	cmp r0, 0
 	beq _080734E0
 	ldr r2, _08073518 @ =gSprites
-	ldr r0, _0807351C @ =gUnknown_2023D44
+	ldr r0, _0807351C @ =gBattlerSpriteIds
 	adds r0, r6, r0
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -2046,7 +2046,7 @@ _080734E0:
 	cmp r0, 0
 	beq _08073520
 	ldr r2, _08073518 @ =gSprites
-	ldr r0, _0807351C @ =gUnknown_2023D44
+	ldr r0, _0807351C @ =gBattlerSpriteIds
 	adds r0, r4, r0
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -2063,7 +2063,7 @@ _080734E0:
 	.align 2, 0
 _08073514: .4byte gBattleAnimTarget
 _08073518: .4byte gSprites
-_0807351C: .4byte gUnknown_2023D44
+_0807351C: .4byte gBattlerSpriteIds
 _08073520:
 	movs r5, 0
 _08073522:
@@ -2309,7 +2309,7 @@ ScriptCmd_choosetwoturnanim: @ 80736E0
 	ldr r2, [r3]
 	adds r0, r2, 0x1
 	str r0, [r3]
-	ldr r0, _0807371C @ =gUnknown_2037F16
+	ldr r0, _0807371C @ =gAnimMoveTurn
 	ldrb r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
@@ -2334,7 +2334,7 @@ _080736FA:
 	bx r0
 	.align 2, 0
 _08073718: .4byte gUnknown_2037ED4
-_0807371C: .4byte gUnknown_2037F16
+_0807371C: .4byte gAnimMoveTurn
 	thumb_func_end ScriptCmd_choosetwoturnanim
 
 	thumb_func_start ScriptCmd_jumpifmoveturn
@@ -2347,7 +2347,7 @@ ScriptCmd_jumpifmoveturn: @ 8073720
 	ldrb r1, [r4, 0x1]
 	adds r3, r2, 0x1
 	str r3, [r5]
-	ldr r0, _08073754 @ =gUnknown_2037F16
+	ldr r0, _08073754 @ =gAnimMoveTurn
 	ldrb r0, [r0]
 	cmp r1, r0
 	bne _08073758
@@ -2365,7 +2365,7 @@ ScriptCmd_jumpifmoveturn: @ 8073720
 	b _0807375C
 	.align 2, 0
 _08073750: .4byte gUnknown_2037ED4
-_08073754: .4byte gUnknown_2037F16
+_08073754: .4byte gAnimMoveTurn
 _08073758:
 	adds r0, r4, 0x6
 	str r0, [r5]

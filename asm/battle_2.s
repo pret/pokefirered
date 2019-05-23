@@ -4511,7 +4511,7 @@ _080121D4: .4byte SpriteCB_HealthBoxBounce
 _080121D8: .4byte gUnknown_3004FF0
 _080121DC: .4byte gSprites
 _080121E0:
-	ldr r0, _0801224C @ =gUnknown_2023D44
+	ldr r0, _0801224C @ =gBattlerSpriteIds
 	adds r0, r4, r0
 	ldrb r7, [r0]
 	ldr r2, _08012250 @ =gUnknown_2024018
@@ -4567,7 +4567,7 @@ _0801223C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801224C: .4byte gUnknown_2023D44
+_0801224C: .4byte gBattlerSpriteIds
 _08012250: .4byte gUnknown_2024018
 _08012254: .4byte gSprites
 	thumb_func_end dp11b_obj_instanciate

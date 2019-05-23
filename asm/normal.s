@@ -1405,7 +1405,7 @@ _080BA362:
 	bcs _080BA3B4
 	ldr r2, _080BA3C4 @ =gSprites
 	mov r12, r2
-	ldr r6, _080BA3C8 @ =gUnknown_2023D44
+	ldr r6, _080BA3C8 @ =gBattlerSpriteIds
 	movs r7, 0x3
 	negs r7, r7
 _080BA392:
@@ -1436,14 +1436,14 @@ _080BA3BA:
 	.align 2, 0
 _080BA3C0: .4byte gBattlersCount
 _080BA3C4: .4byte gSprites
-_080BA3C8: .4byte gUnknown_2023D44
+_080BA3C8: .4byte gBattlerSpriteIds
 	thumb_func_end sub_80BA320
 
 	thumb_func_start sub_80BA3CC
 sub_80BA3CC: @ 80BA3CC
 	push {r4-r6,lr}
 	ldr r6, _080BA440 @ =gSprites
-	ldr r4, _080BA444 @ =gUnknown_2023D44
+	ldr r4, _080BA444 @ =gBattlerSpriteIds
 	ldr r5, _080BA448 @ =gBattleAnimAttacker
 	ldrb r0, [r5]
 	adds r0, r4
@@ -1500,7 +1500,7 @@ sub_80BA3CC: @ 80BA3CC
 	b _080BA470
 	.align 2, 0
 _080BA440: .4byte gSprites
-_080BA444: .4byte gUnknown_2023D44
+_080BA444: .4byte gBattlerSpriteIds
 _080BA448: .4byte gBattleAnimAttacker
 _080BA44C: .4byte gBattleAnimTarget
 _080BA450: .4byte gBattleAnimArgs

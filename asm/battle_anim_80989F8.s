@@ -217,13 +217,13 @@ _08098B72:
 	bne _08098B88
 	movs r6, 0x1
 _08098B88:
-	ldr r0, _08098B90 @ =gUnknown_2023D44
+	ldr r0, _08098B90 @ =gBattlerSpriteIds
 	adds r0, r4, r0
 	b _08098B9C
 	.align 2, 0
-_08098B90: .4byte gUnknown_2023D44
+_08098B90: .4byte gBattlerSpriteIds
 _08098B94:
-	ldr r1, _08098BAC @ =gUnknown_2023D44
+	ldr r1, _08098BAC @ =gBattlerSpriteIds
 	ldr r0, _08098BB0 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	adds r0, r1
@@ -237,7 +237,7 @@ _08098BA2:
 	bl DestroyAnimVisualTask
 	b _08098BF2
 	.align 2, 0
-_08098BAC: .4byte gUnknown_2023D44
+_08098BAC: .4byte gBattlerSpriteIds
 _08098BB0: .4byte gBattleAnimAttacker
 _08098BB4:
 	ldr r1, _08098BF8 @ =gSprites
@@ -929,7 +929,7 @@ _080990E0:
 	movs r0, 0
 	strh r2, [r4, 0x2E]
 	strh r0, [r4, 0x32]
-	ldr r1, _08099110 @ =gUnknown_2023D44
+	ldr r1, _08099110 @ =gBattlerSpriteIds
 	ldr r0, _08099114 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	adds r0, r1
@@ -946,7 +946,7 @@ _080990E0:
 	bx r0
 	.align 2, 0
 _0809910C: .4byte gBattleAnimArgs
-_08099110: .4byte gUnknown_2023D44
+_08099110: .4byte gBattlerSpriteIds
 _08099114: .4byte gBattleAnimAttacker
 _08099118: .4byte sub_8099120
 _0809911C: .4byte sub_8074DC4
@@ -1037,15 +1037,15 @@ sub_80991B4: @ 80991B4
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _080991D8
-	ldr r1, _080991D0 @ =gUnknown_2023D44
+	ldr r1, _080991D0 @ =gBattlerSpriteIds
 	ldr r0, _080991D4 @ =gBattleAnimAttacker
 	b _080991DC
 	.align 2, 0
 _080991CC: .4byte gBattleAnimArgs
-_080991D0: .4byte gUnknown_2023D44
+_080991D0: .4byte gBattlerSpriteIds
 _080991D4: .4byte gBattleAnimAttacker
 _080991D8:
-	ldr r1, _0809923C @ =gUnknown_2023D44
+	ldr r1, _0809923C @ =gBattlerSpriteIds
 	ldr r0, _08099240 @ =gBattleAnimTarget
 _080991DC:
 	ldrb r0, [r0]
@@ -1095,7 +1095,7 @@ _080991DC:
 	strh r3, [r6, 0x32]
 	b _08099252
 	.align 2, 0
-_0809923C: .4byte gUnknown_2023D44
+_0809923C: .4byte gBattlerSpriteIds
 _08099240: .4byte gBattleAnimTarget
 _08099244: .4byte gBattleAnimArgs
 _08099248: .4byte gSprites
@@ -1202,7 +1202,7 @@ _080992FC:
 	ldr r0, _0809937C @ =gBattleAnimTarget
 _080992FE:
 	ldrb r2, [r0]
-	ldr r0, _08099380 @ =gUnknown_2023D44
+	ldr r0, _08099380 @ =gBattlerSpriteIds
 	adds r0, r2, r0
 	ldrb r6, [r0]
 	adds r0, r2, 0
@@ -1264,7 +1264,7 @@ _08099328:
 	bx r0
 	.align 2, 0
 _0809937C: .4byte gBattleAnimTarget
-_08099380: .4byte gUnknown_2023D44
+_08099380: .4byte gBattlerSpriteIds
 _08099384: .4byte gBattleAnimArgs
 _08099388: .4byte gSprites
 _0809938C: .4byte DestroyAnimSprite
@@ -1295,7 +1295,7 @@ _080993BC:
 	ldr r0, _0809943C @ =gBattleAnimTarget
 _080993BE:
 	ldrb r1, [r0]
-	ldr r0, _08099440 @ =gUnknown_2023D44
+	ldr r0, _08099440 @ =gBattlerSpriteIds
 	adds r0, r1, r0
 	ldrb r7, [r0]
 	adds r0, r1, 0
@@ -1357,7 +1357,7 @@ _080993E8:
 	b _08099458
 	.align 2, 0
 _0809943C: .4byte gBattleAnimTarget
-_08099440: .4byte gUnknown_2023D44
+_08099440: .4byte gBattlerSpriteIds
 _08099444: .4byte gBattleAnimArgs
 _08099448: .4byte gSprites
 _0809944C: .4byte DestroyAnimSprite
@@ -1620,7 +1620,7 @@ _08099636:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809965C
-	ldr r1, _08099658 @ =gUnknown_2023D44
+	ldr r1, _08099658 @ =gBattlerSpriteIds
 	ldrb r0, [r5]
 	eors r0, r4
 	adds r0, r1
@@ -1628,7 +1628,7 @@ _08099636:
 	b _08099664
 	.align 2, 0
 _08099654: .4byte gBattleAnimTarget
-_08099658: .4byte gUnknown_2023D44
+_08099658: .4byte gBattlerSpriteIds
 _0809965C:
 	adds r0, r6, 0
 	bl DestroyAnimVisualTask

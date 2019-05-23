@@ -1268,7 +1268,7 @@ _080B951E:
 	adds r1, r4, 0
 	adds r1, 0x8
 	adds r1, r0
-	ldr r0, _080B9554 @ =gUnknown_2023D44
+	ldr r0, _080B9554 @ =gBattlerSpriteIds
 	adds r0, r5, r0
 	ldrb r0, [r0]
 	strh r0, [r1]
@@ -1283,7 +1283,7 @@ _080B9548:
 	bls _080B951E
 	b _080B9574
 	.align 2, 0
-_080B9554: .4byte gUnknown_2023D44
+_080B9554: .4byte gBattlerSpriteIds
 _080B9558:
 	ldrb r0, [r6]
 	bl GetAnimBankSpriteId

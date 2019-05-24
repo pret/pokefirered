@@ -1,4 +1,7 @@
 #include "global.h"
+#include "gpu_regs.h"
+#include "dma3.h"
+#include "bg.h"
 #include "palette.h"
 #include "decompress.h"
 #include "task.h"
@@ -10,8 +13,12 @@
 #include "overworld.h"
 #include "slot_machine.h"
 #include "menu.h"
+#include "new_menu_helpers.h"
+#include "text_window.h"
 #include "random.h"
 #include "constants/songs.h"
+
+extern const u8 gUnknown_841B779[];
 
 struct SlotMachineState
 {
@@ -44,20 +51,24 @@ struct SlotMachineGfxManager
     vu16 * field_70;
 };
 
-struct SlotMachineReelActionTaskDataSub_0000
+struct SlotMachineSetupTaskDataSub_0000
 {
     u16 unk0;
     u8 unk2;
     u8 unk3;
 };
 
-struct SlotMachineReelActionTaskData
+struct SlotMachineSetupTaskData
 {
-    struct SlotMachineReelActionTaskDataSub_0000 field_0000[8];
+    struct SlotMachineSetupTaskDataSub_0000 field_0000[8];
     u8 filler_0020[8];
     u32 field_0028;
-    u8 filler_002C[0x2830];
-};
+    u8 filler_002C[0x830];
+    u8 field_085C[0x800];
+    u8 field_105C[0x800];
+    u8 field_185C[0x800];
+    u8 field_205C[0x800];
+}; // size: 285C
 
 EWRAM_DATA struct SlotMachineState * sSlotMachineState = NULL;
 EWRAM_DATA struct SlotMachineGfxManager * sSlotMachineGfxManager = NULL;
@@ -91,26 +102,27 @@ void sub_8140C6C(struct SlotMachineGfxManager * manager);
 void sub_8140D7C(const s16 *, const s16 *);
 bool32 sub_814104C(void);
 void sub_8141094(void);
-struct SlotMachineReelActionTaskData * sub_814112C(void);
+struct SlotMachineSetupTaskData * sub_814112C(void);
 void sub_81410CC(u8 taskId);
-bool8 sub_8141198(u8 *, struct SlotMachineReelActionTaskData *);
-bool8 sub_8141460(u8 *, struct SlotMachineReelActionTaskData *);
-bool8 sub_81414AC(u8 *, struct SlotMachineReelActionTaskData *);
-bool8 sub_81414EC(u8 *, struct SlotMachineReelActionTaskData *);
-bool8 sub_81414FC(u8 *, struct SlotMachineReelActionTaskData *);
-bool8 sub_8141518(u8 *, struct SlotMachineReelActionTaskData *);
-bool8 sub_8141558(u8 *, struct SlotMachineReelActionTaskData *);
-bool8 sub_8141568(u8 *, struct SlotMachineReelActionTaskData *);
-bool8 sub_8141578(u8 *, struct SlotMachineReelActionTaskData *);
-bool8 sub_8141584(u8 *, struct SlotMachineReelActionTaskData *);
-bool8 sub_81415C8(u8 *, struct SlotMachineReelActionTaskData *);
-bool8 sub_8141610(u8 *, struct SlotMachineReelActionTaskData *);
-bool8 sub_8141650(u8 *, struct SlotMachineReelActionTaskData *);
-bool8 sub_8141690(u8 *, struct SlotMachineReelActionTaskData *);
-bool8 sub_81416C8(u8 *, struct SlotMachineReelActionTaskData *);
-bool8 sub_8141764(u8 *, struct SlotMachineReelActionTaskData *);
 void sub_8141148(u16 a0, u8 a1);
 bool32 sub_8141180(u8 a0);
+bool8 sub_8141198(u8 *, struct SlotMachineSetupTaskData *);
+bool8 sub_8141460(u8 *, struct SlotMachineSetupTaskData *);
+bool8 sub_81414AC(u8 *, struct SlotMachineSetupTaskData *);
+bool8 sub_81414EC(u8 *, struct SlotMachineSetupTaskData *);
+bool8 sub_81414FC(u8 *, struct SlotMachineSetupTaskData *);
+bool8 sub_8141518(u8 *, struct SlotMachineSetupTaskData *);
+bool8 sub_8141558(u8 *, struct SlotMachineSetupTaskData *);
+bool8 sub_8141568(u8 *, struct SlotMachineSetupTaskData *);
+bool8 sub_8141578(u8 *, struct SlotMachineSetupTaskData *);
+bool8 sub_8141584(u8 *, struct SlotMachineSetupTaskData *);
+bool8 sub_81415C8(u8 *, struct SlotMachineSetupTaskData *);
+bool8 sub_8141610(u8 *, struct SlotMachineSetupTaskData *);
+bool8 sub_8141650(u8 *, struct SlotMachineSetupTaskData *);
+bool8 sub_8141690(u8 *, struct SlotMachineSetupTaskData *);
+bool8 sub_81416C8(u8 *, struct SlotMachineSetupTaskData *);
+bool8 sub_8141764(u8 *, struct SlotMachineSetupTaskData *);
+void sub_8141B34(void);
 void sub_8141C30(u8, u8);
 
 const u8 gUnknown_8464890[][2] = {
@@ -466,7 +478,7 @@ const struct SpriteTemplate gUnknown_84658D8 = {
     1, 5, &gUnknown_8465894, gUnknown_84658C8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
-bool8 (*const gUnknown_84658F0[])(u8 *, struct SlotMachineReelActionTaskData *) = {
+bool8 (*const gUnknown_84658F0[])(u8 *, struct SlotMachineSetupTaskData *) = {
     sub_8141198,
     sub_8141460,
     sub_81414AC,
@@ -483,6 +495,81 @@ bool8 (*const gUnknown_84658F0[])(u8 *, struct SlotMachineReelActionTaskData *) 
     sub_8141690,
     sub_81416C8,
     sub_8141764
+};
+
+const u16 gUnknown_8465930[] = INCBIN_U16("graphics/slot_machine/unk_8465930.gbapal");
+const u16 gUnknown_8465950[] = INCBIN_U16("graphics/slot_machine/unk_8465950.gbapal");
+const u16 gUnknown_8465970[] = INCBIN_U16("graphics/slot_machine/unk_8465970.gbapal");
+const u16 gUnknown_8465990[] = INCBIN_U16("graphics/slot_machine/unk_8465990.gbapal");
+const u16 gUnknown_84659B0[] = INCBIN_U16("graphics/slot_machine/unk_84659b0.gbapal");
+const u32 gUnknown_84659D0[] = INCBIN_U32("graphics/slot_machine/unk_84659d0.4bpp.lz");
+const u32 gUnknown_84661D4[] = INCBIN_U32("graphics/slot_machine/unk_84661d4.bin.lz");
+const u16 gUnknown_84664BC[] = INCBIN_U16("graphics/slot_machine/unk_84664bc.gbapal");
+const u16 gUnknown_84664DC[] = INCBIN_U16("graphics/slot_machine/unk_84664dc.gbapal");
+const u16 gUnknown_84664FC[] = INCBIN_U16("graphics/slot_machine/unk_84664fc.gbapal");
+const u16 gUnknown_846651C[] = INCBIN_U16("graphics/slot_machine/unk_846651c.gbapal");
+const u32 gUnknown_846653C[] = INCBIN_U32("graphics/slot_machine/unk_846653c.4bpp.lz");
+const u16 gUnknown_84665C0[] = INCBIN_U16("graphics/slot_machine/unk_84665c0.gbapal");
+const u16 gUnknown_84665E0[] = INCBIN_U16("graphics/slot_machine/unk_84665e0.gbapal");
+const u16 gUnknown_8466600[] = INCBIN_U16("graphics/slot_machine/unk_8466600.gbapal");
+const u32 gUnknown_8466620[] = INCBIN_U32("graphics/slot_machine/unk_8466620.4bpp.lz");
+const u32 gUnknown_8466998[] = INCBIN_U32("graphics/slot_machine/unk_8466998.bin.lz");
+
+const struct BgTemplate gUnknown_8466B10[] = {
+    {
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 29,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0x000
+    }, {
+        .bg = 3,
+        .charBaseIndex = 3,
+        .mapBaseIndex = 31,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 3,
+        .baseTile = 0x000
+    }, {
+        .bg = 2,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 30,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 2,
+        .baseTile = 0x000
+    }, {
+        .bg = 1,
+        .charBaseIndex = 1,
+        .mapBaseIndex = 28,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0x000
+    }
+};
+
+const struct WindowTemplate gUnknown_8466B20[] = {
+    {
+        .bg = 0,
+        .tilemapLeft = 5,
+        .tilemapTop = 15,
+        .width = 20,
+        .height = 4,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x04f
+    }, {
+        .bg = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 0,
+        .width = 30,
+        .height = 2,
+        .paletteNum = 0x0e,
+        .baseBlock = 0x013
+    },
+    DUMMY_WIN_TEMPLATE
 };
 
 void PlaySlotMachine(u16 machineIdx, MainCallback savedCallback)
@@ -1861,7 +1948,7 @@ bool32 sub_814104C(void)
 {
     s32 i;
 
-    struct SlotMachineReelActionTaskData * ptr = Alloc(sizeof(struct SlotMachineReelActionTaskData));
+    struct SlotMachineSetupTaskData * ptr = Alloc(sizeof(struct SlotMachineSetupTaskData));
     if (ptr == NULL)
         return FALSE;
     for (i = 0; i < 8; i++)
@@ -1884,7 +1971,7 @@ void sub_8141094(void)
 
 void sub_81410CC(u8 taskId)
 {
-    struct SlotMachineReelActionTaskData * ptr = (void *)GetWordTaskArg(taskId, 0);
+    struct SlotMachineSetupTaskData * ptr = (void *)GetWordTaskArg(taskId, 0);
     s32 i;
 
     for (i = 0; i < 8; i++)
@@ -1901,14 +1988,14 @@ void sub_8141118(void)
     ProcessSpriteCopyRequests();
 }
 
-struct SlotMachineReelActionTaskData * sub_814112C(void)
+struct SlotMachineSetupTaskData * sub_814112C(void)
 {
     return (void *)GetWordTaskArg(FindTaskIdByFunc(sub_81410CC), 0);
 }
 
 void sub_8141148(u16 a0, u8 a1)
 {
-    struct SlotMachineReelActionTaskData * ptr = sub_814112C();
+    struct SlotMachineSetupTaskData * ptr = sub_814112C();
     ptr->field_0000[a1].unk0 = a0;
     ptr->field_0000[a1].unk2 = 0;
     ptr->field_0000[a1].unk3 = gUnknown_84658F0[a0](&ptr->field_0000[a1].unk2, ptr);
@@ -1918,3 +2005,392 @@ bool32 sub_8141180(u8 a0)
 {
     return sub_814112C()->field_0000[a0].unk3;
 }
+
+#ifdef NONMATCHING
+bool8 sub_8141198(u8 * state, struct SlotMachineSetupTaskData * ptr)
+{
+    u16 pal;
+    struct TextColor textColor;
+    u32 x;
+
+    switch (*state)
+    {
+    case 0:
+        BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
+        (*state)++;
+        break;
+    case 1:
+        SetVBlankCallback(NULL);
+        ResetSpriteData();
+        FreeAllSpritePalettes();
+        RequestDma3Fill(0, (void *)OAM, OAM_SIZE, 1);
+        RequestDma3Fill(0, (void *)VRAM, 0x20, 1);
+        RequestDma3Fill(0, (void *)(VRAM + 0xC000), 0x20, 1);
+        SetGpuReg(REG_OFFSET_DISPCNT, 0);
+        sub_80F6C14();
+        ResetBgsAndClearDma3BusyFlags(0);
+        InitBgsFromTemplates(0, gUnknown_8466B10, NELEMS(gUnknown_8466B10));
+        InitWindows(gUnknown_8466B20);
+
+        SetBgTilemapBuffer(3, ptr->field_205C);
+        FillBgTilemapBufferRect_Palette0(3, 0, 0, 0, 32, 32);
+        CopyBgTilemapBufferToVram(3);
+
+        reset_temp_tile_data_buffers();
+        decompress_and_copy_tile_data_to_vram(2, gUnknown_84659D0, 0, 0x00, 0);
+        decompress_and_copy_tile_data_to_vram(2, gUnknown_846653C, 0, 0xC0, 0);
+        SetBgTilemapBuffer(2, ptr->field_185C);
+        CopyToBgTilemapBuffer(2, gUnknown_84661D4, 0, 0x00);
+        CopyBgTilemapBufferToVram(2);
+        LoadPalette(gUnknown_8465930, 0x00, 0xA0);
+        LoadPalette(gUnknown_84664BC, 0x50, 0x20);
+        LoadPalette(gUnknown_84665C0, 0x70, 0x60);
+        pal = RGB(30, 30, 31);
+        LoadPalette(&pal, 0x00, 0x02);
+        LoadUserWindowBorderGfx(0, 0x00A, 0xD0);
+        sub_814FDA0(0, 0x001, 0xF0);
+
+        SetBgTilemapBuffer(0, ptr->field_085C);
+        FillBgTilemapBufferRect_Palette0(0, 0, 0, 2, 32, 30);
+        decompress_and_copy_tile_data_to_vram(1, gUnknown_8466620, 0, 0, 0);
+        decompress_and_copy_tile_data_to_vram(1, gUnknown_8466998, 0, 0, 1);
+        CopyBgTilemapBufferToVram(1);
+
+        LoadPalette(stdpal_get(2), 0xE0, 0x20);
+        FillWindowPixelBuffer(1, 0xFF);
+        PutWindowTilemap(1);
+
+        x = 0xEC - GetStringWidth(0, gUnknown_841B779, 0);
+        textColor.fgColor = 15;
+        textColor.bgColor = 1;
+        textColor.shadowColor = 2;
+        box_print(1, 0, x, 0, &textColor, 0, gUnknown_841B779);
+        CopyBgTilemapBufferToVram(0);
+
+        SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | 0x20 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
+        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG3 | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BD | BLDCNT_EFFECT_DARKEN);
+        sub_8140C0C();
+        sub_8140CA0();
+        sub_8140E9C();
+        sub_8140FC4();
+        sub_8140F2C();
+        BlendPalettes(0xFFFFFFFF, 0x10, RGB_BLACK);
+        SetVBlankCallback(sub_8141118);
+        SetHBlankCallback(sub_8140E40);
+        (*state)++;
+        break;
+    case 2:
+        if (!free_temp_tile_data_buffers_if_possible())
+        {
+            ShowBg(0);
+            ShowBg(3);
+            ShowBg(2);
+            HideBg(1);
+            sub_8141B34();
+            BlendPalettes(0xFFFFFFFF, 0x10, RGB_BLACK);
+            BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB_BLACK);
+            EnableInterrupts(INTR_FLAG_VBLANK | INTR_FLAG_HBLANK);
+            (*state)++;
+        }
+        break;
+    case 3:
+        UpdatePaletteFade();
+        if (!gPaletteFade.active)
+            return FALSE;
+        break;
+    }
+    return TRUE;
+}
+#else
+NAKED
+bool8 sub_8141198(u8 * state, struct SlotMachineSetupTaskData * ptr)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                "\tmov r7, r8\n"
+                "\tpush {r7}\n"
+                "\tsub sp, 0x14\n"
+                "\tadds r7, r0, 0\n"
+                "\tmov r8, r1\n"
+                "\tldrb r6, [r7]\n"
+                "\tcmp r6, 0x1\n"
+                "\tbeq _081411D0\n"
+                "\tcmp r6, 0x1\n"
+                "\tbgt _081411B4\n"
+                "\tcmp r6, 0\n"
+                "\tbeq _081411C2\n"
+                "\tb _08141450\n"
+                "_081411B4:\n"
+                "\tcmp r6, 0x2\n"
+                "\tbne _081411BA\n"
+                "\tb _081413E4\n"
+                "_081411BA:\n"
+                "\tcmp r6, 0x3\n"
+                "\tbne _081411C0\n"
+                "\tb _08141436\n"
+                "_081411C0:\n"
+                "\tb _08141450\n"
+                "_081411C2:\n"
+                "\tmovs r0, 0x1\n"
+                "\tnegs r0, r0\n"
+                "\tmovs r1, 0x10\n"
+                "\tmovs r2, 0\n"
+                "\tbl BlendPalettes\n"
+                "\tb _0814142E\n"
+                "_081411D0:\n"
+                "\tmovs r0, 0\n"
+                "\tbl SetVBlankCallback\n"
+                "\tbl ResetSpriteData\n"
+                "\tbl FreeAllSpritePalettes\n"
+                "\tmovs r1, 0xE0\n"
+                "\tlsls r1, 19\n"
+                "\tmovs r2, 0x80\n"
+                "\tlsls r2, 3\n"
+                "\tmovs r0, 0\n"
+                "\tmovs r3, 0x1\n"
+                "\tbl RequestDma3Fill\n"
+                "\tmovs r1, 0xC0\n"
+                "\tlsls r1, 19\n"
+                "\tmovs r0, 0\n"
+                "\tmovs r2, 0x20\n"
+                "\tmovs r3, 0x1\n"
+                "\tbl RequestDma3Fill\n"
+                "\tldr r1, _0814139C @ =0x0600c000\n"
+                "\tmovs r0, 0\n"
+                "\tmovs r2, 0x20\n"
+                "\tmovs r3, 0x1\n"
+                "\tbl RequestDma3Fill\n"
+                "\tmovs r0, 0\n"
+                "\tmovs r1, 0\n"
+                "\tbl SetGpuReg\n"
+                "\tbl sub_80F6C14\n"
+                "\tmovs r0, 0\n"
+                "\tbl ResetBgsAndClearDma3BusyFlags\n"
+                "\tldr r1, _081413A0 @ =gUnknown_8466B10\n"
+                "\tmovs r0, 0\n"
+                "\tmovs r2, 0x4\n"
+                "\tbl InitBgsFromTemplates\n"
+                "\tldr r0, _081413A4 @ =gUnknown_8466B20\n"
+                "\tbl InitWindows\n"
+                "\tldr r1, _081413A8 @ =0x0000205c\n"
+                "\tadd r1, r8\n"
+                "\tmovs r0, 0x3\n"
+                "\tbl SetBgTilemapBuffer\n"
+                "\tmovs r4, 0x20\n"
+                "\tstr r4, [sp]\n"
+                "\tstr r4, [sp, 0x4]\n"
+                "\tmovs r0, 0x3\n"
+                "\tmovs r1, 0\n"
+                "\tmovs r2, 0\n"
+                "\tmovs r3, 0\n"
+                "\tbl FillBgTilemapBufferRect_Palette0\n"
+                "\tmovs r0, 0x3\n"
+                "\tbl CopyBgTilemapBufferToVram\n"
+                "\tbl reset_temp_tile_data_buffers\n"
+                "\tldr r1, _081413AC @ =gUnknown_84659D0\n"
+                "\tmovs r5, 0\n"
+                "\tstr r5, [sp]\n"
+                "\tmovs r0, 0x2\n"
+                "\tmovs r2, 0\n"
+                "\tmovs r3, 0\n"
+                "\tbl decompress_and_copy_tile_data_to_vram\n"
+                "\tldr r1, _081413B0 @ =gUnknown_846653C\n"
+                "\tstr r5, [sp]\n"
+                "\tmovs r0, 0x2\n"
+                "\tmovs r2, 0\n"
+                "\tmovs r3, 0xC0\n"
+                "\tbl decompress_and_copy_tile_data_to_vram\n"
+                "\tldr r1, _081413B4 @ =0x0000185c\n"
+                "\tadd r1, r8\n"
+                "\tmovs r0, 0x2\n"
+                "\tbl SetBgTilemapBuffer\n"
+                "\tldr r1, _081413B8 @ =gUnknown_84661D4\n"
+                "\tmovs r0, 0x2\n"
+                "\tmovs r2, 0\n"
+                "\tmovs r3, 0\n"
+                "\tbl CopyToBgTilemapBuffer\n"
+                "\tmovs r0, 0x2\n"
+                "\tbl CopyBgTilemapBufferToVram\n"
+                "\tldr r0, _081413BC @ =gUnknown_8465930\n"
+                "\tmovs r1, 0\n"
+                "\tmovs r2, 0xA0\n"
+                "\tbl LoadPalette\n"
+                "\tldr r0, _081413C0 @ =gUnknown_84664BC\n"
+                "\tmovs r1, 0x50\n"
+                "\tmovs r2, 0x20\n"
+                "\tbl LoadPalette\n"
+                "\tldr r0, _081413C4 @ =gUnknown_84665C0\n"
+                "\tmovs r1, 0x70\n"
+                "\tmovs r2, 0x60\n"
+                "\tbl LoadPalette\n"
+                "\tldr r1, _081413C8 @ =0x00007fde\n"
+                "\tadd r0, sp, 0xC\n"
+                "\tstrh r1, [r0]\n"
+                "\tmovs r1, 0\n"
+                "\tmovs r2, 0x2\n"
+                "\tbl LoadPalette\n"
+                "\tmovs r0, 0\n"
+                "\tmovs r1, 0xA\n"
+                "\tmovs r2, 0xD0\n"
+                "\tbl LoadUserWindowBorderGfx\n"
+                "\tmovs r0, 0\n"
+                "\tmovs r1, 0x1\n"
+                "\tmovs r2, 0xF0\n"
+                "\tbl sub_814FDA0\n"
+                "\tldr r1, _081413CC @ =0x0000085c\n"
+                "\tadd r1, r8\n"
+                "\tmovs r0, 0\n"
+                "\tbl SetBgTilemapBuffer\n"
+                "\tstr r4, [sp]\n"
+                "\tmovs r0, 0x1E\n"
+                "\tstr r0, [sp, 0x4]\n"
+                "\tmovs r0, 0\n"
+                "\tmovs r1, 0\n"
+                "\tmovs r2, 0\n"
+                "\tmovs r3, 0x2\n"
+                "\tbl FillBgTilemapBufferRect_Palette0\n"
+                "\tldr r1, _081413D0 @ =gUnknown_8466620\n"
+                "\tstr r5, [sp]\n"
+                "\tmovs r0, 0x1\n"
+                "\tmovs r2, 0\n"
+                "\tmovs r3, 0\n"
+                "\tbl decompress_and_copy_tile_data_to_vram\n"
+                "\tldr r1, _081413D4 @ =gUnknown_8466998\n"
+                "\tstr r6, [sp]\n"
+                "\tmovs r0, 0x1\n"
+                "\tmovs r2, 0\n"
+                "\tmovs r3, 0\n"
+                "\tbl decompress_and_copy_tile_data_to_vram\n"
+                "\tmovs r0, 0x1\n"
+                "\tbl CopyBgTilemapBufferToVram\n"
+                "\tmovs r0, 0x2\n"
+                "\tbl stdpal_get\n"
+                "\tmovs r1, 0xE0\n"
+                "\tmovs r2, 0x20\n"
+                "\tbl LoadPalette\n"
+                "\tmovs r0, 0x1\n"
+                "\tmovs r1, 0xFF\n"
+                "\tbl FillWindowPixelBuffer\n"
+                "\tmovs r0, 0x1\n"
+                "\tbl PutWindowTilemap\n"
+                "\tldr r4, _081413D8 @ =gUnknown_841B779\n"
+                "\tmovs r0, 0\n"
+                "\tadds r1, r4, 0\n"
+                "\tmovs r2, 0\n"
+                "\tbl GetStringWidth\n"
+                "\tmovs r2, 0xEC\n"
+                "\tsubs r2, r0\n"
+                "\tadd r1, sp, 0x10\n"
+                "\tmovs r0, 0xF\n"
+                "\tstrb r0, [r1]\n"
+                "\tstrb r6, [r1, 0x1]\n"
+                "\tmovs r0, 0x2\n"
+                "\tstrb r0, [r1, 0x2]\n"
+                "\tlsls r2, 24\n"
+                "\tlsrs r2, 24\n"
+                "\tstr r1, [sp]\n"
+                "\tstr r5, [sp, 0x4]\n"
+                "\tstr r4, [sp, 0x8]\n"
+                "\tmovs r0, 0x1\n"
+                "\tmovs r1, 0\n"
+                "\tmovs r3, 0\n"
+                "\tbl box_print\n"
+                "\tmovs r0, 0\n"
+                "\tbl CopyBgTilemapBufferToVram\n"
+                "\tmovs r1, 0x83\n"
+                "\tlsls r1, 5\n"
+                "\tmovs r0, 0\n"
+                "\tbl SetGpuRegBits\n"
+                "\tmovs r0, 0x50\n"
+                "\tmovs r1, 0xF8\n"
+                "\tbl SetGpuReg\n"
+                "\tbl sub_8140C0C\n"
+                "\tbl sub_8140CA0\n"
+                "\tbl sub_8140E9C\n"
+                "\tbl sub_8140FC4\n"
+                "\tbl sub_8140F2C\n"
+                "\tmovs r0, 0x1\n"
+                "\tnegs r0, r0\n"
+                "\tmovs r1, 0x10\n"
+                "\tmovs r2, 0\n"
+                "\tbl BlendPalettes\n"
+                "\tldr r0, _081413DC @ =sub_8141118\n"
+                "\tbl SetVBlankCallback\n"
+                "\tldr r0, _081413E0 @ =sub_8140E40\n"
+                "\tbl SetHBlankCallback\n"
+                "\tb _0814142E\n"
+                "\t.align 2, 0\n"
+                "_0814139C: .4byte 0x0600c000\n"
+                "_081413A0: .4byte gUnknown_8466B10\n"
+                "_081413A4: .4byte gUnknown_8466B20\n"
+                "_081413A8: .4byte 0x0000205c\n"
+                "_081413AC: .4byte gUnknown_84659D0\n"
+                "_081413B0: .4byte gUnknown_846653C\n"
+                "_081413B4: .4byte 0x0000185c\n"
+                "_081413B8: .4byte gUnknown_84661D4\n"
+                "_081413BC: .4byte gUnknown_8465930\n"
+                "_081413C0: .4byte gUnknown_84664BC\n"
+                "_081413C4: .4byte gUnknown_84665C0\n"
+                "_081413C8: .4byte 0x00007fde\n"
+                "_081413CC: .4byte 0x0000085c\n"
+                "_081413D0: .4byte gUnknown_8466620\n"
+                "_081413D4: .4byte gUnknown_8466998\n"
+                "_081413D8: .4byte gUnknown_841B779\n"
+                "_081413DC: .4byte sub_8141118\n"
+                "_081413E0: .4byte sub_8140E40\n"
+                "_081413E4:\n"
+                "\tbl free_temp_tile_data_buffers_if_possible\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r5, r0, 24\n"
+                "\tcmp r5, 0\n"
+                "\tbne _08141450\n"
+                "\tmovs r0, 0\n"
+                "\tbl ShowBg\n"
+                "\tmovs r0, 0x3\n"
+                "\tbl ShowBg\n"
+                "\tmovs r0, 0x2\n"
+                "\tbl ShowBg\n"
+                "\tmovs r0, 0x1\n"
+                "\tbl HideBg\n"
+                "\tbl sub_8141B34\n"
+                "\tmovs r4, 0x1\n"
+                "\tnegs r4, r4\n"
+                "\tadds r0, r4, 0\n"
+                "\tmovs r1, 0x10\n"
+                "\tmovs r2, 0\n"
+                "\tbl BlendPalettes\n"
+                "\tstr r5, [sp]\n"
+                "\tadds r0, r4, 0\n"
+                "\tadds r1, r4, 0\n"
+                "\tmovs r2, 0x10\n"
+                "\tmovs r3, 0\n"
+                "\tbl BeginNormalPaletteFade\n"
+                "\tmovs r0, 0x3\n"
+                "\tbl EnableInterrupts\n"
+                "_0814142E:\n"
+                "\tldrb r0, [r7]\n"
+                "\tadds r0, 0x1\n"
+                "\tstrb r0, [r7]\n"
+                "\tb _08141450\n"
+                "_08141436:\n"
+                "\tbl UpdatePaletteFade\n"
+                "\tldr r0, _0814144C @ =gPaletteFade\n"
+                "\tldrb r1, [r0, 0x7]\n"
+                "\tmovs r0, 0x80\n"
+                "\tands r0, r1\n"
+                "\tcmp r0, 0\n"
+                "\tbne _08141450\n"
+                "\tmovs r0, 0\n"
+                "\tb _08141452\n"
+                "\t.align 2, 0\n"
+                "_0814144C: .4byte gPaletteFade\n"
+                "_08141450:\n"
+                "\tmovs r0, 0x1\n"
+                "_08141452:\n"
+                "\tadd sp, 0x14\n"
+                "\tpop {r3}\n"
+                "\tmov r8, r3\n"
+                "\tpop {r4-r7}\n"
+                "\tpop {r1}\n"
+                "\tbx r1");
+}
+#endif //NONMATCHING

@@ -2,57 +2,6 @@
 	.include "constants/constants.inc"
 
 	.section .rodata
-	.align 2
-
-gUnknown_8465930:: @ 8465930
-	.incbin "graphics/slot_machine/unk_8465930.gbapal"
-
-gUnknown_8465950:: @ 8465950
-	.incbin "graphics/slot_machine/unk_8465950.gbapal"
-	.incbin "graphics/slot_machine/unk_8465970.gbapal"
-	.incbin "graphics/slot_machine/unk_8465990.gbapal"
-	.incbin "graphics/slot_machine/unk_84659b0.gbapal"
-
-gUnknown_84659D0:: @ 84659D0
-	.incbin "graphics/slot_machine/unk_84659d0.4bpp.lz"
-
-gUnknown_84661D4:: @ 84661D4
-	.incbin "graphics/slot_machine/unk_84661d4.bin.lz"
-
-gUnknown_84664BC:: @ 84664BC
-	.incbin "graphics/slot_machine/unk_84664bc.gbapal"
-
-gUnknown_84664DC:: @ 84664DC
-	.incbin "graphics/slot_machine/unk_84664dc.gbapal"
-	.incbin "graphics/slot_machine/unk_84664fc.gbapal"
-	.incbin "graphics/slot_machine/unk_846651c.gbapal"
-
-gUnknown_846653C:: @ 846653C
-	.incbin "graphics/slot_machine/unk_846653c.4bpp.lz"
-
-gUnknown_84665C0:: @ 84665C0
-	.incbin "graphics/slot_machine/unk_84665c0.gbapal"
-	.incbin "graphics/slot_machine/unk_84665e0.gbapal"
-	.incbin "graphics/slot_machine/unk_8466600.gbapal"
-
-gUnknown_8466620:: @ 8466620
-	.incbin "graphics/slot_machine/unk_8466620.4bpp.lz"
-
-gUnknown_8466998:: @ 8466998
-	.incbin "graphics/slot_machine/unk_8466998.bin.lz"
-
-	.align 2 @ bg templates
-gUnknown_8466B10:: @ 8466B10
-	.4byte 0x000001d0
-	.4byte 0x000031ff
-	.4byte 0x000021ea
-	.4byte 0x000001c5
-
-gUnknown_8466B20:: @ 8466B20
-	window_template 0x00, 0x05, 0x0f, 0x14, 0x04, 0x0f, 0x004f
-	window_template 0x00, 0x00, 0x00, 0x1e, 0x02, 0x0e, 0x0013
-	window_template 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0000
-
 gUnknown_8466B38::
 	.2byte 0x00a4, 0x00a5, 0x00a6, 0x00c4, 0x00c5, 0x00c6, 0x00c7, 0x00e7, 0x012c, 0x014c, 0x0191, 0x01b1, 0x01f6, 0x0216, 0x0217, 0x0218
 	.2byte 0x0219, 0x0237, 0x0238, 0x0239

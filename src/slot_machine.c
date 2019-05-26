@@ -18,6 +18,8 @@
 #include "random.h"
 #include "constants/songs.h"
 
+extern const u8 gUnknown_841B747[];
+extern const u8 gUnknown_841B76B[];
 extern const u8 gUnknown_841B779[];
 
 struct SlotMachineState
@@ -61,7 +63,9 @@ struct SlotMachineSetupTaskDataSub_0000
 struct SlotMachineSetupTaskData
 {
     struct SlotMachineSetupTaskDataSub_0000 field_0000[8];
-    u8 filler_0020[8];
+    u8 field_0020;
+    // align 2
+    s32 field_0024;
     u32 field_0028;
     u8 filler_002C[0x830];
     u8 field_085C[0x800];
@@ -122,7 +126,16 @@ bool8 sub_8141650(u8 *, struct SlotMachineSetupTaskData *);
 bool8 sub_8141690(u8 *, struct SlotMachineSetupTaskData *);
 bool8 sub_81416C8(u8 *, struct SlotMachineSetupTaskData *);
 bool8 sub_8141764(u8 *, struct SlotMachineSetupTaskData *);
+void sub_81417E4(const u8 * str);
+void sub_8141828(void);
+void sub_8141834(u16 * bgTilemapBuffer);
+void sub_814191C(u8 taskId);
+void sub_8141AB0(void);
+void sub_8141AD8(u8 a0);
+void sub_8141B18(void);
 void sub_8141B34(void);
+void sub_8141BA0(u8 a0);
+void sub_8141BE4(void);
 void sub_8141C30(u8, u8);
 
 const u8 gUnknown_8464890[][2] = {
@@ -2394,3 +2407,233 @@ bool8 sub_8141198(u8 * state, struct SlotMachineSetupTaskData * ptr)
                 "\tbx r1");
 }
 #endif //NONMATCHING
+
+bool8 sub_8141460(u8 * state, struct SlotMachineSetupTaskData * ptr)
+{
+    switch (*state)
+    {
+    case 0:
+        BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 16, 0);
+        (*state)++;
+        break;
+    case 1:
+        if (!gPaletteFade.active)
+            return FALSE;
+        break;
+    }
+    return TRUE;
+}
+
+bool8 sub_81414AC(u8 * state, struct SlotMachineSetupTaskData * ptr)
+{
+    switch (*state)
+    {
+    case 0:
+        sub_8141834(GetBgTilemapBuffer(2));
+        CopyBgTilemapBufferToVram(2);
+        (*state)++;
+        break;
+    case 1:
+        if (!IsDma3ManagerBusyWithBgCopy())
+            return FALSE;
+        break;
+    }
+    return TRUE;
+}
+
+bool8 sub_81414EC(u8 * state, struct SlotMachineSetupTaskData * ptr)
+{
+    sub_8141020(1);
+    return FALSE;
+}
+
+bool8 sub_81414FC(u8 * state, struct SlotMachineSetupTaskData * ptr)
+{
+    sub_8141020(2);
+    CreateTask(sub_814191C, 3);
+    return FALSE;
+}
+
+bool8 sub_8141518(u8 * state, struct SlotMachineSetupTaskData * ptr)
+{
+    switch (*state)
+    {
+    case 0:
+        sub_8141AB0();
+        (*state)++;
+        break;
+    case 1:
+        if (!FuncIsActiveTask(sub_814191C))
+        {
+            sub_8141020(0);
+            return FALSE;
+        }
+        break;
+    }
+    return TRUE;
+}
+
+bool8 sub_8141558(u8 * state, struct SlotMachineSetupTaskData * ptr)
+{
+    sub_8141020(3);
+    return FALSE;
+}
+
+bool8 sub_8141568(u8 * state, struct SlotMachineSetupTaskData * ptr)
+{
+    sub_8141020(FALSE);
+    return FALSE;
+}
+
+bool8 sub_8141578(u8 * state, struct SlotMachineSetupTaskData * ptr)
+{
+    sub_8140F2C();
+    return FALSE;
+}
+
+bool8 sub_8141584(u8 * state, struct SlotMachineSetupTaskData * ptr)
+{
+    switch (*state)
+    {
+    case 0:
+        sub_81417E4(gUnknown_841B747);
+        CopyWindowToVram(0, 3);
+        (*state)++;
+        break;
+    case 1:
+        if (!IsDma3ManagerBusyWithBgCopy())
+            return FALSE;
+        break;
+    }
+    return TRUE;
+}
+
+bool8 sub_81415C8(u8 * state, struct SlotMachineSetupTaskData * ptr)
+{
+    switch (*state)
+    {
+    case 0:
+        sub_81417E4(gUnknown_841B76B);
+        sub_8141AD8(0);
+        CopyWindowToVram(0, 3);
+        (*state)++;
+        break;
+    case 1:
+        if (!IsDma3ManagerBusyWithBgCopy())
+            return FALSE;
+        break;
+    }
+    return TRUE;
+}
+
+bool8 sub_8141610(u8 * state, struct SlotMachineSetupTaskData * ptr)
+{
+    switch (*state)
+    {
+    case 0:
+        sub_8141828();
+        sub_8141B18();
+        CopyWindowToVram(0, 3);
+        (*state)++;
+        break;
+    case 1:
+        if (!IsDma3ManagerBusyWithBgCopy())
+            return FALSE;
+        break;
+    }
+    return TRUE;
+}
+
+bool8 sub_8141650(u8 * state, struct SlotMachineSetupTaskData * ptr)
+{
+    switch (*state)
+    {
+    case 0:
+        sub_8141BA0(ptr->field_0020);
+        CopyBgTilemapBufferToVram(2);
+        (*state)++;
+        break;
+    case 1:
+        if (!IsDma3ManagerBusyWithBgCopy())
+            return FALSE;
+        break;
+    }
+    return TRUE;
+}
+
+bool8 sub_8141690(u8 * state, struct SlotMachineSetupTaskData * ptr)
+{
+    switch (*state)
+    {
+    case 0:
+        sub_8141BE4();
+        CopyBgTilemapBufferToVram(2);
+        (*state)++;
+        break;
+    case 1:
+        if (!IsDma3ManagerBusyWithBgCopy())
+            return FALSE;
+        break;
+    }
+    return TRUE;
+}
+
+bool8 sub_81416C8(u8 * state, struct SlotMachineSetupTaskData * ptr)
+{
+    switch (*state)
+    {
+    case 0:
+        SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
+        SetGpuReg(REG_OFFSET_WININ, 0x3F);
+        SetGpuReg(REG_OFFSET_WINOUT, 0x3D);
+        SetGpuReg(REG_OFFSET_WIN0H, 0x00);
+        SetGpuReg(REG_OFFSET_WIN1H, 0xA0);
+        ShowBg(1);
+        PlaySE(SE_WIN_OPEN);
+        ptr->field_0024 = 0;
+        (*state)++;
+        break;
+    case 1:
+        ptr->field_0024 += 16;
+        if (ptr->field_0024 >= 256)
+        {
+            ptr->field_0024 = 256;
+            (*state)++;
+        }
+        ChangeBgX(1, 256 * (256 - ptr->field_0024), 0);
+        SetGpuReg(REG_OFFSET_WIN0H, ptr->field_0024);
+        break;
+    case 2:
+        return FALSE;
+    }
+    return TRUE;
+}
+
+bool8 sub_8141764(u8 * state, struct SlotMachineSetupTaskData * ptr)
+{
+    switch (*state)
+    {
+    case 0:
+        PlaySE(SE_WIN_OPEN);
+        (*state)++;
+        // fallthrough
+    case 1:
+        ptr->field_0024 -= 16;
+        if (ptr->field_0024 <= 0)
+        {
+            ptr->field_0024 = 0;
+            (*state)++;
+        }
+        ChangeBgX(1, 256 * (256 - ptr->field_0024), 0);
+        SetGpuReg(REG_OFFSET_WIN0H, ptr->field_0024);
+        break;
+    case 2:
+        HideBg(1);
+        ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
+        (*state)++;
+        break;
+    case 3:
+        return FALSE;
+    }
+    return TRUE;
+}

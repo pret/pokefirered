@@ -114,7 +114,7 @@ sub_813F6F4: @ 813F6F4
 	str r4, [sp, 0xC]
 	str r2, [sp, 0x10]
 	mov r2, r9
-	bl AddTextPrinterParameterized2
+	bl AddTextPrinterParameterized4
 	add sp, 0x14
 	pop {r3,r4}
 	mov r8, r3

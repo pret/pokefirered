@@ -725,8 +725,8 @@ sub_80F6CBC: @ 80F6CBC
 	bx r1
 	thumb_func_end sub_80F6CBC
 
-	thumb_func_start AddTextPrinterParameterized3
-AddTextPrinterParameterized3: @ 80F6CD0
+	thumb_func_start AddTextPrinterParameterized2
+AddTextPrinterParameterized2: @ 80F6CD0
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -796,7 +796,7 @@ AddTextPrinterParameterized3: @ 80F6CD0
 	bx r1
 	.align 2, 0
 _080F6D58: .4byte gTextFlags
-	thumb_func_end AddTextPrinterParameterized3
+	thumb_func_end AddTextPrinterParameterized2
 
 	thumb_func_start sub_80F6D5C
 sub_80F6D5C: @ 80F6D5C
@@ -832,7 +832,7 @@ sub_80F6D5C: @ 80F6D5C
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x4
-	bl AddTextPrinterParameterized3
+	bl AddTextPrinterParameterized2
 	b _080F6DFC
 	.align 2, 0
 _080F6DA8: .4byte gTextFlags
@@ -853,7 +853,7 @@ _080F6DB0:
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x5
-	bl AddTextPrinterParameterized3
+	bl AddTextPrinterParameterized2
 	b _080F6DFC
 	.align 2, 0
 _080F6DD8: .4byte gStringVar4
@@ -871,7 +871,7 @@ _080F6DDC:
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x2
-	bl AddTextPrinterParameterized3
+	bl AddTextPrinterParameterized2
 _080F6DFC:
 	add sp, 0x10
 	pop {r4,r5}
@@ -910,7 +910,7 @@ sub_80F6E08: @ 80F6E08
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x2
-	bl AddTextPrinterParameterized3
+	bl AddTextPrinterParameterized2
 	add sp, 0x10
 	pop {r4}
 	pop {r0}
@@ -948,7 +948,7 @@ sub_80F6E54: @ 80F6E54
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x2
-	bl AddTextPrinterParameterized3
+	bl AddTextPrinterParameterized2
 	add sp, 0x10
 	pop {r4,r5}
 	pop {r0}

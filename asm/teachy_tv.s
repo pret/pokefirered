@@ -789,7 +789,7 @@ sub_815B1DC: @ 815B1DC
 	movs r0, 0
 	movs r1, 0x4
 	adds r2, r4, 0
-	bl AddTextPrinterParameterized3
+	bl AddTextPrinterParameterized2
 	add sp, 0x10
 	pop {r4}
 	pop {r0}

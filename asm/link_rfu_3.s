@@ -12766,7 +12766,7 @@ sub_811C0E0: @ 811C0E0
 	movs r1, 0x3
 	adds r2, r6, 0
 	ldr r3, [sp, 0x14]
-	bl AddTextPrinterParameterized2
+	bl AddTextPrinterParameterized4
 	add sp, 0x18
 	pop {r3-r5}
 	mov r8, r3

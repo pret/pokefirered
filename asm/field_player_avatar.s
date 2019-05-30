@@ -4676,7 +4676,7 @@ sub_805D66C: @ 805D66C
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0x1
-	bl AddTextPrinterParameterized3
+	bl AddTextPrinterParameterized2
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -4851,7 +4851,7 @@ sub_805D7C0: @ 805D7C0
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0x1
-	bl AddTextPrinterParameterized3
+	bl AddTextPrinterParameterized2
 	movs r0, 0xD
 	strh r0, [r6, 0x8]
 	movs r0, 0x1
@@ -4904,7 +4904,7 @@ sub_805D838: @ 805D838
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0x1
-	bl AddTextPrinterParameterized3
+	bl AddTextPrinterParameterized2
 	ldrh r0, [r6, 0x8]
 	adds r0, 0x1
 	strh r0, [r6, 0x8]

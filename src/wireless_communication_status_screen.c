@@ -359,7 +359,7 @@ void sub_814F65C(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 palIdx)
         break;
     // default: UB
     }
-    AddTextPrinterParameterized2(windowId, fontId,x, y, fontId == 0 ? 0 : 1, 0, &textColor, -1, str);
+    AddTextPrinterParameterized4(windowId, fontId,x, y, fontId == 0 ? 0 : 1, 0, &textColor, -1, str);
 }
 
 u32 sub_814F714(struct UnkStruct_x20 * unk20, u32 * arg1)

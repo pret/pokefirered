@@ -874,5 +874,5 @@ static void EggHatchPrintMessage(u8 windowId, u8* string, u8 x, u8 y, u8 speed)
     sEggHatchData->textColor.fgColor = 0;
     sEggHatchData->textColor.bgColor = 5;
     sEggHatchData->textColor.shadowColor = 6;
-    AddTextPrinterParameterized2(windowId, 3, x, y, 1, 1, &sEggHatchData->textColor, speed, string);
+    AddTextPrinterParameterized4(windowId, 3, x, y, 1, 1, &sEggHatchData->textColor, speed, string);
 }

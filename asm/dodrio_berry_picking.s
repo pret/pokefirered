@@ -9014,7 +9014,7 @@ _08154C4E:
 	str r4, [sp, 0x8]
 	movs r1, 0
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	mov r2, r10
 	ldr r0, [r2]
 	add r0, r9
@@ -9319,7 +9319,7 @@ _08154EC8:
 	movs r1, 0
 	movs r2, 0x1C
 	adds r3, r6, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add r0, sp, 0xC
 	mov r1, r9
 	movs r2, 0x1
@@ -9563,7 +9563,7 @@ _081550EA:
 	str r6, [sp, 0x8]
 	movs r1, 0
 	movs r2, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r7, 0
 	mov r0, r9
 	adds r0, 0x1
@@ -9624,7 +9624,7 @@ _0815512E:
 	add r1, sp, 0xC
 	str r1, [sp, 0x8]
 	movs r1, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	b _081551FA
 	.align 2, 0
 _081551A8: .4byte gUnknown_203F440
@@ -10669,7 +10669,7 @@ _08155AA6:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl AddTextPrinterParameterized3
+	bl AddTextPrinterParameterized2
 	b _08155B08
 	.align 2, 0
 _08155ACC: .4byte gUnknown_8419F54

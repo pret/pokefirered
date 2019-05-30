@@ -134,7 +134,7 @@ _080F5660:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x3
-	bl AddTextPrinterParameterized2
+	bl AddTextPrinterParameterized4
 	movs r0, 0x1
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -241,7 +241,7 @@ _080F5744:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x3
-	bl AddTextPrinterParameterized2
+	bl AddTextPrinterParameterized4
 	movs r0, 0x1
 	movs r1, 0x3
 	bl CopyWindowToVram

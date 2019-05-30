@@ -345,7 +345,7 @@ sub_80F8318: @ 80F8318
 	adds r0, r6, 0
 	movs r1, 0x2
 	movs r3, 0x2
-	bl AddTextPrinterParameterized2
+	bl AddTextPrinterParameterized4
 	mov r0, r8
 	add sp, 0x14
 	pop {r3,r4}

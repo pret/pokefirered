@@ -1908,7 +1908,7 @@ _0806FC14:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0xFF
-	bl AddTextPrinterParameterized3
+	bl AddTextPrinterParameterized2
 	movs r0, 0
 	movs r1, 0x8
 	movs r2, 0xF
@@ -2043,7 +2043,7 @@ sub_806FCF4: @ 806FCF4
 	str r4, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x2
 	adds r1, r4, 0
 	adds r2, r6, 0
@@ -2058,7 +2058,7 @@ sub_806FCF4: @ 806FCF4
 	movs r1, 0
 	movs r2, 0x2
 	movs r3, 0xE
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0x2
@@ -2077,7 +2077,7 @@ sub_806FCF4: @ 806FCF4
 	movs r1, 0
 	movs r2, 0x2
 	movs r3, 0x1C
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x4
 	adds r1, r4, 0
 	movs r2, 0x2
@@ -2091,7 +2091,7 @@ sub_806FCF4: @ 806FCF4
 	movs r1, 0
 	movs r2, 0x3C
 	movs r3, 0x1C
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r7, 0x2A
 	ldr r0, _0806FE78 @ =0x00000829
 	bl FlagGet
@@ -2108,7 +2108,7 @@ sub_806FCF4: @ 806FCF4
 	movs r1, 0
 	movs r2, 0x2
 	movs r3, 0x2A
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x1
 	adds r1, r4, 0
 	movs r2, 0x2
@@ -2121,7 +2121,7 @@ sub_806FCF4: @ 806FCF4
 	movs r1, 0
 	movs r2, 0x3C
 	movs r3, 0x2A
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r7, 0x38
 _0806FE0A:
 	ldrb r0, [r5]
@@ -2133,7 +2133,7 @@ _0806FE0A:
 	movs r1, 0
 	movs r2, 0x2
 	adds r3, r7, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x2
 	adds r1, r4, 0
 	movs r2, 0x2
@@ -2146,7 +2146,7 @@ _0806FE0A:
 	movs r1, 0
 	movs r2, 0x3C
 	adds r3, r7, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldrb r0, [r5]
 	movs r1, 0x2
 	bl CopyWindowToVram

@@ -782,7 +782,7 @@ ListMenuPrint: @ 8107428
 	str r6, [sp, 0x10]
 	adds r2, r7, 0
 	mov r3, r12
-	bl AddTextPrinterParameterized2
+	bl AddTextPrinterParameterized4
 	ldrb r1, [r5, 0x3]
 	movs r0, 0x7F
 	ands r0, r1
@@ -820,7 +820,7 @@ _08107494:
 	str r6, [sp, 0x10]
 	adds r2, r7, 0
 	mov r3, r12
-	bl AddTextPrinterParameterized2
+	bl AddTextPrinterParameterized4
 _081074D2:
 	add sp, 0x18
 	pop {r4-r7}

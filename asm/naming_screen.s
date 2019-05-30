@@ -980,7 +980,7 @@ _0809E156:
 	movs r0, 0
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl AddTextPrinterParameterized3
+	bl AddTextPrinterParameterized2
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -3657,7 +3657,7 @@ _0809F5EE:
 	movs r1, 0x2
 	movs r2, 0x68
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0809F614:
 	add sp, 0x10
 	pop {r4,r5}
@@ -4196,7 +4196,7 @@ _0809FA12:
 	adds r0, r6, 0
 	movs r1, 0x1
 	movs r2, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -4317,7 +4317,7 @@ sub_809FAE4: @ 809FAE4
 	str r1, [sp, 0x8]
 	movs r1, 0
 	movs r3, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r0, [r5]
 	adds r0, r4
 	ldrb r0, [r0]

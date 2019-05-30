@@ -639,7 +639,7 @@ _0800C828:
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r0, _0800C86C @ =gUnknown_8234618
 	bl sub_800D0B4
 	movs r0, 0
@@ -670,7 +670,7 @@ _0800C870:
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	str r5, [sp]
 	str r4, [sp, 0x4]
 	ldr r0, _0800C8E8 @ =gUnknown_8415A6E
@@ -679,7 +679,7 @@ _0800C870:
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	bl sub_800CE58
 	ldr r4, _0800C8EC @ =gUnknown_8234620
 	adds r0, r4, 0
@@ -725,7 +725,7 @@ _0800C8F0:
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	str r5, [sp]
 	str r4, [sp, 0x4]
 	ldr r0, _0800C9B8 @ =gUnknown_8415A6E
@@ -734,7 +734,7 @@ _0800C8F0:
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x1
 	strh r0, [r6, 0x1C]
 	str r5, [sp]
@@ -745,7 +745,7 @@ _0800C8F0:
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	bl sub_800CE58
 	ldr r4, _0800C9C0 @ =gUnknown_8234620
 	adds r0, r4, 0
@@ -1355,7 +1355,7 @@ sub_800CDF8: @ 800CDF8
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x4
 	bl PutWindowTilemap
 	movs r0, 0x4
@@ -1404,7 +1404,7 @@ sub_800CE70: @ 800CE70
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x12
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add r1, sp, 0xC
 	movs r2, 0
 	ldr r0, _0800CED0 @ =gSaveBlock2Ptr
@@ -1430,7 +1430,7 @@ _0800CE96:
 	movs r1, 0x2
 	movs r2, 0x3E
 	movs r3, 0x12
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0x14
 	pop {r0}
 	bx r0
@@ -1455,7 +1455,7 @@ sub_800CED4: @ 800CED4
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x22
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r4, _0800CF38 @ =gSaveBlock2Ptr
 	ldr r0, [r4]
 	ldrh r1, [r0, 0xE]
@@ -1479,7 +1479,7 @@ sub_800CED4: @ 800CED4
 	movs r1, 0x2
 	movs r2, 0x3E
 	movs r3, 0x22
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0x2C
 	pop {r4-r6}
 	pop {r0}
@@ -1525,7 +1525,7 @@ _0800CF6A:
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x32
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add r0, sp, 0xC
 	adds r1, r6, 0
 	movs r2, 0
@@ -1541,7 +1541,7 @@ _0800CF6A:
 	movs r1, 0x2
 	movs r2, 0x3E
 	movs r3, 0x32
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0800CFAE:
 	add sp, 0x2C
 	pop {r4-r6}
@@ -1586,7 +1586,7 @@ _0800CFE2:
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x42
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add r0, sp, 0xC
 	adds r1, r6, 0
 	movs r2, 0x2
@@ -1602,7 +1602,7 @@ _0800CFE2:
 	movs r1, 0x2
 	movs r2, 0x3E
 	movs r3, 0x42
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0x2C
 	pop {r4-r6}
 	pop {r0}

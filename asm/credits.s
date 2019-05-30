@@ -422,7 +422,7 @@ _080F3D0A:
 	movs r1, 0x1
 	movs r2, 0x8
 	movs r3, 0x29
-	bl AddTextPrinterParameterized2
+	bl AddTextPrinterParameterized4
 	ldr r1, [r7]
 	movs r0, 0x5
 	b _080F413C
@@ -649,7 +649,7 @@ _080F3EB4:
 	movs r1, 0x1
 	movs r2, 0x2
 	movs r3, 0x6
-	bl AddTextPrinterParameterized2
+	bl AddTextPrinterParameterized4
 	ldr r1, [r7]
 	movs r0, 0x8
 	b _080F3FB8
@@ -696,7 +696,7 @@ _080F3F24:
 	movs r1, 0x2
 	movs r2, 0x8
 	movs r3, 0x6
-	bl AddTextPrinterParameterized2
+	bl AddTextPrinterParameterized4
 	ldr r1, [r7]
 	movs r0, 0x9
 	b _080F3FB8

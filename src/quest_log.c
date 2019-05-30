@@ -922,7 +922,7 @@ void sub_8111070(u8 a0)
         StringAppend(gStringVar4, gStringVar1);
     }
 
-    AddTextPrinterParameterized2(gUnknown_203ADFE[0], 2, 2, 2, 1, 2, &gUnknown_8456634, 0, gStringVar4);
+    AddTextPrinterParameterized4(gUnknown_203ADFE[0], 2, 2, 2, 1, 2, &gUnknown_8456634, 0, gStringVar4);
     PutWindowTilemap(gUnknown_203ADFE[0]);
     PutWindowTilemap(gUnknown_203ADFE[1]);
     CopyWindowToVram(gUnknown_203ADFE[0], 2);
@@ -1417,7 +1417,7 @@ void sub_8111D10(void)
 
     PutWindowTilemap(gUnknown_203ADFE[2]);
     sub_8111D90(gUnknown_203ADFE[2]);
-    AddTextPrinterParameterized2(gUnknown_203ADFE[2], 2, 2, gUnknown_8456698[count], 1, 0, &gUnknown_8456634, 0, gStringVar4);
+    AddTextPrinterParameterized4(gUnknown_203ADFE[2], 2, 2, gUnknown_8456698[count], 1, 0, &gUnknown_8456634, 0, gStringVar4);
     schedule_bg_copy_tilemap_to_vram(0);
 }
 
@@ -2468,7 +2468,7 @@ const struct TextColor gUnknown_8456930 = {
 
 void sub_8112FE4(const u8 * a0)
 {
-    AddTextPrinterParameterized2(gUnknown_203B020, 0x02, 2, 5, 1, 1, &gUnknown_8456930, -1, a0);
+    AddTextPrinterParameterized4(gUnknown_203B020, 0x02, 2, 5, 1, 1, &gUnknown_8456930, -1, a0);
 }
 
 void sub_8113018(const u8 * a0, u8 a1)

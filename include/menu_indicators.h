@@ -24,7 +24,7 @@ struct ScrollIndicatorArrowPairTemplate
 };
 
 // Exported ROM declarations
-u8 AddScrollIndicatorArrowPairParametrized(u8, u8, u8, u8, s32, u16, u16, u16 *);
+u8 AddScrollIndicatorArrowPairParameterized(u8, u8, u8, u8, s32, u16, u16, u16 *);
 u8 AddScrollIndicatorArrowPair(const struct ScrollIndicatorArrowPairTemplate * template, u16 * a1);
 void RemoveScrollIndicatorArrowPair(u8);
 

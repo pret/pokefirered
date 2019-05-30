@@ -521,7 +521,7 @@ _080F21B2:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized3
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -1277,7 +1277,7 @@ _080F27AC:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized3
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -2358,7 +2358,7 @@ sub_80F30A4: @ 80F30A4
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized3
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -2764,7 +2764,7 @@ sub_80F33DC: @ 80F33DC
 	movs r1, 0x2
 	movs r2, 0x4
 	movs r3, 0x3
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	ldr r0, _080F35FC @ =gSaveBlock2Ptr
 	mov r10, r0
 	ldr r1, [r0]

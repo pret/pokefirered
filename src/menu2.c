@@ -444,7 +444,7 @@ void box_print(u8 windowId, u8 fontId, u8 x, u8 y, const struct TextColor * colo
     AddTextPrinter(&printer, speed, NULL);
 }
 
-void AddTextPrinterParametrized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, const struct TextColor *color, s8 speed, const u8 *str)
+void AddTextPrinterParameterized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, const struct TextColor *color, s8 speed, const u8 *str)
 {
     struct TextPrinterTemplate printer;
 

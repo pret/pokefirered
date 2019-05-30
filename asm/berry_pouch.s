@@ -1072,7 +1072,7 @@ _0813D5EA:
 	movs r1, 0xA0
 	movs r2, 0x8
 	movs r3, 0x78
-	bl AddScrollIndicatorArrowPairParametrized
+	bl AddScrollIndicatorArrowPairParameterized
 	ldr r1, [r4]
 	strb r0, [r1, 0x6]
 	add sp, 0x10
@@ -1102,7 +1102,7 @@ sub_813D614: @ 813D614
 	movs r1, 0xD4
 	movs r2, 0x78
 	movs r3, 0x98
-	bl AddScrollIndicatorArrowPairParametrized
+	bl AddScrollIndicatorArrowPairParameterized
 	ldr r1, [r4]
 	strb r0, [r1, 0x6]
 	add sp, 0x10
@@ -1132,7 +1132,7 @@ sub_813D64C: @ 813D64C
 	movs r1, 0x98
 	movs r2, 0x48
 	movs r3, 0x68
-	bl AddScrollIndicatorArrowPairParametrized
+	bl AddScrollIndicatorArrowPairParameterized
 	ldr r1, [r4]
 	strb r0, [r1, 0x6]
 	add sp, 0x10
@@ -3465,7 +3465,7 @@ sub_813E9A0: @ 813E9A0
 	str r4, [sp, 0xC]
 	str r2, [sp, 0x10]
 	mov r2, r9
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	add sp, 0x14
 	pop {r3,r4}
 	mov r8, r3

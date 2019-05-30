@@ -154,7 +154,7 @@ _0810EC62:
 	movs r1, 0x2
 	movs r2, 0x8
 	adds r3, r5, 0
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 _0810EC82:
 	add sp, 0x34
 	pop {r4,r5}
@@ -303,7 +303,7 @@ sub_810ED80: @ 810ED80
 	movs r1, 0xC2
 	movs r2, 0xC
 	movs r3, 0x94
-	bl AddScrollIndicatorArrowPairParametrized
+	bl AddScrollIndicatorArrowPairParameterized
 	strb r0, [r4, 0xA]
 	add sp, 0x10
 	pop {r4}

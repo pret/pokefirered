@@ -1132,7 +1132,7 @@ _0810F6CE:
 	movs r1, 0x1
 	movs r2, 0x4
 	movs r3, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	cmp r7, 0
 	beq _0810F6F6
 	ldrb r0, [r6]

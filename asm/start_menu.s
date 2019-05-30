@@ -1908,7 +1908,7 @@ _0806FC14:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0xFF
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized3
 	movs r0, 0
 	movs r1, 0x8
 	movs r2, 0xF

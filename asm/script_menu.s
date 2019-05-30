@@ -578,7 +578,7 @@ _0809CD82:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized3
 	b _0809CDE0
 	.align 2, 0
 _0809CDAC: .4byte gUnknown_83E0738
@@ -603,7 +603,7 @@ _0809CDB0:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized3
 _0809CDE0:
 	add sp, 0x10
 	pop {r4}
@@ -1178,7 +1178,7 @@ sub_809D254: @ 809D254
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized3
 	add sp, 0x10
 	pop {r0}
 	bx r0

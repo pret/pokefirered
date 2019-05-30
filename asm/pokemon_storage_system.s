@@ -807,7 +807,7 @@ _0808BF3C:
 	str r1, [sp, 0x10]
 	movs r1, 0x1
 	movs r3, 0x2
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	ldr r0, [sp, 0x50]
 	mov r10, r4
 	cmp r0, 0x6
@@ -960,7 +960,7 @@ sub_808BFE0: @ 808BFE0
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0x2
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	lsrs r5, 1
 	adds r0, r7, 0
 	ldr r1, [sp, 0x24]
@@ -1442,7 +1442,7 @@ _0808C3E0:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0xFF
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized3
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -1549,7 +1549,7 @@ _0808C4CE:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized3
 	b _0808C69C
 	.align 2, 0
 _0808C504: .4byte gMain
@@ -1725,7 +1725,7 @@ _0808C66E:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized3
 	strh r4, [r5, 0x8]
 	b _0808C69C
 	.align 2, 0

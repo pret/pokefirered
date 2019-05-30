@@ -4847,7 +4847,7 @@ _0804ECEC:
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	adds r0, r5, 0
 	bl PutWindowTilemap
 	adds r0, r5, 0
@@ -14989,7 +14989,7 @@ sub_8054508: @ 8054508
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	adds r0, r5, 0
 	movs r1, 0x3
 	bl CopyWindowToVram

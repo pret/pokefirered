@@ -229,7 +229,7 @@ _0814BCA2:
 	movs r0, 0
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized3
 	b _0814BD12
 	.align 2, 0
 _0814BCE8: .4byte gStringVar4
@@ -250,7 +250,7 @@ _0814BCF0:
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x2
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized3
 _0814BD12:
 	movs r0, 0
 	movs r1, 0x3
@@ -2868,7 +2868,7 @@ _0814D106:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized3
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -3232,7 +3232,7 @@ _0814D3C0:
 	str r1, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x2
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized3
 	b _0814D40C
 	.align 2, 0
 _0814D3EC: .4byte gUnknown_846E328
@@ -3249,7 +3249,7 @@ _0814D3F0:
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x2
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized3
 _0814D40C:
 	movs r0, 0
 	movs r1, 0x3

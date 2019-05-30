@@ -294,8 +294,8 @@ _08133B38: .4byte 0x0000ffff
 _08133B3C: .4byte gSprites
 	thumb_func_end AddScrollIndicatorArrowPair
 
-	thumb_func_start AddScrollIndicatorArrowPairParametrized
-AddScrollIndicatorArrowPairParametrized: @ 8133B40
+	thumb_func_start AddScrollIndicatorArrowPairParameterized
+AddScrollIndicatorArrowPairParameterized: @ 8133B40
 	push {r4,lr}
 	adds r4, r1, 0
 	subs r0, 0x2
@@ -345,7 +345,7 @@ _08133B76:
 	bx r1
 	.align 2, 0
 _08133BA0: .4byte gUnknown_203B130
-	thumb_func_end AddScrollIndicatorArrowPairParametrized
+	thumb_func_end AddScrollIndicatorArrowPairParameterized
 
 	thumb_func_start sub_8133BA4
 sub_8133BA4: @ 8133BA4

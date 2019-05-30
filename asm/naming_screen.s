@@ -980,7 +980,7 @@ _0809E156:
 	movs r0, 0
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized3
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram

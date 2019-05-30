@@ -5928,7 +5928,7 @@ _081376E6:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x3
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	add sp, 0xD4
 	pop {r4-r7}
 	pop {r0}
@@ -6052,7 +6052,7 @@ _081377F6:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x3
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	b _0813792C
 	.align 2, 0
 _08137820: .4byte gUnknown_8419782
@@ -6176,7 +6176,7 @@ _08137906:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x3
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 _0813792C:
 	add sp, 0xD4
 	pop {r4-r6}
@@ -6341,7 +6341,7 @@ _08137A46:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x3
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	add sp, 0x14
 	pop {r4-r7}
 	pop {r0}
@@ -6486,7 +6486,7 @@ _08137B1C:
 	movs r1, 0x2
 	movs r2, 0x7
 	movs r3, 0x2A
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 _08137B9E:
 	add sp, 0x14
 	pop {r3}
@@ -9875,7 +9875,7 @@ _081396A8:
 	movs r1, 0x2
 	movs r2, 0x7
 	movs r3, 0x2A
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	ldr r0, [r5]
 	adds r0, r4
 	ldrb r0, [r0]

@@ -10669,7 +10669,7 @@ _08155AA6:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized3
 	b _08155B08
 	.align 2, 0
 _08155ACC: .4byte gUnknown_8419F54

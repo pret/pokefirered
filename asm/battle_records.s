@@ -1092,7 +1092,7 @@ _080CDA72:
 	movs r1, 0x2
 	movs r2, 0xC
 	movs r3, 0x18
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	add sp, 0x14
 	pop {r4-r7}
 	pop {r0}
@@ -1138,7 +1138,7 @@ sub_80CDAD0: @ 80CDAD0
 	movs r1, 0x2
 	movs r2, 0
 	mov r3, r8
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	movs r6, 0
 _080CDB0E:
 	movs r4, 0x54
@@ -1161,7 +1161,7 @@ _080CDB1C:
 	movs r0, 0
 	movs r1, 0x2
 	mov r3, r8
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -1230,7 +1230,7 @@ _080CDBA6:
 	movs r0, 0
 	movs r1, 0x2
 	mov r3, r8
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -1291,7 +1291,7 @@ sub_80CDBE4: @ 80CDBE4
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0x4
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	ldr r5, _080CDCA8 @ =gSaveBlock2Ptr
 	ldr r0, [r5]
 	ldr r1, _080CDCAC @ =0x00000a98
@@ -1309,7 +1309,7 @@ sub_80CDBE4: @ 80CDBE4
 	movs r1, 0x2
 	movs r2, 0x54
 	movs r3, 0x30
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	adds r7, r5, 0
 	movs r5, 0xF4
 	lsls r5, 22

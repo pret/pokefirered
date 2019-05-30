@@ -2723,7 +2723,7 @@ _0814EBC6:
 	str r4, [sp, 0x10]
 	movs r1, 0x2
 	movs r3, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	b _0814EC4C
 	.align 2, 0
 _0814EC10: .4byte 0x000001bb
@@ -2752,7 +2752,7 @@ _0814EC18:
 	str r4, [sp, 0x10]
 	movs r1, 0x2
 	movs r3, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 _0814EC4C:
 	ldr r1, _0814EC7C @ =0x000001bb
 	adds r0, r6, r1

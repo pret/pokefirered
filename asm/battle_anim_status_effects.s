@@ -16,7 +16,7 @@ sub_8078178: @ 8078178
 	lsrs r4, 24
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r0, _0807821C @ =gUnknown_2023D44
+	ldr r0, _0807821C @ =gBattlerSpriteIds
 	adds r0, r4, r0
 	ldrb r6, [r0]
 	ldr r0, _08078220 @ =sub_80782BC
@@ -88,7 +88,7 @@ _08078210:
 	bls _080781CC
 	b _08078298
 	.align 2, 0
-_0807821C: .4byte gUnknown_2023D44
+_0807821C: .4byte gBattlerSpriteIds
 _08078220: .4byte sub_80782BC
 _08078224: .4byte gUnknown_83AD048
 _08078228: .4byte gUnknown_83AD950
@@ -341,7 +341,7 @@ sub_80783FC: @ 80783FC
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r4, _080784AC @ =gUnknown_2037F1B
+	ldr r4, _080784AC @ =gBattleAnimTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl sub_8074480
@@ -420,7 +420,7 @@ _08078484:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080784AC: .4byte gUnknown_2037F1B
+_080784AC: .4byte gBattleAnimTarget
 _080784B0: .4byte 0xffe00000
 _080784B4: .4byte 0xffdc0000
 _080784B8: .4byte 0xfffa0000
@@ -867,7 +867,7 @@ _08078830:
 	bl DestroyAnimVisualTask
 	b _0807885A
 _08078838:
-	ldr r0, _08078860 @ =gUnknown_2037F02
+	ldr r0, _08078860 @ =gBattleAnimArgs
 	movs r1, 0
 	strh r5, [r0]
 	strh r2, [r0, 0x2]
@@ -888,7 +888,7 @@ _0807885A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08078860: .4byte gUnknown_2037F02
+_08078860: .4byte gBattleAnimArgs
 _08078864: .4byte gTasks
 _08078868: .4byte sub_80BB088
 	thumb_func_end sub_8078694
@@ -901,9 +901,9 @@ LaunchStatusAnimation: @ 807886C
 	lsrs r4, 24
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r0, _080788A8 @ =gUnknown_2037F1A
+	ldr r0, _080788A8 @ =gBattleAnimAttacker
 	strb r4, [r0]
-	ldr r0, _080788AC @ =gUnknown_2037F1B
+	ldr r0, _080788AC @ =gBattleAnimTarget
 	strb r4, [r0]
 	ldr r0, _080788B0 @ =gUnknown_81C6E84
 	movs r2, 0
@@ -923,8 +923,8 @@ LaunchStatusAnimation: @ 807886C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080788A8: .4byte gUnknown_2037F1A
-_080788AC: .4byte gUnknown_2037F1B
+_080788A8: .4byte gBattleAnimAttacker
+_080788AC: .4byte gBattleAnimTarget
 _080788B0: .4byte gUnknown_81C6E84
 _080788B4: .4byte task0A_80788BC
 _080788B8: .4byte gTasks

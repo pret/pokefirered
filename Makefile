@@ -78,7 +78,7 @@ OBJS_REL := $(patsubst $(OBJ_DIR)/%,%,$(OBJS))
 
 all: rom
 
-rom: $(ROM)
+rom: tools $(ROM)
 
 tools:
 	@$(MAKE) -C tools/gbagfx

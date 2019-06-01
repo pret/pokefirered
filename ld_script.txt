@@ -205,7 +205,7 @@ SECTIONS {
         asm/fldeff_sweetscent.o(.text);
         asm/battle_anim_effects_3.o(.text);
         asm/learn_move.o(.text);
-        asm/fldeff_softboiled.o(.text);
+        src/fldeff_softboiled.o(.text);
         asm/battle_tower.o(.text);
         asm/battle_controller_oak.o(.text);
         asm/player_pc.o(.text);

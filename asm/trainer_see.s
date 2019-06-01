@@ -1024,7 +1024,7 @@ sub_808226C: @ 808226C
 	movs r0, 0x12
 	movs r1, 0x7
 	movs r2, 0x7F
-	bl SpawnSpecialFieldObjectParametrized
+	bl SpawnSpecialFieldObjectParameterized
 	ldr r2, _080822C8 @ =gMapObjects
 	lsls r1, r0, 3
 	adds r1, r0

@@ -57,7 +57,7 @@ _080BF4B8:
 	adds r1, r7, 0
 	adds r2, r4, 0
 	adds r3, r5, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 	ldr r1, _080BF50C @ =gUnknown_20399CC
 	ldr r0, [sp, 0x34]
 	str r0, [r1]

@@ -6116,7 +6116,7 @@ sub_814A84C: @ 814A84C
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add r0, sp, 0xC
 	str r0, [sp]
 	str r4, [sp, 0x4]
@@ -6126,7 +6126,7 @@ sub_814A84C: @ 814A84C
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0x10
 	pop {r4}
 	pop {r0}
@@ -6582,7 +6582,7 @@ sub_814AB98: @ 814AB98
 	movs r1, 0
 	adds r2, r4, 0
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r0, [r6]
 	adds r0, 0x1C
 	add r0, r8
@@ -7950,7 +7950,7 @@ sub_814B5C4: @ 814B5C4
 	adds r0, r4, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl sub_812E62C
+	bl AddTextPrinterParameterized5
 	movs r7, 0
 	mov r8, r4
 	movs r1, 0xFF
@@ -7980,7 +7980,7 @@ _0814B63E:
 	mov r0, r8
 	movs r1, 0x2
 	movs r3, 0
-	bl sub_812E62C
+	bl AddTextPrinterParameterized5
 	ldr r0, [sp, 0x2C]
 	ldm r0!, {r1}
 	str r0, [sp, 0x2C]
@@ -8007,7 +8007,7 @@ _0814B63E:
 	mov r0, r8
 	movs r1, 0x2
 	adds r2, r5, 0
-	bl sub_812E62C
+	bl AddTextPrinterParameterized5
 	movs r0, 0xE0
 	lsls r0, 20
 	add r9, r0

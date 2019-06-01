@@ -4266,7 +4266,7 @@ _08104852:
 	adds r0, r7, 0
 	adds r1, r5, 0
 	adds r2, r6, 0
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	add sp, 0x18
 	pop {r4-r7}
 	pop {r0}

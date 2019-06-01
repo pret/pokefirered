@@ -619,13 +619,13 @@ static void PrintListMenuCursorAt_WithColorIdx(u8 a0, u8 a1)
 
 static void CreateTMCaseScrollIndicatorArrowPair_Main(void)
 {
-    sTMCaseDynamicResources->scrollIndicatorArrowPairId = AddScrollIndicatorArrowPairParametrized(2, 0xA0, 0x08, 0x58, sTMCaseDynamicResources->numTMs - sTMCaseDynamicResources->maxTMsShown + 1, 0x6E, 0x6E, &sTMCaseStaticResources.scrollOffset);
+    sTMCaseDynamicResources->scrollIndicatorArrowPairId = AddScrollIndicatorArrowPairParameterized(2, 0xA0, 0x08, 0x58, sTMCaseDynamicResources->numTMs - sTMCaseDynamicResources->maxTMsShown + 1, 0x6E, 0x6E, &sTMCaseStaticResources.scrollOffset);
 }
 
 static void CreateTMCaseScrollIndicatorArrowPair_SellQuantitySelect(void)
 {
     sTMCaseDynamicResources->currItem = 1;
-    sTMCaseDynamicResources->scrollIndicatorArrowPairId = AddScrollIndicatorArrowPairParametrized(2, 0x98, 0x48, 0x68, 2, 0x6E, 0x6E, &sTMCaseDynamicResources->currItem);
+    sTMCaseDynamicResources->scrollIndicatorArrowPairId = AddScrollIndicatorArrowPairParameterized(2, 0x98, 0x48, 0x68, 2, 0x6E, 0x6E, &sTMCaseDynamicResources->currItem);
 }
 
 static void RemoveTMCaseScrollIndicatorArrowPair(void)
@@ -1317,7 +1317,7 @@ static void InitWindowTemplatesAndPals(void)
 
 static void AddTextPrinterParameterized_ColorByIndex(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorIdx)
 {
-    AddTextPrinterParametrized2(windowId, fontId, x, y, letterSpacing, lineSpacing, &sTextColors[colorIdx], speed, str);
+    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, &sTextColors[colorIdx], speed, str);
 }
 
 static void TMCase_SetWindowBorder1(u8 windowId)
@@ -1339,7 +1339,7 @@ static void TMCase_PrintMessageWithFollowupTask(u8 taskId, u8 windowId, const u8
 static void PrintStringTMCaseOnWindow3(void)
 {
     u32 distance = 72 - GetStringWidth(1, gText_TMCase, 0);
-    box_print(3, 1, distance / 2, 1, &sTextColors[0], 0, gText_TMCase);
+    AddTextPrinterParameterized3(3, 1, distance / 2, 1, &sTextColors[0], 0, gText_TMCase);
 }
 
 static void DrawMoveInfoUIMarkers(void)

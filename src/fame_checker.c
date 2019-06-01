@@ -639,7 +639,7 @@ static bool8 TryExitPickMode(u8 taskId)
 
 static void MessageBoxPrintEmptyText(void)
 {
-    AddTextPrinterParametrized(2, 2, gFameCheckerText_ClearTextbox, 0, NULL, 2, 1, 3);
+    AddTextPrinterParameterized2(2, 2, gFameCheckerText_ClearTextbox, 0, NULL, 2, 1, 3);
 }
 
 static void Task_EnterPickMode(u8 taskId)
@@ -779,7 +779,7 @@ static void GetPickModeText(void)
         if (HasUnlockedAllFlavorTextsForCurrentPerson() == TRUE)
             offset = NUM_FAMECHECKER_PERSONS;
         StringExpandPlaceholders(gStringVar4, sFameCheckerNameAndQuotesPointers[sFameCheckerData->unlockedPersons[who] + offset]);
-        AddTextPrinterParametrized(FCWINDOWID_MSGBOX, 2, gStringVar4, GetTextSpeedSetting(), NULL, 2, 1, 3);
+        AddTextPrinterParameterized2(FCWINDOWID_MSGBOX, 2, gStringVar4, GetTextSpeedSetting(), NULL, 2, 1, 3);
         FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_MSGBOX);
     }
 }
@@ -790,7 +790,7 @@ static void PrintSelectedNameInBrightGreen(u8 taskId)
     u16 cursorPos = FameCheckerGetCursorY();
     FillWindowPixelRect(FCWINDOWID_MSGBOX, 0x11, 0, 0, 0xd0, 0x20);
     StringExpandPlaceholders(gStringVar4, sFameCheckerFlavorTextPointers[sFameCheckerData->unlockedPersons[cursorPos] * 6 + data[1]]);
-    AddTextPrinterParametrized(FCWINDOWID_MSGBOX, 2, gStringVar4, GetTextSpeedSetting(), NULL, 2, 1, 3);
+    AddTextPrinterParameterized2(FCWINDOWID_MSGBOX, 2, gStringVar4, GetTextSpeedSetting(), NULL, 2, 1, 3);
     FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_MSGBOX);
 }
 
@@ -900,7 +900,7 @@ static void PrintUIHelp(u8 state)
     }
     width = GetStringWidth(0, src, 0);
     FillWindowPixelRect(FCWINDOWID_UIHELP, 0x00, 0, 0, 0xc0, 0x10);
-    AddTextPrinterParametrized2(FCWINDOWID_UIHELP, 0, 188 - width, 0, 0, 2, &sTextColor_White, -1, src);
+    AddTextPrinterParameterized4(FCWINDOWID_UIHELP, 0, 188 - width, 0, 0, 2, &sTextColor_White, -1, src);
     FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_UIHELP);
 }
 
@@ -1213,10 +1213,10 @@ static void UpdateIconDescriptionBox(u8 whichText)
     gIconDescriptionBoxIsOpen = 1;
     FillWindowPixelRect(FCWINDOWID_ICONDESC, 0x00, 0, 0, 0x58, 0x20);
     width = (0x54 - GetStringWidth(0, sFlavorTextOriginLocationTexts[idx], 0)) / 2;
-    AddTextPrinterParametrized2(FCWINDOWID_ICONDESC, 0, width, 0, 0, 2, &sTextColor_DkGrey, -1, sFlavorTextOriginLocationTexts[idx]);
+    AddTextPrinterParameterized4(FCWINDOWID_ICONDESC, 0, width, 0, 0, 2, &sTextColor_DkGrey, -1, sFlavorTextOriginLocationTexts[idx]);
     StringExpandPlaceholders(gStringVar1, sFlavorTextOriginObjectNameTexts[idx]);
     width = (0x54 - GetStringWidth(0, gStringVar1, 0)) / 2;
-    AddTextPrinterParametrized2(FCWINDOWID_ICONDESC, 0, width, 10, 0, 2, &sTextColor_DkGrey, -1, gStringVar1);
+    AddTextPrinterParameterized4(FCWINDOWID_ICONDESC, 0, width, 10, 0, 2, &sTextColor_DkGrey, -1, gStringVar1);
     FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_ICONDESC);
 }
 
@@ -1330,7 +1330,7 @@ static void Task_SwitchToPickMode(u8 taskId)
 static void PrintCancelDescription(void)
 {
     FillWindowPixelRect(FCWINDOWID_MSGBOX, 0x11, 0, 0, 0xd0, 0x20);
-    AddTextPrinterParametrized(FCWINDOWID_MSGBOX, 2, gFameCheckerText_FameCheckerWillBeClosed, 0, NULL, 2, 1, 3);
+    AddTextPrinterParameterized2(FCWINDOWID_MSGBOX, 2, gFameCheckerText_FameCheckerWillBeClosed, 0, NULL, 2, 1, 3);
     FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_MSGBOX);
 }
 
@@ -1341,14 +1341,14 @@ static void FC_DoMoveCursor(s32 itemIndex, bool8 onInit)
     u16 who;
     get_coro_args_x18_x1A(sFameCheckerData->listMenuTaskId, &listY, &cursorY);
     who = listY + cursorY;
-    AddTextPrinterParametrized2(FCWINDOWID_LIST, 2, 8, 14 * cursorY + 4, 0, 0, &sTextColor_Green, 0, sListMenuItems[itemIndex].unk_00);
+    AddTextPrinterParameterized4(FCWINDOWID_LIST, 2, 8, 14 * cursorY + 4, 0, 0, &sTextColor_Green, 0, sListMenuItems[itemIndex].unk_00);
     if (!onInit)
     {
         if (listY < sFameCheckerData->listMenuTopIdx2)
             sFameCheckerData->listMenuDrawnSelIdx++;
         else if (listY > sFameCheckerData->listMenuTopIdx2 && who != sFameCheckerData->numUnlockedPersons - 1)
             sFameCheckerData->listMenuDrawnSelIdx--;
-        AddTextPrinterParametrized2(FCWINDOWID_LIST, 2, 8, 14 * sFameCheckerData->listMenuDrawnSelIdx + 4, 0, 0, &sTextColor_DkGrey, 0, sListMenuItems[sFameCheckerData->listMenuCurIdx].unk_00);
+        AddTextPrinterParameterized4(FCWINDOWID_LIST, 2, 8, 14 * sFameCheckerData->listMenuDrawnSelIdx + 4, 0, 0, &sTextColor_DkGrey, 0, sListMenuItems[sFameCheckerData->listMenuCurIdx].unk_00);
 
     }
     sFameCheckerData->listMenuCurIdx = itemIndex;
@@ -1547,7 +1547,7 @@ static void PlaceListMenuCursor(bool8 isActive)
 {
     u16 cursorY = ListMenuGetYCoordForPrintingArrowCursor(sFameCheckerData->listMenuTaskId);
     if (isActive == TRUE)
-        AddTextPrinterParametrized2(FCWINDOWID_LIST, 2, 0, cursorY, 0, 0, &sTextColor_DkGrey, 0, gFameCheckerText_ListMenuCursor);
+        AddTextPrinterParameterized4(FCWINDOWID_LIST, 2, 0, cursorY, 0, 0, &sTextColor_DkGrey, 0, gFameCheckerText_ListMenuCursor);
     else
-        AddTextPrinterParametrized2(FCWINDOWID_LIST, 2, 0, cursorY, 0, 0, &sTextColor_White, 0, gFameCheckerText_ListMenuCursor);
+        AddTextPrinterParameterized4(FCWINDOWID_LIST, 2, 0, cursorY, 0, 0, &sTextColor_White, 0, gFameCheckerText_ListMenuCursor);
 }

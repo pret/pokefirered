@@ -1510,7 +1510,7 @@ _0809B6C4:
 	movs r2, 0x8
 	movs r3, 0x58
 _0809B6E2:
-	bl AddScrollIndicatorArrowPairParametrized
+	bl AddScrollIndicatorArrowPairParameterized
 	lsls r0, 3
 	ldrb r2, [r4, 0x17]
 	movs r1, 0x7
@@ -1542,7 +1542,7 @@ sub_809B6FC: @ 809B6FC
 	movs r1, 0x98
 	movs r2, 0x48
 	movs r3, 0x68
-	bl AddScrollIndicatorArrowPairParametrized
+	bl AddScrollIndicatorArrowPairParameterized
 	lsls r0, 3
 	ldrb r2, [r4, 0x17]
 	movs r1, 0x7

@@ -1600,7 +1600,7 @@ _080C0B44:
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0
 	bl PutWindowTilemap
 	movs r0, 0
@@ -1718,7 +1718,7 @@ sub_80C0BB0: @ 80C0BB0
 	movs r1, 0x2
 	movs r2, 0xC
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0x1
@@ -3737,7 +3737,7 @@ _080C1CA8:
 	movs r1, 0x2
 	movs r2, 0x4
 	movs r3, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	bl sub_80C3580
 	lsls r0, 16
 	lsrs r0, 16
@@ -3750,7 +3750,7 @@ _080C1CA8:
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0xE
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x2
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -9815,7 +9815,7 @@ _080C4E48:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x3
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -9860,7 +9860,7 @@ _080C4EA4:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x4
 	movs r1, 0x3
 	bl CopyWindowToVram

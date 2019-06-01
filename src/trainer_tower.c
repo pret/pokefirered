@@ -1490,14 +1490,14 @@ void sub_815EC8C(void)
     sub_815DC8C();
     FillWindowPixelRect(0, 0, 0, 0, 0xd8, 0x90);
     sub_815EC0C();
-    box_print(0, 2, 0x4a, 0, &gUnknown_847A22C, 0, gUnknown_83FE982);
+    AddTextPrinterParameterized3(0, 2, 0x4a, 0, &gUnknown_847A22C, 0, gUnknown_83FE982);
 
     for (i = 0; i < 4; i++)
     {
         PRINT_TOWER_TIME(sub_815EDDC(&gSaveBlock1Ptr->unkArray[i].unk4));
         StringExpandPlaceholders(gStringVar4, gUnknown_83FE998);
-        box_print(windowId, 2, 0x18, 0x24 + 0x14 * i, &gUnknown_847A22C, 0, gUnknown_83FE9C4[i]);
-        box_print(windowId, 2, 0x60, 0x24 + 0x14 * i, &gUnknown_847A22C, 0, gStringVar4);
+        AddTextPrinterParameterized3(windowId, 2, 0x18, 0x24 + 0x14 * i, &gUnknown_847A22C, 0, gUnknown_83FE9C4[i]);
+        AddTextPrinterParameterized3(windowId, 2, 0x60, 0x24 + 0x14 * i, &gUnknown_847A22C, 0, gStringVar4);
     }
 
     PutWindowTilemap(windowId);

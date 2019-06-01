@@ -4516,7 +4516,7 @@ _0812A642:
 	adds r0, r5, 0
 	movs r1, 0x2
 	adds r2, r6, 0
-	bl sub_812E62C
+	bl AddTextPrinterParameterized5
 	b _0812A6DA
 	.align 2, 0
 _0812A6AC: .4byte gUnknown_845AB64
@@ -4539,7 +4539,7 @@ _0812A6B0:
 	adds r0, r5, 0
 	movs r1, 0x2
 	adds r2, r6, 0
-	bl sub_812E62C
+	bl AddTextPrinterParameterized5
 _0812A6DA:
 	ldr r0, _0812A6F0 @ =gUnknown_203B0E4
 	ldr r0, [r0]
@@ -4689,7 +4689,7 @@ _0812A7B4:
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0x34
 	pop {r3-r5}
 	mov r8, r3
@@ -4767,7 +4767,7 @@ _0812A866:
 	movs r0, 0x2
 	movs r1, 0
 	lsrs r2, r5, 24
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r4, 0x4
 	adds r7, 0x1
 	adds r0, r6, 0
@@ -4807,7 +4807,7 @@ _0812A8A8:
 	movs r4, 0x80
 	lsls r4, 19
 	lsrs r2, r4, 24
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r0, r7, 0x1
 	str r0, [sp, 0x48]
 	adds r6, 0xC
@@ -4858,7 +4858,7 @@ _0812A90C:
 	movs r0, 0x2
 	movs r1, 0
 	adds r3, r4, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r2, r7, 0
 	add r0, sp, 0xC
 	str r0, [sp]
@@ -4870,7 +4870,7 @@ _0812A90C:
 	movs r0, 0x2
 	movs r1, 0
 	adds r3, r4, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0812A960:
 	ldr r7, [sp, 0x48]
 	mov r4, r10
@@ -5063,7 +5063,7 @@ sub_812AA78: @ 812AA78
 	movs r1, 0x2
 	movs r2, 0
 	adds r3, r4, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0x10
 	pop {r4,r5}
 	pop {r0}

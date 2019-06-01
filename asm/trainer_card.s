@@ -1856,7 +1856,7 @@ sub_8089EEC: @ 8089EEC
 	add r0, sp, 0xC
 	str r0, [sp, 0x8]
 	movs r0, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0x4C
 	pop {r4,r5}
 	pop {r0}
@@ -1908,7 +1908,7 @@ sub_8089F78: @ 8089F78
 	add r0, sp, 0xC
 	str r0, [sp, 0x8]
 	movs r0, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0x2C
 	pop {r4}
 	pop {r0}
@@ -1972,7 +1972,7 @@ sub_8089FEC: @ 8089FEC
 	adds r1, r6, 0
 	movs r2, 0x14
 	movs r3, 0x38
-	bl box_print
+	bl AddTextPrinterParameterized3
 	str r5, [sp]
 	str r4, [sp, 0x4]
 	add r0, sp, 0xC
@@ -1981,7 +1981,7 @@ sub_8089FEC: @ 8089FEC
 	adds r1, r6, 0
 	adds r2, r7, 0
 	movs r3, 0x38
-	bl box_print
+	bl AddTextPrinterParameterized3
 	b _0808A0CA
 	.align 2, 0
 _0808A068: .4byte gUnknown_8419CED
@@ -2015,7 +2015,7 @@ _0808A080:
 	adds r1, r6, 0
 	movs r2, 0x10
 	movs r3, 0x39
-	bl box_print
+	bl AddTextPrinterParameterized3
 	str r5, [sp]
 	str r4, [sp, 0x4]
 	add r1, sp, 0xC
@@ -2024,7 +2024,7 @@ _0808A080:
 	adds r1, r6, 0
 	adds r2, r7, 0
 	movs r3, 0x39
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0808A0CA:
 	add sp, 0x18
 	pop {r4-r7}
@@ -2108,7 +2108,7 @@ _0808A112:
 	adds r1, r6, 0
 	movs r2, 0x14
 	movs r3, 0x48
-	bl box_print
+	bl AddTextPrinterParameterized3
 	str r5, [sp]
 	str r4, [sp, 0x4]
 	add r0, sp, 0xC
@@ -2117,7 +2117,7 @@ _0808A112:
 	adds r1, r6, 0
 	adds r2, r7, 0
 	movs r3, 0x48
-	bl box_print
+	bl AddTextPrinterParameterized3
 	str r5, [sp]
 	str r4, [sp, 0x4]
 	ldr r0, _0808A1B0 @ =gUnknown_8419CF7
@@ -2126,7 +2126,7 @@ _0808A112:
 	adds r1, r6, 0
 	movs r2, 0x8A
 	movs r3, 0x48
-	bl box_print
+	bl AddTextPrinterParameterized3
 	b _0808A212
 	.align 2, 0
 _0808A198: .4byte 0x00000829
@@ -2161,7 +2161,7 @@ _0808A1B4:
 	adds r1, r6, 0
 	movs r2, 0x10
 	movs r3, 0x49
-	bl box_print
+	bl AddTextPrinterParameterized3
 	str r5, [sp]
 	str r4, [sp, 0x4]
 	add r1, sp, 0xC
@@ -2170,7 +2170,7 @@ _0808A1B4:
 	adds r1, r6, 0
 	adds r2, r7, 0
 	movs r3, 0x49
-	bl box_print
+	bl AddTextPrinterParameterized3
 	str r5, [sp]
 	str r4, [sp, 0x4]
 	ldr r0, _0808A228 @ =gUnknown_8419CF7
@@ -2179,7 +2179,7 @@ _0808A1B4:
 	adds r1, r6, 0
 	movs r2, 0x8A
 	movs r3, 0x49
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0808A212:
 	add sp, 0x18
 	pop {r4-r7}
@@ -2258,7 +2258,7 @@ _0808A264:
 	movs r0, 0x1
 	movs r2, 0x14
 	movs r3, 0x58
-	bl box_print
+	bl AddTextPrinterParameterized3
 	b _0808A2F4
 	.align 2, 0
 _0808A2B0: .4byte gSaveBlock2Ptr
@@ -2284,7 +2284,7 @@ _0808A2D8:
 	movs r0, 0x1
 	movs r2, 0x10
 	movs r3, 0x59
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0808A2F4:
 	add r0, sp, 0xC
 	adds r1, r5, 0
@@ -2316,7 +2316,7 @@ _0808A2F4:
 	str r1, [sp, 0x8]
 	movs r0, 0x1
 	mov r1, r10
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r1, _0808A3C0 @ =gUnknown_83CD932
 	mov r2, r9
 	ldr r4, [r2]
@@ -2338,7 +2338,7 @@ _0808A2F4:
 	str r0, [sp, 0x8]
 	movs r0, 0x1
 	mov r1, r10
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add r0, sp, 0xC
 	adds r1, r7, 0
 	movs r2, 0x2
@@ -2360,7 +2360,7 @@ _0808A2F4:
 	str r1, [sp, 0x8]
 	movs r0, 0x1
 	mov r1, r10
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0x14
 	pop {r3-r5}
 	mov r8, r3
@@ -2412,7 +2412,7 @@ sub_808A3D0: @ 808A3D0
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r2, 0xA
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r1, [r7]
 	adds r1, 0x19
 	movs r0, 0x2
@@ -2433,7 +2433,7 @@ sub_808A3D0: @ 808A3D0
 	str r1, [sp, 0x8]
 	movs r0, 0x1
 	movs r1, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r0, _0808A4A4 @ =gUnknown_83CD93A
 	mov r8, r0
 	ldr r1, [r7]
@@ -2448,7 +2448,7 @@ sub_808A3D0: @ 808A3D0
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r2, 0xA
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r1, [r7]
 	adds r1, 0x33
 	movs r0, 0x2
@@ -2469,7 +2469,7 @@ sub_808A3D0: @ 808A3D0
 	str r1, [sp, 0x8]
 	movs r0, 0x1
 	movs r1, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0808A486:
 	add sp, 0xC
 	pop {r3}
@@ -2553,7 +2553,7 @@ sub_808A4FC: @ 808A4FC
 	adds r0, 0x4D
 	str r0, [sp, 0x8]
 	movs r0, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	b _0808A59C
 	.align 2, 0
 _0808A538: .4byte gUnknown_20397A4
@@ -2597,7 +2597,7 @@ _0808A550:
 	str r4, [sp, 0x8]
 	movs r0, 0x1
 	adds r1, r5, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0808A59C:
 	add sp, 0xC
 	pop {r4-r6}
@@ -2708,7 +2708,7 @@ sub_808A654: @ 808A654
 	movs r0, 0x1
 	adds r1, r5, 0
 	movs r3, 0x23
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r0, _0808A6C4 @ =gUnknown_83CD8E3
 	str r0, [sp]
 	str r4, [sp, 0x4]
@@ -2719,7 +2719,7 @@ sub_808A654: @ 808A654
 	adds r1, r5, 0
 	movs r2, 0xA4
 	movs r3, 0x23
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0808A6A2:
 	add sp, 0xC
 	pop {r4-r6}
@@ -2830,7 +2830,7 @@ sub_808A760: @ 808A760
 	movs r0, 0x1
 	adds r1, r6, 0
 	movs r3, 0x33
-	bl box_print
+	bl AddTextPrinterParameterized3
 	str r5, [sp]
 	str r4, [sp, 0x4]
 	ldr r0, [r7]
@@ -2841,7 +2841,7 @@ sub_808A760: @ 808A760
 	adds r1, r6, 0
 	movs r2, 0x82
 	movs r3, 0x33
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r5, _0808A804 @ =gUnknown_83CD8E3
 	str r5, [sp]
 	str r4, [sp, 0x4]
@@ -2853,7 +2853,7 @@ sub_808A760: @ 808A760
 	adds r1, r6, 0
 	movs r2, 0x90
 	movs r3, 0x33
-	bl box_print
+	bl AddTextPrinterParameterized3
 	str r5, [sp]
 	str r4, [sp, 0x4]
 	ldr r0, [r7]
@@ -2864,7 +2864,7 @@ sub_808A760: @ 808A760
 	adds r1, r6, 0
 	movs r2, 0xC0
 	movs r3, 0x33
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0808A7E2:
 	add sp, 0xC
 	pop {r4-r7}
@@ -2943,7 +2943,7 @@ sub_808A854: @ 808A854
 	movs r0, 0x1
 	adds r1, r5, 0
 	movs r3, 0x43
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r0, _0808A8C8 @ =gUnknown_83CD8E3
 	str r0, [sp]
 	str r4, [sp, 0x4]
@@ -2955,7 +2955,7 @@ sub_808A854: @ 808A854
 	adds r1, r5, 0
 	movs r2, 0xBA
 	movs r3, 0x43
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0808A8A6:
 	add sp, 0xC
 	pop {r4-r6}
@@ -3042,7 +3042,7 @@ sub_808A91C: @ 808A91C
 	movs r0, 0x1
 	adds r1, r5, 0
 	movs r3, 0x63
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r0, _0808A99C @ =gUnknown_83CD8E3
 	str r0, [sp]
 	str r4, [sp, 0x4]
@@ -3054,7 +3054,7 @@ sub_808A91C: @ 808A91C
 	adds r1, r5, 0
 	movs r2, 0xBA
 	movs r3, 0x63
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0808A97A:
 	add sp, 0xC
 	pop {r4-r6}
@@ -3140,7 +3140,7 @@ sub_808A9F0: @ 808A9F0
 	movs r0, 0x1
 	adds r1, r5, 0
 	movs r3, 0x53
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r0, _0808AA70 @ =gUnknown_83CD8E3
 	str r0, [sp]
 	str r4, [sp, 0x4]
@@ -3152,7 +3152,7 @@ sub_808A9F0: @ 808A9F0
 	adds r1, r5, 0
 	movs r2, 0xBA
 	movs r3, 0x53
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0808AA4C:
 	add sp, 0xC
 	pop {r4-r6}

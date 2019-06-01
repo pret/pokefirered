@@ -7823,7 +7823,7 @@ _08100E0A:
 	str r0, [sp, 0x8]
 	mov r0, r12
 	adds r2, r7, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0x10
 	pop {r3,r4}
 	mov r8, r3

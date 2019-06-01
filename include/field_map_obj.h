@@ -48,7 +48,7 @@ void SpawnFieldObjectsInView(s16, s16);
 u8 sprite_new(u8, u8, s16, s16, u8, u8);
 u8 AddPseudoFieldObject(u16, void (*)(struct Sprite *), s16, s16, u8);
 u8 show_sprite(u8, u8, u8);
-u8 SpawnSpecialFieldObjectParametrized(u8, u8, u8, s16, s16, u8);
+u8 SpawnSpecialFieldObjectParameterized(u8, u8, u8, s16, s16, u8);
 u8 SpawnSpecialFieldObject(struct MapObjectTemplate *);
 void sub_8093038(s16, s16, s16 *, s16 *);
 void CameraObjectReset1(void);

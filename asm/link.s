@@ -3387,7 +3387,7 @@ sub_800AE1C: @ 800AE1C
 	movs r1, 0x3
 	movs r2, 0x2
 	movs r3, 0x5
-	bl box_print
+	bl AddTextPrinterParameterized3
 	str r4, [sp]
 	str r5, [sp, 0x4]
 	ldr r0, _0800AECC @ =gUnknown_841DF05
@@ -3396,7 +3396,7 @@ sub_800AE1C: @ 800AE1C
 	movs r1, 0x3
 	movs r2, 0x2
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0
 	bl PutWindowTilemap
 	movs r0, 0x2
@@ -3444,7 +3444,7 @@ sub_800AED0: @ 800AED0
 	movs r1, 0x3
 	movs r2, 0x2
 	movs r3, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0x2
@@ -3522,7 +3522,7 @@ _0800AF7A:
 	movs r1, 0x3
 	movs r2, 0x2
 	movs r3, 0x14
-	bl box_print
+	bl AddTextPrinterParameterized3
 	b _0800AFC4
 	.align 2, 0
 _0800AF9C: .4byte gWirelessCommType
@@ -3541,7 +3541,7 @@ _0800AFA8:
 	movs r1, 0x3
 	movs r2, 0x2
 	movs r3, 0x14
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0800AFC4:
 	ldr r0, _0800B004 @ =gMain
 	movs r2, 0x87

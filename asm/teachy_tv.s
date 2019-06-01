@@ -5,62 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_815AEE8
-sub_815AEE8: @ 815AEE8
-	push {r4,r5,lr}
-	ldr r4, _0815AF48 @ =gMultiuseListMenuTemplate
-	adds r1, r4, 0
-	ldr r0, _0815AF4C @ =gUnknown_8479368
-	ldm r0!, {r2,r3,r5}
-	stm r1!, {r2,r3,r5}
-	ldm r0!, {r2,r3,r5}
-	stm r1!, {r2,r3,r5}
-	movs r0, 0x1
-	strb r0, [r4, 0x10]
-	ldr r0, _0815AF50 @ =sub_815AFD8
-	str r0, [r4, 0x4]
-	movs r0, 0xB6
-	lsls r0, 1
-	movs r1, 0x1
-	bl CheckBagHasItem
-	lsls r0, 24
-	cmp r0, 0
-	bne _0815AF30
-	ldr r0, _0815AF54 @ =gUnknown_8479340
-	str r0, [r4]
-	movs r0, 0x5
-	strh r0, [r4, 0xC]
-	strh r0, [r4, 0xE]
-	ldrb r2, [r4, 0x14]
-	lsls r1, r2, 28
-	lsrs r1, 28
-	adds r1, 0x8
-	movs r0, 0xF
-	ands r1, r0
-	movs r0, 0x10
-	negs r0, r0
-	ands r0, r2
-	orrs r0, r1
-	strb r0, [r4, 0x14]
-_0815AF30:
-	ldr r0, _0815AF58 @ =gTeachyTV_StaticResources
-	ldrh r1, [r0, 0x6]
-	ldrh r2, [r0, 0x8]
-	adds r0, r4, 0
-	bl ListMenuInit
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0815AF48: .4byte gMultiuseListMenuTemplate
-_0815AF4C: .4byte gUnknown_8479368
-_0815AF50: .4byte sub_815AFD8
-_0815AF54: .4byte gUnknown_8479340
-_0815AF58: .4byte gTeachyTV_StaticResources
-	thumb_func_end sub_815AEE8
-
 	thumb_func_start sub_815AF5C
 sub_815AF5C: @ 815AF5C
 	push {lr}
@@ -125,8 +69,8 @@ _0815AFD0: .4byte gUnknown_203F450
 _0815AFD4: .4byte 0x00004007
 	thumb_func_end sub_815AFAC
 
-	thumb_func_start sub_815AFD8
-sub_815AFD8: @ 815AFD8
+	thumb_func_start TeachyTvAudioByInput
+TeachyTvAudioByInput: @ 815AFD8
 	push {lr}
 	lsls r1, 24
 	lsrs r1, 24
@@ -137,7 +81,7 @@ sub_815AFD8: @ 815AFD8
 _0815AFE8:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_815AFD8
+	thumb_func_end TeachyTvAudioByInput
 
 	thumb_func_start TeachyTvInitIo
 TeachyTvInitIo: @ 815AFEC
@@ -1365,7 +1309,7 @@ _0815B94C:
 	movs r4, 0
 	strh r4, [r5, 0x4]
 	strh r4, [r5, 0x6]
-	bl sub_815AEE8
+	bl TeachyTvSetupWindow
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5]

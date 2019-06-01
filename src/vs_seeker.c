@@ -24,6 +24,8 @@
 #include "unk_810c3a4.h"
 #include "constants/movement_commands.h"
 #include "vs_seeker.h"
+#include "item.h"
+#include "constants/items.h" 
 
 typedef enum
 {
@@ -635,6 +637,7 @@ void sub_810C444(void)
 #ifdef NONMATCHING
 bool8 sub_810C4EC(void)
 {
+    s8 mask;
     if (CheckBagHasItem(ITEM_VS_SEEKER, 1) == TRUE)
     {
         if ((gSaveBlock1Ptr->trainerRematchStepCounter & 0xFF) < 100)
@@ -643,25 +646,23 @@ bool8 sub_810C4EC(void)
 
     if (FlagGet(0x801) == TRUE)
     {
-        u16 x;
-        do {
-            x = (gSaveBlock1Ptr->trainerRematchStepCounter >> 8) & 0xFF;
-        } while (0);
-        if (x < 100)
-        {
-            x++;
-            gSaveBlock1Ptr->trainerRematchStepCounter = ((u16)(x << 8)) | (gSaveBlock1Ptr->trainerRematchStepCounter & 0xFF);
+        register u8 x,y;
+        x = gSaveBlock1Ptr->trainerRematchStepCounter >> 8;
+        if (x > 99) {
+            mask = -1;
+            goto section_1;
         }
-        do {
-            x = (gSaveBlock1Ptr->trainerRematchStepCounter >> 8) & 0xFF;
-        } while (0);
-        if (x == 100)
-        {
-            FlagClear(0x801);
-            sub_810C640();
-            sub_810D0D0();
-            return TRUE;
-        }
+        y = ((u8)x + 1);
+        gSaveBlock1Ptr->trainerRematchStepCounter = (((gSaveBlock1Ptr->trainerRematchStepCounter) & (u8)0xFFFFFFFF) | (y << 8));
+        section_1:
+            x = (gSaveBlock1Ptr->trainerRematchStepCounter >> 8) & mask;
+            if (x == 100)
+            {
+                FlagClear(0x801);
+                sub_810C640();
+                sub_810D0D0();
+                return TRUE;
+            }
     }
 
     return FALSE;

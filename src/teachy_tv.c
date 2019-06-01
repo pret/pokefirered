@@ -22,8 +22,8 @@ typedef struct {
     void (*callback)();
     u8 mode;
     u8 param1;
-    u16 param2;
-    u16 param3;
+    u16 scrollOffset;
+    u16 selectedRow;
     u8 param4;
     u8 filler;
 } TeachyTv_s;
@@ -40,7 +40,7 @@ void TeachyTvCreateAndRenderRbox();
 extern void TeachyTvInitIo();
 extern u8 TeachyTvSetupObj();
 extern void TeachyTvConfigRboxAndObj(u8);
-extern u8 sub_815AEE8();
+u8 TeachyTvSetupWindow();
 extern void sub_815AF5C();
 extern void sub_815B094();
 void TeachyTvSetupBg();
@@ -79,14 +79,13 @@ void VblankHandlerTeachyTv()
 
 void sub_815ABC4(u8 mode, void (*cb)())
 {
-    // JZW: I'm sorry, but otherwise I can't make it match baserom
     TeachyTv_s *v3 = &gTeachyTV_StaticResources;
     u16 v4 = 0;
     v3->mode = mode;
     v3->callback = cb;
     if(!mode) {
-        v3->param2 = v4;
-        v3->param3 = v4;
+        v3->scrollOffset = v4;
+        v3->selectedRow = v4;
         v3->param1 = 0;
     }
     if(mode == 1)
@@ -117,6 +116,7 @@ void C2TeachyTvMainCallback()
     u32 x;
 
     state = gMain.state;
+    // tried several ways to reproduce the control flow, but all failed. Now using goto
     if ( state == 0 )
         goto section_0;
     else if ( state == 1 )
@@ -154,7 +154,7 @@ void C2TeachyTvMainCallback()
         else
         {
             taskId = CreateTask(sub_815B2C0, 0);
-            x = (u32)sub_815AEE8();
+            x = (u32)TeachyTvSetupWindow();
             gTasks[taskId].data[0] = (x << 24) >> 24;
             gTasks[taskId].data[1] = TeachyTvSetupObj();
             sub_815AF5C();
@@ -214,4 +214,29 @@ void TeachyTvCreateAndRenderRbox()
     PutWindowTilemap(0);
     PutWindowTilemap(1u);
     CopyWindowToVram(0, 2u);
+}
+
+extern struct ListMenuTemplate gUnknown_8479368;
+extern struct ListMenuItem gUnknown_8479340;
+extern u8 ListMenuInitInternal(struct ListMenuTemplate *, u16 scrollOffset, u16 selectedRow); 
+extern void TeachyTvAudioByInput(s32, bool8, struct ListMenu *);
+
+u8 TeachyTvSetupWindow()
+{
+    int hasItem;
+    gMultiuseListMenuTemplate = gUnknown_8479368;
+    gMultiuseListMenuTemplate.windowId = 1;
+    gMultiuseListMenuTemplate.moveCursorFunc = TeachyTvAudioByInput;
+    hasItem = (u8)CheckBagHasItem(ITEM_TM_CASE, 1u);
+    if ( !(v0 << 24) )
+    {
+        gMultiuseListMenuTemplate.items = &gUnknown_8479340;
+        gMultiuseListMenuTemplate.totalItems = 5;
+        gMultiuseListMenuTemplate.maxShowed = 5;
+        gMultiuseListMenuTemplate.upText_Y = (gMultiuseListMenuTemplate.upText_Y + 8) & 0xF;
+    }
+    return ListMenuInit(
+               &gMultiuseListMenuTemplate,
+               gTeachyTV_StaticResources.scrollOffset,
+               gTeachyTV_StaticResources.selectedRow);
 }

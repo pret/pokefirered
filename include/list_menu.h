@@ -9,8 +9,8 @@
 
 struct ListMenuItem
 {
-    const u8 *unk_00;
-    s32 unk_04;
+    const u8 *name;
+    s32 id;
 };
 
 struct ListMenu;
@@ -43,7 +43,7 @@ struct ListMenu {
     u16 selectedRow;
     u8 unk_1C;
     u8 unk_1D;
-    u8 unk_1E;
+    u8 taskId;
     u8 unk_1F;
 };
 

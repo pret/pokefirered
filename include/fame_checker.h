@@ -41,7 +41,7 @@ extern u8 gIconDescriptionBoxIsOpen;
 
 void ResetFameChecker(void);
 void FullyUnlockFameChecker(void);
-void UseFameChecker(MainCallback savedCallback);
+void UseFameChecker(void (*)());
 void SetFlavorTextFlagFromSpecialVars(void);
 void UpdatePickStateFromSpecialVar8005(void);
 

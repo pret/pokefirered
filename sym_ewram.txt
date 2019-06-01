@@ -1639,10 +1639,7 @@ gUnknown_203F440: @ 203F440
 	.space 0x4
 
 gTeachyTV_StaticResources: @ 203F444
-	.space 0x6
-
-gUnknown_203F44A: @ 203F44A
-	.space 0x6
+	.space 12
 
 gUnknown_203F450: @ 203F450
 	.space 0x4

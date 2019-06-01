@@ -158,7 +158,7 @@ _0810D4E8:
 	.4byte _0810D630
 	.4byte _0810D668
 _0810D53C:
-	bl sub_80BF768
+	bl VblankHblankHandlerSetZero
 	bl clear_scheduled_bg_copies_to_vram
 	b _0810D674
 _0810D546:
@@ -389,7 +389,7 @@ _0810D718: .4byte gUnknown_203ADCC
 	thumb_func_start sub_810D71C
 sub_810D71C: @ 810D71C
 	push {r4,r5,lr}
-	bl sub_80BF7C8
+	bl InitBgReg
 	ldr r5, _0810D77C @ =gUnknown_203ADC0
 	movs r4, 0x80
 	lsls r4, 4

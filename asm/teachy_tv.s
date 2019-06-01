@@ -5,382 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_815AB94
-sub_815AB94: @ 815AB94
-	push {lr}
-	bl RunTasks
-	bl AnimateSprites
-	bl BuildOamBuffer
-	bl do_scheduled_bg_tilemap_copies_to_vram
-	bl UpdatePaletteFade
-	pop {r0}
-	bx r0
-	thumb_func_end sub_815AB94
-
-	thumb_func_start sub_815ABB0
-sub_815ABB0: @ 815ABB0
-	push {lr}
-	bl LoadOam
-	bl ProcessSpriteCopyRequests
-	bl TransferPlttBuffer
-	pop {r0}
-	bx r0
-	thumb_func_end sub_815ABB0
-
-	thumb_func_start sub_815ABC4
-sub_815ABC4: @ 815ABC4
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	adds r2, r0, 0
-	ldr r3, _0815ABF4 @ =gTeachyTV_StaticResources
-	movs r4, 0
-	strb r2, [r3, 0x4]
-	str r1, [r3]
-	cmp r2, 0
-	bne _0815ABE0
-	movs r0, 0
-	strh r4, [r3, 0x6]
-	strh r4, [r3, 0x8]
-	strb r0, [r3, 0x5]
-_0815ABE0:
-	cmp r2, 0x1
-	bne _0815ABE6
-	strb r4, [r3, 0x4]
-_0815ABE6:
-	ldr r0, _0815ABF8 @ =sub_815AC2C
-	bl SetMainCallback2
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0815ABF4: .4byte gTeachyTV_StaticResources
-_0815ABF8: .4byte sub_815AC2C
-	thumb_func_end sub_815ABC4
-
-	thumb_func_start CB2_ReturnToTeachyTV
-CB2_ReturnToTeachyTV: @ 815ABFC
-	push {lr}
-	ldr r1, _0815AC10 @ =gTeachyTV_StaticResources
-	ldrb r0, [r1, 0x4]
-	cmp r0, 0x1
-	bne _0815AC14
-	ldr r1, [r1]
-	movs r0, 0x1
-	bl sub_815ABC4
-	b _0815AC1C
-	.align 2, 0
-_0815AC10: .4byte gTeachyTV_StaticResources
-_0815AC14:
-	ldr r1, [r1]
-	movs r0, 0x2
-	bl sub_815ABC4
-_0815AC1C:
-	pop {r0}
-	bx r0
-	thumb_func_end CB2_ReturnToTeachyTV
-
-	thumb_func_start sub_815AC20
-sub_815AC20: @ 815AC20
-	ldr r1, _0815AC28 @ =gTeachyTV_StaticResources
-	movs r0, 0x1
-	strb r0, [r1, 0x4]
-	bx lr
-	.align 2, 0
-_0815AC28: .4byte gTeachyTV_StaticResources
-	thumb_func_end sub_815AC20
-
-	thumb_func_start sub_815AC2C
-sub_815AC2C: @ 815AC2C
-	push {r4-r6,lr}
-	sub sp, 0x4
-	ldr r0, _0815AC44 @ =gMain
-	movs r1, 0x87
-	lsls r1, 3
-	adds r6, r0, r1
-	ldrb r5, [r6]
-	cmp r5, 0
-	beq _0815AC48
-	cmp r5, 0x1
-	beq _0815AC9C
-	b _0815AD6E
-	.align 2, 0
-_0815AC44: .4byte gMain
-_0815AC48:
-	ldr r4, _0815AC90 @ =gUnknown_203F450
-	ldr r0, _0815AC94 @ =0x00004008
-	bl AllocZeroed
-	str r0, [r4]
-	str r5, [r0]
-	ldr r1, _0815AC98 @ =0x00004006
-	adds r0, r1
-	strb r5, [r0]
-	ldr r0, [r4]
-	adds r1, 0x1
-	adds r0, r1
-	movs r1, 0xFF
-	strb r1, [r0]
-	bl sub_80BF768
-	bl clear_scheduled_bg_copies_to_vram
-	bl ScanlineEffect_Stop
-	bl FreeAllSpritePalettes
-	bl ResetPaletteFade
-	bl ResetSpriteData
-	bl ResetTasks
-	bl sub_815AD88
-	bl sub_815AE38
-	ldrb r0, [r6]
-	adds r0, 0x1
-	strb r0, [r6]
-	b _0815AD6E
-	.align 2, 0
-_0815AC90: .4byte gUnknown_203F450
-_0815AC94: .4byte 0x00004008
-_0815AC98: .4byte 0x00004006
-_0815AC9C:
-	bl free_temp_tile_data_buffers_if_possible
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _0815AD6E
-	bl sub_815AEB8
-	bl sub_815AFEC
-	ldr r0, _0815ACE0 @ =gTeachyTV_StaticResources
-	ldrb r0, [r0, 0x4]
-	cmp r0, 0x2
-	bne _0815ACEC
-	ldr r0, _0815ACE4 @ =sub_815BA54
-	movs r1, 0
-	bl CreateTask
-	lsls r0, 24
-	lsrs r5, r0, 24
-	bl sub_815B014
-	ldr r2, _0815ACE8 @ =gTasks
-	lsls r1, r5, 2
-	adds r1, r5
-	lsls r1, 3
-	adds r1, r2
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r1, 0xA]
-	adds r0, r5, 0
-	bl sub_815B118
-	b _0815AD26
-	.align 2, 0
-_0815ACE0: .4byte gTeachyTV_StaticResources
-_0815ACE4: .4byte sub_815BA54
-_0815ACE8: .4byte gTasks
-_0815ACEC:
-	ldr r0, _0815AD78 @ =sub_815B2C0
-	movs r1, 0
-	bl CreateTask
-	lsls r0, 24
-	lsrs r5, r0, 24
-	bl sub_815AEE8
-	ldr r1, _0815AD7C @ =gTasks
-	lsls r4, r5, 2
-	adds r4, r5
-	lsls r4, 3
-	adds r4, r1
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r4, 0x8]
-	bl sub_815B014
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r4, 0xA]
-	bl sub_815AF5C
-	movs r0, 0xAD
-	lsls r0, 1
-	bl PlayNewMapMusic
-	bl sub_815B094
-_0815AD26:
-	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
-	movs r0, 0x1
-	bl schedule_bg_copy_tilemap_to_vram
-	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
-	movs r0, 0x3
-	bl schedule_bg_copy_tilemap_to_vram
-	movs r0, 0x9
-	bl sub_812B1E0
-	movs r4, 0x1
-	negs r4, r4
-	adds r0, r4, 0
-	movs r1, 0x10
-	movs r2, 0
-	bl BlendPalettes
-	movs r0, 0
-	str r0, [sp]
-	adds r0, r4, 0
-	movs r1, 0
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	ldr r0, _0815AD80 @ =sub_815ABB0
-	bl SetVBlankCallback
-	ldr r0, _0815AD84 @ =sub_815AB94
-	bl SetMainCallback2
-_0815AD6E:
-	add sp, 0x4
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0815AD78: .4byte sub_815B2C0
-_0815AD7C: .4byte gTasks
-_0815AD80: .4byte sub_815ABB0
-_0815AD84: .4byte sub_815AB94
-	thumb_func_end sub_815AC2C
-
-	thumb_func_start sub_815AD88
-sub_815AD88: @ 815AD88
-	push {r4,lr}
-	bl sub_80BF7C8
-	movs r0, 0
-	bl ResetBgsAndClearDma3BusyFlags
-	ldr r1, _0815AE20 @ =gUnknown_84792E0
-	movs r0, 0
-	movs r2, 0x4
-	bl InitBgsFromTemplates
-	ldr r4, _0815AE24 @ =gUnknown_203F450
-	ldr r1, [r4]
-	adds r1, 0x4
-	movs r0, 0x1
-	bl SetBgTilemapBuffer
-	ldr r1, [r4]
-	ldr r0, _0815AE28 @ =0x00001004
-	adds r1, r0
-	movs r0, 0x2
-	bl SetBgTilemapBuffer
-	ldr r1, [r4]
-	ldr r0, _0815AE2C @ =0x00002004
-	adds r1, r0
-	movs r0, 0x3
-	bl SetBgTilemapBuffer
-	movs r1, 0xC1
-	lsls r1, 6
-	movs r0, 0
-	bl SetGpuReg
-	movs r0, 0
-	bl ShowBg
-	movs r0, 0x1
-	bl ShowBg
-	movs r0, 0x2
-	bl ShowBg
-	movs r0, 0x3
-	bl ShowBg
-	movs r1, 0x80
-	lsls r1, 5
-	movs r0, 0x3
-	movs r2, 0x2
-	bl ChangeBgX
-	movs r1, 0xA0
-	lsls r1, 6
-	movs r0, 0x3
-	movs r2, 0x1
-	bl ChangeBgY
-	ldr r0, [r4]
-	ldr r1, _0815AE30 @ =0x00004004
-	adds r0, r1
-	movs r1, 0
-	strb r1, [r0]
-	ldr r0, [r4]
-	ldr r1, _0815AE34 @ =0x00004005
-	adds r0, r1
-	movs r1, 0x3
-	strb r1, [r0]
-	movs r0, 0x50
-	movs r1, 0
-	bl SetGpuReg
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0815AE20: .4byte gUnknown_84792E0
-_0815AE24: .4byte gUnknown_203F450
-_0815AE28: .4byte 0x00001004
-_0815AE2C: .4byte 0x00002004
-_0815AE30: .4byte 0x00004004
-_0815AE34: .4byte 0x00004005
-	thumb_func_end sub_815AD88
-
-	thumb_func_start sub_815AE38
-sub_815AE38: @ 815AE38
-	push {r4,lr}
-	sub sp, 0x8
-	movs r4, 0
-	add r0, sp, 0x4
-	strh r4, [r0]
-	bl reset_temp_tile_data_buffers
-	ldr r1, _0815AE98 @ =gUnknown_8E86240
-	str r4, [sp]
-	movs r0, 0x1
-	movs r2, 0
-	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
-	ldr r0, _0815AE9C @ =gUnknown_8E86BE8
-	ldr r4, _0815AEA0 @ =gUnknown_203F450
-	ldr r1, [r4]
-	adds r1, 0x4
-	bl LZDecompressWram
-	ldr r0, _0815AEA4 @ =gUnknown_8E86D6C
-	ldr r1, [r4]
-	ldr r2, _0815AEA8 @ =0x00003004
-	adds r1, r2
-	bl LZDecompressWram
-	ldr r0, _0815AEAC @ =gUnknown_8E86F98
-	movs r1, 0
-	movs r2, 0x80
-	bl LoadCompressedPalette
-	add r0, sp, 0x4
-	movs r1, 0
-	movs r2, 0x2
-	bl LoadPalette
-	ldr r0, _0815AEB0 @ =gUnknown_83A5348
-	bl LoadSpritePalette
-	ldr r0, [r4]
-	ldr r1, _0815AEB4 @ =0x00002004
-	adds r0, r1
-	bl sub_815BD80
-	add sp, 0x8
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0815AE98: .4byte gUnknown_8E86240
-_0815AE9C: .4byte gUnknown_8E86BE8
-_0815AEA0: .4byte gUnknown_203F450
-_0815AEA4: .4byte gUnknown_8E86D6C
-_0815AEA8: .4byte 0x00003004
-_0815AEAC: .4byte gUnknown_8E86F98
-_0815AEB0: .4byte gUnknown_83A5348
-_0815AEB4: .4byte 0x00002004
-	thumb_func_end sub_815AE38
-
-	thumb_func_start sub_815AEB8
-sub_815AEB8: @ 815AEB8
-	push {lr}
-	ldr r0, _0815AEE4 @ =gUnknown_84792F0
-	bl InitWindows
-	bl DeactivateAllTextPrinters
-	movs r0, 0
-	movs r1, 0xCC
-	bl FillWindowPixelBuffer
-	movs r0, 0
-	bl PutWindowTilemap
-	movs r0, 0x1
-	bl PutWindowTilemap
-	movs r0, 0
-	movs r1, 0x2
-	bl CopyWindowToVram
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0815AEE4: .4byte gUnknown_84792F0
-	thumb_func_end sub_815AEB8
-
 	thumb_func_start sub_815AEE8
 sub_815AEE8: @ 815AEE8
 	push {r4,r5,lr}
@@ -459,7 +83,7 @@ _0815AF7C: .4byte gUnknown_203F450
 _0815AF80: .4byte 0x00004007
 _0815AF84:
 	ldr r0, _0815AF9C @ =gUnknown_8479380
-	ldr r1, _0815AFA0 @ =gUnknown_203F44A
+	ldr r1, _0815AFA0 @ =gTeachyTV_StaticResources+6
 	bl AddScrollIndicatorArrowPair
 	ldr r1, _0815AFA4 @ =gUnknown_203F450
 	ldr r1, [r1]
@@ -471,7 +95,7 @@ _0815AF96:
 	bx r0
 	.align 2, 0
 _0815AF9C: .4byte gUnknown_8479380
-_0815AFA0: .4byte gUnknown_203F44A
+_0815AFA0: .4byte gTeachyTV_StaticResources+6
 _0815AFA4: .4byte gUnknown_203F450
 _0815AFA8: .4byte 0x00004007
 	thumb_func_end sub_815AF5C
@@ -515,8 +139,8 @@ _0815AFE8:
 	bx r0
 	thumb_func_end sub_815AFD8
 
-	thumb_func_start sub_815AFEC
-sub_815AFEC: @ 815AFEC
+	thumb_func_start TeachyTvInitIo
+TeachyTvInitIo: @ 815AFEC
 	push {lr}
 	movs r0, 0x48
 	movs r1, 0x3F
@@ -532,10 +156,10 @@ sub_815AFEC: @ 815AFEC
 	bl SetGpuReg
 	pop {r0}
 	bx r0
-	thumb_func_end sub_815AFEC
+	thumb_func_end TeachyTvInitIo
 
-	thumb_func_start sub_815B014
-sub_815B014: @ 815B014
+	thumb_func_start TeachyTvSetupObj
+TeachyTvSetupObj: @ 815B014
 	push {lr}
 	sub sp, 0x4
 	ldr r1, _0815B054 @ =SpriteCallbackDummy
@@ -570,7 +194,7 @@ sub_815B014: @ 815B014
 	.align 2, 0
 _0815B054: .4byte SpriteCallbackDummy
 _0815B058: .4byte gSprites
-	thumb_func_end sub_815B014
+	thumb_func_end TeachyTvSetupObj
 
 	thumb_func_start sub_815B05C
 sub_815B05C: @ 815B05C
@@ -673,8 +297,8 @@ _0815B0DE:
 _0815B114: .4byte 0x0000301f
 	thumb_func_end sub_815B0CC
 
-	thumb_func_start sub_815B118
-sub_815B118: @ 815B118
+	thumb_func_start TeachyTvConfigRboxAndObj
+TeachyTvConfigRboxAndObj: @ 815B118
 	push {r4-r7,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -761,7 +385,7 @@ _0815B1B8:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_815B118
+	thumb_func_end TeachyTvConfigRboxAndObj
 
 	thumb_func_start sub_815B1DC
 sub_815B1DC: @ 815B1DC
@@ -903,7 +527,7 @@ sub_815B2C0: @ 815B2C0
 	bl ListMenuHandleInput
 	adds r5, r0, 0
 	ldrb r0, [r6]
-	ldr r4, _0815B324 @ =gUnknown_203F44A
+	ldr r4, _0815B324 @ =gTeachyTV_StaticResources+6
 	adds r2, r4, 0x2
 	adds r1, r4, 0
 	bl get_coro_args_x18_x1A
@@ -930,7 +554,7 @@ _0815B30A:
 	.align 2, 0
 _0815B31C: .4byte gTasks+0x8
 _0815B320: .4byte gPaletteFade
-_0815B324: .4byte gUnknown_203F44A
+_0815B324: .4byte gTeachyTV_StaticResources+6
 _0815B328: .4byte gMain
 _0815B32C: .4byte UseFameCheckerFromMenu
 _0815B330:
@@ -1854,8 +1478,8 @@ _0815BA4E:
 	bx r0
 	thumb_func_end sub_815BA30
 
-	thumb_func_start sub_815BA54
-sub_815BA54: @ 815BA54
+	thumb_func_start TeachyTvTaskFunction
+TeachyTvTaskFunction: @ 815BA54
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1891,7 +1515,7 @@ _0815BA90: .4byte gPaletteFade
 _0815BA94: .4byte gUnknown_8479390
 _0815BA98: .4byte gTeachyTV_StaticResources
 _0815BA9C: .4byte sub_815B4EC
-	thumb_func_end sub_815BA54
+	thumb_func_end TeachyTvTaskFunction
 
 	thumb_func_start sub_815BAA0
 sub_815BAA0: @ 815BAA0

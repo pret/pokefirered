@@ -515,7 +515,7 @@ _0809AEA0: .4byte gTasks
 _0809AEA4: .4byte sub_809AE00
 _0809AEA8: .4byte sub_809ADE4
 _0809AEAC:
-	bl sub_80BF768
+	bl VblankHblankHandlerSetZero
 	str r4, [sp, 0x8]
 	movs r1, 0xE0
 	lsls r1, 19

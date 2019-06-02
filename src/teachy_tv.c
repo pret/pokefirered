@@ -15,6 +15,8 @@
 #include "window.h"
 #include "list_menu.h"
 #include "item.h"
+#include "menu_indicators.h"
+#include "field_map_obj.h"
 #include "constants/songs.h"
 #include "constants/items.h"
 
@@ -37,12 +39,12 @@ void sub_815ABC4(u8 mode, void (*cb)());
 void CB2_ReturnToTeachyTV();
 extern void sub_815AC20();
 void TeachyTvCreateAndRenderRbox();
-extern void TeachyTvInitIo();
-extern u8 TeachyTvSetupObj();
+void TeachyTvInitIo();
+u8 TeachyTvSetupObjEventAndOam();
 extern void TeachyTvConfigRboxAndObj(u8);
 u8 TeachyTvSetupWindow();
-extern void sub_815AF5C();
-extern void sub_815B094();
+void TeachyTvSetupScrollIndicatorArrowPair();
+void TeachyTvSetWindowRegs();
 void TeachyTvSetupBg();
 void TeachyTvLoadGraphic();
 extern void TeachyTvTaskFunction(u8);
@@ -148,7 +150,7 @@ void C2TeachyTvMainCallback()
         if ( gTeachyTV_StaticResources.mode == 2 )
         {
             taskId = CreateTask(TeachyTvTaskFunction, 0);
-            gTasks[taskId].data[1] = TeachyTvSetupObj();
+            gTasks[taskId].data[1] = TeachyTvSetupObjEventAndOam();
             TeachyTvConfigRboxAndObj(taskId);
         }
         else
@@ -156,10 +158,10 @@ void C2TeachyTvMainCallback()
             taskId = CreateTask(sub_815B2C0, 0);
             x = (u32)TeachyTvSetupWindow();
             gTasks[taskId].data[0] = (x << 24) >> 24;
-            gTasks[taskId].data[1] = TeachyTvSetupObj();
-            sub_815AF5C();
+            gTasks[taskId].data[1] = TeachyTvSetupObjEventAndOam();
+            TeachyTvSetupScrollIndicatorArrowPair();
             PlayNewMapMusic(BGM_FRLG_TEACHY_TV);
-            sub_815B094();
+            TeachyTvSetWindowRegs();
         }
         schedule_bg_copy_tilemap_to_vram(0);
         schedule_bg_copy_tilemap_to_vram(1u);
@@ -219,7 +221,7 @@ void TeachyTvCreateAndRenderRbox()
 extern struct ListMenuTemplate gUnknown_8479368;
 extern struct ListMenuItem gUnknown_8479340;
 extern u8 ListMenuInitInternal(struct ListMenuTemplate *, u16 scrollOffset, u16 selectedRow); 
-extern void TeachyTvAudioByInput(s32, bool8, struct ListMenu *);
+void TeachyTvAudioByInput(s32, bool8, struct ListMenu *);
 
 u8 TeachyTvSetupWindow()
 {
@@ -228,7 +230,7 @@ u8 TeachyTvSetupWindow()
     gMultiuseListMenuTemplate.windowId = 1;
     gMultiuseListMenuTemplate.moveCursorFunc = TeachyTvAudioByInput;
     hasItem = (u8)CheckBagHasItem(ITEM_TM_CASE, 1u);
-    if ( !(v0 << 24) )
+    if ( !(hasItem << 24) )
     {
         gMultiuseListMenuTemplate.items = &gUnknown_8479340;
         gMultiuseListMenuTemplate.totalItems = 5;
@@ -240,3 +242,77 @@ u8 TeachyTvSetupWindow()
                gTeachyTV_StaticResources.scrollOffset,
                gTeachyTV_StaticResources.selectedRow);
 }
+
+extern const struct ScrollArrowsTemplate gUnknown_8479380;
+
+void TeachyTvSetupScrollIndicatorArrowPair()
+{
+    int hasItem;
+    hasItem = (u8)CheckBagHasItem(ITEM_TM_CASE, 1u);
+    if ( ! hasItem << 24 ) {
+        u8 * temp = (u8 *)gUnknown_203F450;
+        *((u8 *)temp + 0x4007) = 0xFF;
+    }
+
+    else {
+        u8 *temp, res;
+        res = AddScrollIndicatorArrowPair(
+                                                    &gUnknown_8479380,
+                                                    &(gTeachyTV_StaticResources.scrollOffset));
+        temp = (u8 *)gUnknown_203F450;
+        *((u8 *)temp + 0x4007) = res;
+        }
+}
+
+void TeachyTvRemoveScrollIndicatorArrowPair()
+{
+    u8 *temp = ((u8*)gUnknown_203F450 + 0x4007);
+    if ( *temp != 0xFF )
+    {
+        RemoveScrollIndicatorArrowPair(*temp);
+        *((u8*)gUnknown_203F450 + 0x4007) = 0xFF;
+    }
+}
+
+void TeachyTvAudioByInput(s32 notUsed, bool8 play, struct ListMenu *notUsedAlt)
+{
+    if ( play != 1 )
+        PlaySE(SE_SELECT);
+}
+
+void TeachyTvInitIo()
+{
+    SetGpuReg(0x48u, 0x3Fu);
+    SetGpuReg(0x4Au, 0x1Fu);
+    SetGpuReg(0x50u, 0xCCu);
+    SetGpuReg(0x54u, 5u);
+}
+
+u8 TeachyTvSetupObjEventAndOam()
+{
+    u8 temp = AddPseudoEventObject(90, SpriteCallbackDummy, 0, 0, 8);
+    gSprites[temp].oam.priority = 2;
+    gSprites[temp].invisible = 1;
+    return temp;
+}
+
+void TeachyTvSetSpriteCoordsAndSwitchFrame(u8 objId, u16 x, u16 y, u8 frame)
+{
+    gSprites[objId].pos2.x = x;
+    gSprites[objId].pos2.y = y;
+    gSprites[objId].invisible = 0;
+    StartSpriteAnim(&gSprites[objId], frame);
+}
+
+void TeachyTvSetWindowRegs()
+{
+    SetGpuReg(0x44u, 0xC64u);
+    SetGpuReg(0x40u, 0x1CD4u);
+}
+
+void TeachyTvClearWindowRegs()
+{
+    SetGpuReg(0x44u, 0);
+    SetGpuReg(0x40u, 0);
+}
+

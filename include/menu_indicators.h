@@ -7,7 +7,7 @@
 
 // Exported RAM declarations
 
-struct ScrollIndicatorArrowPairTemplate
+struct ScrollArrowsTemplate
 {
     u8 unk_00;
     u8 unk_01;
@@ -25,7 +25,7 @@ struct ScrollIndicatorArrowPairTemplate
 
 // Exported ROM declarations
 u8 AddScrollIndicatorArrowPairParametrized(u8, u8, u8, u8, s32, u16, u16, u16 *);
-u8 AddScrollIndicatorArrowPair(const struct ScrollIndicatorArrowPairTemplate * template, u16 * a1);
+u8 AddScrollIndicatorArrowPair(const struct ScrollArrowsTemplate * template, u16 * a1);
 void RemoveScrollIndicatorArrowPair(u8);
 
 #endif //GUARD_MENU_INDICATORS_H

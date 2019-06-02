@@ -5,201 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_815AF5C
-sub_815AF5C: @ 815AF5C
-	push {lr}
-	movs r0, 0xB6
-	lsls r0, 1
-	movs r1, 0x1
-	bl CheckBagHasItem
-	lsls r0, 24
-	cmp r0, 0
-	bne _0815AF84
-	ldr r0, _0815AF7C @ =gUnknown_203F450
-	ldr r0, [r0]
-	ldr r1, _0815AF80 @ =0x00004007
-	adds r0, r1
-	movs r1, 0xFF
-	strb r1, [r0]
-	b _0815AF96
-	.align 2, 0
-_0815AF7C: .4byte gUnknown_203F450
-_0815AF80: .4byte 0x00004007
-_0815AF84:
-	ldr r0, _0815AF9C @ =gUnknown_8479380
-	ldr r1, _0815AFA0 @ =gTeachyTV_StaticResources+6
-	bl AddScrollIndicatorArrowPair
-	ldr r1, _0815AFA4 @ =gUnknown_203F450
-	ldr r1, [r1]
-	ldr r2, _0815AFA8 @ =0x00004007
-	adds r1, r2
-	strb r0, [r1]
-_0815AF96:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0815AF9C: .4byte gUnknown_8479380
-_0815AFA0: .4byte gTeachyTV_StaticResources+6
-_0815AFA4: .4byte gUnknown_203F450
-_0815AFA8: .4byte 0x00004007
-	thumb_func_end sub_815AF5C
-
-	thumb_func_start sub_815AFAC
-sub_815AFAC: @ 815AFAC
-	push {r4,lr}
-	ldr r4, _0815AFD0 @ =gUnknown_203F450
-	ldr r0, [r4]
-	ldr r2, _0815AFD4 @ =0x00004007
-	adds r1, r0, r2
-	ldrb r0, [r1]
-	cmp r0, 0xFF
-	beq _0815AFCA
-	bl RemoveScrollIndicatorArrowPair
-	ldr r0, [r4]
-	ldr r1, _0815AFD4 @ =0x00004007
-	adds r0, r1
-	movs r1, 0xFF
-	strb r1, [r0]
-_0815AFCA:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0815AFD0: .4byte gUnknown_203F450
-_0815AFD4: .4byte 0x00004007
-	thumb_func_end sub_815AFAC
-
-	thumb_func_start TeachyTvAudioByInput
-TeachyTvAudioByInput: @ 815AFD8
-	push {lr}
-	lsls r1, 24
-	lsrs r1, 24
-	cmp r1, 0x1
-	beq _0815AFE8
-	movs r0, 0x5
-	bl PlaySE
-_0815AFE8:
-	pop {r0}
-	bx r0
-	thumb_func_end TeachyTvAudioByInput
-
-	thumb_func_start TeachyTvInitIo
-TeachyTvInitIo: @ 815AFEC
-	push {lr}
-	movs r0, 0x48
-	movs r1, 0x3F
-	bl SetGpuReg
-	movs r0, 0x4A
-	movs r1, 0x1F
-	bl SetGpuReg
-	movs r0, 0x50
-	movs r1, 0xCC
-	bl SetGpuReg
-	movs r0, 0x54
-	movs r1, 0x5
-	bl SetGpuReg
-	pop {r0}
-	bx r0
-	thumb_func_end TeachyTvInitIo
-
-	thumb_func_start TeachyTvSetupObj
-TeachyTvSetupObj: @ 815B014
-	push {lr}
-	sub sp, 0x4
-	ldr r1, _0815B054 @ =SpriteCallbackDummy
-	movs r0, 0x8
-	str r0, [sp]
-	movs r0, 0x5A
-	movs r2, 0
-	movs r3, 0
-	bl AddPseudoFieldObject
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, _0815B058 @ =gSprites
-	lsls r2, r0, 4
-	adds r2, r0
-	lsls r2, 2
-	adds r2, r1
-	ldrb r3, [r2, 0x5]
-	movs r1, 0xD
-	negs r1, r1
-	ands r1, r3
-	movs r3, 0x8
-	orrs r1, r3
-	strb r1, [r2, 0x5]
-	adds r2, 0x3E
-	ldrb r1, [r2]
-	movs r3, 0x4
-	orrs r1, r3
-	strb r1, [r2]
-	add sp, 0x4
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0815B054: .4byte SpriteCallbackDummy
-_0815B058: .4byte gSprites
-	thumb_func_end TeachyTvSetupObj
-
-	thumb_func_start sub_815B05C
-sub_815B05C: @ 815B05C
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	lsls r3, 24
-	lsrs r3, 24
-	ldr r5, _0815B090 @ =gSprites
-	lsls r0, r4, 4
-	adds r0, r4
-	lsls r0, 2
-	adds r0, r5
-	strh r1, [r0, 0x24]
-	strh r2, [r0, 0x26]
-	adds r4, r0, 0
-	adds r4, 0x3E
-	ldrb r2, [r4]
-	movs r1, 0x5
-	negs r1, r1
-	ands r1, r2
-	strb r1, [r4]
-	adds r1, r3, 0
-	bl StartSpriteAnim
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0815B090: .4byte gSprites
-	thumb_func_end sub_815B05C
-
-	thumb_func_start sub_815B094
-sub_815B094: @ 815B094
-	push {lr}
-	ldr r1, _0815B0AC @ =0x00000c64
-	movs r0, 0x44
-	bl SetGpuReg
-	ldr r1, _0815B0B0 @ =0x00001cd4
-	movs r0, 0x40
-	bl SetGpuReg
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0815B0AC: .4byte 0x00000c64
-_0815B0B0: .4byte 0x00001cd4
-	thumb_func_end sub_815B094
-
-	thumb_func_start sub_815B0B4
-sub_815B0B4: @ 815B0B4
-	push {lr}
-	movs r0, 0x44
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x40
-	movs r1, 0
-	bl SetGpuReg
-	pop {r0}
-	bx r0
-	thumb_func_end sub_815B0B4
-
 	thumb_func_start sub_815B0CC
 sub_815B0CC: @ 815B0CC
 	push {r4-r7,lr}
@@ -261,7 +66,7 @@ TeachyTvConfigRboxAndObj: @ 815B118
 	adds r7, r0, r1
 	movs r0, 0x1
 	bl ClearWindowTilemap
-	bl sub_815B0B4
+	bl TeachyTvClearWindowRegs
 	ldr r0, _0815B198 @ =gTeachyTV_StaticResources
 	ldrb r0, [r0, 0x5]
 	cmp r0, 0
@@ -272,7 +77,7 @@ TeachyTvConfigRboxAndObj: @ 815B118
 	movs r1, 0x78
 	movs r2, 0x38
 	movs r3, 0
-	bl sub_815B05C
+	bl TeachyTvSetSpriteCoordsAndSwitchFrame
 	movs r4, 0xC0
 	lsls r4, 6
 	movs r0, 0x3
@@ -311,7 +116,7 @@ _0815B1A8:
 	movs r1, 0x78
 	movs r2, 0x38
 	movs r3, 0
-	bl sub_815B05C
+	bl TeachyTvSetSpriteCoordsAndSwitchFrame
 _0815B1B8:
 	movs r0, 0
 	strh r0, [r5, 0x8]
@@ -517,12 +322,12 @@ _0815B33E:
 	adds r1, r2, 0x6
 	adds r2, 0x8
 	bl DestroyListMenu
-	bl sub_815B0B4
+	bl TeachyTvClearWindowRegs
 	movs r0, 0x1
 	bl ClearWindowTilemap
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
-	bl sub_815AFAC
+	bl TeachyTvRemoveScrollIndicatorArrowPair
 	strh r4, [r6, 0x6]
 	strh r4, [r6, 0x4]
 	ldr r1, _0815B384 @ =gTasks
@@ -578,7 +383,7 @@ sub_815B38C: @ 815B38C
 	movs r1, 0x8
 	movs r2, 0x38
 	movs r3, 0x7
-	bl sub_815B05C
+	bl TeachyTvSetSpriteCoordsAndSwitchFrame
 	movs r0, 0x2
 	bl schedule_bg_copy_tilemap_to_vram
 	movs r0, 0
@@ -752,7 +557,7 @@ sub_815B4EC: @ 815B4EC
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_815B05C
+	bl TeachyTvSetSpriteCoordsAndSwitchFrame
 	movs r0, 0
 	movs r1, 0xCC
 	bl FillWindowPixelBuffer
@@ -1320,8 +1125,8 @@ _0815B94C:
 	str r1, [r0]
 	movs r0, 0
 	bl PutWindowTilemap
-	bl sub_815AF5C
-	bl sub_815B094
+	bl TeachyTvSetupScrollIndicatorArrowPair
+	bl TeachyTvSetWindowRegs
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	movs r0, 0x3

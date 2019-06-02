@@ -2017,7 +2017,7 @@ _0809BA56:
 	str r0, [sp]
 	adds r0, r4, 0
 	ldr r1, _0809BAF4 @ =SpriteCallbackDummy
-	bl AddPseudoFieldObject
+	bl AddPseudoEventObject
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r2, r0, 4

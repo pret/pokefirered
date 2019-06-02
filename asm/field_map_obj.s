@@ -1550,8 +1550,8 @@ MakeObjectTemplateFromFieldObjectTemplate: @ 805E960
 	bx r0
 	thumb_func_end MakeObjectTemplateFromFieldObjectTemplate
 
-	thumb_func_start AddPseudoFieldObject
-AddPseudoFieldObject: @ 805E978
+	thumb_func_start AddPseudoEventObject
+AddPseudoEventObject: @ 805E978
 	push {r4-r6,lr}
 	sub sp, 0x1C
 	ldr r4, [sp, 0x2C]
@@ -1612,7 +1612,7 @@ _0805E9E4:
 	.align 2, 0
 _0805E9F0: .4byte 0x0000ffff
 _0805E9F4: .4byte gSprites
-	thumb_func_end AddPseudoFieldObject
+	thumb_func_end AddPseudoEventObject
 
 	thumb_func_start sprite_new
 sprite_new: @ 805E9F8

@@ -460,7 +460,7 @@ struct UnkStruct_203F3CC
     /*01cc*/ u8 filler_01CC[2];
     /*01ce*/ u8 unk_01CE[41];
     /*01f7*/ u8 unk_01F7[10][41];
-    /*0394*/ struct ScrollIndicatorArrowPairTemplate unk_0394;
+    /*0394*/ struct ScrollArrowsTemplate unk_0394;
     /*03a4*/ u8 buffer_03A4[0x1000];
 };
 
@@ -478,7 +478,7 @@ const struct WindowTemplate gUnknown_8468040[] = {
     {0, 1, 0, 28,  3, 15, 0x000},
     {2, 1, 3, 28, 20, 15, 0x000}
 };
-const struct ScrollIndicatorArrowPairTemplate gUnknown_8468050 = {
+const struct ScrollArrowsTemplate gUnknown_8468050 = {
     0x02, 0xe8, 0x18, 0x03, 0xe8, 0x98,
     0x0000, 0x0002, 0x1000, 0x1000, 0x0, 0x000
 };

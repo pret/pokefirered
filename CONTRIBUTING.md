@@ -147,8 +147,8 @@ Search for the file in the linker script `ld_script.txt`:
     asm/ice.o(.text);
 ```
 
-and add the new C file BEFORE the assmebly file, since we are starting to
-decompile this file in order from the top.
+and add the new C file BEFORE the assembly file, since we are decompiling this
+file from the top down.
 
 ```
     asm/fire.o(.text);
@@ -167,8 +167,8 @@ function ends. We see `bx r0` which quickly tells us that our function is
 `void`.
 
 Other branches you might see are `bx r1` or `bx lr`. Seeing these means you'll 
-need to infer the return type from the way it is called, and the values in the
-registers at the end, but it will never.
+need to infer the return type from the way it is called, and from the values in
+the registers at the end, but it will never exceed 32 bits.
 
 To determine the arguments this function takes, we look at its beginning. The
 registers `r0`, `r1`, `r2`, and `r3` are used for arguments and return values.

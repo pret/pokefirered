@@ -17,6 +17,7 @@
 #include "item.h"
 #include "menu_indicators.h"
 #include "field_map_obj.h"
+#include "random.h"
 #include "constants/songs.h"
 #include "constants/items.h"
 
@@ -36,12 +37,12 @@ void C2TeachyTv();
 void C2TeachyTvMainCallback();
 void VblankHandlerTeachyTv();
 void sub_815ABC4(u8 mode, void (*cb)());
-void CB2_ReturnToTeachyTV();
+void sub_815ABFC();
 extern void sub_815AC20();
 void TeachyTvCreateAndRenderRbox();
 void TeachyTvInitIo();
 u8 TeachyTvSetupObjEventAndOam();
-extern void TeachyTvConfigRboxAndObj(u8);
+extern void TeachyTvSetupPostBattleWindowAndObj(u8);
 u8 TeachyTvSetupWindow();
 void TeachyTvSetupScrollIndicatorArrowPair();
 void TeachyTvSetWindowRegs();
@@ -95,7 +96,7 @@ void sub_815ABC4(u8 mode, void (*cb)())
     SetMainCallback2(C2TeachyTvMainCallback);
 }
 
-void CB2_ReturnToTeachyTV()
+void sub_815ABFC()
 {
     if(gTeachyTV_StaticResources.mode == 1)
         sub_815ABC4(1,gTeachyTV_StaticResources.callback);
@@ -151,7 +152,7 @@ void C2TeachyTvMainCallback()
         {
             taskId = CreateTask(TeachyTvTaskFunction, 0);
             gTasks[taskId].data[1] = TeachyTvSetupObjEventAndOam();
-            TeachyTvConfigRboxAndObj(taskId);
+            TeachyTvSetupPostBattleWindowAndObj(taskId);
         }
         else
         {
@@ -314,5 +315,32 @@ void TeachyTvClearWindowRegs()
 {
     SetGpuReg(0x44u, 0);
     SetGpuReg(0x40u, 0);
+}
+
+void TeachyTvBg2AnimController()
+{
+    u16 *tilemapBuffer;
+    u8 counter;
+    u32 offset2;
+    u32 offset;
+    u32 counter2;
+
+    tilemapBuffer = (u16 *)GetBgTilemapBuffer(2u);
+    counter = 1;
+    do
+    {
+        offset2 = 2;
+        offset = 0x20 * counter;
+        counter2 = counter + 1;
+        do
+        {
+            tilemapBuffer[offset + offset2] = ((Random() & 3) << 10) + 0x301F;
+            offset2 = (offset2 + 1) << 0x18 >> 0x18;
+        }
+        while ( offset2 <= 0x1B );
+        counter = counter2;
+    }
+    while ( counter2 << 0x18 >> 0x18 <= 0xCu );
+    schedule_bg_copy_tilemap_to_vram(2u);
 }
 

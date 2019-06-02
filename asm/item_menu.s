@@ -6342,11 +6342,11 @@ sub_810B108: @ 810B108
 	beq _0810B160
 	cmp r4, 0x8
 	beq _0810B16C
-	ldr r2, _0810B15C @ =CB2_ReturnToTeachyTV
+	ldr r2, _0810B15C @ =sub_815ABFC
 	adds r0, r4, 0
 	b _0810B170
 	.align 2, 0
-_0810B15C: .4byte CB2_ReturnToTeachyTV
+_0810B15C: .4byte sub_815ABFC
 _0810B160:
 	ldr r2, _0810B168 @ =sub_8030AEC
 	movs r0, 0x7
@@ -6386,7 +6386,7 @@ _0810B19C:
 	bl sub_815AC20
 	ldr r0, _0810B1C4 @ =gUnknown_203AD10
 	ldr r1, [r0]
-	ldr r0, _0810B1C8 @ =CB2_ReturnToTeachyTV
+	ldr r0, _0810B1C8 @ =sub_815ABFC
 	str r0, [r1]
 	ldr r1, _0810B1CC @ =gTasks
 	lsls r0, r4, 2
@@ -6402,7 +6402,7 @@ _0810B1BC:
 	bx r1
 	.align 2, 0
 _0810B1C4: .4byte gUnknown_203AD10
-_0810B1C8: .4byte CB2_ReturnToTeachyTV
+_0810B1C8: .4byte sub_815ABFC
 _0810B1CC: .4byte gTasks
 _0810B1D0: .4byte sub_810B070
 	thumb_func_end sub_810B180

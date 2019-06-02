@@ -5,49 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_815B0CC
-sub_815B0CC: @ 815B0CC
-	push {r4-r7,lr}
-	movs r0, 0x2
-	bl GetBgTilemapBuffer
-	adds r7, r0, 0
-	movs r0, 0x1
-_0815B0D8:
-	movs r4, 0x2
-	lsls r5, r0, 5
-	adds r6, r0, 0x1
-_0815B0DE:
-	bl Random
-	adds r2, r5, r4
-	lsls r2, 1
-	adds r2, r7
-	movs r1, 0x3
-	ands r1, r0
-	lsls r1, 10
-	ldr r3, _0815B114 @ =0x0000301f
-	adds r0, r3, 0
-	adds r1, r0
-	strh r1, [r2]
-	adds r0, r4, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0x1B
-	bls _0815B0DE
-	lsls r0, r6, 24
-	lsrs r0, 24
-	cmp r0, 0xC
-	bls _0815B0D8
-	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0815B114: .4byte 0x0000301f
-	thumb_func_end sub_815B0CC
-
-	thumb_func_start TeachyTvConfigRboxAndObj
-TeachyTvConfigRboxAndObj: @ 815B118
+	thumb_func_start TeachyTvSetupPostBattleWindowAndObj
+TeachyTvSetupPostBattleWindowAndObj: @ 815B118
 	push {r4-r7,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -134,7 +93,7 @@ _0815B1B8:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end TeachyTvConfigRboxAndObj
+	thumb_func_end TeachyTvSetupPostBattleWindowAndObj
 
 	thumb_func_start sub_815B1DC
 sub_815B1DC: @ 815B1DC
@@ -265,7 +224,7 @@ sub_815B2C0: @ 815B2C0
 	lsls r0, 3
 	ldr r1, _0815B31C @ =gTasks+0x8
 	adds r6, r0, r1
-	bl sub_815B0CC
+	bl TeachyTvBg2AnimController
 	ldr r0, _0815B320 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
@@ -358,7 +317,7 @@ sub_815B38C: @ 815B38C
 	lsls r1, 3
 	ldr r0, _0815B3F8 @ =gTasks+0x8
 	adds r4, r1, r0
-	bl sub_815B0CC
+	bl TeachyTvBg2AnimController
 	ldrh r0, [r4, 0x4]
 	adds r0, 0x1
 	strh r0, [r4, 0x4]
@@ -1103,7 +1062,7 @@ sub_815B92C: @ 815B92C
 	lsls r0, 1
 	bl PlayNewMapMusic
 _0815B94C:
-	bl sub_815B0CC
+	bl TeachyTvBg2AnimController
 	ldrh r0, [r5, 0x4]
 	adds r0, 0x1
 	strh r0, [r5, 0x4]
@@ -1630,7 +1589,7 @@ _0815BD70:
 	lsls r0, 1
 	bl PlayNewMapMusic
 _0815BD78:
-	bl CB2_ReturnToTeachyTV
+	bl sub_815ABFC
 	pop {r0}
 	bx r0
 	thumb_func_end sub_815BD58

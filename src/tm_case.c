@@ -1147,7 +1147,7 @@ void PokeDude_InitTMCase(void)
     AddBagItem(ITEM_TM03, 1);
     AddBagItem(ITEM_TM09, 1);
     AddBagItem(ITEM_TM35, 1);
-    InitTMCase(4, CB2_ReturnToTeachyTV, 0);
+    InitTMCase(4, sub_815ABFC, 0);
 }
 
 static void Task_TMCaseDude1(u8 taskId)

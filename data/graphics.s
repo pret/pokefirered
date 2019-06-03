@@ -11896,7 +11896,7 @@ gFile_graphics_pokemon_back_pics_unown_b_back_pic:: @ 8E3B884
 
 	.align 2
 gFile_graphics_pokemon_icons_unown_B_icon:: @ 8E3BA88
-	.incbin "graphics/pokemon/unown/B/icon.4bpp"
+	.incbin "graphics/pokemon/unown/b/icon.4bpp"
 
 	.align 2
 gFile_graphics_pokemon_front_pics_unown_c_still_front_pic:: @ 8E3BE88
@@ -11908,7 +11908,7 @@ gFile_graphics_pokemon_back_pics_unown_c_back_pic:: @ 8E3C09C
 
 	.align 2
 gFile_graphics_pokemon_icons_unown_C_icon:: @ 8E3C348
-	.incbin "graphics/pokemon/unown/C/icon.4bpp"
+	.incbin "graphics/pokemon/unown/c/icon.4bpp"
 
 	.align 2
 gFile_graphics_pokemon_front_pics_unown_d_still_front_pic:: @ 8E3C748
@@ -11920,7 +11920,7 @@ gFile_graphics_pokemon_back_pics_unown_d_back_pic:: @ 8E3C940
 
 	.align 2
 gFile_graphics_pokemon_icons_unown_D_icon:: @ 8E3CB98
-	.incbin "graphics/pokemon/unown/D/icon.4bpp"
+	.incbin "graphics/pokemon/unown/d/icon.4bpp"
 
 	.align 2
 gFile_graphics_pokemon_front_pics_unown_e_still_front_pic:: @ 8E3CF98
@@ -11932,7 +11932,7 @@ gFile_graphics_pokemon_back_pics_unown_e_back_pic:: @ 8E3D150
 
 	.align 2
 gFile_graphics_pokemon_icons_unown_E_icon:: @ 8E3D350
-	.incbin "graphics/pokemon/unown/E/icon.4bpp"
+	.incbin "graphics/pokemon/unown/e/icon.4bpp"
 
 	.align 2
 gFile_graphics_pokemon_front_pics_unown_f_still_front_pic:: @ 8E3D750
@@ -11944,7 +11944,7 @@ gFile_graphics_pokemon_back_pics_unown_f_back_pic:: @ 8E3D944
 
 	.align 2
 gFile_graphics_pokemon_icons_unown_F_icon:: @ 8E3DB60
-	.incbin "graphics/pokemon/unown/F/icon.4bpp"
+	.incbin "graphics/pokemon/unown/f/icon.4bpp"
 
 	.align 2
 gFile_graphics_pokemon_front_pics_unown_g_still_front_pic:: @ 8E3DF60
@@ -11956,7 +11956,7 @@ gFile_graphics_pokemon_back_pics_unown_g_back_pic:: @ 8E3E13C
 
 	.align 2
 gFile_graphics_pokemon_icons_unown_G_icon:: @ 8E3E388
-	.incbin "graphics/pokemon/unown/G/icon.4bpp"
+	.incbin "graphics/pokemon/unown/g/icon.4bpp"
 
 	.align 2
 gFile_graphics_pokemon_front_pics_unown_h_still_front_pic:: @ 8E3E788
@@ -11968,7 +11968,7 @@ gFile_graphics_pokemon_back_pics_unown_h_back_pic:: @ 8E3E9CC
 
 	.align 2
 gFile_graphics_pokemon_icons_unown_H_icon:: @ 8E3EC90
-	.incbin "graphics/pokemon/unown/H/icon.4bpp"
+	.incbin "graphics/pokemon/unown/h/icon.4bpp"
 
 	.align 2
 gFile_graphics_pokemon_front_pics_unown_i_still_front_pic:: @ 8E3F090
@@ -11980,7 +11980,7 @@ gFile_graphics_pokemon_back_pics_unown_i_back_pic:: @ 8E3F228
 
 	.align 2
 gFile_graphics_pokemon_icons_unown_I_icon:: @ 8E3F3D0
-	.incbin "graphics/pokemon/unown/I/icon.4bpp"
+	.incbin "graphics/pokemon/unown/i/icon.4bpp"
 
 	.align 2
 gFile_graphics_pokemon_front_pics_unown_j_still_front_pic:: @ 8E3F7D0
@@ -11992,7 +11992,7 @@ gFile_graphics_pokemon_back_pics_unown_j_back_pic:: @ 8E3F994
 
 	.align 2
 gFile_graphics_pokemon_icons_unown_J_icon:: @ 8E3FB7C
-	.incbin "graphics/pokemon/unown/J/icon.4bpp"
+	.incbin "graphics/pokemon/unown/j/icon.4bpp"
 
 	.align 2
 gFile_graphics_pokemon_front_pics_unown_k_still_front_pic:: @ 8E3FF7C
@@ -12004,7 +12004,7 @@ gFile_graphics_pokemon_back_pics_unown_k_back_pic:: @ 8E4014C
 
 	.align 2
 gFile_graphics_pokemon_icons_unown_K_icon:: @ 8E40344
-	.incbin "graphics/pokemon/unown/K/icon.4bpp"
+	.incbin "graphics/pokemon/unown/k/icon.4bpp"
 
 	.align 2
 gFile_graphics_pokemon_front_pics_unown_l_still_front_pic:: @ 8E40744
@@ -12016,7 +12016,7 @@ gFile_graphics_pokemon_back_pics_unown_l_back_pic:: @ 8E408F4
 
 	.align 2
 gFile_graphics_pokemon_icons_unown_L_icon:: @ 8E40AC8
-	.incbin "graphics/pokemon/unown/L/icon.4bpp"
+	.incbin "graphics/pokemon/unown/l/icon.4bpp"
 
 	.align 2
 gFile_graphics_pokemon_front_pics_unown_m_still_front_pic:: @ 8E40EC8
@@ -12028,7 +12028,7 @@ gFile_graphics_pokemon_back_pics_unown_m_back_pic:: @ 8E410EC
 
 	.align 2
 gFile_graphics_pokemon_icons_unown_M_icon:: @ 8E41394
-	.incbin "graphics/pokemon/unown/M/icon.4bpp"
+	.incbin "graphics/pokemon/unown/m/icon.4bpp"
 
 	.align 2
 gFile_graphics_pokemon_front_pics_unown_n_still_front_pic:: @ 8E41794
@@ -12040,7 +12040,7 @@ gFile_graphics_pokemon_back_pics_unown_n_back_pic:: @ 8E4198C
 
 	.align 2
 gFile_graphics_pokemon_icons_unown_N_icon:: @ 8E41BF8
-	.incbin "graphics/pokemon/unown/N/icon.4bpp"
+	.incbin "graphics/pokemon/unown/n/icon.4bpp"
 
 	.align 2
 gFile_graphics_pokemon_front_pics_unown_o_still_front_pic:: @ 8E41FF8
@@ -12052,7 +12052,7 @@ gFile_graphics_pokemon_back_pics_unown_o_back_pic:: @ 8E42230
 
 	.align 2
 gFile_graphics_pokemon_icons_unown_O_icon:: @ 8E424F0
-	.incbin "graphics/pokemon/unown/O/icon.4bpp"
+	.incbin "graphics/pokemon/unown/o/icon.4bpp"
 
 	.align 2
 gFile_graphics_pokemon_front_pics_unown_p_still_front_pic:: @ 8E428F0
@@ -12064,7 +12064,7 @@ gFile_graphics_pokemon_back_pics_unown_p_back_pic:: @ 8E42A90
 
 	.align 2
 gFile_graphics_pokemon_icons_unown_P_icon:: @ 8E42C54
-	.incbin "graphics/pokemon/unown/P/icon.4bpp"
+	.incbin "graphics/pokemon/unown/p/icon.4bpp"
 
 	.align 2
 gFile_graphics_pokemon_front_pics_unown_q_still_front_pic:: @ 8E43054
@@ -12076,7 +12076,7 @@ gFile_graphics_pokemon_back_pics_unown_q_back_pic:: @ 8E43208
 
 	.align 2
 gFile_graphics_pokemon_icons_unown_Q_icon:: @ 8E433D4
-	.incbin "graphics/pokemon/unown/Q/icon.4bpp"
+	.incbin "graphics/pokemon/unown/q/icon.4bpp"
 
 	.align 2
 gFile_graphics_pokemon_front_pics_unown_r_still_front_pic:: @ 8E437D4
@@ -12088,7 +12088,7 @@ gFile_graphics_pokemon_back_pics_unown_r_back_pic:: @ 8E43978
 
 	.align 2
 gFile_graphics_pokemon_icons_unown_R_icon:: @ 8E43B40
-	.incbin "graphics/pokemon/unown/R/icon.4bpp"
+	.incbin "graphics/pokemon/unown/r/icon.4bpp"
 
 	.align 2
 gFile_graphics_pokemon_front_pics_unown_s_still_front_pic:: @ 8E43F40
@@ -12100,7 +12100,7 @@ gFile_graphics_pokemon_back_pics_unown_s_back_pic:: @ 8E44128
 
 	.align 2
 gFile_graphics_pokemon_icons_unown_S_icon:: @ 8E4437C
-	.incbin "graphics/pokemon/unown/S/icon.4bpp"
+	.incbin "graphics/pokemon/unown/s/icon.4bpp"
 
 	.align 2
 gFile_graphics_pokemon_front_pics_unown_t_still_front_pic:: @ 8E4477C
@@ -12112,7 +12112,7 @@ gFile_graphics_pokemon_back_pics_unown_t_back_pic:: @ 8E4492C
 
 	.align 2
 gFile_graphics_pokemon_icons_unown_T_icon:: @ 8E44AE0
-	.incbin "graphics/pokemon/unown/T/icon.4bpp"
+	.incbin "graphics/pokemon/unown/t/icon.4bpp"
 
 	.align 2
 gFile_graphics_pokemon_front_pics_unown_u_still_front_pic:: @ 8E44EE0
@@ -12124,7 +12124,7 @@ gFile_graphics_pokemon_back_pics_unown_u_back_pic:: @ 8E450F8
 
 	.align 2
 gFile_graphics_pokemon_icons_unown_U_icon:: @ 8E4534C
-	.incbin "graphics/pokemon/unown/U/icon.4bpp"
+	.incbin "graphics/pokemon/unown/u/icon.4bpp"
 
 	.align 2
 gFile_graphics_pokemon_front_pics_unown_v_still_front_pic:: @ 8E4574C
@@ -12136,7 +12136,7 @@ gFile_graphics_pokemon_back_pics_unown_v_back_pic:: @ 8E45930
 
 	.align 2
 gFile_graphics_pokemon_icons_unown_V_icon:: @ 8E45B60
-	.incbin "graphics/pokemon/unown/V/icon.4bpp"
+	.incbin "graphics/pokemon/unown/v/icon.4bpp"
 
 	.align 2
 gFile_graphics_pokemon_front_pics_unown_w_still_front_pic:: @ 8E45F60
@@ -12148,7 +12148,7 @@ gFile_graphics_pokemon_back_pics_unown_w_back_pic:: @ 8E46134
 
 	.align 2
 gFile_graphics_pokemon_icons_unown_W_icon:: @ 8E46338
-	.incbin "graphics/pokemon/unown/W/icon.4bpp"
+	.incbin "graphics/pokemon/unown/w/icon.4bpp"
 
 	.align 2
 gFile_graphics_pokemon_front_pics_unown_x_still_front_pic:: @ 8E46738
@@ -12160,7 +12160,7 @@ gFile_graphics_pokemon_back_pics_unown_x_back_pic:: @ 8E468FC
 
 	.align 2
 gFile_graphics_pokemon_icons_unown_X_icon:: @ 8E46AEC
-	.incbin "graphics/pokemon/unown/X/icon.4bpp"
+	.incbin "graphics/pokemon/unown/x/icon.4bpp"
 
 	.align 2
 gFile_graphics_pokemon_front_pics_unown_y_still_front_pic:: @ 8E46EEC
@@ -12172,7 +12172,7 @@ gFile_graphics_pokemon_back_pics_unown_y_back_pic:: @ 8E470C4
 
 	.align 2
 gFile_graphics_pokemon_icons_unown_Y_icon:: @ 8E472B8
-	.incbin "graphics/pokemon/unown/Y/icon.4bpp"
+	.incbin "graphics/pokemon/unown/y/icon.4bpp"
 
 	.align 2
 gFile_graphics_pokemon_front_pics_unown_z_still_front_pic:: @ 8E476B8
@@ -12184,7 +12184,7 @@ gFile_graphics_pokemon_back_pics_unown_z_back_pic:: @ 8E47868
 
 	.align 2
 gFile_graphics_pokemon_icons_unown_Z_icon:: @ 8E47A44
-	.incbin "graphics/pokemon/unown/Z/icon.4bpp"
+	.incbin "graphics/pokemon/unown/z/icon.4bpp"
 
 	.align 2
 gFile_graphics_pokemon_front_pics_unown_exclamation_mark_still_front_pic:: @ 8E47E44

@@ -5,96 +5,6 @@
 
 	.text
 
-	thumb_func_start TeachyTvSetupPostBattleWindowAndObj
-TeachyTvSetupPostBattleWindowAndObj: @ 815B118
-	push {r4-r7,lr}
-	sub sp, 0x4
-	lsls r0, 24
-	lsrs r6, r0, 24
-	lsls r0, r6, 2
-	adds r0, r6
-	lsls r0, 3
-	ldr r1, _0815B190 @ =gTasks+0x8
-	adds r5, r0, r1
-	movs r0, 0x2
-	ldrsh r1, [r5, r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, _0815B194 @ =gSprites
-	adds r7, r0, r1
-	movs r0, 0x1
-	bl ClearWindowTilemap
-	bl TeachyTvClearWindowRegs
-	ldr r0, _0815B198 @ =gTeachyTV_StaticResources
-	ldrb r0, [r0, 0x5]
-	cmp r0, 0
-	blt _0815B1B8
-	cmp r0, 0x3
-	bgt _0815B1A8
-	ldrb r0, [r5, 0x2]
-	movs r1, 0x78
-	movs r2, 0x38
-	movs r3, 0
-	bl TeachyTvSetSpriteCoordsAndSwitchFrame
-	movs r4, 0xC0
-	lsls r4, 6
-	movs r0, 0x3
-	adds r1, r4, 0
-	movs r2, 0x1
-	bl ChangeBgX
-	movs r0, 0x3
-	adds r1, r4, 0
-	movs r2, 0x2
-	bl ChangeBgY
-	ldr r2, _0815B19C @ =gUnknown_203F450
-	ldr r1, [r2]
-	ldr r0, _0815B1A0 @ =0x00004004
-	adds r1, r0
-	ldrb r0, [r1]
-	adds r0, 0x3
-	strb r0, [r1]
-	ldr r1, [r2]
-	ldr r0, _0815B1A4 @ =0x00004005
-	adds r1, r0
-	ldrb r0, [r1]
-	subs r0, 0x3
-	strb r0, [r1]
-	b _0815B1B8
-	.align 2, 0
-_0815B190: .4byte gTasks+0x8
-_0815B194: .4byte gSprites
-_0815B198: .4byte gTeachyTV_StaticResources
-_0815B19C: .4byte gUnknown_203F450
-_0815B1A0: .4byte 0x00004004
-_0815B1A4: .4byte 0x00004005
-_0815B1A8:
-	cmp r0, 0x5
-	bgt _0815B1B8
-	ldrb r0, [r5, 0x2]
-	movs r1, 0x78
-	movs r2, 0x38
-	movs r3, 0
-	bl TeachyTvSetSpriteCoordsAndSwitchFrame
-_0815B1B8:
-	movs r0, 0
-	strh r0, [r5, 0x8]
-	strh r0, [r5, 0xA]
-	movs r0, 0x24
-	ldrsh r1, [r7, r0]
-	movs r0, 0x26
-	ldrsh r2, [r7, r0]
-	movs r0, 0x1
-	str r0, [sp]
-	adds r0, r6, 0
-	movs r3, 0
-	bl sub_815BAA0
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end TeachyTvSetupPostBattleWindowAndObj
-
 	thumb_func_start sub_815B1DC
 sub_815B1DC: @ 815B1DC
 	push {r4,lr}
@@ -758,7 +668,7 @@ sub_815B6A8: @ 815B6A8
 	str r3, [sp]
 	adds r0, r5, 0
 	movs r3, 0
-	bl sub_815BAA0
+	bl TeachyTvGrassAnimationMain
 _0815B702:
 	movs r1, 0x4
 	ldrsh r0, [r4, r1]
@@ -843,7 +753,7 @@ _0815B78A:
 	str r0, [sp]
 	adds r0, r5, 0
 	movs r3, 0
-	bl sub_815BAA0
+	bl TeachyTvGrassAnimationMain
 _0815B7AC:
 	movs r1, 0x4
 	ldrsh r0, [r4, r1]
@@ -907,7 +817,7 @@ sub_815B7E4: @ 815B7E4
 	str r0, [sp]
 	adds r0, r6, 0
 	movs r3, 0
-	bl sub_815BAA0
+	bl TeachyTvGrassAnimationMain
 	add sp, 0x4
 	pop {r4-r6}
 	pop {r0}
@@ -948,7 +858,7 @@ sub_815B840: @ 815B840
 	str r0, [sp]
 	adds r0, r3, 0
 	movs r3, 0
-	bl sub_815BAA0
+	bl TeachyTvGrassAnimationMain
 _0815B87E:
 	ldrh r1, [r4, 0x24]
 	movs r2, 0x24
@@ -1225,8 +1135,8 @@ _0815BA98: .4byte gTeachyTV_StaticResources
 _0815BA9C: .4byte sub_815B4EC
 	thumb_func_end TeachyTvPostBattleFadeControl
 
-	thumb_func_start sub_815BAA0
-sub_815BAA0: @ 815BAA0
+	thumb_func_start TeachyTvGrassAnimationMain
+TeachyTvGrassAnimationMain: @ 815BAA0
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -1321,7 +1231,7 @@ _0815BB5C:
 	bx r0
 	.align 2, 0
 _0815BB68: .4byte gUnknown_84795B8
-	thumb_func_end sub_815BAA0
+	thumb_func_end TeachyTvGrassAnimationMain
 
 	thumb_func_start sub_815BB6C
 sub_815BB6C: @ 815BB6C

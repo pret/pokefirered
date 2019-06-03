@@ -43,7 +43,7 @@ extern void sub_815AC20();
 void TeachyTvCreateAndRenderRbox();
 void TeachyTvInitIo();
 u8 TeachyTvSetupObjEventAndOam();
-extern void TeachyTvSetupPostBattleWindowAndObj(u8);
+void TeachyTvSetupPostBattleWindowAndObj(u8);
 u8 TeachyTvSetupWindow();
 void TeachyTvSetupScrollIndicatorArrowPair();
 void TeachyTvSetWindowRegs();
@@ -344,3 +344,32 @@ void TeachyTvBg2AnimController()
     schedule_bg_copy_tilemap_to_vram(2u);
 }
 
+extern void TeachyTvGrassAnimationMain(u8 taskId, s16 x, s16 y, u8 subpriority, bool8 mode);
+
+void TeachyTvSetupPostBattleWindowAndObj(u8 taskId)
+{
+    u16 *v2 = gTasks[taskId].data;
+    int v1 = ((s16 *)v2)[1];
+    struct Sprite *v3 = &gSprites[v1];
+    int op;
+
+    ClearWindowTilemap(1u);
+    TeachyTvClearWindowRegs();
+    op = gTeachyTV_StaticResources.optionChosen;
+    if ( op >= 0 ) {
+        if ( op <= 3 )
+        {
+            TeachyTvSetSpriteCoordsAndSwitchFrame(((char*)v2)[2], 0x78, 0x38, 0);
+            ChangeBgX(3u, 0x3000u, 1u);
+            ChangeBgY(3u, 0x3000u, 2u);
+            *((u8 *)gUnknown_203F450 + 0x4004) += 3;
+            *((u8 *)gUnknown_203F450 + 0x4005) -= 3;
+        }
+        else if ( op <= 5 )
+            TeachyTvSetSpriteCoordsAndSwitchFrame(((char*)v2)[2], 0x78, 0x38, 0);
+    }
+
+    v2[4] = 0;
+    v2[5] = 0;
+    TeachyTvGrassAnimationMain(taskId, v3->pos2.x, v3->pos2.y, 0, 1u);
+}

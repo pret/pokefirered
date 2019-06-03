@@ -18,14 +18,13 @@
 #include "menu_indicators.h"
 #include "field_map_obj.h"
 #include "random.h"
-#include "text.h"
 #include "constants/songs.h"
 #include "constants/items.h"
 
 typedef struct {
     void (*callback)();
     u8 mode;
-    u8 optionChosen;
+    u8 param1;
     u16 scrollOffset;
     u16 selectedRow;
     u8 param4;
@@ -38,18 +37,18 @@ void C2TeachyTv();
 void C2TeachyTvMainCallback();
 void VblankHandlerTeachyTv();
 void sub_815ABC4(u8 mode, void (*cb)());
-void sub_815ABFC();
+void CB2_ReturnToTeachyTV();
 extern void sub_815AC20();
 void TeachyTvCreateAndRenderRbox();
 void TeachyTvInitIo();
 u8 TeachyTvSetupObjEventAndOam();
-extern void TeachyTvSetupPostBattleWindowAndObj(u8);
+extern void TeachyTvConfigRboxAndObj(u8);
 u8 TeachyTvSetupWindow();
 void TeachyTvSetupScrollIndicatorArrowPair();
 void TeachyTvSetWindowRegs();
 void TeachyTvSetupBg();
 void TeachyTvLoadGraphic();
-extern void TeachyTvPostBattleFadeControl(u8);
+extern void TeachyTvTaskFunction(u8);
 extern void sub_815B2C0(u8);
 extern void VblankHblankHandlerSetZero();
 extern void sub_812B1E0(u16);
@@ -90,14 +89,14 @@ void sub_815ABC4(u8 mode, void (*cb)())
     if(!mode) {
         v3->scrollOffset = v4;
         v3->selectedRow = v4;
-        v3->optionChosen = 0;
+        v3->param1 = 0;
     }
     if(mode == 1)
         v3->mode = 0;
     SetMainCallback2(C2TeachyTvMainCallback);
 }
 
-void sub_815ABFC()
+void CB2_ReturnToTeachyTV()
 {
     if(gTeachyTV_StaticResources.mode == 1)
         sub_815ABC4(1,gTeachyTV_StaticResources.callback);
@@ -113,6 +112,7 @@ void sub_815AC20()
 void C2TeachyTvMainCallback()
 {
     int state;
+    void *mallocPtr;
     int taskId;
     Task *taskAddr;
     u8 **v4;
@@ -150,9 +150,9 @@ void C2TeachyTvMainCallback()
         TeachyTvInitIo();
         if ( gTeachyTV_StaticResources.mode == 2 )
         {
-            taskId = CreateTask(TeachyTvPostBattleFadeControl, 0);
+            taskId = CreateTask(TeachyTvTaskFunction, 0);
             gTasks[taskId].data[1] = TeachyTvSetupObjEventAndOam();
-            TeachyTvSetupPostBattleWindowAndObj(taskId);
+            TeachyTvConfigRboxAndObj(taskId);
         }
         else
         {

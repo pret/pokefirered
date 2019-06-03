@@ -737,7 +737,7 @@ static void Task_TMCaseMain(u8 taskId)
         if (sub_80BF72C() != TRUE)
         {
             input = ListMenuHandleInput(data[0]);
-            get_coro_args_x18_x1A(data[0], &sTMCaseStaticResources.scrollOffset, &sTMCaseStaticResources.selectedRow);
+            ListMenuGetScrollAndRow(data[0], &sTMCaseStaticResources.scrollOffset, &sTMCaseStaticResources.selectedRow);
             if (JOY_NEW(SELECT_BUTTON) && sTMCaseStaticResources.unk_05 == 1)
             {
                 PlaySE(SE_SELECT);

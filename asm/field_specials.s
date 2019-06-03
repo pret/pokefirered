@@ -2753,7 +2753,7 @@ sub_80CBADC: @ 80CBADC
 	ldr r4, _080CBB20 @ =gUnknown_3005378
 	adds r1, r4, 0
 	movs r2, 0
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	ldr r1, _080CBB24 @ =gUnknown_2039A18
 	ldrh r0, [r4]
 	strh r0, [r1]

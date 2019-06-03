@@ -736,7 +736,7 @@ _080E4C7E:
 	adds r1, r2, r3
 	ldr r6, _080E4CD4 @ =0x00000a6a
 	adds r2, r6
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	bl FreeAllWindowBuffers
 	ldr r0, _080E4CD8 @ =gPlayerParty
 	ldr r5, [r7]

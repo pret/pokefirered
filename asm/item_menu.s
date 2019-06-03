@@ -2313,7 +2313,7 @@ _08108FA0:
 	adds r4, 0x2
 	mov r1, sp
 	adds r2, r4, 0
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	mov r0, sp
 	ldrh r1, [r0]
 	ldrh r0, [r4]
@@ -2353,7 +2353,7 @@ _08108FE4:
 	adds r3, r5, 0
 	adds r3, 0x8
 	adds r2, r3
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	movs r0, 0x2
 	negs r0, r0
 	cmp r4, r0
@@ -2830,7 +2830,7 @@ sub_81093B8: @ 81093B8
 	mov r2, sp
 	adds r2, 0x16
 	add r1, sp, 0x14
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	mov r2, r8
 	ldrb r0, [r2]
 	movs r1, 0x10
@@ -2942,7 +2942,7 @@ sub_81094B0: @ 81094B0
 	adds r1, r2, r1
 	adds r3, 0x8
 	adds r2, r3
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	ldrb r0, [r4]
 	bl ListMenuGetYCoordForPrintingArrowCursor
 	adds r1, r0, 0
@@ -2967,7 +2967,7 @@ sub_81094B0: @ 81094B0
 	adds r4, 0x2
 	mov r1, sp
 	adds r2, r4, 0
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	mov r0, sp
 	ldrh r1, [r0]
 	ldrh r0, [r4]
@@ -3001,7 +3001,7 @@ _08109558:
 	adds r4, 0x2
 	mov r1, sp
 	adds r2, r4, 0
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	mov r0, sp
 	ldrh r1, [r0]
 	ldrh r0, [r4]
@@ -4573,7 +4573,7 @@ sub_810A288: @ 810A288
 	adds r6, 0x2
 	mov r1, sp
 	adds r2, r6, 0
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	mov r0, sp
 	ldrh r0, [r0]
 	ldrh r1, [r6]

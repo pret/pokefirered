@@ -1142,7 +1142,7 @@ sub_80EBF40: @ 80EBF40
 	mov r8, r1
 	adds r1, r7, 0
 	mov r2, r8
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	movs r0, 0x2
 	negs r0, r0
 	cmp r6, r0

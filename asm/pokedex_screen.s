@@ -593,7 +593,7 @@ _081029D0:
 	ldrb r0, [r1, 0x17]
 	adds r1, 0x62
 	movs r2, 0
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	bl sub_806E25C
 	cmp r0, 0
 	beq _081029F4
@@ -627,7 +627,7 @@ _08102A14:
 	ldrb r0, [r1, 0x17]
 	adds r1, 0x62
 	movs r2, 0
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	ldr r0, _08102A4C @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r3, 0x1
@@ -1367,7 +1367,7 @@ _0810307C:
 	ldrb r0, [r1, 0x17]
 	adds r1, 0x62
 	movs r2, 0
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	bl sub_81039F0
 	ldr r1, [r4]
 	adds r1, 0x60
@@ -1385,7 +1385,7 @@ _08103098:
 	ldrb r0, [r1, 0x17]
 	adds r1, 0x62
 	movs r2, 0
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	ldr r0, _081030F0 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r3, 0x1
@@ -1687,7 +1687,7 @@ _08103344:
 	ldrb r0, [r1, 0x17]
 	adds r1, 0x62
 	movs r2, 0
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	bl sub_81039F0
 	ldr r1, [r4]
 	adds r1, 0x60
@@ -1706,7 +1706,7 @@ _08103362:
 	ldrb r0, [r1, 0x17]
 	adds r1, 0x62
 	movs r2, 0
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	ldr r0, _081033C4 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r2, 0x1

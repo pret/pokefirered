@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start TeachyTvSetupPostBattleWindowAndObj
-TeachyTvSetupPostBattleWindowAndObj: @ 815B118
+	thumb_func_start TeachyTvConfigRboxAndObj
+TeachyTvConfigRboxAndObj: @ 815B118
 	push {r4-r7,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -93,7 +93,7 @@ _0815B1B8:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end TeachyTvSetupPostBattleWindowAndObj
+	thumb_func_end TeachyTvConfigRboxAndObj
 
 	thumb_func_start sub_815B1DC
 sub_815B1DC: @ 815B1DC
@@ -238,7 +238,7 @@ sub_815B2C0: @ 815B2C0
 	ldr r4, _0815B324 @ =gTeachyTV_StaticResources+6
 	adds r2, r4, 0x2
 	adds r1, r4, 0
-	bl ListMenuGetScrollAndRow
+	bl get_coro_args_x18_x1A
 	ldr r0, _0815B328 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x4
@@ -1186,8 +1186,8 @@ _0815BA4E:
 	bx r0
 	thumb_func_end sub_815BA30
 
-	thumb_func_start TeachyTvPostBattleFadeControl
-TeachyTvPostBattleFadeControl: @ 815BA54
+	thumb_func_start TeachyTvTaskFunction
+TeachyTvTaskFunction: @ 815BA54
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1223,7 +1223,7 @@ _0815BA90: .4byte gPaletteFade
 _0815BA94: .4byte gUnknown_8479390
 _0815BA98: .4byte gTeachyTV_StaticResources
 _0815BA9C: .4byte sub_815B4EC
-	thumb_func_end TeachyTvPostBattleFadeControl
+	thumb_func_end TeachyTvTaskFunction
 
 	thumb_func_start sub_815BAA0
 sub_815BAA0: @ 815BAA0
@@ -1589,7 +1589,7 @@ _0815BD70:
 	lsls r0, 1
 	bl PlayNewMapMusic
 _0815BD78:
-	bl sub_815ABFC
+	bl CB2_ReturnToTeachyTV
 	pop {r0}
 	bx r0
 	thumb_func_end sub_815BD58

@@ -1270,7 +1270,7 @@ static void FC_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *list
         struct Task *task = &gTasks[taskId];
         PlaySE(SE_SELECT);
         task->data[1] = 0;
-        get_coro_args_x18_x1A(sFameCheckerData->listMenuTaskId, &listMenuTopIdx, NULL);
+        ListMenuGetScrollAndRow(sFameCheckerData->listMenuTaskId, &listMenuTopIdx, NULL);
         sFameCheckerData->listMenuTopIdx = listMenuTopIdx;
         if (itemIndex != sFameCheckerData->numUnlockedPersons - 1)
         {
@@ -1339,7 +1339,7 @@ static void FC_DoMoveCursor(s32 itemIndex, bool8 onInit)
     u16 listY;
     u16 cursorY;
     u16 who;
-    get_coro_args_x18_x1A(sFameCheckerData->listMenuTaskId, &listY, &cursorY);
+    ListMenuGetScrollAndRow(sFameCheckerData->listMenuTaskId, &listY, &cursorY);
     who = listY + cursorY;
     AddTextPrinterParametrized2(FCWINDOWID_LIST, 2, 8, 14 * cursorY + 4, 0, 0, &sTextColor_Green, 0, sListMenuItems[itemIndex].name);
     if (!onInit)
@@ -1432,7 +1432,7 @@ static void FreeListMenuSelectorArrowPairResources(void)
 static u16 FameCheckerGetCursorY(void)
 {
     u16 listY, cursorY;
-    get_coro_args_x18_x1A(sFameCheckerData->listMenuTaskId, &listY, &cursorY);
+    ListMenuGetScrollAndRow(sFameCheckerData->listMenuTaskId, &listY, &cursorY);
     return listY + cursorY;
 }
 

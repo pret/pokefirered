@@ -563,8 +563,8 @@ _081072CA:
 _081072D0: .4byte gTasks+0x8
 	thumb_func_end sub_81072AC
 
-	thumb_func_start get_coro_args_x18_x1A
-get_coro_args_x18_x1A: @ 81072D4
+	thumb_func_start ListMenuGetScrollAndRow
+ListMenuGetScrollAndRow: @ 81072D4
 	push {lr}
 	adds r3, r1, 0
 	lsls r0, 24
@@ -588,7 +588,7 @@ _081072F6:
 	bx r0
 	.align 2, 0
 _081072FC: .4byte gTasks+0x8
-	thumb_func_end get_coro_args_x18_x1A
+	thumb_func_end ListMenuGetScrollAndRow
 
 	thumb_func_start ListMenuGetYCoordForPrintingArrowCursor
 ListMenuGetYCoordForPrintingArrowCursor: @ 8107300

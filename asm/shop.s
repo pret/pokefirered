@@ -2170,7 +2170,7 @@ sub_809BBC0: @ 809BBC0
 	ldr r7, _0809BC08 @ =gUnknown_2039942
 	subs r2, r7, 0x2
 	adds r1, r7, 0
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	movs r0, 0x2
 	negs r0, r0
 	cmp r4, r0

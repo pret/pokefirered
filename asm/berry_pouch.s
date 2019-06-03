@@ -1694,7 +1694,7 @@ _0813DA9E:
 	ldr r4, _0813DAE0 @ =gUnknown_203F37A
 	subs r2, r4, 0x2
 	adds r1, r4, 0
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	ldr r0, _0813DAE4 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x4

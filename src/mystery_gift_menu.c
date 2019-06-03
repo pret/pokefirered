@@ -538,14 +538,14 @@ void PrintMysteryGiftOrEReaderTopMenu(bool8 mg_or_ereader, bool32 usePickOkCance
     if (!mg_or_ereader)
     {
         src = usePickOkCancel == TRUE ? gText_PickOKExit : gText_PickOKCancel;
-        AddTextPrinterParametrized2(0, 2, 2, 2, 0, 0, &sMG_Ereader_TextColor_1, 0, gText_MysteryGift);
+        AddTextPrinterParameterized4(0, 2, 2, 2, 0, 0, &sMG_Ereader_TextColor_1, 0, gText_MysteryGift);
         width = 222 - GetStringWidth(0, src, 0);
-        AddTextPrinterParametrized2(0, 0, width, 2, 0, 0, &sMG_Ereader_TextColor_1, 0, src);
+        AddTextPrinterParameterized4(0, 0, width, 2, 0, 0, &sMG_Ereader_TextColor_1, 0, src);
     }
     else
     {
-        AddTextPrinterParametrized2(0, 2, 2, 2, 0, 0, &sMG_Ereader_TextColor_1, 0, gJPText_MysteryGift);
-        AddTextPrinterParametrized2(0, 0, 0x78, 2, 0, 0, &sMG_Ereader_TextColor_1, 0, gJPText_DecideStop);
+        AddTextPrinterParameterized4(0, 2, 2, 2, 0, 0, &sMG_Ereader_TextColor_1, 0, gJPText_MysteryGift);
+        AddTextPrinterParameterized4(0, 0, 0x78, 2, 0, 0, &sMG_Ereader_TextColor_1, 0, gJPText_DecideStop);
     }
     CopyWindowToVram(0, 2);
     PutWindowTilemap(0);
@@ -596,7 +596,7 @@ void AddTextPrinterToWindow1(const u8 *str)
 {
     StringExpandPlaceholders(gStringVar4, str);
     FillWindowPixelBuffer(1, 0x11);
-    AddTextPrinterParametrized2(1, 2, 0, 2, 0, 2, &sMG_Ereader_TextColor_2, 0, gStringVar4);
+    AddTextPrinterParameterized4(1, 2, 0, 2, 0, 2, &sMG_Ereader_TextColor_2, 0, gStringVar4);
     DrawTextBorderOuter(1, 0x001, 0xF);
     PutWindowTilemap(1);
     CopyWindowToVram(1, 3);
@@ -703,7 +703,7 @@ u32 MysteryGift_HandleThreeOptionMenu(u8 * unused0, u16 * unused1, u8 whichMenu)
     width = 0;
     for (i = 0; i < listMenuTemplate.totalItems; i++)
     {
-        u32 curWidth = GetStringWidth(2, listMenuTemplate.items[i].name, listMenuTemplate.lettersSpacing);
+        u32 curWidth = GetStringWidth(2, listMenuTemplate.items[i].unk_00, listMenuTemplate.lettersSpacing);
         if (curWidth > width)
             width = curWidth;
     }
@@ -737,7 +737,7 @@ s8 mevent_message_print_and_prompt_yes_no(u8 * textState, u16 * windowId, bool8 
             *windowId = AddWindow(&sWindowTemplate_PromptYesOrNo_Width20);
         }
         FillWindowPixelBuffer(*windowId, 0x11);
-        AddTextPrinterParametrized2(*windowId, 2, 0, 2, 0, 2, &sMG_Ereader_TextColor_2, 0, gStringVar4);
+        AddTextPrinterParameterized4(*windowId, 2, 0, 2, 0, 2, &sMG_Ereader_TextColor_2, 0, gStringVar4);
         DrawTextBorderOuter(*windowId, 0x001, 0x0F);
         CopyWindowToVram(*windowId, 2);
         PutWindowTilemap(*windowId);
@@ -798,7 +798,7 @@ s32 HandleMysteryGiftListMenu(u8 * textState, u16 * windowId, bool32 cannotToss,
         }
         *windowId = AddWindow(&sMysteryGiftMenuWindowTemplate);
         FillWindowPixelBuffer(*windowId, 0x11);
-        AddTextPrinterParametrized2(*windowId, 2, 0, 2, 0, 2, &sMG_Ereader_TextColor_2, 0, gStringVar4);
+        AddTextPrinterParameterized4(*windowId, 2, 0, 2, 0, 2, &sMG_Ereader_TextColor_2, 0, gStringVar4);
         DrawTextBorderOuter(*windowId, 0x001, 0x0F);
         CopyWindowToVram(*windowId, 2);
         PutWindowTilemap(*windowId);

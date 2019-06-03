@@ -5084,7 +5084,7 @@ _0812110E:
 	adds r0, r4, 0
 	movs r1, 0
 	movs r3, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	adds r0, r4, 0
 	bl PutWindowTilemap
 	adds r0, r4, 0
@@ -5141,7 +5141,7 @@ _08121194:
 	movs r1, 0
 	adds r2, r5, 0
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	b _08121224
 	.align 2, 0
 _081211E0: .4byte gUnknown_845A108
@@ -5172,7 +5172,7 @@ _081211F0:
 	movs r1, 0
 	adds r2, r5, 0
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 _08121224:
 	adds r0, r6, 0
 	bl PutWindowTilemap
@@ -5778,7 +5778,7 @@ sub_8121704: @ 8121704
 	str r1, [sp, 0x8]
 	movs r1, 0
 	adds r2, r5, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0xC
 	pop {r4,r5}
 	pop {r0}
@@ -6486,7 +6486,7 @@ _08121CAA:
 	ldr r1, [r1]
 	str r1, [sp, 0x8]
 	movs r1, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 _08121CD0:
 	add sp, 0xC
 	pop {r3}
@@ -6831,7 +6831,7 @@ _08121F3C:
 	str r1, [sp, 0x10]
 	movs r1, 0x2
 	mov r2, r9
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -6903,7 +6903,7 @@ sub_8121FC0: @ 8121FC0
 	movs r0, 0x6
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 	add sp, 0x10
 	pop {r4}
 	pop {r0}
@@ -7005,7 +7005,7 @@ sub_8122084: @ 8122084
 	adds r0, r4, 0
 	movs r1, 0x4
 	adds r2, r5, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 	add sp, 0x10
 	pop {r4,r5}
 	pop {r0}
@@ -7121,7 +7121,7 @@ _0812217A:
 	movs r1, 0x2
 	movs r2, 0x3
 	movs r3, 0x6
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	ldrb r0, [r4, 0xE]
 	bl PutWindowTilemap
 	movs r0, 0x2

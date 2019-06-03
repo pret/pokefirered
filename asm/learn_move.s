@@ -1936,7 +1936,7 @@ _080E563E:
 	movs r1, 0x3
 	adds r2, r7, 0
 	adds r3, r6, 0
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	add sp, 0x14
 	pop {r3-r5}
 	mov r8, r3

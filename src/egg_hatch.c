@@ -78,7 +78,7 @@ static void CreateEggShardSprite(u8 x, u8 y, s16 data1, s16 data2, s16 data3, u8
 static IWRAM_DATA struct EggHatchData *sEggHatchData;
 
 // rom data
-static const u16 sEggPalette[] = INCBIN_U16("graphics/pokemon/palettes/egg_palette.gbapal");
+static const u16 sEggPalette[] = INCBIN_U16("graphics/pokemon/egg/normal.gbapal");
 static const u8 sEggHatchTiles[] = INCBIN_U8("graphics/misc/egg_hatch.4bpp");
 static const u8 sEggShardTiles[] = INCBIN_U8("graphics/misc/egg_shard.4bpp");
 
@@ -874,5 +874,5 @@ static void EggHatchPrintMessage(u8 windowId, u8* string, u8 x, u8 y, u8 speed)
     sEggHatchData->textColor.fgColor = 0;
     sEggHatchData->textColor.bgColor = 5;
     sEggHatchData->textColor.shadowColor = 6;
-    AddTextPrinterParametrized2(windowId, 3, x, y, 1, 1, &sEggHatchData->textColor, speed, string);
+    AddTextPrinterParameterized4(windowId, 3, x, y, 1, 1, &sEggHatchData->textColor, speed, string);
 }

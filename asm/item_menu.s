@@ -1383,7 +1383,7 @@ sub_8108888: @ 8108888
 	movs r1, 0xA0
 	movs r2, 0x8
 	movs r3, 0x68
-	bl AddScrollIndicatorArrowPairParametrized
+	bl AddScrollIndicatorArrowPairParameterized
 	ldr r1, [r4]
 	strb r0, [r1, 0x8]
 	add sp, 0x10
@@ -1439,7 +1439,7 @@ sub_8108908: @ 8108908
 	movs r1, 0x98
 	movs r2, 0x48
 	movs r3, 0x68
-	bl AddScrollIndicatorArrowPairParametrized
+	bl AddScrollIndicatorArrowPairParameterized
 	ldr r1, [r4]
 	strb r0, [r1, 0x8]
 	add sp, 0x10
@@ -1469,7 +1469,7 @@ sub_8108940: @ 8108940
 	movs r1, 0xD4
 	movs r2, 0x78
 	movs r3, 0x98
-	bl AddScrollIndicatorArrowPairParametrized
+	bl AddScrollIndicatorArrowPairParameterized
 	ldr r1, [r4]
 	strb r0, [r1, 0x8]
 	add sp, 0x10

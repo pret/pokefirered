@@ -811,7 +811,7 @@ _080BF260:
 	str r0, [sp, 0x4]
 	str r5, [sp, 0x8]
 	movs r1, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	mov r1, r8
 	ldr r0, [r1]
 	adds r0, 0xF8
@@ -856,7 +856,7 @@ _080BF2CE:
 	str r4, [sp, 0x8]
 	movs r0, 0x1
 	movs r1, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r1, [r5]
 	adds r0, r1, 0
 	adds r0, 0xE9
@@ -875,7 +875,7 @@ _080BF2CE:
 	str r0, [sp, 0x8]
 	movs r0, 0x1
 	movs r1, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram

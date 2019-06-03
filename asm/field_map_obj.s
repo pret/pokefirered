@@ -1373,8 +1373,8 @@ SpawnSpecialFieldObject: @ 805E7F4
 _0805E82C: .4byte gSaveBlock1Ptr
 	thumb_func_end SpawnSpecialFieldObject
 
-	thumb_func_start SpawnSpecialFieldObjectParametrized
-SpawnSpecialFieldObjectParametrized: @ 805E830
+	thumb_func_start SpawnSpecialFieldObjectParameterized
+SpawnSpecialFieldObjectParameterized: @ 805E830
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -1425,7 +1425,7 @@ SpawnSpecialFieldObjectParametrized: @ 805E830
 	bx r1
 	.align 2, 0
 _0805E894: .4byte 0xfff90000
-	thumb_func_end SpawnSpecialFieldObjectParametrized
+	thumb_func_end SpawnSpecialFieldObjectParameterized
 
 	thumb_func_start show_sprite
 show_sprite: @ 805E898

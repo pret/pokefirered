@@ -1041,7 +1041,7 @@ PrintTextOnRightSnappedWindow: @ 810F5E8
 	adds r0, r1, 0
 	movs r1, 0
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	cmp r6, 0
 	beq _0810F63E
 	ldrb r0, [r4]
@@ -1118,7 +1118,7 @@ _0810F684:
 	adds r0, r1, 0
 	movs r1, 0
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0810F6CE:
 	ldrb r0, [r6]
 	movs r1, 0
@@ -1132,7 +1132,7 @@ _0810F6CE:
 	movs r1, 0x1
 	movs r2, 0x4
 	movs r3, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	cmp r7, 0
 	beq _0810F6F6
 	ldrb r0, [r6]
@@ -1883,7 +1883,7 @@ _0810FC30:
 	adds r0, r7, 0
 	ldr r1, [sp, 0x14]
 	ldr r3, [sp, 0x18]
-	bl sub_812E62C
+	bl AddTextPrinterParameterized5
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24

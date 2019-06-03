@@ -1063,7 +1063,8 @@ gUnknown_84169DC:: @ 84169DC
 	.incbin "baserom.gba", 0x4169DC, 0x1C
 
 gUnknown_84169F8:: @ 84169F8
-	.incbin "baserom.gba", 0x4169F8, 0x26
+	.string "This can't be used on\n"
+	.string "that POKéMON.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416A1E:: @ 8416A1E
 	.incbin "baserom.gba", 0x416A1E, 0x1C
@@ -1159,7 +1160,8 @@ gUnknown_8416F10:: @ 8416F10
 	.incbin "baserom.gba", 0x416F10, 0x17
 
 gUnknown_8416F27:: @ 8416F27
-	.incbin "baserom.gba", 0x416F27, 0x27
+	.string "{STR_VAR_1}'s HP was restored\n"
+	.string "by {STR_VAR_2} point(s).{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416F4E:: @ 8416F4E
 	.incbin "baserom.gba", 0x416F4E, 0x21

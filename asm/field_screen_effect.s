@@ -785,7 +785,7 @@ _0807F3E0:
 	movs r1, 0x2
 	mov r2, r10
 	mov r3, r9
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	ldr r2, _0807F42C @ =gTextFlags
 	ldrb r1, [r2]
 	movs r0, 0x2

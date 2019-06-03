@@ -9,8 +9,8 @@
 
 struct ListMenuItem
 {
-    const u8 *name;
-    s32 id;
+    const u8 *unk_00;
+    s32 unk_04;
 };
 
 struct ListMenu;

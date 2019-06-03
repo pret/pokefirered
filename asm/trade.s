@@ -4827,7 +4827,7 @@ _0804ECEC:
 	str r0, [sp, 0x8]
 	adds r0, r5, 0
 	movs r3, 0x4
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add r6, sp, 0x28
 	adds r0, r6, 0
 	ldr r1, [sp, 0x60]
@@ -4847,7 +4847,7 @@ _0804ECEC:
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	adds r0, r5, 0
 	bl PutWindowTilemap
 	adds r0, r5, 0
@@ -5110,7 +5110,7 @@ sub_804EFB4: @ 804EFB4
 	adds r0, r4, 0
 	movs r1, 0
 	movs r3, 0x4
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r0, r4, 0
 	bl PutWindowTilemap
 	adds r0, r4, 0
@@ -14989,7 +14989,7 @@ sub_8054508: @ 8054508
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	adds r0, r5, 0
 	movs r1, 0x3
 	bl CopyWindowToVram

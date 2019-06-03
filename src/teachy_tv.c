@@ -244,7 +244,7 @@ u8 TeachyTvSetupWindow()
                gTeachyTV_StaticResources.selectedRow);
 }
 
-extern const struct ScrollArrowsTemplate gUnknown_8479380;
+extern const struct ScrollIndicatorArrowPairTemplate gUnknown_8479380;
 
 void TeachyTvSetupScrollIndicatorArrowPair()
 {

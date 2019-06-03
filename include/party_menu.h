@@ -13,6 +13,23 @@ enum {
     AILMENT_BRN
 };
 
+struct Struct203B0A0
+{
+    MainCallback exitCallback;
+    TaskFunc unk4;
+    u8 unk8_0:4;
+    u8 mode:2;
+    u8 unk8_2:2;
+    s8 unk9;
+    s8 unkA;
+    u8 unkB;
+    u16 unkC;
+    s16 unkE;
+    s16 unk10;
+};
+
+extern struct Struct203B0A0 gUnknown_203B0A0;
+
 extern void (*gUnknown_3005E98)(u8 taskId, TaskFunc func);
 
 bool8 FieldCallback_PrepareFadeInFromMenu(void);
@@ -27,5 +44,12 @@ void sub_8126EDC(void);
 void c2_8123744(void);
 u8 GetCursorSelectionMonId(void);
 void sub_8128370(void);
+void sub_811F818(u8 monId, u8 a1);
+void sub_8121D0C(u8);
+void sub_811FB28(u8 taskId);
+void sub_8120760(u8 taskId, u8 a1, s8 a2, s16 amount, TaskFunc followupFunc);
+void GetMonNickname(const struct Pokemon * mon, u8 * dest);
+void sub_81202F8(const u8 * src, u8 a1);
+bool8 sub_8120370(void);
 
 #endif // GUARD_PARTY_MENU_H

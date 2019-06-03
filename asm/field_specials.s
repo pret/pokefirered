@@ -601,7 +601,7 @@ SpawnScriptFieldObject: @ 80CAA34
 	movs r0, 0x12
 	movs r1, 0x8
 	movs r2, 0x7F
-	bl SpawnSpecialFieldObjectParametrized
+	bl SpawnSpecialFieldObjectParameterized
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080CAA84 @ =gMapObjects

@@ -3603,7 +3603,7 @@ _081411D0:
 	movs r0, 0x1
 	movs r1, 0
 	movs r3, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 	movs r1, 0x83
@@ -4228,7 +4228,7 @@ sub_81417E4: @ 81417E4
 	movs r0, 0
 	adds r2, r4, 0
 	movs r3, 0x1
-	bl sub_812E62C
+	bl AddTextPrinterParameterized5
 	add sp, 0x14
 	pop {r4}
 	pop {r0}

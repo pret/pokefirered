@@ -5,127 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_815B1DC
-sub_815B1DC: @ 815B1DC
-	push {r4,lr}
-	sub sp, 0x10
-	adds r4, r0, 0
-	ldr r2, _0815B21C @ =gTextFlags
-	ldrb r1, [r2]
-	movs r0, 0x5
-	negs r0, r0
-	ands r0, r1
-	strb r0, [r2]
-	bl GetTextSpeedSetting
-	adds r3, r0, 0
-	lsls r3, 24
-	lsrs r3, 24
-	movs r0, 0
-	str r0, [sp]
-	movs r0, 0x1
-	str r0, [sp, 0x4]
-	movs r0, 0xC
-	str r0, [sp, 0x8]
-	movs r0, 0x3
-	str r0, [sp, 0xC]
-	movs r0, 0
-	movs r1, 0x4
-	adds r2, r4, 0
-	bl AddTextPrinterParameterized2
-	add sp, 0x10
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0815B21C: .4byte gTextFlags
-	thumb_func_end sub_815B1DC
-
-	thumb_func_start sub_815B220
-sub_815B220: @ 815B220
-	push {r4,lr}
-	ldr r4, _0815B238 @ =gUnknown_203F450
-	ldr r0, [r4]
-	bl Free
-	movs r0, 0
-	str r0, [r4]
-	bl FreeAllWindowBuffers
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0815B238: .4byte gUnknown_203F450
-	thumb_func_end sub_815B220
-
-	thumb_func_start sub_815B23C
-sub_815B23C: @ 815B23C
-	push {r4,lr}
-	sub sp, 0x4
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	movs r0, 0x1
-	negs r0, r0
-	movs r1, 0
-	str r1, [sp]
-	movs r2, 0
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	ldr r1, _0815B26C @ =gTasks
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r0, r1
-	ldr r1, _0815B270 @ =sub_815B274
-	str r1, [r0]
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0815B26C: .4byte gTasks
-_0815B270: .4byte sub_815B274
-	thumb_func_end sub_815B23C
-
-	thumb_func_start sub_815B274
-sub_815B274: @ 815B274
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	ldr r0, _0815B298 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _0815B2B6
-	ldr r0, _0815B29C @ =gUnknown_203F450
-	ldr r0, [r0]
-	ldr r0, [r0]
-	cmp r0, 0
-	beq _0815B2A0
-	bl SetMainCallback2
-	b _0815B2AC
-	.align 2, 0
-_0815B298: .4byte gPaletteFade
-_0815B29C: .4byte gUnknown_203F450
-_0815B2A0:
-	bl sub_8055DC4
-	ldr r0, _0815B2BC @ =gTeachyTV_StaticResources
-	ldr r0, [r0]
-	bl SetMainCallback2
-_0815B2AC:
-	bl sub_815B220
-	adds r0, r4, 0
-	bl DestroyTask
-_0815B2B6:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0815B2BC: .4byte gTeachyTV_StaticResources
-	thumb_func_end sub_815B274
-
-	thumb_func_start sub_815B2C0
-sub_815B2C0: @ 815B2C0
+	thumb_func_start TeachyTvOptionListController
+TeachyTvOptionListController: @ 815B2C0
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r7, r0, 24
@@ -179,7 +60,7 @@ _0815B330:
 	movs r0, 0x5
 	bl PlaySE
 	adds r0, r7, 0
-	bl sub_815B23C
+	bl TeachyTvQuitBeginFade
 	b _0815B37A
 _0815B33E:
 	movs r0, 0x5
@@ -204,7 +85,7 @@ _0815B33E:
 	adds r0, r7
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _0815B388 @ =sub_815B4EC
+	ldr r1, _0815B388 @ =TeachyTvRenderMsgAndSwitchClusterFuncs
 	str r1, [r0]
 _0815B37A:
 	pop {r4-r7}
@@ -213,8 +94,8 @@ _0815B37A:
 	.align 2, 0
 _0815B380: .4byte gTeachyTV_StaticResources
 _0815B384: .4byte gTasks
-_0815B388: .4byte sub_815B4EC
-	thumb_func_end sub_815B2C0
+_0815B388: .4byte TeachyTvRenderMsgAndSwitchClusterFuncs
+	thumb_func_end TeachyTvOptionListController
 
 	thumb_func_start sub_815B38C
 sub_815B38C: @ 815B38C
@@ -355,7 +236,7 @@ _0815B48C:
 	movs r1, 0
 	bl StartSpriteAnim
 	ldr r0, _0815B4B0 @ =gUnknown_841B83D
-	bl sub_815B1DC
+	bl TeachyTvInitTextPrinter
 	movs r0, 0
 	strh r0, [r4, 0x4]
 	ldrh r0, [r4, 0x6]
@@ -399,8 +280,8 @@ _0815B4E2:
 _0815B4E8: .4byte gTasks+0x8
 	thumb_func_end sub_815B4C0
 
-	thumb_func_start sub_815B4EC
-sub_815B4EC: @ 815B4EC
+	thumb_func_start TeachyTvRenderMsgAndSwitchClusterFuncs
+TeachyTvRenderMsgAndSwitchClusterFuncs: @ 815B4EC
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -469,7 +350,7 @@ _0815B578:
 	.align 2, 0
 _0815B580: .4byte gUnknown_8479548
 _0815B584: .4byte gTeachyTV_StaticResources
-	thumb_func_end sub_815B4EC
+	thumb_func_end TeachyTvRenderMsgAndSwitchClusterFuncs
 
 	thumb_func_start sub_815B588
 sub_815B588: @ 815B588
@@ -487,7 +368,7 @@ sub_815B588: @ 815B588
 	lsls r0, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl sub_815B1DC
+	bl TeachyTvInitTextPrinter
 	ldrh r0, [r4, 0x6]
 	adds r0, 0x1
 	strh r0, [r4, 0x6]
@@ -516,7 +397,7 @@ sub_815B5C0: @ 815B5C0
 	lsls r0, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl sub_815B1DC
+	bl TeachyTvInitTextPrinter
 	ldrh r0, [r4, 0x6]
 	adds r0, 0x1
 	strh r0, [r4, 0x6]
@@ -990,7 +871,7 @@ _0815B94C:
 	adds r0, r7, 0
 	subs r0, 0x8
 	adds r0, r6, r0
-	ldr r1, _0815B9E0 @ =sub_815B2C0
+	ldr r1, _0815B9E0 @ =TeachyTvOptionListController
 	str r1, [r0]
 	movs r0, 0
 	bl PutWindowTilemap
@@ -1036,7 +917,7 @@ _0815B9D4:
 	bx r0
 	.align 2, 0
 _0815B9DC: .4byte gTasks+0x8
-_0815B9E0: .4byte sub_815B2C0
+_0815B9E0: .4byte TeachyTvOptionListController
 _0815B9E4: .4byte gUnknown_203F450
 _0815B9E8: .4byte 0x00004004
 _0815B9EC: .4byte 0x00004006
@@ -1067,7 +948,7 @@ _0815BA10:
 	ldr r0, _0815BA2C @ =sub_815BA30
 	str r0, [r1]
 	adds r0, r2, 0
-	bl sub_815B23C
+	bl TeachyTvQuitBeginFade
 _0815BA22:
 	pop {r0}
 	bx r0
@@ -1121,7 +1002,7 @@ TeachyTvPostBattleFadeControl: @ 815BA54
 	adds r0, r4, 0
 	subs r0, 0x8
 	adds r0, r2, r0
-	ldr r1, _0815BA9C @ =sub_815B4EC
+	ldr r1, _0815BA9C @ =TeachyTvRenderMsgAndSwitchClusterFuncs
 	str r1, [r0]
 _0815BA86:
 	pop {r4}
@@ -1132,7 +1013,7 @@ _0815BA8C: .4byte gTasks+0x8
 _0815BA90: .4byte gPaletteFade
 _0815BA94: .4byte gUnknown_8479390
 _0815BA98: .4byte gTeachyTV_StaticResources
-_0815BA9C: .4byte sub_815B4EC
+_0815BA9C: .4byte TeachyTvRenderMsgAndSwitchClusterFuncs
 	thumb_func_end TeachyTvPostBattleFadeControl
 
 	thumb_func_start TeachyTvGrassAnimationMain
@@ -1395,7 +1276,7 @@ sub_815BC90: @ 815BC90
 	lsls r0, 3
 	ldr r1, _0815BCCC @ =gTasks+0x8
 	adds r5, r0, r1
-	bl sub_815B220
+	bl TeachyTvFree
 	ldr r1, _0815BCD0 @ =gSpecialVar_0x8004
 	ldr r4, _0815BCD4 @ =gTeachyTV_StaticResources
 	ldrb r0, [r4, 0x5]

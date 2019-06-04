@@ -5,6 +5,7 @@
 #include "palette.h"
 #include "sprite.h"
 #include "menu_helpers.h"
+#include "new_menu_helpers.h"
 #include "sound.h"
 #include "malloc.h"
 #include "sprite.h"
@@ -14,6 +15,7 @@
 #include "decompress.h"
 #include "window.h"
 #include "list_menu.h"
+#include "item_menu.h"
 #include "item.h"
 #include "menu_indicators.h"
 #include "field_map_obj.h"
@@ -50,7 +52,7 @@ void TeachyTvSetWindowRegs();
 void TeachyTvSetupBg();
 void TeachyTvLoadGraphic();
 extern void TeachyTvPostBattleFadeControl(u8);
-extern void sub_815B2C0(u8);
+extern void TeachyTvOptionListController(u8);
 extern void VblankHblankHandlerSetZero();
 extern void sub_812B1E0(u16);
 extern struct BgTemplate gUnknown_84792E0;
@@ -63,6 +65,15 @@ extern struct SpritePalette gUnknown_83A5348;
 extern void sub_815BD80(void *);
 typedef struct Task Task;
 extern struct WindowTemplate gUnknown_84792F0;
+extern void TeachyTvRenderMsgAndSwitchClusterFuncs(u8 taskId);
+extern struct ListMenuTemplate gUnknown_8479368;
+extern struct ListMenuItem gUnknown_8479340;
+extern u8 ListMenuInitInternal(struct ListMenuTemplate *, u16 scrollOffset, u16 selectedRow); 
+void TeachyTvAudioByInput(s32, bool8, struct ListMenu *);
+extern void sub_8055DC4();
+extern void TeachyTvGrassAnimationMain(u8 taskId, s16 x, s16 y, u8 subpriority, bool8 mode);
+extern const struct ScrollIndicatorArrowPairTemplate gUnknown_8479380;
+extern void TeachyTvQuitFadeControlAndTaskDel(u8 taskId);
 
 
 void C2TeachyTv()
@@ -156,7 +167,7 @@ void C2TeachyTvMainCallback()
         }
         else
         {
-            taskId = CreateTask(sub_815B2C0, 0);
+            taskId = CreateTask(TeachyTvOptionListController, 0);
             x = (u32)TeachyTvSetupWindow();
             gTasks[taskId].data[0] = (x << 24) >> 24;
             gTasks[taskId].data[1] = TeachyTvSetupObjEventAndOam();
@@ -219,11 +230,6 @@ void TeachyTvCreateAndRenderRbox()
     CopyWindowToVram(0, 2u);
 }
 
-extern struct ListMenuTemplate gUnknown_8479368;
-extern struct ListMenuItem gUnknown_8479340;
-extern u8 ListMenuInitInternal(struct ListMenuTemplate *, u16 scrollOffset, u16 selectedRow); 
-void TeachyTvAudioByInput(s32, bool8, struct ListMenu *);
-
 u8 TeachyTvSetupWindow()
 {
     int hasItem;
@@ -243,8 +249,6 @@ u8 TeachyTvSetupWindow()
                gTeachyTV_StaticResources.scrollOffset,
                gTeachyTV_StaticResources.selectedRow);
 }
-
-extern const struct ScrollIndicatorArrowPairTemplate gUnknown_8479380;
 
 void TeachyTvSetupScrollIndicatorArrowPair()
 {
@@ -344,8 +348,6 @@ void TeachyTvBg2AnimController()
     schedule_bg_copy_tilemap_to_vram(2u);
 }
 
-extern void TeachyTvGrassAnimationMain(u8 taskId, s16 x, s16 y, u8 subpriority, bool8 mode);
-
 void TeachyTvSetupPostBattleWindowAndObj(u8 taskId)
 {
     u16 *v2 = gTasks[taskId].data;
@@ -373,3 +375,43 @@ void TeachyTvSetupPostBattleWindowAndObj(u8 taskId)
     v2[5] = 0;
     TeachyTvGrassAnimationMain(taskId, v3->pos2.x, v3->pos2.y, 0, 1u);
 }
+
+void TeachyTvInitTextPrinter(char *text)
+{
+    u8 spd;
+    gTextFlags.autoScroll = 0;
+    spd = GetTextSpeedSetting();
+    AddTextPrinterParameterized2(0, 4u, (const u8 *)text, spd, 0, 1u, 0xCu, 3u);
+}
+
+void TeachyTvFree()
+{
+    Free(gUnknown_203F450);
+    gUnknown_203F450 = NULL;
+    FreeAllWindowBuffers();
+}
+
+void TeachyTvQuitBeginFade(u8 taskId)
+{
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10u, 0);
+    gTasks[taskId].func = TeachyTvQuitFadeControlAndTaskDel;
+}
+
+void TeachyTvQuitFadeControlAndTaskDel(u8 taskId)
+{
+    if ( !(gPaletteFade.active) )
+    {
+        if ( *(u32 *)gUnknown_203F450 )
+        {
+            SetMainCallback2(*(void (**)())gUnknown_203F450);
+        }
+        else
+        {
+            sub_8055DC4();
+            SetMainCallback2((void (*)())gTeachyTV_StaticResources.callback);
+        }
+        TeachyTvFree();
+        DestroyTask(taskId);
+    }
+}
+

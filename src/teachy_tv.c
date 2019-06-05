@@ -53,6 +53,7 @@ extern u8 gUnknown_8E86F98; // pal
 extern struct ListMenuTemplate gUnknown_8479368;
 extern struct ListMenuItem gUnknown_8479340;
 extern struct WindowTemplate gUnknown_84792F0;
+extern u8 gUnknown_8479590;
 
 void C2TeachyTv();
 void C2TeachyTvMainCallback();
@@ -74,6 +75,7 @@ void TeachyTvOptionListController(u8);
 void TeachyTvAudioByInput(s32, bool8, struct ListMenu *);
 void TeachyTvQuitFadeControlAndTaskDel(u8 taskId);
 void TeachyTvRenderMsgAndSwitchClusterFuncs(u8 taskId);
+void TeachyTvClearBg1EndGraphicalText();
 
 extern void VblankHblankHandlerSetZero();
 extern void sub_812B1E0(u16);
@@ -83,7 +85,6 @@ extern void sub_8055DC4();
 extern void TeachyTvGrassAnimationMain(u8 taskId, s16 x, s16 y, u8 subpriority, bool8 mode);
 extern bool16 sub_80BF518(u8 textPrinterId);
 extern void _call_via_r1(s32 arg, void *func);
-extern void TeachyTvClearBg1EndGraphicalText();
 extern void TeachyTvBackToOptionList(u8 taskId);
 
 void C2TeachyTv()
@@ -778,4 +779,31 @@ void TeachyTvClusFuncDudeMoveLeft(u8 taskId)
         ++(u16)data[3];
     else
         --v2->pos2.x;
+}
+
+void TeachyTvClusFuncRenderAndRemoveBg1EndGraphic(u8 taskId)
+{
+    s16 *data;
+    int temp;
+
+    data = gTasks[taskId].data;
+    if ( !data[2] )
+    {
+        CopyToBgTilemapBufferRect_ChangePalette(1u, &gUnknown_8479590, 0x14u, 0xAu, 8u, 2u, 0x11u);
+        schedule_bg_copy_tilemap_to_vram(1u);
+    }
+    temp = (u16)data[2] + 1;
+    data[2] = temp;
+    if ( (s16)temp > 126 )
+    {
+        TeachyTvClearBg1EndGraphicalText();
+        (u16)data[2] = 0;
+        ++(u16)data[3];
+    }
+}
+
+void TeachyTvClearBg1EndGraphicalText()
+{
+    FillBgTilemapBufferRect_Palette0(1u, 0, 0x14u, 0xAu, 8u, 2u);
+    schedule_bg_copy_tilemap_to_vram(1u);
 }

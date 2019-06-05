@@ -24,6 +24,8 @@
 #include "constants/songs.h"
 #include "constants/items.h"
 
+typedef struct Task Task;
+
 typedef struct {
     void (*callback)();
     u8 mode;
@@ -36,6 +38,22 @@ typedef struct {
 
 extern TeachyTv_s gTeachyTV_StaticResources;
 extern void * gUnknown_203F450;
+extern const struct ScrollIndicatorArrowPairTemplate gUnknown_8479380;
+extern char gUnknown_841B83D;
+extern struct BgTemplate gUnknown_84792E0;
+extern struct SpritePalette gUnknown_83A5348;
+extern void (**gUnknown_8479548)(u8);
+extern char * gUnknown_8479560;
+extern char * gUnknown_8479578;
+extern void *gUnknown_203F450; // tilemap pointer location
+extern u8 gUnknown_8E86240; // tilemap
+extern u8 gUnknown_8E86BE8;
+extern u8 gUnknown_8E86D6C;
+extern u8 gUnknown_8E86F98; // pal
+extern struct ListMenuTemplate gUnknown_8479368;
+extern struct ListMenuItem gUnknown_8479340;
+extern struct WindowTemplate gUnknown_84792F0;
+
 void C2TeachyTv();
 void C2TeachyTvMainCallback();
 void VblankHandlerTeachyTv();
@@ -53,35 +71,20 @@ void TeachyTvSetupBg();
 void TeachyTvLoadGraphic();
 void TeachyTvPostBattleFadeControl(u8);
 void TeachyTvOptionListController(u8);
+void TeachyTvAudioByInput(s32, bool8, struct ListMenu *);
+void TeachyTvQuitFadeControlAndTaskDel(u8 taskId);
+void TeachyTvRenderMsgAndSwitchClusterFuncs(u8 taskId);
+
 extern void VblankHblankHandlerSetZero();
 extern void sub_812B1E0(u16);
-extern struct BgTemplate gUnknown_84792E0;
-extern void *gUnknown_203F450; // tilemap pointer location
-extern u8 gUnknown_8E86240; // tilemap
-extern u8 gUnknown_8E86BE8;
-extern u8 gUnknown_8E86D6C;
-extern u8 gUnknown_8E86F98; // pal
-extern struct SpritePalette gUnknown_83A5348;
 extern void sub_815BD80(void *);
-typedef struct Task Task;
-extern struct WindowTemplate gUnknown_84792F0;
-void TeachyTvRenderMsgAndSwitchClusterFuncs(u8 taskId);
-extern struct ListMenuTemplate gUnknown_8479368;
-extern struct ListMenuItem gUnknown_8479340;
 extern u8 ListMenuInitInternal(struct ListMenuTemplate *, u16 scrollOffset, u16 selectedRow); 
-void TeachyTvAudioByInput(s32, bool8, struct ListMenu *);
 extern void sub_8055DC4();
 extern void TeachyTvGrassAnimationMain(u8 taskId, s16 x, s16 y, u8 subpriority, bool8 mode);
-extern const struct ScrollIndicatorArrowPairTemplate gUnknown_8479380;
-void TeachyTvQuitFadeControlAndTaskDel(u8 taskId);
-extern char gUnknown_841B83D;
 extern bool16 sub_80BF518(u8 textPrinterId);
 extern void _call_via_r1(s32 arg, void *func);
-extern void (**gUnknown_8479548)(u8);
 extern void TeachyTvClearBg1EndGraphicalText();
 extern void TeachyTvBackToOptionList(u8 taskId);
-extern char * gUnknown_8479560;
-extern char * gUnknown_8479578;
 
 void C2TeachyTv()
 {
@@ -140,58 +143,58 @@ void C2TeachyTvMainCallback()
     state = gMain.state;
     // tried several ways to reproduce the control flow, but all failed. Now using goto
     if ( state == 0 )
-        goto section_0;
+        goto RESETANDLOAD;
     else if ( state == 1 )
-        goto section_1;
+        goto SETDMATOVRAM;
     else
         return;
-    section_0:
-        v4 = (u8 **)&gUnknown_203F450;
-        (*v4) = (u8*)AllocZeroed(0x4008u);
-        *(u32*)gUnknown_203F450 = (u32)state;
-        *((u8*)gUnknown_203F450 + 0x4006) = state;
-        *((u8*)gUnknown_203F450 + 0x4007) = 0xFF;
-        VblankHblankHandlerSetZero();
-        clear_scheduled_bg_copies_to_vram();
-        ScanlineEffect_Stop();
-        FreeAllSpritePalettes();
-        ResetPaletteFade();
-        ResetSpriteData();
-        ResetTasks();
-        TeachyTvSetupBg();
-        TeachyTvLoadGraphic();
-        ++gMain.state;
+RESETANDLOAD:
+    v4 = (u8 **)&gUnknown_203F450;
+    (*v4) = (u8*)AllocZeroed(0x4008u);
+    *(u32*)gUnknown_203F450 = (u32)state;
+    *((u8*)gUnknown_203F450 + 0x4006) = state;
+    *((u8*)gUnknown_203F450 + 0x4007) = 0xFF;
+    VblankHblankHandlerSetZero();
+    clear_scheduled_bg_copies_to_vram();
+    ScanlineEffect_Stop();
+    FreeAllSpritePalettes();
+    ResetPaletteFade();
+    ResetSpriteData();
+    ResetTasks();
+    TeachyTvSetupBg();
+    TeachyTvLoadGraphic();
+    ++gMain.state;
+    return;
+SETDMATOVRAM:
+    if( free_temp_tile_data_buffers_if_possible() == 1 )
         return;
-    section_1:
-        if( free_temp_tile_data_buffers_if_possible() == 1 )
-            return;
-        TeachyTvCreateAndRenderRbox();
-        TeachyTvInitIo();
-        if ( gTeachyTV_StaticResources.mode == 2 )
-        {
-            taskId = CreateTask(TeachyTvPostBattleFadeControl, 0);
-            gTasks[taskId].data[1] = TeachyTvSetupObjEventAndOam();
-            TeachyTvSetupPostBattleWindowAndObj(taskId);
-        }
-        else
-        {
-            taskId = CreateTask(TeachyTvOptionListController, 0);
-            x = (u32)TeachyTvSetupWindow();
-            gTasks[taskId].data[0] = (x << 24) >> 24;
-            gTasks[taskId].data[1] = TeachyTvSetupObjEventAndOam();
-            TeachyTvSetupScrollIndicatorArrowPair();
-            PlayNewMapMusic(BGM_FRLG_TEACHY_TV);
-            TeachyTvSetWindowRegs();
-        }
-        schedule_bg_copy_tilemap_to_vram(0);
-        schedule_bg_copy_tilemap_to_vram(1u);
-        schedule_bg_copy_tilemap_to_vram(2u);
-        schedule_bg_copy_tilemap_to_vram(3u);
-        sub_812B1E0(9); // help system something
-        BlendPalettes(0xFFFFFFFF, 0x10u, 0);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10u, 0, 0);
-        SetVBlankCallback(VblankHandlerTeachyTv);
-        SetMainCallback2(C2TeachyTv);
+    TeachyTvCreateAndRenderRbox();
+    TeachyTvInitIo();
+    if ( gTeachyTV_StaticResources.mode == 2 )
+    {
+        taskId = CreateTask(TeachyTvPostBattleFadeControl, 0);
+        gTasks[taskId].data[1] = TeachyTvSetupObjEventAndOam();
+        TeachyTvSetupPostBattleWindowAndObj(taskId);
+    }
+    else
+    {
+        taskId = CreateTask(TeachyTvOptionListController, 0);
+        x = (u32)TeachyTvSetupWindow();
+        gTasks[taskId].data[0] = (x << 24) >> 24;
+        gTasks[taskId].data[1] = TeachyTvSetupObjEventAndOam();
+        TeachyTvSetupScrollIndicatorArrowPair();
+        PlayNewMapMusic(BGM_FRLG_TEACHY_TV);
+        TeachyTvSetWindowRegs();
+    }
+    schedule_bg_copy_tilemap_to_vram(0);
+    schedule_bg_copy_tilemap_to_vram(1u);
+    schedule_bg_copy_tilemap_to_vram(2u);
+    schedule_bg_copy_tilemap_to_vram(3u);
+    sub_812B1E0(9); // help system something
+    BlendPalettes(0xFFFFFFFF, 0x10u, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10u, 0, 0);
+    SetVBlankCallback(VblankHandlerTeachyTv);
+    SetMainCallback2(C2TeachyTv);
 }
 
 void TeachyTvSetupBg()
@@ -464,94 +467,94 @@ __attribute__((naked))
 void TeachyTvOptionListController(u8 taskId)
 {
     asm_unified("\n\
-    push {r4-r7,lr}\n\
-    lsls r0, 24\n\
-    lsrs r7, r0, 24\n\
-    lsls r0, r7, 2\n\
-    adds r0, r7\n\
-    lsls r0, 3\n\
-    ldr r1, _0815B31C @ =gTasks+0x8\n\
-    adds r6, r0, r1\n\
-    bl TeachyTvBg2AnimController\n\
-    ldr r0, _0815B320 @ =gPaletteFade\n\
-    ldrb r1, [r0, 0x7]\n\
-    movs r0, 0x80\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _0815B37A\n\
-    ldrb r0, [r6]\n\
-    bl ListMenuHandleInput\n\
-    adds r5, r0, 0\n\
-    ldrb r0, [r6]\n\
-    ldr r4, _0815B324 @ =gTeachyTV_StaticResources+6\n\
-    adds r2, r4, 0x2\n\
-    adds r1, r4, 0\n\
-    bl ListMenuGetScrollAndRow\n\
-    ldr r0, _0815B328 @ =gMain\n\
-    ldrh r1, [r0, 0x2E]\n\
-    movs r0, 0x4\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0815B30A\n\
-    subs r0, r4, 0x6\n\
-    ldr r1, [r0]\n\
-    ldr r0, _0815B32C @ =UseFameCheckerFromMenu\n\
-    cmp r1, r0\n\
-    bne _0815B330\n\
-_0815B30A:\n\
-    movs r0, 0x2\n\
-    negs r0, r0\n\
-    cmp r5, r0\n\
-    beq _0815B330\n\
-    adds r0, 0x1\n\
-    cmp r5, r0\n\
-    bne _0815B33E\n\
-    b _0815B37A\n\
-    .align 2, 0\n\
-_0815B31C: .4byte gTasks+0x8\n\
-_0815B320: .4byte gPaletteFade\n\
-_0815B324: .4byte gTeachyTV_StaticResources+6\n\
-_0815B328: .4byte gMain\n\
-_0815B32C: .4byte UseFameCheckerFromMenu\n\
-_0815B330:\n\
-    movs r0, 0x5\n\
-    bl PlaySE\n\
-    adds r0, r7, 0\n\
-    bl TeachyTvQuitBeginFade\n\
-    b _0815B37A\n\
-_0815B33E:\n\
-    movs r0, 0x5\n\
-    bl PlaySE\n\
-    ldr r2, _0815B380 @ =gTeachyTV_StaticResources\n\
-    movs r4, 0\n\
-    strb r5, [r2, 0x5]\n\
-    ldrb r0, [r6]\n\
-    adds r1, r2, 0x6\n\
-    adds r2, 0x8\n\
-    bl DestroyListMenu\n\
-    bl TeachyTvClearWindowRegs\n\
-    movs r0, 0x1\n\
-    bl ClearWindowTilemap\n\
-    movs r0, 0\n\
-    bl schedule_bg_copy_tilemap_to_vram\n\
-    bl TeachyTvRemoveScrollIndicatorArrowPair\n\
-    strh r4, [r6, 0x6]\n\
-    strh r4, [r6, 0x4]\n\
-    ldr r1, _0815B384 @ =gTasks\n\
-    lsls r0, r7, 2\n\
-    adds r0, r7\n\
-    lsls r0, 3\n\
-    adds r0, r1\n\
-    ldr r1, _0815B388 @ =TeachyTvRenderMsgAndSwitchClusterFuncs\n\
-    str r1, [r0]\n\
-_0815B37A:\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_0815B380: .4byte gTeachyTV_StaticResources\n\
-_0815B384: .4byte gTasks\n\
-_0815B388: .4byte TeachyTvRenderMsgAndSwitchClusterFuncs\n\
+        push {r4-r7,lr}\n\
+        lsls r0, 24\n\
+        lsrs r7, r0, 24\n\
+        lsls r0, r7, 2\n\
+        adds r0, r7\n\
+        lsls r0, 3\n\
+        ldr r1, _0815B31C @ =gTasks+0x8\n\
+        adds r6, r0, r1\n\
+        bl TeachyTvBg2AnimController\n\
+        ldr r0, _0815B320 @ =gPaletteFade\n\
+        ldrb r1, [r0, 0x7]\n\
+        movs r0, 0x80\n\
+        ands r0, r1\n\
+        cmp r0, 0\n\
+        bne _0815B37A\n\
+        ldrb r0, [r6]\n\
+        bl ListMenuHandleInput\n\
+        adds r5, r0, 0\n\
+        ldrb r0, [r6]\n\
+        ldr r4, _0815B324 @ =gTeachyTV_StaticResources+6\n\
+        adds r2, r4, 0x2\n\
+        adds r1, r4, 0\n\
+        bl ListMenuGetScrollAndRow\n\
+        ldr r0, _0815B328 @ =gMain\n\
+        ldrh r1, [r0, 0x2E]\n\
+        movs r0, 0x4\n\
+        ands r0, r1\n\
+        cmp r0, 0\n\
+        beq _0815B30A\n\
+        subs r0, r4, 0x6\n\
+        ldr r1, [r0]\n\
+        ldr r0, _0815B32C @ =UseFameCheckerFromMenu\n\
+        cmp r1, r0\n\
+        bne _0815B330\n\
+    _0815B30A:\n\
+        movs r0, 0x2\n\
+        negs r0, r0\n\
+        cmp r5, r0\n\
+        beq _0815B330\n\
+        adds r0, 0x1\n\
+        cmp r5, r0\n\
+        bne _0815B33E\n\
+        b _0815B37A\n\
+        .align 2, 0\n\
+    _0815B31C: .4byte gTasks+0x8\n\
+    _0815B320: .4byte gPaletteFade\n\
+    _0815B324: .4byte gTeachyTV_StaticResources+6\n\
+    _0815B328: .4byte gMain\n\
+    _0815B32C: .4byte UseFameCheckerFromMenu\n\
+    _0815B330:\n\
+        movs r0, 0x5\n\
+        bl PlaySE\n\
+        adds r0, r7, 0\n\
+        bl TeachyTvQuitBeginFade\n\
+        b _0815B37A\n\
+    _0815B33E:\n\
+        movs r0, 0x5\n\
+        bl PlaySE\n\
+        ldr r2, _0815B380 @ =gTeachyTV_StaticResources\n\
+        movs r4, 0\n\
+        strb r5, [r2, 0x5]\n\
+        ldrb r0, [r6]\n\
+        adds r1, r2, 0x6\n\
+        adds r2, 0x8\n\
+        bl DestroyListMenu\n\
+        bl TeachyTvClearWindowRegs\n\
+        movs r0, 0x1\n\
+        bl ClearWindowTilemap\n\
+        movs r0, 0\n\
+        bl schedule_bg_copy_tilemap_to_vram\n\
+        bl TeachyTvRemoveScrollIndicatorArrowPair\n\
+        strh r4, [r6, 0x6]\n\
+        strh r4, [r6, 0x4]\n\
+        ldr r1, _0815B384 @ =gTasks\n\
+        lsls r0, r7, 2\n\
+        adds r0, r7\n\
+        lsls r0, 3\n\
+        adds r0, r1\n\
+        ldr r1, _0815B388 @ =TeachyTvRenderMsgAndSwitchClusterFuncs\n\
+        str r1, [r0]\n\
+    _0815B37A:\n\
+        pop {r4-r7}\n\
+        pop {r0}\n\
+        bx r0\n\
+        .align 2, 0\n\
+    _0815B380: .4byte gTeachyTV_StaticResources\n\
+    _0815B384: .4byte gTasks\n\
+    _0815B388: .4byte TeachyTvRenderMsgAndSwitchClusterFuncs\n\
         ");
 }
 #endif
@@ -693,4 +696,86 @@ void TeachyTvClusFuncStartAnimNpcWalkIntoGrass(u8 taskId)
     data[4] = 0;
     data[5] = 1;
     ++data[3];
+}
+
+void TeachyTvClusFuncDudeMoveUp(u8 taskId)
+{
+    s16 *data;
+    struct Sprite *v3;
+    int temp;
+    int v4;
+
+    data = gTasks[taskId].data;
+    v3 = &gSprites[data[1]];
+    ChangeBgY(3u, 0x100u, 2u);
+    v4 = (u16)data[2] + 1;
+    ((u16*)data)[2] = v4;
+    if ( !( v4 % 16 ) )
+    {
+        --((u8*)gUnknown_203F450)[0x4005];
+        TeachyTvGrassAnimationMain(taskId, v3->pos2.x, v3->pos2.y, 0, 0);
+    }
+    if ( data[2] == 0x30 )
+    {
+        data[2] = 0;
+        data[4] = -1;
+        data[5] = 0;
+        StartSpriteAnim(v3, 7u);
+        ++data[3];
+    }
+}
+
+void TeachyTvClusFuncDudeMoveRight(u8 taskId)
+{
+    u16 *data;
+    struct Sprite *v3;
+    int v4;
+
+    data = (u16 *)gTasks[taskId].data;
+    v3 = &gSprites[(s16)data[1]];
+    ChangeBgX(3u, 0x100u, 1u);
+    v4 = data[2] + 1;
+    data[2] = v4;
+    if ( !(v4 & 0xF) )
+        ++((u8*)gUnknown_203F450)[0x4004];
+    if ( !((((s16*)data)[2] + 8) & 0xF) )
+        TeachyTvGrassAnimationMain(taskId, v3->pos2.x + 8, v3->pos2.y, 0, 0);
+    if ( (s16)data[2] == 0x30 )
+    {
+        data[2] = 0;
+        data[4] = 0;
+        data[5] = 0;
+        StartSpriteAnim(v3, 3u);
+        ++data[3];
+    }
+}
+
+void TeachyTvClusFuncDudeTurnLeft(u8 taskId)
+{
+    s16 *data;
+    struct Sprite *v3;
+
+    data = gTasks[taskId].data;
+    v3 = &gSprites[data[1]];
+    StartSpriteAnim(v3, 6u);
+    ++(u16)data[3];
+    data[4] = 0;
+    data[5] = 0;
+    TeachyTvGrassAnimationMain(taskId, v3->pos2.x, v3->pos2.y, 0, 0);
+}
+
+void TeachyTvClusFuncDudeMoveLeft(u8 taskId)
+{
+    s16 *data;
+    struct Sprite *v2;
+
+    data = gTasks[taskId].data;
+    v2 = &gSprites[data[1]];
+
+    if ( !(v2->pos2.x & 0xF) )
+        TeachyTvGrassAnimationMain(taskId, v2->pos2.x - 8, v2->pos2.y, 0, 0);
+    if ( v2->pos2.x == 8 )
+        ++(u16)data[3];
+    else
+        --v2->pos2.x;
 }

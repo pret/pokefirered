@@ -8,7 +8,6 @@
 #include "new_menu_helpers.h"
 #include "sound.h"
 #include "malloc.h"
-#include "sprite.h"
 #include "scanline_effect.h"
 #include "bg.h"
 #include "gpu_regs.h"
@@ -28,6 +27,7 @@
 #include "battle_transition.h"
 #include "battle_2.h"
 #include "battle.h"
+#include "global.fieldmap.h"
 
 typedef struct Task Task;
 typedef struct {
@@ -92,6 +92,12 @@ u8 TeachyTvGrassAnimationCheckIfNeedsToGenerateGrassObj(s16 x, s16 y);
 void TeachyTvGrassAnimationObjCallback(struct Sprite *sprite);
 void TeachyTvRestorePlayerPartyCallback();
 void TeachyTvPreBattleAnimAndSetBattleCallback(u8 taskId);
+void TeachyTvLoadMapTilesetToBuffer(struct Tileset *ts, u8 *dstBuffer, u16 size);
+void TeachyTvPushBackNewMapPalIndexArrayEntry(struct MapData *mStruct, u16 *buf1, u8 *palIndexArray, u16 mapEntry, u16 offset);
+void TeachyTvComputeMapTilesFromTilesetAndMetaTiles(u16 *metaTilesArray, u8 *blockBuf, u8 *tileset);
+void TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(u8 *blockBuf, u8 *tileset, u8 metaTile);
+u16 TeachyTvComputePalIndexArrayEntryByMetaTile(u8 *palIndexArrayBuf, u16 metaTile);
+void TeachyTvLoadMapPalette(struct MapData *mStruct, u8 *palIndexArray);
 
 extern void VblankHblankHandlerSetZero();
 extern void sub_812B1E0(u16);
@@ -1026,3 +1032,598 @@ void TeachyTvRestorePlayerPartyCallback()
     sub_815ABFC();
 }
 
+NAKED
+void TeachyTvLoadBg3Map(void *buffer)
+{
+    asm_unified("\n\
+        push {r4-r7,lr}\n\
+        mov r7, r10\n\
+        mov r6, r9\n\
+        mov r5, r8\n\
+        push {r5-r7}\n\
+        sub sp, 0x1C\n\
+        str r0, [sp, 0x4]\n\
+        movs r0, 0\n\
+        str r0, [sp, 0x10]\n\
+        ldr r1, _0815BE1C @ =Route1_Layout\n\
+        mov r8, r1\n\
+        movs r0, 0x80\n\
+        lsls r0, 4\n\
+        bl AllocZeroed\n\
+        adds r6, r0, 0\n\
+        movs r0, 0x80\n\
+        lsls r0, 8\n\
+        bl AllocZeroed\n\
+        str r0, [sp, 0x8]\n\
+        movs r0, 0x10\n\
+        bl Alloc\n\
+        str r0, [sp, 0xC]\n\
+        movs r1, 0xFF\n\
+        movs r2, 0x10\n\
+        bl memset\n\
+        mov r2, r8\n\
+        ldr r0, [r2, 0x10]\n\
+        movs r2, 0xA0\n\
+        lsls r2, 2\n\
+        ldr r1, [sp, 0x8]\n\
+        bl TeachyTvLoadMapTilesetToBuffer\n\
+        mov r3, r8\n\
+        ldr r0, [r3, 0x14]\n\
+        ldr r2, [sp, 0x8]\n\
+        movs r3, 0xA0\n\
+        lsls r3, 7\n\
+        adds r1, r2, r3\n\
+        movs r2, 0xC0\n\
+        lsls r2, 1\n\
+        bl TeachyTvLoadMapTilesetToBuffer\n\
+        movs r4, 0\n\
+    _0815BDDE:\n\
+        movs r2, 0\n\
+        adds r0, r4, 0x6\n\
+        str r0, [sp, 0x18]\n\
+        lsls r1, r4, 4\n\
+        mov r10, r1\n\
+        lsls r3, r4, 6\n\
+        mov r9, r3\n\
+        adds r4, 0x1\n\
+        str r4, [sp, 0x14]\n\
+    _0815BDF0:\n\
+        mov r1, r8\n\
+        ldr r0, [r1]\n\
+        ldr r3, [sp, 0x18]\n\
+        muls r0, r3\n\
+        ldr r1, [r1, 0xC]\n\
+        adds r0, r2, r0\n\
+        lsls r0, 1\n\
+        adds r0, r1\n\
+        ldrh r1, [r0, 0x10]\n\
+        ldr r3, _0815BE20 @ =0x000003ff\n\
+        adds r0, r3, 0\n\
+        adds r4, r0, 0\n\
+        ands r4, r1\n\
+        movs r3, 0\n\
+        mov r0, r10\n\
+        adds r1, r0, r2\n\
+        lsls r5, r2, 1\n\
+        adds r7, r2, 0x1\n\
+        cmp r3, r1\n\
+        bge _0815BE3C\n\
+        ldrh r0, [r6]\n\
+        b _0815BE34\n\
+        .align 2, 0\n\
+    _0815BE1C: .4byte Route1_Layout\n\
+    _0815BE20: .4byte 0x000003ff\n\
+    _0815BE24:\n\
+        adds r0, r3, 0x1\n\
+        lsls r0, 16\n\
+        lsrs r3, r0, 16\n\
+        cmp r3, r1\n\
+        bge _0815BE3C\n\
+        lsls r0, r3, 1\n\
+        adds r0, r6\n\
+        ldrh r0, [r0]\n\
+    _0815BE34:\n\
+        cmp r0, 0\n\
+        beq _0815BE46\n\
+        cmp r0, r4\n\
+        bne _0815BE24\n\
+    _0815BE3C:\n\
+        lsls r0, r3, 1\n\
+        adds r0, r6\n\
+        ldrh r0, [r0]\n\
+        cmp r0, 0\n\
+        bne _0815BE56\n\
+    _0815BE46:\n\
+        lsls r0, r3, 1\n\
+        adds r0, r6\n\
+        strh r4, [r0]\n\
+        ldr r0, [sp, 0x10]\n\
+        adds r0, 0x1\n\
+        lsls r0, 16\n\
+        lsrs r0, 16\n\
+        str r0, [sp, 0x10]\n\
+    _0815BE56:\n\
+        mov r2, r9\n\
+        adds r1, r2, r5\n\
+        lsls r1, 1\n\
+        ldr r0, [sp, 0x4]\n\
+        adds r1, r0, r1\n\
+        str r3, [sp]\n\
+        mov r0, r8\n\
+        ldr r2, [sp, 0xC]\n\
+        adds r3, r4, 0\n\
+        bl TeachyTvPushBackNewMapPalIndexArrayEntry\n\
+        lsls r0, r7, 16\n\
+        lsrs r2, r0, 16\n\
+        cmp r2, 0xF\n\
+        bls _0815BDF0\n\
+        ldr r1, [sp, 0x14]\n\
+        lsls r0, r1, 16\n\
+        lsrs r4, r0, 16\n\
+        cmp r4, 0x8\n\
+        bls _0815BDDE\n\
+        ldr r2, [sp, 0x10]\n\
+        lsls r0, r2, 7\n\
+        bl Alloc\n\
+        adds r7, r0, 0\n\
+        movs r0, 0x80\n\
+        bl Alloc\n\
+        adds r5, r0, 0\n\
+        movs r4, 0\n\
+        ldr r3, [sp, 0x10]\n\
+        lsls r3, 23\n\
+        mov r9, r3\n\
+        ldr r0, [sp, 0x10]\n\
+        cmp r4, r0\n\
+        bcs _0815BF00\n\
+        ldr r1, _0815BECC @ =0x0000027f\n\
+        mov r10, r1\n\
+    _0815BEA2:\n\
+        adds r0, r5, 0\n\
+        movs r1, 0\n\
+        movs r2, 0x80\n\
+        bl memset\n\
+        lsls r0, r4, 1\n\
+        adds r1, r0, r6\n\
+        ldrh r0, [r1]\n\
+        cmp r0, r10\n\
+        bhi _0815BED0\n\
+        mov r2, r8\n\
+        ldr r0, [r2, 0x10]\n\
+        ldrh r1, [r1]\n\
+        lsls r1, 4\n\
+        ldr r0, [r0, 0xC]\n\
+        adds r0, r1\n\
+        adds r1, r5, 0\n\
+        ldr r2, [sp, 0x8]\n\
+        bl TeachyTvComputeMapTilesFromTilesetAndMetaTiles\n\
+        b _0815BEE8\n\
+        .align 2, 0\n\
+    _0815BECC: .4byte 0x0000027f\n\
+    _0815BED0:\n\
+        mov r3, r8\n\
+        ldr r0, [r3, 0x14]\n\
+        ldrh r1, [r1]\n\
+        ldr r2, _0815BF44 @ =0xfffffd80\n\
+        adds r1, r2\n\
+        lsls r1, 4\n\
+        ldr r0, [r0, 0xC]\n\
+        adds r0, r1\n\
+        adds r1, r5, 0\n\
+        ldr r2, [sp, 0x8]\n\
+        bl TeachyTvComputeMapTilesFromTilesetAndMetaTiles\n\
+    _0815BEE8:\n\
+        lsls r1, r4, 7\n\
+        adds r1, r7, r1\n\
+        adds r0, r5, 0\n\
+        movs r2, 0x20\n\
+        bl CpuFastSet\n\
+        adds r0, r4, 0x1\n\
+        lsls r0, 16\n\
+        lsrs r4, r0, 16\n\
+        ldr r3, [sp, 0x10]\n\
+        cmp r4, r3\n\
+        bcc _0815BEA2\n\
+    _0815BF00:\n\
+        mov r0, r9\n\
+        lsrs r2, r0, 16\n\
+        movs r0, 0x3\n\
+        adds r1, r7, 0\n\
+        movs r3, 0\n\
+        bl LoadBgTiles\n\
+        mov r0, r8\n\
+        ldr r1, [sp, 0xC]\n\
+        bl TeachyTvLoadMapPalette\n\
+        adds r0, r5, 0\n\
+        bl Free\n\
+        adds r0, r7, 0\n\
+        bl Free\n\
+        ldr r0, [sp, 0xC]\n\
+        bl Free\n\
+        ldr r0, [sp, 0x8]\n\
+        bl Free\n\
+        adds r0, r6, 0\n\
+        bl Free\n\
+        add sp, 0x1C\n\
+        pop {r3-r5}\n\
+        mov r8, r3\n\
+        mov r9, r4\n\
+        mov r10, r5\n\
+        pop {r4-r7}\n\
+        pop {r0}\n\
+        bx r0\n\
+        .align 2, 0\n\
+    _0815BF44: .4byte 0xfffffd80\n\
+            ");
+}
+
+void TeachyTvLoadMapTilesetToBuffer(struct Tileset *ts, u8 *dstBuffer, u16 size)
+{
+    if ( ts )
+    {
+        if ( !ts->isCompressed )
+            CpuFastSet(ts->tiles, dstBuffer, 8 * size);
+        else
+            LZDecompressWram(ts->tiles, dstBuffer);
+    }
+}
+
+#ifdef NONMATCHING
+void TeachyTvPushBackNewMapPalIndexArrayEntry(struct MapData *mStruct, u16 *buf1, u8 *palIndexArray, u16 mapEntry, u16 offset)
+{
+    // weird, seems easy but no match
+    struct Tileset *ts;
+    u16 *metaTileEntryAddr;
+
+    int temp = mapEntry;
+    if ( temp <= 0x27Fu )
+    {
+        ts = mStruct->primaryTileset;
+    }
+    else
+    {
+        ts = mStruct->secondaryTileset;
+        temp = mapEntry - 0x280;
+    }
+    metaTileEntryAddr = &((u16*)(ts->metatiles))[8 * temp];
+    buf1[0] = (TeachyTvComputePalIndexArrayEntryByMetaTile(palIndexArray, metaTileEntryAddr[0]) << 12) + 4 * offset;
+    buf1[1] = (TeachyTvComputePalIndexArrayEntryByMetaTile(palIndexArray, metaTileEntryAddr[1]) << 12) + 4 * offset + 1;
+    buf1[0x20] = (TeachyTvComputePalIndexArrayEntryByMetaTile(palIndexArray, metaTileEntryAddr[2]) << 12) + 4 * offset + 2;
+    buf1[0x21] = (TeachyTvComputePalIndexArrayEntryByMetaTile(palIndexArray, metaTileEntryAddr[3]) << 12) + 4 * offset + 3;
+}
+#else
+NAKED
+void TeachyTvPushBackNewMapPalIndexArrayEntry(struct MapData *mStruct, u16 *buf1, u8 *palIndexArray, u16 mapEntry, u16 offset)
+{
+    asm_unified("\n\
+        push {r4-r7,lr}\n\
+        adds r5, r0, 0\n\
+        adds r7, r1, 0\n\
+        adds r6, r2, 0\n\
+        ldr r0, [sp, 0x14]\n\
+        lsls r3, 16\n\
+        lsrs r1, r3, 16\n\
+        lsls r0, 16\n\
+        lsrs r4, r0, 16\n\
+        ldr r0, _0815BF8C @ =0x0000027f\n\
+        cmp r1, r0\n\
+        bhi _0815BF90\n\
+        ldr r0, [r5, 0x10]\n\
+        b _0815BF96\n\
+        .align 2, 0\n\
+    _0815BF8C: .4byte 0x0000027f\n\
+    _0815BF90:\n\
+        ldr r0, [r5, 0x14]\n\
+        ldr r2, _0815BFEC @ =0xfffffd80\n\
+        adds r1, r2\n\
+    _0815BF96:\n\
+        lsls r1, 4\n\
+        ldr r0, [r0, 0xC]\n\
+        adds r5, r0, r1\n\
+        ldrh r1, [r5]\n\
+        adds r0, r6, 0\n\
+        bl TeachyTvComputePalIndexArrayEntryByMetaTile\n\
+        lsls r0, 12\n\
+        lsls r4, 2\n\
+        adds r0, r4\n\
+        strh r0, [r7]\n\
+        ldrh r1, [r5, 0x2]\n\
+        adds r0, r6, 0\n\
+        bl TeachyTvComputePalIndexArrayEntryByMetaTile\n\
+        lsls r0, 12\n\
+        adds r0, r4\n\
+        adds r0, 0x1\n\
+        strh r0, [r7, 0x2]\n\
+        ldrh r1, [r5, 0x4]\n\
+        adds r0, r6, 0\n\
+        bl TeachyTvComputePalIndexArrayEntryByMetaTile\n\
+        adds r1, r7, 0\n\
+        adds r1, 0x40\n\
+        lsls r0, 12\n\
+        adds r0, r4\n\
+        adds r0, 0x2\n\
+        strh r0, [r1]\n\
+        ldrh r1, [r5, 0x6]\n\
+        adds r0, r6, 0\n\
+        bl TeachyTvComputePalIndexArrayEntryByMetaTile\n\
+        adds r1, r7, 0\n\
+        adds r1, 0x42\n\
+        lsls r0, 12\n\
+        adds r0, r4\n\
+        adds r0, 0x3\n\
+        strh r0, [r1]\n\
+        pop {r4-r7}\n\
+        pop {r0}\n\
+        bx r0\n\
+        .align 2, 0\n\
+    _0815BFEC: .4byte 0xfffffd80\n\
+        ");
+}
+#endif
+
+void TeachyTvComputeMapTilesFromTilesetAndMetaTiles(u16 *metaTilesArray, u8 *blockBuf, u8 *tileset)
+{
+    TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(
+        blockBuf,
+        &tileset[0x20 * (*metaTilesArray & 0x3FF)],
+        (*metaTilesArray >> 10) & 3);
+    TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(blockBuf, &tileset[0x20 * (metaTilesArray[4] & 0x3FF)], (metaTilesArray[4] >> 10) & 3);
+    TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(blockBuf + 0x20, &tileset[0x20 * (metaTilesArray[1] & 0x3FF)], (metaTilesArray[1] >> 10) & 3);
+    TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(blockBuf + 0x20, &tileset[0x20 * (metaTilesArray[5] & 0x3FF)], (metaTilesArray[5] >> 10) & 3);
+    TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(blockBuf + 0x40, &tileset[0x20 * (metaTilesArray[2] & 0x3FF)], (metaTilesArray[2] >> 10) & 3);
+    TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(blockBuf + 0x40, &tileset[0x20 * (metaTilesArray[6] & 0x3FF)], (metaTilesArray[6] >> 10) & 3);
+    blockBuf += 0x60;
+    TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(blockBuf, &tileset[0x20 * (metaTilesArray[3] & 0x3FF)], (metaTilesArray[3] >> 10) & 3);
+    TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(blockBuf, &tileset[0x20 * (metaTilesArray[7] & 0x3FF)], (metaTilesArray[7] >> 10) & 3);
+}
+
+NAKED
+void TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(u8 *blockBuf, u8 *tileset, u8 metaTile)
+{
+    asm_unified("\n\
+        push {r4-r7,lr}\n\
+        mov r7, r10\n\
+        mov r6, r9\n\
+        mov r5, r8\n\
+        push {r5-r7}\n\
+        sub sp, 0x4\n\
+        mov r9, r0\n\
+        adds r4, r1, 0\n\
+        lsls r2, 24\n\
+        lsrs r2, 24\n\
+        mov r10, r2\n\
+        movs r0, 0x20\n\
+        bl AllocZeroed\n\
+        adds r6, r0, 0\n\
+        movs r0, 0x20\n\
+        bl AllocZeroed\n\
+        str r0, [sp]\n\
+        adds r0, r4, 0\n\
+        adds r1, r6, 0\n\
+        movs r2, 0x8\n\
+        bl CpuFastSet\n\
+        movs r0, 0x1\n\
+        mov r1, r10\n\
+        ands r0, r1\n\
+        cmp r0, 0\n\
+        beq _0815C15A\n\
+        movs r5, 0\n\
+        movs r7, 0xF\n\
+        mov r12, r7\n\
+        movs r0, 0xF0\n\
+        mov r8, r0\n\
+    _0815C118:\n\
+        movs r3, 0\n\
+        lsls r4, r5, 2\n\
+    _0815C11C:\n\
+        subs r0, r3, 0x3\n\
+        subs r0, r4, r0\n\
+        adds r0, r6, r0\n\
+        ldrb r1, [r0]\n\
+        adds r2, r4, r3\n\
+        ldr r7, [sp]\n\
+        adds r2, r7, r2\n\
+        adds r0, r1, 0\n\
+        mov r7, r12\n\
+        ands r0, r7\n\
+        lsls r0, 4\n\
+        mov r7, r8\n\
+        ands r1, r7\n\
+        lsrs r1, 4\n\
+        adds r0, r1\n\
+        strb r0, [r2]\n\
+        adds r0, r3, 0x1\n\
+        lsls r0, 24\n\
+        lsrs r3, r0, 24\n\
+        cmp r3, 0x3\n\
+        bls _0815C11C\n\
+        adds r0, r5, 0x1\n\
+        lsls r0, 24\n\
+        lsrs r5, r0, 24\n\
+        cmp r5, 0x7\n\
+        bls _0815C118\n\
+        ldr r0, [sp]\n\
+        adds r1, r6, 0\n\
+        movs r2, 0x8\n\
+        bl CpuFastSet\n\
+    _0815C15A:\n\
+        movs r0, 0x2\n\
+        mov r1, r10\n\
+        ands r0, r1\n\
+        cmp r0, 0\n\
+        beq _0815C18E\n\
+        movs r5, 0\n\
+    _0815C166:\n\
+        lsls r0, r5, 2\n\
+        ldr r7, [sp]\n\
+        adds r0, r7\n\
+        movs r1, 0x7\n\
+        subs r1, r5\n\
+        lsls r1, 2\n\
+        adds r1, r6\n\
+        movs r2, 0x4\n\
+        bl memcpy\n\
+        adds r0, r5, 0x1\n\
+        lsls r0, 24\n\
+        lsrs r5, r0, 24\n\
+        cmp r5, 0x7\n\
+        bls _0815C166\n\
+        ldr r0, [sp]\n\
+        adds r1, r6, 0\n\
+        movs r2, 0x8\n\
+        bl CpuFastSet\n\
+    _0815C18E:\n\
+        movs r5, 0\n\
+        movs r0, 0xF0\n\
+        mov r8, r0\n\
+        movs r1, 0xF\n\
+        mov r12, r1\n\
+    _0815C198:\n\
+        adds r4, r6, r5\n\
+        ldrb r0, [r4]\n\
+        mov r3, r8\n\
+        ands r3, r0\n\
+        cmp r3, 0\n\
+        beq _0815C1B2\n\
+        mov r7, r9\n\
+        adds r2, r7, r5\n\
+        ldrb r1, [r2]\n\
+        mov r0, r12\n\
+        ands r0, r1\n\
+        adds r0, r3\n\
+        strb r0, [r2]\n\
+    _0815C1B2:\n\
+        ldrb r0, [r4]\n\
+        mov r3, r12\n\
+        ands r3, r0\n\
+        cmp r3, 0\n\
+        beq _0815C1CA\n\
+        mov r0, r9\n\
+        adds r2, r0, r5\n\
+        ldrb r1, [r2]\n\
+        mov r0, r8\n\
+        ands r0, r1\n\
+        adds r0, r3\n\
+        strb r0, [r2]\n\
+    _0815C1CA:\n\
+        adds r0, r5, 0x1\n\
+        lsls r0, 24\n\
+        lsrs r5, r0, 24\n\
+        cmp r5, 0x1F\n\
+        bls _0815C198\n\
+        ldr r0, [sp]\n\
+        bl Free\n\
+        adds r0, r6, 0\n\
+        bl Free\n\
+        add sp, 0x4\n\
+        pop {r3-r5}\n\
+        mov r8, r3\n\
+        mov r9, r4\n\
+        mov r10, r5\n\
+        pop {r4-r7}\n\
+        pop {r0}\n\
+        bx r0\n\
+        ");
+}
+
+u16 TeachyTvComputePalIndexArrayEntryByMetaTile(u8 *palIndexArrayBuf, u16 metaTile)
+{
+    u32 pal;
+    u32 counter;
+    int firstEntry;
+    int temp;
+
+    pal = (u32)(metaTile << 16) >> 28;
+    counter = 0;
+    firstEntry = *palIndexArrayBuf;
+    if ( firstEntry != pal )
+    {
+        if ( firstEntry == 0xFF )
+        {
+            *palIndexArrayBuf = pal;
+        }
+        else
+        {
+            while ( 1 )
+            {
+                counter = ((counter + 1) << 0x10) >> 0x10;
+                if ( counter > 0xF )
+                    break;
+                temp = palIndexArrayBuf[counter];
+                if ( temp == pal )
+                    break;
+                if ( temp == 0xFF )
+                {
+                    palIndexArrayBuf[counter] = pal;
+                    break;
+                }
+            }
+        }
+    }
+    return (0xF - counter) & 0xFFFF;
+}
+
+#define NONMATCHING
+#ifdef NONMATCHING
+void TeachyTvLoadMapPalette(struct MapData *mStruct, u8 *palIndexArray)
+{
+    u8 counter, v3;
+    struct Tileset *ts;
+
+    for (counter = 0; counter < 0xF && palIndexArray[counter] != 0xFF; counter++)
+    {
+        if ( palIndexArray[counter] > 6u )
+            ts = mStruct->secondaryTileset;
+        else
+            ts = mStruct->primaryTileset;
+        LoadPalette((u8 *)ts->palettes + 0x20 * palIndexArray[counter], 0x10 * (0xF - counter), 0x20u);
+    }
+}
+#else
+NAKED
+void TeachyTvLoadMapPalette(struct MapData *mStruct, u8 *palIndexArray)
+{
+    asm_unified("\n\
+        push {r4-r6,lr}\n\
+        adds r6, r0, 0\n\
+        adds r5, r1, 0\n\
+        movs r4, 0\n\
+        ldrb r0, [r5]\n\
+        cmp r0, 0xFF\n\
+        beq _0815C274\n\
+    _0815C23E:\n\
+        adds r1, r5, r4\n\
+        ldrb r0, [r1]\n\
+        cmp r0, 0x6\n\
+        bls _0815C24A\n\
+        ldr r0, [r6, 0x14]\n\
+        b _0815C24C\n\
+    _0815C24A:\n\
+        ldr r0, [r6, 0x10]\n\
+    _0815C24C:\n\
+        ldrb r1, [r1]\n\
+        lsls r1, 5\n\
+        ldr r0, [r0, 0x8]\n\
+        adds r0, r1\n\
+        movs r1, 0xF\n\
+        subs r1, r4\n\
+        lsls r1, 20\n\
+        lsrs r1, 16\n\
+        movs r2, 0x20\n\
+        bl LoadPalette\n\
+        adds r0, r4, 0x1\n\
+        lsls r0, 24\n\
+        lsrs r4, r0, 24\n\
+        cmp r4, 0xF\n\
+        bhi _0815C274\n\
+        adds r0, r5, r4\n\
+        ldrb r0, [r0]\n\
+        cmp r0, 0xFF\n\
+        bne _0815C23E\n\
+    _0815C274:\n\
+        pop {r4-r6}\n\
+        pop {r0}\n\
+        bx r0\n\
+        ");
+}
+#endif

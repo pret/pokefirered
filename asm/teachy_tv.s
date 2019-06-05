@@ -5,106 +5,8 @@
 
 	.text
 
-	thumb_func_start TeachyTvGrassAnimationMain
-TeachyTvGrassAnimationMain: @ 815BAA0
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	ldr r4, [sp, 0x1C]
-	lsls r0, 24
-	lsrs r0, 24
-	mov r9, r0
-	lsls r1, 16
-	lsrs r6, r1, 16
-	lsls r2, 16
-	lsrs r1, r2, 16
-	lsls r3, 24
-	lsrs r7, r3, 24
-	lsls r4, 24
-	lsrs r4, 24
-	mov r8, r4
-	ldr r0, _0815BB34 @ =gUnknown_203F450
-	ldr r0, [r0]
-	ldr r2, _0815BB38 @ =0x00004006
-	adds r0, r2
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	beq _0815BB5C
-	lsls r0, r6, 16
-	ldr r2, _0815BB3C @ =0xfff00000
-	adds r0, r2
-	asrs r0, 16
-	lsls r1, 16
-	asrs r5, r1, 16
-	adds r1, r5, 0
-	bl sub_815BC40
-	lsls r0, 24
-	cmp r0, 0
-	beq _0815BB5C
-	ldr r0, _0815BB40 @ =gUnknown_83A0010
-	ldr r0, [r0, 0x10]
-	movs r1, 0
-	movs r2, 0
-	adds r3, r7, 0
-	bl CreateSprite
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, r0, 4
-	adds r1, r0
-	lsls r1, 2
-	ldr r0, _0815BB44 @ =gSprites
-	adds r4, r1, r0
-	strh r6, [r4, 0x24]
-	adds r0, r5, 0
-	adds r0, 0x8
-	strh r0, [r4, 0x26]
-	ldr r0, _0815BB48 @ =sub_815BB6C
-	str r0, [r4, 0x1C]
-	mov r0, r9
-	strh r0, [r4, 0x2E]
-	mov r2, r8
-	cmp r2, 0x1
-	bne _0815BB4C
-	adds r0, r4, 0
-	movs r1, 0x4
-	bl SeekSpriteAnim
-	ldrb r0, [r4, 0x5]
-	movs r1, 0xD
-	negs r1, r1
-	ands r1, r0
-	movs r0, 0x8
-	orrs r1, r0
-	strb r1, [r4, 0x5]
-	b _0815BB5C
-	.align 2, 0
-_0815BB34: .4byte gUnknown_203F450
-_0815BB38: .4byte 0x00004006
-_0815BB3C: .4byte 0xfff00000
-_0815BB40: .4byte gUnknown_83A0010
-_0815BB44: .4byte gSprites
-_0815BB48: .4byte sub_815BB6C
-_0815BB4C:
-	ldr r1, _0815BB68 @ =gUnknown_84795B8
-	adds r0, r4, 0
-	bl SetSubspriteTables
-	adds r1, r4, 0
-	adds r1, 0x42
-	movs r0, 0x40
-	strb r0, [r1]
-_0815BB5C:
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0815BB68: .4byte gUnknown_84795B8
-	thumb_func_end TeachyTvGrassAnimationMain
-
-	thumb_func_start sub_815BB6C
-sub_815BB6C: @ 815BB6C
+	thumb_func_start TeachyTvGrassAnimationObjCallback
+TeachyTvGrassAnimationObjCallback: @ 815BB6C
 	push {r4,r5,lr}
 	adds r3, r0, 0
 	movs r0, 0x2E
@@ -210,10 +112,10 @@ _0815BC3A:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_815BB6C
+	thumb_func_end TeachyTvGrassAnimationObjCallback
 
-	thumb_func_start sub_815BC40
-sub_815BC40: @ 815BC40
+	thumb_func_start TeachyTvGrassAnimationCheckIfNeedsToGenerateGrassObj
+TeachyTvGrassAnimationCheckIfNeedsToGenerateGrassObj: @ 815BC40
 	push {r4,r5,lr}
 	lsls r1, 16
 	lsrs r1, 16
@@ -253,7 +155,7 @@ _0815BC80: .4byte gUnknown_84795C8
 _0815BC84: .4byte gUnknown_203F450
 _0815BC88: .4byte 0x00004005
 _0815BC8C: .4byte 0x00004004
-	thumb_func_end sub_815BC40
+	thumb_func_end TeachyTvGrassAnimationCheckIfNeedsToGenerateGrassObj
 
 	thumb_func_start TeachyTvPrepBattle
 TeachyTvPrepBattle: @ 815BC90
@@ -374,8 +276,8 @@ _0815BD78:
 	bx r0
 	thumb_func_end sub_815BD58
 
-	thumb_func_start sub_815BD80
-sub_815BD80: @ 815BD80
+	thumb_func_start TeachyTvLoadBg3Map
+TeachyTvLoadBg3Map: @ 815BD80
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -594,7 +496,7 @@ _0815BF00:
 	bx r0
 	.align 2, 0
 _0815BF44: .4byte 0xfffffd80
-	thumb_func_end sub_815BD80
+	thumb_func_end TeachyTvLoadBg3Map
 
 	thumb_func_start sub_815BF48
 sub_815BF48: @ 815BF48

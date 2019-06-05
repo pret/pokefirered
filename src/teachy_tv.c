@@ -55,6 +55,8 @@ extern struct ListMenuItem gUnknown_8479340;
 extern struct WindowTemplate gUnknown_84792F0;
 extern u8 gUnknown_8479590;
 extern u8 gUnknown_8479390;
+extern struct SubspriteTable gUnknown_84795B8;
+extern struct SpriteTemplate *gUnknown_83A0010;
 
 void C2TeachyTv();
 void C2TeachyTvMainCallback();
@@ -81,10 +83,12 @@ void TeachyTvBackToOptionList(u8 taskId);
 void TeachyTvSetupBagItemsByOptionChosen();
 void TeachyTvPrepBattle(u8 taskId);
 void TeachyTvGrassAnimationMain(u8 taskId, s16 x, s16 y, u8 subpriority, bool8 mode);
+void TeachyTvLoadBg3Map(void *);
+u8 TeachyTvGrassAnimationCheckIfNeedsToGenerateGrassObj(s16 x, s16 y);
+void TeachyTvGrassAnimationObjCallback(struct Sprite *sprite);
 
 extern void VblankHblankHandlerSetZero();
 extern void sub_812B1E0(u16);
-extern void sub_815BD80(void *);
 extern u8 ListMenuInitInternal(struct ListMenuTemplate *, u16 scrollOffset, u16 selectedRow); 
 extern void sub_8055DC4();
 extern bool16 sub_80BF518(u8 textPrinterId);
@@ -234,7 +238,7 @@ void TeachyTvLoadGraphic()
     LoadCompressedPalette(&gUnknown_8E86F98, 0, 0x80u);
     LoadPalette(&src, 0, 2u);
     LoadSpritePalette((struct SpritePalette *)&gUnknown_83A5348);
-    sub_815BD80((u8 *)gUnknown_203F450 + 0x2004);
+    TeachyTvLoadBg3Map((u8 *)gUnknown_203F450 + 0x2004);
 }
 
 void TeachyTvCreateAndRenderRbox()
@@ -881,3 +885,40 @@ void TeachyTvPostBattleFadeControl(u8 taskId)
     }
 }
 
+void TeachyTvGrassAnimationMain(u8 taskId, s16 x, s16 y, u8 subpriority, bool8 mode)
+{
+    u8 subprio;
+    int res;
+    struct Sprite *obj;
+    int objId;
+    struct SpriteTemplate **objTemAddr;
+
+    subprio = subpriority;
+    if ( ((u8*)gUnknown_203F450)[0x4006] != 1 )
+    {
+        res = TeachyTvGrassAnimationCheckIfNeedsToGenerateGrassObj(
+                          (u32)((x << 16) - 0x100000) >> 16,
+                          y);
+        if ( res << 24 )
+        {
+            objTemAddr = &gUnknown_83A0010;
+            objId = CreateSprite(*(objTemAddr+4), 0, 0, subprio);
+            obj = gSprites + objId;
+            obj->pos2.x = x;
+            obj->pos2.y = y + 8;
+            obj->callback = TeachyTvGrassAnimationObjCallback;
+            obj->data[0] = taskId;
+            if ( mode == 1 )
+            {
+                SeekSpriteAnim(obj, 4u);
+                obj->oam.priority = 2;
+            }
+            else
+            {
+                SetSubspriteTables(obj, &gUnknown_84795B8);
+                obj->subspriteTableNum = 0;
+                obj->subspriteMode = 1;
+            }
+        }
+    }
+}

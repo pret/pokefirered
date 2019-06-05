@@ -45,15 +45,16 @@ extern struct SpritePalette gUnknown_83A5348;
 extern void (**gUnknown_8479548)(u8);
 extern char * gUnknown_8479560;
 extern char * gUnknown_8479578;
-extern void *gUnknown_203F450; // tilemap pointer location
-extern u8 gUnknown_8E86240; // tilemap
+extern void *gUnknown_203F450;
+extern u8 gUnknown_8E86240;
 extern u8 gUnknown_8E86BE8;
 extern u8 gUnknown_8E86D6C;
-extern u8 gUnknown_8E86F98; // pal
+extern u8 gUnknown_8E86F98;
 extern struct ListMenuTemplate gUnknown_8479368;
 extern struct ListMenuItem gUnknown_8479340;
 extern struct WindowTemplate gUnknown_84792F0;
 extern u8 gUnknown_8479590;
+extern u8 gUnknown_8479390;
 
 void C2TeachyTv();
 void C2TeachyTvMainCallback();
@@ -75,17 +76,21 @@ void TeachyTvOptionListController(u8);
 void TeachyTvAudioByInput(s32, bool8, struct ListMenu *);
 void TeachyTvQuitFadeControlAndTaskDel(u8 taskId);
 void TeachyTvRenderMsgAndSwitchClusterFuncs(u8 taskId);
-void TeachyTvClearBg1EndGraphicalText();
+void TeachyTvClearBg1EndGraphicText();
+void TeachyTvBackToOptionList(u8 taskId);
+void TeachyTvSetupBagItemsByOptionChosen();
+void TeachyTvPrepBattle(u8 taskId);
+void TeachyTvGrassAnimationMain(u8 taskId, s16 x, s16 y, u8 subpriority, bool8 mode);
 
 extern void VblankHblankHandlerSetZero();
 extern void sub_812B1E0(u16);
 extern void sub_815BD80(void *);
 extern u8 ListMenuInitInternal(struct ListMenuTemplate *, u16 scrollOffset, u16 selectedRow); 
 extern void sub_8055DC4();
-extern void TeachyTvGrassAnimationMain(u8 taskId, s16 x, s16 y, u8 subpriority, bool8 mode);
 extern bool16 sub_80BF518(u8 textPrinterId);
 extern void _call_via_r1(s32 arg, void *func);
-extern void TeachyTvBackToOptionList(u8 taskId);
+extern void sub_810B108(u8);
+
 
 void C2TeachyTv()
 {
@@ -638,7 +643,7 @@ void TeachyTvRenderMsgAndSwitchClusterFuncs(u8 taskId)
         TeachyTvSetSpriteCoordsAndSwitchFrame(*((char *)data + 2), 0, 0, 0);
         FillWindowPixelBuffer(0, 0xCCu);
         CopyWindowToVram(0, 2u);
-        TeachyTvClearBg1EndGraphicalText();
+        TeachyTvClearBg1EndGraphicText();
         data[2] = v4;
         data[3] = v4;
         gTasks[taskId].func = TeachyTvBackToOptionList;
@@ -796,14 +801,83 @@ void TeachyTvClusFuncRenderAndRemoveBg1EndGraphic(u8 taskId)
     data[2] = temp;
     if ( (s16)temp > 126 )
     {
-        TeachyTvClearBg1EndGraphicalText();
+        TeachyTvClearBg1EndGraphicText();
         (u16)data[2] = 0;
         ++(u16)data[3];
     }
 }
 
-void TeachyTvClearBg1EndGraphicalText()
+void TeachyTvClearBg1EndGraphicText()
 {
     FillBgTilemapBufferRect_Palette0(1u, 0, 0x14u, 0xAu, 8u, 2u);
     schedule_bg_copy_tilemap_to_vram(1u);
 }
+
+void TeachyTvBackToOptionList(u8 taskId)
+{
+    s16 *data;
+    s32 temp;
+
+    data = gTasks[taskId].data;
+    if ( !data[2] )
+        PlayNewMapMusic(BGM_FRLG_TEACHY_TV);
+    TeachyTvBg2AnimController();
+    temp = (u16)data[2] + 1;
+    data[2] = temp;
+    if ( (s16)temp > 0x3F )
+    {
+        data[2] = 0;
+        data[3] = 0;
+        *data = TeachyTvSetupWindow();
+        gTasks[taskId].func = TeachyTvOptionListController;
+        PutWindowTilemap(0);
+        TeachyTvSetupScrollIndicatorArrowPair();
+        TeachyTvSetWindowRegs();
+        schedule_bg_copy_tilemap_to_vram(0);
+        ChangeBgX(3u, 0, 0);
+        ChangeBgY(3u, 0, 0);
+        ChangeBgX(3u, 0x1000u, 2u);
+        ChangeBgY(3u, 0x2800u, 1u);
+        ((u8*)gUnknown_203F450)[0x4004] = 0;
+        ((u8*)gUnknown_203F450)[0x4005] = 3;
+        ((u8*)gUnknown_203F450)[0x4006] = 0;
+    }
+}
+
+void TeachyTvChainTaskBattleOrFadeByOptionChosen(u8 taskId)
+{
+    int op = gTeachyTV_StaticResources.optionChosen;
+    if( op < 0 )
+        return;
+    if ( op <= 3 )
+    {
+        TeachyTvPrepBattle(taskId);
+
+    }
+    else if ( op <= 5 )
+    {
+        *((void(**)())gUnknown_203F450) = TeachyTvSetupBagItemsByOptionChosen;
+        TeachyTvQuitBeginFade(taskId);
+    }
+}
+
+void TeachyTvSetupBagItemsByOptionChosen()
+{
+    if ( gTeachyTV_StaticResources.optionChosen == 4 )
+        sub_810B108(0xAu);
+    else
+        sub_810B108(9u);
+}
+
+void TeachyTvPostBattleFadeControl(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    if ( !(gPaletteFade.active) )
+    {
+        u8* funcIdx = &gUnknown_8479390;
+        int arg = funcIdx[gTeachyTV_StaticResources.optionChosen];
+        data[3] = arg;
+        gTasks[taskId].func = TeachyTvRenderMsgAndSwitchClusterFuncs;
+    }
+}
+

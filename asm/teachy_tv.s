@@ -5,187 +5,6 @@
 
 	.text
 
-	thumb_func_start TeachyTvBackToOptionList
-TeachyTvBackToOptionList: @ 815B92C
-	push {r4-r7,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r6, r1, 3
-	ldr r7, _0815B9DC @ =gTasks+0x8
-	adds r5, r6, r7
-	movs r1, 0x4
-	ldrsh r0, [r5, r1]
-	cmp r0, 0
-	bne _0815B94C
-	movs r0, 0xAD
-	lsls r0, 1
-	bl PlayNewMapMusic
-_0815B94C:
-	bl TeachyTvBg2AnimController
-	ldrh r0, [r5, 0x4]
-	adds r0, 0x1
-	strh r0, [r5, 0x4]
-	lsls r0, 16
-	asrs r0, 16
-	cmp r0, 0x3F
-	ble _0815B9D4
-	movs r4, 0
-	strh r4, [r5, 0x4]
-	strh r4, [r5, 0x6]
-	bl TeachyTvSetupWindow
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r5]
-	adds r0, r7, 0
-	subs r0, 0x8
-	adds r0, r6, r0
-	ldr r1, _0815B9E0 @ =TeachyTvOptionListController
-	str r1, [r0]
-	movs r0, 0
-	bl PutWindowTilemap
-	bl TeachyTvSetupScrollIndicatorArrowPair
-	bl TeachyTvSetWindowRegs
-	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
-	movs r0, 0x3
-	movs r1, 0
-	movs r2, 0
-	bl ChangeBgX
-	movs r0, 0x3
-	movs r1, 0
-	movs r2, 0
-	bl ChangeBgY
-	movs r1, 0x80
-	lsls r1, 5
-	movs r0, 0x3
-	movs r2, 0x2
-	bl ChangeBgX
-	movs r1, 0xA0
-	lsls r1, 6
-	movs r0, 0x3
-	movs r2, 0x1
-	bl ChangeBgY
-	ldr r2, _0815B9E4 @ =gUnknown_203F450
-	ldr r0, [r2]
-	ldr r1, _0815B9E8 @ =0x00004004
-	adds r0, r1
-	strb r4, [r0]
-	ldr r0, [r2]
-	adds r1, 0x1
-	adds r0, r1
-	movs r1, 0x3
-	strb r1, [r0]
-	ldr r0, [r2]
-	ldr r1, _0815B9EC @ =0x00004006
-	adds r0, r1
-	strb r4, [r0]
-_0815B9D4:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0815B9DC: .4byte gTasks+0x8
-_0815B9E0: .4byte TeachyTvOptionListController
-_0815B9E4: .4byte gUnknown_203F450
-_0815B9E8: .4byte 0x00004004
-_0815B9EC: .4byte 0x00004006
-	thumb_func_end TeachyTvBackToOptionList
-
-	thumb_func_start sub_815B9F0
-sub_815B9F0: @ 815B9F0
-	push {lr}
-	lsls r0, 24
-	lsrs r1, r0, 24
-	adds r2, r1, 0
-	ldr r0, _0815BA0C @ =gTeachyTV_StaticResources
-	ldrb r0, [r0, 0x5]
-	cmp r0, 0
-	blt _0815BA22
-	cmp r0, 0x3
-	bgt _0815BA10
-	adds r0, r1, 0
-	bl sub_815BC90
-	b _0815BA22
-	.align 2, 0
-_0815BA0C: .4byte gTeachyTV_StaticResources
-_0815BA10:
-	cmp r0, 0x5
-	bgt _0815BA22
-	ldr r0, _0815BA28 @ =gUnknown_203F450
-	ldr r1, [r0]
-	ldr r0, _0815BA2C @ =sub_815BA30
-	str r0, [r1]
-	adds r0, r2, 0
-	bl TeachyTvQuitBeginFade
-_0815BA22:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0815BA28: .4byte gUnknown_203F450
-_0815BA2C: .4byte sub_815BA30
-	thumb_func_end sub_815B9F0
-
-	thumb_func_start sub_815BA30
-sub_815BA30: @ 815BA30
-	push {lr}
-	ldr r0, _0815BA44 @ =gTeachyTV_StaticResources
-	ldrb r0, [r0, 0x5]
-	cmp r0, 0x4
-	bne _0815BA48
-	movs r0, 0xA
-	bl sub_810B108
-	b _0815BA4E
-	.align 2, 0
-_0815BA44: .4byte gTeachyTV_StaticResources
-_0815BA48:
-	movs r0, 0x9
-	bl sub_810B108
-_0815BA4E:
-	pop {r0}
-	bx r0
-	thumb_func_end sub_815BA30
-
-	thumb_func_start TeachyTvPostBattleFadeControl
-TeachyTvPostBattleFadeControl: @ 815BA54
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r2, r1, 3
-	ldr r4, _0815BA8C @ =gTasks+0x8
-	adds r3, r2, r4
-	ldr r0, _0815BA90 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _0815BA86
-	ldr r1, _0815BA94 @ =gUnknown_8479390
-	ldr r0, _0815BA98 @ =gTeachyTV_StaticResources
-	ldrb r0, [r0, 0x5]
-	adds r0, r1
-	ldrb r0, [r0]
-	strh r0, [r3, 0x6]
-	adds r0, r4, 0
-	subs r0, 0x8
-	adds r0, r2, r0
-	ldr r1, _0815BA9C @ =TeachyTvRenderMsgAndSwitchClusterFuncs
-	str r1, [r0]
-_0815BA86:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0815BA8C: .4byte gTasks+0x8
-_0815BA90: .4byte gPaletteFade
-_0815BA94: .4byte gUnknown_8479390
-_0815BA98: .4byte gTeachyTV_StaticResources
-_0815BA9C: .4byte TeachyTvRenderMsgAndSwitchClusterFuncs
-	thumb_func_end TeachyTvPostBattleFadeControl
-
 	thumb_func_start TeachyTvGrassAnimationMain
 TeachyTvGrassAnimationMain: @ 815BAA0
 	push {r4-r7,lr}
@@ -436,8 +255,8 @@ _0815BC88: .4byte 0x00004005
 _0815BC8C: .4byte 0x00004004
 	thumb_func_end sub_815BC40
 
-	thumb_func_start sub_815BC90
-sub_815BC90: @ 815BC90
+	thumb_func_start TeachyTvPrepBattle
+TeachyTvPrepBattle: @ 815BC90
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -488,7 +307,7 @@ _0815BCE2:
 	.align 2, 0
 _0815BCFC: .4byte gTasks
 _0815BD00: .4byte sub_815BD04
-	thumb_func_end sub_815BC90
+	thumb_func_end TeachyTvPrepBattle
 
 	thumb_func_start sub_815BD04
 sub_815BD04: @ 815BD04

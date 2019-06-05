@@ -23,17 +23,20 @@
 #include "text.h"
 #include "constants/songs.h"
 #include "constants/items.h"
+#include "event_data.h"
+#include "load_save.h"
+#include "battle_transition.h"
+#include "battle_2.h"
+#include "battle.h"
 
 typedef struct Task Task;
-
 typedef struct {
     void (*callback)();
     u8 mode;
     u8 optionChosen;
     u16 scrollOffset;
     u16 selectedRow;
-    u8 param4;
-    u8 filler;
+    u16 filler;
 } TeachyTv_s;
 
 extern TeachyTv_s gTeachyTV_StaticResources;
@@ -57,10 +60,11 @@ extern u8 gUnknown_8479590;
 extern u8 gUnknown_8479390;
 extern struct SubspriteTable gUnknown_84795B8;
 extern struct SpriteTemplate *gUnknown_83A0010;
+extern u8 gUnknown_84795C8;
 
-void C2TeachyTv();
-void C2TeachyTvMainCallback();
-void VblankHandlerTeachyTv();
+void TeachyTvCallback();
+void TeachyTvMainCallback();
+void TeachyTvVblankHandler();
 void sub_815ABC4(u8 mode, void (*cb)());
 void sub_815ABFC();
 void sub_815AC20();
@@ -86,6 +90,8 @@ void TeachyTvGrassAnimationMain(u8 taskId, s16 x, s16 y, u8 subpriority, bool8 m
 void TeachyTvLoadBg3Map(void *);
 u8 TeachyTvGrassAnimationCheckIfNeedsToGenerateGrassObj(s16 x, s16 y);
 void TeachyTvGrassAnimationObjCallback(struct Sprite *sprite);
+void TeachyTvRestorePlayerPartyCallback();
+void TeachyTvPreBattleAnimAndSetBattleCallback(u8 taskId);
 
 extern void VblankHblankHandlerSetZero();
 extern void sub_812B1E0(u16);
@@ -94,9 +100,9 @@ extern void sub_8055DC4();
 extern bool16 sub_80BF518(u8 textPrinterId);
 extern void _call_via_r1(s32 arg, void *func);
 extern void sub_810B108(u8);
+extern void sub_8159F40();
 
-
-void C2TeachyTv()
+void TeachyTvCallback()
 {
     RunTasks();
     AnimateSprites();
@@ -105,7 +111,7 @@ void C2TeachyTv()
     UpdatePaletteFade();
 }
 
-void VblankHandlerTeachyTv()
+void TeachyTvVblankHandler()
 {
     LoadOam();
     ProcessSpriteCopyRequests();
@@ -126,7 +132,7 @@ void sub_815ABC4(u8 mode, void (*cb)())
     }
     if(mode == 1)
         v3->mode = 0;
-    SetMainCallback2(C2TeachyTvMainCallback);
+    SetMainCallback2(TeachyTvMainCallback);
 }
 
 void sub_815ABFC()
@@ -142,7 +148,7 @@ void sub_815AC20()
     gTeachyTV_StaticResources.mode = 1;
 }
 
-void C2TeachyTvMainCallback()
+void TeachyTvMainCallback()
 {
     int state;
     int taskId;
@@ -151,7 +157,6 @@ void C2TeachyTvMainCallback()
     u32 x;
 
     state = gMain.state;
-    // tried several ways to reproduce the control flow, but all failed. Now using goto
     if ( state == 0 )
         goto RESETANDLOAD;
     else if ( state == 1 )
@@ -203,8 +208,8 @@ SETDMATOVRAM:
     sub_812B1E0(9); // help system something
     BlendPalettes(0xFFFFFFFF, 0x10u, 0);
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10u, 0, 0);
-    SetVBlankCallback(VblankHandlerTeachyTv);
-    SetMainCallback2(C2TeachyTv);
+    SetVBlankCallback(TeachyTvVblankHandler);
+    SetMainCallback2(TeachyTvCallback);
 }
 
 void TeachyTvSetupBg()
@@ -922,3 +927,102 @@ void TeachyTvGrassAnimationMain(u8 taskId, s16 x, s16 y, u8 subpriority, bool8 m
         }
     }
 }
+
+void TeachyTvGrassAnimationObjCallback(struct Sprite *sprite)
+{
+    u32 diff1, diff2;
+    s16 *data = gTasks[sprite->data[0]].data;
+    struct Sprite *objAddr = &gSprites[data[1]];
+    if(((u8*)gUnknown_203F450)[0x4006] == 1)
+        DestroySprite(sprite);
+    else {
+        if(sprite->animCmdIndex == 0)
+            sprite->subspriteTableNum = 1;
+        else
+            sprite->subspriteTableNum = 0;
+        sprite->pos2.x += (u16)data[4];
+        sprite->pos2.y += (u16)data[5];
+        if(sprite->animEnded == 0)
+            return;
+        sprite->subpriority = 0;
+        diff1 = (u16)(sprite->pos2.x - objAddr->pos2.x);
+        diff2 = (u16)(sprite->pos2.y - objAddr->pos2.y);
+        diff1 = ((diff1 << 0x10)+0xF0000) >> 0x10;
+        if(diff1 <= 0x1E)
+        {
+            if((s16)diff2 > -0x10)
+            {
+                if((s16)diff2 <= 0x17)
+                    return;
+            }
+        }
+        DestroySprite(sprite);
+    }
+}
+
+u8 TeachyTvGrassAnimationCheckIfNeedsToGenerateGrassObj(s16 x, s16 y)
+{
+    u8 * arr, *ptr;
+    int a, b;
+    if( (x < 0) || (y < 0) )
+        return 0;
+    arr = &gUnknown_84795C8;
+    ptr = gUnknown_203F450;
+    a = ((y >> 4) + ptr[0x4005]) << 4;
+    b = ((x >> 4) + ptr[0x4004]);
+    return arr[a+b];
+}
+
+void TeachyTvPrepBattle(u8 taskId)
+{
+    s16 *data;
+
+    taskId = taskId;
+    data = gTasks[taskId].data;
+    TeachyTvFree();
+    gSpecialVar_0x8004 = gTeachyTV_StaticResources.optionChosen;
+    gMain.savedCallback = TeachyTvRestorePlayerPartyCallback;
+    SavePlayerParty();
+    sub_8159F40();
+    PlayMapChosenOrBattleBGM(MUS_DUMMY);
+    if ( !gTeachyTV_StaticResources.optionChosen )
+        data[6] = 9;
+    else
+        data[6] = 8;
+    data[7] = 0;
+    gTasks[taskId].func = TeachyTvPreBattleAnimAndSetBattleCallback;
+}
+
+void TeachyTvPreBattleAnimAndSetBattleCallback(u8 taskId)
+{
+    s16 *data;
+    int temp;
+
+    data = gTasks[taskId].data;
+    switch(data[7])
+    {
+    case 0:
+        sub_80D08B8(*((u8*)data + 12));
+        ++data[7];
+        break;
+    case 1:
+        temp = sub_80D08F8();
+        if ( temp << 24 )
+        {
+            SetMainCallback2(sub_800FD9C);
+            DestroyTask(taskId);
+        }
+        break;
+    }
+}
+
+void TeachyTvRestorePlayerPartyCallback()
+{
+    LoadPlayerParty();
+    if ( gUnknown_2023E8A == 3 )
+        sub_815AC20();
+    else
+        PlayNewMapMusic(BGM_FRLG_FOLLOW_ME);
+    sub_815ABFC();
+}
+

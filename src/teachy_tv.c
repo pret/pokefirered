@@ -29,7 +29,6 @@
 #include "battle.h"
 #include "global.fieldmap.h"
 
-typedef struct Task Task;
 typedef struct {
     void (*callback)();
     u8 mode;
@@ -127,18 +126,18 @@ void TeachyTvVblankHandler()
 
 void sub_815ABC4(u8 mode, void (*cb)())
 {
-    TeachyTv_s *v3 = &gTeachyTV_StaticResources;
+    TeachyTv_s *resAddr = &gTeachyTV_StaticResources;
     u16 v4 = 0;
-    v3->mode = mode;
-    v3->callback = cb;
+    resAddr->mode = mode;
+    resAddr->callback = cb;
     if(!mode)
     {
-        v3->scrollOffset = v4;
-        v3->selectedRow = v4;
-        v3->optionChosen = 0;
+        resAddr->scrollOffset = v4;
+        resAddr->selectedRow = v4;
+        resAddr->optionChosen = 0;
     }
     if(mode == 1)
-        v3->mode = 0;
+        resAddr->mode = 0;
     SetMainCallback2(TeachyTvMainCallback);
 }
 
@@ -159,8 +158,8 @@ void TeachyTvMainCallback()
 {
     int state;
     int taskId;
-    Task *taskAddr;
-    u8 **v4;
+    struct Task *taskAddr;
+    u8 **memBuf;
     u32 x;
 
     state = gMain.state;
@@ -171,8 +170,8 @@ void TeachyTvMainCallback()
     else
         return;
 RESETANDLOAD:
-    v4 = (u8 **)&gUnknown_203F450;
-    (*v4) = (u8*)AllocZeroed(0x4008u);
+    memBuf = (u8 **)&gUnknown_203F450;
+    (*memBuf) = (u8*)AllocZeroed(0x4008u);
     *(u32*)gUnknown_203F450 = (u32)state;
     *((u8*)gUnknown_203F450 + 0x4006) = state;
     *((u8*)gUnknown_203F450 + 0x4007) = 0xFF;
@@ -296,8 +295,8 @@ void TeachyTvSetupScrollIndicatorArrowPair()
     else {
         u8 *temp, res;
         res = AddScrollIndicatorArrowPair(
-                                                    &gUnknown_8479380,
-                                                    &(gTeachyTV_StaticResources.scrollOffset));
+            &gUnknown_8479380,
+            &(gTeachyTV_StaticResources.scrollOffset));
         temp = (u8 *)gUnknown_203F450;
         *((u8 *)temp + 0x4007) = res;
         }

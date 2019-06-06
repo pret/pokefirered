@@ -28,6 +28,7 @@
 #include "battle_2.h"
 #include "battle.h"
 #include "global.fieldmap.h"
+#include "teachy_tv.h"
 
 typedef struct {
     void (*callback)();
@@ -65,9 +66,6 @@ extern struct MapData Route1_Layout;
 void TeachyTvCallback();
 void TeachyTvMainCallback();
 void TeachyTvVblankHandler();
-void sub_815ABC4(u8 mode, void (*cb)());
-void sub_815ABFC();
-void sub_815AC20();
 void TeachyTvCreateAndRenderRbox();
 void TeachyTvInitIo();
 u8 TeachyTvSetupObjEventAndOam();

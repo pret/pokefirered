@@ -127,13 +127,13 @@ void TeachyTvVblankHandler()
 void sub_815ABC4(u8 mode, void (*cb)())
 {
     TeachyTv_s *resAddr = &gTeachyTV_StaticResources;
-    u16 v4 = 0;
+    u16 zero = 0;
     resAddr->mode = mode;
     resAddr->callback = cb;
     if(!mode)
     {
-        resAddr->scrollOffset = v4;
-        resAddr->selectedRow = v4;
+        resAddr->scrollOffset = zero;
+        resAddr->selectedRow = zero;
         resAddr->optionChosen = 0;
     }
     if(mode == 1)
@@ -144,9 +144,9 @@ void sub_815ABC4(u8 mode, void (*cb)())
 void sub_815ABFC()
 {
     if(gTeachyTV_StaticResources.mode == 1)
-        sub_815ABC4(1,gTeachyTV_StaticResources.callback);
+        sub_815ABC4(1, gTeachyTV_StaticResources.callback);
     else
-        sub_815ABC4(2,gTeachyTV_StaticResources.callback);
+        sub_815ABC4(2, gTeachyTV_StaticResources.callback);
 }
 
 void sub_815AC20()
@@ -163,7 +163,7 @@ void TeachyTvMainCallback()
     u32 x;
 
     state = gMain.state;
-    if ( state == 0 )
+    if ( !state )
         goto RESETANDLOAD;
     else if ( state == 1 )
         goto SETDMATOVRAM;
@@ -942,18 +942,18 @@ void TeachyTvGrassAnimationObjCallback(struct Sprite *sprite)
     if(((u8*)gUnknown_203F450)[0x4006] == 1)
         DestroySprite(sprite);
     else {
-        if(sprite->animCmdIndex == 0)
+        if(!sprite->animCmdIndex)
             sprite->subspriteTableNum = 1;
         else
             sprite->subspriteTableNum = 0;
         sprite->pos2.x += (u16)data[4];
         sprite->pos2.y += (u16)data[5];
-        if(sprite->animEnded == 0)
+        if(!sprite->animEnded)
             return;
         sprite->subpriority = 0;
         diff1 = (u16)(sprite->pos2.x - objAddr->pos2.x);
         diff2 = (u16)(sprite->pos2.y - objAddr->pos2.y);
-        diff1 = ((diff1 << 0x10)+0xF0000) >> 0x10;
+        diff1 = ((diff1 << 0x10) + 0xF0000) >> 0x10;
         if(diff1 <= 0x1E)
         {
             if((s16)diff2 > -0x10)
@@ -1469,10 +1469,7 @@ void TeachyTvPushBackNewMapPalIndexArrayEntry(struct MapData *mStruct, u16 *buf1
 
 void TeachyTvComputeMapTilesFromTilesetAndMetaTiles(u16 *metaTilesArray, u8 *blockBuf, u8 *tileset)
 {
-    TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(
-        blockBuf,
-        &tileset[0x20 * (*metaTilesArray & 0x3FF)],
-        (*metaTilesArray >> 10) & 3);
+    TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(blockBuf, &tileset[0x20 * (*metaTilesArray & 0x3FF)], (*metaTilesArray >> 10) & 3);
     TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(blockBuf, &tileset[0x20 * (metaTilesArray[4] & 0x3FF)], (metaTilesArray[4] >> 10) & 3);
     TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(blockBuf + 0x20, &tileset[0x20 * (metaTilesArray[1] & 0x3FF)], (metaTilesArray[1] >> 10) & 3);
     TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(blockBuf + 0x20, &tileset[0x20 * (metaTilesArray[5] & 0x3FF)], (metaTilesArray[5] >> 10) & 3);

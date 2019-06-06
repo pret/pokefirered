@@ -61,6 +61,7 @@ extern u8 gUnknown_8479390;
 extern struct SubspriteTable gUnknown_84795B8;
 extern struct SpriteTemplate *gUnknown_83A0010;
 extern u8 gUnknown_84795C8;
+extern struct MapData Route1_Layout;
 
 void TeachyTvCallback();
 void TeachyTvMainCallback();
@@ -484,7 +485,7 @@ void TeachyTvOptionListController(u8 taskId)
 }
 
 #else
-__attribute__((naked))
+NAKED
 void TeachyTvOptionListController(u8 taskId)
 {
     asm_unified("\n\
@@ -1032,6 +1033,112 @@ void TeachyTvRestorePlayerPartyCallback()
     sub_815ABFC();
 }
 
+#ifdef NONMATCHING
+void TeachyTvLoadBg3Map(void *buffer)
+{
+    u16 *mapArray;
+    int v2;
+    int v3;
+    int v4;
+    int v5;
+    int mapEntry;
+    int v7;
+    u16 v8;
+    int i;
+    char *MapTileBlockBuf;
+    void *FourMapTileBlocksTempBuf;
+    unsigned int j;
+    u16 *v13;
+    u8 *v14;
+    void *tileset;
+    u8 *palIndexArray;
+    unsigned int v17;
+    u32 v18;
+    int v19;
+    struct MapData * md;
+
+    md = &Route1_Layout;
+    v14 = (u8 *)buffer;
+    v17 = 0;
+    mapArray = (u16 *)AllocZeroed(0x800u);
+    tileset = AllocZeroed(0x8000u);
+    palIndexArray = Alloc(0x10u);
+    memset(palIndexArray, 0xFFu, 0x10u);
+    TeachyTvLoadMapTilesetToBuffer(md->primaryTileset, (u8 *)tileset, 0x280u);
+    TeachyTvLoadMapTilesetToBuffer(md->secondaryTileset, (u8 *)tileset + 0x5000, 0x180u);
+    v2 = 0;
+    do
+    {
+        v3 = 0;
+        v19 = v2 + 6;
+        v4 = 16 * v2;
+        v5 = v2 << 6;
+        v18 = v2 + 1;
+        do
+        {
+            mapEntry = md->map[v3 + 24 * v19 + 8] & 0x3FF;
+            v7 = 0;
+            v8 = v3 + 1;
+            if ( v4 + v3 <= 0 )
+            {
+LABEL_9:
+                if ( mapArray[v7] )
+                    goto LABEL_11;
+            }
+            else
+            {
+                for ( i = *mapArray; i; i = mapArray[v7] )
+                {
+                    if ( i == mapEntry )
+                        goto LABEL_9;
+                    v7 = (u16)(v7 + 1);
+                    if ( v7 >= v4 + v3 )
+                        goto LABEL_9;
+                }
+            }
+            mapArray[v7] = mapEntry;
+            v17 = (u16)(v17 + 1);
+LABEL_11:
+            TeachyTvPushBackNewMapPalIndexArrayEntry(
+                md,
+                (u16 *)&v14[2 * (v5 + 2 * v3)],
+                palIndexArray,
+                mapEntry,
+                v7);
+            v3 = v8;
+        }
+        while ( (u16)v8 <= 0xFu );
+        v2 = v18;
+    }
+    while ( (u16)v18 <= 8u );
+    MapTileBlockBuf = (char *)Alloc(v17 << 7);
+    FourMapTileBlocksTempBuf = Alloc(0x80u);
+    for ( j = 0; j < v17; j = (u16)j + 1 )
+    {
+        memset(FourMapTileBlocksTempBuf, 0, 0x80u);
+        v13 = &mapArray[j];
+        if ( *v13 <= 0x27Fu )
+            TeachyTvComputeMapTilesFromTilesetAndMetaTiles(
+                (u16 *)(16 * *v13 + (u16*)(md->primaryTileset->metatiles)),
+                (u8 *)FourMapTileBlocksTempBuf,
+                (u8 *)tileset);
+        else
+            TeachyTvComputeMapTilesFromTilesetAndMetaTiles(
+                (u16 *)(16 * (*v13 - 0x280) + (u16*)(md->secondaryTileset->metatiles)),
+                (u8 *)FourMapTileBlocksTempBuf,
+                (u8 *)tileset);
+
+        CpuFastSet(FourMapTileBlocksTempBuf, &MapTileBlockBuf[0x80 * j], 0x20u);
+    }
+    LoadBgTiles(3u, MapTileBlockBuf, (u16)v17 << 7, 0);
+    TeachyTvLoadMapPalette(&Route1_Layout, palIndexArray);
+    Free(FourMapTileBlocksTempBuf);
+    Free(MapTileBlockBuf);
+    Free(palIndexArray);
+    Free(tileset);
+    Free(mapArray);
+}
+#else
 NAKED
 void TeachyTvLoadBg3Map(void *buffer)
 {
@@ -1256,6 +1363,7 @@ void TeachyTvLoadBg3Map(void *buffer)
     _0815BF44: .4byte 0xfffffd80\n\
             ");
 }
+#endif
 
 void TeachyTvLoadMapTilesetToBuffer(struct Tileset *ts, u8 *dstBuffer, u16 size)
 {
@@ -1271,7 +1379,6 @@ void TeachyTvLoadMapTilesetToBuffer(struct Tileset *ts, u8 *dstBuffer, u16 size)
 #ifdef NONMATCHING
 void TeachyTvPushBackNewMapPalIndexArrayEntry(struct MapData *mStruct, u16 *buf1, u8 *palIndexArray, u16 mapEntry, u16 offset)
 {
-    // weird, seems easy but no match
     struct Tileset *ts;
     u16 *metaTileEntryAddr;
 
@@ -1377,6 +1484,62 @@ void TeachyTvComputeMapTilesFromTilesetAndMetaTiles(u16 *metaTilesArray, u8 *blo
     TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(blockBuf, &tileset[0x20 * (metaTilesArray[7] & 0x3FF)], (metaTilesArray[7] >> 10) & 3);
 }
 
+#ifdef NONMATCHING
+void TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(u8 *blockBuf, u8 *tileset, u8 metaTile)
+{
+    u8 *buffer;
+    u32 counterV7;
+    u32 counterV8;
+    vu32 src;
+
+    buffer = (u8 *)AllocZeroed(0x20u);
+    src = ((u32)AllocZeroed(0x20u));
+    CpuFastSet(tileset, buffer, 8u);
+    if ( metaTile & 1 )
+    {
+        counterV7 = 0;
+        do
+        {
+            counterV8 = 0;
+            do
+            {
+                u32 offset1 = counterV7 << 2;
+                u32 offset2 = counterV8 - 3;
+                u32 offset = offset1 - offset2;
+                u32 value = buffer[offset];
+                u32 dstOffset = offset1 + counterV8;
+                *(u8*)(src + dstOffset) = ((value & 0xF) << 4) + ((value & 0xF0) >> 4);
+            }
+            while ( ++(u8)counterV8 <= 3u );
+        }
+        while ( ++(u8)counterV7 <= 7u );
+        CpuFastSet((u8*)src, buffer, 8u);
+    }
+    if ( metaTile & 2 )
+    {
+        counterV8 = 0;
+        do
+        {
+            memcpy(&((u8*)src)[4 * counterV8], &buffer[4 * (7 - counterV8)], 4u);
+            counterV8 = (u8)(counterV8 + 1);
+        }
+        while ( counterV8 <= 7u );
+        CpuFastSet((u8*)src, buffer, 8u);
+    }
+    counterV8 = 0;
+    do
+    {
+        if ( buffer[counterV8] & 0xF0 )
+            blockBuf[counterV8] = (blockBuf[counterV8] & 0xF) + (buffer[counterV8] & 0xF0);
+        if ( buffer[counterV8] & 0xF )
+            blockBuf[counterV8] = (blockBuf[counterV8] & 0xF0) + (buffer[counterV8] & 0xF);
+        counterV8 = (u8)(counterV8 + 1);
+    }
+    while ( counterV8 <= 0x1Fu );
+    Free((u8*)src);
+    Free(buffer);
+}
+#else
 NAKED
 void TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(u8 *blockBuf, u8 *tileset, u8 metaTile)
 {
@@ -1525,6 +1688,7 @@ void TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(u8 *blockBuf, u8 *
         bx r0\n\
         ");
 }
+#endif
 
 u16 TeachyTvComputePalIndexArrayEntryByMetaTile(u8 *palIndexArrayBuf, u16 metaTile)
 {
@@ -1560,23 +1724,19 @@ u16 TeachyTvComputePalIndexArrayEntryByMetaTile(u8 *palIndexArrayBuf, u16 metaTi
             }
         }
     }
-    return (0xF - counter) & 0xFFFF;
+    return (u16)(0xF - counter);
 }
 
-#define NONMATCHING
 #ifdef NONMATCHING
 void TeachyTvLoadMapPalette(struct MapData *mStruct, u8 *palIndexArray)
 {
-    u8 counter, v3;
+    u8 counter;
     struct Tileset *ts;
 
-    for (counter = 0; counter < 0xF && palIndexArray[counter] != 0xFF; counter++)
+    for (counter = 0; counter < 16 && palIndexArray[counter] != 0xFF; counter++)
     {
-        if ( palIndexArray[counter] > 6u )
-            ts = mStruct->secondaryTileset;
-        else
-            ts = mStruct->primaryTileset;
-        LoadPalette((u8 *)ts->palettes + 0x20 * palIndexArray[counter], 0x10 * (0xF - counter), 0x20u);
+        ts = *(palIndexArray + counter) > 6u ? mStruct->secondaryTileset : mStruct->primaryTileset;
+        LoadPalette((u16 *)ts->palettes + 0x10 * palIndexArray[counter], 0x10 * (0xF - counter), 0x20u);
     }
 }
 #else

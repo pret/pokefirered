@@ -63,6 +63,15 @@ extern struct SpriteTemplate *gUnknown_83A0010;
 extern u8 gUnknown_84795C8;
 extern struct MapData Route1_Layout;
 
+extern void VblankHblankHandlerSetZero();
+extern void sub_812B1E0(u16);
+extern u8 ListMenuInitInternal(struct ListMenuTemplate *, u16 scrollOffset, u16 selectedRow); 
+extern void sub_8055DC4();
+extern bool16 sub_80BF518(u8 textPrinterId);
+extern void _call_via_r1(s32 arg, void *func);
+extern void sub_810B108(u8);
+extern void sub_8159F40();
+
 void TeachyTvCallback();
 void TeachyTvMainCallback();
 void TeachyTvVblankHandler();
@@ -96,15 +105,6 @@ void TeachyTvComputeMapTilesFromTilesetAndMetaTiles(u16 *metaTilesArray, u8 *blo
 void TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(u8 *blockBuf, u8 *tileset, u8 metaTile);
 u16 TeachyTvComputePalIndexArrayEntryByMetaTile(u8 *palIndexArrayBuf, u16 metaTile);
 void TeachyTvLoadMapPalette(struct MapData *mStruct, u8 *palIndexArray);
-
-extern void VblankHblankHandlerSetZero();
-extern void sub_812B1E0(u16);
-extern u8 ListMenuInitInternal(struct ListMenuTemplate *, u16 scrollOffset, u16 selectedRow); 
-extern void sub_8055DC4();
-extern bool16 sub_80BF518(u8 textPrinterId);
-extern void _call_via_r1(s32 arg, void *func);
-extern void sub_810B108(u8);
-extern void sub_8159F40();
 
 void TeachyTvCallback()
 {
@@ -161,59 +161,57 @@ void TeachyTvMainCallback()
     u32 x;
 
     state = gMain.state;
-    if ( !state )
-        goto RESETANDLOAD;
-    else if ( state == 1 )
-        goto SETDMATOVRAM;
-    else
-        return;
-RESETANDLOAD:
-    memBuf = (u8 **)&gUnknown_203F450;
-    (*memBuf) = (u8*)AllocZeroed(0x4008u);
-    *(u32*)gUnknown_203F450 = (u32)state;
-    *((u8*)gUnknown_203F450 + 0x4006) = state;
-    *((u8*)gUnknown_203F450 + 0x4007) = 0xFF;
-    VblankHblankHandlerSetZero();
-    clear_scheduled_bg_copies_to_vram();
-    ScanlineEffect_Stop();
-    FreeAllSpritePalettes();
-    ResetPaletteFade();
-    ResetSpriteData();
-    ResetTasks();
-    TeachyTvSetupBg();
-    TeachyTvLoadGraphic();
-    ++gMain.state;
-    return;
-SETDMATOVRAM:
-    if( free_temp_tile_data_buffers_if_possible() == 1 )
-        return;
-    TeachyTvCreateAndRenderRbox();
-    TeachyTvInitIo();
-    if ( gTeachyTV_StaticResources.mode == 2 )
+    switch(state)
     {
-        taskId = CreateTask(TeachyTvPostBattleFadeControl, 0);
-        gTasks[taskId].data[1] = TeachyTvSetupObjEventAndOam();
-        TeachyTvSetupPostBattleWindowAndObj(taskId);
+    case 0:
+        memBuf = (u8 **)&gUnknown_203F450;
+        (*memBuf) = (u8*)AllocZeroed(0x4008u);
+        *(u32*)gUnknown_203F450 = (u32)state;
+        *((u8*)gUnknown_203F450 + 0x4006) = state;
+        *((u8*)gUnknown_203F450 + 0x4007) = 0xFF;
+        VblankHblankHandlerSetZero();
+        clear_scheduled_bg_copies_to_vram();
+        ScanlineEffect_Stop();
+        FreeAllSpritePalettes();
+        ResetPaletteFade();
+        ResetSpriteData();
+        ResetTasks();
+        TeachyTvSetupBg();
+        TeachyTvLoadGraphic();
+        ++gMain.state;
+        break;
+    case 1:
+        if( free_temp_tile_data_buffers_if_possible() == 1 )
+            return;
+        TeachyTvCreateAndRenderRbox();
+        TeachyTvInitIo();
+        if ( gTeachyTV_StaticResources.mode == 2 )
+        {
+            taskId = CreateTask(TeachyTvPostBattleFadeControl, 0);
+            gTasks[taskId].data[1] = TeachyTvSetupObjEventAndOam();
+            TeachyTvSetupPostBattleWindowAndObj(taskId);
+        }
+        else
+        {
+            taskId = CreateTask(TeachyTvOptionListController, 0);
+            x = (u32)TeachyTvSetupWindow();
+            gTasks[taskId].data[0] = (x << 24) >> 24;
+            gTasks[taskId].data[1] = TeachyTvSetupObjEventAndOam();
+            TeachyTvSetupScrollIndicatorArrowPair();
+            PlayNewMapMusic(BGM_FRLG_TEACHY_TV);
+            TeachyTvSetWindowRegs();
+        }
+        schedule_bg_copy_tilemap_to_vram(0);
+        schedule_bg_copy_tilemap_to_vram(1u);
+        schedule_bg_copy_tilemap_to_vram(2u);
+        schedule_bg_copy_tilemap_to_vram(3u);
+        sub_812B1E0(9); // help system something
+        BlendPalettes(0xFFFFFFFF, 0x10u, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10u, 0, 0);
+        SetVBlankCallback(TeachyTvVblankHandler);
+        SetMainCallback2(TeachyTvCallback);
+        break;
     }
-    else
-    {
-        taskId = CreateTask(TeachyTvOptionListController, 0);
-        x = (u32)TeachyTvSetupWindow();
-        gTasks[taskId].data[0] = (x << 24) >> 24;
-        gTasks[taskId].data[1] = TeachyTvSetupObjEventAndOam();
-        TeachyTvSetupScrollIndicatorArrowPair();
-        PlayNewMapMusic(BGM_FRLG_TEACHY_TV);
-        TeachyTvSetWindowRegs();
-    }
-    schedule_bg_copy_tilemap_to_vram(0);
-    schedule_bg_copy_tilemap_to_vram(1u);
-    schedule_bg_copy_tilemap_to_vram(2u);
-    schedule_bg_copy_tilemap_to_vram(3u);
-    sub_812B1E0(9); // help system something
-    BlendPalettes(0xFFFFFFFF, 0x10u, 0);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10u, 0, 0);
-    SetVBlankCallback(TeachyTvVblankHandler);
-    SetMainCallback2(TeachyTvCallback);
 }
 
 void TeachyTvSetupBg()

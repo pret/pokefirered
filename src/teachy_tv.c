@@ -222,7 +222,7 @@ void TeachyTvSetupBg()
     SetBgTilemapBuffer(1u, (u8 *)gUnknown_203F450 + 4);
     SetBgTilemapBuffer(2u, (u8 *)gUnknown_203F450 + 0x1004);
     SetBgTilemapBuffer(3u, (u8 *)gUnknown_203F450 + 0x2004);
-    SetGpuReg(0, 0x3040u);
+    SetGpuReg(REG_OFFSET_DISPCNT, 0x3040u);
     ShowBg(0);
     ShowBg(1u);
     ShowBg(2u);
@@ -231,7 +231,7 @@ void TeachyTvSetupBg()
     ChangeBgY(3u, 0x2800u, 1u);
     *((u8 *)gUnknown_203F450 + 0x4004) = 0;
     *((u8 *)gUnknown_203F450 + 0x4005) = 3;
-    SetGpuReg(0x50u, 0);
+    SetGpuReg(REG_OFFSET_BLDCNT, 0);
 }
 
 void TeachyTvLoadGraphic()
@@ -316,10 +316,10 @@ void TeachyTvAudioByInput(s32 notUsed, bool8 play, struct ListMenu *notUsedAlt)
 
 void TeachyTvInitIo()
 {
-    SetGpuReg(0x48u, 0x3Fu);
-    SetGpuReg(0x4Au, 0x1Fu);
-    SetGpuReg(0x50u, 0xCCu);
-    SetGpuReg(0x54u, 5u);
+    SetGpuReg(REG_OFFSET_WININ, 0x3Fu);
+    SetGpuReg(REG_OFFSET_WINOUT, 0x1Fu);
+    SetGpuReg(REG_OFFSET_BLDCNT, 0xCCu);
+    SetGpuReg(REG_OFFSET_BLDY, 5u);
 }
 
 u8 TeachyTvSetupObjEventAndOam()
@@ -340,14 +340,14 @@ void TeachyTvSetSpriteCoordsAndSwitchFrame(u8 objId, u16 x, u16 y, u8 frame)
 
 void TeachyTvSetWindowRegs()
 {
-    SetGpuReg(0x44u, 0xC64u);
-    SetGpuReg(0x40u, 0x1CD4u);
+    SetGpuReg(REG_OFFSET_WIN0V, 0xC64u);
+    SetGpuReg(REG_OFFSET_WIN0H, 0x1CD4u);
 }
 
 void TeachyTvClearWindowRegs()
 {
-    SetGpuReg(0x44u, 0);
-    SetGpuReg(0x40u, 0);
+    SetGpuReg(REG_OFFSET_WIN0V, 0);
+    SetGpuReg(REG_OFFSET_WIN0H, 0);
 }
 
 void TeachyTvBg2AnimController()

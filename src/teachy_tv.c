@@ -171,7 +171,6 @@ void TeachyTvMainCallback()
     int taskId;
     struct Task *taskAddr;
     struct TeachyTvBuf **memBuf;
-    u32 x;
 
     state = gMain.state;
     switch (state)
@@ -207,8 +206,7 @@ void TeachyTvMainCallback()
         else
         {
             taskId = CreateTask(TeachyTvOptionListController, 0);
-            x = (u32)TeachyTvSetupWindow();
-            gTasks[taskId].data[0] = (x << 24) >> 24;
+            gTasks[taskId].data[0] = TeachyTvSetupWindow();
             gTasks[taskId].data[1] = TeachyTvSetupObjEventAndOam();
             TeachyTvSetupScrollIndicatorArrowPair();
             PlayNewMapMusic(BGM_FRLG_TEACHY_TV);
@@ -277,8 +275,7 @@ u8 TeachyTvSetupWindow()
     gMultiuseListMenuTemplate = gUnknown_8479368;
     gMultiuseListMenuTemplate.windowId = 1;
     gMultiuseListMenuTemplate.moveCursorFunc = TeachyTvAudioByInput;
-    hasItem = (u8)CheckBagHasItem(ITEM_TM_CASE, 1);
-    if ( !(hasItem << 24) )
+    if (!CheckBagHasItem(ITEM_TM_CASE, 1))
     {
         gMultiuseListMenuTemplate.items = &gUnknown_8479340;
         gMultiuseListMenuTemplate.totalItems = 5;
@@ -294,8 +291,7 @@ u8 TeachyTvSetupWindow()
 void TeachyTvSetupScrollIndicatorArrowPair()
 {
     int hasItem;
-    hasItem = (u8)CheckBagHasItem(ITEM_TM_CASE, 1);
-    if ( ! hasItem << 24 )
+    if (!CheckBagHasItem(ITEM_TM_CASE, 1))
     {
         struct TeachyTvBuf * temp = gUnknown_203F450;
         temp->var_4007 = 0xFF;
@@ -312,17 +308,16 @@ void TeachyTvSetupScrollIndicatorArrowPair()
 
 void TeachyTvRemoveScrollIndicatorArrowPair()
 {
-    u8 *temp = &(gUnknown_203F450->var_4007);
-    if ( *temp != 0xFF )
+    if ( gUnknown_203F450->var_4007 != 0xFF )
     {
-        RemoveScrollIndicatorArrowPair(*temp);
+        RemoveScrollIndicatorArrowPair(gUnknown_203F450->var_4007);
         gUnknown_203F450->var_4007 = 0xFF;
     }
 }
 
 void TeachyTvAudioByInput(s32 notUsed, bool8 play, struct ListMenu *notUsedAlt)
 {
-    if ( play != 1 )
+    if ( play != TRUE )
         PlaySE(SE_SELECT);
 }
 
@@ -365,8 +360,8 @@ void TeachyTvClearWindowRegs()
 void TeachyTvBg2AnimController()
 {
     u16 *tilemapBuffer;
-    u8 i;
-    u32 offset, offset2, j;
+    u8 i, offset2;
+    u32 j, offset;
 
     tilemapBuffer = (u16 *)GetBgTilemapBuffer(2);
     i = 1;
@@ -378,19 +373,19 @@ void TeachyTvBg2AnimController()
         do
         {
             tilemapBuffer[offset + offset2] = ((Random() & 3) << 10) + 0x301F;
-            offset2 = (offset2 + 1) << 0x18 >> 0x18;
+            offset2 = (offset2 + 1);
         }
         while ( offset2 <= 0x1B );
         i = j;
     }
-    while ( j << 0x18 >> 0x18 <= 0xC );
+    while ( (u8)j <= 0xC );
     schedule_bg_copy_tilemap_to_vram(2);
 }
 
 void TeachyTvSetupPostBattleWindowAndObj(u8 taskId)
 {
-    u16 *v2 = gTasks[taskId].data;
-    int v1 = ((s16 *)v2)[1];
+    s16 *data = gTasks[taskId].data;
+    int v1 = (data)[1];
     struct Sprite *v3 = &gSprites[v1];
     int op;
 
@@ -401,18 +396,18 @@ void TeachyTvSetupPostBattleWindowAndObj(u8 taskId)
     {
         if ( op <= 3 )
         {
-            TeachyTvSetSpriteCoordsAndSwitchFrame(((char*)v2)[2], 0x78, 0x38, 0);
+            TeachyTvSetSpriteCoordsAndSwitchFrame(((char*)data)[2], 0x78, 0x38, 0);
             ChangeBgX(3, 0x3000, 1);
             ChangeBgY(3, 0x3000, 2);
             gUnknown_203F450->var_4004 += 3;
             gUnknown_203F450->var_4005 -= 3;
         }
         else if ( op <= 5 )
-            TeachyTvSetSpriteCoordsAndSwitchFrame(((char*)v2)[2], 0x78, 0x38, 0);
+            TeachyTvSetSpriteCoordsAndSwitchFrame(((char*)data)[2], 0x78, 0x38, 0);
     }
 
-    v2[4] = 0;
-    v2[5] = 0;
+    data[4] = 0;
+    data[5] = 0;
     TeachyTvGrassAnimationMain(taskId, v3->pos2.x, v3->pos2.y, 0, 1);
 }
 
@@ -458,32 +453,32 @@ void TeachyTvQuitFadeControlAndTaskDel(u8 taskId)
 #ifdef NONMATCHING
 void TeachyTvOptionListController(u8 taskId)
 {
-    char *v2;
-    s32 v3;
+    s16 *data;
+    s32 res;
 
-    v2 = (char *)gTasks[taskId].data;
+    data = gTasks[taskId].data;
     TeachyTvBg2AnimController();
     if ( !(gPaletteFade.active) )
     {
-        v3 = ListMenuHandleInput(*v2);
-        ListMenuGetScrollAndRow(*v2, &gTeachyTV_StaticResources.scrollOffset, &gTeachyTV_StaticResources.selectedRow);
+        res = ListMenuHandleInput(*data);
+        ListMenuGetScrollAndRow(*data, &gTeachyTV_StaticResources.scrollOffset, &gTeachyTV_StaticResources.selectedRow);
         if ( ((gMain.newKeys) & 4 && (gTeachyTV_StaticResources.callback != UseFameCheckerFromMenu))
-          || (v3 == -2) )
+          || (res == -2) )
         {
             PlaySE(SE_SELECT);
             TeachyTvQuitBeginFade(taskId);
         }
-        else if ( v3 != -1 )
+        else if ( res != -1 )
         {
             PlaySE(SE_SELECT);
-            gTeachyTV_StaticResources.optionChosen = v3;
-            DestroyListMenu(*v2, &gTeachyTV_StaticResources.scrollOffset, &gTeachyTV_StaticResources.selectedRow);
+            gTeachyTV_StaticResources.optionChosen = res;
+            DestroyListMenu(*data, &gTeachyTV_StaticResources.scrollOffset, &gTeachyTV_StaticResources.selectedRow);
             TeachyTvClearWindowRegs();
             ClearWindowTilemap(1);
             schedule_bg_copy_tilemap_to_vram(0);
             TeachyTvRemoveScrollIndicatorArrowPair();
-            *((u16 *)v2 + 3) = 0;
-            *((u16 *)v2 + 2) = 0;
+            data[3] = 0;
+            data[2] = 0;
             gTasks[taskId].func = TeachyTvRenderMsgAndSwitchClusterFuncs;
         }
     }
@@ -637,14 +632,14 @@ void TeachyTvClusFuncNpcMoveAndSetupTextPrinter(u8 taskId)
 
 void TeachyTvClusFuncIdleIfTextPrinterIsActive(u8 taskId)
 {
-    u16* data = (u16 *)gTasks[taskId].data;
-    if ( !(sub_80BF518(0) << 16) )
+    s16* data = (u16 *)gTasks[taskId].data;
+    if ( !sub_80BF518(0) )
         ++data[3];
 }
 
 void TeachyTvRenderMsgAndSwitchClusterFuncs(u8 taskId)
 {
-    u16 *data;
+    s16 *data;
     data = gTasks[taskId].data;
     if ( gMain.newKeys & 2 )
     {
@@ -663,15 +658,13 @@ void TeachyTvRenderMsgAndSwitchClusterFuncs(u8 taskId)
     {
         void (***array)(u8) = &gUnknown_8479548;
         void (**cluster)(u8) = array[(u8)gTeachyTV_StaticResources.optionChosen];
-        _call_via_r1(
-            taskId,
-            cluster[(s16)data[3]]);
+        cluster[data[3]](taskId);
     }
 }
 
 void TeachyTvClusFuncTextPrinterSwitchStringByOptionChosen(u8 taskId)
 {
-    u16 *data = (u16 *)gTasks[taskId].data;
+    s16 *data = (u16 *)gTasks[taskId].data;
     const char * const* texts = &gUnknown_8479560;
     TeachyTvInitTextPrinter(texts[gTeachyTV_StaticResources.optionChosen]);
     ++data[3];
@@ -679,7 +672,7 @@ void TeachyTvClusFuncTextPrinterSwitchStringByOptionChosen(u8 taskId)
 
 void TeachyTvClusFuncTextPrinterSwitchStringByOptionChosen2(u8 taskId)
 {
-    u16 *data = (u16 *)gTasks[taskId].data;
+    s16 *data = (u16 *)gTasks[taskId].data;
     const char * const* texts = &gUnknown_8479578;
     TeachyTvInitTextPrinter(texts[gTeachyTV_StaticResources.optionChosen]);
     ++data[3];
@@ -687,16 +680,16 @@ void TeachyTvClusFuncTextPrinterSwitchStringByOptionChosen2(u8 taskId)
 
 void TeachyTvClusFuncIdleIfTextPrinterIsActive2(u8 taskId)
 {
-    u16* data = (u16 *)gTasks[taskId].data;
-    if ( !(sub_80BF518(0) << 16) )
+    s16* data = (u16 *)gTasks[taskId].data;
+    if ( !sub_80BF518(0) )
         ++data[3];
 }
 
 void TeachyTvClusFuncEraseTextWindowIfKeyPressed(u8 taskId)
 {
-    u16 *data;
+    s16 *data;
     data = (u16 *)gTasks[taskId].data;
-    if ( gMain.newKeys & 3 )
+    if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
         FillWindowPixelBuffer(0, 0xCC);
         CopyWindowToVram(0, 2);
@@ -706,7 +699,7 @@ void TeachyTvClusFuncEraseTextWindowIfKeyPressed(u8 taskId)
 
 void TeachyTvClusFuncStartAnimNpcWalkIntoGrass(u8 taskId)
 {
-    u16 *data;
+    s16 *data;
     data = (u16 *)gTasks[taskId].data;
     StartSpriteAnim(&gSprites[(s16)data[1]], 5);
     data[2] = 0;
@@ -748,7 +741,7 @@ void TeachyTvClusFuncDudeMoveRight(u8 taskId)
     ChangeBgX(3, 0x100, 1);
     if ( !(++data[2] & 0xF) )
         ++gUnknown_203F450->var_4004;
-    if ( !((((s16*)data)[2] + 8) & 0xF) )
+    if ( !((data[2] + 8) & 0xF) )
         TeachyTvGrassAnimationMain(taskId, obj->pos2.x + 8, obj->pos2.y, 0, 0);
     if ( data[2] == 0x30 )
     {
@@ -768,7 +761,7 @@ void TeachyTvClusFuncDudeTurnLeft(u8 taskId)
     data = gTasks[taskId].data;
     v3 = &gSprites[data[1]];
     StartSpriteAnim(v3, 6);
-    ++(u16)data[3];
+    ++data[3];
     data[4] = 0;
     data[5] = 0;
     TeachyTvGrassAnimationMain(taskId, v3->pos2.x, v3->pos2.y, 0, 0);
@@ -785,7 +778,7 @@ void TeachyTvClusFuncDudeMoveLeft(u8 taskId)
     if ( !(v2->pos2.x & 0xF) )
         TeachyTvGrassAnimationMain(taskId, v2->pos2.x - 8, v2->pos2.y, 0, 0);
     if ( v2->pos2.x == 8 )
-        ++(u16)data[3];
+        ++data[3];
     else
         --v2->pos2.x;
 }
@@ -793,7 +786,6 @@ void TeachyTvClusFuncDudeMoveLeft(u8 taskId)
 void TeachyTvClusFuncRenderAndRemoveBg1EndGraphic(u8 taskId)
 {
     s16 *data;
-    int temp;
 
     data = gTasks[taskId].data;
     if ( !data[2] )
@@ -801,13 +793,11 @@ void TeachyTvClusFuncRenderAndRemoveBg1EndGraphic(u8 taskId)
         CopyToBgTilemapBufferRect_ChangePalette(1, &gUnknown_8479590, 0x14, 0xA, 8, 2, 0x11);
         schedule_bg_copy_tilemap_to_vram(1);
     }
-    temp = (u16)data[2] + 1;
-    data[2] = temp;
-    if ( (s16)temp > 126 )
+    if ( ++data[2] > 126 )
     {
         TeachyTvClearBg1EndGraphicText();
-        (u16)data[2] = 0;
-        ++(u16)data[3];
+        data[2] = 0;
+        ++data[3];
     }
 }
 
@@ -820,15 +810,12 @@ void TeachyTvClearBg1EndGraphicText()
 void TeachyTvBackToOptionList(u8 taskId)
 {
     s16 *data;
-    s32 temp;
 
     data = gTasks[taskId].data;
     if ( !data[2] )
         PlayNewMapMusic(BGM_FRLG_TEACHY_TV);
     TeachyTvBg2AnimController();
-    temp = (u16)data[2] + 1;
-    data[2] = temp;
-    if ( (s16)temp > 0x3F )
+    if ( ++data[2] > 63 )
     {
         data[2] = 0;
         data[3] = 0;
@@ -851,17 +838,18 @@ void TeachyTvBackToOptionList(u8 taskId)
 void TeachyTvChainTaskBattleOrFadeByOptionChosen(u8 taskId)
 {
     int op = gTeachyTV_StaticResources.optionChosen;
-    if ( op < 0 )
-        return;
-    if ( op <= 3 )
+    if ( op >= 0 )
     {
-        TeachyTvPrepBattle(taskId);
+        if ( op <= 3 )
+        {
+            TeachyTvPrepBattle(taskId);
 
-    }
-    else if ( op <= 5 )
-    {
-        *((void(**)())gUnknown_203F450) = TeachyTvSetupBagItemsByOptionChosen;
-        TeachyTvQuitBeginFade(taskId);
+        }
+        else if ( op <= 5 )
+        {
+            *((void(**)())gUnknown_203F450) = TeachyTvSetupBagItemsByOptionChosen;
+            TeachyTvQuitBeginFade(taskId);
+        }
     }
 }
 
@@ -897,7 +885,7 @@ void TeachyTvGrassAnimationMain(u8 taskId, s16 x, s16 y, u8 subpriority, bool8 m
     if ( gUnknown_203F450->var_4006 != 1 )
     {
         res = TeachyTvGrassAnimationCheckIfNeedsToGenerateGrassObj(
-                          (u32)((x << 16) - 0x100000) >> 16,
+                          x - 0x10,
                           y);
         if ( res << 24 )
         {

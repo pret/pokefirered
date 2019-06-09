@@ -319,7 +319,7 @@ void TeachyTvInitIo()
     SetGpuReg(REG_OFFSET_WININ, 0x3F);
     SetGpuReg(REG_OFFSET_WINOUT, 0x1F);
     SetGpuReg(REG_OFFSET_BLDCNT, 0xCC);
-    SetGpuReg(REG_OFFSET_BLDY, 5);
+    SetGpuReg(REG_OFFSET_BLDY, 0x5);
 }
 
 u8 TeachyTvSetupObjEventAndOam()
@@ -346,8 +346,8 @@ void TeachyTvSetWindowRegs()
 
 void TeachyTvClearWindowRegs()
 {
-    SetGpuReg(REG_OFFSET_WIN0V, 0);
-    SetGpuReg(REG_OFFSET_WIN0H, 0);
+    SetGpuReg(REG_OFFSET_WIN0V, 0x0);
+    SetGpuReg(REG_OFFSET_WIN0H, 0x0);
 }
 
 void TeachyTvBg2AnimController()
@@ -576,14 +576,9 @@ void TeachyTvOptionListController(u8 taskId)
 
 void TeachyTvClusFuncTransitionRenderBg2TeachyTvGraphicInitNpcPos(u8 taskId)
 {
-    u16 *data;
-    u32 counter;
-
-    data = (u16 *)gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
     TeachyTvBg2AnimController();
-    counter = data[2] + 1;
-    data[2] = counter;
-    if ( (s16)counter > 63 )
+    if ( ++data[2] > 63 )
     {
         CopyToBgTilemapBufferRect_ChangePalette(2, (u8 *)gUnknown_203F450 + 0x3004, 0, 0, 0x20, 0x20, 0x11);
         TeachyTvSetSpriteCoordsAndSwitchFrame(((u8*)data)[2], 8, 0x38, 7);
@@ -596,13 +591,8 @@ void TeachyTvClusFuncTransitionRenderBg2TeachyTvGraphicInitNpcPos(u8 taskId)
 
 void TeachyTvClusFuncClearBg2TeachyTvGraphic(u8 taskId)
 {
-    u16 *data;
-    u32 counter;
-
-    data = (u16*)gTasks[taskId].data;
-    counter = data[2] + 1;
-    data[2] = counter;
-    if ( (s16)counter == 134 )
+    s16 *data = gTasks[taskId].data;
+    if ( ++data[2] == 134 )
     {
         FillBgTilemapBufferRect_Palette0(2, 0, 2, 1, 0x1A, 0xC);
         schedule_bg_copy_tilemap_to_vram(2);
@@ -730,7 +720,7 @@ void TeachyTvClusFuncDudeMoveUp(u8 taskId)
         --((u8*)gUnknown_203F450)[0x4005];
         TeachyTvGrassAnimationMain(taskId, obj->pos2.x, obj->pos2.y, 0, 0);
     }
-    if ( data[2] == 0x30 )
+    if ( data[2] == 48 )
     {
         data[2] = 0;
         data[4] = -1;
@@ -742,20 +732,17 @@ void TeachyTvClusFuncDudeMoveUp(u8 taskId)
 
 void TeachyTvClusFuncDudeMoveRight(u8 taskId)
 {
-    u16 *data;
+    s16 *data;
     struct Sprite *obj;
-    int counter;
 
     data = (u16 *)gTasks[taskId].data;
     obj = &gSprites[(s16)data[1]];
     ChangeBgX(3, 0x100, 1);
-    counter = data[2] + 1;
-    data[2] = counter;
-    if ( !(counter & 0xF) )
+    if ( !(++data[2] & 0xF) )
         ++((u8*)gUnknown_203F450)[0x4004];
     if ( !((((s16*)data)[2] + 8) & 0xF) )
         TeachyTvGrassAnimationMain(taskId, obj->pos2.x + 8, obj->pos2.y, 0, 0);
-    if ( (s16)data[2] == 0x30 )
+    if ( data[2] == 0x30 )
     {
         data[2] = 0;
         data[4] = 0;
@@ -843,8 +830,8 @@ void TeachyTvBackToOptionList(u8 taskId)
         TeachyTvSetupScrollIndicatorArrowPair();
         TeachyTvSetWindowRegs();
         schedule_bg_copy_tilemap_to_vram(0);
-        ChangeBgX(3, 0, 0);
-        ChangeBgY(3, 0, 0);
+        ChangeBgX(3, 0x0, 0);
+        ChangeBgY(3, 0x0, 0);
         ChangeBgX(3, 0x1000, 2);
         ChangeBgY(3, 0x2800, 1);
         ((u8*)gUnknown_203F450)[0x4004] = 0;

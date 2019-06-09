@@ -137,18 +137,18 @@ void TeachyTvVblankHandler()
 
 void sub_815ABC4(u8 mode, void (*cb)())
 {
-    struct TeachyTvCtrlBlk *resAddr = &gTeachyTV_StaticResources;
-    u16 zero = 0;
-    resAddr->mode = mode;
-    resAddr->callback = cb;
-    if (!mode)
+    gTeachyTV_StaticResources.mode = mode;
+    gTeachyTV_StaticResources.callback = cb;
+    if (mode == 0)
     {
-        resAddr->scrollOffset = zero;
-        resAddr->selectedRow = zero;
-        resAddr->optionChosen = 0;
+        gTeachyTV_StaticResources.scrollOffset = 0;
+        gTeachyTV_StaticResources.selectedRow = 0;
+        gTeachyTV_StaticResources.optionChosen = 0;
     }
     if (mode == 1)
-        resAddr->mode = 0;
+    {
+        gTeachyTV_StaticResources.mode = 0;
+    }
     SetMainCallback2(TeachyTvMainCallback);
 }
 

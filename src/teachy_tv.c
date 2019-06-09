@@ -76,41 +76,41 @@ extern const struct SpriteTemplate * const gUnknown_83A0010;
 extern const u8 gUnknown_84795C8;
 extern const struct MapData Route1_Layout;
 
-extern void VblankHblankHandlerSetZero();
+extern void VblankHblankHandlerSetZero(void);
 extern void sub_812B1E0(u16);
 extern u8 ListMenuInitInternal(struct ListMenuTemplate *, u16 scrollOffset, u16 selectedRow); 
-extern void sub_8055DC4();
+extern void sub_8055DC4(void);
 extern bool16 sub_80BF518(u8 textPrinterId);
 extern void _call_via_r1(s32 arg, void *func);
 extern void sub_810B108(u8);
-extern void sub_8159F40();
+extern void sub_8159F40(void);
 
-void TeachyTvCallback();
-void TeachyTvMainCallback();
-void TeachyTvVblankHandler();
-void TeachyTvCreateAndRenderRbox();
-void TeachyTvInitIo();
-u8 TeachyTvSetupObjEventAndOam();
+void TeachyTvCallback(void);
+void TeachyTvMainCallback(void);
+void TeachyTvVblankHandler(void);
+void TeachyTvCreateAndRenderRbox(void);
+void TeachyTvInitIo(void);
+u8 TeachyTvSetupObjEventAndOam(void);
 void TeachyTvSetupPostBattleWindowAndObj(u8);
-u8 TeachyTvSetupWindow();
-void TeachyTvSetupScrollIndicatorArrowPair();
-void TeachyTvSetWindowRegs();
-void TeachyTvSetupBg();
-void TeachyTvLoadGraphic();
+u8 TeachyTvSetupWindow(void);
+void TeachyTvSetupScrollIndicatorArrowPair(void);
+void TeachyTvSetWindowRegs(void);
+void TeachyTvSetupBg(void);
+void TeachyTvLoadGraphic(void);
 void TeachyTvPostBattleFadeControl(u8);
 void TeachyTvOptionListController(u8);
 void TeachyTvAudioByInput(s32, bool8, struct ListMenu *);
 void TeachyTvQuitFadeControlAndTaskDel(u8 taskId);
 void TeachyTvRenderMsgAndSwitchClusterFuncs(u8 taskId);
-void TeachyTvClearBg1EndGraphicText();
+void TeachyTvClearBg1EndGraphicText(void);
 void TeachyTvBackToOptionList(u8 taskId);
-void TeachyTvSetupBagItemsByOptionChosen();
+void TeachyTvSetupBagItemsByOptionChosen(void);
 void TeachyTvPrepBattle(u8 taskId);
 void TeachyTvGrassAnimationMain(u8 taskId, s16 x, s16 y, u8 subpriority, bool8 mode);
 void TeachyTvLoadBg3Map(void *);
 u8 TeachyTvGrassAnimationCheckIfNeedsToGenerateGrassObj(s16 x, s16 y);
 void TeachyTvGrassAnimationObjCallback(struct Sprite *sprite);
-void TeachyTvRestorePlayerPartyCallback();
+void TeachyTvRestorePlayerPartyCallback(void);
 void TeachyTvPreBattleAnimAndSetBattleCallback(u8 taskId);
 void TeachyTvLoadMapTilesetToBuffer(struct Tileset *ts, u8 *dstBuffer, u16 size);
 void TeachyTvPushBackNewMapPalIndexArrayEntry(struct MapData *mStruct, u16 *buf1, u8 *palIndexArray, u16 mapEntry, u16 offset);
@@ -119,7 +119,7 @@ void TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(u8 *blockBuf, u8 *
 u16 TeachyTvComputePalIndexArrayEntryByMetaTile(u8 *palIndexArrayBuf, u16 metaTile);
 void TeachyTvLoadMapPalette(const struct MapData *const mStruct, u8 *palIndexArray);
 
-void TeachyTvCallback()
+void TeachyTvCallback(void)
 {
     RunTasks();
     AnimateSprites();
@@ -128,7 +128,7 @@ void TeachyTvCallback()
     UpdatePaletteFade();
 }
 
-void TeachyTvVblankHandler()
+void TeachyTvVblankHandler(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
@@ -152,7 +152,7 @@ void sub_815ABC4(u8 mode, void (*cb)())
     SetMainCallback2(TeachyTvMainCallback);
 }
 
-void sub_815ABFC()
+void sub_815ABFC(void)
 {
     if (gTeachyTV_StaticResources.mode == 1)
         sub_815ABC4(1, gTeachyTV_StaticResources.callback);
@@ -160,26 +160,22 @@ void sub_815ABFC()
         sub_815ABC4(2, gTeachyTV_StaticResources.callback);
 }
 
-void sub_815AC20()
+void sub_815AC20(void)
 {
     gTeachyTV_StaticResources.mode = 1;
 }
 
-void TeachyTvMainCallback()
+void TeachyTvMainCallback(void)
 {
-    int state;
-    int taskId;
+    u8 taskId;
     struct Task *taskAddr;
-    struct TeachyTvBuf **memBuf;
 
-    state = gMain.state;
-    switch (state)
+    switch (gMain.state)
     {
     case 0:
-        memBuf = &gUnknown_203F450;
-        (*memBuf) = (struct TeachyTvBuf *)AllocZeroed(0x4008);
-        gUnknown_203F450->state = (u32)state;
-        gUnknown_203F450->var_4006 = state;
+        gUnknown_203F450 = AllocZeroed(sizeof(struct TeachyTvBuf));
+        gUnknown_203F450->state = 0;
+        gUnknown_203F450->var_4006 = 0;
         gUnknown_203F450->var_4007 = 0xFF;
         VblankHblankHandlerSetZero();
         clear_scheduled_bg_copies_to_vram();
@@ -193,7 +189,7 @@ void TeachyTvMainCallback()
         ++gMain.state;
         break;
     case 1:
-        if ( free_temp_tile_data_buffers_if_possible() == 1 )
+        if ( free_temp_tile_data_buffers_if_possible() == TRUE )
             return;
         TeachyTvCreateAndRenderRbox();
         TeachyTvInitIo();
@@ -225,7 +221,7 @@ void TeachyTvMainCallback()
     }
 }
 
-void TeachyTvSetupBg()
+void TeachyTvSetupBg(void)
 {
     InitBgReg();
     ResetBgsAndClearDma3BusyFlags(0);
@@ -245,7 +241,7 @@ void TeachyTvSetupBg()
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
 }
 
-void TeachyTvLoadGraphic()
+void TeachyTvLoadGraphic(void)
 {
     u16 src;
     src = 0;
@@ -259,7 +255,7 @@ void TeachyTvLoadGraphic()
     TeachyTvLoadBg3Map(gUnknown_203F450->buffer3);
 }
 
-void TeachyTvCreateAndRenderRbox()
+void TeachyTvCreateAndRenderRbox(void)
 {
     InitWindows(&gUnknown_84792F0);
     DeactivateAllTextPrinters();
@@ -269,9 +265,8 @@ void TeachyTvCreateAndRenderRbox()
     CopyWindowToVram(0, 2);
 }
 
-u8 TeachyTvSetupWindow()
+u8 TeachyTvSetupWindow(void)
 {
-    int hasItem;
     gMultiuseListMenuTemplate = gUnknown_8479368;
     gMultiuseListMenuTemplate.windowId = 1;
     gMultiuseListMenuTemplate.moveCursorFunc = TeachyTvAudioByInput;
@@ -288,9 +283,8 @@ u8 TeachyTvSetupWindow()
                gTeachyTV_StaticResources.selectedRow);
 }
 
-void TeachyTvSetupScrollIndicatorArrowPair()
+void TeachyTvSetupScrollIndicatorArrowPair(void)
 {
-    int hasItem;
     if (!CheckBagHasItem(ITEM_TM_CASE, 1))
     {
         struct TeachyTvBuf * temp = gUnknown_203F450;
@@ -306,7 +300,7 @@ void TeachyTvSetupScrollIndicatorArrowPair()
         }
 }
 
-void TeachyTvRemoveScrollIndicatorArrowPair()
+void TeachyTvRemoveScrollIndicatorArrowPair(void)
 {
     if ( gUnknown_203F450->var_4007 != 0xFF )
     {
@@ -321,7 +315,7 @@ void TeachyTvAudioByInput(s32 notUsed, bool8 play, struct ListMenu *notUsedAlt)
         PlaySE(SE_SELECT);
 }
 
-void TeachyTvInitIo()
+void TeachyTvInitIo(void)
 {
     SetGpuReg(REG_OFFSET_WININ, 0x3F);
     SetGpuReg(REG_OFFSET_WINOUT, 0x1F);
@@ -329,7 +323,7 @@ void TeachyTvInitIo()
     SetGpuReg(REG_OFFSET_BLDY, 0x5);
 }
 
-u8 TeachyTvSetupObjEventAndOam()
+u8 TeachyTvSetupObjEventAndOam(void)
 {
     u8 temp = AddPseudoEventObject(90, SpriteCallbackDummy, 0, 0, 8);
     gSprites[temp].oam.priority = 2;
@@ -345,25 +339,25 @@ void TeachyTvSetSpriteCoordsAndSwitchFrame(u8 objId, u16 x, u16 y, u8 frame)
     StartSpriteAnim(&gSprites[objId], frame);
 }
 
-void TeachyTvSetWindowRegs()
+void TeachyTvSetWindowRegs(void)
 {
     SetGpuReg(REG_OFFSET_WIN0V, 0xC64);
     SetGpuReg(REG_OFFSET_WIN0H, 0x1CD4);
 }
 
-void TeachyTvClearWindowRegs()
+void TeachyTvClearWindowRegs(void)
 {
     SetGpuReg(REG_OFFSET_WIN0V, 0x0);
     SetGpuReg(REG_OFFSET_WIN0H, 0x0);
 }
 
-void TeachyTvBg2AnimController()
+void TeachyTvBg2AnimController(void)
 {
     u16 *tilemapBuffer;
     u8 i, offset2;
     u32 j, offset;
 
-    tilemapBuffer = (u16 *)GetBgTilemapBuffer(2);
+    tilemapBuffer = GetBgTilemapBuffer(2);
     i = 1;
     do
     {
@@ -419,7 +413,7 @@ void TeachyTvInitTextPrinter(const char *text)
     AddTextPrinterParameterized2(0, 4, (const char *)text, spd, 0, 1, 0xC, 3);
 }
 
-void TeachyTvFree()
+void TeachyTvFree(void)
 {
     Free(gUnknown_203F450);
     gUnknown_203F450 = NULL;
@@ -712,7 +706,7 @@ void TeachyTvClusFuncRenderAndRemoveBg1EndGraphic(u8 taskId)
     }
 }
 
-void TeachyTvClearBg1EndGraphicText()
+void TeachyTvClearBg1EndGraphicText(void)
 {
     FillBgTilemapBufferRect_Palette0(1, 0, 0x14, 0xA, 8, 2);
     schedule_bg_copy_tilemap_to_vram(1);
@@ -764,7 +758,7 @@ void TeachyTvChainTaskBattleOrFadeByOptionChosen(u8 taskId)
     }
 }
 
-void TeachyTvSetupBagItemsByOptionChosen()
+void TeachyTvSetupBagItemsByOptionChosen(void)
 {
     if ( gTeachyTV_StaticResources.optionChosen == 4 )
         sub_810B108(10);
@@ -911,7 +905,7 @@ void TeachyTvPreBattleAnimAndSetBattleCallback(u8 taskId)
     }
 }
 
-void TeachyTvRestorePlayerPartyCallback()
+void TeachyTvRestorePlayerPartyCallback(void)
 {
     LoadPlayerParty();
     if ( gUnknown_2023E8A == 3 )

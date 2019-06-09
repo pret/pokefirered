@@ -1578,7 +1578,7 @@ void TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(u8 *blockBuf, u8 *
 u16 TeachyTvComputePalIndexArrayEntryByMetaTile(u8 *palIndexArrayBuf, u16 metaTile)
 {
     u32 pal;
-    u32 i;
+    u16 i;
     int firstEntry;
     int temp;
 
@@ -1595,7 +1595,7 @@ u16 TeachyTvComputePalIndexArrayEntryByMetaTile(u8 *palIndexArrayBuf, u16 metaTi
         {
             while ( 1 )
             {
-                i = ((i + 1) << 0x10) >> 0x10;
+                ++i;
                 if ( i > 0xF )
                     break;
                 temp = palIndexArrayBuf[i];
@@ -1609,7 +1609,7 @@ u16 TeachyTvComputePalIndexArrayEntryByMetaTile(u8 *palIndexArrayBuf, u16 metaTi
             }
         }
     }
-    return (u16)(0xF - i);
+    return (0xF - i);
 }
 
 #ifdef NONMATCHING

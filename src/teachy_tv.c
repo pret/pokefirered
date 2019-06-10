@@ -29,6 +29,9 @@
 #include "battle.h"
 #include "global.fieldmap.h"
 #include "teachy_tv.h"
+#include "help_system.h"
+#include "overworld.h"
+#include "unk_8159F40.h"
 
 struct TeachyTvCtrlBlk
 {
@@ -54,7 +57,7 @@ struct TeachyTvBuf
 };
 
 EWRAM_DATA struct TeachyTvCtrlBlk gTeachyTV_StaticResources = {0};
-extern struct TeachyTvBuf * gUnknown_203F450;
+EWRAM_DATA struct TeachyTvBuf * gUnknown_203F450;
 extern const struct ScrollIndicatorArrowPairTemplate gUnknown_8479380;
 extern const u8 gUnknown_841B83D;
 extern const struct BgTemplate gUnknown_84792E0;
@@ -69,18 +72,12 @@ extern const u8 gUnknown_8E86F98;
 extern const struct ListMenuTemplate gUnknown_8479368;
 extern const struct ListMenuItem gUnknown_8479340;
 extern const struct WindowTemplate gUnknown_84792F0;
-extern const u8 gUnknown_8479590;
-extern const u8 gUnknown_8479390;
+extern const u16 gUnknown_8479590[];
+extern const u8 gUnknown_8479390[];
 extern const struct SubspriteTable gUnknown_84795B8;
 extern const struct SpriteTemplate * const gUnknown_83A0010;
-extern const u8 gUnknown_84795C8;
+extern const u8 gUnknown_84795C8[];
 extern const struct MapData Route1_Layout;
-
-extern void sub_812B1E0(u16);
-extern void sub_8055DC4(void);
-extern bool16 sub_80BF518(u8 textPrinterId);
-extern void sub_810B108(u8);
-extern void sub_8159F40(void);
 
 void TeachyTvCallback(void);
 void TeachyTvMainCallback(void);
@@ -114,7 +111,7 @@ void TeachyTvPushBackNewMapPalIndexArrayEntry(struct MapData *mStruct, u16 *buf1
 void TeachyTvComputeMapTilesFromTilesetAndMetaTiles(u16 *metaTilesArray, u8 *blockBuf, u8 *tileset);
 void TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(u8 *blockBuf, u8 *tileset, u8 metaTile);
 u16 TeachyTvComputePalIndexArrayEntryByMetaTile(u8 *palIndexArrayBuf, u16 metaTile);
-void TeachyTvLoadMapPalette(const struct MapData *const mStruct, u8 *palIndexArray);
+void TeachyTvLoadMapPalette(const struct MapData * mStruct, const u8 *palIndexArray);
 
 void TeachyTvCallback(void)
 {
@@ -288,10 +285,8 @@ void TeachyTvSetupScrollIndicatorArrowPair(void)
     }
 
     else {
-        struct TeachyTvBuf *temp; 
         u8 res = AddScrollIndicatorArrowPair(&gUnknown_8479380, &(gTeachyTV_StaticResources.scrollOffset));
-        temp = gUnknown_203F450;
-        temp->var_4007 = res;
+        gUnknown_203F450->var_4007 = res;
         }
 }
 
@@ -500,7 +495,7 @@ void TeachyTvClusFuncClearBg2TeachyTvGraphic(u8 taskId)
 void TeachyTvClusFuncNpcMoveAndSetupTextPrinter(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
-    struct Sprite * priteAddr = &gSprites[data[1]];
+    struct Sprite * spriteAddr = &gSprites[data[1]];
     if (data[2] != 35)
         ++data[2];
     else {
@@ -518,7 +513,7 @@ void TeachyTvClusFuncNpcMoveAndSetupTextPrinter(u8 taskId)
 
 void TeachyTvClusFuncIdleIfTextPrinterIsActive(u8 taskId)
 {
-    s16* data = (u16 *)gTasks[taskId].data;
+    s16* data = gTasks[taskId].data;
     if (!sub_80BF518(0))
         ++data[3];
 }
@@ -572,8 +567,7 @@ void TeachyTvClusFuncIdleIfTextPrinterIsActive2(u8 taskId)
 
 void TeachyTvClusFuncEraseTextWindowIfKeyPressed(u8 taskId)
 {
-    s16 *data;
-    data = (u16 *)gTasks[taskId].data;
+    s16 *data = (u16 *)gTasks[taskId].data;
     if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
         FillWindowPixelBuffer(0, 0xCC);
@@ -664,7 +658,7 @@ void TeachyTvClusFuncRenderAndRemoveBg1EndGraphic(u8 taskId)
     s16 *data = gTasks[taskId].data;
     if (!data[2])
     {
-        CopyToBgTilemapBufferRect_ChangePalette(1, &gUnknown_8479590, 0x14, 0xA, 8, 2, 0x11);
+        CopyToBgTilemapBufferRect_ChangePalette(1, gUnknown_8479590, 0x14, 0xA, 8, 2, 0x11);
         schedule_bg_copy_tilemap_to_vram(1);
     }
     if (++data[2] > 126)
@@ -738,7 +732,7 @@ void TeachyTvPostBattleFadeControl(u8 taskId)
     s16 *data = gTasks[taskId].data;
     if (!(gPaletteFade.active))
     {
-        const u8* funcIdx = &gUnknown_8479390;
+        const u8* funcIdx = gUnknown_8479390;
         int arg = funcIdx[gTeachyTV_StaticResources.optionChosen];
         data[3] = arg;
         gTasks[taskId].func = TeachyTvRenderMsgAndSwitchClusterFuncs;
@@ -756,9 +750,7 @@ void TeachyTvGrassAnimationMain(u8 taskId, s16 x, s16 y, u8 subpriority, bool8 m
     subprio = subpriority;
     if (gUnknown_203F450->var_4006 != 1)
     {
-        res = TeachyTvGrassAnimationCheckIfNeedsToGenerateGrassObj(
-                          x - 0x10,
-                          y);
+        res = TeachyTvGrassAnimationCheckIfNeedsToGenerateGrassObj(x - 0x10, y);
         if (res << 24)
         {
             objTemAddr = &gUnknown_83A0010;
@@ -822,7 +814,7 @@ u8 TeachyTvGrassAnimationCheckIfNeedsToGenerateGrassObj(s16 x, s16 y)
     int high, low;
     if ((x < 0) || (y < 0))
         return 0;
-    arr = &gUnknown_84795C8;
+    arr = gUnknown_84795C8;
     high = ((y >> 4) + gUnknown_203F450->var_4005) << 4;
     low = ((x >> 4) + gUnknown_203F450->var_4004);
     return arr[high+low];
@@ -1560,63 +1552,20 @@ u16 TeachyTvComputePalIndexArrayEntryByMetaTile(u8 *palIndexArrayBuf, u16 metaTi
     return (0xF - i);
 }
 
-#ifdef NONMATCHING
-void TeachyTvLoadMapPalette(const struct MapData * const mStruct, u8 *palIndexArray)
+void TeachyTvLoadMapPalette(const struct MapData * mStruct, const u8 * palIndexArray)
 {
     u8 i;
-    struct Tileset *ts;
+    const struct Tileset * ts;
+    u16 * dest;
 
-    for (i = 0; i < 16 && palIndexArray[i] != 0xFF; i++)
+    for (i = 0; i < 16; i++)
     {
-        ts = *(palIndexArray + i) > 6 ? mStruct->secondaryTileset : mStruct->primaryTileset;
-        LoadPalette((u16 *)ts->palettes + 0x10 * palIndexArray[i], 0x10 * (0xF - i), 0x20);
+        if (palIndexArray[i] == 0xFF)
+            break;
+        if (palIndexArray[i] > 6)
+            dest = (u16 *)mStruct->secondaryTileset->palettes + 0x10 * palIndexArray[i];
+        else
+            dest = (u16 *)mStruct->primaryTileset->palettes + 0x10 * palIndexArray[i];
+        LoadPalette(dest, 0x10 * (15 - i), 0x20);
     }
 }
-#else
-NAKED
-void TeachyTvLoadMapPalette(const struct MapData * const mStruct, u8 *palIndexArray)
-{
-    asm_unified("\n\
-        push {r4-r6,lr}\n\
-        adds r6, r0, 0\n\
-        adds r5, r1, 0\n\
-        movs r4, 0\n\
-        ldrb r0, [r5]\n\
-        cmp r0, 0xFF\n\
-        beq _0815C274\n\
-    _0815C23E:\n\
-        adds r1, r5, r4\n\
-        ldrb r0, [r1]\n\
-        cmp r0, 0x6\n\
-        bls _0815C24A\n\
-        ldr r0, [r6, 0x14]\n\
-        b _0815C24C\n\
-    _0815C24A:\n\
-        ldr r0, [r6, 0x10]\n\
-    _0815C24C:\n\
-        ldrb r1, [r1]\n\
-        lsls r1, 5\n\
-        ldr r0, [r0, 0x8]\n\
-        adds r0, r1\n\
-        movs r1, 0xF\n\
-        subs r1, r4\n\
-        lsls r1, 20\n\
-        lsrs r1, 16\n\
-        movs r2, 0x20\n\
-        bl LoadPalette\n\
-        adds r0, r4, 0x1\n\
-        lsls r0, 24\n\
-        lsrs r4, r0, 24\n\
-        cmp r4, 0xF\n\
-        bhi _0815C274\n\
-        adds r0, r5, r4\n\
-        ldrb r0, [r0]\n\
-        cmp r0, 0xFF\n\
-        bne _0815C23E\n\
-    _0815C274:\n\
-        pop {r4-r6}\n\
-        pop {r0}\n\
-        bx r0\n\
-        ");
-}
-#endif

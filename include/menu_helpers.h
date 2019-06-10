@@ -18,6 +18,7 @@ void sub_812225C(u16 *, u16 *, u8, u8);
 void sub_8122298(u16 *, u16 *, u8, u8, u8);
 void sub_8121F68(u8 taskId, const struct YesNoFuncTable *data);
 bool8 sub_81221AC(void);
+bool16 sub_80BF518(u8 textPrinterId);
 bool8 sub_80BF72C(void);
 bool8 sub_80BF708(void);
 void VblankHblankHandlerSetZero(void);

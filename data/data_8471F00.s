@@ -215,47 +215,6 @@ gUnknown_84791E8:: @ 84791E8
 gUnknown_84792D0:: @ 84792D0
 	.incbin "baserom.gba", 0x4792D0, 0x10
 
-gUnknown_84792E0:: @ 84792E0
-	.incbin "baserom.gba", 0x4792E0, 0x10
-
-gUnknown_84792F0:: @ 84792F0
-	.incbin "baserom.gba", 0x4792F0, 0x50
-
-gUnknown_8479340:: @ 8479340
-	.incbin "baserom.gba", 0x479340, 0x28
-
-gUnknown_8479368:: @ 8479368
-	.incbin "baserom.gba", 0x479368, 0x18
-
-gUnknown_8479380:: @ 8479380
-	.incbin "baserom.gba", 0x479380, 0x10
-
-gUnknown_8479390:: @ 8479390
-	.incbin "baserom.gba", 0x479390, 0x1B8
-
-gUnknown_8479548:: @ 8479548
-	.incbin "baserom.gba", 0x479548, 0x18
-
-gUnknown_8479560:: @ 8479560
-	.4byte gUnknown_841B8BF
-	.4byte gUnknown_841BB40
-	.4byte gUnknown_841BE76
-	.4byte gUnknown_841C23B
-	.4byte gUnknown_841C459
-	.4byte gUnknown_841C82A
-
-gUnknown_8479578:: @ 8479578
-	.incbin "baserom.gba", 0x479578, 0x18
-
-gUnknown_8479590:: @ 8479590
-	.incbin "baserom.gba", 0x479590, 0x28
-
-gUnknown_84795B8:: @ 84795B8
-	.incbin "baserom.gba", 0x4795B8, 0x10
-
-gUnknown_84795C8:: @ 84795C8
-	.incbin "baserom.gba", 0x4795C8, 0x90
-
 	.section .rodata.8479668
 
 	.align 2

@@ -1903,7 +1903,28 @@ gUnknown_841B76B:: @ 841B76B
 	.incbin "baserom.gba", 0x41B76B, 0xE
 
 gUnknown_841B779:: @ 841B779
-	.incbin "baserom.gba", 0x41B779, 0xC4
+	.incbin "baserom.gba", 0x41B779, 0x2B
+
+gUnknown_841B7A4:: @ 841B7A4
+	.string "Teach me how to battle.$"
+
+gUnknown_841B7BC:: @ 841B7BC
+	.string "What are status problems?$"
+
+gUnknown_841B7D6:: @ 841B7D6
+	.string "What are type matchups?$"
+
+gUnknown_841B7EE:: @ 841B7EE
+	.string "I want to catch POKéMON.$"
+
+gUnknown_841B807:: @ 841B807
+	.string "Teach me about TMs.$"
+
+gUnknown_841B81B:: @ 841B81B
+	.string "How do I register an item?$"
+
+gUnknown_841B836:: @ 841B836
+	.string "CANCEL$"
 
 gUnknown_841B83D:: @ 841B83D
 	.string "Hey, all you TRAINERS out there!\n"

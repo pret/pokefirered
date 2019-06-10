@@ -289,8 +289,7 @@ void TeachyTvSetupScrollIndicatorArrowPair(void)
 
     else {
         struct TeachyTvBuf *temp; 
-        u8 res;
-        res = AddScrollIndicatorArrowPair(&gUnknown_8479380, &(gTeachyTV_StaticResources.scrollOffset));
+        u8 res = AddScrollIndicatorArrowPair(&gUnknown_8479380, &(gTeachyTV_StaticResources.scrollOffset));
         temp = gUnknown_203F450;
         temp->var_4007 = res;
         }
@@ -500,9 +499,8 @@ void TeachyTvClusFuncClearBg2TeachyTvGraphic(u8 taskId)
 
 void TeachyTvClusFuncNpcMoveAndSetupTextPrinter(u8 taskId)
 {
-    struct Sprite * spriteAddr;
     s16 * data = gTasks[taskId].data;
-    spriteAddr = &gSprites[data[1]];
+    struct Sprite * priteAddr = &gSprites[data[1]];
     if (data[2] != 35)
         ++data[2];
     else {
@@ -619,11 +617,8 @@ void TeachyTvClusFuncDudeMoveUp(u8 taskId)
 
 void TeachyTvClusFuncDudeMoveRight(u8 taskId)
 {
-    s16 *data;
-    struct Sprite *obj;
-
-    data = gTasks[taskId].data;
-    obj = &gSprites[data[1]];
+    s16 *data = gTasks[taskId].data;
+    struct Sprite *obj = &gSprites[data[1]];
     ChangeBgX(3, 0x100, 1);
     if (!(++data[2] & 0xF))
         ++gUnknown_203F450->var_4004;
@@ -641,9 +636,9 @@ void TeachyTvClusFuncDudeMoveRight(u8 taskId)
 
 void TeachyTvClusFuncDudeTurnLeft(u8 taskId)
 {
-    struct Sprite *v3;
+
     s16 *data = gTasks[taskId].data;
-    v3 = &gSprites[data[1]];
+    struct Sprite *v3 = &gSprites[data[1]];
     StartSpriteAnim(v3, 6);
     ++data[3];
     data[4] = 0;
@@ -653,11 +648,8 @@ void TeachyTvClusFuncDudeTurnLeft(u8 taskId)
 
 void TeachyTvClusFuncDudeMoveLeft(u8 taskId)
 {
-    s16 *data;
-    struct Sprite *v2;
-
-    data = gTasks[taskId].data;
-    v2 = &gSprites[data[1]];
+    s16 *data = gTasks[taskId].data;
+    struct Sprite *v2 = &gSprites[data[1]];
 
     if (!(v2->pos2.x & 0xF))
         TeachyTvGrassAnimationMain(taskId, v2->pos2.x - 8, v2->pos2.y, 0, 0);

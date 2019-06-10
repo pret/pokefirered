@@ -472,7 +472,7 @@ void TeachyTvClusFuncTransitionRenderBg2TeachyTvGraphicInitNpcPos(u8 taskId)
     if (++data[2] > 63)
     {
         CopyToBgTilemapBufferRect_ChangePalette(2, gUnknown_203F450->buffer4, 0, 0, 0x20, 0x20, 0x11);
-        TeachyTvSetSpriteCoordsAndSwitchFrame(((u8*)data)[2], 8, 0x38, 7);
+        TeachyTvSetSpriteCoordsAndSwitchFrame(((u8 *)data)[2], 8, 0x38, 7);
         schedule_bg_copy_tilemap_to_vram(2);
         data[2] = 0;
         ++data[3];
@@ -513,7 +513,7 @@ void TeachyTvClusFuncNpcMoveAndSetupTextPrinter(u8 taskId)
 
 void TeachyTvClusFuncIdleIfTextPrinterIsActive(u8 taskId)
 {
-    s16* data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
     if (!sub_80BF518(0))
         ++data[3];
 }
@@ -560,7 +560,7 @@ void TeachyTvClusFuncTextPrinterSwitchStringByOptionChosen2(u8 taskId)
 
 void TeachyTvClusFuncIdleIfTextPrinterIsActive2(u8 taskId)
 {
-    s16* data = (u16 *)gTasks[taskId].data;
+    s16 *data = (u16 *)gTasks[taskId].data;
     if (!sub_80BF518(0))
         ++data[3];
 }
@@ -732,7 +732,7 @@ void TeachyTvPostBattleFadeControl(u8 taskId)
     s16 *data = gTasks[taskId].data;
     if (!(gPaletteFade.active))
     {
-        const u8* funcIdx = gUnknown_8479390;
+        const u8 *funcIdx = gUnknown_8479390;
         int arg = funcIdx[gTeachyTV_StaticResources.optionChosen];
         data[3] = arg;
         gTasks[taskId].func = TeachyTvRenderMsgAndSwitchClusterFuncs;
@@ -751,7 +751,7 @@ void TeachyTvGrassAnimationMain(u8 taskId, s16 x, s16 y, u8 subpriority, bool8 m
     if (gUnknown_203F450->var_4006 != 1)
     {
         res = TeachyTvGrassAnimationCheckIfNeedsToGenerateGrassObj(x - 0x10, y);
-        if (res << 24)
+        if (res)
         {
             objTemAddr = gUnknown_83A0010;
             objId = CreateSprite(*(objTemAddr+4), 0, 0, subprio);
@@ -777,8 +777,7 @@ void TeachyTvGrassAnimationMain(u8 taskId, s16 x, s16 y, u8 subpriority, bool8 m
 
 void TeachyTvGrassAnimationObjCallback(struct Sprite *sprite)
 {
-    u32 diff1, diff2;
-    s16 *data = gTasks[sprite->data[0]].data;
+    s16 diff1, diff2, *data = gTasks[sprite->data[0]].data;
     struct Sprite *objAddr = &gSprites[data[1]];
     if (gUnknown_203F450->var_4006 == 1)
         DestroySprite(sprite);
@@ -794,12 +793,12 @@ void TeachyTvGrassAnimationObjCallback(struct Sprite *sprite)
         sprite->subpriority = 0;
         diff1 = (u16)(sprite->pos2.x - objAddr->pos2.x);
         diff2 = (u16)(sprite->pos2.y - objAddr->pos2.y);
-        diff1 = ((diff1 << 0x10) + 0xF0000) >> 0x10;
-        if (diff1 <= 0x1E)
+        diff1 += 0xF;
+        if ((u16)diff1 <= 0x1E)
         {
-            if ((s16)diff2 > -0x10)
+            if (diff2 > -0x10)
             {
-                if ((s16)diff2 <= 0x17)
+                if (diff2 <= 0x17)
                     return;
             }
         }
@@ -850,7 +849,7 @@ void TeachyTvPreBattleAnimAndSetBattleCallback(u8 taskId)
         ++data[7];
         break;
     case 1:
-        if (sub_80D08F8() << 24)
+        if (sub_80D08F8())
         {
             SetMainCallback2(sub_800FD9C);
             DestroyTask(taskId);
@@ -1317,205 +1316,40 @@ void TeachyTvComputeMapTilesFromTilesetAndMetaTiles(u16 *metaTilesArray, u8 *blo
     TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(blockBuf, &tileset[0x20 * (metaTilesArray[7] & 0x3FF)], (metaTilesArray[7] >> 10) & 3);
 }
 
-#ifdef NONMATCHING
 void TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(u8 *blockBuf, u8 *tileset, u8 metaTile)
 {
-    u32 i;
-    u32 j;
-    vu32 src;
-    u8* buffer = (u8 *)AllocZeroed(0x20);
-    src = ((u32)AllocZeroed(0x20));
+    u8 i, j, * src, *buffer = (u8 *)AllocZeroed(0x20);
+    src = AllocZeroed(0x20);
     CpuFastSet(tileset, buffer, 8);
     if (metaTile & 1)
     {
-        for (i=0; i<8; ++i)
+        for (i = 0; i < 8; ++i)
         {
-            for (j=0; j<4; ++j)
+            for (j = 0; j < 4; ++j)
             {
-                u32 offset1 = i << 2;
                 u32 offset2 = j - 3;
-                u32 offset = offset1 - offset2;
-                u32 value = buffer[offset];
-                u32 dstOffset = offset1 + j;
-                *(u8*)(src + dstOffset) = ((value & 0xF) << 4) + ((value & 0xF0) >> 4);
+                u8 value = buffer[(i << 2) - offset2];
+                src[(i << 2) + j] = ((value & 0xF) << 4) + ((value & 0xF0) >> 4);
             }
         }
-        CpuFastSet((u8*)src, buffer, 8);
+        CpuFastSet(src, buffer, 8);
     }
     if (metaTile & 2)
     {
-        j = 0;
-        do
-        {
-            memcpy(&((u8*)src)[4 * j], &buffer[4 * (7 - j)], 4);
-            j = (u8)(j + 1);
-        }
-        while (j <= 7);
-        CpuFastSet((u8*)src, buffer, 8);
+        for (i = 0; i < 8; ++i)
+            memcpy(&src[4 * i], &buffer[4 * (7 - i)], 4);
+        CpuFastSet(src, buffer, 8);
     }
-    j = 0;
-    do
+    for (i = 0; i < 32; ++i)
     {
-        if (buffer[j] & 0xF0)
-            blockBuf[j] = (blockBuf[j] & 0xF) + (buffer[j] & 0xF0);
-        if (buffer[j] & 0xF)
-            blockBuf[j] = (blockBuf[j] & 0xF0) + (buffer[j] & 0xF);
-        j = (u8)(j + 1);
+        if (buffer[i] & 0xF0)
+            blockBuf[i] = (blockBuf[i] & 0xF) + (buffer[i] & 0xF0);
+        if (buffer[i] & 0xF)
+            blockBuf[i] = (blockBuf[i] & 0xF0) + (buffer[i] & 0xF);
     }
-    while (j <= 0x1F);
-    Free((u8*)src);
+    Free(src);
     Free(buffer);
 }
-#else
-NAKED
-void TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(u8 *blockBuf, u8 *tileset, u8 metaTile)
-{
-    asm_unified("\n\
-        push {r4-r7,lr}\n\
-        mov r7, r10\n\
-        mov r6, r9\n\
-        mov r5, r8\n\
-        push {r5-r7}\n\
-        sub sp, 0x4\n\
-        mov r9, r0\n\
-        adds r4, r1, 0\n\
-        lsls r2, 24\n\
-        lsrs r2, 24\n\
-        mov r10, r2\n\
-        movs r0, 0x20\n\
-        bl AllocZeroed\n\
-        adds r6, r0, 0\n\
-        movs r0, 0x20\n\
-        bl AllocZeroed\n\
-        str r0, [sp]\n\
-        adds r0, r4, 0\n\
-        adds r1, r6, 0\n\
-        movs r2, 0x8\n\
-        bl CpuFastSet\n\
-        movs r0, 0x1\n\
-        mov r1, r10\n\
-        ands r0, r1\n\
-        cmp r0, 0\n\
-        beq _0815C15A\n\
-        movs r5, 0\n\
-        movs r7, 0xF\n\
-        mov r12, r7\n\
-        movs r0, 0xF0\n\
-        mov r8, r0\n\
-    _0815C118:\n\
-        movs r3, 0\n\
-        lsls r4, r5, 2\n\
-    _0815C11C:\n\
-        subs r0, r3, 0x3\n\
-        subs r0, r4, r0\n\
-        adds r0, r6, r0\n\
-        ldrb r1, [r0]\n\
-        adds r2, r4, r3\n\
-        ldr r7, [sp]\n\
-        adds r2, r7, r2\n\
-        adds r0, r1, 0\n\
-        mov r7, r12\n\
-        ands r0, r7\n\
-        lsls r0, 4\n\
-        mov r7, r8\n\
-        ands r1, r7\n\
-        lsrs r1, 4\n\
-        adds r0, r1\n\
-        strb r0, [r2]\n\
-        adds r0, r3, 0x1\n\
-        lsls r0, 24\n\
-        lsrs r3, r0, 24\n\
-        cmp r3, 0x3\n\
-        bls _0815C11C\n\
-        adds r0, r5, 0x1\n\
-        lsls r0, 24\n\
-        lsrs r5, r0, 24\n\
-        cmp r5, 0x7\n\
-        bls _0815C118\n\
-        ldr r0, [sp]\n\
-        adds r1, r6, 0\n\
-        movs r2, 0x8\n\
-        bl CpuFastSet\n\
-    _0815C15A:\n\
-        movs r0, 0x2\n\
-        mov r1, r10\n\
-        ands r0, r1\n\
-        cmp r0, 0\n\
-        beq _0815C18E\n\
-        movs r5, 0\n\
-    _0815C166:\n\
-        lsls r0, r5, 2\n\
-        ldr r7, [sp]\n\
-        adds r0, r7\n\
-        movs r1, 0x7\n\
-        subs r1, r5\n\
-        lsls r1, 2\n\
-        adds r1, r6\n\
-        movs r2, 0x4\n\
-        bl memcpy\n\
-        adds r0, r5, 0x1\n\
-        lsls r0, 24\n\
-        lsrs r5, r0, 24\n\
-        cmp r5, 0x7\n\
-        bls _0815C166\n\
-        ldr r0, [sp]\n\
-        adds r1, r6, 0\n\
-        movs r2, 0x8\n\
-        bl CpuFastSet\n\
-    _0815C18E:\n\
-        movs r5, 0\n\
-        movs r0, 0xF0\n\
-        mov r8, r0\n\
-        movs r1, 0xF\n\
-        mov r12, r1\n\
-    _0815C198:\n\
-        adds r4, r6, r5\n\
-        ldrb r0, [r4]\n\
-        mov r3, r8\n\
-        ands r3, r0\n\
-        cmp r3, 0\n\
-        beq _0815C1B2\n\
-        mov r7, r9\n\
-        adds r2, r7, r5\n\
-        ldrb r1, [r2]\n\
-        mov r0, r12\n\
-        ands r0, r1\n\
-        adds r0, r3\n\
-        strb r0, [r2]\n\
-    _0815C1B2:\n\
-        ldrb r0, [r4]\n\
-        mov r3, r12\n\
-        ands r3, r0\n\
-        cmp r3, 0\n\
-        beq _0815C1CA\n\
-        mov r0, r9\n\
-        adds r2, r0, r5\n\
-        ldrb r1, [r2]\n\
-        mov r0, r8\n\
-        ands r0, r1\n\
-        adds r0, r3\n\
-        strb r0, [r2]\n\
-    _0815C1CA:\n\
-        adds r0, r5, 0x1\n\
-        lsls r0, 24\n\
-        lsrs r5, r0, 24\n\
-        cmp r5, 0x1F\n\
-        bls _0815C198\n\
-        ldr r0, [sp]\n\
-        bl Free\n\
-        adds r0, r6, 0\n\
-        bl Free\n\
-        add sp, 0x4\n\
-        pop {r3-r5}\n\
-        mov r8, r3\n\
-        mov r9, r4\n\
-        mov r10, r5\n\
-        pop {r4-r7}\n\
-        pop {r0}\n\
-        bx r0\n\
-        ");
-}
-#endif
 
 u16 TeachyTvComputePalIndexArrayEntryByMetaTile(u8 *palIndexArrayBuf, u16 metaTile)
 {
@@ -1533,11 +1367,8 @@ u16 TeachyTvComputePalIndexArrayEntryByMetaTile(u8 *palIndexArrayBuf, u16 metaTi
         }
         else
         {
-            while (1)
+            while (++i < 16)
             {
-                ++i;
-                if (i > 0xF)
-                    break;
                 temp = palIndexArrayBuf[i];
                 if (temp == pal)
                     break;

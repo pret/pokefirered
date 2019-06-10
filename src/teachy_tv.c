@@ -1,4 +1,3 @@
-#include "main.h"
 #include "task.h"
 #include "menu.h"
 #include "palette.h"
@@ -31,6 +30,9 @@
 #include "help_system.h"
 #include "overworld.h"
 #include "unk_8159F40.h"
+#include "graphics.h"
+#include "fieldmap.h"
+#include "strings.h"
 
 struct TeachyTvCtrlBlk
 {
@@ -57,14 +59,6 @@ struct TeachyTvBuf
 
 EWRAM_DATA struct TeachyTvCtrlBlk gTeachyTV_StaticResources = {0};
 EWRAM_DATA struct TeachyTvBuf * gUnknown_203F450 = NULL;
-extern const struct SpritePalette gUnknown_83A5348;
-extern const struct SpriteTemplate * const gUnknown_83A0010[];
-extern const struct MapData Route1_Layout;
-extern const u8 gUnknown_841B7A4[], gUnknown_841B7BC[], gUnknown_841B7D6[], gUnknown_841B7EE[], gUnknown_841B807[], gUnknown_841B81B[], gUnknown_841B836[], gUnknown_841B83D[], gUnknown_841B8BF[], gUnknown_841BB40[], gUnknown_841BE76[], gUnknown_841C23B[], gUnknown_841C459[], gUnknown_841C82A[], gUnknown_841BA41[], gUnknown_841BD10[], gUnknown_841C0AF[], gUnknown_841C384[], gUnknown_841C7B4[], gUnknown_841C994[];
-extern const u8 gUnknown_8E86240[];
-extern const u8 gUnknown_8E86BE8[];
-extern const u8 gUnknown_8E86D6C[];
-extern const u8 gUnknown_8E86F98[];
 
 void TeachyTvClusFuncTransitionRenderBg2TeachyTvGraphicInitNpcPos(u8 taskId);
 void TeachyTvClusFuncClearBg2TeachyTvGraphic(u8 taskId);
@@ -189,57 +183,57 @@ const struct WindowTemplate gTeachyTvWindowTemplateArray[] =
 const struct ListMenuItem gTeachyTvListMenuItemArray[] = 
 {
     {
-        .unk_00 = gUnknown_841B7A4,
-        .unk_04 = 0,
+        .label = gUnknown_841B7A4,
+        .index = 0,
     },
     {
-        .unk_00 = gUnknown_841B7BC,
-        .unk_04 = 1,
+        .label = gUnknown_841B7BC,
+        .index = 1,
     },
     {
-        .unk_00 = gUnknown_841B7D6,
-        .unk_04 = 2,
+        .label = gUnknown_841B7D6,
+        .index = 2,
     },
     {
-        .unk_00 = gUnknown_841B7EE,
-        .unk_04 = 3,
+        .label = gUnknown_841B7EE,
+        .index = 3,
     },
     {
-        .unk_00 = gUnknown_841B807,
-        .unk_04 = 4,
+        .label = gUnknown_841B807,
+        .index = 4,
     },
     {
-        .unk_00 = gUnknown_841B81B,
-        .unk_04 = 5,
+        .label = gUnknown_841B81B,
+        .index = 5,
     },
 
     {
-        .unk_00 = gUnknown_841B836,
-        .unk_04 = -2,
+        .label = gUnknown_841B836,
+        .index = -2,
     },
 };
 
 const struct ListMenuItem gTeachyTvListMenuItemArray2[] = 
 {
     {
-        .unk_00 = gUnknown_841B7A4,
-        .unk_04 = 0,
+        .label = gUnknown_841B7A4,
+        .index = 0,
     },
     {
-        .unk_00 = gUnknown_841B7BC,
-        .unk_04 = 1,
+        .label = gUnknown_841B7BC,
+        .index = 1,
     },
     {
-        .unk_00 = gUnknown_841B7D6,
-        .unk_04 = 2,
+        .label = gUnknown_841B7D6,
+        .index = 2,
     },
     {
-        .unk_00 = gUnknown_841B7EE,
-        .unk_04 = 3,
+        .label = gUnknown_841B7EE,
+        .index = 3,
     },
     {
-        .unk_00 = gUnknown_841B836,
-        .unk_04 = -2,
+        .label = gUnknown_841B836,
+        .index = -2,
     },
 };
 
@@ -426,86 +420,6 @@ void (* const * const gTeachyTvFuncClusterArray[])(u8) =
     gTeachyTvFuncCluster3,
     gTeachyTvFuncCluster4,
     gTeachyTvFuncCluster5,
-};
-
-const u8 * const gTeachyTvTextArray1[] = 
-{
-    gUnknown_841B8BF,
-    gUnknown_841BB40,
-    gUnknown_841BE76,
-    gUnknown_841C23B,
-    gUnknown_841C459,
-    gUnknown_841C82A,
-};
-
-const u8 * const gTeachyTvTextArray2[] = 
-{
-    gUnknown_841BA41,
-    gUnknown_841BD10,
-    gUnknown_841C0AF,
-    gUnknown_841C384,
-    gUnknown_841C7B4,
-    gUnknown_841C994,
-};
-
-const u16 gUnknown_8479590[] = 
-{
-    0xD1, 0xD2, 0xD3, 0xD4, 0xD5, 0xD6, 0xD7, 0xD8,
-    0xE1, 0xE2, 0xE3, 0xE4, 0xE5, 0xE6, 0xE7, 0xE8,
-};
-
-const struct Subsprite gTeachyTvSubspriteArray[] = 
-{
-    {
-        .x = -0x8,
-        .y = -0x8,
-        .shape = 0x1,
-        .size = 0x0,
-        .tileOffset = 0x0,
-        .priority = 0x3,
-    },
-    {
-        .x = -0x8,
-        .y = 0x0,
-        .shape = 0x1,
-        .size = 0x0,
-        .tileOffset = 0x2,
-        .priority = 0x2,
-    },
-};
-
-const struct SubspriteTable gTeachyTvSubspriteTableArray[] = 
-{
-    {
-        .subspriteCount = 0,
-        .subsprites = NULL,
-    },
-    {
-        .subspriteCount = 2,
-        .subsprites = gTeachyTvSubspriteArray,
-    },
-};
-
-const u8 gTeachyTvGrassAnimArray[] = 
-{
-    0, 0, 1, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1, 1, 0, 0,
-    0, 0, 1, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1, 1, 0, 0,
-    0, 0, 1, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1, 1, 0, 0,
-    0, 0, 1, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1, 1, 0, 0,
-    0, 0, 1, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1, 1, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0,
-    1, 1, 1, 1, 1, 1, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0,
-    1, 1, 1, 1, 1, 1, 0, 0,
 };
 
 void TeachyTvCallback(void)
@@ -754,7 +668,7 @@ void TeachyTvSetupPostBattleWindowAndObj(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     int v1 = data[1];
-    struct Sprite *v3 = &gSprites[v1];
+    struct Sprite *objAddr = &gSprites[v1];
     int op;
 
     ClearWindowTilemap(1);
@@ -776,7 +690,7 @@ void TeachyTvSetupPostBattleWindowAndObj(u8 taskId)
 
     data[4] = 0;
     data[5] = 0;
-    TeachyTvGrassAnimationMain(taskId, v3->pos2.x, v3->pos2.y, 0, 1);
+    TeachyTvGrassAnimationMain(taskId, objAddr->pos2.x, objAddr->pos2.y, 0, 1);
 }
 
 void TeachyTvInitTextPrinter(const char *text)
@@ -811,7 +725,7 @@ void TeachyTvQuitFadeControlAndTaskDel(u8 taskId)
         else
         {
             sub_8055DC4();
-            SetMainCallback2((void (*)())gTeachyTV_StaticResources.callback);
+            SetMainCallback2(gTeachyTV_StaticResources.callback);
         }
         TeachyTvFree();
         DestroyTask(taskId);
@@ -940,7 +854,15 @@ void TeachyTvRenderMsgAndSwitchClusterFuncs(u8 taskId)
 void TeachyTvClusFuncTextPrinterSwitchStringByOptionChosen(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    const u8 * const* texts = gTeachyTvTextArray1;
+    const u8 * const *texts = (const u8 *const [])
+    {
+        gUnknown_841B8BF,
+        gUnknown_841BB40,
+        gUnknown_841BE76,
+        gUnknown_841C23B,
+        gUnknown_841C459,
+        gUnknown_841C82A,
+    };
     TeachyTvInitTextPrinter(texts[gTeachyTV_StaticResources.optionChosen]);
     ++data[3];
 }
@@ -948,10 +870,78 @@ void TeachyTvClusFuncTextPrinterSwitchStringByOptionChosen(u8 taskId)
 void TeachyTvClusFuncTextPrinterSwitchStringByOptionChosen2(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    const u8 * const* texts = gTeachyTvTextArray2;
+    const u8 * const *texts = (const u8 *const [])
+    {
+        gUnknown_841BA41,
+        gUnknown_841BD10,
+        gUnknown_841C0AF,
+        gUnknown_841C384,
+        gUnknown_841C7B4,
+        gUnknown_841C994,
+    };
     TeachyTvInitTextPrinter(texts[gTeachyTV_StaticResources.optionChosen]);
     ++data[3];
 }
+
+const u16 gUnknown_8479590[] = 
+{
+    0xD1, 0xD2, 0xD3, 0xD4, 0xD5, 0xD6, 0xD7, 0xD8,
+    0xE1, 0xE2, 0xE3, 0xE4, 0xE5, 0xE6, 0xE7, 0xE8,
+};
+
+const struct Subsprite gTeachyTvSubspriteArray[] = 
+{
+    {
+        .x = -0x8,
+        .y = -0x8,
+        .shape = 0x1,
+        .size = 0x0,
+        .tileOffset = 0x0,
+        .priority = 0x3,
+    },
+    {
+        .x = -0x8,
+        .y = 0x0,
+        .shape = 0x1,
+        .size = 0x0,
+        .tileOffset = 0x2,
+        .priority = 0x2,
+    },
+};
+
+const struct SubspriteTable gTeachyTvSubspriteTableArray[] = 
+{
+    {
+        .subspriteCount = 0,
+        .subsprites = NULL,
+    },
+    {
+        .subspriteCount = 2,
+        .subsprites = gTeachyTvSubspriteArray,
+    },
+};
+
+const u8 gTeachyTvGrassAnimArray[] = 
+{
+    0, 0, 1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1, 0, 0,
+    0, 0, 1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1, 0, 0,
+    0, 0, 1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1, 0, 0,
+    0, 0, 1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1, 0, 0,
+    0, 0, 1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0,
+    1, 1, 1, 1, 1, 1, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0,
+    1, 1, 1, 1, 1, 1, 0, 0,
+};
 
 void TeachyTvClusFuncIdleIfTextPrinterIsActive2(u8 taskId)
 {
@@ -1027,25 +1017,25 @@ void TeachyTvClusFuncDudeTurnLeft(u8 taskId)
 {
 
     s16 *data = gTasks[taskId].data;
-    struct Sprite *v3 = &gSprites[data[1]];
-    StartSpriteAnim(v3, 6);
+    struct Sprite *objAddr = &gSprites[data[1]];
+    StartSpriteAnim(objAddr, 6);
     ++data[3];
     data[4] = 0;
     data[5] = 0;
-    TeachyTvGrassAnimationMain(taskId, v3->pos2.x, v3->pos2.y, 0, 0);
+    TeachyTvGrassAnimationMain(taskId, objAddr->pos2.x, objAddr->pos2.y, 0, 0);
 }
 
 void TeachyTvClusFuncDudeMoveLeft(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    struct Sprite *v2 = &gSprites[data[1]];
+    struct Sprite *objAddr = &gSprites[data[1]];
 
-    if (!(v2->pos2.x & 0xF))
-        TeachyTvGrassAnimationMain(taskId, v2->pos2.x - 8, v2->pos2.y, 0, 0);
-    if (v2->pos2.x == 8)
+    if (!(objAddr->pos2.x & 0xF))
+        TeachyTvGrassAnimationMain(taskId, objAddr->pos2.x - 8, objAddr->pos2.y, 0, 0);
+    if (objAddr->pos2.x == 8)
         ++data[3];
     else
-        --v2->pos2.x;
+        --objAddr->pos2.x;
 }
 
 void TeachyTvClusFuncRenderAndRemoveBg1EndGraphic(u8 taskId)

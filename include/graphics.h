@@ -160,6 +160,7 @@ extern const u32 gTMCase_TMSpriteGfx[];
 extern const u32 gUnknown_8E84F20[];
 extern const u32 gUnknown_8E85068[];
 extern const u8 gUnknown_8E99118[];
+extern const u16 gTMCaseMainWindowPalette[];
 
 // egg_hatch
 extern const u32 gBattleTextboxTiles[];
@@ -167,5 +168,11 @@ extern const u32 gFile_graphics_interface_menu_map_tilemap[];
 extern const u32 gBattleTextboxPalette[];
 extern const u32 gTradeGba2_Pal[];
 extern const u32 gTradeGba_Gfx[];
+
+// teachy_tv
+extern const u8 gUnknown_8E86240[];
+extern const u8 gUnknown_8E86BE8[];
+extern const u8 gUnknown_8E86D6C[];
+extern const u8 gUnknown_8E86F98[];
 
 #endif //GUARD_GRAPHICS_H

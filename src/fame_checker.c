@@ -1341,14 +1341,14 @@ static void FC_DoMoveCursor(s32 itemIndex, bool8 onInit)
     u16 who;
     ListMenuGetScrollAndRow(sFameCheckerData->listMenuTaskId, &listY, &cursorY);
     who = listY + cursorY;
-    AddTextPrinterParameterized4(FCWINDOWID_LIST, 2, 8, 14 * cursorY + 4, 0, 0, &sTextColor_Green, 0, sListMenuItems[itemIndex].unk_00);
+    AddTextPrinterParameterized4(FCWINDOWID_LIST, 2, 8, 14 * cursorY + 4, 0, 0, &sTextColor_Green, 0, sListMenuItems[itemIndex].label);
     if (!onInit)
     {
         if (listY < sFameCheckerData->listMenuTopIdx2)
             sFameCheckerData->listMenuDrawnSelIdx++;
         else if (listY > sFameCheckerData->listMenuTopIdx2 && who != sFameCheckerData->numUnlockedPersons - 1)
             sFameCheckerData->listMenuDrawnSelIdx--;
-        AddTextPrinterParameterized4(FCWINDOWID_LIST, 2, 8, 14 * sFameCheckerData->listMenuDrawnSelIdx + 4, 0, 0, &sTextColor_DkGrey, 0, sListMenuItems[sFameCheckerData->listMenuCurIdx].unk_00);
+        AddTextPrinterParameterized4(FCWINDOWID_LIST, 2, 8, 14 * sFameCheckerData->listMenuDrawnSelIdx + 4, 0, 0, &sTextColor_DkGrey, 0, sListMenuItems[sFameCheckerData->listMenuCurIdx].label);
 
     }
     sFameCheckerData->listMenuCurIdx = itemIndex;
@@ -1368,20 +1368,20 @@ static u8 FC_PopulateListMenu(void)
         {
             if (sTrainerIdxs[fameCheckerIdx] < FC_NONTRAINER_START)
             {
-                sListMenuItems[nitems].unk_00 = gTrainers[sTrainerIdxs[fameCheckerIdx]].trainerName;
-                sListMenuItems[nitems].unk_04 = nitems;
+                sListMenuItems[nitems].label = gTrainers[sTrainerIdxs[fameCheckerIdx]].trainerName;
+                sListMenuItems[nitems].index = nitems;
             }
             else
             {
-                sListMenuItems[nitems].unk_00 = sNonTrainerNamePointers[sTrainerIdxs[fameCheckerIdx] - FC_NONTRAINER_START];
-                sListMenuItems[nitems].unk_04 = nitems;
+                sListMenuItems[nitems].label = sNonTrainerNamePointers[sTrainerIdxs[fameCheckerIdx] - FC_NONTRAINER_START];
+                sListMenuItems[nitems].index = nitems;
             }
             sFameCheckerData->unlockedPersons[nitems] = fameCheckerIdx;
             nitems++;
         }
     }
-    sListMenuItems[nitems].unk_00 = gFameCheckerText_Cancel;
-    sListMenuItems[nitems].unk_04 = nitems;
+    sListMenuItems[nitems].label = gFameCheckerText_Cancel;
+    sListMenuItems[nitems].index = nitems;
     sFameCheckerData->unlockedPersons[nitems] = 0xFF;
     nitems++;
     gFameChecker_ListMenuTemplate.totalItems = nitems;

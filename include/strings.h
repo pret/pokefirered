@@ -113,6 +113,27 @@ extern const u8 gText_ICanPayThisMuch_WouldThatBeOkay[];
 extern const u8 gText_TurnedOverItemsWorthYen[];
 extern const u8 gPokeDudeText_TMTypes[];
 extern const u8 gPokeDudeText_ReadTMDescription[];
-extern const u16 gTMCaseMainWindowPalette[];
+
+// teachy_tv
+extern const u8 gUnknown_841B7A4[];
+extern const u8 gUnknown_841B7BC[];
+extern const u8 gUnknown_841B7D6[];
+extern const u8 gUnknown_841B7EE[];
+extern const u8 gUnknown_841B807[];
+extern const u8 gUnknown_841B81B[];
+extern const u8 gUnknown_841B836[];
+extern const u8 gUnknown_841B83D[];
+extern const u8 gUnknown_841B8BF[];
+extern const u8 gUnknown_841BB40[];
+extern const u8 gUnknown_841BE76[];
+extern const u8 gUnknown_841C23B[];
+extern const u8 gUnknown_841C459[];
+extern const u8 gUnknown_841C82A[];
+extern const u8 gUnknown_841BA41[];
+extern const u8 gUnknown_841BD10[];
+extern const u8 gUnknown_841C0AF[];
+extern const u8 gUnknown_841C384[];
+extern const u8 gUnknown_841C7B4[];
+extern const u8 gUnknown_841C994[];
 
 #endif //GUARD_STRINGS_H

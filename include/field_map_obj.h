@@ -46,7 +46,7 @@ void FieldObjectClearAnim(struct MapObject *);
 void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *);
 void SpawnFieldObjectsInView(s16, s16);
 u8 sprite_new(u8, u8, s16, s16, u8, u8);
-u8 AddPseudoEventObject(u16, void (*)(struct Sprite *), s16, s16, u8);
+u8 AddPseudoEventObject(u16, SpriteCallback, s16, s16, u8);
 u8 show_sprite(u8, u8, u8);
 u8 SpawnSpecialFieldObjectParameterized(u8, u8, u8, s16, s16, u8);
 u8 SpawnSpecialFieldObject(struct MapObjectTemplate *);
@@ -92,5 +92,7 @@ void npc_paltag_set_load(u8 mode);
 // Exported data declarations
 
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
+extern const struct SpritePalette gUnknown_83A5348;
+extern const struct SpriteTemplate * const gUnknown_83A0010[];
 
 #endif //GUARD_FIELD_MAP_OBJ_H

@@ -240,8 +240,7 @@ void TeachyTvSetupBg(void)
 
 void TeachyTvLoadGraphic(void)
 {
-    u16 src;
-    src = 0;
+    u16 src = 0;
     reset_temp_tile_data_buffers();
     decompress_and_copy_tile_data_to_vram(1, &gUnknown_8E86240, 0, 0, 0);
     LZDecompressWram(&gUnknown_8E86BE8, gUnknown_203F450->buffer1);
@@ -351,8 +350,7 @@ void TeachyTvClearWindowRegs(void)
 void TeachyTvBg2AnimController(void)
 {
     u16 * tilemapBuffer = GetBgTilemapBuffer(2);
-    u8 i;
-    u8 j;
+    u8 i, j;
     for (i = 1; i < 13; i++)
     {
         for (j = 2; j < 28; j++)
@@ -366,7 +364,7 @@ void TeachyTvBg2AnimController(void)
 void TeachyTvSetupPostBattleWindowAndObj(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    int v1 = (data)[1];
+    int v1 = data[1];
     struct Sprite *v3 = &gSprites[v1];
     int op;
 
@@ -671,9 +669,7 @@ void TeachyTvClusFuncDudeMoveLeft(u8 taskId)
 
 void TeachyTvClusFuncRenderAndRemoveBg1EndGraphic(u8 taskId)
 {
-    s16 *data;
-
-    data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
     if (!data[2])
     {
         CopyToBgTilemapBufferRect_ChangePalette(1, &gUnknown_8479590, 0x14, 0xA, 8, 2, 0x11);
@@ -695,9 +691,7 @@ void TeachyTvClearBg1EndGraphicText(void)
 
 void TeachyTvBackToOptionList(u8 taskId)
 {
-    s16 *data;
-
-    data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
     if (data[2] == 0)
         PlayNewMapMusic(BGM_FRLG_TEACHY_TV);
     TeachyTvBg2AnimController();
@@ -1239,8 +1233,8 @@ void TeachyTvPushBackNewMapPalIndexArrayEntry(struct MapData *mStruct, u16 *buf1
 {
     struct Tileset *ts;
     u16 *metaTileEntryAddr;
-
     int temp = mapEntry;
+
     if (temp <= 0x27F)
     {
         ts = mStruct->primaryTileset;
@@ -1342,12 +1336,10 @@ void TeachyTvComputeMapTilesFromTilesetAndMetaTiles(u16 *metaTilesArray, u8 *blo
 #ifdef NONMATCHING
 void TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(u8 *blockBuf, u8 *tileset, u8 metaTile)
 {
-    u8 *buffer;
     u32 i;
     u32 j;
     vu32 src;
-
-    buffer = (u8 *)AllocZeroed(0x20);
+    u8* buffer = (u8 *)AllocZeroed(0x20);
     src = ((u32)AllocZeroed(0x20));
     CpuFastSet(tileset, buffer, 8);
     if (metaTile & 1)
@@ -1543,12 +1535,10 @@ void TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(u8 *blockBuf, u8 *
 
 u16 TeachyTvComputePalIndexArrayEntryByMetaTile(u8 *palIndexArrayBuf, u16 metaTile)
 {
-    u32 pal;
     u16 i;
     int firstEntry;
     int temp;
-
-    pal = metaTile >> 12;
+    u32 pal = metaTile >> 12;
     i = 0;
     firstEntry = *palIndexArrayBuf;
     if (firstEntry != pal)

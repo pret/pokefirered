@@ -972,11 +972,8 @@ void TeachyTvClusFuncStartAnimNpcWalkIntoGrass(u8 taskId)
 
 void TeachyTvClusFuncDudeMoveUp(u8 taskId)
 {
-    s16 *data;
-    struct Sprite *obj;
-
-    data = gTasks[taskId].data;
-    obj = &gSprites[data[1]];
+    s16 *data = gTasks[taskId].data;
+    struct Sprite *obj = &gSprites[data[1]];
     ChangeBgY(3, 0x100, 2);
     if (!(++data[2] & 0xF))
     {
@@ -1125,13 +1122,12 @@ void TeachyTvPostBattleFadeControl(u8 taskId)
 
 void TeachyTvGrassAnimationMain(u8 taskId, s16 x, s16 y, u8 subpriority, bool8 mode)
 {
-    u8 subprio;
     int res;
     struct Sprite *obj;
     int objId;
     const struct SpriteTemplate *const *objTemAddr;
 
-    subprio = subpriority;
+    u8 subprio = subpriority;
     if (gUnknown_203F450->var_4006 != 1)
     {
         res = TeachyTvGrassAnimationCheckIfNeedsToGenerateGrassObj(x - 0x10, y);
@@ -1205,10 +1201,7 @@ u8 TeachyTvGrassAnimationCheckIfNeedsToGenerateGrassObj(s16 x, s16 y)
 
 void TeachyTvPrepBattle(u8 taskId)
 {
-    s16 *data;
-
-    taskId = taskId;
-    data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
     TeachyTvFree();
     gSpecialVar_0x8004 = gTeachyTV_StaticResources.optionChosen;
     gMain.savedCallback = TeachyTvRestorePlayerPartyCallback;

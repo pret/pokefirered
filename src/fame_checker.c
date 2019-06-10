@@ -1400,7 +1400,7 @@ static void FC_PutWindowTilemapAndCopyWindowToVramMode3_2(u8 windowId)
 
 static void FC_CreateScrollIndicatorArrowPair(void)
 {
-    struct ScrollIndicatorArrowPairTemplate template = {
+    struct ScrollArrowsTemplate template = {
           2,
           40,
           26,
@@ -1412,13 +1412,12 @@ static void FC_CreateScrollIndicatorArrowPair(void)
           SPRITETAG_SCROLL_INDICATORS,
           0xFFFF,
           1,
-          0
     };
 
     if (sFameCheckerData->numUnlockedPersons > 5)
     {
-        template.unk_06 = 0;
-        template.unk_08 = sFameCheckerData->numUnlockedPersons - 5;
+        template.fullyUpThreshold = 0;
+        template.fullyDownThreshold = sFameCheckerData->numUnlockedPersons - 5;
         sFameCheckerData->scrollIndicatorPairTaskId = AddScrollIndicatorArrowPair(&template, &sFameCheckerData->listMenuTopIdx);
     }
 }

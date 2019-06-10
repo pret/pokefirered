@@ -259,20 +259,19 @@ const struct ListMenuTemplate gTeachyTvListMenuTemplateArray =
     .cursorKind = 0x0,
 };
 
-const struct ScrollIndicatorArrowPairTemplate gTeachyTvScrollIndicatorArrowPairTemplateArray = 
+const struct ScrollArrowsTemplate gTeachyTvScrollIndicatorArrowPairTemplateArray = 
 {
-    .unk_00 = 0x2,
-    .unk_01 = 0x78,
-    .unk_02 = 0xC,
-    .unk_03 = 0x3,
-    .unk_04 = 0x78,
-    .unk_05 = 0x64,
-    .unk_06 = 0x0,
-    .unk_08 = 0x1,
-    .unk_0a = 0x800,
-    .unk_0c = 0x800,
-    .unk_0e_0 = 0x0,
-    .unk_0e_4 = 0x0,
+    .firstArrowType = 0x2,
+    .firstX = 0x78,
+    .firstY = 0xC,
+    .secondArrowType = 0x3,
+    .secondX = 0x78,
+    .secondY = 0x64,
+    .fullyUpThreshold = 0x0,
+    .fullyDownThreshold = 0x1,
+    .tileTag = 0x800,
+    .palTag = 0x800,
+    .palNum = 0x0,
 };
 
 const u8 gTeachyTvSwitchFuncArray[] = 

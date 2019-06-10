@@ -169,15 +169,7 @@ const struct WindowTemplate gTeachyTvWindowTemplateArray[] =
         .paletteNum = 0x3,
         .baseBlock = 0x152,
     },
-    {
-        .bg = 0xFF,
-        .tilemapLeft = 0x0,
-        .tilemapTop = 0x0,
-        .width = 0x0,
-        .height = 0x0,
-        .paletteNum = 0x0,
-        .baseBlock = 0x0,
-    },
+    DUMMY_WIN_TEMPLATE,
 };
 
 const struct ListMenuItem gTeachyTvListMenuItemArray[] = 

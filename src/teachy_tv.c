@@ -1595,97 +1595,15 @@ void TeachyTvLoadMapTilesetToBuffer(struct Tileset *ts, u8 *dstBuffer, u16 size)
     }
 }
 
-#ifdef NONMATCHING
 void TeachyTvPushBackNewMapPalIndexArrayEntry(struct MapData *mStruct, u16 *buf1, u8 *palIndexArray, u16 mapEntry, u16 offset)
 {
     struct Tileset *ts;
-    u16 *metaTileEntryAddr;
-    int temp = mapEntry;
-
-    if (temp <= 0x27F)
-    {
-        ts = mStruct->primaryTileset;
-    }
-    else
-    {
-        ts = mStruct->secondaryTileset;
-        temp = mapEntry - 0x280;
-    }
-    metaTileEntryAddr = &((u16*)(ts->metatiles))[8 * temp];
+    u16 * metaTileEntryAddr = mapEntry <= 0x27F ? &((u16*)(mStruct->primaryTileset->metatiles))[8 * mapEntry] : &((u16*)(mStruct->secondaryTileset->metatiles))[8 * (mapEntry - 0x280)];
     buf1[0] = (TeachyTvComputePalIndexArrayEntryByMetaTile(palIndexArray, metaTileEntryAddr[0]) << 12) + 4 * offset;
     buf1[1] = (TeachyTvComputePalIndexArrayEntryByMetaTile(palIndexArray, metaTileEntryAddr[1]) << 12) + 4 * offset + 1;
     buf1[32] = (TeachyTvComputePalIndexArrayEntryByMetaTile(palIndexArray, metaTileEntryAddr[2]) << 12) + 4 * offset + 2;
     buf1[33] = (TeachyTvComputePalIndexArrayEntryByMetaTile(palIndexArray, metaTileEntryAddr[3]) << 12) + 4 * offset + 3;
 }
-#else
-NAKED
-void TeachyTvPushBackNewMapPalIndexArrayEntry(struct MapData *mStruct, u16 *buf1, u8 *palIndexArray, u16 mapEntry, u16 offset)
-{
-    asm_unified("\n\
-        push {r4-r7,lr}\n\
-        adds r5, r0, 0\n\
-        adds r7, r1, 0\n\
-        adds r6, r2, 0\n\
-        ldr r0, [sp, 0x14]\n\
-        lsls r3, 16\n\
-        lsrs r1, r3, 16\n\
-        lsls r0, 16\n\
-        lsrs r4, r0, 16\n\
-        ldr r0, _0815BF8C @ =0x0000027f\n\
-        cmp r1, r0\n\
-        bhi _0815BF90\n\
-        ldr r0, [r5, 0x10]\n\
-        b _0815BF96\n\
-        .align 2, 0\n\
-    _0815BF8C: .4byte 0x0000027f\n\
-    _0815BF90:\n\
-        ldr r0, [r5, 0x14]\n\
-        ldr r2, _0815BFEC @ =0xfffffd80\n\
-        adds r1, r2\n\
-    _0815BF96:\n\
-        lsls r1, 4\n\
-        ldr r0, [r0, 0xC]\n\
-        adds r5, r0, r1\n\
-        ldrh r1, [r5]\n\
-        adds r0, r6, 0\n\
-        bl TeachyTvComputePalIndexArrayEntryByMetaTile\n\
-        lsls r0, 12\n\
-        lsls r4, 2\n\
-        adds r0, r4\n\
-        strh r0, [r7]\n\
-        ldrh r1, [r5, 0x2]\n\
-        adds r0, r6, 0\n\
-        bl TeachyTvComputePalIndexArrayEntryByMetaTile\n\
-        lsls r0, 12\n\
-        adds r0, r4\n\
-        adds r0, 0x1\n\
-        strh r0, [r7, 0x2]\n\
-        ldrh r1, [r5, 0x4]\n\
-        adds r0, r6, 0\n\
-        bl TeachyTvComputePalIndexArrayEntryByMetaTile\n\
-        adds r1, r7, 0\n\
-        adds r1, 0x40\n\
-        lsls r0, 12\n\
-        adds r0, r4\n\
-        adds r0, 0x2\n\
-        strh r0, [r1]\n\
-        ldrh r1, [r5, 0x6]\n\
-        adds r0, r6, 0\n\
-        bl TeachyTvComputePalIndexArrayEntryByMetaTile\n\
-        adds r1, r7, 0\n\
-        adds r1, 0x42\n\
-        lsls r0, 12\n\
-        adds r0, r4\n\
-        adds r0, 0x3\n\
-        strh r0, [r1]\n\
-        pop {r4-r7}\n\
-        pop {r0}\n\
-        bx r0\n\
-        .align 2, 0\n\
-    _0815BFEC: .4byte 0xfffffd80\n\
-        ");
-}
-#endif
 
 void TeachyTvComputeMapTilesFromTilesetAndMetaTiles(u16 *metaTilesArray, u8 *blockBuf, u8 *tileset)
 {

@@ -36,7 +36,7 @@
 
 struct TeachyTvCtrlBlk
 {
-    void (*callback)();
+    MainCallback callback;
     u8 mode;
     u8 optionChosen;
     u16 scrollOffset;

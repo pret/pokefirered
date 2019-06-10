@@ -46,7 +46,7 @@ struct TeachyTvCtrlBlk
 
 struct TeachyTvBuf
 {
-    u32 state;
+    MainCallback savedCallback;
     u8 buffer1[0x1000];
     u8 buffer2[0x1000];
     u8 buffer3[0x1000];
@@ -476,7 +476,7 @@ void TeachyTvMainCallback(void)
     {
     case 0:
         gUnknown_203F450 = AllocZeroed(sizeof(struct TeachyTvBuf));
-        gUnknown_203F450->state = 0;
+        gUnknown_203F450->savedCallback = NULL;
         gUnknown_203F450->var_4006 = 0;
         gUnknown_203F450->var_4007 = 0xFF;
         VblankHblankHandlerSetZero();
@@ -717,9 +717,9 @@ void TeachyTvQuitFadeControlAndTaskDel(u8 taskId)
 {
     if (!(gPaletteFade.active))
     {
-        if (gUnknown_203F450->state)
+        if (gUnknown_203F450->savedCallback != NULL)
         {
-            SetMainCallback2(*(void (**)())gUnknown_203F450);
+            SetMainCallback2(gUnknown_203F450->savedCallback);
         }
         else
         {
@@ -1094,7 +1094,7 @@ void TeachyTvClusFuncTaskBattleOrFadeByOptionChosen(u8 taskId)
         }
         else if (op <= 5)
         {
-            *((void(**)())gUnknown_203F450) = TeachyTvSetupBagItemsByOptionChosen;
+            gUnknown_203F450->savedCallback = TeachyTvSetupBagItemsByOptionChosen;
             TeachyTvQuitBeginFade(taskId);
         }
     }

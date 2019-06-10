@@ -4879,12 +4879,12 @@ sub_8120FB0: @ 8120FB0
 	bl FreeRestoreBattleData
 	bl LoadPlayerParty
 	bl sub_815AC20
-	ldr r0, _08120FC8 @ =sub_815ABFC
+	ldr r0, _08120FC8 @ =CB2_ReturnToTeachyTV
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08120FC8: .4byte sub_815ABFC
+_08120FC8: .4byte CB2_ReturnToTeachyTV
 	thumb_func_end sub_8120FB0
 
 	thumb_func_start sub_8120FCC

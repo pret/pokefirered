@@ -53,15 +53,15 @@ struct TeachyTvBuf
     u8 var_4007;
 };
 
-extern struct TeachyTvCtrlBlk gTeachyTV_StaticResources;
+EWRAM_DATA struct TeachyTvCtrlBlk gTeachyTV_StaticResources = {0};
 extern struct TeachyTvBuf * gUnknown_203F450;
 extern const struct ScrollIndicatorArrowPairTemplate gUnknown_8479380;
-extern const char gUnknown_841B83D;
+extern const u8 gUnknown_841B83D;
 extern const struct BgTemplate gUnknown_84792E0;
 extern const struct SpritePalette gUnknown_83A5348;
 extern void (**gUnknown_8479548)(u8);
-extern const char * const gUnknown_8479560;
-extern const char * const gUnknown_8479578;
+extern const u8 * const gUnknown_8479560;
+extern const u8 * const gUnknown_8479578;
 extern const u8 gUnknown_8E86240;
 extern const u8 gUnknown_8E86BE8;
 extern const u8 gUnknown_8E86D6C;
@@ -76,12 +76,9 @@ extern const struct SpriteTemplate * const gUnknown_83A0010;
 extern const u8 gUnknown_84795C8;
 extern const struct MapData Route1_Layout;
 
-extern void VblankHblankHandlerSetZero(void);
 extern void sub_812B1E0(u16);
-extern u8 ListMenuInitInternal(struct ListMenuTemplate *, u16 scrollOffset, u16 selectedRow); 
 extern void sub_8055DC4(void);
 extern bool16 sub_80BF518(u8 textPrinterId);
-extern void _call_via_r1(s32 arg, void *func);
 extern void sub_810B108(u8);
 extern void sub_8159F40(void);
 
@@ -152,7 +149,7 @@ void sub_815ABC4(u8 mode, void (*cb)())
     SetMainCallback2(TeachyTvMainCallback);
 }
 
-void sub_815ABFC(void)
+void CB2_ReturnToTeachyTV(void)
 {
     if (gTeachyTV_StaticResources.mode == 1)
         sub_815ABC4(1, gTeachyTV_StaticResources.callback);
@@ -189,11 +186,11 @@ void TeachyTvMainCallback(void)
         ++gMain.state;
         break;
     case 1:
-        if ( free_temp_tile_data_buffers_if_possible() == TRUE )
+        if (free_temp_tile_data_buffers_if_possible() == TRUE)
             return;
         TeachyTvCreateAndRenderRbox();
         TeachyTvInitIo();
-        if ( gTeachyTV_StaticResources.mode == 2 )
+        if (gTeachyTV_StaticResources.mode == 2)
         {
             taskId = CreateTask(TeachyTvPostBattleFadeControl, 0);
             gTasks[taskId].data[1] = TeachyTvSetupObjEventAndOam();
@@ -302,7 +299,7 @@ void TeachyTvSetupScrollIndicatorArrowPair(void)
 
 void TeachyTvRemoveScrollIndicatorArrowPair(void)
 {
-    if ( gUnknown_203F450->var_4007 != 0xFF )
+    if (gUnknown_203F450->var_4007 != 0xFF)
     {
         RemoveScrollIndicatorArrowPair(gUnknown_203F450->var_4007);
         gUnknown_203F450->var_4007 = 0xFF;
@@ -311,7 +308,7 @@ void TeachyTvRemoveScrollIndicatorArrowPair(void)
 
 void TeachyTvAudioByInput(s32 notUsed, bool8 play, struct ListMenu *notUsedAlt)
 {
-    if ( play != TRUE )
+    if (play != TRUE)
         PlaySE(SE_SELECT);
 }
 
@@ -353,26 +350,16 @@ void TeachyTvClearWindowRegs(void)
 
 void TeachyTvBg2AnimController(void)
 {
-    u16 *tilemapBuffer;
-    u8 i, offset2;
-    u32 j, offset;
-
-    tilemapBuffer = GetBgTilemapBuffer(2);
-    i = 1;
-    do
+    u16 * tilemapBuffer = GetBgTilemapBuffer(2);
+    u8 i;
+    u8 j;
+    for (i = 1; i < 13; i++)
     {
-        offset2 = 2;
-        offset = 0x20 * i;
-        j = i + 1;
-        do
+        for (j = 2; j < 28; j++)
         {
-            tilemapBuffer[offset + offset2] = ((Random() & 3) << 10) + 0x301F;
-            offset2 = (offset2 + 1);
+            tilemapBuffer[32 * i + j] = ((Random() & 3) << 10) + 0x301F;
         }
-        while ( offset2 <= 0x1B );
-        i = j;
     }
-    while ( (u8)j <= 0xC );
     schedule_bg_copy_tilemap_to_vram(2);
 }
 
@@ -386,9 +373,9 @@ void TeachyTvSetupPostBattleWindowAndObj(u8 taskId)
     ClearWindowTilemap(1);
     TeachyTvClearWindowRegs();
     op = gTeachyTV_StaticResources.optionChosen;
-    if ( op >= 0 )
+    if (op >= 0)
     {
-        if ( op <= 3 )
+        if (op <= 3)
         {
             TeachyTvSetSpriteCoordsAndSwitchFrame(((char*)data)[2], 0x78, 0x38, 0);
             ChangeBgX(3, 0x3000, 1);
@@ -396,7 +383,7 @@ void TeachyTvSetupPostBattleWindowAndObj(u8 taskId)
             gUnknown_203F450->var_4004 += 3;
             gUnknown_203F450->var_4005 -= 3;
         }
-        else if ( op <= 5 )
+        else if (op <= 5)
             TeachyTvSetSpriteCoordsAndSwitchFrame(((char*)data)[2], 0x78, 0x38, 0);
     }
 
@@ -428,9 +415,9 @@ void TeachyTvQuitBeginFade(u8 taskId)
 
 void TeachyTvQuitFadeControlAndTaskDel(u8 taskId)
 {
-    if ( !(gPaletteFade.active) )
+    if (!(gPaletteFade.active))
     {
-        if ( gUnknown_203F450->state )
+        if (gUnknown_203F450->state)
         {
             SetMainCallback2(*(void (**)())gUnknown_203F450);
         }
@@ -490,7 +477,7 @@ void TeachyTvClusFuncTransitionRenderBg2TeachyTvGraphicInitNpcPos(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     TeachyTvBg2AnimController();
-    if ( ++data[2] > 63 )
+    if (++data[2] > 63)
     {
         CopyToBgTilemapBufferRect_ChangePalette(2, gUnknown_203F450->buffer4, 0, 0, 0x20, 0x20, 0x11);
         TeachyTvSetSpriteCoordsAndSwitchFrame(((u8*)data)[2], 8, 0x38, 7);
@@ -504,7 +491,7 @@ void TeachyTvClusFuncTransitionRenderBg2TeachyTvGraphicInitNpcPos(u8 taskId)
 void TeachyTvClusFuncClearBg2TeachyTvGraphic(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    if ( ++data[2] == 134 )
+    if (++data[2] == 134)
     {
         FillBgTilemapBufferRect_Palette0(2, 0, 2, 1, 0x1A, 0xC);
         schedule_bg_copy_tilemap_to_vram(2);
@@ -520,10 +507,10 @@ void TeachyTvClusFuncNpcMoveAndSetupTextPrinter(u8 taskId)
 
     data = gTasks[taskId].data;
     spriteAddr = &gSprites[data[1]];
-    if ( data[2] != 35 )
+    if (data[2] != 35)
         ++data[2];
     else {
-        if ( spriteAddr->pos2.x == 0x78 )
+        if (spriteAddr->pos2.x == 0x78)
         {
             StartSpriteAnim(&gSprites[data[1]], 0);
             TeachyTvInitTextPrinter(&gUnknown_841B83D);
@@ -538,7 +525,7 @@ void TeachyTvClusFuncNpcMoveAndSetupTextPrinter(u8 taskId)
 void TeachyTvClusFuncIdleIfTextPrinterIsActive(u8 taskId)
 {
     s16* data = (u16 *)gTasks[taskId].data;
-    if ( !sub_80BF518(0) )
+    if (!sub_80BF518(0))
         ++data[3];
 }
 
@@ -546,7 +533,7 @@ void TeachyTvRenderMsgAndSwitchClusterFuncs(u8 taskId)
 {
     s16 *data;
     data = gTasks[taskId].data;
-    if ( gMain.newKeys & 2 )
+    if (JOY_NEW(B_BUTTON))
     {
         u8 *offset = &(gUnknown_203F450->var_4006);
         u32 zero = 0;
@@ -570,15 +557,15 @@ void TeachyTvRenderMsgAndSwitchClusterFuncs(u8 taskId)
 void TeachyTvClusFuncTextPrinterSwitchStringByOptionChosen(u8 taskId)
 {
     s16 *data = (u16 *)gTasks[taskId].data;
-    const char * const* texts = &gUnknown_8479560;
+    const u8 * const* texts = &gUnknown_8479560;
     TeachyTvInitTextPrinter(texts[gTeachyTV_StaticResources.optionChosen]);
     ++data[3];
 }
 
 void TeachyTvClusFuncTextPrinterSwitchStringByOptionChosen2(u8 taskId)
 {
-    s16 *data = (u16 *)gTasks[taskId].data;
-    const char * const* texts = &gUnknown_8479578;
+    s16 *data = gTasks[taskId].data;
+    const u8 * const* texts = &gUnknown_8479578;
     TeachyTvInitTextPrinter(texts[gTeachyTV_StaticResources.optionChosen]);
     ++data[3];
 }
@@ -586,7 +573,7 @@ void TeachyTvClusFuncTextPrinterSwitchStringByOptionChosen2(u8 taskId)
 void TeachyTvClusFuncIdleIfTextPrinterIsActive2(u8 taskId)
 {
     s16* data = (u16 *)gTasks[taskId].data;
-    if ( !sub_80BF518(0) )
+    if (!sub_80BF518(0))
         ++data[3];
 }
 
@@ -604,8 +591,7 @@ void TeachyTvClusFuncEraseTextWindowIfKeyPressed(u8 taskId)
 
 void TeachyTvClusFuncStartAnimNpcWalkIntoGrass(u8 taskId)
 {
-    s16 *data;
-    data = (u16 *)gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
     StartSpriteAnim(&gSprites[(s16)data[1]], 5);
     data[2] = 0;
     data[4] = 0;
@@ -621,12 +607,12 @@ void TeachyTvClusFuncDudeMoveUp(u8 taskId)
     data = gTasks[taskId].data;
     obj = &gSprites[data[1]];
     ChangeBgY(3, 0x100, 2);
-    if ( !( ++data[2] & 0xF ) )
+    if (!(++data[2] & 0xF))
     {
         --gUnknown_203F450->var_4005;
         TeachyTvGrassAnimationMain(taskId, obj->pos2.x, obj->pos2.y, 0, 0);
     }
-    if ( data[2] == 48 )
+    if (data[2] == 48)
     {
         data[2] = 0;
         data[4] = -1;
@@ -641,14 +627,14 @@ void TeachyTvClusFuncDudeMoveRight(u8 taskId)
     s16 *data;
     struct Sprite *obj;
 
-    data = (u16 *)gTasks[taskId].data;
-    obj = &gSprites[(s16)data[1]];
+    data = gTasks[taskId].data;
+    obj = &gSprites[data[1]];
     ChangeBgX(3, 0x100, 1);
-    if ( !(++data[2] & 0xF) )
+    if (!(++data[2] & 0xF))
         ++gUnknown_203F450->var_4004;
-    if ( !((data[2] + 8) & 0xF) )
+    if (!((data[2] + 8) & 0xF))
         TeachyTvGrassAnimationMain(taskId, obj->pos2.x + 8, obj->pos2.y, 0, 0);
-    if ( data[2] == 0x30 )
+    if (data[2] == 0x30)
     {
         data[2] = 0;
         data[4] = 0;
@@ -660,10 +646,8 @@ void TeachyTvClusFuncDudeMoveRight(u8 taskId)
 
 void TeachyTvClusFuncDudeTurnLeft(u8 taskId)
 {
-    s16 *data;
     struct Sprite *v3;
-
-    data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
     v3 = &gSprites[data[1]];
     StartSpriteAnim(v3, 6);
     ++data[3];
@@ -680,9 +664,9 @@ void TeachyTvClusFuncDudeMoveLeft(u8 taskId)
     data = gTasks[taskId].data;
     v2 = &gSprites[data[1]];
 
-    if ( !(v2->pos2.x & 0xF) )
+    if (!(v2->pos2.x & 0xF))
         TeachyTvGrassAnimationMain(taskId, v2->pos2.x - 8, v2->pos2.y, 0, 0);
-    if ( v2->pos2.x == 8 )
+    if (v2->pos2.x == 8)
         ++data[3];
     else
         --v2->pos2.x;
@@ -693,12 +677,12 @@ void TeachyTvClusFuncRenderAndRemoveBg1EndGraphic(u8 taskId)
     s16 *data;
 
     data = gTasks[taskId].data;
-    if ( !data[2] )
+    if (!data[2])
     {
         CopyToBgTilemapBufferRect_ChangePalette(1, &gUnknown_8479590, 0x14, 0xA, 8, 2, 0x11);
         schedule_bg_copy_tilemap_to_vram(1);
     }
-    if ( ++data[2] > 126 )
+    if (++data[2] > 126)
     {
         TeachyTvClearBg1EndGraphicText();
         data[2] = 0;
@@ -717,14 +701,14 @@ void TeachyTvBackToOptionList(u8 taskId)
     s16 *data;
 
     data = gTasks[taskId].data;
-    if ( !data[2] )
+    if (data[2] == 0)
         PlayNewMapMusic(BGM_FRLG_TEACHY_TV);
     TeachyTvBg2AnimController();
-    if ( ++data[2] > 63 )
+    if (++data[2] > 63)
     {
         data[2] = 0;
         data[3] = 0;
-        *data = TeachyTvSetupWindow();
+        data[0] = TeachyTvSetupWindow();
         gTasks[taskId].func = TeachyTvOptionListController;
         PutWindowTilemap(0);
         TeachyTvSetupScrollIndicatorArrowPair();
@@ -743,14 +727,14 @@ void TeachyTvBackToOptionList(u8 taskId)
 void TeachyTvChainTaskBattleOrFadeByOptionChosen(u8 taskId)
 {
     int op = gTeachyTV_StaticResources.optionChosen;
-    if ( op >= 0 )
+    if (op >= 0)
     {
-        if ( op <= 3 )
+        if (op <= 3)
         {
             TeachyTvPrepBattle(taskId);
 
         }
-        else if ( op <= 5 )
+        else if (op <= 5)
         {
             *((void(**)())gUnknown_203F450) = TeachyTvSetupBagItemsByOptionChosen;
             TeachyTvQuitBeginFade(taskId);
@@ -760,7 +744,7 @@ void TeachyTvChainTaskBattleOrFadeByOptionChosen(u8 taskId)
 
 void TeachyTvSetupBagItemsByOptionChosen(void)
 {
-    if ( gTeachyTV_StaticResources.optionChosen == 4 )
+    if (gTeachyTV_StaticResources.optionChosen == 4)
         sub_810B108(10);
     else
         sub_810B108(9);
@@ -769,7 +753,7 @@ void TeachyTvSetupBagItemsByOptionChosen(void)
 void TeachyTvPostBattleFadeControl(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    if ( !(gPaletteFade.active) )
+    if (!(gPaletteFade.active))
     {
         const u8* funcIdx = &gUnknown_8479390;
         int arg = funcIdx[gTeachyTV_StaticResources.optionChosen];
@@ -787,12 +771,12 @@ void TeachyTvGrassAnimationMain(u8 taskId, s16 x, s16 y, u8 subpriority, bool8 m
     const struct SpriteTemplate *const *objTemAddr;
 
     subprio = subpriority;
-    if ( gUnknown_203F450->var_4006 != 1 )
+    if (gUnknown_203F450->var_4006 != 1)
     {
         res = TeachyTvGrassAnimationCheckIfNeedsToGenerateGrassObj(
                           x - 0x10,
                           y);
-        if ( res << 24 )
+        if (res << 24)
         {
             objTemAddr = &gUnknown_83A0010;
             objId = CreateSprite(*(objTemAddr+4), 0, 0, subprio);
@@ -801,7 +785,7 @@ void TeachyTvGrassAnimationMain(u8 taskId, s16 x, s16 y, u8 subpriority, bool8 m
             obj->pos2.y = y + 8;
             obj->callback = TeachyTvGrassAnimationObjCallback;
             obj->data[0] = taskId;
-            if ( mode == 1 )
+            if (mode == 1)
             {
                 SeekSpriteAnim(obj, 4);
                 obj->oam.priority = 2;
@@ -853,12 +837,11 @@ u8 TeachyTvGrassAnimationCheckIfNeedsToGenerateGrassObj(s16 x, s16 y)
     const u8 * arr;
     struct TeachyTvBuf *ptr;
     int high, low;
-    if ( (x < 0) || (y < 0) )
+    if ((x < 0) || (y < 0))
         return 0;
     arr = &gUnknown_84795C8;
-    ptr = gUnknown_203F450;
-    high = ((y >> 4) + ptr->var_4005) << 4;
-    low = ((x >> 4) + ptr->var_4004);
+    high = ((y >> 4) + gUnknown_203F450->var_4005) << 4;
+    low = ((x >> 4) + gUnknown_203F450->var_4004);
     return arr[high+low];
 }
 
@@ -874,7 +857,7 @@ void TeachyTvPrepBattle(u8 taskId)
     SavePlayerParty();
     sub_8159F40();
     PlayMapChosenOrBattleBGM(MUS_DUMMY);
-    if ( !gTeachyTV_StaticResources.optionChosen )
+    if (!gTeachyTV_StaticResources.optionChosen)
         data[6] = 9;
     else
         data[6] = 8;
@@ -884,19 +867,15 @@ void TeachyTvPrepBattle(u8 taskId)
 
 void TeachyTvPreBattleAnimAndSetBattleCallback(u8 taskId)
 {
-    s16 *data;
-    int temp;
-
-    data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
     switch (data[7])
     {
     case 0:
-        sub_80D08B8(*((u8*)data + 12));
+        sub_80D08B8(data[6]);
         ++data[7];
         break;
     case 1:
-        temp = sub_80D08F8();
-        if ( temp << 24 )
+        if (sub_80D08F8() << 24)
         {
             SetMainCallback2(sub_800FD9C);
             DestroyTask(taskId);
@@ -908,11 +887,11 @@ void TeachyTvPreBattleAnimAndSetBattleCallback(u8 taskId)
 void TeachyTvRestorePlayerPartyCallback(void)
 {
     LoadPlayerParty();
-    if ( gUnknown_2023E8A == 3 )
+    if (gUnknown_2023E8A == 3)
         sub_815AC20();
     else
         PlayNewMapMusic(BGM_FRLG_FOLLOW_ME);
-    sub_815ABFC();
+    CB2_ReturnToTeachyTV();
 }
 
 #ifdef NONMATCHING
@@ -961,20 +940,20 @@ void TeachyTvLoadBg3Map(void *buffer)
             mapEntry = md->map[v3 + 24 * v19 + 8] & 0x3FF;
             v7 = 0;
             v8 = v3 + 1;
-            if ( v4 + v3 <= 0 )
+            if (v4 + v3 <= 0)
             {
 LABEL_9:
-                if ( mapArray[v7] )
+                if (mapArray[v7])
                     goto LABEL_11;
             }
             else
             {
-                for ( i = *mapArray; i; i = mapArray[v7] )
+                for (i = *mapArray; i; i = mapArray[v7])
                 {
-                    if ( i == mapEntry )
+                    if (i == mapEntry)
                         goto LABEL_9;
                     v7 = (u16)(v7 + 1);
-                    if ( v7 >= v4 + v3 )
+                    if (v7 >= v4 + v3)
                         goto LABEL_9;
                 }
             }
@@ -989,17 +968,17 @@ LABEL_11:
                 v7);
             v3 = v8;
         }
-        while ( (u16)v8 <= 0xF );
+        while ((u16)v8 <= 0xF);
         v2 = v18;
     }
-    while ( (u16)v18 <= 8 );
+    while ((u16)v18 <= 8);
     MapTileBlockBuf = (char *)Alloc(v17 << 7);
     FourMapTileBlocksTempBuf = Alloc(0x80);
-    for ( j = 0; j < v17; j = (u16)j + 1 )
+    for (j = 0; j < v17; j = (u16)j + 1)
     {
         memset(FourMapTileBlocksTempBuf, 0, 0x80);
         v13 = &mapArray[j];
-        if ( *v13 <= 0x27F )
+        if (*v13 <= 0x27F)
             TeachyTvComputeMapTilesFromTilesetAndMetaTiles(
                 (u16 *)(16 * *v13 + (u16*)(md->primaryTileset->metatiles)),
                 (u8 *)FourMapTileBlocksTempBuf,
@@ -1249,9 +1228,9 @@ void TeachyTvLoadBg3Map(void *buffer)
 
 void TeachyTvLoadMapTilesetToBuffer(struct Tileset *ts, u8 *dstBuffer, u16 size)
 {
-    if ( ts )
+    if (ts)
     {
-        if ( !ts->isCompressed )
+        if (!ts->isCompressed)
             CpuFastSet(ts->tiles, dstBuffer, 8 * size);
         else
             LZDecompressWram(ts->tiles, dstBuffer);
@@ -1265,7 +1244,7 @@ void TeachyTvPushBackNewMapPalIndexArrayEntry(struct MapData *mStruct, u16 *buf1
     u16 *metaTileEntryAddr;
 
     int temp = mapEntry;
-    if ( temp <= 0x27F )
+    if (temp <= 0x27F)
     {
         ts = mStruct->primaryTileset;
     }
@@ -1374,13 +1353,11 @@ void TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(u8 *blockBuf, u8 *
     buffer = (u8 *)AllocZeroed(0x20);
     src = ((u32)AllocZeroed(0x20));
     CpuFastSet(tileset, buffer, 8);
-    if ( metaTile & 1 )
+    if (metaTile & 1)
     {
-        i = 0;
-        do
+        for (i=0; i<8; ++i)
         {
-            j = 0;
-            do
+            for (j=0; j<4; ++j)
             {
                 u32 offset1 = i << 2;
                 u32 offset2 = j - 3;
@@ -1389,12 +1366,10 @@ void TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(u8 *blockBuf, u8 *
                 u32 dstOffset = offset1 + j;
                 *(u8*)(src + dstOffset) = ((value & 0xF) << 4) + ((value & 0xF0) >> 4);
             }
-            while ( ++(u8)j <= 3 );
         }
-        while ( ++(u8)i <= 7 );
         CpuFastSet((u8*)src, buffer, 8);
     }
-    if ( metaTile & 2 )
+    if (metaTile & 2)
     {
         j = 0;
         do
@@ -1402,19 +1377,19 @@ void TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(u8 *blockBuf, u8 *
             memcpy(&((u8*)src)[4 * j], &buffer[4 * (7 - j)], 4);
             j = (u8)(j + 1);
         }
-        while ( j <= 7 );
+        while (j <= 7);
         CpuFastSet((u8*)src, buffer, 8);
     }
     j = 0;
     do
     {
-        if ( buffer[j] & 0xF0 )
+        if (buffer[j] & 0xF0)
             blockBuf[j] = (blockBuf[j] & 0xF) + (buffer[j] & 0xF0);
-        if ( buffer[j] & 0xF )
+        if (buffer[j] & 0xF)
             blockBuf[j] = (blockBuf[j] & 0xF0) + (buffer[j] & 0xF);
         j = (u8)(j + 1);
     }
-    while ( j <= 0x1F );
+    while (j <= 0x1F);
     Free((u8*)src);
     Free(buffer);
 }
@@ -1576,26 +1551,26 @@ u16 TeachyTvComputePalIndexArrayEntryByMetaTile(u8 *palIndexArrayBuf, u16 metaTi
     int firstEntry;
     int temp;
 
-    pal = (u32)(metaTile << 16) >> 28;
+    pal = metaTile >> 12;
     i = 0;
     firstEntry = *palIndexArrayBuf;
-    if ( firstEntry != pal )
+    if (firstEntry != pal)
     {
-        if ( firstEntry == 0xFF )
+        if (firstEntry == 0xFF)
         {
             *palIndexArrayBuf = pal;
         }
         else
         {
-            while ( 1 )
+            while (1)
             {
                 ++i;
-                if ( i > 0xF )
+                if (i > 0xF)
                     break;
                 temp = palIndexArrayBuf[i];
-                if ( temp == pal )
+                if (temp == pal)
                     break;
-                if ( temp == 0xFF )
+                if (temp == 0xFF)
                 {
                     palIndexArrayBuf[i] = pal;
                     break;

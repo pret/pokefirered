@@ -502,10 +502,8 @@ void TeachyTvClusFuncClearBg2TeachyTvGraphic(u8 taskId)
 
 void TeachyTvClusFuncNpcMoveAndSetupTextPrinter(u8 taskId)
 {
-    s16 *data;
     struct Sprite * spriteAddr;
-
-    data = gTasks[taskId].data;
+    s16 * data = gTasks[taskId].data;
     spriteAddr = &gSprites[data[1]];
     if (data[2] != 35)
         ++data[2];
@@ -531,8 +529,7 @@ void TeachyTvClusFuncIdleIfTextPrinterIsActive(u8 taskId)
 
 void TeachyTvRenderMsgAndSwitchClusterFuncs(u8 taskId)
 {
-    s16 *data;
-    data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
     if (JOY_NEW(B_BUTTON))
     {
         u8 *offset = &(gUnknown_203F450->var_4006);
@@ -556,7 +553,7 @@ void TeachyTvRenderMsgAndSwitchClusterFuncs(u8 taskId)
 
 void TeachyTvClusFuncTextPrinterSwitchStringByOptionChosen(u8 taskId)
 {
-    s16 *data = (u16 *)gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
     const u8 * const* texts = &gUnknown_8479560;
     TeachyTvInitTextPrinter(texts[gTeachyTV_StaticResources.optionChosen]);
     ++data[3];

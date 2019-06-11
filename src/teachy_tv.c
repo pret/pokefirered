@@ -1218,71 +1218,67 @@ void TeachyTvRestorePlayerPartyCallback(void)
 
 void TeachyTvLoadBg3Map(u16 *buffer)
 {
-    u16 * r7;
-    u8 * r5;
-    u16 r4, r2, r3;
-    u16 r4_1;
-    void * sp08;
-    void * sp0C;
-    u16 sp10 = 0;
-    const struct MapData *layout = &Route1_Layout; // r8
-    u16 * r6 = AllocZeroed(0x800);
-    sp08 = AllocZeroed(0x8000);
-    sp0C = Alloc(16);
-    memset(sp0C, 0xFF, 16);
+    u16 * bgTilesBuffer;
+    u8 * mapTilesRowBuffer;
+    u16 i, j, k;
+    u16 currentBlockIdx;
+    void * tilesetsBuffer;
+    void * palIndicesBuffer;
+    u16 numMapTilesRows = 0;
+    const struct MapData *layout = &Route1_Layout;
+    u16 * blockIndicesBuffer = AllocZeroed(0x800);
+    tilesetsBuffer = AllocZeroed(0x8000);
+    palIndicesBuffer = Alloc(16);
+    memset(palIndicesBuffer, 0xFF, 16);
 
-    TeachyTvLoadMapTilesetToBuffer(layout->primaryTileset, sp08, 0x280);
-    TeachyTvLoadMapTilesetToBuffer(layout->secondaryTileset, sp08 + 0x5000, 0x180);
+    TeachyTvLoadMapTilesetToBuffer(layout->primaryTileset, tilesetsBuffer, 0x280);
+    TeachyTvLoadMapTilesetToBuffer(layout->secondaryTileset, tilesetsBuffer + 0x5000, 0x180);
 
-    for (r4 = 0; r4 < 9; r4++)
+    for (i = 0; i < 9; i++)
     {
-        // sp+18 = r4 + 6
-        // r10 = r4 << 4
-        // r9 = r4 << 6
-        // sp14 <- r4++
-        for (r2 = 0; r2 < 16; r2++)
+        for (j = 0; j < 16; j++)
         {
-            r4_1 = layout->map[8 + (r4 + 6) * layout->width + r2] & 0x3FF;
-            for (r3 = 0; r3 < (r4 << 4) + r2; r3++)
+            currentBlockIdx = layout->map[8 + (i + 6) * layout->width + j] & 0x3FF;
+            for (k = 0; k < (i << 4) + j; k++)
             {
-                if (r6[r3] == 0)
+                if (blockIndicesBuffer[k] == 0)
                     break;
-                if (r6[r3] == r4_1)
+                if (blockIndicesBuffer[k] == currentBlockIdx)
                     break;
             }
-            if (r6[r3] == 0)
+            if (blockIndicesBuffer[k] == 0)
             {
-                r6[r3] = r4_1;
-                sp10++;
+                blockIndicesBuffer[k] = currentBlockIdx;
+                numMapTilesRows++;
             }
-            TeachyTvPushBackNewMapPalIndexArrayEntry(layout, &buffer[64 * r4 + 2 * r2], sp0C, r4_1, r3);
+            TeachyTvPushBackNewMapPalIndexArrayEntry(layout, &buffer[64 * i + 2 * j], palIndicesBuffer, currentBlockIdx, k);
         }
     }
 
-    r7 = Alloc(sp10 * 0x80);
-    r5 = Alloc(0x80);
-    for (r4 = 0; r4 < sp10; r4++)
+    bgTilesBuffer = Alloc(numMapTilesRows * 0x80);
+    mapTilesRowBuffer = Alloc(0x80);
+    for (i = 0; i < numMapTilesRows; i++)
     {
-        memset(r5, 0, 0x80);
-        if (r6[r4] < 0x280)
+        memset(mapTilesRowBuffer, 0, 0x80);
+        if (blockIndicesBuffer[i] < 0x280)
         {
-            TeachyTvComputeMapTilesFromTilesetAndMetaTiles(layout->primaryTileset->metatiles + r6[r4] * 16, r5, sp08);
+            TeachyTvComputeMapTilesFromTilesetAndMetaTiles(layout->primaryTileset->metatiles + blockIndicesBuffer[i] * 16, mapTilesRowBuffer, tilesetsBuffer);
         }
         else
         {
-            TeachyTvComputeMapTilesFromTilesetAndMetaTiles(layout->secondaryTileset->metatiles + (r6[r4] - 0x280) * 16, r5, sp08);
+            TeachyTvComputeMapTilesFromTilesetAndMetaTiles(layout->secondaryTileset->metatiles + (blockIndicesBuffer[i] - 0x280) * 16, mapTilesRowBuffer, tilesetsBuffer);
         }
-        CpuFastCopy(r5, r7 + r4 * 0x40, 0x80);
+        CpuFastCopy(mapTilesRowBuffer, bgTilesBuffer + i * 0x40, 0x80);
     }
 
-    LoadBgTiles(3, r7, sp10 * 0x80, 0);
-    TeachyTvLoadMapPalette(layout, sp0C);
+    LoadBgTiles(3, bgTilesBuffer, numMapTilesRows * 0x80, 0);
+    TeachyTvLoadMapPalette(layout, palIndicesBuffer);
 
-    Free(r5);
-    Free(r7);
-    Free(sp0C);
-    Free(sp08);
-    Free(r6);
+    Free(mapTilesRowBuffer);
+    Free(bgTilesBuffer);
+    Free(palIndicesBuffer);
+    Free(tilesetsBuffer);
+    Free(blockIndicesBuffer);
 }
 
 void TeachyTvLoadMapTilesetToBuffer(struct Tileset *ts, u8 *dstBuffer, u16 size)

@@ -1,10 +1,16 @@
 #include "global.h"
 #include "event_data.h"
+#include "constants/maps.h"
 
 EWRAM_DATA u16 gUnknown_203B0EC = 0;
 EWRAM_DATA u8 gUnknown_203B0EE = 0;
 
 u16 gUnknown_3005EA0;
+
+bool32 sub_812B27C(const u16 * mapIdxs);
+
+extern const u16 gUnknown_845C594[]; // marts
+extern const u16 gUnknown_845C5BC[]; // gyms
 
 void sub_812B1E0(u8 a0)
 {
@@ -42,3 +48,28 @@ void sub_812B248(void)
 {
     gUnknown_203B0EC = gUnknown_3005EA0;
 }
+
+bool32 sub_812B25C(void)
+{
+    return sub_812B27C(gUnknown_845C594);
+}
+
+bool32 sub_812B26C(void)
+{
+    return sub_812B27C(gUnknown_845C5BC);
+}
+
+bool32 sub_812B27C(const u16 * mapIdxs)
+{
+    u16 mapIdx = (gSaveBlock1Ptr->location.mapGroup << 8) + gSaveBlock1Ptr->location.mapNum;
+    s32 i;
+
+    for (i = 0; mapIdxs[i] != MAP_UNDEFINED; i++)
+    {
+        if (mapIdxs[i] == mapIdx)
+            return TRUE;
+    }
+
+    return FALSE;
+}
+

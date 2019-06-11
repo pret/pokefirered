@@ -517,7 +517,7 @@ _0800F5C8: .4byte 0x00006001
 	thumb_func_start sub_800F5CC
 sub_800F5CC: @ 800F5CC
 	push {lr}
-	ldr r0, _0800F5E0 @ =gUnknown_2023E8A
+	ldr r0, _0800F5E0 @ =gBattleOutcome
 	ldrb r2, [r0]
 	cmp r2, 0x3
 	bne _0800F5E8
@@ -526,7 +526,7 @@ sub_800F5CC: @ 800F5CC
 	bl sub_80D87BC
 	b _0800F6F0
 	.align 2, 0
-_0800F5E0: .4byte gUnknown_2023E8A
+_0800F5E0: .4byte gBattleOutcome
 _0800F5E4: .4byte gUnknown_83FE883
 _0800F5E8:
 	ldr r0, _0800F61C @ =gBattleTypeFlags

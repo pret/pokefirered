@@ -129,7 +129,7 @@ sub_80A0F4C: @ 80A0F4C
 _080A0F60: .4byte gUnknown_2039994
 _080A0F64: .4byte CB2_ReturnToField
 _080A0F68:
-	ldr r0, _080A0F88 @ =gUnknown_2023E8A
+	ldr r0, _080A0F88 @ =gBattleOutcome
 	ldrb r0, [r0]
 	cmp r0, 0x8
 	bne _080A0F9C
@@ -143,7 +143,7 @@ _080A0F68:
 	bl SetMainCallback2
 	b _080A0FB0
 	.align 2, 0
-_080A0F88: .4byte gUnknown_2023E8A
+_080A0F88: .4byte gBattleOutcome
 _080A0F8C: .4byte gUnknown_81BFB87
 _080A0F90: .4byte gFieldCallback
 _080A0F94: .4byte sub_807E3EC

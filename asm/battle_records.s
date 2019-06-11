@@ -925,7 +925,7 @@ _080CD94C: .4byte 0x0000270f
 sub_80CD950: @ 80CD950
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, _080CD964 @ =gUnknown_2023E8A
+	ldr r0, _080CD964 @ =gBattleOutcome
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _080CD968
@@ -933,7 +933,7 @@ sub_80CD950: @ 80CD950
 	beq _080CD976
 	b _080CD984
 	.align 2, 0
-_080CD964: .4byte gUnknown_2023E8A
+_080CD964: .4byte gBattleOutcome
 _080CD968:
 	eors r0, r4
 	bl sub_80CD8F8
@@ -978,7 +978,7 @@ sub_80CD98C: @ 80CD98C
 	subs r3, 0x30
 	adds r2, r3
 	ldrh r2, [r2, 0xE]
-	ldr r3, _080CD9EC @ =gUnknown_2023E8A
+	ldr r3, _080CD9EC @ =gBattleOutcome
 	ldrb r3, [r3]
 	ldr r5, _080CD9F0 @ =gLinkPlayers
 	lsls r4, r6, 3
@@ -998,7 +998,7 @@ _080CD9DC: .4byte gSaveBlock1Ptr
 _080CD9E0: .4byte gSaveBlock2Ptr
 _080CD9E4: .4byte 0x00000a98
 _080CD9E8: .4byte gUnknown_2039654
-_080CD9EC: .4byte gUnknown_2023E8A
+_080CD9EC: .4byte gBattleOutcome
 _080CD9F0: .4byte gLinkPlayers
 	thumb_func_end sub_80CD98C
 

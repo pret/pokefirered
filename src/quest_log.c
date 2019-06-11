@@ -2746,7 +2746,7 @@ void sub_81134CC(struct Var4038Struct * a0)
     if (VarGet(VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB) == 2)
     {
         sub_8113078(a0);
-        if (gUnknown_2023E8A == 1)
+        if (gBattleOutcome == B_OUTCOME_WON)
             sub_8113194(a0);
         else
             sub_81131FC(a0);

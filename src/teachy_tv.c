@@ -34,14 +34,23 @@
 #include "fieldmap.h"
 #include "strings.h"
 
+enum TeachyTvScript
+{
+    TTVSCR_BATTLE,
+    TTVSCR_STATUS,
+    TTVSCR_MATCHUPS,
+    TTVSCR_CATCHING,
+    TTVSCR_TMS,
+    TTVSCR_REGISTER
+};
+
 struct TeachyTvCtrlBlk
 {
     MainCallback callback;
     u8 mode;
-    u8 optionChosen;
+    u8 whichScript;
     u16 scrollOffset;
     u16 selectedRow;
-    u16 filler;
 };
 
 struct TeachyTvBuf
@@ -51,196 +60,196 @@ struct TeachyTvBuf
     u16 buffer2[0x800];
     u16 buffer3[0x800];
     u16 buffer4[0x800];
-    u8 var_4004;
-    u8 var_4005;
-    u8 var_4006;
-    u8 var_4007;
+    u8 grassAnimCounterLo;
+    u8 grassAnimCounterHi;
+    u8 grassAnimDisabled;
+    u8 scrollIndicatorArrowPairId;
 };
 
-EWRAM_DATA struct TeachyTvCtrlBlk gTeachyTV_StaticResources = {0};
-EWRAM_DATA struct TeachyTvBuf * gUnknown_203F450 = NULL;
+static EWRAM_DATA struct TeachyTvCtrlBlk gTeachyTV_StaticResources = {0};
+static EWRAM_DATA struct TeachyTvBuf * sResources = NULL;
 
-void TeachyTvClusFuncTransitionRenderBg2TeachyTvGraphicInitNpcPos(u8 taskId);
-void TeachyTvClusFuncClearBg2TeachyTvGraphic(u8 taskId);
-void TeachyTvClusFuncNpcMoveAndSetupTextPrinter(u8 taskId);
-void TeachyTvClusFuncIdleIfTextPrinterIsActive(u8 taskId);
-void TeachyTvClusFuncTextPrinterSwitchStringByOptionChosen(u8 taskId);
-void TeachyTvClusFuncTextPrinterSwitchStringByOptionChosen2(u8 taskId);
-void TeachyTvClusFuncIdleIfTextPrinterIsActive2(u8 taskId);
-void TeachyTvClusFuncEraseTextWindowIfKeyPressed(u8 taskId);
-void TeachyTvClusFuncStartAnimNpcWalkIntoGrass(u8 taskId);
-void TeachyTvClusFuncDudeMoveUp(u8 taskId);
-void TeachyTvClusFuncDudeMoveRight(u8 taskId);
-void TeachyTvClusFuncDudeTurnLeft(u8 taskId);
-void TeachyTvClusFuncDudeMoveLeft(u8 taskId);
-void TeachyTvClusFuncRenderAndRemoveBg1EndGraphic(u8 taskId);
-void TeachyTvClusFuncTaskBattleOrFadeByOptionChosen(u8 taskId);
-void TeachyTvCallback(void);
-void TeachyTvMainCallback(void);
-void TeachyTvVblankHandler(void);
-void TeachyTvCreateAndRenderRbox(void);
-void TeachyTvInitIo(void);
-u8 TeachyTvSetupObjEventAndOam(void);
-void TeachyTvSetupPostBattleWindowAndObj(u8);
-u8 TeachyTvSetupWindow(void);
-void TeachyTvSetupScrollIndicatorArrowPair(void);
-void TeachyTvSetWindowRegs(void);
-void TeachyTvSetupBg(void);
-void TeachyTvLoadGraphic(void);
-void TeachyTvPostBattleFadeControl(u8);
-void TeachyTvOptionListController(u8);
-void TeachyTvAudioByInput(s32, bool8, struct ListMenu *);
-void TeachyTvQuitFadeControlAndTaskDel(u8 taskId);
-void TeachyTvRenderMsgAndSwitchClusterFuncs(u8 taskId);
-void TeachyTvClearBg1EndGraphicText(void);
-void TeachyTvBackToOptionList(u8 taskId);
-void TeachyTvSetupBagItemsByOptionChosen(void);
-void TeachyTvPrepBattle(u8 taskId);
-void TeachyTvGrassAnimationMain(u8 taskId, s16 x, s16 y, u8 subpriority, bool8 mode);
-void TeachyTvLoadBg3Map(u16 *);
-u8 TeachyTvGrassAnimationCheckIfNeedsToGenerateGrassObj(s16 x, s16 y);
-void TeachyTvGrassAnimationObjCallback(struct Sprite *sprite);
-void TeachyTvRestorePlayerPartyCallback(void);
-void TeachyTvPreBattleAnimAndSetBattleCallback(u8 taskId);
-void TeachyTvLoadMapTilesetToBuffer(struct Tileset *ts, u8 *dstBuffer, u16 size);
-void TeachyTvPushBackNewMapPalIndexArrayEntry(const struct MapData *mStruct, u16 *buf1, u8 *palIndexArray, u16 mapEntry, u16 offset);
-void TeachyTvComputeMapTilesFromTilesetAndMetaTiles(u16 *metaTilesArray, u8 *blockBuf, u8 *tileset);
-void TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(u8 *blockBuf, u8 *tileset, u8 metaTile);
-u16 TeachyTvComputePalIndexArrayEntryByMetaTile(u8 *palIndexArrayBuf, u16 metaTile);
-void TeachyTvLoadMapPalette(const struct MapData * mStruct, const u8 *palIndexArray);
+static void TTVcmd_TransitionRenderBg2TeachyTvGraphicInitNpcPos(u8 taskId);
+static void TTVcmd_ClearBg2TeachyTvGraphic(u8 taskId);
+static void TTVcmd_NpcMoveAndSetupTextPrinter(u8 taskId);
+static void TTVcmd_IdleIfTextPrinterIsActive(u8 taskId);
+static void TTVcmd_TextPrinterSwitchStringByOptionChosen(u8 taskId);
+static void TTVcmd_TextPrinterSwitchStringByOptionChosen2(u8 taskId);
+static void TTVcmd_IdleIfTextPrinterIsActive2(u8 taskId);
+static void TTVcmd_EraseTextWindowIfKeyPressed(u8 taskId);
+static void TTVcmd_StartAnimNpcWalkIntoGrass(u8 taskId);
+static void TTVcmd_DudeMoveUp(u8 taskId);
+static void TTVcmd_DudeMoveRight(u8 taskId);
+static void TTVcmd_DudeTurnLeft(u8 taskId);
+static void TTVcmd_DudeMoveLeft(u8 taskId);
+static void TTVcmd_RenderAndRemoveBg1EndGraphic(u8 taskId);
+static void TTVcmd_TaskBattleOrFadeByOptionChosen(u8 taskId);
+static void TeachyTvCallback(void);
+static void TeachyTvMainCallback(void);
+static void TeachyTvVblankHandler(void);
+static void TeachyTvCreateAndRenderRbox(void);
+static void TeachyTvInitIo(void);
+static u8 TeachyTvSetupObjEventAndOam(void);
+static void TeachyTvSetupPostBattleWindowAndObj(u8);
+static u8 TeachyTvSetupWindow(void);
+static void TeachyTvSetupScrollIndicatorArrowPair(void);
+static void TeachyTvSetWindowRegs(void);
+static void TeachyTvSetupBg(void);
+static void TeachyTvLoadGraphic(void);
+static void TeachyTvPostBattleFadeControl(u8);
+static void TeachyTvOptionListController(u8);
+static void TeachyTvAudioByInput(s32, bool8, struct ListMenu *);
+static void TeachyTvQuitFadeControlAndTaskDel(u8 taskId);
+static void TeachyTvRenderMsgAndSwitchClusterFuncs(u8 taskId);
+static void TeachyTvClearBg1EndGraphicText(void);
+static void TTVcmd_End(u8 taskId);
+static void TeachyTvSetupBagItemsByOptionChosen(void);
+static void TeachyTvPrepBattle(u8 taskId);
+static void TeachyTvGrassAnimationMain(u8 taskId, s16 x, s16 y, u8 subpriority, bool8 mode);
+static void TeachyTvLoadBg3Map(u16 *);
+static u8 TeachyTvGrassAnimationCheckIfNeedsToGenerateGrassObj(s16 x, s16 y);
+static void TeachyTvGrassAnimationObjCallback(struct Sprite *sprite);
+static void TeachyTvRestorePlayerPartyCallback(void);
+static void TeachyTvPreBattleAnimAndSetBattleCallback(u8 taskId);
+static void TeachyTvLoadMapTilesetToBuffer(struct Tileset *ts, u8 *dstBuffer, u16 size);
+static void TeachyTvPushBackNewMapPalIndexArrayEntry(const struct MapData *mStruct, u16 *buf1, u8 *palIndexArray, u16 mapEntry, u16 offset);
+static void TeachyTvComputeMapTilesFromTilesetAndMetaTiles(u16 *metaTilesArray, u8 *blockBuf, u8 *tileset);
+static void TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(u8 *blockBuf, u8 *tileset, u8 metaTile);
+static u16 TeachyTvComputePalIndexArrayEntryByMetaTile(u8 *palIndexArrayBuf, u16 metaTile);
+static void TeachyTvLoadMapPalette(const struct MapData * mStruct, const u8 *palIndexArray);
 
-const struct BgTemplate gTeachyTvBgTemplateArray[] = 
+static const struct BgTemplate gTeachyTvBgTemplateArray[] = 
 {
     {
-        .bg = 0x0,
-        .charBaseIndex = 0x0,
-        .mapBaseIndex = 0x1F,
-        .screenSize = 0x0,
-        .paletteMode = 0x0,
-        .priority = 0x1,
-        .baseTile = 0x0,
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 31,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0x000,
     },
     {
-        .bg = 0x1,
-        .charBaseIndex = 0x0,
-        .mapBaseIndex = 0x1E,
-        .screenSize = 0x0,
-        .paletteMode = 0x0,
-        .priority = 0x0,
-        .baseTile = 0x0,
+        .bg = 1,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 30,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0x000,
     },
     {
-        .bg = 0x2,
-        .charBaseIndex = 0x0,
-        .mapBaseIndex = 0x1D,
-        .screenSize = 0x0,
-        .paletteMode = 0x0,
-        .priority = 0x2,
-        .baseTile = 0x0,
+        .bg = 2,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 29,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 2,
+        .baseTile = 0x000,
     },
     {
-        .bg = 0x3,
-        .charBaseIndex = 0x2,
-        .mapBaseIndex = 0x1C,
-        .screenSize = 0x0,
-        .paletteMode = 0x0,
-        .priority = 0x3,
-        .baseTile = 0x0,
+        .bg = 3,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 28,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 3,
+        .baseTile = 0x000,
     },
 };
 
-const struct WindowTemplate gTeachyTvWindowTemplateArray[] = 
+static const struct WindowTemplate gTeachyTvWindowTemplateArray[] = 
 {
     {
-        .bg = 0x1,
-        .tilemapLeft = 0x2,
-        .tilemapTop = 0xF,
-        .width = 0x1A,
-        .height = 0x4,
+        .bg = 1,
+        .tilemapLeft = 2,
+        .tilemapTop = 15,
+        .width = 26,
+        .height = 4,
         .paletteNum = 0x3,
-        .baseBlock = 0xEA,
+        .baseBlock = 0x0EA,
     },
     {
-        .bg = 0x0,
-        .tilemapLeft = 0x4,
-        .tilemapTop = 0x1,
-        .width = 0x16,
-        .height = 0xC,
+        .bg = 0,
+        .tilemapLeft = 4,
+        .tilemapTop = 1,
+        .width = 22,
+        .height = 12,
         .paletteNum = 0x3,
         .baseBlock = 0x152,
     },
     DUMMY_WIN_TEMPLATE,
 };
 
-const struct ListMenuItem gTeachyTvListMenuItemArray[] = 
+static const struct ListMenuItem sListMenuItems[] = 
 {
     {
-        .label = gUnknown_841B7A4,
-        .index = 0,
+        .label = gTeachyTvString_TeachBattle,
+        .index = TTVSCR_BATTLE
     },
     {
-        .label = gUnknown_841B7BC,
-        .index = 1,
+        .label = gTeachyTvString_StatusProblems,
+        .index = TTVSCR_STATUS
     },
     {
-        .label = gUnknown_841B7D6,
-        .index = 2,
+        .label = gTeachyTvString_TypeMatchups,
+        .index = TTVSCR_MATCHUPS
     },
     {
-        .label = gUnknown_841B7EE,
-        .index = 3,
+        .label = gTeachyTvString_CatchPkmn,
+        .index = TTVSCR_CATCHING
     },
     {
-        .label = gUnknown_841B807,
-        .index = 4,
+        .label = gTeachyTvString_AboutTMs,
+        .index = TTVSCR_TMS
     },
     {
-        .label = gUnknown_841B81B,
-        .index = 5,
+        .label = gTeachyTvString_RegisterItem,
+        .index = TTVSCR_REGISTER
     },
 
     {
-        .label = gUnknown_841B836,
-        .index = -2,
+        .label = gTeachyTvString_Cancel,
+        .index = -2
     },
 };
 
-const struct ListMenuItem gTeachyTvListMenuItemArray2[] = 
+static const struct ListMenuItem sListMenuItems_NoTMCase[] = 
 {
     {
-        .label = gUnknown_841B7A4,
-        .index = 0,
+        .label = gTeachyTvString_TeachBattle,
+        .index = TTVSCR_BATTLE
     },
     {
-        .label = gUnknown_841B7BC,
-        .index = 1,
+        .label = gTeachyTvString_StatusProblems,
+        .index = TTVSCR_STATUS
     },
     {
-        .label = gUnknown_841B7D6,
-        .index = 2,
+        .label = gTeachyTvString_TypeMatchups,
+        .index = TTVSCR_MATCHUPS
     },
     {
-        .label = gUnknown_841B7EE,
-        .index = 3,
+        .label = gTeachyTvString_CatchPkmn,
+        .index = TTVSCR_CATCHING
     },
     {
-        .label = gUnknown_841B836,
-        .index = -2,
+        .label = gTeachyTvString_Cancel,
+        .index = -2
     },
 };
 
-const struct ListMenuTemplate gTeachyTvListMenuTemplateArray = 
+static const struct ListMenuTemplate sListMenuTemplate = 
 {
-    .items = gTeachyTvListMenuItemArray,
+    .items = sListMenuItems,
     .moveCursorFunc = NULL,
     .itemPrintFunc = NULL,
-    .totalItems = 0x7,
-    .maxShowed = 0x6,
-    .windowId = 0x0,
-    .header_X = 0x0,
-    .item_X = 0x8,
-    .cursor_X = 0x0,
-    .upText_Y = 0x6,
+    .totalItems = 7,
+    .maxShowed = 6,
+    .windowId = 0,
+    .header_X = 0,
+    .item_X = 8,
+    .cursor_X = 0,
+    .upText_Y = 6,
     .cursorPal = 0x1,
     .fillValue = 0x0,
     .cursorShadowPal = 0x2,
@@ -251,7 +260,7 @@ const struct ListMenuTemplate gTeachyTvListMenuTemplateArray =
     .cursorKind = 0x0,
 };
 
-const struct ScrollArrowsTemplate gTeachyTvScrollIndicatorArrowPairTemplateArray = 
+static const struct ScrollArrowsTemplate sScrollIndicatorArrowPair = 
 {
     .firstArrowType = 0x2,
     .firstX = 0x78,
@@ -259,151 +268,156 @@ const struct ScrollArrowsTemplate gTeachyTvScrollIndicatorArrowPairTemplateArray
     .secondArrowType = 0x3,
     .secondX = 0x78,
     .secondY = 0x64,
-    .fullyUpThreshold = 0x0,
-    .fullyDownThreshold = 0x1,
+    .fullyUpThreshold = 0,
+    .fullyDownThreshold = 1,
     .tileTag = 0x800,
     .palTag = 0x800,
     .palNum = 0x0,
 };
 
-const u8 gTeachyTvSwitchFuncArray[] = 
+static const u8 sWhereToReturnToFromBattle[] = 
 {
-    0xC, 0xC, 0xC, 0xC, 0x9, 0x9, 0x0, 0x0, 
+    12,
+    12,
+    12,
+    12,
+     9,
+     9
 };
 
-void (* const gTeachyTvFuncCluster0[])(u8) = 
+static void (* const sBattleScript[])(u8) = 
 {
-    TeachyTvClusFuncTransitionRenderBg2TeachyTvGraphicInitNpcPos,
-    TeachyTvClusFuncClearBg2TeachyTvGraphic,
-    TeachyTvClusFuncNpcMoveAndSetupTextPrinter,
-    TeachyTvClusFuncIdleIfTextPrinterIsActive,
-    TeachyTvClusFuncIdleIfTextPrinterIsActive2,
-    TeachyTvClusFuncTextPrinterSwitchStringByOptionChosen,
-    TeachyTvClusFuncIdleIfTextPrinterIsActive2,
-    TeachyTvClusFuncEraseTextWindowIfKeyPressed,
-    TeachyTvClusFuncStartAnimNpcWalkIntoGrass,
-    TeachyTvClusFuncDudeMoveUp,
-    TeachyTvClusFuncDudeMoveRight,
-    TeachyTvClusFuncTaskBattleOrFadeByOptionChosen,
-    TeachyTvClusFuncTextPrinterSwitchStringByOptionChosen2,
-    TeachyTvClusFuncIdleIfTextPrinterIsActive2,
-    TeachyTvClusFuncEraseTextWindowIfKeyPressed,
-    TeachyTvClusFuncDudeTurnLeft,
-    TeachyTvClusFuncDudeMoveLeft,
-    TeachyTvClusFuncRenderAndRemoveBg1EndGraphic,
-    TeachyTvBackToOptionList,
+    TTVcmd_TransitionRenderBg2TeachyTvGraphicInitNpcPos,
+    TTVcmd_ClearBg2TeachyTvGraphic,
+    TTVcmd_NpcMoveAndSetupTextPrinter,
+    TTVcmd_IdleIfTextPrinterIsActive,
+    TTVcmd_IdleIfTextPrinterIsActive2,
+    TTVcmd_TextPrinterSwitchStringByOptionChosen,
+    TTVcmd_IdleIfTextPrinterIsActive2,
+    TTVcmd_EraseTextWindowIfKeyPressed,
+    TTVcmd_StartAnimNpcWalkIntoGrass,
+    TTVcmd_DudeMoveUp,
+    TTVcmd_DudeMoveRight,
+    TTVcmd_TaskBattleOrFadeByOptionChosen,
+    TTVcmd_TextPrinterSwitchStringByOptionChosen2,
+    TTVcmd_IdleIfTextPrinterIsActive2,
+    TTVcmd_EraseTextWindowIfKeyPressed,
+    TTVcmd_DudeTurnLeft,
+    TTVcmd_DudeMoveLeft,
+    TTVcmd_RenderAndRemoveBg1EndGraphic,
+    TTVcmd_End,
 };
 
-void (* const gTeachyTvFuncCluster1[])(u8) = 
+static void (* const sStatusScript[])(u8) = 
 {
-    TeachyTvClusFuncTransitionRenderBg2TeachyTvGraphicInitNpcPos,
-    TeachyTvClusFuncClearBg2TeachyTvGraphic,
-    TeachyTvClusFuncNpcMoveAndSetupTextPrinter,
-    TeachyTvClusFuncIdleIfTextPrinterIsActive,
-    TeachyTvClusFuncIdleIfTextPrinterIsActive2,
-    TeachyTvClusFuncTextPrinterSwitchStringByOptionChosen,
-    TeachyTvClusFuncIdleIfTextPrinterIsActive2,
-    TeachyTvClusFuncEraseTextWindowIfKeyPressed,
-    TeachyTvClusFuncStartAnimNpcWalkIntoGrass,
-    TeachyTvClusFuncDudeMoveUp,
-    TeachyTvClusFuncDudeMoveRight,
-    TeachyTvClusFuncTaskBattleOrFadeByOptionChosen,
-    TeachyTvClusFuncTextPrinterSwitchStringByOptionChosen2,
-    TeachyTvClusFuncIdleIfTextPrinterIsActive2,
-    TeachyTvClusFuncEraseTextWindowIfKeyPressed,
-    TeachyTvClusFuncDudeTurnLeft,
-    TeachyTvClusFuncDudeMoveLeft,
-    TeachyTvClusFuncRenderAndRemoveBg1EndGraphic,
-    TeachyTvBackToOptionList,
+    TTVcmd_TransitionRenderBg2TeachyTvGraphicInitNpcPos,
+    TTVcmd_ClearBg2TeachyTvGraphic,
+    TTVcmd_NpcMoveAndSetupTextPrinter,
+    TTVcmd_IdleIfTextPrinterIsActive,
+    TTVcmd_IdleIfTextPrinterIsActive2,
+    TTVcmd_TextPrinterSwitchStringByOptionChosen,
+    TTVcmd_IdleIfTextPrinterIsActive2,
+    TTVcmd_EraseTextWindowIfKeyPressed,
+    TTVcmd_StartAnimNpcWalkIntoGrass,
+    TTVcmd_DudeMoveUp,
+    TTVcmd_DudeMoveRight,
+    TTVcmd_TaskBattleOrFadeByOptionChosen,
+    TTVcmd_TextPrinterSwitchStringByOptionChosen2,
+    TTVcmd_IdleIfTextPrinterIsActive2,
+    TTVcmd_EraseTextWindowIfKeyPressed,
+    TTVcmd_DudeTurnLeft,
+    TTVcmd_DudeMoveLeft,
+    TTVcmd_RenderAndRemoveBg1EndGraphic,
+    TTVcmd_End,
 };
 
-void (* const gTeachyTvFuncCluster2[])(u8) = 
+static void (* const sMatchupsScript[])(u8) = 
 {
-    TeachyTvClusFuncTransitionRenderBg2TeachyTvGraphicInitNpcPos,
-    TeachyTvClusFuncClearBg2TeachyTvGraphic,
-    TeachyTvClusFuncNpcMoveAndSetupTextPrinter,
-    TeachyTvClusFuncIdleIfTextPrinterIsActive,
-    TeachyTvClusFuncIdleIfTextPrinterIsActive2,
-    TeachyTvClusFuncTextPrinterSwitchStringByOptionChosen,
-    TeachyTvClusFuncIdleIfTextPrinterIsActive2,
-    TeachyTvClusFuncEraseTextWindowIfKeyPressed,
-    TeachyTvClusFuncStartAnimNpcWalkIntoGrass,
-    TeachyTvClusFuncDudeMoveUp,
-    TeachyTvClusFuncDudeMoveRight,
-    TeachyTvClusFuncTaskBattleOrFadeByOptionChosen,
-    TeachyTvClusFuncTextPrinterSwitchStringByOptionChosen2,
-    TeachyTvClusFuncIdleIfTextPrinterIsActive2,
-    TeachyTvClusFuncEraseTextWindowIfKeyPressed,
-    TeachyTvClusFuncDudeTurnLeft,
-    TeachyTvClusFuncDudeMoveLeft,
-    TeachyTvClusFuncRenderAndRemoveBg1EndGraphic,
-    TeachyTvBackToOptionList,
+    TTVcmd_TransitionRenderBg2TeachyTvGraphicInitNpcPos,
+    TTVcmd_ClearBg2TeachyTvGraphic,
+    TTVcmd_NpcMoveAndSetupTextPrinter,
+    TTVcmd_IdleIfTextPrinterIsActive,
+    TTVcmd_IdleIfTextPrinterIsActive2,
+    TTVcmd_TextPrinterSwitchStringByOptionChosen,
+    TTVcmd_IdleIfTextPrinterIsActive2,
+    TTVcmd_EraseTextWindowIfKeyPressed,
+    TTVcmd_StartAnimNpcWalkIntoGrass,
+    TTVcmd_DudeMoveUp,
+    TTVcmd_DudeMoveRight,
+    TTVcmd_TaskBattleOrFadeByOptionChosen,
+    TTVcmd_TextPrinterSwitchStringByOptionChosen2,
+    TTVcmd_IdleIfTextPrinterIsActive2,
+    TTVcmd_EraseTextWindowIfKeyPressed,
+    TTVcmd_DudeTurnLeft,
+    TTVcmd_DudeMoveLeft,
+    TTVcmd_RenderAndRemoveBg1EndGraphic,
+    TTVcmd_End,
 };
 
-void (* const gTeachyTvFuncCluster3[])(u8) = 
+static void (* const sCatchingScript[])(u8) = 
 {
-    TeachyTvClusFuncTransitionRenderBg2TeachyTvGraphicInitNpcPos,
-    TeachyTvClusFuncClearBg2TeachyTvGraphic,
-    TeachyTvClusFuncNpcMoveAndSetupTextPrinter,
-    TeachyTvClusFuncIdleIfTextPrinterIsActive,
-    TeachyTvClusFuncIdleIfTextPrinterIsActive2,
-    TeachyTvClusFuncTextPrinterSwitchStringByOptionChosen,
-    TeachyTvClusFuncIdleIfTextPrinterIsActive2,
-    TeachyTvClusFuncEraseTextWindowIfKeyPressed,
-    TeachyTvClusFuncStartAnimNpcWalkIntoGrass,
-    TeachyTvClusFuncDudeMoveUp,
-    TeachyTvClusFuncDudeMoveRight,
-    TeachyTvClusFuncTaskBattleOrFadeByOptionChosen,
-    TeachyTvClusFuncTextPrinterSwitchStringByOptionChosen2,
-    TeachyTvClusFuncIdleIfTextPrinterIsActive2,
-    TeachyTvClusFuncEraseTextWindowIfKeyPressed,
-    TeachyTvClusFuncDudeTurnLeft,
-    TeachyTvClusFuncDudeMoveLeft,
-    TeachyTvClusFuncRenderAndRemoveBg1EndGraphic,
-    TeachyTvBackToOptionList,
+    TTVcmd_TransitionRenderBg2TeachyTvGraphicInitNpcPos,
+    TTVcmd_ClearBg2TeachyTvGraphic,
+    TTVcmd_NpcMoveAndSetupTextPrinter,
+    TTVcmd_IdleIfTextPrinterIsActive,
+    TTVcmd_IdleIfTextPrinterIsActive2,
+    TTVcmd_TextPrinterSwitchStringByOptionChosen,
+    TTVcmd_IdleIfTextPrinterIsActive2,
+    TTVcmd_EraseTextWindowIfKeyPressed,
+    TTVcmd_StartAnimNpcWalkIntoGrass,
+    TTVcmd_DudeMoveUp,
+    TTVcmd_DudeMoveRight,
+    TTVcmd_TaskBattleOrFadeByOptionChosen,
+    TTVcmd_TextPrinterSwitchStringByOptionChosen2,
+    TTVcmd_IdleIfTextPrinterIsActive2,
+    TTVcmd_EraseTextWindowIfKeyPressed,
+    TTVcmd_DudeTurnLeft,
+    TTVcmd_DudeMoveLeft,
+    TTVcmd_RenderAndRemoveBg1EndGraphic,
+    TTVcmd_End,
 };
 
-void (* const gTeachyTvFuncCluster4[])(u8) = 
+static void (* const sTMsScript[])(u8) = 
 {
-    TeachyTvClusFuncTransitionRenderBg2TeachyTvGraphicInitNpcPos,
-    TeachyTvClusFuncClearBg2TeachyTvGraphic,
-    TeachyTvClusFuncNpcMoveAndSetupTextPrinter,
-    TeachyTvClusFuncIdleIfTextPrinterIsActive,
-    TeachyTvClusFuncIdleIfTextPrinterIsActive2,
-    TeachyTvClusFuncTextPrinterSwitchStringByOptionChosen,
-    TeachyTvClusFuncIdleIfTextPrinterIsActive2,
-    TeachyTvClusFuncEraseTextWindowIfKeyPressed,
-    TeachyTvClusFuncTaskBattleOrFadeByOptionChosen,
-    TeachyTvClusFuncTextPrinterSwitchStringByOptionChosen2,
-    TeachyTvClusFuncIdleIfTextPrinterIsActive2,
-    TeachyTvClusFuncEraseTextWindowIfKeyPressed,
-    TeachyTvClusFuncDudeTurnLeft,
-    TeachyTvClusFuncDudeMoveLeft,
-    TeachyTvClusFuncRenderAndRemoveBg1EndGraphic,
-    TeachyTvBackToOptionList,
+    TTVcmd_TransitionRenderBg2TeachyTvGraphicInitNpcPos,
+    TTVcmd_ClearBg2TeachyTvGraphic,
+    TTVcmd_NpcMoveAndSetupTextPrinter,
+    TTVcmd_IdleIfTextPrinterIsActive,
+    TTVcmd_IdleIfTextPrinterIsActive2,
+    TTVcmd_TextPrinterSwitchStringByOptionChosen,
+    TTVcmd_IdleIfTextPrinterIsActive2,
+    TTVcmd_EraseTextWindowIfKeyPressed,
+    TTVcmd_TaskBattleOrFadeByOptionChosen,
+    TTVcmd_TextPrinterSwitchStringByOptionChosen2,
+    TTVcmd_IdleIfTextPrinterIsActive2,
+    TTVcmd_EraseTextWindowIfKeyPressed,
+    TTVcmd_DudeTurnLeft,
+    TTVcmd_DudeMoveLeft,
+    TTVcmd_RenderAndRemoveBg1EndGraphic,
+    TTVcmd_End,
 };
 
-void (* const gTeachyTvFuncCluster5[])(u8) = 
+static void (* const sRegisterKeyItemScript[])(u8) = 
 {
-    TeachyTvClusFuncTransitionRenderBg2TeachyTvGraphicInitNpcPos,
-    TeachyTvClusFuncClearBg2TeachyTvGraphic,
-    TeachyTvClusFuncNpcMoveAndSetupTextPrinter,
-    TeachyTvClusFuncIdleIfTextPrinterIsActive,
-    TeachyTvClusFuncIdleIfTextPrinterIsActive2,
-    TeachyTvClusFuncTextPrinterSwitchStringByOptionChosen,
-    TeachyTvClusFuncIdleIfTextPrinterIsActive2,
-    TeachyTvClusFuncEraseTextWindowIfKeyPressed,
-    TeachyTvClusFuncTaskBattleOrFadeByOptionChosen,
-    TeachyTvClusFuncTextPrinterSwitchStringByOptionChosen2,
-    TeachyTvClusFuncIdleIfTextPrinterIsActive2,
-    TeachyTvClusFuncEraseTextWindowIfKeyPressed,
-    TeachyTvClusFuncDudeTurnLeft,
-    TeachyTvClusFuncDudeMoveLeft,
-    TeachyTvClusFuncRenderAndRemoveBg1EndGraphic,
-    TeachyTvBackToOptionList,
+    TTVcmd_TransitionRenderBg2TeachyTvGraphicInitNpcPos,
+    TTVcmd_ClearBg2TeachyTvGraphic,
+    TTVcmd_NpcMoveAndSetupTextPrinter,
+    TTVcmd_IdleIfTextPrinterIsActive,
+    TTVcmd_IdleIfTextPrinterIsActive2,
+    TTVcmd_TextPrinterSwitchStringByOptionChosen,
+    TTVcmd_IdleIfTextPrinterIsActive2,
+    TTVcmd_EraseTextWindowIfKeyPressed,
+    TTVcmd_TaskBattleOrFadeByOptionChosen,
+    TTVcmd_TextPrinterSwitchStringByOptionChosen2,
+    TTVcmd_IdleIfTextPrinterIsActive2,
+    TTVcmd_EraseTextWindowIfKeyPressed,
+    TTVcmd_DudeTurnLeft,
+    TTVcmd_DudeMoveLeft,
+    TTVcmd_RenderAndRemoveBg1EndGraphic,
+    TTVcmd_End,
 };
 
-void TeachyTvCallback(void)
+static void TeachyTvCallback(void)
 {
     RunTasks();
     AnimateSprites();
@@ -412,14 +426,14 @@ void TeachyTvCallback(void)
     UpdatePaletteFade();
 }
 
-void TeachyTvVblankHandler(void)
+static void TeachyTvVblankHandler(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-void sub_815ABC4(u8 mode, void (*cb)())
+void InitTeachyTvController(u8 mode, MainCallback cb)
 {
     gTeachyTV_StaticResources.mode = mode;
     gTeachyTV_StaticResources.callback = cb;
@@ -427,7 +441,7 @@ void sub_815ABC4(u8 mode, void (*cb)())
     {
         gTeachyTV_StaticResources.scrollOffset = 0;
         gTeachyTV_StaticResources.selectedRow = 0;
-        gTeachyTV_StaticResources.optionChosen = 0;
+        gTeachyTV_StaticResources.whichScript = TTVSCR_BATTLE;
     }
     if (mode == 1)
     {
@@ -439,17 +453,17 @@ void sub_815ABC4(u8 mode, void (*cb)())
 void CB2_ReturnToTeachyTV(void)
 {
     if (gTeachyTV_StaticResources.mode == 1)
-        sub_815ABC4(1, gTeachyTV_StaticResources.callback);
+        InitTeachyTvController(1, gTeachyTV_StaticResources.callback);
     else
-        sub_815ABC4(2, gTeachyTV_StaticResources.callback);
+        InitTeachyTvController(2, gTeachyTV_StaticResources.callback);
 }
 
-void sub_815AC20(void)
+void SetTeachyTvControllerModeToResume(void)
 {
     gTeachyTV_StaticResources.mode = 1;
 }
 
-void TeachyTvMainCallback(void)
+static void TeachyTvMainCallback(void)
 {
     u8 taskId;
     struct Task *taskAddr;
@@ -457,10 +471,10 @@ void TeachyTvMainCallback(void)
     switch (gMain.state)
     {
     case 0:
-        gUnknown_203F450 = AllocZeroed(sizeof(struct TeachyTvBuf));
-        gUnknown_203F450->savedCallback = NULL;
-        gUnknown_203F450->var_4006 = 0;
-        gUnknown_203F450->var_4007 = 0xFF;
+        sResources = AllocZeroed(sizeof(struct TeachyTvBuf));
+        sResources->savedCallback = NULL;
+        sResources->grassAnimDisabled = 0;
+        sResources->scrollIndicatorArrowPairId = 0xFF;
         VblankHblankHandlerSetZero();
         clear_scheduled_bg_copies_to_vram();
         ScanlineEffect_Stop();
@@ -505,14 +519,14 @@ void TeachyTvMainCallback(void)
     }
 }
 
-void TeachyTvSetupBg(void)
+static void TeachyTvSetupBg(void)
 {
     InitBgReg();
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, gTeachyTvBgTemplateArray, 4);
-    SetBgTilemapBuffer(1, gUnknown_203F450->buffer1);
-    SetBgTilemapBuffer(2, gUnknown_203F450->buffer2);
-    SetBgTilemapBuffer(3, gUnknown_203F450->buffer3);
+    SetBgTilemapBuffer(1, sResources->buffer1);
+    SetBgTilemapBuffer(2, sResources->buffer2);
+    SetBgTilemapBuffer(3, sResources->buffer3);
     SetGpuReg(REG_OFFSET_DISPCNT, 0x3040);
     ShowBg(0);
     ShowBg(1);
@@ -520,25 +534,25 @@ void TeachyTvSetupBg(void)
     ShowBg(3);
     ChangeBgX(3, 0x1000, 2);
     ChangeBgY(3, 0x2800, 1);
-    gUnknown_203F450->var_4004 = 0;
-    gUnknown_203F450->var_4005 = 3;
+    sResources->grassAnimCounterLo = 0;
+    sResources->grassAnimCounterHi = 3;
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
 }
 
-void TeachyTvLoadGraphic(void)
+static void TeachyTvLoadGraphic(void)
 {
     u16 src = RGB_BLACK;
     reset_temp_tile_data_buffers();
     decompress_and_copy_tile_data_to_vram(1, gUnknown_8E86240, 0, 0, 0);
-    LZDecompressWram(gUnknown_8E86BE8, gUnknown_203F450->buffer1);
-    LZDecompressWram(gUnknown_8E86D6C, gUnknown_203F450->buffer4);
+    LZDecompressWram(gUnknown_8E86BE8, sResources->buffer1);
+    LZDecompressWram(gUnknown_8E86D6C, sResources->buffer4);
     LoadCompressedPalette(gUnknown_8E86F98, 0, 0x80);
     LoadPalette(&src, 0, sizeof(src));
     LoadSpritePalette(&gUnknown_83A5348);
-    TeachyTvLoadBg3Map(gUnknown_203F450->buffer3);
+    TeachyTvLoadBg3Map(sResources->buffer3);
 }
 
-void TeachyTvCreateAndRenderRbox(void)
+static void TeachyTvCreateAndRenderRbox(void)
 {
     InitWindows(gTeachyTvWindowTemplateArray);
     DeactivateAllTextPrinters();
@@ -548,14 +562,14 @@ void TeachyTvCreateAndRenderRbox(void)
     CopyWindowToVram(0, 2);
 }
 
-u8 TeachyTvSetupWindow(void)
+static u8 TeachyTvSetupWindow(void)
 {
-    gMultiuseListMenuTemplate = gTeachyTvListMenuTemplateArray;
+    gMultiuseListMenuTemplate = sListMenuTemplate;
     gMultiuseListMenuTemplate.windowId = 1;
     gMultiuseListMenuTemplate.moveCursorFunc = TeachyTvAudioByInput;
     if (!CheckBagHasItem(ITEM_TM_CASE, 1))
     {
-        gMultiuseListMenuTemplate.items = gTeachyTvListMenuItemArray2;
+        gMultiuseListMenuTemplate.items = sListMenuItems_NoTMCase;
         gMultiuseListMenuTemplate.totalItems = 5;
         gMultiuseListMenuTemplate.maxShowed = 5;
         gMultiuseListMenuTemplate.upText_Y = (gMultiuseListMenuTemplate.upText_Y + 8) & 0xF;
@@ -567,35 +581,35 @@ u8 TeachyTvSetupWindow(void)
     );
 }
 
-void TeachyTvSetupScrollIndicatorArrowPair(void)
+static void TeachyTvSetupScrollIndicatorArrowPair(void)
 {
     if (!CheckBagHasItem(ITEM_TM_CASE, 1))
     {
-        struct TeachyTvBuf * temp = gUnknown_203F450;
-        temp->var_4007 = 0xFF;
+        struct TeachyTvBuf * temp = sResources;
+        temp->scrollIndicatorArrowPairId = 0xFF;
     }
     else
     {
-        gUnknown_203F450->var_4007 = AddScrollIndicatorArrowPair(&gTeachyTvScrollIndicatorArrowPairTemplateArray, &(gTeachyTV_StaticResources.scrollOffset));
+        sResources->scrollIndicatorArrowPairId = AddScrollIndicatorArrowPair(&sScrollIndicatorArrowPair, &(gTeachyTV_StaticResources.scrollOffset));
     }
 }
 
-void TeachyTvRemoveScrollIndicatorArrowPair(void)
+static void TeachyTvRemoveScrollIndicatorArrowPair(void)
 {
-    if (gUnknown_203F450->var_4007 != 0xFF)
+    if (sResources->scrollIndicatorArrowPairId != 0xFF)
     {
-        RemoveScrollIndicatorArrowPair(gUnknown_203F450->var_4007);
-        gUnknown_203F450->var_4007 = 0xFF;
+        RemoveScrollIndicatorArrowPair(sResources->scrollIndicatorArrowPairId);
+        sResources->scrollIndicatorArrowPairId = 0xFF;
     }
 }
 
-void TeachyTvAudioByInput(s32 notUsed, bool8 play, struct ListMenu *notUsedAlt)
+static void TeachyTvAudioByInput(s32 notUsed, bool8 play, struct ListMenu *notUsedAlt)
 {
     if (play != TRUE)
         PlaySE(SE_SELECT);
 }
 
-void TeachyTvInitIo(void)
+static void TeachyTvInitIo(void)
 {
     SetGpuReg(REG_OFFSET_WININ, 0x3F);
     SetGpuReg(REG_OFFSET_WINOUT, 0x1F);
@@ -603,7 +617,7 @@ void TeachyTvInitIo(void)
     SetGpuReg(REG_OFFSET_BLDY, 0x5);
 }
 
-u8 TeachyTvSetupObjEventAndOam(void)
+static u8 TeachyTvSetupObjEventAndOam(void)
 {
     u8 objId = AddPseudoEventObject(90, SpriteCallbackDummy, 0, 0, 8);
     gSprites[objId].oam.priority = 2;
@@ -611,7 +625,7 @@ u8 TeachyTvSetupObjEventAndOam(void)
     return objId;
 }
 
-void TeachyTvSetSpriteCoordsAndSwitchFrame(u8 objId, u16 x, u16 y, u8 frame)
+static void TeachyTvSetSpriteCoordsAndSwitchFrame(u8 objId, u16 x, u16 y, u8 frame)
 {
     gSprites[objId].pos2.x = x;
     gSprites[objId].pos2.y = y;
@@ -619,19 +633,19 @@ void TeachyTvSetSpriteCoordsAndSwitchFrame(u8 objId, u16 x, u16 y, u8 frame)
     StartSpriteAnim(&gSprites[objId], frame);
 }
 
-void TeachyTvSetWindowRegs(void)
+static void TeachyTvSetWindowRegs(void)
 {
     SetGpuReg(REG_OFFSET_WIN0V, 0xC64);
     SetGpuReg(REG_OFFSET_WIN0H, 0x1CD4);
 }
 
-void TeachyTvClearWindowRegs(void)
+static void TeachyTvClearWindowRegs(void)
 {
     SetGpuReg(REG_OFFSET_WIN0V, 0x0);
     SetGpuReg(REG_OFFSET_WIN0H, 0x0);
 }
 
-void TeachyTvBg2AnimController(void)
+static void TeachyTvBg2AnimController(void)
 {
     u16 * tilemapBuffer = GetBgTilemapBuffer(2);
     u8 i, j;
@@ -645,27 +659,29 @@ void TeachyTvBg2AnimController(void)
     schedule_bg_copy_tilemap_to_vram(2);
 }
 
-void TeachyTvSetupPostBattleWindowAndObj(u8 taskId)
+static void TeachyTvSetupPostBattleWindowAndObj(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     struct Sprite *objAddr = &gSprites[data[1]];
-    int op;
 
     ClearWindowTilemap(1);
     TeachyTvClearWindowRegs();
-    op = gTeachyTV_StaticResources.optionChosen;
-    if (op >= 0)
+    switch (gTeachyTV_StaticResources.whichScript)
     {
-        if (op <= 3)
-        {
-            TeachyTvSetSpriteCoordsAndSwitchFrame(data[1], 0x78, 0x38, 0);
-            ChangeBgX(3, 0x3000, 1);
-            ChangeBgY(3, 0x3000, 2);
-            gUnknown_203F450->var_4004 += 3;
-            gUnknown_203F450->var_4005 -= 3;
-        }
-        else if (op <= 5)
-            TeachyTvSetSpriteCoordsAndSwitchFrame(data[1], 0x78, 0x38, 0);
+    case TTVSCR_BATTLE:
+    case TTVSCR_STATUS:
+    case TTVSCR_MATCHUPS:
+    case TTVSCR_CATCHING:
+        TeachyTvSetSpriteCoordsAndSwitchFrame(data[1], 0x78, 0x38, 0);
+        ChangeBgX(3, 0x3000, 1);
+        ChangeBgY(3, 0x3000, 2);
+        sResources->grassAnimCounterLo += 3;
+        sResources->grassAnimCounterHi -= 3;
+        break;
+    case TTVSCR_TMS:
+    case TTVSCR_REGISTER:
+        TeachyTvSetSpriteCoordsAndSwitchFrame(data[1], 0x78, 0x38, 0);
+        break;
     }
 
     data[4] = 0;
@@ -673,32 +689,32 @@ void TeachyTvSetupPostBattleWindowAndObj(u8 taskId)
     TeachyTvGrassAnimationMain(taskId, objAddr->pos2.x, objAddr->pos2.y, 0, 1);
 }
 
-void TeachyTvInitTextPrinter(const u8 *text)
+static void TeachyTvInitTextPrinter(const u8 *text)
 {
     gTextFlags.autoScroll = 0;
     AddTextPrinterParameterized2(0, 4, text, GetTextSpeedSetting(), 0, 1, 0xC, 3);
 }
 
-void TeachyTvFree(void)
+static void TeachyTvFree(void)
 {
-    Free(gUnknown_203F450);
-    gUnknown_203F450 = NULL;
+    Free(sResources);
+    sResources = NULL;
     FreeAllWindowBuffers();
 }
 
-void TeachyTvQuitBeginFade(u8 taskId)
+static void TeachyTvQuitBeginFade(u8 taskId)
 {
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
     gTasks[taskId].func = TeachyTvQuitFadeControlAndTaskDel;
 }
 
-void TeachyTvQuitFadeControlAndTaskDel(u8 taskId)
+static void TeachyTvQuitFadeControlAndTaskDel(u8 taskId)
 {
     if (!(gPaletteFade.active))
     {
-        if (gUnknown_203F450->savedCallback != NULL)
+        if (sResources->savedCallback != NULL)
         {
-            SetMainCallback2(gUnknown_203F450->savedCallback);
+            SetMainCallback2(sResources->savedCallback);
         }
         else
         {
@@ -710,7 +726,7 @@ void TeachyTvQuitFadeControlAndTaskDel(u8 taskId)
     }
 }
 
-void TeachyTvOptionListController(u8 taskId)
+static void TeachyTvOptionListController(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     s32 input;
@@ -737,7 +753,7 @@ void TeachyTvOptionListController(u8 taskId)
                 break;
             default:
                 PlaySE(SE_SELECT);
-                gTeachyTV_StaticResources.optionChosen = input;
+                gTeachyTV_StaticResources.whichScript = input;
                 DestroyListMenu(data[0], &gTeachyTV_StaticResources.scrollOffset, &gTeachyTV_StaticResources.selectedRow);
                 TeachyTvClearWindowRegs();
                 ClearWindowTilemap(1);
@@ -752,14 +768,14 @@ void TeachyTvOptionListController(u8 taskId)
     }
 }
 
-void TeachyTvClusFuncTransitionRenderBg2TeachyTvGraphicInitNpcPos(u8 taskId)
+static void TTVcmd_TransitionRenderBg2TeachyTvGraphicInitNpcPos(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     TeachyTvBg2AnimController();
     if (++data[2] > 63)
     {
-        CopyToBgTilemapBufferRect_ChangePalette(2, gUnknown_203F450->buffer4, 0, 0, 0x20, 0x20, 0x11);
-        TeachyTvSetSpriteCoordsAndSwitchFrame(((u8 *)data)[2], 8, 0x38, 7);
+        CopyToBgTilemapBufferRect_ChangePalette(2, sResources->buffer4, 0, 0, 0x20, 0x20, 0x11);
+        TeachyTvSetSpriteCoordsAndSwitchFrame(data[1], 8, 0x38, 7);
         schedule_bg_copy_tilemap_to_vram(2);
         data[2] = 0;
         ++data[3];
@@ -767,7 +783,7 @@ void TeachyTvClusFuncTransitionRenderBg2TeachyTvGraphicInitNpcPos(u8 taskId)
     }
 }
 
-void TeachyTvClusFuncClearBg2TeachyTvGraphic(u8 taskId)
+static void TTVcmd_ClearBg2TeachyTvGraphic(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     if (++data[2] == 134)
@@ -779,7 +795,7 @@ void TeachyTvClusFuncClearBg2TeachyTvGraphic(u8 taskId)
     }
 }
 
-void TeachyTvClusFuncNpcMoveAndSetupTextPrinter(u8 taskId)
+static void TTVcmd_NpcMoveAndSetupTextPrinter(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     struct Sprite * spriteAddr = &gSprites[data[1]];
@@ -789,7 +805,7 @@ void TeachyTvClusFuncNpcMoveAndSetupTextPrinter(u8 taskId)
         if (spriteAddr->pos2.x == 0x78)
         {
             StartSpriteAnim(&gSprites[data[1]], 0);
-            TeachyTvInitTextPrinter(gUnknown_841B83D);
+            TeachyTvInitTextPrinter(gTeachyTvText_PokeDudeSaysHello);
             data[2] = 0;
             ++data[3];
         }
@@ -798,83 +814,81 @@ void TeachyTvClusFuncNpcMoveAndSetupTextPrinter(u8 taskId)
     }   
 }
 
-void TeachyTvClusFuncIdleIfTextPrinterIsActive(u8 taskId)
+static void TTVcmd_IdleIfTextPrinterIsActive(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     if (!sub_80BF518(0))
         ++data[3];
 }
 
-void TeachyTvRenderMsgAndSwitchClusterFuncs(u8 taskId)
+static void TeachyTvRenderMsgAndSwitchClusterFuncs(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     if (JOY_NEW(B_BUTTON))
     {
-        u8 *offset = &(gUnknown_203F450->var_4006);
-        u32 zero = 0;
-        offset[0] = 1;
-        TeachyTvSetSpriteCoordsAndSwitchFrame(*((char *)data + 2), 0, 0, 0);
+        sResources->grassAnimDisabled = 1;
+        TeachyTvSetSpriteCoordsAndSwitchFrame(data[1], 0, 0, 0);
         FillWindowPixelBuffer(0, 0xCC);
         CopyWindowToVram(0, 2);
         TeachyTvClearBg1EndGraphicText();
-        data[2] = zero;
-        data[3] = zero;
-        gTasks[taskId].func = TeachyTvBackToOptionList;
+        data[2] = 0;
+        data[3] = 0;
+        gTasks[taskId].func = TTVcmd_End;
     }
     else
     {
         static void (* const * const array[])(u8) =
         {
-            gTeachyTvFuncCluster0,
-            gTeachyTvFuncCluster1,
-            gTeachyTvFuncCluster2,
-            gTeachyTvFuncCluster3,
-            gTeachyTvFuncCluster4,
-            gTeachyTvFuncCluster5,
+            sBattleScript,
+            sStatusScript,
+            sMatchupsScript,
+            sCatchingScript,
+            sTMsScript,
+            sRegisterKeyItemScript,
         };
-        void (*const *cluster)(u8) = array[gTeachyTV_StaticResources.optionChosen];
+        void (*const *cluster)(u8) = array[gTeachyTV_StaticResources.whichScript];
         cluster[data[3]](taskId);
     }
 }
 
-void TeachyTvClusFuncTextPrinterSwitchStringByOptionChosen(u8 taskId)
+static void TTVcmd_TextPrinterSwitchStringByOptionChosen(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     static const u8 *const texts[] = {
-        gUnknown_841B8BF,
-        gUnknown_841BB40,
-        gUnknown_841BE76,
-        gUnknown_841C23B,
-        gUnknown_841C459,
-        gUnknown_841C82A,
+        gTeachyTvText_BattleScript1,
+        gTeachyTvText_StatusScript1,
+        gTeachyTvText_MatchupsScript1,
+        gTeachyTvText_CatchingScript1,
+        gTeachyTvText_TMsScript1,
+        gTeachyTvText_RegisterScript1,
     };
-    TeachyTvInitTextPrinter(texts[gTeachyTV_StaticResources.optionChosen]);
+    TeachyTvInitTextPrinter(texts[gTeachyTV_StaticResources.whichScript]);
     ++data[3];
 }
 
-void TeachyTvClusFuncTextPrinterSwitchStringByOptionChosen2(u8 taskId)
+static void TTVcmd_TextPrinterSwitchStringByOptionChosen2(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     static const u8 *const texts[] =
     {
-        gUnknown_841BA41,
-        gUnknown_841BD10,
-        gUnknown_841C0AF,
-        gUnknown_841C384,
-        gUnknown_841C7B4,
-        gUnknown_841C994,
+        gTeachyTvText_BattleScript2,
+        gTeachyTvText_StatusScript2,
+        gTeachyTvText_MatchupsScript2,
+        gTeachyTvText_CatchingScript2,
+        gTeachyTvText_TMsScript2,
+        gTeachyTvText_RegisterScript2,
     };
-    TeachyTvInitTextPrinter(texts[gTeachyTV_StaticResources.optionChosen]);
+    TeachyTvInitTextPrinter(texts[gTeachyTV_StaticResources.whichScript]);
     ++data[3];
 }
 
-const u16 gUnknown_8479590[] = 
+static const u16 gUnknown_8479590[] = 
 {
     0xD1, 0xD2, 0xD3, 0xD4, 0xD5, 0xD6, 0xD7, 0xD8,
     0xE1, 0xE2, 0xE3, 0xE4, 0xE5, 0xE6, 0xE7, 0xE8,
 };
 
-const struct Subsprite gTeachyTvSubspriteArray[] = 
+static const struct Subsprite gTeachyTvSubspriteArray[] = 
 {
     {
         .x = -0x8,
@@ -894,7 +908,7 @@ const struct Subsprite gTeachyTvSubspriteArray[] =
     },
 };
 
-const struct SubspriteTable gTeachyTvSubspriteTableArray[] = 
+static const struct SubspriteTable gTeachyTvSubspriteTableArray[] = 
 {
     {
         .subspriteCount = 0,
@@ -906,7 +920,7 @@ const struct SubspriteTable gTeachyTvSubspriteTableArray[] =
     },
 };
 
-const u8 gTeachyTvGrassAnimArray[] = 
+static const u8 gTeachyTvGrassAnimArray[] = 
 {
     0, 0, 1, 1, 1, 1, 1, 1,
     1, 1, 1, 1, 1, 1, 0, 0,
@@ -928,14 +942,14 @@ const u8 gTeachyTvGrassAnimArray[] =
     1, 1, 1, 1, 1, 1, 0, 0,
 };
 
-void TeachyTvClusFuncIdleIfTextPrinterIsActive2(u8 taskId)
+static void TTVcmd_IdleIfTextPrinterIsActive2(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     if (!sub_80BF518(0))
         ++data[3];
 }
 
-void TeachyTvClusFuncEraseTextWindowIfKeyPressed(u8 taskId)
+static void TTVcmd_EraseTextWindowIfKeyPressed(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     if (JOY_NEW(A_BUTTON | B_BUTTON))
@@ -946,7 +960,7 @@ void TeachyTvClusFuncEraseTextWindowIfKeyPressed(u8 taskId)
     }
 }
 
-void TeachyTvClusFuncStartAnimNpcWalkIntoGrass(u8 taskId)
+static void TTVcmd_StartAnimNpcWalkIntoGrass(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     StartSpriteAnim(&gSprites[data[1]], 5);
@@ -956,14 +970,14 @@ void TeachyTvClusFuncStartAnimNpcWalkIntoGrass(u8 taskId)
     ++data[3];
 }
 
-void TeachyTvClusFuncDudeMoveUp(u8 taskId)
+static void TTVcmd_DudeMoveUp(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     struct Sprite *obj = &gSprites[data[1]];
     ChangeBgY(3, 0x100, 2);
     if (!(++data[2] & 0xF))
     {
-        --gUnknown_203F450->var_4005;
+        --sResources->grassAnimCounterHi;
         TeachyTvGrassAnimationMain(taskId, obj->pos2.x, obj->pos2.y, 0, 0);
     }
     if (data[2] == 48)
@@ -976,13 +990,13 @@ void TeachyTvClusFuncDudeMoveUp(u8 taskId)
     }
 }
 
-void TeachyTvClusFuncDudeMoveRight(u8 taskId)
+static void TTVcmd_DudeMoveRight(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     struct Sprite *obj = &gSprites[data[1]];
     ChangeBgX(3, 0x100, 1);
     if (!(++data[2] & 0xF))
-        ++gUnknown_203F450->var_4004;
+        ++sResources->grassAnimCounterLo;
     if (!((data[2] + 8) & 0xF))
         TeachyTvGrassAnimationMain(taskId, obj->pos2.x + 8, obj->pos2.y, 0, 0);
     if (data[2] == 0x30)
@@ -995,7 +1009,7 @@ void TeachyTvClusFuncDudeMoveRight(u8 taskId)
     }
 }
 
-void TeachyTvClusFuncDudeTurnLeft(u8 taskId)
+static void TTVcmd_DudeTurnLeft(u8 taskId)
 {
 
     s16 *data = gTasks[taskId].data;
@@ -1007,7 +1021,7 @@ void TeachyTvClusFuncDudeTurnLeft(u8 taskId)
     TeachyTvGrassAnimationMain(taskId, objAddr->pos2.x, objAddr->pos2.y, 0, 0);
 }
 
-void TeachyTvClusFuncDudeMoveLeft(u8 taskId)
+static void TTVcmd_DudeMoveLeft(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     struct Sprite *objAddr = &gSprites[data[1]];
@@ -1020,12 +1034,12 @@ void TeachyTvClusFuncDudeMoveLeft(u8 taskId)
         --objAddr->pos2.x;
 }
 
-void TeachyTvClusFuncRenderAndRemoveBg1EndGraphic(u8 taskId)
+static void TTVcmd_RenderAndRemoveBg1EndGraphic(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     if (!data[2])
     {
-        CopyToBgTilemapBufferRect_ChangePalette(1, gUnknown_8479590, 0x14, 0xA, 8, 2, 0x11);
+        CopyToBgTilemapBufferRect_ChangePalette(1, gUnknown_8479590, 20, 10, 8, 2, 0x11);
         schedule_bg_copy_tilemap_to_vram(1);
     }
     if (++data[2] > 126)
@@ -1036,13 +1050,13 @@ void TeachyTvClusFuncRenderAndRemoveBg1EndGraphic(u8 taskId)
     }
 }
 
-void TeachyTvClearBg1EndGraphicText(void)
+static void TeachyTvClearBg1EndGraphicText(void)
 {
-    FillBgTilemapBufferRect_Palette0(1, 0, 0x14, 0xA, 8, 2);
+    FillBgTilemapBufferRect_Palette0(1, 0, 20, 10, 8, 2);
     schedule_bg_copy_tilemap_to_vram(1);
 }
 
-void TeachyTvBackToOptionList(u8 taskId)
+static void TTVcmd_End(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     if (data[2] == 0)
@@ -1062,53 +1076,54 @@ void TeachyTvBackToOptionList(u8 taskId)
         ChangeBgY(3, 0x0, 0);
         ChangeBgX(3, 0x1000, 2);
         ChangeBgY(3, 0x2800, 1);
-        gUnknown_203F450->var_4004 = 0;
-        gUnknown_203F450->var_4005 = 3;
-        gUnknown_203F450->var_4006 = 0;
+        sResources->grassAnimCounterLo = 0;
+        sResources->grassAnimCounterHi = 3;
+        sResources->grassAnimDisabled = 0;
     }
 }
 
-void TeachyTvClusFuncTaskBattleOrFadeByOptionChosen(u8 taskId)
+static void TTVcmd_TaskBattleOrFadeByOptionChosen(u8 taskId)
 {
-    int op = gTeachyTV_StaticResources.optionChosen;
-    if (op >= 0)
+    switch (gTeachyTV_StaticResources.whichScript)
     {
-        if (op <= 3)
-        {
-            TeachyTvPrepBattle(taskId);
-        }
-        else if (op <= 5)
-        {
-            gUnknown_203F450->savedCallback = TeachyTvSetupBagItemsByOptionChosen;
-            TeachyTvQuitBeginFade(taskId);
-        }
+    case TTVSCR_BATTLE:
+    case TTVSCR_STATUS:
+    case TTVSCR_MATCHUPS:
+    case TTVSCR_CATCHING:
+        TeachyTvPrepBattle(taskId);
+        break;
+    case TTVSCR_TMS:
+    case TTVSCR_REGISTER:
+        sResources->savedCallback = TeachyTvSetupBagItemsByOptionChosen;
+        TeachyTvQuitBeginFade(taskId);
+        break;
     }
 }
 
-void TeachyTvSetupBagItemsByOptionChosen(void)
+static void TeachyTvSetupBagItemsByOptionChosen(void)
 {
-    if (gTeachyTV_StaticResources.optionChosen == 4)
+    if (gTeachyTV_StaticResources.whichScript == TTVSCR_TMS)
         sub_810B108(10);
     else
         sub_810B108(9);
 }
 
-void TeachyTvPostBattleFadeControl(u8 taskId)
+static void TeachyTvPostBattleFadeControl(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     if (!(gPaletteFade.active))
     {
-        data[3] = gTeachyTvSwitchFuncArray[gTeachyTV_StaticResources.optionChosen];
+        data[3] = sWhereToReturnToFromBattle[gTeachyTV_StaticResources.whichScript];
         gTasks[taskId].func = TeachyTvRenderMsgAndSwitchClusterFuncs;
     }
 }
 
-void TeachyTvGrassAnimationMain(u8 taskId, s16 x, s16 y, u8 subpriority, bool8 mode)
+static void TeachyTvGrassAnimationMain(u8 taskId, s16 x, s16 y, u8 subpriority, bool8 mode)
 {
     struct Sprite *obj;
     u8 spriteId;
 
-    if (gUnknown_203F450->var_4006 != 1 && TeachyTvGrassAnimationCheckIfNeedsToGenerateGrassObj(x - 0x10, y))
+    if (sResources->grassAnimDisabled != 1 && TeachyTvGrassAnimationCheckIfNeedsToGenerateGrassObj(x - 0x10, y))
     {
         spriteId = CreateSprite(gUnknown_83A0010[4], 0, 0, subpriority);
         obj = &gSprites[spriteId];
@@ -1130,13 +1145,13 @@ void TeachyTvGrassAnimationMain(u8 taskId, s16 x, s16 y, u8 subpriority, bool8 m
     }
 }
 
-void TeachyTvGrassAnimationObjCallback(struct Sprite *sprite)
+static void TeachyTvGrassAnimationObjCallback(struct Sprite *sprite)
 {
     s16 diff1, diff2;
     s16 *data = gTasks[sprite->data[0]].data;
     struct Sprite *objAddr = &gSprites[data[1]];
 
-    if (gUnknown_203F450->var_4006 == 1)
+    if (sResources->grassAnimDisabled == 1)
         DestroySprite(sprite);
     else
     {
@@ -1144,8 +1159,8 @@ void TeachyTvGrassAnimationObjCallback(struct Sprite *sprite)
             sprite->subspriteTableNum = 1;
         else
             sprite->subspriteTableNum = 0;
-        sprite->pos2.x += (u16)data[4];
-        sprite->pos2.y += (u16)data[5];
+        sprite->pos2.x += data[4];
+        sprite->pos2.y += data[5];
         if (sprite->animEnded)
         {
             sprite->subpriority = 0;
@@ -1157,7 +1172,7 @@ void TeachyTvGrassAnimationObjCallback(struct Sprite *sprite)
     }
 }
 
-u8 TeachyTvGrassAnimationCheckIfNeedsToGenerateGrassObj(s16 x, s16 y)
+static u8 TeachyTvGrassAnimationCheckIfNeedsToGenerateGrassObj(s16 x, s16 y)
 {
     const u8 * arr;
     struct TeachyTvBuf *ptr;
@@ -1165,21 +1180,21 @@ u8 TeachyTvGrassAnimationCheckIfNeedsToGenerateGrassObj(s16 x, s16 y)
     if ((x < 0) || (y < 0))
         return 0;
     arr = gTeachyTvGrassAnimArray;
-    high = ((y >> 4) + gUnknown_203F450->var_4005) << 4;
-    low = ((x >> 4) + gUnknown_203F450->var_4004);
+    high = ((y >> 4) + sResources->grassAnimCounterHi) << 4;
+    low = ((x >> 4) + sResources->grassAnimCounterLo);
     return arr[high+low];
 }
 
-void TeachyTvPrepBattle(u8 taskId)
+static void TeachyTvPrepBattle(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     TeachyTvFree();
-    gSpecialVar_0x8004 = gTeachyTV_StaticResources.optionChosen;
+    gSpecialVar_0x8004 = gTeachyTV_StaticResources.whichScript;
     gMain.savedCallback = TeachyTvRestorePlayerPartyCallback;
     SavePlayerParty();
     sub_8159F40();
     PlayMapChosenOrBattleBGM(MUS_DUMMY);
-    if (!gTeachyTV_StaticResources.optionChosen)
+    if (gTeachyTV_StaticResources.whichScript == TTVSCR_BATTLE)
         data[6] = 9;
     else
         data[6] = 8;
@@ -1187,7 +1202,7 @@ void TeachyTvPrepBattle(u8 taskId)
     gTasks[taskId].func = TeachyTvPreBattleAnimAndSetBattleCallback;
 }
 
-void TeachyTvPreBattleAnimAndSetBattleCallback(u8 taskId)
+static void TeachyTvPreBattleAnimAndSetBattleCallback(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     switch (data[7])
@@ -1206,17 +1221,17 @@ void TeachyTvPreBattleAnimAndSetBattleCallback(u8 taskId)
     }
 }
 
-void TeachyTvRestorePlayerPartyCallback(void)
+static void TeachyTvRestorePlayerPartyCallback(void)
 {
     LoadPlayerParty();
-    if (gUnknown_2023E8A == 3)
-        sub_815AC20();
+    if (gBattleOutcome == B_OUTCOME_DREW)
+        SetTeachyTvControllerModeToResume();
     else
         PlayNewMapMusic(BGM_FRLG_FOLLOW_ME);
     CB2_ReturnToTeachyTV();
 }
 
-void TeachyTvLoadBg3Map(u16 *buffer)
+static void TeachyTvLoadBg3Map(u16 *buffer)
 {
     u16 * bgTilesBuffer;
     u8 * mapTilesRowBuffer;
@@ -1281,7 +1296,7 @@ void TeachyTvLoadBg3Map(u16 *buffer)
     Free(blockIndicesBuffer);
 }
 
-void TeachyTvLoadMapTilesetToBuffer(struct Tileset *ts, u8 *dstBuffer, u16 size)
+static void TeachyTvLoadMapTilesetToBuffer(struct Tileset *ts, u8 *dstBuffer, u16 size)
 {
     if (ts)
     {
@@ -1292,7 +1307,7 @@ void TeachyTvLoadMapTilesetToBuffer(struct Tileset *ts, u8 *dstBuffer, u16 size)
     }
 }
 
-void TeachyTvPushBackNewMapPalIndexArrayEntry(const struct MapData *mStruct, u16 *buf1, u8 *palIndexArray, u16 mapEntry, u16 offset)
+static void TeachyTvPushBackNewMapPalIndexArrayEntry(const struct MapData *mStruct, u16 *buf1, u8 *palIndexArray, u16 mapEntry, u16 offset)
 {
     u16 * metaTileEntryAddr = mapEntry <= 0x27F ? &((u16*)(mStruct->primaryTileset->metatiles))[8 * mapEntry] : &((u16*)(mStruct->secondaryTileset->metatiles))[8 * (mapEntry - 0x280)];
     buf1[0] = (TeachyTvComputePalIndexArrayEntryByMetaTile(palIndexArray, metaTileEntryAddr[0]) << 12) + 4 * offset;
@@ -1301,7 +1316,7 @@ void TeachyTvPushBackNewMapPalIndexArrayEntry(const struct MapData *mStruct, u16
     buf1[33] = (TeachyTvComputePalIndexArrayEntryByMetaTile(palIndexArray, metaTileEntryAddr[3]) << 12) + 4 * offset + 3;
 }
 
-void TeachyTvComputeMapTilesFromTilesetAndMetaTiles(u16 *metaTilesArray, u8 *blockBuf, u8 *tileset)
+static void TeachyTvComputeMapTilesFromTilesetAndMetaTiles(u16 *metaTilesArray, u8 *blockBuf, u8 *tileset)
 {
     TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(blockBuf, &tileset[0x20 * (*metaTilesArray & 0x3FF)], (*metaTilesArray >> 10) & 3);
     TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(blockBuf, &tileset[0x20 * (metaTilesArray[4] & 0x3FF)], (metaTilesArray[4] >> 10) & 3);
@@ -1314,7 +1329,7 @@ void TeachyTvComputeMapTilesFromTilesetAndMetaTiles(u16 *metaTilesArray, u8 *blo
     TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(blockBuf, &tileset[0x20 * (metaTilesArray[7] & 0x3FF)], (metaTilesArray[7] >> 10) & 3);
 }
 
-void TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(u8 *blockBuf, u8 *tileset, u8 metaTile)
+static void TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(u8 *blockBuf, u8 *tileset, u8 metaTile)
 {
     u8 i, j;
     u8 * buffer = AllocZeroed(0x20);
@@ -1350,7 +1365,7 @@ void TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(u8 *blockBuf, u8 *
     Free(buffer);
 }
 
-u16 TeachyTvComputePalIndexArrayEntryByMetaTile(u8 *palIndexArrayBuf, u16 metaTile)
+static u16 TeachyTvComputePalIndexArrayEntryByMetaTile(u8 *palIndexArrayBuf, u16 metaTile)
 {
     u16 i;
     int firstEntry;
@@ -1382,7 +1397,7 @@ u16 TeachyTvComputePalIndexArrayEntryByMetaTile(u8 *palIndexArrayBuf, u16 metaTi
     return (0xF - i);
 }
 
-void TeachyTvLoadMapPalette(const struct MapData * mStruct, const u8 * palIndexArray)
+static void TeachyTvLoadMapPalette(const struct MapData * mStruct, const u8 * palIndexArray)
 {
     u8 i;
     const struct Tileset * ts;

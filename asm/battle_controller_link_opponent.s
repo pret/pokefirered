@@ -6218,15 +6218,15 @@ RecordedOpponentHandleCmd55: @ 803D914
 	ldrb r2, [r0]
 	cmp r2, 0x3
 	bne _0803D93C
-	ldr r0, _0803D938 @ =gUnknown_2023E8A
+	ldr r0, _0803D938 @ =gBattleOutcome
 	strb r2, [r0]
 	b _0803D944
 	.align 2, 0
 _0803D930: .4byte gUnknown_2022BC4
 _0803D934: .4byte gActiveBattler
-_0803D938: .4byte gUnknown_2023E8A
+_0803D938: .4byte gBattleOutcome
 _0803D93C:
-	ldr r0, _0803D968 @ =gUnknown_2023E8A
+	ldr r0, _0803D968 @ =gBattleOutcome
 	movs r1, 0x3
 	eors r1, r2
 	strb r1, [r0]
@@ -6246,7 +6246,7 @@ _0803D944:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803D968: .4byte gUnknown_2023E8A
+_0803D968: .4byte gBattleOutcome
 _0803D96C: .4byte gUnknown_3004FE0
 _0803D970: .4byte gActiveBattler
 _0803D974: .4byte sub_802F6A8

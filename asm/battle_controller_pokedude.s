@@ -6700,7 +6700,7 @@ sub_81597B8: @ 81597B8
 	thumb_func_start sub_81597C4
 sub_81597C4: @ 81597C4
 	push {r4,lr}
-	ldr r2, _08159808 @ =gUnknown_2023E8A
+	ldr r2, _08159808 @ =gBattleOutcome
 	ldr r1, _0815980C @ =gUnknown_2022BC4
 	ldr r4, _08159810 @ =gActiveBattler
 	ldrb r0, [r4]
@@ -6731,7 +6731,7 @@ _08159800:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08159808: .4byte gUnknown_2023E8A
+_08159808: .4byte gBattleOutcome
 _0815980C: .4byte gUnknown_2022BC4
 _08159810: .4byte gActiveBattler
 _08159814: .4byte gBattleTypeFlags

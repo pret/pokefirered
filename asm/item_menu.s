@@ -6383,7 +6383,7 @@ sub_810B180: @ 810B180
 _0810B198: .4byte gMain
 _0810B19C:
 	bl sub_810AECC
-	bl sub_815AC20
+	bl SetTeachyTvControllerModeToResume
 	ldr r0, _0810B1C4 @ =gUnknown_203AD10
 	ldr r1, [r0]
 	ldr r0, _0810B1C8 @ =CB2_ReturnToTeachyTV

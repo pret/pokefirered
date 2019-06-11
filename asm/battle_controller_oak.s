@@ -7435,7 +7435,7 @@ sub_80EB274: @ 80EB274
 	thumb_func_start sub_80EB280
 sub_80EB280: @ 80EB280
 	push {r4,lr}
-	ldr r2, _080EB2C4 @ =gUnknown_2023E8A
+	ldr r2, _080EB2C4 @ =gBattleOutcome
 	ldr r1, _080EB2C8 @ =gUnknown_2022BC4
 	ldr r4, _080EB2CC @ =gActiveBattler
 	ldrb r0, [r4]
@@ -7466,7 +7466,7 @@ _080EB2BC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080EB2C4: .4byte gUnknown_2023E8A
+_080EB2C4: .4byte gBattleOutcome
 _080EB2C8: .4byte gUnknown_2022BC4
 _080EB2CC: .4byte gActiveBattler
 _080EB2D0: .4byte gBattleTypeFlags

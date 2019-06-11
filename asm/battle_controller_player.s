@@ -10671,7 +10671,7 @@ _08033A74: .4byte gUnknown_2023FFC
 	thumb_func_start PlayerHandlecmd55
 PlayerHandlecmd55: @ 8033A78
 	push {r4,lr}
-	ldr r2, _08033AB0 @ =gUnknown_2023E8A
+	ldr r2, _08033AB0 @ =gBattleOutcome
 	ldr r1, _08033AB4 @ =gUnknown_2022BC4
 	ldr r4, _08033AB8 @ =gActiveBattler
 	ldrb r0, [r4]
@@ -10695,7 +10695,7 @@ PlayerHandlecmd55: @ 8033A78
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08033AB0: .4byte gUnknown_2023E8A
+_08033AB0: .4byte gBattleOutcome
 _08033AB4: .4byte gUnknown_2022BC4
 _08033AB8: .4byte gActiveBattler
 _08033ABC: .4byte gUnknown_3004FE0

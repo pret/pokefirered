@@ -4878,7 +4878,7 @@ sub_8120FB0: @ 8120FB0
 	push {lr}
 	bl FreeRestoreBattleData
 	bl LoadPlayerParty
-	bl sub_815AC20
+	bl SetTeachyTvControllerModeToResume
 	ldr r0, _08120FC8 @ =CB2_ReturnToTeachyTV
 	bl SetMainCallback2
 	pop {r0}

@@ -1940,7 +1940,7 @@ sub_8081668: @ 8081668
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0808170A
-	ldr r0, _080816C4 @ =gUnknown_2023E8A
+	ldr r0, _080816C4 @ =gBattleOutcome
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _080816C8
@@ -1953,7 +1953,7 @@ _080816B4: .4byte 0x0000ffdf
 _080816B8: .4byte gSpecialVar_0x8004
 _080816BC: .4byte gUnknown_300502C
 _080816C0: .4byte gWirelessCommType
-_080816C4: .4byte gUnknown_2023E8A
+_080816C4: .4byte gBattleOutcome
 _080816C8:
 	ldr r4, _080816E8 @ =gLinkPlayers
 	bl GetMultiplayerId

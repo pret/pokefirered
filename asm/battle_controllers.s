@@ -2176,7 +2176,7 @@ EmitPrintString: @ 800E2D4
 	ldr r2, _0800E3B4 @ =gUnknown_2022874
 	movs r0, 0x10
 	strb r0, [r2]
-	ldr r0, _0800E3B8 @ =gUnknown_2023E8A
+	ldr r0, _0800E3B8 @ =gBattleOutcome
 	ldrb r0, [r0]
 	strb r0, [r2, 0x1]
 	strb r1, [r2, 0x2]
@@ -2277,7 +2277,7 @@ _0800E378:
 	bx r0
 	.align 2, 0
 _0800E3B4: .4byte gUnknown_2022874
-_0800E3B8: .4byte gUnknown_2023E8A
+_0800E3B8: .4byte gBattleOutcome
 _0800E3BC: .4byte gCurrentMove
 _0800E3C0: .4byte gUnknown_2023D4C
 _0800E3C4: .4byte gUnknown_2023D68

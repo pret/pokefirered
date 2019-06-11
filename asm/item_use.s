@@ -1241,7 +1241,7 @@ sub_80A194C: @ 80A194C
 	push {lr}
 	ldr r1, _080A195C @ =UseFameCheckerFromMenu
 	movs r0, 0
-	bl sub_815ABC4
+	bl InitTeachyTvController
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1263,7 +1263,7 @@ sub_80A1960: @ 80A1960
 	bl sub_80A1184
 	ldr r1, _080A1994 @ =CB2_ReturnToField
 	movs r0, 0
-	bl sub_815ABC4
+	bl InitTeachyTvController
 	adds r0, r4, 0
 	bl DestroyTask
 _080A1988:

@@ -1171,7 +1171,7 @@ static void Task_TMCaseDude_Playback(u8 taskId)
         if (data[8] < 21)
         {
             data[8] = 21;
-            sub_815AC20();
+            SetTeachyTvControllerModeToResume();
         }
     }
 

@@ -5890,7 +5890,7 @@ sub_80D7218: @ 80D7218
 	thumb_func_start LinkPartnerHandlecmd55
 LinkPartnerHandlecmd55: @ 80D7224
 	push {r4,lr}
-	ldr r2, _080D725C @ =gUnknown_2023E8A
+	ldr r2, _080D725C @ =gBattleOutcome
 	ldr r1, _080D7260 @ =gUnknown_2022BC4
 	ldr r4, _080D7264 @ =gActiveBattler
 	ldrb r0, [r4]
@@ -5914,7 +5914,7 @@ LinkPartnerHandlecmd55: @ 80D7224
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D725C: .4byte gUnknown_2023E8A
+_080D725C: .4byte gBattleOutcome
 _080D7260: .4byte gUnknown_2022BC4
 _080D7264: .4byte gActiveBattler
 _080D7268: .4byte gUnknown_3004FE0

@@ -115,25 +115,25 @@ extern const u8 gPokeDudeText_TMTypes[];
 extern const u8 gPokeDudeText_ReadTMDescription[];
 
 // teachy_tv
-extern const u8 gUnknown_841B7A4[];
-extern const u8 gUnknown_841B7BC[];
-extern const u8 gUnknown_841B7D6[];
-extern const u8 gUnknown_841B7EE[];
-extern const u8 gUnknown_841B807[];
-extern const u8 gUnknown_841B81B[];
-extern const u8 gUnknown_841B836[];
-extern const u8 gUnknown_841B83D[];
-extern const u8 gUnknown_841B8BF[];
-extern const u8 gUnknown_841BB40[];
-extern const u8 gUnknown_841BE76[];
-extern const u8 gUnknown_841C23B[];
-extern const u8 gUnknown_841C459[];
-extern const u8 gUnknown_841C82A[];
-extern const u8 gUnknown_841BA41[];
-extern const u8 gUnknown_841BD10[];
-extern const u8 gUnknown_841C0AF[];
-extern const u8 gUnknown_841C384[];
-extern const u8 gUnknown_841C7B4[];
-extern const u8 gUnknown_841C994[];
+extern const u8 gTeachyTvString_TeachBattle[];
+extern const u8 gTeachyTvString_StatusProblems[];
+extern const u8 gTeachyTvString_TypeMatchups[];
+extern const u8 gTeachyTvString_CatchPkmn[];
+extern const u8 gTeachyTvString_AboutTMs[];
+extern const u8 gTeachyTvString_RegisterItem[];
+extern const u8 gTeachyTvString_Cancel[];
+extern const u8 gTeachyTvText_PokeDudeSaysHello[];
+extern const u8 gTeachyTvText_BattleScript1[];
+extern const u8 gTeachyTvText_StatusScript1[];
+extern const u8 gTeachyTvText_MatchupsScript1[];
+extern const u8 gTeachyTvText_CatchingScript1[];
+extern const u8 gTeachyTvText_TMsScript1[];
+extern const u8 gTeachyTvText_RegisterScript1[];
+extern const u8 gTeachyTvText_BattleScript2[];
+extern const u8 gTeachyTvText_StatusScript2[];
+extern const u8 gTeachyTvText_MatchupsScript2[];
+extern const u8 gTeachyTvText_CatchingScript2[];
+extern const u8 gTeachyTvText_TMsScript2[];
+extern const u8 gTeachyTvText_RegisterScript2[];
 
 #endif //GUARD_STRINGS_H

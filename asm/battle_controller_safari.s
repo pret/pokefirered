@@ -1487,7 +1487,7 @@ sub_80DE048: @ 80DE048
 	thumb_func_start SafariHandleCmd55
 SafariHandleCmd55: @ 80DE054
 	push {r4,lr}
-	ldr r2, _080DE098 @ =gUnknown_2023E8A
+	ldr r2, _080DE098 @ =gBattleOutcome
 	ldr r1, _080DE09C @ =gUnknown_2022BC4
 	ldr r4, _080DE0A0 @ =gActiveBattler
 	ldrb r0, [r4]
@@ -1518,7 +1518,7 @@ _080DE090:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DE098: .4byte gUnknown_2023E8A
+_080DE098: .4byte gBattleOutcome
 _080DE09C: .4byte gUnknown_2022BC4
 _080DE0A0: .4byte gActiveBattler
 _080DE0A4: .4byte gBattleTypeFlags

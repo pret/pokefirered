@@ -178,11 +178,11 @@ _080CA748: .4byte gUnknown_8417FCC
 
 	thumb_func_start sub_80CA74C
 sub_80CA74C: @ 80CA74C
-	ldr r0, _080CA754 @ =gUnknown_2023E8A
+	ldr r0, _080CA754 @ =gBattleOutcome
 	ldrb r0, [r0]
 	bx lr
 	.align 2, 0
-_080CA754: .4byte gUnknown_2023E8A
+_080CA754: .4byte gBattleOutcome
 	thumb_func_end sub_80CA74C
 
 	thumb_func_start sub_80CA758

@@ -1,25 +1,25 @@
-gUnknown_841B7A4:: @ 841B7A4
+gTeachyTvString_TeachBattle:: @ 841B7A4
 	.string "Teach me how to battle.$"
 
-gUnknown_841B7BC:: @ 841B7BC
+gTeachyTvString_StatusProblems:: @ 841B7BC
 	.string "What are status problems?$"
 
-gUnknown_841B7D6:: @ 841B7D6
+gTeachyTvString_TypeMatchups:: @ 841B7D6
 	.string "What are type matchups?$"
 
-gUnknown_841B7EE:: @ 841B7EE
+gTeachyTvString_CatchPkmn:: @ 841B7EE
 	.string "I want to catch POKéMON.$"
 
-gUnknown_841B807:: @ 841B807
+gTeachyTvString_AboutTMs:: @ 841B807
 	.string "Teach me about TMs.$"
 
-gUnknown_841B81B:: @ 841B81B
+gTeachyTvString_RegisterItem:: @ 841B81B
 	.string "How do I register an item?$"
 
-gUnknown_841B836:: @ 841B836
+gTeachyTvString_Cancel:: @ 841B836
 	.string "CANCEL$"
 
-gUnknown_841B83D:: @ 841B83D
+gTeachyTvText_PokeDudeSaysHello:: @ 841B83D
 	.string "Hey, all you TRAINERS out there!\n"
 	.string "HELLO, TRAINERS!\p"
 	.string "……… ……… ………\p"
@@ -28,7 +28,7 @@ gUnknown_841B83D:: @ 841B83D
 	.string "It's me, the POKé DUDE!\p"
 	.string "$"
 
-gUnknown_841B8BF:: @ 841B8BF
+gTeachyTvText_BattleScript1:: @ 841B8BF
 	.string "Today, the POKé DUDE's here to\n"
 	.string "tell you about how you can battle\l"
 	.string "POKéMON!\p"
@@ -44,7 +44,7 @@ gUnknown_841B8BF:: @ 841B8BF
 	.string "Keep your eyes glued to the super\n"
 	.string "POKé DUDE SHOW!$"
 
-gUnknown_841BA41:: @ 841BA41
+gTeachyTvText_BattleScript2:: @ 841BA41
 	.string "Well, did you get that?\p"
 	.string "Even if your own POKéMON's HP\n"
 	.string "falls to zero, and it becomes\l"
@@ -55,7 +55,7 @@ gUnknown_841BA41:: @ 841BA41
 	.string "Remember, TRAINERS, a good deed\n"
 	.string "a day brings happiness to stay!$"
 
-gUnknown_841BB40:: @ 841BB40
+gTeachyTvText_StatusScript1:: @ 841BB40
 	.string "Today, the POKé DUDE's here to\n"
 	.string "tell you about status problems!\p"
 	.string "Status problems include poisoning,\n"
@@ -73,7 +73,7 @@ gUnknown_841BB40:: @ 841BB40
 	.string "Keep your eyes glued to the super\n"
 	.string "POKé DUDE SHOW!$"
 
-gUnknown_841BD10:: @ 841BD10
+gTeachyTvText_StatusScript2:: @ 841BD10
 	.string "Poisoning or paralysis don't go\n"
 	.string "away after a battle.\p"
 	.string "If a POKéMON is poisoned, it loses\n"
@@ -87,7 +87,7 @@ gUnknown_841BD10:: @ 841BD10
 	.string "Remember, TRAINERS, a good deed\n"
 	.string "a day brings happiness to stay!$"
 
-gUnknown_841BE76:: @ 841BE76
+gTeachyTvText_MatchupsScript1:: @ 841BE76
 	.string "Does everyone know about type\n"
 	.string "matchups?\p"
 	.string "POKéMON and their moves all\n"
@@ -110,7 +110,7 @@ gUnknown_841BE76:: @ 841BE76
 	.string "Keep your eyes glued to the super\n"
 	.string "POKé DUDE SHOW!$"
 
-gUnknown_841C0AF:: @ 841C0AF
+gTeachyTvText_MatchupsScript2:: @ 841C0AF
 	.string "Is it possible to launch an attack\n"
 	.string "that will inflict heavy damage?\p"
 	.string "Does the opposing POKéMON pose\n"
@@ -126,7 +126,7 @@ gUnknown_841C0AF:: @ 841C0AF
 	.string "Remember, a good deed a day\n"
 	.string "brings happiness to stay!$"
 
-gUnknown_841C23B:: @ 841C23B
+gTeachyTvText_CatchingScript1:: @ 841C23B
 	.string "Today, the POKé DUDE's going to\n"
 	.string "show you how to catch POKéMON!\p"
 	.string "Just imagine… A groovy POKéMON\n"
@@ -141,7 +141,7 @@ gUnknown_841C23B:: @ 841C23B
 	.string "Keep your eyes glued to the super\n"
 	.string "POKé DUDE SHOW!$"
 
-gUnknown_841C384:: @ 841C384
+gTeachyTvText_CatchingScript2:: @ 841C384
 	.string "If your first POKé BALL fails to\n"
 	.string "catch the POKéMON, don't give up!\p"
 	.string "Keep throwing POKé BALLS…\n"
@@ -150,7 +150,7 @@ gUnknown_841C384:: @ 841C384
 	.string "Remember, TRAINERS, a good deed\n"
 	.string "a day brings happiness to stay!$"
 
-gUnknown_841C459:: @ 841C459
+gTeachyTvText_TMsScript1:: @ 841C459
 	.string "Hey, everyone!\n"
 	.string "Do you all have TMs?\p"
 	.string "A TM, Technical Machine, is an\n"
@@ -187,13 +187,13 @@ gPokeDudeText_ReadTMDescription:: @ 841C693
 	.string "So, try using it on POKéMON with\n"
 	.string "arms that can throw punches!$"
 
-gUnknown_841C7B4:: @ 841C7B4
+gTeachyTvText_TMsScript2:: @ 841C7B4
 	.string "Wow, I talked a lot today!\n"
 	.string "All righty, be seeing you!\p"
 	.string "Remember, TRAINERS, a good deed\n"
 	.string "a day brings happiness to stay!$"
 
-gUnknown_841C82A:: @ 841C82A
+gTeachyTvText_RegisterScript1:: @ 841C82A
 	.string "A TRAINER's BAG has a bunch of\n"
 	.string "nifty, convenient features!\p"
 	.string "Take stuff in the KEY ITEMS\n"
@@ -208,7 +208,7 @@ gUnknown_841C82A:: @ 841C82A
 	.string "Keep your eyes glued to the sorta\n"
 	.string "super POKé DUDE SHOW!$"
 
-gUnknown_841C994:: @ 841C994
+gTeachyTvText_RegisterScript2:: @ 841C994
 	.string "And now, your TEACHY TV is\n"
 	.string "registered.\p"
 	.string "How do you use it?\n"

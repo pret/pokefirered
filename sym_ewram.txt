@@ -1638,12 +1638,8 @@ gUnknown_203F43C: @ 203F43C
 gUnknown_203F440: @ 203F440
 	.space 0x4
 
-gTeachyTV_StaticResources: @ 203F444
-	.space 12
-
-gUnknown_203F450: @ 203F450
-	.space 0x4
-
+	.align 2
+	.include "src/teachy_tv.o"
 	.align 2
 	.include "src/unk_815C980.o"
 	.align 2

@@ -14019,16 +14019,16 @@ gUnknown_8E861A8:: @ 8E861A8
 	.incbin "baserom.gba", 0xE861A8, 0x98
 
 gUnknown_8E86240:: @ 8E86240
-	.incbin "baserom.gba", 0xE86240, 0x9A8
+	.incbin "graphics/teachy_tv/tiles.4bpp.lz"
 
 gUnknown_8E86BE8:: @ 8E86BE8
-	.incbin "baserom.gba", 0xE86BE8, 0x184
+	.incbin "graphics/teachy_tv/bg1_tilemap.bin.lz"
 
 gUnknown_8E86D6C:: @ 8E86D6C
-	.incbin "baserom.gba", 0xE86D6C, 0x22C
+	.incbin "graphics/teachy_tv/bg2_tilemap.bin.lz"
 
 gUnknown_8E86F98:: @ 8E86F98
-	.incbin "baserom.gba", 0xE86F98, 0x78
+	.incbin "graphics/teachy_tv/palettes.gbapal.lz"
 
 gUnknown_8E87010:: @ 8E87010
 	.incbin "baserom.gba", 0xE87010, 0x18

@@ -19,6 +19,7 @@ PSSGFXDIR := graphics/pokemon_storage
 EVENTOBJGFXDIR := graphics/event_objects
 MISCGFXDIR := graphics/misc
 TEXTWINDOWGFXDIR := graphics/text_window
+TEACHYTVGFXDIR := graphics/teachy_tv
 
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
 contest_types := cool beauty cute smart tough
@@ -474,3 +475,6 @@ $(MISCGFXDIR)/unk_846B008.4bpp: %.4bpp: %.png
 
 $(TEXTWINDOWGFXDIR)/unk_8470B0C.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 19
+
+$(TEACHYTVGFXDIR)/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 233

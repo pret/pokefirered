@@ -1483,14 +1483,13 @@ gUnknown_203B0E4: @ 203B0E4
 gUnknown_203B0E8: @ 203B0E8
 	.space 0x4
 
-gUnknown_203B0EC: @ 203B0EC
-	.space 0x2
-
-gUnknown_203B0EE: @ 203B0EE
-	.space 0x2
-
+	.align 2
+	.include "src/help_system_812B1E0.o"
+	.align 2
 	.include "src/fame_checker.o"
+	.align 2
 	.include "src/oak_speech.o"
+	.align 2
 	.include "src/tm_case.o"
 
 gUnknown_203B130: @ 203B130

@@ -1,16 +1,32 @@
 #include "global.h"
 #include "event_data.h"
+#include "field_player_avatar.h"
+#include "help_system.h"
+#include "link.h"
+#include "overworld.h"
+#include "quest_log.h"
+#include "save.h"
+#include "save_location.h"
 #include "constants/maps.h"
 
 EWRAM_DATA u16 gUnknown_203B0EC = 0;
 EWRAM_DATA u8 gUnknown_203B0EE = 0;
 
+u8 gUnknown_3005E9C[4];
 u16 gUnknown_3005EA0;
 
 bool32 sub_812B27C(const u16 * mapIdxs);
+void sub_812B4B8(void);
+void sub_812B520(struct HelpSystemStruct_203F190_sub * a0, struct HelpSystemStruct_203F1AC * a1);
+void sub_812BF9C(struct HelpSystemStruct_203F190_sub * a0, struct HelpSystemStruct_203F1AC * a1);
+void sub_812BF74(const u8 *);
+
+// strings.h
+extern const u8 gUnknown_841DFAC[];
 
 extern const u16 gUnknown_845C594[]; // marts
 extern const u16 gUnknown_845C5BC[]; // gyms
+extern const u8 gUnknown_845C5CE[][3];
 
 void sub_812B1E0(u8 a0)
 {
@@ -73,3 +89,112 @@ bool32 sub_812B27C(const u16 * mapIdxs)
     return FALSE;
 }
 
+bool8 sub_812B2C4(void)
+{
+    u8 i, j;
+
+    for (i = 0; i < 16; i++)
+    {
+        for (j = 0; j < gUnknown_845C5CE[i][2]; j++)
+        {
+            if (
+                   gUnknown_845C5CE[i][0] == gSaveBlock1Ptr->location.mapGroup
+                && gUnknown_845C5CE[i][1] + j == gSaveBlock1Ptr->location.mapNum
+                && (i != 15 || FlagGet(FLAG_0x849) == TRUE)
+            )
+                return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+void sub_812B35C(void)
+{
+    sub_812B4B8();
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
+        HelpSystem_SetSomeVariable2(0x16);
+    else if (sub_812B2C4())
+        HelpSystem_SetSomeVariable2(0x15);
+    else if (is_light_level_8_or_9(gMapHeader.mapType))
+    {
+        if ((gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(PALLET_TOWN_PLAYERS_HOUSE_1F) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(PALLET_TOWN_PLAYERS_HOUSE_1F)) || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(PALLET_TOWN_PLAYERS_HOUSE_2F) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(PALLET_TOWN_PLAYERS_HOUSE_2F)))
+            HelpSystem_SetSomeVariable2(0x0E);
+        else if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(PALLET_TOWN_PROFESSOR_OAKS_LAB) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(PALLET_TOWN_PROFESSOR_OAKS_LAB))
+            HelpSystem_SetSomeVariable2(0x0F);
+        else if (IsCurMapPokeCenter() == TRUE)
+            HelpSystem_SetSomeVariable2(0x10);
+        else if (sub_812B25C() == TRUE)
+            HelpSystem_SetSomeVariable2(0x11);
+        else if (sub_812B26C() == TRUE)
+            HelpSystem_SetSomeVariable2(0x12);
+        else
+            HelpSystem_SetSomeVariable2(0x13);
+    }
+    else
+        HelpSystem_SetSomeVariable2(0x14);
+}
+
+bool8 sub_812B40C(void)
+{
+    if (gUnknown_203B0EE == 1)
+        return FALSE;
+
+    if (gSaveFileStatus != SAVE_STATUS_EMPTY && gSaveFileStatus != SAVE_STATUS_INVALID && FlagGet(FLAG_0x83C))
+        return FALSE;
+
+    FlagSet(FLAG_0x83C);
+    gUnknown_203B0EE = 1;
+    return TRUE;
+}
+
+bool8 sub_812B45C(void)
+{
+    if (gReceivedRemoteLinkPlayers == 1)
+        return FALSE;
+    return TRUE;
+}
+
+void sub_812B478(void)
+{
+    gUnknown_3005ECC = 0;
+}
+
+void sub_812B484(void)
+{
+    if (gUnknown_203ADFA != 2 && gUnknown_203ADFA != 3)
+    {
+        gUnknown_3005ECC = 1;
+        sub_812B4B8();
+    }
+}
+
+void sub_812B4AC(void)
+{
+    gUnknown_203F175 = 1;
+}
+
+void sub_812B4B8(void)
+{
+    gUnknown_203F175 = 0;
+}
+
+void sub_812B4C4(struct HelpSystemStruct_203F190_sub * a0, struct HelpSystemStruct_203F1AC * a1)
+{
+    a0->field_00 = a1;
+    a0->field_04 = 1;
+    a0->field_06 = 1;
+    a0->field_08 = 1;
+    a0->field_09 = 4;
+}
+
+void sub_812B4D8(struct HelpSystemStruct_203F190_sub * a0, struct HelpSystemStruct_203F1AC * a1)
+{
+    sub_812B4C4(a0, a1);
+    sub_812B520(a0, a1);
+    sub_812BF74(gUnknown_841DFAC);
+    sub_813C64C(a0, 0, gUnknown_3005E9C[2]);
+    sub_812BF9C(a0, a1);
+    sub_813BDA4(1);
+    sub_813BD5C(1);
+}

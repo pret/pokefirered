@@ -158,7 +158,7 @@ _0810D4E8:
 	.4byte _0810D630
 	.4byte _0810D668
 _0810D53C:
-	bl sub_80BF768
+	bl VblankHblankHandlerSetZero
 	bl clear_scheduled_bg_copies_to_vram
 	b _0810D674
 _0810D546:
@@ -389,7 +389,7 @@ _0810D718: .4byte gUnknown_203ADCC
 	thumb_func_start sub_810D71C
 sub_810D71C: @ 810D71C
 	push {r4,r5,lr}
-	bl sub_80BF7C8
+	bl InitBgReg
 	ldr r5, _0810D77C @ =gUnknown_203ADC0
 	movs r4, 0x80
 	lsls r4, 4
@@ -1403,7 +1403,7 @@ sub_810DEA0: @ 810DEA0
 	adds r4, 0x2
 	mov r1, sp
 	adds r2, r4, 0
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	mov r0, sp
 	ldrh r1, [r0]
 	ldrh r0, [r4]
@@ -1436,7 +1436,7 @@ _0810DF20:
 	ldrb r0, [r6]
 	ldr r1, _0810DF44 @ =gUnknown_203ADD0
 	adds r2, r1, 0x2
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	movs r0, 0x2
 	negs r0, r0
 	cmp r4, r0
@@ -1630,7 +1630,7 @@ sub_810E0B4: @ 810E0B4
 	ldr r7, _0810E120 @ =gUnknown_203ADD0
 	adds r2, r7, 0x2
 	adds r1, r7, 0
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	movs r5, 0x20
 	negs r5, r5
 	ldrb r0, [r4]

@@ -2789,7 +2789,7 @@ sub_809EF54: @ 809EF54
 	str r2, [sp]
 	movs r2, 0x38
 	movs r3, 0x25
-	bl AddPseudoFieldObject
+	bl AddPseudoEventObject
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24

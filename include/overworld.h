@@ -109,6 +109,7 @@ void Overworld_ResetStateAfterTeleport(void);
 
 void Overworld_FadeOutMapMusic(void);
 void sub_805671C(void);
+void sub_8055DC4(void);
 bool8 sub_8055FC4(void);
 
 #endif //GUARD_ROM4_H

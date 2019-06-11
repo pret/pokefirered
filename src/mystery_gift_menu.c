@@ -703,7 +703,7 @@ u32 MysteryGift_HandleThreeOptionMenu(u8 * unused0, u16 * unused1, u8 whichMenu)
     width = 0;
     for (i = 0; i < listMenuTemplate.totalItems; i++)
     {
-        u32 curWidth = GetStringWidth(2, listMenuTemplate.items[i].unk_00, listMenuTemplate.lettersSpacing);
+        u32 curWidth = GetStringWidth(2, listMenuTemplate.items[i].label, listMenuTemplate.lettersSpacing);
         if (curWidth > width)
             width = curWidth;
     }

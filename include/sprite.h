@@ -232,6 +232,8 @@ struct OamMatrix
     s16 d;
 };
 
+typedef void (*SpriteCallback)(struct Sprite *);
+
 extern const struct OamData gDummyOamData;
 extern const union AnimCmd *const gDummySpriteAnimTable[];
 extern const union AffineAnimCmd *const gDummySpriteAffineAnimTable[];

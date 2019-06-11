@@ -418,8 +418,8 @@ _080BF764:
 	bx r1
 	thumb_func_end sub_80BF748
 
-	thumb_func_start sub_80BF768
-sub_80BF768: @ 80BF768
+	thumb_func_start VblankHblankHandlerSetZero
+VblankHblankHandlerSetZero: @ 80BF768
 	push {lr}
 	movs r0, 0
 	bl SetVBlankCallback
@@ -427,13 +427,13 @@ sub_80BF768: @ 80BF768
 	bl SetHBlankCallback
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80BF768
+	thumb_func_end VblankHblankHandlerSetZero
 
 	thumb_func_start sub_80BF77C
 sub_80BF77C: @ 80BF77C
 	push {r4,lr}
 	sub sp, 0xC
-	bl sub_80BF7C8
+	bl InitBgReg
 	mov r1, sp
 	movs r0, 0
 	strh r0, [r1]
@@ -465,8 +465,8 @@ _080BF7C0: .4byte 0x05000100
 _080BF7C4: .4byte 0x01000200
 	thumb_func_end sub_80BF77C
 
-	thumb_func_start sub_80BF7C8
-sub_80BF7C8: @ 80BF7C8
+	thumb_func_start InitBgReg
+InitBgReg: @ 80BF7C8
 	push {lr}
 	movs r0, 0
 	movs r1, 0
@@ -517,7 +517,7 @@ sub_80BF7C8: @ 80BF7C8
 	bl ChangeBgY
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80BF7C8
+	thumb_func_end InitBgReg
 
 	thumb_func_start sub_80BF848
 sub_80BF848: @ 80BF848

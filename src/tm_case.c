@@ -321,7 +321,7 @@ static bool8 DoSetUpTMCaseUI(void)
     switch (gMain.state)
     {
     case 0:
-        sub_80BF768();
+        VblankHblankHandlerSetZero();
         clear_scheduled_bg_copies_to_vram();
         gMain.state++;
         break;
@@ -426,7 +426,7 @@ static void ResetBufferPointers_NoFree(void)
 static void LoadBGTemplates(void)
 {
     void ** ptr;
-    sub_80BF7C8();
+    InitBgReg();
     ptr = &sTilemapBuffer;
     *ptr = AllocZeroed(0x800);
     ResetBgsAndClearDma3BusyFlags(0);
@@ -496,11 +496,11 @@ static void InitTMCaseListMenuItems(void)
     for (i = 0; i < sTMCaseDynamicResources->numTMs; i++)
     {
         GetTMNumberAndMoveString(sListMenuStringsBuffer[i], pocket->itemSlots[i].itemId);
-        sListMenuItemsBuffer[i].unk_00 = sListMenuStringsBuffer[i];
-        sListMenuItemsBuffer[i].unk_04 = i;
+        sListMenuItemsBuffer[i].label = sListMenuStringsBuffer[i];
+        sListMenuItemsBuffer[i].index = i;
     }
-    sListMenuItemsBuffer[i].unk_00 = gText_Close;
-    sListMenuItemsBuffer[i].unk_04 = -2;
+    sListMenuItemsBuffer[i].label = gText_Close;
+    sListMenuItemsBuffer[i].index = -2;
     gMultiuseListMenuTemplate.items = sListMenuItemsBuffer;
     gMultiuseListMenuTemplate.totalItems = sTMCaseDynamicResources->numTMs + 1;
     gMultiuseListMenuTemplate.windowId = 0;
@@ -737,7 +737,7 @@ static void Task_TMCaseMain(u8 taskId)
         if (sub_80BF72C() != TRUE)
         {
             input = ListMenuHandleInput(data[0]);
-            get_coro_args_x18_x1A(data[0], &sTMCaseStaticResources.scrollOffset, &sTMCaseStaticResources.selectedRow);
+            ListMenuGetScrollAndRow(data[0], &sTMCaseStaticResources.scrollOffset, &sTMCaseStaticResources.selectedRow);
             if (JOY_NEW(SELECT_BUTTON) && sTMCaseStaticResources.unk_05 == 1)
             {
                 PlaySE(SE_SELECT);

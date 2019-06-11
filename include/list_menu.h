@@ -9,8 +9,8 @@
 
 struct ListMenuItem
 {
-    const u8 *unk_00;
-    s32 unk_04;
+    const u8 *label;
+    s32 index;
 };
 
 struct ListMenu;
@@ -43,7 +43,7 @@ struct ListMenu {
     u16 selectedRow;
     u8 unk_1C;
     u8 unk_1D;
-    u8 unk_1E;
+    u8 taskId;
     u8 unk_1F;
 };
 
@@ -54,7 +54,7 @@ extern struct ListMenuTemplate gMultiuseListMenuTemplate;
 
 u8 ListMenuInit(struct ListMenuTemplate *template, u16 a1, u16 a2);
 s32 ListMenuHandleInput(u8 id);
-void get_coro_args_x18_x1A(u8 a0, u16 *a1, u16 *a2);
+void ListMenuGetScrollAndRow(u8 a0, u16 *a1, u16 *a2);
 void sub_81AE6C8(u8 a0, u16 *a1, u16 *a2);
 void DestroyListMenu(u8, u16 *, u16 *);
 u16 ListMenuGetYCoordForPrintingArrowCursor(u8);

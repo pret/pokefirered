@@ -3,8 +3,8 @@
 #include "text.h"
 #include "menu.h"
 #include "text_window.h"
+#include "strings.h"
 
-extern const u8 gText_Coins[];
 extern const u8 gUnknown_8417C2D[];
 
 EWRAM_DATA static u8 sCoinsWindowId = 0;

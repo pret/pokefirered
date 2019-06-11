@@ -515,7 +515,7 @@ _0809AEA0: .4byte gTasks
 _0809AEA4: .4byte sub_809AE00
 _0809AEA8: .4byte sub_809ADE4
 _0809AEAC:
-	bl sub_80BF768
+	bl VblankHblankHandlerSetZero
 	str r4, [sp, 0x8]
 	movs r1, 0xE0
 	lsls r1, 19
@@ -2017,7 +2017,7 @@ _0809BA56:
 	str r0, [sp]
 	adds r0, r4, 0
 	ldr r1, _0809BAF4 @ =SpriteCallbackDummy
-	bl AddPseudoFieldObject
+	bl AddPseudoEventObject
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r2, r0, 4
@@ -2170,7 +2170,7 @@ sub_809BBC0: @ 809BBC0
 	ldr r7, _0809BC08 @ =gUnknown_2039942
 	subs r2, r7, 0x2
 	adds r1, r7, 0
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	movs r0, 0x2
 	negs r0, r0
 	cmp r4, r0

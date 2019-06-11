@@ -7888,7 +7888,7 @@ _080588C6:
 	movs r2, 0
 	str r2, [sp]
 	movs r3, 0
-	bl AddPseudoFieldObject
+	bl AddPseudoEventObject
 	strb r0, [r4, 0x4]
 	ldrb r1, [r4, 0x4]
 	lsls r0, r1, 4

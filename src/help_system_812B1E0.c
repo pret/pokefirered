@@ -17,13 +17,18 @@ u16 gUnknown_3005EA0;
 
 bool32 sub_812B27C(const u16 * mapIdxs);
 void sub_812B4B8(void);
-void sub_812B520(struct HelpSystemStruct_203F190_sub * a0, struct HelpSystemStruct_203F1AC * a1);
-void sub_812BF9C(struct HelpSystemStruct_203F190_sub * a0, struct HelpSystemStruct_203F1AC * a1);
+void sub_812B520(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
+void sub_812B614(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
+void sub_812BF9C(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
 void sub_812BF74(const u8 *);
 
 // strings.h
 extern const u8 gUnknown_841DFAC[];
+extern const u8 gUnknown_841DFC9[];
 
+extern const u8 *const gUnknown_845B080[];
+extern const u8 gUnknown_845C4B0[];
+extern const u8 gUnknown_845C4B6[][6];
 extern const u16 gUnknown_845C594[]; // marts
 extern const u16 gUnknown_845C5BC[]; // gyms
 extern const u8 gUnknown_845C5CE[][3];
@@ -179,22 +184,55 @@ void sub_812B4B8(void)
     gUnknown_203F175 = 0;
 }
 
-void sub_812B4C4(struct HelpSystemStruct_203F190_sub * a0, struct HelpSystemStruct_203F1AC * a1)
+void sub_812B4C4(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
 {
-    a0->field_00 = a1;
-    a0->field_04 = 1;
-    a0->field_06 = 1;
-    a0->field_08 = 1;
-    a0->field_09 = 4;
+    a0->sub.field_00 = a1;
+    a0->sub.field_04 = 1;
+    a0->sub.field_06 = 1;
+    a0->sub.field_08 = 1;
+    a0->sub.field_09 = 4;
 }
 
-void sub_812B4D8(struct HelpSystemStruct_203F190_sub * a0, struct HelpSystemStruct_203F1AC * a1)
+void sub_812B4D8(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
 {
     sub_812B4C4(a0, a1);
     sub_812B520(a0, a1);
     sub_812BF74(gUnknown_841DFAC);
     sub_813C64C(a0, 0, gUnknown_3005E9C[2]);
     sub_812BF9C(a0, a1);
+    sub_813BDA4(1);
+    sub_813BD5C(1);
+}
+
+void sub_812B520(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+{
+    u8 i;
+    u8 r4 = 0;
+    for (i = 0; i < 6; i++)
+    {
+        if (gUnknown_845C4B6[gUnknown_203B0EC][gUnknown_845C4B0[i]] == 1)
+        {
+            a1[r4].label = gUnknown_845B080[gUnknown_845C4B0[i]];
+            a1[r4].index = gUnknown_845C4B0[i];
+            r4++;
+        }
+    }
+    a1[r4 - 1].index = -2;
+    a0->sub.field_04 = r4;
+    a0->sub.field_06 = r4;
+    a0->sub.field_08 = 0;
+}
+
+void sub_812B5A8(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+{
+    sub_813BDE8(0);
+    sub_813BFC0(0);
+    sub_813BE78(1);
+    sub_812B4C4(a0, a1);
+    sub_812B614(a0, a1);
+    sub_812BF74(gUnknown_841DFC9);
+    sub_813C64C(a0, a0->field_0C, a0->field_0D);
+    sub_813C4CC(gUnknown_845B080[gUnknown_3005E9C[1]], 0, 0);
     sub_813BDA4(1);
     sub_813BD5C(1);
 }

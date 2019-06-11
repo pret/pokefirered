@@ -2136,37 +2136,79 @@ gUnknown_841DFA0:: @ 841DFA0
 	.string "GOLD$"
 
 gUnknown_841DFA5:: @ 841DFA5
-	.incbin "baserom.gba", 0x41DFA5, 0x7
+	.string "{KEYGFX_A_BUTTON}NEXT$"
 
 gUnknown_841DFAC:: @ 841DFAC
-	.incbin "baserom.gba", 0x41DFAC, 0x12
+	.string "{KEYGFX_DPAD_UP_DOWN}PICK {KEYGFX_A_BUTTON}OK {KEYGFX_B_BUTTON}END$"
 
 gUnknown_841DFBE:: @ 841DFBE
-	.incbin "baserom.gba", 0x41DFBE, 0xB
+	.string "{KEYGFX_A_BUTTON}{KEYGFX_B_BUTTON}CANCEL$"
 
 gUnknown_841DFC9:: @ 841DFC9
-	.incbin "baserom.gba", 0x41DFC9, 0xCA
+	.string "{KEYGFX_DPAD_UP_DOWN}PICK {KEYGFX_A_BUTTON}OK {KEYGFX_B_BUTTON}CANCEL$"
 
+	@ easy chat categories
+	.string "POKéMON$"
+	.string "TRAINER$"
+	.string "STATUS$"
+	.string "BATTLE$"
+	.string "GREETINGS$"
+	.string "PEOPLE$"
+	.string "VOICES$"
+	.string "SPEECH$"
+	.string "ENDINGS$"
+	.string "FEELINGS$"
+	.string "CONDITIONS$"
+	.string "ACTIONS$"
+	.string "LIFESTYLE$"
+	.string "HOBBIES$"
+	.string "TIME$"
+	.string "MISC.$"
+	.string "ADJECTIVES$"
+	.string "EVENTS$"
+	.string "MOVE 1$"
+	.string "MOVE 2$"
+	.string "TRENDY SAYING$"
+	.string "POKéMON2$"
+
+	@ trade-related
 gUnknown_841E093:: @ 841E093
-	.incbin "baserom.gba", 0x41E093, 0xC
+	.string "???$"
+	.string "$"
+	.string "Lv$"
+	.string "---$"
 
 gUnknown_841E09F:: @ 841E09F
-	.incbin "baserom.gba", 0x41E09F, 0x6
+	.string "????$"
+	.string "$"
 
 gUnknown_841E0A5:: @ 841E0A5
-	.incbin "baserom.gba", 0x41E0A5, 0x144
+	.string "Is this trade okay?$"
+	.string "CANCEL$"
+	.string "Choose a POKéMON.$"
+	.string "SUMMARY$"
+	.string "TRADE$"
+	.string "Cancel trade?$"
+	.string "Press the B Button to exit.$"
+	.string "SUMMARY$"
+	.string "TRADE$"
+	.string "{COLOR RED}{HIGHLIGHT DARK_GREY}{SHADOW GREEN}Communication standby…\nPlease wait.$"
+	.string "{COLOR RED}{HIGHLIGHT DARK_GREY}{SHADOW GREEN}The trade has been canceled.$"
+	.string "{COLOR RED}{HIGHLIGHT DARK_GREY}{SHADOW GREEN}That's your only POKéMON\nfor battle.$"
+	.string "{COLOR RED}{HIGHLIGHT DARK_GREY}{SHADOW GREEN}Waiting for your friend\nto finish…$"
+	.string "Your friend wants\nto trade POKéMON.$"
 
 gUnknown_841E1E9:: @ 841E1E9
-	.incbin "baserom.gba", 0x41E1E9, 0x17
+	.string "{STR_VAR_2} will be\nsent to {STR_VAR_1}.$"
 
 gUnknown_841E200:: @ 841E200
-	.incbin "baserom.gba", 0x41E200, 0xD
+	.string "Bye-bye, {STR_VAR_2}!$"
 
 gUnknown_841E20D:: @ 841E20D
-	.incbin "baserom.gba", 0x41E20D, 0x11
+	.string "{STR_VAR_1} sent over {STR_VAR_3}.$"
 
 gUnknown_841E21E:: @ 841E21E
-	.incbin "baserom.gba", 0x41E21E, 0x16
+	.string "Take good care of {STR_VAR_3}!$"
 
 gUnknown_841E234:: @ 841E234
 	.string "From $"

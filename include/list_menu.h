@@ -2,6 +2,7 @@
 #define GUARD_LIST_MENU_H
 
 #include "global.h"
+#include "window.h"
 
 // Exported type declarations
 

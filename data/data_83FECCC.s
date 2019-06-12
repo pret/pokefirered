@@ -818,22 +818,22 @@ gUnknown_8416221:: @ 8416221
 	.string "♀$"
 
 gText_Lv:: @ 8416223
-	.string "{UNKNOWN_F9 0x05}$"
+	.string "{EXTRA_LV}$"
 
 gOtherText_UnkF9_08_Clear_01:: @ 8416226
-	.string "{UNKNOWN_F9 0x08}{CLEAR 0x01}$"
+	.string "{EXTRA_NO}{CLEAR 0x01}$"
 
 gUnknown_841622C::
-	.string "{UNKNOWN_F9 0x04}$"
+	.string "{EXTRA_PLUS}$"
 
 gUnknown_841622F::
 	.string "{ESCAPE 0x03}$"
 
 gUnknown_8416233::
-	.string "{UNKNOWN_F9 0x07}{UNKNOWN_F9 0x08}$"
+	.string "{EXTRA_ID}{EXTRA_NO}$"
 
 gUnknown_8416238:: @ 8416238
-	.string "{UNKNOWN_F9 0x06}$"
+	.string "{EXTRA_PP}$"
 
 gFameCheckerText_ListMenuCursor:: @ 841623B
 	.string "▶$"
@@ -1569,64 +1569,64 @@ gUnknown_841979D:: @ 841979D
 gUnknown_84197B8:: @ 84197B8
 	.string "{UNKNOWN_F7 0x00} nature.\n"
 	.string "Met in a fateful encounter when\n"
-	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
+	.string "at {EXTRA_LV} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_84197ED:: @ 84197ED
 	.string "{UNKNOWN_F7 0x00} nature.\n"
 	.string "Met in a fateful encounter when\n"
-	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
+	.string "at {EXTRA_LV} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_8419822:: @ 8419822
 	.string "{UNKNOWN_F7 0x00} nature.\n"
-	.string "Met in {UNKNOWN_F7 0x02} at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
+	.string "Met in {UNKNOWN_F7 0x02} at {EXTRA_LV} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_8419841:: @ 8419841
 	.string "{UNKNOWN_F7 0x00} nature.\n"
-	.string "Met in {UNKNOWN_F7 0x02} at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
+	.string "Met in {UNKNOWN_F7 0x02} at {EXTRA_LV} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_8419860:: @ 8419860
 	.string "{UNKNOWN_F7 0x00} nature.\n"
 	.string "Apparently met in {UNKNOWN_F7 0x02}\n"
-	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
+	.string "at {EXTRA_LV} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_841988A:: @ 841988A
 	.string "{UNKNOWN_F7 0x00} nature.\n"
 	.string "Apparently met in {UNKNOWN_F7 0x02}\n"
-	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
+	.string "at {EXTRA_LV} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_84198B4:: @ 84198B4
 	.string "{UNKNOWN_F7 0x00} nature.\n"
 	.string "Hatched: {UNKNOWN_F7 0x02}\n"
-	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
+	.string "at {EXTRA_LV} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_84198D5:: @ 84198D5
 	.string "{UNKNOWN_F7 0x00} nature.\n"
 	.string "Hatched: {UNKNOWN_F7 0x02}\n"
-	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
+	.string "at {EXTRA_LV} {UNKNOWN_F7 0x01}.$"
 
 @ TODO: Replace this gibberish with the proper Hiragana
 gUnknown_84198F6:: @ 84198F6
-	.string "{UNKNOWN_F7 0x00}ßÓÁÉË {UNKNOWN_F9 0x05}{UNKNOWN_F7 0x01}çÑÊ\n"
+	.string "{UNKNOWN_F7 0x00}ßÓÁÉË {EXTRA_LV}{UNKNOWN_F7 0x01}çÑÊ\n"
 	.string "{UNKNOWN_F7 0x02}で ÉÇっŒ ùÂだ$"
 
 gUnknown_8419913:: @ 8419913
-	.string "{UNKNOWN_F7 0x00}ÓÁÉË {UNKNOWN_F9 0x05}{UNKNOWN_F7 0x01}çÑÊ\n"
+	.string "{UNKNOWN_F7 0x00}ÓÁÉË {EXTRA_LV}{UNKNOWN_F7 0x01}çÑÊ\n"
 	.string "{UNKNOWN_F7 0x02}で ÉÇっŒ ùÂだ$"
 
 gUnknown_841992F:: @ 841992F
 	.string "{UNKNOWN_F7 0x00} nature. Met in a fateful\n"
 	.string "encounter (hatched: {UNKNOWN_F7 0x02}\n"
-	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}).$"
+	.string "at {EXTRA_LV} {UNKNOWN_F7 0x01}).$"
 
 gUnknown_841996D:: @ 841996D
 	.string "{UNKNOWN_F7 0x00} nature. Met in a fateful\n"
 	.string "encounter (hatched: {UNKNOWN_F7 0x02}\n"
-	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}).$"
+	.string "at {EXTRA_LV} {UNKNOWN_F7 0x01}).$"
 
 gUnknown_84199AB:: @ 84199AB
 	.string "{UNKNOWN_F7 0x00} nature. Apparently met in\n"
 	.string "a fateful encounter (hatched:\n"
-	.string "{UNKNOWN_F7 0x02} at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}).$"
+	.string "{UNKNOWN_F7 0x02} at {EXTRA_LV} {UNKNOWN_F7 0x01}).$"
 
 gUnknown_84199F4:: @ 84199F4
 	.incbin "baserom.gba", 0x4199F4, 0x217
@@ -2283,7 +2283,7 @@ gUnknown_841E2F5:: @ 841E2F5
 	.incbin "baserom.gba", 0x41e2f5, 0x2d
 
 gUnknown_841E322:: @ 841E322
-	.string "{UNKNOWN_F9 0x07}$"
+	.string "{EXTRA_ID}$"
 
 gUnknown_841E325:: @ 841E325
 	.string "Communication standby…$"
@@ -2343,7 +2343,7 @@ gFameCheckerText_PickScreenUI:: @ 841E5B9
 	.string "{KEYGFX_START_BUTTON}PICK {KEYGFX_DPAD_UP_DOWN}SELECT {KEYGFX_B_BUTTON}CANCEL$"
 
 gFameCheckerText_FlavorTextUI:: @ 841E5D2
-	.string "{KEYGFX_DPAD_ANY}PICK {KEYGFX_A_BUTTON}READ {UNKNOWN_F8 0x01}CANCEL$"
+	.string "{KEYGFX_DPAD_ANY}PICK {KEYGFX_A_BUTTON}READ {KEYGFX_B_BUTTON}CANCEL$"
 
 gFameCheckerOakName:: @ 841E5E9
 	.string "OAK$"

@@ -1031,8 +1031,8 @@ _0813C06A:
 _0813C074: .4byte 0x000001fd
 	thumb_func_end sub_813C004
 
-	thumb_func_start sub_813C078
-sub_813C078: @ 813C078
+	thumb_func_start HelpSystemRenderText
+HelpSystemRenderText: @ 813C078
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1421,7 +1421,7 @@ _0813C39C:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_813C078
+	thumb_func_end HelpSystemRenderText
 
 	thumb_func_start sub_813C3AC
 sub_813C3AC: @ 813C3AC
@@ -1527,7 +1527,7 @@ sub_813C454: @ 813C454
 	movs r0, 0x5
 	adds r2, r4, 0
 	movs r3, 0x6
-	bl sub_813C078
+	bl HelpSystemRenderText
 	add sp, 0xC
 	pop {r4}
 	pop {r0}
@@ -1562,7 +1562,7 @@ sub_813C488: @ 813C488
 	movs r0, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_813C078
+	bl HelpSystemRenderText
 	add sp, 0xC
 	pop {r4,r5}
 	pop {r0}
@@ -1595,7 +1595,7 @@ sub_813C4CC: @ 813C4CC
 	movs r0, 0x2
 	adds r2, r6, 0
 	adds r3, r5, 0
-	bl sub_813C078
+	bl HelpSystemRenderText
 	add sp, 0xC
 	pop {r4-r6}
 	pop {r0}
@@ -1636,7 +1636,7 @@ sub_813C50C: @ 813C50C
 	adds r1, r4, 0
 	mov r2, r8
 	movs r3, 0
-	bl sub_813C078
+	bl HelpSystemRenderText
 	movs r0, 0x9C
 	lsls r0, 4
 	adds r4, r0
@@ -1648,7 +1648,7 @@ sub_813C50C: @ 813C50C
 	adds r1, r4, 0
 	mov r2, r9
 	movs r3, 0
-	bl sub_813C078
+	bl HelpSystemRenderText
 	add sp, 0x10
 	pop {r3,r4}
 	mov r8, r3
@@ -1690,7 +1690,7 @@ sub_813C584: @ 813C584
 	adds r1, r4, 0
 	adds r2, r5, 0
 	movs r3, 0x2
-	bl sub_813C078
+	bl HelpSystemRenderText
 	add sp, 0x10
 	pop {r4,r5}
 	pop {r0}

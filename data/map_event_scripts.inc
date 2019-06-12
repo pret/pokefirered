@@ -3257,31 +3257,9 @@ CeladonCity_GameCorner_EventScript_1B2867:: @ 81B2867
 	.incbin "baserom.gba", 0x1B2867, 0xD1
 
 FourIsland_House2_EventScript_1B2938:: @ 81B2938
-	.incbin "baserom.gba", 0x1B2938, 0x4E4
+	.incbin "baserom.gba", 0x1B2938, 0x4C0
 
-gUnknown_81B2E1C:: @ 81B2E1C
-	.string "How do I do this?$"
-
-gUnknown_81B2E2E:: @ 81B2E2E
-	.string "What does this term mean?$"
-
-gUnknown_81B2E48:: @ 81B2E48
-	.string "About this game$"
-
-gUnknown_81B2E58:: @ 81B2E58
-	.string "Type Matchup List$"
-
-gUnknown_81B2E6A:: @ 81B2E6A
-	.string "EXIT$"
-
-gUnknown_81B2E6F:: @ 81B2E6F
-	.incbin "baserom.gba", 0x1B2E6F, 0x15A
-
-gUnknown_81B2FC9:: @ 81B2FC9
-	.incbin "baserom.gba", 0x1B2FC9, 0x52
-
-gUnknown_81B301B:: @ 81B301B
-	.incbin "baserom.gba", 0x1B301B, 0x8199
+	.include "data/text/help_system.inc"
 
 CeladonCity_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
 CeruleanCity_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4

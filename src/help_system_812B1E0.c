@@ -3,12 +3,15 @@
 #include "event_scripts.h"
 #include "field_player_avatar.h"
 #include "help_system.h"
+#include "item.h"
 #include "link.h"
 #include "overworld.h"
+#include "pokedex.h"
 #include "quest_log.h"
 #include "save.h"
 #include "save_location.h"
 #include "strings.h"
+#include "constants/items.h"
 #include "constants/maps.h"
 
 EWRAM_DATA u16 gUnknown_203B0EC = 0;
@@ -23,10 +26,10 @@ void sub_812B520(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
 void sub_812B614(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
 bool8 sub_812B754(void);
 bool8 sub_812B780(u8);
+bool8 sub_812BB10(void);
 void sub_812BF9C(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
 void sub_812BF74(const u8 *);
 
-// this file
 const u8 *const gUnknown_845B080[] = {
     gUnknown_81B2DF8,
     gUnknown_81B2E1C,
@@ -1120,5 +1123,214 @@ bool8 sub_812B754(void)
 {
     if (FlagGet(FLAG_0x4B0) == TRUE && gUnknown_3005E9C[1] == 2)
         return TRUE;
+    return FALSE;
+}
+
+bool8 sub_812B780(u8 id)
+{
+    u8 i = 0;
+
+    if (gUnknown_3005E9C[1] == 0)
+    {
+        switch (id)
+        {
+        case 1:
+        case 2:
+        case 3:
+        case 5:
+        case 8:
+        case 34:
+        case 38:
+        case 41:
+        case 42:
+        case 43:
+            return TRUE;
+        case 4:
+            return FlagGet(FLAG_0x2CF);
+        case 6:
+        case 10:
+        case 16:
+        case 19:
+        case 22:
+        case 35:
+        case 36:
+            return FlagGet(FLAG_WORLD_MAP_VIRIDIAN_CITY);
+        case 7:
+            return FlagGet(FLAG_WORLD_MAP_VERMILION_CITY);
+        case 11:
+        case 24:
+            return FlagGet(FLAG_0x8A4);
+        case 9:
+        case 13:
+        case 14:
+        case 15:
+        case 17:
+        case 18:
+        case 20:
+        case 26:
+        case 29:
+        case 31:
+        case 37:
+            return FlagGet(FLAG_0x828);
+        case 21:
+        case 23:
+            return FlagGet(FLAG_0x829);
+        case 12:
+        case 25:
+        case 27:
+        case 30:
+        case 32:
+        case 33:
+            return FlagGet(FLAG_UNK820);
+        case 28:
+        case 40:
+            return sub_812BB10();
+        case 39:
+            return FlagGet(FLAG_0x29B);
+        case 44:
+            return FlagGet(FLAG_WORLD_MAP_PEWTER_CITY);
+        }
+        return FALSE;
+    }
+    if (gUnknown_3005E9C[1] == 1)
+    {
+        switch (id)
+        {
+        case 06:
+        case 10:
+        case 11:
+        case 12:
+        case 19:
+        case 20:
+        case 21:
+        case 22:
+        case 23:
+        case 24:
+        case 25:
+        case 26:
+        case 27:
+        case 28:
+        case 29:
+        case 31:
+        case 36:
+        case 38:
+        case 39:
+        case 40:
+        case 41:
+        case 42:
+        case 45:
+        case 46:
+        case 47:
+            return TRUE;
+        case 1:
+        case 30:
+        case 37:
+            return FlagGet(FLAG_0x829);
+        case 14:
+            return CheckBagHasItem(ITEM_TOWN_MAP, 1);
+        case 2:
+        case 3:
+        case 5:
+        case 7:
+        case 8:
+        case 9:
+        case 13:
+        case 32:
+        case 33:
+        case 35:
+        case 43:
+        case 44:
+            return FlagGet(FLAG_0x828);
+        case 4:
+        case 34:
+            if (sub_8088EDC(1) > 1)
+                return TRUE;
+            return FALSE;
+        case 15:
+            return FlagGet(FLAG_UNK820);
+        case 16:
+        case 17:
+            return sub_812BB10();
+        case 18:
+            return FlagGet(FLAG_0x271);
+        case 48:
+            return FlagGet(FLAG_0x82C);
+        }
+        return FALSE;
+    }
+    if (gUnknown_3005E9C[1] == 2)
+    {
+        if (sub_812B754() == TRUE)
+        {
+            for (i = 0; gUnknown_845B9BE[i] != 0xFF; i++)
+            {
+                if (gUnknown_845B9BE[i] == id)
+                    return FALSE;
+            }
+        }
+        switch (id)
+        {
+        case 14:
+        case 17:
+        case 22:
+        case 23:
+        case 24:
+        case 25:
+        case 26:
+        case 27:
+        case 28:
+        case 29:
+        case 30:
+        case 31:
+        case 32:
+        case 33:
+        case 34:
+        case 35:
+        case 38:
+            return TRUE;
+        case 1:
+        case 2:
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+        case 8:
+        case 9:
+        case 10:
+        case 11:
+        case 12:
+        case 13:
+        case 16:
+        case 19:
+        case 20:
+        case 21:
+            return FlagGet(FLAG_0x828);
+        case 36:
+        case 37:
+            return sub_812BB10();
+        case 3:
+        case 15:
+        case 18:
+        case 39:
+            return FlagGet(FLAG_0x8A4);
+        }
+        return TRUE;
+    }
+    if (gUnknown_3005E9C[1] == 3)
+    {
+        switch (id)
+        {
+        case 5:
+            return FlagGet(FLAG_UNK820);
+        case 6:
+            return FlagGet(FLAG_0x821);
+        }
+        return TRUE;
+    }
+    if (gUnknown_3005E9C[1] == 4)
+    {
+        return TRUE;
+    }
+
     return FALSE;
 }

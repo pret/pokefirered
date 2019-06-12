@@ -136,4 +136,8 @@ extern const u8 gTeachyTvText_CatchingScript2[];
 extern const u8 gTeachyTvText_TMsScript2[];
 extern const u8 gTeachyTvText_RegisterScript2[];
 
+// help_system_812B1E0
+extern const u8 gUnknown_841DFAC[];
+extern const u8 gUnknown_841DFC9[];
+
 #endif //GUARD_STRINGS_H

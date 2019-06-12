@@ -421,7 +421,6 @@ SECTIONS {
         src/quest_log.o(.rodata);
         data/data_83FECCC.o(.rodata.8456C74);
         src/help_system_812B1E0.o(.rodata);
-        data/help_system_812B1E0.o(.rodata);
         src/fame_checker.o(.rodata);
         src/menu2.o(.rodata);
         src/oak_speech.o(.rodata);

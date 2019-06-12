@@ -38,8 +38,8 @@ extern const u8 *const gUnknown_845B218[];
 extern const u8 *const gUnknown_845B3A0[];
 extern const u8 *const gUnknown_845B500[];
 extern const u8 *const gUnknown_845B540[];
-extern const u8 *const gUnknown_845B9E0[];
 extern const u8 gUnknown_845B9BE[];
+extern const u8 *const gUnknown_845B9E0[];
 extern const u8 gUnknown_845C4B0[];
 extern const u8 gUnknown_845C4B6[][6];
 extern const u16 gUnknown_845C594[]; // marts

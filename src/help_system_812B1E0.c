@@ -19,14 +19,27 @@ bool32 sub_812B27C(const u16 * mapIdxs);
 void sub_812B4B8(void);
 void sub_812B520(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
 void sub_812B614(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
+bool8 sub_812B754(void);
+bool8 sub_812B780(u8);
 void sub_812BF9C(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
 void sub_812BF74(const u8 *);
+
+// event_scripts.h
+extern const u8 gUnknown_81B2E6F[];
 
 // strings.h
 extern const u8 gUnknown_841DFAC[];
 extern const u8 gUnknown_841DFC9[];
 
+// this file
 extern const u8 *const gUnknown_845B080[];
+extern const u8 *const gUnknown_845B0B0[];
+extern const u8 *const gUnknown_845B218[];
+extern const u8 *const gUnknown_845B3A0[];
+extern const u8 *const gUnknown_845B500[];
+extern const u8 *const gUnknown_845B540[];
+extern const u8 *const gUnknown_845B9E0[];
+extern const u8 gUnknown_845B9BE[];
 extern const u8 gUnknown_845C4B0[];
 extern const u8 gUnknown_845C4B6[][6];
 extern const u16 gUnknown_845C594[]; // marts
@@ -235,4 +248,52 @@ void sub_812B5A8(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
     sub_813C4CC(gUnknown_845B080[gUnknown_3005E9C[1]], 0, 0);
     sub_813BDA4(1);
     sub_813BD5C(1);
+}
+
+void sub_812B614(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+{
+    u8 r6 = 0;
+    const u8 * r3 = gUnknown_845B9E0[gUnknown_203B0EC * 5 + gUnknown_3005E9C[1]];
+    u8 i;
+    for (i = 0; r3[i] != 0xFF; i++)
+    {
+        if (sub_812B780(r3[i]) == TRUE)
+        {
+            if (gUnknown_3005E9C[1] == 0)
+                a1[r6].label = gUnknown_845B0B0[r3[i]];
+            else if (gUnknown_3005E9C[1] == 1)
+                a1[r6].label = gUnknown_845B218[r3[i]];
+            else if (gUnknown_3005E9C[1] == 2)
+                a1[r6].label = gUnknown_845B3A0[r3[i]];
+            else if (gUnknown_3005E9C[1] == 3)
+                a1[r6].label = gUnknown_845B500[r3[i]];
+            else
+                a1[r6].label = gUnknown_845B540[r3[i]];
+            a1[r6].index = r3[i];
+            r6++;
+        }
+    }
+    if (sub_812B754() == TRUE)
+    {
+        for (i = 0, r3 = gUnknown_845B9BE; r3[i] != 0xFF; i++)
+        {
+            a1[r6].label = gUnknown_845B3A0[r3[i]];
+            a1[r6].index = r3[i];
+            r6++;
+        }
+    }
+    a1[r6].label = gUnknown_81B2E6F;
+    a1[r6].index = -2;
+    r6++;
+    a0->sub.field_04 = r6;
+    a0->sub.field_06 = 7;
+    a0->sub.field_08 = 0;
+    a0->sub.field_09 = 21;
+}
+
+bool8 sub_812B754(void)
+{
+    if (FlagGet(FLAG_0x4B0) == TRUE && gUnknown_3005E9C[1] == 2)
+        return TRUE;
+    return FALSE;
 }

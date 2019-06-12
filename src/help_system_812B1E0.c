@@ -16,35 +16,25 @@
 #include "constants/maps.h"
 #include "constants/songs.h"
 
-EWRAM_DATA u16 gUnknown_203B0EC = 0;
-EWRAM_DATA u8 gUnknown_203B0EE = 0;
+static EWRAM_DATA u16 gUnknown_203B0EC = 0;
+static EWRAM_DATA u8 gUnknown_203B0EE = 0;
 
 u8 gUnknown_3005E9C[4];
 u16 gUnknown_3005EA0;
 
-bool32 sub_812B27C(const u16 * mapIdxs);
-void sub_812B4B8(void);
-void sub_812B520(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
-void sub_812B614(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
-bool8 sub_812B754(void);
-bool8 sub_812B780(u8);
-bool8 sub_812BB10(void);
-bool8 sub_812BC54(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
-bool8 sub_812BC80(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
-bool8 sub_812BCA8(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
-bool8 sub_812BCD0(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
-bool8 sub_812BD2C(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
-bool8 sub_812BD64(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
-bool8 sub_812BD98(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
-bool8 sub_812BE10(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
-bool8 sub_812BEEC(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
-bool8 sub_812BF18(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
-void sub_812BF5C(void);
-void sub_812BF74(const u8 *);
-void sub_812BF94(struct HelpSystemStruct_203F190 * a0);
-void sub_812BF9C(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
+static bool32 sub_812B27C(const u16 * mapIdxs);
+static void sub_812B520(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
+static void sub_812B614(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
+static bool8 sub_812B754(void);
+static bool8 sub_812B780(u8);
+static bool8 sub_812BB10(void);
 
-const u8 *const gUnknown_845B080[] = {
+static void sub_812BF5C(void);
+static void sub_812BF74(const u8 *);
+static void sub_812BF94(struct HelpSystemStruct_203F190 * a0);
+static void sub_812BF9C(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
+
+static const u8 *const gUnknown_845B080[] = {
     gUnknown_81B2DF8,
     gUnknown_81B2E1C,
     gUnknown_81B2E2E,
@@ -53,7 +43,7 @@ const u8 *const gUnknown_845B080[] = {
     gUnknown_81B2E6A
 };
 
-const u8 *const gUnknown_845B098[] = {
+static const u8 *const gUnknown_845B098[] = {
     gUnknown_81B2E88,
     gUnknown_81B2EC8,
     gUnknown_81B2F00,
@@ -62,7 +52,7 @@ const u8 *const gUnknown_845B098[] = {
     gUnknown_81B2FA9
 };
 
-const u8 *const gUnknown_845B0B0[] = {
+static const u8 *const gUnknown_845B0B0[] = {
     NULL,
     gUnknown_81B3083,
     gUnknown_81B30A9,
@@ -110,7 +100,7 @@ const u8 *const gUnknown_845B0B0[] = {
     gUnknown_81B3516
 };
 
-const u8 *const gUnknown_845B164[] = {
+static const u8 *const gUnknown_845B164[] = {
     NULL,
     gUnknown_81B3525,
     gUnknown_81B35E6,
@@ -158,7 +148,7 @@ const u8 *const gUnknown_845B164[] = {
     gUnknown_81B55F4
 };
 
-const u8 *const gUnknown_845B218[] = {
+static const u8 *const gUnknown_845B218[] = {
     NULL,
     gUnknown_81B56E3,
     gUnknown_81B56F4,
@@ -210,7 +200,7 @@ const u8 *const gUnknown_845B218[] = {
     gUnknown_81B5A37
 };
 
-const u8 *const gUnknown_845B2DC[] = {
+static const u8 *const gUnknown_845B2DC[] = {
     NULL,
     gUnknown_81B5A4D,
     gUnknown_81B5B0C,
@@ -262,7 +252,7 @@ const u8 *const gUnknown_845B2DC[] = {
     gUnknown_81B7C57
 };
 
-const u8 *const gUnknown_845B3A0[] = {
+static const u8 *const gUnknown_845B3A0[] = {
     NULL,
     gUnknown_81B7CC1,
     gUnknown_81B7CC4,
@@ -309,7 +299,7 @@ const u8 *const gUnknown_845B3A0[] = {
     gUnknown_81B7E0F
 };
 
-const u8 *const gUnknown_845B450[] = {
+static const u8 *const gUnknown_845B450[] = {
     NULL,
     gUnknown_81B7E16,
     gUnknown_81B7F0A,
@@ -356,7 +346,7 @@ const u8 *const gUnknown_845B450[] = {
     gUnknown_81B9B2F
 };
 
-const u8 *const gUnknown_845B500[] = {
+static const u8 *const gUnknown_845B500[] = {
     NULL,
     gUnknown_81B9BB7,
     gUnknown_81B9BC7,
@@ -367,7 +357,7 @@ const u8 *const gUnknown_845B500[] = {
     gUnknown_81B9C1D
 };
 
-const u8 *const gUnknown_845B520[] = {
+static const u8 *const gUnknown_845B520[] = {
     NULL,
     gUnknown_81B9C2F,
     gUnknown_81B9D04,
@@ -378,7 +368,7 @@ const u8 *const gUnknown_845B520[] = {
     gUnknown_81BA027
 };
 
-const u8 *const gUnknown_845B540[] = {
+static const u8 *const gUnknown_845B540[] = {
     NULL,
     gUnknown_81BA0F1,
     gUnknown_81BA10D,
@@ -417,7 +407,7 @@ const u8 *const gUnknown_845B540[] = {
     gUnknown_81BA400
 };
 
-const u8 *const gUnknown_845B5D0[] = {
+static const u8 *const gUnknown_845B5D0[] = {
     NULL,
     gUnknown_81BA416,
     gUnknown_81BA4E6,
@@ -457,299 +447,299 @@ const u8 *const gUnknown_845B5D0[] = {
 };
 
 
-const u8 gUnknown_845B660[] = {
+static const u8 gUnknown_845B660[] = {
     0x01, 0x02, 0x03, 0xff
 };
 
-const u8 gUnknown_845B664[] = {
+static const u8 gUnknown_845B664[] = {
     0x01, 0x02, 0x03, 0xff
 };
 
-const u8 gUnknown_845B668[] = {
+static const u8 gUnknown_845B668[] = {
     0x13, 0xff
 };
 
-const u8 gUnknown_845B66A[] = {
+static const u8 gUnknown_845B66A[] = {
     0x01, 0x02, 0x03, 0xff
 };
 
-const u8 gUnknown_845B66E[] = {
+static const u8 gUnknown_845B66E[] = {
     0x01, 0x25, 0xff
 };
 
-const u8 gUnknown_845B671[] = {
+static const u8 gUnknown_845B671[] = {
     0x02, 0x03, 0x04, 0x05, 0x11, 0xff
 };
 
-const u8 gUnknown_845B677[] = {
+static const u8 gUnknown_845B677[] = {
     0x09, 0x01, 0xff
 };
 
-const u8 gUnknown_845B67A[] = {
+static const u8 gUnknown_845B67A[] = {
     0x02, 0x03, 0xff
 };
 
-const u8 gUnknown_845B67D[] = {
+static const u8 gUnknown_845B67D[] = {
     0x09, 0x0a, 0x0b, 0x11, 0x0c, 0x10, 0xff
 };
 
-const u8 gUnknown_845B684[] = {
+static const u8 gUnknown_845B684[] = {
     0x09, 0x01, 0x04, 0x05, 0x06, 0x07, 0x08, 0x02, 0x0d, 0xff
 };
 
-const u8 gUnknown_845B68E[] = {
+static const u8 gUnknown_845B68E[] = {
     0x09, 0x03, 0x0a, 0x0f, 0x12, 0x13, 0x14, 0xff
 };
 
-const u8 gUnknown_845B696[] = {
+static const u8 gUnknown_845B696[] = {
     0x06, 0x07, 0x08, 0x2c, 0x09, 0x0d, 0x0e, 0x0f, 0x10, 0x12, 0xff
 };
 
-const u8 gUnknown_845B6A1[] = {
+static const u8 gUnknown_845B6A1[] = {
     0x16, 0x17, 0x18, 0xff
 };
 
-const u8 gUnknown_845B6A5[] = {
+static const u8 gUnknown_845B6A5[] = {
     0x0a, 0xff
 };
 
-const u8 gUnknown_845B6A7[] = {
+static const u8 gUnknown_845B6A7[] = {
     0x11, 0x0e, 0x19, 0x1a, 0x1b, 0xff
 };
 
-const u8 gUnknown_845B6AD[] = {
+static const u8 gUnknown_845B6AD[] = {
     0x0a, 0xff
 };
 
-const u8 gUnknown_845B6AF[] = {
+static const u8 gUnknown_845B6AF[] = {
     0x0b, 0xff
 };
 
-const u8 gUnknown_845B6B1[] = {
+static const u8 gUnknown_845B6B1[] = {
     0x2b, 0x19, 0x1a, 0xff
 };
 
-const u8 gUnknown_845B6B5[] = {
+static const u8 gUnknown_845B6B5[] = {
     0x0c, 0xff
 };
 
-const u8 gUnknown_845B6B7[] = {
+static const u8 gUnknown_845B6B7[] = {
     0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22, 0xff
 };
 
-const u8 gUnknown_845B6BF[] = {
+static const u8 gUnknown_845B6BF[] = {
     0x02, 0x03, 0x04, 0xff
 };
 
-const u8 gUnknown_845B6C3[] = {
+static const u8 gUnknown_845B6C3[] = {
     0x01, 0x02, 0x03, 0x07, 0xff
 };
 
-const u8 gUnknown_845B6C8[] = {
+static const u8 gUnknown_845B6C8[] = {
     0x02, 0x04, 0x05, 0x09, 0x25, 0xff
 };
 
-const u8 gUnknown_845B6CE[] = {
+static const u8 gUnknown_845B6CE[] = {
     0x1f, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x2c, 0x09, 0x0d, 0x0e, 0x0f, 0x10, 0x0a, 0x0b, 0x0c, 0x11, 0xff
 };
 
-const u8 gUnknown_845B6E2[] = {
+static const u8 gUnknown_845B6E2[] = {
     0x09, 0x01, 0x02, 0x03, 0x0a, 0x28, 0xff
 };
 
-const u8 gUnknown_845B6E9[] = {
+static const u8 gUnknown_845B6E9[] = {
     0x02, 0x05, 0x06, 0x0a, 0x23, 0x24, 0x09, 0x25, 0xff
 };
 
-const u8 gUnknown_845B6F2[] = {
+static const u8 gUnknown_845B6F2[] = {
     0x1f, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x2c, 0x09, 0x0d, 0x0e, 0x0f, 0x10, 0x0a, 0x0b, 0x0c, 0x11, 0x14, 0xff
 };
 
-const u8 gUnknown_845B707[] = {
+static const u8 gUnknown_845B707[] = {
     0x09, 0x01, 0x02, 0x03, 0x0a, 0x28, 0xff
 };
 
-const u8 gUnknown_845B70E[] = {
+static const u8 gUnknown_845B70E[] = {
     0x03, 0x07, 0x04, 0x05, 0x06, 0xff
 };
 
-const u8 gUnknown_845B714[] = {
+static const u8 gUnknown_845B714[] = {
     0x02, 0x05, 0x06, 0x0a, 0x23, 0x24, 0x09, 0x25, 0xff
 };
 
-const u8 gUnknown_845B71D[] = {
+static const u8 gUnknown_845B71D[] = {
     0x1f, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x2c, 0x09, 0x0d, 0x0e, 0x0f, 0x10, 0x0a, 0x0b, 0x0c, 0x11, 0xff
 };
 
-const u8 gUnknown_845B731[] = {
+static const u8 gUnknown_845B731[] = {
     0x09, 0x01, 0x02, 0x03, 0x0a, 0x0c, 0x0e, 0x16, 0x17, 0x18, 0x15, 0xff
 };
 
-const u8 gUnknown_845B73D[] = {
+static const u8 gUnknown_845B73D[] = {
     0x06, 0x0a, 0x23, 0x24, 0x09, 0x25, 0xff
 };
 
-const u8 gUnknown_845B744[] = {
+static const u8 gUnknown_845B744[] = {
     0x1f, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x2c, 0x09, 0x0d, 0x0e, 0x0f, 0x10, 0x0a, 0x0b, 0x0c, 0x11, 0xff
 };
 
-const u8 gUnknown_845B758[] = {
+static const u8 gUnknown_845B758[] = {
     0x09, 0x01, 0x02, 0x03, 0x0a, 0x15, 0xff
 };
 
-const u8 gUnknown_845B75F[] = {
+static const u8 gUnknown_845B75F[] = {
     0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22, 0x23, 0xff
 };
 
-const u8 gUnknown_845B783[] = {
+static const u8 gUnknown_845B783[] = {
     0x02, 0x0a, 0x04, 0x05, 0x06, 0x07, 0x0d, 0x27, 0x08, 0x0b, 0x21, 0x23, 0x24, 0x2c, 0x09, 0x0e, 0x16, 0x17, 0x0f, 0x10, 0x11, 0x1a, 0x15, 0x1f, 0x20, 0x12, 0x13, 0x14, 0x18, 0x19, 0x1b, 0x1e, 0x1c, 0x28, 0x25, 0xff
 };
 
-const u8 gUnknown_845B7A7[] = {
+static const u8 gUnknown_845B7A7[] = {
     0x1f, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x2c, 0x09, 0x0d, 0x0e, 0x0f, 0x10, 0x0a, 0x0b, 0x0c, 0x11, 0xff
 };
 
-const u8 gUnknown_845B7BB[] = {
+static const u8 gUnknown_845B7BB[] = {
     0x09, 0x01, 0x02, 0x0a, 0x0b, 0x0c, 0x0d, 0x15, 0xff
 };
 
-const u8 gUnknown_845B7C4[] = {
+static const u8 gUnknown_845B7C4[] = {
     0x02, 0x0a, 0x04, 0x05, 0x06, 0x07, 0x0d, 0x27, 0x08, 0x0b, 0x21, 0x23, 0x24, 0x2c, 0x09, 0x0e, 0x16, 0x17, 0x0f, 0x10, 0x11, 0x1a, 0x15, 0x1f, 0x20, 0x12, 0x13, 0x14, 0x18, 0x19, 0x1b, 0x1e, 0x1c, 0x28, 0x25, 0xff
 };
 
-const u8 gUnknown_845B7E8[] = {
+static const u8 gUnknown_845B7E8[] = {
     0x1f, 0x01, 0x02, 0x06, 0x0a, 0x0b, 0x0c, 0x11, 0xff
 };
 
-const u8 gUnknown_845B7F1[] = {
+static const u8 gUnknown_845B7F1[] = {
     0x09, 0x01, 0x02, 0x0a, 0x0b, 0x0c, 0x0d, 0x15, 0x28, 0xff
 };
 
-const u8 gUnknown_845B7FB[] = {
+static const u8 gUnknown_845B7FB[] = {
     0x0a, 0x07, 0x0d, 0x27, 0x08, 0x0b, 0x21, 0x23, 0x24, 0x2c, 0x09, 0x0e, 0x16, 0x0f, 0x10, 0x11, 0x1a, 0x15, 0x1f, 0x20, 0x12, 0x13, 0x14, 0x18, 0x19, 0x1b, 0x1e, 0x1c, 0x28, 0x25, 0xff
 };
 
-const u8 gUnknown_845B81A[] = {
+static const u8 gUnknown_845B81A[] = {
     0x1f, 0x01, 0x02, 0x06, 0x0a, 0x0b, 0x0c, 0x11, 0xff
 };
 
-const u8 gUnknown_845B823[] = {
+static const u8 gUnknown_845B823[] = {
     0x09, 0x01, 0x02, 0x0a, 0x0b, 0x0c, 0x0d, 0x15, 0xff
 };
 
-const u8 gUnknown_845B82C[] = {
+static const u8 gUnknown_845B82C[] = {
     0x07, 0x27, 0x08, 0x2c, 0x15, 0x1f, 0x20, 0x12, 0x13, 0x14, 0x18, 0x19, 0x1b, 0x1e, 0x1c, 0x28, 0x25, 0xff
 };
 
-const u8 gUnknown_845B83E[] = {
+static const u8 gUnknown_845B83E[] = {
     0x1f, 0x01, 0x02, 0x06, 0x0a, 0x0b, 0x0c, 0x11, 0xff
 };
 
-const u8 gUnknown_845B847[] = {
+static const u8 gUnknown_845B847[] = {
     0x09, 0x01, 0x02, 0x0a, 0x0b, 0x0c, 0x0d, 0x15, 0xff
 };
 
-const u8 gUnknown_845B850[] = {
+static const u8 gUnknown_845B850[] = {
     0x0f, 0x1b, 0x1d, 0x11, 0x12, 0x15, 0x17, 0x16, 0x1f, 0x20, 0x13, 0x14, 0xff
 };
 
-const u8 gUnknown_845B85D[] = {
+static const u8 gUnknown_845B85D[] = {
     0x20, 0x21, 0x22, 0x23, 0x24, 0x07, 0x09, 0x2b, 0xff
 };
 
-const u8 gUnknown_845B866[] = {
+static const u8 gUnknown_845B866[] = {
     0x09, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x0a, 0x0d, 0x0f, 0x12, 0x13, 0x14, 0x27, 0x15, 0xff
 };
 
-const u8 gUnknown_845B878[] = {
+static const u8 gUnknown_845B878[] = {
     0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22, 0x23, 0xff
 };
 
-const u8 gUnknown_845B89C[] = {
+static const u8 gUnknown_845B89C[] = {
     0x0f, 0x1b, 0x1d, 0x11, 0x12, 0x16, 0x1f, 0x20, 0x13, 0x14, 0xff
 };
 
-const u8 gUnknown_845B8A7[] = {
+static const u8 gUnknown_845B8A7[] = {
     0x20, 0x21, 0x22, 0x23, 0x24, 0x07, 0x2b, 0xff
 };
 
-const u8 gUnknown_845B8AF[] = {
+static const u8 gUnknown_845B8AF[] = {
     0x09, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x0a, 0x0d, 0x0f, 0x12, 0x13, 0x14, 0x27, 0x15, 0xff
 };
 
-const u8 gUnknown_845B8C1[] = {
+static const u8 gUnknown_845B8C1[] = {
     0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22, 0x23, 0xff
 };
 
-const u8 gUnknown_845B8E5[] = {
+static const u8 gUnknown_845B8E5[] = {
     0x0f, 0x1b, 0x1d, 0x11, 0x12, 0x16, 0x1f, 0x20, 0x13, 0x14, 0xff
 };
 
-const u8 gUnknown_845B8F0[] = {
+static const u8 gUnknown_845B8F0[] = {
     0x20, 0x21, 0x22, 0x23, 0x24, 0x07, 0x2b, 0xff
 };
 
-const u8 gUnknown_845B8F8[] = {
+static const u8 gUnknown_845B8F8[] = {
     0x09, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x0a, 0x0d, 0x0f, 0x12, 0x13, 0x14, 0x27, 0x15, 0xff
 };
 
-const u8 gUnknown_845B90A[] = {
+static const u8 gUnknown_845B90A[] = {
     0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22, 0x23, 0xff
 };
 
-const u8 gUnknown_845B92E[] = {
+static const u8 gUnknown_845B92E[] = {
     0x29, 0x2a, 0x2b, 0xff
 };
 
-const u8 gUnknown_845B932[] = {
+static const u8 gUnknown_845B932[] = {
     0x2d, 0x2e, 0x2f, 0x2b, 0xff
 };
 
-const u8 gUnknown_845B937[] = {
+static const u8 gUnknown_845B937[] = {
     0x09, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x0a, 0x0d, 0x0f, 0x12, 0x13, 0x14, 0xff
 };
 
-const u8 gUnknown_845B947[] = {
+static const u8 gUnknown_845B947[] = {
     0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22, 0x23, 0xff
 };
 
-const u8 gUnknown_845B96B[] = {
+static const u8 gUnknown_845B96B[] = {
     0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x30, 0xff
 };
 
-const u8 gUnknown_845B978[] = {
+static const u8 gUnknown_845B978[] = {
     0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x30, 0xff
 };
 
-const u8 gUnknown_845B985[] = {
+static const u8 gUnknown_845B985[] = {
     0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x30, 0xff
 };
 
-const u8 gUnknown_845B992[] = {
+static const u8 gUnknown_845B992[] = {
     0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x30, 0xff
 };
 
-const u8 gUnknown_845B99F[] = {
+static const u8 gUnknown_845B99F[] = {
     0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x30, 0xff
 };
 
-const u8 gUnknown_845B9AC[] = {
+static const u8 gUnknown_845B9AC[] = {
     0x26, 0x27, 0x28, 0x29, 0x2a, 0xff
 };
 
-const u8 gUnknown_845B9B2[] = {
+static const u8 gUnknown_845B9B2[] = {
     0x26, 0x27, 0x28, 0x29, 0x2a, 0xff
 };
 
-const u8 gUnknown_845B9B8[] = {
+static const u8 gUnknown_845B9B8[] = {
     0x26, 0x27, 0x28, 0x29, 0x2a, 0xff
 };
 
-const u8 gUnknown_845B9BE[] = {
+static const u8 gUnknown_845B9BE[] = {
     0x09, 0x01, 0x02, 0x03, 0x23, 0x25, 0x24, 0x04, 0x05, 0x06, 0x07, 0x08, 0x0a, 0x0b, 0x0c, 0x0d, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x27, 0x15, 0x26, 0x16, 0x17, 0x18, 0x1a, 0x0e, 0x1b, 0xff
 };
 
-const u8 *const gUnknown_845B9E0[] = {
+static const u8 *const gUnknown_845B9E0[] = {
     NULL, NULL, NULL, NULL, NULL,
     NULL, NULL, NULL, gUnknown_845B660, NULL,
     NULL, NULL, NULL, gUnknown_845B664, NULL,
@@ -788,13 +778,13 @@ const u8 *const gUnknown_845B9E0[] = {
     NULL, NULL, NULL, NULL, NULL
 };
 
-const u16 unref_845BCB0[] = INCBIN_U16("graphics/help_system/unk_845BCB0.bin");
+static const u16 unref_845BCB0[] = INCBIN_U16("graphics/help_system/unk_845BCB0.bin");
 
-const u8 gUnknown_845C4B0[] = {
+static const u8 gUnknown_845C4B0[] = {
     3, 0, 1, 2, 4, 5
 };
 
-const u8 gUnknown_845C4B6[][6] = {
+static const u8 gUnknown_845C4B6[][6] = {
     {0, 0, 0, 0, 0, 1},
     {0, 0, 0, 1, 0, 1},
     {0, 0, 0, 1, 0, 1},
@@ -834,7 +824,7 @@ const u8 gUnknown_845C4B6[][6] = {
     {0, 0, 0, 0, 0, 0}
 };
 
-const u16 gUnknown_845C594[] = {
+static const u16 gUnknown_845C594[] = {
     MAP_VIRIDIAN_CITY_MART,
     MAP_PEWTER_CITY_MART,
     MAP_CERULEAN_CITY_MART,
@@ -857,7 +847,7 @@ const u16 gUnknown_845C594[] = {
     MAP_UNDEFINED
 };
 
-const u16 gUnknown_845C5BC[] = {
+static const u16 gUnknown_845C5BC[] = {
     MAP_PEWTER_CITY_GYM,
     MAP_CERULEAN_CITY_GYM,
     MAP_VERMILION_CITY_GYM,
@@ -869,7 +859,7 @@ const u16 gUnknown_845C5BC[] = {
     MAP_UNDEFINED
 };
 
-const u8 gUnknown_845C5CE[][3] = {
+static const u8 gUnknown_845C5CE[][3] = {
     { MAP_GROUP(VIRIDIAN_FOREST), MAP_NUM(VIRIDIAN_FOREST), 1 },
     { MAP_GROUP(MT_MOON_1F), MAP_NUM(MT_MOON_1F), 3 },
     { MAP_GROUP(ROCK_TUNNEL_1F), MAP_NUM(ROCK_TUNNEL_1F), 2 },
@@ -925,17 +915,17 @@ void sub_812B248(void)
     gUnknown_203B0EC = gUnknown_3005EA0;
 }
 
-bool32 sub_812B25C(void)
+static bool32 sub_812B25C(void)
 {
     return sub_812B27C(gUnknown_845C594);
 }
 
-bool32 sub_812B26C(void)
+static bool32 sub_812B26C(void)
 {
     return sub_812B27C(gUnknown_845C5BC);
 }
 
-bool32 sub_812B27C(const u16 * mapIdxs)
+static bool32 sub_812B27C(const u16 * mapIdxs)
 {
     u16 mapIdx = (gSaveBlock1Ptr->location.mapGroup << 8) + gSaveBlock1Ptr->location.mapNum;
     s32 i;
@@ -949,7 +939,7 @@ bool32 sub_812B27C(const u16 * mapIdxs)
     return FALSE;
 }
 
-bool8 sub_812B2C4(void)
+static bool8 sub_812B2C4(void)
 {
     u8 i, j;
 
@@ -1039,7 +1029,7 @@ void sub_812B4B8(void)
     gUnknown_203F175 = 0;
 }
 
-void sub_812B4C4(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+static void sub_812B4C4(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
 {
     a0->sub.field_00 = a1;
     a0->sub.field_04 = 1;
@@ -1048,7 +1038,7 @@ void sub_812B4C4(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
     a0->sub.field_09 = 4;
 }
 
-void sub_812B4D8(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+static void sub_812B4D8(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
 {
     sub_812B4C4(a0, a1);
     sub_812B520(a0, a1);
@@ -1059,7 +1049,7 @@ void sub_812B4D8(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
     sub_813BD5C(1);
 }
 
-void sub_812B520(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+static void sub_812B520(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
 {
     u8 i;
     u8 r4 = 0;
@@ -1078,7 +1068,7 @@ void sub_812B520(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
     a0->sub.field_08 = 0;
 }
 
-void sub_812B5A8(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+static void sub_812B5A8(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
 {
     sub_813BDE8(0);
     sub_813BFC0(0);
@@ -1092,7 +1082,7 @@ void sub_812B5A8(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
     sub_813BD5C(1);
 }
 
-void sub_812B614(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+static void sub_812B614(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
 {
     u8 r6 = 0;
     const u8 * r3 = gUnknown_845B9E0[gUnknown_203B0EC * 5 + gUnknown_3005E9C[1]];
@@ -1133,14 +1123,14 @@ void sub_812B614(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
     a0->sub.field_09 = 21;
 }
 
-bool8 sub_812B754(void)
+static bool8 sub_812B754(void)
 {
     if (FlagGet(FLAG_0x4B0) == TRUE && gUnknown_3005E9C[1] == 2)
         return TRUE;
     return FALSE;
 }
 
-bool8 sub_812B780(u8 id)
+static bool8 sub_812B780(u8 id)
 {
     u8 i = 0;
 
@@ -1349,7 +1339,7 @@ bool8 sub_812B780(u8 id)
     return FALSE;
 }
 
-bool8 sub_812BB10(void)
+static bool8 sub_812BB10(void)
 {
     if (FlagGet(FLAG_0x237) == TRUE)
         return TRUE;
@@ -1556,13 +1546,13 @@ bool8 sub_812BF18(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1
     return TRUE;
 }
 
-void sub_812BF5C(void)
+static void sub_812BF5C(void)
 {
     sub_813C624();
     sub_813C4CC(gUnknown_81B2FC9, 0, 0);
 }
 
-void sub_812BF74(const u8 * str)
+static void sub_812BF74(const u8 * str)
 {
     sub_813C5FC();
     sub_813C488(str);
@@ -1573,13 +1563,13 @@ u8 sub_812BF88(void)
     return gUnknown_3005E9C[0];
 }
 
-void sub_812BF94(struct HelpSystemStruct_203F190 * a0)
+static void sub_812BF94(struct HelpSystemStruct_203F190 * a0)
 {
     a0->field_0C = 0;
     a0->field_0D = 0;
 }
 
-void sub_812BF9C(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+static void sub_812BF9C(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
 {
     s32 index = a1[a0->field_0C + a0->field_0D].index;
     if (index == -2)

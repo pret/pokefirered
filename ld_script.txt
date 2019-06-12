@@ -240,7 +240,6 @@ SECTIONS {
         asm/party_menu.o(.text);
         asm/union_room_chat.o(.text);
         src/help_system_812B1E0.o(.text);
-        asm/help_system_812B1E0.o(.text);
         src/quest_log_battle.o(.text);
         src/fame_checker.o(.text);
         src/menu2.o(.text);

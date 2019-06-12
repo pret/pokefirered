@@ -42,5 +42,12 @@ s32 sub_813C690(void);
 void sub_813C75C(void);
 void sub_813C684(u8);
 void sub_813C004(u8, u8);
+void sub_813C50C(const u8 *a0, const u8 *a1);
+void sub_813BEE4(u8);
+void sub_813C624(void);
+void sub_813C5FC(void);
+void sub_813C488(const u8 *str);
+void sub_813C584(const u8 *str);
+void sub_813BE30(u8);
 
 #endif //GUARD_HELP_SYSTEM_H

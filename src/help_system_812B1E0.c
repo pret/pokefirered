@@ -39,10 +39,10 @@ bool8 sub_812BD98(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1
 bool8 sub_812BE10(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
 bool8 sub_812BEEC(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
 bool8 sub_812BF18(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
-void sub_812BF9C(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
 void sub_812BF5C(void);
 void sub_812BF74(const u8 *);
 void sub_812BF94(struct HelpSystemStruct_203F190 * a0);
+void sub_812BF9C(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
 
 const u8 *const gUnknown_845B080[] = {
     gUnknown_81B2DF8,
@@ -1496,4 +1496,95 @@ bool8 sub_812BD98(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1
 void sub_812BDEC(void)
 {
     sub_813C4CC(gUnknown_845B080[gUnknown_3005E9C[1]], 0, 0);
+}
+
+bool8 sub_812BE10(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+{
+    gUnknown_3005E9C[0] = 2;
+    sub_813BDA4(0);
+    sub_813C624();
+    sub_812BF74(gUnknown_841DFBE);
+    sub_813BDE8(1);
+    sub_813BEE4(1);
+
+    if (gUnknown_3005E9C[1] == 0)
+    {
+        sub_813C50C(gUnknown_845B0B0[gUnknown_3005E9C[3]], gUnknown_845B164[gUnknown_3005E9C[3]]);
+    }
+    else if (gUnknown_3005E9C[1] == 1)
+    {
+        sub_813C50C(gUnknown_845B218[gUnknown_3005E9C[3]], gUnknown_845B2DC[gUnknown_3005E9C[3]]);
+    }
+    else if (gUnknown_3005E9C[1] == 2)
+    {
+        sub_813C50C(gUnknown_845B3A0[gUnknown_3005E9C[3]], gUnknown_845B450[gUnknown_3005E9C[3]]);
+    }
+    else if (gUnknown_3005E9C[1] == 3)
+    {
+        sub_813C50C(gUnknown_845B500[gUnknown_3005E9C[3]], gUnknown_845B520[gUnknown_3005E9C[3]]);
+    }
+    else
+    {
+        sub_813C50C(gUnknown_845B540[gUnknown_3005E9C[3]], gUnknown_845B5D0[gUnknown_3005E9C[3]]);
+    }
+    sub_813BDA4(1);
+    sub_813BD5C(1);
+    a0->field_0E = 6;
+    return TRUE;
+}
+
+bool8 sub_812BEEC(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+{
+    gUnknown_3005E9C[0] = 1;
+    sub_812B5A8(a0, a1);
+    sub_813C75C();
+    sub_813C684(2);
+    a0->field_0E = 3;
+    return TRUE;
+}
+
+bool8 sub_812BF18(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+{
+    if (JOY_NEW(B_BUTTON) || JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        a0->field_0E = 5;
+        return TRUE;
+    }
+    if (JOY_NEW(L_BUTTON | R_BUTTON))
+        return FALSE;
+    return TRUE;
+}
+
+void sub_812BF5C(void)
+{
+    sub_813C624();
+    sub_813C4CC(gUnknown_81B2FC9, 0, 0);
+}
+
+void sub_812BF74(const u8 * str)
+{
+    sub_813C5FC();
+    sub_813C488(str);
+}
+
+u8 sub_812BF88(void)
+{
+    return gUnknown_3005E9C[0];
+}
+
+void sub_812BF94(struct HelpSystemStruct_203F190 * a0)
+{
+    a0->field_0C = 0;
+    a0->field_0D = 0;
+}
+
+void sub_812BF9C(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+{
+    s32 index = a1[a0->field_0C + a0->field_0D].index;
+    if (index == -2)
+        sub_813C584(gUnknown_845B098[5]);
+    else
+        sub_813C584(gUnknown_845B098[index]);
+    sub_813BE30(1);
 }

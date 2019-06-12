@@ -18,6 +18,7 @@ struct HelpSystemStruct_203F190
     struct HelpSystemStruct_203F190_sub sub;
     u8 field_0C;
     u8 field_0D;
+    u8 field_0E;
     u8 filler_10[0xC];
 };
 
@@ -37,5 +38,9 @@ void sub_813BD5C(u8);
 void sub_813BDE8(u8);
 void sub_813BFC0(u8);
 void sub_813BE78(u8);
+s32 sub_813C690(void);
+void sub_813C75C(void);
+void sub_813C684(u8);
+void sub_813C004(u8, u8);
 
 #endif //GUARD_HELP_SYSTEM_H

@@ -10,9 +10,11 @@
 #include "quest_log.h"
 #include "save.h"
 #include "save_location.h"
+#include "sound.h"
 #include "strings.h"
 #include "constants/items.h"
 #include "constants/maps.h"
+#include "constants/songs.h"
 
 EWRAM_DATA u16 gUnknown_203B0EC = 0;
 EWRAM_DATA u8 gUnknown_203B0EE = 0;
@@ -27,8 +29,20 @@ void sub_812B614(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
 bool8 sub_812B754(void);
 bool8 sub_812B780(u8);
 bool8 sub_812BB10(void);
+bool8 sub_812BC54(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
+bool8 sub_812BC80(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
+bool8 sub_812BCA8(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
+bool8 sub_812BCD0(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
+bool8 sub_812BD2C(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
+bool8 sub_812BD64(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
+bool8 sub_812BD98(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
+bool8 sub_812BE10(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
+bool8 sub_812BEEC(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
+bool8 sub_812BF18(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
 void sub_812BF9C(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
+void sub_812BF5C(void);
 void sub_812BF74(const u8 *);
+void sub_812BF94(struct HelpSystemStruct_203F190 * a0);
 
 const u8 *const gUnknown_845B080[] = {
     gUnknown_81B2DF8,
@@ -1333,4 +1347,153 @@ bool8 sub_812B780(u8 id)
     }
 
     return FALSE;
+}
+
+bool8 sub_812BB10(void)
+{
+    if (FlagGet(FLAG_0x237) == TRUE)
+        return TRUE;
+    if (FlagGet(FLAG_0x238) == TRUE)
+        return TRUE;
+    if (FlagGet(FLAG_0x239) == TRUE)
+        return TRUE;
+    if (FlagGet(FLAG_0x23A) == TRUE)
+        return TRUE;
+    if (FlagGet(FLAG_0x23B) == TRUE)
+        return TRUE;
+    if (FlagGet(FLAG_0x2EF) == TRUE)
+        return TRUE;
+    if (FlagGet(FLAG_0x1F1) == TRUE)
+        return TRUE;
+    return FALSE;
+}
+
+bool8 sub_812BB9C(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+{
+    switch (a0->field_0E)
+    {
+    case  8:
+        return sub_812BC54(a0, a1);
+    case  9:
+        return sub_812BC80(a0, a1);
+    case 10:
+        return sub_812BCA8(a0, a1);
+    case  0:
+        return sub_812BCD0(a0, a1);
+    case  1:
+        return sub_812BD2C(a0, a1);
+    case  2:
+        return sub_812BD64(a0, a1);
+    case  3:
+        return sub_812BD98(a0, a1);
+    case  4:
+        return sub_812BE10(a0, a1);
+    case  5:
+        return sub_812BEEC(a0, a1);
+    case  6:
+        return sub_812BF18(a0, a1);
+    }
+    return FALSE;
+}
+
+bool8 sub_812BC54(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+{
+    sub_812BF74(gUnknown_841DFA5);
+    sub_812BF5C();
+    sub_813BDA4(1);
+    sub_813BD5C(1);
+    a0->field_0E = 9;
+    return TRUE;
+}
+
+bool8 sub_812BC80(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+{
+    if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        a0->field_0E = 10;
+    }
+    return TRUE;
+}
+
+bool8 sub_812BCA8(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+{
+    gUnknown_3005E9C[2] = 0;
+    sub_812BF94(a0);
+    sub_812B4D8(a0, a1);
+    a0->field_0E = 0;
+    return TRUE;
+}
+
+bool8 sub_812BCD0(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+{
+    s32 v0 = sub_813C690();
+    switch (v0)
+    {
+    case -6:
+    case -2:
+        return FALSE;
+    case -5:
+    case -4:
+        sub_812BF9C(a0, a1);
+        break;
+    case -3:
+    case -1:
+        break;
+    default:
+        gUnknown_3005E9C[1] = v0;
+        a0->field_0E = 1;
+        break;
+    }
+    return TRUE;
+}
+
+bool8 sub_812BD2C(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+{
+    gUnknown_3005E9C[0] = 1;
+    gUnknown_3005E9C[2] = a0->field_0D;
+    sub_812BF94(a0);
+    sub_812B5A8(a0, a1);
+    sub_813C75C();
+    sub_813C684(2);
+    a0->field_0E = 3;
+    return TRUE;
+}
+
+bool8 sub_812BD64(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+{
+    sub_813C004(0, 0);
+    sub_813C004(1, 0);
+    gUnknown_3005E9C[0] = 0;
+    sub_812B4D8(a0, a1);
+    a0->field_0E = 0;
+    return TRUE;
+}
+
+bool8 sub_812BD98(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+{
+    s32 v0 = sub_813C690();
+    switch (v0)
+    {
+    case -6:
+        return FALSE;
+    case -2:
+        a0->field_0E = 2;
+        break;
+    case -5:
+    case -4:
+    case -3:
+    case -1:
+        break;
+    default:
+        gUnknown_3005E9C[3] = v0;
+        a0->field_0E = 4;
+        break;
+    }
+    return TRUE;
+}
+
+void sub_812BDEC(void)
+{
+    sub_813C4CC(gUnknown_845B080[gUnknown_3005E9C[1]], 0, 0);
 }

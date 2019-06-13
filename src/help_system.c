@@ -8,7 +8,23 @@
 #include "list_menu.h"
 #include "sound.h"
 #include "strings.h"
+#include "text.h"
 #include "constants/songs.h"
+
+struct DmaController
+{
+    void * dest;
+    void * src;
+    u32 size:21;
+    u32 destMode:2;
+    u32 srcMode:2;
+    u32 repeat:1;
+    u32 width:1;
+    u32 dreqOn:1;
+    u32 startMode:3;
+    u32 intrEnable:1;
+    u32 dmaEnable:1;
+};
 
 struct HelpSystemVideoState
 {
@@ -19,7 +35,7 @@ struct HelpSystemVideoState
     /*0x0c*/ u16 savedBg0Hofs;
     /*0x0e*/ u16 savedBg0Vofs;
     /*0x10*/ u16 savedBldCnt;
-    /*0x12*/ u8 savedTextColor[3];
+    /*0x12*/ struct TextColor savedTextColor;
     /*0x15*/ u8 state;
 };
 
@@ -38,7 +54,7 @@ void sub_813BC5C(void);
 void sub_813C454(const u8 * str);
 void sub_813C5D4(void);
 
-EWRAM_DATA u8 gUnknown_203B174[0x4000] = {0};
+EWRAM_DATA u8 gUnknown_203B174[BG_CHAR_SIZE] = {0};
 EWRAM_DATA u8 gUnknown_203F174 = 0;
 EWRAM_DATA u8 gUnknown_203F175 = 0;
 EWRAM_DATA u8 gUnknown_203F176 = 0;
@@ -147,4 +163,75 @@ u8 sub_813B870(void)
         break;
     }
     return gUnknown_203F178.state;
+}
+
+void sub_813BB38(void)
+{
+    vu16 * dma;
+    gUnknown_203F178.savedVblankCb = gMain.vblankCallback;
+    gUnknown_203F178.savedHblankCb = gMain.hblankCallback;
+    gMain.vblankCallback = NULL;
+    gMain.hblankCallback = NULL;
+
+    dma = (void *)REG_ADDR_DMA0;
+    dma[5] &= ~(DMA_START_MASK | DMA_DREQ_ON | DMA_REPEAT);
+    dma[5] &= ~DMA_ENABLE;
+    dma[5];
+}
+
+void sub_813BB74(void)
+{
+    gUnknown_203F178.savedDispCnt = GetGpuReg(REG_OFFSET_DISPCNT);
+    gUnknown_203F178.savedBg0Cnt = GetGpuReg(REG_OFFSET_BG0CNT);
+    gUnknown_203F178.savedBg0Hofs = GetGpuReg(REG_OFFSET_BG0HOFS);
+    gUnknown_203F178.savedBg0Vofs = GetGpuReg(REG_OFFSET_BG0VOFS);
+    gUnknown_203F178.savedBldCnt = GetGpuReg(REG_OFFSET_BLDCNT);
+}
+
+void sub_813BBAC(void)
+{
+    RequestDma3Copy((void *)BG_CHAR_ADDR(3), gUnknown_203B174, BG_CHAR_SIZE, 0);
+}
+
+void sub_813BBC8(void)
+{
+    SaveTextColors(
+        &gUnknown_203F178.savedTextColor.fgColor,
+        &gUnknown_203F178.savedTextColor.bgColor,
+        &gUnknown_203F178.savedTextColor.shadowColor
+    );
+}
+
+void sub_813BBDC(void)
+{
+    gMain.vblankCallback = gUnknown_203F178.savedVblankCb;
+    gMain.hblankCallback = gUnknown_203F178.savedHblankCb;
+}
+
+void sub_813BBF4(void)
+{
+    SetGpuReg(REG_OFFSET_BLDCNT, gUnknown_203F178.savedBldCnt);
+    SetGpuReg(REG_OFFSET_BG0HOFS, gUnknown_203F178.savedBg0Hofs);
+    SetGpuReg(REG_OFFSET_BG0VOFS, gUnknown_203F178.savedBg0Vofs);
+    SetGpuReg(REG_OFFSET_BG0CNT, gUnknown_203F178.savedBg0Cnt);
+    SetGpuReg(REG_OFFSET_DISPCNT, gUnknown_203F178.savedDispCnt);
+}
+
+void sub_813BC2C(void)
+{
+    RequestDma3Copy(gUnknown_203B174, (void *)BG_CHAR_ADDR(3), BG_CHAR_SIZE, 0);
+}
+
+void sub_813BC48(void)
+{
+    RestoreTextColors(
+        &gUnknown_203F178.savedTextColor.fgColor,
+        &gUnknown_203F178.savedTextColor.bgColor,
+        &gUnknown_203F178.savedTextColor.shadowColor
+    );
+}
+
+void sub_813BC5C(void)
+{
+    RequestDma3Copy(gDecompressionBuffer, (void *)BG_CHAR_ADDR(3), BG_CHAR_SIZE, 0);
 }

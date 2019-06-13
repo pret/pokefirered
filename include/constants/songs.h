@@ -484,4 +484,4 @@
 #define BGM_BATTLE30 483
 #define BGM_ROUTE_118 0x7FFF  // What is this for?
 
-#endif  
+#endif  // GUARD_CONSTANTS_SONGS_H

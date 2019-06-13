@@ -1,13 +1,15 @@
-gDecompressionBuffer: @ 201C000
-	.space 0x4000
 
-gTrainerId: @ 2020000
-	.space 0x4
-
+	.align 2
+	.include "src/main.o"
+	.align 2
 	.include "src/malloc.o"
+	.align 2
 	.include "src/text_printer.o"
+	.align 2
 	.include "src/window.o"
+	.align 2
 	.include "src/window_8bpp.o"
+	.align 2
 	.include "src/sprite.o"
 
 	.align 2

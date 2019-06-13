@@ -259,7 +259,7 @@ _080F5314: .4byte 0x05000200
 	thumb_func_start sub_80F5318
 sub_80F5318: @ 80F5318
 	push {lr}
-	ldr r0, _080F532C @ =gUnknown_201F800
+	ldr r0, _080F532C @ =gDecompressionBuffer + 0x3800
 	ldr r1, _080F5330 @ =0x0600f800
 	movs r2, 0xA0
 	lsls r2, 3
@@ -268,14 +268,14 @@ sub_80F5318: @ 80F5318
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F532C: .4byte gUnknown_201F800
+_080F532C: .4byte gDecompressionBuffer + 0x3800
 _080F5330: .4byte 0x0600f800
 	thumb_func_end sub_80F5318
 
 	thumb_func_start sub_80F5334
 sub_80F5334: @ 80F5334
 	push {lr}
-	ldr r0, _080F5348 @ =gUnknown_201C020
+	ldr r0, _080F5348 @ =gDecompressionBuffer + 0x020
 	ldr r1, _080F534C @ =0x0600c020
 	movs r2, 0x8C
 	lsls r2, 6
@@ -284,7 +284,7 @@ sub_80F5334: @ 80F5334
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F5348: .4byte gUnknown_201C020
+_080F5348: .4byte gDecompressionBuffer + 0x020
 _080F534C: .4byte 0x0600c020
 	thumb_func_end sub_80F5334
 
@@ -315,7 +315,7 @@ sub_80F5350: @ 80F5350
 	cmp r0, r2
 	bge _080F53B6
 	mov r12, r2
-	ldr r1, _080F53C8 @ =gUnknown_201F800
+	ldr r1, _080F53C8 @ =gDecompressionBuffer + 0x3800
 	mov r10, r1
 _080F5386:
 	mov r4, r9
@@ -354,7 +354,7 @@ _080F53B6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F53C8: .4byte gUnknown_201F800
+_080F53C8: .4byte gDecompressionBuffer + 0x3800
 	thumb_func_end sub_80F5350
 
 	thumb_func_start sub_80F53CC
@@ -404,7 +404,7 @@ sub_80F5404: @ 80F5404
 	ldr r2, _080F544C @ =0x00001111
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r4, _080F5450 @ =gUnknown_201C020
+	ldr r4, _080F5450 @ =gDecompressionBuffer + 0x020
 	ldr r2, _080F5454 @ =0x01001180
 	adds r0, r1, 0
 	adds r1, r4, 0
@@ -427,7 +427,7 @@ sub_80F5404: @ 80F5404
 	bx r0
 	.align 2, 0
 _080F544C: .4byte 0x00001111
-_080F5450: .4byte gUnknown_201C020
+_080F5450: .4byte gDecompressionBuffer + 0x020
 _080F5454: .4byte 0x01001180
 	thumb_func_end sub_80F5404
 

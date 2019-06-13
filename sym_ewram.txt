@@ -1,29 +1,5 @@
 gDecompressionBuffer: @ 201C000
-	.space 0x20
-
-gUnknown_201C020: @ 201C020
-	.space 0xA8
-
-gUnknown_201C0C8: @ 201C0C8
-	.space 0x22F8
-
-gUnknown_201E3C0: @ 201E3C0
-	.space 0x1040
-
-gUnknown_201F400: @ 201F400
-	.space 0x400
-
-gUnknown_201F800: @ 201F800
-	.space 0x500
-
-gUnknown_201FD00: @ 201FD00
-	.space 0x1E0
-
-gUnknown_201FEE0: @ 201FEE0
-	.space 0x20
-
-gUnknown_201FF00: @ 201FF00
-	.space 0x100
+	.space 0x4000
 
 gTrainerId: @ 2020000
 	.space 0x4

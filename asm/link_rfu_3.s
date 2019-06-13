@@ -5404,7 +5404,7 @@ _081186AC: .4byte gStringVar4
 	thumb_func_start sub_81186B0
 sub_81186B0: @ 81186B0
 	push {lr}
-	ldr r3, _081186C4 @ =gUnknown_201FF00
+	ldr r3, _081186C4 @ =gDecompressionBuffer + 0x3F00
 	ldr r1, [r0]
 	movs r2, 0x80
 	lsls r2, 1
@@ -5413,21 +5413,21 @@ sub_81186B0: @ 81186B0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081186C4: .4byte gUnknown_201FF00
+_081186C4: .4byte gDecompressionBuffer + 0x3F00
 	thumb_func_end sub_81186B0
 
 	thumb_func_start sub_81186C8
 sub_81186C8: @ 81186C8
 	push {lr}
 	ldr r0, [r0]
-	ldr r1, _081186DC @ =gUnknown_201FF00
+	ldr r1, _081186DC @ =gDecompressionBuffer + 0x3F00
 	movs r2, 0x80
 	lsls r2, 1
 	bl memcpy
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081186DC: .4byte gUnknown_201FF00
+_081186DC: .4byte gDecompressionBuffer + 0x3F00
 	thumb_func_end sub_81186C8
 
 	thumb_func_start sub_81186E0

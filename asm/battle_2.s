@@ -2093,13 +2093,13 @@ _08010EE4:
 	bl bitmask_all_link_players_but_self
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _08010EF8 @ =gUnknown_201C0C8
+	ldr r1, _08010EF8 @ =gDecompressionBuffer + 0x0C8
 	movs r2, 0x64
 	bl SendBlock
 	ldr r1, _08010EFC @ =gUnknown_2023E82
 	b _080110EA
 	.align 2, 0
-_08010EF8: .4byte gUnknown_201C0C8
+_08010EF8: .4byte gDecompressionBuffer + 0x0C8
 _08010EFC: .4byte gUnknown_2023E82
 _08010F00:
 	bl GetBlockReceivedStatus

@@ -127,9 +127,9 @@ extern const u8 gFameCheckerText_Cancel[];
 extern const u8 gFameCheckerText_ListMenuCursor[];
 extern const u8 gFameCheckerText_FameCheckerWillBeClosed[];
 extern const u8 gFameCheckerText_ClearTextbox[];
-extern const u8 gFameCheckerText_MainScreenUI[]; // "{KEYGFX_START_BUTTON}PICK {KEYGFX_DPAD_UP_DOWN}SELECT {KEYGFX_A_BUTTON}OK$"
-extern const u8 gFameCheckerText_PickScreenUI[]; // "{KEYGFX_START_BUTTON}PICK {KEYGFX_DPAD_UP_DOWN}SELECT {KEYGFX_B_BUTTON}CANCEL$"
-extern const u8 gFameCheckerText_FlavorTextUI[]; // "{KEYGFX_DPAD_ANY}PICK {KEYGFX_A_BUTTON}READ {KEYGFX_B_BUTTON}CANCEL$"
+extern const u8 gFameCheckerText_MainScreenUI[]; // "{KEYGFX_DPAD_ANY}PICK {KEYGFX_DPAD_UP_DOWN}SELECT {KEYGFX_A_BUTTON}OK$"
+extern const u8 gFameCheckerText_PickScreenUI[]; // "{KEYGFX_DPAD_ANY}PICK {KEYGFX_DPAD_UP_DOWN}SELECT {KEYGFX_B_BUTTON}CANCEL$"
+extern const u8 gFameCheckerText_FlavorTextUI[]; // "{KEYGFX_START_BUTTON}PICK {KEYGFX_A_BUTTON}READ {KEYGFX_B_BUTTON}CANCEL$"
 extern const u8 gFameCheckerOakName[]; // "OAK$"
 extern const u8 gFameCheckerDaisyName[]; // "DAISY$"
 extern const u8 gFameCheckerBillName[]; // "BILL$"

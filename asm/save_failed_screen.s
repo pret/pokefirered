@@ -419,7 +419,7 @@ sub_80F5404: @ 80F5404
 	adds r1, r4, 0
 	adds r2, r5, 0
 	movs r3, 0x2
-	bl sub_813C078
+	bl HelpSystemRenderText
 	bl sub_80F5334
 	add sp, 0x10
 	pop {r4,r5}

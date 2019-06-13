@@ -111,5 +111,6 @@ void Overworld_FadeOutMapMusic(void);
 void sub_805671C(void);
 void sub_8055DC4(void);
 bool8 sub_8055FC4(void);
+bool8 is_light_level_8_or_9(u8 mapType);
 
 #endif //GUARD_ROM4_H

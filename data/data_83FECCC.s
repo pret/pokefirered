@@ -818,31 +818,33 @@ gUnknown_8416221:: @ 8416221
 	.string "♀$"
 
 gText_Lv:: @ 8416223
-	.string "{UNKNOWN_F9 0x05}$"
+	.string "{EXTRA_LV}$"
 
 gOtherText_UnkF9_08_Clear_01:: @ 8416226
-	.string "{UNKNOWN_F9 0x08}{CLEAR 0x01}$"
+	.string "{EXTRA_NO}{CLEAR 0x01}$"
 
 gUnknown_841622C::
-	.string "{UNKNOWN_F9 0x04}$"
+	.string "{EXTRA_PLUS}$"
 
 gUnknown_841622F::
 	.string "{ESCAPE 0x03}$"
 
 gUnknown_8416233::
-	.string "{UNKNOWN_F9 0x07}{UNKNOWN_F9 0x08}$"
+	.string "{EXTRA_ID}{EXTRA_NO}$"
 
 gUnknown_8416238:: @ 8416238
-	.string "{UNKNOWN_F9 0x06}$"
+	.string "{EXTRA_PP}$"
 
 gFameCheckerText_ListMenuCursor:: @ 841623B
 	.string "▶$"
 
 gUnknown_841623D:: @ 841623D
-	.string "YES\nNO$"
+	.string "YES\n"
+	.string "NO$"
 
 gUnknown_8416244::
-	.string "Go back to the\nprevious menu.$"
+	.string "Go back to the\n"
+	.string "previous menu.$"
 
 gUnknown_8416262:: @ 8416262
 	.string "What would you like to do?$"
@@ -872,7 +874,8 @@ gUnknown_84162A2::
 	.string "RETIRE$"
 
 gUnknown_84162A9:: @ 84162A9
-	.string "{STR_VAR_1}/{STR_VAR_2}\nBALLS  {STR_VAR_3}$"
+	.string "{STR_VAR_1}/{STR_VAR_2}\n"
+	.string "BALLS  {STR_VAR_3}$"
 
 gText_TimesStrVar1:: @ 84162B9
 	.string "×{STR_VAR_1}$"
@@ -893,7 +896,8 @@ gUnknown_84162FF:: @ 84162FF
 	.incbin "baserom.gba", 0x4162FF, 0x2
 
 gText_IsSelected:: @ 8416301
-	.string " is\nselected.$"
+	.string " is\n"
+	.string "selected.$"
 
 gUnknown_841630F:: @ 841630F
 	.incbin "baserom.gba", 0x41630F, 0x1B
@@ -1344,7 +1348,8 @@ gFameCheckerText_FameCheckerWillBeClosed:: @ 84181C3
 	.string "The FAME CHECKER will be closed.$"
 
 gFameCheckerText_ClearTextbox:: @ 84181E4
-	.string "\n                              $"
+	.string "\n"
+	.string "                              $"
 
 gUnknown_8418204:: @ 8418204
 	.incbin "baserom.gba", 0x00418204, 0x48c
@@ -1569,64 +1574,64 @@ gUnknown_841979D:: @ 841979D
 gUnknown_84197B8:: @ 84197B8
 	.string "{UNKNOWN_F7 0x00} nature.\n"
 	.string "Met in a fateful encounter when\n"
-	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
+	.string "at {EXTRA_LV} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_84197ED:: @ 84197ED
 	.string "{UNKNOWN_F7 0x00} nature.\n"
 	.string "Met in a fateful encounter when\n"
-	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
+	.string "at {EXTRA_LV} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_8419822:: @ 8419822
 	.string "{UNKNOWN_F7 0x00} nature.\n"
-	.string "Met in {UNKNOWN_F7 0x02} at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
+	.string "Met in {UNKNOWN_F7 0x02} at {EXTRA_LV} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_8419841:: @ 8419841
 	.string "{UNKNOWN_F7 0x00} nature.\n"
-	.string "Met in {UNKNOWN_F7 0x02} at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
+	.string "Met in {UNKNOWN_F7 0x02} at {EXTRA_LV} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_8419860:: @ 8419860
 	.string "{UNKNOWN_F7 0x00} nature.\n"
 	.string "Apparently met in {UNKNOWN_F7 0x02}\n"
-	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
+	.string "at {EXTRA_LV} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_841988A:: @ 841988A
 	.string "{UNKNOWN_F7 0x00} nature.\n"
 	.string "Apparently met in {UNKNOWN_F7 0x02}\n"
-	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
+	.string "at {EXTRA_LV} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_84198B4:: @ 84198B4
 	.string "{UNKNOWN_F7 0x00} nature.\n"
 	.string "Hatched: {UNKNOWN_F7 0x02}\n"
-	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
+	.string "at {EXTRA_LV} {UNKNOWN_F7 0x01}.$"
 
 gUnknown_84198D5:: @ 84198D5
 	.string "{UNKNOWN_F7 0x00} nature.\n"
 	.string "Hatched: {UNKNOWN_F7 0x02}\n"
-	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}.$"
+	.string "at {EXTRA_LV} {UNKNOWN_F7 0x01}.$"
 
 @ TODO: Replace this gibberish with the proper Hiragana
 gUnknown_84198F6:: @ 84198F6
-	.string "{UNKNOWN_F7 0x00}ßÓÁÉË {UNKNOWN_F9 0x05}{UNKNOWN_F7 0x01}çÑÊ\n"
+	.string "{UNKNOWN_F7 0x00}ßÓÁÉË {EXTRA_LV}{UNKNOWN_F7 0x01}çÑÊ\n"
 	.string "{UNKNOWN_F7 0x02}で ÉÇっŒ ùÂだ$"
 
 gUnknown_8419913:: @ 8419913
-	.string "{UNKNOWN_F7 0x00}ÓÁÉË {UNKNOWN_F9 0x05}{UNKNOWN_F7 0x01}çÑÊ\n"
+	.string "{UNKNOWN_F7 0x00}ÓÁÉË {EXTRA_LV}{UNKNOWN_F7 0x01}çÑÊ\n"
 	.string "{UNKNOWN_F7 0x02}で ÉÇっŒ ùÂだ$"
 
 gUnknown_841992F:: @ 841992F
 	.string "{UNKNOWN_F7 0x00} nature. Met in a fateful\n"
 	.string "encounter (hatched: {UNKNOWN_F7 0x02}\n"
-	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}).$"
+	.string "at {EXTRA_LV} {UNKNOWN_F7 0x01}).$"
 
 gUnknown_841996D:: @ 841996D
 	.string "{UNKNOWN_F7 0x00} nature. Met in a fateful\n"
 	.string "encounter (hatched: {UNKNOWN_F7 0x02}\n"
-	.string "at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}).$"
+	.string "at {EXTRA_LV} {UNKNOWN_F7 0x01}).$"
 
 gUnknown_84199AB:: @ 84199AB
 	.string "{UNKNOWN_F7 0x00} nature. Apparently met in\n"
 	.string "a fateful encounter (hatched:\n"
-	.string "{UNKNOWN_F7 0x02} at {UNKNOWN_F9 0x05} {UNKNOWN_F7 0x01}).$"
+	.string "{UNKNOWN_F7 0x02} at {EXTRA_LV} {UNKNOWN_F7 0x01}).$"
 
 gUnknown_84199F4:: @ 84199F4
 	.incbin "baserom.gba", 0x4199F4, 0x217
@@ -2136,37 +2141,84 @@ gUnknown_841DFA0:: @ 841DFA0
 	.string "GOLD$"
 
 gUnknown_841DFA5:: @ 841DFA5
-	.incbin "baserom.gba", 0x41DFA5, 0x7
+	.string "{KEYGFX_A_BUTTON}NEXT$"
 
 gUnknown_841DFAC:: @ 841DFAC
-	.incbin "baserom.gba", 0x41DFAC, 0x12
+	.string "{KEYGFX_DPAD_UP_DOWN}PICK {KEYGFX_A_BUTTON}OK {KEYGFX_B_BUTTON}END$"
 
 gUnknown_841DFBE:: @ 841DFBE
-	.incbin "baserom.gba", 0x41DFBE, 0xB
+	.string "{KEYGFX_A_BUTTON}{KEYGFX_B_BUTTON}CANCEL$"
 
 gUnknown_841DFC9:: @ 841DFC9
-	.incbin "baserom.gba", 0x41DFC9, 0xCA
+	.string "{KEYGFX_DPAD_UP_DOWN}PICK {KEYGFX_A_BUTTON}OK {KEYGFX_B_BUTTON}CANCEL$"
 
+	@ easy chat categories
+	.string "POKéMON$"
+	.string "TRAINER$"
+	.string "STATUS$"
+	.string "BATTLE$"
+	.string "GREETINGS$"
+	.string "PEOPLE$"
+	.string "VOICES$"
+	.string "SPEECH$"
+	.string "ENDINGS$"
+	.string "FEELINGS$"
+	.string "CONDITIONS$"
+	.string "ACTIONS$"
+	.string "LIFESTYLE$"
+	.string "HOBBIES$"
+	.string "TIME$"
+	.string "MISC.$"
+	.string "ADJECTIVES$"
+	.string "EVENTS$"
+	.string "MOVE 1$"
+	.string "MOVE 2$"
+	.string "TRENDY SAYING$"
+	.string "POKéMON2$"
+
+	@ trade-related
 gUnknown_841E093:: @ 841E093
-	.incbin "baserom.gba", 0x41E093, 0xC
+	.string "???$"
+	.string "$"
+	.string "Lv$"
+	.string "---$"
 
 gUnknown_841E09F:: @ 841E09F
-	.incbin "baserom.gba", 0x41E09F, 0x6
+	.string "????$"
+	.string "$"
 
 gUnknown_841E0A5:: @ 841E0A5
-	.incbin "baserom.gba", 0x41E0A5, 0x144
+	.string "Is this trade okay?$"
+	.string "CANCEL$"
+	.string "Choose a POKéMON.$"
+	.string "SUMMARY$"
+	.string "TRADE$"
+	.string "Cancel trade?$"
+	.string "Press the B Button to exit.$"
+	.string "SUMMARY$"
+	.string "TRADE$"
+	.string "{COLOR RED}{HIGHLIGHT DARK_GREY}{SHADOW GREEN}Communication standby…\n"
+	.string "Please wait.$"
+	.string "{COLOR RED}{HIGHLIGHT DARK_GREY}{SHADOW GREEN}The trade has been canceled.$"
+	.string "{COLOR RED}{HIGHLIGHT DARK_GREY}{SHADOW GREEN}That's your only POKéMON\n"
+	.string "for battle.$"
+	.string "{COLOR RED}{HIGHLIGHT DARK_GREY}{SHADOW GREEN}Waiting for your friend\n"
+	.string "to finish…$"
+	.string "Your friend wants\n"
+	.string "to trade POKéMON.$"
 
 gUnknown_841E1E9:: @ 841E1E9
-	.incbin "baserom.gba", 0x41E1E9, 0x17
+	.string "{STR_VAR_2} will be\n"
+	.string "sent to {STR_VAR_1}.$"
 
 gUnknown_841E200:: @ 841E200
-	.incbin "baserom.gba", 0x41E200, 0xD
+	.string "Bye-bye, {STR_VAR_2}!$"
 
 gUnknown_841E20D:: @ 841E20D
-	.incbin "baserom.gba", 0x41E20D, 0x11
+	.string "{STR_VAR_1} sent over {STR_VAR_3}.$"
 
 gUnknown_841E21E:: @ 841E21E
-	.incbin "baserom.gba", 0x41E21E, 0x16
+	.string "Take good care of {STR_VAR_3}!$"
 
 gUnknown_841E234:: @ 841E234
 	.string "From $"
@@ -2241,22 +2293,25 @@ gUnknown_841E2F5:: @ 841E2F5
 	.incbin "baserom.gba", 0x41e2f5, 0x2d
 
 gUnknown_841E322:: @ 841E322
-	.string "{UNKNOWN_F9 0x07}$"
+	.string "{EXTRA_ID}$"
 
 gUnknown_841E325:: @ 841E325
 	.string "Communication standby…$"
 
 gDaycareText_GetAlongVeryWell:: @ 841E33C
-	.string "The two seem to get along\nvery well.$"
+	.string "The two seem to get along\n"
+	.string "very well.$"
 
 gDaycareText_GetAlong:: @ 841E361
 	.string "The two seem to get along.$"
 
 gDaycareText_DontLikeOther:: @ 841E37C
-	.string "The two don't seem to like\neach other much.$"
+	.string "The two don't seem to like\n"
+	.string "each other much.$"
 
 gDaycareText_PlayOther:: @ 841E3A8
-	.string "The two prefer to play with other\nPOKéMON than each other.$"
+	.string "The two prefer to play with other\n"
+	.string "POKéMON than each other.$"
 
 gUnknown_841E3E3:: @ 841E3E3
 	.incbin "baserom.gba", 0x41E3E3, 0x18
@@ -2301,7 +2356,7 @@ gFameCheckerText_PickScreenUI:: @ 841E5B9
 	.string "{KEYGFX_START_BUTTON}PICK {KEYGFX_DPAD_UP_DOWN}SELECT {KEYGFX_B_BUTTON}CANCEL$"
 
 gFameCheckerText_FlavorTextUI:: @ 841E5D2
-	.string "{KEYGFX_DPAD_ANY}PICK {KEYGFX_A_BUTTON}READ {UNKNOWN_F8 0x01}CANCEL$"
+	.string "{KEYGFX_DPAD_ANY}PICK {KEYGFX_A_BUTTON}READ {KEYGFX_B_BUTTON}CANCEL$"
 
 gFameCheckerOakName:: @ 841E5E9
 	.string "OAK$"
@@ -2330,19 +2385,24 @@ gText_ReturnToTitle:: @ 841E685
 	.string "Return to the title screen.$"
 
 gText_DontHaveCardNewOneInput:: @ 841E6A1
-	.string "You don't have a WONDER CARD,\nso a new CARD will be input.$"
+	.string "You don't have a WONDER CARD,\n"
+	.string "so a new CARD will be input.$"
 
 gText_DontHaveNewsNewOneInput:: @ 841E6DC
-	.string "You don't have any WONDER NEWS,\nso new NEWS will be input.$"
+	.string "You don't have any WONDER NEWS,\n"
+	.string "so new NEWS will be input.$"
 
 gText_WhereShouldCardBeAccessed:: @ 841E717
-	.string "Where should the WONDER CARD\nbe accessed?$"
+	.string "Where should the WONDER CARD\n"
+	.string "be accessed?$"
 
 gText_WhereShouldNewsBeAccessed:: @ 841E741
-	.string "Where should the WONDER NEWS\nbe accessed?$"
+	.string "Where should the WONDER NEWS\n"
+	.string "be accessed?$"
 
 gUnknown_841E76B:: @ 841E76B
-	.string "Link standby...\n... ... B Button: Cancel$"
+	.string "Link standby...\n"
+	.string "... ... B Button: Cancel$"
 
 gText_Communicating:: @ 841E794
 	.string "Communicating…$"
@@ -2357,22 +2417,28 @@ gText_CommunicationCanceled:: @ 841E7D1
 	.string "Communication has been canceled.$"
 
 gText_ThrowAwayWonderCard:: @ 841E7F2
-	.string "Throw away the WONDER CARD\nand input a new CARD?$"
+	.string "Throw away the WONDER CARD\n"
+	.string "and input a new CARD?$"
 
 gText_HaventReceivedCardsGift:: @ 841E823
-	.string "You haven't received the CARD's gift\nyet. Input a new CARD anyway?$"
+	.string "You haven't received the CARD's gift\n"
+	.string "yet. Input a new CARD anyway?$"
 
 gText_WonderCardReceivedFrom:: @ 841E866
-	.string "A WONDER CARD has been received\nfrom {STR_VAR_1}.$"
+	.string "A WONDER CARD has been received\n"
+	.string "from {STR_VAR_1}.$"
 
 gText_WonderNewsReceivedFrom:: @ 841E88F
-	.string "A WONDER NEWS item has been\nreceived from {STR_VAR_1}.$"
+	.string "A WONDER NEWS item has been\n"
+	.string "received from {STR_VAR_1}.$"
 
 gText_WonderCardReceived:: @ 841E8BD
-	.string "A new WONDER CARD has been\nreceived.$"
+	.string "A new WONDER CARD has been\n"
+	.string "received.$"
 
 gText_WonderNewsReceived:: @ 841E8E2
-	.string "A new WONDER NEWS item has been\nreceived.$"
+	.string "A new WONDER NEWS item has been\n"
+	.string "received.$"
 
 gText_NewStampReceived:: @ 841E90C
 	.string "A new STAMP has been received.$"
@@ -2381,34 +2447,43 @@ gText_NewTrainerReceived:: @ 841E92B
 	.string "A new TRAINER has arrived.$"
 
 gText_AlreadyHadCard:: @ 841E946
-	.string "You already had that\nWONDER CARD.$"
+	.string "You already had that\n"
+	.string "WONDER CARD.$"
 
 gText_AlreadyHadNews:: @ 841E968
-	.string "You already had that\nWONDER NEWS item.$"
+	.string "You already had that\n"
+	.string "WONDER NEWS item.$"
 
 gText_AlreadyHadStamp:: @ 841E98F
-	.string "You already had that\nSTAMP.$"
+	.string "You already had that\n"
+	.string "STAMP.$"
 
 gText_NoMoreRoomForStamps:: @ 841E9AB
-	.string "There's no more room for adding\nSTAMPS.$"
+	.string "There's no more room for adding\n"
+	.string "STAMPS.$"
 
 gText_RecordUploadedViaWireless:: @ 841E9D3
-	.string "Your record has been uploaded via\nWIRELESS COMMUNICATION.$"
+	.string "Your record has been uploaded via\n"
+	.string "WIRELESS COMMUNICATION.$"
 
 gText_CantAcceptCardFromTrainer:: @ 841EA0D
-	.string "You can't accept a WONDER CARD\nfrom this TRAINER.$"
+	.string "You can't accept a WONDER CARD\n"
+	.string "from this TRAINER.$"
 
 gText_CantAcceptNewsFromTrainer:: @ 841EA3F
-	.string "You can't accept WONDER NEWS\nfrom this TRAINER.$"
+	.string "You can't accept WONDER NEWS\n"
+	.string "from this TRAINER.$"
 
 gText_NothingSentOver:: @ 841EA6F
 	.string "Nothing was sent over…$"
 
 gText_WhatToDoWithCards:: @ 841EA86
-	.string "What would you like to do\nwith the WONDER CARDS?$"
+	.string "What would you like to do\n"
+	.string "with the WONDER CARDS?$"
 
 gText_WhatToDoWithNews:: @ 841EAB7
-	.string "What would you like to do\nwith the WONDER NEWS?$"
+	.string "What would you like to do\n"
+	.string "with the WONDER NEWS?$"
 
 gText_SendingWonderCard:: @ 841EAE7
 	.string "Sending your WONDER CARD…$"
@@ -2417,10 +2492,12 @@ gText_SendingWonderNews:: @ 841EB01
 	.string "Sending your WONDER NEWS item…$"
 
 gText_WonderCardSentTo:: @ 841EB20
-	.string "Your WONDER CARD has been sent\nto {STR_VAR_1}.$"
+	.string "Your WONDER CARD has been sent\n"
+	.string "to {STR_VAR_1}.$"
 
 gText_WonderNewsSentTo:: @ 841EB46
-	.string "Your WONDER NEWS item has been\nsent to {STR_VAR_1}.$"
+	.string "Your WONDER NEWS item has been\n"
+	.string "sent to {STR_VAR_1}.$"
 
 gText_StampSentTo:: @ 841EB71
 	.string "A STAMP has been sent to {STR_VAR_1}.$"
@@ -2429,34 +2506,44 @@ gText_GiftSentTo:: @ 841EB8E
 	.string "A GIFT has been sent to {STR_VAR_1}.$"
 
 gText_OtherTrainerHasCard:: @ 841EBAA
-	.string "The other TRAINER has the same\nWONDER CARD already.$"
+	.string "The other TRAINER has the same\n"
+	.string "WONDER CARD already.$"
 
 gText_OtherTrainerHasNews:: @ 841EBDE
-	.string "The other TRAINER has the same\nWONDER NEWS already.$"
+	.string "The other TRAINER has the same\n"
+	.string "WONDER NEWS already.$"
 
 gText_OtherTrainerHasStamp:: @ 841EC12
-	.string "The other TRAINER has the same\nSTAMP already.$"
+	.string "The other TRAINER has the same\n"
+	.string "STAMP already.$"
 
 gText_OtherTrainerCanceled:: @ 841EC40
-	.string "The other TRAINER canceled\ncommunication.$"
+	.string "The other TRAINER canceled\n"
+	.string "communication.$"
 
 gText_CantSendGiftToTrainer:: @ 841EC6A
-	.string "You can't send a MYSTERY GIFT to\nthis TRAINER.$"
+	.string "You can't send a MYSTERY GIFT to\n"
+	.string "this TRAINER.$"
 
 gText_IfThrowAwayCardEventWontHappen:: @ 841EC99
-	.string "If you throw away the CARD,\nits event won't happen. Okay?$"
+	.string "If you throw away the CARD,\n"
+	.string "its event won't happen. Okay?$"
 
 gText_OkayToDiscardNews:: @ 841ECD3
-	.string "Is it okay to discard this\nNEWS item?$"
+	.string "Is it okay to discard this\n"
+	.string "NEWS item?$"
 
 gText_HaventReceivedGiftOkayToDiscard:: @ 841ECF9
-	.string "You haven't received the\nGIFT. Is it okay to discard?$"
+	.string "You haven't received the\n"
+	.string "GIFT. Is it okay to discard?$"
 
 gText_DataWillBeSaved:: @ 841ED2F
-	.string "Data will be saved.\nPlease wait.$"
+	.string "Data will be saved.\n"
+	.string "Please wait.$"
 
 gText_SaveCompletedPressA:: @ 841ED50
-	.string "Save completed.\nPlease press the A Button.$"
+	.string "Save completed.\n"
+	.string "Please press the A Button.$"
 
 gText_WonderCardThrownAway:: @ 841ED7B
 	.string "The WONDER CARD was thrown away.$"
@@ -3726,60 +3813,3 @@ gUnknown_845B050:: @ 845B050
 
 gUnknown_845B068:: @ 845B068
 	.incbin "baserom.gba", 0x45B068, 0x18
-
-gUnknown_845B080:: @ 845B080
-	.incbin "baserom.gba", 0x45B080, 0x18
-
-gUnknown_845B098:: @ 845B098
-	.incbin "baserom.gba", 0x45B098, 0x18
-
-gUnknown_845B0B0:: @ 845B0B0
-	.incbin "baserom.gba", 0x45B0B0, 0xB4
-
-gUnknown_845B164:: @ 845B164
-	.incbin "baserom.gba", 0x45B164, 0xB4
-
-gUnknown_845B218:: @ 845B218
-	.incbin "baserom.gba", 0x45B218, 0xC4
-
-gUnknown_845B2DC:: @ 845B2DC
-	.incbin "baserom.gba", 0x45B2DC, 0xC4
-
-gUnknown_845B3A0:: @ 845B3A0
-	.incbin "baserom.gba", 0x45B3A0, 0xB0
-
-gUnknown_845B450:: @ 845B450
-	.incbin "baserom.gba", 0x45B450, 0xB0
-
-gUnknown_845B500:: @ 845B500
-	.incbin "baserom.gba", 0x45B500, 0x20
-
-gUnknown_845B520:: @ 845B520
-	.incbin "baserom.gba", 0x45B520, 0x20
-
-gUnknown_845B540:: @ 845B540
-	.incbin "baserom.gba", 0x45B540, 0x90
-
-gUnknown_845B5D0:: @ 845B5D0
-	.incbin "baserom.gba", 0x45B5D0, 0x3EE
-
-gUnknown_845B9BE:: @ 845B9BE
-	.incbin "baserom.gba", 0x45B9BE, 0x22
-
-gUnknown_845B9E0:: @ 845B9E0
-	.incbin "baserom.gba", 0x45B9E0, 0xAD0
-
-gUnknown_845C4B0:: @ 845C4B0
-	.incbin "baserom.gba", 0x45C4B0, 0x6
-
-gUnknown_845C4B6:: @ 845C4B6
-	.incbin "baserom.gba", 0x45C4B6, 0xDE
-
-gUnknown_845C594:: @ 845C594
-	.incbin "baserom.gba", 0x45C594, 0x28
-
-gUnknown_845C5BC:: @ 845C5BC
-	.incbin "baserom.gba", 0x45C5BC, 0x12
-
-gUnknown_845C5CE:: @ 845C5CE
-	.incbin "baserom.gba", 0x45C5CE, 0x32

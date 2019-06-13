@@ -1509,33 +1509,10 @@ gUnknown_203B16E: @ 203B16E
 gUnknown_203B170: @ 203B170
 	.space 0x4
 
-gUnknown_203B174: @ 203B174
-	.space 0x4000
+	.align 2
+	.include "src/help_system.o"
 
-gUnknown_203F174: @ 203F174
-	.space 0x1
-
-gUnknown_203F175: @ 203F175
-	.space 0x1
-
-gUnknown_203F176: @ 203F176
-	.space 0x1
-
-gUnknown_203F177: @ 203F177
-	.space 0x1
-
-gUnknown_203F178: @ 203F178
-	.space 0x12
-
-gUnknown_203F18A: @ 203F18A
-	.space 0x6
-
-gUnknown_203F190: @ 203F190
-	.space 0x1C
-
-gUnknown_203F1AC: @ 203F1AC
-	.space 0x1A0
-
+	@ src/unk_text_util.o
 gUnknown_203F34C: @ 203F34C
 	.space 0x20
 

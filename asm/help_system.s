@@ -381,14 +381,14 @@ _0813BBC4: .4byte gUnknown_203B174
 	thumb_func_start sub_813BBC8
 sub_813BBC8: @ 813BBC8
 	push {lr}
-	ldr r0, _0813BBD8 @ =gUnknown_203F18A
+	ldr r0, _0813BBD8 @ =gUnknown_203F178 + 0x12
 	adds r1, r0, 0x1
 	adds r2, r0, 0x2
 	bl SaveTextColors
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0813BBD8: .4byte gUnknown_203F18A
+_0813BBD8: .4byte gUnknown_203F178 + 0x12
 	thumb_func_end sub_813BBC8
 
 	thumb_func_start sub_813BBDC
@@ -450,14 +450,14 @@ _0813BC44: .4byte 0x0600c000
 	thumb_func_start sub_813BC48
 sub_813BC48: @ 813BC48
 	push {lr}
-	ldr r0, _0813BC58 @ =gUnknown_203F18A
+	ldr r0, _0813BC58 @ =gUnknown_203F178 + 0x12
 	adds r1, r0, 0x1
 	adds r2, r0, 0x2
 	bl RestoreTextColors
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0813BC58: .4byte gUnknown_203F18A
+_0813BC58: .4byte gUnknown_203F178 + 0x12
 	thumb_func_end sub_813BC48
 
 	thumb_func_start sub_813BC5C

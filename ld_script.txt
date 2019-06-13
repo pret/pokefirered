@@ -248,6 +248,7 @@ SECTIONS {
         asm/menu_indicators.o(.text);
         asm/pokedex_area_markers.o(.text);
         asm/pokemon_summary_screen.o(.text);
+        src/help_system.o(.text);
         asm/help_system.o(.text);
         asm/wild_pokemon_area.o(.text);
         asm/unk_text_util.o(.text);

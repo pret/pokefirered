@@ -143,6 +143,8 @@ extern const u8 gUnknown_841DFBE[];
 extern const u8 gUnknown_841DFC9[];
 
 // help_system
+extern const u8 gUnknown_841CB3C[];
+extern const u8 gUnknown_841CB41[];
 extern const u8 gUnknown_841CB49[];
 extern const u8 gUnknown_841CB4E[];
 

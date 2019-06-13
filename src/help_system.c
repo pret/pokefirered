@@ -235,3 +235,147 @@ void sub_813BC5C(void)
 {
     RequestDma3Copy(gDecompressionBuffer, (void *)BG_CHAR_ADDR(3), BG_CHAR_SIZE, 0);
 }
+
+void sub_813BC78(u16 baseTile, u8 left, u8 top, u8 width, u8 height, u16 increment)
+{
+    u16 i, j;
+
+    for (i = top; i < top + height; i++)
+    {
+        for (j = left; j < left + width; j++)
+        {
+            *((u16 *)(gDecompressionBuffer + 0x3800 + 64 * i + 2 * j)) = baseTile;
+            baseTile += increment;
+        }
+    }
+
+    sub_813BC5C();
+}
+
+void sub_813BCF4(void)
+{
+    sub_813BC78(0x1FF, 0, 0, 30, 20, 0);
+}
+
+void sub_813BD14(u8 mode)
+{
+    switch (mode)
+    {
+    case 0:
+        sub_813BC78(0x1FF, 1, 0, 7, 2, 0);
+        break;
+    case 1:
+        sub_813BC78(0x1E8, 1, 0, 7, 2, 1);
+        break;
+    }
+}
+
+void sub_813BD5C(u8 mode)
+{
+    switch (mode)
+    {
+    case 0:
+        sub_813BC78(0x1FF, 13, 0, 16, 2, 0);
+        break;
+    case 1:
+        sub_813BC78(0x1A0, 13, 0, 16, 2, 1);
+        break;
+    }
+}
+
+void sub_813BDA4(u8 mode)
+{
+    switch (mode)
+    {
+    case 0:
+        sub_813BC78(0x1FF, 2, 3, 26, 16, 0);
+        break;
+    case 1:
+        sub_813BC78(0x000, 2, 3, 26, 16, 1);
+        break;
+    }
+}
+
+void sub_813BDE8(u8 mode)
+{
+    switch (mode)
+    {
+    case 0:
+        sub_813BC78(0x1FF, 1, 3, 28, 16, 0);
+        break;
+    case 1:
+        sub_813BC78(0x1FA, 1, 3, 28, 17, 0);
+        break;
+    }
+}
+
+void sub_813BE30(u8 mode)
+{
+    switch (mode)
+    {
+    case 0:
+        sub_813BC78(0x1FF, 2, 14, 26, 5, 0);
+        break;
+    case 1:
+        sub_813BC78(0x11E, 2, 14, 26, 5, 1);
+        break;
+    }
+}
+
+void sub_813BE78(u8 mode)
+{
+    switch (mode)
+    {
+    case 0:
+        sub_813BC78(0x1FF, 1,  2, 28, 1, 0);
+        sub_813BC78(0x1FF, 1, 19, 28, 1, 0);
+        break;
+    case 1:
+        sub_813BC78(0x1F7, 1,  2, 28, 1, 0);
+        sub_813BC78(0x1F8, 1, 19, 28, 1, 0);
+        break;
+    }
+}
+
+void sub_813BEE4(u8 mode)
+{
+    switch (mode)
+    {
+    case 0:
+        sub_813BC78(0x1FF, 1,  2, 28, 1, 0);
+        sub_813BC78(0x1FF, 1, 19, 28, 1, 0);
+        break;
+    case 1:
+        sub_813BC78(0x1FB, 1,  2, 28, 1, 0);
+        sub_813BC78(0x1FC, 1, 19, 28, 1, 0);
+        break;
+    }
+}
+
+void sub_813BF50(u8 mode)
+{
+    switch (mode)
+    {
+    case 0:
+        sub_813BC78(0x1FF,  0, 0, 1, 20, 0);
+        sub_813BC78(0x1FF, 29, 0, 1, 20, 0);
+        break;
+    case 1:
+        sub_813BC78(0x1F9,  0, 0, 1, 20, 0);
+        sub_813BC78(0x1F9, 29, 0, 1, 20, 0);
+        break;
+    }
+}
+
+void sub_813BFC0(u8 mode)
+{
+    switch (mode)
+    {
+    case 0:
+        sub_813BC78(0x1FF, 1, 5, 28, 1, 0);
+        break;
+    case 1:
+        sub_813BC78(0x1FC, 1, 5, 28, 1, 0);
+        break;
+    }
+}

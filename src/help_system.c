@@ -957,3 +957,37 @@ void sub_813C3AC(u8 font, u16 glyph, struct Bitmap *srcBlit, struct Bitmap *dest
     destBlit->height = height * 8;
     BlitBitmapRect4Bit(srcBlit, destBlit, 0, 0, x, y, gGlyphInfo[0x80], gGlyphInfo[0x81], 0);
 }
+
+void sub_813C454(const u8 * str)
+{
+    GenerateFontHalfRowLookupTable(1, 15, 2);
+    HelpSystemRenderText(5, gDecompressionBuffer + 0x3D00, str, 6, 2, 7, 2);
+}
+
+void sub_813C488(const u8 * str)
+{
+    s32 left = 0x7C - GetStringWidth(0, str, 0);
+    GenerateFontHalfRowLookupTable(1, 15, 2);
+    HelpSystemRenderText(0, gDecompressionBuffer + 0x3400, str, left, 2, 16, 2);
+}
+
+void sub_813C4CC(const u8 * str, u8 x, u8 y)
+{
+    GenerateFontHalfRowLookupTable(1, 15, 2);
+    HelpSystemRenderText(2, gDecompressionBuffer + 0x0000, str, x, y, 26, 16);
+}
+
+void sub_813C50C(const u8 * str1, const u8 * str2)
+{
+    CpuFill16(0xEEEE, gDecompressionBuffer + 0x0000, 0x3400);
+    GenerateFontHalfRowLookupTable(1, 14, 2);
+    HelpSystemRenderText(2, gDecompressionBuffer + 0x0000, str1, 0, 0, 26, 16);
+    HelpSystemRenderText(2, gDecompressionBuffer + 0x09C0, str2, 0, 0, 26, 13);
+}
+
+void sub_813C584(const u8 * str)
+{
+    CpuFill16(0x1111, gDecompressionBuffer + 0x23C0, 0x1040);
+    GenerateFontHalfRowLookupTable(2, 1, 3);
+    HelpSystemRenderText(2, gDecompressionBuffer + 0x23C0, str, 2, 6, 26, 5);
+}

@@ -73,7 +73,7 @@ _080F516C:
 	ldr r1, _080F5188 @ =0x0000ffff
 	movs r2, 0x80
 	bl m4aMPlayVolumeControl
-	bl sub_813BB38
+	bl SaveCallbacks
 	ldr r1, _080F518C @ =gUnknown_203AB50
 	movs r0, 0x1
 	strb r0, [r1]
@@ -83,9 +83,9 @@ _080F5184: .4byte gMPlayInfo_BGM
 _080F5188: .4byte 0x0000ffff
 _080F518C: .4byte gUnknown_203AB50
 _080F5190:
-	bl sub_813BBAC
-	bl sub_813BB74
-	bl sub_813BBC8
+	bl SaveMapTiles
+	bl SaveMapGPURegs
+	bl SaveMapTextColors
 	bl sub_80F52EC
 	movs r0, 0
 	movs r1, 0
@@ -197,7 +197,7 @@ _080F5298:
 	movs r0, 0
 	movs r1, 0
 	bl SetGpuReg
-	bl sub_813BC2C
+	bl RestoreMapTiles
 	bl sub_80F52EC
 	ldr r1, _080F52B0 @ =gUnknown_203AB50
 	movs r0, 0x8
@@ -211,9 +211,9 @@ _080F52B4:
 	movs r2, 0x80
 	lsls r2, 1
 	bl m4aMPlayVolumeControl
-	bl sub_813BC48
-	bl sub_813BBF4
-	bl sub_813BBDC
+	bl RestoreMapTextColors
+	bl RestoreGPURegs
+	bl RestoreCallbacks
 	ldr r0, _080F52E4 @ =gUnknown_3005430
 	movs r1, 0
 	str r1, [r0]

@@ -16,21 +16,6 @@
 
 extern u8 gGlyphInfo[];
 
-struct DmaController
-{
-    void * dest;
-    void * src;
-    u32 size:21;
-    u32 destMode:2;
-    u32 srcMode:2;
-    u32 repeat:1;
-    u32 width:1;
-    u32 dreqOn:1;
-    u32 startMode:3;
-    u32 intrEnable:1;
-    u32 dmaEnable:1;
-};
-
 struct HelpSystemVideoState
 {
     /*0x00*/ MainCallback savedVblankCb;
@@ -44,42 +29,26 @@ struct HelpSystemVideoState
     /*0x15*/ u8 state;
 };
 
-void sub_813BB38(void);
-void sub_813BB74(void);
-void sub_813BBAC(void);
-void sub_813BBC8(void);
-void sub_813BBDC(void);
-void sub_813BCF4(void);
-void sub_813BBF4(void);
-void sub_813BD14(u8);
-void sub_813BF50(u8);
-void sub_813BC2C(void);
-void sub_813BC48(void);
-void sub_813BC5C(void);
-void sub_813C3AC(u8, u16, struct Bitmap *, struct Bitmap *, u8 *, u8, u8, u8, u8);
-void sub_813C454(const u8 * str);
-void sub_813C5D4(void);
-
-EWRAM_DATA u8 gUnknown_203B174[BG_CHAR_SIZE] = {0};
+static EWRAM_DATA u8 sMapTilesBackup[BG_CHAR_SIZE] = {0};
 EWRAM_DATA u8 gUnknown_203F174 = 0;
 EWRAM_DATA u8 gUnknown_203F175 = 0;
-EWRAM_DATA u8 gUnknown_203F176 = 0;
-EWRAM_DATA u8 gUnknown_203F177 = 0;
-EWRAM_DATA struct HelpSystemVideoState gUnknown_203F178 = {0};
-EWRAM_DATA struct HelpSystemStruct_203F190 gUnknown_203F190 = {0};
-EWRAM_DATA struct ListMenuItem gUnknown_203F1AC[52] = {0};
+static EWRAM_DATA u8 sDelayTimer = 0;
+static EWRAM_DATA u8 sInHelpSystem = 0;
+static EWRAM_DATA struct HelpSystemVideoState sVideoState = {0};
+EWRAM_DATA struct HelpSystemListMenu gHelpSystemListMenu = {0};
+EWRAM_DATA struct ListMenuItem gHelpSystemListMenuItems[52] = {0};
 
-const u16 gUnknown_8464008[] = INCBIN_U16("graphics/help_system/unk_8464008.4bpp");
-const u16 gUnknown_8464128[] = INCBIN_U16("graphics/help_system/unk_8464008.gbapal");
+static const u16 sTiles[] = INCBIN_U16("graphics/help_system/unk_8464008.4bpp");
+static const u16 sPals[] = INCBIN_U16("graphics/help_system/unk_8464008.gbapal");
 
-u8 sub_813B870(void)
+u8 RunHelpSystemCallback(void)
 {
     s32 i;
 
-    switch (gUnknown_203F178.state)
+    switch (sVideoState.state)
     {
     case 0:
-        gUnknown_203F177 = 0;
+        sInHelpSystem = 0;
         if (gSaveBlock2Ptr->optionsButtonMode != OPTIONS_BUTTON_MODE_NORMAL)
             return 0;
         if (JOY_NEW(R_BUTTON) && gUnknown_203F175 == 1)
@@ -96,39 +65,39 @@ u8 sub_813B870(void)
             PlaySE(SE_HELP_OPEN);
             if (!gUnknown_203F174)
                 m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x80);
-            sub_813BB38();
-            gUnknown_203F177 = 1;
-            gUnknown_203F178.state = 1;
+            SaveCallbacks();
+            sInHelpSystem = 1;
+            sVideoState.state = 1;
         }
         break;
     case 1:
-        sub_813BBAC();
-        sub_813BB74();
-        sub_813BBC8();
-        (*(vu16 *)PLTT) = gUnknown_8464128[15];
+        SaveMapTiles();
+        SaveMapGPURegs();
+        SaveMapTextColors();
+        (*(vu16 *)PLTT) = sPals[15];
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
-        gUnknown_203F178.state = 2;
+        sVideoState.state = 2;
         break;
     case 2:
         RequestDma3Fill(0, (void *)BG_CHAR_ADDR(3), BG_CHAR_SIZE, 0);
-        RequestDma3Copy(gUnknown_8464128, (void *)PLTT, sizeof(gUnknown_8464128), 0);
-        RequestDma3Copy(gUnknown_8464008, gDecompressionBuffer + 0x3EE0, sizeof(gUnknown_8464008), 0);
-        gUnknown_203F178.state = 3;
+        RequestDma3Copy(sPals, (void *)PLTT, sizeof(sPals), 0);
+        RequestDma3Copy(sTiles, gDecompressionBuffer + 0x3EE0, sizeof(sTiles), 0);
+        sVideoState.state = 3;
         break;
     case 3:
         sub_813BCF4();
-        sub_813C5D4();
-        sub_813C5FC();
-        sub_813C454(gUnknown_841CB49);
+        HelpSystem_FillPanel3();
+        HelpSystem_FillPanel2();
+        HelpSystem_PrintText_Row61(gString_Help);
         sub_813BD14(1);
         if (sub_812B40C() == TRUE)
-            sub_812BC54(&gUnknown_203F190, gUnknown_203F1AC);
+            sub_812BC54(&gHelpSystemListMenu, gHelpSystemListMenuItems);
         else
-            sub_812BCA8(&gUnknown_203F190, gUnknown_203F1AC);
+            sub_812BCA8(&gHelpSystemListMenu, gHelpSystemListMenuItems);
         sub_813BE78(1);
         sub_813BF50(1);
-        sub_813BC5C();
-        gUnknown_203F178.state = 4;
+        CommitTilemap();
+        sVideoState.state = 4;
         break;
     case 4:
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
@@ -136,46 +105,46 @@ u8 sub_813B870(void)
         SetGpuReg(REG_OFFSET_BG0VOFS, 0);
         SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(3) | BGCNT_16COLOR | BGCNT_SCREENBASE(31));
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_BG0_ON);
-        gUnknown_203F178.state = 5;
+        sVideoState.state = 5;
         break;
     case 5:
-        if (!sub_812BB9C(&gUnknown_203F190, gUnknown_203F1AC))
+        if (!sub_812BB9C(&gHelpSystemListMenu, gHelpSystemListMenuItems))
         {
             PlaySE(SE_HELP_CLOSE);
-            gUnknown_203F178.state = 6;
+            sVideoState.state = 6;
         }
         break;
     case 6:
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
-        sub_813BC2C();
+        RestoreMapTiles();
         for (i = 0; i < 0x200; i += 2)
         {
-            *((vu16 *)(PLTT + 0x000 + i)) = gUnknown_8464128[15];
-            *((vu16 *)(PLTT + 0x200 + i)) = gUnknown_8464128[15];
+            *((vu16 *)(PLTT + 0x000 + i)) = sPals[15];
+            *((vu16 *)(PLTT + 0x200 + i)) = sPals[15];
         }
-        gUnknown_203F178.state = 7;
+        sVideoState.state = 7;
         break;
     case 7:
         if (!gUnknown_203F174)
             m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
-        sub_813BC48();
-        sub_813BBF4();
-        gUnknown_203F178.state = 8;
+        RestoreMapTextColors();
+        RestoreGPURegs();
+        sVideoState.state = 8;
         break;
     case 8:
-        sub_813BBDC();
-        gUnknown_203F177 = 0;
-        gUnknown_203F178.state = 0;
+        RestoreCallbacks();
+        sInHelpSystem = 0;
+        sVideoState.state = 0;
         break;
     }
-    return gUnknown_203F178.state;
+    return sVideoState.state;
 }
 
-void sub_813BB38(void)
+void SaveCallbacks(void)
 {
     vu16 * dma;
-    gUnknown_203F178.savedVblankCb = gMain.vblankCallback;
-    gUnknown_203F178.savedHblankCb = gMain.hblankCallback;
+    sVideoState.savedVblankCb = gMain.vblankCallback;
+    sVideoState.savedHblankCb = gMain.hblankCallback;
     gMain.vblankCallback = NULL;
     gMain.hblankCallback = NULL;
 
@@ -185,64 +154,64 @@ void sub_813BB38(void)
     dma[5];
 }
 
-void sub_813BB74(void)
+void SaveMapGPURegs(void)
 {
-    gUnknown_203F178.savedDispCnt = GetGpuReg(REG_OFFSET_DISPCNT);
-    gUnknown_203F178.savedBg0Cnt = GetGpuReg(REG_OFFSET_BG0CNT);
-    gUnknown_203F178.savedBg0Hofs = GetGpuReg(REG_OFFSET_BG0HOFS);
-    gUnknown_203F178.savedBg0Vofs = GetGpuReg(REG_OFFSET_BG0VOFS);
-    gUnknown_203F178.savedBldCnt = GetGpuReg(REG_OFFSET_BLDCNT);
+    sVideoState.savedDispCnt = GetGpuReg(REG_OFFSET_DISPCNT);
+    sVideoState.savedBg0Cnt = GetGpuReg(REG_OFFSET_BG0CNT);
+    sVideoState.savedBg0Hofs = GetGpuReg(REG_OFFSET_BG0HOFS);
+    sVideoState.savedBg0Vofs = GetGpuReg(REG_OFFSET_BG0VOFS);
+    sVideoState.savedBldCnt = GetGpuReg(REG_OFFSET_BLDCNT);
 }
 
-void sub_813BBAC(void)
+void SaveMapTiles(void)
 {
-    RequestDma3Copy((void *)BG_CHAR_ADDR(3), gUnknown_203B174, BG_CHAR_SIZE, 0);
+    RequestDma3Copy((void *)BG_CHAR_ADDR(3), sMapTilesBackup, BG_CHAR_SIZE, 0);
 }
 
-void sub_813BBC8(void)
+void SaveMapTextColors(void)
 {
     SaveTextColors(
-        &gUnknown_203F178.savedTextColor.fgColor,
-        &gUnknown_203F178.savedTextColor.bgColor,
-        &gUnknown_203F178.savedTextColor.shadowColor
+        &sVideoState.savedTextColor.fgColor,
+        &sVideoState.savedTextColor.bgColor,
+        &sVideoState.savedTextColor.shadowColor
     );
 }
 
-void sub_813BBDC(void)
+void RestoreCallbacks(void)
 {
-    gMain.vblankCallback = gUnknown_203F178.savedVblankCb;
-    gMain.hblankCallback = gUnknown_203F178.savedHblankCb;
+    gMain.vblankCallback = sVideoState.savedVblankCb;
+    gMain.hblankCallback = sVideoState.savedHblankCb;
 }
 
-void sub_813BBF4(void)
+void RestoreGPURegs(void)
 {
-    SetGpuReg(REG_OFFSET_BLDCNT, gUnknown_203F178.savedBldCnt);
-    SetGpuReg(REG_OFFSET_BG0HOFS, gUnknown_203F178.savedBg0Hofs);
-    SetGpuReg(REG_OFFSET_BG0VOFS, gUnknown_203F178.savedBg0Vofs);
-    SetGpuReg(REG_OFFSET_BG0CNT, gUnknown_203F178.savedBg0Cnt);
-    SetGpuReg(REG_OFFSET_DISPCNT, gUnknown_203F178.savedDispCnt);
+    SetGpuReg(REG_OFFSET_BLDCNT, sVideoState.savedBldCnt);
+    SetGpuReg(REG_OFFSET_BG0HOFS, sVideoState.savedBg0Hofs);
+    SetGpuReg(REG_OFFSET_BG0VOFS, sVideoState.savedBg0Vofs);
+    SetGpuReg(REG_OFFSET_BG0CNT, sVideoState.savedBg0Cnt);
+    SetGpuReg(REG_OFFSET_DISPCNT, sVideoState.savedDispCnt);
 }
 
-void sub_813BC2C(void)
+void RestoreMapTiles(void)
 {
-    RequestDma3Copy(gUnknown_203B174, (void *)BG_CHAR_ADDR(3), BG_CHAR_SIZE, 0);
+    RequestDma3Copy(sMapTilesBackup, (void *)BG_CHAR_ADDR(3), BG_CHAR_SIZE, 0);
 }
 
-void sub_813BC48(void)
+void RestoreMapTextColors(void)
 {
     RestoreTextColors(
-        &gUnknown_203F178.savedTextColor.fgColor,
-        &gUnknown_203F178.savedTextColor.bgColor,
-        &gUnknown_203F178.savedTextColor.shadowColor
+        &sVideoState.savedTextColor.fgColor,
+        &sVideoState.savedTextColor.bgColor,
+        &sVideoState.savedTextColor.shadowColor
     );
 }
 
-void sub_813BC5C(void)
+void CommitTilemap(void)
 {
     RequestDma3Copy(gDecompressionBuffer, (void *)BG_CHAR_ADDR(3), BG_CHAR_SIZE, 0);
 }
 
-void sub_813BC78(u16 baseTile, u8 left, u8 top, u8 width, u8 height, u16 increment)
+void HS_DrawBgTilemapRect(u16 baseTile, u8 left, u8 top, u8 width, u8 height, u16 increment)
 {
     u16 i, j;
 
@@ -255,12 +224,12 @@ void sub_813BC78(u16 baseTile, u8 left, u8 top, u8 width, u8 height, u16 increme
         }
     }
 
-    sub_813BC5C();
+    CommitTilemap();
 }
 
 void sub_813BCF4(void)
 {
-    sub_813BC78(0x1FF, 0, 0, 30, 20, 0);
+    HS_DrawBgTilemapRect(0x1FF, 0, 0, 30, 20, 0);
 }
 
 void sub_813BD14(u8 mode)
@@ -268,10 +237,10 @@ void sub_813BD14(u8 mode)
     switch (mode)
     {
     case 0:
-        sub_813BC78(0x1FF, 1, 0, 7, 2, 0);
+        HS_DrawBgTilemapRect(0x1FF, 1, 0, 7, 2, 0);
         break;
     case 1:
-        sub_813BC78(0x1E8, 1, 0, 7, 2, 1);
+        HS_DrawBgTilemapRect(0x1E8, 1, 0, 7, 2, 1);
         break;
     }
 }
@@ -281,10 +250,10 @@ void sub_813BD5C(u8 mode)
     switch (mode)
     {
     case 0:
-        sub_813BC78(0x1FF, 13, 0, 16, 2, 0);
+        HS_DrawBgTilemapRect(0x1FF, 13, 0, 16, 2, 0);
         break;
     case 1:
-        sub_813BC78(0x1A0, 13, 0, 16, 2, 1);
+        HS_DrawBgTilemapRect(0x1A0, 13, 0, 16, 2, 1);
         break;
     }
 }
@@ -294,10 +263,10 @@ void sub_813BDA4(u8 mode)
     switch (mode)
     {
     case 0:
-        sub_813BC78(0x1FF, 2, 3, 26, 16, 0);
+        HS_DrawBgTilemapRect(0x1FF, 2, 3, 26, 16, 0);
         break;
     case 1:
-        sub_813BC78(0x000, 2, 3, 26, 16, 1);
+        HS_DrawBgTilemapRect(0x000, 2, 3, 26, 16, 1);
         break;
     }
 }
@@ -307,10 +276,10 @@ void sub_813BDE8(u8 mode)
     switch (mode)
     {
     case 0:
-        sub_813BC78(0x1FF, 1, 3, 28, 16, 0);
+        HS_DrawBgTilemapRect(0x1FF, 1, 3, 28, 16, 0);
         break;
     case 1:
-        sub_813BC78(0x1FA, 1, 3, 28, 17, 0);
+        HS_DrawBgTilemapRect(0x1FA, 1, 3, 28, 17, 0);
         break;
     }
 }
@@ -320,10 +289,10 @@ void sub_813BE30(u8 mode)
     switch (mode)
     {
     case 0:
-        sub_813BC78(0x1FF, 2, 14, 26, 5, 0);
+        HS_DrawBgTilemapRect(0x1FF, 2, 14, 26, 5, 0);
         break;
     case 1:
-        sub_813BC78(0x11E, 2, 14, 26, 5, 1);
+        HS_DrawBgTilemapRect(0x11E, 2, 14, 26, 5, 1);
         break;
     }
 }
@@ -333,12 +302,12 @@ void sub_813BE78(u8 mode)
     switch (mode)
     {
     case 0:
-        sub_813BC78(0x1FF, 1,  2, 28, 1, 0);
-        sub_813BC78(0x1FF, 1, 19, 28, 1, 0);
+        HS_DrawBgTilemapRect(0x1FF, 1,  2, 28, 1, 0);
+        HS_DrawBgTilemapRect(0x1FF, 1, 19, 28, 1, 0);
         break;
     case 1:
-        sub_813BC78(0x1F7, 1,  2, 28, 1, 0);
-        sub_813BC78(0x1F8, 1, 19, 28, 1, 0);
+        HS_DrawBgTilemapRect(0x1F7, 1,  2, 28, 1, 0);
+        HS_DrawBgTilemapRect(0x1F8, 1, 19, 28, 1, 0);
         break;
     }
 }
@@ -348,12 +317,12 @@ void sub_813BEE4(u8 mode)
     switch (mode)
     {
     case 0:
-        sub_813BC78(0x1FF, 1,  2, 28, 1, 0);
-        sub_813BC78(0x1FF, 1, 19, 28, 1, 0);
+        HS_DrawBgTilemapRect(0x1FF, 1,  2, 28, 1, 0);
+        HS_DrawBgTilemapRect(0x1FF, 1, 19, 28, 1, 0);
         break;
     case 1:
-        sub_813BC78(0x1FB, 1,  2, 28, 1, 0);
-        sub_813BC78(0x1FC, 1, 19, 28, 1, 0);
+        HS_DrawBgTilemapRect(0x1FB, 1,  2, 28, 1, 0);
+        HS_DrawBgTilemapRect(0x1FC, 1, 19, 28, 1, 0);
         break;
     }
 }
@@ -363,12 +332,12 @@ void sub_813BF50(u8 mode)
     switch (mode)
     {
     case 0:
-        sub_813BC78(0x1FF,  0, 0, 1, 20, 0);
-        sub_813BC78(0x1FF, 29, 0, 1, 20, 0);
+        HS_DrawBgTilemapRect(0x1FF,  0, 0, 1, 20, 0);
+        HS_DrawBgTilemapRect(0x1FF, 29, 0, 1, 20, 0);
         break;
     case 1:
-        sub_813BC78(0x1F9,  0, 0, 1, 20, 0);
-        sub_813BC78(0x1F9, 29, 0, 1, 20, 0);
+        HS_DrawBgTilemapRect(0x1F9,  0, 0, 1, 20, 0);
+        HS_DrawBgTilemapRect(0x1F9, 29, 0, 1, 20, 0);
         break;
     }
 }
@@ -378,10 +347,10 @@ void sub_813BFC0(u8 mode)
     switch (mode)
     {
     case 0:
-        sub_813BC78(0x1FF, 1, 5, 28, 1, 0);
+        HS_DrawBgTilemapRect(0x1FF, 1, 5, 28, 1, 0);
         break;
     case 1:
-        sub_813BC78(0x1FC, 1, 5, 28, 1, 0);
+        HS_DrawBgTilemapRect(0x1FC, 1, 5, 28, 1, 0);
         break;
     }
 }
@@ -391,20 +360,20 @@ void sub_813C004(u8 a0, u8 mode)
     switch (mode)
     {
     case 0:
-        sub_813BC78(0x1FF, 28,  3, 1, 1, 0);
-        sub_813BC78(0x1FF, 28, 18, 1, 1, 0);
+        HS_DrawBgTilemapRect(0x1FF, 28,  3, 1, 1, 0);
+        HS_DrawBgTilemapRect(0x1FF, 28, 18, 1, 1, 0);
         break;
     case 1:
         if (a0 == 0)
-            sub_813BC78(0x1FE, 28,  3, 1, 1, 0);
+            HS_DrawBgTilemapRect(0x1FE, 28,  3, 1, 1, 0);
         else
-            sub_813BC78(0x1FD, 28, 18, 1, 1, 0);
+            HS_DrawBgTilemapRect(0x1FD, 28, 18, 1, 1, 0);
         break;
     }
 }
 
 #define HelpSystemHandleRenderGlyph(character) ({\
-    do {sub_813C3AC(font, character, &srcBlit, &destBlit, dest, x, y, width, height);} while (0); font;\
+    do {DecompressAndRenderGlyph(font, character, &srcBlit, &destBlit, dest, x, y, width, height);} while (0); font;\
 })
 
 #ifdef NONMATCHING
@@ -447,15 +416,15 @@ void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 wid
                 {
                     if (FlagGet(FLAG_SYS_NOT_SOMEONES_PC) == TRUE)
                     {
-                        if (gUnknown_841CB3C[i] == EOS)
+                        if (gString_Bill[i] == EOS)
                             break;
-                        HelpSystemHandleRenderGlyph(gUnknown_841CB3C[i]);
+                        HelpSystemHandleRenderGlyph(gString_Bill[i]);
                     }
                     else
                     {
-                        if (gUnknown_841CB41[i] == EOS)
+                        if (gString_Someone[i] == EOS)
                             break;
-                        HelpSystemHandleRenderGlyph(gUnknown_841CB41[i]);
+                        HelpSystemHandleRenderGlyph(gString_Someone[i]);
                     }
                     x += gGlyphInfo[0x80];
                 }
@@ -634,7 +603,7 @@ void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 wid
                 "\tldr r0, [sp, 0x24]\n"
                 "\tadd r2, sp, 0x14\n"
                 "\tadd r3, sp, 0x1C\n"
-                "\tbl sub_813C3AC\n"
+                "\tbl DecompressAndRenderGlyph\n"
                 "\tldr r0, [sp, 0x24]\n"
                 "\tldrb r0, [r5]\n"
                 "\tadds r0, r7, r0\n"
@@ -677,10 +646,10 @@ void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 wid
                 "\tldr r0, [sp, 0x24]\n"
                 "\tadd r2, sp, 0x14\n"
                 "\tadd r3, sp, 0x1C\n"
-                "\tbl sub_813C3AC\n"
+                "\tbl DecompressAndRenderGlyph\n"
                 "\tb _0813C1AC\n"
                 "_0813C184:\n"
-                "\tldr r0, _0813C1D8 @ =gUnknown_841CB41\n"
+                "\tldr r0, _0813C1D8 @ =gString_Someone\n"
                 "\tadds r1, r4, r0\n"
                 "\tldrb r0, [r1]\n"
                 "\tcmp r0, 0xFF\n"
@@ -698,7 +667,7 @@ void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 wid
                 "\tldr r0, [sp, 0x24]\n"
                 "\tadd r2, sp, 0x14\n"
                 "\tadd r3, sp, 0x1C\n"
-                "\tbl sub_813C3AC\n"
+                "\tbl DecompressAndRenderGlyph\n"
                 "_0813C1AC:\n"
                 "\tldr r1, [sp, 0x24]\n"
                 "\tldrb r0, [r5]\n"
@@ -715,16 +684,16 @@ void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 wid
                 "\tlsrs r0, 24\n"
                 "\tcmp r0, 0x1\n"
                 "\tbne _0813C184\n"
-                "\tldr r0, _0813C1E0 @ =gUnknown_841CB3C\n"
+                "\tldr r0, _0813C1E0 @ =gString_Bill\n"
                 "\tadds r1, r4, r0\n"
                 "\tldrb r0, [r1]\n"
                 "\tcmp r0, 0xFF\n"
                 "\tbne _0813C164\n"
                 "\tb _0813C0AC_masterLoop\n"
                 "\t.align 2, 0\n"
-                "_0813C1D8: .4byte gUnknown_841CB41\n"
+                "_0813C1D8: .4byte gString_Someone\n"
                 "_0813C1DC: .4byte 0x00000834\n"
-                "_0813C1E0: .4byte gUnknown_841CB3C\n"
+                "_0813C1E0: .4byte gString_Bill\n"
                 "_0813C1E4:\n"
                 "\tldr r7, [sp, 0x34]\n"
                 "\tldr r1, _0813C1FC @ =gGlyphInfo\n"
@@ -916,7 +885,7 @@ void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 wid
                 "\tstr r0, [sp, 0x10]\n"
                 "\tldr r0, [sp, 0x24]\n"
                 "\tadd r2, sp, 0x14\n"
-                "\tbl sub_813C3AC\n"
+                "\tbl DecompressAndRenderGlyph\n"
                 "\tldr r1, [sp, 0x24]\n"
                 "\tldr r0, _0813C398 @ =gGlyphInfo\n"
                 "\tadds r0, 0x80\n"
@@ -941,7 +910,7 @@ void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 wid
 }
 #endif //NONMATCHING
 
-void sub_813C3AC(u8 font, u16 glyph, struct Bitmap *srcBlit, struct Bitmap *destBlit, u8 *destBuffer, u8 x, u8 y, u8 width, u8 height)
+void DecompressAndRenderGlyph(u8 font, u16 glyph, struct Bitmap *srcBlit, struct Bitmap *destBlit, u8 *destBuffer, u8 x, u8 y, u8 width, u8 height)
 {
     if (font == 0)
         DecompressGlyphFont0(glyph, FALSE);
@@ -958,26 +927,26 @@ void sub_813C3AC(u8 font, u16 glyph, struct Bitmap *srcBlit, struct Bitmap *dest
     BlitBitmapRect4Bit(srcBlit, destBlit, 0, 0, x, y, gGlyphInfo[0x80], gGlyphInfo[0x81], 0);
 }
 
-void sub_813C454(const u8 * str)
+void HelpSystem_PrintText_Row61(const u8 * str)
 {
     GenerateFontHalfRowLookupTable(1, 15, 2);
     HelpSystemRenderText(5, gDecompressionBuffer + 0x3D00, str, 6, 2, 7, 2);
 }
 
-void sub_813C488(const u8 * str)
+void HelpSystem_PrintTextRightAlign_Row52(const u8 * str)
 {
     s32 left = 0x7C - GetStringWidth(0, str, 0);
     GenerateFontHalfRowLookupTable(1, 15, 2);
     HelpSystemRenderText(0, gDecompressionBuffer + 0x3400, str, left, 2, 16, 2);
 }
 
-void sub_813C4CC(const u8 * str, u8 x, u8 y)
+void HelpSystem_PrintTextAt(const u8 * str, u8 x, u8 y)
 {
     GenerateFontHalfRowLookupTable(1, 15, 2);
     HelpSystemRenderText(2, gDecompressionBuffer + 0x0000, str, x, y, 26, 16);
 }
 
-void sub_813C50C(const u8 * str1, const u8 * str2)
+void HelpSystem_PrintTwoStrings(const u8 * str1, const u8 * str2)
 {
     CpuFill16(0xEEEE, gDecompressionBuffer + 0x0000, 0x3400);
     GenerateFontHalfRowLookupTable(1, 14, 2);
@@ -985,9 +954,249 @@ void sub_813C50C(const u8 * str1, const u8 * str2)
     HelpSystemRenderText(2, gDecompressionBuffer + 0x09C0, str2, 0, 0, 26, 13);
 }
 
-void sub_813C584(const u8 * str)
+void HelpSystem_PrintText_813C584(const u8 * str)
 {
     CpuFill16(0x1111, gDecompressionBuffer + 0x23C0, 0x1040);
     GenerateFontHalfRowLookupTable(2, 1, 3);
     HelpSystemRenderText(2, gDecompressionBuffer + 0x23C0, str, 2, 6, 26, 5);
+}
+
+void HelpSystem_FillPanel3(void)
+{
+    CpuFill16(0xFFFF, gDecompressionBuffer + 0x3D00, 0x1C0);
+}
+
+void HelpSystem_FillPanel2(void)
+{
+    CpuFill16(0xFFFF, gDecompressionBuffer + 0x3400, 0x400);
+}
+
+void HelpSystem_FillPanel1(void)
+{
+    CpuFill16(0xFFFF, gDecompressionBuffer + 0x0000, 0x3400);
+}
+
+void HelpSystem_InitListMenuController(struct HelpSystemListMenu * a0, u8 a1, u8 a2)
+{
+    gHelpSystemListMenu.sub = a0->sub;
+    gHelpSystemListMenu.field_0C = a1;
+    gHelpSystemListMenu.field_0D = a2;
+    gHelpSystemListMenu.field_0E = 0;
+    if (gHelpSystemListMenu.sub.totalItems < gHelpSystemListMenu.sub.maxShowed)
+        gHelpSystemListMenu.sub.maxShowed = gHelpSystemListMenu.sub.totalItems;
+    sub_813BDA4(0);
+    HelpSystem_FillPanel1();
+    PrintListMenuItems();
+    PlaceListMenuCursor();
+}
+
+void HelpSystem_SetInputDelay(u8 a0)
+{
+    sDelayTimer = a0;
+}
+
+s32 HelpSystem_GetMenuInput(void)
+{
+    if (sDelayTimer != 0)
+    {
+        sDelayTimer--;
+        return -1;
+    }
+    else if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        return gHelpSystemListMenu.sub.items[gHelpSystemListMenu.field_0C + gHelpSystemListMenu.field_0D].index;
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        return -2;
+    }
+    else if (JOY_NEW(L_BUTTON | R_BUTTON))
+    {
+        return -6;
+    }
+    else if (JOY_REPT(DPAD_UP))
+    {
+        if (!MoveCursor(1, 0))
+            PlaySE(SE_SELECT);
+        return -4;
+    }
+    else if (JOY_REPT(DPAD_DOWN))
+    {
+        if (!MoveCursor(1, 1))
+            PlaySE(SE_SELECT);
+        return -5;
+    }
+    else if (JOY_REPT(DPAD_LEFT))
+    {
+        if (!MoveCursor(7, 0))
+            PlaySE(SE_SELECT);
+        return -4;
+    }
+    else if (JOY_REPT(DPAD_RIGHT))
+    {
+        if (!MoveCursor(7, 1))
+            PlaySE(SE_SELECT);
+        return -5;
+    }
+    else
+        return -1;
+}
+
+void sub_813C75C(void)
+{
+    u8 r6 = gHelpSystemListMenu.sub.totalItems - 7;
+    if (gHelpSystemListMenu.sub.totalItems > 7)
+    {
+        s32 r4 = gHelpSystemListMenu.field_0C + gHelpSystemListMenu.field_0D;
+        sub_813C004(0, 0);
+        if (r4 == 0)
+            sub_813C004(1, 1);
+        else if (gHelpSystemListMenu.field_0C == 0 && gHelpSystemListMenu.field_0D != 0)
+            sub_813C004(1, 1);
+        else if (gHelpSystemListMenu.field_0C == r6)
+            sub_813C004(0, 1);
+        else if (gHelpSystemListMenu.field_0C != 0)
+        {
+            sub_813C004(0, 1);
+            sub_813C004(1, 1);
+        }
+    }
+}
+
+void PrintListMenuItems(void)
+{
+    u8 glyphHeight = GetFontAttribute(2, 1) + 1;
+    s32 i;
+    s32 r5 = gHelpSystemListMenu.field_0C;
+
+    for (i = 0; i < gHelpSystemListMenu.sub.maxShowed; i++)
+    {
+        u8 x = gHelpSystemListMenu.sub.left + 8;
+        u8 y = gHelpSystemListMenu.sub.top + glyphHeight * i;
+        HelpSystem_PrintTextAt(gHelpSystemListMenu.sub.items[r5].label, x, y);
+        r5++;
+    }
+}
+
+void PlaceListMenuCursor(void)
+{
+    u8 glyphHeight = GetFontAttribute(2, 1) + 1;
+    u8 x = gHelpSystemListMenu.sub.left;
+    u8 y = gHelpSystemListMenu.sub.top + glyphHeight * gHelpSystemListMenu.field_0D;
+    HelpSystem_PrintTextAt(gFameCheckerText_ListMenuCursor, x, y);
+}
+
+void sub_813C860(u8 i)
+{
+    u8 glyphHeight = GetFontAttribute(2, 1) + 1;
+    u8 x = gHelpSystemListMenu.sub.left;
+    u8 y = gHelpSystemListMenu.sub.top + i * glyphHeight;
+    HelpSystem_PrintTextAt(gString_HelpSystem_ClearTo8, x, y);
+}
+
+u8 TryMoveCursor1(u8 dirn)
+{
+    u16 r4;
+    if (dirn == 0)
+    {
+        if (gHelpSystemListMenu.sub.maxShowed == 1)
+            r4 = 0;
+        else
+            r4 = gHelpSystemListMenu.sub.maxShowed - (gHelpSystemListMenu.sub.maxShowed / 2 + (gHelpSystemListMenu.sub.maxShowed & 1)) - 1;
+        if (gHelpSystemListMenu.field_0C == 0)
+        {
+            if (gHelpSystemListMenu.field_0D != 0)
+            {
+                gHelpSystemListMenu.field_0D--;
+                return 1;
+            }
+            else
+                return 0;
+        }
+        if (gHelpSystemListMenu.field_0D > r4)
+        {
+            gHelpSystemListMenu.field_0D--;
+            return 1;
+        }
+        else
+        {
+            gHelpSystemListMenu.field_0C--;
+            return 2;
+        }
+    }
+    else
+    {
+        if (gHelpSystemListMenu.sub.maxShowed == 1)
+            r4 = 0;
+        else
+            r4 = gHelpSystemListMenu.sub.maxShowed / 2 + (gHelpSystemListMenu.sub.maxShowed & 1);
+        if (gHelpSystemListMenu.field_0C == gHelpSystemListMenu.sub.totalItems - gHelpSystemListMenu.sub.maxShowed)
+        {
+            if (gHelpSystemListMenu.field_0D < gHelpSystemListMenu.sub.maxShowed - 1)
+            {
+                gHelpSystemListMenu.field_0D++;
+                return 1;
+            }
+            else
+                return 0;
+        }
+        else if (gHelpSystemListMenu.field_0D < r4)
+        {
+            gHelpSystemListMenu.field_0D++;
+            return 1;
+        }
+        else
+        {
+            gHelpSystemListMenu.field_0C++;
+            return 2;
+        }
+    }
+}
+
+bool8 MoveCursor(u8 by, u8 dirn)
+{
+    u8 r7 = gHelpSystemListMenu.field_0D;
+    u8 flags = 0;
+    s32 i;
+    for (i = 0; i < by; i++)
+        flags |= TryMoveCursor1(dirn);
+
+    switch (flags)
+    {
+    case 0:
+    default:
+        // neither changed
+        return TRUE;
+    case 1:
+        // changed field_0D only
+        sub_813C860(r7);
+        PlaceListMenuCursor();
+        CommitTilemap();
+        break;
+    case 2:
+    case 3:
+        // changed field_0C
+        if (sub_812BF88() == TRUE)
+        {
+            HelpSystem_SetInputDelay(2);
+            HelpSystem_FillPanel1();
+            PrintListMenuItems();
+            PlaceListMenuCursor();
+            sub_812BDEC();
+            sub_813C75C();
+        }
+        else
+        {
+            sub_813BDA4(0);
+            HelpSystem_FillPanel1();
+            PrintListMenuItems();
+            PlaceListMenuCursor();
+            sub_813BDA4(1);
+        }
+        CommitTilemap();
+        break;
+    }
+    return FALSE;
 }

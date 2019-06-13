@@ -1912,16 +1912,16 @@ gUnknown_841B779:: @ 841B779
 
 	.include "data/text/teachy_tv.inc"
 
-gUnknown_841CB3C:: @ 841CB3C
+gString_Bill:: @ 841CB3C
 	.string "BILL$"
 
-gUnknown_841CB41:: @ 841CB41
+gString_Someone:: @ 841CB41
 	.string "SOMEONE$"
 
-gUnknown_841CB49:: @ 841CB49
+gString_Help:: @ 841CB49
 	.string "HELP$"
 
-gUnknown_841CB4E:: @ 841CB4E
+gString_HelpSystem_ClearTo8:: @ 841CB4E
 	.string "{CLEAR_TO 8}$"
 
 gUnknown_841CB52:: @ 841CB52

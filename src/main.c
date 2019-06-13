@@ -5,6 +5,7 @@
 #include "dma3.h"
 #include "gba/flash_internal.h"
 #include "battle.h"
+#include "help_system.h"
 
 extern u16 GetGpuReg(u8);
 extern void SetGpuReg(u8, u16);
@@ -32,7 +33,6 @@ extern u16 SetFlashTimerIntr(u8 timerNum, void (**intrFunc)(void));
 extern void ScanlineEffect_Stop(void);
 extern void sub_80F50F4(void);
 extern bool32 sub_80F5118(void);
-extern bool8 sub_813B870(void);
 
 extern struct SoundInfo gSoundInfo;
 extern u32 gFlashMemoryPresent;
@@ -206,7 +206,7 @@ static void InitMainCallbacks(void)
 
 static void CallCallbacks(void)
 {
-    if (!sub_80F5118() && !sub_813B870())
+    if (!sub_80F5118() && !RunHelpSystemCallback())
     {
         if (gMain.callback1)
             gMain.callback1();

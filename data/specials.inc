@@ -410,7 +410,7 @@ gSpecials:: @ 815FD60
 	def_special sub_8127888
 	def_special sub_80803FC
 	def_special sub_812B35C
-	def_special sub_815D334
+	def_special Special_SSAnneDepartureCutscene
 	def_special sub_8149A18
 	def_special sub_806E25C
 	def_special sub_815D9E8

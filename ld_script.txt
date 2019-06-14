@@ -280,6 +280,7 @@ SECTIONS {
         src/teachy_tv.o(.text);
         asm/ereader_helpers.o(.text);
         src/unk_815C980.o(.text);
+        src/ss_anne.o(.text);
         asm/ss_anne.o(.text);
         asm/cereader_tool.o(.text);
         src/trainer_tower.o(.text);
@@ -454,6 +455,8 @@ SECTIONS {
         src/teachy_tv.o(.rodata);
         src/unk_815C980.o(.rodata);
         data/data_8471F00.o(.rodata.8479668);
+        src/ss_anne.o(.rodata);
+        data/data_8471F00.o(.rodata.cereader_tool);
         src/trainer_tower.o(.rodata);
         data/data_8471F00.o(.rodata.after_trainer_tower);
         src/mystery_event_msg.o(.rodata);

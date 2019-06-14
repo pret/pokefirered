@@ -225,7 +225,7 @@ gUnknown_8479688::
 	.incbin "graphics/misc/unk_8479688.4bpp.lz"
 
 gUnknown_8479748::
-	.incbin "baserom.gba", 0x479748, 0xF0
+	.incbin "graphics/misc/unk_8479748.4bpp.lz"
 
 	.section .rodata.cereader_tool
 

@@ -200,7 +200,7 @@ VermilionCity_EventScript_166B91:: @ 8166B91
 
 VermilionCity_EventScript_166B98:: @ 8166B98
 	lockall
-	setvar VAR_0x4053, 0
+	setvar VAR_VERMILION_CITY_TICKET_CHECK_TRIGGER, 0
 	releaseall
 	end
 
@@ -215,7 +215,7 @@ EventScript_166BA0:: @ 8166BA0
 	checkflag FLAG_0x234
 	goto_if 0, EventScript_166BDE
 	msgbox gUnknown_817FA77
-	setvar VAR_0x4053, 1
+	setvar VAR_VERMILION_CITY_TICKET_CHECK_TRIGGER, 1
 	releaseall
 	end
 

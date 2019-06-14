@@ -26,7 +26,7 @@ SSAnne_Exterior_160859:: @ 8160859
 	applymovement 255, Movement_1608B7
 	waitmovement 0
 	setvar VAR_MAP_SCENE_VERMILION_CITY, 2
-	setvar VAR_0x4053, 0
+	setvar VAR_VERMILION_CITY_TICKET_CHECK_TRIGGER, 0
 	warp MAP_VERMILION_CITY, 255, 23, 34
 	waitstate
 	releaseall

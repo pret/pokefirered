@@ -1912,77 +1912,91 @@ gUnknown_841B779:: @ 841B779
 
 	.include "data/text/teachy_tv.inc"
 
-gUnknown_841CB3C:: @ 841CB3C
-	.incbin "baserom.gba", 0x41CB3C, 0x5
+gString_Bill:: @ 841CB3C
+	.string "BILL$"
 
-gUnknown_841CB41:: @ 841CB41
-	.incbin "baserom.gba", 0x41CB41, 0x8
+gString_Someone:: @ 841CB41
+	.string "SOMEONE$"
 
-gUnknown_841CB49:: @ 841CB49
-	.incbin "baserom.gba", 0x41CB49, 0x5
+gString_Help:: @ 841CB49
+	.string "HELP$"
 
-gUnknown_841CB4E:: @ 841CB4E
-	.incbin "baserom.gba", 0x41CB4E, 0x4
+gString_HelpSystem_ClearTo8:: @ 841CB4E
+	.string "{CLEAR_TO 8}$"
 
 gUnknown_841CB52:: @ 841CB52
-	.incbin "baserom.gba", 0x41CB52, 0x8
+	.string " points$"
 
 gUnknown_841CB5A:: @ 841CB5A
-	.incbin "baserom.gba", 0x41CB5A, 0x9
+	.string " time(s)$"
 
 gUnknown_841CB63:: @ 841CB63
-	.incbin "baserom.gba", 0x41CB63, 0x46
+	.string "POKéMON JUMP RECORDS$"
+	.string "Jumps in a row:$"
+	.string "Best score:$"
+	.string "EXCELLENTS in a row:$"
 
 gUnknown_841CBA9:: @ 841CBA9
-	.incbin "baserom.gba", 0x41CBA9, 0x21
+	.string "Awesome score! You've\n"
+	.string "won {UNKNOWN_F7 01} {UNKNOWN_F7 00}!$"
 
 gUnknown_841CBCA:: @ 841CBCA
-	.incbin "baserom.gba", 0x41CBCA, 0x1A
+	.string "There's no room left now.$"
 
 gUnknown_841CBE4:: @ 841CBE4
-	.incbin "baserom.gba", 0x41CBE4, 0x19
+	.string "You can't hold any more!$"
 
 gUnknown_841CBFD:: @ 841CBFD
-	.incbin "baserom.gba", 0x41CBFD, 0x14
+	.string "Want to play again?$"
 
 gUnknown_841CC11:: @ 841CC11
-	.incbin "baserom.gba", 0x41CC11, 0x31
+	.string "Somebody dropped out.\nThe link will be canceled.$"
 
 gUnknown_841CC42:: @ 841CC42
-	.incbin "baserom.gba", 0x41CC42, 0x22
+	.string "SAVING…\nDON'T TURN OFF THE POWER.$"
 
 gUnknown_841CC64:: @ 841CC64
-	.incbin "baserom.gba", 0x41CC64, 0x9F
+	.string "Communication standby…$"
+	.string "SAVING...\nDON'T TURN OFF THE POWER.$"
+	.string "DODRIO BERRY-PICKING RECORDS$"
+	.string "BERRIES picked:$"
+	.string "Best score:$"
+	.string "BERRIES picked in a row with\nfive players:$"
 
 gUnknown_841CD03:: @ 841CD03
-	.incbin "baserom.gba", 0x41CD03, 0x22
+	.string "Announcing BERRY-PICKING results!$"
 
 gUnknown_841CD25:: @ 841CD25
-	.incbin "baserom.gba", 0x41CD25, 0x1E
+	.string "10P     30P     50P     {EXTRA 0xDD}50P$"
 
 gUnknown_841CD43:: @ 841CD43
-	.incbin "baserom.gba", 0x41CD43, 0x15
+	.string "Announcing rankings!$"
 
 gUnknown_841CD58:: @ 841CD58
-	.incbin "baserom.gba", 0x41CD58, 0x22
+	.string "Announcing prizes!$"
+	.string "1:$"
+	.string "2:$"
+	.string "3:$"
+	.string "4:$"
+	.string "5:$"
 
 gUnknown_841CD7A:: @ 841CD7A
-	.incbin "baserom.gba", 0x41CD7A, 0x25
+	.string "The first-place winner gets\nthis {UNKNOWN_F7 00}!$"
 
 gUnknown_841CD9F:: @ 841CD9F
-	.incbin "baserom.gba", 0x41CD9F, 0x1B
+	.string "You can't hold any more...$"
 
 gUnknown_841CDBA:: @ 841CDBA
-	.incbin "baserom.gba", 0x41CDBA, 0x1D
+	.string "It filled its storage space.$"
 
 gUnknown_841CDD7:: @ 841CDD7
-	.incbin "baserom.gba", 0x41CDD7, 0x14
+	.string "Want to play again?$"
 
 gUnknown_841CDEB:: @ 841CDEB
-	.incbin "baserom.gba", 0x41CDEB, 0x31
+	.string "Somebody dropped out.\nThe link will be canceled.$"
 
 gUnknown_841CE1C:: @ 841CE1C
-	.incbin "baserom.gba", 0x41CE1C, 0x8
+	.string " points$"
 
 gUnknown_841CE24:: @ 841CE24
 	.incbin "baserom.gba", 0x41CE24, 0x1FC

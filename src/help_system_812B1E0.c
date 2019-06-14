@@ -23,16 +23,16 @@ u8 gUnknown_3005E9C[4];
 u16 gUnknown_3005EA0;
 
 static bool32 sub_812B27C(const u16 * mapIdxs);
-static void sub_812B520(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
-static void sub_812B614(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
+static void sub_812B520(struct HelpSystemListMenu * a0, struct ListMenuItem * a1);
+static void sub_812B614(struct HelpSystemListMenu * a0, struct ListMenuItem * a1);
 static bool8 sub_812B754(void);
 static bool8 sub_812B780(u8);
 static bool8 sub_812BB10(void);
 
 static void sub_812BF5C(void);
 static void sub_812BF74(const u8 *);
-static void sub_812BF94(struct HelpSystemStruct_203F190 * a0);
-static void sub_812BF9C(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1);
+static void sub_812BF94(struct HelpSystemListMenu * a0);
+static void sub_812BF9C(struct HelpSystemListMenu * a0, struct ListMenuItem * a1);
 
 static const u8 *const gUnknown_845B080[] = {
     gUnknown_81B2DF8,
@@ -1029,27 +1029,27 @@ void sub_812B4B8(void)
     gUnknown_203F175 = 0;
 }
 
-static void sub_812B4C4(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+static void sub_812B4C4(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
 {
-    a0->sub.field_00 = a1;
-    a0->sub.field_04 = 1;
-    a0->sub.field_06 = 1;
-    a0->sub.field_08 = 1;
-    a0->sub.field_09 = 4;
+    a0->sub.items = a1;
+    a0->sub.totalItems = 1;
+    a0->sub.maxShowed = 1;
+    a0->sub.left = 1;
+    a0->sub.top = 4;
 }
 
-static void sub_812B4D8(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+static void sub_812B4D8(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
 {
     sub_812B4C4(a0, a1);
     sub_812B520(a0, a1);
     sub_812BF74(gUnknown_841DFAC);
-    sub_813C64C(a0, 0, gUnknown_3005E9C[2]);
+    HelpSystem_InitListMenuController(a0, 0, gUnknown_3005E9C[2]);
     sub_812BF9C(a0, a1);
     sub_813BDA4(1);
     sub_813BD5C(1);
 }
 
-static void sub_812B520(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+static void sub_812B520(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
 {
     u8 i;
     u8 r4 = 0;
@@ -1063,12 +1063,12 @@ static void sub_812B520(struct HelpSystemStruct_203F190 * a0, struct ListMenuIte
         }
     }
     a1[r4 - 1].index = -2;
-    a0->sub.field_04 = r4;
-    a0->sub.field_06 = r4;
-    a0->sub.field_08 = 0;
+    a0->sub.totalItems = r4;
+    a0->sub.maxShowed = r4;
+    a0->sub.left = 0;
 }
 
-static void sub_812B5A8(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+static void sub_812B5A8(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
 {
     sub_813BDE8(0);
     sub_813BFC0(0);
@@ -1076,13 +1076,13 @@ static void sub_812B5A8(struct HelpSystemStruct_203F190 * a0, struct ListMenuIte
     sub_812B4C4(a0, a1);
     sub_812B614(a0, a1);
     sub_812BF74(gUnknown_841DFC9);
-    sub_813C64C(a0, a0->field_0C, a0->field_0D);
-    sub_813C4CC(gUnknown_845B080[gUnknown_3005E9C[1]], 0, 0);
+    HelpSystem_InitListMenuController(a0, a0->field_0C, a0->field_0D);
+    HelpSystem_PrintTextAt(gUnknown_845B080[gUnknown_3005E9C[1]], 0, 0);
     sub_813BDA4(1);
     sub_813BD5C(1);
 }
 
-static void sub_812B614(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+static void sub_812B614(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
 {
     u8 r6 = 0;
     const u8 * r3 = gUnknown_845B9E0[gUnknown_203B0EC * 5 + gUnknown_3005E9C[1]];
@@ -1117,10 +1117,10 @@ static void sub_812B614(struct HelpSystemStruct_203F190 * a0, struct ListMenuIte
     a1[r6].label = gUnknown_81B2E6F;
     a1[r6].index = -2;
     r6++;
-    a0->sub.field_04 = r6;
-    a0->sub.field_06 = 7;
-    a0->sub.field_08 = 0;
-    a0->sub.field_09 = 21;
+    a0->sub.totalItems = r6;
+    a0->sub.maxShowed = 7;
+    a0->sub.left = 0;
+    a0->sub.top = 21;
 }
 
 static bool8 sub_812B754(void)
@@ -1358,7 +1358,7 @@ static bool8 sub_812BB10(void)
     return FALSE;
 }
 
-bool8 sub_812BB9C(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+bool8 sub_812BB9C(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
 {
     switch (a0->field_0E)
     {
@@ -1386,7 +1386,7 @@ bool8 sub_812BB9C(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1
     return FALSE;
 }
 
-bool8 sub_812BC54(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+bool8 sub_812BC54(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
 {
     sub_812BF74(gUnknown_841DFA5);
     sub_812BF5C();
@@ -1396,7 +1396,7 @@ bool8 sub_812BC54(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1
     return TRUE;
 }
 
-bool8 sub_812BC80(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+bool8 sub_812BC80(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
 {
     if (JOY_NEW(A_BUTTON))
     {
@@ -1406,7 +1406,7 @@ bool8 sub_812BC80(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1
     return TRUE;
 }
 
-bool8 sub_812BCA8(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+bool8 sub_812BCA8(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
 {
     gUnknown_3005E9C[2] = 0;
     sub_812BF94(a0);
@@ -1415,9 +1415,9 @@ bool8 sub_812BCA8(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1
     return TRUE;
 }
 
-bool8 sub_812BCD0(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+bool8 sub_812BCD0(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
 {
-    s32 v0 = sub_813C690();
+    s32 v0 = HelpSystem_GetMenuInput();
     switch (v0)
     {
     case -6:
@@ -1438,19 +1438,19 @@ bool8 sub_812BCD0(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1
     return TRUE;
 }
 
-bool8 sub_812BD2C(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+bool8 sub_812BD2C(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
 {
     gUnknown_3005E9C[0] = 1;
     gUnknown_3005E9C[2] = a0->field_0D;
     sub_812BF94(a0);
     sub_812B5A8(a0, a1);
     sub_813C75C();
-    sub_813C684(2);
+    HelpSystem_SetInputDelay(2);
     a0->field_0E = 3;
     return TRUE;
 }
 
-bool8 sub_812BD64(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+bool8 sub_812BD64(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
 {
     sub_813C004(0, 0);
     sub_813C004(1, 0);
@@ -1460,9 +1460,9 @@ bool8 sub_812BD64(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1
     return TRUE;
 }
 
-bool8 sub_812BD98(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+bool8 sub_812BD98(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
 {
-    s32 v0 = sub_813C690();
+    s32 v0 = HelpSystem_GetMenuInput();
     switch (v0)
     {
     case -6:
@@ -1485,37 +1485,37 @@ bool8 sub_812BD98(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1
 
 void sub_812BDEC(void)
 {
-    sub_813C4CC(gUnknown_845B080[gUnknown_3005E9C[1]], 0, 0);
+    HelpSystem_PrintTextAt(gUnknown_845B080[gUnknown_3005E9C[1]], 0, 0);
 }
 
-bool8 sub_812BE10(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+bool8 sub_812BE10(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
 {
     gUnknown_3005E9C[0] = 2;
     sub_813BDA4(0);
-    sub_813C624();
+    HelpSystem_FillPanel1();
     sub_812BF74(gUnknown_841DFBE);
     sub_813BDE8(1);
     sub_813BEE4(1);
 
     if (gUnknown_3005E9C[1] == 0)
     {
-        sub_813C50C(gUnknown_845B0B0[gUnknown_3005E9C[3]], gUnknown_845B164[gUnknown_3005E9C[3]]);
+        HelpSystem_PrintTwoStrings(gUnknown_845B0B0[gUnknown_3005E9C[3]], gUnknown_845B164[gUnknown_3005E9C[3]]);
     }
     else if (gUnknown_3005E9C[1] == 1)
     {
-        sub_813C50C(gUnknown_845B218[gUnknown_3005E9C[3]], gUnknown_845B2DC[gUnknown_3005E9C[3]]);
+        HelpSystem_PrintTwoStrings(gUnknown_845B218[gUnknown_3005E9C[3]], gUnknown_845B2DC[gUnknown_3005E9C[3]]);
     }
     else if (gUnknown_3005E9C[1] == 2)
     {
-        sub_813C50C(gUnknown_845B3A0[gUnknown_3005E9C[3]], gUnknown_845B450[gUnknown_3005E9C[3]]);
+        HelpSystem_PrintTwoStrings(gUnknown_845B3A0[gUnknown_3005E9C[3]], gUnknown_845B450[gUnknown_3005E9C[3]]);
     }
     else if (gUnknown_3005E9C[1] == 3)
     {
-        sub_813C50C(gUnknown_845B500[gUnknown_3005E9C[3]], gUnknown_845B520[gUnknown_3005E9C[3]]);
+        HelpSystem_PrintTwoStrings(gUnknown_845B500[gUnknown_3005E9C[3]], gUnknown_845B520[gUnknown_3005E9C[3]]);
     }
     else
     {
-        sub_813C50C(gUnknown_845B540[gUnknown_3005E9C[3]], gUnknown_845B5D0[gUnknown_3005E9C[3]]);
+        HelpSystem_PrintTwoStrings(gUnknown_845B540[gUnknown_3005E9C[3]], gUnknown_845B5D0[gUnknown_3005E9C[3]]);
     }
     sub_813BDA4(1);
     sub_813BD5C(1);
@@ -1523,17 +1523,17 @@ bool8 sub_812BE10(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1
     return TRUE;
 }
 
-bool8 sub_812BEEC(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+bool8 sub_812BEEC(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
 {
     gUnknown_3005E9C[0] = 1;
     sub_812B5A8(a0, a1);
     sub_813C75C();
-    sub_813C684(2);
+    HelpSystem_SetInputDelay(2);
     a0->field_0E = 3;
     return TRUE;
 }
 
-bool8 sub_812BF18(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+bool8 sub_812BF18(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
 {
     if (JOY_NEW(B_BUTTON) || JOY_NEW(A_BUTTON))
     {
@@ -1548,14 +1548,14 @@ bool8 sub_812BF18(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1
 
 static void sub_812BF5C(void)
 {
-    sub_813C624();
-    sub_813C4CC(gUnknown_81B2FC9, 0, 0);
+    HelpSystem_FillPanel1();
+    HelpSystem_PrintTextAt(gUnknown_81B2FC9, 0, 0);
 }
 
 static void sub_812BF74(const u8 * str)
 {
-    sub_813C5FC();
-    sub_813C488(str);
+    HelpSystem_FillPanel2();
+    HelpSystem_PrintTextRightAlign_Row52(str);
 }
 
 u8 sub_812BF88(void)
@@ -1563,18 +1563,18 @@ u8 sub_812BF88(void)
     return gUnknown_3005E9C[0];
 }
 
-static void sub_812BF94(struct HelpSystemStruct_203F190 * a0)
+static void sub_812BF94(struct HelpSystemListMenu * a0)
 {
     a0->field_0C = 0;
     a0->field_0D = 0;
 }
 
-static void sub_812BF9C(struct HelpSystemStruct_203F190 * a0, struct ListMenuItem * a1)
+static void sub_812BF9C(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
 {
     s32 index = a1[a0->field_0C + a0->field_0D].index;
     if (index == -2)
-        sub_813C584(gUnknown_845B098[5]);
+        HelpSystem_PrintText_813C584(gUnknown_845B098[5]);
     else
-        sub_813C584(gUnknown_845B098[index]);
+        HelpSystem_PrintText_813C584(gUnknown_845B098[index]);
     sub_813BE30(1);
 }

@@ -248,7 +248,7 @@ SECTIONS {
         asm/menu_indicators.o(.text);
         asm/pokedex_area_markers.o(.text);
         asm/pokemon_summary_screen.o(.text);
-        asm/help_system.o(.text);
+        src/help_system.o(.text);
         asm/wild_pokemon_area.o(.text);
         asm/unk_text_util.o(.text);
         asm/berry_pouch.o(.text);
@@ -427,7 +427,7 @@ SECTIONS {
         data/menu_indicators.o(.rodata);
         data/pokedex_area_markers.o(.rodata);
         data/pokemon_summary_screen.o(.rodata);
-        data/help_system.o(.rodata);
+        src/help_system.o(.rodata);
         data/wild_pokemon_area.o(.rodata);
         data/unk_text_util.o(.rodata);
         data/berry_pouch.o(.rodata);

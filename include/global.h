@@ -72,6 +72,7 @@
 #define TEST_BUTTON(field, button) ({(field) & (button);})
 #define JOY_NEW(button) TEST_BUTTON(gMain.newKeys,  button)
 #define JOY_HELD(button)  TEST_BUTTON(gMain.heldKeys, button)
+#define JOY_REPT(button) TEST_BUTTON(gMain.newAndRepeatedKeys, button)
 
 extern u8 gStringVar1[];
 extern u8 gStringVar2[];

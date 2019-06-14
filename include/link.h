@@ -147,7 +147,7 @@ extern bool8 gReceivedRemoteLinkPlayers;
 extern bool8 gLinkVSyncDisabled;
 
 extern u8 gUnknown_3003F84;
-extern u64 gUnknown_3003FB4;
+extern u64 gSioMlt_Recv;
 
 void Task_DestroySelf(u8);
 void OpenLink(void);

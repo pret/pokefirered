@@ -4686,7 +4686,7 @@ _0800B85C:
 _0800B860:
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r2, _0800B8BC @ =gUnknown_3003FB4
+	ldr r2, _0800B8BC @ =gSioMlt_Recv
 	ldr r3, _0800B8C0 @ =0x04000120
 	ldr r0, [r3]
 	ldr r1, [r3, 0x4]
@@ -4731,7 +4731,7 @@ _0800B8A0:
 	.align 2, 0
 _0800B8B4: .4byte 0x0400012a
 _0800B8B8: .4byte 0x0000b9a0
-_0800B8BC: .4byte gUnknown_3003FB4
+_0800B8BC: .4byte gSioMlt_Recv
 _0800B8C0: .4byte 0x04000120
 _0800B8C4: .4byte gUnknown_3000E6B
 _0800B8C8: .4byte 0x00008fff

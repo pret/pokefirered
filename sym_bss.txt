@@ -197,38 +197,8 @@ gUnknown_3002040: @ 3002040
 gUnknown_3002044: @ 3002044
 	.space 0x4
 
-gUnknown_3002048: @ 3002048
-	.space 0x18
-
-gUnknown_3002060: @ 3002060
-	.space 0x2
-
-gUnknown_3002062: @ 3002062
-	.space 0x2
-
-gUnknown_3002064: @ 3002064
-	.space 0x2
-
-gUnknown_3002066: @ 3002066
-	.space 0x2
-
-gUnknown_3002068: @ 3002068
-	.space 0x4
-
-gUnknown_300206C: @ 300206C
-	.space 0x2
-
-gUnknown_300206E: @ 300206E
-	.space 0x2
-
-gUnknown_3002070: @ 3002070
-	.space 0x2
-
-gUnknown_3002072: @ 3002072
-	.space 0x2
-
-gUnknown_3002074: @ 3002074
-	.space 0x4
+	.align 3
+	.include "src/ereader_helpers.o"
 
 	.align 3
 	.include "src/unk_815C980.o"

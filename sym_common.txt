@@ -96,7 +96,7 @@ gUnknown_3003FA0: @ 3003FA0
 gUnknown_3003FB0: @ 3003FB0
 	.space 0x4
 
-gUnknown_3003FB4: @ 3003FB4
+gSioMlt_Recv: @ 3003FB4
 	.space 0xFBC
 
 gUnknown_3004F70: @ 3004F70

@@ -227,24 +227,6 @@ gUnknown_8479688::
 gUnknown_8479748::
 	.incbin "graphics/misc/unk_8479748.4bpp.lz"
 
-	.section .rodata.cereader_tool
-
-	// cereader_tool
-
-	.align 2
-gUnknown_8479CD8:: @ 8479CD8
-	.asciz "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/cereader_tool.c"
-
-	.align 2
-gUnknown_8479D10:: @ 8479D10
-	.asciz "ttdata->dummy == 0"
-
-	.align 2
-gUnknown_8479D24:: @ 8479D24
-	.asciz "ttdata->id == 0"
-
-	// trainer_tower
-
 	.section .rodata.after_trainer_tower
 
 	// unk_815F138

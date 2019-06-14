@@ -20,7 +20,7 @@ SSAnne_Exterior_160859:: @ 8160859
 	call_if 4, EventScript_1608AC
 	fadenewbgm BGM_FRLG_SURF
 	delay 50
-	special sub_815D334
+	special Special_SSAnneDepartureCutscene
 	waitstate
 	removeobject 1
 	applymovement 255, Movement_1608B7

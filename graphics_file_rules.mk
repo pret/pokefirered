@@ -20,6 +20,7 @@ EVENTOBJGFXDIR := graphics/event_objects
 MISCGFXDIR := graphics/misc
 TEXTWINDOWGFXDIR := graphics/text_window
 TEACHYTVGFXDIR := graphics/teachy_tv
+SSANNEGFXDIR := graphics/ss_anne
 
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
 contest_types := cool beauty cute smart tough
@@ -478,3 +479,6 @@ $(TEXTWINDOWGFXDIR)/unk_8470B0C.4bpp: %.4bpp: %.png
 
 $(TEACHYTVGFXDIR)/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 233
+
+$(SSANNEGFXDIR)/unk_8479A38.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 17

@@ -219,16 +219,17 @@ gUnknown_84792D0:: @ 84792D0
 
 	.align 2
 gUnknown_8479668:: @ 8479668
-	.incbin "baserom.gba", 0x479668, 0x5F0
+	.incbin "graphics/misc/unk_8479688.gbapal"
 
-gUnknown_8479C58:: @ 8479C58
-	.incbin "baserom.gba", 0x479C58, 0x30
+gUnknown_8479688::
+	.incbin "graphics/misc/unk_8479688.4bpp.lz"
 
-gUnknown_8479C88:: @ 8479C88
-	.incbin "baserom.gba", 0x479C88, 0x38
+gUnknown_8479748::
+	.incbin "baserom.gba", 0x479748, 0xF0
 
-gUnknown_8479CC0:: @ 8479CC0
-	.incbin "baserom.gba", 0x479CC0, 0x18
+	.section .rodata.cereader_tool
+
+	// cereader_tool
 
 	.align 2
 gUnknown_8479CD8:: @ 8479CD8

@@ -251,7 +251,7 @@
 #define SE_W114 246
 #define SE_W063B 247
 #define SE_CASHIER 248
-
+#define SE_SHIP_HORN 249
 #define SE_HELP_OPEN 250
 #define SE_HELP_CLOSE 251
 #define SE_HELP_PAGE 252

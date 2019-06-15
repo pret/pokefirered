@@ -970,16 +970,18 @@ gUnknown_8416644:: @ 8416644
 	.incbin "baserom.gba", 0x416644, 0x11
 
 gUnknown_8416655:: @ 8416655
-	.incbin "baserom.gba", 0x416655, 0x7
+	.string "POWDER$"
 
 gUnknown_841665C:: @ 841665C
-	.incbin "baserom.gba", 0x41665C, 0x34
+	.string "Played the POKé FLUTE.\p"
+	.string "Now, that's a catchy tune!{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416690:: @ 8416690
-	.incbin "baserom.gba", 0x416690, 0x17
+	.string "Played the POKé FLUTE.$"
 
 gUnknown_84166A7:: @ 84166A7
-	.incbin "baserom.gba", 0x4166A7, 0x2C
+	.string "The POKé FLUTE awakened sleeping\n"
+	.string "POKéMON.{PAUSE_UNTIL_PRESS}$"
 
 gText_TMCase:: @ 84166D3
 	.string "TM CASE$"

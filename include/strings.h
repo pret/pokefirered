@@ -148,4 +148,6 @@ extern const u8 gString_Someone[];
 extern const u8 gString_Help[];
 extern const u8 gString_HelpSystem_ClearTo8[];
 
+extern const u8 gUnknown_8416655[];
+
 #endif //GUARD_STRINGS_H

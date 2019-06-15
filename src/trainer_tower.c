@@ -77,6 +77,7 @@ struct UnkStruct_847A074
 
 EWRAM_DATA struct UnkStruct_203F458 * gUnknown_203F458 = NULL;
 EWRAM_DATA struct UnkStruct_203F45C * gUnknown_203F45C = NULL;
+EWRAM_DATA u8 unused_variable = 0;
 
 void sub_815D96C(void);
 void sub_815DC8C(void);  // setup

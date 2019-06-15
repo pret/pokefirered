@@ -1598,9 +1598,5 @@ gUnknown_203F440: @ 203F440
 	.include "src/unk_815C980.o"
 	.align 2
 	.include "src/trainer_tower.o"
-
-gUnknown_203F460: @ 203F460
-	.space 0x4
-
-gUnknown_203F464: @ 203F464
-	.space 0x1
+	.align 2
+	.include "src/unk_815EDDC.o"

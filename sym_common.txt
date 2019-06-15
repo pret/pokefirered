@@ -329,20 +329,11 @@ gUnknown_3005ECC: @ 3005ECC
 
 	.align 4
 gUnknown_3005EE0: @ 3005EE0
+@ const u8 *gUnknown_3005EE0[4]
 	.space 0x10
 
-gUnknown_3005EF0: @ 3005EF0
-	.space 0x4
-
-gUnknown_3005EF4: @ 3005EF4
-	.space 0x4
-
-gUnknown_3005EF8: @ 3005EF8
-	.space 0x8
-
-gUnknown_3005F00: @ 3005F00
-	.space 0x50
-
+	.align 4
+	.include "berry_fix_program.o"
 	.include "m4a.o"
 	.include "agb_flash.o"
 

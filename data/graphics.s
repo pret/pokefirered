@@ -16234,58 +16234,58 @@ gTilesetPalettes_8EA1B68:: @ 8EA1B68
 gTilesetTiles_8EA1D68:: @ 8EA1D68
 	.incbin "data/tilesets/primary/82D4A94/tiles.4bpp.lz"
 
-gUnknown_8EA463C:: @ 8EA463C
+gBerryFixGameboy_Pal:: @ 8EA463C
 	.incbin "graphics/berry_fix/gba_small.gbapal"
 
-gUnknown_8EA467C:: @ 8EA467C
+gBerryFixGameboy_Gfx:: @ 8EA467C
 	.incbin "graphics/berry_fix/gba_small.4bpp.lz"
 
-gUnknown_8EA52B8:: @ 8EA52B8
+gBerryFixGameboy_Tilemap:: @ 8EA52B8
 	.incbin "graphics/berry_fix/gba_small.bin.lz"
 
-gUnknown_8EA5604:: @ 8EA5604
+gBerryFixGameboyLogo_Pal:: @ 8EA5604
 	.incbin "graphics/berry_fix/logo.gbapal"
 
-gUnknown_8EA5664:: @ 8EA5664
+gBerryFixGameboyLogo_Gfx:: @ 8EA5664
 	.incbin "graphics/berry_fix/logo.4bpp.lz"
 
-gUnknown_8EA60C8:: @ 8EA60C8
+gBerryFixGameboyLogo_Tilemap:: @ 8EA60C8
 	.incbin "graphics/berry_fix/logo.bin.lz"
 
-gUnknown_8EA63C8:: @ 8EA63C8
+gBerryFixGbaTransfer_Pal:: @ 8EA63C8
 	.incbin "graphics/berry_fix/gba_transfer.gbapal"
 
-gUnknown_8EA6408:: @ 8EA6408
+gBerryFixGbaTransfer_Gfx:: @ 8EA6408
 	.incbin "graphics/berry_fix/gba_transfer.4bpp.lz"
 
-gUnknown_8EA7028:: @ 8EA7028
+gBerryFixGbaTransfer_Tilemap:: @ 8EA7028
 	.incbin "graphics/berry_fix/gba_transfer.bin.lz"
 
-gUnknown_8EA72E0:: @ 8EA72E0
+gBerryFixGbaTransferHighlight_Pal:: @ 8EA72E0
 	.incbin "graphics/berry_fix/gba_transfer_highlight.gbapal"
 
-gUnknown_8EA7320:: @ 8EA7320
+gBerryFixGbaTransferHighlight_Gfx:: @ 8EA7320
 	.incbin "graphics/berry_fix/gba_transfer_highlight.4bpp.lz"
 
-gUnknown_8EA8118:: @ 8EA8118
+gBerryFixGbaTransferHighlight_Tilemap:: @ 8EA8118
 	.incbin "graphics/berry_fix/gba_transfer_highlight.bin.lz"
 
-gUnknown_8EA83C8:: @ 8EA83C8
+gBerryFixGbaTransferError_Pal:: @ 8EA83C8
 	.incbin "graphics/berry_fix/gba_transfer_error.gbapal"
 
-gUnknown_8EA8408:: @ 8EA8408
+gBerryFixGbaTransferError_Gfx:: @ 8EA8408
 	.incbin "graphics/berry_fix/gba_transfer_error.4bpp.lz"
 
-gUnknown_8EA8CC8:: @ 8EA8CC8
+gBerryFixGbaTransferError_Tilemap:: @ 8EA8CC8
 	.incbin "graphics/berry_fix/gba_transfer_error.bin.lz"
 
-gUnknown_8EA8F00:: @ 8EA8F00
+gBerryFixWindow_Pal:: @ 8EA8F00
 	.incbin "graphics/berry_fix/window.gbapal"
 
-gUnknown_8EA8F40:: @ 8EA8F40
+gBerryFixWindow_Gfx:: @ 8EA8F40
 	.incbin "graphics/berry_fix/window.4bpp.lz"
 
-gUnknown_8EA9588:: @ 8EA9588
+gBerryFixWindow_Tilemap:: @ 8EA9588
 	.incbin "graphics/berry_fix/window.bin.lz"
 
 	.align 2

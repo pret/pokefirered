@@ -231,19 +231,72 @@ gUnknown_8479748::
 
 	// berry_fix_program
 
-gUnknown_847A890:: @ 847A890
-	.4byte gUnknown_8EA467C, gUnknown_8EA52B8, gUnknown_8EA463C
-	.4byte gUnknown_8EA5664, gUnknown_8EA60C8, gUnknown_8EA5604
-	.4byte gUnknown_8EA6408, gUnknown_8EA7028, gUnknown_8EA63C8
-	.4byte gUnknown_8EA7320, gUnknown_8EA8118, gUnknown_8EA72E0
-	.4byte gUnknown_8EA8408, gUnknown_8EA8CC8, gUnknown_8EA83C8
-	.4byte gUnknown_8EA8F40, gUnknown_8EA9588, gUnknown_8EA8F00
+gUnknown_847A8D8::
+	.string "{CLEAR 11}A{CLEAR 6}B{CLEAR 6}C{CLEAR 26}D{CLEAR 6}E{CLEAR 6}F{CLEAR 26}others$"
 
-	.incbin "baserom.gba", 0x47A8D8, 0x2D4
+gUnknown_847A8FA::
+	.string "{CLEAR 11}G{CLEAR 6}H{CLEAR 6}I{CLEAR 26}J{CLEAR 6}K{CLEAR 6}L$"
+
+gUnknown_847A913::
+	.string "{CLEAR 11}M{CLEAR 6}N{CLEAR 6}O{CLEAR 26}P{CLEAR 6}Q{CLEAR 6}R{CLEAR 6}S{CLEAR 26} $"
+
+gUnknown_847A934::
+	.string "{CLEAR 11}T{CLEAR 6}U{CLEAR 6}V{CLEAR 26}W{CLEAR 6}X{CLEAR 6}Y{CLEAR 6}Z{CLEAR 26} $"
+	.string "{CLEAR 11}a{CLEAR 6}b{CLEAR 6}c{CLEAR 26}d{CLEAR 6}e{CLEAR 6}f{CLEAR 6} {CLEAR 26}.$"
+	.string "{CLEAR 11}g{CLEAR 6}h{CLEAR 7}i{CLEAR 27}j{CLEAR 6}k{CLEAR 6}l{CLEAR 7} {CLEAR 26},$"
+	.string "{CLEAR 11}m{CLEAR 6}n{CLEAR 7}o{CLEAR 26}p{CLEAR 6}q{CLEAR 7}r{CLEAR 6}s{CLEAR 27} $"
+	.string "{CLEAR 12}t{CLEAR 6}u{CLEAR 6}v{CLEAR 26}w{CLEAR 6}x{CLEAR 6}y{CLEAR 6}z{CLEAR 26} $"
+	.string "{CLEAR 11}A{CLEAR 6}B{CLEAR 6}C{CLEAR 26}D{CLEAR 6}E{CLEAR 6}F{CLEAR 6} {CLEAR 26}.$"
+	.string "{CLEAR 11}G{CLEAR 6}H{CLEAR 6}I{CLEAR 26}J{CLEAR 6}K{CLEAR 6}L{CLEAR 6} {CLEAR 26},$"
+	.string "{CLEAR 11}M{CLEAR 6}N{CLEAR 6}O{CLEAR 26}P{CLEAR 6}Q{CLEAR 6}R{CLEAR 6}S{CLEAR 26} $"
+	.string "{CLEAR 11}T{CLEAR 6}U{CLEAR 6}V{CLEAR 26}W{CLEAR 6}X{CLEAR 6}Y{CLEAR 6}Z{CLEAR 26} $"
+	.string "{CLEAR 11}0{CLEAR 16}1{CLEAR 16}2{CLEAR 16}3{CLEAR 16}4{CLEAR 16} $"
+	.string "{CLEAR 11}5{CLEAR 16}6{CLEAR 16}7{CLEAR 16}8{CLEAR 16}9{CLEAR 16} $"
+	.string "{CLEAR 11}!{CLEAR 16}?{CLEAR 16}♂{CLEAR 16}♀{CLEAR 16}/{CLEAR 16}-$"
+	.string "{CLEAR 11}…{CLEAR 16}“{CLEAR 16}”{CLEAR 18}‘{CLEAR 18}'{CLEAR 18} $"
+	.string "ABCDE$"
+	.string "FGHIJ$"
+	.string "KLMNO$"
+	.string "PQRST$"
+	.string "UVWXY$"
+	.string "Z    $"
+	.string "01234$"
+	.string "56789$"
+	.string ".,!? $"
+	.string "-/&… $"
+	.string "abcde$"
+	.string "fghij$"
+	.string "klmno$"
+	.string "pqrst$"
+	.string "uvwxy$"
+	.string "z    $"
+	.string "01234$"
+	.string "56789$"
+	.string ".,!? $"
+	.string "-/&… $"
+	.string "$"
+	.string "$"
+	.string "$"
+	.string "$"
+	.string "$"
+	.string "$"
+	.string "$"
+	.string "$"
+	.string "{EXTRA 245}{EXTRA 246}{EXTRA 247}{EXTRA 248}{EXTRA 254}$"
+	.string "{EXTRA 249}{EXTRA 250}{EXTRA 252}{EXTRA 251}{EXTRA 253}$"
+	.string "{EXTRA 236}{EXTRA 237}{EXTRA 238}{EXTRA 235}{EXTRA 234}$"
+	.string "♂♀{EXTRA 212}{EXTRA 213}{EXTRA 211}$"
+	.string "{EXTRA 216}{EXTRA 217}{EXTRA 242}{EXTRA 243}{EXTRA 244}$"
+	.string "{EXTRA 218}{EXTRA 241}{EXTRA 224}{EXTRA 226}{EXTRA 227}$"
+	.string "{EXTRA 240}{EXTRA 239}{EXTRA 225}{EXTRA 214}{EXTRA 215}$"
+	.string "{EXTRA 228}{EXTRA 229}{EXTRA 230}{EXTRA 231}{EXTRA 232}$"
+	.string "{EXTRA 233}{EXTRA 220}{EXTRA 221}{EXTRA 222}{EXTRA 209}$"
+	.string "{EXTRA 210}{EXTRA 208}ょ: $"
 
 	// trainer_tower (again?)
 
 	@ 847ABAC
+.align 2
 	.include "data/trainer_tower/trainers.inc"
 
 	.align 2

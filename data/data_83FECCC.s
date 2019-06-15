@@ -2808,7 +2808,10 @@ gUnknown_843F8DB:: @ 843F8DB
 	.incbin "baserom.gba", 0x43F8DB, 0x5
 
 gUnknown_843F8E0:: @ 843F8E0
-	.incbin "baserom.gba", 0x43F8E0, 0x10
+	.4byte gUnknown_847A8D8
+	.4byte gUnknown_847A8FA
+	.4byte gUnknown_847A913
+	.4byte gUnknown_847A934
 
 gUnknown_843F8F0:: @ 843F8F0
 	.incbin "baserom.gba", 0x43F8F0, 0x20

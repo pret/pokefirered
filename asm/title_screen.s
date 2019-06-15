@@ -1688,13 +1688,13 @@ sub_80796E8: @ 80796E8
 	cmp r0, 0
 	bne _080796FE
 	bl m4aMPlayAllStop
-	ldr r0, _08079704 @ =sub_815F74C
+	ldr r0, _08079704 @ =mb_berry_fix_serve
 	bl SetMainCallback2
 _080796FE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08079704: .4byte sub_815F74C
+_08079704: .4byte mb_berry_fix_serve
 	thumb_func_end sub_80796E8
 
 	thumb_func_start sub_8079708

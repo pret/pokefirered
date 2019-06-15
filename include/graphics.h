@@ -175,4 +175,25 @@ extern const u8 gUnknown_8E86BE8[];
 extern const u8 gUnknown_8E86D6C[];
 extern const u8 gUnknown_8E86F98[];
 
+// berry_fix_program
+
+extern const u8 gBerryFixGameboy_Gfx[];
+extern const u8 gBerryFixGameboy_Tilemap[];
+extern const u8 gBerryFixGameboy_Pal[];
+extern const u8 gBerryFixGameboyLogo_Gfx[];
+extern const u8 gBerryFixGameboyLogo_Tilemap[];
+extern const u8 gBerryFixGameboyLogo_Pal[];
+extern const u8 gBerryFixGbaTransfer_Gfx[];
+extern const u8 gBerryFixGbaTransfer_Tilemap[];
+extern const u8 gBerryFixGbaTransfer_Pal[];
+extern const u8 gBerryFixGbaTransferHighlight_Gfx[];
+extern const u8 gBerryFixGbaTransferHighlight_Tilemap[];
+extern const u8 gBerryFixGbaTransferHighlight_Pal[];
+extern const u8 gBerryFixGbaTransferError_Gfx[];
+extern const u8 gBerryFixGbaTransferError_Tilemap[];
+extern const u8 gBerryFixGbaTransferError_Pal[];
+extern const u8 gBerryFixWindow_Gfx[];
+extern const u8 gBerryFixWindow_Tilemap[];
+extern const u8 gBerryFixWindow_Pal[];
+
 #endif //GUARD_GRAPHICS_H

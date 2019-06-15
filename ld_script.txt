@@ -284,7 +284,7 @@ SECTIONS {
         src/cereader_tool.o(.text);
         src/trainer_tower.o(.text);
         src/unk_815EDDC.o(.text);
-        asm/unk_815F138.o(.text);
+        src/unk_815F138.o(.text);
         asm/berry_fix_program.o(.text);
     } =0
 
@@ -457,6 +457,7 @@ SECTIONS {
         src/ss_anne.o(.rodata);
         src/cereader_tool.o(.rodata);
         src/trainer_tower.o(.rodata);
+        src/unk_815F138.o(.rodata);
         data/data_8471F00.o(.rodata.after_trainer_tower);
         src/mystery_event_msg.o(.rodata);
         data/mystery_event_msg.o(.rodata);

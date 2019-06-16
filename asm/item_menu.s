@@ -981,7 +981,7 @@ _08108584:
 	bl StringCopy
 _0810858C:
 	adds r0, r5, 0
-	bl ItemId_GetItem
+	bl ItemId_GetName
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringAppend
@@ -2853,7 +2853,7 @@ sub_81093B8: @ 81093B8
 	bl BagGetItemIdByPocketPosition
 	lsls r0, 16
 	lsrs r0, 16
-	bl ItemId_GetItem
+	bl ItemId_GetName
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy

@@ -1759,7 +1759,7 @@ _0811D330:
 _0811D358:
 	adds r4, 0x14
 	adds r0, r7, 0
-	bl ItemId_GetItem
+	bl ItemId_GetName
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy

@@ -44,7 +44,7 @@ bool8 CheckPCHasItem(u16 itemId, u16 count);
 bool8 AddPCItem(u16 itemId, u16 count);
 void RemovePCItem(u8 index, u16 count);
 void SwapRegisteredBike(void);
-const struct Item *ItemId_GetItem(u16 itemId);
+const u8 *ItemId_GetName(u16 itemId);
 u16 ItemId_GetId(u16 itemId);
 u16 ItemId_GetPrice(u16 itemId);
 u8 ItemId_GetHoldEffect(u16 itemId);

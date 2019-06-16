@@ -27,5 +27,6 @@ void sub_81AAC70(void);
 void sub_8108CF0(void);
 void sub_810B108(u8);
 void UseFameCheckerFromMenu(void);
+void sub_8108D60(struct ItemSlot * slots, int pos1, int pos2);
 
 #endif //GUARD_ITEM_MENU_H

@@ -3708,7 +3708,7 @@ const u16 * sub_8113FBC(const u16 * a0)
         case POCKET_ITEMS:
         case POCKET_POKE_BALLS:
         case POCKET_BERRY_POUCH:
-            StringCopy(gStringVar1, ItemId_GetItem(r5[0])->name);
+            StringCopy(gStringVar1, ItemId_GetName(r5[0]));
             if (r5[0] == ITEM_ESCAPE_ROPE)
             {
                 sub_80C4DF8(gStringVar2, r5[2]);
@@ -3725,7 +3725,7 @@ const u16 * sub_8113FBC(const u16 * a0)
             }
             break;
         case POCKET_KEY_ITEMS:
-            StringCopy(gStringVar1, ItemId_GetItem(r5[0])->name);
+            StringCopy(gStringVar1, ItemId_GetName(r5[0]));
             StringExpandPlaceholders(gStringVar4, gUnknown_841A220);
             break;
         case POCKET_TM_CASE:
@@ -3771,7 +3771,7 @@ const u16 * sub_8114188(const u16 * a0)
 {
     const u16 * r4 = sub_8113E88(5, a0);
     QuestLog_AutoGetSpeciesName(r4[1], gStringVar1, 0);
-    StringCopy(gStringVar2, ItemId_GetItem(r4[0])->name);
+    StringCopy(gStringVar2, ItemId_GetName(r4[0]));
     StringExpandPlaceholders(gStringVar4, gUnknown_841AB74);
     r4 += 2;
     return r4;
@@ -3787,7 +3787,7 @@ const u16 * sub_81141E4(const u16 * a0)
     const u16 * r4 = sub_8113E88(6, a0);
 
     QuestLog_AutoGetSpeciesName(r4[1], gStringVar1, 0);
-    StringCopy(gStringVar2, ItemId_GetItem(r4[0])->name);
+    StringCopy(gStringVar2, ItemId_GetName(r4[0]));
     StringExpandPlaceholders(gStringVar4, gUnknown_841AB8E);
     r4 += 2;
     return r4;
@@ -3803,7 +3803,7 @@ const u16 * sub_8114240(const u16 * a0)
     const u16 * r4 = sub_8113E88(7, a0);
 
     QuestLog_AutoGetSpeciesName(r4[1], gStringVar2, 0);
-    StringCopy(gStringVar1, ItemId_GetItem(r4[0])->name);
+    StringCopy(gStringVar1, ItemId_GetName(r4[0]));
     StringExpandPlaceholders(gStringVar4, gUnknown_841A6A5);
     r4 += 2;
     return r4;
@@ -3819,7 +3819,7 @@ const u16 * sub_811429C(const u16 * a0)
     const u16 * r4 = sub_8113E88(8, a0);
 
     QuestLog_AutoGetSpeciesName(r4[1], gStringVar1, 0);
-    StringCopy(gStringVar2, ItemId_GetItem(r4[0])->name);
+    StringCopy(gStringVar2, ItemId_GetName(r4[0]));
     StringExpandPlaceholders(gStringVar4, gUnknown_841A1CD);
     r4 += 2;
     return r4;
@@ -3846,8 +3846,8 @@ const u16 * sub_8114324(const u16 * a0)
 {
     const u16 * r4 = sub_8113E88(9, a0);
     QuestLog_AutoGetSpeciesName(r4[2], gStringVar1, 0);
-    StringCopy(gStringVar2, ItemId_GetItem(r4[0])->name);
-    StringCopy(gStringVar3, ItemId_GetItem(r4[1])->name);
+    StringCopy(gStringVar2, ItemId_GetName(r4[0]));
+    StringCopy(gStringVar3, ItemId_GetName(r4[1]));
     StringExpandPlaceholders(gStringVar4, gUnknown_841A193);
     r4 += 3;
     return r4;
@@ -3862,8 +3862,8 @@ const u16 * sub_8114394(const u16 * a0)
 {
     const u16 * r4 = sub_8113E88(10, a0);
     QuestLog_AutoGetSpeciesName(r4[2], gStringVar2, 0);
-    StringCopy(gStringVar3, ItemId_GetItem(r4[0])->name);
-    StringCopy(gStringVar1, ItemId_GetItem(r4[1])->name);
+    StringCopy(gStringVar3, ItemId_GetName(r4[0]));
+    StringCopy(gStringVar1, ItemId_GetName(r4[1]));
     StringExpandPlaceholders(gStringVar4, gUnknown_841A6E1);
     r4 += 3;
     return r4;
@@ -4817,7 +4817,7 @@ const u16 * sub_8115518(const u16 * a0)
     UnkTextUtil_Reset();
     sub_80C4DF8(gStringVar1, r7[0]);
     UnkTextUtil_SetPtrI(0, gStringVar1);
-    UnkTextUtil_SetPtrI(1, ItemId_GetItem(r4[0])->name);
+    UnkTextUtil_SetPtrI(1, ItemId_GetName(r4[0]));
     if (r4[1] < 2)
         UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841A7DD);
     else
@@ -4852,7 +4852,7 @@ const u16 * sub_81155E0(const u16 * a0) {
     if (r7[1] == 0) {
         UnkTextUtil_SetPtrI(0, gSaveBlock2Ptr->playerName);
         UnkTextUtil_SetPtrI(1, gStringVar1);
-        UnkTextUtil_SetPtrI(2, ItemId_GetItem(r5[0])->name);
+        UnkTextUtil_SetPtrI(2, ItemId_GetName(r5[0]));
         if (r5[1] == 1)
             UnkTextUtil_SetPtrI(3, gUnknown_841A8D4);
         else
@@ -4867,7 +4867,7 @@ const u16 * sub_81155E0(const u16 * a0) {
     else
     {
         UnkTextUtil_SetPtrI(0, gStringVar1);
-        UnkTextUtil_SetPtrI(1, ItemId_GetItem(r5[0])->name);
+        UnkTextUtil_SetPtrI(1, ItemId_GetName(r5[0]));
         ConvertIntToDecimalStringN(gStringVar2, r6, STR_CONV_MODE_LEFT_ALIGN, 6);
         UnkTextUtil_SetPtrI(2, gStringVar2);
         UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841A896);
@@ -4890,7 +4890,7 @@ const u16 * sub_8115700(const u16 * a0)
     const u16 * r4 = sub_8113E88(40, a0);
     const u8 * r5 = (const u8 *)r4 + 2;
     sub_80C4DF8(gStringVar1, r5[0]);
-    StringCopy(gStringVar2, ItemId_GetItem(r4[0])->name);
+    StringCopy(gStringVar2, ItemId_GetName(r4[0]));
     StringExpandPlaceholders(gStringVar4, gUnknown_841B03F);
     return (const u16 *)(r5 + 2);
 }

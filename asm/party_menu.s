@@ -3627,7 +3627,7 @@ _08120678:
 _0812067E:
 	ldr r0, _08120698 @ =0x0000016d
 _08120680:
-	bl ItemId_GetItem
+	bl ItemId_GetName
 	adds r1, r0, 0
 _08120686:
 	ldr r0, _0812069C @ =gStringVar1

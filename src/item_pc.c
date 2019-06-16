@@ -6,6 +6,7 @@
 #include "graphics.h"
 #include "help_system.h"
 #include "item.h"
+#include "item_menu.h"
 #include "item_menu_icons.h"
 #include "list_menu.h"
 #include "main.h"
@@ -76,6 +77,11 @@ void sub_810DDA4(void);
 void sub_810DE08(void);
 void sub_810DE94(u8);
 void sub_810DEA0(u8 taskId);
+void sub_810DFE0(u8 taskId, s16 pos);
+void sub_810E0B4(u8 taskId);
+void sub_810E160(u8 taskId, u32 pos);
+void sub_810E200(u8 taskId, u32 pos);
+void sub_810E274(u8 taskId);
 void sub_810E8F0(void);
 void sub_810EA34(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorIdx);
 
@@ -368,7 +374,7 @@ void sub_810D878(void)
 
     for (i = 0; i < gUnknown_203ADBC->field_07; i++)
     {
-        gUnknown_203ADC4[i].label = ItemId_GetItem(gSaveBlock1Ptr->pcItems[i].itemId)->name;
+        gUnknown_203ADC4[i].label = ItemId_GetName(gSaveBlock1Ptr->pcItems[i].itemId);
         gUnknown_203ADC4[i].index = i;
     }
     gUnknown_203ADC4[i].label = gFameCheckerText_Cancel;
@@ -597,4 +603,123 @@ void sub_810DE6C(int a0)
 void sub_810DE94(u8 a0)
 {
     gUnknown_203ADCC.field_8 = a0;
+}
+
+void sub_810DEA0(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    u16 scroll;
+    u16 row;
+    s32 input;
+
+    if (!gPaletteFade.active && !sub_80A0A98())
+    {
+        if (JOY_NEW(SELECT_BUTTON))
+        {
+            ListMenuGetScrollAndRow(data[0], &scroll, &row);
+            if (scroll + row != gUnknown_203ADBC->field_07)
+            {
+                PlaySE(SE_SELECT);
+                sub_810DFE0(taskId, scroll + row);
+                return;
+            }
+        }
+        input = ListMenuHandleInput(data[0]);
+        ListMenuGetScrollAndRow(data[0], &gUnknown_203ADCC.field_4, &gUnknown_203ADCC.field_6);
+        switch (input)
+        {
+        case -1:
+            break;
+        case -2:
+            PlaySE(SE_SELECT);
+            sub_810DE94(0);
+            gTasks[taskId].func = sub_810DC8C;
+            break;
+        default:
+            PlaySE(SE_SELECT);
+            sub_810DE6C(1);
+            sub_810DBD0();
+            data[1] = input;
+            data[2] = ItemPc_GetItemQuantityBySlotId(input);
+            sub_810DAB4(data[0], 2);
+            gTasks[taskId].func = sub_810E274;
+            break;
+        }
+    }
+}
+
+void sub_810DFB0(u8 taskId)
+{
+    sub_810DE6C(0);
+    sub_810DB5C();
+    gTasks[taskId].func = sub_810DEA0;
+}
+
+void sub_810DFE0(u8 taskId, s16 pos)
+{
+    s16 * data = gTasks[taskId].data;
+
+    sub_8107BD0(data[0], 16, 1);
+    data[1] = pos;
+    gUnknown_203ADBC->field_04 = pos;
+    StringCopy(gStringVar1, ItemId_GetName(ItemPc_GetItemIdBySlotId(data[1])));
+    StringExpandPlaceholders(gStringVar4, gUnknown_841633F);
+    FillWindowPixelBuffer(1, 0x00);
+    sub_810EA34(1, 2, gStringVar4, 0, 3, 2, 3, 0, 0);
+    sub_80986A8(-32, ListMenuGetYCoordForPrintingArrowCursor(data[0]));
+    sub_8098660(0);
+    sub_810DAB4(data[0], 2);
+    gTasks[taskId].func = sub_810E0B4;
+}
+
+void sub_810E0B4(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    ListMenuHandleInput(data[0]);
+    ListMenuGetScrollAndRow(data[0], &gUnknown_203ADCC.field_4, &gUnknown_203ADCC.field_6);
+    sub_80986A8(-32, ListMenuGetYCoordForPrintingArrowCursor(data[0]));
+    if (JOY_NEW(A_BUTTON | SELECT_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        gUnknown_203ADBC->field_04 = 0xFF;
+        sub_810E160(taskId, gUnknown_203ADCC.field_4 + gUnknown_203ADCC.field_6);
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        gUnknown_203ADBC->field_04 = 0xFF;
+        sub_810E200(taskId, gUnknown_203ADCC.field_4 + gUnknown_203ADCC.field_6);
+    }
+}
+
+void sub_810E160(u8 taskId, u32 pos)
+{
+    s16 * data = gTasks[taskId].data;
+    if (data[1] == pos || data[1] == pos - 1)
+        sub_810E200(taskId, pos);
+    else
+    {
+        sub_8108D60(gSaveBlock1Ptr->pcItems, data[1], pos);
+        DestroyListMenu(data[0], &gUnknown_203ADCC.field_4, &gUnknown_203ADCC.field_6);
+        if (data[1] < pos)
+            gUnknown_203ADCC.field_6--;
+        sub_810D878();
+        data[0] = ListMenuInit(&gMultiuseListMenuTemplate, gUnknown_203ADCC.field_4, gUnknown_203ADCC.field_6);
+        sub_8098660(1);
+        gTasks[taskId].func = sub_810DEA0;
+    }
+}
+
+void sub_810E200(u8 taskId, u32 pos)
+{
+    s16 * data = gTasks[taskId].data;
+
+    DestroyListMenu(data[0], &gUnknown_203ADCC.field_4, &gUnknown_203ADCC.field_6);
+    if (data[1] < pos)
+        gUnknown_203ADCC.field_6--;
+    sub_810D878();
+    data[0] = ListMenuInit(&gMultiuseListMenuTemplate, gUnknown_203ADCC.field_4, gUnknown_203ADCC.field_6);
+    sub_8098660(1);
+    gTasks[taskId].func = sub_810DEA0;
 }

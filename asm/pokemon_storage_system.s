@@ -16876,7 +16876,7 @@ _08093EF2:
 	beq _08093F78
 	ldr r3, _08093F74 @ =0x00000d61
 	adds r4, r3
-	bl ItemId_GetItem
+	bl ItemId_GetName
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0
@@ -21364,7 +21364,7 @@ sub_80961A8: @ 80961A8
 	ldr r1, _080961C0 @ =0x00002224
 	adds r0, r1
 	ldrh r0, [r0]
-	bl ItemId_GetItem
+	bl ItemId_GetName
 	pop {r1}
 	bx r1
 	.align 2, 0

@@ -113,6 +113,7 @@ extern const u8 gText_ICanPayThisMuch_WouldThatBeOkay[];
 extern const u8 gText_TurnedOverItemsWorthYen[];
 extern const u8 gPokeDudeText_TMTypes[];
 extern const u8 gPokeDudeText_ReadTMDescription[];
+extern const u8 gFameCheckerText_Cancel[];
 
 // teachy_tv
 extern const u8 gTeachyTvString_TeachBattle[];

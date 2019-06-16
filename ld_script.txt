@@ -417,6 +417,7 @@ SECTIONS {
         src/bag.o(.rodata);
         src/trainer_pokemon_sprites.o(.rodata);
         src/vs_seeker.o(.rodata);
+        src/item_pc.o(.rodata);
         data/data_83FECCC.o(.rodata.8453F6C);
         src/quest_log.o(.rodata);
         data/data_83FECCC.o(.rodata.8456C74);

@@ -71,5 +71,8 @@ u16 BagGetItemIdByPocketPosition(u8 a0, u16 a1);
 u16 BagGetQuantityByPocketPosition(u8 a0, u16 a1);
 bool8 itemid_is_unique(u16 itemId);
 void sub_809A584(struct ItemSlot * slots, u8 capacity);
+u16 GetBagItemId(u16 *);
+
+void sub_809A4E8(void);
 
 #endif // ITEM_H

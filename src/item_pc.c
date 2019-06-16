@@ -13,6 +13,7 @@
 #include "menu.h"
 #include "menu_helpers.h"
 #include "menu_indicators.h"
+#include "new_menu_helpers.h"
 #include "palette.h"
 #include "party_menu.h"
 #include "pc_screen_effect.h"
@@ -26,7 +27,7 @@
 
 struct ItemPcResources
 {
-    u32 field_00;
+    MainCallback field_00;
     u8 field_04;
     u8 field_05;
     u8 field_06;
@@ -64,17 +65,18 @@ void sub_810D878(void);
 void sub_810D954(s32 itemIndex, bool8 onInit, struct ListMenu * list);
 void sub_810DA20(u8 windowId, s32 itemId, u8 y);
 void sub_810DAD4(u8 y, u8 state);
-void sub_810E8F0(void);
 void sub_810DB34(void);
 void sub_810DB5C(void);
 void sub_810DBF0(void);
 void sub_810DC40(void);
+void sub_810DCE4(u8 taskId);
 u16 ItemPc_GetItemIdBySlotId(u16 itemIndex);
 u16 ItemPc_GetItemQuantityBySlotId(u16 itemIndex);
 void sub_810DDA4(void);
 void sub_810DE08(void);
 void sub_810DE94(u8);
 void sub_810DEA0(u8 taskId);
+void sub_810E8F0(void);
 void sub_810EA34(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorIdx);
 
 const struct BgTemplate gUnknown_8453F6C[2] = {
@@ -355,7 +357,7 @@ bool8 sub_810D78C(void)
 
 bool8 sub_810D83C(void)
 {
-    sub_810D83C_sub(gUnknown_203ADC4, 0x0F8);
+    sub_810D83C_sub(gUnknown_203ADC4, sizeof(struct ListMenuItem) * (PC_ITEMS_COUNT + 1));
     sub_810D83C_sub(gUnknown_203ADC8, 0x1B2);
     return TRUE;
 }
@@ -482,4 +484,117 @@ void sub_810DBD0(void)
         RemoveScrollIndicatorArrowPair(gUnknown_203ADBC->field_08);
         gUnknown_203ADBC->field_08 = 0xFF;
     }
+}
+
+void sub_810DBF0(void)
+{
+    if (gUnknown_203ADCC.field_4 != 0 && gUnknown_203ADCC.field_4 + gUnknown_203ADBC->field_06 > gUnknown_203ADBC->field_07 + 1)
+        gUnknown_203ADCC.field_4 = (gUnknown_203ADBC->field_07 + 1) - gUnknown_203ADBC->field_06;
+    if (gUnknown_203ADCC.field_4 + gUnknown_203ADCC.field_6 >= gUnknown_203ADBC->field_07 + 1)
+    {
+        if (gUnknown_203ADBC->field_07 + 1 < 2)
+            gUnknown_203ADCC.field_6 = 0;
+        else
+            gUnknown_203ADCC.field_6 = gUnknown_203ADBC->field_07;
+    }
+}
+
+#define sub_810DC40_sub(ptr) ({        \
+    void ** ptr__ = (void **)&(ptr);   \
+    if (*ptr__ != NULL)                \
+        Free(*ptr__);                  \
+})
+
+void sub_810DC40(void)
+{
+    sub_810DC40_sub(gUnknown_203ADBC);
+    sub_810DC40_sub(gUnknown_203ADC0);
+    sub_810DC40_sub(gUnknown_203ADC4);
+    sub_810DC40_sub(gUnknown_203ADC8);
+    FreeAllWindowBuffers();
+}
+
+void sub_810DC8C(u8 taskId)
+{
+    if (gUnknown_203ADCC.field_8 == 1)
+    {
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    }
+    else
+    {
+        sub_80A0A70(0, 0, 0);
+        PlaySE(SE_PC_OFF);
+    }
+    gTasks[taskId].func = sub_810DCE4;
+}
+
+void sub_810DCE4(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    if (!gPaletteFade.active && !sub_80A0AAC())
+    {
+        DestroyListMenu(data[0], &gUnknown_203ADCC.field_4, &gUnknown_203ADCC.field_6);
+        if (gUnknown_203ADBC->field_00 != NULL)
+            SetMainCallback2(gUnknown_203ADBC->field_00);
+        else
+            SetMainCallback2(gUnknown_203ADCC.field_0);
+        sub_810DBD0();
+        sub_810DC40();
+        DestroyTask(taskId);
+    }
+}
+
+u8 sub_810DD54(void)
+{
+    return gUnknown_203ADCC.field_4 + gUnknown_203ADCC.field_6;
+}
+
+u16 ItemPc_GetItemIdBySlotId(u16 idx)
+{
+    return gSaveBlock1Ptr->pcItems[idx].itemId;
+}
+
+u16 ItemPc_GetItemQuantityBySlotId(u16 idx)
+{
+    return GetBagItemId(&gSaveBlock1Ptr->pcItems[idx].quantity);
+}
+
+void sub_810DDA4(void)
+{
+    u16 i;
+
+    sub_809A4E8();
+    gUnknown_203ADBC->field_07 = 0;
+    for (i = 0; i < PC_ITEMS_COUNT; gUnknown_203ADBC->field_07++, i++)
+    {
+        if (gSaveBlock1Ptr->pcItems[i].itemId == ITEM_NONE)
+            break;
+    }
+    gUnknown_203ADBC->field_06 = gUnknown_203ADBC->field_07 + 1 <= 6 ? gUnknown_203ADBC->field_07 + 1 : 6;
+}
+
+void sub_810DE08(void)
+{
+    u8 i;
+
+    if (gUnknown_203ADCC.field_6 > 3)
+    {
+        for (i = 0; i <= gUnknown_203ADCC.field_6 - 3; gUnknown_203ADCC.field_6--, gUnknown_203ADCC.field_4++, i++)
+        {
+            if (gUnknown_203ADCC.field_4 + gUnknown_203ADBC->field_06 == gUnknown_203ADBC->field_07 + 1)
+                break;
+        }
+    }
+}
+
+void sub_810DE6C(int a0)
+{
+    sub_80F6B08(1, 0, 14, 30, 6, a0 + 1);
+    schedule_bg_copy_tilemap_to_vram(1);
+}
+
+void sub_810DE94(u8 a0)
+{
+    gUnknown_203ADCC.field_8 = a0;
 }

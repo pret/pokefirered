@@ -1,5 +1,6 @@
 #include "global.h"
 #include "bg.h"
+#include "data2.h"
 #include "decompress.h"
 #include "gpu_regs.h"
 #include "graphics.h"
@@ -11,12 +12,16 @@
 #include "malloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
+#include "menu_indicators.h"
 #include "palette.h"
+#include "party_menu.h"
 #include "pc_screen_effect.h"
 #include "scanline_effect.h"
 #include "sound.h"
+#include "string_util.h"
 #include "strings.h"
 #include "task.h"
+#include "constants/items.h"
 #include "constants/songs.h"
 
 struct ItemPcResources
@@ -27,7 +32,7 @@ struct ItemPcResources
     u8 field_06;
     u8 field_07;
     u8 field_08;
-    u8 filler_09[3];
+    u16 field_0A;
     s16 field_0C[3];
 };
 
@@ -58,15 +63,19 @@ bool8 sub_810D83C(void);
 void sub_810D878(void);
 void sub_810D954(s32 itemIndex, bool8 onInit, struct ListMenu * list);
 void sub_810DA20(u8 windowId, s32 itemId, u8 y);
+void sub_810DAD4(u8 y, u8 state);
 void sub_810E8F0(void);
 void sub_810DB34(void);
 void sub_810DB5C(void);
 void sub_810DBF0(void);
 void sub_810DC40(void);
+u16 ItemPc_GetItemIdBySlotId(u16 itemIndex);
+u16 ItemPc_GetItemQuantityBySlotId(u16 itemIndex);
 void sub_810DDA4(void);
 void sub_810DE08(void);
 void sub_810DE94(u8);
 void sub_810DEA0(u8 taskId);
+void sub_810EA34(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorIdx);
 
 const struct BgTemplate gUnknown_8453F6C[2] = {
     {
@@ -381,4 +390,96 @@ void sub_810D878(void)
     gMultiuseListMenuTemplate.itemPrintFunc = sub_810DA20;
     gMultiuseListMenuTemplate.scrollMultiple = 0;
     gMultiuseListMenuTemplate.cursorKind = 0;
+}
+
+void sub_810D954(s32 itemIndex, bool8 onInit, struct ListMenu * list)
+{
+    u16 itemId;
+    const u8 * desc;
+    if (onInit != TRUE)
+        PlaySE(SE_SELECT);
+
+    if (gUnknown_203ADBC->field_04 == 0xFF)
+    {
+        sub_8098940(gUnknown_203ADBC->field_05 ^ 1);
+        if (itemIndex != -2)
+        {
+            itemId = ItemPc_GetItemIdBySlotId(itemIndex);
+            sub_80988E8(itemId, gUnknown_203ADBC->field_05);
+            if (ItemId_GetPocket(itemId) == POCKET_TM_CASE)
+                desc = gMoveNames[ItemIdToBattleMoveId(itemId)];
+            else
+                desc = ItemId_GetDescription(itemId);
+        }
+        else
+        {
+            sub_80988E8(ITEM_N_A, gUnknown_203ADBC->field_05);
+            desc = gUnknown_84178BE;
+        }
+        gUnknown_203ADBC->field_05 ^= 1;
+        FillWindowPixelBuffer(1, 0);
+        sub_810EA34(1, 2, desc, 0, 3, 2, 0, 0, 3);
+    }
+}
+
+void sub_810DA20(u8 windowId, s32 itemId, u8 y)
+{
+    if (gUnknown_203ADBC->field_04 != 0xFF)
+    {
+        if (gUnknown_203ADBC->field_04 == (u8)itemId)
+            sub_810DAD4(y, 2);
+        else
+            sub_810DAD4(y, 0xFF);
+    }
+    if (itemId != -2)
+    {
+        u16 quantity = ItemPc_GetItemQuantityBySlotId(itemId);
+        ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_RIGHT_ALIGN, 3);
+        StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+        sub_810EA34(windowId, 0, gStringVar4, 110, y, 0, 0, 0xFF, 1);
+    }
+}
+
+void sub_810DAB4(u8 listMenuId, u8 colorIdx)
+{
+    sub_810DAD4(ListMenuGetYCoordForPrintingArrowCursor(listMenuId), colorIdx);
+}
+
+void sub_810DAD4(u8 y, u8 colorIdx)
+{
+    if (colorIdx == 0xFF)
+    {
+        u8 maxWidth = GetFontAttribute(2, FONTATTR_MAX_LETTER_WIDTH);
+        u8 maxHeight = GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT);
+        FillWindowPixelRect(0, 0, 0, y, maxWidth, maxHeight);
+    }
+    else
+    {
+        sub_810EA34(0, 2, gFameCheckerText_ListMenuCursor, 0, y, 0, 0, 0, colorIdx);
+    }
+}
+
+void sub_810DB34(void)
+{
+    sub_810EA34(2, 0, gUnknown_84178A7, 0, 1, 0, 1, 0, 0);
+}
+
+void sub_810DB5C(void)
+{
+    gUnknown_203ADBC->field_08 = AddScrollIndicatorArrowPairParameterized(2, 128, 8, 104, gUnknown_203ADBC->field_07 - gUnknown_203ADBC->field_06 + 1, 110, 110, &gUnknown_203ADCC.field_4);
+}
+
+void sub_810DB98(void)
+{
+    gUnknown_203ADBC->field_0A = 1;
+    gUnknown_203ADBC->field_08 = AddScrollIndicatorArrowPairParameterized(2, 212, 120, 152, 2, 110, 110, &gUnknown_203ADBC->field_0A);
+}
+
+void sub_810DBD0(void)
+{
+    if (gUnknown_203ADBC->field_08 != 0xFF)
+    {
+        RemoveScrollIndicatorArrowPair(gUnknown_203ADBC->field_08);
+        gUnknown_203ADBC->field_08 = 0xFF;
+    }
 }

@@ -150,5 +150,7 @@ extern const u8 gString_Help[];
 extern const u8 gString_HelpSystem_ClearTo8[];
 
 extern const u8 gUnknown_8416655[];
+extern const u8 gUnknown_84178A7[];
+extern const u8 gUnknown_84178BE[];
 
 #endif //GUARD_STRINGS_H

@@ -5,346 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_810D954
-sub_810D954: @ 810D954
-	push {r4,r5,lr}
-	sub sp, 0x14
-	adds r4, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	cmp r1, 0x1
-	beq _0810D968
-	movs r0, 0x5
-	bl PlaySE
-_0810D968:
-	ldr r5, _0810D9BC @ =gUnknown_203ADBC
-	ldr r1, [r5]
-	ldrb r0, [r1, 0x4]
-	cmp r0, 0xFF
-	bne _0810DA0A
-	ldrb r1, [r1, 0x5]
-	movs r0, 0x1
-	eors r0, r1
-	bl sub_8098940
-	movs r0, 0x2
-	negs r0, r0
-	cmp r4, r0
-	beq _0810D9CE
-	lsls r0, r4, 16
-	lsrs r0, 16
-	bl sub_810DD68
-	lsls r0, 16
-	lsrs r4, r0, 16
-	ldr r0, [r5]
-	ldrb r1, [r0, 0x5]
-	adds r0, r4, 0
-	bl sub_80988E8
-	adds r0, r4, 0
-	bl ItemId_GetPocket
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x4
-	bne _0810D9C4
-	adds r0, r4, 0
-	bl ItemIdToBattleMoveId
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0xD
-	muls r1, r0
-	ldr r0, _0810D9C0 @ =gMoveNames
-	adds r5, r1, r0
-	b _0810D9DA
-	.align 2, 0
-_0810D9BC: .4byte gUnknown_203ADBC
-_0810D9C0: .4byte gMoveNames
-_0810D9C4:
-	adds r0, r4, 0
-	bl ItemId_GetDescription
-	adds r5, r0, 0
-	b _0810D9DA
-_0810D9CE:
-	ldr r0, _0810DA14 @ =0x00000177
-	ldr r1, [r5]
-	ldrb r1, [r1, 0x5]
-	bl sub_80988E8
-	ldr r5, _0810DA18 @ =gUnknown_84178BE
-_0810D9DA:
-	ldr r0, _0810DA1C @ =gUnknown_203ADBC
-	ldr r2, [r0]
-	ldrb r0, [r2, 0x5]
-	movs r1, 0x1
-	eors r0, r1
-	movs r4, 0
-	strb r0, [r2, 0x5]
-	movs r0, 0x1
-	movs r1, 0
-	bl FillWindowPixelBuffer
-	movs r1, 0x3
-	str r1, [sp]
-	movs r0, 0x2
-	str r0, [sp, 0x4]
-	str r4, [sp, 0x8]
-	str r4, [sp, 0xC]
-	str r1, [sp, 0x10]
-	movs r0, 0x1
-	movs r1, 0x2
-	adds r2, r5, 0
-	movs r3, 0
-	bl sub_810EA34
-_0810DA0A:
-	add sp, 0x14
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0810DA14: .4byte 0x00000177
-_0810DA18: .4byte gUnknown_84178BE
-_0810DA1C: .4byte gUnknown_203ADBC
-	thumb_func_end sub_810D954
-
-	thumb_func_start sub_810DA20
-sub_810DA20: @ 810DA20
-	push {r4-r6,lr}
-	sub sp, 0x14
-	adds r4, r1, 0
-	lsls r0, 24
-	lsrs r6, r0, 24
-	lsls r2, 24
-	lsrs r5, r2, 24
-	ldr r0, _0810DA4C @ =gUnknown_203ADBC
-	ldr r0, [r0]
-	ldrb r1, [r0, 0x4]
-	cmp r1, 0xFF
-	beq _0810DA58
-	lsls r0, r4, 24
-	lsrs r0, 24
-	cmp r1, r0
-	bne _0810DA50
-	adds r0, r5, 0
-	movs r1, 0x2
-	bl sub_810DAD4
-	b _0810DA58
-	.align 2, 0
-_0810DA4C: .4byte gUnknown_203ADBC
-_0810DA50:
-	adds r0, r5, 0
-	movs r1, 0xFF
-	bl sub_810DAD4
-_0810DA58:
-	movs r0, 0x2
-	negs r0, r0
-	cmp r4, r0
-	beq _0810DA9E
-	lsls r0, r4, 16
-	lsrs r0, 16
-	bl sub_810DD80
-	adds r1, r0, 0
-	lsls r1, 16
-	lsrs r1, 16
-	ldr r0, _0810DAA8 @ =gStringVar1
-	movs r2, 0x1
-	movs r3, 0x3
-	bl ConvertIntToDecimalStringN
-	ldr r4, _0810DAAC @ =gStringVar4
-	ldr r1, _0810DAB0 @ =gText_TimesStrVar1
-	adds r0, r4, 0
-	bl StringExpandPlaceholders
-	str r5, [sp]
-	movs r0, 0
-	str r0, [sp, 0x4]
-	str r0, [sp, 0x8]
-	movs r0, 0xFF
-	str r0, [sp, 0xC]
-	movs r0, 0x1
-	str r0, [sp, 0x10]
-	adds r0, r6, 0
-	movs r1, 0
-	adds r2, r4, 0
-	movs r3, 0x6E
-	bl sub_810EA34
-_0810DA9E:
-	add sp, 0x14
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0810DAA8: .4byte gStringVar1
-_0810DAAC: .4byte gStringVar4
-_0810DAB0: .4byte gText_TimesStrVar1
-	thumb_func_end sub_810DA20
-
-	thumb_func_start sub_810DAB4
-sub_810DAB4: @ 810DAB4
-	push {r4,lr}
-	adds r4, r1, 0
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r4, 24
-	lsrs r4, 24
-	bl ListMenuGetYCoordForPrintingArrowCursor
-	lsls r0, 24
-	lsrs r0, 24
-	adds r1, r4, 0
-	bl sub_810DAD4
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_810DAB4
-
-	thumb_func_start sub_810DAD4
-sub_810DAD4: @ 810DAD4
-	push {r4,r5,lr}
-	sub sp, 0x14
-	lsls r0, 24
-	lsrs r5, r0, 24
-	lsls r1, 24
-	lsrs r1, 24
-	cmp r1, 0xFF
-	bne _0810DB10
-	movs r0, 0x2
-	movs r1, 0
-	bl GetFontAttribute
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	movs r0, 0x2
-	movs r1, 0x1
-	bl GetFontAttribute
-	lsls r0, 24
-	lsrs r0, 24
-	str r4, [sp]
-	str r0, [sp, 0x4]
-	movs r0, 0
-	movs r1, 0
-	movs r2, 0
-	adds r3, r5, 0
-	bl FillWindowPixelRect
-	b _0810DB26
-_0810DB10:
-	ldr r2, _0810DB30 @ =gFameCheckerText_ListMenuCursor
-	str r5, [sp]
-	movs r0, 0
-	str r0, [sp, 0x4]
-	str r0, [sp, 0x8]
-	str r0, [sp, 0xC]
-	str r1, [sp, 0x10]
-	movs r1, 0x2
-	movs r3, 0
-	bl sub_810EA34
-_0810DB26:
-	add sp, 0x14
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0810DB30: .4byte gFameCheckerText_ListMenuCursor
-	thumb_func_end sub_810DAD4
-
-	thumb_func_start sub_810DB34
-sub_810DB34: @ 810DB34
-	push {lr}
-	sub sp, 0x14
-	ldr r2, _0810DB58 @ =gUnknown_84178A7
-	movs r1, 0x1
-	str r1, [sp]
-	movs r0, 0
-	str r0, [sp, 0x4]
-	str r1, [sp, 0x8]
-	str r0, [sp, 0xC]
-	str r0, [sp, 0x10]
-	movs r0, 0x2
-	movs r1, 0
-	movs r3, 0
-	bl sub_810EA34
-	add sp, 0x14
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0810DB58: .4byte gUnknown_84178A7
-	thumb_func_end sub_810DB34
-
-	thumb_func_start sub_810DB5C
-sub_810DB5C: @ 810DB5C
-	push {r4,lr}
-	sub sp, 0x10
-	ldr r4, _0810DB90 @ =gUnknown_203ADBC
-	ldr r1, [r4]
-	ldrb r0, [r1, 0x7]
-	ldrb r1, [r1, 0x6]
-	subs r0, r1
-	adds r0, 0x1
-	str r0, [sp]
-	movs r0, 0x6E
-	str r0, [sp, 0x4]
-	str r0, [sp, 0x8]
-	ldr r0, _0810DB94 @ =gUnknown_203ADCC + 0x4
-	str r0, [sp, 0xC]
-	movs r0, 0x2
-	movs r1, 0x80
-	movs r2, 0x8
-	movs r3, 0x68
-	bl AddScrollIndicatorArrowPairParameterized
-	ldr r1, [r4]
-	strb r0, [r1, 0x8]
-	add sp, 0x10
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0810DB90: .4byte gUnknown_203ADBC
-_0810DB94: .4byte gUnknown_203ADCC + 0x4
-	thumb_func_end sub_810DB5C
-
-	thumb_func_start sub_810DB98
-sub_810DB98: @ 810DB98
-	push {r4,lr}
-	sub sp, 0x10
-	ldr r4, _0810DBCC @ =gUnknown_203ADBC
-	ldr r1, [r4]
-	movs r0, 0x1
-	strh r0, [r1, 0xA]
-	movs r0, 0x2
-	str r0, [sp]
-	movs r0, 0x6E
-	str r0, [sp, 0x4]
-	str r0, [sp, 0x8]
-	adds r1, 0xA
-	str r1, [sp, 0xC]
-	movs r0, 0x2
-	movs r1, 0xD4
-	movs r2, 0x78
-	movs r3, 0x98
-	bl AddScrollIndicatorArrowPairParameterized
-	ldr r1, [r4]
-	strb r0, [r1, 0x8]
-	add sp, 0x10
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0810DBCC: .4byte gUnknown_203ADBC
-	thumb_func_end sub_810DB98
-
-	thumb_func_start sub_810DBD0
-sub_810DBD0: @ 810DBD0
-	push {r4,lr}
-	ldr r4, _0810DBEC @ =gUnknown_203ADBC
-	ldr r1, [r4]
-	ldrb r0, [r1, 0x8]
-	cmp r0, 0xFF
-	beq _0810DBE6
-	bl RemoveScrollIndicatorArrowPair
-	ldr r1, [r4]
-	movs r0, 0xFF
-	strb r0, [r1, 0x8]
-_0810DBE6:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0810DBEC: .4byte gUnknown_203ADBC
-	thumb_func_end sub_810DBD0
-
 	thumb_func_start sub_810DBF0
 sub_810DBF0: @ 810DBF0
 	push {r4,r5,lr}
@@ -537,8 +197,8 @@ sub_810DD54: @ 810DD54
 _0810DD64: .4byte gUnknown_203ADCC
 	thumb_func_end sub_810DD54
 
-	thumb_func_start sub_810DD68
-sub_810DD68: @ 810DD68
+	thumb_func_start ItemPc_GetItemIdBySlotId
+ItemPc_GetItemIdBySlotId: @ 810DD68
 	lsls r0, 16
 	ldr r1, _0810DD7C @ =gSaveBlock1Ptr
 	ldr r1, [r1]
@@ -551,10 +211,10 @@ sub_810DD68: @ 810DD68
 	bx lr
 	.align 2, 0
 _0810DD7C: .4byte gSaveBlock1Ptr
-	thumb_func_end sub_810DD68
+	thumb_func_end ItemPc_GetItemIdBySlotId
 
-	thumb_func_start sub_810DD80
-sub_810DD80: @ 810DD80
+	thumb_func_start ItemPc_GetItemQuantityBySlotId
+ItemPc_GetItemQuantityBySlotId: @ 810DD80
 	push {lr}
 	lsls r0, 16
 	ldr r1, _0810DD9C @ =gSaveBlock1Ptr
@@ -571,7 +231,7 @@ sub_810DD80: @ 810DD80
 	.align 2, 0
 _0810DD9C: .4byte gSaveBlock1Ptr
 _0810DDA0: .4byte 0x0000029a
-	thumb_func_end sub_810DD80
+	thumb_func_end ItemPc_GetItemQuantityBySlotId
 
 	thumb_func_start sub_810DDA4
 sub_810DDA4: @ 810DDA4
@@ -814,7 +474,7 @@ _0810DF6C:
 	strh r4, [r6, 0x2]
 	lsls r0, r4, 16
 	lsrs r0, 16
-	bl sub_810DD80
+	bl ItemPc_GetItemQuantityBySlotId
 	strh r0, [r6, 0x4]
 	ldrb r0, [r6]
 	movs r1, 0x2
@@ -890,7 +550,7 @@ sub_810DFE0: @ 810DFE0
 	strb r4, [r0, 0x4]
 	ldr r4, _0810E0A4 @ =gStringVar1
 	ldrh r0, [r6, 0x2]
-	bl sub_810DD68
+	bl ItemPc_GetItemIdBySlotId
 	lsls r0, 16
 	lsrs r0, 16
 	bl ItemId_GetItem
@@ -1224,7 +884,7 @@ sub_810E274: @ 810E274
 	movs r3, 0x2
 	bl ProgramAndPlaceMenuCursorOnWindow
 	ldrh r0, [r6, 0x2]
-	bl sub_810DD68
+	bl ItemPc_GetItemIdBySlotId
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, _0810E348 @ =gStringVar1
@@ -1328,7 +988,7 @@ sub_810E3A4: @ 810E3A4
 	movs r0, 0x1
 	strh r0, [r4, 0x10]
 	ldrh r0, [r4, 0x2]
-	bl sub_810DD80
+	bl ItemPc_GetItemQuantityBySlotId
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x1
@@ -1373,7 +1033,7 @@ sub_810E418: @ 810E418
 	ldr r7, _0810E49C @ =gTasks+0x8
 	adds r5, r6, r7
 	ldrh r0, [r5, 0x2]
-	bl sub_810DD68
+	bl ItemPc_GetItemIdBySlotId
 	lsls r0, 16
 	lsrs r4, r0, 16
 	ldrh r1, [r5, 0x10]
@@ -1483,7 +1143,7 @@ _0810E51A:
 	movs r0, 0x5
 	bl PlaySE
 	ldrh r0, [r5, 0x2]
-	bl sub_810DD68
+	bl ItemPc_GetItemIdBySlotId
 	lsls r0, 16
 	lsrs r0, 16
 	ldrh r1, [r5, 0x10]
@@ -1578,7 +1238,7 @@ sub_810E5E0: @ 810E5E0
 	sub sp, 0x14
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_810DD68
+	bl ItemPc_GetItemIdBySlotId
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r6, _0810E660 @ =gStringVar1
@@ -1828,7 +1488,7 @@ sub_810E7F8: @ 810E7F8
 	bl sub_810DD54
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_810DD68
+	bl ItemPc_GetItemIdBySlotId
 	ldr r1, _0810E834 @ =gUnknown_203B0A0
 	strh r0, [r1, 0xC]
 	add sp, 0xC

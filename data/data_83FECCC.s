@@ -1272,7 +1272,10 @@ gUnknown_841786B:: @ 841786B
 	.incbin "baserom.gba", 0x41786B, 0x3C
 
 gUnknown_84178A7:: @ 84178A7
-	.incbin "baserom.gba", 0x4178A7, 0x17
+	.incbin "baserom.gba", 0x4178A7, 0xE
+
+gUnknown_84178B5::
+	.incbin "baserom.gba", 0x4178B5, 0x9
 
 gUnknown_84178BE:: @ 84178BE
 	.incbin "baserom.gba", 0x4178BE, 0x12
@@ -3071,9 +3074,6 @@ gUnknown_8453094:: @ 8453094
 	.section .rodata.8453F6C
 
 // item_pc.o
-gUnknown_8453F74:: @ 8453F74
-	.incbin "baserom.gba", 0x453F74, 0x18
-
 gUnknown_8453F8C:: @ 8453F8C
 	.incbin "baserom.gba", 0x453F8C, 0xC
 

@@ -9,6 +9,7 @@
 #include "item_menu.h"
 #include "item_menu_icons.h"
 #include "list_menu.h"
+#include "item_use.h"
 #include "main.h"
 #include "malloc.h"
 #include "menu.h"
@@ -82,8 +83,21 @@ void sub_810E0B4(u8 taskId);
 void sub_810E160(u8 taskId, u32 pos);
 void sub_810E200(u8 taskId, u32 pos);
 void sub_810E274(u8 taskId);
+void sub_810E358(u8 taskId);
+void sub_810E3A4(u8 taskId);
+void sub_810E418(u8 taskId);
+void sub_810E4F4(u8 taskId);
+void sub_810E548(u8 taskId);
+void sub_810E578(u8 taskId);
+void sub_810E5E0(u16 itemId);
+void sub_810E6D8(u8 taskId);
+void sub_810E79C(u8 taskId);
+void sub_810E8A0(u8 taskId);
 void sub_810E8F0(void);
 void sub_810EA34(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorIdx);
+void sub_810EA9C(u8 windowId);
+u8 sub_810EAB4(u8 idx);
+void sub_810EAF0(u8 idx);
 
 const struct BgTemplate gUnknown_8453F6C[2] = {
     {
@@ -97,6 +111,12 @@ const struct BgTemplate gUnknown_8453F6C[2] = {
         .mapBaseIndex = 30,
         .priority = 1
     }
+};
+
+const struct MenuAction gUnknown_8453F74[] = {
+    {gUnknown_84178B5,        {.void_u8 = sub_810E3A4}},
+    {gOtherText_Give,         {.void_u8 = sub_810E79C}},
+    {gFameCheckerText_Cancel, {.void_u8 = sub_810E8A0}}
 };
 
 void sub_810D3F4(u8 a0, MainCallback callback)
@@ -722,4 +742,108 @@ void sub_810E200(u8 taskId, u32 pos)
     data[0] = ListMenuInit(&gMultiuseListMenuTemplate, gUnknown_203ADCC.field_4, gUnknown_203ADCC.field_6);
     sub_8098660(1);
     gTasks[taskId].func = sub_810DEA0;
+}
+
+void sub_810E274(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    u8 windowId;
+
+    sub_810EA9C(4);
+    windowId = sub_810EAB4(0);
+    PrintTextArray(4, 2, 8, 2, GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) + 2, 3, gUnknown_8453F74);
+    ProgramAndPlaceMenuCursorOnWindow(4, 2, 0, 2, GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) + 2, 3, 0);
+    CopyItemName(ItemPc_GetItemIdBySlotId(data[1]), gStringVar1);
+    StringExpandPlaceholders(gStringVar4, gUnknown_84162FF);
+    sub_810EA34(windowId, 2, gStringVar4, 0, 2, 1, 0, 0, 1);
+    schedule_bg_copy_tilemap_to_vram(0);
+    gTasks[taskId].func = sub_810E358;
+}
+
+void sub_810E358(u8 taskId)
+{
+    s8 input = ProcessMenuInputNoWrapAround();
+    switch (input)
+    {
+    case -1:
+        PlaySE(SE_SELECT);
+        sub_810E8A0(taskId);
+        break;
+    case -2:
+        break;
+    default:
+        PlaySE(SE_SELECT);
+        gUnknown_8453F74[input].func.void_u8(taskId);
+    }
+}
+
+void sub_810E3A4(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    sub_810F4D8(4, 0);
+    sub_810EAF0(0);
+    ClearWindowTilemap(4);
+    data[8] = 1;
+    if (ItemPc_GetItemQuantityBySlotId(data[1]) == 1)
+    {
+        PutWindowTilemap(0);
+        schedule_bg_copy_tilemap_to_vram(0);
+        sub_810E418(taskId);
+    }
+    else
+    {
+        PutWindowTilemap(0);
+        sub_810E5E0(data[1]);
+        sub_810DB98();
+        gTasks[taskId].func = sub_810E6D8;
+    }
+}
+
+void sub_810E418(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    u16 itemId = ItemPc_GetItemIdBySlotId(data[1]);
+    u8 windowId;
+
+    if (AddBagItem(itemId, data[8]) == TRUE)
+    {
+        sub_80A2294(29, 0, itemId, 0xFFFF);
+        CopyItemName(itemId, gStringVar1);
+        ConvertIntToDecimalStringN(gStringVar2, data[8], STR_CONV_MODE_LEFT_ALIGN, 3);
+        StringExpandPlaceholders(gStringVar4, gUnknown_84177C5);
+        windowId = sub_810EAB4(2);
+        AddTextPrinterParameterized(windowId, 2, gStringVar4, 0, 2, 0, NULL);
+        gTasks[taskId].func = sub_810E4F4;
+    }
+    else
+    {
+        windowId = sub_810EAB4(2);
+        AddTextPrinterParameterized(windowId, 2, gUnknown_841778A, 0, 2, 0, NULL);
+        gTasks[taskId].func = sub_810E548;
+    }
+}
+
+void sub_810E4F4(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    u16 itemId;
+
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        itemId = ItemPc_GetItemIdBySlotId(data[1]);
+        sub_809A460(itemId, data[8]);
+        sub_809A4E8();
+        sub_810E578(taskId);
+    }
+}
+
+void sub_810E548(u8 taskId)
+{
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        sub_810E578(taskId);
+    }
 }

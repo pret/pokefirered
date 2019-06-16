@@ -149,9 +149,15 @@ extern const u8 gString_Someone[];
 extern const u8 gString_Help[];
 extern const u8 gString_HelpSystem_ClearTo8[];
 
+extern const u8 gOtherText_Give[];
+extern const u8 gFameCheckerText_Cancel[];
+extern const u8 gUnknown_84162FF[];
 extern const u8 gUnknown_841633F[];
 extern const u8 gUnknown_8416655[];
+extern const u8 gUnknown_841778A[];
+extern const u8 gUnknown_84177C5[];
 extern const u8 gUnknown_84178A7[];
+extern const u8 gUnknown_84178B5[];
 extern const u8 gUnknown_84178BE[];
 
 #endif //GUARD_STRINGS_H

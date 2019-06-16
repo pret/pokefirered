@@ -2,6 +2,7 @@
 #define GUARD_MENU_HELPERS_H
 
 #include "global.h"
+#include "task.h"
 
 // Exported type declarations
 

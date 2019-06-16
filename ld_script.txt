@@ -231,6 +231,7 @@ SECTIONS {
         src/bag.o(.text);
         src/trainer_pokemon_sprites.o(.text);
         src/vs_seeker.o(.text);
+        src/item_pc.o(.text);
         asm/item_pc.o(.text);
         asm/mailbox_pc.o(.text);
         asm/menu.o(.text);

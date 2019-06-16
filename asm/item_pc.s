@@ -5,334 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_810D3F4
-sub_810D3F4: @ 810D3F4
-	push {r4-r6,lr}
-	adds r4, r1, 0
-	lsls r0, 24
-	lsrs r0, 24
-	adds r5, r0, 0
-	cmp r5, 0x1
-	bhi _0810D410
-	ldr r6, _0810D418 @ =gUnknown_203ADBC
-	movs r0, 0x14
-	bl Alloc
-	str r0, [r6]
-	cmp r0, 0
-	bne _0810D41C
-_0810D410:
-	adds r0, r4, 0
-	bl SetMainCallback2
-	b _0810D462
-	.align 2, 0
-_0810D418: .4byte gUnknown_203ADBC
-_0810D41C:
-	cmp r5, 0x1
-	beq _0810D42A
-	ldr r0, _0810D468 @ =gUnknown_203ADCC
-	str r4, [r0]
-	movs r1, 0
-	strh r1, [r0, 0x6]
-	strh r1, [r0, 0x4]
-_0810D42A:
-	ldr r1, [r6]
-	movs r0, 0xFF
-	strb r0, [r1, 0x4]
-	ldr r0, [r6]
-	movs r2, 0
-	strb r2, [r0, 0x5]
-	ldr r1, [r6]
-	movs r0, 0x1
-	negs r0, r0
-	strb r0, [r1, 0x8]
-	ldr r0, [r6]
-	str r2, [r0]
-	ldr r5, _0810D46C @ =sub_810D4A0
-	adds r4, r6, 0
-	movs r3, 0
-_0810D448:
-	ldr r0, [r4]
-	lsls r1, r2, 1
-	adds r0, 0xC
-	adds r0, r1
-	strh r3, [r0]
-	adds r0, r2, 0x1
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r2, 0x2
-	bls _0810D448
-	adds r0, r5, 0
-	bl SetMainCallback2
-_0810D462:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0810D468: .4byte gUnknown_203ADCC
-_0810D46C: .4byte sub_810D4A0
-	thumb_func_end sub_810D3F4
-
-	thumb_func_start sub_810D470
-sub_810D470: @ 810D470
-	push {lr}
-	bl RunTasks
-	bl AnimateSprites
-	bl BuildOamBuffer
-	bl do_scheduled_bg_tilemap_copies_to_vram
-	bl UpdatePaletteFade
-	pop {r0}
-	bx r0
-	thumb_func_end sub_810D470
-
-	thumb_func_start sub_810D48C
-sub_810D48C: @ 810D48C
-	push {lr}
-	bl LoadOam
-	bl ProcessSpriteCopyRequests
-	bl TransferPlttBuffer
-	pop {r0}
-	bx r0
-	thumb_func_end sub_810D48C
-
-	thumb_func_start sub_810D4A0
-sub_810D4A0: @ 810D4A0
-	push {lr}
-_0810D4A2:
-	bl sub_810D4C0
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _0810D4BA
-	bl sub_80BF708
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _0810D4A2
-_0810D4BA:
-	pop {r0}
-	bx r0
-	thumb_func_end sub_810D4A0
-
-	thumb_func_start sub_810D4C0
-sub_810D4C0: @ 810D4C0
-	push {r4,lr}
-	sub sp, 0x4
-	ldr r0, _0810D4E0 @ =gMain
-	movs r1, 0x87
-	lsls r1, 3
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r0, 0x14
-	bls _0810D4D4
-	b _0810D688
-_0810D4D4:
-	lsls r0, 2
-	ldr r1, _0810D4E4 @ =_0810D4E8
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_0810D4E0: .4byte gMain
-_0810D4E4: .4byte _0810D4E8
-	.align 2, 0
-_0810D4E8:
-	.4byte _0810D53C
-	.4byte _0810D546
-	.4byte _0810D54C
-	.4byte _0810D552
-	.4byte _0810D558
-	.4byte _0810D55E
-	.4byte _0810D564
-	.4byte _0810D56A
-	.4byte _0810D584
-	.4byte _0810D594
-	.4byte _0810D59A
-	.4byte _0810D5A8
-	.4byte _0810D5BA
-	.4byte _0810D5C0
-	.4byte _0810D5C6
-	.4byte _0810D5CC
-	.4byte _0810D608
-	.4byte _0810D60E
-	.4byte _0810D616
-	.4byte _0810D630
-	.4byte _0810D668
-_0810D53C:
-	bl VblankHblankHandlerSetZero
-	bl clear_scheduled_bg_copies_to_vram
-	b _0810D674
-_0810D546:
-	bl ScanlineEffect_Stop
-	b _0810D674
-_0810D54C:
-	bl FreeAllSpritePalettes
-	b _0810D674
-_0810D552:
-	bl ResetPaletteFade
-	b _0810D674
-_0810D558:
-	bl ResetSpriteData
-	b _0810D674
-_0810D55E:
-	bl sub_80984D8
-	b _0810D674
-_0810D564:
-	bl ResetTasks
-	b _0810D674
-_0810D56A:
-	bl sub_810D71C
-	lsls r0, 24
-	cmp r0, 0
-	beq _0810D5B2
-	ldr r0, _0810D580 @ =gUnknown_203ADBC
-	ldr r1, [r0]
-	movs r0, 0
-	strh r0, [r1, 0xC]
-	b _0810D674
-	.align 2, 0
-_0810D580: .4byte gUnknown_203ADBC
-_0810D584:
-	bl sub_810D78C
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _0810D592
-	b _0810D6A0
-_0810D592:
-	b _0810D674
-_0810D594:
-	bl sub_810E8F0
-	b _0810D674
-_0810D59A:
-	bl sub_810DDA4
-	bl sub_810DBF0
-	bl sub_810DE08
-	b _0810D674
-_0810D5A8:
-	bl sub_810D83C
-	lsls r0, 24
-	cmp r0, 0
-	bne _0810D674
-_0810D5B2:
-	bl sub_810D6AC
-	movs r0, 0x1
-	b _0810D6A2
-_0810D5BA:
-	bl sub_810D878
-	b _0810D674
-_0810D5C0:
-	bl sub_810DB34
-	b _0810D674
-_0810D5C6:
-	bl sub_80985E4
-	b _0810D674
-_0810D5CC:
-	ldr r0, _0810D5F8 @ =sub_810DEA0
-	movs r1, 0
-	bl CreateTask
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	ldr r0, _0810D5FC @ =gMultiuseListMenuTemplate
-	ldr r2, _0810D600 @ =gUnknown_203ADCC
-	ldrh r1, [r2, 0x4]
-	ldrh r2, [r2, 0x6]
-	bl ListMenuInit
-	ldr r2, _0810D604 @ =gTasks
-	lsls r1, r4, 2
-	adds r1, r4
-	lsls r1, 3
-	adds r1, r2
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r1, 0x8]
-	b _0810D674
-	.align 2, 0
-_0810D5F8: .4byte sub_810DEA0
-_0810D5FC: .4byte gMultiuseListMenuTemplate
-_0810D600: .4byte gUnknown_203ADCC
-_0810D604: .4byte gTasks
-_0810D608:
-	bl sub_810DB5C
-	b _0810D674
-_0810D60E:
-	movs r0, 0x1D
-	bl HelpSystem_SetSomeVariable2
-	b _0810D674
-_0810D616:
-	ldr r0, _0810D62C @ =gUnknown_203ADCC
-	ldrb r0, [r0, 0x8]
-	cmp r0, 0x1
-	bne _0810D674
-	movs r0, 0x1
-	negs r0, r0
-	movs r1, 0x10
-	movs r2, 0
-	bl BlendPalettes
-	b _0810D674
-	.align 2, 0
-_0810D62C: .4byte gUnknown_203ADCC
-_0810D630:
-	ldr r0, _0810D64C @ =gUnknown_203ADCC
-	ldrb r0, [r0, 0x8]
-	cmp r0, 0x1
-	bne _0810D650
-	movs r0, 0x1
-	negs r0, r0
-	movs r1, 0
-	str r1, [sp]
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	b _0810D674
-	.align 2, 0
-_0810D64C: .4byte gUnknown_203ADCC
-_0810D650:
-	movs r0, 0
-	movs r1, 0
-	movs r2, 0
-	bl sub_80A0A48
-	movs r0, 0x1
-	bl sub_810DE94
-	movs r0, 0x2
-	bl PlaySE
-	b _0810D674
-_0810D668:
-	bl sub_80BF72C
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _0810D6A0
-_0810D674:
-	ldr r1, _0810D684 @ =gMain
-	movs r0, 0x87
-	lsls r0, 3
-	adds r1, r0
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	b _0810D6A0
-	.align 2, 0
-_0810D684: .4byte gMain
-_0810D688:
-	ldr r0, _0810D698 @ =sub_810D48C
-	bl SetVBlankCallback
-	ldr r0, _0810D69C @ =sub_810D470
-	bl SetMainCallback2
-	movs r0, 0x1
-	b _0810D6A2
-	.align 2, 0
-_0810D698: .4byte sub_810D48C
-_0810D69C: .4byte sub_810D470
-_0810D6A0:
-	movs r0, 0
-_0810D6A2:
-	add sp, 0x4
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_810D4C0
-
 	thumb_func_start sub_810D6AC
 sub_810D6AC: @ 810D6AC
 	push {lr}
@@ -935,7 +607,7 @@ sub_810DB5C: @ 810DB5C
 	movs r0, 0x6E
 	str r0, [sp, 0x4]
 	str r0, [sp, 0x8]
-	ldr r0, _0810DB94 @ =gUnknown_203ADD0
+	ldr r0, _0810DB94 @ =gUnknown_203ADCC + 0x4
 	str r0, [sp, 0xC]
 	movs r0, 0x2
 	movs r1, 0x80
@@ -950,7 +622,7 @@ sub_810DB5C: @ 810DB5C
 	bx r0
 	.align 2, 0
 _0810DB90: .4byte gUnknown_203ADBC
-_0810DB94: .4byte gUnknown_203ADD0
+_0810DB94: .4byte gUnknown_203ADCC + 0x4
 	thumb_func_end sub_810DB5C
 
 	thumb_func_start sub_810DB98
@@ -1151,7 +823,7 @@ sub_810DCE4: @ 810DCE4
 	cmp r0, 0
 	bne _0810DD4E
 	ldrb r0, [r4]
-	ldr r4, _0810DD30 @ =gUnknown_203ADD0
+	ldr r4, _0810DD30 @ =gUnknown_203ADCC + 0x4
 	adds r2, r4, 0x2
 	adds r1, r4, 0
 	bl DestroyListMenu
@@ -1165,7 +837,7 @@ sub_810DCE4: @ 810DCE4
 	.align 2, 0
 _0810DD28: .4byte gTasks+0x8
 _0810DD2C: .4byte gPaletteFade
-_0810DD30: .4byte gUnknown_203ADD0
+_0810DD30: .4byte gUnknown_203ADCC + 0x4
 _0810DD34: .4byte gUnknown_203ADBC
 _0810DD38:
 	subs r0, r4, 0x4
@@ -1434,7 +1106,7 @@ _0810DF20:
 	bl ListMenuHandleInput
 	adds r4, r0, 0
 	ldrb r0, [r6]
-	ldr r1, _0810DF44 @ =gUnknown_203ADD0
+	ldr r1, _0810DF44 @ =gUnknown_203ADCC + 0x4
 	adds r2, r1, 0x2
 	bl ListMenuGetScrollAndRow
 	movs r0, 0x2
@@ -1446,7 +1118,7 @@ _0810DF20:
 	bne _0810DF6C
 	b _0810DF9E
 	.align 2, 0
-_0810DF44: .4byte gUnknown_203ADD0
+_0810DF44: .4byte gUnknown_203ADCC + 0x4
 _0810DF48:
 	movs r0, 0x5
 	bl PlaySE
@@ -1627,7 +1299,7 @@ sub_810E0B4: @ 810E0B4
 	ldrb r0, [r4]
 	bl ListMenuHandleInput
 	ldrb r0, [r4]
-	ldr r7, _0810E120 @ =gUnknown_203ADD0
+	ldr r7, _0810E120 @ =gUnknown_203ADCC + 0x4
 	adds r2, r7, 0x2
 	adds r1, r7, 0
 	bl ListMenuGetScrollAndRow
@@ -1661,7 +1333,7 @@ sub_810E0B4: @ 810E0B4
 	b _0810E150
 	.align 2, 0
 _0810E11C: .4byte gTasks+0x8
-_0810E120: .4byte gUnknown_203ADD0
+_0810E120: .4byte gUnknown_203ADCC + 0x4
 _0810E124: .4byte gMain
 _0810E128: .4byte gUnknown_203ADBC
 _0810E12C:
@@ -1728,7 +1400,7 @@ _0810E194:
 	adds r2, r4, 0
 	bl sub_8108D60
 	ldrb r0, [r6]
-	ldr r5, _0810E1F4 @ =gUnknown_203ADD0
+	ldr r5, _0810E1F4 @ =gUnknown_203ADCC + 0x4
 	adds r2, r5, 0x2
 	adds r1, r5, 0
 	bl DestroyListMenu
@@ -1765,7 +1437,7 @@ _0810E1E6:
 	bx r0
 	.align 2, 0
 _0810E1F0: .4byte gSaveBlock1Ptr
-_0810E1F4: .4byte gUnknown_203ADD0
+_0810E1F4: .4byte gUnknown_203ADCC + 0x4
 _0810E1F8: .4byte gMultiuseListMenuTemplate
 _0810E1FC: .4byte sub_810DEA0
 	thumb_func_end sub_810E160
@@ -1785,7 +1457,7 @@ sub_810E200: @ 810E200
 	mov r8, r0
 	adds r6, r7, r0
 	ldrb r0, [r6]
-	ldr r5, _0810E268 @ =gUnknown_203ADD0
+	ldr r5, _0810E268 @ =gUnknown_203ADCC + 0x4
 	adds r2, r5, 0x2
 	adds r1, r5, 0
 	bl DestroyListMenu
@@ -1821,7 +1493,7 @@ _0810E234:
 	bx r0
 	.align 2, 0
 _0810E264: .4byte gTasks+0x8
-_0810E268: .4byte gUnknown_203ADD0
+_0810E268: .4byte gUnknown_203ADCC + 0x4
 _0810E26C: .4byte gMultiuseListMenuTemplate
 _0810E270: .4byte sub_810DEA0
 	thumb_func_end sub_810E200
@@ -2202,7 +1874,7 @@ sub_810E578: @ 810E578
 	movs r0, 0x1
 	bl PutWindowTilemap
 	ldrb r0, [r5]
-	ldr r4, _0810E5D8 @ =gUnknown_203ADD0
+	ldr r4, _0810E5D8 @ =gUnknown_203ADCC + 0x4
 	adds r2, r4, 0x2
 	adds r1, r4, 0
 	bl DestroyListMenu
@@ -2226,7 +1898,7 @@ sub_810E578: @ 810E578
 	bx r0
 	.align 2, 0
 _0810E5D4: .4byte gTasks+0x8
-_0810E5D8: .4byte gUnknown_203ADD0
+_0810E5D8: .4byte gUnknown_203ADCC + 0x4
 _0810E5DC: .4byte gMultiuseListMenuTemplate
 	thumb_func_end sub_810E578
 

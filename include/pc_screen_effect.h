@@ -1,0 +1,6 @@
+#ifndef GUARD_PC_SCREEN_EFFECT_H
+#define GUARD_PC_SCREEN_EFFECT_H
+
+void sub_80A0A48(u16, u16, u8);
+
+#endif //GUARD_PC_SCREEN_EFFECT_H

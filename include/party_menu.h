@@ -51,5 +51,6 @@ void sub_8120760(u8 taskId, u8 a1, s8 a2, s16 amount, TaskFunc followupFunc);
 void GetMonNickname(const struct Pokemon * mon, u8 * dest);
 void sub_81202F8(const u8 * src, u8 a1);
 bool8 sub_8120370(void);
+void sub_811EA44(u8 a, u8 b, u8 c, u8 d, u8 messageId, TaskFunc task, MainCallback callback);
 
 #endif // GUARD_PARTY_MENU_H

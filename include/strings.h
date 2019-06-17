@@ -155,6 +155,7 @@ extern const u8 gUnknown_84162FF[];
 extern const u8 gUnknown_841633F[];
 extern const u8 gUnknown_8416655[];
 extern const u8 gUnknown_841778A[];
+extern const u8 gUnknown_84177AC[];
 extern const u8 gUnknown_84177C5[];
 extern const u8 gUnknown_84178A7[];
 extern const u8 gUnknown_84178B5[];

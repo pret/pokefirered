@@ -24,6 +24,7 @@
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
+#include "text_window.h"
 #include "constants/items.h"
 #include "constants/songs.h"
 
@@ -52,6 +53,7 @@ EWRAM_DATA u8 * gUnknown_203ADC0 = NULL;
 EWRAM_DATA struct ListMenuItem * gUnknown_203ADC4 = NULL;
 EWRAM_DATA void * gUnknown_203ADC8 = NULL;
 EWRAM_DATA struct ItemPcStaticResources gUnknown_203ADCC = {};
+EWRAM_DATA u8 gUnknown_203ADD8[3] = {};
 
 extern const struct CompressedSpriteSheet gUnknown_83D4240;
 extern const struct CompressedSpritePalette gUnknown_83D4248;
@@ -89,15 +91,19 @@ void sub_810E418(u8 taskId);
 void sub_810E4F4(u8 taskId);
 void sub_810E548(u8 taskId);
 void sub_810E578(u8 taskId);
-void sub_810E5E0(u16 itemId);
+void sub_810E5E0(u16 slotId);
 void sub_810E6D8(u8 taskId);
 void sub_810E79C(u8 taskId);
+void sub_810E7F8(void);
+void sub_810E838(void);
+void sub_810E848(u8 taskId);
 void sub_810E8A0(u8 taskId);
 void sub_810E8F0(void);
 void sub_810EA34(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorIdx);
 void sub_810EA9C(u8 windowId);
 u8 sub_810EAB4(u8 idx);
 void sub_810EAF0(u8 idx);
+void sub_810EB30(u8 taskId, const u8 * str, TaskFunc taskFunc);
 
 const struct BgTemplate gUnknown_8453F6C[2] = {
     {
@@ -117,6 +123,93 @@ const struct MenuAction gUnknown_8453F74[] = {
     {gUnknown_84178B5,        {.void_u8 = sub_810E3A4}},
     {gOtherText_Give,         {.void_u8 = sub_810E79C}},
     {gFameCheckerText_Cancel, {.void_u8 = sub_810E8A0}}
+};
+
+const struct TextColor gUnknown_8453F8C[] = {
+    {0,  1, 2},
+    {0,  2, 3},
+    {0,  3, 2},
+    {0, 10, 2}
+};
+
+const struct WindowTemplate gUnknown_8453F98[] = {
+    {
+        .bg = 0,
+        .tilemapLeft = 0x07,
+        .tilemapTop = 0x01,
+        .width = 0x13,
+        .height = 0x0c,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x02bf
+    }, {
+        .bg = 0,
+        .tilemapLeft = 0x05,
+        .tilemapTop = 0x0e,
+        .width = 0x19,
+        .height = 0x06,
+        .paletteNum = 0x0d,
+        .baseBlock = 0x0229
+    }, {
+        .bg = 0,
+        .tilemapLeft = 0x01,
+        .tilemapTop = 0x01,
+        .width = 0x05,
+        .height = 0x04,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x0215
+    }, {
+        .bg = 0,
+        .tilemapLeft = 0x18,
+        .tilemapTop = 0x0f,
+        .width = 0x05,
+        .height = 0x04,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x0201
+    }, {
+        .bg = 0,
+        .tilemapLeft = 0x16,
+        .tilemapTop = 0x0d,
+        .width = 0x07,
+        .height = 0x06,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x01d7
+    }, {
+        .bg = 0,
+        .tilemapLeft = 0x02,
+        .tilemapTop = 0x0f,
+        .width = 0x1a,
+        .height = 0x04,
+        .paletteNum = 0x0b,
+        .baseBlock = 0x016f
+    }, DUMMY_WIN_TEMPLATE
+};
+
+const struct WindowTemplate gUnknown_8453FD0[] = {
+    {
+        .bg = 0,
+        .tilemapLeft = 0x06,
+        .tilemapTop = 0x0f,
+        .width = 0x0e,
+        .height = 0x04,
+        .paletteNum = 0x0c,
+        .baseBlock = 0x0137
+    }, {
+        .bg = 0,
+        .tilemapLeft = 0x06,
+        .tilemapTop = 0x0f,
+        .width = 0x10,
+        .height = 0x04,
+        .paletteNum = 0x0c,
+        .baseBlock = 0x0137
+    }, {
+        .bg = 0,
+        .tilemapLeft = 0x06,
+        .tilemapTop = 0x0f,
+        .width = 0x17,
+        .height = 0x04,
+        .paletteNum = 0x0c,
+        .baseBlock = 0x009b
+    }
 };
 
 void sub_810D3F4(u8 a0, MainCallback callback)
@@ -781,7 +874,7 @@ void sub_810E3A4(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
-    sub_810F4D8(4, 0);
+    sub_810F4D8(4, FALSE);
     sub_810EAF0(0);
     ClearWindowTilemap(4);
     data[8] = 1;
@@ -846,4 +939,212 @@ void sub_810E548(u8 taskId)
         PlaySE(SE_SELECT);
         sub_810E578(taskId);
     }
+}
+
+void sub_810E578(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    sub_810EAF0(2);
+    PutWindowTilemap(1);
+    DestroyListMenu(data[0], &gUnknown_203ADCC.field_4, &gUnknown_203ADCC.field_6);
+    sub_810DDA4();
+    sub_810DBF0();
+    sub_810D878();
+    data[0] = ListMenuInit(&gMultiuseListMenuTemplate, gUnknown_203ADCC.field_4, gUnknown_203ADCC.field_6);
+    schedule_bg_copy_tilemap_to_vram(0);
+    sub_810DFB0(taskId);
+}
+
+void sub_810E5E0(u16 slotId)
+{
+    u16 itemId = ItemPc_GetItemIdBySlotId(slotId);
+
+    CopyItemName(itemId, gStringVar1);
+    StringExpandPlaceholders(gStringVar4, gUnknown_84177AC);
+    AddTextPrinterParameterized(sub_810EAB4(1), 2, gStringVar4, 0, 2, 0, NULL);
+    ConvertIntToDecimalStringN(gStringVar1, 1, STR_CONV_MODE_LEADING_ZEROS, 3);
+    StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+    sub_810EA9C(3);
+    sub_810EA34(3, 0, gStringVar4, 8, 10, 1, 0, 0, 1);
+    schedule_bg_copy_tilemap_to_vram(0);
+}
+
+void sub_810E670(s16 quantity)
+{
+    FillWindowPixelRect(3, 0x11, 10, 10, 28, 12);
+    ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEADING_ZEROS, 3);
+    StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+    sub_810EA34(3, 0, gStringVar4, 8, 10, 1, 0, 0, 1);
+}
+
+void sub_810E6D8(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    if (sub_80BF848(&data[8], data[2]) == TRUE)
+        sub_810E670(data[8]);
+    else if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        sub_810EAF0(1);
+        ClearWindowTilemap(3);
+        PutWindowTilemap(0);
+        sub_810DAB4(data[0], 1);
+        schedule_bg_copy_tilemap_to_vram(0);
+        sub_810DBD0();
+        sub_810E418(taskId);
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        sub_810F4D8(3, FALSE);
+        sub_810EAF0(1);
+        ClearWindowTilemap(3);
+        PutWindowTilemap(0);
+        PutWindowTilemap(1);
+        sub_810DAB4(data[0], 1);
+        schedule_bg_copy_tilemap_to_vram(0);
+        sub_810DBD0();
+        sub_810DFB0(taskId);
+    }
+}
+
+void sub_810E79C(u8 taskId)
+{
+    if (CalculatePlayerPartyCount() == 0)
+    {
+        sub_810F4D8(4, FALSE);
+        sub_810EAF0(0);
+        ClearWindowTilemap(4);
+        PutWindowTilemap(0);
+        sub_810EB30(taskId, gText_ThereIsNoPokemon, sub_810E848);
+    }
+    else
+    {
+        gUnknown_203ADBC->field_00 = sub_810E7F8;
+        sub_810DC8C(taskId);
+    }
+}
+
+void sub_810E7F8(void)
+{
+    sub_811EA44(0, 0, 6, 0, 6, sub_811FB28, sub_810E838);
+    gUnknown_203B0A0.unkC = ItemPc_GetItemIdBySlotId(sub_810DD54());
+}
+
+void sub_810E838(void)
+{
+    sub_810D3F4(1, NULL);
+}
+
+void sub_810E848(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        sub_810F260(5, 0);
+        ClearWindowTilemap(5);
+        PutWindowTilemap(1);
+        sub_810DAB4(data[0], 1);
+        schedule_bg_copy_tilemap_to_vram(0);
+        sub_810DFB0(taskId);
+    }
+}
+
+void sub_810E8A0(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    sub_810F4D8(4, FALSE);
+    sub_810EAF0(0);
+    ClearWindowTilemap(4);
+    PutWindowTilemap(0);
+    PutWindowTilemap(1);
+    sub_810DAB4(data[0], 1);
+    schedule_bg_copy_tilemap_to_vram(0);
+    sub_810DFB0(taskId);
+}
+
+void sub_810E8F0(void)
+{
+    u8 i;
+
+    InitWindows(gUnknown_8453F98);
+    DeactivateAllTextPrinters();
+    sub_815001C(0, 0x3C0, 0xE0);
+    sub_814FF2C(0, 0x3A3, 0xC0);
+    sub_814FEAC(0, 0x3AC, 0xB0);
+    LoadPalette(stdpal_get(2), 0xD0, 0x20);
+    LoadPalette(gTMCaseMainWindowPalette, 0xF0, 0x20);
+    for (i = 0; i < 3; i++)
+    {
+        FillWindowPixelBuffer(i, 0x00);
+        PutWindowTilemap(i);
+    }
+    schedule_bg_copy_tilemap_to_vram(0);
+    for (i = 0; i < 3; i++)
+        gUnknown_203ADD8[i] = 0xFF;
+}
+
+void sub_810E984(u8 windowId, const u8 * string, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed)
+{
+    struct TextPrinterTemplate template;
+
+    template.currentChar = string;
+    template.windowId = windowId;
+    template.fontId = 3;
+    template.x = x;
+    template.y = y;
+    template.currentX = x;
+    template.currentY = y;
+    template.fgColor = 2;
+    template.bgColor = 0;
+    template.shadowColor = 3;
+    template.unk = GetFontAttribute(3, FONTATTR_UNKNOWN);
+    template.letterSpacing = letterSpacing + GetFontAttribute(3, FONTATTR_LETTER_SPACING);
+    template.lineSpacing = lineSpacing + GetFontAttribute(3, FONTATTR_LINE_SPACING);
+    AddTextPrinter(&template, speed, NULL);
+}
+
+void sub_810EA34(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorIdx)
+{
+    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, &gUnknown_8453F8C[colorIdx], speed, str);
+}
+
+void sub_810EA9C(u8 windowId)
+{
+    SetWindowBorderStyle(windowId, FALSE, 0x3C0, 0x0E);
+}
+
+u8 sub_810EAB4(u8 idx)
+{
+    if (gUnknown_203ADD8[idx] == 0xFF)
+    {
+        gUnknown_203ADD8[idx] = AddWindow(&gUnknown_8453FD0[idx]);
+        SetWindowBorderStyle(gUnknown_203ADD8[idx], TRUE, 0x3A3, 0x0C);
+    }
+
+    return gUnknown_203ADD8[idx];
+}
+
+void sub_810EAF0(u8 idx)
+{
+    sub_810F4D8(gUnknown_203ADD8[idx], 0);
+    ClearWindowTilemap(gUnknown_203ADD8[idx]);
+    RemoveWindow(gUnknown_203ADD8[idx]);
+    gUnknown_203ADD8[idx] = 0xFF;
+}
+
+u8 sub_810EB20(u8 idx)
+{
+    return gUnknown_203ADD8[idx];
+}
+
+void sub_810EB30(u8 taskId, const u8 * str, TaskFunc taskFunc)
+{
+    DisplayMessageAndContinueTask(taskId, 5, 0x3AC, 0x0B, 2, GetTextSpeedSetting(), str, taskFunc);
+    schedule_bg_copy_tilemap_to_vram(0);
 }

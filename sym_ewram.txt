@@ -1321,9 +1321,7 @@ gSpecialVar_ItemId: @ 203AD30
 	.align 2
 	.include "src/item_pc.o"
 
-gUnknown_203ADD8: @ 203ADD8
-	.space 0x4
-
+	.align 2
 gUnknown_203ADDC: @ 203ADDC
 	.space 0x4
 

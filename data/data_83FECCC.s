@@ -3073,16 +3073,7 @@ gUnknown_8453094:: @ 8453094
 
 	.section .rodata.8453F6C
 
-// item_pc.o
-gUnknown_8453F8C:: @ 8453F8C
-	.incbin "baserom.gba", 0x453F8C, 0xC
-
-gUnknown_8453F98:: @ 8453F98
-	.incbin "baserom.gba", 0x453F98, 0x38
-
-gUnknown_8453FD0:: @ 8453FD0
-	.incbin "baserom.gba", 0x453FD0, 0x18
-
+// mailbox_pc.o
 gUnknown_8453FE8:: @ 8453FE8
 	.incbin "baserom.gba", 0x453FE8, 0x18
 

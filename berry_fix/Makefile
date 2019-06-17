@@ -153,7 +153,7 @@ $(SONG_BUILDDIR)/%.o: $(SONG_SUBDIR)/%.s
 	$(AS) $(ASFLAGS) -I sound -o $@ $<
 
 $(ELF): ld_script.txt $(OBJS)
-	cd $(OBJ_DIR) && ../$(LD) $(LDFLAGS) -T ../ld_script.txt -o ../$@
+	cd $(OBJ_DIR) && ../$(LD) $(GCC_LDFLAGS) -T ../ld_script.txt -o ../$@
 
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary $< $@

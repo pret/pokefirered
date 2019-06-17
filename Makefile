@@ -33,7 +33,15 @@ override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-
 
 CPPFLAGS := -I tools/agbcc -I tools/agbcc/include -iquote include -nostdinc -undef
 
-LDFLAGS = -Map ../../$(MAP)
+# LLVM requires a different syntax for generating the map file.
+IS_LLVM = $(shell $(CXX) --help | grep -i "clang llvm compiler")
+LLVM_LDFLAGS = -Wl,-map,../../$(MAP)
+GCC_LDFLAGS = -Map ../../$(MAP)
+ifneq '' '$(IS_LLVM)'
+  LDFLAGS = $(LLVM_LDFLAGS)
+else
+  LDFLAGS = $(GCC_LDFLAGS)
+endif
 
 LIB := -L ../../tools/agbcc/lib -lgcc -lc
 
@@ -198,7 +206,7 @@ $(OBJ_DIR)/ld_script.ld: ld_script.txt $(OBJ_DIR)/sym_bss.ld $(OBJ_DIR)/sym_comm
 	cd $(OBJ_DIR) && sed -f ../../ld_script.sed ../../$< | sed "s#tools/#../../tools/#g" > ld_script.ld
 
 $(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS)
-	cd $(OBJ_DIR) && ../../$(LD) $(LDFLAGS) -T ld_script.ld -o ../../$@ $(LIB)
+	cd $(OBJ_DIR) && ../../$(LD) $(GCC_LDFLAGS) -T ld_script.ld -o ../../$@ $(LIB)
 
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary $< $@

@@ -2071,7 +2071,7 @@ sub_80CB580: @ 80CB580
 	ldr r5, _080CB62C @ =0x0000021d
 	adds r1, r5, 0
 	movs r2, 0xD0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	ldrb r0, [r4]
 	movs r1, 0
 	adds r2, r5, 0
@@ -2141,7 +2141,7 @@ sub_80CB63C: @ 80CB63C
 	ldr r4, _080CB654 @ =gUnknown_2039A0C
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	ldrb r0, [r4]
 	bl RemoveWindow
 	pop {r4}
@@ -2862,7 +2862,7 @@ sub_80CBBAC: @ 80CBBAC
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	ldrh r0, [r4, 0x22]
 	lsls r0, 24
 	lsrs r0, 24

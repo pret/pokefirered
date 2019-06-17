@@ -119,7 +119,7 @@ _080E46C6:
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xE0
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	movs r0, 0xD0
 	movs r1, 0x1
 	bl sub_8107D38

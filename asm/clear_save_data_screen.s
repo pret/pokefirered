@@ -109,11 +109,11 @@ _080F564A:
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xF0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0xF0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	b _080F56E2
 _080F5660:
 	movs r0, 0x1

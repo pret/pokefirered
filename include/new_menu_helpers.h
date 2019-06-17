@@ -29,7 +29,7 @@ void ResetBg0(void);
 void Menu_LoadStdPalAt(u16);
 void * malloc_and_decompress(const void * src, u32 * size);
 u16 sub_80F796C(void);
-void sub_80F6B08(u8 bgId, u8 left, u8 top, u8 width, u8 height, u8 palette);
+void SetBgRectPal(u8 bgId, u8 left, u8 top, u8 width, u8 height, u8 palette);
 void DecompressAndLoadBgGfxUsingHeap(u8 bgId, const void * gfx, u32 size, u16 a3, u8 a4);
 void ClearStdWindowAndFrame(u8 taskId, bool8 copyNow);
 

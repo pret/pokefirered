@@ -3035,7 +3035,7 @@ _0808D0D6:
 	movs r0, 0x1
 	movs r1, 0xB
 	movs r2, 0xE0
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	b _0808D20C
 	.align 2, 0
 _0808D100: .4byte 0x05000080
@@ -8165,7 +8165,7 @@ sub_808FB68: @ 808FB68
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r2, 0xD0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	movs r0, 0x20
 	str r0, [sp]
 	movs r0, 0x14
@@ -8363,7 +8363,7 @@ sub_808FD20: @ 808FD20
 	push {lr}
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	pop {r0}
@@ -16876,7 +16876,7 @@ _08093EF2:
 	beq _08093F78
 	ldr r3, _08093F74 @ =0x00000d61
 	adds r4, r3
-	bl ItemId_GetItem
+	bl ItemId_GetName
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0
@@ -19077,7 +19077,7 @@ sub_8095024: @ 8095024
 	adds r0, r4
 	ldrb r0, [r0]
 	movs r1, 0x1
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	ldr r0, [r5]
 	adds r0, r4
 	ldrb r0, [r0]
@@ -21364,7 +21364,7 @@ sub_80961A8: @ 80961A8
 	ldr r1, _080961C0 @ =0x00002224
 	adds r0, r1
 	ldrh r0, [r0]
-	bl ItemId_GetItem
+	bl ItemId_GetName
 	pop {r1}
 	bx r1
 	.align 2, 0

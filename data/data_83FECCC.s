@@ -892,8 +892,8 @@ gText_DepositItem:: @ 84162E8
 gUnknown_84162F5:: @ 84162F5
 	.incbin "baserom.gba", 0x4162F5, 0xA
 
-gUnknown_84162FF:: @ 84162FF
-	.incbin "baserom.gba", 0x4162FF, 0x2
+gOtherText_StrVar1:: @ 84162FF
+	.string "{STR_VAR_1}"
 
 gText_IsSelected:: @ 8416301
 	.string " is\n"
@@ -906,8 +906,9 @@ gText_ThereIsNoPokemon:: @ 841632A
 	.string "There is no\n"
 	.string "POKéMON.$"
 
-gUnknown_841633F:: @ 841633F
-	.incbin "baserom.gba", 0x41633F, 0x1F
+gOtherText_WhereShouldTheStrVar1BePlaced:: @ 841633F
+	.string "Where should the {STR_VAR_1}\n"
+	.string "be placed?$"
 
 gText_ItemCantBeHeld:: @ 841635E
 	.string "The {STR_VAR_1} can't be held.$"
@@ -969,7 +970,7 @@ gUnknown_8416631:: @ 8416631
 gUnknown_8416644:: @ 8416644
 	.incbin "baserom.gba", 0x416644, 0x11
 
-gUnknown_8416655:: @ 8416655
+gOtherText_Powder:: @ 8416655
 	.string "POWDER$"
 
 gUnknown_841665C:: @ 841665C
@@ -1247,14 +1248,26 @@ gUnknown_84176FE:: @ 84176FE
 gUnknown_8417774:: @ 8417774
 	.incbin "baserom.gba", 0x417774, 0x16
 
-gUnknown_841778A:: @ 841778A
-	.incbin "baserom.gba", 0x41778A, 0x22
+gText_NoMoreRoomInBag:: @ 841778A
+	.string "There is no more\n"
+	.string "room in the BAG.$"
 
-gUnknown_84177AC:: @ 84177AC
-	.incbin "baserom.gba", 0x4177AC, 0x19
+gText_WithdrawHowMany:: @ 84177AC
+	.string "Withdraw how many\n"
+	.string "{STR_VAR_1}(s)?$"
 
-gUnknown_84177C5:: @ 84177C5
-	.incbin "baserom.gba", 0x4177C5, 0x29
+gText_WithdrewQuantItem:: @ 84177C5
+	.string "Withdrew {STR_VAR_2}\n"
+	.string "{STR_VAR_1}(s).$"
+
+gOtherText_Read::
+	.string "READ$"
+
+gOtherText_MoveToBag::
+	.string "MOVE TO BAG$"
+
+gOtherText_Give2::
+	.string "GIVE$"
 
 gUnknown_84177EE:: @ 84177EE
 	.incbin "baserom.gba", 0x4177EE, 0x18
@@ -1271,11 +1284,15 @@ gUnknown_8417858:: @ 8417858
 gUnknown_841786B:: @ 841786B
 	.incbin "baserom.gba", 0x41786B, 0x3C
 
-gUnknown_84178A7:: @ 84178A7
-	.incbin "baserom.gba", 0x4178A7, 0x17
+gText_WithdrawItem:: @ 84178A7
+	.string "WITHDRAW\n"
+	.string "ITEM$"
 
-gUnknown_84178BE:: @ 84178BE
-	.incbin "baserom.gba", 0x4178BE, 0x12
+gText_Withdraw::
+	.string "WITHDRAW$"
+
+gText_ReturnToPC:: @ 84178BE
+	.string "Return to the PC.$"
 
 gUnknown_84178D0:: @ 84178D0
 	.incbin "baserom.gba", 0x4178D0, 0xA
@@ -2626,7 +2643,7 @@ gUnknown_841EF10:: @ 841EF10
 	.incbin "baserom.gba", 0x41EF10, 0x2B8
 
 gUnknown_841F1C8:: @ 841F1C8
-	.incbin "baserom.gba", 0x41F1C8, 0x240
+	.incbin "graphics/text_window/unk_841F1C8.4bpp"
 
 gTMCaseMainWindowPalette:: @ 841F408
 	.incbin "graphics/tm_case/unk_841F408.gbapal"
@@ -3070,22 +3087,7 @@ gUnknown_8453094:: @ 8453094
 
 	.section .rodata.8453F6C
 
-// item_pc.o
-gUnknown_8453F6C:: @ 8453F6C
-	.incbin "baserom.gba", 0x453F6C, 0x8
-
-gUnknown_8453F74:: @ 8453F74
-	.incbin "baserom.gba", 0x453F74, 0x18
-
-gUnknown_8453F8C:: @ 8453F8C
-	.incbin "baserom.gba", 0x453F8C, 0xC
-
-gUnknown_8453F98:: @ 8453F98
-	.incbin "baserom.gba", 0x453F98, 0x38
-
-gUnknown_8453FD0:: @ 8453FD0
-	.incbin "baserom.gba", 0x453FD0, 0x18
-
+// mailbox_pc.o
 gUnknown_8453FE8:: @ 8453FE8
 	.incbin "baserom.gba", 0x453FE8, 0x18
 

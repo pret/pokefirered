@@ -556,11 +556,11 @@ gUnknown_83D41F4:: @ 83D41F4
 gUnknown_83D41FC:: @ 83D41FC
 	.incbin "baserom.gba", 0x3D41FC, 0x44
 
-gUnknown_83D4240:: @ 83D4240
-	.incbin "baserom.gba", 0x3D4240, 0x8
+gBagSwapSpriteSheet:: @ 83D4240
+	obj_tiles gFile_graphics_interface_bag_swap_sheet, 0x0100, 0x0065
 
-gUnknown_83D4248:: @ 83D4248
-	.incbin "baserom.gba", 0x3D4248, 0x8
+gBagSwapSpritePalette:: @ 83D4248
+	obj_pal gFile_graphics_interface_bag_swap_palette, 0x0065
 
 gUnknown_83D4250:: @ 83D4250
 	.incbin "baserom.gba", 0x3D4250, 0x2C

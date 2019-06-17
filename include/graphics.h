@@ -176,7 +176,6 @@ extern const u8 gUnknown_8E86D6C[];
 extern const u8 gUnknown_8E86F98[];
 
 // berry_fix_program
-
 extern const u8 gBerryFixGameboy_Gfx[];
 extern const u8 gBerryFixGameboy_Tilemap[];
 extern const u8 gBerryFixGameboy_Pal[];
@@ -195,5 +194,11 @@ extern const u8 gBerryFixGbaTransferError_Pal[];
 extern const u8 gBerryFixWindow_Gfx[];
 extern const u8 gBerryFixWindow_Tilemap[];
 extern const u8 gBerryFixWindow_Pal[];
+
+// item_pc
+
+extern const u8 gItemPcTiles[];
+extern const u8 gItemPcBgPals[];
+extern const u8 gItemPcTilemap[];
 
 #endif //GUARD_GRAPHICS_H

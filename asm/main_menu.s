@@ -1656,7 +1656,7 @@ sub_800D094: @ 800D094
 	ldr r1, _0800D0AC @ =0x000001b1
 	movs r0, 0
 	movs r2, 0x20
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	ldr r0, _0800D0B0 @ =gUnknown_8234638
 	bl sub_800D1E8
 	pop {r0}

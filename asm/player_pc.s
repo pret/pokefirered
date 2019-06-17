@@ -237,7 +237,7 @@ sub_80EB81C: @ 80EB81C
 	bl PlaySE
 	ldrb r0, [r4, 0x14]
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	ldrb r0, [r4, 0x14]
 	bl ClearWindowTilemap
 	ldrb r0, [r4, 0x14]
@@ -256,7 +256,7 @@ _080EB874: .4byte sub_80EB9B8
 _080EB878:
 	ldrb r0, [r4, 0x14]
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	ldrb r0, [r4, 0x14]
 	bl ClearWindowTilemap
 	ldrb r0, [r4, 0x14]
@@ -752,7 +752,7 @@ _080EBC78: .4byte sub_80EBCAC
 _080EBC7C:
 	ldrb r0, [r4, 0x14]
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	ldrb r0, [r4, 0x14]
 	bl ClearWindowTilemap
 	ldrb r0, [r4, 0x14]
@@ -811,7 +811,7 @@ sub_80EBCD8: @ 80EBCD8
 	bl CleanupOverworldWindowsAndTilemaps
 	ldrb r0, [r5, 0xC]
 	ldr r1, _080EBD14 @ =CB2_ReturnToField
-	bl sub_810D3F4
+	bl ItemPc_Init
 	adds r0, r4, 0
 	bl DestroyTask
 _080EBD06:
@@ -837,7 +837,7 @@ sub_80EBD18: @ 80EBD18
 	ldr r0, _080EBD44 @ =sub_80EBCD8
 	str r0, [r1]
 	movs r0, 0
-	bl sub_810DE94
+	bl ItemPc_SetInitializedFlag
 	movs r0, 0x1
 	movs r1, 0
 	bl fade_screen
@@ -861,7 +861,7 @@ sub_80EBD48: @ 80EBD48
 	adds r4, r0
 	ldrb r0, [r4, 0x14]
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	ldrb r0, [r4, 0x14]
 	bl ClearWindowTilemap
 	ldrb r0, [r4, 0x14]

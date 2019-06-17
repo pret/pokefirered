@@ -7851,7 +7851,7 @@ sub_8100E34: @ 8100E34
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0xE0
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0xE

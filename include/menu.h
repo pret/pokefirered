@@ -36,7 +36,7 @@ void do_scheduled_bg_tilemap_copies_to_vram(void);
 void clear_scheduled_bg_copies_to_vram(void);
 void AddTextPrinterParameterized4(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, const struct TextColor *color, s8 speed, const u8 *str);
 void sub_8197B1C(u8 windowId, bool8 copyToVram, u16 a2, u16 a3);
-void sub_810F4D8(u8 windowId, bool32 someBool);
+void ClearMenuWindow(u8 windowId, bool8 copyToVram);
 void *sub_80F68F0(u8 bgId, const void *src, u32 size, u16 offset, u8 mode);
 void CreateWindow_SnapRight_StdPal(u8, u8, u8, u8, u16);
 void Menu_PrintHelpSystemUIHeader(const u8 *, const u8 *, u8, u32, u8);
@@ -49,6 +49,7 @@ void CreateYesNoMenu(const struct WindowTemplate *, u8, u8, u8, u16, u8, u8);
 void StartBlendTask(u8 eva_start, u8 evb_start, u8 eva_end, u8 evb_end, u8 ev_step, u8 priority);
 bool8 IsBlendTaskActive(void);
 void AddItemMenuActionTextPrinters(u8 windowId, u8 fontId, u8 left, u8 top, u8 letterSpacing, u8 lineHeight, u8 itemCount, const struct MenuAction *strs, const u8 *a8);
-void sub_810F260(u8 windowId, u8 a1);
+void ClearMenuWindow_BorderThickness2(u8 windowId, u8 a1);
+void PrintTextArray(u8, u8, u8, u8, u8, u8, const struct MenuAction *);
 
 #endif // GUARD_MENU_H

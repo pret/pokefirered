@@ -7930,7 +7930,7 @@ sub_814B5C4: @ 814B5C4
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0xD0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0xD

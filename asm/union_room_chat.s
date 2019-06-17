@@ -4329,7 +4329,7 @@ sub_812A51C: @ 812A51C
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x18]
 	bl ClearWindowTilemap
@@ -4568,7 +4568,7 @@ sub_812A6F4: @ 812A6F4
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1E]
 	bl ClearWindowTilemap
@@ -5015,7 +5015,7 @@ sub_812AA64: @ 812AA64
 	push {lr}
 	movs r0, 0x3
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	movs r0, 0x3
 	bl ClearWindowTilemap
 	pop {r0}
@@ -5350,11 +5350,11 @@ sub_812AD20: @ 812AD20
 	movs r0, 0x3
 	movs r1, 0x1
 	movs r2, 0xD0
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	movs r0, 0x3
 	movs r1, 0xA
 	movs r2, 0x20
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	ldr r0, _0812AD4C @ =gTMCaseMainWindowPalette
 	movs r1, 0xE0
 	movs r2, 0x20

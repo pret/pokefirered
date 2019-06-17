@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_811EA44
-sub_811EA44: @ 811EA44
+	thumb_func_start PartyMenuInit
+PartyMenuInit: @ 811EA44
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -181,7 +181,7 @@ _0811EB90: .4byte gUnknown_203B09C
 _0811EB94: .4byte gPlayerParty
 _0811EB98: .4byte gTextFlags
 _0811EB9C: .4byte sub_811EBD0
-	thumb_func_end sub_811EA44
+	thumb_func_end PartyMenuInit
 
 	thumb_func_start sub_811EBA0
 sub_811EBA0: @ 811EBA0
@@ -219,7 +219,7 @@ _0811EBD2:
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0811EBF6
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -299,7 +299,7 @@ _0811ECAE:
 	bl FreeAllSpritePalettes
 	b _0811EDFC
 _0811ECB4:
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	cmp r0, 0
 	beq _0811ECC0
@@ -1799,7 +1799,7 @@ _0811F884:
 	movs r1, 0x17
 	movs r2, 0x10
 	movs r3, 0x7
-	bl sub_80F6B08
+	bl SetBgRectPal
 	b _0811F8B0
 _0811F89E:
 	movs r0, 0x2
@@ -1809,7 +1809,7 @@ _0811F89E:
 	movs r1, 0x17
 	movs r2, 0x10
 	movs r3, 0x7
-	bl sub_80F6B08
+	bl SetBgRectPal
 _0811F8B0:
 	ldr r0, _0811F8BC @ =gUnknown_203B09C
 	ldr r0, [r0]
@@ -1857,7 +1857,7 @@ _0811F8F2:
 	movs r2, 0x12
 _0811F904:
 	movs r3, 0x7
-	bl sub_80F6B08
+	bl SetBgRectPal
 	b _0811F91E
 _0811F90C:
 	movs r0, 0x2
@@ -1867,7 +1867,7 @@ _0811F90C:
 	movs r1, 0x17
 	movs r2, 0x12
 	movs r3, 0x7
-	bl sub_80F6B08
+	bl SetBgRectPal
 _0811F91E:
 	ldr r0, _0811F940 @ =gUnknown_203B09C
 	ldr r0, [r0]
@@ -2494,7 +2494,7 @@ _0811FDD6:
 	.align 2, 0
 _0811FDF0: .4byte gUnknown_203B0A0
 _0811FDF4:
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	cmp r0, 0
 	bne _0811FE04
@@ -3234,7 +3234,7 @@ sub_8120328: @ 8120328
 	bne _0812035E
 	movs r0, 0x6
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	movs r0, 0x6
 	bl ClearWindowTilemap
 _0812035E:
@@ -3302,10 +3302,10 @@ sub_81203B8: @ 81203B8
 	beq _08120410
 	movs r0, 0x6
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	movs r0, 0x6
 	bl ClearWindowTilemap
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3366,7 +3366,7 @@ _0812043C:
 _08120448:
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	b _08120468
 	.align 2, 0
 _08120454: .4byte gUnknown_203B0A0
@@ -3376,7 +3376,7 @@ _0812045C:
 	movs r0, 0x6
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 _08120468:
 	ldr r1, _0812049C @ =gStringVar1
 	adds r0, r5, 0
@@ -3418,7 +3418,7 @@ sub_81204AC: @ 81204AC
 	movs r0, 0x8
 	adds r1, r6, 0
 	adds r2, r4, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	ldr r1, _081204FC @ =gStringVar1
 	adds r0, r6, 0
 	bl GetMonNickname
@@ -3627,7 +3627,7 @@ _08120678:
 _0812067E:
 	ldr r0, _08120698 @ =0x0000016d
 _08120680:
-	bl ItemId_GetItem
+	bl ItemId_GetName
 	adds r1, r0, 0
 _08120686:
 	ldr r0, _0812069C @ =gStringVar1
@@ -4709,11 +4709,11 @@ sub_8120E58: @ 8120E58
 	movs r0, 0
 	movs r1, 0x4F
 	movs r2, 0xD0
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	movs r0, 0
 	movs r1, 0x58
 	movs r2, 0xF0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	ldr r0, _08120E94 @ =gUnknown_203B0A0
 	ldrb r0, [r0, 0xB]
 	cmp r0, 0x3
@@ -5016,11 +5016,11 @@ _081210AC:
 	movs r0, 0
 	movs r1, 0x4F
 	movs r2, 0xD0
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	movs r0, 0
 	movs r1, 0x58
 	movs r2, 0xF0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	movs r0, 0x2
 	bl stdpal_get
 	movs r1, 0xC0
@@ -6507,7 +6507,7 @@ sub_8121CE4: @ 8121CE4
 	cmp r0, 0xFF
 	beq _08121D04
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	ldrb r0, [r4]
 	bl RemoveWindow
 	movs r0, 0xFF
@@ -7026,7 +7026,7 @@ sub_81220D4: @ 81220D4
 	adds r0, r4, 0
 	movs r1, 0x4F
 	movs r2, 0xE0
-	bl sub_814FEAC
+	bl TextWindow_SetBubbleFrame_841F1C8
 	adds r0, r4, 0
 	movs r1, 0x1
 	movs r2, 0x4F
@@ -7054,7 +7054,7 @@ sub_8122110: @ 8122110
 	bl ClearWindowTilemap
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_810F260
+	bl ClearMenuWindow_BorderThickness2
 	adds r0, r4, 0
 	bl RemoveWindow
 	movs r0, 0x2
@@ -8717,7 +8717,7 @@ sub_8122DBC: @ 8122DBC
 	str r1, [sp, 0x8]
 	movs r1, 0xFF
 	movs r3, 0x1
-	bl sub_811EA44
+	bl PartyMenuInit
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -9928,7 +9928,7 @@ _081237AE:
 	str r1, [sp, 0x8]
 	movs r1, 0xFF
 	movs r3, 0x1
-	bl sub_811EA44
+	bl PartyMenuInit
 	b _08123814
 	.align 2, 0
 _081237BC: .4byte gUnknown_203B0D8
@@ -9967,7 +9967,7 @@ _081237F8:
 	str r1, [sp, 0x8]
 	movs r1, 0xFF
 	movs r3, 0x1
-	bl sub_811EA44
+	bl PartyMenuInit
 _08123814:
 	add sp, 0xC
 	pop {r3}
@@ -10345,7 +10345,7 @@ sub_8123ACC: @ 8123ACC
 	str r1, [sp, 0x8]
 	movs r1, 0xFF
 	movs r3, 0x1
-	bl sub_811EA44
+	bl PartyMenuInit
 	b _08123B68
 	.align 2, 0
 _08123B38: .4byte gUnknown_203B0A0
@@ -10366,7 +10366,7 @@ _08123B4C:
 	str r1, [sp, 0x8]
 	movs r1, 0xFF
 	movs r3, 0x1
-	bl sub_811EA44
+	bl PartyMenuInit
 _08123B68:
 	add sp, 0xC
 	pop {r3}
@@ -10675,7 +10675,7 @@ sub_8123DCC: @ 8123DCC
 	str r1, [sp, 0x8]
 	movs r1, 0xFF
 	movs r3, 0x1
-	bl sub_811EA44
+	bl PartyMenuInit
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -11627,7 +11627,7 @@ _081245D6:
 	ldr r0, [r5]
 	adds r0, 0xD
 	bl sub_8121CE4
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -12237,7 +12237,7 @@ sub_8124AB0: @ 8124AB0
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_811EA44
+	bl PartyMenuInit
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -12577,7 +12577,7 @@ _08124D6A:
 	adds r1, r7, 0
 	movs r2, 0x3
 	movs r3, 0x1
-	bl sub_811EA44
+	bl PartyMenuInit
 	add sp, 0xC
 	pop {r3}
 	mov r8, r3
@@ -12759,7 +12759,7 @@ _08124EC8:
 	str r1, [sp, 0x8]
 	movs r1, 0xFF
 	movs r2, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 _08124EE6:
 	add sp, 0xC
 	pop {r3}
@@ -12820,7 +12820,7 @@ sub_8124EFC: @ 8124EFC
 	movs r0, 0x4
 	adds r1, r5, 0
 	adds r3, r6, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	ldrh r1, [r7]
 	movs r0, 0xA9
 	lsls r0, 1
@@ -12852,7 +12852,7 @@ _08124F94:
 	ldr r1, [r4]
 	str r1, [sp, 0x8]
 	movs r1, 0xFF
-	bl sub_811EA44
+	bl PartyMenuInit
 _08124FB2:
 	add sp, 0xC
 	pop {r3}
@@ -13312,7 +13312,7 @@ _08125380:
 	movs r0, 0x4
 	adds r1, r5, 0
 	adds r2, r6, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	adds r0, r7, 0
 	bl sub_8124DC0
 	ldr r1, _081253A8 @ =gUnknown_3005E98
@@ -13958,7 +13958,7 @@ sub_8125898: @ 8125898
 	ldr r3, _08125940 @ =0x0000ffff
 	movs r0, 0x4
 	adds r1, r4, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	movs r0, 0x1
 	bl PlaySE
 	ldrh r0, [r6]
@@ -14060,7 +14060,7 @@ _081259A0:
 	movs r0, 0x4
 	adds r1, r4, 0
 	adds r2, r5, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	movs r0, 0x1
 	bl PlaySE
 	adds r0, r5, 0
@@ -14315,7 +14315,7 @@ sub_8125B40: @ 8125B40
 	movs r0, 0x4
 	adds r1, r4, 0
 	adds r2, r5, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	adds r0, r6, 0
 	bl sub_8124DC0
 	ldr r1, _08125BEC @ =gUnknown_3005E98
@@ -14712,7 +14712,7 @@ _08125EE8:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_811EA44
+	bl PartyMenuInit
 _08125F02:
 	add sp, 0xC
 	pop {r4,r5}
@@ -14799,7 +14799,7 @@ sub_8125F5C: @ 8125F5C
 	movs r0, 0x4
 	adds r1, r6, 0
 	adds r3, r4, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	ldr r1, _08125FF0 @ =gStringVar1
 	adds r0, r6, 0
 	bl GetMonNickname
@@ -15268,7 +15268,7 @@ sub_8126350: @ 8126350
 	ldr r3, _08126424 @ =0x0000ffff
 	movs r0, 0x4
 	adds r1, r4, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	movs r0, 0
 	bl PlayFanfareByFanfareNum
 	ldrb r0, [r6, 0x9]
@@ -16112,7 +16112,7 @@ _08126A94:
 	ldrh r2, [r0]
 	ldr r3, _08126AE0 @ =0x0000ffff
 	movs r0, 0x4
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 _08126AB4:
 	ldr r0, _08126ADC @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
@@ -16266,7 +16266,7 @@ sub_8126BD4: @ 8126BD4
 	ldrh r2, [r5]
 	ldr r3, _08126C20 @ =0x0000ffff
 	movs r0, 0x4
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	ldrh r0, [r5]
 	movs r1, 0x1
 	bl RemoveBagItem
@@ -16640,7 +16640,7 @@ CB2_PartyMenuFromStartMenu: @ 8126EB0
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -16684,7 +16684,7 @@ _08126F0A:
 	movs r1, 0
 	movs r2, 0x5
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	ldr r1, _08126F38 @ =gUnknown_203B0A0
 	ldr r0, _08126F3C @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
@@ -16995,7 +16995,7 @@ _0812719C:
 	str r1, [sp, 0x8]
 	movs r1, 0xFF
 	movs r3, 0x1
-	bl sub_811EA44
+	bl PartyMenuInit
 _081271B8:
 	add sp, 0xC
 	pop {r4-r7}
@@ -17233,7 +17233,7 @@ sub_8127384: @ 8127384
 	bne _081273A0
 	adds r0, r1, 0
 	movs r1, 0x1
-	bl sub_809A460
+	bl RemoveItemFromPC
 	b _081273A8
 	.align 2, 0
 _0812739C: .4byte gUnknown_203B0A0
@@ -17286,7 +17286,7 @@ sub_81273D8: @ 81273D8
 	movs r1, 0
 	movs r2, 0x7
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -17387,7 +17387,7 @@ sub_81274A8: @ 81274A8
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	ldr r1, _081274F4 @ =gUnknown_203B0A0
 	lsls r4, 6
 	ldrb r2, [r1, 0x8]
@@ -17824,7 +17824,7 @@ sub_81277F4: @ 81277F4
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -17850,7 +17850,7 @@ sub_812781C: @ 812781C
 	movs r1, 0
 	movs r2, 0xC
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	b _08127870
 	.align 2, 0
 _08127844: .4byte gSpecialVar_0x8005
@@ -17867,7 +17867,7 @@ _08127850:
 	movs r1, 0
 	movs r2, 0xC
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	ldr r1, _08127880 @ =gUnknown_203B0A0
 	ldr r0, _08127884 @ =gSpecialVar_0x8007
 	ldrh r0, [r0]
@@ -17897,7 +17897,7 @@ sub_8127888: @ 8127888
 	movs r1, 0
 	movs r2, 0xD
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -17960,7 +17960,7 @@ sub_81278DC: @ 81278DC
 	movs r0, 0x1
 	adds r2, r4, 0
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	movs r0, 0x8
 	bl sub_80EB2F4
 	b _08127950
@@ -17982,7 +17982,7 @@ _08127930:
 	movs r0, 0x1
 	adds r2, r4, 0
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 _08127950:
 	bl nullsub_44
 	bl pokemon_change_order
@@ -18012,7 +18012,7 @@ sub_8127968: @ 8127968
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	bl nullsub_44
 	bl pokemon_change_order
 	add sp, 0xC
@@ -18040,7 +18040,7 @@ sub_81279A4: @ 81279A4
 	movs r0, 0x1
 	movs r2, 0xE
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	bl nullsub_44
 	bl pokemon_change_order
 	add sp, 0xC
@@ -18079,7 +18079,7 @@ sub_81279E0: @ 81279E0
 	movs r0, 0x1
 	movs r2, 0x3
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	movs r0, 0x8
 	bl sub_80EB2F4
 	b _08127A62
@@ -18110,7 +18110,7 @@ _08127A44:
 	movs r0, 0x1
 	movs r2, 0x3
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 _08127A62:
 	bl nullsub_44
 	bl pokemon_change_order
@@ -19069,7 +19069,7 @@ sub_8128198: @ 8128198
 	movs r1, 0x3
 	movs r2, 0
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -19314,7 +19314,7 @@ sub_8128370: @ 8128370
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -19343,7 +19343,7 @@ sub_81283A8: @ 81283A8
 	movs r1, 0
 	movs r2, 0xB
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	add sp, 0xC
 	pop {r0}
 	bx r0

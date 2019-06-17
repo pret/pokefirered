@@ -98,7 +98,7 @@ void sub_815EFBC(u8 windowId, u32 powder, u8 x, u8 y, u8 speed)
 void sub_815F014(u8 windowId, u16 baseBlock, u8 palette, u32 powder)
 {
     SetWindowBorderStyle(windowId, FALSE, baseBlock, palette);
-    AddTextPrinterParameterized(windowId, 0, gUnknown_8416655, 0, 0, -1, NULL);
+    AddTextPrinterParameterized(windowId, 0, gOtherText_Powder, 0, 0, -1, NULL);
     sub_815EFBC(windowId, powder, 39, 12, 0);
 }
 
@@ -119,7 +119,7 @@ void sub_815F094(void)
         gUnknown_203F464 = AddWindow(&template2);
         FillWindowPixelBuffer(gUnknown_203F464, 0);
         PutWindowTilemap(gUnknown_203F464);
-        sub_814FF2C(gUnknown_203F464, 0x21D, 0xD0);
+        TextWindow_SetStdFrame0_WithPal(gUnknown_203F464, 0x21D, 0xD0);
         sub_815F014(gUnknown_203F464, 0x21D, 0xD, sub_815EFA0());
     }
 }
@@ -127,6 +127,6 @@ void sub_815F094(void)
 void sub_815F114(void)
 {
     ClearWindowTilemap(gUnknown_203F464);
-    sub_810F4D8(gUnknown_203F464, 1);
+    ClearMenuWindow(gUnknown_203F464, 1);
     RemoveWindow(gUnknown_203F464);
 }

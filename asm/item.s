@@ -169,7 +169,7 @@ CopyItemName: @ 8099E90
 	.align 2, 0
 _08099EB4: .4byte gUnknown_84162BD
 _08099EB8:
-	bl ItemId_GetItem
+	bl ItemId_GetName
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
@@ -957,8 +957,8 @@ _0809A458:
 	bx r1
 	thumb_func_end AddPCItem
 
-	thumb_func_start sub_809A460
-sub_809A460: @ 809A460
+	thumb_func_start RemoveItemFromPC
+RemoveItemFromPC: @ 809A460
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1027,10 +1027,10 @@ _0809A4D8:
 	bx r0
 	.align 2, 0
 _0809A4E4: .4byte gSaveBlock1Ptr
-	thumb_func_end sub_809A460
+	thumb_func_end RemoveItemFromPC
 
-	thumb_func_start sub_809A4E8
-sub_809A4E8: @ 809A4E8
+	thumb_func_start ItemPcCompaction
+ItemPcCompaction: @ 809A4E8
 	push {r4-r7,lr}
 	movs r2, 0
 _0809A4EC:
@@ -1079,7 +1079,7 @@ _0809A52E:
 	bx r0
 	.align 2, 0
 _0809A53C: .4byte gSaveBlock1Ptr
-	thumb_func_end sub_809A4E8
+	thumb_func_end ItemPcCompaction
 
 	thumb_func_start sub_809A540
 sub_809A540: @ 809A540
@@ -1567,8 +1567,8 @@ _0809A8B8:
 	bx r1
 	thumb_func_end SanitizeItemId
 
-	thumb_func_start ItemId_GetItem
-ItemId_GetItem: @ 809A8BC
+	thumb_func_start ItemId_GetName
+ItemId_GetName: @ 809A8BC
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -1583,7 +1583,7 @@ ItemId_GetItem: @ 809A8BC
 	bx r1
 	.align 2, 0
 _0809A8D8: .4byte gItems
-	thumb_func_end ItemId_GetItem
+	thumb_func_end ItemId_GetName
 
 	thumb_func_start itemid_get_number
 itemid_get_number: @ 809A8DC

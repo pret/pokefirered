@@ -630,7 +630,7 @@ sub_80A1460: @ 80A1460
 	ldr r3, _080A14C4 @ =0x0000ffff
 	movs r0, 0x4
 	movs r1, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	ldr r1, _080A14C8 @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
@@ -689,7 +689,7 @@ sub_80A14E8: @ 80A14E8
 	ldr r3, _080A1548 @ =0x0000ffff
 	movs r0, 0x4
 	movs r1, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	ldr r1, _080A154C @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
@@ -765,7 +765,7 @@ _080A1598:
 	ldr r3, _080A15D8 @ =0x0000ffff
 	movs r0, 0x4
 	movs r1, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	ldr r1, _080A15DC @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
@@ -1201,7 +1201,7 @@ sub_80A18EC: @ 80A18EC
 	ldr r3, _080A1924 @ =0x0000ffff
 	movs r0, 0x4
 	movs r1, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	ldr r1, _080A1928 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -1328,7 +1328,7 @@ sub_80A19E8: @ 80A19E8
 	ldr r3, _080A1A34 @ =0x0000ffff
 	movs r0, 0x4
 	movs r1, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	ldr r5, _080A1A38 @ =0x00004020
 	ldrh r0, [r4]
 	bl ItemId_GetHoldEffectParam
@@ -1399,7 +1399,7 @@ sub_80A1A94: @ 80A1A94
 	ldr r3, _080A1AD8 @ =0x0000ffff
 	movs r0, 0x4
 	movs r1, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	ldrh r0, [r5]
 	cmp r0, 0x2B
 	bne _080A1AF4
@@ -1533,7 +1533,7 @@ ItemUseOutOfBattle_EscapeRope: @ 80A1BAC
 	ldrb r3, [r0, 0x14]
 	movs r0, 0x4
 	movs r1, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	ldr r1, _080A1BE4 @ =gUnknown_2039998
 	ldr r0, _080A1BE8 @ =sub_80A1C08
 	str r0, [r1]
@@ -1692,7 +1692,7 @@ sub_80A1CF8: @ 80A1CF8
 	ldr r3, _080A1D30 @ =0x0000ffff
 	movs r0, 0x4
 	movs r1, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	ldr r1, _080A1D34 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -2102,7 +2102,7 @@ sub_80A2010: @ 80A2010
 	ldr r3, _080A204C @ =0x0000ffff
 	movs r0, 0x4
 	movs r1, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	ldr r2, _080A2050 @ =gStringVar4
 	ldr r3, _080A2054 @ =sub_8108B50
 	adds r0, r4, 0
@@ -2363,8 +2363,8 @@ _080A228A:
 _080A2290: .4byte gTasks
 	thumb_func_end sub_80A2238
 
-	thumb_func_start sub_80A2294
-sub_80A2294: @ 80A2294
+	thumb_func_start ItemUse_SetQuestLogEvent
+ItemUse_SetQuestLogEvent: @ 80A2294
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -2405,6 +2405,6 @@ _080A22CA:
 	bx r0
 	.align 2, 0
 _080A22E4: .4byte 0x0000ffff
-	thumb_func_end sub_80A2294
+	thumb_func_end ItemUse_SetQuestLogEvent
 
 	.align 2, 0 @ Don't pad with nop.

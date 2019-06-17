@@ -1194,7 +1194,7 @@ sub_80F26D4: @ 80F26D4
 	ldr r1, _080F2758 @ =0x0000021d
 	movs r0, 0x1
 	movs r2, 0xD0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	movs r0, 0x78
 	strh r0, [r4, 0xE]
 	ldr r0, _080F275C @ =Task_Hof_WaitAndPrintPlayerInfo

@@ -113,6 +113,7 @@ extern const u8 gText_ICanPayThisMuch_WouldThatBeOkay[];
 extern const u8 gText_TurnedOverItemsWorthYen[];
 extern const u8 gPokeDudeText_TMTypes[];
 extern const u8 gPokeDudeText_ReadTMDescription[];
+extern const u8 gFameCheckerText_Cancel[];
 
 // teachy_tv
 extern const u8 gTeachyTvString_TeachBattle[];
@@ -148,6 +149,16 @@ extern const u8 gString_Someone[];
 extern const u8 gString_Help[];
 extern const u8 gString_HelpSystem_ClearTo8[];
 
-extern const u8 gUnknown_8416655[];
+extern const u8 gOtherText_Give[];
+extern const u8 gFameCheckerText_Cancel[];
+extern const u8 gOtherText_StrVar1[];
+extern const u8 gOtherText_WhereShouldTheStrVar1BePlaced[];
+extern const u8 gOtherText_Powder[];
+extern const u8 gText_NoMoreRoomInBag[];
+extern const u8 gText_WithdrawHowMany[];
+extern const u8 gText_WithdrewQuantItem[];
+extern const u8 gText_WithdrawItem[];
+extern const u8 gText_Withdraw[];
+extern const u8 gText_ReturnToPC[];
 
 #endif //GUARD_STRINGS_H

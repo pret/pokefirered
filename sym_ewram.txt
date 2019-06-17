@@ -1318,27 +1318,10 @@ gSpecialVar_ItemId: @ 203AD30
 	.align 2
 	.include "src/vs_seeker.o"
 
-gUnknown_203ADBC: @ 203ADBC
-	.space 0x4
+	.align 2
+	.include "src/item_pc.o"
 
-gUnknown_203ADC0: @ 203ADC0
-	.space 0x4
-
-gUnknown_203ADC4: @ 203ADC4
-	.space 0x4
-
-gUnknown_203ADC8: @ 203ADC8
-	.space 0x4
-
-gUnknown_203ADCC: @ 203ADCC
-	.space 0x4
-
-gUnknown_203ADD0: @ 203ADD0
-	.space 0x8
-
-gUnknown_203ADD8: @ 203ADD8
-	.space 0x4
-
+	.align 2
 gUnknown_203ADDC: @ 203ADDC
 	.space 0x4
 

@@ -2097,7 +2097,7 @@ _0814E6E0:
 	ldr r4, _0814E700 @ =0x0000021d
 	adds r1, r4, 0
 	movs r2, 0xD0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	ldrb r0, [r5]
 	movs r1, 0
 	adds r2, r4, 0
@@ -2246,7 +2246,7 @@ sub_814E80C: @ 814E80C
 	adds r5, r4, r0
 	ldrb r0, [r5]
 	movs r1, 0x1
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	ldrb r0, [r5]
 	bl RemoveWindow
 	adds r0, r4, 0
@@ -2309,7 +2309,7 @@ _0814E876:
 	ldr r4, _0814E8AC @ =0x0000021d
 	adds r1, r4, 0
 	movs r2, 0xD0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	ldrb r0, [r7, 0x2]
 	movs r1, 0
 	adds r2, r4, 0
@@ -2499,7 +2499,7 @@ _0814EA3C: .4byte gMain
 _0814EA40:
 	ldrb r0, [r7, 0x2]
 	movs r1, 0x1
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	ldrb r0, [r7, 0x2]
 	bl ClearWindowTilemap
 	ldrb r0, [r7, 0x2]

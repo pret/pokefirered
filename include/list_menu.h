@@ -62,5 +62,6 @@ u16 ListMenuGetYCoordForPrintingArrowCursor(u8);
 void sub_8107D38(u8, u8);
 s32 DoMysteryGiftListMenu(const struct WindowTemplate *windowTemplate, const struct ListMenuTemplate *listMenuTemplate, u8 arg2, u16 tileNum, u16 palNum);
 void ListMenuDefaultCursorMoveFunc(s32, u8, struct ListMenu *);
+void sub_8107BD0(u8 taskId, u8 attr, s32 value);
 
 #endif //GUARD_LIST_MENU_H

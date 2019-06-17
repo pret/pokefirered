@@ -47,6 +47,8 @@ struct Window
     u8 *tileData;
 };
 
+typedef void (*WindowFunc)(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum);
+
 bool16 InitWindows(const struct WindowTemplate *templates);
 u16 AddWindow(const struct WindowTemplate *template);
 int AddWindowWithoutTileMap(const struct WindowTemplate *template);
@@ -64,7 +66,7 @@ void FillWindowPixelRect(u8 windowId, u8 fillValue, u16 x, u16 y, u16 width, u16
 void CopyToWindowPixelBuffer(u8 windowId, const u8 *src, u16 size, u16 tileOffset);
 void FillWindowPixelBuffer(u8 windowId, u8 fillValue);
 void ScrollWindow(u8 windowId, u8 direction, u8 distance, u8 fillValue);
-void CallWindowFunction(u8 windowId, void ( *func)(u8, u8, u8, u8, u8, u8));
+void CallWindowFunction(u8 windowId, WindowFunc func);
 bool8 SetWindowAttribute(u8 windowId, u8 attributeId, u32 value);
 u32 GetWindowAttribute(u8 windowId, u8 attributeId);
 u16 AddWindow8Bit(struct WindowTemplate *template);

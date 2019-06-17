@@ -27,8 +27,8 @@ static const u16 gUnknown_84719EC[] = INCBIN_U16("graphics/text_window/unk_84715
 static const u16 gUnknown_8471A0C[] = INCBIN_U16("graphics/text_window/unk_84716AC.gbapal");
 static const u16 gUnknown_8471A2C[] = INCBIN_U16("graphics/text_window/unk_84717CC.gbapal");
 
-const u16 gUnknown_8471A4C[] = INCBIN_U16("graphics/text_window/unk_8471A4C.4bpp");
-const u16 gUnknown_8471B6C[] = INCBIN_U16("graphics/text_window/unk_8471B6C.4bpp");
+const u16 gStdFrame0[] = INCBIN_U16("graphics/text_window/unk_8471A4C.4bpp");
+const u16 gStdFrame1[] = INCBIN_U16("graphics/text_window/unk_8471B6C.4bpp");
 
 const u16 gUnknown_8471DEC[][16] = {
     INCBIN_U16("graphics/text_window/stdpal_0.gbapal"),
@@ -38,7 +38,7 @@ const u16 gUnknown_8471DEC[][16] = {
     INCBIN_U16("graphics/text_window/stdpal_4.gbapal")
 };
 
-const struct TextWindowGraphics gUnknown_8471E8C[] = {
+const struct TextWindowGraphics gUserFrames[] = {
     {gUnknown_8470D6C, gUnknown_847190C},
     {gUnknown_8470E8C, gUnknown_847192C},
     {gUnknown_8470FCC, gUnknown_847194C},
@@ -53,8 +53,8 @@ const struct TextWindowGraphics gUnknown_8471E8C[] = {
 
 const struct TextWindowGraphics * sub_8069788(u8 idx)
 {
-    if (idx >= 20) // if (idx >= NELEMS(gUnknown_8471E8C))
-        return &gUnknown_8471E8C[0];
+    if (idx >= 20) // if (idx >= NELEMS(gUserFrames))
+        return &gUserFrames[0];
     else
-        return &gUnknown_8471E8C[idx];
+        return &gUserFrames[idx];
 }

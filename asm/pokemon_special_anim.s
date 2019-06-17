@@ -1617,7 +1617,7 @@ sub_811D184: @ 811D184
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0xE0
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -1703,7 +1703,7 @@ sub_811D2D0: @ 811D2D0
 	bl ClearWindowTilemap
 	movs r0, 0
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	movs r0, 0
 	movs r1, 0x1
 	bl CopyWindowToVram

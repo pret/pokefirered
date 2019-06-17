@@ -1721,7 +1721,7 @@ sub_809D6B0: @ 809D6B0
 	bl ClearWindowTilemap
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	adds r0, r4, 0
 	bl RemoveWindow
 	pop {r4}

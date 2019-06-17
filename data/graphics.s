@@ -13976,14 +13976,14 @@ gUnknown_8E84F20:: @ 8E84F20
 gUnknown_8E85068:: @ 8E85068
 	.incbin "graphics/tm_case/unk_8E85068.gbapal.lz"
 
-gUnknown_8E85090:: @ 8E85090
-	.incbin "baserom.gba", 0xE85090, 0x378
+gItemPcTiles:: @ 8E85090
+	.incbin "graphics/item_pc/unk_8E85090.4bpp.lz"
 
-gUnknown_8E85408:: @ 8E85408
-	.incbin "baserom.gba", 0xE85408, 0x50
+gItemPcBgPals:: @ 8E85408
+	.incbin "graphics/item_pc/unk_8E85408.gbapal.lz"
 
-gUnknown_8E85458:: @ 8E85458
-	.incbin "baserom.gba", 0xE85458, 0x1B4
+gItemPcTilemap:: @ 8E85458
+	.incbin "graphics/item_pc/unk_8E85458.bin.lz"
 
 gUnknown_8E8560C:: @ 8E8560C
 	.incbin "baserom.gba", 0xE8560C, 0x3C4

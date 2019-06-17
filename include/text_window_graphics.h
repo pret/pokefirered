@@ -8,11 +8,11 @@ struct TextWindowGraphics
 };
 
 extern const u16 gUnknown_8470B0C[];
-extern const u16 gUnknown_8471A4C[];
-extern const u16 gUnknown_8471B6C[];
+extern const u16 gStdFrame0[];
+extern const u16 gStdFrame1[];
 extern const u16 gUnknown_8471DEC[][16];
 
-extern const struct TextWindowGraphics gUnknown_8471E8C[];
+extern const struct TextWindowGraphics gUserFrames[];
 
 const struct TextWindowGraphics * sub_8069788(u8 idx);
 

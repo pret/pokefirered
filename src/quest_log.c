@@ -1691,7 +1691,7 @@ void sub_81123BC(void)
 
 void sub_8112450(void)
 {
-    if (sub_80BF708() != 1)
+    if (MenuHelpers_LinkSomething() != 1)
     {
         sub_8112364();
         sub_81123BC();
@@ -2842,7 +2842,7 @@ void sub_8113550(u16 a0, const u16 * a1)
     if (sub_81138A0(a0, a1) == TRUE)
         return;
 
-    if (sub_80BF708() == TRUE)
+    if (MenuHelpers_LinkSomething() == TRUE)
         return;
 
     // NONMATCHING: branch logic here
@@ -2954,7 +2954,7 @@ void sub_8113550(u16 a0, const u16 * a1)
                 "\tbne _081135AA\n"
                 "\tb ._return\n"
                 "_081135AA:\n"
-                "\tbl sub_80BF708\n"
+                "\tbl MenuHelpers_LinkSomething\n"
                 "\tlsls r0, 24\n"
                 "\tlsrs r0, 24\n"
                 "\tcmp r0, 0x1\n"

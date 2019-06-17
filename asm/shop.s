@@ -332,7 +332,7 @@ sub_809AD24: @ 809AD24
 	ldr r4, _0809AD3C @ =gUnknown_2039950
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	ldrb r0, [r4]
 	bl RemoveWindow
 	pop {r4}
@@ -529,7 +529,7 @@ _0809AEAC:
 	bl ResetSpriteData
 	bl ResetTasks
 	bl clear_scheduled_bg_copies_to_vram
-	bl sub_80984D8
+	bl ResetItemMenuIconState
 	bl sub_809AF6C
 	lsls r0, 24
 	cmp r0, 0
@@ -793,7 +793,7 @@ _0809B118:
 	movs r1, 0
 	movs r2, 0xE
 	movs r3, 0x1E
-	bl sub_80F6B08
+	bl SetBgRectPal
 	b _0809B14E
 	.align 2, 0
 _0809B138: .4byte gUnknown_2039934
@@ -805,7 +805,7 @@ _0809B13C:
 	movs r1, 0
 	movs r2, 0xC
 	movs r3, 0x1E
-	bl sub_80F6B08
+	bl SetBgRectPal
 _0809B14E:
 	movs r0, 0x1
 	bl schedule_bg_copy_tilemap_to_vram
@@ -1069,7 +1069,7 @@ _0809B34A:
 	lsrs r1, 30
 	movs r0, 0x1
 	eors r0, r1
-	bl sub_8098940
+	bl DestroyItemMenuIcon
 	movs r0, 0x2
 	negs r0, r0
 	cmp r5, r0
@@ -1079,7 +1079,7 @@ _0809B34A:
 	ldrb r1, [r6, 0x17]
 	lsls r1, 29
 	lsrs r1, 30
-	bl sub_80988E8
+	bl CreateItemMenuIcon
 	b _0809B398
 	.align 2, 0
 _0809B384: .4byte gUnknown_8416757
@@ -1089,7 +1089,7 @@ _0809B38C:
 	ldrb r1, [r6, 0x17]
 	lsls r1, 29
 	lsrs r1, 30
-	bl sub_80988E8
+	bl CreateItemMenuIcon
 _0809B398:
 	ldr r3, _0809B3D4 @ =gUnknown_2039934
 	ldrb r2, [r3, 0x17]
@@ -2396,10 +2396,10 @@ _0809BDD4:
 	bl sub_809B73C
 	movs r0, 0x3
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	movs r0, 0x3
 	bl ClearWindowTilemap
 	movs r0, 0x1
@@ -2442,10 +2442,10 @@ _0809BE54:
 	bl sub_809B73C
 	movs r0, 0x3
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	movs r0, 0x3
 	bl ClearWindowTilemap
 	movs r0, 0x1
@@ -2601,7 +2601,7 @@ sub_809BF98: @ 809BF98
 	adds r4, r5, r6
 	movs r0, 0x2
 	movs r1, 0
-	bl sub_810F260
+	bl ClearMenuWindow_BorderThickness2
 	ldrb r0, [r4, 0xE]
 	movs r1, 0x1
 	bl sub_809B57C

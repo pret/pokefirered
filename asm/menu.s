@@ -556,8 +556,8 @@ _0810F258: .4byte 0x00000803
 _0810F25C: .4byte 0x00000804
 	thumb_func_end sub_810EE5C
 
-	thumb_func_start sub_810F260
-sub_810F260: @ 810F260
+	thumb_func_start ClearMenuWindow_BorderThickness2
+ClearMenuWindow_BorderThickness2: @ 810F260
 	push {r4,r5,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -583,7 +583,7 @@ _0810F28E:
 	bx r0
 	.align 2, 0
 _0810F294: .4byte sub_810F298
-	thumb_func_end sub_810F260
+	thumb_func_end ClearMenuWindow_BorderThickness2
 
 	thumb_func_start sub_810F298
 sub_810F298: @ 810F298
@@ -866,8 +866,8 @@ _0810F4D0: .4byte gUnknown_203ADF0
 _0810F4D4: .4byte gUnknown_203ADF2
 	thumb_func_end DrawWindowBorder
 
-	thumb_func_start sub_810F4D8
-sub_810F4D8: @ 810F4D8
+	thumb_func_start ClearMenuWindow
+ClearMenuWindow: @ 810F4D8
 	push {r4,r5,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -893,7 +893,7 @@ _0810F506:
 	bx r0
 	.align 2, 0
 _0810F50C: .4byte sub_810F510
-	thumb_func_end sub_810F4D8
+	thumb_func_end ClearMenuWindow
 
 	thumb_func_start sub_810F510
 sub_810F510: @ 810F510
@@ -2469,7 +2469,7 @@ sub_81100E8: @ 81100E8
 	ldr r4, _08110100 @ =gUnknown_203ADF3
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	ldrb r0, [r4]
 	bl RemoveWindow
 	pop {r4}

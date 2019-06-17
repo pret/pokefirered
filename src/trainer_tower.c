@@ -1299,7 +1299,7 @@ void sub_815E720(void)
 void sub_815E88C(void)
 {
     u8 windowId = VarGet(VAR_0x4001);
-    sub_810F4D8(windowId, TRUE);
+    ClearMenuWindow(windowId, TRUE);
     RemoveWindow(windowId);
 }
 

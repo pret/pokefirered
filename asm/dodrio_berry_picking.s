@@ -6474,7 +6474,7 @@ sub_81538D0: @ 81538D0
 	adds r0, r7, 0
 	adds r1, r4, 0
 	movs r2, 0xD0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	adds r0, r7, 0
 	adds r1, r4, 0
 	movs r2, 0xD
@@ -8351,7 +8351,7 @@ sub_8154720: @ 8154720
 	movs r0, 0
 	movs r1, 0xA
 	movs r2, 0xB0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8154720

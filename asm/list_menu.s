@@ -52,7 +52,7 @@ _08106F06:
 	lsls r2, r1, 24
 	lsrs r2, 24
 	adds r1, r7, 0
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 _08106F24:
 	ldrb r0, [r5, 0x5]
 	mov r3, r8

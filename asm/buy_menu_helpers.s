@@ -24,15 +24,15 @@ _0813F686:
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xD0
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	movs r0, 0
 	movs r1, 0x13
 	movs r2, 0xE0
-	bl sub_814FEAC
+	bl TextWindow_SetBubbleFrame_841F1C8
 	movs r0, 0
 	movs r1, 0xA
 	movs r2, 0xF0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	movs r0, 0
 	bl PutWindowTilemap
 	movs r0, 0x4

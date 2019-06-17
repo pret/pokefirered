@@ -1092,7 +1092,7 @@ static void Task_OakSpeech20(u8 taskId)
 static void Task_OakSpeech21(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
-    sub_810F4D8(data[13], 1);
+    ClearMenuWindow(data[13], 1);
     RemoveWindow(data[13]);
     data[13] = 0;
     ClearDialogWindowAndFrame(0, 1);
@@ -1184,7 +1184,7 @@ static void Task_OakSpeech29(u8 taskId)
     case 3:
     case 4:
         PlaySE(SE_SELECT);
-        sub_810F4D8(data[13], TRUE);
+        ClearMenuWindow(data[13], TRUE);
         RemoveWindow(data[13]);
         GetDefaultName(sOakSpeechResources->unk_0010, input - 1);
         data[15] = 1;
@@ -1211,7 +1211,7 @@ static void Task_OakSpeech25(u8 taskId)
         }
         else
         {
-            sub_810F4D8(gTasks[taskId].data[13], 1);
+            ClearMenuWindow(gTasks[taskId].data[13], 1);
             RemoveWindow(gTasks[taskId].data[13]);
             DoNamingScreen(4, gSaveBlock1Ptr->rivalName, 0, 0, 0, CB2_ReturnFromNamingScreen);
         }

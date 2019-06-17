@@ -623,7 +623,7 @@ _080BF112:
 	.align 2, 0
 _080BF128: .4byte sub_80BF368
 _080BF12C:
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

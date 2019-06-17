@@ -151,14 +151,14 @@ extern const u8 gString_HelpSystem_ClearTo8[];
 
 extern const u8 gOtherText_Give[];
 extern const u8 gFameCheckerText_Cancel[];
-extern const u8 gUnknown_84162FF[];
-extern const u8 gUnknown_841633F[];
-extern const u8 gUnknown_8416655[];
-extern const u8 gUnknown_841778A[];
-extern const u8 gUnknown_84177AC[];
-extern const u8 gUnknown_84177C5[];
-extern const u8 gUnknown_84178A7[];
-extern const u8 gUnknown_84178B5[];
-extern const u8 gUnknown_84178BE[];
+extern const u8 gOtherText_StrVar1[];
+extern const u8 gOtherText_WhereShouldTheStrVar1BePlaced[];
+extern const u8 gOtherText_Powder[];
+extern const u8 gText_NoMoreRoomInBag[];
+extern const u8 gText_WithdrawHowMany[];
+extern const u8 gText_WithdrewQuantItem[];
+extern const u8 gText_WithdrawItem[];
+extern const u8 gText_Withdraw[];
+extern const u8 gText_ReturnToPC[];
 
 #endif //GUARD_STRINGS_H

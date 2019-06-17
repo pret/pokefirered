@@ -220,7 +220,7 @@ sub_806EF18: @ 806EF18
 	ldr r4, _0806EF40 @ =gUnknown_2037101
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -440,7 +440,7 @@ _0806F0C4:
 	movs r3, 0
 	bl ProgramAndPlaceMenuCursorOnWindow
 	strb r0, [r4]
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806F118
@@ -666,7 +666,7 @@ sub_806F280: @ 806F280
 	bl MoveMenuCursor
 	ldr r4, _0806F360 @ =gUnknown_20370F4
 	strb r0, [r4]
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806F2D2
@@ -701,7 +701,7 @@ _0806F2D2:
 	bl MoveMenuCursor
 	ldr r4, _0806F360 @ =gUnknown_20370F4
 	strb r0, [r4]
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806F320
@@ -1080,7 +1080,7 @@ sub_806F5C8: @ 806F5C8
 _0806F5E4:
 	movs r0, 0
 	movs r1, 0
-	bl sub_810F260
+	bl ClearMenuWindow_BorderThickness2
 	bl sub_806F14C
 	bl sub_812B248
 	ldr r1, _0806F5FC @ =gUnknown_20370F0
@@ -1093,7 +1093,7 @@ _0806F600: .4byte sub_806F280
 _0806F604:
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_810F260
+	bl ClearMenuWindow_BorderThickness2
 	bl sub_80696C0
 	bl ScriptContext2_Disable
 	bl sub_812B248
@@ -1781,7 +1781,7 @@ _0806FB12:
 	movs r0, 0
 	movs r1, 0x8
 	movs r2, 0xF0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	b _0806FB64
 	.align 2, 0
 _0806FB34: .4byte gUnknown_83A73B8
@@ -2014,7 +2014,7 @@ sub_806FCF4: @ 806FCF4
 	ldr r4, _0806FE5C @ =0x0000021d
 	adds r1, r4, 0
 	movs r2, 0xD0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	ldrb r0, [r5]
 	movs r1, 0
 	adds r2, r4, 0

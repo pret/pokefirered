@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80984D8
-sub_80984D8: @ 80984D8
+	thumb_func_start ResetItemMenuIconState
+ResetItemMenuIconState: @ 80984D8
 	push {r4,lr}
 	movs r2, 0
 	ldr r4, _080984F8 @ =gUnknown_2039878
@@ -26,7 +26,7 @@ _080984E0:
 	bx r0
 	.align 2, 0
 _080984F8: .4byte gUnknown_2039878
-	thumb_func_end sub_80984D8
+	thumb_func_end ResetItemMenuIconState
 
 	thumb_func_start sub_80984FC
 sub_80984FC: @ 80984FC
@@ -534,8 +534,8 @@ _080988DA:
 	bx r1
 	thumb_func_end AddItemIconObjectWithCustomObjectTemplate
 
-	thumb_func_start sub_80988E8
-sub_80988E8: @ 80988E8
+	thumb_func_start CreateItemMenuIcon
+CreateItemMenuIcon: @ 80988E8
 	push {r4-r6,lr}
 	lsls r0, 16
 	lsrs r6, r0, 16
@@ -577,10 +577,10 @@ _08098932:
 	.align 2, 0
 _08098938: .4byte gUnknown_2039882
 _0809893C: .4byte gSprites
-	thumb_func_end sub_80988E8
+	thumb_func_end CreateItemMenuIcon
 
-	thumb_func_start sub_8098940
-sub_8098940: @ 8098940
+	thumb_func_start DestroyItemMenuIcon
+DestroyItemMenuIcon: @ 8098940
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -605,7 +605,7 @@ _08098964:
 	.align 2, 0
 _0809896C: .4byte gUnknown_2039882
 _08098970: .4byte gSprites
-	thumb_func_end sub_8098940
+	thumb_func_end DestroyItemMenuIcon
 
 	thumb_func_start sub_8098974
 sub_8098974: @ 8098974

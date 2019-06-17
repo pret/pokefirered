@@ -357,8 +357,8 @@ _080BF702:
 	bx r1
 	thumb_func_end itemid_80BF6D8_mail_related
 
-	thumb_func_start sub_80BF708
-sub_80BF708: @ 80BF708
+	thumb_func_start MenuHelpers_LinkSomething
+MenuHelpers_LinkSomething: @ 80BF708
 	push {lr}
 	bl is_c1_link_related_active
 	cmp r0, 0x1
@@ -377,12 +377,12 @@ _080BF724:
 _080BF726:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80BF708
+	thumb_func_end MenuHelpers_LinkSomething
 
 	thumb_func_start sub_80BF72C
 sub_80BF72C: @ 80BF72C
 	push {lr}
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BF742

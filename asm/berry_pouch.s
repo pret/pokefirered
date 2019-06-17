@@ -130,7 +130,7 @@ _0813CE32:
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0813CE56
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -199,10 +199,10 @@ _0813CEEC:
 	bl ResetSpriteData
 	b _0813CFD2
 _0813CEF2:
-	bl sub_80984D8
+	bl ResetItemMenuIconState
 	b _0813CFD2
 _0813CEF8:
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813CFD2
@@ -798,7 +798,7 @@ _0813D3D6:
 	ldrb r1, [r0, 0x9]
 	movs r0, 0x1
 	eors r0, r1
-	bl sub_8098940
+	bl DestroyItemMenuIcon
 	ldr r1, [r4]
 	ldrb r0, [r1, 0x7]
 	cmp r0, r5
@@ -1028,7 +1028,7 @@ sub_813D594: @ 813D594
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0x1E
-	bl sub_80F6B08
+	bl SetBgRectPal
 	movs r0, 0x1
 	bl schedule_bg_copy_tilemap_to_vram
 	add sp, 0x8
@@ -1869,7 +1869,7 @@ _0813DC18: .4byte gUnknown_203F384
 _0813DC1C: .4byte gUnknown_84643B0
 _0813DC20: .4byte gUnknown_203F388
 _0813DC24:
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1985,7 +1985,7 @@ _0813DC86:
 	ldr r1, _0813DD68 @ =gStringVar1
 	bl sub_813D39C
 	ldr r5, _0813DD6C @ =gStringVar4
-	ldr r1, _0813DD70 @ =gUnknown_84162FF
+	ldr r1, _0813DD70 @ =gOtherText_StrVar1
 	adds r0, r5, 0
 	bl StringExpandPlaceholders
 	movs r0, 0x2
@@ -2014,7 +2014,7 @@ _0813DD60: .4byte gUnknown_203F388
 _0813DD64: .4byte gUnknown_846437C
 _0813DD68: .4byte gStringVar1
 _0813DD6C: .4byte gStringVar4
-_0813DD70: .4byte gUnknown_84162FF
+_0813DD70: .4byte gOtherText_StrVar1
 	thumb_func_end sub_813DBE4
 
 	thumb_func_start sub_813DD74
@@ -3367,15 +3367,15 @@ sub_813E910: @ 813E910
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xE0
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	movs r0, 0
 	movs r1, 0x13
 	movs r2, 0xD0
-	bl sub_814FEAC
+	bl TextWindow_SetBubbleFrame_841F1C8
 	movs r0, 0
 	movs r1, 0xA
 	movs r2, 0xC0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	ldr r0, _0813E998 @ =gTMCaseMainWindowPalette
 	movs r1, 0xF0
 	movs r2, 0x20
@@ -3562,7 +3562,7 @@ sub_813EA98: @ 813EA98
 	adds r4, r0
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	ldrb r0, [r4]
 	bl ClearWindowTilemap
 	ldrb r0, [r4]
@@ -3589,7 +3589,7 @@ sub_813EACC: @ 813EACC
 	cmp r0, 0xFF
 	beq _0813EB04
 	movs r1, 0
-	bl sub_810F260
+	bl ClearMenuWindow_BorderThickness2
 	ldrb r0, [r4]
 	bl ClearWindowTilemap
 	ldrb r0, [r4]

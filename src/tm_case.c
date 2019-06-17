@@ -309,7 +309,7 @@ static void CB2_SetUpTMCaseUI_Blocking(void)
             break;
         if (DoSetUpTMCaseUI() == TRUE)
             break;
-        if (sub_80BF708() == TRUE)
+        if (MenuHelpers_LinkSomething() == TRUE)
             break;
     }
 }
@@ -595,7 +595,7 @@ static void TMCase_MoveCursor_UpdatePrintedDescription(s32 itemIndex)
 
 static void FillBG2RowWithPalette_2timesNplus1(s32 a0)
 {
-    sub_80F6B08(2, 0, 12, 30, 8, 2 * a0 + 1);
+    SetBgRectPal(2, 0, 12, 30, 8, 2 * a0 + 1);
     schedule_bg_copy_tilemap_to_vram(2);
 }
 
@@ -782,7 +782,7 @@ static void Task_SelectTMAction_FromFieldBag(u8 taskId)
 {
     u8 * strbuf;
     TMCase_SetWindowBorder2(2);
-    if (!sub_80BF708() && InUnionRoom() != TRUE)
+    if (!MenuHelpers_LinkSomething() && InUnionRoom() != TRUE)
     {
         AddTMContextMenu(&sTMCaseDynamicResources->contextMenuWindowId, 0);
         sTMCaseDynamicResources->menuActionIndices = sMenuActionIndices_Field;
@@ -837,7 +837,7 @@ static void Task_TMContextMenu_HandleInput(u8 taskId)
 static void TMHMContextMenuAction_Use(u8 taskId)
 {
     RemoveTMContextMenu(&sTMCaseDynamicResources->contextMenuWindowId);
-    sub_810F4D8(2, 0);
+    ClearMenuWindow(2, 0);
     ClearWindowTilemap(2);
     PutWindowTilemap(0);
     schedule_bg_copy_tilemap_to_vram(0);
@@ -859,7 +859,7 @@ static void TMHMContextMenuAction_Give(u8 taskId)
     s16 * data = gTasks[taskId].data;
     u16 itemId = BagGetItemIdByPocketPosition(POCKET_TM_CASE, data[1]);
     RemoveTMContextMenu(&sTMCaseDynamicResources->contextMenuWindowId);
-    sub_810F4D8(2, 0);
+    ClearMenuWindow(2, 0);
     ClearWindowTilemap(2);
     PutWindowTilemap(1);
     PutWindowTilemap(4);
@@ -912,7 +912,7 @@ static void Subtask_CloseContextMenuAndReturnToMain(u8 taskId)
     DestroyListMenu(data[0], &sTMCaseStaticResources.scrollOffset, &sTMCaseStaticResources.selectedRow);
     data[0] = ListMenuInit(&gMultiuseListMenuTemplate, sTMCaseStaticResources.scrollOffset, sTMCaseStaticResources.selectedRow);
     PrintListMenuCursorByID_WithColorIdx(data[0], 1);
-    sub_810F260(6, 0);
+    ClearMenuWindow_BorderThickness2(6, 0);
     ClearWindowTilemap(6);
     PutWindowTilemap(1);
     PutWindowTilemap(4);
@@ -927,7 +927,7 @@ static void TMHMContextMenuAction_Exit(u8 taskId)
     s16 * data = gTasks[taskId].data;
 
     RemoveTMContextMenu(&sTMCaseDynamicResources->contextMenuWindowId);
-    sub_810F4D8(2, 0);
+    ClearMenuWindow(2, 0);
     ClearWindowTilemap(2);
     PutWindowTilemap(0);
     PrintListMenuCursorByID_WithColorIdx(data[0], 1);
@@ -1016,8 +1016,8 @@ static void Task_SaleOfTMsCancelled(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
-    sub_810F4D8(8, 0);
-    sub_810F260(6, 0);
+    ClearMenuWindow(8, 0);
+    ClearMenuWindow_BorderThickness2(6, 0);
     PutWindowTilemap(0);
     PutWindowTilemap(1);
     PutWindowTilemap(3);
@@ -1065,7 +1065,7 @@ static void Task_QuantitySelect_HandleInput(u8 taskId)
     else if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        sub_810F4D8(7, 0);
+        ClearMenuWindow(7, 0);
         schedule_bg_copy_tilemap_to_vram(0);
         schedule_bg_copy_tilemap_to_vram(1);
         RemoveTMCaseScrollIndicatorArrowPair();
@@ -1074,9 +1074,9 @@ static void Task_QuantitySelect_HandleInput(u8 taskId)
     else if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
-        sub_810F4D8(7, 0);
-        sub_810F4D8(8, 0);
-        sub_810F260(6, 0);
+        ClearMenuWindow(7, 0);
+        ClearMenuWindow(8, 0);
+        ClearMenuWindow_BorderThickness2(6, 0);
         PutWindowTilemap(3);
         PutWindowTilemap(0);
         PutWindowTilemap(1);
@@ -1123,8 +1123,8 @@ static void Task_AfterSale_ReturnToList(u8 taskId)
     if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
-        sub_810F4D8(8, 0);
-        sub_810F260(6, 0);
+        ClearMenuWindow(8, 0);
+        ClearMenuWindow_BorderThickness2(6, 0);
         PutWindowTilemap(1);
         PutWindowTilemap(3);
         PutWindowTilemap(4);
@@ -1249,7 +1249,7 @@ static void Task_TMCaseDude_Playback(u8 taskId)
         {
             FillBG2RowWithPalette_2timesNplus1(0);
             BeginNormalPaletteFade(0x00000400, 0, 6, 0, 0);
-            sub_810F260(6, 0);
+            ClearMenuWindow_BorderThickness2(6, 0);
             schedule_bg_copy_tilemap_to_vram(1);
             data[8]++;
         }
@@ -1297,9 +1297,9 @@ static void InitWindowTemplatesAndPals(void)
 
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
-    sub_815001C(0, 0x5B, 0xE0);
-    sub_814FEAC(0, 0x64, 0xB0);
-    sub_814FF2C(0, 0x78, 0xD0);
+    TextWindow_SetUserSelectedFrame(0, 0x5B, 0xE0);
+    TextWindow_SetBubbleFrame_841F1C8(0, 0x64, 0xB0);
+    TextWindow_SetStdFrame0_WithPal(0, 0x78, 0xD0);
     LoadPalette(gTMCaseMainWindowPalette, 0xF0, 0x20);
     LoadPalette(gTMCaseMainWindowPalette, 0xA0, 0x20);
     LoadPalette(sPal3Override, 0xF6, 0x04);
@@ -1420,7 +1420,7 @@ static u8 AddTMContextMenu(u8 * a0, u8 a1)
 
 static void RemoveTMContextMenu(u8 * a0)
 {
-    sub_810F4D8(*a0, FALSE);
+    ClearMenuWindow(*a0, FALSE);
     ClearWindowTilemap(*a0);
     RemoveWindow(*a0);
     schedule_bg_copy_tilemap_to_vram(0);

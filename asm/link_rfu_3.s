@@ -12966,7 +12966,7 @@ _0811C300:
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xD0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	bl sub_80F77B8
 	ldr r0, _0811C35C @ =sub_811C1B4
 	bl SetVBlankCallback

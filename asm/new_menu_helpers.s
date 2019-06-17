@@ -486,8 +486,8 @@ _080F6AFC:
 	bx r1
 	thumb_func_end sub_80F6AD0
 
-	thumb_func_start sub_80F6B08
-sub_80F6B08: @ 80F6B08
+	thumb_func_start SetBgRectPal
+SetBgRectPal: @ 80F6B08
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -561,7 +561,7 @@ _080F6B80:
 	bx r0
 	.align 2, 0
 _080F6B90: .4byte 0x00000fff
-	thumb_func_end sub_80F6B08
+	thumb_func_end SetBgRectPal
 
 	thumb_func_start sub_80F6B94
 sub_80F6B94: @ 80F6B94
@@ -984,13 +984,13 @@ _080F6EC4:
 	lsls r1, 2
 	movs r0, 0
 	movs r2, 0xF0
-	bl sub_814FEAC
+	bl TextWindow_SetBubbleFrame_841F1C8
 _080F6ED4:
 	movs r1, 0x85
 	lsls r1, 2
 	movs r0, 0
 	movs r2, 0xE0
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80F6E9C
@@ -2033,7 +2033,7 @@ _080F7798:
 	lsls r1, 2
 	adds r0, r4, 0
 	movs r2, 0xF0
-	bl sub_814FEAC
+	bl TextWindow_SetBubbleFrame_841F1C8
 _080F77A4:
 	movs r2, 0x80
 	lsls r2, 2
@@ -2347,7 +2347,7 @@ sub_80F79A4: @ 80F79A4
 	lsls r1, 2
 	movs r0, 0
 	movs r2, 0xE0
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80F79A4

@@ -1069,7 +1069,7 @@ _08004046:\n\
 }
 #endif // NONMATCHING
 
-void CallWindowFunction(u8 windowId, void ( *func)(u8, u8, u8, u8, u8, u8))
+void CallWindowFunction(u8 windowId, WindowFunc func)
 {
     struct WindowTemplate window = gWindows[windowId].window;
     func(window.bg, window.tilemapLeft, window.tilemapTop, window.width, window.height, window.paletteNum);

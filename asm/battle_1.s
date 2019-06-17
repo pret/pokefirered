@@ -223,11 +223,11 @@ sub_800F380: @ 800F380
 	movs r0, 0x2
 	movs r1, 0x12
 	movs r2, 0x10
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	movs r0, 0x2
 	movs r1, 0x22
 	movs r2, 0x10
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	ldr r4, _0800F3F0 @ =gPlttBufferUnfaded
 	adds r0, r4, 0
 	adds r0, 0xB8
@@ -257,7 +257,7 @@ sub_800F380: @ 800F380
 	movs r0, 0
 	movs r1, 0x30
 	movs r2, 0x70
-	bl sub_814FEAC
+	bl TextWindow_SetBubbleFrame_841F1C8
 	adds r0, r4, 0
 	adds r0, 0xEC
 	movs r1, 0

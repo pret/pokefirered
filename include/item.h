@@ -73,7 +73,7 @@ bool8 itemid_is_unique(u16 itemId);
 void sub_809A584(struct ItemSlot * slots, u8 capacity);
 u16 GetBagItemId(u16 *);
 
-void sub_809A4E8(void);
-void sub_809A460(u16 itemId, u16 quantity);
+void ItemPcCompaction(void);
+void RemoveItemFromPC(u16 itemId, u16 quantity);
 
 #endif // ITEM_H

@@ -21,7 +21,7 @@ void sub_8121F68(u8 taskId, const struct YesNoFuncTable *data);
 bool8 sub_81221AC(void);
 bool16 sub_80BF518(u8 textPrinterId);
 bool8 sub_80BF72C(void);
-bool8 sub_80BF708(void);
+bool8 MenuHelpers_LinkSomething(void);
 void VblankHblankHandlerSetZero(void);
 void InitBgReg(void);
 u8 sub_80BF8E4(void);

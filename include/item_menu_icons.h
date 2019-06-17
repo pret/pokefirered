@@ -3,11 +3,11 @@
 
 #include "global.h"
 
-void sub_80984D8(void);
+void ResetItemMenuIconState(void);
 void sub_80985E4(void);
 u8 sub_80D511C(u8 a0, u8 a1, u8 a2, u8 a3);
-void sub_8098940(bool8 a0);
-void sub_80988E8(u16 itemId, bool8 a0);
+void DestroyItemMenuIcon(bool8 a0);
+void CreateItemMenuIcon(u16 itemId, bool8 a0);
 void sub_80986A8(s16 x, u16 y);
 void sub_8098660(u8);
 

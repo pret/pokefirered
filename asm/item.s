@@ -957,8 +957,8 @@ _0809A458:
 	bx r1
 	thumb_func_end AddPCItem
 
-	thumb_func_start sub_809A460
-sub_809A460: @ 809A460
+	thumb_func_start RemoveItemFromPC
+RemoveItemFromPC: @ 809A460
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1027,10 +1027,10 @@ _0809A4D8:
 	bx r0
 	.align 2, 0
 _0809A4E4: .4byte gSaveBlock1Ptr
-	thumb_func_end sub_809A460
+	thumb_func_end RemoveItemFromPC
 
-	thumb_func_start sub_809A4E8
-sub_809A4E8: @ 809A4E8
+	thumb_func_start ItemPcCompaction
+ItemPcCompaction: @ 809A4E8
 	push {r4-r7,lr}
 	movs r2, 0
 _0809A4EC:
@@ -1079,7 +1079,7 @@ _0809A52E:
 	bx r0
 	.align 2, 0
 _0809A53C: .4byte gSaveBlock1Ptr
-	thumb_func_end sub_809A4E8
+	thumb_func_end ItemPcCompaction
 
 	thumb_func_start sub_809A540
 sub_809A540: @ 809A540

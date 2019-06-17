@@ -78,11 +78,11 @@ _0804C674:
 	movs r0, 0
 	movs r1, 0x14
 	movs r2, 0xC0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	movs r0, 0x2
 	movs r1, 0x1
 	movs r2, 0xE0
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	bl sub_809707C
 	ldr r2, _0804C708 @ =gUnknown_2031DA8
 	ldr r0, [r2]

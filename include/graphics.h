@@ -197,8 +197,8 @@ extern const u8 gBerryFixWindow_Pal[];
 
 // item_pc
 
-extern const u8 gUnknown_8E85090[];
-extern const u8 gUnknown_8E85408[];
-extern const u8 gUnknown_8E85458[];
+extern const u8 gItemPcTiles[];
+extern const u8 gItemPcBgPals[];
+extern const u8 gItemPcTilemap[];
 
 #endif //GUARD_GRAPHICS_H

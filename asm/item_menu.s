@@ -200,7 +200,7 @@ _08107F12:
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08107F36
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -275,10 +275,10 @@ _08107FD8:
 	bl ResetSpriteData
 	b _08108104
 _08107FDE:
-	bl sub_80984D8
+	bl ResetItemMenuIconState
 	b _08108104
 _08107FE4:
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	cmp r0, 0
 	beq _08107FF0
@@ -687,7 +687,7 @@ _08108340:
 	.align 2, 0
 _08108348: .4byte gUnknown_83D41F4
 _0810834C:
-	ldr r0, _08108360 @ =gUnknown_83D4240
+	ldr r0, _08108360 @ =gBagSwapSpriteSheet
 _0810834E:
 	bl LoadCompressedObjectPic
 _08108352:
@@ -698,10 +698,10 @@ _08108352:
 	strb r0, [r1, 0x10]
 	b _0810837C
 	.align 2, 0
-_08108360: .4byte gUnknown_83D4240
+_08108360: .4byte gBagSwapSpriteSheet
 _08108364: .4byte gUnknown_203AD10
 _08108368:
-	ldr r0, _08108378 @ =gUnknown_83D4248
+	ldr r0, _08108378 @ =gBagSwapSpritePalette
 	bl LoadCompressedObjectPalette
 	ldr r1, [r4]
 	movs r0, 0
@@ -709,7 +709,7 @@ _08108368:
 	movs r0, 0x1
 	b _0810837E
 	.align 2, 0
-_08108378: .4byte gUnknown_83D4248
+_08108378: .4byte gBagSwapSpritePalette
 _0810837C:
 	movs r0, 0
 _0810837E:
@@ -1014,7 +1014,7 @@ _081085BA:
 	lsrs r1, 30
 	movs r0, 0x1
 	eors r0, r1
-	bl sub_8098940
+	bl DestroyItemMenuIcon
 	ldr r2, [r4]
 	ldr r0, _08108608 @ =gUnknown_203ACFC
 	ldrh r1, [r0, 0x6]
@@ -1036,7 +1036,7 @@ _081085BA:
 	ldrb r1, [r1, 0x5]
 	lsls r1, 26
 	lsrs r1, 30
-	bl sub_80988E8
+	bl CreateItemMenuIcon
 	b _08108618
 	.align 2, 0
 _08108604: .4byte gUnknown_203AD10
@@ -1046,7 +1046,7 @@ _0810860C:
 	ldrb r1, [r2, 0x5]
 	lsls r1, 26
 	lsrs r1, 30
-	bl sub_80988E8
+	bl CreateItemMenuIcon
 _08108618:
 	ldr r4, _08108650 @ =gUnknown_203AD10
 	ldr r3, [r4]
@@ -1999,8 +1999,8 @@ _08108D5A:
 	bx r0
 	thumb_func_end sub_8108CFC
 
-	thumb_func_start sub_8108D60
-sub_8108D60: @ 8108D60
+	thumb_func_start ItemMenu_MoveItemSlotToNewPositionInArray
+ItemMenu_MoveItemSlotToNewPositionInArray: @ 8108D60
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r3, r2, 0
@@ -2057,7 +2057,7 @@ _08108DC0:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8108D60
+	thumb_func_end ItemMenu_MoveItemSlotToNewPositionInArray
 
 	thumb_func_start sub_8108DC8
 sub_8108DC8: @ 8108DC8
@@ -2514,7 +2514,7 @@ sub_8109140: @ 8109140
 	movs r1, 0
 	movs r2, 0xE
 	movs r3, 0x1E
-	bl sub_80F6B08
+	bl SetBgRectPal
 	movs r0, 0x1
 	bl schedule_bg_copy_tilemap_to_vram
 	add sp, 0x8
@@ -2627,7 +2627,7 @@ sub_81091D0: @ 81091D0
 	lsrs r1, 30
 	movs r0, 0x1
 	eors r0, r1
-	bl sub_8098940
+	bl DestroyItemMenuIcon
 	bl sub_8108978
 _08109242:
 	movs r0, 0x12
@@ -2677,7 +2677,7 @@ sub_8109298: @ 8109298
 	lsls r0, 3
 	ldr r1, _081092DC @ =gTasks+0x8
 	adds r5, r0, r1
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	cmp r0, 0
 	bne _08109314
@@ -2858,7 +2858,7 @@ sub_81093B8: @ 81093B8
 	adds r0, r4, 0
 	bl StringCopy
 	ldr r4, _081094A4 @ =gStringVar4
-	ldr r1, _081094A8 @ =gUnknown_841633F
+	ldr r1, _081094A8 @ =gOtherText_WhereShouldTheStrVar1BePlaced
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0x1
@@ -2910,7 +2910,7 @@ _08109498: .4byte gUnknown_203AD10
 _0810949C: .4byte gStringVar1
 _081094A0: .4byte gUnknown_203ACFC
 _081094A4: .4byte gStringVar4
-_081094A8: .4byte gUnknown_841633F
+_081094A8: .4byte gOtherText_WhereShouldTheStrVar1BePlaced
 _081094AC: .4byte sub_81094B0
 	thumb_func_end sub_81093B8
 
@@ -3071,7 +3071,7 @@ _081095E8:
 	ldr r0, [r0]
 	adds r1, r2, 0
 	adds r2, r5, 0
-	bl sub_8108D60
+	bl ItemMenu_MoveItemSlotToNewPositionInArray
 	ldrb r0, [r6]
 	ldrh r2, [r4, 0x6]
 	lsls r2, 1
@@ -3464,7 +3464,7 @@ _08109930: .4byte gUnknown_203AD24
 _08109934: .4byte gUnknown_8452F30
 _08109938: .4byte gUnknown_203AD28
 _0810993C:
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3727,7 +3727,7 @@ _08109AD4:
 	ldr r1, _08109BAC @ =gStringVar1
 	bl CopyItemName
 	ldr r6, _08109BB0 @ =gStringVar4
-	ldr r1, _08109BB4 @ =gUnknown_84162FF
+	ldr r1, _08109BB4 @ =gOtherText_StrVar1
 	adds r0, r6, 0
 	bl StringExpandPlaceholders
 	movs r0, 0x2
@@ -3754,7 +3754,7 @@ _08109BA4: .4byte gUnknown_8452EB8
 _08109BA8: .4byte gSpecialVar_ItemId
 _08109BAC: .4byte gStringVar1
 _08109BB0: .4byte gStringVar4
-_08109BB4: .4byte gUnknown_84162FF
+_08109BB4: .4byte gOtherText_StrVar1
 	thumb_func_end sub_8109890
 
 	thumb_func_start sub_8109BB8
@@ -5753,7 +5753,7 @@ sub_810AC40: @ 810AC40
 	ldr r3, _0810ACD4 @ =0x0000ffff
 	movs r0, 0x1C
 	movs r1, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	ldrh r0, [r5]
 	ldr r1, _0810ACD8 @ =gStringVar1
 	bl CopyItemName

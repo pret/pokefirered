@@ -542,34 +542,11 @@ gUnknown_83D414C:: @ 83D414C
 	.incbin "baserom.gba", 0x3D414C, 0x18
 
 gUnknown_83D4164:: @ 83D4164
-	.incbin "baserom.gba", 0x3D4164, 0x80
+	.incbin "baserom.gba", 0x3D4164, 0x8
 
-gUnknown_83D41E4:: @ 83D41E4
-	.incbin "baserom.gba", 0x3D41E4, 0x8
-
-gUnknown_83D41EC:: @ 83D41EC
-	.incbin "baserom.gba", 0x3D41EC, 0x8
-
-gUnknown_83D41F4:: @ 83D41F4
-	.incbin "baserom.gba", 0x3D41F4, 0x8
-
-gUnknown_83D41FC:: @ 83D41FC
-	.incbin "baserom.gba", 0x3D41FC, 0x44
-
-gBagSwapSpriteSheet:: @ 83D4240
-	obj_tiles gFile_graphics_interface_bag_swap_sheet, 0x0100, 0x0065
-
-gBagSwapSpritePalette:: @ 83D4248
-	obj_pal gFile_graphics_interface_bag_swap_palette, 0x0065
-
-gUnknown_83D4250:: @ 83D4250
-	.incbin "baserom.gba", 0x3D4250, 0x2C
-
-gUnknown_83D427C:: @ 83D427C
-	.incbin "baserom.gba", 0x3D427C, 0x18
-
-gUnknown_83D4294:: @ 83D4294
-	.incbin "baserom.gba", 0x3D4294, 0x6D94
+	.section .rodata.83D4E4C
+gUnknown_83D4E4C::
+	.incbin "baserom.gba", 0x3D4E54, 0x61D4
 
 gItems:: @ 83DB028
 	.incbin "baserom.gba", 0x3DB028, 0x4074

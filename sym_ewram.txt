@@ -922,20 +922,8 @@ gUnknown_2039870: @ 2039870
 gUnknown_2039874: @ 2039874
 	.space 0x4
 
-gUnknown_2039878: @ 2039878
-	.space 0x1
-
-gUnknown_2039879: @ 2039879
-	.space 0x9
-
-gUnknown_2039882: @ 2039882
-	.space 0x2
-
-gUnknown_2039884: @ 2039884
-	.space 0x4
-
-gUnknown_2039888: @ 2039888
-	.space 0x4
+	.align 2
+	.include "src/item_menu_icons.o"
 
 gBagPockets: @ 203988C
 	.space 0x28

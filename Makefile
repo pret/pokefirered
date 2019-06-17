@@ -34,6 +34,8 @@ override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-
 CPPFLAGS := -I tools/agbcc -I tools/agbcc/include -iquote include -nostdinc -undef
 
 # LLVM requires a different syntax for generating the map file.
+# We also keep the old LDFLAGS variable, before changing it, since the tools don't need the -Map argument.
+ORIG_LD := $(LDFLAGS)
 IS_LLVM = $(shell $(CXX) --help | grep -i "clang llvm compiler")
 LLVM_LDFLAGS = -Wl,-map,../../$(MAP)
 GCC_LDFLAGS = -Map ../../$(MAP)
@@ -89,16 +91,16 @@ all: rom
 rom: tools $(ROM)
 
 tools:
-	@$(MAKE) -C tools/gbagfx
-	@$(MAKE) -C tools/scaninc
-	@$(MAKE) -C tools/preproc
-	@$(MAKE) -C tools/bin2c
-	@$(MAKE) -C tools/rsfont
-	@$(MAKE) -C tools/aif2pcm
-	@$(MAKE) -C tools/ramscrgen
-	@$(MAKE) -C tools/mid2agb
-	@$(MAKE) -C tools/gbafix
-	@$(MAKE) -C tools/mapjson
+	@$(MAKE) -C tools/gbagfx LDFLAGS=$(ORIG_LD)
+	@$(MAKE) -C tools/scaninc LDFLAGS=$(ORIG_LD)
+	@$(MAKE) -C tools/preproc LDFLAGS=$(ORIG_LD)
+	@$(MAKE) -C tools/bin2c LDFLAGS=$(ORIG_LD)
+	@$(MAKE) -C tools/rsfont LDFLAGS=$(ORIG_LD)
+	@$(MAKE) -C tools/aif2pcm LDFLAGS=$(ORIG_LD)
+	@$(MAKE) -C tools/ramscrgen LDFLAGS=$(ORIG_LD)
+	@$(MAKE) -C tools/mid2agb LDFLAGS=$(ORIG_LD)
+	@$(MAKE) -C tools/gbafix LDFLAGS=$(ORIG_LD)
+	@$(MAKE) -C tools/mapjson LDFLAGS=$(ORIG_LD)
 
 # For contributors to make sure a change didn't affect the contents of the ROM.
 compare: rom

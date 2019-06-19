@@ -416,6 +416,8 @@ SECTIONS {
         data/data_83F5738.o(.rodata);
         src/save.o(.rodata);
         data/data_83FECCC.o(.rodata);
+        data/strings.o(.rodata);
+        data/data_83FECCC.o(.rodata.841EE44);
         src/bag.o(.rodata);
         src/trainer_pokemon_sprites.o(.rodata);
         src/vs_seeker.o(.rodata);

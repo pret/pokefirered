@@ -22,5 +22,7 @@ void sub_805D9C4(struct Sprite *sprite);
 void sub_805D154(u8 direction);
 void sub_805DAE4(u8 direction);
 void SetPlayerAvatarTransitionFlags(u16 a);
+bool8 IsPlayerFacingSurfableFishableWater(void);
+void sub_805D2C0(u8 secondaryId);
 
 #endif //GUARD_FIELD_PLAYER_AVATAR_H

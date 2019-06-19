@@ -153,6 +153,7 @@ SECTIONS {
         src/fldeff_berrytree.o(.text);
         asm/field_special_scene.o(.text);
         asm/safari_zone.o(.text);
+        src/item_use.o(.text);
         asm/item_use.o(.text);
         asm/battle_anim_effects_1.o(.text);
         asm/battle_anim_effects_2.o(.text);
@@ -410,6 +411,8 @@ SECTIONS {
         data/data_835B488.o(.rodata);
         src/item_menu_icons.o(.rodata);
         data/data_835B488.o(.rodata.83D4E4C);
+        src/item.o(.rodata);
+        data/data_835B488.o(.rodata.83DF09C);
         src/heal_location.o(.rodata);
         data/data_835B488.o(.rodata.83EEC98);
         src/battle_ai_script_commands.o(.rodata);

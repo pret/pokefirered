@@ -21,5 +21,6 @@ bool8 MonHasMail(struct Pokemon *mon);
 void TakeMailFromMon(struct Pokemon *mon);
 u8 GiveMailToMon2(struct Pokemon *mon, struct MailStruct *mail);
 void ClearMailStruct(struct MailStruct *mail);
+void sub_80BEBEC(u16 *, void (*)(void), u8);
 
 #endif // GUARD_MAIL_H

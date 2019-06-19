@@ -161,4 +161,7 @@ extern const u8 gText_WithdrawItem[];
 extern const u8 gText_Withdraw[];
 extern const u8 gText_ReturnToPC[];
 
+extern const u8 gUnknown_8416425[];
+extern const u8 gUnknown_8416451[];
+
 #endif //GUARD_STRINGS_H

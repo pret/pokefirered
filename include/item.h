@@ -1,18 +1,20 @@
-#ifndef ITEM_H
-#define ITEM_H
+#ifndef GUARD_ITEM_H
+#define GUARD_ITEM_H
+
+#include "global.h"
 
 typedef void (*ItemUseFunc)(u8);
 
 struct Item
 {
-    u8 name[14];
+    u8 name[ITEM_NAME_LENGTH];
     u16 itemId;
     u16 price;
     u8 holdEffect;
     u8 holdEffectParam;
     const u8 *description;
     u8 importance;
-    u8 unk19;
+    u8 exitsBagOnUse;
     u8 pocket;
     u8 type;
     ItemUseFunc fieldUseFunc;
@@ -76,4 +78,4 @@ u16 GetBagItemId(u16 *);
 void ItemPcCompaction(void);
 void RemoveItemFromPC(u16 itemId, u16 quantity);
 
-#endif // ITEM_H
+#endif // GUARD_ITEM_H

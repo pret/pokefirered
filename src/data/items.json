@@ -11,7 +11,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -29,7 +29,7 @@
       "type": 0,
       "fieldUseFunc": "NULL",
       "battleUsage": 2,
-      "battleUseFunc": "sub_80A1E1C",
+      "battleUseFunc": "BattleUseFunc_MasterBall",
       "secondaryId": 0
     },
     {
@@ -45,7 +45,7 @@
       "type": 1,
       "fieldUseFunc": "NULL",
       "battleUsage": 2,
-      "battleUseFunc": "sub_80A1E1C",
+      "battleUseFunc": "BattleUseFunc_MasterBall",
       "secondaryId": 1
     },
     {
@@ -61,7 +61,7 @@
       "type": 2,
       "fieldUseFunc": "NULL",
       "battleUsage": 2,
-      "battleUseFunc": "sub_80A1E1C",
+      "battleUseFunc": "BattleUseFunc_MasterBall",
       "secondaryId": 2
     },
     {
@@ -77,7 +77,7 @@
       "type": 3,
       "fieldUseFunc": "NULL",
       "battleUsage": 2,
-      "battleUseFunc": "sub_80A1E1C",
+      "battleUseFunc": "BattleUseFunc_MasterBall",
       "secondaryId": 3
     },
     {
@@ -93,7 +93,7 @@
       "type": 4,
       "fieldUseFunc": "NULL",
       "battleUsage": 2,
-      "battleUseFunc": "sub_80A1E1C",
+      "battleUseFunc": "BattleUseFunc_MasterBall",
       "secondaryId": 4
     },
     {
@@ -109,7 +109,7 @@
       "type": 5,
       "fieldUseFunc": "NULL",
       "battleUsage": 2,
-      "battleUseFunc": "sub_80A1E1C",
+      "battleUseFunc": "BattleUseFunc_MasterBall",
       "secondaryId": 5
     },
     {
@@ -125,7 +125,7 @@
       "type": 6,
       "fieldUseFunc": "NULL",
       "battleUsage": 2,
-      "battleUseFunc": "sub_80A1E1C",
+      "battleUseFunc": "BattleUseFunc_MasterBall",
       "secondaryId": 6
     },
     {
@@ -141,7 +141,7 @@
       "type": 7,
       "fieldUseFunc": "NULL",
       "battleUsage": 2,
-      "battleUseFunc": "sub_80A1E1C",
+      "battleUseFunc": "BattleUseFunc_MasterBall",
       "secondaryId": 7
     },
     {
@@ -157,7 +157,7 @@
       "type": 8,
       "fieldUseFunc": "NULL",
       "battleUsage": 2,
-      "battleUseFunc": "sub_80A1E1C",
+      "battleUseFunc": "BattleUseFunc_MasterBall",
       "secondaryId": 8
     },
     {
@@ -173,7 +173,7 @@
       "type": 9,
       "fieldUseFunc": "NULL",
       "battleUsage": 2,
-      "battleUseFunc": "sub_80A1E1C",
+      "battleUseFunc": "BattleUseFunc_MasterBall",
       "secondaryId": 9
     },
     {
@@ -189,7 +189,7 @@
       "type": 10,
       "fieldUseFunc": "NULL",
       "battleUsage": 2,
-      "battleUseFunc": "sub_80A1E1C",
+      "battleUseFunc": "BattleUseFunc_MasterBall",
       "secondaryId": 10
     },
     {
@@ -205,7 +205,7 @@
       "type": 11,
       "fieldUseFunc": "NULL",
       "battleUsage": 2,
-      "battleUseFunc": "sub_80A1E1C",
+      "battleUseFunc": "BattleUseFunc_MasterBall",
       "secondaryId": 11
     },
     {
@@ -219,9 +219,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -235,9 +235,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -251,9 +251,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -267,9 +267,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -283,9 +283,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -299,9 +299,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -315,9 +315,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -331,9 +331,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -347,9 +347,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -363,9 +363,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -379,9 +379,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -395,9 +395,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -411,9 +411,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -427,9 +427,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -443,9 +443,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -459,9 +459,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -475,9 +475,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -491,9 +491,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -507,9 +507,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -523,9 +523,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -539,9 +539,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -555,9 +555,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16FC",
+      "fieldUseFunc": "FieldUseFunc_Ether",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FF4",
+      "battleUseFunc": "BattleUseFunc_Ether",
       "secondaryId": 0
     },
     {
@@ -571,9 +571,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16FC",
+      "fieldUseFunc": "FieldUseFunc_Ether",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FF4",
+      "battleUseFunc": "BattleUseFunc_Ether",
       "secondaryId": 0
     },
     {
@@ -587,9 +587,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16FC",
+      "fieldUseFunc": "FieldUseFunc_Ether",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FF4",
+      "battleUseFunc": "BattleUseFunc_Ether",
       "secondaryId": 0
     },
     {
@@ -603,9 +603,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16FC",
+      "fieldUseFunc": "FieldUseFunc_Ether",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FF4",
+      "battleUseFunc": "BattleUseFunc_Ether",
       "secondaryId": 0
     },
     {
@@ -619,9 +619,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -635,9 +635,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -651,9 +651,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -667,9 +667,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -683,7 +683,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A1A94",
+      "fieldUseFunc": "FieldUseFunc_BlackFlute",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -699,7 +699,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A1A94",
+      "fieldUseFunc": "FieldUseFunc_BlackFlute",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -715,9 +715,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -731,7 +731,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A176C",
+      "fieldUseFunc": "FieldUseFunc_SacredAsh",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -747,7 +747,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -763,7 +763,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -779,7 +779,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -795,7 +795,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -811,7 +811,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -827,7 +827,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -843,7 +843,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -859,7 +859,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -875,7 +875,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -891,7 +891,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -907,7 +907,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -923,7 +923,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -939,7 +939,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -955,7 +955,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -971,7 +971,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -987,7 +987,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1003,7 +1003,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1019,7 +1019,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1035,7 +1035,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1051,7 +1051,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1067,7 +1067,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1083,7 +1083,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1099,7 +1099,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A1734",
+      "fieldUseFunc": "FieldUseFunc_RareCandy",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1115,7 +1115,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A1718",
+      "fieldUseFunc": "FieldUseFunc_PpUp",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1131,7 +1131,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1147,7 +1147,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A1718",
+      "fieldUseFunc": "FieldUseFunc_PpUp",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1163,7 +1163,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1179,9 +1179,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 2,
-      "battleUseFunc": "sub_80A1E7C",
+      "battleUseFunc": "BattleUseFunc_GuardSpec",
       "secondaryId": 0
     },
     {
@@ -1195,9 +1195,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 2,
-      "battleUseFunc": "sub_80A1E7C",
+      "battleUseFunc": "BattleUseFunc_GuardSpec",
       "secondaryId": 0
     },
     {
@@ -1211,9 +1211,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 2,
-      "battleUseFunc": "sub_80A1E7C",
+      "battleUseFunc": "BattleUseFunc_GuardSpec",
       "secondaryId": 0
     },
     {
@@ -1227,9 +1227,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 2,
-      "battleUseFunc": "sub_80A1E7C",
+      "battleUseFunc": "BattleUseFunc_GuardSpec",
       "secondaryId": 0
     },
     {
@@ -1243,9 +1243,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 2,
-      "battleUseFunc": "sub_80A1E7C",
+      "battleUseFunc": "BattleUseFunc_GuardSpec",
       "secondaryId": 0
     },
     {
@@ -1259,9 +1259,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 2,
-      "battleUseFunc": "sub_80A1E7C",
+      "battleUseFunc": "BattleUseFunc_GuardSpec",
       "secondaryId": 0
     },
     {
@@ -1275,9 +1275,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 2,
-      "battleUseFunc": "sub_80A1E7C",
+      "battleUseFunc": "BattleUseFunc_GuardSpec",
       "secondaryId": 0
     },
     {
@@ -1291,9 +1291,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 2,
-      "battleUseFunc": "sub_80A2010",
+      "battleUseFunc": "BattleUseFunc_PokeDoll",
       "secondaryId": 0
     },
     {
@@ -1307,9 +1307,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 2,
-      "battleUseFunc": "sub_80A2010",
+      "battleUseFunc": "BattleUseFunc_PokeDoll",
       "secondaryId": 0
     },
     {
@@ -1323,7 +1323,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1339,7 +1339,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A1998",
+      "fieldUseFunc": "FieldUseFunc_SuperRepel",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1355,7 +1355,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A1998",
+      "fieldUseFunc": "FieldUseFunc_SuperRepel",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1387,7 +1387,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A1998",
+      "fieldUseFunc": "FieldUseFunc_SuperRepel",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1403,7 +1403,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1419,7 +1419,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1435,7 +1435,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1451,7 +1451,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1467,7 +1467,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1483,7 +1483,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1499,7 +1499,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A1750",
+      "fieldUseFunc": "FieldUseFunc_SunStone",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1515,7 +1515,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A1750",
+      "fieldUseFunc": "FieldUseFunc_SunStone",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1531,7 +1531,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A1750",
+      "fieldUseFunc": "FieldUseFunc_SunStone",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1547,7 +1547,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A1750",
+      "fieldUseFunc": "FieldUseFunc_SunStone",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1563,7 +1563,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A1750",
+      "fieldUseFunc": "FieldUseFunc_SunStone",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1579,7 +1579,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "sub_80A1750",
+      "fieldUseFunc": "FieldUseFunc_SunStone",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1595,7 +1595,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1611,7 +1611,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1627,7 +1627,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1643,7 +1643,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1659,7 +1659,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1675,7 +1675,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1691,7 +1691,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1707,7 +1707,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1723,7 +1723,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1739,7 +1739,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1755,7 +1755,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1771,7 +1771,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1787,7 +1787,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1803,7 +1803,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1819,7 +1819,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1835,7 +1835,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1851,7 +1851,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1867,7 +1867,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1883,7 +1883,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1899,7 +1899,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1915,7 +1915,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1931,7 +1931,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1947,7 +1947,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 0,
-      "fieldUseFunc": "sub_80A11E8",
+      "fieldUseFunc": "FieldUseFunc_OrangeMail",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1963,7 +1963,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 0,
-      "fieldUseFunc": "sub_80A11E8",
+      "fieldUseFunc": "FieldUseFunc_OrangeMail",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 1
@@ -1979,7 +1979,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 0,
-      "fieldUseFunc": "sub_80A11E8",
+      "fieldUseFunc": "FieldUseFunc_OrangeMail",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 2
@@ -1995,7 +1995,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 0,
-      "fieldUseFunc": "sub_80A11E8",
+      "fieldUseFunc": "FieldUseFunc_OrangeMail",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 3
@@ -2011,7 +2011,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 0,
-      "fieldUseFunc": "sub_80A11E8",
+      "fieldUseFunc": "FieldUseFunc_OrangeMail",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 4
@@ -2027,7 +2027,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 0,
-      "fieldUseFunc": "sub_80A11E8",
+      "fieldUseFunc": "FieldUseFunc_OrangeMail",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 5
@@ -2043,7 +2043,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 0,
-      "fieldUseFunc": "sub_80A11E8",
+      "fieldUseFunc": "FieldUseFunc_OrangeMail",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 6
@@ -2059,7 +2059,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 0,
-      "fieldUseFunc": "sub_80A11E8",
+      "fieldUseFunc": "FieldUseFunc_OrangeMail",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 7
@@ -2075,7 +2075,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 0,
-      "fieldUseFunc": "sub_80A11E8",
+      "fieldUseFunc": "FieldUseFunc_OrangeMail",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 8
@@ -2091,7 +2091,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 0,
-      "fieldUseFunc": "sub_80A11E8",
+      "fieldUseFunc": "FieldUseFunc_OrangeMail",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 9
@@ -2107,7 +2107,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 0,
-      "fieldUseFunc": "sub_80A11E8",
+      "fieldUseFunc": "FieldUseFunc_OrangeMail",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 10
@@ -2123,7 +2123,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 0,
-      "fieldUseFunc": "sub_80A11E8",
+      "fieldUseFunc": "FieldUseFunc_OrangeMail",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 11
@@ -2139,9 +2139,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -2155,9 +2155,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -2171,9 +2171,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -2187,9 +2187,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -2203,9 +2203,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -2219,9 +2219,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 1,
-      "fieldUseFunc": "sub_80A16FC",
+      "fieldUseFunc": "FieldUseFunc_Ether",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FF4",
+      "battleUseFunc": "BattleUseFunc_Ether",
       "secondaryId": 0
     },
     {
@@ -2235,9 +2235,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -2251,9 +2251,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -2267,9 +2267,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -2283,9 +2283,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 1,
-      "fieldUseFunc": "sub_80A16E0",
+      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
       "battleUsage": 1,
-      "battleUseFunc": "sub_80A1FBC",
+      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
       "secondaryId": 0
     },
     {
@@ -2299,7 +2299,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2315,7 +2315,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2331,7 +2331,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2347,7 +2347,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2363,7 +2363,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2379,7 +2379,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2395,7 +2395,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2411,7 +2411,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2427,7 +2427,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2443,7 +2443,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2459,7 +2459,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2475,7 +2475,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2491,7 +2491,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2507,7 +2507,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2523,7 +2523,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2539,7 +2539,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2555,7 +2555,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2571,7 +2571,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2587,7 +2587,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2603,7 +2603,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2619,7 +2619,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2635,7 +2635,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2651,7 +2651,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2667,7 +2667,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2683,7 +2683,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2699,7 +2699,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2715,7 +2715,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2731,7 +2731,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2747,7 +2747,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2763,7 +2763,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2779,7 +2779,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2795,7 +2795,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2827,7 +2827,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2843,7 +2843,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2859,7 +2859,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2875,7 +2875,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2891,7 +2891,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2907,7 +2907,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2923,7 +2923,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2939,7 +2939,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2955,7 +2955,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2971,7 +2971,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2987,7 +2987,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3003,7 +3003,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3019,7 +3019,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3035,7 +3035,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3051,7 +3051,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3067,7 +3067,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3083,7 +3083,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3099,7 +3099,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3115,7 +3115,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3131,7 +3131,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3147,7 +3147,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3163,7 +3163,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3179,7 +3179,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3195,7 +3195,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3211,7 +3211,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3227,7 +3227,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3243,7 +3243,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3259,7 +3259,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3275,7 +3275,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3291,7 +3291,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3307,7 +3307,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3323,7 +3323,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3339,7 +3339,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3355,7 +3355,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3371,7 +3371,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3387,7 +3387,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3403,7 +3403,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3419,7 +3419,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3435,7 +3435,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3451,7 +3451,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3467,7 +3467,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3483,7 +3483,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3499,7 +3499,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3515,7 +3515,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3531,7 +3531,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3547,7 +3547,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3563,7 +3563,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3579,7 +3579,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3595,7 +3595,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3611,7 +3611,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3627,7 +3627,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3643,7 +3643,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3659,7 +3659,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3675,7 +3675,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3691,7 +3691,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3707,7 +3707,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3723,7 +3723,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3739,7 +3739,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3755,7 +3755,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3771,7 +3771,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3787,7 +3787,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3803,7 +3803,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3819,7 +3819,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3835,7 +3835,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3851,7 +3851,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3867,7 +3867,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3883,7 +3883,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3899,7 +3899,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3915,7 +3915,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3931,7 +3931,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3947,7 +3947,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3963,7 +3963,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3979,7 +3979,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -3995,7 +3995,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4011,7 +4011,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4027,7 +4027,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4043,7 +4043,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4059,7 +4059,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4075,7 +4075,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4091,7 +4091,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4107,7 +4107,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4123,7 +4123,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4139,7 +4139,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4155,7 +4155,7 @@
       "exitsBagOnUse": 1,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 2,
-      "fieldUseFunc": "sub_80A122C",
+      "fieldUseFunc": "FieldUseFunc_MachBike",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4171,7 +4171,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A1460",
+      "fieldUseFunc": "FieldUseFunc_CoinCase",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4203,7 +4203,7 @@
       "exitsBagOnUse": 1,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 2,
-      "fieldUseFunc": "sub_80A1338",
+      "fieldUseFunc": "FieldUseFunc_OldRod",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4219,7 +4219,7 @@
       "exitsBagOnUse": 1,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 2,
-      "fieldUseFunc": "sub_80A1338",
+      "fieldUseFunc": "FieldUseFunc_OldRod",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 1
@@ -4235,7 +4235,7 @@
       "exitsBagOnUse": 1,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 2,
-      "fieldUseFunc": "sub_80A1338",
+      "fieldUseFunc": "FieldUseFunc_OldRod",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 2
@@ -4251,7 +4251,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4267,7 +4267,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4283,7 +4283,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4299,7 +4299,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4315,7 +4315,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4331,7 +4331,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4347,7 +4347,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4363,7 +4363,7 @@
       "exitsBagOnUse": 1,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 2,
-      "fieldUseFunc": "sub_80A122C",
+      "fieldUseFunc": "FieldUseFunc_MachBike",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 1
@@ -4379,7 +4379,7 @@
       "exitsBagOnUse": 1,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4395,7 +4395,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4411,7 +4411,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 1
@@ -4427,7 +4427,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4443,7 +4443,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4459,7 +4459,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4475,7 +4475,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4491,7 +4491,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4507,7 +4507,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4523,7 +4523,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4539,7 +4539,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4555,7 +4555,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4571,7 +4571,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4587,7 +4587,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4603,7 +4603,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -4619,7 +4619,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -5621,7 +5621,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -5637,7 +5637,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -5653,7 +5653,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -5669,9 +5669,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A156C",
+      "fieldUseFunc": "FieldUseFunc_PokeFlute",
       "battleUsage": 2,
-      "battleUseFunc": "sub_80A1E64",
+      "battleUseFunc": "BattleUseFunc_PokeFlute",
       "secondaryId": 0
     },
     {
@@ -5685,7 +5685,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -5701,7 +5701,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -5717,7 +5717,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -5733,7 +5733,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -5749,7 +5749,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -5765,7 +5765,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -5781,7 +5781,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -5797,7 +5797,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -5813,7 +5813,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -5829,7 +5829,7 @@
       "exitsBagOnUse": 1,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 2,
-      "fieldUseFunc": "sub_80A122C",
+      "fieldUseFunc": "FieldUseFunc_MachBike",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -5845,7 +5845,7 @@
       "exitsBagOnUse": 1,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A1C60",
+      "fieldUseFunc": "FieldUseFunc_TownMap",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -5861,7 +5861,7 @@
       "exitsBagOnUse": 1,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 2,
-      "fieldUseFunc": "sub_80A1D9C",
+      "fieldUseFunc": "FieldUseFunc_VsSeeker",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -5877,7 +5877,7 @@
       "exitsBagOnUse": 1,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A1CF8",
+      "fieldUseFunc": "FieldUseFunc_FameChecker",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -5893,7 +5893,7 @@
       "exitsBagOnUse": 1,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A1788",
+      "fieldUseFunc": "FieldUseFunc_TmCase",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -5909,9 +5909,9 @@
       "exitsBagOnUse": 1,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A1820",
+      "fieldUseFunc": "FieldUseFunc_BerryPouch",
       "battleUsage": 3,
-      "battleUseFunc": "sub_80A18B8",
+      "battleUseFunc": "BattleUseFunc_BerryPouch",
       "secondaryId": 0
     },
     {
@@ -5925,7 +5925,7 @@
       "exitsBagOnUse": 1,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 2,
-      "fieldUseFunc": "sub_80A18EC",
+      "fieldUseFunc": "FieldUseFunc_TeachyTv",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -5941,7 +5941,7 @@
       "exitsBagOnUse": 1,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -5957,7 +5957,7 @@
       "exitsBagOnUse": 1,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -5973,7 +5973,7 @@
       "exitsBagOnUse": 1,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -5989,7 +5989,7 @@
       "exitsBagOnUse": 1,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -6005,7 +6005,7 @@
       "exitsBagOnUse": 1,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -6021,7 +6021,7 @@
       "exitsBagOnUse": 1,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A14E8",
+      "fieldUseFunc": "FieldUseFunc_PowderJar",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -6037,7 +6037,7 @@
       "exitsBagOnUse": 1,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -6053,7 +6053,7 @@
       "exitsBagOnUse": 1,
       "pocket": "POCKET_KEY_ITEMS",
       "type": 4,
-      "fieldUseFunc": "sub_80A2238",
+      "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0

@@ -36,7 +36,7 @@ void ItemUseOnFieldCB_Bicycle(u8 taskId);
 bool8 ItemUseCheckFunc_Rod(void);
 void ItemUseOnFieldCB_Rod(u8 taskId);
 void sub_813EC8C(u8 taskId);
-void sub_80A1750(u8 taskId);
+void FieldUseFunc_SunStone(u8 taskId);
 
 extern void (*const gUnknown_83E2954[])(void);
 
@@ -112,7 +112,7 @@ u8 sub_80A1150(u16 itemId)
 {
     if (ItemId_GetPocket(itemId) == POCKET_TM_CASE)
         return 1;
-    else if (ItemId_GetFieldFunc(itemId) == sub_80A1750)
+    else if (ItemId_GetFieldFunc(itemId) == FieldUseFunc_SunStone)
         return 2;
     else
         return 0;
@@ -143,7 +143,7 @@ void sub_80A11C0(u8 taskId)
     }
 }
 
-void sub_80A11E8(u8 taskId)
+void FieldUseFunc_OrangeMail(u8 taskId)
 {
     sub_8108EE0(sub_80A1208);
     sub_8108B50(taskId);
@@ -157,7 +157,7 @@ void sub_80A1208(void)
     sub_80BEBEC(buffer, UseFameCheckerFromMenu, 0);
 }
 
-void sub_80A122C(u8 taskId)
+void FieldUseFunc_MachBike(u8 taskId)
 {
     s16 x, y;
     u8 behavior;
@@ -190,7 +190,7 @@ void ItemUseOnFieldCB_Bicycle(u8 taskId)
     DestroyTask(taskId);
 }
 
-void sub_80A1338(u8 taskId)
+void FieldUseFunc_OldRod(u8 taskId)
 {
     if (ItemUseCheckFunc_Rod() == TRUE)
     {

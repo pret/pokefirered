@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80A1460
-sub_80A1460: @ 80A1460
+	thumb_func_start FieldUseFunc_CoinCase
+FieldUseFunc_CoinCase: @ 80A1460
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -64,10 +64,10 @@ _080A14DC:
 	bx r0
 	.align 2, 0
 _080A14E4: .4byte sub_80A112C
-	thumb_func_end sub_80A1460
+	thumb_func_end FieldUseFunc_CoinCase
 
-	thumb_func_start sub_80A14E8
-sub_80A14E8: @ 80A14E8
+	thumb_func_start FieldUseFunc_PowderJar
+FieldUseFunc_PowderJar: @ 80A14E8
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -123,10 +123,10 @@ _080A1560:
 	bx r0
 	.align 2, 0
 _080A1568: .4byte sub_80A112C
-	thumb_func_end sub_80A14E8
+	thumb_func_end FieldUseFunc_PowderJar
 
-	thumb_func_start sub_80A156C
-sub_80A156C: @ 80A156C
+	thumb_func_start FieldUseFunc_PokeFlute
+FieldUseFunc_PokeFlute: @ 80A156C
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -227,7 +227,7 @@ _080A1638:
 	.align 2, 0
 _080A1640: .4byte gUnknown_841665C
 _080A1644: .4byte sub_80A112C
-	thumb_func_end sub_80A156C
+	thumb_func_end FieldUseFunc_PokeFlute
 
 	thumb_func_start sub_80A1648
 sub_80A1648: @ 80A1648
@@ -307,8 +307,8 @@ sub_80A16D0: @ 80A16D0
 	bx r0
 	thumb_func_end sub_80A16D0
 
-	thumb_func_start sub_80A16E0
-sub_80A16E0: @ 80A16E0
+	thumb_func_start FieldUseFunc_OpenPartyMenu
+FieldUseFunc_OpenPartyMenu: @ 80A16E0
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -321,10 +321,10 @@ sub_80A16E0: @ 80A16E0
 	.align 2, 0
 _080A16F4: .4byte gUnknown_3005E98
 _080A16F8: .4byte sub_81252D0
-	thumb_func_end sub_80A16E0
+	thumb_func_end FieldUseFunc_OpenPartyMenu
 
-	thumb_func_start sub_80A16FC
-sub_80A16FC: @ 80A16FC
+	thumb_func_start FieldUseFunc_Ether
+FieldUseFunc_Ether: @ 80A16FC
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -337,10 +337,10 @@ sub_80A16FC: @ 80A16FC
 	.align 2, 0
 _080A1710: .4byte gUnknown_3005E98
 _080A1714: .4byte sub_81256F8
-	thumb_func_end sub_80A16FC
+	thumb_func_end FieldUseFunc_Ether
 
-	thumb_func_start sub_80A1718
-sub_80A1718: @ 80A1718
+	thumb_func_start FieldUseFunc_PpUp
+FieldUseFunc_PpUp: @ 80A1718
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -353,10 +353,10 @@ sub_80A1718: @ 80A1718
 	.align 2, 0
 _080A172C: .4byte gUnknown_3005E98
 _080A1730: .4byte dp05_pp_up
-	thumb_func_end sub_80A1718
+	thumb_func_end FieldUseFunc_PpUp
 
-	thumb_func_start sub_80A1734
-sub_80A1734: @ 80A1734
+	thumb_func_start FieldUseFunc_RareCandy
+FieldUseFunc_RareCandy: @ 80A1734
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -369,10 +369,10 @@ sub_80A1734: @ 80A1734
 	.align 2, 0
 _080A1748: .4byte gUnknown_3005E98
 _080A174C: .4byte dp05_rare_candy
-	thumb_func_end sub_80A1734
+	thumb_func_end FieldUseFunc_RareCandy
 
-	thumb_func_start sub_80A1750
-sub_80A1750: @ 80A1750
+	thumb_func_start FieldUseFunc_SunStone
+FieldUseFunc_SunStone: @ 80A1750
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -385,10 +385,10 @@ sub_80A1750: @ 80A1750
 	.align 2, 0
 _080A1764: .4byte gUnknown_3005E98
 _080A1768: .4byte sub_8126B60
-	thumb_func_end sub_80A1750
+	thumb_func_end FieldUseFunc_SunStone
 
-	thumb_func_start sub_80A176C
-sub_80A176C: @ 80A176C
+	thumb_func_start FieldUseFunc_SacredAsh
+FieldUseFunc_SacredAsh: @ 80A176C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -401,10 +401,10 @@ sub_80A176C: @ 80A176C
 	.align 2, 0
 _080A1780: .4byte gUnknown_3005E98
 _080A1784: .4byte sub_8126894
-	thumb_func_end sub_80A176C
+	thumb_func_end FieldUseFunc_SacredAsh
 
-	thumb_func_start sub_80A1788
-sub_80A1788: @ 80A1788
+	thumb_func_start FieldUseFunc_TmCase
+FieldUseFunc_TmCase: @ 80A1788
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -438,7 +438,7 @@ _080A17C8:
 	bx r0
 	.align 2, 0
 _080A17D0: .4byte sub_80A17E8
-	thumb_func_end sub_80A1788
+	thumb_func_end FieldUseFunc_TmCase
 
 	thumb_func_start sub_80A17D4
 sub_80A17D4: @ 80A17D4
@@ -481,8 +481,8 @@ _080A1818: .4byte gPaletteFade
 _080A181C: .4byte CB2_ReturnToField
 	thumb_func_end sub_80A17E8
 
-	thumb_func_start sub_80A1820
-sub_80A1820: @ 80A1820
+	thumb_func_start FieldUseFunc_BerryPouch
+FieldUseFunc_BerryPouch: @ 80A1820
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -516,7 +516,7 @@ _080A1860:
 	bx r0
 	.align 2, 0
 _080A1868: .4byte sub_80A1880
-	thumb_func_end sub_80A1820
+	thumb_func_end FieldUseFunc_BerryPouch
 
 	thumb_func_start sub_80A186C
 sub_80A186C: @ 80A186C
@@ -559,8 +559,8 @@ _080A18B0: .4byte gPaletteFade
 _080A18B4: .4byte CB2_ReturnToField
 	thumb_func_end sub_80A1880
 
-	thumb_func_start sub_80A18B8
-sub_80A18B8: @ 80A18B8
+	thumb_func_start BattleUseFunc_BerryPouch
+BattleUseFunc_BerryPouch: @ 80A18B8
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -574,7 +574,7 @@ sub_80A18B8: @ 80A18B8
 	bx r0
 	.align 2, 0
 _080A18D4: .4byte sub_80A18D8
-	thumb_func_end sub_80A18B8
+	thumb_func_end BattleUseFunc_BerryPouch
 
 	thumb_func_start sub_80A18D8
 sub_80A18D8: @ 80A18D8
@@ -589,8 +589,8 @@ sub_80A18D8: @ 80A18D8
 _080A18E8: .4byte sub_8107ECC
 	thumb_func_end sub_80A18D8
 
-	thumb_func_start sub_80A18EC
-sub_80A18EC: @ 80A18EC
+	thumb_func_start FieldUseFunc_TeachyTv
+FieldUseFunc_TeachyTv: @ 80A18EC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -632,7 +632,7 @@ _080A1940:
 	bx r0
 	.align 2, 0
 _080A1948: .4byte sub_80A1960
-	thumb_func_end sub_80A18EC
+	thumb_func_end FieldUseFunc_TeachyTv
 
 	thumb_func_start sub_80A194C
 sub_80A194C: @ 80A194C
@@ -673,8 +673,8 @@ _080A1990: .4byte gPaletteFade
 _080A1994: .4byte CB2_ReturnToField
 	thumb_func_end sub_80A1960
 
-	thumb_func_start sub_80A1998
-sub_80A1998: @ 80A1998
+	thumb_func_start FieldUseFunc_SuperRepel
+FieldUseFunc_SuperRepel: @ 80A1998
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -710,7 +710,7 @@ _080A19D8:
 	.align 2, 0
 _080A19E0: .4byte gUnknown_841659E
 _080A19E4: .4byte sub_810A1F8
-	thumb_func_end sub_80A1998
+	thumb_func_end FieldUseFunc_SuperRepel
 
 	thumb_func_start sub_80A19E8
 sub_80A19E8: @ 80A19E8
@@ -786,8 +786,8 @@ _080A1A8C: .4byte gStringVar4
 _080A1A90: .4byte gUnknown_841658C
 	thumb_func_end sub_80A1A44
 
-	thumb_func_start sub_80A1A94
-sub_80A1A94: @ 80A1A94
+	thumb_func_start FieldUseFunc_BlackFlute
+FieldUseFunc_BlackFlute: @ 80A1A94
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -859,7 +859,7 @@ _080A1B38: .4byte gStringVar4
 _080A1B3C: .4byte gUnknown_8416600
 _080A1B40: .4byte gTasks
 _080A1B44: .4byte sub_80A1B48
-	thumb_func_end sub_80A1A94
+	thumb_func_end FieldUseFunc_BlackFlute
 
 	thumb_func_start sub_80A1B48
 sub_80A1B48: @ 80A1B48
@@ -1004,8 +1004,8 @@ sub_80A1C44: @ 80A1C44
 	bx r0
 	thumb_func_end sub_80A1C44
 
-	thumb_func_start sub_80A1C60
-sub_80A1C60: @ 80A1C60
+	thumb_func_start FieldUseFunc_TownMap
+FieldUseFunc_TownMap: @ 80A1C60
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1039,7 +1039,7 @@ _080A1CA0:
 	bx r0
 	.align 2, 0
 _080A1CA8: .4byte sub_80A1CC0
-	thumb_func_end sub_80A1C60
+	thumb_func_end FieldUseFunc_TownMap
 
 	thumb_func_start sub_80A1CAC
 sub_80A1CAC: @ 80A1CAC
@@ -1080,8 +1080,8 @@ _080A1CF0: .4byte gPaletteFade
 _080A1CF4: .4byte CB2_ReturnToField
 	thumb_func_end sub_80A1CC0
 
-	thumb_func_start sub_80A1CF8
-sub_80A1CF8: @ 80A1CF8
+	thumb_func_start FieldUseFunc_FameChecker
+FieldUseFunc_FameChecker: @ 80A1CF8
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1123,7 +1123,7 @@ _080A1D4C:
 	bx r0
 	.align 2, 0
 _080A1D54: .4byte sub_80A1D68
-	thumb_func_end sub_80A1CF8
+	thumb_func_end FieldUseFunc_FameChecker
 
 	thumb_func_start sub_80A1D58
 sub_80A1D58: @ 80A1D58
@@ -1162,8 +1162,8 @@ _080A1D94: .4byte gPaletteFade
 _080A1D98: .4byte CB2_ReturnToField
 	thumb_func_end sub_80A1D68
 
-	thumb_func_start sub_80A1D9C
-sub_80A1D9C: @ 80A1D9C
+	thumb_func_start FieldUseFunc_VsSeeker
+FieldUseFunc_VsSeeker: @ 80A1D9C
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -1218,7 +1218,7 @@ _080A1E00:
 	.align 2, 0
 _080A1E04: .4byte sItemUseOnFieldCB
 _080A1E08: .4byte Task_VsSeeker_0
-	thumb_func_end sub_80A1D9C
+	thumb_func_end FieldUseFunc_VsSeeker
 
 	thumb_func_start sub_80A1E0C
 sub_80A1E0C: @ 80A1E0C
@@ -1230,8 +1230,8 @@ sub_80A1E0C: @ 80A1E0C
 	bx r0
 	thumb_func_end sub_80A1E0C
 
-	thumb_func_start sub_80A1E1C
-sub_80A1E1C: @ 80A1E1C
+	thumb_func_start BattleUseFunc_MasterBall
+BattleUseFunc_MasterBall: @ 80A1E1C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1262,10 +1262,10 @@ _080A1E54:
 	.align 2, 0
 _080A1E5C: .4byte gUnknown_8416631
 _080A1E60: .4byte sub_810A1F8
-	thumb_func_end sub_80A1E1C
+	thumb_func_end BattleUseFunc_MasterBall
 
-	thumb_func_start sub_80A1E64
-sub_80A1E64: @ 80A1E64
+	thumb_func_start BattleUseFunc_PokeFlute
+BattleUseFunc_PokeFlute: @ 80A1E64
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -1276,10 +1276,10 @@ sub_80A1E64: @ 80A1E64
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80A1E64
+	thumb_func_end BattleUseFunc_PokeFlute
 
-	thumb_func_start sub_80A1E7C
-sub_80A1E7C: @ 80A1E7C
+	thumb_func_start BattleUseFunc_GuardSpec
+BattleUseFunc_GuardSpec: @ 80A1E7C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1332,7 +1332,7 @@ _080A1EE4:
 	.align 2, 0
 _080A1EEC: .4byte gTasks
 _080A1EF0: .4byte sub_80A1EF4
-	thumb_func_end sub_80A1E7C
+	thumb_func_end BattleUseFunc_GuardSpec
 
 	thumb_func_start sub_80A1EF4
 sub_80A1EF4: @ 80A1EF4
@@ -1435,8 +1435,8 @@ _080A1FB0:
 _080A1FB8: .4byte sub_81279E0
 	thumb_func_end sub_80A1F78
 
-	thumb_func_start sub_80A1FBC
-sub_80A1FBC: @ 80A1FBC
+	thumb_func_start BattleUseFunc_OpenPartyMenu
+BattleUseFunc_OpenPartyMenu: @ 80A1FBC
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1449,7 +1449,7 @@ sub_80A1FBC: @ 80A1FBC
 	.align 2, 0
 _080A1FD0: .4byte gUnknown_3005E98
 _080A1FD4: .4byte ItemUseCB_Medicine
-	thumb_func_end sub_80A1FBC
+	thumb_func_end BattleUseFunc_OpenPartyMenu
 
 	thumb_func_start sub_80A1FD8
 sub_80A1FD8: @ 80A1FD8
@@ -1467,8 +1467,8 @@ _080A1FEC: .4byte gUnknown_3005E98
 _080A1FF0: .4byte sub_8126894
 	thumb_func_end sub_80A1FD8
 
-	thumb_func_start sub_80A1FF4
-sub_80A1FF4: @ 80A1FF4
+	thumb_func_start BattleUseFunc_Ether
+BattleUseFunc_Ether: @ 80A1FF4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1481,10 +1481,10 @@ sub_80A1FF4: @ 80A1FF4
 	.align 2, 0
 _080A2008: .4byte gUnknown_3005E98
 _080A200C: .4byte sub_81256F8
-	thumb_func_end sub_80A1FF4
+	thumb_func_end BattleUseFunc_Ether
 
-	thumb_func_start sub_80A2010
-sub_80A2010: @ 80A2010
+	thumb_func_start BattleUseFunc_PokeDoll
+BattleUseFunc_PokeDoll: @ 80A2010
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1521,7 +1521,7 @@ _080A2060:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80A2010
+	thumb_func_end BattleUseFunc_PokeDoll
 
 	thumb_func_start ItemUseOutOfBattle_EnigmaBerry
 ItemUseOutOfBattle_EnigmaBerry: @ 80A2068
@@ -1578,7 +1578,7 @@ _080A20E8:
 	movs r0, 0x1
 	strh r0, [r1, 0x10]
 	adds r0, r4, 0
-	bl sub_80A16E0
+	bl FieldUseFunc_OpenPartyMenu
 	b _080A2188
 	.align 2, 0
 _080A2100: .4byte gTasks
@@ -1591,7 +1591,7 @@ _080A2104:
 	movs r0, 0x1
 	strh r0, [r1, 0x10]
 	adds r0, r4, 0
-	bl sub_80A176C
+	bl FieldUseFunc_SacredAsh
 	b _080A2188
 	.align 2, 0
 _080A211C: .4byte gTasks
@@ -1604,7 +1604,7 @@ _080A2120:
 	movs r0, 0x1
 	strh r0, [r1, 0x10]
 	adds r0, r4, 0
-	bl sub_80A1734
+	bl FieldUseFunc_RareCandy
 	b _080A2188
 	.align 2, 0
 _080A2138: .4byte gTasks
@@ -1617,7 +1617,7 @@ _080A213C:
 	movs r0, 0x1
 	strh r0, [r1, 0x10]
 	adds r0, r4, 0
-	bl sub_80A1718
+	bl FieldUseFunc_PpUp
 	b _080A2188
 	.align 2, 0
 _080A2154: .4byte gTasks
@@ -1630,7 +1630,7 @@ _080A2158:
 	movs r0, 0x1
 	strh r0, [r1, 0x10]
 	adds r0, r4, 0
-	bl sub_80A16FC
+	bl FieldUseFunc_Ether
 	b _080A2188
 	.align 2, 0
 _080A2170: .4byte gTasks
@@ -1643,7 +1643,7 @@ _080A2174:
 	movs r0, 0x4
 	strh r0, [r1, 0x10]
 	adds r0, r4, 0
-	bl sub_80A2238
+	bl FieldUseFunc_OakStopsYou
 _080A2188:
 	pop {r4}
 	pop {r0}
@@ -1698,27 +1698,27 @@ _080A21BC:
 	.4byte _080A2224
 _080A2214:
 	adds r0, r4, 0
-	bl sub_80A1E7C
+	bl BattleUseFunc_GuardSpec
 	b _080A2232
 _080A221C:
 	adds r0, r4, 0
-	bl sub_80A1FBC
+	bl BattleUseFunc_OpenPartyMenu
 	b _080A2232
 _080A2224:
 	adds r0, r4, 0
-	bl sub_80A1FF4
+	bl BattleUseFunc_Ether
 	b _080A2232
 _080A222C:
 	adds r0, r4, 0
-	bl sub_80A2238
+	bl FieldUseFunc_OakStopsYou
 _080A2232:
 	pop {r4}
 	pop {r0}
 	bx r0
 	thumb_func_end ItemUseInBattle_EnigmaBerry
 
-	thumb_func_start sub_80A2238
-sub_80A2238: @ 80A2238
+	thumb_func_start FieldUseFunc_OakStopsYou
+FieldUseFunc_OakStopsYou: @ 80A2238
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -1759,7 +1759,7 @@ _080A228A:
 	bx r0
 	.align 2, 0
 _080A2290: .4byte gTasks
-	thumb_func_end sub_80A2238
+	thumb_func_end FieldUseFunc_OakStopsYou
 
 	thumb_func_start ItemUse_SetQuestLogEvent
 ItemUse_SetQuestLogEvent: @ 80A2294

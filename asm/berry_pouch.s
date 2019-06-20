@@ -2124,7 +2124,7 @@ sub_813DE0C: @ 813DE0C
 	cmp r0, 0
 	bne _0813DE68
 	adds r0, r5, 0
-	bl sub_80A2238
+	bl FieldUseFunc_OakStopsYou
 	b _0813DEB0
 	.align 2, 0
 _0813DE5C: .4byte gUnknown_203F388

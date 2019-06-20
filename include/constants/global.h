@@ -76,4 +76,6 @@ enum
     POCKET_BERRY_POUCH,
 };
 
+#define NUM_BAG_POCKETS 5
+
 #endif //GUARD_CONSTANTS_GLOBAL_H

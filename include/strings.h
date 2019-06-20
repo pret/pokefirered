@@ -164,4 +164,6 @@ extern const u8 gText_ReturnToPC[];
 extern const u8 gUnknown_8416425[];
 extern const u8 gUnknown_8416451[];
 
+extern const u8 gUnknown_84162BD[];
+
 #endif //GUARD_STRINGS_H

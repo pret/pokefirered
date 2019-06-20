@@ -676,7 +676,7 @@ static u16 ItemPc_GetItemIdBySlotId(u16 idx)
 
 static u16 ItemPc_GetItemQuantityBySlotId(u16 idx)
 {
-    return GetBagItemId(&gSaveBlock1Ptr->pcItems[idx].quantity);
+    return GetPcItemQuantity(&gSaveBlock1Ptr->pcItems[idx].quantity);
 }
 
 static void ItemPc_CountPcItems(void)

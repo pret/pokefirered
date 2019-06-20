@@ -73,7 +73,7 @@ u16 BagGetItemIdByPocketPosition(u8 a0, u16 a1);
 u16 BagGetQuantityByPocketPosition(u8 a0, u16 a1);
 bool8 itemid_is_unique(u16 itemId);
 void sub_809A584(struct ItemSlot * slots, u8 capacity);
-u16 GetBagItemId(u16 *);
+u16 GetPcItemQuantity(u16 *);
 
 void ItemPcCompaction(void);
 void RemoveItemFromPC(u16 itemId, u16 quantity);

@@ -139,6 +139,7 @@ SECTIONS {
         asm/map_name_popup.o(.text);
         src/item_menu_icons.o(.text);
         asm/battle_anim_mon_movement.o(.text);
+        src/item.o(.text);
         asm/item.o(.text);
         asm/shop.o(.text);
         src/berry.o(.text);

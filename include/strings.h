@@ -163,6 +163,11 @@ extern const u8 gText_ReturnToPC[];
 
 extern const u8 gUnknown_8416425[];
 extern const u8 gUnknown_8416451[];
+extern const u8 gUnknown_8416537[];
+extern const u8 gUnknown_8416644[];
+extern const u8 gUnknown_841665C[];
+extern const u8 gUnknown_8416690[];
+extern const u8 gUnknown_84166A7[];
 
 extern const u8 gUnknown_84162BD[];
 

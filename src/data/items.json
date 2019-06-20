@@ -1499,7 +1499,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_SunStone",
+      "fieldUseFunc": "FieldUseFunc_EvoItem",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1515,7 +1515,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_SunStone",
+      "fieldUseFunc": "FieldUseFunc_EvoItem",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1531,7 +1531,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_SunStone",
+      "fieldUseFunc": "FieldUseFunc_EvoItem",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1547,7 +1547,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_SunStone",
+      "fieldUseFunc": "FieldUseFunc_EvoItem",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1563,7 +1563,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_SunStone",
+      "fieldUseFunc": "FieldUseFunc_EvoItem",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1579,7 +1579,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_SunStone",
+      "fieldUseFunc": "FieldUseFunc_EvoItem",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0

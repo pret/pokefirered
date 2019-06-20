@@ -84,7 +84,7 @@ bool8 sub_815EF5C(void)
     }
 }
 
-u32 sub_815EFA0(void)
+u32 GetBerryPowder(void)
 {
     return sub_815EE3C(&gSaveBlock2Ptr->berryCrush.berryPowderAmount);
 }
@@ -104,7 +104,7 @@ void sub_815F014(u8 windowId, u16 baseBlock, u8 palette, u32 powder)
 
 void sub_815F070(void)
 {
-    sub_815EFBC(gUnknown_203F464, sub_815EFA0(), 39, 12, 0);
+    sub_815EFBC(gUnknown_203F464, GetBerryPowder(), 39, 12, 0);
 }
 
 void sub_815F094(void)
@@ -120,7 +120,7 @@ void sub_815F094(void)
         FillWindowPixelBuffer(gUnknown_203F464, 0);
         PutWindowTilemap(gUnknown_203F464);
         TextWindow_SetStdFrame0_WithPal(gUnknown_203F464, 0x21D, 0xD0);
-        sub_815F014(gUnknown_203F464, 0x21D, 0xD, sub_815EFA0());
+        sub_815F014(gUnknown_203F464, 0x21D, 0xD, GetBerryPowder());
     }
 }
 

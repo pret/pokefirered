@@ -16,7 +16,7 @@ void FieldUseFunc_OpenPartyMenu(u8 taskId);
 void FieldUseFunc_Ether(u8 taskId);
 void FieldUseFunc_PpUp(u8 taskId);
 void FieldUseFunc_RareCandy(u8 taskId);
-void FieldUseFunc_SunStone(u8 taskId);
+void FieldUseFunc_EvoItem(u8 taskId);
 void FieldUseFunc_SacredAsh(u8 taskId);
 void FieldUseFunc_TmCase(u8 taskId);
 void FieldUseFunc_BerryPouch(u8 taskId);

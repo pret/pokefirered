@@ -2150,8 +2150,8 @@ _08108E58:
 	bx r0
 	thumb_func_end sub_8108E54
 
-	thumb_func_start sub_8108E70
-sub_8108E70: @ 8108E70
+	thumb_func_start DisplayItemMessageInBag
+DisplayItemMessageInBag: @ 8108E70
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -2202,7 +2202,7 @@ sub_8108E70: @ 8108E70
 	bx r0
 	.align 2, 0
 _08108EDC: .4byte gTasks+0x8
-	thumb_func_end sub_8108E70
+	thumb_func_end DisplayItemMessageInBag
 
 	thumb_func_start sub_8108EE0
 sub_8108EE0: @ 8108EE0
@@ -4376,7 +4376,7 @@ sub_810A0A8: @ 810A0A8
 	ldr r3, _0810A11C @ =sub_810A1D0
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8108E70
+	bl DisplayItemMessageInBag
 	b _0810A166
 	.align 2, 0
 _0810A110: .4byte gTasks+0x8
@@ -4430,7 +4430,7 @@ sub_810A170: @ 810A170
 	ldr r2, _0810A184 @ =gText_ThereIsNoPokemon
 	ldr r3, _0810A188 @ =sub_810A1D0
 	movs r1, 0x2
-	bl sub_8108E70
+	bl DisplayItemMessageInBag
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -4456,7 +4456,7 @@ sub_810A18C: @ 810A18C
 	adds r0, r4, 0
 	movs r1, 0x2
 	adds r2, r5, 0
-	bl sub_8108E70
+	bl DisplayItemMessageInBag
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -4697,7 +4697,7 @@ sub_810A370: @ 810A370
 	ldr r3, _0810A3C8 @ =sub_810A1D0
 	adds r0, r5, 0
 	movs r1, 0x2
-	bl sub_8108E70
+	bl DisplayItemMessageInBag
 	b _0810A426
 	.align 2, 0
 _0810A3BC: .4byte gTasks+0x8
@@ -4826,7 +4826,7 @@ sub_810A468: @ 810A468
 	ldr r3, _0810A4C0 @ =sub_810A1D0
 	adds r0, r5, 0
 	movs r1, 0x2
-	bl sub_8108E70
+	bl DisplayItemMessageInBag
 	b _0810A51E
 	.align 2, 0
 _0810A4B4: .4byte gTasks+0x8
@@ -4981,7 +4981,7 @@ _0810A5B4:
 	ldr r3, _0810A5F4 @ =sub_810A1F8
 	adds r0, r5, 0
 	adds r2, r4, 0
-	bl sub_8108E70
+	bl DisplayItemMessageInBag
 	b _0810A63E
 	.align 2, 0
 _0810A5E8: .4byte gStringVar1
@@ -5019,7 +5019,7 @@ _0810A618:
 	ldr r3, _0810A650 @ =sub_810A770
 	adds r0, r7, 0
 	adds r2, r4, 0
-	bl sub_8108E70
+	bl DisplayItemMessageInBag
 _0810A63E:
 	pop {r4-r7}
 	pop {r0}
@@ -5112,7 +5112,7 @@ sub_810A690: @ 810A690
 	ldr r3, _0810A708 @ =sub_810A70C
 	adds r0, r5, 0
 	adds r2, r4, 0
-	bl sub_8108E70
+	bl DisplayItemMessageInBag
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -5426,7 +5426,7 @@ sub_810A940: @ 810A940
 	adds r0, r5, 0
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl sub_8108E70
+	bl DisplayItemMessageInBag
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -5803,7 +5803,7 @@ _0810ACEC:
 	ldr r3, _0810AD0C @ =sub_810A1D0
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8108E70
+	bl DisplayItemMessageInBag
 _0810ACF8:
 	add sp, 0x14
 	pop {r3,r4}

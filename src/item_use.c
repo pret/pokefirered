@@ -1,6 +1,8 @@
 #include "global.h"
 #include "berry_pouch.h"
+#include "berry_powder.h"
 #include "bike.h"
+#include "coins.h"
 #include "event_data.h"
 #include "field_fadetransition.h"
 #include "field_map_obj_helpers.h"
@@ -9,6 +11,7 @@
 #include "fieldmap.h"
 #include "item.h"
 #include "item_menu.h"
+#include "item_use.h"
 #include "mail.h"
 #include "map_obj_80688E4.h"
 #include "map_obj_lock.h"
@@ -20,8 +23,10 @@
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
+#include "constants/fanfares.h"
 #include "constants/flags.h"
 #include "constants/items.h"
+#include "constants/moves.h"
 #include "constants/songs.h"
 
 EWRAM_DATA void (*sItemUseOnFieldCB)(u8 taskId) = NULL;
@@ -35,8 +40,10 @@ void sub_80A1208(void);
 void ItemUseOnFieldCB_Bicycle(u8 taskId);
 bool8 ItemUseCheckFunc_Rod(void);
 void ItemUseOnFieldCB_Rod(u8 taskId);
+void FieldUseFunc_EvoItem(u8 taskId);
+void sub_80A1648(u8 taskId);
+void sub_80A1674(u8 taskId);
 void sub_813EC8C(u8 taskId);
-void FieldUseFunc_SunStone(u8 taskId);
 
 extern void (*const gUnknown_83E2954[])(void);
 
@@ -90,7 +97,7 @@ void sub_80A10C4(u8 taskId, bool8 a1, u8 a2, const u8 * str)
 {
     StringExpandPlaceholders(gStringVar4, str);
     if (a1 == FALSE)
-        sub_8108E70(taskId, a2, gStringVar4, sub_810A1F8);
+        DisplayItemMessageInBag(taskId, a2, gStringVar4, sub_810A1F8);
     else
         DisplayItemMessageOnField(taskId, a2, gStringVar4, sub_80A112C);
 }
@@ -108,11 +115,11 @@ void sub_80A112C(u8 taskId)
     ScriptContext2_Disable();
 }
 
-u8 sub_80A1150(u16 itemId)
+u8 GetItemCompatibilityRule(u16 itemId)
 {
     if (ItemId_GetPocket(itemId) == POCKET_TM_CASE)
         return 1;
-    else if (ItemId_GetFieldFunc(itemId) == FieldUseFunc_SunStone)
+    else if (ItemId_GetFieldFunc(itemId) == FieldUseFunc_EvoItem)
         return 2;
     else
         return 0;
@@ -239,4 +246,77 @@ void ItemUseOutOfBattle_Itemfinder(u8 taskId)
     IncrementGameStat(GAME_STAT_USED_ITEMFINDER);
     sItemUseOnFieldCB = sub_813EC8C;
     sub_80A103C(taskId);
+}
+
+void FieldUseFunc_CoinCase(u8 taskId)
+{
+    ConvertIntToDecimalStringN(gStringVar1, GetCoins(), STR_CONV_MODE_LEFT_ALIGN, 4);
+    StringExpandPlaceholders(gStringVar4, gUnknown_8416537);
+    ItemUse_SetQuestLogEvent(4, NULL, gSpecialVar_ItemId, 0xFFFF);
+    if (gTasks[taskId].data[3] == 0)
+        DisplayItemMessageInBag(taskId, 2, gStringVar4, sub_810A1F8);
+    else
+        DisplayItemMessageOnField(taskId, 2, gStringVar4, sub_80A112C);
+}
+
+void FieldUseFunc_PowderJar(u8 taskId)
+{
+    ConvertIntToDecimalStringN(gStringVar1, GetBerryPowder(), STR_CONV_MODE_LEFT_ALIGN, 5);
+    StringExpandPlaceholders(gStringVar4, gUnknown_8416644);
+    ItemUse_SetQuestLogEvent(4, NULL, gSpecialVar_ItemId, 0xFFFF);
+    if (gTasks[taskId].data[3] == 0)
+        DisplayItemMessageInBag(taskId, 2, gStringVar4, sub_810A1F8);
+    else
+        DisplayItemMessageOnField(taskId, 2, gStringVar4, sub_80A112C);
+}
+
+void FieldUseFunc_PokeFlute(u8 taskId)
+{
+    bool8 wokeSomeoneUp = FALSE;
+    u8 i;
+
+    for (i = 0; i < CalculatePlayerPartyCount(); i++)
+    {
+        if (!ExecuteTableBasedItemEffect(&gPlayerParty[i], ITEM_AWAKENING, i, MOVE_NONE))
+            wokeSomeoneUp = TRUE;
+    }
+
+    if (wokeSomeoneUp)
+    {
+        ItemUse_SetQuestLogEvent(4, NULL, gSpecialVar_ItemId, 0xFFFF);
+        if (gTasks[taskId].data[3] == 0)
+            DisplayItemMessageInBag(taskId, 2, gUnknown_8416690, sub_80A1648);
+        else
+            DisplayItemMessageOnField(taskId, 2, gUnknown_8416690, sub_80A1648);
+    }
+    else
+    {
+        // Now that's a catchy tune!
+        if (gTasks[taskId].data[3] == 0)
+            DisplayItemMessageInBag(taskId, 2, gUnknown_841665C, sub_810A1F8);
+        else
+            DisplayItemMessageOnField(taskId, 2, gUnknown_841665C, sub_80A112C);
+    }
+}
+
+void sub_80A1648(u8 taskId)
+{
+    PlayFanfareByFanfareNum(FANFARE_POKEFLUTE);
+    gTasks[taskId].func = sub_80A1674;
+}
+
+void sub_80A1674(u8 taskId)
+{
+    if (WaitFanfare(FALSE))
+    {
+        if (gTasks[taskId].data[3] == 0)
+            DisplayItemMessageInBag(taskId, 2, gUnknown_84166A7, sub_810A1F8);
+        else
+            DisplayItemMessageOnField(taskId, 2, gUnknown_84166A7, sub_80A112C);
+    }
+}
+
+void sub_80A16D0(u8 taskId)
+{
+    sub_80A0FBC(taskId);
 }

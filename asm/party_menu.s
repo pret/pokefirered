@@ -1274,7 +1274,7 @@ _0811F47C:
 	cmp r0, 0x3
 	bne _0811F492
 	adds r0, r4, 0
-	bl sub_80A1150
+	bl GetItemCompatibilityRule
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -12644,7 +12644,7 @@ sub_8124DE0: @ 8124DE0
 	push {r4,lr}
 	ldr r4, _08124E0C @ =gSpecialVar_ItemId
 	ldrh r0, [r4]
-	bl sub_80A1150
+	bl GetItemCompatibilityRule
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2

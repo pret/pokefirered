@@ -1571,4 +1571,4 @@ gUnknown_203F440: @ 203F440
 	.align 2
 	.include "src/trainer_tower.o"
 	.align 2
-	.include "src/unk_815EDDC.o"
+	.include "src/berry_powder.o"

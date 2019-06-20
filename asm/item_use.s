@@ -5,308 +5,6 @@
 
 	.text
 
-	thumb_func_start FieldUseFunc_CoinCase
-FieldUseFunc_CoinCase: @ 80A1460
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	ldr r4, _080A14B4 @ =gStringVar1
-	bl GetCoins
-	adds r1, r0, 0
-	lsls r1, 16
-	lsrs r1, 16
-	adds r0, r4, 0
-	movs r2, 0
-	movs r3, 0x4
-	bl ConvertIntToDecimalStringN
-	ldr r4, _080A14B8 @ =gStringVar4
-	ldr r1, _080A14BC @ =gUnknown_8416537
-	adds r0, r4, 0
-	bl StringExpandPlaceholders
-	ldr r0, _080A14C0 @ =gSpecialVar_ItemId
-	ldrh r2, [r0]
-	ldr r3, _080A14C4 @ =0x0000ffff
-	movs r0, 0x4
-	movs r1, 0
-	bl ItemUse_SetQuestLogEvent
-	ldr r1, _080A14C8 @ =gTasks
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	adds r0, r1
-	movs r1, 0xE
-	ldrsh r0, [r0, r1]
-	cmp r0, 0
-	bne _080A14D0
-	ldr r3, _080A14CC @ =sub_810A1F8
-	adds r0, r5, 0
-	movs r1, 0x2
-	adds r2, r4, 0
-	bl sub_8108E70
-	b _080A14DC
-	.align 2, 0
-_080A14B4: .4byte gStringVar1
-_080A14B8: .4byte gStringVar4
-_080A14BC: .4byte gUnknown_8416537
-_080A14C0: .4byte gSpecialVar_ItemId
-_080A14C4: .4byte 0x0000ffff
-_080A14C8: .4byte gTasks
-_080A14CC: .4byte sub_810A1F8
-_080A14D0:
-	ldr r3, _080A14E4 @ =sub_80A112C
-	adds r0, r5, 0
-	movs r1, 0x2
-	adds r2, r4, 0
-	bl DisplayItemMessageOnField
-_080A14DC:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080A14E4: .4byte sub_80A112C
-	thumb_func_end FieldUseFunc_CoinCase
-
-	thumb_func_start FieldUseFunc_PowderJar
-FieldUseFunc_PowderJar: @ 80A14E8
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	ldr r4, _080A1538 @ =gStringVar1
-	bl sub_815EFA0
-	adds r1, r0, 0
-	adds r0, r4, 0
-	movs r2, 0
-	movs r3, 0x5
-	bl ConvertIntToDecimalStringN
-	ldr r4, _080A153C @ =gStringVar4
-	ldr r1, _080A1540 @ =gUnknown_8416644
-	adds r0, r4, 0
-	bl StringExpandPlaceholders
-	ldr r0, _080A1544 @ =gSpecialVar_ItemId
-	ldrh r2, [r0]
-	ldr r3, _080A1548 @ =0x0000ffff
-	movs r0, 0x4
-	movs r1, 0
-	bl ItemUse_SetQuestLogEvent
-	ldr r1, _080A154C @ =gTasks
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	adds r0, r1
-	movs r1, 0xE
-	ldrsh r0, [r0, r1]
-	cmp r0, 0
-	bne _080A1554
-	ldr r3, _080A1550 @ =sub_810A1F8
-	adds r0, r5, 0
-	movs r1, 0x2
-	adds r2, r4, 0
-	bl sub_8108E70
-	b _080A1560
-	.align 2, 0
-_080A1538: .4byte gStringVar1
-_080A153C: .4byte gStringVar4
-_080A1540: .4byte gUnknown_8416644
-_080A1544: .4byte gSpecialVar_ItemId
-_080A1548: .4byte 0x0000ffff
-_080A154C: .4byte gTasks
-_080A1550: .4byte sub_810A1F8
-_080A1554:
-	ldr r3, _080A1568 @ =sub_80A112C
-	adds r0, r5, 0
-	movs r1, 0x2
-	adds r2, r4, 0
-	bl DisplayItemMessageOnField
-_080A1560:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080A1568: .4byte sub_80A112C
-	thumb_func_end FieldUseFunc_PowderJar
-
-	thumb_func_start FieldUseFunc_PokeFlute
-FieldUseFunc_PokeFlute: @ 80A156C
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	movs r6, 0
-	movs r4, 0
-	b _080A1598
-_080A1578:
-	movs r0, 0x64
-	muls r0, r4
-	ldr r1, _080A15D0 @ =gPlayerParty
-	adds r0, r1
-	movs r1, 0x11
-	adds r2, r4, 0
-	movs r3, 0
-	bl ExecuteTableBasedItemEffect
-	lsls r0, 24
-	cmp r0, 0
-	bne _080A1592
-	movs r6, 0x1
-_080A1592:
-	adds r0, r4, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-_080A1598:
-	bl CalculatePlayerPartyCount
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r4, r0
-	bcc _080A1578
-	cmp r6, 0
-	beq _080A1600
-	ldr r0, _080A15D4 @ =gSpecialVar_ItemId
-	ldrh r2, [r0]
-	ldr r3, _080A15D8 @ =0x0000ffff
-	movs r0, 0x4
-	movs r1, 0
-	bl ItemUse_SetQuestLogEvent
-	ldr r1, _080A15DC @ =gTasks
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	adds r0, r1
-	movs r1, 0xE
-	ldrsh r0, [r0, r1]
-	cmp r0, 0
-	bne _080A15E8
-	ldr r2, _080A15E0 @ =gUnknown_8416690
-	ldr r3, _080A15E4 @ =sub_80A1648
-	b _080A1616
-	.align 2, 0
-_080A15D0: .4byte gPlayerParty
-_080A15D4: .4byte gSpecialVar_ItemId
-_080A15D8: .4byte 0x0000ffff
-_080A15DC: .4byte gTasks
-_080A15E0: .4byte gUnknown_8416690
-_080A15E4: .4byte sub_80A1648
-_080A15E8:
-	ldr r2, _080A15F8 @ =gUnknown_8416690
-	ldr r3, _080A15FC @ =sub_80A1648
-	adds r0, r5, 0
-	movs r1, 0x2
-	bl DisplayItemMessageOnField
-	b _080A1638
-	.align 2, 0
-_080A15F8: .4byte gUnknown_8416690
-_080A15FC: .4byte sub_80A1648
-_080A1600:
-	ldr r0, _080A1620 @ =gTasks
-	lsls r1, r5, 2
-	adds r1, r5
-	lsls r1, 3
-	adds r1, r0
-	movs r2, 0xE
-	ldrsh r0, [r1, r2]
-	cmp r0, 0
-	bne _080A162C
-	ldr r2, _080A1624 @ =gUnknown_841665C
-	ldr r3, _080A1628 @ =sub_810A1F8
-_080A1616:
-	adds r0, r5, 0
-	movs r1, 0x2
-	bl sub_8108E70
-	b _080A1638
-	.align 2, 0
-_080A1620: .4byte gTasks
-_080A1624: .4byte gUnknown_841665C
-_080A1628: .4byte sub_810A1F8
-_080A162C:
-	ldr r2, _080A1640 @ =gUnknown_841665C
-	ldr r3, _080A1644 @ =sub_80A112C
-	adds r0, r5, 0
-	movs r1, 0x2
-	bl DisplayItemMessageOnField
-_080A1638:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080A1640: .4byte gUnknown_841665C
-_080A1644: .4byte sub_80A112C
-	thumb_func_end FieldUseFunc_PokeFlute
-
-	thumb_func_start sub_80A1648
-sub_80A1648: @ 80A1648
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	movs r0, 0xB
-	bl PlayFanfareByFanfareNum
-	ldr r1, _080A166C @ =gTasks
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r0, r1
-	ldr r1, _080A1670 @ =sub_80A1674
-	str r1, [r0]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080A166C: .4byte gTasks
-_080A1670: .4byte sub_80A1674
-	thumb_func_end sub_80A1648
-
-	thumb_func_start sub_80A1674
-sub_80A1674: @ 80A1674
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	adds r5, r4, 0
-	movs r0, 0
-	bl WaitFanfare
-	lsls r0, 24
-	cmp r0, 0
-	beq _080A16C0
-	ldr r0, _080A16A8 @ =gTasks
-	lsls r1, r4, 2
-	adds r1, r4
-	lsls r1, 3
-	adds r1, r0
-	movs r2, 0xE
-	ldrsh r0, [r1, r2]
-	cmp r0, 0
-	bne _080A16B4
-	ldr r2, _080A16AC @ =gUnknown_84166A7
-	ldr r3, _080A16B0 @ =sub_810A1F8
-	adds r0, r4, 0
-	movs r1, 0x2
-	bl sub_8108E70
-	b _080A16C0
-	.align 2, 0
-_080A16A8: .4byte gTasks
-_080A16AC: .4byte gUnknown_84166A7
-_080A16B0: .4byte sub_810A1F8
-_080A16B4:
-	ldr r2, _080A16C8 @ =gUnknown_84166A7
-	ldr r3, _080A16CC @ =sub_80A112C
-	adds r0, r5, 0
-	movs r1, 0x2
-	bl DisplayItemMessageOnField
-_080A16C0:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080A16C8: .4byte gUnknown_84166A7
-_080A16CC: .4byte sub_80A112C
-	thumb_func_end sub_80A1674
-
-	thumb_func_start sub_80A16D0
-sub_80A16D0: @ 80A16D0
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	bl sub_80A0FBC
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80A16D0
-
 	thumb_func_start FieldUseFunc_OpenPartyMenu
 FieldUseFunc_OpenPartyMenu: @ 80A16E0
 	push {lr}
@@ -371,8 +69,8 @@ _080A1748: .4byte gUnknown_3005E98
 _080A174C: .4byte dp05_rare_candy
 	thumb_func_end FieldUseFunc_RareCandy
 
-	thumb_func_start FieldUseFunc_SunStone
-FieldUseFunc_SunStone: @ 80A1750
+	thumb_func_start FieldUseFunc_EvoItem
+FieldUseFunc_EvoItem: @ 80A1750
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -385,7 +83,7 @@ FieldUseFunc_SunStone: @ 80A1750
 	.align 2, 0
 _080A1764: .4byte gUnknown_3005E98
 _080A1768: .4byte sub_8126B60
-	thumb_func_end FieldUseFunc_SunStone
+	thumb_func_end FieldUseFunc_EvoItem
 
 	thumb_func_start FieldUseFunc_SacredAsh
 FieldUseFunc_SacredAsh: @ 80A176C
@@ -702,7 +400,7 @@ _080A19CC:
 	ldr r3, _080A19E4 @ =sub_810A1F8
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8108E70
+	bl DisplayItemMessageInBag
 _080A19D8:
 	pop {r4}
 	pop {r0}
@@ -740,7 +438,7 @@ sub_80A19E8: @ 80A19E8
 	ldr r3, _080A1A40 @ =sub_810A1F8
 	adds r0, r6, 0
 	movs r1, 0x2
-	bl sub_8108E70
+	bl DisplayItemMessageInBag
 _080A1A2A:
 	pop {r4-r6}
 	pop {r0}
@@ -884,7 +582,7 @@ sub_80A1B48: @ 80A1B48
 	ldr r3, _080A1B88 @ =sub_810A1F8
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8108E70
+	bl DisplayItemMessageInBag
 _080A1B78:
 	pop {r4}
 	pop {r0}
@@ -1254,7 +952,7 @@ _080A1E48:
 	ldr r3, _080A1E60 @ =sub_810A1F8
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8108E70
+	bl DisplayItemMessageInBag
 _080A1E54:
 	pop {r4}
 	pop {r0}
@@ -1307,7 +1005,7 @@ BattleUseFunc_GuardSpec: @ 80A1E7C
 	ldr r3, _080A1ED0 @ =sub_810A1F8
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8108E70
+	bl DisplayItemMessageInBag
 	b _080A1EE4
 	.align 2, 0
 _080A1EBC: .4byte gBattlerPartyIndexes
@@ -1364,7 +1062,7 @@ sub_80A1EF4: @ 80A1EF4
 	ldr r3, _080A1F44 @ =sub_80A1F48
 	adds r0, r5, 0
 	movs r1, 0x2
-	bl sub_8108E70
+	bl DisplayItemMessageInBag
 _080A1F36:
 	pop {r4,r5}
 	pop {r0}
@@ -1505,7 +1203,7 @@ BattleUseFunc_PokeDoll: @ 80A2010
 	ldr r3, _080A2054 @ =sub_8108B50
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8108E70
+	bl DisplayItemMessageInBag
 	b _080A2060
 	.align 2, 0
 _080A2044: .4byte gBattleTypeFlags

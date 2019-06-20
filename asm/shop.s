@@ -2259,7 +2259,7 @@ sub_809BCA0: @ 809BCA0
 	ldr r0, _0809BD40 @ =gTasks+0x8
 	adds r5, r0
 	ldrh r0, [r5, 0xA]
-	bl sub_809A7DC
+	bl BagGetQuantityByItemId
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16

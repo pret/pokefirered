@@ -2069,7 +2069,7 @@ sub_8108DC8: @ 8108DC8
 	adds r4, r1, r0
 	ldr r0, [r4]
 	ldrb r1, [r4, 0x4]
-	bl sub_809A584
+	bl BagPocketCompaction
 	ldr r3, _08108E40 @ =gUnknown_203AD10
 	ldr r0, [r3]
 	adds r0, 0xA

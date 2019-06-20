@@ -140,7 +140,6 @@ SECTIONS {
         src/item_menu_icons.o(.text);
         asm/battle_anim_mon_movement.o(.text);
         src/item.o(.text);
-        asm/item.o(.text);
         asm/shop.o(.text);
         src/berry.o(.text);
         asm/script_menu.o(.text);

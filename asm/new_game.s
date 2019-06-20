@@ -262,7 +262,7 @@ sub_8054A60: @ 8054A60
 	ldr r1, _08054B68 @ =0x00000296
 	adds r0, r1
 	strh r5, [r0]
-	bl sub_809A2DC
+	bl ClearItemSlotsInAllBagPockets
 	bl sub_80EB658
 	bl sub_809C794
 	bl sub_80BDD34

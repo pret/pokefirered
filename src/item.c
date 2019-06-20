@@ -4,10 +4,15 @@
 #include "item.h"
 #include "item_use.h"
 #include "load_save.h"
+#include "malloc.h"
+#include "quest_log.h"
 #include "string_util.h"
 #include "strings.h"
 #include "constants/hold_effects.h"
 #include "constants/items.h"
+#include "constants/maps.h"
+
+void SortAndCompactBagPocket(struct BagPocket * pocket);
 
 // Item descriptions and data
 #include "data/items.h"
@@ -49,7 +54,7 @@ void ApplyNewEncryptionKeyToBagItems_(u32 key) {
     ApplyNewEncryptionKeyToBagItems(key);
 }
 
-void sub_8099E44(void)
+void SetBagPocketsPointers(void)
 {
     gBagPockets[POCKET_ITEMS - 1].itemSlots = gSaveBlock1Ptr->bagPocket_Items;
     gBagPockets[POCKET_ITEMS - 1].capacity = BAG_ITEMS_COUNT;
@@ -76,7 +81,7 @@ void CopyItemName(u16 itemId, u8 * dest)
     }
 }
 
-s8 sub_8099ECC(u8 pocketId)
+s8 BagPocketGetFirstEmptySlot(u8 pocketId)
 {
     u16 i;
 
@@ -89,7 +94,7 @@ s8 sub_8099ECC(u8 pocketId)
     return -1;
 }
 
-bool8 sub_8099F08(u8 pocketId)
+bool8 IsPocketNotEmpty(u8 pocketId)
 {
     u8 i;
 
@@ -132,7 +137,7 @@ bool8 CheckBagHasItem(u16 itemId, u16 count)
     return FALSE;
 }
 
-bool8 sub_8099FAC(void)
+bool8 CheckHasAtLeastOneBerry(void)
 {
     u8 itemId;
     bool8 exists;
@@ -143,7 +148,7 @@ bool8 sub_8099FAC(void)
         gSpecialVar_Result = FALSE;
         return FALSE;
     }
-    for (itemId = ITEM_CHERI_BERRY; itemId <= ITEM_ENIGMA_BERRY; itemId++)
+    for (itemId = FIRST_BERRY_INDEX; itemId <= LAST_BERRY_INDEX; itemId++)
     {
         exists = CheckBagHasItem(itemId, 1);
         if (exists)
@@ -185,7 +190,7 @@ bool8 CheckBagHasSpace(u16 itemId, u16 count)
         }
     }
 
-    if (sub_8099ECC(pocket) != -1)
+    if (BagPocketGetFirstEmptySlot(pocket) != -1)
         return TRUE;
 
     return FALSE;
@@ -225,7 +230,7 @@ bool8 AddBagItem(u16 itemId, u16 count)
 
     if (pocket == POCKET_TM_CASE - 1 && !CheckBagHasItem(ITEM_TM_CASE, 1))
     {
-        idx = sub_8099ECC(POCKET_KEY_ITEMS - 1);
+        idx = BagPocketGetFirstEmptySlot(POCKET_KEY_ITEMS - 1);
         if (idx == -1)
             return FALSE;
         gBagPockets[POCKET_KEY_ITEMS - 1].itemSlots[idx].itemId = ITEM_TM_CASE;
@@ -234,7 +239,7 @@ bool8 AddBagItem(u16 itemId, u16 count)
 
     if (pocket == POCKET_BERRY_POUCH - 1 && !CheckBagHasItem(ITEM_BERRY_POUCH, 1))
     {
-        idx = sub_8099ECC(POCKET_KEY_ITEMS - 1);
+        idx = BagPocketGetFirstEmptySlot(POCKET_KEY_ITEMS - 1);
         if (idx == -1)
             return FALSE;
         gBagPockets[POCKET_KEY_ITEMS - 1].itemSlots[idx].itemId = ITEM_BERRY_POUCH;
@@ -245,7 +250,7 @@ bool8 AddBagItem(u16 itemId, u16 count)
     if (itemId == ITEM_BERRY_POUCH)
         FlagSet(FLAG_0x847);
 
-    idx = sub_8099ECC(pocket);
+    idx = BagPocketGetFirstEmptySlot(pocket);
     if (idx == -1)
         return FALSE;
 
@@ -309,7 +314,7 @@ void ClearItemSlots(struct ItemSlot * slots, u8 capacity)
     }
 }
 
-void sub_809A2A4(void)
+void ClearPCItemSlots(void)
 {
     u16 i;
 
@@ -320,7 +325,7 @@ void sub_809A2A4(void)
     }
 }
 
-void sub_809A2DC(void)
+void ClearItemSlotsInAllBagPockets(void)
 {
     u16 i;
 
@@ -330,7 +335,7 @@ void sub_809A2DC(void)
     }
 }
 
-s8 sub_809A304(void)
+s8 PCItemsGetFirstEmptySlot(void)
 {
     s8 i;
 
@@ -343,7 +348,7 @@ s8 sub_809A304(void)
     return -1;
 }
 
-u8 sub_809A33C(void)
+u8 CountItemsInPC(void)
 {
     u8 count = 0;
     u8 i;
@@ -397,7 +402,7 @@ bool8 AddPCItem(u16 itemId, u16 count)
         }
     }
 
-    idx = sub_809A304();
+    idx = PCItemsGetFirstEmptySlot();
     if (idx == -1)
         return FALSE;
 
@@ -448,7 +453,7 @@ void ItemPcCompaction(void)
     }
 }
 
-void sub_809A540(void)
+void RegisteredItemHandleBikeSwap(void)
 {
     switch (gSaveBlock1Ptr->registeredItem)
     {
@@ -461,7 +466,7 @@ void sub_809A540(void)
     }
 }
 
-void sub_809A578(struct ItemSlot * a, struct ItemSlot * b)
+void SwapItemSlots(struct ItemSlot * a, struct ItemSlot * b)
 {
     struct ItemSlot c;
     c = *a;
@@ -469,7 +474,7 @@ void sub_809A578(struct ItemSlot * a, struct ItemSlot * b)
     *b = c;
 }
 
-void sub_809A584(struct ItemSlot * slots, u8 capacity)
+void BagPocketCompaction(struct ItemSlot * slots, u8 capacity)
 {
     u16 i, j;
 
@@ -479,8 +484,200 @@ void sub_809A584(struct ItemSlot * slots, u8 capacity)
         {
             if (GetBagItemQuantity(&slots[i].quantity) == 0)
             {
-                sub_809A578(&slots[i], &slots[j]);
+                SwapItemSlots(&slots[i], &slots[j]);
             }
         }
     }
+}
+
+void SortPocketAndPlaceHMsFirst(struct BagPocket * pocket)
+{
+    u16 i;
+    u16 j = 0;
+    u16 k;
+    struct ItemSlot * buff;
+
+    SortAndCompactBagPocket(pocket);
+
+    for (i = 0; i < pocket->capacity; i++)
+    {
+        if (pocket->itemSlots[i].itemId == ITEM_NONE && GetBagItemQuantity(&pocket->itemSlots[i].quantity) == 0)
+            return;
+        if (pocket->itemSlots[i].itemId >= ITEM_HM01 && GetBagItemQuantity(&pocket->itemSlots[i].quantity) != 0)
+        {
+            for (j = i + 1; j < pocket->capacity; j++)
+            {
+                if (pocket->itemSlots[j].itemId == ITEM_NONE && GetBagItemQuantity(&pocket->itemSlots[j].quantity) == 0)
+                    break;
+            }
+            break;
+        }
+    }
+
+    for (k = 0; k < pocket->capacity; k++)
+        pocket->itemSlots[k].quantity = GetBagItemQuantity(&pocket->itemSlots[k].quantity);
+    buff = AllocZeroed(pocket->capacity * sizeof(struct ItemSlot));
+    CpuCopy16(pocket->itemSlots + i, buff, (j - i) * sizeof(struct ItemSlot));
+    CpuCopy16(pocket->itemSlots, buff + (j - i), i * sizeof(struct ItemSlot));
+    CpuCopy16(buff, pocket->itemSlots, pocket->capacity * sizeof(struct ItemSlot));
+    for (k = 0; k < pocket->capacity; k++)
+        SetBagItemQuantity(&pocket->itemSlots[k].quantity, pocket->itemSlots[k].quantity);
+    Free(buff);
+}
+
+void SortAndCompactBagPocket(struct BagPocket * pocket)
+{
+    u16 i, j;
+
+    for (i = 0; i < pocket->capacity; i++)
+    {
+        for (j = i + 1; j < pocket->capacity; j++)
+        {
+            if (GetBagItemQuantity(&pocket->itemSlots[i].quantity) == 0 || (GetBagItemQuantity(&pocket->itemSlots[j].quantity) != 0 && pocket->itemSlots[i].itemId > pocket->itemSlots[j].itemId))
+                SwapItemSlots(&pocket->itemSlots[i], &pocket->itemSlots[j]);
+        }
+    }
+}
+
+u16 BagGetItemIdByPocketPosition(u8 pocketId, u16 slotId)
+{
+    return gBagPockets[pocketId - 1].itemSlots[slotId].itemId;
+}
+
+u16 BagGetQuantityByPocketPosition(u8 pocketId, u16 slotId)
+{
+    return GetBagItemQuantity(&gBagPockets[pocketId - 1].itemSlots[slotId].quantity);
+}
+
+u16 BagGetQuantityByItemId(u16 itemId)
+{
+    u16 i;
+    struct BagPocket * pocket = &gBagPockets[ItemId_GetPocket(itemId) - 1];
+
+    for (i = 0; i < pocket->capacity; i++)
+    {
+        if (pocket->itemSlots[i].itemId == itemId)
+            return GetBagItemQuantity(&pocket->itemSlots[i].quantity);
+    }
+
+    return 0;
+}
+
+void sub_809A824(u16 itemId)
+{
+    struct QuestLogStruct_809A824
+    {
+        u16 itemId;
+        u8 mapSectionId;
+    } * ptr;
+    if
+    (
+        itemId == ITEM_OAKS_PARCEL
+     || itemId == ITEM_POKE_FLUTE
+     || itemId == ITEM_SECRET_KEY
+     || itemId == ITEM_BIKE_VOUCHER
+     || itemId == ITEM_GOLD_TEETH
+     || itemId == ITEM_OLD_AMBER
+     || itemId == ITEM_CARD_KEY
+     || itemId == ITEM_LIFT_KEY
+     || itemId == ITEM_HELIX_FOSSIL
+     || itemId == ITEM_DOME_FOSSIL
+     || itemId == ITEM_SILPH_SCOPE
+     || itemId == ITEM_BICYCLE
+     || itemId == ITEM_TOWN_MAP
+     || itemId == ITEM_VS_SEEKER
+     || itemId == ITEM_TEACHY_TV
+     || itemId == ITEM_RAINBOW_PASS
+     || itemId == ITEM_TEA
+     || itemId == ITEM_POWDER_JAR
+     || itemId == ITEM_RUBY
+     || itemId == ITEM_SAPPHIRE
+    )
+    {
+        if (itemId != ITEM_TOWN_MAP || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(PALLET_TOWN_GARYS_HOUSE) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(PALLET_TOWN_GARYS_HOUSE)))
+        {
+            ptr = malloc(sizeof(*ptr));
+            ptr->itemId = itemId;
+            ptr->mapSectionId = gMapHeader.regionMapSectionId;
+            sub_8113550(40, (void *)ptr);
+            free(ptr);
+        }
+    }
+}
+
+u16 SanitizeItemId(u16 itemId)
+{
+    if (itemId >= ITEM_N_A)
+        return ITEM_NONE;
+    return itemId;
+}
+
+const u8 * ItemId_GetName(u16 itemId)
+{
+    return gItems[SanitizeItemId(itemId)].name;
+}
+
+u16 itemid_get_number(u16 itemId)
+{
+    return gItems[SanitizeItemId(itemId)].itemId;
+}
+
+u16 itemid_get_market_price(u16 itemId)
+{
+    return gItems[SanitizeItemId(itemId)].price;
+}
+
+u8 ItemId_GetHoldEffect(u16 itemId)
+{
+    return gItems[SanitizeItemId(itemId)].holdEffect;
+}
+
+u8 ItemId_GetHoldEffectParam(u16 itemId)
+{
+    return gItems[SanitizeItemId(itemId)].holdEffectParam;
+}
+
+const u8 * ItemId_GetDescription(u16 itemId)
+{
+    return gItems[SanitizeItemId(itemId)].description;
+}
+
+bool8 itemid_is_unique(u16 itemId)
+{
+    return gItems[SanitizeItemId(itemId)].importance;
+}
+
+u8 itemid_get_x19(u16 itemId)
+{
+    return gItems[SanitizeItemId(itemId)].exitsBagOnUse;
+}
+
+u8 ItemId_GetPocket(u16 itemId)
+{
+    return gItems[SanitizeItemId(itemId)].pocket;
+}
+
+u8 ItemId_GetType(u16 itemId)
+{
+    return gItems[SanitizeItemId(itemId)].type;
+}
+
+ItemUseFunc ItemId_GetFieldFunc(u16 itemId)
+{
+    return gItems[SanitizeItemId(itemId)].fieldUseFunc;
+}
+
+bool8 ItemId_GetBattleUsage(u16 itemId)
+{
+    return gItems[SanitizeItemId(itemId)].battleUsage;
+}
+
+ItemUseFunc ItemId_GetBattleFunc(u16 itemId)
+{
+    return gItems[SanitizeItemId(itemId)].battleUseFunc;
+}
+
+u8 ItemId_GetSecondaryId(u16 itemId)
+{
+    return gItems[SanitizeItemId(itemId)].secondaryId;
 }

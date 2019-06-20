@@ -359,7 +359,7 @@ static bool8 DoSetUpTMCaseUI(void)
             gMain.state++;
         break;
     case 9:
-        sub_809A5E4(&gBagPockets[POCKET_TM_CASE - 1]);
+        SortPocketAndPlaceHMsFirst(&gBagPockets[POCKET_TM_CASE - 1]);
         gMain.state++;
         break;
     case 10:
@@ -648,7 +648,7 @@ static void TMCaseSetup_GetTMCount(void)
     struct BagPocket * pocket = &gBagPockets[POCKET_TM_CASE - 1];
     u16 i;
 
-    sub_809A584(pocket->itemSlots, pocket->capacity);
+    BagPocketCompaction(pocket->itemSlots, pocket->capacity);
     sTMCaseDynamicResources->numTMs = 0;
     for (i = 0; i < pocket->capacity; i++)
     {

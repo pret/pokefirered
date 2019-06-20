@@ -5,7 +5,7 @@
 
 extern const struct Berry sBerries[];
 
-#define ENIGMA_BERRY_STRUCT ({const struct Berry2 *berries = (const struct Berry2 *)sBerries;berries[ITEM_ENIGMA_BERRY - ITEM_CHERI_BERRY];})
+#define ENIGMA_BERRY_STRUCT ({const struct Berry2 *berries = (const struct Berry2 *)sBerries;berries[ITEM_ENIGMA_BERRY - FIRST_BERRY_INDEX];})
 
 void sub_809C718(void)
 {
@@ -136,10 +136,10 @@ bool32 IsEnigmaBerryValid(void)
 
 const struct Berry * sub_809C8A0(u8 berryIdx)
 {
-    if (berryIdx == ITEM_ENIGMA_BERRY - ITEM_CHERI_BERRY + 1 && IsEnigmaBerryValid())
+    if (berryIdx == ITEM_TO_BERRY(ITEM_ENIGMA_BERRY) && IsEnigmaBerryValid())
         return (struct Berry *)&gSaveBlock1Ptr->enigmaBerry.berry;
 
-    if (berryIdx == 0 || berryIdx > ITEM_ENIGMA_BERRY - ITEM_CHERI_BERRY + 1)
+    if (berryIdx == 0 || berryIdx > ITEM_TO_BERRY(ITEM_ENIGMA_BERRY))
         berryIdx = 1;
 
     return &sBerries[berryIdx - 1];
@@ -147,18 +147,18 @@ const struct Berry * sub_809C8A0(u8 berryIdx)
 
 u8 ItemIdToBerryType(u16 itemId)
 {
-    if (itemId - ITEM_CHERI_BERRY < 0 || itemId - ITEM_CHERI_BERRY > ITEM_ENIGMA_BERRY - ITEM_CHERI_BERRY)
+    if (itemId - FIRST_BERRY_INDEX < 0 || itemId - FIRST_BERRY_INDEX > ITEM_ENIGMA_BERRY - FIRST_BERRY_INDEX)
         return 1;
 
-    return itemId - ITEM_CHERI_BERRY + 1;
+    return ITEM_TO_BERRY(itemId);
 }
 
 u16 BerryTypeToItemId(u16 berryType)
 {
-    if (berryType - 1 < 0 || berryType - 1 > ITEM_ENIGMA_BERRY - ITEM_CHERI_BERRY)
-        return ITEM_CHERI_BERRY;
+    if (berryType - 1 < 0 || berryType - 1 > ITEM_ENIGMA_BERRY - FIRST_BERRY_INDEX)
+        return FIRST_BERRY_INDEX;
 
-    return berryType + ITEM_CHERI_BERRY - 1;
+    return berryType + FIRST_BERRY_INDEX - 1;
 }
 
 void GetBerryNameByBerryType(u8 berryType, u8 * dest)

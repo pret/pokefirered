@@ -1443,7 +1443,7 @@ sub_813D8AC: @ 813D8AC
 	push {r4,lr}
 	ldr r4, _0813D904 @ =gBagPockets + 0x20
 	adds r0, r4, 0
-	bl sub_809A720
+	bl SortAndCompactBagPocket
 	ldr r3, _0813D908 @ =gUnknown_203F36C
 	ldr r1, [r3]
 	movs r0, 0

@@ -985,8 +985,8 @@ void sub_8111368(void)
 {
     gUnknown_203ADFA = 2;
     sub_806E6FC();
-    sub_809A2DC();
-    sub_809A2A4();
+    ClearItemSlotsInAllBagPockets();
+    ClearPCItemSlots();
     if (sub_8110AC8() == 1)
     {
         sub_8111274(gUnknown_203ADF8, 0);

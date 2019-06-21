@@ -63,6 +63,8 @@ extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 extern u16 gAnimSpeciesByBanks[BATTLE_BANKS_COUNT];
 extern u8 gUnknown_02038440;
+extern u8 gBattlerSpriteIds[MAX_BATTLERS_COUNT];
+extern u8 gBattleAnimAttacker;
 
 void ClearBattleAnimationVars(void);
 void DoMoveAnim(u16 move);
@@ -77,6 +79,7 @@ s8 BattleAnimAdjustPanning(s8 pan);
 s8 BattleAnimAdjustPanning2(s8 pan);
 s16 sub_80A52EC(s16 a);
 s16 CalculatePanIncrement(s16 sourcePan, s16 targetPan, s16 incrementPan);
+bool8 sub_8072DF0(u8 battlerId);
 
 // battle_anim_80FE840.s
 void SetAnimBgAttribute(u8 bgId, u8 attributeId, u8 value);

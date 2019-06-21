@@ -138,8 +138,9 @@ SECTIONS {
         asm/mail_data.o(.text);
         asm/map_name_popup.o(.text);
         src/item_menu_icons.o(.text);
+        src/battle_anim_mon_movement.o(.text);
         asm/battle_anim_mon_movement.o(.text);
-        asm/item.o(.text);
+        src/item.o(.text);
         asm/shop.o(.text);
         src/berry.o(.text);
         asm/script_menu.o(.text);
@@ -153,7 +154,7 @@ SECTIONS {
         src/fldeff_berrytree.o(.text);
         asm/field_special_scene.o(.text);
         asm/safari_zone.o(.text);
-        asm/item_use.o(.text);
+        src/item_use.o(.text);
         asm/battle_anim_effects_1.o(.text);
         asm/battle_anim_effects_2.o(.text);
         asm/water.o(.text);
@@ -284,7 +285,7 @@ SECTIONS {
         src/ss_anne.o(.text);
         src/cereader_tool.o(.text);
         src/trainer_tower.o(.text);
-        src/unk_815EDDC.o(.text);
+        src/berry_powder.o(.text);
         src/unk_815F138.o(.text);
         src/berry_fix_program.o(.text);
     } =0
@@ -409,7 +410,9 @@ SECTIONS {
         data/field_weather.o(.rodata);
         data/data_835B488.o(.rodata);
         src/item_menu_icons.o(.rodata);
-        data/data_835B488.o(.rodata.83D4E4C);
+        src/battle_anim_mon_movement.o(.rodata);
+        src/item.o(.rodata);
+        data/data_835B488.o(.rodata.83DF09C);
         src/heal_location.o(.rodata);
         data/data_835B488.o(.rodata.83EEC98);
         src/battle_ai_script_commands.o(.rodata);

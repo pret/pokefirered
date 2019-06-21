@@ -161,4 +161,20 @@ extern const u8 gText_WithdrawItem[];
 extern const u8 gText_Withdraw[];
 extern const u8 gText_ReturnToPC[];
 
+extern const u8 gUnknown_8416425[];
+extern const u8 gUnknown_8416451[];
+extern const u8 gUnknown_8416537[];
+extern const u8 gUnknown_841658C[];
+extern const u8 gUnknown_841659E[];
+extern const u8 gUnknown_84165D2[];
+extern const u8 gUnknown_8416600[];
+extern const u8 gUnknown_8416631[];
+extern const u8 gUnknown_8416644[];
+extern const u8 gUnknown_841665C[];
+extern const u8 gUnknown_8416690[];
+extern const u8 gUnknown_84166A7[];
+extern const u8 gUnknown_84169DC[];
+
+extern const u8 gUnknown_84162BD[];
+
 #endif //GUARD_STRINGS_H

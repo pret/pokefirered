@@ -9,7 +9,7 @@
 sub_80EB658: @ 80EB658
 	push {r4-r6,lr}
 	movs r4, 0
-	bl sub_809A2A4
+	bl ClearPCItemSlots
 	ldr r1, _080EB6A8 @ =gUnknown_8402220
 	ldrh r0, [r1]
 	cmp r0, 0
@@ -727,7 +727,7 @@ sub_80EBC38: @ 80EBC38
 	lsls r6, r0, 3
 	ldr r7, _080EBC6C @ =gTasks+0x8
 	adds r4, r6, r7
-	bl sub_809A33C
+	bl CountItemsInPC
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x4]

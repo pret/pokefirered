@@ -139,7 +139,7 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special sub_80BDB1C
 	def_special nullsub_75
-	def_special sub_809A540
+	def_special RegisteredItemHandleBikeSwap
 	def_special CalculatePlayerPartyCount
 	def_special CountPartyNonEggMons
 	def_special CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
@@ -420,7 +420,7 @@ gSpecials:: @ 815FD60
 	def_special sub_812B478
 	def_special sub_812B484
 	def_special sub_810B82C
-	def_special sub_8099FAC
+	def_special CheckHasAtLeastOneBerry
 	def_special sub_815F094
 	def_special sub_815F114
 	def_special sub_815EEB0

@@ -552,7 +552,7 @@ static void Task_TopMenuHandleInput(u8 taskId)
     if (FindTaskIdByFunc(Task_FCOpenOrCloseInfoBox) == 0xFF)
     {
         RunTextPrinters();
-        if ((JOY_NEW(SELECT_BUTTON)) && !sFameCheckerData->inPickMode && sFameCheckerData->savedCallback != UseFameCheckerFromMenu)
+        if ((JOY_NEW(SELECT_BUTTON)) && !sFameCheckerData->inPickMode && sFameCheckerData->savedCallback != ReturnToBagFromKeyItem)
             task->func = Task_StartToCloseFameChecker;
         else if (JOY_NEW(START_BUTTON))
         {

@@ -41,6 +41,7 @@ static void sub_815CFEC(struct UnkStruct2 *arg0, s32 arg1, bool32 arg2);
 static bool32 SharesTileWithAnyActive(u32 id);
 static bool32 SharesPalWithAnyActive(u32 id);
 static void sub_8035648(void);
+static u8 sub_815D324(u32 shape, u32 size);
 
 // ewram
 static EWRAM_DATA struct UnkStruct1 *gUnknown_203F454 = {0};
@@ -430,7 +431,7 @@ static bool32 SharesPalWithAnyActive(u32 id)
     return FALSE;
 }
 
-u8 sub_815D324(u32 shape, u32 size)
+static u8 sub_815D324(u32 shape, u32 size)
 {
     return gUnknown_8479658[shape][size];
 }

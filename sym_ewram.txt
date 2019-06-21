@@ -985,9 +985,10 @@ gUnknown_2039994: @ 2039994
 gUnknown_2039996: @ 2039996
 	.space 0x2
 
-gUnknown_2039998: @ 2039998
-	.space 0x4
+	.align 2
+	.include "src/item_use.o"
 
+	.align 2
 gUnknown_203999C: @ 203999C
 	.space 0x8
 
@@ -1570,4 +1571,4 @@ gUnknown_203F440: @ 203F440
 	.align 2
 	.include "src/trainer_tower.o"
 	.align 2
-	.include "src/unk_815EDDC.o"
+	.include "src/berry_powder.o"

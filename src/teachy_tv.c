@@ -736,7 +736,7 @@ static void TeachyTvOptionListController(u8 taskId)
     {
         input = ListMenuHandleInput(data[0]);
         ListMenuGetScrollAndRow(data[0], &sStaticResources.scrollOffset, &sStaticResources.selectedRow);
-        if ((JOY_NEW(SELECT_BUTTON) && sStaticResources.callback != UseFameCheckerFromMenu))
+        if ((JOY_NEW(SELECT_BUTTON) && sStaticResources.callback != ReturnToBagFromKeyItem))
         {
             PlaySE(SE_SELECT);
             TeachyTvQuitBeginFade(taskId);

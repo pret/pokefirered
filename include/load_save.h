@@ -25,5 +25,6 @@ void MoveSaveBlocks_ResetHeap(void);
 void ApplyNewEncryptionKeyToAllEncryptedData(u32 encryptionKey);
 void ApplyNewEncryptionKeyToBagItems(u32 encryptionKey);
 void ApplyNewEncryptionKeyToWord(u32 * word, u32 encryptionKey);
+void ApplyNewEncryptionKeyToHword(u16 * hword, u32 encryptionKey);
 
 #endif // GUARD_LOAD_SAVE_H

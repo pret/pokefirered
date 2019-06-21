@@ -2758,7 +2758,7 @@ _0814D03C:
 	movs r3, 0x6
 	bl ConvertIntToDecimalStringN
 	ldr r4, _0814D080 @ =gStringVar2
-	bl sub_815EFA0
+	bl GetBerryPowder
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0
@@ -2963,7 +2963,7 @@ _0814D1D0:
 	bl memset
 	cmp r4, 0
 	bne _0814D202
-	bl sub_8099FAC
+	bl CheckHasAtLeastOneBerry
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814D1FE

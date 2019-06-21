@@ -1274,7 +1274,7 @@ _0811F47C:
 	cmp r0, 0x3
 	bne _0811F492
 	adds r0, r4, 0
-	bl sub_80A1150
+	bl GetItemCompatibilityRule
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -12617,7 +12617,7 @@ sub_8124DB0: @ 8124DB0
 	movs r0, 0x6
 	movs r1, 0
 	movs r2, 0xFF
-	bl sub_813CD50
+	bl InitBerryPouch
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8124DB0
@@ -12644,7 +12644,7 @@ sub_8124DE0: @ 8124DE0
 	push {r4,lr}
 	ldr r4, _08124E0C @ =gSpecialVar_ItemId
 	ldrh r0, [r4]
-	bl sub_80A1150
+	bl GetItemCompatibilityRule
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -13730,8 +13730,8 @@ _081256F2:
 	bx r0
 	thumb_func_end sub_81256C0
 
-	thumb_func_start sub_81256F8
-sub_81256F8: @ 81256F8
+	thumb_func_start ItemUseCB_PpRestore
+ItemUseCB_PpRestore: @ 81256F8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -13802,7 +13802,7 @@ _0812577E:
 _08125784: .4byte gUnknown_203B0A0
 _08125788: .4byte gTasks
 _0812578C: .4byte sub_81256C0
-	thumb_func_end sub_81256F8
+	thumb_func_end ItemUseCB_PpRestore
 
 	thumb_func_start sub_8125790
 sub_8125790: @ 8125790

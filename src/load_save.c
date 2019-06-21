@@ -7,7 +7,7 @@
 #include "malloc.h"
 #include "item.h"
 
-extern void sub_8099E44(void);
+extern void SetBagPocketsPointers(void);
 extern void sub_8110840(void *oldSave);
 extern void sub_8055778(int);
 extern void sub_8054F38(u32 newKey);
@@ -80,7 +80,7 @@ void SetSaveBlocksPointers(void)
     *sav1_LocalVar = (void*)(&gSaveBlock1) + offset;
     gPokemonStoragePtr = (void*)(&gPokemonStorage) + offset;
 
-    sub_8099E44();
+    SetBagPocketsPointers();
     sub_8110840(oldSave);
 }
 

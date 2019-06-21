@@ -31,6 +31,8 @@ extern MainCallback gFieldCallback;
 
 extern struct WarpData gUnknown_2031DBC;
 
+extern u8 gUnknown_2031DE0;
+
 void IncrementGameStat(u8 index);
 
 void Overworld_SetMapObjTemplateCoords(u8, s16, s16);
@@ -112,5 +114,7 @@ void sub_805671C(void);
 void sub_8055DC4(void);
 bool8 sub_8055FC4(void);
 bool8 is_light_level_8_or_9(u8 mapType);
+bool32 sub_8055C9C(void);
+void sub_8054D70(void);
 
 #endif //GUARD_ROM4_H

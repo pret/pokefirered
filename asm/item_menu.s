@@ -138,8 +138,8 @@ _08107EB0: .4byte gUnknown_203AD10
 _08107EB4: .4byte gUnknown_203ACFC
 	thumb_func_end sub_8107DB4
 
-	thumb_func_start UseFameCheckerFromMenu
-UseFameCheckerFromMenu: @ 8107EB8
+	thumb_func_start ReturnToBagFromKeyItem
+ReturnToBagFromKeyItem: @ 8107EB8
 	push {lr}
 	ldr r2, _08107EC8 @ =sub_80568A8
 	movs r0, 0
@@ -149,7 +149,7 @@ UseFameCheckerFromMenu: @ 8107EB8
 	bx r0
 	.align 2, 0
 _08107EC8: .4byte sub_80568A8
-	thumb_func_end UseFameCheckerFromMenu
+	thumb_func_end ReturnToBagFromKeyItem
 
 	thumb_func_start sub_8107ECC
 sub_8107ECC: @ 8107ECC
@@ -1739,8 +1739,8 @@ _08108B48: .4byte gUnknown_203AD18
 _08108B4C: .4byte gUnknown_203AD1C
 	thumb_func_end sub_8108B04
 
-	thumb_func_start sub_8108B50
-sub_8108B50: @ 8108B50
+	thumb_func_start ItemMenu_StartFadeToExitCallback
+ItemMenu_StartFadeToExitCallback: @ 8108B50
 	push {r4,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -1768,7 +1768,7 @@ sub_8108B50: @ 8108B50
 	.align 2, 0
 _08108B84: .4byte gTasks
 _08108B88: .4byte sub_8108B8C
-	thumb_func_end sub_8108B50
+	thumb_func_end ItemMenu_StartFadeToExitCallback
 
 	thumb_func_start sub_8108B8C
 sub_8108B8C: @ 8108B8C
@@ -2069,7 +2069,7 @@ sub_8108DC8: @ 8108DC8
 	adds r4, r1, r0
 	ldr r0, [r4]
 	ldrb r1, [r4, 0x4]
-	bl sub_809A584
+	bl BagPocketCompaction
 	ldr r3, _08108E40 @ =gUnknown_203AD10
 	ldr r0, [r3]
 	adds r0, 0xA
@@ -2150,8 +2150,8 @@ _08108E58:
 	bx r0
 	thumb_func_end sub_8108E54
 
-	thumb_func_start sub_8108E70
-sub_8108E70: @ 8108E70
+	thumb_func_start DisplayItemMessageInBag
+DisplayItemMessageInBag: @ 8108E70
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -2202,17 +2202,17 @@ sub_8108E70: @ 8108E70
 	bx r0
 	.align 2, 0
 _08108EDC: .4byte gTasks+0x8
-	thumb_func_end sub_8108E70
+	thumb_func_end DisplayItemMessageInBag
 
-	thumb_func_start sub_8108EE0
-sub_8108EE0: @ 8108EE0
+	thumb_func_start ItemMenu_SetExitCallback
+ItemMenu_SetExitCallback: @ 8108EE0
 	ldr r1, _08108EE8 @ =gUnknown_203AD10
 	ldr r1, [r1]
 	str r0, [r1]
 	bx lr
 	.align 2, 0
 _08108EE8: .4byte gUnknown_203AD10
-	thumb_func_end sub_8108EE0
+	thumb_func_end ItemMenu_SetExitCallback
 
 	thumb_func_start sub_8108EEC
 sub_8108EEC: @ 8108EEC
@@ -2376,12 +2376,12 @@ _08109018:
 	adds r0, r6
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _08109040 @ =sub_8108B50
+	ldr r1, _08109040 @ =ItemMenu_StartFadeToExitCallback
 	b _081090C4
 	.align 2, 0
 _08109038: .4byte gSpecialVar_ItemId
 _0810903C: .4byte gTasks
-_08109040: .4byte sub_8108B50
+_08109040: .4byte ItemMenu_StartFadeToExitCallback
 _08109044:
 	movs r0, 0x5
 	bl PlaySE
@@ -2402,13 +2402,13 @@ _08109044:
 	adds r0, r6
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _08109080 @ =sub_8108B50
+	ldr r1, _08109080 @ =ItemMenu_StartFadeToExitCallback
 	b _081090C4
 	.align 2, 0
 _08109074: .4byte gUnknown_203AD10
 _08109078: .4byte gSpecialVar_ItemId
 _0810907C: .4byte gTasks
-_08109080: .4byte sub_8108B50
+_08109080: .4byte ItemMenu_StartFadeToExitCallback
 _08109084:
 	bl sub_8108978
 	ldrb r0, [r7]
@@ -4376,7 +4376,7 @@ sub_810A0A8: @ 810A0A8
 	ldr r3, _0810A11C @ =sub_810A1D0
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8108E70
+	bl DisplayItemMessageInBag
 	b _0810A166
 	.align 2, 0
 _0810A110: .4byte gTasks+0x8
@@ -4404,13 +4404,13 @@ _0810A13E:
 	mov r0, r8
 	subs r0, 0x8
 	adds r0, r6, r0
-	ldr r1, _0810A15C @ =sub_8108B50
+	ldr r1, _0810A15C @ =ItemMenu_StartFadeToExitCallback
 	str r1, [r0]
 	b _0810A166
 	.align 2, 0
 _0810A154: .4byte gUnknown_203AD10
 _0810A158: .4byte sub_8126EDC
-_0810A15C: .4byte sub_8108B50
+_0810A15C: .4byte ItemMenu_StartFadeToExitCallback
 _0810A160:
 	adds r0, r7, 0
 	bl sub_810A18C
@@ -4430,7 +4430,7 @@ sub_810A170: @ 810A170
 	ldr r2, _0810A184 @ =gText_ThereIsNoPokemon
 	ldr r3, _0810A188 @ =sub_810A1D0
 	movs r1, 0x2
-	bl sub_8108E70
+	bl DisplayItemMessageInBag
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -4456,7 +4456,7 @@ sub_810A18C: @ 810A18C
 	adds r0, r4, 0
 	movs r1, 0x2
 	adds r2, r5, 0
-	bl sub_8108E70
+	bl DisplayItemMessageInBag
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -4697,7 +4697,7 @@ sub_810A370: @ 810A370
 	ldr r3, _0810A3C8 @ =sub_810A1D0
 	adds r0, r5, 0
 	movs r1, 0x2
-	bl sub_8108E70
+	bl DisplayItemMessageInBag
 	b _0810A426
 	.align 2, 0
 _0810A3BC: .4byte gTasks+0x8
@@ -4719,9 +4719,9 @@ _0810A3DC:
 	bne _0810A3F8
 	ldr r0, _0810A3F4 @ =sub_810A448
 _0810A3E4:
-	bl sub_8108EE0
+	bl ItemMenu_SetExitCallback
 	adds r0, r5, 0
-	bl sub_8108B50
+	bl ItemMenu_StartFadeToExitCallback
 	b _0810A426
 	.align 2, 0
 _0810A3F0: .4byte 0x0000016d
@@ -4740,11 +4740,11 @@ _0810A3F8:
 	mov r0, r9
 	subs r0, 0x8
 	adds r0, r7, r0
-	ldr r1, _0810A41C @ =sub_8108B50
+	ldr r1, _0810A41C @ =ItemMenu_StartFadeToExitCallback
 	str r1, [r0]
 	b _0810A426
 	.align 2, 0
-_0810A41C: .4byte sub_8108B50
+_0810A41C: .4byte ItemMenu_StartFadeToExitCallback
 _0810A420:
 	adds r0, r5, 0
 	bl sub_810A18C
@@ -4776,7 +4776,7 @@ sub_810A448: @ 810A448
 	ldr r1, _0810A458 @ =sub_810A45C
 	movs r0, 0x1
 	movs r2, 0
-	bl sub_813CD50
+	bl InitBerryPouch
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -4826,7 +4826,7 @@ sub_810A468: @ 810A468
 	ldr r3, _0810A4C0 @ =sub_810A1D0
 	adds r0, r5, 0
 	movs r1, 0x2
-	bl sub_8108E70
+	bl DisplayItemMessageInBag
 	b _0810A51E
 	.align 2, 0
 _0810A4B4: .4byte gTasks+0x8
@@ -4848,9 +4848,9 @@ _0810A4D4:
 	bne _0810A4F0
 	ldr r0, _0810A4EC @ =sub_810A540
 _0810A4DC:
-	bl sub_8108EE0
+	bl ItemMenu_SetExitCallback
 	adds r0, r5, 0
-	bl sub_8108B50
+	bl ItemMenu_StartFadeToExitCallback
 	b _0810A51E
 	.align 2, 0
 _0810A4E8: .4byte 0x0000016d
@@ -4869,11 +4869,11 @@ _0810A4F0:
 	mov r0, r9
 	subs r0, 0x8
 	adds r0, r7, r0
-	ldr r1, _0810A514 @ =sub_8108B50
+	ldr r1, _0810A514 @ =ItemMenu_StartFadeToExitCallback
 	str r1, [r0]
 	b _0810A51E
 	.align 2, 0
-_0810A514: .4byte sub_8108B50
+_0810A514: .4byte ItemMenu_StartFadeToExitCallback
 _0810A518:
 	adds r0, r5, 0
 	bl sub_810A18C
@@ -4905,7 +4905,7 @@ sub_810A540: @ 810A540
 	ldr r1, _0810A550 @ =sub_810A554
 	movs r0, 0x3
 	movs r2, 0
-	bl sub_813CD50
+	bl InitBerryPouch
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -4954,9 +4954,9 @@ _0810A598:
 	bne _0810A5B4
 	ldr r0, _0810A5B0 @ =sub_810A668
 _0810A5A0:
-	bl sub_8108EE0
+	bl ItemMenu_SetExitCallback
 	adds r0, r5, 0
-	bl sub_8108B50
+	bl ItemMenu_StartFadeToExitCallback
 	b _0810A63E
 	.align 2, 0
 _0810A5AC: .4byte 0x0000016d
@@ -4981,7 +4981,7 @@ _0810A5B4:
 	ldr r3, _0810A5F4 @ =sub_810A1F8
 	adds r0, r5, 0
 	adds r2, r4, 0
-	bl sub_8108E70
+	bl DisplayItemMessageInBag
 	b _0810A63E
 	.align 2, 0
 _0810A5E8: .4byte gStringVar1
@@ -5019,7 +5019,7 @@ _0810A618:
 	ldr r3, _0810A650 @ =sub_810A770
 	adds r0, r7, 0
 	adds r2, r4, 0
-	bl sub_8108E70
+	bl DisplayItemMessageInBag
 _0810A63E:
 	pop {r4-r7}
 	pop {r0}
@@ -5050,7 +5050,7 @@ sub_810A668: @ 810A668
 	ldr r1, _0810A678 @ =sub_810A67C
 	movs r0, 0x2
 	movs r2, 0
-	bl sub_813CD50
+	bl InitBerryPouch
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -5112,7 +5112,7 @@ sub_810A690: @ 810A690
 	ldr r3, _0810A708 @ =sub_810A70C
 	adds r0, r5, 0
 	adds r2, r4, 0
-	bl sub_8108E70
+	bl DisplayItemMessageInBag
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -5426,7 +5426,7 @@ sub_810A940: @ 810A940
 	adds r0, r5, 0
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl sub_8108E70
+	bl DisplayItemMessageInBag
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -5803,7 +5803,7 @@ _0810ACEC:
 	ldr r3, _0810AD0C @ =sub_810A1D0
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8108E70
+	bl DisplayItemMessageInBag
 _0810ACF8:
 	add sp, 0x14
 	pop {r3,r4}
@@ -6860,7 +6860,7 @@ _0810B564:
 	ldr r0, _0810B5B4 @ =ItemUseCB_Medicine
 	str r0, [r1]
 	ldr r0, _0810B5B8 @ =sub_81279A4
-	bl sub_8108EE0
+	bl ItemMenu_SetExitCallback
 	mov r0, r9
 	subs r0, 0x8
 	add r0, r8

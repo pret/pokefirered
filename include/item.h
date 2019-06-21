@@ -1,18 +1,20 @@
-#ifndef ITEM_H
-#define ITEM_H
+#ifndef GUARD_ITEM_H
+#define GUARD_ITEM_H
+
+#include "global.h"
 
 typedef void (*ItemUseFunc)(u8);
 
 struct Item
 {
-    u8 name[14];
+    u8 name[ITEM_NAME_LENGTH];
     u16 itemId;
     u16 price;
     u8 holdEffect;
     u8 holdEffectParam;
     const u8 *description;
     u8 importance;
-    u8 unk19;
+    u8 exitsBagOnUse;
     u8 pocket;
     u8 type;
     ItemUseFunc fieldUseFunc;
@@ -60,20 +62,20 @@ u8 ItemId_GetBattleUsage(u16 itemId);
 ItemUseFunc ItemId_GetBattleFunc(u16 itemId);
 u8 ItemId_GetSecondaryId(u16 itemId);
 u16 itemid_get_market_price(u16 itemId);
-void sub_809A2DC(void);
-void sub_809A2A4(void);
+void ClearItemSlotsInAllBagPockets(void);
+void ClearPCItemSlots(void);
 void CopyItemName(u16, u8 *);
 void sub_809A824(u16 itemId);
 bool8 AddBagItem(u16 itemId, u16 amount);
 
-void sub_809A5E4(struct BagPocket *);
+void SortPocketAndPlaceHMsFirst(struct BagPocket *);
 u16 BagGetItemIdByPocketPosition(u8 a0, u16 a1);
 u16 BagGetQuantityByPocketPosition(u8 a0, u16 a1);
 bool8 itemid_is_unique(u16 itemId);
-void sub_809A584(struct ItemSlot * slots, u8 capacity);
-u16 GetBagItemId(u16 *);
+void BagPocketCompaction(struct ItemSlot * slots, u8 capacity);
+u16 GetPcItemQuantity(u16 *);
 
 void ItemPcCompaction(void);
 void RemoveItemFromPC(u16 itemId, u16 quantity);
 
-#endif // ITEM_H
+#endif // GUARD_ITEM_H

@@ -46,6 +46,7 @@ PREPROC := tools/preproc/preproc
 RAMSCRGEN := tools/ramscrgen/ramscrgen
 FIX := tools/gbafix/gbafix
 MAPJSON := tools/mapjson/mapjson
+JSONPROC := tools/jsonproc/jsonproc
 
 # Clear the default suffixes
 .SUFFIXES:
@@ -103,6 +104,7 @@ tools:
 	@$(MAKE) -C tools/mid2agb
 	@$(MAKE) -C tools/gbafix
 	@$(MAKE) -C tools/mapjson
+	@$(MAKE) -C tools/jsonproc
 
 # For contributors to make sure a change didn't affect the contents of the ROM.
 compare: rom
@@ -126,6 +128,7 @@ clean: tidy
 	@$(MAKE) clean -C tools/mid2agb
 	@$(MAKE) clean -C tools/gbafix
 	@$(MAKE) clean -C tools/mapjson
+	@$(MAKE) clean -C tools/jsonproc
 
 tidy:
 	rm -f $(ROM) $(ELF) $(MAP)
@@ -135,6 +138,7 @@ tidy:
 include graphics_file_rules.mk
 include tileset_rules.mk
 include map_data_rules.mk
+include json_data_rules.mk
 
 %.s: ;
 %.png: ;

@@ -138,6 +138,7 @@ SECTIONS {
         asm/mail_data.o(.text);
         asm/map_name_popup.o(.text);
         src/item_menu_icons.o(.text);
+        src/battle_anim_mon_movement.o(.text);
         asm/battle_anim_mon_movement.o(.text);
         src/item.o(.text);
         asm/shop.o(.text);
@@ -409,7 +410,7 @@ SECTIONS {
         data/field_weather.o(.rodata);
         data/data_835B488.o(.rodata);
         src/item_menu_icons.o(.rodata);
-        data/data_835B488.o(.rodata.83D4E4C);
+        src/battle_anim_mon_movement.o(.rodata);
         src/item.o(.rodata);
         data/data_835B488.o(.rodata.83DF09C);
         src/heal_location.o(.rodata);

@@ -544,10 +544,6 @@ gUnknown_83D414C:: @ 83D414C
 gUnknown_83D4164:: @ 83D4164
 	.incbin "baserom.gba", 0x3D4164, 0x8
 
-	.section .rodata.83D4E4C
-gUnknown_83D4E4C::
-	.incbin "baserom.gba", 0x3D4E54, 0x78
-
 	.section .rodata.83DF09C
 gUnknown_83DF09C:: @ 83DF09C
 	.incbin "baserom.gba", 0x3DF09C, 0x18

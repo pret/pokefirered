@@ -50,7 +50,8 @@ void ApplyNewEncryptionKeyToBagItems(u32 key)
     }
 }
 
-void ApplyNewEncryptionKeyToBagItems_(u32 key) {
+void ApplyNewEncryptionKeyToBagItems_(u32 key)
+{
     ApplyNewEncryptionKeyToBagItems(key);
 }
 

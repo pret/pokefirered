@@ -59,12 +59,11 @@ extern u8 gAnimFriendship;
 extern u16 gWeatherMoveAnim;
 extern s16 gBattleAnimArgs[ANIM_ARGS_COUNT];
 extern u8 gAnimMoveTurn;
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8 gBattleAnimAttacker;
+extern u8 gBattleAnimTarget;
 extern u16 gAnimSpeciesByBanks[BATTLE_BANKS_COUNT];
 extern u8 gUnknown_02038440;
 extern u8 gBattlerSpriteIds[MAX_BATTLERS_COUNT];
-extern u8 gBattleAnimAttacker;
 
 void ClearBattleAnimationVars(void);
 void DoMoveAnim(u16 move);
@@ -123,5 +122,9 @@ void LaunchStatusAnimation(u8 bank, u8 statusAnimId);
 u8 ItemIdToBallId(u16 itemId);
 u8 LaunchBallStarsTask(u8 x, u8 y, u8 kindOfStars, u8 arg3, u8 ballId);
 u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 bank, u32 arg2, u8 ballId);
+
+// battle_anim_mons.s
+void sub_8074DC4(struct Sprite * sprite);
+void sub_80754B8(struct Sprite * sprite);
 
 #endif // GUARD_BATTLE_ANIM_H

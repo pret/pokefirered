@@ -10,8 +10,11 @@ void sub_8098D54(u8 taskId);
 void sub_8098EF0(u8 taskId);
 void sub_8099004(u8 taskId);
 void sub_80990AC(struct Sprite * sprite);
+void sub_8099120(struct Sprite * sprite);
 void sub_8099144(struct Sprite * sprite);
+void sub_8099190(struct Sprite * sprite);
 void sub_80991B4(struct Sprite * sprite);
+void sub_8099270(struct Sprite * sprite);
 void sub_80992E0(struct Sprite * sprite);
 void sub_8099394(struct Sprite * sprite);
 
@@ -272,4 +275,83 @@ void sub_8099004(u8 taskId)
         gSprites[spriteId].pos2.y = 0;
         DestroyAnimVisualTask(taskId);
     }
+}
+
+void sub_809907C(u8 taskId)
+{
+    if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
+        gBattleAnimArgs[1] = -gBattleAnimArgs[1];
+    sub_8098F84(taskId);
+}
+
+void sub_80990AC(struct Sprite * sprite)
+{
+    sprite->invisible = TRUE;
+    if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
+        sprite->data[1] = -gBattleAnimArgs[1];
+    else
+        sprite->data[1] =  gBattleAnimArgs[1];
+    sprite->data[0] = gBattleAnimArgs[0];
+    sprite->data[2] = 0;
+    sprite->data[3] = gBattlerSpriteIds[gBattleAnimAttacker];
+    sprite->data[4] = gBattleAnimArgs[0];
+    StoreSpriteCallbackInData6(sprite, sub_8099120);
+    sprite->callback = sub_8074DC4;
+}
+
+void sub_8099120(struct Sprite * sprite)
+{
+    sprite->data[0] = sprite->data[4];
+    sprite->data[1] = -sprite->data[1];
+    sprite->callback = sub_8074DC4;
+    StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
+}
+
+void sub_8099144(struct Sprite * sprite)
+{
+    u8 spriteId;
+    sprite->invisible = TRUE;
+    spriteId = GetAnimBankSpriteId(gBattleAnimArgs[2]);
+    sprite->data[0] = gBattleAnimArgs[0];
+    sprite->data[1] = 0;
+    sprite->data[2] = gBattleAnimArgs[1];
+    sprite->data[3] = spriteId;
+    sprite->data[4] = gBattleAnimArgs[0];
+    StoreSpriteCallbackInData6(sprite, sub_8099190);
+    sprite->callback = sub_8074DC4;
+}
+
+void sub_8099190(struct Sprite * sprite)
+{
+    sprite->data[0] = sprite->data[4];
+    sprite->data[2] = -sprite->data[2];
+    sprite->callback = sub_8074DC4;
+    StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
+}
+
+void sub_80991B4(struct Sprite * sprite)
+{
+    u8 spriteId;
+    if (gBattleAnimArgs[0] == 0)
+        spriteId = gBattlerSpriteIds[gBattleAnimAttacker];
+    else
+        spriteId = gBattlerSpriteIds[gBattleAnimTarget];
+    sprite->data[0] = gBattleAnimArgs[2];
+    sprite->data[1] = gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x;
+    sprite->data[2] = gSprites[spriteId].pos1.x;
+    sprite->data[3] = gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y;
+    sprite->data[4] = gSprites[spriteId].pos1.y;
+    sub_80754B8(sprite);
+    sprite->data[3] = 0;
+    sprite->data[4] = 0;
+    sprite->data[5] = gSprites[spriteId].pos2.x;
+    sprite->data[6] = gSprites[spriteId].pos2.y;
+    sprite->invisible = TRUE;
+    if (gBattleAnimArgs[1] == 1)
+        sprite->data[2] = 0;
+    else if (gBattleAnimArgs[1] == 2)
+        sprite->data[1] = 0;
+    sprite->data[7] = gBattleAnimArgs[1];
+    sprite->data[7] |= spriteId << 8;
+    sprite->callback = sub_8099270;
 }

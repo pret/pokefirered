@@ -12617,7 +12617,7 @@ sub_8124DB0: @ 8124DB0
 	movs r0, 0x6
 	movs r1, 0
 	movs r2, 0xFF
-	bl sub_813CD50
+	bl InitBerryPouch
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8124DB0

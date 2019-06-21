@@ -29,7 +29,7 @@
       "type": 0,
       "fieldUseFunc": "NULL",
       "battleUsage": 2,
-      "battleUseFunc": "BattleUseFunc_MasterBall",
+      "battleUseFunc": "BattleUseFunc_PokeBallEtc",
       "secondaryId": 0
     },
     {
@@ -45,7 +45,7 @@
       "type": 1,
       "fieldUseFunc": "NULL",
       "battleUsage": 2,
-      "battleUseFunc": "BattleUseFunc_MasterBall",
+      "battleUseFunc": "BattleUseFunc_PokeBallEtc",
       "secondaryId": 1
     },
     {
@@ -61,7 +61,7 @@
       "type": 2,
       "fieldUseFunc": "NULL",
       "battleUsage": 2,
-      "battleUseFunc": "BattleUseFunc_MasterBall",
+      "battleUseFunc": "BattleUseFunc_PokeBallEtc",
       "secondaryId": 2
     },
     {
@@ -77,7 +77,7 @@
       "type": 3,
       "fieldUseFunc": "NULL",
       "battleUsage": 2,
-      "battleUseFunc": "BattleUseFunc_MasterBall",
+      "battleUseFunc": "BattleUseFunc_PokeBallEtc",
       "secondaryId": 3
     },
     {
@@ -93,7 +93,7 @@
       "type": 4,
       "fieldUseFunc": "NULL",
       "battleUsage": 2,
-      "battleUseFunc": "BattleUseFunc_MasterBall",
+      "battleUseFunc": "BattleUseFunc_PokeBallEtc",
       "secondaryId": 4
     },
     {
@@ -109,7 +109,7 @@
       "type": 5,
       "fieldUseFunc": "NULL",
       "battleUsage": 2,
-      "battleUseFunc": "BattleUseFunc_MasterBall",
+      "battleUseFunc": "BattleUseFunc_PokeBallEtc",
       "secondaryId": 5
     },
     {
@@ -125,7 +125,7 @@
       "type": 6,
       "fieldUseFunc": "NULL",
       "battleUsage": 2,
-      "battleUseFunc": "BattleUseFunc_MasterBall",
+      "battleUseFunc": "BattleUseFunc_PokeBallEtc",
       "secondaryId": 6
     },
     {
@@ -141,7 +141,7 @@
       "type": 7,
       "fieldUseFunc": "NULL",
       "battleUsage": 2,
-      "battleUseFunc": "BattleUseFunc_MasterBall",
+      "battleUseFunc": "BattleUseFunc_PokeBallEtc",
       "secondaryId": 7
     },
     {
@@ -157,7 +157,7 @@
       "type": 8,
       "fieldUseFunc": "NULL",
       "battleUsage": 2,
-      "battleUseFunc": "BattleUseFunc_MasterBall",
+      "battleUseFunc": "BattleUseFunc_PokeBallEtc",
       "secondaryId": 8
     },
     {
@@ -173,7 +173,7 @@
       "type": 9,
       "fieldUseFunc": "NULL",
       "battleUsage": 2,
-      "battleUseFunc": "BattleUseFunc_MasterBall",
+      "battleUseFunc": "BattleUseFunc_PokeBallEtc",
       "secondaryId": 9
     },
     {
@@ -189,7 +189,7 @@
       "type": 10,
       "fieldUseFunc": "NULL",
       "battleUsage": 2,
-      "battleUseFunc": "BattleUseFunc_MasterBall",
+      "battleUseFunc": "BattleUseFunc_PokeBallEtc",
       "secondaryId": 10
     },
     {
@@ -205,7 +205,7 @@
       "type": 11,
       "fieldUseFunc": "NULL",
       "battleUsage": 2,
-      "battleUseFunc": "BattleUseFunc_MasterBall",
+      "battleUseFunc": "BattleUseFunc_PokeBallEtc",
       "secondaryId": 11
     },
     {
@@ -219,9 +219,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -235,9 +235,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -251,9 +251,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -267,9 +267,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -283,9 +283,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -299,9 +299,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -315,9 +315,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -331,9 +331,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -347,9 +347,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -363,9 +363,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -379,9 +379,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -395,9 +395,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -411,9 +411,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -427,9 +427,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -443,9 +443,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -459,9 +459,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -475,9 +475,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -491,9 +491,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -507,9 +507,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -523,9 +523,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -539,9 +539,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -619,9 +619,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -635,9 +635,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -653,7 +653,7 @@
       "type": 1,
       "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -669,7 +669,7 @@
       "type": 1,
       "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -715,9 +715,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -1019,7 +1019,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1035,7 +1035,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1051,7 +1051,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1067,7 +1067,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1083,7 +1083,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -1131,7 +1131,7 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0
@@ -2139,9 +2139,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -2155,9 +2155,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -2171,9 +2171,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -2187,9 +2187,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -2203,9 +2203,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -2235,9 +2235,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -2253,7 +2253,7 @@
       "type": 4,
       "fieldUseFunc": "FieldUseFunc_OakStopsYou",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -2267,9 +2267,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {
@@ -2283,9 +2283,9 @@
       "exitsBagOnUse": 0,
       "pocket": "POCKET_BERRY_POUCH",
       "type": 1,
-      "fieldUseFunc": "FieldUseFunc_OpenPartyMenu",
+      "fieldUseFunc": "FieldUseFunc_Medicine",
       "battleUsage": 1,
-      "battleUseFunc": "BattleUseFunc_OpenPartyMenu",
+      "battleUseFunc": "BattleUseFunc_Medicine",
       "secondaryId": 0
     },
     {

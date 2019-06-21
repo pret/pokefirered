@@ -1,6 +1,10 @@
 #ifndef GUARD_CONSTANTS_FLAGS_H
 #define GUARD_CONSTANTS_FLAGS_H
 
+// Sys Flags Maybe
+#define FLAG_WHITE_FLUTE_ACTIVE                                     0x803
+#define FLAG_BLACK_FLUTE_ACTIVE                                     0x804
+
 // World Map Flags
 #define FLAG_WORLD_MAP_PALLET_TOWN                                  0x890
 #define FLAG_WORLD_MAP_VIRIDIAN_CITY                                0x891

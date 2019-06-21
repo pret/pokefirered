@@ -52,5 +52,14 @@ void GetMonNickname(const struct Pokemon * mon, u8 * dest);
 void sub_81202F8(const u8 * src, u8 a1);
 bool8 sub_8120370(void);
 void PartyMenuInit(u8 a, u8 b, u8 c, u8 d, u8 messageId, TaskFunc task, MainCallback callback);
+void sub_81252D0(u8 taskId, TaskFunc followUpFunc);
+void sub_81256F8(u8 taskId, TaskFunc followUpFunc);
+void dp05_pp_up(u8 taskId, TaskFunc followUpFunc);
+void dp05_rare_candy(u8 taskId, TaskFunc followUpFunc);
+void sub_8126B60(u8 taskId, TaskFunc followUpFunc);
+void sub_8126894(u8 taskId, TaskFunc followUpFunc);
+void sub_81279E0(void);
+void ItemUseCB_Medicine(u8 taskId, TaskFunc followUpFunc);
+u8 GetItemEffectType(u16 itemId);
 
 #endif // GUARD_PARTY_MENU_H

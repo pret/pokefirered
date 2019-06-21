@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_813CD50
-sub_813CD50: @ 813CD50
+	thumb_func_start InitBerryPouch
+InitBerryPouch: @ 813CD50
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -92,7 +92,7 @@ _0813CDF0: .4byte gTextFlags
 _0813CDF4: .4byte gSpecialVar_ItemId
 _0813CDF8: .4byte sub_813CE30
 _0813CDFC: .4byte 0x0000080c
-	thumb_func_end sub_813CD50
+	thumb_func_end InitBerryPouch
 
 	thumb_func_start sub_813CE00
 sub_813CE00: @ 813CE00

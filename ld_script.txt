@@ -154,7 +154,6 @@ SECTIONS {
         asm/field_special_scene.o(.text);
         asm/safari_zone.o(.text);
         src/item_use.o(.text);
-        asm/item_use.o(.text);
         asm/battle_anim_effects_1.o(.text);
         asm/battle_anim_effects_2.o(.text);
         asm/water.o(.text);

@@ -911,14 +911,14 @@ _0806F498:
 	bl PlayRainStoppingSoundEffect
 	bl sub_806EF18
 	bl CleanupOverworldWindowsAndTilemaps
-	ldr r0, _0806F4B0 @ =UseFameCheckerFromMenu
+	ldr r0, _0806F4B0 @ =ReturnToBagFromKeyItem
 	bl SetMainCallback2
 	movs r0, 0x1
 _0806F4AC:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806F4B0: .4byte UseFameCheckerFromMenu
+_0806F4B0: .4byte ReturnToBagFromKeyItem
 	thumb_func_end sub_806F480
 
 	thumb_func_start sub_806F4B4

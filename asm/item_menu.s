@@ -138,8 +138,8 @@ _08107EB0: .4byte gUnknown_203AD10
 _08107EB4: .4byte gUnknown_203ACFC
 	thumb_func_end sub_8107DB4
 
-	thumb_func_start UseFameCheckerFromMenu
-UseFameCheckerFromMenu: @ 8107EB8
+	thumb_func_start ReturnToBagFromKeyItem
+ReturnToBagFromKeyItem: @ 8107EB8
 	push {lr}
 	ldr r2, _08107EC8 @ =sub_80568A8
 	movs r0, 0
@@ -149,7 +149,7 @@ UseFameCheckerFromMenu: @ 8107EB8
 	bx r0
 	.align 2, 0
 _08107EC8: .4byte sub_80568A8
-	thumb_func_end UseFameCheckerFromMenu
+	thumb_func_end ReturnToBagFromKeyItem
 
 	thumb_func_start sub_8107ECC
 sub_8107ECC: @ 8107ECC
@@ -4776,7 +4776,7 @@ sub_810A448: @ 810A448
 	ldr r1, _0810A458 @ =sub_810A45C
 	movs r0, 0x1
 	movs r2, 0
-	bl sub_813CD50
+	bl InitBerryPouch
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -4905,7 +4905,7 @@ sub_810A540: @ 810A540
 	ldr r1, _0810A550 @ =sub_810A554
 	movs r0, 0x3
 	movs r2, 0
-	bl sub_813CD50
+	bl InitBerryPouch
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -5050,7 +5050,7 @@ sub_810A668: @ 810A668
 	ldr r1, _0810A678 @ =sub_810A67C
 	movs r0, 0x2
 	movs r2, 0
-	bl sub_813CD50
+	bl InitBerryPouch
 	pop {r0}
 	bx r0
 	.align 2, 0

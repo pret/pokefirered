@@ -678,6 +678,6 @@ u8 GetMonsStateToDoubles(void);
 void sub_803E0A4(struct Pokemon *mon, struct BattleTowerPokemon *src);
 void SetMultiuseSpriteTemplateToPokemon(u16 trainerSpriteId, u8 battlerPosition);
 
-const u8 * sub_8042DA4(u16 itemId);
+const u8 * Battle_PrintStatBoosterEffectMessage(u16 itemId);
 
 #endif // GUARD_POKEMON_H

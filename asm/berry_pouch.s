@@ -1358,8 +1358,8 @@ _0813D800: .4byte gUnknown_203F37C
 _0813D804: .4byte gUnknown_203F380
 	thumb_func_end sub_813D7CC
 
-	thumb_func_start sub_813D808
-sub_813D808: @ 813D808
+	thumb_func_start BerryPouch_StartFadeToExitCallback
+BerryPouch_StartFadeToExitCallback: @ 813D808
 	push {r4,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -1387,7 +1387,7 @@ sub_813D808: @ 813D808
 	.align 2, 0
 _0813D83C: .4byte gTasks
 _0813D840: .4byte sub_813D844
-	thumb_func_end sub_813D808
+	thumb_func_end BerryPouch_StartFadeToExitCallback
 
 	thumb_func_start sub_813D844
 sub_813D844: @ 813D844
@@ -1510,15 +1510,15 @@ _0813D92C:
 	bx r0
 	thumb_func_end sub_813D8AC
 
-	thumb_func_start sub_813D934
-sub_813D934: @ 813D934
+	thumb_func_start BerryPouch_SetExitCallback
+BerryPouch_SetExitCallback: @ 813D934
 	ldr r1, _0813D93C @ =gUnknown_203F36C
 	ldr r1, [r1]
 	str r0, [r1]
 	bx lr
 	.align 2, 0
 _0813D93C: .4byte gUnknown_203F36C
-	thumb_func_end sub_813D934
+	thumb_func_end BerryPouch_SetExitCallback
 
 	thumb_func_start sub_813D940
 sub_813D940: @ 813D940
@@ -1767,7 +1767,7 @@ _0813DB46:
 	strh r0, [r1]
 _0813DB48:
 	adds r0, r6, 0
-	bl sub_813D808
+	bl BerryPouch_StartFadeToExitCallback
 	b _0813DB9E
 	.align 2, 0
 _0813DB50: .4byte gUnknown_203F36C
@@ -2577,7 +2577,7 @@ _0813E248:
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _0813E270 @ =sub_813D808
+	ldr r1, _0813E270 @ =BerryPouch_StartFadeToExitCallback
 	str r1, [r0]
 _0813E25E:
 	pop {r4}
@@ -2587,7 +2587,7 @@ _0813E25E:
 _0813E264: .4byte gUnknown_203F36C
 _0813E268: .4byte sub_8126EDC
 _0813E26C: .4byte gTasks
-_0813E270: .4byte sub_813D808
+_0813E270: .4byte BerryPouch_StartFadeToExitCallback
 	thumb_func_end sub_813E200
 
 	thumb_func_start sub_813E274
@@ -2598,7 +2598,7 @@ sub_813E274: @ 813E274
 	ldr r2, _0813E288 @ =gText_ThereIsNoPokemon
 	ldr r3, _0813E28C @ =sub_813E290
 	movs r1, 0x2
-	bl sub_813EB20
+	bl DisplayItemMessageInBerryPouch
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -2745,7 +2745,7 @@ sub_813E37C: @ 813E37C
 	adds r0, r5, 0
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl sub_813EB20
+	bl DisplayItemMessageInBerryPouch
 	b _0813E3EA
 	.align 2, 0
 _0813E3C4: .4byte gTasks+0x8
@@ -2761,7 +2761,7 @@ _0813E3D8:
 	adds r0, r7, 0
 	subs r0, 0x8
 	adds r0, r6, r0
-	ldr r1, _0813E3F8 @ =sub_813D808
+	ldr r1, _0813E3F8 @ =BerryPouch_StartFadeToExitCallback
 	str r1, [r0]
 _0813E3EA:
 	pop {r4-r7}
@@ -2770,7 +2770,7 @@ _0813E3EA:
 	.align 2, 0
 _0813E3F0: .4byte gUnknown_203F36C
 _0813E3F4: .4byte c2_8123744
-_0813E3F8: .4byte sub_813D808
+_0813E3F8: .4byte BerryPouch_StartFadeToExitCallback
 	thumb_func_end sub_813E37C
 
 	thumb_func_start sub_813E3FC
@@ -2786,14 +2786,14 @@ sub_813E3FC: @ 813E3FC
 	adds r1, r0
 	lsls r1, 3
 	adds r1, r2
-	ldr r0, _0813E424 @ =sub_813D808
+	ldr r0, _0813E424 @ =BerryPouch_StartFadeToExitCallback
 	str r0, [r1]
 	bx lr
 	.align 2, 0
 _0813E418: .4byte gUnknown_203F36C
 _0813E41C: .4byte sub_808CE60
 _0813E420: .4byte gTasks
-_0813E424: .4byte sub_813D808
+_0813E424: .4byte BerryPouch_StartFadeToExitCallback
 	thumb_func_end sub_813E3FC
 
 	thumb_func_start sub_813E428
@@ -2827,7 +2827,7 @@ sub_813E428: @ 813E428
 	ldr r3, _0813E484 @ =sub_813E2B8
 	adds r0, r5, 0
 	adds r2, r4, 0
-	bl sub_813EB20
+	bl DisplayItemMessageInBerryPouch
 	b _0813E4CE
 	.align 2, 0
 _0813E470: .4byte gTasks+0x8
@@ -2867,7 +2867,7 @@ _0813E4A8:
 	ldr r3, _0813E4E0 @ =sub_813E5B8
 	adds r0, r7, 0
 	adds r2, r4, 0
-	bl sub_813EB20
+	bl DisplayItemMessageInBerryPouch
 _0813E4CE:
 	pop {r4-r7}
 	pop {r0}
@@ -2917,7 +2917,7 @@ sub_813E4E4: @ 813E4E4
 	ldr r3, _0813E550 @ =sub_813E554
 	adds r0, r5, 0
 	adds r2, r4, 0
-	bl sub_813EB20
+	bl DisplayItemMessageInBerryPouch
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -3213,7 +3213,7 @@ sub_813E768: @ 813E768
 	adds r0, r5, 0
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl sub_813EB20
+	bl DisplayItemMessageInBerryPouch
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -3622,8 +3622,8 @@ sub_813EB10: @ 813EB10
 _0813EB1C: .4byte gUnknown_203F38C
 	thumb_func_end sub_813EB10
 
-	thumb_func_start sub_813EB20
-sub_813EB20: @ 813EB20
+	thumb_func_start DisplayItemMessageInBerryPouch
+DisplayItemMessageInBerryPouch: @ 813EB20
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -3666,7 +3666,7 @@ _0813EB44:
 	.align 2, 0
 _0813EB74: .4byte gUnknown_203F38C
 _0813EB78: .4byte gUnknown_8464400
-	thumb_func_end sub_813EB20
+	thumb_func_end DisplayItemMessageInBerryPouch
 
 	thumb_func_start sub_813EB7C
 sub_813EB7C: @ 813EB7C

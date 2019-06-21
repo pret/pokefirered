@@ -13730,8 +13730,8 @@ _081256F2:
 	bx r0
 	thumb_func_end sub_81256C0
 
-	thumb_func_start sub_81256F8
-sub_81256F8: @ 81256F8
+	thumb_func_start ItemUseCB_PpRestore
+ItemUseCB_PpRestore: @ 81256F8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -13802,7 +13802,7 @@ _0812577E:
 _08125784: .4byte gUnknown_203B0A0
 _08125788: .4byte gTasks
 _0812578C: .4byte sub_81256C0
-	thumb_func_end sub_81256F8
+	thumb_func_end ItemUseCB_PpRestore
 
 	thumb_func_start sub_8125790
 sub_8125790: @ 8125790

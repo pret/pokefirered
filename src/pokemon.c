@@ -4526,7 +4526,7 @@ void sub_8042D50(int stat)
     BattleStringExpandPlaceholdersToDisplayedString(BattleText_UnknownString3);
 }
 
-const u8 *sub_8042DA4(u16 itemId)
+const u8 *Battle_PrintStatBoosterEffectMessage(u16 itemId)
 {
     int i;
     const u8 *itemEffect;

@@ -73,8 +73,8 @@ void sub_80A1CAC(void);
 void sub_80A1CC0(u8 taskId);
 void sub_80A1D58(void);
 void sub_80A1D68(u8 taskId);
-void sub_80A1EF4(u8 taskId);
-void sub_80A1F48(u8 taskId);
+void Task_BattleUse_StatBooster_DelayAndPrint(u8 taskId);
+void Task_BattleUse_StatBooster_WaitButton_ReturnToBattle(u8 taskId);
 
 extern void (*const gUnknown_83E2954[])(void);
 
@@ -87,15 +87,15 @@ void sub_80A0FBC(u8 taskId)
         itemType = ItemId_GetType(gSpecialVar_ItemId) - 1;
     if (GetPocketByItemId(gSpecialVar_ItemId) == POCKET_BERRY_POUCH)
     {
-        sub_813D934(gUnknown_83E2954[itemType]);
-        sub_813D808(taskId);
+        BerryPouch_SetExitCallback(gUnknown_83E2954[itemType]);
+        BerryPouch_StartFadeToExitCallback(taskId);
     }
     else
     {
-        sub_8108EE0(gUnknown_83E2954[itemType]);
+        ItemMenu_SetExitCallback(gUnknown_83E2954[itemType]);
         if (itemType == 1)
             sub_8108CB4();
-        sub_8108B50(taskId);
+        ItemMenu_StartFadeToExitCallback(taskId);
     }
 }
 
@@ -183,8 +183,8 @@ void sub_80A11C0(u8 taskId)
 
 void FieldUseFunc_OrangeMail(u8 taskId)
 {
-    sub_8108EE0(sub_80A1208);
-    sub_8108B50(taskId);
+    ItemMenu_SetExitCallback(sub_80A1208);
+    ItemMenu_StartFadeToExitCallback(taskId);
 }
 
 void sub_80A1208(void)
@@ -222,7 +222,7 @@ void ItemUseOnFieldCB_Bicycle(u8 taskId)
 {
     if (!TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
         PlaySE(SE_JITENSYA);
-    sub_80BD5C8(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE);
+    StartTransitionToFlipBikeState(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE);
     sub_80696C0();
     ScriptContext2_Disable();
     DestroyTask(taskId);
@@ -360,7 +360,7 @@ void FieldUseFunc_Medicine(u8 taskId)
 
 void FieldUseFunc_Ether(u8 taskId)
 {
-    gUnknown_3005E98 = sub_81256F8;
+    gUnknown_3005E98 = ItemUseCB_PpRestore;
     sub_80A16D0(taskId);
 }
 
@@ -392,8 +392,8 @@ void FieldUseFunc_TmCase(u8 taskId)
 {
     if (gTasks[taskId].data[3] == 0)
     {
-        sub_8108EE0(InitTMCaseFromBag);
-        sub_8108B50(taskId);
+        ItemMenu_SetExitCallback(InitTMCaseFromBag);
+        ItemMenu_StartFadeToExitCallback(taskId);
     }
     else
     {
@@ -423,8 +423,8 @@ void FieldUseFunc_BerryPouch(u8 taskId)
 {
     if (gTasks[taskId].data[3] == 0)
     {
-        sub_8108EE0(InitBerryPouchFromBag);
-        sub_8108B50(taskId);
+        ItemMenu_SetExitCallback(InitBerryPouchFromBag);
+        ItemMenu_StartFadeToExitCallback(taskId);
     }
     else
     {
@@ -452,8 +452,8 @@ void Task_InitBerryPouchFromField(u8 taskId)
 
 void BattleUseFunc_BerryPouch(u8 taskId)
 {
-    sub_8108EE0(InitBerryPouchFromBattle);
-    sub_8108B50(taskId);
+    ItemMenu_SetExitCallback(InitBerryPouchFromBattle);
+    ItemMenu_StartFadeToExitCallback(taskId);
 }
 
 void InitBerryPouchFromBattle(void)
@@ -466,8 +466,8 @@ void FieldUseFunc_TeachyTv(u8 taskId)
     ItemUse_SetQuestLogEvent(4, NULL, gSpecialVar_ItemId, 0xFFFF);
     if (gTasks[taskId].data[3] == 0)
     {
-        sub_8108EE0(InitTeachyTvFromBag);
-        sub_8108B50(taskId);
+        ItemMenu_SetExitCallback(InitTeachyTvFromBag);
+        ItemMenu_StartFadeToExitCallback(taskId);
     }
     else
     {
@@ -596,8 +596,8 @@ void FieldUseFunc_TownMap(u8 taskId)
 {
     if (gTasks[taskId].data[3] == 0)
     {
-        sub_8108EE0(sub_80A1CAC);
-        sub_8108B50(taskId);
+        ItemMenu_SetExitCallback(sub_80A1CAC);
+        ItemMenu_StartFadeToExitCallback(taskId);
     }
     else
     {
@@ -628,8 +628,8 @@ void FieldUseFunc_FameChecker(u8 taskId)
     ItemUse_SetQuestLogEvent(4, NULL, gSpecialVar_ItemId, 0xFFFF);
     if (gTasks[taskId].data[3] == 0)
     {
-        sub_8108EE0(sub_80A1D58);
-        sub_8108B50(taskId);
+        ItemMenu_SetExitCallback(sub_80A1D58);
+        ItemMenu_StartFadeToExitCallback(taskId);
     }
     else
     {
@@ -686,7 +686,7 @@ void BattleUseFunc_PokeBallEtc(u8 taskId)
     {
         RemoveBagItem(gSpecialVar_ItemId, 1);
         sub_8108CB4();
-        sub_8108B50(taskId);
+        ItemMenu_StartFadeToExitCallback(taskId);
     }
     else
     {
@@ -697,7 +697,7 @@ void BattleUseFunc_PokeBallEtc(u8 taskId)
 void BattleUseFunc_PokeFlute(u8 taskId)
 {
     sub_8108CB4();
-    sub_8108B50(taskId);
+    ItemMenu_StartFadeToExitCallback(taskId);
 }
 
 void BattleUseFunc_GuardSpec(u8 taskId)
@@ -709,11 +709,11 @@ void BattleUseFunc_GuardSpec(u8 taskId)
     else
     {
         gTasks[taskId].data[8] = 0;
-        gTasks[taskId].func = sub_80A1EF4;
+        gTasks[taskId].func = Task_BattleUse_StatBooster_DelayAndPrint;
     }
 }
 
-void sub_80A1EF4(u8 taskId)
+void Task_BattleUse_StatBooster_DelayAndPrint(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -722,49 +722,49 @@ void sub_80A1EF4(u8 taskId)
         u16 itemId = gSpecialVar_ItemId;
         PlaySE(SE_KAIFUKU);
         RemoveBagItem(itemId, 1);
-        DisplayItemMessageInBag(taskId, 2, sub_8042DA4(itemId), sub_80A1F48);
+        DisplayItemMessageInBag(taskId, 2, Battle_PrintStatBoosterEffectMessage(itemId), Task_BattleUse_StatBooster_WaitButton_ReturnToBattle);
     }
 }
 
-void sub_80A1F48(u8 taskId)
+void Task_BattleUse_StatBooster_WaitButton_ReturnToBattle(u8 taskId)
 {
     if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
         sub_8108CB4();
-        sub_8108B50(taskId);
+        ItemMenu_StartFadeToExitCallback(taskId);
     }
 }
 
-void sub_80A1F78(u8 taskId)
+void ItemUse_SwitchToPartyMenuInBattle(u8 taskId)
 {
     if (GetPocketByItemId(gSpecialVar_ItemId) == POCKET_BERRY_POUCH)
     {
-        sub_813D934(sub_81279E0);
-        sub_813D808(taskId);
+        BerryPouch_SetExitCallback(sub_81279E0);
+        BerryPouch_StartFadeToExitCallback(taskId);
     }
     else
     {
-        sub_8108EE0(sub_81279E0);
-        sub_8108B50(taskId);
+        ItemMenu_SetExitCallback(sub_81279E0);
+        ItemMenu_StartFadeToExitCallback(taskId);
     }
 }
 
 void BattleUseFunc_Medicine(u8 taskId)
 {
     gUnknown_3005E98 = ItemUseCB_Medicine;
-    sub_80A1F78(taskId);
+    ItemUse_SwitchToPartyMenuInBattle(taskId);
 }
 
 void sub_80A1FD8(u8 taskId)
 {
     gUnknown_3005E98 = sub_8126894;
-    sub_80A1F78(taskId);
+    ItemUse_SwitchToPartyMenuInBattle(taskId);
 }
 
 void BattleUseFunc_Ether(u8 taskId)
 {
-    gUnknown_3005E98 = sub_81256F8;
-    sub_80A1F78(taskId);
+    gUnknown_3005E98 = ItemUseCB_PpRestore;
+    ItemUse_SwitchToPartyMenuInBattle(taskId);
 }
 
 void BattleUseFunc_PokeDoll(u8 taskId)
@@ -773,7 +773,7 @@ void BattleUseFunc_PokeDoll(u8 taskId)
     {
         sub_80A1A44();
         ItemUse_SetQuestLogEvent(4, 0, gSpecialVar_ItemId, 0xFFFF);
-        DisplayItemMessageInBag(taskId, 2, gStringVar4, sub_8108B50);
+        DisplayItemMessageInBag(taskId, 2, gStringVar4, ItemMenu_StartFadeToExitCallback);
     }
     else
         sub_80A1110(taskId, 0);
@@ -853,7 +853,7 @@ void FieldUseFunc_OakStopsYou(u8 taskId)
     if (GetPocketByItemId(gSpecialVar_ItemId) == POCKET_BERRY_POUCH)
     {
         StringExpandPlaceholders(gStringVar4, gUnknown_8416425);
-        sub_813EB20(taskId, 4, gStringVar4, sub_813E2B8);
+        DisplayItemMessageInBerryPouch(taskId, 4, gStringVar4, sub_813E2B8);
     }
     else
         sub_80A1110(taskId, gTasks[taskId].data[3]);

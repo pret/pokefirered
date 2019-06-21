@@ -1739,8 +1739,8 @@ _08108B48: .4byte gUnknown_203AD18
 _08108B4C: .4byte gUnknown_203AD1C
 	thumb_func_end sub_8108B04
 
-	thumb_func_start sub_8108B50
-sub_8108B50: @ 8108B50
+	thumb_func_start ItemMenu_StartFadeToExitCallback
+ItemMenu_StartFadeToExitCallback: @ 8108B50
 	push {r4,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -1768,7 +1768,7 @@ sub_8108B50: @ 8108B50
 	.align 2, 0
 _08108B84: .4byte gTasks
 _08108B88: .4byte sub_8108B8C
-	thumb_func_end sub_8108B50
+	thumb_func_end ItemMenu_StartFadeToExitCallback
 
 	thumb_func_start sub_8108B8C
 sub_8108B8C: @ 8108B8C
@@ -2204,15 +2204,15 @@ DisplayItemMessageInBag: @ 8108E70
 _08108EDC: .4byte gTasks+0x8
 	thumb_func_end DisplayItemMessageInBag
 
-	thumb_func_start sub_8108EE0
-sub_8108EE0: @ 8108EE0
+	thumb_func_start ItemMenu_SetExitCallback
+ItemMenu_SetExitCallback: @ 8108EE0
 	ldr r1, _08108EE8 @ =gUnknown_203AD10
 	ldr r1, [r1]
 	str r0, [r1]
 	bx lr
 	.align 2, 0
 _08108EE8: .4byte gUnknown_203AD10
-	thumb_func_end sub_8108EE0
+	thumb_func_end ItemMenu_SetExitCallback
 
 	thumb_func_start sub_8108EEC
 sub_8108EEC: @ 8108EEC
@@ -2376,12 +2376,12 @@ _08109018:
 	adds r0, r6
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _08109040 @ =sub_8108B50
+	ldr r1, _08109040 @ =ItemMenu_StartFadeToExitCallback
 	b _081090C4
 	.align 2, 0
 _08109038: .4byte gSpecialVar_ItemId
 _0810903C: .4byte gTasks
-_08109040: .4byte sub_8108B50
+_08109040: .4byte ItemMenu_StartFadeToExitCallback
 _08109044:
 	movs r0, 0x5
 	bl PlaySE
@@ -2402,13 +2402,13 @@ _08109044:
 	adds r0, r6
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _08109080 @ =sub_8108B50
+	ldr r1, _08109080 @ =ItemMenu_StartFadeToExitCallback
 	b _081090C4
 	.align 2, 0
 _08109074: .4byte gUnknown_203AD10
 _08109078: .4byte gSpecialVar_ItemId
 _0810907C: .4byte gTasks
-_08109080: .4byte sub_8108B50
+_08109080: .4byte ItemMenu_StartFadeToExitCallback
 _08109084:
 	bl sub_8108978
 	ldrb r0, [r7]
@@ -4404,13 +4404,13 @@ _0810A13E:
 	mov r0, r8
 	subs r0, 0x8
 	adds r0, r6, r0
-	ldr r1, _0810A15C @ =sub_8108B50
+	ldr r1, _0810A15C @ =ItemMenu_StartFadeToExitCallback
 	str r1, [r0]
 	b _0810A166
 	.align 2, 0
 _0810A154: .4byte gUnknown_203AD10
 _0810A158: .4byte sub_8126EDC
-_0810A15C: .4byte sub_8108B50
+_0810A15C: .4byte ItemMenu_StartFadeToExitCallback
 _0810A160:
 	adds r0, r7, 0
 	bl sub_810A18C
@@ -4719,9 +4719,9 @@ _0810A3DC:
 	bne _0810A3F8
 	ldr r0, _0810A3F4 @ =sub_810A448
 _0810A3E4:
-	bl sub_8108EE0
+	bl ItemMenu_SetExitCallback
 	adds r0, r5, 0
-	bl sub_8108B50
+	bl ItemMenu_StartFadeToExitCallback
 	b _0810A426
 	.align 2, 0
 _0810A3F0: .4byte 0x0000016d
@@ -4740,11 +4740,11 @@ _0810A3F8:
 	mov r0, r9
 	subs r0, 0x8
 	adds r0, r7, r0
-	ldr r1, _0810A41C @ =sub_8108B50
+	ldr r1, _0810A41C @ =ItemMenu_StartFadeToExitCallback
 	str r1, [r0]
 	b _0810A426
 	.align 2, 0
-_0810A41C: .4byte sub_8108B50
+_0810A41C: .4byte ItemMenu_StartFadeToExitCallback
 _0810A420:
 	adds r0, r5, 0
 	bl sub_810A18C
@@ -4848,9 +4848,9 @@ _0810A4D4:
 	bne _0810A4F0
 	ldr r0, _0810A4EC @ =sub_810A540
 _0810A4DC:
-	bl sub_8108EE0
+	bl ItemMenu_SetExitCallback
 	adds r0, r5, 0
-	bl sub_8108B50
+	bl ItemMenu_StartFadeToExitCallback
 	b _0810A51E
 	.align 2, 0
 _0810A4E8: .4byte 0x0000016d
@@ -4869,11 +4869,11 @@ _0810A4F0:
 	mov r0, r9
 	subs r0, 0x8
 	adds r0, r7, r0
-	ldr r1, _0810A514 @ =sub_8108B50
+	ldr r1, _0810A514 @ =ItemMenu_StartFadeToExitCallback
 	str r1, [r0]
 	b _0810A51E
 	.align 2, 0
-_0810A514: .4byte sub_8108B50
+_0810A514: .4byte ItemMenu_StartFadeToExitCallback
 _0810A518:
 	adds r0, r5, 0
 	bl sub_810A18C
@@ -4954,9 +4954,9 @@ _0810A598:
 	bne _0810A5B4
 	ldr r0, _0810A5B0 @ =sub_810A668
 _0810A5A0:
-	bl sub_8108EE0
+	bl ItemMenu_SetExitCallback
 	adds r0, r5, 0
-	bl sub_8108B50
+	bl ItemMenu_StartFadeToExitCallback
 	b _0810A63E
 	.align 2, 0
 _0810A5AC: .4byte 0x0000016d
@@ -6860,7 +6860,7 @@ _0810B564:
 	ldr r0, _0810B5B4 @ =ItemUseCB_Medicine
 	str r0, [r1]
 	ldr r0, _0810B5B8 @ =sub_81279A4
-	bl sub_8108EE0
+	bl ItemMenu_SetExitCallback
 	mov r0, r9
 	subs r0, 0x8
 	add r0, r8

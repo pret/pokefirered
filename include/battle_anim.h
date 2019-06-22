@@ -125,6 +125,7 @@ u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 bank, u32 arg2, u8 ballId);
 
 // battle_anim_mons.s
 void sub_8074DC4(struct Sprite * sprite);
+void sub_8074E14(struct Sprite * sprite);
 void sub_80754B8(struct Sprite * sprite);
 
 #endif // GUARD_BATTLE_ANIM_H

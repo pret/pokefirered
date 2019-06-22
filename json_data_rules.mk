@@ -6,4 +6,4 @@ AUTO_GEN_TARGETS += src/data/items.h
 src/data/items.h: src/data/items.json src/data/items.json.txt
 	$(JSONPROC) $^ $@
 
-$(BUILD_DIR)/src/item.o: C_DEP += src/data/items.h
+$(C_BUILDDIR)/item.o: c_dep += src/data/items.h

@@ -26,7 +26,6 @@ To set up the repository:
 	make install-sdk prefix=../pokefirered
 
 	cd ../pokefirered
-	./build_tools.sh
 
 To build **pokefirered.gba**:
 

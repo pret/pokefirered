@@ -528,7 +528,7 @@ sub_805A948: @ 805A948
 	mov r8, r1
 	adds r0, r6, 0
 	adds r1, r7, 0
-	bl sub_8058E48
+	bl MapGridGetMetatileIdAt
 	lsls r0, 16
 	lsrs r4, r0, 16
 	movs r0, 0x80
@@ -557,7 +557,7 @@ _0805A98C:
 	asrs r0, 16
 	lsls r1, r7, 16
 	asrs r1, 16
-	bl sub_8058F8C
+	bl MapGridGetMetatileLayerTypeAt
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r4, 4

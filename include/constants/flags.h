@@ -1,6 +1,92 @@
 #ifndef GUARD_CONSTANTS_FLAGS_H
 #define GUARD_CONSTANTS_FLAGS_H
 
+// Sys Flags Maybe
+#define FLAG_WHITE_FLUTE_ACTIVE                                     0x803
+#define FLAG_BLACK_FLUTE_ACTIVE                                     0x804
+
+// World Map Flags
+#define FLAG_WORLD_MAP_PALLET_TOWN                                  0x890
+#define FLAG_WORLD_MAP_VIRIDIAN_CITY                                0x891
+#define FLAG_WORLD_MAP_PEWTER_CITY                                  0x892
+#define FLAG_WORLD_MAP_CERULEAN_CITY                                0x893
+#define FLAG_WORLD_MAP_LAVENDER_TOWN                                0x894
+#define FLAG_WORLD_MAP_VERMILION_CITY                               0x895
+#define FLAG_WORLD_MAP_CELADON_CITY                                 0x896
+#define FLAG_WORLD_MAP_FUCHSIA_CITY                                 0x897
+#define FLAG_WORLD_MAP_CINNABAR_ISLAND                              0x898
+#define FLAG_WORLD_MAP_INDIGO_PLATEAU_EXTERIOR                      0x899
+#define FLAG_WORLD_MAP_SAFFRON_CITY_DUPLICATE                       0x89a
+#define FLAG_WORLD_MAP_ONE_ISLAND                                   0x89b
+#define FLAG_WORLD_MAP_TWO_ISLAND                                   0x89c
+#define FLAG_WORLD_MAP_THREE_ISLAND                                 0x89d
+#define FLAG_WORLD_MAP_FOUR_ISLAND                                  0x89e
+#define FLAG_WORLD_MAP_FIVE_ISLAND                                  0x89f
+#define FLAG_WORLD_MAP_SEVEN_ISLAND                                 0x8a0
+#define FLAG_WORLD_MAP_SIX_ISLAND                                   0x8a1
+#define FLAG_WORLD_MAP_ROUTE4_POKEMON_CENTER_1F                     0x8a2
+#define FLAG_WORLD_MAP_ROUTE10_POKEMON_CENTER_1F                    0x8a3
+#define FLAG_WORLD_MAP_VIRIDIAN_FOREST                              0x8a4
+#define FLAG_WORLD_MAP_MT_MOON_1F                                   0x8a5
+#define FLAG_WORLD_MAP_SSANNE_EXTERIOR                              0x8a6
+#define FLAG_WORLD_MAP_UNDERGROUND_PATH_NORTH_SOUTH_TUNNEL          0x8a7
+#define FLAG_WORLD_MAP_UNDERGROUND_PATH_EAST_WEST_TUNNEL            0x8a8
+#define FLAG_WORLD_MAP_DIGLETTS_CAVE_B1F                            0x8a9
+#define FLAG_WORLD_MAP_VICTORY_ROAD_1F                              0x8aa
+#define FLAG_WORLD_MAP_ROCKET_HIDEOUT_B1F                           0x8ab
+#define FLAG_WORLD_MAP_SILPH_CO_1F                                  0x8ac
+#define FLAG_WORLD_MAP_POKEMON_MANSION_1F                           0x8ad
+#define FLAG_WORLD_MAP_SAFARI_ZONE_CENTER                           0x8ae
+#define FLAG_WORLD_MAP_POKEMON_LEAGUE_LORELEIS_ROOM                 0x8af
+#define FLAG_WORLD_MAP_ROCK_TUNNEL_1F                               0x8b0
+#define FLAG_WORLD_MAP_SEAFOAM_ISLANDS_1F                           0x8b1
+#define FLAG_WORLD_MAP_POKEMON_TOWER_1F                             0x8b2
+#define FLAG_WORLD_MAP_CERULEAN_CAVE_1F                             0x8b3
+#define FLAG_WORLD_MAP_POWER_PLANT                                  0x8b4
+#define FLAG_WORLD_MAP_NAVEL_ROCK_EXTERIOR                          0x8b5
+#define FLAG_WORLD_MAP_MT_EMBER_EXTERIOR                            0x8b6
+#define FLAG_WORLD_MAP_THREE_ISLAND_BERRY_FOREST                    0x8b7
+#define FLAG_WORLD_MAP_FOUR_ISLAND_ICEFALL_CAVE_ENTRANCE            0x8b8
+#define FLAG_WORLD_MAP_FIVE_ISLAND_ROCKET_WAREHOUSE                 0x8b9
+#define FLAG_WORLD_MAP_SEVEN_ISLAND_TRAINER_TOWER_LOBBY             0x8ba
+#define FLAG_WORLD_MAP_SIX_ISLAND_DOTTED_HOLE_1F                    0x8bb
+#define FLAG_WORLD_MAP_FIVE_ISLAND_LOST_CAVE_ENTRANCE               0x8bc
+#define FLAG_WORLD_MAP_SIX_ISLAND_PATTERN_BUSH                      0x8bd
+#define FLAG_WORLD_MAP_SIX_ISLAND_ALTERING_CAVE                     0x8be
+#define FLAG_WORLD_MAP_SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER     0x8bf
+#define FLAG_WORLD_MAP_THREE_ISLAND_DUNSPARCE_TUNNEL                0x8c0
+#define FLAG_WORLD_MAP_SEVEN_ISLAND_SEAVAULT_CANYON_TANOBY_KEY      0x8c1
+#define FLAG_WORLD_MAP_BIRTH_ISLAND_EXTERIOR                        0x8c2
+
+// Unknown
+
+#define FLAG_0x807 0x807
+#define FLAG_0x821 0x821
+#define FLAG_0x822 0x822
+#define FLAG_0x823 0x823
+#define FLAG_0x825 0x825
+#define FLAG_0x827 0x827
+#define FLAG_0x828 0x828
+#define FLAG_0x829 0x829
+#define FLAG_0x82C 0x82C
+#define FLAG_0x82F 0x82F
+#define FLAG_0x830 0x830
+#define FLAG_SYS_NOT_SOMEONES_PC 0x834
+#define FLAG_0x83C 0x83C
+#define FLAG_0x83E 0x83E
+#define FLAG_0x841 0x841
+#define FLAG_0x844 0x844
+#define FLAG_0x845 0x845
+#define FLAG_0x846 0x846
+#define FLAG_0x847 0x847
+#define FLAG_0x848 0x848
+#define FLAG_0x849 0x849
+#define FLAG_0x84A 0x84A
+#define FLAG_0x84B 0x84B
+
+
+// Emerald Flags
+
 // TODO: Get correct names and numbers
 
 #define FLAG_0x001               0x1
@@ -136,7 +222,7 @@
 #define FLAG_0x083               0x83
 #define FLAG_0x084               0x84
 #define FLAG_0x085               0x85
-#define FLAG_PENDING_DAYCARE_EGG 0x86
+#define FLAG_0x086               0x86
 #define FLAG_0x087               0x87
 #define FLAG_0x088               0x88
 #define FLAG_0x089               0x89
@@ -616,7 +702,7 @@
 #define FLAG_0x263               0x263
 #define FLAG_0x264               0x264
 #define FLAG_0x265               0x265
-#define FLAG_0x266               0x266
+#define FLAG_PENDING_DAYCARE_EGG 0x266
 #define FLAG_0x267               0x267
 #define FLAG_0x268               0x268
 #define FLAG_0x269               0x269

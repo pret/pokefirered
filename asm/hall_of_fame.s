@@ -508,7 +508,7 @@ _080F21B2:
 	bl memcpy
 	movs r0, 0
 	movs r1, 0
-	bl sub_80F6EE4
+	bl DrawDialogueFrame
 	ldr r2, _080F2214 @ =gUnknown_8419F54
 	movs r0, 0
 	str r0, [sp]
@@ -521,7 +521,7 @@ _080F21B2:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -692,7 +692,7 @@ _080F22F2:
 	ldr r3, _080F238C @ =0x0000ffff
 	str r3, [sp, 0xC]
 	movs r3, 0x1
-	bl sub_810C1CC
+	bl CreateMonPicSprite_HandleDeoxys
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, _080F2390 @ =gSprites
@@ -723,7 +723,7 @@ _080F22F2:
 	strh r0, [r1]
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_80F6F54
+	bl ClearDialogWindowAndFrame
 	adds r4, r5
 	ldr r0, _080F239C @ =sub_80F23A0
 	str r0, [r4]
@@ -1172,7 +1172,7 @@ sub_80F26D4: @ 80F26D4
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	movs r1, 0x1
-	bl sub_810C374
+	bl PlayerGenderToFrontTrainerPicId_Debug
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x6
@@ -1182,7 +1182,7 @@ sub_80F26D4: @ 80F26D4
 	movs r1, 0x1
 	movs r2, 0x78
 	movs r3, 0x48
-	bl sub_810C2A4
+	bl CreateTrainerPicSprite
 	ldr r1, _080F2750 @ =gTasks
 	lsls r4, r5, 2
 	adds r4, r5
@@ -1194,7 +1194,7 @@ sub_80F26D4: @ 80F26D4
 	ldr r1, _080F2758 @ =0x0000021d
 	movs r0, 0x1
 	movs r2, 0xD0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	movs r0, 0x78
 	strh r0, [r4, 0xE]
 	ldr r0, _080F275C @ =Task_Hof_WaitAndPrintPlayerInfo
@@ -1265,7 +1265,7 @@ _080F27AC:
 	bl sub_80F33DC
 	movs r0, 0
 	movs r1, 0
-	bl sub_80F6EE4
+	bl DrawDialogueFrame
 	ldr r2, _080F27FC @ =gUnknown_84160C8
 	str r5, [sp]
 	movs r0, 0x2
@@ -1277,7 +1277,7 @@ _080F27AC:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -1383,7 +1383,7 @@ _080F28AC:
 	ldrb r0, [r4]
 	cmp r0, 0xFF
 	beq _080F28B6
-	bl sub_810C214
+	bl FreeAndDestroyMonPicSprite
 _080F28B6:
 	adds r4, 0x2
 	subs r5, 0x1
@@ -1394,7 +1394,7 @@ _080F28B6:
 	lsls r1, 3
 	adds r1, r0
 	ldrh r0, [r1, 0x10]
-	bl sub_810C2E8
+	bl FreeAndDestroyTrainerPicSprite
 	movs r0, 0
 	bl HideBg
 	movs r0, 0x1
@@ -1459,8 +1459,8 @@ sub_80F2934: @ 80F2934
 	movs r1, 0x9
 	movs r3, 0xB
 	bl Overworld_SetWarpDestination
-	bl sub_807E438
-	bl sub_80559E4
+	bl DoWarp
+	bl ResetInitialPlayerAvatarState
 	add sp, 0x4
 	pop {r0}
 	bx r0
@@ -1607,7 +1607,7 @@ sub_80F2AA4: @ 80F2AA4
 	movs r1, 0x1E
 	movs r2, 0
 	movs r3, 0xC
-	bl sub_810F558
+	bl CreateWindow_SnapRight_StdPal
 	movs r0, 0x3
 	bl Save_LoadGameData
 	lsls r0, 24
@@ -1825,7 +1825,7 @@ _080F2C4C:
 	ldr r3, _080F2CA0 @ =0x0000ffff
 	str r3, [sp, 0xC]
 	movs r3, 0x1
-	bl sub_810C1CC
+	bl CreateMonPicSprite_HandleDeoxys
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r2, _080F2CA4 @ =gSprites
@@ -1888,13 +1888,13 @@ _080F2CB4:
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	bgt _080F2D24
-	ldr r1, _080F2D20 @ =gUnknown_8415D78
+	ldr r1, _080F2D20 @ =gText_UPDOWNPick_ABUTTONBBUTTONCancel
 	movs r0, 0x1
 	str r0, [sp]
 	adds r0, r5, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_810F650
+	bl Menu_PrintHelpSystemUIHeader
 	b _080F2D34
 	.align 2, 0
 _080F2D08: .4byte 0xffff0000
@@ -1903,15 +1903,15 @@ _080F2D10: .4byte gStringVar1
 _080F2D14: .4byte gTasks
 _080F2D18: .4byte gStringVar4
 _080F2D1C: .4byte gUnknown_84160B4
-_080F2D20: .4byte gUnknown_8415D78
+_080F2D20: .4byte gText_UPDOWNPick_ABUTTONBBUTTONCancel
 _080F2D24:
-	ldr r1, _080F2D54 @ =gUnknown_8415D60
+	ldr r1, _080F2D54 @ =gText_UPDOWNPick_ABUTTONNext_BBUTTONBack
 	movs r0, 0x1
 	str r0, [sp]
 	adds r0, r5, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_810F650
+	bl Menu_PrintHelpSystemUIHeader
 _080F2D34:
 	ldr r0, _080F2D58 @ =gTasks
 	ldr r1, [sp, 0x14]
@@ -1929,7 +1929,7 @@ _080F2D34:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F2D54: .4byte gUnknown_8415D60
+_080F2D54: .4byte gText_UPDOWNPick_ABUTTONNext_BBUTTONBack
 _080F2D58: .4byte gTasks
 _080F2D5C: .4byte Task_HofPC_PrintMonInfo
 	thumb_func_end sub_80F2B6C
@@ -2118,7 +2118,7 @@ _080F2EC4:
 	ldrb r0, [r0]
 	cmp r0, 0xFF
 	beq _080F2ED6
-	bl sub_810C214
+	bl FreeAndDestroyMonPicSprite
 _080F2ED6:
 	adds r0, r4, 0x1
 	lsls r0, 16
@@ -2339,13 +2339,13 @@ sub_80F30A4: @ 80F30A4
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _080F30FC @ =gUnknown_8415D8C
+	ldr r0, _080F30FC @ =gText_ABUTTONExit
 	movs r1, 0x8
 	movs r2, 0x1
-	bl sub_810F5E8
+	bl PrintTextOnRightSnappedWindow
 	movs r0, 0
 	movs r1, 0
-	bl sub_80F6EE4
+	bl DrawDialogueFrame
 	ldr r2, _080F3100 @ =gUnknown_8416090
 	movs r0, 0
 	str r0, [sp]
@@ -2358,7 +2358,7 @@ sub_80F30A4: @ 80F30A4
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -2374,7 +2374,7 @@ sub_80F30A4: @ 80F30A4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F30FC: .4byte gUnknown_8415D8C
+_080F30FC: .4byte gText_ABUTTONExit
 _080F3100: .4byte gUnknown_8416090
 _080F3104: .4byte gTasks
 _080F3108: .4byte Task_HofPC_ExitOnButtonPress
@@ -2436,7 +2436,7 @@ HallOfFame_PrintWelcomeText: @ 80F313C
 	movs r1, 0x2
 	adds r2, r4, 0
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -2535,7 +2535,7 @@ _080F322E:
 	movs r1, 0x2
 	movs r2, 0x10
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 _080F3252:
 	movs r2, 0
 	ldrb r0, [r7, 0xA]
@@ -2606,7 +2606,7 @@ _080F32C4:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldrh r2, [r7, 0x8]
 	ldr r4, _080F3320 @ =0x000001ff
 	adds r0, r4, 0
@@ -2676,7 +2676,7 @@ _080F3348:
 	movs r1, 0x2
 	movs r2, 0x80
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r1, _080F33D4 @ =gUnknown_84160F4
 	add r0, sp, 0xC
 	bl StringCopy
@@ -2694,7 +2694,7 @@ _080F3348:
 	movs r1, 0x2
 	movs r2, 0x20
 	movs r3, 0x11
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r1, _080F33D8 @ =gUnknown_8416104
 	add r0, sp, 0xC
 	bl StringCopy
@@ -2711,7 +2711,7 @@ _080F3348:
 	movs r1, 0x2
 	movs r2, 0x60
 	movs r3, 0x11
-	bl box_print
+	bl AddTextPrinterParameterized3
 _080F33BA:
 	movs r0, 0
 	movs r1, 0x3
@@ -2764,7 +2764,7 @@ sub_80F33DC: @ 80F33DC
 	movs r1, 0x2
 	movs r2, 0x4
 	movs r3, 0x3
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	ldr r0, _080F35FC @ =gSaveBlock2Ptr
 	mov r10, r0
 	ldr r1, [r0]
@@ -2785,7 +2785,7 @@ sub_80F33DC: @ 80F33DC
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r3, 0x3
-	bl box_print
+	bl AddTextPrinterParameterized3
 	mov r1, r10
 	ldr r0, [r1]
 	ldrb r4, [r0, 0xA]
@@ -2801,7 +2801,7 @@ sub_80F33DC: @ 80F33DC
 	movs r1, 0x2
 	movs r2, 0x4
 	movs r3, 0x12
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add r1, sp, 0x14
 	mov r8, r1
 	ldr r1, _080F3604 @ =0x000186a0
@@ -2869,7 +2869,7 @@ sub_80F33DC: @ 80F33DC
 	movs r1, 0x2
 	adds r2, r6, 0
 	movs r3, 0x12
-	bl box_print
+	bl AddTextPrinterParameterized3
 	mov r1, r9
 	str r1, [sp]
 	str r7, [sp, 0x4]
@@ -2879,7 +2879,7 @@ sub_80F33DC: @ 80F33DC
 	movs r1, 0x2
 	movs r2, 0x4
 	movs r3, 0x20
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add r5, sp, 0x14
 	mov r0, r10
 	ldr r4, [r0]
@@ -2957,7 +2957,7 @@ _080F3582:
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r3, 0x20
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x1
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -3070,11 +3070,11 @@ _080F36B8: .4byte gUnknown_840C39C
 	thumb_func_start sub_80F36BC
 sub_80F36BC: @ 80F36BC
 	push {lr}
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl ResetTasks
 	bl ResetSpriteData
 	bl reset_temp_tile_data_buffers
-	bl dp13_810BB8C
+	bl ResetAllPicSprites
 	bl FreeAllSpritePalettes
 	ldr r1, _080F36EC @ =gReservedSpritePaletteCount
 	movs r0, 0x8
@@ -3223,8 +3223,8 @@ _080F37C8:
 	bl CopyBgTilemapBufferToVram
 	b _080F3854
 _080F381E:
-	bl sub_80F6C6C
-	bl sub_80F6C98
+	bl InitStandardTextBoxWindows
+	bl ResetBg0
 	b _080F3854
 _080F3828:
 	movs r1, 0x82
@@ -3353,7 +3353,7 @@ _080F38EE:
 	movs r1, 0x3
 	ands r0, r1
 	adds r0, 0x8
-	ldr r1, _080F392C @ =gUnknown_825E074
+	ldr r1, _080F392C @ =gSineTable
 	lsls r4, 1
 	adds r4, r1
 	movs r2, 0
@@ -3373,7 +3373,7 @@ _080F3926:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F392C: .4byte gUnknown_825E074
+_080F392C: .4byte gSineTable
 	thumb_func_end sub_80F38D8
 
 	thumb_func_start sub_80F3930

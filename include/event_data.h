@@ -36,6 +36,7 @@ bool32 sub_806E2BC(void);
 void sub_806E6FC(void);
 void sub_806E2D0(void);
 void sub_806E370(void);
+bool32 sub_806E25C(void);
 
 extern u16 gSpecialVar_0x8000;
 extern u16 gSpecialVar_0x8001;
@@ -58,5 +59,8 @@ extern u16 gSpecialVar_0x8014;
 
 extern u16 gSpecialVar_Result;
 extern u16 gSpecialVar_0x8004;
+
+extern u16 gUnknown_20370DA;
+extern u16 gUnknown_20370DC;
 
 #endif // GUARD_EVENT_DATA_H

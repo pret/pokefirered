@@ -100,7 +100,7 @@ struct CgbChannel
     u8 le;
     u8 sw;
     u32 fr;
-    u32 wp;
+    u32 * wp;
     u32 cp;
     u32 tp;
     u32 pp;

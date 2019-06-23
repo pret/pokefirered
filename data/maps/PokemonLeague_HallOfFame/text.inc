@@ -1,0 +1,15 @@
+gUnknown_817922F:: @ 817922F
+    .string "OAK: Er-hem!\n"
+    .string "Congratulations, {PLAYER}!\p"
+    .string "This floor is the POKéMON HALL OF\n"
+    .string "FAME.\p"
+    .string "POKéMON LEAGUE CHAMPIONS are\n"
+    .string "honored for their exploits here.\p"
+    .string "Their POKéMON are also recorded in\n"
+    .string "the HALL OF FAME.\p"
+    .string "{PLAYER}!\p"
+    .string "You have worked hard to become\n"
+    .string "the new LEAGUE CHAMPION.\p"
+    .string "Congratulations, {PLAYER}, you and\n"
+    .string "your POKéMON are HALL OF FAMERS!$"
+

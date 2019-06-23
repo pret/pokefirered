@@ -26,4 +26,4 @@ gCurSaveChunk:
 gFlashIdentIsValid: @ 0x0300123C
 	.space 0x4
 
-	.include "*libagb_flash.a:agb_flash.o"
+	.include "agb_flash.o"

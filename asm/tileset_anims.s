@@ -132,11 +132,11 @@ sub_806FFB0: @ 806FFB0
 sub_806FFBC: @ 806FFBC
 	push {r4,lr}
 	bl ResetTilesetAnimBuffer
-	ldr r2, _08070014 @ =gUnknown_3000FAE
+	ldr r2, _08070014 @ =sPrimaryTilesetCBCounter
 	ldrh r0, [r2]
 	adds r0, 0x1
 	strh r0, [r2]
-	ldr r1, _08070018 @ =gUnknown_3000FB0
+	ldr r1, _08070018 @ =sPrimaryTilesetCBBufferSize
 	lsls r0, 16
 	lsrs r0, 16
 	ldrh r1, [r1]
@@ -145,11 +145,11 @@ sub_806FFBC: @ 806FFBC
 	movs r0, 0
 	strh r0, [r2]
 _0806FFDA:
-	ldr r4, _0807001C @ =gUnknown_3000FB2
+	ldr r4, _0807001C @ =sSecondaryTilesetCBCounter
 	ldrh r0, [r4]
 	adds r0, 0x1
 	strh r0, [r4]
-	ldr r1, _08070020 @ =gUnknown_3000FB4
+	ldr r1, _08070020 @ =sSecondaryTilesetCBBufferSize
 	lsls r0, 16
 	lsrs r0, 16
 	ldrh r1, [r1]
@@ -158,14 +158,14 @@ _0806FFDA:
 	movs r0, 0
 	strh r0, [r4]
 _0806FFF2:
-	ldr r0, _08070024 @ =gUnknown_3000FB8
+	ldr r0, _08070024 @ =sPrimaryTilesetCB
 	ldr r1, [r0]
 	cmp r1, 0
 	beq _08070000
 	ldrh r0, [r2]
 	bl _call_via_r1
 _08070000:
-	ldr r0, _08070028 @ =gUnknown_3000FBC
+	ldr r0, _08070028 @ =sSecondaryTilesetCB
 	ldr r1, [r0]
 	cmp r1, 0
 	beq _0807000E
@@ -176,23 +176,23 @@ _0807000E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08070014: .4byte gUnknown_3000FAE
-_08070018: .4byte gUnknown_3000FB0
-_0807001C: .4byte gUnknown_3000FB2
-_08070020: .4byte gUnknown_3000FB4
-_08070024: .4byte gUnknown_3000FB8
-_08070028: .4byte gUnknown_3000FBC
+_08070014: .4byte sPrimaryTilesetCBCounter
+_08070018: .4byte sPrimaryTilesetCBBufferSize
+_0807001C: .4byte sSecondaryTilesetCBCounter
+_08070020: .4byte sSecondaryTilesetCBBufferSize
+_08070024: .4byte sPrimaryTilesetCB
+_08070028: .4byte sSecondaryTilesetCB
 	thumb_func_end sub_806FFBC
 
 	thumb_func_start cur_mapheader_run_tileset1_func
 cur_mapheader_run_tileset1_func: @ 807002C
 	push {lr}
-	ldr r0, _08070058 @ =gUnknown_3000FAE
+	ldr r0, _08070058 @ =sPrimaryTilesetCBCounter
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, _0807005C @ =gUnknown_3000FB0
+	ldr r0, _0807005C @ =sPrimaryTilesetCBBufferSize
 	strh r1, [r0]
-	ldr r1, _08070060 @ =gUnknown_3000FB8
+	ldr r1, _08070060 @ =sPrimaryTilesetCB
 	movs r0, 0
 	str r0, [r1]
 	ldr r0, _08070064 @ =gMapHeader
@@ -208,21 +208,21 @@ _08070052:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08070058: .4byte gUnknown_3000FAE
-_0807005C: .4byte gUnknown_3000FB0
-_08070060: .4byte gUnknown_3000FB8
+_08070058: .4byte sPrimaryTilesetCBCounter
+_0807005C: .4byte sPrimaryTilesetCBBufferSize
+_08070060: .4byte sPrimaryTilesetCB
 _08070064: .4byte gMapHeader
 	thumb_func_end cur_mapheader_run_tileset1_func
 
 	thumb_func_start cur_mapheader_run_tileset2_func
 cur_mapheader_run_tileset2_func: @ 8070068
 	push {lr}
-	ldr r0, _08070094 @ =gUnknown_3000FB2
+	ldr r0, _08070094 @ =sSecondaryTilesetCBCounter
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, _08070098 @ =gUnknown_3000FB4
+	ldr r0, _08070098 @ =sSecondaryTilesetCBBufferSize
 	strh r1, [r0]
-	ldr r1, _0807009C @ =gUnknown_3000FBC
+	ldr r1, _0807009C @ =sSecondaryTilesetCB
 	movs r0, 0
 	str r0, [r1]
 	ldr r0, _080700A0 @ =gMapHeader
@@ -238,9 +238,9 @@ _0807008E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08070094: .4byte gUnknown_3000FB2
-_08070098: .4byte gUnknown_3000FB4
-_0807009C: .4byte gUnknown_3000FBC
+_08070094: .4byte sSecondaryTilesetCBCounter
+_08070098: .4byte sSecondaryTilesetCBBufferSize
+_0807009C: .4byte sSecondaryTilesetCB
 _080700A0: .4byte gMapHeader
 	thumb_func_end cur_mapheader_run_tileset2_func
 
@@ -342,22 +342,22 @@ _0807014C:
 
 	thumb_func_start sub_8070154
 sub_8070154: @ 8070154
-	ldr r1, _0807016C @ =gUnknown_3000FAE
+	ldr r1, _0807016C @ =sPrimaryTilesetCBCounter
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, _08070170 @ =gUnknown_3000FB0
+	ldr r1, _08070170 @ =sPrimaryTilesetCBBufferSize
 	movs r2, 0xA0
 	lsls r2, 2
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r1, _08070174 @ =gUnknown_3000FB8
+	ldr r1, _08070174 @ =sPrimaryTilesetCB
 	ldr r0, _08070178 @ =sub_8070120
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_0807016C: .4byte gUnknown_3000FAE
-_08070170: .4byte gUnknown_3000FB0
-_08070174: .4byte gUnknown_3000FB8
+_0807016C: .4byte sPrimaryTilesetCBCounter
+_08070170: .4byte sPrimaryTilesetCBBufferSize
+_08070174: .4byte sPrimaryTilesetCB
 _08070178: .4byte sub_8070120
 	thumb_func_end sub_8070154
 
@@ -410,20 +410,20 @@ _080701D0:
 
 	thumb_func_start sub_80701D8
 sub_80701D8: @ 80701D8
-	ldr r1, _080701EC @ =gUnknown_3000FB2
+	ldr r1, _080701EC @ =sSecondaryTilesetCBCounter
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, _080701F0 @ =gUnknown_3000FB4
+	ldr r1, _080701F0 @ =sSecondaryTilesetCBBufferSize
 	movs r0, 0x78
 	strh r0, [r1]
-	ldr r1, _080701F4 @ =gUnknown_3000FBC
+	ldr r1, _080701F4 @ =sSecondaryTilesetCB
 	ldr r0, _080701F8 @ =sub_80701AC
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_080701EC: .4byte gUnknown_3000FB2
-_080701F0: .4byte gUnknown_3000FB4
-_080701F4: .4byte gUnknown_3000FBC
+_080701EC: .4byte sSecondaryTilesetCBCounter
+_080701F0: .4byte sSecondaryTilesetCBBufferSize
+_080701F4: .4byte sSecondaryTilesetCB
 _080701F8: .4byte sub_80701AC
 	thumb_func_end sub_80701D8
 
@@ -474,20 +474,20 @@ _08070248:
 
 	thumb_func_start sub_8070250
 sub_8070250: @ 8070250
-	ldr r1, _08070264 @ =gUnknown_3000FB2
+	ldr r1, _08070264 @ =sSecondaryTilesetCBCounter
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, _08070268 @ =gUnknown_3000FB4
+	ldr r1, _08070268 @ =sSecondaryTilesetCBBufferSize
 	movs r0, 0xA0
 	strh r0, [r1]
-	ldr r1, _0807026C @ =gUnknown_3000FBC
+	ldr r1, _0807026C @ =sSecondaryTilesetCB
 	ldr r0, _08070270 @ =sub_8070224
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_08070264: .4byte gUnknown_3000FB2
-_08070268: .4byte gUnknown_3000FB4
-_0807026C: .4byte gUnknown_3000FBC
+_08070264: .4byte sSecondaryTilesetCBCounter
+_08070268: .4byte sSecondaryTilesetCBBufferSize
+_0807026C: .4byte sSecondaryTilesetCB
 _08070270: .4byte sub_8070224
 	thumb_func_end sub_8070250
 
@@ -531,22 +531,22 @@ _080702B0:
 
 	thumb_func_start sub_80702B4
 sub_80702B4: @ 80702B4
-	ldr r1, _080702CC @ =gUnknown_3000FB2
+	ldr r1, _080702CC @ =sSecondaryTilesetCBCounter
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, _080702D0 @ =gUnknown_3000FB4
+	ldr r1, _080702D0 @ =sSecondaryTilesetCBBufferSize
 	movs r2, 0x80
 	lsls r2, 1
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r1, _080702D4 @ =gUnknown_3000FBC
+	ldr r1, _080702D4 @ =sSecondaryTilesetCB
 	ldr r0, _080702D8 @ =sub_807029C
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_080702CC: .4byte gUnknown_3000FB2
-_080702D0: .4byte gUnknown_3000FB4
-_080702D4: .4byte gUnknown_3000FBC
+_080702CC: .4byte sSecondaryTilesetCBCounter
+_080702D0: .4byte sSecondaryTilesetCBBufferSize
+_080702D4: .4byte sSecondaryTilesetCB
 _080702D8: .4byte sub_807029C
 	thumb_func_end sub_80702B4
 
@@ -589,20 +589,20 @@ _08070318:
 
 	thumb_func_start sub_807031C
 sub_807031C: @ 807031C
-	ldr r1, _08070330 @ =gUnknown_3000FB2
+	ldr r1, _08070330 @ =sSecondaryTilesetCBCounter
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, _08070334 @ =gUnknown_3000FB4
+	ldr r1, _08070334 @ =sSecondaryTilesetCBBufferSize
 	movs r0, 0xF0
 	strh r0, [r1]
-	ldr r1, _08070338 @ =gUnknown_3000FBC
+	ldr r1, _08070338 @ =sSecondaryTilesetCB
 	ldr r0, _0807033C @ =sub_8070304
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_08070330: .4byte gUnknown_3000FB2
-_08070334: .4byte gUnknown_3000FB4
-_08070338: .4byte gUnknown_3000FBC
+_08070330: .4byte sSecondaryTilesetCBCounter
+_08070334: .4byte sSecondaryTilesetCBBufferSize
+_08070338: .4byte sSecondaryTilesetCB
 _0807033C: .4byte sub_8070304
 	thumb_func_end sub_807031C
 
@@ -645,22 +645,22 @@ _0807037C:
 
 	thumb_func_start sub_8070380
 sub_8070380: @ 8070380
-	ldr r1, _08070398 @ =gUnknown_3000FB2
+	ldr r1, _08070398 @ =sSecondaryTilesetCBCounter
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, _0807039C @ =gUnknown_3000FB4
+	ldr r1, _0807039C @ =sSecondaryTilesetCBBufferSize
 	movs r2, 0x80
 	lsls r2, 1
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r1, _080703A0 @ =gUnknown_3000FBC
+	ldr r1, _080703A0 @ =sSecondaryTilesetCB
 	ldr r0, _080703A4 @ =sub_8070368
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_08070398: .4byte gUnknown_3000FB2
-_0807039C: .4byte gUnknown_3000FB4
-_080703A0: .4byte gUnknown_3000FBC
+_08070398: .4byte sSecondaryTilesetCBCounter
+_0807039C: .4byte sSecondaryTilesetCBBufferSize
+_080703A0: .4byte sSecondaryTilesetCB
 _080703A4: .4byte sub_8070368
 	thumb_func_end sub_8070380
 

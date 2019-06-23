@@ -91,7 +91,7 @@ sub_80807E8: @ 80807E8
 	lsrs r4, 24
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80F6F9C
+	bl ClearStdWindowAndFrame
 	adds r0, r4, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -765,7 +765,7 @@ _08080D3C:
 	cmp r2, 0x9
 	bne _08080D54
 _08080D44:
-	bl sub_80098B8
+	bl CloseLink
 	bl HideFieldMessageBox
 	ldr r0, _08080D50 @ =sub_8080F78
 	b _08080D72
@@ -860,7 +860,7 @@ _08080DF6:
 	cmp r0, 0x9
 	bne _08080E20
 _08080DFE:
-	bl sub_80098B8
+	bl CloseLink
 _08080E02:
 	bl HideFieldMessageBox
 	ldr r0, _08080E18 @ =gTasks
@@ -1631,7 +1631,7 @@ _08081410:
 _08081418:
 	str r0, [r1]
 _0808141A:
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	ldr r1, _08081444 @ =gTrainerBattleOpponent_A
 	movs r2, 0x80
 	lsls r2, 4
@@ -1854,7 +1854,7 @@ _080815E0:
 _080815E8:
 	str r0, [r1]
 _080815EA:
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	ldr r1, _08081614 @ =gTrainerBattleOpponent_A
 	movs r3, 0x80
 	lsls r3, 4
@@ -1905,14 +1905,14 @@ _0808164C:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808165C
-	ldr r0, _08081664 @ =c2_exit_to_overworld_2_switch
+	ldr r0, _08081664 @ =CB2_ReturnToField
 	bl SetMainCallback2
 _0808165C:
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08081664: .4byte c2_exit_to_overworld_2_switch
+_08081664: .4byte CB2_ReturnToField
 	thumb_func_end sub_8081624
 
 	thumb_func_start sub_8081668
@@ -1940,7 +1940,7 @@ sub_8081668: @ 8081668
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0808170A
-	ldr r0, _080816C4 @ =gUnknown_2023E8A
+	ldr r0, _080816C4 @ =gBattleOutcome
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _080816C8
@@ -1953,7 +1953,7 @@ _080816B4: .4byte 0x0000ffdf
 _080816B8: .4byte gSpecialVar_0x8004
 _080816BC: .4byte gUnknown_300502C
 _080816C0: .4byte gWirelessCommType
-_080816C4: .4byte gUnknown_2023E8A
+_080816C4: .4byte gBattleOutcome
 _080816C8:
 	ldr r4, _080816E8 @ =gLinkPlayers
 	bl GetMultiplayerId
@@ -2459,7 +2459,7 @@ sub_8081A90: @ 8081A90
 	lsls r0, 17
 	cmp r1, r0
 	ble _08081AC2
-	bl sub_80098B8
+	bl CloseLink
 	ldr r0, _08081ADC @ =c2_800ACD4
 	bl SetMainCallback2
 	adds r0, r4, 0

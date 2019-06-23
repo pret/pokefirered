@@ -9,7 +9,7 @@ extern u8 gUnknown_203ADFA;
 
 extern void sub_80CBDE8(void); // field_specials
 extern u16 CalcCRC16WithTable(u8 *data, int length); // util
-extern bool32 sub_8143FC8(void); // mevent
+extern bool32 ValidateReceivedWonderCard(void); // mevent
 
 enum
 {
@@ -19,7 +19,7 @@ enum
 };
 
 EWRAM_DATA u8 gUnknown_20370A0 = 0;
-EWRAM_DATA u8 *gUnknown_20370A4 = NULL;
+EWRAM_DATA const u8 *gRAMScriptPtr = NULL;
 
 // ewram bss
 /*IWRAM_DATA*/ static u8 sScriptContext1Status;
@@ -485,7 +485,7 @@ bool8 InitRamScript(u8 *script, u16 scriptSize, u8 mapGroup, u8 mapNum, u8 objec
 u8 *GetRamScript(u8 objectId, u8 *script)
 {
     struct RamScriptData *scriptData = &gSaveBlock1Ptr->ramScript.data;
-    gUnknown_20370A4 = NULL;
+    gRAMScriptPtr = NULL;
     if (scriptData->magic != RAM_SCRIPT_MAGIC)
         return script;
     if (scriptData->mapGroup != gSaveBlock1Ptr->location.mapGroup)
@@ -501,7 +501,7 @@ u8 *GetRamScript(u8 objectId, u8 *script)
     }
     else
     {
-        gUnknown_20370A4 = script;
+        gRAMScriptPtr = script;
         return scriptData->script;
     }
 }
@@ -525,7 +525,7 @@ bool32 sub_8069DFC(void)
 u8 *sub_8069E48(void)
 {
     struct RamScriptData *scriptData = &gSaveBlock1Ptr->ramScript.data;
-    if (!sub_8143FC8())
+    if (!ValidateReceivedWonderCard())
         return NULL;
     if (scriptData->magic != RAM_SCRIPT_MAGIC)
         return NULL;

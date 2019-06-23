@@ -109,11 +109,11 @@ _080F564A:
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xF0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0xF0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	b _080F56E2
 _080F5660:
 	movs r0, 0x1
@@ -134,7 +134,7 @@ _080F5660:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x3
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	movs r0, 0x1
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -152,7 +152,7 @@ _080F569C:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810FF60
+	bl CreateYesNoMenu
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 	b _080F56E2
@@ -204,7 +204,7 @@ sub_80F5708: @ 80F5708
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080F578C
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r4, r0, 24
 	movs r0, 0x1
@@ -241,7 +241,7 @@ _080F5744:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x3
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	movs r0, 0x1
 	movs r1, 0x3
 	bl CopyWindowToVram

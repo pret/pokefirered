@@ -29,7 +29,7 @@ _08009498:
 	cmp r0, r1
 	beq _080094C4
 	bl sub_800B210
-	bl sub_80098B8
+	bl CloseLink
 	bl RestoreSerialTimer3IntrHandlers
 	movs r0, 0
 	b _080094CE
@@ -507,8 +507,8 @@ _080098B0: .4byte gUnknown_3003F30
 _080098B4: .4byte gUnknown_3003F2C
 	thumb_func_end sub_8009804
 
-	thumb_func_start sub_80098B8
-sub_80098B8: @ 80098B8
+	thumb_func_start CloseLink
+CloseLink: @ 80098B8
 	push {r4,lr}
 	ldr r0, _080098DC @ =gReceivedRemoteLinkPlayers
 	movs r4, 0
@@ -529,7 +529,7 @@ _080098CC:
 _080098DC: .4byte gReceivedRemoteLinkPlayers
 _080098E0: .4byte gWirelessCommType
 _080098E4: .4byte gLinkOpen
-	thumb_func_end sub_80098B8
+	thumb_func_end CloseLink
 
 	thumb_func_start TestBlockTransfer
 TestBlockTransfer: @ 80098E8
@@ -870,7 +870,7 @@ _08009B7E:
 	movs r0, 0
 	strh r0, [r3]
 	lsls r4, r6, 4
-	ldr r5, _08009BCC @ =gUnknown_3003ED0
+	ldr r5, _08009BCC @ =gRecvCmds
 	adds r2, r4, r5
 	ldrh r0, [r2]
 	mov r12, r1
@@ -906,7 +906,7 @@ _08009BC4:
 	b _08009E3E
 	.align 2, 0
 _08009BC8: .4byte gUnknown_3003E60
-_08009BCC: .4byte gUnknown_3003ED0
+_08009BCC: .4byte gRecvCmds
 _08009BD0: .4byte 0x00005fff
 _08009BD4: .4byte 0x00004444
 _08009BD8: .4byte 0x00002222
@@ -1006,12 +1006,12 @@ _08009C94:
 	adds r1, r0
 	movs r2, 0
 	strh r2, [r1]
-	ldr r0, _08009CBC @ =gUnknown_3003ED0
+	ldr r0, _08009CBC @ =gRecvCmds
 	adds r0, 0x2
 	adds r0, r4, r0
 	ldrh r0, [r0]
 	strh r0, [r1, 0x2]
-	ldr r0, _08009CBC @ =gUnknown_3003ED0
+	ldr r0, _08009CBC @ =gRecvCmds
 	adds r0, 0x4
 	adds r0, r4, r0
 	ldrh r0, [r0]
@@ -1019,7 +1019,7 @@ _08009C94:
 	b _08009E3E
 	.align 2, 0
 _08009CB8: .4byte gUnknown_3000E18
-_08009CBC: .4byte gUnknown_3003ED0
+_08009CBC: .4byte gRecvCmds
 _08009CC0:
 	mov r3, r12
 	adds r0, r3, r6
@@ -1037,7 +1037,7 @@ _08009CC0:
 	mov r8, r0
 	movs r2, 0
 	adds r5, r3, 0
-	ldr r7, _08009D0C @ =gUnknown_3003ED0
+	ldr r7, _08009D0C @ =gRecvCmds
 	adds r3, r4, 0
 _08009CE4:
 	ldrh r1, [r5]
@@ -1059,13 +1059,13 @@ _08009CE4:
 	.align 2, 0
 _08009D04: .4byte gUnknown_3000E18
 _08009D08: .4byte gDecompressionBuffer
-_08009D0C: .4byte gUnknown_3003ED0
+_08009D0C: .4byte gRecvCmds
 _08009D10:
 	movs r2, 0
 	ldr r1, _08009DC4 @ =gBlockRecvBuffer
 	mov r9, r1
 	adds r7, r3, 0
-	ldr r3, _08009DC8 @ =gUnknown_3003ED0
+	ldr r3, _08009DC8 @ =gRecvCmds
 	mov r8, r3
 	lsls r5, r6, 8
 	adds r3, r4, 0
@@ -1153,7 +1153,7 @@ _08009DBC:
 	b _08009E3E
 	.align 2, 0
 _08009DC4: .4byte gBlockRecvBuffer
-_08009DC8: .4byte gUnknown_3003ED0
+_08009DC8: .4byte gRecvCmds
 _08009DCC: .4byte gUnknown_3003EB8
 _08009DD0: .4byte gLinkPlayers
 _08009DD4: .4byte gUnknown_82345C0
@@ -1187,7 +1187,7 @@ _08009E08:
 	b _08009E3E
 _08009E0E:
 	ldr r3, _08009E2C @ =gUnknown_8234598
-	ldr r0, _08009E30 @ =gUnknown_3003ED0
+	ldr r0, _08009E30 @ =gRecvCmds
 	adds r0, 0x2
 	adds r0, r4, r0
 	ldrh r2, [r0]
@@ -1202,9 +1202,9 @@ _08009E0E:
 	b _08009E3E
 	.align 2, 0
 _08009E2C: .4byte gUnknown_8234598
-_08009E30: .4byte gUnknown_3003ED0
+_08009E30: .4byte gRecvCmds
 _08009E34:
-	ldr r0, _08009E5C @ =gUnknown_3003ED0
+	ldr r0, _08009E5C @ =gRecvCmds
 	adds r0, 0x2
 	adds r0, r4, r0
 	ldrh r0, [r0]
@@ -1226,7 +1226,7 @@ _08009E4A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08009E5C: .4byte gUnknown_3003ED0
+_08009E5C: .4byte gRecvCmds
 	thumb_func_end sub_8009B70
 
 	thumb_func_start sub_8009E60
@@ -1596,7 +1596,7 @@ _0800A100:
 	bne _0800A112
 	ldr r0, _0800A11C @ =gUnknown_3003EAC
 	strb r4, [r0]
-	bl sub_80098B8
+	bl CloseLink
 _0800A112:
 	movs r6, 0
 	ldr r4, _0800A120 @ =gLinkPlayers
@@ -2122,7 +2122,7 @@ sub_800A4BC: @ 800A4BC
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0800A4D4
-	bl sub_80FA4F8
+	bl IsNoOneConnected
 	lsls r0, 24
 	lsrs r0, 24
 	b _0800A4E2
@@ -2833,7 +2833,7 @@ _0800A9E6:
 	ldr r1, _0800AA1C @ =gUnknown_3003EAC
 	movs r0, 0x1
 	strb r0, [r1]
-	bl sub_80098B8
+	bl CloseLink
 	ldr r0, _0800AA20 @ =c2_800ACD4
 	bl SetMainCallback2
 _0800A9F6:
@@ -3045,7 +3045,7 @@ _0800AB5C:
 	ldr r0, _0800AB90 @ =gLinkVSyncDisabled
 	movs r4, 0x1
 	strb r4, [r0]
-	bl sub_80098B8
+	bl CloseLink
 	ldr r1, _0800AB94 @ =gUnknown_3003F80
 	movs r0, 0
 	str r0, [r1]
@@ -3198,7 +3198,7 @@ _0800AC8E:
 	ldr r1, _0800ACB8 @ =gUnknown_3003EAC
 	movs r0, 0x1
 	strb r0, [r1]
-	bl sub_80098B8
+	bl CloseLink
 _0800AC98:
 	pop {r0}
 	bx r0
@@ -3252,7 +3252,7 @@ c2_800ACD4: @ 800ACD4
 	movs r2, 0x2
 	bl FillPalette
 	bl ResetTasks
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	ldr r1, _0800ADF0 @ =gWirelessCommType
 	ldrb r0, [r1]
 	cmp r0, 0
@@ -3308,7 +3308,7 @@ _0800AD30:
 	lsls r1, 8
 	movs r0, 0
 	bl ClearGpuRegBits
-	ldr r0, _0800AE08 @ =gUnknown_841F408
+	ldr r0, _0800AE08 @ =gTMCaseMainWindowPalette
 	movs r1, 0xF0
 	movs r2, 0x20
 	bl LoadPalette
@@ -3343,7 +3343,7 @@ _0800ADF8: .4byte sub_800978C
 _0800ADFC: .4byte gUnknown_82345E8
 _0800AE00: .4byte gUnknown_2022860
 _0800AE04: .4byte gUnknown_82345F0
-_0800AE08: .4byte gUnknown_841F408
+_0800AE08: .4byte gTMCaseMainWindowPalette
 _0800AE0C: .4byte gSoftResetDisabled
 _0800AE10: .4byte sub_80094D4
 _0800AE14: .4byte gMain
@@ -3360,7 +3360,7 @@ sub_800AE1C: @ 800AE1C
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl sub_80F696C
+	bl DecompressAndLoadBgGfxUsingHeap
 	ldr r1, _0800AEBC @ =gWirelessLinkDisplayBin
 	movs r0, 0x1
 	movs r2, 0
@@ -3387,7 +3387,7 @@ sub_800AE1C: @ 800AE1C
 	movs r1, 0x3
 	movs r2, 0x2
 	movs r3, 0x5
-	bl box_print
+	bl AddTextPrinterParameterized3
 	str r4, [sp]
 	str r5, [sp, 0x4]
 	ldr r0, _0800AECC @ =gUnknown_841DF05
@@ -3396,7 +3396,7 @@ sub_800AE1C: @ 800AE1C
 	movs r1, 0x3
 	movs r2, 0x2
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0
 	bl PutWindowTilemap
 	movs r0, 0x2
@@ -3444,7 +3444,7 @@ sub_800AED0: @ 800AED0
 	movs r1, 0x3
 	movs r2, 0x2
 	movs r3, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0x2
@@ -3522,7 +3522,7 @@ _0800AF7A:
 	movs r1, 0x3
 	movs r2, 0x2
 	movs r3, 0x14
-	bl box_print
+	bl AddTextPrinterParameterized3
 	b _0800AFC4
 	.align 2, 0
 _0800AF9C: .4byte gWirelessCommType
@@ -3541,7 +3541,7 @@ _0800AFA8:
 	movs r1, 0x3
 	movs r2, 0x2
 	movs r3, 0x14
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0800AFC4:
 	ldr r0, _0800B004 @ =gMain
 	movs r2, 0x87
@@ -3779,7 +3779,7 @@ HandleLinkConnection: @ 800B178
 	bne _0800B1C8
 	ldr r0, _0800B1B4 @ =gUnknown_3003F84
 	ldr r1, _0800B1B8 @ =gUnknown_3003F50
-	ldr r2, _0800B1BC @ =gUnknown_3003ED0
+	ldr r2, _0800B1BC @ =gRecvCmds
 	bl LinkMain1
 	ldr r4, _0800B1C0 @ =gUnknown_3003F20
 	str r0, [r4]
@@ -3801,7 +3801,7 @@ _0800B1AA:
 _0800B1B0: .4byte gWirelessCommType
 _0800B1B4: .4byte gUnknown_3003F84
 _0800B1B8: .4byte gUnknown_3003F50
-_0800B1BC: .4byte gUnknown_3003ED0
+_0800B1BC: .4byte gRecvCmds
 _0800B1C0: .4byte gUnknown_3003F20
 _0800B1C4: .4byte gMain + 0x2C
 _0800B1C8:
@@ -4686,7 +4686,7 @@ _0800B85C:
 _0800B860:
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r2, _0800B8BC @ =gUnknown_3003FB4
+	ldr r2, _0800B8BC @ =gSioMlt_Recv
 	ldr r3, _0800B8C0 @ =0x04000120
 	ldr r0, [r3]
 	ldr r1, [r3, 0x4]
@@ -4731,7 +4731,7 @@ _0800B8A0:
 	.align 2, 0
 _0800B8B4: .4byte 0x0400012a
 _0800B8B8: .4byte 0x0000b9a0
-_0800B8BC: .4byte gUnknown_3003FB4
+_0800B8BC: .4byte gSioMlt_Recv
 _0800B8C0: .4byte 0x04000120
 _0800B8C4: .4byte gUnknown_3000E6B
 _0800B8C8: .4byte 0x00008fff

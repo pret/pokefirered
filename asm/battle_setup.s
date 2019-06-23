@@ -42,7 +42,7 @@ _0807F65E:
 	cmp r0, 0x1
 	bne _0807F686
 	bl sub_812B484
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	ldr r0, _0807F68C @ =sub_800FD9C
 	bl SetMainCallback2
 	bl sub_806D7E8
@@ -104,7 +104,7 @@ sub_807F6CC: @ 807F6CC
 	bhi _0807F6FC
 	ldr r0, _0807F6F8 @ =0x00000167
 	movs r1, 0x1
-	bl sub_8099F40
+	bl CheckBagHasItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807F6FC
@@ -318,8 +318,8 @@ _0807F8BC: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 _0807F8C0: .4byte gBattleTypeFlags
 	thumb_func_end sub_807F888
 
-	thumb_func_start sub_807F8C4
-sub_807F8C4: @ 807F8C4
+	thumb_func_start BattleSetup_StartScriptedWildBattle
+BattleSetup_StartScriptedWildBattle: @ 807F8C4
 	push {lr}
 	bl ScriptContext2_Enable
 	ldr r1, _0807F8F8 @ =gMain
@@ -344,7 +344,7 @@ sub_807F8C4: @ 807F8C4
 _0807F8F8: .4byte gMain
 _0807F8FC: .4byte sub_807FBA0
 _0807F900: .4byte gBattleTypeFlags
-	thumb_func_end sub_807F8C4
+	thumb_func_end BattleSetup_StartScriptedWildBattle
 
 	thumb_func_start sub_807F904
 sub_807F904: @ 807F904
@@ -356,7 +356,7 @@ sub_807F904: @ 807F904
 	str r0, [r1, 0x8]
 	ldr r0, _0807F94C @ =0x00000167
 	movs r1, 0x1
-	bl sub_8099F40
+	bl CheckBagHasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807F958
@@ -623,7 +623,7 @@ sub_807FB40: @ 807FB40
 	movs r0, 0
 	movs r1, 0x80
 	bl ResetOamRange
-	ldr r0, _0807FB78 @ =gUnknown_2023E8A
+	ldr r0, _0807FB78 @ =gBattleOutcome
 	ldrb r0, [r0]
 	bl IsPlayerDefeated
 	cmp r0, 0x1
@@ -633,12 +633,12 @@ sub_807FB40: @ 807FB40
 	b _0807FB8C
 	.align 2, 0
 _0807FB74: .4byte 0x01000100
-_0807FB78: .4byte gUnknown_2023E8A
+_0807FB78: .4byte gBattleOutcome
 _0807FB7C: .4byte c2_whiteout
 _0807FB80:
-	ldr r0, _0807FB94 @ =c2_exit_to_overworld_2_switch
+	ldr r0, _0807FB94 @ =CB2_ReturnToField
 	bl SetMainCallback2
-	ldr r1, _0807FB98 @ =gUnknown_3005020
+	ldr r1, _0807FB98 @ =gFieldCallback
 	ldr r0, _0807FB9C @ =sub_807E3EC
 	str r0, [r1]
 _0807FB8C:
@@ -646,8 +646,8 @@ _0807FB8C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807FB94: .4byte c2_exit_to_overworld_2_switch
-_0807FB98: .4byte gUnknown_3005020
+_0807FB94: .4byte CB2_ReturnToField
+_0807FB98: .4byte gFieldCallback
 _0807FB9C: .4byte sub_807E3EC
 	thumb_func_end sub_807FB40
 
@@ -666,7 +666,7 @@ sub_807FBA0: @ 807FBA0
 	movs r0, 0
 	movs r1, 0x80
 	bl ResetOamRange
-	ldr r0, _0807FBD8 @ =gUnknown_2023E8A
+	ldr r0, _0807FBD8 @ =gBattleOutcome
 	ldrb r0, [r0]
 	bl IsPlayerDefeated
 	cmp r0, 0x1
@@ -676,7 +676,7 @@ sub_807FBA0: @ 807FBA0
 	b _0807FBE6
 	.align 2, 0
 _0807FBD4: .4byte 0x01000100
-_0807FBD8: .4byte gUnknown_2023E8A
+_0807FBD8: .4byte gBattleOutcome
 _0807FBDC: .4byte c2_whiteout
 _0807FBE0:
 	ldr r0, _0807FBEC @ =c2_exit_to_overworld_1_continue_scripts_restart_music
@@ -704,7 +704,7 @@ sub_807FBF0: @ 807FBF0
 	movs r0, 0
 	movs r1, 0x80
 	bl ResetOamRange
-	ldr r4, _0807FC28 @ =gUnknown_2023E8A
+	ldr r4, _0807FC28 @ =gBattleOutcome
 	ldrb r0, [r4]
 	bl IsPlayerDefeated
 	adds r1, r0, 0
@@ -715,7 +715,7 @@ sub_807FBF0: @ 807FBF0
 	b _0807FC4C
 	.align 2, 0
 _0807FC24: .4byte 0x01000100
-_0807FC28: .4byte gUnknown_2023E8A
+_0807FC28: .4byte gBattleOutcome
 _0807FC2C: .4byte c2_whiteout
 _0807FC30:
 	ldrb r0, [r4]
@@ -1512,7 +1512,7 @@ battle_80801F0: @ 80801F0
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
 	bl GetFieldObjectIdByLocalIdAndMap
-	ldr r1, _08080224 @ =gUnknown_3005074
+	ldr r1, _08080224 @ =gSelectedEventObject
 	strb r0, [r1]
 _08080212:
 	pop {r0}
@@ -1521,11 +1521,11 @@ _08080212:
 _08080218: .4byte gUnknown_20386B0
 _0808021C: .4byte gSpecialVar_LastTalked
 _08080220: .4byte gSaveBlock1Ptr
-_08080224: .4byte gUnknown_3005074
+_08080224: .4byte gSelectedEventObject
 	thumb_func_end battle_80801F0
 
-	thumb_func_start sub_8080228
-sub_8080228: @ 8080228
+	thumb_func_start BattleSetup_ConfigureTrainerBattle
+BattleSetup_ConfigureTrainerBattle: @ 8080228
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl sub_8080110
@@ -1640,14 +1640,14 @@ _08080326:
 	.align 2, 0
 _0808032C: .4byte gUnknown_83C6900
 _08080330: .4byte gUnknown_81A4EC1
-	thumb_func_end sub_8080228
+	thumb_func_end BattleSetup_ConfigureTrainerBattle
 
 	thumb_func_start TrainerWantsBattle
 TrainerWantsBattle: @ 8080334
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _08080368 @ =gUnknown_3005074
+	ldr r2, _08080368 @ =gSelectedEventObject
 	strb r0, [r2]
 	ldr r4, _0808036C @ =gSpecialVar_LastTalked
 	ldr r3, _08080370 @ =gMapObjects
@@ -1659,7 +1659,7 @@ TrainerWantsBattle: @ 8080334
 	strh r0, [r4]
 	adds r1, 0x1
 	adds r0, r1, 0
-	bl sub_8080228
+	bl BattleSetup_ConfigureTrainerBattle
 	ldr r0, _08080374 @ =gUnknown_81A4EB4
 	bl ScriptContext1_SetupScript
 	bl ScriptContext2_Enable
@@ -1667,7 +1667,7 @@ TrainerWantsBattle: @ 8080334
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08080368: .4byte gUnknown_3005074
+_08080368: .4byte gSelectedEventObject
 _0808036C: .4byte gSpecialVar_LastTalked
 _08080370: .4byte gMapObjects
 _08080374: .4byte gUnknown_81A4EB4
@@ -1693,7 +1693,7 @@ GetTrainerFlagFromScriptPointer: @ 8080378
 	thumb_func_start sub_8080398
 sub_8080398: @ 8080398
 	push {r4,lr}
-	ldr r0, _080803C4 @ =gUnknown_3005074
+	ldr r0, _080803C4 @ =gSelectedEventObject
 	ldrb r0, [r0]
 	lsls r4, r0, 3
 	adds r4, r0
@@ -1713,7 +1713,7 @@ sub_8080398: @ 8080398
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080803C4: .4byte gUnknown_3005074
+_080803C4: .4byte gSelectedEventObject
 _080803C8: .4byte gMapObjects
 	thumb_func_end sub_8080398
 
@@ -1785,8 +1785,8 @@ HasTrainerAlreadyBeenFought: @ 8080424
 	bx r1
 	thumb_func_end HasTrainerAlreadyBeenFought
 
-	thumb_func_start trainer_flag_set
-trainer_flag_set: @ 808043C
+	thumb_func_start SetTrainerFlag
+SetTrainerFlag: @ 808043C
 	push {lr}
 	lsls r0, 16
 	movs r1, 0xA0
@@ -1796,10 +1796,10 @@ trainer_flag_set: @ 808043C
 	bl FlagSet
 	pop {r0}
 	bx r0
-	thumb_func_end trainer_flag_set
+	thumb_func_end SetTrainerFlag
 
-	thumb_func_start trainer_flag_clear
-trainer_flag_clear: @ 8080450
+	thumb_func_start ClearTrainerFlag
+ClearTrainerFlag: @ 8080450
 	push {lr}
 	lsls r0, 16
 	movs r1, 0xA0
@@ -1809,10 +1809,10 @@ trainer_flag_clear: @ 8080450
 	bl FlagClear
 	pop {r0}
 	bx r0
-	thumb_func_end trainer_flag_clear
+	thumb_func_end ClearTrainerFlag
 
-	thumb_func_start sub_8080464
-sub_8080464: @ 8080464
+	thumb_func_start BattleSetup_StartTrainerBattle
+BattleSetup_StartTrainerBattle: @ 8080464
 	push {r4,lr}
 	ldr r4, _080804A0 @ =gBattleTypeFlags
 	movs r0, 0x8
@@ -1844,7 +1844,7 @@ _0808048C:
 _080804A0: .4byte gBattleTypeFlags
 _080804A4: .4byte gMain
 _080804A8: .4byte sub_80804AC
-	thumb_func_end sub_8080464
+	thumb_func_end BattleSetup_StartTrainerBattle
 
 	thumb_func_start sub_80804AC
 sub_80804AC: @ 80804AC
@@ -1853,7 +1853,7 @@ sub_80804AC: @ 80804AC
 	ldrh r0, [r0]
 	cmp r0, 0x9
 	bne _08080508
-	ldr r0, _080804DC @ =gUnknown_2023E8A
+	ldr r0, _080804DC @ =gBattleOutcome
 	ldrb r0, [r0]
 	bl IsPlayerDefeated
 	adds r1, r0, 0
@@ -1870,7 +1870,7 @@ sub_80804AC: @ 80804AC
 	b _080804EE
 	.align 2, 0
 _080804D8: .4byte gUnknown_20386AC
-_080804DC: .4byte gUnknown_2023E8A
+_080804DC: .4byte gBattleOutcome
 _080804E0: .4byte gSpecialVar_Result
 _080804E4: .4byte gUnknown_20386CC
 _080804E8:
@@ -1900,7 +1900,7 @@ _08080508:
 _0808051C: .4byte gTrainerBattleOpponent_A
 _08080520: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 _08080524:
-	ldr r0, _08080538 @ =gUnknown_2023E8A
+	ldr r0, _08080538 @ =gBattleOutcome
 	ldrb r0, [r0]
 	bl IsPlayerDefeated
 	cmp r0, 0x1
@@ -1910,7 +1910,7 @@ _08080530:
 	bl SetMainCallback2
 	b _0808054E
 	.align 2, 0
-_08080538: .4byte gUnknown_2023E8A
+_08080538: .4byte gBattleOutcome
 _0808053C: .4byte c2_whiteout
 _08080540:
 	ldr r0, _08080554 @ =c2_exit_to_overworld_1_continue_scripts_restart_music
@@ -1940,7 +1940,7 @@ sub_8080558: @ 8080558
 _08080570: .4byte gTrainerBattleOpponent_A
 _08080574: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 _08080578:
-	ldr r0, _0808058C @ =gUnknown_2023E8A
+	ldr r0, _0808058C @ =gBattleOutcome
 	ldrb r0, [r0]
 	bl IsPlayerDefeated
 	cmp r0, 0x1
@@ -1949,7 +1949,7 @@ _08080578:
 	bl SetMainCallback2
 	b _080805A6
 	.align 2, 0
-_0808058C: .4byte gUnknown_2023E8A
+_0808058C: .4byte gBattleOutcome
 _08080590: .4byte c2_whiteout
 _08080594:
 	ldr r0, _080805AC @ =c2_exit_to_overworld_1_continue_scripts_restart_music
@@ -1992,8 +1992,8 @@ sub_80805D8: @ 80805D8
 	bx r0
 	thumb_func_end sub_80805D8
 
-	thumb_func_start sub_80805E8
-sub_80805E8: @ 80805E8
+	thumb_func_start BattleSetup_GetScriptAddrAfterBattle
+BattleSetup_GetScriptAddrAfterBattle: @ 80805E8
 	push {lr}
 	ldr r0, _080805F8 @ =gUnknown_20386C4
 	ldr r0, [r0]
@@ -2006,10 +2006,10 @@ _080805F4:
 	.align 2, 0
 _080805F8: .4byte gUnknown_20386C4
 _080805FC: .4byte gUnknown_81C555B
-	thumb_func_end sub_80805E8
+	thumb_func_end BattleSetup_GetScriptAddrAfterBattle
 
-	thumb_func_start sub_8080600
-sub_8080600: @ 8080600
+	thumb_func_start BattleSetup_GetTrainerPostBattleScript
+BattleSetup_GetTrainerPostBattleScript: @ 8080600
 	push {lr}
 	ldr r0, _08080610 @ =gUnknown_20386C8
 	ldr r0, [r0]
@@ -2022,7 +2022,7 @@ _0808060C:
 	.align 2, 0
 _08080610: .4byte gUnknown_20386C8
 _08080614: .4byte gUnknown_81C555B
-	thumb_func_end sub_8080600
+	thumb_func_end BattleSetup_GetTrainerPostBattleScript
 
 	thumb_func_start sub_8080618
 sub_8080618: @ 8080618

@@ -58,7 +58,7 @@ void sub_8145D18(u8 whichWindow);
 void sub_8146060(void);
 void sub_81461D8(void);
 
-extern const struct OamData gUnknown_83AC9F8;
+extern const struct OamData gOamData_83AC9F8;
 
 const struct TextColor gUnknown_8467068[] = {
     {0, 2, 3},
@@ -113,7 +113,7 @@ const struct SpritePalette gUnknown_8467F60[] = {
     {gUnknown_8467ED4, 0x8000}
 };
 const struct SpriteTemplate gUnknown_8467FA0 = {
-    0x8000, 0x8000, &gUnknown_83AC9F8, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+    0x8000, 0x8000, &gOamData_83AC9F8, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 const struct UnkStruct_8467FB8 gUnknown_8467FB8[8] = {
     {1, 0, 0, 0, gUnknown_846718C, gUnknown_8467288, gUnknown_846708C},
@@ -126,7 +126,7 @@ const struct UnkStruct_8467FB8 gUnknown_8467FB8[8] = {
     {1, 0, 0, 7, gUnknown_8467A7C, gUnknown_8467CAC, gUnknown_846716C}
 };
 
-bool32 sub_8145654(struct MEventBuffer_32E0_Sub * r5, struct MEventBuffer_3430_Sub * r6)
+bool32 InitWonderCardResources(struct MEventBuffer_32E0_Sub * r5, struct MEventBuffer_3430_Sub * r6)
 {
     if (r5 == NULL || r6 == NULL)
         return FALSE;
@@ -145,7 +145,7 @@ bool32 sub_8145654(struct MEventBuffer_32E0_Sub * r5, struct MEventBuffer_3430_S
     return TRUE;
 }
 
-void sub_81456F0(void)
+void DestroyWonderCardResources(void)
 {
     if (gUnknown_203F3C8 != NULL)
     {
@@ -155,7 +155,7 @@ void sub_81456F0(void)
     }
 }
 
-s32 sub_814571C(void)
+s32 FadeToWonderCardMenu(void)
 {
     if (gUnknown_203F3C8 == NULL)
         return -1;
@@ -219,7 +219,7 @@ s32 sub_814571C(void)
     return 0;
 }
 
-s32 sub_814593C(bool32 flag)
+s32 FadeOutFromWonderCard(bool32 flag)
 {
     if (gUnknown_203F3C8 == NULL)
         return -1;
@@ -252,7 +252,7 @@ s32 sub_814593C(bool32 flag)
             FreeMonIconPalettes();
             break;
         case 5:
-            sub_8142344(gUnknown_203F3B8, flag);
+            PrintMysteryGiftOrEReaderTopMenu(gGiftIsFromEReader, flag);
             break;
         case 6:
             CopyBgTilemapBufferToVram(0);
@@ -347,28 +347,28 @@ void sub_8145D18(u8 whichWindow)
         case 0:
         {
             s32 x;
-            box_print(windowId, 3, 0, 1, &gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal1], 0, gUnknown_203F3C8->unk_018B);
+            AddTextPrinterParameterized3(windowId, 3, 0, 1, &gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal1], 0, gUnknown_203F3C8->unk_018B);
             x = 160 - GetStringWidth(3, gUnknown_203F3C8->unk_01B4, GetFontAttribute(3, 2));
             if (x < 0)
                 x = 0;
-            box_print(windowId, 3, x, 17, &gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal1], 0, gUnknown_203F3C8->unk_01B4);
+            AddTextPrinterParameterized3(windowId, 3, x, 17, &gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal1], 0, gUnknown_203F3C8->unk_01B4);
             if (gUnknown_203F3C8->unk_0000.unk_04 != 0)
             {
-                box_print(windowId, 2, 166, 17, &gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal1], 0, gUnknown_203F3C8->unk_01DD);
+                AddTextPrinterParameterized3(windowId, 2, 166, 17, &gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal1], 0, gUnknown_203F3C8->unk_01DD);
             }
             break;
         }
         case 1:
             for (; sp0C < 4; sp0C++)
             {
-                box_print(windowId, 3, 0, 16 * sp0C + 2, &gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal2], 0, gUnknown_203F3C8->unk_01E4[sp0C]);
+                AddTextPrinterParameterized3(windowId, 3, 0, 16 * sp0C + 2, &gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal2], 0, gUnknown_203F3C8->unk_01E4[sp0C]);
             }
             break;
         case 2:
-            box_print(windowId, 3, 0, gUnknown_8467070[gUnknown_203F3C8->unk_0000.unk_08_0], &gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal3], 0, gUnknown_203F3C8->unk_0288);
+            AddTextPrinterParameterized3(windowId, 3, 0, gUnknown_8467070[gUnknown_203F3C8->unk_0000.unk_08_0], &gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal3], 0, gUnknown_203F3C8->unk_0288);
             if (gUnknown_203F3C8->unk_0000.unk_08_0 != 2)
             {
-                box_print(windowId, 3, 0, 16 + gUnknown_8467070[gUnknown_203F3C8->unk_0000.unk_08_0], &gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal3], 0, gUnknown_203F3C8->unk_02B1);
+                AddTextPrinterParameterized3(windowId, 3, 0, 16 + gUnknown_8467070[gUnknown_203F3C8->unk_0000.unk_08_0], &gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal3], 0, gUnknown_203F3C8->unk_02B1);
             }
             else
             {
@@ -377,11 +377,11 @@ void sub_8145D18(u8 whichWindow)
                 s32 spacing = GetFontAttribute(3, 2);
                 for (; sp0C < gUnknown_203F3C8->unk_0175; sp0C++)
                 {
-                    box_print(windowId, 3, x, y, &gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal3], 0, gUnknown_203F3C8->unk_02DC[sp0C].unk_01);
+                    AddTextPrinterParameterized3(windowId, 3, x, y, &gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal3], 0, gUnknown_203F3C8->unk_02DC[sp0C].unk_01);
                     if (gUnknown_203F3C8->unk_02DC[sp0C].unk_42[0] != EOS)
                     {
                         x += GetStringWidth(3, gUnknown_203F3C8->unk_02DC[sp0C].unk_01, spacing);
-                        box_print(windowId, 2, x, y, &gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal3], 0, gUnknown_203F3C8->unk_02DC[sp0C].unk_42);
+                        AddTextPrinterParameterized3(windowId, 2, x, y, &gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal3], 0, gUnknown_203F3C8->unk_02DC[sp0C].unk_42);
                         x += GetStringWidth(3, gUnknown_203F3C8->unk_02DC[sp0C].unk_42, spacing) + gUnknown_203F3C8->unk_02DC[sp0C].unk_00;
                     }
                 }
@@ -460,7 +460,7 @@ struct UnkStruct_203F3CC
     /*01cc*/ u8 filler_01CC[2];
     /*01ce*/ u8 unk_01CE[41];
     /*01f7*/ u8 unk_01F7[10][41];
-    /*0394*/ struct ScrollIndicatorArrowPairTemplate unk_0394;
+    /*0394*/ struct ScrollArrowsTemplate unk_0394;
     /*03a4*/ u8 buffer_03A4[0x1000];
 };
 
@@ -478,9 +478,9 @@ const struct WindowTemplate gUnknown_8468040[] = {
     {0, 1, 0, 28,  3, 15, 0x000},
     {2, 1, 3, 28, 20, 15, 0x000}
 };
-const struct ScrollIndicatorArrowPairTemplate gUnknown_8468050 = {
+const struct ScrollArrowsTemplate gUnknown_8468050 = {
     0x02, 0xe8, 0x18, 0x03, 0xe8, 0x98,
-    0x0000, 0x0002, 0x1000, 0x1000, 0x0, 0x000
+    0x0000, 0x0002, 0x1000, 0x1000, 0x0,
 };
 
 const u16 gUnknown_8468060[] = INCBIN_U16("data/graphics/mevent/pal_468060.gbapal");
@@ -508,7 +508,7 @@ const struct UnkStruct_8467FB8 gUnknown_8468720[] = {
     {1, 0, 0, 0, gUnknown_84685B4, gUnknown_8468644, gUnknown_84680A0}
 };
 
-bool32 sub_8146288(const struct MEventBuffer_3120_Sub * a0)
+bool32 InitWonderNewsResources(const struct MEventBuffer_3120_Sub * a0)
 {
     if (a0 == NULL)
         return FALSE;
@@ -523,7 +523,7 @@ bool32 sub_8146288(const struct MEventBuffer_3120_Sub * a0)
     return TRUE;
 }
 
-void sub_81462EC(void)
+void DestroyWonderNewsResources(void)
 {
     if (gUnknown_203F3CC != NULL)
     {
@@ -533,7 +533,7 @@ void sub_81462EC(void)
     }
 }
 
-s32 sub_8146318(void)
+s32 FadeToWonderNewsMenu(void)
 {
     if (gUnknown_203F3CC == NULL)
         return -1;
@@ -608,7 +608,7 @@ s32 sub_8146318(void)
     return 0;
 }
 
-s32 sub_8146604(bool32 flag)
+s32 FadeOutFromWonderNews(bool32 flag)
 {
     if (gUnknown_203F3CC == NULL)
         return -1;
@@ -653,10 +653,10 @@ s32 sub_8146604(bool32 flag)
             }
             break;
         case 5:
-            sub_8142344(gUnknown_203F3B8, flag);
+            PrintMysteryGiftOrEReaderTopMenu(gGiftIsFromEReader, flag);
             break;
         case 6:
-            sub_8142420();
+            MG_DrawCheckerboardPattern();
             CopyBgTilemapBufferToVram(0);
             CopyBgTilemapBufferToVram(3);
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
@@ -671,7 +671,7 @@ s32 sub_8146604(bool32 flag)
     return 0;
 }
 
-void sub_81467EC(void)
+void MENews_RemoveScrollIndicatorArrowPair(void)
 {
     if (!gUnknown_203F3CC->unk_01C0_0 && gUnknown_203F3CC->unk_01C1 != 0xFF)
     {
@@ -682,7 +682,7 @@ void sub_81467EC(void)
 }
 
 
-void sub_8146834(void)
+void MENews_AddScrollIndicatorArrowPair(void)
 {
     if (gUnknown_203F3CC->unk_01C0_0)
     {
@@ -691,7 +691,7 @@ void sub_8146834(void)
     }
 }
 
-u8 sub_8146884(u16 input)
+u32 MENews_GetInput(u16 input)
 {
     if (gUnknown_203F3CC->unk_01C2_0)
     {
@@ -743,7 +743,7 @@ void sub_8146980(void)
             ++gUnknown_203F3CC->unk_01C4;
     }
     gUnknown_203F3CC->unk_0394 = gUnknown_8468050;
-    gUnknown_203F3CC->unk_0394.unk_08 = gUnknown_203F3CC->unk_01C4;
+    gUnknown_203F3CC->unk_0394.fullyDownThreshold = gUnknown_203F3CC->unk_01C4;
 }
 
 void sub_8146A30(void)
@@ -757,10 +757,10 @@ void sub_8146A30(void)
     x = (0xe0 - GetStringWidth(3, gUnknown_203F3CC->unk_01CE, GetFontAttribute(3, 2))) / 2;
     if (x < 0)
         x = 0;
-    box_print(gUnknown_203F3CC->unk_01C8[0], 3, x, 6, &gUnknown_8468038[gUnknown_203F3CC->unk_01BC->textPal1], 0, gUnknown_203F3CC->unk_01CE);
+    AddTextPrinterParameterized3(gUnknown_203F3CC->unk_01C8[0], 3, x, 6, &gUnknown_8468038[gUnknown_203F3CC->unk_01BC->textPal1], 0, gUnknown_203F3CC->unk_01CE);
     for (; i < 10; ++i)
     {
-        box_print(gUnknown_203F3CC->unk_01C8[1], 3, 0, 16 * i + 2, &gUnknown_8468038[gUnknown_203F3CC->unk_01BC->textPal2], 0, gUnknown_203F3CC->unk_01F7[i]);
+        AddTextPrinterParameterized3(gUnknown_203F3CC->unk_01C8[1], 3, 0, 16 * i + 2, &gUnknown_8468038[gUnknown_203F3CC->unk_01BC->textPal2], 0, gUnknown_203F3CC->unk_01F7[i]);
     }
     CopyWindowToVram(gUnknown_203F3CC->unk_01C8[0], 3);
     CopyWindowToVram(gUnknown_203F3CC->unk_01C8[1], 3);

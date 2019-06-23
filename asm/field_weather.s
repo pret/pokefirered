@@ -122,7 +122,7 @@ weather_set: @ 8079CF4
 	beq _08079D0A
 	cmp r4, 0xD
 	beq _08079D0A
-	bl play_some_sound
+	bl PlayRainStoppingSoundEffect
 _08079D0A:
 	ldr r1, _08079D4C @ =gUnknown_2037F34
 	ldr r2, _08079D50 @ =0x000006d1
@@ -170,7 +170,7 @@ sub_8079D60: @ 8079D60
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl play_some_sound
+	bl PlayRainStoppingSoundEffect
 	ldr r0, _08079D84 @ =gUnknown_2037F34
 	movs r2, 0xDA
 	lsls r2, 3
@@ -193,7 +193,7 @@ sub_8079D8C: @ 8079D8C
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl play_some_sound
+	bl PlayRainStoppingSoundEffect
 	ldr r1, _08079DB8 @ =gUnknown_2037F34
 	movs r2, 0xDA
 	lsls r2, 3
@@ -2250,7 +2250,7 @@ _0807AD14:
 	movs r1, 0x7F
 	ands r0, r1
 	strh r0, [r2]
-	ldr r1, _0807AD5C @ =gUnknown_825E074
+	ldr r1, _0807AD5C @ =gSineTable
 	movs r3, 0
 	ldrsh r0, [r2, r3]
 	lsls r0, 1
@@ -2278,7 +2278,7 @@ _0807AD54:
 	strh r0, [r4]
 	b _0807ADA0
 	.align 2, 0
-_0807AD5C: .4byte gUnknown_825E074
+_0807AD5C: .4byte gSineTable
 _0807AD60: .4byte 0x0000073c
 _0807AD64: .4byte 0x0000073e
 _0807AD68:
@@ -2625,8 +2625,8 @@ _0807AFFA:
 _0807B000: .4byte 0x000006dd
 	thumb_func_end SetRainStrengthFromSoundEffect
 
-	thumb_func_start play_some_sound
-play_some_sound: @ 807B004
+	thumb_func_start PlayRainStoppingSoundEffect
+PlayRainStoppingSoundEffect: @ 807B004
 	push {lr}
 	bl IsSpecialSEPlaying
 	lsls r0, 24
@@ -2658,7 +2658,7 @@ _0807B03C:
 _0807B042:
 	pop {r0}
 	bx r0
-	thumb_func_end play_some_sound
+	thumb_func_end PlayRainStoppingSoundEffect
 
 	thumb_func_start sub_807B048
 sub_807B048: @ 807B048
@@ -2804,8 +2804,8 @@ sav1_get_weather_probably: @ 807B130
 _0807B13C: .4byte gSaveBlock1Ptr
 	thumb_func_end sav1_get_weather_probably
 
-	thumb_func_start sub_807B140
-sub_807B140: @ 807B140
+	thumb_func_start SetSav1WeatherFromCurrMapHeader
+SetSav1WeatherFromCurrMapHeader: @ 807B140
 	push {r4,r5,lr}
 	ldr r4, _0807B16C @ =gSaveBlock1Ptr
 	ldr r0, [r4]
@@ -2828,7 +2828,7 @@ sub_807B140: @ 807B140
 	.align 2, 0
 _0807B16C: .4byte gSaveBlock1Ptr
 _0807B170: .4byte gMapHeader
-	thumb_func_end sub_807B140
+	thumb_func_end SetSav1WeatherFromCurrMapHeader
 
 	thumb_func_start SetWeather
 SetWeather: @ 807B174

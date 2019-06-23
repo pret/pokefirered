@@ -51,8 +51,8 @@ struct Tileset
     /*0x04*/ void *tiles;
     /*0x08*/ void *palettes;
     /*0x0c*/ void *metatiles;
-    /*0x10*/ void *metatileAttributes;
-    /*0x14*/ TilesetCB callback;
+    /*0x10*/ TilesetCB callback;
+    /*0x14*/ void *metatileAttributes;
 };
 
 struct MapData
@@ -63,14 +63,24 @@ struct MapData
     /*0x0c*/ u16 *map;
     /*0x10*/ struct Tileset *primaryTileset;
     /*0x14*/ struct Tileset *secondaryTileset;
+    /*0x18*/ u8 unk18;
+    /*0x19*/ u8 unk19;
 };
 
 struct BackupMapData
 {
-    s32 width;
-    s32 height;
+    s32 Xsize;
+    s32 Ysize;
     u16 *map;
 };
+
+union __attribute__((packed)) MapObjectRange {
+    u8 as_byte;
+    struct __attribute__((packed)) {
+        u8 x:4;
+        u8 y:4;
+    } __attribute__((aligned (1))) as_nybbles;
+} __attribute__((aligned (1)));
 
 struct MapObjectTemplate
 {
@@ -81,8 +91,7 @@ struct MapObjectTemplate
     /*0x06*/ s16 y;
     /*0x08*/ u8 elevation;
     /*0x09*/ u8 movementType;
-    /*0x0A*/ u8 unkA_0:4;
-             u8 unkA_4:4;
+    /*0x0A*/ union MapObjectRange range;
     ///*0x0B*/ u8 fillerB[1];
     /*0x0C*/ u16 unkC;
     /*0x0E*/ u16 unkE;
@@ -149,9 +158,9 @@ struct MapEvents
 struct MapConnection
 {
  /*0x00*/ u8 direction;
- /*0x01*/ u32 offset;
- /*0x05*/ u8 mapGroup;
- /*0x06*/ u8 mapNum;
+ /*0x04*/ u32 offset;
+ /*0x08*/ u8 mapGroup;
+ /*0x09*/ u8 mapNum;
 };
 
 struct MapConnections
@@ -226,13 +235,7 @@ struct MapObject
     /*0x14*/ struct Coords16 coords3;
     /*0x18*/ u8 mapobj_unk_18:4;  //current direction?
     /*0x18*/ u8 placeholder18:4;
-    /*0x19*/ union __attribute__((packed)) {
-        u8 as_byte;
-        struct __attribute__((packed)) {
-            u8 x:4;
-            u8 y:4;
-        } __attribute__((aligned (1))) as_nybbles;
-    } __attribute__((aligned (1))) range;
+    /*0x19*/ union MapObjectRange range;
     /*0x1A*/ u8 mapobj_unk_1A;
     /*0x1B*/ u8 mapobj_unk_1B;
     /*0x1C*/ u8 mapobj_unk_1C;
@@ -328,7 +331,7 @@ struct Camera
 };
 
 extern struct MapObject gMapObjects[NUM_FIELD_OBJECTS];
-extern u8 gSelectedMapObject;
+extern u8 gSelectedEventObject;
 extern struct MapHeader gMapHeader;
 extern struct PlayerAvatar gPlayerAvatar;
 extern struct Camera gCamera;

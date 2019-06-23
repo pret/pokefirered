@@ -113,7 +113,7 @@ sub_800C318: @ 800C318
 	ldr r0, _0800C4B0 @ =0x810001ff
 	str r0, [r1, 0x8]
 	ldr r0, [r1, 0x8]
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl ResetTasks
 	bl ResetSpriteData
 	bl FreeAllSpritePalettes
@@ -639,7 +639,7 @@ _0800C828:
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r0, _0800C86C @ =gUnknown_8234618
 	bl sub_800D0B4
 	movs r0, 0
@@ -670,7 +670,7 @@ _0800C870:
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	str r5, [sp]
 	str r4, [sp, 0x4]
 	ldr r0, _0800C8E8 @ =gUnknown_8415A6E
@@ -679,7 +679,7 @@ _0800C870:
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	bl sub_800CE58
 	ldr r4, _0800C8EC @ =gUnknown_8234620
 	adds r0, r4, 0
@@ -725,7 +725,7 @@ _0800C8F0:
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	str r5, [sp]
 	str r4, [sp, 0x4]
 	ldr r0, _0800C9B8 @ =gUnknown_8415A6E
@@ -734,7 +734,7 @@ _0800C8F0:
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x1
 	strh r0, [r6, 0x1C]
 	str r5, [sp]
@@ -745,7 +745,7 @@ _0800C8F0:
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	bl sub_800CE58
 	ldr r4, _0800C9C0 @ =gUnknown_8234620
 	adds r0, r4, 0
@@ -983,7 +983,7 @@ _0800CB2E:
 	bl FreeAllWindowBuffers
 	adds r0, r6, 0
 	bl DestroyTask
-	bl sub_812EB2C
+	bl StartNewGameScene
 	b _0800CB84
 	.align 2, 0
 _0800CB44: .4byte gUnknown_2031DE0
@@ -1005,7 +1005,7 @@ _0800CB64: .4byte gPlttBufferUnfaded
 _0800CB68: .4byte gPlttBufferFaded
 _0800CB6C: .4byte gUnknown_2031DE0
 _0800CB70:
-	ldr r0, _0800CB8C @ =sub_81422AC
+	ldr r0, _0800CB8C @ =c2_mystery_gift
 	bl SetMainCallback2
 	bl sub_812B478
 	bl FreeAllWindowBuffers
@@ -1017,7 +1017,7 @@ _0800CB84:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800CB8C: .4byte sub_81422AC
+_0800CB8C: .4byte c2_mystery_gift
 	thumb_func_end sub_800CA94
 
 	thumb_func_start sub_800CB90
@@ -1141,7 +1141,7 @@ sub_800CC68: @ 800CC68
 	ands r0, r1
 	cmp r0, 0
 	bne _0800CC86
-	ldr r0, _0800CC90 @ =sub_8078914
+	ldr r0, _0800CC90 @ =CB2_InitTitleScreen
 	bl SetMainCallback2
 	adds r0, r4, 0
 	bl DestroyTask
@@ -1151,7 +1151,7 @@ _0800CC86:
 	bx r0
 	.align 2, 0
 _0800CC8C: .4byte gPaletteFade
-_0800CC90: .4byte sub_8078914
+_0800CC90: .4byte CB2_InitTitleScreen
 	thumb_func_end sub_800CC68
 
 	thumb_func_start sub_800CC94
@@ -1355,7 +1355,7 @@ sub_800CDF8: @ 800CDF8
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x4
 	bl PutWindowTilemap
 	movs r0, 0x4
@@ -1404,7 +1404,7 @@ sub_800CE70: @ 800CE70
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x12
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add r1, sp, 0xC
 	movs r2, 0
 	ldr r0, _0800CED0 @ =gSaveBlock2Ptr
@@ -1430,7 +1430,7 @@ _0800CE96:
 	movs r1, 0x2
 	movs r2, 0x3E
 	movs r3, 0x12
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0x14
 	pop {r0}
 	bx r0
@@ -1455,7 +1455,7 @@ sub_800CED4: @ 800CED4
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x22
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r4, _0800CF38 @ =gSaveBlock2Ptr
 	ldr r0, [r4]
 	ldrh r1, [r0, 0xE]
@@ -1479,7 +1479,7 @@ sub_800CED4: @ 800CED4
 	movs r1, 0x2
 	movs r2, 0x3E
 	movs r3, 0x22
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0x2C
 	pop {r4-r6}
 	pop {r0}
@@ -1525,7 +1525,7 @@ _0800CF6A:
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x32
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add r0, sp, 0xC
 	adds r1, r6, 0
 	movs r2, 0
@@ -1541,7 +1541,7 @@ _0800CF6A:
 	movs r1, 0x2
 	movs r2, 0x3E
 	movs r3, 0x32
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0800CFAE:
 	add sp, 0x2C
 	pop {r4-r6}
@@ -1586,7 +1586,7 @@ _0800CFE2:
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x42
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add r0, sp, 0xC
 	adds r1, r6, 0
 	movs r2, 0x2
@@ -1602,7 +1602,7 @@ _0800CFE2:
 	movs r1, 0x2
 	movs r2, 0x3E
 	movs r3, 0x42
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0x2C
 	pop {r4-r6}
 	pop {r0}
@@ -1656,7 +1656,7 @@ sub_800D094: @ 800D094
 	ldr r1, _0800D0AC @ =0x000001b1
 	movs r0, 0
 	movs r2, 0x20
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	ldr r0, _0800D0B0 @ =gUnknown_8234638
 	bl sub_800D1E8
 	pop {r0}

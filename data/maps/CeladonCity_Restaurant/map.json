@@ -1,0 +1,107 @@
+{
+  "id": "MAP_CELADON_CITY_RESTAURANT",
+  "name": "CeladonCity_Restaurant",
+  "layout": "LAYOUT_CELADON_CITY_RESTAURANT",
+  "music": "BGM_FRLG_CELADON_CITY",
+  "region_map_section": "MAPSEC_CELADON_CITY",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 0,
+  "unknown_19": 0,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "59",
+      "x": 12,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "5",
+      "movement_range_x": 2,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "CeladonCity_Restaurant_EventScript_16D1EB",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "28",
+      "x": 11,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "3",
+      "movement_range_x": 1,
+      "movement_range_y": 2,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "CeladonCity_Restaurant_EventScript_16D1F4",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "27",
+      "x": 9,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "CeladonCity_Restaurant_EventScript_16D25E",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "30",
+      "x": 1,
+      "y": 2,
+      "elevation": 0,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "CeladonCity_Restaurant_EventScript_16D1FD",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "47",
+      "x": 3,
+      "y": 7,
+      "elevation": 0,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "CeladonCity_Restaurant_EventScript_16D255",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 5,
+      "y": 9,
+      "elevation": 0,
+      "dest_map": "MAP_CELADON_CITY",
+      "dest_warp_id": 7
+    },
+    {
+      "x": 6,
+      "y": 9,
+      "elevation": 0,
+      "dest_map": "MAP_CELADON_CITY",
+      "dest_warp_id": 7
+    },
+    {
+      "x": 7,
+      "y": 9,
+      "elevation": 0,
+      "dest_map": "MAP_CELADON_CITY",
+      "dest_warp_id": 7
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

@@ -92,4 +92,89 @@ extern const u8 gText_Coins[];
 extern const u8 gText_EggNickname[];
 extern const u8 gText_Pokemon[];
 
+extern const u8 gOtherText_Use[];
+extern const u8 gOtherText_Give[];
+extern const u8 gOtherText_Exit[];
+extern const u8 gText_ThreeHyphens[];
+extern const u8 gOtherText_UnkF9_08_Clear_01[];
+extern const u8 gFameCheckerText_ListMenuCursor[];
+extern const u8 gText_TimesStrVar1[];
+extern const u8 gText_IsSelected[];
+extern const u8 gText_ThereIsNoPokemon[];
+extern const u8 gText_ItemCantBeHeld[];
+extern const u8 gText_TMCase[];
+extern const u8 gText_Close[];
+extern const u8 gText_TMCaseWillBePutAway[];
+extern const u8 gText_FontSize0[];
+extern const u8 gText_FontSize2[];
+extern const u8 gText_OhNoICantBuyThat[];
+extern const u8 gText_HowManyWouldYouLikeToSell[];
+extern const u8 gText_ICanPayThisMuch_WouldThatBeOkay[];
+extern const u8 gText_TurnedOverItemsWorthYen[];
+extern const u8 gPokeDudeText_TMTypes[];
+extern const u8 gPokeDudeText_ReadTMDescription[];
+extern const u8 gFameCheckerText_Cancel[];
+
+// teachy_tv
+extern const u8 gTeachyTvString_TeachBattle[];
+extern const u8 gTeachyTvString_StatusProblems[];
+extern const u8 gTeachyTvString_TypeMatchups[];
+extern const u8 gTeachyTvString_CatchPkmn[];
+extern const u8 gTeachyTvString_AboutTMs[];
+extern const u8 gTeachyTvString_RegisterItem[];
+extern const u8 gTeachyTvString_Cancel[];
+extern const u8 gTeachyTvText_PokeDudeSaysHello[];
+extern const u8 gTeachyTvText_BattleScript1[];
+extern const u8 gTeachyTvText_StatusScript1[];
+extern const u8 gTeachyTvText_MatchupsScript1[];
+extern const u8 gTeachyTvText_CatchingScript1[];
+extern const u8 gTeachyTvText_TMsScript1[];
+extern const u8 gTeachyTvText_RegisterScript1[];
+extern const u8 gTeachyTvText_BattleScript2[];
+extern const u8 gTeachyTvText_StatusScript2[];
+extern const u8 gTeachyTvText_MatchupsScript2[];
+extern const u8 gTeachyTvText_CatchingScript2[];
+extern const u8 gTeachyTvText_TMsScript2[];
+extern const u8 gTeachyTvText_RegisterScript2[];
+
+// help_system_812B1E0
+extern const u8 gUnknown_841DFA5[];
+extern const u8 gUnknown_841DFAC[];
+extern const u8 gUnknown_841DFBE[];
+extern const u8 gUnknown_841DFC9[];
+
+// help_system
+extern const u8 gString_Bill[];
+extern const u8 gString_Someone[];
+extern const u8 gString_Help[];
+extern const u8 gString_HelpSystem_ClearTo8[];
+
+extern const u8 gOtherText_Give[];
+extern const u8 gFameCheckerText_Cancel[];
+extern const u8 gOtherText_StrVar1[];
+extern const u8 gOtherText_WhereShouldTheStrVar1BePlaced[];
+extern const u8 gOtherText_Powder[];
+extern const u8 gText_NoMoreRoomInBag[];
+extern const u8 gText_WithdrawHowMany[];
+extern const u8 gText_WithdrewQuantItem[];
+extern const u8 gText_WithdrawItem[];
+extern const u8 gText_Withdraw[];
+extern const u8 gText_ReturnToPC[];
+
+extern const u8 gUnknown_8416425[];
+extern const u8 gUnknown_8416451[];
+extern const u8 gUnknown_8416537[];
+extern const u8 gUnknown_841658C[];
+extern const u8 gUnknown_841659E[];
+extern const u8 gUnknown_84165D2[];
+extern const u8 gUnknown_8416600[];
+extern const u8 gUnknown_8416631[];
+extern const u8 gUnknown_8416644[];
+extern const u8 gUnknown_841665C[];
+extern const u8 gUnknown_8416690[];
+extern const u8 gUnknown_84166A7[];
+extern const u8 gUnknown_84169DC[];
+
+extern const u8 gUnknown_84162BD[];
+
 #endif //GUARD_STRINGS_H

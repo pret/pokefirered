@@ -5559,7 +5559,7 @@ AddTextPrinterAndCreateWindowOnHealthbox: @ 804A648
 	movs r1, 0
 	adds r2, r6, 0
 	mov r3, r8
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	mov r0, r10
 	str r4, [r0]
 	adds r0, r5, 0

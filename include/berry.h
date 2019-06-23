@@ -62,6 +62,7 @@ void FieldObjectInteractionPickBerryTree(void);
 void FieldObjectInteractionRemoveBerryTree(void);
 u8 PlayerHasBerries(void);
 void ResetBerryTreeSparkleFlags(void);
+const struct Berry * sub_809C8A0(u8 berryIdx);
 
 extern const struct Berry gBerries[];
 

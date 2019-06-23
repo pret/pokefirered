@@ -12,5 +12,7 @@ void SetBoxMonNickFromAnyBox(u8 boxId, u8 monPosition, u8 * newNick);
 void CompactPartySlots(void);
 u32 GetBoxMonDataFromAnyBox(u8 boxId, u8 monPosition, u32 request);
 void sub_808BCB4(u8 boxId, u8 monPosition);
+u8 * GetBoxNamePtr(u8 boxId);
+void sub_808CE60(void);
 
 #endif // GUARD_POKEMON_STORAGE_SYSTEM_H

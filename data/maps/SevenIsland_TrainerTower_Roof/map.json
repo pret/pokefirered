@@ -1,0 +1,48 @@
+{
+  "id": "MAP_SEVEN_ISLAND_TRAINER_TOWER_ROOF",
+  "name": "SevenIsland_TrainerTower_Roof",
+  "layout": "LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_ROOF",
+  "music": "BGM_FRLG_TRAINER_TOWER",
+  "region_map_section": "MAPSEC_TRAINER_TOWER_2",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 0,
+  "unknown_19": 2,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "70",
+      "x": 9,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SevenIsland_TrainerTower_Roof_EventScript_1646E0",
+      "flag": "6"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 13,
+      "y": 5,
+      "elevation": 0,
+      "dest_map": "MAP_SEVEN_ISLAND_TRAINER_TOWER_ELEVATOR",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 4,
+      "y": 6,
+      "elevation": 3,
+      "dest_map": "MAP_SEVEN_ISLAND_TRAINER_TOWER_8F",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

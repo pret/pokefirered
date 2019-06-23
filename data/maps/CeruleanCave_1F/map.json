@@ -1,0 +1,204 @@
+{
+  "id": "MAP_CERULEAN_CAVE_1F",
+  "name": "CeruleanCave_1F",
+  "layout": "LAYOUT_CERULEAN_CAVE_1F",
+  "music": "BGM_FRLG_ROCKET_HIDEOUT",
+  "region_map_section": "MAPSEC_CERULEAN_CAVE",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_4",
+  "unknown_18": 1,
+  "unknown_19": 7,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "92",
+      "x": 7,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "CeruleanCave_1F_EventScript_1BEA47",
+      "flag": "434"
+    },
+    {
+      "graphics_id": "92",
+      "x": 11,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "CeruleanCave_1F_EventScript_1BEA54",
+      "flag": "435"
+    },
+    {
+      "graphics_id": "92",
+      "x": 25,
+      "y": 5,
+      "elevation": 4,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "CeruleanCave_1F_EventScript_1BEA3A",
+      "flag": "433"
+    },
+    {
+      "graphics_id": "96",
+      "x": 7,
+      "y": 21,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "CeruleanCave_1F_EventScript_1BE00C",
+      "flag": "18"
+    },
+    {
+      "graphics_id": "96",
+      "x": 13,
+      "y": 21,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "CeruleanCave_1F_EventScript_1BE00C",
+      "flag": "19"
+    },
+    {
+      "graphics_id": "96",
+      "x": 5,
+      "y": 20,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "CeruleanCave_1F_EventScript_1BE00C",
+      "flag": "20"
+    },
+    {
+      "graphics_id": "96",
+      "x": 14,
+      "y": 20,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "CeruleanCave_1F_EventScript_1BE00C",
+      "flag": "21"
+    },
+    {
+      "graphics_id": "96",
+      "x": 11,
+      "y": 21,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "CeruleanCave_1F_EventScript_1BE00C",
+      "flag": "22"
+    },
+    {
+      "graphics_id": "96",
+      "x": 9,
+      "y": 18,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "CeruleanCave_1F_EventScript_1BE00C",
+      "flag": "23"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 33,
+      "y": 21,
+      "elevation": 3,
+      "dest_map": "MAP_CERULEAN_CITY",
+      "dest_warp_id": 7
+    },
+    {
+      "x": 34,
+      "y": 2,
+      "elevation": 3,
+      "dest_map": "MAP_CERULEAN_CAVE_2F",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 1,
+      "y": 7,
+      "elevation": 3,
+      "dest_map": "MAP_CERULEAN_CAVE_B1F",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 10,
+      "y": 2,
+      "elevation": 3,
+      "dest_map": "MAP_CERULEAN_CAVE_2F",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 5,
+      "y": 15,
+      "elevation": 3,
+      "dest_map": "MAP_CERULEAN_CAVE_2F",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 30,
+      "y": 10,
+      "elevation": 4,
+      "dest_map": "MAP_CERULEAN_CAVE_2F",
+      "dest_warp_id": 3
+    },
+    {
+      "x": 24,
+      "y": 11,
+      "elevation": 3,
+      "dest_map": "MAP_CERULEAN_CAVE_2F",
+      "dest_warp_id": 4
+    },
+    {
+      "x": 2,
+      "y": 4,
+      "elevation": 3,
+      "dest_map": "MAP_CERULEAN_CAVE_2F",
+      "dest_warp_id": 5
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 12,
+      "y": 2,
+      "elevation": 3,
+      "item": "POCKET_KEY_ITEMS",
+      "flag": "39",
+      "unknown": 1
+    }
+  ]
+}

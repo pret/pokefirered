@@ -1,0 +1,119 @@
+{
+  "id": "MAP_POKEMON_TOWER_6F",
+  "name": "PokemonTower_6F",
+  "layout": "LAYOUT_POKEMON_TOWER_6F",
+  "music": "BGM_FRLG_POKEMON_TOWER",
+  "region_map_section": "MAPSEC_POKEMON_TOWER",
+  "requires_flash": false,
+  "weather": "WEATHER_FOG_HORIZONTAL",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 0,
+  "unknown_19": 5,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_2",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "58",
+      "x": 13,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "PokemonTower_6F_EventScript_163514",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "58",
+      "x": 18,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "PokemonTower_6F_EventScript_163542",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "58",
+      "x": 9,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "PokemonTower_6F_EventScript_16352B",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "92",
+      "x": 5,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PokemonTower_6F_EventScript_1BE796",
+      "flag": "380"
+    },
+    {
+      "graphics_id": "92",
+      "x": 15,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PokemonTower_6F_EventScript_1BE7A3",
+      "flag": "381"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 11,
+      "y": 16,
+      "elevation": 3,
+      "dest_map": "MAP_POKEMON_TOWER_7F",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 18,
+      "y": 10,
+      "elevation": 3,
+      "dest_map": "MAP_POKEMON_TOWER_5F",
+      "dest_warp_id": 1
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 15,
+      "elevation": 3,
+      "var": "VAR_0x4059",
+      "var_value": 0,
+      "script": "PokemonTower_6F_EventScript_1634B8"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 16,
+      "elevation": 3,
+      "var": "VAR_0x4059",
+      "var_value": 0,
+      "script": "PokemonTower_6F_EventScript_1634B8"
+    }
+  ],
+  "bg_events": []
+}

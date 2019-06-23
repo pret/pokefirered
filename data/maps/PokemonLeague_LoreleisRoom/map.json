@@ -1,0 +1,48 @@
+{
+  "id": "MAP_POKEMON_LEAGUE_LORELEIS_ROOM",
+  "name": "PokemonLeague_LoreleisRoom",
+  "layout": "LAYOUT_POKEMON_LEAGUE_LORELEIS_ROOM",
+  "music": "BGM_FRLG_GYM",
+  "region_map_section": "MAPSEC_POKEMON_LEAGUE",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 0,
+  "unknown_19": 0,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_4",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "77",
+      "x": 6,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PokemonLeague_LoreleisRoom_EventScript_1625DC",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 6,
+      "y": 12,
+      "elevation": 0,
+      "dest_map": "MAP_INDIGO_PLATEAU_POKEMON_CENTER_1F",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 6,
+      "y": 2,
+      "elevation": 0,
+      "dest_map": "MAP_POKEMON_LEAGUE_BRUNOS_ROOM",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

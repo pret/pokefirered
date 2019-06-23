@@ -18,7 +18,7 @@ sub_8088FF0: @ 8088FF0
 	cmp r0, 0
 	beq _08089020
 	ldr r1, _08089028 @ =0x040000d4
-	ldr r0, _0808902C @ =gUnknown_2038700
+	ldr r0, _0808902C @ =gScanlineEffectRegBuffers
 	str r0, [r1]
 	movs r2, 0xF0
 	lsls r2, 3
@@ -33,7 +33,7 @@ _08089020:
 	.align 2, 0
 _08089024: .4byte gUnknown_20397A4
 _08089028: .4byte 0x040000d4
-_0808902C: .4byte gUnknown_2038700
+_0808902C: .4byte gScanlineEffectRegBuffers
 _08089030: .4byte 0x800000a0
 	thumb_func_end sub_8088FF0
 
@@ -44,7 +44,7 @@ sub_8089034: @ 8089034
 	ldrh r3, [r4]
 	movs r0, 0
 	strh r0, [r4]
-	ldr r1, _08089064 @ =gUnknown_2038700
+	ldr r1, _08089064 @ =gScanlineEffectRegBuffers
 	ldr r0, _08089068 @ =0x04000006
 	ldrh r2, [r0]
 	movs r0, 0xFF
@@ -63,7 +63,7 @@ sub_8089034: @ 8089034
 	bx r0
 	.align 2, 0
 _08089060: .4byte 0x04000208
-_08089064: .4byte gUnknown_2038700
+_08089064: .4byte gScanlineEffectRegBuffers
 _08089068: .4byte 0x04000006
 _0808906C: .4byte 0x04000012
 	thumb_func_end sub_8089034
@@ -291,7 +291,7 @@ _0808924A:
 	cmp r0, 0
 	beq _08089280
 	movs r0, 0xB
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	bl sub_808B1D4
 	movs r0, 0xF2
 	bl PlaySE
@@ -387,7 +387,7 @@ _0808931C: .4byte gMain
 _08089320: .4byte gReceivedRemoteLinkPlayers
 _08089324:
 	movs r0, 0xA
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	bl sub_808B1D4
 	ldr r0, _08089340 @ =gUnknown_20397A4
 	ldr r1, [r0]
@@ -431,7 +431,7 @@ _0808937A:
 	bl sub_800AAC0
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_80F6EE4
+	bl DrawDialogueFrame
 	ldr r2, _080893B0 @ =gUnknown_8419D89
 	movs r0, 0x1
 	str r0, [sp]
@@ -1647,7 +1647,7 @@ sub_8089D8C: @ 8089D8C
 	ldr r0, _08089DA0 @ =sub_8089070
 	bl SetMainCallback2
 	movs r0, 0xA
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1658,7 +1658,7 @@ _08089DA0: .4byte sub_8089070
 sub_8089DA4: @ 8089DA4
 	push {lr}
 	bl ResetTasks
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	ldr r0, _08089DC4 @ =sub_80890C0
 	movs r1, 0
 	bl CreateTask
@@ -1856,7 +1856,7 @@ sub_8089EEC: @ 8089EEC
 	add r0, sp, 0xC
 	str r0, [sp, 0x8]
 	movs r0, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0x4C
 	pop {r4,r5}
 	pop {r0}
@@ -1908,7 +1908,7 @@ sub_8089F78: @ 8089F78
 	add r0, sp, 0xC
 	str r0, [sp, 0x8]
 	movs r0, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0x2C
 	pop {r4}
 	pop {r0}
@@ -1972,7 +1972,7 @@ sub_8089FEC: @ 8089FEC
 	adds r1, r6, 0
 	movs r2, 0x14
 	movs r3, 0x38
-	bl box_print
+	bl AddTextPrinterParameterized3
 	str r5, [sp]
 	str r4, [sp, 0x4]
 	add r0, sp, 0xC
@@ -1981,7 +1981,7 @@ sub_8089FEC: @ 8089FEC
 	adds r1, r6, 0
 	adds r2, r7, 0
 	movs r3, 0x38
-	bl box_print
+	bl AddTextPrinterParameterized3
 	b _0808A0CA
 	.align 2, 0
 _0808A068: .4byte gUnknown_8419CED
@@ -2015,7 +2015,7 @@ _0808A080:
 	adds r1, r6, 0
 	movs r2, 0x10
 	movs r3, 0x39
-	bl box_print
+	bl AddTextPrinterParameterized3
 	str r5, [sp]
 	str r4, [sp, 0x4]
 	add r1, sp, 0xC
@@ -2024,7 +2024,7 @@ _0808A080:
 	adds r1, r6, 0
 	adds r2, r7, 0
 	movs r3, 0x39
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0808A0CA:
 	add sp, 0x18
 	pop {r4-r7}
@@ -2108,7 +2108,7 @@ _0808A112:
 	adds r1, r6, 0
 	movs r2, 0x14
 	movs r3, 0x48
-	bl box_print
+	bl AddTextPrinterParameterized3
 	str r5, [sp]
 	str r4, [sp, 0x4]
 	add r0, sp, 0xC
@@ -2117,7 +2117,7 @@ _0808A112:
 	adds r1, r6, 0
 	adds r2, r7, 0
 	movs r3, 0x48
-	bl box_print
+	bl AddTextPrinterParameterized3
 	str r5, [sp]
 	str r4, [sp, 0x4]
 	ldr r0, _0808A1B0 @ =gUnknown_8419CF7
@@ -2126,7 +2126,7 @@ _0808A112:
 	adds r1, r6, 0
 	movs r2, 0x8A
 	movs r3, 0x48
-	bl box_print
+	bl AddTextPrinterParameterized3
 	b _0808A212
 	.align 2, 0
 _0808A198: .4byte 0x00000829
@@ -2161,7 +2161,7 @@ _0808A1B4:
 	adds r1, r6, 0
 	movs r2, 0x10
 	movs r3, 0x49
-	bl box_print
+	bl AddTextPrinterParameterized3
 	str r5, [sp]
 	str r4, [sp, 0x4]
 	add r1, sp, 0xC
@@ -2170,7 +2170,7 @@ _0808A1B4:
 	adds r1, r6, 0
 	adds r2, r7, 0
 	movs r3, 0x49
-	bl box_print
+	bl AddTextPrinterParameterized3
 	str r5, [sp]
 	str r4, [sp, 0x4]
 	ldr r0, _0808A228 @ =gUnknown_8419CF7
@@ -2179,7 +2179,7 @@ _0808A1B4:
 	adds r1, r6, 0
 	movs r2, 0x8A
 	movs r3, 0x49
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0808A212:
 	add sp, 0x18
 	pop {r4-r7}
@@ -2258,7 +2258,7 @@ _0808A264:
 	movs r0, 0x1
 	movs r2, 0x14
 	movs r3, 0x58
-	bl box_print
+	bl AddTextPrinterParameterized3
 	b _0808A2F4
 	.align 2, 0
 _0808A2B0: .4byte gSaveBlock2Ptr
@@ -2284,7 +2284,7 @@ _0808A2D8:
 	movs r0, 0x1
 	movs r2, 0x10
 	movs r3, 0x59
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0808A2F4:
 	add r0, sp, 0xC
 	adds r1, r5, 0
@@ -2316,7 +2316,7 @@ _0808A2F4:
 	str r1, [sp, 0x8]
 	movs r0, 0x1
 	mov r1, r10
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r1, _0808A3C0 @ =gUnknown_83CD932
 	mov r2, r9
 	ldr r4, [r2]
@@ -2338,7 +2338,7 @@ _0808A2F4:
 	str r0, [sp, 0x8]
 	movs r0, 0x1
 	mov r1, r10
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add r0, sp, 0xC
 	adds r1, r7, 0
 	movs r2, 0x2
@@ -2360,7 +2360,7 @@ _0808A2F4:
 	str r1, [sp, 0x8]
 	movs r0, 0x1
 	mov r1, r10
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0x14
 	pop {r3-r5}
 	mov r8, r3
@@ -2412,7 +2412,7 @@ sub_808A3D0: @ 808A3D0
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r2, 0xA
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r1, [r7]
 	adds r1, 0x19
 	movs r0, 0x2
@@ -2433,7 +2433,7 @@ sub_808A3D0: @ 808A3D0
 	str r1, [sp, 0x8]
 	movs r0, 0x1
 	movs r1, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r0, _0808A4A4 @ =gUnknown_83CD93A
 	mov r8, r0
 	ldr r1, [r7]
@@ -2448,7 +2448,7 @@ sub_808A3D0: @ 808A3D0
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r2, 0xA
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r1, [r7]
 	adds r1, 0x33
 	movs r0, 0x2
@@ -2469,7 +2469,7 @@ sub_808A3D0: @ 808A3D0
 	str r1, [sp, 0x8]
 	movs r0, 0x1
 	movs r1, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0808A486:
 	add sp, 0xC
 	pop {r3}
@@ -2553,7 +2553,7 @@ sub_808A4FC: @ 808A4FC
 	adds r0, 0x4D
 	str r0, [sp, 0x8]
 	movs r0, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	b _0808A59C
 	.align 2, 0
 _0808A538: .4byte gUnknown_20397A4
@@ -2597,7 +2597,7 @@ _0808A550:
 	str r4, [sp, 0x8]
 	movs r0, 0x1
 	adds r1, r5, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0808A59C:
 	add sp, 0xC
 	pop {r4-r6}
@@ -2708,7 +2708,7 @@ sub_808A654: @ 808A654
 	movs r0, 0x1
 	adds r1, r5, 0
 	movs r3, 0x23
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r0, _0808A6C4 @ =gUnknown_83CD8E3
 	str r0, [sp]
 	str r4, [sp, 0x4]
@@ -2719,7 +2719,7 @@ sub_808A654: @ 808A654
 	adds r1, r5, 0
 	movs r2, 0xA4
 	movs r3, 0x23
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0808A6A2:
 	add sp, 0xC
 	pop {r4-r6}
@@ -2830,7 +2830,7 @@ sub_808A760: @ 808A760
 	movs r0, 0x1
 	adds r1, r6, 0
 	movs r3, 0x33
-	bl box_print
+	bl AddTextPrinterParameterized3
 	str r5, [sp]
 	str r4, [sp, 0x4]
 	ldr r0, [r7]
@@ -2841,7 +2841,7 @@ sub_808A760: @ 808A760
 	adds r1, r6, 0
 	movs r2, 0x82
 	movs r3, 0x33
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r5, _0808A804 @ =gUnknown_83CD8E3
 	str r5, [sp]
 	str r4, [sp, 0x4]
@@ -2853,7 +2853,7 @@ sub_808A760: @ 808A760
 	adds r1, r6, 0
 	movs r2, 0x90
 	movs r3, 0x33
-	bl box_print
+	bl AddTextPrinterParameterized3
 	str r5, [sp]
 	str r4, [sp, 0x4]
 	ldr r0, [r7]
@@ -2864,7 +2864,7 @@ sub_808A760: @ 808A760
 	adds r1, r6, 0
 	movs r2, 0xC0
 	movs r3, 0x33
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0808A7E2:
 	add sp, 0xC
 	pop {r4-r7}
@@ -2943,7 +2943,7 @@ sub_808A854: @ 808A854
 	movs r0, 0x1
 	adds r1, r5, 0
 	movs r3, 0x43
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r0, _0808A8C8 @ =gUnknown_83CD8E3
 	str r0, [sp]
 	str r4, [sp, 0x4]
@@ -2955,7 +2955,7 @@ sub_808A854: @ 808A854
 	adds r1, r5, 0
 	movs r2, 0xBA
 	movs r3, 0x43
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0808A8A6:
 	add sp, 0xC
 	pop {r4-r6}
@@ -3042,7 +3042,7 @@ sub_808A91C: @ 808A91C
 	movs r0, 0x1
 	adds r1, r5, 0
 	movs r3, 0x63
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r0, _0808A99C @ =gUnknown_83CD8E3
 	str r0, [sp]
 	str r4, [sp, 0x4]
@@ -3054,7 +3054,7 @@ sub_808A91C: @ 808A91C
 	adds r1, r5, 0
 	movs r2, 0xBA
 	movs r3, 0x63
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0808A97A:
 	add sp, 0xC
 	pop {r4-r6}
@@ -3140,7 +3140,7 @@ sub_808A9F0: @ 808A9F0
 	movs r0, 0x1
 	adds r1, r5, 0
 	movs r3, 0x53
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r0, _0808AA70 @ =gUnknown_83CD8E3
 	str r0, [sp]
 	str r4, [sp, 0x4]
@@ -3152,7 +3152,7 @@ sub_808A9F0: @ 808A9F0
 	adds r1, r5, 0
 	movs r2, 0xBA
 	movs r3, 0x53
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0808AA4C:
 	add sp, 0xC
 	pop {r4-r6}
@@ -4179,10 +4179,10 @@ sub_808B254: @ 808B254
 	bl HideBg
 	movs r0, 0x3
 	bl HideBg
-	bl remove_some_task
-	bl dp12_8087EA4
+	bl ScanlineEffect_Stop
+	bl ScanlineEffect_Clear
 	movs r1, 0
-	ldr r0, _0808B290 @ =gUnknown_2038700
+	ldr r0, _0808B290 @ =gScanlineEffectRegBuffers
 	movs r2, 0
 	movs r3, 0xF0
 	lsls r3, 3
@@ -4201,7 +4201,7 @@ _0808B278:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0808B290: .4byte gUnknown_2038700
+_0808B290: .4byte gScanlineEffectRegBuffers
 	thumb_func_end sub_808B254
 
 	thumb_func_start sub_808B294
@@ -4271,7 +4271,7 @@ _0808B2CA:
 	movs r2, 0
 	cmp r2, r7
 	bcs _0808B334
-	ldr r3, _0808B3C0 @ =gUnknown_2038700
+	ldr r3, _0808B3C0 @ =gScanlineEffectRegBuffers
 _0808B31C:
 	lsls r0, r2, 16
 	asrs r0, 16
@@ -4296,7 +4296,7 @@ _0808B334:
 	lsrs r7, r4, 16
 	cmp r1, r0
 	bge _0808B36C
-	ldr r0, _0808B3C0 @ =gUnknown_2038700
+	ldr r0, _0808B3C0 @ =gScanlineEffectRegBuffers
 	mov r12, r0
 	adds r4, r3, 0
 _0808B34E:
@@ -4321,7 +4321,7 @@ _0808B36C:
 	asrs r0, r1, 16
 	cmp r0, 0x9F
 	bgt _0808B38A
-	ldr r2, _0808B3C0 @ =gUnknown_2038700
+	ldr r2, _0808B3C0 @ =gScanlineEffectRegBuffers
 _0808B378:
 	asrs r0, r1, 16
 	lsls r1, r0, 1
@@ -4359,7 +4359,7 @@ _0808B3A2:
 _0808B3B4: .4byte gUnknown_20397A4
 _0808B3B8: .4byte 0x00007bcc
 _0808B3BC: .4byte 0xffff0000
-_0808B3C0: .4byte gUnknown_2038700
+_0808B3C0: .4byte gScanlineEffectRegBuffers
 	thumb_func_end sub_808B294
 
 	thumb_func_start sub_808B3C4
@@ -4612,7 +4612,7 @@ _0808B572:
 	movs r2, 0
 	cmp r2, r7
 	bcs _0808B5DC
-	ldr r3, _0808B668 @ =gUnknown_2038700
+	ldr r3, _0808B668 @ =gScanlineEffectRegBuffers
 _0808B5C4:
 	lsls r0, r2, 16
 	asrs r0, 16
@@ -4637,7 +4637,7 @@ _0808B5DC:
 	lsrs r7, r4, 16
 	cmp r1, r0
 	bge _0808B612
-	ldr r0, _0808B668 @ =gUnknown_2038700
+	ldr r0, _0808B668 @ =gScanlineEffectRegBuffers
 	mov r12, r0
 	adds r4, r3, 0
 _0808B5F6:
@@ -4661,7 +4661,7 @@ _0808B612:
 	asrs r0, r1, 16
 	cmp r0, 0x9F
 	bgt _0808B630
-	ldr r2, _0808B668 @ =gUnknown_2038700
+	ldr r2, _0808B668 @ =gScanlineEffectRegBuffers
 _0808B61E:
 	asrs r0, r1, 16
 	lsls r1, r0, 1
@@ -4699,7 +4699,7 @@ _0808B648:
 _0808B65C: .4byte gUnknown_20397A4
 _0808B660: .4byte 0x00007bcc
 _0808B664: .4byte 0xffff0000
-_0808B668: .4byte gUnknown_2038700
+_0808B668: .4byte gScanlineEffectRegBuffers
 	thumb_func_end sub_808B540
 
 	thumb_func_start sub_808B66C
@@ -5019,7 +5019,7 @@ _0808B8FC:
 	adds r0, r1, r4
 	ldrb r0, [r0]
 	movs r1, 0x1
-	bl sub_810C374
+	bl PlayerGenderToFrontTrainerPicId_Debug
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r5, _0808B944 @ =gUnknown_83CD8EC

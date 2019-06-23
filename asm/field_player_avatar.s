@@ -2818,7 +2818,7 @@ PartyHasMonWithSurf: @ 805C83C
 _0805C84E:
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl pokemon_has_move
+	bl MonKnowsMove
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805C860
@@ -4676,7 +4676,7 @@ sub_805D66C: @ 805D66C
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0x1
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -4769,7 +4769,7 @@ _0805D748:
 	strh r6, [r0, 0x26]
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_80F6F54
+	bl ClearDialogWindowAndFrame
 	ldrh r0, [r5, 0xA]
 	adds r0, 0x1
 	strh r0, [r5, 0xA]
@@ -4851,7 +4851,7 @@ sub_805D7C0: @ 805D7C0
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0x1
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 	movs r0, 0xD
 	strh r0, [r6, 0x8]
 	movs r0, 0x1
@@ -4904,7 +4904,7 @@ sub_805D838: @ 805D838
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0x1
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 	ldrh r0, [r6, 0x8]
 	adds r0, 0x1
 	strh r0, [r6, 0x8]
@@ -5043,7 +5043,7 @@ sub_805D980: @ 805D980
 	bl UnfreezeMapObjects
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_80F6F54
+	bl ClearDialogWindowAndFrame
 	ldr r0, _0805D9C0 @ =sub_805D304
 	bl FindTaskIdByFunc
 	lsls r0, 24

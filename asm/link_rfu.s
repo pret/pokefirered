@@ -3259,7 +3259,7 @@ sub_80FEC54: @ 80FEC54
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_805642C
+	bl is_c1_link_related_active
 	cmp r0, 0
 	bne _080FEC70
 _080FEC62:
@@ -4359,7 +4359,7 @@ _080FF4A2:
 	thumb_func_start sub_80FF4A8
 sub_80FF4A8: @ 80FF4A8
 	push {lr}
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -4400,7 +4400,7 @@ _080FF4EA:
 	thumb_func_start sub_80FF4F0
 sub_80FF4F0: @ 80FF4F0
 	push {r4,lr}
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -4446,7 +4446,7 @@ _080FF53E:
 	thumb_func_start sub_80FF544
 sub_80FF544: @ 80FF544
 	push {lr}
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -6079,7 +6079,7 @@ _08100038:
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
-	bl sub_80F696C
+	bl DecompressAndLoadBgGfxUsingHeap
 	ldr r1, _08100068 @ =gUnknown_8E99E74
 	movs r0, 0x3
 	movs r2, 0
@@ -6106,7 +6106,7 @@ _0810006C:
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl sub_80F696C
+	bl DecompressAndLoadBgGfxUsingHeap
 	movs r0, 0x1
 	bl CopyBgTilemapBufferToVram
 	b _08100104
@@ -7823,7 +7823,7 @@ _08100E0A:
 	str r0, [sp, 0x8]
 	mov r0, r12
 	adds r2, r7, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0x10
 	pop {r3,r4}
 	mov r8, r3
@@ -7851,11 +7851,11 @@ sub_8100E34: @ 8100E34
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0xE0
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0xE
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	movs r0, 0
 	bl sub_8100E7C
 	movs r0, 0x1
@@ -7964,7 +7964,7 @@ sub_8100F18: @ 8100F18
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810FF60
+	bl CreateYesNoMenu
 	add sp, 0xC
 	pop {r0}
 	bx r0

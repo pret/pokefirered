@@ -1,0 +1,125 @@
+{
+  "id": "MAP_ONE_ISLAND_TREASURE_BEACH",
+  "name": "OneIsland_TreasureBeach",
+  "layout": "LAYOUT_ONE_ISLAND_TREASURE_BEACH",
+  "music": "BGM_FRLG_ROUTE_3",
+  "region_map_section": "MAPSEC_TREASURE_BEACH",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_3",
+  "unknown_18": 1,
+  "unknown_19": 6,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": [
+    {
+      "map": "MAP_ONE_ISLAND",
+      "offset": 0,
+      "direction": "up"
+    }
+  ],
+  "object_events": [
+    {
+      "graphics_id": "44",
+      "x": 8,
+      "y": 11,
+      "elevation": 1,
+      "movement_type": "2",
+      "movement_range_x": 2,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "OneIsland_TreasureBeach_EventScript_1ABF27",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "19",
+      "x": 13,
+      "y": 20,
+      "elevation": 3,
+      "movement_type": "2",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "OneIsland_TreasureBeach_EventScript_16876C",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 8,
+      "y": 20,
+      "elevation": 3,
+      "item": "ITEM_STARDUST",
+      "flag": "103",
+      "unknown": 1
+    },
+    {
+      "type": "hidden_item",
+      "x": 13,
+      "y": 27,
+      "elevation": 3,
+      "item": "ITEM_STARDUST",
+      "flag": "104",
+      "unknown": 1
+    },
+    {
+      "type": "hidden_item",
+      "x": 11,
+      "y": 31,
+      "elevation": 3,
+      "item": "ITEM_PEARL",
+      "flag": "105",
+      "unknown": 1
+    },
+    {
+      "type": "hidden_item",
+      "x": 9,
+      "y": 34,
+      "elevation": 3,
+      "item": "ITEM_PEARL",
+      "flag": "106",
+      "unknown": 1
+    },
+    {
+      "type": "hidden_item",
+      "x": 15,
+      "y": 22,
+      "elevation": 3,
+      "item": "POCKET_KEY_ITEMS",
+      "flag": "107",
+      "unknown": 1
+    },
+    {
+      "type": "hidden_item",
+      "x": 16,
+      "y": 33,
+      "elevation": 3,
+      "item": "POCKET_KEY_ITEMS",
+      "flag": "108",
+      "unknown": 1
+    },
+    {
+      "type": "hidden_item",
+      "x": 15,
+      "y": 29,
+      "elevation": 3,
+      "item": "ITEM_STAR_PIECE",
+      "flag": "109",
+      "unknown": 1
+    },
+    {
+      "type": "hidden_item",
+      "x": 8,
+      "y": 27,
+      "elevation": 3,
+      "item": "ITEM_BIG_PEARL",
+      "flag": "110",
+      "unknown": 1
+    }
+  ]
+}

@@ -72,7 +72,7 @@ sub_8054C48: @ 8054C48
 	bl sub_8054C04
 	adds r4, r0, 0
 	ldr r5, _08054C6C @ =gStringVar1
-	bl sub_80CBF04
+	bl CountDigits
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -118,7 +118,7 @@ _08054C9C: .4byte gUnknown_826D29E
 	thumb_func_start sub_8054CA0
 sub_8054CA0: @ 8054CA0
 	push {lr}
-	bl sub_80559E4
+	bl ResetInitialPlayerAvatarState
 	movs r0, 0x83
 	lsls r0, 4
 	bl FlagClear
@@ -154,10 +154,10 @@ _08054D00: .4byte 0x00000808
 _08054D04: .4byte 0x0000404d
 	thumb_func_end sub_8054CA0
 
-	thumb_func_start sub_8054D08
-sub_8054D08: @ 8054D08
+	thumb_func_start Overworld_ResetStateAfterTeleport
+Overworld_ResetStateAfterTeleport: @ 8054D08
 	push {lr}
-	bl sub_80559E4
+	bl ResetInitialPlayerAvatarState
 	movs r0, 0x83
 	lsls r0, 4
 	bl FlagClear
@@ -191,12 +191,12 @@ _08054D60: .4byte 0x00000805
 _08054D64: .4byte 0x00000806
 _08054D68: .4byte 0x00000808
 _08054D6C: .4byte 0x0000404d
-	thumb_func_end sub_8054D08
+	thumb_func_end Overworld_ResetStateAfterTeleport
 
 	thumb_func_start sub_8054D70
 sub_8054D70: @ 8054D70
 	push {lr}
-	bl sub_80559E4
+	bl ResetInitialPlayerAvatarState
 	movs r0, 0x83
 	lsls r0, 4
 	bl FlagClear
@@ -235,7 +235,7 @@ _08054DD4: .4byte 0x0000404d
 	thumb_func_start sub_8054DD8
 sub_8054DD8: @ 8054DD8
 	push {lr}
-	bl sub_80559E4
+	bl ResetInitialPlayerAvatarState
 	movs r0, 0x83
 	lsls r0, 4
 	bl FlagClear
@@ -722,7 +722,7 @@ get_mapdata_header: @ 8055170
 	.align 2, 0
 _08055180: .4byte gSaveBlock1Ptr
 _08055184:
-	ldr r0, _08055194 @ =gUnknown_834EB8C
+	ldr r0, _08055194 @ =gMapLayouts
 	subs r1, 0x1
 	lsls r1, 2
 	adds r1, r0
@@ -731,7 +731,7 @@ _0805518E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08055194: .4byte gUnknown_834EB8C
+_08055194: .4byte gMapLayouts
 	thumb_func_end get_mapdata_header
 
 	thumb_func_start warp_shift
@@ -825,7 +825,7 @@ _08055232:
 get_mapheader_by_bank_and_number: @ 8055238
 	lsls r0, 16
 	lsls r1, 16
-	ldr r2, _0805524C @ =gUnknown_83526A8
+	ldr r2, _0805524C @ =gMapGroups
 	lsrs r0, 14
 	adds r0, r2
 	ldr r0, [r0]
@@ -834,7 +834,7 @@ get_mapheader_by_bank_and_number: @ 8055238
 	ldr r0, [r1]
 	bx lr
 	.align 2, 0
-_0805524C: .4byte gUnknown_83526A8
+_0805524C: .4byte gMapGroups
 	thumb_func_end get_mapheader_by_bank_and_number
 
 	thumb_func_start warp1_get_mapheader
@@ -1084,8 +1084,8 @@ saved_warp2_set: @ 80553E8
 _08055418: .4byte gSaveBlock1Ptr
 	thumb_func_end saved_warp2_set
 
-	thumb_func_start saved_warp2_set_2
-saved_warp2_set_2: @ 805541C
+	thumb_func_start SetDynamicWarpWithCoords
+SetDynamicWarpWithCoords: @ 805541C
 	push {r4,r5,lr}
 	sub sp, 0x8
 	ldr r4, [sp, 0x14]
@@ -1112,7 +1112,7 @@ saved_warp2_set_2: @ 805541C
 	bx r0
 	.align 2, 0
 _08055450: .4byte gSaveBlock1Ptr
-	thumb_func_end saved_warp2_set_2
+	thumb_func_end SetDynamicWarpWithCoords
 
 	thumb_func_start copy_saved_warp2_bank_and_enter_x_to_warp1
 copy_saved_warp2_bank_and_enter_x_to_warp1: @ 8055454
@@ -1178,15 +1178,15 @@ _080554B8: .4byte gSaveBlock1Ptr
 sub_80554BC: @ 80554BC
 	push {lr}
 	ldr r0, _080554C8 @ =gUnknown_2031DBC
-	bl sub_80BFCD0
+	bl SetBlackoutRespawnWarpAndHealerNpc
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080554C8: .4byte gUnknown_2031DBC
 	thumb_func_end sub_80554BC
 
-	thumb_func_start sub_80554CC
-sub_80554CC: @ 80554CC
+	thumb_func_start SetLastHealLocationWarp
+SetLastHealLocationWarp: @ 80554CC
 	push {r4,r5,lr}
 	sub sp, 0x8
 	lsls r0, 24
@@ -1218,7 +1218,7 @@ _08055500:
 	bx r0
 	.align 2, 0
 _08055508: .4byte gSaveBlock1Ptr
-	thumb_func_end sub_80554CC
+	thumb_func_end SetLastHealLocationWarp
 
 	thumb_func_start sub_805550C
 sub_805550C: @ 805550C
@@ -1281,7 +1281,7 @@ sub_805550C: @ 805550C
 	lsls r4, 24
 	asrs r4, 24
 	str r4, [sp]
-	bl sub_80555A0
+	bl SetEscapeWarp
 _08055590:
 	add sp, 0x4
 	pop {r4-r7}
@@ -1292,8 +1292,8 @@ _08055598: .4byte gUnknown_2031DBC
 _0805559C: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_805550C
 
-	thumb_func_start sub_80555A0
-sub_80555A0: @ 80555A0
+	thumb_func_start SetEscapeWarp
+SetEscapeWarp: @ 80555A0
 	push {r4-r6,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
@@ -1325,7 +1325,7 @@ sub_80555A0: @ 80555A0
 	bx r0
 	.align 2, 0
 _080555DC: .4byte gSaveBlock1Ptr
-	thumb_func_end sub_80555A0
+	thumb_func_end SetEscapeWarp
 
 	thumb_func_start sub_80555E0
 sub_80555E0: @ 80555E0
@@ -1342,8 +1342,8 @@ _080555F0: .4byte gUnknown_2031DBC
 _080555F4: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_80555E0
 
-	thumb_func_start sub_80555F8
-sub_80555F8: @ 80555F8
+	thumb_func_start SetFixedDiveWarp
+SetFixedDiveWarp: @ 80555F8
 	push {r4-r6,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
@@ -1373,7 +1373,7 @@ sub_80555F8: @ 80555F8
 	bx r0
 	.align 2, 0
 _08055630: .4byte gUnknown_2031DC4
-	thumb_func_end sub_80555F8
+	thumb_func_end SetFixedDiveWarp
 
 	thumb_func_start warp1_set_to_warp2
 warp1_set_to_warp2: @ 8055634
@@ -1389,8 +1389,8 @@ _08055644: .4byte gUnknown_2031DBC
 _08055648: .4byte gUnknown_2031DC4
 	thumb_func_end warp1_set_to_warp2
 
-	thumb_func_start sub_805564C
-sub_805564C: @ 805564C
+	thumb_func_start SetFixedHoleWarp
+SetFixedHoleWarp: @ 805564C
 	push {r4-r6,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
@@ -1420,10 +1420,10 @@ sub_805564C: @ 805564C
 	bx r0
 	.align 2, 0
 _08055684: .4byte gUnknown_2031DCC
-	thumb_func_end sub_805564C
+	thumb_func_end SetFixedHoleWarp
 
-	thumb_func_start sub_8055688
-sub_8055688: @ 8055688
+	thumb_func_start SetWarpDestinationToFixedHoleWarp
+SetWarpDestinationToFixedHoleWarp: @ 8055688
 	push {r4-r6,lr}
 	sub sp, 0x4
 	lsls r0, 16
@@ -1464,7 +1464,7 @@ _080556D6:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8055688
+	thumb_func_end SetWarpDestinationToFixedHoleWarp
 
 	thumb_func_start warp1_set_to_sav1w
 warp1_set_to_sav1w: @ 80556E0
@@ -1712,7 +1712,7 @@ sub_8055864: @ 8055864
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl sub_810C578
-	bl sub_807B140
+	bl SetSav1WeatherFromCurrMapHeader
 	bl sub_805610C
 	bl sub_8055CB8
 	bl sav1_reset_battle_music_maybe
@@ -1723,7 +1723,7 @@ sub_8055864: @ 8055864
 	ldr r0, [r4]
 	bl copy_map_tileset2_to_vram_2
 	ldr r0, [r4]
-	bl sub_8059AA0
+	bl apply_map_tileset2_palette
 	movs r4, 0x7
 _080558D4:
 	lsls r0, r4, 24
@@ -1784,7 +1784,7 @@ sub_8055920: @ 8055920
 	lsls r1, 16
 	lsrs r1, 16
 	bl sub_810C578
-	bl sub_807B140
+	bl SetSav1WeatherFromCurrMapHeader
 	bl sub_805610C
 	cmp r4, 0
 	beq _08055974
@@ -1817,7 +1817,7 @@ sub_80559A8: @ 80559A8
 	ldrb r0, [r0, 0x17]
 	bl is_light_level_1_2_3_5_or_6
 	bl TrySetMapSaveWarpStatus
-	bl sub_807B140
+	bl SetSav1WeatherFromCurrMapHeader
 	bl sub_805610C
 	bl sub_8055CB8
 	bl sub_8110920
@@ -1830,8 +1830,8 @@ sub_80559A8: @ 80559A8
 _080559E0: .4byte gMapHeader
 	thumb_func_end sub_80559A8
 
-	thumb_func_start sub_80559E4
-sub_80559E4: @ 80559E4
+	thumb_func_start ResetInitialPlayerAvatarState
+ResetInitialPlayerAvatarState: @ 80559E4
 	ldr r0, _080559F4 @ =gUnknown_2031DD4
 	movs r2, 0
 	movs r1, 0x1
@@ -1841,7 +1841,7 @@ sub_80559E4: @ 80559E4
 	bx lr
 	.align 2, 0
 _080559F4: .4byte gUnknown_2031DD4
-	thumb_func_end sub_80559E4
+	thumb_func_end ResetInitialPlayerAvatarState
 
 	thumb_func_start sub_80559F8
 sub_80559F8: @ 80559F8
@@ -2295,8 +2295,8 @@ sav1_get_flash_used_on_map: @ 8055D30
 _08055D3C: .4byte gSaveBlock1Ptr
 	thumb_func_end sav1_get_flash_used_on_map
 
-	thumb_func_start sub_8055D40
-sub_8055D40: @ 8055D40
+	thumb_func_start SetCurrentMapLayout
+SetCurrentMapLayout: @ 8055D40
 	push {lr}
 	ldr r1, _08055D54 @ =gSaveBlock1Ptr
 	ldr r1, [r1]
@@ -2309,7 +2309,7 @@ sub_8055D40: @ 8055D40
 	.align 2, 0
 _08055D54: .4byte gSaveBlock1Ptr
 _08055D58: .4byte gMapHeader
-	thumb_func_end sub_8055D40
+	thumb_func_end SetCurrentMapLayout
 
 	thumb_func_start sub_8055D5C
 sub_8055D5C: @ 8055D5C
@@ -2411,7 +2411,7 @@ _08055DDC:
 	bgt _08055E24
 	ldr r0, _08055E1C @ =gMPlayInfo_BGM
 	ldr r1, [r0]
-	ldr r0, _08055E20 @ =gUnknown_86E6B0C
+	ldr r0, _08055E20 @ =gSong_86E6B0C
 	cmp r1, r0
 	bne _08055E24
 	movs r0, 0x4
@@ -2421,7 +2421,7 @@ _08055DDC:
 _08055E14: .4byte gSaveBlock1Ptr
 _08055E18: .4byte 0x00004f01
 _08055E1C: .4byte gMPlayInfo_BGM
-_08055E20: .4byte gUnknown_86E6B0C
+_08055E20: .4byte gSong_86E6B0C
 _08055E24:
 	bl sub_8055D8C
 	lsls r0, 16
@@ -2441,7 +2441,7 @@ _08055E40:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08055E5A
-	ldr r5, _08055E74 @ =0x00000131
+	ldr r5, _08055E74 @ =0x00000131 @ BGM_FRLG_SURF
 	adds r0, r5, 0
 	bl sub_8056124
 	cmp r0, 0
@@ -2464,15 +2464,15 @@ _08055E6C:
 _08055E74: .4byte 0x00000131
 	thumb_func_end sub_8055DC4
 
-	thumb_func_start sub_8055E78
-sub_8055E78: @ 8055E78
+	thumb_func_start Overworld_SetSavedMusic
+Overworld_SetSavedMusic: @ 8055E78
 	ldr r1, _08055E80 @ =gSaveBlock1Ptr
 	ldr r1, [r1]
 	strh r0, [r1, 0x2C]
 	bx lr
 	.align 2, 0
 _08055E80: .4byte gSaveBlock1Ptr
-	thumb_func_end sub_8055E78
+	thumb_func_end Overworld_SetSavedMusic
 
 	thumb_func_start sav1_reset_battle_music_maybe
 sav1_reset_battle_music_maybe: @ 8055E84
@@ -2511,7 +2511,7 @@ _08055EA8:
 	bl GetCurrentMapMusic
 	lsls r0, 16
 	lsrs r6, r0, 16
-	ldr r5, _08055F08 @ =0x00000131
+	ldr r5, _08055F08 @ =0x00000131 @ BGM_FRLG_SURF
 	cmp r6, r5
 	beq _08055F14
 	movs r0, 0x8
@@ -2573,8 +2573,8 @@ _08055F42:
 	bx r0
 	thumb_func_end Overworld_ChangeMusicToDefault
 
-	thumb_func_start sub_8055F48
-sub_8055F48: @ 8055F48
+	thumb_func_start Overworld_ChangeMusicTo
+Overworld_ChangeMusicTo: @ 8055F48
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -2590,7 +2590,7 @@ _08055F62:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8055F48
+	thumb_func_end Overworld_ChangeMusicTo
 
 	thumb_func_start GetMapMusicFadeoutSpeed
 GetMapMusicFadeoutSpeed: @ 8055F68
@@ -2958,8 +2958,8 @@ _080561F8:
 	bx r1
 	thumb_func_end is_light_level_1_2_3_5_or_6
 
-	thumb_func_start is_light_level_1_2_3_or_6
-is_light_level_1_2_3_or_6: @ 80561FC
+	thumb_func_start Overworld_MapTypeAllowsTeleportAndFly
+Overworld_MapTypeAllowsTeleportAndFly: @ 80561FC
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2979,7 +2979,7 @@ _08056216:
 _08056218:
 	pop {r1}
 	bx r1
-	thumb_func_end is_light_level_1_2_3_or_6
+	thumb_func_end Overworld_MapTypeAllowsTeleportAndFly
 
 	thumb_func_start is_light_level_8_or_9
 is_light_level_8_or_9: @ 805621C
@@ -3022,8 +3022,8 @@ sav1_saved_warp2_map_get_name: @ 8056238
 _0805625C: .4byte gSaveBlock1Ptr
 	thumb_func_end sav1_saved_warp2_map_get_name
 
-	thumb_func_start sav1_map_get_name
-sav1_map_get_name: @ 8056260
+	thumb_func_start GetCurrentRegionMapSectionId
+GetCurrentRegionMapSectionId: @ 8056260
 	push {lr}
 	ldr r0, _08056284 @ =gSaveBlock1Ptr
 	ldr r1, [r0]
@@ -3042,7 +3042,7 @@ sav1_map_get_name: @ 8056260
 	bx r1
 	.align 2, 0
 _08056284: .4byte gSaveBlock1Ptr
-	thumb_func_end sav1_map_get_name
+	thumb_func_end GetCurrentRegionMapSectionId
 
 	thumb_func_start sav1_map_get_battletype
 sav1_map_get_battletype: @ 8056288
@@ -3117,8 +3117,8 @@ sub_80562B0: @ 80562B0
 	ldr r1, [r5]
 	movs r0, 0x3
 	bl SetBgTilemapBuffer
-	bl sub_80F6C6C
-	bl sub_80F6C98
+	bl InitStandardTextBoxWindows
+	bl ResetBg0
 	bl sub_8069348
 	pop {r3}
 	mov r8, r3
@@ -3181,8 +3181,8 @@ sub_8056354: @ 8056354
 	ldr r1, [r5]
 	movs r0, 0x3
 	bl SetBgTilemapBuffer
-	bl sub_80F6C6C
-	bl sub_80F6C98
+	bl InitStandardTextBoxWindows
+	bl ResetBg0
 	bl sub_8069348
 	pop {r3}
 	mov r8, r3
@@ -3196,8 +3196,8 @@ _080563E8: .4byte gUnknown_3005014
 _080563EC: .4byte gUnknown_300501C
 	thumb_func_end sub_8056354
 
-	thumb_func_start sub_80563F0
-sub_80563F0: @ 80563F0
+	thumb_func_start CleanupOverworldWindowsAndTilemaps
+CleanupOverworldWindowsAndTilemaps: @ 80563F0
 	push {lr}
 	bl sub_80F6C8C
 	ldr r0, _08056414 @ =gUnknown_300501C
@@ -3215,7 +3215,7 @@ sub_80563F0: @ 80563F0
 _08056414: .4byte gUnknown_300501C
 _08056418: .4byte gUnknown_3005014
 _0805641C: .4byte gUnknown_3005018
-	thumb_func_end sub_80563F0
+	thumb_func_end CleanupOverworldWindowsAndTilemaps
 
 	thumb_func_start sub_8056420
 sub_8056420: @ 8056420
@@ -3225,8 +3225,8 @@ sub_8056420: @ 8056420
 	bx r0
 	thumb_func_end sub_8056420
 
-	thumb_func_start sub_805642C
-sub_805642C: @ 805642C
+	thumb_func_start is_c1_link_related_active
+is_c1_link_related_active: @ 805642C
 	push {lr}
 	ldr r0, _0805643C @ =gMain
 	ldr r1, [r0]
@@ -3243,7 +3243,7 @@ _08056444:
 _08056446:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805642C
+	thumb_func_end is_c1_link_related_active
 
 	thumb_func_start sub_805644C
 sub_805644C: @ 805644C
@@ -3442,7 +3442,7 @@ _080565E8: .4byte gMain
 	thumb_func_start map_post_load_hook_exec
 map_post_load_hook_exec: @ 80565EC
 	push {r4,lr}
-	ldr r4, _08056604 @ =gUnknown_3005024
+	ldr r4, _08056604 @ =gFieldCallback2
 	ldr r0, [r4]
 	cmp r0, 0
 	beq _08056618
@@ -3453,28 +3453,28 @@ map_post_load_hook_exec: @ 80565EC
 	movs r0, 0
 	b _08056638
 	.align 2, 0
-_08056604: .4byte gUnknown_3005024
+_08056604: .4byte gFieldCallback2
 _08056608:
 	movs r1, 0
 	str r1, [r4]
-	ldr r0, _08056614 @ =gUnknown_3005020
+	ldr r0, _08056614 @ =gFieldCallback
 	str r1, [r0]
 	b _08056636
 	.align 2, 0
-_08056614: .4byte gUnknown_3005020
+_08056614: .4byte gFieldCallback
 _08056618:
-	ldr r0, _08056628 @ =gUnknown_3005020
+	ldr r0, _08056628 @ =gFieldCallback
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _0805662C
 	bl _call_via_r0
 	b _08056630
 	.align 2, 0
-_08056628: .4byte gUnknown_3005020
+_08056628: .4byte gFieldCallback
 _0805662C:
 	bl sub_807DF64
 _08056630:
-	ldr r1, _08056640 @ =gUnknown_3005020
+	ldr r1, _08056640 @ =gFieldCallback
 	movs r0, 0
 	str r0, [r1]
 _08056636:
@@ -3484,7 +3484,7 @@ _08056638:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08056640: .4byte gUnknown_3005020
+_08056640: .4byte gFieldCallback
 	thumb_func_end map_post_load_hook_exec
 
 	thumb_func_start CB2_NewGame
@@ -3494,14 +3494,14 @@ CB2_NewGame: @ 8056644
 	bl StopMapMusic
 	bl sub_8056420
 	bl sub_8054A60
-	bl sub_80559E4
+	bl ResetInitialPlayerAvatarState
 	bl PlayTimeCounter_Start
 	bl ScriptContext1_Init
 	bl ScriptContext2_Disable
-	ldr r1, _0805668C @ =gUnknown_3005020
+	ldr r1, _0805668C @ =gFieldCallback
 	ldr r0, _08056690 @ =sub_807DF7C
 	str r0, [r1]
-	ldr r1, _08056694 @ =gUnknown_3005024
+	ldr r1, _08056694 @ =gFieldCallback2
 	movs r0, 0
 	str r0, [r1]
 	ldr r0, _08056698 @ =gMain + 0x438
@@ -3514,9 +3514,9 @@ CB2_NewGame: @ 8056644
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805668C: .4byte gUnknown_3005020
+_0805668C: .4byte gFieldCallback
 _08056690: .4byte sub_807DF7C
-_08056694: .4byte gUnknown_3005024
+_08056694: .4byte gFieldCallback2
 _08056698: .4byte gMain + 0x438
 _0805669C: .4byte sub_8056534
 _080566A0: .4byte sub_80565B4
@@ -3545,7 +3545,7 @@ c2_whiteout: @ 80566A4
 	bl sub_80559F8
 	bl ScriptContext1_Init
 	bl ScriptContext2_Disable
-	ldr r1, _0805670C @ =gUnknown_3005020
+	ldr r1, _0805670C @ =gFieldCallback
 	ldr r0, _08056710 @ =sub_807F5F0
 	str r0, [r1]
 	mov r1, sp
@@ -3565,7 +3565,7 @@ _08056702:
 	bx r0
 	.align 2, 0
 _08056708: .4byte gMain
-_0805670C: .4byte gUnknown_3005020
+_0805670C: .4byte gFieldCallback
 _08056710: .4byte sub_807F5F0
 _08056714: .4byte sub_8056534
 _08056718: .4byte sub_80565B4
@@ -3624,7 +3624,7 @@ _08056784: .4byte sub_80565B4
 sub_8056788: @ 8056788
 	push {lr}
 	bl sub_80569BC
-	ldr r0, _080567A0 @ =gUnknown_3005020
+	ldr r0, _080567A0 @ =gFieldCallback
 	ldr r1, _080567A4 @ =sub_807DE58
 	str r1, [r0]
 	ldr r0, _080567A8 @ =c2_80567AC
@@ -3632,7 +3632,7 @@ sub_8056788: @ 8056788
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080567A0: .4byte gUnknown_3005020
+_080567A0: .4byte gFieldCallback
 _080567A4: .4byte sub_807DE58
 _080567A8: .4byte c2_80567AC
 	thumb_func_end sub_8056788
@@ -3659,10 +3659,10 @@ _080567D4: .4byte c1_link_related
 _080567D8: .4byte sub_80565B4
 	thumb_func_end c2_80567AC
 
-	thumb_func_start c2_exit_to_overworld_2_switch
-c2_exit_to_overworld_2_switch: @ 80567DC
+	thumb_func_start CB2_ReturnToField
+CB2_ReturnToField: @ 80567DC
 	push {lr}
-	bl sub_805642C
+	bl is_c1_link_related_active
 	cmp r0, 0x1
 	bne _080567F4
 	ldr r0, _080567F0 @ =c2_exit_to_overworld_2_link
@@ -3679,7 +3679,7 @@ _080567FE:
 	bx r0
 	.align 2, 0
 _08056804: .4byte c2_exit_to_overworld_2_local
-	thumb_func_end c2_exit_to_overworld_2_switch
+	thumb_func_end CB2_ReturnToField
 
 	thumb_func_start c2_exit_to_overworld_2_local
 c2_exit_to_overworld_2_local: @ 8056808
@@ -3731,26 +3731,26 @@ c2_8056854: @ 8056854
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08056888
-	ldr r1, _08056880 @ =gUnknown_3005020
+	ldr r1, _08056880 @ =gFieldCallback
 	ldr r0, _08056884 @ =sub_807DE58
 	b _0805688C
 	.align 2, 0
 _08056878: .4byte c1_link_related
 _0805687C: .4byte gWirelessCommType
-_08056880: .4byte gUnknown_3005020
+_08056880: .4byte gFieldCallback
 _08056884: .4byte sub_807DE58
 _08056888:
-	ldr r1, _080568A0 @ =gUnknown_3005020
+	ldr r1, _080568A0 @ =gFieldCallback
 	ldr r0, _080568A4 @ =sub_807DDD0
 _0805688C:
 	str r0, [r1]
 	bl ScriptContext1_Init
 	bl ScriptContext2_Disable
-	bl c2_exit_to_overworld_2_switch
+	bl CB2_ReturnToField
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080568A0: .4byte gUnknown_3005020
+_080568A0: .4byte gFieldCallback
 _080568A4: .4byte sub_807DDD0
 	thumb_func_end c2_8056854
 
@@ -3758,14 +3758,14 @@ _080568A4: .4byte sub_807DDD0
 sub_80568A8: @ 80568A8
 	push {lr}
 	bl sub_80569BC
-	ldr r1, _080568BC @ =gUnknown_3005024
+	ldr r1, _080568BC @ =gFieldCallback2
 	ldr r0, _080568C0 @ =sub_807E3BC
 	str r0, [r1]
-	bl c2_exit_to_overworld_2_switch
+	bl CB2_ReturnToField
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080568BC: .4byte gUnknown_3005024
+_080568BC: .4byte gFieldCallback2
 _080568C0: .4byte sub_807E3BC
 	thumb_func_end sub_80568A8
 
@@ -3773,14 +3773,14 @@ _080568C0: .4byte sub_807E3BC
 sub_80568C4: @ 80568C4
 	push {lr}
 	bl sub_80569BC
-	ldr r1, _080568D8 @ =gUnknown_3005020
+	ldr r1, _080568D8 @ =gFieldCallback
 	ldr r0, _080568DC @ =sub_807DD44
 	str r0, [r1]
-	bl c2_exit_to_overworld_2_switch
+	bl CB2_ReturnToField
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080568D8: .4byte gUnknown_3005020
+_080568D8: .4byte gFieldCallback
 _080568DC: .4byte sub_807DD44
 	thumb_func_end sub_80568C4
 
@@ -3788,29 +3788,29 @@ _080568DC: .4byte sub_807DD44
 c2_exit_to_overworld_1_continue_scripts_restart_music: @ 80568E0
 	push {lr}
 	bl sub_80569BC
-	ldr r1, _080568F4 @ =gUnknown_3005020
-	ldr r0, _080568F8 @ =sub_807DD24
+	ldr r1, _080568F4 @ =gFieldCallback
+	ldr r0, _080568F8 @ =FieldCallback_ReturnToEventScript2
 	str r0, [r1]
-	bl c2_exit_to_overworld_2_switch
+	bl CB2_ReturnToField
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080568F4: .4byte gUnknown_3005020
-_080568F8: .4byte sub_807DD24
+_080568F4: .4byte gFieldCallback
+_080568F8: .4byte FieldCallback_ReturnToEventScript2
 	thumb_func_end c2_exit_to_overworld_1_continue_scripts_restart_music
 
 	thumb_func_start sub_80568FC
 sub_80568FC: @ 80568FC
 	push {lr}
 	bl sub_80569BC
-	ldr r1, _08056910 @ =gUnknown_3005020
+	ldr r1, _08056910 @ =gFieldCallback
 	ldr r0, _08056914 @ =sub_807DF7C
 	str r0, [r1]
-	bl c2_exit_to_overworld_2_switch
+	bl CB2_ReturnToField
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08056910: .4byte gUnknown_3005020
+_08056910: .4byte gFieldCallback
 _08056914: .4byte sub_807DF7C
 	thumb_func_end sub_80568FC
 
@@ -3847,7 +3847,7 @@ sub_8056938: @ 8056938
 	bl PlayTimeCounter_Start
 	bl ScriptContext1_Init
 	bl ScriptContext2_Disable
-	ldr r1, _08056990 @ =gUnknown_3005024
+	ldr r1, _08056990 @ =gFieldCallback2
 	movs r0, 0
 	str r0, [r1]
 	ldr r1, _08056994 @ =gUnknown_2031DE0
@@ -3863,21 +3863,21 @@ sub_8056938: @ 8056938
 	bl SetMainCallback2
 	b _080569AC
 	.align 2, 0
-_08056990: .4byte gUnknown_3005024
+_08056990: .4byte gFieldCallback2
 _08056994: .4byte gUnknown_2031DE0
 _08056998: .4byte sub_805671C
 _0805699C:
-	ldr r0, _080569B0 @ =gUnknown_3005020
+	ldr r0, _080569B0 @ =gFieldCallback
 	ldr r1, _080569B4 @ =sub_8056918
 	str r1, [r0]
 	ldr r0, _080569B8 @ =sub_8056534
 	bl sub_80565E0
-	bl c2_exit_to_overworld_2_switch
+	bl CB2_ReturnToField
 _080569AC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080569B0: .4byte gUnknown_3005020
+_080569B0: .4byte gFieldCallback
 _080569B4: .4byte sub_8056918
 _080569B8: .4byte sub_8056534
 	thumb_func_end sub_8056938
@@ -3890,7 +3890,7 @@ sub_80569BC: @ 80569BC
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080569CE
-	bl sub_80098B8
+	bl CloseLink
 _080569CE:
 	ldr r0, _080569E4 @ =gWirelessCommType
 	ldrb r0, [r0]
@@ -3933,7 +3933,7 @@ VBlankCB_Field: @ 8056A14
 	push {lr}
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
-	bl sub_8087F54
+	bl ScanlineEffect_InitHBlankDmaTransfer
 	bl FieldUpdateBgTilemapScroll
 	bl TransferPlttBuffer
 	bl TransferTilesetAnimsBuffer
@@ -3954,7 +3954,7 @@ sub_8056A34: @ 8056A34
 	ldr r0, [r2]
 	ldr r1, [r2, 0x4]
 	ldr r2, [r2, 0x8]
-	bl sub_8087EE4
+	bl ScanlineEffect_SetParams
 _08056A52:
 	pop {r0}
 	bx r0
@@ -4024,14 +4024,14 @@ _08056AEE:
 _08056AF4:
 	ldr r0, _08056B00 @ =gMapHeader
 	ldr r0, [r0]
-	bl sub_8059A54
+	bl copy_map_tileset1_to_vram
 	b _08056B62
 	.align 2, 0
 _08056B00: .4byte gMapHeader
 _08056B04:
 	ldr r0, _08056B10 @ =gMapHeader
 	ldr r0, [r0]
-	bl sub_8059A68
+	bl copy_map_tileset2_to_vram
 	b _08056B62
 	.align 2, 0
 _08056B10: .4byte gMapHeader
@@ -4166,14 +4166,14 @@ _08056C2A:
 _08056C30:
 	ldr r0, _08056C3C @ =gMapHeader
 	ldr r0, [r0]
-	bl sub_8059A54
+	bl copy_map_tileset1_to_vram
 	b _08056CCA
 	.align 2, 0
 _08056C3C: .4byte gMapHeader
 _08056C40:
 	ldr r0, _08056C4C @ =gMapHeader
 	ldr r0, [r0]
-	bl sub_8059A68
+	bl copy_map_tileset2_to_vram
 	b _08056CCA
 	.align 2, 0
 _08056C4C: .4byte gMapHeader
@@ -4355,14 +4355,14 @@ _08056DCA:
 _08056DD0:
 	ldr r0, _08056DDC @ =gMapHeader
 	ldr r0, [r0]
-	bl sub_8059A54
+	bl copy_map_tileset1_to_vram
 	b _08056E3E
 	.align 2, 0
 _08056DDC: .4byte gMapHeader
 _08056DE0:
 	ldr r0, _08056DEC @ =gMapHeader
 	ldr r0, [r0]
-	bl sub_8059A68
+	bl copy_map_tileset2_to_vram
 	b _08056E3E
 	.align 2, 0
 _08056DEC: .4byte gMapHeader
@@ -4451,7 +4451,7 @@ sub_8056E80: @ 8056E80
 	movs r0, 0
 	movs r1, 0
 	bl SetGpuReg
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	ldr r2, _08056EF8 @ =0x05000002
 	mov r1, sp
 	movs r0, 0
@@ -4630,8 +4630,8 @@ sub_8057024: @ 8057024
 	bl ResetTasks
 	bl ResetSpriteData
 	bl ResetPaletteFade
-	bl dp12_8087EA4
-	bl dp13_810BB8C
+	bl ScanlineEffect_Clear
+	bl ResetAllPicSprites
 	bl ResetCameraUpdateInfo
 	bl InstallCameraPanAheadCallback
 	cmp r4, 0
@@ -4690,7 +4690,7 @@ mli4_mapscripts_and_other: @ 805709C
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sav1_camera_get_focus_coords
+	bl GetCameraFocusCoords
 	bl sub_8055A6C
 	adds r5, r0, 0
 	mov r0, sp
@@ -4705,7 +4705,7 @@ mli4_mapscripts_and_other: @ 805709C
 	bl InitPlayerAvatar
 	ldrb r0, [r5]
 	bl SetPlayerAvatarTransitionFlags
-	bl sub_80559E4
+	bl ResetInitialPlayerAvatarState
 	movs r0, 0
 	movs r1, 0
 	bl sub_805EC30
@@ -4792,7 +4792,7 @@ sub_8057178: @ 8057178
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sav1_camera_get_focus_coords
+	bl GetCameraFocusCoords
 	mov r2, sp
 	ldr r0, _080571A4 @ =gUnknown_300502C
 	ldrb r1, [r0]
@@ -4801,7 +4801,7 @@ sub_8057178: @ 8057178
 	lsls r0, 16
 	lsrs r0, 16
 	ldrh r1, [r4]
-	bl sub_80597EC
+	bl SetCameraFocusCoords
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
@@ -4820,7 +4820,7 @@ sub_80571A8: @ 80571A8
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sav1_camera_get_focus_coords
+	bl GetCameraFocusCoords
 	mov r3, sp
 	mov r2, sp
 	ldr r0, _08057224 @ =gUnknown_300502C
@@ -5066,14 +5066,14 @@ _080573C2:
 _080573C8:
 	ldr r0, _080573D4 @ =gMapHeader
 	ldr r0, [r0]
-	bl sub_8059A54
+	bl copy_map_tileset1_to_vram
 	b _08057412
 	.align 2, 0
 _080573D4: .4byte gMapHeader
 _080573D8:
 	ldr r0, _080573E4 @ =gMapHeader
 	ldr r0, [r0]
-	bl sub_8059A68
+	bl copy_map_tileset2_to_vram
 	b _08057412
 	.align 2, 0
 _080573E4: .4byte gMapHeader
@@ -5150,7 +5150,7 @@ _0805748C: .4byte sub_805671C
 _08057490:
 	ldr r0, _080574A0 @ =sub_8056534
 	bl sub_80565E0
-	bl c2_exit_to_overworld_2_switch
+	bl CB2_ReturnToField
 _0805749A:
 	pop {r0}
 	bx r0
@@ -5314,7 +5314,7 @@ _08057560:
 	bl ScriptContext2_Disable
 	movs r0, 0
 	bl sub_80565E0
-	ldr r1, _08057614 @ =gUnknown_3005024
+	ldr r1, _08057614 @ =gFieldCallback2
 	ldr r0, _08057618 @ =sub_80574EC
 	str r0, [r1]
 	ldr r0, _0805761C @ =gMain
@@ -5334,7 +5334,7 @@ _08057604: .4byte 0x0000ffff
 _08057608: .4byte gUnknown_2031DBC
 _0805760C: .4byte gUnknown_2031DE8
 _08057610: .4byte gPaletteFade
-_08057614: .4byte gUnknown_3005024
+_08057614: .4byte gFieldCallback2
 _08057618: .4byte sub_80574EC
 _0805761C: .4byte gMain
 _08057620:
@@ -5395,8 +5395,8 @@ _08057690:
 	bl sub_8055920
 	b _0805772A
 _0805769C:
-	bl dp12_8087EA4
-	bl dp13_810BB8C
+	bl ScanlineEffect_Clear
+	bl ResetAllPicSprites
 	bl ResetCameraUpdateInfo
 	bl InstallCameraPanAheadCallback
 	bl FieldEffectActiveListClear
@@ -5415,14 +5415,14 @@ _080576CC:
 _080576D2:
 	ldr r0, _080576DC @ =gMapHeader
 	ldr r0, [r0]
-	bl sub_8059A54
+	bl copy_map_tileset1_to_vram
 	b _0805772A
 	.align 2, 0
 _080576DC: .4byte gMapHeader
 _080576E0:
 	ldr r0, _080576EC @ =gMapHeader
 	ldr r0, [r0]
-	bl sub_8059A68
+	bl copy_map_tileset2_to_vram
 	b _0805772A
 	.align 2, 0
 _080576EC: .4byte gMapHeader
@@ -5619,7 +5619,7 @@ sub_8057854: @ 8057854
 	ands r0, r1
 	cmp r0, 0
 	bne _08057876
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	ldr r0, _08057880 @ =sub_805671C
 	bl SetMainCallback2
 	adds r0, r4, 0
@@ -6144,7 +6144,7 @@ _08057C72:
 	bl sub_805833C
 	cmp r0, 0x1
 	bls _08057CA8
-	bl sub_805642C
+	bl is_c1_link_related_active
 	cmp r0, 0x1
 	bne _08057CA8
 	bl sub_800A00C
@@ -6748,7 +6748,7 @@ _08058074:
 	ldr r1, [r4, 0x8]
 	str r0, [sp]
 	str r1, [sp, 0x4]
-	ldr r3, _080580E4 @ =gUnknown_826D2D8
+	ldr r3, _080580E4 @ =gDirectionToVectors
 	ldrb r0, [r4, 0x3]
 	lsls r0, 3
 	adds r0, r3
@@ -6801,7 +6801,7 @@ _080580E0:
 	ldr r0, _080580F8 @ =gUnknown_81BB9A3
 	b _08058122
 	.align 2, 0
-_080580E4: .4byte gUnknown_826D2D8
+_080580E4: .4byte gDirectionToVectors
 _080580E8: .4byte 0xffff0000
 _080580EC: .4byte 0x0000ffff
 _080580F0: .4byte 0xffffff00
@@ -6976,7 +6976,7 @@ _08058240: .4byte gUnknown_81BB9F0
 	thumb_func_start sub_8058244
 sub_8058244: @ 8058244
 	push {lr}
-	bl sub_805642C
+	bl is_c1_link_related_active
 	cmp r0, 0
 	bne _08058252
 	movs r0, 0
@@ -7009,7 +7009,7 @@ sub_8058274: @ 8058274
 	bl sub_800B248
 	cmp r0, 0x1
 	bls _080582D8
-	bl sub_805642C
+	bl is_c1_link_related_active
 	cmp r0, 0x1
 	bne _080582D8
 	bl sub_800A00C
@@ -7062,7 +7062,7 @@ sub_80582E0: @ 80582E0
 	bl sub_805833C
 	cmp r0, 0x1
 	bls _08058304
-	bl sub_805642C
+	bl is_c1_link_related_active
 	cmp r0, 0x1
 	bne _08058304
 	bl sub_800A00C
@@ -7829,7 +7829,7 @@ _08058854:
 	bls _08058810
 	asrs r0, r3, 16
 	asrs r1, r5, 16
-	bl sub_8058DC4
+	bl MapGridIsImpassableAt
 	lsls r0, 24
 	lsrs r0, 24
 _0805886A:
@@ -7888,7 +7888,7 @@ _080588C6:
 	movs r2, 0
 	str r2, [sp]
 	movs r3, 0
-	bl AddPseudoFieldObject
+	bl AddPseudoEventObject
 	strb r0, [r4, 0x4]
 	ldrb r1, [r4, 0x4]
 	lsls r0, r1, 4

@@ -1,4 +1,5 @@
 	.section script_data, "aw", %progbits
+	.align 2
 
 gUnknown_81C68EC:: @ 81C68EC
 	.incbin "baserom.gba", 0x1C68EC, 0x8

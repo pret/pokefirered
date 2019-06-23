@@ -1,50 +1,63 @@
+	.include "asm/macros.inc"
+	.include "constants/constants.inc"
+
 	.section .rodata
 
 	.align 2
-gUnknown_8468C98:: @ 8468C98
-	.incbin "baserom.gba", 0x468C98, 0x520
+gUnknown_846AFE8:: @ 846AFE8
+	.incbin "graphics/misc/unk_846B008.gbapal"
 
-gUnknown_84691B8:: @ 84691B8
-	.incbin "baserom.gba", 0x4691B8, 0x20
-
-gUnknown_84691D8:: @ 84691D8
-	.incbin "baserom.gba", 0x4691D8, 0x800
-
-gUnknown_84699D8:: @ 84699D8
-	.incbin "baserom.gba", 0x4699D8, 0x1520
-
-gUnknown_846AEF8:: @ 846AEF8
-	.incbin "baserom.gba", 0x46AEF8, 0x4
-
-gUnknown_846AEFC:: @ 846AEFC
-	.incbin "baserom.gba", 0x46AEFC, 0x2C
-
-gUnknown_846AF28:: @ 846AF28
-	.incbin "baserom.gba", 0x46AF28, 0x38
-
-gUnknown_846AF60:: @ 846AF60
-	.incbin "baserom.gba", 0x46AF60, 0x18
-
-gUnknown_846AF78:: @ 846AF78
-	.incbin "baserom.gba", 0x46AF78, 0x18
-
-gUnknown_846AF90:: @ 846AF90
-	.incbin "baserom.gba", 0x46AF90, 0x40
-
-gUnknown_846AFD0:: @ 846AFD0
-	.incbin "baserom.gba", 0x46AFD0, 0x45C
+gUnknown_846B008:: @ 846B008
+	.incbin "graphics/misc/unk_846B008.4bpp.lz"
 
 gUnknown_846B42C:: @ 846B42C
-	.incbin "baserom.gba", 0x46B42C, 0x10
+	obj_tiles gUnknown_846B008, 0x0c00, 0x2000
+	null_obj_tiles
 
 gUnknown_846B43C:: @ 846B43C
-	.incbin "baserom.gba", 0x46B43C, 0x58
+	obj_pal gUnknown_846AFE8, 0x2000
+	null_obj_pal
+
+gUnknown_846B44C:: @ 846B44C
+	obj_image_anim_frame 0x00, 0
+	obj_image_anim_end
+
+gUnknown_846B454:: @ 846B454
+	obj_image_anim_frame 0x10, 0
+	obj_image_anim_end
+
+gUnknown_846B45C:: @ 846B45C
+	obj_image_anim_frame 0x20, 0
+	obj_image_anim_end
+
+gUnknown_846B464:: @ 846B464
+	obj_image_anim_frame 0x40, 0
+	obj_image_anim_end
+
+gUnknown_846B46C:: @ 846B46C
+	obj_image_anim_frame 0x30, 0
+	obj_image_anim_end
+
+gUnknown_846B474:: @ 846B474
+	obj_image_anim_frame 0x50, 0
+	obj_image_anim_end
+
+gUnknown_846B47C::
+	.4byte gUnknown_846B44C
+	.4byte gUnknown_846B454
+	.4byte gUnknown_846B45C
+	.4byte gUnknown_846B464
+	.4byte gUnknown_846B46C
+	.4byte gUnknown_846B474
 
 gUnknown_846B494:: @ 846B494
-	.incbin "baserom.gba", 0x46B494, 0x18
+	spr_template 0x2000, 0x2000, gOamData_83AC9D8, gUnknown_846B47C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_846B4AC:: @ 846B4AC
-	.incbin "baserom.gba", 0x46B4AC, 0x10
+	@ This is a 2D array with one row.
+	@ Why this was done this way is beyond me.
+	@ The data that follow this row are not at all function pointers.
+	.4byte sub_81477C0, sub_814784C, sub_81479D4, sub_8147A34
 
 gUnknown_846B4BC:: @ 846B4BC
 	.incbin "baserom.gba", 0x46B4BC, 0x190
@@ -125,10 +138,14 @@ gUnknown_846D953:: @ 846D953
 	.incbin "baserom.gba", 0x46D953, 0xD
 
 gUnknown_846D960:: @ 846D960
-	.incbin "baserom.gba", 0x46D960, 0x8
+	obj_tiles gUnknown_8479688, 0, 800
 
 gUnknown_846D968:: @ 846D968
-	.incbin "baserom.gba", 0x46D968, 0x40
+	obj_pal gUnknown_8479668, 800
+
+gUnknown_846D970::
+	.2byte 0x0006, 0x0008, 0x0010, 0x0008, 0x0006, 0x0008, 0x000b, 0x0006, 0x0010, 0x0008, 0x0002, 0x0006
+	.2byte 0x0006, 0x0008, 0x0010, 0x0008, 0x0014, 0x0006, 0x0002, 0x0006, 0x0006, 0x0008, 0x000b, 0x0006, 0x0010, 0x0008, 0x0014, 0x0006
 
 gUnknown_846D9A8:: @ 846D9A8
 	.incbin "baserom.gba", 0x46D9A8, 0x2C
@@ -279,45 +296,3 @@ gUnknown_846F488:: @ 846F488
 
 gUnknown_846F4B8:: @ 846F4B8
 	.incbin "baserom.gba", 0x46F4B8, 0x18
-
-gUnknown_846F4D0:: @ 846F4D0
-	.incbin "baserom.gba", 0x46F4D0, 0x200
-
-gUnknown_846F6D0:: @ 846F6D0
-	.incbin "baserom.gba", 0x46F6D0, 0x210
-
-gUnknown_846F8E0:: @ 846F8E0
-	.incbin "baserom.gba", 0x46F8E0, 0x194
-
-gUnknown_846FA74:: @ 846FA74
-	.incbin "baserom.gba", 0x46FA74, 0x8
-
-gUnknown_846FA7C:: @ 846FA7C
-	.incbin "baserom.gba", 0x46FA7C, 0x30
-
-gUnknown_846FAAC:: @ 846FAAC
-	.incbin "baserom.gba", 0x46FAAC, 0x14
-
-gUnknown_846FAC0:: @ 846FAC0
-	.incbin "baserom.gba", 0x46FAC0, 0x48
-
-gUnknown_846FB08:: @ 846FB08
-	.incbin "baserom.gba", 0x46FB08, 0x4
-
-gUnknown_846FB0C:: @ 846FB0C
-	.incbin "baserom.gba", 0x46FB0C, 0x1000
-
-gUnknown_8470B0C:: @ 8470B0C
-	.incbin "baserom.gba", 0x470B0C, 0xF40
-
-gUnknown_8471A4C:: @ 8471A4C
-	.incbin "baserom.gba", 0x471A4C, 0x120
-
-gUnknown_8471B6C:: @ 8471B6C
-	.incbin "baserom.gba", 0x471B6C, 0x280
-
-gUnknown_8471DEC:: @ 8471DEC
-	.incbin "baserom.gba", 0x471DEC, 0xA0
-
-gUnknown_8471E8C:: @ 8471E8C
-	.incbin "baserom.gba", 0x471E8C, 0x50

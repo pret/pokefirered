@@ -673,7 +673,7 @@ sub_805E2E8: @ 805E2E8
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805E37C
-	ldr r1, _0805E374 @ =gUnknown_3005040
+	ldr r1, _0805E374 @ =VMap
 	ldr r0, [r1]
 	adds r3, r0, 0
 	subs r3, 0x10
@@ -736,7 +736,7 @@ _0805E36A:
 	movs r0, 0
 	b _0805E37E
 	.align 2, 0
-_0805E374: .4byte gUnknown_3005040
+_0805E374: .4byte VMap
 _0805E378: .4byte gSaveBlock1Ptr
 _0805E37C:
 	movs r0, 0x1
@@ -1373,8 +1373,8 @@ SpawnSpecialFieldObject: @ 805E7F4
 _0805E82C: .4byte gSaveBlock1Ptr
 	thumb_func_end SpawnSpecialFieldObject
 
-	thumb_func_start SpawnSpecialFieldObjectParametrized
-SpawnSpecialFieldObjectParametrized: @ 805E830
+	thumb_func_start SpawnSpecialFieldObjectParameterized
+SpawnSpecialFieldObjectParameterized: @ 805E830
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -1425,7 +1425,7 @@ SpawnSpecialFieldObjectParametrized: @ 805E830
 	bx r1
 	.align 2, 0
 _0805E894: .4byte 0xfff90000
-	thumb_func_end SpawnSpecialFieldObjectParametrized
+	thumb_func_end SpawnSpecialFieldObjectParameterized
 
 	thumb_func_start show_sprite
 show_sprite: @ 805E898
@@ -1550,8 +1550,8 @@ MakeObjectTemplateFromFieldObjectTemplate: @ 805E960
 	bx r0
 	thumb_func_end MakeObjectTemplateFromFieldObjectTemplate
 
-	thumb_func_start AddPseudoFieldObject
-AddPseudoFieldObject: @ 805E978
+	thumb_func_start AddPseudoEventObject
+AddPseudoEventObject: @ 805E978
 	push {r4-r6,lr}
 	sub sp, 0x1C
 	ldr r4, [sp, 0x2C]
@@ -1612,10 +1612,10 @@ _0805E9E4:
 	.align 2, 0
 _0805E9F0: .4byte 0x0000ffff
 _0805E9F4: .4byte gSprites
-	thumb_func_end AddPseudoFieldObject
+	thumb_func_end AddPseudoEventObject
 
-	thumb_func_start sub_805E9F8
-sub_805E9F8: @ 805E9F8
+	thumb_func_start sprite_new
+sprite_new: @ 805E9F8
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1772,7 +1772,7 @@ _0805EB24:
 _0805EB38: .4byte sub_8068FA8
 _0805EB3C: .4byte 0x0000ffff
 _0805EB40: .4byte gSprites
-	thumb_func_end sub_805E9F8
+	thumb_func_end sprite_new
 
 	thumb_func_start sub_805EB44
 sub_805EB44: @ 805EB44
@@ -3516,7 +3516,7 @@ npc_coords_shift_still: @ 805F818
 	thumb_func_start UpdateFieldObjectCoordsForCameraUpdate
 UpdateFieldObjectCoordsForCameraUpdate: @ 805F82C
 	push {r4,r5,lr}
-	ldr r2, _0805F88C @ =gUnknown_2036E18
+	ldr r2, _0805F88C @ =gCamera
 	ldrb r1, [r2]
 	movs r0, 0x1
 	ands r0, r1
@@ -3566,7 +3566,7 @@ _0805F884:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805F88C: .4byte gUnknown_2036E18
+_0805F88C: .4byte gCamera
 _0805F890: .4byte gMapObjects
 	thumb_func_end UpdateFieldObjectCoordsForCameraUpdate
 
@@ -12332,13 +12332,13 @@ npc_block_way: @ 80636AC
 _080636E2:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8058DC4
+	bl MapGridIsImpassableAt
 	lsls r0, 24
 	cmp r0, 0
 	bne _08063724
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8059334
+	bl GetMapBorderIdAt
 	movs r1, 0x1
 	negs r1, r1
 	cmp r0, r1
@@ -12432,13 +12432,13 @@ sub_8063770: @ 8063770
 	lsrs r4, r1, 31
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_8058DC4
+	bl MapGridIsImpassableAt
 	lsls r0, 24
 	cmp r0, 0
 	bne _080637E8
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_8059334
+	bl GetMapBorderIdAt
 	movs r1, 0x1
 	negs r1, r1
 	cmp r0, r1
@@ -21605,7 +21605,7 @@ _080677EA:
 	ands r0, r1
 	strb r0, [r5, 0x1]
 _08067822:
-	ldr r1, _08067850 @ =gUnknown_825E074
+	ldr r1, _08067850 @ =gSineTable
 	movs r2, 0x3A
 	ldrsh r0, [r4, r2]
 	lsls r0, 1
@@ -21629,7 +21629,7 @@ _08067822:
 	strb r0, [r5]
 	b _080678B6
 	.align 2, 0
-_08067850: .4byte gUnknown_825E074
+_08067850: .4byte gSineTable
 _08067854:
 	ldrh r0, [r4, 0x36]
 	adds r0, 0x1
@@ -21697,7 +21697,7 @@ sub_80678C0: @ 80678C0
 	movs r0, 0xFF
 	ands r2, r0
 	strh r2, [r1, 0x3C]
-	ldr r3, _080678EC @ =gUnknown_825E074
+	ldr r3, _080678EC @ =gSineTable
 	movs r4, 0x3C
 	ldrsh r0, [r1, r4]
 	lsls r0, 1
@@ -21715,7 +21715,7 @@ _080678E6:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080678EC: .4byte gUnknown_825E074
+_080678EC: .4byte gSineTable
 	thumb_func_end sub_80678C0
 
 	thumb_func_start sub_80678F0

@@ -8,7 +8,7 @@
 #include "battle.h"
 #include "battle_setup.h"
 #include "menu.h"
-#include "battle_dome_cards.h"
+#include "trainer_pokemon_sprites.h"
 #include "scanline_effect.h"
 #include "new_menu_helpers.h"
 #include "item_menu.h"
@@ -127,9 +127,9 @@ extern const u8 gFameCheckerText_Cancel[];
 extern const u8 gFameCheckerText_ListMenuCursor[];
 extern const u8 gFameCheckerText_FameCheckerWillBeClosed[];
 extern const u8 gFameCheckerText_ClearTextbox[];
-extern const u8 gFameCheckerText_MainScreenUI[]; // "{KEYGFX_START_BUTTON}PICK {KEYGFX_DPAD_UP_DOWN}SELECT {KEYGFX_A_BUTTON}OK$"
-extern const u8 gFameCheckerText_PickScreenUI[]; // "{KEYGFX_START_BUTTON}PICK {KEYGFX_DPAD_UP_DOWN}SELECT {KEYGFX_B_BUTTON}CANCEL$"
-extern const u8 gFameCheckerText_FlavorTextUI[]; // "{KEYGFX_DPAD_ANY}PICK {KEYGFX_A_BUTTON}READ {KEYGFX_B_BUTTON}CANCEL$"
+extern const u8 gFameCheckerText_MainScreenUI[]; // "{KEYGFX_DPAD_ANY}PICK {KEYGFX_DPAD_UP_DOWN}SELECT {KEYGFX_A_BUTTON}OK$"
+extern const u8 gFameCheckerText_PickScreenUI[]; // "{KEYGFX_DPAD_ANY}PICK {KEYGFX_DPAD_UP_DOWN}SELECT {KEYGFX_B_BUTTON}CANCEL$"
+extern const u8 gFameCheckerText_FlavorTextUI[]; // "{KEYGFX_START_BUTTON}PICK {KEYGFX_A_BUTTON}READ {KEYGFX_B_BUTTON}CANCEL$"
 extern const u8 gFameCheckerOakName[]; // "OAK$"
 extern const u8 gFameCheckerDaisyName[]; // "DAISY$"
 extern const u8 gFameCheckerBillName[]; // "BILL$"
@@ -552,7 +552,7 @@ static void Task_TopMenuHandleInput(u8 taskId)
     if (FindTaskIdByFunc(Task_FCOpenOrCloseInfoBox) == 0xFF)
     {
         RunTextPrinters();
-        if ((JOY_NEW(SELECT_BUTTON)) && !sFameCheckerData->inPickMode && sFameCheckerData->savedCallback != UseFameCheckerFromMenu)
+        if ((JOY_NEW(SELECT_BUTTON)) && !sFameCheckerData->inPickMode && sFameCheckerData->savedCallback != ReturnToBagFromKeyItem)
             task->func = Task_StartToCloseFameChecker;
         else if (JOY_NEW(START_BUTTON))
         {
@@ -639,7 +639,7 @@ static bool8 TryExitPickMode(u8 taskId)
 
 static void MessageBoxPrintEmptyText(void)
 {
-    AddTextPrinterParametrized(2, 2, gFameCheckerText_ClearTextbox, 0, NULL, 2, 1, 3);
+    AddTextPrinterParameterized2(2, 2, gFameCheckerText_ClearTextbox, 0, NULL, 2, 1, 3);
 }
 
 static void Task_EnterPickMode(u8 taskId)
@@ -779,7 +779,7 @@ static void GetPickModeText(void)
         if (HasUnlockedAllFlavorTextsForCurrentPerson() == TRUE)
             offset = NUM_FAMECHECKER_PERSONS;
         StringExpandPlaceholders(gStringVar4, sFameCheckerNameAndQuotesPointers[sFameCheckerData->unlockedPersons[who] + offset]);
-        AddTextPrinterParametrized(FCWINDOWID_MSGBOX, 2, gStringVar4, sub_80F78A8(), NULL, 2, 1, 3);
+        AddTextPrinterParameterized2(FCWINDOWID_MSGBOX, 2, gStringVar4, GetTextSpeedSetting(), NULL, 2, 1, 3);
         FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_MSGBOX);
     }
 }
@@ -790,7 +790,7 @@ static void PrintSelectedNameInBrightGreen(u8 taskId)
     u16 cursorPos = FameCheckerGetCursorY();
     FillWindowPixelRect(FCWINDOWID_MSGBOX, 0x11, 0, 0, 0xd0, 0x20);
     StringExpandPlaceholders(gStringVar4, sFameCheckerFlavorTextPointers[sFameCheckerData->unlockedPersons[cursorPos] * 6 + data[1]]);
-    AddTextPrinterParametrized(FCWINDOWID_MSGBOX, 2, gStringVar4, sub_80F78A8(), NULL, 2, 1, 3);
+    AddTextPrinterParameterized2(FCWINDOWID_MSGBOX, 2, gStringVar4, GetTextSpeedSetting(), NULL, 2, 1, 3);
     FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_MSGBOX);
 }
 
@@ -803,7 +803,7 @@ static void WipeMsgBoxAndTransfer(void)
 static void Setup_DrawMsgAndListBoxes(void)
 {
     sub_80F6E9C();
-    sub_80F6EE4(FCWINDOWID_MSGBOX, TRUE);
+    DrawDialogueFrame(FCWINDOWID_MSGBOX, TRUE);
     FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_MSGBOX);
     FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_LIST);
 }
@@ -853,7 +853,7 @@ static void Task_DestroyAssetsAndCloseFameChecker(u8 taskId)
         FreeQuestionMarkSpriteResources();
         FreeListMenuSelectorArrowPairResources();
         SetMainCallback2(sFameCheckerData->savedCallback);
-        sub_810713C(sFameCheckerData->listMenuTaskId, 0, 0);
+        DestroyListMenu(sFameCheckerData->listMenuTaskId, NULL, NULL);
         Free(sBg3TilemapBuffer);
         Free(sBg1TilemapBuffer);
         Free(sBg2TilemapBuffer);
@@ -900,7 +900,7 @@ static void PrintUIHelp(u8 state)
     }
     width = GetStringWidth(0, src, 0);
     FillWindowPixelRect(FCWINDOWID_UIHELP, 0x00, 0, 0, 0xc0, 0x10);
-    AddTextPrinterParametrized2(FCWINDOWID_UIHELP, 0, 188 - width, 0, 0, 2, &sTextColor_White, -1, src);
+    AddTextPrinterParameterized4(FCWINDOWID_UIHELP, 0, 188 - width, 0, 0, 2, &sTextColor_White, -1, src);
     FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_UIHELP);
 }
 
@@ -1009,10 +1009,10 @@ static void FCSetup_ClearVideoRegisters(void)
 
 static void FCSetup_ResetTasksAndSpriteResources(void)
 {
-    remove_some_task();
+    ScanlineEffect_Stop();
     ResetTasks();
     ResetSpriteData();
-    dp13_810BB8C();
+    ResetAllPicSprites();
     ResetPaletteFade();
     npc_paltag_set_load(0);
     gReservedSpritePaletteCount = 7;
@@ -1181,7 +1181,7 @@ static u8 CreatePersonPicSprite(u8 fcPersonIdx)
     }
     else
     {
-        spriteId = sub_810C2A4(sFameCheckerTrainerPicIdxs[fcPersonIdx], 1, 0x94, 0x42, 6, 0xFFFF);
+        spriteId = CreateTrainerPicSprite(sFameCheckerTrainerPicIdxs[fcPersonIdx], 1, 0x94, 0x42, 6, 0xFFFF);
     }
     gSprites[spriteId].callback = SpriteCB_FCSpinningPokeball;
     if (gSaveBlock1Ptr->fameChecker[fcPersonIdx].pickState == FCPICKSTATE_SILHOUETTE)
@@ -1202,7 +1202,7 @@ static void DestroyPersonPicSprite(u8 taskId, u16 who)
     )
         DestroySprite(&gSprites[data[2]]);
     else
-        sub_810C2E8(data[2]);
+        FreeAndDestroyTrainerPicSprite(data[2]);
 }
 
 static void UpdateIconDescriptionBox(u8 whichText)
@@ -1213,10 +1213,10 @@ static void UpdateIconDescriptionBox(u8 whichText)
     gIconDescriptionBoxIsOpen = 1;
     FillWindowPixelRect(FCWINDOWID_ICONDESC, 0x00, 0, 0, 0x58, 0x20);
     width = (0x54 - GetStringWidth(0, sFlavorTextOriginLocationTexts[idx], 0)) / 2;
-    AddTextPrinterParametrized2(FCWINDOWID_ICONDESC, 0, width, 0, 0, 2, &sTextColor_DkGrey, -1, sFlavorTextOriginLocationTexts[idx]);
+    AddTextPrinterParameterized4(FCWINDOWID_ICONDESC, 0, width, 0, 0, 2, &sTextColor_DkGrey, -1, sFlavorTextOriginLocationTexts[idx]);
     StringExpandPlaceholders(gStringVar1, sFlavorTextOriginObjectNameTexts[idx]);
     width = (0x54 - GetStringWidth(0, gStringVar1, 0)) / 2;
-    AddTextPrinterParametrized2(FCWINDOWID_ICONDESC, 0, width, 10, 0, 2, &sTextColor_DkGrey, -1, gStringVar1);
+    AddTextPrinterParameterized4(FCWINDOWID_ICONDESC, 0, width, 10, 0, 2, &sTextColor_DkGrey, -1, gStringVar1);
     FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_ICONDESC);
 }
 
@@ -1270,7 +1270,7 @@ static void FC_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *list
         struct Task *task = &gTasks[taskId];
         PlaySE(SE_SELECT);
         task->data[1] = 0;
-        get_coro_args_x18_x1A(sFameCheckerData->listMenuTaskId, &listMenuTopIdx, NULL);
+        ListMenuGetScrollAndRow(sFameCheckerData->listMenuTaskId, &listMenuTopIdx, NULL);
         sFameCheckerData->listMenuTopIdx = listMenuTopIdx;
         if (itemIndex != sFameCheckerData->numUnlockedPersons - 1)
         {
@@ -1330,7 +1330,7 @@ static void Task_SwitchToPickMode(u8 taskId)
 static void PrintCancelDescription(void)
 {
     FillWindowPixelRect(FCWINDOWID_MSGBOX, 0x11, 0, 0, 0xd0, 0x20);
-    AddTextPrinterParametrized(FCWINDOWID_MSGBOX, 2, gFameCheckerText_FameCheckerWillBeClosed, 0, NULL, 2, 1, 3);
+    AddTextPrinterParameterized2(FCWINDOWID_MSGBOX, 2, gFameCheckerText_FameCheckerWillBeClosed, 0, NULL, 2, 1, 3);
     FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_MSGBOX);
 }
 
@@ -1339,16 +1339,16 @@ static void FC_DoMoveCursor(s32 itemIndex, bool8 onInit)
     u16 listY;
     u16 cursorY;
     u16 who;
-    get_coro_args_x18_x1A(sFameCheckerData->listMenuTaskId, &listY, &cursorY);
+    ListMenuGetScrollAndRow(sFameCheckerData->listMenuTaskId, &listY, &cursorY);
     who = listY + cursorY;
-    AddTextPrinterParametrized2(FCWINDOWID_LIST, 2, 8, 14 * cursorY + 4, 0, 0, &sTextColor_Green, 0, sListMenuItems[itemIndex].unk_00);
+    AddTextPrinterParameterized4(FCWINDOWID_LIST, 2, 8, 14 * cursorY + 4, 0, 0, &sTextColor_Green, 0, sListMenuItems[itemIndex].label);
     if (!onInit)
     {
         if (listY < sFameCheckerData->listMenuTopIdx2)
             sFameCheckerData->listMenuDrawnSelIdx++;
         else if (listY > sFameCheckerData->listMenuTopIdx2 && who != sFameCheckerData->numUnlockedPersons - 1)
             sFameCheckerData->listMenuDrawnSelIdx--;
-        AddTextPrinterParametrized2(FCWINDOWID_LIST, 2, 8, 14 * sFameCheckerData->listMenuDrawnSelIdx + 4, 0, 0, &sTextColor_DkGrey, 0, sListMenuItems[sFameCheckerData->listMenuCurIdx].unk_00);
+        AddTextPrinterParameterized4(FCWINDOWID_LIST, 2, 8, 14 * sFameCheckerData->listMenuDrawnSelIdx + 4, 0, 0, &sTextColor_DkGrey, 0, sListMenuItems[sFameCheckerData->listMenuCurIdx].label);
 
     }
     sFameCheckerData->listMenuCurIdx = itemIndex;
@@ -1368,20 +1368,20 @@ static u8 FC_PopulateListMenu(void)
         {
             if (sTrainerIdxs[fameCheckerIdx] < FC_NONTRAINER_START)
             {
-                sListMenuItems[nitems].unk_00 = gTrainers[sTrainerIdxs[fameCheckerIdx]].trainerName;
-                sListMenuItems[nitems].unk_04 = nitems;
+                sListMenuItems[nitems].label = gTrainers[sTrainerIdxs[fameCheckerIdx]].trainerName;
+                sListMenuItems[nitems].index = nitems;
             }
             else
             {
-                sListMenuItems[nitems].unk_00 = sNonTrainerNamePointers[sTrainerIdxs[fameCheckerIdx] - FC_NONTRAINER_START];
-                sListMenuItems[nitems].unk_04 = nitems;
+                sListMenuItems[nitems].label = sNonTrainerNamePointers[sTrainerIdxs[fameCheckerIdx] - FC_NONTRAINER_START];
+                sListMenuItems[nitems].index = nitems;
             }
             sFameCheckerData->unlockedPersons[nitems] = fameCheckerIdx;
             nitems++;
         }
     }
-    sListMenuItems[nitems].unk_00 = gFameCheckerText_Cancel;
-    sListMenuItems[nitems].unk_04 = nitems;
+    sListMenuItems[nitems].label = gFameCheckerText_Cancel;
+    sListMenuItems[nitems].index = nitems;
     sFameCheckerData->unlockedPersons[nitems] = 0xFF;
     nitems++;
     gFameChecker_ListMenuTemplate.totalItems = nitems;
@@ -1400,7 +1400,7 @@ static void FC_PutWindowTilemapAndCopyWindowToVramMode3_2(u8 windowId)
 
 static void FC_CreateScrollIndicatorArrowPair(void)
 {
-    struct ScrollIndicatorArrowPairTemplate template = {
+    struct ScrollArrowsTemplate template = {
           2,
           40,
           26,
@@ -1412,13 +1412,12 @@ static void FC_CreateScrollIndicatorArrowPair(void)
           SPRITETAG_SCROLL_INDICATORS,
           0xFFFF,
           1,
-          0
     };
 
     if (sFameCheckerData->numUnlockedPersons > 5)
     {
-        template.unk_06 = 0;
-        template.unk_08 = sFameCheckerData->numUnlockedPersons - 5;
+        template.fullyUpThreshold = 0;
+        template.fullyDownThreshold = sFameCheckerData->numUnlockedPersons - 5;
         sFameCheckerData->scrollIndicatorPairTaskId = AddScrollIndicatorArrowPair(&template, &sFameCheckerData->listMenuTopIdx);
     }
 }
@@ -1432,7 +1431,7 @@ static void FreeListMenuSelectorArrowPairResources(void)
 static u16 FameCheckerGetCursorY(void)
 {
     u16 listY, cursorY;
-    get_coro_args_x18_x1A(sFameCheckerData->listMenuTaskId, &listY, &cursorY);
+    ListMenuGetScrollAndRow(sFameCheckerData->listMenuTaskId, &listY, &cursorY);
     return listY + cursorY;
 }
 
@@ -1547,7 +1546,7 @@ static void PlaceListMenuCursor(bool8 isActive)
 {
     u16 cursorY = ListMenuGetYCoordForPrintingArrowCursor(sFameCheckerData->listMenuTaskId);
     if (isActive == TRUE)
-        AddTextPrinterParametrized2(FCWINDOWID_LIST, 2, 0, cursorY, 0, 0, &sTextColor_DkGrey, 0, gFameCheckerText_ListMenuCursor);
+        AddTextPrinterParameterized4(FCWINDOWID_LIST, 2, 0, cursorY, 0, 0, &sTextColor_DkGrey, 0, gFameCheckerText_ListMenuCursor);
     else
-        AddTextPrinterParametrized2(FCWINDOWID_LIST, 2, 0, cursorY, 0, 0, &sTextColor_White, 0, gFameCheckerText_ListMenuCursor);
+        AddTextPrinterParameterized4(FCWINDOWID_LIST, 2, 0, cursorY, 0, 0, &sTextColor_White, 0, gFameCheckerText_ListMenuCursor);
 }

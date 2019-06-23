@@ -1,0 +1,219 @@
+{
+  "id": "MAP_SIX_ISLAND_PATTERN_BUSH",
+  "name": "SixIsland_PatternBush",
+  "layout": "LAYOUT_SIX_ISLAND_PATTERN_BUSH",
+  "music": "BGM_FRLG_VIRIDIAN_FOREST",
+  "region_map_section": "MAPSEC_PATTERN_BUSH",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_3",
+  "unknown_18": 1,
+  "unknown_19": 7,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "28",
+      "x": 48,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "20",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "SixIsland_PatternBush_EventScript_164590",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "28",
+      "x": 10,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "18",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 2,
+      "script": "SixIsland_PatternBush_EventScript_1645A7",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "20",
+      "x": 51,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 2,
+      "script": "SixIsland_PatternBush_EventScript_1645BE",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "20",
+      "x": 12,
+      "y": 13,
+      "elevation": 3,
+      "movement_type": "2",
+      "movement_range_x": 1,
+      "movement_range_y": 2,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 2,
+      "script": "SixIsland_PatternBush_EventScript_1645D5",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "20",
+      "x": 37,
+      "y": 23,
+      "elevation": 3,
+      "movement_type": "51",
+      "movement_range_x": 2,
+      "movement_range_y": 5,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "SixIsland_PatternBush_EventScript_1645EC",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "18",
+      "x": 32,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 2,
+      "script": "SixIsland_PatternBush_EventScript_164603",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "18",
+      "x": 52,
+      "y": 20,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 4,
+      "script": "SixIsland_PatternBush_EventScript_16461A",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "22",
+      "x": 8,
+      "y": 21,
+      "elevation": 3,
+      "movement_type": "17",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 5,
+      "script": "SixIsland_PatternBush_EventScript_164631",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "22",
+      "x": 39,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "2",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "SixIsland_PatternBush_EventScript_164648",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "39",
+      "x": 3,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "3",
+      "movement_range_x": 1,
+      "movement_range_y": 2,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "SixIsland_PatternBush_EventScript_16465F",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "40",
+      "x": 19,
+      "y": 24,
+      "elevation": 3,
+      "movement_type": "28",
+      "movement_range_x": 5,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "SixIsland_PatternBush_EventScript_164676",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "56",
+      "x": 30,
+      "y": 19,
+      "elevation": 3,
+      "movement_type": "7",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "SixIsland_PatternBush_EventScript_16468D",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 54,
+      "y": 26,
+      "elevation": 3,
+      "dest_map": "MAP_SIX_ISLAND_GREEN_PATH",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 55,
+      "y": 26,
+      "elevation": 3,
+      "dest_map": "MAP_SIX_ISLAND_GREEN_PATH",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 56,
+      "y": 26,
+      "elevation": 3,
+      "dest_map": "MAP_SIX_ISLAND_GREEN_PATH",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 3,
+      "y": 26,
+      "elevation": 3,
+      "dest_map": "MAP_SIX_ISLAND_GREEN_PATH",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 4,
+      "y": 26,
+      "elevation": 3,
+      "dest_map": "MAP_SIX_ISLAND_GREEN_PATH",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 5,
+      "y": 26,
+      "elevation": 3,
+      "dest_map": "MAP_SIX_ISLAND_GREEN_PATH",
+      "dest_warp_id": 3
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

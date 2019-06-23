@@ -1,0 +1,178 @@
+{
+  "id": "MAP_ROCKET_HIDEOUT_B4F",
+  "name": "RocketHideout_B4F",
+  "layout": "LAYOUT_ROCKET_HIDEOUT_B4F",
+  "music": "BGM_FRLG_ROCKET_HIDEOUT",
+  "region_map_section": "MAPSEC_ROCKET_HIDEOUT",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 0,
+  "unknown_19": 7,
+  "elevator_flag": -4,
+  "battle_scene": "BATTLE_SCENE_3",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "87",
+      "x": 19,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "RocketHideout_B4F_EventScript_161317",
+      "flag": "56"
+    },
+    {
+      "graphics_id": "92",
+      "x": 20,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "RocketHideout_B4F_EventScript_161363",
+      "flag": "55"
+    },
+    {
+      "graphics_id": "49",
+      "x": 4,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "RocketHideout_B4F_EventScript_161381",
+      "flag": "173"
+    },
+    {
+      "graphics_id": "92",
+      "x": 3,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "RocketHideout_B4F_EventScript_1613AD",
+      "flag": "54"
+    },
+    {
+      "graphics_id": "49",
+      "x": 19,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "RocketHideout_B4F_EventScript_161418",
+      "flag": "173"
+    },
+    {
+      "graphics_id": "49",
+      "x": 16,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "RocketHideout_B4F_EventScript_1613CE",
+      "flag": "173"
+    },
+    {
+      "graphics_id": "92",
+      "x": 1,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "RocketHideout_B4F_EventScript_1BE72E",
+      "flag": "372"
+    },
+    {
+      "graphics_id": "92",
+      "x": 4,
+      "y": 14,
+      "elevation": 0,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "RocketHideout_B4F_EventScript_1BE73B",
+      "flag": "373"
+    },
+    {
+      "graphics_id": "92",
+      "x": 6,
+      "y": 23,
+      "elevation": 0,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "RocketHideout_B4F_EventScript_1BE748",
+      "flag": "374"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 11,
+      "y": 15,
+      "elevation": 3,
+      "dest_map": "MAP_ROCKET_HIDEOUT_B3F",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 20,
+      "y": 23,
+      "elevation": 0,
+      "dest_map": "MAP_ROCKET_HIDEOUT_ELEVATOR",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 21,
+      "y": 23,
+      "elevation": 0,
+      "dest_map": "MAP_ROCKET_HIDEOUT_ELEVATOR",
+      "dest_warp_id": 1
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 22,
+      "y": 6,
+      "elevation": 3,
+      "item": "ITEM_NEST_BALL",
+      "flag": "13",
+      "unknown": 1
+    },
+    {
+      "type": "hidden_item",
+      "x": 16,
+      "y": 6,
+      "elevation": 3,
+      "item": "ITEM_NET_BALL",
+      "flag": "134",
+      "unknown": 1
+    }
+  ]
+}

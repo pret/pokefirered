@@ -1,0 +1,193 @@
+{
+  "id": "MAP_SILPH_CO_8F",
+  "name": "SilphCo_8F",
+  "layout": "LAYOUT_SILPH_CO_8F",
+  "music": "BGM_FRLG_SILPH",
+  "region_map_section": "MAPSEC_SILPH_CO",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 0,
+  "unknown_19": 7,
+  "elevator_flag": 8,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "49",
+      "x": 28,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 4,
+      "script": "SilphCo_8F_EventScript_161CB0",
+      "flag": "83"
+    },
+    {
+      "graphics_id": "49",
+      "x": 10,
+      "y": 17,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 5,
+      "script": "SilphCo_8F_EventScript_161CC7",
+      "flag": "83"
+    },
+    {
+      "graphics_id": "55",
+      "x": 9,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 2,
+      "script": "SilphCo_8F_EventScript_161C99",
+      "flag": "83"
+    },
+    {
+      "graphics_id": "47",
+      "x": 2,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "5",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SilphCo_8F_EventScript_161C6F",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "92",
+      "x": 24,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SilphCo_8F_EventScript_1BEB4B",
+      "flag": "456"
+    },
+    {
+      "graphics_id": "55",
+      "x": 29,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SilphCo_8F_EventScript_1AD0ED",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 16,
+      "y": 2,
+      "elevation": 3,
+      "dest_map": "MAP_SILPH_CO_9F",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 11,
+      "y": 10,
+      "elevation": 3,
+      "dest_map": "MAP_SILPH_CO_8F",
+      "dest_warp_id": 4
+    },
+    {
+      "x": 10,
+      "y": 6,
+      "elevation": 3,
+      "dest_map": "MAP_SILPH_CO_2F",
+      "dest_warp_id": 5
+    },
+    {
+      "x": 28,
+      "y": 2,
+      "elevation": 3,
+      "dest_map": "MAP_SILPH_CO_7F",
+      "dest_warp_id": 3
+    },
+    {
+      "x": 2,
+      "y": 12,
+      "elevation": 3,
+      "dest_map": "MAP_SILPH_CO_8F",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 2,
+      "y": 17,
+      "elevation": 3,
+      "dest_map": "MAP_SILPH_CO_2F",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 22,
+      "y": 3,
+      "elevation": 0,
+      "dest_map": "MAP_SILPH_CO_ELEVATOR",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "bg_event_type_0",
+      "x": 6,
+      "y": 10,
+      "elevation": 0,
+      "script": "SilphCo_8F_EventScript_1A8A6D"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 6,
+      "y": 11,
+      "elevation": 0,
+      "script": "SilphCo_8F_EventScript_1A8A6D"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 5,
+      "y": 11,
+      "elevation": 0,
+      "script": "SilphCo_8F_EventScript_1A8A6D"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 5,
+      "y": 10,
+      "elevation": 0,
+      "script": "SilphCo_8F_EventScript_1A8A6D"
+    },
+    {
+      "type": "hidden_item",
+      "x": 29,
+      "y": 10,
+      "elevation": 0,
+      "item": "ITEM_NUGGET",
+      "flag": "141",
+      "unknown": 1
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 27,
+      "y": 1,
+      "elevation": 0,
+      "script": "SilphCo_8F_EventScript_161C90"
+    }
+  ]
+}

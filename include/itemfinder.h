@@ -1,0 +1,6 @@
+#ifndef GUARD_ITEMFINDER_H
+#define GUARD_ITEMFINDER_H
+
+void sub_813EC8C(u8 taskId);
+
+#endif //GUARD_ITEMFINDER_H

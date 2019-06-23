@@ -33,9 +33,9 @@ _080CA644:
 	movs r4, 0x8D
 	lsls r4, 1
 	adds r0, r4, 0
-	bl sub_8055E78
+	bl Overworld_SetSavedMusic
 	adds r0, r4, 0
-	bl sub_8055F48
+	bl Overworld_ChangeMusicTo
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -178,11 +178,11 @@ _080CA748: .4byte gUnknown_8417FCC
 
 	thumb_func_start sub_80CA74C
 sub_80CA74C: @ 80CA74C
-	ldr r0, _080CA754 @ =gUnknown_2023E8A
+	ldr r0, _080CA754 @ =gBattleOutcome
 	ldrb r0, [r0]
 	bx lr
 	.align 2, 0
-_080CA754: .4byte gUnknown_2023E8A
+_080CA754: .4byte gBattleOutcome
 	thumb_func_end sub_80CA74C
 
 	thumb_func_start sub_80CA758
@@ -601,7 +601,7 @@ SpawnScriptFieldObject: @ 80CAA34
 	movs r0, 0x12
 	movs r1, 0x8
 	movs r2, 0x7F
-	bl SpawnSpecialFieldObjectParametrized
+	bl SpawnSpecialFieldObjectParameterized
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080CAA84 @ =gMapObjects
@@ -756,7 +756,7 @@ sub_80CAB78: @ 80CAB78
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_80CBD94
+	bl GetStarterPokemon
 	lsls r0, 16
 	lsrs r6, r0, 16
 	bl CalculatePlayerPartyCount
@@ -2071,7 +2071,7 @@ sub_80CB580: @ 80CB580
 	ldr r5, _080CB62C @ =0x0000021d
 	adds r1, r5, 0
 	movs r2, 0xD0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	ldrb r0, [r4]
 	movs r1, 0
 	adds r2, r5, 0
@@ -2141,7 +2141,7 @@ sub_80CB63C: @ 80CB63C
 	ldr r4, _080CB654 @ =gUnknown_2039A0C
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	ldrb r0, [r4]
 	bl RemoveWindow
 	pop {r4}
@@ -2753,7 +2753,7 @@ sub_80CBADC: @ 80CBADC
 	ldr r4, _080CBB20 @ =gUnknown_3005378
 	adds r1, r4, 0
 	movs r2, 0
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	ldr r1, _080CBB24 @ =gUnknown_2039A18
 	ldrh r0, [r4]
 	strh r0, [r1]
@@ -2854,7 +2854,7 @@ sub_80CBBAC: @ 80CBBAC
 	lsrs r0, 24
 	movs r1, 0
 	movs r2, 0
-	bl sub_810713C
+	bl DestroyListMenu
 	ldr r0, _080CBC28 @ =gUnknown_2039A14
 	ldr r0, [r0]
 	bl Free
@@ -2862,7 +2862,7 @@ sub_80CBBAC: @ 80CBBAC
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	ldrh r0, [r4, 0x22]
 	lsls r0, 24
 	lsrs r0, 24
@@ -3078,15 +3078,15 @@ _080CBD7C: .4byte gTasks
 sub_80CBD80: @ 80CBD80
 	push {lr}
 	movs r0, 0x16
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	movs r0, 0x8
 	bl SetPlayerAvatarTransitionFlags
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80CBD80
 
-	thumb_func_start sub_80CBD94
-sub_80CBD94: @ 80CBD94
+	thumb_func_start GetStarterPokemon
+GetStarterPokemon: @ 80CBD94
 	push {lr}
 	lsls r0, 16
 	lsrs r1, r0, 16
@@ -3094,31 +3094,31 @@ sub_80CBD94: @ 80CBD94
 	bls _080CBDA0
 	movs r1, 0
 _080CBDA0:
-	ldr r0, _080CBDAC @ =gUnknown_83F5D2C
+	ldr r0, _080CBDAC @ =sStarterMon
 	lsls r1, 1
 	adds r1, r0
 	ldrh r0, [r1]
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080CBDAC: .4byte gUnknown_83F5D2C
-	thumb_func_end sub_80CBD94
+_080CBDAC: .4byte sStarterMon
+	thumb_func_end GetStarterPokemon
 
-	thumb_func_start sub_80CBDB0
-sub_80CBDB0: @ 80CBDB0
+	thumb_func_start ScrSpecial_GetStarter
+ScrSpecial_GetStarter: @ 80CBDB0
 	push {lr}
 	ldr r0, _080CBDC8 @ =0x00004031
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_80CBD94
+	bl GetStarterPokemon
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r1}
 	bx r1
 	.align 2, 0
 _080CBDC8: .4byte 0x00004031
-	thumb_func_end sub_80CBDB0
+	thumb_func_end ScrSpecial_GetStarter
 
 	thumb_func_start sub_80CBDCC
 sub_80CBDCC: @ 80CBDCC
@@ -3138,7 +3138,7 @@ _080CBDE4: .4byte gSpecialVar_0x8004
 
 	thumb_func_start sub_80CBDE8
 sub_80CBDE8: @ 80CBDE8
-	ldr r1, _080CBDF8 @ =gUnknown_3005074
+	ldr r1, _080CBDF8 @ =gSelectedEventObject
 	movs r0, 0
 	strb r0, [r1]
 	ldr r1, _080CBDFC @ =gUnknown_20370DA
@@ -3146,7 +3146,7 @@ sub_80CBDE8: @ 80CBDE8
 	strh r0, [r1]
 	bx lr
 	.align 2, 0
-_080CBDF8: .4byte gUnknown_3005074
+_080CBDF8: .4byte gSelectedEventObject
 _080CBDFC: .4byte gUnknown_20370DA
 	thumb_func_end sub_80CBDE8
 
@@ -3157,7 +3157,7 @@ sub_80CBE00: @ 80CBE00
 	ldrh r0, [r0]
 	cmp r0, 0xFF
 	bne _080CBE44
-	ldr r1, _080CBE1C @ =gUnknown_3005074
+	ldr r1, _080CBE1C @ =gSelectedEventObject
 	ldrb r0, [r1]
 	cmp r0, 0
 	bne _080CBE20
@@ -3165,7 +3165,7 @@ sub_80CBE00: @ 80CBE00
 	b _080CBE48
 	.align 2, 0
 _080CBE18: .4byte gUnknown_20370DA
-_080CBE1C: .4byte gUnknown_3005074
+_080CBE1C: .4byte gSelectedEventObject
 _080CBE20:
 	ldr r2, _080CBE4C @ =gMapObjects
 	ldrb r1, [r1]
@@ -3267,7 +3267,7 @@ TV_PrintIntToStringVar: @ 80CBED4
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
-	bl sub_80CBF04
+	bl CountDigits
 	adds r3, r0, 0
 	ldr r0, _080CBF00 @ =gUnknown_83F5AF8
 	lsls r4, 2
@@ -3285,8 +3285,8 @@ TV_PrintIntToStringVar: @ 80CBED4
 _080CBF00: .4byte gUnknown_83F5AF8
 	thumb_func_end TV_PrintIntToStringVar
 
-	thumb_func_start sub_80CBF04
-sub_80CBF04: @ 80CBF04
+	thumb_func_start CountDigits
+CountDigits: @ 80CBF04
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r1, 0xA
@@ -3366,7 +3366,7 @@ _080CBF9A:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80CBF04
+	thumb_func_end CountDigits
 
 	thumb_func_start sub_80CBFA0
 sub_80CBFA0: @ 80CBFA0
@@ -5542,7 +5542,7 @@ sub_80CD098: @ 80CD098
 	str r3, [sp]
 	movs r0, 0
 	movs r3, 0
-	bl sub_8006300
+	bl CreateTextCursorSpriteForOakSpeech
 	ldr r1, _080CD0DC @ =gUnknown_2039A1B
 	strb r0, [r1]
 	b _080CD0E8

@@ -50,8 +50,8 @@ sub_80E4660: @ 80E4660
 	bne _080E4684
 	ldr r0, _080E4690 @ =sub_80E478C
 	bl SetMainCallback2
-	ldr r1, _080E4694 @ =gUnknown_3005020
-	ldr r0, _080E4698 @ =sub_807DD24
+	ldr r1, _080E4694 @ =gFieldCallback
+	ldr r0, _080E4698 @ =FieldCallback_ReturnToEventScript2
 	str r0, [r1]
 	adds r0, r4, 0
 	bl DestroyTask
@@ -62,8 +62,8 @@ _080E4684:
 	.align 2, 0
 _080E468C: .4byte gPaletteFade
 _080E4690: .4byte sub_80E478C
-_080E4694: .4byte gUnknown_3005020
-_080E4698: .4byte sub_807DD24
+_080E4694: .4byte gFieldCallback
+_080E4698: .4byte FieldCallback_ReturnToEventScript2
 	thumb_func_end sub_80E4660
 
 	thumb_func_start sub_80E469C
@@ -119,7 +119,7 @@ _080E46C6:
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xE0
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	movs r0, 0xD0
 	movs r1, 0x1
 	bl sub_8107D38
@@ -133,7 +133,7 @@ _080E46C6:
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl sub_80F696C
+	bl DecompressAndLoadBgGfxUsingHeap
 	ldr r1, _080E4788 @ =gUnknown_8E97EC4
 	movs r0, 0x1
 	movs r2, 0
@@ -296,7 +296,7 @@ sub_80E48C0: @ 80E48C0
 	ldr r4, _080E48F0 @ =gStringVar4
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
-	bl sub_80F78A8
+	bl GetTextSpeedSetting
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp]
@@ -454,7 +454,7 @@ _080E4A3E:
 	movs r1, 0x3
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810FF60
+	bl CreateYesNoMenu
 	ldr r0, _080E4A64 @ =gUnknown_203AAB4
 	ldr r1, [r0]
 	ldrb r0, [r1]
@@ -540,7 +540,7 @@ _080E4AF4:
 	movs r1, 0x3
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810FF60
+	bl CreateYesNoMenu
 	ldr r0, _080E4B1C @ =gUnknown_203AAB4
 	ldr r1, [r0]
 	ldrb r0, [r1]
@@ -601,7 +601,7 @@ _080E4B70:
 	movs r1, 0x3
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810FF60
+	bl CreateYesNoMenu
 	ldr r0, _080E4B94 @ =gUnknown_203AAB4
 	ldr r1, [r0]
 	movs r0, 0x12
@@ -665,7 +665,7 @@ _080E4BF4:
 	movs r1, 0x3
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810FF60
+	bl CreateYesNoMenu
 	ldr r0, _080E4C18 @ =gUnknown_203AAB4
 	ldr r1, [r0]
 	movs r0, 0x1A
@@ -736,7 +736,7 @@ _080E4C7E:
 	adds r1, r2, r3
 	ldr r6, _080E4CD4 @ =0x00000a6a
 	adds r2, r6
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	bl FreeAllWindowBuffers
 	ldr r0, _080E4CD8 @ =gPlayerParty
 	ldr r5, [r7]
@@ -810,13 +810,13 @@ _080E4D26:
 	ldr r0, _080E4D40 @ =gUnknown_203AAB4
 	ldr r0, [r0]
 	bl Free
-	ldr r0, _080E4D44 @ =c2_exit_to_overworld_2_switch
+	ldr r0, _080E4D44 @ =CB2_ReturnToField
 	bl SetMainCallback2
 	b _080E4EDA
 	.align 2, 0
 _080E4D3C: .4byte gPaletteFade
 _080E4D40: .4byte gUnknown_203AAB4
-_080E4D44: .4byte c2_exit_to_overworld_2_switch
+_080E4D44: .4byte CB2_ReturnToField
 _080E4D48:
 	movs r0, 0x1
 	negs r0, r0
@@ -1016,7 +1016,7 @@ _080E4EF4:
 	lsrs r0, 24
 	movs r1, 0x1
 	movs r2, 0xE
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	adds r4, 0x1
 	cmp r4, 0x7
 	ble _080E4EF4
@@ -1373,7 +1373,7 @@ _080E51AA:
 	adds r2, r3
 	movs r0, 0xFE
 	str r0, [r2]
-	ldr r2, _080E51FC @ =gUnknown_3005E70
+	ldr r2, _080E51FC @ =gMultiuseListMenuTemplate
 	adds r1, r2, 0
 	ldr r0, _080E5200 @ =gUnknown_83FFA94
 	ldm r0!, {r3,r5,r6}
@@ -1397,7 +1397,7 @@ _080E51EC: .4byte gPlayerParty
 _080E51F0: .4byte gMoveNames
 _080E51F4: .4byte gStringVar1
 _080E51F8: .4byte gFameCheckerText_Cancel
-_080E51FC: .4byte gUnknown_3005E70
+_080E51FC: .4byte gMultiuseListMenuTemplate
 _080E5200: .4byte gUnknown_83FFA94
 	thumb_func_end sub_80E50CC
 
@@ -1523,7 +1523,7 @@ _080E52FA:
 	thumb_func_start sub_80E5300
 sub_80E5300: @ 80E5300
 	push {r4,lr}
-	ldr r0, _080E5330 @ =gUnknown_3005E70
+	ldr r0, _080E5330 @ =gMultiuseListMenuTemplate
 	ldr r4, _080E5334 @ =gUnknown_203AAB4
 	ldr r2, [r4]
 	ldr r3, _080E5338 @ =0x00000a68
@@ -1544,7 +1544,7 @@ sub_80E5300: @ 80E5300
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E5330: .4byte gUnknown_3005E70
+_080E5330: .4byte gMultiuseListMenuTemplate
 _080E5334: .4byte gUnknown_203AAB4
 _080E5338: .4byte 0x00000a68
 _080E533C: .4byte 0x00000263
@@ -1568,11 +1568,11 @@ sub_80E5340: @ 80E5340
 	movs r0, 0x2
 	movs r2, 0x1
 	movs r3, 0x4
-	bl sub_8107D68
+	bl blit_move_info_icon
 	ldrb r0, [r4, 0x1]
 	cmp r0, 0x1
 	bhi _080E5388
-	ldr r1, _080E5384 @ =gUnknown_8416213
+	ldr r1, _080E5384 @ =gText_ThreeHyphens
 	movs r0, 0
 	str r0, [sp]
 	str r0, [sp, 0x4]
@@ -1583,7 +1583,7 @@ sub_80E5340: @ 80E5340
 	b _080E53A6
 	.align 2, 0
 _080E5380: .4byte gBattleMoves
-_080E5384: .4byte gUnknown_8416213
+_080E5384: .4byte gText_ThreeHyphens
 _080E5388:
 	ldrb r1, [r4, 0x1]
 	add r0, sp, 0x8
@@ -1608,7 +1608,7 @@ _080E53A6:
 	adds r4, r1, 0
 	cmp r2, 0
 	bne _080E53D4
-	ldr r1, _080E53D0 @ =gUnknown_8416213
+	ldr r1, _080E53D0 @ =gText_ThreeHyphens
 	str r2, [sp]
 	movs r0, 0x1
 	str r0, [sp, 0x4]
@@ -1619,7 +1619,7 @@ _080E53A6:
 	b _080E53F4
 	.align 2, 0
 _080E53CC: .4byte gBattleMoves
-_080E53D0: .4byte gUnknown_8416213
+_080E53D0: .4byte gText_ThreeHyphens
 _080E53D4:
 	ldrb r1, [r0, 0x3]
 	add r0, sp, 0x8
@@ -1680,27 +1680,27 @@ sub_80E5444: @ 80E5444
 	movs r1, 0x13
 	movs r2, 0x1
 	movs r3, 0x4
-	bl sub_8107D68
+	bl blit_move_info_icon
 	movs r0, 0x1
 	movs r1, 0x14
 	movs r2, 0
 	movs r3, 0x4
-	bl sub_8107D68
+	bl blit_move_info_icon
 	movs r0, 0x1
 	movs r1, 0x15
 	movs r2, 0
 	movs r3, 0x13
-	bl sub_8107D68
+	bl blit_move_info_icon
 	movs r0, 0
 	movs r1, 0x16
 	movs r2, 0x1
 	movs r3, 0x13
-	bl sub_8107D68
+	bl blit_move_info_icon
 	movs r0, 0
 	movs r1, 0x17
 	movs r2, 0x1
 	movs r3, 0x22
-	bl sub_8107D68
+	bl blit_move_info_icon
 	movs r0, 0
 	bl PutWindowTilemap
 	movs r0, 0x1
@@ -1814,7 +1814,7 @@ _080E5570: .4byte 0x00000a67
 	thumb_func_start sub_80E5574
 sub_80E5574: @ 80E5574
 	push {r4,lr}
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r4, r0, 24
 	movs r0, 0x2
@@ -1936,7 +1936,7 @@ _080E563E:
 	movs r1, 0x3
 	adds r2, r7, 0
 	adds r3, r6, 0
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	add sp, 0x14
 	pop {r3-r5}
 	mov r8, r3

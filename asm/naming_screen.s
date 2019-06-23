@@ -401,8 +401,8 @@ _0809DBD6:
 	movs r1, 0
 	movs r2, 0
 	bl ChangeBgY
-	bl sub_80F6C6C
-	bl sub_80F6C98
+	bl InitStandardTextBoxWindows
+	bl ResetBg0
 _0809DCA4:
 	lsls r0, r4, 3
 	ldr r1, _0809DD50 @ =gUnknown_83E22A0
@@ -493,7 +493,7 @@ sub_809DD60: @ 809DD60
 	bl SetMainCallback2
 	bl sub_812B234
 	movs r0, 0x3
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -959,13 +959,13 @@ _0809E156:
 	bl StringExpandPlaceholders
 	movs r0, 0
 	movs r1, 0
-	bl sub_80F6EE4
+	bl DrawDialogueFrame
 	ldr r2, _0809E1D0 @ =gTextFlags
 	ldrb r0, [r2]
 	movs r1, 0x1
 	orrs r0, r1
 	strb r0, [r2]
-	bl sub_80F78A8
+	bl GetTextSpeedSetting
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -980,7 +980,7 @@ _0809E156:
 	movs r0, 0
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -2789,7 +2789,7 @@ sub_809EF54: @ 809EF54
 	str r2, [sp]
 	movs r2, 0x38
 	movs r3, 0x25
-	bl AddPseudoFieldObject
+	bl AddPseudoEventObject
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3657,7 +3657,7 @@ _0809F5EE:
 	movs r1, 0x2
 	movs r2, 0x68
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0809F614:
 	add sp, 0x10
 	pop {r4,r5}
@@ -4196,7 +4196,7 @@ _0809FA12:
 	adds r0, r6, 0
 	movs r1, 0x1
 	movs r2, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -4317,7 +4317,7 @@ sub_809FAE4: @ 809FAE4
 	str r1, [sp, 0x8]
 	movs r1, 0
 	movs r3, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r0, [r5]
 	adds r0, r4
 	ldrb r0, [r0]

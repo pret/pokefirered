@@ -45,7 +45,7 @@ sub_8077764: @ 8077764
 	cmp r1, 0
 	beq _080777BC
 	movs r0, 0x19
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	b _080777DA
 	.align 2, 0
 _080777B0: .4byte gPaletteFade
@@ -53,7 +53,7 @@ _080777B4: .4byte gBattleScripting
 _080777B8: .4byte gBattleTypeFlags
 _080777BC:
 	movs r0, 0x18
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	b _080777DA
 _080777C4:
 	movs r0, 0x80
@@ -61,11 +61,11 @@ _080777C4:
 	cmp r1, 0
 	beq _080777D4
 	movs r0, 0x1A
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	b _080777DA
 _080777D4:
 	movs r0, 0x17
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 _080777DA:
 	ldr r0, _080777E4 @ =sub_80777E8
 	bl SetMainCallback2
@@ -123,7 +123,7 @@ _08077860:
 _08077866:
 	movs r0, 0
 	bl SetVBlankCallback
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	bl sub_800F324
 	movs r0, 0x1
 	movs r1, 0x1
@@ -142,33 +142,33 @@ _08077866:
 	movs r0, 0x3
 	bl ShowBg
 	bl ResetPaletteFade
-	ldr r0, _080778C8 @ =gUnknown_2022974
+	ldr r0, _080778C8 @ =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, _080778CC @ =gUnknown_2022976
+	ldr r0, _080778CC @ =gBattle_BG0_Y
 	strh r1, [r0]
-	ldr r0, _080778D0 @ =gUnknown_2022978
+	ldr r0, _080778D0 @ =gBattle_BG1_X
 	strh r1, [r0]
-	ldr r0, _080778D4 @ =gUnknown_202297A
+	ldr r0, _080778D4 @ =gBattle_BG1_Y
 	strh r1, [r0]
-	ldr r0, _080778D8 @ =gUnknown_202297C
+	ldr r0, _080778D8 @ =gBattle_BG2_X
 	strh r1, [r0]
-	ldr r0, _080778DC @ =gUnknown_202297E
+	ldr r0, _080778DC @ =gBattle_BG2_Y
 	strh r1, [r0]
-	ldr r0, _080778E0 @ =gUnknown_2022980
+	ldr r0, _080778E0 @ =gBattle_BG3_X
 	strh r1, [r0]
-	ldr r0, _080778E4 @ =gUnknown_2022982
+	ldr r0, _080778E4 @ =gBattle_BG3_Y
 	strh r1, [r0]
 	b _08077A8A
 	.align 2, 0
-_080778C8: .4byte gUnknown_2022974
-_080778CC: .4byte gUnknown_2022976
-_080778D0: .4byte gUnknown_2022978
-_080778D4: .4byte gUnknown_202297A
-_080778D8: .4byte gUnknown_202297C
-_080778DC: .4byte gUnknown_202297E
-_080778E0: .4byte gUnknown_2022980
-_080778E4: .4byte gUnknown_2022982
+_080778C8: .4byte gBattle_BG0_X
+_080778CC: .4byte gBattle_BG0_Y
+_080778D0: .4byte gBattle_BG1_X
+_080778D4: .4byte gBattle_BG1_Y
+_080778D8: .4byte gBattle_BG2_X
+_080778DC: .4byte gBattle_BG2_Y
+_080778E0: .4byte gBattle_BG3_X
+_080778E4: .4byte gBattle_BG3_Y
 _080778E8:
 	movs r0, 0
 	str r0, [sp, 0x4]
@@ -661,7 +661,7 @@ _08077CD2:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_803F7D4
+	bl SetMultiuseSpriteTemplateToPokemon
 	ldr r5, _08077D98 @ =gMultiuseSpriteTemplate
 	adds r0, r7, 0
 	movs r1, 0x2
@@ -678,7 +678,7 @@ _08077CD2:
 	adds r1, r4, 0
 	mov r2, r8
 	bl CreateSprite
-	ldr r4, _08077D9C @ =gUnknown_2023D44
+	ldr r4, _08077D9C @ =gBattlerSpriteIds
 	adds r4, r7, r4
 	strb r0, [r4]
 	ldr r5, _08077DA0 @ =gSprites
@@ -735,7 +735,7 @@ _08077CD2:
 _08077D90: .4byte gBattlerPartyIndexes
 _08077D94: .4byte gEnemyParty
 _08077D98: .4byte gMultiuseSpriteTemplate
-_08077D9C: .4byte gUnknown_2023D44
+_08077D9C: .4byte gBattlerSpriteIds
 _08077DA0: .4byte gSprites
 _08077DA4: .4byte SpriteCallbackDummy
 _08077DA8: .4byte gBattleMonForms
@@ -820,7 +820,7 @@ _08077E54:
 	movs r1, 0x50
 	adds r2, r4, 0
 	bl CreateSprite
-	ldr r3, _08077E9C @ =gUnknown_2023D44
+	ldr r3, _08077E9C @ =gBattlerSpriteIds
 	strb r0, [r3]
 	ldr r4, _08077EA0 @ =gSprites
 	ldrb r0, [r3]
@@ -851,7 +851,7 @@ _08077E54:
 	.align 2, 0
 _08077E94: .4byte gMultiuseSpriteTemplate
 _08077E98: .4byte gUnknown_8239F8C
-_08077E9C: .4byte gUnknown_2023D44
+_08077E9C: .4byte gBattlerSpriteIds
 _08077EA0: .4byte gSprites
 _08077EA4: .4byte SpriteCallbackDummy
 _08077EA8:
@@ -887,7 +887,7 @@ _08077EA8:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_803F7D4
+	bl SetMultiuseSpriteTemplateToPokemon
 	ldr r5, _08077FCC @ =gMultiuseSpriteTemplate
 	adds r0, r7, 0
 	movs r1, 0x2
@@ -904,7 +904,7 @@ _08077EA8:
 	adds r1, r4, 0
 	mov r2, r8
 	bl CreateSprite
-	ldr r4, _08077FD0 @ =gUnknown_2023D44
+	ldr r4, _08077FD0 @ =gBattlerSpriteIds
 	adds r4, r7, r4
 	strb r0, [r4]
 	ldr r5, _08077FD4 @ =gSprites
@@ -958,7 +958,7 @@ _08077EA8:
 	bl StartSpriteAnim
 _08077F84:
 	ldr r1, _08077FD4 @ =gSprites
-	ldr r0, _08077FD0 @ =gUnknown_2023D44
+	ldr r0, _08077FD0 @ =gBattlerSpriteIds
 	adds r0, r7, r0
 	ldrb r0, [r0]
 	lsls r2, r0, 4
@@ -993,7 +993,7 @@ _08077FB4:
 _08077FC4: .4byte gBattlerPartyIndexes
 _08077FC8: .4byte gPlayerParty
 _08077FCC: .4byte gMultiuseSpriteTemplate
-_08077FD0: .4byte gUnknown_2023D44
+_08077FD0: .4byte gBattlerSpriteIds
 _08077FD4: .4byte gSprites
 _08077FD8: .4byte SpriteCallbackDummy
 _08077FDC: .4byte gBattleMonForms

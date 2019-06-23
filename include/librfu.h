@@ -67,6 +67,33 @@ union RfuPacket
     struct RfuPacket8 rfuPacket8;
 };
 
+struct UnkLinkRfuStruct_02022B14Substruct
+{
+    u16 unk_00_0:4;
+    u16 unk_00_4:1;
+    u16 unk_00_5:1;
+    u16 unk_00_6:1;
+    u16 unk_00_7:1;
+    u16 unk_01_0:1;
+    u16 unk_01_1:1;
+    u16 unk_01_2:4;
+    u16 unk_01_6:2;
+    u8 playerTrainerId[2];
+};
+
+struct __attribute__((packed, aligned(2))) UnkLinkRfuStruct_02022B14
+{
+    struct UnkLinkRfuStruct_02022B14Substruct unk_00;
+    u8 unk_04[4];
+    u16 species:10;
+    u16 type:6;
+    u8 unk_0a_0:7;
+    u8 unk_0a_7:1;
+    u8 playerGender:1;
+    u8 unk_0b_1:7;
+    u8 unk_0c;
+};
+
 struct RfuStruct
 {
     vs32 unk_0;

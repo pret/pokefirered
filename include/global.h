@@ -4,6 +4,7 @@
 #include "config.h"
 #include "gba/gba.h"
 #include <string.h>
+#include "constants/global.h"
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
@@ -39,10 +40,6 @@
 // Converts a number to Q4.12 fixed-point format
 #define Q_4_12(n)  ((s16)((n) * 4096))
 
-#define POKEMON_SLOTS_NUMBER 412
-#define POKEMON_NAME_LENGTH 10
-#define OT_NAME_LENGTH 7
-
 #define min(a, b) ((a) < (b) ? (a) : (b))
 #define max(a, b) ((a) >= (b) ? (a) : (b))
 
@@ -72,80 +69,12 @@
 #define TEST_BUTTON(field, button) ({(field) & (button);})
 #define JOY_NEW(button) TEST_BUTTON(gMain.newKeys,  button)
 #define JOY_HELD(button)  TEST_BUTTON(gMain.heldKeys, button)
+#define JOY_REPT(button) TEST_BUTTON(gMain.newAndRepeatedKeys, button)
 
 extern u8 gStringVar1[];
 extern u8 gStringVar2[];
 extern u8 gStringVar3[];
 extern u8 gStringVar4[];
-
-enum
-{
-    VERSION_SAPPHIRE = 1,
-    VERSION_RUBY = 2,
-    VERSION_EMERALD = 3,
-    VERSION_FIRE_RED = 4,
-    VERSION_LEAF_GREEN = 5,
-};
-
-enum LanguageId {
-    LANGUAGE_JAPANESE = 1,
-    LANGUAGE_ENGLISH = 2,
-    LANGUAGE_FRENCH = 3,
-    LANGUAGE_ITALIAN = 4,
-    LANGUAGE_GERMAN = 5,
-    // 6 goes unused but the theory is it was meant to be Korean
-        LANGUAGE_SPANISH = 7,
-};
-
-#define GAME_LANGUAGE (LANGUAGE_ENGLISH)
-
-#define PC_ITEMS_COUNT      30
-#define BAG_ITEMS_COUNT     42
-#define BAG_KEYITEMS_COUNT  30
-#define BAG_POKEBALLS_COUNT 13
-#define BAG_TMHM_COUNT      58
-#define BAG_BERRIES_COUNT   43
-
-enum
-{
-    MALE,
-    FEMALE
-};
-
-enum
-{
-    OPTIONS_BUTTON_MODE_NORMAL,
-    OPTIONS_BUTTON_MODE_LR,
-    OPTIONS_BUTTON_MODE_L_EQUALS_A
-};
-
-enum
-{
-    OPTIONS_TEXT_SPEED_SLOW,
-    OPTIONS_TEXT_SPEED_MID,
-    OPTIONS_TEXT_SPEED_FAST
-};
-
-enum
-{
-    OPTIONS_SOUND_MONO,
-    OPTIONS_SOUND_STEREO
-};
-
-enum
-{
-    OPTIONS_BATTLE_STYLE_SHIFT,
-    OPTIONS_BATTLE_STYLE_SET
-};
-
-enum
-{
-    BAG_ITEMS = 1,
-    BAG_POKEBALLS,
-    BAG_TMsHMs,
-    BAG_BERRIES,
-    BAG_KEYITEMS
-};
 
 struct Coords16
 {
@@ -241,33 +170,6 @@ struct LinkBattleRecords
     u8 languages[LINK_B_RECORDS_COUNT];
 };
 
-struct BattleTowerPokemon
-{
-    u16 species;
-    u16 heldItem;
-    u16 moves[4];
-    u8 level;
-    u8 ppBonuses;
-    u8 hpEV;
-    u8 attackEV;
-    u8 defenseEV;
-    u8 speedEV;
-    u8 spAttackEV;
-    u8 spDefenseEV;
-    u32 otId;
-    u32 hpIV:5;
-    u32 attackIV:5;
-    u32 defenseIV:5;
-    u32 speedIV:5;
-    u32 spAttackIV:5;
-    u32 spDefenseIV:5;
-    u32 gap:1;
-    u32 altAbility:1;
-    u32 personality;
-    u8 nickname[POKEMON_NAME_LENGTH + 1];
-    u8 friendship;
-};
-
 struct UnknownSaveBlock2Struct
 {
     u8 field_0;
@@ -328,7 +230,8 @@ struct SaveBlock2
     /*0x0AC*/ u8 filler_AC[0x3F4];
     /*0x4A0*/ u32 unk_4A0[0x2F];
     /*0x55c*/ struct UnkSaveBlock2Substruct_55C unk_55C;
-    /*0x574*/ u8 filler_574[0x524];
+    /*0x574*/ u8 filler_574[0x324];
+    /*0x898*/ u16 mapView[0x100];
     /*0xA98*/ struct LinkBattleRecords linkBattleRecords;
     /*0xAF0*/ struct BerryCrush berryCrush;
     /*0xB00*/ u8 filler_B00[0x420];
@@ -524,9 +427,9 @@ struct ContestWinner
     u8 contestRank;
 };
 
-struct DaycareMiscMon
+struct DayCareMail
 {
-    struct MailStruct mail;
+    struct MailStruct message;
     u8 OT_name[OT_NAME_LENGTH + 1];
     u8 monName[POKEMON_NAME_LENGTH + 1];
     u8 gameLanguage:4;
@@ -536,7 +439,7 @@ struct DaycareMiscMon
 struct DaycareMon
 {
     struct BoxPokemon mon;
-    struct DaycareMiscMon misc;
+    struct DayCareMail mail;
     u32 steps;
 };
 
@@ -545,14 +448,8 @@ struct DaycareMon
 struct DayCare
 {
     struct DaycareMon mons[DAYCARE_MON_COUNT];
-    u16 unk_118;
-    u8 unk_11A;
-};
-
-struct DayCareMail
-{
-    /*0x00*/ struct MailStruct message;
-    /*0x24*/ u8 names[19];
+    u16 offspringPersonality;
+    u8 stepCounter;
 };
 
 struct RecordMixingDayCareMail
@@ -597,6 +494,12 @@ typedef union QuestLogScene QuestLogScene;
 
 // This name is a complete guess and may change.
 
+#define MAP_OBJECTS_COUNT  16
+#define BERRY_TREES_COUNT  128
+#define FLAGS_COUNT        288 // 300
+#define VARS_COUNT         256
+#define MAIL_COUNT         16
+
 // Declare here so that it can be recursively referenced.
 union QuestLogMovement;
 
@@ -610,6 +513,43 @@ union QuestLogMovement
     } ident_struct;
 };
 
+struct QuestLogMapObject
+{
+    /*0x00*/ u8 active:1;
+    /*0x00*/ u8 mapobj_bit_3:1;
+    /*0x00*/ u8 mapobj_bit_4:1;
+    /*0x00*/ u8 mapobj_bit_5:1;
+    /*0x00*/ u8 mapobj_bit_8:1;
+    /*0x00*/ u8 mapobj_bit_9:1;
+    /*0x00*/ u8 mapobj_bit_10:1;
+    /*0x00*/ u8 mapobj_bit_11:1;
+    /*0x01*/ u8 mapobj_bit_12:1;
+    /*0x01*/ u8 mapobj_bit_13:1;
+    /*0x01*/ u8 mapobj_bit_14:1;
+    /*0x01*/ u8 mapobj_bit_15:1;
+    /*0x01*/ u8 mapobj_bit_16:1;
+    /*0x01*/ u8 mapobj_bit_23:1;
+    /*0x01*/ u8 mapobj_bit_24:1;
+    /*0x01*/ u8 mapobj_bit_25:1;
+    /*0x02*/ u8 mapobj_bit_26:1;
+    /*0x02*/ u8 mapobj_unk_18:4;
+    /*0x02*/ u8 unused_02_5:3;
+    /*0x03*/ u8 mapobj_unk_0B_0:4;
+    /*0x03*/ u8 elevation:4;
+    /*0x04*/ u8 graphicsId;
+    /*0x05*/ u8 animPattern;
+    /*0x06*/ u8 trainerType;
+    /*0x07*/ u8 localId;
+    /*0x08*/ u8 mapNum;
+    /*0x09*/ u8 mapGroup;
+    /*0x0a*/ s16 x;
+    /*0x0c*/ s16 y;
+    /*0x0e*/ u8 trainerRange_berryTreeId;
+    /*0x0f*/ u8 mapobj_unk_1F;
+    /*0x10*/ u8 mapobj_unk_21;
+    /*0x11*/ u8 animId;
+};
+
 struct QuestLog
 {
     /*0x0000*/ u8 unk_000;
@@ -618,7 +558,7 @@ struct QuestLog
     /*0x0003*/ s8 unk_003;
     /*0x0004*/ s16 unk_004;
     /*0x0006*/ s16 unk_006;
-    /*0x0008*/ u8 filler_008[0x140];
+    /*0x0008*/ struct QuestLogMapObject unk_008[MAP_OBJECTS_COUNT];
 
     // These arrays hold the game state for
     // playing back the quest log
@@ -637,12 +577,6 @@ struct FameCheckerSaveData
     u16 flavorTextFlags:12;
     u16 unk_0_E:2;
 };
-
-#define MAP_OBJECTS_COUNT  16
-#define BERRY_TREES_COUNT  128
-#define FLAGS_COUNT        288 // 300
-#define VARS_COUNT         256
-#define MAIL_COUNT         16
 
 #define NUM_EASY_CHAT_EXTRA_PHRASES 33
 #define EASY_CHAT_EXTRA_PHRASES_SIZE ((NUM_EASY_CHAT_EXTRA_PHRASES >> 3) + (NUM_EASY_CHAT_EXTRA_PHRASES % 8 ? 1 : 0))
@@ -709,6 +643,27 @@ struct MEventBuffers
     /*0x344 0x3464*/ u32 unk_344[2][5];
 }; // 0x36C 0x348C
 
+struct TrainerTowerLog
+{
+    u32 unk0;
+    u32 unk4;
+    u8 unk8;
+    u8 unk9;
+    u8 unkA_0:1;
+    u8 unkA_1:1;
+    u8 unkA_2:1;
+    u8 unkA_3:1;
+    u8 unkA_4:1;
+    u8 unkA_5:1;
+    u8 unkA_6:2;
+};
+
+struct TrainerRematchState
+{
+    u16 stepCounter;
+    u8 rematches[100];
+};
+
 struct SaveBlock1
 {
     /*0x0000*/ struct Coords16 pos;
@@ -736,7 +691,7 @@ struct SaveBlock1
     /*0x05F8*/ u8 seen1[DEX_FLAGS_NO];
     /*0x062C*/ u16 berryBlenderRecords[3]; // unused
     /*0x0632*/ u8 field_632[6]; // unused?
-    /*0x0638*/ u8 trainerRematchStepCounter;
+    /*0x0638*/ u16 trainerRematchStepCounter;
     /*0x063A*/ u8 ALIGNED(2) trainerRematches[100];
     /*0x06A0*/ struct MapObject mapObjects[MAP_OBJECTS_COUNT];
     /*0x08E0*/ struct MapObjectTemplate mapObjectTemplates[64];
@@ -764,19 +719,14 @@ struct SaveBlock1
     /*0x3A48*/ u8 filler_3a48[4];
     /*0x3A4C*/ u8 rivalName[PLAYER_NAME_LENGTH];
     /*0x3A54*/ struct FameCheckerSaveData fameChecker[NUM_FAMECHECKER_PERSONS];
-    /*0x3A94*/ u8 filler3A94[0x2A0];
+    /*0x3A94*/ u8 filler3A94[0x204];
+    /*0x3C98*/ struct DaycareMon route5DayCareMon;
+    /*0x3D24*/ u8 filler3D24[0x10];
     /*0x3D34*/ u32 unkArrayIdx;
-    /*0x3D38*/ u32 unkArray[4][3];
+    /*0x3D38*/ struct TrainerTowerLog unkArray[4];
 };
 
 extern struct SaveBlock1* gSaveBlock1Ptr;
-
-struct Bitmap           // TODO: Find a better spot for this
-{
-    u8* pixels;
-    u32 width:16;
-    u32 height:16;
-};
 
 extern u8 gReservedSpritePaletteCount;
 

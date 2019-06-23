@@ -1,0 +1,48 @@
+{
+  "id": "MAP_SIX_ISLAND_DOTTED_HOLE_1F",
+  "name": "SixIsland_DottedHole_1F",
+  "layout": "LAYOUT_SIX_ISLAND_DOTTED_HOLE_1F",
+  "music": "BGM_FRLG_TANOBY_RUINS",
+  "region_map_section": "MAPSEC_DOTTED_HOLE",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_4",
+  "unknown_18": 1,
+  "unknown_19": 7,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": null,
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 6,
+      "y": 9,
+      "elevation": 3,
+      "dest_map": "MAP_SIX_ISLAND_RUIN_VALLEY",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 6,
+      "y": 5,
+      "elevation": 3,
+      "dest_map": "MAP_SIX_ISLAND_DOTTED_HOLE_B1F",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 13,
+      "y": 5,
+      "elevation": 3,
+      "dest_map": "MAP_SIX_ISLAND_DOTTED_HOLE_SAPPHIRE_ROOM",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 6,
+      "y": 7,
+      "elevation": 3,
+      "dest_map": "MAP_SIX_ISLAND_DOTTED_HOLE_B1F",
+      "dest_warp_id": 2
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

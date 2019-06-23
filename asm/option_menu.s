@@ -93,7 +93,7 @@ _080883FA:
 	cmp r3, 0x5
 	bls _080883E6
 	movs r0, 0xD
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	ldr r0, _0808842C @ =sub_8088454
 	bl SetMainCallback2
 	pop {r4-r6}
@@ -409,7 +409,7 @@ sub_8088680: @ 8088680
 	movs r1, 0
 	adds r2, r4, 0
 	movs r3, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x2
 	bl PutWindowTilemap
 	movs r0, 0x2
@@ -431,7 +431,7 @@ sub_80886D4: @ 80886D4
 	bl ResetPaletteFade
 	bl FreeAllSpritePalettes
 	bl ResetTasks
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80886D4
@@ -906,7 +906,7 @@ _08088A72:
 	movs r1, 0x2
 	mov r2, r8
 	adds r3, r7, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	b _08088ADE
 	.align 2, 0
 _08088A94: .4byte gUnknown_83CC354
@@ -940,7 +940,7 @@ _08088A9C:
 	movs r1, 0x2
 	mov r2, r8
 	adds r3, r7, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 _08088ADE:
 	movs r0, 0x1
 	bl PutWindowTilemap
@@ -967,7 +967,7 @@ sub_8088B00: @ 8088B00
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
-	ldr r1, _08088BBC @ =gUnknown_3005020
+	ldr r1, _08088BBC @ =gFieldCallback
 	ldr r0, _08088BC0 @ =sub_807DF64
 	str r0, [r1]
 	ldr r0, _08088BC4 @ =gMain
@@ -1050,7 +1050,7 @@ sub_8088B00: @ 8088B00
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08088BBC: .4byte gUnknown_3005020
+_08088BBC: .4byte gFieldCallback
 _08088BC0: .4byte sub_807DF64
 _08088BC4: .4byte gMain
 _08088BC8: .4byte gSaveBlock2Ptr

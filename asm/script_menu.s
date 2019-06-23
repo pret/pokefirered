@@ -301,7 +301,7 @@ _0809CB7A:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	ldr r0, [sp, 0x18]
 	adds r1, r7, 0
 	adds r2, r5, 0
@@ -578,7 +578,7 @@ _0809CD82:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 	b _0809CDE0
 	.align 2, 0
 _0809CDAC: .4byte gUnknown_83E0738
@@ -603,7 +603,7 @@ _0809CDB0:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 _0809CDE0:
 	add sp, 0x10
 	pop {r4}
@@ -613,8 +613,8 @@ _0809CDE0:
 _0809CDE8: .4byte gUnknown_83E0748
 	thumb_func_end sub_809CD48
 
-	thumb_func_start sub_809CDEC
-sub_809CDEC: @ 809CDEC
+	thumb_func_start ScriptMenu_YesNo
+ScriptMenu_YesNo: @ 809CDEC
 	push {r4,lr}
 	ldr r4, _0809CE04 @ =task_yes_no_maybe
 	adds r0, r4, 0
@@ -649,7 +649,7 @@ _0809CE28:
 	.align 2, 0
 _0809CE30: .4byte gSpecialVar_Result
 _0809CE34: .4byte sub_809D6D4
-	thumb_func_end sub_809CDEC
+	thumb_func_end ScriptMenu_YesNo
 
 	thumb_func_start sub_809CE38
 sub_809CE38: @ 809CE38
@@ -690,7 +690,7 @@ task_yes_no_maybe: @ 809CE54
 	.align 2, 0
 _0809CE74: .4byte gTasks
 _0809CE78:
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	movs r0, 0x1
@@ -733,8 +733,8 @@ _0809CEBC:
 _0809CEC4: .4byte gSpecialVar_Result
 	thumb_func_end task_yes_no_maybe
 
-	thumb_func_start sub_809CEC8
-sub_809CEC8: @ 809CEC8
+	thumb_func_start ScriptMenu_MultichoiceGrid
+ScriptMenu_MultichoiceGrid: @ 809CEC8
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -862,7 +862,7 @@ _0809CFCC: .4byte gSpecialVar_Result
 _0809CFD0: .4byte sub_809D6D4
 _0809CFD4: .4byte gUnknown_83E04B0
 _0809CFD8: .4byte gTasks
-	thumb_func_end sub_809CEC8
+	thumb_func_end ScriptMenu_MultichoiceGrid
 
 	thumb_func_start sub_809CFDC
 sub_809CFDC: @ 809CFDC
@@ -1138,7 +1138,7 @@ _0809D1FA:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	movs r0, 0
 	mov r1, r9
 	adds r2, r6, 0
@@ -1178,7 +1178,7 @@ sub_809D254: @ 809D254
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 	add sp, 0x10
 	pop {r0}
 	bx r0
@@ -1241,8 +1241,8 @@ _0809D2E8:
 	bx r0
 	thumb_func_end sub_809D288
 
-	thumb_func_start sub_809D2F0
-sub_809D2F0: @ 809D2F0
+	thumb_func_start ScriptMenu_ShowPokemonPic
+ScriptMenu_ShowPokemonPic: @ 809D2F0
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1344,10 +1344,10 @@ _0809D3C2:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_809D2F0
+	thumb_func_end ScriptMenu_ShowPokemonPic
 
-	thumb_func_start sub_809D3CC
-sub_809D3CC: @ 809D3CC
+	thumb_func_start ScriptMenu_GetPicboxWaitFunc
+ScriptMenu_GetPicboxWaitFunc: @ 809D3CC
 	push {lr}
 	ldr r0, _0809D3F0 @ =sub_809D288
 	bl FindTaskIdByFunc
@@ -1374,7 +1374,7 @@ _0809D3FC:
 _0809D3FE:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_809D3CC
+	thumb_func_end ScriptMenu_GetPicboxWaitFunc
 
 	thumb_func_start sub_809D404
 sub_809D404: @ 809D404
@@ -1721,7 +1721,7 @@ sub_809D6B0: @ 809D6B0
 	bl ClearWindowTilemap
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	adds r0, r4, 0
 	bl RemoveWindow
 	pop {r4}
@@ -1732,7 +1732,7 @@ sub_809D6B0: @ 809D6B0
 	thumb_func_start sub_809D6D4
 sub_809D6D4: @ 809D6D4
 	push {lr}
-	ldr r0, _0809D74C @ =gUnknown_81A7AE0
+	ldr r0, _0809D74C @ =EventScript_1A7AE0
 	bl ScriptContext1_SetupScript
 	ldr r0, _0809D750 @ =sub_809D288
 	bl FindTaskIdByFunc
@@ -1788,7 +1788,7 @@ _0809D748:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809D74C: .4byte gUnknown_81A7AE0
+_0809D74C: .4byte EventScript_1A7AE0
 _0809D750: .4byte sub_809D288
 _0809D754: .4byte gTasks+0x8
 _0809D758: .4byte gSprites
@@ -1925,7 +1925,7 @@ _0809D844:
 	bl AddTextPrinterParameterized
 	adds r0, r6, 0x1
 	lsls r0, 24
-	ldr r2, _0809D8BC @ =gUnknown_84161C8
+	ldr r2, _0809D8BC @ =gOtherText_Exit
 	lsrs r0, 20
 	adds r0, 0x2
 	lsls r0, 24
@@ -1946,7 +1946,7 @@ _0809D844:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	movs r0, 0
 	mov r1, r9
 	adds r2, r7, 0
@@ -1964,7 +1964,7 @@ _0809D8A8:
 	bx r0
 	.align 2, 0
 _0809D8B8: .4byte gUnknown_8417DED
-_0809D8BC: .4byte gUnknown_84161C8
+_0809D8BC: .4byte gOtherText_Exit
 	thumb_func_end sub_809D764
 
 	thumb_func_start sub_809D8C0

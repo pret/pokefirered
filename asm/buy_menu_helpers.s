@@ -24,15 +24,15 @@ _0813F686:
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xD0
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	movs r0, 0
 	movs r1, 0x13
 	movs r2, 0xE0
-	bl sub_814FEAC
+	bl TextWindow_SetBubbleFrame_841F1C8
 	movs r0, 0
 	movs r1, 0xA
 	movs r2, 0xF0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	movs r0, 0
 	bl PutWindowTilemap
 	movs r0, 0x4
@@ -114,7 +114,7 @@ sub_813F6F4: @ 813F6F4
 	str r4, [sp, 0xC]
 	str r2, [sp, 0x10]
 	mov r2, r9
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	add sp, 0x14
 	pop {r3,r4}
 	mov r8, r3
@@ -141,7 +141,7 @@ sub_813F75C: @ 813F75C
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_80F78A8
+	bl GetTextSpeedSetting
 	lsls r0, 24
 	lsrs r0, 24
 	str r4, [sp]
@@ -209,7 +209,7 @@ sub_813F7D8: @ 813F7D8
 	str r3, [sp, 0xC]
 	movs r2, 0x2
 	movs r3, 0
-	bl sub_80BF5D0
+	bl CreateYesNoMenuWithCallbacks
 	add sp, 0x10
 	pop {r0}
 	bx r0

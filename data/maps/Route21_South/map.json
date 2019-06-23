@@ -1,0 +1,96 @@
+{
+  "id": "MAP_ROUTE21_SOUTH",
+  "name": "Route21_South",
+  "layout": "LAYOUT_ROUTE21_SOUTH",
+  "music": "BGM_FRLG_ROUTE_3",
+  "region_map_section": "MAPSEC_ROUTE_21",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_3",
+  "unknown_18": 1,
+  "unknown_19": 6,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": [
+    {
+      "map": "MAP_ROUTE21_NORTH",
+      "offset": 0,
+      "direction": "up"
+    },
+    {
+      "map": "MAP_CINNABAR_ISLAND",
+      "offset": 0,
+      "direction": "down"
+    }
+  ],
+  "object_events": [
+    {
+      "graphics_id": "57",
+      "x": 11,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "Route21_South_EventScript_1AB9B3",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "57",
+      "x": 14,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "Route21_South_EventScript_1ABA2F",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "43",
+      "x": 15,
+      "y": 24,
+      "elevation": 1,
+      "movement_type": "14",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "Route21_South_EventScript_1ABAAB",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "43",
+      "x": 15,
+      "y": 38,
+      "elevation": 1,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "Route21_South_EventScript_1ABAE9",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "43",
+      "x": 10,
+      "y": 29,
+      "elevation": 1,
+      "movement_type": "2",
+      "movement_range_x": 2,
+      "movement_range_y": 2,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 4,
+      "script": "Route21_South_EventScript_1ABB27",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [],
+  "coord_events": [],
+  "bg_events": []
+}

@@ -1,5 +1,5 @@
-#include <gba/gba.h>
-#include <siirtc.h>
+#include "gba/gba.h"
+#include "siirtc.h"
 #include "global.h"
 #include "main.h"
 

@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_813CD50
-sub_813CD50: @ 813CD50
+	thumb_func_start InitBerryPouch
+InitBerryPouch: @ 813CD50
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -92,7 +92,7 @@ _0813CDF0: .4byte gTextFlags
 _0813CDF4: .4byte gSpecialVar_ItemId
 _0813CDF8: .4byte sub_813CE30
 _0813CDFC: .4byte 0x0000080c
-	thumb_func_end sub_813CD50
+	thumb_func_end InitBerryPouch
 
 	thumb_func_start sub_813CE00
 sub_813CE00: @ 813CE00
@@ -130,7 +130,7 @@ _0813CE32:
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0813CE56
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -183,11 +183,11 @@ _0813CE84:
 	.4byte _0813CFB0
 	.4byte _0813CFBE
 _0813CED0:
-	bl sub_80BF768
+	bl VblankHblankHandlerSetZero
 	bl clear_scheduled_bg_copies_to_vram
 	b _0813CFD2
 _0813CEDA:
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	b _0813CFD2
 _0813CEE0:
 	bl FreeAllSpritePalettes
@@ -199,10 +199,10 @@ _0813CEEC:
 	bl ResetSpriteData
 	b _0813CFD2
 _0813CEF2:
-	bl sub_80984D8
+	bl ResetItemMenuIconState
 	b _0813CFD2
 _0813CEF8:
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813CFD2
@@ -255,7 +255,7 @@ _0813CF62:
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _0813CF98 @ =gUnknown_3005E70
+	ldr r0, _0813CF98 @ =gMultiuseListMenuTemplate
 	ldr r2, _0813CF9C @ =gUnknown_203F370
 	ldrh r1, [r2, 0xA]
 	ldrh r2, [r2, 0x8]
@@ -273,7 +273,7 @@ _0813CF62:
 	b _0813CFD2
 	.align 2, 0
 _0813CF94: .4byte sub_813DA68
-_0813CF98: .4byte gUnknown_3005E70
+_0813CF98: .4byte gMultiuseListMenuTemplate
 _0813CF9C: .4byte gUnknown_203F370
 _0813CFA0: .4byte gTasks
 _0813CFA4:
@@ -386,7 +386,7 @@ _0813D078: .4byte gUnknown_203F370
 	thumb_func_start sub_813D07C
 sub_813D07C: @ 813D07C
 	push {r4,lr}
-	bl sub_80BF7C8
+	bl InitBgReg
 	ldr r4, _0813D0DC @ =gUnknown_203F36C
 	ldr r0, [r4]
 	adds r0, 0xC
@@ -573,7 +573,7 @@ sub_813D204: @ 813D204
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	ldr r0, _0813D280 @ =gUnknown_20398AC
+	ldr r0, _0813D280 @ =gBagPockets + 0x20
 	mov r8, r0
 	movs r6, 0
 	ldr r0, _0813D284 @ =gUnknown_203F36C
@@ -615,10 +615,10 @@ _0813D254:
 	ldr r2, [r0]
 	lsls r0, r6, 3
 	adds r0, r2
-	ldr r1, _0813D290 @ =gUnknown_84166DB
+	ldr r1, _0813D290 @ =gText_Close
 	str r1, [r0]
 	str r6, [r0, 0x4]
-	ldr r1, _0813D294 @ =gUnknown_3005E70
+	ldr r1, _0813D294 @ =gMultiuseListMenuTemplate
 	str r2, [r1]
 	ldr r0, _0813D298 @ =gUnknown_203F370
 	ldrb r0, [r0, 0x4]
@@ -633,12 +633,12 @@ _0813D254:
 	adds r2, r1, 0
 	b _0813D2A6
 	.align 2, 0
-_0813D280: .4byte gUnknown_20398AC
+_0813D280: .4byte gBagPockets + 0x20
 _0813D284: .4byte gUnknown_203F36C
 _0813D288: .4byte gUnknown_203F380
 _0813D28C: .4byte gUnknown_203F37C
-_0813D290: .4byte gUnknown_84166DB
-_0813D294: .4byte gUnknown_3005E70
+_0813D290: .4byte gText_Close
+_0813D294: .4byte gMultiuseListMenuTemplate
 _0813D298: .4byte gUnknown_203F370
 _0813D29C:
 	ldr r0, _0813D310 @ =gUnknown_203F36C
@@ -715,10 +715,10 @@ sub_813D31C: @ 813D31C
 	lsls r5, r1, 16
 	lsrs r5, 16
 	ldr r4, _0813D384 @ =gStringVar4
-	ldr r1, _0813D388 @ =gUnknown_84166FF
+	ldr r1, _0813D388 @ =gText_FontSize0
 	adds r0, r4, 0
 	bl StringCopy
-	ldr r1, _0813D38C @ =gUnknown_8416226
+	ldr r1, _0813D38C @ =gOtherText_UnkF9_08_Clear_01
 	adds r0, r4, 0
 	bl StringAppend
 	ldr r6, _0813D390 @ =gStringVar1
@@ -733,11 +733,11 @@ sub_813D31C: @ 813D31C
 	bl StringAppend
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r1, _0813D394 @ =gUnknown_84643B4
 	adds r0, r4, 0
 	bl StringAppend
-	ldr r1, _0813D398 @ =gUnknown_8416703
+	ldr r1, _0813D398 @ =gText_FontSize2
 	adds r0, r4, 0
 	bl StringAppend
 	adds r0, r4, 0
@@ -753,11 +753,11 @@ sub_813D31C: @ 813D31C
 	bx r0
 	.align 2, 0
 _0813D384: .4byte gStringVar4
-_0813D388: .4byte gUnknown_84166FF
-_0813D38C: .4byte gUnknown_8416226
+_0813D388: .4byte gText_FontSize0
+_0813D38C: .4byte gOtherText_UnkF9_08_Clear_01
 _0813D390: .4byte gStringVar1
 _0813D394: .4byte gUnknown_84643B4
-_0813D398: .4byte gUnknown_8416703
+_0813D398: .4byte gText_FontSize2
 	thumb_func_end sub_813D31C
 
 	thumb_func_start sub_813D39C
@@ -798,7 +798,7 @@ _0813D3D6:
 	ldrb r1, [r0, 0x9]
 	movs r0, 0x1
 	eors r0, r1
-	bl sub_8098940
+	bl DestroyItemMenuIcon
 	ldr r1, [r4]
 	ldrb r0, [r1, 0x7]
 	cmp r0, r5
@@ -806,7 +806,7 @@ _0813D3D6:
 	lsls r1, r5, 16
 	lsrs r1, 16
 	movs r0, 0x5
-	bl sub_809A798
+	bl BagGetItemIdByPocketPosition
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, [r4]
@@ -857,10 +857,10 @@ sub_813D430: @ 813D430
 	lsrs r4, 16
 	movs r0, 0x5
 	adds r1, r4, 0
-	bl sub_809A798
+	bl BagGetItemIdByPocketPosition
 	movs r0, 0x5
 	adds r1, r4, 0
-	bl sub_809A7B4
+	bl BagGetQuantityByPocketPosition
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -869,7 +869,7 @@ sub_813D430: @ 813D430
 	movs r3, 0x3
 	bl ConvertIntToDecimalStringN
 	ldr r4, _0813D4A8 @ =gStringVar4
-	ldr r1, _0813D4AC @ =gUnknown_84162B9
+	ldr r1, _0813D4AC @ =gText_TimesStrVar1
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	str r5, [sp]
@@ -894,7 +894,7 @@ _0813D498:
 _0813D4A0: .4byte gUnknown_203F36C
 _0813D4A4: .4byte gStringVar1
 _0813D4A8: .4byte gStringVar4
-_0813D4AC: .4byte gUnknown_84162B9
+_0813D4AC: .4byte gText_TimesStrVar1
 	thumb_func_end sub_813D430
 
 	thumb_func_start sub_813D4B0
@@ -980,7 +980,7 @@ sub_813D538: @ 813D538
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x5
-	bl sub_809A798
+	bl BagGetItemIdByPocketPosition
 	lsls r0, 16
 	lsrs r0, 16
 	bl ItemId_GetDescription
@@ -1028,7 +1028,7 @@ sub_813D594: @ 813D594
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0x1E
-	bl sub_80F6B08
+	bl SetBgRectPal
 	movs r0, 0x1
 	bl schedule_bg_copy_tilemap_to_vram
 	add sp, 0x8
@@ -1072,7 +1072,7 @@ _0813D5EA:
 	movs r1, 0xA0
 	movs r2, 0x8
 	movs r3, 0x78
-	bl AddScrollIndicatorArrowPairParametrized
+	bl AddScrollIndicatorArrowPairParameterized
 	ldr r1, [r4]
 	strb r0, [r1, 0x6]
 	add sp, 0x10
@@ -1102,7 +1102,7 @@ sub_813D614: @ 813D614
 	movs r1, 0xD4
 	movs r2, 0x78
 	movs r3, 0x98
-	bl AddScrollIndicatorArrowPairParametrized
+	bl AddScrollIndicatorArrowPairParameterized
 	ldr r1, [r4]
 	strb r0, [r1, 0x6]
 	add sp, 0x10
@@ -1132,7 +1132,7 @@ sub_813D64C: @ 813D64C
 	movs r1, 0x98
 	movs r2, 0x48
 	movs r3, 0x68
-	bl AddScrollIndicatorArrowPairParametrized
+	bl AddScrollIndicatorArrowPairParameterized
 	ldr r1, [r4]
 	strb r0, [r1, 0x6]
 	add sp, 0x10
@@ -1358,8 +1358,8 @@ _0813D800: .4byte gUnknown_203F37C
 _0813D804: .4byte gUnknown_203F380
 	thumb_func_end sub_813D7CC
 
-	thumb_func_start sub_813D808
-sub_813D808: @ 813D808
+	thumb_func_start BerryPouch_StartFadeToExitCallback
+BerryPouch_StartFadeToExitCallback: @ 813D808
 	push {r4,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -1387,7 +1387,7 @@ sub_813D808: @ 813D808
 	.align 2, 0
 _0813D83C: .4byte gTasks
 _0813D840: .4byte sub_813D844
-	thumb_func_end sub_813D808
+	thumb_func_end BerryPouch_StartFadeToExitCallback
 
 	thumb_func_start sub_813D844
 sub_813D844: @ 813D844
@@ -1409,7 +1409,7 @@ sub_813D844: @ 813D844
 	ldr r4, _0813D884 @ =gUnknown_203F37A
 	subs r2, r4, 0x2
 	adds r1, r4, 0
-	bl sub_810713C
+	bl DestroyListMenu
 	ldr r0, _0813D888 @ =gUnknown_203F36C
 	ldr r0, [r0]
 	ldr r0, [r0]
@@ -1441,9 +1441,9 @@ _0813D8A4:
 	thumb_func_start sub_813D8AC
 sub_813D8AC: @ 813D8AC
 	push {r4,lr}
-	ldr r4, _0813D904 @ =gUnknown_20398AC
+	ldr r4, _0813D904 @ =gBagPockets + 0x20
 	adds r0, r4, 0
-	bl sub_809A720
+	bl SortAndCompactBagPocket
 	ldr r3, _0813D908 @ =gUnknown_203F36C
 	ldr r1, [r3]
 	movs r0, 0
@@ -1485,7 +1485,7 @@ _0813D8EE:
 	adds r1, r0, 0
 	b _0813D916
 	.align 2, 0
-_0813D904: .4byte gUnknown_20398AC
+_0813D904: .4byte gBagPockets + 0x20
 _0813D908: .4byte gUnknown_203F36C
 _0813D90C: .4byte gUnknown_203F370
 _0813D910:
@@ -1510,15 +1510,15 @@ _0813D92C:
 	bx r0
 	thumb_func_end sub_813D8AC
 
-	thumb_func_start sub_813D934
-sub_813D934: @ 813D934
+	thumb_func_start BerryPouch_SetExitCallback
+BerryPouch_SetExitCallback: @ 813D934
 	ldr r1, _0813D93C @ =gUnknown_203F36C
 	ldr r1, [r1]
 	str r0, [r1]
 	bx lr
 	.align 2, 0
 _0813D93C: .4byte gUnknown_203F36C
-	thumb_func_end sub_813D934
+	thumb_func_end BerryPouch_SetExitCallback
 
 	thumb_func_start sub_813D940
 sub_813D940: @ 813D940
@@ -1574,7 +1574,7 @@ sub_813D940: @ 813D940
 	movs r2, 0x2
 	movs r3, 0x3
 	bl ConvertIntToDecimalStringN
-	ldr r1, _0813D9F4 @ =gUnknown_84162B9
+	ldr r1, _0813D9F4 @ =gText_TimesStrVar1
 	mov r0, r9
 	bl StringExpandPlaceholders
 	movs r0, 0xA
@@ -1601,7 +1601,7 @@ sub_813D940: @ 813D940
 _0813D9E8: .4byte gTasks+0x8
 _0813D9EC: .4byte gStringVar1
 _0813D9F0: .4byte gStringVar4
-_0813D9F4: .4byte gUnknown_84162B9
+_0813D9F4: .4byte gText_TimesStrVar1
 	thumb_func_end sub_813D940
 
 	thumb_func_start sub_813D9F8
@@ -1631,7 +1631,7 @@ sub_813D9F8: @ 813D9F8
 	adds r3, r5, 0
 	bl ConvertIntToDecimalStringN
 	ldr r4, _0813DA60 @ =gStringVar4
-	ldr r1, _0813DA64 @ =gUnknown_84162B9
+	ldr r1, _0813DA64 @ =gText_TimesStrVar1
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0xA
@@ -1654,7 +1654,7 @@ sub_813D9F8: @ 813D9F8
 	.align 2, 0
 _0813DA5C: .4byte gStringVar1
 _0813DA60: .4byte gStringVar4
-_0813DA64: .4byte gUnknown_84162B9
+_0813DA64: .4byte gText_TimesStrVar1
 	thumb_func_end sub_813D9F8
 
 	thumb_func_start sub_813DA68
@@ -1694,7 +1694,7 @@ _0813DA9E:
 	ldr r4, _0813DAE0 @ =gUnknown_203F37A
 	subs r2, r4, 0x2
 	adds r1, r4, 0
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	ldr r0, _0813DAE4 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x4
@@ -1748,7 +1748,7 @@ _0813DB10:
 	lsls r1, r5, 16
 	lsrs r1, 16
 	movs r0, 0x5
-	bl sub_809A798
+	bl BagGetItemIdByPocketPosition
 	ldr r1, _0813DB34 @ =gSpecialVar_ItemId
 	b _0813DB46
 	.align 2, 0
@@ -1767,7 +1767,7 @@ _0813DB46:
 	strh r0, [r1]
 _0813DB48:
 	adds r0, r6, 0
-	bl sub_813D808
+	bl BerryPouch_StartFadeToExitCallback
 	b _0813DB9E
 	.align 2, 0
 _0813DB50: .4byte gUnknown_203F36C
@@ -1784,11 +1784,11 @@ _0813DB58:
 	lsrs r4, 16
 	movs r0, 0x5
 	adds r1, r4, 0
-	bl sub_809A7B4
+	bl BagGetQuantityByPocketPosition
 	strh r0, [r7, 0x4]
 	movs r0, 0x5
 	adds r1, r4, 0
-	bl sub_809A798
+	bl BagGetItemIdByPocketPosition
 	ldr r1, _0813DBA8 @ =gSpecialVar_ItemId
 	strh r0, [r1]
 	ldr r0, _0813DBAC @ =gTasks
@@ -1869,7 +1869,7 @@ _0813DC18: .4byte gUnknown_203F384
 _0813DC1C: .4byte gUnknown_84643B0
 _0813DC20: .4byte gUnknown_203F388
 _0813DC24:
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1974,7 +1974,7 @@ _0813DC86:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	movs r0, 0x6
 	bl sub_813EA08
 	adds r4, r0, 0
@@ -1985,7 +1985,7 @@ _0813DC86:
 	ldr r1, _0813DD68 @ =gStringVar1
 	bl sub_813D39C
 	ldr r5, _0813DD6C @ =gStringVar4
-	ldr r1, _0813DD70 @ =gUnknown_84162FF
+	ldr r1, _0813DD70 @ =gOtherText_StrVar1
 	adds r0, r5, 0
 	bl StringExpandPlaceholders
 	movs r0, 0x2
@@ -2014,7 +2014,7 @@ _0813DD60: .4byte gUnknown_203F388
 _0813DD64: .4byte gUnknown_846437C
 _0813DD68: .4byte gStringVar1
 _0813DD6C: .4byte gStringVar4
-_0813DD70: .4byte gUnknown_84162FF
+_0813DD70: .4byte gOtherText_StrVar1
 	thumb_func_end sub_813DBE4
 
 	thumb_func_start sub_813DD74
@@ -2124,7 +2124,7 @@ sub_813DE0C: @ 813DE0C
 	cmp r0, 0
 	bne _0813DE68
 	adds r0, r5, 0
-	bl sub_80A2238
+	bl FieldUseFunc_OakStopsYou
 	b _0813DEB0
 	.align 2, 0
 _0813DE5C: .4byte gUnknown_203F388
@@ -2497,18 +2497,18 @@ _0813E18A:
 	ldr r0, _0813E1F4 @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldrh r1, [r5, 0x10]
-	bl sub_809A1D8
+	bl RemoveBagItem
 	movs r0, 0x9
 	bl sub_813EA98
 	ldrb r0, [r5]
 	ldr r4, _0813E1F8 @ =gUnknown_203F37A
 	subs r2, r4, 0x2
 	adds r1, r4, 0
-	bl sub_810713C
+	bl DestroyListMenu
 	bl sub_813D8AC
 	bl sub_813D6F4
 	bl sub_813D204
-	ldr r0, _0813E1FC @ =gUnknown_3005E70
+	ldr r0, _0813E1FC @ =gMultiuseListMenuTemplate
 	subs r4, 0xA
 	ldrh r1, [r4, 0xA]
 	ldrh r2, [r4, 0x8]
@@ -2534,7 +2534,7 @@ _0813E1EC: .4byte gTasks+0x8
 _0813E1F0: .4byte gMain
 _0813E1F4: .4byte gSpecialVar_ItemId
 _0813E1F8: .4byte gUnknown_203F37A
-_0813E1FC: .4byte gUnknown_3005E70
+_0813E1FC: .4byte gMultiuseListMenuTemplate
 	thumb_func_end sub_813E164
 
 	thumb_func_start sub_813E200
@@ -2577,7 +2577,7 @@ _0813E248:
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _0813E270 @ =sub_813D808
+	ldr r1, _0813E270 @ =BerryPouch_StartFadeToExitCallback
 	str r1, [r0]
 _0813E25E:
 	pop {r4}
@@ -2587,7 +2587,7 @@ _0813E25E:
 _0813E264: .4byte gUnknown_203F36C
 _0813E268: .4byte sub_8126EDC
 _0813E26C: .4byte gTasks
-_0813E270: .4byte sub_813D808
+_0813E270: .4byte BerryPouch_StartFadeToExitCallback
 	thumb_func_end sub_813E200
 
 	thumb_func_start sub_813E274
@@ -2595,14 +2595,14 @@ sub_813E274: @ 813E274
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _0813E288 @ =gUnknown_841632A
+	ldr r2, _0813E288 @ =gText_ThereIsNoPokemon
 	ldr r3, _0813E28C @ =sub_813E290
 	movs r1, 0x2
-	bl sub_813EB20
+	bl DisplayItemMessageInBerryPouch
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0813E288: .4byte gUnknown_841632A
+_0813E288: .4byte gText_ThereIsNoPokemon
 _0813E28C: .4byte sub_813E290
 	thumb_func_end sub_813E274
 
@@ -2646,11 +2646,11 @@ sub_813E2B8: @ 813E2B8
 	ldr r4, _0813E318 @ =gUnknown_203F37A
 	subs r2, r4, 0x2
 	adds r1, r4, 0
-	bl sub_810713C
+	bl DestroyListMenu
 	bl sub_813D8AC
 	bl sub_813D6F4
 	bl sub_813D204
-	ldr r0, _0813E31C @ =gUnknown_3005E70
+	ldr r0, _0813E31C @ =gMultiuseListMenuTemplate
 	subs r4, 0xA
 	ldrh r1, [r4, 0xA]
 	ldrh r2, [r4, 0x8]
@@ -2671,7 +2671,7 @@ sub_813E2B8: @ 813E2B8
 	.align 2, 0
 _0813E314: .4byte gTasks+0x8
 _0813E318: .4byte gUnknown_203F37A
-_0813E31C: .4byte gUnknown_3005E70
+_0813E31C: .4byte gMultiuseListMenuTemplate
 	thumb_func_end sub_813E2B8
 
 	thumb_func_start sub_813E320
@@ -2726,7 +2726,7 @@ sub_813E37C: @ 813E37C
 	adds r0, r6, r7
 	ldrh r1, [r0, 0x2]
 	movs r0, 0x5
-	bl sub_809A798
+	bl BagGetItemIdByPocketPosition
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r4, 0
@@ -2736,7 +2736,7 @@ sub_813E37C: @ 813E37C
 	bne _0813E3D8
 	ldr r1, _0813E3C8 @ =gStringVar1
 	adds r0, r4, 0
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r4, _0813E3CC @ =gStringVar4
 	ldr r1, _0813E3D0 @ =gUnknown_8416374
 	adds r0, r4, 0
@@ -2745,7 +2745,7 @@ sub_813E37C: @ 813E37C
 	adds r0, r5, 0
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl sub_813EB20
+	bl DisplayItemMessageInBerryPouch
 	b _0813E3EA
 	.align 2, 0
 _0813E3C4: .4byte gTasks+0x8
@@ -2761,7 +2761,7 @@ _0813E3D8:
 	adds r0, r7, 0
 	subs r0, 0x8
 	adds r0, r6, r0
-	ldr r1, _0813E3F8 @ =sub_813D808
+	ldr r1, _0813E3F8 @ =BerryPouch_StartFadeToExitCallback
 	str r1, [r0]
 _0813E3EA:
 	pop {r4-r7}
@@ -2770,7 +2770,7 @@ _0813E3EA:
 	.align 2, 0
 _0813E3F0: .4byte gUnknown_203F36C
 _0813E3F4: .4byte c2_8123744
-_0813E3F8: .4byte sub_813D808
+_0813E3F8: .4byte BerryPouch_StartFadeToExitCallback
 	thumb_func_end sub_813E37C
 
 	thumb_func_start sub_813E3FC
@@ -2786,14 +2786,14 @@ sub_813E3FC: @ 813E3FC
 	adds r1, r0
 	lsls r1, 3
 	adds r1, r2
-	ldr r0, _0813E424 @ =sub_813D808
+	ldr r0, _0813E424 @ =BerryPouch_StartFadeToExitCallback
 	str r0, [r1]
 	bx lr
 	.align 2, 0
 _0813E418: .4byte gUnknown_203F36C
 _0813E41C: .4byte sub_808CE60
 _0813E420: .4byte gTasks
-_0813E424: .4byte sub_813D808
+_0813E424: .4byte BerryPouch_StartFadeToExitCallback
 	thumb_func_end sub_813E3FC
 
 	thumb_func_start sub_813E428
@@ -2815,9 +2815,9 @@ sub_813E428: @ 813E428
 	bne _0813E488
 	ldrh r0, [r6]
 	ldr r1, _0813E478 @ =gStringVar1
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r4, _0813E47C @ =gStringVar4
-	ldr r1, _0813E480 @ =gUnknown_84168F1
+	ldr r1, _0813E480 @ =gText_OhNoICantBuyThat
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	bl sub_80BF8E4
@@ -2827,14 +2827,14 @@ sub_813E428: @ 813E428
 	ldr r3, _0813E484 @ =sub_813E2B8
 	adds r0, r5, 0
 	adds r2, r4, 0
-	bl sub_813EB20
+	bl DisplayItemMessageInBerryPouch
 	b _0813E4CE
 	.align 2, 0
 _0813E470: .4byte gTasks+0x8
 _0813E474: .4byte gSpecialVar_ItemId
 _0813E478: .4byte gStringVar1
 _0813E47C: .4byte gStringVar4
-_0813E480: .4byte gUnknown_84168F1
+_0813E480: .4byte gText_OhNoICantBuyThat
 _0813E484: .4byte sub_813E2B8
 _0813E488:
 	movs r0, 0x1
@@ -2855,9 +2855,9 @@ _0813E4A0:
 _0813E4A8:
 	ldrh r0, [r6]
 	ldr r1, _0813E4D4 @ =gStringVar1
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r4, _0813E4D8 @ =gStringVar4
-	ldr r1, _0813E4DC @ =gUnknown_8416911
+	ldr r1, _0813E4DC @ =gText_HowManyWouldYouLikeToSell
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	bl sub_80BF8E4
@@ -2867,7 +2867,7 @@ _0813E4A8:
 	ldr r3, _0813E4E0 @ =sub_813E5B8
 	adds r0, r7, 0
 	adds r2, r4, 0
-	bl sub_813EB20
+	bl DisplayItemMessageInBerryPouch
 _0813E4CE:
 	pop {r4-r7}
 	pop {r0}
@@ -2875,7 +2875,7 @@ _0813E4CE:
 	.align 2, 0
 _0813E4D4: .4byte gStringVar1
 _0813E4D8: .4byte gStringVar4
-_0813E4DC: .4byte gUnknown_8416911
+_0813E4DC: .4byte gText_HowManyWouldYouLikeToSell
 _0813E4E0: .4byte sub_813E5B8
 	thumb_func_end sub_813E428
 
@@ -2893,7 +2893,7 @@ sub_813E4E4: @ 813E4E4
 	ldr r6, _0813E544 @ =gStringVar3
 	ldrh r1, [r4, 0x2]
 	movs r0, 0x5
-	bl sub_809A798
+	bl BagGetItemIdByPocketPosition
 	lsls r0, 16
 	lsrs r0, 16
 	bl itemid_get_market_price
@@ -2907,7 +2907,7 @@ sub_813E4E4: @ 813E4E4
 	movs r3, 0x6
 	bl ConvertIntToDecimalStringN
 	ldr r4, _0813E548 @ =gStringVar4
-	ldr r1, _0813E54C @ =gUnknown_8416936
+	ldr r1, _0813E54C @ =gText_ICanPayThisMuch_WouldThatBeOkay
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	bl sub_80BF8E4
@@ -2917,7 +2917,7 @@ sub_813E4E4: @ 813E4E4
 	ldr r3, _0813E550 @ =sub_813E554
 	adds r0, r5, 0
 	adds r2, r4, 0
-	bl sub_813EB20
+	bl DisplayItemMessageInBerryPouch
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -2925,7 +2925,7 @@ sub_813E4E4: @ 813E4E4
 _0813E540: .4byte gTasks+0x8
 _0813E544: .4byte gStringVar3
 _0813E548: .4byte gStringVar4
-_0813E54C: .4byte gUnknown_8416936
+_0813E54C: .4byte gText_ICanPayThisMuch_WouldThatBeOkay
 _0813E550: .4byte sub_813E554
 	thumb_func_end sub_813E4E4
 
@@ -3004,7 +3004,7 @@ sub_813E5B8: @ 813E5B8
 	bl ConvertIntToDecimalStringN
 	ldr r2, _0813E65C @ =gStringVar4
 	mov r8, r2
-	ldr r1, _0813E660 @ =gUnknown_84162B9
+	ldr r1, _0813E660 @ =gText_TimesStrVar1
 	mov r0, r8
 	bl StringExpandPlaceholders
 	movs r0, 0xA
@@ -3024,7 +3024,7 @@ sub_813E5B8: @ 813E5B8
 	mov r3, r9
 	ldrh r1, [r3, 0x2]
 	movs r0, 0x5
-	bl sub_809A798
+	bl BagGetItemIdByPocketPosition
 	lsls r0, 16
 	lsrs r0, 16
 	bl itemid_get_market_price
@@ -3052,7 +3052,7 @@ sub_813E5B8: @ 813E5B8
 _0813E654: .4byte gTasks+0x8
 _0813E658: .4byte gStringVar1
 _0813E65C: .4byte gStringVar4
-_0813E660: .4byte gUnknown_84162B9
+_0813E660: .4byte gText_TimesStrVar1
 _0813E664: .4byte sub_813E690
 	thumb_func_end sub_813E5B8
 
@@ -3103,7 +3103,7 @@ sub_813E690: @ 813E690
 	bl sub_813D9F8
 	ldrh r1, [r5, 0x2]
 	movs r0, 0x5
-	bl sub_809A798
+	bl BagGetItemIdByPocketPosition
 	lsls r0, 16
 	lsrs r0, 16
 	bl itemid_get_market_price
@@ -3188,11 +3188,11 @@ sub_813E768: @ 813E768
 	ldr r0, _0813E7D8 @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, _0813E7DC @ =gStringVar1
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r6, _0813E7E0 @ =gStringVar3
 	ldrh r1, [r4, 0x2]
 	movs r0, 0x5
-	bl sub_809A798
+	bl BagGetItemIdByPocketPosition
 	lsls r0, 16
 	lsrs r0, 16
 	bl itemid_get_market_price
@@ -3206,14 +3206,14 @@ sub_813E768: @ 813E768
 	movs r3, 0x6
 	bl ConvertIntToDecimalStringN
 	ldr r4, _0813E7E4 @ =gStringVar4
-	ldr r1, _0813E7E8 @ =gUnknown_8416959
+	ldr r1, _0813E7E8 @ =gText_TurnedOverItemsWorthYen
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	ldr r3, _0813E7EC @ =sub_813E7F0
 	adds r0, r5, 0
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl sub_813EB20
+	bl DisplayItemMessageInBerryPouch
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -3223,7 +3223,7 @@ _0813E7D8: .4byte gSpecialVar_ItemId
 _0813E7DC: .4byte gStringVar1
 _0813E7E0: .4byte gStringVar3
 _0813E7E4: .4byte gStringVar4
-_0813E7E8: .4byte gUnknown_8416959
+_0813E7E8: .4byte gText_TurnedOverItemsWorthYen
 _0813E7EC: .4byte sub_813E7F0
 	thumb_func_end sub_813E768
 
@@ -3250,7 +3250,7 @@ sub_813E7F0: @ 813E7F0
 	ldrh r0, [r5]
 	mov r2, r8
 	ldrh r1, [r2, 0x10]
-	bl sub_809A1D8
+	bl RemoveBagItem
 	ldr r7, _0813E8C4 @ =gSaveBlock1Ptr
 	ldr r4, [r7]
 	movs r3, 0xA4
@@ -3277,11 +3277,11 @@ sub_813E7F0: @ 813E7F0
 	ldr r4, _0813E8C8 @ =gUnknown_203F37A
 	subs r2, r4, 0x2
 	adds r1, r4, 0
-	bl sub_810713C
+	bl DestroyListMenu
 	bl sub_813D8AC
 	bl sub_813D6F4
 	bl sub_813D204
-	ldr r0, _0813E8CC @ =gUnknown_3005E70
+	ldr r0, _0813E8CC @ =gMultiuseListMenuTemplate
 	subs r4, 0xA
 	ldrh r1, [r4, 0xA]
 	ldrh r2, [r4, 0x8]
@@ -3322,7 +3322,7 @@ _0813E8BC: .4byte gTasks+0x8
 _0813E8C0: .4byte gSpecialVar_ItemId
 _0813E8C4: .4byte gSaveBlock1Ptr
 _0813E8C8: .4byte gUnknown_203F37A
-_0813E8CC: .4byte gUnknown_3005E70
+_0813E8CC: .4byte gMultiuseListMenuTemplate
 _0813E8D0: .4byte sub_813E8D4
 	thumb_func_end sub_813E7F0
 
@@ -3367,16 +3367,16 @@ sub_813E910: @ 813E910
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xE0
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	movs r0, 0
 	movs r1, 0x13
 	movs r2, 0xD0
-	bl sub_814FEAC
+	bl TextWindow_SetBubbleFrame_841F1C8
 	movs r0, 0
 	movs r1, 0xA
 	movs r2, 0xC0
-	bl sub_814FF2C
-	ldr r0, _0813E998 @ =gUnknown_841F408
+	bl TextWindow_SetStdFrame0_WithPal
+	ldr r0, _0813E998 @ =gTMCaseMainWindowPalette
 	movs r1, 0xF0
 	movs r2, 0x20
 	bl LoadPalette
@@ -3418,7 +3418,7 @@ _0813E97C:
 	bx r0
 	.align 2, 0
 _0813E994: .4byte gUnknown_84643B8
-_0813E998: .4byte gUnknown_841F408
+_0813E998: .4byte gTMCaseMainWindowPalette
 _0813E99C: .4byte gUnknown_203F38C
 	thumb_func_end sub_813E910
 
@@ -3465,7 +3465,7 @@ sub_813E9A0: @ 813E9A0
 	str r4, [sp, 0xC]
 	str r2, [sp, 0x10]
 	mov r2, r9
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	add sp, 0x14
 	pop {r3,r4}
 	mov r8, r3
@@ -3562,7 +3562,7 @@ sub_813EA98: @ 813EA98
 	adds r4, r0
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	ldrb r0, [r4]
 	bl ClearWindowTilemap
 	ldrb r0, [r4]
@@ -3589,7 +3589,7 @@ sub_813EACC: @ 813EACC
 	cmp r0, 0xFF
 	beq _0813EB04
 	movs r1, 0
-	bl sub_810F260
+	bl ClearMenuWindow_BorderThickness2
 	ldrb r0, [r4]
 	bl ClearWindowTilemap
 	ldrb r0, [r4]
@@ -3622,8 +3622,8 @@ sub_813EB10: @ 813EB10
 _0813EB1C: .4byte gUnknown_203F38C
 	thumb_func_end sub_813EB10
 
-	thumb_func_start sub_813EB20
-sub_813EB20: @ 813EB20
+	thumb_func_start DisplayItemMessageInBerryPouch
+DisplayItemMessageInBerryPouch: @ 813EB20
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -3642,7 +3642,7 @@ sub_813EB20: @ 813EB20
 	bl AddWindow
 	strb r0, [r4, 0x5]
 _0813EB44:
-	bl sub_80F78A8
+	bl GetTextSpeedSetting
 	lsls r0, 24
 	lsrs r0, 24
 	ldrb r1, [r4, 0x5]
@@ -3666,7 +3666,7 @@ _0813EB44:
 	.align 2, 0
 _0813EB74: .4byte gUnknown_203F38C
 _0813EB78: .4byte gUnknown_8464400
-	thumb_func_end sub_813EB20
+	thumb_func_end DisplayItemMessageInBerryPouch
 
 	thumb_func_start sub_813EB7C
 sub_813EB7C: @ 813EB7C
@@ -3685,7 +3685,7 @@ sub_813EB7C: @ 813EB7C
 	str r3, [sp, 0xC]
 	movs r2, 0x2
 	movs r3, 0
-	bl sub_80BF5D0
+	bl CreateYesNoMenuWithCallbacks
 	add sp, 0x10
 	pop {r0}
 	bx r0
@@ -3710,7 +3710,7 @@ sub_813EBA8: @ 813EBA8
 	str r3, [sp, 0xC]
 	movs r2, 0x2
 	movs r3, 0
-	bl sub_80BF5D0
+	bl CreateYesNoMenuWithCallbacks
 	add sp, 0x10
 	pop {r0}
 	bx r0

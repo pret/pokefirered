@@ -1604,7 +1604,7 @@ _080D7F9C:
 	ldrh r0, [r0]
 _080D7FA0:
 	mov r1, sp
-	bl sub_8099E90
+	bl CopyItemName
 	mov r4, sp
 	b _080D8382
 	.align 2, 0
@@ -2495,12 +2495,12 @@ _080D8698: .4byte gUnknown_83FD8A2
 _080D869C:
 	adds r0, r2, 0
 	adds r1, r6, 0
-	bl sub_8099E90
+	bl CopyItemName
 	b _080D86AE
 _080D86A6:
 	adds r0, r2, 0
 	adds r1, r6, 0
-	bl sub_8099E90
+	bl CopyItemName
 _080D86AE:
 	adds r5, 0x3
 _080D86B0:
@@ -2863,7 +2863,7 @@ _080D894A:
 	movs r3, 0x1
 	b _080D8960
 _080D8958:
-	bl sub_80F78A8
+	bl GetTextSpeedSetting
 	lsls r0, 24
 	lsrs r3, r0, 24
 _080D8960:

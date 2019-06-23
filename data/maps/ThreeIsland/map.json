@@ -1,0 +1,371 @@
+{
+  "id": "MAP_THREE_ISLAND",
+  "name": "ThreeIsland",
+  "layout": "LAYOUT_THREE_ISLAND",
+  "music": "BGM_FRLG_ISLAND_ONE",
+  "region_map_section": "MAPSEC_THREE_ISLAND",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_1",
+  "unknown_18": 1,
+  "unknown_19": 6,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": [
+    {
+      "map": "MAP_THREE_ISLAND_PORT",
+      "offset": 0,
+      "direction": "down"
+    },
+    {
+      "map": "MAP_THREE_ISLAND_BOND_BRIDGE",
+      "offset": 0,
+      "direction": "left"
+    }
+  ],
+  "object_events": [
+    {
+      "graphics_id": "25",
+      "x": 7,
+      "y": 24,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "ThreeIsland_EventScript_1677E5",
+      "flag": "126"
+    },
+    {
+      "graphics_id": "25",
+      "x": 8,
+      "y": 23,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "ThreeIsland_EventScript_167989",
+      "flag": "126"
+    },
+    {
+      "graphics_id": "53",
+      "x": 8,
+      "y": 24,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "ThreeIsland_EventScript_1677D8",
+      "flag": "145"
+    },
+    {
+      "graphics_id": "53",
+      "x": 9,
+      "y": 23,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "ThreeIsland_EventScript_1677D8",
+      "flag": "121"
+    },
+    {
+      "graphics_id": "53",
+      "x": 9,
+      "y": 24,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "ThreeIsland_EventScript_1677D8",
+      "flag": "121"
+    },
+    {
+      "graphics_id": "53",
+      "x": 10,
+      "y": 22,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "ThreeIsland_EventScript_1677D8",
+      "flag": "121"
+    },
+    {
+      "graphics_id": "53",
+      "x": 10,
+      "y": 24,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "ThreeIsland_EventScript_1677D8",
+      "flag": "121"
+    },
+    {
+      "graphics_id": "53",
+      "x": 11,
+      "y": 23,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "ThreeIsland_EventScript_1677D8",
+      "flag": "121"
+    },
+    {
+      "graphics_id": "95",
+      "x": 20,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "ThreeIsland_EventScript_1BDF13",
+      "flag": "18"
+    },
+    {
+      "graphics_id": "92",
+      "x": 18,
+      "y": 17,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "ThreeIsland_EventScript_1BEABC",
+      "flag": "443"
+    },
+    {
+      "graphics_id": "23",
+      "x": 15,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "5",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "ThreeIsland_EventScript_167C77",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "16",
+      "x": 14,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "ThreeIsland_EventScript_167C80",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "132",
+      "x": 15,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "ThreeIsland_EventScript_167C89",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "53",
+      "x": 15,
+      "y": 31,
+      "elevation": 3,
+      "movement_type": "5",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "ThreeIsland_EventScript_167CA5",
+      "flag": "121"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 3,
+      "y": 31,
+      "elevation": 0,
+      "dest_map": "MAP_THREE_ISLAND_HOUSE1",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 14,
+      "y": 27,
+      "elevation": 0,
+      "dest_map": "MAP_THREE_ISLAND_POKEMON_CENTER_1F",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 18,
+      "y": 12,
+      "elevation": 0,
+      "dest_map": "MAP_THREE_ISLAND_MART",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 4,
+      "y": 6,
+      "elevation": 0,
+      "dest_map": "MAP_THREE_ISLAND_HOUSE2",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 12,
+      "y": 6,
+      "elevation": 0,
+      "dest_map": "MAP_THREE_ISLAND_HOUSE3",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 12,
+      "y": 12,
+      "elevation": 0,
+      "dest_map": "MAP_THREE_ISLAND_HOUSE4",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 13,
+      "y": 19,
+      "elevation": 0,
+      "dest_map": "MAP_THREE_ISLAND_HOUSE5",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 27,
+      "elevation": 3,
+      "var": "VAR_0x407B",
+      "var_value": 2,
+      "script": "ThreeIsland_EventScript_1679B5"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 27,
+      "elevation": 3,
+      "var": "VAR_0x407B",
+      "var_value": 2,
+      "script": "ThreeIsland_EventScript_1679B5"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 27,
+      "elevation": 3,
+      "var": "VAR_0x407B",
+      "var_value": 2,
+      "script": "ThreeIsland_EventScript_1679B5"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 27,
+      "elevation": 3,
+      "var": "VAR_0x407B",
+      "var_value": 2,
+      "script": "ThreeIsland_EventScript_1679B5"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 26,
+      "elevation": 3,
+      "var": "VAR_0x407B",
+      "var_value": 3,
+      "script": "ThreeIsland_EventScript_167A1D"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 26,
+      "elevation": 3,
+      "var": "VAR_0x407B",
+      "var_value": 3,
+      "script": "ThreeIsland_EventScript_167A29"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 26,
+      "elevation": 3,
+      "var": "VAR_0x407B",
+      "var_value": 3,
+      "script": "ThreeIsland_EventScript_167A35"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 27,
+      "elevation": 3,
+      "var": "VAR_0x407B",
+      "var_value": 2,
+      "script": "ThreeIsland_EventScript_1679B5"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 26,
+      "elevation": 3,
+      "var": "VAR_0x407B",
+      "var_value": 3,
+      "script": "ThreeIsland_EventScript_167A41"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 26,
+      "elevation": 3,
+      "var": "VAR_0x407B",
+      "var_value": 3,
+      "script": "ThreeIsland_EventScript_167A4D"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "bg_event_type_0",
+      "x": 12,
+      "y": 31,
+      "elevation": 0,
+      "script": "ThreeIsland_EventScript_167C9C"
+    },
+    {
+      "type": "hidden_item",
+      "x": 5,
+      "y": 13,
+      "elevation": 3,
+      "item": "ITEM_PP_UP",
+      "flag": "164",
+      "unknown": 1
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "id": "MAP_FIVE_ISLAND_LOST_CAVE_ROOM1",
+  "name": "FiveIsland_LostCave_Room1",
+  "layout": "LAYOUT_FIVE_ISLAND_LOST_CAVE_ROOM1",
+  "music": "BGM_FRLG_MT_EMBER",
+  "region_map_section": "MAPSEC_LOST_CAVE",
+  "requires_flash": false,
+  "weather": "WEATHER_FOG_HORIZONTAL",
+  "map_type": "MAP_TYPE_4",
+  "unknown_18": 1,
+  "unknown_19": 7,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "56",
+      "x": 5,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "2",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "FiveIsland_LostCave_Room1_EventScript_164BF7",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 8,
+      "y": 2,
+      "elevation": 3,
+      "dest_map": "MAP_FIVE_ISLAND_LOST_CAVE_ENTRANCE",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 5,
+      "y": 1,
+      "elevation": 3,
+      "dest_map": "MAP_FIVE_ISLAND_LOST_CAVE_ROOM1",
+      "dest_warp_id": 3
+    },
+    {
+      "x": 8,
+      "y": 5,
+      "elevation": 3,
+      "dest_map": "MAP_FIVE_ISLAND_LOST_CAVE_ROOM2",
+      "dest_warp_id": 3
+    },
+    {
+      "x": 5,
+      "y": 8,
+      "elevation": 3,
+      "dest_map": "MAP_FIVE_ISLAND_LOST_CAVE_ROOM1",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 2,
+      "y": 5,
+      "elevation": 3,
+      "dest_map": "MAP_FIVE_ISLAND_LOST_CAVE_ROOM1",
+      "dest_warp_id": 2
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

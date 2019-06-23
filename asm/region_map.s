@@ -118,13 +118,13 @@ sub_80BFEDC: @ 80BFEDC
 	str r2, [r4]
 	cmp r2, 0
 	bne _080BFF08
-	ldr r0, _080BFF04 @ =c2_exit_to_overworld_2_switch
+	ldr r0, _080BFF04 @ =CB2_ReturnToField
 	bl SetMainCallback2
 	b _080BFF38
 	.align 2, 0
 _080BFEFC: .4byte gUnknown_20399D4
 _080BFF00: .4byte 0x000047c0
-_080BFF04: .4byte c2_exit_to_overworld_2_switch
+_080BFF04: .4byte CB2_ReturnToField
 _080BFF08:
 	ldr r1, _080BFF40 @ =gUnknown_2031DE0
 	movs r0, 0x1
@@ -172,13 +172,13 @@ sub_80BFF50: @ 80BFF50
 	str r2, [r4]
 	cmp r2, 0
 	bne _080BFF7C
-	ldr r0, _080BFF78 @ =c2_exit_to_overworld_2_switch
+	ldr r0, _080BFF78 @ =CB2_ReturnToField
 	bl SetMainCallback2
 	b _080BFFB4
 	.align 2, 0
 _080BFF70: .4byte gUnknown_20399D4
 _080BFF74: .4byte 0x000047c0
-_080BFF78: .4byte c2_exit_to_overworld_2_switch
+_080BFF78: .4byte CB2_ReturnToField
 _080BFF7C:
 	ldr r1, _080BFFBC @ =gUnknown_2031DE0
 	movs r0, 0x1
@@ -1487,7 +1487,7 @@ sub_80C0A6C: @ 80C0A6C
 	bl ResetPaletteFade
 	bl FreeAllSpritePalettes
 	bl ResetTasks
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80C0A6C
@@ -1600,7 +1600,7 @@ _080C0B44:
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0
 	bl PutWindowTilemap
 	movs r0, 0
@@ -1718,7 +1718,7 @@ sub_80C0BB0: @ 80C0BB0
 	movs r1, 0x2
 	movs r2, 0xC
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0x1
@@ -3737,7 +3737,7 @@ _080C1CA8:
 	movs r1, 0x2
 	movs r2, 0x4
 	movs r3, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	bl sub_80C3580
 	lsls r0, 16
 	lsrs r0, 16
@@ -3750,7 +3750,7 @@ _080C1CA8:
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0xE
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x2
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -6451,7 +6451,7 @@ _080C3300:
 	ldr r1, _080C3338 @ =0x000047bc
 	adds r0, r1
 	ldr r1, [r0]
-	ldr r0, _080C333C @ =c2_exit_to_overworld_2_switch
+	ldr r0, _080C333C @ =CB2_ReturnToField
 	cmp r1, r0
 	bne _080C331A
 _080C3318:
@@ -6474,7 +6474,7 @@ _080C332C:
 	.align 2, 0
 _080C3334: .4byte gUnknown_20399D4
 _080C3338: .4byte 0x000047bc
-_080C333C: .4byte c2_exit_to_overworld_2_switch
+_080C333C: .4byte CB2_ReturnToField
 _080C3340: .4byte gUnknown_20399E4
 _080C3344: .4byte sub_80C3348
 	thumb_func_end sub_80C31C0
@@ -9815,7 +9815,7 @@ _080C4E48:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x3
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -9860,7 +9860,7 @@ _080C4EA4:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x4
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -10276,12 +10276,12 @@ _080C5220:
 	ldrb r0, [r0, 0x2]
 	cmp r0, 0x1
 	bne _080C5258
-	ldr r0, _080C5254 @ =c2_exit_to_overworld_2_switch
+	ldr r0, _080C5254 @ =CB2_ReturnToField
 	bl SetMainCallback2
 	b _080C525E
 	.align 2, 0
 _080C5250: .4byte gUnknown_20399FC
-_080C5254: .4byte c2_exit_to_overworld_2_switch
+_080C5254: .4byte CB2_ReturnToField
 _080C5258:
 	ldr r0, _080C5274 @ =sub_8124AB0
 	bl SetMainCallback2

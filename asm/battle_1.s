@@ -223,11 +223,11 @@ sub_800F380: @ 800F380
 	movs r0, 0x2
 	movs r1, 0x12
 	movs r2, 0x10
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	movs r0, 0x2
 	movs r1, 0x22
 	movs r2, 0x10
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	ldr r4, _0800F3F0 @ =gPlttBufferUnfaded
 	adds r0, r4, 0
 	adds r0, 0xB8
@@ -253,11 +253,11 @@ sub_800F380: @ 800F380
 	cmp r0, 0
 	beq _0800F3EA
 	movs r0, 0x70
-	bl sub_80F77CC
+	bl Menu_LoadStdPalAt
 	movs r0, 0
 	movs r1, 0x30
 	movs r2, 0x70
-	bl sub_814FEAC
+	bl TextWindow_SetBubbleFrame_841F1C8
 	adds r0, r4, 0
 	adds r0, 0xEC
 	movs r1, 0
@@ -294,7 +294,7 @@ sub_800F40C: @ 800F40C
 	thumb_func_start LoadBattleTextboxAndBackground
 LoadBattleTextboxAndBackground: @ 800F420
 	push {lr}
-	ldr r0, _0800F454 @ =gUnknown_8D00000
+	ldr r0, _0800F454 @ =gBattleTextboxTiles
 	movs r1, 0xC0
 	lsls r1, 19
 	bl LZDecompressVram
@@ -305,7 +305,7 @@ LoadBattleTextboxAndBackground: @ 800F420
 	bl CopyToBgTilemapBuffer
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
-	ldr r0, _0800F45C @ =gUnknown_8D004D8
+	ldr r0, _0800F45C @ =gBattleTextboxPalette
 	movs r1, 0
 	movs r2, 0x40
 	bl LoadCompressedPalette
@@ -314,9 +314,9 @@ LoadBattleTextboxAndBackground: @ 800F420
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800F454: .4byte gUnknown_8D00000
+_0800F454: .4byte gBattleTextboxTiles
 _0800F458: .4byte gFile_graphics_interface_menu_map_tilemap
-_0800F45C: .4byte gUnknown_8D004D8
+_0800F45C: .4byte gBattleTextboxPalette
 	thumb_func_end LoadBattleTextboxAndBackground
 
 	thumb_func_start sub_800F460
@@ -517,7 +517,7 @@ _0800F5C8: .4byte 0x00006001
 	thumb_func_start sub_800F5CC
 sub_800F5CC: @ 800F5CC
 	push {lr}
-	ldr r0, _0800F5E0 @ =gUnknown_2023E8A
+	ldr r0, _0800F5E0 @ =gBattleOutcome
 	ldrb r2, [r0]
 	cmp r2, 0x3
 	bne _0800F5E8
@@ -526,7 +526,7 @@ sub_800F5CC: @ 800F5CC
 	bl sub_80D87BC
 	b _0800F6F0
 	.align 2, 0
-_0800F5E0: .4byte gUnknown_2023E8A
+_0800F5E0: .4byte gBattleOutcome
 _0800F5E4: .4byte gUnknown_83FE883
 _0800F5E8:
 	ldr r0, _0800F61C @ =gBattleTypeFlags
@@ -908,7 +908,7 @@ _0800F8F0:
 	ldrsh r0, [r5, r1]
 	cmp r0, 0
 	beq _0800F958
-	ldr r4, _0800F944 @ =gUnknown_2022978
+	ldr r4, _0800F944 @ =gBattle_BG1_X
 	ldrh r0, [r5, 0xA]
 	bl Sin2
 	lsls r0, 16
@@ -923,7 +923,7 @@ _0800F90A:
 	adds r0, r2, 0
 	subs r0, r1
 	strh r0, [r4]
-	ldr r4, _0800F948 @ =gUnknown_202297C
+	ldr r4, _0800F948 @ =gBattle_BG2_X
 	ldrh r0, [r5, 0xC]
 	bl Sin2
 	lsls r0, 16
@@ -938,21 +938,21 @@ _0800F928:
 	adds r0, r3, 0
 	subs r0, r1
 	strh r0, [r4]
-	ldr r0, _0800F94C @ =gUnknown_202297A
+	ldr r0, _0800F94C @ =gBattle_BG1_Y
 	ldr r2, _0800F950 @ =0x0000ffdc
 	adds r1, r2, 0
 	strh r1, [r0]
-	ldr r0, _0800F954 @ =gUnknown_202297E
+	ldr r0, _0800F954 @ =gBattle_BG2_Y
 	strh r1, [r0]
 	b _0800F9C4
 	.align 2, 0
-_0800F944: .4byte gUnknown_2022978
-_0800F948: .4byte gUnknown_202297C
-_0800F94C: .4byte gUnknown_202297A
+_0800F944: .4byte gBattle_BG1_X
+_0800F948: .4byte gBattle_BG2_X
+_0800F94C: .4byte gBattle_BG1_Y
 _0800F950: .4byte 0x0000ffdc
-_0800F954: .4byte gUnknown_202297E
+_0800F954: .4byte gBattle_BG2_Y
 _0800F958:
-	ldr r4, _0800F9E8 @ =gUnknown_2022978
+	ldr r4, _0800F9E8 @ =gBattle_BG1_X
 	ldrh r0, [r5, 0xA]
 	bl Sin2
 	lsls r0, 16
@@ -967,7 +967,7 @@ _0800F96A:
 	adds r0, r3, 0
 	subs r0, r1
 	strh r0, [r4]
-	ldr r4, _0800F9EC @ =gUnknown_202297A
+	ldr r4, _0800F9EC @ =gBattle_BG1_Y
 	ldrh r0, [r5, 0xA]
 	bl Cos2
 	lsls r0, 16
@@ -979,7 +979,7 @@ _0800F988:
 	asrs r0, 5
 	subs r0, 0xA4
 	strh r0, [r4]
-	ldr r4, _0800F9F0 @ =gUnknown_202297C
+	ldr r4, _0800F9F0 @ =gBattle_BG2_X
 	ldrh r0, [r5, 0xC]
 	bl Sin2
 	lsls r0, 16
@@ -994,7 +994,7 @@ _0800F9A0:
 	adds r0, r2, 0
 	subs r0, r1
 	strh r0, [r4]
-	ldr r4, _0800F9F4 @ =gUnknown_202297E
+	ldr r4, _0800F9F4 @ =gBattle_BG2_Y
 	ldrh r0, [r5, 0xC]
 	bl Cos2
 	lsls r0, 16
@@ -1025,10 +1025,10 @@ _0800F9C4:
 	strh r0, [r1, 0xA]
 	b _0800FAC4
 	.align 2, 0
-_0800F9E8: .4byte gUnknown_2022978
-_0800F9EC: .4byte gUnknown_202297A
-_0800F9F0: .4byte gUnknown_202297C
-_0800F9F4: .4byte gUnknown_202297E
+_0800F9E8: .4byte gBattle_BG1_X
+_0800F9EC: .4byte gBattle_BG1_Y
+_0800F9F0: .4byte gBattle_BG2_X
+_0800F9F4: .4byte gBattle_BG2_Y
 _0800F9F8: .4byte gTasks
 _0800F9FC:
 	movs r3, 0x12
@@ -1190,11 +1190,11 @@ sub_800FAE0: @ 800FAE0
 	movs r0, 0x4A
 	movs r1, 0x36
 	bl SetGpuReg
-	ldr r0, _0800FB84 @ =gUnknown_202297A
+	ldr r0, _0800FB84 @ =gBattle_BG1_Y
 	ldr r2, _0800FB88 @ =0x0000ff5c
 	adds r1, r2, 0
 	strh r1, [r0]
-	ldr r0, _0800FB8C @ =gUnknown_202297E
+	ldr r0, _0800FB8C @ =gBattle_BG2_Y
 	strh r1, [r0]
 	ldr r0, _0800FB90 @ =gUnknown_8248318
 	bl sub_800F034
@@ -1208,9 +1208,9 @@ _0800FB74: .4byte 0x06010000
 _0800FB78: .4byte gFile_graphics_battle_transitions_vs_frame_palette
 _0800FB7C: .4byte 0x00005c04
 _0800FB80: .4byte gFile_graphics_battle_transitions_vs_frame_tilemap
-_0800FB84: .4byte gUnknown_202297A
+_0800FB84: .4byte gBattle_BG1_Y
 _0800FB88: .4byte 0x0000ff5c
-_0800FB8C: .4byte gUnknown_202297E
+_0800FB8C: .4byte gBattle_BG2_Y
 _0800FB90: .4byte gUnknown_8248318
 _0800FB94:
 	movs r0, 0x80
@@ -1385,13 +1385,13 @@ _0800FCD0:
 	.4byte _0800FD68
 	.4byte _0800FD8C
 _0800FCEC:
-	ldr r0, _0800FCF8 @ =gUnknown_8D00000
+	ldr r0, _0800FCF8 @ =gBattleTextboxTiles
 	movs r1, 0xC0
 	lsls r1, 19
 	bl LZDecompressVram
 	b _0800FD94
 	.align 2, 0
-_0800FCF8: .4byte gUnknown_8D00000
+_0800FCF8: .4byte gBattleTextboxTiles
 _0800FCFC:
 	ldr r1, _0800FD10 @ =gFile_graphics_interface_menu_map_tilemap
 	movs r0, 0
@@ -1404,13 +1404,13 @@ _0800FCFC:
 	.align 2, 0
 _0800FD10: .4byte gFile_graphics_interface_menu_map_tilemap
 _0800FD14:
-	ldr r0, _0800FD20 @ =gUnknown_8D004D8
+	ldr r0, _0800FD20 @ =gBattleTextboxPalette
 	movs r1, 0
 	movs r2, 0x40
 	bl LoadCompressedPalette
 	b _0800FD94
 	.align 2, 0
-_0800FD20: .4byte gUnknown_8D004D8
+_0800FD20: .4byte gBattleTextboxPalette
 _0800FD24:
 	bl sub_800FC2C
 	lsls r0, 24

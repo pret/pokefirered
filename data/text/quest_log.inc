@@ -55,7 +55,7 @@ gUnknown_841A349:: @ 841A349
 
 gUnknown_841A391:: @ 841A391
 	.string "Removed the item {STR_VAR_1} from\n"
-	.string "the BAG’s ITEMS POCKET and stored it\n"
+	.string "the BAG's ITEMS POCKET and stored it\n"
 	.string "on the PC.$"
 
 gUnknown_841A3DA:: @ 841A3DA
@@ -64,7 +64,7 @@ gUnknown_841A3DA:: @ 841A3DA
 
 gUnknown_841A3FF:: @ 841A3FF
 	.string "Traded {STR_VAR_3} in exchange for\n"
-	.string "{STR_VAR_1}’s {STR_VAR_2}.$"
+	.string "{STR_VAR_1}'s {STR_VAR_2}.$"
 
 gUnknown_841A422:: @ 841A422
 	.string "Took on {UNKNOWN_F7 0x00} in a SINGLE BATTLE.\n"
@@ -134,7 +134,7 @@ gUnknown_841A694:: @ 841A694
 
 gUnknown_841A6A5:: @ 841A6A5
 	.string "Removed the item {STR_VAR_1} from\n"
-	.string "{PLAYER}’s PC and gave it to {STR_VAR_2}\n"
+	.string "{PLAYER}'s PC and gave it to {STR_VAR_2}\n"
 	.string "to hold.$"
 
 gUnknown_841A6E1:: @ 841A6E1
@@ -156,7 +156,7 @@ gUnknown_841A762::
 
 gUnknown_841A76A:: @ 841A76A
 	.string "Met and traded with {STR_VAR_1}.\n"
-	.string "Obtained the TRAINER’s {STR_VAR_2} in\n"
+	.string "Obtained the TRAINER's {STR_VAR_2} in\n"
 	.string "exchange for {STR_VAR_3}.$"
 
 gUnknown_841A7B0:: @ 841A7B0
@@ -295,11 +295,11 @@ gUnknown_841AD3C:: @ 841AD3C
 
 gUnknown_841AD69:: @ 841AD69
 	.string "{STR_VAR_1} used TELEPORT, transporting\n"
-	.string "the party to {STR_VAR_2}’s\n"
+	.string "the party to {STR_VAR_2}'s\n"
 	.string "{STR_VAR_3}.$"
 
 gUnknown_841AD9E:: @ 841AD9E
-	.string "{PLAYER} left {STR_VAR_1}’s\n"
+	.string "{PLAYER} left {STR_VAR_1}'s\n"
 	.string "{STR_VAR_2} for the next\n"
 	.string "destination.$"
 
@@ -311,7 +311,7 @@ gUnknown_841ADFF:: @ 841ADFF
 	.string "{PLAYER} rested comfortably at home.$"
 
 gUnknown_841AE1E:: @ 841AE1E
-	.string "{PLAYER} left PROF. OAK’s POKéMON\n"
+	.string "{PLAYER} left PROF. OAK's POKéMON\n"
 	.string "RESEARCH LAB.$"
 
 gUnknown_841AE48:: @ 841AE48
@@ -332,17 +332,17 @@ gUnknown_841AEDC:: @ 841AEDC
 
 gUnknown_841AF0C:: @ 841AF0C
 	.string "Took on {UNKNOWN_F7 0x00} GYM LEADER\n"
-	.string "{UNKNOWN_F7 0x01}’s {UNKNOWN_F7 0x02} with {UNKNOWN_F7 0x03}\n"
+	.string "{UNKNOWN_F7 0x01}'s {UNKNOWN_F7 0x02} with {UNKNOWN_F7 0x03}\n"
 	.string "and won {UNKNOWN_F7 0x04}!$"
 
 gUnknown_841AF3E:: @ 841AF3E
-	.string "Took on ELITE FOUR {UNKNOWN_F7 0x00}’s\n"
+	.string "Took on ELITE FOUR {UNKNOWN_F7 0x00}'s\n"
 	.string "{UNKNOWN_F7 0x01} with {UNKNOWN_F7 0x02} and\n"
 	.string "won {UNKNOWN_F7 0x03}!$"
 
 gUnknown_841AF6D:: @ 841AF6D
 	.string "In {UNKNOWN_F7 0x00}, took on\n"
-	.string "{UNKNOWN_F7 0x01}’s {UNKNOWN_F7 0x02} with {UNKNOWN_F7 0x03}\n"
+	.string "{UNKNOWN_F7 0x01}'s {UNKNOWN_F7 0x02} with {UNKNOWN_F7 0x03}\n"
 	.string "and won {UNKNOWN_F7 0x04}!$"
 
 gUnknown_841AF98:: @ 841AF98
@@ -403,7 +403,7 @@ gUnknown_841B0FF:: @ 841B0FF
 	.string "BIKE SHOP$"
 
 gUnknown_841B109:: @ 841B109
-	.string "BILL’S HOUSE$"
+	.string "BILL'S HOUSE$"
 
 gUnknown_841B116:: @ 841B116
 	.string "DAY CARE$"
@@ -418,7 +418,7 @@ gUnknown_841B141:: @ 841B141
 	.string "S.S. ANNE$"
 
 gUnknown_841B14B:: @ 841B14B
-	.string "DIGLETT’S CAVE$"
+	.string "DIGLETT'S CAVE$"
 
 gUnknown_841B15A:: @ 841B15A
 	.string "ROCK TUNNEL$"
@@ -433,7 +433,7 @@ gUnknown_841B180:: @ 841B180
 	.string "VOLUNTEER HOUSE$"
 
 gUnknown_841B190:: @ 841B190
-	.string "NAME RATER’S HOUSE$"
+	.string "NAME RATER'S HOUSE$"
 
 gUnknown_841B1A3:: @ 841B1A3
 	.string "CELADON DEPT. STORE$"
@@ -454,7 +454,7 @@ gUnknown_841B1F4:: @ 841B1F4
 	.string "SAFARI ZONE$"
 
 gUnknown_841B200:: @ 841B200
-	.string "WARDEN’S HOME$"
+	.string "WARDEN'S HOME$"
 
 gUnknown_841B20E:: @ 841B20E
 	.string "FIGHTING DOJO$"

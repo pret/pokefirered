@@ -60,8 +60,7 @@ gUnknown_3000E6B: @ 3000E6B
 gUnknown_3000E6C: @ 3000E6C
 	.space 0x8
 
-gUnknown_3000E74: @ 3000E74
-	.space 0x4
+	.include "src/daycare.o"
 
 gUnknown_3000E78: @ 3000E78
 	.space 0x4
@@ -111,22 +110,22 @@ gUnknown_3000FA9: @ 3000FA9
 gUnknown_3000FAC: @ 3000FAC
 	.space 0x2
 
-gUnknown_3000FAE: @ 3000FAE
+sPrimaryTilesetCBCounter: @ 3000FAE
 	.space 0x2
 
-gUnknown_3000FB0: @ 3000FB0
+sPrimaryTilesetCBBufferSize: @ 3000FB0
 	.space 0x2
 
-gUnknown_3000FB2: @ 3000FB2
+sSecondaryTilesetCBCounter: @ 3000FB2
 	.space 0x2
 
-gUnknown_3000FB4: @ 3000FB4
+sSecondaryTilesetCBBufferSize: @ 3000FB4
 	.space 0x4
 
-gUnknown_3000FB8: @ 3000FB8
+sPrimaryTilesetCB: @ 3000FB8
 	.space 0x4
 
-gUnknown_3000FBC: @ 3000FBC
+sSecondaryTilesetCB: @ 3000FBC
 	.space 0x4
 
 	.include "src/sound.o"
@@ -198,48 +197,13 @@ gUnknown_3002040: @ 3002040
 gUnknown_3002044: @ 3002044
 	.space 0x4
 
-gUnknown_3002048: @ 3002048
-	.space 0x18
+	.align 3
+	.include "src/ereader_helpers.o"
 
-gUnknown_3002060: @ 3002060
-	.space 0x2
+	.align 3
+	.include "src/unk_815C980.o"
 
-gUnknown_3002062: @ 3002062
-	.space 0x2
-
-gUnknown_3002064: @ 3002064
-	.space 0x2
-
-gUnknown_3002066: @ 3002066
-	.space 0x2
-
-gUnknown_3002068: @ 3002068
-	.space 0x4
-
-gUnknown_300206C: @ 300206C
-	.space 0x2
-
-gUnknown_300206E: @ 300206E
-	.space 0x2
-
-gUnknown_3002070: @ 3002070
-	.space 0x2
-
-gUnknown_3002072: @ 3002072
-	.space 0x2
-
-gUnknown_3002074: @ 3002074
-	.space 0x4
-
-gUnknown_3002078: @ 3002078
-	.space 0x4
-
-gUnknown_300207C: @ 300207C
-	.space 0x4
-
-gUnknown_3002080: @ 3002080
-	.space 0x8
-
+	.align 3
 	.include "asm/m4a_1.o"
 	.include "src/agb_flash.o"
 

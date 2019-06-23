@@ -30,7 +30,7 @@ gUnknown_3003EBC: @ 3003EBC
 gUnknown_3003EC4: @ 3003EC4
 	.space 0xC
 
-gUnknown_3003ED0: @ 3003ED0
+gRecvCmds: @ 3003ED0
 	.space 0x2
 
 gUnknown_3003ED2: @ 3003ED2
@@ -96,7 +96,7 @@ gUnknown_3003FA0: @ 3003FA0
 gUnknown_3003FB0: @ 3003FB0
 	.space 0x4
 
-gUnknown_3003FB4: @ 3003FB4
+gSioMlt_Recv: @ 3003FB4
 	.space 0xFBC
 
 gUnknown_3004F70: @ 3004F70
@@ -145,10 +145,10 @@ gUnknown_3005018: @ 3005018
 gUnknown_300501C: @ 300501C
 	.space 0x4
 
-gUnknown_3005020: @ 3005020
+gFieldCallback: @ 3005020
 	.space 0x4
 
-gUnknown_3005024: @ 3005024
+gFieldCallback2: @ 3005024
 	.space 0x4
 
 gUnknown_3005028: @ 3005028
@@ -160,9 +160,9 @@ gUnknown_300502C: @ 300502C
 gUnknown_3005030: @ 3005030
 	.space 0x10
 
-gUnknown_3005040: @ 3005040
-	.space 0x10
+	.include "fieldmap.o"
 
+	.align 4
 gUnknown_3005050: @ 3005050
 	.space 0x18
 
@@ -175,7 +175,7 @@ gUnknown_300506C: @ 300506C
 gUnknown_3005070: @ 3005070
 	.space 0x4
 
-gUnknown_3005074: @ 3005074
+gSelectedEventObject: @ 3005074
 	.space 0x4
 
 gUnknown_3005078: @ 3005078
@@ -301,7 +301,7 @@ gUnknown_3005E20: @ 3005E20
 gUnknown_3005E60: @ 3005E60
 	.space 0x10
 
-gUnknown_3005E70: @ 3005E70
+gMultiuseListMenuTemplate: @ 3005E70
 	.space 0x18
 
 	.include "quest_log.o"
@@ -318,12 +318,8 @@ gUnknown_3005E94: @ 3005E94
 gUnknown_3005E98: @ 3005E98
 	.space 0x4
 
-gUnknown_3005E9C: @ 3005E9C
-	.space 0x4
-
-gUnknown_3005EA0: @ 3005EA0
-	.space 0x10
-
+	.include "help_system_812B1E0.o"
+	.align 4
 	.include "fame_checker.o"
 
 gUnknown_3005ECC: @ 3005ECC
@@ -333,21 +329,12 @@ gUnknown_3005ECC: @ 3005ECC
 
 	.align 4
 gUnknown_3005EE0: @ 3005EE0
+@ const u8 *gUnknown_3005EE0[4]
 	.space 0x10
 
-gUnknown_3005EF0: @ 3005EF0
-	.space 0x4
-
-gUnknown_3005EF4: @ 3005EF4
-	.space 0x4
-
-gUnknown_3005EF8: @ 3005EF8
-	.space 0x8
-
-gUnknown_3005F00: @ 3005F00
-	.space 0x50
-
-	.include "m4a_2.o"
+	.align 4
+	.include "berry_fix_program.o"
+	.include "m4a.o"
 	.include "agb_flash.o"
 
 gRfuState: @ 3007438

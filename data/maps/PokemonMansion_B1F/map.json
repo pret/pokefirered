@@ -1,0 +1,137 @@
+{
+  "id": "MAP_POKEMON_MANSION_B1F",
+  "name": "PokemonMansion_B1F",
+  "layout": "LAYOUT_POKEMON_MANSION_B1F",
+  "music": "BGM_FRLG_POKEMON_MANSION",
+  "region_map_section": "MAPSEC_POKEMON_MANSION",
+  "requires_flash": false,
+  "weather": "WEATHER_CLOUDY",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 0,
+  "unknown_19": 7,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_3",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "92",
+      "x": 6,
+      "y": 21,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PokemonMansion_B1F_EventScript_1BE9B8",
+      "flag": "423"
+    },
+    {
+      "graphics_id": "52",
+      "x": 20,
+      "y": 25,
+      "elevation": 3,
+      "movement_type": "2",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "PokemonMansion_B1F_EventScript_162329",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "55",
+      "x": 34,
+      "y": 13,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 6,
+      "script": "PokemonMansion_B1F_EventScript_162340",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "92",
+      "x": 23,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PokemonMansion_B1F_EventScript_1BE99E",
+      "flag": "420"
+    },
+    {
+      "graphics_id": "92",
+      "x": 2,
+      "y": 29,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PokemonMansion_B1F_EventScript_1BE9AB",
+      "flag": "421"
+    },
+    {
+      "graphics_id": "92",
+      "x": 5,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PokemonMansion_B1F_EventScript_1BE9C5",
+      "flag": "424"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 34,
+      "y": 29,
+      "elevation": 3,
+      "dest_map": "MAP_POKEMON_MANSION_1F",
+      "dest_warp_id": 4
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "bg_event_type_0",
+      "x": 21,
+      "y": 27,
+      "elevation": 0,
+      "script": "PokemonMansion_B1F_EventScript_162320"
+    },
+    {
+      "type": "bg_event_type_1",
+      "x": 24,
+      "y": 29,
+      "elevation": 0,
+      "script": "PokemonMansion_B1F_EventScript_16230C"
+    },
+    {
+      "type": "bg_event_type_1",
+      "x": 27,
+      "y": 5,
+      "elevation": 0,
+      "script": "PokemonMansion_B1F_EventScript_16230C"
+    },
+    {
+      "type": "hidden_item",
+      "x": 35,
+      "y": 5,
+      "elevation": 3,
+      "item": "ITEM_ELIXIR",
+      "flag": "33",
+      "unknown": 1
+    }
+  ]
+}

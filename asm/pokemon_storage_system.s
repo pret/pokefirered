@@ -807,7 +807,7 @@ _0808BF3C:
 	str r1, [sp, 0x10]
 	movs r1, 0x1
 	movs r3, 0x2
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	ldr r0, [sp, 0x50]
 	mov r10, r4
 	cmp r0, 0x6
@@ -960,7 +960,7 @@ sub_808BFE0: @ 808BFE0
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0x2
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	lsrs r5, 1
 	adds r0, r7, 0
 	ldr r1, [sp, 0x24]
@@ -1412,7 +1412,7 @@ _0808C3CC:
 	.4byte _0808C680
 _0808C3E0:
 	movs r0, 0x1C
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	ldrb r0, [r5, 0xA]
 	adds r1, r5, 0
 	adds r1, 0x26
@@ -1420,7 +1420,7 @@ _0808C3E0:
 	bl sub_80F6E9C
 	movs r0, 0
 	movs r1, 0
-	bl sub_80F6EE4
+	bl DrawDialogueFrame
 	movs r0, 0
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -1442,7 +1442,7 @@ _0808C3E0:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0xFF
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -1549,7 +1549,7 @@ _0808C4CE:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 	b _0808C69C
 	.align 2, 0
 _0808C504: .4byte gMain
@@ -1557,12 +1557,12 @@ _0808C508: .4byte gUnknown_83CDA20
 _0808C50C:
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_80F6F9C
+	bl ClearStdWindowAndFrame
 	ldrh r0, [r5, 0x26]
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
-	bl sub_80F6F9C
+	bl ClearStdWindowAndFrame
 	bl ScriptContext2_Disable
 	bl EnableBothScriptContexts
 	adds r0, r4, 0
@@ -1725,7 +1725,7 @@ _0808C66E:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 	strh r4, [r5, 0x8]
 	b _0808C69C
 	.align 2, 0
@@ -1737,7 +1737,7 @@ _0808C680:
 	ands r0, r1
 	cmp r0, 0
 	bne _0808C69C
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	ldrb r0, [r5, 0xC]
 	bl sub_808CDE4
 	adds r0, r4, 0
@@ -1833,7 +1833,7 @@ sub_808C72C: @ 808C72C
 	lsrs r4, 24
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80F6F1C
+	bl DrawStdWindowFrame
 	movs r0, 0x2
 	movs r1, 0
 	bl GetMenuCursorDimensionByFont
@@ -1861,7 +1861,7 @@ sub_808C72C: @ 808C72C
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	mov r0, r10
 	strh r5, [r0]
 	add sp, 0xC
@@ -1883,18 +1883,18 @@ sub_808C7B4: @ 808C7B4
 	bl sub_808FDF0
 	ldr r1, _0808C7D0 @ =gUnknown_20397A8
 	strb r0, [r1]
-	ldr r1, _0808C7D4 @ =gUnknown_3005020
+	ldr r1, _0808C7D4 @ =gFieldCallback
 	ldr r0, _0808C7D8 @ =mapldr_0808C6D8
 	str r0, [r1]
-	ldr r0, _0808C7DC @ =c2_exit_to_overworld_2_switch
+	ldr r0, _0808C7DC @ =CB2_ReturnToField
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0808C7D0: .4byte gUnknown_20397A8
-_0808C7D4: .4byte gUnknown_3005020
+_0808C7D4: .4byte gFieldCallback
 _0808C7D8: .4byte mapldr_0808C6D8
-_0808C7DC: .4byte c2_exit_to_overworld_2_switch
+_0808C7DC: .4byte CB2_ReturnToField
 	thumb_func_end sub_808C7B4
 
 	thumb_func_start sub_808C7E0
@@ -2716,7 +2716,7 @@ _0808CE18:
 	ldr r1, [r4]
 	strb r0, [r1, 0x4]
 	movs r0, 0x1C
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	bl StorageGetCurrentBox
 	ldr r1, _0808CE58 @ =gUnknown_20397B8
 	strb r0, [r1]
@@ -2767,7 +2767,7 @@ _0808CE8C:
 	ldr r1, [r4]
 	strb r0, [r1, 0x4]
 	movs r0, 0x1C
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	ldr r0, _0808CEC4 @ =c2_Box
 	bl SetMainCallback2
 _0808CEB6:
@@ -3035,7 +3035,7 @@ _0808D0D6:
 	movs r0, 0x1
 	movs r1, 0xB
 	movs r2, 0xE0
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	b _0808D20C
 	.align 2, 0
 _0808D100: .4byte 0x05000080
@@ -4700,7 +4700,7 @@ _0808DF24:
 	adds r0, 0x1
 	strb r0, [r1]
 _0808DF3A:
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -5151,7 +5151,7 @@ _0808E2E8:
 	adds r0, r1
 	ldrh r0, [r0]
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808E314
@@ -5479,7 +5479,7 @@ _0808E59C:
 	.align 2, 0
 _0808E5B8: .4byte gUnknown_20397B0
 _0808E5BC:
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -5504,7 +5504,7 @@ _0808E5E0:
 	adds r0, r1
 	ldrh r0, [r0]
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -6284,7 +6284,7 @@ _0808EC40:
 	.align 2, 0
 _0808EC50: .4byte gMain
 _0808EC54:
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -6426,7 +6426,7 @@ _0808ED74:
 	.align 2, 0
 _0808ED84: .4byte gMain
 _0808ED88:
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -6643,7 +6643,7 @@ _0808EF56:
 	mov r0, sp
 	ldrh r0, [r0]
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 _0808EF60:
 	add sp, 0x4
 	pop {r0}
@@ -6681,7 +6681,7 @@ sub_808EF8C: @ 808EF8C
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
-	bl sub_80F696C
+	bl DecompressAndLoadBgGfxUsingHeap
 	ldr r0, _0808EFC0 @ =gUnknown_83CE4D0
 	ldr r1, _0808EFC4 @ =0x0600f800
 	bl LZ77UnCompVram
@@ -6724,7 +6724,7 @@ sub_808EFE4: @ 808EFE4
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl sub_80F696C
+	bl DecompressAndLoadBgGfxUsingHeap
 	ldr r0, _0808F038 @ =gUnknown_83CE5FC
 	ldr r5, _0808F03C @ =gUnknown_20397B0
 	ldr r1, [r5]
@@ -7229,7 +7229,7 @@ sub_808F3F8: @ 808F3F8
 	cmp r2, 0
 	beq _0808F48C
 	lsls r0, r2, 3
-	ldr r1, _0808F470 @ =gUnknown_82350AC
+	ldr r1, _0808F470 @ =gMonFrontPicTable
 	adds r0, r1
 	ldr r5, _0808F474 @ =0x000022bc
 	adds r1, r4, r5
@@ -7270,7 +7270,7 @@ sub_808F3F8: @ 808F3F8
 	.align 2, 0
 _0808F468: .4byte gUnknown_20397B0
 _0808F46C: .4byte 0x00002238
-_0808F470: .4byte gUnknown_82350AC
+_0808F470: .4byte gMonFrontPicTable
 _0808F474: .4byte 0x000022bc
 _0808F478: .4byte 0x00000cd8
 _0808F47C: .4byte 0x0000223c
@@ -8165,7 +8165,7 @@ sub_808FB68: @ 808FB68
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r2, 0xD0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	movs r0, 0x20
 	str r0, [sp]
 	movs r0, 0x14
@@ -8311,7 +8311,7 @@ _0808FC7C:
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r2, 0xD
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0x1
@@ -8345,7 +8345,7 @@ sub_808FCE8: @ 808FCE8
 	str r1, [sp, 0x8]
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810FF60
+	bl CreateYesNoMenu
 	lsls r4, 24
 	asrs r4, 24
 	adds r0, r4, 0
@@ -8363,7 +8363,7 @@ sub_808FD20: @ 808FD20
 	push {lr}
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	pop {r0}
@@ -10686,7 +10686,7 @@ _08090EC6:
 	ldr r0, [r4]
 	ldr r0, [r0]
 	mov r8, r0
-	ldr r5, _08090FB8 @ =gUnknown_825E074
+	ldr r5, _08090FB8 @ =gSineTable
 	mov r0, r9
 	adds r1, r3, r0
 	ldrb r0, [r1]
@@ -10803,7 +10803,7 @@ _08090FA0:
 _08090FAC: .4byte 0x00000c59
 _08090FB0: .4byte 0x00000afc
 _08090FB4: .4byte 0x00000a68
-_08090FB8: .4byte gUnknown_825E074
+_08090FB8: .4byte gSineTable
 _08090FBC: .4byte sub_80911B0
 _08090FC0: .4byte SpriteCallbackDummy
 	thumb_func_end sub_8090E74
@@ -12046,7 +12046,7 @@ _08091938:
 	str r0, [sp]
 	movs r0, 0x2
 	movs r2, 0
-	bl sub_80F696C
+	bl DecompressAndLoadBgGfxUsingHeap
 	movs r0, 0x2
 	bl CopyBgTilemapBufferToVram
 	add sp, 0x4
@@ -16876,7 +16876,7 @@ _08093EF2:
 	beq _08093F78
 	ldr r3, _08093F74 @ =0x00000d61
 	adds r4, r3
-	bl ItemId_GetItem
+	bl ItemId_GetName
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0
@@ -18961,7 +18961,7 @@ sub_8094E88: @ 8094E88
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	ldr r0, [r5]
@@ -19077,7 +19077,7 @@ sub_8095024: @ 8095024
 	adds r0, r4
 	ldrb r0, [r0]
 	movs r1, 0x1
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	ldr r0, [r5]
 	adds r0, r4
 	ldrb r0, [r0]
@@ -21364,7 +21364,7 @@ sub_80961A8: @ 80961A8
 	ldr r1, _080961C0 @ =0x00002224
 	adds r0, r1
 	ldrh r0, [r0]
-	bl ItemId_GetItem
+	bl ItemId_GetName
 	pop {r1}
 	bx r1
 	.align 2, 0
@@ -22054,7 +22054,7 @@ _080966BA:
 	movs r1, 0x2
 	adds r2, r4, 0
 	movs r3, 0x2
-	bl sub_812E62C
+	bl AddTextPrinterParameterized5
 	add sp, 0x14
 	pop {r4}
 	pop {r0}
@@ -22569,7 +22569,7 @@ _08096AA2:
 	lsls r0, 16
 	asrs r0, 20
 	strh r0, [r4, 0x22]
-	ldr r1, _08096B08 @ =gUnknown_825E074
+	ldr r1, _08096B08 @ =gSineTable
 	movs r2, 0x38
 	ldrsh r0, [r4, r2]
 	lsls r0, 4
@@ -22605,7 +22605,7 @@ _08096B00:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08096B08: .4byte gUnknown_825E074
+_08096B08: .4byte gSineTable
 _08096B0C: .4byte sub_80969BC
 	thumb_func_end sub_8096A74
 
@@ -22650,7 +22650,7 @@ _08096B3E:
 	lsls r1, 16
 	asrs r1, 20
 	strh r1, [r4, 0x22]
-	ldr r1, _08096BA4 @ =gUnknown_825E074
+	ldr r1, _08096BA4 @ =gSineTable
 	movs r2, 0x38
 	ldrsh r0, [r4, r2]
 	lsls r0, 4
@@ -22687,7 +22687,7 @@ _08096B9E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08096BA4: .4byte gUnknown_825E074
+_08096BA4: .4byte gSineTable
 _08096BA8: .4byte SpriteCallbackDummy
 	thumb_func_end sub_8096B10
 

@@ -7,9 +7,9 @@
 #define MON_DATA_OT_ID              1
 #define MON_DATA_NICKNAME           2
 #define MON_DATA_LANGUAGE           3
-#define MON_DATA_SANITY_BIT1        4
-#define MON_DATA_SANITY_BIT2        5
-#define MON_DATA_SANITY_BIT3        6
+#define MON_DATA_SANITY_IS_BAD_EGG  4
+#define MON_DATA_SANITY_HAS_SPECIES 5
+#define MON_DATA_SANITY_IS_EGG      6
 #define MON_DATA_OT_NAME            7
 #define MON_DATA_MARKINGS           8
 #define MON_DATA_CHECKSUM           9
@@ -310,31 +310,31 @@ struct PokemonStorage
     /*0x83C2*/ u8 boxWallpapers[14];
 };
 
-struct UnknownPokemonStruct
+struct BattleTowerPokemon
 {
-    u16 species;
-    u16 heldItem;
-    u16 moves[4];
-    u8 level;
-    u8 ppBonuses;
-    u8 hpEV;
-    u8 attackEV;
-    u8 defenseEV;
-    u8 speedEV;
-    u8 spAttackEV;
-    u8 spDefenseEV;
-    u32 otId;
-    u32 hpIV:5;
-    u32 attackIV:5;
-    u32 defenseIV:5;
-    u32 speedIV:5;
-    u32 spAttackIV:5;
-    u32 spDefenseIV:5;
-    u32 gap:1;
-    u32 altAbility:1;
-    u32 personality;
-    u8 nickname[POKEMON_NAME_LENGTH + 1];
-    u8 friendship;
+    /*0x00*/ u16 species;
+    /*0x02*/ u16 heldItem;
+    /*0x04*/ u16 moves[4];
+    /*0x0C*/ u8 level;
+    /*0x0D*/ u8 ppBonuses;
+    /*0x0E*/ u8 hpEV;
+    /*0x0F*/ u8 attackEV;
+    /*0x10*/ u8 defenseEV;
+    /*0x11*/ u8 speedEV;
+    /*0x12*/ u8 spAttackEV;
+    /*0x13*/ u8 spDefenseEV;
+    /*0x14*/ u32 otId;
+    /*0x18*/ u32 hpIV:5;
+             u32 attackIV:5;
+             u32 defenseIV:5;
+             u32 speedIV:5;
+             u32 spAttackIV:5;
+             u32 spDefenseIV:5;
+             u32 gap:1;
+             u32 altAbility:1;
+    /*0x1C*/ u32 personality;
+    /*0x20*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
+    /*0x2B*/ u8 friendship;
 };
 
 #define BATTLE_STATS_NO 8
@@ -444,6 +444,8 @@ struct BattleMove
     s8 priority;
     u8 flags;
 };
+
+extern const struct BattleMove gBattleMoves[];
 
 #define FLAG_MAKES_CONTACT          0x1
 #define FLAG_PROTECT_AFFECTED       0x2
@@ -631,6 +633,7 @@ void SetWildMonHeldItem(void);
 u16 GetMonEVCount(struct Pokemon *);
 
 const struct CompressedSpritePalette *sub_806E794(struct Pokemon *mon);
+const struct CompressedSpritePalette *GetMonSpritePalStruct(struct Pokemon *mon);
 const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u16 species, u32 otId , u32 personality);
 bool32 IsHMMove2(u16 move);
 bool8 IsPokeSpriteNotFlipped(u16 species);
@@ -669,5 +672,12 @@ bool8 HealStatusConditions(struct Pokemon *mon, u32 battlePartyId, u32 healMask,
 void DoMonFrontSpriteAnimation(struct Sprite* sprite, u16 species, bool8 noCry, u8 arg3);
 void BattleAnimateFrontSprite(struct Sprite* sprite, u16 species, bool8 noCry, u8 arg3);
 void BattleAnimateBackSprite(struct Sprite* sprite, u16 species);
+
+void PlayMapChosenOrBattleBGM(u16 songId);
+u8 GetMonsStateToDoubles(void);
+void sub_803E0A4(struct Pokemon *mon, struct BattleTowerPokemon *src);
+void SetMultiuseSpriteTemplateToPokemon(u16 trainerSpriteId, u8 battlerPosition);
+
+const u8 * Battle_PrintStatBoosterEffectMessage(u16 itemId);
 
 #endif // GUARD_POKEMON_H

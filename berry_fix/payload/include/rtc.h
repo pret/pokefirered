@@ -1,8 +1,8 @@
 #ifndef GUARD_RTC_H
 #define GUARD_RTC_H
 
-#include <gba/gba.h>
-#include <siirtc.h>
+#include "gba/gba.h"
+#include "siirtc.h"
 #include "global.h"
 
 extern struct Time gTimeSinceBerryUpdate;

@@ -1,0 +1,75 @@
+{
+  "id": "MAP_ROUTE2_VIRIDIAN_FOREST_SOUTH_ENTRANCE",
+  "name": "Route2_ViridianForest_SouthEntrance",
+  "layout": "LAYOUT_ROUTE2_ENTRANCE",
+  "music": "BGM_FRLG_VIRIDIAN_CITY",
+  "region_map_section": "MAPSEC_ROUTE_2",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 1,
+  "unknown_19": 2,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "28",
+      "x": 10,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "Route2_ViridianForest_SouthEntrance_EventScript_16F5E6",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "23",
+      "x": 4,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "2",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "Route2_ViridianForest_SouthEntrance_EventScript_16F5EF",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 6,
+      "y": 10,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE2",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 7,
+      "y": 10,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE2",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 8,
+      "y": 10,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE2",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 7,
+      "y": 1,
+      "elevation": 3,
+      "dest_map": "MAP_VIRIDIAN_FOREST",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

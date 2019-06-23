@@ -74,7 +74,7 @@ _0809AAF8:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	ldrb r0, [r4]
 	bl PutWindowTilemap
 	ldrb r0, [r4]
@@ -288,18 +288,18 @@ _0809ACD0: .4byte sub_809AD40
 	thumb_func_start sub_809ACD4
 sub_809ACD4: @ 809ACD4
 	push {lr}
-	ldr r2, _0809ACEC @ =c2_exit_to_overworld_2_switch
+	ldr r2, _0809ACEC @ =CB2_ReturnToField
 	movs r0, 0x2
 	movs r1, 0x3
 	bl sub_8107DB4
-	ldr r1, _0809ACF0 @ =gUnknown_3005020
+	ldr r1, _0809ACF0 @ =gFieldCallback
 	ldr r0, _0809ACF4 @ =sub_809AD74
 	str r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809ACEC: .4byte c2_exit_to_overworld_2_switch
-_0809ACF0: .4byte gUnknown_3005020
+_0809ACEC: .4byte CB2_ReturnToField
+_0809ACF0: .4byte gFieldCallback
 _0809ACF4: .4byte sub_809AD74
 	thumb_func_end sub_809ACD4
 
@@ -332,7 +332,7 @@ sub_809AD24: @ 809AD24
 	ldr r4, _0809AD3C @ =gUnknown_2039950
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	ldrb r0, [r4]
 	bl RemoveWindow
 	pop {r4}
@@ -477,7 +477,7 @@ _0809AE2C:
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _0809AE9C @ =gUnknown_3005E70
+	ldr r0, _0809AE9C @ =gMultiuseListMenuTemplate
 	movs r1, 0
 	movs r2, 0
 	bl ListMenuInit
@@ -510,26 +510,26 @@ _0809AE2C:
 _0809AE90: .4byte gMain
 _0809AE94: .4byte gUnknown_2039934
 _0809AE98: .4byte sub_809BBC0
-_0809AE9C: .4byte gUnknown_3005E70
+_0809AE9C: .4byte gMultiuseListMenuTemplate
 _0809AEA0: .4byte gTasks
 _0809AEA4: .4byte sub_809AE00
 _0809AEA8: .4byte sub_809ADE4
 _0809AEAC:
-	bl sub_80BF768
+	bl VblankHblankHandlerSetZero
 	str r4, [sp, 0x8]
 	movs r1, 0xE0
 	lsls r1, 19
 	ldr r2, _0809AF4C @ =0x01000100
 	add r0, sp, 0x8
 	bl CpuFastSet
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl reset_temp_tile_data_buffers
 	bl FreeAllSpritePalettes
 	bl ResetPaletteFade
 	bl ResetSpriteData
 	bl ResetTasks
 	bl clear_scheduled_bg_copies_to_vram
-	bl sub_80984D8
+	bl ResetItemMenuIconState
 	bl sub_809AF6C
 	lsls r0, 24
 	cmp r0, 0
@@ -793,7 +793,7 @@ _0809B118:
 	movs r1, 0
 	movs r2, 0xE
 	movs r3, 0x1E
-	bl sub_80F6B08
+	bl SetBgRectPal
 	b _0809B14E
 	.align 2, 0
 _0809B138: .4byte gUnknown_2039934
@@ -805,7 +805,7 @@ _0809B13C:
 	movs r1, 0
 	movs r2, 0xC
 	movs r3, 0x1E
-	bl sub_80F6B08
+	bl SetBgRectPal
 _0809B14E:
 	movs r0, 0x1
 	bl schedule_bg_copy_tilemap_to_vram
@@ -904,7 +904,7 @@ _0809B1F2:
 	movs r0, 0x2
 	negs r0, r0
 	str r0, [r1, 0x4]
-	ldr r5, _0809B2D4 @ =gUnknown_3005E70
+	ldr r5, _0809B2D4 @ =gMultiuseListMenuTemplate
 	str r2, [r5]
 	ldr r6, _0809B2D8 @ =gUnknown_2039934
 	ldrh r0, [r6, 0x10]
@@ -992,7 +992,7 @@ _0809B2BC:
 _0809B2C8: .4byte gUnknown_2039968
 _0809B2CC: .4byte gFameCheckerText_Cancel
 _0809B2D0: .4byte gUnknown_2039964
-_0809B2D4: .4byte gUnknown_3005E70
+_0809B2D4: .4byte gMultiuseListMenuTemplate
 _0809B2D8: .4byte gUnknown_2039934
 _0809B2DC: .4byte sub_809B320
 _0809B2E0: .4byte sub_809B408
@@ -1000,7 +1000,7 @@ _0809B2E4:
 	strh r0, [r5, 0xE]
 _0809B2E6:
 	ldr r0, _0809B2F8 @ =gUnknown_2039934
-	ldr r1, _0809B2FC @ =gUnknown_3005E70
+	ldr r1, _0809B2FC @ =gMultiuseListMenuTemplate
 	ldrh r1, [r1, 0xE]
 	strh r1, [r0, 0x12]
 	movs r0, 0x1
@@ -1010,7 +1010,7 @@ _0809B2F0:
 	bx r1
 	.align 2, 0
 _0809B2F8: .4byte gUnknown_2039934
-_0809B2FC: .4byte gUnknown_3005E70
+_0809B2FC: .4byte gMultiuseListMenuTemplate
 	thumb_func_end sub_809B188
 
 	thumb_func_start sub_809B300
@@ -1023,7 +1023,7 @@ sub_809B300: @ 809B300
 	lsrs r5, 16
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_8099E90
+	bl CopyItemName
 	str r6, [r4]
 	str r5, [r4, 0x4]
 	pop {r4-r6}
@@ -1069,7 +1069,7 @@ _0809B34A:
 	lsrs r1, 30
 	movs r0, 0x1
 	eors r0, r1
-	bl sub_8098940
+	bl DestroyItemMenuIcon
 	movs r0, 0x2
 	negs r0, r0
 	cmp r5, r0
@@ -1079,7 +1079,7 @@ _0809B34A:
 	ldrb r1, [r6, 0x17]
 	lsls r1, 29
 	lsrs r1, 30
-	bl sub_80988E8
+	bl CreateItemMenuIcon
 	b _0809B398
 	.align 2, 0
 _0809B384: .4byte gUnknown_8416757
@@ -1089,7 +1089,7 @@ _0809B38C:
 	ldrb r1, [r6, 0x17]
 	lsls r1, 29
 	lsrs r1, 30
-	bl sub_80988E8
+	bl CreateItemMenuIcon
 _0809B398:
 	ldr r3, _0809B3D4 @ =gUnknown_2039934
 	ldrb r2, [r3, 0x17]
@@ -1233,7 +1233,7 @@ sub_809B494: @ 809B494
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
 	ldr r5, _0809B51C @ =gStringVar4
-	ldr r1, _0809B520 @ =gUnknown_8416226
+	ldr r1, _0809B520 @ =gOtherText_UnkF9_08_Clear_01
 	adds r0, r5, 0
 	bl StringCopy
 	adds r0, r5, 0
@@ -1279,10 +1279,10 @@ sub_809B494: @ 809B494
 _0809B514: .4byte gStringVar1
 _0809B518: .4byte 0xfffffee0
 _0809B51C: .4byte gStringVar4
-_0809B520: .4byte gUnknown_8416226
+_0809B520: .4byte gOtherText_UnkF9_08_Clear_01
 _0809B524: .4byte gMoveNames
 _0809B528:
-	ldr r2, _0809B564 @ =gUnknown_8416213
+	ldr r2, _0809B564 @ =gText_ThreeHyphens
 	movs r4, 0
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -1312,7 +1312,7 @@ _0809B55C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809B564: .4byte gUnknown_8416213
+_0809B564: .4byte gText_ThreeHyphens
 _0809B568: .4byte gUnknown_8416217
 	thumb_func_end sub_809B494
 
@@ -1452,17 +1452,17 @@ _0809B66C: .4byte gUnknown_2039968
 	thumb_func_start sub_809B670
 sub_809B670: @ 809B670
 	push {lr}
-	ldr r0, _0809B684 @ =gUnknown_3005020
+	ldr r0, _0809B684 @ =gFieldCallback
 	ldr r1, _0809B688 @ =sub_809AD74
 	str r1, [r0]
-	ldr r0, _0809B68C @ =c2_exit_to_overworld_2_switch
+	ldr r0, _0809B68C @ =CB2_ReturnToField
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809B684: .4byte gUnknown_3005020
+_0809B684: .4byte gFieldCallback
 _0809B688: .4byte sub_809AD74
-_0809B68C: .4byte c2_exit_to_overworld_2_switch
+_0809B68C: .4byte CB2_ReturnToField
 	thumb_func_end sub_809B670
 
 	thumb_func_start sub_809B690
@@ -1510,7 +1510,7 @@ _0809B6C4:
 	movs r2, 0x8
 	movs r3, 0x58
 _0809B6E2:
-	bl AddScrollIndicatorArrowPairParametrized
+	bl AddScrollIndicatorArrowPairParameterized
 	lsls r0, 3
 	ldrb r2, [r4, 0x17]
 	movs r1, 0x7
@@ -1542,7 +1542,7 @@ sub_809B6FC: @ 809B6FC
 	movs r1, 0x98
 	movs r2, 0x48
 	movs r3, 0x68
-	bl AddScrollIndicatorArrowPairParametrized
+	bl AddScrollIndicatorArrowPairParameterized
 	lsls r0, 3
 	ldrb r2, [r4, 0x17]
 	movs r1, 0x7
@@ -1632,7 +1632,7 @@ _0809B7B2:
 	movs r3, 0
 	ldrsh r1, [r2, r3]
 	adds r1, r7
-	bl sub_8058E48
+	bl MapGridGetMetatileIdAt
 	lsls r0, 16
 	lsrs r5, r0, 16
 	mov r0, sp
@@ -1645,7 +1645,7 @@ _0809B7B2:
 	adds r1, r7, r1
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_8058F8C
+	bl MapGridGetMetatileLayerTypeAt
 	lsls r0, 24
 	lsrs r3, r0, 24
 	ldr r0, _0809B808 @ =0x0000027f
@@ -2017,7 +2017,7 @@ _0809BA56:
 	str r0, [sp]
 	adds r0, r4, 0
 	ldr r1, _0809BAF4 @ =SpriteCallbackDummy
-	bl AddPseudoFieldObject
+	bl AddPseudoEventObject
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r2, r0, 4
@@ -2119,7 +2119,7 @@ sub_809BB44: @ 809BB44
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
 	ldr r4, _0809BBB8 @ =gStringVar4
-	ldr r1, _0809BBBC @ =gUnknown_84162B9
+	ldr r1, _0809BBBC @ =gText_TimesStrVar1
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0xA
@@ -2144,7 +2144,7 @@ _0809BBAC: .4byte gTasks+0x8
 _0809BBB0: .4byte gUnknown_2039934
 _0809BBB4: .4byte gStringVar1
 _0809BBB8: .4byte gStringVar4
-_0809BBBC: .4byte gUnknown_84162B9
+_0809BBBC: .4byte gText_TimesStrVar1
 	thumb_func_end sub_809BB44
 
 	thumb_func_start sub_809BBC0
@@ -2170,7 +2170,7 @@ sub_809BBC0: @ 809BBC0
 	ldr r7, _0809BC08 @ =gUnknown_2039942
 	subs r2, r7, 0x2
 	adds r1, r7, 0
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	movs r0, 0x2
 	negs r0, r0
 	cmp r4, r0
@@ -2232,7 +2232,7 @@ _0809BC78: .4byte sub_809BF98
 _0809BC7C:
 	ldr r1, _0809BC94 @ =gStringVar1
 	adds r0, r4, 0
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r1, _0809BC98 @ =gUnknown_8416766
 	ldr r2, _0809BC9C @ =sub_809BCA0
 	adds r0, r6, 0
@@ -2259,7 +2259,7 @@ sub_809BCA0: @ 809BCA0
 	ldr r0, _0809BD40 @ =gTasks+0x8
 	adds r5, r0
 	ldrh r0, [r5, 0xA]
-	bl sub_809A7DC
+	bl BagGetQuantityByItemId
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -2396,10 +2396,10 @@ _0809BDD4:
 	bl sub_809B73C
 	movs r0, 0x3
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	movs r0, 0x3
 	bl ClearWindowTilemap
 	movs r0, 0x1
@@ -2408,7 +2408,7 @@ _0809BDD4:
 	bl PutWindowTilemap
 	ldrh r0, [r4, 0xA]
 	ldr r1, _0809BE40 @ =gStringVar1
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r0, _0809BE44 @ =gStringVar2
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
@@ -2442,10 +2442,10 @@ _0809BE54:
 	bl sub_809B73C
 	movs r0, 0x3
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	movs r0, 0x3
 	bl ClearWindowTilemap
 	movs r0, 0x1
@@ -2485,7 +2485,7 @@ sub_809BEA4: @ 809BEA4
 	bl PutWindowTilemap
 	ldrh r0, [r4, 0xA]
 	ldrh r1, [r4, 0x2]
-	bl sub_809A084
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2601,7 +2601,7 @@ sub_809BF98: @ 809BF98
 	adds r4, r5, r6
 	movs r0, 0x2
 	movs r1, 0
-	bl sub_810F260
+	bl ClearMenuWindow_BorderThickness2
 	ldrb r0, [r4, 0xE]
 	movs r1, 0x1
 	bl sub_809B57C
@@ -2644,7 +2644,7 @@ sub_809C004: @ 809C004
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r1, _0809C03C @ =gUnknown_3005020
+	ldr r1, _0809C03C @ =gFieldCallback
 	ldr r0, _0809C040 @ =sub_809AD74
 	str r0, [r1]
 	movs r0, 0x1
@@ -2666,7 +2666,7 @@ sub_809C004: @ 809C004
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809C03C: .4byte gUnknown_3005020
+_0809C03C: .4byte gFieldCallback
 _0809C040: .4byte sub_809AD74
 _0809C044: .4byte gTasks
 _0809C048: .4byte sub_809C04C
@@ -2691,9 +2691,9 @@ sub_809C04C: @ 809C04C
 	ldrb r0, [r2, 0xE]
 	movs r1, 0
 	movs r2, 0
-	bl sub_810713C
+	bl DestroyListMenu
 	bl sub_809B604
-	ldr r0, _0809C090 @ =c2_exit_to_overworld_2_switch
+	ldr r0, _0809C090 @ =CB2_ReturnToField
 	bl SetMainCallback2
 	adds r0, r4, 0
 	bl DestroyTask
@@ -2704,7 +2704,7 @@ _0809C082:
 	.align 2, 0
 _0809C088: .4byte gTasks+0x8
 _0809C08C: .4byte gPaletteFade
-_0809C090: .4byte c2_exit_to_overworld_2_switch
+_0809C090: .4byte CB2_ReturnToField
 	thumb_func_end sub_809C04C
 
 	thumb_func_start nullsub_52
@@ -2826,8 +2826,8 @@ _0809C15A:
 _0809C160: .4byte gUnknown_203996C
 	thumb_func_end sub_809C138
 
-	thumb_func_start sub_809C164
-sub_809C164: @ 809C164
+	thumb_func_start CreatePokemartMenu
+CreatePokemartMenu: @ 809C164
 	push {r4,lr}
 	bl sub_809ABD8
 	movs r0, 0
@@ -2851,10 +2851,10 @@ sub_809C164: @ 809C164
 _0809C194: .4byte EnableBothScriptContexts
 _0809C198: .4byte gUnknown_203996C
 _0809C19C: .4byte gMapHeader
-	thumb_func_end sub_809C164
+	thumb_func_end CreatePokemartMenu
 
-	thumb_func_start sub_809C1A0
-sub_809C1A0: @ 809C1A0
+	thumb_func_start CreateDecorationShop1Menu
+CreateDecorationShop1Menu: @ 809C1A0
 	push {lr}
 	bl sub_809ABD8
 	movs r0, 0x2
@@ -2865,10 +2865,10 @@ sub_809C1A0: @ 809C1A0
 	bx r0
 	.align 2, 0
 _0809C1B8: .4byte EnableBothScriptContexts
-	thumb_func_end sub_809C1A0
+	thumb_func_end CreateDecorationShop1Menu
 
-	thumb_func_start sub_809C1BC
-sub_809C1BC: @ 809C1BC
+	thumb_func_start CreateDecorationShop2Menu
+CreateDecorationShop2Menu: @ 809C1BC
 	push {lr}
 	bl sub_809ABD8
 	movs r0, 0x3
@@ -2879,7 +2879,7 @@ sub_809C1BC: @ 809C1BC
 	bx r0
 	.align 2, 0
 _0809C1D4: .4byte EnableBothScriptContexts
-	thumb_func_end sub_809C1BC
+	thumb_func_end CreateDecorationShop2Menu
 
 	thumb_func_start sub_809C1D8
 sub_809C1D8: @ 809C1D8
@@ -2940,7 +2940,7 @@ _0809C238:
 	adds r5, r1, r0
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_8058E48
+	bl MapGridGetMetatileIdAt
 	movs r2, 0
 	ldrsh r1, [r7, r2]
 	lsls r0, 16
@@ -3006,7 +3006,7 @@ _0809C2B8:
 	adds r5, r1, r0
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_8058E48
+	bl MapGridGetMetatileIdAt
 	movs r1, 0x2
 	subs r1, r7
 	lsls r1, 1

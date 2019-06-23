@@ -1,0 +1,135 @@
+{
+  "id": "MAP_FIVE_ISLAND_MEMORIAL_PILLAR",
+  "name": "FiveIsland_MemorialPillar",
+  "layout": "LAYOUT_FIVE_ISLAND_MEMORIAL_PILLAR",
+  "music": "BGM_FRLG_SEVII_ISLANDS",
+  "region_map_section": "MAPSEC_MEMORIAL_PILLAR",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_3",
+  "unknown_18": 1,
+  "unknown_19": 6,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": [
+    {
+      "map": "MAP_FIVE_ISLAND_MEADOW",
+      "offset": -20,
+      "direction": "left"
+    }
+  ],
+  "object_events": [
+    {
+      "graphics_id": "25",
+      "x": 8,
+      "y": 44,
+      "elevation": 4,
+      "movement_type": "15",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "FiveIsland_MemorialPillar_EventScript_1689D3",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "26",
+      "x": 12,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "21",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "FiveIsland_MemorialPillar_EventScript_1AC317",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "26",
+      "x": 14,
+      "y": 17,
+      "elevation": 3,
+      "movement_type": "19",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 2,
+      "script": "FiveIsland_MemorialPillar_EventScript_1AC355",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "26",
+      "x": 17,
+      "y": 31,
+      "elevation": 3,
+      "movement_type": "2",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "FiveIsland_MemorialPillar_EventScript_1AC393",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "92",
+      "x": 4,
+      "y": 47,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "FiveIsland_MemorialPillar_EventScript_1BEC83",
+      "flag": "480"
+    }
+  ],
+  "warp_events": [],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "bg_event_type_1",
+      "x": 9,
+      "y": 43,
+      "elevation": 0,
+      "script": "FiveIsland_MemorialPillar_EventScript_168A48"
+    },
+    {
+      "type": "hidden_item",
+      "x": 8,
+      "y": 52,
+      "elevation": 3,
+      "item": "ITEM_BIG_PEARL",
+      "flag": "170",
+      "unknown": 1
+    },
+    {
+      "type": "hidden_item",
+      "x": 15,
+      "y": 7,
+      "elevation": 3,
+      "item": "ITEM_RAZZ_BERRY",
+      "flag": "171",
+      "unknown": 1
+    },
+    {
+      "type": "hidden_item",
+      "x": 17,
+      "y": 22,
+      "elevation": 3,
+      "item": "ITEM_SITRUS_BERRY",
+      "flag": "172",
+      "unknown": 1
+    },
+    {
+      "type": "hidden_item",
+      "x": 14,
+      "y": 25,
+      "elevation": 3,
+      "item": "ITEM_BLUK_BERRY",
+      "flag": "173",
+      "unknown": 1
+    }
+  ]
+}

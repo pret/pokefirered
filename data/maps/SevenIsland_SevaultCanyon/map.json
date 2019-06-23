@@ -1,0 +1,323 @@
+{
+  "id": "MAP_SEVEN_ISLAND_SEVAULT_CANYON",
+  "name": "SevenIsland_SevaultCanyon",
+  "layout": "LAYOUT_SEVEN_ISLAND_SEVAULT_CANYON",
+  "music": "BGM_FRLG_SEVII_ISLANDS",
+  "region_map_section": "MAPSEC_SEVAULT_CANYON",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_3",
+  "unknown_18": 1,
+  "unknown_19": 6,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": [
+    {
+      "map": "MAP_SEVEN_ISLAND_TANOBY_RUINS",
+      "offset": -48,
+      "direction": "down"
+    },
+    {
+      "map": "MAP_SEVEN_ISLAND_SEVAULT_CANYON_ENTRANCE",
+      "offset": -20,
+      "direction": "left"
+    }
+  ],
+  "object_events": [
+    {
+      "graphics_id": "24",
+      "x": 13,
+      "y": 43,
+      "elevation": 3,
+      "movement_type": "7",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 2,
+      "script": "SevenIsland_SevaultCanyon_EventScript_1ACA4D",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "25",
+      "x": 13,
+      "y": 36,
+      "elevation": 3,
+      "movement_type": "18",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 2,
+      "script": "SevenIsland_SevaultCanyon_EventScript_1ACA8B",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "39",
+      "x": 3,
+      "y": 35,
+      "elevation": 3,
+      "movement_type": "21",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "SevenIsland_SevaultCanyon_EventScript_1ACAC9",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "40",
+      "x": 3,
+      "y": 36,
+      "elevation": 3,
+      "movement_type": "22",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "SevenIsland_SevaultCanyon_EventScript_1ACB07",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "41",
+      "x": 7,
+      "y": 56,
+      "elevation": 3,
+      "movement_type": "2",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "SevenIsland_SevaultCanyon_EventScript_1ACB45",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "42",
+      "x": 11,
+      "y": 63,
+      "elevation": 3,
+      "movement_type": "2",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "SevenIsland_SevaultCanyon_EventScript_1ACB83",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "41",
+      "x": 14,
+      "y": 13,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "SevenIsland_SevaultCanyon_EventScript_1ACBC1",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "42",
+      "x": 14,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "SevenIsland_SevaultCanyon_EventScript_1ACC07",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "96",
+      "x": 3,
+      "y": 41,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SevenIsland_SevaultCanyon_EventScript_1BE00C",
+      "flag": "18"
+    },
+    {
+      "graphics_id": "97",
+      "x": 13,
+      "y": 47,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SevenIsland_SevaultCanyon_EventScript_1BE11D",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "96",
+      "x": 7,
+      "y": 44,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SevenIsland_SevaultCanyon_EventScript_1BE00C",
+      "flag": "19"
+    },
+    {
+      "graphics_id": "96",
+      "x": 12,
+      "y": 47,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SevenIsland_SevaultCanyon_EventScript_1BE00C",
+      "flag": "21"
+    },
+    {
+      "graphics_id": "96",
+      "x": 15,
+      "y": 46,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SevenIsland_SevaultCanyon_EventScript_1BE00C",
+      "flag": "22"
+    },
+    {
+      "graphics_id": "96",
+      "x": 16,
+      "y": 47,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SevenIsland_SevaultCanyon_EventScript_1BE00C",
+      "flag": "23"
+    },
+    {
+      "graphics_id": "97",
+      "x": 17,
+      "y": 47,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SevenIsland_SevaultCanyon_EventScript_1BE11D",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "96",
+      "x": 11,
+      "y": 31,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SevenIsland_SevaultCanyon_EventScript_1BE00C",
+      "flag": "27"
+    },
+    {
+      "graphics_id": "92",
+      "x": 18,
+      "y": 45,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SevenIsland_SevaultCanyon_EventScript_1BECDE",
+      "flag": "487"
+    },
+    {
+      "graphics_id": "92",
+      "x": 7,
+      "y": 38,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SevenIsland_SevaultCanyon_EventScript_1BECEB",
+      "flag": "488"
+    },
+    {
+      "graphics_id": "92",
+      "x": 17,
+      "y": 23,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SevenIsland_SevaultCanyon_EventScript_1BECF8",
+      "flag": "489"
+    },
+    {
+      "graphics_id": "54",
+      "x": 8,
+      "y": 26,
+      "elevation": 3,
+      "movement_type": "7",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SevenIsland_SevaultCanyon_EventScript_1ACF95",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 7,
+      "y": 17,
+      "elevation": 5,
+      "dest_map": "MAP_SEVEN_ISLAND_SEAVAULT_CANYON_TANOBY_KEY",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 14,
+      "y": 61,
+      "elevation": 0,
+      "dest_map": "MAP_SEVEN_ISLAND_SEVAULT_CANYON_HOUSE",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 15,
+      "y": 66,
+      "elevation": 3,
+      "item": "ITEM_CHERI_BERRY",
+      "flag": "63",
+      "unknown": 1
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 16,
+      "y": 71,
+      "elevation": 0,
+      "script": "SevenIsland_SevaultCanyon_EventScript_168BFE"
+    }
+  ]
+}

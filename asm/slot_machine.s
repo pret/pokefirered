@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_813F804
-sub_813F804: @ 813F804
+	thumb_func_start PlaySlotMachine
+PlaySlotMachine: @ 813F804
 	push {r4-r6,lr}
 	adds r6, r1, 0
 	lsls r0, 16
@@ -39,7 +39,7 @@ _0813F840:
 	bx r0
 	.align 2, 0
 _0813F848: .4byte sub_813F898
-	thumb_func_end sub_813F804
+	thumb_func_end PlaySlotMachine
 
 	thumb_func_start sub_813F84C
 sub_813F84C: @ 813F84C
@@ -629,7 +629,7 @@ _0813FD00:
 	strh r0, [r4]
 	b _0813FD78
 _0813FD08:
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -3541,7 +3541,7 @@ _081411D0:
 	movs r0, 0
 	movs r1, 0xA
 	movs r2, 0xD0
-	bl sub_814FE40
+	bl LoadUserWindowBorderGfx
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xF0
@@ -3603,7 +3603,7 @@ _081411D0:
 	movs r0, 0x1
 	movs r1, 0
 	movs r3, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 	movs r1, 0x83
@@ -4215,7 +4215,7 @@ sub_81417E4: @ 81417E4
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xF
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	movs r1, 0x2
 	str r1, [sp]
 	movs r0, 0xFF
@@ -4228,7 +4228,7 @@ sub_81417E4: @ 81417E4
 	movs r0, 0
 	adds r2, r4, 0
 	movs r3, 0x1
-	bl sub_812E62C
+	bl AddTextPrinterParameterized5
 	add sp, 0x14
 	pop {r4}
 	pop {r0}
@@ -4424,7 +4424,7 @@ _08141984:
 	ldrsh r0, [r5, r2]
 	cmp r0, 0
 	bne _081419C4
-	ldr r1, _081419BC @ =gUnknown_825E074
+	ldr r1, _081419BC @ =gSineTable
 	movs r2, 0x4
 	ldrsh r0, [r5, r2]
 	lsls r0, 1
@@ -4447,7 +4447,7 @@ _08141984:
 	movs r0, 0x8
 	b _081419C6
 	.align 2, 0
-_081419BC: .4byte gUnknown_825E074
+_081419BC: .4byte gSineTable
 _081419C0: .4byte gUnknown_84664DC
 _081419C4:
 	subs r0, r1, 0x1
@@ -4462,7 +4462,7 @@ _081419C6:
 	movs r1, 0x7F
 	ands r0, r1
 	strh r0, [r5, 0x8]
-	ldr r1, _081419FC @ =gUnknown_825E074
+	ldr r1, _081419FC @ =gSineTable
 	movs r2, 0x8
 	ldrsh r0, [r5, r2]
 	lsls r0, 1
@@ -4478,7 +4478,7 @@ _081419C6:
 	bl BlendPalettes
 	b _08141A2C
 	.align 2, 0
-_081419FC: .4byte gUnknown_825E074
+_081419FC: .4byte gSineTable
 _08141A00:
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
@@ -4603,7 +4603,7 @@ sub_8141AD8: @ 8141AD8
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810FF60
+	bl CreateYesNoMenu
 	lsls r4, 24
 	asrs r4, 24
 	adds r0, r4, 0

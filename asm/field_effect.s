@@ -603,13 +603,13 @@ CreateTrainerSprite: @ 8083858
 	lsrs r0, 24
 	mov r9, r0
 	lsrs r4, 21
-	ldr r3, _080838E0 @ =gUnknown_8239A1C
+	ldr r3, _080838E0 @ =gTrainerFrontPicPaletteTable
 	mov r8, r3
 	add r8, r4
 	mov r0, r8
 	adds r1, r7, 0
 	bl LoadCompressedObjectPaletteOverrideBuffer
-	ldr r0, _080838E4 @ =gUnknown_823957C
+	ldr r0, _080838E4 @ =gTrainerFrontPicTable
 	adds r4, r0
 	adds r0, r4, 0
 	adds r1, r7, 0
@@ -649,8 +649,8 @@ CreateTrainerSprite: @ 8083858
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080838E0: .4byte gUnknown_8239A1C
-_080838E4: .4byte gUnknown_823957C
+_080838E0: .4byte gTrainerFrontPicPaletteTable
+_080838E4: .4byte gTrainerFrontPicTable
 _080838E8: .4byte gUnknown_83CBE50
 _080838EC: .4byte gDummySpriteAnimTable
 _080838F0: .4byte gDummySpriteAffineAnimTable
@@ -666,12 +666,12 @@ LoadTrainerGfx_TrainerCard: @ 80838F8
 	lsls r4, 24
 	lsls r5, 16
 	lsrs r5, 16
-	ldr r0, _08083928 @ =gUnknown_823957C
+	ldr r0, _08083928 @ =gTrainerFrontPicTable
 	lsrs r4, 21
 	adds r0, r4, r0
 	ldr r0, [r0]
 	bl LZDecompressVram
-	ldr r0, _0808392C @ =gUnknown_8239A1C
+	ldr r0, _0808392C @ =gTrainerFrontPicPaletteTable
 	adds r4, r0
 	ldr r0, [r4]
 	adds r1, r5, 0
@@ -681,8 +681,8 @@ LoadTrainerGfx_TrainerCard: @ 80838F8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08083928: .4byte gUnknown_823957C
-_0808392C: .4byte gUnknown_8239A1C
+_08083928: .4byte gTrainerFrontPicTable
+_0808392C: .4byte gTrainerFrontPicPaletteTable
 	thumb_func_end LoadTrainerGfx_TrainerCard
 
 	thumb_func_start AddNewGameBirchObject
@@ -742,7 +742,7 @@ sub_8083970: @ 8083970
 	movs r1, 0
 	adds r2, r3, 0
 	movs r3, 0x1
-	bl sub_810C1CC
+	bl CreateMonPicSprite_HandleDeoxys
 	lsls r0, 16
 	lsrs r5, r0, 16
 	ldrh r0, [r4, 0x4]
@@ -806,7 +806,7 @@ sub_80839D4: @ 80839D4
 	mov r1, r9
 	mov r2, r10
 	movs r3, 0x1
-	bl sub_810C1CC
+	bl CreateMonPicSprite_HandleDeoxys
 	lsls r0, 16
 	lsrs r4, r0, 16
 	mov r1, r8
@@ -854,7 +854,7 @@ sub_8083A5C: @ 8083A5C
 	bl FreeOamMatrix
 _08083A7A:
 	adds r0, r5, 0
-	bl sub_810C214
+	bl FreeAndDestroyMonPicSprite
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -1968,16 +1968,16 @@ _080842C2:
 	thumb_func_start sub_80842C8
 sub_80842C8: @ 80842C8
 	push {lr}
-	ldr r0, _080842DC @ =c2_exit_to_overworld_2_switch
+	ldr r0, _080842DC @ =CB2_ReturnToField
 	bl SetMainCallback2
-	ldr r1, _080842E0 @ =gUnknown_3005020
+	ldr r1, _080842E0 @ =gFieldCallback
 	ldr r0, _080842E4 @ =mapldr_080842E8
 	str r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080842DC: .4byte c2_exit_to_overworld_2_switch
-_080842E0: .4byte gUnknown_3005020
+_080842DC: .4byte CB2_ReturnToField
+_080842E0: .4byte gFieldCallback
 _080842E4: .4byte mapldr_080842E8
 	thumb_func_end sub_80842C8
 
@@ -1990,14 +1990,14 @@ mapldr_080842E8: @ 80842E8
 	bl CreateTask
 	bl ScriptContext2_Enable
 	bl player_bitmagic
-	ldr r1, _0808430C @ =gUnknown_3005020
+	ldr r1, _0808430C @ =gFieldCallback
 	movs r0, 0
 	str r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08084308: .4byte task00_8084310
-_0808430C: .4byte gUnknown_3005020
+_0808430C: .4byte gFieldCallback
 	thumb_func_end mapldr_080842E8
 
 	thumb_func_start task00_8084310
@@ -2042,7 +2042,7 @@ _08084350:
 	bl warp_in
 	ldr r0, _08084384 @ =sub_805671C
 	bl SetMainCallback2
-	ldr r1, _08084388 @ =gUnknown_3005020
+	ldr r1, _08084388 @ =gFieldCallback
 	ldr r0, _0808438C @ =mapldr_08084390
 	str r0, [r1]
 	adds r0, r5, 0
@@ -2055,7 +2055,7 @@ _08084376:
 _0808437C: .4byte gTasks
 _08084380: .4byte gFieldEffectArguments
 _08084384: .4byte sub_805671C
-_08084388: .4byte gUnknown_3005020
+_08084388: .4byte gFieldCallback
 _0808438C: .4byte mapldr_08084390
 	thumb_func_end task00_8084310
 
@@ -2093,7 +2093,7 @@ mapldr_08084390: @ 8084390
 _080843D2:
 	bl ScriptContext2_Enable
 	bl player_bitmagic
-	ldr r1, _080843F4 @ =gUnknown_3005020
+	ldr r1, _080843F4 @ =gFieldCallback
 	movs r0, 0
 	str r0, [r1]
 	pop {r4}
@@ -2103,7 +2103,7 @@ _080843D2:
 _080843E8: .4byte c3_080843F8
 _080843EC: .4byte gMapObjects
 _080843F0: .4byte gPlayerAvatar
-_080843F4: .4byte gUnknown_3005020
+_080843F4: .4byte gFieldCallback
 	thumb_func_end mapldr_08084390
 
 	thumb_func_start c3_080843F8
@@ -2162,14 +2162,14 @@ sub_8084454: @ 8084454
 	ldr r0, _0808447C @ =sub_8084484
 	movs r1, 0
 	bl CreateTask
-	ldr r1, _08084480 @ =gUnknown_3005020
+	ldr r1, _08084480 @ =gFieldCallback
 	movs r0, 0
 	str r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0808447C: .4byte sub_8084484
-_08084480: .4byte gUnknown_3005020
+_08084480: .4byte gFieldCallback
 	thumb_func_end sub_8084454
 
 	thumb_func_start sub_8084484
@@ -2542,7 +2542,7 @@ sub_8084708: @ 8084708
 	movs r0, 0x8
 	bl SetPlayerAvatarTransitionFlags
 	movs r0, 0x16
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 _08084760:
 	ldr r0, _08084780 @ =sub_8084484
 	bl FindTaskIdByFunc
@@ -2861,7 +2861,7 @@ sub_80849A0: @ 80849A0
 	bne _080849DC
 	bl sub_809C460
 	bl warp_in
-	ldr r1, _080849E4 @ =gUnknown_3005020
+	ldr r1, _080849E4 @ =gFieldCallback
 	ldr r0, _080849E8 @ =sub_80849F4
 	str r0, [r1]
 	ldr r0, _080849EC @ =sub_805671C
@@ -2876,7 +2876,7 @@ _080849DC:
 	bx r0
 	.align 2, 0
 _080849E0: .4byte gPaletteFade
-_080849E4: .4byte gUnknown_3005020
+_080849E4: .4byte gFieldCallback
 _080849E8: .4byte sub_80849F4
 _080849EC: .4byte sub_805671C
 _080849F0: .4byte sub_80847C0
@@ -2893,14 +2893,14 @@ sub_80849F4: @ 80849F4
 	ldr r0, _08084A1C @ =sub_8084A24
 	movs r1, 0
 	bl CreateTask
-	ldr r1, _08084A20 @ =gUnknown_3005020
+	ldr r1, _08084A20 @ =gFieldCallback
 	movs r0, 0
 	str r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08084A1C: .4byte sub_8084A24
-_08084A20: .4byte gUnknown_3005020
+_08084A20: .4byte gFieldCallback
 	thumb_func_end sub_80849F4
 
 	thumb_func_start sub_8084A24
@@ -3884,7 +3884,7 @@ sub_8085168: @ 8085168
 	cmp r0, 0x1
 	bne _080851A0
 	bl warp_in
-	ldr r1, _080851AC @ =gUnknown_3005020
+	ldr r1, _080851AC @ =gFieldCallback
 	ldr r0, _080851B0 @ =mapldr_080851BC
 	str r0, [r1]
 	ldr r0, _080851B4 @ =sub_805671C
@@ -3900,7 +3900,7 @@ _080851A0:
 	bx r1
 	.align 2, 0
 _080851A8: .4byte gPaletteFade
-_080851AC: .4byte gUnknown_3005020
+_080851AC: .4byte gFieldCallback
 _080851B0: .4byte mapldr_080851BC
 _080851B4: .4byte sub_805671C
 _080851B8: .4byte sub_8084F44
@@ -3913,7 +3913,7 @@ mapldr_080851BC: @ 80851BC
 	bl pal_fill_for_maplights
 	bl sub_8111CF0
 	bl ScriptContext2_Enable
-	ldr r0, _080851E0 @ =gUnknown_3005020
+	ldr r0, _080851E0 @ =gFieldCallback
 	movs r1, 0
 	str r1, [r0]
 	ldr r0, _080851E4 @ =sub_80851E8
@@ -3921,7 +3921,7 @@ mapldr_080851BC: @ 80851BC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080851E0: .4byte gUnknown_3005020
+_080851E0: .4byte gFieldCallback
 _080851E4: .4byte sub_80851E8
 	thumb_func_end mapldr_080851BC
 
@@ -4389,7 +4389,7 @@ sub_808554C: @ 808554C
 	cmp r0, 0x1
 	bne _08085584
 	bl warp_in
-	ldr r1, _08085590 @ =gUnknown_3005020
+	ldr r1, _08085590 @ =gFieldCallback
 	ldr r0, _08085594 @ =sub_8084454
 	str r0, [r1]
 	ldr r0, _08085598 @ =sub_805671C
@@ -4405,7 +4405,7 @@ _08085584:
 	bx r1
 	.align 2, 0
 _0808558C: .4byte gPaletteFade
-_08085590: .4byte gUnknown_3005020
+_08085590: .4byte gFieldCallback
 _08085594: .4byte sub_8084454
 _08085598: .4byte sub_805671C
 _0808559C: .4byte sub_80853E4
@@ -4613,7 +4613,7 @@ _08085702:
 	bl FieldObjectSetDirection
 	bl sub_80555E0
 	bl warp_in
-	ldr r1, _0808575C @ =gUnknown_3005020
+	ldr r1, _0808575C @ =gFieldCallback
 	ldr r0, _08085760 @ =sub_80859D4
 	str r0, [r1]
 	ldr r0, _08085764 @ =sub_805671C
@@ -4629,7 +4629,7 @@ _08085750:
 	bx r0
 	.align 2, 0
 _08085758: .4byte gPaletteFade
-_0808575C: .4byte gUnknown_3005020
+_0808575C: .4byte gFieldCallback
 _08085760: .4byte sub_80859D4
 _08085764: .4byte sub_805671C
 _08085768: .4byte sub_808563C
@@ -4970,7 +4970,7 @@ sub_80859D4: @ 80859D4
 	bl sub_8111CF0
 	bl ScriptContext2_Enable
 	bl player_bitmagic
-	ldr r1, _08085A14 @ =gUnknown_3005020
+	ldr r1, _08085A14 @ =gFieldCallback
 	movs r0, 0
 	str r0, [r1]
 	ldr r2, _08085A18 @ =gMapObjects
@@ -4990,7 +4990,7 @@ sub_80859D4: @ 80859D4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08085A14: .4byte gUnknown_3005020
+_08085A14: .4byte gFieldCallback
 _08085A18: .4byte gMapObjects
 _08085A1C: .4byte gPlayerAvatar
 _08085A20: .4byte sub_8085A24
@@ -5156,8 +5156,8 @@ _08085B58:
 _08085B60: .4byte sub_8085A24
 	thumb_func_end sub_8085A80
 
-	thumb_func_start sub_8085B64
-sub_8085B64: @ 8085B64
+	thumb_func_start CreateTeleportFieldEffectTask
+CreateTeleportFieldEffectTask: @ 8085B64
 	push {lr}
 	ldr r0, _08085B74 @ =sub_8085B78
 	movs r1, 0
@@ -5166,7 +5166,7 @@ sub_8085B64: @ 8085B64
 	bx r0
 	.align 2, 0
 _08085B74: .4byte sub_8085B78
-	thumb_func_end sub_8085B64
+	thumb_func_end CreateTeleportFieldEffectTask
 
 	thumb_func_start sub_8085B78
 sub_8085B78: @ 8085B78
@@ -5409,7 +5409,7 @@ sub_8085D34: @ 8085D34
 	bl warp_in
 	ldr r0, _08085D78 @ =sub_805671C
 	bl SetMainCallback2
-	ldr r1, _08085D7C @ =gUnknown_3005020
+	ldr r1, _08085D7C @ =gFieldCallback
 	ldr r0, _08085D80 @ =mapldr_08085D88
 	str r0, [r1]
 	ldr r0, _08085D84 @ =sub_8085B78
@@ -5423,7 +5423,7 @@ _08085D70:
 	.align 2, 0
 _08085D74: .4byte gPaletteFade
 _08085D78: .4byte sub_805671C
-_08085D7C: .4byte gUnknown_3005020
+_08085D7C: .4byte gFieldCallback
 _08085D80: .4byte mapldr_08085D88
 _08085D84: .4byte sub_8085B78
 	thumb_func_end sub_8085D34
@@ -5436,7 +5436,7 @@ mapldr_08085D88: @ 8085D88
 	bl sub_8111CF0
 	bl ScriptContext2_Enable
 	bl player_bitmagic
-	ldr r1, _08085DCC @ =gUnknown_3005020
+	ldr r1, _08085DCC @ =gFieldCallback
 	movs r0, 0
 	str r0, [r1]
 	ldr r2, _08085DD0 @ =gMapObjects
@@ -5457,7 +5457,7 @@ mapldr_08085D88: @ 8085D88
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08085DCC: .4byte gUnknown_3005020
+_08085DCC: .4byte gFieldCallback
 _08085DD0: .4byte gMapObjects
 _08085DD4: .4byte gPlayerAvatar
 _08085DD8: .4byte sub_8085DDC
@@ -6955,7 +6955,7 @@ sub_8086944: @ 8086944
 	cmp r0, 0
 	beq _08086978
 	adds r0, r4, 0
-	bl sub_8055F48
+	bl Overworld_ChangeMusicTo
 _08086978:
 	movs r0, 0
 	pop {r4}
@@ -7213,7 +7213,7 @@ sub_8086B30: @ 8086B30
 	lsrs r0, 24
 	bl DestroyTask
 	movs r0, 0x16
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 _08086B96:
 	pop {r4,r5}
 	pop {r0}

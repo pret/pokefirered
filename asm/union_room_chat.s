@@ -200,7 +200,7 @@ sub_81285B4: @ 81285B4
 	bl TransferPlttBuffer
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
-	bl sub_8087F54
+	bl ScanlineEffect_InitHBlankDmaTransfer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81285B4
@@ -1720,7 +1720,7 @@ _081291E8:
 	bl sub_812B4B8
 	bl sub_8129B88
 	bl sub_81284BC
-	ldr r0, _08129214 @ =c2_exit_to_overworld_2_switch
+	ldr r0, _08129214 @ =CB2_ReturnToField
 	bl SetMainCallback2
 _08129206:
 	add sp, 0x4
@@ -1729,7 +1729,7 @@ _08129206:
 	bx r0
 	.align 2, 0
 _08129210: .4byte gPaletteFade
-_08129214: .4byte c2_exit_to_overworld_2_switch
+_08129214: .4byte CB2_ReturnToField
 	thumb_func_end sub_8128FB8
 
 	thumb_func_start sub_8129218
@@ -3046,7 +3046,7 @@ sub_8129B88: @ 8129B88
 	str r0, [r4]
 _08129B9E:
 	bl FreeAllWindowBuffers
-	ldr r1, _08129BB4 @ =gUnknown_2039600
+	ldr r1, _08129BB4 @ =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 	pop {r4}
@@ -3054,7 +3054,7 @@ _08129B9E:
 	bx r0
 	.align 2, 0
 _08129BB0: .4byte gUnknown_203B0E4
-_08129BB4: .4byte gUnknown_2039600
+_08129BB4: .4byte gScanlineEffect
 	thumb_func_end sub_8129B88
 
 	thumb_func_start sub_8129BB8
@@ -4288,7 +4288,7 @@ sub_812A424: @ 812A424
 	ldrb r0, [r0, 0x18]
 	movs r1, 0x1
 	movs r2, 0xD
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	ldr r0, [r6]
 	ldrb r0, [r0, 0x18]
 	movs r1, 0xE
@@ -4299,7 +4299,7 @@ sub_812A424: @ 812A424
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 _0812A4F0:
 	add sp, 0x14
 	pop {r3}
@@ -4329,7 +4329,7 @@ sub_812A51C: @ 812A51C
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x18]
 	bl ClearWindowTilemap
@@ -4495,7 +4495,7 @@ _0812A642:
 	adds r0, r5, 0
 	movs r1, 0xA
 	movs r2, 0x2
-	bl sub_81501D0
+	bl DrawTextBorderInner
 	ldrb r3, [r4, 0x5]
 	adds r3, 0x8
 	lsls r3, 24
@@ -4516,7 +4516,7 @@ _0812A642:
 	adds r0, r5, 0
 	movs r1, 0x2
 	adds r2, r6, 0
-	bl sub_812E62C
+	bl AddTextPrinterParameterized5
 	b _0812A6DA
 	.align 2, 0
 _0812A6AC: .4byte gUnknown_845AB64
@@ -4524,7 +4524,7 @@ _0812A6B0:
 	adds r0, r5, 0
 	movs r1, 0xA
 	movs r2, 0x2
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	ldrb r3, [r4, 0x5]
 	ldrb r0, [r4, 0x6]
 	str r0, [sp]
@@ -4539,7 +4539,7 @@ _0812A6B0:
 	adds r0, r5, 0
 	movs r1, 0x2
 	adds r2, r6, 0
-	bl sub_812E62C
+	bl AddTextPrinterParameterized5
 _0812A6DA:
 	ldr r0, _0812A6F0 @ =gUnknown_203B0E4
 	ldr r0, [r0]
@@ -4568,7 +4568,7 @@ sub_812A6F4: @ 812A6F4
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1E]
 	bl ClearWindowTilemap
@@ -4689,7 +4689,7 @@ _0812A7B4:
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0x34
 	pop {r3-r5}
 	mov r8, r3
@@ -4767,7 +4767,7 @@ _0812A866:
 	movs r0, 0x2
 	movs r1, 0
 	lsrs r2, r5, 24
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r4, 0x4
 	adds r7, 0x1
 	adds r0, r6, 0
@@ -4807,7 +4807,7 @@ _0812A8A8:
 	movs r4, 0x80
 	lsls r4, 19
 	lsrs r2, r4, 24
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r0, r7, 0x1
 	str r0, [sp, 0x48]
 	adds r6, 0xC
@@ -4858,7 +4858,7 @@ _0812A90C:
 	movs r0, 0x2
 	movs r1, 0
 	adds r3, r4, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r2, r7, 0
 	add r0, sp, 0xC
 	str r0, [sp]
@@ -4870,7 +4870,7 @@ _0812A90C:
 	movs r0, 0x2
 	movs r1, 0
 	adds r3, r4, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0812A960:
 	ldr r7, [sp, 0x48]
 	mov r4, r10
@@ -4980,7 +4980,7 @@ sub_812AA10: @ 812AA10
 	movs r0, 0x3
 	movs r1, 0x1
 	movs r2, 0xD
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	ldr r0, _0812AA60 @ =gUnknown_845ABEC
 	str r0, [sp]
 	movs r0, 0x3
@@ -5000,7 +5000,7 @@ sub_812AA10: @ 812AA10
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	movs r0, 0x3
 	bl PutWindowTilemap
 	add sp, 0xC
@@ -5015,7 +5015,7 @@ sub_812AA64: @ 812AA64
 	push {lr}
 	movs r0, 0x3
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	movs r0, 0x3
 	bl ClearWindowTilemap
 	pop {r0}
@@ -5063,7 +5063,7 @@ sub_812AA78: @ 812AA78
 	movs r1, 0x2
 	movs r2, 0
 	adds r3, r4, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0x10
 	pop {r4,r5}
 	pop {r0}
@@ -5350,19 +5350,19 @@ sub_812AD20: @ 812AD20
 	movs r0, 0x3
 	movs r1, 0x1
 	movs r2, 0xD0
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	movs r0, 0x3
 	movs r1, 0xA
 	movs r2, 0x20
-	bl sub_814FF2C
-	ldr r0, _0812AD4C @ =gUnknown_841F408
+	bl TextWindow_SetStdFrame0_WithPal
+	ldr r0, _0812AD4C @ =gTMCaseMainWindowPalette
 	movs r1, 0xE0
 	movs r2, 0x20
 	bl LoadPalette
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0812AD4C: .4byte gUnknown_841F408
+_0812AD4C: .4byte gTMCaseMainWindowPalette
 	thumb_func_end sub_812AD20
 
 	thumb_func_start sub_812AD50
@@ -5384,13 +5384,13 @@ sub_812AD50: @ 812AD50
 	strh r1, [r0, 0x20]
 	str r1, [sp, 0xC]
 	add r0, sp, 0xC
-	ldr r1, _0812AD98 @ =gUnknown_2038700
+	ldr r1, _0812AD98 @ =gScanlineEffectRegBuffers
 	ldr r2, _0812AD9C @ =0x010003c0
 	bl CpuFastSet
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
 	ldr r2, [sp, 0x8]
-	bl sub_8087EE4
+	bl ScanlineEffect_SetParams
 	add sp, 0x10
 	pop {r0}
 	bx r0
@@ -5398,7 +5398,7 @@ sub_812AD50: @ 812AD50
 _0812AD8C: .4byte 0xa2600001
 _0812AD90: .4byte 0x04000014
 _0812AD94: .4byte gUnknown_203B0E4
-_0812AD98: .4byte gUnknown_2038700
+_0812AD98: .4byte gScanlineEffectRegBuffers
 _0812AD9C: .4byte 0x010003c0
 	thumb_func_end sub_812AD50
 
@@ -5410,12 +5410,12 @@ sub_812ADA0: @ 812ADA0
 	lsrs r0, 16
 	mov r1, sp
 	strh r0, [r1]
-	ldr r5, _0812ADE8 @ =gUnknown_2039600
+	ldr r5, _0812ADE8 @ =gScanlineEffect
 	ldrb r0, [r5, 0x14]
 	lsls r1, r0, 4
 	subs r1, r0
 	lsls r1, 7
-	ldr r4, _0812ADEC @ =gUnknown_2038700
+	ldr r4, _0812ADEC @ =gScanlineEffectRegBuffers
 	adds r1, r4
 	ldr r2, _0812ADF0 @ =0x01000090
 	mov r0, sp
@@ -5439,8 +5439,8 @@ sub_812ADA0: @ 812ADA0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0812ADE8: .4byte gUnknown_2039600
-_0812ADEC: .4byte gUnknown_2038700
+_0812ADE8: .4byte gScanlineEffect
+_0812ADEC: .4byte gScanlineEffectRegBuffers
 _0812ADF0: .4byte 0x01000090
 _0812ADF4: .4byte 0x01000010
 	thumb_func_end sub_812ADA0
@@ -5457,7 +5457,7 @@ sub_812ADF8: @ 812ADF8
 	lsrs r4, 16
 	mov r0, sp
 	strh r4, [r0]
-	ldr r5, _0812AE64 @ =gUnknown_2038700
+	ldr r5, _0812AE64 @ =gScanlineEffectRegBuffers
 	ldr r0, _0812AE68 @ =0x01000090
 	mov r9, r0
 	mov r0, sp
@@ -5498,7 +5498,7 @@ sub_812ADF8: @ 812ADF8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0812AE64: .4byte gUnknown_2038700
+_0812AE64: .4byte gScanlineEffectRegBuffers
 _0812AE68: .4byte 0x01000090
 _0812AE6C: .4byte 0x01000010
 	thumb_func_end sub_812ADF8

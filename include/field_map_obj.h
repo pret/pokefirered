@@ -35,7 +35,7 @@ u8 sub_808D4F4(void);
 void RemoveFieldObjectByLocalIdAndMap(u8, u8, u8);
 void npc_load_two_palettes__no_record(u16, u8);
 void npc_load_two_palettes__and_record(u16, u8);
-void sub_808EBA8(u8, u8, u8, s16, s16);
+void sub_805F7C4(u8, u8, u8, s16, s16);
 void pal_patch_for_npc(u16, u8);
 void sub_808E16C(s16, s16);
 void sub_808F28C(u8 localId, u8 mapNum, u8 mapGroup, u8 decorCat);
@@ -46,9 +46,9 @@ void FieldObjectClearAnim(struct MapObject *);
 void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *);
 void SpawnFieldObjectsInView(s16, s16);
 u8 sprite_new(u8, u8, s16, s16, u8, u8);
-u8 AddPseudoFieldObject(u16, void (*)(struct Sprite *), s16, s16, u8);
+u8 AddPseudoEventObject(u16, SpriteCallback, s16, s16, u8);
 u8 show_sprite(u8, u8, u8);
-u8 SpawnSpecialFieldObjectParametrized(u8, u8, u8, s16, s16, u8);
+u8 SpawnSpecialFieldObjectParameterized(u8, u8, u8, s16, s16, u8);
 u8 SpawnSpecialFieldObject(struct MapObjectTemplate *);
 void sub_8093038(s16, s16, s16 *, s16 *);
 void CameraObjectReset1(void);
@@ -59,13 +59,13 @@ const struct MapObjectGraphicsInfo *GetFieldObjectGraphicsInfo(u8);
 void npc_by_local_id_and_map_set_field_1_bit_x20(u8, u8, u8, u8);
 void gpu_pal_allocator_reset__manage_upper_four(void);
 void sub_808E82C(u8, u8, u8, s16, s16);
-void sub_808E7E4(u8, u8, u8);
-void sub_808E78C(u8, u8, u8, u8);
+void sub_805F400(u8, u8, u8);
+void sub_805F3A8(u8, u8, u8, u8);
 void sub_808E75C(s16, s16);
 void FieldObjectGetLocalIdAndMap(struct MapObject *, u8 *, u8 *, u8 *);
 void npc_coords_shift(struct MapObject *, s16, s16);
 void sub_808EB08(struct MapObject *, s16, s16);
-void sub_808F254(u8, u8, u8);
+void sub_805FE94(u8, u8, u8);
 void FieldObjectStep(struct MapObject *, struct Sprite *, bool8(struct MapObject *, struct Sprite *));
 u8 FieldObjectFaceOppositeDirection(struct MapObject *, u8);
 u8 GetOppositeDirection(u8);
@@ -92,5 +92,7 @@ void npc_paltag_set_load(u8 mode);
 // Exported data declarations
 
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
+extern const struct SpritePalette gUnknown_83A5348;
+extern const struct SpriteTemplate * const gUnknown_83A0010[];
 
 #endif //GUARD_FIELD_MAP_OBJ_H

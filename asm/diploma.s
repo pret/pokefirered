@@ -279,7 +279,7 @@ sub_80F4E24: @ 80F4E24
 	bl ResetPaletteFade
 	bl FreeAllSpritePalettes
 	bl ResetTasks
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80F4E24
@@ -559,7 +559,7 @@ _080F5050:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0x4
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r1, _080F50EC @ =gUnknown_841B619
 	add r0, sp, 0xC
 	bl UnkTextUtil_StringExpandPlaceholders
@@ -579,7 +579,7 @@ _080F5050:
 	movs r1, 0x2
 	adds r2, r4, 0
 	movs r3, 0x1E
-	bl box_print
+	bl AddTextPrinterParameterized3
 	str r6, [sp]
 	movs r0, 0
 	str r0, [sp, 0x4]
@@ -589,7 +589,7 @@ _080F5050:
 	movs r1, 0x2
 	movs r2, 0x78
 	movs r3, 0x69
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0
 	bl PutWindowTilemap
 	add sp, 0xAC

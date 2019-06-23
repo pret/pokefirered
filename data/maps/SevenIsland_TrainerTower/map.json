@@ -1,0 +1,102 @@
+{
+  "id": "MAP_SEVEN_ISLAND_TRAINER_TOWER",
+  "name": "SevenIsland_TrainerTower",
+  "layout": "LAYOUT_SEVEN_ISLAND_TRAINER_TOWER",
+  "music": "BGM_FRLG_SEVII_ISLANDS",
+  "region_map_section": "MAPSEC_TRAINER_TOWER",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_3",
+  "unknown_18": 1,
+  "unknown_19": 6,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": [
+    {
+      "map": "MAP_SEVEN_ISLAND",
+      "offset": 48,
+      "direction": "down"
+    }
+  ],
+  "object_events": [
+    {
+      "graphics_id": "19",
+      "x": 56,
+      "y": 26,
+      "elevation": 3,
+      "movement_type": "7",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "SevenIsland_TrainerTower_EventScript_1AC84D",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "23",
+      "x": 56,
+      "y": 29,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "SevenIsland_TrainerTower_EventScript_1AC88B",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 58,
+      "y": 7,
+      "elevation": 3,
+      "dest_map": "MAP_SEVEN_ISLAND_TRAINER_TOWER_LOBBY",
+      "dest_warp_id": 1
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 49,
+      "y": 27,
+      "elevation": 3,
+      "item": "ITEM_BIG_PEARL",
+      "flag": "185",
+      "unknown": 1
+    },
+    {
+      "type": "hidden_item",
+      "x": 47,
+      "y": 30,
+      "elevation": 3,
+      "item": "ITEM_PEARL",
+      "flag": "186",
+      "unknown": 1
+    },
+    {
+      "type": "hidden_item",
+      "x": 59,
+      "y": 32,
+      "elevation": 3,
+      "item": "ITEM_NANAB_BERRY",
+      "flag": "187",
+      "unknown": 1
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 56,
+      "y": 8,
+      "elevation": 0,
+      "script": "SevenIsland_TrainerTower_EventScript_168BE1"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 50,
+      "y": 30,
+      "elevation": 0,
+      "script": "SevenIsland_TrainerTower_EventScript_168BEA"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "id": "MAP_NAVEL_ROCK_SUMMIT",
+  "name": "NavelRock_Summit",
+  "layout": "LAYOUT_NAVEL_ROCK_SUMMIT",
+  "music": "BGM_FRLG_MT_EMBER",
+  "region_map_section": "MAPSEC_NAVEL_ROCK",
+  "requires_flash": false,
+  "weather": "WEATHER_CLOUDY",
+  "map_type": "MAP_TYPE_4",
+  "unknown_18": 0,
+  "unknown_19": 6,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "145",
+      "x": 9,
+      "y": 6,
+      "elevation": 0,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "0x0",
+      "flag": "156"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 10,
+      "y": 18,
+      "elevation": 3,
+      "dest_map": "MAP_NAVEL_ROCK_SUMMIT_PATH_5F",
+      "dest_warp_id": 1
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 12,
+      "elevation": 3,
+      "var": "VAR_0x4001",
+      "var_value": 0,
+      "script": "NavelRock_Summit_EventScript_164FFB"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 9,
+      "y": 11,
+      "elevation": 3,
+      "item": "ITEM_SACRED_ASH",
+      "flag": "160",
+      "unknown": 129
+    }
+  ]
+}

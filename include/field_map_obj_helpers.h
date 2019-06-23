@@ -4,6 +4,6 @@
 #include "global.h"
 
 void UnfreezeMapObjects(void);
-void sub_8097B78(u8, u8);
+void sub_8069058(u8, u8);
 
 #endif

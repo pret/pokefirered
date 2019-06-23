@@ -1,0 +1,69 @@
+{
+  "id": "MAP_ROUTE11_EAST_ENTRANCE_2F",
+  "name": "Route11_EastEntrance_2F",
+  "layout": "LAYOUT_ENTRANCE_2F",
+  "music": "BGM_FRLG_VERMILION_CITY",
+  "region_map_section": "MAPSEC_ROUTE_11",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 0,
+  "unknown_19": 0,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "18",
+      "x": 7,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "5",
+      "movement_range_x": 2,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "Route11_EastEntrance_2F_EventScript_16FD5C",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "55",
+      "x": 2,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "Route11_EastEntrance_2F_EventScript_16FDD8",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 10,
+      "y": 9,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE11_EAST_ENTRANCE_1F",
+      "dest_warp_id": 4
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "bg_event_type_0",
+      "x": 4,
+      "y": 1,
+      "elevation": 0,
+      "script": "Route11_EastEntrance_2F_EventScript_16FD35"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 8,
+      "y": 1,
+      "elevation": 0,
+      "script": "Route11_EastEntrance_2F_EventScript_16FD53"
+    }
+  ]
+}

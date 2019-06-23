@@ -183,7 +183,7 @@ sub_8054A28: @ 8054A28
 	bl ZeroPlayerPartyMons
 	bl ZeroEnemyPartyMons
 	bl sub_81089BC
-	bl sub_81320AC
+	bl ResetTMCaseCursorPos
 	bl sub_813D6E4
 	bl sub_811089C
 	bl Random
@@ -257,12 +257,12 @@ sub_8054A60: @ 8054A60
 	strb r5, [r0]
 	bl ZeroPlayerPartyMons
 	bl sub_808C7E0
-	bl sub_8141C54
+	bl ClearRoamerData
 	ldr r0, [r6]
 	ldr r1, _08054B68 @ =0x00000296
 	adds r0, r1
 	strh r5, [r0]
-	bl sub_809A2DC
+	bl ClearItemSlotsInAllBagPockets
 	bl sub_80EB658
 	bl sub_809C794
 	bl sub_80BDD34

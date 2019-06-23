@@ -1,7 +1,3 @@
-MONSTILLFRONTGFXDIR := graphics/pokemon/front_pics
-MONBACKGFXDIR := graphics/pokemon/back_pics
-MONFRONTGFXDIR := graphics/pokemon/anim_front_pics
-MONPALDIR := graphics/pokemon/palettes
 TILESETGFXDIR := data/tilesets
 GLOBALGFXDIR := data/graphics
 FONTGFXDIR := $(GLOBALGFXDIR)/fonts
@@ -22,231 +18,38 @@ PKNAVOPTIONSGFXDIR := graphics/pokenav/options
 PSSGFXDIR := graphics/pokemon_storage
 EVENTOBJGFXDIR := graphics/event_objects
 MISCGFXDIR := graphics/misc
+TEXTWINDOWGFXDIR := graphics/text_window
+TEACHYTVGFXDIR := graphics/teachy_tv
+SSANNEGFXDIR := graphics/ss_anne
+ITEMPCGFXDIR := graphics/item_pc
 
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
 contest_types := cool beauty cute smart tough
 
-$(MONSTILLFRONTGFXDIR)/castform_still_front_pic.4bpp: $(MONSTILLFRONTGFXDIR)/castform_normal_form_still_front_pic.4bpp \
-												   $(MONSTILLFRONTGFXDIR)/castform_sunny_form_still_front_pic.4bpp \
-												   $(MONSTILLFRONTGFXDIR)/castform_rainy_form_still_front_pic.4bpp \
-												   $(MONSTILLFRONTGFXDIR)/castform_snowy_form_still_front_pic.4bpp
+CASTFORMGFXDIR := graphics/pokemon/castform
+$(CASTFORMGFXDIR)/front.4bpp: $(CASTFORMGFXDIR)/normal/front.4bpp \
+											$(CASTFORMGFXDIR)/sunny/front.4bpp \
+											$(CASTFORMGFXDIR)/rainy/front.4bpp \
+											$(CASTFORMGFXDIR)/snowy/front.4bpp
 	@cat $^ >$@
 
-$(MONBACKGFXDIR)/castform_back_pic.4bpp: $(MONBACKGFXDIR)/castform_normal_form_back_pic.4bpp \
-									  $(MONBACKGFXDIR)/castform_sunny_form_back_pic.4bpp \
-									  $(MONBACKGFXDIR)/castform_rainy_form_back_pic.4bpp \
-									  $(MONBACKGFXDIR)/castform_snowy_form_back_pic.4bpp
+$(CASTFORMGFXDIR)/back.4bpp: $(CASTFORMGFXDIR)/normal/back.4bpp \
+									 $(CASTFORMGFXDIR)/sunny/back.4bpp \
+									 $(CASTFORMGFXDIR)/rainy/back.4bpp \
+									 $(CASTFORMGFXDIR)/snowy/back.4bpp
 	@cat $^ >$@
 
-$(MONFRONTGFXDIR)/castform_front_pic.4bpp: $(MONFRONTGFXDIR)/castform_normal_form_front_pic.4bpp \
-										$(MONFRONTGFXDIR)/castform_sunny_form_front_pic.4bpp \
-										$(MONFRONTGFXDIR)/castform_rainy_form_front_pic.4bpp \
-										$(MONFRONTGFXDIR)/castform_snowy_form_front_pic.4bpp
+$(CASTFORMGFXDIR)/normal.gbapal: $(CASTFORMGFXDIR)/normal/normal.gbapal \
+									 $(CASTFORMGFXDIR)/sunny/normal.gbapal \
+									 $(CASTFORMGFXDIR)/rainy/normal.gbapal \
+									 $(CASTFORMGFXDIR)/snowy/normal.gbapal
 	@cat $^ >$@
 
-$(MONPALDIR)/castform_palette.gbapal: $(MONPALDIR)/castform_normal_form_palette.gbapal \
-									  $(MONPALDIR)/castform_sunny_form_palette.gbapal \
-									  $(MONPALDIR)/castform_rainy_form_palette.gbapal \
-									  $(MONPALDIR)/castform_snowy_form_palette.gbapal
+$(CASTFORMGFXDIR)/shiny.gbapal: $(CASTFORMGFXDIR)/normal/shiny.gbapal \
+									$(CASTFORMGFXDIR)/sunny/shiny.gbapal \
+									$(CASTFORMGFXDIR)/rainy/shiny.gbapal \
+									$(CASTFORMGFXDIR)/snowy/shiny.gbapal
 	@cat $^ >$@
-
-$(MONPALDIR)/castform_shiny_palette.gbapal: $(MONPALDIR)/castform_normal_form_shiny_palette.gbapal \
-											$(MONPALDIR)/castform_sunny_form_shiny_palette.gbapal \
-											$(MONPALDIR)/castform_rainy_form_shiny_palette.gbapal \
-											$(MONPALDIR)/castform_snowy_form_shiny_palette.gbapal
-	@cat $^ >$@
-
-$(TILESETGFXDIR)/secondary/petalburg/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 159
-
-$(TILESETGFXDIR)/secondary/rustboro/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 498
-
-$(TILESETGFXDIR)/secondary/dewford/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 503
-
-$(TILESETGFXDIR)/secondary/slateport/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 504
-
-$(TILESETGFXDIR)/secondary/mauville/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 503
-
-$(TILESETGFXDIR)/secondary/lavaridge/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 450
-
-$(TILESETGFXDIR)/secondary/fortree/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 493
-
-$(TILESETGFXDIR)/secondary/pacifidlog/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 504
-
-$(TILESETGFXDIR)/secondary/sootopolis/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 328
-
-$(TILESETGFXDIR)/secondary/battle_frontier_outside_west/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 508
-
-$(TILESETGFXDIR)/secondary/battle_frontier_outside_east/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 508
-
-$(TILESETGFXDIR)/primary/building/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 502
-
-$(TILESETGFXDIR)/secondary/shop/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 502
-
-$(TILESETGFXDIR)/secondary/pokemon_center/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 478
-
-$(TILESETGFXDIR)/secondary/cave/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 425
-
-$(TILESETGFXDIR)/secondary/pokemon_school/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 278
-
-$(TILESETGFXDIR)/secondary/pokemon_fan_club/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 319
-
-$(TILESETGFXDIR)/secondary/unused_1/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 17
-
-$(TILESETGFXDIR)/secondary/meteor_falls/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 460
-
-$(TILESETGFXDIR)/secondary/oceanic_museum/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 319
-
-$(TILESETGFXDIR)/secondary/cable_club/unknown_tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 120
-
-$(TILESETGFXDIR)/secondary/seashore_house/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 312
-
-$(TILESETGFXDIR)/secondary/pretty_petal_flower_shop/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 345
-
-$(TILESETGFXDIR)/secondary/pokemon_day_care/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 355
-
-$(TILESETGFXDIR)/secondary/secret_base/brown_cave/unused_tiles.4bpp: $(TILESETGFXDIR)/secondary/secret_base/brown_cave/tiles.png
-	$(GFX) $< $@ -num_tiles 82
-
-$(TILESETGFXDIR)/secondary/secret_base/tree/unused_tiles.4bpp: $(TILESETGFXDIR)/secondary/secret_base/tree/tiles.png
-	$(GFX) $< $@ -num_tiles 82
-
-$(TILESETGFXDIR)/secondary/secret_base/shrub/unused_tiles.4bpp: $(TILESETGFXDIR)/secondary/secret_base/shrub/tiles.png
-	$(GFX) $< $@ -num_tiles 82
-
-$(TILESETGFXDIR)/secondary/secret_base/blue_cave/unused_tiles.4bpp: $(TILESETGFXDIR)/secondary/secret_base/blue_cave/tiles.png
-	$(GFX) $< $@ -num_tiles 82
-
-$(TILESETGFXDIR)/secondary/secret_base/yellow_cave/unused_tiles.4bpp: $(TILESETGFXDIR)/secondary/secret_base/yellow_cave/tiles.png
-	$(GFX) $< $@ -num_tiles 82
-
-$(TILESETGFXDIR)/secondary/secret_base/red_cave/unused_tiles.4bpp: $(TILESETGFXDIR)/secondary/secret_base/red_cave/tiles.png
-	$(GFX) $< $@ -num_tiles 82
-
-$(TILESETGFXDIR)/secondary/secret_base/brown_cave/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 83
-
-$(TILESETGFXDIR)/secondary/secret_base/tree/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 83
-
-$(TILESETGFXDIR)/secondary/secret_base/shrub/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 83
-
-$(TILESETGFXDIR)/secondary/secret_base/blue_cave/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 83
-
-$(TILESETGFXDIR)/secondary/secret_base/yellow_cave/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 83
-
-$(TILESETGFXDIR)/secondary/secret_base/red_cave/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 83
-
-$(TILESETGFXDIR)/secondary/inside_of_truck/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 62
-
-$(TILESETGFXDIR)/secondary/contest/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 430
-
-$(TILESETGFXDIR)/secondary/lilycove_museum/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 431
-
-$(TILESETGFXDIR)/secondary/lab/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 500
-
-$(TILESETGFXDIR)/secondary/underwater/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 500
-
-$(TILESETGFXDIR)/secondary/generic_building/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 509
-
-$(TILESETGFXDIR)/secondary/mauville_game_corner/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 469
-
-$(TILESETGFXDIR)/secondary/unused_2/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 150
-
-$(TILESETGFXDIR)/secondary/rustboro_gym/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 60
-
-$(TILESETGFXDIR)/secondary/dewford_gym/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 61
-
-$(TILESETGFXDIR)/secondary/lavaridge_gym/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 54
-
-$(TILESETGFXDIR)/secondary/petalburg_gym/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 148
-
-$(TILESETGFXDIR)/secondary/fortree_gym/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 61
-
-$(TILESETGFXDIR)/secondary/mossdeep_gym/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 82
-
-$(TILESETGFXDIR)/secondary/sootopolis_gym/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 484
-
-$(TILESETGFXDIR)/secondary/trick_house_puzzle/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 294
-
-$(TILESETGFXDIR)/secondary/inside_ship/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 342
-
-$(TILESETGFXDIR)/secondary/elite_four/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 505
-
-$(TILESETGFXDIR)/secondary/battle_frontier/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 310
-
-$(TILESETGFXDIR)/secondary/battle_factory/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 424
-
-$(TILESETGFXDIR)/secondary/battle_pike/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 382
-
-$(TILESETGFXDIR)/secondary/mirage_tower/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 420
-
-$(TILESETGFXDIR)/secondary/mossdeep_game_corner/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 95
-
-$(TILESETGFXDIR)/secondary/island_harbor/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 503
-
-$(TILESETGFXDIR)/secondary/trainer_hill/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 374
-
-$(TILESETGFXDIR)/secondary/navel_rock/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 420
-
-$(TILESETGFXDIR)/secondary/battle_frontier_ranking_hall/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 136
-
-$(TILESETGFXDIR)/secondary/mystery_events_house/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 509
 
 $(FONTGFXDIR)/font0_latin.latfont: $(FONTGFXDIR)/font0_latin.png
 	$(GFX) $< $@
@@ -276,6 +79,9 @@ $(FONTGFXDIR)/font5_latin.latfont: $(FONTGFXDIR)/font5_latin.png
 	$(GFX) $< $@
 
 $(FONTGFXDIR)/font5_jap.fwjpnfont: $(FONTGFXDIR)/font5_jap.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/font6.fwjpnfont: $(FONTGFXDIR)/font6_braille.png
 	$(GFX) $< $@
 
 $(FONTGFXDIR)/font9_jap.fwjpnfont: $(FONTGFXDIR)/font9_jap.png
@@ -620,6 +426,9 @@ $(INTERFACEGFXDIR)/selector_outline.4bpp: %.4bpp: %.png
 	
 $(BATTRANSGFXDIR)/frontier_transition.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 43
+
+graphics/tm_case/unk_8E845D8.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 91
 	
 $(PKNAVOPTIONSGFXDIR)/options.4bpp: $(PKNAVOPTIONSGFXDIR)/hoenn_map.4bpp \
 								$(PKNAVOPTIONSGFXDIR)/condition.4bpp \
@@ -659,3 +468,21 @@ $(FAMECHECKERGFXDIR)/img_845cf00.4bpp: %.4bpp: %.png
 
 $(GLOBALGFXDIR)/fame_checker_bg.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 165
+
+data/seagallop/water.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 41
+
+$(MISCGFXDIR)/unk_846B008.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
+$(TEXTWINDOWGFXDIR)/unk_8470B0C.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 19
+
+$(TEACHYTVGFXDIR)/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 233
+
+$(SSANNEGFXDIR)/unk_8479A38.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 17
+
+$(ITEMPCGFXDIR)/unk_8E85090.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 82

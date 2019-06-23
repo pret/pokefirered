@@ -3,8 +3,6 @@
 
 #include "global.h"
 
-#include "global.h"
-
 typedef void (*MainCallback)(void);
 typedef void (*IntrCallback)(void);
 typedef void (*IntrFunc)(void);
@@ -66,6 +64,7 @@ void DoSoftReset(void);
 void ClearPokemonCrySongs(void);
 void RestoreSerialTimer3IntrHandlers(void);
 void SetVBlankCounter1Ptr(u32 *ptr);
+void DisableVBlankCounter1(void);
 
 extern const char RomHeaderGameCode[4];
 extern const char RomHeaderSoftwareVersion;

@@ -1,0 +1,138 @@
+{
+  "id": "MAP_FIVE_ISLAND_MEADOW",
+  "name": "FiveIsland_Meadow",
+  "layout": "LAYOUT_FIVE_ISLAND_MEADOW",
+  "music": "BGM_FRLG_SEVII_ISLANDS",
+  "region_map_section": "MAPSEC_FIVE_ISLE_MEADOW",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_3",
+  "unknown_18": 1,
+  "unknown_19": 6,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": [
+    {
+      "map": "MAP_FIVE_ISLAND",
+      "offset": 0,
+      "direction": "left"
+    },
+    {
+      "map": "MAP_FIVE_ISLAND_MEMORIAL_PILLAR",
+      "offset": 20,
+      "direction": "right"
+    }
+  ],
+  "object_events": [
+    {
+      "graphics_id": "50",
+      "x": 18,
+      "y": 18,
+      "elevation": 3,
+      "movement_type": "2",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "FiveIsland_Meadow_EventScript_1689BB",
+      "flag": "136"
+    },
+    {
+      "graphics_id": "49",
+      "x": 17,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "17",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 5,
+      "script": "FiveIsland_Meadow_EventScript_16898D",
+      "flag": "136"
+    },
+    {
+      "graphics_id": "49",
+      "x": 11,
+      "y": 27,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "FiveIsland_Meadow_EventScript_1689A4",
+      "flag": "136"
+    },
+    {
+      "graphics_id": "95",
+      "x": 8,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "FiveIsland_Meadow_EventScript_1BDF13",
+      "flag": "18"
+    },
+    {
+      "graphics_id": "95",
+      "x": 19,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "FiveIsland_Meadow_EventScript_1BDF13",
+      "flag": "19"
+    },
+    {
+      "graphics_id": "92",
+      "x": 12,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "FiveIsland_Meadow_EventScript_1BEC69",
+      "flag": "478"
+    },
+    {
+      "graphics_id": "92",
+      "x": 3,
+      "y": 22,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "FiveIsland_Meadow_EventScript_1BEC76",
+      "flag": "479"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 12,
+      "y": 21,
+      "elevation": 0,
+      "dest_map": "MAP_FIVE_ISLAND_ROCKET_WAREHOUSE",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "bg_event_type_0",
+      "x": 12,
+      "y": 21,
+      "elevation": 0,
+      "script": "FiveIsland_Meadow_EventScript_168942"
+    }
+  ]
+}

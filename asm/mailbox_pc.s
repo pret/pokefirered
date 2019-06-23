@@ -81,7 +81,7 @@ sub_810EBE0: @ 810EBE0
 	adds r4, r0
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	ldrb r0, [r4]
 	bl ClearWindowTilemap
 	ldrb r0, [r4]
@@ -154,7 +154,7 @@ _0810EC62:
 	movs r1, 0x2
 	movs r2, 0x8
 	adds r3, r5, 0
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 _0810EC82:
 	add sp, 0x34
 	pop {r4,r5}
@@ -176,7 +176,7 @@ sub_810EC98: @ 810EC98
 	ldr r7, _0810ED50 @ =gUnknown_203ADE0
 	ldr r0, _0810ED54 @ =gFameCheckerText_Cancel
 	mov r12, r0
-	ldr r5, _0810ED58 @ =gUnknown_3005E70
+	ldr r5, _0810ED58 @ =gMultiuseListMenuTemplate
 	ldr r1, _0810ED5C @ =gUnknown_203ADDC
 	mov r8, r1
 	ldrb r0, [r6, 0x5]
@@ -263,7 +263,7 @@ _0810ECCE:
 	.align 2, 0
 _0810ED50: .4byte gUnknown_203ADE0
 _0810ED54: .4byte gFameCheckerText_Cancel
-_0810ED58: .4byte gUnknown_3005E70
+_0810ED58: .4byte gMultiuseListMenuTemplate
 _0810ED5C: .4byte gUnknown_203ADDC
 _0810ED60: .4byte gUnknown_8454003
 _0810ED64: .4byte sub_810ED6C
@@ -303,7 +303,7 @@ sub_810ED80: @ 810ED80
 	movs r1, 0xC2
 	movs r2, 0xC
 	movs r3, 0x94
-	bl AddScrollIndicatorArrowPairParametrized
+	bl AddScrollIndicatorArrowPairParameterized
 	strb r0, [r4, 0xA]
 	add sp, 0x10
 	pop {r4}

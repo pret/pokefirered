@@ -490,7 +490,7 @@ _0806EB8E:
 	ldrsh r0, [r0, r3]
 	movs r2, 0
 	ldrsh r1, [r4, r2]
-	bl sub_8058E48
+	bl MapGridGetMetatileIdAt
 	ldr r1, _0806EBDC @ =0x0000020a
 	cmp r0, r1
 	bne _0806EBE4
@@ -534,7 +534,7 @@ sub_806EC04: @ 806EC04
 	asrs r4, r1, 16
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8058E48
+	bl MapGridGetMetatileIdAt
 	ldr r1, _0806EC38 @ =0x0000022f
 	ldr r2, _0806EC3C @ =0x00000237
 	cmp r0, r1

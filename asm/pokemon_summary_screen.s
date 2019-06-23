@@ -107,7 +107,7 @@ _081345D0:
 	beq _08134604
 _081345D4:
 	movs r0, 0x6
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	ldr r2, _081345F8 @ =gUnknown_203B140
 	ldr r0, [r2]
 	ldr r3, _081345FC @ =0x00003214
@@ -128,7 +128,7 @@ _081345FC: .4byte 0x00003214
 _08134600: .4byte 0x00003234
 _08134604:
 	movs r0, 0x6
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	ldr r0, [r4]
 	ldr r3, _08134628 @ =0x00003214
 	adds r0, r3
@@ -149,7 +149,7 @@ _0813462C: .4byte 0x0000321c
 _08134630: .4byte 0x00003234
 _08134634:
 	movs r0, 0x8
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	ldr r0, [r4]
 	ldr r3, _08134710 @ =0x00003214
 	adds r0, r3
@@ -3549,7 +3549,7 @@ _08136264:
 	ldr r0, [r6]
 	ldr r4, _08136328 @ =0x00003088
 	adds r0, r4
-	ldr r1, _0813632C @ =gUnknown_8416223
+	ldr r1, _0813632C @ =gText_Lv
 	bl StringCopy
 	ldr r0, [r6]
 	adds r0, r4
@@ -3580,14 +3580,14 @@ _0813631C: .4byte 0x00003290
 _08136320: .4byte 0x0000ffff
 _08136324: .4byte 0x0000306c
 _08136328: .4byte 0x00003088
-_0813632C: .4byte gUnknown_8416223
+_0813632C: .4byte gText_Lv
 _08136330: .4byte 0x00003074
 _08136334: .4byte gUnknown_84161EF
 _08136338:
 	ldr r1, [r6]
 	ldr r2, _0813634C @ =0x00003074
 	adds r1, r2
-	bl sub_8099E90
+	bl CopyItemName
 _08136342:
 	add sp, 0x14
 	pop {r4-r7}
@@ -4180,7 +4180,7 @@ _08136812:
 	adds r1, r4, r3
 	ldr r0, [r6]
 	adds r0, r1
-	ldr r5, _081368A4 @ =gUnknown_8416213
+	ldr r5, _081368A4 @ =gText_ThreeHyphens
 	adds r1, r5, 0
 	bl StringCopy
 	ldr r0, _081368A8 @ =0x00003188
@@ -4209,7 +4209,7 @@ _08136894: .4byte gUnknown_841620E
 _08136898: .4byte 0x000030b8
 _0813689C: .4byte gUnknown_8416210
 _081368A0: .4byte 0x0000316c
-_081368A4: .4byte gUnknown_8416213
+_081368A4: .4byte gText_ThreeHyphens
 _081368A8: .4byte 0x00003188
 _081368AC: .4byte gUnknown_203B144
 _081368B0:
@@ -4399,7 +4399,7 @@ _081369D0:
 	ldr r1, _08136A68 @ =0x0000316c
 	adds r0, r1
 	adds r0, r6, r0
-	ldr r1, _08136A6C @ =gUnknown_8416213
+	ldr r1, _08136A6C @ =gText_ThreeHyphens
 	bl StringCopy
 	b _08136A84
 	.align 2, 0
@@ -4411,7 +4411,7 @@ _08136A5C: .4byte 0x00003258
 _08136A60: .4byte gUnknown_203B144
 _08136A64: .4byte gBattleMoves
 _08136A68: .4byte 0x0000316c
-_08136A6C: .4byte gUnknown_8416213
+_08136A6C: .4byte gText_ThreeHyphens
 _08136A70:
 	lsls r4, r7, 2
 	adds r0, r4, r7
@@ -4441,7 +4441,7 @@ _08136A84:
 	ldr r2, _08136AC0 @ =0x00003188
 	adds r0, r2
 	adds r0, r3, r0
-	ldr r1, _08136AC4 @ =gUnknown_8416213
+	ldr r1, _08136AC4 @ =gText_ThreeHyphens
 	bl StringCopy
 	b _08136ADA
 	.align 2, 0
@@ -4450,7 +4450,7 @@ _08136AB4: .4byte gBattleMoves
 _08136AB8: .4byte gUnknown_203B140
 _08136ABC: .4byte 0x00003258
 _08136AC0: .4byte 0x00003188
-_08136AC4: .4byte gUnknown_8416213
+_08136AC4: .4byte gText_ThreeHyphens
 _08136AC8:
 	adds r0, r4, r7
 	ldr r4, _08136AE8 @ =0x00003188
@@ -4567,7 +4567,7 @@ sub_8136BAC: @ 8136BAC
 	bl ResetSpriteData
 	bl ResetPaletteFade
 	bl FreeAllSpritePalettes
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8136BAC
@@ -4808,7 +4808,7 @@ sub_8136DA4: @ 8136DA4
 	movs r1, 0x2
 	movs r2, 0x4
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r0, [r5]
 	adds r0, r4
 	ldrb r0, [r0]
@@ -4853,7 +4853,7 @@ sub_8136DF0: @ 8136DF0
 	adds r0, r1, 0
 	movs r1, 0
 	movs r3, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r0, [r5]
 	adds r0, r4
 	ldrb r0, [r0]
@@ -4904,7 +4904,7 @@ sub_8136E50: @ 8136E50
 	movs r1, 0x2
 	movs r2, 0x4
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 _08136E9A:
 	ldr r2, [r6]
 	adds r0, r2, r7
@@ -4920,7 +4920,7 @@ _08136E9A:
 	movs r1, 0x2
 	movs r2, 0x28
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r0, [r6]
 	ldr r3, _08136F04 @ =0x00003290
 	adds r0, r3
@@ -4941,7 +4941,7 @@ _08136E9A:
 	movs r1, 0x2
 	movs r2, 0x69
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	b _08136F28
 	.align 2, 0
 _08136EEC: .4byte gUnknown_203B140
@@ -4965,7 +4965,7 @@ _08136F0C:
 	movs r1, 0x2
 	movs r2, 0x69
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 _08136F28:
 	ldr r0, _08136F44 @ =gUnknown_203B140
 	ldr r0, [r0]
@@ -5053,7 +5053,7 @@ sub_8136FB0: @ 8136FB0
 	movs r1, 0x2
 	movs r2, 0x2F
 	movs r3, 0x13
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r3, [r6]
 	movs r1, 0xC8
 	lsls r1, 6
@@ -5077,7 +5077,7 @@ sub_8136FB0: @ 8136FB0
 	str r1, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0x5
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r1, [r6]
 	ldr r2, _08137064 @ =0x00003003
 	adds r0, r1, r2
@@ -5090,7 +5090,7 @@ sub_8136FB0: @ 8136FB0
 	movs r1, 0x2
 	movs r2, 0x2F
 	movs r3, 0x31
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r1, [r6]
 	ldr r2, _08137064 @ =0x00003003
 	adds r0, r1, r2
@@ -5103,7 +5103,7 @@ sub_8136FB0: @ 8136FB0
 	movs r1, 0x2
 	movs r2, 0x2F
 	movs r3, 0x40
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r1, [r6]
 	ldr r2, _08137064 @ =0x00003003
 	adds r0, r1, r2
@@ -5116,7 +5116,7 @@ sub_8136FB0: @ 8136FB0
 	movs r1, 0x2
 	movs r2, 0x2F
 	movs r3, 0x4F
-	bl box_print
+	bl AddTextPrinterParameterized3
 	b _081370CA
 	.align 2, 0
 _08137060: .4byte gUnknown_203B140
@@ -5167,7 +5167,7 @@ _081370A6:
 	movs r1, 0x2
 	movs r2, 0x7
 	movs r3, 0x2D
-	bl box_print
+	bl AddTextPrinterParameterized3
 _081370CA:
 	add sp, 0xC
 	pop {r4-r7}
@@ -5212,7 +5212,7 @@ sub_81370EC: @ 81370EC
 	str r3, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0x4
-	bl box_print
+	bl AddTextPrinterParameterized3
 	mov r2, r9
 	ldr r3, [r2]
 	adds r0, r3, r4
@@ -5230,7 +5230,7 @@ sub_81370EC: @ 81370EC
 	str r3, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0x16
-	bl box_print
+	bl AddTextPrinterParameterized3
 	mov r2, r9
 	ldr r3, [r2]
 	adds r0, r3, r4
@@ -5248,7 +5248,7 @@ sub_81370EC: @ 81370EC
 	str r3, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0x23
-	bl box_print
+	bl AddTextPrinterParameterized3
 	mov r2, r9
 	ldr r3, [r2]
 	adds r0, r3, r4
@@ -5266,7 +5266,7 @@ sub_81370EC: @ 81370EC
 	str r3, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0x30
-	bl box_print
+	bl AddTextPrinterParameterized3
 	mov r2, r9
 	ldr r3, [r2]
 	adds r0, r3, r4
@@ -5284,7 +5284,7 @@ sub_81370EC: @ 81370EC
 	str r3, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0x3D
-	bl box_print
+	bl AddTextPrinterParameterized3
 	mov r2, r9
 	ldr r3, [r2]
 	adds r0, r3, r4
@@ -5302,7 +5302,7 @@ sub_81370EC: @ 81370EC
 	str r3, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0x4A
-	bl box_print
+	bl AddTextPrinterParameterized3
 	mov r2, r9
 	ldr r3, [r2]
 	adds r0, r3, r4
@@ -5320,7 +5320,7 @@ sub_81370EC: @ 81370EC
 	str r3, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0x57
-	bl box_print
+	bl AddTextPrinterParameterized3
 	mov r2, r9
 	ldr r3, [r2]
 	adds r4, r3, r4
@@ -5338,7 +5338,7 @@ sub_81370EC: @ 81370EC
 	str r3, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0x64
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0xC
 	pop {r3,r4}
 	mov r8, r3
@@ -5406,7 +5406,7 @@ _081372B0:
 	movs r1, 0x2
 	movs r2, 0x3
 	movs r3, 0x75
-	bl box_print
+	bl AddTextPrinterParameterized3
 _081372CE:
 	add sp, 0xC
 	pop {r4}
@@ -5490,7 +5490,7 @@ _0813733E:
 	movs r1, 0x2
 	movs r2, 0x3
 	mov r3, r12
-	bl box_print
+	bl AddTextPrinterParameterized3
 	mov r1, r10
 	ldr r0, [r1]
 	ldr r2, _081373A4 @ =0x00003258
@@ -5577,7 +5577,7 @@ _081373EA:
 	movs r1, 0x2
 	movs r2, 0x24
 	mov r3, r8
-	bl box_print
+	bl AddTextPrinterParameterized3
 	mov r0, r10
 	ldr r3, [r0]
 	adds r4, r3, r4
@@ -5603,7 +5603,7 @@ _081373EA:
 	str r3, [sp, 0x8]
 	movs r1, 0x2
 	mov r3, r8
-	bl box_print
+	bl AddTextPrinterParameterized3
 	mov r0, r10
 	ldr r1, [r0]
 	ldr r2, _081374DC @ =0x00003258
@@ -5623,7 +5623,7 @@ _081373EA:
 	movs r1, 0x2
 	movs r2, 0x3A
 	mov r3, r8
-	bl box_print
+	bl AddTextPrinterParameterized3
 	mov r0, r10
 	ldr r3, [r0]
 	ldr r1, _081374C8 @ =0x00003003
@@ -5645,7 +5645,7 @@ _081373EA:
 	str r3, [sp, 0x8]
 	movs r1, 0x2
 	mov r3, r8
-	bl box_print
+	bl AddTextPrinterParameterized3
 _081374B4:
 	add sp, 0x10
 	pop {r3-r5}
@@ -5928,7 +5928,7 @@ _081376E6:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x3
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	add sp, 0xD4
 	pop {r4-r7}
 	pop {r0}
@@ -6052,7 +6052,7 @@ _081377F6:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x3
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	b _0813792C
 	.align 2, 0
 _08137820: .4byte gUnknown_8419782
@@ -6176,7 +6176,7 @@ _08137906:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x3
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 _0813792C:
 	add sp, 0xD4
 	pop {r4-r6}
@@ -6341,7 +6341,7 @@ _08137A46:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x3
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	add sp, 0x14
 	pop {r4-r7}
 	pop {r0}
@@ -6377,7 +6377,7 @@ sub_8137A90: @ 8137A90
 	movs r1, 0x2
 	movs r2, 0x1A
 	movs r3, 0x7
-	bl box_print
+	bl AddTextPrinterParameterized3
 	mov r1, r8
 	ldr r0, [r1]
 	adds r0, r6
@@ -6389,7 +6389,7 @@ sub_8137A90: @ 8137A90
 	movs r1, 0x2
 	movs r2, 0x1A
 	movs r3, 0x14
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0xC
 	pop {r3}
 	mov r8, r3
@@ -6444,7 +6444,7 @@ _08137B1C:
 	movs r1, 0x2
 	movs r2, 0x39
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r3, [r7]
 	adds r0, r3, r4
 	ldrb r0, [r0]
@@ -6461,7 +6461,7 @@ _08137B1C:
 	movs r1, 0x2
 	movs r2, 0x39
 	movs r3, 0xF
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r2, [r7]
 	adds r4, r2, r4
 	ldrb r0, [r4]
@@ -6486,7 +6486,7 @@ _08137B1C:
 	movs r1, 0x2
 	movs r2, 0x7
 	movs r3, 0x2A
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 _08137B9E:
 	add sp, 0x14
 	pop {r3}
@@ -6569,7 +6569,7 @@ sub_8137C18: @ 8137C18
 	movs r1, 0x2
 	movs r2, 0x42
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r1, [r5]
 	adds r4, r1, r4
 	ldrb r0, [r4]
@@ -6582,7 +6582,7 @@ sub_8137C18: @ 8137C18
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0xF
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0xC
 	pop {r3}
 	mov r8, r3
@@ -6636,7 +6636,7 @@ _08137CA4:
 	adds r3, r2
 	lsrs r3, 16
 	movs r2, 0x3
-	bl sub_8107D68
+	bl blit_move_info_icon
 _08137CDE:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -6660,7 +6660,7 @@ _08137CDE:
 	lsrs r1, 24
 	movs r2, 0x3
 	movs r3, 0x75
-	bl sub_8107D68
+	bl blit_move_info_icon
 _08137D0E:
 	pop {r4,r5}
 	pop {r0}
@@ -7608,7 +7608,7 @@ _0813846C:
 _08138470:
 	movs r0, 0x7
 _08138472:
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 _08138476:
 	pop {r0}
 	bx r0
@@ -8325,7 +8325,7 @@ _08138A62:
 	lsrs r1, 24
 	movs r2, 0x2F
 	movs r3, 0x23
-	bl sub_8107D68
+	bl blit_move_info_icon
 	ldr r1, [r6]
 	adds r4, r1, r4
 	ldr r3, _08138AB8 @ =0x00003221
@@ -8342,7 +8342,7 @@ _08138A62:
 	lsrs r1, 24
 	movs r2, 0x53
 	movs r3, 0x23
-	bl sub_8107D68
+	bl blit_move_info_icon
 	b _08138B0E
 	.align 2, 0
 _08138AB0: .4byte 0x00003003
@@ -8365,7 +8365,7 @@ _08138ABC:
 	lsrs r1, 24
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_8107D68
+	bl blit_move_info_icon
 	ldr r2, [r6]
 	adds r4, r2, r4
 	ldr r1, _08138B1C @ =0x00003221
@@ -8381,7 +8381,7 @@ _08138ABC:
 	lsrs r1, 24
 	movs r2, 0x24
 	movs r3, 0x3
-	bl sub_8107D68
+	bl blit_move_info_icon
 _08138B04:
 	ldr r0, [r6]
 	adds r0, r5
@@ -8431,7 +8431,7 @@ _08138B48: .4byte 0x00003208
 	thumb_func_start sub_8138B4C
 sub_8138B4C: @ 8138B4C
 	push {lr}
-	bl sub_805642C
+	bl is_c1_link_related_active
 	cmp r0, 0
 	bne _08138B84
 	bl sub_811FA20
@@ -9875,7 +9875,7 @@ _081396A8:
 	movs r1, 0x2
 	movs r2, 0x7
 	movs r3, 0x2A
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	ldr r0, [r5]
 	adds r0, r4
 	ldrb r0, [r0]
@@ -10258,7 +10258,7 @@ sub_813995C: @ 813995C
 	adds r1, r4, 0
 	adds r2, r6, 0
 	movs r3, 0x1
-	bl sub_810C16C
+	bl CreateMonPicSprite
 	b _08139A40
 	.align 2, 0
 _081399CC: .4byte gUnknown_203B170
@@ -10290,7 +10290,7 @@ _081399E8:
 	adds r1, r4, 0
 	adds r2, r6, 0
 	movs r3, 0x1
-	bl sub_810C16C
+	bl CreateMonPicSprite
 	b _08139A40
 	.align 2, 0
 _08139A1C: .4byte gUnknown_203B16C
@@ -10308,7 +10308,7 @@ _08139A24:
 	adds r1, r4, 0
 	adds r2, r6, 0
 	movs r3, 0x1
-	bl sub_810C1CC
+	bl CreateMonPicSprite_HandleDeoxys
 _08139A40:
 	lsls r0, 16
 	lsrs r5, r0, 16
@@ -10593,7 +10593,7 @@ sub_8139C80: @ 8139C80
 	ldr r1, _08139CA8 @ =0x00003010
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_810C214
+	bl FreeAndDestroyMonPicSprite
 	ldr r4, _08139CAC @ =gUnknown_203B170
 	ldr r0, [r4]
 	bl Free
@@ -13239,7 +13239,7 @@ _0813B16C:
 _0813B190: .4byte 0x000032f4
 _0813B194: .4byte 0x00003210
 _0813B198:
-	bl sub_805642C
+	bl is_c1_link_related_active
 	cmp r0, 0
 	bne _0813B1C4
 	ldr r0, _0813B1C0 @ =gReceivedRemoteLinkPlayers
@@ -14088,7 +14088,7 @@ _0813B84E:
 sub_813B854: @ 813B854
 	push {lr}
 	sub sp, 0x4
-	ldr r3, _0813B86C @ =c2_exit_to_overworld_2_switch
+	ldr r3, _0813B86C @ =CB2_ReturnToField
 	movs r0, 0
 	str r0, [sp]
 	movs r1, 0
@@ -14098,7 +14098,7 @@ sub_813B854: @ 813B854
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0813B86C: .4byte c2_exit_to_overworld_2_switch
+_0813B86C: .4byte CB2_ReturnToField
 	thumb_func_end sub_813B854
 
 	.align 2, 0 @ Don't pad with nop.

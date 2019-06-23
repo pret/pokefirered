@@ -1,0 +1,221 @@
+{
+  "id": "MAP_MT_MOON_B2F",
+  "name": "MtMoon_B2F",
+  "layout": "LAYOUT_MT_MOON_B2F",
+  "music": "BGM_FRLG_MT_MOON",
+  "region_map_section": "MAPSEC_MT_MOON",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_4",
+  "unknown_18": 1,
+  "unknown_19": 7,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "98",
+      "x": 13,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "MtMoon_B2F_EventScript_16071B",
+      "flag": "47"
+    },
+    {
+      "graphics_id": "98",
+      "x": 14,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "MtMoon_B2F_EventScript_16077F",
+      "flag": "48"
+    },
+    {
+      "graphics_id": "55",
+      "x": 13,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "MtMoon_B2F_EventScript_1606C2",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "49",
+      "x": 37,
+      "y": 21,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "MtMoon_B2F_EventScript_160829",
+      "flag": "173"
+    },
+    {
+      "graphics_id": "49",
+      "x": 12,
+      "y": 20,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 2,
+      "script": "MtMoon_B2F_EventScript_1607E4",
+      "flag": "173"
+    },
+    {
+      "graphics_id": "49",
+      "x": 35,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "7",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 4,
+      "script": "MtMoon_B2F_EventScript_160812",
+      "flag": "173"
+    },
+    {
+      "graphics_id": "49",
+      "x": 18,
+      "y": 27,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 4,
+      "script": "MtMoon_B2F_EventScript_1607FB",
+      "flag": "173"
+    },
+    {
+      "graphics_id": "92",
+      "x": 30,
+      "y": 26,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "MtMoon_B2F_EventScript_1BE61D",
+      "flag": "351"
+    },
+    {
+      "graphics_id": "92",
+      "x": 35,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "MtMoon_B2F_EventScript_1BE62A",
+      "flag": "352"
+    },
+    {
+      "graphics_id": "92",
+      "x": 24,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "MtMoon_B2F_EventScript_1BEAD6",
+      "flag": "447"
+    },
+    {
+      "graphics_id": "92",
+      "x": 3,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "MtMoon_B2F_EventScript_1BEAE3",
+      "flag": "448"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 25,
+      "y": 21,
+      "elevation": 3,
+      "dest_map": "MAP_MT_MOON_B1F",
+      "dest_warp_id": 3
+    },
+    {
+      "x": 31,
+      "y": 11,
+      "elevation": 3,
+      "dest_map": "MAP_MT_MOON_B1F",
+      "dest_warp_id": 4
+    },
+    {
+      "x": 17,
+      "y": 31,
+      "elevation": 3,
+      "dest_map": "MAP_MT_MOON_B1F",
+      "dest_warp_id": 5
+    },
+    {
+      "x": 5,
+      "y": 10,
+      "elevation": 3,
+      "dest_map": "MAP_MT_MOON_B1F",
+      "dest_warp_id": 6
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 11,
+      "elevation": 3,
+      "var": "VAR_0x408B",
+      "var_value": 0,
+      "script": "MtMoon_B2F_EventScript_1606B0"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 20,
+      "y": 16,
+      "elevation": 3,
+      "item": "ITEM_MOON_STONE",
+      "flag": "2",
+      "unknown": 1
+    },
+    {
+      "type": "hidden_item",
+      "x": 39,
+      "y": 11,
+      "elevation": 3,
+      "item": "ITEM_ETHER",
+      "flag": "3",
+      "unknown": 1
+    }
+  ]
+}

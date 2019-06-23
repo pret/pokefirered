@@ -1,0 +1,102 @@
+{
+  "id": "MAP_CELADON_CITY_DEPARTMENT_STORE_5F",
+  "name": "CeladonCity_DepartmentStore_5F",
+  "layout": "LAYOUT_CELADON_CITY_DEPARTMENT_STORE_5F",
+  "music": "BGM_FRLG_POKEMON_CENTER",
+  "region_map_section": "MAPSEC_CELADON_CITY",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 0,
+  "unknown_19": 4,
+  "elevator_flag": 5,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "61",
+      "x": 11,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "5",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "CeladonCity_DepartmentStore_5F_EventScript_16BC41",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "62",
+      "x": 6,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "2",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "CeladonCity_DepartmentStore_5F_EventScript_16BC4A",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "68",
+      "x": 1,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 2,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "CeladonCity_DepartmentStore_5F_EventScript_16BC5C",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "68",
+      "x": 1,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 2,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "CeladonCity_DepartmentStore_5F_EventScript_16BC96",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 6,
+      "y": 1,
+      "elevation": 0,
+      "dest_map": "MAP_CELADON_CITY_DEPARTMENT_STORE_ELEVATOR",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 9,
+      "y": 2,
+      "elevation": 3,
+      "dest_map": "MAP_CELADON_CITY_DEPARTMENT_STORE_4F",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 3,
+      "y": 2,
+      "elevation": 3,
+      "dest_map": "MAP_CELADON_CITY_DEPARTMENT_STORE_ROOF",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "bg_event_type_0",
+      "x": 8,
+      "y": 1,
+      "elevation": 0,
+      "script": "CeladonCity_DepartmentStore_5F_EventScript_16BC53"
+    }
+  ]
+}

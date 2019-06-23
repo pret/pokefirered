@@ -24,8 +24,14 @@ struct UCoords32
     u32 x, y;
 };
 
+extern struct UCoords32 gDirectionToVectors[];
+
 extern struct LinkPlayerMapObject gLinkPlayerMapObjects[4];
 extern MainCallback gFieldCallback;
+
+extern struct WarpData gUnknown_2031DBC;
+
+extern u8 gUnknown_2031DE0;
 
 void IncrementGameStat(u8 index);
 
@@ -35,7 +41,10 @@ void Overworld_SetMapObjTemplateMovementType(u8, u8);
 void Overworld_SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 
 void saved_warp2_set(int unused, s8 mapGroup, s8 mapNum, s8 warpId);
-void saved_warp2_set_2(int unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
+void SetDynamicWarpWithCoords(int unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
+void SetFixedDiveWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
+void SetFixedHoleWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
+void SetEscapeWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void Overworld_SetHealLocationWarp(u8);
 void sub_8084DD4(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void sub_8084E2C(s8, s8, s8, s8, s8);
@@ -58,7 +67,7 @@ void strange_npc_table_clear(void);
 const struct MapHeader *get_mapheader_by_bank_and_number(u16, u16);
 void FieldObjectMoveDestCoords(struct MapObject *, u32, s16 *, s16 *);
 void sub_8086230(void);
-void c2_exit_to_overworld_2_switch(void);
+void CB2_ReturnToField(void);
 bool32 sub_8087598(void);
 void c2_exit_to_overworld_1_continue_scripts_restart_music(void);
 void warp_in(void);
@@ -79,13 +88,33 @@ void sub_805726C(void);
 void sub_8057430(void);
 void sub_8055DC4(void);
 
-u8 sav1_map_get_name(void);
+u8 GetCurrentRegionMapSectionId(void);
 
+void SetCurrentMapLayout(u16 mapDataId);
+void SetWarpDestinationToFixedHoleWarp(s16 x, s16 y);
+
+void ResetInitialPlayerAvatarState(void);
 void sub_8055D40(u16 mapDataId);
+void CleanupOverworldWindowsAndTilemaps(void);
 
 extern u8 gUnknown_2031DD8;
 extern u8 gUnknown_2036E28;
 
-extern bool8 (* gUnknown_3005024)(void);
+extern void (*gFieldCallback)(void);
+extern bool8 (* gFieldCallback2)(void);
+
+void SetLastHealLocationWarp(u8 healLocaionId);
+void sub_8055864(u8 mapGroup, u8 mapNum);
+void CB2_NewGame(void);
+bool8 Overworld_MapTypeAllowsTeleportAndFly(u8 mapType);
+void Overworld_ResetStateAfterTeleport(void);
+
+void Overworld_FadeOutMapMusic(void);
+void sub_805671C(void);
+void sub_8055DC4(void);
+bool8 sub_8055FC4(void);
+bool8 is_light_level_8_or_9(u8 mapType);
+bool32 sub_8055C9C(void);
+void sub_8054D70(void);
 
 #endif //GUARD_ROM4_H

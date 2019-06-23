@@ -18,8 +18,15 @@ extern u8 gUnknown_3005E88;
 extern u16 gUnknown_3005E8C;
 extern struct UnkStruct_3005E90 gUnknown_3005E90;
 extern struct UnkStruct_203AE98 * gUnknown_3005E94;
+extern const u16 gUnknown_84566A8[];
 
 void sub_8112720(u8);
 void sub_8113550(u16, const u16 *);
+void sub_8115748(u16);
+u8 sub_8112CAC(void);
+bool8 sub_81119D4(void (*func)(void));
+void sub_8111F38(u16, u16);
+
+extern u8 gUnknown_203ADFA;
 
 #endif //GUARD_QUEST_LOG_H

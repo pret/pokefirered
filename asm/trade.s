@@ -20,7 +20,7 @@ sub_804C600: @ 804C600
 	strb r0, [r2, 0x8]
 	ldr r0, _0804C6FC @ =sub_804D4F8
 	bl SetVBlankCallback
-	ldr r4, _0804C700 @ =gUnknown_841F408
+	ldr r4, _0804C700 @ =gTMCaseMainWindowPalette
 	adds r0, r4, 0
 	movs r1, 0xF0
 	movs r2, 0x14
@@ -78,11 +78,11 @@ _0804C674:
 	movs r0, 0
 	movs r1, 0x14
 	movs r2, 0xC0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	movs r0, 0x2
 	movs r1, 0x1
 	movs r2, 0xE0
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	bl sub_809707C
 	ldr r2, _0804C708 @ =gUnknown_2031DA8
 	ldr r0, [r2]
@@ -118,7 +118,7 @@ _0804C6F0:
 	.align 2, 0
 _0804C6F8: .4byte gPaletteFade
 _0804C6FC: .4byte sub_804D4F8
-_0804C700: .4byte gUnknown_841F408
+_0804C700: .4byte gTMCaseMainWindowPalette
 _0804C704: .4byte gUnknown_8261F1C
 _0804C708: .4byte gUnknown_2031DA8
 _0804C70C: .4byte gUnknown_8261F2C
@@ -422,7 +422,7 @@ _0804C9B0:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804C9E8
-	bl sub_80FA4F8
+	bl IsNoOneConnected
 	lsls r0, 24
 	cmp r0, 0
 	bne _0804C9C4
@@ -1832,7 +1832,7 @@ sub_804D5A4: @ 804D5A4
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804D5FC
-	bl sub_80FA4F8
+	bl IsNoOneConnected
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804D620
@@ -1845,7 +1845,7 @@ sub_804D5A4: @ 804D5A4
 	bl Free
 	movs r0, 0
 	str r0, [r5]
-	bl sub_80FCE44
+	bl DestroyWirelessStatusIndicatorSprite
 	ldr r0, _0804D5F8 @ =sub_8050138
 	bl SetMainCallback2
 	b _0804D620
@@ -2487,7 +2487,7 @@ _0804DB1A:
 	bne _0804DB5A
 	adds r0, r4, 0
 	movs r1, 0x2
-	ldr r2, _0804DB74 @ =gUnknown_8246BE5
+	ldr r2, _0804DB74 @ = gSpeciesNames + 0xD05
 	bl SetMonData
 _0804DB5A:
 	adds r4, 0x64
@@ -2500,7 +2500,7 @@ _0804DB5A:
 _0804DB68: .4byte gEnemyParty
 _0804DB6C: .4byte 0x0000012f
 _0804DB70: .4byte gUnknown_8262034
-_0804DB74: .4byte gUnknown_8246BE5
+_0804DB74: .4byte gSpeciesNames+0xD05
 _0804DB78:
 	ldr r2, _0804DBA8 @ =gUnknown_2031DA8
 	ldr r1, [r2]
@@ -3369,7 +3369,7 @@ _0804E208:
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0xE
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	movs r0, 0x1
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -3390,7 +3390,7 @@ _0804E208:
 	movs r1, 0x3
 	movs r2, 0
 	movs r3, 0
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0x1
@@ -3432,7 +3432,7 @@ _0804E2A6:
 	movs r1, 0x3
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810FF60
+	bl CreateYesNoMenu
 	ldr r0, [r4]
 	adds r0, 0x6F
 	movs r1, 0x4
@@ -3912,7 +3912,7 @@ _0804E670: .4byte 0x0000bbcc
 	thumb_func_start sub_804E674
 sub_804E674: @ 804E674
 	push {r4,lr}
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -4019,7 +4019,7 @@ _0804E740: .4byte gUnknown_2031DA8
 	thumb_func_start sub_804E744
 sub_804E744: @ 804E744
 	push {r4,r5,lr}
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r5, r0, 24
 	cmp r5, 0
@@ -4162,7 +4162,7 @@ sub_804E830: @ 804E830
 	movs r1, 0x3
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810FF60
+	bl CreateYesNoMenu
 	ldr r0, [r4]
 	adds r0, 0xA8
 	strb r5, [r0]
@@ -4296,7 +4296,7 @@ sub_804E944: @ 804E944
 	ldr r0, [r0]
 	bl Free
 	bl FreeAllWindowBuffers
-	bl sub_80FCE44
+	bl DestroyWirelessStatusIndicatorSprite
 	ldr r0, _0804E984 @ =c2_8056854
 	bl SetMainCallback2
 	b _0804E9AA
@@ -4827,7 +4827,7 @@ _0804ECEC:
 	str r0, [sp, 0x8]
 	adds r0, r5, 0
 	movs r3, 0x4
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add r6, sp, 0x28
 	adds r0, r6, 0
 	ldr r1, [sp, 0x60]
@@ -4847,7 +4847,7 @@ _0804ECEC:
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	adds r0, r5, 0
 	bl PutWindowTilemap
 	adds r0, r5, 0
@@ -5110,7 +5110,7 @@ sub_804EFB4: @ 804EFB4
 	adds r0, r4, 0
 	movs r1, 0
 	movs r3, 0x4
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r0, r4, 0
 	bl PutWindowTilemap
 	adds r0, r4, 0
@@ -5876,7 +5876,7 @@ sub_804F5BC: @ 804F5BC
 	movs r0, 0
 	movs r1, 0x14
 	movs r2, 0xC
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	movs r0, 0
 	bl PutWindowTilemap
 	movs r0, 0
@@ -7178,7 +7178,7 @@ _0804FF7A:
 	lsls r0, 1
 	cmp r1, r0
 	bls _0804FFAC
-	bl sub_80098B8
+	bl CloseLink
 	ldr r0, _0804FFC0 @ =c2_800ACD4
 	bl SetMainCallback2
 	ldr r1, [r4]
@@ -7285,7 +7285,7 @@ _08050040:
 	cmp r6, 0
 	bne _0805007C
 	lsls r0, r5, 3
-	ldr r1, _08050074 @ =gUnknown_82350AC
+	ldr r1, _08050074 @ =gMonFrontPicTable
 	adds r0, r1
 	ldr r1, _08050078 @ =gMonSpritesGfxPtr
 	ldr r1, [r1]
@@ -7296,11 +7296,11 @@ _08050040:
 	movs r4, 0
 	b _0805009A
 	.align 2, 0
-_08050074: .4byte gUnknown_82350AC
+_08050074: .4byte gMonFrontPicTable
 _08050078: .4byte gMonSpritesGfxPtr
 _0805007C:
 	lsls r0, r5, 3
-	ldr r1, _080500BC @ =gUnknown_82350AC
+	ldr r1, _080500BC @ =gMonFrontPicTable
 	adds r0, r1
 	ldr r1, _080500C0 @ =gMonSpritesGfxPtr
 	ldr r2, [r1]
@@ -7329,7 +7329,7 @@ _0805009A:
 	str r7, [r1]
 	b _0805011E
 	.align 2, 0
-_080500BC: .4byte gUnknown_82350AC
+_080500BC: .4byte gMonFrontPicTable
 _080500C0: .4byte gMonSpritesGfxPtr
 _080500C4: .4byte gUnknown_2031DAC
 _080500C8:
@@ -7337,7 +7337,7 @@ _080500C8:
 	bl GetMonSpritePalStruct
 	ldrh r0, [r0, 0x4]
 	adds r1, r4, 0
-	bl sub_803F7D4
+	bl SetMultiuseSpriteTemplateToPokemon
 	ldr r0, _08050128 @ =gMultiuseSpriteTemplate
 	movs r1, 0x78
 	movs r2, 0x3C
@@ -7432,7 +7432,7 @@ _08050194:
 	ldr r2, _08050230 @ =0x00001144
 	adds r0, r2, 0
 	strh r0, [r1]
-	bl sub_80098B8
+	bl CloseLink
 _080501A8:
 	ldr r4, _08050234 @ =gUnknown_2031DAC
 	movs r0, 0x88
@@ -7841,7 +7841,7 @@ sub_80504CC: @ 80504CC
 	movs r0, 0x3
 	bl SetBgTilemapBuffer
 	bl DeactivateAllTextPrinters
-	ldr r0, _080505B8 @ =gUnknown_8D00000
+	ldr r0, _080505B8 @ =gBattleTextboxTiles
 	mov r10, r0
 	movs r0, 0
 	mov r9, r0
@@ -7849,7 +7849,7 @@ sub_80504CC: @ 80504CC
 	mov r1, r10
 	movs r2, 0
 	movs r3, 0
-	bl sub_80F696C
+	bl DecompressAndLoadBgGfxUsingHeap
 	ldr r0, _080505BC @ =gFile_graphics_interface_menu_map_tilemap
 	mov r8, r0
 	ldr r4, _080505C0 @ =gDecompressionBuffer
@@ -7860,7 +7860,7 @@ sub_80504CC: @ 80504CC
 	adds r2, r5, 0
 	movs r3, 0
 	bl CopyToBgTilemapBuffer
-	ldr r6, _080505C4 @ =gUnknown_8D004D8
+	ldr r6, _080505C4 @ =gBattleTextboxPalette
 	adds r0, r6, 0
 	movs r1, 0
 	movs r2, 0x20
@@ -7873,7 +7873,7 @@ sub_80504CC: @ 80504CC
 	mov r1, r10
 	movs r2, 0
 	movs r3, 0
-	bl sub_80F696C
+	bl DecompressAndLoadBgGfxUsingHeap
 	mov r0, r8
 	adds r1, r4, 0
 	bl LZDecompressWram
@@ -7896,10 +7896,10 @@ sub_80504CC: @ 80504CC
 	bx r0
 	.align 2, 0
 _080505B4: .4byte gUnknown_826D1D4
-_080505B8: .4byte gUnknown_8D00000
+_080505B8: .4byte gBattleTextboxTiles
 _080505BC: .4byte gFile_graphics_interface_menu_map_tilemap
 _080505C0: .4byte gDecompressionBuffer
-_080505C4: .4byte gUnknown_8D004D8
+_080505C4: .4byte gBattleTextboxPalette
 _080505C8: .4byte gUnknown_826D1BC
 	thumb_func_end sub_80504CC
 
@@ -8360,11 +8360,11 @@ _080509A4:
 	ldr r1, _08050A00 @ =0x00005206
 	movs r0, 0xC
 	bl SetGpuReg
-	ldr r0, _08050A04 @ =gUnknown_8EAEA20
+	ldr r0, _08050A04 @ =gTradeGba2_Pal
 	movs r1, 0x10
 	movs r2, 0x60
 	bl LoadPalette
-	ldr r3, _08050A08 @ =gUnknown_8EAEA80
+	ldr r3, _08050A08 @ =gTradeGba_Gfx
 	ldr r4, _08050A0C @ =0x06004000
 	movs r5, 0xA1
 	lsls r5, 5
@@ -8388,8 +8388,8 @@ _080509E6:
 	.align 2, 0
 _080509FC: .4byte gUnknown_2031DAC
 _08050A00: .4byte 0x00005206
-_08050A04: .4byte gUnknown_8EAEA20
-_08050A08: .4byte gUnknown_8EAEA80
+_08050A04: .4byte gTradeGba2_Pal
+_08050A08: .4byte gTradeGba_Gfx
 _08050A0C: .4byte 0x06004000
 _08050A10: .4byte 0x040000d4
 _08050A14: .4byte 0x80000800
@@ -8436,7 +8436,7 @@ _08050A66:
 	ldr r1, _08050ABC @ =0x80000800
 	str r1, [r0, 0x8]
 	ldr r0, [r0, 0x8]
-	ldr r3, _08050AC0 @ =gUnknown_8EAEA80
+	ldr r3, _08050AC0 @ =gTradeGba_Gfx
 	movs r4, 0xC0
 	lsls r4, 19
 	movs r5, 0xA1
@@ -8471,7 +8471,7 @@ _08050AB0: .4byte gUnknown_8269A5C
 _08050AB4: .4byte 0x06002800
 _08050AB8: .4byte 0x040000d4
 _08050ABC: .4byte 0x80000800
-_08050AC0: .4byte gUnknown_8EAEA80
+_08050AC0: .4byte gTradeGba_Gfx
 _08050AC4:
 	ldr r0, _08050AF4 @ =gUnknown_2031DAC
 	ldr r2, [r0]
@@ -8769,11 +8769,11 @@ _08050D48:
 	ldr r1, _08050DC0 @ =0x00005206
 	movs r0, 0xC
 	bl SetGpuReg
-	ldr r0, _08050DC4 @ =gUnknown_8EAEA20
+	ldr r0, _08050DC4 @ =gTradeGba2_Pal
 	movs r1, 0x10
 	movs r2, 0x60
 	bl LoadPalette
-	ldr r3, _08050DC8 @ =gUnknown_8EAEA80
+	ldr r3, _08050DC8 @ =gTradeGba_Gfx
 	ldr r4, _08050DCC @ =0x06004000
 	movs r5, 0xA1
 	lsls r5, 5
@@ -8800,7 +8800,7 @@ _08050D98:
 	orrs r0, r7
 	str r0, [r1, 0x8]
 	ldr r0, [r1, 0x8]
-	ldr r1, _08050DD8 @ =gUnknown_826601C
+	ldr r1, _08050DD8 @ =gUnknown_08331F60
 	ldr r2, _08050DDC @ =0x06009000
 	ldr r0, _08050DD0 @ =0x040000d4
 	str r1, [r0]
@@ -8816,12 +8816,12 @@ _08050DB4:
 	.align 2, 0
 _08050DBC: .4byte gUnknown_2031DAC
 _08050DC0: .4byte 0x00005206
-_08050DC4: .4byte gUnknown_8EAEA20
-_08050DC8: .4byte gUnknown_8EAEA80
+_08050DC4: .4byte gTradeGba2_Pal
+_08050DC8: .4byte gTradeGba_Gfx
 _08050DCC: .4byte 0x06004000
 _08050DD0: .4byte 0x040000d4
 _08050DD4: .4byte 0x80000800
-_08050DD8: .4byte gUnknown_826601C
+_08050DD8: .4byte gUnknown_08331F60
 _08050DDC: .4byte 0x06009000
 	thumb_func_end sub_8050968
 
@@ -10807,7 +10807,7 @@ _08052042:
 	adds r0, 0xF2
 	ldrh r2, [r0]
 	lsls r0, r2, 3
-	ldr r1, _08052068 @ =gUnknown_82350AC
+	ldr r1, _08052068 @ =gMonFrontPicTable
 	adds r0, r1
 	ldr r1, _0805206C @ =gMonSpritesGfxPtr
 	ldr r1, [r1]
@@ -10819,7 +10819,7 @@ _08052042:
 	.align 2, 0
 _08052060: .4byte gSprites
 _08052064: .4byte SpriteCallbackDummy
-_08052068: .4byte gUnknown_82350AC
+_08052068: .4byte gMonFrontPicTable
 _0805206C: .4byte gMonSpritesGfxPtr
 _08052070:
 	ldr r4, _0805211C @ =gSprites
@@ -11137,7 +11137,7 @@ _080522BC:
 	bl Free
 	str r4, [r7]
 _0805230A:
-	ldr r0, _08052328 @ =c2_exit_to_overworld_2_switch
+	ldr r0, _08052328 @ =CB2_ReturnToField
 	bl SetMainCallback2
 	bl sub_8053AE4
 	bl sub_812B484
@@ -11150,7 +11150,7 @@ _0805231A:
 	bx r1
 	.align 2, 0
 _08052324: .4byte gPaletteFade
-_08052328: .4byte c2_exit_to_overworld_2_switch
+_08052328: .4byte CB2_ReturnToField
 	thumb_func_end sub_8050F3C
 
 	thumb_func_start sub_805232C
@@ -13032,7 +13032,7 @@ _0805349E:
 	adds r0, 0xF2
 	ldrh r2, [r0]
 	lsls r0, r2, 3
-	ldr r1, _080534C4 @ =gUnknown_82350AC
+	ldr r1, _080534C4 @ =gMonFrontPicTable
 	adds r0, r1
 	ldr r1, _080534C8 @ =gMonSpritesGfxPtr
 	ldr r1, [r1]
@@ -13044,7 +13044,7 @@ _0805349E:
 	.align 2, 0
 _080534BC: .4byte gSprites
 _080534C0: .4byte SpriteCallbackDummy
-_080534C4: .4byte gUnknown_82350AC
+_080534C4: .4byte gMonFrontPicTable
 _080534C8: .4byte gMonSpritesGfxPtr
 _080534CC:
 	ldr r4, _08053578 @ =gSprites
@@ -13362,7 +13362,7 @@ _08053718:
 	bl Free
 	str r4, [r7]
 _08053766:
-	ldr r0, _08053784 @ =c2_exit_to_overworld_2_switch
+	ldr r0, _08053784 @ =CB2_ReturnToField
 	bl SetMainCallback2
 	bl sub_8053AE4
 	bl sub_812B484
@@ -13375,7 +13375,7 @@ _08053776:
 	bx r1
 	.align 2, 0
 _08053780: .4byte gPaletteFade
-_08053784: .4byte c2_exit_to_overworld_2_switch
+_08053784: .4byte CB2_ReturnToField
 	thumb_func_end sub_805232C
 
 	thumb_func_start sub_8053788
@@ -14745,7 +14745,7 @@ _0805434C:
 	ldr r0, _08054378 @ =sub_804C718
 	cmp r1, r0
 	bne _08054384
-	bl sub_80FA4F8
+	bl IsNoOneConnected
 	lsls r0, 24
 	cmp r0, 0
 	beq _08054396
@@ -14819,7 +14819,7 @@ sub_80543C4: @ 80543C4
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08054412
-	bl sub_80FCE44
+	bl DestroyWirelessStatusIndicatorSprite
 _08054412:
 	ldr r0, _0805443C @ =gMain
 	ldr r0, [r0, 0x8]
@@ -14875,8 +14875,8 @@ sub_8054470: @ 8054470
 	bne _08054494
 	ldr r0, _080544A0 @ =sub_80505CC
 	bl SetMainCallback2
-	ldr r1, _080544A4 @ =gUnknown_3005020
-	ldr r0, _080544A8 @ =sub_807DD24
+	ldr r1, _080544A4 @ =gFieldCallback
+	ldr r0, _080544A8 @ =FieldCallback_ReturnToEventScript2
 	str r0, [r1]
 	adds r0, r4, 0
 	bl DestroyTask
@@ -14887,8 +14887,8 @@ _08054494:
 	.align 2, 0
 _0805449C: .4byte gPaletteFade
 _080544A0: .4byte sub_80505CC
-_080544A4: .4byte gUnknown_3005020
-_080544A8: .4byte sub_807DD24
+_080544A4: .4byte gFieldCallback
+_080544A8: .4byte FieldCallback_ReturnToEventScript2
 	thumb_func_end sub_8054470
 
 	thumb_func_start sub_80544AC
@@ -14989,7 +14989,7 @@ sub_8054508: @ 8054508
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	adds r0, r5, 0
 	movs r1, 0x3
 	bl CopyWindowToVram

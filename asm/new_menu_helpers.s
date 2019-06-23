@@ -272,8 +272,8 @@ _080F695E:
 	bx r1
 	thumb_func_end sub_80F68F0
 
-	thumb_func_start sub_80F696C
-sub_80F696C: @ 80F696C
+	thumb_func_start DecompressAndLoadBgGfxUsingHeap
+DecompressAndLoadBgGfxUsingHeap: @ 80F696C
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -333,7 +333,7 @@ _080F69D2:
 	.align 2, 0
 _080F69E0: .4byte task_free_buf_after_copying_tile_data_to_vram
 _080F69E4: .4byte gTasks
-	thumb_func_end sub_80F696C
+	thumb_func_end DecompressAndLoadBgGfxUsingHeap
 
 	thumb_func_start sub_80F69E8
 sub_80F69E8: @ 80F69E8
@@ -486,8 +486,8 @@ _080F6AFC:
 	bx r1
 	thumb_func_end sub_80F6AD0
 
-	thumb_func_start sub_80F6B08
-sub_80F6B08: @ 80F6B08
+	thumb_func_start SetBgRectPal
+SetBgRectPal: @ 80F6B08
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -561,7 +561,7 @@ _080F6B80:
 	bx r0
 	.align 2, 0
 _080F6B90: .4byte 0x00000fff
-	thumb_func_end sub_80F6B08
+	thumb_func_end SetBgRectPal
 
 	thumb_func_start sub_80F6B94
 sub_80F6B94: @ 80F6B94
@@ -672,8 +672,8 @@ sub_80F6C14: @ 80F6C14
 	bx r0
 	thumb_func_end sub_80F6C14
 
-	thumb_func_start sub_80F6C6C
-sub_80F6C6C: @ 80F6C6C
+	thumb_func_start InitStandardTextBoxWindows
+InitStandardTextBoxWindows: @ 80F6C6C
 	push {lr}
 	ldr r0, _080F6C84 @ =gUnknown_841F42C
 	bl InitWindows
@@ -686,7 +686,7 @@ sub_80F6C6C: @ 80F6C6C
 	.align 2, 0
 _080F6C84: .4byte gUnknown_841F42C
 _080F6C88: .4byte gUnknown_203ABE0
-	thumb_func_end sub_80F6C6C
+	thumb_func_end InitStandardTextBoxWindows
 
 	thumb_func_start sub_80F6C8C
 sub_80F6C8C: @ 80F6C8C
@@ -696,8 +696,8 @@ sub_80F6C8C: @ 80F6C8C
 	bx r0
 	thumb_func_end sub_80F6C8C
 
-	thumb_func_start sub_80F6C98
-sub_80F6C98: @ 80F6C98
+	thumb_func_start ResetBg0
+ResetBg0: @ 80F6C98
 	push {lr}
 	movs r0, 0
 	movs r1, 0
@@ -711,7 +711,7 @@ sub_80F6C98: @ 80F6C98
 	bl sub_80F6E9C
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80F6C98
+	thumb_func_end ResetBg0
 
 	thumb_func_start sub_80F6CBC
 sub_80F6CBC: @ 80F6CBC
@@ -725,8 +725,8 @@ sub_80F6CBC: @ 80F6CBC
 	bx r1
 	thumb_func_end sub_80F6CBC
 
-	thumb_func_start AddTextPrinterParametrized
-AddTextPrinterParametrized: @ 80F6CD0
+	thumb_func_start AddTextPrinterParameterized2
+AddTextPrinterParameterized2: @ 80F6CD0
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -796,7 +796,7 @@ AddTextPrinterParametrized: @ 80F6CD0
 	bx r1
 	.align 2, 0
 _080F6D58: .4byte gTextFlags
-	thumb_func_end AddTextPrinterParametrized
+	thumb_func_end AddTextPrinterParameterized2
 
 	thumb_func_start sub_80F6D5C
 sub_80F6D5C: @ 80F6D5C
@@ -819,7 +819,7 @@ sub_80F6D5C: @ 80F6D5C
 	lsrs r0, 24
 	cmp r0, 0
 	bne _080F6DB0
-	bl sub_80F78A8
+	bl GetTextSpeedSetting
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -832,7 +832,7 @@ sub_80F6D5C: @ 80F6D5C
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x4
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 	b _080F6DFC
 	.align 2, 0
 _080F6DA8: .4byte gTextFlags
@@ -840,7 +840,7 @@ _080F6DAC: .4byte gStringVar4
 _080F6DB0:
 	cmp r0, 0x1
 	bne _080F6DDC
-	bl sub_80F78A8
+	bl GetTextSpeedSetting
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -853,12 +853,12 @@ _080F6DB0:
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x5
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 	b _080F6DFC
 	.align 2, 0
 _080F6DD8: .4byte gStringVar4
 _080F6DDC:
-	bl sub_80F78A8
+	bl GetTextSpeedSetting
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -871,7 +871,7 @@ _080F6DDC:
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x2
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 _080F6DFC:
 	add sp, 0x10
 	pop {r4,r5}
@@ -896,7 +896,7 @@ sub_80F6E08: @ 80F6E08
 	ands r1, r2
 	orrs r1, r0
 	strb r1, [r3]
-	bl sub_80F78A8
+	bl GetTextSpeedSetting
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -910,7 +910,7 @@ sub_80F6E08: @ 80F6E08
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x2
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 	add sp, 0x10
 	pop {r4}
 	pop {r0}
@@ -948,7 +948,7 @@ sub_80F6E54: @ 80F6E54
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x2
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 	add sp, 0x10
 	pop {r4,r5}
 	pop {r0}
@@ -984,19 +984,19 @@ _080F6EC4:
 	lsls r1, 2
 	movs r0, 0
 	movs r2, 0xF0
-	bl sub_814FEAC
+	bl TextWindow_SetBubbleFrame_841F1C8
 _080F6ED4:
 	movs r1, 0x85
 	lsls r1, 2
 	movs r0, 0
 	movs r2, 0xE0
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80F6E9C
 
-	thumb_func_start sub_80F6EE4
-sub_80F6EE4: @ 80F6EE4
+	thumb_func_start DrawDialogueFrame
+DrawDialogueFrame: @ 80F6EE4
 	push {r4,r5,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -1022,10 +1022,10 @@ _080F6F12:
 	bx r0
 	.align 2, 0
 _080F6F18: .4byte sub_80F7124
-	thumb_func_end sub_80F6EE4
+	thumb_func_end DrawDialogueFrame
 
-	thumb_func_start sub_80F6F1C
-sub_80F6F1C: @ 80F6F1C
+	thumb_func_start DrawStdWindowFrame
+DrawStdWindowFrame: @ 80F6F1C
 	push {r4,r5,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -1051,10 +1051,10 @@ _080F6F4A:
 	bx r0
 	.align 2, 0
 _080F6F50: .4byte sub_80F6FD4
-	thumb_func_end sub_80F6F1C
+	thumb_func_end DrawStdWindowFrame
 
-	thumb_func_start sub_80F6F54
-sub_80F6F54: @ 80F6F54
+	thumb_func_start ClearDialogWindowAndFrame
+ClearDialogWindowAndFrame: @ 80F6F54
 	push {r4,r5,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -1087,10 +1087,10 @@ _080F6F8E:
 	.align 2, 0
 _080F6F94: .4byte sub_80F76CC
 _080F6F98: .4byte gUnknown_203ADFA
-	thumb_func_end sub_80F6F54
+	thumb_func_end ClearDialogWindowAndFrame
 
-	thumb_func_start sub_80F6F9C
-sub_80F6F9C: @ 80F6F9C
+	thumb_func_start ClearStdWindowAndFrame
+ClearStdWindowAndFrame: @ 80F6F9C
 	push {r4,r5,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -1116,7 +1116,7 @@ _080F6FCA:
 	bx r0
 	.align 2, 0
 _080F6FD0: .4byte sub_80F7684
-	thumb_func_end sub_80F6F9C
+	thumb_func_end ClearStdWindowAndFrame
 
 	thumb_func_start sub_80F6FD4
 sub_80F6FD4: @ 80F6FD4
@@ -2033,7 +2033,7 @@ _080F7798:
 	lsls r1, 2
 	adds r0, r4, 0
 	movs r2, 0xF0
-	bl sub_814FEAC
+	bl TextWindow_SetBubbleFrame_841F1C8
 _080F77A4:
 	movs r2, 0x80
 	lsls r2, 2
@@ -2049,37 +2049,37 @@ _080F77A4:
 	thumb_func_start sub_80F77B8
 sub_80F77B8: @ 80F77B8
 	push {lr}
-	ldr r0, _080F77C8 @ =gUnknown_841F408
+	ldr r0, _080F77C8 @ =gTMCaseMainWindowPalette
 	movs r1, 0xE0
 	movs r2, 0x14
 	bl LoadPalette
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F77C8: .4byte gUnknown_841F408
+_080F77C8: .4byte gTMCaseMainWindowPalette
 	thumb_func_end sub_80F77B8
 
-	thumb_func_start sub_80F77CC
-sub_80F77CC: @ 80F77CC
+	thumb_func_start Menu_LoadStdPalAt
+Menu_LoadStdPalAt: @ 80F77CC
 	push {lr}
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r0, _080F77E0 @ =gUnknown_841F408
+	ldr r0, _080F77E0 @ =gTMCaseMainWindowPalette
 	movs r2, 0x14
 	bl LoadPalette
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F77E0: .4byte gUnknown_841F408
-	thumb_func_end sub_80F77CC
+_080F77E0: .4byte gTMCaseMainWindowPalette
+	thumb_func_end Menu_LoadStdPalAt
 
 	thumb_func_start sub_80F77E4
 sub_80F77E4: @ 80F77E4
-	ldr r0, _080F77E8 @ =gUnknown_841F408
+	ldr r0, _080F77E8 @ =gTMCaseMainWindowPalette
 	bx lr
 	.align 2, 0
-_080F77E8: .4byte gUnknown_841F408
+_080F77E8: .4byte gTMCaseMainWindowPalette
 	thumb_func_end sub_80F77E4
 
 	thumb_func_start sub_80F77EC
@@ -2091,14 +2091,14 @@ sub_80F77EC: @ 80F77EC
 	bls _080F77F8
 	movs r1, 0
 _080F77F8:
-	ldr r0, _080F7804 @ =gUnknown_841F408
+	ldr r0, _080F7804 @ =gTMCaseMainWindowPalette
 	lsls r1, 1
 	adds r1, r0
 	ldrh r0, [r1]
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080F7804: .4byte gUnknown_841F408
+_080F7804: .4byte gTMCaseMainWindowPalette
 	thumb_func_end sub_80F77EC
 
 	thumb_func_start DisplayItemMessageOnField
@@ -2116,7 +2116,7 @@ DisplayItemMessageOnField: @ 80F7808
 	lsls r4, 24
 	lsrs r4, 24
 	bl sub_80F6E9C
-	bl sub_80F78A8
+	bl GetTextSpeedSetting
 	lsls r0, 24
 	lsrs r0, 24
 	movs r2, 0x80
@@ -2156,7 +2156,7 @@ sub_80F7858: @ 80F7858
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810FF60
+	bl CreateYesNoMenu
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -2179,7 +2179,7 @@ sub_80F7880: @ 80F7880
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810FF60
+	bl CreateYesNoMenu
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -2187,8 +2187,8 @@ sub_80F7880: @ 80F7880
 _080F78A4: .4byte gUnknown_841F43C
 	thumb_func_end sub_80F7880
 
-	thumb_func_start sub_80F78A8
-sub_80F78A8: @ 80F78A8
+	thumb_func_start GetTextSpeedSetting
+GetTextSpeedSetting: @ 80F78A8
 	push {lr}
 	ldr r3, _080F78D8 @ =gSaveBlock2Ptr
 	ldr r2, [r3]
@@ -2216,7 +2216,7 @@ _080F78C4:
 	.align 2, 0
 _080F78D8: .4byte gSaveBlock2Ptr
 _080F78DC: .4byte gUnknown_841F428
-	thumb_func_end sub_80F78A8
+	thumb_func_end GetTextSpeedSetting
 
 	thumb_func_start sub_80F78E0
 sub_80F78E0: @ 80F78E0
@@ -2347,7 +2347,7 @@ sub_80F79A4: @ 80F79A4
 	lsls r1, 2
 	movs r0, 0
 	movs r2, 0xE0
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80F79A4

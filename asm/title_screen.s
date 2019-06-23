@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8078914
-sub_8078914: @ 8078914
+	thumb_func_start CB2_InitTitleScreen
+CB2_InitTitleScreen: @ 8078914
 	push {r4-r6,lr}
 	sub sp, 0xC
 	ldr r0, _08078930 @ =gMain
@@ -230,7 +230,7 @@ _08078B26:
 	bx r0
 	.align 2, 0
 _08078B30: .4byte gMain
-	thumb_func_end sub_8078914
+	thumb_func_end CB2_InitTitleScreen
 
 	thumb_func_start sub_8078B34
 sub_8078B34: @ 8078B34
@@ -292,7 +292,7 @@ sub_8078BB4: @ 8078BB4
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
-	bl sub_8087F54
+	bl ScanlineEffect_InitHBlankDmaTransfer
 	ldr r1, _08078BE4 @ =gUnknown_2037F30
 	ldrb r0, [r1]
 	cmp r0, 0xFF
@@ -433,7 +433,7 @@ sub_8078C9C: @ 8078C9C
 	strb r5, [r0, 0x9]
 	add r0, sp, 0xC
 	strh r5, [r0]
-	ldr r4, _08078D1C @ =gUnknown_2038700
+	ldr r4, _08078D1C @ =gScanlineEffectRegBuffers
 	ldr r6, _08078D20 @ =0x010000a0
 	adds r1, r4, 0
 	adds r2, r6, 0
@@ -450,7 +450,7 @@ sub_8078C9C: @ 8078C9C
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
 	ldr r2, [sp, 0x8]
-	bl sub_8087EE4
+	bl ScanlineEffect_SetParams
 	mov r0, r8
 	movs r1, 0x1
 	bl sub_8078C90
@@ -463,7 +463,7 @@ sub_8078C9C: @ 8078C9C
 	.align 2, 0
 _08078D14: .4byte 0x04000054
 _08078D18: .4byte 0xa2600001
-_08078D1C: .4byte gUnknown_2038700
+_08078D1C: .4byte gScanlineEffectRegBuffers
 _08078D20: .4byte 0x010000a0
 	thumb_func_end sub_8078C9C
 
@@ -507,7 +507,7 @@ _08078D5C:
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	bge _08078D9C
-	ldr r1, _08078D80 @ =gUnknown_2039600
+	ldr r1, _08078D80 @ =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 _08078D78:
@@ -516,7 +516,7 @@ _08078D78:
 	strh r0, [r4, 0x2]
 	b _08078D9C
 	.align 2, 0
-_08078D80: .4byte gUnknown_2039600
+_08078D80: .4byte gScanlineEffect
 _08078D84:
 	movs r0, 0x50
 	movs r1, 0
@@ -809,7 +809,7 @@ sub_8078FC4: @ 8078FC4
 	b _08079094
 _08078FD6:
 	movs r0, 0x1
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	ldr r0, _0807902C @ =sub_807941C
 	movs r1, 0
 	bl CreateTask
@@ -1481,9 +1481,9 @@ sub_8079550: @ 8079550
 	asrs r4, r5, 16
 	cmp r4, 0
 	blt _08079574
-	ldr r3, _08079618 @ =gUnknown_2038700
+	ldr r3, _08079618 @ =gScanlineEffectRegBuffers
 	lsls r2, r4, 1
-	ldr r0, _0807961C @ =gUnknown_2039600
+	ldr r0, _0807961C @ =gScanlineEffect
 	ldrb r1, [r0, 0x14]
 	lsls r0, r1, 4
 	subs r0, r1
@@ -1496,9 +1496,9 @@ _08079574:
 	movs r3, 0
 	mov r8, r5
 	adds r6, r4, 0
-	ldr r0, _08079618 @ =gUnknown_2038700
+	ldr r0, _08079618 @ =gScanlineEffectRegBuffers
 	mov r12, r0
-	ldr r7, _0807961C @ =gUnknown_2039600
+	ldr r7, _0807961C @ =gScanlineEffect
 	movs r5, 0xF
 	lsls r2, r6, 1
 	adds r4, r2, 0
@@ -1537,8 +1537,8 @@ _080795AE:
 	adds r3, 0x10
 	cmp r3, 0x9F
 	bgt _080795E6
-	ldr r6, _08079618 @ =gUnknown_2038700
-	ldr r5, _0807961C @ =gUnknown_2039600
+	ldr r6, _08079618 @ =gScanlineEffectRegBuffers
+	ldr r5, _0807961C @ =gScanlineEffect
 	movs r4, 0
 _080795CC:
 	cmp r3, 0
@@ -1562,8 +1562,8 @@ _080795E6:
 	subs r3, 0x10
 	cmp r3, 0
 	blt _0807960E
-	ldr r6, _08079618 @ =gUnknown_2038700
-	ldr r5, _0807961C @ =gUnknown_2039600
+	ldr r6, _08079618 @ =gScanlineEffectRegBuffers
+	ldr r5, _0807961C @ =gScanlineEffect
 	movs r4, 0
 _080795F8:
 	lsls r2, r3, 1
@@ -1584,14 +1584,14 @@ _0807960E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08079618: .4byte gUnknown_2038700
-_0807961C: .4byte gUnknown_2039600
+_08079618: .4byte gScanlineEffectRegBuffers
+_0807961C: .4byte gScanlineEffect
 	thumb_func_end sub_8079550
 
 	thumb_func_start sub_8079620
 sub_8079620: @ 8079620
 	push {lr}
-	ldr r1, _08079644 @ =gUnknown_2039600
+	ldr r1, _08079644 @ =gScanlineEffect
 	ldrb r0, [r1, 0x15]
 	cmp r0, 0
 	beq _0807962E
@@ -1607,7 +1607,7 @@ _0807962E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08079644: .4byte gUnknown_2039600
+_08079644: .4byte gScanlineEffect
 	thumb_func_end sub_8079620
 
 	thumb_func_start sub_8079648
@@ -1688,13 +1688,13 @@ sub_80796E8: @ 80796E8
 	cmp r0, 0
 	bne _080796FE
 	bl m4aMPlayAllStop
-	ldr r0, _08079704 @ =sub_815F74C
+	ldr r0, _08079704 @ =mb_berry_fix_serve
 	bl SetMainCallback2
 _080796FE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08079704: .4byte sub_815F74C
+_08079704: .4byte mb_berry_fix_serve
 	thumb_func_end sub_80796E8
 
 	thumb_func_start sub_8079708

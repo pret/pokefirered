@@ -2,11 +2,11 @@
 .global SPECIAL_\ptr
 .set SPECIAL_\ptr, __special__
 .set __special__, __special__ + 1
-    .4byte \ptr
-    .endm
+	.4byte \ptr
+	.endm
 
 .set __special__, 0
-    .align 2
+	.align 2
 
 gSpecials:: @ 815FD60
 	def_special sp000_heal_pokemon
@@ -40,7 +40,7 @@ gSpecials:: @ 815FD60
 	def_special sub_8081064
 	def_special sub_80810CC
 	def_special sub_80810F4
-	def_special sub_80098B8
+	def_special CloseLink
 	def_special sub_80819C8
 	def_special sub_8081978
 	def_special sub_80819B8
@@ -139,7 +139,7 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special sub_80BDB1C
 	def_special nullsub_75
-	def_special sub_809A540
+	def_special RegisteredItemHandleBikeSwap
 	def_special CalculatePlayerPartyCount
 	def_special CountPartyNonEggMons
 	def_special CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
@@ -191,7 +191,7 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special sub_80CA74C
 	def_special GetDaycareMonNicknames
-	def_special sub_80464B4
+	def_special GetDaycareState
 	def_special RejectEggFromDayCare
 	def_special GiveEggFromDaycare
 	def_special SetDaycareCompatibilityString
@@ -203,7 +203,7 @@ gSpecials:: @ 815FD60
 	def_special GetDaycareCost
 	def_special TakePokemonFromDaycare
 	def_special ScriptHatchMon
-	def_special sub_8046FD4
+	def_special EggHatch
 	def_special sub_8046EAC
 	def_special sub_80CD228
 	def_special IsEnoughForCostInVar0x8005
@@ -221,7 +221,7 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
-	def_special sub_80CA3D8
+	def_special Special_GetPokedexCount
 	def_special sub_80CA524
 	def_special sub_80CA86C
 	def_special sub_80CA9A8
@@ -306,7 +306,7 @@ gSpecials:: @ 815FD60
 	def_special ScrSpecial_AreLeadMonEVsMaxedOut
 	def_special sub_8069740
 	def_special sub_8069768
-	def_special sub_8141D9C
+	def_special InitRoamer
 	def_special nullsub_75
 	def_special sub_80CA804
 	def_special nullsub_75
@@ -327,8 +327,8 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special sub_807B6C0
-	def_special sp13E_warp_to_last_warp
-	def_special sp13F_fall_to_last_warp
+	def_special DoDiveWarp
+	def_special DoFallWarp
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special sub_80E5E70
@@ -363,7 +363,7 @@ gSpecials:: @ 815FD60
 	def_special GetDaycarePokemonCount
 	def_special sub_80CB63C
 	def_special sub_80CBD80
-	def_special sub_80CBDB0
+	def_special ScrSpecial_GetStarter
 	def_special sub_80CBDCC
 	def_special sub_810C444
 	def_special sub_80CC7B4
@@ -383,17 +383,17 @@ gSpecials:: @ 815FD60
 	def_special SetFlavorTextFlagFromSpecialVars
 	def_special UpdatePickStateFromSpecialVar8005
 	def_special sub_8054C48
-	def_special sub_8046B40
-	def_special sub_8046B70
-	def_special sub_8046B94
-	def_special sub_8046BBC
-	def_special sub_8046BDC
-	def_special sub_8146E78
+	def_special PutMonInRoute5Daycare
+	def_special GetCostToWithdrawRoute5DaycareMon
+	def_special IsThereMonInRoute5Daycare
+	def_special GetNumLevelsGainedForRoute5DaycareMon
+	def_special TakePokemonFromRoute5Daycare
+	def_special ScrSpecial_SeaGallopFerry
 	def_special sub_80CC48C
 	def_special sub_812B220
 	def_special sub_812B234
 	def_special sub_812B248
-	def_special sub_8143FC8
+	def_special ValidateReceivedWonderCard
 	def_special sub_810B810
 	def_special sub_811999C
 	def_special sp182_move_string
@@ -410,7 +410,7 @@ gSpecials:: @ 815FD60
 	def_special sub_8127888
 	def_special sub_80803FC
 	def_special sub_812B35C
-	def_special sub_815D334
+	def_special Special_SSAnneDepartureCutscene
 	def_special sub_8149A18
 	def_special sub_806E25C
 	def_special sub_815D9E8
@@ -420,7 +420,7 @@ gSpecials:: @ 815FD60
 	def_special sub_812B478
 	def_special sub_812B484
 	def_special sub_810B82C
-	def_special sub_8099FAC
+	def_special CheckHasAtLeastOneBerry
 	def_special sub_815F094
 	def_special sub_815F114
 	def_special sub_815EEB0

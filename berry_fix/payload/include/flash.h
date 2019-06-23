@@ -1,7 +1,7 @@
 #ifndef GUARD_FLASH_H
 #define GUARD_FLASH_H
 
-#include <gba/gba.h>
+#include "gba/gba.h"
 
 enum
 {

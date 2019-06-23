@@ -1,0 +1,222 @@
+{
+  "id": "MAP_VICTORY_ROAD_3F",
+  "name": "VictoryRoad_3F",
+  "layout": "LAYOUT_VICTORY_ROAD_3F",
+  "music": "BGM_FRLG_MT_MOON",
+  "region_map_section": "MAPSEC_KANTO_VICTORY_ROAD",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_4",
+  "unknown_18": 1,
+  "unknown_19": 7,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "41",
+      "x": 40,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "VictoryRoad_3F_EventScript_161103",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "42",
+      "x": 21,
+      "y": 5,
+      "elevation": 4,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 4,
+      "script": "VictoryRoad_3F_EventScript_161148",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "41",
+      "x": 10,
+      "y": 17,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 5,
+      "script": "VictoryRoad_3F_EventScript_16111A",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "42",
+      "x": 11,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 5,
+      "script": "VictoryRoad_3F_EventScript_161131",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "92",
+      "x": 38,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "VictoryRoad_3F_EventScript_1BEA20",
+      "flag": "431"
+    },
+    {
+      "graphics_id": "92",
+      "x": 12,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "VictoryRoad_3F_EventScript_1BEA2D",
+      "flag": "432"
+    },
+    {
+      "graphics_id": "97",
+      "x": 19,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "VictoryRoad_3F_EventScript_1BE11D",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "97",
+      "x": 33,
+      "y": 18,
+      "elevation": 0,
+      "movement_type": "8",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 88,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "VictoryRoad_3F_EventScript_1BE11D",
+      "flag": "89"
+    },
+    {
+      "graphics_id": "97",
+      "x": 35,
+      "y": 13,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "VictoryRoad_3F_EventScript_1BE11D",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "97",
+      "x": 32,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "VictoryRoad_3F_EventScript_1BE11D",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "41",
+      "x": 38,
+      "y": 13,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "VictoryRoad_3F_EventScript_16115F",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "42",
+      "x": 39,
+      "y": 13,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 1,
+      "script": "VictoryRoad_3F_EventScript_16117A",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 5,
+      "y": 2,
+      "elevation": 3,
+      "dest_map": "MAP_VICTORY_ROAD_2F",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 34,
+      "y": 9,
+      "elevation": 3,
+      "dest_map": "MAP_VICTORY_ROAD_2F",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 37,
+      "y": 10,
+      "elevation": 3,
+      "dest_map": "MAP_VICTORY_ROAD_2F",
+      "dest_warp_id": 3
+    },
+    {
+      "x": 39,
+      "y": 17,
+      "elevation": 3,
+      "dest_map": "MAP_VICTORY_ROAD_2F",
+      "dest_warp_id": 4
+    },
+    {
+      "x": 34,
+      "y": 18,
+      "elevation": 3,
+      "dest_map": "MAP_VICTORY_ROAD_2F",
+      "dest_warp_id": 8
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 7,
+      "elevation": 3,
+      "var": "VAR_0x4067",
+      "var_value": 99,
+      "script": "VictoryRoad_3F_EventScript_1610CF"
+    }
+  ],
+  "bg_events": []
+}

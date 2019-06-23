@@ -1,0 +1,158 @@
+{
+  "id": "MAP_CINNABAR_ISLAND",
+  "name": "CinnabarIsland",
+  "layout": "LAYOUT_CINNABAR_ISLAND",
+  "music": "BGM_FRLG_CINNABAR_ISLAND",
+  "region_map_section": "MAPSEC_CINNABAR_ISLAND",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_1",
+  "unknown_18": 1,
+  "unknown_19": 6,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": [
+    {
+      "map": "MAP_ROUTE21_SOUTH",
+      "offset": 0,
+      "direction": "up"
+    },
+    {
+      "map": "MAP_ROUTE20",
+      "offset": 0,
+      "direction": "right"
+    }
+  ],
+  "object_events": [
+    {
+      "graphics_id": "28",
+      "x": 14,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "5",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "CinnabarIsland_EventScript_1671EF",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "32",
+      "x": 11,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "1",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "CinnabarIsland_EventScript_167208",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "73",
+      "x": 20,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "0x0",
+      "flag": "98"
+    },
+    {
+      "graphics_id": "108",
+      "x": 23,
+      "y": 7,
+      "elevation": 1,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "0x0",
+      "flag": "107"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 8,
+      "y": 3,
+      "elevation": 0,
+      "dest_map": "MAP_POKEMON_MANSION_1F",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 20,
+      "y": 4,
+      "elevation": 0,
+      "dest_map": "MAP_CINNABAR_ISLAND_GYM",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 8,
+      "y": 9,
+      "elevation": 0,
+      "dest_map": "MAP_CINNABAR_ISLAND_POKEMON_LAB_ENTRANCE",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 14,
+      "y": 11,
+      "elevation": 0,
+      "dest_map": "MAP_CINNABAR_ISLAND_POKEMON_CENTER_1F",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 19,
+      "y": 11,
+      "elevation": 0,
+      "dest_map": "MAP_CINNABAR_ISLAND_MART",
+      "dest_warp_id": 1
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 20,
+      "y": 5,
+      "elevation": 3,
+      "var": "VAR_0x4001",
+      "var_value": 0,
+      "script": "CinnabarIsland_EventScript_1671CA"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "bg_event_type_0",
+      "x": 12,
+      "y": 3,
+      "elevation": 0,
+      "script": "CinnabarIsland_EventScript_167211"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 9,
+      "y": 9,
+      "elevation": 0,
+      "script": "CinnabarIsland_EventScript_16721A"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 22,
+      "y": 5,
+      "elevation": 0,
+      "script": "CinnabarIsland_EventScript_167223"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 10,
+      "y": 9,
+      "elevation": 0,
+      "script": "CinnabarIsland_EventScript_16721A"
+    }
+  ]
+}

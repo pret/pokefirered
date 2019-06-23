@@ -38,7 +38,7 @@ _0813392A:
 _0813393A:
 	movs r0, 0x34
 	ldrsh r3, [r4, r0]
-	ldr r1, _0813395C @ =gUnknown_825E074
+	ldr r1, _0813395C @ =gSineTable
 	ldrh r2, [r4, 0x38]
 	lsls r0, r2, 24
 	lsrs r0, 23
@@ -54,11 +54,11 @@ _08133954:
 	strh r0, [r4, 0x24]
 	b _0813397E
 	.align 2, 0
-_0813395C: .4byte gUnknown_825E074
+_0813395C: .4byte gSineTable
 _08133960:
 	movs r0, 0x34
 	ldrsh r3, [r4, r0]
-	ldr r1, _0813398C @ =gUnknown_825E074
+	ldr r1, _0813398C @ =gSineTable
 	ldrh r2, [r4, 0x38]
 	lsls r0, r2, 24
 	lsrs r0, 23
@@ -81,7 +81,7 @@ _08133984:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0813398C: .4byte gUnknown_825E074
+_0813398C: .4byte gSineTable
 	thumb_func_end sub_8133904
 
 	thumb_func_start AddScrollIndicatorArrowObject
@@ -294,8 +294,8 @@ _08133B38: .4byte 0x0000ffff
 _08133B3C: .4byte gSprites
 	thumb_func_end AddScrollIndicatorArrowPair
 
-	thumb_func_start AddScrollIndicatorArrowPairParametrized
-AddScrollIndicatorArrowPairParametrized: @ 8133B40
+	thumb_func_start AddScrollIndicatorArrowPairParameterized
+AddScrollIndicatorArrowPairParameterized: @ 8133B40
 	push {r4,lr}
 	adds r4, r1, 0
 	subs r0, 0x2
@@ -345,7 +345,7 @@ _08133B76:
 	bx r1
 	.align 2, 0
 _08133BA0: .4byte gUnknown_203B130
-	thumb_func_end AddScrollIndicatorArrowPairParametrized
+	thumb_func_end AddScrollIndicatorArrowPairParameterized
 
 	thumb_func_start sub_8133BA4
 sub_8133BA4: @ 8133BA4
@@ -959,7 +959,7 @@ _0813403C: .4byte gSprites
 ObjectCB_RedArrowCursor: @ 8134040
 	push {lr}
 	adds r2, r0, 0
-	ldr r1, _08134068 @ =gUnknown_825E074
+	ldr r1, _08134068 @ =gSineTable
 	ldrh r3, [r2, 0x2E]
 	lsls r0, r3, 24
 	lsrs r0, 23
@@ -978,7 +978,7 @@ _08134058:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08134068: .4byte gUnknown_825E074
+_08134068: .4byte gSineTable
 	thumb_func_end ObjectCB_RedArrowCursor
 
 	thumb_func_start nullsub_95

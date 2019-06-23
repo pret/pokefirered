@@ -57,7 +57,7 @@ _080BF4B8:
 	adds r1, r7, 0
 	adds r2, r4, 0
 	adds r3, r5, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 	ldr r1, _080BF50C @ =gUnknown_20399CC
 	ldr r0, [sp, 0x34]
 	str r0, [r1]
@@ -129,7 +129,7 @@ sub_80BF560: @ 80BF560
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -182,8 +182,8 @@ _080BF5C8: .4byte gTasks
 _080BF5CC: .4byte gUnknown_20399C8
 	thumb_func_end sub_80BF560
 
-	thumb_func_start sub_80BF5D0
-sub_80BF5D0: @ 80BF5D0
+	thumb_func_start CreateYesNoMenuWithCallbacks
+CreateYesNoMenuWithCallbacks: @ 80BF5D0
 	push {r4-r7,lr}
 	sub sp, 0xC
 	adds r6, r0, 0
@@ -210,7 +210,7 @@ sub_80BF5D0: @ 80BF5D0
 	str r5, [sp, 0x4]
 	movs r4, 0
 	str r4, [sp, 0x8]
-	bl sub_810FF60
+	bl CreateYesNoMenu
 	ldr r0, _080BF624 @ =gUnknown_20399C8
 	str r7, [r0]
 	ldr r1, _080BF628 @ =gTasks
@@ -228,7 +228,7 @@ sub_80BF5D0: @ 80BF5D0
 _080BF624: .4byte gUnknown_20399C8
 _080BF628: .4byte gTasks
 _080BF62C: .4byte sub_80BF560
-	thumb_func_end sub_80BF5D0
+	thumb_func_end CreateYesNoMenuWithCallbacks
 
 	thumb_func_start GetLRKeysState
 GetLRKeysState: @ 80BF630
@@ -334,7 +334,7 @@ itemid_80BF6D8_mail_related: @ 80BF6D8
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
-	bl sub_805642C
+	bl is_c1_link_related_active
 	cmp r0, 0x1
 	beq _080BF6EE
 	bl InUnionRoom
@@ -357,10 +357,10 @@ _080BF702:
 	bx r1
 	thumb_func_end itemid_80BF6D8_mail_related
 
-	thumb_func_start sub_80BF708
-sub_80BF708: @ 80BF708
+	thumb_func_start MenuHelpers_LinkSomething
+MenuHelpers_LinkSomething: @ 80BF708
 	push {lr}
-	bl sub_805642C
+	bl is_c1_link_related_active
 	cmp r0, 0x1
 	beq _080BF71A
 	ldr r0, _080BF720 @ =gReceivedRemoteLinkPlayers
@@ -377,12 +377,12 @@ _080BF724:
 _080BF726:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80BF708
+	thumb_func_end MenuHelpers_LinkSomething
 
 	thumb_func_start sub_80BF72C
 sub_80BF72C: @ 80BF72C
 	push {lr}
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BF742
@@ -418,8 +418,8 @@ _080BF764:
 	bx r1
 	thumb_func_end sub_80BF748
 
-	thumb_func_start sub_80BF768
-sub_80BF768: @ 80BF768
+	thumb_func_start VblankHblankHandlerSetZero
+VblankHblankHandlerSetZero: @ 80BF768
 	push {lr}
 	movs r0, 0
 	bl SetVBlankCallback
@@ -427,13 +427,13 @@ sub_80BF768: @ 80BF768
 	bl SetHBlankCallback
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80BF768
+	thumb_func_end VblankHblankHandlerSetZero
 
 	thumb_func_start sub_80BF77C
 sub_80BF77C: @ 80BF77C
 	push {r4,lr}
 	sub sp, 0xC
-	bl sub_80BF7C8
+	bl InitBgReg
 	mov r1, sp
 	movs r0, 0
 	strh r0, [r1]
@@ -465,8 +465,8 @@ _080BF7C0: .4byte 0x05000100
 _080BF7C4: .4byte 0x01000200
 	thumb_func_end sub_80BF77C
 
-	thumb_func_start sub_80BF7C8
-sub_80BF7C8: @ 80BF7C8
+	thumb_func_start InitBgReg
+InitBgReg: @ 80BF7C8
 	push {lr}
 	movs r0, 0
 	movs r1, 0
@@ -517,7 +517,7 @@ sub_80BF7C8: @ 80BF7C8
 	bl ChangeBgY
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80BF7C8
+	thumb_func_end InitBgReg
 
 	thumb_func_start sub_80BF848
 sub_80BF848: @ 80BF848

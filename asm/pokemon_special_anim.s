@@ -558,7 +558,7 @@ _0811C9AA:
 	adds r0, r4, 0
 	adds r0, 0x96
 	ldrh r0, [r0]
-	bl sub_80A1150
+	bl GetItemCompatibilityRule
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -1617,7 +1617,7 @@ sub_811D184: @ 811D184
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0xE0
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -1688,7 +1688,7 @@ sub_811D2A8: @ 811D2A8
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xE
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -1703,7 +1703,7 @@ sub_811D2D0: @ 811D2D0
 	bl ClearWindowTilemap
 	movs r0, 0
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	movs r0, 0
 	movs r1, 0x1
 	bl CopyWindowToVram
@@ -1727,7 +1727,7 @@ sub_811D2EC: @ 811D2EC
 	lsrs r7, r0, 16
 	movs r0, 0
 	mov r8, r0
-	bl sub_80F78A8
+	bl GetTextSpeedSetting
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
@@ -1759,7 +1759,7 @@ _0811D330:
 _0811D358:
 	adds r4, 0x14
 	adds r0, r7, 0
-	bl ItemId_GetItem
+	bl ItemId_GetName
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
@@ -1918,7 +1918,7 @@ _0811D4A2:
 	movs r0, 0
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl sub_812E62C
+	bl AddTextPrinterParameterized5
 _0811D4C2:
 	add sp, 0x14
 	pop {r3,r4}
@@ -2285,7 +2285,7 @@ sub_811D764: @ 811D764
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0xE
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	movs r0, 0x2
 	str r0, [sp]
 	movs r0, 0x3
@@ -2441,7 +2441,7 @@ _0811D884:
 	cmp r4, 0
 	beq _0811D916
 	lsls r0, r7, 3
-	ldr r1, _0811D900 @ =gUnknown_82350AC
+	ldr r1, _0811D900 @ =gMonFrontPicTable
 	adds r0, r1
 	adds r1, r6, 0
 	adds r2, r7, 0
@@ -2474,7 +2474,7 @@ _0811D884:
 	bl sub_811DB14
 	b _0811D910
 	.align 2, 0
-_0811D900: .4byte gUnknown_82350AC
+_0811D900: .4byte gMonFrontPicTable
 _0811D904: .4byte gUnknown_8459A30
 _0811D908: .4byte gSprites
 _0811D90C:
@@ -3400,7 +3400,7 @@ sub_811DFC0: @ 811DFC0
 	strh r0, [r3, 0x4]
 	movs r5, 0x4
 	ldrsh r1, [r3, r5]
-	ldr r2, _0811E018 @ =gUnknown_825E074
+	ldr r2, _0811E018 @ =gSineTable
 	movs r5, 0x2
 	ldrsh r0, [r3, r5]
 	adds r0, 0x40
@@ -3424,7 +3424,7 @@ sub_811DFC0: @ 811DFC0
 	strh r0, [r4, 0x26]
 	b _0811E036
 	.align 2, 0
-_0811E018: .4byte gUnknown_825E074
+_0811E018: .4byte gSineTable
 _0811E01C:
 	ldr r2, _0811E03C @ =gTasks
 	movs r5, 0xE
@@ -3958,7 +3958,7 @@ _0811E3E0:
 	lsls r0, 16
 	lsrs r0, 16
 	adds r0, 0x46
-	ldr r3, _0811E4BC @ =gUnknown_825E074
+	ldr r3, _0811E4BC @ =gSineTable
 	movs r4, 0xA
 	ldrsh r2, [r5, r4]
 	adds r1, r2, 0
@@ -4035,7 +4035,7 @@ _0811E4A4:
 	strh r0, [r5]
 	b _0811E4DC
 	.align 2, 0
-_0811E4BC: .4byte gUnknown_825E074
+_0811E4BC: .4byte gSineTable
 _0811E4C0: .4byte gUnknown_8459B30
 _0811E4C4: .4byte gSprites
 _0811E4C8:
@@ -4548,7 +4548,7 @@ _0811E880:
 	movs r1, 0x2
 	movs r2, 0
 	adds r3, r5, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	lsls r0, r7, 1
 	mov r4, sp
 	adds r4, r0
@@ -4571,7 +4571,7 @@ _0811E8BA:
 	movs r1, 0x2
 	movs r2, 0x38
 	adds r3, r5, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0
 	strb r0, [r6]
 	movs r0, 0
@@ -4604,7 +4604,7 @@ _0811E8F4:
 	mov r0, r8
 	movs r1, 0x2
 	adds r3, r5, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r0, r7, 0x1
 	lsls r0, 16
 	lsrs r7, r0, 16
@@ -4725,7 +4725,7 @@ _0811E9C0:
 	movs r1, 0x2
 	movs r2, 0
 	adds r3, r5, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r4, 0x38
 	lsls r4, 24
 	lsrs r4, 24
@@ -4739,7 +4739,7 @@ _0811E9C0:
 	movs r1, 0x2
 	adds r2, r4, 0
 	adds r3, r5, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r0, r6, 0x1
 	lsls r0, 16
 	lsrs r6, r0, 16

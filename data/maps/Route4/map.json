@@ -1,0 +1,186 @@
+{
+  "id": "MAP_ROUTE4",
+  "name": "Route4",
+  "layout": "LAYOUT_ROUTE4",
+  "music": "BGM_FRLG_ROUTE_3",
+  "region_map_section": "MAPSEC_ROUTE_4",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_3",
+  "unknown_18": 1,
+  "unknown_19": 6,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": [
+    {
+      "map": "MAP_ROUTE3",
+      "offset": -60,
+      "direction": "down"
+    },
+    {
+      "map": "MAP_CERULEAN_CITY",
+      "offset": -10,
+      "direction": "right"
+    }
+  ],
+  "object_events": [
+    {
+      "graphics_id": "23",
+      "x": 9,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "2",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "Route4_EventScript_167F8C",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "22",
+      "x": 75,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 4,
+      "script": "Route4_EventScript_1A95B9",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "92",
+      "x": 67,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "Route4_EventScript_1BE637",
+      "flag": "353"
+    },
+    {
+      "graphics_id": "19",
+      "x": 15,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "5",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "Route4_EventScript_1ACDEA",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "54",
+      "x": 47,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "10",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "Route4_EventScript_1C494E",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "54",
+      "x": 50,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "Route4_EventScript_1C49B6",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "65321",
+      "x": 109,
+      "y": 3,
+      "elevation": 12,
+      "movement_type": "0",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 3,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "0x0",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 19,
+      "y": 5,
+      "elevation": 3,
+      "dest_map": "MAP_MT_MOON_1F",
+      "dest_warp_id": 3
+    },
+    {
+      "x": 32,
+      "y": 5,
+      "elevation": 0,
+      "dest_map": "MAP_MT_MOON_B1F",
+      "dest_warp_id": 7
+    },
+    {
+      "x": 12,
+      "y": 5,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE4_POKEMON_CENTER_1F",
+      "dest_warp_id": 1
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "bg_event_type_0",
+      "x": 18,
+      "y": 7,
+      "elevation": 0,
+      "script": "Route4_EventScript_167F95"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 34,
+      "y": 7,
+      "elevation": 0,
+      "script": "Route4_EventScript_167F9E"
+    },
+    {
+      "type": "hidden_item",
+      "x": 43,
+      "y": 2,
+      "elevation": 3,
+      "item": "POCKET_POKE_BALLS",
+      "flag": "50",
+      "unknown": 1
+    },
+    {
+      "type": "hidden_item",
+      "x": 5,
+      "y": 4,
+      "elevation": 3,
+      "item": "ITEM_PERSIM_BERRY",
+      "flag": "114",
+      "unknown": 1
+    },
+    {
+      "type": "hidden_item",
+      "x": 67,
+      "y": 17,
+      "elevation": 3,
+      "item": "ITEM_RAZZ_BERRY",
+      "flag": "156",
+      "unknown": 1
+    }
+  ]
+}

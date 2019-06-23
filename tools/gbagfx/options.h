@@ -7,7 +7,6 @@
 
 struct GbaToPngOptions {
     char *paletteFilePath;
-    char *tilemapFilePath;
     int bitDepth;
     bool hasTransparency;
     int width;
@@ -16,7 +15,6 @@ struct GbaToPngOptions {
 };
 
 struct PngToGbaOptions {
-    char *tilemapFilePath;
     int numTiles;
     int bitDepth;
     int metatileWidth;

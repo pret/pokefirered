@@ -1,0 +1,160 @@
+{
+  "id": "MAP_SSANNE_KITCHEN",
+  "name": "SSAnne_Kitchen",
+  "layout": "LAYOUT_SSANNE_KITCHEN",
+  "music": "BGM_FRLG_SS_ANNE",
+  "region_map_section": "MAPSEC_S_S_ANNE",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 0,
+  "unknown_19": 6,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "59",
+      "x": 1,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "3",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SSAnne_Kitchen_EventScript_160AB3",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "59",
+      "x": 6,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "3",
+      "movement_range_x": 1,
+      "movement_range_y": 2,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SSAnne_Kitchen_EventScript_160ABC",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "59",
+      "x": 10,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "18",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SSAnne_Kitchen_EventScript_160AC5",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "59",
+      "x": 8,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "7",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SSAnne_Kitchen_EventScript_160ACE",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "59",
+      "x": 14,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "7",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SSAnne_Kitchen_EventScript_160B1E",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "59",
+      "x": 14,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "9",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SSAnne_Kitchen_EventScript_160B27",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "59",
+      "x": 14,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "7",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SSAnne_Kitchen_EventScript_160B30",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "92",
+      "x": 1,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SSAnne_Kitchen_EventScript_1BE6AC",
+      "flag": "362"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 7,
+      "y": 1,
+      "elevation": 0,
+      "dest_map": "MAP_SSANNE_1F_CORRIDOR",
+      "dest_warp_id": 1
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 14,
+      "y": 8,
+      "elevation": 0,
+      "item": "ITEM_CHESTO_BERRY",
+      "flag": "122",
+      "unknown": 1
+    },
+    {
+      "type": "hidden_item",
+      "x": 14,
+      "y": 4,
+      "elevation": 0,
+      "item": "ITEM_PECHA_BERRY",
+      "flag": "120",
+      "unknown": 1
+    },
+    {
+      "type": "hidden_item",
+      "x": 14,
+      "y": 6,
+      "elevation": 0,
+      "item": "ITEM_CHERI_BERRY",
+      "flag": "121",
+      "unknown": 1
+    }
+  ]
+}

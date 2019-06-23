@@ -3,8 +3,8 @@
 #include "text.h"
 #include "menu.h"
 #include "text_window.h"
+#include "strings.h"
 
-extern const u8 gText_Coins[];
 extern const u8 gUnknown_8417C2D[];
 
 EWRAM_DATA static u8 sCoinsWindowId = 0;
@@ -87,7 +87,7 @@ void ShowCoinsWindow(u32 coinAmount, u8 x, u8 y)
     sCoinsWindowId = AddWindow(&template2);
     FillWindowPixelBuffer(sCoinsWindowId, 0);
     PutWindowTilemap(sCoinsWindowId);
-    sub_814FF2C(sCoinsWindowId, 0x21D, 0xD0);
+    TextWindow_SetStdFrame0_WithPal(sCoinsWindowId, 0x21D, 0xD0);
     SetWindowBorderStyle(sCoinsWindowId, FALSE, 0x21D, 0xD);
     AddTextPrinterParameterized(sCoinsWindowId, 2, gUnknown_8417C2D, 0, 0, 0xFF, 0);
     PrintCoinsString(coinAmount);
@@ -96,6 +96,6 @@ void ShowCoinsWindow(u32 coinAmount, u8 x, u8 y)
 void HideCoinsWindow(void)
 {
     ClearWindowTilemap(sCoinsWindowId);
-    sub_810F4D8(sCoinsWindowId, TRUE);
+    ClearMenuWindow(sCoinsWindowId, TRUE);
     RemoveWindow(sCoinsWindowId);
 }

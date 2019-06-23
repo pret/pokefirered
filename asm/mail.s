@@ -200,7 +200,7 @@ _080BED40:
 _080BED8C:
 	movs r0, 0
 	bl SetVBlankCallback
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	movs r0, 0
 	movs r1, 0
 	bl SetGpuReg
@@ -209,13 +209,13 @@ _080BED8C:
 	cmp r0, 0
 	bne _080BEDB4
 	movs r0, 0x22
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	b _080BF0F4
 	.align 2, 0
 _080BEDB0: .4byte gUnknown_203AAC4
 _080BEDB4:
 	movs r0, 0x1E
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	b _080BF0F4
 _080BEDBC:
 	add r1, sp, 0x8
@@ -623,7 +623,7 @@ _080BF112:
 	.align 2, 0
 _080BF128: .4byte sub_80BF368
 _080BF12C:
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -811,7 +811,7 @@ _080BF260:
 	str r0, [sp, 0x4]
 	str r5, [sp, 0x8]
 	movs r1, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	mov r1, r8
 	ldr r0, [r1]
 	adds r0, 0xF8
@@ -856,7 +856,7 @@ _080BF2CE:
 	str r4, [sp, 0x8]
 	movs r0, 0x1
 	movs r1, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r1, [r5]
 	adds r0, r1, 0
 	adds r0, 0xE9
@@ -875,7 +875,7 @@ _080BF2CE:
 	str r0, [sp, 0x8]
 	movs r0, 0x1
 	movs r1, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram

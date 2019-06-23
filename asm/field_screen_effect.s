@@ -135,12 +135,12 @@ _0807EEE0:
 	beq _0807EF6C
 	b _0807EF76
 _0807EEE6:
-	ldr r0, _0807EF0C @ =gUnknown_2039600
+	ldr r0, _0807EF0C @ =gScanlineEffect
 	ldrb r1, [r0, 0x14]
 	lsls r0, r1, 4
 	subs r0, r1
 	lsls r0, 7
-	ldr r1, _0807EF10 @ =gUnknown_2038700
+	ldr r1, _0807EF10 @ =gScanlineEffectRegBuffers
 	adds r0, r1
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
@@ -153,15 +153,15 @@ _0807EEE6:
 	strh r0, [r4]
 	b _0807EF76
 	.align 2, 0
-_0807EF0C: .4byte gUnknown_2039600
-_0807EF10: .4byte gUnknown_2038700
+_0807EF0C: .4byte gScanlineEffect
+_0807EF10: .4byte gScanlineEffectRegBuffers
 _0807EF14:
-	ldr r0, _0807EF5C @ =gUnknown_2039600
+	ldr r0, _0807EF5C @ =gScanlineEffect
 	ldrb r1, [r0, 0x14]
 	lsls r0, r1, 4
 	subs r0, r1
 	lsls r0, 7
-	ldr r1, _0807EF60 @ =gUnknown_2038700
+	ldr r1, _0807EF60 @ =gScanlineEffectRegBuffers
 	adds r0, r1
 	movs r6, 0x2
 	ldrsh r1, [r4, r6]
@@ -186,19 +186,19 @@ _0807EF14:
 	ldrsh r0, [r4, r3]
 	cmp r0, 0x1
 	bne _0807EF64
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	movs r0, 0x2
 	strh r0, [r4]
 	b _0807EF76
 	.align 2, 0
-_0807EF5C: .4byte gUnknown_2039600
-_0807EF60: .4byte gUnknown_2038700
+_0807EF5C: .4byte gScanlineEffect
+_0807EF60: .4byte gScanlineEffectRegBuffers
 _0807EF64:
 	adds r0, r5, 0
 	bl DestroyTask
 	b _0807EF76
 _0807EF6C:
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	adds r0, r5, 0
 	bl DestroyTask
 _0807EF76:
@@ -344,7 +344,7 @@ sub_807F074: @ 807F074
 	lsrs r0, 24
 	cmp r0, 0
 	beq _0807F0A2
-	ldr r4, _0807F0A8 @ =gUnknown_2038700
+	ldr r4, _0807F0A8 @ =gScanlineEffectRegBuffers
 	ldr r1, _0807F0AC @ =gUnknown_83C68D4
 	lsls r0, 1
 	adds r0, r1
@@ -365,7 +365,7 @@ _0807F0A2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807F0A8: .4byte gUnknown_2038700
+_0807F0A8: .4byte gScanlineEffectRegBuffers
 _0807F0AC: .4byte gUnknown_83C68D4
 	thumb_func_end sub_807F074
 
@@ -785,7 +785,7 @@ _0807F3E0:
 	movs r1, 0x2
 	mov r2, r10
 	mov r3, r9
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	ldr r2, _0807F42C @ =gTextFlags
 	ldrb r1, [r2]
 	movs r0, 0x2
@@ -869,7 +869,7 @@ _0807F4A8:
 	adds r7, r0, r1
 	strh r5, [r7, 0xA]
 	movs r0, 0xF0
-	bl sub_80F77CC
+	bl Menu_LoadStdPalAt
 	adds r0, r5, 0
 	movs r1, 0
 	bl FillWindowPixelBuffer

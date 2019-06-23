@@ -922,7 +922,7 @@ void sub_8111070(u8 a0)
         StringAppend(gStringVar4, gStringVar1);
     }
 
-    AddTextPrinterParametrized2(gUnknown_203ADFE[0], 2, 2, 2, 1, 2, &gUnknown_8456634, 0, gStringVar4);
+    AddTextPrinterParameterized4(gUnknown_203ADFE[0], 2, 2, 2, 1, 2, &gUnknown_8456634, 0, gStringVar4);
     PutWindowTilemap(gUnknown_203ADFE[0]);
     PutWindowTilemap(gUnknown_203ADFE[1]);
     CopyWindowToVram(gUnknown_203ADFE[0], 2);
@@ -985,19 +985,19 @@ void sub_8111368(void)
 {
     gUnknown_203ADFA = 2;
     sub_806E6FC();
-    sub_809A2DC();
-    sub_809A2A4();
+    ClearItemSlotsInAllBagPockets();
+    ClearPCItemSlots();
     if (sub_8110AC8() == 1)
     {
         sub_8111274(gUnknown_203ADF8, 0);
-        gUnknown_3005024 = sub_8111038;
+        gFieldCallback2 = sub_8111038;
         SetMainCallback2(sub_80572A8);
     }
     else
     {
         sub_8111274(gUnknown_203ADF8, 1);
         warp_in();
-        gUnknown_3005024 = sub_8111000;
+        gFieldCallback2 = sub_8111000;
         SetMainCallback2(sub_805726C);
     }
 }
@@ -1055,7 +1055,7 @@ void sub_8111438(void)
         {
             for (r6 = 0; r6 < 30; r6++)
             {
-                if (GetBoxMonDataFromAnyBox(r3, r6, MON_DATA_SANITY_BIT2))
+                if (GetBoxMonDataFromAnyBox(r3, r6, MON_DATA_SANITY_HAS_SPECIES))
                 {
                     sub_808BCB4(r3, r6);
                     r5--;
@@ -1074,7 +1074,7 @@ void sub_8111438(void)
             for (r6 = 0; r6 < IN_BOX_COUNT; r6++)
             {
                 struct BoxPokemon * boxMon = GetBoxedMonPtr(r3, r6);
-                if (!GetBoxMonData(boxMon, MON_DATA_SANITY_BIT2))
+                if (!GetBoxMonData(boxMon, MON_DATA_SANITY_HAS_SPECIES))
                 {
                     CopyMon(boxMon, &r9->mon.box, sizeof(struct BoxPokemon));
                     r5++;
@@ -1104,7 +1104,7 @@ u16 sub_8111618(void)
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_BIT2))
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_HAS_SPECIES))
             count++;
     }
 
@@ -1120,7 +1120,7 @@ u16 sub_811164C(void)
     {
         for (j = 0; j < IN_BOX_COUNT; j++)
         {
-            if (GetBoxMonDataFromAnyBox(i, j, MON_DATA_SANITY_BIT2))
+            if (GetBoxMonDataFromAnyBox(i, j, MON_DATA_SANITY_HAS_SPECIES))
                 count++;
         }
     }
@@ -1237,7 +1237,7 @@ void sub_8111984(void)
     Save_ResetSaveCounters();
     Save_LoadGameData(0);
     SetMainCallback2(sub_8057430);
-    gUnknown_3005024 = sub_8111F60;
+    gFieldCallback2 = sub_8111F60;
     FreeAllWindowBuffers();
     gUnknown_203ADFA = 3;
     gUnknown_203AE8C = NULL;
@@ -1417,7 +1417,7 @@ void sub_8111D10(void)
 
     PutWindowTilemap(gUnknown_203ADFE[2]);
     sub_8111D90(gUnknown_203ADFE[2]);
-    AddTextPrinterParametrized2(gUnknown_203ADFE[2], 2, 2, gUnknown_8456698[count], 1, 0, &gUnknown_8456634, 0, gStringVar4);
+    AddTextPrinterParameterized4(gUnknown_203ADFE[2], 2, 2, gUnknown_8456698[count], 1, 0, &gUnknown_8456634, 0, gStringVar4);
     schedule_bg_copy_tilemap_to_vram(0);
 }
 
@@ -1599,7 +1599,7 @@ void sub_81120AC(u8 taskId)
             gUnknown_203AE94 = (struct UnkStruct_203AE94){};
             sub_80696C0();
             ScriptContext2_Disable();
-            gTextFlags.flag_2 = FALSE;
+            gTextFlags.autoScroll = FALSE;
             gUnknown_2036E28 = 0;
             sub_8082740(0);
             gUnknown_3005ECC = 1;
@@ -1691,7 +1691,7 @@ void sub_81123BC(void)
 
 void sub_8112450(void)
 {
-    if (sub_80BF708() != 1)
+    if (MenuHelpers_LinkSomething() != 1)
     {
         sub_8112364();
         sub_81123BC();
@@ -2291,7 +2291,7 @@ void sub_8112E3C(u8 a0, struct UnkStruct_300201C * a1, u16 a2)
     }
 }
 
-const u16 gUnknown_84566A8[][16] = INCBIN_U16("data/graphics/unknown_84566a8.bin");
+const u16 gUnknown_84566A8[] = INCBIN_U16("data/graphics/unknown_84566a8.bin");
 
 const struct WindowTemplate gUnknown_8456928 = {
     0x00, 0, 15, 30, 5, 15, 0x008F
@@ -2349,7 +2349,7 @@ void sub_8112F18(u8 a0)
                 else
                     k = 5;
                 CpuCopy32(
-                    gUnknown_84566A8[k], // operand swap on "add" instruction
+                    (void *)gUnknown_84566A8 + 32 * k, // operand swap on "add" instruction
                     buffer + 32 * (i * width + j),
                     32
                 );
@@ -2468,7 +2468,7 @@ const struct TextColor gUnknown_8456930 = {
 
 void sub_8112FE4(const u8 * a0)
 {
-    AddTextPrinterParametrized2(gUnknown_203B020, 0x02, 2, 5, 1, 1, &gUnknown_8456930, -1, a0);
+    AddTextPrinterParameterized4(gUnknown_203B020, 0x02, 2, 5, 1, 1, &gUnknown_8456930, -1, a0);
 }
 
 void sub_8113018(const u8 * a0, u8 a1)
@@ -2515,7 +2515,7 @@ void sub_81130BC(struct Var4038Struct * varPtr)
         FlagClear(FLAG_0x06D);
         FlagClear(FLAG_0x06E);
         FlagClear(FLAG_0x06F);
-        VarSet(VAR_0x4073, 1);
+        VarSet(VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 1);
     }
 }
 
@@ -2523,7 +2523,7 @@ ALIGNED(4) const u8 gUnknown_8456934[] = {2, 1, 2, 1};
 
 u8 sub_8113114(struct Var4038Struct * a0, u8 a1)
 {
-    if (VarGet(VAR_0x4073) == 2)
+    if (VarGet(VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB) == 2)
     {
         if (a0->unk_0_0 + gUnknown_8456934[a1] >= 20)
         {
@@ -2743,10 +2743,10 @@ void sub_81134B8(void)
 
 void sub_81134CC(struct Var4038Struct * a0)
 {
-    if (VarGet(VAR_0x4073) == 2)
+    if (VarGet(VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB) == 2)
     {
         sub_8113078(a0);
-        if (gUnknown_2023E8A == 1)
+        if (gBattleOutcome == B_OUTCOME_WON)
             sub_8113194(a0);
         else
             sub_81131FC(a0);
@@ -2842,7 +2842,7 @@ void sub_8113550(u16 a0, const u16 * a1)
     if (sub_81138A0(a0, a1) == TRUE)
         return;
 
-    if (sub_80BF708() == TRUE)
+    if (MenuHelpers_LinkSomething() == TRUE)
         return;
 
     // NONMATCHING: branch logic here
@@ -2954,7 +2954,7 @@ void sub_8113550(u16 a0, const u16 * a1)
                 "\tbne _081135AA\n"
                 "\tb ._return\n"
                 "_081135AA:\n"
-                "\tbl sub_80BF708\n"
+                "\tbl MenuHelpers_LinkSomething\n"
                 "\tlsls r0, 24\n"
                 "\tlsrs r0, 24\n"
                 "\tcmp r0, 0x1\n"
@@ -3708,7 +3708,7 @@ const u16 * sub_8113FBC(const u16 * a0)
         case POCKET_ITEMS:
         case POCKET_POKE_BALLS:
         case POCKET_BERRY_POUCH:
-            StringCopy(gStringVar1, ItemId_GetItem(r5[0])->name);
+            StringCopy(gStringVar1, ItemId_GetName(r5[0]));
             if (r5[0] == ITEM_ESCAPE_ROPE)
             {
                 sub_80C4DF8(gStringVar2, r5[2]);
@@ -3725,7 +3725,7 @@ const u16 * sub_8113FBC(const u16 * a0)
             }
             break;
         case POCKET_KEY_ITEMS:
-            StringCopy(gStringVar1, ItemId_GetItem(r5[0])->name);
+            StringCopy(gStringVar1, ItemId_GetName(r5[0]));
             StringExpandPlaceholders(gStringVar4, gUnknown_841A220);
             break;
         case POCKET_TM_CASE:
@@ -3771,7 +3771,7 @@ const u16 * sub_8114188(const u16 * a0)
 {
     const u16 * r4 = sub_8113E88(5, a0);
     QuestLog_AutoGetSpeciesName(r4[1], gStringVar1, 0);
-    StringCopy(gStringVar2, ItemId_GetItem(r4[0])->name);
+    StringCopy(gStringVar2, ItemId_GetName(r4[0]));
     StringExpandPlaceholders(gStringVar4, gUnknown_841AB74);
     r4 += 2;
     return r4;
@@ -3787,7 +3787,7 @@ const u16 * sub_81141E4(const u16 * a0)
     const u16 * r4 = sub_8113E88(6, a0);
 
     QuestLog_AutoGetSpeciesName(r4[1], gStringVar1, 0);
-    StringCopy(gStringVar2, ItemId_GetItem(r4[0])->name);
+    StringCopy(gStringVar2, ItemId_GetName(r4[0]));
     StringExpandPlaceholders(gStringVar4, gUnknown_841AB8E);
     r4 += 2;
     return r4;
@@ -3803,7 +3803,7 @@ const u16 * sub_8114240(const u16 * a0)
     const u16 * r4 = sub_8113E88(7, a0);
 
     QuestLog_AutoGetSpeciesName(r4[1], gStringVar2, 0);
-    StringCopy(gStringVar1, ItemId_GetItem(r4[0])->name);
+    StringCopy(gStringVar1, ItemId_GetName(r4[0]));
     StringExpandPlaceholders(gStringVar4, gUnknown_841A6A5);
     r4 += 2;
     return r4;
@@ -3819,7 +3819,7 @@ const u16 * sub_811429C(const u16 * a0)
     const u16 * r4 = sub_8113E88(8, a0);
 
     QuestLog_AutoGetSpeciesName(r4[1], gStringVar1, 0);
-    StringCopy(gStringVar2, ItemId_GetItem(r4[0])->name);
+    StringCopy(gStringVar2, ItemId_GetName(r4[0]));
     StringExpandPlaceholders(gStringVar4, gUnknown_841A1CD);
     r4 += 2;
     return r4;
@@ -3846,8 +3846,8 @@ const u16 * sub_8114324(const u16 * a0)
 {
     const u16 * r4 = sub_8113E88(9, a0);
     QuestLog_AutoGetSpeciesName(r4[2], gStringVar1, 0);
-    StringCopy(gStringVar2, ItemId_GetItem(r4[0])->name);
-    StringCopy(gStringVar3, ItemId_GetItem(r4[1])->name);
+    StringCopy(gStringVar2, ItemId_GetName(r4[0]));
+    StringCopy(gStringVar3, ItemId_GetName(r4[1]));
     StringExpandPlaceholders(gStringVar4, gUnknown_841A193);
     r4 += 3;
     return r4;
@@ -3862,8 +3862,8 @@ const u16 * sub_8114394(const u16 * a0)
 {
     const u16 * r4 = sub_8113E88(10, a0);
     QuestLog_AutoGetSpeciesName(r4[2], gStringVar2, 0);
-    StringCopy(gStringVar3, ItemId_GetItem(r4[0])->name);
-    StringCopy(gStringVar1, ItemId_GetItem(r4[1])->name);
+    StringCopy(gStringVar3, ItemId_GetName(r4[0]));
+    StringCopy(gStringVar1, ItemId_GetName(r4[1]));
     StringExpandPlaceholders(gStringVar4, gUnknown_841A6E1);
     r4 += 3;
     return r4;
@@ -4312,7 +4312,7 @@ u16 * sub_8114C68(u16 * a0, const u16 * a1)
 const u16 * sub_8114C8C(const u16 * a0)
 {
     const u16 *r4 = sub_8113E88(28, a0);
-    sub_8099E90(r4[0], gStringVar1);
+    CopyItemName(r4[0], gStringVar1);
     StringExpandPlaceholders(gStringVar4, gUnknown_841A391);
     return r4 + 1;
 }
@@ -4329,7 +4329,7 @@ u16 * sub_8114CC0(u16 * a0, const u16 * a1)
 const u16 * sub_8114CE4(const u16 * a0)
 {
     const u16 *r4 = sub_8113E88(29, a0);
-    sub_8099E90(r4[0], gStringVar1);
+    CopyItemName(r4[0], gStringVar1);
     StringExpandPlaceholders(gStringVar4, gUnknown_841A3DA);
     return r4 + 1;
 }
@@ -4817,7 +4817,7 @@ const u16 * sub_8115518(const u16 * a0)
     UnkTextUtil_Reset();
     sub_80C4DF8(gStringVar1, r7[0]);
     UnkTextUtil_SetPtrI(0, gStringVar1);
-    UnkTextUtil_SetPtrI(1, ItemId_GetItem(r4[0])->name);
+    UnkTextUtil_SetPtrI(1, ItemId_GetName(r4[0]));
     if (r4[1] < 2)
         UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841A7DD);
     else
@@ -4852,7 +4852,7 @@ const u16 * sub_81155E0(const u16 * a0) {
     if (r7[1] == 0) {
         UnkTextUtil_SetPtrI(0, gSaveBlock2Ptr->playerName);
         UnkTextUtil_SetPtrI(1, gStringVar1);
-        UnkTextUtil_SetPtrI(2, ItemId_GetItem(r5[0])->name);
+        UnkTextUtil_SetPtrI(2, ItemId_GetName(r5[0]));
         if (r5[1] == 1)
             UnkTextUtil_SetPtrI(3, gUnknown_841A8D4);
         else
@@ -4867,7 +4867,7 @@ const u16 * sub_81155E0(const u16 * a0) {
     else
     {
         UnkTextUtil_SetPtrI(0, gStringVar1);
-        UnkTextUtil_SetPtrI(1, ItemId_GetItem(r5[0])->name);
+        UnkTextUtil_SetPtrI(1, ItemId_GetName(r5[0]));
         ConvertIntToDecimalStringN(gStringVar2, r6, STR_CONV_MODE_LEFT_ALIGN, 6);
         UnkTextUtil_SetPtrI(2, gStringVar2);
         UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_841A896);
@@ -4890,7 +4890,7 @@ const u16 * sub_8115700(const u16 * a0)
     const u16 * r4 = sub_8113E88(40, a0);
     const u8 * r5 = (const u8 *)r4 + 2;
     sub_80C4DF8(gStringVar1, r5[0]);
-    StringCopy(gStringVar2, ItemId_GetItem(r4[0])->name);
+    StringCopy(gStringVar2, ItemId_GetName(r4[0]));
     StringExpandPlaceholders(gStringVar4, gUnknown_841B03F);
     return (const u16 *)(r5 + 2);
 }

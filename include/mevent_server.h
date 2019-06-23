@@ -37,7 +37,7 @@ struct mevent_cmd_ish
     u32 parameter;
 };
 
-struct mevent_srv_ish
+struct mevent_client
 {
     u32 unk_00;
     u32 param;
@@ -83,13 +83,13 @@ void mevent_srv_sub_init(struct mevent_srv_sub * svr, u32 sendPlayerNo, u32 recv
 void mevent_srv_sub_init_send(struct mevent_srv_sub * svr, u32 ident, const void * src, u32 size);
 void mevent_srv_sub_init_recv(struct mevent_srv_sub * svr, u32 ident, void * dest);
 
-void mevent_srv_ish_do_init(void);
-u32 mevent_srv_ish_do_exec(u16 * a0);
-void mevent_srv_ish_inc_flag(void);
-void * mevent_srv_ish_get_buffer(void);
-void mevent_srv_ish_set_param(u32 a0);
-void mevent_srv_common_do_init_1(void);
-void mevent_srv_common_do_init_2(void);
-u32 mevent_srv_init_do_exec(u16 * a0);
+void mevent_client_do_init(void);
+u32 mevent_client_do_exec(u16 * a0);
+void mevent_client_inc_flag(void);
+void * mevent_client_get_buffer(void);
+void mevent_client_set_param(u32 a0);
+void mevent_srv_init_wnews(void);
+void mevent_srv_new_wcard(void);
+u32 mevent_srv_common_do_exec(u16 * a0);
 
 #endif //GUARD_MEVENT_SERVER_H

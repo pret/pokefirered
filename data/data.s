@@ -1,5 +1,8 @@
 #include "constants/region_map.h"
 #include "constants/trainer_classes.h"
+#include "constants/songs.h"
+#include "constants/region_map.h"
+	.set NULL, 0
 
 	.section .rodata
 
@@ -73,7 +76,7 @@ gUnknown_82349BC:: @ 82349BC
 gUnknown_82349CC:: @ 82349CC
 	.incbin "baserom.gba", 0x2349CC, 0x6E0
 
-gUnknown_82350AC:: @ 82350AC
+gMonFrontPicTable:: @ 82350AC
 	.incbin "baserom.gba", 0x2350AC, 0xE8
 
 gUnknown_8235194:: @ 8235194
@@ -82,7 +85,7 @@ gUnknown_8235194:: @ 8235194
 gUnknown_8235E6C:: @ 8235E6C
 	.incbin "baserom.gba", 0x235E6C, 0x6E0
 
-gUnknown_823654C:: @ 823654C
+gMonBackPicTable:: @ 823654C
 	.incbin "baserom.gba", 0x23654C, 0xDC0
 
 gMonPaletteTable:: @ 823730C
@@ -100,10 +103,10 @@ gTrainerFrontAnimsPtrTable:: @ 82390DC
 gUnknown_823932C:: @ 823932C
 	.incbin "baserom.gba", 0x23932C, 0x250
 
-gUnknown_823957C:: @ 823957C
+gTrainerFrontPicTable:: @ 823957C
 	.incbin "baserom.gba", 0x23957C, 0x4A0
 
-gUnknown_8239A1C:: @ 8239A1C
+gTrainerFrontPicPaletteTable:: @ 8239A1C
 	.incbin "baserom.gba", 0x239A1C, 0x558
 
 gTrainerBackAnimsPtrTable:: @ 8239F74
@@ -112,7 +115,7 @@ gTrainerBackAnimsPtrTable:: @ 8239F74
 gUnknown_8239F8C:: @ 8239F8C
 	.incbin "baserom.gba", 0x239F8C, 0x18
 
-gUnknown_8239FA4:: @ 8239FA4
+gTrainerBackPicTable:: @ 8239FA4
 	.incbin "baserom.gba", 0x239FA4, 0x30
 
 gUnknown_8239FD4:: @ 8239FD4
@@ -129,10 +132,7 @@ gTrainers:: @ 823EAD8
 	.incbin "baserom.gba", 0x23EAC8, 0x7418
 
 gSpeciesNames:: @ 8245EE0
-	.incbin "baserom.gba", 0x245EE0, 0xD05
-
-gUnknown_8246BE5:: @ 8246BE5
-	.incbin "baserom.gba", 0x246BE5, 0x4AF
+	.include "data/text/species_names.inc"
 
 gMoveNames:: @ 8247094
 	.incbin "baserom.gba", 0x247094, 0xF97
@@ -547,69 +547,9 @@ gUnknown_825E032:: @ 825E032
 gUnknown_825E05C:: @ 825E05C
 	.incbin "baserom.gba", 0x25E05C, 0x18
 
-gUnknown_825E074:: @ 825E074
-	.incbin "baserom.gba", 0x25E074, 0x280
+	.section .rodata.825EF0C
 
-gUnknown_825E2F4:: @ 825E2F4
-	.incbin "baserom.gba", 0x25E2F4, 0x168
-
-gBitTable:: @ 825E45C
-	.incbin "baserom.gba", 0x25E45C, 0x80
-
-gUnknown_825E4DC:: @ 825E4DC
-	.incbin "baserom.gba", 0x25E4DC, 0x18
-
-gUnknown_825E4F4:: @ 825E4F4
-	.incbin "baserom.gba", 0x25E4F4, 0x18
-
-gUnknown_825E50C:: @ 825E50C
-	.incbin "baserom.gba", 0x25E50C, 0xA00
-
-gUnknown_825EF0C:: @ 825EF0C
-	.incbin "baserom.gba", 0x25EF0C, 0x8E8
-
-gUnknown_825F7F4:: @ 825F7F4
-	.incbin "baserom.gba", 0x25F7F4, 0x20
-
-gUnknown_825F814:: @ 825F814
-	.incbin "baserom.gba", 0x25F814, 0x18
-
-gUnknown_825F82C:: @ 825F82C
-	.incbin "baserom.gba", 0x25F82C, 0x10
-
-gUnknown_825F83C:: @ 825F83C
-	.incbin "baserom.gba", 0x25F83C, 0x2
-
-gUnknown_825F83E:: @ 825F83E
-	.incbin "baserom.gba", 0x25F83E, 0x8DE
-
-gUnknown_826011C:: @ 826011C
-	.incbin "baserom.gba", 0x26011C, 0x8
-
-gUnknown_8260124:: @ 8260124
-	.incbin "baserom.gba", 0x260124, 0x8
-
-gUnknown_826012C:: @ 826012C
-	.incbin "baserom.gba", 0x26012C, 0x8
-
-gUnknown_8260134:: @ 8260134
-	.incbin "baserom.gba", 0x260134, 0x50
-
-gUnknown_8260184:: @ 8260184
-	.incbin "baserom.gba", 0x260184, 0x18
-
-gUnknown_826019C:: @ 826019C
-	.incbin "baserom.gba", 0x26019C, 0x8
-
-gUnknown_82601A4:: @ 82601A4
-	.incbin "baserom.gba", 0x2601A4, 0x10
-
-gUnknown_82601B4:: @ 82601B4
-	.incbin "baserom.gba", 0x2601B4, 0x8
-
-gUnknown_82601BC:: @ 82601BC
-	.incbin "baserom.gba", 0x2601BC, 0x4C
-
+	.align 2
 gUnknown_8260208:: @ 8260208
 	.incbin "baserom.gba", 0x260208, 0x8
 
@@ -751,13 +691,13 @@ gUnknown_8261E8A:: @ 8261E8A
 gUnknown_8261EB6:: @ 8261EB6
 	.incbin "baserom.gba", 0x261EB6, 0xB
 
-gUnknown_8261EC1:: @ 8261EC1
+gText_MaleSymbol4:: @ 8261EC1
 	.incbin "baserom.gba", 0x261EC1, 0x2
 
-gUnknown_8261EC3:: @ 8261EC3
+gText_FemaleSymbol4:: @ 8261EC3
 	.incbin "baserom.gba", 0x261EC3, 0x2
 
-gUnknown_8261EC5:: @ 8261EC5
+gText_GenderlessSymbol:: @ 8261EC5
 	.incbin "baserom.gba", 0x261EC5, 0x2
 
 gUnknown_8261EC7:: @ 8261EC7
@@ -793,7 +733,7 @@ gUnknown_8262055:: @ 8262055
 gUnknown_826407C:: @ 826407C
 	.incbin "baserom.gba", 0x26407C, 0x1FA0
 
-gUnknown_826601C:: @ 826601C
+gUnknown_08331F60:: @ 826601C
 	.incbin "baserom.gba", 0x26601C, 0x1000
 
 gUnknown_826701C:: @ 826701C
@@ -908,8 +848,16 @@ gUnknown_826D29E:: @ 826D29E
 gUnknown_826D2B0:: @ 826D2B0
 	.incbin "baserom.gba", 0x26D2B0, 0x28
 
-gUnknown_826D2D8:: @ 826D2D8
-	.incbin "baserom.gba", 0x26D2D8, 0x48
+gDirectionToVectors:: @ 826D2D8
+	.4byte  0,  0
+	.4byte  0,  1
+	.4byte  0, -1
+	.4byte -1,  0
+	.4byte  1,  0
+	.4byte -1,  1
+	.4byte  1,  1
+	.4byte -1, -1
+	.4byte  1, -1
 
 gUnknown_826D320:: @ 826D320
 	.incbin "baserom.gba", 0x26D320, 0x10
@@ -918,36 +866,24 @@ gUnknown_826D330:: @ 826D330
 	.incbin "baserom.gba", 0x26D330, 0xC
 
 gUnknown_826D33C:: @ 826D33C
-	.incbin "baserom.gba", 0x26D33C, 0xC
+	.4byte sub_8058684
+	.4byte sub_80586A4
+	.4byte sub_80586A8
 
 gUnknown_826D348:: @ 826D348
-	.incbin "baserom.gba", 0x26D348, 0x2C
+	.4byte sub_80586C8
+	.4byte sub_80586CC
+	.4byte sub_80586CC
+	.4byte sub_80586CC
+	.4byte sub_80586CC
+	.4byte sub_80586C8
+	.4byte sub_80586C8
+	.4byte sub_8058734
+	.4byte sub_8058734
+	.4byte sub_8058734
+	.4byte sub_8058734
 
 gUnknown_826D374:: @ 826D374
-	.incbin "baserom.gba", 0x26D374, 0x78258
+	.4byte sub_805874C
+	.4byte sub_8058754
 
-gUnknown_82E55CC:: @ 82E55CC
-	.incbin "baserom.gba", 0x2E55CC, 0x695C0
-
-gUnknown_834EB8C:: @ 834EB8C
-	.incbin "baserom.gba", 0x34EB8C, 0x3B1C
-
-gUnknown_83526A8:: @ 83526A8
-	.incbin "baserom.gba", 0x3526A8, 0x844
-
-gUnknown_8352EEC:: @ 8352EEC
-	.incbin "baserom.gba", 0x352EEC, 0x4
-
-gUnknown_8352EF0:: @ 8352EF0
-	.incbin "baserom.gba", 0x352EF0, 0x20
-
-gUnknown_8352F10:: @ 8352F10
-	.incbin "baserom.gba", 0x352F10, 0x8
-
-	.align 2
-gUnknown_8352F18:: @ 8352F18
-	.asciz "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/fieldmap.c"
-
-	.align 2
-gUnknown_8352F4C:: @ 8352F4C
-	.asciz "VMap.Xsize * VMap.Ysize <= VIRTUAL_MAP_SIZE"

@@ -1,0 +1,1150 @@
+#include "global.h"
+#include "bg.h"
+#include "data2.h"
+#include "decompress.h"
+#include "gpu_regs.h"
+#include "graphics.h"
+#include "help_system.h"
+#include "item.h"
+#include "item_menu.h"
+#include "item_menu_icons.h"
+#include "list_menu.h"
+#include "item_pc.h"
+#include "item_use.h"
+#include "main.h"
+#include "malloc.h"
+#include "menu.h"
+#include "menu_helpers.h"
+#include "menu_indicators.h"
+#include "new_menu_helpers.h"
+#include "palette.h"
+#include "party_menu.h"
+#include "pc_screen_effect.h"
+#include "scanline_effect.h"
+#include "sound.h"
+#include "string_util.h"
+#include "strings.h"
+#include "task.h"
+#include "text_window.h"
+#include "constants/items.h"
+#include "constants/songs.h"
+
+struct ItemPcResources
+{
+    MainCallback savedCallback;
+    u8 moveModeOrigPos;
+    u8 itemMenuIconSlot;
+    u8 maxShowed;
+    u8 nItems;
+    u8 scrollIndicatorArrowPairId;
+    u16 withdrawQuantitySubmenuCursorPos;
+    s16 data[3];
+};
+
+struct ItemPcStaticResources
+{
+    MainCallback savedCallback;
+    u16 scroll;
+    u16 row;
+    u8 initialized;
+};
+
+static EWRAM_DATA struct ItemPcResources * sStateDataPtr = NULL;
+static EWRAM_DATA u8 * sBg1TilemapBuffer = NULL;
+static EWRAM_DATA struct ListMenuItem * sListMenuItems = NULL;
+static EWRAM_DATA u8 * sUnusedStringAllocation = NULL;
+static EWRAM_DATA struct ItemPcStaticResources sListMenuState = {};
+static EWRAM_DATA u8 sSubmenuWindowIds[3] = {};
+
+extern const struct CompressedSpriteSheet gBagSwapSpriteSheet;
+extern const struct CompressedSpritePalette gBagSwapSpritePalette;
+
+static void ItemPc_RunSetup(void);
+static bool8 ItemPc_DoGfxSetup(void);
+static void ItemPc_FadeAndBail(void);
+static void Task_ItemPcWaitFadeAndBail(u8 taskId);
+static bool8 ItemPc_InitBgs(void);
+static bool8 ItemPc_LoadGraphics(void);
+static bool8 ItemPc_AllocateResourcesForListMenu(void);
+static void ItemPc_BuildListMenuTemplate(void);
+static void ItemPc_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu * list);
+static void ItemPc_ItemPrintFunc(u8 windowId, s32 itemId, u8 y);
+static void ItemPc_PrintOrRemoveCursorAt(u8 y, u8 state);
+static void ItemPc_PrintWithdrawItem(void);
+static void ItemPc_PlaceTopMenuScrollIndicatorArrows(void);
+static void ItemPc_SetCursorPosition(void);
+static void ItemPc_FreeResources(void);
+static void Task_ItemPcTurnOff2(u8 taskId);
+static u16 ItemPc_GetItemIdBySlotId(u16 itemIndex);
+static u16 ItemPc_GetItemQuantityBySlotId(u16 itemIndex);
+static void ItemPc_CountPcItems(void);
+static void ItemPc_SetScrollPosition(void);
+static void Task_ItemPcMain(u8 taskId);
+static void ItemPc_MoveItemModeInit(u8 taskId, s16 pos);
+static void Task_ItemPcMoveItemModeRun(u8 taskId);
+static void ItemPc_InsertItemIntoNewSlot(u8 taskId, u32 pos);
+static void ItemPc_MoveItemModeCancel(u8 taskId, u32 pos);
+static void Task_ItemPcSubmenuInit(u8 taskId);
+static void Task_ItemPcSubmenuRun(u8 taskId);
+static void Task_ItemPcWithdraw(u8 taskId);
+static void ItemPc_DoWithdraw(u8 taskId);
+static void Task_ItemPcWaitButtonAndFinishWithdrawMultiple(u8 taskId);
+static void Task_ItemPcWaitButtonWithdrawMultipleFailed(u8 taskId);
+static void Task_ItemPcCleanUpWithdraw(u8 taskId);
+static void ItemPc_WithdrawMultipleInitWindow(u16 slotId);
+static void Task_ItemPcHandleWithdrawMultiple(u8 taskId);
+static void Task_ItemPcGive(u8 taskId);
+static void ItemPc_CB2_SwitchToPartyMenu(void);
+static void ItemPc_CB2_ReturnFromPartyMenu(void);
+static void gTask_ItemPcWaitButtonAndExitSubmenu(u8 taskId);
+static void Task_ItemPcCancel(u8 taskId);
+static void ItemPc_InitWindows(void);
+static void ItemPc_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorIdx);
+static void ItemPc_SetBorderStyleOnWindow(u8 windowId);
+static u8 ItemPc_GetOrCreateSubwindow(u8 idx);
+static void ItemPc_DestroySubwindow(u8 idx);
+static void ItemPc_PrintOnWindow5WithContinueTask(u8 taskId, const u8 * str, TaskFunc taskFunc);
+
+static const struct BgTemplate sBgTemplates[2] = {
+    {
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 31,
+        .priority = 0
+    }, {
+        .bg = 1,
+        .charBaseIndex = 3,
+        .mapBaseIndex = 30,
+        .priority = 1
+    }
+};
+
+static const struct MenuAction sItemPcSubmenuOptions[] = {
+    {gText_Withdraw,          {.void_u8 = Task_ItemPcWithdraw}},
+    {gOtherText_Give,         {.void_u8 = Task_ItemPcGive}},
+    {gFameCheckerText_Cancel, {.void_u8 = Task_ItemPcCancel}}
+};
+
+static const struct TextColor gUnknown_8453F8C[] = {
+    {0,  1, 2},
+    {0,  2, 3},
+    {0,  3, 2},
+    {0, 10, 2}
+};
+
+static const struct WindowTemplate gUnknown_8453F98[] = {
+    {
+        .bg = 0,
+        .tilemapLeft = 0x07,
+        .tilemapTop = 0x01,
+        .width = 0x13,
+        .height = 0x0c,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x02bf
+    }, {
+        .bg = 0,
+        .tilemapLeft = 0x05,
+        .tilemapTop = 0x0e,
+        .width = 0x19,
+        .height = 0x06,
+        .paletteNum = 0x0d,
+        .baseBlock = 0x0229
+    }, {
+        .bg = 0,
+        .tilemapLeft = 0x01,
+        .tilemapTop = 0x01,
+        .width = 0x05,
+        .height = 0x04,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x0215
+    }, {
+        .bg = 0,
+        .tilemapLeft = 0x18,
+        .tilemapTop = 0x0f,
+        .width = 0x05,
+        .height = 0x04,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x0201
+    }, {
+        .bg = 0,
+        .tilemapLeft = 0x16,
+        .tilemapTop = 0x0d,
+        .width = 0x07,
+        .height = 0x06,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x01d7
+    }, {
+        .bg = 0,
+        .tilemapLeft = 0x02,
+        .tilemapTop = 0x0f,
+        .width = 0x1a,
+        .height = 0x04,
+        .paletteNum = 0x0b,
+        .baseBlock = 0x016f
+    }, DUMMY_WIN_TEMPLATE
+};
+
+static const struct WindowTemplate gUnknown_8453FD0[] = {
+    {
+        .bg = 0,
+        .tilemapLeft = 0x06,
+        .tilemapTop = 0x0f,
+        .width = 0x0e,
+        .height = 0x04,
+        .paletteNum = 0x0c,
+        .baseBlock = 0x0137
+    }, {
+        .bg = 0,
+        .tilemapLeft = 0x06,
+        .tilemapTop = 0x0f,
+        .width = 0x10,
+        .height = 0x04,
+        .paletteNum = 0x0c,
+        .baseBlock = 0x0137
+    }, {
+        .bg = 0,
+        .tilemapLeft = 0x06,
+        .tilemapTop = 0x0f,
+        .width = 0x17,
+        .height = 0x04,
+        .paletteNum = 0x0c,
+        .baseBlock = 0x009b
+    }
+};
+
+void ItemPc_Init(u8 a0, MainCallback callback)
+{
+    u8 i;
+
+    if (a0 >= 2)
+    {
+        SetMainCallback2(callback);
+        return;
+    }
+    if ((sStateDataPtr = Alloc(sizeof(struct ItemPcResources))) == NULL)
+    {
+        SetMainCallback2(callback);
+        return;
+    }
+    if (a0 != 1)
+    {
+        sListMenuState.savedCallback = callback;
+        sListMenuState.scroll = sListMenuState.row = 0;
+    }
+    sStateDataPtr->moveModeOrigPos = 0xFF;
+    sStateDataPtr->itemMenuIconSlot = 0;
+    sStateDataPtr->scrollIndicatorArrowPairId = 0xFF;
+    sStateDataPtr->savedCallback = 0;
+    for (i = 0; i < 3; i++)
+    {
+        sStateDataPtr->data[i] = 0;
+    }
+    SetMainCallback2(ItemPc_RunSetup);
+}
+
+static void ItemPc_MainCB(void)
+{
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    do_scheduled_bg_tilemap_copies_to_vram();
+    UpdatePaletteFade();
+}
+
+static void ItemPc_VBlankCB(void)
+{
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+}
+
+static void ItemPc_RunSetup(void)
+{
+    while (1)
+    {
+        if (ItemPc_DoGfxSetup() == TRUE)
+            break;
+        if (MenuHelpers_LinkSomething() == TRUE)
+            break;
+    }
+}
+
+static bool8 ItemPc_DoGfxSetup(void)
+{
+    u8 taskId;
+    switch (gMain.state)
+    {
+    case 0:
+        VblankHblankHandlerSetZero();
+        clear_scheduled_bg_copies_to_vram();
+        gMain.state++;
+        break;
+    case 1:
+        ScanlineEffect_Stop();
+        gMain.state++;
+        break;
+    case 2:
+        FreeAllSpritePalettes();
+        gMain.state++;
+        break;
+    case 3:
+        ResetPaletteFade();
+        gMain.state++;
+        break;
+    case 4:
+        ResetSpriteData();
+        gMain.state++;
+        break;
+    case 5:
+        ResetItemMenuIconState();
+        gMain.state++;
+        break;
+    case 6:
+        ResetTasks();
+        gMain.state++;
+        break;
+    case 7:
+        if (ItemPc_InitBgs())
+        {
+            sStateDataPtr->data[0] = 0;
+            gMain.state++;
+        }
+        else
+        {
+            ItemPc_FadeAndBail();
+            return TRUE;
+        }
+        break;
+    case 8:
+        if (ItemPc_LoadGraphics() == TRUE)
+            gMain.state++;
+        break;
+    case 9:
+        ItemPc_InitWindows();
+        gMain.state++;
+        break;
+    case 10:
+        ItemPc_CountPcItems();
+        ItemPc_SetCursorPosition();
+        ItemPc_SetScrollPosition();
+        gMain.state++;
+        break;
+    case 11:
+        if (ItemPc_AllocateResourcesForListMenu())
+            gMain.state++;
+        else
+        {
+            ItemPc_FadeAndBail();
+            return TRUE;
+        }
+        break;
+    case 12:
+        ItemPc_BuildListMenuTemplate();
+        gMain.state++;
+        break;
+    case 13:
+        ItemPc_PrintWithdrawItem();
+        gMain.state++;
+        break;
+    case 14:
+        sub_80985E4();
+        gMain.state++;
+        break;
+    case 15:
+        taskId = CreateTask(Task_ItemPcMain, 0);
+        gTasks[taskId].data[0] = ListMenuInit(&gMultiuseListMenuTemplate, sListMenuState.scroll, sListMenuState.row);
+        gMain.state++;
+        break;
+    case 16:
+        ItemPc_PlaceTopMenuScrollIndicatorArrows();
+        gMain.state++;
+        break;
+    case 17:
+        HelpSystem_SetSomeVariable2(29);
+        gMain.state++;
+        break;
+    case 18:
+        if (sListMenuState.initialized == 1)
+        {
+            BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
+        }
+        gMain.state++;
+        break;
+    case 19:
+        if (sListMenuState.initialized == 1)
+        {
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        }
+        else
+        {
+            sub_80A0A48(0, 0, 0);
+            ItemPc_SetInitializedFlag(1);
+            PlaySE(SE_PC_LOGON);
+        }
+        gMain.state++;
+        break;
+    case 20:
+        if (sub_80BF72C() != TRUE)
+            gMain.state++;
+        break;
+    default:
+        SetVBlankCallback(ItemPc_VBlankCB);
+        SetMainCallback2(ItemPc_MainCB);
+        return TRUE;
+    }
+    return FALSE;
+}
+
+static void ItemPc_FadeAndBail(void)
+{
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    CreateTask(Task_ItemPcWaitFadeAndBail, 0);
+    SetVBlankCallback(ItemPc_VBlankCB);
+    SetMainCallback2(ItemPc_MainCB);
+}
+
+static void Task_ItemPcWaitFadeAndBail(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        SetMainCallback2(sListMenuState.savedCallback);
+        ItemPc_FreeResources();
+        DestroyTask(taskId);
+    }
+}
+
+static bool8 ItemPc_InitBgs(void)
+{
+    InitBgReg();
+    sBg1TilemapBuffer = Alloc(0x800);
+    if (sBg1TilemapBuffer == NULL)
+        return FALSE;
+    memset(sBg1TilemapBuffer, 0, 0x800);
+    ResetBgsAndClearDma3BusyFlags(0);
+    InitBgsFromTemplates(0, sBgTemplates, NELEMS(sBgTemplates));
+    SetBgTilemapBuffer(1, sBg1TilemapBuffer);
+    schedule_bg_copy_tilemap_to_vram(1);
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
+    SetGpuReg(REG_OFFSET_BLDCNT , 0);
+    ShowBg(0);
+    ShowBg(1);
+    return TRUE;
+}
+
+static bool8 ItemPc_LoadGraphics(void)
+{
+    switch (sStateDataPtr->data[0])
+    {
+    case 0:
+        reset_temp_tile_data_buffers();
+        decompress_and_copy_tile_data_to_vram(1, gItemPcTiles, 0, 0, 0);
+        sStateDataPtr->data[0]++;
+        break;
+    case 1:
+        if (free_temp_tile_data_buffers_if_possible() != TRUE)
+        {
+            LZDecompressWram(gItemPcTilemap, sBg1TilemapBuffer);
+            sStateDataPtr->data[0]++;
+        }
+        break;
+    case 2:
+        LoadCompressedPalette(gItemPcBgPals, 0x00, 0x60);
+        sStateDataPtr->data[0]++;
+        break;
+    case 3:
+        LoadCompressedObjectPic(&gBagSwapSpriteSheet);
+        sStateDataPtr->data[0]++;
+        break;
+    default:
+        LoadCompressedObjectPalette(&gBagSwapSpritePalette);
+        sStateDataPtr->data[0] = 0;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+#define try_alloc(ptr__, size) ({ \
+    void ** ptr = (void **)&(ptr__);             \
+    *ptr = Alloc(size);                 \
+    if (*ptr == NULL)                   \
+    {                                   \
+        ItemPc_FreeResources();                  \
+        ItemPc_FadeAndBail();                  \
+        return FALSE;                   \
+    }                                   \
+})
+
+static bool8 ItemPc_AllocateResourcesForListMenu(void)
+{
+    try_alloc(sListMenuItems, sizeof(struct ListMenuItem) * (PC_ITEMS_COUNT + 1));
+    try_alloc(sUnusedStringAllocation, 14 * (PC_ITEMS_COUNT + 1));
+    return TRUE;
+}
+
+static void ItemPc_BuildListMenuTemplate(void)
+{
+    u16 i;
+
+    for (i = 0; i < sStateDataPtr->nItems; i++)
+    {
+        sListMenuItems[i].label = ItemId_GetName(gSaveBlock1Ptr->pcItems[i].itemId);
+        sListMenuItems[i].index = i;
+    }
+    sListMenuItems[i].label = gFameCheckerText_Cancel;
+    sListMenuItems[i].index = -2;
+
+    gMultiuseListMenuTemplate.items = sListMenuItems;
+    gMultiuseListMenuTemplate.totalItems = sStateDataPtr->nItems + 1;
+    gMultiuseListMenuTemplate.windowId = 0;
+    gMultiuseListMenuTemplate.header_X = 0;
+    gMultiuseListMenuTemplate.item_X = 9;
+    gMultiuseListMenuTemplate.cursor_X = 1;
+    gMultiuseListMenuTemplate.lettersSpacing = 1;
+    gMultiuseListMenuTemplate.itemVerticalPadding = 2;
+    gMultiuseListMenuTemplate.upText_Y = 2;
+    gMultiuseListMenuTemplate.maxShowed = sStateDataPtr->maxShowed;
+    gMultiuseListMenuTemplate.fontId = 2;
+    gMultiuseListMenuTemplate.cursorPal = 2;
+    gMultiuseListMenuTemplate.fillValue = 0;
+    gMultiuseListMenuTemplate.cursorShadowPal = 3;
+    gMultiuseListMenuTemplate.moveCursorFunc = ItemPc_MoveCursorFunc;
+    gMultiuseListMenuTemplate.itemPrintFunc = ItemPc_ItemPrintFunc;
+    gMultiuseListMenuTemplate.scrollMultiple = 0;
+    gMultiuseListMenuTemplate.cursorKind = 0;
+}
+
+static void ItemPc_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu * list)
+{
+    u16 itemId;
+    const u8 * desc;
+    if (onInit != TRUE)
+        PlaySE(SE_SELECT);
+
+    if (sStateDataPtr->moveModeOrigPos == 0xFF)
+    {
+        DestroyItemMenuIcon(sStateDataPtr->itemMenuIconSlot ^ 1);
+        if (itemIndex != -2)
+        {
+            itemId = ItemPc_GetItemIdBySlotId(itemIndex);
+            CreateItemMenuIcon(itemId, sStateDataPtr->itemMenuIconSlot);
+            if (ItemId_GetPocket(itemId) == POCKET_TM_CASE)
+                desc = gMoveNames[ItemIdToBattleMoveId(itemId)];
+            else
+                desc = ItemId_GetDescription(itemId);
+        }
+        else
+        {
+            CreateItemMenuIcon(ITEM_N_A, sStateDataPtr->itemMenuIconSlot);
+            desc = gText_ReturnToPC;
+        }
+        sStateDataPtr->itemMenuIconSlot ^= 1;
+        FillWindowPixelBuffer(1, 0);
+        ItemPc_AddTextPrinterParameterized(1, 2, desc, 0, 3, 2, 0, 0, 3);
+    }
+}
+
+static void ItemPc_ItemPrintFunc(u8 windowId, s32 itemId, u8 y)
+{
+    if (sStateDataPtr->moveModeOrigPos != 0xFF)
+    {
+        if (sStateDataPtr->moveModeOrigPos == (u8)itemId)
+            ItemPc_PrintOrRemoveCursorAt(y, 2);
+        else
+            ItemPc_PrintOrRemoveCursorAt(y, 0xFF);
+    }
+    if (itemId != -2)
+    {
+        u16 quantity = ItemPc_GetItemQuantityBySlotId(itemId);
+        ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_RIGHT_ALIGN, 3);
+        StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+        ItemPc_AddTextPrinterParameterized(windowId, 0, gStringVar4, 110, y, 0, 0, 0xFF, 1);
+    }
+}
+
+static void ItemPc_PrintOrRemoveCursor(u8 listMenuId, u8 colorIdx)
+{
+    ItemPc_PrintOrRemoveCursorAt(ListMenuGetYCoordForPrintingArrowCursor(listMenuId), colorIdx);
+}
+
+static void ItemPc_PrintOrRemoveCursorAt(u8 y, u8 colorIdx)
+{
+    if (colorIdx == 0xFF)
+    {
+        u8 maxWidth = GetFontAttribute(2, FONTATTR_MAX_LETTER_WIDTH);
+        u8 maxHeight = GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT);
+        FillWindowPixelRect(0, 0, 0, y, maxWidth, maxHeight);
+    }
+    else
+    {
+        ItemPc_AddTextPrinterParameterized(0, 2, gFameCheckerText_ListMenuCursor, 0, y, 0, 0, 0, colorIdx);
+    }
+}
+
+static void ItemPc_PrintWithdrawItem(void)
+{
+    ItemPc_AddTextPrinterParameterized(2, 0, gText_WithdrawItem, 0, 1, 0, 1, 0, 0);
+}
+
+static void ItemPc_PlaceTopMenuScrollIndicatorArrows(void)
+{
+    sStateDataPtr->scrollIndicatorArrowPairId = AddScrollIndicatorArrowPairParameterized(2, 128, 8, 104, sStateDataPtr->nItems - sStateDataPtr->maxShowed + 1, 110, 110, &sListMenuState.scroll);
+}
+
+static void ItemPc_PlaceWithdrawQuantityScrollIndicatorArrows(void)
+{
+    sStateDataPtr->withdrawQuantitySubmenuCursorPos = 1;
+    sStateDataPtr->scrollIndicatorArrowPairId = AddScrollIndicatorArrowPairParameterized(2, 212, 120, 152, 2, 110, 110, &sStateDataPtr->withdrawQuantitySubmenuCursorPos);
+}
+
+static void ItemPc_RemoveScrollIndicatorArrowPair(void)
+{
+    if (sStateDataPtr->scrollIndicatorArrowPairId != 0xFF)
+    {
+        RemoveScrollIndicatorArrowPair(sStateDataPtr->scrollIndicatorArrowPairId);
+        sStateDataPtr->scrollIndicatorArrowPairId = 0xFF;
+    }
+}
+
+static void ItemPc_SetCursorPosition(void)
+{
+    if (sListMenuState.scroll != 0 && sListMenuState.scroll + sStateDataPtr->maxShowed > sStateDataPtr->nItems + 1)
+        sListMenuState.scroll = (sStateDataPtr->nItems + 1) - sStateDataPtr->maxShowed;
+    if (sListMenuState.scroll + sListMenuState.row >= sStateDataPtr->nItems + 1)
+    {
+        if (sStateDataPtr->nItems + 1 < 2)
+            sListMenuState.row = 0;
+        else
+            sListMenuState.row = sStateDataPtr->nItems;
+    }
+}
+
+#define try_free(ptr) ({        \
+    void ** ptr__ = (void **)&(ptr);   \
+    if (*ptr__ != NULL)                \
+        Free(*ptr__);                  \
+})
+
+static void ItemPc_FreeResources(void)
+{
+    try_free(sStateDataPtr);
+    try_free(sBg1TilemapBuffer);
+    try_free(sListMenuItems);
+    try_free(sUnusedStringAllocation);
+    FreeAllWindowBuffers();
+}
+
+static void Task_ItemPcTurnOff1(u8 taskId)
+{
+    if (sListMenuState.initialized == 1)
+    {
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    }
+    else
+    {
+        sub_80A0A70(0, 0, 0);
+        PlaySE(SE_PC_OFF);
+    }
+    gTasks[taskId].func = Task_ItemPcTurnOff2;
+}
+
+static void Task_ItemPcTurnOff2(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    if (!gPaletteFade.active && !sub_80A0AAC())
+    {
+        DestroyListMenu(data[0], &sListMenuState.scroll, &sListMenuState.row);
+        if (sStateDataPtr->savedCallback != NULL)
+            SetMainCallback2(sStateDataPtr->savedCallback);
+        else
+            SetMainCallback2(sListMenuState.savedCallback);
+        ItemPc_RemoveScrollIndicatorArrowPair();
+        ItemPc_FreeResources();
+        DestroyTask(taskId);
+    }
+}
+
+static u8 ItemPc_GetCursorPosition(void)
+{
+    return sListMenuState.scroll + sListMenuState.row;
+}
+
+static u16 ItemPc_GetItemIdBySlotId(u16 idx)
+{
+    return gSaveBlock1Ptr->pcItems[idx].itemId;
+}
+
+static u16 ItemPc_GetItemQuantityBySlotId(u16 idx)
+{
+    return GetPcItemQuantity(&gSaveBlock1Ptr->pcItems[idx].quantity);
+}
+
+static void ItemPc_CountPcItems(void)
+{
+    u16 i;
+
+    ItemPcCompaction();
+    sStateDataPtr->nItems = 0;
+    for (i = 0; i < PC_ITEMS_COUNT; sStateDataPtr->nItems++, i++)
+    {
+        if (gSaveBlock1Ptr->pcItems[i].itemId == ITEM_NONE)
+            break;
+    }
+    sStateDataPtr->maxShowed = sStateDataPtr->nItems + 1 <= 6 ? sStateDataPtr->nItems + 1 : 6;
+}
+
+static void ItemPc_SetScrollPosition(void)
+{
+    u8 i;
+
+    if (sListMenuState.row > 3)
+    {
+        for (i = 0; i <= sListMenuState.row - 3; sListMenuState.row--, sListMenuState.scroll++, i++)
+        {
+            if (sListMenuState.scroll + sStateDataPtr->maxShowed == sStateDataPtr->nItems + 1)
+                break;
+        }
+    }
+}
+
+static void ItemPc_SetMessageWindowPalette(int a0)
+{
+    SetBgRectPal(1, 0, 14, 30, 6, a0 + 1);
+    schedule_bg_copy_tilemap_to_vram(1);
+}
+
+void ItemPc_SetInitializedFlag(u8 a0)
+{
+    sListMenuState.initialized = a0;
+}
+
+static void Task_ItemPcMain(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    u16 scroll;
+    u16 row;
+    s32 input;
+
+    if (!gPaletteFade.active && !sub_80A0A98())
+    {
+        if (JOY_NEW(SELECT_BUTTON))
+        {
+            ListMenuGetScrollAndRow(data[0], &scroll, &row);
+            if (scroll + row != sStateDataPtr->nItems)
+            {
+                PlaySE(SE_SELECT);
+                ItemPc_MoveItemModeInit(taskId, scroll + row);
+                return;
+            }
+        }
+        input = ListMenuHandleInput(data[0]);
+        ListMenuGetScrollAndRow(data[0], &sListMenuState.scroll, &sListMenuState.row);
+        switch (input)
+        {
+        case -1:
+            break;
+        case -2:
+            PlaySE(SE_SELECT);
+            ItemPc_SetInitializedFlag(0);
+            gTasks[taskId].func = Task_ItemPcTurnOff1;
+            break;
+        default:
+            PlaySE(SE_SELECT);
+            ItemPc_SetMessageWindowPalette(1);
+            ItemPc_RemoveScrollIndicatorArrowPair();
+            data[1] = input;
+            data[2] = ItemPc_GetItemQuantityBySlotId(input);
+            ItemPc_PrintOrRemoveCursor(data[0], 2);
+            gTasks[taskId].func = Task_ItemPcSubmenuInit;
+            break;
+        }
+    }
+}
+
+static void ItemPc_ReturnFromSubmenu(u8 taskId)
+{
+    ItemPc_SetMessageWindowPalette(0);
+    ItemPc_PlaceTopMenuScrollIndicatorArrows();
+    gTasks[taskId].func = Task_ItemPcMain;
+}
+
+static void ItemPc_MoveItemModeInit(u8 taskId, s16 pos)
+{
+    s16 * data = gTasks[taskId].data;
+
+    sub_8107BD0(data[0], 16, 1);
+    data[1] = pos;
+    sStateDataPtr->moveModeOrigPos = pos;
+    StringCopy(gStringVar1, ItemId_GetName(ItemPc_GetItemIdBySlotId(data[1])));
+    StringExpandPlaceholders(gStringVar4, gOtherText_WhereShouldTheStrVar1BePlaced);
+    FillWindowPixelBuffer(1, 0x00);
+    ItemPc_AddTextPrinterParameterized(1, 2, gStringVar4, 0, 3, 2, 3, 0, 0);
+    sub_80986A8(-32, ListMenuGetYCoordForPrintingArrowCursor(data[0]));
+    sub_8098660(0);
+    ItemPc_PrintOrRemoveCursor(data[0], 2);
+    gTasks[taskId].func = Task_ItemPcMoveItemModeRun;
+}
+
+static void Task_ItemPcMoveItemModeRun(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    ListMenuHandleInput(data[0]);
+    ListMenuGetScrollAndRow(data[0], &sListMenuState.scroll, &sListMenuState.row);
+    sub_80986A8(-32, ListMenuGetYCoordForPrintingArrowCursor(data[0]));
+    if (JOY_NEW(A_BUTTON | SELECT_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        sStateDataPtr->moveModeOrigPos = 0xFF;
+        ItemPc_InsertItemIntoNewSlot(taskId, sListMenuState.scroll + sListMenuState.row);
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        sStateDataPtr->moveModeOrigPos = 0xFF;
+        ItemPc_MoveItemModeCancel(taskId, sListMenuState.scroll + sListMenuState.row);
+    }
+}
+
+static void ItemPc_InsertItemIntoNewSlot(u8 taskId, u32 pos)
+{
+    s16 * data = gTasks[taskId].data;
+    if (data[1] == pos || data[1] == pos - 1)
+        ItemPc_MoveItemModeCancel(taskId, pos);
+    else
+    {
+        ItemMenu_MoveItemSlotToNewPositionInArray(gSaveBlock1Ptr->pcItems, data[1], pos);
+        DestroyListMenu(data[0], &sListMenuState.scroll, &sListMenuState.row);
+        if (data[1] < pos)
+            sListMenuState.row--;
+        ItemPc_BuildListMenuTemplate();
+        data[0] = ListMenuInit(&gMultiuseListMenuTemplate, sListMenuState.scroll, sListMenuState.row);
+        sub_8098660(1);
+        gTasks[taskId].func = Task_ItemPcMain;
+    }
+}
+
+static void ItemPc_MoveItemModeCancel(u8 taskId, u32 pos)
+{
+    s16 * data = gTasks[taskId].data;
+
+    DestroyListMenu(data[0], &sListMenuState.scroll, &sListMenuState.row);
+    if (data[1] < pos)
+        sListMenuState.row--;
+    ItemPc_BuildListMenuTemplate();
+    data[0] = ListMenuInit(&gMultiuseListMenuTemplate, sListMenuState.scroll, sListMenuState.row);
+    sub_8098660(1);
+    gTasks[taskId].func = Task_ItemPcMain;
+}
+
+static void Task_ItemPcSubmenuInit(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    u8 windowId;
+
+    ItemPc_SetBorderStyleOnWindow(4);
+    windowId = ItemPc_GetOrCreateSubwindow(0);
+    PrintTextArray(4, 2, 8, 2, GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) + 2, 3, sItemPcSubmenuOptions);
+    ProgramAndPlaceMenuCursorOnWindow(4, 2, 0, 2, GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) + 2, 3, 0);
+    CopyItemName(ItemPc_GetItemIdBySlotId(data[1]), gStringVar1);
+    StringExpandPlaceholders(gStringVar4, gOtherText_StrVar1);
+    ItemPc_AddTextPrinterParameterized(windowId, 2, gStringVar4, 0, 2, 1, 0, 0, 1);
+    schedule_bg_copy_tilemap_to_vram(0);
+    gTasks[taskId].func = Task_ItemPcSubmenuRun;
+}
+
+static void Task_ItemPcSubmenuRun(u8 taskId)
+{
+    s8 input = ProcessMenuInputNoWrapAround();
+    switch (input)
+    {
+    case -1:
+        PlaySE(SE_SELECT);
+        Task_ItemPcCancel(taskId);
+        break;
+    case -2:
+        break;
+    default:
+        PlaySE(SE_SELECT);
+        sItemPcSubmenuOptions[input].func.void_u8(taskId);
+    }
+}
+
+static void Task_ItemPcWithdraw(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    ClearMenuWindow(4, FALSE);
+    ItemPc_DestroySubwindow(0);
+    ClearWindowTilemap(4);
+    data[8] = 1;
+    if (ItemPc_GetItemQuantityBySlotId(data[1]) == 1)
+    {
+        PutWindowTilemap(0);
+        schedule_bg_copy_tilemap_to_vram(0);
+        ItemPc_DoWithdraw(taskId);
+    }
+    else
+    {
+        PutWindowTilemap(0);
+        ItemPc_WithdrawMultipleInitWindow(data[1]);
+        ItemPc_PlaceWithdrawQuantityScrollIndicatorArrows();
+        gTasks[taskId].func = Task_ItemPcHandleWithdrawMultiple;
+    }
+}
+
+static void ItemPc_DoWithdraw(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    u16 itemId = ItemPc_GetItemIdBySlotId(data[1]);
+    u8 windowId;
+
+    if (AddBagItem(itemId, data[8]) == TRUE)
+    {
+        ItemUse_SetQuestLogEvent(29, NULL, itemId, 0xFFFF);
+        CopyItemName(itemId, gStringVar1);
+        ConvertIntToDecimalStringN(gStringVar2, data[8], STR_CONV_MODE_LEFT_ALIGN, 3);
+        StringExpandPlaceholders(gStringVar4, gText_WithdrewQuantItem);
+        windowId = ItemPc_GetOrCreateSubwindow(2);
+        AddTextPrinterParameterized(windowId, 2, gStringVar4, 0, 2, 0, NULL);
+        gTasks[taskId].func = Task_ItemPcWaitButtonAndFinishWithdrawMultiple;
+    }
+    else
+    {
+        windowId = ItemPc_GetOrCreateSubwindow(2);
+        AddTextPrinterParameterized(windowId, 2, gText_NoMoreRoomInBag, 0, 2, 0, NULL);
+        gTasks[taskId].func = Task_ItemPcWaitButtonWithdrawMultipleFailed;
+    }
+}
+
+static void Task_ItemPcWaitButtonAndFinishWithdrawMultiple(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    u16 itemId;
+
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        itemId = ItemPc_GetItemIdBySlotId(data[1]);
+        RemoveItemFromPC(itemId, data[8]);
+        ItemPcCompaction();
+        Task_ItemPcCleanUpWithdraw(taskId);
+    }
+}
+
+static void Task_ItemPcWaitButtonWithdrawMultipleFailed(u8 taskId)
+{
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        Task_ItemPcCleanUpWithdraw(taskId);
+    }
+}
+
+static void Task_ItemPcCleanUpWithdraw(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    ItemPc_DestroySubwindow(2);
+    PutWindowTilemap(1);
+    DestroyListMenu(data[0], &sListMenuState.scroll, &sListMenuState.row);
+    ItemPc_CountPcItems();
+    ItemPc_SetCursorPosition();
+    ItemPc_BuildListMenuTemplate();
+    data[0] = ListMenuInit(&gMultiuseListMenuTemplate, sListMenuState.scroll, sListMenuState.row);
+    schedule_bg_copy_tilemap_to_vram(0);
+    ItemPc_ReturnFromSubmenu(taskId);
+}
+
+static void ItemPc_WithdrawMultipleInitWindow(u16 slotId)
+{
+    u16 itemId = ItemPc_GetItemIdBySlotId(slotId);
+
+    CopyItemName(itemId, gStringVar1);
+    StringExpandPlaceholders(gStringVar4, gText_WithdrawHowMany);
+    AddTextPrinterParameterized(ItemPc_GetOrCreateSubwindow(1), 2, gStringVar4, 0, 2, 0, NULL);
+    ConvertIntToDecimalStringN(gStringVar1, 1, STR_CONV_MODE_LEADING_ZEROS, 3);
+    StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+    ItemPc_SetBorderStyleOnWindow(3);
+    ItemPc_AddTextPrinterParameterized(3, 0, gStringVar4, 8, 10, 1, 0, 0, 1);
+    schedule_bg_copy_tilemap_to_vram(0);
+}
+
+static void sub_810E670(s16 quantity)
+{
+    FillWindowPixelRect(3, 0x11, 10, 10, 28, 12);
+    ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEADING_ZEROS, 3);
+    StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+    ItemPc_AddTextPrinterParameterized(3, 0, gStringVar4, 8, 10, 1, 0, 0, 1);
+}
+
+static void Task_ItemPcHandleWithdrawMultiple(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    if (sub_80BF848(&data[8], data[2]) == TRUE)
+        sub_810E670(data[8]);
+    else if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        ItemPc_DestroySubwindow(1);
+        ClearWindowTilemap(3);
+        PutWindowTilemap(0);
+        ItemPc_PrintOrRemoveCursor(data[0], 1);
+        schedule_bg_copy_tilemap_to_vram(0);
+        ItemPc_RemoveScrollIndicatorArrowPair();
+        ItemPc_DoWithdraw(taskId);
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        ClearMenuWindow(3, FALSE);
+        ItemPc_DestroySubwindow(1);
+        ClearWindowTilemap(3);
+        PutWindowTilemap(0);
+        PutWindowTilemap(1);
+        ItemPc_PrintOrRemoveCursor(data[0], 1);
+        schedule_bg_copy_tilemap_to_vram(0);
+        ItemPc_RemoveScrollIndicatorArrowPair();
+        ItemPc_ReturnFromSubmenu(taskId);
+    }
+}
+
+static void Task_ItemPcGive(u8 taskId)
+{
+    if (CalculatePlayerPartyCount() == 0)
+    {
+        ClearMenuWindow(4, FALSE);
+        ItemPc_DestroySubwindow(0);
+        ClearWindowTilemap(4);
+        PutWindowTilemap(0);
+        ItemPc_PrintOnWindow5WithContinueTask(taskId, gText_ThereIsNoPokemon, gTask_ItemPcWaitButtonAndExitSubmenu);
+    }
+    else
+    {
+        sStateDataPtr->savedCallback = ItemPc_CB2_SwitchToPartyMenu;
+        Task_ItemPcTurnOff1(taskId);
+    }
+}
+
+static void ItemPc_CB2_SwitchToPartyMenu(void)
+{
+    PartyMenuInit(0, 0, 6, 0, 6, sub_811FB28, ItemPc_CB2_ReturnFromPartyMenu);
+    gUnknown_203B0A0.unkC = ItemPc_GetItemIdBySlotId(ItemPc_GetCursorPosition());
+}
+
+static void ItemPc_CB2_ReturnFromPartyMenu(void)
+{
+    ItemPc_Init(1, NULL);
+}
+
+static void gTask_ItemPcWaitButtonAndExitSubmenu(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        ClearMenuWindow_BorderThickness2(5, 0);
+        ClearWindowTilemap(5);
+        PutWindowTilemap(1);
+        ItemPc_PrintOrRemoveCursor(data[0], 1);
+        schedule_bg_copy_tilemap_to_vram(0);
+        ItemPc_ReturnFromSubmenu(taskId);
+    }
+}
+
+static void Task_ItemPcCancel(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    ClearMenuWindow(4, FALSE);
+    ItemPc_DestroySubwindow(0);
+    ClearWindowTilemap(4);
+    PutWindowTilemap(0);
+    PutWindowTilemap(1);
+    ItemPc_PrintOrRemoveCursor(data[0], 1);
+    schedule_bg_copy_tilemap_to_vram(0);
+    ItemPc_ReturnFromSubmenu(taskId);
+}
+
+static void ItemPc_InitWindows(void)
+{
+    u8 i;
+
+    InitWindows(gUnknown_8453F98);
+    DeactivateAllTextPrinters();
+    TextWindow_SetUserSelectedFrame(0, 0x3C0, 0xE0);
+    TextWindow_SetStdFrame0_WithPal(0, 0x3A3, 0xC0);
+    TextWindow_SetBubbleFrame_841F1C8(0, 0x3AC, 0xB0);
+    LoadPalette(stdpal_get(2), 0xD0, 0x20);
+    LoadPalette(gTMCaseMainWindowPalette, 0xF0, 0x20);
+    for (i = 0; i < 3; i++)
+    {
+        FillWindowPixelBuffer(i, 0x00);
+        PutWindowTilemap(i);
+    }
+    schedule_bg_copy_tilemap_to_vram(0);
+    for (i = 0; i < 3; i++)
+        sSubmenuWindowIds[i] = 0xFF;
+}
+
+static void unused_ItemPc_AddTextPrinterParameterized(u8 windowId, const u8 * string, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed)
+{
+    struct TextPrinterTemplate template;
+
+    template.currentChar = string;
+    template.windowId = windowId;
+    template.fontId = 3;
+    template.x = x;
+    template.y = y;
+    template.currentX = x;
+    template.currentY = y;
+    template.fgColor = 2;
+    template.bgColor = 0;
+    template.shadowColor = 3;
+    template.unk = GetFontAttribute(3, FONTATTR_UNKNOWN);
+    template.letterSpacing = letterSpacing + GetFontAttribute(3, FONTATTR_LETTER_SPACING);
+    template.lineSpacing = lineSpacing + GetFontAttribute(3, FONTATTR_LINE_SPACING);
+    AddTextPrinter(&template, speed, NULL);
+}
+
+static void ItemPc_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorIdx)
+{
+    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, &gUnknown_8453F8C[colorIdx], speed, str);
+}
+
+static void ItemPc_SetBorderStyleOnWindow(u8 windowId)
+{
+    SetWindowBorderStyle(windowId, FALSE, 0x3C0, 0x0E);
+}
+
+static u8 ItemPc_GetOrCreateSubwindow(u8 idx)
+{
+    if (sSubmenuWindowIds[idx] == 0xFF)
+    {
+        sSubmenuWindowIds[idx] = AddWindow(&gUnknown_8453FD0[idx]);
+        SetWindowBorderStyle(sSubmenuWindowIds[idx], TRUE, 0x3A3, 0x0C);
+    }
+
+    return sSubmenuWindowIds[idx];
+}
+
+static void ItemPc_DestroySubwindow(u8 idx)
+{
+    ClearMenuWindow(sSubmenuWindowIds[idx], FALSE);
+    ClearWindowTilemap(sSubmenuWindowIds[idx]); // redundant
+    RemoveWindow(sSubmenuWindowIds[idx]);
+    sSubmenuWindowIds[idx] = 0xFF;
+}
+
+static u8 ItemPc_GetSubwindow(u8 idx)
+{
+    return sSubmenuWindowIds[idx];
+}
+
+static void ItemPc_PrintOnWindow5WithContinueTask(u8 taskId, const u8 * str, TaskFunc taskFunc)
+{
+    DisplayMessageAndContinueTask(taskId, 5, 0x3AC, 0x0B, 2, GetTextSpeedSetting(), str, taskFunc);
+    schedule_bg_copy_tilemap_to_vram(0);
+}

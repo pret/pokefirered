@@ -5,13 +5,13 @@
 #include "window.h"
 #include "text.h"
 #include "sprite.h"
+#include "blit.h"
 
 extern u8 gGlyphInfo[0x90];
 extern u8 gUnknown_203ADFA;
-extern u16 gUnknown_841F408[];
-extern const struct OamData gUnknown_83AC9D0;
+extern u16 gTMCaseMainWindowPalette[];
+extern const struct OamData gOamData_83AC9D0;
 
-extern void FillBitmapRect4Bit(struct Bitmap *surface, u16 x, u16 y, u16 width, u16 height, u8 fillValue);
 extern void FillWindowPixelRect(u8 windowId, u8 fillValue, u16 x, u16 y, u16 width, u16 height);
 extern void BlitBitmapRectToWindow(u8 windowId, const u8 *pixels, u16 srcX, u16 srcY, u16 srcWidth, int srcHeight, u16 destX, u16 destY, u16 rectWidth, u16 rectHeight);
 extern u8 GetKeypadIconWidth(u8 keypadIconId);
@@ -52,7 +52,7 @@ const struct SpriteSheet gUnknown_81EA68C[] =
 
 const struct SpritePalette gUnknown_81EA6A4[] =
 {
-    {gUnknown_841F408, 0x8000},
+    {gTMCaseMainWindowPalette, 0x8000},
     {NULL}
 };
 
@@ -60,7 +60,7 @@ const struct SpriteTemplate gUnknown_81EA6B4 =
 {
     .tileTag = 0x8000,
     .paletteTag = 0x8000,
-    .oam = &gUnknown_83AC9D0,
+    .oam = &gOamData_83AC9D0,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -453,7 +453,7 @@ void TextPrinterInitDownArrowCounters(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
 
-    if (gTextFlags.flag_2 == 1)
+    if (gTextFlags.autoScroll == 1)
         subStruct->frames_visible_counter = 0;
     else
     {
@@ -467,7 +467,7 @@ void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter)
     struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
     const u8 *arrowTiles;
 
-    if (gTextFlags.flag_2 == 0)
+    if (gTextFlags.autoScroll == 0)
     {
         if (subStruct->field_1 != 0)
         {
@@ -483,7 +483,7 @@ void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter)
                 10,
                 12);
 
-            switch (gTextFlags.flag_1)
+            switch (gTextFlags.useAlternateDownArrow)
             {
                 case 0:
                 default:
@@ -544,7 +544,7 @@ bool8 TextPrinterWaitAutoMode(struct TextPrinter *textPrinter)
 bool16 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter)
 {
     bool8 result = FALSE;
-    if (gTextFlags.flag_2 != 0)
+    if (gTextFlags.autoScroll != 0)
     {
         result = TextPrinterWaitAutoMode(textPrinter);
     }
@@ -563,7 +563,7 @@ bool16 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter)
 bool16 TextPrinterWait(struct TextPrinter *textPrinter)
 {
     bool16 result = FALSE;
-    if (gTextFlags.flag_2 != 0)
+    if (gTextFlags.autoScroll != 0)
     {
         result = TextPrinterWaitAutoMode(textPrinter);
     }
@@ -591,7 +591,7 @@ void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, bool8 drawArrow, u8 *c
         FillWindowPixelRect(windowId, (bgColor << 4) | bgColor, x, y, 10, 12);
         if (drawArrow == 0)
         {
-            switch (gTextFlags.flag_1)
+            switch (gTextFlags.useAlternateDownArrow)
             {
                 case 0:
                 default:
@@ -1791,7 +1791,7 @@ void sub_80062B0(struct Sprite *sprite)
     }
 }
 
-u8 sub_8006300(u8 sheetId, u16 x, u16 y, u8 priority, u8 subpriority)
+u8 CreateTextCursorSpriteForOakSpeech(u8 sheetId, u16 x, u16 y, u8 priority, u8 subpriority)
 {
     u8 spriteId;
     LoadSpriteSheet(&gUnknown_81EA68C[sheetId & 1]);

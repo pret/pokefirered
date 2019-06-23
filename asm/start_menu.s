@@ -11,7 +11,7 @@ sub_806ED54: @ 806ED54
 	ldr r0, _0806ED6C @ =gUnknown_20370F5
 	movs r1, 0
 	strb r1, [r0]
-	bl sub_805642C
+	bl is_c1_link_related_active
 	cmp r0, 0x1
 	bne _0806ED70
 	bl sub_806EE34
@@ -158,7 +158,7 @@ sub_806EE7C: @ 806EE7C
 	bl PutWindowTilemap
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_80F6F1C
+	bl DrawStdWindowFrame
 	ldr r0, _0806EEFC @ =gStringVar1
 	ldr r1, _0806EF00 @ =gUnknown_2039996
 	ldrh r1, [r1]
@@ -220,7 +220,7 @@ sub_806EF18: @ 806EF18
 	ldr r4, _0806EF40 @ =gUnknown_2037101
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -390,7 +390,7 @@ _0806F06C:
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl sub_80F6F1C
+	bl DrawStdWindowFrame
 	ldr r1, _0806F08C @ =gUnknown_20370FF
 	b _0806F0B8
 	.align 2, 0
@@ -438,9 +438,9 @@ _0806F0C4:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	strb r0, [r4]
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806F118
@@ -568,13 +568,13 @@ sub_806F1D4: @ 806F1D4
 	movs r0, 0
 	strb r0, [r1]
 	strb r0, [r1, 0x1]
-	ldr r1, _0806F1E8 @ =gUnknown_3005024
+	ldr r1, _0806F1E8 @ =gFieldCallback2
 	ldr r0, _0806F1EC @ =sub_806F1B8
 	str r0, [r1]
 	bx lr
 	.align 2, 0
 _0806F1E4: .4byte gUnknown_20370FF
-_0806F1E8: .4byte gUnknown_3005024
+_0806F1E8: .4byte gFieldCallback2
 _0806F1EC: .4byte sub_806F1B8
 	thumb_func_end sub_806F1D4
 
@@ -634,7 +634,7 @@ _0806F254: .4byte gUnknown_20370F0
 	thumb_func_start ShowStartMenu
 ShowStartMenu: @ 806F258
 	push {lr}
-	bl sub_805642C
+	bl is_c1_link_related_active
 	cmp r0, 0
 	bne _0806F26E
 	bl player_bitmagic
@@ -666,7 +666,7 @@ sub_806F280: @ 806F280
 	bl MoveMenuCursor
 	ldr r4, _0806F360 @ =gUnknown_20370F4
 	strb r0, [r4]
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806F2D2
@@ -701,7 +701,7 @@ _0806F2D2:
 	bl MoveMenuCursor
 	ldr r4, _0806F360 @ =gUnknown_20370F4
 	strb r0, [r4]
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806F320
@@ -854,9 +854,9 @@ _0806F424: .4byte gPaletteFade
 _0806F428:
 	movs r0, 0x29
 	bl IncrementGameStat
-	bl play_some_sound
+	bl PlayRainStoppingSoundEffect
 	bl sub_806EF18
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	ldr r0, _0806F448 @ =sub_810275C
 	bl SetMainCallback2
 	movs r0, 0x1
@@ -881,9 +881,9 @@ sub_806F44C: @ 806F44C
 	.align 2, 0
 _0806F460: .4byte gPaletteFade
 _0806F464:
-	bl play_some_sound
+	bl PlayRainStoppingSoundEffect
 	bl sub_806EF18
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	ldr r0, _0806F47C @ =CB2_PartyMenuFromStartMenu
 	bl SetMainCallback2
 	movs r0, 0x1
@@ -908,17 +908,17 @@ sub_806F480: @ 806F480
 	.align 2, 0
 _0806F494: .4byte gPaletteFade
 _0806F498:
-	bl play_some_sound
+	bl PlayRainStoppingSoundEffect
 	bl sub_806EF18
-	bl sub_80563F0
-	ldr r0, _0806F4B0 @ =UseFameCheckerFromMenu
+	bl CleanupOverworldWindowsAndTilemaps
+	ldr r0, _0806F4B0 @ =ReturnToBagFromKeyItem
 	bl SetMainCallback2
 	movs r0, 0x1
 _0806F4AC:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806F4B0: .4byte UseFameCheckerFromMenu
+_0806F4B0: .4byte ReturnToBagFromKeyItem
 	thumb_func_end sub_806F480
 
 	thumb_func_start sub_806F4B4
@@ -935,9 +935,9 @@ sub_806F4B4: @ 806F4B4
 	.align 2, 0
 _0806F4C8: .4byte gPaletteFade
 _0806F4CC:
-	bl play_some_sound
+	bl PlayRainStoppingSoundEffect
 	bl sub_806EF18
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	ldr r0, _0806F4E4 @ =sub_80568A8
 	bl sub_808B698
 	movs r0, 0x1
@@ -974,9 +974,9 @@ sub_806F4FC: @ 806F4FC
 	.align 2, 0
 _0806F510: .4byte gPaletteFade
 _0806F514:
-	bl play_some_sound
+	bl PlayRainStoppingSoundEffect
 	bl sub_806EF18
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	ldr r0, _0806F534 @ =sub_8088388
 	bl SetMainCallback2
 	ldr r1, _0806F538 @ =gMain
@@ -1029,8 +1029,8 @@ sub_806F56C: @ 806F56C
 	.align 2, 0
 _0806F580: .4byte gPaletteFade
 _0806F584:
-	bl play_some_sound
-	bl sub_80563F0
+	bl PlayRainStoppingSoundEffect
+	bl CleanupOverworldWindowsAndTilemaps
 	ldr r0, _0806F59C @ =gUnknown_300502C
 	ldrb r0, [r0]
 	ldr r1, _0806F5A0 @ =sub_80568A8
@@ -1049,7 +1049,7 @@ sub_806F5A4: @ 806F5A4
 	push {lr}
 	bl sub_812B234
 	movs r0, 0xC
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	bl sub_806F624
 	ldr r1, _0806F5C0 @ =gUnknown_20370F0
 	ldr r0, _0806F5C4 @ =sub_806F5C8
@@ -1080,7 +1080,7 @@ sub_806F5C8: @ 806F5C8
 _0806F5E4:
 	movs r0, 0
 	movs r1, 0
-	bl sub_810F260
+	bl ClearMenuWindow_BorderThickness2
 	bl sub_806F14C
 	bl sub_812B248
 	ldr r1, _0806F5FC @ =gUnknown_20370F0
@@ -1093,7 +1093,7 @@ _0806F600: .4byte sub_806F280
 _0806F604:
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_810F260
+	bl ClearMenuWindow_BorderThickness2
 	bl sub_80696C0
 	bl ScriptContext2_Disable
 	bl sub_812B248
@@ -1109,7 +1109,7 @@ _0806F61E:
 	thumb_func_start sub_806F624
 sub_806F624: @ 806F624
 	push {lr}
-	bl sub_80590D8
+	bl save_serialize_map
 	ldr r1, _0806F63C @ =gUnknown_3000FA4
 	ldr r0, _0806F640 @ =sub_806F7A8
 	str r0, [r1]
@@ -1156,7 +1156,7 @@ sub_806F67C: @ 806F67C
 	push {lr}
 	bl sub_812B234
 	movs r0, 0xC
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	bl sub_806F624
 	ldr r0, _0806F698 @ =task50_save_game
 	movs r1, 0x50
@@ -1239,7 +1239,7 @@ sub_806F71C: @ 806F71C
 	push {lr}
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_80F6F54
+	bl ClearDialogWindowAndFrame
 	pop {r0}
 	bx r0
 	thumb_func_end sub_806F71C
@@ -1328,7 +1328,7 @@ sub_806F7A8: @ 806F7A8
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl sub_80F6F9C
+	bl ClearStdWindowAndFrame
 	bl remove_start_menu_window_maybe
 	movs r0, 0
 	bl sub_8112EDC
@@ -1362,7 +1362,7 @@ _0806F7F4: .4byte sub_806F7F8
 	thumb_func_start sub_806F7F8
 sub_806F7F8: @ 806F7F8
 	push {lr}
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -1481,7 +1481,7 @@ _0806F8D8: .4byte sub_806F8DC
 	thumb_func_start sub_806F8DC
 sub_806F8DC: @ 806F8DC
 	push {lr}
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -1713,7 +1713,7 @@ _0806FA88:
 	bl SetGpuReg
 	movs r0, 0
 	bl SetVBlankCallback
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	movs r2, 0xA0
 	lsls r2, 19
 	mov r1, sp
@@ -1767,7 +1767,7 @@ _0806FB00:
 	bl ResetSpriteData
 	bl ResetTasks
 	bl ResetPaletteFade
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	b _0806FB64
 _0806FB12:
 	movs r0, 0
@@ -1781,7 +1781,7 @@ _0806FB12:
 	movs r0, 0
 	movs r1, 0x8
 	movs r2, 0xF0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	b _0806FB64
 	.align 2, 0
 _0806FB34: .4byte gUnknown_83A73B8
@@ -1908,11 +1908,11 @@ _0806FC14:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0xFF
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 	movs r0, 0
 	movs r1, 0x8
 	movs r2, 0xF
-	bl sub_8150048
+	bl DrawTextBorderOuter
 	movs r0, 0
 	bl PutWindowTilemap
 	movs r0, 0
@@ -2014,7 +2014,7 @@ sub_806FCF4: @ 806FCF4
 	ldr r4, _0806FE5C @ =0x0000021d
 	adds r1, r4, 0
 	movs r2, 0xD0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	ldrb r0, [r5]
 	movs r1, 0
 	adds r2, r4, 0
@@ -2043,7 +2043,7 @@ sub_806FCF4: @ 806FCF4
 	str r4, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x2
 	adds r1, r4, 0
 	adds r2, r6, 0
@@ -2058,7 +2058,7 @@ sub_806FCF4: @ 806FCF4
 	movs r1, 0
 	movs r2, 0x2
 	movs r3, 0xE
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0x2
@@ -2077,7 +2077,7 @@ sub_806FCF4: @ 806FCF4
 	movs r1, 0
 	movs r2, 0x2
 	movs r3, 0x1C
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x4
 	adds r1, r4, 0
 	movs r2, 0x2
@@ -2091,7 +2091,7 @@ sub_806FCF4: @ 806FCF4
 	movs r1, 0
 	movs r2, 0x3C
 	movs r3, 0x1C
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r7, 0x2A
 	ldr r0, _0806FE78 @ =0x00000829
 	bl FlagGet
@@ -2108,7 +2108,7 @@ sub_806FCF4: @ 806FCF4
 	movs r1, 0
 	movs r2, 0x2
 	movs r3, 0x2A
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x1
 	adds r1, r4, 0
 	movs r2, 0x2
@@ -2121,7 +2121,7 @@ sub_806FCF4: @ 806FCF4
 	movs r1, 0
 	movs r2, 0x3C
 	movs r3, 0x2A
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r7, 0x38
 _0806FE0A:
 	ldrb r0, [r5]
@@ -2133,7 +2133,7 @@ _0806FE0A:
 	movs r1, 0
 	movs r2, 0x2
 	adds r3, r7, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x2
 	adds r1, r4, 0
 	movs r2, 0x2
@@ -2146,7 +2146,7 @@ _0806FE0A:
 	movs r1, 0
 	movs r2, 0x3C
 	adds r3, r7, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldrb r0, [r5]
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -2178,7 +2178,7 @@ sub_806FE84: @ 806FE84
 	ldr r4, _0806FE9C @ =gUnknown_2037104
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_80F6F9C
+	bl ClearStdWindowAndFrame
 	ldrb r0, [r4]
 	bl RemoveWindow
 	pop {r4}
@@ -2197,7 +2197,7 @@ sub_806FEA0: @ 806FEA0
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
-	bl sub_80F6F9C
+	bl ClearStdWindowAndFrame
 	bl remove_start_menu_window_maybe
 	bl sub_80696C0
 	bl ScriptContext2_Disable

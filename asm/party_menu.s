@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_811EA44
-sub_811EA44: @ 811EA44
+	thumb_func_start PartyMenuInit
+PartyMenuInit: @ 811EA44
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -181,7 +181,7 @@ _0811EB90: .4byte gUnknown_203B09C
 _0811EB94: .4byte gPlayerParty
 _0811EB98: .4byte gTextFlags
 _0811EB9C: .4byte sub_811EBD0
-	thumb_func_end sub_811EA44
+	thumb_func_end PartyMenuInit
 
 	thumb_func_start sub_811EBA0
 sub_811EBA0: @ 811EBA0
@@ -219,7 +219,7 @@ _0811EBD2:
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0811EBF6
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -276,12 +276,12 @@ _0811EC24:
 	.4byte _0811EDD0
 	.4byte _0811EDDE
 _0811EC80:
-	bl sub_80BF768
+	bl VblankHblankHandlerSetZero
 	bl sub_80BF77C
 	bl clear_scheduled_bg_copies_to_vram
 	b _0811EDFC
 _0811EC8E:
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	b _0811EDFC
 _0811EC94:
 	bl ResetPaletteFade
@@ -299,7 +299,7 @@ _0811ECAE:
 	bl FreeAllSpritePalettes
 	b _0811EDFC
 _0811ECB4:
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	cmp r0, 0
 	beq _0811ECC0
@@ -420,7 +420,7 @@ _0811ED96:
 _0811EDA8: .4byte gUnknown_203B09C
 _0811EDAC:
 	movs r0, 0x5
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	b _0811EDFC
 _0811EDB4:
 	ldr r4, _0811EDCC @ =gUnknown_203B09C
@@ -565,7 +565,7 @@ _0811EEC8: .4byte gUnknown_203B0B8
 	thumb_func_start sub_811EECC
 sub_811EECC: @ 811EECC
 	push {r4,r5,lr}
-	bl sub_80BF7C8
+	bl InitBgReg
 	ldr r5, _0811EF34 @ =gUnknown_203B0BC
 	movs r4, 0x80
 	lsls r4, 4
@@ -1274,7 +1274,7 @@ _0811F47C:
 	cmp r0, 0x3
 	bne _0811F492
 	adds r0, r4, 0
-	bl sub_80A1150
+	bl GetItemCompatibilityRule
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1799,7 +1799,7 @@ _0811F884:
 	movs r1, 0x17
 	movs r2, 0x10
 	movs r3, 0x7
-	bl sub_80F6B08
+	bl SetBgRectPal
 	b _0811F8B0
 _0811F89E:
 	movs r0, 0x2
@@ -1809,7 +1809,7 @@ _0811F89E:
 	movs r1, 0x17
 	movs r2, 0x10
 	movs r3, 0x7
-	bl sub_80F6B08
+	bl SetBgRectPal
 _0811F8B0:
 	ldr r0, _0811F8BC @ =gUnknown_203B09C
 	ldr r0, [r0]
@@ -1857,7 +1857,7 @@ _0811F8F2:
 	movs r2, 0x12
 _0811F904:
 	movs r3, 0x7
-	bl sub_80F6B08
+	bl SetBgRectPal
 	b _0811F91E
 _0811F90C:
 	movs r0, 0x2
@@ -1867,7 +1867,7 @@ _0811F90C:
 	movs r1, 0x17
 	movs r2, 0x12
 	movs r3, 0x7
-	bl sub_80F6B08
+	bl SetBgRectPal
 _0811F91E:
 	ldr r0, _0811F940 @ =gUnknown_203B09C
 	ldr r0, [r0]
@@ -2494,7 +2494,7 @@ _0811FDD6:
 	.align 2, 0
 _0811FDF0: .4byte gUnknown_203B0A0
 _0811FDF4:
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	cmp r0, 0
 	bne _0811FE04
@@ -2585,7 +2585,7 @@ sub_811FEA4: @ 811FEA4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -3234,7 +3234,7 @@ sub_8120328: @ 8120328
 	bne _0812035E
 	movs r0, 0x6
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	movs r0, 0x6
 	bl ClearWindowTilemap
 _0812035E:
@@ -3302,10 +3302,10 @@ sub_81203B8: @ 81203B8
 	beq _08120410
 	movs r0, 0x6
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	movs r0, 0x6
 	bl ClearWindowTilemap
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3366,7 +3366,7 @@ _0812043C:
 _08120448:
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	b _08120468
 	.align 2, 0
 _08120454: .4byte gUnknown_203B0A0
@@ -3376,14 +3376,14 @@ _0812045C:
 	movs r0, 0x6
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 _08120468:
 	ldr r1, _0812049C @ =gStringVar1
 	adds r0, r5, 0
 	bl GetMonNickname
 	ldr r1, _081204A0 @ =gStringVar2
 	adds r0, r4, 0
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r4, _081204A4 @ =gStringVar4
 	ldr r1, _081204A8 @ =gUnknown_8416C2A
 	adds r0, r4, 0
@@ -3418,13 +3418,13 @@ sub_81204AC: @ 81204AC
 	movs r0, 0x8
 	adds r1, r6, 0
 	adds r2, r4, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	ldr r1, _081204FC @ =gStringVar1
 	adds r0, r6, 0
 	bl GetMonNickname
 	ldr r1, _08120500 @ =gStringVar2
 	adds r0, r4, 0
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r4, _08120504 @ =gStringVar4
 	ldr r1, _08120508 @ =gUnknown_8416CAC
 	adds r0, r4, 0
@@ -3458,7 +3458,7 @@ sub_812050C: @ 812050C
 	bl GetMonNickname
 	ldr r1, _0812054C @ =gStringVar2
 	adds r0, r4, 0
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r4, _08120550 @ =gStringVar4
 	ldr r1, _08120554 @ =gUnknown_8416C49
 	adds r0, r4, 0
@@ -3502,10 +3502,10 @@ sub_8120558: @ 8120558
 	bl sub_8124B60
 	ldr r1, _081205B8 @ =gStringVar1
 	adds r0, r4, 0
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r1, _081205BC @ =gStringVar2
 	adds r0, r5, 0
-	bl sub_8099E90
+	bl CopyItemName
 	ldr r4, _081205C0 @ =gStringVar4
 	ldr r1, _081205C4 @ =gUnknown_8416CEA
 	adds r0, r4, 0
@@ -3582,7 +3582,7 @@ sub_8120610: @ 8120610
 	b _0812064E
 _0812062C:
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812064C
@@ -3627,7 +3627,7 @@ _08120678:
 _0812067E:
 	ldr r0, _08120698 @ =0x0000016d
 _08120680:
-	bl ItemId_GetItem
+	bl ItemId_GetName
 	adds r1, r0, 0
 _08120686:
 	ldr r0, _0812069C @ =gStringVar1
@@ -4198,7 +4198,7 @@ sub_8120AC4: @ 8120AC4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -4298,7 +4298,7 @@ _08120B86:
 	lsls r0, 16
 	lsrs r1, r0, 16
 	adds r0, r5, 0
-	bl pokemon_has_move
+	bl MonKnowsMove
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4709,11 +4709,11 @@ sub_8120E58: @ 8120E58
 	movs r0, 0
 	movs r1, 0x4F
 	movs r2, 0xD0
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	movs r0, 0
 	movs r1, 0x58
 	movs r2, 0xF0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	ldr r0, _08120E94 @ =gUnknown_203B0A0
 	ldrb r0, [r0, 0xB]
 	cmp r0, 0x3
@@ -4878,13 +4878,13 @@ sub_8120FB0: @ 8120FB0
 	push {lr}
 	bl FreeRestoreBattleData
 	bl LoadPlayerParty
-	bl sub_815AC20
-	ldr r0, _08120FC8 @ =sub_815ABFC
+	bl SetTeachyTvControllerModeToResume
+	ldr r0, _08120FC8 @ =CB2_ReturnToTeachyTV
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08120FC8: .4byte sub_815ABFC
+_08120FC8: .4byte CB2_ReturnToTeachyTV
 	thumb_func_end sub_8120FB0
 
 	thumb_func_start sub_8120FCC
@@ -5016,11 +5016,11 @@ _081210AC:
 	movs r0, 0
 	movs r1, 0x4F
 	movs r2, 0xD0
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	movs r0, 0
 	movs r1, 0x58
 	movs r2, 0xF0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	movs r0, 0x2
 	bl stdpal_get
 	movs r1, 0xC0
@@ -5084,7 +5084,7 @@ _0812110E:
 	adds r0, r4, 0
 	movs r1, 0
 	movs r3, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	adds r0, r4, 0
 	bl PutWindowTilemap
 	adds r0, r4, 0
@@ -5141,7 +5141,7 @@ _08121194:
 	movs r1, 0
 	adds r2, r5, 0
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	b _08121224
 	.align 2, 0
 _081211E0: .4byte gUnknown_845A108
@@ -5149,7 +5149,7 @@ _081211E4: .4byte gUnknown_203B0A0
 _081211E8: .4byte gFameCheckerText_Cancel
 _081211EC: .4byte gUnknown_8459FFC
 _081211F0:
-	ldr r4, _08121240 @ =gUnknown_84161C8
+	ldr r4, _08121240 @ =gOtherText_Exit
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0
@@ -5172,7 +5172,7 @@ _081211F0:
 	movs r1, 0
 	adds r2, r5, 0
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 _08121224:
 	adds r0, r6, 0
 	bl PutWindowTilemap
@@ -5187,7 +5187,7 @@ _08121238:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08121240: .4byte gUnknown_84161C8
+_08121240: .4byte gOtherText_Exit
 _08121244: .4byte gUnknown_8459FFC
 	thumb_func_end sub_81210F8
 
@@ -5778,7 +5778,7 @@ sub_8121704: @ 8121704
 	str r1, [sp, 0x8]
 	movs r1, 0
 	adds r2, r5, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0xC
 	pop {r4,r5}
 	pop {r0}
@@ -5909,7 +5909,7 @@ sub_8121808: @ 8121808
 	movs r3, 0x3
 	bl ConvertIntToDecimalStringN
 	ldr r4, _0812184C @ =gStringVar1
-	ldr r1, _08121850 @ =gUnknown_8416223
+	ldr r1, _08121850 @ =gText_Lv
 	adds r0, r4, 0
 	bl StringCopy
 	adds r0, r4, 0
@@ -5927,7 +5927,7 @@ sub_8121808: @ 8121808
 	.align 2, 0
 _08121848: .4byte gStringVar2
 _0812184C: .4byte gStringVar1
-_08121850: .4byte gUnknown_8416223
+_08121850: .4byte gText_Lv
 	thumb_func_end sub_8121808
 
 	thumb_func_start sub_8121854
@@ -6486,7 +6486,7 @@ _08121CAA:
 	ldr r1, [r1]
 	str r1, [sp, 0x8]
 	movs r1, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 _08121CD0:
 	add sp, 0xC
 	pop {r3}
@@ -6507,7 +6507,7 @@ sub_8121CE4: @ 8121CE4
 	cmp r0, 0xFF
 	beq _08121D04
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	ldrb r0, [r4]
 	bl RemoveWindow
 	movs r0, 0xFF
@@ -6831,7 +6831,7 @@ _08121F3C:
 	str r1, [sp, 0x10]
 	movs r1, 0x2
 	mov r2, r9
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -6888,7 +6888,7 @@ sub_8121FC0: @ 8121FC0
 	movs r1, 0x1
 	orrs r0, r1
 	strb r0, [r2]
-	bl sub_80F78A8
+	bl GetTextSpeedSetting
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -6903,7 +6903,7 @@ sub_8121FC0: @ 8121FC0
 	movs r0, 0x6
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 	add sp, 0x10
 	pop {r4}
 	pop {r0}
@@ -6926,7 +6926,7 @@ sub_812200C: @ 812200C
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810FF60
+	bl CreateYesNoMenu
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -6990,7 +6990,7 @@ sub_8122084: @ 8122084
 	movs r1, 0x1
 	orrs r0, r1
 	strb r0, [r2]
-	bl sub_80F78A8
+	bl GetTextSpeedSetting
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -7005,7 +7005,7 @@ sub_8122084: @ 8122084
 	adds r0, r4, 0
 	movs r1, 0x4
 	adds r2, r5, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 	add sp, 0x10
 	pop {r4,r5}
 	pop {r0}
@@ -7026,7 +7026,7 @@ sub_81220D4: @ 81220D4
 	adds r0, r4, 0
 	movs r1, 0x4F
 	movs r2, 0xE0
-	bl sub_814FEAC
+	bl TextWindow_SetBubbleFrame_841F1C8
 	adds r0, r4, 0
 	movs r1, 0x1
 	movs r2, 0x4F
@@ -7054,7 +7054,7 @@ sub_8122110: @ 8122110
 	bl ClearWindowTilemap
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_810F260
+	bl ClearMenuWindow_BorderThickness2
 	adds r0, r4, 0
 	bl RemoveWindow
 	movs r0, 0x2
@@ -7121,7 +7121,7 @@ _0812217A:
 	movs r1, 0x2
 	movs r2, 0x3
 	movs r3, 0x6
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	ldrb r0, [r4, 0xE]
 	bl PutWindowTilemap
 	movs r0, 0x2
@@ -8717,7 +8717,7 @@ sub_8122DBC: @ 8122DBC
 	str r1, [sp, 0x8]
 	movs r1, 0xFF
 	movs r3, 0x1
-	bl sub_811EA44
+	bl PartyMenuInit
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -9928,7 +9928,7 @@ _081237AE:
 	str r1, [sp, 0x8]
 	movs r1, 0xFF
 	movs r3, 0x1
-	bl sub_811EA44
+	bl PartyMenuInit
 	b _08123814
 	.align 2, 0
 _081237BC: .4byte gUnknown_203B0D8
@@ -9943,7 +9943,7 @@ _081237CC:
 	beq _081237F8
 	ldrh r0, [r6]
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 	movs r0, 0x9
 	ldrsb r0, [r5, r0]
 	mov r1, r8
@@ -9967,7 +9967,7 @@ _081237F8:
 	str r1, [sp, 0x8]
 	movs r1, 0xFF
 	movs r3, 0x1
-	bl sub_811EA44
+	bl PartyMenuInit
 _08123814:
 	add sp, 0xC
 	pop {r3}
@@ -10016,7 +10016,7 @@ sub_8123824: @ 8123824
 	bl sub_81205C8
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 	ldr r1, _0812389C @ =gTasks
 	lsls r0, r7, 2
 	adds r0, r7
@@ -10113,7 +10113,7 @@ sub_8123930: @ 8123930
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -10133,17 +10133,17 @@ _08123956:
 	ldr r5, _08123998 @ =gSpecialVar_ItemId
 	ldrh r0, [r5]
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 	ldr r6, _0812399C @ =gUnknown_203B0D8
 	ldrh r0, [r6]
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _081239AC
 	ldrh r0, [r5]
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	ldrh r0, [r6]
 	bl sub_8120658
 	ldr r0, _081239A0 @ =gStringVar4
@@ -10330,10 +10330,10 @@ sub_8123ACC: @ 8123ACC
 	bl SetMonData
 	ldrh r0, [r4]
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 	mov r0, r8
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	ldrb r0, [r6, 0x8]
 	lsls r0, 28
 	lsrs r0, 28
@@ -10345,7 +10345,7 @@ sub_8123ACC: @ 8123ACC
 	str r1, [sp, 0x8]
 	movs r1, 0xFF
 	movs r3, 0x1
-	bl sub_811EA44
+	bl PartyMenuInit
 	b _08123B68
 	.align 2, 0
 _08123B38: .4byte gUnknown_203B0A0
@@ -10366,7 +10366,7 @@ _08123B4C:
 	str r1, [sp, 0x8]
 	movs r1, 0xFF
 	movs r3, 0x1
-	bl sub_811EA44
+	bl PartyMenuInit
 _08123B68:
 	add sp, 0xC
 	pop {r3}
@@ -10675,7 +10675,7 @@ sub_8123DCC: @ 8123DCC
 	str r1, [sp, 0x8]
 	movs r1, 0xFF
 	movs r3, 0x1
-	bl sub_811EA44
+	bl PartyMenuInit
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -10752,7 +10752,7 @@ sub_8123E8C: @ 8123E8C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -10871,7 +10871,7 @@ sub_8123F80: @ 8123F80
 	push {r7}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -10903,7 +10903,7 @@ _08123FAA:
 	lsrs r4, r0, 16
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -11627,7 +11627,7 @@ _081245D6:
 	ldr r0, [r5]
 	adds r0, 0xD
 	bl sub_8121CE4
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -11790,7 +11790,7 @@ _08124754: .4byte gUnknown_203B0A0
 _08124758: .4byte sub_80C4EF8
 _0812475C:
 	ldr r1, _08124780 @ =gUnknown_203B0A0
-	ldr r0, _08124784 @ =c2_exit_to_overworld_2_switch
+	ldr r0, _08124784 @ =CB2_ReturnToField
 	str r0, [r1]
 	bl GetCursorSelectionMonId
 	lsls r0, 24
@@ -11807,7 +11807,7 @@ _08124778:
 	b _081247B4
 	.align 2, 0
 _08124780: .4byte gUnknown_203B0A0
-_08124784: .4byte c2_exit_to_overworld_2_switch
+_08124784: .4byte CB2_ReturnToField
 _08124788: .4byte gPlayerParty
 _0812478C:
 	cmp r4, 0
@@ -11897,7 +11897,7 @@ sub_8124828: @ 8124828
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -11915,7 +11915,7 @@ _08124848:
 	b _081248A2
 _0812484E:
 	ldr r1, _0812487C @ =gUnknown_203B0A0
-	ldr r0, _08124880 @ =c2_exit_to_overworld_2_switch
+	ldr r0, _08124880 @ =CB2_ReturnToField
 	str r0, [r1]
 	bl GetCursorSelectionMonId
 	lsls r0, 24
@@ -11936,17 +11936,17 @@ _0812484E:
 	b _081248A2
 	.align 2, 0
 _0812487C: .4byte gUnknown_203B0A0
-_08124880: .4byte c2_exit_to_overworld_2_switch
+_08124880: .4byte CB2_ReturnToField
 _08124884: .4byte gPlayerParty
 _08124888: .4byte gUnknown_203B09C
 _0812488C:
 	movs r0, 0x5
 	bl PlaySE
 _08124892:
-	ldr r0, _081248A8 @ =gUnknown_3005024
+	ldr r0, _081248A8 @ =gFieldCallback2
 	movs r1, 0
 	str r1, [r0]
-	ldr r0, _081248AC @ =gUnknown_203B0C4
+	ldr r0, _081248AC @ =gPostMenuFieldCallback
 	str r1, [r0]
 	adds r0, r4, 0
 	bl sub_81203B8
@@ -11955,12 +11955,12 @@ _081248A2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081248A8: .4byte gUnknown_3005024
-_081248AC: .4byte gUnknown_203B0C4
+_081248A8: .4byte gFieldCallback2
+_081248AC: .4byte gPostMenuFieldCallback
 	thumb_func_end sub_8124828
 
-	thumb_func_start hm_add_c3_launch_phase_2
-hm_add_c3_launch_phase_2: @ 81248B0
+	thumb_func_start FieldCallback_PrepareFadeInFromMenu
+FieldCallback_PrepareFadeInFromMenu: @ 81248B0
 	push {lr}
 	bl sub_807DC00
 	ldr r0, _081248C4 @ =task_launch_hm_phase_2
@@ -11971,7 +11971,7 @@ hm_add_c3_launch_phase_2: @ 81248B0
 	bx r1
 	.align 2, 0
 _081248C4: .4byte task_launch_hm_phase_2
-	thumb_func_end hm_add_c3_launch_phase_2
+	thumb_func_end FieldCallback_PrepareFadeInFromMenu
 
 	thumb_func_start task_launch_hm_phase_2
 task_launch_hm_phase_2: @ 81248C8
@@ -11988,7 +11988,7 @@ task_launch_hm_phase_2: @ 81248C8
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [r1]
-	ldr r0, _08124900 @ =gUnknown_203B0C4
+	ldr r0, _08124900 @ =gPostMenuFieldCallback
 	ldr r0, [r0]
 	bl _call_via_r0
 	adds r0, r4, 0
@@ -11999,7 +11999,7 @@ _081248F4:
 	bx r0
 	.align 2, 0
 _081248FC: .4byte gFieldEffectArguments
-_08124900: .4byte gUnknown_203B0C4
+_08124900: .4byte gPostMenuFieldCallback
 	thumb_func_end task_launch_hm_phase_2
 
 	thumb_func_start brm_get_selected_species
@@ -12118,18 +12118,18 @@ sub_8124998: @ 8124998
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08124A00
-	ldr r1, _081249F0 @ =gUnknown_3005024
-	ldr r0, _081249F4 @ =hm_add_c3_launch_phase_2
+	ldr r1, _081249F0 @ =gFieldCallback2
+	ldr r0, _081249F4 @ =FieldCallback_PrepareFadeInFromMenu
 	str r0, [r1]
-	ldr r1, _081249F8 @ =gUnknown_203B0C4
+	ldr r1, _081249F8 @ =gPostMenuFieldCallback
 	ldr r0, _081249FC @ =hm_surf_run_dp02scr
 	str r0, [r1]
 	movs r0, 0x1
 	b _08124A02
 	.align 2, 0
-_081249F0: .4byte gUnknown_3005024
-_081249F4: .4byte hm_add_c3_launch_phase_2
-_081249F8: .4byte gUnknown_203B0C4
+_081249F0: .4byte gFieldCallback2
+_081249F4: .4byte FieldCallback_PrepareFadeInFromMenu
+_081249F8: .4byte gPostMenuFieldCallback
 _081249FC: .4byte hm_surf_run_dp02scr
 _08124A00:
 	movs r0, 0
@@ -12207,7 +12207,7 @@ sub_8124A8C: @ 8124A8C
 	push {lr}
 	ldr r0, _08124AA4 @ =gMapHeader
 	ldrb r0, [r0, 0x17]
-	bl is_light_level_1_2_3_or_6
+	bl Overworld_MapTypeAllowsTeleportAndFly
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -12237,7 +12237,7 @@ sub_8124AB0: @ 8124AB0
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_811EA44
+	bl PartyMenuInit
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -12289,18 +12289,18 @@ hm_prepare_waterfall: @ 8124AF8
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08124B54
-	ldr r1, _08124B44 @ =gUnknown_3005024
-	ldr r0, _08124B48 @ =hm_add_c3_launch_phase_2
+	ldr r1, _08124B44 @ =gFieldCallback2
+	ldr r0, _08124B48 @ =FieldCallback_PrepareFadeInFromMenu
 	str r0, [r1]
-	ldr r1, _08124B4C @ =gUnknown_203B0C4
+	ldr r1, _08124B4C @ =gPostMenuFieldCallback
 	ldr r0, _08124B50 @ =hm2_waterfall
 	str r0, [r1]
 	movs r0, 0x1
 	b _08124B56
 	.align 2, 0
-_08124B44: .4byte gUnknown_3005024
-_08124B48: .4byte hm_add_c3_launch_phase_2
-_08124B4C: .4byte gUnknown_203B0C4
+_08124B44: .4byte gFieldCallback2
+_08124B48: .4byte FieldCallback_PrepareFadeInFromMenu
+_08124B4C: .4byte gPostMenuFieldCallback
 _08124B50: .4byte hm2_waterfall
 _08124B54:
 	movs r0, 0
@@ -12577,7 +12577,7 @@ _08124D6A:
 	adds r1, r7, 0
 	movs r2, 0x3
 	movs r3, 0x1
-	bl sub_811EA44
+	bl PartyMenuInit
 	add sp, 0xC
 	pop {r3}
 	mov r8, r3
@@ -12606,7 +12606,7 @@ sub_8124DA0: @ 8124DA0
 	movs r0, 0x5
 	movs r1, 0
 	movs r2, 0xFF
-	bl sub_81317F8
+	bl InitTMCase
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8124DA0
@@ -12617,7 +12617,7 @@ sub_8124DB0: @ 8124DB0
 	movs r0, 0x6
 	movs r1, 0
 	movs r2, 0xFF
-	bl sub_813CD50
+	bl InitBerryPouch
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8124DB0
@@ -12644,7 +12644,7 @@ sub_8124DE0: @ 8124DE0
 	push {r4,lr}
 	ldr r4, _08124E0C @ =gSpecialVar_ItemId
 	ldrh r0, [r4]
-	bl sub_80A1150
+	bl GetItemCompatibilityRule
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -12735,7 +12735,7 @@ sub_8124E48: @ 8124E48
 	bhi _08124EB0
 	adds r0, r1, 0
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 _08124EB0:
 	mov r1, r8
 	ldr r0, [r1]
@@ -12759,7 +12759,7 @@ _08124EC8:
 	str r1, [sp, 0x8]
 	movs r1, 0xFF
 	movs r2, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 _08124EE6:
 	add sp, 0xC
 	pop {r3}
@@ -12820,7 +12820,7 @@ sub_8124EFC: @ 8124EFC
 	movs r0, 0x4
 	adds r1, r5, 0
 	adds r3, r6, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	ldrh r1, [r7]
 	movs r0, 0xA9
 	lsls r0, 1
@@ -12828,7 +12828,7 @@ sub_8124EFC: @ 8124EFC
 	bhi _08124F7C
 	adds r0, r1, 0
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 _08124F7C:
 	mov r1, r8
 	ldr r0, [r1]
@@ -12852,7 +12852,7 @@ _08124F94:
 	ldr r1, [r4]
 	str r1, [sp, 0x8]
 	movs r1, 0xFF
-	bl sub_811EA44
+	bl PartyMenuInit
 _08124FB2:
 	add sp, 0xC
 	pop {r3}
@@ -13312,7 +13312,7 @@ _08125380:
 	movs r0, 0x4
 	adds r1, r5, 0
 	adds r2, r6, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	adds r0, r7, 0
 	bl sub_8124DC0
 	ldr r1, _081253A8 @ =gUnknown_3005E98
@@ -13418,7 +13418,7 @@ _0812544C:
 	beq _0812547E
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 	b _0812547E
 	.align 2, 0
 _08125474: .4byte gUnknown_203B0C0
@@ -13684,7 +13684,7 @@ _08125680:
 	mov r1, r8
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	movs r0, 0x2
 	bl schedule_bg_copy_tilemap_to_vram
 	add sp, 0x10
@@ -13730,8 +13730,8 @@ _081256F2:
 	bx r0
 	thumb_func_end sub_81256C0
 
-	thumb_func_start sub_81256F8
-sub_81256F8: @ 81256F8
+	thumb_func_start ItemUseCB_PpRestore
+ItemUseCB_PpRestore: @ 81256F8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -13802,7 +13802,7 @@ _0812577E:
 _08125784: .4byte gUnknown_203B0A0
 _08125788: .4byte gTasks
 _0812578C: .4byte sub_81256C0
-	thumb_func_end sub_81256F8
+	thumb_func_end ItemUseCB_PpRestore
 
 	thumb_func_start sub_8125790
 sub_8125790: @ 8125790
@@ -13958,12 +13958,12 @@ sub_8125898: @ 8125898
 	ldr r3, _08125940 @ =0x0000ffff
 	movs r0, 0x4
 	adds r1, r4, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	movs r0, 0x1
 	bl PlaySE
 	ldrh r0, [r6]
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 	movs r2, 0xE
 	ldrsh r1, [r5, r2]
 	adds r1, 0xD
@@ -14060,12 +14060,12 @@ _081259A0:
 	movs r0, 0x4
 	adds r1, r4, 0
 	adds r2, r5, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	movs r0, 0x1
 	bl PlaySE
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 	movs r0, 0
 	ldrsh r1, [r7, r0]
 	adds r1, 0xD
@@ -14185,8 +14185,8 @@ _08125ABC:
 	bx r1
 	thumb_func_end sub_8125A90
 
-	thumb_func_start pokemon_has_move
-pokemon_has_move: @ 8125AC0
+	thumb_func_start MonKnowsMove
+MonKnowsMove: @ 8125AC0
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	lsls r1, 16
@@ -14212,7 +14212,7 @@ _08125AE8:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end pokemon_has_move
+	thumb_func_end MonKnowsMove
 
 	thumb_func_start sub_8125AF0
 sub_8125AF0: @ 8125AF0
@@ -14315,7 +14315,7 @@ sub_8125B40: @ 8125B40
 	movs r0, 0x4
 	adds r1, r4, 0
 	adds r2, r5, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	adds r0, r6, 0
 	bl sub_8124DC0
 	ldr r1, _08125BEC @ =gUnknown_3005E98
@@ -14406,7 +14406,7 @@ sub_8125C48: @ 8125C48
 	bhi _08125C84
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 _08125C84:
 	ldr r1, _08125CD8 @ =gStringVar1
 	adds r0, r5, 0
@@ -14561,7 +14561,7 @@ sub_8125DBC: @ 8125DBC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -14712,7 +14712,7 @@ _08125EE8:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_811EA44
+	bl PartyMenuInit
 _08125F02:
 	add sp, 0xC
 	pop {r4,r5}
@@ -14799,7 +14799,7 @@ sub_8125F5C: @ 8125F5C
 	movs r0, 0x4
 	adds r1, r6, 0
 	adds r3, r4, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	ldr r1, _08125FF0 @ =gStringVar1
 	adds r0, r6, 0
 	bl GetMonNickname
@@ -15016,7 +15016,7 @@ sub_8126170: @ 8126170
 	muls r1, r0
 	ldr r0, _081261A4 @ =gPlayerParty
 	adds r4, r1, r0
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r5, r0, 24
 	cmp r5, 0
@@ -15268,7 +15268,7 @@ sub_8126350: @ 8126350
 	ldr r3, _08126424 @ =0x0000ffff
 	movs r0, 0x4
 	adds r1, r4, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	movs r0, 0
 	bl PlayFanfareByFanfareNum
 	ldrb r0, [r6, 0x9]
@@ -15276,7 +15276,7 @@ sub_8126350: @ 8126350
 	bl sub_8126440
 	ldrh r0, [r5]
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 	ldr r1, _08126428 @ =gStringVar1
 	adds r0, r4, 0
 	bl GetMonNickname
@@ -16112,12 +16112,12 @@ _08126A94:
 	ldrh r2, [r0]
 	ldr r3, _08126AE0 @ =0x0000ffff
 	movs r0, 0x4
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 _08126AB4:
 	ldr r0, _08126ADC @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 _08126ABE:
 	ldr r1, _08126AE4 @ =gTasks
 	lsls r0, r4, 2
@@ -16266,10 +16266,10 @@ sub_8126BD4: @ 8126BD4
 	ldrh r2, [r5]
 	ldr r3, _08126C20 @ =0x0000ffff
 	movs r0, 0x4
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	ldrh r0, [r5]
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -16640,7 +16640,7 @@ CB2_PartyMenuFromStartMenu: @ 8126EB0
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -16684,7 +16684,7 @@ _08126F0A:
 	movs r1, 0
 	movs r2, 0x5
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	ldr r1, _08126F38 @ =gUnknown_203B0A0
 	ldr r0, _08126F3C @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
@@ -16971,7 +16971,7 @@ sub_812713C: @ 812713C
 	bl SetMonData
 	ldrh r0, [r4]
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 	adds r0, r7, 0
 	bl sub_81273AC
 	ldr r0, [r6]
@@ -16995,7 +16995,7 @@ _0812719C:
 	str r1, [sp, 0x8]
 	movs r1, 0xFF
 	movs r3, 0x1
-	bl sub_811EA44
+	bl PartyMenuInit
 _081271B8:
 	add sp, 0xC
 	pop {r4-r7}
@@ -17093,7 +17093,7 @@ sub_8127268: @ 8127268
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -17117,7 +17117,7 @@ _0812728E:
 	ldr r6, _081272C4 @ =gUnknown_203B0D8
 	ldrh r0, [r6]
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _081272CC
@@ -17233,14 +17233,14 @@ sub_8127384: @ 8127384
 	bne _081273A0
 	adds r0, r1, 0
 	movs r1, 0x1
-	bl sub_809A460
+	bl RemoveItemFromPC
 	b _081273A8
 	.align 2, 0
 _0812739C: .4byte gUnknown_203B0A0
 _081273A0:
 	adds r0, r1, 0
 	movs r1, 0x1
-	bl sub_809A1D8
+	bl RemoveBagItem
 _081273A8:
 	pop {r0}
 	bx r0
@@ -17257,14 +17257,14 @@ sub_81273AC: @ 81273AC
 	beq _081273C8
 	adds r0, r1, 0
 	movs r1, 0x1
-	bl sub_809A3C8
+	bl AddPCItem
 	b _081273D0
 	.align 2, 0
 _081273C4: .4byte gUnknown_203B0A0
 _081273C8:
 	adds r0, r1, 0
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 _081273D0:
 	lsls r0, 24
 	lsrs r0, 24
@@ -17286,7 +17286,7 @@ sub_81273D8: @ 81273D8
 	movs r1, 0
 	movs r2, 0x7
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -17387,7 +17387,7 @@ sub_81274A8: @ 81274A8
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	ldr r1, _081274F4 @ =gUnknown_203B0A0
 	lsls r4, 6
 	ldrb r2, [r1, 0x8]
@@ -17824,7 +17824,7 @@ sub_81277F4: @ 81277F4
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -17850,7 +17850,7 @@ sub_812781C: @ 812781C
 	movs r1, 0
 	movs r2, 0xC
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	b _08127870
 	.align 2, 0
 _08127844: .4byte gSpecialVar_0x8005
@@ -17867,7 +17867,7 @@ _08127850:
 	movs r1, 0
 	movs r2, 0xC
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	ldr r1, _08127880 @ =gUnknown_203B0A0
 	ldr r0, _08127884 @ =gSpecialVar_0x8007
 	ldrh r0, [r0]
@@ -17897,7 +17897,7 @@ sub_8127888: @ 8127888
 	movs r1, 0
 	movs r2, 0xD
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -17960,7 +17960,7 @@ sub_81278DC: @ 81278DC
 	movs r0, 0x1
 	adds r2, r4, 0
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	movs r0, 0x8
 	bl sub_80EB2F4
 	b _08127950
@@ -17982,7 +17982,7 @@ _08127930:
 	movs r0, 0x1
 	adds r2, r4, 0
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 _08127950:
 	bl nullsub_44
 	bl pokemon_change_order
@@ -18012,7 +18012,7 @@ sub_8127968: @ 8127968
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	bl nullsub_44
 	bl pokemon_change_order
 	add sp, 0xC
@@ -18040,7 +18040,7 @@ sub_81279A4: @ 81279A4
 	movs r0, 0x1
 	movs r2, 0xE
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	bl nullsub_44
 	bl pokemon_change_order
 	add sp, 0xC
@@ -18079,7 +18079,7 @@ sub_81279E0: @ 81279E0
 	movs r0, 0x1
 	movs r2, 0x3
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	movs r0, 0x8
 	bl sub_80EB2F4
 	b _08127A62
@@ -18110,7 +18110,7 @@ _08127A44:
 	movs r0, 0x1
 	movs r2, 0x3
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 _08127A62:
 	bl nullsub_44
 	bl pokemon_change_order
@@ -19069,7 +19069,7 @@ sub_8128198: @ 8128198
 	movs r1, 0x3
 	movs r2, 0
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -19301,28 +19301,28 @@ _0812836C: .4byte gUnknown_2022B58
 sub_8128370: @ 8128370
 	push {lr}
 	sub sp, 0xC
-	ldr r1, _08128398 @ =gUnknown_3005024
+	ldr r1, _08128398 @ =gFieldCallback2
 	ldr r0, _0812839C @ =hm_add_c3_without_phase_2
 	str r0, [r1]
 	movs r0, 0xF
 	str r0, [sp]
 	ldr r0, _081283A0 @ =sub_811FB28
 	str r0, [sp, 0x4]
-	ldr r0, _081283A4 @ =c2_exit_to_overworld_2_switch
+	ldr r0, _081283A4 @ =CB2_ReturnToField
 	str r0, [sp, 0x8]
 	movs r0, 0x6
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	add sp, 0xC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08128398: .4byte gUnknown_3005024
+_08128398: .4byte gFieldCallback2
 _0812839C: .4byte hm_add_c3_without_phase_2
 _081283A0: .4byte sub_811FB28
-_081283A4: .4byte c2_exit_to_overworld_2_switch
+_081283A4: .4byte CB2_ReturnToField
 	thumb_func_end sub_8128370
 
 	thumb_func_start sub_81283A8
@@ -19331,27 +19331,27 @@ sub_81283A8: @ 81283A8
 	sub sp, 0xC
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _081283D4 @ =gUnknown_3005024
+	ldr r2, _081283D4 @ =gFieldCallback2
 	ldr r1, _081283D8 @ =hm_add_c3_without_phase_2
 	str r1, [r2]
 	movs r1, 0
 	str r1, [sp]
 	ldr r1, _081283DC @ =sub_811FB28
 	str r1, [sp, 0x4]
-	ldr r1, _081283E0 @ =c2_exit_to_overworld_2_switch
+	ldr r1, _081283E0 @ =CB2_ReturnToField
 	str r1, [sp, 0x8]
 	movs r1, 0
 	movs r2, 0xB
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	add sp, 0xC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081283D4: .4byte gUnknown_3005024
+_081283D4: .4byte gFieldCallback2
 _081283D8: .4byte hm_add_c3_without_phase_2
 _081283DC: .4byte sub_811FB28
-_081283E0: .4byte c2_exit_to_overworld_2_switch
+_081283E0: .4byte CB2_ReturnToField
 	thumb_func_end sub_81283A8
 
 	thumb_func_start hm_add_c3_without_phase_2

@@ -1,0 +1,34 @@
+{
+  "id": "MAP_NAVEL_ROCK_BASE_PATH_B6F",
+  "name": "NavelRock_BasePath_B6F",
+  "layout": "LAYOUT_NAVEL_ROCK_BASE_PATH_B6F",
+  "music": "BGM_FRLG_MT_EMBER",
+  "region_map_section": "MAPSEC_NAVEL_ROCK",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_4",
+  "unknown_18": 0,
+  "unknown_19": 6,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": null,
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 4,
+      "y": 4,
+      "elevation": 3,
+      "dest_map": "MAP_NAVEL_ROCK_BASE_PATH_B5F",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 2,
+      "y": 2,
+      "elevation": 3,
+      "dest_map": "MAP_NAVEL_ROCK_BASE_PATH_B7F",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

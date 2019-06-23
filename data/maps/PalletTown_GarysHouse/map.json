@@ -1,0 +1,90 @@
+{
+  "id": "MAP_PALLET_TOWN_GARYS_HOUSE",
+  "name": "PalletTown_GarysHouse",
+  "layout": "LAYOUT_PALLET_TOWN_GARYS_HOUSE",
+  "music": "BGM_FRLG_PALLET_TOWN",
+  "region_map_section": "MAPSEC_PALLET_TOWN",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 0,
+  "unknown_19": 0,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "76",
+      "x": 10,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "2",
+      "movement_range_x": 1,
+      "movement_range_y": 3,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PalletTown_GarysHouse_EventScript_168D56",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "93",
+      "x": 6,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "PalletTown_GarysHouse_EventScript_168F63",
+      "flag": "57"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 4,
+      "y": 8,
+      "elevation": 3,
+      "dest_map": "MAP_PALLET_TOWN",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 5,
+      "y": 8,
+      "elevation": 3,
+      "dest_map": "MAP_PALLET_TOWN",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 3,
+      "y": 8,
+      "elevation": 3,
+      "dest_map": "MAP_PALLET_TOWN",
+      "dest_warp_id": 1
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "bg_event_type_0",
+      "x": 12,
+      "y": 1,
+      "elevation": 0,
+      "script": "PalletTown_GarysHouse_EventScript_168F6C"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 11,
+      "y": 1,
+      "elevation": 0,
+      "script": "PalletTown_GarysHouse_EventScript_168F6C"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 9,
+      "y": 1,
+      "elevation": 0,
+      "script": "PalletTown_GarysHouse_EventScript_168F75"
+    }
+  ]
+}

@@ -273,8 +273,8 @@ _0807DD1C:
 	bx r0
 	thumb_func_end task0A_asap_script_env_2_enable_and_set_ctx_running
 
-	thumb_func_start sub_807DD24
-sub_807DD24: @ 807DD24
+	thumb_func_start FieldCallback_ReturnToEventScript2
+FieldCallback_ReturnToEventScript2: @ 807DD24
 	push {lr}
 	bl ScriptContext2_Enable
 	bl sub_8055DC4
@@ -286,7 +286,7 @@ sub_807DD24: @ 807DD24
 	bx r0
 	.align 2, 0
 _0807DD40: .4byte task0A_asap_script_env_2_enable_and_set_ctx_running
-	thumb_func_end sub_807DD24
+	thumb_func_end FieldCallback_ReturnToEventScript2
 
 	thumb_func_start sub_807DD44
 sub_807DD44: @ 807DD44
@@ -661,7 +661,7 @@ _0807E028:
 	ldrsh r0, [r6, r2]
 	movs r2, 0
 	ldrsh r1, [r7, r2]
-	bl sub_805B268
+	bl FieldSetDoorOpened
 	movs r0, 0x1
 	strh r0, [r4, 0x8]
 	b _0807E206
@@ -691,7 +691,7 @@ _0807E074:
 	ldrsh r0, [r6, r1]
 	movs r2, 0
 	ldrsh r1, [r7, r2]
-	bl sub_805B364
+	bl GetDoorSoundEffect
 	lsls r0, 16
 	lsrs r0, 16
 	bl PlaySE
@@ -699,12 +699,12 @@ _0807E074:
 	ldrsh r0, [r6, r1]
 	movs r2, 0
 	ldrsh r1, [r7, r2]
-	bl sub_805B310
+	bl FieldAnimateDoorOpen
 	movs r0, 0x7
 	strh r0, [r4, 0x8]
 	b _0807E206
 _0807E0A2:
-	bl sub_805B350
+	bl FieldIsDoorAnimationRunning
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807E0AE
@@ -750,7 +750,7 @@ _0807E0FC:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x22
 	ldrsh r1, [r4, r2]
-	bl sub_805B2D0
+	bl FieldAnimateDoorClose
 	movs r0, 0x9
 	strh r0, [r4, 0x8]
 	b _0807E206
@@ -762,7 +762,7 @@ _0807E10E:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807E206
-	bl sub_805B350
+	bl FieldIsDoorAnimationRunning
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807E206
@@ -822,7 +822,7 @@ _0807E198:
 	ldrsh r0, [r6, r1]
 	movs r2, 0
 	ldrsh r1, [r7, r2]
-	bl sub_805B2D0
+	bl FieldAnimateDoorClose
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r4, 0xA]
@@ -1153,16 +1153,16 @@ _0807E434:
 	bx r1
 	thumb_func_end sub_807E418
 
-	thumb_func_start sub_807E438
-sub_807E438: @ 807E438
+	thumb_func_start DoWarp
+DoWarp: @ 807E438
 	push {lr}
 	bl ScriptContext2_Enable
 	bl sub_8055F88
 	bl sub_807DC18
-	bl play_some_sound
+	bl PlayRainStoppingSoundEffect
 	movs r0, 0x9
 	bl PlaySE
-	ldr r0, _0807E464 @ =gUnknown_3005020
+	ldr r0, _0807E464 @ =gFieldCallback
 	ldr r1, _0807E468 @ =sub_807DF64
 	str r1, [r0]
 	ldr r0, _0807E46C @ =sub_807E718
@@ -1171,19 +1171,19 @@ sub_807E438: @ 807E438
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807E464: .4byte gUnknown_3005020
+_0807E464: .4byte gFieldCallback
 _0807E468: .4byte sub_807DF64
 _0807E46C: .4byte sub_807E718
-	thumb_func_end sub_807E438
+	thumb_func_end DoWarp
 
-	thumb_func_start sp13E_warp_to_last_warp
-sp13E_warp_to_last_warp: @ 807E470
+	thumb_func_start DoDiveWarp
+DoDiveWarp: @ 807E470
 	push {lr}
 	bl ScriptContext2_Enable
 	bl sub_8055F88
 	bl sub_807DC18
-	bl play_some_sound
-	ldr r0, _0807E494 @ =gUnknown_3005020
+	bl PlayRainStoppingSoundEffect
+	ldr r0, _0807E494 @ =gFieldCallback
 	ldr r1, _0807E498 @ =sub_807DF64
 	str r1, [r0]
 	ldr r0, _0807E49C @ =sub_807E718
@@ -1192,10 +1192,10 @@ sp13E_warp_to_last_warp: @ 807E470
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807E494: .4byte gUnknown_3005020
+_0807E494: .4byte gFieldCallback
 _0807E498: .4byte sub_807DF64
 _0807E49C: .4byte sub_807E718
-	thumb_func_end sp13E_warp_to_last_warp
+	thumb_func_end DoDiveWarp
 
 	thumb_func_start sub_807E4A0
 sub_807E4A0: @ 807E4A0
@@ -1228,11 +1228,11 @@ _0807E4D4: .4byte sub_807E980
 _0807E4D8: .4byte gTasks
 	thumb_func_end sub_807E4A0
 
-	thumb_func_start sub_807E4DC
-sub_807E4DC: @ 807E4DC
+	thumb_func_start DoDoorWarp
+DoDoorWarp: @ 807E4DC
 	push {lr}
 	bl ScriptContext2_Enable
-	ldr r0, _0807E4F4 @ =gUnknown_3005020
+	ldr r0, _0807E4F4 @ =gFieldCallback
 	ldr r1, _0807E4F8 @ =sub_807DF64
 	str r1, [r0]
 	ldr r0, _0807E4FC @ =sub_807E80C
@@ -1241,10 +1241,10 @@ sub_807E4DC: @ 807E4DC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807E4F4: .4byte gUnknown_3005020
+_0807E4F4: .4byte gFieldCallback
 _0807E4F8: .4byte sub_807DF64
 _0807E4FC: .4byte sub_807E80C
-	thumb_func_end sub_807E4DC
+	thumb_func_end DoDoorWarp
 
 	thumb_func_start sub_807E500
 sub_807E500: @ 807E500
@@ -1253,14 +1253,14 @@ sub_807E500: @ 807E500
 	ldr r0, _0807E518 @ =sub_807E718
 	movs r1, 0xA
 	bl CreateTask
-	ldr r1, _0807E51C @ =gUnknown_3005020
+	ldr r1, _0807E51C @ =gFieldCallback
 	ldr r0, _0807E520 @ =sub_807DF94
 	str r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0807E518: .4byte sub_807E718
-_0807E51C: .4byte gUnknown_3005020
+_0807E51C: .4byte gFieldCallback
 _0807E520: .4byte sub_807DF94
 	thumb_func_end sub_807E500
 
@@ -1268,7 +1268,7 @@ _0807E520: .4byte sub_807DF94
 sub_807E524: @ 807E524
 	push {lr}
 	bl ScriptContext2_Enable
-	ldr r0, _0807E53C @ =gUnknown_3005020
+	ldr r0, _0807E53C @ =gFieldCallback
 	ldr r1, _0807E540 @ =sub_807DF64
 	str r1, [r0]
 	ldr r0, _0807E544 @ =sub_807E784
@@ -1277,24 +1277,24 @@ sub_807E524: @ 807E524
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807E53C: .4byte gUnknown_3005020
+_0807E53C: .4byte gFieldCallback
 _0807E540: .4byte sub_807DF64
 _0807E544: .4byte sub_807E784
 	thumb_func_end sub_807E524
 
-	thumb_func_start sp13F_fall_to_last_warp
-sp13F_fall_to_last_warp: @ 807E548
+	thumb_func_start DoFallWarp
+DoFallWarp: @ 807E548
 	push {lr}
-	bl sp13E_warp_to_last_warp
-	ldr r1, _0807E558 @ =gUnknown_3005020
+	bl DoDiveWarp
+	ldr r1, _0807E558 @ =gFieldCallback
 	ldr r0, _0807E55C @ =sub_8084454
 	str r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807E558: .4byte gUnknown_3005020
+_0807E558: .4byte gFieldCallback
 _0807E55C: .4byte sub_8084454
-	thumb_func_end sp13F_fall_to_last_warp
+	thumb_func_end DoFallWarp
 
 	thumb_func_start sub_807E560
 sub_807E560: @ 807E560
@@ -1339,14 +1339,14 @@ sub_807E59C: @ 807E59C
 	ldr r0, _0807E5B8 @ =sub_807E784
 	movs r1, 0xA
 	bl CreateTask
-	ldr r1, _0807E5BC @ =gUnknown_3005020
+	ldr r1, _0807E5BC @ =gFieldCallback
 	ldr r0, _0807E5C0 @ =sub_807DF94
 	str r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0807E5B8: .4byte sub_807E784
-_0807E5BC: .4byte gUnknown_3005020
+_0807E5BC: .4byte gFieldCallback
 _0807E5C0: .4byte sub_807DF94
 	thumb_func_end sub_807E59C
 
@@ -1358,14 +1358,14 @@ sub_807E5C4: @ 807E5C4
 	ldr r0, _0807E5E0 @ =sub_807E718
 	movs r1, 0xA
 	bl CreateTask
-	ldr r1, _0807E5E4 @ =gUnknown_3005020
+	ldr r1, _0807E5E4 @ =gFieldCallback
 	ldr r0, _0807E5E8 @ =nullsub_60
 	str r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0807E5E0: .4byte sub_807E718
-_0807E5E4: .4byte gUnknown_3005020
+_0807E5E4: .4byte gFieldCallback
 _0807E5E8: .4byte nullsub_60
 	thumb_func_end sub_807E5C4
 
@@ -1690,7 +1690,7 @@ _0807E85C:
 	movs r2, 0
 	ldrsh r1, [r6, r2]
 	subs r1, 0x1
-	bl sub_805B364
+	bl GetDoorSoundEffect
 	lsls r0, 16
 	lsrs r0, 16
 	bl PlaySE
@@ -1699,7 +1699,7 @@ _0807E85C:
 	movs r2, 0
 	ldrsh r1, [r6, r2]
 	subs r1, 0x1
-	bl sub_805B310
+	bl FieldAnimateDoorOpen
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r5, 0xA]
@@ -1760,7 +1760,7 @@ _0807E8F4:
 	movs r2, 0
 	ldrsh r1, [r6, r2]
 	subs r1, 0x1
-	bl sub_805B2D0
+	bl FieldAnimateDoorClose
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r5, 0xA]
@@ -1807,7 +1807,7 @@ _0807E95C:
 _0807E966:
 	bl sub_8055F88
 _0807E96A:
-	bl play_some_sound
+	bl PlayRainStoppingSoundEffect
 	movs r0, 0
 	strh r0, [r5, 0x8]
 	ldr r0, _0807E97C @ =sub_807E718
@@ -1891,7 +1891,7 @@ _0807EA00:
 	b _0807EAB0
 _0807EA10:
 	bl sub_8055F88
-	bl play_some_sound
+	bl PlayRainStoppingSoundEffect
 	ldrb r1, [r7, 0x5]
 	movs r0, 0xD
 	negs r0, r0
@@ -1954,7 +1954,7 @@ _0807EA92:
 	strh r0, [r5]
 	b _0807EAB0
 _0807EA9A:
-	ldr r0, _0807EAB8 @ =gUnknown_3005020
+	ldr r0, _0807EAB8 @ =gFieldCallback
 	ldr r1, _0807EABC @ =sub_807DF64
 	str r1, [r0]
 	bl warp_in
@@ -1968,7 +1968,7 @@ _0807EAB0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807EAB8: .4byte gUnknown_3005020
+_0807EAB8: .4byte gFieldCallback
 _0807EABC: .4byte sub_807DF64
 _0807EAC0: .4byte sub_805671C
 	thumb_func_end sub_807E980

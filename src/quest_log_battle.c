@@ -26,7 +26,7 @@ void sub_812C334(s32 *, s32 *);
 
 void sub_812BFDC(void)
 {
-    if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_WALLY_TUTORIAL | BATTLE_TYPE_DOME)) && (gUnknown_2023E8A == 1 || gUnknown_2023E8A == 7))
+    if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_WALLY_TUTORIAL | BATTLE_TYPE_DOME)) && (gBattleOutcome == B_OUTCOME_WON || gBattleOutcome == B_OUTCOME_CAUGHT))
     {
         struct QuestLogStruct_TrainerBattleRecord * questLogTrainerBattleRecord = Alloc(sizeof(struct QuestLogStruct_TrainerBattleRecord));
         struct QuestLogStruct_WildBattleRecord * questLogWildBattleRecord = Alloc(sizeof(struct QuestLogStruct_WildBattleRecord));
@@ -71,7 +71,7 @@ void sub_812BFDC(void)
                 playerEndingHP = gBattleMons[GetBattlerAtPosition(0)].hp;
                 playerMaxHP = gBattleMons[GetBattlerAtPosition(0)].maxHP;
             }
-            questLogTrainerBattleRecord->v7 = sav1_map_get_name();
+            questLogTrainerBattleRecord->v7 = GetCurrentRegionMapSectionId();
             questLogTrainerBattleRecord->v6 = 0;
             if (playerEndingHP < playerMaxHP / 3 * 2)
                 questLogTrainerBattleRecord->v6 = 1;
@@ -81,7 +81,7 @@ void sub_812BFDC(void)
         }
         else
         {
-            if (gUnknown_2023E8A == 1)
+            if (gBattleOutcome == B_OUTCOME_WON)
             {
                 questLogWildBattleRecord->v0 = GetMonData(gEnemyParty + 0, MON_DATA_SPECIES);
                 questLogWildBattleRecord->v2 = SPECIES_NONE;
@@ -91,7 +91,7 @@ void sub_812BFDC(void)
                 questLogWildBattleRecord->v0 = SPECIES_NONE;
                 questLogWildBattleRecord->v2 = GetMonData(gEnemyParty + 0, MON_DATA_SPECIES);
             }
-            questLogWildBattleRecord->v4 = sav1_map_get_name();
+            questLogWildBattleRecord->v4 = GetCurrentRegionMapSectionId();
             sub_8113550(31, (const u16 *)questLogWildBattleRecord);
         }
         Free(questLogTrainerBattleRecord);
@@ -116,7 +116,7 @@ void sub_812C224(void)
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
         struct QuestLogStruct_LinkBattleRecord * r5 = Alloc(sizeof(struct QuestLogStruct_LinkBattleRecord));
-        r5->v0 = gUnknown_2023E8A - 1;
+        r5->v0 = gBattleOutcome - 1; // 0 = won, 1 = lost, 2 = drew
         if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
         {
             r8 = 15;

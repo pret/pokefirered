@@ -983,6 +983,6 @@ extern u8 gBattlersCount;
 extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
 extern s32 gBattleMoveDamage;
 
-extern u8 gUnknown_2023E8A;
+extern u8 gBattleOutcome;
 
 #endif // GUARD_BATTLE_H

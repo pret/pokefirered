@@ -9,7 +9,7 @@
 sub_80EB658: @ 80EB658
 	push {r4-r6,lr}
 	movs r4, 0
-	bl sub_809A2A4
+	bl ClearPCItemSlots
 	ldr r1, _080EB6A8 @ =gUnknown_8402220
 	ldrh r0, [r1]
 	cmp r0, 0
@@ -25,7 +25,7 @@ _080EB672:
 	ldrh r0, [r0]
 	adds r1, r6
 	ldrh r1, [r1]
-	bl sub_809A3C8
+	bl AddPCItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -187,7 +187,7 @@ _080EB77E:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	ldr r1, _080EB814 @ =gTasks
@@ -237,7 +237,7 @@ sub_80EB81C: @ 80EB81C
 	bl PlaySE
 	ldrb r0, [r4, 0x14]
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	ldrb r0, [r4, 0x14]
 	bl ClearWindowTilemap
 	ldrb r0, [r4, 0x14]
@@ -256,7 +256,7 @@ _080EB874: .4byte sub_80EB9B8
 _080EB878:
 	ldrb r0, [r4, 0x14]
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	ldrb r0, [r4, 0x14]
 	bl ClearWindowTilemap
 	ldrb r0, [r4, 0x14]
@@ -361,11 +361,11 @@ _080EB940:
 	cmp r0, 0
 	bne _080EB95C
 	movs r0, 0x22
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	b _080EB962
 _080EB95C:
 	movs r0, 0x1E
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 _080EB962:
 	ldr r0, _080EB990 @ =gUnknown_203AAC4
 	ldrb r0, [r0, 0x5]
@@ -376,7 +376,7 @@ _080EB962:
 	bne _080EB99C
 	movs r0, 0
 	movs r1, 0
-	bl sub_80F6F54
+	bl ClearDialogWindowAndFrame
 	adds r0, r5, 0
 	bl sub_80EBEB0
 	ldr r0, _080EB994 @ =gTasks
@@ -449,14 +449,14 @@ sub_80EB9E8: @ 80EB9E8
 	cmp r0, 0
 	bne _080EBA18
 	movs r0, 0x21
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	b _080EBA1E
 	.align 2, 0
 _080EBA10: .4byte gTasks+0x8
 _080EBA14: .4byte gUnknown_203AAC4
 _080EBA18:
 	movs r0, 0x1D
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 _080EBA1E:
 	ldr r0, _080EBA80 @ =gUnknown_8402258
 	bl AddWindow
@@ -488,7 +488,7 @@ _080EBA1E:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	ldr r1, _080EBA88 @ =gUnknown_84021DC
@@ -513,7 +513,7 @@ sub_80EBA8C: @ 80EBA8C
 	adds r4, r0, 0
 	movs r0, 0
 	movs r1, 0
-	bl sub_80F6EE4
+	bl DrawDialogueFrame
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0
@@ -627,12 +627,12 @@ sub_80EBB70: @ 80EBB70
 	ands r0, r1
 	cmp r0, 0
 	bne _080EBB9C
-	bl sub_80563F0
-	ldr r2, _080EBBA8 @ =c2_exit_to_overworld_2_switch
+	bl CleanupOverworldWindowsAndTilemaps
+	ldr r2, _080EBBA8 @ =CB2_ReturnToField
 	movs r0, 0x3
 	movs r1, 0
 	bl sub_8107DB4
-	ldr r1, _080EBBAC @ =gUnknown_3005020
+	ldr r1, _080EBBAC @ =gFieldCallback
 	ldr r0, _080EBBB0 @ =sub_80EBC0C
 	str r0, [r1]
 	adds r0, r4, 0
@@ -643,8 +643,8 @@ _080EBB9C:
 	bx r0
 	.align 2, 0
 _080EBBA4: .4byte gPaletteFade
-_080EBBA8: .4byte c2_exit_to_overworld_2_switch
-_080EBBAC: .4byte gUnknown_3005020
+_080EBBA8: .4byte CB2_ReturnToField
+_080EBBAC: .4byte gFieldCallback
 _080EBBB0: .4byte sub_80EBC0C
 	thumb_func_end sub_80EBB70
 
@@ -702,7 +702,7 @@ sub_80EBC0C: @ 80EBC0C
 	bl sub_80F6E9C
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_80F6EE4
+	bl DrawDialogueFrame
 	ldr r0, _080EBC34 @ =sub_80EBBDC
 	movs r1, 0
 	bl CreateTask
@@ -727,7 +727,7 @@ sub_80EBC38: @ 80EBC38
 	lsls r6, r0, 3
 	ldr r7, _080EBC6C @ =gTasks+0x8
 	adds r4, r6, r7
-	bl sub_809A33C
+	bl CountItemsInPC
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x4]
@@ -740,19 +740,19 @@ sub_80EBC38: @ 80EBC38
 	adds r0, r6, r0
 	ldr r1, _080EBC70 @ =sub_80EBD18
 	str r1, [r0]
-	ldr r1, _080EBC74 @ =gUnknown_3005020
+	ldr r1, _080EBC74 @ =gFieldCallback
 	ldr r0, _080EBC78 @ =sub_80EBCAC
 	str r0, [r1]
 	b _080EBC9C
 	.align 2, 0
 _080EBC6C: .4byte gTasks+0x8
 _080EBC70: .4byte sub_80EBD18
-_080EBC74: .4byte gUnknown_3005020
+_080EBC74: .4byte gFieldCallback
 _080EBC78: .4byte sub_80EBCAC
 _080EBC7C:
 	ldrb r0, [r4, 0x14]
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	ldrb r0, [r4, 0x14]
 	bl ClearWindowTilemap
 	ldrb r0, [r4, 0x14]
@@ -777,7 +777,7 @@ sub_80EBCAC: @ 80EBCAC
 	bl sub_80F6E9C
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_80F6EE4
+	bl DrawDialogueFrame
 	ldr r0, _080EBCD4 @ =sub_80EBBDC
 	movs r1, 0
 	bl CreateTask
@@ -808,10 +808,10 @@ sub_80EBCD8: @ 80EBCD8
 	ands r0, r1
 	cmp r0, 0
 	bne _080EBD06
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	ldrb r0, [r5, 0xC]
-	ldr r1, _080EBD14 @ =c2_exit_to_overworld_2_switch
-	bl sub_810D3F4
+	ldr r1, _080EBD14 @ =CB2_ReturnToField
+	bl ItemPc_Init
 	adds r0, r4, 0
 	bl DestroyTask
 _080EBD06:
@@ -821,7 +821,7 @@ _080EBD06:
 	.align 2, 0
 _080EBD0C: .4byte gTasks+0x8
 _080EBD10: .4byte gPaletteFade
-_080EBD14: .4byte c2_exit_to_overworld_2_switch
+_080EBD14: .4byte CB2_ReturnToField
 	thumb_func_end sub_80EBCD8
 
 	thumb_func_start sub_80EBD18
@@ -837,7 +837,7 @@ sub_80EBD18: @ 80EBD18
 	ldr r0, _080EBD44 @ =sub_80EBCD8
 	str r0, [r1]
 	movs r0, 0
-	bl sub_810DE94
+	bl ItemPc_SetInitializedFlag
 	movs r0, 0x1
 	movs r1, 0
 	bl fade_screen
@@ -861,7 +861,7 @@ sub_80EBD48: @ 80EBD48
 	adds r4, r0
 	ldrb r0, [r4, 0x14]
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	ldrb r0, [r4, 0x14]
 	bl ClearWindowTilemap
 	ldrb r0, [r4, 0x14]
@@ -1142,7 +1142,7 @@ sub_80EBF40: @ 80EBF40
 	mov r8, r1
 	adds r1, r7, 0
 	mov r2, r8
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	movs r0, 0x2
 	negs r0, r0
 	cmp r6, r0
@@ -1174,7 +1174,7 @@ _080EBFB6:
 	ldrb r0, [r4, 0x16]
 	adds r1, r7, 0
 	mov r2, r8
-	bl sub_810713C
+	bl DestroyListMenu
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	mov r1, r8
@@ -1288,7 +1288,7 @@ sub_80EC094: @ 80EC094
 	ldrb r0, [r4, 0x16]
 	movs r1, 0
 	movs r2, 0
-	bl sub_810713C
+	bl DestroyListMenu
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	bl sub_810EDB0
@@ -1341,7 +1341,7 @@ sub_80EC0D8: @ 80EC0D8
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	ldr r1, _080EC154 @ =gTasks
@@ -1438,7 +1438,7 @@ sub_80EC1D4: @ 80EC1D4
 	cmp r0, 0
 	bne _080EC216
 	bl sub_810EDB0
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	ldr r2, _080EC220 @ =gSaveBlock1Ptr
 	ldr r1, _080EC224 @ =gUnknown_203AAC4
 	ldrh r0, [r1]
@@ -1503,13 +1503,13 @@ sub_80EC260: @ 80EC260
 	cmp r0, 0
 	bne _080EC278
 	movs r0, 0x22
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	b _080EC27E
 	.align 2, 0
 _080EC274: .4byte gUnknown_203AAC4
 _080EC278:
 	movs r0, 0x1E
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 _080EC27E:
 	bl sub_80F6E9C
 	ldr r0, _080EC2A8 @ =sub_80EC230
@@ -1543,17 +1543,17 @@ _080EC2B6:
 	thumb_func_start sub_80EC2C0
 sub_80EC2C0: @ 80EC2C0
 	push {lr}
-	ldr r0, _080EC2D4 @ =gUnknown_3005020
+	ldr r0, _080EC2D4 @ =gFieldCallback
 	ldr r1, _080EC2D8 @ =sub_80EC260
 	str r1, [r0]
-	ldr r0, _080EC2DC @ =c2_exit_to_overworld_2_switch
+	ldr r0, _080EC2DC @ =CB2_ReturnToField
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080EC2D4: .4byte gUnknown_3005020
+_080EC2D4: .4byte gFieldCallback
 _080EC2D8: .4byte sub_80EC260
-_080EC2DC: .4byte c2_exit_to_overworld_2_switch
+_080EC2DC: .4byte CB2_ReturnToField
 	thumb_func_end sub_80EC2C0
 
 	thumb_func_start sub_80EC2E0
@@ -1599,7 +1599,7 @@ sub_80EC324: @ 80EC324
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl ProcessMenuInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r0, 24
 	movs r1, 0x1
@@ -1649,7 +1649,7 @@ sub_80EC364: @ 80EC364
 	adds r5, r1, r0
 	ldrh r0, [r5, 0x20]
 	movs r1, 0x1
-	bl sub_809A084
+	bl AddBagItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _080EC3B4
@@ -1753,7 +1753,7 @@ sub_80EC444: @ 80EC444
 	cmp r0, 0
 	bne _080EC468
 	bl sub_810EDB0
-	bl sub_80563F0
+	bl CleanupOverworldWindowsAndTilemaps
 	bl sub_81273D8
 	adds r0, r4, 0
 	bl DestroyTask
@@ -1773,13 +1773,13 @@ sub_80EC474: @ 80EC474
 	cmp r0, 0
 	bne _080EC48C
 	movs r0, 0x22
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 	b _080EC492
 	.align 2, 0
 _080EC488: .4byte gUnknown_203AAC4
 _080EC48C:
 	movs r0, 0x1E
-	bl sub_812B1F0
+	bl HelpSystem_SetSomeVariable2
 _080EC492:
 	ldr r0, _080EC4E8 @ =sub_80EC230
 	movs r1, 0
@@ -1834,17 +1834,17 @@ _080EC4F6:
 	thumb_func_start sub_80EC500
 sub_80EC500: @ 80EC500
 	push {lr}
-	ldr r0, _080EC514 @ =gUnknown_3005020
+	ldr r0, _080EC514 @ =gFieldCallback
 	ldr r1, _080EC518 @ =sub_80EC474
 	str r1, [r0]
-	ldr r0, _080EC51C @ =c2_exit_to_overworld_2_switch
+	ldr r0, _080EC51C @ =CB2_ReturnToField
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080EC514: .4byte gUnknown_3005020
+_080EC514: .4byte gFieldCallback
 _080EC518: .4byte sub_80EC474
-_080EC51C: .4byte c2_exit_to_overworld_2_switch
+_080EC51C: .4byte CB2_ReturnToField
 	thumb_func_end sub_80EC500
 
 	thumb_func_start sub_80EC520
@@ -1852,14 +1852,14 @@ sub_80EC520: @ 80EC520
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080EC534 @ =gUnknown_841632A
+	ldr r2, _080EC534 @ =gText_ThereIsNoPokemon
 	ldr r3, _080EC538 @ =sub_80EC574
 	movs r1, 0x2
 	bl DisplayItemMessageOnField
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080EC534: .4byte gUnknown_841632A
+_080EC534: .4byte gText_ThereIsNoPokemon
 _080EC538: .4byte sub_80EC574
 	thumb_func_end sub_80EC520
 
@@ -1871,7 +1871,7 @@ sub_80EC53C: @ 80EC53C
 	lsrs r4, 24
 	movs r0, 0
 	movs r1, 0
-	bl sub_80F6F54
+	bl ClearDialogWindowAndFrame
 	adds r0, r4, 0
 	bl sub_80EBEB0
 	movs r0, 0

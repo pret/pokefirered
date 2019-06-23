@@ -52,7 +52,7 @@ _08106F06:
 	lsls r2, r1, 24
 	lsrs r2, 24
 	adds r1, r7, 0
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 _08106F24:
 	ldrb r0, [r5, 0x5]
 	mov r3, r8
@@ -60,9 +60,9 @@ _08106F24:
 	lsls r2, 24
 	lsrs r2, 24
 	ldr r1, [sp, 0x4]
-	bl sub_8150048
+	bl DrawTextBorderOuter
 _08106F34:
-	ldr r0, _08106F64 @ =gUnknown_3005E70
+	ldr r0, _08106F64 @ =gMultiuseListMenuTemplate
 	adds r2, r0, 0
 	ldr r1, [sp]
 	ldm r1!, {r3-r5}
@@ -84,7 +84,7 @@ _08106F34:
 	b _08106FE4
 	.align 2, 0
 _08106F60: .4byte gUnknown_203ACF4
-_08106F64: .4byte gUnknown_3005E70
+_08106F64: .4byte gMultiuseListMenuTemplate
 _08106F68:
 	ldrb r0, [r5, 0x6]
 	bl ListMenuHandleInput
@@ -126,7 +126,7 @@ _08106FA8:
 	bgt _08106FBA
 	ldrb r0, [r5, 0x5]
 	movs r1, 0
-	bl sub_80F6F9C
+	bl ClearStdWindowAndFrame
 _08106FBA:
 	ldr r0, _08106FC8 @ =gUnknown_203ACF4
 	ldrb r0, [r0, 0x5]
@@ -139,7 +139,7 @@ _08106FCC:
 	ldrb r0, [r5, 0x6]
 	movs r1, 0
 	movs r2, 0
-	bl sub_810713C
+	bl DestroyListMenu
 	ldrb r0, [r5, 0x5]
 	bl RemoveWindow
 	movs r0, 0
@@ -340,8 +340,8 @@ _08107136:
 	bx r1
 	thumb_func_end ListMenuHandleInput
 
-	thumb_func_start sub_810713C
-sub_810713C: @ 810713C
+	thumb_func_start DestroyListMenu
+DestroyListMenu: @ 810713C
 	push {r4,lr}
 	adds r3, r1, 0
 	lsls r0, 24
@@ -377,7 +377,7 @@ _08107170:
 	bx r0
 	.align 2, 0
 _0810717C: .4byte gTasks+0x8
-	thumb_func_end sub_810713C
+	thumb_func_end DestroyListMenu
 
 	thumb_func_start sub_8107180
 sub_8107180: @ 8107180
@@ -563,8 +563,8 @@ _081072CA:
 _081072D0: .4byte gTasks+0x8
 	thumb_func_end sub_81072AC
 
-	thumb_func_start get_coro_args_x18_x1A
-get_coro_args_x18_x1A: @ 81072D4
+	thumb_func_start ListMenuGetScrollAndRow
+ListMenuGetScrollAndRow: @ 81072D4
 	push {lr}
 	adds r3, r1, 0
 	lsls r0, 24
@@ -588,7 +588,7 @@ _081072F6:
 	bx r0
 	.align 2, 0
 _081072FC: .4byte gTasks+0x8
-	thumb_func_end get_coro_args_x18_x1A
+	thumb_func_end ListMenuGetScrollAndRow
 
 	thumb_func_start ListMenuGetYCoordForPrintingArrowCursor
 ListMenuGetYCoordForPrintingArrowCursor: @ 8107300
@@ -782,7 +782,7 @@ ListMenuPrint: @ 8107428
 	str r6, [sp, 0x10]
 	adds r2, r7, 0
 	mov r3, r12
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	ldrb r1, [r5, 0x3]
 	movs r0, 0x7F
 	ands r0, r1
@@ -820,7 +820,7 @@ _08107494:
 	str r6, [sp, 0x10]
 	adds r2, r7, 0
 	mov r3, r12
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 _081074D2:
 	add sp, 0x18
 	pop {r4-r7}
@@ -1635,8 +1635,8 @@ sub_8107A9C: @ 8107A9C
 _08107AE8: .4byte gUnknown_3005E60
 	thumb_func_end sub_8107A9C
 
-	thumb_func_start sub_8107AEC
-sub_8107AEC: @ 8107AEC
+	thumb_func_start ListMenuDefaultCursorMoveFunc
+ListMenuDefaultCursorMoveFunc: @ 8107AEC
 	push {lr}
 	lsls r1, 24
 	cmp r1, 0
@@ -1646,7 +1646,7 @@ sub_8107AEC: @ 8107AEC
 _08107AFA:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8107AEC
+	thumb_func_end ListMenuDefaultCursorMoveFunc
 
 	thumb_func_start sub_8107B00
 sub_8107B00: @ 8107B00
@@ -1976,8 +1976,8 @@ _08107D56:
 _08107D64: .4byte gUnknown_8E95DBC
 	thumb_func_end sub_8107D38
 
-	thumb_func_start sub_8107D68
-sub_8107D68: @ 8107D68
+	thumb_func_start blit_move_info_icon
+blit_move_info_icon: @ 8107D68
 	push {r4,r5,lr}
 	sub sp, 0x18
 	lsls r0, 24
@@ -2014,6 +2014,6 @@ sub_8107D68: @ 8107D68
 	.align 2, 0
 _08107DAC: .4byte gUnknown_8452C94
 _08107DB0: .4byte gUnknown_8E95DDC
-	thumb_func_end sub_8107D68
+	thumb_func_end blit_move_info_icon
 
 	.align 2, 0 @ Don't pad with nop.

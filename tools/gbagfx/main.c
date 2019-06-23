@@ -12,6 +12,7 @@
 #include "lz.h"
 #include "rl.h"
 #include "font.h"
+#include "huff.h"
 
 struct CommandHandler
 {
@@ -34,17 +35,6 @@ void ConvertGbaToPng(char *inputPath, char *outputPath, struct GbaToPngOptions *
         image.hasPalette = false;
     }
 
-    if (options->tilemapFilePath != NULL)
-    {
-        ReadGbaTilemap(options->tilemapFilePath, &image.tileMap);
-        image.hasTilemap = true;
-    }
-    else
-    {
-        image.tileMap.data = NULL;
-        image.hasTilemap = false;
-    }
-
     ReadImage(inputPath, options->width, options->bitDepth, options->metatileWidth, options->metatileHeight, &image, !image.hasPalette);
 
     image.hasTransparency = options->hasTransparency;
@@ -59,16 +49,10 @@ void ConvertPngToGba(char *inputPath, char *outputPath, struct PngToGbaOptions *
     struct Image image;
 
     image.bitDepth = options->bitDepth;
-    image.hasTilemap = options->tilemapFilePath == NULL ? false : true;
-    image.tileMap.data = NULL;
-    image.tileMap.numTiles = 0;
 
     ReadPng(inputPath, &image);
 
     WriteImage(outputPath, options->numTiles, options->bitDepth, options->metatileWidth, options->metatileHeight, &image, !image.hasPalette);
-
-    if (image.hasTilemap)
-        WriteGbaTilemap(options->tilemapFilePath, &image.tileMap);
 
     FreeImage(&image);
 }
@@ -78,7 +62,6 @@ void HandleGbaToPngCommand(char *inputPath, char *outputPath, int argc, char **a
     char *inputFileExtension = GetFileExtension(inputPath);
     struct GbaToPngOptions options;
     options.paletteFilePath = NULL;
-    options.tilemapFilePath = NULL;
     options.bitDepth = inputFileExtension[0] - '0';
     options.hasTransparency = false;
     options.width = 1;
@@ -97,15 +80,6 @@ void HandleGbaToPngCommand(char *inputPath, char *outputPath, int argc, char **a
             i++;
 
             options.paletteFilePath = argv[i];
-        }
-        else if (strcmp(option, "-tilemap") == 0)
-        {
-            if (i + 1 >= argc)
-                FATAL_ERROR("No tilemap file path following \"-tilemap\".\n");
-
-            i++;
-
-            options.tilemapFilePath = argv[i];
         }
         else if (strcmp(option, "-object") == 0)
         {
@@ -171,7 +145,6 @@ void HandlePngToGbaCommand(char *inputPath, char *outputPath, int argc, char **a
     options.bitDepth = bitDepth;
     options.metatileWidth = 1;
     options.metatileHeight = 1;
-    options.tilemapFilePath = NULL;
 
     for (int i = 3; i < argc; i++)
     {
@@ -189,14 +162,6 @@ void HandlePngToGbaCommand(char *inputPath, char *outputPath, int argc, char **a
 
             if (options.numTiles < 1)
                 FATAL_ERROR("Number of tiles must be positive.\n");
-        }
-        else if (strcmp(option, "-tilemap") == 0)
-        {
-            if (i + 1 >= argc)
-                FATAL_ERROR("No tilemap path following \"-tilemap\".\n");
-
-            i++;
-            options.tilemapFilePath = argv[i];
         }
         else if (strcmp(option, "-mwidth") == 0)
         {
@@ -290,10 +255,6 @@ void HandleLatinFontToPngCommand(char *inputPath, char *outputPath, int argc UNU
 {
     struct Image image;
 
-    image.hasTilemap = false;
-    image.tileMap.data = NULL;
-    image.tileMap.numTiles = 0;
-
     ReadLatinFont(inputPath, &image);
     WritePng(outputPath, &image);
 
@@ -303,10 +264,6 @@ void HandleLatinFontToPngCommand(char *inputPath, char *outputPath, int argc UNU
 void HandlePngToLatinFontCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
 {
     struct Image image;
-
-    image.hasTilemap = false;
-    image.tileMap.data = NULL;
-    image.tileMap.numTiles = 0;
 
     image.bitDepth = 2;
 
@@ -320,10 +277,6 @@ void HandleHalfwidthJapaneseFontToPngCommand(char *inputPath, char *outputPath, 
 {
     struct Image image;
 
-    image.hasTilemap = false;
-    image.tileMap.data = NULL;
-    image.tileMap.numTiles = 0;
-
     ReadHalfwidthJapaneseFont(inputPath, &image);
     WritePng(outputPath, &image);
 
@@ -333,10 +286,6 @@ void HandleHalfwidthJapaneseFontToPngCommand(char *inputPath, char *outputPath, 
 void HandlePngToHalfwidthJapaneseFontCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
 {
     struct Image image;
-
-    image.hasTilemap = false;
-    image.tileMap.data = NULL;
-    image.tileMap.numTiles = 0;
 
     image.bitDepth = 2;
 
@@ -350,10 +299,6 @@ void HandleFullwidthJapaneseFontToPngCommand(char *inputPath, char *outputPath, 
 {
     struct Image image;
 
-    image.hasTilemap = false;
-    image.tileMap.data = NULL;
-    image.tileMap.numTiles = 0;
-
     ReadFullwidthJapaneseFont(inputPath, &image);
     WritePng(outputPath, &image);
 
@@ -363,10 +308,6 @@ void HandleFullwidthJapaneseFontToPngCommand(char *inputPath, char *outputPath, 
 void HandlePngToFullwidthJapaneseFontCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
 {
     struct Image image;
-
-    image.hasTilemap = false;
-    image.tileMap.data = NULL;
-    image.tileMap.numTiles = 0;
 
     image.bitDepth = 2;
 
@@ -485,6 +426,61 @@ void HandleRLDecompressCommand(char *inputPath, char *outputPath, int argc UNUSE
     free(uncompressedData);
 }
 
+void HandleHuffCompressCommand(char *inputPath, char *outputPath, int argc, char **argv)
+{
+    int fileSize;
+    int bitDepth = 4;
+
+    for (int i = 3; i < argc; i++)
+    {
+        char *option = argv[i];
+
+        if (strcmp(option, "-depth") == 0)
+        {
+            if (i + 1 >= argc)
+                FATAL_ERROR("No size following \"-depth\".\n");
+
+            i++;
+
+            if (!ParseNumber(argv[i], NULL, 10, &bitDepth))
+                FATAL_ERROR("Failed to parse bit depth.\n");
+
+            if (bitDepth != 4 && bitDepth != 8)
+                FATAL_ERROR("GBA only supports bit depth of 4 or 8.\n");
+        }
+        else
+        {
+            FATAL_ERROR("Unrecognized option \"%s\".\n", option);
+        }
+    }
+
+    unsigned char *buffer = ReadWholeFile(inputPath, &fileSize);
+
+    int compressedSize;
+    unsigned char *compressedData = HuffCompress(buffer, fileSize, &compressedSize, bitDepth);
+
+    free(buffer);
+
+    WriteWholeFile(outputPath, compressedData, compressedSize);
+
+    free(compressedData);
+}
+
+void HandleHuffDecompressCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
+{
+    int fileSize;
+    unsigned char *buffer = ReadWholeFile(inputPath, &fileSize);
+
+    int uncompressedSize;
+    unsigned char *uncompressedData = HuffDecompress(buffer, fileSize, &uncompressedSize);
+
+    free(buffer);
+
+    WriteWholeFile(outputPath, uncompressedData, uncompressedSize);
+
+    free(uncompressedData);
+}
+
 int main(int argc, char **argv)
 {
     if (argc < 3)
@@ -507,7 +503,9 @@ int main(int argc, char **argv)
         { "png", "hwjpnfont", HandlePngToHalfwidthJapaneseFontCommand },
         { "fwjpnfont", "png", HandleFullwidthJapaneseFontToPngCommand },
         { "png", "fwjpnfont", HandlePngToFullwidthJapaneseFontCommand },
+        { NULL, "huff", HandleHuffCompressCommand },
         { NULL, "lz", HandleLZCompressCommand },
+        { "huff", NULL, HandleHuffDecompressCommand },
         { "lz", NULL, HandleLZDecompressCommand },
         { NULL, "rl", HandleRLCompressCommand },
         { "rl", NULL, HandleRLDecompressCommand },

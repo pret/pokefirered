@@ -379,6 +379,8 @@
 #define ITEM_RUBY 373
 #define ITEM_SAPPHIRE 374
 
+#define ITEM_N_A 375
+
 // Emerald
 #define ITEM_MAGMA_EMBLEM 375
 #define ITEM_OLD_SEA_MAP 376
@@ -392,12 +394,5 @@
 
 // Check if the item is one that can be used on a Pokemon.
 #define IS_POKEMON_ITEM(item) ((item) >= ITEM_POTION && (item) <= ITEM_0B2)
-
-// POCKETS
-#define POCKET_ITEMS       1
-#define POCKET_KEY_ITEMS   2
-#define POCKET_POKE_BALLS  3
-#define POCKET_TM_CASE     4
-#define POCKET_BERRY_POUCH 5
 
 #endif  // GUARD_CONSTANTS_ITEMS_H

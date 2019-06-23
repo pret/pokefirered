@@ -1,0 +1,97 @@
+{
+  "id": "MAP_SIX_ISLAND_GREEN_PATH",
+  "name": "SixIsland_GreenPath",
+  "layout": "LAYOUT_SIX_ISLAND_GREEN_PATH",
+  "music": "BGM_FRLG_SEVII_ISLANDS",
+  "region_map_section": "MAPSEC_GREEN_PATH",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_3",
+  "unknown_18": 1,
+  "unknown_19": 6,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": [
+    {
+      "map": "MAP_SIX_ISLAND_OUTCAST_ISLAND",
+      "offset": 0,
+      "direction": "up"
+    },
+    {
+      "map": "MAP_SIX_ISLAND_WATER_PATH",
+      "offset": 0,
+      "direction": "right"
+    }
+  ],
+  "object_events": [
+    {
+      "graphics_id": "23",
+      "x": 11,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "20",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 2,
+      "script": "SixIsland_GreenPath_EventScript_1AC517",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 63,
+      "y": 10,
+      "elevation": 3,
+      "dest_map": "MAP_SIX_ISLAND_PATTERN_BUSH",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 64,
+      "y": 10,
+      "elevation": 3,
+      "dest_map": "MAP_SIX_ISLAND_PATTERN_BUSH",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 45,
+      "y": 10,
+      "elevation": 3,
+      "dest_map": "MAP_SIX_ISLAND_PATTERN_BUSH",
+      "dest_warp_id": 4
+    },
+    {
+      "x": 46,
+      "y": 10,
+      "elevation": 3,
+      "dest_map": "MAP_SIX_ISLAND_PATTERN_BUSH",
+      "dest_warp_id": 4
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "bg_event_type_0",
+      "x": 40,
+      "y": 10,
+      "elevation": 0,
+      "script": "SixIsland_GreenPath_EventScript_168B37"
+    },
+    {
+      "type": "bg_event_type_0",
+      "x": 69,
+      "y": 10,
+      "elevation": 0,
+      "script": "SixIsland_GreenPath_EventScript_168B2E"
+    },
+    {
+      "type": "hidden_item",
+      "x": 12,
+      "y": 9,
+      "elevation": 3,
+      "item": "POCKET_KEY_ITEMS",
+      "flag": "180",
+      "unknown": 1
+    }
+  ]
+}

@@ -26,6 +26,7 @@ ld_script_sapphire.txt
 *.id2
 *.nam
 *.til
+.fuse*
 *.ld
 tags
 types_*.taghl
@@ -40,3 +41,4 @@ build/
 .idea/
 *.DS_Store
 *.pl
+*.bak

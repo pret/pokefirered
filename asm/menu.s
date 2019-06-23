@@ -556,8 +556,8 @@ _0810F258: .4byte 0x00000803
 _0810F25C: .4byte 0x00000804
 	thumb_func_end sub_810EE5C
 
-	thumb_func_start sub_810F260
-sub_810F260: @ 810F260
+	thumb_func_start ClearMenuWindow_BorderThickness2
+ClearMenuWindow_BorderThickness2: @ 810F260
 	push {r4,r5,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -583,7 +583,7 @@ _0810F28E:
 	bx r0
 	.align 2, 0
 _0810F294: .4byte sub_810F298
-	thumb_func_end sub_810F260
+	thumb_func_end ClearMenuWindow_BorderThickness2
 
 	thumb_func_start sub_810F298
 sub_810F298: @ 810F298
@@ -866,8 +866,8 @@ _0810F4D0: .4byte gUnknown_203ADF0
 _0810F4D4: .4byte gUnknown_203ADF2
 	thumb_func_end DrawWindowBorder
 
-	thumb_func_start sub_810F4D8
-sub_810F4D8: @ 810F4D8
+	thumb_func_start ClearMenuWindow
+ClearMenuWindow: @ 810F4D8
 	push {r4,r5,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -893,7 +893,7 @@ _0810F506:
 	bx r0
 	.align 2, 0
 _0810F50C: .4byte sub_810F510
-	thumb_func_end sub_810F4D8
+	thumb_func_end ClearMenuWindow
 
 	thumb_func_start sub_810F510
 sub_810F510: @ 810F510
@@ -933,8 +933,8 @@ sub_810F510: @ 810F510
 	bx r0
 	thumb_func_end sub_810F510
 
-	thumb_func_start sub_810F558
-sub_810F558: @ 810F558
+	thumb_func_start CreateWindow_SnapRight_StdPal
+CreateWindow_SnapRight_StdPal: @ 810F558
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1005,10 +1005,10 @@ _0810F5C4:
 	bx r1
 	.align 2, 0
 _0810F5E4: .4byte gUnknown_203ADF4
-	thumb_func_end sub_810F558
+	thumb_func_end CreateWindow_SnapRight_StdPal
 
-	thumb_func_start sub_810F5E8
-sub_810F5E8: @ 810F5E8
+	thumb_func_start PrintTextOnRightSnappedWindow
+PrintTextOnRightSnappedWindow: @ 810F5E8
 	push {r4-r6,lr}
 	sub sp, 0xC
 	adds r5, r0, 0
@@ -1041,7 +1041,7 @@ sub_810F5E8: @ 810F5E8
 	adds r0, r1, 0
 	movs r1, 0
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	cmp r6, 0
 	beq _0810F63E
 	ldrb r0, [r4]
@@ -1055,10 +1055,10 @@ _0810F63E:
 	.align 2, 0
 _0810F648: .4byte gUnknown_203ADF4
 _0810F64C: .4byte gUnknown_8456618
-	thumb_func_end sub_810F5E8
+	thumb_func_end PrintTextOnRightSnappedWindow
 
-	thumb_func_start sub_810F650
-sub_810F650: @ 810F650
+	thumb_func_start Menu_PrintHelpSystemUIHeader
+Menu_PrintHelpSystemUIHeader: @ 810F650
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1118,7 +1118,7 @@ _0810F684:
 	adds r0, r1, 0
 	movs r1, 0
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0810F6CE:
 	ldrb r0, [r6]
 	movs r1, 0
@@ -1132,7 +1132,7 @@ _0810F6CE:
 	movs r1, 0x1
 	movs r2, 0x4
 	movs r3, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	cmp r7, 0
 	beq _0810F6F6
 	ldrb r0, [r6]
@@ -1145,7 +1145,7 @@ _0810F6F6:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_810F650
+	thumb_func_end Menu_PrintHelpSystemUIHeader
 
 	thumb_func_start sub_810F704
 sub_810F704: @ 810F704
@@ -1264,8 +1264,8 @@ _0810F7BE:
 _0810F7D4: .4byte gUnknown_203ADE4
 	thumb_func_end sub_810F774
 
-	thumb_func_start sub_810F7D8
-sub_810F7D8: @ 810F7D8
+	thumb_func_start ProgramAndPlaceMenuCursorOnWindow
+ProgramAndPlaceMenuCursorOnWindow: @ 810F7D8
 	push {r4-r6,lr}
 	sub sp, 0x10
 	ldr r4, [sp, 0x20]
@@ -1297,7 +1297,7 @@ sub_810F7D8: @ 810F7D8
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_810F7D8
+	thumb_func_end ProgramAndPlaceMenuCursorOnWindow
 
 	thumb_func_start sub_810F818
 sub_810F818: @ 810F818
@@ -1336,7 +1336,7 @@ sub_810F818: @ 810F818
 	adds r1, r6, 0
 	ldr r2, [sp, 0xC]
 	ldr r3, [sp, 0x10]
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x14
@@ -1883,7 +1883,7 @@ _0810FC30:
 	adds r0, r7, 0
 	ldr r1, [sp, 0x14]
 	ldr r3, [sp, 0x18]
-	bl sub_812E62C
+	bl AddTextPrinterParameterized5
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -2272,8 +2272,8 @@ sub_810FF04: @ 810FF04
 	bx r1
 	thumb_func_end sub_810FF04
 
-	thumb_func_start sub_810FF60
-sub_810FF60: @ 810FF60
+	thumb_func_start CreateYesNoMenu
+CreateYesNoMenu: @ 810FF60
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2410,7 +2410,7 @@ sub_810FF60: @ 810FF60
 	adds r1, r6, 0
 	mov r2, r8
 	mov r3, r9
-	bl sub_810F7D8
+	bl ProgramAndPlaceMenuCursorOnWindow
 	add sp, 0x1C
 	pop {r3-r5}
 	mov r8, r3
@@ -2422,7 +2422,7 @@ sub_810FF60: @ 810FF60
 	.align 2, 0
 _0811009C: .4byte gUnknown_203ADF3
 _081100A0: .4byte gUnknown_841623D
-	thumb_func_end sub_810FF60
+	thumb_func_end CreateYesNoMenu
 
 	thumb_func_start sub_81100A4
 sub_81100A4: @ 81100A4
@@ -2439,14 +2439,14 @@ sub_81100A4: @ 81100A4
 	movs r2, 0
 	str r2, [sp, 0x8]
 	movs r3, 0
-	bl sub_810FF60
+	bl CreateYesNoMenu
 	add sp, 0xC
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81100A4
 
-	thumb_func_start ProcessMenuInputNoWrap_
-ProcessMenuInputNoWrap_: @ 81100C8
+	thumb_func_start Menu_ProcessInputNoWrapClearOnChoose
+Menu_ProcessInputNoWrapClearOnChoose: @ 81100C8
 	push {r4,lr}
 	bl ProcessMenuInputNoWrapAround
 	lsls r0, 24
@@ -2461,7 +2461,7 @@ _081100DE:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end ProcessMenuInputNoWrap_
+	thumb_func_end Menu_ProcessInputNoWrapClearOnChoose
 
 	thumb_func_start sub_81100E8
 sub_81100E8: @ 81100E8
@@ -2469,7 +2469,7 @@ sub_81100E8: @ 81100E8
 	ldr r4, _08110100 @ =gUnknown_203ADF3
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_810F4D8
+	bl ClearMenuWindow
 	ldrb r0, [r4]
 	bl RemoveWindow
 	pop {r4}

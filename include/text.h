@@ -68,7 +68,8 @@
 #define CHAR_y              0xED
 #define CHAR_z              0xEE
 #define CHAR_SPECIAL_F7     0xF7
-#define CHAR_SPECIAL_F9     0xF9
+#define CHAR_KEYPAD_ICON    0xF8
+#define CHAR_EXTRA_EMOJI    0xF9
 #define CHAR_COLON          0xF0
 #define CHAR_PROMPT_SCROLL  0xFA // waits for button press and scrolls dialog
 #define CHAR_PROMPT_CLEAR   0xFB // waits for button press and clears dialog
@@ -90,6 +91,18 @@
 
 #define TEXT_SPEED_FF 0xFF
 
+enum
+{
+    FONTATTR_MAX_LETTER_WIDTH,
+    FONTATTR_MAX_LETTER_HEIGHT,
+    FONTATTR_LETTER_SPACING,
+    FONTATTR_LINE_SPACING,
+    FONTATTR_UNKNOWN,   // dunno what this is yet
+    FONTATTR_COLOR_FOREGROUND,
+    FONTATTR_COLOR_BACKGROUND,
+    FONTATTR_COLOR_SHADOW
+};
+
 struct TextPrinterSubStruct
 {
     u8 font_type:4;  // 0x14
@@ -106,9 +119,9 @@ struct TextPrinterSubStruct
     u8 active;
 };
 
-struct TextSubPrinter // TODO: Better name
+struct TextPrinterTemplate // TODO: Better name
 {
-    const u8* current_text_offset;
+    const u8* currentChar;
     u8 windowId;
     u8 fontId;
     u8 x;
@@ -117,17 +130,17 @@ struct TextSubPrinter // TODO: Better name
     u8 currentY;
     u8 letterSpacing;
     u8 lineSpacing;
-    u8 fontColor_l:4;   // 0xC
-    u8 fontColor_h:4;
+    u8 unk:4;   // 0xC
+    u8 fgColor:4;
     u8 bgColor:4;
     u8 shadowColor:4;
 };
 
 struct TextPrinter
 {
-    struct TextSubPrinter subPrinter;
+    struct TextPrinterTemplate subPrinter;
 
-    void (*callback)(struct TextSubPrinter *, u16); // 0x10
+    void (*callback)(struct TextPrinterTemplate *, u16); // 0x10
 
     union {
         struct TextPrinterSubStruct sub;
@@ -150,8 +163,8 @@ struct FontInfo
     u8 maxLetterHeight;
     u8 letterSpacing;
     u8 lineSpacing;
-    u8 fontColor_l:4;
-    u8 fontColor_h:4;
+    u8 unk:4;
+    u8 fgColor:4;
     u8 bgColor:4;
     u8 shadowColor:4;
 };
@@ -172,10 +185,10 @@ struct KeypadIcon
 };
 
 typedef struct {
-    u8 flag_0:1;
-    u8 flag_1:1;
-    u8 flag_2:1;
-    u8 flag_3:1;
+    u8 canABSpeedUpPrint:1;
+    u8 useAlternateDownArrow:1;
+    u8 autoScroll:1;
+    u8 forceMidTextSpeed:1;
 } TextFlags;
 
 extern TextFlags gTextFlags;
@@ -192,10 +205,12 @@ extern u8 gStringVar2[];
 extern u8 gStringVar3[];
 extern u8 gStringVar4[];
 
+extern const u8 gKeypadIconTiles[];
+
 void SetFontsPointer(const struct FontInfo *fonts);
 void DeactivateAllTextPrinters(void);
-u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextSubPrinter *, u16));
-bool16 AddTextPrinter(struct TextSubPrinter *textSubPrinter, u8 speed, void (*callback)(struct TextSubPrinter *, u16));
+u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16));
+bool16 AddTextPrinter(struct TextPrinterTemplate *textSubPrinter, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16));
 void RunTextPrinters(void);
 bool16 IsTextPrinterActive(u8 id);
 u32 RenderFont(struct TextPrinter *textPrinter);
@@ -248,7 +263,10 @@ s32 GetGlyphWidthFont1(u16 glyphId, bool32 isJapanese);
 void DecompressGlyphFont9(u16 glyphId);
 s32 GetGlyphWidthFont3(u16 glyphId, bool32 isJapanese);
 s32 GetGlyphWidthFont4(u16 glyphId, bool32 isJapanese);
+void DecompressGlyphFont5(u16 glyphId, bool32 isJapanese);
 s32 GetGlyphWidthFont5(u16 glyphId, bool32 isJapanese);
 void sub_80062B0(struct Sprite *sprite);
+u8 CreateTextCursorSpriteForOakSpeech(u8 sheetId, u16 x, u16 y, u8 priority, u8 subpriority);
+void sub_8006398(u8 spriteId);
 
 #endif // GUARD_TEXT_H

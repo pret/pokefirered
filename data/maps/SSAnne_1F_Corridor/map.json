@@ -1,0 +1,138 @@
+{
+  "id": "MAP_SSANNE_1F_CORRIDOR",
+  "name": "SSAnne_1F_Corridor",
+  "layout": "LAYOUT_SSANNE_1F_CORRIDOR",
+  "music": "BGM_FRLG_SS_ANNE",
+  "region_map_section": "MAPSEC_S_S_ANNE",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_8",
+  "unknown_18": 0,
+  "unknown_19": 6,
+  "elevator_flag": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "62",
+      "x": 18,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "7",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SSAnne_1F_Corridor_EventScript_1608D5",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "47",
+      "x": 12,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "8",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "SSAnne_1F_Corridor_EventScript_1608CC",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 3,
+      "y": 8,
+      "elevation": 3,
+      "dest_map": "MAP_SSANNE_2F_CORRIDOR",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 2,
+      "y": 18,
+      "elevation": 3,
+      "dest_map": "MAP_SSANNE_KITCHEN",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 19,
+      "y": 1,
+      "elevation": 3,
+      "dest_map": "MAP_SSANNE_EXTERIOR",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 20,
+      "y": 0,
+      "elevation": 0,
+      "dest_map": "MAP_SSANNE_EXTERIOR",
+      "dest_warp_id": 3
+    },
+    {
+      "x": 3,
+      "y": 20,
+      "elevation": 0,
+      "dest_map": "MAP_SSANNE_KITCHEN",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 28,
+      "y": 17,
+      "elevation": 3,
+      "dest_map": "MAP_SSANNE_B1F_CORRIDOR",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 5,
+      "y": 10,
+      "elevation": 3,
+      "dest_map": "MAP_SSANNE_1F_ROOM1",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 8,
+      "y": 10,
+      "elevation": 3,
+      "dest_map": "MAP_SSANNE_1F_ROOM2",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 11,
+      "y": 10,
+      "elevation": 3,
+      "dest_map": "MAP_SSANNE_1F_ROOM3",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 14,
+      "y": 10,
+      "elevation": 3,
+      "dest_map": "MAP_SSANNE_1F_ROOM4",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 17,
+      "y": 10,
+      "elevation": 3,
+      "dest_map": "MAP_SSANNE_1F_ROOM5",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 23,
+      "y": 10,
+      "elevation": 3,
+      "dest_map": "MAP_SSANNE_1F_ROOM7",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 20,
+      "y": 10,
+      "elevation": 3,
+      "dest_map": "MAP_SSANNE_1F_ROOM6",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

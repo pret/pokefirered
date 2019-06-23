@@ -16,10 +16,11 @@
 #include "constants/songs.h"
 #include "constants/items.h"
 
-static void Task_ContinueTaskAfterMessagePrints(u8 taskId);
 static EWRAM_DATA const struct YesNoFuncTable *gUnknown_20399C8 = NULL;
 static EWRAM_DATA TaskFunc gUnknown_20399CC = NULL;
 static EWRAM_DATA u8 gUnknown_20399D0 = {0};
+
+static void Task_ContinueTaskAfterMessagePrints(u8 taskId);
 
 void DisplayMessageAndContinueTask(u8 taskId, u8 windowId, u16 arg2, u8 arg3, u8 fontId, u8 textSpeed, const u8 *string, void *taskFunc)
 {
@@ -243,7 +244,7 @@ bool8 AdjustQuantityAccordingToDPadInput(s16 *arg0, u16 arg1)
 
 u8 sub_80BF8E4(void)
 {
-    if(!ContextNpcGetTextColor())
+    if (!ContextNpcGetTextColor())
         return 4;
     else
         return 5;

@@ -2,7 +2,7 @@
 
 static u32 sub_80A0E78(void)
 {
-	return 0;
+    return 0;
 }
 
 static void nullsub_57(void)

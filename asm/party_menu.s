@@ -276,8 +276,8 @@ _0811EC24:
 	.4byte _0811EDD0
 	.4byte _0811EDDE
 _0811EC80:
-	bl VblankHblankHandlerSetZero
-	bl sub_80BF77C
+	bl SetVBlankHBlankCallbacksToNull
+	bl ClearVramOamPltt
 	bl clear_scheduled_bg_copies_to_vram
 	b _0811EDFC
 _0811EC8E:
@@ -565,7 +565,7 @@ _0811EEC8: .4byte gUnknown_203B0B8
 	thumb_func_start sub_811EECC
 sub_811EECC: @ 811EECC
 	push {r4,r5,lr}
-	bl InitBgReg
+	bl ResetAllBgsCoordinatesAndBgCntRegs
 	ldr r5, _0811EF34 @ =gUnknown_203B0BC
 	movs r4, 0x80
 	lsls r4, 4
@@ -3218,7 +3218,7 @@ sub_8120328: @ 8120328
 	lsrs r4, r0, 24
 	adds r5, r4, 0
 	movs r0, 0x6
-	bl sub_80BF518
+	bl RunTextPrintersRetIsActive
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x1
@@ -3536,7 +3536,7 @@ sub_81205C8: @ 81205C8
 	lsrs r4, r5, 16
 	adds r7, r4, 0
 	adds r0, r4, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4529,7 +4529,7 @@ sub_8120D08: @ 8120D08
 	ldr r5, _08120D38 @ =gTasks+0x8
 	adds r0, r4, r5
 	ldrb r0, [r0]
-	bl sub_80BF518
+	bl RunTextPrintersRetIsActive
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x1
@@ -4643,7 +4643,7 @@ sub_8120DE0: @ 8120DE0
 	ldr r6, _08120E14 @ =gTasks+0x8
 	adds r4, r5, r6
 	ldrb r0, [r4]
-	bl sub_80BF518
+	bl RunTextPrintersRetIsActive
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x1
@@ -7031,7 +7031,7 @@ sub_81220D4: @ 81220D4
 	movs r1, 0x1
 	movs r2, 0x4F
 	movs r3, 0xE
-	bl sub_810EDC4
+	bl DrawDialogFrameWithCustomTileAndPalette
 	ldr r1, _0812210C @ =gUnknown_8417457
 	adds r0, r4, 0
 	bl sub_8122084
@@ -7553,7 +7553,7 @@ sub_81224D0: @ 81224D0
 	.align 2, 0
 _081224F4: .4byte gSprites
 _081224F8:
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812251C
@@ -7643,7 +7643,7 @@ _08122588:
 	adds r0, r7, r5
 	ldrb r4, [r0]
 	adds r0, r1, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -7676,7 +7676,7 @@ _081225CC:
 	adds r0, r5, r7
 	ldrb r4, [r0, 0x6]
 	adds r0, r1, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -8327,7 +8327,7 @@ _08122AB6:
 	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _08122AEC
@@ -9937,7 +9937,7 @@ _081237C4: .4byte gPlayerParty
 _081237C8: .4byte sub_81238A4
 _081237CC:
 	ldrh r0, [r6]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _081237F8
@@ -10165,7 +10165,7 @@ _081239A4: .4byte gTasks
 _081239A8: .4byte sub_81203B8
 _081239AC:
 	ldrh r0, [r5]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _081239EC
@@ -16736,7 +16736,7 @@ _08126F84: .4byte gUnknown_203B0A0
 _08126F88: .4byte gPlayerParty
 _08126F8C:
 	ldrh r0, [r5]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _08126FA0
@@ -16780,7 +16780,7 @@ sub_8126FD8: @ 8126FD8
 	lsrs r4, r0, 24
 	ldr r5, _08127004 @ =gUnknown_203B0A0
 	ldrh r0, [r5, 0xC]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _08127010
@@ -17135,7 +17135,7 @@ _081272C4: .4byte gUnknown_203B0D8
 _081272C8: .4byte gStringVar4
 _081272CC:
 	adds r0, r4, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _081272F0

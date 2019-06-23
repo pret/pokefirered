@@ -3259,7 +3259,7 @@ sub_80FEC54: @ 80FEC54
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl is_c1_link_related_active
+	bl IsUpdateLinkStateCBActive
 	cmp r0, 0
 	bne _080FEC70
 _080FEC62:

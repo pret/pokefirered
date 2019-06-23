@@ -206,5 +206,6 @@ void sub_800AA80(u8);
 void sub_80098D8(void);
 void CloseLink(void);
 bool8 sub_800A4BC(void);
+bool32 sub_800B270(void);
 
 #endif // GUARD_LINK_H

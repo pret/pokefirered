@@ -13984,7 +13984,7 @@ sub_8053B48: @ 8053B48
 	ldrh r0, [r5, 0x28]
 	cmp r0, 0
 	beq _08053CC0
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _08053CB4

@@ -2,9 +2,11 @@
 #define GUARD_MENU_H
 
 #include "global.h"
-
 #include "text.h"
 #include "window.h"
+
+#define MENU_NOTHING_CHOSEN -2
+#define MENU_B_PRESSED -1
 
 struct MenuAction
 {
@@ -45,7 +47,7 @@ void sub_810F71C(void);
 void sub_810F740(void);
 u8 ProgramAndPlaceMenuCursorOnWindow(u8 windowId, u8 fontId, u8 left, u8 top, u8 cursorHeight, u8 numChoices, u8 initialCursorPosition);
 void CreateYesNoMenu(const struct WindowTemplate *, u8, u8, u8, u16, u8, u8);
-
+void DrawDialogFrameWithCustomTileAndPalette(u8 windowId, bool8 copyToVram, u16 a2, u8 a3);
 void StartBlendTask(u8 eva_start, u8 evb_start, u8 eva_end, u8 evb_end, u8 ev_step, u8 priority);
 bool8 IsBlendTaskActive(void);
 void AddItemMenuActionTextPrinters(u8 windowId, u8 fontId, u8 left, u8 top, u8 letterSpacing, u8 lineHeight, u8 itemCount, const struct MenuAction *strs, const u8 *a8);

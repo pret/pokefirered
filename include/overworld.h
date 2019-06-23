@@ -61,7 +61,7 @@ void Overworld_SetSavedMusic(u16);
 void Overworld_ChangeMusicToDefault(void);
 void Overworld_ChangeMusicTo(u16);
 
-bool32 is_c1_link_related_active(void);
+bool32 IsUpdateLinkStateCBActive(void);
 
 void strange_npc_table_clear(void);
 const struct MapHeader *get_mapheader_by_bank_and_number(u16, u16);
@@ -116,5 +116,6 @@ bool8 sub_8055FC4(void);
 bool8 is_light_level_8_or_9(u8 mapType);
 bool32 sub_8055C9C(void);
 void sub_8054D70(void);
+bool32 sub_8058244(void);
 
 #endif //GUARD_ROM4_H

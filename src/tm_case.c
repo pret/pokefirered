@@ -321,7 +321,7 @@ static bool8 DoSetUpTMCaseUI(void)
     switch (gMain.state)
     {
     case 0:
-        VblankHblankHandlerSetZero();
+        SetVBlankHBlankCallbacksToNull();
         clear_scheduled_bg_copies_to_vram();
         gMain.state++;
         break;
@@ -426,7 +426,7 @@ static void ResetBufferPointers_NoFree(void)
 static void LoadBGTemplates(void)
 {
     void ** ptr;
-    InitBgReg();
+    ResetAllBgsCoordinatesAndBgCntRegs();
     ptr = &sTilemapBuffer;
     *ptr = AllocZeroed(0x800);
     ResetBgsAndClearDma3BusyFlags(0);
@@ -1058,7 +1058,7 @@ static void Task_QuantitySelect_HandleInput(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
-    if (sub_80BF848(&data[8], data[2]) == 1)
+    if (AdjustQuantityAccordingToDPadInput(&data[8], data[2]) == 1)
     {
         SellTM_PrintQuantityAndSalePrice(data[8], itemid_get_market_price(BagGetItemIdByPocketPosition(POCKET_TM_CASE, data[1])) / 2 * data[8]);
     }

@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_810EDC4
-sub_810EDC4: @ 810EDC4
+	thumb_func_start DrawDialogFrameWithCustomTileAndPalette
+DrawDialogFrameWithCustomTileAndPalette: @ 810EDC4
 	push {r4,r5,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -38,7 +38,7 @@ _0810EDFA:
 _0810EE00: .4byte gUnknown_203ADF0
 _0810EE04: .4byte gUnknown_203ADF2
 _0810EE08: .4byte sub_810EE5C
-	thumb_func_end sub_810EDC4
+	thumb_func_end DrawDialogFrameWithCustomTileAndPalette
 
 	thumb_func_start sub_810EE0C
 sub_810EE0C: @ 810EE0C

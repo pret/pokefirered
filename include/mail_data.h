@@ -10,6 +10,6 @@
 // Exported ROM declarations
 
 u16 sub_80D45E8(u16, u16 *);
-bool8 itemid_is_mail(u16 itemId);
+bool8 ItemIsMail(u16 itemId);
 
 #endif //GUARD_MAIL_DATA_H

@@ -11,7 +11,7 @@ sub_806ED54: @ 806ED54
 	ldr r0, _0806ED6C @ =gUnknown_20370F5
 	movs r1, 0
 	strb r1, [r0]
-	bl is_c1_link_related_active
+	bl IsUpdateLinkStateCBActive
 	cmp r0, 0x1
 	bne _0806ED70
 	bl sub_806EE34
@@ -634,7 +634,7 @@ _0806F254: .4byte gUnknown_20370F0
 	thumb_func_start ShowStartMenu
 ShowStartMenu: @ 806F258
 	push {lr}
-	bl is_c1_link_related_active
+	bl IsUpdateLinkStateCBActive
 	cmp r0, 0
 	bne _0806F26E
 	bl player_bitmagic

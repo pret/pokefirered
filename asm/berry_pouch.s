@@ -183,7 +183,7 @@ _0813CE84:
 	.4byte _0813CFB0
 	.4byte _0813CFBE
 _0813CED0:
-	bl VblankHblankHandlerSetZero
+	bl SetVBlankHBlankCallbacksToNull
 	bl clear_scheduled_bg_copies_to_vram
 	b _0813CFD2
 _0813CEDA:
@@ -386,7 +386,7 @@ _0813D078: .4byte gUnknown_203F370
 	thumb_func_start sub_813D07C
 sub_813D07C: @ 813D07C
 	push {r4,lr}
-	bl InitBgReg
+	bl ResetAllBgsCoordinatesAndBgCntRegs
 	ldr r4, _0813D0DC @ =gUnknown_203F36C
 	ldr r0, [r4]
 	adds r0, 0xC
@@ -2338,7 +2338,7 @@ sub_813E010: @ 813E010
 	adds r0, r4, 0
 	adds r0, 0x10
 	ldrh r1, [r4, 0x4]
-	bl sub_80BF848
+	bl AdjustQuantityAccordingToDPadInput
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3091,7 +3091,7 @@ sub_813E690: @ 813E690
 	adds r0, r5, 0
 	adds r0, 0x10
 	ldrh r1, [r5, 0x4]
-	bl sub_80BF848
+	bl AdjustQuantityAccordingToDPadInput
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

@@ -3150,8 +3150,8 @@ _080CBDF8: .4byte gSelectedEventObject
 _080CBDFC: .4byte gUnknown_20370DA
 	thumb_func_end sub_80CBDE8
 
-	thumb_func_start sub_80CBE00
-sub_80CBE00: @ 80CBE00
+	thumb_func_start ContextNpcGetTextColor
+ContextNpcGetTextColor: @ 80CBE00
 	push {lr}
 	ldr r0, _080CBE18 @ =gUnknown_20370DA
 	ldrh r0, [r0]
@@ -3192,7 +3192,7 @@ _080CBE48:
 	bx r1
 	.align 2, 0
 _080CBE4C: .4byte gMapObjects
-	thumb_func_end sub_80CBE00
+	thumb_func_end ContextNpcGetTextColor
 
 	thumb_func_start sub_80CBE50
 sub_80CBE50: @ 80CBE50

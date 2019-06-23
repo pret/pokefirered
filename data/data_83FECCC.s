@@ -665,7 +665,7 @@ gUnknown_843EE64:: @ 843EE64
 	.asciz "SEARCH"
 
 	.align 2
-	.incbin "baserom.gba", 0x43EEC0, 0x43F004-0x43EEC0
+	.incbin "baserom.gba", 0x43EEC0, 0x144
 
 gUnknown_843F004:: @ 843F004
 	.incbin "baserom.gba", 0x43F004, 0x100

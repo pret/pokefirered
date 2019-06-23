@@ -16412,5 +16412,4 @@ gUnknown_8EAFFC0:: @ 8EAFFC0
 gUnknown_8EB0ADC:: @ 8EB0ADC
 	.incbin "baserom.gba", 0xEB0ADC, 0x44
 
-gUnknown_8EB0B20:: @ 8EB0B20
-	.incbin "baserom.gba", 0xEB0B20
+	@ EOF

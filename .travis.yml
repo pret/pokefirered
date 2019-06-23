@@ -1,0 +1,35 @@
+language: generic
+dist: trusty
+sudo: false
+addons:
+  apt:
+    packages:
+      - gcc-multilib
+      - linux-libc-dev
+      - zlib-dev
+cache:
+  apt: true
+install:
+  - pushd $HOME
+  - travis_retry git clone https://github.com/luckytyphlosion/agbcc.git -b new_layout_with_libs
+  - cd agbcc && make && make install prefix=$TRAVIS_BUILD_DIR
+  - popd
+matrix:
+  include:
+    - os: linux
+      addons:
+        apt:
+          sources:
+              - ubuntu-toolchain-r-test
+          packages:
+            - g++-7
+      env: _="Build"
+      script:
+        - head -c 16777216 /dev/zero > tmp.bin
+        - make ips_patch -C tools/br_ips
+        - tools/br_ips/ips_patch tmp.bin baserom.ips baserom.gba
+        - rm tmp.bin
+        - make tools CXX=g++-7
+        - make -j2 compare
+after_success:
+  - .travis/calcrom/webhook.sh pokefirered

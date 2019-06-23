@@ -116,7 +116,6 @@ static void getIncbinsFromFile(struct Baserom ** incbins, size_t * num, size_t *
                 data = realloc(data, maxnincbins * sizeof(struct Baserom));
                 if (data == NULL) FATAL_ERROR("unable to reallocate incbins buffer\n");
             }
-            // fprintf(stderr, "DEBUG: %s:%d: 0x%x, 0x%lx\n", fname, line_n, incbinOffset, trueSize);
             data[nincbins].offset = incbinOffset;
             data[nincbins].size = trueSize;
             incbinOffset += trueSize;
@@ -220,7 +219,6 @@ static void writePatch(const char * filename, const struct Baserom * incbins, si
         if (fseek(rom, offset, SEEK_SET)) FATAL_ERROR("seek\n");
         if (fread(readbuf, 1, size, rom) != size) FATAL_ERROR("read\n");
         if (fwrite(readbuf, 1, size, file) != size) FATAL_ERROR("write\n");
-        printf("DEBUG: 0x%x, 0x%lx\n", offset, size);
     }
     free(readbuf);
     fwrite("EOF", 1, 3, file);

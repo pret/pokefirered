@@ -144,14 +144,14 @@ bool8 sub_80BF748(void)
 
 void SetVBlankHBlankCallbacksToNull(void)
 {
-	SetVBlankCallback(NULL);
-	SetHBlankCallback(NULL);
+    SetVBlankCallback(NULL);
+    SetHBlankCallback(NULL);
 }
 
 void ClearVramOamPltt(void)
 {
-	ResetAllBgsCoordinatesAndBgCntRegs();
-	CpuFill16(0, (void*) VRAM, VRAM_SIZE);
+    ResetAllBgsCoordinatesAndBgCntRegs();
+    CpuFill16(0, (void*) VRAM, VRAM_SIZE);
     CpuFill32(0, (void*) OAM, OAM_SIZE);
     CpuFill16(0, (void*) PLTT, PLTT_SIZE);
 }
@@ -243,8 +243,8 @@ bool8 AdjustQuantityAccordingToDPadInput(s16 *arg0, u16 arg1)
 
 u8 sub_80BF8E4(void)
 {
-	if(!ContextNpcGetTextColor())
-		return 4;
-	else
-		return 5;
+    if(!ContextNpcGetTextColor())
+        return 4;
+    else
+        return 5;
 }

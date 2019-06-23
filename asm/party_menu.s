@@ -3218,7 +3218,7 @@ sub_8120328: @ 8120328
 	lsrs r4, r0, 24
 	adds r5, r4, 0
 	movs r0, 0x6
-	bl RunTextPrintersRetIsActive
+	bl RunTextPrinters_CheckActive
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x1
@@ -4529,7 +4529,7 @@ sub_8120D08: @ 8120D08
 	ldr r5, _08120D38 @ =gTasks+0x8
 	adds r0, r4, r5
 	ldrb r0, [r0]
-	bl RunTextPrintersRetIsActive
+	bl RunTextPrinters_CheckActive
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x1
@@ -4643,7 +4643,7 @@ sub_8120DE0: @ 8120DE0
 	ldr r6, _08120E14 @ =gTasks+0x8
 	adds r4, r5, r6
 	ldrb r0, [r4]
-	bl RunTextPrintersRetIsActive
+	bl RunTextPrinters_CheckActive
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x1

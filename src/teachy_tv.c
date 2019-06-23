@@ -817,7 +817,7 @@ static void TTVcmd_NpcMoveAndSetupTextPrinter(u8 taskId)
 static void TTVcmd_IdleIfTextPrinterIsActive(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    if (!RunTextPrintersRetIsActive(0))
+    if (!RunTextPrinters_CheckActive(0))
         ++data[3];
 }
 
@@ -945,7 +945,7 @@ static const u8 sGrassAnimArray[] =
 static void TTVcmd_IdleIfTextPrinterIsActive2(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    if (!RunTextPrintersRetIsActive(0))
+    if (!RunTextPrinters_CheckActive(0))
         ++data[3];
 }
 

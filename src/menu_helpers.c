@@ -36,7 +36,7 @@ void DisplayMessageAndContinueTask(u8 taskId, u8 windowId, u16 arg2, u8 arg3, u8
     gTasks[taskId].func = Task_ContinueTaskAfterMessagePrints;
 }
 
-bool16 RunTextPrintersRetIsActive(u8 textPrinterId)
+bool16 RunTextPrinters_CheckActive(u8 textPrinterId)
 {
     RunTextPrinters();
     return IsTextPrinterActive(textPrinterId);
@@ -44,7 +44,7 @@ bool16 RunTextPrintersRetIsActive(u8 textPrinterId)
 
 static void Task_ContinueTaskAfterMessagePrints(u8 taskId)
 {
-    if (!RunTextPrintersRetIsActive(gUnknown_20399D0))
+    if (!RunTextPrinters_CheckActive(gUnknown_20399D0))
         gUnknown_20399CC(taskId);
 }
 
@@ -75,9 +75,9 @@ u8 GetLRKeysState(void)
 {
     if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
     {
-        if (gMain.newKeys & L_BUTTON)
+        if (JOY_NEW(L_BUTTON))
             return 1;
-        if (gMain.newKeys & R_BUTTON)
+        if (JOY_NEW(R_BUTTON))
             return 2;
     }
     return 0;
@@ -87,9 +87,9 @@ u8 sub_80BF66C(void)
 {
     if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
     {
-        if (gMain.newAndRepeatedKeys & L_BUTTON)
+        if (JOY_REPT(L_BUTTON))
             return 1;
-        if (gMain.newAndRepeatedKeys & R_BUTTON)
+        if (JOY_REPT(R_BUTTON))
             return 2;
     }
     return 0;
@@ -178,7 +178,7 @@ bool8 AdjustQuantityAccordingToDPadInput(s16 *arg0, u16 arg1)
 {
     s16 valBefore = (*arg0);
 
-    if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP)
+    if (JOY_REPT(DPAD_ANY) == DPAD_UP)
     {
         (*arg0)++;
         if ((*arg0) > arg1)
@@ -194,7 +194,7 @@ bool8 AdjustQuantityAccordingToDPadInput(s16 *arg0, u16 arg1)
             return TRUE;
         }
     }
-    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_DOWN)
+    else if (JOY_REPT(DPAD_ANY) == DPAD_DOWN)
     {
         (*arg0)--;
         if ((*arg0) <= 0)
@@ -209,7 +209,7 @@ bool8 AdjustQuantityAccordingToDPadInput(s16 *arg0, u16 arg1)
             return TRUE;
         }
     }
-    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_RIGHT)
+    else if (JOY_REPT(DPAD_ANY) == DPAD_RIGHT)
     {
         (*arg0) += 10;
         if ((*arg0) > arg1)
@@ -224,7 +224,7 @@ bool8 AdjustQuantityAccordingToDPadInput(s16 *arg0, u16 arg1)
             return TRUE;
         }
     }
-    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_LEFT)
+    else if (JOY_REPT(DPAD_ANY) == DPAD_LEFT)
     {
         (*arg0) -= 10;
         if ((*arg0) <= 0)

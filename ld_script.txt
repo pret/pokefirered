@@ -172,7 +172,6 @@ SECTIONS {
         asm/ground.o(.text);
         asm/normal.o(.text);
         asm/battle_anim_utility_funcs.o(.text);
-        src/bike.o(.text);
         asm/bike.o(.text);
         asm/easy_chat.o(.text);
         asm/mon_markings.o(.text);

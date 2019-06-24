@@ -1209,14 +1209,7 @@ gUnknown_203AB54: @ 203AB54
 	.space 0x4
 
 	.include "src/new_menu_helpers.o"
-
 	.align 2
-gUnknown_203AB5C: @ 203AB5C
-	.space 0x4
-
-gUnknown_203AB60: @ 203AB60
-	.space 0x80
-
 sStartMenuWindowId: @ 203ABE0
 	.space 0x4
 

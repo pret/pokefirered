@@ -1179,7 +1179,7 @@ sub_806F69C: @ 806F69C
 	movs r1, 0x1
 	bl sub_80F7768
 	movs r0, 0x1
-	bl sub_80F6E08
+	bl AddTextPrinterForMessage
 	ldr r1, _0806F6CC @ =gUnknown_3000FA9
 	movs r0, 0x1
 	strb r0, [r1]

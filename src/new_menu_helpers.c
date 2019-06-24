@@ -10,11 +10,12 @@
 #include "new_menu_helpers.h"
 #include "quest_log.h"
 #include "text.h"
+#include "field_specials.h"
 
 static EWRAM_DATA bool8 gUnknown_203AB58[4] = {FALSE}; // knizz: bgmaps_that_need_syncing
+static EWRAM_DATA u16 gUnknown_203AB5C = {0};
+static EWRAM_DATA void *gUnknown_203AB60[0x20] = {NULL};
 
-EWRAM_DATA u16 gUnknown_203AB5C;
-EWRAM_DATA void *gUnknown_203AB60[0x20];
 extern const struct WindowTemplate sStandardTextBox_WindowTemplates[];
 EWRAM_DATA u8 sStartMenuWindowId;
 
@@ -181,10 +182,10 @@ u16 CopyDecompressedTileDataToVram(u8 bgId, const void *src, u16 size, u16 offse
 {
     switch (mode)
     { // different to EM
-        case 1:
-            break;
-        case 0:        
-        default:
+    case 1:
+        break;
+    case 0:        
+    default:
         return LoadBgTiles(bgId, src, size, offset);
     }
     return LoadBgTilemap(bgId, src, size, offset);
@@ -279,3 +280,29 @@ u16 AddTextPrinterParameterized2(u8 windowId, u8 fontId, const u8 *str, u8 speed
     return AddTextPrinter(&printer, speed, callback);
 }
 
+void AddTextPrinterDiffStyle(bool8 allowSkippingDelayWithButtonPress)
+{
+    u8 result;
+    void *nptr = NULL; // This is required for matching
+
+    gTextFlags.canABSpeedUpPrint = allowSkippingDelayWithButtonPress;    
+    result = ContextNpcGetTextColor();
+    if (!result)
+        AddTextPrinterParameterized2(0, 4, gStringVar4, GetTextSpeedSetting(), nptr, 8, 1, 3);
+    else if (result == 1)
+        AddTextPrinterParameterized2(0, 5, gStringVar4, GetTextSpeedSetting(), nptr, 4, 1, 3);
+    else
+        AddTextPrinterParameterized2(0, 2, gStringVar4, GetTextSpeedSetting(), nptr, 2, 1, 3);
+}
+
+void AddTextPrinterForMessage(bool8 allowSkippingDelayWithButtonPress)
+{
+    gTextFlags.canABSpeedUpPrint = allowSkippingDelayWithButtonPress;
+    AddTextPrinterParameterized2(0, 2, gStringVar4, GetTextSpeedSetting(), NULL, 2, 1, 3);
+}
+
+void AddTextPrinterWithCustomSpeedForMessage(bool8 allowSkippingDelayWithButtonPress, u8 speed)
+{
+    gTextFlags.canABSpeedUpPrint = allowSkippingDelayWithButtonPress;
+    AddTextPrinterParameterized2(0, 2, gStringVar4, speed, NULL, 2, 1, 3);
+}

@@ -8491,7 +8491,7 @@ sub_811A0B4: @ 811A0B4
 	bl StringExpandPlaceholders
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_80F6E54
+	bl AddTextPrinterWithCustomSpeedForMessage
 	movs r0, 0
 	pop {r4}
 	pop {r1}
@@ -8536,7 +8536,7 @@ _0811A10A:
 	adds r1, r5, 0
 	bl StringExpandPlaceholders
 	movs r0, 0x1
-	bl sub_80F6E08
+	bl AddTextPrinterForMessage
 	ldrb r0, [r4]
 	adds r0, 0x1
 	strb r0, [r4]

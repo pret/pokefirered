@@ -49,7 +49,7 @@ _0809AAF8:
 	strb r0, [r4]
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_80F7750
+	bl SetStdWindowBorderStyle
 	movs r0, 0x2
 	movs r1, 0
 	bl GetMenuCursorDimensionByFont

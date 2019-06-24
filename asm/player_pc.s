@@ -149,7 +149,7 @@ _080EB77E:
 	strh r0, [r7, 0x14]
 	ldrb r0, [r7, 0x14]
 	movs r1, 0
-	bl sub_80F7750
+	bl SetStdWindowBorderStyle
 	movs r0, 0x2
 	movs r1, 0
 	bl GetMenuCursorDimensionByFont
@@ -464,7 +464,7 @@ _080EBA1E:
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl sub_80F7750
+	bl SetStdWindowBorderStyle
 	movs r0, 0x2
 	movs r1, 0
 	bl GetMenuCursorDimensionByFont
@@ -1578,7 +1578,7 @@ sub_80EC2FC: @ 80EC2FC
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_80F7858
+	bl DisplayYesNoMenuDefaultYes
 	ldr r1, _080EC31C @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4

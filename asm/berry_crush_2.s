@@ -2946,7 +2946,7 @@ _0814D1A6:
 	strb r0, [r5, 0xC]
 	b _0814D238
 _0814D1CA:
-	bl sub_80F7858
+	bl DisplayYesNoMenuDefaultYes
 	b _0814D230
 _0814D1D0:
 	bl Menu_ProcessInputNoWrapClearOnChoose

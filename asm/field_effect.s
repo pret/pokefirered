@@ -6185,7 +6185,7 @@ sub_8086358: @ 8086358
 	movs r1, 0
 	movs r2, 0
 	bl ChangeBgY
-	bl sub_80F77B8
+	bl Menu_LoadStdPal
 	movs r0, 0x26
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 4
@@ -6568,7 +6568,7 @@ sub_8086650: @ 8086650
 	movs r1, 0
 	movs r2, 0
 	bl ChangeBgY
-	bl sub_80F77B8
+	bl Menu_LoadStdPal
 	movs r0, 0x26
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 4

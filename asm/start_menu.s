@@ -1347,7 +1347,7 @@ _0806F7D8: .4byte sub_806F7DC
 	thumb_func_start sub_806F7DC
 sub_806F7DC: @ 806F7DC
 	push {lr}
-	bl sub_80F7858
+	bl DisplayYesNoMenuDefaultYes
 	ldr r1, _0806F7F0 @ =gUnknown_3000FA4
 	ldr r0, _0806F7F4 @ =sub_806F7F8
 	str r0, [r1]
@@ -1451,7 +1451,7 @@ _0806F8A0: .4byte sub_806F8A4
 	thumb_func_start sub_806F8A4
 sub_806F8A4: @ 806F8A4
 	push {lr}
-	bl sub_80F7858
+	bl DisplayYesNoMenuDefaultYes
 	ldr r1, _0806F8B8 @ =gUnknown_3000FA4
 	ldr r0, _0806F8BC @ =sub_806F8DC
 	str r0, [r1]
@@ -1466,7 +1466,7 @@ _0806F8BC: .4byte sub_806F8DC
 	thumb_func_start sub_806F8C0
 sub_806F8C0: @ 806F8C0
 	push {lr}
-	bl sub_80F7880
+	bl DisplayYesNoMenuDefaultNo
 	ldr r1, _0806F8D4 @ =gUnknown_3000FA4
 	ldr r0, _0806F8D8 @ =sub_806F8DC
 	str r0, [r1]

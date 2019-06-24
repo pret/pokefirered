@@ -249,7 +249,7 @@ _0809CB02:
 	lsrs r5, r0, 24
 	adds r0, r5, 0
 	movs r1, 0
-	bl sub_80F7750
+	bl SetStdWindowBorderStyle
 	mov r2, r10
 	cmp r2, 0x1E
 	beq _0809CB32
@@ -636,7 +636,7 @@ _0809CE08:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0809CE26
-	bl sub_80F7858
+	bl DisplayYesNoMenuDefaultYes
 	adds r0, r4, 0
 	movs r1, 0x50
 	bl CreateTask
@@ -822,7 +822,7 @@ _0809CF08:
 	lsrs r0, 24
 	strh r0, [r4, 0x14]
 	movs r1, 0
-	bl sub_80F7750
+	bl SetStdWindowBorderStyle
 	ldrb r0, [r4, 0x14]
 	lsls r5, 27
 	lsrs r5, 24
@@ -989,7 +989,7 @@ _0809D0B0:
 	lsrs r6, r0, 24
 	adds r0, r6, 0
 	movs r1, 0
-	bl sub_80F7750
+	bl SetStdWindowBorderStyle
 	ldr r2, _0809D128 @ =gUnknown_8417BD3
 	movs r0, 0x22
 	str r0, [sp]
@@ -1050,7 +1050,7 @@ _0809D14C:
 	lsrs r6, r0, 24
 	adds r0, r6, 0
 	movs r1, 0
-	bl sub_80F7750
+	bl SetStdWindowBorderStyle
 	mov r0, r8
 	bl FlagGet
 	lsls r0, 24
@@ -1326,7 +1326,7 @@ _0809D31C:
 	strb r0, [r1, 0x5]
 	ldrb r0, [r3, 0x12]
 	movs r1, 0x1
-	bl sub_80F7750
+	bl SetStdWindowBorderStyle
 	movs r0, 0
 	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0x1
@@ -1613,7 +1613,7 @@ _0809D572:
 	strh r2, [r1, 0x8]
 	strh r5, [r1, 0xC]
 	movs r1, 0x1
-	bl sub_80F7750
+	bl SetStdWindowBorderStyle
 	movs r0, 0
 	bl ScheduleBgCopyTilemapToVram
 _0809D5F2:
@@ -1859,7 +1859,7 @@ _0809D7B8:
 	lsrs r7, r0, 24
 	adds r0, r7, 0
 	movs r1, 0
-	bl sub_80F7750
+	bl SetStdWindowBorderStyle
 	movs r6, 0
 	mov r5, r9
 	subs r5, 0x2

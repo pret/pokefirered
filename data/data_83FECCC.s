@@ -559,7 +559,7 @@ gUnknown_841F428:: @ 841F428
 sStandardTextBox_WindowTemplates:: @ 841F42C
 	.incbin "baserom.gba", 0x41F42C, 0x10
 
-gUnknown_841F43C:: @ 841F43C
+sYesNo_WindowTemplate:: @ 841F43C
 	.incbin "baserom.gba", 0x41F43C, 0x8
 
 gUnknown_841F444:: @ 841F444

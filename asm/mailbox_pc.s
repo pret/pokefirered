@@ -60,7 +60,7 @@ sub_810EBAC: @ 810EBAC
 	strb r0, [r4]
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_80F7750
+	bl SetStdWindowBorderStyle
 _0810EBD0:
 	ldrb r0, [r4]
 	pop {r4}

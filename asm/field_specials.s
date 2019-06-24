@@ -2631,7 +2631,7 @@ _080CB9D2:
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
 	movs r1, 0
-	bl sub_80F7750
+	bl SetStdWindowBorderStyle
 	ldr r4, _080CBA70 @ =gUnknown_3005360
 	ldrh r0, [r5, 0xA]
 	strh r0, [r4, 0xC]

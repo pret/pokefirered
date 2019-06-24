@@ -8578,7 +8578,7 @@ _0811A15E:
 	negs r0, r0
 	b _0811A1A4
 _0811A168:
-	bl sub_80F7858
+	bl DisplayYesNoMenuDefaultYes
 	ldrb r0, [r4]
 	adds r0, 0x1
 	strb r0, [r4]
@@ -12967,7 +12967,7 @@ _0811C300:
 	movs r1, 0x1
 	movs r2, 0xD0
 	bl TextWindow_SetStdFrame0_WithPal
-	bl sub_80F77B8
+	bl Menu_LoadStdPal
 	ldr r0, _0811C35C @ =sub_811C1B4
 	bl SetVBlankCallback
 	ldr r1, _0811C360 @ =gMain

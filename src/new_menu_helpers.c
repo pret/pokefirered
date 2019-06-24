@@ -13,6 +13,8 @@
 #include "field_specials.h"
 #include "text_window.h"
 #include "script.h"
+#include "graphics.h"
+#include "palette.h"
 
 #define DLG_WINDOW_PALETTE_NUM 15
 #define DLG_WINDOW_BASE_TILE_NUM 0x200
@@ -24,6 +26,7 @@ static EWRAM_DATA u16 gUnknown_203AB5C = {0};
 static EWRAM_DATA void *gUnknown_203AB60[0x20] = {NULL};
 
 extern const struct WindowTemplate sStandardTextBox_WindowTemplates[];
+extern const struct WindowTemplate sYesNo_WindowTemplate;
 EWRAM_DATA u8 sStartMenuWindowId;
 
 static u16 CopyDecompressedTileDataToVram(u8 bgId, const void *src, u16 size, u16 offset, u8 mode);
@@ -323,14 +326,14 @@ void sub_80F6E9C(void)
     if (gUnknown_203ADFA == 2)
     {
         gTextFlags.autoScroll = 1;
-        TextWindow_LoadTilesStdFrame1(0, 0x200);
+        TextWindow_LoadTilesStdFrame1(0, DLG_WINDOW_BASE_TILE_NUM);
     }
     else
     {
-        sub_80F77B8();
-        TextWindow_LoadResourcesStdFrame0(0, 0x200, 0xF0);
+        Menu_LoadStdPal();
+        TextWindow_LoadResourcesStdFrame0(0, DLG_WINDOW_BASE_TILE_NUM, DLG_WINDOW_PALETTE_NUM * 0x10);
     }
-    TextWindow_SetUserSelectedFrame(0, 0x214, 0xE0);
+    TextWindow_SetUserSelectedFrame(0, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM * 0x10);
 }
 
 void DrawDialogueFrame(u8 windowId, bool8 copyToVram)
@@ -459,3 +462,69 @@ static void WindowFunc_ClearDialogWindowAndFrame(u8 bg, u8 tilemapLeft, u8 tilem
 {
     FillBgTilemapBufferRect(bg, 0, tilemapLeft - 2, tilemapTop - 1, width + 4, height + 2, STD_WINDOW_PALETTE_NUM);
 }
+
+void sub_80F771C(bool8 copyToVram)
+{
+    FillBgTilemapBufferRect(0, 0, 0, 0, 0x20, 0x20, 0x11);
+    if (copyToVram == TRUE)
+        CopyBgTilemapBufferToVram(0);
+}
+
+void SetStdWindowBorderStyle(u8 windowId, bool8 copyToVram)
+{
+    SetWindowBorderStyle(windowId, copyToVram, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM);
+}
+
+void sub_80F7768(u8 windowId, bool8 copyToVram)
+{
+    if (gUnknown_203ADFA == 2)
+    {
+        gTextFlags.autoScroll = 1;
+        TextWindow_LoadTilesStdFrame1(0, DLG_WINDOW_BASE_TILE_NUM);
+    }
+    else
+    {
+        TextWindow_LoadResourcesStdFrame0(windowId, DLG_WINDOW_BASE_TILE_NUM, DLG_WINDOW_PALETTE_NUM * 0x10);
+    }
+    DrawDialogFrameWithCustomTileAndPalette(windowId, copyToVram, DLG_WINDOW_BASE_TILE_NUM, DLG_WINDOW_PALETTE_NUM);
+}
+
+void Menu_LoadStdPal(void)
+{
+    LoadPalette(gTMCaseMainWindowPalette, STD_WINDOW_PALETTE_NUM * 0x10, 0x14);
+}
+
+void Menu_LoadStdPalAt(u16 offset)
+{
+    LoadPalette(gTMCaseMainWindowPalette, offset, 0x14);
+}
+
+static const u16 *GetTmCaseMainWindowPalette(void)
+{
+    return gTMCaseMainWindowPalette;
+}
+
+static u16 GetStdPalColor(u8 colorNum)
+{
+    if (colorNum > 0xF)
+        colorNum = 0;
+    return gTMCaseMainWindowPalette[colorNum];
+}
+
+void DisplayItemMessageOnField(u8 taskId, u8 bgId, const u8 *string, TaskFunc callback)
+{
+    sub_80F6E9C();
+    DisplayMessageAndContinueTask(taskId, 0, DLG_WINDOW_BASE_TILE_NUM, DLG_WINDOW_PALETTE_NUM, bgId, GetTextSpeedSetting(), string, callback);
+    CopyWindowToVram(0, 3);
+}
+
+void DisplayYesNoMenuDefaultYes(void)
+{
+    CreateYesNoMenu(&sYesNo_WindowTemplate, 2, 0, 2, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM, 0);
+}
+
+void DisplayYesNoMenuDefaultNo(void)
+{
+    CreateYesNoMenu(&sYesNo_WindowTemplate, 2, 0, 2, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM, 1);
+}
+

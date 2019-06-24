@@ -429,7 +429,7 @@ _08000E46:\n\
 }
 #endif
 
-int RequestDma3Copy(const void *src, void *dest, u16 size, u8 mode)
+s16 RequestDma3Copy(const void *src, void *dest, u16 size, u8 mode)
 {
     int cursor;
     int var = 0;
@@ -466,7 +466,7 @@ int RequestDma3Copy(const void *src, void *dest, u16 size, u8 mode)
     return -1;
 }
 
-int RequestDma3Fill(s32 value, void *dest, u16 size, u8 mode)
+s16 RequestDma3Fill(s32 value, void *dest, u16 size, u8 mode)
 {
     int cursor;
     int var = 0;
@@ -504,7 +504,7 @@ int RequestDma3Fill(s32 value, void *dest, u16 size, u8 mode)
     return -1;
 }
 
-int CheckForSpaceForDma3Request(s16 index)
+s16 CheckForSpaceForDma3Request(s16 index)
 {
     int current = 0;
 

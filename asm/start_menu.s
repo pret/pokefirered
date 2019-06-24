@@ -1127,7 +1127,7 @@ _0806F644: .4byte gUnknown_3000FA9
 	thumb_func_start sub_806F648
 sub_806F648: @ 806F648
 	push {lr}
-	bl sub_80F6CBC
+	bl RunTextPrinters_CheckPrinter0Active
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x1
@@ -1596,7 +1596,7 @@ _0806F9B4: .4byte sub_806FA04
 	thumb_func_start sub_806F9B8
 sub_806F9B8: @ 806F9B8
 	push {lr}
-	bl sub_80F6CBC
+	bl RunTextPrinters_CheckPrinter0Active
 	lsls r0, 16
 	cmp r0, 0
 	bne _0806F9D0
@@ -1638,7 +1638,7 @@ _0806FA00:
 	thumb_func_start sub_806FA04
 sub_806FA04: @ 806FA04
 	push {lr}
-	bl sub_80F6CBC
+	bl RunTextPrinters_CheckPrinter0Active
 	lsls r0, 16
 	cmp r0, 0
 	bne _0806FA1C

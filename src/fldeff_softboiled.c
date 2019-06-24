@@ -72,7 +72,7 @@ void sub_80E583C(u8 taskId)
     GetMonNickname(&gPlayerParty[gUnknown_203B0A0.unkA], gStringVar1);
     StringExpandPlaceholders(gStringVar4, gUnknown_8416F27);
     sub_81202F8(gStringVar4, 0);
-    schedule_bg_copy_tilemap_to_vram(2);
+    ScheduleBgCopyTilemapToVram(2);
     gTasks[taskId].func = sub_80E58A0;
 }
 
@@ -104,6 +104,6 @@ void sub_80E5934(u8 taskId)
 {
     PlaySE(SE_SELECT);
     sub_81202F8(gUnknown_84169F8, 0);
-    schedule_bg_copy_tilemap_to_vram(2);
+    ScheduleBgCopyTilemapToVram(2);
     gTasks[taskId].func = sub_80E5900;
 }

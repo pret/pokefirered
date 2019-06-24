@@ -3073,7 +3073,7 @@ sub_80F36BC: @ 80F36BC
 	bl ScanlineEffect_Stop
 	bl ResetTasks
 	bl ResetSpriteData
-	bl reset_temp_tile_data_buffers
+	bl ResetTempTileDataBuffers
 	bl ResetAllPicSprites
 	bl FreeAllSpritePalettes
 	ldr r1, _080F36EC @ =gReservedSpritePaletteCount
@@ -3174,12 +3174,12 @@ _080F37A4:
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	b _080F3854
 	.align 2, 0
 _080F37B8: .4byte gUnknown_840C3BC
 _080F37BC:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	cmp r0, 0
 	beq _080F3854

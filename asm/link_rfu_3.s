@@ -8503,7 +8503,7 @@ _0811A0DC: .4byte gStringVar4
 	thumb_func_start sub_811A0E0
 sub_811A0E0: @ 811A0E0
 	push {lr}
-	bl sub_80F6CBC
+	bl RunTextPrinters_CheckPrinter0Active
 	lsls r0, 16
 	cmp r0, 0
 	beq _0811A0F0
@@ -8544,7 +8544,7 @@ _0811A10A:
 	.align 2, 0
 _0811A12C: .4byte gStringVar4
 _0811A130:
-	bl sub_80F6CBC
+	bl RunTextPrinters_CheckPrinter0Active
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0
@@ -12935,7 +12935,7 @@ _0811C2C0:
 	movs r0, 0
 	movs r2, 0x1
 	bl InitBgsFromTemplates
-	bl reset_temp_tile_data_buffers
+	bl ResetTempTileDataBuffers
 	ldr r0, _0811C358 @ =gUnknown_8457198
 	bl InitWindows
 	lsls r0, 16

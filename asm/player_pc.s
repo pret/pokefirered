@@ -189,7 +189,7 @@ _080EB77E:
 	movs r3, 0x2
 	bl ProgramAndPlaceMenuCursorOnWindow
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r1, _080EB814 @ =gTasks
 	mov r2, r8
 	lsls r0, r2, 2
@@ -243,7 +243,7 @@ sub_80EB81C: @ 80EB81C
 	ldrb r0, [r4, 0x14]
 	bl RemoveWindow
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	adds r0, r7, 0
 	subs r0, 0x8
 	adds r0, r6, r0
@@ -262,7 +262,7 @@ _080EB878:
 	ldrb r0, [r4, 0x14]
 	bl RemoveWindow
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	adds r2, r7, 0
 	subs r2, 0x8
 	adds r2, r6, r2
@@ -490,7 +490,7 @@ _080EBA1E:
 	movs r3, 0x2
 	bl ProgramAndPlaceMenuCursorOnWindow
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r1, _080EBA88 @ =gUnknown_84021DC
 	lsls r0, r7, 2
 	adds r0, r1
@@ -1084,7 +1084,7 @@ sub_80EBEB0: @ 80EBEB0
 	mov r2, r8
 	bl AddTextPrinterParameterized
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r4, _080EBF38 @ =gUnknown_203AAC4
 	adds r0, r4, 0
 	bl sub_810EC98
@@ -1176,7 +1176,7 @@ _080EBFB6:
 	mov r2, r8
 	bl DestroyListMenu
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	mov r1, r8
 	ldrb r0, [r1, 0xA]
 	bl RemoveScrollIndicatorArrowPair
@@ -1290,7 +1290,7 @@ sub_80EC094: @ 80EC094
 	movs r2, 0
 	bl DestroyListMenu
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	bl sub_810EDB0
 	adds r0, r5, 0
 	bl sub_80EB8BC
@@ -1343,7 +1343,7 @@ sub_80EC0D8: @ 80EC0D8
 	movs r3, 0x2
 	bl ProgramAndPlaceMenuCursorOnWindow
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r1, _080EC154 @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
@@ -1875,7 +1875,7 @@ sub_80EC53C: @ 80EC53C
 	adds r0, r4, 0
 	bl sub_80EBEB0
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r1, _080EC56C @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -1900,7 +1900,7 @@ sub_80EC574: @ 80EC574
 	movs r0, 0x2
 	bl sub_810EBE0
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r1, _080EC59C @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4

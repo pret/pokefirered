@@ -155,7 +155,7 @@ sub_813F75C: @ 813F75C
 	movs r3, 0xE
 	bl DisplayMessageAndContinueTask
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	add sp, 0x10
 	pop {r3}
 	mov r8, r3

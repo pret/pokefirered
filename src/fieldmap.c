@@ -897,7 +897,7 @@ void copy_tileset_patterns_to_vram(struct Tileset const *tileset, u16 numTiles, 
         if (!tileset->isCompressed)
             LoadBgTiles(2, tileset->tiles, numTiles * 32, offset);
         else
-            sub_80F68F0(2, tileset->tiles, numTiles * 32, offset, 0);
+            DecompressAndCopyTileDataToVram2(2, tileset->tiles, numTiles * 32, offset, 0);
     }
 }
 
@@ -908,7 +908,7 @@ void copy_tileset_patterns_to_vram2(struct Tileset const *tileset, u16 numTiles,
         if (!tileset->isCompressed)
             LoadBgTiles(2, tileset->tiles, numTiles * 32, offset);
         else
-            sub_80F69E8(2, tileset->tiles, numTiles * 32, offset, 0);
+            DecompressAndLoadBgGfxUsingHeap2(2, tileset->tiles, numTiles * 32, offset, 0);
     }
 }
 

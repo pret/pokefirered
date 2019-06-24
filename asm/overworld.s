@@ -3199,7 +3199,7 @@ _080563EC: .4byte gUnknown_300501C
 	thumb_func_start CleanupOverworldWindowsAndTilemaps
 CleanupOverworldWindowsAndTilemaps: @ 80563F0
 	push {lr}
-	bl sub_80F6C8C
+	bl FreeAllOverworldWindowBuffers
 	ldr r0, _08056414 @ =gUnknown_300501C
 	ldr r0, [r0]
 	bl Free
@@ -3393,7 +3393,7 @@ sub_8056578: @ 8056578
 	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	bl sub_806FFBC
-	bl do_scheduled_bg_tilemap_copies_to_vram
+	bl DoScheduledBgTilemapCopiesToVram
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8056578
@@ -4036,7 +4036,7 @@ _08056B04:
 	.align 2, 0
 _08056B10: .4byte gMapHeader
 _08056B14:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4178,7 +4178,7 @@ _08056C40:
 	.align 2, 0
 _08056C4C: .4byte gMapHeader
 _08056C50:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4367,7 +4367,7 @@ _08056DE0:
 	.align 2, 0
 _08056DEC: .4byte gMapHeader
 _08056DF0:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4523,8 +4523,8 @@ sub_8056F08: @ 8056F08
 	thumb_func_start sub_8056F1C
 sub_8056F1C: @ 8056F1C
 	push {r4,lr}
-	bl clear_scheduled_bg_copies_to_vram
-	bl reset_temp_tile_data_buffers
+	bl ClearScheduledBgCopiesToVram
+	bl ResetTempTileDataBuffers
 	movs r0, 0x4C
 	movs r1, 0
 	bl SetGpuReg
@@ -4563,11 +4563,11 @@ sub_8056F1C: @ 8056F1C
 	movs r0, 0x52
 	bl SetGpuReg
 	movs r0, 0x1
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0x3
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r1, _08057020 @ =0x00007060
 	movs r0, 0
 	bl SetGpuReg
@@ -5078,7 +5078,7 @@ _080573D8:
 	.align 2, 0
 _080573E4: .4byte gMapHeader
 _080573E8:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -5177,7 +5177,7 @@ _080574B8:
 	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	bl sub_806FFBC
-	bl do_scheduled_bg_tilemap_copies_to_vram
+	bl DoScheduledBgTilemapCopiesToVram
 	cmp r4, 0
 	beq _080574E0
 	bl SetFieldVBlankCallback
@@ -5427,7 +5427,7 @@ _080576E0:
 	.align 2, 0
 _080576EC: .4byte gMapHeader
 _080576F0:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

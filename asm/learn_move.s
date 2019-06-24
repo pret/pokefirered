@@ -76,7 +76,7 @@ sub_80E469C: @ 80E469C
 	movs r0, 0
 	movs r2, 0x2
 	bl InitBgsFromTemplates
-	bl reset_temp_tile_data_buffers
+	bl ResetTempTileDataBuffers
 	ldr r0, _080E4778 @ =gUnknown_83FFA44
 	bl InitWindows
 	lsls r0, 16

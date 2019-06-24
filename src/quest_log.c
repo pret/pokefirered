@@ -1418,7 +1418,7 @@ void sub_8111D10(void)
     PutWindowTilemap(gUnknown_203ADFE[2]);
     sub_8111D90(gUnknown_203ADFE[2]);
     AddTextPrinterParameterized4(gUnknown_203ADFE[2], 2, 2, gUnknown_8456698[count], 1, 0, &gUnknown_8456634, 0, gStringVar4);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
 }
 
 void sub_8111D90(u8 a0)
@@ -2297,7 +2297,7 @@ const struct WindowTemplate gUnknown_8456928 = {
     0x00, 0, 15, 30, 5, 15, 0x008F
 };
 
-void sub_8112EA8(void)
+void MapNamePopupWindowIdSetDummy(void)
 {
     gUnknown_203B020 = 0xFF;
 }

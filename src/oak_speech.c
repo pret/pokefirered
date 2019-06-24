@@ -495,7 +495,7 @@ static void Task_OaksSpeech1(u8 taskId)
         ScanlineEffect_Stop();
         ResetSpriteData();
         FreeAllSpritePalettes();
-        reset_temp_tile_data_buffers();
+        ResetTempTileDataBuffers();
         HelpSystem_SetSomeVariable2(2);
         break;
     case 1:
@@ -536,10 +536,10 @@ static void Task_OaksSpeech1(u8 taskId)
     case 5:
         sOakSpeechResources->textSpeed = GetTextSpeedSetting();
         gTextFlags.canABSpeedUpPrint = TRUE;
-        decompress_and_copy_tile_data_to_vram(1, sOakSpeechGfx_GameStartHelpUI, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, sOakSpeechGfx_GameStartHelpUI, 0, 0, 0);
         break;
     case 6:
-        if (free_temp_tile_data_buffers_if_possible())
+        if (FreeTempTileDataBuffersIfPossible())
             return;
         ClearDialogWindowAndFrame(0, 1);
         FillBgTilemapBufferRect_Palette0(1, 0x0000,  0,  0, 32, 32);
@@ -718,7 +718,7 @@ static void Task_OakSpeech6(u8 taskId)
         PlayBGM(BGM_FRLG_GAME_EXPLANATION_MIDDLE);
         sub_810F71C();
         PrintTextOnRightSnappedWindow(gText_ABUTTONNext, 0, 1);
-        sOakSpeechResources->unk_0008 = malloc_and_decompress(sNewGameAdventureIntroTilemap, &sp14);
+        sOakSpeechResources->unk_0008 = MallocAndDecompress(sNewGameAdventureIntroTilemap, &sp14);
         CopyToBgTilemapBufferRect(1, sOakSpeechResources->unk_0008, 0, 2, 30, 19);
         CopyBgTilemapBufferToVram(1);
         Free(sOakSpeechResources->unk_0008);
@@ -869,7 +869,7 @@ static void Task_OakSpeech9(u8 taskId)
         data[3]--;
     else
     {
-        sOakSpeechResources->solidColorsGfx = malloc_and_decompress(sOakSpeechGfx_SolidColors, &size);
+        sOakSpeechResources->solidColorsGfx = MallocAndDecompress(sOakSpeechGfx_SolidColors, &size);
         LoadBgTiles(1, sOakSpeechResources->solidColorsGfx, size, 0);
         CopyToBgTilemapBuffer(1, sOakSpeech_BackgroundTilemap, 0, 0);
         CopyBgTilemapBufferToVram(1);
@@ -1536,7 +1536,7 @@ static void CB2_ReturnFromNamingScreen(void)
         ScanlineEffect_Stop();
         ResetSpriteData();
         FreeAllSpritePalettes();
-        reset_temp_tile_data_buffers();
+        ResetTempTileDataBuffers();
         break;
     case 1:
         ResetBgsAndClearDma3BusyFlags(0);
@@ -1564,10 +1564,10 @@ static void CB2_ReturnFromNamingScreen(void)
         LoadPalette(sHelpDocsPalette, 0, 0xe0);
         break;
     case 4:
-        decompress_and_copy_tile_data_to_vram(1, sOakSpeechGfx_SolidColors, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, sOakSpeechGfx_SolidColors, 0, 0, 0);
         break;
     case 5:
-        if (free_temp_tile_data_buffers_if_possible())
+        if (FreeTempTileDataBuffersIfPossible())
             return;
         FillBgTilemapBufferRect_Palette0(1, 0x000, 0, 0, 30, 20);
         CopyToBgTilemapBuffer(1, sOakSpeech_BackgroundTilemap, 0, 0);

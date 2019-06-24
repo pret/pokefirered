@@ -3472,7 +3472,7 @@ _081411D0:
 	movs r0, 0
 	movs r1, 0
 	bl SetGpuReg
-	bl sub_80F6C14
+	bl ResetBgPositions
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, _081413A0 @ =gUnknown_8466B10
@@ -3495,20 +3495,20 @@ _081411D0:
 	bl FillBgTilemapBufferRect_Palette0
 	movs r0, 0x3
 	bl CopyBgTilemapBufferToVram
-	bl reset_temp_tile_data_buffers
+	bl ResetTempTileDataBuffers
 	ldr r1, _081413AC @ =gUnknown_84659D0
 	movs r5, 0
 	str r5, [sp]
 	movs r0, 0x2
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r1, _081413B0 @ =gUnknown_846653C
 	str r5, [sp]
 	movs r0, 0x2
 	movs r2, 0
 	movs r3, 0xC0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r1, _081413B4 @ =0x0000185c
 	add r1, r8
 	movs r0, 0x2
@@ -3563,13 +3563,13 @@ _081411D0:
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r1, _081413D4 @ =gUnknown_8466998
 	str r6, [sp]
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	movs r0, 0x1
 	bl CopyBgTilemapBufferToVram
 	movs r0, 0x2
@@ -3648,7 +3648,7 @@ _081413D8: .4byte gUnknown_841B779
 _081413DC: .4byte sub_8141118
 _081413E0: .4byte sub_8140E40
 _081413E4:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0

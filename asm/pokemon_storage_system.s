@@ -2669,7 +2669,7 @@ _0808CDC0: .4byte gUnknown_20397B0
 c2_Box: @ 808CDC4
 	push {lr}
 	bl RunTasks
-	bl do_scheduled_bg_tilemap_copies_to_vram
+	bl DoScheduledBgTilemapCopiesToVram
 	bl sub_808EFC8
 	bl sub_808F99C
 	bl AnimateSprites
@@ -2835,7 +2835,7 @@ sub_808CF10: @ 808CF10
 	ldr r1, _0808CF88 @ =gKeyRepeatStartDelay
 	movs r0, 0x14
 	strh r0, [r1]
-	bl clear_scheduled_bg_copies_to_vram
+	bl ClearScheduledBgCopiesToVram
 	movs r0, 0x3
 	bl sub_80F7AD8
 	ldr r2, _0808CF8C @ =gUnknown_83CE6F8
@@ -6738,7 +6738,7 @@ sub_808EFE4: @ 808EFE4
 	movs r0, 0x1
 	bl ShowBg
 	movs r0, 0x1
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
@@ -6956,7 +6956,7 @@ sub_808F1D0: @ 808F1D0
 	bl sub_808F49C
 	bl sub_808F5E8
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -7526,7 +7526,7 @@ _0808F66E:
 	movs r0, 0
 	bl sub_80F7E54
 	movs r0, 0x1
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
@@ -7608,7 +7608,7 @@ _0808F718:
 	bl sub_80F7E54
 _0808F73A:
 	movs r0, 0x1
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r0, _0808F754 @ =gUnknown_20397B0
 	ldr r0, [r0]
 	ldr r1, _0808F758 @ =0x000002c7
@@ -7680,7 +7680,7 @@ sub_808F794: @ 808F794
 	movs r0, 0x1
 	bl sub_80F7E54
 	movs r0, 0x1
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0x8
 	bl sub_8090B98
 	ldr r1, [r4]
@@ -7800,7 +7800,7 @@ sub_808F850: @ 808F850
 	cmp r0, 0x14
 	beq _0808F8D4
 	movs r0, 0x1
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0x1
 	b _0808F8FE
 	.align 2, 0
@@ -7822,7 +7822,7 @@ _0808F8D4:
 	movs r0, 0x2
 	bl sub_80F7E54
 	movs r0, 0x1
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 _0808F8FC:
 	movs r0, 0
 _0808F8FE:
@@ -7859,7 +7859,7 @@ _0808F934:
 	movs r0, 0x2
 	bl sub_80F7E54
 	movs r0, 0x1
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	add sp, 0x4
 	pop {r0}
 	bx r0
@@ -8068,7 +8068,7 @@ sub_808FAA8: @ 808FAA8
 	movs r0, 0x1
 	bl sub_80F7E54
 	movs r0, 0x1
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	add sp, 0x4
 	pop {r0}
 	bx r0
@@ -8318,7 +8318,7 @@ _0808FC7C:
 	movs r1, 0x2
 	bl CopyWindowToVram
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	add sp, 0xC
 	pop {r4-r6}
 	pop {r0}
@@ -8365,7 +8365,7 @@ sub_808FD20: @ 808FD20
 	movs r1, 0
 	bl ClearMenuWindow
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	pop {r0}
 	bx r0
 	thumb_func_end sub_808FD20
@@ -18963,7 +18963,7 @@ sub_8094E88: @ 8094E88
 	movs r3, 0x2
 	bl ProgramAndPlaceMenuCursorOnWindow
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r0, [r5]
 	ldr r3, _08094F8C @ =0x00000caa
 	adds r0, r3
@@ -22334,7 +22334,7 @@ _080968D0:
 	movs r3, 0x14
 	bl FillBgTilemapBufferRect
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	add sp, 0xC
 	pop {r4-r7}
 	pop {r0}

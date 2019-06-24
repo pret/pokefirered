@@ -240,7 +240,7 @@ _080BEDE0:
 	b _080BF0F4
 _080BEDE6:
 	bl FreeAllSpritePalettes
-	bl reset_temp_tile_data_buffers
+	bl ResetTempTileDataBuffers
 	movs r0, 0x10
 	movs r1, 0
 	bl SetGpuReg
@@ -318,13 +318,13 @@ _080BEE88:
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	b _080BF0F4
 	.align 2, 0
 _080BEEB0: .4byte gUnknown_83EE9C8
 _080BEEB4: .4byte gUnknown_20399C4
 _080BEEB8:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	cmp r0, 0
 	bne _080BEEC4

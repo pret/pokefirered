@@ -1909,7 +1909,7 @@ sub_804D638: @ 804D638
 	lsrs r1, 24
 	movs r0, 0x1C
 	bl SetGpuReg
-	bl sub_80F6CBC
+	bl RunTextPrinters_CheckPrinter0Active
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer

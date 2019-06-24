@@ -308,7 +308,7 @@ _0809CB7A:
 	mov r3, r10
 	bl sub_809CC18
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 _0809CBA2:
 	add sp, 0x20
 	pop {r3-r5}
@@ -845,7 +845,7 @@ _0809CF08:
 	movs r3, 0x1
 	bl sub_811030C
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 _0809CFB8:
 	movs r0, 0x1
 _0809CFBA:
@@ -1145,7 +1145,7 @@ _0809D1FA:
 	movs r3, 0xFF
 	bl sub_809CC18
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	add sp, 0xC
 	pop {r3,r4}
 	mov r8, r3
@@ -1328,7 +1328,7 @@ _0809D31C:
 	movs r1, 0x1
 	bl sub_80F7750
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0x1
 	b _0809D3C2
 	.align 2, 0
@@ -1615,7 +1615,7 @@ _0809D572:
 	movs r1, 0x1
 	bl sub_80F7750
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 _0809D5F2:
 	movs r0, 0x1
 _0809D5F4:
@@ -1953,7 +1953,7 @@ _0809D844:
 	movs r3, 0xFF
 	bl sub_809CC18
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 _0809D8A8:
 	add sp, 0xC
 	pop {r3,r4}

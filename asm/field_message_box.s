@@ -90,7 +90,7 @@ _080693E2:
 	strh r0, [r5, 0x8]
 	b _08069402
 _080693EA:
-	bl sub_80F6CBC
+	bl RunTextPrinters_CheckPrinter0Active
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x1

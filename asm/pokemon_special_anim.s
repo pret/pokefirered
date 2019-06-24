@@ -1558,7 +1558,7 @@ sub_811D184: @ 811D184
 	lsls r5, r1, 16
 	lsrs r5, 16
 	bl FreeAllWindowBuffers
-	bl reset_temp_tile_data_buffers
+	bl ResetTempTileDataBuffers
 	movs r0, 0
 	movs r1, 0
 	bl SetGpuReg
@@ -1654,7 +1654,7 @@ _0811D27C: .4byte 0x00001914
 	thumb_func_start sub_811D280
 sub_811D280: @ 811D280
 	push {lr}
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	cmp r0, 0
 	beq _0811D290
@@ -2353,7 +2353,7 @@ sub_811D7D4: @ 811D7D4
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	cmp r4, 0x4
 	beq _0811D818
 	ldr r0, _0811D814 @ =gUnknown_845963C

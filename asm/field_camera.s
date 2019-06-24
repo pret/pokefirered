@@ -710,11 +710,11 @@ _0805AAA2:
 	strh r0, [r3]
 _0805AABE:
 	movs r0, 0x1
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0x3
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	pop {r4}
 	pop {r0}
 	bx r0

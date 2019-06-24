@@ -123,7 +123,7 @@ sub_80F819C: @ 80F819C
 	lsrs r5, r0, 24
 	cmp r5, 0x1C
 	beq _080F8224
-	bl reset_temp_tile_data_buffers
+	bl ResetTempTileDataBuffers
 	ldr r4, _080F8200 @ =gUnknown_843E9E8
 	lsls r5, 4
 	adds r0, r4, 0
@@ -141,7 +141,7 @@ sub_80F819C: @ 80F819C
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	movs r0, 0
 	bl GetBgTilemapBuffer
 	cmp r0, 0
@@ -206,7 +206,7 @@ _080F8254: .4byte gUnknown_203ABED
 	thumb_func_start sub_80F8258
 sub_80F8258: @ 80F8258
 	push {lr}
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}

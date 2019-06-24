@@ -28,7 +28,7 @@ _0813F686:
 	movs r0, 0
 	movs r1, 0x13
 	movs r2, 0xE0
-	bl TextWindow_SetBubbleFrame_841F1C8
+	bl TextWindow_LoadResourcesStdFrame0
 	movs r0, 0
 	movs r1, 0xA
 	movs r2, 0xF0

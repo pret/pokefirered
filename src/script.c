@@ -279,7 +279,7 @@ void sub_8069A2C(void)
     gUnknown_3000FA1 = 0;
 }
 
-bool8 sub_8069A38(void)
+bool8 IsMsgSignPost(void)
 {
     if(gUnknown_3000FA1 == TRUE)
         return TRUE;

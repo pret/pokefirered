@@ -3371,7 +3371,7 @@ sub_813E910: @ 813E910
 	movs r0, 0
 	movs r1, 0x13
 	movs r2, 0xD0
-	bl TextWindow_SetBubbleFrame_841F1C8
+	bl TextWindow_LoadResourcesStdFrame0
 	movs r0, 0
 	movs r1, 0xA
 	movs r2, 0xC0

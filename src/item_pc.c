@@ -1076,7 +1076,7 @@ static void ItemPc_InitWindows(void)
     DeactivateAllTextPrinters();
     TextWindow_SetUserSelectedFrame(0, 0x3C0, 0xE0);
     TextWindow_SetStdFrame0_WithPal(0, 0x3A3, 0xC0);
-    TextWindow_SetBubbleFrame_841F1C8(0, 0x3AC, 0xB0);
+    TextWindow_LoadResourcesStdFrame0(0, 0x3AC, 0xB0);
     LoadPalette(stdpal_get(2), 0xD0, 0x20);
     LoadPalette(gTMCaseMainWindowPalette, 0xF0, 0x20);
     for (i = 0; i < 3; i++)

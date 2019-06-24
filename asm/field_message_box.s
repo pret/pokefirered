@@ -65,13 +65,13 @@ _0806939E:
 	movs r1, 0x80
 	lsls r1, 2
 	movs r0, 0
-	bl sub_814FF98
+	bl TextWindow_LoadTilesStdFrame1
 	b _080693E2
 	.align 2, 0
 _080693BC: .4byte gUnknown_203ADFA
 _080693C0: .4byte gTextFlags
 _080693C4:
-	bl sub_8069A38
+	bl IsMsgSignPost
 	lsls r0, 24
 	cmp r0, 0
 	bne _080693D4

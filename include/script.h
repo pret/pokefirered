@@ -72,6 +72,7 @@ void sub_80699A4(void);
 void sub_8069970(void);
 void sub_8069A20(void);
 void sub_8069A2C(void);
+bool8 IsMsgSignPost(void);
 
 extern const u8 *gRAMScriptPtr;
 

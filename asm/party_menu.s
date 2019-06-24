@@ -7026,7 +7026,7 @@ sub_81220D4: @ 81220D4
 	adds r0, r4, 0
 	movs r1, 0x4F
 	movs r2, 0xE0
-	bl TextWindow_SetBubbleFrame_841F1C8
+	bl TextWindow_LoadResourcesStdFrame0
 	adds r0, r4, 0
 	movs r1, 0x1
 	movs r2, 0x4F

@@ -211,7 +211,7 @@ void sub_810B858(void)
         InitWindows(gUnknown_84530E4);
     DeactivateAllTextPrinters();
     TextWindow_SetUserSelectedFrame(0, 0x64, 0xE0);
-    TextWindow_SetBubbleFrame_841F1C8(0, 0x6D, 0xD0);
+    TextWindow_LoadResourcesStdFrame0(0, 0x6D, 0xD0);
     TextWindow_SetStdFrame0_WithPal(0, 0x81, 0xC0);
     LoadPalette(gUnknown_8453098, 0xF0, 0x20);
     for (i = 0; i < 3; i++)

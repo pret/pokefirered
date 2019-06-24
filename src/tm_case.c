@@ -1298,7 +1298,7 @@ static void InitWindowTemplatesAndPals(void)
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
     TextWindow_SetUserSelectedFrame(0, 0x5B, 0xE0);
-    TextWindow_SetBubbleFrame_841F1C8(0, 0x64, 0xB0);
+    TextWindow_LoadResourcesStdFrame0(0, 0x64, 0xB0);
     TextWindow_SetStdFrame0_WithPal(0, 0x78, 0xD0);
     LoadPalette(gTMCaseMainWindowPalette, 0xF0, 0x20);
     LoadPalette(gTMCaseMainWindowPalette, 0xA0, 0x20);

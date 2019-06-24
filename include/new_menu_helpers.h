@@ -22,15 +22,22 @@ void DrawDialogueFrame(u8 windowId, bool8 transfer);
 void sub_80F7974(const u8 *);
 u8 GetStartMenuWindowId(void);
 void sub_80F7998(void);
-void DecompressAndLoadBgGfxUsingHeap2(u8 bgId, const void *src, u32 size, u16 offset, u8 mode);
 void DrawStdWindowFrame(u8 windowId, bool8 copyNow);
 void InitStandardTextBoxWindows(void);
 void ResetBg0(void);
+void ResetBgPositions(void);
+void CopyRectIntoAltRect(u8 bgId, u16 *dest, u8 left, u8 top, u8 width, u8 height);
+void SetBgRectPal(u8 bgId, u8 left, u8 top, u8 width, u8 height, u8 palette);
+void DecompressAndLoadBgGfxUsingHeap(u8 bgId, const void *src, u32 size, u16 offset, u8 mode);
+void DecompressAndLoadBgGfxUsingHeap2(u8 bgId, const void *src, u32 size, u16 offset, u8 mode);
 void Menu_LoadStdPalAt(u16);
 void * MallocAndDecompress(const void * src, u32 * size);
 u16 sub_80F796C(void);
-void SetBgRectPal(u8 bgId, u8 left, u8 top, u8 width, u8 height, u8 palette);
-void DecompressAndLoadBgGfxUsingHeap(u8 bgId, const void * gfx, u32 size, u16 a3, u8 a4);
 void ClearStdWindowAndFrame(u8 taskId, bool8 copyNow);
+void sub_80F77B8(void);
+void sub_80F6E9C(void);
+void AddTextPrinterWithCustomSpeedForMessage(bool8 allowSkippingDelayWithButtonPress, u8 speed);
+void AddTextPrinterDiffStyle(bool8 allowSkippingDelayWithButtonPress);
+void AddTextPrinterForMessage(bool8 allowSkippingDelayWithButtonPress);
 
 #endif // GUARD_NEW_MENU_HELPERS_H

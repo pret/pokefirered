@@ -57,7 +57,7 @@ void sub_814FE6C(u8 windowId, u16 destOffset, u8 palIdx)
     LoadPalette(stdpal_get(2), palIdx, 32);
 }
 
-void TextWindow_SetBubbleFrame_841F1C8(u8 windowId, u16 destOffset, u8 palIdx)
+void TextWindow_LoadResourcesStdFrame0(u8 windowId, u16 destOffset, u8 palIdx)
 {
     LoadBgTiles(GetWindowAttribute(windowId, WINDOW_BG), gUnknown_841F1C8, 0x280, destOffset);
     LoadPalette(stdpal_get(0), palIdx, 32);
@@ -80,7 +80,7 @@ void sub_814FF6C(u8 windowId, u16 destOffset)
     LoadBgTiles(GetWindowAttribute(windowId, WINDOW_BG), gStdFrame0, 0x120, destOffset);
 }
 
-void sub_814FF98(u8 windowId, u16 destOffset)
+void TextWindow_LoadTilesStdFrame1(u8 windowId, u16 destOffset)
 {
     LoadBgTiles(GetWindowAttribute(windowId, WINDOW_BG), gStdFrame1, 0x280, destOffset);
 }

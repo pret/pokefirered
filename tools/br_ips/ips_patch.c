@@ -2,24 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
-
-#ifdef _MSC_VER
-
-#define FATAL_ERROR(format, ...)          \
-do {                                      \
-    fprintf(stderr, format, __VA_ARGS__); \
-    exit(1);                              \
-} while (0)
-
-#else
-
-#define FATAL_ERROR(format, ...)            \
-do {                                        \
-    fprintf(stderr, format, ##__VA_ARGS__); \
-    exit(1);                                \
-} while (0)
-
-#endif // _MSC_VER
+#include "global.h"
 
 static const char SPLASH[] = "Small IPS patch utility\n"
                              "Created by PikalaxALT on 23 June 2019 All Rights Reserved\n";

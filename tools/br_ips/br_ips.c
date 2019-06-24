@@ -4,29 +4,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
-
-#ifdef _MSC_VER
-
-#define FATAL_ERROR(format, ...)          \
-do {                                      \
-    fprintf(stderr, format, __VA_ARGS__); \
-    exit(1);                              \
-} while (0)
-
-#else
-
-#define FATAL_ERROR(format, ...)            \
-do {                                        \
-    fprintf(stderr, format, ##__VA_ARGS__); \
-    exit(1);                                \
-} while (0)
-
-#endif // _MSC_VER
-
-#ifndef _SSIZE_T
-#define _SSIZE_T
-typedef int ssize_t;
-#endif // _SSIZE_T
+#include "global.h"
 
 static const char SPLASH[] = "IPS patch creator for undisassembled data\n"
                              "Created by PikalaxALT on 23 June 2019 All Rights Reserved\n";
@@ -42,14 +20,9 @@ static const char HELP[] = "br_ips\n"
                            "Options:\n"
                            "    -h - show this message and exit\n";
 
-struct Hunk {
-    uint32_t offset;
-    size_t size;
-};
-
-static ssize_t getline(char ** lineptr, size_t * n, FILE * stream) {
+static int getline(char ** lineptr, size_t * n, FILE * stream) {
     // Static implementation of GNU getline
-    ssize_t i = 0;
+    int i = 0;
     int c;
     size_t size = *n;
     char * buf = *lineptr;
@@ -62,31 +35,28 @@ static ssize_t getline(char ** lineptr, size_t * n, FILE * stream) {
         if (feof(stream)) return -1;
         c = getc(stream);
         buf[i++] = c;
-        if (i == size) {
+        if (i == size -1) {
             size <<= 1;
             buf = realloc(buf, size);
             if (buf == NULL) return -1;     
         }
     } while (c != '\n');
-    
+    buf[i] = 0;
     *lineptr = buf;
     *n = size;
     return i;
 }
 
-static void getIncbinsFromFile(struct Hunk ** hunks, size_t * num, size_t * maxnum, const char * fname, char ** strbuf, size_t * buffersize) {
+static void getIncbinsFromFile(hunk_t ** hunks, size_t * num, size_t * maxnum, const char * fname, char ** strbuf, size_t * buffersize) {
     // Recursively find incbinned segments and encode them as hunks.
     FILE * file = fopen(fname, "r");
     if (file == NULL) FATAL_ERROR("unable to open file \"%s\" for reading\n", fname);
-    struct Hunk * data = *hunks;
+    hunk_t * data = *hunks;
     size_t nhunks = *num;
     size_t maxnhunks = *maxnum;
     int line_n = 0; // for error prints
     while (getline(strbuf, buffersize, file) > 0) {
         line_n++;
-        // Replace the newline character with NUL
-        char * nl_p = strchr(*strbuf, '\n');
-        if (nl_p != NULL) *nl_p = 0;
         // If another file is included by this one, recurse into it.
         char * include = strstr(*strbuf, ".include");
         if (include != NULL) {
@@ -136,7 +106,7 @@ static void getIncbinsFromFile(struct Hunk ** hunks, size_t * num, size_t * maxn
             size_t trueSize = incbinSize <= 0xFFFF ? incbinSize : 0xFFFF;
             if (nhunks >= maxnhunks) {
                 maxnhunks <<= 1;
-                data = realloc(data, maxnhunks * sizeof(struct Hunk));
+                data = realloc(data, maxnhunks * sizeof(hunk_t));
                 if (data == NULL) FATAL_ERROR("unable to reallocate hunks buffer\n");
             }
             data[nhunks].offset = incbinOffset;
@@ -159,7 +129,7 @@ static void getIncbinsFromFile(struct Hunk ** hunks, size_t * num, size_t * maxn
     *maxnum = maxnhunks;
 }
 
-static struct Hunk * getAllIncbins(FILE * ld_script, size_t * num_p) {
+static hunk_t * getAllIncbins(FILE * ld_script, size_t * num_p) {
     // Parse the ld script.
     // Strict adherence to syntax is expected.
     char * line = NULL;
@@ -168,7 +138,7 @@ static struct Hunk * getAllIncbins(FILE * ld_script, size_t * num_p) {
     size_t maxnum = 256;
     size_t num = 0;
     // Allocate the hunks array.
-    struct Hunk * hunks = malloc(256 * sizeof(struct Hunk));
+    hunk_t * hunks = malloc(256 * sizeof(hunk_t));
     if (hunks == NULL) FATAL_ERROR("failed to allocate hunks buffer\n");
     while (getline(&line, &linesiz, ld_script) > 0) {
         char * endptr;
@@ -200,16 +170,16 @@ static int cmp_baserom(const void * a, const void * b) {
     // Comparison function for sorting Hunk structs.
     // For more details, please refer to the qsort man pages.
     // See also the function "collapseIncbins" below.
-    const struct Hunk * aa = (const struct Hunk *)a;
-    const struct Hunk * bb = (const struct Hunk *)b;
+    const hunk_t * aa = (const hunk_t *)a;
+    const hunk_t * bb = (const hunk_t *)b;
     return (aa->offset > bb->offset) - (aa->offset < bb->offset);
 }
 
-static void collapseIncbins(struct Hunk * hunks, size_t * num_p) {
+static void collapseIncbins(hunk_t * hunks, size_t * num_p) {
     // This function merges adjacent hunks where possible.
     size_t num = *num_p;
     // Sort the array by offset increasing.
-    qsort(hunks, num, sizeof(struct Hunk), cmp_baserom);
+    qsort(hunks, num, sizeof(hunk_t), cmp_baserom);
     // We stop at num - 1 because we need to be able to look one
     // entry ahead in the hunks array.
     for (int i = 0; i < num - 1; i++) {
@@ -269,7 +239,7 @@ static void collapseIncbins(struct Hunk * hunks, size_t * num_p) {
     *num_p = num;
 }
 
-static void writePatch(const char * filename, const struct Hunk * hunks, size_t num, FILE * rom) {
+static void writePatch(const char * filename, const hunk_t * hunks, size_t num, FILE * rom) {
     // Create an IPS patch.
     // The file is headed with a magic code which is "PATCH" in ASCII.
     // Following that are the "hunks": 3-byte offset, 2-byte size, and
@@ -323,7 +293,7 @@ int main(int argc, char ** argv) {
     if (ld_script == NULL) FATAL_ERROR("unable to open \"ld_script.txt\" for reading\n");
     // Find all instances where segments of baserom.gba are incbinned literaly.
     size_t num = 0;
-    struct Hunk * hunks = getAllIncbins(ld_script, &num);
+    hunk_t * hunks = getAllIncbins(ld_script, &num);
     fclose(ld_script);
     if (num == 0) {
         // If this line is printed, the script was unable to find any

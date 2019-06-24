@@ -26,7 +26,7 @@ static EWRAM_DATA u16 gUnknown_203AB5C = {0};
 static EWRAM_DATA void *gUnknown_203AB60[0x20] = {NULL};
 static EWRAM_DATA u8 sStartMenuWindowId = {0};
 
-static const u8 gUnknown_841F428[] = { 8, 4, 1, 0, };
+static const u8 gUnknown_841F428[] = { 8, 4, 1 };
 
 static const struct WindowTemplate sStandardTextBox_WindowTemplates[] = 
 {
@@ -39,7 +39,7 @@ static const struct WindowTemplate sStandardTextBox_WindowTemplates[] =
         .paletteNum = DLG_WINDOW_PALETTE_NUM,
         .baseBlock = 0x198,
     },
-    DUMMY_WIN_TEMPLATE,
+    DUMMY_WIN_TEMPLATE
 };
 
 static const struct WindowTemplate sYesNo_WindowTemplate = 
@@ -142,20 +142,20 @@ static const struct FontInfo gFontInfos[] =
         .fgColor = 0x1,
         .bgColor = 0x2,
         .shadowColor = 0xF,
-    },
+    }
 };
 
 
 static const u8 gMenuCursorDimensions[][2] = 
 {
-    { 0x8,  0xD, },
-    { 0x8,  0xE, },
-    { 0x8,  0xE, },
-    { 0x8,  0xE, },
-    { 0x8,  0xE, },
-    { 0x8,  0xE, },
-    { 0x8, 0x10, },
-    { 0x0,  0x0, },
+    { 0x8,  0xD },
+    { 0x8,  0xE },
+    { 0x8,  0xE },
+    { 0x8,  0xE },
+    { 0x8,  0xE },
+    { 0x8,  0xE },
+    { 0x8, 0x10 },
+    { 0x0,  0x0 }
 };
 
 static u16 CopyDecompressedTileDataToVram(u8 bgId, const void *src, u16 size, u16 offset, u8 mode);
@@ -202,7 +202,7 @@ void DoScheduledBgTilemapCopiesToVram(void)
 void ResetTempTileDataBuffers(void)
 {
     int i;
-    for (i = 0; i < (s32)ARRAY_COUNT(gUnknown_203AB60); i++)
+    for (i = 0; i < (s32)NELEMS(gUnknown_203AB60); i++)
     {
         gUnknown_203AB60[i] = NULL;
     }
@@ -234,7 +234,7 @@ bool8 FreeTempTileDataBuffersIfPossible(void)
 void *DecompressAndCopyTileDataToVram(u8 bgId, const void *src, u32 size, u16 offset, u8 mode)
 {
     u32 sizeOut;
-    if (gUnknown_203AB5C < ARRAY_COUNT(gUnknown_203AB60))
+    if (gUnknown_203AB5C < NELEMS(gUnknown_203AB60))
     {
         void *ptr = MallocAndDecompress(src, &sizeOut);
         if (!size)
@@ -252,7 +252,7 @@ void *DecompressAndCopyTileDataToVram(u8 bgId, const void *src, u32 size, u16 of
 void *DecompressAndCopyTileDataToVram2(u8 bgId, const void *src, u32 size, u16 offset, u8 mode)
 {
     u32 sizeOut;
-    if (gUnknown_203AB5C < ARRAY_COUNT(gUnknown_203AB60))
+    if (gUnknown_203AB5C < NELEMS(gUnknown_203AB60))
     {
         void *ptr = MallocAndDecompress(src, &sizeOut);
         if (sizeOut > size)
@@ -285,8 +285,8 @@ void DecompressAndLoadBgGfxUsingHeap2(u8 bgId, const void *src, u32 size, u16 of
 {
     u32 sizeOut;
     void *ptr = MallocAndDecompress(src, &sizeOut);
-        if (sizeOut > size)
-            sizeOut = size;
+    if (sizeOut > size)
+        sizeOut = size;
     if (ptr)
     {
         u8 taskId = CreateTask(TaskFreeBufAfterCopyingTileDataToVram, 0);
@@ -308,7 +308,7 @@ void *MallocAndDecompress(const void *src, u32 *size)
 {
     void *ptr;
     u8 *sizeAsBytes = (u8 *)size;
-    u8 *srcAsBytes = (u8 *)src;
+    const u8 *srcAsBytes = src;
 
     sizeAsBytes[0] = srcAsBytes[1];
     sizeAsBytes[1] = srcAsBytes[2];
@@ -324,7 +324,7 @@ void *MallocAndDecompress(const void *src, u32 *size)
 static u16 CopyDecompressedTileDataToVram(u8 bgId, const void *src, u16 size, u16 offset, u8 mode)
 {
     switch (mode)
-    { // different to EM
+    {
     case 1:
         break;
     case 0:        
@@ -413,8 +413,8 @@ u16 AddTextPrinterParameterized2(u8 windowId, u8 fontId, const u8 *str, u8 speed
     printer.y = 1;
     printer.currentX = 0;
     printer.currentY = 1;
-    printer.letterSpacing = 1; // different to EM
-    printer.lineSpacing = 1; // different to EM
+    printer.letterSpacing = 1;
+    printer.lineSpacing = 1;
     printer.unk = 0;
     printer.fgColor = fgColor;
     printer.bgColor = bgColor;
@@ -426,11 +426,11 @@ u16 AddTextPrinterParameterized2(u8 windowId, u8 fontId, const u8 *str, u8 speed
 void AddTextPrinterDiffStyle(bool8 allowSkippingDelayWithButtonPress)
 {
     u8 result;
-    void *nptr = NULL; // This is required for matching
+    void *nptr = NULL;
 
     gTextFlags.canABSpeedUpPrint = allowSkippingDelayWithButtonPress;    
     result = ContextNpcGetTextColor();
-    if (!result)
+    if (result == 0)
         AddTextPrinterParameterized2(0, 4, gStringVar4, GetTextSpeedSetting(), nptr, 8, 1, 3);
     else if (result == 1)
         AddTextPrinterParameterized2(0, 5, gStringVar4, GetTextSpeedSetting(), nptr, 4, 1, 3);
@@ -671,7 +671,7 @@ u8 sub_80F78E0(u8 height)
     {
         struct WindowTemplate wTemp1, wTemp2;
         SetWindowTemplateFields(&wTemp1, 0, 0x16, 1, 7, height * 2 - 1, DLG_WINDOW_PALETTE_NUM, 0x13D);
-        wTemp2 = wTemp1; // This is required for matching
+        wTemp2 = wTemp1;
         sStartMenuWindowId = AddWindow(&wTemp2);
         PutWindowTilemap(sStartMenuWindowId);
     }

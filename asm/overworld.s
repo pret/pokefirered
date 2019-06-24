@@ -3225,8 +3225,8 @@ sub_8056420: @ 8056420
 	bx r0
 	thumb_func_end sub_8056420
 
-	thumb_func_start is_c1_link_related_active
-is_c1_link_related_active: @ 805642C
+	thumb_func_start IsUpdateLinkStateCBActive
+IsUpdateLinkStateCBActive: @ 805642C
 	push {lr}
 	ldr r0, _0805643C @ =gMain
 	ldr r1, [r0]
@@ -3243,7 +3243,7 @@ _08056444:
 _08056446:
 	pop {r1}
 	bx r1
-	thumb_func_end is_c1_link_related_active
+	thumb_func_end IsUpdateLinkStateCBActive
 
 	thumb_func_start sub_805644C
 sub_805644C: @ 805644C
@@ -3662,7 +3662,7 @@ _080567D8: .4byte sub_80565B4
 	thumb_func_start CB2_ReturnToField
 CB2_ReturnToField: @ 80567DC
 	push {lr}
-	bl is_c1_link_related_active
+	bl IsUpdateLinkStateCBActive
 	cmp r0, 0x1
 	bne _080567F4
 	ldr r0, _080567F0 @ =c2_exit_to_overworld_2_link
@@ -6144,7 +6144,7 @@ _08057C72:
 	bl sub_805833C
 	cmp r0, 0x1
 	bls _08057CA8
-	bl is_c1_link_related_active
+	bl IsUpdateLinkStateCBActive
 	cmp r0, 0x1
 	bne _08057CA8
 	bl sub_800A00C
@@ -6976,7 +6976,7 @@ _08058240: .4byte gUnknown_81BB9F0
 	thumb_func_start sub_8058244
 sub_8058244: @ 8058244
 	push {lr}
-	bl is_c1_link_related_active
+	bl IsUpdateLinkStateCBActive
 	cmp r0, 0
 	bne _08058252
 	movs r0, 0
@@ -7009,7 +7009,7 @@ sub_8058274: @ 8058274
 	bl sub_800B248
 	cmp r0, 0x1
 	bls _080582D8
-	bl is_c1_link_related_active
+	bl IsUpdateLinkStateCBActive
 	cmp r0, 0x1
 	bne _080582D8
 	bl sub_800A00C
@@ -7062,7 +7062,7 @@ sub_80582E0: @ 80582E0
 	bl sub_805833C
 	cmp r0, 0x1
 	bls _08058304
-	bl is_c1_link_related_active
+	bl IsUpdateLinkStateCBActive
 	cmp r0, 0x1
 	bne _08058304
 	bl sub_800A00C

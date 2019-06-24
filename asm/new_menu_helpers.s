@@ -814,7 +814,7 @@ sub_80F6D5C: @ 80F6D5C
 	ands r1, r2
 	orrs r1, r0
 	strb r1, [r3]
-	bl sub_80CBE00
+	bl ContextNpcGetTextColor
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -2040,7 +2040,7 @@ _080F77A4:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r3, 0xF
-	bl sub_810EDC4
+	bl DrawDialogFrameWithCustomTileAndPalette
 	pop {r4,r5}
 	pop {r0}
 	bx r0

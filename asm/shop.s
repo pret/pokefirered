@@ -23,7 +23,7 @@ sub_809AAB0: @ 809AAB0
 	strb r0, [r4, 0x16]
 	movs r0, 0
 	strh r0, [r4, 0xC]
-	bl sub_80CBE00
+	bl ContextNpcGetTextColor
 	lsls r0, 24
 	cmp r0, 0
 	bne _0809AAF0
@@ -515,7 +515,7 @@ _0809AEA0: .4byte gTasks
 _0809AEA4: .4byte sub_809AE00
 _0809AEA8: .4byte sub_809ADE4
 _0809AEAC:
-	bl VblankHblankHandlerSetZero
+	bl SetVBlankHBlankCallbacksToNull
 	str r4, [sp, 0x8]
 	movs r1, 0xE0
 	lsls r1, 19
@@ -2365,7 +2365,7 @@ sub_809BD8C: @ 809BD8C
 	adds r0, r4, 0x2
 	ldr r6, _0809BDD0 @ =gUnknown_2039934
 	ldrh r1, [r6, 0x14]
-	bl sub_80BF848
+	bl AdjustQuantityAccordingToDPadInput
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

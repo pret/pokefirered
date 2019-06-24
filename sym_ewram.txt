@@ -1010,15 +1010,9 @@ gUnknown_20399C0: @ 20399C0
 gUnknown_20399C4: @ 20399C4
 	.space 0x4
 
-gUnknown_20399C8: @ 20399C8
-	.space 0x4
+	.include "src/menu_helpers.o"
 
-gUnknown_20399CC: @ 20399CC
-	.space 0x4
-
-gUnknown_20399D0: @ 20399D0
-	.space 0x4
-
+	.align 2
 gUnknown_20399D4: @ 20399D4
 	.space 0x4
 

@@ -275,7 +275,7 @@ static bool8 ItemPc_DoGfxSetup(void)
     switch (gMain.state)
     {
     case 0:
-        VblankHblankHandlerSetZero();
+        SetVBlankHBlankCallbacksToNull();
         clear_scheduled_bg_copies_to_vram();
         gMain.state++;
         break;
@@ -415,7 +415,7 @@ static void Task_ItemPcWaitFadeAndBail(u8 taskId)
 
 static bool8 ItemPc_InitBgs(void)
 {
-    InitBgReg();
+    ResetAllBgsCoordinatesAndBgCntRegs();
     sBg1TilemapBuffer = Alloc(0x800);
     if (sBg1TilemapBuffer == NULL)
         return FALSE;
@@ -982,7 +982,7 @@ static void Task_ItemPcHandleWithdrawMultiple(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
-    if (sub_80BF848(&data[8], data[2]) == TRUE)
+    if (AdjustQuantityAccordingToDPadInput(&data[8], data[2]) == TRUE)
         sub_810E670(data[8]);
     else if (JOY_NEW(A_BUTTON))
     {

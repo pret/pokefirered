@@ -3377,7 +3377,7 @@ _0808D3DC:
 	ldr r1, _0808D40C @ =0x00000ce2
 	adds r0, r1
 	ldrh r0, [r0]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808D404
@@ -3491,7 +3491,7 @@ _0808D4D8:
 	ldr r1, _0808D504 @ =0x00000ce2
 	adds r0, r1
 	ldrh r0, [r0]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808D508
@@ -4109,7 +4109,7 @@ _0808DA20:
 	ldr r2, _0808DA54 @ =0x00000ce2
 	adds r0, r2
 	ldrh r0, [r0]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808DAA0
@@ -4154,7 +4154,7 @@ _0808DA90:
 	ldr r2, _0808DAA8 @ =0x00000ce2
 	adds r0, r1, r2
 	ldrh r0, [r0]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808DAAC
@@ -4971,7 +4971,7 @@ _0808E166:
 	ldr r1, _0808E17C @ =0x00000ce2
 	adds r0, r1
 	ldrh r0, [r0]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808E180
@@ -5275,7 +5275,7 @@ _0808E3FC:
 	ldr r1, _0808E418 @ =0x00000ce2
 	adds r0, r1
 	ldrh r0, [r0]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808E41C
@@ -18314,7 +18314,7 @@ _08094A48: .4byte gUnknown_20397B0
 _08094A4C: .4byte 0x00000ce2
 _08094A50:
 	ldrh r0, [r1]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	bne _08094A68
@@ -18344,7 +18344,7 @@ _08094A70:
 _08094A8C: .4byte 0x00000ce2
 _08094A90:
 	ldrh r0, [r1]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

@@ -253,7 +253,7 @@ _08107F60:
 	.4byte _081080D8
 	.4byte _081080DE
 _08107FB0:
-	bl VblankHblankHandlerSetZero
+	bl SetVBlankHBlankCallbacksToNull
 	bl clear_scheduled_bg_copies_to_vram
 	b _08108104
 _08107FBA:
@@ -520,7 +520,7 @@ _081081CC: .4byte gUnknown_203AD1C
 	thumb_func_start sub_81081D0
 sub_81081D0: @ 81081D0
 	push {r4,r5,lr}
-	bl InitBgReg
+	bl ResetAllBgsCoordinatesAndBgCntRegs
 	ldr r5, _08108230 @ =gUnknown_203AD14
 	movs r4, 0x80
 	lsls r4, 4
@@ -3551,7 +3551,7 @@ _081099EC:
 	strb r0, [r4]
 	ldr r0, _08109A10 @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4035,7 +4035,7 @@ sub_8109DEC: @ 8109DEC
 	adds r0, r4, 0
 	adds r0, 0x10
 	ldrh r1, [r4, 0x4]
-	bl sub_80BF848
+	bl AdjustQuantityAccordingToDPadInput
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4817,7 +4817,7 @@ sub_810A468: @ 810A468
 	lsrs r4, r0, 16
 	adds r6, r4, 0
 	adds r0, r4, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -5296,7 +5296,7 @@ sub_810A85C: @ 810A85C
 	adds r0, r5, 0
 	adds r0, 0x10
 	ldrh r1, [r5, 0x4]
-	bl sub_80BF848
+	bl AdjustQuantityAccordingToDPadInput
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -5659,7 +5659,7 @@ sub_810AB88: @ 810AB88
 	adds r0, r4, 0
 	adds r0, 0x10
 	ldrh r1, [r4, 0x4]
-	bl sub_80BF848
+	bl AdjustQuantityAccordingToDPadInput
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

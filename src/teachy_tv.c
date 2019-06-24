@@ -475,7 +475,7 @@ static void TeachyTvMainCallback(void)
         sResources->savedCallback = NULL;
         sResources->grassAnimDisabled = 0;
         sResources->scrollIndicatorArrowPairId = 0xFF;
-        VblankHblankHandlerSetZero();
+        SetVBlankHBlankCallbacksToNull();
         clear_scheduled_bg_copies_to_vram();
         ScanlineEffect_Stop();
         FreeAllSpritePalettes();
@@ -521,7 +521,7 @@ static void TeachyTvMainCallback(void)
 
 static void TeachyTvSetupBg(void)
 {
-    InitBgReg();
+    ResetAllBgsCoordinatesAndBgCntRegs();
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sBgTemplates, 4);
     SetBgTilemapBuffer(1, sResources->buffer1);
@@ -817,7 +817,7 @@ static void TTVcmd_NpcMoveAndSetupTextPrinter(u8 taskId)
 static void TTVcmd_IdleIfTextPrinterIsActive(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    if (!sub_80BF518(0))
+    if (!RunTextPrinters_CheckActive(0))
         ++data[3];
 }
 
@@ -945,7 +945,7 @@ static const u8 sGrassAnimArray[] =
 static void TTVcmd_IdleIfTextPrinterIsActive2(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    if (!sub_80BF518(0))
+    if (!RunTextPrinters_CheckActive(0))
         ++data[3];
 }
 

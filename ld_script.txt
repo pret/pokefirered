@@ -151,7 +151,7 @@ SECTIONS {
         asm/pc_screen_effect.o(.text);
         asm/fldeff_poison.o(.text);
         src/fldeff_berrytree.o(.text);
-        asm/field_special_scene.o(.text);
+        src/field_special_scene.o(.text);
         asm/safari_zone.o(.text);
         src/item_use.o(.text);
         asm/battle_anim_effects_1.o(.text);
@@ -176,7 +176,7 @@ SECTIONS {
         asm/easy_chat.o(.text);
         asm/mon_markings.o(.text);
         asm/mail.o(.text);
-        asm/menu_helpers.o(.text);
+        src/menu_helpers.o(.text);
         asm/script_pokemon_util_80BF8FC.o(.text);
         src/heal_location.o(.text);
         asm/region_map.o(.text);

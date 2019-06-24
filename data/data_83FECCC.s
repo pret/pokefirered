@@ -553,21 +553,8 @@ gUnknown_841F1C8:: @ 841F1C8
 gTMCaseMainWindowPalette:: @ 841F408
 	.incbin "graphics/tm_case/unk_841F408.gbapal"
 
-gUnknown_841F428:: @ 841F428
-	.incbin "baserom.gba", 0x41F428, 0x4
-
-sStandardTextBox_WindowTemplates:: @ 841F42C
-	.incbin "baserom.gba", 0x41F42C, 0x10
-
-sYesNo_WindowTemplate:: @ 841F43C
-	.incbin "baserom.gba", 0x41F43C, 0x8
-
-gUnknown_841F444:: @ 841F444
-	.incbin "baserom.gba", 0x41F444, 0x60
-
-gUnknown_841F4A4:: @ 841F4A4
-	.incbin "baserom.gba", 0x41F4A4, 0x10
-
+	.section .rodata.841F4B4
+	.align 2
 gUnknown_841F4B4:: @ 841F4B4
 	.incbin "baserom.gba", 0x41F4B4, 0x1F534
 

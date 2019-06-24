@@ -1329,7 +1329,7 @@ sub_806F7A8: @ 806F7A8
 	lsrs r0, 24
 	movs r1, 0
 	bl ClearStdWindowAndFrame
-	bl remove_start_menu_window_maybe
+	bl RemoveStartMenuWindow
 	movs r0, 0
 	bl sub_8112EDC
 	bl sub_806FCF4
@@ -2198,7 +2198,7 @@ sub_806FEA0: @ 806FEA0
 	lsrs r0, 24
 	movs r1, 0x1
 	bl ClearStdWindowAndFrame
-	bl remove_start_menu_window_maybe
+	bl RemoveStartMenuWindow
 	bl sub_80696C0
 	bl ScriptContext2_Disable
 	pop {r0}

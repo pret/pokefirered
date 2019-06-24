@@ -2471,12 +2471,12 @@ void sub_8112FE4(const u8 * a0)
     AddTextPrinterParameterized4(gUnknown_203B020, 0x02, 2, 5, 1, 1, &gUnknown_8456930, -1, a0);
 }
 
-void sub_8113018(const u8 * a0, u8 a1)
+void sub_8113018(const u8 * text, u8 mode)
 {
     sub_8112FD0();
-    sub_8112FE4(a0);
-    if (a1)
-        CopyWindowToVram(gUnknown_203B020, a1);
+    sub_8112FE4(text);
+    if (mode)
+        CopyWindowToVram(gUnknown_203B020, mode);
 }
 
 void sub_8113044(void)

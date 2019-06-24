@@ -24,10 +24,139 @@
 static EWRAM_DATA bool8 gUnknown_203AB58[4] = {FALSE}; // knizz: bgmaps_that_need_syncing
 static EWRAM_DATA u16 gUnknown_203AB5C = {0};
 static EWRAM_DATA void *gUnknown_203AB60[0x20] = {NULL};
+static EWRAM_DATA u8 sStartMenuWindowId = {0};
 
-extern const struct WindowTemplate sStandardTextBox_WindowTemplates[];
-extern const struct WindowTemplate sYesNo_WindowTemplate;
-EWRAM_DATA u8 sStartMenuWindowId;
+static const u8 gUnknown_841F428[] = { 8, 4, 1, 0, };
+
+static const struct WindowTemplate sStandardTextBox_WindowTemplates[] = 
+{
+    {
+        .bg = 0,
+        .tilemapLeft = 0x2,
+        .tilemapTop = 0xF,
+        .width = 0x1A,
+        .height = 0x4,
+        .paletteNum = DLG_WINDOW_PALETTE_NUM,
+        .baseBlock = 0x198,
+    },
+    DUMMY_WIN_TEMPLATE,
+};
+
+static const struct WindowTemplate sYesNo_WindowTemplate = 
+{
+    .bg = 0,
+    .tilemapLeft = 0x15,
+    .tilemapTop = 0x9,
+    .width = 0x6,
+    .height = 0x4,
+    .paletteNum = DLG_WINDOW_PALETTE_NUM,
+    .baseBlock = 0x125,
+};
+
+static const struct FontInfo gFontInfos[] = 
+{
+    {
+        .fontFunction = Font0Func,
+        .maxLetterWidth = 0x8,
+        .maxLetterHeight = 0xD,
+        .letterSpacing = 0x0,
+        .lineSpacing = 0x0,
+        .unk = 0x0,
+        .fgColor = 0x2,
+        .bgColor = 0x1,
+        .shadowColor = 0x3,
+    },
+    {
+        .fontFunction = Font1Func,
+        .maxLetterWidth = 0x8,
+        .maxLetterHeight = 0xE,
+        .letterSpacing = 0x0,
+        .lineSpacing = 0x0,
+        .unk = 0x0,
+        .fgColor = 0x2,
+        .bgColor = 0x1,
+        .shadowColor = 0x3,
+    },
+    {
+        .fontFunction = Font2Func,
+        .maxLetterWidth = 0xA,
+        .maxLetterHeight = 0xE,
+        .letterSpacing = 0x1,
+        .lineSpacing = 0x0,
+        .unk = 0x0,
+        .fgColor = 0x2,
+        .bgColor = 0x1,
+        .shadowColor = 0x3,
+    },
+    {
+        .fontFunction = Font3Func,
+        .maxLetterWidth = 0xA,
+        .maxLetterHeight = 0xE,
+        .letterSpacing = 0x1,
+        .lineSpacing = 0x0,
+        .unk = 0x0,
+        .fgColor = 0x2,
+        .bgColor = 0x1,
+        .shadowColor = 0x3,
+    },
+    {
+        .fontFunction = Font4Func,
+        .maxLetterWidth = 0xA,
+        .maxLetterHeight = 0xE,
+        .letterSpacing = 0x0,
+        .lineSpacing = 0x0,
+        .unk = 0x0,
+        .fgColor = 0x2,
+        .bgColor = 0x1,
+        .shadowColor = 0x3,
+    },
+    {
+        .fontFunction = Font5Func,
+        .maxLetterWidth = 0xA,
+        .maxLetterHeight = 0xE,
+        .letterSpacing = 0x0,
+        .lineSpacing = 0x0,
+        .unk = 0x0,
+        .fgColor = 0x2,
+        .bgColor = 0x1,
+        .shadowColor = 0x3,
+    },
+    {
+        .fontFunction = Font6Func,
+        .maxLetterWidth = 0x8,
+        .maxLetterHeight = 0x10,
+        .letterSpacing = 0x0,
+        .lineSpacing = 0x2,
+        .unk = 0x0,
+        .fgColor = 0x2,
+        .bgColor = 0x1,
+        .shadowColor = 0x3,
+    },
+    {
+        .fontFunction = NULL,
+        .maxLetterWidth = 0x8,
+        .maxLetterHeight = 0x8,
+        .letterSpacing = 0x0,
+        .lineSpacing = 0x0,
+        .unk = 0x0,
+        .fgColor = 0x1,
+        .bgColor = 0x2,
+        .shadowColor = 0xF,
+    },
+};
+
+
+static const u8 gMenuCursorDimensions[][2] = 
+{
+    { 0x8,  0xD, },
+    { 0x8,  0xE, },
+    { 0x8,  0xE, },
+    { 0x8,  0xE, },
+    { 0x8,  0xE, },
+    { 0x8,  0xE, },
+    { 0x8, 0x10, },
+    { 0x0,  0x0, },
+};
 
 static u16 CopyDecompressedTileDataToVram(u8 bgId, const void *src, u16 size, u16 offset, u8 mode);
 static void WindowFunc_DrawDialogueFrame(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum);
@@ -528,3 +657,109 @@ void DisplayYesNoMenuDefaultNo(void)
     CreateYesNoMenu(&sYesNo_WindowTemplate, 2, 0, 2, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM, 1);
 }
 
+u8 GetTextSpeedSetting(void)
+{
+    u32 speed;
+    if (gSaveBlock2Ptr->optionsTextSpeed > OPTIONS_TEXT_SPEED_FAST)
+        gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_MID;
+    return gUnknown_841F428[gSaveBlock2Ptr->optionsTextSpeed];
+}
+
+u8 sub_80F78E0(u8 height)
+{
+    if (sStartMenuWindowId == 0xFF)
+    {
+        struct WindowTemplate wTemp1, wTemp2;
+        SetWindowTemplateFields(&wTemp1, 0, 0x16, 1, 7, height * 2 - 1, DLG_WINDOW_PALETTE_NUM, 0x13D);
+        wTemp2 = wTemp1; // This is required for matching
+        sStartMenuWindowId = AddWindow(&wTemp2);
+        PutWindowTilemap(sStartMenuWindowId);
+    }
+    return sStartMenuWindowId;
+}
+
+u8 GetStartMenuWindowId(void)
+{
+    return sStartMenuWindowId;
+}
+
+void RemoveStartMenuWindow(void)
+{
+    if (sStartMenuWindowId != 0xFF)
+    {
+        RemoveWindow(sStartMenuWindowId);
+        sStartMenuWindowId = 0xFF;
+    }
+}
+
+static u16 GetDlgWindowBaseTileNum(void)
+{
+    return DLG_WINDOW_BASE_TILE_NUM;
+}
+
+u16 GetStdWindowBaseTileNum(void)
+{
+    return STD_WINDOW_BASE_TILE_NUM;
+}
+
+void sub_80F7974(const u8 * text)
+{
+    sub_814FE6C(sub_8112EB4(), DLG_WINDOW_BASE_TILE_NUM, 0x10 * DLG_WINDOW_PALETTE_NUM);
+    sub_8113018(text, 2);
+}
+
+void sub_80F7998(void)
+{
+    sub_8112EDC(2);
+}
+
+void sub_80F79A4(void)
+{
+    Menu_LoadStdPal();
+    sub_814FEEC(0, DLG_WINDOW_BASE_TILE_NUM, 0x10 * DLG_WINDOW_PALETTE_NUM);
+    TextWindow_SetUserSelectedFrame(0, STD_WINDOW_BASE_TILE_NUM, 0x10 * STD_WINDOW_PALETTE_NUM);
+}
+
+void SetDefaultFontsPointer(void)
+{
+    SetFontsPointer(&gFontInfos[0]);
+}
+
+u8 GetFontAttribute(u8 fontId, u8 attributeId)
+{
+    int result = 0;
+
+    switch (attributeId)
+    {
+    case FONTATTR_MAX_LETTER_WIDTH:
+        result = gFontInfos[fontId].maxLetterWidth;
+        break;
+    case FONTATTR_MAX_LETTER_HEIGHT:
+        result = gFontInfos[fontId].maxLetterHeight;
+        break;
+    case FONTATTR_LETTER_SPACING:
+        result = gFontInfos[fontId].letterSpacing;
+        break;
+    case FONTATTR_LINE_SPACING:
+        result = gFontInfos[fontId].lineSpacing;
+        break;
+    case FONTATTR_UNKNOWN:
+        result = gFontInfos[fontId].unk;
+        break;
+    case FONTATTR_COLOR_FOREGROUND:
+        result = gFontInfos[fontId].fgColor;
+        break;
+    case FONTATTR_COLOR_BACKGROUND:
+        result = gFontInfos[fontId].bgColor;
+        break;
+    case FONTATTR_COLOR_SHADOW:
+        result = gFontInfos[fontId].shadowColor;
+        break;
+    }
+    return result;
+}
+
+u8 GetMenuCursorDimensionByFont(u8 fontId, u8 whichDimension)
+{
+    return gMenuCursorDimensions[fontId][whichDimension];
+}

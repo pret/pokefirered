@@ -1054,7 +1054,7 @@ static void Task_OakSpeech19(u8 taskId)
     {
         gTasks[taskId].data[13] = AddWindow(&sNewGameAdventureIntroWindowTemplates[1]);
         PutWindowTilemap(gTasks[taskId].data[13]);
-        SetWindowBorderStyle(gTasks[taskId].data[13], 1, sub_80F796C(), 14);
+        SetWindowBorderStyle(gTasks[taskId].data[13], 1, GetStdWindowBaseTileNum(), 14);
         FillWindowPixelBuffer(gTasks[taskId].data[13], 0x11);
         sOakSpeechResources->unk_001C[0] = 1;
         sOakSpeechResources->unk_001C[1] = 2;
@@ -1246,7 +1246,7 @@ static void Task_OakSpeech26(u8 taskId)
                 data[3]--;
             else
             {
-                CreateYesNoMenu(&sNewGameAdventureIntroWindowTemplates[2], 2, 0, 2, sub_80F796C(), 14, 0);
+                CreateYesNoMenu(&sNewGameAdventureIntroWindowTemplates[2], 2, 0, 2, GetStdWindowBaseTileNum(), 14, 0);
                 gTasks[taskId].func = Task_OakSpeech27;
             }
         }
@@ -1850,7 +1850,7 @@ static void PrintNameChoiceOptions(u8 taskId, u8 state)
 
     data[13] = AddWindow(&sNewGameAdventureIntroWindowTemplates[3]);
     PutWindowTilemap(data[13]);
-    SetWindowBorderStyle(data[13], 1, sub_80F796C(), 14);
+    SetWindowBorderStyle(data[13], 1, GetStdWindowBaseTileNum(), 14);
     FillWindowPixelBuffer(gTasks[taskId].data[13], 0x11);
     AddTextPrinterParameterized(data[13], 2, gOtherText_NewName, 8, 1, 0, NULL);
     if (state == 0)

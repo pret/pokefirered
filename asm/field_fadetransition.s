@@ -245,7 +245,7 @@ _0807DCDC:
 sub_807DCE4: @ 807DCE4
 	push {lr}
 	bl ScriptContext2_Enable
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	bl sub_807DC00
 	ldr r0, _0807DD00 @ =task0A_nop_for_a_while
 	movs r1, 0xA
@@ -277,7 +277,7 @@ _0807DD1C:
 FieldCallback_ReturnToEventScript2: @ 807DD24
 	push {lr}
 	bl ScriptContext2_Enable
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	bl sub_807DC00
 	ldr r0, _0807DD40 @ =task0A_asap_script_env_2_enable_and_set_ctx_running
 	movs r1, 0xA
@@ -366,7 +366,7 @@ _0807DDCA:
 sub_807DDD0: @ 807DDD0
 	push {lr}
 	bl ScriptContext2_Enable
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	bl palette_bg_faded_fill_black
 	ldr r0, _0807DDEC @ =task_mpl_807DD60
 	movs r1, 0xA
@@ -434,7 +434,7 @@ _0807DE50:
 sub_807DE58: @ 807DE58
 	push {lr}
 	bl ScriptContext2_Enable
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	bl palette_bg_faded_fill_black
 	ldr r0, _0807DE74 @ =sub_807DDF0
 	movs r1, 0xA
@@ -563,7 +563,7 @@ _0807DF5E:
 	thumb_func_start sub_807DF64
 sub_807DF64: @ 807DF64
 	push {lr}
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	bl sub_8111CF0
 	movs r0, 0
 	bl sub_807DE78
@@ -575,7 +575,7 @@ sub_807DF64: @ 807DF64
 	thumb_func_start sub_807DF7C
 sub_807DF7C: @ 807DF7C
 	push {lr}
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	bl sub_8111CF0
 	movs r0, 0x1
 	bl sub_807DE78
@@ -587,7 +587,7 @@ sub_807DF7C: @ 807DF7C
 	thumb_func_start sub_807DF94
 sub_807DF94: @ 807DF94
 	push {lr}
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	bl pal_fill_for_maplights
 	bl sub_8111CF0
 	movs r0, 0x28
@@ -1112,7 +1112,7 @@ _0807E3E4:
 sub_807E3EC: @ 807E3EC
 	push {lr}
 	bl ScriptContext2_Enable
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	bl sub_807DC00
 	ldr r0, _0807E408 @ =task_mpl_807E3C8
 	movs r1, 0xA
@@ -2188,7 +2188,7 @@ sub_807EC34: @ 807EC34
 	.align 2, 0
 _0807EC6C: .4byte gTasks+0x8
 _0807EC70:
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	bl pal_fill_for_maplights
 	bl ScriptContext2_Enable
 	adds r0, r5, 0x2

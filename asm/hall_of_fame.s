@@ -2322,7 +2322,7 @@ _080F3082:
 	bl Free
 	str r4, [r5]
 _080F3090:
-	bl sub_80CA5A0
+	bl ReturnFromHallOfFamePC
 _080F3094:
 	pop {r4,r5}
 	pop {r0}

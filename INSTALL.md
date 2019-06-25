@@ -42,4 +42,14 @@ If only `.c` or `.s` files were changed, turn off the dependency scanning tempor
 
 	make -j$(nproc) NODEP=1
 
-**Note:** If the build command is not recognized on Linux, including the Linux environment used within Windows, run `nproc` and replace `$(nproc)` with the returned value (e.g.: `make -j4`). Because `nproc` is not available on macOS, the alternative is `sysctl -n hw.ncpu`.
+**Note (until further notice):** If this is your first time building Pokemon FireRed, an unmodified copy of Pokemon FireRed is required in the project root under the name `baserom.gba`. To generate this, you should run the following commands:
+
+    make ips_patch -C tools/br_ips
+	head -c 16777216 /dev/zero > tmp.bin
+	tools/br_ips/ips_patch tmp.bin baserom.ips baserom.gba
+	make compare -j$(nproc)
+	cp pokefirered.gba baserom.gba
+
+Alternatively, you can obtain an unmodified copy of Pokemon FireRed and use that as baserom.gba.  Make sure the SHA1 checksum matches with what's provided in [the README](README.md).
+
+**Note 2:** If the build command is not recognized on Linux, including the Linux environment used within Windows, run `nproc` and replace `$(nproc)` with the returned value (e.g.: `make -j4`). Because `nproc` is not available on macOS, the alternative is `sysctl -n hw.ncpu`.

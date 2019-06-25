@@ -327,7 +327,7 @@ void MultiBootStartMaster(struct MultiBootParam *mp, const u8 *srcp, int length,
     mp->probe_count = 0xd0;
 }
 
-int MultiBootCheckComplete(struct MultiBootParam *mp)
+bool32 MultiBootCheckComplete(struct MultiBootParam *mp)
 {
     if (mp->probe_count == 0xe9)
         return 1;

@@ -24,26 +24,29 @@ static int getline(char ** lineptr, size_t * n, FILE * stream) {
     // Static implementation of GNU getline
     int i = 0;
     int c;
+    if (n == NULL || lineptr == NULL || stream == NULL) return -1;
     size_t size = *n;
     char * buf = *lineptr;
-    if (size == 0) {
-        size = BUFSIZ;
-        buf = realloc(buf, BUFSIZ);
+    if (buf == NULL || size < 4) {
+        size = 128;
+        *lineptr = buf = realloc(buf, 128);
     }
     if (buf == NULL) return -1;
-    do {
-        if (feof(stream)) return -1;
+    while (1) {
         c = getc(stream);
+        if (c == EOF) break;
         buf[i++] = c;
-        if (i == size -1) {
+        if (c == '\n') break;
+        if (i == size - 1) {
             size <<= 1;
             buf = realloc(buf, size);
             if (buf == NULL) return -1;     
+            *lineptr = buf;
+            *n = size;
         }
-    } while (c != '\n');
+    }
+    if (i == 0) return -1;
     buf[i] = 0;
-    *lineptr = buf;
-    *n = size;
     return i;
 }
 

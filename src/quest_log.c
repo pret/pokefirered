@@ -1567,7 +1567,7 @@ void sub_81120AC(u8 taskId)
     {
         case 0:
             gUnknown_2031DD8 = 0;
-            sub_8055DC4();
+            Overworld_PlaySpecialMapMusic();
             sub_811229C();
             FillWindowPixelRect(gUnknown_203ADFE[0], 0xF, 0, 0, gUnknown_845661C[0].width * 8, gUnknown_845661C[0].height * 8);
             data[0]++;

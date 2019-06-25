@@ -718,7 +718,7 @@ static void TeachyTvQuitFadeControlAndTaskDel(u8 taskId)
         }
         else
         {
-            sub_8055DC4();
+            Overworld_PlaySpecialMapMusic();
             SetMainCallback2(sStaticResources.callback);
         }
         TeachyTvFree();

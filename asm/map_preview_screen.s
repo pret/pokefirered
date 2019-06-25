@@ -440,7 +440,7 @@ _080F8448:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080F853C
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	b _080F84EA
 _080F8458:
 	ldrh r0, [r4, 0x2]

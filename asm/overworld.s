@@ -2378,8 +2378,8 @@ sub_8055DB8: @ 8055DB8
 	bx r0
 	thumb_func_end sub_8055DB8
 
-	thumb_func_start sub_8055DC4
-sub_8055DC4: @ 8055DC4
+	thumb_func_start Overworld_PlaySpecialMapMusic
+Overworld_PlaySpecialMapMusic: @ 8055DC4
 	push {r4,r5,lr}
 	sub sp, 0x4
 	ldr r0, _08055DD8 @ =gUnknown_2031DD8
@@ -2462,7 +2462,7 @@ _08055E6C:
 	bx r0
 	.align 2, 0
 _08055E74: .4byte 0x00000131
-	thumb_func_end sub_8055DC4
+	thumb_func_end Overworld_PlaySpecialMapMusic
 
 	thumb_func_start Overworld_SetSavedMusic
 Overworld_SetSavedMusic: @ 8055E78

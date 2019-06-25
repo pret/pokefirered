@@ -57,9 +57,7 @@ gUnknown_3000E6A: @ 3000E6A
 gUnknown_3000E6B: @ 3000E6B
 	.space 0x1
 
-gUnknown_3000E6C: @ 3000E6C
-	.space 0x8
-
+	.include "src/multiboot.o"
 	.include "src/daycare.o"
 
 gUnknown_3000E78: @ 3000E78

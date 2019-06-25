@@ -2062,7 +2062,7 @@ _0808438C: .4byte mapldr_08084390
 	thumb_func_start mapldr_08084390
 mapldr_08084390: @ 8084390
 	push {r4,lr}
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	bl sub_807DC00
 	ldr r0, _080843E8 @ =c3_080843F8
 	movs r1, 0
@@ -2154,7 +2154,7 @@ _08084450: .4byte gPaletteFade
 	thumb_func_start sub_8084454
 sub_8084454: @ 8084454
 	push {lr}
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	bl pal_fill_for_maplights
 	bl sub_8111CF0
 	bl ScriptContext2_Enable
@@ -2885,7 +2885,7 @@ _080849F0: .4byte sub_80847C0
 	thumb_func_start sub_80849F4
 sub_80849F4: @ 80849F4
 	push {lr}
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	bl pal_fill_for_maplights
 	bl sub_8111CF0
 	bl ScriptContext2_Enable
@@ -3909,7 +3909,7 @@ _080851B8: .4byte sub_8084F44
 	thumb_func_start mapldr_080851BC
 mapldr_080851BC: @ 80851BC
 	push {lr}
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	bl pal_fill_for_maplights
 	bl sub_8111CF0
 	bl ScriptContext2_Enable
@@ -4965,7 +4965,7 @@ _080859C4:
 	thumb_func_start sub_80859D4
 sub_80859D4: @ 80859D4
 	push {lr}
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	bl pal_fill_for_maplights
 	bl sub_8111CF0
 	bl ScriptContext2_Enable
@@ -5431,7 +5431,7 @@ _08085D84: .4byte sub_8085B78
 	thumb_func_start mapldr_08085D88
 mapldr_08085D88: @ 8085D88
 	push {lr}
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	bl pal_fill_for_maplights
 	bl sub_8111CF0
 	bl ScriptContext2_Enable

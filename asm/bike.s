@@ -730,7 +730,7 @@ StartTransitionToFlipBikeState: @ 80BD5C8
 	movs r0, 0x1
 	bl SetPlayerAvatarTransitionFlags
 	bl sav1_reset_battle_music_maybe
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	b _080BD618
 	.align 2, 0
 _080BD5F0: .4byte gUnknown_2036E2C

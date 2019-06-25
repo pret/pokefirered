@@ -914,8 +914,8 @@ _0809D034:
 _0809D03C: .4byte gSpecialVar_Result
 	thumb_func_end sub_809CFDC
 
-	thumb_func_start sp109_CreatePCMenu
-sp109_CreatePCMenu: @ 809D040
+	thumb_func_start ScrSpecial_CreatePCMenu
+ScrSpecial_CreatePCMenu: @ 809D040
 	push {lr}
 	ldr r0, _0809D060 @ =sub_809CC98
 	bl FuncIsActiveTask
@@ -937,7 +937,7 @@ _0809D068:
 _0809D06A:
 	pop {r1}
 	bx r1
-	thumb_func_end sp109_CreatePCMenu
+	thumb_func_end ScrSpecial_CreatePCMenu
 
 	thumb_func_start sub_809D070
 sub_809D070: @ 809D070
@@ -1159,8 +1159,8 @@ _0809D24C: .4byte gStringVar4
 _0809D250: .4byte gUnknown_8417BB6
 	thumb_func_end sub_809D070
 
-	thumb_func_start sub_809D254
-sub_809D254: @ 809D254
+	thumb_func_start ScriptMenu_DisplayPCStartupPrompt
+ScriptMenu_DisplayPCStartupPrompt: @ 809D254
 	push {lr}
 	sub sp, 0x10
 	movs r0, 0
@@ -1184,7 +1184,7 @@ sub_809D254: @ 809D254
 	bx r0
 	.align 2, 0
 _0809D284: .4byte gUnknown_81A508A
-	thumb_func_end sub_809D254
+	thumb_func_end ScriptMenu_DisplayPCStartupPrompt
 
 	thumb_func_start sub_809D288
 sub_809D288: @ 809D288

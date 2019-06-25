@@ -162,7 +162,7 @@ gSpecials:: @ 815FD60
 	def_special sub_80CA758
 	def_special nullsub_75
 	def_special nullsub_75
-	def_special sub_8055DC4
+	def_special Overworld_PlaySpecialMapMusic
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
@@ -271,8 +271,8 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
-	def_special sp109_CreatePCMenu
-	def_special sub_80CA574
+	def_special ScrSpecial_CreatePCMenu
+	def_special HallOfFamePCBeginFade
 	def_special sub_80CA618
 	def_special nullsub_75
 	def_special nullsub_75

@@ -605,88 +605,25 @@ u16 Unused_LoadBgPalette(u8 bg, const void *src, u16 size, u16 destOffset)
     return (u8)cursor;
 }
 
-#ifdef NONMATCHING  // Matches everything but r5 and r6 are flipped, rrr
 bool8 IsDma3ManagerBusyWithBgCopy(void)
 {
-    u8 mod;
-    u8 div;
-    s8 reqSpace;
-
     int i;
 
     for (i = 0; i < 0x80; i++)
     {
-        div = i / 0x20;
-        mod = i % 0x20;
+        u8 div = i / 0x20;
+        u8 mod = i % 0x20;
 
-        if ((sDmaBusyBitfield[div] & (1 << mod)) != FALSE)
+        if ((sDmaBusyBitfield[div] & (1 << mod)))
         {
-            reqSpace = CheckForSpaceForDma3Request(i);
+            s8 reqSpace = CheckForSpaceForDma3Request(i);
             if (reqSpace == -1)
-            {
                 return TRUE;
-            }
-
             sDmaBusyBitfield[div] &= ~(1 << mod);
         }
     }
-
     return FALSE;
 }
-#else
-NAKED
-bool8 IsDma3ManagerBusyWithBgCopy(void)
-{
-    asm("push {r4-r7,lr}\n\
-    mov r5, #0\n\
-    mov r7, #0x1\n\
-    neg r7, r7\n\
-_08001ADC:\n\
-    add r0, r5, #0\n\
-    cmp r5, #0\n\
-    bge _08001AE4\n\
-    add r0, #0x1F\n\
-_08001AE4:\n\
-    asr r0, #5\n\
-    lsl r2, r0, #24\n\
-    lsl r0, #5\n\
-    sub r0, r5, r0\n\
-    lsl r0, #24\n\
-    lsr r0, #24\n\
-    ldr r1, =sDmaBusyBitfield\n\
-    lsr r2, #22\n\
-    add r4, r2, r1\n\
-    mov r6, #0x1\n\
-    lsl r6, r0\n\
-    ldr r0, [r4]\n\
-    and r0, r6\n\
-    cmp r0, #0\n\
-    beq _08001B22\n\
-    lsl r0, r5, #16\n\
-    asr r0, #16\n\
-    bl CheckForSpaceForDma3Request\n\
-    lsl r0, #24\n\
-    asr r0, #24\n\
-    cmp r0, r7\n\
-    bne _08001B1C\n\
-    mov r0, #0x1\n\
-    b _08001B2A\n\
-    .pool\n\
-_08001B1C:\n\
-    ldr r0, [r4]\n\
-    bic r0, r6\n\
-    str r0, [r4]\n\
-_08001B22:\n\
-    add r5, #0x1\n\
-    cmp r5, #0x7F\n\
-    ble _08001ADC\n\
-    mov r0, #0\n\
-_08001B2A:\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1\n");
-}
-#endif // NONMATCHING
 
 void ShowBg(u8 bg)
 {

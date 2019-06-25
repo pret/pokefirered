@@ -6,6 +6,7 @@
 #include "constants/abilities.h"
 #include "constants/battle_ai.h"
 #include "constants/battle_move_effects.h"
+#include "constants/moves.h"
 
 extern u16 Random(void);
 extern void sub_80C7164(void);
@@ -230,10 +231,7 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
     BattleAICmd_if_not_taunted,              // 0x5D
 };
 
-#ifdef NONMATCHING
-static
-#endif
-const u16 sDiscouragedPowerfulMoveEffects[] =
+static const u16 sDiscouragedPowerfulMoveEffects[] =
 {
     EFFECT_EXPLOSION,
     EFFECT_DREAM_EATER,
@@ -970,331 +968,69 @@ static void BattleAICmd_get_move_power(void)
     gAIScriptPtr += 1;
 }
 
-// still a nonmatching
-#ifdef NONMATCHING
 static void BattleAICmd_is_most_powerful_move(void)
 {
-    int i, j;
-    s32 damages[MAX_MON_MOVES];
+    s32 i, checkedMove;
+    s32 moveDmgs[4];
 
     for (i = 0; sDiscouragedPowerfulMoveEffects[i] != 0xFFFF; i++)
+    {
         if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].effect == sDiscouragedPowerfulMoveEffects[i])
             break;
+    }
 
     if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].power > 1
-     && sDiscouragedPowerfulMoveEffects[i] == 0xFFFF)
+        && sDiscouragedPowerfulMoveEffects[i] == 0xFFFF)
     {
         gDynamicBasePower = 0;
-        eDynamicMoveType = 0;
-        eDmgMultiplier = 1;
+        *(&gBattleStruct->dynamicMoveType) = 0;
+        gBattleScripting.dmgMultiplier = 1;
         gMoveResultFlags = 0;
         gCritMultiplier = 1;
 
-        for (i = 0; i < MAX_MON_MOVES; i++)
+        for (checkedMove = 0; checkedMove < MAX_MON_MOVES; checkedMove++)
         {
-            for (j = 0; sDiscouragedPowerfulMoveEffects[j] != 0xFFFF; j++)
-            { // _08108276
-                if (gBattleMoves[gBattleMons[gBankAttacker].moves[i]].effect == sDiscouragedPowerfulMoveEffects[j])
+            for (i = 0; sDiscouragedPowerfulMoveEffects[i] != 0xFFFF; i++)
+            {
+                if (gBattleMoves[gBattleMons[sBattler_AI].moves[checkedMove]].effect == sDiscouragedPowerfulMoveEffects[i])
                     break;
             }
 
-            // _081082BA
-            if (gBattleMons[gBankAttacker].moves[i]
-             && sDiscouragedPowerfulMoveEffects[j] == 0xFFFF
-             && gBattleMoves[gBattleMons[gBankAttacker].moves[i]].power > 1)
+            if (gBattleMons[sBattler_AI].moves[checkedMove] != MOVE_NONE
+                && sDiscouragedPowerfulMoveEffects[i] == 0xFFFF
+                && gBattleMoves[gBattleMons[sBattler_AI].moves[checkedMove]].power > 1)
             {
-                gCurrentMove = gBattleMons[gBankAttacker].moves[i];
-                AI_CalcDmg(gBankAttacker, gBankTarget);
-                TypeCalc(gCurrentMove, gBankAttacker, gBankTarget);
-                damages[i] = (gBattleMoveDamage * AI_THINKING_STRUCT->simulatedRNG[i]) / 100;
-
-                if (damages[i] == 0) // moves always do at least 1 damage.
-                    damages[i] = 1;
+                gCurrentMove = gBattleMons[sBattler_AI].moves[checkedMove];
+                AI_CalcDmg(sBattler_AI, gBattlerTarget);
+                TypeCalc(gCurrentMove, sBattler_AI, gBattlerTarget);
+                moveDmgs[checkedMove] = gBattleMoveDamage * AI_THINKING_STRUCT->simulatedRNG[checkedMove] / 100;
+                if (moveDmgs[checkedMove] == 0)
+                    moveDmgs[checkedMove] = 1;
             }
             else
             {
-                damages[i] = 0;
+                moveDmgs[checkedMove] = 0;
             }
         }
 
-        for (i = 0; i < MAX_MON_MOVES; i++)
-            if (damages[i] > damages[AI_THINKING_STRUCT->movesetIndex])
+        for (checkedMove = 0; checkedMove < MAX_MON_MOVES; checkedMove++)
+        {
+            if (moveDmgs[checkedMove] > moveDmgs[AI_THINKING_STRUCT->movesetIndex])
                 break;
+        }
 
-        if (i == MAX_MON_MOVES)
-            AI_THINKING_STRUCT->funcResult = 2;
+        if (checkedMove == MAX_MON_MOVES)
+            AI_THINKING_STRUCT->funcResult = MOVE_MOST_POWERFUL; // Is the most powerful.
         else
-            AI_THINKING_STRUCT->funcResult = 1;
+            AI_THINKING_STRUCT->funcResult = MOVE_NOT_MOST_POWERFUL; // Not the most powerful.
     }
     else
     {
-        AI_THINKING_STRUCT->funcResult = 0;
+        AI_THINKING_STRUCT->funcResult = MOVE_POWER_DISCOURAGED; // Highly discouraged in terms of power.
     }
 
-    gAIScriptPtr += 1;
+    gAIScriptPtr++;
 }
-#else
-NAKED
-static void BattleAICmd_is_most_powerful_move(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x14\n\
-    movs r3, 0\n\
-    ldr r0, _080C80A4 @ =sDiscouragedPowerfulMoveEffects\n\
-    ldrh r1, [r0]\n\
-    ldr r5, _080C80A8 @ =0x0000ffff\n\
-    ldr r6, _080C80AC @ =gBattleMoves\n\
-    ldr r2, _080C80B0 @ =gBattleResources\n\
-    cmp r1, r5\n\
-    beq _080C7FA2\n\
-    ldr r0, [r2]\n\
-    ldr r0, [r0, 0x14]\n\
-    ldrh r1, [r0, 0x2]\n\
-    lsls r0, r1, 1\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r6\n\
-    ldrb r4, [r0]\n\
-    ldr r1, _080C80A4 @ =sDiscouragedPowerfulMoveEffects\n\
-_080C7F92:\n\
-    ldrh r0, [r1]\n\
-    cmp r4, r0\n\
-    beq _080C7FA2\n\
-    adds r1, 0x2\n\
-    adds r3, 0x1\n\
-    ldrh r0, [r1]\n\
-    cmp r0, r5\n\
-    bne _080C7F92\n\
-_080C7FA2:\n\
-    ldr r0, [r2]\n\
-    ldr r0, [r0, 0x14]\n\
-    ldrh r1, [r0, 0x2]\n\
-    lsls r0, r1, 1\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r6\n\
-    ldrb r0, [r0, 0x1]\n\
-    cmp r0, 0x1\n\
-    bhi _080C7FB8\n\
-    b _080C8142\n\
-_080C7FB8:\n\
-    lsls r0, r3, 1\n\
-    ldr r1, _080C80A4 @ =sDiscouragedPowerfulMoveEffects\n\
-    adds r0, r1\n\
-    ldrh r3, [r0]\n\
-    ldr r0, _080C80A8 @ =0x0000ffff\n\
-    cmp r3, r0\n\
-    beq _080C7FC8\n\
-    b _080C8142\n\
-_080C7FC8:\n\
-    ldr r0, _080C80B4 @ =gDynamicBasePower\n\
-    movs r1, 0\n\
-    strh r1, [r0]\n\
-    ldr r0, _080C80B8 @ =gBattleStruct\n\
-    ldr r0, [r0]\n\
-    strb r1, [r0, 0x13]\n\
-    ldr r0, _080C80BC @ =gBattleScripting\n\
-    movs r2, 0x1\n\
-    strb r2, [r0, 0xE]\n\
-    ldr r0, _080C80C0 @ =gMoveResultFlags\n\
-    strb r1, [r0]\n\
-    ldr r0, _080C80C4 @ =gCritMultiplier\n\
-    strb r2, [r0]\n\
-    movs r6, 0\n\
-    mov r9, r3\n\
-    ldr r2, _080C80A4 @ =sDiscouragedPowerfulMoveEffects\n\
-    ldrh r2, [r2]\n\
-    str r2, [sp, 0x10]\n\
-_080C7FEC:\n\
-    movs r3, 0\n\
-    ldr r5, _080C80C8 @ =gBattleMons\n\
-    lsls r4, r6, 1\n\
-    ldr r7, _080C80CC @ =sBattler_AI\n\
-    lsls r0, r6, 2\n\
-    mov r8, r0\n\
-    adds r1, r6, 0x1\n\
-    mov r10, r1\n\
-    ldr r2, [sp, 0x10]\n\
-    cmp r2, r9\n\
-    beq _080C8030\n\
-    ldr r2, _080C80AC @ =gBattleMoves\n\
-    ldrb r1, [r7]\n\
-    movs r0, 0x58\n\
-    muls r0, r1\n\
-    adds r0, r4, r0\n\
-    adds r1, r5, 0\n\
-    adds r1, 0xC\n\
-    adds r0, r1\n\
-    ldrh r1, [r0]\n\
-    lsls r0, r1, 1\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r2\n\
-    ldrb r2, [r0]\n\
-    ldr r1, _080C80A4 @ =sDiscouragedPowerfulMoveEffects\n\
-_080C8020:\n\
-    ldrh r0, [r1]\n\
-    cmp r2, r0\n\
-    beq _080C8030\n\
-    adds r1, 0x2\n\
-    adds r3, 0x1\n\
-    ldrh r0, [r1]\n\
-    cmp r0, r9\n\
-    bne _080C8020\n\
-_080C8030:\n\
-    ldrb r1, [r7]\n\
-    movs r0, 0x58\n\
-    muls r0, r1\n\
-    adds r0, r4, r0\n\
-    adds r1, r5, 0\n\
-    adds r1, 0xC\n\
-    adds r1, r0, r1\n\
-    ldrh r0, [r1]\n\
-    cmp r0, 0\n\
-    beq _080C80DC\n\
-    lsls r0, r3, 1\n\
-    ldr r2, _080C80A4 @ =sDiscouragedPowerfulMoveEffects\n\
-    adds r0, r2\n\
-    ldrh r0, [r0]\n\
-    cmp r0, r9\n\
-    bne _080C80DC\n\
-    ldr r0, _080C80AC @ =gBattleMoves\n\
-    ldrh r2, [r1]\n\
-    lsls r1, r2, 1\n\
-    adds r1, r2\n\
-    lsls r1, 2\n\
-    adds r1, r0\n\
-    ldrb r0, [r1, 0x1]\n\
-    cmp r0, 0x1\n\
-    bls _080C80DC\n\
-    ldr r5, _080C80D0 @ =gCurrentMove\n\
-    strh r2, [r5]\n\
-    ldrb r0, [r7]\n\
-    ldr r4, _080C80D4 @ =gBattlerTarget\n\
-    ldrb r1, [r4]\n\
-    bl AI_CalcDmg\n\
-    ldrh r0, [r5]\n\
-    ldrb r1, [r7]\n\
-    ldrb r2, [r4]\n\
-    bl TypeCalc\n\
-    mov r4, sp\n\
-    add r4, r8\n\
-    ldr r2, _080C80D8 @ =gBattleMoveDamage\n\
-    ldr r0, _080C80B0 @ =gBattleResources\n\
-    ldr r0, [r0]\n\
-    ldr r0, [r0, 0x14]\n\
-    adds r0, 0x18\n\
-    adds r0, r6\n\
-    ldrb r1, [r0]\n\
-    ldr r0, [r2]\n\
-    muls r0, r1\n\
-    movs r1, 0x64\n\
-    bl __divsi3\n\
-    str r0, [r4]\n\
-    cmp r0, 0\n\
-    bne _080C80E4\n\
-    movs r0, 0x1\n\
-    str r0, [r4]\n\
-    b _080C80E4\n\
-    .align 2, 0\n\
-_080C80A4: .4byte sDiscouragedPowerfulMoveEffects\n\
-_080C80A8: .4byte 0x0000ffff\n\
-_080C80AC: .4byte gBattleMoves\n\
-_080C80B0: .4byte gBattleResources\n\
-_080C80B4: .4byte gDynamicBasePower\n\
-_080C80B8: .4byte gBattleStruct\n\
-_080C80BC: .4byte gBattleScripting\n\
-_080C80C0: .4byte gMoveResultFlags\n\
-_080C80C4: .4byte gCritMultiplier\n\
-_080C80C8: .4byte gBattleMons\n\
-_080C80CC: .4byte sBattler_AI\n\
-_080C80D0: .4byte gCurrentMove\n\
-_080C80D4: .4byte gBattlerTarget\n\
-_080C80D8: .4byte gBattleMoveDamage\n\
-_080C80DC:\n\
-    mov r1, sp\n\
-    add r1, r8\n\
-    movs r0, 0\n\
-    str r0, [r1]\n\
-_080C80E4:\n\
-    mov r6, r10\n\
-    cmp r6, 0x3\n\
-    bgt _080C80EC\n\
-    b _080C7FEC\n\
-_080C80EC:\n\
-    movs r6, 0\n\
-    ldr r2, _080C8130 @ =gBattleResources\n\
-    ldr r0, [r2]\n\
-    ldr r0, [r0, 0x14]\n\
-    ldrb r0, [r0, 0x1]\n\
-    lsls r0, 2\n\
-    add r0, sp\n\
-    ldr r1, [sp]\n\
-    ldr r0, [r0]\n\
-    ldr r5, _080C8134 @ =gAIScriptPtr\n\
-    cmp r1, r0\n\
-    bgt _080C8122\n\
-    adds r4, r2, 0\n\
-    mov r3, sp\n\
-_080C8108:\n\
-    adds r3, 0x4\n\
-    adds r6, 0x1\n\
-    cmp r6, 0x3\n\
-    bgt _080C8122\n\
-    ldr r0, [r4]\n\
-    ldr r0, [r0, 0x14]\n\
-    ldrb r0, [r0, 0x1]\n\
-    lsls r0, 2\n\
-    add r0, sp\n\
-    ldr r1, [r3]\n\
-    ldr r0, [r0]\n\
-    cmp r1, r0\n\
-    ble _080C8108\n\
-_080C8122:\n\
-    cmp r6, 0x4\n\
-    bne _080C8138\n\
-    ldr r0, [r2]\n\
-    ldr r1, [r0, 0x14]\n\
-    movs r0, 0x2\n\
-    str r0, [r1, 0x8]\n\
-    b _080C814C\n\
-    .align 2, 0\n\
-_080C8130: .4byte gBattleResources\n\
-_080C8134: .4byte gAIScriptPtr\n\
-_080C8138:\n\
-    ldr r0, [r2]\n\
-    ldr r1, [r0, 0x14]\n\
-    movs r0, 0x1\n\
-    str r0, [r1, 0x8]\n\
-    b _080C814C\n\
-_080C8142:\n\
-    ldr r0, [r2]\n\
-    ldr r1, [r0, 0x14]\n\
-    movs r0, 0\n\
-    str r0, [r1, 0x8]\n\
-    ldr r5, _080C8164 @ =gAIScriptPtr\n\
-_080C814C:\n\
-    ldr r0, [r5]\n\
-    adds r0, 0x1\n\
-    str r0, [r5]\n\
-    add sp, 0x14\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080C8164: .4byte gAIScriptPtr\n\
-    .syntax divided\n");
-}
-#endif
 
 static void BattleAICmd_get_move(void)
 {

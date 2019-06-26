@@ -65,9 +65,8 @@ gUnknown_3000E6C: @ 3000E6C
 gUnknown_3000E78: @ 3000E78
 	.space 0x4
 
-gUnknown_3000E7C: @ 3000E7C
-	.space 0x4
-
+	.include "src/play_time.o"
+	.align 2
 gUnknown_3000E80: @ 3000E80
 	.space 0x4
 

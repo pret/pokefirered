@@ -145,7 +145,6 @@ static const struct FontInfo gFontInfos[] =
     }
 };
 
-
 static const u8 gMenuCursorDimensions[][2] = 
 {
     { 0x8,  0xD },
@@ -202,6 +201,7 @@ void DoScheduledBgTilemapCopiesToVram(void)
 void ResetTempTileDataBuffers(void)
 {
     int i;
+
     for (i = 0; i < (s32)NELEMS(gUnknown_203AB60); i++)
     {
         gUnknown_203AB60[i] = NULL;
@@ -234,6 +234,7 @@ bool8 FreeTempTileDataBuffersIfPossible(void)
 void *DecompressAndCopyTileDataToVram(u8 bgId, const void *src, u32 size, u16 offset, u8 mode)
 {
     u32 sizeOut;
+
     if (gUnknown_203AB5C < NELEMS(gUnknown_203AB60))
     {
         void *ptr = MallocAndDecompress(src, &sizeOut);
@@ -252,6 +253,7 @@ void *DecompressAndCopyTileDataToVram(u8 bgId, const void *src, u32 size, u16 of
 void *DecompressAndCopyTileDataToVram2(u8 bgId, const void *src, u32 size, u16 offset, u8 mode)
 {
     u32 sizeOut;
+
     if (gUnknown_203AB5C < NELEMS(gUnknown_203AB60))
     {
         void *ptr = MallocAndDecompress(src, &sizeOut);
@@ -270,6 +272,7 @@ void *DecompressAndCopyTileDataToVram2(u8 bgId, const void *src, u32 size, u16 o
 void DecompressAndLoadBgGfxUsingHeap(u8 bgId, const void *src, u32 size, u16 offset, u8 mode)
 {
     u32 sizeOut;
+
     void *ptr = MallocAndDecompress(src, &sizeOut);
     if (!size)
         size = sizeOut;
@@ -284,6 +287,7 @@ void DecompressAndLoadBgGfxUsingHeap(u8 bgId, const void *src, u32 size, u16 off
 void DecompressAndLoadBgGfxUsingHeap2(u8 bgId, const void *src, u32 size, u16 offset, u8 mode)
 {
     u32 sizeOut;
+
     void *ptr = MallocAndDecompress(src, &sizeOut);
     if (sizeOut > size)
         sizeOut = size;
@@ -336,8 +340,7 @@ static u16 CopyDecompressedTileDataToVram(u8 bgId, const void *src, u16 size, u1
 
 void SetBgRectPal(u8 bgId, u8 left, u8 top, u8 width, u8 height, u8 palette)
 {
-    u8 i;
-    u8 j;
+    u8 i, j;
     u16 *ptr = GetBgTilemapBuffer(bgId);
 
     for (i = top; i < top + height; i++)
@@ -351,8 +354,7 @@ void SetBgRectPal(u8 bgId, u8 left, u8 top, u8 width, u8 height, u8 palette)
 
 void CopyRectIntoAltRect(u8 bgId, u16 *dest, u8 left, u8 top, u8 width, u8 height)
 {
-    u8 i;
-    u8 j;
+    u8 i,j;
     const u16 *src = GetBgTilemapBuffer(bgId);
 
     for (i = 0; i < height; i++)

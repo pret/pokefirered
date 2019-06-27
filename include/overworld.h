@@ -81,7 +81,7 @@ void mapldr_default(void);
 
 u32 GetGameStat(u8);
 
-void sub_8056938(void);
+void CB2_ContinueSavedGame(void);
 void sub_8055D5C(struct WarpData *);
 void sub_80572A8(void);
 void sub_805726C(void);

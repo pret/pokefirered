@@ -174,8 +174,8 @@ Sav2_ClearSetDefault: @ 8054A18
 	bx r0
 	thumb_func_end Sav2_ClearSetDefault
 
-	thumb_func_start sub_8054A28
-sub_8054A28: @ 8054A28
+	thumb_func_start ResetMenuAndMonGlobals
+ResetMenuAndMonGlobals: @ 8054A28
 	push {lr}
 	ldr r1, _08054A5C @ =gUnknown_2031DB0
 	movs r0, 0
@@ -195,7 +195,7 @@ sub_8054A28: @ 8054A28
 	bx r0
 	.align 2, 0
 _08054A5C: .4byte gUnknown_2031DB0
-	thumb_func_end sub_8054A28
+	thumb_func_end ResetMenuAndMonGlobals
 
 	thumb_func_start sub_8054A60
 sub_8054A60: @ 8054A60

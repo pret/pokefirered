@@ -1106,7 +1106,7 @@ _08079248:
 	bne _080792A6
 	bl SeedRngAndSetTrainerId
 	bl SetSaveBlocksPointers
-	bl sub_8054A28
+	bl ResetMenuAndMonGlobals
 	bl Save_ResetSaveCounters
 	movs r0, 0
 	bl Save_LoadGameData

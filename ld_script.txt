@@ -117,7 +117,7 @@ SECTIONS {
         asm/reshow_battle_screen.o(.text);
         asm/battle_anim_status_effects.o(.text);
         asm/title_screen.o(.text);
-        asm/reset_save_heap.o(.text);
+        src/reset_save_heap.o(.text);
         asm/field_weather.o(.text);
         asm/field_weather_effects.o(.text);
         asm/field_fadetransition.o(.text);

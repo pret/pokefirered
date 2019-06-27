@@ -859,7 +859,7 @@ void sub_8110F14(u8 taskId)
     }
     else
     {
-        SetMainCallback2(sub_8056938);
+        SetMainCallback2(CB2_ContinueSavedGame);
         DestroyTask(taskId);
     }
 }

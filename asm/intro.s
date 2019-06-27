@@ -305,7 +305,7 @@ c2_copyright_1: @ 80EC820
 	lsls r0, 24
 	cmp r0, 0
 	bne _080EC858
-	bl sub_8054A28
+	bl ResetMenuAndMonGlobals
 	bl Save_ResetSaveCounters
 	movs r0, 0
 	bl Save_LoadGameData

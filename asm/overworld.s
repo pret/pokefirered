@@ -3833,8 +3833,8 @@ _0805692C:
 _08056934: .4byte gMapHeader
 	thumb_func_end sub_8056918
 
-	thumb_func_start sub_8056938
-sub_8056938: @ 8056938
+	thumb_func_start CB2_ContinueSavedGame
+CB2_ContinueSavedGame: @ 8056938
 	push {lr}
 	bl sub_80569BC
 	bl StopMapMusic
@@ -3880,7 +3880,7 @@ _080569AC:
 _080569B0: .4byte gFieldCallback
 _080569B4: .4byte sub_8056918
 _080569B8: .4byte sub_8056534
-	thumb_func_end sub_8056938
+	thumb_func_end CB2_ContinueSavedGame
 
 	thumb_func_start sub_80569BC
 sub_80569BC: @ 80569BC

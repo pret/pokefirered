@@ -2446,7 +2446,7 @@ _0811D884:
 	adds r1, r6, 0
 	adds r2, r7, 0
 	mov r3, r10
-	bl sub_800ECC4
+	bl HandleLoadSpecialPokePic
 	mov r0, r8
 	bl GetMonFrontSpritePal
 	adds r1, r4, 0
@@ -3699,7 +3699,7 @@ sub_811E204: @ 811E204
 	sub sp, 0x8
 	mov r10, r0
 	ldr r0, _0811E2E0 @ =gUnknown_84599B8
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	ldr r0, _0811E2E4 @ =gUnknown_84599C0
 	bl LoadSpritePalette
 	movs r0, 0
@@ -4148,7 +4148,7 @@ _0811E582:
 sub_811E588: @ 811E588
 	push {lr}
 	ldr r0, _0811E59C @ =gUnknown_84599C8
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	ldr r0, _0811E5A0 @ =gUnknown_84599D0
 	bl LoadSpritePalette
 	pop {r0}
@@ -4216,7 +4216,7 @@ sub_811E5B8: @ 811E5B8
 	str r1, [r4]
 	mov r1, r9
 	strh r1, [r4, 0x4]
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	adds r0, r4, 0
 	bl LoadSpritePalette
 	ldr r0, _0811E674 @ =sub_811E694

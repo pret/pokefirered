@@ -469,7 +469,7 @@ static bool8 HandleLoadTMCaseGraphicsAndPalettes(void)
         sTMCaseDynamicResources->seqId++;
         break;
     case 4:
-        LoadCompressedObjectPic(&sTMSpriteSheet);
+        LoadCompressedSpriteSheet(&sTMSpriteSheet);
         sTMCaseDynamicResources->seqId++;
         break;
     default:

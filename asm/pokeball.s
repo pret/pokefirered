@@ -2029,9 +2029,9 @@ CreatePokeballSpriteToReleaseMon: @ 804B908
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r0, _0804B9D4 @ =gUnknown_826056C
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	ldr r0, _0804B9D8 @ =gUnknown_82605CC
-	bl sub_800F078
+	bl LoadCompressedSpritePaletteUsingHeap
 	ldr r0, _0804B9DC @ =gUnknown_82606F4
 	mov r1, r9
 	mov r2, r10
@@ -2362,9 +2362,9 @@ sub_804BB98: @ 804BB98
 	lsrs r0, 24
 	mov r9, r0
 	ldr r0, _0804BC3C @ =gUnknown_826056C
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	ldr r0, _0804BC40 @ =gUnknown_82605CC
-	bl sub_800F078
+	bl LoadCompressedSpritePaletteUsingHeap
 	ldr r0, _0804BC44 @ =gUnknown_82606F4
 	adds r1, r6, 0
 	mov r2, r8
@@ -2790,10 +2790,10 @@ LoadBallGfx: @ 804BEF4
 	cmp r0, r1
 	bne _0804BF1C
 	adds r0, r5, 0
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	ldr r0, _0804BF58 @ =gUnknown_82605CC
 	adds r0, r6, r0
-	bl sub_800F078
+	bl LoadCompressedSpritePaletteUsingHeap
 _0804BF1C:
 	cmp r4, 0x6
 	beq _0804BF48

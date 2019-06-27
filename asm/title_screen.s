@@ -1704,7 +1704,7 @@ sub_8079708: @ 8079708
 	ldr r4, _08079728 @ =gUnknown_83BFB9C
 _0807970E:
 	adds r0, r4, 0
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	adds r4, 0x8
 	adds r5, 0x1
 	cmp r5, 0x3

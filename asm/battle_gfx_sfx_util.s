@@ -975,7 +975,7 @@ _08034548:
 	ldr r1, [r1]
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_800ECC4
+	bl HandleLoadSpecialPokePic
 _08034562:
 	mov r2, r8
 	lsls r1, r2, 4
@@ -1184,7 +1184,7 @@ sub_80346C4: @ 80346C4
 	ldr r0, _0803474C @ =gTrainerFrontPicPaletteTable
 	adds r5, r0
 	adds r0, r5, 0
-	bl sub_800F078
+	bl LoadCompressedSpritePaletteUsingHeap
 	add sp, 0x8
 	pop {r3}
 	mov r8, r3
@@ -1262,9 +1262,9 @@ sub_80347A8: @ 80347A8
 	cmp r0, 0
 	bne _080347E0
 	ldr r0, _080347D8 @ =gUnknown_8260208
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	ldr r0, _080347DC @ =gUnknown_8260210
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	movs r5, 0x2
 	b _08034802
 	.align 2, 0
@@ -1274,16 +1274,16 @@ _080347DC: .4byte gUnknown_8260210
 _080347E0:
 	ldr r4, _08034828 @ =gUnknown_8260218
 	adds r0, r4, 0
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	adds r4, 0x8
 	adds r0, r4, 0
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	ldr r4, _0803482C @ =gUnknown_8260228
 	adds r0, r4, 0
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	adds r4, 0x8
 	adds r0, r4, 0
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	movs r5, 0x4
 _08034802:
 	movs r4, 0
@@ -1296,7 +1296,7 @@ _0803480C:
 	ldrb r0, [r0]
 	lsls r0, 3
 	adds r0, r6
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1349,14 +1349,14 @@ _08034864:
 	cmp r0, 0
 	beq _08034890
 	ldr r0, _0803488C @ =gUnknown_8260238
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	b _0803495A
 	.align 2, 0
 _08034888: .4byte gBattleTypeFlags
 _0803488C: .4byte gUnknown_8260238
 _08034890:
 	ldr r0, _08034898 @ =gUnknown_8260208
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	b _0803495A
 	.align 2, 0
 _08034898: .4byte gUnknown_8260208
@@ -1364,7 +1364,7 @@ _0803489C:
 	cmp r4, 0x3
 	bne _080348AC
 	ldr r0, _080348A8 @ =gUnknown_8260210
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	b _0803495A
 	.align 2, 0
 _080348A8: .4byte gUnknown_8260210
@@ -1388,7 +1388,7 @@ _080348CC:
 	cmp r4, 0x2
 	bne _080348DC
 	ldr r0, _080348D8 @ =gUnknown_8260218
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	b _0803495A
 	.align 2, 0
 _080348D8: .4byte gUnknown_8260218
@@ -1396,7 +1396,7 @@ _080348DC:
 	cmp r4, 0x3
 	bne _080348EC
 	ldr r0, _080348E8 @ =gUnknown_8260220
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	b _0803495A
 	.align 2, 0
 _080348E8: .4byte gUnknown_8260220
@@ -1404,7 +1404,7 @@ _080348EC:
 	cmp r4, 0x4
 	bne _080348FC
 	ldr r0, _080348F8 @ =gUnknown_8260228
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	b _0803495A
 	.align 2, 0
 _080348F8: .4byte gUnknown_8260228
@@ -1412,7 +1412,7 @@ _080348FC:
 	cmp r4, 0x5
 	bne _0803490C
 	ldr r0, _08034908 @ =gUnknown_8260230
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	b _0803495A
 	.align 2, 0
 _08034908: .4byte gUnknown_8260230
@@ -1449,7 +1449,7 @@ _08034944:
 	lsls r0, 3
 	ldr r1, _08034954 @ =gUnknown_8260240
 	adds r0, r1
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	b _0803495A
 	.align 2, 0
 _08034950: .4byte gUnknown_2023BD6
@@ -2911,7 +2911,7 @@ LoadAndCreateEnemyShadowSprites: @ 8035538
 	mov r7, r8
 	push {r7}
 	ldr r0, _08035614 @ =gUnknown_8250A0C
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	movs r0, 0x1
 	bl GetBattlerAtPosition
 	adds r5, r0, 0

@@ -498,7 +498,7 @@ _0813D170: .4byte gSaveBlock2Ptr
 _0813D174: .4byte gUnknown_8E85BF4
 _0813D178:
 	ldr r0, _0813D18C @ =gUnknown_84644A8
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 _0813D17E:
 	ldr r1, [r5]
 	adds r1, r6
@@ -510,7 +510,7 @@ _0813D17E:
 _0813D18C: .4byte gUnknown_84644A8
 _0813D190:
 	ldr r0, _0813D1A8 @ =gUnknown_84644B0
-	bl LoadCompressedObjectPalette
+	bl LoadCompressedSpritePalette
 	ldr r0, _0813D1AC @ =gUnknown_203F36C
 	ldr r0, [r0]
 	ldr r1, _0813D1B0 @ =0x0000080c

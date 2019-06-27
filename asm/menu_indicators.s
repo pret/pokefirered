@@ -180,7 +180,7 @@ AddScrollIndicatorArrowPair: @ 8133A20
 	orrs r0, r1
 	str r0, [sp, 0x8]
 	add r0, sp, 0x4
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	ldrh r2, [r6, 0xC]
 	cmp r2, r4
 	bne _08133A7C
@@ -727,7 +727,7 @@ ListMenuAddRedOutlineCursorObject: @ 8133E38
 	ands r1, r3
 	orrs r1, r2
 	str r1, [r0, 0x4]
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	ldrh r2, [r6, 0x8]
 	ldr r7, _08133E8C @ =0x0000ffff
 	cmp r2, r7
@@ -1005,7 +1005,7 @@ ListMenuAddRedArrowCursorObject: @ 8134070
 	ands r1, r4
 	orrs r1, r2
 	str r1, [r0, 0x4]
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	ldrh r2, [r5, 0x8]
 	cmp r2, r4
 	bne _081340C4

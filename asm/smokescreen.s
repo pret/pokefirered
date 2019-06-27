@@ -26,9 +26,9 @@ sub_804A76C: @ 804A76C
 	cmp r0, r1
 	bne _0804A79E
 	adds r0, r5, 0
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	ldr r0, _0804A8AC @ =gUnknown_8250994
-	bl sub_800F078
+	bl LoadCompressedSpritePaletteUsingHeap
 _0804A79E:
 	ldr r0, _0804A8B0 @ =sub_804A8C0
 	bl CreateInvisibleSpriteWithCallback

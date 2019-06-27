@@ -3264,10 +3264,10 @@ sub_80F05B4: @ 80F05B4
 	cmp r0, r1
 	bne _080F05DA
 	adds r0, r4, 0
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	ldr r0, _080F05E8 @ =gUnknown_840BFA8
 	adds r0, r5, r0
-	bl sub_800F078
+	bl LoadCompressedSpritePaletteUsingHeap
 _080F05DA:
 	pop {r4,r5}
 	pop {r0}
@@ -5514,9 +5514,9 @@ _080F177E:
 	cmp r0, r7
 	bne _080F179E
 	ldr r0, _080F17E8 @ =gUnknown_83AD350
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	ldr r0, _080F17EC @ =gUnknown_83ADC58
-	bl sub_800F078
+	bl LoadCompressedSpritePaletteUsingHeap
 _080F179E:
 	ldr r5, _080F17F0 @ =sub_80F181C
 	adds r0, r5, 0
@@ -5941,9 +5941,9 @@ sub_80F1AE0: @ 80F1AE0
 	lsls r4, 24
 	lsrs r4, 24
 	ldr r0, _080F1B08 @ =gUnknown_83AD470
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	ldr r0, _080F1B0C @ =gUnknown_83ADD78
-	bl sub_800F078
+	bl LoadCompressedSpritePaletteUsingHeap
 	ldr r0, _080F1B10 @ =0x0000281d
 	bl IndexOfSpritePaletteTag
 	adds r0, r4, 0

@@ -9465,7 +9465,7 @@ sub_8101A90: @ 8101A90
 	ldr r4, _08101AC0 @ =gUnknown_843F938
 _08101AA2:
 	adds r0, r4, 0
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	adds r4, 0x8
 	adds r5, 0x1
 	cmp r5, 0x3

@@ -452,11 +452,11 @@ static bool8 ItemPc_LoadGraphics(void)
         sStateDataPtr->data[0]++;
         break;
     case 3:
-        LoadCompressedObjectPic(&gBagSwapSpriteSheet);
+        LoadCompressedSpriteSheet(&gBagSwapSpriteSheet);
         sStateDataPtr->data[0]++;
         break;
     default:
-        LoadCompressedObjectPalette(&gBagSwapSpritePalette);
+        LoadCompressedSpritePalette(&gBagSwapSpritePalette);
         sStateDataPtr->data[0] = 0;
         return TRUE;
     }

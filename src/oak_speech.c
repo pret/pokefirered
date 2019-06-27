@@ -1613,7 +1613,7 @@ static void CreateNidoranFSprite(u8 taskId)
     u8 spriteId;
 
     DecompressPicFromTable(gUnknown_8235194, sub_8044E00(0), SPECIES_NIDORAN_F);
-    sub_800F078(&gUnknown_82373F4);
+    LoadCompressedSpritePaletteUsingHeap(&gUnknown_82373F4);
     SetMultiuseSpriteTemplateToPokemon(SPECIES_NIDORAN_F, 0);
     spriteId = CreateSprite(&gMultiuseSpriteTemplate, 0x60, 0x60, 1);
     gSprites[spriteId].callback = SpriteCallbackDummy;
@@ -1635,9 +1635,9 @@ static void CreatePikaOrGrassPlatformSpriteAndLinkToCurrentTask(u8 taskId, u8 st
     switch (state)
     {
     case 0:
-        LoadCompressedObjectPic(&sOakSpeech_PikaSpriteSheets[0]);
-        LoadCompressedObjectPic(&sOakSpeech_PikaSpriteSheets[1]);
-        LoadCompressedObjectPic(&sOakSpeech_PikaSpriteSheets[2]);
+        LoadCompressedSpriteSheet(&sOakSpeech_PikaSpriteSheets[0]);
+        LoadCompressedSpriteSheet(&sOakSpeech_PikaSpriteSheets[1]);
+        LoadCompressedSpriteSheet(&sOakSpeech_PikaSpriteSheets[2]);
         LoadSpritePalette(&sOakSpeech_PikaSpritePal);
         spriteId = CreateSprite(&sOakSpeech_PikaSpriteTemplates[0], 0x10, 0x11, 2);
         gSprites[spriteId].oam.priority = 0;
@@ -1654,7 +1654,7 @@ static void CreatePikaOrGrassPlatformSpriteAndLinkToCurrentTask(u8 taskId, u8 st
         gTasks[taskId].data[9] = spriteId;
         break;
     case 1:
-        LoadCompressedObjectPic(&sOakSpeech_GrassPlatformSpriteSheet);
+        LoadCompressedSpriteSheet(&sOakSpeech_GrassPlatformSpriteSheet);
         LoadSpritePalette(&sOakSpeech_GrassPlatformSpritePal);
         for (i = 0; i < 3; i++)
         {

@@ -8013,11 +8013,11 @@ _0812285C: .4byte 0x0000fffc
 sub_8122860: @ 8122860
 	push {lr}
 	ldr r0, _08122878 @ =gUnknown_845A474
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	ldr r0, _0812287C @ =gUnknown_845A4EC
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	ldr r0, _08122880 @ =gUnknown_845A47C
-	bl LoadCompressedObjectPalette
+	bl LoadCompressedSpritePalette
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -8164,9 +8164,9 @@ _0812297C: .4byte gSprites
 sub_8122980: @ 8122980
 	push {lr}
 	ldr r0, _08122994 @ =gUnknown_845A574
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	ldr r0, _08122998 @ =gUnknown_845A57C
-	bl LoadCompressedObjectPalette
+	bl LoadCompressedSpritePalette
 	pop {r0}
 	bx r0
 	.align 2, 0

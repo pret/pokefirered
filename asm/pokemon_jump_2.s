@@ -6777,7 +6777,7 @@ sub_814AD6C: @ 814AD6C
 	ldr r5, _0814ADAC @ =gUnknown_846E0B0
 _0814AD74:
 	adds r0, r5, 0
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	adds r5, 0x8
 	adds r4, 0x1
 	cmp r4, 0x4
@@ -6881,7 +6881,7 @@ _0814AE2A:
 	adds r0, r1
 	ldr r3, [r7, 0x8]
 	mov r1, r8
-	bl sub_800ECC4
+	bl HandleLoadSpecialPokePic
 	mov r3, r8
 	str r3, [sp, 0x18]
 	adds r4, r6, 0
@@ -6903,7 +6903,7 @@ _0814AE2A:
 	ands r1, r5
 	orrs r1, r4
 	str r1, [r0, 0x4]
-	bl LoadCompressedObjectPalette
+	bl LoadCompressedSpritePalette
 	mov r0, r8
 	bl Free
 	mov r0, r10

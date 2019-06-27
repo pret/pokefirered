@@ -969,17 +969,7 @@ gUnknown_8452F6C:: @ 8452F6C
 gUnknown_8452F7C:: @ 8452F7C
 	.incbin "baserom.gba", 0x452F7C, 0xC0
 
-gUnknown_845303C:: @ 845303C
-	.incbin "baserom.gba", 0x45303C, 0x56
-
-gUnknown_8453092:: @ 8453092
-	.incbin "baserom.gba", 0x453092, 0x2
-
-gUnknown_8453094:: @ 8453094
-	.incbin "baserom.gba", 0x453094, 0x4
-
 	.section .rodata.8453F6C
-
 // mailbox_pc.o
 gUnknown_8453FE8:: @ 8453FE8
 	.incbin "baserom.gba", 0x453FE8, 0x18

@@ -132,28 +132,28 @@ void MoveSaveBlocks_ResetHeap(void)
 
 u32 sav2_x1_query_bit1(void)
 {
-    return gSaveBlock2Ptr->specialSaveWarp & 1;
+    return gSaveBlock2Ptr->specialSaveWarpFlags & 1;
 }
 
 void sav2_x9_clear_bit1(void)
 {
-    gSaveBlock2Ptr->specialSaveWarp &= ~1;
+    gSaveBlock2Ptr->specialSaveWarpFlags &= ~1;
 }
 
 void sub_804C1AC(void)
 {
-    gSaveBlock2Ptr->specialSaveWarp |= 1;
+    gSaveBlock2Ptr->specialSaveWarpFlags |= 1;
 }
 
 void sub_804C1C0(void)
 {
     sub_8055778(0);
-    gSaveBlock2Ptr->specialSaveWarp |= 1;
+    gSaveBlock2Ptr->specialSaveWarpFlags |= 1;
 }
 
 void sav2_gender2_inplace_and_xFE(void)
 {
-    gSaveBlock2Ptr->specialSaveWarp &= ~1;
+    gSaveBlock2Ptr->specialSaveWarpFlags &= ~1;
 }
 
 void SavePlayerParty(void)

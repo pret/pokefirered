@@ -227,7 +227,7 @@ SECTIONS {
         asm/pokedex_screen.o(.text);
         asm/list_menu.o(.text);
         asm/item_menu.o(.text);
-        asm/save_location.o(.text);
+        src/save_location.o(.text);
         src/bag.o(.text);
         src/trainer_pokemon_sprites.o(.text);
         src/vs_seeker.o(.text);
@@ -421,6 +421,7 @@ SECTIONS {
         data/data_83FECCC.o(.rodata.841EE44);
         src/new_menu_helpers.o(.rodata);
         data/data_83FECCC.o(.rodata.841F4B4);
+        src/save_location.o(.rodata);
         src/bag.o(.rodata);
         src/trainer_pokemon_sprites.o(.rodata);
         src/vs_seeker.o(.rodata);

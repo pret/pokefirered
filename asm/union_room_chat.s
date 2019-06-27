@@ -5510,7 +5510,7 @@ sub_812AE70: @ 812AE70
 	ldr r4, _0812AE9C @ =gUnknown_845AF58
 _0812AE76:
 	adds r0, r4, 0
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	adds r4, 0x8
 	adds r5, 0x1
 	cmp r5, 0x4

@@ -2381,7 +2381,7 @@ _08048DC4:
 	bge _08048DB0
 	mov r6, r10
 	adds r0, r4, r6
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	ldr r0, _08048E4C @ =gUnknown_826049C
 	adds r0, r4, r0
 	bl LoadSpriteSheet

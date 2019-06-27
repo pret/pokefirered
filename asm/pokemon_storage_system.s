@@ -7233,7 +7233,7 @@ sub_808F3F8: @ 808F3F8
 	adds r0, r1
 	ldr r5, _0808F474 @ =0x000022bc
 	adds r1, r4, r5
-	bl sub_800ECC4
+	bl HandleLoadSpecialPokePic
 	ldr r1, [r6]
 	ldr r2, _0808F478 @ =0x00000cd8
 	adds r0, r1, r2
@@ -20609,7 +20609,7 @@ _08095B9C:
 	orrs r0, r1
 	str r0, [r2, 0x4]
 	mov r0, r9
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	mov r4, r9
 	ldrh r0, [r4, 0x6]
 	bl GetSpriteTileStartByTag

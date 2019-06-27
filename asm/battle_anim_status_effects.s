@@ -26,9 +26,9 @@ sub_8078178: @ 8078178
 	lsrs r0, 24
 	mov r8, r0
 	ldr r0, _08078224 @ =gUnknown_83AD048
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	ldr r0, _08078228 @ =gUnknown_83AD950
-	bl sub_800F078
+	bl LoadCompressedSpritePaletteUsingHeap
 	ldr r1, _0807822C @ =gTasks
 	mov r2, r8
 	lsls r0, r2, 2

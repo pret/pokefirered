@@ -3080,9 +3080,9 @@ sub_80F36BC: @ 80F36BC
 	movs r0, 0x8
 	strb r0, [r1]
 	ldr r0, _080F36F0 @ =gUnknown_840C248
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	ldr r0, _080F36F4 @ =gUnknown_840C258
-	bl LoadCompressedObjectPalette
+	bl LoadCompressedSpritePalette
 	pop {r0}
 	bx r0
 	.align 2, 0

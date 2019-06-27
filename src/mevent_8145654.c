@@ -402,7 +402,7 @@ void sub_8146060(void)
     }
     if (gUnknown_203F3C8->unk_0000.unk_09 != 0 && gUnknown_203F3C8->unk_0000.unk_08_0 == 1)
     {
-        sub_800F034(&gUnknown_8467F58);
+        LoadCompressedSpriteSheetUsingHeap(&gUnknown_8467F58);
         LoadSpritePalette(&gUnknown_8467F60[gUnknown_203F3C8->unk_0170->textPal4]);
         for (; r7 < gUnknown_203F3C8->unk_0000.unk_09; r7++)
         {

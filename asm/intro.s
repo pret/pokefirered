@@ -2759,7 +2759,7 @@ sub_80EDC40: @ 80EDC40
 	ldr r4, _080EDCE4 @ =gUnknown_840BBC0
 _080EDC46:
 	adds r0, r4, 0
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	adds r4, 0x8
 	adds r5, 0x1
 	cmp r5, 0x4
@@ -4823,7 +4823,7 @@ sub_80EEBE4: @ 80EEBE4
 	ldr r4, _080EEC04 @ =gUnknown_840BEDC
 _080EEBEA:
 	adds r0, r4, 0
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	adds r4, 0x8
 	adds r5, 0x1
 	cmp r5, 0x6

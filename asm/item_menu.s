@@ -676,20 +676,20 @@ _0810832C: .4byte gSaveBlock2Ptr
 _08108330: .4byte gUnknown_83D41E4
 _08108334:
 	ldr r0, _0810833C @ =gUnknown_83D41EC
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	b _08108352
 	.align 2, 0
 _0810833C: .4byte gUnknown_83D41EC
 _08108340:
 	ldr r0, _08108348 @ =gUnknown_83D41F4
-	bl LoadCompressedObjectPalette
+	bl LoadCompressedSpritePalette
 	b _08108352
 	.align 2, 0
 _08108348: .4byte gUnknown_83D41F4
 _0810834C:
 	ldr r0, _08108360 @ =gBagSwapSpriteSheet
 _0810834E:
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 _08108352:
 	ldr r0, _08108364 @ =gUnknown_203AD10
 	ldr r1, [r0]
@@ -702,7 +702,7 @@ _08108360: .4byte gBagSwapSpriteSheet
 _08108364: .4byte gUnknown_203AD10
 _08108368:
 	ldr r0, _08108378 @ =gBagSwapSpritePalette
-	bl LoadCompressedObjectPalette
+	bl LoadCompressedSpritePalette
 	ldr r1, [r4]
 	movs r0, 0
 	strb r0, [r1, 0x10]

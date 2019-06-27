@@ -1197,7 +1197,7 @@ sub_800FAE0: @ 800FAE0
 	ldr r0, _0800FB8C @ =gBattle_BG2_Y
 	strh r1, [r0]
 	ldr r0, _0800FB90 @ =gUnknown_8248318
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	b _0800FC26
 	.align 2, 0
 _0800FB64: .4byte gBattleTypeFlags

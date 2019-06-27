@@ -170,7 +170,7 @@ sub_81476E0: @ 81476E0
 	lsls r0, 3
 	ldr r1, _081477B0 @ =gUnknown_846B42C
 	adds r0, r1
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	movs r2, 0x8
 	ldrsh r0, [r4, r2]
 	lsls r0, 3

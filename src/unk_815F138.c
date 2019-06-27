@@ -209,7 +209,7 @@ void sub_815F564(u16 tilesTag, u16 palTag)
     struct SpritePalette spritePalette = {gUnknown_847A328};
     spriteSheet.tag = tilesTag;
     spritePalette.tag = palTag;
-    LoadCompressedObjectPic(&spriteSheet);
+    LoadCompressedSpriteSheet(&spriteSheet);
     LoadSpritePalette(&spritePalette);
 }
 

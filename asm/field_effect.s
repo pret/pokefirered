@@ -608,12 +608,12 @@ CreateTrainerSprite: @ 8083858
 	add r8, r4
 	mov r0, r8
 	adds r1, r7, 0
-	bl LoadCompressedObjectPaletteOverrideBuffer
+	bl LoadCompressedSpritePaletteOverrideBuffer
 	ldr r0, _080838E4 @ =gTrainerFrontPicTable
 	adds r4, r0
 	adds r0, r4, 0
 	adds r1, r7, 0
-	bl LoadCompressedObjectPicOverrideBuffer
+	bl LoadCompressedSpriteSheetOverrideBuffer
 	mov r1, sp
 	ldrh r0, [r4, 0x6]
 	movs r2, 0

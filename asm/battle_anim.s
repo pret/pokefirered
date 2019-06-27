@@ -483,11 +483,11 @@ ScriptCmd_loadspritegfx: @ 8072868
 	lsls r5, r4, 3
 	ldr r0, _080728B8 @ =gUnknown_8399388
 	adds r0, r5, r0
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	ldr r0, _080728BC @ =gUnknown_8399C90
 	adds r5, r0
 	adds r0, r5, 0
-	bl sub_800F078
+	bl LoadCompressedSpritePaletteUsingHeap
 	ldr r0, [r6]
 	adds r0, 0x2
 	str r0, [r6]

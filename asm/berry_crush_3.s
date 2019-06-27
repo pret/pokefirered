@@ -2845,7 +2845,7 @@ sub_814ECE0: @ 814ECE0
 _0814ECF6:
 	lsls r0, r5, 3
 	adds r0, r4
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24

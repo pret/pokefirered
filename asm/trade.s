@@ -7292,7 +7292,7 @@ _08050040:
 	ldr r1, [r1, 0x8]
 	adds r2, r5, 0
 	adds r3, r7, 0
-	bl sub_800ECC4
+	bl HandleLoadSpecialPokePic
 	movs r4, 0
 	b _0805009A
 	.align 2, 0
@@ -7316,7 +7316,7 @@ _0805007C:
 _0805009A:
 	mov r0, r8
 	bl GetMonSpritePalStruct
-	bl LoadCompressedObjectPalette
+	bl LoadCompressedSpritePalette
 	ldr r0, _080500C4 @ =gUnknown_2031DAC
 	ldr r1, [r0]
 	adds r0, r1, 0
@@ -10813,7 +10813,7 @@ _08052042:
 	ldr r1, [r1]
 	ldr r1, [r1, 0x10]
 	ldr r3, [r3, 0x6C]
-	bl sub_800ECC4
+	bl HandleLoadSpecialPokePic
 	ldr r1, [r7]
 	b _080522AC
 	.align 2, 0
@@ -13038,7 +13038,7 @@ _0805349E:
 	ldr r1, [r1]
 	ldr r1, [r1, 0x10]
 	ldr r3, [r3, 0x6C]
-	bl sub_800ECC4
+	bl HandleLoadSpecialPokePic
 	ldr r1, [r7]
 	b _08053708
 	.align 2, 0

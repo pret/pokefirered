@@ -865,79 +865,66 @@ void SetBgAffine(u8 bg, u32 srcCenterX, u32 srcCenterY, s16 dispCenterX, s16 dis
     SetBgAffineInternal(bg, srcCenterX, srcCenterY, dispCenterX, dispCenterY, scaleX, scaleY, rotationAngle);
 }
 
-u8 AdjustBgMosaic(u8 a1, u8 a2)
+#define BG_MOSAIC_SET 0
+#define BG_MOSAIC_SET_H 1
+#define BG_MOSAIC_INC_H 2
+#define BG_MOSAIC_DEC_H 3
+#define BG_MOSAIC_SET_V 4
+#define BG_MOSAIC_INC_V 5
+#define BG_MOSAIC_DEC_V 6
+
+u8 AdjustBgMosaic(u8 value, u8 mode)
 {
-    u16 result;
-    s16 test1;
-    s16 test2;
+    u16 mosaicSize;
+    s16 bgMosaicH;
+    s16 bgMosaicV;
+    mosaicSize = GetGpuReg(REG_OFFSET_MOSAIC);
+    bgMosaicH = mosaicSize & 0xF;
+    bgMosaicV = (mosaicSize >> 4) & 0xF;
+    mosaicSize &= 0xFF00;
 
-    result = GetGpuReg(REG_OFFSET_MOSAIC);
-
-    test1 = result & 0xF;
-    test2 = (result >> 4) & 0xF;
-    result &= 0xFF00;
-
-    switch (a2)
+    switch (mode)
     {
-        case 0:
-        default:
-            test1 = a1 & 0xF;
-            test2 = a1 >> 0x4;
-            break;
-        case 1:
-            test1 = a1 & 0xF;
-            break;
-        case 2:
-            if ((test1 + a1) > 0xF)
-            {
-                test1 = 0xF;
-            }
-            else
-            {
-                test1 += a1;
-            }
-            break;
-        case 3:
-            if ((test1 - a1) < 0)
-            {
-                test1 = 0x0;
-            }
-            else
-            {
-                test1 -= a1;
-            }
-            break;
-        case 4:
-            test2 = a1 & 0xF;
-            break;
-        case 5:
-            if ((test2 + a1) > 0xF)
-            {
-                test2 = 0xF;
-            }
-            else
-            {
-                test2 += a1;
-            }
-            break;
-        case 6:
-            if ((test2 - a1) < 0)
-            {
-                test2 = 0x0;
-            }
-            else
-            {
-                test2 -= a1;
-            }
-            break;
+    case BG_MOSAIC_SET:
+    default:
+        bgMosaicH = value & 0xF;
+        bgMosaicV = value >> 0x4;
+        break;
+    case BG_MOSAIC_SET_H:
+        bgMosaicH = value & 0xF;
+        break;
+    case BG_MOSAIC_INC_H:
+        if ((bgMosaicH + value) > 0xF)
+            bgMosaicH = 0xF;
+        else
+            bgMosaicH += value;
+        break;
+    case BG_MOSAIC_DEC_H:
+        if ((bgMosaicH - value) < 0)
+            bgMosaicH = 0x0;
+        else
+            bgMosaicH -= value;
+        break;
+    case BG_MOSAIC_SET_V:
+        bgMosaicV = value & 0xF;
+        break;
+    case BG_MOSAIC_INC_V:
+        if ((bgMosaicV + value) > 0xF)
+            bgMosaicV = 0xF;
+        else
+            bgMosaicV += value;
+        break;
+    case BG_MOSAIC_DEC_V:
+        if ((bgMosaicV - value) < 0)
+            bgMosaicV = 0x0;
+        else
+            bgMosaicV -= value;
+        break;
     }
-
-    result |= ((test2 << 0x4) & 0xF0);
-    result |= (test1 & 0xF);
-
-    SetGpuReg(REG_OFFSET_MOSAIC, result);
-
-    return result;
+    mosaicSize |= ((bgMosaicV << 0x4) & 0xF0);
+    mosaicSize |= (bgMosaicH & 0xF);
+    SetGpuReg(REG_OFFSET_MOSAIC, mosaicSize);
+    return mosaicSize;
 }
 
 void SetBgTilemapBuffer(u8 bg, void *tilemap)

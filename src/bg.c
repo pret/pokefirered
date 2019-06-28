@@ -865,7 +865,7 @@ void SetBgAffine(u8 bg, u32 srcCenterX, u32 srcCenterY, s16 dispCenterX, s16 dis
     SetBgAffineInternal(bg, srcCenterX, srcCenterY, dispCenterX, dispCenterY, scaleX, scaleY, rotationAngle);
 }
 
-u8 Unused_AdjustBgMosaic(u8 a1, u8 a2)
+u8 AdjustBgMosaic(u8 a1, u8 a2)
 {
     u16 result;
     s16 test1;

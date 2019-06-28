@@ -25,7 +25,7 @@ sub_807F620: @ 807F620
 	.align 2, 0
 _0807F640: .4byte gTasks+0x8
 _0807F644:
-	bl c3_80A0DD8_is_running
+	bl FldEffPoison_IsActive
 	cmp r0, 0
 	bne _0807F686
 	bl sub_812B478

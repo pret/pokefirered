@@ -149,7 +149,7 @@ SECTIONS {
         asm/field_poison.o(.text);
         asm/pokemon_size_record.o(.text);
         asm/pc_screen_effect.o(.text);
-        asm/fldeff_poison.o(.text);
+        src/fldeff_poison.o(.text);
         src/fldeff_berrytree.o(.text);
         src/field_special_scene.o(.text);
         asm/safari_zone.o(.text);

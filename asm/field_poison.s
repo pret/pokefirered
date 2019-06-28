@@ -291,7 +291,7 @@ _080A0668:
 	cmp r7, 0
 	beq _080A067C
 _080A0678:
-	bl overworld_poison_effect
+	bl FldEffPoison_Start
 _080A067C:
 	cmp r6, 0
 	beq _080A0688

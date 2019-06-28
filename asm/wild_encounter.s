@@ -1020,8 +1020,8 @@ _08082EB6:
 _08082EBC: .4byte gSpecialVar_Result
 	thumb_func_end sub_8082E54
 
-	thumb_func_start sub_8082EC0
-sub_8082EC0: @ 8082EC0
+	thumb_func_start SweetScentWildEncounter
+SweetScentWildEncounter: @ 8082EC0
 	push {r4,r5,lr}
 	sub sp, 0x4
 	mov r4, sp
@@ -1108,7 +1108,7 @@ _08082F6E:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8082EC0
+	thumb_func_end SweetScentWildEncounter
 
 	thumb_func_start sub_8082F78
 sub_8082F78: @ 8082F78

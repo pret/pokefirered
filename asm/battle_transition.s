@@ -137,7 +137,7 @@ _080D09AC: .4byte gTasks
 Transition_Phase1: @ 80D09B0
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_807B05C
+	bl SetWeatherScreenFadeOut
 	ldr r0, _080D09DC @ =gPlttBufferFaded
 	ldr r1, _080D09E0 @ =gPlttBufferUnfaded
 	ldr r2, _080D09E4 @ =0x04000100

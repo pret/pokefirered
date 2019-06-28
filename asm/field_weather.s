@@ -2672,8 +2672,8 @@ _0807B054: .4byte gUnknown_2037F34
 _0807B058: .4byte 0x000006d3
 	thumb_func_end sub_807B048
 
-	thumb_func_start sub_807B05C
-sub_807B05C: @ 807B05C
+	thumb_func_start SetWeatherScreenFadeOut
+SetWeatherScreenFadeOut: @ 807B05C
 	ldr r0, _0807B068 @ =gUnknown_2037F34
 	ldr r1, _0807B06C @ =0x000006c6
 	adds r0, r1
@@ -2683,7 +2683,7 @@ sub_807B05C: @ 807B05C
 	.align 2, 0
 _0807B068: .4byte gUnknown_2037F34
 _0807B06C: .4byte 0x000006c6
-	thumb_func_end sub_807B05C
+	thumb_func_end SetWeatherScreenFadeOut
 
 	thumb_func_start sub_807B070
 sub_807B070: @ 807B070

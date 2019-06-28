@@ -44,5 +44,6 @@ u16 GetLocalWaterMon(void);
 bool8 UpdateRepelCounter(void);
 void sub_8082740(u8);
 u8 GetUnownLetterByPersonalityLoByte(u32 personality);
+bool8 SweetScentWildEncounter(void);
 
 #endif // GUARD_WILD_ENCOUNTER_H

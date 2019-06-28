@@ -3575,7 +3575,7 @@ gUnknown_81BE2B7:: @ 81BE2B7
 gUnknown_81BE2FF:: @ 81BE2FF
 	.incbin "baserom.gba", 0x1BE2FF, 0x265
 
-gUnknown_81BE564:: @ 81BE564
+EventScript_FailSweetScent:: @ 81BE564
 	.incbin "baserom.gba", 0x1BE564, 0x2A
 
 Route2_EventScript_1BE58E:: @ 81BE58E

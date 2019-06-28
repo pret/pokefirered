@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start npc_before_player_of_type
-npc_before_player_of_type: @ 80C97A8
+	thumb_func_start CheckObjectGraphicsInFrontOfPlayer
+CheckObjectGraphicsInFrontOfPlayer: @ 80C97A8
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	lsls r5, 24
@@ -46,7 +46,7 @@ _080C97F6:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end npc_before_player_of_type
+	thumb_func_end CheckObjectGraphicsInFrontOfPlayer
 
 	thumb_func_start oei_task_add
 oei_task_add: @ 80C97FC
@@ -283,7 +283,7 @@ _080C99D4: .4byte gPlayerAvatar
 SetUpFieldMove_RockSmash: @ 80C99D8
 	push {lr}
 	movs r0, 0x60
-	bl npc_before_player_of_type
+	bl CheckObjectGraphicsInFrontOfPlayer
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

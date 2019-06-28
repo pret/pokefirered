@@ -3566,7 +3566,7 @@ SeafoamIslands_B1F_EventScript_1BE11D:: @ 81BE11D
 VictoryRoad_2F_EventScript_1BE11D:: @ 81BE11D
 	.incbin "baserom.gba", 0x1BE11D, 0x51
 
-gUnknown_81BE16E:: @ 81BE16E
+EventScript_FldEffStrength:: @ 81BE16E
 	.incbin "baserom.gba", 0x1BE16E, 0x149
 
 gUnknown_81BE2B7:: @ 81BE2B7

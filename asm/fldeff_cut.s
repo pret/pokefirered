@@ -39,7 +39,7 @@ sub_8097898: @ 8097898
 	cmp r0, 0x1
 	beq _080978E0
 	movs r0, 0x5F
-	bl npc_before_player_of_type
+	bl CheckObjectGraphicsInFrontOfPlayer
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

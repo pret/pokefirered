@@ -1144,4 +1144,6 @@ extern const u8 gUnknown_81BB084[];
 extern const u8 gUnknown_81BB0DF[];
 extern const u8 gUnknown_81BB156[];
 
+extern const u8 EventScript_FldEffStrength[];
+
 #endif //GUARD_EVENT_SCRIPTS_H

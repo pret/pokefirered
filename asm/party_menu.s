@@ -3543,7 +3543,7 @@ sub_81205C8: @ 81205C8
 	bne _081205F2
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl sub_8097D38
+	bl GiveMailToMon
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -10776,7 +10776,7 @@ _08123EB2:
 	muls r0, r1
 	ldr r1, _08123EE8 @ =gPlayerParty
 	adds r0, r1
-	bl sub_809803C
+	bl TakeMailFromMon2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF

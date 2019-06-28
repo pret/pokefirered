@@ -12,7 +12,6 @@ enum
 void PlayTimeCounter_Reset(void)
 {
     sPlayTimeCounterState = STOPPED;
-
     gSaveBlock2Ptr->playTimeHours = 0;
     gSaveBlock2Ptr->playTimeMinutes = 0;
     gSaveBlock2Ptr->playTimeSeconds = 0;
@@ -22,7 +21,6 @@ void PlayTimeCounter_Reset(void)
 void PlayTimeCounter_Start(void)
 {
     sPlayTimeCounterState = RUNNING;
-
     if (gSaveBlock2Ptr->playTimeHours > 999)
         PlayTimeCounter_SetToMax();
 }

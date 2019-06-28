@@ -12,7 +12,6 @@ static bool32 IsCurMapInLocationList(const u16 *list)
         if (list[i] == locSum)
             return TRUE;
     }
-
     return FALSE;
 }
 

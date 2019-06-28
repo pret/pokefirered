@@ -5,7 +5,7 @@
 #include "string_util.h"
 #include "constants/species.h"
 #include "constants/items.h"
-#include "mail.h"
+#include "mail_data.h"
 #include "pokemon_storage_system.h"
 #include "event_data.h"
 #include "random.h"

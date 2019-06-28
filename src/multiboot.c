@@ -23,9 +23,7 @@ void MultiBootInit(struct MultiBootParam *mp)
 
 int MultiBootMain(struct MultiBootParam *mp)
 {
-    int i;
-    int j;
-    int k;
+    int i, j, k;
 
     if (MultiBootCheckComplete(mp))
     {
@@ -260,9 +258,7 @@ output_burst:
 
 static int MultiBootSend(struct MultiBootParam *mp, u16 data)
 {
-    int i;
-
-    i = REG_SIOCNT & (SIO_MULTI_BUSY | SIO_MULTI_SD | SIO_MULTI_SI);
+    int i = REG_SIOCNT & (SIO_MULTI_BUSY | SIO_MULTI_SD | SIO_MULTI_SI);
     if (i != SIO_MULTI_SD)
     {
         MultiBootInit(mp);

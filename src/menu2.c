@@ -820,7 +820,7 @@ u8 sub_812EA78(u16 species, u32 personality, u8 a2)
 {
     if (species == SPECIES_UNOWN)
     {
-        u8 unownLetter = GetUnownLetterByPersonality(personality);
+        u8 unownLetter = GetUnownLetterByPersonalityLoByte(personality);
         switch (unownLetter)
         {
         case 0:

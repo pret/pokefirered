@@ -79,7 +79,6 @@ void HandleLoadSpecialPokePic(const struct CompressedSpriteSheet *src, void *des
         isFrontPic = TRUE; // frontPic
     else
         isFrontPic = FALSE; // backPic
-
     LoadSpecialPokePic(src, dest, species, personality, isFrontPic);
 }
 
@@ -94,7 +93,6 @@ void LoadSpecialPokePic(const struct CompressedSpriteSheet *src, void *dest, s32
             i = SPECIES_UNOWN;
         else
             i += SPECIES_UNOWN_B - 1;
-
         if (!isFrontPic)
             LZ77UnCompWram(gMonBackPicTable[i].data, dest);
         else

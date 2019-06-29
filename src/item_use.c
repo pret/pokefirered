@@ -68,7 +68,6 @@ void sub_80A19E8(u8 taskId);
 void sub_80A1A44(void);
 void sub_80A1B48(u8 taskId);
 void sub_80A1C08(u8 taskId);
-void sub_80A1C44(u8 taskId);
 void sub_80A1CAC(void);
 void sub_80A1CC0(u8 taskId);
 void sub_80A1D58(void);
@@ -557,7 +556,7 @@ void sub_80A1B48(u8 taskId)
     }
 }
 
-bool8 sub_80A1B8C(void)
+bool8 CanUseEscapeRopeOnCurrMap(void)
 {
     if (gMapHeader.escapeRope & 1)
         return TRUE;
@@ -567,7 +566,7 @@ bool8 sub_80A1B8C(void)
 
 void ItemUseOutOfBattle_EscapeRope(u8 taskId)
 {
-    if (sub_80A1B8C() == TRUE)
+    if (CanUseEscapeRopeOnCurrMap() == TRUE)
     {
         ItemUse_SetQuestLogEvent(4, NULL, gSpecialVar_ItemId, gMapHeader.regionMapSectionId);
         sItemUseOnFieldCB = sub_80A1C08;
@@ -579,7 +578,7 @@ void ItemUseOutOfBattle_EscapeRope(u8 taskId)
 
 void sub_80A1C08(u8 taskId)
 {
-    sub_8054D70();
+    Overworld_ResetStateAfterDigEscRope();
     sub_80A1A44();
     gTasks[taskId].data[0] = 0;
     DisplayItemMessageOnField(taskId, 2, gStringVar4, sub_80A1C44);

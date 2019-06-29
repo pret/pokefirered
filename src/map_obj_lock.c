@@ -89,7 +89,7 @@ void LockSelectedMapObject(void)
 void sub_80696C0(void)
 {
     u8 fieldObjectId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
-    FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[fieldObjectId]);
+    FieldObjectClearHeldMovementIfFinished(&gMapObjects[fieldObjectId]);
     sub_80974D8();
     UnfreezeMapObjects();
 }
@@ -98,9 +98,9 @@ void sub_80696F0(void)
 {
     u8 fieldObjectId;
     if (gMapObjects[gSelectedEventObject].active)
-        FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[gSelectedEventObject]);
+        FieldObjectClearHeldMovementIfFinished(&gMapObjects[gSelectedEventObject]);
     fieldObjectId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
-    FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[fieldObjectId]);
+    FieldObjectClearHeldMovementIfFinished(&gMapObjects[fieldObjectId]);
     sub_80974D8();
     UnfreezeMapObjects();
 }

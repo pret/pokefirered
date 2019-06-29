@@ -1091,7 +1091,7 @@ _0813F470:
 	.4byte _0813F50C
 	.4byte _0813F52C
 _0813F484:
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2

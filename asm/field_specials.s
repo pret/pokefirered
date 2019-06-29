@@ -413,7 +413,7 @@ sub_80CA8F8: @ 80CA8F8
 	movs r4, 0
 	movs r7, 0
 	movs r5, 0
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r0, 0
@@ -510,7 +510,7 @@ sub_80CA9A8: @ 80CA9A8
 	movs r4, 0
 	movs r6, 0
 	movs r5, 0
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r0, 0
@@ -5152,7 +5152,7 @@ sub_80CCD84: @ 80CCD84
 	ldr r0, _080CCDC4 @ =0x00190018
 	cmp r1, r0
 	bne _080CCDC8
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2

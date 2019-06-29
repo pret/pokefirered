@@ -730,7 +730,7 @@ _0807E0AE:
 	ldr r1, _0807E0E8 @ =gMapObjects
 	adds r0, r1
 	movs r1, 0x10
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	movs r0, 0x8
 	strh r0, [r4, 0x8]
 	b _0807E206
@@ -783,7 +783,7 @@ _0807E10E:
 	lsls r0, 2
 	ldr r1, _0807E15C @ =gMapObjects
 	adds r0, r1
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	b _0807E1F2
 	.align 2, 0
 _0807E158: .4byte sub_807F204
@@ -807,7 +807,7 @@ _0807E160:
 	ldr r1, _0807E194 @ =gMapObjects
 	adds r0, r1
 	movs r1, 0x10
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	movs r0, 0x2
 	strh r0, [r4, 0x8]
 	b _0807E206
@@ -838,7 +838,7 @@ _0807E198:
 	lsls r0, 2
 	ldr r1, _0807E1D8 @ =gMapObjects
 	adds r0, r1
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	movs r0, 0x3
 	strh r0, [r4, 0x8]
 	b _0807E206
@@ -929,7 +929,7 @@ _0807E25E:
 	lsls r4, 2
 	ldr r0, _0807E2A4 @ =gMapObjects
 	adds r4, r0
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8063F84
@@ -937,7 +937,7 @@ _0807E25E:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	movs r0, 0x2
 	strh r0, [r5, 0x8]
 	b _0807E2C6
@@ -1744,7 +1744,7 @@ _0807E8AE:
 	lsls r0, 2
 	adds r0, r4
 	movs r1, 0x11
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	movs r0, 0x2
 	strh r0, [r5, 0x8]
 	b _0807E976
@@ -1776,7 +1776,7 @@ _0807E8F4:
 	lsls r0, 2
 	ldr r1, _0807E93C @ =gMapObjects
 	adds r0, r1
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	movs r0, 0
 	bl sub_807DCB0
 	movs r0, 0x3
@@ -1871,12 +1871,12 @@ _0807E9DA:
 	b _0807EA92
 _0807E9E8:
 	adds r0, r6, 0
-	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl FieldObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807EA00
 	adds r0, r6, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807EAB0
@@ -2033,7 +2033,7 @@ _0807EB08:
 	lsrs r0, 7
 	cmp r0, 0
 	beq _0807EB4C
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetStepInPlaceDelay16AnimId
@@ -2071,7 +2071,7 @@ sub_807EB64: @ 807EB64
 	lsls r4, 2
 	ldr r0, _0807EBB8 @ =gMapObjects
 	adds r4, r0
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetStepInPlaceDelay16AnimId

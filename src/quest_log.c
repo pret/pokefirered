@@ -1705,7 +1705,7 @@ void sub_811246C(struct Sprite *sprite)
     {
         if (gUnknown_203AF9A[0][0] != 0xFF)
         {
-            sub_8063CA4(mapObject, gUnknown_203AF9A[0][0]);
+            FieldObjectSetHeldMovement(mapObject, gUnknown_203AF9A[0][0]);
             gUnknown_203AF9A[0][0] = 0xFF;
         }
         if (gUnknown_203AF9A[0][1] != 0xFF)
@@ -1719,7 +1719,7 @@ void sub_811246C(struct Sprite *sprite)
     {
         if (gUnknown_203AF9A[mapObject->localId][0] != 0xFF)
         {
-            sub_8063CA4(mapObject, gUnknown_203AF9A[mapObject->localId][0]);
+            FieldObjectSetHeldMovement(mapObject, gUnknown_203AF9A[mapObject->localId][0]);
             gUnknown_203AF9A[mapObject->localId][0] = 0xFF;
         }
         sub_8063E28(mapObject, sprite);
@@ -1911,7 +1911,7 @@ void sub_8112940(u8 a0, struct UnkStruct_203AE98 *a1, u16 a2)
             gUnknown_3005E94[gUnknown_203AF98].unk_4 = 0;
             gUnknown_3005E94[gUnknown_203AF98].unk_6 = 0;
             gUnknown_3005E94[gUnknown_203AF98].unk_0 = 0;
-            switch (player_get_direction_lower_nybble())
+            switch (GetPlayerFacingDirection())
             {
                 case 0:
                 case 1:

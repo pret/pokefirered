@@ -565,7 +565,7 @@ sub_80977F0: @ 80977F0
 	cmp r0, 0
 	beq _08097838
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809786A
@@ -583,7 +583,7 @@ _08097838:
 _08097850: .4byte gMapObjects
 _08097854:
 	adds r0, r4, 0
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	lsls r0, 24
 	cmp r0, 0
 	bne _0809786A

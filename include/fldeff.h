@@ -1,10 +1,22 @@
 #ifndef GUARD_FLDEFF_H
 #define GUARD_FLDEFF_H
 
+extern struct MapPosition gPlayerFacingPosition;
+
 bool8 CheckObjectGraphicsInFrontOfPlayer(u8 graphicsId);
 u8 oei_task_add(void);
 
-// rock smash
+// flash
+
+// cut
+
+// dig
+bool8 SetUpFieldMove_Dig(void);
+bool8 FldEff_UseDig(void);
+
+// rocksmash
+bool8 SetUpFieldMove_RockSmash(void);
+bool8 FldEff_UseRockSmash(void);
 
 // berrytree
 void nullsub_56(void);

@@ -181,7 +181,8 @@ SECTIONS {
         src/heal_location.o(.text);
         asm/region_map.o(.text);
         src/battle_ai_script_commands.o(.text);
-        asm/rom6.o(.text);
+        src/fldeff_rocksmash.o(.text);
+        src/fldeff_dig.o(.text);
         asm/fldeff_flash.o(.text);
         asm/post_battle_event_funcs.o(.text);
         src/prof_pc.o(.text);

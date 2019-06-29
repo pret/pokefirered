@@ -3545,7 +3545,7 @@ CeruleanCave_B1F_EventScript_1BE00C:: @ 81BE00C
 CeruleanCave_1F_EventScript_1BE00C:: @ 81BE00C
 	.incbin "baserom.gba", 0x1BE00C, 0x58
 
-gUnknown_81BE064:: @ 81BE064
+EventScript_FldEffRockSmash:: @ 81BE064
 	.incbin "baserom.gba", 0x1BE064, 0xB9
 
 MtEmber_Exterior_EventScript_1BE11D:: @ 81BE11D

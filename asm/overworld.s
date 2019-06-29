@@ -193,8 +193,8 @@ _08054D68: .4byte 0x00000808
 _08054D6C: .4byte 0x0000404d
 	thumb_func_end Overworld_ResetStateAfterTeleport
 
-	thumb_func_start sub_8054D70
-sub_8054D70: @ 8054D70
+	thumb_func_start Overworld_ResetStateAfterDigEscRope
+Overworld_ResetStateAfterDigEscRope: @ 8054D70
 	push {lr}
 	bl ResetInitialPlayerAvatarState
 	movs r0, 0x83
@@ -230,7 +230,7 @@ _08054DC8: .4byte 0x00000805
 _08054DCC: .4byte 0x00000806
 _08054DD0: .4byte 0x00000808
 _08054DD4: .4byte 0x0000404d
-	thumb_func_end sub_8054D70
+	thumb_func_end Overworld_ResetStateAfterDigEscRope
 
 	thumb_func_start sub_8054DD8
 sub_8054DD8: @ 8054DD8
@@ -1257,7 +1257,7 @@ sub_805550C: @ 805550C
 	ldrh r0, [r0, 0x4]
 	cmp r0, 0x1
 	beq _08055590
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -1858,7 +1858,7 @@ _08055A04: .4byte gUnknown_2031DD4
 	thumb_func_start sub_8055A08
 sub_8055A08: @ 8055A08
 	push {r4,lr}
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	ldr r4, _08055A24 @ =gUnknown_2031DD4
 	strb r0, [r4, 0x1]
 	movs r0, 0x2

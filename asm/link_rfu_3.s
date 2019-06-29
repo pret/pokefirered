@@ -11381,13 +11381,13 @@ sub_811B66C: @ 811B66C
 	ldr r1, _0811B6C0 @ =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl FieldObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	bne _0811B6D0
 	ldrb r1, [r5]
 	adds r0, r4, 0
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	lsls r0, 24
 	cmp r0, 0
 	bne _0811B6C4
@@ -11440,7 +11440,7 @@ sub_811B6E8: @ 811B6E8
 	ldr r1, _0811B72C @ =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _0811B730
@@ -12496,7 +12496,7 @@ sub_811BF00: @ 811BF00
 	b _0811BFEE
 _0811BF1C:
 	ldr r4, _0811BF44 @ =gUnknown_8457116
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r4

@@ -114,7 +114,7 @@ void sub_805671C(void);
 bool8 sub_8055FC4(void);
 bool8 is_light_level_8_or_9(u8 mapType);
 bool32 sub_8055C9C(void);
-void sub_8054D70(void);
+void Overworld_ResetStateAfterDigEscRope(void);
 bool32 sub_8058244(void);
 
 #endif //GUARD_ROM4_H

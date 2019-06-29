@@ -6,13 +6,15 @@
 #include "script.h"
 #include "fldeff.h"
 #include "event_scripts.h"
+#include "constants/songs.h"
+#include "constants/map_objects.h"
 
 static void FldEff_UseStrength(void);
 static void sub_80D08A8(void);
 
 bool8 SetUpFieldMove_Strength(void)
 {
-    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) || CheckObjectGraphicsInFrontOfPlayer(0x61) != TRUE)
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) || CheckObjectGraphicsInFrontOfPlayer(/*MAP_OBJ_GFX_PUSHABLE_BOULDER*/0x61) != TRUE)
     {
     	return FALSE;
     }

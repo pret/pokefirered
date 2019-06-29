@@ -726,8 +726,14 @@ struct SaveBlock1
     /*0x3D38*/ struct TrainerTowerLog unkArray[4];
 };
 
-extern struct SaveBlock1* gSaveBlock1Ptr;
+struct MapPosition
+{
+    s16 x;
+    s16 y;
+    s8 height;
+};
 
+extern struct SaveBlock1* gSaveBlock1Ptr;
 extern u8 gReservedSpritePaletteCount;
 
 #endif // GUARD_GLOBAL_H

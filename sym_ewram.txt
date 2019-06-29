@@ -1043,7 +1043,7 @@ gUnknown_20399FC: @ 20399FC
 gAIScriptPtr: @ 2039A00
 	.space 0x4
 
-gUnknown_2039A04: @ 2039A04
+gPlayerFacingPosition: @ 2039A04
 	.space 0x8
 
 gUnknown_2039A0C: @ 2039A0C

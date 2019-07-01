@@ -865,14 +865,6 @@ void SetBgAffine(u8 bg, u32 srcCenterX, u32 srcCenterY, s16 dispCenterX, s16 dis
     SetBgAffineInternal(bg, srcCenterX, srcCenterY, dispCenterX, dispCenterY, scaleX, scaleY, rotationAngle);
 }
 
-#define BG_MOSAIC_SET 0
-#define BG_MOSAIC_SET_H 1
-#define BG_MOSAIC_INC_H 2
-#define BG_MOSAIC_DEC_H 3
-#define BG_MOSAIC_SET_V 4
-#define BG_MOSAIC_INC_V 5
-#define BG_MOSAIC_DEC_V 6
-
 u8 AdjustBgMosaic(u8 value, u8 mode)
 {
     u16 mosaicSize;

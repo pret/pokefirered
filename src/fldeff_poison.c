@@ -24,7 +24,7 @@ static void Task_FieldPoisonEffect(u8 taskId)
         DestroyTask(taskId);
         return;
     }
-    AdjustBgMosaic((u8)(((u8)data[1] << 4) | (u8)data[1]), 0);
+    AdjustBgMosaic((u8)(((u8)data[1] << 4) | (u8)data[1]), BG_MOSAIC_SET);
 }
 
 void FldEffPoison_Start(void)

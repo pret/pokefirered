@@ -16,7 +16,7 @@ static /*IWRAM_DATA*/ struct {
     /* 0x0C */ u32 value;
 } gDma3Requests[128];
 
-static bool8 gDma3ManagerLocked;
+static volatile bool8 gDma3ManagerLocked;
 static u8 gDma3RequestCursor;
 
 void ClearDma3Requests(void)

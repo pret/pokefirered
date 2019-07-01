@@ -50,7 +50,6 @@ static int getline(char ** lineptr, size_t * n, FILE * stream) {
     return i;
 }
 
-
 static void getIncbinsFromFile(hunk_t ** hunks, size_t * num, size_t * maxnum, const char * fname, char ** strbuf, size_t * buffersize) {
     // Recursively find incbinned segments and encode them as hunks.
     FILE * file = fopen(fname, "r");

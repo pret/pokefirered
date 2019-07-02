@@ -1065,7 +1065,7 @@ Text_1A5446:: @ 81A5446
 	.string "Want to give a nickname to the\n"
 	.string "{STR_VAR_2} you received?$"
 
-gUnknown_81A5476:: @ 81A5476
+gText_PkmnFainted3:: @ 81A5476
 	.string "{STR_VAR_1} fainted…\p"
 	.string "$"
 

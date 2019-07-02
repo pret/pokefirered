@@ -4,6 +4,7 @@
 #include "global.h"
 
 extern u8 gNumSafariBalls;
+extern u16 gSafariZoneStepCounter;
 
 bool32 GetSafariZoneFlag(void);
 void SetSafariZoneFlag(void);

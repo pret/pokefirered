@@ -98,7 +98,7 @@ static void sub_80C98FC(u8 taskId)
 
 static void sub_80C99A0(u8 taskId)
 {
-    ((void (*)(void))(((u16)gTasks[taskId].data[8] << 16) | (u16)gTasks[taskId].data[9]))();
+    FLDEFF_CALL_FUNC_IN_DATA();
     gPlayerAvatar.unk6 = FALSE;
     DestroyTask(taskId);
 }

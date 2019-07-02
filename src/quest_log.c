@@ -996,7 +996,7 @@ void sub_8111368(void)
     else
     {
         sub_8111274(gUnknown_203ADF8, 1);
-        warp_in();
+        WarpIntoMap();
         gFieldCallback2 = sub_8111000;
         SetMainCallback2(sub_805726C);
     }

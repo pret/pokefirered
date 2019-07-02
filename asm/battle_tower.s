@@ -2010,14 +2010,14 @@ _080E68A8: .4byte gPlayerParty
 _080E68AC:
 	bl sub_80E7550
 _080E68B0:
-	ldr r0, _080E68C0 @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r0, _080E68C0 @ =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	bl SetMainCallback2
 	add sp, 0x4
 	pop {r4-r6}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E68C0: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
+_080E68C0: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
 	thumb_func_end sub_80E6854
 
 	thumb_func_start sub_80E68C4

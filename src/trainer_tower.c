@@ -1106,7 +1106,7 @@ void sub_815E068(u8 battleType, u8 facilityClass)
 
 void sub_815E114(void)
 {
-    SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+    SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
 void sub_815E124(u8 taskId)

@@ -1840,7 +1840,7 @@ _0806D704:
 	.align 2, 0
 _0806D71C: .4byte gUnknown_81BF546
 _0806D720:
-	bl sub_80A0F0C
+	bl SafariZoneTakeStep
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

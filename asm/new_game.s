@@ -159,7 +159,7 @@ sub_80549F8: @ 80549F8
 	movs r1, 0x1
 	movs r3, 0x6
 	bl Overworld_SetWarpDestination
-	bl warp_in
+	bl WarpIntoMap
 	add sp, 0x4
 	pop {r0}
 	bx r0

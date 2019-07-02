@@ -979,13 +979,7 @@ gUnknown_203998C: @ 203998C
 	.include "src/money.o"
 
 	.align 2
-gUnknown_2039994: @ 2039994
-	.space 0x2
-
-gUnknown_2039996: @ 2039996
-	.space 0x2
-
-	.align 2
+	.include "src/safari_zone.o"
 	.include "src/item_use.o"
 
 	.align 2

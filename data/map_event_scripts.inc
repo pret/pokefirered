@@ -4178,16 +4178,16 @@ gUnknown_81BFB5F:: @ 81BFB5F
 gUnknown_81BFB65:: @ 81BFB65
 	.incbin "baserom.gba", 0x1BFB65, 0x22
 
-gUnknown_81BFB87:: @ 81BFB87
+EventScript_SafariWarpOut:: @ 81BFB87
 	.incbin "baserom.gba", 0x1BFB87, 0x23
 
-gUnknown_81BFBAA:: @ 81BFBAA
+EventScript_SafariRetire:: @ 81BFBAA
 	.incbin "baserom.gba", 0x1BFBAA, 0x1B
 
-gUnknown_81BFBC5:: @ 81BFBC5
+EventScript_SafariTimesUp:: @ 81BFBC5
 	.incbin "baserom.gba", 0x1BFBC5, 0x12
 
-gUnknown_81BFBD7:: @ 81BFBD7
+EventScript_SafariOutOfBalls:: @ 81BFBD7
 	.incbin "baserom.gba", 0x1BFBD7, 0x2D5
 
 gUnknown_81BFEAC:: @ 81BFEAC

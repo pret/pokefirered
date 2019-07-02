@@ -3367,7 +3367,7 @@ sub_8117440: @ 8117440
 	movs r0, 0
 	mov r3, r8
 	bl SetDynamicWarpWithCoords
-	bl warp_in
+	bl WarpIntoMap
 	add sp, 0x8
 	pop {r3}
 	mov r8, r3
@@ -3424,7 +3424,7 @@ sub_81174B4: @ 81174B4
 	adds r1, r5, 0
 	mov r3, r8
 	bl Overworld_SetWarpDestination
-	bl warp_in
+	bl WarpIntoMap
 	add sp, 0x4
 	pop {r3}
 	mov r8, r3
@@ -3763,21 +3763,21 @@ _08117890:
 	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _081178AC @ =sub_805671C
+	ldr r1, _081178AC @ =CB2_LoadMap
 	bl sub_8147AA8
 	b _081178E0
 	.align 2, 0
-_081178AC: .4byte sub_805671C
+_081178AC: .4byte CB2_LoadMap
 _081178B0:
 	movs r0, 0x7
 	movs r1, 0x9
 	movs r2, 0x1
 	bl sub_8117440
-	ldr r0, _081178C4 @ =sub_805671C
+	ldr r0, _081178C4 @ =CB2_LoadMap
 	bl sub_814B754
 	b _081178E0
 	.align 2, 0
-_081178C4: .4byte sub_805671C
+_081178C4: .4byte CB2_LoadMap
 _081178C8:
 	movs r0, 0x8
 	movs r1, 0x5
@@ -3786,7 +3786,7 @@ _081178C8:
 	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _081178F8 @ =sub_805671C
+	ldr r1, _081178F8 @ =CB2_LoadMap
 	bl sub_81507FC
 _081178E0:
 	adds r0, r4, 0
@@ -3800,7 +3800,7 @@ _081178E0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081178F8: .4byte sub_805671C
+_081178F8: .4byte CB2_LoadMap
 _081178FC: .4byte gSpecialVar_Result
 	thumb_func_end sub_81175BC
 

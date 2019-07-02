@@ -229,7 +229,7 @@ void sub_814F32C(void)
         Free(GetBgTilemapBuffer(i));
     }
     Free(gUnknown_3002040);
-    SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+    SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
 void sub_814F364(s16 * unk0, s16 * unk1)

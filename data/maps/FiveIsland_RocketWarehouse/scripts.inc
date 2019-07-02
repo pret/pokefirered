@@ -113,7 +113,7 @@ FiveIsland_RocketWarehouse_EventScript_164087:: @ 8164087
 
 EventScript_1640A2:: @ 81640A2
 	getplayerxy VAR_0x8004, VAR_0x8005
-	specialvar VAR_RESULT, player_get_direction_lower_nybble
+	specialvar VAR_RESULT, GetPlayerFacingDirection
 	compare_var_to_value VAR_RESULT, 2
 	call_if 1, EventScript_16412E
 	msgbox gUnknown_817B7AE

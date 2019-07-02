@@ -683,7 +683,7 @@ u8 AddItemIconObject(u16 tilesTag, u16 paletteTag, u16 itemId)
 
     spritePalette.data = sub_8098974(itemId, 1);
     spritePalette.tag = paletteTag;
-    LoadCompressedObjectPalette(&spritePalette);
+    LoadCompressedSpritePalette(&spritePalette);
 
     CpuCopy16(&gUnknown_83D427C, &template, sizeof(struct SpriteTemplate));
     template.tileTag = tilesTag;
@@ -714,7 +714,7 @@ u8 AddItemIconObjectWithCustomObjectTemplate(const struct SpriteTemplate * origT
 
     spritePalette.data = sub_8098974(itemId, 1);
     spritePalette.tag = paletteTag;
-    LoadCompressedObjectPalette(&spritePalette);
+    LoadCompressedSpritePalette(&spritePalette);
 
     CpuCopy16(origTemplate, &template, sizeof(struct SpriteTemplate));
     template.tileTag = tilesTag;

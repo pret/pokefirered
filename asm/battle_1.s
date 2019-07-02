@@ -257,7 +257,7 @@ sub_800F380: @ 800F380
 	movs r0, 0
 	movs r1, 0x30
 	movs r2, 0x70
-	bl TextWindow_SetBubbleFrame_841F1C8
+	bl TextWindow_LoadResourcesStdFrame0
 	adds r0, r4, 0
 	adds r0, 0xEC
 	movs r1, 0
@@ -1197,7 +1197,7 @@ sub_800FAE0: @ 800FAE0
 	ldr r0, _0800FB8C @ =gBattle_BG2_Y
 	strh r1, [r0]
 	ldr r0, _0800FB90 @ =gUnknown_8248318
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	b _0800FC26
 	.align 2, 0
 _0800FB64: .4byte gBattleTypeFlags

@@ -5,7 +5,7 @@
 #include "string_util.h"
 #include "constants/species.h"
 #include "constants/items.h"
-#include "mail.h"
+#include "mail_data.h"
 #include "pokemon_storage_system.h"
 #include "event_data.h"
 #include "random.h"
@@ -1768,8 +1768,8 @@ static u8 EggHatchCreateMonSprite(u8 a0, u8 switchID, u8 pokeID, u16* speciesLoc
     {
         u16 species = GetMonData(mon, MON_DATA_SPECIES);
         u32 pid = GetMonData(mon, MON_DATA_PERSONALITY);
-        sub_800ECC4(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites[(a0 * 2) + 1], species, pid);
-        LoadCompressedObjectPalette(GetMonSpritePalStruct(mon));
+        HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites[(a0 * 2) + 1], species, pid);
+        LoadCompressedSpritePalette(GetMonSpritePalStruct(mon));
         *speciesLoc = species;
     }
         break;
@@ -1824,7 +1824,7 @@ static void CB2_EggHatch_0(void)
         SetVBlankCallback(VBlankCB_EggHatch);
         gSpecialVar_0x8005 = GetCurrentMapMusic();
 
-        reset_temp_tile_data_buffers();
+        ResetTempTileDataBuffers();
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, sBgTemplates_EggHatch, ARRAY_COUNT(sBgTemplates_EggHatch));
 

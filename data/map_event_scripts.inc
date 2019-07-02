@@ -3545,7 +3545,7 @@ CeruleanCave_B1F_EventScript_1BE00C:: @ 81BE00C
 CeruleanCave_1F_EventScript_1BE00C:: @ 81BE00C
 	.incbin "baserom.gba", 0x1BE00C, 0x58
 
-gUnknown_81BE064:: @ 81BE064
+EventScript_FldEffRockSmash:: @ 81BE064
 	.incbin "baserom.gba", 0x1BE064, 0xB9
 
 MtEmber_Exterior_EventScript_1BE11D:: @ 81BE11D
@@ -3566,7 +3566,7 @@ SeafoamIslands_B1F_EventScript_1BE11D:: @ 81BE11D
 VictoryRoad_2F_EventScript_1BE11D:: @ 81BE11D
 	.incbin "baserom.gba", 0x1BE11D, 0x51
 
-gUnknown_81BE16E:: @ 81BE16E
+EventScript_FldEffStrength:: @ 81BE16E
 	.incbin "baserom.gba", 0x1BE16E, 0x149
 
 gUnknown_81BE2B7:: @ 81BE2B7
@@ -3575,7 +3575,7 @@ gUnknown_81BE2B7:: @ 81BE2B7
 gUnknown_81BE2FF:: @ 81BE2FF
 	.incbin "baserom.gba", 0x1BE2FF, 0x265
 
-gUnknown_81BE564:: @ 81BE564
+EventScript_FailSweetScent:: @ 81BE564
 	.incbin "baserom.gba", 0x1BE564, 0x2A
 
 Route2_EventScript_1BE58E:: @ 81BE58E

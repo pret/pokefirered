@@ -305,7 +305,7 @@ c2_copyright_1: @ 80EC820
 	lsls r0, 24
 	cmp r0, 0
 	bne _080EC858
-	bl sub_8054A28
+	bl ResetMenuAndMonGlobals
 	bl Save_ResetSaveCounters
 	movs r0, 0
 	bl Save_LoadGameData
@@ -381,7 +381,7 @@ _080EC8A0:
 	bl ResetTasks
 	bl ResetSpriteData
 	bl ResetPaletteFade
-	bl reset_temp_tile_data_buffers
+	bl ResetTempTileDataBuffers
 	bl sub_80ECA00
 	add r1, sp, 0x4
 	movs r0, 0
@@ -445,13 +445,13 @@ _080EC944:
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r1, _080EC980 @ =gUnknown_8402668
 	str r4, [sp]
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r0, _080EC984 @ =gUnknown_840270C
 	movs r1, 0xD0
 	movs r2, 0x20
@@ -463,7 +463,7 @@ _080EC97C: .4byte gUnknown_8402650
 _080EC980: .4byte gUnknown_8402668
 _080EC984: .4byte gUnknown_840270C
 _080EC988:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	cmp r0, 0
 	bne _080EC9C6
@@ -1144,13 +1144,13 @@ _080ECED8:
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r1, _080ECF5C @ =gUnknown_8404F7C
 	movs r0, 0x1
 	str r0, [sp]
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	movs r0, 0x1
 	bl ShowBg
 	movs r0, 0
@@ -1172,7 +1172,7 @@ _080ECF58: .4byte gUnknown_84048EC
 _080ECF5C: .4byte gUnknown_8404F7C
 _080ECF60: .4byte sub_80EC9EC
 _080ECF64:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -1184,15 +1184,15 @@ _080ECF72:
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r1, _080ECFA0 @ =gUnknown_8403FE8
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
-	bl sub_80F6C14
+	bl DecompressAndCopyTileDataToVram
+	bl ResetBgPositions
 	movs r0, 0x1
 	bl ShowBg
 	b _080ECFF0
@@ -1200,7 +1200,7 @@ _080ECF72:
 _080ECF9C: .4byte gUnknown_8402D54
 _080ECFA0: .4byte gUnknown_8403FE8
 _080ECFA4:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	cmp r0, 0
 	bne _080ED094
@@ -1476,14 +1476,14 @@ _080ED1C4:
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r1, _080ED210 @ =gUnknown_8405890
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	movs r0, 0x3
 	bl ShowBg
 	b _080ED3CA
@@ -1493,7 +1493,7 @@ _080ED208: .4byte gUnknown_840BB90
 _080ED20C: .4byte gUnknown_8405414
 _080ED210: .4byte gUnknown_8405890
 _080ED214:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0
@@ -1527,39 +1527,39 @@ _080ED222:
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r1, _080ED310 @ =gUnknown_8405CDC
 	movs r4, 0x1
 	str r4, [sp]
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r1, _080ED314 @ =gUnknown_8406654
 	str r6, [sp]
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r1, _080ED318 @ =gUnknown_84071D0
 	str r4, [sp]
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r1, _080ED31C @ =gUnknown_8405DC4
 	str r6, [sp]
 	movs r0, 0x2
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r1, _080ED320 @ =gUnknown_840644C
 	str r4, [sp]
 	movs r0, 0x2
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
-	bl sub_80F6C14
+	bl DecompressAndCopyTileDataToVram
+	bl ResetBgPositions
 	movs r0, 0
 	bl ShowBg
 	movs r0, 0x1
@@ -1602,7 +1602,7 @@ _080ED320: .4byte gUnknown_840644C
 _080ED324: .4byte sub_80ED40C
 _080ED328: .4byte sub_80EC9EC
 _080ED32C:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	cmp r0, 0
 	bne _080ED3F6
@@ -1847,13 +1847,13 @@ _080ED4E4:
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r1, _080ED598 @ =gUnknown_8407A50
 	movs r0, 0x1
 	str r0, [sp]
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	movs r0, 0x1
 	bl ShowBg
 	movs r0, 0
@@ -1862,7 +1862,7 @@ _080ED4E4:
 	bl HideBg
 	movs r0, 0x3
 	bl HideBg
-	bl sub_80F6C14
+	bl ResetBgPositions
 	ldrb r0, [r5, 0x4]
 	adds r0, 0x1
 	strb r0, [r5, 0x4]
@@ -1895,7 +1895,7 @@ _080ED590: .4byte gUnknown_840BBA0
 _080ED594: .4byte gUnknown_8407470
 _080ED598: .4byte gUnknown_8407A50
 _080ED59C:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -1905,13 +1905,13 @@ _080ED59C:
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r1, _080ED5F0 @ =gUnknown_8408D98
 	str r4, [sp]
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r1, _080ED5F4 @ =gUnknown_203AB00
 	movs r0, 0x4
 	strh r0, [r1]
@@ -1935,7 +1935,7 @@ _080ED5F0: .4byte gUnknown_8408D98
 _080ED5F4: .4byte gUnknown_203AB00
 _080ED5F8: .4byte gUnknown_203AB02
 _080ED5FC:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
@@ -2730,7 +2730,7 @@ _080EDBF8:
 	strb r0, [r4, 0x4]
 	b _080EDC34
 _080EDC0C:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	cmp r0, 0
 	bne _080EDC34
@@ -2759,7 +2759,7 @@ sub_80EDC40: @ 80EDC40
 	ldr r4, _080EDCE4 @ =gUnknown_840BBC0
 _080EDC46:
 	adds r0, r4, 0
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	adds r4, 0x8
 	adds r5, 0x1
 	cmp r5, 0x4
@@ -4823,7 +4823,7 @@ sub_80EEBE4: @ 80EEBE4
 	ldr r4, _080EEC04 @ =gUnknown_840BEDC
 _080EEBEA:
 	adds r0, r4, 0
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	adds r4, 0x8
 	adds r5, 0x1
 	cmp r5, 0x6

@@ -495,7 +495,7 @@ static void Task_OaksSpeech1(u8 taskId)
         ScanlineEffect_Stop();
         ResetSpriteData();
         FreeAllSpritePalettes();
-        reset_temp_tile_data_buffers();
+        ResetTempTileDataBuffers();
         HelpSystem_SetSomeVariable2(2);
         break;
     case 1:
@@ -536,10 +536,10 @@ static void Task_OaksSpeech1(u8 taskId)
     case 5:
         sOakSpeechResources->textSpeed = GetTextSpeedSetting();
         gTextFlags.canABSpeedUpPrint = TRUE;
-        decompress_and_copy_tile_data_to_vram(1, sOakSpeechGfx_GameStartHelpUI, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, sOakSpeechGfx_GameStartHelpUI, 0, 0, 0);
         break;
     case 6:
-        if (free_temp_tile_data_buffers_if_possible())
+        if (FreeTempTileDataBuffersIfPossible())
             return;
         ClearDialogWindowAndFrame(0, 1);
         FillBgTilemapBufferRect_Palette0(1, 0x0000,  0,  0, 32, 32);
@@ -718,7 +718,7 @@ static void Task_OakSpeech6(u8 taskId)
         PlayBGM(BGM_FRLG_GAME_EXPLANATION_MIDDLE);
         sub_810F71C();
         PrintTextOnRightSnappedWindow(gText_ABUTTONNext, 0, 1);
-        sOakSpeechResources->unk_0008 = malloc_and_decompress(sNewGameAdventureIntroTilemap, &sp14);
+        sOakSpeechResources->unk_0008 = MallocAndDecompress(sNewGameAdventureIntroTilemap, &sp14);
         CopyToBgTilemapBufferRect(1, sOakSpeechResources->unk_0008, 0, 2, 30, 19);
         CopyBgTilemapBufferToVram(1);
         Free(sOakSpeechResources->unk_0008);
@@ -869,7 +869,7 @@ static void Task_OakSpeech9(u8 taskId)
         data[3]--;
     else
     {
-        sOakSpeechResources->solidColorsGfx = malloc_and_decompress(sOakSpeechGfx_SolidColors, &size);
+        sOakSpeechResources->solidColorsGfx = MallocAndDecompress(sOakSpeechGfx_SolidColors, &size);
         LoadBgTiles(1, sOakSpeechResources->solidColorsGfx, size, 0);
         CopyToBgTilemapBuffer(1, sOakSpeech_BackgroundTilemap, 0, 0);
         CopyBgTilemapBufferToVram(1);
@@ -1054,7 +1054,7 @@ static void Task_OakSpeech19(u8 taskId)
     {
         gTasks[taskId].data[13] = AddWindow(&sNewGameAdventureIntroWindowTemplates[1]);
         PutWindowTilemap(gTasks[taskId].data[13]);
-        SetWindowBorderStyle(gTasks[taskId].data[13], 1, sub_80F796C(), 14);
+        SetWindowBorderStyle(gTasks[taskId].data[13], 1, GetStdWindowBaseTileNum(), 14);
         FillWindowPixelBuffer(gTasks[taskId].data[13], 0x11);
         sOakSpeechResources->unk_001C[0] = 1;
         sOakSpeechResources->unk_001C[1] = 2;
@@ -1246,7 +1246,7 @@ static void Task_OakSpeech26(u8 taskId)
                 data[3]--;
             else
             {
-                CreateYesNoMenu(&sNewGameAdventureIntroWindowTemplates[2], 2, 0, 2, sub_80F796C(), 14, 0);
+                CreateYesNoMenu(&sNewGameAdventureIntroWindowTemplates[2], 2, 0, 2, GetStdWindowBaseTileNum(), 14, 0);
                 gTasks[taskId].func = Task_OakSpeech27;
             }
         }
@@ -1536,7 +1536,7 @@ static void CB2_ReturnFromNamingScreen(void)
         ScanlineEffect_Stop();
         ResetSpriteData();
         FreeAllSpritePalettes();
-        reset_temp_tile_data_buffers();
+        ResetTempTileDataBuffers();
         break;
     case 1:
         ResetBgsAndClearDma3BusyFlags(0);
@@ -1564,10 +1564,10 @@ static void CB2_ReturnFromNamingScreen(void)
         LoadPalette(sHelpDocsPalette, 0, 0xe0);
         break;
     case 4:
-        decompress_and_copy_tile_data_to_vram(1, sOakSpeechGfx_SolidColors, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, sOakSpeechGfx_SolidColors, 0, 0, 0);
         break;
     case 5:
-        if (free_temp_tile_data_buffers_if_possible())
+        if (FreeTempTileDataBuffersIfPossible())
             return;
         FillBgTilemapBufferRect_Palette0(1, 0x000, 0, 0, 30, 20);
         CopyToBgTilemapBuffer(1, sOakSpeech_BackgroundTilemap, 0, 0);
@@ -1613,7 +1613,7 @@ static void CreateNidoranFSprite(u8 taskId)
     u8 spriteId;
 
     DecompressPicFromTable(gUnknown_8235194, sub_8044E00(0), SPECIES_NIDORAN_F);
-    sub_800F078(&gUnknown_82373F4);
+    LoadCompressedSpritePaletteUsingHeap(&gUnknown_82373F4);
     SetMultiuseSpriteTemplateToPokemon(SPECIES_NIDORAN_F, 0);
     spriteId = CreateSprite(&gMultiuseSpriteTemplate, 0x60, 0x60, 1);
     gSprites[spriteId].callback = SpriteCallbackDummy;
@@ -1635,9 +1635,9 @@ static void CreatePikaOrGrassPlatformSpriteAndLinkToCurrentTask(u8 taskId, u8 st
     switch (state)
     {
     case 0:
-        LoadCompressedObjectPic(&sOakSpeech_PikaSpriteSheets[0]);
-        LoadCompressedObjectPic(&sOakSpeech_PikaSpriteSheets[1]);
-        LoadCompressedObjectPic(&sOakSpeech_PikaSpriteSheets[2]);
+        LoadCompressedSpriteSheet(&sOakSpeech_PikaSpriteSheets[0]);
+        LoadCompressedSpriteSheet(&sOakSpeech_PikaSpriteSheets[1]);
+        LoadCompressedSpriteSheet(&sOakSpeech_PikaSpriteSheets[2]);
         LoadSpritePalette(&sOakSpeech_PikaSpritePal);
         spriteId = CreateSprite(&sOakSpeech_PikaSpriteTemplates[0], 0x10, 0x11, 2);
         gSprites[spriteId].oam.priority = 0;
@@ -1654,7 +1654,7 @@ static void CreatePikaOrGrassPlatformSpriteAndLinkToCurrentTask(u8 taskId, u8 st
         gTasks[taskId].data[9] = spriteId;
         break;
     case 1:
-        LoadCompressedObjectPic(&sOakSpeech_GrassPlatformSpriteSheet);
+        LoadCompressedSpriteSheet(&sOakSpeech_GrassPlatformSpriteSheet);
         LoadSpritePalette(&sOakSpeech_GrassPlatformSpritePal);
         for (i = 0; i < 3; i++)
         {
@@ -1850,7 +1850,7 @@ static void PrintNameChoiceOptions(u8 taskId, u8 state)
 
     data[13] = AddWindow(&sNewGameAdventureIntroWindowTemplates[3]);
     PutWindowTilemap(data[13]);
-    SetWindowBorderStyle(data[13], 1, sub_80F796C(), 14);
+    SetWindowBorderStyle(data[13], 1, GetStdWindowBaseTileNum(), 14);
     FillWindowPixelBuffer(gTasks[taskId].data[13], 0x11);
     AddTextPrinterParameterized(data[13], 2, gOtherText_NewName, 8, 1, 0, NULL);
     if (state == 0)

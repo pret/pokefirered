@@ -211,7 +211,7 @@ void sub_810B858(void)
         InitWindows(gUnknown_84530E4);
     DeactivateAllTextPrinters();
     TextWindow_SetUserSelectedFrame(0, 0x64, 0xE0);
-    TextWindow_SetBubbleFrame_841F1C8(0, 0x6D, 0xD0);
+    TextWindow_LoadResourcesStdFrame0(0, 0x6D, 0xD0);
     TextWindow_SetStdFrame0_WithPal(0, 0x81, 0xC0);
     LoadPalette(gUnknown_8453098, 0xF0, 0x20);
     for (i = 0; i < 3; i++)
@@ -219,7 +219,7 @@ void sub_810B858(void)
         FillWindowPixelBuffer(i, 0x00);
         PutWindowTilemap(i);
     }
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
     for (i = 0; i < 11; i++)
     {
         gUnknown_203AD34[i] = 0xFF;
@@ -258,7 +258,7 @@ u8 sub_810B9DC(u8 a0, u8 a1)
         {
             SetWindowBorderStyle(gUnknown_203AD34[a0], FALSE, 0x081, 0x0C);
         }
-        schedule_bg_copy_tilemap_to_vram(0);
+        ScheduleBgCopyTilemapToVram(0);
     }
     return gUnknown_203AD34[a0];
 }
@@ -268,7 +268,7 @@ void sub_810BA3C(u8 a0)
     ClearMenuWindow(gUnknown_203AD34[a0], FALSE);
     ClearWindowTilemap(gUnknown_203AD34[a0]);
     RemoveWindow(gUnknown_203AD34[a0]);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
     gUnknown_203AD34[a0] = 0xFF;
 }
 
@@ -289,7 +289,7 @@ void sub_810BA9C(u8 a0)
         ClearWindowTilemap(gUnknown_203AD34[a0]);
         RemoveWindow(gUnknown_203AD34[a0]);
         PutWindowTilemap(1);
-        schedule_bg_copy_tilemap_to_vram(0);
+        ScheduleBgCopyTilemapToVram(0);
         gUnknown_203AD34[a0] = 0xFF;
 
     }

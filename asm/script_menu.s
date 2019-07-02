@@ -249,7 +249,7 @@ _0809CB02:
 	lsrs r5, r0, 24
 	adds r0, r5, 0
 	movs r1, 0
-	bl sub_80F7750
+	bl SetStdWindowBorderStyle
 	mov r2, r10
 	cmp r2, 0x1E
 	beq _0809CB32
@@ -308,7 +308,7 @@ _0809CB7A:
 	mov r3, r10
 	bl sub_809CC18
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 _0809CBA2:
 	add sp, 0x20
 	pop {r3-r5}
@@ -636,7 +636,7 @@ _0809CE08:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0809CE26
-	bl sub_80F7858
+	bl DisplayYesNoMenuDefaultYes
 	adds r0, r4, 0
 	movs r1, 0x50
 	bl CreateTask
@@ -822,7 +822,7 @@ _0809CF08:
 	lsrs r0, 24
 	strh r0, [r4, 0x14]
 	movs r1, 0
-	bl sub_80F7750
+	bl SetStdWindowBorderStyle
 	ldrb r0, [r4, 0x14]
 	lsls r5, 27
 	lsrs r5, 24
@@ -845,7 +845,7 @@ _0809CF08:
 	movs r3, 0x1
 	bl sub_811030C
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 _0809CFB8:
 	movs r0, 0x1
 _0809CFBA:
@@ -914,8 +914,8 @@ _0809D034:
 _0809D03C: .4byte gSpecialVar_Result
 	thumb_func_end sub_809CFDC
 
-	thumb_func_start sp109_CreatePCMenu
-sp109_CreatePCMenu: @ 809D040
+	thumb_func_start ScrSpecial_CreatePCMenu
+ScrSpecial_CreatePCMenu: @ 809D040
 	push {lr}
 	ldr r0, _0809D060 @ =sub_809CC98
 	bl FuncIsActiveTask
@@ -937,7 +937,7 @@ _0809D068:
 _0809D06A:
 	pop {r1}
 	bx r1
-	thumb_func_end sp109_CreatePCMenu
+	thumb_func_end ScrSpecial_CreatePCMenu
 
 	thumb_func_start sub_809D070
 sub_809D070: @ 809D070
@@ -989,7 +989,7 @@ _0809D0B0:
 	lsrs r6, r0, 24
 	adds r0, r6, 0
 	movs r1, 0
-	bl sub_80F7750
+	bl SetStdWindowBorderStyle
 	ldr r2, _0809D128 @ =gUnknown_8417BD3
 	movs r0, 0x22
 	str r0, [sp]
@@ -1050,7 +1050,7 @@ _0809D14C:
 	lsrs r6, r0, 24
 	adds r0, r6, 0
 	movs r1, 0
-	bl sub_80F7750
+	bl SetStdWindowBorderStyle
 	mov r0, r8
 	bl FlagGet
 	lsls r0, 24
@@ -1145,7 +1145,7 @@ _0809D1FA:
 	movs r3, 0xFF
 	bl sub_809CC18
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	add sp, 0xC
 	pop {r3,r4}
 	mov r8, r3
@@ -1159,8 +1159,8 @@ _0809D24C: .4byte gStringVar4
 _0809D250: .4byte gUnknown_8417BB6
 	thumb_func_end sub_809D070
 
-	thumb_func_start sub_809D254
-sub_809D254: @ 809D254
+	thumb_func_start ScriptMenu_DisplayPCStartupPrompt
+ScriptMenu_DisplayPCStartupPrompt: @ 809D254
 	push {lr}
 	sub sp, 0x10
 	movs r0, 0
@@ -1184,7 +1184,7 @@ sub_809D254: @ 809D254
 	bx r0
 	.align 2, 0
 _0809D284: .4byte gUnknown_81A508A
-	thumb_func_end sub_809D254
+	thumb_func_end ScriptMenu_DisplayPCStartupPrompt
 
 	thumb_func_start sub_809D288
 sub_809D288: @ 809D288
@@ -1326,9 +1326,9 @@ _0809D31C:
 	strb r0, [r1, 0x5]
 	ldrb r0, [r3, 0x12]
 	movs r1, 0x1
-	bl sub_80F7750
+	bl SetStdWindowBorderStyle
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0x1
 	b _0809D3C2
 	.align 2, 0
@@ -1613,9 +1613,9 @@ _0809D572:
 	strh r2, [r1, 0x8]
 	strh r5, [r1, 0xC]
 	movs r1, 0x1
-	bl sub_80F7750
+	bl SetStdWindowBorderStyle
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 _0809D5F2:
 	movs r0, 0x1
 _0809D5F4:
@@ -1859,7 +1859,7 @@ _0809D7B8:
 	lsrs r7, r0, 24
 	adds r0, r7, 0
 	movs r1, 0
-	bl sub_80F7750
+	bl SetStdWindowBorderStyle
 	movs r6, 0
 	mov r5, r9
 	subs r5, 0x2
@@ -1953,7 +1953,7 @@ _0809D844:
 	movs r3, 0xFF
 	bl sub_809CC18
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 _0809D8A8:
 	add sp, 0xC
 	pop {r3,r4}

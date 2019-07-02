@@ -76,18 +76,20 @@ u8 GetStepInPlaceDelay32AnimId(u32);
 u8 npc_block_way(struct MapObject *, s16, s16, u32);
 void MoveCoords(u8, s16 *, s16 *);
 bool8 FieldObjectIsSpecialAnimActive(struct MapObject *);
-u8 FieldObjectClearAnimIfSpecialAnimFinished(struct MapObject *);
+u8 FieldObjectClearHeldMovementIfFinished(struct MapObject *);
 u8 GetFieldObjectIdByXYZ(u16 x, u16 y, u8 z);
 void sub_8063E28(struct MapObject *, struct Sprite *);
-void sub_8063CA4(struct MapObject *, u8);
+void FieldObjectSetHeldMovement(struct MapObject *, u8);
 void npc_coords_shift_still(struct MapObject *);
 void sub_805FE7C(struct MapObject *, u8);
 void npc_set_running_behaviour_etc(struct MapObject *, u8);
 u8 sub_80634F0(u8 direction);
 u8 sub_8063500(u8 a0);
-void sub_805F060(struct MapObject *mapObject, u8 a1);
+void EventObjectSetGraphicsId(struct MapObject *mapObject, u8 a1);
 u8 sub_805EB44(u8, u8, s16, s16);
 void npc_paltag_set_load(u8 mode);
+bool8 FieldObjectIsMovementOverridden(struct MapObject *mapObject);
+u8 FieldObjectCheckHeldMovementStatus(struct MapObject *mapObject);
 
 // Exported data declarations
 

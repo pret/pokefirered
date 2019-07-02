@@ -4793,8 +4793,8 @@ _08149DF0:
 	bl InitBgsFromTemplates
 	ldr r0, _08149EEC @ =gUnknown_846D8E4
 	bl InitWindows
-	bl sub_80F6C14
-	bl reset_temp_tile_data_buffers
+	bl ResetBgPositions
+	bl ResetTempTileDataBuffers
 	ldr r0, [r6]
 	bl sub_814AD6C
 	bl sub_814A9C8
@@ -4807,14 +4807,14 @@ _08149DF0:
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r1, _08149EF8 @ =gUnknown_846BA00
 	movs r4, 0x1
 	str r4, [sp]
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r0, _08149EFC @ =gUnknown_846BBB0
 	movs r1, 0x30
 	movs r2, 0x20
@@ -4824,13 +4824,13 @@ _08149DF0:
 	movs r0, 0x2
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r1, _08149F04 @ =gUnknown_846C520
 	str r4, [sp]
 	movs r0, 0x2
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r0, _08149F08 @ =gUnknown_846C8D8
 	movs r1, 0x10
 	movs r2, 0x20
@@ -4840,13 +4840,13 @@ _08149DF0:
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r1, _08149F10 @ =gUnknown_846D3A8
 	str r4, [sp]
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r0, _08149F14 @ =gUnknown_846B794
 	movs r1, 0x20
 	movs r2, 0x20
@@ -4897,7 +4897,7 @@ _08149F0C: .4byte gUnknown_846C8F8
 _08149F10: .4byte gUnknown_846D3A8
 _08149F14: .4byte gUnknown_846B794
 _08149F18:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	cmp r0, 0
 	bne _08149F5A
@@ -6777,7 +6777,7 @@ sub_814AD6C: @ 814AD6C
 	ldr r5, _0814ADAC @ =gUnknown_846E0B0
 _0814AD74:
 	adds r0, r5, 0
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	adds r5, 0x8
 	adds r4, 0x1
 	cmp r4, 0x4
@@ -6881,7 +6881,7 @@ _0814AE2A:
 	adds r0, r1
 	ldr r3, [r7, 0x8]
 	mov r1, r8
-	bl sub_800ECC4
+	bl HandleLoadSpecialPokePic
 	mov r3, r8
 	str r3, [sp, 0x18]
 	adds r4, r6, 0
@@ -6903,7 +6903,7 @@ _0814AE2A:
 	ands r1, r5
 	orrs r1, r4
 	str r1, [r0, 0x4]
-	bl LoadCompressedObjectPalette
+	bl LoadCompressedSpritePalette
 	mov r0, r8
 	bl Free
 	mov r0, r10

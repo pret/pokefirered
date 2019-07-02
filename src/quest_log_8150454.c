@@ -115,7 +115,7 @@ void sub_81505C4(u8 taskId)
                 gTasks[taskId].data[0]++;
             break;
         case 2:
-            StartSpriteAnim(sprite, sub_8063500(player_get_direction_lower_nybble()));
+            StartSpriteAnim(sprite, sub_8063500(GetPlayerFacingDirection()));
             gTasks[taskId].data[0]++;
             break;
         case 3:
@@ -173,7 +173,7 @@ void sub_8150794(u8 taskId)
 
 void sub_81507BC(struct MapObject * a0, u8 a1)
 {
-    sub_805F060(a0, a1);
+    EventObjectSetGraphicsId(a0, a1);
 }
 
 void sub_81507CC(void)

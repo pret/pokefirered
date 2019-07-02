@@ -320,7 +320,7 @@ sub_806CAC8: @ 806CAC8
 	sub sp, 0x8
 	adds r5, r0, 0
 	bl sub_8069A54
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r6, r0, 24
 	mov r4, sp
@@ -629,7 +629,7 @@ _0806CD54:
 	ldrb r0, [r4, 0x2]
 	cmp r0, 0
 	beq _0806CDC0
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	ldrb r1, [r4, 0x2]
@@ -1033,7 +1033,7 @@ _0806D078:
 	lsls r0, 2
 	ldr r1, _0806D098 @ =gMapObjects
 	adds r0, r1
-	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
+	bl FieldObjectCheckHeldMovementStatus
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806D0A0

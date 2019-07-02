@@ -193,8 +193,8 @@ _08054D68: .4byte 0x00000808
 _08054D6C: .4byte 0x0000404d
 	thumb_func_end Overworld_ResetStateAfterTeleport
 
-	thumb_func_start sub_8054D70
-sub_8054D70: @ 8054D70
+	thumb_func_start Overworld_ResetStateAfterDigEscRope
+Overworld_ResetStateAfterDigEscRope: @ 8054D70
 	push {lr}
 	bl ResetInitialPlayerAvatarState
 	movs r0, 0x83
@@ -230,7 +230,7 @@ _08054DC8: .4byte 0x00000805
 _08054DCC: .4byte 0x00000806
 _08054DD0: .4byte 0x00000808
 _08054DD4: .4byte 0x0000404d
-	thumb_func_end sub_8054D70
+	thumb_func_end Overworld_ResetStateAfterDigEscRope
 
 	thumb_func_start sub_8054DD8
 sub_8054DD8: @ 8054DD8
@@ -1257,7 +1257,7 @@ sub_805550C: @ 805550C
 	ldrh r0, [r0, 0x4]
 	cmp r0, 0x1
 	beq _08055590
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -1858,7 +1858,7 @@ _08055A04: .4byte gUnknown_2031DD4
 	thumb_func_start sub_8055A08
 sub_8055A08: @ 8055A08
 	push {r4,lr}
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	ldr r4, _08055A24 @ =gUnknown_2031DD4
 	strb r0, [r4, 0x1]
 	movs r0, 0x2
@@ -2378,8 +2378,8 @@ sub_8055DB8: @ 8055DB8
 	bx r0
 	thumb_func_end sub_8055DB8
 
-	thumb_func_start sub_8055DC4
-sub_8055DC4: @ 8055DC4
+	thumb_func_start Overworld_PlaySpecialMapMusic
+Overworld_PlaySpecialMapMusic: @ 8055DC4
 	push {r4,r5,lr}
 	sub sp, 0x4
 	ldr r0, _08055DD8 @ =gUnknown_2031DD8
@@ -2462,7 +2462,7 @@ _08055E6C:
 	bx r0
 	.align 2, 0
 _08055E74: .4byte 0x00000131
-	thumb_func_end sub_8055DC4
+	thumb_func_end Overworld_PlaySpecialMapMusic
 
 	thumb_func_start Overworld_SetSavedMusic
 Overworld_SetSavedMusic: @ 8055E78
@@ -3199,7 +3199,7 @@ _080563EC: .4byte gUnknown_300501C
 	thumb_func_start CleanupOverworldWindowsAndTilemaps
 CleanupOverworldWindowsAndTilemaps: @ 80563F0
 	push {lr}
-	bl sub_80F6C8C
+	bl FreeAllOverworldWindowBuffers
 	ldr r0, _08056414 @ =gUnknown_300501C
 	ldr r0, [r0]
 	bl Free
@@ -3393,7 +3393,7 @@ sub_8056578: @ 8056578
 	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	bl sub_806FFBC
-	bl do_scheduled_bg_tilemap_copies_to_vram
+	bl DoScheduledBgTilemapCopiesToVram
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8056578
@@ -3833,8 +3833,8 @@ _0805692C:
 _08056934: .4byte gMapHeader
 	thumb_func_end sub_8056918
 
-	thumb_func_start sub_8056938
-sub_8056938: @ 8056938
+	thumb_func_start CB2_ContinueSavedGame
+CB2_ContinueSavedGame: @ 8056938
 	push {lr}
 	bl sub_80569BC
 	bl StopMapMusic
@@ -3880,7 +3880,7 @@ _080569AC:
 _080569B0: .4byte gFieldCallback
 _080569B4: .4byte sub_8056918
 _080569B8: .4byte sub_8056534
-	thumb_func_end sub_8056938
+	thumb_func_end CB2_ContinueSavedGame
 
 	thumb_func_start sub_80569BC
 sub_80569BC: @ 80569BC
@@ -4036,7 +4036,7 @@ _08056B04:
 	.align 2, 0
 _08056B10: .4byte gMapHeader
 _08056B14:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4178,7 +4178,7 @@ _08056C40:
 	.align 2, 0
 _08056C4C: .4byte gMapHeader
 _08056C50:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4367,7 +4367,7 @@ _08056DE0:
 	.align 2, 0
 _08056DEC: .4byte gMapHeader
 _08056DF0:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4523,8 +4523,8 @@ sub_8056F08: @ 8056F08
 	thumb_func_start sub_8056F1C
 sub_8056F1C: @ 8056F1C
 	push {r4,lr}
-	bl clear_scheduled_bg_copies_to_vram
-	bl reset_temp_tile_data_buffers
+	bl ClearScheduledBgCopiesToVram
+	bl ResetTempTileDataBuffers
 	movs r0, 0x4C
 	movs r1, 0
 	bl SetGpuReg
@@ -4563,11 +4563,11 @@ sub_8056F1C: @ 8056F1C
 	movs r0, 0x52
 	bl SetGpuReg
 	movs r0, 0x1
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0x3
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r1, _08057020 @ =0x00007060
 	movs r0, 0
 	bl SetGpuReg
@@ -5078,7 +5078,7 @@ _080573D8:
 	.align 2, 0
 _080573E4: .4byte gMapHeader
 _080573E8:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -5177,7 +5177,7 @@ _080574B8:
 	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	bl sub_806FFBC
-	bl do_scheduled_bg_tilemap_copies_to_vram
+	bl DoScheduledBgTilemapCopiesToVram
 	cmp r4, 0
 	beq _080574E0
 	bl SetFieldVBlankCallback
@@ -5427,7 +5427,7 @@ _080576E0:
 	.align 2, 0
 _080576EC: .4byte gMapHeader
 _080576F0:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

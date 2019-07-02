@@ -290,7 +290,7 @@ static void CB2_Idle(void)
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
-    do_scheduled_bg_tilemap_copies_to_vram();
+    DoScheduledBgTilemapCopiesToVram();
     UpdatePaletteFade();
 }
 
@@ -322,7 +322,7 @@ static bool8 DoSetUpTMCaseUI(void)
     {
     case 0:
         SetVBlankHBlankCallbacksToNull();
-        clear_scheduled_bg_copies_to_vram();
+        ClearScheduledBgCopiesToVram();
         gMain.state++;
         break;
     case 1:
@@ -432,8 +432,8 @@ static void LoadBGTemplates(void)
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sBGTemplates, NELEMS(sBGTemplates));
     SetBgTilemapBuffer(2, *ptr);
-    schedule_bg_copy_tilemap_to_vram(1);
-    schedule_bg_copy_tilemap_to_vram(2);
+    ScheduleBgCopyTilemapToVram(1);
+    ScheduleBgCopyTilemapToVram(2);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     ShowBg(0);
@@ -446,12 +446,12 @@ static bool8 HandleLoadTMCaseGraphicsAndPalettes(void)
     switch (sTMCaseDynamicResources->seqId)
     {
     case 0:
-        reset_temp_tile_data_buffers();
-        decompress_and_copy_tile_data_to_vram(1, gUnknown_8E845D8, 0, 0, 0);
+        ResetTempTileDataBuffers();
+        DecompressAndCopyTileDataToVram(1, gUnknown_8E845D8, 0, 0, 0);
         sTMCaseDynamicResources->seqId++;
         break;
     case 1:
-        if (free_temp_tile_data_buffers_if_possible() != TRUE)
+        if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
             LZDecompressWram(gUnknown_8E84A24, sTilemapBuffer);
             sTMCaseDynamicResources->seqId++;
@@ -469,7 +469,7 @@ static bool8 HandleLoadTMCaseGraphicsAndPalettes(void)
         sTMCaseDynamicResources->seqId++;
         break;
     case 4:
-        LoadCompressedObjectPic(&sTMSpriteSheet);
+        LoadCompressedSpriteSheet(&sTMSpriteSheet);
         sTMCaseDynamicResources->seqId++;
         break;
     default:
@@ -596,7 +596,7 @@ static void TMCase_MoveCursor_UpdatePrintedDescription(s32 itemIndex)
 static void FillBG2RowWithPalette_2timesNplus1(s32 a0)
 {
     SetBgRectPal(2, 0, 12, 30, 8, 2 * a0 + 1);
-    schedule_bg_copy_tilemap_to_vram(2);
+    ScheduleBgCopyTilemapToVram(2);
 }
 
 static void PrintListMenuCursorByID_WithColorIdx(u8 a0, u8 a1)
@@ -806,8 +806,8 @@ static void Task_SelectTMAction_FromFieldBag(u8 taskId)
         PlaceHMTileInWindow(2, 0, 2);
         CopyWindowToVram(2, 2);
     }
-    schedule_bg_copy_tilemap_to_vram(0);
-    schedule_bg_copy_tilemap_to_vram(1);
+    ScheduleBgCopyTilemapToVram(0);
+    ScheduleBgCopyTilemapToVram(1);
     gTasks[taskId].func = Task_TMContextMenu_HandleInput;
 }
 
@@ -840,8 +840,8 @@ static void TMHMContextMenuAction_Use(u8 taskId)
     ClearMenuWindow(2, 0);
     ClearWindowTilemap(2);
     PutWindowTilemap(0);
-    schedule_bg_copy_tilemap_to_vram(0);
-    schedule_bg_copy_tilemap_to_vram(1);
+    ScheduleBgCopyTilemapToVram(0);
+    ScheduleBgCopyTilemapToVram(1);
     if (CalculatePlayerPartyCount() == 0)
     {
         PrintError_ThereIsNoPokemon(taskId);
@@ -864,8 +864,8 @@ static void TMHMContextMenuAction_Give(u8 taskId)
     PutWindowTilemap(1);
     PutWindowTilemap(4);
     PutWindowTilemap(5);
-    schedule_bg_copy_tilemap_to_vram(0);
-    schedule_bg_copy_tilemap_to_vram(1);
+    ScheduleBgCopyTilemapToVram(0);
+    ScheduleBgCopyTilemapToVram(1);
     if (!itemid_is_unique(itemId))
     {
         if (CalculatePlayerPartyCount() == 0)
@@ -917,8 +917,8 @@ static void Subtask_CloseContextMenuAndReturnToMain(u8 taskId)
     PutWindowTilemap(1);
     PutWindowTilemap(4);
     PutWindowTilemap(5);
-    schedule_bg_copy_tilemap_to_vram(0);
-    schedule_bg_copy_tilemap_to_vram(1);
+    ScheduleBgCopyTilemapToVram(0);
+    ScheduleBgCopyTilemapToVram(1);
     Subtask_ReturnToTMCaseMain(taskId);
 }
 
@@ -934,8 +934,8 @@ static void TMHMContextMenuAction_Exit(u8 taskId)
     PutWindowTilemap(1);
     PutWindowTilemap(4);
     PutWindowTilemap(5);
-    schedule_bg_copy_tilemap_to_vram(0);
-    schedule_bg_copy_tilemap_to_vram(1);
+    ScheduleBgCopyTilemapToVram(0);
+    ScheduleBgCopyTilemapToVram(1);
     Subtask_ReturnToTMCaseMain(taskId);
 }
 
@@ -1023,8 +1023,8 @@ static void Task_SaleOfTMsCancelled(u8 taskId)
     PutWindowTilemap(3);
     PutWindowTilemap(4);
     PutWindowTilemap(5);
-    schedule_bg_copy_tilemap_to_vram(0);
-    schedule_bg_copy_tilemap_to_vram(1);
+    ScheduleBgCopyTilemapToVram(0);
+    ScheduleBgCopyTilemapToVram(1);
     PrintListMenuCursorByID_WithColorIdx(data[0], 1);
     Subtask_ReturnToTMCaseMain(taskId);
 }
@@ -1040,8 +1040,8 @@ static void Task_InitQuantitySelectUI(u8 taskId)
     SellTM_PrintQuantityAndSalePrice(1, itemid_get_market_price(BagGetItemIdByPocketPosition(POCKET_TM_CASE, data[1])) / 2 * data[8]);
     HandlePrintMoneyOnHand();
     CreateTMCaseScrollIndicatorArrowPair_SellQuantitySelect();
-    schedule_bg_copy_tilemap_to_vram(0);
-    schedule_bg_copy_tilemap_to_vram(1);
+    ScheduleBgCopyTilemapToVram(0);
+    ScheduleBgCopyTilemapToVram(1);
     gTasks[taskId].func = Task_QuantitySelect_HandleInput;
 }
 
@@ -1066,8 +1066,8 @@ static void Task_QuantitySelect_HandleInput(u8 taskId)
     {
         PlaySE(SE_SELECT);
         ClearMenuWindow(7, 0);
-        schedule_bg_copy_tilemap_to_vram(0);
-        schedule_bg_copy_tilemap_to_vram(1);
+        ScheduleBgCopyTilemapToVram(0);
+        ScheduleBgCopyTilemapToVram(1);
         RemoveTMCaseScrollIndicatorArrowPair();
         Task_AskConfirmSaleWithAmount(taskId);
     }
@@ -1080,8 +1080,8 @@ static void Task_QuantitySelect_HandleInput(u8 taskId)
         PutWindowTilemap(3);
         PutWindowTilemap(0);
         PutWindowTilemap(1);
-        schedule_bg_copy_tilemap_to_vram(0);
-        schedule_bg_copy_tilemap_to_vram(1);
+        ScheduleBgCopyTilemapToVram(0);
+        ScheduleBgCopyTilemapToVram(1);
         RemoveTMCaseScrollIndicatorArrowPair();
         PrintListMenuCursorByID_WithColorIdx(data[0], 1);
         Subtask_ReturnToTMCaseMain(taskId);
@@ -1093,7 +1093,7 @@ static void Task_PrintSaleConfirmedText(u8 taskId)
     s16 * data = gTasks[taskId].data;
 
     PutWindowTilemap(0);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
     ConvertIntToDecimalStringN(gStringVar3, itemid_get_market_price(BagGetItemIdByPocketPosition(POCKET_TM_CASE, data[1])) / 2 * data[8], STR_CONV_MODE_LEFT_ALIGN, 6);
     StringExpandPlaceholders(gStringVar4, gText_TurnedOverItemsWorthYen);
@@ -1250,7 +1250,7 @@ static void Task_TMCaseDude_Playback(u8 taskId)
             FillBG2RowWithPalette_2timesNplus1(0);
             BeginNormalPaletteFade(0x00000400, 0, 6, 0, 0);
             ClearMenuWindow_BorderThickness2(6, 0);
-            schedule_bg_copy_tilemap_to_vram(1);
+            ScheduleBgCopyTilemapToVram(1);
             data[8]++;
         }
         break;
@@ -1298,7 +1298,7 @@ static void InitWindowTemplatesAndPals(void)
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
     TextWindow_SetUserSelectedFrame(0, 0x5B, 0xE0);
-    TextWindow_SetBubbleFrame_841F1C8(0, 0x64, 0xB0);
+    TextWindow_LoadResourcesStdFrame0(0, 0x64, 0xB0);
     TextWindow_SetStdFrame0_WithPal(0, 0x78, 0xD0);
     LoadPalette(gTMCaseMainWindowPalette, 0xF0, 0x20);
     LoadPalette(gTMCaseMainWindowPalette, 0xA0, 0x20);
@@ -1312,7 +1312,7 @@ static void InitWindowTemplatesAndPals(void)
     PutWindowTilemap(3);
     PutWindowTilemap(4);
     PutWindowTilemap(5);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
 }
 
 static void AddTextPrinterParameterized_ColorByIndex(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorIdx)
@@ -1333,7 +1333,7 @@ static void TMCase_SetWindowBorder2(u8 windowId)
 static void TMCase_PrintMessageWithFollowupTask(u8 taskId, u8 windowId, const u8 * str, TaskFunc func)
 {
     DisplayMessageAndContinueTask(taskId, 6, 0x64, 0x0B, windowId, GetTextSpeedSetting(), str, func);
-    schedule_bg_copy_tilemap_to_vram(1);
+    ScheduleBgCopyTilemapToVram(1);
 }
 
 static void PrintStringTMCaseOnWindow3(void)
@@ -1413,7 +1413,7 @@ static u8 AddTMContextMenu(u8 * a0, u8 a1)
     {
         *a0 = AddWindow(&sTMContextWindowTemplates[a1]);
         TMCase_SetWindowBorder1(*a0);
-        schedule_bg_copy_tilemap_to_vram(0);
+        ScheduleBgCopyTilemapToVram(0);
     }
     return *a0;
 }
@@ -1423,7 +1423,7 @@ static void RemoveTMContextMenu(u8 * a0)
     ClearMenuWindow(*a0, FALSE);
     ClearWindowTilemap(*a0);
     RemoveWindow(*a0);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
     *a0 = 0xFF;
 }
 

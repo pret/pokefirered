@@ -94,12 +94,12 @@ sub_805B45C: @ 805B45C
 	adds r4, r0, 0
 	lsls r1, 24
 	lsrs r5, r1, 24
-	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl FieldObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805B4A6
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805B4A6
@@ -845,7 +845,7 @@ _0805B9AC: .4byte gPlayerAvatar
 	thumb_func_start PlayerNotOnBikeNotMoving
 PlayerNotOnBikeNotMoving: @ 805B9B0
 	push {lr}
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	bl PlayerFaceDirection
@@ -1631,7 +1631,7 @@ PlayerIsAnimActive: @ 805BF7C
 	lsls r0, 2
 	ldr r1, _0805BF9C @ =gMapObjects
 	adds r0, r1
-	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl FieldObjectIsMovementOverridden
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -1651,7 +1651,7 @@ PlayerCheckIfAnimFinishedOrInactive: @ 805BFA0
 	lsls r0, 2
 	ldr r1, _0805BFC0 @ =gMapObjects
 	adds r0, r1
-	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
+	bl FieldObjectCheckHeldMovementStatus
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -1737,7 +1737,7 @@ sub_805C024: @ 805C024
 	ldr r1, _0805C068 @ =gMapObjects
 	adds r0, r1
 	adds r1, r5, 0
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805C05E
@@ -1765,7 +1765,7 @@ sub_805C06C: @ 805C06C
 	ldr r1, _0805C0A0 @ =gMapObjects
 	adds r0, r1
 	adds r1, r4, 0
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805C094
@@ -1789,7 +1789,7 @@ sub_805C0A4: @ 805C0A4
 	lsls r1, 24
 	lsrs r5, r1, 24
 	adds r1, r5, 0
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805C0CA
@@ -2404,7 +2404,7 @@ GetXYCoordsOneStepInFrontOfPlayer: @ 805C4F4
 	adds r0, r3
 	ldrh r0, [r0, 0x12]
 	strh r0, [r5]
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r4, 0
@@ -2582,8 +2582,8 @@ _0805C6BC:
 	bx r1
 	thumb_func_end plaer_get_pos_including_state_based_drift
 
-	thumb_func_start player_get_direction_lower_nybble
-player_get_direction_lower_nybble: @ 805C6C4
+	thumb_func_start GetPlayerFacingDirection
+GetPlayerFacingDirection: @ 805C6C4
 	ldr r2, _0805C6DC @ =gMapObjects
 	ldr r0, _0805C6E0 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
@@ -2598,7 +2598,7 @@ player_get_direction_lower_nybble: @ 805C6C4
 	.align 2, 0
 _0805C6DC: .4byte gMapObjects
 _0805C6E0: .4byte gPlayerAvatar
-	thumb_func_end player_get_direction_lower_nybble
+	thumb_func_end GetPlayerFacingDirection
 
 	thumb_func_start player_get_direction_upper_nybble
 player_get_direction_upper_nybble: @ 805C6E4
@@ -3257,7 +3257,7 @@ sub_805CB70: @ 805CB70
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_805F060
+	bl EventObjectSetGraphicsId
 	ldrb r1, [r5, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -3318,7 +3318,7 @@ sub_805CBE8: @ 805CBE8
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_805F060
+	bl EventObjectSetGraphicsId
 	ldrb r1, [r5, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -3532,19 +3532,19 @@ sub_805CD84: @ 805CD84
 	adds r5, r1, 0
 	adds r4, r2, 0
 	adds r0, r5, 0
-	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl FieldObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805CE0E
 	adds r0, r4, 0
-	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl FieldObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805CE0E
 	adds r0, r5, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	ldrb r0, [r6, 0xC]
 	bl GetStepInPlaceDelay16AnimId
 	adds r1, r0, 0
@@ -3602,19 +3602,19 @@ sub_805CE20: @ 805CE20
 	adds r5, r1, 0
 	adds r4, r2, 0
 	adds r0, r5, 0
-	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
+	bl FieldObjectCheckHeldMovementStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805CE70
 	adds r0, r4, 0
-	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
+	bl FieldObjectCheckHeldMovementStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805CE70
 	adds r0, r5, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	adds r0, r4, 0
 	bl sub_806DE28
 	ldrh r0, [r4, 0x10]
@@ -3704,7 +3704,7 @@ PlayerAvatar_DoSecretBaseMatJump: @ 805CEEC
 	movs r0, 0x1
 	strb r0, [r5, 0x6]
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805CF48
@@ -3836,7 +3836,7 @@ sub_805CFEC: @ 805CFEC
 	movs r2, 0x4
 	bl memcpy
 	adds r0, r5, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805D054
@@ -3896,7 +3896,7 @@ sub_805D064: @ 805D064
 	movs r2, 0x5
 	bl memcpy
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805D094
@@ -3924,7 +3924,7 @@ sub_805D0A4: @ 805D0A4
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805D0E8
@@ -4073,12 +4073,12 @@ taskFF_0805D1D4: @ 805D1D4
 	ldr r1, _0805D234 @ =gMapObjects
 	adds r5, r0, r1
 	adds r0, r5, 0
-	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl FieldObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805D200
 	adds r0, r5, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805D228
@@ -4124,7 +4124,7 @@ sub_805D240: @ 805D240
 	ldr r1, _0805D2B8 @ =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805D2AE
@@ -4134,7 +4134,7 @@ sub_805D240: @ 805D240
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_805F060
+	bl EventObjectSetGraphicsId
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
@@ -4503,7 +4503,7 @@ _0805D548:
 	adds r4, r0
 	lsls r4, 2
 	adds r4, r5
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8063510
@@ -4734,7 +4734,7 @@ _0805D6EA:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_805F060
+	bl EventObjectSetGraphicsId
 	ldrb r1, [r4, 0x18]
 	lsrs r1, 4
 	adds r0, r4, 0
@@ -4827,7 +4827,7 @@ sub_805D7C0: @ 805D7C0
 	adds r4, r0
 	lsls r4, 2
 	adds r4, r5
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8063500
@@ -4883,7 +4883,7 @@ sub_805D838: @ 805D838
 	adds r4, r0
 	lsls r4, 2
 	adds r4, r5
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8063500
@@ -4978,7 +4978,7 @@ sub_805D8D8: @ 805D8D8
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_805F060
+	bl EventObjectSetGraphicsId
 	ldrb r1, [r4, 0x18]
 	lsrs r1, 4
 	adds r0, r4, 0
@@ -5131,7 +5131,7 @@ _0805DA2E:
 	bhi _0805DA60
 	movs r0, 0x8
 	strh r0, [r4, 0x24]
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -5280,7 +5280,7 @@ _0805DB58:
 	b _0805DBFA
 _0805DB5E:
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805DBFA
@@ -5608,7 +5608,7 @@ sub_805DDC8: @ 805DDC8
 	ble _0805DE20
 _0805DDE4:
 	adds r0, r5, 0
-	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
+	bl FieldObjectCheckHeldMovementStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805DE20

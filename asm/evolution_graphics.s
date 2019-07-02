@@ -573,7 +573,7 @@ _080F5D80: .4byte SpriteCB_PostEvoSparkleSet2
 LoadEvoSparkleSpriteAndPal: @ 80F5D84
 	push {lr}
 	ldr r0, _080F5D98 @ =gUnknown_841EEC4
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	ldr r0, _080F5D9C @ =gUnknown_841EED4
 	bl LoadSpritePalettes
 	pop {r0}

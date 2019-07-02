@@ -3197,7 +3197,7 @@ _08135FD8:
 	.align 2, 0
 _08135FE0: .4byte gUnknown_84636C0
 _08135FE4:
-	bl reset_temp_tile_data_buffers
+	bl ResetTempTileDataBuffers
 	b _08136020
 _08135FEA:
 	ldr r1, _08135FFC @ =gUnknown_8E9A460
@@ -3206,12 +3206,12 @@ _08135FEA:
 	movs r0, 0x2
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	b _08136020
 	.align 2, 0
 _08135FFC: .4byte gUnknown_8E9A460
 _08136000:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

@@ -553,21 +553,8 @@ gUnknown_841F1C8:: @ 841F1C8
 gTMCaseMainWindowPalette:: @ 841F408
 	.incbin "graphics/tm_case/unk_841F408.gbapal"
 
-gUnknown_841F428:: @ 841F428
-	.incbin "baserom.gba", 0x41F428, 0x4
-
-gUnknown_841F42C:: @ 841F42C
-	.incbin "baserom.gba", 0x41F42C, 0x10
-
-gUnknown_841F43C:: @ 841F43C
-	.incbin "baserom.gba", 0x41F43C, 0x8
-
-gUnknown_841F444:: @ 841F444
-	.incbin "baserom.gba", 0x41F444, 0x60
-
-gUnknown_841F4A4:: @ 841F4A4
-	.incbin "baserom.gba", 0x41F4A4, 0x10
-
+	.section .rodata.841F4B4
+	.align 2
 gUnknown_841F4B4:: @ 841F4B4
 	.incbin "baserom.gba", 0x41F4B4, 0x1F534
 
@@ -982,17 +969,7 @@ gUnknown_8452F6C:: @ 8452F6C
 gUnknown_8452F7C:: @ 8452F7C
 	.incbin "baserom.gba", 0x452F7C, 0xC0
 
-gUnknown_845303C:: @ 845303C
-	.incbin "baserom.gba", 0x45303C, 0x56
-
-gUnknown_8453092:: @ 8453092
-	.incbin "baserom.gba", 0x453092, 0x2
-
-gUnknown_8453094:: @ 8453094
-	.incbin "baserom.gba", 0x453094, 0x4
-
 	.section .rodata.8453F6C
-
 // mailbox_pc.o
 gUnknown_8453FE8:: @ 8453FE8
 	.incbin "baserom.gba", 0x453FE8, 0x18

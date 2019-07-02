@@ -1127,7 +1127,7 @@ _0806F644: .4byte gUnknown_3000FA9
 	thumb_func_start sub_806F648
 sub_806F648: @ 806F648
 	push {lr}
-	bl sub_80F6CBC
+	bl RunTextPrinters_CheckPrinter0Active
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x1
@@ -1179,7 +1179,7 @@ sub_806F69C: @ 806F69C
 	movs r1, 0x1
 	bl sub_80F7768
 	movs r0, 0x1
-	bl sub_80F6E08
+	bl AddTextPrinterForMessage
 	ldr r1, _0806F6CC @ =gUnknown_3000FA9
 	movs r0, 0x1
 	strb r0, [r1]
@@ -1329,7 +1329,7 @@ sub_806F7A8: @ 806F7A8
 	lsrs r0, 24
 	movs r1, 0
 	bl ClearStdWindowAndFrame
-	bl remove_start_menu_window_maybe
+	bl RemoveStartMenuWindow
 	movs r0, 0
 	bl sub_8112EDC
 	bl sub_806FCF4
@@ -1347,7 +1347,7 @@ _0806F7D8: .4byte sub_806F7DC
 	thumb_func_start sub_806F7DC
 sub_806F7DC: @ 806F7DC
 	push {lr}
-	bl sub_80F7858
+	bl DisplayYesNoMenuDefaultYes
 	ldr r1, _0806F7F0 @ =gUnknown_3000FA4
 	ldr r0, _0806F7F4 @ =sub_806F7F8
 	str r0, [r1]
@@ -1451,7 +1451,7 @@ _0806F8A0: .4byte sub_806F8A4
 	thumb_func_start sub_806F8A4
 sub_806F8A4: @ 806F8A4
 	push {lr}
-	bl sub_80F7858
+	bl DisplayYesNoMenuDefaultYes
 	ldr r1, _0806F8B8 @ =gUnknown_3000FA4
 	ldr r0, _0806F8BC @ =sub_806F8DC
 	str r0, [r1]
@@ -1466,7 +1466,7 @@ _0806F8BC: .4byte sub_806F8DC
 	thumb_func_start sub_806F8C0
 sub_806F8C0: @ 806F8C0
 	push {lr}
-	bl sub_80F7880
+	bl DisplayYesNoMenuDefaultNo
 	ldr r1, _0806F8D4 @ =gUnknown_3000FA4
 	ldr r0, _0806F8D8 @ =sub_806F8DC
 	str r0, [r1]
@@ -1596,7 +1596,7 @@ _0806F9B4: .4byte sub_806FA04
 	thumb_func_start sub_806F9B8
 sub_806F9B8: @ 806F9B8
 	push {lr}
-	bl sub_80F6CBC
+	bl RunTextPrinters_CheckPrinter0Active
 	lsls r0, 16
 	cmp r0, 0
 	bne _0806F9D0
@@ -1638,7 +1638,7 @@ _0806FA00:
 	thumb_func_start sub_806FA04
 sub_806FA04: @ 806FA04
 	push {lr}
-	bl sub_80F6CBC
+	bl RunTextPrinters_CheckPrinter0Active
 	lsls r0, 16
 	cmp r0, 0
 	bne _0806FA1C
@@ -2198,7 +2198,7 @@ sub_806FEA0: @ 806FEA0
 	lsrs r0, 24
 	movs r1, 0x1
 	bl ClearStdWindowAndFrame
-	bl remove_start_menu_window_maybe
+	bl RemoveStartMenuWindow
 	bl sub_80696C0
 	bl ScriptContext2_Disable
 	pop {r0}

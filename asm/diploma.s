@@ -463,7 +463,7 @@ _080F4FB8:
 	beq _080F4FEE
 	b _080F4FF8
 _080F4FC2:
-	bl reset_temp_tile_data_buffers
+	bl ResetTempTileDataBuffers
 	b _080F5000
 _080F4FC8:
 	ldr r1, _080F4FDC @ =gUnknown_84147C0
@@ -472,12 +472,12 @@ _080F4FC8:
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	b _080F5000
 	.align 2, 0
 _080F4FDC: .4byte gUnknown_84147C0
 _080F4FE0:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

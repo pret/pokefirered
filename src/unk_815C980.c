@@ -128,7 +128,7 @@ bool32 sub_815CA40(u32 id, s32 arg1, const struct UnkStruct3 *arg2)
 
             compObjectPic = *(struct CompressedSpriteSheet*)(arg2->spriteSheet);
             compObjectPic.size = GetDecompressedDataSize(arg2->spriteSheet->data);
-            gUnknown_203F454->array[id].tileStart = LoadCompressedObjectPic(&compObjectPic);
+            gUnknown_203F454->array[id].tileStart = LoadCompressedSpriteSheet(&compObjectPic);
         }
 
         if (gUnknown_203F454->array[id].tileStart == 0xFFFF)

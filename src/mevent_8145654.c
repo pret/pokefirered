@@ -175,13 +175,13 @@ s32 FadeToWonderCardMenu(void)
             CopyBgTilemapBufferToVram(0);
             CopyBgTilemapBufferToVram(1);
             CopyBgTilemapBufferToVram(2);
-            decompress_and_copy_tile_data_to_vram(2, gUnknown_203F3C8->unk_0170->tiles, 0, 0x008, 0);
+            DecompressAndCopyTileDataToVram(2, gUnknown_203F3C8->unk_0170->tiles, 0, 0x008, 0);
             gUnknown_203F3C8->unk_0176[0] = AddWindow(&gUnknown_8467074[0]);
             gUnknown_203F3C8->unk_0176[1] = AddWindow(&gUnknown_8467074[1]);
             gUnknown_203F3C8->unk_0176[2] = AddWindow(&gUnknown_8467074[2]);
             break;
         case 3:
-            if (free_temp_tile_data_buffers_if_possible())
+            if (FreeTempTileDataBuffersIfPossible())
                 return 0;
             gPaletteFade.bufferTransferDisabled = TRUE;
             LoadPalette(gUnknown_203F3C8->unk_0170->pal, 0x10, 0x20);
@@ -402,7 +402,7 @@ void sub_8146060(void)
     }
     if (gUnknown_203F3C8->unk_0000.unk_09 != 0 && gUnknown_203F3C8->unk_0000.unk_08_0 == 1)
     {
-        sub_800F034(&gUnknown_8467F58);
+        LoadCompressedSpriteSheetUsingHeap(&gUnknown_8467F58);
         LoadSpritePalette(&gUnknown_8467F60[gUnknown_203F3C8->unk_0170->textPal4]);
         for (; r7 < gUnknown_203F3C8->unk_0000.unk_09; r7++)
         {
@@ -565,12 +565,12 @@ s32 FadeToWonderNewsMenu(void)
             CopyBgTilemapBufferToVram(1);
             CopyBgTilemapBufferToVram(2);
             CopyBgTilemapBufferToVram(3);
-            decompress_and_copy_tile_data_to_vram(3, gUnknown_203F3CC->unk_01BC->tiles, 0, 8, 0);
+            DecompressAndCopyTileDataToVram(3, gUnknown_203F3CC->unk_01BC->tiles, 0, 8, 0);
             gUnknown_203F3CC->unk_01C8[0] = AddWindow(&gUnknown_8468040[0]);
             gUnknown_203F3CC->unk_01C8[1] = AddWindow(&gUnknown_8468040[1]);
             break;
         case 3:
-            if (free_temp_tile_data_buffers_if_possible())
+            if (FreeTempTileDataBuffersIfPossible())
                 return 0;
             gPaletteFade.bufferTransferDisabled = TRUE;
             LoadPalette(gUnknown_203F3CC->unk_01BC->pal, 0x10, 0x20);

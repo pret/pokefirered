@@ -50,7 +50,7 @@ _0814D61C:
 	movs r1, 0
 	bl SetGpuReg
 	bl ScanlineEffect_Stop
-	bl reset_temp_tile_data_buffers
+	bl ResetTempTileDataBuffers
 	b _0814D878
 _0814D63A:
 	add r0, sp, 0x8
@@ -175,12 +175,12 @@ _0814D73A:
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	b _0814D878
 	.align 2, 0
 _0814D764: .4byte gUnknown_8EAFFC0
 _0814D768:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814D774
@@ -2845,7 +2845,7 @@ sub_814ECE0: @ 814ECE0
 _0814ECF6:
 	lsls r0, r5, 3
 	adds r0, r4
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24

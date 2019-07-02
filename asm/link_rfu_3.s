@@ -8491,7 +8491,7 @@ sub_811A0B4: @ 811A0B4
 	bl StringExpandPlaceholders
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_80F6E54
+	bl AddTextPrinterWithCustomSpeedForMessage
 	movs r0, 0
 	pop {r4}
 	pop {r1}
@@ -8503,7 +8503,7 @@ _0811A0DC: .4byte gStringVar4
 	thumb_func_start sub_811A0E0
 sub_811A0E0: @ 811A0E0
 	push {lr}
-	bl sub_80F6CBC
+	bl RunTextPrinters_CheckPrinter0Active
 	lsls r0, 16
 	cmp r0, 0
 	beq _0811A0F0
@@ -8536,7 +8536,7 @@ _0811A10A:
 	adds r1, r5, 0
 	bl StringExpandPlaceholders
 	movs r0, 0x1
-	bl sub_80F6E08
+	bl AddTextPrinterForMessage
 	ldrb r0, [r4]
 	adds r0, 0x1
 	strb r0, [r4]
@@ -8544,7 +8544,7 @@ _0811A10A:
 	.align 2, 0
 _0811A12C: .4byte gStringVar4
 _0811A130:
-	bl sub_80F6CBC
+	bl RunTextPrinters_CheckPrinter0Active
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0
@@ -8578,7 +8578,7 @@ _0811A15E:
 	negs r0, r0
 	b _0811A1A4
 _0811A168:
-	bl sub_80F7858
+	bl DisplayYesNoMenuDefaultYes
 	ldrb r0, [r4]
 	adds r0, 0x1
 	strb r0, [r4]
@@ -11381,13 +11381,13 @@ sub_811B66C: @ 811B66C
 	ldr r1, _0811B6C0 @ =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl FieldObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	bne _0811B6D0
 	ldrb r1, [r5]
 	adds r0, r4, 0
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	lsls r0, 24
 	cmp r0, 0
 	bne _0811B6C4
@@ -11440,7 +11440,7 @@ sub_811B6E8: @ 811B6E8
 	ldr r1, _0811B72C @ =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _0811B730
@@ -12496,7 +12496,7 @@ sub_811BF00: @ 811BF00
 	b _0811BFEE
 _0811BF1C:
 	ldr r4, _0811BF44 @ =gUnknown_8457116
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r4
@@ -12935,7 +12935,7 @@ _0811C2C0:
 	movs r0, 0
 	movs r2, 0x1
 	bl InitBgsFromTemplates
-	bl reset_temp_tile_data_buffers
+	bl ResetTempTileDataBuffers
 	ldr r0, _0811C358 @ =gUnknown_8457198
 	bl InitWindows
 	lsls r0, 16
@@ -12967,7 +12967,7 @@ _0811C300:
 	movs r1, 0x1
 	movs r2, 0xD0
 	bl TextWindow_SetStdFrame0_WithPal
-	bl sub_80F77B8
+	bl Menu_LoadStdPal
 	ldr r0, _0811C35C @ =sub_811C1B4
 	bl SetVBlankCallback
 	ldr r1, _0811C360 @ =gMain

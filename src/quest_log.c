@@ -859,7 +859,7 @@ void sub_8110F14(u8 taskId)
     }
     else
     {
-        SetMainCallback2(sub_8056938);
+        SetMainCallback2(CB2_ContinueSavedGame);
         DestroyTask(taskId);
     }
 }
@@ -1418,7 +1418,7 @@ void sub_8111D10(void)
     PutWindowTilemap(gUnknown_203ADFE[2]);
     sub_8111D90(gUnknown_203ADFE[2]);
     AddTextPrinterParameterized4(gUnknown_203ADFE[2], 2, 2, gUnknown_8456698[count], 1, 0, &gUnknown_8456634, 0, gStringVar4);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
 }
 
 void sub_8111D90(u8 a0)
@@ -1567,7 +1567,7 @@ void sub_81120AC(u8 taskId)
     {
         case 0:
             gUnknown_2031DD8 = 0;
-            sub_8055DC4();
+            Overworld_PlaySpecialMapMusic();
             sub_811229C();
             FillWindowPixelRect(gUnknown_203ADFE[0], 0xF, 0, 0, gUnknown_845661C[0].width * 8, gUnknown_845661C[0].height * 8);
             data[0]++;
@@ -1705,7 +1705,7 @@ void sub_811246C(struct Sprite *sprite)
     {
         if (gUnknown_203AF9A[0][0] != 0xFF)
         {
-            sub_8063CA4(mapObject, gUnknown_203AF9A[0][0]);
+            FieldObjectSetHeldMovement(mapObject, gUnknown_203AF9A[0][0]);
             gUnknown_203AF9A[0][0] = 0xFF;
         }
         if (gUnknown_203AF9A[0][1] != 0xFF)
@@ -1719,7 +1719,7 @@ void sub_811246C(struct Sprite *sprite)
     {
         if (gUnknown_203AF9A[mapObject->localId][0] != 0xFF)
         {
-            sub_8063CA4(mapObject, gUnknown_203AF9A[mapObject->localId][0]);
+            FieldObjectSetHeldMovement(mapObject, gUnknown_203AF9A[mapObject->localId][0]);
             gUnknown_203AF9A[mapObject->localId][0] = 0xFF;
         }
         sub_8063E28(mapObject, sprite);
@@ -1911,7 +1911,7 @@ void sub_8112940(u8 a0, struct UnkStruct_203AE98 *a1, u16 a2)
             gUnknown_3005E94[gUnknown_203AF98].unk_4 = 0;
             gUnknown_3005E94[gUnknown_203AF98].unk_6 = 0;
             gUnknown_3005E94[gUnknown_203AF98].unk_0 = 0;
-            switch (player_get_direction_lower_nybble())
+            switch (GetPlayerFacingDirection())
             {
                 case 0:
                 case 1:
@@ -2297,7 +2297,7 @@ const struct WindowTemplate gUnknown_8456928 = {
     0x00, 0, 15, 30, 5, 15, 0x008F
 };
 
-void sub_8112EA8(void)
+void MapNamePopupWindowIdSetDummy(void)
 {
     gUnknown_203B020 = 0xFF;
 }
@@ -2471,12 +2471,12 @@ void sub_8112FE4(const u8 * a0)
     AddTextPrinterParameterized4(gUnknown_203B020, 0x02, 2, 5, 1, 1, &gUnknown_8456930, -1, a0);
 }
 
-void sub_8113018(const u8 * a0, u8 a1)
+void sub_8113018(const u8 * text, u8 mode)
 {
     sub_8112FD0();
-    sub_8112FE4(a0);
-    if (a1)
-        CopyWindowToVram(gUnknown_203B020, a1);
+    sub_8112FE4(text);
+    if (mode)
+        CopyWindowToVram(gUnknown_203B020, mode);
 }
 
 void sub_8113044(void)

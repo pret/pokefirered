@@ -61,10 +61,10 @@ SECTIONS {
         src/sprite.o(.text);
         src/string_util.o(.text);
         asm/link.o(.text);
-        asm/multiboot.o(.text);
+        src/multiboot.o(.text);
         asm/main_menu.o(.text);
         asm/battle_controllers.o(.text);
-        asm/decompress.o(.text);
+        src/decompress.o(.text);
         asm/battle_1.o(.text);
         asm/battle_2.o(.text);
         asm/battle_util.o(.text);
@@ -87,7 +87,7 @@ SECTIONS {
         asm/pokeball.o(.text);
         src/load_save.o(.text);
         asm/trade.o(.text);
-        asm/play_time.o(.text);
+        src/play_time.o(.text);
         asm/new_game.o(.text);
         asm/overworld.o(.text);
         src/fieldmap.o(.text);
@@ -117,7 +117,7 @@ SECTIONS {
         asm/reshow_battle_screen.o(.text);
         asm/battle_anim_status_effects.o(.text);
         asm/title_screen.o(.text);
-        asm/reset_save_heap.o(.text);
+        src/reset_save_heap.o(.text);
         asm/field_weather.o(.text);
         asm/field_weather_effects.o(.text);
         asm/field_fadetransition.o(.text);
@@ -135,7 +135,7 @@ SECTIONS {
         asm/pokemon_icon.o(.text);
         asm/script_movement.o(.text);
         asm/fldeff_cut.o(.text);
-        asm/mail_data.o(.text);
+        src/mail_data.o(.text);
         asm/map_name_popup.o(.text);
         src/item_menu_icons.o(.text);
         src/battle_anim_mon_movement.o(.text);
@@ -149,7 +149,7 @@ SECTIONS {
         asm/field_poison.o(.text);
         asm/pokemon_size_record.o(.text);
         asm/pc_screen_effect.o(.text);
-        asm/fldeff_poison.o(.text);
+        src/fldeff_poison.o(.text);
         src/fldeff_berrytree.o(.text);
         src/field_special_scene.o(.text);
         asm/safari_zone.o(.text);
@@ -181,16 +181,17 @@ SECTIONS {
         src/heal_location.o(.text);
         asm/region_map.o(.text);
         src/battle_ai_script_commands.o(.text);
-        asm/rom6.o(.text);
+        src/fldeff_rocksmash.o(.text);
+        src/fldeff_dig.o(.text);
         asm/fldeff_flash.o(.text);
         asm/post_battle_event_funcs.o(.text);
         src/prof_pc.o(.text);
-        asm/hof_pc.o(.text);
+        src/hof_pc.o(.text);
         asm/field_specials.o(.text);
         asm/battle_records.o(.text);
         asm/evolution_scene.o(.text);
         src/coins.o(.text);
-        asm/fldeff_strength.o(.text);
+        src/fldeff_strength.o(.text);
         asm/battle_transition.o(.text);
         asm/battle_controller_link_partner.o(.text);
         asm/battle_message.o(.text);
@@ -202,7 +203,7 @@ SECTIONS {
         asm/field_effect_helpers.o(.text);
         asm/battle_anim_sound_tasks.o(.text);
         asm/battle_controller_safari.o(.text);
-        asm/fldeff_sweetscent.o(.text);
+        src/fldeff_sweetscent.o(.text);
         asm/battle_anim_effects_3.o(.text);
         asm/learn_move.o(.text);
         src/fldeff_softboiled.o(.text);
@@ -218,7 +219,7 @@ SECTIONS {
         asm/clear_save_data_screen.o(.text);
         asm/evolution_graphics.o(.text);
         src/fldeff_teleport.o(.text);
-        asm/new_menu_helpers.o(.text);
+        src/new_menu_helpers.o(.text);
         asm/box_party_pokemon_dropdown.o(.text);
         asm/save_menu_util.o(.text);
         asm/map_preview_screen.o(.text);
@@ -227,7 +228,7 @@ SECTIONS {
         asm/pokedex_screen.o(.text);
         asm/list_menu.o(.text);
         asm/item_menu.o(.text);
-        asm/save_location.o(.text);
+        src/save_location.o(.text);
         src/bag.o(.text);
         src/trainer_pokemon_sprites.o(.text);
         src/vs_seeker.o(.text);
@@ -419,6 +420,9 @@ SECTIONS {
         data/data_83FECCC.o(.rodata);
         data/strings.o(.rodata);
         data/data_83FECCC.o(.rodata.841EE44);
+        src/new_menu_helpers.o(.rodata);
+        data/data_83FECCC.o(.rodata.841F4B4);
+        src/save_location.o(.rodata);
         src/bag.o(.rodata);
         src/trainer_pokemon_sprites.o(.rodata);
         src/vs_seeker.o(.rodata);

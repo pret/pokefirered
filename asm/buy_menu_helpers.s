@@ -28,7 +28,7 @@ _0813F686:
 	movs r0, 0
 	movs r1, 0x13
 	movs r2, 0xE0
-	bl TextWindow_SetBubbleFrame_841F1C8
+	bl TextWindow_LoadResourcesStdFrame0
 	movs r0, 0
 	movs r1, 0xA
 	movs r2, 0xF0
@@ -155,7 +155,7 @@ sub_813F75C: @ 813F75C
 	movs r3, 0xE
 	bl DisplayMessageAndContinueTask
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	add sp, 0x10
 	pop {r3}
 	mov r8, r3

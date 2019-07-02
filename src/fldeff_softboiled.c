@@ -4,11 +4,12 @@
 #include "string_util.h"
 #include "menu.h"
 #include "constants/songs.h"
+#include "fldeff.h"
 
-void sub_80E57E8(u8 taskId);
-void sub_80E583C(u8 taskId);
-void sub_80E58A0(u8 taskId);
-void sub_80E5934(u8 taskId);
+static void sub_80E57E8(u8 taskId);
+static void sub_80E583C(u8 taskId);
+static void sub_80E58A0(u8 taskId);
+static void sub_80E5934(u8 taskId);
 
 extern const u8 gUnknown_84169F8[];
 extern const u8 gUnknown_8416F27[];
@@ -61,22 +62,22 @@ void sub_80E5724(u8 taskId)
     }
 }
 
-void sub_80E57E8(u8 taskId)
+static void sub_80E57E8(u8 taskId)
 {
     PlaySE(SE_KAIFUKU);
     sub_8120760(taskId, gUnknown_203B0A0.unkA, 1, GetMonData(&gPlayerParty[gUnknown_203B0A0.unk9], MON_DATA_MAX_HP) / 5, sub_80E583C);
 }
 
-void sub_80E583C(u8 taskId)
+static void sub_80E583C(u8 taskId)
 {
     GetMonNickname(&gPlayerParty[gUnknown_203B0A0.unkA], gStringVar1);
     StringExpandPlaceholders(gStringVar4, gUnknown_8416F27);
     sub_81202F8(gStringVar4, 0);
-    schedule_bg_copy_tilemap_to_vram(2);
+    ScheduleBgCopyTilemapToVram(2);
     gTasks[taskId].func = sub_80E58A0;
 }
 
-void sub_80E58A0(u8 taskId)
+static void sub_80E58A0(u8 taskId)
 {
     if (sub_8120370() != TRUE)
     {
@@ -91,7 +92,7 @@ void sub_80E58A0(u8 taskId)
     }
 }
 
-void sub_80E5900(u8 taskId)
+static void sub_80E5900(u8 taskId)
 {
     if (sub_8120370() != TRUE)
     {
@@ -100,10 +101,10 @@ void sub_80E5900(u8 taskId)
     }
 }
 
-void sub_80E5934(u8 taskId)
+static void sub_80E5934(u8 taskId)
 {
     PlaySE(SE_SELECT);
     sub_81202F8(gUnknown_84169F8, 0);
-    schedule_bg_copy_tilemap_to_vram(2);
+    ScheduleBgCopyTilemapToVram(2);
     gTasks[taskId].func = sub_80E5900;
 }

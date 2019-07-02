@@ -39,7 +39,7 @@ sub_8097898: @ 8097898
 	cmp r0, 0x1
 	beq _080978E0
 	movs r0, 0x5F
-	bl npc_before_player_of_type
+	bl CheckObjectGraphicsInFrontOfPlayer
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -74,7 +74,7 @@ _080978F8: .4byte FieldCallback_PrepareFadeInFromMenu
 _080978FC: .4byte gPostMenuFieldCallback
 _08097900: .4byte sub_8097984
 _08097904:
-	ldr r4, _0809797C @ =gUnknown_2039A04
+	ldr r4, _0809797C @ =gPlayerFacingPosition
 	adds r1, r4, 0x2
 	adds r0, r4, 0
 	bl PlayerGetDestCoords
@@ -136,7 +136,7 @@ _08097970:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0809797C: .4byte gUnknown_2039A04
+_0809797C: .4byte gPlayerFacingPosition
 _08097980: .4byte 0x0000ffff
 	thumb_func_end sub_8097898
 
@@ -253,7 +253,7 @@ sub_8097A48: @ 8097A48
 	movs r7, 0
 	movs r0, 0x79
 	bl PlaySE
-	ldr r4, _08097B38 @ =gUnknown_2039A04
+	ldr r4, _08097B38 @ =gPlayerFacingPosition
 	adds r1, r4, 0x2
 	adds r0, r4, 0
 	bl PlayerGetDestCoords
@@ -362,7 +362,7 @@ _08097AE2:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08097B38: .4byte gUnknown_2039A04
+_08097B38: .4byte gPlayerFacingPosition
 _08097B3C: .4byte 0x0000ffff
 _08097B40: .4byte gUnknown_2039870
 _08097B44: .4byte gSprites

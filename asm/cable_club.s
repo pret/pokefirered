@@ -55,7 +55,7 @@ sub_808078C: @ 808078C
 	lsrs r4, 24
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80F7750
+	bl SetStdWindowBorderStyle
 	ldr r5, _080807E0 @ =gStringVar4
 	ldr r1, _080807E4 @ =gUnknown_841DF82
 	adds r0, r5, 0

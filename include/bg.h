@@ -25,6 +25,17 @@ enum
     BG_CTRL_ATTR_WRAPAROUND = 8,
 };
 
+enum AdjustBgMosaicMode
+{
+    BG_MOSAIC_SET,
+    BG_MOSAIC_SET_H,
+    BG_MOSAIC_INC_H,
+    BG_MOSAIC_DEC_H,
+    BG_MOSAIC_SET_V,
+    BG_MOSAIC_INC_V,
+    BG_MOSAIC_DEC_V,
+};
+
 enum BgTileAllocMode
 {
     BG_TILE_FIND_FREE_SPACE,
@@ -71,7 +82,7 @@ u32 ChangeBgY(u8 bg, u32 value, u8 op);
 u32 ChangeBgY_ScreenOff(u8 bg, u32 value, u8 op);
 u32 GetBgY(u8 bg);
 void SetBgAffine(u8 bg, u32 srcCenterX, u32 srcCenterY, s16 dispCenterX, s16 dispCenterY, s16 scaleX, s16 scaleY, u16 rotationAngle);
-u8 Unused_AdjustBgMosaic(u8 a1, u8 a2);
+u8 AdjustBgMosaic(u8 value, u8 mode);
 void SetBgTilemapBuffer(u8 bg, void *tilemap);
 void UnsetBgTilemapBuffer(u8 bg);
 void* GetBgTilemapBuffer(u8 bg);

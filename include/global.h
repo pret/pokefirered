@@ -209,7 +209,7 @@ struct SaveBlock2
 {
     /*0x000*/ u8 playerName[PLAYER_NAME_LENGTH];
     /*0x008*/ u8 playerGender; // MALE, FEMALE
-    /*0x009*/ u8 specialSaveWarp;
+    /*0x009*/ u8 specialSaveWarpFlags;
     /*0x00A*/ u8 playerTrainerId[4];
     /*0x00E*/ u16 playTimeHours;
     /*0x010*/ u8 playTimeMinutes;
@@ -726,8 +726,14 @@ struct SaveBlock1
     /*0x3D38*/ struct TrainerTowerLog unkArray[4];
 };
 
-extern struct SaveBlock1* gSaveBlock1Ptr;
+struct MapPosition
+{
+    s16 x;
+    s16 y;
+    s8 height;
+};
 
+extern struct SaveBlock1* gSaveBlock1Ptr;
 extern u8 gReservedSpritePaletteCount;
 
 #endif // GUARD_GLOBAL_H

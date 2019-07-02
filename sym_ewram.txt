@@ -1043,7 +1043,7 @@ gUnknown_20399FC: @ 20399FC
 gAIScriptPtr: @ 2039A00
 	.space 0x4
 
-gUnknown_2039A04: @ 2039A04
+gPlayerFacingPosition: @ 2039A04
 	.space 0x8
 
 gUnknown_2039A0C: @ 2039A0C
@@ -1091,7 +1091,7 @@ gUnknown_2039A34: @ 2039A34
 	.include "src/save.o"
 	.include "src/mystery_event_script.o"
 
-gUnknown_203AAB0: @ 203AAB0
+gPaletteDecompressionBuffer: @ 203AAB0
 	.space 0x4
 
 gUnknown_203AAB4: @ 203AAB4
@@ -1208,18 +1208,8 @@ gUnknown_203AB50: @ 203AB50
 gUnknown_203AB54: @ 203AB54
 	.space 0x4
 
-gUnknown_203AB58: @ 203AB58
-	.space 0x4
-
-gUnknown_203AB5C: @ 203AB5C
-	.space 0x4
-
-gUnknown_203AB60: @ 203AB60
-	.space 0x80
-
-gUnknown_203ABE0: @ 203ABE0
-	.space 0x4
-
+	.include "src/new_menu_helpers.o"
+	.align 2
 gUnknown_203ABE4: @ 203ABE4
 	.space 0x4
 

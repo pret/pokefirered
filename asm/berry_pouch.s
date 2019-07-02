@@ -100,7 +100,7 @@ sub_813CE00: @ 813CE00
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer
-	bl do_scheduled_bg_tilemap_copies_to_vram
+	bl DoScheduledBgTilemapCopiesToVram
 	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
@@ -184,7 +184,7 @@ _0813CE84:
 	.4byte _0813CFBE
 _0813CED0:
 	bl SetVBlankHBlankCallbacksToNull
-	bl clear_scheduled_bg_copies_to_vram
+	bl ClearScheduledBgCopiesToVram
 	b _0813CFD2
 _0813CEDA:
 	bl ScanlineEffect_Stop
@@ -405,7 +405,7 @@ sub_813D07C: @ 813D07C
 	movs r0, 0x1
 	bl SetBgTilemapBuffer
 	movs r0, 0x1
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0x50
 	movs r1, 0
 	bl SetGpuReg
@@ -454,18 +454,18 @@ _0813D10C:
 	beq _0813D178
 	b _0813D190
 _0813D116:
-	bl reset_temp_tile_data_buffers
+	bl ResetTempTileDataBuffers
 	ldr r1, _0813D12C @ =gUnknown_8E859D0
 	str r4, [sp]
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	b _0813D17E
 	.align 2, 0
 _0813D12C: .4byte gUnknown_8E859D0
 _0813D130:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -498,7 +498,7 @@ _0813D170: .4byte gSaveBlock2Ptr
 _0813D174: .4byte gUnknown_8E85BF4
 _0813D178:
 	ldr r0, _0813D18C @ =gUnknown_84644A8
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 _0813D17E:
 	ldr r1, [r5]
 	adds r1, r6
@@ -510,7 +510,7 @@ _0813D17E:
 _0813D18C: .4byte gUnknown_84644A8
 _0813D190:
 	ldr r0, _0813D1A8 @ =gUnknown_84644B0
-	bl LoadCompressedObjectPalette
+	bl LoadCompressedSpritePalette
 	ldr r0, _0813D1AC @ =gUnknown_203F36C
 	ldr r0, [r0]
 	ldr r1, _0813D1B0 @ =0x0000080c
@@ -1030,7 +1030,7 @@ sub_813D594: @ 813D594
 	movs r3, 0x1E
 	bl SetBgRectPal
 	movs r0, 0x1
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	add sp, 0x8
 	pop {r0}
 	bx r0
@@ -2111,9 +2111,9 @@ sub_813DE0C: @ 813DE0C
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r0, _0813DE60 @ =gUnknown_203F370
 	ldrb r0, [r0, 0x4]
 	cmp r0, 0x4
@@ -2309,9 +2309,9 @@ sub_813DFC8: @ 813DFC8
 	movs r0, 0
 	bl PutWindowTilemap
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldrb r0, [r4]
 	movs r1, 0x1
 	bl sub_813D4B0
@@ -2370,9 +2370,9 @@ _0813E048:
 	movs r0, 0
 	bl sub_813EA98
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	bl sub_813D684
 	adds r0, r5, 0
 	bl sub_813DF54
@@ -2395,9 +2395,9 @@ _0813E090:
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldrb r0, [r4]
 	movs r1, 0x1
 	bl sub_813D4B0
@@ -2519,7 +2519,7 @@ _0813E18A:
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldrb r0, [r5]
 	movs r1, 0x1
 	bl sub_813D4B0
@@ -2555,9 +2555,9 @@ sub_813E200: @ 813E200
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	cmp r0, 0
@@ -2659,7 +2659,7 @@ sub_813E2B8: @ 813E2B8
 	lsrs r0, 24
 	strh r0, [r5]
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldrb r0, [r5]
 	movs r1, 0x1
 	bl sub_813D4B0
@@ -2693,9 +2693,9 @@ sub_813E320: @ 813E320
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r1, _0813E378 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -2964,7 +2964,7 @@ sub_813E568: @ 813E568
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldrb r0, [r4]
 	movs r1, 0x1
 	bl sub_813D4B0
@@ -3130,7 +3130,7 @@ _0813E6E4:
 	movs r0, 0
 	bl PutWindowTilemap
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	bl sub_813D684
 	adds r0, r4, 0
 	bl sub_813E4E4
@@ -3157,7 +3157,7 @@ _0813E718:
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	bl sub_813D684
 	ldrb r0, [r5]
 	movs r1, 0x1
@@ -3184,7 +3184,7 @@ sub_813E768: @ 813E768
 	movs r0, 0
 	bl PutWindowTilemap
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r0, _0813E7D8 @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, _0813E7DC @ =gStringVar1
@@ -3371,7 +3371,7 @@ sub_813E910: @ 813E910
 	movs r0, 0
 	movs r1, 0x13
 	movs r2, 0xD0
-	bl TextWindow_SetBubbleFrame_841F1C8
+	bl TextWindow_LoadResourcesStdFrame0
 	movs r0, 0
 	movs r1, 0xA
 	movs r2, 0xC0
@@ -3397,9 +3397,9 @@ _0813E946:
 	movs r0, 0x2
 	bl PutWindowTilemap
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r4, 0
 	ldr r3, _0813E99C @ =gUnknown_203F38C
 	movs r2, 0xFF
@@ -3522,7 +3522,7 @@ _0813EA54:
 	bl SetWindowBorderStyle
 _0813EA60:
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r0, _0813EA74 @ =gUnknown_203F38C
 	adds r0, r4, r0
 	ldrb r0, [r0]
@@ -3568,7 +3568,7 @@ sub_813EA98: @ 813EA98
 	ldrb r0, [r4]
 	bl RemoveWindow
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0xFF
 	strb r0, [r4]
 	pop {r4}
@@ -3597,9 +3597,9 @@ sub_813EACC: @ 813EACC
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0xFF
 	strb r0, [r4]
 _0813EB04:
@@ -3656,7 +3656,7 @@ _0813EB44:
 	movs r3, 0xD
 	bl DisplayMessageAndContinueTask
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	add sp, 0x10
 	pop {r3}
 	mov r8, r3

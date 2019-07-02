@@ -422,7 +422,7 @@ static void TeachyTvCallback(void)
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
-    do_scheduled_bg_tilemap_copies_to_vram();
+    DoScheduledBgTilemapCopiesToVram();
     UpdatePaletteFade();
 }
 
@@ -476,7 +476,7 @@ static void TeachyTvMainCallback(void)
         sResources->grassAnimDisabled = 0;
         sResources->scrollIndicatorArrowPairId = 0xFF;
         SetVBlankHBlankCallbacksToNull();
-        clear_scheduled_bg_copies_to_vram();
+        ClearScheduledBgCopiesToVram();
         ScanlineEffect_Stop();
         FreeAllSpritePalettes();
         ResetPaletteFade();
@@ -487,7 +487,7 @@ static void TeachyTvMainCallback(void)
         ++gMain.state;
         break;
     case 1:
-        if (free_temp_tile_data_buffers_if_possible() == TRUE)
+        if (FreeTempTileDataBuffersIfPossible() == TRUE)
             return;
         TeachyTvCreateAndRenderRbox();
         TeachyTvInitIo();
@@ -506,10 +506,10 @@ static void TeachyTvMainCallback(void)
             PlayNewMapMusic(BGM_FRLG_TEACHY_TV);
             TeachyTvSetWindowRegs();
         }
-        schedule_bg_copy_tilemap_to_vram(0);
-        schedule_bg_copy_tilemap_to_vram(1);
-        schedule_bg_copy_tilemap_to_vram(2);
-        schedule_bg_copy_tilemap_to_vram(3);
+        ScheduleBgCopyTilemapToVram(0);
+        ScheduleBgCopyTilemapToVram(1);
+        ScheduleBgCopyTilemapToVram(2);
+        ScheduleBgCopyTilemapToVram(3);
         sub_812B1E0(9); // help system something
         BlendPalettes(0xFFFFFFFF, 0x10, 0);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
@@ -542,8 +542,8 @@ static void TeachyTvSetupBg(void)
 static void TeachyTvLoadGraphic(void)
 {
     u16 src = RGB_BLACK;
-    reset_temp_tile_data_buffers();
-    decompress_and_copy_tile_data_to_vram(1, gUnknown_8E86240, 0, 0, 0);
+    ResetTempTileDataBuffers();
+    DecompressAndCopyTileDataToVram(1, gUnknown_8E86240, 0, 0, 0);
     LZDecompressWram(gUnknown_8E86BE8, sResources->buffer1);
     LZDecompressWram(gUnknown_8E86D6C, sResources->buffer4);
     LoadCompressedPalette(gUnknown_8E86F98, 0, 0x80);
@@ -656,7 +656,7 @@ static void TeachyTvBg2AnimController(void)
             tilemapBuffer[32 * i + j] = ((Random() & 3) << 10) + 0x301F;
         }
     }
-    schedule_bg_copy_tilemap_to_vram(2);
+    ScheduleBgCopyTilemapToVram(2);
 }
 
 static void TeachyTvSetupPostBattleWindowAndObj(u8 taskId)
@@ -718,7 +718,7 @@ static void TeachyTvQuitFadeControlAndTaskDel(u8 taskId)
         }
         else
         {
-            sub_8055DC4();
+            Overworld_PlaySpecialMapMusic();
             SetMainCallback2(sStaticResources.callback);
         }
         TeachyTvFree();
@@ -757,7 +757,7 @@ static void TeachyTvOptionListController(u8 taskId)
                 DestroyListMenu(data[0], &sStaticResources.scrollOffset, &sStaticResources.selectedRow);
                 TeachyTvClearWindowRegs();
                 ClearWindowTilemap(1);
-                schedule_bg_copy_tilemap_to_vram(0);
+                ScheduleBgCopyTilemapToVram(0);
                 TeachyTvRemoveScrollIndicatorArrowPair();
                 data[3] = 0;
                 data[2] = 0;
@@ -776,7 +776,7 @@ static void TTVcmd_TransitionRenderBg2TeachyTvGraphicInitNpcPos(u8 taskId)
     {
         CopyToBgTilemapBufferRect_ChangePalette(2, sResources->buffer4, 0, 0, 0x20, 0x20, 0x11);
         TeachyTvSetSpriteCoordsAndSwitchFrame(data[1], 8, 0x38, 7);
-        schedule_bg_copy_tilemap_to_vram(2);
+        ScheduleBgCopyTilemapToVram(2);
         data[2] = 0;
         ++data[3];
         PlayNewMapMusic(BGM_FRLG_FOLLOW_ME);
@@ -789,7 +789,7 @@ static void TTVcmd_ClearBg2TeachyTvGraphic(u8 taskId)
     if (++data[2] == 134)
     {
         FillBgTilemapBufferRect_Palette0(2, 0, 2, 1, 0x1A, 0xC);
-        schedule_bg_copy_tilemap_to_vram(2);
+        ScheduleBgCopyTilemapToVram(2);
         data[2] = 0;
         ++data[3];
     }
@@ -1040,7 +1040,7 @@ static void TTVcmd_RenderAndRemoveBg1EndGraphic(u8 taskId)
     if (!data[2])
     {
         CopyToBgTilemapBufferRect_ChangePalette(1, sBg1EndGraphic, 20, 10, 8, 2, 0x11);
-        schedule_bg_copy_tilemap_to_vram(1);
+        ScheduleBgCopyTilemapToVram(1);
     }
     if (++data[2] > 126)
     {
@@ -1053,7 +1053,7 @@ static void TTVcmd_RenderAndRemoveBg1EndGraphic(u8 taskId)
 static void TeachyTvClearBg1EndGraphicText(void)
 {
     FillBgTilemapBufferRect_Palette0(1, 0, 20, 10, 8, 2);
-    schedule_bg_copy_tilemap_to_vram(1);
+    ScheduleBgCopyTilemapToVram(1);
 }
 
 static void TTVcmd_End(u8 taskId)
@@ -1071,7 +1071,7 @@ static void TTVcmd_End(u8 taskId)
         PutWindowTilemap(0);
         TeachyTvSetupScrollIndicatorArrowPair();
         TeachyTvSetWindowRegs();
-        schedule_bg_copy_tilemap_to_vram(0);
+        ScheduleBgCopyTilemapToVram(0);
         ChangeBgX(3, 0x0, 0);
         ChangeBgY(3, 0x0, 0);
         ChangeBgX(3, 0x1000, 2);

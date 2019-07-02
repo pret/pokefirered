@@ -2322,7 +2322,7 @@ _080F3082:
 	bl Free
 	str r4, [r5]
 _080F3090:
-	bl sub_80CA5A0
+	bl ReturnFromHallOfFamePC
 _080F3094:
 	pop {r4,r5}
 	pop {r0}
@@ -3073,16 +3073,16 @@ sub_80F36BC: @ 80F36BC
 	bl ScanlineEffect_Stop
 	bl ResetTasks
 	bl ResetSpriteData
-	bl reset_temp_tile_data_buffers
+	bl ResetTempTileDataBuffers
 	bl ResetAllPicSprites
 	bl FreeAllSpritePalettes
 	ldr r1, _080F36EC @ =gReservedSpritePaletteCount
 	movs r0, 0x8
 	strb r0, [r1]
 	ldr r0, _080F36F0 @ =gUnknown_840C248
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	ldr r0, _080F36F4 @ =gUnknown_840C258
-	bl LoadCompressedObjectPalette
+	bl LoadCompressedSpritePalette
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3174,12 +3174,12 @@ _080F37A4:
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	b _080F3854
 	.align 2, 0
 _080F37B8: .4byte gUnknown_840C3BC
 _080F37BC:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	cmp r0, 0
 	beq _080F3854

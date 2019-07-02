@@ -65,13 +65,13 @@ _0806939E:
 	movs r1, 0x80
 	lsls r1, 2
 	movs r0, 0
-	bl sub_814FF98
+	bl TextWindow_LoadTilesStdFrame1
 	b _080693E2
 	.align 2, 0
 _080693BC: .4byte gUnknown_203ADFA
 _080693C0: .4byte gTextFlags
 _080693C4:
-	bl sub_8069A38
+	bl IsMsgSignPost
 	lsls r0, 24
 	cmp r0, 0
 	bne _080693D4
@@ -90,7 +90,7 @@ _080693E2:
 	strh r0, [r5, 0x8]
 	b _08069402
 _080693EA:
-	bl sub_80F6CBC
+	bl RunTextPrinters_CheckPrinter0Active
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x1
@@ -226,7 +226,7 @@ textbox_fdecode_auto_and_task_add: @ 80694C8
 	ldr r0, _080694E0 @ =gStringVar4
 	bl StringExpandPlaceholders
 	movs r0, 0x1
-	bl sub_80F6D5C
+	bl AddTextPrinterDiffStyle
 	bl task_add_textbox
 	pop {r0}
 	bx r0
@@ -238,7 +238,7 @@ _080694E0: .4byte gStringVar4
 textbox_auto_and_task_add: @ 80694E4
 	push {lr}
 	movs r0, 0x1
-	bl sub_80F6D5C
+	bl AddTextPrinterDiffStyle
 	bl task_add_textbox
 	pop {r0}
 	bx r0

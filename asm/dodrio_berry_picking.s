@@ -11348,7 +11348,7 @@ _08156020:
 	.align 2, 0
 _0815602C: .4byte gUnknown_84758A8
 _08156030:
-	bl reset_temp_tile_data_buffers
+	bl ResetTempTileDataBuffers
 	b _08156082
 _08156036:
 	ldr r1, _08156040 @ =gUnknown_8475B3C
@@ -11366,12 +11366,12 @@ _08156044:
 _0815604C:
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	b _08156082
 	.align 2, 0
 _08156058: .4byte gUnknown_84763CC
 _0815605C:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

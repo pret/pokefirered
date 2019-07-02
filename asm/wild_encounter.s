@@ -482,7 +482,7 @@ _08082A8E:
 	lsrs r0, 16
 	orrs r4, r0
 	adds r0, r4, 0
-	bl GetUnownLetterByPersonality
+	bl GetUnownLetterByPersonalityLoByte
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, r5
@@ -493,8 +493,8 @@ _08082A8E:
 	bx r1
 	thumb_func_end sub_8082A88
 
-	thumb_func_start GetUnownLetterByPersonality
-GetUnownLetterByPersonality: @ 8082AB8
+	thumb_func_start GetUnownLetterByPersonalityLoByte
+GetUnownLetterByPersonalityLoByte: @ 8082AB8
 	push {lr}
 	adds r2, r0, 0
 	movs r0, 0xC0
@@ -520,7 +520,7 @@ GetUnownLetterByPersonality: @ 8082AB8
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end GetUnownLetterByPersonality
+	thumb_func_end GetUnownLetterByPersonalityLoByte
 
 	thumb_func_start sub_8082AEC
 sub_8082AEC: @ 8082AEC
@@ -1020,8 +1020,8 @@ _08082EB6:
 _08082EBC: .4byte gSpecialVar_Result
 	thumb_func_end sub_8082E54
 
-	thumb_func_start sub_8082EC0
-sub_8082EC0: @ 8082EC0
+	thumb_func_start SweetScentWildEncounter
+SweetScentWildEncounter: @ 8082EC0
 	push {r4,r5,lr}
 	sub sp, 0x4
 	mov r4, sp
@@ -1108,7 +1108,7 @@ _08082F6E:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8082EC0
+	thumb_func_end SweetScentWildEncounter
 
 	thumb_func_start sub_8082F78
 sub_8082F78: @ 8082F78

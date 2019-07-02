@@ -608,12 +608,12 @@ CreateTrainerSprite: @ 8083858
 	add r8, r4
 	mov r0, r8
 	adds r1, r7, 0
-	bl LoadCompressedObjectPaletteOverrideBuffer
+	bl LoadCompressedSpritePaletteOverrideBuffer
 	ldr r0, _080838E4 @ =gTrainerFrontPicTable
 	adds r4, r0
 	adds r0, r4, 0
 	adds r1, r7, 0
-	bl LoadCompressedObjectPicOverrideBuffer
+	bl LoadCompressedSpriteSheetOverrideBuffer
 	mov r1, sp
 	ldrh r0, [r4, 0x6]
 	movs r2, 0
@@ -2062,7 +2062,7 @@ _0808438C: .4byte mapldr_08084390
 	thumb_func_start mapldr_08084390
 mapldr_08084390: @ 8084390
 	push {r4,lr}
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	bl sub_807DC00
 	ldr r0, _080843E8 @ =c3_080843F8
 	movs r1, 0
@@ -2154,7 +2154,7 @@ _08084450: .4byte gPaletteFade
 	thumb_func_start sub_8084454
 sub_8084454: @ 8084454
 	push {lr}
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	bl pal_fill_for_maplights
 	bl sub_8111CF0
 	bl ScriptContext2_Enable
@@ -2235,7 +2235,7 @@ sub_80844BC: @ 80844BC
 	strb r1, [r0, 0x1]
 	movs r0, 0x1
 	strb r0, [r6, 0x6]
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8063EB8
@@ -2243,7 +2243,7 @@ sub_80844BC: @ 80844BC
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	adds r3, r4, 0
 	adds r3, 0x42
 	ldrb r0, [r3]
@@ -2653,17 +2653,17 @@ sub_8084820: @ 8084820
 	ldr r1, _0808488C @ =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl FieldObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808484A
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808487E
 _0808484A:
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8063EB8
@@ -2671,7 +2671,7 @@ _0808484A:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	movs r1, 0
@@ -2885,7 +2885,7 @@ _080849F0: .4byte sub_80847C0
 	thumb_func_start sub_80849F4
 sub_80849F4: @ 80849F4
 	push {lr}
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	bl pal_fill_for_maplights
 	bl sub_8111CF0
 	bl ScriptContext2_Enable
@@ -2952,7 +2952,7 @@ sub_8084A5C: @ 8084A5C
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	mov r4, sp
 	adds r4, 0x2
 	mov r0, sp
@@ -3192,7 +3192,7 @@ sub_8084C3C: @ 8084C3C
 	ldr r1, _08084C98 @ =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08084C8A
@@ -3205,7 +3205,7 @@ sub_8084C3C: @ 8084C3C
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	ldr r0, _08084C9C @ =sub_8084A24
 	bl FindTaskIdByFunc
 	lsls r0, 24
@@ -3317,12 +3317,12 @@ waterfall_1_do_anim_probably: @ 8084D44
 	adds r5, r1, 0
 	bl ScriptContext2_Enable
 	adds r0, r5, 0
-	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl FieldObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	bne _08084D74
 	adds r0, r5, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	ldr r1, _08084D7C @ =gFieldEffectArguments
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
@@ -3374,7 +3374,7 @@ sub_8084DA4: @ 8084DA4
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	strh r0, [r5, 0x8]
@@ -3390,7 +3390,7 @@ sub_8084DCC: @ 8084DCC
 	adds r5, r0, 0
 	adds r4, r1, 0
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _08084DE2
@@ -3909,7 +3909,7 @@ _080851B8: .4byte sub_8084F44
 	thumb_func_start mapldr_080851BC
 mapldr_080851BC: @ 80851BC
 	push {lr}
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	bl pal_fill_for_maplights
 	bl sub_8111CF0
 	bl ScriptContext2_Enable
@@ -4070,7 +4070,7 @@ sub_80852C0: @ 80852C0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 _08085308:
 	movs r0, 0
 	pop {r4}
@@ -4084,7 +4084,7 @@ _08085310: .4byte gSprites
 sub_8085314: @ 8085314
 	push {lr}
 	adds r0, r1, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808533E
@@ -4266,7 +4266,7 @@ sub_8085470: @ 8085470
 	adds r4, r1, 0
 	adds r6, r2, 0
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080854E4
@@ -4311,7 +4311,7 @@ _080854C4:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	movs r0, 0x21
 	bl PlaySE
 _080854E4:
@@ -4527,7 +4527,7 @@ sub_808566C: @ 808566C
 	strh r0, [r4, 0x8]
 	movs r0, 0x40
 	strh r0, [r4, 0x22]
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x24]
@@ -4641,12 +4641,12 @@ sub_808576C: @ 808576C
 	adds r4, r0, 0
 	adds r6, r1, 0
 	adds r5, r2, 0
-	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl FieldObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808578A
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080857E4
@@ -4673,7 +4673,7 @@ _0808579E:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	ldrh r1, [r5]
 	movs r2, 0
 	ldrsh r0, [r5, r2]
@@ -4965,7 +4965,7 @@ _080859C4:
 	thumb_func_start sub_80859D4
 sub_80859D4: @ 80859D4
 	push {lr}
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	bl pal_fill_for_maplights
 	bl sub_8111CF0
 	bl ScriptContext2_Enable
@@ -5031,7 +5031,7 @@ sub_8085A54: @ 8085A54
 	beq _08085A78
 	movs r0, 0x28
 	bl PlaySE
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x26]
@@ -5125,7 +5125,7 @@ _08085B10:
 	cmp r1, r0
 	bne _08085B58
 	adds r0, r6, 0
-	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
+	bl FieldObjectCheckHeldMovementStatus
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -5200,7 +5200,7 @@ sub_8085BA8: @ 8085BA8
 	bl ScriptContext2_Enable
 	bl player_bitmagic
 	bl CameraObjectReset2
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x26]
@@ -5431,7 +5431,7 @@ _08085D84: .4byte sub_8085B78
 	thumb_func_start mapldr_08085D88
 mapldr_08085D88: @ 8085D88
 	push {lr}
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	bl pal_fill_for_maplights
 	bl sub_8111CF0
 	bl ScriptContext2_Enable
@@ -5540,7 +5540,7 @@ sub_8085E0C: @ 8085E0C
 	ldrb r0, [r2]
 	lsrs r0, 6
 	strh r0, [r6, 0x24]
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x26]
@@ -6185,7 +6185,7 @@ sub_8086358: @ 8086358
 	movs r1, 0
 	movs r2, 0
 	bl ChangeBgY
-	bl sub_80F77B8
+	bl Menu_LoadStdPal
 	movs r0, 0x26
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 4
@@ -6568,7 +6568,7 @@ sub_8086650: @ 8086650
 	movs r1, 0
 	movs r2, 0
 	bl ChangeBgY
-	bl sub_80F77B8
+	bl Menu_LoadStdPal
 	movs r0, 0x26
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 4
@@ -7050,12 +7050,12 @@ sub_8086A20: @ 8086A20
 	ldr r1, _08086A68 @ =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl FieldObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086A4A
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086A5C
@@ -7063,7 +7063,7 @@ _08086A4A:
 	bl sub_805CB70
 	adds r0, r4, 0
 	movs r1, 0x45
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	strh r0, [r5, 0x8]
@@ -7087,7 +7087,7 @@ sub_8086A6C: @ 8086A6C
 	lsls r0, 2
 	ldr r1, _08086AAC @ =gMapObjects
 	adds r0, r1
-	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
+	bl FieldObjectCheckHeldMovementStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086AA2
@@ -7135,9 +7135,9 @@ sub_8086AB4: @ 8086AB4
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_805F060
+	bl EventObjectSetGraphicsId
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	ldrb r0, [r4, 0x18]
 	lsrs r0, 4
 	bl sub_80641C0
@@ -7145,7 +7145,7 @@ sub_8086AB4: @ 8086AB4
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	ldr r1, _08086B2C @ =gFieldEffectArguments
 	movs r2, 0xA
 	ldrsh r0, [r6, r2]
@@ -7182,7 +7182,7 @@ sub_8086B30: @ 8086B30
 	ldr r1, _08086BA0 @ =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086B96
@@ -7199,7 +7199,7 @@ sub_8086B30: @ 8086B30
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	ldrb r0, [r4, 0x1A]
 	movs r1, 0x1
 	bl sub_80DC44C
@@ -7302,12 +7302,12 @@ sub_8086C24: @ 8086C24
 	ldr r1, _08086C6C @ =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl FieldObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086C4E
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086C60
@@ -7315,7 +7315,7 @@ _08086C4E:
 	bl sub_805CBE8
 	adds r0, r4, 0
 	movs r1, 0x45
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	strh r0, [r5, 0x8]
@@ -7340,7 +7340,7 @@ sub_8086C70: @ 8086C70
 	ldr r1, _08086CA0 @ =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086CEE
@@ -7366,7 +7366,7 @@ _08086CAE:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_805F060
+	bl EventObjectSetGraphicsId
 	b _08086CD2
 _08086CC0:
 	movs r0, 0
@@ -7375,7 +7375,7 @@ _08086CC0:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_805F060
+	bl EventObjectSetGraphicsId
 _08086CD2:
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
@@ -7405,7 +7405,7 @@ sub_8086CF4: @ 8086CF4
 	lsls r0, 2
 	ldr r1, _08086D30 @ =gMapObjects
 	adds r0, r1
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086D26
@@ -7599,12 +7599,12 @@ sub_8086E70: @ 8086E70
 	ldr r1, _08086EC4 @ =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl FieldObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086E9A
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086EB8
@@ -7617,7 +7617,7 @@ _08086E9A:
 	bl sub_805CB70
 	adds r0, r4, 0
 	movs r1, 0x45
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	strh r0, [r5, 0x8]
@@ -7641,7 +7641,7 @@ sub_8086EC8: @ 8086EC8
 	lsls r0, 2
 	ldr r1, _08086F04 @ =gMapObjects
 	adds r0, r1
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086EF8
@@ -7732,7 +7732,7 @@ sub_8086F64: @ 8086F64
 	ldr r1, _08086FA4 @ =gMapObjects
 	adds r0, r1
 	movs r1, 0x2
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 _08086F98:
 	pop {r4}
 	pop {r0}
@@ -7765,7 +7765,7 @@ sub_8086FA8: @ 8086FA8
 	bne _08086FEC
 _08086FCE:
 	adds r0, r2, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086FEC
@@ -7809,7 +7809,7 @@ sub_8086FFC: @ 8086FFC
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_805F060
+	bl EventObjectSetGraphicsId
 	ldrb r1, [r4, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -7824,7 +7824,7 @@ sub_8086FFC: @ 8086FFC
 	strb r0, [r4, 0x1]
 	adds r0, r4, 0
 	movs r1, 0x54
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	strh r0, [r5, 0x8]
@@ -8433,12 +8433,12 @@ sub_80874C8: @ 80874C8
 	ldr r1, _080875B8 @ =gMapObjects
 	adds r5, r0, r1
 	adds r0, r5, 0
-	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl FieldObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _080874F2
 	adds r0, r5, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080875AE
@@ -8468,7 +8468,7 @@ _0808751A:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl sub_805F060
+	bl EventObjectSetGraphicsId
 	bl CameraObjectReset2
 	adds r0, r5, 0
 	movs r1, 0x3
@@ -8688,7 +8688,7 @@ sub_8087698: @ 8087698
 	bl sub_805CB70
 	adds r0, r5, 0
 	movs r1, 0x45
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	ldrh r0, [r6, 0x8]
 	adds r0, 0x1
 	strh r0, [r6, 0x8]
@@ -8713,7 +8713,7 @@ sub_8087710: @ 8087710
 	lsls r0, 2
 	ldr r1, _08087744 @ =gMapObjects
 	adds r0, r1
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08087738
@@ -8795,7 +8795,7 @@ _080877B4:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_805F060
+	bl EventObjectSetGraphicsId
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl FieldObjectTurn

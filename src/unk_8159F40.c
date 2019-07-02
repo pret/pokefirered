@@ -612,7 +612,7 @@ void sub_815A540(void)
         s16 x, y;
 
         PlayerGetDestCoords(&x, &y);
-        if (!MetatileBehavior_IsSurfable(MapGridGetMetatileBehaviorAt(x, y)) && TestPlayerAvatarFlags(0x08))
+        if (!MetatileBehavior_IsSurfable(MapGridGetMetatileBehaviorAt(x, y)) && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
         {
             struct MapObject *mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
             SetPlayerAvatarTransitionFlags(0x01);

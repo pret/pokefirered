@@ -983,7 +983,7 @@ static void BattleAICmd_is_most_powerful_move(void)
         && sDiscouragedPowerfulMoveEffects[i] == 0xFFFF)
     {
         gDynamicBasePower = 0;
-        *(&gBattleStruct->dynamicMoveType) = 0;
+        gBattleStruct->dynamicMoveType = 0;
         gBattleScripting.dmgMultiplier = 1;
         gMoveResultFlags = 0;
         gCritMultiplier = 1;

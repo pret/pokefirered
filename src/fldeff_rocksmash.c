@@ -124,8 +124,7 @@ bool8 FldEff_UseRockSmash(void)
 {
     u8 taskId = oei_task_add();
 
-    gTasks[taskId].data[8] = (u32)sub_80C9A60 >> 16;
-    gTasks[taskId].data[9] = (u32)sub_80C9A60;
+    FLDEFF_SET_FUNC_TO_DATA(sub_80C9A60);
     IncrementGameStat(GAME_STAT_USED_ROCK_SMASH);
     return FALSE;
 }

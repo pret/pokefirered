@@ -1,6 +1,10 @@
 #ifndef GUARD_FLDEFF_H
 #define GUARD_FLDEFF_H
 
+#define FLDEFF_SET_FUNC_TO_DATA(func)                     \
+gTasks[taskId].data[8] = (u32)func >> 16;                 \
+gTasks[taskId].data[9] = (u32)func;
+
 extern struct MapPosition gPlayerFacingPosition;
 
 bool8 CheckObjectGraphicsInFrontOfPlayer(u8 graphicsId);

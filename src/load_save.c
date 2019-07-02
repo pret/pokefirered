@@ -6,6 +6,7 @@
 #include "random.h"
 #include "malloc.h"
 #include "item.h"
+#include "save_location.h"
 
 extern void SetBagPocketsPointers(void);
 extern void sub_8110840(void *oldSave);
@@ -132,28 +133,28 @@ void MoveSaveBlocks_ResetHeap(void)
 
 u32 sav2_x1_query_bit1(void)
 {
-    return gSaveBlock2Ptr->specialSaveWarpFlags & 1;
+    return gSaveBlock2Ptr->specialSaveWarpFlags & CONTINUE_GAME_WARP;
 }
 
 void sav2_x9_clear_bit1(void)
 {
-    gSaveBlock2Ptr->specialSaveWarpFlags &= ~1;
+    gSaveBlock2Ptr->specialSaveWarpFlags &= ~CONTINUE_GAME_WARP;
 }
 
 void sub_804C1AC(void)
 {
-    gSaveBlock2Ptr->specialSaveWarpFlags |= 1;
+    gSaveBlock2Ptr->specialSaveWarpFlags |= CONTINUE_GAME_WARP;
 }
 
 void sub_804C1C0(void)
 {
     sub_8055778(0);
-    gSaveBlock2Ptr->specialSaveWarpFlags |= 1;
+    gSaveBlock2Ptr->specialSaveWarpFlags |= CONTINUE_GAME_WARP;
 }
 
 void sav2_gender2_inplace_and_xFE(void)
 {
-    gSaveBlock2Ptr->specialSaveWarpFlags &= ~1;
+    gSaveBlock2Ptr->specialSaveWarpFlags &= ~CONTINUE_GAME_WARP;
 }
 
 void SavePlayerParty(void)

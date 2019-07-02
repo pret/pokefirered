@@ -73,17 +73,21 @@ u8 GiveMailToMon(struct Pokemon *mon, u16 itemId)
 
 u16 SpeciesToMailSpecies(u16 species, u32 personality)
 {
-    return species == 0xC9 ? ((GetUnownLetterByPersonality(personality) << 16) + 0x75300000) >> 16 : species;
+    if (species == SPECIES_UNOWN) {
+        u32 mailSpecies = GetUnownLetterByPersonality(personality) + 30000;
+        return mailSpecies;
+    }
+    return species;
 }
 
-u16 MailSpeciesToSpecies(u16 mailSpecies, u16 *buffer)
+u16 MailSpeciesToSpecies(u16 mailSpecies, u16 *unownLetter)
 {
     u16 result;
 
     if (mailSpecies >= 30000 && mailSpecies < (30000 + UNOWN_FORM_COUNT))
     {
         result = SPECIES_UNOWN;
-        *buffer = mailSpecies - 30000;
+        *unownLetter = mailSpecies - 30000;
     }
     else
     {

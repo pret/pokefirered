@@ -12,14 +12,18 @@
 #include "link.h"
 #include "menu.h"
 #include "save.h"
+#include "sound.h"
 #include "new_game.h"
+#include "constants/songs.h"
 
 struct IntroSequenceData
 {
     void (*field_0000)(struct IntroSequenceData *);
     u8 field_0004;
     u8 field_0005;
-    u8 filler_0006[0x36];
+    u8 filler_0006[0xC];
+    u16 field_0012;
+    u8 filler_0014[0x28];
     u8 field_003C[0x400];
     u8 field_043C[0x400];
     u8 filler_083C[0x2080];
@@ -36,7 +40,11 @@ void sub_80ECAB0(u8 taskId);
 void sub_80ECAA8(struct IntroSequenceData * ptr, void (*cb)(struct IntroSequenceData *));
 void sub_80ECAF0(struct IntroSequenceData * ptr);
 void sub_80ECB98(struct IntroSequenceData * ptr);
+void sub_80ECC3C(struct IntroSequenceData * ptr);
+void sub_80ECCA8(struct IntroSequenceData * ptr);
 void sub_80EDBE8(struct IntroSequenceData * ptr);
+void sub_80EDC40(void);
+void sub_80EDDF0(void);
 
 extern const u32 gMultiBootProgram_PokemonColosseum_Start[];
 
@@ -284,6 +292,62 @@ void sub_80ECAF0(struct IntroSequenceData * this)
     case 1:
         if (!IsDma3ManagerBusyWithBgCopy())
             sub_80ECAA8(this, sub_80ECB98);
+        break;
+    }
+}
+
+void sub_80ECB98(struct IntroSequenceData * this)
+{
+    switch (this->field_0004)
+    {
+    case 0:
+        SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN1_ON);
+        SetGpuReg(REG_OFFSET_WININ, 0x3F00);
+        SetGpuReg(REG_OFFSET_WINOUT, 0x0000);
+        SetGpuReg(REG_OFFSET_WIN1H, 0x00F0);
+        SetGpuReg(REG_OFFSET_WIN1V, 0x0000);
+        this->field_0012 = 0;
+        this->field_0004++;
+        break;
+    case 1:
+        ShowBg(3);
+        BlendPalettes(0xFFFFFFFF, 0x00, RGB_BLACK);
+        this->field_0004++;
+        break;
+    case 2:
+        this->field_0012 += 8;
+        if (this->field_0012 >= 0x30)
+            this->field_0012 = 0x30;
+        SetGpuReg(REG_OFFSET_WIN1V, ((0x50 - this->field_0012) << 8) | (0x50 + this->field_0012));
+        if (this->field_0012 == 0x30)
+            sub_80ECAA8(this, sub_80ECC3C);
+        break;
+    }
+}
+
+void sub_80ECC3C(struct IntroSequenceData * this)
+{
+    switch (this->field_0004)
+    {
+    case 0:
+        PlaySE(BGM_FRLG_GAMEFREAK_LOGO);
+        sub_80EDC40();
+        this->field_0012 = 0;
+        this->field_0004++;
+        break;
+    case 1:
+        this->field_0012++;
+        if (this->field_0012 == 30)
+        {
+            sub_80EDDF0();
+            this->field_0012 = 0;
+            this->field_0004++;
+        }
+        break;
+    case 2:
+        this->field_0012++;
+        if (this->field_0012 == 90)
+            sub_80ECAA8(this, sub_80ECCA8);
         break;
     }
 }

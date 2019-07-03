@@ -246,7 +246,7 @@ SECTIONS {
         src/menu2.o(.text);
         src/oak_speech.o(.text);
         src/tm_case.o(.text);
-        asm/menu_indicators.o(.text);
+        src/menu_indicators.o(.text);
         asm/pokedex_area_markers.o(.text);
         asm/pokemon_summary_screen.o(.text);
         src/help_system.o(.text);
@@ -437,7 +437,7 @@ SECTIONS {
         src/menu2.o(.rodata);
         src/oak_speech.o(.rodata);
         src/tm_case.o(.rodata);
-        data/menu_indicators.o(.rodata);
+        src/menu_indicators.o(.rodata);
         data/pokedex_area_markers.o(.rodata);
         data/pokemon_summary_screen.o(.rodata);
         src/help_system.o(.rodata);

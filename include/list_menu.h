@@ -4,9 +4,21 @@
 #include "global.h"
 #include "window.h"
 
-// Exported type declarations
+#define LIST_NOTHING_CHOSEN -1
+#define LIST_CANCEL -2
+#define LIST_HEADER -3
 
-// Exported RAM declarations
+#define LIST_NO_MULTIPLE_SCROLL     0
+#define LIST_MULTIPLE_SCROLL_DPAD   1
+#define LIST_MULTIPLE_SCROLL_L_R    2
+
+enum
+{
+    SCROLL_ARROW_LEFT,
+    SCROLL_ARROW_RIGHT,
+    SCROLL_ARROW_UP,
+    SCROLL_ARROW_DOWN,
+};
 
 struct ListMenuItem
 {
@@ -38,14 +50,24 @@ struct ListMenuTemplate
     u8 cursorKind:2; // x40, x80
 };
 
-struct ListMenu {
-    struct ListMenuTemplate _template;
+struct ListMenu
+{
+    struct ListMenuTemplate template;
     u16 scrollOffset;
     u16 selectedRow;
     u8 unk_1C;
     u8 unk_1D;
     u8 taskId;
     u8 unk_1F;
+};
+
+struct ListMenuWindowRect
+{
+    u8 x;
+    u8 y;
+    u8 width;
+    u8 height;
+    u8 palNum;
 };
 
 extern struct ListMenuTemplate gUnknown_03006310;

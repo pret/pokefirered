@@ -1353,9 +1353,7 @@ gUnknown_203B0E8: @ 203B0E8
 	.include "src/oak_speech.o"
 	.align 2
 	.include "src/tm_case.o"
-
-gUnknown_203B130: @ 203B130
-	.space 0x10
+	.include "src/menu_indicators.o"
 
 gUnknown_203B140: @ 203B140
 	.space 0x4

@@ -1901,8 +1901,8 @@ _0806D780: .4byte 0x00004021
 _0806D784: .4byte gPlayerParty
 	thumb_func_end AdjustFriendship_step
 
-	thumb_func_start DoPoisonFieldEffect_timer_set
-DoPoisonFieldEffect_timer_set: @ 806D788
+	thumb_func_start ClearPoisonStepCounter
+ClearPoisonStepCounter: @ 806D788
 	push {lr}
 	ldr r0, _0806D798 @ =0x00004022
 	movs r1, 0
@@ -1911,7 +1911,7 @@ DoPoisonFieldEffect_timer_set: @ 806D788
 	bx r0
 	.align 2, 0
 _0806D798: .4byte 0x00004022
-	thumb_func_end DoPoisonFieldEffect_timer_set
+	thumb_func_end ClearPoisonStepCounter
 
 	thumb_func_start DoPoisonFieldEffect_step
 DoPoisonFieldEffect_step: @ 806D79C

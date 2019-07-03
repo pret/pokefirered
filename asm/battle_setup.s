@@ -46,7 +46,7 @@ _0807F65E:
 	ldr r0, _0807F68C @ =sub_800FD9C
 	bl SetMainCallback2
 	bl sub_806D7E8
-	bl DoPoisonFieldEffect_timer_set
+	bl ClearPoisonStepCounter
 	adds r0, r5, 0
 	bl DestroyTask
 _0807F686:

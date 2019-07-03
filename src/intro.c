@@ -82,7 +82,7 @@ void sub_80EEBE4(void);
 
 extern const u32 gMultiBootProgram_PokemonColosseum_Start[];
 
-extern const u8 gUnknown_8402260[];
+extern const u16 gUnknown_8402260[];
 extern const u8 gUnknown_8402280[];
 extern const u8 gUnknown_84024E4[];
 extern const u16 gUnknown_8402630[];

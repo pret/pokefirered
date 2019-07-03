@@ -39,8 +39,10 @@ types_*.taghl
 Thumbs.db
 build/
 .idea/
+cmake-build-*
 *.DS_Store
 *.pl
 *.bak
 src/data/items.h
-tools/br_ips/{br_ips,ips_patch}{,.exe}
+tools/br_ips/br_ips
+tools/br_ips/ips_patch

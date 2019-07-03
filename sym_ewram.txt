@@ -1112,14 +1112,7 @@ gUnknown_203AAC4: @ 203AAC4
 gUnknown_203AAC6: @ 203AAC6
 	.space 0xE
 
-gUnknown_203AAD4: @ 203AAD4
-	.space 0x2C
-
-gUnknown_203AB00: @ 203AB00
-	.space 0x2
-
-gUnknown_203AB02: @ 203AB02
-	.space 0x2
+	.include "src/intro.o"
 
 gUnknown_203AB04: @ 203AB04
 	.space 0x2

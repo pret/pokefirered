@@ -27,16 +27,19 @@ struct IntroSequenceData
     u8 field_000C[6];
     u16 field_0012;
     struct Sprite * field_0014;
-    u8 filler_0018[4];
+    struct Sprite * field_0018;
     struct Sprite * field_001C;
     struct Sprite * field_0020;
-    u8 filler_0024[0x18];
+    struct Sprite * field_0024;
+    u8 filler_0028[0x14];
     u8 field_003C[0x400];
     u8 field_043C[0x400];
     u8 filler_083C[0x2080];
 }; // size: 0x28BC
 
 EWRAM_DATA struct GcmbStruct gUnknown_203AAD4 = {0};
+EWRAM_DATA u16 gUnknown_203AB00 = 0;
+EWRAM_DATA u16 gUnknown_203AB02 = 0;
 
 void sub_80EC870(void);
 void sub_80EC9D4(void);
@@ -60,12 +63,21 @@ void sub_80ED428(u8 taskId);
 void sub_80ED444(struct IntroSequenceData * ptr);
 void sub_80ED4A0(struct IntroSequenceData * ptr);
 void sub_80ED4C0(struct IntroSequenceData * ptr);
+void sub_80ED6D8(void);
+void sub_80ED714(u8 taskId);
+void sub_80ED7D4(struct IntroSequenceData * ptr);
+void sub_80ED818(struct Sprite * sprite);
+void sub_80ED898(struct IntroSequenceData * ptr);
 void sub_80EDBE8(struct IntroSequenceData * ptr);
 void sub_80ED40C(u8 taskId);
 void sub_80EDC40(void);
 void sub_80EDDF0(void);
 void sub_80EDED8(void);
 struct Sprite * sub_80EDF68(void);
+void sub_80EE200(u8 taskId);
+void sub_80EE4F8(struct IntroSequenceData * ptr);
+void sub_80EE528(struct Sprite * sprite, u16 a1, u16 a2, u16 a3);
+bool32 sub_80EE5C8(struct IntroSequenceData * ptr);
 void sub_80EEBE4(void);
 
 extern const u32 gMultiBootProgram_PokemonColosseum_Start[];
@@ -96,14 +108,21 @@ extern const u8 gUnknown_840644C[];
 extern const u16 gUnknown_8406634[];
 extern const u8 gUnknown_8406654[];
 extern const u8 gUnknown_84071D0[];
+extern const u16 gUnknown_8407430[];
+extern const u8 gUnknown_8407470[];
+extern const u8 gUnknown_8407A50[];
+extern const u8 gUnknown_8407B9C[];
+extern const u8 gUnknown_8408D98[];
 
 extern const struct BgTemplate gUnknown_840BB80[2];
 extern const struct BgTemplate gUnknown_840BB88[2];
 extern const struct BgTemplate gUnknown_840BB90[4];
+extern const struct BgTemplate gUnknown_840BBA0[2];
 extern const struct WindowTemplate gUnknown_840BBA8[];
 
 extern const struct SpriteTemplate gUnknown_840BDA8;
 extern const struct SpriteTemplate gUnknown_840BDC0;
+extern const struct SpriteTemplate gUnknown_840BDFC;
 
 void sub_80EC5A4(void)
 {
@@ -735,4 +754,161 @@ void sub_80ED4A0(struct IntroSequenceData * this)
         DestroySprite(this->field_001C);
     if (this->field_0020 != NULL)
         DestroySprite(this->field_0020);
+}
+
+void sub_80ED4C0(struct IntroSequenceData * this)
+{
+    switch (this->field_0004)
+    {
+    case 0:
+        LoadPalette(gUnknown_8407430, 0x10, 0x40);
+        LoadPalette(gUnknown_8405DA4, 0x50, 0x20);
+        BlendPalettes(0xFFFFFFFE, 16, RGB_WHITE);
+        InitBgsFromTemplates(0, gUnknown_840BBA0, NELEMS(gUnknown_840BBA0));
+        DecompressAndCopyTileDataToVram(1, gUnknown_8407470, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, gUnknown_8407A50, 0, 0, 1);
+        ShowBg(1);
+        HideBg(0);
+        HideBg(2);
+        HideBg(3);
+        ResetBgPositions();
+        this->field_0004++;
+        SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
+        SetGpuRegBits(REG_OFFSET_WININ, 0x12);
+        ClearGpuRegBits(REG_OFFSET_WININ, 0x01);
+        SetGpuRegBits(REG_OFFSET_WINOUT, 0x00);
+        SetGpuReg(REG_OFFSET_WIN0V, 0x2080);
+        SetGpuReg(REG_OFFSET_WIN0H, 0x0078);
+        break;
+    case 1:
+        if (!FreeTempTileDataBuffersIfPossible())
+        {
+            DecompressAndCopyTileDataToVram(0, gUnknown_8407B9C, 0, 0, 0);
+            DecompressAndCopyTileDataToVram(0, gUnknown_8408D98, 0, 0, 1);
+            gUnknown_203AB00 = 4;
+            gUnknown_203AB02 = 52;
+            ChangeBgX(0, 0x00001800, 0);
+            ChangeBgY(0, 0x0001F000, 0);
+            this->field_0004++;
+        }
+        break;
+    case 2:
+        if (!FreeTempTileDataBuffersIfPossible())
+        {
+            BlendPalettes(0xFFFFFFFE, 0, RGB_WHITE);
+            ShowBg(0);
+            CreateTask(sub_80ED714, 0);
+            sub_80EE4F8(this);
+            sub_80EE528(this->field_0018, 0, 0xB4, 0x34);
+            CreateTask(sub_80EE200, 0);
+            sub_80ED6D8();
+            this->field_0012 = 0;
+            this->field_0004++;
+        }
+        break;
+    case 3:
+        this->field_0012++;
+        if (this->field_0012 == 16)
+            sub_80ED7D4(this);
+        if (!sub_80EE5C8(this) && !FuncIsActiveTask(sub_80EE200))
+            sub_80ECAA8(this, sub_80ED898);
+        break;
+    }
+}
+
+void sub_80ED69C(u8 taskId)
+{
+    if (gTasks[taskId].data[0] == 0)
+        ChangeBgX(1, 0x400, 2);
+    else
+        ChangeBgX(1, 0x020, 2);
+}
+
+void sub_80ED6D8(void)
+{
+    CreateTask(sub_80ED69C, 0);
+}
+
+void sub_80ED6EC(void)
+{
+    u8 taskId = FindTaskIdByFunc(sub_80ED69C);
+    gTasks[taskId].data[0] = 1;
+}
+
+void sub_80ED714(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    if (data[0] == 0)
+    {
+        data[1]++;
+        if (data[1] >= 30)
+        {
+            data[1] = 0;
+            data[2] ^= 1;
+            ChangeBgY(0, (data[2] << 15) + 0x1F000, 0);
+        }
+    }
+}
+
+void sub_80ED760(void)
+{
+    u8 taskId = FindTaskIdByFunc(sub_80ED714);
+    gTasks[taskId].data[0] = 1;
+}
+
+void sub_80ED788(void)
+{
+    u8 taskId = FindTaskIdByFunc(sub_80ED714);
+    gTasks[taskId].data[0] = 0;
+}
+
+u8 sub_80ED7B0(void)
+{
+    u8 taskId = FindTaskIdByFunc(sub_80ED714);
+    return gTasks[taskId].data[2];
+}
+
+void sub_80ED7D4(struct IntroSequenceData * this)
+{
+    u8 spriteId = CreateSprite(&gUnknown_840BDFC, 296, 112, 7);
+    if (spriteId != MAX_SPRITES)
+    {
+        this->field_0024 = &gSprites[spriteId];
+        this->field_0024->callback = sub_80ED818;
+    }
+    else
+        this->field_0024 = NULL;
+}
+
+void sub_80ED818(struct Sprite * sprite)
+{
+    s16 * data = sprite->data;
+
+    switch (data[0])
+    {
+    case 0:
+        data[1] = sprite->pos1.x << 5;
+        data[2] = 160;
+        data[0]++;
+        // fallthrough
+    case 1:
+        data[1] -= data[2];
+        sprite->pos1.x = data[1] >> 5;
+        if (sprite->pos1.x <= 52)
+        {
+            sub_80ED6EC();
+            data[0]++;
+        }
+        break;
+    case 2:
+        data[1] -= 32;
+        sprite->pos1.x = data[1] >> 5;
+        if (sprite->pos1.x <= -32)
+        {
+            sprite->invisible = TRUE;
+            sprite->data[0]++;
+            DestroySprite(sprite);
+        }
+        break;
+    }
 }

@@ -21,9 +21,13 @@ struct IntroSequenceData
     void (*field_0000)(struct IntroSequenceData *);
     u8 field_0004;
     u8 field_0005;
-    u8 filler_0006[0xC];
+    u8 filler_0006[2];
+    u16 field_0008;
+    u16 field_000A;
+    u8 field_000C[6];
     u16 field_0012;
-    u8 filler_0014[0x28];
+    struct Sprite * field_0014;
+    u8 filler_0018[0x24];
     u8 field_003C[0x400];
     u8 field_043C[0x400];
     u8 filler_083C[0x2080];
@@ -42,9 +46,18 @@ void sub_80ECAF0(struct IntroSequenceData * ptr);
 void sub_80ECB98(struct IntroSequenceData * ptr);
 void sub_80ECC3C(struct IntroSequenceData * ptr);
 void sub_80ECCA8(struct IntroSequenceData * ptr);
+void sub_80ECD60(struct IntroSequenceData * ptr);
+void sub_80ECEA4(struct IntroSequenceData * ptr);
+void sub_80ED0AC(u8 taskId);
+void sub_80ED118(void);
+void sub_80ED140(u8 taskId);
+void sub_80ED188(struct IntroSequenceData * ptr);
 void sub_80EDBE8(struct IntroSequenceData * ptr);
 void sub_80EDC40(void);
 void sub_80EDDF0(void);
+void sub_80EDED8(void);
+struct Sprite * sub_80EDF68(void);
+void sub_80EEBE4(void);
 
 extern const u32 gMultiBootProgram_PokemonColosseum_Start[];
 
@@ -57,9 +70,17 @@ extern const u8 gUnknown_8402668[];
 extern const u16 gUnknown_840270C[];
 extern const u8 gUnknown_840272C[];
 extern const u8 gUnknown_84028F8[];
+extern const u16 gUnknown_8402D34[];
+extern const u8 gUnknown_8402D54[];
+extern const u8 gUnknown_8403FE8[];
+extern const u16 gUnknown_84048CC[];
+extern const u8 gUnknown_84048EC[];
+extern const u8 gUnknown_8404F7C[];
 
 extern const struct BgTemplate gUnknown_840BB80[2];
+extern const struct BgTemplate gUnknown_840BB88[2];
 extern const struct WindowTemplate gUnknown_840BBA8[];
+
 
 void sub_80EC5A4(void)
 {
@@ -349,5 +370,223 @@ void sub_80ECC3C(struct IntroSequenceData * this)
         if (this->field_0012 == 90)
             sub_80ECAA8(this, sub_80ECCA8);
         break;
+    }
+}
+
+void sub_80ECCA8(struct IntroSequenceData * this)
+{
+    switch (this->field_0004)
+    {
+    case 0:
+        sub_80EDED8();
+        this->field_0012 = 0;
+        this->field_0004++;
+        break;
+    case 1:
+        this->field_0012++;
+        if (this->field_0012 >= 40)
+            this->field_0004++;
+        break;
+    case 2:
+        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG2 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD);
+        StartBlendTask(0, 16, 16, 0, 48, 0);
+        this->field_0004++;
+        break;
+    case 3:
+        ShowBg(2);
+        this->field_0004++;
+        break;
+    case 4:
+        if (!IsBlendTaskActive())
+        {
+            SetGpuReg(REG_OFFSET_BLDCNT, 0);
+            this->field_0012 = 0;
+            this->field_0004++;
+        }
+        break;
+    case 5:
+        this->field_0012++;
+        if (this->field_0012 > 50)
+            sub_80ECAA8(this, sub_80ECD60);
+        break;
+    }
+}
+
+void sub_80ECD60(struct IntroSequenceData * this)
+{
+    switch (this->field_0004)
+    {
+    case 0:
+        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_OBJ | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD);
+        StartBlendTask(0, 16, 16, 0, 16, 0);
+        this->field_0008 = 0;
+        this->field_000A = 16;
+        this->field_0012 = 0;
+        this->field_0004++;
+        break;
+    case 1:
+        this->field_0014 = sub_80EDF68();
+        this->field_0004++;
+        break;
+    case 2:
+        if (!IsBlendTaskActive())
+        {
+            BlitBitmapToWindow(0, this->field_003C, 0x38, 0x06, 0x20, 0x40);
+            BlitBitmapToWindow(0, this->field_043C, 0x00, 0x28, 0x90, 0x10);
+            CopyWindowToVram(0, 2);
+            this->field_0004++;
+        }
+        break;
+    case 3:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            DestroySprite(this->field_0014);
+            this->field_0012 = 0;
+            this->field_0004++;
+        }
+        break;
+    case 4:
+        this->field_0012++;
+        if (this->field_0012 > 90)
+        {
+            SetGpuRegBits(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG2);
+            StartBlendTask(16, 0, 0, 16, 20, 0);
+            this->field_0004++;
+        }
+        break;
+    case 5:
+        if (!IsBlendTaskActive())
+        {
+            HideBg(2);
+            this->field_0004++;
+        }
+        break;
+    case 6:
+        ResetSpriteData();
+        FreeAllSpritePalettes();
+        this->field_0012 = 0;
+        this->field_0004++;
+        break;
+    case 7:
+        this->field_0012++;
+        if (this->field_0012 > 20)
+        {
+            SetGpuReg(REG_OFFSET_BLDCNT, 0);
+            sub_80ECAA8(this, sub_80ECEA4);
+        }
+        break;
+    }
+}
+
+void sub_80ECEA4(struct IntroSequenceData * this)
+{
+    switch (this->field_0004)
+    {
+    case 0:
+        SetVBlankCallback(NULL);
+        LoadPalette(gUnknown_8402D34, 0x10, 0x20);
+        LoadPalette(gUnknown_84048CC, 0x20, 0x20);
+        BlendPalettes(0x06, 0x10, RGB_WHITE);
+        InitBgsFromTemplates(0, gUnknown_840BB88, NELEMS(gUnknown_840BB88));
+        DecompressAndCopyTileDataToVram(1, gUnknown_84048EC, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, gUnknown_8404F7C, 0, 0, 1);
+        ShowBg(1);
+        HideBg(0);
+        HideBg(2);
+        HideBg(3);
+        sub_80EEBE4();
+        SetVBlankCallback(sub_80EC9EC);
+        this->field_0004++;
+        break;
+    case 1:
+        if (!FreeTempTileDataBuffersIfPossible())
+        {
+            DecompressAndCopyTileDataToVram(0, gUnknown_8402D54, 0, 0, 0);
+            DecompressAndCopyTileDataToVram(0, gUnknown_8403FE8, 0, 0, 1);
+            ResetBgPositions();
+            ShowBg(1);
+            this->field_0004++;
+        }
+        break;
+    case 2:
+        if (!FreeTempTileDataBuffersIfPossible())
+        {
+            ShowBg(0);
+            CreateTask(sub_80ED0AC, 0);
+            BeginNormalPaletteFade(0x00000006, -2, 16, 0, RGB_WHITE);
+            this->field_0004++;
+        }
+        break;
+    case 3:
+        if (!gPaletteFade.active)
+        {
+            m4aSongNumStart(BGM_FRLG_OPENING);
+            this->field_0012 = 0;
+            this->field_0004++;
+        }
+        break;
+    case 4:
+        this->field_0012++;
+        if (this->field_0012 == 20)
+        {
+            CreateTask(sub_80ED140, 0);
+            sub_80ED118();
+        }
+        if (this->field_0012 >= 30)
+        {
+            BlendPalettes(-2, 16, RGB_WHITE);
+            DestroyTask(FindTaskIdByFunc(sub_80ED0AC));
+            DestroyTask(FindTaskIdByFunc(sub_80ED140));
+            sub_80ECAA8(this, sub_80ED188);
+        }
+        break;
+    case 5:
+        if (!gPaletteFade.active)
+        {
+            DestroyTask(FindTaskIdByFunc(sub_80ED0AC));
+            DestroyTask(FindTaskIdByFunc(sub_80ED140));
+            sub_80ECAA8(this, sub_80ED188);
+        }
+        break;
+    }
+}
+
+void sub_80ED0AC(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    data[0]++;
+    if (data[0] > 5)
+    {
+        data[0] = 0;
+        data[1]++;
+        if (data[1] > 2)
+            data[1] = 0;
+        ChangeBgY(0, data[1] << 15, 0);
+    }
+    if (data[2])
+    {
+        data[3] += 0x120;
+        ChangeBgY(0, data[3], 2);
+    }
+}
+
+void sub_80ED118(void)
+{
+    u8 taskId = FindTaskIdByFunc(sub_80ED0AC);
+    gTasks[taskId].data[2] = TRUE;
+}
+
+void sub_80ED140(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    data[0]++;
+    if (data[0] > 3)
+    {
+        data[0] = 0;
+        if (data[1] < 2)
+            data[1]++;
+        ChangeBgY(1, data[1] << 15, 0);
     }
 }

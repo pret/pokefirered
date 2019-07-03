@@ -118,7 +118,34 @@ gUnknown_8408D98:: @ bin.lz
 	.incbin "graphics/intro/unk_8408D98.bin.lz"
 
 gUnknown_840926C:: @ 840926C
-	.incbin "baserom.gba", 0x40926C, 0x2914
+	.incbin "graphics/intro/unk_840926C.4bpp.lz"
+
+gUnknown_84096AC:: @ 84096AC
+	.incbin "graphics/intro/unk_84096AC.gbapal"
+
+gUnknown_84096CC:: @ 84096CC
+	.incbin "graphics/intro/unk_84096CC.4bpp.lz"
+
+gUnknown_8409A1C:: @ 8409A1C
+	.incbin "graphics/intro/unk_8409A1C.gbapal"
+
+gUnknown_8409A3C:: @ 8409A3C
+	.incbin "graphics/intro/unk_8409A3C.4bpp.lz"
+
+gUnknown_8409D20:: @ 8409D20
+	.incbin "graphics/intro/unk_8409D20.4bpp.lz"
+
+gUnknown_840A3E4:: @ 840A3E4
+	.incbin "graphics/intro/unk_840A3E4.4bpp.lz"
+
+gUnknown_840B834:: @ 840B834
+	.incbin "graphics/intro/unk_840B834.gbapal"
+
+gUnknown_840B874:: @ 840B874
+	.incbin "graphics/intro/unk_840B874.4bpp.lz"
+
+gUnknown_840BAE0:: @ 840BAE0
+	.incbin "graphics/intro/unk_840BAE0.4bpp.lz"
 
 gUnknown_840BB80:: @ 840BB80
 	.incbin "baserom.gba", 0x40BB80, 0x8

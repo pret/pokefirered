@@ -27,7 +27,10 @@ struct IntroSequenceData
     u8 field_000C[6];
     u16 field_0012;
     struct Sprite * field_0014;
-    u8 filler_0018[0x24];
+    u8 filler_0018[4];
+    struct Sprite * field_001C;
+    struct Sprite * field_0020;
+    u8 filler_0024[0x18];
     u8 field_003C[0x400];
     u8 field_043C[0x400];
     u8 filler_083C[0x2080];
@@ -52,7 +55,13 @@ void sub_80ED0AC(u8 taskId);
 void sub_80ED118(void);
 void sub_80ED140(u8 taskId);
 void sub_80ED188(struct IntroSequenceData * ptr);
+void sub_80ED40C(u8 taskId);
+void sub_80ED428(u8 taskId);
+void sub_80ED444(struct IntroSequenceData * ptr);
+void sub_80ED4A0(struct IntroSequenceData * ptr);
+void sub_80ED4C0(struct IntroSequenceData * ptr);
 void sub_80EDBE8(struct IntroSequenceData * ptr);
+void sub_80ED40C(u8 taskId);
 void sub_80EDC40(void);
 void sub_80EDDF0(void);
 void sub_80EDED8(void);
@@ -76,11 +85,25 @@ extern const u8 gUnknown_8403FE8[];
 extern const u16 gUnknown_84048CC[];
 extern const u8 gUnknown_84048EC[];
 extern const u8 gUnknown_8404F7C[];
+extern const u16 gUnknown_84053B4[];
+extern const u8 gUnknown_8405414[];
+extern const u8 gUnknown_8405890[];
+extern const u8 gUnknown_8405B28[];
+extern const u8 gUnknown_8405CDC[];
+extern const u16 gUnknown_8405DA4[];
+extern const u8 gUnknown_8405DC4[];
+extern const u8 gUnknown_840644C[];
+extern const u16 gUnknown_8406634[];
+extern const u8 gUnknown_8406654[];
+extern const u8 gUnknown_84071D0[];
 
 extern const struct BgTemplate gUnknown_840BB80[2];
 extern const struct BgTemplate gUnknown_840BB88[2];
+extern const struct BgTemplate gUnknown_840BB90[4];
 extern const struct WindowTemplate gUnknown_840BBA8[];
 
+extern const struct SpriteTemplate gUnknown_840BDA8;
+extern const struct SpriteTemplate gUnknown_840BDC0;
 
 void sub_80EC5A4(void)
 {
@@ -589,4 +612,127 @@ void sub_80ED140(u8 taskId)
             data[1]++;
         ChangeBgY(1, data[1] << 15, 0);
     }
+}
+
+void sub_80ED188(struct IntroSequenceData * this)
+{
+    switch (this->field_0004)
+    {
+    case 0:
+        BlendPalettes(0xFFFFFFFE, 16, RGB_WHITE);
+        InitBgsFromTemplates(0, gUnknown_840BB90, NELEMS(gUnknown_840BB90));
+        DecompressAndCopyTileDataToVram(3, gUnknown_8405414, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(3, gUnknown_8405890, 0, 0, 1);
+        ShowBg(3);
+        this->field_0004++;
+        break;
+    case 1:
+        if (!FreeTempTileDataBuffersIfPossible())
+        {
+            SetVBlankCallback(NULL);
+            LoadPalette(gUnknown_84053B4, 0x10, 0x60);
+            LoadPalette(gUnknown_8405DA4, 0x50, 0x20);
+            LoadPalette(gUnknown_8406634, 0x60, 0x20);
+            BlendPalettes(0xFFFFFFFE, 16, RGB_WHITE);
+            DecompressAndCopyTileDataToVram(0, gUnknown_8405B28, 0, 0, 0);
+            DecompressAndCopyTileDataToVram(0, gUnknown_8405CDC, 0, 0, 1);
+            DecompressAndCopyTileDataToVram(1, gUnknown_8406654, 0, 0, 0);
+            DecompressAndCopyTileDataToVram(1, gUnknown_84071D0, 0, 0, 1);
+            DecompressAndCopyTileDataToVram(2, gUnknown_8405DC4, 0, 0, 0);
+            DecompressAndCopyTileDataToVram(2, gUnknown_840644C, 0, 0, 1);
+            ResetBgPositions();
+            ShowBg(0);
+            HideBg(1);
+            HideBg(2);
+            ChangeBgY(2, 0x0001CE00, 0);
+            ChangeBgY(1, 0x00002800, 0);
+            CreateTask(sub_80ED40C, 0);
+            sub_80ED444(this);
+            BlendPalettes(0xFFFFFFFE, 16, RGB_WHITE);
+            SetVBlankCallback(sub_80EC9EC);
+            this->field_0004++;
+        }
+        break;
+    case 2:
+        if (!FreeTempTileDataBuffersIfPossible())
+        {
+            BeginNormalPaletteFade(0xFFFFFFFE, -2, 16, 0, RGB_WHITE);
+            this->field_0004++;
+        }
+        break;
+    case 3:
+        if (!gPaletteFade.active)
+        {
+            this->field_0012 = 0;
+            this->field_0004++;
+        }
+        break;
+    case 4:
+        this->field_0012++;
+        if (this->field_0012 >= 60)
+        {
+            this->field_0012 = 0;
+            DestroyTask(FindTaskIdByFunc(sub_80ED40C));
+            sub_80ED4A0(this);
+            CreateTask(sub_80ED428, 0);
+            ChangeBgY(3, 0x00010000, 0);
+            HideBg(0);
+            ShowBg(3);
+            ShowBg(1);
+            ShowBg(2);
+            this->field_0004++;
+        }
+        break;
+    case 5:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            this->field_0012 = 0;
+            this->field_0004++;
+        }
+        break;
+    case 6:
+        this->field_0012++;
+        if (this->field_0012 >= 60)
+        {
+            DestroyTask(FindTaskIdByFunc(sub_80ED428));
+            sub_80ECAA8(this, sub_80ED4C0);
+        }
+        break;
+    }
+}
+
+void sub_80ED40C(u8 taskId)
+{
+    ChangeBgX(3, 0x0E0, 2);
+    ChangeBgX(0, 0x110, 1);
+}
+
+void sub_80ED428(u8 taskId)
+{
+    ChangeBgY(2, 0x020, 1);
+    ChangeBgY(1, 0x024, 2);
+}
+
+void sub_80ED444(struct IntroSequenceData * this)
+{
+    u8 spriteId;
+
+    this->field_001C = NULL;
+    this->field_0020 = NULL;
+
+    spriteId = CreateSprite(&gUnknown_840BDA8, 168, 80, 11);
+    if (spriteId != MAX_SPRITES)
+        this->field_0020 = &gSprites[spriteId];
+
+    spriteId = CreateSprite(&gUnknown_840BDC0, 72, 80, 12);
+    if (spriteId != MAX_SPRITES)
+        this->field_001C = &gSprites[spriteId];
+}
+
+void sub_80ED4A0(struct IntroSequenceData * this)
+{
+    if (this->field_001C != NULL)
+        DestroySprite(this->field_001C);
+    if (this->field_0020 != NULL)
+        DestroySprite(this->field_0020);
 }

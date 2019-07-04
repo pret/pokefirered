@@ -55,7 +55,12 @@ static void VCountIntr(void);
 static void SerialIntr(void);
 static void IntrDummy(void);
 
-const u8 gGameVersion = VERSION_FIRE_RED;
+#if defined(FIRERED)
+#define GAME_VERSION VERSION_FIRE_RED
+#elif defined(LEAF_GREEN)
+#define GAME_VERSION VERSION_LEAF_GREEN
+#endif
+const u8 gGameVersion = GAME_VERSION;
 
 const u8 gGameLanguage = GAME_LANGUAGE;
 

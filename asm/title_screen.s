@@ -1056,7 +1056,11 @@ _080791DE:
 	lsrs r5, r0, 24
 	cmp r5, 0
 	bne _080792A6
+	.ifdef FIRERED
 	movs r0, 0x6
+	.else
+	movs r0, 0x3
+	.endif
 	movs r1, 0
 	bl PlayCry1
 	ldrb r0, [r4, 0xC]

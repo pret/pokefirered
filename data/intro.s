@@ -141,6 +141,9 @@ gUnknown_840A3E4:: @ 840A3E4
 gUnknown_840B834:: @ 840B834
 	.incbin "graphics/intro/unk_840B834.gbapal"
 
+gUnknown_840B854::
+	.incbin "graphics/intro/unk_840B854.gbapal"
+
 gUnknown_840B874:: @ 840B874
 	.incbin "graphics/intro/unk_840B874.4bpp.lz"
 
@@ -176,16 +179,16 @@ gUnknown_840BBB8:: @ 840BBB8
 	.byte 0x00, 0x00
 
 gUnknown_840BBC0:: @ 840BBC0
-	obj_tiles 0x08402a64, 0x0080, 0x0000
-	obj_tiles 0x08402adc, 0x0080, 0x0001
-	obj_tiles 0x08402b2c, 0x0800, 0x0002
-	obj_tiles 0x084028f8, 0x0400, 0x0003
-	obj_tiles 0x08402cd4, 0x0100, 0x0004
+	obj_tiles gUnknown_8402A64, 0x0080, 0
+	obj_tiles gUnknown_8402ADC, 0x0080, 1
+	obj_tiles gUnknown_8402B2C, 0x0800, 2
+	obj_tiles gUnknown_84028F8, 0x0400, 3
+	obj_tiles gUnknown_8402CD4, 0x0100, 4
 
 gUnknown_840BBE8:: @ 840BBE8
-	obj_pal 0x08402a44, 0x0000
-	obj_pal 0x08402abc, 0x0001
-	obj_pal 0x0840270c, 0x0003
+	obj_pal gUnknown_8402A44, 0
+	obj_pal gUnknown_8402ABC, 1
+	obj_pal gUnknown_840270C, 3
 	obj_pal NULL, 0x0000
 
 gUnknown_840BC08:: @ 840BC08
@@ -313,7 +316,7 @@ gUnknown_840BDC0:: @ 840BDC0
 	spr_template 6, 6, gOamData_840BDA0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gOamData_840BDD8::
-	.4byte 0xC0004000, 0x00000000 @ { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SHAPE_H_RECTANGLE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 0, .paletteNum = 0 }
+	.4byte 0xC0004000, NULL @ { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SHAPE_H_RECTANGLE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 0, .paletteNum = 0 }
 
 gAnimCmds_840BDE0::
 	obj_image_anim_frame 0, 0
@@ -331,20 +334,83 @@ gAnimCmdTable_840BDF4::
 gUnknown_840BDFC:: @ 840BDFC
 	spr_template 8, 8, gOamData_840BDD8, gAnimCmdTable_840BDF4, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
-gUnknown_840BE14::
-	.incbin "baserom.gba", 0x40BE14, 0x38
+gOamData_840BE14::
+	.word 0xC0000300, 0x00000400 @ { .affineMode = ST_OAM_AFFINE_DOUBLE, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SHAPE_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 1, .paletteNum = 0 }
+
+gAnimCmd_40BE1C::
+	obj_image_anim_frame 0, 0
+	obj_image_anim_end
+
+gAnimCmd_40BE24::
+	obj_image_anim_frame 64, 0
+	obj_image_anim_end
+
+gAnimCmd_40BE2C::
+	obj_image_anim_frame 96, 0
+	obj_image_anim_end
+
+gAnimCmd_40BE34::
+	obj_image_anim_frame 160, 0
+	obj_image_anim_end
+
+gAnimCmdTable_840BE3C::
+	.word gAnimCmd_40BE1C
+	.word gAnimCmd_40BE24
+	.word gAnimCmd_40BE2C
+	.word gAnimCmd_40BE34
 
 gUnknown_840BE4C:: @ 840BE4C
-	.incbin "baserom.gba", 0x40BE4C, 0x40
+	spr_template 9, 6, gOamData_840BE14, gAnimCmdTable_840BE3C, NULL, gAffineAnimCmdTable_840BD80, SpriteCallbackDummy
+
+gOamData_840BE64::
+	.word 0xC0008000, 0x00000400 @ { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SHAPE_V_RECTANGLE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 1, .paletteNum = 0 }
+
+gAnimCmd_840BE6C::
+	obj_image_anim_frame 0, 8
+	obj_image_anim_frame 32, 4
+	obj_image_anim_end
+
+gAnimCmd_840BE78::
+	obj_image_anim_frame 64, 8
+	obj_image_anim_frame 72, 4
+	obj_image_anim_end
+
+gAnimCmdTable_840BE84::
+	.word gAnimCmd_840BE6C
+	.word gAnimCmd_840BE78
 
 gUnknown_840BE8C:: @ 840BE8C
-	.incbin "baserom.gba", 0x40BE8C, 0x38
+	spr_template 10, 10, gOamData_840BE64, gAnimCmdTable_840BE84, NULL, gDummySpriteAffineAnimTable, sub_80EE1C4
+
+gOamData_840BEA4::
+	.word 0x40000000, 0x00000400 @ { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SHAPE_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_1, .tileNum = 0x000, .priority = 1, .paletteNum = 0 }
+
+gAnimCmd_840BEAC::
+	obj_image_anim_frame 0, 10
+	obj_image_anim_frame 4, 10
+	obj_image_anim_frame 8, 10
+	obj_image_anim_frame 12, 8
+	obj_image_anim_end
+
+gAnimCmdTable_840BEC0::
+	.word gAnimCmd_840BEAC
 
 gUnknown_840BEC4:: @ 840BEC4
-	.incbin "baserom.gba", 0x40BEC4, 0x18
+	spr_template 11, 11, gOamData_840BEA4, gAnimCmdTable_840BEC0, NULL, gDummySpriteAffineAnimTable, sub_80EE8E4
 
 gUnknown_840BEDC:: @ 840BEDC
-	.incbin "baserom.gba", 0x40BEDC, 0x38
+	obj_tiles gUnknown_840926C, 0x0800, 6
+	obj_tiles gUnknown_84096CC, 0x0800, 7
+	obj_tiles gUnknown_840A3E4, 0x2800, 5
+	obj_tiles gUnknown_8409A3C, 0x0800, 8
+	obj_tiles gUnknown_8409D20, 0x1800, 9
+	obj_tiles gUnknown_840B874, 0x0a00, 10
+	obj_tiles gUnknown_840BAE0, 0x0200, 11
 
 gUnknown_840BF14:: @ 840BF14
-	.incbin "baserom.gba", 0x40BF14, 0x28
+	obj_pal gUnknown_8405DA4, 6
+	obj_pal gUnknown_84096AC, 7
+	obj_pal gUnknown_8409A1C, 8
+	obj_pal gUnknown_840B834, 10
+	obj_pal gUnknown_840B854, 11
+

@@ -1115,9 +1115,6 @@ gUnknown_203AAC6: @ 203AAC6
 	.include "src/intro.o"
 
 	.align 2
-gUnknown_203AB30: @ 203AB30
-	.space 0x4
-
 gUnknown_203AB34: @ 203AB34
 	.space 0x4
 

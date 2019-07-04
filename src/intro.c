@@ -74,55 +74,348 @@ void sub_80EDC40(void);
 void sub_80EDDF0(void);
 void sub_80EDED8(void);
 struct Sprite * sub_80EDF68(void);
+void sub_80EE1C4(struct Sprite * sprite);
 void sub_80EE200(u8 taskId);
+void sub_80EE29C(struct Sprite * sprite);
+void sub_80EE350(struct Sprite * sprite);
+void sub_80EE4DC(struct Sprite * sprite);
 void sub_80EE4F8(struct IntroSequenceData * ptr);
 void sub_80EE528(struct Sprite * sprite, u16 a1, u16 a2, u16 a3);
 bool32 sub_80EE5C8(struct IntroSequenceData * ptr);
+void sub_80EE8E4(struct Sprite * sprite);
 void sub_80EEBE4(void);
 
 extern const u32 gMultiBootProgram_PokemonColosseum_Start[];
 
-extern const u16 gUnknown_8402260[];
-extern const u8 gUnknown_8402280[];
-extern const u8 gUnknown_84024E4[];
-extern const u16 gUnknown_8402630[];
-extern const u8 gUnknown_8402650[];
-extern const u8 gUnknown_8402668[];
-extern const u16 gUnknown_840270C[];
-extern const u8 gUnknown_840272C[];
-extern const u8 gUnknown_84028F8[];
-extern const u16 gUnknown_8402D34[];
-extern const u8 gUnknown_8402D54[];
-extern const u8 gUnknown_8403FE8[];
-extern const u16 gUnknown_84048CC[];
-extern const u8 gUnknown_84048EC[];
-extern const u8 gUnknown_8404F7C[];
-extern const u16 gUnknown_84053B4[];
-extern const u8 gUnknown_8405414[];
-extern const u8 gUnknown_8405890[];
-extern const u8 gUnknown_8405B28[];
-extern const u8 gUnknown_8405CDC[];
-extern const u16 gUnknown_8405DA4[];
-extern const u8 gUnknown_8405DC4[];
-extern const u8 gUnknown_840644C[];
-extern const u16 gUnknown_8406634[];
-extern const u8 gUnknown_8406654[];
-extern const u8 gUnknown_84071D0[];
-extern const u16 gUnknown_8407430[];
-extern const u8 gUnknown_8407470[];
-extern const u8 gUnknown_8407A50[];
-extern const u8 gUnknown_8407B9C[];
-extern const u8 gUnknown_8408D98[];
+const u16 gUnknown_8402260[] = INCBIN_U16("graphics/intro/unk_8402260.gbapal");
+const u8 gUnknown_8402280[] = INCBIN_U8("graphics/intro/unk_8402280.4bpp.lz");
+const u8 gUnknown_84024E4[] = INCBIN_U8("graphics/intro/unk_84024E4.bin.lz");
+const u16 gUnknown_8402630[] = INCBIN_U16("graphics/intro/unk_8402630.gbapal");
+const u8 gUnknown_8402650[] = INCBIN_U8("graphics/intro/unk_8402650.4bpp.lz");
+const u8 gUnknown_8402668[] = INCBIN_U8("graphics/intro/unk_8402668.bin.lz");
+const u16 gUnknown_840270C[] = INCBIN_U16("graphics/intro/unk_840270C.gbapal");
+const u8 gUnknown_840272C[] = INCBIN_U8("graphics/intro/unk_840272C.4bpp.lz");
+const u8 gUnknown_84028F8[] = INCBIN_U8("graphics/intro/unk_84028F8.bin.lz");
+const u16 gUnknown_8402A44[] = INCBIN_U16("graphics/intro/unk_8402A64.gbapal");
+const u8 gUnknown_8402A64[] = INCBIN_U8("graphics/intro/unk_8402A64.4bpp.lz");
+const u16 gUnknown_8402ABC[] = INCBIN_U16("graphics/intro/unk_8402ADC.gbapal");
+const u8 gUnknown_8402ADC[] = INCBIN_U8("graphics/intro/unk_8402ADC.4bpp.lz");
+const u8 gUnknown_8402B2C[] = INCBIN_U8("graphics/intro/unk_8402B2C.4bpp.lz");
+const u8 gUnknown_8402CD4[] = INCBIN_U8("graphics/intro/unk_8402CD4.4bpp.lz");
+const u16 gUnknown_8402D34[] = INCBIN_U16("graphics/intro/unk_8402D34.gbapal");
+const u8 gUnknown_8402D54[] = INCBIN_U8("graphics/intro/unk_8402D54.4bpp.lz");
+const u8 gUnknown_8403FE8[] = INCBIN_U8("graphics/intro/unk_8403FE8.bin.lz");
+const u16 gUnknown_84048CC[] = INCBIN_U16("graphics/intro/unk_84048CC.gbapal");
+const u8 gUnknown_84048EC[] = INCBIN_U8("graphics/intro/unk_84048EC.4bpp.lz");
+const u8 gUnknown_8404F7C[] = INCBIN_U8("graphics/intro/unk_8404F7C.bin.lz");
+const u16 gUnknown_84053B4[] = INCBIN_U16("graphics/intro/unk_84053B4.gbapal");
+const u8 gUnknown_8405414[] = INCBIN_U8("graphics/intro/unk_8405414.4bpp.lz");
+const u8 gUnknown_8405890[] = INCBIN_U8("graphics/intro/unk_8405890.bin.lz");
+const u16 gUnknown_8405B08[] = INCBIN_U16("graphics/intro/unk_8405B08.gbapal");
+const u8 gUnknown_8405B28[] = INCBIN_U8("graphics/intro/unk_8405B28.4bpp.lz");
+const u8 gUnknown_8405CDC[] = INCBIN_U8("graphics/intro/unk_8405CDC.bin.lz");
+const u16 gUnknown_8405DA4[] = INCBIN_U16("graphics/intro/unk_8405DA4.gbapal");
+const u8 gUnknown_8405DC4[] = INCBIN_U8("graphics/intro/unk_8405DC4.4bpp.lz");
+const u8 gUnknown_840644C[] = INCBIN_U8("graphics/intro/unk_840644C.bin.lz");
+const u16 gUnknown_8406634[] = INCBIN_U16("graphics/intro/unk_8406634.gbapal");
+const u8 gUnknown_8406654[] = INCBIN_U8("graphics/intro/unk_8406654.4bpp.lz");
+const u8 gUnknown_84071D0[] = INCBIN_U8("graphics/intro/unk_84071D0.bin.lz");
+const u16 gUnknown_8407430[] = INCBIN_U16("graphics/intro/unk_8407430.gbapal");
+const u8 gUnknown_8407470[] = INCBIN_U8("graphics/intro/unk_8407470.4bpp.lz");
+const u8 gUnknown_8407A50[] = INCBIN_U8("graphics/intro/unk_8407A50.bin.lz");
+const u8 gUnknown_8407B9C[] = INCBIN_U8("graphics/intro/unk_8407B9C.4bpp.lz");
+const u8 gUnknown_8408D98[] = INCBIN_U8("graphics/intro/unk_8408D98.bin.lz");
+const u8 gUnknown_840926C[] = INCBIN_U8("graphics/intro/unk_840926C.4bpp.lz");
+const u16 gUnknown_84096AC[] = INCBIN_U16("graphics/intro/unk_84096AC.gbapal");
+const u8 gUnknown_84096CC[] = INCBIN_U8("graphics/intro/unk_84096CC.4bpp.lz");
+const u16 gUnknown_8409A1C[] = INCBIN_U16("graphics/intro/unk_8409A1C.gbapal");
+const u8 gUnknown_8409A3C[] = INCBIN_U8("graphics/intro/unk_8409A3C.4bpp.lz");
+const u8 gUnknown_8409D20[] = INCBIN_U8("graphics/intro/unk_8409D20.4bpp.lz");
+const u8 gUnknown_840A3E4[] = INCBIN_U8("graphics/intro/unk_840A3E4.4bpp.lz");
+const u16 gUnknown_840B834[] = INCBIN_U16("graphics/intro/unk_840B834.gbapal");
+const u16 gUnknown_840B854[] = INCBIN_U16("graphics/intro/unk_840B854.gbapal");
+const u8 gUnknown_840B874[] = INCBIN_U8("graphics/intro/unk_840B874.4bpp.lz");
+const u8 gUnknown_840BAE0[] = INCBIN_U8("graphics/intro/unk_840BAE0.4bpp.lz");
 
-extern const struct BgTemplate gUnknown_840BB80[2];
-extern const struct BgTemplate gUnknown_840BB88[2];
-extern const struct BgTemplate gUnknown_840BB90[4];
-extern const struct BgTemplate gUnknown_840BBA0[2];
-extern const struct WindowTemplate gUnknown_840BBA8[];
+const struct BgTemplate gUnknown_840BB80[] = {
+	{ 3, 3, 31, 0, 0, 3, 0x000 },
+	{ 2, 3, 30, 0, 0, 2, 0x010 }
+};
 
-extern const struct SpriteTemplate gUnknown_840BDA8;
-extern const struct SpriteTemplate gUnknown_840BDC0;
-extern const struct SpriteTemplate gUnknown_840BDFC;
+const struct BgTemplate gUnknown_840BB88[] = {
+	{ 0, 0, 28, 2, 0, 0, 0x000 },
+	{ 1, 1, 30, 2, 0, 0, 0x000 }
+};
+
+const struct BgTemplate gUnknown_840BB90[] = {
+	{ 3, 1, 30, 2, 0, 3, 0x000 },
+	{ 0, 0, 29, 0, 0, 0, 0x000 },
+	{ 2, 3, 27, 0, 0, 2, 0x000 },
+	{ 1, 2, 28, 0, 0, 1, 0x000 }
+};
+
+const struct BgTemplate gUnknown_840BBA0[] = {
+	{ 1, 0, 29, 0, 0, 1, 0x000 },
+	{ 0, 1, 30, 2, 0, 0, 0x000 }
+};
+
+const struct WindowTemplate gUnknown_840BBA8[] = {
+	{ 2, 6, 4, 18, 9, 0xD, 0x000 },
+	DUMMY_WIN_TEMPLATE
+};
+
+const u8 gUnknown_840BBB8[][2] = {
+	{0x3f, 0x3f},
+	{0x00, 0x3f},
+	{0x3f, 0x00},
+	{0x00, 0x00}
+};
+
+const struct CompressedSpriteSheet gUnknown_840BBC0[] = {
+	{gUnknown_8402A64, 0x0080, 0},
+	{gUnknown_8402ADC, 0x0080, 1},
+	{gUnknown_8402B2C, 0x0800, 2},
+	{gUnknown_84028F8, 0x0400, 3},
+	{gUnknown_8402CD4, 0x0100, 4}
+};
+
+const struct SpritePalette gUnknown_840BBE8[] = {
+	{gUnknown_8402A44, 0},
+	{gUnknown_8402ABC, 1},
+	{gUnknown_840270C, 3},
+	{0}
+};
+
+const s16 gUnknown_840BC08[][2] = {
+	{0x0048, 0x0050},
+	{0x0088, 0x004a},
+	{0x00a8, 0x0050},
+	{0x0078, 0x0050},
+	{0x0068, 0x0056},
+	{0x0058, 0x004a},
+	{0x00b8, 0x004a},
+	{0x0038, 0x0056},
+	{0x0098, 0x0056}
+};
+
+const struct OamData gOamData_840BC2C = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_1, .tileNum = 0x000, .priority = 2, .paletteNum = 0 };
+
+const struct OamData gOamData_840BC34 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_0, .tileNum = 0x000, .priority = 2, .paletteNum = 0 };
+
+const union AnimCmd gAnimCmd_840BC3C[] = {
+	ANIMCMD_FRAME(0, 4),
+	ANIMCMD_FRAME(1, 4),
+	ANIMCMD_FRAME(2, 4),
+	ANIMCMD_FRAME(3, 4),
+	ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gAnimCmd_840BC50[] = {
+	ANIMCMD_FRAME(0, 4),
+	ANIMCMD_FRAME(1, 4),
+	ANIMCMD_FRAME(2, 4),
+	ANIMCMD_FRAME(3, 4),
+	ANIMCMD_END
+};
+
+const union AnimCmd *const gAnimCmdTable_840BC64[] = {
+	gAnimCmd_840BC3C,
+	gAnimCmd_840BC50
+};
+
+const struct SpriteTemplate gUnknown_840BC6C = {0, 0, &gOamData_840BC2C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80EE29C};
+
+const struct SpriteTemplate gUnknown_840BC84 = {1, 1, &gOamData_840BC34, gAnimCmdTable_840BC64, NULL, gDummySpriteAffineAnimTable, sub_80EE350};
+
+const struct OamData gOamData_840BC9C = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_2, .tileNum = 0x000, .priority = 2, .paletteNum = 0 };
+
+const union AnimCmd gAnimCmd_840BCA4[] = {
+	ANIMCMD_FRAME(0, 8),
+	ANIMCMD_FRAME(16, 8),
+	ANIMCMD_FRAME(32, 8),
+	ANIMCMD_FRAME(48, 8),
+	ANIMCMD_END
+};
+
+const union AnimCmd *const gAnimCmdTable_840BCB8[] = {
+	gAnimCmd_840BCA4
+};
+
+const struct SpriteTemplate gUnknown_840BCBC = {2, 1, &gOamData_840BC9C, gAnimCmdTable_840BCB8, NULL, gDummySpriteAffineAnimTable, sub_80EE4DC};
+
+const struct OamData gOamData_840BCD4 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_BLEND, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_V_RECTANGLE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 3, .paletteNum = 0 };
+
+const struct SpriteTemplate gUnknown_840BCDC = {3, 3, &gOamData_840BCD4, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
+
+const struct OamData gOamData_840BCF4 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_BLEND, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_H_RECTANGLE, .matrixNum = 0, .size = ST_OAM_SIZE_1, .tileNum = 0x000, .priority = 3, .paletteNum = 0 };
+
+const struct SpriteTemplate gUnknown_840BCFC = {4, 3, &gOamData_840BCF4, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
+
+const struct OamData gOamData_840BD14 = { .affineMode = ST_OAM_AFFINE_DOUBLE, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 1, .paletteNum = 0 };
+
+const union AnimCmd gAnimCmd_840BD1C[] = {
+	ANIMCMD_FRAME(0, 1),
+	ANIMCMD_END
+};
+
+const union AnimCmd gAnimCmd_840BD24[] = {
+	ANIMCMD_FRAME(64, 1),
+	ANIMCMD_END
+};
+
+const union AnimCmd gAnimCmd_840BD2C[] = {
+	ANIMCMD_FRAME(128, 1),
+	ANIMCMD_END
+};
+
+const union AnimCmd gAnimCmd_840BD34[] = {
+	ANIMCMD_FRAME(192, 1),
+	ANIMCMD_END
+};
+
+const union AnimCmd gAnimCmd_840BD3C[] = {
+	ANIMCMD_FRAME(256, 1),
+	ANIMCMD_END
+};
+
+const union AnimCmd *const gAnimCmdTable_840BD44[] = {
+	gAnimCmd_840BD1C,
+	gAnimCmd_840BD24,
+	gAnimCmd_840BD2C,
+	gAnimCmd_840BD34,
+	gAnimCmd_840BD3C
+};
+
+const union AffineAnimCmd gAffineAnimCmd_840BD58[] = {
+	AFFINEANIMCMD_FRAME(256, 256, 0, 0),
+	AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd gAffineAnimCmd_840BD68[] = {
+	AFFINEANIMCMD_FRAME(256, 256, 0, 0),
+	AFFINEANIMCMD_FRAME(32, 32, 0, 8),
+	AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd *const gAffineAnimCmdTable_840BD80[] = {
+	gAffineAnimCmd_840BD58,
+	gAffineAnimCmd_840BD68
+};
+
+const struct SpriteTemplate gUnknown_840BD88 = {5, 7, &gOamData_840BD14, gAnimCmdTable_840BD44, NULL, gAffineAnimCmdTable_840BD80, SpriteCallbackDummy};
+
+const struct OamData gOamData_840BDA0 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 1, .paletteNum = 0 };
+
+const struct SpriteTemplate gUnknown_840BDA8 = {7, 7, &gOamData_840BDA0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
+
+const struct SpriteTemplate gUnknown_840BDC0 = {6, 6, &gOamData_840BDA0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
+
+const struct OamData gOamData_840BDD8 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_H_RECTANGLE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 0, .paletteNum = 0 };
+
+const union AnimCmd gAnimCmds_840BDE0[] = {
+	ANIMCMD_FRAME(0, 0),
+	ANIMCMD_END
+};
+
+const union AnimCmd gAnimCmds_840BDE8[] = {
+	ANIMCMD_FRAME(32, 4),
+	ANIMCMD_FRAME(0, 4),
+	ANIMCMD_END
+};
+
+const union AnimCmd *const gAnimCmdTable_840BDF4[] = {
+	gAnimCmds_840BDE0,
+	gAnimCmds_840BDE8
+};
+
+const struct SpriteTemplate gUnknown_840BDFC = {8, 8, &gOamData_840BDD8, gAnimCmdTable_840BDF4, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
+
+const struct OamData gOamData_840BE14 = { .affineMode = ST_OAM_AFFINE_DOUBLE, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 1, .paletteNum = 0 };
+
+const union AnimCmd gAnimCmd_840BE1C[] = {
+	ANIMCMD_FRAME(0, 0),
+	ANIMCMD_END
+};
+
+const union AnimCmd gAnimCmd_840BE24[] = {
+	ANIMCMD_FRAME(64, 0),
+	ANIMCMD_END
+};
+
+const union AnimCmd gAnimCmd_840BE2C[] = {
+	ANIMCMD_FRAME(96, 0),
+	ANIMCMD_END
+};
+
+const union AnimCmd gAnimCmd_840BE34[] = {
+	ANIMCMD_FRAME(160, 0),
+	ANIMCMD_END
+};
+
+const union AnimCmd *const gAnimCmdTable_840BE3C[] = {
+	gAnimCmd_840BE1C,
+	gAnimCmd_840BE24,
+	gAnimCmd_840BE2C,
+	gAnimCmd_840BE34
+};
+
+const struct SpriteTemplate gUnknown_840BE4C = {9, 6, &gOamData_840BE14, gAnimCmdTable_840BE3C, NULL, gAffineAnimCmdTable_840BD80, SpriteCallbackDummy};
+
+const struct OamData gOamData_840BE64 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_V_RECTANGLE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 1, .paletteNum = 0 };
+
+const union AnimCmd gAnimCmd_840BE6C[] = {
+	ANIMCMD_FRAME(0, 8),
+	ANIMCMD_FRAME(32, 4),
+	ANIMCMD_END
+};
+
+const union AnimCmd gAnimCmd_840BE78[] = {
+	ANIMCMD_FRAME(64, 8),
+	ANIMCMD_FRAME(72, 4),
+	ANIMCMD_END
+};
+
+const union AnimCmd *const gAnimCmdTable_840BE84[] = {
+	gAnimCmd_840BE6C,
+	gAnimCmd_840BE78
+};
+
+const struct SpriteTemplate gUnknown_840BE8C = {10, 10, &gOamData_840BE64, gAnimCmdTable_840BE84, NULL, gDummySpriteAffineAnimTable, sub_80EE1C4};
+
+const struct OamData gOamData_840BEA4 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_1, .tileNum = 0x000, .priority = 1, .paletteNum = 0 };
+
+const union AnimCmd gAnimCmd_840BEAC[] = {
+	ANIMCMD_FRAME(0, 10),
+	ANIMCMD_FRAME(4, 10),
+	ANIMCMD_FRAME(8, 10),
+	ANIMCMD_FRAME(12, 8),
+	ANIMCMD_END
+};
+
+const union AnimCmd *const gAnimCmdTable_840BEC0[] = {
+	gAnimCmd_840BEAC
+};
+
+const struct SpriteTemplate gUnknown_840BEC4 = {11, 11, &gOamData_840BEA4, gAnimCmdTable_840BEC0, NULL, gDummySpriteAffineAnimTable, sub_80EE8E4};
+
+const struct CompressedSpriteSheet gUnknown_840BEDC[] = {
+	{gUnknown_840926C, 0x0800, 6},
+	{gUnknown_84096CC, 0x0800, 7},
+	{gUnknown_840A3E4, 0x2800, 5},
+	{gUnknown_8409A3C, 0x0800, 8},
+	{gUnknown_8409D20, 0x1800, 9},
+	{gUnknown_840B874, 0x0a00, 10},
+	{gUnknown_840BAE0, 0x0200, 11}
+};
+
+const struct SpritePalette gUnknown_840BF14[] = {
+	{gUnknown_8405DA4, 6},
+	{gUnknown_84096AC, 7},
+	{gUnknown_8409A1C, 8},
+	{gUnknown_840B834, 10},
+	{gUnknown_840B854, 11},
+    // {0}
+};
 
 void sub_80EC5A4(void)
 {

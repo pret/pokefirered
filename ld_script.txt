@@ -420,7 +420,6 @@ SECTIONS {
         src/save.o(.rodata);
         data/data_83FECCC.o(.rodata);
 		src/intro.o(.rodata);
-		data/intro.o(.rodata);
         data/data_83FECCC.o(.rodata.battle_anim_special);
         data/strings.o(.rodata);
         data/data_83FECCC.o(.rodata.841EE44);

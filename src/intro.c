@@ -14,6 +14,9 @@
 #include "save.h"
 #include "sound.h"
 #include "new_game.h"
+#include "title_screen.h"
+#include "decompress.h"
+#include "util.h"
 #include "constants/songs.h"
 
 struct IntroSequenceData
@@ -21,17 +24,18 @@ struct IntroSequenceData
     void (*field_0000)(struct IntroSequenceData *);
     u8 field_0004;
     u8 field_0005;
-    u8 filler_0006[2];
+    u8 field_0006;
     u16 field_0008;
     u16 field_000A;
-    u8 field_000C[6];
+    u8 filler_000C[6];
     u16 field_0012;
     struct Sprite * field_0014;
     struct Sprite * field_0018;
     struct Sprite * field_001C;
     struct Sprite * field_0020;
     struct Sprite * field_0024;
-    u8 filler_0028[0x14];
+    struct Sprite * field_0028[4];
+    u8 filler_0038[0x4];
     u8 field_003C[0x400];
     u8 field_043C[0x400];
     u8 filler_083C[0x2080];
@@ -40,6 +44,27 @@ struct IntroSequenceData
 EWRAM_DATA struct GcmbStruct gUnknown_203AAD4 = {0};
 EWRAM_DATA u16 gUnknown_203AB00 = 0;
 EWRAM_DATA u16 gUnknown_203AB02 = 0;
+EWRAM_DATA u16 gUnknown_203AB04 = 0;
+EWRAM_DATA u16 gUnknown_203AB06 = 0;
+EWRAM_DATA u16 gUnknown_203AB08 = 0;
+EWRAM_DATA u16 gUnknown_203AB0A = 0;
+EWRAM_DATA u16 gUnknown_203AB0C = 0;
+EWRAM_DATA u16 gUnknown_203AB0E = 0;
+EWRAM_DATA u16 gUnknown_203AB10 = 0;
+EWRAM_DATA u16 gUnknown_203AB12 = 0;
+EWRAM_DATA u16 gUnknown_203AB14 = 0;
+EWRAM_DATA u16 gUnknown_203AB16 = 0;
+EWRAM_DATA u16 gUnknown_203AB18 = 0;
+EWRAM_DATA u16 gUnknown_203AB1A = 0;
+EWRAM_DATA u16 gUnknown_203AB1C = 0;
+EWRAM_DATA u16 gUnknown_203AB1E = 0;
+EWRAM_DATA u16 gUnknown_203AB20 = 0;
+EWRAM_DATA u16 gUnknown_203AB22 = 0;
+EWRAM_DATA u16 gUnknown_203AB24 = 0;
+EWRAM_DATA u16 gUnknown_203AB26 = 0;
+EWRAM_DATA u32 gUnknown_203AB28 = 0;
+EWRAM_DATA u16 gUnknown_203AB2C = 0;
+EWRAM_DATA u16 gUnknown_203AB2E = 0;
 
 void sub_80EC870(void);
 void sub_80EC9D4(void);
@@ -68,12 +93,15 @@ void sub_80ED714(u8 taskId);
 void sub_80ED7D4(struct IntroSequenceData * ptr);
 void sub_80ED818(struct Sprite * sprite);
 void sub_80ED898(struct IntroSequenceData * ptr);
+void sub_80EDAF0(struct IntroSequenceData * ptr);
+void sub_80EDB70(struct IntroSequenceData * ptr);
+void sub_80EDBAC(struct IntroSequenceData * ptr);
 void sub_80EDBE8(struct IntroSequenceData * ptr);
-void sub_80ED40C(u8 taskId);
 void sub_80EDC40(void);
 void sub_80EDDF0(void);
 void sub_80EDED8(void);
 struct Sprite * sub_80EDF68(void);
+void sub_80EDF94(struct IntroSequenceData * ptr);
 void sub_80EE1C4(struct Sprite * sprite);
 void sub_80EE200(u8 taskId);
 void sub_80EE29C(struct Sprite * sprite);
@@ -82,7 +110,12 @@ void sub_80EE4DC(struct Sprite * sprite);
 void sub_80EE4F8(struct IntroSequenceData * ptr);
 void sub_80EE528(struct Sprite * sprite, u16 a1, u16 a2, u16 a3);
 bool32 sub_80EE5C8(struct IntroSequenceData * ptr);
+void sub_80EE5E4(struct IntroSequenceData * ptr);
+void sub_80EE6A4(struct IntroSequenceData * ptr);
+bool8 sub_80EE850(struct IntroSequenceData * ptr);
 void sub_80EE8E4(struct Sprite * sprite);
+void sub_80EE970(struct Sprite * sprite, s16 a1, u16 a2, u8 a3);
+void sub_80EEA94(struct IntroSequenceData * ptr);
 void sub_80EEBE4(void);
 
 extern const u32 gMultiBootProgram_PokemonColosseum_Start[];
@@ -1203,5 +1236,249 @@ void sub_80ED818(struct Sprite * sprite)
             DestroySprite(sprite);
         }
         break;
+    }
+}
+
+void sub_80ED898(struct IntroSequenceData * this)
+{
+    switch (this->field_0004)
+    {
+    case 0:
+        this->field_0012 = 0;
+        this->field_0004++;
+        break;
+    case 1:
+        this->field_0012++;
+        if (this->field_0012 > 30)
+        {
+            sub_80EE5E4(this);
+            this->field_0004++;
+        }
+        break;
+    case 2:
+        if (!sub_80EE850(this))
+        {
+            this->field_0012 = 0;
+            this->field_0004++;
+        }
+        break;
+    case 3:
+        this->field_0012++;
+        if (this->field_0012 > 30)
+        {
+            sub_80ED760();
+            sub_80EDF94(this);
+            this->field_0012 = 0;
+            this->field_0004++;
+        }
+        break;
+    case 4:
+        if (this->field_0006)
+        {
+            sub_80EE6A4(this);
+            this->field_0004++;
+        }
+        break;
+    case 5:
+        if (!sub_80EE850(this))
+        {
+            sub_80ED788();
+            this->field_0012 = 0;
+            this->field_0004++;
+        }
+        break;
+    case 6:
+        this->field_0012++;
+        if (this->field_0012 > 16)
+        {
+            sub_80EE970(this->field_0018, 8, 12, 5);
+            this->field_0004++;
+        }
+        break;
+    case 7:
+        if (!sub_80EE850(this))
+        {
+            sub_80EE970(this->field_0018, 8, 12, 5);
+            this->field_0004++;
+        }
+        break;
+    case 8:
+        if (!sub_80EE850(this))
+        {
+            this->field_0012 = 0;
+            this->field_0004++;
+        }
+        break;
+    case 9:
+        this->field_0012++;
+        if (this->field_0012 > 20)
+        {
+            sub_80EEA94(this);
+            this->field_0012 = 0;
+            this->field_0004++;
+        }
+        break;
+    case 10:
+        if (!sub_80ED7B0())
+        {
+            sub_80ED760();
+            sub_80EDAF0(this);
+            this->field_0004++;
+        }
+        break;
+    case 11:
+        HideBg(0);
+        this->field_0012 = 0;
+        this->field_0004++;
+        break;
+    case 12:
+        this->field_0012++;
+        if (this->field_0012 == 48)
+            BeginNormalPaletteFade(0x00000006, 2, 0, 16, RGB_WHITE);
+        if (this->field_0012 > 120)
+        {
+            sub_80EDB70(this);
+            sub_80EDBAC(this);
+            this->field_0004++;
+            this->field_0012 = 0;
+        }
+        break;
+    case 13:
+        this->field_0012++;
+        if (this->field_0012 > 8)
+        {
+            CpuFill16(RGB_WHITE, gPlttBufferUnfaded + 16, 64);
+            BeginNormalPaletteFade(0xFFFFFFFE, -2, 0, 16, RGB_BLACK);
+            this->field_0004++;
+        }
+        break;
+    case 14:
+        if (!gPaletteFade.active)
+        {
+            this->field_0012 = 0;
+            this->field_0004++;
+        }
+        break;
+    case 15:
+        this->field_0012++;
+        if (this->field_0012 > 60)
+            sub_80ECAA8(this, sub_80EDBE8);
+        break;
+    default:
+        if (JOY_NEW(R_BUTTON))
+        {
+            BlendPalettes(0xFFFF0064, 0, RGB_WHITE);
+            this->field_0018->pos2.x = 0;
+            this->field_0018->pos1.x = 0xB4;
+            this->field_0004 = 1;
+            this->field_0012 = 30;
+        }
+        break;
+    }
+}
+
+void sub_80EDAD8(struct Sprite * sprite)
+{
+    CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, sprite->oam.affineMode);
+}
+
+void sub_80EDAF0(struct IntroSequenceData * this)
+{
+    int i;
+
+    for (i = 0; i < 4; i++)
+    {
+        int x = (i & 1) * 48 + 49;
+        int y = (i / 2) * 64 + 72;
+        u8 spriteId = CreateSprite(&gUnknown_840BE4C, x, y, 8);
+        if (spriteId != MAX_SPRITES)
+        {
+            StartSpriteAnim(&gSprites[spriteId], i);
+            this->field_0028[i] = &gSprites[spriteId];
+            if (i & 1)
+                this->field_0028[i]->oam.shape = ST_OAM_V_RECTANGLE;
+            sub_80EDAD8(this->field_0028[i]);
+        }
+    }
+}
+
+void sub_80EDB70(struct IntroSequenceData * this)
+{
+    this->field_0018->pos1.x += this->field_0018->pos2.x;
+    this->field_0018->pos1.y += this->field_0018->pos2.y;
+    sub_8007FFC(this->field_0018, 0, 0x2A);
+    this->field_0018->callback = SpriteCallbackDummy;
+    StartSpriteAffineAnim(this->field_0018, 1);
+}
+
+void nullsub_83(struct Sprite * sprite)
+{
+    
+}
+
+void sub_80EDBAC(struct IntroSequenceData * this)
+{
+    int i;
+    
+    for (i = 0; i < 4; i++)
+    {
+        StartSpriteAffineAnim(this->field_0028[i], 1);
+        this->field_0028[i]->callback = nullsub_83;
+        sub_8007FFC(this->field_0028[i], gUnknown_840BBB8[i][0], gUnknown_840BBB8[i][1]);
+    }
+}
+
+void sub_80EDBE8(struct IntroSequenceData * this)
+{
+    switch (this->field_0004)
+    {
+    case 0:
+        FillPalette(RGB_BLACK, 0, 0x400);
+        this->field_0004++;
+        break;
+    case 1:
+        if (!FreeTempTileDataBuffersIfPossible())
+        {
+            DestroyTask(this->field_0005);
+            Free(this);
+            DisableInterrupts(INTR_FLAG_HBLANK);
+            SetHBlankCallback(NULL);
+            SetMainCallback2(CB2_InitTitleScreen);
+        }
+        break;
+    }
+}
+
+void sub_80EDC40(void)
+{
+    int i;
+    u8 spriteId;
+    
+    for (i = 0; i < NELEMS(gUnknown_840BBC0); i++)
+    {
+        LoadCompressedSpriteSheet(&gUnknown_840BBC0[i]);
+    }
+    LoadSpritePalettes(gUnknown_840BBE8);
+    gUnknown_203AB0E = 0x60;
+    gUnknown_203AB10 = 0x10;
+    gUnknown_203AB12 = 0x07;
+    gUnknown_203AB14 = 0x05;
+    gUnknown_203AB16 = 0x08;
+    gUnknown_203AB18 = 0x5A;
+    gUnknown_203AB1A = 0x78;
+    gUnknown_203AB1E = 0x01;
+    gUnknown_203AB20 = 0x01;
+    gUnknown_203AB22 = 0x05;
+    gUnknown_203AB24 = 0x05;
+    if (gUnknown_203AB28 == 0)
+        gUnknown_203AB28 = 0x151B9245;
+    spriteId = CreateSprite(&gUnknown_840BC6C, 0xF8, 0x37, 0);
+    if (spriteId != MAX_SPRITES)
+    {
+        gSprites[spriteId].data[0] = 0xF80;
+        gSprites[spriteId].data[1] = 0x370;
+        gSprites[spriteId].data[2] = gUnknown_203AB0E;
+        gSprites[spriteId].data[3] = gUnknown_203AB10;
+        StoreWordInTwoHalfwords(&gSprites[spriteId].data[6], gUnknown_203AB28);
     }
 }

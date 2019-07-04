@@ -19,6 +19,7 @@
 #include "util.h"
 #include "trig.h"
 #include "constants/songs.h"
+#include "constants/species.h"
 
 struct IntroSequenceData
 {
@@ -115,10 +116,13 @@ void sub_80EE350(struct Sprite * sprite);
 void sub_80EE40C(struct Sprite * sprite);
 void sub_80EE4DC(struct Sprite * sprite);
 void sub_80EE4F8(struct IntroSequenceData * ptr);
-void sub_80EE528(struct Sprite * sprite, u16 a1, u16 a2, u16 a3);
+void sub_80EE528(struct Sprite * sprite, s16 a1, s16 a2, u16 a3);
+void sub_80EE580(struct Sprite * sprite);
 bool32 sub_80EE5C8(struct IntroSequenceData * ptr);
 void sub_80EE5E4(struct IntroSequenceData * ptr);
+void sub_80EE610(struct Sprite * sprite);
 void sub_80EE6A4(struct IntroSequenceData * ptr);
+void sub_80EE704(struct Sprite * sprite);
 bool8 sub_80EE850(struct IntroSequenceData * ptr);
 void sub_80EE8E4(struct Sprite * sprite);
 void sub_80EE970(struct Sprite * sprite, s16 a1, u16 a2, u8 a3);
@@ -1758,10 +1762,166 @@ void sub_80EE350(struct Sprite * sprite)
         sprite->pos2.y = sprite->data[5] >> gUnknown_203AB1C;
     if (sprite->data[7] > gUnknown_203AB18)
     {
-        sprite->invisible = sprite->invisible ? FALSE : TRUE;
+        sprite->invisible = !sprite->invisible;
         if (sprite->data[7] > gUnknown_203AB1A)
             DestroySprite(sprite);
     }
     if (sprite->pos1.y + sprite->pos2.y < 0 || sprite->pos1.y + sprite->pos2.y > 160)
         DestroySprite(sprite);
+}
+
+void sub_80EE40C(struct Sprite * sprite)
+{
+    if (sprite->data[2])
+    {
+        sprite->data[2]--;
+        sprite->data[1]++;
+        sprite->pos1.y = sprite->data[1] >> 4;
+        if (sprite->pos1.y > 0x56)
+        {
+            sprite->pos1.y = 0x4A;
+            sprite->data[1] = 0x4A0;
+        }
+        if (sprite->animEnded)
+        {
+            if (sprite->data[0] == 0)
+            {
+                sprite->pos1.x += 26;
+                if (sprite->pos1.x > 188)
+                {
+                    sprite->pos1.x = 376 - sprite->pos1.x;
+                    sprite->data[0] = 1;
+                }
+            }
+            else
+            {
+                sprite->pos1.x -= 26;
+                if (sprite->pos1.x < 52)
+                {
+                    sprite->pos1.x = 104 - sprite->pos1.x;
+                    sprite->data[0] = 0;
+                }
+            }
+            StartSpriteAnim(sprite, 1);
+        }
+    }
+    else
+    {
+        if (sprite->data[3])
+            DestroySprite(sprite);
+        if (sprite->animEnded)
+            StartSpriteAnim(sprite, 0);
+        sprite->data[1] += 4;
+        sprite->pos1.y = sprite->data[1] >> 4;
+        sprite->data[4]++;
+        if (sprite->data[4] > 50)
+            DestroySprite(sprite);
+    }
+}
+
+void sub_80EE4DC(struct Sprite * sprite)
+{
+    if (sprite->animEnded)
+        DestroySprite(sprite);
+}
+
+void sub_80EE4F8(struct IntroSequenceData * this)
+{
+    u8 spriteId = CreateSprite(&gUnknown_840BD88, 0, 0, 9);
+    this->field_0018 = &gSprites[spriteId];
+}
+
+void sub_80EE528(struct Sprite * sprite, s16 a1, s16 a2, u16 a3)
+{
+    sprite->data[0] = a1 << 4;
+    sprite->data[1] = ((a2 - a1) << 4) / a3;
+    sprite->data[2] = a3;
+    sprite->data[3] = a2;
+    sprite->data[4] = 0;
+    sprite->pos1.x = a1;
+    sprite->pos1.y = 100;
+    sprite->callback = sub_80EE580;
+}
+
+void sub_80EE580(struct Sprite * sprite)
+{
+    sprite->data[4]++;
+    if (sprite->data[4] >= 40)
+    {
+        if (sprite->data[1] > 1)
+            sprite->data[1]--;
+    }
+    sprite->data[0] += sprite->data[1];
+    sprite->pos1.x = sprite->data[0] >> 4;
+    if (sprite->pos1.x >= sprite->data[3])
+    {
+        sprite->pos1.x = sprite->data[3];
+        sprite->callback = SpriteCallbackDummy;
+    }
+}
+
+bool32 sub_80EE5C8(struct IntroSequenceData * ptr)
+{
+    return ptr->field_0018->callback == sub_80EE580 ? TRUE : FALSE;
+}
+
+void sub_80EE5E4(struct IntroSequenceData * ptr)
+{
+    StartSpriteAnim(ptr->field_0018, 2);
+    ptr->field_0018->data[0] = 0;
+    ptr->field_0018->data[1] = 0;
+    ptr->field_0018->pos2.y = 3;
+    ptr->field_0018->callback = sub_80EE610;
+}
+
+void sub_80EE610(struct Sprite * sprite)
+{
+    switch (sprite->data[0])
+    {
+    case 0:
+        sprite->data[1]++;
+        if (sprite->data[1] > 8)
+        {
+            StartSpriteAnim(sprite, 1);
+            sprite->pos2.y = 0;
+            sprite->data[0]++;
+        }
+        break;
+    case 1:
+        PlayCry3(SPECIES_NIDORINO, 0x3F, 1);
+        sprite->data[1] = 0;
+        sprite->data[0]++;
+        break;
+    case 2:
+        sprite->data[2]++;
+        if (sprite->data[2] > 1)
+        {
+            sprite->data[2] = 0;
+            sprite->pos2.y = sprite->pos2.y == 0 ? 1 : 0;
+        }
+        sprite->data[1]++;
+        if (sprite->data[1] > 48)
+        {
+            StartSpriteAnim(sprite, 0);
+            sprite->pos2.y = 0;
+            sprite->callback = SpriteCallbackDummy;
+        }
+        break;
+    }
+}
+
+void sub_80EE6A4(struct IntroSequenceData * ptr)
+{
+    gUnknown_203AB0A = 16;
+    gUnknown_203AB04 = 3;
+    gUnknown_203AB08 = 5;
+    gUnknown_203AB06 = 0;
+    StartSpriteAnim(ptr->field_0018, 2);
+    ptr->field_0018->data[0] = 0;
+    ptr->field_0018->data[1] = 0;
+    ptr->field_0018->data[2] = 0;
+    ptr->field_0018->data[3] = 0;
+    ptr->field_0018->data[4] = 0;
+    ptr->field_0018->data[7] = 40;
+    ptr->field_0018->callback = sub_80EE704;
 }

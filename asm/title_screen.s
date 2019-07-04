@@ -1057,9 +1057,9 @@ _080791DE:
 	cmp r5, 0
 	bne _080792A6
 	.ifdef FIRERED
-	movs r0, 0x6
+	movs r0, 0x6 @ CHARIZARD
 	.else
-	movs r0, 0x3
+	movs r0, 0x3 @ VENUSAUR
 	.endif
 	movs r1, 0
 	bl PlayCry1

@@ -63,7 +63,7 @@ EWRAM_DATA u16 gUnknown_203AB22 = 0;
 EWRAM_DATA u16 gUnknown_203AB24 = 0;
 EWRAM_DATA u16 gUnknown_203AB26 = 0;
 EWRAM_DATA u32 gUnknown_203AB28 = 0;
-EWRAM_DATA u16 gUnknown_203AB2C = 0;
+EWRAM_DATA s16 gUnknown_203AB2C = 0;
 EWRAM_DATA u16 gUnknown_203AB2E = 0;
 
 void sub_80EC870(void);
@@ -1480,5 +1480,28 @@ void sub_80EDC40(void)
         gSprites[spriteId].data[2] = gUnknown_203AB0E;
         gSprites[spriteId].data[3] = gUnknown_203AB10;
         StoreWordInTwoHalfwords(&gSprites[spriteId].data[6], gUnknown_203AB28);
+    }
+}
+
+void sub_80EDD28(s16 x, s16 y, s16 a2)
+{
+    u8 spriteId;
+    s16 r4 = (a2 & gUnknown_203AB12) + 2;
+    s16 r2 = gUnknown_203AB2C;
+    gUnknown_203AB2C++;
+    if (gUnknown_203AB2C > 3)
+        gUnknown_203AB2C = -3;
+    x += r4;
+    y += r2;
+    if (x >= 1 && x <= 0xEF)
+    {
+        spriteId = CreateSprite(&gUnknown_840BC84, x, y, 1);
+        if (spriteId != MAX_SPRITES)
+        {
+            gSprites[spriteId].data[0] = x << gUnknown_203AB22;
+            gSprites[spriteId].data[1] = y << gUnknown_203AB24;
+            gSprites[spriteId].data[2] = gUnknown_203AB1E * r4;
+            gSprites[spriteId].data[3] = gUnknown_203AB20 * r2;
+        }
     }
 }

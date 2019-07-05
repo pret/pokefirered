@@ -124,9 +124,12 @@ void sub_80EE610(struct Sprite * sprite);
 void sub_80EE6A4(struct IntroSequenceData * ptr);
 void sub_80EE704(struct Sprite * sprite);
 bool8 sub_80EE850(struct IntroSequenceData * ptr);
+void sub_80EE864(s16 a1, s16 a2, s16 a3);
 void sub_80EE8E4(struct Sprite * sprite);
-void sub_80EE970(struct Sprite * sprite, s16 a1, u16 a2, u8 a3);
+void sub_80EE970(struct Sprite * sprite, u16 a1, s16 a2, u8 a3);
+void sub_80EE9D4(struct Sprite * sprite);
 void sub_80EEA94(struct IntroSequenceData * ptr);
+void sub_80EEB08(struct Sprite * sprite);
 void sub_80EEBE4(void);
 
 extern const u32 gMultiBootProgram_PokemonColosseum_Start[];
@@ -1756,7 +1759,7 @@ void sub_80EE350(struct Sprite * sprite)
     sprite->data[4]++;
     sprite->data[5] += sprite->data[4];
     sprite->data[7]++;
-    sprite->pos1.x = *(u16 *)&sprite->data[0] >> gUnknown_203AB22;
+    sprite->pos1.x = (u16)sprite->data[0] >> gUnknown_203AB22;
     sprite->pos1.y = sprite->data[1] >> gUnknown_203AB24;
     if (gUnknown_203AB1C && sprite->data[3] < 0)
         sprite->pos2.y = sprite->data[5] >> gUnknown_203AB1C;
@@ -1924,4 +1927,249 @@ void sub_80EE6A4(struct IntroSequenceData * ptr)
     ptr->field_0018->data[4] = 0;
     ptr->field_0018->data[7] = 40;
     ptr->field_0018->callback = sub_80EE704;
+}
+
+void sub_80EE704(struct Sprite * sprite)
+{
+    switch (sprite->data[0])
+    {
+    case 0:
+        sprite->data[1]++;
+        if (sprite->data[1] > 4)
+        {
+            StartSpriteAnim(sprite, 3);
+            sprite->data[0]++;
+        }
+        break;
+    case 1:
+        sprite->data[2] += sprite->data[7];
+        sprite->data[3] += 8;
+        sprite->pos2.x = sprite->data[2] >> 4;
+        sprite->pos2.y = -((gSineTable[sprite->data[3]] * gUnknown_203AB04) >> gUnknown_203AB08);
+        sprite->data[5]++;
+        if (sprite->data[5] > gUnknown_203AB06)
+        {
+            sprite->data[5] = 0;
+            sprite->data[7]--;
+        }
+        sprite->data[4]++;
+        if (sprite->data[4] > 15)
+        {
+            StartSpriteAnim(sprite, 2);
+            sprite->data[1] = 0;
+            sprite->data[6] = 0x4757;
+            sprite->data[7] = 28;
+            sprite->data[0]++;
+        }
+        break;
+    case 2:
+        sprite->data[2] += sprite->data[7];
+        sprite->pos2.x = sprite->data[2] >> 4;
+        sprite->data[1]++;
+        if (sprite->data[1] > 6)
+        {
+            sub_80EE864(sprite->pos1.x + sprite->pos2.x, sprite->pos1.y + sprite->pos2.y, sprite->data[6]);
+            sprite->data[6] *= 1103515245;
+        }
+        if (sprite->data[1] > 12)
+        {
+            StartSpriteAnim(sprite, 0);
+            sprite->data[1] = 0;
+            sprite->data[0]++;
+        }
+        break;
+    case 3:
+        sprite->data[1]++;
+        if (sprite->data[1] > 16)
+        {
+            sub_80EE970(sprite, gUnknown_203AB0A, -sprite->pos2.x, 4);
+        }
+        break;
+    }
+}
+
+bool8 sub_80EE850(struct IntroSequenceData * ptr)
+{
+    return ptr->field_0018->callback == SpriteCallbackDummy ? FALSE : TRUE;
+}
+
+void sub_80EE864(s16 a1, s16 a2, s16 a3)
+{
+    int i;
+    u8 spriteId;
+
+    for (i = 0; i < 2; i++)
+    {
+        spriteId = CreateSprite(&gUnknown_840BEC4, a1 - 22, a2 + 24, 10);
+        if (spriteId != MAX_SPRITES)
+        {
+            gSprites[spriteId].data[3] = (a3 % 13) + 8;
+            gSprites[spriteId].data[4] = a3 % 3;
+            gSprites[spriteId].data[7] = i;
+            a3 *= 1103515245;
+        }
+    }
+}
+
+void sub_80EE8E4(struct Sprite * sprite)
+{
+    s16 * data = sprite->data;
+
+    switch (sprite->data[0])
+    {
+    case 0:
+        data[1] = sprite->pos1.x << 4;
+        data[2] = sprite->pos1.y << 4;
+        sprite->data[0]++;
+        // fallthrough
+    case 1:
+        data[1] -= data[3];
+        data[2] += data[4];
+        sprite->pos1.x = data[1] >> 4;
+        sprite->pos1.y = data[2] >> 4;
+        if (sprite->animEnded)
+            DestroySprite(sprite);
+        break;
+    }
+    data[7]++;
+    if (data[7] > 1)
+    {
+        data[7] = 0;
+        sprite->invisible ^= TRUE;
+    }
+}
+
+void sub_80EE970(struct Sprite * sprite, u16 a1, s16 a2, u8 a3)
+{
+    sprite->data[0] = 0;
+    sprite->data[1] = a1;
+    sprite->data[2] = sprite->pos2.x << 4;
+    sprite->data[3] = (a2 << 4) / a1;
+    sprite->data[4] = 0;
+    sprite->data[5] = 0x800 / a1;
+    sprite->data[6] = 0;
+    sprite->data[7] = a3;
+    StartSpriteAnim(sprite, 2);
+    sprite->callback = sub_80EE9D4;
+}
+
+void sub_80EE9D4(struct Sprite * sprite)
+{
+    switch (sprite->data[0])
+    {
+    case 0:
+        sprite->data[6]++;
+        if (sprite->data[6] > 4)
+        {
+            StartSpriteAnim(sprite, 3);
+            sprite->data[6] = 0;
+            sprite->data[0]++;
+        }
+        break;
+    case 1:
+        sprite->data[1]--;
+        if (sprite->data[1])
+        {
+            sprite->data[2] += sprite->data[3];
+            sprite->data[4] += sprite->data[5];
+            sprite->pos2.x = sprite->data[2] >> 4;
+            sprite->pos2.y = -(gSineTable[sprite->data[4] >> 4] >> sprite->data[7]);
+        }
+        else
+        {
+            sprite->pos2.x = (u16)sprite->data[2] >> 4;
+            sprite->pos2.y = 0;
+            StartSpriteAnim(sprite, 2);
+            if (sprite->data[7] == 5)
+                sprite->callback = SpriteCallbackDummy;
+            else
+            {
+                sprite->data[6] = 0;
+                sprite->data[0]++;
+            }
+        }
+        break;
+    case 2:
+        sprite->data[6]++;
+        if (sprite->data[6] > 4)
+        {
+            StartSpriteAnim(sprite, 0);
+            sprite->callback = SpriteCallbackDummy;
+        }
+        break;
+    }
+}
+
+void sub_80EEA94(struct IntroSequenceData * ptr)
+{
+    ptr->field_0018->data[0] = 0;
+    ptr->field_0018->data[1] = 0;
+    ptr->field_0018->data[2] = 0;
+    ptr->field_0018->data[3] = 0;
+    ptr->field_0018->data[4] = 0;
+    ptr->field_0018->data[5] = 0;
+    ptr->field_0018->pos1.x += ptr->field_0018->pos2.x;
+    ptr->field_0018->pos2.x = 0;
+    gUnknown_203AB0C = 0x24;
+    gUnknown_203AB06 = 0x28;
+    gUnknown_203AB04 = 0x03;
+    gUnknown_203AB08 = 0x04;
+    ptr->field_0018->data[7] = 36;
+    StartSpriteAnim(ptr->field_0018, 2);
+    ptr->field_0018->callback = sub_80EEB08;
+}
+
+void sub_80EEB08(struct Sprite * sprite)
+{
+    switch (sprite->data[0])
+    {
+    case 0:
+        sprite->data[1]++;
+        if (sprite->data[1] & 1)
+        {
+            sprite->data[2]++;
+            if (sprite->data[2] & 1)
+                sprite->pos2.x++;
+            else
+                sprite->pos2.x--;
+        }
+        if (sprite->data[1] > 17)
+        {
+            sprite->data[1] = 0;
+            sprite->data[0]++;
+        }
+        break;
+    case 1:
+        if (++sprite->data[1] >= gUnknown_203AB06)
+        {
+            StartSpriteAnim(sprite, 4);
+            sprite->data[1] = 0;
+            sprite->data[2] = 0;
+            sprite->data[0]++;
+        }
+        break;
+    case 2:
+        sprite->data[1] += sprite->data[7];
+        sprite->pos2.x = -(sprite->data[1] >> 4);
+        sprite->pos2.y = -((gSineTable[sprite->data[1] >> 4] * gUnknown_203AB04) >> gUnknown_203AB08);
+        sprite->data[2]++;
+        if (sprite->data[7] > 12)
+            sprite->data[7]--;
+        if ((sprite->data[1] >> 4) > 0x3F)
+            sprite->callback = SpriteCallbackDummy;
+        break;
+    }
+}
+
+void sub_80EEBE4(void)
+{
+    int i;
+    
+    for (i = 0; i < NELEMS(gUnknown_840BEDC); i++)
+    {
+        LoadCompressedSpriteSheet(&gUnknown_840BEDC[i]);
+    }
+    // gUnknown_840BF14 is not properly terminated, so this
+    // call exhibits undefined behavior.
+    LoadSpritePalettes(gUnknown_840BF14);
 }

@@ -211,7 +211,6 @@ SECTIONS {
         asm/battle_controller_oak.o(.text);
         asm/player_pc.o(.text);
         src/intro.o(.text);
-        asm/intro.o(.text);
         asm/battle_anim_special.o(.text);
         asm/hall_of_fame.o(.text);
         asm/credits.o(.text);

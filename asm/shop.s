@@ -572,7 +572,7 @@ _0809AEAC:
 	ldrb r0, [r0, 0x16]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_813F66C
+	bl BuyMenuInitWindows
 	bl sub_809B080
 	b _0809AF5E
 	.align 2, 0
@@ -819,7 +819,7 @@ sub_809B15C: @ 809B15C
 	push {lr}
 	bl sub_809B764
 	bl sub_809BAFC
-	bl sub_813F6D0
+	bl BuyMenuDrawMoneyBox
 	movs r0, 0
 	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0x1
@@ -1116,7 +1116,7 @@ _0809B398:
 	movs r1, 0x2
 	adds r2, r7, 0
 	movs r3, 0
-	bl sub_813F6F4
+	bl BuyMenuPrint
 	b _0809B400
 	.align 2, 0
 _0809B3D0: .4byte 0x00000177
@@ -1138,7 +1138,7 @@ _0809B3D8:
 	movs r1, 0x2
 	adds r2, r7, 0
 	movs r3, 0x2
-	bl sub_813F6F4
+	bl BuyMenuPrint
 _0809B400:
 	add sp, 0x14
 	pop {r4-r7}
@@ -1204,7 +1204,7 @@ _0809B45C:
 	adds r0, r6, 0
 	movs r1, 0
 	movs r3, 0x69
-	bl sub_813F6F4
+	bl BuyMenuPrint
 _0809B480:
 	add sp, 0x14
 	pop {r4-r6}
@@ -1251,7 +1251,7 @@ sub_809B494: @ 809B494
 	movs r1, 0
 	adds r2, r5, 0
 	movs r3, 0
-	bl sub_813F6F4
+	bl BuyMenuPrint
 	lsls r0, r7, 16
 	lsrs r0, 16
 	bl ItemIdToBattleMoveId
@@ -1273,7 +1273,7 @@ sub_809B494: @ 809B494
 	movs r1, 0x2
 	adds r2, r5, 0
 	movs r3, 0
-	bl sub_813F6F4
+	bl BuyMenuPrint
 	b _0809B55C
 	.align 2, 0
 _0809B514: .4byte gStringVar1
@@ -1294,7 +1294,7 @@ _0809B528:
 	movs r0, 0x6
 	movs r1, 0
 	movs r3, 0
-	bl sub_813F6F4
+	bl BuyMenuPrint
 	ldr r2, _0809B568 @ =gUnknown_8416217
 	movs r0, 0x10
 	str r0, [sp]
@@ -1305,7 +1305,7 @@ _0809B528:
 	movs r0, 0x6
 	movs r1, 0x2
 	movs r3, 0
-	bl sub_813F6F4
+	bl BuyMenuPrint
 _0809B55C:
 	add sp, 0x14
 	pop {r4-r7}
@@ -1388,7 +1388,7 @@ _0809B5E0:
 	movs r0, 0x4
 	movs r1, 0x2
 	movs r3, 0x1
-	bl sub_813F6F4
+	bl BuyMenuPrint
 _0809B5F8:
 	add sp, 0x14
 	pop {r4,r5}
@@ -2134,7 +2134,7 @@ sub_809BB44: @ 809BB44
 	movs r1, 0
 	adds r2, r4, 0
 	movs r3, 0x2
-	bl sub_813F6F4
+	bl BuyMenuPrint
 	add sp, 0x14
 	pop {r4}
 	pop {r0}
@@ -2223,7 +2223,7 @@ _0809BC1A:
 	ldr r1, _0809BC74 @ =gUnknown_8416842
 	ldr r2, _0809BC78 @ =sub_809BF98
 	adds r0, r6, 0
-	bl sub_813F75C
+	bl BuyMenuDisplayMessage
 	b _0809BC8E
 	.align 2, 0
 _0809BC70: .4byte gSaveBlock1Ptr
@@ -2236,7 +2236,7 @@ _0809BC7C:
 	ldr r1, _0809BC98 @ =gUnknown_8416766
 	ldr r2, _0809BC9C @ =sub_809BCA0
 	adds r0, r6, 0
-	bl sub_813F75C
+	bl BuyMenuDisplayMessage
 _0809BC8E:
 	pop {r4-r7}
 	pop {r0}
@@ -2265,7 +2265,7 @@ sub_809BCA0: @ 809BCA0
 	lsrs r4, 16
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_813F7C0
+	bl BuyMenuQuantityBoxThinBorder
 	ldr r0, _0809BD44 @ =gStringVar1
 	adds r1, r4, 0
 	movs r2, 0x1
@@ -2287,11 +2287,11 @@ sub_809BCA0: @ 809BCA0
 	movs r1, 0x2
 	adds r2, r6, 0
 	movs r3, 0
-	bl sub_813F6F4
+	bl BuyMenuPrint
 	strh r4, [r5, 0x2]
 	movs r0, 0x3
 	movs r1, 0
-	bl sub_813F7A8
+	bl BuyMenuQuantityBoxNormalBorder
 	adds r0, r7, 0
 	bl sub_809BB44
 	movs r0, 0
@@ -2423,7 +2423,7 @@ _0809BDD4:
 	ldr r1, _0809BE4C @ =gUnknown_841678E
 	ldr r2, _0809BE50 @ =sub_809BE90
 	adds r0, r5, 0
-	bl sub_813F75C
+	bl BuyMenuDisplayMessage
 	b _0809BE88
 	.align 2, 0
 _0809BE3C: .4byte gMain
@@ -2464,7 +2464,7 @@ sub_809BE90: @ 809BE90
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _0809BEA0 @ =gUnknown_83DF0B4
-	bl sub_813F7D8
+	bl BuyMenuConfirmPurchase
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -2493,7 +2493,7 @@ sub_809BEA4: @ 809BEA4
 	ldr r1, _0809BEEC @ =gUnknown_84167E7
 	ldr r2, _0809BEF0 @ =sub_809BF0C
 	adds r0, r5, 0
-	bl sub_813F75C
+	bl BuyMenuDisplayMessage
 	adds r0, r5, 0
 	bl nullsub_52
 	ldrh r0, [r4, 0xA]
@@ -2509,7 +2509,7 @@ _0809BEF4:
 	ldr r1, _0809BF04 @ =gUnknown_8416861
 	ldr r2, _0809BF08 @ =sub_809BF98
 	adds r0, r5, 0
-	bl sub_813F75C
+	bl BuyMenuDisplayMessage
 _0809BEFE:
 	pop {r4,r5}
 	pop {r0}

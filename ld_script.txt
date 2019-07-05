@@ -254,7 +254,7 @@ SECTIONS {
         asm/unk_text_util.o(.text);
         asm/berry_pouch.o(.text);
         asm/itemfinder.o(.text);
-        asm/buy_menu_helpers.o(.text);
+        src/buy_menu_helpers.o(.text);
         asm/slot_machine.o(.text);
         src/roamer.o(.text);
         src/mystery_gift_menu.o(.text);
@@ -445,7 +445,7 @@ SECTIONS {
         data/unk_text_util.o(.rodata);
         data/berry_pouch.o(.rodata);
         data/itemfinder.o(.rodata);
-        data/buy_menu_helpers.o(.rodata);
+        src/buy_menu_helpers.o(.rodata);
         data/slot_machine.o(.rodata);
         src/roamer.o(.rodata);
         src/mystery_gift_menu.o(.rodata);

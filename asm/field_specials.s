@@ -3183,7 +3183,7 @@ _080CBE20:
 	lsls r0, 24
 	lsrs r0, 24
 _080CBE40:
-	bl sub_813CD24
+	bl GetColorFromTextColorTable
 _080CBE44:
 	lsls r0, 24
 	lsrs r0, 24

@@ -5747,7 +5747,7 @@ _08137574:
 sub_8137578: @ 8137578
 	push {r4-r7,lr}
 	sub sp, 0xD4
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	ldr r7, _081375E8 @ =gUnknown_203B140
 	ldr r0, [r7]
 	ldr r4, _081375EC @ =0x00003290
@@ -5760,7 +5760,7 @@ sub_8137578: @ 8137578
 	adds r0, r1
 	ldr r1, [r0]
 	movs r0, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	ldr r0, [r7]
 	adds r0, r4
 	movs r1, 0x24
@@ -5777,7 +5777,7 @@ _081375B2:
 	bl ConvertIntToDecimalStringN
 	movs r0, 0x1
 	add r1, sp, 0x14
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	ldr r0, [r7]
 	adds r0, r4
 	movs r1, 0x23
@@ -5824,7 +5824,7 @@ _0813761C:
 _08137626:
 	adds r1, r4, 0
 	movs r0, 0x2
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	ldr r4, _08137664 @ =gUnknown_203B140
 	ldr r0, [r4]
 	ldr r1, _08137668 @ =0x00003290
@@ -5901,7 +5901,7 @@ _081376C0:
 	ldr r1, _081376D8 @ =gUnknown_8419841
 _081376CE:
 	adds r0, r4, 0
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	b _081376E6
 	.align 2, 0
 _081376D8: .4byte gUnknown_8419841
@@ -5909,7 +5909,7 @@ _081376DC:
 	add r4, sp, 0x3C
 	ldr r1, _08137714 @ =gUnknown_8419822
 	adds r0, r4, 0
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 _081376E6:
 	ldr r0, _08137718 @ =gUnknown_203B140
 	ldr r0, [r0]
@@ -5944,7 +5944,7 @@ _08137720: .4byte gUnknown_8463FA4
 sub_8137724: @ 8137724
 	push {r4-r6,lr}
 	sub sp, 0xD4
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	ldr r5, _081377A0 @ =gUnknown_203B140
 	ldr r0, [r5]
 	ldr r4, _081377A4 @ =0x00003290
@@ -5957,7 +5957,7 @@ sub_8137724: @ 8137724
 	adds r0, r1
 	ldr r1, [r0]
 	movs r0, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	ldr r0, [r5]
 	adds r0, r4
 	movs r1, 0x24
@@ -5974,7 +5974,7 @@ _0813775E:
 	bl ConvertIntToDecimalStringN
 	movs r0, 0x1
 	add r1, sp, 0x14
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	ldr r0, [r5]
 	adds r0, r4
 	movs r1, 0x23
@@ -6025,7 +6025,7 @@ _081377D0:
 	ldr r1, _081377E8 @ =gUnknown_841979D
 _081377DE:
 	adds r0, r4, 0
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	b _081377F6
 	.align 2, 0
 _081377E8: .4byte gUnknown_841979D
@@ -6033,7 +6033,7 @@ _081377EC:
 	add r4, sp, 0x3C
 	ldr r1, _08137820 @ =gUnknown_8419782
 	adds r0, r4, 0
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 _081377F6:
 	ldr r0, _08137824 @ =gUnknown_203B140
 	ldr r0, [r0]
@@ -6077,7 +6077,7 @@ _08137846:
 _08137850:
 	adds r1, r4, 0
 	movs r0, 0x2
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	ldr r4, _08137890 @ =gUnknown_203B140
 	ldr r0, [r4]
 	ldr r1, _08137894 @ =0x00003290
@@ -6149,7 +6149,7 @@ _081378EA:
 	ldr r1, _081378F8 @ =gUnknown_841988A
 _081378EE:
 	adds r0, r4, 0
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	b _08137906
 	.align 2, 0
 _081378F8: .4byte gUnknown_841988A
@@ -6157,7 +6157,7 @@ _081378FC:
 	add r4, sp, 0x3C
 	ldr r1, _08137934 @ =gUnknown_8419860
 	adds r0, r4, 0
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 _08137906:
 	ldr r0, _08137938 @ =gUnknown_203B140
 	ldr r0, [r0]

@@ -513,18 +513,18 @@ _080F5014: .4byte gUnknown_203AB48
 sub_80F5018: @ 80F5018
 	push {r4-r6,lr}
 	sub sp, 0xAC
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	ldr r0, _080F5040 @ =gSaveBlock2Ptr
 	ldr r1, [r0]
 	movs r0, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	bl sub_8088F84
 	lsls r0, 16
 	cmp r0, 0
 	beq _080F5048
 	ldr r1, _080F5044 @ =gUnknown_841B68F
 	movs r0, 0x1
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	b _080F5050
 	.align 2, 0
 _080F5040: .4byte gSaveBlock2Ptr
@@ -532,14 +532,14 @@ _080F5044: .4byte gUnknown_841B68F
 _080F5048:
 	ldr r1, _080F50E0 @ =gUnknown_841B698
 	movs r0, 0x1
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 _080F5050:
 	movs r0, 0
 	movs r1, 0
 	bl FillWindowPixelBuffer
 	ldr r1, _080F50E4 @ =gUnknown_841B60E
 	add r0, sp, 0xC
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	movs r5, 0x1
 	negs r5, r5
 	movs r0, 0x2
@@ -562,7 +562,7 @@ _080F5050:
 	bl AddTextPrinterParameterized3
 	ldr r1, _080F50EC @ =gUnknown_841B619
 	add r0, sp, 0xC
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	movs r0, 0x2
 	add r1, sp, 0xC
 	adds r2, r5, 0

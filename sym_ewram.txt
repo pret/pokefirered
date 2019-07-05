@@ -1393,10 +1393,7 @@ gUnknown_203B170: @ 203B170
 
 	.align 2
 	.include "src/help_system.o"
-
-	@ src/unk_text_util.o
-gUnknown_203F34C: @ 203F34C
-	.space 0x20
+	.include "src/dynamic_placeholder_text_util.o"
 
 gUnknown_203F36C: @ 203F36C
 	.space 0x4

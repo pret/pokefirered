@@ -43,182 +43,182 @@ struct IntroSequenceData
     u8 filler_083C[0x2080];
 }; // size: 0x28BC
 
-EWRAM_DATA struct GcmbStruct gUnknown_203AAD4 = {0};
-EWRAM_DATA u16 gUnknown_203AB00 = 0;
-EWRAM_DATA u16 gUnknown_203AB02 = 0;
-EWRAM_DATA u16 gUnknown_203AB04 = 0;
-EWRAM_DATA u16 gUnknown_203AB06 = 0;
-EWRAM_DATA u16 gUnknown_203AB08 = 0;
-EWRAM_DATA u16 gUnknown_203AB0A = 0;
-EWRAM_DATA u16 gUnknown_203AB0C = 0;
-EWRAM_DATA u16 gUnknown_203AB0E = 0;
-EWRAM_DATA u16 gUnknown_203AB10 = 0;
-EWRAM_DATA u16 gUnknown_203AB12 = 0;
-EWRAM_DATA u16 gUnknown_203AB14 = 0;
-EWRAM_DATA u16 gUnknown_203AB16 = 0;
-EWRAM_DATA u16 gUnknown_203AB18 = 0;
-EWRAM_DATA u16 gUnknown_203AB1A = 0;
-EWRAM_DATA u16 gUnknown_203AB1C = 0;
-EWRAM_DATA u16 gUnknown_203AB1E = 0;
-EWRAM_DATA u16 gUnknown_203AB20 = 0;
-EWRAM_DATA u16 gUnknown_203AB22 = 0;
-EWRAM_DATA u16 gUnknown_203AB24 = 0;
-EWRAM_DATA u16 gUnknown_203AB26 = 0;
-EWRAM_DATA u32 gUnknown_203AB28 = 0;
-EWRAM_DATA s16 gUnknown_203AB2C = 0;
-EWRAM_DATA u16 gUnknown_203AB2E = 0;
-EWRAM_DATA u32 gUnknown_203AB30 = 0;
+static EWRAM_DATA struct GcmbStruct gUnknown_203AAD4 = {0};
+static EWRAM_DATA u16 gUnknown_203AB00 = 0;
+static EWRAM_DATA u16 gUnknown_203AB02 = 0;
+static EWRAM_DATA u16 gUnknown_203AB04 = 0;
+static EWRAM_DATA u16 gUnknown_203AB06 = 0;
+static EWRAM_DATA u16 gUnknown_203AB08 = 0;
+static EWRAM_DATA u16 gUnknown_203AB0A = 0;
+static EWRAM_DATA u16 gUnknown_203AB0C = 0;
+static EWRAM_DATA u16 gUnknown_203AB0E = 0;
+static EWRAM_DATA u16 gUnknown_203AB10 = 0;
+static EWRAM_DATA u16 gUnknown_203AB12 = 0;
+static EWRAM_DATA u16 gUnknown_203AB14 = 0;
+static EWRAM_DATA u16 gUnknown_203AB16 = 0;
+static EWRAM_DATA u16 gUnknown_203AB18 = 0;
+static EWRAM_DATA u16 gUnknown_203AB1A = 0;
+static EWRAM_DATA u16 gUnknown_203AB1C = 0;
+static EWRAM_DATA u16 gUnknown_203AB1E = 0;
+static EWRAM_DATA u16 gUnknown_203AB20 = 0;
+static EWRAM_DATA u16 gUnknown_203AB22 = 0;
+static EWRAM_DATA u16 gUnknown_203AB24 = 0;
+static EWRAM_DATA u16 gUnknown_203AB26 = 0;
+static EWRAM_DATA u32 gUnknown_203AB28 = 0;
+static EWRAM_DATA s16 gUnknown_203AB2C = 0;
+static EWRAM_DATA u16 gUnknown_203AB2E = 0;
+static EWRAM_DATA u32 gUnknown_203AB30 = 0;
 
-void sub_80EC870(void);
-void sub_80EC9D4(void);
-void sub_80EC9EC(void);
-void sub_80ECA00(void);
-void sub_80ECA70(void);
-void sub_80ECAB0(u8 taskId);
-void sub_80ECAA8(struct IntroSequenceData * ptr, void (*cb)(struct IntroSequenceData *));
-void sub_80ECAF0(struct IntroSequenceData * ptr);
-void sub_80ECB98(struct IntroSequenceData * ptr);
-void sub_80ECC3C(struct IntroSequenceData * ptr);
-void sub_80ECCA8(struct IntroSequenceData * ptr);
-void sub_80ECD60(struct IntroSequenceData * ptr);
-void sub_80ECEA4(struct IntroSequenceData * ptr);
-void sub_80ED0AC(u8 taskId);
-void sub_80ED118(void);
-void sub_80ED140(u8 taskId);
-void sub_80ED188(struct IntroSequenceData * ptr);
-void sub_80ED40C(u8 taskId);
-void sub_80ED428(u8 taskId);
-void sub_80ED444(struct IntroSequenceData * ptr);
-void sub_80ED4A0(struct IntroSequenceData * ptr);
-void sub_80ED4C0(struct IntroSequenceData * ptr);
-void sub_80ED6D8(void);
-void sub_80ED714(u8 taskId);
-void sub_80ED7D4(struct IntroSequenceData * ptr);
-void sub_80ED818(struct Sprite * sprite);
-void sub_80ED898(struct IntroSequenceData * ptr);
-void sub_80EDAF0(struct IntroSequenceData * ptr);
-void sub_80EDB70(struct IntroSequenceData * ptr);
-void sub_80EDBAC(struct IntroSequenceData * ptr);
-void sub_80EDBE8(struct IntroSequenceData * ptr);
-void sub_80EDC40(void);
-void sub_80EDDF0(void);
-void sub_80EDE04(u8 taskId);
-void sub_80EDED8(void);
-void sub_80EDEEC(u8 taskId);
-struct Sprite * sub_80EDF68(void);
-void sub_80EDF94(struct IntroSequenceData * ptr);
-void sub_80EE024(u8 taskId);
-void sub_80EE160(void);
-void sub_80EE1C4(struct Sprite * sprite);
-void sub_80EE200(u8 taskId);
-void sub_80EE29C(struct Sprite * sprite);
-void sub_80EE350(struct Sprite * sprite);
-void sub_80EE40C(struct Sprite * sprite);
-void sub_80EE4DC(struct Sprite * sprite);
-void sub_80EE4F8(struct IntroSequenceData * ptr);
-void sub_80EE528(struct Sprite * sprite, s16 a1, s16 a2, u16 a3);
-void sub_80EE580(struct Sprite * sprite);
-bool32 sub_80EE5C8(struct IntroSequenceData * ptr);
-void sub_80EE5E4(struct IntroSequenceData * ptr);
-void sub_80EE610(struct Sprite * sprite);
-void sub_80EE6A4(struct IntroSequenceData * ptr);
-void sub_80EE704(struct Sprite * sprite);
-bool8 sub_80EE850(struct IntroSequenceData * ptr);
-void sub_80EE864(s16 a1, s16 a2, s16 a3);
-void sub_80EE8E4(struct Sprite * sprite);
-void sub_80EE970(struct Sprite * sprite, u16 a1, s16 a2, u8 a3);
-void sub_80EE9D4(struct Sprite * sprite);
-void sub_80EEA94(struct IntroSequenceData * ptr);
-void sub_80EEB08(struct Sprite * sprite);
-void sub_80EEBE4(void);
+static void sub_80EC870(void);
+static void sub_80EC9D4(void);
+static void sub_80EC9EC(void);
+static void sub_80ECA00(void);
+static void sub_80ECA70(void);
+static void sub_80ECAB0(u8 taskId);
+static void sub_80ECAA8(struct IntroSequenceData * ptr, void (*cb)(struct IntroSequenceData *));
+static void sub_80ECAF0(struct IntroSequenceData * ptr);
+static void sub_80ECB98(struct IntroSequenceData * ptr);
+static void sub_80ECC3C(struct IntroSequenceData * ptr);
+static void sub_80ECCA8(struct IntroSequenceData * ptr);
+static void sub_80ECD60(struct IntroSequenceData * ptr);
+static void sub_80ECEA4(struct IntroSequenceData * ptr);
+static void sub_80ED0AC(u8 taskId);
+static void sub_80ED118(void);
+static void sub_80ED140(u8 taskId);
+static void sub_80ED188(struct IntroSequenceData * ptr);
+static void sub_80ED40C(u8 taskId);
+static void sub_80ED428(u8 taskId);
+static void sub_80ED444(struct IntroSequenceData * ptr);
+static void sub_80ED4A0(struct IntroSequenceData * ptr);
+static void sub_80ED4C0(struct IntroSequenceData * ptr);
+static void sub_80ED6D8(void);
+static void sub_80ED714(u8 taskId);
+static void sub_80ED7D4(struct IntroSequenceData * ptr);
+static void sub_80ED818(struct Sprite * sprite);
+static void sub_80ED898(struct IntroSequenceData * ptr);
+static void sub_80EDAF0(struct IntroSequenceData * ptr);
+static void sub_80EDB70(struct IntroSequenceData * ptr);
+static void sub_80EDBAC(struct IntroSequenceData * ptr);
+static void sub_80EDBE8(struct IntroSequenceData * ptr);
+static void sub_80EDC40(void);
+static void sub_80EDDF0(void);
+static void sub_80EDE04(u8 taskId);
+static void sub_80EDED8(void);
+static void sub_80EDEEC(u8 taskId);
+static struct Sprite * sub_80EDF68(void);
+static void sub_80EDF94(struct IntroSequenceData * ptr);
+static void sub_80EE024(u8 taskId);
+static void sub_80EE160(void);
+static void sub_80EE1C4(struct Sprite * sprite);
+static void sub_80EE200(u8 taskId);
+static void sub_80EE29C(struct Sprite * sprite);
+static void sub_80EE350(struct Sprite * sprite);
+static void sub_80EE40C(struct Sprite * sprite);
+static void sub_80EE4DC(struct Sprite * sprite);
+static void sub_80EE4F8(struct IntroSequenceData * ptr);
+static void sub_80EE528(struct Sprite * sprite, s16 a1, s16 a2, u16 a3);
+static void sub_80EE580(struct Sprite * sprite);
+static bool32 sub_80EE5C8(struct IntroSequenceData * ptr);
+static void sub_80EE5E4(struct IntroSequenceData * ptr);
+static void sub_80EE610(struct Sprite * sprite);
+static void sub_80EE6A4(struct IntroSequenceData * ptr);
+static void sub_80EE704(struct Sprite * sprite);
+static bool8 sub_80EE850(struct IntroSequenceData * ptr);
+static void sub_80EE864(s16 a1, s16 a2, s16 a3);
+static void sub_80EE8E4(struct Sprite * sprite);
+static void sub_80EE970(struct Sprite * sprite, u16 a1, s16 a2, u8 a3);
+static void sub_80EE9D4(struct Sprite * sprite);
+static void sub_80EEA94(struct IntroSequenceData * ptr);
+static void sub_80EEB08(struct Sprite * sprite);
+static void sub_80EEBE4(void);
 
 extern const u32 gMultiBootProgram_PokemonColosseum_Start[];
 
-const u16 gUnknown_8402260[] = INCBIN_U16("graphics/intro/unk_8402260.gbapal");
-const u8 gUnknown_8402280[] = INCBIN_U8("graphics/intro/unk_8402280.4bpp.lz");
-const u8 gUnknown_84024E4[] = INCBIN_U8("graphics/intro/unk_84024E4.bin.lz");
-const u16 gUnknown_8402630[] = INCBIN_U16("graphics/intro/unk_8402630.gbapal");
-const u8 gUnknown_8402650[] = INCBIN_U8("graphics/intro/unk_8402650.4bpp.lz");
-const u8 gUnknown_8402668[] = INCBIN_U8("graphics/intro/unk_8402668.bin.lz");
-const u16 gUnknown_840270C[] = INCBIN_U16("graphics/intro/unk_840270C.gbapal");
-const u8 gUnknown_840272C[] = INCBIN_U8("graphics/intro/unk_840272C.4bpp.lz");
-const u8 gUnknown_84028F8[] = INCBIN_U8("graphics/intro/unk_84028F8.bin.lz");
-const u16 gUnknown_8402A44[] = INCBIN_U16("graphics/intro/unk_8402A64.gbapal");
-const u8 gUnknown_8402A64[] = INCBIN_U8("graphics/intro/unk_8402A64.4bpp.lz");
-const u16 gUnknown_8402ABC[] = INCBIN_U16("graphics/intro/unk_8402ADC.gbapal");
-const u8 gUnknown_8402ADC[] = INCBIN_U8("graphics/intro/unk_8402ADC.4bpp.lz");
-const u8 gUnknown_8402B2C[] = INCBIN_U8("graphics/intro/unk_8402B2C.4bpp.lz");
-const u8 gUnknown_8402CD4[] = INCBIN_U8("graphics/intro/unk_8402CD4.4bpp.lz");
-const u16 gUnknown_8402D34[] = INCBIN_U16("graphics/intro/unk_8402D34.gbapal");
-const u8 gUnknown_8402D54[] = INCBIN_U8("graphics/intro/unk_8402D54.4bpp.lz");
-const u8 gUnknown_8403FE8[] = INCBIN_U8("graphics/intro/unk_8403FE8.bin.lz");
-const u16 gUnknown_84048CC[] = INCBIN_U16("graphics/intro/unk_84048CC.gbapal");
-const u8 gUnknown_84048EC[] = INCBIN_U8("graphics/intro/unk_84048EC.4bpp.lz");
-const u8 gUnknown_8404F7C[] = INCBIN_U8("graphics/intro/unk_8404F7C.bin.lz");
-const u16 gUnknown_84053B4[] = INCBIN_U16("graphics/intro/unk_84053B4.gbapal");
-const u8 gUnknown_8405414[] = INCBIN_U8("graphics/intro/unk_8405414.4bpp.lz");
-const u8 gUnknown_8405890[] = INCBIN_U8("graphics/intro/unk_8405890.bin.lz");
-const u16 gUnknown_8405B08[] = INCBIN_U16("graphics/intro/unk_8405B08.gbapal");
-const u8 gUnknown_8405B28[] = INCBIN_U8("graphics/intro/unk_8405B28.4bpp.lz");
-const u8 gUnknown_8405CDC[] = INCBIN_U8("graphics/intro/unk_8405CDC.bin.lz");
-const u16 gUnknown_8405DA4[] = INCBIN_U16("graphics/intro/unk_8405DA4.gbapal");
-const u8 gUnknown_8405DC4[] = INCBIN_U8("graphics/intro/unk_8405DC4.4bpp.lz");
-const u8 gUnknown_840644C[] = INCBIN_U8("graphics/intro/unk_840644C.bin.lz");
-const u16 gUnknown_8406634[] = INCBIN_U16("graphics/intro/unk_8406634.gbapal");
-const u8 gUnknown_8406654[] = INCBIN_U8("graphics/intro/unk_8406654.4bpp.lz");
-const u8 gUnknown_84071D0[] = INCBIN_U8("graphics/intro/unk_84071D0.bin.lz");
-const u16 gUnknown_8407430[] = INCBIN_U16("graphics/intro/unk_8407430.gbapal");
-const u8 gUnknown_8407470[] = INCBIN_U8("graphics/intro/unk_8407470.4bpp.lz");
-const u8 gUnknown_8407A50[] = INCBIN_U8("graphics/intro/unk_8407A50.bin.lz");
-const u8 gUnknown_8407B9C[] = INCBIN_U8("graphics/intro/unk_8407B9C.4bpp.lz");
-const u8 gUnknown_8408D98[] = INCBIN_U8("graphics/intro/unk_8408D98.bin.lz");
-const u8 gUnknown_840926C[] = INCBIN_U8("graphics/intro/unk_840926C.4bpp.lz");
-const u16 gUnknown_84096AC[] = INCBIN_U16("graphics/intro/unk_84096AC.gbapal");
-const u8 gUnknown_84096CC[] = INCBIN_U8("graphics/intro/unk_84096CC.4bpp.lz");
-const u16 gUnknown_8409A1C[] = INCBIN_U16("graphics/intro/unk_8409A1C.gbapal");
-const u8 gUnknown_8409A3C[] = INCBIN_U8("graphics/intro/unk_8409A3C.4bpp.lz");
-const u8 gUnknown_8409D20[] = INCBIN_U8("graphics/intro/unk_8409D20.4bpp.lz");
-const u8 gUnknown_840A3E4[] = INCBIN_U8("graphics/intro/unk_840A3E4.4bpp.lz");
-const u16 gUnknown_840B834[] = INCBIN_U16("graphics/intro/unk_840B834.gbapal");
-const u16 gUnknown_840B854[] = INCBIN_U16("graphics/intro/unk_840B854.gbapal");
-const u8 gUnknown_840B874[] = INCBIN_U8("graphics/intro/unk_840B874.4bpp.lz");
-const u8 gUnknown_840BAE0[] = INCBIN_U8("graphics/intro/unk_840BAE0.4bpp.lz");
+static const u16 gUnknown_8402260[] = INCBIN_U16("graphics/intro/unk_8402260.gbapal");
+static const u8 gUnknown_8402280[] = INCBIN_U8("graphics/intro/unk_8402280.4bpp.lz");
+static const u8 gUnknown_84024E4[] = INCBIN_U8("graphics/intro/unk_84024E4.bin.lz");
+static const u16 gUnknown_8402630[] = INCBIN_U16("graphics/intro/unk_8402630.gbapal");
+static const u8 gUnknown_8402650[] = INCBIN_U8("graphics/intro/unk_8402650.4bpp.lz");
+static const u8 gUnknown_8402668[] = INCBIN_U8("graphics/intro/unk_8402668.bin.lz");
+static const u16 gUnknown_840270C[] = INCBIN_U16("graphics/intro/unk_840270C.gbapal");
+static const u8 gUnknown_840272C[] = INCBIN_U8("graphics/intro/unk_840272C.4bpp.lz");
+static const u8 gUnknown_84028F8[] = INCBIN_U8("graphics/intro/unk_84028F8.bin.lz");
+static const u16 gUnknown_8402A44[] = INCBIN_U16("graphics/intro/unk_8402A64.gbapal");
+static const u8 gUnknown_8402A64[] = INCBIN_U8("graphics/intro/unk_8402A64.4bpp.lz");
+static const u16 gUnknown_8402ABC[] = INCBIN_U16("graphics/intro/unk_8402ADC.gbapal");
+static const u8 gUnknown_8402ADC[] = INCBIN_U8("graphics/intro/unk_8402ADC.4bpp.lz");
+static const u8 gUnknown_8402B2C[] = INCBIN_U8("graphics/intro/unk_8402B2C.4bpp.lz");
+static const u8 gUnknown_8402CD4[] = INCBIN_U8("graphics/intro/unk_8402CD4.4bpp.lz");
+static const u16 gUnknown_8402D34[] = INCBIN_U16("graphics/intro/unk_8402D34.gbapal");
+static const u8 gUnknown_8402D54[] = INCBIN_U8("graphics/intro/unk_8402D54.4bpp.lz");
+static const u8 gUnknown_8403FE8[] = INCBIN_U8("graphics/intro/unk_8403FE8.bin.lz");
+static const u16 gUnknown_84048CC[] = INCBIN_U16("graphics/intro/unk_84048CC.gbapal");
+static const u8 gUnknown_84048EC[] = INCBIN_U8("graphics/intro/unk_84048EC.4bpp.lz");
+static const u8 gUnknown_8404F7C[] = INCBIN_U8("graphics/intro/unk_8404F7C.bin.lz");
+static const u16 gUnknown_84053B4[] = INCBIN_U16("graphics/intro/unk_84053B4.gbapal");
+static const u8 gUnknown_8405414[] = INCBIN_U8("graphics/intro/unk_8405414.4bpp.lz");
+static const u8 gUnknown_8405890[] = INCBIN_U8("graphics/intro/unk_8405890.bin.lz");
+static const u16 gUnknown_8405B08[] = INCBIN_U16("graphics/intro/unk_8405B08.gbapal");
+static const u8 gUnknown_8405B28[] = INCBIN_U8("graphics/intro/unk_8405B28.4bpp.lz");
+static const u8 gUnknown_8405CDC[] = INCBIN_U8("graphics/intro/unk_8405CDC.bin.lz");
+static const u16 gUnknown_8405DA4[] = INCBIN_U16("graphics/intro/unk_8405DA4.gbapal");
+static const u8 gUnknown_8405DC4[] = INCBIN_U8("graphics/intro/unk_8405DC4.4bpp.lz");
+static const u8 gUnknown_840644C[] = INCBIN_U8("graphics/intro/unk_840644C.bin.lz");
+static const u16 gUnknown_8406634[] = INCBIN_U16("graphics/intro/unk_8406634.gbapal");
+static const u8 gUnknown_8406654[] = INCBIN_U8("graphics/intro/unk_8406654.4bpp.lz");
+static const u8 gUnknown_84071D0[] = INCBIN_U8("graphics/intro/unk_84071D0.bin.lz");
+static const u16 gUnknown_8407430[] = INCBIN_U16("graphics/intro/unk_8407430.gbapal");
+static const u8 gUnknown_8407470[] = INCBIN_U8("graphics/intro/unk_8407470.4bpp.lz");
+static const u8 gUnknown_8407A50[] = INCBIN_U8("graphics/intro/unk_8407A50.bin.lz");
+static const u8 gUnknown_8407B9C[] = INCBIN_U8("graphics/intro/unk_8407B9C.4bpp.lz");
+static const u8 gUnknown_8408D98[] = INCBIN_U8("graphics/intro/unk_8408D98.bin.lz");
+static const u8 gUnknown_840926C[] = INCBIN_U8("graphics/intro/unk_840926C.4bpp.lz");
+static const u16 gUnknown_84096AC[] = INCBIN_U16("graphics/intro/unk_84096AC.gbapal");
+static const u8 gUnknown_84096CC[] = INCBIN_U8("graphics/intro/unk_84096CC.4bpp.lz");
+static const u16 gUnknown_8409A1C[] = INCBIN_U16("graphics/intro/unk_8409A1C.gbapal");
+static const u8 gUnknown_8409A3C[] = INCBIN_U8("graphics/intro/unk_8409A3C.4bpp.lz");
+static const u8 gUnknown_8409D20[] = INCBIN_U8("graphics/intro/unk_8409D20.4bpp.lz");
+static const u8 gUnknown_840A3E4[] = INCBIN_U8("graphics/intro/unk_840A3E4.4bpp.lz");
+static const u16 gUnknown_840B834[] = INCBIN_U16("graphics/intro/unk_840B834.gbapal");
+static const u16 gUnknown_840B854[] = INCBIN_U16("graphics/intro/unk_840B854.gbapal");
+static const u8 gUnknown_840B874[] = INCBIN_U8("graphics/intro/unk_840B874.4bpp.lz");
+static const u8 gUnknown_840BAE0[] = INCBIN_U8("graphics/intro/unk_840BAE0.4bpp.lz");
 
-const struct BgTemplate gUnknown_840BB80[] = {
+static const struct BgTemplate gUnknown_840BB80[] = {
 	{ 3, 3, 31, 0, 0, 3, 0x000 },
 	{ 2, 3, 30, 0, 0, 2, 0x010 }
 };
 
-const struct BgTemplate gUnknown_840BB88[] = {
+static const struct BgTemplate gUnknown_840BB88[] = {
 	{ 0, 0, 28, 2, 0, 0, 0x000 },
 	{ 1, 1, 30, 2, 0, 0, 0x000 }
 };
 
-const struct BgTemplate gUnknown_840BB90[] = {
+static const struct BgTemplate gUnknown_840BB90[] = {
 	{ 3, 1, 30, 2, 0, 3, 0x000 },
 	{ 0, 0, 29, 0, 0, 0, 0x000 },
 	{ 2, 3, 27, 0, 0, 2, 0x000 },
 	{ 1, 2, 28, 0, 0, 1, 0x000 }
 };
 
-const struct BgTemplate gUnknown_840BBA0[] = {
+static const struct BgTemplate gUnknown_840BBA0[] = {
 	{ 1, 0, 29, 0, 0, 1, 0x000 },
 	{ 0, 1, 30, 2, 0, 0, 0x000 }
 };
 
-const struct WindowTemplate gUnknown_840BBA8[] = {
+static const struct WindowTemplate gUnknown_840BBA8[] = {
 	{ 2, 6, 4, 18, 9, 0xD, 0x000 },
 	DUMMY_WIN_TEMPLATE
 };
 
-const u8 gUnknown_840BBB8[][2] = {
+static const u8 gUnknown_840BBB8[][2] = {
 	{0x3f, 0x3f},
 	{0x00, 0x3f},
 	{0x3f, 0x00},
 	{0x00, 0x00}
 };
 
-const struct CompressedSpriteSheet gUnknown_840BBC0[] = {
+static const struct CompressedSpriteSheet gUnknown_840BBC0[] = {
 	{gUnknown_8402A64, 0x0080, 0},
 	{gUnknown_8402ADC, 0x0080, 1},
 	{gUnknown_8402B2C, 0x0800, 2},
@@ -226,14 +226,14 @@ const struct CompressedSpriteSheet gUnknown_840BBC0[] = {
 	{gUnknown_8402CD4, 0x0100, 4}
 };
 
-const struct SpritePalette gUnknown_840BBE8[] = {
+static const struct SpritePalette gUnknown_840BBE8[] = {
 	{gUnknown_8402A44, 0},
 	{gUnknown_8402ABC, 1},
 	{gUnknown_840270C, 3},
 	{0}
 };
 
-const struct Coords16 gUnknown_840BC08[] = {
+static const struct Coords16 gUnknown_840BC08[] = {
 	{0x0048, 0x0050},
 	{0x0088, 0x004a},
 	{0x00a8, 0x0050},
@@ -245,11 +245,11 @@ const struct Coords16 gUnknown_840BC08[] = {
 	{0x0098, 0x0056}
 };
 
-const struct OamData gOamData_840BC2C = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_1, .tileNum = 0x000, .priority = 2, .paletteNum = 0 };
+static const struct OamData gOamData_840BC2C = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_1, .tileNum = 0x000, .priority = 2, .paletteNum = 0 };
 
-const struct OamData gOamData_840BC34 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_0, .tileNum = 0x000, .priority = 2, .paletteNum = 0 };
+static const struct OamData gOamData_840BC34 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_0, .tileNum = 0x000, .priority = 2, .paletteNum = 0 };
 
-const union AnimCmd gAnimCmd_840BC3C[] = {
+static const union AnimCmd gAnimCmd_840BC3C[] = {
 	ANIMCMD_FRAME(0, 4),
 	ANIMCMD_FRAME(1, 4),
 	ANIMCMD_FRAME(2, 4),
@@ -257,7 +257,7 @@ const union AnimCmd gAnimCmd_840BC3C[] = {
 	ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd gAnimCmd_840BC50[] = {
+static const union AnimCmd gAnimCmd_840BC50[] = {
 	ANIMCMD_FRAME(0, 4),
 	ANIMCMD_FRAME(1, 4),
 	ANIMCMD_FRAME(2, 4),
@@ -265,18 +265,18 @@ const union AnimCmd gAnimCmd_840BC50[] = {
 	ANIMCMD_END
 };
 
-const union AnimCmd *const gAnimCmdTable_840BC64[] = {
+static const union AnimCmd *const gAnimCmdTable_840BC64[] = {
 	gAnimCmd_840BC3C,
 	gAnimCmd_840BC50
 };
 
-const struct SpriteTemplate gUnknown_840BC6C = {0, 0, &gOamData_840BC2C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80EE29C};
+static const struct SpriteTemplate gUnknown_840BC6C = {0, 0, &gOamData_840BC2C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80EE29C};
 
-const struct SpriteTemplate gUnknown_840BC84 = {1, 1, &gOamData_840BC34, gAnimCmdTable_840BC64, NULL, gDummySpriteAffineAnimTable, sub_80EE350};
+static const struct SpriteTemplate gUnknown_840BC84 = {1, 1, &gOamData_840BC34, gAnimCmdTable_840BC64, NULL, gDummySpriteAffineAnimTable, sub_80EE350};
 
-const struct OamData gOamData_840BC9C = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_2, .tileNum = 0x000, .priority = 2, .paletteNum = 0 };
+static const struct OamData gOamData_840BC9C = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_2, .tileNum = 0x000, .priority = 2, .paletteNum = 0 };
 
-const union AnimCmd gAnimCmd_840BCA4[] = {
+static const union AnimCmd gAnimCmd_840BCA4[] = {
 	ANIMCMD_FRAME(0, 8),
 	ANIMCMD_FRAME(16, 8),
 	ANIMCMD_FRAME(32, 8),
@@ -284,48 +284,48 @@ const union AnimCmd gAnimCmd_840BCA4[] = {
 	ANIMCMD_END
 };
 
-const union AnimCmd *const gAnimCmdTable_840BCB8[] = {
+static const union AnimCmd *const gAnimCmdTable_840BCB8[] = {
 	gAnimCmd_840BCA4
 };
 
-const struct SpriteTemplate gUnknown_840BCBC = {2, 1, &gOamData_840BC9C, gAnimCmdTable_840BCB8, NULL, gDummySpriteAffineAnimTable, sub_80EE4DC};
+static const struct SpriteTemplate gUnknown_840BCBC = {2, 1, &gOamData_840BC9C, gAnimCmdTable_840BCB8, NULL, gDummySpriteAffineAnimTable, sub_80EE4DC};
 
-const struct OamData gOamData_840BCD4 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_BLEND, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_V_RECTANGLE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 3, .paletteNum = 0 };
+static const struct OamData gOamData_840BCD4 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_BLEND, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_V_RECTANGLE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 3, .paletteNum = 0 };
 
-const struct SpriteTemplate gUnknown_840BCDC = {3, 3, &gOamData_840BCD4, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
+static const struct SpriteTemplate gUnknown_840BCDC = {3, 3, &gOamData_840BCD4, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
 
-const struct OamData gOamData_840BCF4 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_BLEND, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_H_RECTANGLE, .matrixNum = 0, .size = ST_OAM_SIZE_1, .tileNum = 0x000, .priority = 3, .paletteNum = 0 };
+static const struct OamData gOamData_840BCF4 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_BLEND, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_H_RECTANGLE, .matrixNum = 0, .size = ST_OAM_SIZE_1, .tileNum = 0x000, .priority = 3, .paletteNum = 0 };
 
-const struct SpriteTemplate gUnknown_840BCFC = {4, 3, &gOamData_840BCF4, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
+static const struct SpriteTemplate gUnknown_840BCFC = {4, 3, &gOamData_840BCF4, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
 
-const struct OamData gOamData_840BD14 = { .affineMode = ST_OAM_AFFINE_DOUBLE, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 1, .paletteNum = 0 };
+static const struct OamData gOamData_840BD14 = { .affineMode = ST_OAM_AFFINE_DOUBLE, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 1, .paletteNum = 0 };
 
-const union AnimCmd gAnimCmd_840BD1C[] = {
+static const union AnimCmd gAnimCmd_840BD1C[] = {
 	ANIMCMD_FRAME(0, 1),
 	ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_840BD24[] = {
+static const union AnimCmd gAnimCmd_840BD24[] = {
 	ANIMCMD_FRAME(64, 1),
 	ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_840BD2C[] = {
+static const union AnimCmd gAnimCmd_840BD2C[] = {
 	ANIMCMD_FRAME(128, 1),
 	ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_840BD34[] = {
+static const union AnimCmd gAnimCmd_840BD34[] = {
 	ANIMCMD_FRAME(192, 1),
 	ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_840BD3C[] = {
+static const union AnimCmd gAnimCmd_840BD3C[] = {
 	ANIMCMD_FRAME(256, 1),
 	ANIMCMD_END
 };
 
-const union AnimCmd *const gAnimCmdTable_840BD44[] = {
+static const union AnimCmd *const gAnimCmdTable_840BD44[] = {
 	gAnimCmd_840BD1C,
 	gAnimCmd_840BD24,
 	gAnimCmd_840BD2C,
@@ -333,105 +333,105 @@ const union AnimCmd *const gAnimCmdTable_840BD44[] = {
 	gAnimCmd_840BD3C
 };
 
-const union AffineAnimCmd gAffineAnimCmd_840BD58[] = {
+static const union AffineAnimCmd gAffineAnimCmd_840BD58[] = {
 	AFFINEANIMCMD_FRAME(256, 256, 0, 0),
 	AFFINEANIMCMD_END
 };
 
-const union AffineAnimCmd gAffineAnimCmd_840BD68[] = {
+static const union AffineAnimCmd gAffineAnimCmd_840BD68[] = {
 	AFFINEANIMCMD_FRAME(256, 256, 0, 0),
 	AFFINEANIMCMD_FRAME(32, 32, 0, 8),
 	AFFINEANIMCMD_END
 };
 
-const union AffineAnimCmd *const gAffineAnimCmdTable_840BD80[] = {
+static const union AffineAnimCmd *const gAffineAnimCmdTable_840BD80[] = {
 	gAffineAnimCmd_840BD58,
 	gAffineAnimCmd_840BD68
 };
 
-const struct SpriteTemplate gUnknown_840BD88 = {5, 7, &gOamData_840BD14, gAnimCmdTable_840BD44, NULL, gAffineAnimCmdTable_840BD80, SpriteCallbackDummy};
+static const struct SpriteTemplate gUnknown_840BD88 = {5, 7, &gOamData_840BD14, gAnimCmdTable_840BD44, NULL, gAffineAnimCmdTable_840BD80, SpriteCallbackDummy};
 
-const struct OamData gOamData_840BDA0 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 1, .paletteNum = 0 };
+static const struct OamData gOamData_840BDA0 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 1, .paletteNum = 0 };
 
-const struct SpriteTemplate gUnknown_840BDA8 = {7, 7, &gOamData_840BDA0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
+static const struct SpriteTemplate gUnknown_840BDA8 = {7, 7, &gOamData_840BDA0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
 
-const struct SpriteTemplate gUnknown_840BDC0 = {6, 6, &gOamData_840BDA0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
+static const struct SpriteTemplate gUnknown_840BDC0 = {6, 6, &gOamData_840BDA0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
 
-const struct OamData gOamData_840BDD8 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_H_RECTANGLE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 0, .paletteNum = 0 };
+static const struct OamData gOamData_840BDD8 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_H_RECTANGLE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 0, .paletteNum = 0 };
 
-const union AnimCmd gAnimCmds_840BDE0[] = {
+static const union AnimCmd gAnimCmds_840BDE0[] = {
 	ANIMCMD_FRAME(0, 0),
 	ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmds_840BDE8[] = {
+static const union AnimCmd gAnimCmds_840BDE8[] = {
 	ANIMCMD_FRAME(32, 4),
 	ANIMCMD_FRAME(0, 4),
 	ANIMCMD_END
 };
 
-const union AnimCmd *const gAnimCmdTable_840BDF4[] = {
+static const union AnimCmd *const gAnimCmdTable_840BDF4[] = {
 	gAnimCmds_840BDE0,
 	gAnimCmds_840BDE8
 };
 
-const struct SpriteTemplate gUnknown_840BDFC = {8, 8, &gOamData_840BDD8, gAnimCmdTable_840BDF4, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
+static const struct SpriteTemplate gUnknown_840BDFC = {8, 8, &gOamData_840BDD8, gAnimCmdTable_840BDF4, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
 
-const struct OamData gOamData_840BE14 = { .affineMode = ST_OAM_AFFINE_DOUBLE, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 1, .paletteNum = 0 };
+static const struct OamData gOamData_840BE14 = { .affineMode = ST_OAM_AFFINE_DOUBLE, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 1, .paletteNum = 0 };
 
-const union AnimCmd gAnimCmd_840BE1C[] = {
+static const union AnimCmd gAnimCmd_840BE1C[] = {
 	ANIMCMD_FRAME(0, 0),
 	ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_840BE24[] = {
+static const union AnimCmd gAnimCmd_840BE24[] = {
 	ANIMCMD_FRAME(64, 0),
 	ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_840BE2C[] = {
+static const union AnimCmd gAnimCmd_840BE2C[] = {
 	ANIMCMD_FRAME(96, 0),
 	ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_840BE34[] = {
+static const union AnimCmd gAnimCmd_840BE34[] = {
 	ANIMCMD_FRAME(160, 0),
 	ANIMCMD_END
 };
 
-const union AnimCmd *const gAnimCmdTable_840BE3C[] = {
+static const union AnimCmd *const gAnimCmdTable_840BE3C[] = {
 	gAnimCmd_840BE1C,
 	gAnimCmd_840BE24,
 	gAnimCmd_840BE2C,
 	gAnimCmd_840BE34
 };
 
-const struct SpriteTemplate gUnknown_840BE4C = {9, 6, &gOamData_840BE14, gAnimCmdTable_840BE3C, NULL, gAffineAnimCmdTable_840BD80, SpriteCallbackDummy};
+static const struct SpriteTemplate gUnknown_840BE4C = {9, 6, &gOamData_840BE14, gAnimCmdTable_840BE3C, NULL, gAffineAnimCmdTable_840BD80, SpriteCallbackDummy};
 
-const struct OamData gOamData_840BE64 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_V_RECTANGLE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 1, .paletteNum = 0 };
+static const struct OamData gOamData_840BE64 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_V_RECTANGLE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 1, .paletteNum = 0 };
 
-const union AnimCmd gAnimCmd_840BE6C[] = {
+static const union AnimCmd gAnimCmd_840BE6C[] = {
 	ANIMCMD_FRAME(0, 8),
 	ANIMCMD_FRAME(32, 4),
 	ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_840BE78[] = {
+static const union AnimCmd gAnimCmd_840BE78[] = {
 	ANIMCMD_FRAME(64, 8),
 	ANIMCMD_FRAME(72, 4),
 	ANIMCMD_END
 };
 
-const union AnimCmd *const gAnimCmdTable_840BE84[] = {
+static const union AnimCmd *const gAnimCmdTable_840BE84[] = {
 	gAnimCmd_840BE6C,
 	gAnimCmd_840BE78
 };
 
-const struct SpriteTemplate gUnknown_840BE8C = {10, 10, &gOamData_840BE64, gAnimCmdTable_840BE84, NULL, gDummySpriteAffineAnimTable, sub_80EE1C4};
+static const struct SpriteTemplate gUnknown_840BE8C = {10, 10, &gOamData_840BE64, gAnimCmdTable_840BE84, NULL, gDummySpriteAffineAnimTable, sub_80EE1C4};
 
-const struct OamData gOamData_840BEA4 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_1, .tileNum = 0x000, .priority = 1, .paletteNum = 0 };
+static const struct OamData gOamData_840BEA4 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_1, .tileNum = 0x000, .priority = 1, .paletteNum = 0 };
 
-const union AnimCmd gAnimCmd_840BEAC[] = {
+static const union AnimCmd gAnimCmd_840BEAC[] = {
 	ANIMCMD_FRAME(0, 10),
 	ANIMCMD_FRAME(4, 10),
 	ANIMCMD_FRAME(8, 10),
@@ -439,13 +439,13 @@ const union AnimCmd gAnimCmd_840BEAC[] = {
 	ANIMCMD_END
 };
 
-const union AnimCmd *const gAnimCmdTable_840BEC0[] = {
+static const union AnimCmd *const gAnimCmdTable_840BEC0[] = {
 	gAnimCmd_840BEAC
 };
 
-const struct SpriteTemplate gUnknown_840BEC4 = {11, 11, &gOamData_840BEA4, gAnimCmdTable_840BEC0, NULL, gDummySpriteAffineAnimTable, sub_80EE8E4};
+static const struct SpriteTemplate gUnknown_840BEC4 = {11, 11, &gOamData_840BEA4, gAnimCmdTable_840BEC0, NULL, gDummySpriteAffineAnimTable, sub_80EE8E4};
 
-const struct CompressedSpriteSheet gUnknown_840BEDC[] = {
+static const struct CompressedSpriteSheet gUnknown_840BEDC[] = {
 	{gUnknown_840926C, 0x0800, 6},
 	{gUnknown_84096CC, 0x0800, 7},
 	{gUnknown_840A3E4, 0x2800, 5},
@@ -460,7 +460,7 @@ const struct CompressedSpriteSheet gUnknown_840BEDC[] = {
 // LoadSpritePalettes uses a {0} entry to signal end of array.
 // Because such an entry is absent in this case, the function
 // continues reading into the next .rodata section.
-const struct SpritePalette gUnknown_840BF14[] = {
+static const struct SpritePalette gUnknown_840BF14[] = {
 	{gUnknown_8405DA4, 6},
 	{gUnknown_84096AC, 7},
 	{gUnknown_8409A1C, 8},
@@ -469,32 +469,32 @@ const struct SpritePalette gUnknown_840BF14[] = {
     // {0}
 };
 
-void sub_80EC5A4(void)
+static void sub_80EC5A4(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-void sub_80EC5B8(void)
+static void sub_80EC5B8(void)
 {
     if (!UpdatePaletteFade())
         SetMainCallback2(sub_80EC870);
 }
 
-void load_copyright_graphics(u16 a, u16 b, u16 c)
+static void load_copyright_graphics(u16 a, u16 b, u16 c)
 {
     LZ77UnCompVram(gUnknown_8402280, (void *)BG_VRAM + a);
     LZ77UnCompVram(gUnknown_84024E4, (void *)BG_VRAM + b);
     LoadPalette(gUnknown_8402260, c, 0x20);
 }
 
-void SerialCb_CopyrightScreen(void)
+static void SerialCb_CopyrightScreen(void)
 {
     GameCubeMultiBoot_HandleSerialInterrupt(&gUnknown_203AAD4);
 }
 
-bool8 sub_80EC62C(void)
+static bool8 sub_80EC62C(void)
 {
     switch (gMain.state)
     {
@@ -586,7 +586,7 @@ void sub_80EC864(void)
     sub_80EC62C();
 }
 
-void sub_80EC870(void)
+static void sub_80EC870(void)
 {
     switch (gMain.state)
     {
@@ -628,7 +628,7 @@ void sub_80EC870(void)
     gMain.state++;
 }
 
-void sub_80EC9D4(void)
+static void sub_80EC9D4(void)
 {
     RunTasks();
     AnimateSprites();
@@ -636,14 +636,14 @@ void sub_80EC9D4(void)
     UpdatePaletteFade();
 }
 
-void sub_80EC9EC(void)
+static void sub_80EC9EC(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-void sub_80ECA00(void)
+static void sub_80ECA00(void)
 {
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
@@ -660,7 +660,7 @@ void sub_80ECA00(void)
     SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
 }
 
-void sub_80ECA70(void)
+static void sub_80ECA70(void)
 {
     struct IntroSequenceData * ptr = Alloc(sizeof(struct IntroSequenceData));
     sub_80ECAA8(ptr, sub_80ECAF0);
@@ -668,13 +668,13 @@ void sub_80ECA70(void)
     SetWordTaskArg(ptr->field_0005, 0, (uintptr_t)ptr);
 }
 
-void sub_80ECAA8(struct IntroSequenceData * ptr, void (*cb)(struct IntroSequenceData *))
+static void sub_80ECAA8(struct IntroSequenceData * ptr, void (*cb)(struct IntroSequenceData *))
 {
     ptr->field_0000 = cb;
     ptr->field_0004 = 0;
 }
 
-void sub_80ECAB0(u8 taskId)
+static void sub_80ECAB0(u8 taskId)
 {
     struct IntroSequenceData * ptr = (void *)GetWordTaskArg(taskId, 0);
     if (JOY_NEW(A_BUTTON | START_BUTTON | SELECT_BUTTON) && ptr->field_0000 != sub_80EDBE8)
@@ -682,7 +682,7 @@ void sub_80ECAB0(u8 taskId)
     ptr->field_0000(ptr);
 }
 
-void sub_80ECAF0(struct IntroSequenceData * this)
+static void sub_80ECAF0(struct IntroSequenceData * this)
 {
     switch (this->field_0004)
     {
@@ -704,7 +704,7 @@ void sub_80ECAF0(struct IntroSequenceData * this)
     }
 }
 
-void sub_80ECB98(struct IntroSequenceData * this)
+static void sub_80ECB98(struct IntroSequenceData * this)
 {
     switch (this->field_0004)
     {
@@ -733,7 +733,7 @@ void sub_80ECB98(struct IntroSequenceData * this)
     }
 }
 
-void sub_80ECC3C(struct IntroSequenceData * this)
+static void sub_80ECC3C(struct IntroSequenceData * this)
 {
     switch (this->field_0004)
     {
@@ -760,7 +760,7 @@ void sub_80ECC3C(struct IntroSequenceData * this)
     }
 }
 
-void sub_80ECCA8(struct IntroSequenceData * this)
+static void sub_80ECCA8(struct IntroSequenceData * this)
 {
     switch (this->field_0004)
     {
@@ -799,7 +799,7 @@ void sub_80ECCA8(struct IntroSequenceData * this)
     }
 }
 
-void sub_80ECD60(struct IntroSequenceData * this)
+static void sub_80ECD60(struct IntroSequenceData * this)
 {
     switch (this->field_0004)
     {
@@ -865,7 +865,7 @@ void sub_80ECD60(struct IntroSequenceData * this)
     }
 }
 
-void sub_80ECEA4(struct IntroSequenceData * this)
+static void sub_80ECEA4(struct IntroSequenceData * this)
 {
     switch (this->field_0004)
     {
@@ -938,7 +938,7 @@ void sub_80ECEA4(struct IntroSequenceData * this)
     }
 }
 
-void sub_80ED0AC(u8 taskId)
+static void sub_80ED0AC(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -958,13 +958,13 @@ void sub_80ED0AC(u8 taskId)
     }
 }
 
-void sub_80ED118(void)
+static void sub_80ED118(void)
 {
     u8 taskId = FindTaskIdByFunc(sub_80ED0AC);
     gTasks[taskId].data[2] = TRUE;
 }
 
-void sub_80ED140(u8 taskId)
+static void sub_80ED140(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -978,7 +978,7 @@ void sub_80ED140(u8 taskId)
     }
 }
 
-void sub_80ED188(struct IntroSequenceData * this)
+static void sub_80ED188(struct IntroSequenceData * this)
 {
     switch (this->field_0004)
     {
@@ -1065,19 +1065,19 @@ void sub_80ED188(struct IntroSequenceData * this)
     }
 }
 
-void sub_80ED40C(u8 taskId)
+static void sub_80ED40C(u8 taskId)
 {
     ChangeBgX(3, 0x0E0, 2);
     ChangeBgX(0, 0x110, 1);
 }
 
-void sub_80ED428(u8 taskId)
+static void sub_80ED428(u8 taskId)
 {
     ChangeBgY(2, 0x020, 1);
     ChangeBgY(1, 0x024, 2);
 }
 
-void sub_80ED444(struct IntroSequenceData * this)
+static void sub_80ED444(struct IntroSequenceData * this)
 {
     u8 spriteId;
 
@@ -1093,7 +1093,7 @@ void sub_80ED444(struct IntroSequenceData * this)
         this->field_001C = &gSprites[spriteId];
 }
 
-void sub_80ED4A0(struct IntroSequenceData * this)
+static void sub_80ED4A0(struct IntroSequenceData * this)
 {
     if (this->field_001C != NULL)
         DestroySprite(this->field_001C);
@@ -1101,7 +1101,7 @@ void sub_80ED4A0(struct IntroSequenceData * this)
         DestroySprite(this->field_0020);
 }
 
-void sub_80ED4C0(struct IntroSequenceData * this)
+static void sub_80ED4C0(struct IntroSequenceData * this)
 {
     switch (this->field_0004)
     {
@@ -1161,7 +1161,7 @@ void sub_80ED4C0(struct IntroSequenceData * this)
     }
 }
 
-void sub_80ED69C(u8 taskId)
+static void sub_80ED69C(u8 taskId)
 {
     if (gTasks[taskId].data[0] == 0)
         ChangeBgX(1, 0x400, 2);
@@ -1169,18 +1169,18 @@ void sub_80ED69C(u8 taskId)
         ChangeBgX(1, 0x020, 2);
 }
 
-void sub_80ED6D8(void)
+static void sub_80ED6D8(void)
 {
     CreateTask(sub_80ED69C, 0);
 }
 
-void sub_80ED6EC(void)
+static void sub_80ED6EC(void)
 {
     u8 taskId = FindTaskIdByFunc(sub_80ED69C);
     gTasks[taskId].data[0] = 1;
 }
 
-void sub_80ED714(u8 taskId)
+static void sub_80ED714(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     if (data[0] == 0)
@@ -1195,25 +1195,25 @@ void sub_80ED714(u8 taskId)
     }
 }
 
-void sub_80ED760(void)
+static void sub_80ED760(void)
 {
     u8 taskId = FindTaskIdByFunc(sub_80ED714);
     gTasks[taskId].data[0] = 1;
 }
 
-void sub_80ED788(void)
+static void sub_80ED788(void)
 {
     u8 taskId = FindTaskIdByFunc(sub_80ED714);
     gTasks[taskId].data[0] = 0;
 }
 
-u8 sub_80ED7B0(void)
+static u8 sub_80ED7B0(void)
 {
     u8 taskId = FindTaskIdByFunc(sub_80ED714);
     return gTasks[taskId].data[2];
 }
 
-void sub_80ED7D4(struct IntroSequenceData * this)
+static void sub_80ED7D4(struct IntroSequenceData * this)
 {
     u8 spriteId = CreateSprite(&gUnknown_840BDFC, 296, 112, 7);
     if (spriteId != MAX_SPRITES)
@@ -1225,7 +1225,7 @@ void sub_80ED7D4(struct IntroSequenceData * this)
         this->field_0024 = NULL;
 }
 
-void sub_80ED818(struct Sprite * sprite)
+static void sub_80ED818(struct Sprite * sprite)
 {
     s16 * data = sprite->data;
 
@@ -1258,7 +1258,7 @@ void sub_80ED818(struct Sprite * sprite)
     }
 }
 
-void sub_80ED898(struct IntroSequenceData * this)
+static void sub_80ED898(struct IntroSequenceData * this)
 {
     switch (this->field_0004)
     {
@@ -1396,12 +1396,12 @@ void sub_80ED898(struct IntroSequenceData * this)
     }
 }
 
-void sub_80EDAD8(struct Sprite * sprite)
+static void sub_80EDAD8(struct Sprite * sprite)
 {
     CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, sprite->oam.affineMode);
 }
 
-void sub_80EDAF0(struct IntroSequenceData * this)
+static void sub_80EDAF0(struct IntroSequenceData * this)
 {
     int i;
 
@@ -1421,7 +1421,7 @@ void sub_80EDAF0(struct IntroSequenceData * this)
     }
 }
 
-void sub_80EDB70(struct IntroSequenceData * this)
+static void sub_80EDB70(struct IntroSequenceData * this)
 {
     this->field_0018->pos1.x += this->field_0018->pos2.x;
     this->field_0018->pos1.y += this->field_0018->pos2.y;
@@ -1430,11 +1430,11 @@ void sub_80EDB70(struct IntroSequenceData * this)
     StartSpriteAffineAnim(this->field_0018, 1);
 }
 
-void nullsub_83(struct Sprite * sprite)
+static void nullsub_83(struct Sprite * sprite)
 {
 }
 
-void sub_80EDBAC(struct IntroSequenceData * this)
+static void sub_80EDBAC(struct IntroSequenceData * this)
 {
     int i;
 
@@ -1446,7 +1446,7 @@ void sub_80EDBAC(struct IntroSequenceData * this)
     }
 }
 
-void sub_80EDBE8(struct IntroSequenceData * this)
+static void sub_80EDBE8(struct IntroSequenceData * this)
 {
     switch (this->field_0004)
     {
@@ -1467,7 +1467,7 @@ void sub_80EDBE8(struct IntroSequenceData * this)
     }
 }
 
-void sub_80EDC40(void)
+static void sub_80EDC40(void)
 {
     int i;
     u8 spriteId;
@@ -1501,7 +1501,7 @@ void sub_80EDC40(void)
     }
 }
 
-void sub_80EDD28(s16 x, s16 y, u16 a2)
+static void sub_80EDD28(s16 x, s16 y, u16 a2)
 {
     u8 spriteId;
     s16 r4 = (a2 & gUnknown_203AB12) + 2;
@@ -1524,12 +1524,12 @@ void sub_80EDD28(s16 x, s16 y, u16 a2)
     }
 }
 
-void sub_80EDDF0(void)
+static void sub_80EDDF0(void)
 {
     CreateTask(sub_80EDE04, 1);
 }
 
-void sub_80EDE04(u8 taskId)
+static void sub_80EDE04(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     u8 r6;
@@ -1560,12 +1560,12 @@ void sub_80EDE04(u8 taskId)
     }
 }
 
-void sub_80EDED8(void)
+static void sub_80EDED8(void)
 {
     CreateTask(sub_80EDEEC, 2);
 }
 
-void sub_80EDEEC(u8 taskId)
+static void sub_80EDEEC(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     u8 r2;
@@ -1586,13 +1586,13 @@ void sub_80EDEEC(u8 taskId)
         data[0] = 0;
 }
 
-struct Sprite * sub_80EDF68(void)
+static struct Sprite * sub_80EDF68(void)
 {
     u8 spriteId = CreateSprite(&gUnknown_840BCDC, 120, 70, 4);
     return &gSprites[spriteId];
 }
 
-void sub_80EDF94(struct IntroSequenceData * this)
+static void sub_80EDF94(struct IntroSequenceData * this)
 {
     u8 taskId;
     this->field_0006 = 0;
@@ -1602,7 +1602,7 @@ void sub_80EDF94(struct IntroSequenceData * this)
     gTasks[taskId].data[4] = GetBgX(0);
 }
 
-void sub_80EDFD8(int a, int b, int c, int d)
+static void sub_80EDFD8(int a, int b, int c, int d)
 {
     ChangeBgY(0, (a << 15) + 0x1F000, 0);
     ChangeBgX(0, d, 0);
@@ -1610,7 +1610,7 @@ void sub_80EDFD8(int a, int b, int c, int d)
     ChangeBgY(0, c << 8, 2);
 }
 
-void sub_80EE024(u8 taskId)
+static void sub_80EE024(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     int b, c;
@@ -1680,7 +1680,7 @@ void sub_80EE024(u8 taskId)
     sub_80EDFD8(data[7], b, c, data[4]);
 }
 
-void sub_80EE160(void)
+static void sub_80EE160(void)
 {
     u8 spriteId;
     
@@ -1695,14 +1695,14 @@ void sub_80EE160(void)
     }
 }
 
-void sub_80EE1C4(struct Sprite * sprite)
+static void sub_80EE1C4(struct Sprite * sprite)
 {
     sprite->invisible ^= TRUE;
     if (sprite->animEnded)
         DestroySprite(sprite);
 }
 
-void sub_80EE200(u8 taskId)
+static void sub_80EE200(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -1728,7 +1728,7 @@ void sub_80EE200(u8 taskId)
     }
 }
 
-void sub_80EE29C(struct Sprite * sprite)
+static void sub_80EE29C(struct Sprite * sprite)
 {
     u32 v;
     sprite->data[0] -= sprite->data[2];
@@ -1750,7 +1750,7 @@ void sub_80EE29C(struct Sprite * sprite)
         DestroySprite(sprite);
 }
 
-void sub_80EE350(struct Sprite * sprite)
+static void sub_80EE350(struct Sprite * sprite)
 {
     u32 v;
 
@@ -1773,7 +1773,7 @@ void sub_80EE350(struct Sprite * sprite)
         DestroySprite(sprite);
 }
 
-void sub_80EE40C(struct Sprite * sprite)
+static void sub_80EE40C(struct Sprite * sprite)
 {
     if (sprite->data[2])
     {
@@ -1822,19 +1822,19 @@ void sub_80EE40C(struct Sprite * sprite)
     }
 }
 
-void sub_80EE4DC(struct Sprite * sprite)
+static void sub_80EE4DC(struct Sprite * sprite)
 {
     if (sprite->animEnded)
         DestroySprite(sprite);
 }
 
-void sub_80EE4F8(struct IntroSequenceData * this)
+static void sub_80EE4F8(struct IntroSequenceData * this)
 {
     u8 spriteId = CreateSprite(&gUnknown_840BD88, 0, 0, 9);
     this->field_0018 = &gSprites[spriteId];
 }
 
-void sub_80EE528(struct Sprite * sprite, s16 a1, s16 a2, u16 a3)
+static void sub_80EE528(struct Sprite * sprite, s16 a1, s16 a2, u16 a3)
 {
     sprite->data[0] = a1 << 4;
     sprite->data[1] = ((a2 - a1) << 4) / a3;
@@ -1846,7 +1846,7 @@ void sub_80EE528(struct Sprite * sprite, s16 a1, s16 a2, u16 a3)
     sprite->callback = sub_80EE580;
 }
 
-void sub_80EE580(struct Sprite * sprite)
+static void sub_80EE580(struct Sprite * sprite)
 {
     sprite->data[4]++;
     if (sprite->data[4] >= 40)
@@ -1863,12 +1863,12 @@ void sub_80EE580(struct Sprite * sprite)
     }
 }
 
-bool32 sub_80EE5C8(struct IntroSequenceData * ptr)
+static bool32 sub_80EE5C8(struct IntroSequenceData * ptr)
 {
     return ptr->field_0018->callback == sub_80EE580 ? TRUE : FALSE;
 }
 
-void sub_80EE5E4(struct IntroSequenceData * ptr)
+static void sub_80EE5E4(struct IntroSequenceData * ptr)
 {
     StartSpriteAnim(ptr->field_0018, 2);
     ptr->field_0018->data[0] = 0;
@@ -1877,7 +1877,7 @@ void sub_80EE5E4(struct IntroSequenceData * ptr)
     ptr->field_0018->callback = sub_80EE610;
 }
 
-void sub_80EE610(struct Sprite * sprite)
+static void sub_80EE610(struct Sprite * sprite)
 {
     switch (sprite->data[0])
     {
@@ -1913,7 +1913,7 @@ void sub_80EE610(struct Sprite * sprite)
     }
 }
 
-void sub_80EE6A4(struct IntroSequenceData * ptr)
+static void sub_80EE6A4(struct IntroSequenceData * ptr)
 {
     gUnknown_203AB0A = 16;
     gUnknown_203AB04 = 3;
@@ -1929,7 +1929,7 @@ void sub_80EE6A4(struct IntroSequenceData * ptr)
     ptr->field_0018->callback = sub_80EE704;
 }
 
-void sub_80EE704(struct Sprite * sprite)
+static void sub_80EE704(struct Sprite * sprite)
 {
     switch (sprite->data[0])
     {
@@ -1988,12 +1988,12 @@ void sub_80EE704(struct Sprite * sprite)
     }
 }
 
-bool8 sub_80EE850(struct IntroSequenceData * ptr)
+static bool8 sub_80EE850(struct IntroSequenceData * ptr)
 {
     return ptr->field_0018->callback == SpriteCallbackDummy ? FALSE : TRUE;
 }
 
-void sub_80EE864(s16 a1, s16 a2, s16 a3)
+static void sub_80EE864(s16 a1, s16 a2, s16 a3)
 {
     int i;
     u8 spriteId;
@@ -2011,7 +2011,7 @@ void sub_80EE864(s16 a1, s16 a2, s16 a3)
     }
 }
 
-void sub_80EE8E4(struct Sprite * sprite)
+static void sub_80EE8E4(struct Sprite * sprite)
 {
     s16 * data = sprite->data;
 
@@ -2039,7 +2039,7 @@ void sub_80EE8E4(struct Sprite * sprite)
     }
 }
 
-void sub_80EE970(struct Sprite * sprite, u16 a1, s16 a2, u8 a3)
+static void sub_80EE970(struct Sprite * sprite, u16 a1, s16 a2, u8 a3)
 {
     sprite->data[0] = 0;
     sprite->data[1] = a1;
@@ -2053,7 +2053,7 @@ void sub_80EE970(struct Sprite * sprite, u16 a1, s16 a2, u8 a3)
     sprite->callback = sub_80EE9D4;
 }
 
-void sub_80EE9D4(struct Sprite * sprite)
+static void sub_80EE9D4(struct Sprite * sprite)
 {
     switch (sprite->data[0])
     {
@@ -2100,7 +2100,7 @@ void sub_80EE9D4(struct Sprite * sprite)
     }
 }
 
-void sub_80EEA94(struct IntroSequenceData * ptr)
+static void sub_80EEA94(struct IntroSequenceData * ptr)
 {
     ptr->field_0018->data[0] = 0;
     ptr->field_0018->data[1] = 0;
@@ -2119,7 +2119,7 @@ void sub_80EEA94(struct IntroSequenceData * ptr)
     ptr->field_0018->callback = sub_80EEB08;
 }
 
-void sub_80EEB08(struct Sprite * sprite)
+static void sub_80EEB08(struct Sprite * sprite)
 {
     switch (sprite->data[0])
     {
@@ -2161,7 +2161,7 @@ void sub_80EEB08(struct Sprite * sprite)
     }
 }
 
-void sub_80EEBE4(void)
+static void sub_80EEBE4(void)
 {
     int i;
     

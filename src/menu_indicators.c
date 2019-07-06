@@ -9,6 +9,42 @@
 #include "list_menu.h"
 #include "menu_indicators.h"
 
+struct ScrollIndicatorPair
+{
+    u8 field_0;
+    u16 *scrollOffset;
+    u16 fullyUpThreshold;
+    u16 fullyDownThreshold;
+    u8 topSpriteId;
+    u8 bottomSpriteId;
+    u16 tileTag;
+    u16 palTag;
+};
+
+struct RedOutlineCursor
+{
+    struct SubspriteTable subspriteTable;
+    struct Subsprite *subspritesPtr;
+    u8 spriteId;
+    u16 tileTag;
+    u16 palTag;
+};
+
+struct RedArrowCursor
+{
+    u8 spriteId;
+    u16 tileTag;
+    u16 palTag;
+};
+
+struct ScrollIndicatorTemplate
+{
+    u8 animNum:4;
+    u8 bounceDir:4;
+    u8 multiplier;
+    s16 frequency;
+};
+
 static EWRAM_DATA struct ScrollArrowsTemplate sTempScrollArrowTemplate = {0};
 
 static void SpriteCallback_ScrollIndicatorArrow(struct Sprite *sprite);

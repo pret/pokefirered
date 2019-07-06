@@ -23,10 +23,12 @@ enum LanguageId {
     LANGUAGE_ITALIAN = 4,
     LANGUAGE_GERMAN = 5,
     // 6 goes unused but the theory is it was meant to be Korean
-        LANGUAGE_SPANISH = 7,
+	LANGUAGE_SPANISH = 7,
 };
 
+#ifdef ENGLISH
 #define GAME_LANGUAGE (LANGUAGE_ENGLISH)
+#endif
 
 #define PC_ITEMS_COUNT      30
 #define BAG_ITEMS_COUNT     42

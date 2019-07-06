@@ -3,15 +3,41 @@ CPP := $(CC) -E
 LD := tools/binutils/bin/arm-none-eabi-ld
 OBJCOPY := tools/binutils/bin/arm-none-eabi-objcopy
 
+GAME_VERSION := FIRERED
+REVISION := 0
+GAME_LANGUAGE := ENGLISH
+
+# So long as baserom.gba is required, we error out if the
+# user tries to build any ROM other than FireRed.
+ifneq ($(GAME_VERSION),FIRERED)
+$(error We can only build English Pokemon FireRed v1.0 currently)
+else ifneq ($(REVISION),0)
+$(error We can only build English Pokemon FireRed v1.0 currently)
+else ifneq ($(GAME_LANGUAGE),ENGLISH)
+$(error We can only build English Pokemon FireRed v1.0 currently)
+endif
+
+ifeq ($(GAME_VERSION),FIRERED)
 TITLE       := POKEMON FIRE
-GAME_CODE   := BPRE
+GAME_CODE   := BPR
+BUILD_NAME  := firered
+else
+TITLE       := POKEMON LEAF
+GAME_CODE   := BPL
+BUILD_NAME  := leafgreen
+endif
+ifeq ($(GAME_LANGUAGE),ENGLISH)
+GAME_CODE   := $(GAME_CODE)E
+endif
+ifneq ($(REVISION),0)
+BUILD_NAME  := $(BUILD_NAME)_rev$(REVISION)
+endif
 MAKER_CODE  := 01
-REVISION    := 0
 
 SHELL := /bin/bash -o pipefail
 
-ROM := pokefirered.gba
-OBJ_DIR := build/firered
+ROM := poke$(BUILD_NAME).gba
+OBJ_DIR := build/$(BUILD_NAME)
 
 ELF = $(ROM:.gba=.elf)
 MAP = $(ROM:.gba=.map)
@@ -26,12 +52,12 @@ ASM_BUILDDIR = $(OBJ_DIR)/$(ASM_SUBDIR)
 DATA_ASM_BUILDDIR = $(OBJ_DIR)/$(DATA_ASM_SUBDIR)
 SONG_BUILDDIR = $(OBJ_DIR)/$(SONG_SUBDIR)
 
-ASFLAGS := -mcpu=arm7tdmi
+ASFLAGS := -mcpu=arm7tdmi --defsym $(GAME_VERSION)=1 --defsym REVISION=$(REVISION) --defsym $(GAME_LANGUAGE)=1
 
 CC1             := tools/agbcc/bin/agbcc
 override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
 
-CPPFLAGS := -I tools/agbcc -I tools/agbcc/include -iquote include -nostdinc -undef
+CPPFLAGS := -I tools/agbcc -I tools/agbcc/include -iquote include -nostdinc -undef -D$(GAME_VERSION) -DREVISION=$(REVISION) -D$(GAME_LANGUAGE)
 
 LDFLAGS = -Map ../../$(MAP)
 

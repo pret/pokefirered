@@ -1112,75 +1112,9 @@ gUnknown_203AAC4: @ 203AAC4
 gUnknown_203AAC6: @ 203AAC6
 	.space 0xE
 
-gUnknown_203AAD4: @ 203AAD4
-	.space 0x2C
+	.include "src/intro.o"
 
-gUnknown_203AB00: @ 203AB00
-	.space 0x2
-
-gUnknown_203AB02: @ 203AB02
-	.space 0x2
-
-gUnknown_203AB04: @ 203AB04
-	.space 0x2
-
-gUnknown_203AB06: @ 203AB06
-	.space 0x2
-
-gUnknown_203AB08: @ 203AB08
-	.space 0x2
-
-gUnknown_203AB0A: @ 203AB0A
-	.space 0x2
-
-gUnknown_203AB0C: @ 203AB0C
-	.space 0x2
-
-gUnknown_203AB0E: @ 203AB0E
-	.space 0x2
-
-gUnknown_203AB10: @ 203AB10
-	.space 0x2
-
-gUnknown_203AB12: @ 203AB12
-	.space 0x2
-
-gUnknown_203AB14: @ 203AB14
-	.space 0x2
-
-gUnknown_203AB16: @ 203AB16
-	.space 0x2
-
-gUnknown_203AB18: @ 203AB18
-	.space 0x2
-
-gUnknown_203AB1A: @ 203AB1A
-	.space 0x2
-
-gUnknown_203AB1C: @ 203AB1C
-	.space 0x2
-
-gUnknown_203AB1E: @ 203AB1E
-	.space 0x2
-
-gUnknown_203AB20: @ 203AB20
-	.space 0x2
-
-gUnknown_203AB22: @ 203AB22
-	.space 0x2
-
-gUnknown_203AB24: @ 203AB24
-	.space 0x4
-
-gUnknown_203AB28: @ 203AB28
-	.space 0x4
-
-gUnknown_203AB2C: @ 203AB2C
-	.space 0x4
-
-gUnknown_203AB30: @ 203AB30
-	.space 0x4
-
+	.align 2
 gUnknown_203AB34: @ 203AB34
 	.space 0x4
 

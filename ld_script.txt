@@ -210,7 +210,7 @@ SECTIONS {
         asm/battle_tower.o(.text);
         asm/battle_controller_oak.o(.text);
         asm/player_pc.o(.text);
-        asm/intro.o(.text);
+        src/intro.o(.text);
         asm/battle_anim_special.o(.text);
         asm/hall_of_fame.o(.text);
         asm/credits.o(.text);
@@ -418,6 +418,8 @@ SECTIONS {
         data/data_83F5738.o(.rodata);
         src/save.o(.rodata);
         data/data_83FECCC.o(.rodata);
+		src/intro.o(.rodata);
+        data/data_83FECCC.o(.rodata.battle_anim_special);
         data/strings.o(.rodata);
         data/data_83FECCC.o(.rodata.841EE44);
         src/new_menu_helpers.o(.rodata);

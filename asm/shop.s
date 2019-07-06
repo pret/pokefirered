@@ -2164,7 +2164,7 @@ sub_809BBC0: @ 809BBC0
 	cmp r0, 0
 	bne _0809BC8E
 	ldrb r0, [r5, 0xE]
-	bl ListMenuHandleInput
+	bl ListMenu_ProcessInput
 	adds r4, r0, 0
 	ldrb r0, [r5, 0xE]
 	ldr r7, _0809BC08 @ =gUnknown_2039942
@@ -2691,7 +2691,7 @@ sub_809C04C: @ 809C04C
 	ldrb r0, [r2, 0xE]
 	movs r1, 0
 	movs r2, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	bl sub_809B604
 	ldr r0, _0809C090 @ =CB2_ReturnToField
 	bl SetMainCallback2

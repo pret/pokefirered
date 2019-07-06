@@ -1168,9 +1168,8 @@ gUnknown_203ACEC: @ 203ACEC
 gUnknown_203ACF0: @ 203ACF0
 	.space 0x4
 
-gUnknown_203ACF4: @ 203ACF4
-	.space 0x8
-
+	.include "src/list_menu.o"
+	.align 2
 gUnknown_203ACFC: @ 203ACFC
 	.space 0x6
 

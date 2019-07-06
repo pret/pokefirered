@@ -77,5 +77,7 @@ u8 ListMenuAddCursorObjectInternal(struct CursorStruct *cursor, u32 cursorKind);
 u8 ListMenuAddRedOutlineCursorObject(struct CursorStruct *cursor);
 void ListMenuUpdateRedOutlineCursorObject(u8 taskId, u16 x, u16 y);
 void ListMenuRemoveRedOutlineCursorObject(u8 taskId);
+void ListMenuRemoveCursorObject(u8 taskId, u32 cursorKind);
+void ListMenuUpdateCursorObject(u8 taskId, u16 x, u16 y, u32 cursorKind);
 
 #endif //GUARD_MENU_INDICATORS_H

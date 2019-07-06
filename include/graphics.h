@@ -32,6 +32,9 @@ extern const u8 gInterfacePal_LuxuryBall[];
 extern const u8 gInterfaceGfx_PremierBall[];
 extern const u8 gInterfacePal_PremierBall[];
 extern const u8 gOpenPokeballGfx[];
+extern const u8 gFireRedMenuElements_Gfx[];
+extern const u16 gFireRedMenuElements1_Pal[];
+extern const u16 gFireRedMenuElements2_Pal[];
 
 extern const u8 gItemIcon_QuestionMark[];
 extern const u8 gItemIconPalette_QuestionMark[];

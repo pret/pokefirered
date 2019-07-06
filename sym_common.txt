@@ -298,12 +298,9 @@ gUnknown_3005E10: @ 3005E10
 gUnknown_3005E20: @ 3005E20
 	.space 0x40
 
-gUnknown_3005E60: @ 3005E60
-	.space 0x10
-
-gMultiuseListMenuTemplate: @ 3005E70
-	.space 0x18
-
+	.align 4
+	.include "list_menu.o"
+	.align 2
 	.include "quest_log.o"
 
 gUnknown_3005E8C: @ 3005E8C

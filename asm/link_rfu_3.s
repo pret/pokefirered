@@ -620,7 +620,7 @@ _08115DD4:
 	bl sub_81165E8
 	strb r0, [r5, 0x13]
 	ldrb r0, [r5, 0x12]
-	bl sub_8107180
+	bl RedrawListMenu
 	b _0811610C
 	.align 2, 0
 _08115DE4: .4byte gUnknown_203B058
@@ -783,7 +783,7 @@ _08115EF4:
 	movs r0, 0
 	strb r0, [r1, 0x1B]
 	ldrb r0, [r5, 0x12]
-	bl sub_8107180
+	bl RedrawListMenu
 	ldrb r0, [r5, 0x13]
 	adds r0, 0x1
 	strb r0, [r5, 0x13]
@@ -870,7 +870,7 @@ _08115FB4:
 	ldr r0, [r5]
 	bl sub_81165E8
 	ldrb r0, [r5, 0x12]
-	bl sub_8107180
+	bl RedrawListMenu
 _08115FF0:
 	movs r0, 0x4
 	strb r0, [r5, 0xC]
@@ -1139,7 +1139,7 @@ sub_81161E4: @ 81161E4
 	ldrb r0, [r4, 0x12]
 	movs r1, 0
 	movs r2, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	ldrb r0, [r4, 0x10]
 	bl ClearWindowTilemap
 	ldrb r0, [r4, 0xF]
@@ -1400,7 +1400,7 @@ _08116460:
 	movs r0, 0x2
 	bl PlaySE
 	ldrb r0, [r5, 0x12]
-	bl sub_8107180
+	bl RedrawListMenu
 	ldr r4, _081164A0 @ =gStringVar2
 	ldrb r0, [r5, 0x13]
 	lsls r0, 5
@@ -1433,7 +1433,7 @@ _081164AC:
 	movs r1, 0
 	bl sub_80FB9E4
 	ldrb r0, [r5, 0x12]
-	bl sub_8107180
+	bl RedrawListMenu
 	strb r4, [r5, 0xC]
 	movs r0, 0x1
 	b _081164C2
@@ -1972,7 +1972,7 @@ _08116916:
 	b _08116BF6
 _0811691E:
 	ldrb r0, [r6, 0xE]
-	bl ListMenuHandleInput
+	bl ListMenu_ProcessInput
 	adds r4, r0, 0
 	ldr r0, _0811696C @ =gMain
 	ldrh r1, [r0, 0x2E]
@@ -2301,7 +2301,7 @@ _08116BF4:
 	strb r0, [r6, 0x8]
 _08116BF6:
 	ldrb r0, [r6, 0xE]
-	bl sub_8107180
+	bl RedrawListMenu
 	b _08116D06
 _08116BFE:
 	bl sub_80FB9F4
@@ -2322,7 +2322,7 @@ _08116C10:
 	ldrb r0, [r6, 0xE]
 	movs r1, 0
 	movs r2, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	ldrb r0, [r6, 0xC]
 	bl ClearWindowTilemap
 	ldrb r0, [r6, 0xB]
@@ -2480,7 +2480,7 @@ sub_8116D60: @ 8116D60
 	movs r1, 0
 	bl sub_80FCD74
 	ldrb r0, [r4, 0xE]
-	bl sub_8107180
+	bl RedrawListMenu
 	ldr r5, _08116DD4 @ =gStringVar1
 	ldrb r0, [r4, 0xF]
 	lsls r0, 5
@@ -4151,7 +4151,7 @@ _08117BF4:
 	bl sub_81165E8
 	strb r0, [r5, 0x13]
 	ldrb r0, [r5, 0x12]
-	bl sub_8107180
+	bl RedrawListMenu
 _08117C02:
 	movs r0, 0x2
 	strb r0, [r5, 0xC]
@@ -4198,7 +4198,7 @@ _08117C42:
 	adds r1, r0
 	strb r4, [r1, 0x1B]
 	ldrb r0, [r5, 0x12]
-	bl sub_8107180
+	bl RedrawListMenu
 	movs r0, 0x5
 	strb r0, [r5, 0x19]
 	ldrb r1, [r5, 0x13]
@@ -4268,7 +4268,7 @@ _08117CB2:
 	movs r0, 0
 	strb r0, [r1, 0x1B]
 	ldrb r0, [r5, 0x12]
-	bl sub_8107180
+	bl RedrawListMenu
 	ldrb r0, [r5, 0x13]
 	adds r0, 0x1
 	strb r0, [r5, 0x13]
@@ -4327,7 +4327,7 @@ _08117D3C:
 	ldr r0, [r5]
 	bl sub_81165E8
 	ldrb r0, [r5, 0x12]
-	bl sub_8107180
+	bl RedrawListMenu
 	movs r0, 0x2
 	strb r0, [r5, 0xC]
 _08117D7C:
@@ -4398,7 +4398,7 @@ _08117DEE:
 	ldrb r0, [r5, 0x12]
 	movs r1, 0
 	movs r2, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 	ldrb r0, [r5, 0xF]
@@ -4457,7 +4457,7 @@ _08117E80:
 	ldrb r0, [r5, 0x12]
 	movs r1, 0
 	movs r2, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 	ldrb r0, [r5, 0xF]
@@ -4673,11 +4673,11 @@ _08118070:
 	bl PlaySE
 _08118086:
 	ldrb r0, [r5, 0xE]
-	bl sub_8107180
+	bl RedrawListMenu
 	b _08118288
 _0811808E:
 	ldrb r0, [r5, 0xE]
-	bl ListMenuHandleInput
+	bl ListMenu_ProcessInput
 	adds r2, r0, 0
 	ldr r0, _08118128 @ =gMain
 	ldrh r1, [r0, 0x2E]
@@ -4707,7 +4707,7 @@ _0811808E:
 	movs r1, 0
 	bl sub_80FCD74
 	ldrb r0, [r5, 0xE]
-	bl sub_8107180
+	bl RedrawListMenu
 	ldr r4, _0811812C @ =gStringVar1
 	ldrb r0, [r5, 0xF]
 	lsls r0, 5
@@ -4842,7 +4842,7 @@ _081181EC:
 	ldrb r0, [r5, 0xE]
 	movs r1, 0
 	movs r2, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 	ldrb r0, [r5, 0xD]
@@ -5085,14 +5085,14 @@ _0811841E:
 	b _08118604
 _08118426:
 	ldrb r0, [r5, 0xE]
-	bl sub_8107180
+	bl RedrawListMenu
 	b _08118604
 _0811842E:
 	ldrb r0, [r5, 0x13]
 	cmp r0, 0
 	beq _0811843A
 	ldrb r0, [r5, 0xE]
-	bl ListMenuHandleInput
+	bl ListMenu_ProcessInput
 _0811843A:
 	ldrb r0, [r5, 0x14]
 	cmp r0, 0x78
@@ -5242,7 +5242,7 @@ _08118564:
 	ldrb r0, [r5, 0xE]
 	movs r1, 0
 	movs r2, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 	ldrb r0, [r5, 0xB]
@@ -8715,7 +8715,7 @@ _0811A270: .4byte gMultiuseListMenuTemplate
 _0811A274:
 	mov r3, r9
 	ldrb r0, [r3]
-	bl ListMenuHandleInput
+	bl ListMenu_ProcessInput
 	mov r8, r0
 	ldr r0, _0811A2AC @ =gMain
 	ldrh r1, [r0, 0x2E]
@@ -8726,7 +8726,7 @@ _0811A274:
 	ldrb r0, [r4]
 	movs r1, 0
 	movs r2, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	ldrb r0, [r5]
 	movs r1, 0x1
 	bl ClearStdWindowAndFrame
@@ -8747,7 +8747,7 @@ _0811A2B0:
 	ldrb r0, [r6]
 	movs r1, 0
 	movs r2, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	ldrb r0, [r5]
 	movs r1, 0x1
 	bl ClearStdWindowAndFrame
@@ -8821,7 +8821,7 @@ _0811A350: .4byte gUnknown_8456F1C
 _0811A354: .4byte gMultiuseListMenuTemplate
 _0811A358:
 	ldrb r0, [r5]
-	bl ListMenuHandleInput
+	bl ListMenu_ProcessInput
 	adds r1, r0, 0
 	ldr r0, _0811A3A8 @ =gMain
 	ldrh r2, [r0, 0x2E]
@@ -8842,7 +8842,7 @@ _0811A37E:
 	ldrb r0, [r5]
 	movs r1, 0
 	movs r2, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	ldrb r0, [r4]
 	movs r1, 0x1
 	bl ClearStdWindowAndFrame
@@ -8867,7 +8867,7 @@ _0811A3AC:
 	ldrb r0, [r5]
 	movs r1, 0
 	movs r2, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	ldrb r0, [r4]
 	movs r1, 0x1
 	bl ClearStdWindowAndFrame
@@ -9999,7 +9999,7 @@ _0811AC3C:
 	adds r0, r6, 0
 	movs r2, 0x44
 	adds r3, r5, 0
-	bl blit_move_info_icon
+	bl BlitMoveInfoIcon
 	movs r0, 0xB
 	mov r2, r8
 	muls r2, r0

@@ -2781,7 +2781,7 @@ sub_80CBB28: @ 80CBB28
 	ldrh r0, [r6, 0x24]
 	lsls r0, 24
 	lsrs r0, 24
-	bl ListMenuHandleInput
+	bl ListMenu_ProcessInput
 	adds r4, r0, 0
 	movs r0, 0x2
 	negs r0, r0
@@ -2854,7 +2854,7 @@ sub_80CBBAC: @ 80CBBAC
 	lsrs r0, 24
 	movs r1, 0
 	movs r2, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	ldr r0, _080CBC28 @ =gUnknown_2039A14
 	ldr r0, [r0]
 	bl Free

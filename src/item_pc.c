@@ -653,7 +653,7 @@ static void Task_ItemPcTurnOff2(u8 taskId)
 
     if (!gPaletteFade.active && !sub_80A0AAC())
     {
-        DestroyListMenu(data[0], &sListMenuState.scroll, &sListMenuState.row);
+        DestroyListMenuTask(data[0], &sListMenuState.scroll, &sListMenuState.row);
         if (sStateDataPtr->savedCallback != NULL)
             SetMainCallback2(sStateDataPtr->savedCallback);
         else
@@ -737,7 +737,7 @@ static void Task_ItemPcMain(u8 taskId)
                 return;
             }
         }
-        input = ListMenuHandleInput(data[0]);
+        input = ListMenu_ProcessInput(data[0]);
         ListMenuGetScrollAndRow(data[0], &sListMenuState.scroll, &sListMenuState.row);
         switch (input)
         {
@@ -772,7 +772,7 @@ static void ItemPc_MoveItemModeInit(u8 taskId, s16 pos)
 {
     s16 * data = gTasks[taskId].data;
 
-    sub_8107BD0(data[0], 16, 1);
+    ListMenuSetUnkIndicatorsStructField(data[0], 16, 1);
     data[1] = pos;
     sStateDataPtr->moveModeOrigPos = pos;
     StringCopy(gStringVar1, ItemId_GetName(ItemPc_GetItemIdBySlotId(data[1])));
@@ -789,7 +789,7 @@ static void Task_ItemPcMoveItemModeRun(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
-    ListMenuHandleInput(data[0]);
+    ListMenu_ProcessInput(data[0]);
     ListMenuGetScrollAndRow(data[0], &sListMenuState.scroll, &sListMenuState.row);
     sub_80986A8(-32, ListMenuGetYCoordForPrintingArrowCursor(data[0]));
     if (JOY_NEW(A_BUTTON | SELECT_BUTTON))
@@ -814,7 +814,7 @@ static void ItemPc_InsertItemIntoNewSlot(u8 taskId, u32 pos)
     else
     {
         ItemMenu_MoveItemSlotToNewPositionInArray(gSaveBlock1Ptr->pcItems, data[1], pos);
-        DestroyListMenu(data[0], &sListMenuState.scroll, &sListMenuState.row);
+        DestroyListMenuTask(data[0], &sListMenuState.scroll, &sListMenuState.row);
         if (data[1] < pos)
             sListMenuState.row--;
         ItemPc_BuildListMenuTemplate();
@@ -828,7 +828,7 @@ static void ItemPc_MoveItemModeCancel(u8 taskId, u32 pos)
 {
     s16 * data = gTasks[taskId].data;
 
-    DestroyListMenu(data[0], &sListMenuState.scroll, &sListMenuState.row);
+    DestroyListMenuTask(data[0], &sListMenuState.scroll, &sListMenuState.row);
     if (data[1] < pos)
         sListMenuState.row--;
     ItemPc_BuildListMenuTemplate();
@@ -947,7 +947,7 @@ static void Task_ItemPcCleanUpWithdraw(u8 taskId)
 
     ItemPc_DestroySubwindow(2);
     PutWindowTilemap(1);
-    DestroyListMenu(data[0], &sListMenuState.scroll, &sListMenuState.row);
+    DestroyListMenuTask(data[0], &sListMenuState.scroll, &sListMenuState.row);
     ItemPc_CountPcItems();
     ItemPc_SetCursorPosition();
     ItemPc_BuildListMenuTemplate();

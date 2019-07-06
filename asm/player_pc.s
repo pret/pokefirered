@@ -1134,7 +1134,7 @@ sub_80EBF40: @ 80EBF40
 	cmp r0, 0
 	bne _080EBFEA
 	ldrb r0, [r4, 0x16]
-	bl ListMenuHandleInput
+	bl ListMenu_ProcessInput
 	adds r6, r0, 0
 	ldrb r0, [r4, 0x16]
 	ldr r7, _080EBF9C @ =gUnknown_203AAC6
@@ -1174,7 +1174,7 @@ _080EBFB6:
 	ldrb r0, [r4, 0x16]
 	adds r1, r7, 0
 	mov r2, r8
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	movs r0, 0
 	bl ScheduleBgCopyTilemapToVram
 	mov r1, r8
@@ -1288,7 +1288,7 @@ sub_80EC094: @ 80EC094
 	ldrb r0, [r4, 0x16]
 	movs r1, 0
 	movs r2, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	movs r0, 0
 	bl ScheduleBgCopyTilemapToVram
 	bl sub_810EDB0

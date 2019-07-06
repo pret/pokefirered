@@ -6636,7 +6636,7 @@ _08137CA4:
 	adds r3, r2
 	lsrs r3, 16
 	movs r2, 0x3
-	bl blit_move_info_icon
+	bl BlitMoveInfoIcon
 _08137CDE:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -6660,7 +6660,7 @@ _08137CDE:
 	lsrs r1, 24
 	movs r2, 0x3
 	movs r3, 0x75
-	bl blit_move_info_icon
+	bl BlitMoveInfoIcon
 _08137D0E:
 	pop {r4,r5}
 	pop {r0}
@@ -8325,7 +8325,7 @@ _08138A62:
 	lsrs r1, 24
 	movs r2, 0x2F
 	movs r3, 0x23
-	bl blit_move_info_icon
+	bl BlitMoveInfoIcon
 	ldr r1, [r6]
 	adds r4, r1, r4
 	ldr r3, _08138AB8 @ =0x00003221
@@ -8342,7 +8342,7 @@ _08138A62:
 	lsrs r1, 24
 	movs r2, 0x53
 	movs r3, 0x23
-	bl blit_move_info_icon
+	bl BlitMoveInfoIcon
 	b _08138B0E
 	.align 2, 0
 _08138AB0: .4byte 0x00003003
@@ -8365,7 +8365,7 @@ _08138ABC:
 	lsrs r1, 24
 	movs r2, 0
 	movs r3, 0x3
-	bl blit_move_info_icon
+	bl BlitMoveInfoIcon
 	ldr r2, [r6]
 	adds r4, r2, r4
 	ldr r1, _08138B1C @ =0x00003221
@@ -8381,7 +8381,7 @@ _08138ABC:
 	lsrs r1, 24
 	movs r2, 0x24
 	movs r3, 0x3
-	bl blit_move_info_icon
+	bl BlitMoveInfoIcon
 _08138B04:
 	ldr r0, [r6]
 	adds r0, r5

@@ -734,7 +734,7 @@ static void TeachyTvOptionListController(u8 taskId)
     TeachyTvBg2AnimController();
     if (!gPaletteFade.active)
     {
-        input = ListMenuHandleInput(data[0]);
+        input = ListMenu_ProcessInput(data[0]);
         ListMenuGetScrollAndRow(data[0], &sStaticResources.scrollOffset, &sStaticResources.selectedRow);
         if ((JOY_NEW(SELECT_BUTTON) && sStaticResources.callback != ReturnToBagFromKeyItem))
         {
@@ -754,7 +754,7 @@ static void TeachyTvOptionListController(u8 taskId)
             default:
                 PlaySE(SE_SELECT);
                 sStaticResources.whichScript = input;
-                DestroyListMenu(data[0], &sStaticResources.scrollOffset, &sStaticResources.selectedRow);
+                DestroyListMenuTask(data[0], &sStaticResources.scrollOffset, &sStaticResources.selectedRow);
                 TeachyTvClearWindowRegs();
                 ClearWindowTilemap(1);
                 ScheduleBgCopyTilemapToVram(0);

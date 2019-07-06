@@ -1409,7 +1409,7 @@ sub_80E5204: @ 80E5204
 	ldr r1, _080E525C @ =0x00000263
 	adds r0, r1
 	ldrb r0, [r0]
-	bl ListMenuHandleInput
+	bl ListMenu_ProcessInput
 	ldr r0, _080E5260 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
@@ -1568,7 +1568,7 @@ sub_80E5340: @ 80E5340
 	movs r0, 0x2
 	movs r2, 0x1
 	movs r3, 0x4
-	bl blit_move_info_icon
+	bl BlitMoveInfoIcon
 	ldrb r0, [r4, 0x1]
 	cmp r0, 0x1
 	bhi _080E5388
@@ -1680,27 +1680,27 @@ sub_80E5444: @ 80E5444
 	movs r1, 0x13
 	movs r2, 0x1
 	movs r3, 0x4
-	bl blit_move_info_icon
+	bl BlitMoveInfoIcon
 	movs r0, 0x1
 	movs r1, 0x14
 	movs r2, 0
 	movs r3, 0x4
-	bl blit_move_info_icon
+	bl BlitMoveInfoIcon
 	movs r0, 0x1
 	movs r1, 0x15
 	movs r2, 0
 	movs r3, 0x13
-	bl blit_move_info_icon
+	bl BlitMoveInfoIcon
 	movs r0, 0
 	movs r1, 0x16
 	movs r2, 0x1
 	movs r3, 0x13
-	bl blit_move_info_icon
+	bl BlitMoveInfoIcon
 	movs r0, 0
 	movs r1, 0x17
 	movs r2, 0x1
 	movs r3, 0x22
-	bl blit_move_info_icon
+	bl BlitMoveInfoIcon
 	movs r0, 0
 	bl PutWindowTilemap
 	movs r0, 0x1

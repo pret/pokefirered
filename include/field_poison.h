@@ -6,7 +6,7 @@
 enum {
     FLDPSN_NONE,
     FLDPSN_PSN,
-    FLDPSN_FNT,
+    FLDPSN_FNT
 };
 
 void ExecuteWhiteOut(void);

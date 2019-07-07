@@ -24,7 +24,7 @@ void DynamicPlaceholderTextUtil_Reset(void)
     {
         *ptr2-- = fillval;
     }
-    while ((int)ptr2 >= (int)ptr);
+    while ((intptr_t)ptr2 >= (intptr_t)ptr);
 }
 
 void DynamicPlaceholderTextUtil_SetPlaceholderPtr(u8 idx, const u8 *ptr)

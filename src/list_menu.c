@@ -132,11 +132,11 @@ s32 DoMysteryGiftListMenu(const struct WindowTemplate *windowTemplate, const str
         break;
     case 1:
         sMysteryGiftLinkMenu.currItemId = ListMenu_ProcessInput(sMysteryGiftLinkMenu.listTaskId);
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             sMysteryGiftLinkMenu.state = 2;
         }
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             sMysteryGiftLinkMenu.currItemId = LIST_CANCEL;
             sMysteryGiftLinkMenu.state = 2;
@@ -195,11 +195,11 @@ s32 ListMenu_ProcessInput(u8 listTaskId)
 {
     struct ListMenu *list = (struct ListMenu *)gTasks[listTaskId].data;
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         return list->template.items[list->scrollOffset + list->selectedRow].index;
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         return LIST_CANCEL;
     }
@@ -248,8 +248,6 @@ s32 ListMenu_ProcessInput(u8 listTaskId)
         }
     }
 }
-
-#define TASK_NONE 0xFF
 
 void DestroyListMenuTask(u8 listTaskId, u16 *scrollOffset, u16 *selectedRow)
 {
@@ -433,8 +431,6 @@ static void ListMenuDrawCursor(struct ListMenu *list)
         break;
     }
 }
-
-#undef TASK_NONE
 
 static u8 ListMenuAddCursorObject(struct ListMenu *list, u32 cursorKind)
 {

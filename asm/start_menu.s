@@ -160,7 +160,7 @@ sub_806EE7C: @ 806EE7C
 	movs r1, 0
 	bl DrawStdWindowFrame
 	ldr r0, _0806EEFC @ =gStringVar1
-	ldr r1, _0806EF00 @ =gUnknown_2039996
+	ldr r1, _0806EF00 @ =gSafariZoneStepCounter
 	ldrh r1, [r1]
 	movs r2, 0x1
 	movs r3, 0x3
@@ -172,7 +172,7 @@ sub_806EE7C: @ 806EE7C
 	movs r3, 0x3
 	bl ConvertIntToDecimalStringN
 	ldr r0, _0806EF08 @ =gStringVar3
-	ldr r1, _0806EF0C @ =gUnknown_2039994
+	ldr r1, _0806EF0C @ =gNumSafariBalls
 	ldrb r1, [r1]
 	movs r2, 0x1
 	movs r3, 0x2
@@ -203,10 +203,10 @@ sub_806EE7C: @ 806EE7C
 _0806EEF4: .4byte gUnknown_2037101
 _0806EEF8: .4byte gUnknown_83A738C
 _0806EEFC: .4byte gStringVar1
-_0806EF00: .4byte gUnknown_2039996
+_0806EF00: .4byte gSafariZoneStepCounter
 _0806EF04: .4byte gStringVar2
 _0806EF08: .4byte gStringVar3
-_0806EF0C: .4byte gUnknown_2039994
+_0806EF0C: .4byte gNumSafariBalls
 _0806EF10: .4byte gStringVar4
 _0806EF14: .4byte gUnknown_84162A9
 	thumb_func_end sub_806EE7C
@@ -1009,7 +1009,7 @@ sub_806F554: @ 806F554
 	bl sub_806EF18
 	bl sub_80F7998
 	bl sub_806FEA0
-	bl sub_80A0F3C
+	bl SafariZoneRetirePrompt
 	movs r0, 0x1
 	pop {r1}
 	bx r1

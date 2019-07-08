@@ -2,7 +2,6 @@
 #define GUARD_ROM4_H
 
 #include "global.h"
-
 #include "main.h"
 
 struct UnkPlayerStruct
@@ -69,8 +68,8 @@ void FieldObjectMoveDestCoords(struct MapObject *, u32, s16 *, s16 *);
 void sub_8086230(void);
 void CB2_ReturnToField(void);
 bool32 sub_8087598(void);
-void c2_exit_to_overworld_1_continue_scripts_restart_music(void);
-void warp_in(void);
+void CB2_ReturnToFieldContinueScriptPlayMapMusic(void);
+void WarpIntoMap(void);
 u8 get_map_light_level_by_bank_and_number(s8 mapGroup, s8 mapNum);
 void sub_8086194(void);
 void sub_8084CCC(u8 spawn);
@@ -110,7 +109,7 @@ bool8 Overworld_MapTypeAllowsTeleportAndFly(u8 mapType);
 void Overworld_ResetStateAfterTeleport(void);
 
 void Overworld_FadeOutMapMusic(void);
-void sub_805671C(void);
+void CB2_LoadMap(void);
 bool8 sub_8055FC4(void);
 bool8 is_light_level_8_or_9(u8 mapType);
 bool32 sub_8055C9C(void);

@@ -323,8 +323,8 @@ static void Task_SeaGallop_3(void)
     PlayRainStoppingSoundEffect();
     PlaySE(SE_KAIDAN);
     gFieldCallback = sub_807DF64;
-    warp_in();
-    SetMainCallback2(sub_805671C);
+    WarpIntoMap();
+    SetMainCallback2(CB2_LoadMap);
     ResetInitialPlayerAvatarState();
     FreeFerrySpriteResources();
     Free(sBg3TilemapBuffer);

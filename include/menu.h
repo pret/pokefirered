@@ -27,12 +27,10 @@ void InitMenuInUpperLeftCornerPlaySoundWhenAPressed(u8 idx, u8 nstrs,u8);
 u8 GetMenuCursorPos(void);
 s8 ProcessMenuInput(void);
 s8 ProcessMenuInputNoWrapAround(void);
-void blit_move_info_icon(u8 winId, u8 a2, u16 x, u16 y);
 void ResetTempTileDataBuffers(void);
 void *DecompressAndCopyTileDataToVram(u8 bg_id, const void *src, u32 size, u16 offset, u8 mode);
 bool8 FreeTempTileDataBuffersIfPossible(void);
 u64 sub_8198A50(struct WindowTemplate*, u8, u8, u8, u8, u8, u8, u16); // returns something but it isn't used, fix when menu.s is decomp'd
-//void CreateYesNoMenu(const struct WindowTemplate *windowTemplate, u16 borderFirstTileNum, u8 borderPalette, u8 initialCursorPos);
 s8 Menu_ProcessInputNoWrapClearOnChoose(void);
 void DoScheduledBgTilemapCopiesToVram(void);
 void ClearScheduledBgCopiesToVram(void);
@@ -53,5 +51,10 @@ bool8 IsBlendTaskActive(void);
 void AddItemMenuActionTextPrinters(u8 windowId, u8 fontId, u8 left, u8 top, u8 letterSpacing, u8 lineHeight, u8 itemCount, const struct MenuAction *strs, const u8 *a8);
 void ClearMenuWindow_BorderThickness2(u8 windowId, u8 a1);
 void PrintTextArray(u8, u8, u8, u8, u8, u8, const struct MenuAction *);
+
+void sub_8107CD8(u8 palOffset, u16 speciesId);
+void sub_8107CF8(u8 windowId, u16 speciesId, u32 personality, u16 x, u16 y);
+void sub_8107D38(u8, u8);
+void BlitMoveInfoIcon(u8 windowId, u8 iconId, u16 x, u16 y);
 
 #endif // GUARD_MENU_H

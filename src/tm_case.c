@@ -716,7 +716,7 @@ static void Task_FadeOutAndCloseTMCase(u8 taskId)
 
     if (!gPaletteFade.active)
     {
-        DestroyListMenu(data[0], &sTMCaseStaticResources.scrollOffset, &sTMCaseStaticResources.selectedRow);
+        DestroyListMenuTask(data[0], &sTMCaseStaticResources.scrollOffset, &sTMCaseStaticResources.selectedRow);
         if (sTMCaseDynamicResources->savedCallback != NULL)
             SetMainCallback2(sTMCaseDynamicResources->savedCallback);
         else
@@ -736,7 +736,7 @@ static void Task_TMCaseMain(u8 taskId)
     {
         if (sub_80BF72C() != TRUE)
         {
-            input = ListMenuHandleInput(data[0]);
+            input = ListMenu_ProcessInput(data[0]);
             ListMenuGetScrollAndRow(data[0], &sTMCaseStaticResources.scrollOffset, &sTMCaseStaticResources.selectedRow);
             if (JOY_NEW(SELECT_BUTTON) && sTMCaseStaticResources.unk_05 == 1)
             {
@@ -909,7 +909,7 @@ static void Subtask_CloseContextMenuAndReturnToMain(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
-    DestroyListMenu(data[0], &sTMCaseStaticResources.scrollOffset, &sTMCaseStaticResources.selectedRow);
+    DestroyListMenuTask(data[0], &sTMCaseStaticResources.scrollOffset, &sTMCaseStaticResources.selectedRow);
     data[0] = ListMenuInit(&gMultiuseListMenuTemplate, sTMCaseStaticResources.scrollOffset, sTMCaseStaticResources.selectedRow);
     PrintListMenuCursorByID_WithColorIdx(data[0], 1);
     ClearMenuWindow_BorderThickness2(6, 0);
@@ -1108,7 +1108,7 @@ static void Task_DoSaleOfTMs(u8 taskId)
     RemoveBagItem(gSpecialVar_ItemId, data[8]);
     AddMoney(&gSaveBlock1Ptr->money, itemid_get_market_price(gSpecialVar_ItemId) / 2 * data[8]);
     sub_809C09C(gSpecialVar_ItemId, data[8], 2);
-    DestroyListMenu(data[0], &sTMCaseStaticResources.scrollOffset, &sTMCaseStaticResources.selectedRow);
+    DestroyListMenuTask(data[0], &sTMCaseStaticResources.scrollOffset, &sTMCaseStaticResources.selectedRow);
     TMCaseSetup_GetTMCount();
     TMCaseSetup_InitListMenuPositions();
     InitTMCaseListMenuItems();
@@ -1204,7 +1204,7 @@ static void Task_TMCaseDude_Playback(u8 taskId)
         {
             gMain.newKeys = 0;
             gMain.newAndRepeatedKeys = DPAD_DOWN;
-            ListMenuHandleInput(data[0]);
+            ListMenu_ProcessInput(data[0]);
         }
         data[9]++;
         if (data[9] > 0x65)
@@ -1223,7 +1223,7 @@ static void Task_TMCaseDude_Playback(u8 taskId)
         {
             gMain.newKeys = 0;
             gMain.newAndRepeatedKeys = DPAD_UP;
-            ListMenuHandleInput(data[0]);
+            ListMenu_ProcessInput(data[0]);
         }
         data[9]++;
         if (data[9] > 0x65)
@@ -1269,7 +1269,7 @@ static void Task_TMCaseDude_Playback(u8 taskId)
         {
             memcpy(gSaveBlock1Ptr->bagPocket_TMHM, sPokeDudePackBackup->bagPocket_TMHM, sizeof(gSaveBlock1Ptr->bagPocket_TMHM));
             memcpy(gSaveBlock1Ptr->bagPocket_KeyItems, sPokeDudePackBackup->bagPocket_KeyItems, sizeof(gSaveBlock1Ptr->bagPocket_KeyItems));
-            DestroyListMenu(data[0], NULL, NULL);
+            DestroyListMenuTask(data[0], NULL, NULL);
             sTMCaseStaticResources.selectedRow = sPokeDudePackBackup->unk_160;
             sTMCaseStaticResources.scrollOffset = sPokeDudePackBackup->unk_162;
             Free(sPokeDudePackBackup);
@@ -1344,10 +1344,10 @@ static void PrintStringTMCaseOnWindow3(void)
 
 static void DrawMoveInfoUIMarkers(void)
 {
-    blit_move_info_icon(4, 19, 0, 0);
-    blit_move_info_icon(4, 20, 0, 12);
-    blit_move_info_icon(4, 21, 0, 24);
-    blit_move_info_icon(4, 22, 0, 36);
+    BlitMoveInfoIcon(4, 19, 0, 0);
+    BlitMoveInfoIcon(4, 20, 0, 12);
+    BlitMoveInfoIcon(4, 21, 0, 24);
+    BlitMoveInfoIcon(4, 22, 0, 36);
     CopyWindowToVram(4, 2);
 }
 
@@ -1369,7 +1369,7 @@ static void TMCase_MoveCursor_UpdatePrintedTMInfo(u16 itemId)
     else
     {
         move = ItemIdToBattleMoveId(itemId);
-        blit_move_info_icon(5, gBattleMoves[move].type + 1, 0, 0);
+        BlitMoveInfoIcon(5, gBattleMoves[move].type + 1, 0, 0);
         if (gBattleMoves[move].power < 2)
             str = gText_ThreeHyphens;
         else

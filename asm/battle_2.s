@@ -13497,7 +13497,7 @@ sub_8016AC0: @ 8016AC0
 	strh r1, [r0]
 	ldr r0, _08016B08 @ =gBattle_BG0_Y
 	strh r1, [r0]
-	ldr r1, _08016B0C @ =gUnknown_2039994
+	ldr r1, _08016B0C @ =gNumSafariBalls
 	ldrb r0, [r1]
 	subs r0, 0x1
 	strb r0, [r1]
@@ -13518,7 +13518,7 @@ _08016AFC: .4byte gUnknown_2023BDE
 _08016B00: .4byte gUnknown_2023BE2
 _08016B04: .4byte gBattle_BG0_X
 _08016B08: .4byte gBattle_BG0_Y
-_08016B0C: .4byte gUnknown_2039994
+_08016B0C: .4byte gNumSafariBalls
 _08016B10: .4byte gUnknown_2023D68
 _08016B14: .4byte gUnknown_2023D74
 _08016B18: .4byte gUnknown_81D99B0

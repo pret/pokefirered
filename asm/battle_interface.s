@@ -4307,7 +4307,7 @@ UpdateLeftNoOfBallsTextOnHealthbox: @ 8049D10
 	ldr r1, _08049D84 @ =gUnknown_83FE81C
 	mov r0, sp
 	bl StringCopy
-	ldr r1, _08049D88 @ =gUnknown_2039994
+	ldr r1, _08049D88 @ =gNumSafariBalls
 	ldrb r1, [r1]
 	movs r2, 0
 	movs r3, 0x2
@@ -4351,7 +4351,7 @@ UpdateLeftNoOfBallsTextOnHealthbox: @ 8049D10
 	bx r0
 	.align 2, 0
 _08049D84: .4byte gUnknown_83FE81C
-_08049D88: .4byte gUnknown_2039994
+_08049D88: .4byte gNumSafariBalls
 _08049D8C: .4byte gSprites
 _08049D90: .4byte 0x060102c0
 _08049D94: .4byte 0x06010a00

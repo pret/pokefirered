@@ -1409,7 +1409,7 @@ sub_813D844: @ 813D844
 	ldr r4, _0813D884 @ =gUnknown_203F37A
 	subs r2, r4, 0x2
 	adds r1, r4, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	ldr r0, _0813D888 @ =gUnknown_203F36C
 	ldr r0, [r0]
 	ldr r0, [r0]
@@ -1688,7 +1688,7 @@ _0813DA90:
 	b _0813DB9E
 _0813DA9E:
 	ldrb r0, [r7]
-	bl ListMenuHandleInput
+	bl ListMenu_ProcessInput
 	adds r5, r0, 0
 	ldrb r0, [r7]
 	ldr r4, _0813DAE0 @ =gUnknown_203F37A
@@ -2504,7 +2504,7 @@ _0813E18A:
 	ldr r4, _0813E1F8 @ =gUnknown_203F37A
 	subs r2, r4, 0x2
 	adds r1, r4, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	bl sub_813D8AC
 	bl sub_813D6F4
 	bl sub_813D204
@@ -2646,7 +2646,7 @@ sub_813E2B8: @ 813E2B8
 	ldr r4, _0813E318 @ =gUnknown_203F37A
 	subs r2, r4, 0x2
 	adds r1, r4, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	bl sub_813D8AC
 	bl sub_813D6F4
 	bl sub_813D204
@@ -3277,7 +3277,7 @@ sub_813E7F0: @ 813E7F0
 	ldr r4, _0813E8C8 @ =gUnknown_203F37A
 	subs r2, r4, 0x2
 	adds r1, r4, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	bl sub_813D8AC
 	bl sub_813D6F4
 	bl sub_813D204

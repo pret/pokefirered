@@ -17,7 +17,7 @@ EventScript_16D2C8:: @ 816D2C8
 	closemessage
 	applymovement 255, Movement_16D367
 	waitmovement 0
-	special sub_80A0EEC
+	special ExitSafariMode
 	setvar VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0
 	releaseall
 	end
@@ -29,7 +29,7 @@ EventScript_16D2F2:: @ 816D2F2
 	closemessage
 	applymovement 255, Movement_16D362
 	waitmovement 0
-	special sub_80A0EEC
+	special ExitSafariMode
 	setvar VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0
 	releaseall
 	end
@@ -44,7 +44,7 @@ EventScript_16D312:: @ 816D312
 	closemessage
 	applymovement 255, Movement_16D362
 	waitmovement 0
-	special sub_80A0EEC
+	special ExitSafariMode
 	setvar VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0
 	releaseall
 	end
@@ -132,7 +132,7 @@ EventScript_16D3CA:: @ 816D3CA
 	call_if 1, EventScript_16D441
 	compare_var_to_value VAR_0x4002, 2
 	call_if 1, EventScript_16D457
-	special sub_80A0EC4
+	special EnterSafariMode
 	setvar VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 2
 	warp MAP_SAFARI_ZONE_CENTER, 255, 26, 30
 	waitstate

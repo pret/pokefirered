@@ -1815,15 +1815,15 @@ _0811D3C0:
 _0811D3D4: .4byte gUnknown_841B295
 _0811D3D8: .4byte gUnknown_841B2A7
 _0811D3DC:
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	bl sub_811D0F4
 	adds r1, r0, 0
 	movs r0, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	bl sub_811D0D0
 	adds r1, r0, 0
 	movs r0, 0x1
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	adds r4, 0x14
 	ldr r1, _0811D400 @ =gUnknown_841B32E
 	b _0811D470
@@ -1866,20 +1866,20 @@ _0811D444: .4byte gUnknown_841B2F1
 _0811D448: .4byte gUnknown_841B2ED
 _0811D44C: .4byte gUnknown_8459998
 _0811D450:
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	bl sub_811D0F4
 	adds r1, r0, 0
 	movs r0, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	bl sub_811D0C4
 	adds r1, r0, 0
 	movs r0, 0x1
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	adds r4, 0x14
 	ldr r1, _0811D478 @ =gUnknown_841B306
 _0811D470:
 	adds r0, r4, 0
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	b _0811D4A2
 	.align 2, 0
 _0811D478: .4byte gUnknown_841B306

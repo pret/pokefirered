@@ -2362,10 +2362,10 @@ _08129664:
 	ldrb r1, [r4, 0x8]
 	cmp r0, r1
 	beq _081296EC
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	movs r0, 0
 	adds r1, r4, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	ldr r1, _08129684 @ =gUnknown_841B3AA
 	b _081296D8
 	.align 2, 0
@@ -2404,14 +2404,14 @@ _081296BE:
 	ldrb r5, [r5]
 	cmp r0, r5
 	beq _081296EC
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	movs r0, 0
 	adds r1, r4, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	ldr r1, _081296E8 @ =gUnknown_841B3BE
 _081296D8:
 	adds r0, r6, 0
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	movs r0, 0x1
 	b _081296EE
 	.align 2, 0
@@ -3957,11 +3957,11 @@ sub_812A240: @ 812A240
 	beq _0812A280
 	b _0812A28A
 _0812A250:
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	bl sub_8129814
 	adds r1, r0, 0
 	movs r0, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	movs r0, 0x5
 	movs r1, 0
 	bl sub_812A578
@@ -4122,11 +4122,11 @@ sub_812A378: @ 812A378
 	beq _0812A3BC
 	b _0812A3C6
 _0812A388:
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	ldr r0, _0812A3B4 @ =gSaveBlock2Ptr
 	ldr r1, [r0]
 	movs r0, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	movs r0, 0x9
 	movs r1, 0
 	bl sub_812A578
@@ -4455,7 +4455,7 @@ _0812A5F8:
 	adds r0, r1, 0
 	adds r0, 0x22
 	ldr r1, [r4]
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	ldr r0, [r5]
 	adds r6, r0, 0
 	adds r6, 0x22

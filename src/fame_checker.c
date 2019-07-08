@@ -580,7 +580,7 @@ static void Task_TopMenuHandleInput(u8 taskId)
         }
         else if (JOY_NEW(A_BUTTON))
         {
-            cursorPos = ListMenuHandleInput(0);
+            cursorPos = ListMenu_ProcessInput(0);
             if (cursorPos == sFameCheckerData->numUnlockedPersons - 1) // CANCEL
                 task->func = Task_StartToCloseFameChecker;
             else if (sFameCheckerData->inPickMode)
@@ -615,7 +615,7 @@ static void Task_TopMenuHandleInput(u8 taskId)
                 task->func = Task_StartToCloseFameChecker;
         }
         else
-            ListMenuHandleInput(0);
+            ListMenu_ProcessInput(0);
     }
 }
 
@@ -853,7 +853,7 @@ static void Task_DestroyAssetsAndCloseFameChecker(u8 taskId)
         FreeQuestionMarkSpriteResources();
         FreeListMenuSelectorArrowPairResources();
         SetMainCallback2(sFameCheckerData->savedCallback);
-        DestroyListMenu(sFameCheckerData->listMenuTaskId, NULL, NULL);
+        DestroyListMenuTask(sFameCheckerData->listMenuTaskId, NULL, NULL);
         Free(sBg3TilemapBuffer);
         Free(sBg1TilemapBuffer);
         Free(sBg2TilemapBuffer);

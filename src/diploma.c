@@ -56,14 +56,14 @@ static EWRAM_DATA struct Diploma *gDiploma = NULL;
 
 extern const u32 gUnknown_84154E8[];
 
-static void CB2_DiplomaOam(void)
+static void VCBC_DiplomaOam(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-void DiplomaInit(void)
+void CB2_ShowDiploma(void)
 {
     gDiploma = AllocZeroed(sizeof(*gDiploma));
     gDiploma->state = 0;
@@ -122,7 +122,7 @@ static void Task_DiplomaInit(u8 taskId)
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
         break;
     case 8:
-        SetVBlankCallback(CB2_DiplomaOam);
+        SetVBlankCallback(VCBC_DiplomaOam);
         break;
     default:
         if (gPaletteFade.active)

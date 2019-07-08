@@ -3799,8 +3799,8 @@ _080568F4: .4byte gFieldCallback
 _080568F8: .4byte FieldCallback_ReturnToEventScript2
 	thumb_func_end c2_exit_to_overworld_1_continue_scripts_restart_music
 
-	thumb_func_start sub_80568FC
-sub_80568FC: @ 80568FC
+	thumb_func_start CB2_Overworld
+CB2_Overworld: @ 80568FC
 	push {lr}
 	bl sub_80569BC
 	ldr r1, _08056910 @ =gFieldCallback
@@ -3812,7 +3812,7 @@ sub_80568FC: @ 80568FC
 	.align 2, 0
 _08056910: .4byte gFieldCallback
 _08056914: .4byte sub_807DF7C
-	thumb_func_end sub_80568FC
+	thumb_func_end CB2_Overworld
 
 	thumb_func_start sub_8056918
 sub_8056918: @ 8056918

@@ -4,6 +4,7 @@
 #include "gpu_regs.h"
 #include "window.h"
 #include "main.h"
+#include "overworld.h"
 #include "scanline_effect.h"
 #include "task.h"
 #include "unk_text_util.h"
@@ -12,14 +13,12 @@
 #include "bg.h"
 #include "sound.h"
 #include "malloc.h"
+#include "pokedex.h"
 #include "sprite.h"
 #include "palette.h"
 #include "new_menu_helpers.h"
 #include "menu.h"
 #include "diploma.h"
-
-void sub_80568FC(void);
-u16 sub_8088F84(void);
 
 static void DiplomaBgInit(void);
 static void DiplomaPrintText(void);
@@ -102,7 +101,7 @@ static void Task_DiplomaInit(u8 taskId)
         CopyToBgTilemapBuffer(1, gUnknown_84154E8, 0, 0);
         break;
     case 4:
-        if (sub_8088F84())
+        if (HasAllKantoMons())
         {
             SetGpuReg(REG_OFFSET_BG1HOFS, 0x80 << 1);
         }
@@ -165,7 +164,7 @@ static void Task_DiplomaReturnToOverworld(u8 taskId)
     DestroyTask(taskId);
     FreeAllWindowBuffers();
     FREE_AND_SET_NULL(gDiploma);
-    SetMainCallback2(sub_80568FC);
+    SetMainCallback2(CB2_Overworld);
 }
 
 static void DiplomaBgInit(void)
@@ -232,10 +231,10 @@ static u8 DiplomaLoadGfx(void)
 static void DiplomaPrintText(void)
 {
     u8 arr[160];
-    uintptr_t len;
+    u32 width;
     UnkTextUtil_Reset();
     UnkTextUtil_SetPtrI(0, gSaveBlock2Ptr->playerName);
-    if (sub_8088F84())
+    if (HasAllKantoMons())
     {
         UnkTextUtil_SetPtrI(1, gUnknown_841B68F);
     }
@@ -245,11 +244,11 @@ static void DiplomaPrintText(void)
     }
     FillWindowPixelBuffer(0, 0);
     UnkTextUtil_StringExpandPlaceholders(arr, gUnknown_841B60E);
-    len = (uintptr_t)GetStringWidth(2, arr, -1);
-    AddTextPrinterParameterized3(0, 2, 0x78 - (len / 2), 4, gUnknown_8415A04, -1, arr);
+    width = GetStringWidth(2, arr, -1);
+    AddTextPrinterParameterized3(0, 2, 0x78 - (width / 2), 4, gUnknown_8415A04, -1, arr);
     UnkTextUtil_StringExpandPlaceholders(arr, gUnknown_841B619);
-    len = (uintptr_t)GetStringWidth(2, arr, -1);
-    AddTextPrinterParameterized3(0, 0x2, 0x78 - (len / 2), 0x1E, gUnknown_8415A04, -1, arr);
+    width = GetStringWidth(2, arr, -1);
+    AddTextPrinterParameterized3(0, 0x2, 0x78 - (width / 2), 0x1E, gUnknown_8415A04, -1, arr);
     AddTextPrinterParameterized3(0, 0x2, 0x78, 0x69, gUnknown_8415A04, 0, gUnknown_841B684);
     PutWindowTilemap(0);
 }

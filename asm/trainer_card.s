@@ -1070,7 +1070,7 @@ _080898BE:
 	adds r0, 0x1
 	strb r0, [r5, 0x1]
 _080898CE:
-	bl sub_8088F84
+	bl HasAllKantoMons
 	lsls r0, 16
 	cmp r0, 0
 	beq _080898DE
@@ -1117,7 +1117,7 @@ _08089918:
 _0808991C:
 	bl sub_8088F58
 	strb r0, [r5, 0x3]
-	bl sub_8088F84
+	bl HasAllKantoMons
 	adds r6, r5, 0
 	adds r6, 0x4D
 	strb r0, [r6]

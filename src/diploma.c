@@ -48,142 +48,142 @@ struct Diploma
     u8 state;
     u8 gfxStep;
     u8 callbackStep;
-	u8 padding;
+    u8 padding;
     u8 tilemapBuffer[0x1000];
 }
-	*gDiploma = NULL;
+    *gDiploma = NULL;
 
 extern const u32 gUnknown_84154E8[];
 
 void CB2_DiplomaOam(void)
 {
-	LoadOam();
-	ProcessSpriteCopyRequests();
-	TransferPlttBuffer();
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
 }
 
 void DiplomaInit(void)
 {
-	gDiploma = AllocZeroed(sizeof(*gDiploma));
-	gDiploma->state = 0;
-	gDiploma->gfxStep = 0;
-	gDiploma->callbackStep = 0;
-	DiplomaBgInit();
-	CreateTask(Task_DiplomaInit, 0);
-	SetMainCallback2(CB2_DiplomaInit);
+    gDiploma = AllocZeroed(sizeof(*gDiploma));
+    gDiploma->state = 0;
+    gDiploma->gfxStep = 0;
+    gDiploma->callbackStep = 0;
+    DiplomaBgInit();
+    CreateTask(Task_DiplomaInit, 0);
+    SetMainCallback2(CB2_DiplomaInit);
 }
 
 void CB2_DiplomaInit(void)
 {
-	RunTasks();
-	AnimateSprites();
-	BuildOamBuffer();
-	UpdatePaletteFade();
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
 }
 
 void Task_DiplomaInit(u8 taskId)
 {
-	switch (gDiploma->callbackStep)
-	{
-		case 0:
-			SetVBlankCallback(NULL);
-			break;
-		case 1:
-			DiplomaVblankHandler();
-			break;
-		case 2:
-			if (!DiplomaLoadGfx())
-			{
-				return;
-			}
-			break;
-		case 3:
-			CopyToBgTilemapBuffer(1, gUnknown_84154E8, 0, 0);
-			break;
-		case 4:
-			if (sub_8088F84())
-			{
-				SetGpuReg(REG_OFFSET_BG1HOFS, 0x80 << 1);
-			}
-			else
-			{
-				SetGpuReg(REG_OFFSET_BG1HOFS, 0);
-			}
-			break;
-		case 5:
-			DiplomaPrintText();
-			break;
-		case 6:
-			CopyBgTilemapBufferToVram(0);
-			CopyBgTilemapBufferToVram(1);
-			break;
-		case 7:
-			BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
-			break;
-		case 8:
-			SetVBlankCallback(CB2_DiplomaOam);
-			break;
-		default:
-			if (gPaletteFade.active)
-			{
-				break;
-			}
-			PlayFanfareByFanfareNum(5);
-			gTasks[taskId].func = Task_WaitForExit;
-	}
-	gDiploma->callbackStep++;
+    switch (gDiploma->callbackStep)
+    {
+        case 0:
+            SetVBlankCallback(NULL);
+            break;
+        case 1:
+            DiplomaVblankHandler();
+            break;
+        case 2:
+            if (!DiplomaLoadGfx())
+            {
+                return;
+            }
+            break;
+        case 3:
+            CopyToBgTilemapBuffer(1, gUnknown_84154E8, 0, 0);
+            break;
+        case 4:
+            if (sub_8088F84())
+            {
+                SetGpuReg(REG_OFFSET_BG1HOFS, 0x80 << 1);
+            }
+            else
+            {
+                SetGpuReg(REG_OFFSET_BG1HOFS, 0);
+            }
+            break;
+        case 5:
+            DiplomaPrintText();
+            break;
+        case 6:
+            CopyBgTilemapBufferToVram(0);
+            CopyBgTilemapBufferToVram(1);
+            break;
+        case 7:
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+            break;
+        case 8:
+            SetVBlankCallback(CB2_DiplomaOam);
+            break;
+        default:
+            if (gPaletteFade.active)
+            {
+                break;
+            }
+            PlayFanfareByFanfareNum(5);
+            gTasks[taskId].func = Task_WaitForExit;
+    }
+    gDiploma->callbackStep++;
 }
 
 void Task_WaitForExit(u8 taskId)
 {
     switch (gDiploma->state)
-	{
+    {
         case 0:
             if (WaitFanfare(0))
-			{
-				gDiploma->state++;
-			}
+            {
+                gDiploma->state++;
+            }
             break;
         case 1:
             if (JOY_NEW(A_BUTTON))
-			{
+            {
                 BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-				gDiploma->state++;
-			}
-			break;
+                gDiploma->state++;
+            }
+            break;
         case 2:
             Task_DiplomaReturnToOverworld(taskId);
-			break;
+            break;
     }
 }
 
 void Task_DiplomaReturnToOverworld(u8 taskId)
 {
-	if (gPaletteFade.active)
-		return;
-	DestroyTask(taskId);
-	FreeAllWindowBuffers();
-	FREE_AND_SET_NULL(gDiploma);
-	SetMainCallback2(sub_80568FC);
+    if (gPaletteFade.active)
+        return;
+    DestroyTask(taskId);
+    FreeAllWindowBuffers();
+    FREE_AND_SET_NULL(gDiploma);
+    SetMainCallback2(sub_80568FC);
 }
 
 void DiplomaBgInit(void)
 {
-	ResetSpriteData();
-	ResetPaletteFade();
-	FreeAllSpritePalettes();
-	ResetTasks();
-	ScanlineEffect_Stop();
+    ResetSpriteData();
+    ResetPaletteFade();
+    FreeAllSpritePalettes();
+    ResetTasks();
+    ScanlineEffect_Stop();
 }
 
 void DiplomaVblankHandler(void)
 {
-	void *vram = (void *)VRAM;
+    void *vram = (void *)VRAM;
     DmaClearLarge16(3, vram, VRAM_SIZE, 0x1000);
     DmaClear32(3, (void *)OAM, OAM_SIZE);
     DmaClear16(3, (void *)PLTT, PLTT_SIZE);
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
-	ResetBgsAndClearDma3BusyFlags(0);
+    ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, gUnknown_8415A08, 2);
     ChangeBgX(0, 0, 0);
     ChangeBgY(0, 0, 0);
@@ -193,10 +193,10 @@ void DiplomaVblankHandler(void)
     ChangeBgY(2, 0, 0);
     ChangeBgX(3, 0, 0);
     ChangeBgY(3, 0, 0);
-	InitWindows(gUnknown_8415A10);
-	DeactivateAllTextPrinters();
-	SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
-	SetBgTilemapBuffer(1, gDiploma->tilemapBuffer);
+    InitWindows(gUnknown_8415A10);
+    DeactivateAllTextPrinters();
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
+    SetBgTilemapBuffer(1, gDiploma->tilemapBuffer);
     ShowBg(0);
     ShowBg(1);
     FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
@@ -205,27 +205,27 @@ void DiplomaVblankHandler(void)
 
 u8 DiplomaLoadGfx(void)
 {
-	switch (gDiploma->gfxStep)
-	{
-		case 0:
-			ResetTempTileDataBuffers();
-			break;
-		case 1:
-			DecompressAndCopyTileDataToVram(1, gUnknown_84147C0, 0, 0, 0);
-			break;
-		case 2:
-			if (!(FreeTempTileDataBuffersIfPossible() == 1))
-			{
-				break;
-			}
-			return 0;
-		case 3:
-			LoadPalette(gUnknown_8415954, 0, 0x40);
-		default:
-			return 1;
-	}
-	gDiploma->gfxStep++;
-	return 0;
+    switch (gDiploma->gfxStep)
+    {
+        case 0:
+            ResetTempTileDataBuffers();
+            break;
+        case 1:
+            DecompressAndCopyTileDataToVram(1, gUnknown_84147C0, 0, 0, 0);
+            break;
+        case 2:
+            if (!(FreeTempTileDataBuffersIfPossible() == 1))
+            {
+                break;
+            }
+            return 0;
+        case 3:
+            LoadPalette(gUnknown_8415954, 0, 0x40);
+        default:
+            return 1;
+    }
+    gDiploma->gfxStep++;
+    return 0;
 }
 
 void DiplomaPrintText(void)

@@ -1130,8 +1130,7 @@ gUnknown_203AB40: @ 203AB40
 gUnknown_203AB44: @ 203AB44
 	.space 0x4
 
-gDiploma: @ 203AB48
-	.space 0x4
+	.include "src/diploma.o"
 
 gUnknown_203AB4C: @ 203AB4C
 	.space 0x4

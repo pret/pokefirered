@@ -50,8 +50,9 @@ struct Diploma
     u8 gfxStep;
     u8 callbackStep;
     u16 tilemapBuffer[0x800];
-}
-    *gDiploma = NULL;
+};
+
+static EWRAM_DATA struct Diploma *gDiploma = NULL;
 
 extern const u32 gUnknown_84154E8[];
 

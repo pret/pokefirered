@@ -9,13 +9,13 @@
 sub_80CA618: @ 80CA618
 	push {lr}
 	bl sub_8112364
-	ldr r0, _080CA62C @ =sub_80F4C10
+	ldr r0, _080CA62C @ =DiplomaInit
 	bl SetMainCallback2
 	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CA62C: .4byte sub_80F4C10
+_080CA62C: .4byte DiplomaInit
 	thumb_func_end sub_80CA618
 
 	thumb_func_start sub_80CA630

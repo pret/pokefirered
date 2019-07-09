@@ -17,12 +17,6 @@ struct MenuAction
     } func;
 };
 
-struct WindowTemplateWithAttr
-{
-	struct WindowTemplate *ptr;
-	u32 attr;
-};
-
 // menu2
 void AddTextPrinterParameterized3(u8 windowId, u8 fontId, u8 x, u8 y, const struct TextColor * color, s8 speed, const u8 * str);
 void AddTextPrinterParameterized4(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, const struct TextColor *color, s8 speed, const u8 *str);
@@ -68,9 +62,6 @@ void ClearStdWindowAndFrameToTransparent(u8 windowId, bool8 copyToVram);
 void DrawStdFrameWithCustomTileAndPalette(u8 windowId, bool8 copyToVram, u16 baseTileNum, u8 paletteNum);
 void ClearDialogWindowAndFrameToTransparent(u8 windowId, bool8 copyToVram);
 void DrawDialogFrameWithCustomTileAndPalette(u8 windowId, bool8 copyToVram, u16 tileNum, u8 paletteNum);
-
-// currently incorrect, WIP
-void SetWindowTemplateFields(struct WindowTemplate *template, u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum, u16 baseBlock);
-
+struct WindowTemplate SetWindowTemplateFields(u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum, u16 baseBlock);
 
 #endif // GUARD_MENU_H

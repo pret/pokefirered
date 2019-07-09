@@ -110,13 +110,11 @@ void sub_815F070(void)
 void sub_815F094(void)
 {
     struct WindowTemplate template;
-    struct WindowTemplate template2;
 
     if (sub_81119D4(sub_809D6D4) != TRUE)
     {
-        SetWindowTemplateFields(&template, 0, 1, 1, 8, 3, 15, 32);
-        template2 = template;
-        gUnknown_203F464 = AddWindow(&template2);
+        template = SetWindowTemplateFields(0, 1, 1, 8, 3, 15, 32);
+        gUnknown_203F464 = AddWindow(&template);
         FillWindowPixelBuffer(gUnknown_203F464, 0);
         PutWindowTilemap(gUnknown_203F464);
         TextWindow_SetStdFrame0_WithPal(gUnknown_203F464, 0x21D, 0xD0);

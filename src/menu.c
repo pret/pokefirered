@@ -519,11 +519,9 @@ static void sub_810FDE4(u8 windowId, u8 fontId, u8 lineHeight, u8 itemCount, con
     AddItemMenuActionTextPrinters(windowId, fontId, GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH), 0, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), lineHeight, itemCount, strs, orderArray);
 }
 
-/*
-struct WindowTemplateWithAttr SetWindowTemplateFields(struct WindowTemplate *template, u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum, u16 baseBlock)
+struct WindowTemplate SetWindowTemplateFields(u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum, u16 baseBlock)
 {
     struct WindowTemplate temp;
-    struct WindowTemplateWithAttr ret;
 
     temp.bg = bg;
     temp.tilemapLeft = left;
@@ -532,113 +530,14 @@ struct WindowTemplateWithAttr SetWindowTemplateFields(struct WindowTemplate *tem
     temp.height = height;
     temp.paletteNum = paletteNum;
     temp.baseBlock = baseBlock;
-    *template = temp;
-    ret.ptr = template;
-    ret.attr = *((u32*)&temp);
-    return ret;
-}
-*/
-NAKED
-void SetWindowTemplateFields(struct WindowTemplate *template, u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum, u16 baseBlock)
-{
-    asm_unified("\n\
-        push {r4-r7,lr}\n\
-        mov r7, r10\n\
-        mov r6, r9\n\
-        mov r5, r8\n\
-        push {r5-r7}\n\
-        sub sp, 0x8\n\
-        ldr r4, [sp, 0x28]\n\
-        mov r12, r4\n\
-        ldr r4, [sp, 0x2C]\n\
-        mov r9, r4\n\
-        ldr r4, [sp, 0x30]\n\
-        mov r10, r4\n\
-        ldr r7, [sp, 0x34]\n\
-        lsls r1, 24\n\
-        lsrs r1, 24\n\
-        lsls r2, 24\n\
-        lsls r3, 24\n\
-        mov r4, r9\n\
-        lsls r4, 24\n\
-        lsrs r4, 24\n\
-        mov r9, r4\n\
-        mov r4, r10\n\
-        lsls r4, 24\n\
-        mov r10, r4\n\
-        ldr r4, _0810FEF0 @ =0xffffff00\n\
-        mov r8, r4\n\
-        mov r5, r8\n\
-        ldr r4, [sp]\n\
-        ands r5, r4\n\
-        orrs r5, r1\n\
-        str r5, [sp]\n\
-        lsrs r2, 16\n\
-        ldr r6, _0810FEF4 @ =0xffff00ff\n\
-        adds r4, r6, 0\n\
-        ands r4, r5\n\
-        orrs r4, r2\n\
-        str r4, [sp]\n\
-        lsrs r3, 8\n\
-        ldr r1, _0810FEF8 @ =0xff00ffff\n\
-        ands r1, r4\n\
-        orrs r1, r3\n\
-        str r1, [sp]\n\
-        mov r2, r12\n\
-        lsls r2, 24\n\
-        mov r12, r2\n\
-        ldr r2, _0810FEFC @ =0x00ffffff\n\
-        ands r1, r2\n\
-        mov r4, r12\n\
-        orrs r4, r1\n\
-        str r4, [sp]\n\
-        ldr r1, [sp, 0x4]\n\
-        mov r2, r8\n\
-        ands r1, r2\n\
-        mov r4, r9\n\
-        orrs r1, r4\n\
-        mov r8, r1\n\
-        str r1, [sp, 0x4]\n\
-        mov r1, r10\n\
-        lsrs r1, 16\n\
-        mov r2, r8\n\
-        ands r6, r2\n\
-        orrs r6, r1\n\
-        str r6, [sp, 0x4]\n\
-        lsls r2, r7, 16\n\
-        ldr r1, _0810FF00 @ =0x0000ffff\n\
-        ands r6, r1\n\
-        orrs r6, r2\n\
-        str r6, [sp, 0x4]\n\
-        ldr r1, [sp]\n\
-        ldr r2, [sp, 0x4]\n\
-        str r1, [r0]\n\
-        str r2, [r0, 0x4]\n\
-        add sp, 0x8\n\
-        pop {r3-r5}\n\
-        mov r8, r3\n\
-        mov r9, r4\n\
-        mov r10, r5\n\
-        pop {r4-r7}\n\
-        pop {r2}\n\
-        bx r2\n\
-        .align 2, 0\n\
-    _0810FEF0: .4byte 0xffffff00\n\
-    _0810FEF4: .4byte 0xffff00ff\n\
-    _0810FEF8: .4byte 0xff00ffff\n\
-    _0810FEFC: .4byte 0x00ffffff\n\
-    _0810FF00: .4byte 0x0000ffff\n\
-    ");
+    return temp;
 }
 
 // not used
 static u16 CreateWindowTemplate(u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum, u16 baseBlock)
 {
-    struct WindowTemplate template, temp;
-    
-    SetWindowTemplateFields(&template, bg, left, top, width, height, paletteNum, baseBlock);
-    temp = template;
-    return (u16)AddWindow(&temp);
+    struct WindowTemplate template = SetWindowTemplateFields(bg, left, top, width, height, paletteNum, baseBlock);
+    return AddWindow(&template);
 }
 
 void CreateYesNoMenu(const struct WindowTemplate *window, u8 fontId, u8 left, u8 top, u16 baseTileNum, u8 paletteNum, u8 initialCursorPos)

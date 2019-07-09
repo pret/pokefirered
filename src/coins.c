@@ -80,11 +80,10 @@ void PrintCoinsString(u32 coinAmount)
 
 void ShowCoinsWindow(u32 coinAmount, u8 x, u8 y)
 {
-    struct WindowTemplate template, template2;
+    struct WindowTemplate template;
 
-    SetWindowTemplateFields(&template, 0, x + 1, y + 1, 8, 3, 0xF, 0x20);
-    template2 = template; // again, why...
-    sCoinsWindowId = AddWindow(&template2);
+    template = SetWindowTemplateFields(0, x + 1, y + 1, 8, 3, 0xF, 0x20);
+    sCoinsWindowId = AddWindow(&template);
     FillWindowPixelBuffer(sCoinsWindowId, 0);
     PutWindowTilemap(sCoinsWindowId);
     TextWindow_SetStdFrame0_WithPal(sCoinsWindowId, 0x21D, 0xD0);

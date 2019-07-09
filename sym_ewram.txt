@@ -1085,7 +1085,7 @@ gUnknown_2039A34: @ 2039A34
 	.include "src/save.o"
 	.include "src/mystery_event_script.o"
 
-gPaletteDecompressionBuffer: @ 203AAB0
+gUnknown_203AAB0: @ 203AAB0
 	.space 0x4
 
 gUnknown_203AAB4: @ 203AAB4

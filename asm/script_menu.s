@@ -271,7 +271,7 @@ _0809CB32:
 	movs r1, 0x2
 	movs r2, 0x8
 	movs r3, 0x2
-	bl PrintMultichoiceListItems
+	bl MultichoiceList_PrintItems
 	b _0809CB7A
 	.align 2, 0
 _0809CB54: .4byte sub_809D6D4
@@ -290,7 +290,7 @@ _0809CB5C:
 	movs r1, 0x2
 	movs r2, 0x8
 	movs r3, 0x2
-	bl PrintMultichoiceListItems
+	bl MultichoiceList_PrintItems
 _0809CB7A:
 	movs r0, 0xE
 	str r0, [sp]
@@ -833,7 +833,7 @@ _0809CF08:
 	movs r1, 0x1
 	adds r2, r5, 0
 	movs r3, 0x10
-	bl MultichoiceGridPrintItems
+	bl MultichoiceGrid_PrintItems
 	ldrb r0, [r4, 0x14]
 	str r5, [sp]
 	str r7, [sp, 0x4]
@@ -843,7 +843,7 @@ _0809CF08:
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0x1
-	bl MultichoiceGridInitCursor
+	bl MultichoiceGrid_InitCursor
 	movs r0, 0
 	bl ScheduleBgCopyTilemapToVram
 _0809CFB8:

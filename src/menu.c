@@ -35,18 +35,18 @@ static EWRAM_DATA u8 sPaletteNum = 0;
 static EWRAM_DATA u8 sYesNoWindowId = 0;
 static EWRAM_DATA u8 sTopBarWindowId = 0;
 
+static void WindowFunc_DrawDialogFrameWithCustomTileAndPalette(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum);
+static void WindowFunc_ClearDialogWindowAndFrameNullPalette(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum);
+static void WindowFunc_DrawStdFrameWithCustomTileAndPalette(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum);
+static void WindowFunc_ClearStdWindowAndFrameToTransparent(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum);
+static u8 MultichoiceGrid_MoveCursor(s8 deltaX, s8 deltaY);
+
 static const struct TextColor gUnknown_8456618 = 
 {
     .fgColor = 15,
     .bgColor = 1,
     .shadowColor = 2,
 };
-
-static void WindowFunc_DrawDialogFrameWithCustomTileAndPalette(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum);
-static void WindowFunc_ClearDialogWindowAndFrameNullPalette(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum);
-static void WindowFunc_DrawStdFrameWithCustomTileAndPalette(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum);
-static void WindowFunc_ClearStdWindowAndFrameToTransparent(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum);
-static u8 MultichoiceGridComputeNewCursorPos(s8 deltaX, s8 deltaY);
 
 void DrawDialogFrameWithCustomTileAndPalette(u8 windowId, bool8 copyToVram, u16 tileNum, u8 paletteNum)
 {
@@ -245,7 +245,7 @@ void TopBarWindowPrintTwoStrings(const u8 *string, const u8 *string2, bool8 fgCo
 }
 
 // not used
-static void Unused_CopyTopBarWindowToVram(void)
+static void CopyTopBarWindowToVram(void)
 {
     if (sTopBarWindowId != 0xFF)
         CopyWindowToVram(sTopBarWindowId, 3);
@@ -305,7 +305,7 @@ static u8 sub_810F818(u8 windowId, u8 fontId, u8 left, u8 top, u8 numChoices, u8
     return Menu_InitCursor(windowId, fontId, left, top, GetMenuCursorDimensionByFont(fontId, 1), numChoices, initialCursorPos);
 }
 
-static void RedrawMenuCursor(u8 oldPos, u8 newPos)
+static void Menu_RedrawCursor(u8 oldPos, u8 newPos)
 {
     u8 width, height;
 
@@ -326,7 +326,7 @@ u8 Menu_MoveCursor(s8 cursorDelta)
         sMenu.cursorPos = sMenu.minCursorPos;
     else
         sMenu.cursorPos += cursorDelta;
-    RedrawMenuCursor(oldPos, sMenu.cursorPos);
+    Menu_RedrawCursor(oldPos, sMenu.cursorPos);
     return sMenu.cursorPos;
 }
 
@@ -342,7 +342,7 @@ u8 Menu_MoveCursorNoWrapAround(s8 cursorDelta)
     else
         sMenu.cursorPos += cursorDelta;
 
-    RedrawMenuCursor(oldPos, sMenu.cursorPos);
+    Menu_RedrawCursor(oldPos, sMenu.cursorPos);
     return sMenu.cursorPos;
 }
 
@@ -472,7 +472,7 @@ void PrintTextArray(u8 windowId, u8 fontId, u8 left, u8 top, u8 lineHeight, u8 i
     CopyWindowToVram(windowId, 2);
 }
 
-void PrintMultichoiceListItems(u8 windowId, u8 fontId, u8 left, u8 top, u8 lineHeight, u8 itemCount, const struct MenuAction *strs, u8 letterSpacing, u8 lineSpacing)
+void MultichoiceList_PrintItems(u8 windowId, u8 fontId, u8 left, u8 top, u8 lineHeight, u8 itemCount, const struct MenuAction *strs, u8 letterSpacing, u8 lineSpacing)
 {
     u8 i;
 
@@ -521,16 +521,16 @@ static void sub_810FDE4(u8 windowId, u8 fontId, u8 lineHeight, u8 itemCount, con
 
 struct WindowTemplate SetWindowTemplateFields(u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum, u16 baseBlock)
 {
-    struct WindowTemplate temp;
+    struct WindowTemplate template;
 
-    temp.bg = bg;
-    temp.tilemapLeft = left;
-    temp.tilemapTop = top;
-    temp.width = width;
-    temp.height = height;
-    temp.paletteNum = paletteNum;
-    temp.baseBlock = baseBlock;
-    return temp;
+    template.bg = bg;
+    template.tilemapLeft = left;
+    template.tilemapTop = top;
+    template.width = width;
+    template.height = height;
+    template.paletteNum = paletteNum;
+    template.baseBlock = baseBlock;
+    return template;
 }
 
 // not used
@@ -564,7 +564,7 @@ void CreateYesNoMenu(const struct WindowTemplate *window, u8 fontId, u8 left, u8
 }
 
 // not used
-static void Unused_CreateYesNoMenu2(const struct WindowTemplate *window, u8 paletteNum, u16 baseTileNum, u8 initialCursorPos)
+static void CreateYesNoMenu2(const struct WindowTemplate *window, u8 paletteNum, u16 baseTileNum, u8 initialCursorPos)
 {
     CreateYesNoMenu(window, paletteNum, 0, 0, baseTileNum, initialCursorPos, 0);
 }
@@ -583,7 +583,7 @@ void DestroyYesNoMenu(void)
     RemoveWindow(sYesNoWindowId);
 }
 
-void MultichoiceGridPrintItems(u8 windowId, u8 fontId, u8 itemWidth, u8 itemHeight, u8 cols, u8 rows, const struct MenuAction *strs)
+void MultichoiceGrid_PrintItems(u8 windowId, u8 fontId, u8 itemWidth, u8 itemHeight, u8 cols, u8 rows, const struct MenuAction *strs)
 {
     u8 width, i, j, yOffset;
 
@@ -599,7 +599,7 @@ void MultichoiceGridPrintItems(u8 windowId, u8 fontId, u8 itemWidth, u8 itemHeig
 }
 
 //not used
-static void Unused_MultichoiceGridPrintItemsCustomOrder(u8 windowId, u8 fontId, u8 itemWidth, u8 itemHeight, u8 cols, u8 rows, const struct MenuAction *strs, const u8 *orderArray)
+static void MultichoiceGrid_PrintItemsCustomOrder(u8 windowId, u8 fontId, u8 itemWidth, u8 itemHeight, u8 cols, u8 rows, const struct MenuAction *strs, const u8 *orderArray)
 {
     u8 width, i, j;
 
@@ -613,7 +613,7 @@ static void Unused_MultichoiceGridPrintItemsCustomOrder(u8 windowId, u8 fontId, 
     CopyWindowToVram(windowId, 2);
 }
 
-static u8 MultichoiceGridInitCursorInternal(u8 windowId, u8 fontId, u8 left, u8 top, u8 optionWidth, u8 cursorHeight, u8 cols, u8 rows, u8 numChoices, u8 cursorPos)
+static u8 MultichoiceGrid_InitCursorInternal(u8 windowId, u8 fontId, u8 left, u8 top, u8 optionWidth, u8 cursorHeight, u8 cols, u8 rows, u8 numChoices, u8 cursorPos)
 {
     s32 pos;
 
@@ -632,19 +632,19 @@ static u8 MultichoiceGridInitCursorInternal(u8 windowId, u8 fontId, u8 left, u8 
         sMenu.cursorPos = 0;
     else
         sMenu.cursorPos = pos;
-    MultichoiceGridComputeNewCursorPos(0, 0);
+    MultichoiceGrid_MoveCursor(0, 0);
     return sMenu.cursorPos;
 }
 
-u8 MultichoiceGridInitCursor(u8 windowId, u8 fontId, u8 left, u8 top, u8 optionWidth, u8 cols, u8 rows, u8 cursorPos)
+u8 MultichoiceGrid_InitCursor(u8 windowId, u8 fontId, u8 left, u8 top, u8 optionWidth, u8 cols, u8 rows, u8 cursorPos)
 {
     s32 cursorHeight = 16;
     u8 numChoices = cols * rows;
 
-    return MultichoiceGridInitCursorInternal(windowId, fontId, left, top, optionWidth, cursorHeight, cols, rows, numChoices, cursorPos);
+    return MultichoiceGrid_InitCursorInternal(windowId, fontId, left, top, optionWidth, cursorHeight, cols, rows, numChoices, cursorPos);
 }
 
-static void MultichoiceGridUpdateCursorPos(u8 oldCursorPos, u8 newCursorPos)
+static void MultichoiceGrid_RedrawCursor(u8 oldCursorPos, u8 newCursorPos)
 {
     u8 cursorWidth = GetMenuCursorDimensionByFont(sMenu.fontId, 0);
     u8 cursorHeight = GetMenuCursorDimensionByFont(sMenu.fontId, 1);
@@ -657,7 +657,7 @@ static void MultichoiceGridUpdateCursorPos(u8 oldCursorPos, u8 newCursorPos)
     AddTextPrinterParameterized(sMenu.windowId, sMenu.fontId, gFameCheckerText_ListMenuCursor, xPos, yPos, 0, 0);
 }
 
-static u8 MultichoiceGridComputeNewCursorPos(s8 deltaX, s8 deltaY)
+static u8 MultichoiceGrid_MoveCursor(s8 deltaX, s8 deltaY)
 {
     u8 oldPos = sMenu.cursorPos;
 
@@ -686,12 +686,12 @@ static u8 MultichoiceGridComputeNewCursorPos(s8 deltaX, s8 deltaY)
     }
     else
     {
-        MultichoiceGridUpdateCursorPos(oldPos, sMenu.cursorPos);
+        MultichoiceGrid_RedrawCursor(oldPos, sMenu.cursorPos);
         return sMenu.cursorPos;
     }
 }
 
-static u8 MultichoiceGridComputeNewCursorPosIfValid(s8 deltaX, s8 deltaY)
+static u8 MultichoiceGrid_MoveCursorIfValid(s8 deltaX, s8 deltaY)
 {
     u8 oldPos = sMenu.cursorPos;
 
@@ -712,7 +712,7 @@ static u8 MultichoiceGridComputeNewCursorPosIfValid(s8 deltaX, s8 deltaY)
     }
     else
     {
-        MultichoiceGridUpdateCursorPos(oldPos, sMenu.cursorPos);
+        MultichoiceGrid_RedrawCursor(oldPos, sMenu.cursorPos);
         return sMenu.cursorPos;
     }
 }
@@ -732,25 +732,25 @@ static s8 sub_81105A0(void)
     else if (JOY_NEW(DPAD_UP))
     {
         PlaySE(SE_SELECT);
-        MultichoiceGridComputeNewCursorPos(0, -1);
+        MultichoiceGrid_MoveCursor(0, -1);
         return MENU_NOTHING_CHOSEN;
     }
     else if (JOY_NEW(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
-        MultichoiceGridComputeNewCursorPos(0, 1);
+        MultichoiceGrid_MoveCursor(0, 1);
         return MENU_NOTHING_CHOSEN;
     }
     else if (JOY_NEW(DPAD_LEFT) || GetLRKeysState() == 1)
     {
         PlaySE(SE_SELECT);
-        MultichoiceGridComputeNewCursorPos(-1, 0);
+        MultichoiceGrid_MoveCursor(-1, 0);
         return MENU_NOTHING_CHOSEN;
     }
     else if (JOY_NEW(DPAD_RIGHT) || GetLRKeysState() == 2)
     {
         PlaySE(SE_SELECT);
-        MultichoiceGridComputeNewCursorPos(1, 0);
+        MultichoiceGrid_MoveCursor(1, 0);
         return MENU_NOTHING_CHOSEN;
     }
     return MENU_NOTHING_CHOSEN;
@@ -771,25 +771,25 @@ s8 Menu_ProcessInputGridLayout(void)
     }
     else if (JOY_NEW(DPAD_UP))
     {
-        if (oldPos != MultichoiceGridComputeNewCursorPosIfValid(0, -1))
+        if (oldPos != MultichoiceGrid_MoveCursorIfValid(0, -1))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
     else if (JOY_NEW(DPAD_DOWN))
     {
-        if (oldPos != MultichoiceGridComputeNewCursorPosIfValid(0, 1))
+        if (oldPos != MultichoiceGrid_MoveCursorIfValid(0, 1))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
     else if (JOY_NEW(DPAD_LEFT) || GetLRKeysState() == 1)
     {
-        if (oldPos != MultichoiceGridComputeNewCursorPosIfValid(-1, 0))
+        if (oldPos != MultichoiceGrid_MoveCursorIfValid(-1, 0))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
     else if (JOY_NEW(DPAD_RIGHT) || GetLRKeysState() == 2)
     {
-        if (oldPos != MultichoiceGridComputeNewCursorPosIfValid(1, 0))
+        if (oldPos != MultichoiceGrid_MoveCursorIfValid(1, 0))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
@@ -811,25 +811,25 @@ static s8 sub_81106F4(void)
     else if (JOY_REPT(DPAD_ANY) == DPAD_UP)
     {
         PlaySE(SE_SELECT);
-        MultichoiceGridComputeNewCursorPos(0, -1);
+        MultichoiceGrid_MoveCursor(0, -1);
         return MENU_NOTHING_CHOSEN;
     }
     else if (JOY_REPT(DPAD_ANY) == DPAD_DOWN)
     {
         PlaySE(SE_SELECT);
-        MultichoiceGridComputeNewCursorPos(0, 1);
+        MultichoiceGrid_MoveCursor(0, 1);
         return MENU_NOTHING_CHOSEN;
     }
     else if (JOY_REPT(DPAD_ANY) == DPAD_LEFT || sub_80BF66C() == 1)
     {
         PlaySE(SE_SELECT);
-        MultichoiceGridComputeNewCursorPos(-1, 0);
+        MultichoiceGrid_MoveCursor(-1, 0);
         return MENU_NOTHING_CHOSEN;
     }
     else if (JOY_REPT(DPAD_ANY) == DPAD_RIGHT || sub_80BF66C() == 2)
     {
         PlaySE(SE_SELECT);
-        MultichoiceGridComputeNewCursorPos(1, 0);
+        MultichoiceGrid_MoveCursor(1, 0);
         return MENU_NOTHING_CHOSEN;
     }
 
@@ -852,25 +852,25 @@ static s8 sub_81107A0(void)
     }
     else if (JOY_REPT(DPAD_ANY) == DPAD_UP)
     {
-        if (oldPos != MultichoiceGridComputeNewCursorPosIfValid(0, -1))
+        if (oldPos != MultichoiceGrid_MoveCursorIfValid(0, -1))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
     else if (JOY_REPT(DPAD_ANY) == DPAD_DOWN)
     {
-        if (oldPos != MultichoiceGridComputeNewCursorPosIfValid(0, 1))
+        if (oldPos != MultichoiceGrid_MoveCursorIfValid(0, 1))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
     else if (JOY_REPT(DPAD_ANY) == DPAD_LEFT || sub_80BF66C() == 1)
     {
-        if (oldPos != MultichoiceGridComputeNewCursorPosIfValid(-1, 0))
+        if (oldPos != MultichoiceGrid_MoveCursorIfValid(-1, 0))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
     else if (JOY_REPT(DPAD_ANY) == DPAD_RIGHT || sub_80BF66C() == 2)
     {
-        if (oldPos != MultichoiceGridComputeNewCursorPosIfValid(1, 0))
+        if (oldPos != MultichoiceGrid_MoveCursorIfValid(1, 0))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }

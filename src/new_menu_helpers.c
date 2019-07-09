@@ -671,8 +671,7 @@ u8 sub_80F78E0(u8 height)
 {
     if (sStartMenuWindowId == 0xFF)
     {
-        struct WindowTemplate template;
-        template = SetWindowTemplateFields(0, 0x16, 1, 7, height * 2 - 1, DLG_WINDOW_PALETTE_NUM, 0x13D);
+        struct WindowTemplate template = SetWindowTemplateFields(0, 0x16, 1, 7, height * 2 - 1, DLG_WINDOW_PALETTE_NUM, 0x13D);
         sStartMenuWindowId = AddWindow(&template);
         PutWindowTilemap(sStartMenuWindowId);
     }

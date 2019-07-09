@@ -37,6 +37,7 @@
 #include "link.h"
 #include "quest_log_8150454.h"
 #include "quest_log.h"
+#include "new_menu_helpers.h"
 
 u8 gUnknown_3005E88;
 

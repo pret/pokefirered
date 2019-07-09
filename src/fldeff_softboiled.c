@@ -3,6 +3,7 @@
 #include "sound.h"
 #include "string_util.h"
 #include "menu.h"
+#include "new_menu_helpers.h"
 #include "constants/songs.h"
 #include "fldeff.h"
 

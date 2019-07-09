@@ -23,22 +23,15 @@ struct WindowTemplateWithAttr
 	u32 attr;
 };
 
-void AddTextPrinterParameterized3(u8, u8, u8, u8, const void *, s8, const u8 *);
-void AddTextPrinterParameterized5(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16), u8 letterSpacing, u8 lineSpacing);
-void sub_8198070(u8 windowId, bool8 copyToVram);
-void ScheduleBgCopyTilemapToVram(u8 bgNum);
-void PrintMenuTable(u8 idx, u8 nstrs, const struct MenuAction *strs);
-void InitMenuInUpperLeftCornerPlaySoundWhenAPressed(u8 idx, u8 nstrs,u8);
-void ResetTempTileDataBuffers(void);
-void *DecompressAndCopyTileDataToVram(u8 bg_id, const void *src, u32 size, u16 offset, u8 mode);
-bool8 FreeTempTileDataBuffersIfPossible(void);
-void DoScheduledBgTilemapCopiesToVram(void);
-void ClearScheduledBgCopiesToVram(void);
+// menu2
+void AddTextPrinterParameterized3(u8 windowId, u8 fontId, u8 x, u8 y, const struct TextColor * color, s8 speed, const u8 * str);
 void AddTextPrinterParameterized4(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, const struct TextColor *color, s8 speed, const u8 *str);
-void sub_8197B1C(u8 windowId, bool8 copyToVram, u16 a2, u16 a3);
-void *DecompressAndCopyTileDataToVram2(u8 bgId, const void *src, u32 size, u16 offset, u8 mode);
+void AddTextPrinterParameterized5(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16), u8 letterSpacing, u8 lineSpacing);
+void sub_812E6DC(u8 windowId, const u8 * src, u16 x, u16 y);
 void StartBlendTask(u8 eva_start, u8 evb_start, u8 eva_end, u8 evb_end, u8 ev_step, u8 priority);
 bool8 IsBlendTaskActive(void);
+u8 sub_812EA78(u16 species, u32 personality, u8 a2);
+s8 sub_812EAE4(u16 species, u32 personality, u8 a2);
 
 // list_menu
 void sub_8107CD8(u8 palOffset, u16 speciesId);

@@ -6,6 +6,7 @@
 #include "window.h"
 #include "text_window.h"
 #include "menu_helpers.h"
+#include "new_menu_helpers.h"
 #include "menu.h"
 #include "money.h"
 #include "bag.h"

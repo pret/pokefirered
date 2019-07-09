@@ -603,7 +603,7 @@ void sub_80F771C(bool8 copyToVram)
 
 void SetStdWindowBorderStyle(u8 windowId, bool8 copyToVram)
 {
-    SetWindowBorderStyle(windowId, copyToVram, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM);
+    DrawStdFrameWithCustomTileAndPalette(windowId, copyToVram, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM);
 }
 
 void sub_80F7768(u8 windowId, bool8 copyToVram)

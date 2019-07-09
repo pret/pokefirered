@@ -109,7 +109,7 @@ void PrintMoneyAmount(u8 windowId, u8 x, u8 y, int amount, u8 speed)
 
 void PrintMoneyAmountInMoneyBoxWithBorder(u8 windowId, u16 tileStart, u8 pallete, int amount)
 {
-    SetWindowBorderStyle(windowId, FALSE, tileStart, pallete);
+    DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, tileStart, pallete);
     AddTextPrinterParameterized(windowId, 2, gUnknown_8419CE7, 0, 0, 0xFF, 0);
     PrintMoneyAmountInMoneyBox(windowId, amount, 0);
 }
@@ -134,7 +134,7 @@ void DrawMoneyBox(int amount, u8 x, u8 y)
 
 void HideMoneyBox(void)
 {
-    ClearMenuWindow(sMoneyBoxWindowId, FALSE);
+    ClearStdWindowAndFrameToTransparent(sMoneyBoxWindowId, FALSE);
     CopyWindowToVram(sMoneyBoxWindowId, 2);
     RemoveWindow(sMoneyBoxWindowId);
 }

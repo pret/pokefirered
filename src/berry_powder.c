@@ -97,7 +97,7 @@ void sub_815EFBC(u8 windowId, u32 powder, u8 x, u8 y, u8 speed)
 
 void sub_815F014(u8 windowId, u16 baseBlock, u8 palette, u32 powder)
 {
-    SetWindowBorderStyle(windowId, FALSE, baseBlock, palette);
+    DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, baseBlock, palette);
     AddTextPrinterParameterized(windowId, 0, gOtherText_Powder, 0, 0, -1, NULL);
     sub_815EFBC(windowId, powder, 39, 12, 0);
 }
@@ -127,6 +127,6 @@ void sub_815F094(void)
 void sub_815F114(void)
 {
     ClearWindowTilemap(gUnknown_203F464);
-    ClearMenuWindow(gUnknown_203F464, 1);
+    ClearStdWindowAndFrameToTransparent(gUnknown_203F464, 1);
     RemoveWindow(gUnknown_203F464);
 }

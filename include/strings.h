@@ -178,4 +178,6 @@ extern const u8 gUnknown_84169DC[];
 
 extern const u8 gUnknown_84162BD[];
 
+extern const u8 gUnknown_841623D[];
+
 #endif //GUARD_STRINGS_H

@@ -240,7 +240,7 @@ void sub_810B958(const u8 * str)
 void sub_810B994(void)
 {
     u32 x;
-    SetWindowBorderStyle(2, FALSE, 0x081, 0x0C);
+    DrawStdFrameWithCustomTileAndPalette(2, FALSE, 0x081, 0x0C);
     x = 0x40 - GetStringWidth(0, gText_DepositItem, 0);
     AddTextPrinterParameterized(2, 0, gText_DepositItem, x / 2, 1, 0, NULL);
 }
@@ -252,11 +252,11 @@ u8 sub_810B9DC(u8 a0, u8 a1)
         gUnknown_203AD34[a0] = AddWindow(&gUnknown_8453104[a0 + a1]);
         if (a0 != 6)
         {
-            SetWindowBorderStyle(gUnknown_203AD34[a0], FALSE, 0x064, 0x0E);
+            DrawStdFrameWithCustomTileAndPalette(gUnknown_203AD34[a0], FALSE, 0x064, 0x0E);
         }
         else
         {
-            SetWindowBorderStyle(gUnknown_203AD34[a0], FALSE, 0x081, 0x0C);
+            DrawStdFrameWithCustomTileAndPalette(gUnknown_203AD34[a0], FALSE, 0x081, 0x0C);
         }
         ScheduleBgCopyTilemapToVram(0);
     }
@@ -265,7 +265,7 @@ u8 sub_810B9DC(u8 a0, u8 a1)
 
 void sub_810BA3C(u8 a0)
 {
-    ClearMenuWindow(gUnknown_203AD34[a0], FALSE);
+    ClearStdWindowAndFrameToTransparent(gUnknown_203AD34[a0], FALSE);
     ClearWindowTilemap(gUnknown_203AD34[a0]);
     RemoveWindow(gUnknown_203AD34[a0]);
     ScheduleBgCopyTilemapToVram(0);
@@ -285,7 +285,7 @@ void sub_810BA9C(u8 a0)
 {
     if (gUnknown_203AD34[a0] != 0xFF)
     {
-        ClearMenuWindow_BorderThickness2(gUnknown_203AD34[a0], FALSE);
+        ClearDialogWindowAndFrameToTransparent(gUnknown_203AD34[a0], FALSE);
         ClearWindowTilemap(gUnknown_203AD34[a0]);
         RemoveWindow(gUnknown_203AD34[a0]);
         PutWindowTilemap(1);

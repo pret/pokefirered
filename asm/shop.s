@@ -74,7 +74,7 @@ _0809AAF8:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl ProgramAndPlaceMenuCursorOnWindow
+	bl Menu_InitCursor
 	ldrb r0, [r4]
 	bl PutWindowTilemap
 	ldrb r0, [r4]
@@ -194,7 +194,7 @@ sub_809AC10: @ 809AC10
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
-	bl ProcessMenuInputNoWrapAround
+	bl Menu_ProcessInputNoWrapAround
 	lsls r0, 24
 	asrs r1, r0, 24
 	movs r0, 0x2
@@ -211,7 +211,7 @@ sub_809AC10: @ 809AC10
 	b _0809AC52
 _0809AC3C:
 	ldr r4, _0809AC58 @ =gUnknown_83DF09C
-	bl GetMenuCursorPos
+	bl Menu_GetCursorPos
 	lsls r0, 24
 	lsrs r0, 21
 	adds r4, 0x4
@@ -332,7 +332,7 @@ sub_809AD24: @ 809AD24
 	ldr r4, _0809AD3C @ =gUnknown_2039950
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl ClearMenuWindow
+	bl ClearStdWindowAndFrameToTransparent
 	ldrb r0, [r4]
 	bl RemoveWindow
 	pop {r4}
@@ -2396,10 +2396,10 @@ _0809BDD4:
 	bl sub_809B73C
 	movs r0, 0x3
 	movs r1, 0
-	bl ClearMenuWindow
+	bl ClearStdWindowAndFrameToTransparent
 	movs r0, 0x1
 	movs r1, 0
-	bl ClearMenuWindow
+	bl ClearStdWindowAndFrameToTransparent
 	movs r0, 0x3
 	bl ClearWindowTilemap
 	movs r0, 0x1
@@ -2442,10 +2442,10 @@ _0809BE54:
 	bl sub_809B73C
 	movs r0, 0x3
 	movs r1, 0
-	bl ClearMenuWindow
+	bl ClearStdWindowAndFrameToTransparent
 	movs r0, 0x1
 	movs r1, 0
-	bl ClearMenuWindow
+	bl ClearStdWindowAndFrameToTransparent
 	movs r0, 0x3
 	bl ClearWindowTilemap
 	movs r0, 0x1
@@ -2601,7 +2601,7 @@ sub_809BF98: @ 809BF98
 	adds r4, r5, r6
 	movs r0, 0x2
 	movs r1, 0
-	bl ClearMenuWindow_BorderThickness2
+	bl ClearDialogWindowAndFrameToTransparent
 	ldrb r0, [r4, 0xE]
 	movs r1, 0x1
 	bl sub_809B57C

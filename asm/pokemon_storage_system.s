@@ -1466,7 +1466,7 @@ _0808C454:
 	strh r0, [r5, 0x8]
 	b _0808C69C
 _0808C45C:
-	bl ProcessMenuInput
+	bl Menu_ProcessInput
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r5, 0xC]
@@ -1665,8 +1665,8 @@ _0808C5D8:
 _0808C5F4:
 	movs r0, 0x1
 	negs r0, r0
-	bl MoveMenuCursor
-	bl GetMenuCursorPos
+	bl Menu_MoveCursor
+	bl Menu_GetCursorPos
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0xA]
@@ -1699,8 +1699,8 @@ _0808C624:
 	strh r6, [r5, 0xA]
 _0808C63C:
 	movs r0, 0x1
-	bl MoveMenuCursor
-	bl GetMenuCursorPos
+	bl Menu_MoveCursor
+	bl Menu_GetCursorPos
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0xA]
@@ -1861,7 +1861,7 @@ sub_808C72C: @ 808C72C
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl ProgramAndPlaceMenuCursorOnWindow
+	bl Menu_InitCursor
 	mov r0, r10
 	strh r5, [r0]
 	add sp, 0xC
@@ -8349,7 +8349,7 @@ sub_808FCE8: @ 808FCE8
 	lsls r4, 24
 	asrs r4, 24
 	adds r0, r4, 0
-	bl MoveMenuCursorNoWrapAround
+	bl Menu_MoveCursorNoWrapAround
 	add sp, 0xC
 	pop {r4}
 	pop {r0}
@@ -8363,7 +8363,7 @@ sub_808FD20: @ 808FD20
 	push {lr}
 	movs r0, 0x1
 	movs r1, 0
-	bl ClearMenuWindow
+	bl ClearStdWindowAndFrameToTransparent
 	movs r0, 0
 	bl ScheduleBgCopyTilemapToVram
 	pop {r0}
@@ -18931,7 +18931,7 @@ sub_8094E88: @ 8094E88
 	movs r1, 0
 	movs r2, 0xB
 	movs r3, 0xE
-	bl SetWindowBorderStyle
+	bl DrawStdFrameWithCustomTileAndPalette
 	ldr r2, [r5]
 	adds r0, r2, r4
 	ldrb r0, [r0]
@@ -18961,7 +18961,7 @@ sub_8094E88: @ 8094E88
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0x2
-	bl ProgramAndPlaceMenuCursorOnWindow
+	bl Menu_InitCursor
 	movs r0, 0
 	bl ScheduleBgCopyTilemapToVram
 	ldr r0, [r5]
@@ -19023,7 +19023,7 @@ _08094FB6:
 	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
-	bl MoveMenuCursor
+	bl Menu_MoveCursor
 	b _08094FF2
 	.align 2, 0
 _08094FD0: .4byte gMain
@@ -19035,10 +19035,10 @@ _08094FD4:
 	movs r0, 0x5
 	bl PlaySE
 	movs r0, 0x1
-	bl MoveMenuCursor
+	bl Menu_MoveCursor
 	b _08094FF2
 _08094FEA:
-	bl GetMenuCursorPos
+	bl Menu_GetCursorPos
 	lsls r0, 24
 	lsrs r5, r0, 24
 _08094FF2:
@@ -19077,7 +19077,7 @@ sub_8095024: @ 8095024
 	adds r0, r4
 	ldrb r0, [r0]
 	movs r1, 0x1
-	bl ClearMenuWindow
+	bl ClearStdWindowAndFrameToTransparent
 	ldr r0, [r5]
 	adds r0, r4
 	ldrb r0, [r0]

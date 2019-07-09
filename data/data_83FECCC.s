@@ -823,9 +823,7 @@ gUnknown_8454000:: @ 8454000
 gUnknown_8454003:: @ 8454003
 	.incbin "baserom.gba", 0x454003, 0x2615
 
-gUnknown_8456618:: @ 8456618
-	.incbin "baserom.gba", 0x456618, 0x4
-
+	@ menu.o
 	@ quest_log.o
 	@ link_rfu_3.o
 	.section .rodata.8456C74

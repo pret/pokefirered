@@ -1299,7 +1299,7 @@ void sub_815E720(void)
 void sub_815E88C(void)
 {
     u8 windowId = VarGet(VAR_0x4001);
-    ClearMenuWindow(windowId, TRUE);
+    ClearStdWindowAndFrameToTransparent(windowId, TRUE);
     RemoveWindow(windowId);
 }
 

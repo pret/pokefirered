@@ -48,7 +48,5 @@ void sub_80F7974(const u8 * text);
 void sub_80F7998(void);
 void sub_80F79A4(void);
 void SetDefaultFontsPointer(void);
-u8 GetFontAttribute(u8 fontId, u8 attributeId);
-u8 GetMenuCursorDimensionByFont(u8 fontId, u8 whichDimension);
 
 #endif // GUARD_NEW_MENU_HELPERS_H

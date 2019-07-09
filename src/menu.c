@@ -47,8 +47,6 @@ static void WindowFunc_ClearDialogWindowAndFrameNullPalette(u8 bg, u8 tilemapLef
 static void WindowFunc_DrawStdFrameWithCustomTileAndPalette(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum);
 static void WindowFunc_ClearStdWindowAndFrameToTransparent(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum);
 static u8 MultichoiceGridComputeNewCursorPos(s8 deltaX, s8 deltaY);
-u8 Menu_MoveCursor(s8 cursorDelta);
-void DestroyYesNoMenu(void);
 
 void DrawDialogFrameWithCustomTileAndPalette(u8 windowId, bool8 copyToVram, u16 tileNum, u8 paletteNum)
 {
@@ -213,7 +211,6 @@ void TopBarWindowPrintString(const u8 *string, u8 unUsed, bool8 copyToVram)
     }
 }
 
-
 void TopBarWindowPrintTwoStrings(const u8 *string, const u8 *string2, bool8 fgColorChooser, u8 notUsed, bool8 copyToVram)
 {
     struct TextColor color;
@@ -308,7 +305,7 @@ static u8 sub_810F818(u8 windowId, u8 fontId, u8 left, u8 top, u8 numChoices, u8
     return Menu_InitCursor(windowId, fontId, left, top, GetMenuCursorDimensionByFont(fontId, 1), numChoices, initialCursorPos);
 }
 
-void RedrawMenuCursor(u8 oldPos, u8 newPos)
+static void RedrawMenuCursor(u8 oldPos, u8 newPos)
 {
     u8 width, height;
 
@@ -480,9 +477,7 @@ void PrintMultichoiceListItems(u8 windowId, u8 fontId, u8 left, u8 top, u8 lineH
     u8 i;
 
     for (i = 0; i < itemCount; i++)
-    {
         AddTextPrinterParameterized5(windowId, fontId, strs[i].text, left, (lineHeight * i) + top, 0xFF, NULL, letterSpacing, lineSpacing);
-    }
     CopyWindowToVram(windowId, 2);
 }
 

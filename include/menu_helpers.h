@@ -4,7 +4,8 @@
 #include "global.h"
 #include "task.h"
 
-struct YesNoFuncTable {
+struct YesNoFuncTable
+{
     TaskFunc yesFunc;
     TaskFunc noFunc;
 };

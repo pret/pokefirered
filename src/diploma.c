@@ -1,23 +1,23 @@
-#include "constants/fanfares.h"
-#include "gba/macro.h"
 #include "global.h"
-#include "gpu_regs.h"
-#include "window.h"
-#include "main.h"
-#include "overworld.h"
-#include "scanline_effect.h"
-#include "task.h"
-#include "unk_text_util.h"
-#include "gpu_regs.h"
-#include "text.h"
 #include "bg.h"
-#include "sound.h"
+#include "constants/fanfares.h"
+#include "dynamic_placeholder_text_util.h"
+#include "gba/macro.h"
+#include "gpu_regs.h"
+#include "gpu_regs.h"
+#include "main.h"
 #include "malloc.h"
-#include "pokedex.h"
-#include "sprite.h"
-#include "palette.h"
-#include "new_menu_helpers.h"
 #include "menu.h"
+#include "new_menu_helpers.h"
+#include "overworld.h"
+#include "palette.h"
+#include "pokedex.h"
+#include "scanline_effect.h"
+#include "sound.h"
+#include "sprite.h"
+#include "task.h"
+#include "text.h"
+#include "window.h"
 #include "diploma.h"
 
 static void DiplomaBgInit(void);
@@ -232,21 +232,21 @@ static void DiplomaPrintText(void)
 {
     u8 arr[160];
     u32 width;
-    UnkTextUtil_Reset();
-    UnkTextUtil_SetPtrI(0, gSaveBlock2Ptr->playerName);
+    DynamicPlaceholderTextUtil_Reset();
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gSaveBlock2Ptr->playerName);
     if (HasAllKantoMons())
     {
-        UnkTextUtil_SetPtrI(1, gUnknown_841B68F);
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gUnknown_841B68F);
     }
     else
     {
-        UnkTextUtil_SetPtrI(1, gUnknown_841B698);
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gUnknown_841B698);
     }
     FillWindowPixelBuffer(0, 0);
-    UnkTextUtil_StringExpandPlaceholders(arr, gUnknown_841B60E);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(arr, gUnknown_841B60E);
     width = GetStringWidth(2, arr, -1);
     AddTextPrinterParameterized3(0, 2, 0x78 - (width / 2), 4, gUnknown_8415A04, -1, arr);
-    UnkTextUtil_StringExpandPlaceholders(arr, gUnknown_841B619);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(arr, gUnknown_841B619);
     width = GetStringWidth(2, arr, -1);
     AddTextPrinterParameterized3(0, 0x2, 0x78 - (width / 2), 0x1E, gUnknown_8415A04, -1, arr);
     AddTextPrinterParameterized3(0, 0x2, 0x78, 0x69, gUnknown_8415A04, 0, gUnknown_841B684);

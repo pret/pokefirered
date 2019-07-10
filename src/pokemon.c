@@ -5423,7 +5423,7 @@ void PlayMapChosenOrBattleBGM(u16 songId)
         PlayNewMapMusic(GetMUS_ForBattle());
 }
 
-const u8 *GetMonFrontSpritePal(struct Pokemon *mon)
+const u32 *GetMonFrontSpritePal(struct Pokemon *mon)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
     u32 otId = GetMonData(mon, MON_DATA_OT_ID, 0);
@@ -5431,7 +5431,7 @@ const u8 *GetMonFrontSpritePal(struct Pokemon *mon)
     return GetFrontSpritePalFromSpeciesAndPersonality(species, otId, personality);
 }
 
-const u8 *GetFrontSpritePalFromSpeciesAndPersonality(u16 species, u32 otId, u32 personality)
+const u32 *GetFrontSpritePalFromSpeciesAndPersonality(u16 species, u32 otId, u32 personality)
 {
     u32 shinyValue;
 

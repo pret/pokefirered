@@ -1265,7 +1265,7 @@ _0814DFE0:
 	adds r4, r2, r4
 	str r4, [sp, 0x2C]
 _0814DFF0:
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	ldr r0, [sp, 0x10]
 	cmp r0, 0x1
 	beq _0814E0E4
@@ -1610,10 +1610,10 @@ _0814E2B8:
 	ldr r0, [sp, 0xC]
 	adds r1, r0, r1
 	movs r0, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	ldr r0, _0814E324 @ =gStringVar4
 	adds r1, r4, 0
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	ldr r1, [sp, 0x2C]
 	ldrb r0, [r1]
 	mov r2, r9

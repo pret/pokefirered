@@ -1411,7 +1411,7 @@ _0807E632:
 	strh r0, [r4, 0x8]
 	b _0807E64A
 _0807E63A:
-	bl warp_in
+	bl WarpIntoMap
 	ldr r0, _0807E650 @ =sub_8056788
 	bl SetMainCallback2
 	adds r0, r5, 0
@@ -1494,8 +1494,8 @@ _0807E6DC:
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0807E6F4
-	bl warp_in
-	ldr r0, _0807E700 @ =sub_805671C
+	bl WarpIntoMap
+	ldr r0, _0807E700 @ =CB2_LoadMap
 	bl SetMainCallback2
 	adds r0, r5, 0
 	bl DestroyTask
@@ -1505,7 +1505,7 @@ _0807E6F4:
 	bx r0
 	.align 2, 0
 _0807E6FC: .4byte gReceivedRemoteLinkPlayers
-_0807E700: .4byte sub_805671C
+_0807E700: .4byte CB2_LoadMap
 	thumb_func_end sub_807E678
 
 	thumb_func_start sub_807E704
@@ -1563,8 +1563,8 @@ _0807E762:
 	strh r0, [r4, 0x8]
 	b _0807E77A
 _0807E76A:
-	bl warp_in
-	ldr r0, _0807E780 @ =sub_805671C
+	bl WarpIntoMap
+	ldr r0, _0807E780 @ =CB2_LoadMap
 	bl SetMainCallback2
 	adds r0, r5, 0
 	bl DestroyTask
@@ -1573,7 +1573,7 @@ _0807E77A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807E780: .4byte sub_805671C
+_0807E780: .4byte CB2_LoadMap
 	thumb_func_end sub_807E718
 
 	thumb_func_start sub_807E784
@@ -1630,8 +1630,8 @@ _0807E7EA:
 	strh r0, [r4, 0x8]
 	b _0807E802
 _0807E7F2:
-	bl warp_in
-	ldr r0, _0807E808 @ =sub_805671C
+	bl WarpIntoMap
+	ldr r0, _0807E808 @ =CB2_LoadMap
 	bl SetMainCallback2
 	adds r0, r5, 0
 	bl DestroyTask
@@ -1640,7 +1640,7 @@ _0807E802:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807E808: .4byte sub_805671C
+_0807E808: .4byte CB2_LoadMap
 	thumb_func_end sub_807E784
 
 	thumb_func_start sub_807E80C
@@ -1957,8 +1957,8 @@ _0807EA9A:
 	ldr r0, _0807EAB8 @ =gFieldCallback
 	ldr r1, _0807EABC @ =sub_807DF64
 	str r1, [r0]
-	bl warp_in
-	ldr r0, _0807EAC0 @ =sub_805671C
+	bl WarpIntoMap
+	ldr r0, _0807EAC0 @ =CB2_LoadMap
 	bl SetMainCallback2
 	adds r0, r4, 0
 	bl DestroyTask
@@ -1970,7 +1970,7 @@ _0807EAB0:
 	.align 2, 0
 _0807EAB8: .4byte gFieldCallback
 _0807EABC: .4byte sub_807DF64
-_0807EAC0: .4byte sub_805671C
+_0807EAC0: .4byte CB2_LoadMap
 	thumb_func_end sub_807E980
 
 	thumb_func_start sub_807EAC4

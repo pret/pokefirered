@@ -22,7 +22,7 @@ sub_8054BC8: @ 8054BC8
 	bl sp000_heal_pokemon
 	bl sub_8054DD8
 	bl sub_80554BC
-	bl warp_in
+	bl WarpIntoMap
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -993,15 +993,15 @@ _0805536C:
 _08055374: .4byte gMapHeader
 	thumb_func_end update_camera_pos_from_warpid
 
-	thumb_func_start warp_in
-warp_in: @ 8055378
+	thumb_func_start WarpIntoMap
+WarpIntoMap: @ 8055378
 	push {lr}
 	bl warp_shift
 	bl set_current_map_header_from_sav1_save_old_name
 	bl update_camera_pos_from_warpid
 	pop {r0}
 	bx r0
-	thumb_func_end warp_in
+	thumb_func_end WarpIntoMap
 
 	thumb_func_start Overworld_SetWarpDestination
 Overworld_SetWarpDestination: @ 805538C
@@ -3571,8 +3571,8 @@ _08056714: .4byte sub_8056534
 _08056718: .4byte sub_80565B4
 	thumb_func_end c2_whiteout
 
-	thumb_func_start sub_805671C
-sub_805671C: @ 805671C
+	thumb_func_start CB2_LoadMap
+CB2_LoadMap: @ 805671C
 	push {lr}
 	bl sub_80569BC
 	bl ScriptContext1_Init
@@ -3590,7 +3590,7 @@ sub_805671C: @ 805671C
 _08056740: .4byte sub_80C9BFC
 _08056744: .4byte gMain
 _08056748: .4byte sub_805674C
-	thumb_func_end sub_805671C
+	thumb_func_end CB2_LoadMap
 
 	thumb_func_start sub_805674C
 sub_805674C: @ 805674C
@@ -3784,8 +3784,8 @@ _080568D8: .4byte gFieldCallback
 _080568DC: .4byte sub_807DD44
 	thumb_func_end sub_80568C4
 
-	thumb_func_start c2_exit_to_overworld_1_continue_scripts_restart_music
-c2_exit_to_overworld_1_continue_scripts_restart_music: @ 80568E0
+	thumb_func_start CB2_ReturnToFieldContinueScriptPlayMapMusic
+CB2_ReturnToFieldContinueScriptPlayMapMusic: @ 80568E0
 	push {lr}
 	bl sub_80569BC
 	ldr r1, _080568F4 @ =gFieldCallback
@@ -3797,7 +3797,7 @@ c2_exit_to_overworld_1_continue_scripts_restart_music: @ 80568E0
 	.align 2, 0
 _080568F4: .4byte gFieldCallback
 _080568F8: .4byte FieldCallback_ReturnToEventScript2
-	thumb_func_end c2_exit_to_overworld_1_continue_scripts_restart_music
+	thumb_func_end CB2_ReturnToFieldContinueScriptPlayMapMusic
 
 	thumb_func_start CB2_Overworld
 CB2_Overworld: @ 80568FC
@@ -3858,14 +3858,14 @@ CB2_ContinueSavedGame: @ 8056938
 	bne _0805699C
 	bl sav2_x9_clear_bit1
 	bl warp1_set_to_sav1w
-	bl warp_in
-	ldr r0, _08056998 @ =sub_805671C
+	bl WarpIntoMap
+	ldr r0, _08056998 @ =CB2_LoadMap
 	bl SetMainCallback2
 	b _080569AC
 	.align 2, 0
 _08056990: .4byte gFieldCallback2
 _08056994: .4byte gUnknown_2031DE0
-_08056998: .4byte sub_805671C
+_08056998: .4byte CB2_LoadMap
 _0805699C:
 	ldr r0, _080569B0 @ =gFieldCallback
 	ldr r1, _080569B4 @ =sub_8056918
@@ -5139,14 +5139,14 @@ sub_8057430: @ 8057430
 	bne _08057490
 	bl sav2_x9_clear_bit1
 	bl warp1_set_to_sav1w
-	bl warp_in
-	ldr r0, _0805748C @ =sub_805671C
+	bl WarpIntoMap
+	ldr r0, _0805748C @ =CB2_LoadMap
 	bl SetMainCallback2
 	b _0805749A
 	.align 2, 0
 _08057484: .4byte gUnknown_2036E28
 _08057488: .4byte gUnknown_2031DE0
-_0805748C: .4byte sub_805671C
+_0805748C: .4byte CB2_LoadMap
 _08057490:
 	ldr r0, _080574A0 @ =sub_8056534
 	bl sub_80565E0
@@ -5304,7 +5304,7 @@ _08057560:
 	adds r0, r4
 	ldrh r0, [r0, 0x4]
 	strh r0, [r1]
-	bl warp_in
+	bl WarpIntoMap
 	ldr r2, _08057610 @ =gPaletteFade
 	ldrb r0, [r2, 0x8]
 	movs r1, 0x80
@@ -5620,7 +5620,7 @@ sub_8057854: @ 8057854
 	cmp r0, 0
 	bne _08057876
 	bl CleanupOverworldWindowsAndTilemaps
-	ldr r0, _08057880 @ =sub_805671C
+	ldr r0, _08057880 @ =CB2_LoadMap
 	bl SetMainCallback2
 	adds r0, r4, 0
 	bl DestroyTask
@@ -5630,7 +5630,7 @@ _08057876:
 	bx r0
 	.align 2, 0
 _0805787C: .4byte gPaletteFade
-_08057880: .4byte sub_805671C
+_08057880: .4byte CB2_LoadMap
 	thumb_func_end sub_8057854
 
 	thumb_func_start c1_link_related

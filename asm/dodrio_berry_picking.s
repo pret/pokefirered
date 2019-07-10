@@ -9983,7 +9983,7 @@ _08155480:
 	movs r1, 0
 	adds r2, r5, 0
 	bl AddTextPrinterParameterized
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	bl sub_8153390
 	lsls r0, 16
 	lsrs r0, 16
@@ -9992,10 +9992,10 @@ _08155480:
 	bl CopyItemName
 	movs r0, 0
 	adds r1, r5, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	ldr r1, _0815556C @ =gUnknown_841CD7A
 	add r0, sp, 0xC
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	ldr r0, [r4]
 	add r0, r10
 	ldrb r0, [r0]
@@ -10016,7 +10016,7 @@ _08155480:
 	beq _0815559E
 	cmp r4, 0x3
 	beq _0815559E
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	bl sub_8153390
 	lsls r0, 16
 	lsrs r0, 16
@@ -10024,12 +10024,12 @@ _08155480:
 	bl CopyItemName
 	movs r0, 0
 	adds r1, r5, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	cmp r4, 0x2
 	bne _08155574
 	ldr r1, _08155570 @ =gUnknown_841CD9F
 	add r0, sp, 0xC
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	b _08155580
 	.align 2, 0
 _08155558: .4byte 0x00000101
@@ -10044,7 +10044,7 @@ _08155574:
 	bne _08155580
 	ldr r1, _081555C4 @ =gUnknown_841CDBA
 	add r0, sp, 0xC
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 _08155580:
 	ldr r0, _081555C8 @ =gUnknown_203F440
 	ldr r0, [r0]

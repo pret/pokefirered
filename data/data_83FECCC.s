@@ -759,8 +759,7 @@ gUnknown_84524C4:: @ 84524C4
 gUnknown_8452C4C:: @ 8452C4C
 	.incbin "baserom.gba", 0x452C4C, 0x48
 
-gUnknown_8452C94:: @ 8452C94
-	.incbin "baserom.gba", 0x452C94, 0x60
+	.section .rodata.8452CF4
 
 gUnknown_8452CF4:: @ 8452CF4
 	.incbin "baserom.gba", 0x452CF4, 0x8

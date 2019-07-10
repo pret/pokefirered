@@ -2,6 +2,7 @@
 #define GUARD_CONSTANTS_FLAGS_H
 
 // Sys Flags Maybe
+#define FLAG_SYS_SAFARI_MODE                                        0x800
 #define FLAG_WHITE_FLUTE_ACTIVE                                     0x803
 #define FLAG_BLACK_FLUTE_ACTIVE                                     0x804
 
@@ -1436,7 +1437,7 @@
 #define FLAG_SYS_USE_STRENGTH     (CODE_FLAGS + 0x29)
 #define FLAG_SYS_WEATHER_CTRL     (CODE_FLAGS + 0x2A)
 #define FLAG_SYS_CYCLING_ROAD     (CODE_FLAGS + 0x2B)
-#define FLAG_SYS_SAFARI_MODE      (CODE_FLAGS + 0x2C)
+#define FLAG_0x88C                (CODE_FLAGS + 0x2C)
 #define FLAG_SYS_CRUISE_MODE      (CODE_FLAGS + 0x2D)
 
 #define FLAG_0x88E                (CODE_FLAGS + 0x2E)

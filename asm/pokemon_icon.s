@@ -519,8 +519,8 @@ _080971C0:
 _080971C8: .4byte gUnknown_83D4038
 	thumb_func_end sub_8097198
 
-	thumb_func_start sub_80971CC
-sub_80971CC: @ 80971CC
+	thumb_func_start GetValidMonIconPalettePtr
+GetValidMonIconPalettePtr: @ 80971CC
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -542,7 +542,7 @@ _080971DC:
 	.align 2, 0
 _080971F0: .4byte gUnknown_83D4038
 _080971F4: .4byte gUnknown_83D3E80
-	thumb_func_end sub_80971CC
+	thumb_func_end GetValidMonIconPalettePtr
 
 	thumb_func_start sub_80971F8
 sub_80971F8: @ 80971F8

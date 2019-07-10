@@ -1802,7 +1802,7 @@ sub_8108B8C: @ 8108B8C
 	adds r3, r4, 0
 	adds r3, 0x8
 	adds r2, r3
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	ldr r0, _08108BF0 @ =gUnknown_203AD10
 	ldr r0, [r0]
 	ldr r0, [r0]
@@ -2341,7 +2341,7 @@ _08108FA0:
 _08108FE0: .4byte gUnknown_203AD10
 _08108FE4:
 	ldrb r0, [r7]
-	bl ListMenuHandleInput
+	bl ListMenu_ProcessInput
 	adds r4, r0, 0
 	ldrb r0, [r7]
 	ldr r5, _08109014 @ =gUnknown_203ACFC
@@ -2617,7 +2617,7 @@ sub_81091D0: @ 81091D0
 	adds r1, r2, r1
 	adds r3, 0x8
 	adds r2, r3
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	movs r0, 0
 	bl ScheduleBgCopyTilemapToVram
 	ldr r0, _08109290 @ =gUnknown_203AD10
@@ -2835,7 +2835,7 @@ sub_81093B8: @ 81093B8
 	ldrb r0, [r2]
 	movs r1, 0x10
 	movs r2, 0x1
-	bl sub_8107BD0
+	bl ListMenuSetUnkIndicatorsStructField
 	mov r0, r8
 	strh r4, [r0, 0x2]
 	ldr r0, _08109498 @ =gUnknown_203AD10
@@ -2931,7 +2931,7 @@ sub_81094B0: @ 81094B0
 	cmp r0, 0x1
 	beq _0810959E
 	ldrb r0, [r4]
-	bl ListMenuHandleInput
+	bl ListMenu_ProcessInput
 	adds r5, r0, 0
 	ldrb r0, [r4]
 	ldr r3, _0810953C @ =gUnknown_203ACFC
@@ -3082,7 +3082,7 @@ _081095E8:
 	adds r7, r4, 0
 	adds r7, 0x8
 	adds r2, r7
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	movs r3, 0x2
 	ldrsh r0, [r6, r3]
 	cmp r0, r5
@@ -3160,7 +3160,7 @@ sub_810967C: @ 810967C
 	adds r7, r5, 0
 	adds r7, 0x8
 	adds r2, r7
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	movs r3, 0x2
 	ldrsh r0, [r6, r3]
 	cmp r0, r4
@@ -4213,7 +4213,7 @@ _08109F6E:
 	adds r6, r4, 0
 	adds r6, 0x8
 	adds r2, r6
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	ldrb r0, [r4, 0x6]
 	bl sub_8108DC8
 	ldrb r0, [r4, 0x6]
@@ -4304,7 +4304,7 @@ _0810A052:
 	adds r6, r4, 0
 	adds r6, 0x8
 	adds r2, r6
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	ldrb r0, [r4, 0x6]
 	bl sub_810842C
 	ldr r0, _0810A0A4 @ =gMultiuseListMenuTemplate
@@ -4519,7 +4519,7 @@ sub_810A1F8: @ 810A1F8
 	adds r3, r4
 	mov r9, r3
 	add r2, r9
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	ldrb r0, [r4, 0x6]
 	bl sub_8108DC8
 	ldrb r0, [r4, 0x6]
@@ -5497,7 +5497,7 @@ sub_810A9D4: @ 810A9D4
 	adds r3, r4
 	mov r9, r3
 	add r2, r9
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	ldrb r0, [r4, 0x6]
 	bl sub_8108DC8
 	ldrb r0, [r4, 0x6]
@@ -6212,7 +6212,7 @@ _0810B01C:
 	ldrb r0, [r5]
 	movs r1, 0
 	movs r2, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	bl sub_810AECC
 	bl sub_8108CB4
 	adds r0, r7, 0
@@ -6537,7 +6537,7 @@ _0810B29E:
 	adds r6, r4, 0
 	adds r6, 0x8
 	adds r2, r6
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	ldrb r0, [r4, 0x6]
 	bl sub_810842C
 	ldr r0, _0810B328 @ =gMultiuseListMenuTemplate
@@ -6573,7 +6573,7 @@ _0810B32C:
 	movs r0, 0x80
 	strh r0, [r1, 0x30]
 	ldrb r0, [r7]
-	bl ListMenuHandleInput
+	bl ListMenu_ProcessInput
 	b _0810B36C
 	.align 2, 0
 _0810B340: .4byte gMain
@@ -6583,7 +6583,7 @@ _0810B344:
 	ldrb r0, [r7]
 	movs r1, 0
 	movs r2, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	bl sub_810AECC
 	bl sub_8108CB4
 	adds r0, r6, 0
@@ -6701,7 +6701,7 @@ _0810B428:
 _0810B430:
 	strh r0, [r1, 0x30]
 	ldrb r0, [r4]
-	bl ListMenuHandleInput
+	bl ListMenu_ProcessInput
 	b _0810B4B0
 	.align 2, 0
 _0810B43C: .4byte gMain
@@ -6738,7 +6738,7 @@ _0810B468:
 	ldrb r0, [r4]
 	movs r1, 0
 	movs r2, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	bl sub_810AECC
 	bl sub_8108CB4
 	adds r0, r7, 0
@@ -6817,7 +6817,7 @@ _0810B528:
 	strh r6, [r0, 0x2E]
 	strh r7, [r0, 0x30]
 	ldrb r0, [r5]
-	bl ListMenuHandleInput
+	bl ListMenu_ProcessInput
 	b _0810B5C0
 	.align 2, 0
 _0810B538: .4byte gMain
@@ -6854,7 +6854,7 @@ _0810B564:
 	ldrb r0, [r5]
 	movs r1, 0
 	movs r2, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	bl sub_810AECC
 	ldr r1, _0810B5B0 @ =gUnknown_3005E98
 	ldr r0, _0810B5B4 @ =ItemUseCB_Medicine
@@ -6950,7 +6950,7 @@ _0810B64E:
 	strh r5, [r0, 0x2E]
 	strh r7, [r0, 0x30]
 	ldrb r0, [r6]
-	bl ListMenuHandleInput
+	bl ListMenu_ProcessInput
 	b _0810B6E0
 	.align 2, 0
 _0810B65C: .4byte gMain
@@ -6989,7 +6989,7 @@ _0810B68C:
 	ldrb r0, [r6]
 	movs r1, 0
 	movs r2, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	bl sub_810AECC
 	ldr r0, _0810B6D4 @ =gUnknown_203AD10
 	ldr r1, [r0]

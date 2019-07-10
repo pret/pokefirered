@@ -17903,7 +17903,7 @@ PutMonIconOnLvlUpBox: @ 8026688
 	orrs r0, r1
 	str r0, [sp, 0x4]
 	adds r0, r4, 0
-	bl sub_80971CC
+	bl GetValidMonIconPalettePtr
 	str r0, [sp, 0x8]
 	add r4, sp, 0x8
 	ldr r0, [r4, 0x4]

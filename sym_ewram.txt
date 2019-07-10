@@ -979,13 +979,7 @@ gUnknown_203998C: @ 203998C
 	.include "src/money.o"
 
 	.align 2
-gUnknown_2039994: @ 2039994
-	.space 0x2
-
-gUnknown_2039996: @ 2039996
-	.space 0x2
-
-	.align 2
+	.include "src/safari_zone.o"
 	.include "src/item_use.o"
 
 	.align 2
@@ -1173,9 +1167,8 @@ gUnknown_203ACEC: @ 203ACEC
 gUnknown_203ACF0: @ 203ACF0
 	.space 0x4
 
-gUnknown_203ACF4: @ 203ACF4
-	.space 0x8
-
+	.include "src/list_menu.o"
+	.align 2
 gUnknown_203ACFC: @ 203ACFC
 	.space 0x6
 
@@ -1358,9 +1351,7 @@ gUnknown_203B0E8: @ 203B0E8
 	.include "src/oak_speech.o"
 	.align 2
 	.include "src/tm_case.o"
-
-gUnknown_203B130: @ 203B130
-	.space 0x10
+	.include "src/menu_indicators.o"
 
 gUnknown_203B140: @ 203B140
 	.space 0x4
@@ -1400,10 +1391,7 @@ gUnknown_203B170: @ 203B170
 
 	.align 2
 	.include "src/help_system.o"
-
-	@ src/unk_text_util.o
-gUnknown_203F34C: @ 203F34C
-	.space 0x20
+	.include "src/dynamic_placeholder_text_util.o"
 
 gUnknown_203F36C: @ 203F36C
 	.space 0x4

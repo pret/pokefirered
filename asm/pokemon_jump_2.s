@@ -5644,20 +5644,20 @@ sub_814A468: @ 814A468
 	ldr r1, _0814A530 @ =gUnknown_846D94C
 	bl StringAppend
 _0814A4C2:
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	ldr r4, _0814A52C @ =gUnknown_203F3D8
 	ldr r1, [r4]
 	adds r1, 0x26
 	movs r0, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	ldr r1, [r4]
 	adds r1, 0x66
 	movs r0, 0x1
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	ldr r0, [r4]
 	adds r0, 0xA6
 	ldr r1, _0814A534 @ =gUnknown_841CBA9
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	movs r0, 0x4
 	movs r1, 0x8
 	movs r2, 0x16
@@ -5706,15 +5706,15 @@ sub_814A53C: @ 814A53C
 	ldr r1, [r4]
 	adds r1, 0x26
 	bl CopyItemName
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	ldr r1, [r4]
 	adds r1, 0x26
 	movs r0, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	ldr r0, [r4]
 	adds r0, 0xA6
 	ldr r1, _0814A5B0 @ =gUnknown_841CBCA
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	movs r0, 0x4
 	movs r1, 0x8
 	movs r2, 0x16
@@ -5761,15 +5761,15 @@ sub_814A5B4: @ 814A5B4
 	ldr r1, [r4]
 	adds r1, 0x26
 	bl CopyItemName
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	ldr r1, [r4]
 	adds r1, 0x26
 	movs r0, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	ldr r0, [r4]
 	adds r0, 0xA6
 	ldr r1, _0814A628 @ =gUnknown_841CBE4
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	movs r0, 0x4
 	movs r1, 0x9
 	movs r2, 0x16

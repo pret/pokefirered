@@ -16029,14 +16029,14 @@ gFile_graphics_mail_retro_map_tilemap:: @ 8E95C88
 	.incbin "graphics/mail/retro/map.bin.lz"
 
 	.align 2
-gUnknown_8E95D9C:: @ 8E95D9C
-	.incbin "baserom.gba", 0xE95D9C, 0x20 @UNKNOWN
+gFireRedMenuElements1_Pal:: @ 8E95D9C
+	.incbin "graphics/interface/dex_caught_pokeball.gbapal"
 
-gUnknown_8E95DBC:: @ 8E95DBC
-	.incbin "baserom.gba", 0xE95DBC, 0x20 @UNKNOWN
+gFireRedMenuElements2_Pal:: @ 8E95DBC
+	.incbin "graphics/interface/pokemon_types.gbapal"
 
-gUnknown_8E95DDC:: @ 8E95DDC
-	.incbin "baserom.gba", 0xE95DDC, 0x2000 @UNKNOWN
+gFireRedMenuElements_Gfx:: @ 8E95DDC
+	.incbin "graphics/interface/dex_caught_pokeball_and_pokemon_types.4bpp"
 
 gUnknown_8E97DDC:: @ 8E97DDC
 	.incbin "baserom.gba", 0xE97DDC, 0x20 @UNKNOWN

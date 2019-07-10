@@ -287,7 +287,7 @@ sub_80CD460: @ 80CD460
 	ands r0, r1
 	cmp r0, 0
 	bne _080CD490
-	ldr r0, _080CD49C @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r0, _080CD49C @ =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	bl SetMainCallback2
 	ldr r0, _080CD4A0 @ =gUnknown_2039A1C
 	ldr r0, [r0]
@@ -303,7 +303,7 @@ _080CD490:
 	bx r0
 	.align 2, 0
 _080CD498: .4byte gPaletteFade
-_080CD49C: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
+_080CD49C: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
 _080CD4A0: .4byte gUnknown_2039A1C
 	thumb_func_end sub_80CD460
 

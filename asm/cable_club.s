@@ -2387,13 +2387,13 @@ sp02A_crash_sound: @ 8081A1C
 	push {lr}
 	ldr r0, _08081A2C @ =gSpecialVar_0x8006
 	ldrb r0, [r0]
-	ldr r1, _08081A30 @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r1, _08081A30 @ =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	bl sub_808B700
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08081A2C: .4byte gSpecialVar_0x8006
-_08081A30: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
+_08081A30: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
 	thumb_func_end sp02A_crash_sound
 
 	thumb_func_start sub_8081A34

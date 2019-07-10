@@ -1533,7 +1533,7 @@ static void DaycarePrintMonInfo(u8 windowId, s32 daycareSlotId, u8 y)
 
 static void Task_HandleDaycareLevelMenuInput(u8 taskId)
 {
-    u32 input = ListMenuHandleInput(gTasks[taskId].tMenuListTaskId);
+    u32 input = ListMenu_ProcessInput(gTasks[taskId].tMenuListTaskId);
 
     if (gMain.newKeys & A_BUTTON)
     {
@@ -1547,7 +1547,7 @@ static void Task_HandleDaycareLevelMenuInput(u8 taskId)
             gSpecialVar_Result = 2;
             break;
         }
-        DestroyListMenu(gTasks[taskId].tMenuListTaskId, NULL, NULL);
+        DestroyListMenuTask(gTasks[taskId].tMenuListTaskId, NULL, NULL);
         ClearStdWindowAndFrame(gTasks[taskId].tWindowId, TRUE);
         RemoveWindow(gTasks[taskId].tWindowId);
         DestroyTask(taskId);
@@ -1556,7 +1556,7 @@ static void Task_HandleDaycareLevelMenuInput(u8 taskId)
     else if (gMain.newKeys & B_BUTTON)
     {
         gSpecialVar_Result = 2;
-        DestroyListMenu(gTasks[taskId].tMenuListTaskId, NULL, NULL);
+        DestroyListMenuTask(gTasks[taskId].tMenuListTaskId, NULL, NULL);
         ClearStdWindowAndFrame(gTasks[taskId].tWindowId, TRUE);
         RemoveWindow(gTasks[taskId].tWindowId);
         DestroyTask(taskId);

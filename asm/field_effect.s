@@ -2039,8 +2039,8 @@ _08084350:
 	cmp r0, 0
 	bne _08084376
 	bl sub_8054CA0
-	bl warp_in
-	ldr r0, _08084384 @ =sub_805671C
+	bl WarpIntoMap
+	ldr r0, _08084384 @ =CB2_LoadMap
 	bl SetMainCallback2
 	ldr r1, _08084388 @ =gFieldCallback
 	ldr r0, _0808438C @ =mapldr_08084390
@@ -2054,7 +2054,7 @@ _08084376:
 	.align 2, 0
 _0808437C: .4byte gTasks
 _08084380: .4byte gFieldEffectArguments
-_08084384: .4byte sub_805671C
+_08084384: .4byte CB2_LoadMap
 _08084388: .4byte gFieldCallback
 _0808438C: .4byte mapldr_08084390
 	thumb_func_end task00_8084310
@@ -2860,11 +2860,11 @@ sub_80849A0: @ 80849A0
 	cmp r0, 0x1
 	bne _080849DC
 	bl sub_809C460
-	bl warp_in
+	bl WarpIntoMap
 	ldr r1, _080849E4 @ =gFieldCallback
 	ldr r0, _080849E8 @ =sub_80849F4
 	str r0, [r1]
-	ldr r0, _080849EC @ =sub_805671C
+	ldr r0, _080849EC @ =CB2_LoadMap
 	bl SetMainCallback2
 	ldr r0, _080849F0 @ =sub_80847C0
 	bl FindTaskIdByFunc
@@ -2878,7 +2878,7 @@ _080849DC:
 _080849E0: .4byte gPaletteFade
 _080849E4: .4byte gFieldCallback
 _080849E8: .4byte sub_80849F4
-_080849EC: .4byte sub_805671C
+_080849EC: .4byte CB2_LoadMap
 _080849F0: .4byte sub_80847C0
 	thumb_func_end sub_80849A0
 
@@ -3883,11 +3883,11 @@ sub_8085168: @ 8085168
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080851A0
-	bl warp_in
+	bl WarpIntoMap
 	ldr r1, _080851AC @ =gFieldCallback
 	ldr r0, _080851B0 @ =mapldr_080851BC
 	str r0, [r1]
-	ldr r0, _080851B4 @ =sub_805671C
+	ldr r0, _080851B4 @ =CB2_LoadMap
 	bl SetMainCallback2
 	ldr r0, _080851B8 @ =sub_8084F44
 	bl FindTaskIdByFunc
@@ -3902,7 +3902,7 @@ _080851A0:
 _080851A8: .4byte gPaletteFade
 _080851AC: .4byte gFieldCallback
 _080851B0: .4byte mapldr_080851BC
-_080851B4: .4byte sub_805671C
+_080851B4: .4byte CB2_LoadMap
 _080851B8: .4byte sub_8084F44
 	thumb_func_end sub_8085168
 
@@ -4388,11 +4388,11 @@ sub_808554C: @ 808554C
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08085584
-	bl warp_in
+	bl WarpIntoMap
 	ldr r1, _08085590 @ =gFieldCallback
 	ldr r0, _08085594 @ =sub_8084454
 	str r0, [r1]
-	ldr r0, _08085598 @ =sub_805671C
+	ldr r0, _08085598 @ =CB2_LoadMap
 	bl SetMainCallback2
 	ldr r0, _0808559C @ =sub_80853E4
 	bl FindTaskIdByFunc
@@ -4407,7 +4407,7 @@ _08085584:
 _0808558C: .4byte gPaletteFade
 _08085590: .4byte gFieldCallback
 _08085594: .4byte sub_8084454
-_08085598: .4byte sub_805671C
+_08085598: .4byte CB2_LoadMap
 _0808559C: .4byte sub_80853E4
 	thumb_func_end sub_808554C
 
@@ -4612,11 +4612,11 @@ _08085702:
 	adds r0, r6, 0
 	bl FieldObjectSetDirection
 	bl sub_80555E0
-	bl warp_in
+	bl WarpIntoMap
 	ldr r1, _0808575C @ =gFieldCallback
 	ldr r0, _08085760 @ =sub_80859D4
 	str r0, [r1]
-	ldr r0, _08085764 @ =sub_805671C
+	ldr r0, _08085764 @ =CB2_LoadMap
 	bl SetMainCallback2
 	ldr r0, _08085768 @ =sub_808563C
 	bl FindTaskIdByFunc
@@ -4631,7 +4631,7 @@ _08085750:
 _08085758: .4byte gPaletteFade
 _0808575C: .4byte gFieldCallback
 _08085760: .4byte sub_80859D4
-_08085764: .4byte sub_805671C
+_08085764: .4byte CB2_LoadMap
 _08085768: .4byte sub_808563C
 	thumb_func_end sub_8085690
 
@@ -5406,8 +5406,8 @@ sub_8085D34: @ 8085D34
 	cmp r0, 0x1
 	bne _08085D70
 	bl copy_saved_warp3_bank_and_enter_x_to_warp1
-	bl warp_in
-	ldr r0, _08085D78 @ =sub_805671C
+	bl WarpIntoMap
+	ldr r0, _08085D78 @ =CB2_LoadMap
 	bl SetMainCallback2
 	ldr r1, _08085D7C @ =gFieldCallback
 	ldr r0, _08085D80 @ =mapldr_08085D88
@@ -5422,7 +5422,7 @@ _08085D70:
 	bx r0
 	.align 2, 0
 _08085D74: .4byte gPaletteFade
-_08085D78: .4byte sub_805671C
+_08085D78: .4byte CB2_LoadMap
 _08085D7C: .4byte gFieldCallback
 _08085D80: .4byte mapldr_08085D88
 _08085D84: .4byte sub_8085B78

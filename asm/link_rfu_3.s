@@ -620,7 +620,7 @@ _08115DD4:
 	bl sub_81165E8
 	strb r0, [r5, 0x13]
 	ldrb r0, [r5, 0x12]
-	bl sub_8107180
+	bl RedrawListMenu
 	b _0811610C
 	.align 2, 0
 _08115DE4: .4byte gUnknown_203B058
@@ -783,7 +783,7 @@ _08115EF4:
 	movs r0, 0
 	strb r0, [r1, 0x1B]
 	ldrb r0, [r5, 0x12]
-	bl sub_8107180
+	bl RedrawListMenu
 	ldrb r0, [r5, 0x13]
 	adds r0, 0x1
 	strb r0, [r5, 0x13]
@@ -870,7 +870,7 @@ _08115FB4:
 	ldr r0, [r5]
 	bl sub_81165E8
 	ldrb r0, [r5, 0x12]
-	bl sub_8107180
+	bl RedrawListMenu
 _08115FF0:
 	movs r0, 0x4
 	strb r0, [r5, 0xC]
@@ -1139,7 +1139,7 @@ sub_81161E4: @ 81161E4
 	ldrb r0, [r4, 0x12]
 	movs r1, 0
 	movs r2, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	ldrb r0, [r4, 0x10]
 	bl ClearWindowTilemap
 	ldrb r0, [r4, 0xF]
@@ -1400,7 +1400,7 @@ _08116460:
 	movs r0, 0x2
 	bl PlaySE
 	ldrb r0, [r5, 0x12]
-	bl sub_8107180
+	bl RedrawListMenu
 	ldr r4, _081164A0 @ =gStringVar2
 	ldrb r0, [r5, 0x13]
 	lsls r0, 5
@@ -1433,7 +1433,7 @@ _081164AC:
 	movs r1, 0
 	bl sub_80FB9E4
 	ldrb r0, [r5, 0x12]
-	bl sub_8107180
+	bl RedrawListMenu
 	strb r4, [r5, 0xC]
 	movs r0, 0x1
 	b _081164C2
@@ -1972,7 +1972,7 @@ _08116916:
 	b _08116BF6
 _0811691E:
 	ldrb r0, [r6, 0xE]
-	bl ListMenuHandleInput
+	bl ListMenu_ProcessInput
 	adds r4, r0, 0
 	ldr r0, _0811696C @ =gMain
 	ldrh r1, [r0, 0x2E]
@@ -2301,7 +2301,7 @@ _08116BF4:
 	strb r0, [r6, 0x8]
 _08116BF6:
 	ldrb r0, [r6, 0xE]
-	bl sub_8107180
+	bl RedrawListMenu
 	b _08116D06
 _08116BFE:
 	bl sub_80FB9F4
@@ -2322,7 +2322,7 @@ _08116C10:
 	ldrb r0, [r6, 0xE]
 	movs r1, 0
 	movs r2, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	ldrb r0, [r6, 0xC]
 	bl ClearWindowTilemap
 	ldrb r0, [r6, 0xB]
@@ -2480,7 +2480,7 @@ sub_8116D60: @ 8116D60
 	movs r1, 0
 	bl sub_80FCD74
 	ldrb r0, [r4, 0xE]
-	bl sub_8107180
+	bl RedrawListMenu
 	ldr r5, _08116DD4 @ =gStringVar1
 	ldrb r0, [r4, 0xF]
 	lsls r0, 5
@@ -3367,7 +3367,7 @@ sub_8117440: @ 8117440
 	movs r0, 0
 	mov r3, r8
 	bl SetDynamicWarpWithCoords
-	bl warp_in
+	bl WarpIntoMap
 	add sp, 0x8
 	pop {r3}
 	mov r8, r3
@@ -3424,7 +3424,7 @@ sub_81174B4: @ 81174B4
 	adds r1, r5, 0
 	mov r3, r8
 	bl Overworld_SetWarpDestination
-	bl warp_in
+	bl WarpIntoMap
 	add sp, 0x4
 	pop {r3}
 	mov r8, r3
@@ -3763,21 +3763,21 @@ _08117890:
 	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _081178AC @ =sub_805671C
+	ldr r1, _081178AC @ =CB2_LoadMap
 	bl sub_8147AA8
 	b _081178E0
 	.align 2, 0
-_081178AC: .4byte sub_805671C
+_081178AC: .4byte CB2_LoadMap
 _081178B0:
 	movs r0, 0x7
 	movs r1, 0x9
 	movs r2, 0x1
 	bl sub_8117440
-	ldr r0, _081178C4 @ =sub_805671C
+	ldr r0, _081178C4 @ =CB2_LoadMap
 	bl sub_814B754
 	b _081178E0
 	.align 2, 0
-_081178C4: .4byte sub_805671C
+_081178C4: .4byte CB2_LoadMap
 _081178C8:
 	movs r0, 0x8
 	movs r1, 0x5
@@ -3786,7 +3786,7 @@ _081178C8:
 	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _081178F8 @ =sub_805671C
+	ldr r1, _081178F8 @ =CB2_LoadMap
 	bl sub_81507FC
 _081178E0:
 	adds r0, r4, 0
@@ -3800,7 +3800,7 @@ _081178E0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081178F8: .4byte sub_805671C
+_081178F8: .4byte CB2_LoadMap
 _081178FC: .4byte gSpecialVar_Result
 	thumb_func_end sub_81175BC
 
@@ -4151,7 +4151,7 @@ _08117BF4:
 	bl sub_81165E8
 	strb r0, [r5, 0x13]
 	ldrb r0, [r5, 0x12]
-	bl sub_8107180
+	bl RedrawListMenu
 _08117C02:
 	movs r0, 0x2
 	strb r0, [r5, 0xC]
@@ -4198,7 +4198,7 @@ _08117C42:
 	adds r1, r0
 	strb r4, [r1, 0x1B]
 	ldrb r0, [r5, 0x12]
-	bl sub_8107180
+	bl RedrawListMenu
 	movs r0, 0x5
 	strb r0, [r5, 0x19]
 	ldrb r1, [r5, 0x13]
@@ -4268,7 +4268,7 @@ _08117CB2:
 	movs r0, 0
 	strb r0, [r1, 0x1B]
 	ldrb r0, [r5, 0x12]
-	bl sub_8107180
+	bl RedrawListMenu
 	ldrb r0, [r5, 0x13]
 	adds r0, 0x1
 	strb r0, [r5, 0x13]
@@ -4327,7 +4327,7 @@ _08117D3C:
 	ldr r0, [r5]
 	bl sub_81165E8
 	ldrb r0, [r5, 0x12]
-	bl sub_8107180
+	bl RedrawListMenu
 	movs r0, 0x2
 	strb r0, [r5, 0xC]
 _08117D7C:
@@ -4398,7 +4398,7 @@ _08117DEE:
 	ldrb r0, [r5, 0x12]
 	movs r1, 0
 	movs r2, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 	ldrb r0, [r5, 0xF]
@@ -4457,7 +4457,7 @@ _08117E80:
 	ldrb r0, [r5, 0x12]
 	movs r1, 0
 	movs r2, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 	ldrb r0, [r5, 0xF]
@@ -4673,11 +4673,11 @@ _08118070:
 	bl PlaySE
 _08118086:
 	ldrb r0, [r5, 0xE]
-	bl sub_8107180
+	bl RedrawListMenu
 	b _08118288
 _0811808E:
 	ldrb r0, [r5, 0xE]
-	bl ListMenuHandleInput
+	bl ListMenu_ProcessInput
 	adds r2, r0, 0
 	ldr r0, _08118128 @ =gMain
 	ldrh r1, [r0, 0x2E]
@@ -4707,7 +4707,7 @@ _0811808E:
 	movs r1, 0
 	bl sub_80FCD74
 	ldrb r0, [r5, 0xE]
-	bl sub_8107180
+	bl RedrawListMenu
 	ldr r4, _0811812C @ =gStringVar1
 	ldrb r0, [r5, 0xF]
 	lsls r0, 5
@@ -4842,7 +4842,7 @@ _081181EC:
 	ldrb r0, [r5, 0xE]
 	movs r1, 0
 	movs r2, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 	ldrb r0, [r5, 0xD]
@@ -5085,14 +5085,14 @@ _0811841E:
 	b _08118604
 _08118426:
 	ldrb r0, [r5, 0xE]
-	bl sub_8107180
+	bl RedrawListMenu
 	b _08118604
 _0811842E:
 	ldrb r0, [r5, 0x13]
 	cmp r0, 0
 	beq _0811843A
 	ldrb r0, [r5, 0xE]
-	bl ListMenuHandleInput
+	bl ListMenu_ProcessInput
 _0811843A:
 	ldrb r0, [r5, 0x14]
 	cmp r0, 0x78
@@ -5242,7 +5242,7 @@ _08118564:
 	ldrb r0, [r5, 0xE]
 	movs r1, 0
 	movs r2, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 	ldrb r0, [r5, 0xB]
@@ -8715,7 +8715,7 @@ _0811A270: .4byte gMultiuseListMenuTemplate
 _0811A274:
 	mov r3, r9
 	ldrb r0, [r3]
-	bl ListMenuHandleInput
+	bl ListMenu_ProcessInput
 	mov r8, r0
 	ldr r0, _0811A2AC @ =gMain
 	ldrh r1, [r0, 0x2E]
@@ -8726,7 +8726,7 @@ _0811A274:
 	ldrb r0, [r4]
 	movs r1, 0
 	movs r2, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	ldrb r0, [r5]
 	movs r1, 0x1
 	bl ClearStdWindowAndFrame
@@ -8747,7 +8747,7 @@ _0811A2B0:
 	ldrb r0, [r6]
 	movs r1, 0
 	movs r2, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	ldrb r0, [r5]
 	movs r1, 0x1
 	bl ClearStdWindowAndFrame
@@ -8821,7 +8821,7 @@ _0811A350: .4byte gUnknown_8456F1C
 _0811A354: .4byte gMultiuseListMenuTemplate
 _0811A358:
 	ldrb r0, [r5]
-	bl ListMenuHandleInput
+	bl ListMenu_ProcessInput
 	adds r1, r0, 0
 	ldr r0, _0811A3A8 @ =gMain
 	ldrh r2, [r0, 0x2E]
@@ -8842,7 +8842,7 @@ _0811A37E:
 	ldrb r0, [r5]
 	movs r1, 0
 	movs r2, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	ldrb r0, [r4]
 	movs r1, 0x1
 	bl ClearStdWindowAndFrame
@@ -8867,7 +8867,7 @@ _0811A3AC:
 	ldrb r0, [r5]
 	movs r1, 0
 	movs r2, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	ldrb r0, [r4]
 	movs r1, 0x1
 	bl ClearStdWindowAndFrame
@@ -9999,7 +9999,7 @@ _0811AC3C:
 	adds r0, r6, 0
 	movs r2, 0x44
 	adds r3, r5, 0
-	bl blit_move_info_icon
+	bl BlitMoveInfoIcon
 	movs r0, 0xB
 	mov r2, r8
 	muls r2, r0
@@ -10537,14 +10537,14 @@ _0811B056:
 	lsls r0, r4, 24
 	lsrs r0, 24
 	adds r1, r5, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	adds r5, 0xB
 	adds r4, 0x1
 	cmp r4, 0x3
 	ble _0811B056
 	ldr r1, _0811B074 @ =gUnknown_8457D44
 	adds r0, r7, 0
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	b _0811B080
 	.align 2, 0
 _0811B074: .4byte gUnknown_8457D44
@@ -10952,7 +10952,7 @@ sub_811B31C: @ 811B31C
 	ldr r0, _0811B4B0 @ =gUnknown_2039624
 	adds r1, r0
 	mov r8, r1
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	mov r6, r9
 	adds r6, 0xAC
 	bl sub_80447F0
@@ -10966,11 +10966,11 @@ sub_811B31C: @ 811B31C
 	bl StringCopy
 	movs r0, 0
 	adds r1, r6, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	mov r1, r8
 	adds r1, 0x30
 	movs r0, 0x1
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	movs r4, 0xB0
 	lsls r4, 1
 	add r4, r9
@@ -10984,7 +10984,7 @@ sub_811B31C: @ 811B31C
 	bl StringCopy
 	movs r0, 0x2
 	adds r1, r4, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	mov r5, r9
 	adds r5, 0xCA
 	mov r0, r8
@@ -10995,7 +10995,7 @@ sub_811B31C: @ 811B31C
 	bl ConvertIntToDecimalStringN
 	movs r0, 0x3
 	adds r1, r5, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	movs r2, 0xD9
 	add r2, r9
 	mov r10, r2
@@ -11015,16 +11015,16 @@ sub_811B31C: @ 811B31C
 	bl ConvertIntToDecimalStringN
 	movs r0, 0x4
 	mov r1, r10
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	movs r0, 0x5
 	adds r1, r4, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	movs r4, 0xC8
 	lsls r4, 1
 	add r4, r9
 	ldr r1, _0811B4BC @ =gUnknown_84594C4
 	adds r0, r4, 0
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	ldr r0, _0811B4C0 @ =gStringVar4
 	adds r1, r4, 0
 	bl StringCopy
@@ -11041,7 +11041,7 @@ _0811B40A:
 	bl ConvertIntToDecimalStringN
 	movs r0, 0
 	adds r1, r6, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	mov r2, r8
 	ldrh r1, [r2, 0x16]
 	cmp r1, r4
@@ -11056,7 +11056,7 @@ _0811B426:
 	bl ConvertIntToDecimalStringN
 	movs r0, 0x2
 	adds r1, r4, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	mov r0, r8
 	ldrh r1, [r0, 0x20]
 	adds r0, r5, 0
@@ -11065,7 +11065,7 @@ _0811B426:
 	bl ConvertIntToDecimalStringN
 	movs r0, 0x3
 	adds r1, r5, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	movs r7, 0
 	movs r6, 0x80
 	lsls r6, 19
@@ -11078,7 +11078,7 @@ _0811B45E:
 	bl CopyEasyChatWord
 	lsrs r0, r6, 24
 	adds r1, r4, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	movs r2, 0x80
 	lsls r2, 17
 	adds r6, r2
@@ -11092,7 +11092,7 @@ _0811B45E:
 	add r4, r9
 	ldr r1, _0811B4C8 @ =gUnknown_8459504
 	adds r0, r4, 0
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	ldr r5, _0811B4C0 @ =gStringVar4
 	adds r0, r5, 0
 	adds r1, r4, 0
@@ -11102,7 +11102,7 @@ _0811B45E:
 	bne _0811B4D0
 	ldr r1, _0811B4CC @ =gUnknown_8459588
 	adds r0, r4, 0
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl StringAppend
@@ -11127,7 +11127,7 @@ _0811B4D0:
 	adds r1, r0
 	ldr r1, [r1]
 	adds r0, r4, 0
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl StringAppend

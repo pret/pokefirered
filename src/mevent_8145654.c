@@ -97,7 +97,7 @@ const u16 gUnknown_8467E74[] = INCBIN_U16("data/graphics/mevent/pal_467E74.gbapa
 const u16 gUnknown_8467E94[] = INCBIN_U16("data/graphics/mevent/pal_467E94.gbapal");
 const u16 gUnknown_8467EB4[] = INCBIN_U16("data/graphics/mevent/pal_467EB4.gbapal");
 const u16 gUnknown_8467ED4[] = INCBIN_U16("data/graphics/mevent/pal_467ED4.gbapal");
-const u8 gUnknown_8467EF4[] = INCBIN_U8("data/graphics/mevent/gfx_467EF4.4bpp.lz");
+const u32 gUnknown_8467EF4[] = INCBIN_U32("data/graphics/mevent/gfx_467EF4.4bpp.lz");
 
 const struct CompressedSpriteSheet gUnknown_8467F58 = {
     gUnknown_8467EF4, 0x100, 0x8000

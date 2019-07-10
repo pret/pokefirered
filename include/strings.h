@@ -91,6 +91,7 @@ extern const u8 gText_PkmnFainted3[];
 extern const u8 gText_Coins[];
 extern const u8 gText_EggNickname[];
 extern const u8 gText_Pokemon[];
+extern const u8 gText_PkmnFainted3[];
 
 extern const u8 gOtherText_Use[];
 extern const u8 gOtherText_Give[];

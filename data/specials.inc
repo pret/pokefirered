@@ -214,8 +214,8 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
-	def_special sub_80A0EC4
-	def_special sub_80A0EEC
+	def_special EnterSafariMode
+	def_special ExitSafariMode
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75

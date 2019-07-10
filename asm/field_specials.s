@@ -268,13 +268,13 @@ _080CA7E6:
 sub_80CA7EC: @ 80CA7EC
 	push {lr}
 	bl sub_8112364
-	ldr r1, _080CA800 @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r1, _080CA800 @ =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	movs r0, 0x1
 	bl sub_80BFF50
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CA800: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
+_080CA800: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
 	thumb_func_end sub_80CA7EC
 
 	thumb_func_start sub_80CA804
@@ -2781,7 +2781,7 @@ sub_80CBB28: @ 80CBB28
 	ldrh r0, [r6, 0x24]
 	lsls r0, 24
 	lsrs r0, 24
-	bl ListMenuHandleInput
+	bl ListMenu_ProcessInput
 	adds r4, r0, 0
 	movs r0, 0x2
 	negs r0, r0
@@ -2854,7 +2854,7 @@ sub_80CBBAC: @ 80CBBAC
 	lsrs r0, 24
 	movs r1, 0
 	movs r2, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	ldr r0, _080CBC28 @ =gUnknown_2039A14
 	ldr r0, [r0]
 	bl Free
@@ -3183,7 +3183,7 @@ _080CBE20:
 	lsls r0, 24
 	lsrs r0, 24
 _080CBE40:
-	bl sub_813CD24
+	bl GetColorFromTextColorTable
 _080CBE44:
 	lsls r0, 24
 	lsrs r0, 24
@@ -3469,7 +3469,7 @@ ChangeBoxPokemonNickname_CB: @ 80CC064
 	ldrb r1, [r1]
 	ldr r2, _080CC084 @ =gStringVar2
 	bl SetBoxMonNickFromAnyBox
-	bl c2_exit_to_overworld_1_continue_scripts_restart_music
+	bl CB2_ReturnToFieldContinueScriptPlayMapMusic
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3577,7 +3577,7 @@ ChangePokemonNickname_CB: @ 80CC144
 	ldr r2, _080CC16C @ =gStringVar2
 	movs r1, 0x2
 	bl SetMonData
-	bl c2_exit_to_overworld_1_continue_scripts_restart_music
+	bl CB2_ReturnToFieldContinueScriptPlayMapMusic
 	pop {r0}
 	bx r0
 	.align 2, 0

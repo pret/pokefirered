@@ -17844,7 +17844,7 @@ sub_812781C: @ 812781C
 	str r0, [sp]
 	ldr r0, _08127848 @ =sub_811FB28
 	str r0, [sp, 0x4]
-	ldr r0, _0812784C @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r0, _0812784C @ =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	str r0, [sp, 0x8]
 	movs r0, 0
 	movs r1, 0
@@ -17855,13 +17855,13 @@ sub_812781C: @ 812781C
 	.align 2, 0
 _08127844: .4byte gSpecialVar_0x8005
 _08127848: .4byte sub_811FB28
-_0812784C: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
+_0812784C: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
 _08127850:
 	movs r0, 0x7F
 	str r0, [sp]
 	ldr r0, _08127878 @ =sub_8126DC8
 	str r0, [sp, 0x4]
-	ldr r0, _0812787C @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r0, _0812787C @ =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	str r0, [sp, 0x8]
 	movs r0, 0
 	movs r1, 0
@@ -17878,7 +17878,7 @@ _08127870:
 	bx r0
 	.align 2, 0
 _08127878: .4byte sub_8126DC8
-_0812787C: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
+_0812787C: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
 _08127880: .4byte gUnknown_203B0A0
 _08127884: .4byte gSpecialVar_0x8007
 	thumb_func_end sub_812781C
@@ -17891,7 +17891,7 @@ sub_8127888: @ 8127888
 	str r0, [sp]
 	ldr r0, _081278AC @ =sub_811FB28
 	str r0, [sp, 0x4]
-	ldr r0, _081278B0 @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r0, _081278B0 @ =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	str r0, [sp, 0x8]
 	movs r0, 0xB
 	movs r1, 0
@@ -17903,7 +17903,7 @@ sub_8127888: @ 8127888
 	bx r0
 	.align 2, 0
 _081278AC: .4byte sub_811FB28
-_081278B0: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
+_081278B0: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
 	thumb_func_end sub_8127888
 
 	thumb_func_start sub_81278B4

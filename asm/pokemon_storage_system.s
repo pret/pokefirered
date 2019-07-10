@@ -8190,7 +8190,7 @@ sub_808FBA4: @ 808FBA4
 	sub sp, 0xC
 	lsls r0, 24
 	lsrs r6, r0, 24
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	ldr r1, _0808FBC8 @ =gUnknown_83CEA88
 	lsls r0, r6, 3
 	adds r0, r1
@@ -8231,7 +8231,7 @@ _0808FC04:
 	adds r1, r2
 _0808FC0C:
 	movs r0, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	b _0808FC7C
 	.align 2, 0
 _0808FC14: .4byte gUnknown_20397B0
@@ -8281,7 +8281,7 @@ _0808FC62:
 	ldr r0, _0808FCE0 @ =0x000021db
 	adds r1, r0
 	movs r0, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 _0808FC7C:
 	ldr r5, _0808FCDC @ =gUnknown_20397B0
 	ldr r0, [r5]
@@ -8292,7 +8292,7 @@ _0808FC7C:
 	lsls r1, r6, 3
 	adds r1, r2
 	ldr r1, [r1]
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	movs r0, 0x1
 	movs r1, 0x11
 	bl FillWindowPixelBuffer

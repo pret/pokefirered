@@ -196,7 +196,7 @@ u8 CreateTopBarWindowLoadPalette(u8 bg, u8 width, u8 yPos, u8 palette, u16 baseT
     return sTopBarWindowId;
 }
 
-void TopBarWindowPrintString(const u8 *string, u8 unUsed, bool8 copyToVram)
+void TopBarWindowPrintString(const u8 *string, u8 unused, bool8 copyToVram)
 {
     s32 width;
 
@@ -211,7 +211,7 @@ void TopBarWindowPrintString(const u8 *string, u8 unUsed, bool8 copyToVram)
     }
 }
 
-void TopBarWindowPrintTwoStrings(const u8 *string, const u8 *string2, bool8 fgColorChooser, u8 notUsed, bool8 copyToVram)
+void TopBarWindowPrintTwoStrings(const u8 *string, const u8 *string2, bool8 fgColorChooser, u8 unused, bool8 copyToVram)
 {
     struct TextColor color;
     s32 fgColor, width;

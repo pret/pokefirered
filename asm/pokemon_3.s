@@ -560,7 +560,7 @@ _08044946:
 	pop {r1}
 	bx r1
 	thumb_func_end CheckBattleTypeGhost
-*/
+
 	thumb_func_start OakSpeechNidoranFSetupTemplate
 OakSpeechNidoranFSetupTemplate: @ 8044950
 	push {r4-r7,lr}
@@ -1125,7 +1125,7 @@ _08044D70:
 	.align 2, 0
 _08044D7C: .4byte sOakTutNidoranResources
 	thumb_func_end OakSpeechNidoranFSetup
-
+*/
 	thumb_func_start OakSpeechNidoranFFreeResources
 OakSpeechNidoranFFreeResources: @ 8044D80
 	push {r4,lr}

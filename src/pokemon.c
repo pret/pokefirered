@@ -21,6 +21,7 @@
 #include "sound.h"
 #include "pokedex.h"
 #include "strings.h"
+#include "malloc.h"
 #include "constants/items.h"
 #include "constants/species.h"
 #include "constants/pokemon.h"
@@ -36,17 +37,22 @@
 // Extracts the lower 16 bits of a 32-bit number
 #define LOHALF(n) ((n) & 0xFFFF)
 
-// TODO: what is this
-struct UnkStruct20244F4
+struct OakSpeechNidoranFStruct
 {
-    u8 unk0:4;
-    u8 unk0_2:4;
-    u8 filler1[0xF];
-    struct SpriteTemplate *unk10;
+    u8 spriteCount:4;
+    u8 battlePosition:4;
+    u8 frameCount;
+    u8 enable;
+    bool8 enable2;
+    u32 sizePerSprite;
+    u8 *dataBuffer;
+    u8 **bufferPtrs;
+    struct SpriteTemplate *templates;
+    struct SpriteFrameImage *frameImages;
 };
 
 // External symbols
-extern struct UnkStruct20244F4 *sOakTutNidoranResources;
+extern struct OakSpeechNidoranFStruct *sOakTutNidoranResources;
 extern struct SpriteTemplate gUnknown_825DEF0[];
 extern struct SpriteTemplate gUnknown_825DF50[];
 extern const union AnimCmd *const *const gTrainerBackAnimsPtrTable[];
@@ -82,6 +88,7 @@ extern s8 gPokeblockFlavorCompatibilityTable[];
 
 extern const u16 sDeoxysBaseStats[];
 extern const u16 gLinkPlayerFacilityClasses[];
+extern const struct SpriteTemplate gUnknown_825E05C;
 
 // External functions
 extern u8 GetCurrentRegionMapSectionId(void); // overworld
@@ -1138,10 +1145,10 @@ void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition)
     {
         if(sOakTutNidoranResources)
         {
-            if(battlerPosition >= (s8)sOakTutNidoranResources->unk0_2) // why a cast?!? changing the unk0_2 type to s8 causes extra shifts, but a cast is the correct fix. why, compiler?
+            if(battlerPosition >= (s8)sOakTutNidoranResources->battlePosition) // why a cast?!? changing the unk0_2 type to s8 causes extra shifts, but a cast is the correct fix. why, compiler?
                 battlerPosition = 0;
 
-            gMultiuseSpriteTemplate = sOakTutNidoranResources->unk10[battlerPosition];
+            gMultiuseSpriteTemplate = sOakTutNidoranResources->templates[battlerPosition];
         }
         else
         {
@@ -5723,19 +5730,14 @@ void SetDeoxysStats(void)
 
         if (GetMonData(mon, MON_DATA_SPECIES, NULL) != SPECIES_DEOXYS)
             continue;
-
         value = GetMonData(mon, MON_DATA_ATK, NULL);
         SetMonData(mon, MON_DATA_ATK, &value);
-
         value = GetMonData(mon, MON_DATA_DEF, NULL);
         SetMonData(mon, MON_DATA_DEF, &value);
-
         value = GetMonData(mon, MON_DATA_SPEED, NULL);
         SetMonData(mon, MON_DATA_SPEED, &value);
-
         value = GetMonData(mon, MON_DATA_SPATK, NULL);
         SetMonData(mon, MON_DATA_SPATK, &value);
-
         value = GetMonData(mon, MON_DATA_SPDEF, NULL);
         SetMonData(mon, MON_DATA_SPDEF, &value);
     }
@@ -5770,6 +5772,7 @@ void CreateObedientEnemyMon(void)
     if (itemId)
     {
         u8 heldItem[2];
+        
         heldItem[0] = itemId;
         heldItem[1] = itemId >> 8;
         SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, heldItem);
@@ -5779,7 +5782,8 @@ void CreateObedientEnemyMon(void)
 void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality)
 {
     u8 getFlagCaseId = (caseId == FLAG_SET_SEEN) ? FLAG_GET_SEEN : FLAG_GET_CAUGHT;
-    if (!GetSetPokedexFlag(nationalNum, getFlagCaseId)) // don't set if it's already set
+    
+    if (!GetSetPokedexFlag(nationalNum, getFlagCaseId))
     {
         GetSetPokedexFlag(nationalNum, caseId);
         if (NationalPokedexNumToSpecies(nationalNum) == SPECIES_UNOWN)
@@ -5803,3 +5807,48 @@ bool8 CheckBattleTypeGhost(struct Pokemon *mon, u8 bank)
     return FALSE;
 }
 
+void OakSpeechNidoranFSetupTemplate(struct OakSpeechNidoranFStruct *structPtr, u8 battlePosition)
+{
+    u16 i = 0, j = 0;
+
+    if (battlePosition > 3)
+    {
+        for (i = 0; i < (s8)structPtr->spriteCount; ++i)
+        {
+            structPtr->templates[i] = gUnknown_825DEF0[i];
+            for (j = 0; j < structPtr->frameCount; ++j)
+                structPtr->frameImages[i * structPtr->frameCount + j].data = &structPtr->bufferPtrs[i][j * 0x800];
+            structPtr->templates[i].images = &structPtr->frameImages[i * structPtr->frameCount];
+        }
+    }
+    else
+    {
+        const struct SpriteTemplate *template = &gUnknown_825DEF0[battlePosition];
+        
+        structPtr->templates[0] = *template;
+        for (j = 0; j < structPtr->frameCount; ++j)
+                structPtr->frameImages[j].data = &structPtr->bufferPtrs[0][j * 0x800];
+        structPtr->templates[0].images = structPtr->frameImages;
+    }
+}
+
+// not used
+void OakSpeechNidoranFSetupTemplateDummy(struct OakSpeechNidoranFStruct *structPtr)
+{
+    u16 i, j;
+
+    for (i = 0; i < (s8)structPtr->spriteCount; ++i)
+    {
+        structPtr->templates[i] = gUnknown_825E05C;
+        for (j = 0; j < structPtr->frameCount; ++j)
+            structPtr->frameImages[i * structPtr->spriteCount + j].data = &structPtr->bufferPtrs[i][j * 0x800];
+        structPtr->templates[i].images = &structPtr->frameImages[i * structPtr->spriteCount]; // Bug here, it should be frameCount logically
+        structPtr->templates[i].anims = gUnknown_82349BC;
+        structPtr->templates[i].paletteTag = i;
+    }
+}
+
+struct OakSpeechNidoranFStruct *OakSpeechNidoranFSetup(u8 battlePosition, bool8 enable)
+{
+
+}

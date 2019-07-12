@@ -214,7 +214,7 @@ SECTIONS {
         asm/battle_anim_special.o(.text);
         asm/hall_of_fame.o(.text);
         asm/credits.o(.text);
-        asm/diploma.o(.text);
+        src/diploma.o(.text);
         asm/save_failed_screen.o(.text);
         asm/clear_save_data_screen.o(.text);
         asm/evolution_graphics.o(.text);

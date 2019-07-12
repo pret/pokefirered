@@ -177,5 +177,6 @@ extern const u8 gUnknown_84166A7[];
 extern const u8 gUnknown_84169DC[];
 
 extern const u8 gUnknown_84162BD[];
+extern const u8 gUnknown_841D148[];
 
 #endif //GUARD_STRINGS_H

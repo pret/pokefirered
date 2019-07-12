@@ -4,7 +4,7 @@
 	.syntax unified
 
 	.text
-
+/*
 	thumb_func_start GetPlayerPartyHighestLevel
 GetPlayerPartyHighestLevel: @ 80444F8
 	push {r4-r6,lr}
@@ -233,7 +233,7 @@ _080446A0:
 	adds r0, r5, 0
 	movs r2, 0
 	bl GetMonData
-	ldr r2, _08044704 @ =gUnknown_825E026
+	ldr r2, _08044704 @ =sDeoxysBaseStats
 	lsls r1, r6, 1
 	adds r1, r2
 	ldrh r1, [r1]
@@ -270,7 +270,7 @@ _080446FE:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08044704: .4byte gUnknown_825E026
+_08044704: .4byte sDeoxysBaseStats
 	thumb_func_end GetDeoxysStat
 
 	thumb_func_start SetDeoxysStats
@@ -370,7 +370,7 @@ sub_80447AC: @ 80447AC
 	ldrb r0, [r1, 0x13]
 	lsls r0, 3
 	orrs r2, r0
-	ldr r0, _080447EC @ =gUnknown_825E032
+	ldr r0, _080447EC @ =gLinkPlayerFacilityClasses
 	lsls r2, 1
 	adds r2, r0
 	ldrh r0, [r2]
@@ -381,7 +381,7 @@ sub_80447AC: @ 80447AC
 	bx r1
 	.align 2, 0
 _080447E8: .4byte gLinkPlayers
-_080447EC: .4byte gUnknown_825E032
+_080447EC: .4byte gLinkPlayerFacilityClasses
 	thumb_func_end sub_80447AC
 
 	thumb_func_start sub_80447F0
@@ -406,7 +406,7 @@ sub_80447F0: @ 80447F0
 	lsls r0, 3
 	orrs r2, r0
 	ldr r1, _08044830 @ =gFacilityClassToTrainerClass
-	ldr r0, _08044834 @ =gUnknown_825E032
+	ldr r0, _08044834 @ =gLinkPlayerFacilityClasses
 	lsls r2, 1
 	adds r2, r0
 	ldrh r0, [r2]
@@ -417,7 +417,7 @@ sub_80447F0: @ 80447F0
 	.align 2, 0
 _0804482C: .4byte gLinkPlayers
 _08044830: .4byte gFacilityClassToTrainerClass
-_08044834: .4byte gUnknown_825E032
+_08044834: .4byte gLinkPlayerFacilityClasses
 	thumb_func_end sub_80447F0
 
 	thumb_func_start CreateObedientEnemyMon
@@ -560,7 +560,7 @@ _08044946:
 	pop {r1}
 	bx r1
 	thumb_func_end CheckBattleTypeGhost
-
+*/
 	thumb_func_start OakSpeechNidoranFSetupTemplate
 OakSpeechNidoranFSetupTemplate: @ 8044950
 	push {r4-r7,lr}

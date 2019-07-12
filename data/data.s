@@ -538,10 +538,10 @@ sFriendshipEventDeltas:: @ 825DFF6
 sHMMoves:: @ 825E014
 	.incbin "baserom.gba", 0x25E014, 0x12
 
-gUnknown_825E026:: @ 825E026
+sDeoxysBaseStats:: @ 825E026
 	.incbin "baserom.gba", 0x25E026, 0xC
 
-gUnknown_825E032:: @ 825E032
+gLinkPlayerFacilityClasses:: @ 825E032
 	.incbin "baserom.gba", 0x25E032, 0x2A
 
 gUnknown_825E05C:: @ 825E05C

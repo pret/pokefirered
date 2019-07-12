@@ -33,39 +33,6 @@
 #define GET_BANK_SIDE(bank)((GetBattlerPosition(bank) & BIT_SIDE))
 #define GET_BANK_SIDE2(bank)((GET_BANK_IDENTITY(bank) & BIT_SIDE))
 
-#define BATTLE_TYPE_DOUBLE          0x0001
-#define BATTLE_TYPE_LINK            0x0002
-#define BATTLE_TYPE_WILD            0x0004
-#define BATTLE_TYPE_TRAINER         0x0008
-#define BATTLE_TYPE_FIRST_BATTLE    0x0010
-#define BATTLE_TYPE_20              0x0020
-#define BATTLE_TYPE_MULTI           0x0040
-#define BATTLE_TYPE_SAFARI          0x0080
-#define BATTLE_TYPE_BATTLE_TOWER    0x0100
-#define BATTLE_TYPE_WALLY_TUTORIAL  0x0200
-#define BATTLE_TYPE_ROAMER          0x0400
-#define BATTLE_TYPE_EREADER_TRAINER 0x0800
-#define BATTLE_TYPE_KYOGRE_GROUDON  0x1000
-#define BATTLE_TYPE_LEGENDARY       0x2000
-#define BATTLE_TYPE_REGI            0x4000
-#define BATTLE_TYPE_TWO_OPPONENTS   0x8000
-#define BATTLE_TYPE_DOME            0x10000 // this is used in pokemon.c, but its clearly not the correct name for FR/LG. TODO: Fix these
-#define BATTLE_TYPE_PALACE          0x20000
-#define BATTLE_TYPE_ARENA           0x40000
-#define BATTLE_TYPE_FACTORY         0x80000
-#define BATTLE_TYPE_x100000         0x100000
-#define BATTLE_TYPE_PYRAMID         0x200000
-#define BATTLE_TYPE_INGAME_PARTNER  0x400000
-#define BATTLE_TYPE_x800000         0x800000
-#define BATTLE_TYPE_RECORDED        0x1000000
-#define BATTLE_TYPE_x2000000        0x2000000
-#define BATTLE_TYPE_x4000000        0x4000000
-#define BATTLE_TYPE_SECRET_BASE     0x8000000
-#define BATTLE_TYPE_GROUDON         0x10000000
-#define BATTLE_TYPE_KYORGE          0x20000000
-#define BATTLE_TYPE_RAYQUAZA        0x40000000
-#define BATTLE_TYPE_x80000000       0x80000000
-
 #define TRAINER_OPPONENT_3FE        0x3FE
 #define TRAINER_OPPONENT_C00        0xC00
 #define TRAINER_OPPONENT_800        0x800

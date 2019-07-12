@@ -19,6 +19,8 @@
 #include "link.h"
 #include "m4a.h"
 #include "sound.h"
+#include "pokedex.h"
+#include "strings.h"
 #include "constants/items.h"
 #include "constants/species.h"
 #include "constants/pokemon.h"
@@ -77,6 +79,9 @@ extern const struct CompressedSpritePalette gMonPaletteTable[];
 extern const struct CompressedSpritePalette gMonShinyPaletteTable[];
 extern const u16 sHMMoves[];
 extern s8 gPokeblockFlavorCompatibilityTable[];
+
+extern const u16 sDeoxysBaseStats[];
+extern const u16 gLinkPlayerFacilityClasses[];
 
 // External functions
 extern u8 GetCurrentRegionMapSectionId(void); // overworld
@@ -5607,3 +5612,194 @@ u8 *GetTrainerPartnerName(void)
     u8 id = GetMultiplayerId();
     return gLinkPlayers[GetBankMultiplayerId(gLinkPlayers[id].id ^ 2)].name;
 }
+
+u8 GetPlayerPartyHighestLevel(void)
+{
+    s32 slot;
+    u8 level, monLevel;
+
+    level = 1;
+    for(slot = 0; slot < PARTY_SIZE; ++slot)
+    {
+        if (GetMonData(&gPlayerParty[slot], MON_DATA_SANITY_HAS_SPECIES, NULL) == 1 && !GetMonData(&gPlayerParty[slot], MON_DATA_SANITY_IS_EGG, NULL))
+        {
+            monLevel = GetMonData(&gPlayerParty[slot], MON_DATA_LEVEL, NULL);
+            if (monLevel > level)
+                level = monLevel;
+        }
+    }
+    return level;
+}
+
+u16 FacilityClassToPicIndex(u16 facilityClass)
+{
+    return gFacilityClassToPicIndex[facilityClass];
+}
+
+bool8 sub_804455C(u8 caseId, u8 battlerId)
+{
+    switch (caseId)
+    {
+    case 0:
+    default:
+        return FALSE;
+    case 1:
+        if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
+            return FALSE;
+        if (!gMain.inBattle)
+            return FALSE;
+        if (gLinkPlayers[GetMultiplayerId()].id == battlerId)
+            return FALSE;
+        break;
+    case 2:
+        break;
+    case 3:
+        if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
+            return FALSE;
+        if (!gMain.inBattle)
+            return FALSE;
+        if (battlerId == 1 || battlerId == 4 || battlerId == 5)
+            return TRUE;
+        return FALSE;
+    case 4:
+        break;
+    case 5:
+        if (gBattleTypeFlags & BATTLE_TYPE_LINK)
+        {
+            if (!gMain.inBattle)
+                return FALSE;
+            if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+            {
+                if (gLinkPlayers[GetMultiplayerId()].id == battlerId)
+                    return FALSE;
+            }
+            else
+            {
+                if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
+                    return FALSE;
+            }
+        }
+        else
+        {
+            if (!gMain.inBattle)
+                return FALSE;
+            if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
+                return FALSE;
+        }
+        break;
+    }
+
+    return TRUE;
+}
+
+u16 GetDeoxysStat(struct Pokemon *mon, s32 statId)
+{
+    s32 ivVal, evVal;
+    u16 statValue;
+    u8 nature;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_20 || GetMonData(mon, MON_DATA_SPECIES, NULL) != SPECIES_DEOXYS)
+    {
+        return statValue = 0;
+    }
+    else
+    {
+        ivVal = GetMonData(mon, MON_DATA_HP_IV + statId, NULL);
+        evVal = GetMonData(mon, MON_DATA_HP_EV + statId, NULL);
+        statValue = ((sDeoxysBaseStats[statId] * 2 + ivVal + evVal / 4) * mon->level) / 100 + 5;
+        nature = GetNature(mon);
+        statValue = ModifyStatByNature(nature, statValue, (u8)statId);
+    }
+    return statValue;
+}
+
+void SetDeoxysStats(void)
+{
+    s32 i, value;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        struct Pokemon *mon = &gPlayerParty[i];
+
+        if (GetMonData(mon, MON_DATA_SPECIES, NULL) != SPECIES_DEOXYS)
+            continue;
+
+        value = GetMonData(mon, MON_DATA_ATK, NULL);
+        SetMonData(mon, MON_DATA_ATK, &value);
+
+        value = GetMonData(mon, MON_DATA_DEF, NULL);
+        SetMonData(mon, MON_DATA_DEF, &value);
+
+        value = GetMonData(mon, MON_DATA_SPEED, NULL);
+        SetMonData(mon, MON_DATA_SPEED, &value);
+
+        value = GetMonData(mon, MON_DATA_SPATK, NULL);
+        SetMonData(mon, MON_DATA_SPATK, &value);
+
+        value = GetMonData(mon, MON_DATA_SPDEF, NULL);
+        SetMonData(mon, MON_DATA_SPDEF, &value);
+    }
+}
+
+u16 sub_80447AC(void)
+{
+    u8 linkId = GetMultiplayerId() ^ 1;
+    u32 arrId = gLinkPlayers[linkId].trainerId & 7;
+
+    arrId |= gLinkPlayers[linkId].gender << 3;
+    return FacilityClassToPicIndex(gLinkPlayerFacilityClasses[arrId]);
+}
+
+u16 sub_80447F0(void)
+{
+    u8 linkId = GetMultiplayerId() ^ 1;
+    u32 arrId = gLinkPlayers[linkId].trainerId & 7;
+
+    arrId |= gLinkPlayers[linkId].gender << 3;
+    return gFacilityClassToTrainerClass[gLinkPlayerFacilityClasses[arrId]];
+}
+
+void CreateObedientEnemyMon(void)
+{
+    s32 species = gSpecialVar_0x8004;
+    s32 level = gSpecialVar_0x8005;
+    s32 itemId = gSpecialVar_0x8006;
+
+    ZeroEnemyPartyMons();
+    CreateObedientMon(&gEnemyParty[0], species, level, 32, 0, 0, 0, 0);
+    if (itemId)
+    {
+        u8 heldItem[2];
+        heldItem[0] = itemId;
+        heldItem[1] = itemId >> 8;
+        SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, heldItem);
+    }
+}
+
+void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality)
+{
+    u8 getFlagCaseId = (caseId == FLAG_SET_SEEN) ? FLAG_GET_SEEN : FLAG_GET_CAUGHT;
+    if (!GetSetPokedexFlag(nationalNum, getFlagCaseId)) // don't set if it's already set
+    {
+        GetSetPokedexFlag(nationalNum, caseId);
+        if (NationalPokedexNumToSpecies(nationalNum) == SPECIES_UNOWN)
+            gSaveBlock2Ptr->pokedex.unownPersonality = personality;
+        if (NationalPokedexNumToSpecies(nationalNum) == SPECIES_SPINDA)
+            gSaveBlock2Ptr->pokedex.spindaPersonality = personality;
+    }
+}
+
+bool8 CheckBattleTypeGhost(struct Pokemon *mon, u8 bank)
+{
+    u8 buffer[12];
+
+    if (gBattleTypeFlags & BATTLE_TYPE_GHOST && GetBattlerSide(bank))
+    {
+        GetMonData(mon, MON_DATA_NICKNAME, buffer);
+        StringGetEnd10(buffer);
+        if (!StringCompare(buffer, gUnknown_841D148))
+            return TRUE;
+    }
+    return FALSE;
+}
+

@@ -13273,7 +13273,7 @@ sub_80240D4: @ 80240D4
 	adds r1, r4
 	ldr r2, [r1]
 	movs r1, 0x2
-	bl sub_8044898
+	bl HandleSetPokedexFlag
 _0802412A:
 	ldr r2, _08024180 @ =gAbsentBattlerFlags
 	ldr r1, _08024184 @ =gBitTable
@@ -13398,7 +13398,7 @@ _08024228:
 	bl GetBankMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8043620
+	bl GetLinkTrainerFlankId
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x1
@@ -21520,7 +21520,7 @@ _08028336:
 	bl GetBankMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8043620
+	bl GetLinkTrainerFlankId
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x1
@@ -21665,7 +21665,7 @@ _08028458:
 	bl GetBankMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8043620
+	bl GetLinkTrainerFlankId
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x1
@@ -32384,7 +32384,7 @@ _0802D9B4:
 	lsrs r0, 16
 	movs r1, 0x3
 	adds r2, r4, 0
-	bl sub_8044898
+	bl HandleSetPokedexFlag
 	ldr r1, _0802D9D4 @ =gUnknown_2023D74
 	ldr r0, [r1]
 	adds r0, 0x5

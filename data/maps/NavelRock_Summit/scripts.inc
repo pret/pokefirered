@@ -67,7 +67,7 @@ NavelRock_Summit_EventScript_164FFB:: @ 8164FFB
 	setvar VAR_0x8004, SPECIES_HO_OH
 	setvar VAR_0x8005, 70
 	setvar VAR_0x8006, 0
-	special sub_8044838
+	special CreateObedientEnemyMon
 	setflag FLAG_0x807
 	special sub_807F9D8
 	waitstate

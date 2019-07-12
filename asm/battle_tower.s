@@ -1222,7 +1222,7 @@ _080E6286:
 	adds r2, r3
 	ldr r1, [r4]
 	adds r1, r2
-	bl sub_803E0A4
+	bl CreateBattleTowerMon
 	adds r6, 0x1
 	cmp r6, 0x2
 	ble _080E6286
@@ -1251,7 +1251,7 @@ _080E62B2:
 	muls r2, r6
 	adds r2, 0x1C
 	adds r1, r2
-	bl sub_803E0A4
+	bl CreateBattleTowerMon
 	adds r6, 0x1
 	cmp r6, 0x2
 	ble _080E62B2
@@ -2136,7 +2136,7 @@ _080E69A0:
 	adds r2, r1
 	ldr r1, [r4]
 	adds r1, r2
-	bl sub_803E0A4
+	bl CreateBattleTowerMon
 	adds r5, 0x1
 	cmp r5, 0x2
 	ble _080E69A0

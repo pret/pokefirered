@@ -38,7 +38,7 @@ sub_8054C04: @ 8054C04
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_80444F8
+	bl GetPlayerPartyHighestLevel
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _08054C40 @ =gUnknown_826D294

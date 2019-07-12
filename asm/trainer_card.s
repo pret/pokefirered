@@ -4955,7 +4955,7 @@ sub_808B838: @ 808B838
 	adds r0, r1
 	ldrb r4, [r0]
 	adds r0, r4, 0
-	bl sub_804454C
+	bl FacilityClassToPicIndex
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, _0808B8A0 @ =gUnknown_83CD8EC
@@ -4982,7 +4982,7 @@ _0808B8A4:
 	cmp r0, 0
 	beq _0808B8FC
 	adds r0, r4, 0
-	bl sub_804454C
+	bl FacilityClassToPicIndex
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, _0808B8F4 @ =gUnknown_83CD8EC

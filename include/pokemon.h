@@ -607,7 +607,7 @@ void CopyPlayerPartyMonToBattleData(u8 battleIndex, u8 partyIndex);
 u8 GetNature(struct Pokemon *mon);
 u8 GetNatureFromPersonality(u32 personality);
 
-u16 nature_stat_mod(u8 nature, u16 n, u8 statIndex);
+u16 ModifyStatByNature(u8 nature, u16 n, u8 statIndex);
 
 void MonRestorePP(struct Pokemon *);
 void BoxMonRestorePP(struct BoxPokemon *);
@@ -666,6 +666,7 @@ bool8 TryIncrementMonLevel(struct Pokemon *mon);
 void BoxMonToMon(struct BoxPokemon *srcMon, struct Pokemon *dstMon);
 u8 GetLevelUpMovesBySpecies(u16 species, u16 *moves);
 bool8 HealStatusConditions(struct Pokemon *mon, u32 battlePartyId, u32 healMask, u8 battlerId);
+u16 GetDeoxysStat(struct Pokemon *mon, s32 statId);
 
 #include "sprite.h"
 
@@ -675,7 +676,7 @@ void BattleAnimateBackSprite(struct Sprite* sprite, u16 species);
 
 void PlayMapChosenOrBattleBGM(u16 songId);
 u8 GetMonsStateToDoubles(void);
-void sub_803E0A4(struct Pokemon *mon, struct BattleTowerPokemon *src);
+void CreateBattleTowerMon(struct Pokemon *mon, struct BattleTowerPokemon *src);
 void SetMultiuseSpriteTemplateToPokemon(u16 trainerSpriteId, u8 battlerPosition);
 
 const u8 * Battle_PrintStatBoosterEffectMessage(u16 itemId);

@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80444F8
-sub_80444F8: @ 80444F8
+	thumb_func_start GetPlayerPartyHighestLevel
+GetPlayerPartyHighestLevel: @ 80444F8
 	push {r4-r6,lr}
 	movs r6, 0x1
 	movs r5, 0
@@ -47,10 +47,10 @@ _08044538:
 	bx r1
 	.align 2, 0
 _08044548: .4byte gPlayerParty
-	thumb_func_end sub_80444F8
+	thumb_func_end GetPlayerPartyHighestLevel
 
-	thumb_func_start sub_804454C
-sub_804454C: @ 804454C
+	thumb_func_start FacilityClassToPicIndex
+FacilityClassToPicIndex: @ 804454C
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, _08044558 @ =gFacilityClassToPicIndex
@@ -59,7 +59,7 @@ sub_804454C: @ 804454C
 	bx lr
 	.align 2, 0
 _08044558: .4byte gFacilityClassToPicIndex
-	thumb_func_end sub_804454C
+	thumb_func_end FacilityClassToPicIndex
 
 	thumb_func_start sub_804455C
 sub_804455C: @ 804455C
@@ -261,7 +261,7 @@ _080446CC:
 	lsls r2, r6, 24
 	lsrs r2, 24
 	adds r1, r4, 0
-	bl nature_stat_mod
+	bl ModifyStatByNature
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r4, 0
@@ -273,8 +273,8 @@ _080446FE:
 _08044704: .4byte gUnknown_825E026
 	thumb_func_end GetDeoxysStat
 
-	thumb_func_start sub_8044708
-sub_8044708: @ 8044708
+	thumb_func_start SetDeoxysStats
+SetDeoxysStats: @ 8044708
 	push {r4,r5,lr}
 	sub sp, 0x4
 	movs r5, 0
@@ -347,7 +347,7 @@ _08044798:
 	bx r0
 	.align 2, 0
 _080447A8: .4byte gPlayerParty
-	thumb_func_end sub_8044708
+	thumb_func_end SetDeoxysStats
 
 	thumb_func_start sub_80447AC
 sub_80447AC: @ 80447AC
@@ -374,7 +374,7 @@ sub_80447AC: @ 80447AC
 	lsls r2, 1
 	adds r2, r0
 	ldrh r0, [r2]
-	bl sub_804454C
+	bl FacilityClassToPicIndex
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r1}
@@ -420,8 +420,8 @@ _08044830: .4byte gFacilityClassToTrainerClass
 _08044834: .4byte gUnknown_825E032
 	thumb_func_end sub_80447F0
 
-	thumb_func_start sub_8044838
-sub_8044838: @ 8044838
+	thumb_func_start CreateObedientEnemyMon
+CreateObedientEnemyMon: @ 8044838
 	push {r4-r7,lr}
 	sub sp, 0x14
 	ldr r0, _08044888 @ =gSpecialVar_0x8004
@@ -465,10 +465,10 @@ _08044888: .4byte gSpecialVar_0x8004
 _0804488C: .4byte gSpecialVar_0x8005
 _08044890: .4byte gSpecialVar_0x8006
 _08044894: .4byte gEnemyParty
-	thumb_func_end sub_8044838
+	thumb_func_end CreateObedientEnemyMon
 
-	thumb_func_start sub_8044898
-sub_8044898: @ 8044898
+	thumb_func_start HandleSetPokedexFlag
+HandleSetPokedexFlag: @ 8044898
 	push {r4-r7,lr}
 	adds r7, r2, 0
 	lsls r0, 16
@@ -515,10 +515,10 @@ _080448EE:
 	bx r0
 	.align 2, 0
 _080448F4: .4byte gSaveBlock2Ptr
-	thumb_func_end sub_8044898
+	thumb_func_end HandleSetPokedexFlag
 
-	thumb_func_start sub_80448F8
-sub_80448F8: @ 80448F8
+	thumb_func_start CheckBattleTypeGhost
+CheckBattleTypeGhost: @ 80448F8
 	push {r4,lr}
 	sub sp, 0xC
 	adds r4, r0, 0
@@ -559,10 +559,10 @@ _08044946:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80448F8
+	thumb_func_end CheckBattleTypeGhost
 
-	thumb_func_start sub_8044950
-sub_8044950: @ 8044950
+	thumb_func_start OakSpeechNidoranFSetupTemplate
+OakSpeechNidoranFSetupTemplate: @ 8044950
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -688,10 +688,10 @@ _08044A2C:
 	bx r0
 	.align 2, 0
 _08044A3C: .4byte gUnknown_825DEF0
-	thumb_func_end sub_8044950
+	thumb_func_end OakSpeechNidoranFSetupTemplate
 
-	thumb_func_start sub_8044A40
-sub_8044A40: @ 8044A40
+	thumb_func_start OakSpeechNidoranFSetupTemplateDummy
+OakSpeechNidoranFSetupTemplateDummy: @ 8044A40
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -783,10 +783,10 @@ _08044ADA:
 	.align 2, 0
 _08044AE8: .4byte gUnknown_825E05C
 _08044AEC: .4byte gUnknown_82349BC
-	thumb_func_end sub_8044A40
+	thumb_func_end OakSpeechNidoranFSetupTemplateDummy
 
-	thumb_func_start SetUpMonSpriteManagerMaybe
-SetUpMonSpriteManagerMaybe: @ 8044AF0
+	thumb_func_start OakSpeechNidoranFSetup
+OakSpeechNidoranFSetup: @ 8044AF0
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -796,7 +796,7 @@ SetUpMonSpriteManagerMaybe: @ 8044AF0
 	lsrs r5, r1, 24
 	movs r0, 0
 	mov r8, r0
-	ldr r4, _08044B34 @ =gUnknown_20244F4
+	ldr r4, _08044B34 @ =sOakTutNidoranResources
 	ldr r1, [r4]
 	cmp r1, 0
 	beq _08044B1E
@@ -810,7 +810,7 @@ SetUpMonSpriteManagerMaybe: @ 8044AF0
 	mov r1, r8
 	str r1, [r4]
 _08044B1E:
-	ldr r4, _08044B34 @ =gUnknown_20244F4
+	ldr r4, _08044B34 @ =sOakTutNidoranResources
 	movs r0, 0x18
 	bl AllocZeroed
 	adds r2, r0, 0
@@ -821,7 +821,7 @@ _08044B2E:
 	movs r0, 0
 	b _08044D70
 	.align 2, 0
-_08044B34: .4byte gUnknown_20244F4
+_08044B34: .4byte sOakTutNidoranResources
 _08044B38:
 	cmp r5, 0
 	beq _08044B94
@@ -862,7 +862,7 @@ _08044B64:
 _08044B7C:
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r2, _08044B90 @ =gUnknown_20244F4
+	ldr r2, _08044B90 @ =sOakTutNidoranResources
 	ldr r1, [r2]
 	movs r0, 0x4
 	strb r0, [r1, 0x1]
@@ -871,7 +871,7 @@ _08044B7C:
 	strb r0, [r1, 0x3]
 	b _08044BD0
 	.align 2, 0
-_08044B90: .4byte gUnknown_20244F4
+_08044B90: .4byte sOakTutNidoranResources
 _08044B94:
 	cmp r6, 0
 	bne _08044B9A
@@ -881,7 +881,7 @@ _08044B9A:
 	bls _08044BA0
 	movs r6, 0x8
 _08044BA0:
-	ldr r4, _08044C10 @ =gUnknown_20244F4
+	ldr r4, _08044C10 @ =sOakTutNidoranResources
 	ldr r3, [r4]
 	movs r0, 0xF
 	adds r1, r6, 0
@@ -906,7 +906,7 @@ _08044BA0:
 	ldr r0, [r4]
 	strb r2, [r0, 0x3]
 _08044BD0:
-	ldr r5, _08044C10 @ =gUnknown_20244F4
+	ldr r5, _08044C10 @ =sOakTutNidoranResources
 	ldr r0, [r5]
 	ldrb r1, [r0, 0x1]
 	lsls r1, 11
@@ -937,7 +937,7 @@ _08044C04:
 	mov r8, r1
 	b _08044C44
 	.align 2, 0
-_08044C10: .4byte gUnknown_20244F4
+_08044C10: .4byte sOakTutNidoranResources
 _08044C14:
 	ldrb r0, [r1]
 	lsls r0, 28
@@ -965,7 +965,7 @@ _08044C20:
 	cmp r4, r0
 	blt _08044C20
 _08044C44:
-	ldr r5, _08044C8C @ =gUnknown_20244F4
+	ldr r5, _08044C8C @ =sOakTutNidoranResources
 	ldr r0, [r5]
 	ldrb r1, [r0]
 	lsls r1, 28
@@ -1000,7 +1000,7 @@ _08044C7C:
 	mov r8, r0
 	b _08044CE2
 	.align 2, 0
-_08044C8C: .4byte gUnknown_20244F4
+_08044C8C: .4byte sOakTutNidoranResources
 _08044C90:
 	movs r4, 0
 	ldrb r0, [r1, 0x1]
@@ -1038,19 +1038,19 @@ _08044CC6:
 	cmp r4, 0x1
 	bne _08044CDA
 	adds r1, r6, 0
-	bl sub_8044950
+	bl OakSpeechNidoranFSetupTemplate
 	b _08044CE2
 _08044CDA:
-	ldr r0, _08044D60 @ =gUnknown_20244F4
+	ldr r0, _08044D60 @ =sOakTutNidoranResources
 	ldr r0, [r0]
-	bl sub_8044A40
+	bl OakSpeechNidoranFSetupTemplateDummy
 _08044CE2:
 	movs r0, 0x2
 	mov r1, r8
 	ands r0, r1
 	cmp r0, 0
 	beq _08044D12
-	ldr r4, _08044D60 @ =gUnknown_20244F4
+	ldr r4, _08044D60 @ =sOakTutNidoranResources
 	ldr r0, [r4]
 	ldr r0, [r0, 0x14]
 	cmp r0, 0
@@ -1074,7 +1074,7 @@ _08044D12:
 	ands r0, r1
 	cmp r0, 0
 	beq _08044D42
-	ldr r4, _08044D60 @ =gUnknown_20244F4
+	ldr r4, _08044D60 @ =sOakTutNidoranResources
 	ldr r0, [r4]
 	ldr r0, [r0, 0xC]
 	cmp r0, 0
@@ -1096,7 +1096,7 @@ _08044D42:
 	mov r0, r8
 	cmp r0, 0
 	beq _08044D64
-	ldr r4, _08044D60 @ =gUnknown_20244F4
+	ldr r4, _08044D60 @ =sOakTutNidoranResources
 	ldr r0, [r4]
 	movs r1, 0
 	movs r2, 0x18
@@ -1107,14 +1107,14 @@ _08044D42:
 	str r0, [r4]
 	b _08044D6C
 	.align 2, 0
-_08044D60: .4byte gUnknown_20244F4
+_08044D60: .4byte sOakTutNidoranResources
 _08044D64:
-	ldr r0, _08044D7C @ =gUnknown_20244F4
+	ldr r0, _08044D7C @ =sOakTutNidoranResources
 	ldr r1, [r0]
 	movs r0, 0xA3
 	strb r0, [r1, 0x2]
 _08044D6C:
-	ldr r0, _08044D7C @ =gUnknown_20244F4
+	ldr r0, _08044D7C @ =sOakTutNidoranResources
 	ldr r0, [r0]
 _08044D70:
 	pop {r3}
@@ -1123,13 +1123,13 @@ _08044D70:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08044D7C: .4byte gUnknown_20244F4
-	thumb_func_end SetUpMonSpriteManagerMaybe
+_08044D7C: .4byte sOakTutNidoranResources
+	thumb_func_end OakSpeechNidoranFSetup
 
-	thumb_func_start sub_8044D80
-sub_8044D80: @ 8044D80
+	thumb_func_start OakSpeechNidoranFFreeResources
+OakSpeechNidoranFFreeResources: @ 8044D80
 	push {r4,lr}
-	ldr r4, _08044D9C @ =gUnknown_20244F4
+	ldr r4, _08044D9C @ =sOakTutNidoranResources
 	ldr r1, [r4]
 	cmp r1, 0
 	beq _08044DFA
@@ -1142,7 +1142,7 @@ sub_8044D80: @ 8044D80
 	bl memset
 	b _08044DF6
 	.align 2, 0
-_08044D9C: .4byte gUnknown_20244F4
+_08044D9C: .4byte sOakTutNidoranResources
 _08044DA0:
 	ldr r0, [r1, 0x14]
 	cmp r0, 0
@@ -1192,14 +1192,14 @@ _08044DFA:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8044D80
+	thumb_func_end OakSpeechNidoranFFreeResources
 
-	thumb_func_start sub_8044E00
-sub_8044E00: @ 8044E00
+	thumb_func_start OakSpeechNidoranFGetBuffer
+OakSpeechNidoranFGetBuffer: @ 8044E00
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r0, _08044E14 @ =gUnknown_20244F4
+	ldr r0, _08044E14 @ =sOakTutNidoranResources
 	ldr r2, [r0]
 	ldrb r0, [r2, 0x2]
 	cmp r0, 0xA3
@@ -1207,7 +1207,7 @@ sub_8044E00: @ 8044E00
 	movs r0, 0
 	b _08044E2C
 	.align 2, 0
-_08044E14: .4byte gUnknown_20244F4
+_08044E14: .4byte sOakTutNidoranResources
 _08044E18:
 	ldrb r0, [r2]
 	lsls r0, 28
@@ -1223,6 +1223,6 @@ _08044E24:
 _08044E2C:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8044E00
+	thumb_func_end OakSpeechNidoranFGetBuffer
 
 	.align 2, 0 @ Don't pad with nop.

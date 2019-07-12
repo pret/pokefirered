@@ -44,11 +44,10 @@ struct UnkStruct20244F4
 };
 
 // External symbols
-extern struct UnkStruct20244F4 *gUnknown_20244F4;
+extern struct UnkStruct20244F4 *sOakTutNidoranResources;
 extern struct SpriteTemplate gUnknown_825DEF0[];
 extern struct SpriteTemplate gUnknown_825DF50[];
 extern const union AnimCmd *const *const gTrainerBackAnimsPtrTable[];
-extern struct SpriteTemplate gUnknown_825DEF0[];
 extern const union AnimCmd *const *const gTrainerFrontAnimsPtrTable[];
 extern const union AnimCmd *const gUnknown_82349BC[];
 extern const u8 gUnknown_825DEA1[];
@@ -90,7 +89,6 @@ extern u8 StorageGetCurrentBox(void); // pokemon_storage_system
 extern void sub_80174B8(u8 battlerId);
 
 union PokemonSubstruct *GetSubstruct(struct BoxPokemon *boxMon, u32 personality, u8 substructType);
-s32 GetDeoxysStat(struct Pokemon *mon, s32 statId);
 
 // code
 void ZeroBoxMonData(struct BoxPokemon *boxMon)
@@ -351,7 +349,7 @@ void CreateMonWithEVSpread(struct Pokemon *mon, u16 species, u8 level, u8 fixedI
     CalculateMonStats(mon);
 }
 
-void sub_803E0A4(struct Pokemon *mon, struct BattleTowerPokemon *src)
+void CreateBattleTowerMon(struct Pokemon *mon, struct BattleTowerPokemon *src)
 {
     s32 i;
     u8 value;
@@ -476,7 +474,7 @@ u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon)
     u8 baseStat = gBaseStats[species].base;                     \
     s32 n = (((2 * baseStat + iv + ev / 4) * level) / 100) + 5; \
     u8 nature = GetNature(mon);                                 \
-    n = nature_stat_mod(nature, n, statIndex);                  \
+    n = ModifyStatByNature(nature, n, statIndex);                  \
     SetMonData(mon, field, &n);                                 \
 }
 
@@ -1122,7 +1120,7 @@ u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality)
         return MON_MALE;
 }
 
-void SetMultiuseSpriteTemplateToPokemon(u16 trainerSpriteId, u8 battlerPosition)
+void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition)
 {
     if(gMonSpritesGfxPtr != NULL)
     {
@@ -1133,12 +1131,12 @@ void SetMultiuseSpriteTemplateToPokemon(u16 trainerSpriteId, u8 battlerPosition)
     }
     else
     {
-        if(gUnknown_20244F4)
+        if(sOakTutNidoranResources)
         {
-            if(battlerPosition >= (s8)gUnknown_20244F4->unk0_2) // why a cast?!? changing the unk0_2 type to s8 causes extra shifts, but a cast is the correct fix. why, compiler?
+            if(battlerPosition >= (s8)sOakTutNidoranResources->unk0_2) // why a cast?!? changing the unk0_2 type to s8 causes extra shifts, but a cast is the correct fix. why, compiler?
                 battlerPosition = 0;
 
-            gMultiuseSpriteTemplate = gUnknown_20244F4->unk10[battlerPosition];
+            gMultiuseSpriteTemplate = sOakTutNidoranResources->unk10[battlerPosition];
         }
         else
         {
@@ -1148,7 +1146,7 @@ void SetMultiuseSpriteTemplateToPokemon(u16 trainerSpriteId, u8 battlerPosition)
             gMultiuseSpriteTemplate = gUnknown_825DEF0[battlerPosition];
         }
     }
-    gMultiuseSpriteTemplate.paletteTag = trainerSpriteId;
+    gMultiuseSpriteTemplate.paletteTag = speciesTag;
     gMultiuseSpriteTemplate.anims = gUnknown_82349BC;
 }
 
@@ -1290,27 +1288,27 @@ u32 GetMonData(struct Pokemon *mon, s32 field, u8* data)
         ret = mon->maxHP;
         break;
     case MON_DATA_ATK:
-        ret = (u16)GetDeoxysStat(mon, STAT_ATK);
+        ret = GetDeoxysStat(mon, STAT_ATK);
         if (!ret)
             ret = mon->attack;
         break;
     case MON_DATA_DEF:
-        ret = (u16)GetDeoxysStat(mon, STAT_DEF);
+        ret = GetDeoxysStat(mon, STAT_DEF);
         if (!ret)
             ret = mon->defense;
         break;
     case MON_DATA_SPEED:
-        ret = (u16)GetDeoxysStat(mon, STAT_SPEED);
+        ret = GetDeoxysStat(mon, STAT_SPEED);
         if (!ret)
             ret = mon->speed;
         break;
     case MON_DATA_SPATK:
-        ret = (u16)GetDeoxysStat(mon, STAT_SPATK);
+        ret = GetDeoxysStat(mon, STAT_SPATK);
         if (!ret)
             ret = mon->spAttack;
         break;
     case MON_DATA_SPDEF:
-        ret = (u16)GetDeoxysStat(mon, STAT_SPDEF);
+        ret = GetDeoxysStat(mon, STAT_SPDEF);
         if (!ret)
             ret = mon->spDefense;
         break;
@@ -4928,7 +4926,7 @@ bool8 sub_80435E0(void)
     return retVal;
 }
 
-bool8 sub_8043620(u8 id)
+bool8 GetLinkTrainerFlankId(u8 id)
 {
     bool8 retVal = FALSE;
     switch (gLinkPlayers[id].id)
@@ -4954,12 +4952,12 @@ s32 GetBankMultiplayerId(u16 a1)
     return id;
 }
 
-u8 sub_804367C(u16 trainer)
+u8 GetTrainerEncounterMusicId(u16 trainer)
 {
     return gTrainers[trainer].encounterMusic_gender & 0x7F;
 }
 
-u16 nature_stat_mod(u8 nature, u16 n, u8 statIndex)
+u16 ModifyStatByNature(u8 nature, u16 n, u8 statIndex)
 {
     if (statIndex < 1 || statIndex > 5)
     {
@@ -5214,7 +5212,7 @@ void sub_8043B40(void)
     u8 foo[4]; // huh?
 }
 
-void sub_8043B48(struct Pokemon *mon, int species, u8 unused, u32 data)
+void SetMonExpWithMaxLevelCheck(struct Pokemon *mon, int species, u8 unused, u32 data)
 {
     if (data > gExperienceTables[gBaseStats[species].growthRate][100])
     {
@@ -5235,7 +5233,7 @@ bool8 TryIncrementMonLevel(struct Pokemon *mon)
         if(exp > gExperienceTables[gBaseStats[species].growthRate][newLevel])
         {
             SetMonData(mon, MON_DATA_LEVEL, &newLevel);
-            sub_8043B48(mon, species, newLevel, exp);
+            SetMonExpWithMaxLevelCheck(mon, species, newLevel, exp);
             return TRUE;
         }
         else
@@ -5243,7 +5241,7 @@ bool8 TryIncrementMonLevel(struct Pokemon *mon)
     }
     else
     {
-        sub_8043B48(mon, species, level, exp);
+        SetMonExpWithMaxLevelCheck(mon, species, level, exp);
         return FALSE;
     }
 }
@@ -5604,7 +5602,7 @@ bool8 IsShinyOtIdPersonality(u32 otId, u32 personality)
     return retVal;
 }
 
-u8 *sub_80444C4(void)
+u8 *GetTrainerPartnerName(void)
 {
     u8 id = GetMultiplayerId();
     return gLinkPlayers[GetBankMultiplayerId(gLinkPlayers[id].id ^ 2)].name;

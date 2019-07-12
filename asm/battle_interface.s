@@ -3610,7 +3610,7 @@ _08049734:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r7, 0
-	bl sub_80448F8
+	bl CheckBattleTypeGhost
 	lsls r0, 24
 	cmp r0, 0
 	beq _08049754
@@ -3755,7 +3755,7 @@ sub_804981C: @ 804981C
 	ldr r6, _080498EC @ =gEnemyParty
 	adds r0, r6
 	adds r1, r4, 0
-	bl sub_80448F8
+	bl CheckBattleTypeGhost
 	lsls r0, 24
 	cmp r0, 0
 	bne _0804991C

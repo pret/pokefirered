@@ -1378,21 +1378,21 @@ void sub_815E9FC(void)
             {
                 r2 = gUnknown_847A2EE[r5][r6];
                 gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r4].unk_040[r2].level = r9;
-                sub_803E0A4(&gEnemyParty[r6], &gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r4].unk_040[r2]);
+                CreateBattleTowerMon(&gEnemyParty[r6], &gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r4].unk_040[r2]);
             }
             break;
         case 1:
             r2 = gUnknown_847A2FE[r5][0];
             gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[0].unk_040[r2].level = r9;
-            sub_803E0A4(&gEnemyParty[0], &gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[0].unk_040[r2]);
+            CreateBattleTowerMon(&gEnemyParty[0], &gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[0].unk_040[r2]);
             r2 = gUnknown_847A2FE[r5][1];
             gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[1].unk_040[r2].level = r9;
-            sub_803E0A4(&gEnemyParty[1], &gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[1].unk_040[r2]);
+            CreateBattleTowerMon(&gEnemyParty[1], &gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[1].unk_040[r2]);
             break;
         case 2:
             r2 = gUnknown_847A30E[r5][r4];
             gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r4].unk_040[r2].level = r9;
-            sub_803E0A4(&gEnemyParty[0], &gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r4].unk_040[r2]);
+            CreateBattleTowerMon(&gEnemyParty[0], &gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r4].unk_040[r2]);
             break;
     }
 }

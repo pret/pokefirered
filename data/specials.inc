@@ -452,5 +452,5 @@ gSpecials:: @ 815FD60
 	def_special sub_80CB328
 	def_special sub_80CD154
 	def_special sub_80CD1B4
-	def_special sub_8044838
+	def_special CreateObedientEnemyMon
 gSpecialsEnd::

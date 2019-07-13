@@ -796,7 +796,7 @@ OakSpeechNidoranFSetup: @ 8044AF0
 	lsrs r5, r1, 24
 	movs r0, 0
 	mov r8, r0
-	ldr r4, _08044B34 @ =sOakTutNidoranResources
+	ldr r4, _08044B34 @ =sOakSpeechNidoranResources
 	ldr r1, [r4]
 	cmp r1, 0
 	beq _08044B1E
@@ -810,7 +810,7 @@ OakSpeechNidoranFSetup: @ 8044AF0
 	mov r1, r8
 	str r1, [r4]
 _08044B1E:
-	ldr r4, _08044B34 @ =sOakTutNidoranResources
+	ldr r4, _08044B34 @ =sOakSpeechNidoranResources
 	movs r0, 0x18
 	bl AllocZeroed
 	adds r2, r0, 0
@@ -821,7 +821,7 @@ _08044B2E:
 	movs r0, 0
 	b _08044D70
 	.align 2, 0
-_08044B34: .4byte sOakTutNidoranResources
+_08044B34: .4byte sOakSpeechNidoranResources
 _08044B38:
 	cmp r5, 0
 	beq _08044B94
@@ -862,7 +862,7 @@ _08044B64:
 _08044B7C:
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r2, _08044B90 @ =sOakTutNidoranResources
+	ldr r2, _08044B90 @ =sOakSpeechNidoranResources
 	ldr r1, [r2]
 	movs r0, 0x4
 	strb r0, [r1, 0x1]
@@ -871,7 +871,7 @@ _08044B7C:
 	strb r0, [r1, 0x3]
 	b _08044BD0
 	.align 2, 0
-_08044B90: .4byte sOakTutNidoranResources
+_08044B90: .4byte sOakSpeechNidoranResources
 _08044B94:
 	cmp r6, 0
 	bne _08044B9A
@@ -881,7 +881,7 @@ _08044B9A:
 	bls _08044BA0
 	movs r6, 0x8
 _08044BA0:
-	ldr r4, _08044C10 @ =sOakTutNidoranResources
+	ldr r4, _08044C10 @ =sOakSpeechNidoranResources
 	ldr r3, [r4]
 	movs r0, 0xF
 	adds r1, r6, 0
@@ -906,7 +906,7 @@ _08044BA0:
 	ldr r0, [r4]
 	strb r2, [r0, 0x3]
 _08044BD0:
-	ldr r5, _08044C10 @ =sOakTutNidoranResources
+	ldr r5, _08044C10 @ =sOakSpeechNidoranResources
 	ldr r0, [r5]
 	ldrb r1, [r0, 0x1]
 	lsls r1, 11
@@ -937,7 +937,7 @@ _08044C04:
 	mov r8, r1
 	b _08044C44
 	.align 2, 0
-_08044C10: .4byte sOakTutNidoranResources
+_08044C10: .4byte sOakSpeechNidoranResources
 _08044C14:
 	ldrb r0, [r1]
 	lsls r0, 28
@@ -965,7 +965,7 @@ _08044C20:
 	cmp r4, r0
 	blt _08044C20
 _08044C44:
-	ldr r5, _08044C8C @ =sOakTutNidoranResources
+	ldr r5, _08044C8C @ =sOakSpeechNidoranResources
 	ldr r0, [r5]
 	ldrb r1, [r0]
 	lsls r1, 28
@@ -1000,7 +1000,7 @@ _08044C7C:
 	mov r8, r0
 	b _08044CE2
 	.align 2, 0
-_08044C8C: .4byte sOakTutNidoranResources
+_08044C8C: .4byte sOakSpeechNidoranResources
 _08044C90:
 	movs r4, 0
 	ldrb r0, [r1, 0x1]
@@ -1041,7 +1041,7 @@ _08044CC6:
 	bl OakSpeechNidoranFSetupTemplate
 	b _08044CE2
 _08044CDA:
-	ldr r0, _08044D60 @ =sOakTutNidoranResources
+	ldr r0, _08044D60 @ =sOakSpeechNidoranResources
 	ldr r0, [r0]
 	bl OakSpeechNidoranFSetupTemplateDummy
 _08044CE2:
@@ -1050,7 +1050,7 @@ _08044CE2:
 	ands r0, r1
 	cmp r0, 0
 	beq _08044D12
-	ldr r4, _08044D60 @ =sOakTutNidoranResources
+	ldr r4, _08044D60 @ =sOakSpeechNidoranResources
 	ldr r0, [r4]
 	ldr r0, [r0, 0x14]
 	cmp r0, 0
@@ -1074,7 +1074,7 @@ _08044D12:
 	ands r0, r1
 	cmp r0, 0
 	beq _08044D42
-	ldr r4, _08044D60 @ =sOakTutNidoranResources
+	ldr r4, _08044D60 @ =sOakSpeechNidoranResources
 	ldr r0, [r4]
 	ldr r0, [r0, 0xC]
 	cmp r0, 0
@@ -1096,7 +1096,7 @@ _08044D42:
 	mov r0, r8
 	cmp r0, 0
 	beq _08044D64
-	ldr r4, _08044D60 @ =sOakTutNidoranResources
+	ldr r4, _08044D60 @ =sOakSpeechNidoranResources
 	ldr r0, [r4]
 	movs r1, 0
 	movs r2, 0x18
@@ -1107,14 +1107,14 @@ _08044D42:
 	str r0, [r4]
 	b _08044D6C
 	.align 2, 0
-_08044D60: .4byte sOakTutNidoranResources
+_08044D60: .4byte sOakSpeechNidoranResources
 _08044D64:
-	ldr r0, _08044D7C @ =sOakTutNidoranResources
+	ldr r0, _08044D7C @ =sOakSpeechNidoranResources
 	ldr r1, [r0]
 	movs r0, 0xA3
 	strb r0, [r1, 0x2]
 _08044D6C:
-	ldr r0, _08044D7C @ =sOakTutNidoranResources
+	ldr r0, _08044D7C @ =sOakSpeechNidoranResources
 	ldr r0, [r0]
 _08044D70:
 	pop {r3}
@@ -1123,13 +1123,13 @@ _08044D70:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08044D7C: .4byte sOakTutNidoranResources
+_08044D7C: .4byte sOakSpeechNidoranResources
 	thumb_func_end OakSpeechNidoranFSetup
 */
 	thumb_func_start OakSpeechNidoranFFreeResources
 OakSpeechNidoranFFreeResources: @ 8044D80
 	push {r4,lr}
-	ldr r4, _08044D9C @ =sOakTutNidoranResources
+	ldr r4, _08044D9C @ =sOakSpeechNidoranResources
 	ldr r1, [r4]
 	cmp r1, 0
 	beq _08044DFA
@@ -1142,7 +1142,7 @@ OakSpeechNidoranFFreeResources: @ 8044D80
 	bl memset
 	b _08044DF6
 	.align 2, 0
-_08044D9C: .4byte sOakTutNidoranResources
+_08044D9C: .4byte sOakSpeechNidoranResources
 _08044DA0:
 	ldr r0, [r1, 0x14]
 	cmp r0, 0
@@ -1199,7 +1199,7 @@ OakSpeechNidoranFGetBuffer: @ 8044E00
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r0, _08044E14 @ =sOakTutNidoranResources
+	ldr r0, _08044E14 @ =sOakSpeechNidoranResources
 	ldr r2, [r0]
 	ldrb r0, [r2, 0x2]
 	cmp r0, 0xA3
@@ -1207,7 +1207,7 @@ OakSpeechNidoranFGetBuffer: @ 8044E00
 	movs r0, 0
 	b _08044E2C
 	.align 2, 0
-_08044E14: .4byte sOakTutNidoranResources
+_08044E14: .4byte sOakSpeechNidoranResources
 _08044E18:
 	ldrb r0, [r2]
 	lsls r0, 28

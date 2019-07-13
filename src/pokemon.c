@@ -52,7 +52,7 @@ struct OakSpeechNidoranFStruct
 };
 
 // External symbols
-extern struct OakSpeechNidoranFStruct *sOakTutNidoranResources;
+extern struct OakSpeechNidoranFStruct *sOakSpeechNidoranResources;
 extern struct SpriteTemplate gUnknown_825DEF0[];
 extern struct SpriteTemplate gUnknown_825DF50[];
 extern const union AnimCmd *const *const gTrainerBackAnimsPtrTable[];
@@ -1143,12 +1143,12 @@ void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition)
     }
     else
     {
-        if(sOakTutNidoranResources)
+        if(sOakSpeechNidoranResources)
         {
-            if(battlerPosition >= (s8)sOakTutNidoranResources->battlePosition) // why a cast?!? changing the unk0_2 type to s8 causes extra shifts, but a cast is the correct fix. why, compiler?
+            if(battlerPosition >= (s8)sOakSpeechNidoranResources->battlePosition) // why a cast?!? changing the unk0_2 type to s8 causes extra shifts, but a cast is the correct fix. why, compiler?
                 battlerPosition = 0;
 
-            gMultiuseSpriteTemplate = sOakTutNidoranResources->templates[battlerPosition];
+            gMultiuseSpriteTemplate = sOakSpeechNidoranResources->templates[battlerPosition];
         }
         else
         {
@@ -5842,7 +5842,7 @@ void OakSpeechNidoranFSetupTemplateDummy(struct OakSpeechNidoranFStruct *structP
         structPtr->templates[i] = gUnknown_825E05C;
         for (j = 0; j < structPtr->frameCount; ++j)
             structPtr->frameImages[i * structPtr->spriteCount + j].data = &structPtr->bufferPtrs[i][j * 0x800];
-        structPtr->templates[i].images = &structPtr->frameImages[i * structPtr->spriteCount]; // Bug here, it should be frameCount logically
+        structPtr->templates[i].images = &structPtr->frameImages[i * structPtr->spriteCount]; // should be frameCount logically
         structPtr->templates[i].anims = gUnknown_82349BC;
         structPtr->templates[i].paletteTag = i;
     }
@@ -5850,5 +5850,105 @@ void OakSpeechNidoranFSetupTemplateDummy(struct OakSpeechNidoranFStruct *structP
 
 struct OakSpeechNidoranFStruct *OakSpeechNidoranFSetup(u8 battlePosition, bool8 enable)
 {
+    s32 size;
+    u8 i, flags = 0;
 
+    if (sOakSpeechNidoranResources != NULL)
+    {
+        if (sOakSpeechNidoranResources->enable == 0xA3)
+            return NULL;
+        memset(sOakSpeechNidoranResources, 0, sizeof(struct OakSpeechNidoranFStruct));
+        sOakSpeechNidoranResources = NULL;
+    }
+    sOakSpeechNidoranResources = AllocZeroed(0x18);
+    if (sOakSpeechNidoranResources == NULL)
+        return NULL;
+    switch (enable)
+    {
+    case TRUE:
+        if (battlePosition == 4)
+        {
+            sOakSpeechNidoranResources->spriteCount = 4;
+            sOakSpeechNidoranResources->battlePosition = 4;
+        }
+        else
+        {
+            if (battlePosition > 4)
+                battlePosition = 0;
+            sOakSpeechNidoranResources->spriteCount = 1;
+            sOakSpeechNidoranResources->battlePosition = 1;
+        }
+        sOakSpeechNidoranResources->frameCount = 4;
+        sOakSpeechNidoranResources->enable2 = TRUE;
+        break;
+    case FALSE:
+    default:
+        if (!battlePosition)
+            battlePosition = 1;
+        if (battlePosition > 8)
+            battlePosition = 8;
+        sOakSpeechNidoranResources->spriteCount = battlePosition;
+        sOakSpeechNidoranResources->battlePosition = battlePosition;
+        sOakSpeechNidoranResources->frameCount = 4;
+        sOakSpeechNidoranResources->enable2 = FALSE;
+        break;
+    }
+    size = sOakSpeechNidoranResources->frameCount * 0x800;
+    sOakSpeechNidoranResources->sizePerSprite = size;
+    sOakSpeechNidoranResources->dataBuffer = AllocZeroed(sOakSpeechNidoranResources->spriteCount * size);
+    sOakSpeechNidoranResources->bufferPtrs = AllocZeroed(sOakSpeechNidoranResources->spriteCount * 0x20);
+    if (sOakSpeechNidoranResources->dataBuffer == NULL ||  sOakSpeechNidoranResources->bufferPtrs == NULL)
+    {
+        flags |= 1;
+    }
+    else
+    {
+        for (i = 0; i < (s8)sOakSpeechNidoranResources->spriteCount; ++i)
+            sOakSpeechNidoranResources->bufferPtrs[i] = &sOakSpeechNidoranResources->dataBuffer[sOakSpeechNidoranResources->sizePerSprite * i];
+    }
+    sOakSpeechNidoranResources->templates = AllocZeroed(sizeof(struct SpriteTemplate) * sOakSpeechNidoranResources->spriteCount);
+    sOakSpeechNidoranResources->frameImages = AllocZeroed(sOakSpeechNidoranResources->spriteCount * sizeof(struct SpriteFrameImage) * sOakSpeechNidoranResources->frameCount);
+    if (sOakSpeechNidoranResources->templates == NULL || sOakSpeechNidoranResources->frameImages == NULL)
+    {
+        flags |= 2;
+    }
+    else
+    {
+        for (i = 0; i < sOakSpeechNidoranResources->frameCount * sOakSpeechNidoranResources->spriteCount; ++i)
+                sOakSpeechNidoranResources->frameImages[i].size = 0x800;
+        switch (sOakSpeechNidoranResources->enable2)
+        {
+        case TRUE:
+            OakSpeechNidoranFSetupTemplate(sOakSpeechNidoranResources, battlePosition);
+            break;
+        case FALSE:
+        default:
+            OakSpeechNidoranFSetupTemplateDummy(sOakSpeechNidoranResources);
+            break;
+        }
+    }
+    if (flags & 2)
+    {
+        if (sOakSpeechNidoranResources->frameImages != NULL)
+            FREE_AND_SET_NULL(sOakSpeechNidoranResources->frameImages);
+        if (sOakSpeechNidoranResources->templates != NULL)
+            FREE_AND_SET_NULL(sOakSpeechNidoranResources->templates);
+    }
+    if (flags & 1)
+    {
+        if (sOakSpeechNidoranResources->bufferPtrs != NULL)
+            FREE_AND_SET_NULL(sOakSpeechNidoranResources->bufferPtrs);
+        if (sOakSpeechNidoranResources->dataBuffer != NULL)
+            FREE_AND_SET_NULL(sOakSpeechNidoranResources->dataBuffer);
+    }
+    if (flags)
+    {
+        memset(sOakSpeechNidoranResources, 0, sizeof(struct OakSpeechNidoranFStruct));
+        FREE_AND_SET_NULL(sOakSpeechNidoranResources);
+    }
+    else
+    {
+        sOakSpeechNidoranResources->enable = 0xA3;
+    }
+    return sOakSpeechNidoranResources;
 }

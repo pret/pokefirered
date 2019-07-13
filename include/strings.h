@@ -185,4 +185,11 @@ extern const u8 gUnknown_841B684[];
 extern const u8 gUnknown_841B68F[];
 extern const u8 gUnknown_841B698[];
 
+// battle_records
+extern const u8 gUnknown_8418174[];
+extern const u8 gUnknown_8418188[];
+extern const u8 gUnknown_84181A4[];
+extern const u8 gUnknown_84181B6[];
+extern const u8 gUnknown_84181BE[];
+
 #endif //GUARD_STRINGS_H

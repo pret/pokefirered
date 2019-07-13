@@ -16,7 +16,9 @@
 #include "sound.h"
 #include "string_util.h"
 #include "link.h"
+#include "menu.h"
 #include "overworld.h"
+#include "strings.h"
 #include "trainer_card.h"
 #include "constants/battle.h"
 #include "constants/songs.h"
@@ -45,10 +47,54 @@ void sub_80CD608(void);
 void sub_80CD628(void);
 void sub_80CD638(void);
 void sub_80CDBE4(void);
+void sub_80CDCB4(u8 windowId);
 void sub_80CDCD0(u8 bgId);
 
-extern const struct WindowTemplate gUnknown_83F6C68[];
-extern const struct BgTemplate gUnknown_83F6C7C[2];
+const u16 gUnknown_83F6388[] = INCBIN_U16("graphics/battle_records/bg_tiles.4bpp");
+const u16 gUnknown_83F6448[] = INCBIN_U16("graphics/battle_records/palette.gbapal");
+const u16 gUnknown_83F6468[] = INCBIN_U16("graphics/battle_records/tilemap.bin");
+
+const struct WindowTemplate gUnknown_83F6C68[] = {
+    {
+        .bg = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 1,
+        .width = 27,
+        .height = 18,
+        .paletteNum = 0xF,
+        .baseBlock = 0x014
+    }, DUMMY_WIN_TEMPLATE
+};
+
+const struct TextColor gUnknown_83F6C78 = {
+    0, 2, 3
+};
+
+const struct BgTemplate gUnknown_83F6C7C[2] = {
+    {
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 31,
+        .screenSize = 0,
+        .paletteMode = 0, // 4bpp
+        .priority = 0,
+        .baseTile = 0x000
+    }, {
+        .bg = 3,
+        .charBaseIndex = 1,
+        .mapBaseIndex = 30,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 3,
+        .baseTile = 0x000
+    }
+};
+
+u8 *const gUnknown_83F6C84[3] = {
+    gStringVar1,
+    gStringVar2,
+    gStringVar3
+};
 
 void sub_80CD228(void)
 {
@@ -417,4 +463,122 @@ void sub_80CD98C(s32 battlerId)
         sub_80CD950(battlerId);
         sub_80CD854(&gSaveBlock2Ptr->linkBattleRecords, gTrainerCards[battlerId].playerName, gTrainerCards[battlerId].trainerId, gBattleOutcome, gLinkPlayers[battlerId].language);
     }
+}
+
+void sub_80CD9F4(struct LinkBattleRecords * records)
+{
+    u32 nwins = GetGameStat(GAME_STAT_LINK_BATTLE_WINS);
+    u32 nlosses = GetGameStat(GAME_STAT_LINK_BATTLE_LOSSES);
+    u32 ndraws = GetGameStat(GAME_STAT_LINK_BATTLE_DRAWS);
+    s32 i;
+    s32 j;
+    bool32 foundEnd;
+    u8 * strvar;
+
+    if (nwins > 9999)
+        nwins = 9999;
+    if (nlosses > 9999)
+        nlosses = 9999;
+    if (ndraws > 9999)
+        ndraws = 9999;
+
+    ConvertIntToDecimalStringN(gStringVar1, nwins, STR_CONV_MODE_LEFT_ALIGN, 4);
+    ConvertIntToDecimalStringN(gStringVar2, nlosses, STR_CONV_MODE_LEFT_ALIGN, 4);
+    ConvertIntToDecimalStringN(gStringVar3, ndraws, STR_CONV_MODE_LEFT_ALIGN, 4);
+
+    for (i = 0; i < NELEMS(gUnknown_83F6C84); i++)
+    {
+        strvar = gUnknown_83F6C84[i];
+        foundEnd = FALSE;
+        for (j = 0; j < 4; j++)
+        {
+            if (!foundEnd && *strvar == EOS)
+                foundEnd = TRUE;
+            if (foundEnd)
+                *strvar = CHAR_SPACE;
+            strvar++;
+        }
+        *strvar = 0xFF;
+    }
+
+    StringExpandPlaceholders(gStringVar4, gUnknown_8418188);
+    AddTextPrinterParameterized4(0, 2, 12, 24, 0, 2, &gUnknown_83F6C78, 0, gStringVar4);
+}
+
+void sub_80CDAD0(struct LinkBattleRecord * record, u8 y)
+{
+    u8 i = 0;
+    s32 x;
+
+    if (record->wins == 0 && record->losses == 0 && record->draws == 0)
+    {
+        AddTextPrinterParameterized4(0, 2, 0, y, 0, 2, &gUnknown_83F6C78, 0, gUnknown_84181B6);
+        for (i = 0; i < 3; i++)
+        {
+            if (i == 0)
+                x = 0x54;
+            else if (i == 1)
+                x = 0x84;
+            else
+                x = 0xB4;
+            AddTextPrinterParameterized4(0, 2, x, y, 0, 2, &gUnknown_83F6C78, 0, gUnknown_84181BE);
+        }
+    }
+    else
+    {
+        for (i = 0; i < 4; i++)
+        {
+            if (i == 0)
+            {
+                x = 0;
+                StringFillWithTerminator(gStringVar1, OT_NAME_LENGTH + 1);
+                StringCopyN(gStringVar1, record->name, OT_NAME_LENGTH);
+            }
+            else if (i == 1)
+            {
+                x = 0x54;
+                ConvertIntToDecimalStringN(gStringVar1, record->wins, STR_CONV_MODE_RIGHT_ALIGN, 4);
+            }
+            else if (i == 2)
+            {
+                x = 0x84;
+                ConvertIntToDecimalStringN(gStringVar1, record->losses, STR_CONV_MODE_RIGHT_ALIGN, 4);
+            }
+            else
+            {
+                x = 0xB4;
+                ConvertIntToDecimalStringN(gStringVar1, record->draws, STR_CONV_MODE_RIGHT_ALIGN, 4);
+            }
+            AddTextPrinterParameterized4(0, 2, x, y, 0, 2, &gUnknown_83F6C78, 0, gStringVar1);
+        }
+    }
+}
+
+void sub_80CDBE4(void)
+{
+    u32 left;
+    s32 i;
+
+    FillWindowPixelRect(0, PIXEL_FILL(0), 0, 0, 0xD8, 0x90);
+    StringExpandPlaceholders(gStringVar4, gUnknown_8418174);
+    left = 0xD0 - GetStringWidth(2, gStringVar4, -1);
+    AddTextPrinterParameterized4(0, 2, left / 2, 4, 0, 2, &gUnknown_83F6C78, 0, gStringVar4);
+    sub_80CD9F4(&gSaveBlock2Ptr->linkBattleRecords);
+    AddTextPrinterParameterized4(0, 2, 0x54, 0x30, 0, 2, &gUnknown_83F6C78, 0, gUnknown_84181A4);
+    for (i = 0; i < LINK_B_RECORDS_COUNT; i++)
+        sub_80CDAD0(&gSaveBlock2Ptr->linkBattleRecords.entries[i], 0x3D + 14 * i);
+    sub_80CDCB4(0);
+}
+
+void sub_80CDCB4(u8 windowId)
+{
+    PutWindowTilemap(windowId);
+    CopyWindowToVram(windowId, 3);
+}
+
+void sub_80CDCD0(u8 bg)
+{
+    LoadBgTiles(bg, gUnknown_83F6388, 0xC0, 0);
+    CopyToBgTilemapBufferRect(bg, gUnknown_83F6468, 0, 0, 32, 32);
+    LoadPalette(gUnknown_83F6448, 0, 0x20);
 }

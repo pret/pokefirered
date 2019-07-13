@@ -842,16 +842,7 @@ gUnknown_2039620: @ 2039620
 	.space 0x4
 
 gTrainerCards: @ 2039624
-	.space 0x14
-
-gUnknown_2039638: @ 2039638
-	.space 0x2
-
-gUnknown_203963A: @ 203963A
-	.space 0x1A
-
-gUnknown_2039654: @ 2039654
-	.space 0x150
+	.space 0x180
 
 gUnknown_20397A4: @ 20397A4
 	.space 0x4

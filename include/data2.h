@@ -19,4 +19,10 @@ extern const u8 gMoveNames[][13];
 extern const u8 gAbilityNames[][13];
 extern const u8 gTypeNames[][7];
 
+extern const struct CompressedSpritePalette gMonPaletteTable[];
+extern const struct CompressedSpritePalette gMonShinyPaletteTable[];
+extern const union AnimCmd *const *const gTrainerBackAnimsPtrTable[];
+extern const union AnimCmd *const *const gTrainerFrontAnimsPtrTable[];
+extern const union AnimCmd *const gUnknown_82349BC[];
+
 #endif // GUARD_DATA2_H

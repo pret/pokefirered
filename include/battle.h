@@ -951,5 +951,6 @@ extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
 extern s32 gBattleMoveDamage;
 
 extern u8 gBattleOutcome;
+extern u8 gBattleMonForms[MAX_BATTLERS_COUNT];
 
 #endif // GUARD_BATTLE_H

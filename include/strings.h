@@ -179,6 +179,7 @@ extern const u8 gUnknown_84169DC[];
 extern const u8 gUnknown_84162BD[];
 extern const u8 gUnknown_841D148[];
 
+// pokemon.c
 extern const u8 BattleText_Rose[];
 extern const u8 BattleText_UnknownString3[];
 extern const u8 BattleText_GetPumped[];

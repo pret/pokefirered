@@ -14,7 +14,7 @@
 #include "menu.h"
 #include "help_system.h"
 #include "new_menu_helpers.h"
-#include "pokemon_3.h"
+#include "pokemon.h"
 #include "sound.h"
 #include "event_scripts.h"
 #include "scanline_effect.h"

@@ -5,6 +5,7 @@
 #include "random.h"
 #include "main.h"
 #include "text.h"
+#include "data2.h"
 #include "string_util.h"
 #include "battle.h"
 #include "item.h"
@@ -56,8 +57,28 @@ struct OakSpeechNidoranFStruct
     struct SpriteFrameImage *frameImages;
 };
 
-// resolve here and static
-extern struct OakSpeechNidoranFStruct *sOakSpeechNidoranResources;
+// TODO: move sLearningMoveTableID, gPlayerPartyCount, gEnemyPartyCount, 
+// gEnemyParty, gPlayerParty here after resolving symbol ref in between. 
+extern u8 sLearningMoveTableID;
+
+EWRAM_DATA struct SpriteTemplate gMultiuseSpriteTemplate = {0};
+static EWRAM_DATA struct OakSpeechNidoranFStruct *sOakSpeechNidoranResources = NULL;
+
+static union PokemonSubstruct *GetSubstruct(struct BoxPokemon *boxMon, u32 personality, u8 substructType);
+static u16 GetDeoxysStat(struct Pokemon *mon, s32 statId);
+static bool8 IsShinyOtIdPersonality(u32 otId, u32 personality);
+static u16 ModifyStatByNature(u8 nature, u16 n, u8 statIndex);
+static u8 GetNatureFromPersonality(u32 personality);
+static bool8 sub_8042BE8(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId);
+static bool8 HealStatusConditions(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId);
+static bool8 IsPokemonStorageFull(void);
+static u8 SendMonToPC(struct Pokemon* mon);
+static void EncryptBoxMon(struct BoxPokemon *boxMon);
+static void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
+static void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon);
+static u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
+static u8 GetLevelFromMonExp(struct Pokemon *mon);
+static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon);
 
 // decomp here
 extern struct SpriteTemplate gUnknown_825DF50[];
@@ -83,32 +104,6 @@ extern u32 gTMHMLearnsets[][2];
 extern const u8 gUnknown_825DEA1[];
 extern const u8 gUnknown_825DEA9[];
 extern const u8 sGetMonDataEVConstants[];
-
-// extern symbols
-extern u8 sBattler_AI;
-extern u8 sLearningMoveTableID;
-extern u8 gBattleMonForms[4];
-extern const struct CompressedSpritePalette gMonPaletteTable[];
-extern const struct CompressedSpritePalette gMonShinyPaletteTable[];
-extern const union AnimCmd *const *const gTrainerBackAnimsPtrTable[];
-extern const union AnimCmd *const *const gTrainerFrontAnimsPtrTable[];
-extern const union AnimCmd *const gUnknown_82349BC[];
-
-static union PokemonSubstruct *GetSubstruct(struct BoxPokemon *boxMon, u32 personality, u8 substructType);
-static u16 GetDeoxysStat(struct Pokemon *mon, s32 statId);
-static bool8 IsShinyOtIdPersonality(u32 otId, u32 personality);
-static u16 ModifyStatByNature(u8 nature, u16 n, u8 statIndex);
-static u8 GetNatureFromPersonality(u32 personality);
-static bool8 sub_8042BE8(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId);
-static bool8 HealStatusConditions(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId);
-static bool8 IsPokemonStorageFull(void);
-static u8 SendMonToPC(struct Pokemon* mon);
-static void EncryptBoxMon(struct BoxPokemon *boxMon);
-static void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
-static void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon);
-static u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
-static u8 GetLevelFromMonExp(struct Pokemon *mon);
-static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon);
 
 // code
 void ZeroBoxMonData(struct BoxPokemon *boxMon)
@@ -4938,10 +4933,10 @@ bool8 sub_80435E0(void)
     return retVal;
 }
 
-bool8 GetLinkTrainerFlankId(u8 id)
+bool8 GetLinkTrainerFlankId(u8 linkPlayerId)
 {
     bool8 retVal = FALSE;
-    switch (gLinkPlayers[id].id)
+    switch (gLinkPlayers[linkPlayerId].id)
     {
     case 0:
     case 3:

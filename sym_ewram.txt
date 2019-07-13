@@ -841,7 +841,7 @@ gFieldEffectArguments: @ 20386E0
 gUnknown_2039620: @ 2039620
 	.space 0x4
 
-gUnknown_2039624: @ 2039624
+gTrainerCards: @ 2039624
 	.space 0x14
 
 gUnknown_2039638: @ 2039638

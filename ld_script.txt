@@ -188,6 +188,7 @@ SECTIONS {
         src/prof_pc.o(.text);
         src/hof_pc.o(.text);
         asm/field_specials.o(.text);
+        src/battle_records.o(.text);
         asm/battle_records.o(.text);
         asm/evolution_scene.o(.text);
         src/coins.o(.text);

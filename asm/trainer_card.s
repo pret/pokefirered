@@ -4090,7 +4090,7 @@ _0808B1B8: .4byte 0x00007bce
 sub_808B1BC: @ 808B1BC
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _0808B1D0 @ =gUnknown_2039624
+	ldr r2, _0808B1D0 @ =gTrainerCards
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 5
@@ -4098,7 +4098,7 @@ sub_808B1BC: @ 808B1BC
 	ldrb r0, [r1, 0x1]
 	bx lr
 	.align 2, 0
-_0808B1D0: .4byte gUnknown_2039624
+_0808B1D0: .4byte gTrainerCards
 	thumb_func_end sub_808B1BC
 
 	thumb_func_start sub_808B1D4
@@ -4792,7 +4792,7 @@ sub_808B700: @ 808B700
 	ldr r0, [r5]
 	ldr r1, _0808B760 @ =0x0000045c
 	adds r0, r1
-	ldr r2, _0808B764 @ =gUnknown_2039624
+	ldr r2, _0808B764 @ =gTrainerCards
 	lsls r1, r4, 1
 	adds r1, r4
 	lsls r1, 5
@@ -4818,7 +4818,7 @@ sub_808B700: @ 808B700
 _0808B758: .4byte gUnknown_20397A4
 _0808B75C: .4byte 0x00007bd0
 _0808B760: .4byte 0x0000045c
-_0808B764: .4byte gUnknown_2039624
+_0808B764: .4byte gTrainerCards
 _0808B768: .4byte gLinkPlayers
 _0808B76C: .4byte 0x00007bcf
 _0808B770: .4byte sub_80895B8
@@ -5070,7 +5070,7 @@ _0808B95C: .4byte sub_80895B8
 sub_808B960: @ 808B960
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, _0808B984 @ =gUnknown_2039624
+	ldr r0, _0808B984 @ =gTrainerCards
 	ldr r1, _0808B988 @ =gUnknown_83CD960
 	movs r2, 0x60
 	bl memcpy
@@ -5083,7 +5083,7 @@ sub_808B960: @ 808B960
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808B984: .4byte gUnknown_2039624
+_0808B984: .4byte gTrainerCards
 _0808B988: .4byte gUnknown_83CD960
 _0808B98C: .4byte sub_80895B8
 	thumb_func_end sub_808B960
@@ -5092,7 +5092,7 @@ _0808B98C: .4byte sub_80895B8
 sub_808B990: @ 808B990
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, _0808B9B4 @ =gUnknown_2039624
+	ldr r0, _0808B9B4 @ =gTrainerCards
 	ldr r1, _0808B9B8 @ =gUnknown_83CD9C0
 	movs r2, 0x60
 	bl memcpy
@@ -5105,7 +5105,7 @@ sub_808B990: @ 808B990
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808B9B4: .4byte gUnknown_2039624
+_0808B9B4: .4byte gTrainerCards
 _0808B9B8: .4byte gUnknown_83CD9C0
 _0808B9BC: .4byte sub_80895B8
 	thumb_func_end sub_808B990

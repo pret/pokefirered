@@ -3154,14 +3154,14 @@ _081172C0:
 	cmp r4, r0
 	bne _0811734A
 	movs r4, 0
-	ldr r0, _081172E0 @ =gUnknown_2039624
+	ldr r0, _081172E0 @ =gTrainerCards
 	adds r7, r0, 0
 	adds r7, 0x38
 	ldr r6, _081172E4 @ =gLinkPlayers
 	adds r5, r0, 0
 	b _08117302
 	.align 2, 0
-_081172E0: .4byte gUnknown_2039624
+_081172E0: .4byte gTrainerCards
 _081172E4: .4byte gLinkPlayers
 _081172E8:
 	lsls r0, r4, 8
@@ -10949,7 +10949,7 @@ sub_811B31C: @ 811B31C
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 5
-	ldr r0, _0811B4B0 @ =gUnknown_2039624
+	ldr r0, _0811B4B0 @ =gTrainerCards
 	adds r1, r0
 	mov r8, r1
 	bl DynamicPlaceholderTextUtil_Reset
@@ -11108,7 +11108,7 @@ _0811B45E:
 	bl StringAppend
 	b _0811B4F0
 	.align 2, 0
-_0811B4B0: .4byte gUnknown_2039624
+_0811B4B0: .4byte gTrainerCards
 _0811B4B4: .4byte gTrainerClassNames
 _0811B4B8: .4byte gUnknown_84594B0
 _0811B4BC: .4byte gUnknown_84594C4

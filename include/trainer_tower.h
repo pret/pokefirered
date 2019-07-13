@@ -1,0 +1,6 @@
+#ifndef GUARD_TRAINER_TOWER_H
+#define GUARD_TRAINER_TOWER_H
+
+void sub_815EC8C(void);
+
+#endif //GUARD_TRAINER_TOWER_H

@@ -179,4 +179,13 @@ extern const u8 gUnknown_84169DC[];
 extern const u8 gUnknown_84162BD[];
 extern const u8 gUnknown_841D148[];
 
+extern const u8 BattleText_Rose[];
+extern const u8 BattleText_UnknownString3[];
+extern const u8 BattleText_GetPumped[];
+extern const u8 BattleText_MistShroud[];
+extern const u8 gText_EggNickname[];
+extern const u8 gText_BadEgg[];
+extern const u8 gText_PkmnsXPreventsSwitching[];
+extern u8 *gUnknown_83FD5D0[];
+
 #endif //GUARD_STRINGS_H

@@ -16,12 +16,17 @@
 #include "battle_controllers.h"
 #include "evolution_scene.h"
 #include "battle_message.h"
+#include "battle_util.h"
+#include "battle_ai_script_commands.h"
 #include "link.h"
 #include "m4a.h"
 #include "sound.h"
 #include "pokedex.h"
 #include "strings.h"
 #include "malloc.h"
+#include "overworld.h"
+#include "party_menu.h"
+#include "field_specials.h"
 #include "constants/items.h"
 #include "constants/species.h"
 #include "constants/pokemon.h"
@@ -51,56 +56,59 @@ struct OakSpeechNidoranFStruct
     struct SpriteFrameImage *frameImages;
 };
 
-// External symbols
+// resolve here and static
 extern struct OakSpeechNidoranFStruct *sOakSpeechNidoranResources;
-extern struct SpriteTemplate gUnknown_825DEF0[];
-extern struct SpriteTemplate gUnknown_825DF50[];
-extern const union AnimCmd *const *const gTrainerBackAnimsPtrTable[];
-extern const union AnimCmd *const *const gTrainerFrontAnimsPtrTable[];
-extern const union AnimCmd *const gUnknown_82349BC[];
-extern const u8 gUnknown_825DEA1[];
-extern const u8 gPPUpWriteMasks[];
-extern u8 *gUnknown_83FD5D0[];
-extern const u8 gUnknown_825DFF0[];
-extern const u8 gText_EggNickname[];
-extern const u8 gText_BadEgg[];
-extern const u8 BattleText_Rose[];
-extern const u8 BattleText_UnknownString3[];
-extern const u8 BattleText_GetPumped[];
-extern const u8 BattleText_MistShroud[];
-extern const u8 gText_PkmnsXPreventsSwitching[];
-extern const u8 sHoldEffectToType[][2];
-extern u8 sLearningMoveTableID;
-extern const u8 sSecretBaseFacilityClasses[2][5];
-extern u16 gUnknown_8251CB8[];
-extern u16 gUnknown_8251FEE[];
-extern u16 gUnknown_8252324[];
-extern u16 gUnknown_82539D4[];
-extern struct SpindaSpot gSpindaSpotGraphics[];
-extern s8 gNatureStatTable[][5];
-extern const s8 sFriendshipEventDeltas[][3];
-extern u32 gTMHMLearnsets[][2];
-extern u8 gBattleMonForms[4];
-extern const struct CompressedSpritePalette gMonPaletteTable[];
-extern const struct CompressedSpritePalette gMonShinyPaletteTable[];
-extern const u16 sHMMoves[];
-extern s8 gPokeblockFlavorCompatibilityTable[];
 
+// decomp here
+extern struct SpriteTemplate gUnknown_825DF50[];
 extern const u16 sDeoxysBaseStats[];
 extern const u16 gLinkPlayerFacilityClasses[];
 extern const struct SpriteTemplate gUnknown_825E05C;
+extern s8 gPokeblockFlavorCompatibilityTable[];
+extern const u16 sHMMoves[];
+extern const u8 gPPUpWriteMasks[];
+extern const u8 sSecretBaseFacilityClasses[2][5];
+extern const s8 sFriendshipEventDeltas[][3];
+extern const u8 gUnknown_825DFF0[];
+extern const u8 sHoldEffectToType[][2];
+extern u16 gUnknown_8251CB8[];
+extern u16 gUnknown_8251FEE[];
+extern u16 gUnknown_8252324[];
+extern struct SpriteTemplate gUnknown_825DEF0[];
+extern const u8 gUnknown_825DEA1[];
+extern u16 gUnknown_82539D4[];
+extern struct SpindaSpot gSpindaSpotGraphics[];
+extern s8 gNatureStatTable[][5];
+extern u32 gTMHMLearnsets[][2];
+extern const u8 gUnknown_825DEA1[];
+extern const u8 gUnknown_825DEA9[];
+extern const u8 sGetMonDataEVConstants[];
 
-// External functions
-extern u8 GetCurrentRegionMapSectionId(void); // overworld
-extern const struct BattleMove gBattleMoves[];
-extern u8 sBattler_AI; // battle_ai
-extern void set_unknown_box_id(u8); // field_specials
-extern u8 pokemon_order_func(u8);
-extern u16 get_unknown_box_id(void); // field_specials
-extern u8 StorageGetCurrentBox(void); // pokemon_storage_system
-extern void sub_80174B8(u8 battlerId);
+// extern symbols
+extern u8 sBattler_AI;
+extern u8 sLearningMoveTableID;
+extern u8 gBattleMonForms[4];
+extern const struct CompressedSpritePalette gMonPaletteTable[];
+extern const struct CompressedSpritePalette gMonShinyPaletteTable[];
+extern const union AnimCmd *const *const gTrainerBackAnimsPtrTable[];
+extern const union AnimCmd *const *const gTrainerFrontAnimsPtrTable[];
+extern const union AnimCmd *const gUnknown_82349BC[];
 
-union PokemonSubstruct *GetSubstruct(struct BoxPokemon *boxMon, u32 personality, u8 substructType);
+static union PokemonSubstruct *GetSubstruct(struct BoxPokemon *boxMon, u32 personality, u8 substructType);
+static u16 GetDeoxysStat(struct Pokemon *mon, s32 statId);
+static bool8 IsShinyOtIdPersonality(u32 otId, u32 personality);
+static u16 ModifyStatByNature(u8 nature, u16 n, u8 statIndex);
+static u8 GetNatureFromPersonality(u32 personality);
+static bool8 sub_8042BE8(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId);
+static bool8 HealStatusConditions(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId);
+static bool8 IsPokemonStorageFull(void);
+static u8 SendMonToPC(struct Pokemon* mon);
+static void EncryptBoxMon(struct BoxPokemon *boxMon);
+static void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
+static void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon);
+static u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
+static u8 GetLevelFromMonExp(struct Pokemon *mon);
+static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon);
 
 // code
 void ZeroBoxMonData(struct BoxPokemon *boxMon)
@@ -317,7 +325,7 @@ void CreateMonWithIVsPersonality(struct Pokemon *mon, u16 species, u8 level, u32
     CalculateMonStats(mon);
 }
 
-void CreateMonWithIVsOTID(struct Pokemon *mon, u16 species, u8 level, u8 *ivs, u32 otId)
+static void CreateMonWithIVsOTID(struct Pokemon *mon, u16 species, u8 level, u8 *ivs, u32 otId)
 {
     CreateMon(mon, species, level, 0, 0, 0, OT_ID_PRESET, otId);
     SetMonData(mon, MON_DATA_HP_IV, &ivs[0]);
@@ -412,7 +420,7 @@ void CreateBattleTowerMon(struct Pokemon *mon, struct BattleTowerPokemon *src)
     CalculateMonStats(mon);
 }
 
-void CreateObedientMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId)
+static void CreateObedientMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId)
 {
     bool32 obedient = TRUE;
 
@@ -457,7 +465,7 @@ void sub_803E23C(struct Pokemon *mon, struct BattleTowerPokemon *dest)
     GetMonData(mon, MON_DATA_NICKNAME, dest->nickname);
 }
 
-u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon)
+static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon)
 {
     u16 checksum = 0;
     union PokemonSubstruct *substruct0 = GetSubstruct(boxMon, boxMon->personality, 0);
@@ -566,7 +574,7 @@ void BoxMonToMon(struct BoxPokemon *src, struct Pokemon *dest)
     CalculateMonStats(dest);
 }
 
-u8 GetLevelFromMonExp(struct Pokemon *mon)
+static u8 GetLevelFromMonExp(struct Pokemon *mon)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     u32 exp = GetMonData(mon, MON_DATA_EXP, NULL);
@@ -595,7 +603,7 @@ u16 GiveMoveToMon(struct Pokemon *mon, u16 move)
     return GiveMoveToBoxMon(&mon->box, move);
 }
 
-u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move)
+static u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move)
 {
     s32 i;
     for (i = 0; i < 4; i++)
@@ -642,7 +650,7 @@ void SetBattleMonMoveSlot(struct BattlePokemon *mon, u16 move, u8 slot)
     mon->pp[slot] = gBattleMoves[move].pp;
 }
 
-void GiveMonInitialMoveset(struct Pokemon *mon)
+static void GiveMonInitialMoveset(struct Pokemon *mon)
 {
     GiveBoxMonInitialMoveset(&mon->box);
 }
@@ -650,7 +658,7 @@ void GiveMonInitialMoveset(struct Pokemon *mon)
 // TODO: make level_up_learnsets.h in src/data and move this to there.
 #define LEVEL_UP_END 0xffff
 
-void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
+static void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
 {
     u16 species = GetBoxMonData(boxMon, MON_DATA_SPECIES, NULL);
     s32 level = GetLevelFromBoxMonExp(boxMon);
@@ -732,7 +740,7 @@ void DeleteFirstMoveAndGiveMoveToMon(struct Pokemon *mon, u16 move)
     SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
 }
 
-void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move)
+static void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move)
 {
     s32 i;
     u16 moves[4];
@@ -1180,7 +1188,7 @@ void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerSpriteId, u8 battlerPosit
     }
 }
 
-void EncryptBoxMon(struct BoxPokemon *boxMon)
+static void EncryptBoxMon(struct BoxPokemon *boxMon)
 {
     u32 i;
     for (i = 0; i < 12; i++)
@@ -1190,7 +1198,7 @@ void EncryptBoxMon(struct BoxPokemon *boxMon)
     }
 }
 
-void DecryptBoxMon(struct BoxPokemon *boxMon)
+static void DecryptBoxMon(struct BoxPokemon *boxMon)
 {
     u32 i;
     for (i = 0; i < 12; i++)
@@ -1246,7 +1254,7 @@ case n:                                                                 \
         break;                                                          \
     }                                                                   \
 
-union PokemonSubstruct *GetSubstruct(struct BoxPokemon *boxMon, u32 personality, u8 substructType)
+static union PokemonSubstruct *GetSubstruct(struct BoxPokemon *boxMon, u32 personality, u8 substructType)
 {
     union PokemonSubstruct *substruct = NULL;
 
@@ -2075,7 +2083,7 @@ u8 GiveMonToPlayer(struct Pokemon *mon)
     return MON_GIVEN_TO_PARTY;
 }
 
-u8 SendMonToPC(struct Pokemon* mon)
+static u8 SendMonToPC(struct Pokemon* mon)
 {
     s32 boxNo, boxPos;
 
@@ -2175,7 +2183,7 @@ u8 GetMonAbility(struct Pokemon *mon)
     return GetAbilityBySpecies(species, altAbility);
 }
 
-void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord)
+static void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord)
 {
     s32 i, j;
 
@@ -2234,7 +2242,7 @@ bool8 IsPlayerPartyAndPokemonStorageFull(void)
     return IsPokemonStorageFull();
 }
 
-bool8 IsPokemonStorageFull(void)
+static bool8 IsPokemonStorageFull(void)
 {
     s32 i, j;
 
@@ -2283,7 +2291,7 @@ void RemoveBattleMonPPBonus(struct BattlePokemon *mon, u8 moveIndex)
     mon->ppBonuses &= gPPUpWriteMasks[moveIndex];
 }
 
-void CopyPlayerPartyMonToBattleData(u8 battlerId, u8 partyIndex)
+static void CopyPlayerPartyMonToBattleData(u8 battlerId, u8 partyIndex)
 {
     u16* hpSwitchout;
     s32 i;
@@ -2342,10 +2350,6 @@ bool8 ExecuteTableBasedItemEffect(struct Pokemon *mon, u16 item, u8 partyIndex, 
 {
     return PokemonUseItemEffects(mon, item, partyIndex, moveIndex, 0);
 }
-
-extern const u8 gUnknown_825DEA1[];
-extern const u8 gUnknown_825DEA9[];
-extern const u8 sGetMonDataEVConstants[];
 
 bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 moveIndex, u8 e)
 {
@@ -2850,7 +2854,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
     return retVal;
 }
 
-bool8 HealStatusConditions(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId)
+static bool8 HealStatusConditions(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId)
 {
     u32 status = GetMonData(mon, MON_DATA_STATUS, 0);
 
@@ -2867,8 +2871,6 @@ bool8 HealStatusConditions(struct Pokemon *mon, u32 unused, u32 healMask, u8 bat
         return TRUE;
     }
 }
-
-extern bool8 sub_8042BE8(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId);
 
 #ifdef NONMATCHING
 /*
@@ -4407,7 +4409,7 @@ _08042BD8:\n\
 }
 #endif
 
-bool8 sub_8042BE8(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId)
+static bool8 sub_8042BE8(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId)
 {
     if((GetMonData(mon, MON_DATA_STATUS, NULL) & healMask) != 0)
         return TRUE;
@@ -4528,7 +4530,7 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
     return offset;
 }
 
-void sub_8042D50(int stat)
+static void sub_8042D50(int stat)
 {
     gBattlerTarget = gBattlerInMenuId;
     StringCopy(gBattleTextBuff1, gUnknown_83FD5D0[gUnknown_825DFF0[stat]]);
@@ -4591,12 +4593,10 @@ u8 GetNature(struct Pokemon *mon)
     return GetMonData(mon, MON_DATA_PERSONALITY, 0) % 25;
 }
 
-u8 GetNatureFromPersonality(u32 personality)
+static u8 GetNatureFromPersonality(u32 personality)
 {
     return personality % 25;
 }
-
-extern bool32 sub_806E25C(void);
 
 u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
 {
@@ -4728,7 +4728,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
 
 // HoennPokedexNumToSpecies, but is it really Hoenn or Kanto its checking
 // TODO: Figure this out
-u16 sub_80431B4(u16 var)
+static u16 sub_80431B4(u16 var)
 {
     u16 species;
 
@@ -4765,7 +4765,7 @@ u16 NationalPokedexNumToSpecies(u16 nationalNum)
 }
 
 // NationalToKantoOrder?
-u16 sub_804324C(u16 nationalNum)
+static u16 sub_804324C(u16 nationalNum)
 {
     u16 hoennNum;
 
@@ -4793,7 +4793,7 @@ u16 SpeciesToNationalPokedexNum(u16 species)
 
 // these 2 functions are probably kanto and not hoenn
 // TODO: figure this out
-u16 SpeciesToHoennPokedexNum(u16 species)
+static u16 SpeciesToHoennPokedexNum(u16 species)
 {
     if (!species)
         return 0;
@@ -4820,7 +4820,7 @@ u16 SpeciesToCryId(u16 species)
     return gUnknown_82539D4[species - ((SPECIES_OLD_UNOWN_Z + 1) - 1)];
 }
 
-void sub_8043338(u16 species, u32 personality, u8 *dest)
+static void sub_8043338(u16 species, u32 personality, u8 *dest)
 {
     if (species == SPECIES_SPINDA
         && dest != gMonSpritesGfxPtr->sprites[0]
@@ -4969,7 +4969,7 @@ u8 GetTrainerEncounterMusicId(u16 trainer)
     return gTrainers[trainer].encounterMusic_gender & 0x7F;
 }
 
-u16 ModifyStatByNature(u8 nature, u16 n, u8 statIndex)
+static u16 ModifyStatByNature(u8 nature, u16 n, u8 statIndex)
 {
     if (statIndex < 1 || statIndex > 5)
     {
@@ -5214,7 +5214,7 @@ u8 CheckPartyHasHadPokerus(struct Pokemon *party, u8 selection)
     return retVal;
 }
 
-void sub_8043B38(void)
+static void sub_8043B38(void)
 {
     u8 foo[4]; // huh?
 }
@@ -5224,7 +5224,7 @@ void sub_8043B40(void)
     u8 foo[4]; // huh?
 }
 
-void SetMonExpWithMaxLevelCheck(struct Pokemon *mon, int species, u8 unused, u32 data)
+static void SetMonExpWithMaxLevelCheck(struct Pokemon *mon, int species, u8 unused, u32 data)
 {
     if (data > gExperienceTables[gBaseStats[species].growthRate][100])
     {
@@ -5387,7 +5387,7 @@ void ClearBattleMonForms(void)
         gBattleMonForms[i] = 0;
 }
 
-u16 GetMUS_ForBattle(void)
+static u16 GetMUS_ForBattle(void)
 {
     if(gBattleTypeFlags & 0x1000)
         return 0x12A;
@@ -5490,7 +5490,7 @@ bool8 IsPokeSpriteNotFlipped(u16 species)
     return gBaseStats[species].noFlip;
 }
 
-s8 GetMonFlavorRelation(struct Pokemon *mon, u8 flavor)
+static s8 GetMonFlavorRelation(struct Pokemon *mon, u8 flavor)
 {
     u8 nature = GetNature(mon);
     return gPokeblockFlavorCompatibilityTable[nature * 5 + flavor];
@@ -5605,7 +5605,7 @@ bool8 IsMonShiny(struct Pokemon *mon)
     return IsShinyOtIdPersonality(otId, personality);
 }
 
-bool8 IsShinyOtIdPersonality(u32 otId, u32 personality)
+static bool8 IsShinyOtIdPersonality(u32 otId, u32 personality)
 {
     bool8 retVal = FALSE;
     u32 shinyValue = HIHALF(otId) ^ LOHALF(otId) ^ HIHALF(personality) ^ LOHALF(personality);
@@ -5699,7 +5699,7 @@ bool8 sub_804455C(u8 caseId, u8 battlerId)
     return TRUE;
 }
 
-u16 GetDeoxysStat(struct Pokemon *mon, s32 statId)
+static u16 GetDeoxysStat(struct Pokemon *mon, s32 statId)
 {
     s32 ivVal, evVal;
     u16 statValue;
@@ -5807,7 +5807,7 @@ bool8 CheckBattleTypeGhost(struct Pokemon *mon, u8 bank)
     return FALSE;
 }
 
-void OakSpeechNidoranFSetupTemplate(struct OakSpeechNidoranFStruct *structPtr, u8 battlePosition)
+static void OakSpeechNidoranFSetupTemplate(struct OakSpeechNidoranFStruct *structPtr, u8 battlePosition)
 {
     u16 i = 0, j = 0;
 
@@ -5833,7 +5833,7 @@ void OakSpeechNidoranFSetupTemplate(struct OakSpeechNidoranFStruct *structPtr, u
 }
 
 // not used
-void OakSpeechNidoranFSetupTemplateDummy(struct OakSpeechNidoranFStruct *structPtr)
+static void OakSpeechNidoranFSetupTemplateDummy(struct OakSpeechNidoranFStruct *structPtr)
 {
     u16 i, j;
 
@@ -5888,6 +5888,7 @@ struct OakSpeechNidoranFStruct *OakSpeechNidoranFSetup(u8 battlePosition, bool8 
             battlePosition = 1;
         if (battlePosition > 8)
             battlePosition = 8;
+        // The following two statements refused to cooperate. 
         sOakSpeechNidoranResources->spriteCount = battlePosition;
         sOakSpeechNidoranResources->battlePosition = battlePosition;
         sOakSpeechNidoranResources->frameCount = 4;
@@ -6319,8 +6320,7 @@ void OakSpeechNidoranFFreeResources(void)
             if (sOakSpeechNidoranResources->dataBuffer != NULL)
                 FREE_AND_SET_NULL(sOakSpeechNidoranResources->dataBuffer);
             memset(sOakSpeechNidoranResources, 0, sizeof(struct OakSpeechNidoranFStruct));
-            Free(sOakSpeechNidoranResources);
-            sOakSpeechNidoranResources = NULL;  
+            FREE_AND_SET_NULL(sOakSpeechNidoranResources);
         }
 
     }

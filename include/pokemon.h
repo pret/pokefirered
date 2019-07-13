@@ -2,6 +2,7 @@
 #define GUARD_POKEMON_H
 
 #include "global.h"
+#include "sprite.h"
 
 #define MON_DATA_PERSONALITY        0
 #define MON_DATA_OT_ID              1
@@ -545,30 +546,21 @@ void CreateMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV,
 void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 gender, u8 nature, u8 unownLetter);
 void CreateMaleMon(struct Pokemon *mon, u16 species, u8 level);
 void CreateMonWithIVsPersonality(struct Pokemon *mon, u16 species, u8 level, u32 ivs, u32 personality);
-void CreateMonWithIVsOTID(struct Pokemon *mon, u16 species, u8 level, u8 *ivs, u32 otId);
 void CreateMonWithEVSpread(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 evSpread);
-u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon);
 void CalculateMonStats(struct Pokemon *mon);
-u8 GetLevelFromMonExp(struct Pokemon *mon);
 u8 GetLevelFromBoxMonExp(struct BoxPokemon *boxMon);
 u16 GiveMoveToMon(struct Pokemon *mon, u16 move);
-u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 u16 GiveMoveToBattleMon(struct BattlePokemon *mon, u16 move);
 void MonRestorePP(struct Pokemon *mon);
 void SetMonMoveSlot(struct Pokemon *mon, u16 move, u8 slot);
 void SetBattleMonMoveSlot(struct BattlePokemon *mon, u16 move, u8 slot);
-void GiveMonInitialMoveset(struct Pokemon *mon);
-void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon);
 void DeleteFirstMoveAndGiveMoveToMon(struct Pokemon *mon, u16 move);
-void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 bool8 ExecuteTableBasedItemEffect(struct Pokemon *mon, u16 item, u8 partyIndex, u8 moveIndex);
 bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 moveIndex, u8 e);
 
 u8 GetMonGender(struct Pokemon *mon);
 u8 GetBoxMonGender(struct BoxPokemon *boxMon);
 u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality);
-void EncryptBoxMon(struct BoxPokemon *boxMon);
-void DecryptBoxMon(struct BoxPokemon *boxMon);
 
 // These are full type signatures for GetMonData() and GetBoxMonData(),
 // but they are not used since some code erroneously omits the third arg.
@@ -587,28 +579,20 @@ void SetMonData(struct Pokemon *mon, s32 field, const void *data);
 void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *data);
 void CopyMon(void *dest, void *src, size_t size);
 u8 GiveMonToPlayer(struct Pokemon *mon);
-u8 SendMonToPC(struct Pokemon *mon);
 u8 CalculatePlayerPartyCount(void);
 u8 CalculateEnemyPartyCount(void);
 
 u8 GetAbilityBySpecies(u16 species, bool8 altAbility);
 u8 GetMonAbility(struct Pokemon *mon);
-void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord);
 u8 GetSecretBaseTrainerPicIndex(void);
 u8 GetSecretBaseTrainerNameIndex(void);
 bool8 IsPlayerPartyAndPokemonStorageFull(void);
-bool8 IsPokemonStorageFull(void);
 void GetSpeciesName(u8 *name, u16 species);
 u8 CalculatePPWithBonus(u16 move, u8 ppBonuses, u8 moveIndex);
 void RemoveMonPPBonus(struct Pokemon *mon, u8 moveIndex);
 void RemoveBattleMonPPBonus(struct BattlePokemon *mon, u8 moveIndex);
-void CopyPlayerPartyMonToBattleData(u8 battleIndex, u8 partyIndex);
 
 u8 GetNature(struct Pokemon *mon);
-u8 GetNatureFromPersonality(u32 personality);
-
-u16 ModifyStatByNature(u8 nature, u16 n, u8 statIndex);
-
 void MonRestorePP(struct Pokemon *);
 void BoxMonRestorePP(struct BoxPokemon *);
 
@@ -632,21 +616,17 @@ bool8 IsOtherTrainer(u32, u8 *);
 void SetWildMonHeldItem(void);
 u16 GetMonEVCount(struct Pokemon *);
 
-const struct CompressedSpritePalette *sub_806E794(struct Pokemon *mon);
 const struct CompressedSpritePalette *GetMonSpritePalStruct(struct Pokemon *mon);
 const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u16 species, u32 otId , u32 personality);
 bool32 IsHMMove2(u16 move);
 bool8 IsPokeSpriteNotFlipped(u16 species);
 bool8 IsMonShiny(struct Pokemon *mon);
-bool8 IsShinyOtIdPersonality(u32 otId, u32 personality);
 
 void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies);
 bool8 IsTradedMon(struct Pokemon *mon);
 void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality);
 s32 GetBankMultiplayerId(u16 a1);
-bool16 sub_806D82C(u8 id);
 u16 MonTryLearningNewMove(struct Pokemon* mon, bool8);
-void sub_8068AA4(void); // sets stats for deoxys
 bool8 HasTwoFramesAnimation(u16 species);
 u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem);
 void RandomlyGivePartyPokerus(struct Pokemon *party);
@@ -654,21 +634,14 @@ u8 CheckPartyPokerus(struct Pokemon *party, u8 selection);
 u8 CheckPartyHasHadPokerus(struct Pokemon *party, u8 selection);
 void UpdatePartyPokerusTime(u16 days);
 void PartySpreadPokerus(struct Pokemon *party);
-s8 GetMonFlavorRelation(struct Pokemon *mon, u8 a2);
 s8 GetFlavorRelationByPersonality(u32 personality, u8 a2);
 u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit);
 u8 GetDefaultMoveTarget(u8 atkBank);
 u16 PlayerGenderToFrontTrainerPicId(u8 playerGender);
-void sub_806A1C0(u16 arg0, u8 bankIdentity);
-void sub_806A12C(u16 trainerSpriteId, u8 bankIdentity);
 u8 GetSecretBaseTrainerPicIndex(void);
 bool8 TryIncrementMonLevel(struct Pokemon *mon);
 void BoxMonToMon(struct BoxPokemon *srcMon, struct Pokemon *dstMon);
 u8 GetLevelUpMovesBySpecies(u16 species, u16 *moves);
-bool8 HealStatusConditions(struct Pokemon *mon, u32 battlePartyId, u32 healMask, u8 battlerId);
-u16 GetDeoxysStat(struct Pokemon *mon, s32 statId);
-
-#include "sprite.h"
 
 void DoMonFrontSpriteAnimation(struct Sprite* sprite, u16 species, bool8 noCry, u8 arg3);
 void BattleAnimateFrontSprite(struct Sprite* sprite, u16 species, bool8 noCry, u8 arg3);

@@ -24,37 +24,29 @@
 #include "constants/songs.h"
 #include "constants/maps.h"
 
-struct LinkBattleRecordState
-{
-    u16 unk_00;
-    u16 unk_02;
-    u8 filler_04[92];
-};
+static EWRAM_DATA u16 * sBg3TilemapBuffer_p = NULL;
 
-EWRAM_DATA struct LinkBattleRecordState gUnknown_2039638[10] = {};
-EWRAM_DATA u16 * gUnknown_2039A1C = NULL;
+static void MainCB2_SetUp(void);
+static void VBlankCB(void);
+static void MainCB2(void);
+static void Task_WaitFadeIn(u8 taskId);
+static void Task_WaitButton(u8 taskId);
+static void Task_FadeOut(u8 taskId);
+static void Task_DestroyAndReturnToField(u8 taskId);
+static void ClearWindowCommitAndRemove(u8 winddowId);
+static void ResetGpu(void);
+static void StopAllRunningTasks(void);
+static void EnableDisplay(void);
+static void ResetBGPos(void);
+static void PrintBattleRecords(void);
+static void CommitWindow(u8 windowId);
+static void LoadFrameGfxOnBg(u8 bgId);
 
-void sub_80CD240(void);
-void sub_80CD38C(void);
-void sub_80CD3A0(void);
-void sub_80CD3B8(u8 taskId);
-void sub_80CD3E8(u8 taskId);
-void sub_80CD428(u8 taskId);
-void sub_80CD460(u8 taskId);
-void sub_80CD4A4(u8 winddowId);
-void sub_80CD4D0(void);
-void sub_80CD608(void);
-void sub_80CD628(void);
-void sub_80CD638(void);
-void sub_80CDBE4(void);
-void sub_80CDCB4(u8 windowId);
-void sub_80CDCD0(u8 bgId);
+static const u16 sTiles[] = INCBIN_U16("graphics/battle_records/bg_tiles.4bpp");
+static const u16 sPalette[] = INCBIN_U16("graphics/battle_records/palette.gbapal");
+static const u16 sTilemap[] = INCBIN_U16("graphics/battle_records/tilemap.bin");
 
-const u16 gUnknown_83F6388[] = INCBIN_U16("graphics/battle_records/bg_tiles.4bpp");
-const u16 gUnknown_83F6448[] = INCBIN_U16("graphics/battle_records/palette.gbapal");
-const u16 gUnknown_83F6468[] = INCBIN_U16("graphics/battle_records/tilemap.bin");
-
-const struct WindowTemplate gUnknown_83F6C68[] = {
+static const struct WindowTemplate sWindowTemplates[] = {
     {
         .bg = 0,
         .tilemapLeft = 2,
@@ -66,11 +58,11 @@ const struct WindowTemplate gUnknown_83F6C68[] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-const struct TextColor gUnknown_83F6C78 = {
+static const struct TextColor sTextColor = {
     0, 2, 3
 };
 
-const struct BgTemplate gUnknown_83F6C7C[2] = {
+static const struct BgTemplate sBgTemplates[2] = {
     {
         .bg = 0,
         .charBaseIndex = 0,
@@ -90,41 +82,41 @@ const struct BgTemplate gUnknown_83F6C7C[2] = {
     }
 };
 
-u8 *const gUnknown_83F6C84[3] = {
+static u8 *const sStringVars[3] = {
     gStringVar1,
     gStringVar2,
     gStringVar3
 };
 
-void sub_80CD228(void)
+void Special_BattleRecords(void)
 {
     SetVBlankCallback(NULL);
-    SetMainCallback2(sub_80CD240);
+    SetMainCallback2(MainCB2_SetUp);
 }
 
-void sub_80CD240(void)
+static void MainCB2_SetUp(void)
 {
     switch (gMain.state)
     {
     case 0:
         SetVBlankCallback(NULL);
-        sub_80CD4D0();
+        ResetGpu();
         gMain.state++;
         break;
     case 1:
-        sub_80CD608();
+        StopAllRunningTasks();
         gMain.state++;
         break;
     case 2:
-        gUnknown_2039A1C = AllocZeroed(0x800);
+        sBg3TilemapBuffer_p = AllocZeroed(0x800);
         ResetBgsAndClearDma3BusyFlags(0);
-        InitBgsFromTemplates(0, gUnknown_83F6C7C, NELEMS(gUnknown_83F6C7C));
-        SetBgTilemapBuffer(3, gUnknown_2039A1C);
-        sub_80CD638();
+        InitBgsFromTemplates(0, sBgTemplates, NELEMS(sBgTemplates));
+        SetBgTilemapBuffer(3, sBg3TilemapBuffer_p);
+        ResetBGPos();
         gMain.state++;
         break;
     case 3:
-        sub_80CDCD0(3);
+        LoadFrameGfxOnBg(3);
         LoadPalette(stdpal_get(0), 0xF0, 0x20);
         gMain.state++;
         break;
@@ -138,7 +130,7 @@ void sub_80CD240(void)
         }
         break;
     case 5:
-        InitWindows(gUnknown_83F6C68);
+        InitWindows(sWindowTemplates);
         DeactivateAllTextPrinters();
         gMain.state++;
         break;
@@ -147,27 +139,27 @@ void sub_80CD240(void)
         gMain.state++;
         break;
     case 7:
-        sub_80CD628();
-        SetVBlankCallback(sub_80CD38C);
+        EnableDisplay();
+        SetVBlankCallback(VBlankCB);
         if (gSpecialVar_0x8004)
-            sub_815EC8C();
+            PrintTrainerTowerRecords();
         else
-            sub_80CDBE4();
-        CreateTask(sub_80CD3B8, 8);
-        SetMainCallback2(sub_80CD3A0);
+            PrintBattleRecords();
+        CreateTask(Task_WaitFadeIn, 8);
+        SetMainCallback2(MainCB2);
         gMain.state = 0;
         break;
     }
 }
 
-void sub_80CD38C(void)
+static void VBlankCB(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-void sub_80CD3A0(void)
+static void MainCB2(void)
 {
     RunTasks();
     AnimateSprites();
@@ -175,42 +167,42 @@ void sub_80CD3A0(void)
     UpdatePaletteFade();
 }
 
-void sub_80CD3B8(u8 taskId)
+static void Task_WaitFadeIn(u8 taskId)
 {
     if (!gPaletteFade.active)
-        gTasks[taskId].func = sub_80CD3E8;
+        gTasks[taskId].func = Task_WaitButton;
 }
 
-void sub_80CD3E8(u8 taskId)
+static void Task_WaitButton(u8 taskId)
 {
     struct Task * task = &gTasks[taskId];
 
     if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
-        task->func = sub_80CD428;
+        task->func = Task_FadeOut;
     }
 }
 
-void sub_80CD428(u8 taskId)
+static void Task_FadeOut(u8 taskId)
 {
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-    gTasks[taskId].func = sub_80CD460;
+    gTasks[taskId].func = Task_DestroyAndReturnToField;
 }
 
-void sub_80CD460(u8 taskId)
+static void Task_DestroyAndReturnToField(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
-        Free(gUnknown_2039A1C);
-        sub_80CD4A4(0);
+        Free(sBg3TilemapBuffer_p);
+        ClearWindowCommitAndRemove(0);
         FreeAllWindowBuffers();
         DestroyTask(taskId);
     }
 }
 
-void sub_80CD4A4(u8 windowId)
+static void ClearWindowCommitAndRemove(u8 windowId)
 {
     FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
     ClearWindowTilemap(windowId);
@@ -218,7 +210,7 @@ void sub_80CD4A4(u8 windowId)
     RemoveWindow(windowId);
 }
 
-void sub_80CD4D0(void)
+static void ResetGpu(void)
 {
     {
     void * dest = (void *)VRAM;
@@ -260,7 +252,7 @@ void sub_80CD4D0(void)
     SetGpuReg(REG_OFFSET_BLDY, 0);
 }
 
-void sub_80CD608(void)
+static void StopAllRunningTasks(void)
 {
     ScanlineEffect_Stop();
     ResetTasks();
@@ -270,12 +262,12 @@ void sub_80CD608(void)
     FreeAllSpritePalettes();
 }
 
-void sub_80CD628(void)
+static void EnableDisplay(void)
 {
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG3_ON);
 }
 
-void sub_80CD638(void)
+static void ResetBGPos(void)
 {
     ChangeBgX(0, 0, 0);
     ChangeBgY(0, 0, 0);
@@ -287,7 +279,7 @@ void sub_80CD638(void)
     ChangeBgY(3, 0, 0);
 }
 
-void InitLinkBattleRecord(struct LinkBattleRecord * record)
+static void InitLinkBattleRecord(struct LinkBattleRecord * record)
 {
     CpuFill16(0, record, sizeof(*record));
     record->name[0] = EOS;
@@ -297,7 +289,7 @@ void InitLinkBattleRecord(struct LinkBattleRecord * record)
     record->draws = 0;
 }
 
-void InitLinkBattleRecords_(struct LinkBattleRecords * records)
+static void InitLinkBattleRecords_(struct LinkBattleRecords * records)
 {
     s32 i;
 
@@ -308,12 +300,12 @@ void InitLinkBattleRecords_(struct LinkBattleRecords * records)
     SetGameStat(GAME_STAT_LINK_BATTLE_DRAWS, 0);
 }
 
-s32 GetLinkBattleRecordTotalBattles(struct LinkBattleRecord * record)
+static s32 GetLinkBattleRecordTotalBattles(struct LinkBattleRecord * record)
 {
     return record->wins + record->losses + record->draws;
 }
 
-s32 sub_80CD704(struct LinkBattleRecords * records, const u8 * name, u16 trainerId)
+static s32 IndexOfOpponentLinkBattleRecord(struct LinkBattleRecords * records, const u8 * name, u16 trainerId)
 {
     s32 i;
 
@@ -326,7 +318,7 @@ s32 sub_80CD704(struct LinkBattleRecords * records, const u8 * name, u16 trainer
     return LINK_B_RECORDS_COUNT;
 }
 
-void SortLinkBattleRecords(struct LinkBattleRecords * records)
+static void SortLinkBattleRecords(struct LinkBattleRecords * records)
 {
     struct LinkBattleRecord tmp;
     s32 i;
@@ -346,7 +338,7 @@ void SortLinkBattleRecords(struct LinkBattleRecords * records)
     }
 }
 
-void UpdateLinkBattleRecord(struct LinkBattleRecord * record, s32 outcome)
+static void UpdateLinkBattleRecord(struct LinkBattleRecord * record, s32 outcome)
 {
     switch (outcome)
     {
@@ -368,7 +360,7 @@ void UpdateLinkBattleRecord(struct LinkBattleRecord * record, s32 outcome)
     }
 }
 
-void UpdateLinkBattleGameStats(s32 outcome)
+static void UpdateLinkBattleGameStats(s32 outcome)
 {
     u8 statId;
 
@@ -391,7 +383,7 @@ void UpdateLinkBattleGameStats(s32 outcome)
         IncrementGameStat(statId);
 }
 
-void sub_80CD854(struct LinkBattleRecords * records, const u8 * name, u16 trainerId, s32 outcome, u32 language)
+static void AddOpponentLinkBattleRecord(struct LinkBattleRecords * records, const u8 * name, u16 trainerId, s32 outcome, u32 language)
 {
     u8 namebuf[OT_NAME_LENGTH + 1];
     s32 i;
@@ -407,7 +399,7 @@ void sub_80CD854(struct LinkBattleRecords * records, const u8 * name, u16 traine
         StringCopy(namebuf, name);
     UpdateLinkBattleGameStats(outcome);
     SortLinkBattleRecords(records);
-    i = sub_80CD704(records, namebuf, trainerId);
+    i = IndexOfOpponentLinkBattleRecord(records, namebuf, trainerId);
     if (i == LINK_B_RECORDS_COUNT)
     {
         i = LINK_B_RECORDS_COUNT - 1;
@@ -425,7 +417,7 @@ void InitLinkBattleRecords(void)
     InitLinkBattleRecords_(&gSaveBlock2Ptr->linkBattleRecords);
 }
 
-void sub_80CD8F8(s32 battlerId)
+static void IncTrainerCardWinCount(s32 battlerId)
 {
     u16 *wins = &gTrainerCards[battlerId].linkBattleWins;
     (*wins)++;
@@ -433,7 +425,7 @@ void sub_80CD8F8(s32 battlerId)
         *wins = 9999;
 }
 
-void sub_80CD924(s32 battlerId)
+static void IncTrainerCardLossCount(s32 battlerId)
 {
     u16 *losses = &gTrainerCards[battlerId].linkBattleLosses;
     (*losses)++;
@@ -441,31 +433,31 @@ void sub_80CD924(s32 battlerId)
         *losses = 9999;
 }
 
-void sub_80CD950(s32 battlerId)
+static void UpdateBattleOutcomeOnTrainerCards(s32 battlerId)
 {
     switch (gBattleOutcome)
     {
     case B_OUTCOME_WON:
-        sub_80CD8F8(battlerId ^ 1);
-        sub_80CD924(battlerId);
+        IncTrainerCardWinCount(battlerId ^ 1);
+        IncTrainerCardLossCount(battlerId);
         break;
     case B_OUTCOME_LOST:
-        sub_80CD924(battlerId ^ 1);
-        sub_80CD8F8(battlerId);
+        IncTrainerCardLossCount(battlerId ^ 1);
+        IncTrainerCardWinCount(battlerId);
         break;
     }
 }
 
-void sub_80CD98C(s32 battlerId)
+void TryRecordLinkBattleOutcome(s32 battlerId)
 {
     if (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(UNKNOWN_MAP_00_04) || gSaveBlock1Ptr->location.mapNum != MAP_NUM(UNKNOWN_MAP_00_04))
     {
-        sub_80CD950(battlerId);
-        sub_80CD854(&gSaveBlock2Ptr->linkBattleRecords, gTrainerCards[battlerId].playerName, gTrainerCards[battlerId].trainerId, gBattleOutcome, gLinkPlayers[battlerId].language);
+        UpdateBattleOutcomeOnTrainerCards(battlerId);
+        AddOpponentLinkBattleRecord(&gSaveBlock2Ptr->linkBattleRecords, gTrainerCards[battlerId].playerName, gTrainerCards[battlerId].trainerId, gBattleOutcome, gLinkPlayers[battlerId].language);
     }
 }
 
-void sub_80CD9F4(struct LinkBattleRecords * records)
+static void PrintTotalRecord(struct LinkBattleRecords * records)
 {
     u32 nwins = GetGameStat(GAME_STAT_LINK_BATTLE_WINS);
     u32 nlosses = GetGameStat(GAME_STAT_LINK_BATTLE_LOSSES);
@@ -486,9 +478,9 @@ void sub_80CD9F4(struct LinkBattleRecords * records)
     ConvertIntToDecimalStringN(gStringVar2, nlosses, STR_CONV_MODE_LEFT_ALIGN, 4);
     ConvertIntToDecimalStringN(gStringVar3, ndraws, STR_CONV_MODE_LEFT_ALIGN, 4);
 
-    for (i = 0; i < NELEMS(gUnknown_83F6C84); i++)
+    for (i = 0; i < NELEMS(sStringVars); i++)
     {
-        strvar = gUnknown_83F6C84[i];
+        strvar = sStringVars[i];
         foundEnd = FALSE;
         for (j = 0; j < 4; j++)
         {
@@ -501,18 +493,18 @@ void sub_80CD9F4(struct LinkBattleRecords * records)
         *strvar = 0xFF;
     }
 
-    StringExpandPlaceholders(gStringVar4, gUnknown_8418188);
-    AddTextPrinterParameterized4(0, 2, 12, 24, 0, 2, &gUnknown_83F6C78, 0, gStringVar4);
+    StringExpandPlaceholders(gStringVar4, gString_BattleRecords_TotalRecord);
+    AddTextPrinterParameterized4(0, 2, 12, 24, 0, 2, &sTextColor, 0, gStringVar4);
 }
 
-void sub_80CDAD0(struct LinkBattleRecord * record, u8 y)
+static void PrintOpponentBattleRecord(struct LinkBattleRecord * record, u8 y)
 {
     u8 i = 0;
     s32 x;
 
     if (record->wins == 0 && record->losses == 0 && record->draws == 0)
     {
-        AddTextPrinterParameterized4(0, 2, 0, y, 0, 2, &gUnknown_83F6C78, 0, gUnknown_84181B6);
+        AddTextPrinterParameterized4(0, 2, 0, y, 0, 2, &sTextColor, 0, gString_BattleRecords_7Dashes);
         for (i = 0; i < 3; i++)
         {
             if (i == 0)
@@ -521,7 +513,7 @@ void sub_80CDAD0(struct LinkBattleRecord * record, u8 y)
                 x = 0x84;
             else
                 x = 0xB4;
-            AddTextPrinterParameterized4(0, 2, x, y, 0, 2, &gUnknown_83F6C78, 0, gUnknown_84181BE);
+            AddTextPrinterParameterized4(0, 2, x, y, 0, 2, &sTextColor, 0, gString_BattleRecords_4Dashes);
         }
     }
     else
@@ -549,36 +541,36 @@ void sub_80CDAD0(struct LinkBattleRecord * record, u8 y)
                 x = 0xB4;
                 ConvertIntToDecimalStringN(gStringVar1, record->draws, STR_CONV_MODE_RIGHT_ALIGN, 4);
             }
-            AddTextPrinterParameterized4(0, 2, x, y, 0, 2, &gUnknown_83F6C78, 0, gStringVar1);
+            AddTextPrinterParameterized4(0, 2, x, y, 0, 2, &sTextColor, 0, gStringVar1);
         }
     }
 }
 
-void sub_80CDBE4(void)
+static void PrintBattleRecords(void)
 {
     u32 left;
     s32 i;
 
     FillWindowPixelRect(0, PIXEL_FILL(0), 0, 0, 0xD8, 0x90);
-    StringExpandPlaceholders(gStringVar4, gUnknown_8418174);
+    StringExpandPlaceholders(gStringVar4, gString_BattleRecords_PlayersBattleResults);
     left = 0xD0 - GetStringWidth(2, gStringVar4, -1);
-    AddTextPrinterParameterized4(0, 2, left / 2, 4, 0, 2, &gUnknown_83F6C78, 0, gStringVar4);
-    sub_80CD9F4(&gSaveBlock2Ptr->linkBattleRecords);
-    AddTextPrinterParameterized4(0, 2, 0x54, 0x30, 0, 2, &gUnknown_83F6C78, 0, gUnknown_84181A4);
+    AddTextPrinterParameterized4(0, 2, left / 2, 4, 0, 2, &sTextColor, 0, gStringVar4);
+    PrintTotalRecord(&gSaveBlock2Ptr->linkBattleRecords);
+    AddTextPrinterParameterized4(0, 2, 0x54, 0x30, 0, 2, &sTextColor, 0, gString_BattleRecords_ColumnHeaders);
     for (i = 0; i < LINK_B_RECORDS_COUNT; i++)
-        sub_80CDAD0(&gSaveBlock2Ptr->linkBattleRecords.entries[i], 0x3D + 14 * i);
-    sub_80CDCB4(0);
+        PrintOpponentBattleRecord(&gSaveBlock2Ptr->linkBattleRecords.entries[i], 0x3D + 14 * i);
+    CommitWindow(0);
 }
 
-void sub_80CDCB4(u8 windowId)
+static void CommitWindow(u8 windowId)
 {
     PutWindowTilemap(windowId);
     CopyWindowToVram(windowId, 3);
 }
 
-void sub_80CDCD0(u8 bg)
+static void LoadFrameGfxOnBg(u8 bg)
 {
-    LoadBgTiles(bg, gUnknown_83F6388, 0xC0, 0);
-    CopyToBgTilemapBufferRect(bg, gUnknown_83F6468, 0, 0, 32, 32);
-    LoadPalette(gUnknown_83F6448, 0, 0x20);
+    LoadBgTiles(bg, sTiles, 0xC0, 0);
+    CopyToBgTilemapBufferRect(bg, sTilemap, 0, 0, 32, 32);
+    LoadPalette(sPalette, 0, 0x20);
 }

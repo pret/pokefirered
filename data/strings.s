@@ -1814,19 +1814,19 @@ gUnknown_8418152:: @ 0x8418152
 gUnknown_8418163:: @ 0x8418163
 	.string "PP UP{CLEAR_TO 0x65}{SMALL}3,000$"
 
-gUnknown_8418174:: @ 8418174
+gString_BattleRecords_PlayersBattleResults:: @ 8418174
 	.string "{PLAYER}'s BATTLE RESULTS$"
 
-gUnknown_8418188:: @ 8418188
+gString_BattleRecords_TotalRecord:: @ 8418188
 	.string "TOTAL RECORD W:{STR_VAR_1} L:{STR_VAR_2} D:{STR_VAR_3}$"
 
-gUnknown_84181A4:: @ 84181A4
+gString_BattleRecords_ColumnHeaders:: @ 84181A4
 	.string "WIN{CLEAR_TO 0x30}LOSE{CLEAR_TO 0x60}DRAW$"
 
-gUnknown_84181B6:: @ 84181B6
+gString_BattleRecords_7Dashes:: @ 84181B6
 	.string "-------$"
 
-gUnknown_84181BE:: @ 84181BE
+gString_BattleRecords_4Dashes:: @ 84181BE
 	.string "----$"
 
 gFameCheckerText_FameCheckerWillBeClosed:: @ 84181C3

@@ -13,7 +13,7 @@
 #include "random.h"
 #include "cereader_tool.h"
 #include "easy_chat.h"
-#include "text.h"
+#include "text.h"sub_815EC8C
 #include "battle_setup.h"
 #include "battle_transition.h"
 #include "battle.h"
@@ -1425,7 +1425,7 @@ void sub_815EC0C(void)
     }
 }
 
-void sub_815EC8C(void)
+void PrintTrainerTowerRecords(void)
 {
     s32 i;
     u8 windowId = 0;

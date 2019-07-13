@@ -1935,7 +1935,7 @@ sub_8081668: @ 8081668
 	ldrb r0, [r0]
 	movs r5, 0x1
 	eors r0, r5
-	bl sub_80CD98C
+	bl TryRecordLinkBattleOutcome
 	ldr r0, _080816C0 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0

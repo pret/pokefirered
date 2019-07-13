@@ -1061,8 +1061,7 @@ gUnknown_2039A1A: @ 2039A1A
 gUnknown_2039A1B: @ 2039A1B
 	.space 0x1
 
-gUnknown_2039A1C: @ 2039A1C
-	.space 0x4
+	.include "src/battle_records.o"
 
 gUnknown_2039A20: @ 2039A20
 	.space 0x4

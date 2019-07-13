@@ -175,9 +175,14 @@ extern const u8 gUnknown_841665C[];
 extern const u8 gUnknown_8416690[];
 extern const u8 gUnknown_84166A7[];
 extern const u8 gUnknown_84169DC[];
-
+extern const u8 gUnknown_841623D[];
 extern const u8 gUnknown_84162BD[];
 
-extern const u8 gUnknown_841623D[];
+// diploma
+extern const u8 gUnknown_841B60E[];
+extern const u8 gUnknown_841B619[];
+extern const u8 gUnknown_841B684[];
+extern const u8 gUnknown_841B68F[];
+extern const u8 gUnknown_841B698[];
 
 #endif //GUARD_STRINGS_H

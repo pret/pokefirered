@@ -15,33 +15,11 @@
 #include "scanline_effect.h"
 #include "sound.h"
 #include "sprite.h"
+#include "strings.h"
 #include "task.h"
 #include "text.h"
 #include "window.h"
 #include "diploma.h"
-
-static void DiplomaBgInit(void);
-static void DiplomaPrintText(void);
-static u8 DiplomaLoadGfx(void);
-static void DiplomaVblankHandler(void);
-
-static void CB2_DiplomaInit(void);
-
-static void Task_WaitForExit(u8);
-static void Task_DiplomaInit(u8);
-static void Task_DiplomaReturnToOverworld(u8);
-
-extern const struct BgTemplate gUnknown_8415A08[2];
-extern const struct WindowTemplate gUnknown_8415A10[];
-extern const u8 gUnknown_8402650[];
-extern const u8 gUnknown_841B60E[];
-extern const u8 gUnknown_841B684[];
-extern u8 gUnknown_84147C0[];
-extern u8 gUnknown_8415954[];
-extern u8 gUnknown_841B698[];
-extern u8 gUnknown_841B68F[];
-extern u8 gUnknown_841B619[];
-extern u8 gUnknown_8415A04[];
 
 struct Diploma
 {
@@ -53,7 +31,60 @@ struct Diploma
 
 static EWRAM_DATA struct Diploma *gDiploma = NULL;
 
-extern const u32 gUnknown_84154E8[];
+static void DiplomaBgInit(void);
+static void DiplomaPrintText(void);
+static u8 DiplomaLoadGfx(void);
+static void DiplomaVblankHandler(void);
+static void CB2_DiplomaInit(void);
+static void Task_WaitForExit(u8);
+static void Task_DiplomaInit(u8);
+static void Task_DiplomaReturnToOverworld(u8);
+
+static const u32 gUnknown_84147C0[] = INCBIN_U32("graphics/diploma/unk_84147C0.4bpp.lz");
+static const u32 gUnknown_84154E8[] = INCBIN_U32("graphics/diploma/unk_84154E8.bin.lz");
+static const u16 gUnknown_8415954[] = INCBIN_U16("graphics/diploma/unk_8415954.gbapal");
+
+static const u8 gUnknown_8415994[] = _("{HIGHLIGHT TRANSPARENT}プレイヤー");
+static const u8 gUnknown_841599D[] = _("{HIGHLIGHT TRANSPARENT}さま");
+static const u8 gUnknown_84159A3[] = _("{HIGHLIGHT TRANSPARENT}ホウエン");
+static const u8 gUnknown_84159AB[] = _("{HIGHLIGHT TRANSPARENT}ぜんこく");
+static const u8 gUnknown_84159B3[] = _("{HIGHLIGHT TRANSPARENT}　　　　　ポケモンずかんを\nみごと　かんせい　させた\nいだいなこうせきを　たたえ\nここに　しょうめい　します");
+static const u8 gUnknown_84159ED[] = _("{COLOR RED}{HIGHLIGHT TRANSPARENT}ゲームフリーク");
+static const u8 gUnknown_84159FB[] = _("{COLOR RED}{HIGHLIGHT TRANSPARENT}");
+
+static const ALIGNED(4) struct TextColor gUnknown_8415A04 = {0, 2, 3};
+
+static const struct BgTemplate gUnknown_8415A08[] = {
+    {
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 31,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 1,
+    }, {
+        .bg = 1,
+        .charBaseIndex = 1,
+        .mapBaseIndex = 29,
+        .screenSize = 1,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0,
+    }
+};
+
+static const struct WindowTemplate gUnknown_8415A10[] = {
+    {
+        .bg = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 2,
+        .width = 29,
+        .height = 16,
+        .paletteNum = 15,
+        .baseBlock = 0x000
+    }, DUMMY_WIN_TEMPLATE
+};
 
 static void VCBC_DiplomaOam(void)
 {
@@ -245,10 +276,10 @@ static void DiplomaPrintText(void)
     FillWindowPixelBuffer(0, 0);
     DynamicPlaceholderTextUtil_ExpandPlaceholders(arr, gUnknown_841B60E);
     width = GetStringWidth(2, arr, -1);
-    AddTextPrinterParameterized3(0, 2, 0x78 - (width / 2), 4, gUnknown_8415A04, -1, arr);
+    AddTextPrinterParameterized3(0, 2, 0x78 - (width / 2), 4, &gUnknown_8415A04, -1, arr);
     DynamicPlaceholderTextUtil_ExpandPlaceholders(arr, gUnknown_841B619);
     width = GetStringWidth(2, arr, -1);
-    AddTextPrinterParameterized3(0, 0x2, 0x78 - (width / 2), 0x1E, gUnknown_8415A04, -1, arr);
-    AddTextPrinterParameterized3(0, 0x2, 0x78, 0x69, gUnknown_8415A04, 0, gUnknown_841B684);
+    AddTextPrinterParameterized3(0, 0x2, 0x78 - (width / 2), 0x1E, &gUnknown_8415A04, -1, arr);
+    AddTextPrinterParameterized3(0, 0x2, 0x78, 0x69, &gUnknown_8415A04, 0, gUnknown_841B684);
     PutWindowTilemap(0);
 }

@@ -3715,7 +3715,7 @@ _08109AD4:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl ProgramAndPlaceMenuCursorOnWindow
+	bl Menu_InitCursor
 	movs r0, 0x6
 	movs r1, 0
 	bl sub_810B9DC
@@ -3791,7 +3791,7 @@ sub_8109BE4: @ 8109BE4
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08109C42
-	bl ProcessMenuInputNoWrapAround
+	bl Menu_ProcessInputNoWrapAround
 	lsls r0, 24
 	asrs r4, r0, 24
 	movs r0, 0x2
@@ -6507,7 +6507,7 @@ _0810B290:
 	movs r0, 0x5
 	bl PlaySE
 	movs r0, 0x1
-	bl MoveMenuCursorNoWrapAround
+	bl Menu_MoveCursorNoWrapAround
 	b _0810B36C
 _0810B29E:
 	movs r0, 0x5

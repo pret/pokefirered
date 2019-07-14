@@ -1703,7 +1703,7 @@ sub_811D2D0: @ 811D2D0
 	bl ClearWindowTilemap
 	movs r0, 0
 	movs r1, 0
-	bl ClearMenuWindow
+	bl ClearStdWindowAndFrameToTransparent
 	movs r0, 0
 	movs r1, 0x1
 	bl CopyWindowToVram

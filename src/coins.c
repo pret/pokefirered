@@ -61,7 +61,7 @@ void PrintCoinsString_Parameterized(u8 windowId, u32 coinAmount, u8 x, u8 y, u8 
 
 void sub_80D0674(u8 windowId, u16 tileStart, u8 palette, u32 coinAmount)
 {
-    SetWindowBorderStyle(windowId, FALSE, tileStart, palette);
+    DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, tileStart, palette);
     AddTextPrinterParameterized(windowId, 2, gUnknown_8417C2D, 0, 0, 0xFF, 0);
     PrintCoinsString_Parameterized(windowId, coinAmount, 0x10, 0xC, 0);
 }
@@ -80,15 +80,14 @@ void PrintCoinsString(u32 coinAmount)
 
 void ShowCoinsWindow(u32 coinAmount, u8 x, u8 y)
 {
-    struct WindowTemplate template, template2;
+    struct WindowTemplate template;
 
-    SetWindowTemplateFields(&template, 0, x + 1, y + 1, 8, 3, 0xF, 0x20);
-    template2 = template; // again, why...
-    sCoinsWindowId = AddWindow(&template2);
+    template = SetWindowTemplateFields(0, x + 1, y + 1, 8, 3, 0xF, 0x20);
+    sCoinsWindowId = AddWindow(&template);
     FillWindowPixelBuffer(sCoinsWindowId, 0);
     PutWindowTilemap(sCoinsWindowId);
     TextWindow_SetStdFrame0_WithPal(sCoinsWindowId, 0x21D, 0xD0);
-    SetWindowBorderStyle(sCoinsWindowId, FALSE, 0x21D, 0xD);
+    DrawStdFrameWithCustomTileAndPalette(sCoinsWindowId, FALSE, 0x21D, 0xD);
     AddTextPrinterParameterized(sCoinsWindowId, 2, gUnknown_8417C2D, 0, 0, 0xFF, 0);
     PrintCoinsString(coinAmount);
 }
@@ -96,6 +95,6 @@ void ShowCoinsWindow(u32 coinAmount, u8 x, u8 y)
 void HideCoinsWindow(void)
 {
     ClearWindowTilemap(sCoinsWindowId);
-    ClearMenuWindow(sCoinsWindowId, TRUE);
+    ClearStdWindowAndFrameToTransparent(sCoinsWindowId, TRUE);
     RemoveWindow(sCoinsWindowId);
 }

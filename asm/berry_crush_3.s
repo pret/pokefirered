@@ -2102,7 +2102,7 @@ _0814E6E0:
 	movs r1, 0
 	adds r2, r4, 0
 	movs r3, 0xD
-	bl SetWindowBorderStyle
+	bl DrawStdFrameWithCustomTileAndPalette
 	b _0814E7F8
 	.align 2, 0
 _0814E700: .4byte 0x0000021d
@@ -2246,7 +2246,7 @@ sub_814E80C: @ 814E80C
 	adds r5, r4, r0
 	ldrb r0, [r5]
 	movs r1, 0x1
-	bl ClearMenuWindow
+	bl ClearStdWindowAndFrameToTransparent
 	ldrb r0, [r5]
 	bl RemoveWindow
 	adds r0, r4, 0
@@ -2314,7 +2314,7 @@ _0814E876:
 	movs r1, 0
 	adds r2, r4, 0
 	movs r3, 0xD
-	bl SetWindowBorderStyle
+	bl DrawStdFrameWithCustomTileAndPalette
 	b _0814EA66
 	.align 2, 0
 _0814E8A8: .4byte gUnknown_846E3F0
@@ -2499,7 +2499,7 @@ _0814EA3C: .4byte gMain
 _0814EA40:
 	ldrb r0, [r7, 0x2]
 	movs r1, 0x1
-	bl ClearMenuWindow
+	bl ClearStdWindowAndFrameToTransparent
 	ldrb r0, [r7, 0x2]
 	bl ClearWindowTilemap
 	ldrb r0, [r7, 0x2]

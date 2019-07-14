@@ -845,7 +845,7 @@ static void Task_ItemPcSubmenuInit(u8 taskId)
     ItemPc_SetBorderStyleOnWindow(4);
     windowId = ItemPc_GetOrCreateSubwindow(0);
     PrintTextArray(4, 2, 8, 2, GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) + 2, 3, sItemPcSubmenuOptions);
-    ProgramAndPlaceMenuCursorOnWindow(4, 2, 0, 2, GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) + 2, 3, 0);
+    Menu_InitCursor(4, 2, 0, 2, GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) + 2, 3, 0);
     CopyItemName(ItemPc_GetItemIdBySlotId(data[1]), gStringVar1);
     StringExpandPlaceholders(gStringVar4, gOtherText_StrVar1);
     ItemPc_AddTextPrinterParameterized(windowId, 2, gStringVar4, 0, 2, 1, 0, 0, 1);
@@ -855,7 +855,7 @@ static void Task_ItemPcSubmenuInit(u8 taskId)
 
 static void Task_ItemPcSubmenuRun(u8 taskId)
 {
-    s8 input = ProcessMenuInputNoWrapAround();
+    s8 input = Menu_ProcessInputNoWrapAround();
     switch (input)
     {
     case -1:
@@ -874,7 +874,7 @@ static void Task_ItemPcWithdraw(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
-    ClearMenuWindow(4, FALSE);
+    ClearStdWindowAndFrameToTransparent(4, FALSE);
     ItemPc_DestroySubwindow(0);
     ClearWindowTilemap(4);
     data[8] = 1;
@@ -998,7 +998,7 @@ static void Task_ItemPcHandleWithdrawMultiple(u8 taskId)
     else if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
-        ClearMenuWindow(3, FALSE);
+        ClearStdWindowAndFrameToTransparent(3, FALSE);
         ItemPc_DestroySubwindow(1);
         ClearWindowTilemap(3);
         PutWindowTilemap(0);
@@ -1014,7 +1014,7 @@ static void Task_ItemPcGive(u8 taskId)
 {
     if (CalculatePlayerPartyCount() == 0)
     {
-        ClearMenuWindow(4, FALSE);
+        ClearStdWindowAndFrameToTransparent(4, FALSE);
         ItemPc_DestroySubwindow(0);
         ClearWindowTilemap(4);
         PutWindowTilemap(0);
@@ -1045,7 +1045,7 @@ static void gTask_ItemPcWaitButtonAndExitSubmenu(u8 taskId)
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        ClearMenuWindow_BorderThickness2(5, 0);
+        ClearDialogWindowAndFrameToTransparent(5, 0);
         ClearWindowTilemap(5);
         PutWindowTilemap(1);
         ItemPc_PrintOrRemoveCursor(data[0], 1);
@@ -1058,7 +1058,7 @@ static void Task_ItemPcCancel(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
-    ClearMenuWindow(4, FALSE);
+    ClearStdWindowAndFrameToTransparent(4, FALSE);
     ItemPc_DestroySubwindow(0);
     ClearWindowTilemap(4);
     PutWindowTilemap(0);
@@ -1116,7 +1116,7 @@ static void ItemPc_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 
 
 static void ItemPc_SetBorderStyleOnWindow(u8 windowId)
 {
-    SetWindowBorderStyle(windowId, FALSE, 0x3C0, 0x0E);
+    DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, 0x3C0, 0x0E);
 }
 
 static u8 ItemPc_GetOrCreateSubwindow(u8 idx)
@@ -1124,7 +1124,7 @@ static u8 ItemPc_GetOrCreateSubwindow(u8 idx)
     if (sSubmenuWindowIds[idx] == 0xFF)
     {
         sSubmenuWindowIds[idx] = AddWindow(&gUnknown_8453FD0[idx]);
-        SetWindowBorderStyle(sSubmenuWindowIds[idx], TRUE, 0x3A3, 0x0C);
+        DrawStdFrameWithCustomTileAndPalette(sSubmenuWindowIds[idx], TRUE, 0x3A3, 0x0C);
     }
 
     return sSubmenuWindowIds[idx];
@@ -1132,7 +1132,7 @@ static u8 ItemPc_GetOrCreateSubwindow(u8 idx)
 
 static void ItemPc_DestroySubwindow(u8 idx)
 {
-    ClearMenuWindow(sSubmenuWindowIds[idx], FALSE);
+    ClearStdWindowAndFrameToTransparent(sSubmenuWindowIds[idx], FALSE);
     ClearWindowTilemap(sSubmenuWindowIds[idx]); // redundant
     RemoveWindow(sSubmenuWindowIds[idx]);
     sSubmenuWindowIds[idx] = 0xFF;

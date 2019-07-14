@@ -4607,7 +4607,7 @@ sub_8141AD8: @ 8141AD8
 	lsls r4, 24
 	asrs r4, 24
 	adds r0, r4, 0
-	bl MoveMenuCursorNoWrapAround
+	bl Menu_MoveCursorNoWrapAround
 	bl sub_814112C
 	movs r1, 0x1
 	str r1, [r0, 0x28]
@@ -4627,7 +4627,7 @@ sub_8141B18: @ 8141B18
 	ldr r0, [r4, 0x28]
 	cmp r0, 0
 	beq _08141B2E
-	bl sub_81100E8
+	bl DestroyYesNoMenu
 	movs r0, 0
 	str r0, [r4, 0x28]
 _08141B2E:

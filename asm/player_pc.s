@@ -187,7 +187,7 @@ _080EB77E:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl ProgramAndPlaceMenuCursorOnWindow
+	bl Menu_InitCursor
 	movs r0, 0
 	bl ScheduleBgCopyTilemapToVram
 	ldr r1, _080EB814 @ =gTasks
@@ -223,7 +223,7 @@ sub_80EB81C: @ 80EB81C
 	lsls r6, r1, 3
 	ldr r7, _080EB870 @ =gTasks+0x8
 	adds r4, r6, r7
-	bl ProcessMenuInputNoWrapAround
+	bl Menu_ProcessInputNoWrapAround
 	lsls r0, 24
 	asrs r5, r0, 24
 	movs r0, 0x2
@@ -237,7 +237,7 @@ sub_80EB81C: @ 80EB81C
 	bl PlaySE
 	ldrb r0, [r4, 0x14]
 	movs r1, 0
-	bl ClearMenuWindow
+	bl ClearStdWindowAndFrameToTransparent
 	ldrb r0, [r4, 0x14]
 	bl ClearWindowTilemap
 	ldrb r0, [r4, 0x14]
@@ -256,7 +256,7 @@ _080EB874: .4byte sub_80EB9B8
 _080EB878:
 	ldrb r0, [r4, 0x14]
 	movs r1, 0
-	bl ClearMenuWindow
+	bl ClearStdWindowAndFrameToTransparent
 	ldrb r0, [r4, 0x14]
 	bl ClearWindowTilemap
 	ldrb r0, [r4, 0x14]
@@ -488,7 +488,7 @@ _080EBA1E:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl ProgramAndPlaceMenuCursorOnWindow
+	bl Menu_InitCursor
 	movs r0, 0
 	bl ScheduleBgCopyTilemapToVram
 	ldr r1, _080EBA88 @ =gUnknown_84021DC
@@ -541,7 +541,7 @@ sub_80EBAB8: @ 80EBAB8
 	ands r0, r1
 	cmp r0, 0
 	beq _080EBAE8
-	bl GetMenuCursorPos
+	bl Menu_GetCursorPos
 	lsls r0, 24
 	cmp r0, 0
 	beq _080EBB64
@@ -557,7 +557,7 @@ _080EBAE8:
 	ands r0, r1
 	cmp r0, 0
 	beq _080EBB20
-	bl GetMenuCursorPos
+	bl Menu_GetCursorPos
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -566,9 +566,9 @@ _080EBAE8:
 	bl PlaySE
 	movs r0, 0x1
 _080EBB04:
-	bl MoveMenuCursor
+	bl Menu_MoveCursor
 	ldr r4, _080EBB1C @ =gUnknown_84021DC
-	bl GetMenuCursorPos
+	bl Menu_GetCursorPos
 	lsls r0, 24
 	lsrs r0, 22
 	adds r0, r4
@@ -586,7 +586,7 @@ _080EBB20:
 	movs r0, 0x5
 	bl PlaySE
 	ldr r4, _080EBB48 @ =gUnknown_8402208
-	bl GetMenuCursorPos
+	bl Menu_GetCursorPos
 	lsls r0, 24
 	lsrs r0, 21
 	adds r4, 0x4
@@ -752,7 +752,7 @@ _080EBC78: .4byte sub_80EBCAC
 _080EBC7C:
 	ldrb r0, [r4, 0x14]
 	movs r1, 0
-	bl ClearMenuWindow
+	bl ClearStdWindowAndFrameToTransparent
 	ldrb r0, [r4, 0x14]
 	bl ClearWindowTilemap
 	ldrb r0, [r4, 0x14]
@@ -861,7 +861,7 @@ sub_80EBD48: @ 80EBD48
 	adds r4, r0
 	ldrb r0, [r4, 0x14]
 	movs r1, 0
-	bl ClearMenuWindow
+	bl ClearStdWindowAndFrameToTransparent
 	ldrb r0, [r4, 0x14]
 	bl ClearWindowTilemap
 	ldrb r0, [r4, 0x14]
@@ -1341,7 +1341,7 @@ sub_80EC0D8: @ 80EC0D8
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl ProgramAndPlaceMenuCursorOnWindow
+	bl Menu_InitCursor
 	movs r0, 0
 	bl ScheduleBgCopyTilemapToVram
 	ldr r1, _080EC154 @ =gTasks
@@ -1369,7 +1369,7 @@ sub_80EC15C: @ 80EC15C
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r6, r5, 0
-	bl ProcessMenuInput_other
+	bl Menu_ProcessInput_other
 	lsls r0, 24
 	asrs r4, r0, 24
 	movs r0, 0x2

@@ -603,7 +603,7 @@ void sub_80F771C(bool8 copyToVram)
 
 void SetStdWindowBorderStyle(u8 windowId, bool8 copyToVram)
 {
-    SetWindowBorderStyle(windowId, copyToVram, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM);
+    DrawStdFrameWithCustomTileAndPalette(windowId, copyToVram, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM);
 }
 
 void sub_80F7768(u8 windowId, bool8 copyToVram)
@@ -671,10 +671,8 @@ u8 sub_80F78E0(u8 height)
 {
     if (sStartMenuWindowId == 0xFF)
     {
-        struct WindowTemplate wTemp1, wTemp2;
-        SetWindowTemplateFields(&wTemp1, 0, 0x16, 1, 7, height * 2 - 1, DLG_WINDOW_PALETTE_NUM, 0x13D);
-        wTemp2 = wTemp1;
-        sStartMenuWindowId = AddWindow(&wTemp2);
+        struct WindowTemplate template = SetWindowTemplateFields(0, 0x16, 1, 7, height * 2 - 1, DLG_WINDOW_PALETTE_NUM, 0x13D);
+        sStartMenuWindowId = AddWindow(&template);
         PutWindowTilemap(sStartMenuWindowId);
     }
     return sStartMenuWindowId;

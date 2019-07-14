@@ -8,6 +8,7 @@
 #include "data2.h"
 #include "string_util.h"
 #include "battle.h"
+#include "battle_2.h"
 #include "item.h"
 #include "event_data.h"
 #include "util.h"
@@ -80,21 +81,181 @@ static u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 static u8 GetLevelFromMonExp(struct Pokemon *mon);
 static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon);
 
-extern struct SpriteTemplate gUnknown_825DF50[];
-extern s8 gPokeblockFlavorCompatibilityTable[];
-extern const u8 gPPUpWriteMasks[];
-extern const u8 sHoldEffectToType[][2];
-extern u16 gUnknown_8251CB8[];
-extern u16 gUnknown_8251FEE[];
-extern u16 gUnknown_8252324[];
-extern struct SpriteTemplate gUnknown_825DEF0[];
-extern const u8 gUnknown_825DEA1[];
-extern u16 gUnknown_82539D4[];
-extern struct SpindaSpot gSpindaSpotGraphics[];
-extern s8 gNatureStatTable[][5];
-extern u32 gTMHMLearnsets[][2];
-extern const u8 gUnknown_825DEA1[];
-extern const u8 gUnknown_825DEA9[];
+const s8 gPokeblockFlavorCompatibilityTable[] =
+{
+    // Cool, Beauty, Cute, Smart, Tough
+          0,      0,    0,     0,     0, // Hardy
+          1,      0,    0,     0,    -1, // Lonely
+          1,      0,   -1,     0,     0, // Brave
+          1,     -1,    0,     0,     0, // Adamant
+          1,      0,    0,    -1,     0, // Naughty
+         -1,      0,    0,     0,     1, // Bold
+          0,      0,    0,     0,     0, // Docile
+          0,      0,   -1,     0,     1, // Relaxed
+          0,     -1,    0,     0,     1, // Impish
+          0,      0,    0,    -1,     1, // Lax
+         -1,      0,    1,     0,     0, // Timid
+          0,      0,    1,     0,    -1, // Hasty
+          0,      0,    0,     0,     0, // Serious
+          0,     -1,    1,     0,     0, // Jolly
+          0,      0,    1,    -1,     0, // Naive
+         -1,      1,    0,     0,     0, // Modest
+          0,      1,    0,     0,    -1, // Mild
+          0,      1,   -1,     0,     0, // Quiet
+          0,      0,    0,     0,     0, // Bashful
+          0,      1,    0,    -1,     0, // Rash
+         -1,      0,    0,     1,     0, // Calm
+          0,      0,    0,     1,    -1, // Gentle
+          0,      0,   -1,     1,     0, // Sassy
+          0,     -1,    0,     1,     0, // Careful
+          0,      0,    0,     0,     0  // Quirky
+};
+
+const u8 gPPUpGetMask[] = { 0x03, 0x0c, 0x30, 0xc0 }; // Masks for getting PP Up count, also PP Max values
+
+const u8 gPPUpSetMask[] = { 0xfc, 0xf3, 0xcf, 0x3f }; // Masks for setting PP Up count
+
+const u8 gPPUpAddMask[] = { 0x01, 0x04, 0x10, 0x40 }; // Values added to PP Up count
+
+const u8 gStatStageRatios[][2] =
+{
+    { 10, 40 },
+    { 10, 35 },
+    { 10, 30 },
+    { 10, 25 },
+    { 10, 20 }, 
+    { 10, 15 },
+    { 10, 10 },
+    { 15, 10 },
+    { 20, 10 },
+    { 25, 10 },
+    { 30, 10 },
+    { 35, 10 },
+    { 40, 10 },
+    { 138, 174 },
+    { 108, 120 },
+};
+
+static const u8 filler = 0xFF;
+
+static const u8 sHoldEffectToType[][2] = 
+{
+    {HOLD_EFFECT_BUG_POWER, TYPE_BUG},
+    {HOLD_EFFECT_STEEL_POWER, TYPE_STEEL},
+    {HOLD_EFFECT_GROUND_POWER, TYPE_GROUND},
+    {HOLD_EFFECT_ROCK_POWER, TYPE_ROCK},
+    {HOLD_EFFECT_GRASS_POWER, TYPE_GRASS},
+    {HOLD_EFFECT_DARK_POWER, TYPE_DARK},
+    {HOLD_EFFECT_FIGHTING_POWER, TYPE_FIGHTING},
+    {HOLD_EFFECT_ELECTRIC_POWER, TYPE_ELECTRIC},
+    {HOLD_EFFECT_WATER_POWER, TYPE_WATER},
+    {HOLD_EFFECT_FLYING_POWER, TYPE_FLYING},
+    {HOLD_EFFECT_POISON_POWER, TYPE_POISON},
+    {HOLD_EFFECT_ICE_POWER, TYPE_ICE},
+    {HOLD_EFFECT_GHOST_POWER, TYPE_GHOST},
+    {HOLD_EFFECT_PSYCHIC_POWER, TYPE_PSYCHIC},
+    {HOLD_EFFECT_FIRE_POWER, TYPE_FIRE},
+    {HOLD_EFFECT_DRAGON_POWER, TYPE_DRAGON},
+    {HOLD_EFFECT_NORMAL_POWER, TYPE_NORMAL},
+};
+
+const struct SpriteTemplate gUnknown_825DEF0[] = 
+{
+    {
+        .tileTag = SPRITE_INVALID_TAG,
+        .paletteTag = 0,
+        .oam = &gUnknown_824F018,
+        .anims = NULL, 
+        .images = gUnknown_8234698,
+        .affineAnims = gUnknown_82348C8,
+        .callback = sub_80120C4,
+    },
+    {
+        .tileTag = SPRITE_INVALID_TAG,
+        .paletteTag = 0,
+        .oam = &gUnknown_824F010,
+        .anims = NULL, 
+        .images = gUnknown_82346B8,
+        .affineAnims = gUnknown_8234944,
+        .callback = oac_poke_opponent,
+    },
+    {
+        .tileTag = SPRITE_INVALID_TAG,
+        .paletteTag = 0,
+        .oam = &gUnknown_824F018,
+        .anims = NULL, 
+        .images = gUnknown_82346D8,
+        .affineAnims = gUnknown_82348C8,
+        .callback = sub_80120C4,
+    },
+    {
+        .tileTag = SPRITE_INVALID_TAG,
+        .paletteTag = 0,
+        .oam = &gUnknown_824F010,
+        .anims = NULL, 
+        .images = gUnknown_82346F8,
+        .affineAnims = gUnknown_8234944,
+        .callback = oac_poke_opponent,
+    },
+};
+
+const struct SpriteTemplate gUnknown_825DF50[] = 
+{
+    {
+        .tileTag = SPRITE_INVALID_TAG,
+        .paletteTag = 0,
+        .oam = &gUnknown_824F018,
+        .anims = NULL, 
+        .images = gUnknown_8234718,
+        .affineAnims = gUnknown_82348C8,
+        .callback = sub_80120C4,
+    },
+    {
+        .tileTag = SPRITE_INVALID_TAG,
+        .paletteTag = 0,
+        .oam = &gUnknown_824F018,
+        .anims = NULL, 
+        .images = gUnknown_8234740,
+        .affineAnims = gUnknown_82348C8,
+        .callback = sub_80120C4,
+    },
+    {
+        .tileTag = SPRITE_INVALID_TAG,
+        .paletteTag = 0,
+        .oam = &gUnknown_824F018,
+        .anims = NULL, 
+        .images = gUnknown_82347A8,
+        .affineAnims = gUnknown_82348C8,
+        .callback = sub_80120C4,
+    },
+    {
+        .tileTag = SPRITE_INVALID_TAG,
+        .paletteTag = 0,
+        .oam = &gUnknown_824F018,
+        .anims = NULL, 
+        .images = gUnknown_82347C8,
+        .affineAnims = gUnknown_82348C8,
+        .callback = sub_80120C4,
+    },
+    {
+        .tileTag = SPRITE_INVALID_TAG,
+        .paletteTag = 0,
+        .oam = &gUnknown_824F018,
+        .anims = NULL, 
+        .images = gUnknown_8234768,
+        .affineAnims = gUnknown_82348C8,
+        .callback = sub_80120C4,
+    },
+    {
+        .tileTag = SPRITE_INVALID_TAG,
+        .paletteTag = 0,
+        .oam = &gUnknown_824F018,
+        .anims = NULL, 
+        .images = gUnknown_8234788,
+        .affineAnims = gUnknown_82348C8,
+        .callback = sub_80120C4,
+    },
+};
 
 static const u8 sSecretBaseFacilityClasses[][5] = 
 {
@@ -2348,19 +2509,19 @@ void GetSpeciesName(u8 *name, u16 species)
 u8 CalculatePPWithBonus(u16 move, u8 ppBonuses, u8 moveIndex)
 {
     u8 basePP = gBattleMoves[move].pp;
-    return basePP + ((basePP * 20 * ((gUnknown_825DEA1[moveIndex] & ppBonuses) >> (2 * moveIndex))) / 100);
+    return basePP + ((basePP * 20 * ((gPPUpGetMask[moveIndex] & ppBonuses) >> (2 * moveIndex))) / 100);
 }
 
 void RemoveMonPPBonus(struct Pokemon *mon, u8 moveIndex)
 {
     u8 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES, NULL);
-    ppBonuses &= gPPUpWriteMasks[moveIndex];
+    ppBonuses &= gPPUpSetMask[moveIndex];
     SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
 }
 
 void RemoveBattleMonPPBonus(struct BattlePokemon *mon, u8 moveIndex)
 {
-    mon->ppBonuses &= gPPUpWriteMasks[moveIndex];
+    mon->ppBonuses &= gPPUpSetMask[moveIndex];
 }
 
 static void CopyPlayerPartyMonToBattleData(u8 battlerId, u8 partyIndex)
@@ -2598,11 +2759,11 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
             if (r10 & 0x20)
             {
                 r10 &= ~0x20;
-                data = (GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL) & gUnknown_825DEA1[moveIndex]) >> (moveIndex * 2);
+                data = (GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL) & gPPUpGetMask[moveIndex]) >> (moveIndex * 2);
                 sp28 = CalculatePPWithBonus(GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex, NULL), GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL), moveIndex);
                 if (data < 3 && sp28 > 4)
                 {
-                    data = GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL) + gUnknown_825DEA9[moveIndex];
+                    data = GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL) + gPPUpAddMask[moveIndex];
                     SetMonData(pkmn, MON_DATA_PP_BONUSES, &data);
 
                     data = CalculatePPWithBonus(GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex, NULL), data, moveIndex) - sp28;
@@ -2827,13 +2988,13 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                         }
                         break;
                     case 4:
-                        data = (GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL) & gUnknown_825DEA1[moveIndex]) >> (moveIndex * 2);
+                        data = (GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL) & gPPUpGetMask[moveIndex]) >> (moveIndex * 2);
                         if (data < 3)
                         {
                             r4 = CalculatePPWithBonus(GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex, NULL), GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL), moveIndex);
                             data = GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL);
-                            data &= gPPUpWriteMasks[moveIndex];
-                            data += gUnknown_825DEA9[moveIndex] * 3;
+                            data &= gPPUpSetMask[moveIndex];
+                            data += gPPUpAddMask[moveIndex] * 3;
 
                             SetMonData(pkmn, MON_DATA_PP_BONUSES, &data);
                             data = CalculatePPWithBonus(GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex, NULL), data, moveIndex) - r4;
@@ -3131,11 +3292,11 @@ bool8 PokemonUseItemEffects2(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 m
             if (r10 & 0x20)
             {
                 r10 &= ~0x20;
-                data = (GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL) & gUnknown_825DEA1[moveIndex]) >> (moveIndex * 2);
+                data = (GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL) & gPPUpGetMask[moveIndex]) >> (moveIndex * 2);
                 sp28 = CalculatePPWithBonus(GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex, NULL), GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL), moveIndex);
                 if (data < 3 && sp28 > 4)
                 {
-                    //data = GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL) + gUnknown_825DEA9[moveIndex];
+                    //data = GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL) + gPPUpAddMask[moveIndex];
                     //SetMonData(pkmn, MON_DATA_PP_BONUSES, &data);
                     //
                     //data = CalculatePPWithBonus(GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex, NULL), data, moveIndex) - sp28;
@@ -3370,7 +3531,7 @@ bool8 PokemonUseItemEffects2(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 m
                         }
                         break;
                     case 4:
-                        data = (GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL) & gUnknown_825DEA1[moveIndex]) >> (moveIndex * 2);
+                        data = (GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL) & gPPUpGetMask[moveIndex]) >> (moveIndex * 2);
                         r4 = CalculatePPWithBonus(GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex, NULL), GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL), moveIndex);
                         if (data < 3)
                         {
@@ -3379,8 +3540,8 @@ bool8 PokemonUseItemEffects2(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 m
                             /*
                             
                             data = GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL);
-                            data &= gPPUpWriteMasks[moveIndex];
-                            data += gUnknown_825DEA9[moveIndex] * 3;
+                            data &= gPPUpSetMask[moveIndex];
+                            data += gPPUpAddMask[moveIndex] * 3;
 
                             SetMonData(pkmn, MON_DATA_PP_BONUSES, &data);
                             data = CalculatePPWithBonus(GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex, NULL), data, moveIndex) - r4;
@@ -4041,7 +4202,7 @@ _08042850:\n\
     movs r2, 0\n\
     bl GetMonData\n\
     adds r5, r0, 0\n\
-    ldr r0, _080428DC @ =gUnknown_825DEA1\n\
+    ldr r0, _080428DC @ =gPPUpGetMask\n\
     ldr r1, [sp, 0x8]\n\
     adds r0, r1, r0\n\
     ldrb r0, [r0]\n\
@@ -4097,7 +4258,7 @@ _080428D2:\n\
     ldr r0, [r0]\n\
     mov pc, r0\n\
     .align 2, 0\n\
-_080428DC: .4byte gUnknown_825DEA1\n\
+_080428DC: .4byte gPPUpGetMask\n\
 _080428E0: .4byte _080428E4\n\
     .align 2, 0\n\
 _080428E4:\n\
@@ -4359,7 +4520,7 @@ _08042AF4:\n\
     movs r2, 0\n\
     bl GetMonData\n\
     adds r5, r0, 0\n\
-    ldr r0, _08042B48 @ =gUnknown_825DEA1\n\
+    ldr r0, _08042B48 @ =gPPUpGetMask\n\
     ldr r1, [sp, 0x8]\n\
     adds r0, r1, r0\n\
     ldrb r0, [r0]\n\
@@ -4393,7 +4554,7 @@ _08042AF4:\n\
     str r2, [sp, 0x10]\n\
     b _08042BBE\n\
     .align 2, 0\n\
-_08042B48: .4byte gUnknown_825DEA1\n\
+_08042B48: .4byte gPPUpGetMask\n\
 _08042B4C:\n\
     mov r0, r8\n\
     movs r1, 0x20\n\

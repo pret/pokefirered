@@ -44,6 +44,7 @@ void RunBattleScriptCommands_PopCallbacksStack(void);
 void RunBattleScriptCommands(void);
 bool8 TryRunFromBattle(u8 bank);
 void sub_800FD9C(void);
+void sub_80120C4(struct Sprite *);
 
 extern const u8 gStatusConditionString_PoisonJpn[8];
 extern const u8 gStatusConditionString_SleepJpn[8];

@@ -553,30 +553,6 @@ gEvolutionTable:: @ 8259754
 gLevelUpLearnsets:: @ 825D7B4
 	.incbin "baserom.gba", 0x25D7B4, 0x670
 
-gPokeblockFlavorCompatibilityTable:: @ 825DE24
-	.incbin "baserom.gba", 0x25DE24, 0x7D
-
-gUnknown_825DEA1:: @ 825DEA1
-	.incbin "baserom.gba", 0x25DEA1, 0x4
-
-gPPUpWriteMasks:: @ 825DEA5
-	.incbin "baserom.gba", 0x25DEA5, 0x4
-
-gUnknown_825DEA9:: @ 825DEA9
-	.incbin "baserom.gba", 0x25DEA9, 0x4
-
-gStatStageRatios:: @ 825DEAD
-	.incbin "baserom.gba", 0x25DEAD, 0x1F
-
-sHoldEffectToType:: @ 825DECC
-	.incbin "baserom.gba", 0x25DECC, 0x24
-
-gUnknown_825DEF0:: @ 825DEF0
-	.incbin "baserom.gba", 0x25DEF0, 0x60
-
-gUnknown_825DF50:: @ 825DF50
-	.incbin "baserom.gba", 0x25DF50, 0x90
-
 	.section .rodata.825EF0C
 
 	.align 2

@@ -31,11 +31,11 @@ extern const struct CompressedSpritePalette gMonShinyPaletteTable[];
 extern const union AnimCmd *const *const gTrainerBackAnimsPtrTable[];
 extern const union AnimCmd *const *const gTrainerFrontAnimsPtrTable[];
 
+extern const struct OamData gUnknown_824F010;
+extern const struct OamData gUnknown_824F018;
 extern const union AnimCmd *const gUnknown_82349BC[];
-
 extern const union AffineAnimCmd *const gUnknown_82348C8[];
 extern const union AffineAnimCmd *const gUnknown_8234944[];
-
 extern const struct SpriteFrameImage gUnknown_8234698[];
 extern const struct SpriteFrameImage gUnknown_82346B8[];
 extern const struct SpriteFrameImage gUnknown_82346D8[];
@@ -46,8 +46,5 @@ extern const struct SpriteFrameImage gUnknown_8234768[];
 extern const struct SpriteFrameImage gUnknown_8234788[];
 extern const struct SpriteFrameImage gUnknown_82347A8[];
 extern const struct SpriteFrameImage gUnknown_82347C8[];
-
-extern const struct OamData gUnknown_824F010;
-extern const struct OamData gUnknown_824F018;
 
 #endif // GUARD_DATA2_H

@@ -136,7 +136,7 @@ const u8 gStatStageRatios[][2] =
     { 108, 120 },
 };
 
-static const u8 filler = 0xFF;
+static const u8 sFiller = _("");
 
 static const u8 sHoldEffectToType[][2] = 
 {

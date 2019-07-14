@@ -504,7 +504,7 @@ void sub_812E6DC(u8 windowId, const u8 * src, u16 x, u16 y)
 
 // Yeah, no, I'm not bothering with this
 NAKED
-void sub_819A080(void * a0, void * a1, u16 a2, u16 a3, u16 a4, u16 a5, u16 a6, u16 a7)
+static void sub_812E768(void * a0, void * a1, u16 a2, u16 a3, u16 a4, u16 a5, u16 a6, u16 a7)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                 "\tmov r7, r10\n"

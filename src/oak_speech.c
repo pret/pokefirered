@@ -37,7 +37,7 @@ struct OakSpeechResources
     u16 unk_0010;
     u16 unk_0012;
     u16 unk_0014[4];
-    u8 unk_001C[3];
+    struct TextColor textColor;
     u8 textSpeed;
     u8 filler_0020[0x1800];
     u8 bg2TilemapBuffer[0x400];
@@ -546,7 +546,7 @@ static void Task_OaksSpeech1(u8 taskId)
         CopyBgTilemapBufferToVram(1);
         break;
     case 7:
-        CreateWindow_SnapRight_StdPal(0, 30, 0, 13, 0x1C4);
+        CreateTopBarWindowLoadPalette(0, 30, 0, 13, 0x1C4);
         FillBgTilemapBufferRect_Palette0(1, 0xD00F,  0,  0, 30, 2);
         FillBgTilemapBufferRect_Palette0(1, 0xD002,  0,  2, 30, 1);
         FillBgTilemapBufferRect_Palette0(1, 0xD00E,  0, 19, 30, 1);
@@ -572,7 +572,7 @@ static void Task_OaksSpeech1(u8 taskId)
 
 static void CreateHelpDocsPage1(void)
 {
-    Menu_PrintHelpSystemUIHeader(gText_Controls, gText_ABUTTONNext, 0, 0, 1);
+    TopBarWindowPrintTwoStrings(gText_Controls, gText_ABUTTONNext, 0, 0, 1);
     sOakSpeechResources->unk_0014[0] = AddWindow(sHelpDocsWindowTemplatePtrs[sOakSpeechResources->unk_0012]);
     PutWindowTilemap(sOakSpeechResources->unk_0014[0]);
     FillWindowPixelBuffer(sOakSpeechResources->unk_0014[0], 0x00);
@@ -592,7 +592,7 @@ static void Task_OakSpeech4(u8 taskId)
     }
     else
     {
-        PrintTextOnRightSnappedWindow(gText_ABUTTONNext_BBUTTONBack, 0, 1);
+        TopBarWindowPrintString(gText_ABUTTONNext_BBUTTONBack, 0, 1);
         for (i = 0; i < 3; i++)
         {
             sOakSpeechResources->unk_0014[i] = AddWindow(&sHelpDocsWindowTemplatePtrs[sOakSpeechResources->unk_0012][i]);
@@ -716,8 +716,8 @@ static void Task_OakSpeech6(u8 taskId)
     else
     {
         PlayBGM(BGM_FRLG_GAME_EXPLANATION_MIDDLE);
-        sub_810F71C();
-        PrintTextOnRightSnappedWindow(gText_ABUTTONNext, 0, 1);
+        ClearTopBarWindow();
+        TopBarWindowPrintString(gText_ABUTTONNext, 0, 1);
         sOakSpeechResources->unk_0008 = MallocAndDecompress(sNewGameAdventureIntroTilemap, &sp14);
         CopyToBgTilemapBufferRect(1, sOakSpeechResources->unk_0008, 0, 2, 30, 19);
         CopyBgTilemapBufferToVram(1);
@@ -793,13 +793,13 @@ static void Task_OakSpeech7(u8 taskId)
             AddTextPrinterParameterized4(data[14], 2, 3, 5, 1, 0, &sTextColor_OakSpeech, 0, sNewGameAdventureIntroTextPointers[sOakSpeechResources->unk_0012]);
             if (sOakSpeechResources->unk_0012 == 0)
             {
-                sub_810F71C();
-                PrintTextOnRightSnappedWindow(gText_ABUTTONNext, 0, 1);
+                ClearTopBarWindow();
+                TopBarWindowPrintString(gText_ABUTTONNext, 0, 1);
             }
             else
             {
-                sub_810F71C();
-                PrintTextOnRightSnappedWindow(gText_ABUTTONNext_BBUTTONBack, 0, 1);
+                ClearTopBarWindow();
+                TopBarWindowPrintString(gText_ABUTTONNext_BBUTTONBack, 0, 1);
             }
             gMain.state++;
         }
@@ -846,7 +846,7 @@ static void Task_OakSpeech8(u8 taskId)
 
     if (!gPaletteFade.active)
     {
-        sub_810F740();
+        DestroyTopBarWindow();
         FillWindowPixelBuffer(data[14], 0x00);
         ClearWindowTilemap(data[14]);
         CopyWindowToVram(data[14], 3);
@@ -1054,17 +1054,17 @@ static void Task_OakSpeech19(u8 taskId)
     {
         gTasks[taskId].data[13] = AddWindow(&sNewGameAdventureIntroWindowTemplates[1]);
         PutWindowTilemap(gTasks[taskId].data[13]);
-        SetWindowBorderStyle(gTasks[taskId].data[13], 1, GetStdWindowBaseTileNum(), 14);
+        DrawStdFrameWithCustomTileAndPalette(gTasks[taskId].data[13], 1, GetStdWindowBaseTileNum(), 14);
         FillWindowPixelBuffer(gTasks[taskId].data[13], 0x11);
-        sOakSpeechResources->unk_001C[0] = 1;
-        sOakSpeechResources->unk_001C[1] = 2;
-        sOakSpeechResources->unk_001C[2] = 3;
-        AddTextPrinterParameterized3(gTasks[taskId].data[13], 2, 8, 1, sOakSpeechResources->unk_001C, 0, gText_Boy);
-        sOakSpeechResources->unk_001C[0] = 1;
-        sOakSpeechResources->unk_001C[1] = 2;
-        sOakSpeechResources->unk_001C[2] = 3;
-        AddTextPrinterParameterized3(gTasks[taskId].data[13], 2, 8, 17, sOakSpeechResources->unk_001C, 0, gText_Girl);
-        ProgramAndPlaceMenuCursorOnWindow(gTasks[taskId].data[13], 2, 0, 1, GetFontAttribute(2, 1) + 2, 2, 0);
+        sOakSpeechResources->textColor.fgColor = 1;
+        sOakSpeechResources->textColor.bgColor = 2;
+        sOakSpeechResources->textColor.shadowColor = 3;
+        AddTextPrinterParameterized3(gTasks[taskId].data[13], 2, 8, 1, &sOakSpeechResources->textColor, 0, gText_Boy);
+        sOakSpeechResources->textColor.fgColor = 1;
+        sOakSpeechResources->textColor.bgColor = 2;
+        sOakSpeechResources->textColor.shadowColor = 3;
+        AddTextPrinterParameterized3(gTasks[taskId].data[13], 2, 8, 17, &sOakSpeechResources->textColor, 0, gText_Girl);
+        Menu_InitCursor(gTasks[taskId].data[13], 2, 0, 1, GetFontAttribute(2, 1) + 2, 2, 0);
         CopyWindowToVram(gTasks[taskId].data[13], 3);
         gTasks[taskId].func = Task_OakSpeech20;
     }
@@ -1072,7 +1072,7 @@ static void Task_OakSpeech19(u8 taskId)
 
 static void Task_OakSpeech20(u8 taskId)
 {
-    s8 input = ProcessMenuInputNoWrapAround();
+    s8 input = Menu_ProcessInputNoWrapAround();
     switch (input)
     {
     case 0:
@@ -1092,7 +1092,7 @@ static void Task_OakSpeech20(u8 taskId)
 static void Task_OakSpeech21(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
-    ClearMenuWindow(data[13], 1);
+    ClearStdWindowAndFrameToTransparent(data[13], 1);
     RemoveWindow(data[13]);
     data[13] = 0;
     ClearDialogWindowAndFrame(0, 1);
@@ -1176,7 +1176,7 @@ static void Task_OakSpeech28(u8 taskId)
 static void Task_OakSpeech29(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
-    s8 input = ProcessMenuInput();
+    s8 input = Menu_ProcessInput();
     switch (input)
     {
     case 1:
@@ -1184,7 +1184,7 @@ static void Task_OakSpeech29(u8 taskId)
     case 3:
     case 4:
         PlaySE(SE_SELECT);
-        ClearMenuWindow(data[13], TRUE);
+        ClearStdWindowAndFrameToTransparent(data[13], TRUE);
         RemoveWindow(data[13]);
         GetDefaultName(sOakSpeechResources->unk_0010, input - 1);
         data[15] = 1;
@@ -1211,7 +1211,7 @@ static void Task_OakSpeech25(u8 taskId)
         }
         else
         {
-            ClearMenuWindow(gTasks[taskId].data[13], 1);
+            ClearStdWindowAndFrameToTransparent(gTasks[taskId].data[13], 1);
             RemoveWindow(gTasks[taskId].data[13]);
             DoNamingScreen(4, gSaveBlock1Ptr->rivalName, 0, 0, 0, CB2_ReturnFromNamingScreen);
         }
@@ -1850,7 +1850,7 @@ static void PrintNameChoiceOptions(u8 taskId, u8 state)
 
     data[13] = AddWindow(&sNewGameAdventureIntroWindowTemplates[3]);
     PutWindowTilemap(data[13]);
-    SetWindowBorderStyle(data[13], 1, GetStdWindowBaseTileNum(), 14);
+    DrawStdFrameWithCustomTileAndPalette(data[13], 1, GetStdWindowBaseTileNum(), 14);
     FillWindowPixelBuffer(gTasks[taskId].data[13], 0x11);
     AddTextPrinterParameterized(data[13], 2, gOtherText_NewName, 8, 1, 0, NULL);
     if (state == 0)
@@ -1861,7 +1861,7 @@ static void PrintNameChoiceOptions(u8 taskId, u8 state)
     {
         AddTextPrinterParameterized(data[13], 2, textPtrs[i], 8, 16 * (i + 1) + 1, 0, NULL);
     }
-    ProgramAndPlaceMenuCursorOnWindow(data[13], 2, 0, 1, 16, 5, 0);
+    Menu_InitCursor(data[13], 2, 0, 1, 16, 5, 0);
     CopyWindowToVram(data[13], 3);
 }
 

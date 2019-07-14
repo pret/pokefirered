@@ -9,13 +9,13 @@
 sub_80CA618: @ 80CA618
 	push {lr}
 	bl sub_8112364
-	ldr r0, _080CA62C @ =sub_80F4C10
+	ldr r0, _080CA62C @ =CB2_ShowDiploma
 	bl SetMainCallback2
 	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CA62C: .4byte sub_80F4C10
+_080CA62C: .4byte CB2_ShowDiploma
 	thumb_func_end sub_80CA618
 
 	thumb_func_start sub_80CA630
@@ -2076,7 +2076,7 @@ sub_80CB580: @ 80CB580
 	movs r1, 0
 	adds r2, r5, 0
 	movs r3, 0xD
-	bl SetWindowBorderStyle
+	bl DrawStdFrameWithCustomTileAndPalette
 	ldrb r0, [r4]
 	ldr r2, _080CB630 @ =gUnknown_8418075
 	movs r1, 0x2
@@ -2141,7 +2141,7 @@ sub_80CB63C: @ 80CB63C
 	ldr r4, _080CB654 @ =gUnknown_2039A0C
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl ClearMenuWindow
+	bl ClearStdWindowAndFrameToTransparent
 	ldrb r0, [r4]
 	bl RemoveWindow
 	pop {r4}
@@ -2862,7 +2862,7 @@ sub_80CBBAC: @ 80CBBAC
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
-	bl ClearMenuWindow
+	bl ClearStdWindowAndFrameToTransparent
 	ldrh r0, [r4, 0x22]
 	lsls r0, 24
 	lsrs r0, 24

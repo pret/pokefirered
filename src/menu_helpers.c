@@ -22,10 +22,10 @@ static EWRAM_DATA u8 gUnknown_20399D0 = {0};
 
 static void Task_ContinueTaskAfterMessagePrints(u8 taskId);
 
-void DisplayMessageAndContinueTask(u8 taskId, u8 windowId, u16 arg2, u8 arg3, u8 fontId, u8 textSpeed, const u8 *string, void *taskFunc)
+void DisplayMessageAndContinueTask(u8 taskId, u8 windowId, u16 tileNum, u8 paletteNum, u8 fontId, u8 textSpeed, const u8 *string, void *taskFunc)
 {
     gUnknown_20399D0 = windowId;
-    DrawDialogFrameWithCustomTileAndPalette(windowId, TRUE, arg2, arg3);
+    DrawDialogFrameWithCustomTileAndPalette(windowId, TRUE, tileNum, paletteNum);
 
     if (string != gStringVar4)
         StringExpandPlaceholders(gStringVar4, string);
@@ -64,9 +64,9 @@ static void Task_CallYesOrNoCallback(u8 taskId)
     }
 }
 
-void CreateYesNoMenuWithCallbacks(u8 taskId, const struct WindowTemplate *template, u8 arg2, u8 arg3, u8 arg4, u16 tileStart, u8 palette, const struct YesNoFuncTable *yesNo)
+void CreateYesNoMenuWithCallbacks(u8 taskId, const struct WindowTemplate *template, u8 fontId, u8 left, u8 top, u16 tileStart, u8 palette, const struct YesNoFuncTable *yesNo)
 {
-    CreateYesNoMenu(template, arg2, arg3, arg4, tileStart, palette, 0);
+    CreateYesNoMenu(template, fontId, left, top, tileStart, palette, 0);
     gUnknown_20399C8 = yesNo;
     gTasks[taskId].func = Task_CallYesOrNoCallback;
 }

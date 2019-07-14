@@ -3234,7 +3234,7 @@ sub_8120328: @ 8120328
 	bne _0812035E
 	movs r0, 0x6
 	movs r1, 0
-	bl ClearMenuWindow
+	bl ClearStdWindowAndFrameToTransparent
 	movs r0, 0x6
 	bl ClearWindowTilemap
 _0812035E:
@@ -3302,7 +3302,7 @@ sub_81203B8: @ 81203B8
 	beq _08120410
 	movs r0, 0x6
 	movs r1, 0
-	bl ClearMenuWindow
+	bl ClearStdWindowAndFrameToTransparent
 	movs r0, 0x6
 	bl ClearWindowTilemap
 	bl MenuHelpers_LinkSomething
@@ -6507,7 +6507,7 @@ sub_8121CE4: @ 8121CE4
 	cmp r0, 0xFF
 	beq _08121D04
 	movs r1, 0
-	bl ClearMenuWindow
+	bl ClearStdWindowAndFrameToTransparent
 	ldrb r0, [r4]
 	bl RemoveWindow
 	movs r0, 0xFF
@@ -6608,7 +6608,7 @@ _08121DB0:
 	movs r1, 0
 	movs r2, 0x58
 	movs r3, 0xF
-	bl SetWindowBorderStyle
+	bl DrawStdFrameWithCustomTileAndPalette
 	ldr r4, _08121DF0 @ =gStringVar4
 	ldr r1, _08121DF4 @ =gUnknown_845A2E8
 	lsls r0, r6, 2
@@ -6770,7 +6770,7 @@ _08121ED2:
 	movs r1, 0
 	movs r2, 0x4F
 	movs r3, 0xD
-	bl SetWindowBorderStyle
+	bl DrawStdFrameWithCustomTileAndPalette
 	cmp r4, 0x3
 	bne _08121F00
 	ldr r0, [r6]
@@ -6854,7 +6854,7 @@ _08121F7A:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810F774
+	bl Menu_InitCursorInternal
 	movs r0, 0x2
 	bl ScheduleBgCopyTilemapToVram
 	ldr r0, [r4]
@@ -6882,7 +6882,7 @@ sub_8121FC0: @ 8121FC0
 	movs r1, 0
 	movs r2, 0x4F
 	movs r3, 0xD
-	bl SetWindowBorderStyle
+	bl DrawStdFrameWithCustomTileAndPalette
 	ldr r2, _08122008 @ =gTextFlags
 	ldrb r0, [r2]
 	movs r1, 0x1
@@ -6947,7 +6947,7 @@ sub_8122034: @ 8122034
 	movs r1, 0
 	movs r2, 0x4F
 	movs r3, 0xD
-	bl SetWindowBorderStyle
+	bl DrawStdFrameWithCustomTileAndPalette
 	ldr r0, [r4]
 	ldrb r0, [r0, 0xC]
 	pop {r4}
@@ -7054,7 +7054,7 @@ sub_8122110: @ 8122110
 	bl ClearWindowTilemap
 	adds r0, r4, 0
 	movs r1, 0
-	bl ClearMenuWindow_BorderThickness2
+	bl ClearDialogWindowAndFrameToTransparent
 	adds r0, r4, 0
 	bl RemoveWindow
 	movs r0, 0x2
@@ -8550,27 +8550,27 @@ sub_8122C5C: @ 8122C5C
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x3
 	bhi _08122CA0
-	bl ProcessMenuInputNoWrapAround_other
+	bl Menu_ProcessInputNoWrapAround_other
 	b _08122CA4
 	.align 2, 0
 _08122C94: .4byte gPaletteFade
 _08122C98: .4byte gTasks+0x8
 _08122C9C: .4byte gUnknown_203B09C
 _08122CA0:
-	bl ProcessMenuInput_other
+	bl Menu_ProcessInput_other
 _08122CA4:
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r0, 0
 	ldrsh r4, [r7, r0]
-	bl GetMenuCursorPos
+	bl Menu_GetCursorPos
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
 	beq _08122CCE
 	ldr r0, _08122D14 @ =gUnknown_203B09C
 	ldr r4, [r0]
-	bl GetMenuCursorPos
+	bl Menu_GetCursorPos
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, 0xF
@@ -8578,7 +8578,7 @@ _08122CA4:
 	ldrb r0, [r4]
 	bl sub_8122138
 _08122CCE:
-	bl GetMenuCursorPos
+	bl Menu_GetCursorPos
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r7]
@@ -11600,7 +11600,7 @@ sub_81245A4: @ 81245A4
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	bl GetMenuCursorPos
+	bl Menu_GetCursorPos
 	ldr r5, _08124610 @ =gUnknown_203B09C
 	ldr r1, [r5]
 	lsls r0, 24
@@ -13684,7 +13684,7 @@ _08125680:
 	mov r1, r8
 	movs r2, 0
 	movs r3, 0x2
-	bl ProgramAndPlaceMenuCursorOnWindow
+	bl Menu_InitCursor
 	movs r0, 0x2
 	bl ScheduleBgCopyTilemapToVram
 	add sp, 0x10
@@ -13706,7 +13706,7 @@ sub_81256C0: @ 81256C0
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
-	bl ProcessMenuInput
+	bl Menu_ProcessInput
 	lsls r0, 24
 	asrs r1, r0, 24
 	movs r0, 0x2
@@ -13813,7 +13813,7 @@ sub_8125790: @ 8125790
 	ldr r0, [r0]
 	adds r0, 0xC
 	bl sub_8121CE4
-	bl GetMenuCursorPos
+	bl Menu_GetCursorPos
 	ldr r1, _081257C4 @ =gUnknown_203B0A0
 	lsls r0, 24
 	lsrs r0, 24

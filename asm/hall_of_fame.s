@@ -1607,7 +1607,7 @@ sub_80F2AA4: @ 80F2AA4
 	movs r1, 0x1E
 	movs r2, 0
 	movs r3, 0xC
-	bl CreateWindow_SnapRight_StdPal
+	bl CreateTopBarWindowLoadPalette
 	movs r0, 0x3
 	bl Save_LoadGameData
 	lsls r0, 24
@@ -1894,7 +1894,7 @@ _080F2CB4:
 	adds r0, r5, 0
 	movs r2, 0
 	movs r3, 0
-	bl Menu_PrintHelpSystemUIHeader
+	bl TopBarWindowPrintTwoStrings
 	b _080F2D34
 	.align 2, 0
 _080F2D08: .4byte 0xffff0000
@@ -1911,7 +1911,7 @@ _080F2D24:
 	adds r0, r5, 0
 	movs r2, 0
 	movs r3, 0
-	bl Menu_PrintHelpSystemUIHeader
+	bl TopBarWindowPrintTwoStrings
 _080F2D34:
 	ldr r0, _080F2D58 @ =gTasks
 	ldr r1, [sp, 0x14]
@@ -2298,7 +2298,7 @@ sub_80F3030: @ 80F3030
 	bl HideBg
 	movs r0, 0x3
 	bl HideBg
-	bl sub_810F740
+	bl DestroyTopBarWindow
 	bl FreeAllWindowBuffers
 	movs r0, 0x1
 	bl UnsetBgTilemapBuffer
@@ -2342,7 +2342,7 @@ sub_80F30A4: @ 80F30A4
 	ldr r0, _080F30FC @ =gText_ABUTTONExit
 	movs r1, 0x8
 	movs r2, 0x1
-	bl PrintTextOnRightSnappedWindow
+	bl TopBarWindowPrintString
 	movs r0, 0
 	movs r1, 0
 	bl DrawDialogueFrame
@@ -2750,7 +2750,7 @@ sub_80F33DC: @ 80F33DC
 	movs r0, 0x1
 	movs r1, 0
 	movs r3, 0xD
-	bl SetWindowBorderStyle
+	bl DrawStdFrameWithCustomTileAndPalette
 	movs r7, 0
 	str r7, [sp]
 	str r7, [sp, 0x4]

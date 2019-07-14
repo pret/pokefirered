@@ -441,7 +441,7 @@ gSpecials:: @ 815FD60
 	def_special sub_8147594
 	def_special sub_80CD034
 	def_special sub_815D834
-	def_special sub_8088F84
+	def_special HasAllKantoMons
 	def_special sub_80CD074
 	def_special sub_80CD098
 	def_special sub_811B15C

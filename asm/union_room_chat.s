@@ -499,7 +499,7 @@ _081287FE:
 	.align 2, 0
 _0812880C: .4byte gUnknown_203B0E0
 _08128810:
-	bl ProcessMenuInput
+	bl Menu_ProcessInput
 	lsls r0, 24
 	asrs r0, 8
 	lsrs r6, r0, 16
@@ -534,7 +534,7 @@ _08128848:
 	movs r0, 0x5
 	bl PlaySE
 	movs r0, 0x1
-	bl MoveMenuCursor
+	bl Menu_MoveCursor
 	b _081288CE
 	.align 2, 0
 _08128864: .4byte gMain
@@ -4299,7 +4299,7 @@ sub_812A424: @ 812A424
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl ProgramAndPlaceMenuCursorOnWindow
+	bl Menu_InitCursor
 _0812A4F0:
 	add sp, 0x14
 	pop {r3}
@@ -4329,7 +4329,7 @@ sub_812A51C: @ 812A51C
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl ClearMenuWindow
+	bl ClearStdWindowAndFrameToTransparent
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x18]
 	bl ClearWindowTilemap
@@ -4366,7 +4366,7 @@ _0812A564: .4byte gUnknown_203B0E4
 	thumb_func_start sub_812A568
 sub_812A568: @ 812A568
 	push {lr}
-	bl ProcessMenuInput
+	bl Menu_ProcessInput
 	lsls r0, 24
 	asrs r0, 24
 	pop {r1}
@@ -4568,7 +4568,7 @@ sub_812A6F4: @ 812A6F4
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl ClearMenuWindow
+	bl ClearStdWindowAndFrameToTransparent
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1E]
 	bl ClearWindowTilemap
@@ -4987,7 +4987,7 @@ sub_812AA10: @ 812AA10
 	movs r1, 0x2
 	movs r2, 0xE
 	movs r3, 0x5
-	bl sub_810FC80
+	bl UnionRoomAndTradeMenuPrintOptions
 	bl sub_81296F4
 	lsls r0, 24
 	lsrs r0, 24
@@ -5000,7 +5000,7 @@ sub_812AA10: @ 812AA10
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0
-	bl ProgramAndPlaceMenuCursorOnWindow
+	bl Menu_InitCursor
 	movs r0, 0x3
 	bl PutWindowTilemap
 	add sp, 0xC
@@ -5015,7 +5015,7 @@ sub_812AA64: @ 812AA64
 	push {lr}
 	movs r0, 0x3
 	movs r1, 0
-	bl ClearMenuWindow
+	bl ClearStdWindowAndFrameToTransparent
 	movs r0, 0x3
 	bl ClearWindowTilemap
 	pop {r0}

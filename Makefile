@@ -244,10 +244,10 @@ $(OBJ_DIR)/ld_script.ld: ld_script.txt $(OBJ_DIR)/sym_bss.ld $(OBJ_DIR)/sym_comm
 
 $(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS)
 	cd $(OBJ_DIR) && ../../$(LD) $(LDFLAGS) -T ld_script.ld -o ../../$@ $(LIB)
+	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
 
 $(ROM): $(ELF)
-	$(OBJCOPY) -O binary $< $@
-	$(FIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
+	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
 
 berry_fix/berry_fix.gba:
 	@$(MAKE) -C berry_fix

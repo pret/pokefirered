@@ -196,7 +196,7 @@ SECTIONS {
         asm/battle_message.o(.text);
         src/math_util.o(.text);
         src/roulette_util.o(.text);
-        asm/cable_car_util.o(.text);
+        src/cable_car_util.o(.text);
         src/save.o(.text);
         src/mystery_event_script.o(.text);
         asm/field_effect_helpers.o(.text);
@@ -213,7 +213,7 @@ SECTIONS {
         asm/battle_anim_special.o(.text);
         asm/hall_of_fame.o(.text);
         asm/credits.o(.text);
-        asm/diploma.o(.text);
+        src/diploma.o(.text);
         asm/save_failed_screen.o(.text);
         asm/clear_save_data_screen.o(.text);
         asm/evolution_graphics.o(.text);
@@ -233,7 +233,7 @@ SECTIONS {
         src/vs_seeker.o(.text);
         src/item_pc.o(.text);
         asm/mailbox_pc.o(.text);
-        asm/menu.o(.text);
+        src/menu.o(.text);
         src/quest_log.o(.text);
         asm/link_rfu_3.o(.text);
         asm/pokemon_special_anim.o(.text);
@@ -420,6 +420,7 @@ SECTIONS {
         data/data_83FECCC.o(.rodata);
 		src/intro.o(.rodata);
         data/data_83FECCC.o(.rodata.battle_anim_special);
+        src/diploma.o(.rodata);
         data/strings.o(.rodata);
         data/data_83FECCC.o(.rodata.841EE44);
         src/new_menu_helpers.o(.rodata);
@@ -432,6 +433,7 @@ SECTIONS {
         src/vs_seeker.o(.rodata);
         src/item_pc.o(.rodata);
         data/data_83FECCC.o(.rodata.8453F6C);
+        src/menu.o(.rodata);
         src/quest_log.o(.rodata);
         data/data_83FECCC.o(.rodata.8456C74);
         src/help_system_812B1E0.o(.rodata);
@@ -541,13 +543,7 @@ SECTIONS {
         data/multiboot_pokemon_colosseum.o(.rodata);
     } =0
 
-    gap1 :
-    {
-        gap1_start = ABSOLUTE(.);
-        BYTE(0xFF)
-        . = 0x8D00000 - gap1_start;
-    } =0xFF
-
+	. = 0x08D00000;
     gfx_data :
     ALIGN(4)
     {

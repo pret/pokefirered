@@ -6,6 +6,7 @@
 #include "decompress.h"
 #include "malloc.h"
 #include "menu.h"
+#include "new_menu_helpers.h"
 #include "pokemon_icon.h"
 #include "mystery_gift_menu.h"
 #include "menu_indicators.h"

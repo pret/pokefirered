@@ -81,7 +81,7 @@ sub_810EBE0: @ 810EBE0
 	adds r4, r0
 	ldrb r0, [r4]
 	movs r1, 0
-	bl ClearMenuWindow
+	bl ClearStdWindowAndFrameToTransparent
 	ldrb r0, [r4]
 	bl ClearWindowTilemap
 	ldrb r0, [r4]

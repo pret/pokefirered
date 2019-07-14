@@ -345,24 +345,6 @@ gUnknown_8414588:: @ 8414588
 gUnknown_84145BC:: @ 84145BC
 	.incbin "baserom.gba", 0x4145BC, 0x204
 
-gUnknown_84147C0:: @ 84147C0
-	.incbin "baserom.gba", 0x4147C0, 0xD28
-
-gUnknown_84154E8:: @ 84154E8
-	.incbin "baserom.gba", 0x4154E8, 0x46C
-
-gUnknown_8415954:: @ 8415954
-	.incbin "baserom.gba", 0x415954, 0xB0
-
-gUnknown_8415A04:: @ 8415A04
-	.incbin "baserom.gba", 0x415A04, 0x4
-
-gUnknown_8415A08:: @ 8415A08
-	.incbin "baserom.gba", 0x415A08, 0x8
-
-gUnknown_8415A10:: @ 8415A10
-	.incbin "baserom.gba", 0x415A10, 0x10
-
 	@ strings
 
 	.section .rodata.841EE44
@@ -823,9 +805,7 @@ gUnknown_8454000:: @ 8454000
 gUnknown_8454003:: @ 8454003
 	.incbin "baserom.gba", 0x454003, 0x2615
 
-gUnknown_8456618:: @ 8456618
-	.incbin "baserom.gba", 0x456618, 0x4
-
+	@ menu.o
 	@ quest_log.o
 	@ link_rfu_3.o
 	.section .rodata.8456C74

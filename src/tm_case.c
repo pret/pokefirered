@@ -795,7 +795,7 @@ static void Task_SelectTMAction_FromFieldBag(u8 taskId)
         sTMCaseDynamicResources->numMenuActions = NELEMS(sMenuActionIndices_UnionRoom);
     }
     AddItemMenuActionTextPrinters(sTMCaseDynamicResources->contextMenuWindowId, 2, GetMenuCursorDimensionByFont(2, 0), 2, 0, GetFontAttribute(2, 1) + 2, sTMCaseDynamicResources->numMenuActions, sMenuActions_UseGiveExit, sTMCaseDynamicResources->menuActionIndices);
-    ProgramAndPlaceMenuCursorOnWindow(sTMCaseDynamicResources->contextMenuWindowId, 2, 0, 2, GetFontAttribute(2, 1) + 2, sTMCaseDynamicResources->numMenuActions, 0);
+    Menu_InitCursor(sTMCaseDynamicResources->contextMenuWindowId, 2, 0, 2, GetFontAttribute(2, 1) + 2, sTMCaseDynamicResources->numMenuActions, 0);
     strbuf = Alloc(256);
     GetTMNumberAndMoveString(strbuf, gSpecialVar_ItemId);
     StringAppend(strbuf, gText_IsSelected);
@@ -817,7 +817,7 @@ static void Task_TMContextMenu_HandleInput(u8 taskId)
 
     if (sub_80BF72C() != TRUE)
     {
-        input = ProcessMenuInputNoWrapAround();
+        input = Menu_ProcessInputNoWrapAround();
         switch (input)
         {
         case -1:
@@ -837,7 +837,7 @@ static void Task_TMContextMenu_HandleInput(u8 taskId)
 static void TMHMContextMenuAction_Use(u8 taskId)
 {
     RemoveTMContextMenu(&sTMCaseDynamicResources->contextMenuWindowId);
-    ClearMenuWindow(2, 0);
+    ClearStdWindowAndFrameToTransparent(2, 0);
     ClearWindowTilemap(2);
     PutWindowTilemap(0);
     ScheduleBgCopyTilemapToVram(0);
@@ -859,7 +859,7 @@ static void TMHMContextMenuAction_Give(u8 taskId)
     s16 * data = gTasks[taskId].data;
     u16 itemId = BagGetItemIdByPocketPosition(POCKET_TM_CASE, data[1]);
     RemoveTMContextMenu(&sTMCaseDynamicResources->contextMenuWindowId);
-    ClearMenuWindow(2, 0);
+    ClearStdWindowAndFrameToTransparent(2, 0);
     ClearWindowTilemap(2);
     PutWindowTilemap(1);
     PutWindowTilemap(4);
@@ -912,7 +912,7 @@ static void Subtask_CloseContextMenuAndReturnToMain(u8 taskId)
     DestroyListMenuTask(data[0], &sTMCaseStaticResources.scrollOffset, &sTMCaseStaticResources.selectedRow);
     data[0] = ListMenuInit(&gMultiuseListMenuTemplate, sTMCaseStaticResources.scrollOffset, sTMCaseStaticResources.selectedRow);
     PrintListMenuCursorByID_WithColorIdx(data[0], 1);
-    ClearMenuWindow_BorderThickness2(6, 0);
+    ClearDialogWindowAndFrameToTransparent(6, 0);
     ClearWindowTilemap(6);
     PutWindowTilemap(1);
     PutWindowTilemap(4);
@@ -927,7 +927,7 @@ static void TMHMContextMenuAction_Exit(u8 taskId)
     s16 * data = gTasks[taskId].data;
 
     RemoveTMContextMenu(&sTMCaseDynamicResources->contextMenuWindowId);
-    ClearMenuWindow(2, 0);
+    ClearStdWindowAndFrameToTransparent(2, 0);
     ClearWindowTilemap(2);
     PutWindowTilemap(0);
     PrintListMenuCursorByID_WithColorIdx(data[0], 1);
@@ -1016,8 +1016,8 @@ static void Task_SaleOfTMsCancelled(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
-    ClearMenuWindow(8, 0);
-    ClearMenuWindow_BorderThickness2(6, 0);
+    ClearStdWindowAndFrameToTransparent(8, 0);
+    ClearDialogWindowAndFrameToTransparent(6, 0);
     PutWindowTilemap(0);
     PutWindowTilemap(1);
     PutWindowTilemap(3);
@@ -1065,7 +1065,7 @@ static void Task_QuantitySelect_HandleInput(u8 taskId)
     else if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        ClearMenuWindow(7, 0);
+        ClearStdWindowAndFrameToTransparent(7, 0);
         ScheduleBgCopyTilemapToVram(0);
         ScheduleBgCopyTilemapToVram(1);
         RemoveTMCaseScrollIndicatorArrowPair();
@@ -1074,9 +1074,9 @@ static void Task_QuantitySelect_HandleInput(u8 taskId)
     else if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
-        ClearMenuWindow(7, 0);
-        ClearMenuWindow(8, 0);
-        ClearMenuWindow_BorderThickness2(6, 0);
+        ClearStdWindowAndFrameToTransparent(7, 0);
+        ClearStdWindowAndFrameToTransparent(8, 0);
+        ClearDialogWindowAndFrameToTransparent(6, 0);
         PutWindowTilemap(3);
         PutWindowTilemap(0);
         PutWindowTilemap(1);
@@ -1123,8 +1123,8 @@ static void Task_AfterSale_ReturnToList(u8 taskId)
     if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
-        ClearMenuWindow(8, 0);
-        ClearMenuWindow_BorderThickness2(6, 0);
+        ClearStdWindowAndFrameToTransparent(8, 0);
+        ClearDialogWindowAndFrameToTransparent(6, 0);
         PutWindowTilemap(1);
         PutWindowTilemap(3);
         PutWindowTilemap(4);
@@ -1249,7 +1249,7 @@ static void Task_TMCaseDude_Playback(u8 taskId)
         {
             FillBG2RowWithPalette_2timesNplus1(0);
             BeginNormalPaletteFade(0x00000400, 0, 6, 0, 0);
-            ClearMenuWindow_BorderThickness2(6, 0);
+            ClearDialogWindowAndFrameToTransparent(6, 0);
             ScheduleBgCopyTilemapToVram(1);
             data[8]++;
         }
@@ -1322,12 +1322,12 @@ static void AddTextPrinterParameterized_ColorByIndex(u8 windowId, u8 fontId, con
 
 static void TMCase_SetWindowBorder1(u8 windowId)
 {
-    SetWindowBorderStyle(windowId, FALSE, 0x5B, 0x0E);
+    DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, 0x5B, 0x0E);
 }
 
 static void TMCase_SetWindowBorder2(u8 windowId)
 {
-    SetWindowBorderStyle(windowId, FALSE, 0x78, 0x0D);
+    DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, 0x78, 0x0D);
 }
 
 static void TMCase_PrintMessageWithFollowupTask(u8 taskId, u8 windowId, const u8 * str, TaskFunc func)
@@ -1420,7 +1420,7 @@ static u8 AddTMContextMenu(u8 * a0, u8 a1)
 
 static void RemoveTMContextMenu(u8 * a0)
 {
-    ClearMenuWindow(*a0, FALSE);
+    ClearStdWindowAndFrameToTransparent(*a0, FALSE);
     ClearWindowTilemap(*a0);
     RemoveWindow(*a0);
     ScheduleBgCopyTilemapToVram(0);

@@ -3,6 +3,7 @@
 #include "sound.h"
 #include "string_util.h"
 #include "menu.h"
+#include "new_menu_helpers.h"
 #include "constants/songs.h"
 #include "fldeff.h"
 
@@ -85,7 +86,7 @@ static void sub_80E58A0(u8 taskId)
         sub_811F818(gUnknown_203B0A0.unk9, 0);
         gUnknown_203B0A0.unk9 = gUnknown_203B0A0.unkA;
         sub_811F818(gUnknown_203B0A0.unkA, 1);
-        ClearMenuWindow(6, 0);
+        ClearStdWindowAndFrameToTransparent(6, 0);
         ClearWindowTilemap(6);
         sub_8121D0C(0);
         gTasks[taskId].func = sub_811FB28;

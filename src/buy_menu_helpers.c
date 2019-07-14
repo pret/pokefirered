@@ -202,12 +202,12 @@ void BuyMenuDisplayMessage(u8 taskId, const u8 *text, TaskFunc callback)
 
 void BuyMenuQuantityBoxNormalBorder(u8 windowId, bool8 copyToVram)
 {
-    SetWindowBorderStyle(windowId, copyToVram, 0x1, 0xD);
+    DrawStdFrameWithCustomTileAndPalette(windowId, copyToVram, 0x1, 0xD);
 }
 
 void BuyMenuQuantityBoxThinBorder(u8 windowId, bool8 copyToVram)
 {
-    SetWindowBorderStyle(windowId, copyToVram, 0xA, 0xF);
+    DrawStdFrameWithCustomTileAndPalette(windowId, copyToVram, 0xA, 0xF);
 }
 
 void BuyMenuConfirmPurchase(u8 taskId, const struct YesNoFuncTable *yesNo)

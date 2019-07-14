@@ -2076,7 +2076,7 @@ sub_80CB580: @ 80CB580
 	movs r1, 0
 	adds r2, r5, 0
 	movs r3, 0xD
-	bl SetWindowBorderStyle
+	bl DrawStdFrameWithCustomTileAndPalette
 	ldrb r0, [r4]
 	ldr r2, _080CB630 @ =gUnknown_8418075
 	movs r1, 0x2
@@ -2141,7 +2141,7 @@ sub_80CB63C: @ 80CB63C
 	ldr r4, _080CB654 @ =gUnknown_2039A0C
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl ClearMenuWindow
+	bl ClearStdWindowAndFrameToTransparent
 	ldrb r0, [r4]
 	bl RemoveWindow
 	pop {r4}
@@ -2862,7 +2862,7 @@ sub_80CBBAC: @ 80CBBAC
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
-	bl ClearMenuWindow
+	bl ClearStdWindowAndFrameToTransparent
 	ldrh r0, [r4, 0x22]
 	lsls r0, 24
 	lsrs r0, 24

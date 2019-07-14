@@ -5304,7 +5304,7 @@ sub_814A218: @ 814A218
 _0814A22C: .4byte gUnknown_203F3D8
 _0814A230:
 	bl sub_814A6CC
-	bl sub_81100E8
+	bl DestroyYesNoMenu
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 	ldr r1, [r5]

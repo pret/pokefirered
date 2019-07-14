@@ -1075,7 +1075,7 @@ gUnknown_2039A34: @ 2039A34
 	.include "src/save.o"
 	.include "src/mystery_event_script.o"
 
-gPaletteDecompressionBuffer: @ 203AAB0
+gUnknown_203AAB0: @ 203AAB0
 	.space 0x4
 
 gUnknown_203AAB4: @ 203AAB4
@@ -1217,21 +1217,7 @@ gUnknown_203ADDC: @ 203ADDC
 gUnknown_203ADE0: @ 203ADE0
 	.space 0x4
 
-gUnknown_203ADE4: @ 203ADE4
-	.space 0xC
-
-gUnknown_203ADF0: @ 203ADF0
-	.space 0x2
-
-gUnknown_203ADF2: @ 203ADF2
-	.space 0x1
-
-gUnknown_203ADF3: @ 203ADF3
-	.space 0x1
-
-gUnknown_203ADF4: @ 203ADF4
-	.space 0x4
-
+	.include "src/menu.o"
 	.include "src/quest_log.o"
 
 gUnknown_203B04C: @ 203B04C

@@ -3379,7 +3379,7 @@ _0804E208:
 	movs r1, 0x3
 	movs r2, 0x10
 	movs r3, 0x2
-	bl sub_810FC80
+	bl UnionRoomAndTradeMenuPrintOptions
 	movs r0, 0x10
 	str r0, [sp]
 	movs r0, 0x2
@@ -3390,7 +3390,7 @@ _0804E208:
 	movs r1, 0x3
 	movs r2, 0
 	movs r3, 0
-	bl ProgramAndPlaceMenuCursorOnWindow
+	bl Menu_InitCursor
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0x1
@@ -3533,7 +3533,7 @@ _0804E384: .4byte 0x06010000
 sub_804E388: @ 804E388
 	push {lr}
 	sub sp, 0x4
-	bl ProcessMenuInputNoWrapAround
+	bl Menu_ProcessInputNoWrapAround
 	lsls r0, 24
 	asrs r0, 24
 	movs r1, 0x1

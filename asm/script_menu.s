@@ -271,7 +271,7 @@ _0809CB32:
 	movs r1, 0x2
 	movs r2, 0x8
 	movs r3, 0x2
-	bl sub_810FBE8
+	bl MultichoiceList_PrintItems
 	b _0809CB7A
 	.align 2, 0
 _0809CB54: .4byte sub_809D6D4
@@ -290,7 +290,7 @@ _0809CB5C:
 	movs r1, 0x2
 	movs r2, 0x8
 	movs r3, 0x2
-	bl sub_810FBE8
+	bl MultichoiceList_PrintItems
 _0809CB7A:
 	movs r0, 0xE
 	str r0, [sp]
@@ -301,7 +301,7 @@ _0809CB7A:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl ProgramAndPlaceMenuCursorOnWindow
+	bl Menu_InitCursor
 	ldr r0, [sp, 0x18]
 	adds r1, r7, 0
 	adds r2, r5, 0
@@ -475,10 +475,10 @@ _0809CCD0:
 	ldrsh r0, [r5, r1]
 	cmp r0, 0
 	bne _0809CCDE
-	bl ProcessMenuInputNoWrapAround
+	bl Menu_ProcessInputNoWrapAround
 	b _0809CCE2
 _0809CCDE:
-	bl ProcessMenuInput
+	bl Menu_ProcessInput
 _0809CCE2:
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -562,7 +562,7 @@ _0809CD78:
 	bl FillWindowPixelBuffer
 	ldr r4, _0809CDAC @ =gUnknown_83E0738
 _0809CD82:
-	bl GetMenuCursorPos
+	bl Menu_GetCursorPos
 	lsls r0, 24
 	lsrs r0, 22
 	adds r0, r4
@@ -587,7 +587,7 @@ _0809CDB0:
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
 	ldr r4, _0809CDE8 @ =gUnknown_83E0748
-	bl GetMenuCursorPos
+	bl Menu_GetCursorPos
 	lsls r0, 24
 	lsrs r0, 22
 	adds r0, r4
@@ -833,7 +833,7 @@ _0809CF08:
 	movs r1, 0x1
 	adds r2, r5, 0
 	movs r3, 0x10
-	bl sub_8110104
+	bl MultichoiceGrid_PrintItems
 	ldrb r0, [r4, 0x14]
 	str r5, [sp]
 	str r7, [sp, 0x4]
@@ -843,7 +843,7 @@ _0809CF08:
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_811030C
+	bl MultichoiceGrid_InitCursor
 	movs r0, 0
 	bl ScheduleBgCopyTilemapToVram
 _0809CFB8:
@@ -874,7 +874,7 @@ sub_809CFDC: @ 809CFDC
 	lsls r0, 3
 	ldr r1, _0809D018 @ =gTasks+0x8
 	adds r5, r0, r1
-	bl sub_8110650
+	bl Menu_ProcessInputGridLayout
 	lsls r0, 24
 	asrs r1, r0, 24
 	movs r0, 0x2
@@ -1138,7 +1138,7 @@ _0809D1FA:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl ProgramAndPlaceMenuCursorOnWindow
+	bl Menu_InitCursor
 	movs r0, 0
 	mov r1, r9
 	adds r2, r6, 0
@@ -1721,7 +1721,7 @@ sub_809D6B0: @ 809D6B0
 	bl ClearWindowTilemap
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl ClearMenuWindow
+	bl ClearStdWindowAndFrameToTransparent
 	adds r0, r4, 0
 	bl RemoveWindow
 	pop {r4}
@@ -1946,7 +1946,7 @@ _0809D844:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl ProgramAndPlaceMenuCursorOnWindow
+	bl Menu_InitCursor
 	movs r0, 0
 	mov r1, r9
 	adds r2, r7, 0

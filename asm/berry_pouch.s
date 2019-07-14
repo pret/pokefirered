@@ -1974,7 +1974,7 @@ _0813DC86:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl ProgramAndPlaceMenuCursorOnWindow
+	bl Menu_InitCursor
 	movs r0, 0x6
 	bl sub_813EA08
 	adds r4, r0, 0
@@ -2051,7 +2051,7 @@ sub_813DDA0: @ 813DDA0
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0813DDFE
-	bl ProcessMenuInputNoWrapAround
+	bl Menu_ProcessInputNoWrapAround
 	lsls r0, 24
 	asrs r4, r0, 24
 	movs r0, 0x2
@@ -3509,7 +3509,7 @@ _0813EA38:
 	movs r1, 0
 	movs r2, 0xA
 	movs r3, 0xC
-	bl SetWindowBorderStyle
+	bl DrawStdFrameWithCustomTileAndPalette
 	b _0813EA60
 	.align 2, 0
 _0813EA4C: .4byte gUnknown_203F38C
@@ -3519,7 +3519,7 @@ _0813EA54:
 	movs r1, 0
 	movs r2, 0x1
 	movs r3, 0xE
-	bl SetWindowBorderStyle
+	bl DrawStdFrameWithCustomTileAndPalette
 _0813EA60:
 	movs r0, 0x2
 	bl ScheduleBgCopyTilemapToVram
@@ -3545,7 +3545,7 @@ sub_813EA78: @ 813EA78
 	movs r1, 0
 	movs r2, 0x1
 	movs r3, 0xE
-	bl SetWindowBorderStyle
+	bl DrawStdFrameWithCustomTileAndPalette
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3562,7 +3562,7 @@ sub_813EA98: @ 813EA98
 	adds r4, r0
 	ldrb r0, [r4]
 	movs r1, 0
-	bl ClearMenuWindow
+	bl ClearStdWindowAndFrameToTransparent
 	ldrb r0, [r4]
 	bl ClearWindowTilemap
 	ldrb r0, [r4]
@@ -3589,7 +3589,7 @@ sub_813EACC: @ 813EACC
 	cmp r0, 0xFF
 	beq _0813EB04
 	movs r1, 0
-	bl ClearMenuWindow_BorderThickness2
+	bl ClearDialogWindowAndFrameToTransparent
 	ldrb r0, [r4]
 	bl ClearWindowTilemap
 	ldrb r0, [r4]

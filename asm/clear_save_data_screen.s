@@ -120,7 +120,7 @@ _080F5660:
 	movs r1, 0x1
 	movs r2, 0x1
 	movs r3, 0xF
-	bl SetWindowBorderStyle
+	bl DrawStdFrameWithCustomTileAndPalette
 	movs r0, 0x1
 	str r0, [sp]
 	str r0, [sp, 0x4]
@@ -304,7 +304,7 @@ _080F57D4:
 	lsrs r4, r0, 24
 	cmp r4, 0
 	bne _080F57FE
-	bl sub_81100E8
+	bl DestroyYesNoMenu
 	adds r0, r6, 0
 	bl DestroyTask
 	bl FreeAllWindowBuffers

@@ -8586,7 +8586,7 @@ _0811A168:
 _0811A174:
 	cmp r5, 0
 	beq _0811A186
-	bl sub_81100E8
+	bl DestroyYesNoMenu
 	movs r0, 0
 	strb r0, [r4]
 	movs r0, 0x3

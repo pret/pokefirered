@@ -61,7 +61,6 @@ struct OakSpeechNidoranFStruct
 // TODO: move sLearningMoveTableID, gPlayerPartyCount, gEnemyPartyCount, 
 // gEnemyParty, gPlayerParty here after resolving symbol ref in between. 
 extern u8 sLearningMoveTableID;
-
 EWRAM_DATA struct SpriteTemplate gMultiuseSpriteTemplate = {0};
 static EWRAM_DATA struct OakSpeechNidoranFStruct *sOakSpeechNidoranResources = NULL;
 
@@ -80,6 +79,10 @@ static void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon);
 static u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 static u8 GetLevelFromMonExp(struct Pokemon *mon);
 static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon);
+
+#include "data/pokemon/level_up_learnsets.h"
+#include "data/pokemon/evolution.h"
+#include "data/pokemon/level_up_learnset_pointers.h"
 
 const s8 gPokeblockFlavorCompatibilityTable[] =
 {
@@ -484,7 +487,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
     }
 
-    if (gBaseStats[species].ability2)
+    if (gBaseStats[species].abilities[1])
     {
         value = personality & 1;
         SetBoxMonData(boxMon, MON_DATA_ALT_ABILITY, &value);
@@ -727,7 +730,7 @@ static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon)
     u8 baseStat = gBaseStats[species].base;                     \
     s32 n = (((2 * baseStat + iv + ev / 4) * level) / 100) + 5; \
     u8 nature = GetNature(mon);                                 \
-    n = ModifyStatByNature(nature, n, statIndex);                  \
+    n = ModifyStatByNature(nature, n, statIndex);               \
     SetMonData(mon, field, &n);                                 \
 }
 
@@ -887,9 +890,6 @@ static void GiveMonInitialMoveset(struct Pokemon *mon)
 {
     GiveBoxMonInitialMoveset(&mon->box);
 }
-
-// TODO: make level_up_learnsets.h in src/data and move this to there.
-#define LEVEL_UP_END 0xffff
 
 static void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
 {
@@ -2402,9 +2402,9 @@ u8 GetMonsStateToDoubles(void)
 u8 GetAbilityBySpecies(u16 species, bool8 altAbility)
 {
     if (altAbility)
-        gLastUsedAbility = gBaseStats[species].ability2;
+        gLastUsedAbility = gBaseStats[species].abilities[1];
     else
-        gLastUsedAbility = gBaseStats[species].ability1;
+        gLastUsedAbility = gBaseStats[species].abilities[0];
 
     return gLastUsedAbility;
 }

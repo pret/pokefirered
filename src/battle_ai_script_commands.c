@@ -1170,28 +1170,28 @@ static void BattleAICmd_get_ability(void)
             return;
         }
 
-        if (gBaseStats[gBattleMons[index].species].ability1 != ABILITY_NONE)
+        if (gBaseStats[gBattleMons[index].species].abilities[0] != ABILITY_NONE)
         {
-            if (gBaseStats[gBattleMons[index].species].ability2 != ABILITY_NONE)
+            if (gBaseStats[gBattleMons[index].species].abilities[1] != ABILITY_NONE)
             {
                 // AI has no knowledge of opponent, so it guesses which ability.
                 if (Random() % 2)
                 {
-                    AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[index].species].ability1;
+                    AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[index].species].abilities[0];
                 }
                 else
                 {
-                    AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[index].species].ability2;
+                    AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[index].species].abilities[1];
                 }
             }
             else
             {
-                AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[index].species].ability1; // it's definitely ability 1.
+                AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[index].species].abilities[0]; // it's definitely ability 1.
             }
         }
         else
         {
-            AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[index].species].ability2; // AI cant actually reach this part since every mon has at least 1 ability.
+            AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[index].species].abilities[1]; // AI cant actually reach this part since every mon has at least 1 ability.
         }
     }
     else

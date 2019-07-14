@@ -2,6 +2,7 @@
 #define GUARD_BATTLE_2_H
 
 #include "global.h"
+#include "sprite.h"
 
 void CB2_InitBattle(void);
 void BattleMainCB2(void);

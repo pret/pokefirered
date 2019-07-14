@@ -76,7 +76,7 @@ static const struct BgTemplate sBgTemplates[2] = {
         .charBaseIndex = 1,
         .mapBaseIndex = 30,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = 0, // 4bpp
         .priority = 3,
         .baseTile = 0x000
     }

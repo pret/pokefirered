@@ -13,7 +13,7 @@
 #include "random.h"
 #include "cereader_tool.h"
 #include "easy_chat.h"
-#include "text.h"sub_815EC8C
+#include "text.h"
 #include "battle_setup.h"
 #include "battle_transition.h"
 #include "battle.h"

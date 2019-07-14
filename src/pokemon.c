@@ -80,17 +80,9 @@ static u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 static u8 GetLevelFromMonExp(struct Pokemon *mon);
 static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon);
 
-// decomp here
 extern struct SpriteTemplate gUnknown_825DF50[];
-extern const u16 sDeoxysBaseStats[];
-extern const u16 gLinkPlayerFacilityClasses[];
-extern const struct SpriteTemplate gUnknown_825E05C;
 extern s8 gPokeblockFlavorCompatibilityTable[];
-extern const u16 sHMMoves[];
 extern const u8 gPPUpWriteMasks[];
-extern const u8 sSecretBaseFacilityClasses[2][5];
-extern const s8 sFriendshipEventDeltas[][3];
-extern const u8 gUnknown_825DFF0[];
 extern const u8 sHoldEffectToType[][2];
 extern u16 gUnknown_8251CB8[];
 extern u16 gUnknown_8251FEE[];
@@ -103,7 +95,92 @@ extern s8 gNatureStatTable[][5];
 extern u32 gTMHMLearnsets[][2];
 extern const u8 gUnknown_825DEA1[];
 extern const u8 gUnknown_825DEA9[];
-extern const u8 sGetMonDataEVConstants[];
+
+static const u8 sSecretBaseFacilityClasses[][5] = 
+{
+    { 0x58, 0x58, 0x58, 0x58, 0x58 },
+    { 0x58, 0x58, 0x58, 0x58, 0x58 },
+};
+
+static const u8 sGetMonDataEVConstants[] = 
+{
+    MON_DATA_HP_EV,
+    MON_DATA_ATK_EV,
+    MON_DATA_DEF_EV,
+    MON_DATA_SPEED_EV,
+    MON_DATA_SPDEF_EV,
+    MON_DATA_SPATK_EV
+};
+
+static const u8 gUnknown_825DFF0[] = 
+{
+    STAT_ATK, STAT_ATK, STAT_SPEED, STAT_DEF, STAT_SPATK, STAT_ACC
+};
+
+static const s8 sFriendshipEventDeltas[][3] = 
+{
+    { 5,  3,  2 },
+    { 5,  3,  2 },
+    { 1,  1,  0 },
+    { 3,  2,  1 },
+    { 1,  1,  0 },
+    { 1,  1,  1 },
+    { 3,  3,  3 },
+    {-1, -1, -1 },
+    {-5, -5, -10 },
+    {-5, -5, -10 },
+};
+
+static const u16 sHMMoves[] = 
+{
+    MOVE_CUT, MOVE_FLY, MOVE_SURF, MOVE_STRENGTH, MOVE_FLASH,
+    MOVE_ROCK_SMASH, MOVE_WATERFALL, MOVE_DIVE, 0xFFFF
+};
+
+static const u16 sDeoxysBaseStats[] = 
+{
+    50, // Hp
+    180, // Attack
+    20, // Defense
+    150, // Speed
+    180, // Sp.Attack
+    20, // Sp.Defense
+};
+
+const u16 gLinkPlayerFacilityClasses[] = 
+{
+    0x74, 0x6F, 0x5C, 0x58, 0x6A,
+    0x59, 0x6D, 0x6C, 0x75, 0x7D,
+    0x5D, 0x5A, 0x89, 0x8A, 0x8C,
+    0x68, 0x0,
+};
+
+const static struct OamData sOakSpeechNidoranFDummyOamData = 
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+};
+
+const struct SpriteTemplate sOakSpeechNidoranFDummyTemplate = 
+{
+    .tileTag = SPRITE_INVALID_TAG,
+    .paletteTag = SPRITE_INVALID_TAG,
+    .oam = &sOakSpeechNidoranFDummyOamData,
+    .anims = gDummySpriteAnimTable, 
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
 
 // code
 void ZeroBoxMonData(struct BoxPokemon *boxMon)
@@ -5834,7 +5911,7 @@ static void OakSpeechNidoranFSetupTemplateDummy(struct OakSpeechNidoranFStruct *
 
     for (i = 0; i < (s8)structPtr->spriteCount; ++i)
     {
-        structPtr->templates[i] = gUnknown_825E05C;
+        structPtr->templates[i] = sOakSpeechNidoranFDummyTemplate;
         for (j = 0; j < structPtr->frameCount; ++j)
             structPtr->frameImages[i * structPtr->spriteCount + j].data = &structPtr->bufferPtrs[i][j * 0x800];
         structPtr->templates[i].images = &structPtr->frameImages[i * structPtr->spriteCount]; // should be frameCount logically

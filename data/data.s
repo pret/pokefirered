@@ -68,7 +68,52 @@ gUnknown_8234690:: @ 8234690
 	.incbin "baserom.gba", 0x234690, 0x4
 
 gUnknown_8234694:: @ 8234694
-	.incbin "baserom.gba", 0x234694, 0x328
+	.incbin "baserom.gba", 0x234694, 0x4
+
+gUnknown_8234698:: @ 8234698
+	.incbin "baserom.gba", 0x234698, 0x20
+
+gUnknown_82346B8:: @ 82346B8
+	.incbin "baserom.gba", 0x2346B8, 0x20
+
+gUnknown_82346D8:: @ 82346D8
+	.incbin "baserom.gba", 0x2346D8, 0x20
+
+gUnknown_82346F8:: @ 82346F8
+	.incbin "baserom.gba", 0x2346F8, 0x20
+
+gUnknown_8234718:: @ 8234718
+	.incbin "baserom.gba", 0x234718, 0x28
+
+gUnknown_8234740:: @ 8234740
+	.incbin "baserom.gba", 0x234740, 0x28
+
+gUnknown_8234768:: @ 8234768
+	.incbin "baserom.gba", 0x234768, 0x20
+
+gUnknown_8234788:: @ 8234788
+	.incbin "baserom.gba", 0x234788, 0x20
+
+gUnknown_82347A8:: @ 82347A8
+	.incbin "baserom.gba", 0x2347A8, 0x20
+
+gUnknown_82347C8:: @ 82347C8
+	.incbin "baserom.gba", 0x2347C8, 0x20
+
+gUnknown_82347E8:: @ 82347E8
+	.incbin "baserom.gba", 0x2347E8, 0xE0
+
+gUnknown_82348C8:: @ 82348C8
+	.incbin "baserom.gba", 0x2348C8, 0x24
+
+gUnknown_82348EC:: @ 82348EC
+	.incbin "baserom.gba", 0x2348EC, 0x58
+
+gUnknown_8234944:: @ 8234944
+	.incbin "baserom.gba", 0x234944, 0x58
+
+gUnknown_823499C:: @ 823499C
+	.incbin "baserom.gba", 0x23499C, 0x20
 
 gUnknown_82349BC:: @ 82349BC
 	.incbin "baserom.gba", 0x2349BC, 0x10
@@ -174,7 +219,16 @@ gUnknown_824EFF0:: @ 824EFF0
 	.incbin "baserom.gba", 0x24EFF0, 0x18
 
 gUnknown_824F008:: @ 824F008
-	.incbin "baserom.gba", 0x24F008, 0x40
+	.incbin "baserom.gba", 0x24F008, 0x8
+
+gUnknown_824F010:: @ 824F010
+	.incbin "baserom.gba", 0x24F010, 0x8
+
+gUnknown_824F018:: @ 824F018
+	.incbin "baserom.gba", 0x24F018, 0x8
+
+gUnknown_824F020:: @ 824F020
+	.incbin "baserom.gba", 0x24F020, 0x28
 
 gUnknown_824F048:: @ 824F048
 	.incbin "baserom.gba", 0x24F048, 0x8
@@ -522,30 +576,6 @@ gUnknown_825DEF0:: @ 825DEF0
 
 gUnknown_825DF50:: @ 825DF50
 	.incbin "baserom.gba", 0x25DF50, 0x90
-
-sSecretBaseFacilityClasses:: @ 825DFE0
-	.incbin "baserom.gba", 0x25DFE0, 0xA
-
-sGetMonDataEVConstants:: @ 825DFEA
-	.incbin "baserom.gba", 0x25DFEA, 0x6
-
-gUnknown_825DFF0:: @ 825DFF0
-	.incbin "baserom.gba", 0x25DFF0, 0x6
-
-sFriendshipEventDeltas:: @ 825DFF6
-	.incbin "baserom.gba", 0x25DFF6, 0x1E
-
-sHMMoves:: @ 825E014
-	.incbin "baserom.gba", 0x25E014, 0x12
-
-sDeoxysBaseStats:: @ 825E026
-	.incbin "baserom.gba", 0x25E026, 0xC
-
-gLinkPlayerFacilityClasses:: @ 825E032
-	.incbin "baserom.gba", 0x25E032, 0x2A
-
-gUnknown_825E05C:: @ 825E05C
-	.incbin "baserom.gba", 0x25E05C, 0x18
 
 	.section .rodata.825EF0C
 

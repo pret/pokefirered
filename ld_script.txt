@@ -380,6 +380,7 @@ SECTIONS {
         src/bg_regs.o(.rodata);
         src/string_util.o(.rodata);
         data/data.o(.rodata);
+        src/pokemon.o(.rodata);
         src/trig.o(.rodata);
         src/util.o(.rodata);
         src/daycare.o(.rodata);

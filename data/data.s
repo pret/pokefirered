@@ -541,17 +541,8 @@ gUnknown_82539D4:: @ 82539D4
 gExperienceTables:: @ 8253AE4
 	.incbin "baserom.gba", 0x253AE4, 0xCA0
 
-gBaseStats:: @ 8254784
-	.incbin "baserom.gba", 0x254784, 0x2D10
-
-@gUnknown_8257494:: @ 8257494
-@	.incbin "baserom.gba", 0x257494, 0x22C0
-
-@gEvolutionTable:: @ 8259754
-@	.incbin "baserom.gba", 0x259754, 0x4060
-
-@gLevelUpLearnsets:: @ 825D7B4
-@	.incbin "baserom.gba", 0x25D7B4, 0x670
+@gBaseStats:: @ 8254784
+@	.incbin "baserom.gba", 0x254784, 0x2D10
 
 	.section .rodata.825EF0C
 

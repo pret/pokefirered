@@ -1563,8 +1563,8 @@ const struct SpriteTemplate gUnknown_825DF50[] =
 
 static const u8 sSecretBaseFacilityClasses[][5] = 
 {
-    { 0x58, 0x58, 0x58, 0x58, 0x58 },
-    { 0x58, 0x58, 0x58, 0x58, 0x58 },
+    { FACILITY_CLASS_YOUNGSTER_2, FACILITY_CLASS_YOUNGSTER_2, FACILITY_CLASS_YOUNGSTER_2, FACILITY_CLASS_YOUNGSTER_2, FACILITY_CLASS_YOUNGSTER_2 },
+    { FACILITY_CLASS_YOUNGSTER_2, FACILITY_CLASS_YOUNGSTER_2, FACILITY_CLASS_YOUNGSTER_2, FACILITY_CLASS_YOUNGSTER_2, FACILITY_CLASS_YOUNGSTER_2 },
 };
 
 static const u8 sGetMonDataEVConstants[] = 
@@ -2675,25 +2675,25 @@ u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality)
 
 void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition)
 {
-    if(gMonSpritesGfxPtr != NULL)
+    if (gMonSpritesGfxPtr != NULL)
     {
-        if(battlerPosition >= 4)
+        if (battlerPosition >= 4)
             battlerPosition = 0;
 
         gMultiuseSpriteTemplate = gMonSpritesGfxPtr->templates[battlerPosition];
     }
     else
     {
-        if(sOakSpeechNidoranResources)
+        if (sOakSpeechNidoranResources)
         {
-            if(battlerPosition >= (s8)sOakSpeechNidoranResources->battlePosition) // why a cast?!? changing the unk0_2 type to s8 causes extra shifts, but a cast is the correct fix. why, compiler?
+            if (battlerPosition >= (s8)sOakSpeechNidoranResources->battlePosition) // why a cast?!? changing the unk0_2 type to s8 causes extra shifts, but a cast is the correct fix. why, compiler?
                 battlerPosition = 0;
 
             gMultiuseSpriteTemplate = sOakSpeechNidoranResources->templates[battlerPosition];
         }
         else
         {
-            if(battlerPosition >= 4)
+            if (battlerPosition >= 4)
                 battlerPosition = 0;
 
             gMultiuseSpriteTemplate = gUnknown_825DEF0[battlerPosition];
@@ -2706,7 +2706,7 @@ void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition)
 void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerSpriteId, u8 battlerPosition)
 {
     gMultiuseSpriteTemplate.paletteTag = trainerSpriteId;
-    if(battlerPosition == B_POSITION_PLAYER_LEFT || battlerPosition == B_POSITION_PLAYER_RIGHT)
+    if (battlerPosition == B_POSITION_PLAYER_LEFT || battlerPosition == B_POSITION_PLAYER_RIGHT)
     {
         gMultiuseSpriteTemplate = gUnknown_825DF50[trainerSpriteId];
         gMultiuseSpriteTemplate.anims = gTrainerBackAnimsPtrTable[trainerSpriteId];
@@ -4835,7 +4835,7 @@ bool8 PokemonUseItemEffects2(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 m
                         r4 = CalculatePPWithBonus(GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex, NULL), GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL), moveIndex);
                         if (data < 3)
                         {
-                            if(r4 <= 4)
+                            if (r4 <= 4)
                                 break;
                             /*
                             
@@ -5944,7 +5944,7 @@ _08042BD8:\n\
 
 static bool8 sub_8042BE8(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId)
 {
-    if((GetMonData(mon, MON_DATA_STATUS, NULL) & healMask) != 0)
+    if ((GetMonData(mon, MON_DATA_STATUS, NULL) & healMask) != 0)
         return TRUE;
     else
         return FALSE;
@@ -6263,15 +6263,15 @@ static u16 HoennPokedexNumToSpecies(u16 var)
 {
     u16 species;
 
-    if(!var)
+    if (!var)
         return 0;
 
     species = 0;
 
-    while(species < POKEMON_SLOTS_NUMBER - 1 && sSpeciesToHoennPokedexNum[species] != var)
+    while (species < POKEMON_SLOTS_NUMBER - 1 && sSpeciesToHoennPokedexNum[species] != var)
         species++;
 
-    if(species == POKEMON_SLOTS_NUMBER - 1)
+    if (species == POKEMON_SLOTS_NUMBER - 1)
         return 0;
 
     return species + 1;
@@ -6345,7 +6345,7 @@ u16 SpeciesToCryId(u16 species)
     if (species <= SPECIES_OLD_UNOWN_Z - 1)
         return SPECIES_UNOWN - 1;
 
-    return sSpeciesIdToCryId[species - ((SPECIES_OLD_UNOWN_Z + 1) - 1)];
+    return sHoennSpeciesIdToCryId[species - ((SPECIES_OLD_UNOWN_Z + 1) - 1)];
 }
 
 static void sub_8043338(u16 species, u32 personality, u8 *dest)
@@ -6764,9 +6764,9 @@ bool8 TryIncrementMonLevel(struct Pokemon *mon)
     u8 newLevel = level + 1;
     u32 exp = GetMonData(mon, MON_DATA_EXP, NULL);
 
-    if(level < 100)
+    if (level < 100)
     {
-        if(exp > gExperienceTables[gBaseStats[species].growthRate][newLevel])
+        if (exp > gExperienceTables[gBaseStats[species].growthRate][newLevel])
         {
             SetMonData(mon, MON_DATA_LEVEL, &newLevel);
             SetMonExpWithMaxLevelCheck(mon, species, newLevel, exp);
@@ -6907,19 +6907,19 @@ u16 sub_8043F90(u16 species)
 void ClearBattleMonForms(void)
 {
     int i;
-    for(i = 0; i < 4; i++)
+    for (i = 0; i < 4; i++)
         gBattleMonForms[i] = 0;
 }
 
 static u16 GetMUS_ForBattle(void)
 {
-    if(gBattleTypeFlags & 0x1000)
+    if (gBattleTypeFlags & 0x1000)
         return 0x12A;
-    if(gBattleTypeFlags & 0x4000)
+    if (gBattleTypeFlags & 0x4000)
         return 0x10A;
-    if(gBattleTypeFlags & 0x2)
+    if (gBattleTypeFlags & 0x2)
         return 0x10A;
-    if(gBattleTypeFlags & 0x8)
+    if (gBattleTypeFlags & 0x8)
     {
         switch (gTrainers[gTrainerBattleOpponent_A].trainerClass)
         {
@@ -7149,7 +7149,7 @@ u8 GetPlayerPartyHighestLevel(void)
     u8 level, monLevel;
 
     level = 1;
-    for(slot = 0; slot < PARTY_SIZE; ++slot)
+    for (slot = 0; slot < PARTY_SIZE; ++slot)
     {
         if (GetMonData(&gPlayerParty[slot], MON_DATA_SANITY_HAS_SPECIES, NULL) == 1 && !GetMonData(&gPlayerParty[slot], MON_DATA_SANITY_IS_EGG, NULL))
         {

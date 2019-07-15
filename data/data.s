@@ -356,18 +356,6 @@ gUnknown_8250A34:: @ 8250A34
 gUnknown_8250B20:: @ 8250B20
 	.incbin "baserom.gba", 0x250B20, 0xE4
 
-gBattleMoves:: @ 8250C04
-	.incbin "baserom.gba", 0x250C04, 0x10B4
-
-gUnknown_8251CB8:: @ 8251CB8
-	.incbin "baserom.gba", 0x251CB8, 0x336
-
-gUnknown_8251FEE:: @ 8251FEE
-	.incbin "baserom.gba", 0x251FEE, 0x336
-
-gUnknown_8252324:: @ 8252324
-	.incbin "baserom.gba", 0x252324, 0x338
-
 	.section .rodata.825EF0C
 
 	.align 2

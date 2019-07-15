@@ -2386,8 +2386,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
             spDefense = (110 * spDefense) / 100;
     }
 
-    // TODO: Use ARRAY_COUNT(sHoldEffectToType)
-    for (i = 0; i < 17; i++)
+    for (i = 0; i < NELEMS(sHoldEffectToType); i++)
     {
         if (attackerHoldEffect == sHoldEffectToType[i][0]
             && type == sHoldEffectToType[i][1])
@@ -6260,9 +6259,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
     return targetSpecies;
 }
 
-// HoennPokedexNumToSpecies, but is it really Hoenn or Kanto its checking
-// TODO: Figure this out
-static u16 sub_80431B4(u16 var)
+static u16 HoennPokedexNumToSpecies(u16 var)
 {
     u16 species;
 
@@ -6324,8 +6321,6 @@ u16 SpeciesToNationalPokedexNum(u16 species)
     return sSpeciesToNationalPokedexNum[species - 1];
 }
 
-// these 2 functions are probably kanto and not hoenn
-// TODO: figure this out
 static u16 SpeciesToHoennPokedexNum(u16 species)
 {
     if (!species)
@@ -6528,10 +6523,6 @@ static u16 ModifyStatByNature(u8 nature, u16 n, u8 statIndex)
 #define TRAINER_CLASS_ELITE_FOUR     0x54
 #define TRAINER_CLASS_LEADER         0x57
 #define TRAINER_CLASS_CHAMPION       0x5A
-
-// TODO: Move these too
-#define FRIENDSHIP_EVENT_LEAGUE_BATTLE 0x3
-#define FRIENDSHIP_EVENT_WALKING       0x5
 
 void AdjustFriendship(struct Pokemon *mon, u8 event)
 {
@@ -7110,8 +7101,7 @@ void sub_8044348(void)
 
 void SetWildMonHeldItem(void)
 {
-    // TODO: Replace 0x00010000 with the right flag that isnt BATTLE_TYPE_DOME
-    if (!(gBattleTypeFlags & (0x00010000 | BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_TRAINER)))
+    if (!(gBattleTypeFlags & (BATTLE_TYPE_POKEDUDE | BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_TRAINER)))
     {
         u16 rnd = Random() % 100;
         u16 species = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, 0);

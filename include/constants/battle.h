@@ -60,7 +60,7 @@
 #define BATTLE_TYPE_LEGENDARY       0x2000
 #define BATTLE_TYPE_REGI            0x4000
 #define BATTLE_TYPE_GHOST           0x8000
-#define BATTLE_TYPE_DOME            0x10000
+#define BATTLE_TYPE_POKEDUDE        0x10000
 #define BATTLE_TYPE_PALACE          0x20000
 #define BATTLE_TYPE_ARENA           0x40000
 #define BATTLE_TYPE_FACTORY         0x80000

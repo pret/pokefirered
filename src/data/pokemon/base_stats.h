@@ -12029,4 +12029,3 @@ const struct BaseStats gBaseStats[] =
         .noFlip = FALSE,
     },
 };
-

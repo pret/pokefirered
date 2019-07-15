@@ -35,6 +35,8 @@
 #include "constants/abilities.h"
 #include "constants/flags.h"
 #include "constants/moves.h"
+#include "constants/trainer_classes.h"
+#include "constants/facility_trainer_classes.h"
 #include "constants/hold_effects.h"
 #include "constants/battle_move_effects.h"
 
@@ -80,6 +82,10 @@ static u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 static u8 GetLevelFromMonExp(struct Pokemon *mon);
 static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon);
 
+#include "data/pokemon/tmhm_learnsets.h"
+#include "data/pokemon/trainer_class_lookups.h"
+#include "data/pokemon/cry_ids.h"
+#include "data/pokemon/experience_tables.h"
 #include "data/pokemon/base_stats.h"
 #include "data/pokemon/level_up_learnsets.h"
 #include "data/pokemon/evolution.h"
@@ -314,10 +320,10 @@ static const u16 sDeoxysBaseStats[] =
 
 const u16 gLinkPlayerFacilityClasses[] = 
 {
-    0x74, 0x6F, 0x5C, 0x58, 0x6A,
-    0x59, 0x6D, 0x6C, 0x75, 0x7D,
-    0x5D, 0x5A, 0x89, 0x8A, 0x8C,
-    0x68, 0x0,
+    FACILITY_CLASS_COOLTRAINER_3, FACILITY_CLASS_BLACK_BELT_2, FACILITY_CLASS_CAMPER_2, FACILITY_CLASS_YOUNGSTER_2, FACILITY_CLASS_PSYCHIC_3,
+    FACILITY_CLASS_BUG_CATCHER_2, FACILITY_CLASS_TAMER, FACILITY_CLASS_JUGGLER, FACILITY_CLASS_COOLTRAINER_4, FACILITY_CLASS_CHANNELER,
+    FACILITY_CLASS_PICNICKER_2, FACILITY_CLASS_LASS_2, FACILITY_CLASS_PSYCHIC_4, FACILITY_CLASS_CRUSH_GIRL, FACILITY_CLASS_PKMN_BREEDER_3,
+    FACILITY_CLASS_BEAUTY_2, FACILITY_CLASS_AQUA_LEADER,
 };
 
 const static struct OamData sOakSpeechNidoranFDummyOamData = 
@@ -5051,7 +5057,7 @@ u16 SpeciesToCryId(u16 species)
     if (species <= SPECIES_OLD_UNOWN_Z - 1)
         return SPECIES_UNOWN - 1;
 
-    return gUnknown_82539D4[species - ((SPECIES_OLD_UNOWN_Z + 1) - 1)];
+    return sSpeciesIdToCryId[species - ((SPECIES_OLD_UNOWN_Z + 1) - 1)];
 }
 
 static void sub_8043338(u16 species, u32 personality, u8 *dest)

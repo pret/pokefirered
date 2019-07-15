@@ -24,7 +24,7 @@ extern u16 gUnknown_8252324[];
 extern u16 gUnknown_82539D4[];
 extern struct SpindaSpot gSpindaSpotGraphics[];
 extern s8 gNatureStatTable[][5];
-extern u32 gTMHMLearnsets[][2];
+extern const u32 gTMHMLearnsets[][2];
 
 extern const struct CompressedSpritePalette gMonPaletteTable[];
 extern const struct CompressedSpritePalette gMonShinyPaletteTable[];

@@ -368,15 +368,6 @@ gUnknown_8251FEE:: @ 8251FEE
 gUnknown_8252324:: @ 8252324
 	.incbin "baserom.gba", 0x252324, 0x338
 
-gSpindaSpotGraphics:: @ 825265C
-	.incbin "baserom.gba", 0x25265C, 0x260
-
-gItemEffectTable:: @ 82528BC
-	.incbin "baserom.gba", 0x2528BC, 0x28C
-
-gNatureStatTable:: @ 8252B48
-	.incbin "baserom.gba", 0x252B48, 0x80
-
 	.section .rodata.825EF0C
 
 	.align 2

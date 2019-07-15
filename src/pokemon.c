@@ -30,6 +30,7 @@
 #include "party_menu.h"
 #include "field_specials.h"
 #include "constants/items.h"
+#include "constants/item_effects.h"
 #include "constants/species.h"
 #include "constants/pokemon.h"
 #include "constants/abilities.h"
@@ -81,6 +82,48 @@ static void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon);
 static u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 static u8 GetLevelFromMonExp(struct Pokemon *mon);
 static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon);
+
+
+
+static const struct SpindaSpot sSpindaSpotGraphics[] =
+{
+    {16, 7, INCBIN_U16("graphics/spinda_spots/spot_0.bin")},
+    {40, 8, INCBIN_U16("graphics/spinda_spots/spot_1.bin")},
+    {22, 25, INCBIN_U16("graphics/spinda_spots/spot_2.bin")},
+    {34, 26, INCBIN_U16("graphics/spinda_spots/spot_3.bin")}
+};
+
+#include "data/pokemon/item_effects.h"
+
+const s8 gNatureStatTable[][5] =
+{
+    // Atk Def Spd Sp.Atk Sp.Def
+    {    0,  0,  0,     0,     0}, // Hardy
+    {   +1, -1,  0,     0,     0}, // Lonely
+    {   +1,  0, -1,     0,     0}, // Brave
+    {   +1,  0,  0,    -1,     0}, // Adamant
+    {   +1,  0,  0,     0,    -1}, // Naughty
+    {   -1, +1,  0,     0,     0}, // Bold
+    {    0,  0,  0,     0,     0}, // Docile
+    {    0, +1, -1,     0,     0}, // Relaxed
+    {    0, +1,  0,    -1,     0}, // Impish
+    {    0, +1,  0,     0,    -1}, // Lax
+    {   -1,  0, +1,     0,     0}, // Timid
+    {    0, -1, +1,     0,     0}, // Hasty
+    {    0,  0,  0,     0,     0}, // Serious
+    {    0,  0, +1,    -1,     0}, // Jolly
+    {    0,  0, +1,     0,    -1}, // Naive
+    {   -1,  0,  0,    +1,     0}, // Modest
+    {    0, -1,  0,    +1,     0}, // Mild
+    {    0,  0, -1,    +1,     0}, // Quiet
+    {    0,  0,  0,     0,     0}, // Bashful
+    {    0,  0,  0,    +1,    -1}, // Rash
+    {   -1,  0,  0,     0,    +1}, // Calm
+    {    0, -1,  0,     0,    +1}, // Gentle
+    {    0,  0, -1,     0,    +1}, // Sassy
+    {    0,  0,  0,    -1,    +1}, // Careful
+    {    0,  0,  0,     0,     0}, // Quirky
+};
 
 #include "data/pokemon/tmhm_learnsets.h"
 #include "data/pokemon/trainer_class_lookups.h"
@@ -5070,13 +5113,13 @@ static void sub_8043338(u16 species, u32 personality, u8 *dest)
         for (i = 0; i < 4; i++)
         {
             int j;
-            u8 x = gSpindaSpotGraphics[i].x + ((personality & 0x0F) - 8);
-            u8 y = gSpindaSpotGraphics[i].y + (((personality & 0xF0) >> 4) - 8);
+            u8 x = sSpindaSpotGraphics[i].x + ((personality & 0x0F) - 8);
+            u8 y = sSpindaSpotGraphics[i].y + (((personality & 0xF0) >> 4) - 8);
 
             for (j = 0; j < 16; j++)
             {
                 int k;
-                s32 row = gSpindaSpotGraphics[i].image[j];
+                s32 row = sSpindaSpotGraphics[i].image[j];
 
                 for (k = x; k < x + 16; k++)
                 {
@@ -5115,13 +5158,13 @@ void DrawSpindaSpots(u16 species, u32 personality, u8 *dest, u8 a4)
         for (i = 0; i < 4; i++)
         {
             int j;
-            u8 x = gSpindaSpotGraphics[i].x + ((personality & 0x0F) - 8);
-            u8 y = gSpindaSpotGraphics[i].y + (((personality & 0xF0) >> 4) - 8);
+            u8 x = sSpindaSpotGraphics[i].x + ((personality & 0x0F) - 8);
+            u8 y = sSpindaSpotGraphics[i].y + (((personality & 0xF0) >> 4) - 8);
 
             for (j = 0; j < 16; j++)
             {
                 int k;
-                s32 row = gSpindaSpotGraphics[i].image[j];
+                s32 row = sSpindaSpotGraphics[i].image[j];
 
                 for (k = x; k < x + 16; k++)
                 {

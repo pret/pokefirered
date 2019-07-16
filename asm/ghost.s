@@ -2349,7 +2349,7 @@ _080B64A4:
 	asrs r0, 16
 	bl __floatsidf
 	ldr r2, _080B658C @ =0x3fb00000
-	ldr r3, _080B6590 @ =0x00000000
+	ldr r3, _080B658C+4 @ =0x00000000
 	bl __muldf3
 	adds r5, r1, 0
 	adds r4, r0, 0
@@ -2375,7 +2375,7 @@ _080B64A4:
 	asrs r0, 16
 	bl __floatsidf
 	ldr r2, _080B658C @ =0x3fb00000
-	ldr r3, _080B6590 @ =0x00000000
+	ldr r3, _080B658C+4 @ =0x00000000
 	bl __muldf3
 	ldr r2, [sp, 0x18]
 	ldr r3, [sp, 0x1C]
@@ -2398,8 +2398,8 @@ _080B64A4:
 	lsls r0, r2, 16
 	asrs r0, 16
 	bl __floatsidf
-	ldr r2, _080B658C @ =0x3fb00000
-	ldr r3, _080B6590 @ =0x00000000
+	ldr r2, _080B658C   @ =0x3fb00000
+	ldr r3, _080B658C+4 @ =0x00000000
 	bl __muldf3
 	ldr r2, [sp, 0x18]
 	ldr r3, [sp, 0x1C]
@@ -2416,8 +2416,8 @@ _080B64A4:
 	lsls r0, r1, 16
 	asrs r0, 16
 	bl __floatsidf
-	ldr r2, _080B658C @ =0x3fb00000
-	ldr r3, _080B6590 @ =0x00000000
+	ldr r2, _080B658C   @ =0x3fb00000
+	ldr r3, _080B658C+4 @ =0x00000000
 	bl __muldf3
 	ldr r2, [sp, 0x18]
 	ldr r3, [sp, 0x1C]
@@ -2433,8 +2433,7 @@ _080B64A4:
 	b _080B65C2
 	.align 2, 0
 _080B6588: .4byte gTasks
-_080B658C: .4byte 0x3fb00000
-_080B6590: .4byte 0x00000000
+_080B658C: .double 0.0625
 _080B6594:
 	movs r2, 0
 	mov r9, r2

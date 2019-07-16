@@ -185,4 +185,11 @@ extern const u8 gUnknown_841B684[];
 extern const u8 gUnknown_841B68F[];
 extern const u8 gUnknown_841B698[];
 
+// battle_records
+extern const u8 gString_BattleRecords_PlayersBattleResults[];
+extern const u8 gString_BattleRecords_TotalRecord[];
+extern const u8 gString_BattleRecords_ColumnHeaders[];
+extern const u8 gString_BattleRecords_7Dashes[];
+extern const u8 gString_BattleRecords_4Dashes[];
+
 #endif //GUARD_STRINGS_H

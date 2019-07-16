@@ -205,7 +205,7 @@ gSpecials:: @ 815FD60
 	def_special ScriptHatchMon
 	def_special EggHatch
 	def_special sub_8046EAC
-	def_special sub_80CD228
+	def_special Special_BattleRecords
 	def_special IsEnoughForCostInVar0x8005
 	def_special SubtractMoneyFromVar0x8005
 	def_special ExecuteWhiteOut

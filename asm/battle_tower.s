@@ -2407,7 +2407,7 @@ _080E6C00:
 	adds r0, r2
 	ldrh r1, [r0]
 	movs r0, 0x20
-	bl sub_8054F00
+	bl SetGameStat
 	b _080E6C80
 	.align 2, 0
 _080E6C10: .4byte 0x0000057a
@@ -2599,7 +2599,7 @@ _080E6D9C:
 	adds r0, r1
 	ldrh r1, [r0]
 	movs r0, 0x20
-	bl sub_8054F00
+	bl SetGameStat
 	b _080E6E08
 	.align 2, 0
 _080E6DAC: .4byte 0x0000057a
@@ -2717,7 +2717,7 @@ _080E6E76:
 	adds r5, r0, 0
 	movs r0, 0x20
 	adds r1, r5, 0
-	bl sub_8054F00
+	bl SetGameStat
 	ldr r1, _080E6EA4 @ =0x0000270f
 	cmp r5, r1
 	bhi _080E6EB8
@@ -2731,7 +2731,7 @@ _080E6EA8:
 	ldrh r5, [r1]
 	movs r0, 0x20
 	adds r1, r5, 0
-	bl sub_8054F00
+	bl SetGameStat
 	ldr r1, _080E6EC4 @ =0x0000270f
 	cmp r5, r1
 	bls _080E6ECC

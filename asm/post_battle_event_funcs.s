@@ -44,7 +44,7 @@ _080CA318:
 	ldrb r0, [r2, 0x11]
 	orrs r1, r0
 	movs r0, 0x1
-	bl sub_8054F00
+	bl SetGameStat
 _080CA33A:
 	bl sub_804C1AC
 	movs r0, 0x1

@@ -670,7 +670,7 @@ gUnknown_8416741:: @ 0x8416741
 	.string "SEE YA!$"
 
 gUnknown_8416749:: @ 8416749
-	.string "IN BAG:{SIZE 0x00} {STR_VAR_1}$"
+	.string "IN BAG:{SMALL} {STR_VAR_1}$"
 
 gUnknown_8416757:: @ 8416757
 	.string "Quit shopping.$"
@@ -1293,19 +1293,19 @@ gUnknown_841797F:: @ 0x841797F
 	.string "INFO$"
 
 gUnknown_8417984:: @ 0x8417984
-	.string "FRESH WATER{CLEAR_TO 0x57}{SIZE 0x00}¥200$"
+	.string "FRESH WATER{CLEAR_TO 0x57}{SMALL}¥200$"
 
 gUnknown_841799A:: @ 0x841799A
-	.string "SODA POP{CLEAR_TO 0x57}{SIZE 0x00}¥300$"
+	.string "SODA POP{CLEAR_TO 0x57}{SMALL}¥300$"
 
 gUnknown_84179AD:: @ 0x84179AD
-	.string "LEMONADE{CLEAR_TO 0x57}{SIZE 0x00}¥350$"
+	.string "LEMONADE{CLEAR_TO 0x57}{SMALL}¥350$"
 
 gUnknown_84179C0:: @ 0x84179C0
-	.string "{SIZE 0x00} 50 COINS{CLEAR_TO 0x45}¥1,000$"
+	.string "{SMALL} 50 COINS{CLEAR_TO 0x45}¥1,000$"
 
 gUnknown_84179D6:: @ 0x84179D6
-	.string "{SIZE 0x00}500 COINS{CLEAR_TO 0x40}¥10,000$"
+	.string "{SMALL}500 COINS{CLEAR_TO 0x40}¥10,000$"
 
 gUnknown_84179ED:: @ 0x84179ED
 	.string "Excellent$"
@@ -1335,19 +1335,19 @@ gUnknown_8417A3D:: @ 0x8417A3D
 	.string "Left$"
 
 gUnknown_8417A42:: @ 0x8417A42
-	.string "TM13{CLEAR_TO 0x48}{SIZE 0x00}4,000 COINS$"
+	.string "TM13{CLEAR_TO 0x48}{SMALL}4,000 COINS$"
 
 gUnknown_8417A58:: @ 0x8417A58
-	.string "TM23{CLEAR_TO 0x48}{SIZE 0x00}3,500 COINS$"
+	.string "TM23{CLEAR_TO 0x48}{SMALL}3,500 COINS$"
 
 gUnknown_8417A6E:: @ 0x8417A6E
-	.string "TM24{CLEAR_TO 0x48}{SIZE 0x00}4,000 COINS$"
+	.string "TM24{CLEAR_TO 0x48}{SMALL}4,000 COINS$"
 
 gUnknown_8417A84:: @ 0x8417A84
-	.string "TM30{CLEAR_TO 0x48}{SIZE 0x00}4,500 COINS$"
+	.string "TM30{CLEAR_TO 0x48}{SMALL}4,500 COINS$"
 
 gUnknown_8417A9A:: @ 0x8417A9A
-	.string "TM35{CLEAR_TO 0x48}{SIZE 0x00}4,000 COINS$"
+	.string "TM35{CLEAR_TO 0x48}{SMALL}4,000 COINS$"
 
 gUnknown_8417AB0:: @ 0x8417AB0
 	.string "1F$"
@@ -1491,40 +1491,40 @@ gUnknown_8417C2D:: @ 8417C2D
 	.string "COINS$"
 
 gUnknown_8417C33:: @ 0x8417C33
-	.string "BICYCLE{CLEAR_TO 0x49}{SIZE 0x00}¥1,000,000$"
+	.string "BICYCLE{CLEAR_TO 0x49}{SMALL}¥1,000,000$"
 
 gUnknown_8417C4B:: @ 0x8417C4B
 	.string "NO THANKS$"
 
 gUnknown_8417C55:: @ 0x8417C55
-	.string "ABRA{CLEAR_TO 0x55}{SIZE 0x00} 180 COINS$"
+	.string "ABRA{CLEAR_TO 0x55}{SMALL} 180 COINS$"
 
 gUnknown_8417C6A:: @ 0x8417C6A
-	.string "CLEFAIRY{CLEAR_TO 0x55}{SIZE 0x00} 500 COINS$"
+	.string "CLEFAIRY{CLEAR_TO 0x55}{SMALL} 500 COINS$"
 
 gUnknown_8417C83:: @ 0x8417C83
-	.string "DRATINI{CLEAR_TO 0x4B}{SIZE 0x00} 2,800 COINS$"
+	.string "DRATINI{CLEAR_TO 0x4B}{SMALL} 2,800 COINS$"
 
 gUnknown_8417C9D:: @ 0x8417C9D
-	.string "SCYTHER{CLEAR_TO 0x4B}{SIZE 0x00} 5,500 COINS$"
+	.string "SCYTHER{CLEAR_TO 0x4B}{SMALL} 5,500 COINS$"
 
 gUnknown_8417CB7:: @ 0x8417CB7
-	.string "PORYGON{CLEAR_TO 0x4B}{SIZE 0x00} 9,999 COINS$"
+	.string "PORYGON{CLEAR_TO 0x4B}{SMALL} 9,999 COINS$"
 
 gUnknown_8417CD1:: @ 0x8417CD1
-	.string "ABRA{CLEAR_TO 0x55}{SIZE 0x00} 120 COINS$"
+	.string "ABRA{CLEAR_TO 0x55}{SMALL} 120 COINS$"
 
 gUnknown_8417CE6:: @ 0x8417CE6
-	.string "CLEFAIRY{CLEAR_TO 0x55}{SIZE 0x00} 750 COINS$"
+	.string "CLEFAIRY{CLEAR_TO 0x55}{SMALL} 750 COINS$"
 
 gUnknown_8417CFF:: @ 0x8417CFF
-	.string "PINSIR{CLEAR_TO 0x4B}{SIZE 0x00} 2,500 COINS$"
+	.string "PINSIR{CLEAR_TO 0x4B}{SMALL} 2,500 COINS$"
 
 gUnknown_8417D18:: @ 0x8417D18
-	.string "DRATINI{CLEAR_TO 0x4B}{SIZE 0x00} 4,600 COINS$"
+	.string "DRATINI{CLEAR_TO 0x4B}{SMALL} 4,600 COINS$"
 
 gUnknown_8417D32:: @ 0x8417D32
-	.string "PORYGON{CLEAR_TO 0x4B}{SIZE 0x00} 6,500 COINS$"
+	.string "PORYGON{CLEAR_TO 0x4B}{SMALL} 6,500 COINS$"
 
 gUnknown_8417D4C:: @ 0x8417D4C
 	.string "NO THANKS$"
@@ -1632,19 +1632,19 @@ gUnknown_8417ECC:: @ 0x8417ECC
 	.string "BIRTH ISLAND$"
 
 gUnknown_8417ED9:: @ 0x8417ED9
-	.string "MIRACLE SEED{CLEAR_TO 0x50}{SIZE 0x00}1,000 COINS$"
+	.string "MIRACLE SEED{CLEAR_TO 0x50}{SMALL}1,000 COINS$"
 
 gUnknown_8417EF7:: @ 0x8417EF7
-	.string "CHARCOAL{CLEAR_TO 0x50}{SIZE 0x00}1,000 COINS$"
+	.string "CHARCOAL{CLEAR_TO 0x50}{SMALL}1,000 COINS$"
 
 gUnknown_8417F11:: @ 0x8417F11
-	.string "MYSTIC WATER{CLEAR_TO 0x50}{SIZE 0x00}1,000 COINS$"
+	.string "MYSTIC WATER{CLEAR_TO 0x50}{SMALL}1,000 COINS$"
 
 gUnknown_8417F2F:: @ 0x8417F2F
-	.string "YELLOW FLUTE{CLEAR_TO 0x50}{SIZE 0x00}1,600 COINS$"
+	.string "YELLOW FLUTE{CLEAR_TO 0x50}{SMALL}1,600 COINS$"
 
 gUnknown_8417F4D:: @ 0x8417F4D
-	.string "SMOKE BALL{CLEAR_TO 0x5A}{SIZE 0x00}800 COINS$"
+	.string "SMOKE BALL{CLEAR_TO 0x5A}{SMALL}800 COINS$"
 
 gUnknown_8417F67:: @ 0x8417F67
 	.string "$"
@@ -1782,51 +1782,51 @@ gUnknown_841809C:: @ 0x841809C
 	.string "UNION ROOM$"
 
 gUnknown_84180A7:: @ 0x84180A7
-	.string "ENERGYPOWDER{CLEAR_TO 0x74}{SIZE 0x00}50$"
+	.string "ENERGYPOWDER{CLEAR_TO 0x74}{SMALL}50$"
 
 gUnknown_84180BC:: @ 0x84180BC
-	.string "ENERGY ROOT{CLEAR_TO 0x74}{SIZE 0x00}80$"
+	.string "ENERGY ROOT{CLEAR_TO 0x74}{SMALL}80$"
 
 gUnknown_84180D0:: @ 0x84180D0
-	.string "HEAL POWDER{CLEAR_TO 0x74}{SIZE 0x00}50$"
+	.string "HEAL POWDER{CLEAR_TO 0x74}{SMALL}50$"
 
 gUnknown_84180E4:: @ 0x84180E4
-	.string "REVIVAL HERB{CLEAR_TO 0x6F}{SIZE 0x00}300$"
+	.string "REVIVAL HERB{CLEAR_TO 0x6F}{SMALL}300$"
 
 gUnknown_84180FA:: @ 0x84180FA
-	.string "PROTEIN{CLEAR_TO 0x65}{SIZE 0x00}1,000$"
+	.string "PROTEIN{CLEAR_TO 0x65}{SMALL}1,000$"
 
 gUnknown_841810D:: @ 0x841810D
-	.string "IRON{CLEAR_TO 0x65}{SIZE 0x00}1,000$"
+	.string "IRON{CLEAR_TO 0x65}{SMALL}1,000$"
 
 gUnknown_841811D:: @ 0x841811D
-	.string "CARBOS{CLEAR_TO 0x65}{SIZE 0x00}1,000$"
+	.string "CARBOS{CLEAR_TO 0x65}{SMALL}1,000$"
 
 gUnknown_841812F:: @ 0x841812F
-	.string "CALCIUM{CLEAR_TO 0x65}{SIZE 0x00}1,000$"
+	.string "CALCIUM{CLEAR_TO 0x65}{SMALL}1,000$"
 
 gUnknown_8418142:: @ 0x8418142
-	.string "ZINC{CLEAR_TO 0x65}{SIZE 0x00}1,000$"
+	.string "ZINC{CLEAR_TO 0x65}{SMALL}1,000$"
 
 gUnknown_8418152:: @ 0x8418152
-	.string "HP UP{CLEAR_TO 0x65}{SIZE 0x00}1,000$"
+	.string "HP UP{CLEAR_TO 0x65}{SMALL}1,000$"
 
 gUnknown_8418163:: @ 0x8418163
-	.string "PP UP{CLEAR_TO 0x65}{SIZE 0x00}3,000$"
+	.string "PP UP{CLEAR_TO 0x65}{SMALL}3,000$"
 
-gUnknown_8418174:: @ 8418174
+gString_BattleRecords_PlayersBattleResults:: @ 8418174
 	.string "{PLAYER}'s BATTLE RESULTS$"
 
-gUnknown_8418188:: @ 8418188
+gString_BattleRecords_TotalRecord:: @ 8418188
 	.string "TOTAL RECORD W:{STR_VAR_1} L:{STR_VAR_2} D:{STR_VAR_3}$"
 
-gUnknown_84181A4:: @ 84181A4
+gString_BattleRecords_ColumnHeaders:: @ 84181A4
 	.string "WIN{CLEAR_TO 0x30}LOSE{CLEAR_TO 0x60}DRAW$"
 
-gUnknown_84181B6:: @ 84181B6
+gString_BattleRecords_7Dashes:: @ 84181B6
 	.string "-------$"
 
-gUnknown_84181BE:: @ 84181BE
+gString_BattleRecords_4Dashes:: @ 84181BE
 	.string "----$"
 
 gFameCheckerText_FameCheckerWillBeClosed:: @ 84181C3
@@ -2870,7 +2870,7 @@ gUnknown_841B2A7:: @ 841B2A7
 	.string ".$"
 
 gUnknown_841B2A9:: @ 0x841B2A9
-	.string "{SIZE 0x00}MAX.{SIZE 0x02} HP$"
+	.string "{SMALL}MAX.{SIZE 0x02} HP$"
 
 gUnknown_841B2B7:: @ 0x841B2B7
 	.string "ATTACK$"
@@ -2888,10 +2888,10 @@ gUnknown_841B2D4:: @ 0x841B2D4
 	.string "SP. DEF$"
 
 gUnknown_841B2DC:: @ 841B2DC
-	.string "{SIZE 0x00}{EXTRA_PLUS}{SIZE 0x02}$"
+	.string "{SMALL}{EXTRA_PLUS}{SIZE 0x02}$"
 
 gUnknown_841B2E5:: @ 841B2E5
-	.string "{SIZE 0x00}-{SIZE 0x02}$"
+	.string "{SMALL}-{SIZE 0x02}$"
 
 gUnknown_841B2ED:: @ 841B2ED
 	.string "1, $"

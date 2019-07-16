@@ -223,7 +223,7 @@ SevenIsland_TrainerTower_Lobby_EventScript_164AD8:: @ 8164AD8
 	lockall
 	fadescreen 1
 	setvar VAR_0x8004, 1
-	special sub_80CD228
+	special Special_BattleRecords
 	waitstate
 	releaseall
 	end

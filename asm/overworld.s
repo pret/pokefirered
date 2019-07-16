@@ -334,7 +334,7 @@ _08054EB0:
 	ldr r1, _08054EC0 @ =0x00ffffff
 _08054EB2:
 	adds r0, r4, 0
-	bl sub_8054F00
+	bl SetGameStat
 _08054EB8:
 	pop {r4}
 	pop {r0}
@@ -376,8 +376,8 @@ _08054EFA:
 	bx r1
 	thumb_func_end GetGameStat
 
-	thumb_func_start sub_8054F00
-sub_8054F00: @ 8054F00
+	thumb_func_start SetGameStat
+SetGameStat: @ 8054F00
 	push {lr}
 	adds r3, r1, 0
 	lsls r0, 24
@@ -405,7 +405,7 @@ _08054F2A:
 	.align 2, 0
 _08054F30: .4byte gSaveBlock1Ptr
 _08054F34: .4byte gSaveBlock2Ptr
-	thumb_func_end sub_8054F00
+	thumb_func_end SetGameStat
 
 	thumb_func_start sub_8054F38
 sub_8054F38: @ 8054F38

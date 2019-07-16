@@ -566,10 +566,10 @@ void sub_815D8C8(void)
     }
 }
 
-void sub_815D8F8(void) // fakematching
+void sub_815D8F8(void)
 {
     u8 i;
-    register u32 found_map asm("r4") = 0xFF;
+    u8 found_map = 0xFF;
     for (i = 0; i < 15; i++)
     {
         if (gUnknown_8479D34[i].mapGroup == gSaveBlock1Ptr->location.mapGroup && gUnknown_8479D34[i].mapNum == gSaveBlock1Ptr->location.mapNum)
@@ -1425,7 +1425,7 @@ void sub_815EC0C(void)
     }
 }
 
-void sub_815EC8C(void)
+void PrintTrainerTowerRecords(void)
 {
     s32 i;
     u8 windowId = 0;

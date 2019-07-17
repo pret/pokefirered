@@ -2475,13 +2475,13 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 
         if ((sideStatus & SIDE_STATUS_REFLECT) && gCritMultiplier == 1)
         {
-            if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && CountAliveMons(2) == 2)
+            if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) == 2)
                 damage = 2 * (damage / 3);
             else
                 damage /= 2;
         }
 
-        if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMoves[move].target == 8 && CountAliveMons(2) == 2)
+        if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMoves[move].target == 8 && CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) == 2)
             damage /= 2;
 
         // moves always do at least 1 damage.
@@ -2522,13 +2522,13 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 
         if ((sideStatus & SIDE_STATUS_LIGHTSCREEN) && gCritMultiplier == 1)
         {
-            if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && CountAliveMons(2) == 2)
+            if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) == 2)
                 damage = 2 * (damage / 3);
             else
                 damage /= 2;
         }
 
-        if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMoves[move].target == 8 && CountAliveMons(2) == 2)
+        if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMoves[move].target == 8 && CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) == 2)
             damage /= 2;
 
         // are effects of weather negated with cloud nine or air lock
@@ -2574,28 +2574,28 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     return damage + 2;
 }
 
-u8 CountAliveMons(u8 a1)
+u8 CountAliveMonsInBattle(u8 caseId)
 {
     s32 i;
     u8 retVal = 0;
 
-    switch (a1)
+    switch (caseId)
     {
-    case 0:
+    case BATTLE_ALIVE_EXCEPT_ACTIVE:
         for (i = 0; i < 4; i++)
         {
             if (i != gActiveBattler && !(gAbsentBattlerFlags & gBitTable[i]))
                 retVal++;
         }
         break;
-    case 1:
+    case BATTLE_ALIVE_ATK_SIDE:
         for (i = 0; i < 4; i++)
         {
             if (GetBattlerSide(i) == GetBattlerSide(sBattler_AI) && !(gAbsentBattlerFlags & gBitTable[i]))
                 retVal++;
         }
         break;
-    case 2:
+    case BATTLE_ALIVE_DEF_SIDE:
         for (i = 0; i < 4; i++)
         {
             if (GetBattlerSide(i) == GetBattlerSide(gBattlerTarget) && !(gAbsentBattlerFlags & gBitTable[i]))
@@ -2607,29 +2607,28 @@ u8 CountAliveMons(u8 a1)
     return retVal;
 }
 
-u8 GetDefaultMoveTarget(u8 a1)
+u8 GetDefaultMoveTarget(u8 battlerId)
 {
-    u8 status = GetBattlerPosition(a1) & 1;
+    u8 opposing = BATTLE_OPPOSITE(GetBattlerPosition(battlerId) & BIT_SIDE);
 
-    status ^= 1;
     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
-        return GetBattlerAtPosition(status);
-    if (CountAliveMons(0) > 1)
+        return GetBattlerAtPosition(opposing);
+    if (CountAliveMonsInBattle(BATTLE_ALIVE_EXCEPT_ACTIVE) > 1)
     {
-        u8 val;
+        u8 position;
 
         if ((Random() & 1) == 0)
-            val = status ^ 2;
+            position = BATTLE_PARTNER(opposing);
         else
-            val = status;
-        return GetBattlerAtPosition(val);
+            position = opposing;
+        return GetBattlerAtPosition(position);
     }
     else
     {
-        if ((gAbsentBattlerFlags & gBitTable[status]))
-            return GetBattlerAtPosition(status ^ 2);
+        if ((gAbsentBattlerFlags & gBitTable[opposing]))
+            return GetBattlerAtPosition(BATTLE_PARTNER(opposing));
         else
-            return GetBattlerAtPosition(status);
+            return GetBattlerAtPosition(opposing);
     }
 }
 

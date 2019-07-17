@@ -19745,7 +19745,7 @@ _0802753C:
 	cmp r0, 0
 	beq _080275AC
 	movs r0, 0x1
-	bl CountAliveMons
+	bl CountAliveMonsInBattle
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x2
@@ -22207,7 +22207,7 @@ _0802887C:
 	cmp r0, 0
 	beq _080288EC
 	movs r0, 0x1
-	bl CountAliveMons
+	bl CountAliveMonsInBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2

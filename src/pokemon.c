@@ -32,6 +32,7 @@
 #include "constants/items.h"
 #include "constants/item_effects.h"
 #include "constants/species.h"
+#include "constants/hoenn_cries.h"
 #include "constants/pokemon.h"
 #include "constants/abilities.h"
 #include "constants/flags.h"

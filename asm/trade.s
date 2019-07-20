@@ -8135,7 +8135,7 @@ sub_80507A0: @ 80507A0
 	adds r0, r4, 0
 	movs r1, 0x3
 	adds r2, r5, 0
-	bl sub_8044898
+	bl HandleSetPokedexFlag
 _080507F4:
 	pop {r4,r5}
 	pop {r0}

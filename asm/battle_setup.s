@@ -2051,7 +2051,7 @@ sub_8080628: @ 8080628
 	beq _080806BE
 	ldr r0, _08080668 @ =gTrainerBattleOpponent_A
 	ldrh r0, [r0]
-	bl sub_804367C
+	bl GetTrainerEncounterMusicId
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xD

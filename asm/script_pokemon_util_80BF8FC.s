@@ -269,7 +269,7 @@ sub_80BFAA8: @ 80BFAA8
 	mov r6, sp
 	adds r6, 0x6
 	strb r0, [r6]
-	ldr r1, _080BFBA4 @ =gUnknown_825DEA1
+	ldr r1, _080BFBA4 @ =gPPUpGetMask
 	adds r0, r5, r1
 	ldrb r0, [r0]
 	mov r9, r0
@@ -330,7 +330,7 @@ sub_80BFAA8: @ 80BFAA8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080BFBA4: .4byte gUnknown_825DEA1
+_080BFBA4: .4byte gPPUpGetMask
 	thumb_func_end sub_80BFAA8
 
 	thumb_func_start sub_80BFBA8

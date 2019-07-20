@@ -1132,7 +1132,7 @@ _0801067E:
 	adds r1, r0
 	ldrh r0, [r1]
 	strh r0, [r2, 0x10]
-	bl sub_8044708
+	bl SetDeoxysStats
 	ldr r1, _080106F0 @ =gUnknown_2023E82
 	b _080108B2
 	.align 2, 0
@@ -1834,7 +1834,7 @@ _08010CE2:
 	adds r1, r7, 0
 	bl sub_8010414
 	bl sub_801017C
-	bl sub_8044708
+	bl SetDeoxysStats
 	ldr r0, _08010D4C @ =gDecompressionBuffer
 	ldr r1, _08010D50 @ =gPlayerParty
 	movs r2, 0x96
@@ -6570,7 +6570,7 @@ _080131F6:
 	add r1, r10
 	ldr r2, [r1]
 	movs r1, 0x2
-	bl sub_8044898
+	bl HandleSetPokedexFlag
 	b _080132C2
 	.align 2, 0
 _08013230: .4byte gBaseStats
@@ -6609,7 +6609,7 @@ _0801324C:
 	add r1, r10
 	ldr r2, [r1]
 	movs r1, 0x2
-	bl sub_8044898
+	bl HandleSetPokedexFlag
 	b _080132B4
 _0801328E:
 	ldr r0, _08013324 @ =0x0001aa02
@@ -6628,7 +6628,7 @@ _0801328E:
 	add r1, r10
 	ldr r2, [r1]
 	movs r1, 0x2
-	bl sub_8044898
+	bl HandleSetPokedexFlag
 _080132B4:
 	movs r0, 0
 	bl EmitLoadMonSprite
@@ -7097,7 +7097,7 @@ _0801364C:
 	adds r1, r7
 	ldr r2, [r1]
 	movs r1, 0x2
-	bl sub_8044898
+	bl HandleSetPokedexFlag
 _08013684:
 	ldrb r0, [r4]
 	adds r0, 0x1

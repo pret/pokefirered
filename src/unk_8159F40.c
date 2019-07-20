@@ -28,7 +28,7 @@ void sub_8159F40(void)
     s32 opIdx = 0;
     const struct UnkStruct_84792D0 * data;
 
-    gBattleTypeFlags = BATTLE_TYPE_DOME;
+    gBattleTypeFlags = BATTLE_TYPE_POKEDUDE;
     ZeroPlayerPartyMons();
     ZeroEnemyPartyMons();
     data = gUnknown_84792D0[gSpecialVar_0x8004];

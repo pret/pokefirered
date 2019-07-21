@@ -35,7 +35,7 @@ static void DiplomaBgInit(void);
 static void DiplomaPrintText(void);
 static u8 DiplomaLoadGfx(void);
 static void DiplomaVblankHandler(void);
-static void CB2_DiplomaInit(void);
+static void CB2_Diploma(void);
 static void Task_WaitForExit(u8);
 static void Task_DiplomaInit(u8);
 static void Task_DiplomaReturnToOverworld(u8);
@@ -101,10 +101,10 @@ void CB2_ShowDiploma(void)
     gDiploma->callbackStep = 0;
     DiplomaBgInit();
     CreateTask(Task_DiplomaInit, 0);
-    SetMainCallback2(CB2_DiplomaInit);
+    SetMainCallback2(CB2_Diploma);
 }
 
-static void CB2_DiplomaInit(void)
+static void CB2_Diploma(void)
 {
     RunTasks();
     AnimateSprites();
@@ -134,7 +134,7 @@ static void Task_DiplomaInit(u8 taskId)
     case 4:
         if (HasAllKantoMons())
         {
-            SetGpuReg(REG_OFFSET_BG1HOFS, 0x80 << 1);
+            SetGpuReg(REG_OFFSET_BG1HOFS, 0x100);
         }
         else
         {

@@ -1621,7 +1621,7 @@ const u16 gLinkPlayerFacilityClasses[] =
     FACILITY_CLASS_BEAUTY_2, FACILITY_CLASS_AQUA_LEADER,
 };
 
-const static struct OamData sOakSpeechNidoranFDummyOamData = 
+static const struct OamData sOakSpeechNidoranFDummyOamData = 
 {
     .y = 0,
     .affineMode = 0,
@@ -1637,7 +1637,7 @@ const static struct OamData sOakSpeechNidoranFDummyOamData =
     .paletteNum = 0,
 };
 
-const struct SpriteTemplate sOakSpeechNidoranFDummyTemplate = 
+static const struct SpriteTemplate sOakSpeechNidoranFDummyTemplate = 
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = SPRITE_INVALID_TAG,

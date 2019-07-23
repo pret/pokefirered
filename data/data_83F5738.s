@@ -133,40 +133,40 @@ gUnknown_83F846D:: @ 83F846D
 gUnknown_83F847D:: @ 83F847D
 	.incbin "baserom.gba", 0x3F847D, 0x323
 
-gUnknown_83F87A0:: @ 83F87A0
+sBigPokeballTileset:: @ 83F87A0
 	.incbin "baserom.gba", 0x3F87A0, 0x580
 
-gUnknown_83F8D20:: @ 83F8D20
+sSlidingPokeballTilemap:: @ 83F8D20
 	.incbin "baserom.gba", 0x3F8D20, 0x240
 
-gUnknown_83F8F60:: @ 83F8F60
+sVsBarTileset:: @ 83F8F60
 	.incbin "baserom.gba", 0x3F8F60, 0x11E0
 
-gUnknown_83FA140:: @ 83FA140
+sGridSquareTilemap:: @ 83FA140
 	.incbin "baserom.gba", 0x3FA140, 0x1E0
 
-gUnknown_83FA320:: @ 83FA320
+sBT_Phase1Tasks:: @ 83FA320
 	.incbin "baserom.gba", 0x3FA320, 0x48
 
-gUnknown_83FA368:: @ 83FA368
+sBT_Phase2Tasks:: @ 83FA368
 	.incbin "baserom.gba", 0x3FA368, 0x48
 
-gUnknown_83FA3B0:: @ 83FA3B0
+sBT_MainPhases:: @ 83FA3B0
 	.incbin "baserom.gba", 0x3FA3B0, 0x10
 
-gUnknown_83FA3C0:: @ 83FA3C0
+sBT_Phase2BlurFuncs:: @ 83FA3C0
 	.incbin "baserom.gba", 0x3FA3C0, 0xC
 
-gUnknown_83FA3CC:: @ 83FA3CC
+sBT_Phase2DistortedWaveFuncs:: @ 83FA3CC
 	.incbin "baserom.gba", 0x3FA3CC, 0x8
 
-gUnknown_83FA3D4:: @ 83FA3D4
+sBT_Phase2HorizontalCorrugateFuncs:: @ 83FA3D4
 	.incbin "baserom.gba", 0x3FA3D4, 0x8
 
-gUnknown_83FA3DC:: @ 83FA3DC
+sBT_Phase2BigPokeballFuncs:: @ 83FA3DC
 	.incbin "baserom.gba", 0x3FA3DC, 0x18
 
-gUnknown_83FA3F4:: @ 83FA3F4
+sBT_Phase2SlidingPokeballsFuncs:: @ 83FA3F4
 	.incbin "baserom.gba", 0x3FA3F4, 0xC
 
 gUnknown_83FA400:: @ 83FA400
@@ -178,82 +178,82 @@ gUnknown_83FA404:: @ 83FA404
 gUnknown_83FA40E:: @ 83FA40E
 	.incbin "baserom.gba", 0x3FA40E, 0x6
 
-gUnknown_83FA414:: @ 83FA414
+sBT_Phase2ClockwiseBlackFadeFuncs:: @ 83FA414
 	.incbin "baserom.gba", 0x3FA414, 0x1C
 
-gUnknown_83FA430:: @ 83FA430
+sBT_Phase2FullScreenWaveFuncs:: @ 83FA430
 	.incbin "baserom.gba", 0x3FA430, 0x8
 
-gUnknown_83FA438:: @ 83FA438
+sBT_Phase2BlackWaveToRightFuncs:: @ 83FA438
 	.incbin "baserom.gba", 0x3FA438, 0xC
 
 gUnknown_83FA444:: @ 83FA444
 	.incbin "baserom.gba", 0x3FA444, 0x20
 
-gUnknown_83FA464:: @ 83FA464
+sBT_Phase2AntiClockwiseSpiralFuncs:: @ 83FA464
 	.incbin "baserom.gba", 0x3FA464, 0x8
 
-gUnknown_83FA46C:: @ 83FA46C
+sBT_Phase2MugshotFuncs:: @ 83FA46C
 	.incbin "baserom.gba", 0x3FA46C, 0x28
 
-gUnknown_83FA494:: @ 83FA494
+sMugshotsTrainerPicIDsTable:: @ 83FA494
 	.incbin "baserom.gba", 0x3FA494, 0x6
 
-gUnknown_83FA49A:: @ 83FA49A
+sMugshotsOpponentRotationScales:: @ 83FA49A
 	.incbin "baserom.gba", 0x3FA49A, 0x14
 
-gUnknown_83FA4AE:: @ 83FA4AE
+sMugshotsOpponentCoords:: @ 83FA4AE
 	.incbin "baserom.gba", 0x3FA4AE, 0x16
 
-gUnknown_83FA4C4:: @ 83FA4C4
+sBT_Phase2MugshotSpriteFuncs:: @ 83FA4C4
 	.incbin "baserom.gba", 0x3FA4C4, 0x1C
 
-gUnknown_83FA4E0:: @ 83FA4E0
+sMugShotSlideVelocity:: @ 83FA4E0
 	.incbin "baserom.gba", 0x3FA4E0, 0x4
 
-gUnknown_83FA4E4:: @ 83FA4E4
+sMugShotSlideDeceleration:: @ 83FA4E4
 	.incbin "baserom.gba", 0x3FA4E4, 0x4
 
-gUnknown_83FA4E8:: @ 83FA4E8
+sBT_Phase2SlicedScreenFuncs:: @ 83FA4E8
 	.incbin "baserom.gba", 0x3FA4E8, 0xC
 
-gUnknown_83FA4F4:: @ 83FA4F4
+sBT_Phase2WhiteFadeInStripesFuncs:: @ 83FA4F4
 	.incbin "baserom.gba", 0x3FA4F4, 0x14
 
-gUnknown_83FA508:: @ 83FA508
+sWhiteStripeDelay:: @ 83FA508
 	.incbin "baserom.gba", 0x3FA508, 0xC
 
-gUnknown_83FA514:: @ 83FA514
+sBT_Phase2GridSquaresFuncs:: @ 83FA514
 	.incbin "baserom.gba", 0x3FA514, 0xC
 
-gUnknown_83FA520:: @ 83FA520
+sBT_Phase2BlackDoodlesFuncs:: @ 83FA520
 	.incbin "baserom.gba", 0x3FA520, 0x14
 
-gUnknown_83FA534:: @ 83FA534
+sBlackDoodlesSegments:: @ 83FA534
 	.incbin "baserom.gba", 0x3FA534, 0x46
 
-gUnknown_83FA57A:: @ 83FA57A
+sBlackDoodlesDelay:: @ 83FA57A
 	.incbin "baserom.gba", 0x3FA57A, 0xE
 
-gUnknown_83FA588:: @ 83FA588
+sBT_Phase1FadeFuncs:: @ 83FA588
 	.incbin "baserom.gba", 0x3FA588, 0x44
 
-gUnknown_83FA5CC:: @ 83FA5CC
+sSpriteTemplate_SlidingPokeball:: @ 83FA5CC
 	.incbin "baserom.gba", 0x3FA5CC, 0x6C
 
-gUnknown_83FA638:: @ 83FA638
+sSlidingPokeballBigPokeballPalette:: @ 83FA638
 	.incbin "baserom.gba", 0x3FA638, 0x108
 
-gUnknown_83FA740:: @ 83FA740
+sVsBarOpponentPalettes:: @ 83FA740
 	.incbin "baserom.gba", 0x3FA740, 0x14
 
-gUnknown_83FA754:: @ 83FA754
+sVsBarPlayerPalettes:: @ 83FA754
 	.incbin "baserom.gba", 0x3FA754, 0x30
 
-gUnknown_83FA784:: @ 83FA784
+sBigPokeballTilemap:: @ 83FA784
 	.incbin "baserom.gba", 0x3FA784, 0x4B0
 
-gUnknown_83FAC34:: @ 83FAC34
+sVsBarTilemap:: @ 83FAC34
 	.incbin "baserom.gba", 0x3FAC34, 0x500
 
 gUnknown_83FB134:: @ 83FB134

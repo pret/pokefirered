@@ -1057,7 +1057,7 @@ gUnknown_2039A24: @ 2039A24
 	.include "src/coins.o"
 
 	.align 2
-gUnknown_2039A2C: @ 2039A2C
+sTransitionStructPtr: @ 2039A2C
 	.space 0x4
 
 gUnknown_2039A30: @ 2039A30

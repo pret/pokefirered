@@ -5,44 +5,44 @@
 
 	.text
 
-	thumb_func_start sub_80D08B8
-sub_80D08B8: @ 80D08B8
+	thumb_func_start BT_StartOnField
+BT_StartOnField: @ 80D08B8
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r5, _080D08DC @ =gUnknown_2039A2C
+	ldr r5, _080D08DC @ =sTransitionStructPtr
 	movs r0, 0x3C
 	bl AllocZeroed
 	str r0, [r5]
 	ldr r1, _080D08E0 @ =gMain
-	ldr r0, _080D08E4 @ =sub_80565A8
+	ldr r0, _080D08E4 @ =CB2_OverworldBasic
 	str r0, [r1, 0x4]
 	adds r0, r4, 0
-	bl LaunchBattleTransitionTask
+	bl BT_LaunchTask
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D08DC: .4byte gUnknown_2039A2C
+_080D08DC: .4byte sTransitionStructPtr
 _080D08E0: .4byte gMain
-_080D08E4: .4byte sub_80565A8
-	thumb_func_end sub_80D08B8
+_080D08E4: .4byte CB2_OverworldBasic
+	thumb_func_end BT_StartOnField
 
-	thumb_func_start sub_80D08E8
-sub_80D08E8: @ 80D08E8
+	thumb_func_start BT_StartWithoutAlloc
+BT_StartWithoutAlloc: @ 80D08E8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl LaunchBattleTransitionTask
+	bl BT_LaunchTask
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80D08E8
+	thumb_func_end BT_StartWithoutAlloc
 
-	thumb_func_start sub_80D08F8
-sub_80D08F8: @ 80D08F8
+	thumb_func_start BT_IsDone
+BT_IsDone: @ 80D08F8
 	push {r4,r5,lr}
-	ldr r0, _080D091C @ =sub_80D0978
+	ldr r0, _080D091C @ =BT_TaskMain
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -58,11 +58,11 @@ sub_80D08F8: @ 80D08F8
 	movs r0, 0
 	b _080D093C
 	.align 2, 0
-_080D091C: .4byte sub_80D0978
+_080D091C: .4byte BT_TaskMain
 _080D0920: .4byte gTasks
 _080D0924:
-	bl sub_80D3DD0
-	ldr r4, _080D0944 @ =gUnknown_2039A2C
+	bl BT_InitCtrlBlk
+	ldr r4, _080D0944 @ =sTransitionStructPtr
 	ldr r0, [r4]
 	bl Free
 	movs r0, 0
@@ -75,16 +75,16 @@ _080D093C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D0944: .4byte gUnknown_2039A2C
-	thumb_func_end sub_80D08F8
+_080D0944: .4byte sTransitionStructPtr
+	thumb_func_end BT_IsDone
 
-	thumb_func_start LaunchBattleTransitionTask
-LaunchBattleTransitionTask: @ 80D0948
+	thumb_func_start BT_LaunchTask
+BT_LaunchTask: @ 80D0948
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _080D0970 @ =sub_80D0978
+	ldr r0, _080D0970 @ =BT_TaskMain
 	movs r1, 0x2
 	bl CreateTask
 	lsls r0, 24
@@ -99,16 +99,16 @@ LaunchBattleTransitionTask: @ 80D0948
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D0970: .4byte sub_80D0978
+_080D0970: .4byte BT_TaskMain
 _080D0974: .4byte gTasks
-	thumb_func_end LaunchBattleTransitionTask
+	thumb_func_end BT_LaunchTask
 
-	thumb_func_start sub_80D0978
-sub_80D0978: @ 80D0978
+	thumb_func_start BT_TaskMain
+BT_TaskMain: @ 80D0978
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, _080D09A8 @ =gUnknown_83FA3B0
+	ldr r5, _080D09A8 @ =sBT_MainPhases
 	ldr r2, _080D09AC @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
@@ -129,12 +129,12 @@ _080D098A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D09A8: .4byte gUnknown_83FA3B0
+_080D09A8: .4byte sBT_MainPhases
 _080D09AC: .4byte gTasks
-	thumb_func_end sub_80D0978
+	thumb_func_end BT_TaskMain
 
-	thumb_func_start Transition_Phase1
-Transition_Phase1: @ 80D09B0
+	thumb_func_start BT_Phase1Blink
+BT_Phase1Blink: @ 80D09B0
 	push {r4,lr}
 	adds r4, r0, 0
 	bl SetWeatherScreenFadeOut
@@ -142,7 +142,7 @@ Transition_Phase1: @ 80D09B0
 	ldr r1, _080D09E0 @ =gPlttBufferUnfaded
 	ldr r2, _080D09E4 @ =0x04000100
 	bl CpuSet
-	ldr r1, _080D09E8 @ =gUnknown_83FA320
+	ldr r1, _080D09E8 @ =sBT_Phase1Tasks
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	lsls r0, 2
@@ -158,7 +158,7 @@ Transition_Phase1: @ 80D09B0
 _080D09DC: .4byte gPlttBufferFaded
 _080D09E0: .4byte gPlttBufferUnfaded
 _080D09E4: .4byte 0x04000100
-_080D09E8: .4byte gUnknown_83FA320
+_080D09E8: .4byte sBT_Phase1Tasks
 _080D09EC:
 	movs r1, 0x4
 	bl CreateTask
@@ -170,13 +170,13 @@ _080D09FA:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end Transition_Phase1
+	thumb_func_end BT_Phase1Blink
 
-	thumb_func_start Transition_WaitForPhase1
-Transition_WaitForPhase1: @ 80D0A00
+	thumb_func_start BT_WaitForPhase1
+BT_WaitForPhase1: @ 80D0A00
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r1, _080D0A20 @ =gUnknown_83FA320
+	ldr r1, _080D0A20 @ =sBT_Phase1Tasks
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	lsls r0, 2
@@ -190,7 +190,7 @@ Transition_WaitForPhase1: @ 80D0A00
 	movs r0, 0
 	b _080D0A2C
 	.align 2, 0
-_080D0A20: .4byte gUnknown_83FA320
+_080D0A20: .4byte sBT_Phase1Tasks
 _080D0A24:
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
@@ -200,13 +200,13 @@ _080D0A2C:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end Transition_WaitForPhase1
+	thumb_func_end BT_WaitForPhase1
 
-	thumb_func_start Transition_Phase2
-Transition_Phase2: @ 80D0A34
+	thumb_func_start BT_Phase2LaunchAnimTask
+BT_Phase2LaunchAnimTask: @ 80D0A34
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r1, _080D0A58 @ =gUnknown_83FA368
+	ldr r1, _080D0A58 @ =sBT_Phase2Tasks
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	lsls r0, 2
@@ -222,16 +222,16 @@ Transition_Phase2: @ 80D0A34
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D0A58: .4byte gUnknown_83FA368
-	thumb_func_end Transition_Phase2
+_080D0A58: .4byte sBT_Phase2Tasks
+	thumb_func_end BT_Phase2LaunchAnimTask
 
-	thumb_func_start Transition_WaitForPhase2
-Transition_WaitForPhase2: @ 80D0A5C
+	thumb_func_start BT_WaitForPhase2
+BT_WaitForPhase2: @ 80D0A5C
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0
 	strh r0, [r4, 0x26]
-	ldr r1, _080D0A88 @ =gUnknown_83FA368
+	ldr r1, _080D0A88 @ =sBT_Phase2Tasks
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	lsls r0, 2
@@ -250,11 +250,11 @@ _080D0A80:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D0A88: .4byte gUnknown_83FA368
-	thumb_func_end Transition_WaitForPhase2
+_080D0A88: .4byte sBT_Phase2Tasks
+	thumb_func_end BT_WaitForPhase2
 
-	thumb_func_start Phase1Task_TransitionAll
-Phase1Task_TransitionAll: @ 80D0A8C
+	thumb_func_start BT_Phase1Task
+BT_Phase1Task: @ 80D0A8C
 	push {r4,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -278,12 +278,12 @@ Phase1Task_TransitionAll: @ 80D0A8C
 	movs r1, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl CreatePhase1Task
+	bl BT_CreatePhase1SubTask
 	b _080D0AD4
 	.align 2, 0
 _080D0AC0: .4byte gTasks
 _080D0AC4:
-	bl sub_80D3CA4
+	bl BT_IsPhase1Done
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D0AD4
@@ -294,14 +294,14 @@ _080D0AD4:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end Phase1Task_TransitionAll
+	thumb_func_end BT_Phase1Task
 
-	thumb_func_start sub_80D0ADC
-sub_80D0ADC: @ 80D0ADC
+	thumb_func_start BT_Phase2Blur
+BT_Phase2Blur: @ 80D0ADC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, _080D0B0C @ =gUnknown_83FA3C0
+	ldr r5, _080D0B0C @ =sBT_Phase2BlurFuncs
 	ldr r2, _080D0B10 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
@@ -322,12 +322,12 @@ _080D0AEE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D0B0C: .4byte gUnknown_83FA3C0
+_080D0B0C: .4byte sBT_Phase2BlurFuncs
 _080D0B10: .4byte gTasks
-	thumb_func_end sub_80D0ADC
+	thumb_func_end BT_Phase2Blur
 
-	thumb_func_start sub_80D0B14
-sub_80D0B14: @ 80D0B14
+	thumb_func_start BT_Phase2Blur_InitBgMosaic
+BT_Phase2Blur_InitBgMosaic: @ 80D0B14
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x4C
@@ -349,10 +349,10 @@ sub_80D0B14: @ 80D0B14
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80D0B14
+	thumb_func_end BT_Phase2Blur_InitBgMosaic
 
-	thumb_func_start sub_80D0B48
-sub_80D0B48: @ 80D0B48
+	thumb_func_start BT_Phase2Blur_Anim
+BT_Phase2Blur_Anim: @ 80D0B48
 	push {r4,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -402,10 +402,10 @@ _080D0B9E:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80D0B48
+	thumb_func_end BT_Phase2Blur_Anim
 
-	thumb_func_start sub_80D0BA8
-sub_80D0BA8: @ 80D0BA8
+	thumb_func_start BT_Phase2Blur_IsDone
+BT_Phase2Blur_IsDone: @ 80D0BA8
 	push {lr}
 	ldr r0, _080D0BCC @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
@@ -413,7 +413,7 @@ sub_80D0BA8: @ 80D0BA8
 	ands r0, r1
 	cmp r0, 0
 	bne _080D0BC4
-	ldr r0, _080D0BD0 @ =sub_80D0ADC
+	ldr r0, _080D0BD0 @ =BT_Phase2Blur
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -424,15 +424,15 @@ _080D0BC4:
 	bx r1
 	.align 2, 0
 _080D0BCC: .4byte gPaletteFade
-_080D0BD0: .4byte sub_80D0ADC
-	thumb_func_end sub_80D0BA8
+_080D0BD0: .4byte BT_Phase2Blur
+	thumb_func_end BT_Phase2Blur_IsDone
 
-	thumb_func_start sub_80D0BD4
-sub_80D0BD4: @ 80D0BD4
+	thumb_func_start BT_Phase2DistortedWave
+BT_Phase2DistortedWave: @ 80D0BD4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, _080D0C04 @ =gUnknown_83FA3CC
+	ldr r5, _080D0C04 @ =sBT_Phase2DistortedWaveFuncs
 	ldr r2, _080D0C08 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
@@ -453,16 +453,16 @@ _080D0BE6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D0C04: .4byte gUnknown_83FA3CC
+_080D0C04: .4byte sBT_Phase2DistortedWaveFuncs
 _080D0C08: .4byte gTasks
-	thumb_func_end sub_80D0BD4
+	thumb_func_end BT_Phase2DistortedWave
 
-	thumb_func_start sub_80D0C0C
-sub_80D0C0C: @ 80D0C0C
+	thumb_func_start BT_Phase2DistortedWave_InitWave
+BT_Phase2DistortedWave_InitWave: @ 80D0C0C
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r5, r0, 0
-	bl sub_80D3DD0
+	bl BT_InitCtrlBlk
 	bl ScanlineEffect_Clear
 	movs r0, 0x1
 	negs r0, r0
@@ -473,7 +473,7 @@ sub_80D0C0C: @ 80D0C0C
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
 	ldr r0, _080D0C68 @ =gScanlineEffectRegBuffers + 0x780
-	ldr r1, _080D0C6C @ =gUnknown_2039A2C
+	ldr r1, _080D0C6C @ =sTransitionStructPtr
 	ldr r1, [r1]
 	movs r2, 0x14
 	ldrsh r1, [r1, r2]
@@ -482,10 +482,10 @@ sub_80D0C0C: @ 80D0C0C
 	str r2, [sp, 0x4]
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_80D3E74
-	ldr r0, _080D0C70 @ =sub_80D0CF0
+	bl BT_LoadWaveIntoBuffer
+	ldr r0, _080D0C70 @ =VBCB_BT_Phase2DistortedWave
 	bl SetVBlankCallback
-	ldr r0, _080D0C74 @ =sub_80D0D28
+	ldr r0, _080D0C74 @ =HBCB_BT_Phase2DistortedWave
 	bl SetHBlankCallback
 	movs r0, 0x3
 	bl EnableInterrupts
@@ -499,16 +499,16 @@ sub_80D0C0C: @ 80D0C0C
 	bx r1
 	.align 2, 0
 _080D0C68: .4byte gScanlineEffectRegBuffers + 0x780
-_080D0C6C: .4byte gUnknown_2039A2C
-_080D0C70: .4byte sub_80D0CF0
-_080D0C74: .4byte sub_80D0D28
-	thumb_func_end sub_80D0C0C
+_080D0C6C: .4byte sTransitionStructPtr
+_080D0C70: .4byte VBCB_BT_Phase2DistortedWave
+_080D0C74: .4byte HBCB_BT_Phase2DistortedWave
+	thumb_func_end BT_Phase2DistortedWave_InitWave
 
-	thumb_func_start sub_80D0C78
-sub_80D0C78: @ 80D0C78
+	thumb_func_start BT_Phase2DistortedWave_UpdateWave
+BT_Phase2DistortedWave_UpdateWave: @ 80D0C78
 	push {r4,r5,lr}
 	sub sp, 0x8
-	ldr r4, _080D0CE0 @ =gUnknown_2039A2C
+	ldr r4, _080D0CE0 @ =sTransitionStructPtr
 	ldr r2, [r4]
 	ldrb r1, [r2]
 	movs r1, 0
@@ -532,14 +532,14 @@ sub_80D0C78: @ 80D0C78
 	str r0, [sp, 0x4]
 	adds r0, r3, 0
 	movs r3, 0x2
-	bl sub_80D3E74
+	bl BT_LoadWaveIntoBuffer
 	ldr r0, _080D0CE8 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _080D0CCA
-	ldr r0, _080D0CEC @ =sub_80D0BD4
+	ldr r0, _080D0CEC @ =BT_Phase2DistortedWave
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -556,17 +556,17 @@ _080D0CCA:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D0CE0: .4byte gUnknown_2039A2C
+_080D0CE0: .4byte sTransitionStructPtr
 _080D0CE4: .4byte gScanlineEffectRegBuffers
 _080D0CE8: .4byte gPaletteFade
-_080D0CEC: .4byte sub_80D0BD4
-	thumb_func_end sub_80D0C78
+_080D0CEC: .4byte BT_Phase2DistortedWave
+	thumb_func_end BT_Phase2DistortedWave_UpdateWave
 
-	thumb_func_start sub_80D0CF0
-sub_80D0CF0: @ 80D0CF0
+	thumb_func_start VBCB_BT_Phase2DistortedWave
+VBCB_BT_Phase2DistortedWave: @ 80D0CF0
 	push {lr}
-	bl sub_80D3DF4
-	ldr r0, _080D0D18 @ =gUnknown_2039A2C
+	bl BT_VBSyncOamAndPltt
+	ldr r0, _080D0D18 @ =sTransitionStructPtr
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -585,14 +585,14 @@ _080D0D14:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D0D18: .4byte gUnknown_2039A2C
+_080D0D18: .4byte sTransitionStructPtr
 _080D0D1C: .4byte 0x040000d4
 _080D0D20: .4byte gScanlineEffectRegBuffers
 _080D0D24: .4byte 0x800000a0
-	thumb_func_end sub_80D0CF0
+	thumb_func_end VBCB_BT_Phase2DistortedWave
 
-	thumb_func_start sub_80D0D28
-sub_80D0D28: @ 80D0D28
+	thumb_func_start HBCB_BT_Phase2DistortedWave
+HBCB_BT_Phase2DistortedWave: @ 80D0D28
 	ldr r1, _080D0D48 @ =gScanlineEffectRegBuffers
 	ldr r0, _080D0D4C @ =0x04000006
 	ldrh r0, [r0]
@@ -613,14 +613,14 @@ sub_80D0D28: @ 80D0D28
 _080D0D48: .4byte gScanlineEffectRegBuffers
 _080D0D4C: .4byte 0x04000006
 _080D0D50: .4byte 0x04000014
-	thumb_func_end sub_80D0D28
+	thumb_func_end HBCB_BT_Phase2DistortedWave
 
-	thumb_func_start sub_80D0D54
-sub_80D0D54: @ 80D0D54
+	thumb_func_start BT_Phase2HorizontalCorrugate
+BT_Phase2HorizontalCorrugate: @ 80D0D54
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, _080D0D84 @ =gUnknown_83FA3D4
+	ldr r5, _080D0D84 @ =sBT_Phase2HorizontalCorrugateFuncs
 	ldr r2, _080D0D88 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
@@ -641,16 +641,16 @@ _080D0D66:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D0D84: .4byte gUnknown_83FA3D4
+_080D0D84: .4byte sBT_Phase2HorizontalCorrugateFuncs
 _080D0D88: .4byte gTasks
-	thumb_func_end sub_80D0D54
+	thumb_func_end BT_Phase2HorizontalCorrugate
 
-	thumb_func_start sub_80D0D8C
-sub_80D0D8C: @ 80D0D8C
+	thumb_func_start BT_Phase2HorizontalCorrugate_Init
+BT_Phase2HorizontalCorrugate_Init: @ 80D0D8C
 	push {r4,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
-	bl sub_80D3DD0
+	bl BT_InitCtrlBlk
 	bl ScanlineEffect_Clear
 	movs r0, 0x1
 	negs r0, r0
@@ -660,7 +660,7 @@ sub_80D0D8C: @ 80D0D8C
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r0, _080D0DE0 @ =gUnknown_2039A2C
+	ldr r0, _080D0DE0 @ =sTransitionStructPtr
 	ldr r1, [r0]
 	ldr r0, _080D0DE4 @ =gScanlineEffectRegBuffers + 0x780
 	movs r2, 0x16
@@ -668,9 +668,9 @@ sub_80D0D8C: @ 80D0D8C
 	movs r2, 0xA0
 	lsls r2, 1
 	bl memset
-	ldr r0, _080D0DE8 @ =sub_80D0E80
+	ldr r0, _080D0DE8 @ =VBCB_BT_Phase2HorizontalCorrugate
 	bl SetVBlankCallback
-	ldr r0, _080D0DEC @ =sub_80D0EB8
+	ldr r0, _080D0DEC @ =HBCB_BT_Phase2HorizontalCorrugate
 	bl SetHBlankCallback
 	movs r0, 0x3
 	bl EnableInterrupts
@@ -683,16 +683,16 @@ sub_80D0D8C: @ 80D0D8C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D0DE0: .4byte gUnknown_2039A2C
+_080D0DE0: .4byte sTransitionStructPtr
 _080D0DE4: .4byte gScanlineEffectRegBuffers + 0x780
-_080D0DE8: .4byte sub_80D0E80
-_080D0DEC: .4byte sub_80D0EB8
-	thumb_func_end sub_80D0D8C
+_080D0DE8: .4byte VBCB_BT_Phase2HorizontalCorrugate
+_080D0DEC: .4byte HBCB_BT_Phase2HorizontalCorrugate
+	thumb_func_end BT_Phase2HorizontalCorrugate_Init
 
-	thumb_func_start sub_80D0DF0
-sub_80D0DF0: @ 80D0DF0
+	thumb_func_start BT_Phase2HorizontalCorrugate_UpdateWave
+BT_Phase2HorizontalCorrugate_UpdateWave: @ 80D0DF0
 	push {r4-r7,lr}
-	ldr r1, _080D0E70 @ =gUnknown_2039A2C
+	ldr r1, _080D0E70 @ =sTransitionStructPtr
 	ldr r2, [r1]
 	ldrb r1, [r2]
 	movs r1, 0
@@ -718,7 +718,7 @@ _080D0E18:
 	ldr r1, _080D0E74 @ =gScanlineEffectRegBuffers
 	lsls r2, r5, 1
 	adds r2, r1
-	ldr r6, _080D0E70 @ =gUnknown_2039A2C
+	ldr r6, _080D0E70 @ =sTransitionStructPtr
 	ldr r1, [r6]
 	ldrh r1, [r1, 0x16]
 	adds r0, r1
@@ -739,7 +739,7 @@ _080D0E18:
 	ands r0, r1
 	cmp r0, 0
 	bne _080D0E5E
-	ldr r0, _080D0E7C @ =sub_80D0D54
+	ldr r0, _080D0E7C @ =BT_Phase2HorizontalCorrugate
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -755,17 +755,17 @@ _080D0E5E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D0E70: .4byte gUnknown_2039A2C
+_080D0E70: .4byte sTransitionStructPtr
 _080D0E74: .4byte gScanlineEffectRegBuffers
 _080D0E78: .4byte gPaletteFade
-_080D0E7C: .4byte sub_80D0D54
-	thumb_func_end sub_80D0DF0
+_080D0E7C: .4byte BT_Phase2HorizontalCorrugate
+	thumb_func_end BT_Phase2HorizontalCorrugate_UpdateWave
 
-	thumb_func_start sub_80D0E80
-sub_80D0E80: @ 80D0E80
+	thumb_func_start VBCB_BT_Phase2HorizontalCorrugate
+VBCB_BT_Phase2HorizontalCorrugate: @ 80D0E80
 	push {lr}
-	bl sub_80D3DF4
-	ldr r0, _080D0EA8 @ =gUnknown_2039A2C
+	bl BT_VBSyncOamAndPltt
+	ldr r0, _080D0EA8 @ =sTransitionStructPtr
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -784,14 +784,14 @@ _080D0EA4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D0EA8: .4byte gUnknown_2039A2C
+_080D0EA8: .4byte sTransitionStructPtr
 _080D0EAC: .4byte 0x040000d4
 _080D0EB0: .4byte gScanlineEffectRegBuffers
 _080D0EB4: .4byte 0x800000a0
-	thumb_func_end sub_80D0E80
+	thumb_func_end VBCB_BT_Phase2HorizontalCorrugate
 
-	thumb_func_start sub_80D0EB8
-sub_80D0EB8: @ 80D0EB8
+	thumb_func_start HBCB_BT_Phase2HorizontalCorrugate
+HBCB_BT_Phase2HorizontalCorrugate: @ 80D0EB8
 	ldr r1, _080D0ED8 @ =gScanlineEffectRegBuffers
 	ldr r0, _080D0EDC @ =0x04000006
 	ldrh r0, [r0]
@@ -812,14 +812,14 @@ sub_80D0EB8: @ 80D0EB8
 _080D0ED8: .4byte gScanlineEffectRegBuffers
 _080D0EDC: .4byte 0x04000006
 _080D0EE0: .4byte 0x04000016
-	thumb_func_end sub_80D0EB8
+	thumb_func_end HBCB_BT_Phase2HorizontalCorrugate
 
-	thumb_func_start sub_80D0EE4
-sub_80D0EE4: @ 80D0EE4
+	thumb_func_start BT_Phase2BigPokeball
+BT_Phase2BigPokeball: @ 80D0EE4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, _080D0F14 @ =gUnknown_83FA3DC
+	ldr r5, _080D0F14 @ =sBT_Phase2BigPokeballFuncs
 	ldr r2, _080D0F18 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
@@ -840,16 +840,16 @@ _080D0EF6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D0F14: .4byte gUnknown_83FA3DC
+_080D0F14: .4byte sBT_Phase2BigPokeballFuncs
 _080D0F18: .4byte gTasks
-	thumb_func_end sub_80D0EE4
+	thumb_func_end BT_Phase2BigPokeball
 
-	thumb_func_start sub_80D0F1C
-sub_80D0F1C: @ 80D0F1C
+	thumb_func_start BT_Phase2BigPokeball_Init
+BT_Phase2BigPokeball_Init: @ 80D0F1C
 	push {r4-r6,lr}
 	sub sp, 0xC
 	adds r4, r0, 0
-	bl sub_80D3DD0
+	bl BT_InitCtrlBlk
 	bl ScanlineEffect_Clear
 	movs r1, 0
 	movs r0, 0x10
@@ -859,7 +859,7 @@ sub_80D0F1C: @ 80D0F1C
 	movs r0, 0x80
 	lsls r0, 7
 	strh r0, [r4, 0x12]
-	ldr r0, _080D0FB8 @ =gUnknown_2039A2C
+	ldr r0, _080D0FB8 @ =sTransitionStructPtr
 	ldr r2, [r0]
 	movs r0, 0x3F
 	strh r0, [r2, 0x2]
@@ -889,11 +889,11 @@ _080D0F64:
 	lsrs r1, r0, 16
 	cmp r1, 0x9F
 	bls _080D0F64
-	ldr r0, _080D0FC4 @ =sub_80D1370
+	ldr r0, _080D0FC4 @ =VBCB_BT_Phase2BigPokeball1
 	bl SetVBlankCallback
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl sub_80D3E28
+	bl BT_GetBg0TilemapAndTilesetBase
 	mov r1, sp
 	movs r0, 0
 	strh r0, [r1]
@@ -901,12 +901,12 @@ _080D0F64:
 	ldr r2, _080D0FC8 @ =0x01000400
 	mov r0, sp
 	bl CpuSet
-	ldr r0, _080D0FCC @ =gUnknown_83F87A0
+	ldr r0, _080D0FCC @ =sBigPokeballTileset
 	ldr r1, [sp, 0x8]
 	movs r2, 0xB0
 	lsls r2, 2
 	bl CpuSet
-	ldr r0, _080D0FD0 @ =gUnknown_83FA638
+	ldr r0, _080D0FD0 @ =sSlidingPokeballBigPokeballPalette
 	movs r1, 0xF0
 	movs r2, 0x20
 	bl LoadPalette
@@ -919,27 +919,27 @@ _080D0F64:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D0FB8: .4byte gUnknown_2039A2C
+_080D0FB8: .4byte sTransitionStructPtr
 _080D0FBC: .4byte 0x00003f41
 _080D0FC0: .4byte gScanlineEffectRegBuffers + 0x780
-_080D0FC4: .4byte sub_80D1370
+_080D0FC4: .4byte VBCB_BT_Phase2BigPokeball1
 _080D0FC8: .4byte 0x01000400
-_080D0FCC: .4byte gUnknown_83F87A0
-_080D0FD0: .4byte gUnknown_83FA638
-	thumb_func_end sub_80D0F1C
+_080D0FCC: .4byte sBigPokeballTileset
+_080D0FD0: .4byte sSlidingPokeballBigPokeballPalette
+	thumb_func_end BT_Phase2BigPokeball_Init
 
-	thumb_func_start sub_80D0FD4
-sub_80D0FD4: @ 80D0FD4
+	thumb_func_start BT_Phase2BigPokeball_LoadTilemapAndWave
+BT_Phase2BigPokeball_LoadTilemapAndWave: @ 80D0FD4
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
 	push {r6,r7}
 	sub sp, 0x10
 	adds r7, r0, 0
-	ldr r5, _080D105C @ =gUnknown_83FA784
+	ldr r5, _080D105C @ =sBigPokeballTilemap
 	add r1, sp, 0xC
 	add r0, sp, 0x8
-	bl sub_80D3E28
+	bl BT_GetBg0TilemapAndTilesetBase
 	movs r1, 0
 	ldr r0, [sp, 0x8]
 	mov r9, r0
@@ -986,7 +986,7 @@ _080D1000:
 	mov r0, r8
 	movs r1, 0
 	movs r3, 0x84
-	bl sub_80D3E74
+	bl BT_LoadWaveIntoBuffer
 	ldrh r0, [r7, 0x8]
 	adds r0, 0x1
 	strh r0, [r7, 0x8]
@@ -999,16 +999,16 @@ _080D1000:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D105C: .4byte gUnknown_83FA784
+_080D105C: .4byte sBigPokeballTilemap
 _080D1060: .4byte gScanlineEffectRegBuffers
-	thumb_func_end sub_80D0FD4
+	thumb_func_end BT_Phase2BigPokeball_LoadTilemapAndWave
 
-	thumb_func_start sub_80D1064
-sub_80D1064: @ 80D1064
+	thumb_func_start BT_Phase2BigPokeball_UpdateWave1IncEva
+BT_Phase2BigPokeball_UpdateWave1IncEva: @ 80D1064
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r3, r0, 0
-	ldr r2, _080D10EC @ =gUnknown_2039A2C
+	ldr r2, _080D10EC @ =sTransitionStructPtr
 	ldr r1, [r2]
 	ldrb r0, [r1]
 	movs r0, 0
@@ -1063,7 +1063,7 @@ _080D10AE:
 	str r1, [sp, 0x4]
 	movs r1, 0
 	movs r3, 0x84
-	bl sub_80D3E74
+	bl BT_LoadWaveIntoBuffer
 	ldr r1, [r4]
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -1075,17 +1075,17 @@ _080D10AE:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D10EC: .4byte gUnknown_2039A2C
+_080D10EC: .4byte sTransitionStructPtr
 _080D10F0: .4byte 0xfffffe80
 _080D10F4: .4byte gScanlineEffectRegBuffers
-	thumb_func_end sub_80D1064
+	thumb_func_end BT_Phase2BigPokeball_UpdateWave1IncEva
 
-	thumb_func_start sub_80D10F8
-sub_80D10F8: @ 80D10F8
+	thumb_func_start BT_Phase2BigPokeball_UpdateWave2DecEvb
+BT_Phase2BigPokeball_UpdateWave2DecEvb: @ 80D10F8
 	push {r4,lr}
 	sub sp, 0x8
 	adds r3, r0, 0
-	ldr r2, _080D1158 @ =gUnknown_2039A2C
+	ldr r2, _080D1158 @ =sTransitionStructPtr
 	ldr r1, [r2]
 	ldrb r0, [r1]
 	movs r0, 0
@@ -1133,7 +1133,7 @@ _080D1140:
 	adds r0, r1, r4
 	b _080D1162
 	.align 2, 0
-_080D1158: .4byte gUnknown_2039A2C
+_080D1158: .4byte sTransitionStructPtr
 _080D115C: .4byte 0xfffffe80
 _080D1160:
 	movs r0, 0
@@ -1150,8 +1150,8 @@ _080D1162:
 	str r1, [sp, 0x4]
 	movs r1, 0
 	movs r3, 0x84
-	bl sub_80D3E74
-	ldr r0, _080D1198 @ =gUnknown_2039A2C
+	bl BT_LoadWaveIntoBuffer
+	ldr r0, _080D1198 @ =sTransitionStructPtr
 	ldr r1, [r0]
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -1164,15 +1164,15 @@ _080D1162:
 	bx r1
 	.align 2, 0
 _080D1194: .4byte gScanlineEffectRegBuffers
-_080D1198: .4byte gUnknown_2039A2C
-	thumb_func_end sub_80D10F8
+_080D1198: .4byte sTransitionStructPtr
+	thumb_func_end BT_Phase2BigPokeball_UpdateWave2DecEvb
 
-	thumb_func_start sub_80D119C
-sub_80D119C: @ 80D119C
+	thumb_func_start BT_Phase2BigPokeball_UpdateWave3
+BT_Phase2BigPokeball_UpdateWave3: @ 80D119C
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
-	ldr r0, _080D11C4 @ =gUnknown_2039A2C
+	ldr r0, _080D11C4 @ =sTransitionStructPtr
 	ldr r0, [r0]
 	ldrb r1, [r0]
 	movs r2, 0
@@ -1190,7 +1190,7 @@ sub_80D119C: @ 80D119C
 	strh r0, [r4, 0x12]
 	b _080D11CE
 	.align 2, 0
-_080D11C4: .4byte gUnknown_2039A2C
+_080D11C4: .4byte sTransitionStructPtr
 _080D11C8: .4byte 0xfffffe80
 _080D11CC:
 	strh r2, [r4, 0x12]
@@ -1206,7 +1206,7 @@ _080D11CE:
 	str r5, [sp, 0x4]
 	movs r1, 0
 	movs r3, 0x84
-	bl sub_80D3E74
+	bl BT_LoadWaveIntoBuffer
 	movs r1, 0x12
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
@@ -1221,7 +1221,7 @@ _080D11CE:
 	strh r0, [r4, 0xC]
 	strh r1, [r4, 0xE]
 _080D1202:
-	ldr r0, _080D121C @ =gUnknown_2039A2C
+	ldr r0, _080D121C @ =sTransitionStructPtr
 	ldr r1, [r0]
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -1234,14 +1234,14 @@ _080D1202:
 	bx r1
 	.align 2, 0
 _080D1218: .4byte gScanlineEffectRegBuffers
-_080D121C: .4byte gUnknown_2039A2C
-	thumb_func_end sub_80D119C
+_080D121C: .4byte sTransitionStructPtr
+	thumb_func_end BT_Phase2BigPokeball_UpdateWave3
 
-	thumb_func_start sub_80D1220
-sub_80D1220: @ 80D1220
+	thumb_func_start BT_Phase2BigPokeball_CircleEffect
+BT_Phase2BigPokeball_CircleEffect: @ 80D1220
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, _080D12C4 @ =gUnknown_2039A2C
+	ldr r0, _080D12C4 @ =sTransitionStructPtr
 	ldr r0, [r0]
 	ldrb r1, [r0]
 	movs r3, 0
@@ -1277,7 +1277,7 @@ _080D125E:
 	ldrsh r3, [r4, r1]
 	movs r1, 0x78
 	movs r2, 0x50
-	bl sub_80D3EF0
+	bl BT_GenerateCircle
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	cmp r0, 0
@@ -1292,8 +1292,8 @@ _080D125E:
 	ands r0, r2
 	strh r0, [r1, 0xA]
 	ldrh r0, [r1, 0xA]
-	bl sub_80D3E60
-	ldr r0, _080D12DC @ =sub_80D0EE4
+	bl BT_BlendPalettesToBlack
+	ldr r0, _080D12DC @ =BT_Phase2BigPokeball
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -1306,10 +1306,10 @@ _080D129A:
 	bne _080D12AE
 	adds r0, r1, 0x1
 	strh r0, [r4, 0xE]
-	ldr r0, _080D12E0 @ =sub_80D139C
+	ldr r0, _080D12E0 @ =VBCB_BT_Phase2BigPokeball2
 	bl SetVBlankCallback
 _080D12AE:
-	ldr r0, _080D12C4 @ =gUnknown_2039A2C
+	ldr r0, _080D12C4 @ =sTransitionStructPtr
 	ldr r1, [r0]
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -1320,18 +1320,18 @@ _080D12AE:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D12C4: .4byte gUnknown_2039A2C
+_080D12C4: .4byte sTransitionStructPtr
 _080D12C8: .4byte 0x000007ff
 _080D12CC: .4byte gScanlineEffectRegBuffers
 _080D12D0: .4byte 0x040000b0
 _080D12D4: .4byte 0x0000c5ff
 _080D12D8: .4byte 0x00007fff
-_080D12DC: .4byte sub_80D0EE4
-_080D12E0: .4byte sub_80D139C
-	thumb_func_end sub_80D1220
+_080D12DC: .4byte BT_Phase2BigPokeball
+_080D12E0: .4byte VBCB_BT_Phase2BigPokeball2
+	thumb_func_end BT_Phase2BigPokeball_CircleEffect
 
-	thumb_func_start sub_80D12E4
-sub_80D12E4: @ 80D12E4
+	thumb_func_start BT_VBStopDma0SyncSrcBufferSetLcdRegs
+BT_VBStopDma0SyncSrcBufferSetLcdRegs: @ 80D12E4
 	push {r4,lr}
 	ldr r1, _080D1354 @ =0x040000b0
 	ldrh r2, [r1, 0xA]
@@ -1343,8 +1343,8 @@ sub_80D12E4: @ 80D12E4
 	ands r0, r2
 	strh r0, [r1, 0xA]
 	ldrh r0, [r1, 0xA]
-	bl sub_80D3DF4
-	ldr r4, _080D1360 @ =gUnknown_2039A2C
+	bl BT_VBSyncOamAndPltt
+	ldr r4, _080D1360 @ =sTransitionStructPtr
 	ldr r0, [r4]
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -1387,16 +1387,16 @@ _080D131C:
 _080D1354: .4byte 0x040000b0
 _080D1358: .4byte 0x0000c5ff
 _080D135C: .4byte 0x00007fff
-_080D1360: .4byte gUnknown_2039A2C
+_080D1360: .4byte sTransitionStructPtr
 _080D1364: .4byte 0x040000d4
 _080D1368: .4byte gScanlineEffectRegBuffers
 _080D136C: .4byte 0x800000a0
-	thumb_func_end sub_80D12E4
+	thumb_func_end BT_VBStopDma0SyncSrcBufferSetLcdRegs
 
-	thumb_func_start sub_80D1370
-sub_80D1370: @ 80D1370
+	thumb_func_start VBCB_BT_Phase2BigPokeball1
+VBCB_BT_Phase2BigPokeball1: @ 80D1370
 	push {lr}
-	bl sub_80D12E4
+	bl BT_VBStopDma0SyncSrcBufferSetLcdRegs
 	ldr r1, _080D138C @ =0x040000b0
 	ldr r0, _080D1390 @ =gScanlineEffectRegBuffers + 0x780
 	str r0, [r1]
@@ -1412,12 +1412,12 @@ _080D138C: .4byte 0x040000b0
 _080D1390: .4byte gScanlineEffectRegBuffers + 0x780
 _080D1394: .4byte 0x04000010
 _080D1398: .4byte 0xa2400001
-	thumb_func_end sub_80D1370
+	thumb_func_end VBCB_BT_Phase2BigPokeball1
 
-	thumb_func_start sub_80D139C
-sub_80D139C: @ 80D139C
+	thumb_func_start VBCB_BT_Phase2BigPokeball2
+VBCB_BT_Phase2BigPokeball2: @ 80D139C
 	push {lr}
-	bl sub_80D12E4
+	bl BT_VBStopDma0SyncSrcBufferSetLcdRegs
 	ldr r1, _080D13B8 @ =0x040000b0
 	ldr r0, _080D13BC @ =gScanlineEffectRegBuffers + 0x780
 	str r0, [r1]
@@ -1433,14 +1433,14 @@ _080D13B8: .4byte 0x040000b0
 _080D13BC: .4byte gScanlineEffectRegBuffers + 0x780
 _080D13C0: .4byte 0x04000040
 _080D13C4: .4byte 0xa2400001
-	thumb_func_end sub_80D139C
+	thumb_func_end VBCB_BT_Phase2BigPokeball2
 
-	thumb_func_start sub_80D13C8
-sub_80D13C8: @ 80D13C8
+	thumb_func_start BT_Phase2SlidingPokeballs
+BT_Phase2SlidingPokeballs: @ 80D13C8
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, _080D13F8 @ =gUnknown_83FA3F4
+	ldr r5, _080D13F8 @ =sBT_Phase2SlidingPokeballsFuncs
 	ldr r2, _080D13FC @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
@@ -1461,19 +1461,19 @@ _080D13DA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D13F8: .4byte gUnknown_83FA3F4
+_080D13F8: .4byte sBT_Phase2SlidingPokeballsFuncs
 _080D13FC: .4byte gTasks
-	thumb_func_end sub_80D13C8
+	thumb_func_end BT_Phase2SlidingPokeballs
 
-	thumb_func_start Phase2_Transition_PokeballsTrail_Func1
-Phase2_Transition_PokeballsTrail_Func1: @ 80D1400
+	thumb_func_start BT_Phase2SlidingPokeballs_LoadBgGfx
+BT_Phase2SlidingPokeballs_LoadBgGfx: @ 80D1400
 	push {r4,lr}
 	sub sp, 0xC
 	adds r4, r0, 0
 	add r0, sp, 0x4
 	add r1, sp, 0x8
-	bl sub_80D3E28
-	ldr r0, _080D1440 @ =gUnknown_83F8D20
+	bl BT_GetBg0TilemapAndTilesetBase
+	ldr r0, _080D1440 @ =sSlidingPokeballTilemap
 	ldr r1, [sp, 0x8]
 	movs r2, 0x20
 	bl CpuSet
@@ -1483,7 +1483,7 @@ Phase2_Transition_PokeballsTrail_Func1: @ 80D1400
 	ldr r2, _080D1444 @ =0x05000200
 	mov r0, sp
 	bl CpuSet
-	ldr r0, _080D1448 @ =gUnknown_83FA638
+	ldr r0, _080D1448 @ =sSlidingPokeballBigPokeballPalette
 	movs r1, 0xF0
 	movs r2, 0x20
 	bl LoadPalette
@@ -1496,13 +1496,13 @@ Phase2_Transition_PokeballsTrail_Func1: @ 80D1400
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D1440: .4byte gUnknown_83F8D20
+_080D1440: .4byte sSlidingPokeballTilemap
 _080D1444: .4byte 0x05000200
-_080D1448: .4byte gUnknown_83FA638
-	thumb_func_end Phase2_Transition_PokeballsTrail_Func1
+_080D1448: .4byte sSlidingPokeballBigPokeballPalette
+	thumb_func_end BT_Phase2SlidingPokeballs_LoadBgGfx
 
-	thumb_func_start Phase2_Transition_PokeballsTrail_Func2
-Phase2_Transition_PokeballsTrail_Func2: @ 80D144C
+	thumb_func_start BT_Phase2SlidingPokeballs_SetupFldeffArgs
+BT_Phase2SlidingPokeballs_SetupFldeffArgs: @ 80D144C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1568,18 +1568,18 @@ _080D147A:
 _080D14CC: .4byte gUnknown_83FA400
 _080D14D0: .4byte gUnknown_83FA404
 _080D14D4: .4byte gFieldEffectArguments
-	thumb_func_end Phase2_Transition_PokeballsTrail_Func2
+	thumb_func_end BT_Phase2SlidingPokeballs_SetupFldeffArgs
 
-	thumb_func_start Phase2_Transition_PokeballsTrail_Func3
-Phase2_Transition_PokeballsTrail_Func3: @ 80D14D8
+	thumb_func_start BT_Phase2SlidingPokeballs_IsDone
+BT_Phase2SlidingPokeballs_IsDone: @ 80D14D8
 	push {lr}
 	movs r0, 0x2D
 	bl FieldEffectActiveListContains
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D14F8
-	bl sub_80D3E60
-	ldr r0, _080D1500 @ =sub_80D13C8
+	bl BT_BlendPalettesToBlack
+	ldr r0, _080D1500 @ =BT_Phase2SlidingPokeballs
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -1589,13 +1589,13 @@ _080D14F8:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D1500: .4byte sub_80D13C8
-	thumb_func_end Phase2_Transition_PokeballsTrail_Func3
+_080D1500: .4byte BT_Phase2SlidingPokeballs
+	thumb_func_end BT_Phase2SlidingPokeballs_IsDone
 
 	thumb_func_start FldEff_Pokeball
 FldEff_Pokeball: @ 80D1504
 	push {r4,r5,lr}
-	ldr r0, _080D1560 @ =gUnknown_83FA5CC
+	ldr r0, _080D1560 @ =sSpriteTemplate_SlidingPokeball
 	ldr r5, _080D1564 @ =gFieldEffectArguments
 	movs r2, 0
 	ldrsh r1, [r5, r2]
@@ -1638,14 +1638,14 @@ FldEff_Pokeball: @ 80D1504
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D1560: .4byte gUnknown_83FA5CC
+_080D1560: .4byte sSpriteTemplate_SlidingPokeball
 _080D1564: .4byte gFieldEffectArguments
 _080D1568: .4byte gSprites
 _080D156C: .4byte 0x0000ffff
 	thumb_func_end FldEff_Pokeball
 
-	thumb_func_start sub_80D1570
-sub_80D1570: @ 80D1570
+	thumb_func_start SpriteCB_BT_Phase2SlidingPokeballs
+SpriteCB_BT_Phase2SlidingPokeballs: @ 80D1570
 	push {r4-r6,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -1745,14 +1745,14 @@ _080D162A:
 	bx r0
 	.align 2, 0
 _080D1634: .4byte 0x0000f001
-	thumb_func_end sub_80D1570
+	thumb_func_end SpriteCB_BT_Phase2SlidingPokeballs
 
-	thumb_func_start sub_80D1638
-sub_80D1638: @ 80D1638
+	thumb_func_start BT_Phase2ClockwiseBlackFade
+BT_Phase2ClockwiseBlackFade: @ 80D1638
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, _080D1668 @ =gUnknown_83FA414
+	ldr r5, _080D1668 @ =sBT_Phase2ClockwiseBlackFadeFuncs
 	ldr r2, _080D166C @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
@@ -1773,17 +1773,17 @@ _080D164A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D1668: .4byte gUnknown_83FA414
+_080D1668: .4byte sBT_Phase2ClockwiseBlackFadeFuncs
 _080D166C: .4byte gTasks
-	thumb_func_end sub_80D1638
+	thumb_func_end BT_Phase2ClockwiseBlackFade
 
-	thumb_func_start sub_80D1670
-sub_80D1670: @ 80D1670
+	thumb_func_start BT_Phase2ClockwiseBlackFade_Init
+BT_Phase2ClockwiseBlackFade_Init: @ 80D1670
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80D3DD0
+	bl BT_InitCtrlBlk
 	bl ScanlineEffect_Clear
-	ldr r0, _080D16C4 @ =gUnknown_2039A2C
+	ldr r0, _080D16C4 @ =sTransitionStructPtr
 	ldr r1, [r0]
 	movs r0, 0
 	strh r0, [r1, 0x2]
@@ -1805,9 +1805,9 @@ _080D1696:
 	lsrs r1, r0, 16
 	cmp r1, 0x9F
 	bls _080D1696
-	ldr r0, _080D16D4 @ =sub_80D1ABC
+	ldr r0, _080D16D4 @ =VBCB_BT_Phase2ClockwiseBlackFade
 	bl SetVBlankCallback
-	ldr r0, _080D16C4 @ =gUnknown_2039A2C
+	ldr r0, _080D16C4 @ =sTransitionStructPtr
 	ldr r1, [r0]
 	movs r0, 0x78
 	strh r0, [r1, 0x2C]
@@ -1819,19 +1819,19 @@ _080D1696:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D16C4: .4byte gUnknown_2039A2C
+_080D16C4: .4byte sTransitionStructPtr
 _080D16C8: .4byte 0x0000f0f1
 _080D16CC: .4byte gScanlineEffectRegBuffers + 0x780
 _080D16D0: .4byte 0x0000f3f4
-_080D16D4: .4byte sub_80D1ABC
-	thumb_func_end sub_80D1670
+_080D16D4: .4byte VBCB_BT_Phase2ClockwiseBlackFade
+	thumb_func_end BT_Phase2ClockwiseBlackFade_Init
 
-	thumb_func_start sub_80D16D8
-sub_80D16D8: @ 80D16D8
+	thumb_func_start BT_Phase2ClockwiseBlackFade_Step1
+BT_Phase2ClockwiseBlackFade_Step1: @ 80D16D8
 	push {r4-r7,lr}
 	sub sp, 0xC
 	adds r6, r0, 0
-	ldr r2, _080D1760 @ =gUnknown_2039A2C
+	ldr r2, _080D1760 @ =sTransitionStructPtr
 	ldr r1, [r2]
 	ldrb r0, [r1]
 	movs r0, 0
@@ -1849,10 +1849,10 @@ sub_80D16D8: @ 80D16D8
 	str r1, [sp, 0x8]
 	movs r1, 0x78
 	movs r2, 0x50
-	bl sub_80D4088
+	bl BT_DiagonalSegment_InitParams
 	ldr r5, _080D1764 @ =gScanlineEffectRegBuffers
 _080D1708:
-	ldr r4, _080D1760 @ =gUnknown_2039A2C
+	ldr r4, _080D1760 @ =sTransitionStructPtr
 	ldr r0, [r4]
 	movs r7, 0x2A
 	ldrsh r3, [r0, r7]
@@ -1868,7 +1868,7 @@ _080D1708:
 	adds r0, 0x24
 	movs r1, 0x1
 	movs r2, 0x1
-	bl sub_80D4104
+	bl BT_DiagonalSegment_ComputePointOnSegment
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D1708
@@ -1897,12 +1897,12 @@ _080D174C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D1760: .4byte gUnknown_2039A2C
+_080D1760: .4byte sTransitionStructPtr
 _080D1764: .4byte gScanlineEffectRegBuffers
-	thumb_func_end sub_80D16D8
+	thumb_func_end BT_Phase2ClockwiseBlackFade_Step1
 
-	thumb_func_start sub_80D1768
-sub_80D1768: @ 80D1768
+	thumb_func_start BT_Phase2ClockwiseBlackFade_Step2
+BT_Phase2ClockwiseBlackFade_Step2: @ 80D1768
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -1912,7 +1912,7 @@ sub_80D1768: @ 80D1768
 	add r1, sp, 0xC
 	movs r0, 0
 	strb r0, [r1]
-	ldr r4, _080D17EC @ =gUnknown_2039A2C
+	ldr r4, _080D17EC @ =sTransitionStructPtr
 	ldr r1, [r4]
 	ldrb r0, [r1]
 	movs r0, 0
@@ -1929,7 +1929,7 @@ sub_80D1768: @ 80D1768
 	movs r1, 0x78
 	movs r2, 0x50
 	movs r3, 0xF0
-	bl sub_80D4088
+	bl BT_DiagonalSegment_InitParams
 	mov r9, r4
 	mov r7, r9
 	add r5, sp, 0xC
@@ -1965,11 +1965,11 @@ _080D17BE:
 	adds r0, 0x24
 	movs r1, 0x1
 	movs r2, 0x1
-	bl sub_80D4104
+	bl BT_DiagonalSegment_ComputePointOnSegment
 	strb r0, [r5]
 	b _080D17A6
 	.align 2, 0
-_080D17EC: .4byte gUnknown_2039A2C
+_080D17EC: .4byte sTransitionStructPtr
 _080D17F0: .4byte gScanlineEffectRegBuffers
 _080D17F4:
 	ldr r1, [r7]
@@ -1993,7 +1993,7 @@ _080D1812:
 	cmp r0, r2
 	bge _080D183A
 	adds r3, r4, 0
-	ldr r5, _080D1858 @ =gUnknown_2039A2C
+	ldr r5, _080D1858 @ =sTransitionStructPtr
 _080D181E:
 	ldr r2, [r5]
 	ldrh r0, [r2, 0x2A]
@@ -2025,15 +2025,15 @@ _080D183A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D1858: .4byte gUnknown_2039A2C
-	thumb_func_end sub_80D1768
+_080D1858: .4byte sTransitionStructPtr
+	thumb_func_end BT_Phase2ClockwiseBlackFade_Step2
 
-	thumb_func_start sub_80D185C
-sub_80D185C: @ 80D185C
+	thumb_func_start BT_Phase2ClockwiseBlackFade_Step3
+BT_Phase2ClockwiseBlackFade_Step3: @ 80D185C
 	push {r4-r6,lr}
 	sub sp, 0xC
 	adds r6, r0, 0
-	ldr r2, _080D18DC @ =gUnknown_2039A2C
+	ldr r2, _080D18DC @ =sTransitionStructPtr
 	ldr r1, [r2]
 	ldrb r0, [r1]
 	movs r0, 0
@@ -2050,10 +2050,10 @@ sub_80D185C: @ 80D185C
 	str r1, [sp, 0x8]
 	movs r1, 0x78
 	movs r2, 0x50
-	bl sub_80D4088
+	bl BT_DiagonalSegment_InitParams
 	ldr r5, _080D18E0 @ =gScanlineEffectRegBuffers
 _080D188A:
-	ldr r4, _080D18DC @ =gUnknown_2039A2C
+	ldr r4, _080D18DC @ =sTransitionStructPtr
 	ldr r0, [r4]
 	movs r1, 0x2A
 	ldrsh r3, [r0, r1]
@@ -2067,7 +2067,7 @@ _080D188A:
 	adds r0, 0x24
 	movs r1, 0x1
 	movs r2, 0x1
-	bl sub_80D4104
+	bl BT_DiagonalSegment_ComputePointOnSegment
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D188A
@@ -2095,12 +2095,12 @@ _080D18C8:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D18DC: .4byte gUnknown_2039A2C
+_080D18DC: .4byte sTransitionStructPtr
 _080D18E0: .4byte gScanlineEffectRegBuffers
-	thumb_func_end sub_80D185C
+	thumb_func_end BT_Phase2ClockwiseBlackFade_Step3
 
-	thumb_func_start sub_80D18E4
-sub_80D18E4: @ 80D18E4
+	thumb_func_start BT_Phase2ClockwiseBlackFade_Step4
+BT_Phase2ClockwiseBlackFade_Step4: @ 80D18E4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2111,7 +2111,7 @@ sub_80D18E4: @ 80D18E4
 	add r1, sp, 0xC
 	movs r0, 0
 	strb r0, [r1]
-	ldr r4, _080D196C @ =gUnknown_2039A2C
+	ldr r4, _080D196C @ =sTransitionStructPtr
 	ldr r1, [r4]
 	ldrb r0, [r1]
 	movs r0, 0
@@ -2128,10 +2128,10 @@ sub_80D18E4: @ 80D18E4
 	movs r1, 0x78
 	movs r2, 0x50
 	movs r3, 0
-	bl sub_80D4088
+	bl BT_DiagonalSegment_InitParams
 	ldr r7, _080D1970 @ =gScanlineEffectRegBuffers
 	mov r10, r7
-	ldr r0, _080D196C @ =gUnknown_2039A2C
+	ldr r0, _080D196C @ =sTransitionStructPtr
 	mov r8, r0
 	add r6, sp, 0xC
 _080D1928:
@@ -2166,11 +2166,11 @@ _080D1948:
 	adds r0, 0x24
 	movs r1, 0x1
 	movs r2, 0x1
-	bl sub_80D4104
+	bl BT_DiagonalSegment_ComputePointOnSegment
 	strb r0, [r6]
 	b _080D1928
 	.align 2, 0
-_080D196C: .4byte gUnknown_2039A2C
+_080D196C: .4byte sTransitionStructPtr
 _080D1970: .4byte gScanlineEffectRegBuffers
 _080D1974:
 	mov r0, r8
@@ -2195,7 +2195,7 @@ _080D1992:
 	ble _080D19BC
 	ldr r6, _080D19DC @ =gScanlineEffectRegBuffers
 	adds r3, r1, 0
-	ldr r5, _080D19E0 @ =gUnknown_2039A2C
+	ldr r5, _080D19E0 @ =sTransitionStructPtr
 _080D19A0:
 	ldr r2, [r5]
 	ldrh r0, [r2, 0x2A]
@@ -2212,7 +2212,7 @@ _080D19A0:
 	cmp r1, r0
 	bgt _080D19A0
 _080D19BC:
-	ldr r7, _080D19E0 @ =gUnknown_2039A2C
+	ldr r7, _080D19E0 @ =sTransitionStructPtr
 	ldr r0, [r7]
 	ldrb r1, [r0]
 	adds r1, 0x1
@@ -2229,15 +2229,15 @@ _080D19BC:
 	bx r1
 	.align 2, 0
 _080D19DC: .4byte gScanlineEffectRegBuffers
-_080D19E0: .4byte gUnknown_2039A2C
-	thumb_func_end sub_80D18E4
+_080D19E0: .4byte sTransitionStructPtr
+	thumb_func_end BT_Phase2ClockwiseBlackFade_Step4
 
-	thumb_func_start sub_80D19E4
-sub_80D19E4: @ 80D19E4
+	thumb_func_start BT_Phase2ClockwiseBlackFade_Step5
+BT_Phase2ClockwiseBlackFade_Step5: @ 80D19E4
 	push {r4-r7,lr}
 	sub sp, 0xC
 	adds r7, r0, 0
-	ldr r1, _080D1A74 @ =gUnknown_2039A2C
+	ldr r1, _080D1A74 @ =sTransitionStructPtr
 	ldr r0, [r1]
 	ldrb r2, [r0]
 	movs r2, 0
@@ -2253,11 +2253,11 @@ sub_80D19E4: @ 80D19E4
 	str r1, [sp, 0x8]
 	movs r1, 0x78
 	movs r2, 0x50
-	bl sub_80D4088
+	bl BT_DiagonalSegment_InitParams
 	ldr r6, _080D1A78 @ =gScanlineEffectRegBuffers
 _080D1A10:
 	movs r2, 0x78
-	ldr r5, _080D1A74 @ =gUnknown_2039A2C
+	ldr r5, _080D1A74 @ =sTransitionStructPtr
 	ldr r3, [r5]
 	ldrh r4, [r3, 0x28]
 	movs r1, 0x28
@@ -2280,7 +2280,7 @@ _080D1A24:
 	adds r0, 0x24
 	movs r1, 0x1
 	movs r2, 0x1
-	bl sub_80D4104
+	bl BT_DiagonalSegment_ComputePointOnSegment
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D1A10
@@ -2307,12 +2307,12 @@ _080D1A5E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D1A74: .4byte gUnknown_2039A2C
+_080D1A74: .4byte sTransitionStructPtr
 _080D1A78: .4byte gScanlineEffectRegBuffers
-	thumb_func_end sub_80D19E4
+	thumb_func_end BT_Phase2ClockwiseBlackFade_Step5
 
-	thumb_func_start sub_80D1A7C
-sub_80D1A7C: @ 80D1A7C
+	thumb_func_start BT_Phase2ClockwiseBlackFade_End
+BT_Phase2ClockwiseBlackFade_End: @ 80D1A7C
 	push {lr}
 	ldr r1, _080D1AAC @ =0x040000b0
 	ldrh r2, [r1, 0xA]
@@ -2324,8 +2324,8 @@ sub_80D1A7C: @ 80D1A7C
 	ands r0, r2
 	strh r0, [r1, 0xA]
 	ldrh r0, [r1, 0xA]
-	bl sub_80D3E60
-	ldr r0, _080D1AB8 @ =sub_80D1638
+	bl BT_BlendPalettesToBlack
+	ldr r0, _080D1AB8 @ =BT_Phase2ClockwiseBlackFade
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -2337,11 +2337,11 @@ sub_80D1A7C: @ 80D1A7C
 _080D1AAC: .4byte 0x040000b0
 _080D1AB0: .4byte 0x0000c5ff
 _080D1AB4: .4byte 0x00007fff
-_080D1AB8: .4byte sub_80D1638
-	thumb_func_end sub_80D1A7C
+_080D1AB8: .4byte BT_Phase2ClockwiseBlackFade
+	thumb_func_end BT_Phase2ClockwiseBlackFade_End
 
-	thumb_func_start sub_80D1ABC
-sub_80D1ABC: @ 80D1ABC
+	thumb_func_start VBCB_BT_Phase2ClockwiseBlackFade
+VBCB_BT_Phase2ClockwiseBlackFade: @ 80D1ABC
 	push {r4,r5,lr}
 	ldr r5, _080D1B34 @ =0x040000b0
 	ldrh r1, [r5, 0xA]
@@ -2353,8 +2353,8 @@ sub_80D1ABC: @ 80D1ABC
 	ands r0, r1
 	strh r0, [r5, 0xA]
 	ldrh r0, [r5, 0xA]
-	bl sub_80D3DF4
-	ldr r4, _080D1B40 @ =gUnknown_2039A2C
+	bl BT_VBSyncOamAndPltt
+	ldr r4, _080D1B40 @ =sTransitionStructPtr
 	ldr r0, [r4]
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -2402,20 +2402,20 @@ _080D1AF4:
 _080D1B34: .4byte 0x040000b0
 _080D1B38: .4byte 0x0000c5ff
 _080D1B3C: .4byte 0x00007fff
-_080D1B40: .4byte gUnknown_2039A2C
+_080D1B40: .4byte sTransitionStructPtr
 _080D1B44: .4byte 0x040000d4
 _080D1B48: .4byte gScanlineEffectRegBuffers
 _080D1B4C: .4byte 0x800000a0
 _080D1B50: .4byte 0x04000040
 _080D1B54: .4byte 0xa2400001
-	thumb_func_end sub_80D1ABC
+	thumb_func_end VBCB_BT_Phase2ClockwiseBlackFade
 
-	thumb_func_start sub_80D1B58
-sub_80D1B58: @ 80D1B58
+	thumb_func_start BT_Phase2FullScreenWave
+BT_Phase2FullScreenWave: @ 80D1B58
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, _080D1B88 @ =gUnknown_83FA430
+	ldr r5, _080D1B88 @ =sBT_Phase2FullScreenWaveFuncs
 	ldr r2, _080D1B8C @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
@@ -2436,19 +2436,19 @@ _080D1B6A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D1B88: .4byte gUnknown_83FA430
+_080D1B88: .4byte sBT_Phase2FullScreenWaveFuncs
 _080D1B8C: .4byte gTasks
-	thumb_func_end sub_80D1B58
+	thumb_func_end BT_Phase2FullScreenWave
 
-	thumb_func_start sub_80D1B90
-sub_80D1B90: @ 80D1B90
+	thumb_func_start BT_Phase2FullScreenWave_Init
+BT_Phase2FullScreenWave_Init: @ 80D1B90
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_80D3DD0
+	bl BT_InitCtrlBlk
 	bl ScanlineEffect_Clear
 	movs r2, 0
 	ldr r4, _080D1BD8 @ =gScanlineEffectRegBuffers + 0x780
-	ldr r3, _080D1BDC @ =gUnknown_2039A2C
+	ldr r3, _080D1BDC @ =sTransitionStructPtr
 _080D1BA2:
 	lsls r1, r2, 1
 	adds r1, r4
@@ -2460,9 +2460,9 @@ _080D1BA2:
 	lsrs r2, r0, 24
 	cmp r2, 0x9F
 	bls _080D1BA2
-	ldr r0, _080D1BE0 @ =sub_80D1CC8
+	ldr r0, _080D1BE0 @ =VBCB_BT_Phase2FullScreenWave
 	bl SetVBlankCallback
-	ldr r0, _080D1BE4 @ =sub_80D1D00
+	ldr r0, _080D1BE4 @ =HBCB_BT_Phase2FullScreenWave
 	bl SetHBlankCallback
 	movs r0, 0x2
 	bl EnableInterrupts
@@ -2475,19 +2475,19 @@ _080D1BA2:
 	bx r1
 	.align 2, 0
 _080D1BD8: .4byte gScanlineEffectRegBuffers + 0x780
-_080D1BDC: .4byte gUnknown_2039A2C
-_080D1BE0: .4byte sub_80D1CC8
-_080D1BE4: .4byte sub_80D1D00
-	thumb_func_end sub_80D1B90
+_080D1BDC: .4byte sTransitionStructPtr
+_080D1BE0: .4byte VBCB_BT_Phase2FullScreenWave
+_080D1BE4: .4byte HBCB_BT_Phase2FullScreenWave
+	thumb_func_end BT_Phase2FullScreenWave_Init
 
-	thumb_func_start sub_80D1BE8
-sub_80D1BE8: @ 80D1BE8
+	thumb_func_start BT_Phase2FullScreenWave_UpdateWave
+BT_Phase2FullScreenWave_UpdateWave: @ 80D1BE8
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
 	sub sp, 0x4
 	adds r6, r0, 0
-	ldr r0, _080D1CB4 @ =gUnknown_2039A2C
+	ldr r0, _080D1CB4 @ =sTransitionStructPtr
 	ldr r1, [r0]
 	ldrb r0, [r1]
 	movs r0, 0
@@ -2522,7 +2522,7 @@ _080D1C28:
 	ldr r1, _080D1CBC @ =gScanlineEffectRegBuffers
 	lsls r2, r5, 1
 	adds r2, r1
-	ldr r1, _080D1CB4 @ =gUnknown_2039A2C
+	ldr r1, _080D1CB4 @ =sTransitionStructPtr
 	ldr r1, [r1]
 	ldrh r1, [r1, 0x16]
 	adds r0, r1
@@ -2565,13 +2565,13 @@ _080D1C78:
 	ands r0, r1
 	cmp r0, 0
 	bne _080D1C9A
-	ldr r0, _080D1CC4 @ =sub_80D1B58
+	ldr r0, _080D1CC4 @ =BT_Phase2FullScreenWave
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
 	bl DestroyTask
 _080D1C9A:
-	ldr r0, _080D1CB4 @ =gUnknown_2039A2C
+	ldr r0, _080D1CB4 @ =sTransitionStructPtr
 	ldr r1, [r0]
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -2585,18 +2585,18 @@ _080D1C9A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D1CB4: .4byte gUnknown_2039A2C
+_080D1CB4: .4byte sTransitionStructPtr
 _080D1CB8: .4byte 0x1fff0000
 _080D1CBC: .4byte gScanlineEffectRegBuffers
 _080D1CC0: .4byte gPaletteFade
-_080D1CC4: .4byte sub_80D1B58
-	thumb_func_end sub_80D1BE8
+_080D1CC4: .4byte BT_Phase2FullScreenWave
+	thumb_func_end BT_Phase2FullScreenWave_UpdateWave
 
-	thumb_func_start sub_80D1CC8
-sub_80D1CC8: @ 80D1CC8
+	thumb_func_start VBCB_BT_Phase2FullScreenWave
+VBCB_BT_Phase2FullScreenWave: @ 80D1CC8
 	push {lr}
-	bl sub_80D3DF4
-	ldr r0, _080D1CF0 @ =gUnknown_2039A2C
+	bl BT_VBSyncOamAndPltt
+	ldr r0, _080D1CF0 @ =sTransitionStructPtr
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -2615,14 +2615,14 @@ _080D1CEC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D1CF0: .4byte gUnknown_2039A2C
+_080D1CF0: .4byte sTransitionStructPtr
 _080D1CF4: .4byte 0x040000d4
 _080D1CF8: .4byte gScanlineEffectRegBuffers
 _080D1CFC: .4byte 0x800000a0
-	thumb_func_end sub_80D1CC8
+	thumb_func_end VBCB_BT_Phase2FullScreenWave
 
-	thumb_func_start sub_80D1D00
-sub_80D1D00: @ 80D1D00
+	thumb_func_start HBCB_BT_Phase2FullScreenWave
+HBCB_BT_Phase2FullScreenWave: @ 80D1D00
 	ldr r1, _080D1D20 @ =gScanlineEffectRegBuffers
 	ldr r0, _080D1D24 @ =0x04000006
 	ldrh r0, [r0]
@@ -2643,14 +2643,14 @@ sub_80D1D00: @ 80D1D00
 _080D1D20: .4byte gScanlineEffectRegBuffers
 _080D1D24: .4byte 0x04000006
 _080D1D28: .4byte 0x04000016
-	thumb_func_end sub_80D1D00
+	thumb_func_end HBCB_BT_Phase2FullScreenWave
 
-	thumb_func_start sub_80D1D2C
-sub_80D1D2C: @ 80D1D2C
+	thumb_func_start BT_Phase2BlackWaveToRight
+BT_Phase2BlackWaveToRight: @ 80D1D2C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, _080D1D5C @ =gUnknown_83FA438
+	ldr r5, _080D1D5C @ =sBT_Phase2BlackWaveToRightFuncs
 	ldr r2, _080D1D60 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
@@ -2671,17 +2671,17 @@ _080D1D3E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D1D5C: .4byte gUnknown_83FA438
+_080D1D5C: .4byte sBT_Phase2BlackWaveToRightFuncs
 _080D1D60: .4byte gTasks
-	thumb_func_end sub_80D1D2C
+	thumb_func_end BT_Phase2BlackWaveToRight
 
-	thumb_func_start sub_80D1D64
-sub_80D1D64: @ 80D1D64
+	thumb_func_start BT_Phase2BlackWaveToRight_Init
+BT_Phase2BlackWaveToRight_Init: @ 80D1D64
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80D3DD0
+	bl BT_InitCtrlBlk
 	bl ScanlineEffect_Clear
-	ldr r0, _080D1DB0 @ =gUnknown_2039A2C
+	ldr r0, _080D1DB0 @ =sTransitionStructPtr
 	ldr r1, [r0]
 	movs r2, 0
 	movs r0, 0x3F
@@ -2703,7 +2703,7 @@ _080D1D8A:
 	lsrs r1, r0, 24
 	cmp r1, 0x9F
 	bls _080D1D8A
-	ldr r0, _080D1DB8 @ =sub_80D1E98
+	ldr r0, _080D1DB8 @ =VBCB_BT_Phase2BlackWaveToRight
 	bl SetVBlankCallback
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
@@ -2713,18 +2713,18 @@ _080D1D8A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D1DB0: .4byte gUnknown_2039A2C
+_080D1DB0: .4byte sTransitionStructPtr
 _080D1DB4: .4byte gScanlineEffectRegBuffers + 0x780
-_080D1DB8: .4byte sub_80D1E98
-	thumb_func_end sub_80D1D64
+_080D1DB8: .4byte VBCB_BT_Phase2BlackWaveToRight
+	thumb_func_end BT_Phase2BlackWaveToRight_Init
 
-	thumb_func_start sub_80D1DBC
-sub_80D1DBC: @ 80D1DBC
+	thumb_func_start BT_Phase2BlackWaveToRight_UpdateWave
+BT_Phase2BlackWaveToRight_UpdateWave: @ 80D1DBC
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
 	adds r4, r0, 0
-	ldr r0, _080D1E50 @ =gUnknown_2039A2C
+	ldr r0, _080D1E50 @ =sTransitionStructPtr
 	ldr r1, [r0]
 	ldrb r0, [r1]
 	movs r0, 0
@@ -2785,7 +2785,7 @@ _080D1E18:
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
 _080D1E36:
-	ldr r0, _080D1E50 @ =gUnknown_2039A2C
+	ldr r0, _080D1E50 @ =sTransitionStructPtr
 	ldr r1, [r0]
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -2798,12 +2798,12 @@ _080D1E36:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D1E50: .4byte gUnknown_2039A2C
+_080D1E50: .4byte sTransitionStructPtr
 _080D1E54: .4byte gScanlineEffectRegBuffers
-	thumb_func_end sub_80D1DBC
+	thumb_func_end BT_Phase2BlackWaveToRight_UpdateWave
 
-	thumb_func_start sub_80D1E58
-sub_80D1E58: @ 80D1E58
+	thumb_func_start BT_Phase2BlackWaveToRight_End
+BT_Phase2BlackWaveToRight_End: @ 80D1E58
 	push {lr}
 	ldr r1, _080D1E88 @ =0x040000b0
 	ldrh r2, [r1, 0xA]
@@ -2815,8 +2815,8 @@ sub_80D1E58: @ 80D1E58
 	ands r0, r2
 	strh r0, [r1, 0xA]
 	ldrh r0, [r1, 0xA]
-	bl sub_80D3E60
-	ldr r0, _080D1E94 @ =sub_80D1D2C
+	bl BT_BlendPalettesToBlack
+	ldr r0, _080D1E94 @ =BT_Phase2BlackWaveToRight
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -2828,11 +2828,11 @@ sub_80D1E58: @ 80D1E58
 _080D1E88: .4byte 0x040000b0
 _080D1E8C: .4byte 0x0000c5ff
 _080D1E90: .4byte 0x00007fff
-_080D1E94: .4byte sub_80D1D2C
-	thumb_func_end sub_80D1E58
+_080D1E94: .4byte BT_Phase2BlackWaveToRight
+	thumb_func_end BT_Phase2BlackWaveToRight_End
 
-	thumb_func_start sub_80D1E98
-sub_80D1E98: @ 80D1E98
+	thumb_func_start VBCB_BT_Phase2BlackWaveToRight
+VBCB_BT_Phase2BlackWaveToRight: @ 80D1E98
 	push {r4,r5,lr}
 	ldr r4, _080D1F04 @ =0x040000b0
 	ldrh r1, [r4, 0xA]
@@ -2844,8 +2844,8 @@ sub_80D1E98: @ 80D1E98
 	ands r0, r1
 	strh r0, [r4, 0xA]
 	ldrh r0, [r4, 0xA]
-	bl sub_80D3DF4
-	ldr r5, _080D1F10 @ =gUnknown_2039A2C
+	bl BT_VBSyncOamAndPltt
+	ldr r5, _080D1F10 @ =sTransitionStructPtr
 	ldr r0, [r5]
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -2887,21 +2887,21 @@ _080D1ED0:
 _080D1F04: .4byte 0x040000b0
 _080D1F08: .4byte 0x0000c5ff
 _080D1F0C: .4byte 0x00007fff
-_080D1F10: .4byte gUnknown_2039A2C
+_080D1F10: .4byte sTransitionStructPtr
 _080D1F14: .4byte 0x040000d4
 _080D1F18: .4byte gScanlineEffectRegBuffers
 _080D1F1C: .4byte 0x800000a0
 _080D1F20: .4byte gScanlineEffectRegBuffers + 0x780
 _080D1F24: .4byte 0x04000040
 _080D1F28: .4byte 0xa2400001
-	thumb_func_end sub_80D1E98
+	thumb_func_end VBCB_BT_Phase2BlackWaveToRight
 
-	thumb_func_start sub_80D1F2C
-sub_80D1F2C: @ 80D1F2C
+	thumb_func_start BT_Phase2AntiClockwiseSpiral
+BT_Phase2AntiClockwiseSpiral: @ 80D1F2C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, _080D1F5C @ =gUnknown_83FA464
+	ldr r5, _080D1F5C @ =sBT_Phase2AntiClockwiseSpiralFuncs
 	ldr r2, _080D1F60 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
@@ -2922,9 +2922,9 @@ _080D1F3E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D1F5C: .4byte gUnknown_83FA464
+_080D1F5C: .4byte sBT_Phase2AntiClockwiseSpiralFuncs
 _080D1F60: .4byte gTasks
-	thumb_func_end sub_80D1F2C
+	thumb_func_end BT_Phase2AntiClockwiseSpiral
 
 	thumb_func_start sub_80D1F64
 sub_80D1F64: @ 80D1F64
@@ -3398,7 +3398,7 @@ _080D22CA:
 	ldrsh r4, [r0, r3]
 	ldr r6, _080D2324 @ =gScanlineEffectRegBuffers + 0x780
 _080D22D4:
-	ldr r0, _080D2328 @ =gUnknown_2039A2C
+	ldr r0, _080D2328 @ =sTransitionStructPtr
 	ldr r5, [r0]
 	asrs r2, r1, 16
 	adds r0, r2, 0
@@ -3438,7 +3438,7 @@ _080D22D4:
 	.align 2, 0
 _080D2320: .4byte gUnknown_83FA444
 _080D2324: .4byte gScanlineEffectRegBuffers + 0x780
-_080D2328: .4byte gUnknown_2039A2C
+_080D2328: .4byte sTransitionStructPtr
 _080D232C:
 	ldrh r0, [r3]
 	cmp r0, r1
@@ -3476,7 +3476,7 @@ _080D2360:
 	ldrsh r4, [r0, r3]
 	ldr r6, _080D23C0 @ =gScanlineEffectRegBuffers + 0x780
 _080D236A:
-	ldr r0, _080D23C4 @ =gUnknown_2039A2C
+	ldr r0, _080D23C4 @ =sTransitionStructPtr
 	ldr r3, [r0]
 	asrs r2, r1, 16
 	adds r0, r2, 0
@@ -3520,7 +3520,7 @@ _080D23A6:
 	.align 2, 0
 _080D23BC: .4byte gUnknown_83FA444
 _080D23C0: .4byte gScanlineEffectRegBuffers + 0x780
-_080D23C4: .4byte gUnknown_2039A2C
+_080D23C4: .4byte sTransitionStructPtr
 _080D23C8: .4byte 0xffff0000
 _080D23CC:
 	lsls r0, r2, 16
@@ -3541,7 +3541,7 @@ _080D23DA:
 	ldrsh r4, [r0, r6]
 	ldr r6, _080D2440 @ =gScanlineEffectRegBuffers + 0x780
 _080D23EC:
-	ldr r0, _080D2444 @ =gUnknown_2039A2C
+	ldr r0, _080D2444 @ =sTransitionStructPtr
 	ldr r5, [r0]
 	asrs r2, r1, 16
 	adds r0, r2, 0
@@ -3582,7 +3582,7 @@ _080D23EC:
 _080D2438: .4byte 0x0000ffb1
 _080D243C: .4byte gUnknown_83FA444
 _080D2440: .4byte gScanlineEffectRegBuffers + 0x780
-_080D2444: .4byte gUnknown_2039A2C
+_080D2444: .4byte sTransitionStructPtr
 _080D2448:
 	ldrh r0, [r3]
 	cmp r0, r1
@@ -3617,7 +3617,7 @@ _080D2474:
 	adds r0, r5, r0
 	movs r3, 0
 	ldrsh r4, [r0, r3]
-	ldr r6, _080D2534 @ =gUnknown_2039A2C
+	ldr r6, _080D2534 @ =sTransitionStructPtr
 	mov r8, r6
 	ldr r6, _080D2538 @ =gScanlineEffectRegBuffers + 0x780
 _080D248A:
@@ -3709,17 +3709,17 @@ _080D251C:
 	.align 2, 0
 _080D252C: .4byte 0x0000ffb1
 _080D2530: .4byte gUnknown_83FA444
-_080D2534: .4byte gUnknown_2039A2C
+_080D2534: .4byte sTransitionStructPtr
 _080D2538: .4byte gScanlineEffectRegBuffers + 0x780
 	thumb_func_end sub_80D1F64
 
-	thumb_func_start sub_80D253C
-sub_80D253C: @ 80D253C
+	thumb_func_start BT_Phase2AntiClockwiseSpiral_Init
+BT_Phase2AntiClockwiseSpiral_Init: @ 80D253C
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_80D3DD0
+	bl BT_InitCtrlBlk
 	bl ScanlineEffect_Clear
-	ldr r0, _080D25A0 @ =gUnknown_2039A2C
+	ldr r0, _080D25A0 @ =sTransitionStructPtr
 	ldr r1, [r0]
 	movs r4, 0
 	strh r4, [r1, 0x2]
@@ -3749,7 +3749,7 @@ sub_80D253C: @ 80D253C
 	ldr r0, _080D25BC @ =0x80000140
 	str r0, [r1, 0x8]
 	ldr r0, [r1, 0x8]
-	ldr r0, _080D25C0 @ =sub_80D2698
+	ldr r0, _080D25C0 @ =VBCB_BT_Phase2AntiClockwiseBlackFade
 	bl SetVBlankCallback
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
@@ -3761,7 +3761,7 @@ sub_80D253C: @ 80D253C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D25A0: .4byte gUnknown_2039A2C
+_080D25A0: .4byte sTransitionStructPtr
 _080D25A4: .4byte 0x00007878
 _080D25A8: .4byte 0x00003070
 _080D25AC: .4byte 0x00001090
@@ -3769,11 +3769,11 @@ _080D25B0: .4byte 0x040000d4
 _080D25B4: .4byte gScanlineEffectRegBuffers + 0x780
 _080D25B8: .4byte 0xfffff880
 _080D25BC: .4byte 0x80000140
-_080D25C0: .4byte sub_80D2698
-	thumb_func_end sub_80D253C
+_080D25C0: .4byte VBCB_BT_Phase2AntiClockwiseBlackFade
+	thumb_func_end BT_Phase2AntiClockwiseSpiral_Init
 
-	thumb_func_start sub_80D25C4
-sub_80D25C4: @ 80D25C4
+	thumb_func_start BT_Phase2AntiClockwiseSpiral_Update
+BT_Phase2AntiClockwiseSpiral_Update: @ 80D25C4
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -3784,7 +3784,7 @@ sub_80D25C4: @ 80D25C4
 	ldrsh r1, [r4, r2]
 	movs r2, 0x1
 	bl sub_80D1F64
-	ldr r5, _080D2694 @ =gUnknown_2039A2C
+	ldr r5, _080D2694 @ =sTransitionStructPtr
 	ldr r1, [r5]
 	ldrb r0, [r1]
 	movs r2, 0x1
@@ -3870,7 +3870,7 @@ _080D2662:
 	ldr r1, [r5]
 	movs r0, 0x1
 	strh r0, [r1, 0x20]
-	bl sub_80D3E60
+	bl BT_BlendPalettesToBlack
 _080D2686:
 	movs r0, 0
 	pop {r3}
@@ -3879,11 +3879,11 @@ _080D2686:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D2694: .4byte gUnknown_2039A2C
-	thumb_func_end sub_80D25C4
+_080D2694: .4byte sTransitionStructPtr
+	thumb_func_end BT_Phase2AntiClockwiseSpiral_Update
 
-	thumb_func_start sub_80D2698
-sub_80D2698: @ 80D2698
+	thumb_func_start VBCB_BT_Phase2AntiClockwiseBlackFade
+VBCB_BT_Phase2AntiClockwiseBlackFade: @ 80D2698
 	push {r4-r6,lr}
 	ldr r5, _080D26D0 @ =0x040000b0
 	ldrh r1, [r5, 0xA]
@@ -3895,14 +3895,14 @@ sub_80D2698: @ 80D2698
 	ands r0, r1
 	strh r0, [r5, 0xA]
 	ldrh r0, [r5, 0xA]
-	bl sub_80D3DF4
-	ldr r4, _080D26DC @ =gUnknown_2039A2C
+	bl BT_VBSyncOamAndPltt
+	ldr r4, _080D26DC @ =sTransitionStructPtr
 	ldr r2, [r4]
 	movs r0, 0x20
 	ldrsh r3, [r2, r0]
 	cmp r3, 0
 	beq _080D26E4
-	ldr r0, _080D26E0 @ =sub_80D1F2C
+	ldr r0, _080D26E0 @ =BT_Phase2AntiClockwiseSpiral
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -3912,8 +3912,8 @@ sub_80D2698: @ 80D2698
 _080D26D0: .4byte 0x040000b0
 _080D26D4: .4byte 0x0000c5ff
 _080D26D8: .4byte 0x00007fff
-_080D26DC: .4byte gUnknown_2039A2C
-_080D26E0: .4byte sub_80D1F2C
+_080D26DC: .4byte sTransitionStructPtr
+_080D26E0: .4byte BT_Phase2AntiClockwiseSpiral
 _080D26E4:
 	ldrb r0, [r2]
 	cmp r0, 0
@@ -3971,10 +3971,10 @@ _080D2758: .4byte 0x80000140
 _080D275C: .4byte gScanlineEffectRegBuffers
 _080D2760: .4byte 0x04000040
 _080D2764: .4byte 0xa6400001
-	thumb_func_end sub_80D2698
+	thumb_func_end VBCB_BT_Phase2AntiClockwiseBlackFade
 
-	thumb_func_start Phase2Task_Transition_Sydney
-Phase2Task_Transition_Sydney: @ 80D2768
+	thumb_func_start BT_Phase2StartLoreleiMugshot
+BT_Phase2StartLoreleiMugshot: @ 80D2768
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3985,15 +3985,15 @@ Phase2Task_Transition_Sydney: @ 80D2768
 	adds r1, r2
 	movs r2, 0
 	strh r2, [r1, 0x26]
-	bl Phase2Task_MugShotTransition
+	bl BT_Phase2Mugshot
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080D2784: .4byte gTasks
-	thumb_func_end Phase2Task_Transition_Sydney
+	thumb_func_end BT_Phase2StartLoreleiMugshot
 
-	thumb_func_start Phase2Task_Transition_Phoebe
-Phase2Task_Transition_Phoebe: @ 80D2788
+	thumb_func_start BT_Phase2StartBrunoMugshot
+BT_Phase2StartBrunoMugshot: @ 80D2788
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -4004,15 +4004,15 @@ Phase2Task_Transition_Phoebe: @ 80D2788
 	adds r1, r2
 	movs r2, 0x1
 	strh r2, [r1, 0x26]
-	bl Phase2Task_MugShotTransition
+	bl BT_Phase2Mugshot
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080D27A4: .4byte gTasks
-	thumb_func_end Phase2Task_Transition_Phoebe
+	thumb_func_end BT_Phase2StartBrunoMugshot
 
-	thumb_func_start Phase2Task_Transition_Glacia
-Phase2Task_Transition_Glacia: @ 80D27A8
+	thumb_func_start BT_Phase2StartAgathaMugshot
+BT_Phase2StartAgathaMugshot: @ 80D27A8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -4023,15 +4023,15 @@ Phase2Task_Transition_Glacia: @ 80D27A8
 	adds r1, r2
 	movs r2, 0x2
 	strh r2, [r1, 0x26]
-	bl Phase2Task_MugShotTransition
+	bl BT_Phase2Mugshot
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080D27C4: .4byte gTasks
-	thumb_func_end Phase2Task_Transition_Glacia
+	thumb_func_end BT_Phase2StartAgathaMugshot
 
-	thumb_func_start Phase2Task_Transition_Drake
-Phase2Task_Transition_Drake: @ 80D27C8
+	thumb_func_start BT_Phase2StartLanceMugshot
+BT_Phase2StartLanceMugshot: @ 80D27C8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -4042,15 +4042,15 @@ Phase2Task_Transition_Drake: @ 80D27C8
 	adds r1, r2
 	movs r2, 0x3
 	strh r2, [r1, 0x26]
-	bl Phase2Task_MugShotTransition
+	bl BT_Phase2Mugshot
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080D27E4: .4byte gTasks
-	thumb_func_end Phase2Task_Transition_Drake
+	thumb_func_end BT_Phase2StartLanceMugshot
 
-	thumb_func_start Phase2Task_Transition_Steven
-Phase2Task_Transition_Steven: @ 80D27E8
+	thumb_func_start BT_Phase2StartBlueMugshot
+BT_Phase2StartBlueMugshot: @ 80D27E8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -4061,19 +4061,19 @@ Phase2Task_Transition_Steven: @ 80D27E8
 	adds r1, r2
 	movs r2, 0x4
 	strh r2, [r1, 0x26]
-	bl Phase2Task_MugShotTransition
+	bl BT_Phase2Mugshot
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080D2804: .4byte gTasks
-	thumb_func_end Phase2Task_Transition_Steven
+	thumb_func_end BT_Phase2StartBlueMugshot
 
-	thumb_func_start Phase2Task_MugShotTransition
-Phase2Task_MugShotTransition: @ 80D2808
+	thumb_func_start BT_Phase2Mugshot
+BT_Phase2Mugshot: @ 80D2808
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, _080D2838 @ =gUnknown_83FA46C
+	ldr r5, _080D2838 @ =sBT_Phase2MugshotFuncs
 	ldr r2, _080D283C @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
@@ -4094,25 +4094,25 @@ _080D281A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D2838: .4byte gUnknown_83FA46C
+_080D2838: .4byte sBT_Phase2MugshotFuncs
 _080D283C: .4byte gTasks
-	thumb_func_end Phase2Task_MugShotTransition
+	thumb_func_end BT_Phase2Mugshot
 
-	thumb_func_start Phase2_Mugshot_Func1
-Phase2_Mugshot_Func1: @ 80D2840
+	thumb_func_start BT_Phase2Mugshot_Init
+BT_Phase2Mugshot_Init: @ 80D2840
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80D3DD0
+	bl BT_InitCtrlBlk
 	bl ScanlineEffect_Clear
 	adds r0, r4, 0
-	bl sub_80D2EA4
+	bl BT_Phase2Mugshots_CreateSprites
 	movs r0, 0
 	strh r0, [r4, 0xA]
 	movs r0, 0x1
 	strh r0, [r4, 0xC]
 	movs r0, 0xEF
 	strh r0, [r4, 0xE]
-	ldr r0, _080D2898 @ =gUnknown_2039A2C
+	ldr r0, _080D2898 @ =sTransitionStructPtr
 	ldr r1, [r0]
 	movs r0, 0x3F
 	strh r0, [r1, 0x2]
@@ -4132,7 +4132,7 @@ _080D2874:
 	lsrs r1, r0, 24
 	cmp r1, 0x9F
 	bls _080D2874
-	ldr r0, _080D28A4 @ =sub_80D2D50
+	ldr r0, _080D28A4 @ =VBCB_BT_Phase2Mugshot1_Slide
 	bl SetVBlankCallback
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
@@ -4142,28 +4142,28 @@ _080D2874:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D2898: .4byte gUnknown_2039A2C
+_080D2898: .4byte sTransitionStructPtr
 _080D289C: .4byte gScanlineEffectRegBuffers + 0x780
 _080D28A0: .4byte 0x0000f0f1
-_080D28A4: .4byte sub_80D2D50
-	thumb_func_end Phase2_Mugshot_Func1
+_080D28A4: .4byte VBCB_BT_Phase2Mugshot1_Slide
+	thumb_func_end BT_Phase2Mugshot_Init
 
-	thumb_func_start Phase2_Mugshot_Func2
-Phase2_Mugshot_Func2: @ 80D28A8
+	thumb_func_start BT_Phase2Mugshot_LoadGfx
+BT_Phase2Mugshot_LoadGfx: @ 80D28A8
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
 	sub sp, 0x8
 	mov r8, r0
-	ldr r6, _080D2950 @ =gUnknown_83FAC34
+	ldr r6, _080D2950 @ =sVsBarTilemap
 	add r1, sp, 0x4
 	mov r0, sp
-	bl sub_80D3E28
-	ldr r0, _080D2954 @ =gUnknown_83F8F60
+	bl BT_GetBg0TilemapAndTilesetBase
+	ldr r0, _080D2954 @ =sVsBarTileset
 	ldr r1, [sp, 0x4]
 	movs r2, 0xF0
 	bl CpuSet
-	ldr r1, _080D2958 @ =gUnknown_83FA740
+	ldr r1, _080D2958 @ =sVsBarOpponentPalettes
 	mov r2, r8
 	movs r3, 0x26
 	ldrsh r0, [r2, r3]
@@ -4173,7 +4173,7 @@ Phase2_Mugshot_Func2: @ 80D28A8
 	movs r1, 0xF0
 	movs r2, 0x20
 	bl LoadPalette
-	ldr r1, _080D295C @ =gUnknown_83FA754
+	ldr r1, _080D295C @ =sVsBarPlayerPalettes
 	ldr r0, _080D2960 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
@@ -4217,7 +4217,7 @@ _080D2902:
 	ble _080D28FC
 	movs r0, 0x2
 	bl EnableInterrupts
-	ldr r0, _080D2964 @ =sub_80D2E6C
+	ldr r0, _080D2964 @ =HBCB_BT_Phase2Mugshot
 	bl SetHBlankCallback
 	mov r2, r8
 	ldrh r0, [r2, 0x8]
@@ -4231,19 +4231,19 @@ _080D2902:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D2950: .4byte gUnknown_83FAC34
-_080D2954: .4byte gUnknown_83F8F60
-_080D2958: .4byte gUnknown_83FA740
-_080D295C: .4byte gUnknown_83FA754
+_080D2950: .4byte sVsBarTilemap
+_080D2954: .4byte sVsBarTileset
+_080D2958: .4byte sVsBarOpponentPalettes
+_080D295C: .4byte sVsBarPlayerPalettes
 _080D2960: .4byte gSaveBlock2Ptr
-_080D2964: .4byte sub_80D2E6C
-	thumb_func_end Phase2_Mugshot_Func2
+_080D2964: .4byte HBCB_BT_Phase2Mugshot
+	thumb_func_end BT_Phase2Mugshot_LoadGfx
 
-	thumb_func_start sub_80D2968
-sub_80D2968: @ 80D2968
+	thumb_func_start BT_Phase2Mugshot_VsBarsSlideIn
+BT_Phase2Mugshot_VsBarsSlideIn: @ 80D2968
 	push {r4-r7,lr}
 	adds r4, r0, 0
-	ldr r0, _080D2A4C @ =gUnknown_2039A2C
+	ldr r0, _080D2A4C @ =sTransitionStructPtr
 	ldr r1, [r0]
 	ldrb r0, [r1]
 	movs r0, 0
@@ -4346,7 +4346,7 @@ _080D2A1E:
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
 _080D2A2A:
-	ldr r0, _080D2A4C @ =gUnknown_2039A2C
+	ldr r0, _080D2A4C @ =sTransitionStructPtr
 	ldr r1, [r0]
 	ldrh r0, [r1, 0x18]
 	subs r0, 0x8
@@ -4363,15 +4363,15 @@ _080D2A2A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D2A4C: .4byte gUnknown_2039A2C
+_080D2A4C: .4byte sTransitionStructPtr
 _080D2A50: .4byte gScanlineEffectRegBuffers
-	thumb_func_end sub_80D2968
+	thumb_func_end BT_Phase2Mugshot_VsBarsSlideIn
 
-	thumb_func_start sub_80D2A54
-sub_80D2A54: @ 80D2A54
+	thumb_func_start BT_Phase2Mugshot_StartSpriteSlide
+BT_Phase2Mugshot_StartSpriteSlide: @ 80D2A54
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r2, _080D2AC8 @ =gUnknown_2039A2C
+	ldr r2, _080D2AC8 @ =sTransitionStructPtr
 	ldr r1, [r2]
 	ldrb r0, [r1]
 	movs r0, 0
@@ -4404,14 +4404,14 @@ _080D2A68:
 	movs r1, 0x22
 	ldrsh r0, [r4, r1]
 	movs r1, 0
-	bl sub_80D3120
+	bl BT_SetSpriteAsOpponentOrPlayer
 	movs r1, 0x24
 	ldrsh r0, [r4, r1]
 	movs r1, 0x1
-	bl sub_80D3120
+	bl BT_SetSpriteAsOpponentOrPlayer
 	movs r1, 0x22
 	ldrsh r0, [r4, r1]
-	bl sub_80D3138
+	bl BT_StartSpriteSlide
 	movs r0, 0x61
 	bl PlaySE
 	ldr r1, [r5]
@@ -4424,15 +4424,15 @@ _080D2A68:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D2AC8: .4byte gUnknown_2039A2C
+_080D2AC8: .4byte sTransitionStructPtr
 _080D2ACC: .4byte gScanlineEffectRegBuffers
-	thumb_func_end sub_80D2A54
+	thumb_func_end BT_Phase2Mugshot_StartSpriteSlide
 
-	thumb_func_start sub_80D2AD0
-sub_80D2AD0: @ 80D2AD0
+	thumb_func_start BT_Phase2Mugshot_WaitForOpponentInPlace
+BT_Phase2Mugshot_WaitForOpponentInPlace: @ 80D2AD0
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, _080D2B08 @ =gUnknown_2039A2C
+	ldr r0, _080D2B08 @ =sTransitionStructPtr
 	ldr r1, [r0]
 	ldrh r0, [r1, 0x18]
 	subs r0, 0x8
@@ -4442,7 +4442,7 @@ sub_80D2AD0: @ 80D2AD0
 	strh r0, [r1, 0x1A]
 	movs r1, 0x22
 	ldrsh r0, [r4, r1]
-	bl sub_80D3154
+	bl BT_IsSpriteSlideFinished
 	lsls r0, 16
 	cmp r0, 0
 	beq _080D2B00
@@ -4451,23 +4451,23 @@ sub_80D2AD0: @ 80D2AD0
 	strh r0, [r4, 0x8]
 	movs r1, 0x24
 	ldrsh r0, [r4, r1]
-	bl sub_80D3138
+	bl BT_StartSpriteSlide
 _080D2B00:
 	movs r0, 0
 	pop {r4}
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D2B08: .4byte gUnknown_2039A2C
-	thumb_func_end sub_80D2AD0
+_080D2B08: .4byte sTransitionStructPtr
+	thumb_func_end BT_Phase2Mugshot_WaitForOpponentInPlace
 
-	thumb_func_start sub_80D2B0C
-sub_80D2B0C: @ 80D2B0C
+	thumb_func_start BT_Phase2Mugshot_WaitForPlayerInPlace
+BT_Phase2Mugshot_WaitForPlayerInPlace: @ 80D2B0C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
 	adds r6, r0, 0
-	ldr r7, _080D2BAC @ =gUnknown_2039A2C
+	ldr r7, _080D2BAC @ =sTransitionStructPtr
 	ldr r1, [r7]
 	ldrh r0, [r1, 0x18]
 	subs r0, 0x8
@@ -4479,7 +4479,7 @@ sub_80D2B0C: @ 80D2B0C
 	strh r0, [r1, 0x1A]
 	movs r1, 0x24
 	ldrsh r0, [r6, r1]
-	bl sub_80D3154
+	bl BT_IsSpriteSlideFinished
 	lsls r0, 16
 	cmp r0, 0
 	beq _080D2BA0
@@ -4528,7 +4528,7 @@ sub_80D2B0C: @ 80D2B0C
 	ldr r1, [r7]
 	movs r0, 0xBF
 	strh r0, [r1, 0xE]
-	ldr r0, _080D2BC0 @ =sub_80D2DEC
+	ldr r0, _080D2BC0 @ =VBCB_BT_Phase2Mugshot2_WhiteFade
 	bl SetVBlankCallback
 _080D2BA0:
 	movs r0, 0
@@ -4538,19 +4538,19 @@ _080D2BA0:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D2BAC: .4byte gUnknown_2039A2C
+_080D2BAC: .4byte sTransitionStructPtr
 _080D2BB0: .4byte 0x040000b0
 _080D2BB4: .4byte 0x0000c5ff
 _080D2BB8: .4byte 0x00007fff
 _080D2BBC: .4byte gScanlineEffectRegBuffers
-_080D2BC0: .4byte sub_80D2DEC
-	thumb_func_end sub_80D2B0C
+_080D2BC0: .4byte VBCB_BT_Phase2Mugshot2_WhiteFade
+	thumb_func_end BT_Phase2Mugshot_WaitForPlayerInPlace
 
-	thumb_func_start sub_80D2BC4
-sub_80D2BC4: @ 80D2BC4
+	thumb_func_start BT_Phase2Mugshot_ExpandWhiteBand
+BT_Phase2Mugshot_ExpandWhiteBand: @ 80D2BC4
 	push {r4-r7,lr}
 	adds r4, r0, 0
-	ldr r2, _080D2C84 @ =gUnknown_2039A2C
+	ldr r2, _080D2C84 @ =sTransitionStructPtr
 	ldr r1, [r2]
 	ldrb r0, [r1]
 	movs r0, 0
@@ -4651,15 +4651,15 @@ _080D2C6E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D2C84: .4byte gUnknown_2039A2C
+_080D2C84: .4byte sTransitionStructPtr
 _080D2C88: .4byte gScanlineEffectRegBuffers
-	thumb_func_end sub_80D2BC4
+	thumb_func_end BT_Phase2Mugshot_ExpandWhiteBand
 
-	thumb_func_start sub_80D2C8C
-sub_80D2C8C: @ 80D2C8C
+	thumb_func_start BT_Phase2Mugshot_StartBlackFade
+BT_Phase2Mugshot_StartBlackFade: @ 80D2C8C
 	push {r4-r6,lr}
 	adds r4, r0, 0
-	ldr r5, _080D2CBC @ =gUnknown_2039A2C
+	ldr r5, _080D2CBC @ =sTransitionStructPtr
 	ldr r0, [r5]
 	ldrb r1, [r0]
 	movs r6, 0
@@ -4681,15 +4681,15 @@ sub_80D2C8C: @ 80D2C8C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D2CBC: .4byte gUnknown_2039A2C
+_080D2CBC: .4byte sTransitionStructPtr
 _080D2CC0: .4byte 0x00007fff
-	thumb_func_end sub_80D2C8C
+	thumb_func_end BT_Phase2Mugshot_StartBlackFade
 
-	thumb_func_start sub_80D2CC4
-sub_80D2CC4: @ 80D2CC4
+	thumb_func_start BT_Phase2Mugshot_WaitForBlackFade
+BT_Phase2Mugshot_WaitForBlackFade: @ 80D2CC4
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r5, _080D2D08 @ =gUnknown_2039A2C
+	ldr r5, _080D2D08 @ =sTransitionStructPtr
 	ldr r1, [r5]
 	ldrb r0, [r1]
 	movs r0, 0
@@ -4721,12 +4721,12 @@ _080D2CF4:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D2D08: .4byte gUnknown_2039A2C
+_080D2D08: .4byte sTransitionStructPtr
 _080D2D0C: .4byte gScanlineEffectRegBuffers
-	thumb_func_end sub_80D2CC4
+	thumb_func_end BT_Phase2Mugshot_WaitForBlackFade
 
-	thumb_func_start sub_80D2D10
-sub_80D2D10: @ 80D2D10
+	thumb_func_start BT_Phase2Mugshot_End
+BT_Phase2Mugshot_End: @ 80D2D10
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r1, _080D2D44 @ =0x040000b0
@@ -4739,7 +4739,7 @@ sub_80D2D10: @ 80D2D10
 	ands r0, r2
 	strh r0, [r1, 0xA]
 	ldrh r0, [r1, 0xA]
-	bl sub_80D3E60
+	bl BT_BlendPalettesToBlack
 	ldr r0, [r4]
 	bl FindTaskIdByFunc
 	lsls r0, 24
@@ -4753,10 +4753,10 @@ sub_80D2D10: @ 80D2D10
 _080D2D44: .4byte 0x040000b0
 _080D2D48: .4byte 0x0000c5ff
 _080D2D4C: .4byte 0x00007fff
-	thumb_func_end sub_80D2D10
+	thumb_func_end BT_Phase2Mugshot_End
 
-	thumb_func_start sub_80D2D50
-sub_80D2D50: @ 80D2D50
+	thumb_func_start VBCB_BT_Phase2Mugshot1_Slide
+VBCB_BT_Phase2Mugshot1_Slide: @ 80D2D50
 	push {r4,r5,lr}
 	ldr r4, _080D2DC4 @ =0x040000b0
 	ldrh r1, [r4, 0xA]
@@ -4768,8 +4768,8 @@ sub_80D2D50: @ 80D2D50
 	ands r0, r1
 	strh r0, [r4, 0xA]
 	ldrh r0, [r4, 0xA]
-	bl sub_80D3DF4
-	ldr r5, _080D2DD0 @ =gUnknown_2039A2C
+	bl BT_VBSyncOamAndPltt
+	ldr r5, _080D2DD0 @ =sTransitionStructPtr
 	ldr r0, [r5]
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -4815,17 +4815,17 @@ _080D2D88:
 _080D2DC4: .4byte 0x040000b0
 _080D2DC8: .4byte 0x0000c5ff
 _080D2DCC: .4byte 0x00007fff
-_080D2DD0: .4byte gUnknown_2039A2C
+_080D2DD0: .4byte sTransitionStructPtr
 _080D2DD4: .4byte 0x040000d4
 _080D2DD8: .4byte gScanlineEffectRegBuffers
 _080D2DDC: .4byte 0x800000a0
 _080D2DE0: .4byte gScanlineEffectRegBuffers + 0x780
 _080D2DE4: .4byte 0x04000040
 _080D2DE8: .4byte 0xa2400001
-	thumb_func_end sub_80D2D50
+	thumb_func_end VBCB_BT_Phase2Mugshot1_Slide
 
-	thumb_func_start sub_80D2DEC
-sub_80D2DEC: @ 80D2DEC
+	thumb_func_start VBCB_BT_Phase2Mugshot2_WhiteFade
+VBCB_BT_Phase2Mugshot2_WhiteFade: @ 80D2DEC
 	push {r4,lr}
 	ldr r4, _080D2E44 @ =0x040000b0
 	ldrh r1, [r4, 0xA]
@@ -4837,8 +4837,8 @@ sub_80D2DEC: @ 80D2DEC
 	ands r0, r1
 	strh r0, [r4, 0xA]
 	ldrh r0, [r4, 0xA]
-	bl sub_80D3DF4
-	ldr r2, _080D2E50 @ =gUnknown_2039A2C
+	bl BT_VBSyncOamAndPltt
+	ldr r2, _080D2E50 @ =sTransitionStructPtr
 	ldr r0, [r2]
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -4872,34 +4872,34 @@ _080D2E24:
 _080D2E44: .4byte 0x040000b0
 _080D2E48: .4byte 0x0000c5ff
 _080D2E4C: .4byte 0x00007fff
-_080D2E50: .4byte gUnknown_2039A2C
+_080D2E50: .4byte sTransitionStructPtr
 _080D2E54: .4byte 0x040000d4
 _080D2E58: .4byte gScanlineEffectRegBuffers
 _080D2E5C: .4byte 0x800000a0
 _080D2E60: .4byte gScanlineEffectRegBuffers + 0x780
 _080D2E64: .4byte 0x04000054
 _080D2E68: .4byte 0xa2400001
-	thumb_func_end sub_80D2DEC
+	thumb_func_end VBCB_BT_Phase2Mugshot2_WhiteFade
 
-	thumb_func_start sub_80D2E6C
-sub_80D2E6C: @ 80D2E6C
+	thumb_func_start HBCB_BT_Phase2Mugshot
+HBCB_BT_Phase2Mugshot: @ 80D2E6C
 	push {lr}
 	ldr r0, _080D2E80 @ =0x04000006
 	ldrh r0, [r0]
 	cmp r0, 0x4F
 	bhi _080D2E8C
 	ldr r1, _080D2E84 @ =0x04000010
-	ldr r0, _080D2E88 @ =gUnknown_2039A2C
+	ldr r0, _080D2E88 @ =sTransitionStructPtr
 	ldr r0, [r0]
 	ldrh r0, [r0, 0x18]
 	b _080D2E94
 	.align 2, 0
 _080D2E80: .4byte 0x04000006
 _080D2E84: .4byte 0x04000010
-_080D2E88: .4byte gUnknown_2039A2C
+_080D2E88: .4byte sTransitionStructPtr
 _080D2E8C:
 	ldr r1, _080D2E9C @ =0x04000010
-	ldr r0, _080D2EA0 @ =gUnknown_2039A2C
+	ldr r0, _080D2EA0 @ =sTransitionStructPtr
 	ldr r0, [r0]
 	ldrh r0, [r0, 0x1A]
 _080D2E94:
@@ -4908,11 +4908,11 @@ _080D2E94:
 	bx r0
 	.align 2, 0
 _080D2E9C: .4byte 0x04000010
-_080D2EA0: .4byte gUnknown_2039A2C
-	thumb_func_end sub_80D2E6C
+_080D2EA0: .4byte sTransitionStructPtr
+	thumb_func_end HBCB_BT_Phase2Mugshot
 
-	thumb_func_start sub_80D2EA4
-sub_80D2EA4: @ 80D2EA4
+	thumb_func_start BT_Phase2Mugshots_CreateSprites
+BT_Phase2Mugshots_CreateSprites: @ 80D2EA4
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -4922,13 +4922,13 @@ sub_80D2EA4: @ 80D2EA4
 	ldr r6, _080D2FF8 @ =gReservedSpritePaletteCount
 	movs r0, 0xA
 	strb r0, [r6]
-	ldr r0, _080D2FFC @ =gUnknown_83FA494
+	ldr r0, _080D2FFC @ =sMugshotsTrainerPicIDsTable
 	movs r2, 0x26
 	ldrsh r1, [r4, r2]
 	mov r9, r1
 	add r0, r9
 	ldrb r0, [r0]
-	ldr r2, _080D3000 @ =gUnknown_83FA4AE
+	ldr r2, _080D3000 @ =sMugshotsOpponentCoords
 	lsls r1, 2
 	mov r9, r1
 	adds r1, r2
@@ -4980,7 +4980,7 @@ sub_80D2EA4: @ 80D2EA4
 	adds r6, r0
 	lsls r6, 2
 	adds r6, r1
-	ldr r0, _080D3010 @ =sub_80D301C
+	ldr r0, _080D3010 @ =SpriteCB_BT_Phase2Mugshots
 	str r0, [r5, 0x1C]
 	str r0, [r6, 0x1C]
 	ldrb r0, [r5, 0x1]
@@ -5046,7 +5046,7 @@ sub_80D2EA4: @ 80D2EA4
 	ldrb r0, [r5, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	ldr r2, _080D3014 @ =gUnknown_83FA49A
+	ldr r2, _080D3014 @ =sMugshotsOpponentRotationScales
 	mov r3, r9
 	adds r1, r3, r2
 	movs r4, 0
@@ -5075,21 +5075,21 @@ sub_80D2EA4: @ 80D2EA4
 	bx r0
 	.align 2, 0
 _080D2FF8: .4byte gReservedSpritePaletteCount
-_080D2FFC: .4byte gUnknown_83FA494
-_080D3000: .4byte gUnknown_83FA4AE
+_080D2FFC: .4byte sMugshotsTrainerPicIDsTable
+_080D3000: .4byte sMugshotsOpponentCoords
 _080D3004: .4byte gDecompressionBuffer
 _080D3008: .4byte gSaveBlock2Ptr
 _080D300C: .4byte gSprites
-_080D3010: .4byte sub_80D301C
-_080D3014: .4byte gUnknown_83FA49A
+_080D3010: .4byte SpriteCB_BT_Phase2Mugshots
+_080D3014: .4byte sMugshotsOpponentRotationScales
 _080D3018: .4byte 0xfffffe00
-	thumb_func_end sub_80D2EA4
+	thumb_func_end BT_Phase2Mugshots_CreateSprites
 
-	thumb_func_start sub_80D301C
-sub_80D301C: @ 80D301C
+	thumb_func_start SpriteCB_BT_Phase2Mugshots
+SpriteCB_BT_Phase2Mugshots: @ 80D301C
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r5, _080D3040 @ =gUnknown_83FA4C4
+	ldr r5, _080D3040 @ =sBT_Phase2MugshotSpriteFuncs
 _080D3022:
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
@@ -5105,26 +5105,26 @@ _080D3022:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D3040: .4byte gUnknown_83FA4C4
-	thumb_func_end sub_80D301C
+_080D3040: .4byte sBT_Phase2MugshotSpriteFuncs
+	thumb_func_end SpriteCB_BT_Phase2Mugshots
 
-	thumb_func_start sub_80D3044
-sub_80D3044: @ 80D3044
+	thumb_func_start BT_Phase2MugshotsSpriteFuncs_Wait
+BT_Phase2MugshotsSpriteFuncs_Wait: @ 80D3044
 	movs r0, 0
 	bx lr
-	thumb_func_end sub_80D3044
+	thumb_func_end BT_Phase2MugshotsSpriteFuncs_Wait
 
-	thumb_func_start sub_80D3048
-sub_80D3048: @ 80D3048
+	thumb_func_start BT_Phase2MugshotsSpriteFuncs_InitParams
+BT_Phase2MugshotsSpriteFuncs_InitParams: @ 80D3048
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r5, r0, 0
-	ldr r1, _080D308C @ =gUnknown_83FA4E0
+	ldr r1, _080D308C @ =sMugShotSlideVelocity
 	mov r0, sp
 	movs r2, 0x4
 	bl memcpy
 	add r4, sp, 0x4
-	ldr r1, _080D3090 @ =gUnknown_83FA4E4
+	ldr r1, _080D3090 @ =sMugShotSlideDeceleration
 	adds r0, r4, 0
 	movs r2, 0x4
 	bl memcpy
@@ -5149,12 +5149,12 @@ sub_80D3048: @ 80D3048
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D308C: .4byte gUnknown_83FA4E0
-_080D3090: .4byte gUnknown_83FA4E4
-	thumb_func_end sub_80D3048
+_080D308C: .4byte sMugShotSlideVelocity
+_080D3090: .4byte sMugShotSlideDeceleration
+	thumb_func_end BT_Phase2MugshotsSpriteFuncs_InitParams
 
-	thumb_func_start sub_80D3094
-sub_80D3094: @ 80D3094
+	thumb_func_start BT_Phase2MugshotsSpriteFuncs_SlideSpriteIn
+BT_Phase2MugshotsSpriteFuncs_SlideSpriteIn: @ 80D3094
 	push {lr}
 	adds r1, r0, 0
 	ldrh r0, [r1, 0x30]
@@ -5183,10 +5183,10 @@ _080D30C0:
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80D3094
+	thumb_func_end BT_Phase2MugshotsSpriteFuncs_SlideSpriteIn
 
-	thumb_func_start sub_80D30C8
-sub_80D30C8: @ 80D30C8
+	thumb_func_start BT_Phase2MugshotsSpriteFuncs_DecelerateSprite
+BT_Phase2MugshotsSpriteFuncs_DecelerateSprite: @ 80D30C8
 	push {lr}
 	adds r2, r0, 0
 	ldrh r3, [r2, 0x32]
@@ -5210,10 +5210,10 @@ _080D30EE:
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80D30C8
+	thumb_func_end BT_Phase2MugshotsSpriteFuncs_DecelerateSprite
 
-	thumb_func_start sub_80D30F4
-sub_80D30F4: @ 80D30F4
+	thumb_func_start BT_Phase2MugshotsSpriteFuncs_DecelerateSprite2
+BT_Phase2MugshotsSpriteFuncs_DecelerateSprite2: @ 80D30F4
 	push {lr}
 	adds r2, r0, 0
 	ldrh r0, [r2, 0x32]
@@ -5236,10 +5236,10 @@ _080D3118:
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80D30F4
+	thumb_func_end BT_Phase2MugshotsSpriteFuncs_DecelerateSprite2
 
-	thumb_func_start sub_80D3120
-sub_80D3120: @ 80D3120
+	thumb_func_start BT_SetSpriteAsOpponentOrPlayer
+BT_SetSpriteAsOpponentOrPlayer: @ 80D3120
 	ldr r3, _080D3134 @ =gSprites
 	lsls r0, 16
 	asrs r0, 16
@@ -5251,10 +5251,10 @@ sub_80D3120: @ 80D3120
 	bx lr
 	.align 2, 0
 _080D3134: .4byte gSprites
-	thumb_func_end sub_80D3120
+	thumb_func_end BT_SetSpriteAsOpponentOrPlayer
 
-	thumb_func_start sub_80D3138
-sub_80D3138: @ 80D3138
+	thumb_func_start BT_StartSpriteSlide
+BT_StartSpriteSlide: @ 80D3138
 	ldr r2, _080D3150 @ =gSprites
 	lsls r0, 16
 	asrs r0, 16
@@ -5268,10 +5268,10 @@ sub_80D3138: @ 80D3138
 	bx lr
 	.align 2, 0
 _080D3150: .4byte gSprites
-	thumb_func_end sub_80D3138
+	thumb_func_end BT_StartSpriteSlide
 
-	thumb_func_start sub_80D3154
-sub_80D3154: @ 80D3154
+	thumb_func_start BT_IsSpriteSlideFinished
+BT_IsSpriteSlideFinished: @ 80D3154
 	ldr r2, _080D3168 @ =gSprites
 	lsls r0, 16
 	asrs r0, 16
@@ -5284,14 +5284,14 @@ sub_80D3154: @ 80D3154
 	bx lr
 	.align 2, 0
 _080D3168: .4byte gSprites
-	thumb_func_end sub_80D3154
+	thumb_func_end BT_IsSpriteSlideFinished
 
-	thumb_func_start sub_80D316C
-sub_80D316C: @ 80D316C
+	thumb_func_start BT_Phase2SlicedScreen
+BT_Phase2SlicedScreen: @ 80D316C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, _080D319C @ =gUnknown_83FA4E8
+	ldr r5, _080D319C @ =sBT_Phase2SlicedScreenFuncs
 	ldr r2, _080D31A0 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
@@ -5312,15 +5312,15 @@ _080D317E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D319C: .4byte gUnknown_83FA4E8
+_080D319C: .4byte sBT_Phase2SlicedScreenFuncs
 _080D31A0: .4byte gTasks
-	thumb_func_end sub_80D316C
+	thumb_func_end BT_Phase2SlicedScreen
 
-	thumb_func_start sub_80D31A4
-sub_80D31A4: @ 80D31A4
+	thumb_func_start BT_Phase2SlicedScreen_Init
+BT_Phase2SlicedScreen_Init: @ 80D31A4
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	bl sub_80D3DD0
+	bl BT_InitCtrlBlk
 	bl ScanlineEffect_Clear
 	movs r3, 0
 	movs r0, 0x80
@@ -5328,7 +5328,7 @@ sub_80D31A4: @ 80D31A4
 	strh r0, [r5, 0xC]
 	movs r0, 0x1
 	strh r0, [r5, 0xE]
-	ldr r2, _080D3210 @ =gUnknown_2039A2C
+	ldr r2, _080D3210 @ =sTransitionStructPtr
 	ldr r1, [r2]
 	movs r0, 0x3F
 	strh r0, [r1, 0x2]
@@ -5356,9 +5356,9 @@ _080D31D0:
 	bls _080D31D0
 	movs r0, 0x2
 	bl EnableInterrupts
-	ldr r0, _080D3218 @ =sub_80D332C
+	ldr r0, _080D3218 @ =VBCB_BT_Phase2SlicedScreen
 	bl SetVBlankCallback
-	ldr r0, _080D321C @ =sub_80D33C0
+	ldr r0, _080D321C @ =HBCB_BT_Phase2SlicedScreen
 	bl SetHBlankCallback
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
@@ -5368,19 +5368,19 @@ _080D31D0:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D3210: .4byte gUnknown_2039A2C
+_080D3210: .4byte sTransitionStructPtr
 _080D3214: .4byte gScanlineEffectRegBuffers + 0x780
-_080D3218: .4byte sub_80D332C
-_080D321C: .4byte sub_80D33C0
-	thumb_func_end sub_80D31A4
+_080D3218: .4byte VBCB_BT_Phase2SlicedScreen
+_080D321C: .4byte HBCB_BT_Phase2SlicedScreen
+	thumb_func_end BT_Phase2SlicedScreen_Init
 
-	thumb_func_start sub_80D3220
-sub_80D3220: @ 80D3220
+	thumb_func_start BT_Phase2SlicedScreen_UpdateOffsets
+BT_Phase2SlicedScreen_UpdateOffsets: @ 80D3220
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
 	adds r3, r0, 0
-	ldr r2, _080D329C @ =gUnknown_2039A2C
+	ldr r2, _080D329C @ =sTransitionStructPtr
 	ldr r1, [r2]
 	ldrb r0, [r1]
 	movs r0, 0
@@ -5442,7 +5442,7 @@ _080D3278:
 	subs r0, r1
 	b _080D32BA
 	.align 2, 0
-_080D329C: .4byte gUnknown_2039A2C
+_080D329C: .4byte sTransitionStructPtr
 _080D32A0: .4byte 0x00000fff
 _080D32A4: .4byte gScanlineEffectRegBuffers
 _080D32A8:
@@ -5482,10 +5482,10 @@ _080D32D4:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80D3220
+	thumb_func_end BT_Phase2SlicedScreen_UpdateOffsets
 
-	thumb_func_start sub_80D32EC
-sub_80D32EC: @ 80D32EC
+	thumb_func_start BT_Phase2SlicedScreen_End
+BT_Phase2SlicedScreen_End: @ 80D32EC
 	push {lr}
 	ldr r1, _080D331C @ =0x040000b0
 	ldrh r2, [r1, 0xA]
@@ -5497,8 +5497,8 @@ sub_80D32EC: @ 80D32EC
 	ands r0, r2
 	strh r0, [r1, 0xA]
 	ldrh r0, [r1, 0xA]
-	bl sub_80D3E60
-	ldr r0, _080D3328 @ =sub_80D316C
+	bl BT_BlendPalettesToBlack
+	ldr r0, _080D3328 @ =BT_Phase2SlicedScreen
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -5510,11 +5510,11 @@ sub_80D32EC: @ 80D32EC
 _080D331C: .4byte 0x040000b0
 _080D3320: .4byte 0x0000c5ff
 _080D3324: .4byte 0x00007fff
-_080D3328: .4byte sub_80D316C
-	thumb_func_end sub_80D32EC
+_080D3328: .4byte BT_Phase2SlicedScreen
+	thumb_func_end BT_Phase2SlicedScreen_End
 
-	thumb_func_start sub_80D332C
-sub_80D332C: @ 80D332C
+	thumb_func_start VBCB_BT_Phase2SlicedScreen
+VBCB_BT_Phase2SlicedScreen: @ 80D332C
 	push {r4,r5,lr}
 	ldr r5, _080D3398 @ =0x040000b0
 	ldrh r1, [r5, 0xA]
@@ -5526,8 +5526,8 @@ sub_80D332C: @ 80D332C
 	ands r0, r1
 	strh r0, [r5, 0xA]
 	ldrh r0, [r5, 0xA]
-	bl sub_80D3DF4
-	ldr r4, _080D33A4 @ =gUnknown_2039A2C
+	bl BT_VBSyncOamAndPltt
+	ldr r4, _080D33A4 @ =sTransitionStructPtr
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x2]
 	movs r0, 0x48
@@ -5569,17 +5569,17 @@ _080D3382:
 _080D3398: .4byte 0x040000b0
 _080D339C: .4byte 0x0000c5ff
 _080D33A0: .4byte 0x00007fff
-_080D33A4: .4byte gUnknown_2039A2C
+_080D33A4: .4byte sTransitionStructPtr
 _080D33A8: .4byte 0x040000d4
 _080D33AC: .4byte gScanlineEffectRegBuffers
 _080D33B0: .4byte 0x80000140
 _080D33B4: .4byte gScanlineEffectRegBuffers + 0x8C0
 _080D33B8: .4byte 0x04000040
 _080D33BC: .4byte 0xa2400001
-	thumb_func_end sub_80D332C
+	thumb_func_end VBCB_BT_Phase2SlicedScreen
 
-	thumb_func_start sub_80D33C0
-sub_80D33C0: @ 80D33C0
+	thumb_func_start HBCB_BT_Phase2SlicedScreen
+HBCB_BT_Phase2SlicedScreen: @ 80D33C0
 	ldr r1, _080D33E0 @ =gScanlineEffectRegBuffers
 	ldr r0, _080D33E4 @ =0x04000006
 	ldrh r0, [r0]
@@ -5600,14 +5600,14 @@ sub_80D33C0: @ 80D33C0
 _080D33E0: .4byte gScanlineEffectRegBuffers
 _080D33E4: .4byte 0x04000006
 _080D33E8: .4byte 0x04000014
-	thumb_func_end sub_80D33C0
+	thumb_func_end HBCB_BT_Phase2SlicedScreen
 
-	thumb_func_start sub_80D33EC
-sub_80D33EC: @ 80D33EC
+	thumb_func_start BT_Phase2WhiteFadeInStripes
+BT_Phase2WhiteFadeInStripes: @ 80D33EC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, _080D341C @ =gUnknown_83FA4F4
+	ldr r5, _080D341C @ =sBT_Phase2WhiteFadeInStripesFuncs
 	ldr r2, _080D3420 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
@@ -5628,17 +5628,17 @@ _080D33FE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D341C: .4byte gUnknown_83FA4F4
+_080D341C: .4byte sBT_Phase2WhiteFadeInStripesFuncs
 _080D3420: .4byte gTasks
-	thumb_func_end sub_80D33EC
+	thumb_func_end BT_Phase2WhiteFadeInStripes
 
-	thumb_func_start sub_80D3424
-sub_80D3424: @ 80D3424
+	thumb_func_start BT_Phase2WhiteFadeInStripes_Init
+BT_Phase2WhiteFadeInStripes_Init: @ 80D3424
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_80D3DD0
+	bl BT_InitCtrlBlk
 	bl ScanlineEffect_Clear
-	ldr r0, _080D348C @ =gUnknown_2039A2C
+	ldr r0, _080D348C @ =sTransitionStructPtr
 	ldr r1, [r0]
 	movs r2, 0
 	movs r0, 0xBF
@@ -5670,9 +5670,9 @@ _080D3450:
 	bls _080D3450
 	movs r0, 0x2
 	bl EnableInterrupts
-	ldr r0, _080D3494 @ =sub_80D36E0
+	ldr r0, _080D3494 @ =HBCB_BT_Phase2WhiteFadeInStripes
 	bl SetHBlankCallback
-	ldr r0, _080D3498 @ =sub_80D35F4
+	ldr r0, _080D3498 @ =VBCB_BT_Phase2WhiteFadeInStripes1
 	bl SetVBlankCallback
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
@@ -5682,25 +5682,25 @@ _080D3450:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D348C: .4byte gUnknown_2039A2C
+_080D348C: .4byte sTransitionStructPtr
 _080D3490: .4byte gScanlineEffectRegBuffers + 0x780
-_080D3494: .4byte sub_80D36E0
-_080D3498: .4byte sub_80D35F4
-	thumb_func_end sub_80D3424
+_080D3494: .4byte HBCB_BT_Phase2WhiteFadeInStripes
+_080D3498: .4byte VBCB_BT_Phase2WhiteFadeInStripes1
+	thumb_func_end BT_Phase2WhiteFadeInStripes_Init
 
-	thumb_func_start sub_80D349C
-sub_80D349C: @ 80D349C
+	thumb_func_start BT_Phase2WhiteFadeInStripes_SetupSprites
+BT_Phase2WhiteFadeInStripes_SetupSprites: @ 80D349C
 	push {r4-r6,lr}
 	sub sp, 0xC
 	adds r6, r0, 0
-	ldr r1, _080D3504 @ =gUnknown_83FA508
+	ldr r1, _080D3504 @ =sWhiteStripeDelay
 	mov r0, sp
 	movs r2, 0xC
 	bl memcpy
 	movs r5, 0
 	movs r4, 0
 _080D34B0:
-	ldr r0, _080D3508 @ =sub_80D3720
+	ldr r0, _080D3508 @ =SpriteCB_BT_Phase2WhiteFadeInStripes
 	bl CreateInvisibleSprite
 	lsls r0, 24
 	lsrs r0, 24
@@ -5741,16 +5741,16 @@ _080D34B0:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D3504: .4byte gUnknown_83FA508
-_080D3508: .4byte sub_80D3720
+_080D3504: .4byte sWhiteStripeDelay
+_080D3508: .4byte SpriteCB_BT_Phase2WhiteFadeInStripes
 _080D350C: .4byte gSprites
-	thumb_func_end sub_80D349C
+	thumb_func_end BT_Phase2WhiteFadeInStripes_SetupSprites
 
-	thumb_func_start sub_80D3510
-sub_80D3510: @ 80D3510
+	thumb_func_start BT_Phase2WhiteFadeInStripes_IsWhiteFadeDone
+BT_Phase2WhiteFadeInStripes_IsWhiteFadeDone: @ 80D3510
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r2, _080D3544 @ =gUnknown_2039A2C
+	ldr r2, _080D3544 @ =sTransitionStructPtr
 	ldr r1, [r2]
 	ldrb r0, [r1]
 	movs r0, 0
@@ -5774,15 +5774,15 @@ _080D353A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D3544: .4byte gUnknown_2039A2C
+_080D3544: .4byte sTransitionStructPtr
 _080D3548: .4byte 0x00007fff
-	thumb_func_end sub_80D3510
+	thumb_func_end BT_Phase2WhiteFadeInStripes_IsWhiteFadeDone
 
-	thumb_func_start sub_80D354C
-sub_80D354C: @ 80D354C
+	thumb_func_start BT_Phase2WhiteFadeInStripes_Stop
+BT_Phase2WhiteFadeInStripes_Stop: @ 80D354C
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	ldr r5, _080D35A0 @ =gUnknown_2039A2C
+	ldr r5, _080D35A0 @ =sTransitionStructPtr
 	ldr r0, [r5]
 	ldrb r1, [r0]
 	movs r4, 0
@@ -5810,7 +5810,7 @@ sub_80D354C: @ 80D354C
 	movs r0, 0x3F
 	strh r0, [r1, 0x2]
 	strh r4, [r1, 0x20]
-	ldr r0, _080D35B0 @ =sub_80D3690
+	ldr r0, _080D35B0 @ =VBCB_BT_Phase2WhiteFadeInStripes2
 	bl SetVBlankCallback
 	ldrh r0, [r6, 0x8]
 	adds r0, 0x1
@@ -5820,17 +5820,17 @@ sub_80D354C: @ 80D354C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D35A0: .4byte gUnknown_2039A2C
+_080D35A0: .4byte sTransitionStructPtr
 _080D35A4: .4byte 0x040000b0
 _080D35A8: .4byte 0x0000c5ff
 _080D35AC: .4byte 0x00007fff
-_080D35B0: .4byte sub_80D3690
-	thumb_func_end sub_80D354C
+_080D35B0: .4byte VBCB_BT_Phase2WhiteFadeInStripes2
+	thumb_func_end BT_Phase2WhiteFadeInStripes_Stop
 
-	thumb_func_start sub_80D35B4
-sub_80D35B4: @ 80D35B4
+	thumb_func_start BT_Phase2WhiteFadeInStripes_IsDone
+BT_Phase2WhiteFadeInStripes_IsDone: @ 80D35B4
 	push {lr}
-	ldr r0, _080D35EC @ =gUnknown_2039A2C
+	ldr r0, _080D35EC @ =sTransitionStructPtr
 	ldr r1, [r0]
 	movs r2, 0xF0
 	lsls r2, 1
@@ -5845,8 +5845,8 @@ sub_80D35B4: @ 80D35B4
 	lsrs r0, 16
 	cmp r0, 0x10
 	bls _080D35E6
-	bl sub_80D3E60
-	ldr r0, _080D35F0 @ =sub_80D33EC
+	bl BT_BlendPalettesToBlack
+	ldr r0, _080D35F0 @ =BT_Phase2WhiteFadeInStripes
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -5856,12 +5856,12 @@ _080D35E6:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D35EC: .4byte gUnknown_2039A2C
-_080D35F0: .4byte sub_80D33EC
-	thumb_func_end sub_80D35B4
+_080D35EC: .4byte sTransitionStructPtr
+_080D35F0: .4byte BT_Phase2WhiteFadeInStripes
+	thumb_func_end BT_Phase2WhiteFadeInStripes_IsDone
 
-	thumb_func_start sub_80D35F4
-sub_80D35F4: @ 80D35F4
+	thumb_func_start VBCB_BT_Phase2WhiteFadeInStripes1
+VBCB_BT_Phase2WhiteFadeInStripes1: @ 80D35F4
 	push {r4,r5,lr}
 	ldr r5, _080D3668 @ =0x040000b0
 	ldrh r1, [r5, 0xA]
@@ -5873,8 +5873,8 @@ sub_80D35F4: @ 80D35F4
 	ands r0, r1
 	strh r0, [r5, 0xA]
 	ldrh r0, [r5, 0xA]
-	bl sub_80D3DF4
-	ldr r4, _080D3674 @ =gUnknown_2039A2C
+	bl BT_VBSyncOamAndPltt
+	ldr r4, _080D3674 @ =sTransitionStructPtr
 	ldr r0, [r4]
 	ldrh r1, [r0, 0xE]
 	movs r0, 0x50
@@ -5920,20 +5920,20 @@ _080D3654:
 _080D3668: .4byte 0x040000b0
 _080D366C: .4byte 0x0000c5ff
 _080D3670: .4byte 0x00007fff
-_080D3674: .4byte gUnknown_2039A2C
+_080D3674: .4byte sTransitionStructPtr
 _080D3678: .4byte 0x040000d4
 _080D367C: .4byte gScanlineEffectRegBuffers
 _080D3680: .4byte 0x80000140
 _080D3684: .4byte gScanlineEffectRegBuffers + 0x8C0
 _080D3688: .4byte 0x04000040
 _080D368C: .4byte 0xa2400001
-	thumb_func_end sub_80D35F4
+	thumb_func_end VBCB_BT_Phase2WhiteFadeInStripes1
 
-	thumb_func_start sub_80D3690
-sub_80D3690: @ 80D3690
+	thumb_func_start VBCB_BT_Phase2WhiteFadeInStripes2
+VBCB_BT_Phase2WhiteFadeInStripes2: @ 80D3690
 	push {r4,lr}
-	bl sub_80D3DF4
-	ldr r4, _080D36DC @ =gUnknown_2039A2C
+	bl BT_VBSyncOamAndPltt
+	ldr r4, _080D36DC @ =sTransitionStructPtr
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x12]
 	movs r0, 0x54
@@ -5962,11 +5962,11 @@ sub_80D3690: @ 80D3690
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D36DC: .4byte gUnknown_2039A2C
-	thumb_func_end sub_80D3690
+_080D36DC: .4byte sTransitionStructPtr
+	thumb_func_end VBCB_BT_Phase2WhiteFadeInStripes2
 
-	thumb_func_start sub_80D36E0
-sub_80D36E0: @ 80D36E0
+	thumb_func_start HBCB_BT_Phase2WhiteFadeInStripes
+HBCB_BT_Phase2WhiteFadeInStripes: @ 80D36E0
 	push {lr}
 	sub sp, 0x4
 	mov r1, sp
@@ -5998,10 +5998,10 @@ _080D36F8:
 _080D3714: .4byte 0x04000006
 _080D3718: .4byte 0x04000054
 _080D371C: .4byte gScanlineEffectRegBuffers
-	thumb_func_end sub_80D36E0
+	thumb_func_end HBCB_BT_Phase2WhiteFadeInStripes
 
-	thumb_func_start sub_80D3720
-sub_80D3720: @ 80D3720
+	thumb_func_start SpriteCB_BT_Phase2WhiteFadeInStripes
+SpriteCB_BT_Phase2WhiteFadeInStripes: @ 80D3720
 	push {r4-r7,lr}
 	adds r3, r0, 0
 	ldrh r1, [r3, 0x38]
@@ -6015,14 +6015,14 @@ sub_80D3720: @ 80D3720
 	ldrsh r0, [r3, r1]
 	cmp r0, 0
 	beq _080D380A
-	ldr r0, _080D3748 @ =gUnknown_2039A2C
+	ldr r0, _080D3748 @ =sTransitionStructPtr
 	ldr r1, [r0]
 	ldrb r0, [r1]
 	movs r0, 0x1
 	strb r0, [r1]
 	b _080D380A
 	.align 2, 0
-_080D3748: .4byte gUnknown_2039A2C
+_080D3748: .4byte sTransitionStructPtr
 _080D374C:
 	movs r2, 0x22
 	ldrsh r0, [r3, r2]
@@ -6099,7 +6099,7 @@ _080D37CE:
 	ldrsh r0, [r3, r2]
 	cmp r0, 0
 	beq _080D37E0
-	ldr r0, _080D3814 @ =gUnknown_2039A2C
+	ldr r0, _080D3814 @ =sTransitionStructPtr
 	ldr r1, [r0]
 	ldrb r0, [r1]
 	movs r0, 0x1
@@ -6111,7 +6111,7 @@ _080D37E0:
 	beq _080D380A
 	movs r2, 0x3A
 	ldrsh r0, [r3, r2]
-	ldr r1, _080D3814 @ =gUnknown_2039A2C
+	ldr r1, _080D3814 @ =sTransitionStructPtr
 	cmp r0, 0
 	beq _080D37FC
 	ldr r0, [r1]
@@ -6132,15 +6132,15 @@ _080D380A:
 	bx r0
 	.align 2, 0
 _080D3810: .4byte gScanlineEffectRegBuffers
-_080D3814: .4byte gUnknown_2039A2C
-	thumb_func_end sub_80D3720
+_080D3814: .4byte sTransitionStructPtr
+	thumb_func_end SpriteCB_BT_Phase2WhiteFadeInStripes
 
-	thumb_func_start sub_80D3818
-sub_80D3818: @ 80D3818
+	thumb_func_start BT_Phase2GridSquares
+BT_Phase2GridSquares: @ 80D3818
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, _080D3848 @ =gUnknown_83FA514
+	ldr r5, _080D3848 @ =sBT_Phase2GridSquaresFuncs
 	ldr r2, _080D384C @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
@@ -6161,19 +6161,19 @@ _080D382A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D3848: .4byte gUnknown_83FA514
+_080D3848: .4byte sBT_Phase2GridSquaresFuncs
 _080D384C: .4byte gTasks
-	thumb_func_end sub_80D3818
+	thumb_func_end BT_Phase2GridSquares
 
-	thumb_func_start Phase2_Transition_GridSquares_Func1
-Phase2_Transition_GridSquares_Func1: @ 80D3850
+	thumb_func_start BT_Phase2GridSquares_LoadGfx
+BT_Phase2GridSquares_LoadGfx: @ 80D3850
 	push {r4,lr}
 	sub sp, 0xC
 	adds r4, r0, 0
 	add r0, sp, 0x4
 	add r1, sp, 0x8
-	bl sub_80D3E28
-	ldr r0, _080D3898 @ =gUnknown_83FA140
+	bl BT_GetBg0TilemapAndTilesetBase
+	ldr r0, _080D3898 @ =sGridSquareTilemap
 	ldr r1, [sp, 0x8]
 	movs r2, 0x10
 	bl CpuSet
@@ -6186,7 +6186,7 @@ Phase2_Transition_GridSquares_Func1: @ 80D3850
 	ldr r2, _080D389C @ =0x01000400
 	mov r0, sp
 	bl CpuSet
-	ldr r0, _080D38A0 @ =gUnknown_83FA638
+	ldr r0, _080D38A0 @ =sSlidingPokeballBigPokeballPalette
 	movs r1, 0xF0
 	movs r2, 0x20
 	bl LoadPalette
@@ -6199,13 +6199,13 @@ Phase2_Transition_GridSquares_Func1: @ 80D3850
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D3898: .4byte gUnknown_83FA140
+_080D3898: .4byte sGridSquareTilemap
 _080D389C: .4byte 0x01000400
-_080D38A0: .4byte gUnknown_83FA638
-	thumb_func_end Phase2_Transition_GridSquares_Func1
+_080D38A0: .4byte sSlidingPokeballBigPokeballPalette
+	thumb_func_end BT_Phase2GridSquares_LoadGfx
 
-	thumb_func_start Phase2_Transition_GridSquares_Func2
-Phase2_Transition_GridSquares_Func2: @ 80D38A4
+	thumb_func_start BT_Phase2GridSquares_UpdateTileset
+BT_Phase2GridSquares_UpdateTileset: @ 80D38A4
 	push {r4,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -6214,7 +6214,7 @@ Phase2_Transition_GridSquares_Func2: @ 80D38A4
 	cmp r0, 0
 	bne _080D38E6
 	mov r0, sp
-	bl sub_80D3E08
+	bl BT_GetBg0TilesetBase
 	movs r0, 0x3
 	strh r0, [r4, 0xA]
 	ldrh r0, [r4, 0xC]
@@ -6223,7 +6223,7 @@ Phase2_Transition_GridSquares_Func2: @ 80D38A4
 	movs r1, 0xC
 	ldrsh r0, [r4, r1]
 	lsls r0, 5
-	ldr r1, _080D38F8 @ =gUnknown_83FA140
+	ldr r1, _080D38F8 @ =sGridSquareTilemap
 	adds r0, r1
 	ldr r1, [sp]
 	movs r2, 0x10
@@ -6247,11 +6247,11 @@ _080D38E6:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D38F8: .4byte gUnknown_83FA140
-	thumb_func_end Phase2_Transition_GridSquares_Func2
+_080D38F8: .4byte sGridSquareTilemap
+	thumb_func_end BT_Phase2GridSquares_UpdateTileset
 
-	thumb_func_start Phase2_Transition_GridSquares_Func3
-Phase2_Transition_GridSquares_Func3: @ 80D38FC
+	thumb_func_start BT_Phase2GridSquares_IsDone
+BT_Phase2GridSquares_IsDone: @ 80D38FC
 	push {lr}
 	ldrh r1, [r0, 0xA]
 	subs r1, 0x1
@@ -6259,8 +6259,8 @@ Phase2_Transition_GridSquares_Func3: @ 80D38FC
 	lsls r1, 16
 	cmp r1, 0
 	bne _080D391C
-	bl sub_80D3E60
-	ldr r0, _080D3924 @ =sub_80D3818
+	bl BT_BlendPalettesToBlack
+	ldr r0, _080D3924 @ =BT_Phase2GridSquares
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -6270,15 +6270,15 @@ _080D391C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D3924: .4byte sub_80D3818
-	thumb_func_end Phase2_Transition_GridSquares_Func3
+_080D3924: .4byte BT_Phase2GridSquares
+	thumb_func_end BT_Phase2GridSquares_IsDone
 
-	thumb_func_start sub_80D3928
-sub_80D3928: @ 80D3928
+	thumb_func_start BT_Phase2BlackDoodles
+BT_Phase2BlackDoodles: @ 80D3928
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, _080D3958 @ =gUnknown_83FA520
+	ldr r5, _080D3958 @ =sBT_Phase2BlackDoodlesFuncs
 	ldr r2, _080D395C @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
@@ -6299,17 +6299,17 @@ _080D393A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D3958: .4byte gUnknown_83FA520
+_080D3958: .4byte sBT_Phase2BlackDoodlesFuncs
 _080D395C: .4byte gTasks
-	thumb_func_end sub_80D3928
+	thumb_func_end BT_Phase2BlackDoodles
 
-	thumb_func_start sub_80D3960
-sub_80D3960: @ 80D3960
+	thumb_func_start BT_Phase2BlackDoodles_Init
+BT_Phase2BlackDoodles_Init: @ 80D3960
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_80D3DD0
+	bl BT_InitCtrlBlk
 	bl ScanlineEffect_Clear
-	ldr r0, _080D39B8 @ =gUnknown_2039A2C
+	ldr r0, _080D39B8 @ =sTransitionStructPtr
 	ldr r1, [r0]
 	movs r2, 0
 	movs r0, 0x3F
@@ -6336,7 +6336,7 @@ _080D3984:
 	adds r0, r4, 0
 	movs r2, 0xA0
 	bl CpuSet
-	ldr r0, _080D39C0 @ =sub_80D3BA4
+	ldr r0, _080D39C0 @ =VBCB_BT_Phase2BlackDoodles
 	bl SetVBlankCallback
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
@@ -6346,22 +6346,22 @@ _080D3984:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D39B8: .4byte gUnknown_2039A2C
+_080D39B8: .4byte sTransitionStructPtr
 _080D39BC: .4byte gScanlineEffectRegBuffers
-_080D39C0: .4byte sub_80D3BA4
-	thumb_func_end sub_80D3960
+_080D39C0: .4byte VBCB_BT_Phase2BlackDoodles
+	thumb_func_end BT_Phase2BlackDoodles_Init
 
-	thumb_func_start sub_80D39C4
-sub_80D39C4: @ 80D39C4
+	thumb_func_start BT_Phase2BlackDoodles_InitSingleBrush
+BT_Phase2BlackDoodles_InitSingleBrush: @ 80D39C4
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
 	sub sp, 0xC
 	mov r8, r0
-	ldr r0, _080D3A38 @ =gUnknown_2039A2C
+	ldr r0, _080D3A38 @ =sTransitionStructPtr
 	ldr r0, [r0]
 	adds r0, 0x24
-	ldr r6, _080D3A3C @ =gUnknown_83FA534
+	ldr r6, _080D3A3C @ =sBlackDoodlesSegments
 	mov r2, r8
 	movs r3, 0xA
 	ldrsh r1, [r2, r3]
@@ -6387,7 +6387,7 @@ sub_80D39C4: @ 80D39C4
 	movs r4, 0x1
 	str r4, [sp, 0x4]
 	str r4, [sp, 0x8]
-	bl sub_80D4088
+	bl BT_DiagonalSegment_InitParams
 	mov r0, r8
 	movs r2, 0xA
 	ldrsh r1, [r0, r2]
@@ -6410,18 +6410,18 @@ sub_80D39C4: @ 80D39C4
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D3A38: .4byte gUnknown_2039A2C
-_080D3A3C: .4byte gUnknown_83FA534
-	thumb_func_end sub_80D39C4
+_080D3A38: .4byte sTransitionStructPtr
+_080D3A3C: .4byte sBlackDoodlesSegments
+	thumb_func_end BT_Phase2BlackDoodles_InitSingleBrush
 
-	thumb_func_start sub_80D3A40
-sub_80D3A40: @ 80D3A40
+	thumb_func_start BT_Phase2BlackDoodles_DrawSingleBrush
+BT_Phase2BlackDoodles_DrawSingleBrush: @ 80D3A40
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
 	push {r6,r7}
 	adds r6, r0, 0
-	ldr r0, _080D3A90 @ =gUnknown_2039A2C
+	ldr r0, _080D3A90 @ =sTransitionStructPtr
 	ldr r1, [r0]
 	ldrb r0, [r1]
 	movs r0, 0
@@ -6432,7 +6432,7 @@ sub_80D3A40: @ 80D3A40
 	mov r9, r0
 _080D3A5C:
 	ldr r1, _080D3A94 @ =gScanlineEffectRegBuffers
-	ldr r0, _080D3A90 @ =gUnknown_2039A2C
+	ldr r0, _080D3A90 @ =sTransitionStructPtr
 	ldr r2, [r0]
 	movs r3, 0x2A
 	ldrsh r0, [r2, r3]
@@ -6459,7 +6459,7 @@ _080D3A84:
 	lsrs r3, r1, 16
 	b _080D3AB0
 	.align 2, 0
-_080D3A90: .4byte gUnknown_2039A2C
+_080D3A90: .4byte sTransitionStructPtr
 _080D3A94: .4byte gScanlineEffectRegBuffers
 _080D3A98:
 	lsls r0, r5, 16
@@ -6476,7 +6476,7 @@ _080D3AA6:
 	bgt _080D3AB0
 	lsrs r5, r1, 16
 _080D3AB0:
-	ldr r0, _080D3AD4 @ =gUnknown_2039A2C
+	ldr r0, _080D3AD4 @ =sTransitionStructPtr
 	ldr r4, [r0]
 	movs r0, 0x2A
 	ldrsh r2, [r4, r0]
@@ -6495,13 +6495,13 @@ _080D3AB0:
 	strh r0, [r6, 0x8]
 	b _080D3AFC
 	.align 2, 0
-_080D3AD4: .4byte gUnknown_2039A2C
+_080D3AD4: .4byte sTransitionStructPtr
 _080D3AD8:
 	adds r0, r4, 0
 	adds r0, 0x24
 	movs r1, 0x1
 	movs r2, 0x1
-	bl sub_80D4104
+	bl BT_DiagonalSegment_ComputePointOnSegment
 	lsls r0, 24
 	lsrs r7, r0, 24
 	mov r1, r8
@@ -6515,7 +6515,7 @@ _080D3AD8:
 	cmp r0, 0xF
 	ble _080D3A5C
 _080D3AFC:
-	ldr r0, _080D3B18 @ =gUnknown_2039A2C
+	ldr r0, _080D3B18 @ =sTransitionStructPtr
 	ldr r1, [r0]
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -6529,11 +6529,11 @@ _080D3AFC:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D3B18: .4byte gUnknown_2039A2C
-	thumb_func_end sub_80D3A40
+_080D3B18: .4byte sTransitionStructPtr
+	thumb_func_end BT_Phase2BlackDoodles_DrawSingleBrush
 
-	thumb_func_start sub_80D3B1C
-sub_80D3B1C: @ 80D3B1C
+	thumb_func_start BT_Phase2BlackDoodles_IsDone
+BT_Phase2BlackDoodles_IsDone: @ 80D3B1C
 	push {lr}
 	adds r2, r0, 0
 	ldrh r0, [r2, 0xA]
@@ -6553,8 +6553,8 @@ sub_80D3B1C: @ 80D3B1C
 	ands r0, r2
 	strh r0, [r1, 0xA]
 	ldrh r0, [r1, 0xA]
-	bl sub_80D3E60
-	ldr r0, _080D3B64 @ =sub_80D3928
+	bl BT_BlendPalettesToBlack
+	ldr r0, _080D3B64 @ =BT_Phase2BlackDoodles
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -6565,12 +6565,12 @@ sub_80D3B1C: @ 80D3B1C
 _080D3B58: .4byte 0x040000b0
 _080D3B5C: .4byte 0x0000c5ff
 _080D3B60: .4byte 0x00007fff
-_080D3B64: .4byte sub_80D3928
+_080D3B64: .4byte BT_Phase2BlackDoodles
 _080D3B68:
 	ldrh r0, [r2, 0x8]
 	adds r0, 0x1
 	strh r0, [r2, 0x8]
-	ldr r1, _080D3B84 @ =gUnknown_83FA57A
+	ldr r1, _080D3B84 @ =sBlackDoodlesDelay
 	movs r3, 0xA
 	ldrsh r0, [r2, r3]
 	subs r0, 0x1
@@ -6583,11 +6583,11 @@ _080D3B80:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D3B84: .4byte gUnknown_83FA57A
-	thumb_func_end sub_80D3B1C
+_080D3B84: .4byte sBlackDoodlesDelay
+	thumb_func_end BT_Phase2BlackDoodles_IsDone
 
-	thumb_func_start sub_80D3B88
-sub_80D3B88: @ 80D3B88
+	thumb_func_start BT_Phase2BlackDoodles_NextBrush
+BT_Phase2BlackDoodles_NextBrush: @ 80D3B88
 	push {lr}
 	adds r1, r0, 0
 	ldrh r0, [r1, 0xE]
@@ -6604,10 +6604,10 @@ _080D3B9C:
 _080D3BA0:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80D3B88
+	thumb_func_end BT_Phase2BlackDoodles_NextBrush
 
-	thumb_func_start sub_80D3BA4
-sub_80D3BA4: @ 80D3BA4
+	thumb_func_start VBCB_BT_Phase2BlackDoodles
+VBCB_BT_Phase2BlackDoodles: @ 80D3BA4
 	push {r4,r5,lr}
 	ldr r5, _080D3C1C @ =0x040000b0
 	ldrh r1, [r5, 0xA]
@@ -6619,8 +6619,8 @@ sub_80D3BA4: @ 80D3BA4
 	ands r0, r1
 	strh r0, [r5, 0xA]
 	ldrh r0, [r5, 0xA]
-	bl sub_80D3DF4
-	ldr r4, _080D3C28 @ =gUnknown_2039A2C
+	bl BT_VBSyncOamAndPltt
+	ldr r4, _080D3C28 @ =sTransitionStructPtr
 	ldr r0, [r4]
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -6668,16 +6668,16 @@ _080D3BDC:
 _080D3C1C: .4byte 0x040000b0
 _080D3C20: .4byte 0x0000c5ff
 _080D3C24: .4byte 0x00007fff
-_080D3C28: .4byte gUnknown_2039A2C
+_080D3C28: .4byte sTransitionStructPtr
 _080D3C2C: .4byte 0x040000d4
 _080D3C30: .4byte gScanlineEffectRegBuffers
 _080D3C34: .4byte 0x800000a0
 _080D3C38: .4byte 0x04000040
 _080D3C3C: .4byte 0xa2400001
-	thumb_func_end sub_80D3BA4
+	thumb_func_end VBCB_BT_Phase2BlackDoodles
 
-	thumb_func_start CreatePhase1Task
-CreatePhase1Task: @ 80D3C40
+	thumb_func_start BT_CreatePhase1SubTask
+BT_CreatePhase1SubTask: @ 80D3C40
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -6698,7 +6698,7 @@ CreatePhase1Task: @ 80D3C40
 	lsrs r6, 16
 	lsls r3, 16
 	lsrs r3, 16
-	ldr r0, _080D3C9C @ =sub_80D3CC4
+	ldr r0, _080D3C9C @ =BT_Phase1SubTask
 	movs r1, 0x3
 	str r3, [sp]
 	bl CreateTask
@@ -6724,14 +6724,14 @@ CreatePhase1Task: @ 80D3C40
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D3C9C: .4byte sub_80D3CC4
+_080D3C9C: .4byte BT_Phase1SubTask
 _080D3CA0: .4byte gTasks
-	thumb_func_end CreatePhase1Task
+	thumb_func_end BT_CreatePhase1SubTask
 
-	thumb_func_start sub_80D3CA4
-sub_80D3CA4: @ 80D3CA4
+	thumb_func_start BT_IsPhase1Done
+BT_IsPhase1Done: @ 80D3CA4
 	push {lr}
-	ldr r0, _080D3CB8 @ =sub_80D3CC4
+	ldr r0, _080D3CB8 @ =BT_Phase1SubTask
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -6740,20 +6740,20 @@ sub_80D3CA4: @ 80D3CA4
 	movs r0, 0
 	b _080D3CBE
 	.align 2, 0
-_080D3CB8: .4byte sub_80D3CC4
+_080D3CB8: .4byte BT_Phase1SubTask
 _080D3CBC:
 	movs r0, 0x1
 _080D3CBE:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80D3CA4
+	thumb_func_end BT_IsPhase1Done
 
-	thumb_func_start sub_80D3CC4
-sub_80D3CC4: @ 80D3CC4
+	thumb_func_start BT_Phase1SubTask
+BT_Phase1SubTask: @ 80D3CC4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, _080D3CF4 @ =gUnknown_83FA588
+	ldr r5, _080D3CF4 @ =sBT_Phase1FadeFuncs
 	ldr r2, _080D3CF8 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
@@ -6774,12 +6774,12 @@ _080D3CD6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D3CF4: .4byte gUnknown_83FA588
+_080D3CF4: .4byte sBT_Phase1FadeFuncs
 _080D3CF8: .4byte gTasks
-	thumb_func_end sub_80D3CC4
+	thumb_func_end BT_Phase1SubTask
 
-	thumb_func_start Phase1_TransitionAll_Func1
-Phase1_TransitionAll_Func1: @ 80D3CFC
+	thumb_func_start BT_Phase1_FadeOut
+BT_Phase1_FadeOut: @ 80D3CFC
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrh r1, [r4, 0x14]
@@ -6828,10 +6828,10 @@ _080D3D4A:
 	bx r1
 	.align 2, 0
 _080D3D54: .4byte 0x00002d6b
-	thumb_func_end Phase1_TransitionAll_Func1
+	thumb_func_end BT_Phase1_FadeOut
 
-	thumb_func_start Phase1_TransitionAll_Func2
-Phase1_TransitionAll_Func2: @ 80D3D58
+	thumb_func_start BT_Phase1_FadeIn
+BT_Phase1_FadeIn: @ 80D3D58
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrh r1, [r4, 0x14]
@@ -6873,7 +6873,7 @@ _080D3D92:
 	lsls r0, 16
 	cmp r0, 0
 	bne _080D3DC0
-	ldr r0, _080D3DBC @ =sub_80D3CC4
+	ldr r0, _080D3DBC @ =BT_Phase1SubTask
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -6881,7 +6881,7 @@ _080D3D92:
 	b _080D3DC6
 	.align 2, 0
 _080D3DB8: .4byte 0x00002d6b
-_080D3DBC: .4byte sub_80D3CC4
+_080D3DBC: .4byte BT_Phase1SubTask
 _080D3DC0:
 	ldrh r0, [r4, 0xA]
 	strh r0, [r4, 0x14]
@@ -6891,12 +6891,12 @@ _080D3DC6:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end Phase1_TransitionAll_Func2
+	thumb_func_end BT_Phase1_FadeIn
 
-	thumb_func_start sub_80D3DD0
-sub_80D3DD0: @ 80D3DD0
+	thumb_func_start BT_InitCtrlBlk
+BT_InitCtrlBlk: @ 80D3DD0
 	push {r4,lr}
-	ldr r4, _080D3DF0 @ =gUnknown_2039A2C
+	ldr r4, _080D3DF0 @ =sTransitionStructPtr
 	ldr r0, [r4]
 	movs r1, 0
 	movs r2, 0x3C
@@ -6910,21 +6910,21 @@ sub_80D3DD0: @ 80D3DD0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D3DF0: .4byte gUnknown_2039A2C
-	thumb_func_end sub_80D3DD0
+_080D3DF0: .4byte sTransitionStructPtr
+	thumb_func_end BT_InitCtrlBlk
 
-	thumb_func_start sub_80D3DF4
-sub_80D3DF4: @ 80D3DF4
+	thumb_func_start BT_VBSyncOamAndPltt
+BT_VBSyncOamAndPltt: @ 80D3DF4
 	push {lr}
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80D3DF4
+	thumb_func_end BT_VBSyncOamAndPltt
 
-	thumb_func_start sub_80D3E08
-sub_80D3E08: @ 80D3E08
+	thumb_func_start BT_GetBg0TilesetBase
+BT_GetBg0TilesetBase: @ 80D3E08
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x8
@@ -6940,10 +6940,10 @@ sub_80D3E08: @ 80D3E08
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80D3E08
+	thumb_func_end BT_GetBg0TilesetBase
 
-	thumb_func_start sub_80D3E28
-sub_80D3E28: @ 80D3E28
+	thumb_func_start BT_GetBg0TilemapAndTilesetBase
+BT_GetBg0TilemapAndTilesetBase: @ 80D3E28
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	adds r6, r1, 0
@@ -6970,10 +6970,10 @@ sub_80D3E28: @ 80D3E28
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80D3E28
+	thumb_func_end BT_GetBg0TilemapAndTilesetBase
 
-	thumb_func_start sub_80D3E60
-sub_80D3E60: @ 80D3E60
+	thumb_func_start BT_BlendPalettesToBlack
+BT_BlendPalettesToBlack: @ 80D3E60
 	push {lr}
 	movs r0, 0x1
 	negs r0, r0
@@ -6982,10 +6982,10 @@ sub_80D3E60: @ 80D3E60
 	bl BlendPalettes
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80D3E60
+	thumb_func_end BT_BlendPalettesToBlack
 
-	thumb_func_start sub_80D3E74
-sub_80D3E74: @ 80D3E74
+	thumb_func_start BT_LoadWaveIntoBuffer
+BT_LoadWaveIntoBuffer: @ 80D3E74
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -7048,10 +7048,10 @@ _080D3EDC:
 	bx r0
 	.align 2, 0
 _080D3EEC: .4byte 0xffff0000
-	thumb_func_end sub_80D3E74
+	thumb_func_end BT_LoadWaveIntoBuffer
 
-	thumb_func_start sub_80D3EF0
-sub_80D3EF0: @ 80D3EF0
+	thumb_func_start BT_GenerateCircle
+BT_GenerateCircle: @ 80D3EF0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -7267,10 +7267,10 @@ _080D4072:
 	bx r0
 	.align 2, 0
 _080D4084: .4byte 0xffff0000
-	thumb_func_end sub_80D3EF0
+	thumb_func_end BT_GenerateCircle
 
-	thumb_func_start sub_80D4088
-sub_80D4088: @ 80D4088
+	thumb_func_start BT_DiagonalSegment_InitParams
+BT_DiagonalSegment_InitParams: @ 80D4088
 	push {r4-r7,lr}
 	adds r6, r0, 0
 	ldr r0, [sp, 0x14]
@@ -7334,10 +7334,10 @@ _080D40F8:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80D4088
+	thumb_func_end BT_DiagonalSegment_InitParams
 
-	thumb_func_start sub_80D4104
-sub_80D4104: @ 80D4104
+	thumb_func_start BT_DiagonalSegment_ComputePointOnSegment
+BT_DiagonalSegment_ComputePointOnSegment: @ 80D4104
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -7475,6 +7475,6 @@ _080D41F2:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80D4104
+	thumb_func_end BT_DiagonalSegment_ComputePointOnSegment
 
 	.align 2, 0 @ Don't pad with nop.

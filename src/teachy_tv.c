@@ -1208,11 +1208,11 @@ static void TeachyTvPreBattleAnimAndSetBattleCallback(u8 taskId)
     switch (data[7])
     {
     case 0:
-        sub_80D08B8(data[6]);
+        BT_StartOnField(data[6]);
         ++data[7];
         break;
     case 1:
-        if (sub_80D08F8())
+        if (BT_IsDone())
         {
             SetMainCallback2(sub_800FD9C);
             DestroyTask(taskId);

@@ -9193,7 +9193,7 @@ sub_81390B0: @ 81390B0
 	mov r4, sp
 	adds r4, 0x6
 	strb r0, [r4]
-	ldr r5, _081391E8 @ =gUnknown_825DEA1
+	ldr r5, _081391E8 @ =gPPUpGetMask
 	ldr r0, _081391E0 @ =gUnknown_203B16D
 	ldrb r1, [r0]
 	adds r0, r1, r5
@@ -9278,7 +9278,7 @@ _081391D8: .4byte gUnknown_203B140
 _081391DC: .4byte 0x000032f4
 _081391E0: .4byte gUnknown_203B16D
 _081391E4: .4byte gUnknown_203B16E
-_081391E8: .4byte gUnknown_825DEA1
+_081391E8: .4byte gPPUpGetMask
 	thumb_func_end sub_81390B0
 
 	thumb_func_start sub_81391EC
@@ -9340,7 +9340,7 @@ sub_81391EC: @ 81391EC
 	mov r4, sp
 	adds r4, 0x6
 	strb r0, [r4]
-	ldr r5, _08139324 @ =gUnknown_825DEA1
+	ldr r5, _08139324 @ =gPPUpGetMask
 	ldr r0, _0813931C @ =gUnknown_203B16D
 	ldrb r1, [r0]
 	adds r0, r1, r5
@@ -9425,7 +9425,7 @@ _08139314: .4byte gUnknown_203B140
 _08139318: .4byte 0x000032f4
 _0813931C: .4byte gUnknown_203B16D
 _08139320: .4byte gUnknown_203B16E
-_08139324: .4byte gUnknown_825DEA1
+_08139324: .4byte gPPUpGetMask
 	thumb_func_end sub_81391EC
 
 	thumb_func_start sub_8139328

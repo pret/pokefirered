@@ -487,13 +487,7 @@ gUnknown_2024414: @ 2024414
 gUnknown_2024478: @ 2024478
 	.space 0x64
 
-gMultiuseSpriteTemplate: @ 20244DC
-	.space 0x18
-
-gUnknown_20244F4: @ 20244F4
-	.space 0x4
-
-	.align 2
+	.include "src/pokemon.o"
 	.include "src/daycare.o"
 	.align 2
 	.include "src/load_save.o"

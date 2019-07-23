@@ -1005,7 +1005,7 @@ _0802EB04:
 	cmp r0, 0
 	bne _0802EB3A
 	movs r0, 0
-	bl CountAliveMons
+	bl CountAliveMonsInBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

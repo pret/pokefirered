@@ -18182,7 +18182,7 @@ sub_8127AC0: @ 8127AC0
 	bne _08127B08
 _08127AE6:
 	ldr r4, _08127AFC @ =gStringVar1
-	bl sub_80444C4
+	bl GetTrainerPartnerName
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy

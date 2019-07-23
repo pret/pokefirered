@@ -191,6 +191,7 @@ SECTIONS {
         asm/evolution_scene.o(.text);
         src/coins.o(.text);
         src/fldeff_strength.o(.text);
+        src/battle_transition.o(.text);
         asm/battle_transition.o(.text);
         asm/battle_controller_link_partner.o(.text);
         asm/battle_message.o(.text);

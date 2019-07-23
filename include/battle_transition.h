@@ -3,10 +3,6 @@
 
 #include "global.h"
 
-bool8 BT_IsDone(void);
-void BT_StartOnField(u8 transitionId);
-bool8 FldEff_Pokeball(void);
-
 enum
 {
     MUGSHOT_LORELEI,
@@ -35,5 +31,11 @@ enum
 #define B_TRANSITION_LANCE 15
 #define B_TRANSITION_BLUE 16
 #define B_TRANSITION_ANTI_CLOCKWISE_SPIRAL 17
+
+extern const struct SpritePalette sSpritePalette_SlidingPokeball;
+
+bool8 BT_IsDone(void);
+void BT_StartOnField(u8 transitionId);
+bool8 FldEff_Pokeball(void);
 
 #endif // GUARD_BATTLE_TRANSITION_H

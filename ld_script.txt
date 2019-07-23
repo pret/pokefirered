@@ -418,6 +418,8 @@ SECTIONS {
         data/data_83F5738.o(.rodata);
         src/battle_records.o(.rodata);
         data/data_83F5738.o(.rodata.83F6C90);
+        src/battle_transition.o(.rodata);
+        data/data_83F5738.o(.rodata.83FB134);
         src/save.o(.rodata);
         data/data_83FECCC.o(.rodata);
 		src/intro.o(.rodata);

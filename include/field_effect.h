@@ -83,5 +83,6 @@ void sub_80B69DC(void);
 void CreateTeleportFieldEffectTask(void);
 void FieldEffectActiveListRemove(u8 id);
 void sub_8085620(void);
+void FieldEffectStop(struct Sprite *sprite, u8 id);
 
 #endif //GUARD_FIELD_EFFECTS_H

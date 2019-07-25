@@ -6,11 +6,16 @@
 #include "palette.h"
 #include "trig.h"
 #include "random.h"
+#include "sound.h"
+#include "decompress.h"
 #include "gpu_regs.h"
 #include "battle_transition.h"
 #include "field_effect.h"
 #include "field_weather.h"
+#include "field_camera.h"
+#include "trainer_pokemon_sprites.h"
 #include "scanline_effect.h"
+#include "constants/songs.h"
 
 typedef bool8 (*TransitionStateFunc)(struct Task *task);
 typedef bool8 (*TransitionSpriteCallback)(struct Sprite *sprite);
@@ -23,7 +28,7 @@ struct TransitionData
     u16 win0H;
     u16 win0V;
     u16 unused_A;
-    u16 unused_C;
+    u16 win1V;
     u16 bldCnt;
     u16 bldAlpha;
     u16 bldY;
@@ -36,15 +41,6 @@ struct TransitionData
     s16 counter;
     s16 unused_22;
     s16 data[11]; // for multiple purposes
-};
-
-struct __attribute__((packed)) BlackDoodleSegment
-{
-    s16 startPtX;
-    s16 startPtY;
-    s16 endPtX;
-    s16 endPtY;
-    u16 whichSide;
 };
 
 EWRAM_DATA struct TransitionData *sTransitionStructPtr = NULL;
@@ -114,6 +110,7 @@ bool8 BT_Phase1Blink(struct Task *task);
 bool8 BT_WaitForPhase1(struct Task *task);
 bool8 BT_Phase2LaunchAnimTask(struct Task *task);
 bool8 BT_WaitForPhase2(struct Task *task);
+
 void BT_Phase2Blur(u8 taskId);
 void BT_Phase2DistortedWave(u8 taskId);
 void BT_Phase2HorizontalCorrugate(u8 taskId);
@@ -133,9 +130,12 @@ void BT_Phase2StartLanceMugshot(u8 taskId);
 void BT_Phase2StartBlueMugshot(u8 taskId);
 void BT_Phase2AntiClockwiseSpiral(u8 taskId);
 void BT_Phase1Task(u8 taskId);
+void BT_Phase2Mugshot(u8 taskId);
+void BT_Phase1SubTask(u8 taskId);
 
 void SpriteCB_BT_Phase2Mugshots(struct Sprite *sprite);
 void SpriteCB_BT_Phase2SlidingPokeballs(struct Sprite *sprite);
+void SpriteCB_BT_Phase2WhiteFadeInStripes(struct Sprite *sprite);
 
 bool8 BT_Phase2MugshotsSpriteFuncs_Wait(struct Sprite *sprite);
 bool8 BT_Phase2MugshotsSpriteFuncs_InitParams(struct Sprite *sprite);
@@ -154,6 +154,16 @@ void VBCB_BT_Phase2ClockwiseBlackFade(void);
 void VBCB_BT_Phase2FullScreenWave(void);
 void HBCB_BT_Phase2FullScreenWave(void);
 void VBCB_BT_Phase2BlackWaveToRight(void);
+void VBCB_BT_Phase2AntiClockwiseBlackFade(void);
+void VBCB_BT_Phase2Mugshot1_Slide(void);
+void VBCB_BT_Phase2Mugshot2_WhiteFade(void);
+void HBCB_BT_Phase2Mugshot(void);
+void VBCB_BT_Phase2SlicedScreen(void);
+void HBCB_BT_Phase2SlicedScreen(void);
+void VBCB_BT_Phase2WhiteFadeInStripes1(void);
+void VBCB_BT_Phase2WhiteFadeInStripes2(void);
+void HBCB_BT_Phase2WhiteFadeInStripes(void);
+void VBCB_BT_Phase2BlackDoodles(void);
 
 void BT_LaunchTask(u8 transitionId);
 void BT_TaskMain(u8 taskId);
@@ -161,12 +171,17 @@ void BT_InitCtrlBlk(void);
 void BT_CreatePhase1SubTask(s16 fadeOutDelay, s16 fadeInDelay, s16 blinkTimes, s16 fadeOutSpeed, s16 fadeInSpeed);
 bool8 BT_IsPhase1Done(void);
 void BT_VBSyncOamAndPltt(void);
+void BT_GetBg0TilesetBase(u16 **tilesetPtr);
 void BT_GetBg0TilemapAndTilesetBase(u16 **tilemapPtr, u16 **tilesetPtr);
 void BT_LoadWaveIntoBuffer(s16 *buffer, s16 offset, s16 theta, s16 frequency, s16 amplitude, s16 bufSize);
 void BT_GenerateCircle(s16 *buffer, s16 x, s16 y, s16 radius);
 void BT_BlendPalettesToBlack(void);
-void BT_DiagonalSegment_InitParams(s16 *buffer, s16 startPtX, s16 startPtY, s16 endPtX, s16 endPtY, s16 stepX, s16 stepY);
+void BT_DiagonalSegment_InitParams(s16 *data, s16 startPtX, s16 startPtY, s16 endPtX, s16 endPtY, s16 stepX, s16 stepY);
 bool8 BT_DiagonalSegment_ComputePointOnSegment(s16 *data, bool8 checkBoundary1, bool8 checkBoundary2);
+void BT_SetSpriteAsOpponentOrPlayer(s16 spriteId, bool16 value);
+void BT_StartSpriteSlide(s16 spriteId);
+s16 BT_IsSpriteSlideFinished(s16 spriteId);
+void BT_Phase2Mugshots_CreateSprites(struct Task *task);
 
 const u32 sBigPokeballTileset[] = INCBIN_U32("graphics/battle_transitions/big_pokeball_tileset.4bpp");
 const u32 sSlidingPokeballTilemap[] = INCBIN_U32("graphics/battle_transitions/sliding_pokeball_tilemap.bin");
@@ -174,7 +189,7 @@ const u8 sSpriteImage_SlidingPokeball[] = INCBIN_U8("graphics/battle_transitions
 const u32 sVsBarTileset[] = INCBIN_U32("graphics/battle_transitions/vsbar_tileset.4bpp");
 const u8 sSpriteImage_UnusedBrendan[] = INCBIN_U8("graphics/battle_transitions/unused_brendan.4bpp");
 const u8 sSpriteImage_UnusedLass[] = INCBIN_U8("graphics/battle_transitions/unused_lass.4bpp");
-const u32 sGridSquareTilemap[] = INCBIN_U32("graphics/battle_transitions/grid_square_tilemap.bin");
+const u32 sGridSquareTileset[] = INCBIN_U32("graphics/battle_transitions/grid_square_tileset.4bpp");
 
 const TaskFunc sBT_Phase1Tasks[] =
 {
@@ -398,57 +413,15 @@ const TransitionStateFunc sBT_Phase2BlackDoodlesFuncs[] =
     BT_Phase2BlackDoodles_NextBrush,
 };
 
-const struct BlackDoodleSegment sBlackDoodlesSegments[] =
+const s16 sBlackDoodlesSegments[][5] =
 {
-    {
-        .startPtX = 0x38,
-        .startPtY = 0x0,
-        .endPtX = 0x0,
-        .endPtY = 0xA0,
-        .whichSide = 0,
-    },
-    {
-        .startPtX = 0x68,
-        .startPtY = 0xA0,
-        .endPtX = 0xF0,
-        .endPtY = 0x58,
-        .whichSide = 1,
-    },
-    {
-        .startPtX = 0xF0,
-        .startPtY = 0x48,
-        .endPtX = 0x38,
-        .endPtY = 0x0,
-        .whichSide = 1,
-    },
-    {
-        .startPtX = 0x0,
-        .startPtY = 0x20,
-        .endPtX = 0x90,
-        .endPtY = 0xA0,
-        .whichSide = 0,
-    },
-    {
-        .startPtX = 0x90,
-        .startPtY = 0xA0,
-        .endPtX = 0xB8,
-        .endPtY = 0x0,
-        .whichSide = 1,
-    },
-    {
-        .startPtX = 0x38,
-        .startPtY = 0x0,
-        .endPtX = 0xA8,
-        .endPtY = 0xA0,
-        .whichSide = 0,
-    },
-    {
-        .startPtX = 0xA8,
-        .startPtY = 0xA0,
-        .endPtX = 0x30,
-        .endPtY = 0x0,
-        .whichSide = 1,
-    },
+    { 0x38, 0x00, 0x00, 0xA0, 0 },
+    { 0x68, 0xA0, 0xF0, 0x58, 1 },
+    { 0xF0, 0x48, 0x38, 0x00, 1 },
+    { 0x00, 0x20, 0x90, 0xA0, 0 },
+    { 0x90, 0xA0, 0xB8, 0x00, 1 },
+    { 0x38, 0x00, 0xA8, 0xA0, 0 },
+    { 0xA8, 0xA0, 0x30, 0x00, 1 },
 };
 
 const s16 sBlackDoodlesDelay[] = { 1, 1, 1, 1, 1, 1, 0 };
@@ -802,6 +775,7 @@ void VBCB_BT_Phase2DistortedWave(void)
 void HBCB_BT_Phase2DistortedWave(void)
 {
     s16 offset = gScanlineEffectRegBuffers[1][REG_VCOUNT];
+    
     REG_BG1HOFS = offset;
     REG_BG2HOFS = offset;
     REG_BG3HOFS = offset;
@@ -852,7 +826,8 @@ void VBCB_BT_Phase2HorizontalCorrugate(void)
 
 void HBCB_BT_Phase2HorizontalCorrugate(void)
 {
-    u16 offset = gScanlineEffectRegBuffers[1][REG_VCOUNT];
+    s16 offset = gScanlineEffectRegBuffers[1][REG_VCOUNT];
+    
     REG_BG1VOFS = offset;
     REG_BG2VOFS = offset;
     REG_BG3VOFS = offset;
@@ -928,7 +903,7 @@ bool8 BT_Phase2BigPokeball_UpdateWave1IncEva(struct Task *task)
         ++task->tState;
     task->tTheta += 12;
     task->tAmplitude -= 384;
-    // Assign a very high frequency value so that 2 adjacent values in gScanlineEffectRegBuffers[0] have different sign
+    // Assign a very high frequency value so that 2 adjacent values in gScanlineEffectRegBuffers[0] will have different sign. 
     BT_LoadWaveIntoBuffer(gScanlineEffectRegBuffers[0], 0, task->tTheta, 132, task->tAmplitude >> 8, 160);
     ++sTransitionStructPtr->vblankDma;
     return FALSE;
@@ -996,7 +971,7 @@ bool8 BT_Phase2BigPokeball_CircleEffect(struct Task *task)
     sTransitionStructPtr->vblankDma = FALSE;
     if (task->tDeltaRadius < 2048)
         task->tDeltaRadius += 256;
-    if (task->tRadius != 0)
+    if (task->tRadius)
     {
         task->tRadius -= (task->tDeltaRadius >> 8);
         if (task->tRadius < 0)
@@ -1034,13 +1009,13 @@ void BT_VBStopDma0SyncSrcBufferSetLcdRegs(void)
 void VBCB_BT_Phase2BigPokeball1(void)
 {
     BT_VBStopDma0SyncSrcBufferSetLcdRegs();
-    DmaSet(0, gScanlineEffectRegBuffers[1], &REG_BG0HOFS, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 1);
+    DmaSet(0, gScanlineEffectRegBuffers[1], &REG_BG0HOFS, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_16BIT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 1);
 }
 
 void VBCB_BT_Phase2BigPokeball2(void)
 {
     BT_VBStopDma0SyncSrcBufferSetLcdRegs();
-    DmaSet(0, gScanlineEffectRegBuffers[1], &REG_WIN0H, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 1);
+    DmaSet(0, gScanlineEffectRegBuffers[1], &REG_WIN0H, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_16BIT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 1);
 }
 
 #undef tRadius
@@ -1354,7 +1329,7 @@ void VBCB_BT_Phase2ClockwiseBlackFade(void)
     SetGpuReg(REG_OFFSET_WINOUT, sTransitionStructPtr->winOut);
     SetGpuReg(REG_OFFSET_WIN0V, sTransitionStructPtr->win0V);
     SetGpuReg(REG_OFFSET_WIN0H, gScanlineEffectRegBuffers[1][0]);
-    DmaSet(0, gScanlineEffectRegBuffers[1], &REG_WIN0H, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 1);
+    DmaSet(0, gScanlineEffectRegBuffers[1], &REG_WIN0H, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_16BIT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 1);
 }
 
 #undef trStartPtX
@@ -1405,6 +1380,7 @@ bool8 BT_Phase2FullScreenWave_UpdateWave(struct Task *task)
     for (i = 0; i < 160; ++i, theta += frequency)
     {
         s16 var = theta >> 8;
+
         #ifndef NONMATCHING
         asm("");
         #endif
@@ -1430,7 +1406,8 @@ void VBCB_BT_Phase2FullScreenWave(void)
 
 void HBCB_BT_Phase2FullScreenWave(void)
 {
-    u16 offset = gScanlineEffectRegBuffers[1][REG_VCOUNT];
+    s16 offset = gScanlineEffectRegBuffers[1][REG_VCOUNT];
+    
     REG_BG1VOFS = offset;
     REG_BG2VOFS = offset;
     REG_BG3VOFS = offset;
@@ -1522,4 +1499,2007 @@ void BT_Phase2AntiClockwiseSpiral(u8 taskId)
     while (sBT_Phase2AntiClockwiseSpiralFuncs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
+#ifdef NONMATCHING
+void sub_80D1F64(s16 a1, s16 a2, bool8 a3)
+{
+    s16 elem;
 
+    for (elem = 320; elem < NELEMS(gScanlineEffectRegBuffers[1]); ++elem)
+        gScanlineEffectRegBuffers[1][elem] = 120;
+    WILL DO IT LATER
+    LET ME RESOLVE OTHER STUFF FIRST
+
+}
+#else
+NAKED
+void sub_80D1F64(s16 a1, s16 a2, bool8 a3)
+{
+    asm_unified("\n\
+        push {r4-r7,lr}\n\
+        mov r7, r10\n\
+        mov r6, r9\n\
+        mov r5, r8\n\
+        push {r5-r7}\n\
+        sub sp, 0x14\n\
+        lsls r0, 16\n\
+        lsrs r0, 16\n\
+        str r0, [sp]\n\
+        lsls r1, 16\n\
+        lsrs r5, r1, 16\n\
+        lsls r2, 24\n\
+        lsrs r2, 24\n\
+        str r2, [sp, 0x4]\n\
+        movs r0, 0\n\
+        mov r10, r0\n\
+        movs r1, 0xA0\n\
+        lsls r1, 17\n\
+        ldr r4, _080D1FD8 @ =gScanlineEffectRegBuffers + 0x780\n\
+        ldr r3, _080D1FDC @ =0x000003bf\n\
+        movs r2, 0x78\n\
+    _080D1F8E:\n\
+        asrs r0, r1, 16\n\
+        lsls r1, r0, 1\n\
+        adds r1, r4\n\
+        strh r2, [r1]\n\
+        adds r0, 0x1\n\
+        lsls r1, r0, 16\n\
+        asrs r0, r1, 16\n\
+        cmp r0, r3\n\
+        ble _080D1F8E\n\
+        lsls r0, r5, 16\n\
+        movs r1, 0\n\
+        mov r9, r1\n\
+        str r0, [sp, 0xC]\n\
+        cmp r0, 0\n\
+        bgt _080D1FAE\n\
+        b _080D221A\n\
+    _080D1FAE:\n\
+        mov r3, r10\n\
+        lsrs r2, r3, 3\n\
+        ldr r4, [sp]\n\
+        adds r0, r2, r4\n\
+        lsls r0, 16\n\
+        lsrs r3, r0, 16\n\
+        mov r0, r10\n\
+        adds r0, 0x1\n\
+        asrs r1, r0, 3\n\
+        str r0, [sp, 0x8]\n\
+        cmp r2, r1\n\
+        beq _080D1FE0\n\
+        lsls r1, r3, 16\n\
+        movs r6, 0x80\n\
+        lsls r6, 9\n\
+        adds r0, r1, r6\n\
+        lsrs r0, 16\n\
+        mov r8, r0\n\
+        adds r0, r1, 0\n\
+        b _080D1FE6\n\
+        .align 2, 0\n\
+    _080D1FD8: .4byte gScanlineEffectRegBuffers + 0x780\n\
+    _080D1FDC: .4byte 0x000003bf\n\
+    _080D1FE0:\n\
+        lsls r0, r3, 16\n\
+        lsrs r1, r0, 16\n\
+        mov r8, r1\n\
+    _080D1FE6:\n\
+        asrs r4, r0, 16\n\
+        mov r0, r10\n\
+        adds r1, r4, 0\n\
+        bl Sin\n\
+        movs r5, 0x50\n\
+        subs r0, r5, r0\n\
+        lsls r0, 16\n\
+        lsrs r2, r0, 16\n\
+        mov r0, r10\n\
+        adds r1, r4, 0\n\
+        str r2, [sp, 0x10]\n\
+        bl Cos\n\
+        adds r0, 0x78\n\
+        lsls r0, 16\n\
+        lsrs r7, r0, 16\n\
+        ldr r6, [sp, 0x8]\n\
+        mov r3, r8\n\
+        lsls r4, r3, 16\n\
+        asrs r4, 16\n\
+        adds r0, r6, 0\n\
+        adds r1, r4, 0\n\
+        bl Sin\n\
+        subs r5, r0\n\
+        lsls r5, 16\n\
+        lsrs r5, 16\n\
+        adds r0, r6, 0\n\
+        adds r1, r4, 0\n\
+        bl Cos\n\
+        adds r0, 0x78\n\
+        lsls r0, 16\n\
+        lsrs r3, r0, 16\n\
+        ldr r2, [sp, 0x10]\n\
+        lsls r0, r2, 16\n\
+        asrs r1, r0, 16\n\
+        cmp r1, 0\n\
+        bge _080D203E\n\
+        lsls r0, r5, 16\n\
+        cmp r0, 0\n\
+        bge _080D203E\n\
+        b _080D21F8\n\
+    _080D203E:\n\
+        cmp r1, 0x9F\n\
+        ble _080D204C\n\
+        lsls r0, r5, 16\n\
+        asrs r0, 16\n\
+        cmp r0, 0x9F\n\
+        ble _080D204C\n\
+        b _080D21F8\n\
+    _080D204C:\n\
+        cmp r1, 0\n\
+        bge _080D2052\n\
+        movs r2, 0\n\
+    _080D2052:\n\
+        lsls r0, r2, 16\n\
+        asrs r0, 16\n\
+        cmp r0, 0x9F\n\
+        ble _080D205C\n\
+        movs r2, 0x9F\n\
+    _080D205C:\n\
+        lsls r0, r7, 16\n\
+        cmp r0, 0\n\
+        bge _080D2064\n\
+        movs r7, 0\n\
+    _080D2064:\n\
+        lsls r0, r7, 16\n\
+        asrs r0, 16\n\
+        cmp r0, 0xFF\n\
+        ble _080D206E\n\
+        movs r7, 0xFF\n\
+    _080D206E:\n\
+        lsls r0, r5, 16\n\
+        cmp r0, 0\n\
+        bge _080D2076\n\
+        movs r5, 0\n\
+    _080D2076:\n\
+        lsls r0, r5, 16\n\
+        asrs r0, 16\n\
+        cmp r0, 0x9F\n\
+        ble _080D2080\n\
+        movs r5, 0x9F\n\
+    _080D2080:\n\
+        lsls r0, r3, 16\n\
+        cmp r0, 0\n\
+        bge _080D2088\n\
+        movs r3, 0\n\
+    _080D2088:\n\
+        lsls r0, r3, 16\n\
+        asrs r0, 16\n\
+        cmp r0, 0xFF\n\
+        ble _080D2092\n\
+        movs r3, 0xFF\n\
+    _080D2092:\n\
+        lsls r0, r5, 16\n\
+        asrs r0, 16\n\
+        lsls r1, r2, 16\n\
+        asrs r2, r1, 16\n\
+        subs r0, r2\n\
+        lsls r0, 16\n\
+        lsrs r5, r0, 16\n\
+        mov r0, r10\n\
+        subs r0, 0x40\n\
+        lsls r0, 24\n\
+        adds r6, r1, 0\n\
+        cmp r0, 0\n\
+        blt _080D2158\n\
+        movs r4, 0xA0\n\
+        lsls r4, 1\n\
+        adds r0, r2, r4\n\
+        lsls r0, 1\n\
+        ldr r1, _080D20E8 @ =gScanlineEffectRegBuffers + 0x780\n\
+        adds r0, r1\n\
+        strh r7, [r0]\n\
+        lsls r0, r5, 16\n\
+        adds r4, r0, 0\n\
+        cmp r4, 0\n\
+        bne _080D20C4\n\
+        b _080D21F8\n\
+    _080D20C4:\n\
+        lsls r0, r3, 16\n\
+        asrs r0, 16\n\
+        lsls r1, r7, 16\n\
+        asrs r2, r1, 16\n\
+        subs r0, r2\n\
+        lsls r0, 16\n\
+        lsrs r3, r0, 16\n\
+        asrs r0, 16\n\
+        mov r8, r0\n\
+        movs r0, 0x1\n\
+        negs r0, r0\n\
+        cmp r8, r0\n\
+        bge _080D20EC\n\
+        cmp r2, 0x1\n\
+        ble _080D20EC\n\
+        subs r0, r2, 0x1\n\
+        b _080D20FC\n\
+        .align 2, 0\n\
+    _080D20E8: .4byte gScanlineEffectRegBuffers + 0x780\n\
+    _080D20EC:\n\
+        lsls r0, r3, 16\n\
+        asrs r0, 16\n\
+        cmp r0, 0x1\n\
+        ble _080D2100\n\
+        asrs r0, r1, 16\n\
+        cmp r0, 0xFE\n\
+        bgt _080D2100\n\
+        adds r0, 0x1\n\
+    _080D20FC:\n\
+        lsls r0, 16\n\
+        lsrs r7, r0, 16\n\
+    _080D2100:\n\
+        adds r0, r4, 0\n\
+        asrs r1, r0, 16\n\
+        cmp r1, 0\n\
+        bge _080D212C\n\
+        asrs r2, r6, 16\n\
+        ldr r3, _080D2128 @ =gScanlineEffectRegBuffers + 0x780\n\
+    _080D210C:\n\
+        asrs r1, r0, 16\n\
+        adds r0, r2, r1\n\
+        movs r4, 0xA0\n\
+        lsls r4, 1\n\
+        adds r0, r4\n\
+        lsls r0, 1\n\
+        adds r0, r3\n\
+        strh r7, [r0]\n\
+        adds r1, 0x1\n\
+        lsls r0, r1, 16\n\
+        cmp r0, 0\n\
+        blt _080D210C\n\
+        b _080D21F8\n\
+        .align 2, 0\n\
+    _080D2128: .4byte gScanlineEffectRegBuffers + 0x780\n\
+    _080D212C:\n\
+        cmp r1, 0\n\
+        ble _080D21F8\n\
+        asrs r2, r6, 16\n\
+        ldr r3, _080D2154 @ =gScanlineEffectRegBuffers + 0x780\n\
+    _080D2134:\n\
+        lsls r1, r5, 16\n\
+        asrs r1, 16\n\
+        adds r0, r2, r1\n\
+        movs r6, 0xA0\n\
+        lsls r6, 1\n\
+        adds r0, r6\n\
+        lsls r0, 1\n\
+        adds r0, r3\n\
+        strh r7, [r0]\n\
+        subs r1, 0x1\n\
+        lsls r1, 16\n\
+        lsrs r5, r1, 16\n\
+        cmp r1, 0\n\
+        bgt _080D2134\n\
+        b _080D21F8\n\
+        .align 2, 0\n\
+    _080D2154: .4byte gScanlineEffectRegBuffers + 0x780\n\
+    _080D2158:\n\
+        movs r1, 0xF0\n\
+        lsls r1, 1\n\
+        adds r0, r2, r1\n\
+        lsls r0, 1\n\
+        ldr r2, _080D2190 @ =gScanlineEffectRegBuffers + 0x780\n\
+        adds r0, r2\n\
+        strh r7, [r0]\n\
+        lsls r0, r5, 16\n\
+        adds r4, r0, 0\n\
+        cmp r4, 0\n\
+        beq _080D21F8\n\
+        lsls r0, r3, 16\n\
+        asrs r0, 16\n\
+        lsls r1, r7, 16\n\
+        asrs r2, r1, 16\n\
+        subs r0, r2\n\
+        lsls r0, 16\n\
+        lsrs r3, r0, 16\n\
+        asrs r0, 16\n\
+        mov r8, r0\n\
+        movs r0, 0x1\n\
+        negs r0, r0\n\
+        cmp r8, r0\n\
+        bge _080D2194\n\
+        cmp r2, 0x1\n\
+        ble _080D2194\n\
+        subs r0, r2, 0x1\n\
+        b _080D21A4\n\
+        .align 2, 0\n\
+    _080D2190: .4byte gScanlineEffectRegBuffers + 0x780\n\
+    _080D2194:\n\
+        lsls r0, r3, 16\n\
+        asrs r0, 16\n\
+        cmp r0, 0x1\n\
+        ble _080D21A8\n\
+        asrs r0, r1, 16\n\
+        cmp r0, 0xFE\n\
+        bgt _080D21A8\n\
+        adds r0, 0x1\n\
+    _080D21A4:\n\
+        lsls r0, 16\n\
+        lsrs r7, r0, 16\n\
+    _080D21A8:\n\
+        adds r0, r4, 0\n\
+        asrs r1, r0, 16\n\
+        cmp r1, 0\n\
+        bge _080D21D4\n\
+        asrs r2, r6, 16\n\
+        ldr r3, _080D21D0 @ =gScanlineEffectRegBuffers + 0x780\n\
+    _080D21B4:\n\
+        asrs r1, r0, 16\n\
+        adds r0, r2, r1\n\
+        movs r4, 0xF0\n\
+        lsls r4, 1\n\
+        adds r0, r4\n\
+        lsls r0, 1\n\
+        adds r0, r3\n\
+        strh r7, [r0]\n\
+        adds r1, 0x1\n\
+        lsls r0, r1, 16\n\
+        cmp r0, 0\n\
+        blt _080D21B4\n\
+        b _080D21F8\n\
+        .align 2, 0\n\
+    _080D21D0: .4byte gScanlineEffectRegBuffers + 0x780\n\
+    _080D21D4:\n\
+        cmp r1, 0\n\
+        ble _080D21F8\n\
+        asrs r2, r6, 16\n\
+        ldr r3, _080D2270 @ =gScanlineEffectRegBuffers + 0x780\n\
+    _080D21DC:\n\
+        lsls r1, r5, 16\n\
+        asrs r1, 16\n\
+        adds r0, r2, r1\n\
+        movs r6, 0xF0\n\
+        lsls r6, 1\n\
+        adds r0, r6\n\
+        lsls r0, 1\n\
+        adds r0, r3\n\
+        strh r7, [r0]\n\
+        subs r1, 0x1\n\
+        lsls r1, 16\n\
+        lsrs r5, r1, 16\n\
+        cmp r1, 0\n\
+        bgt _080D21DC\n\
+    _080D21F8:\n\
+        mov r1, r9\n\
+        lsls r0, r1, 16\n\
+        movs r2, 0x80\n\
+        lsls r2, 9\n\
+        adds r0, r2\n\
+        ldr r3, [sp, 0x8]\n\
+        lsls r1, r3, 24\n\
+        lsrs r1, 24\n\
+        mov r10, r1\n\
+        lsrs r4, r0, 16\n\
+        mov r9, r4\n\
+        asrs r0, 16\n\
+        ldr r6, [sp, 0xC]\n\
+        asrs r1, r6, 12\n\
+        cmp r0, r1\n\
+        bge _080D221A\n\
+        b _080D1FAE\n\
+    _080D221A:\n\
+        ldr r0, [sp, 0x4]\n\
+        cmp r0, 0\n\
+        beq _080D222C\n\
+        movs r0, 0xC0\n\
+        lsls r0, 10\n\
+        ldr r1, [sp, 0xC]\n\
+        ands r0, r1\n\
+        cmp r0, 0\n\
+        bne _080D2274\n\
+    _080D222C:\n\
+        movs r2, 0\n\
+        mov r9, r2\n\
+        ldr r4, _080D2270 @ =gScanlineEffectRegBuffers + 0x780\n\
+        movs r5, 0xA0\n\
+        lsls r5, 1\n\
+    _080D2236:\n\
+        mov r3, r9\n\
+        lsls r1, r3, 16\n\
+        asrs r1, 16\n\
+        lsls r3, r1, 1\n\
+        ldr r6, [sp, 0x4]\n\
+        adds r3, r6\n\
+        lsls r3, 1\n\
+        adds r3, r4\n\
+        adds r0, r1, r5\n\
+        lsls r0, 1\n\
+        adds r0, r4\n\
+        ldrh r2, [r0]\n\
+        lsls r2, 8\n\
+        movs r6, 0xF0\n\
+        lsls r6, 1\n\
+        adds r0, r1, r6\n\
+        lsls r0, 1\n\
+        adds r0, r4\n\
+        ldrh r0, [r0]\n\
+        orrs r2, r0\n\
+        strh r2, [r3]\n\
+        adds r1, 0x1\n\
+        lsls r1, 16\n\
+        lsrs r0, r1, 16\n\
+        mov r9, r0\n\
+        asrs r1, 16\n\
+        cmp r1, 0x9F\n\
+        ble _080D2236\n\
+        b _080D251C\n\
+        .align 2, 0\n\
+    _080D2270: .4byte gScanlineEffectRegBuffers + 0x780\n\
+    _080D2274:\n\
+        ldr r1, [sp, 0xC]\n\
+        asrs r4, r1, 16\n\
+        lsls r0, r4, 20\n\
+        asrs r0, 16\n\
+        lsls r5, r4, 1\n\
+        ldr r2, [sp]\n\
+        lsls r1, r2, 16\n\
+        asrs r1, 16\n\
+        adds r1, r5\n\
+        lsls r1, 16\n\
+        asrs r1, 16\n\
+        bl Sin\n\
+        lsls r0, 16\n\
+        lsrs r2, r0, 16\n\
+        cmp r4, 0\n\
+        bge _080D2298\n\
+        adds r4, 0x3\n\
+    _080D2298:\n\
+        asrs r0, r4, 2\n\
+        cmp r0, 0x1\n\
+        beq _080D234C\n\
+        cmp r0, 0x1\n\
+        bgt _080D22A8\n\
+        cmp r0, 0\n\
+        beq _080D22B6\n\
+        b _080D24DA\n\
+    _080D22A8:\n\
+        cmp r0, 0x2\n\
+        bne _080D22AE\n\
+        b _080D23CC\n\
+    _080D22AE:\n\
+        cmp r0, 0x3\n\
+        bne _080D22B4\n\
+        b _080D2466\n\
+    _080D22B4:\n\
+        b _080D24DA\n\
+    _080D22B6:\n\
+        lsls r0, r2, 16\n\
+        asrs r0, 16\n\
+        cmp r0, 0x50\n\
+        ble _080D22C0\n\
+        movs r2, 0x50\n\
+    _080D22C0:\n\
+        mov r9, r2\n\
+        lsls r1, r2, 16\n\
+        cmp r1, 0\n\
+        bgt _080D22CA\n\
+        b _080D24DA\n\
+    _080D22CA:\n\
+        ldr r0, _080D2320 @ =gUnknown_83FA444\n\
+        adds r0, r5, r0\n\
+        movs r3, 0\n\
+        ldrsh r4, [r0, r3]\n\
+        ldr r6, _080D2324 @ =gScanlineEffectRegBuffers + 0x780\n\
+    _080D22D4:\n\
+        ldr r0, _080D2328 @ =sTransitionStructPtr\n\
+        ldr r5, [r0]\n\
+        asrs r2, r1, 16\n\
+        adds r0, r2, 0\n\
+        muls r0, r4\n\
+        asrs r0, 8\n\
+        adds r0, 0x78\n\
+        lsls r1, r0, 16\n\
+        lsrs r7, r1, 16\n\
+        strh r0, [r5, 0x28]\n\
+        lsls r1, r7, 16\n\
+        lsrs r0, r1, 16\n\
+        cmp r0, 0xFF\n\
+        bhi _080D2334\n\
+        movs r3, 0xC8\n\
+        lsls r3, 1\n\
+        adds r0, r3, 0\n\
+        subs r0, r2\n\
+        strh r0, [r5, 0x14]\n\
+        adds r0, r3, 0\n\
+        subs r0, r2\n\
+        lsls r0, 1\n\
+        adds r3, r0, r6\n\
+        ldrh r0, [r3]\n\
+        strh r0, [r5, 0x38]\n\
+        movs r0, 0x8C\n\
+        lsls r0, 2\n\
+        subs r0, r2\n\
+        lsls r0, 1\n\
+        adds r2, r0, r6\n\
+        ldrh r0, [r2]\n\
+        asrs r1, 16\n\
+        cmp r0, r1\n\
+        bge _080D232C\n\
+        movs r0, 0x78\n\
+        strh r0, [r2]\n\
+        b _080D2334\n\
+        .align 2, 0\n\
+    _080D2320: .4byte gUnknown_83FA444\n\
+    _080D2324: .4byte gScanlineEffectRegBuffers + 0x780\n\
+    _080D2328: .4byte sTransitionStructPtr\n\
+    _080D232C:\n\
+        ldrh r0, [r3]\n\
+        cmp r0, r1\n\
+        bge _080D2334\n\
+        strh r7, [r3]\n\
+    _080D2334:\n\
+        mov r1, r9\n\
+        lsls r0, r1, 16\n\
+        ldr r2, _080D2348 @ =0xffff0000\n\
+        adds r0, r2\n\
+        lsrs r0, 16\n\
+        mov r9, r0\n\
+        lsls r1, r0, 16\n\
+        cmp r1, 0\n\
+        bgt _080D22D4\n\
+        b _080D24DA\n\
+        .align 2, 0\n\
+    _080D2348: .4byte 0xffff0000\n\
+    _080D234C:\n\
+        lsls r0, r2, 16\n\
+        asrs r0, 16\n\
+        cmp r0, 0x50\n\
+        ble _080D2356\n\
+        movs r2, 0x50\n\
+    _080D2356:\n\
+        mov r9, r2\n\
+        lsls r1, r2, 16\n\
+        cmp r1, 0\n\
+        bgt _080D2360\n\
+        b _080D24DA\n\
+    _080D2360:\n\
+        ldr r0, _080D23BC @ =gUnknown_83FA444\n\
+        adds r0, r5, r0\n\
+        movs r3, 0\n\
+        ldrsh r4, [r0, r3]\n\
+        ldr r6, _080D23C0 @ =gScanlineEffectRegBuffers + 0x780\n\
+    _080D236A:\n\
+        ldr r0, _080D23C4 @ =sTransitionStructPtr\n\
+        ldr r3, [r0]\n\
+        asrs r2, r1, 16\n\
+        adds r0, r2, 0\n\
+        muls r0, r4\n\
+        asrs r0, 8\n\
+        adds r0, 0x78\n\
+        lsls r1, r0, 16\n\
+        lsrs r7, r1, 16\n\
+        strh r0, [r3, 0x28]\n\
+        lsls r5, r7, 16\n\
+        lsrs r0, r5, 16\n\
+        cmp r0, 0xFF\n\
+        bhi _080D23A6\n\
+        movs r1, 0xC8\n\
+        lsls r1, 1\n\
+        adds r0, r1, 0\n\
+        subs r0, r2\n\
+        strh r0, [r3, 0x14]\n\
+        adds r0, r1, 0\n\
+        subs r0, r2\n\
+        lsls r0, 1\n\
+        adds r2, r0, r6\n\
+        ldrh r0, [r2]\n\
+        strh r0, [r3, 0x38]\n\
+        ldrh r1, [r2]\n\
+        asrs r0, r5, 16\n\
+        cmp r1, r0\n\
+        bge _080D23A6\n\
+        strh r7, [r2]\n\
+    _080D23A6:\n\
+        mov r2, r9\n\
+        lsls r0, r2, 16\n\
+        ldr r3, _080D23C8 @ =0xffff0000\n\
+        adds r0, r3\n\
+        lsrs r0, 16\n\
+        mov r9, r0\n\
+        lsls r1, r0, 16\n\
+        cmp r1, 0\n\
+        bgt _080D236A\n\
+        b _080D24DA\n\
+        .align 2, 0\n\
+    _080D23BC: .4byte gUnknown_83FA444\n\
+    _080D23C0: .4byte gScanlineEffectRegBuffers + 0x780\n\
+    _080D23C4: .4byte sTransitionStructPtr\n\
+    _080D23C8: .4byte 0xffff0000\n\
+    _080D23CC:\n\
+        lsls r0, r2, 16\n\
+        asrs r0, 16\n\
+        movs r1, 0x4F\n\
+        negs r1, r1\n\
+        cmp r0, r1\n\
+        bge _080D23DA\n\
+        ldr r2, _080D2438 @ =0x0000ffb1\n\
+    _080D23DA:\n\
+        mov r9, r2\n\
+        lsls r1, r2, 16\n\
+        cmp r1, 0\n\
+        bgt _080D24DA\n\
+        ldr r0, _080D243C @ =gUnknown_83FA444\n\
+        adds r0, r5, r0\n\
+        movs r6, 0\n\
+        ldrsh r4, [r0, r6]\n\
+        ldr r6, _080D2440 @ =gScanlineEffectRegBuffers + 0x780\n\
+    _080D23EC:\n\
+        ldr r0, _080D2444 @ =sTransitionStructPtr\n\
+        ldr r5, [r0]\n\
+        asrs r2, r1, 16\n\
+        adds r0, r2, 0\n\
+        muls r0, r4\n\
+        asrs r0, 8\n\
+        adds r0, 0x78\n\
+        lsls r1, r0, 16\n\
+        lsrs r7, r1, 16\n\
+        strh r0, [r5, 0x28]\n\
+        lsls r1, r7, 16\n\
+        lsrs r0, r1, 16\n\
+        cmp r0, 0xFF\n\
+        bhi _080D2450\n\
+        movs r3, 0x8C\n\
+        lsls r3, 2\n\
+        adds r0, r3, 0\n\
+        subs r0, r2\n\
+        strh r0, [r5, 0x14]\n\
+        adds r0, r3, 0\n\
+        subs r0, r2\n\
+        lsls r0, 1\n\
+        adds r3, r0, r6\n\
+        ldrh r0, [r3]\n\
+        strh r0, [r5, 0x38]\n\
+        movs r0, 0xC8\n\
+        lsls r0, 1\n\
+        subs r0, r2\n\
+        lsls r0, 1\n\
+        adds r2, r0, r6\n\
+        ldrh r0, [r2]\n\
+        asrs r1, 16\n\
+        cmp r0, r1\n\
+        blt _080D2448\n\
+        movs r0, 0x78\n\
+        strh r0, [r2]\n\
+        b _080D2450\n\
+        .align 2, 0\n\
+    _080D2438: .4byte 0x0000ffb1\n\
+    _080D243C: .4byte gUnknown_83FA444\n\
+    _080D2440: .4byte gScanlineEffectRegBuffers + 0x780\n\
+    _080D2444: .4byte sTransitionStructPtr\n\
+    _080D2448:\n\
+        ldrh r0, [r3]\n\
+        cmp r0, r1\n\
+        ble _080D2450\n\
+        strh r7, [r3]\n\
+    _080D2450:\n\
+        mov r1, r9\n\
+        lsls r0, r1, 16\n\
+        movs r2, 0x80\n\
+        lsls r2, 9\n\
+        adds r0, r2\n\
+        lsrs r0, 16\n\
+        mov r9, r0\n\
+        lsls r1, r0, 16\n\
+        cmp r1, 0\n\
+        ble _080D23EC\n\
+        b _080D24DA\n\
+    _080D2466:\n\
+        lsls r0, r2, 16\n\
+        asrs r0, 16\n\
+        movs r1, 0x4F\n\
+        negs r1, r1\n\
+        cmp r0, r1\n\
+        bge _080D2474\n\
+        ldr r2, _080D252C @ =0x0000ffb1\n\
+    _080D2474:\n\
+        mov r9, r2\n\
+        lsls r1, r2, 16\n\
+        cmp r1, 0\n\
+        bgt _080D24DA\n\
+        ldr r0, _080D2530 @ =gUnknown_83FA444\n\
+        adds r0, r5, r0\n\
+        movs r3, 0\n\
+        ldrsh r4, [r0, r3]\n\
+        ldr r6, _080D2534 @ =sTransitionStructPtr\n\
+        mov r8, r6\n\
+        ldr r6, _080D2538 @ =gScanlineEffectRegBuffers + 0x780\n\
+    _080D248A:\n\
+        mov r0, r8\n\
+        ldr r3, [r0]\n\
+        asrs r2, r1, 16\n\
+        adds r0, r2, 0\n\
+        muls r0, r4\n\
+        asrs r0, 8\n\
+        adds r0, 0x78\n\
+        lsls r1, r0, 16\n\
+        lsrs r7, r1, 16\n\
+        strh r0, [r3, 0x28]\n\
+        lsls r5, r7, 16\n\
+        lsrs r0, r5, 16\n\
+        cmp r0, 0xFF\n\
+        bhi _080D24C6\n\
+        movs r1, 0x8C\n\
+        lsls r1, 2\n\
+        adds r0, r1, 0\n\
+        subs r0, r2\n\
+        strh r0, [r3, 0x14]\n\
+        adds r0, r1, 0\n\
+        subs r0, r2\n\
+        lsls r0, 1\n\
+        adds r2, r0, r6\n\
+        ldrh r0, [r2]\n\
+        strh r0, [r3, 0x38]\n\
+        ldrh r1, [r2]\n\
+        asrs r0, r5, 16\n\
+        cmp r1, r0\n\
+        ble _080D24C6\n\
+        strh r7, [r2]\n\
+    _080D24C6:\n\
+        mov r2, r9\n\
+        lsls r0, r2, 16\n\
+        movs r3, 0x80\n\
+        lsls r3, 9\n\
+        adds r0, r3\n\
+        lsrs r0, 16\n\
+        mov r9, r0\n\
+        lsls r1, r0, 16\n\
+        cmp r1, 0\n\
+        ble _080D248A\n\
+    _080D24DA:\n\
+        movs r4, 0\n\
+        mov r9, r4\n\
+        ldr r4, _080D2538 @ =gScanlineEffectRegBuffers + 0x780\n\
+        movs r5, 0xA0\n\
+        lsls r5, 1\n\
+    _080D24E4:\n\
+        mov r6, r9\n\
+        lsls r1, r6, 16\n\
+        asrs r1, 16\n\
+        lsls r3, r1, 1\n\
+        ldr r0, [sp, 0x4]\n\
+        adds r3, r0\n\
+        lsls r3, 1\n\
+        adds r3, r4\n\
+        adds r0, r1, r5\n\
+        lsls r0, 1\n\
+        adds r0, r4\n\
+        ldrh r2, [r0]\n\
+        lsls r2, 8\n\
+        movs r6, 0xF0\n\
+        lsls r6, 1\n\
+        adds r0, r1, r6\n\
+        lsls r0, 1\n\
+        adds r0, r4\n\
+        ldrh r0, [r0]\n\
+        orrs r2, r0\n\
+        strh r2, [r3]\n\
+        adds r1, 0x1\n\
+        lsls r1, 16\n\
+        lsrs r0, r1, 16\n\
+        mov r9, r0\n\
+        asrs r1, 16\n\
+        cmp r1, 0x9F\n\
+        ble _080D24E4\n\
+    _080D251C:\n\
+        add sp, 0x14\n\
+        pop {r3-r5}\n\
+        mov r8, r3\n\
+        mov r9, r4\n\
+        mov r10, r5\n\
+        pop {r4-r7}\n\
+        pop {r0}\n\
+        bx r0\n\
+        .align 2, 0\n\
+    _080D252C: .4byte 0x0000ffb1\n\
+    _080D2530: .4byte gUnknown_83FA444\n\
+    _080D2534: .4byte sTransitionStructPtr\n\
+    _080D2538: .4byte gScanlineEffectRegBuffers + 0x780\n\
+        ");
+}
+#endif
+
+bool8 BT_Phase2AntiClockwiseSpiral_Init(struct Task *task)
+{
+    BT_InitCtrlBlk();
+    ScanlineEffect_Clear();
+    sTransitionStructPtr->winIn = 0;
+    sTransitionStructPtr->winOut = 0x3F;
+    sTransitionStructPtr->win0H = 0x7878;
+    sTransitionStructPtr->win0V = 0x3070;
+    sTransitionStructPtr->win1V = 0x1090;
+    sTransitionStructPtr->counter = 0;
+    sub_80D1F64(0, 0, FALSE);
+    sub_80D1F64(0, 0, TRUE);
+    DmaCopy16(3, gScanlineEffectRegBuffers[1], gScanlineEffectRegBuffers[0], 640);
+    SetVBlankCallback(VBCB_BT_Phase2AntiClockwiseBlackFade);
+    ++task->tState;
+    task->data[1] = 0;
+    task->data[2] = 0;
+    return FALSE;
+}
+
+bool8 BT_Phase2AntiClockwiseSpiral_Update(struct Task *task)
+{
+    s16 v0, v1;
+
+    sub_80D1F64(task->data[2], task->data[1], TRUE);
+    sTransitionStructPtr->vblankDma |= TRUE;
+    if (++task->data[1] == 17)
+    {
+        sub_80D1F64(task->data[2], 16, FALSE);
+        v0 = 48 - task->data[2];
+        if (v0 < 0)
+            v0 = 0;
+        v1 = task->data[2] + 112;
+        if (v1 > 255)
+            v1 = 255;
+        sTransitionStructPtr->win0V = v0 | v1;
+        task->data[2] += 32;
+        task->data[1] = 0;
+        sub_80D1F64(task->data[2], 0, TRUE);
+        v0 = 48 - task->data[2];
+        if (v0 < 0)
+            v0 = 0;
+        v1 = task->data[2] + 112;
+        if (v1 > 255)
+            v1 = 255;
+        sTransitionStructPtr->win1V = v0 | v1;
+        sTransitionStructPtr->vblankDma |= TRUE;
+        if (task->data[2] > 159)
+        {
+            sTransitionStructPtr->counter = 1;
+            BT_BlendPalettesToBlack();
+        }
+    }
+    return FALSE;
+}
+
+void VBCB_BT_Phase2AntiClockwiseBlackFade(void)
+{
+    DmaStop(0);
+    BT_VBSyncOamAndPltt();
+    if (sTransitionStructPtr->counter)
+    {
+        DestroyTask(FindTaskIdByFunc(BT_Phase2AntiClockwiseSpiral));
+    }
+    else
+    {
+        if (sTransitionStructPtr->vblankDma)
+        {
+            DmaCopy16(3, gScanlineEffectRegBuffers[1], gScanlineEffectRegBuffers[0], 640);
+            sTransitionStructPtr->vblankDma = FALSE;
+        }
+        SetGpuReg(REG_OFFSET_WININ, sTransitionStructPtr->winIn);
+        SetGpuReg(REG_OFFSET_WINOUT, sTransitionStructPtr->winOut);
+        SetGpuReg(REG_OFFSET_WIN0V, sTransitionStructPtr->win0V);
+        SetGpuReg(REG_OFFSET_WIN1V, sTransitionStructPtr->win1V);
+        SetGpuReg(REG_OFFSET_WIN0H, gScanlineEffectRegBuffers[0][0]);
+        SetGpuReg(REG_OFFSET_WIN1H, gScanlineEffectRegBuffers[0][1]);
+        DmaSet(0, gScanlineEffectRegBuffers[0], &REG_WIN0H, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_32BIT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 1);
+    }
+}
+
+#define tTheta data[1]
+#define tbg0HOfsOpponent data[2]
+#define tbg0HOfsPlayer data[3]
+#define tCounter data[3]
+#define tHalfBandwidth data[4]
+#define tOpponentSpriteId data[13]
+#define tPlayerSpriteId data[14]
+#define tWhichMugshot data[15]
+
+#define spState data[0]
+#define spSpeed data[1]
+#define spAbsAcc data[2]
+#define sphasSlideFinished data[6]
+#define spOpponentOrPlayer data[7]
+
+void BT_Phase2StartLoreleiMugshot(u8 taskId)
+{
+    gTasks[taskId].tWhichMugshot = MUGSHOT_LORELEI;
+    BT_Phase2Mugshot(taskId);
+}
+
+void BT_Phase2StartBrunoMugshot(u8 taskId)
+{
+    gTasks[taskId].tWhichMugshot = MUGSHOT_BRUNO;
+    BT_Phase2Mugshot(taskId);
+}
+
+void BT_Phase2StartAgathaMugshot(u8 taskId)
+{
+    gTasks[taskId].tWhichMugshot = MUGSHOT_AGATHA;
+    BT_Phase2Mugshot(taskId);
+}
+
+void BT_Phase2StartLanceMugshot(u8 taskId)
+{
+    gTasks[taskId].tWhichMugshot = MUGSHOT_LANCE;
+    BT_Phase2Mugshot(taskId);
+}
+
+void BT_Phase2StartBlueMugshot(u8 taskId)
+{
+    gTasks[taskId].tWhichMugshot = MUGSHOT_BLUE;
+    BT_Phase2Mugshot(taskId);
+}
+
+void BT_Phase2Mugshot(u8 taskId)
+{
+    while (sBT_Phase2MugshotFuncs[gTasks[taskId].tState](&gTasks[taskId]));
+}
+
+bool8 BT_Phase2Mugshot_Init(struct Task *task)
+{
+    u8 i;
+
+    BT_InitCtrlBlk();
+    ScanlineEffect_Clear();
+    BT_Phase2Mugshots_CreateSprites(task);
+    task->tTheta = 0;
+    task->tbg0HOfsOpponent = 1;
+    task->tbg0HOfsPlayer = 239;
+    sTransitionStructPtr->winIn = 0x3F;
+    sTransitionStructPtr->winOut = 0x3E;
+    sTransitionStructPtr->win0V = 160;
+    for (i = 0; i < 160; ++i)
+        gScanlineEffectRegBuffers[1][i] = 0xF0F1;
+    SetVBlankCallback(VBCB_BT_Phase2Mugshot1_Slide);
+    ++task->tState;
+    return FALSE;
+}
+
+bool8 BT_Phase2Mugshot_LoadGfx(struct Task *task)
+{
+    s16 i, j;
+    u16 *tilemapAddr, *tilesetAddr;
+    const u16 *mugshotsMap = sVsBarTilemap;
+    
+    BT_GetBg0TilemapAndTilesetBase(&tilemapAddr, &tilesetAddr);
+    CpuSet(sVsBarTileset, tilesetAddr, 0xF0);
+    LoadPalette(sVsBarOpponentPalettes[task->tWhichMugshot], 0xF0, 0x20);
+    LoadPalette(sVsBarPlayerPalettes[gSaveBlock2Ptr->playerGender], 0xFA, 0xC);
+    for (i = 0; i < 20; ++i)
+        for (j = 0; j < 32; ++j, ++mugshotsMap)
+            tilemapAddr[i * 32 + j] = *mugshotsMap | 0xF000; // use palette #15
+    EnableInterrupts(INTR_FLAG_HBLANK);
+    SetHBlankCallback(HBCB_BT_Phase2Mugshot);
+    ++task->tState;
+    return FALSE;
+}
+
+bool8 BT_Phase2Mugshot_VsBarsSlideIn(struct Task *task)
+{
+    u8 i, theta;
+    u16* toStore;
+    s16 value;
+    s32 mergedBg0hOfs;
+
+    sTransitionStructPtr->vblankDma = FALSE;
+
+    toStore = gScanlineEffectRegBuffers[0];
+    theta = task->tTheta;
+    task->tTheta += 0x10;
+    for (i = 0; i < 80; ++i, ++toStore, theta += 0x10)
+    {
+        value = task->tbg0HOfsOpponent + Sin(theta, 0x10);
+        if (value < 0)
+            value = 1;
+        if (value > 0xF0)
+            value = 0xF0;
+        *toStore = value;
+    }
+    for (; i < 160; ++i, ++toStore, theta += 0x10)
+    {
+        value = task->tCounter - Sin(theta, 0x10);
+        if (value < 0)
+            value = 0;
+        if (value > 0xEF)
+            value = 0xEF;
+        *toStore = (value << 8) | (0xF0);
+    }
+    task->tbg0HOfsOpponent += 8;
+    task->tCounter -= 8;
+    if (task->tbg0HOfsOpponent > 0xF0)
+        task->tbg0HOfsOpponent = 0xF0;
+    if (task->tCounter < 0)
+        task->tCounter = 0;
+    mergedBg0hOfs = *(s32*)(&task->tbg0HOfsOpponent);
+    if (mergedBg0hOfs == 0x00F0)
+        ++task->tState;
+    sTransitionStructPtr->bg0HOfsOpponent -= 8;
+    sTransitionStructPtr->bg0HOfsPlayer += 8;
+    ++sTransitionStructPtr->vblankDma;
+    return FALSE;
+}
+
+bool8 BT_Phase2Mugshot_StartSpriteSlide(struct Task *task)
+{
+    u8 i;
+    u16* toStore;
+
+    sTransitionStructPtr->vblankDma = FALSE;
+    for (i = 0, toStore = gScanlineEffectRegBuffers[0]; i < 160; ++i, ++toStore)
+        *toStore = 0xF0;
+    ++task->tState;
+    task->tTheta = 0;
+    task->tbg0HOfsOpponent = 0;
+    task->tbg0HOfsPlayer = 0;
+    sTransitionStructPtr->bg0HOfsOpponent -= 8;
+    sTransitionStructPtr->bg0HOfsPlayer += 8;
+    BT_SetSpriteAsOpponentOrPlayer(task->tOpponentSpriteId, FALSE);
+    BT_SetSpriteAsOpponentOrPlayer(task->tPlayerSpriteId, TRUE);
+    BT_StartSpriteSlide(task->tOpponentSpriteId);
+    PlaySE(SE_C_MAKU_U);
+    ++sTransitionStructPtr->vblankDma;
+    return FALSE;
+}
+
+bool8 BT_Phase2Mugshot_WaitForOpponentInPlace(struct Task *task)
+{
+    sTransitionStructPtr->bg0HOfsOpponent -= 8;
+    sTransitionStructPtr->bg0HOfsPlayer += 8;
+    if (BT_IsSpriteSlideFinished(task->tOpponentSpriteId))
+    {
+        ++task->tState;
+        BT_StartSpriteSlide(task->tPlayerSpriteId);
+    }
+    return FALSE;
+}
+
+bool8 BT_Phase2Mugshot_WaitForPlayerInPlace(struct Task *task)
+{
+    sTransitionStructPtr->bg0HOfsOpponent -= 8;
+    sTransitionStructPtr->bg0HOfsPlayer += 8;
+    if (BT_IsSpriteSlideFinished(task->tPlayerSpriteId))
+    {
+        sTransitionStructPtr->vblankDma = FALSE;
+        SetVBlankCallback(NULL);
+        DmaStop(0);
+        memset(gScanlineEffectRegBuffers[0], 0, 320);
+        memset(gScanlineEffectRegBuffers[1], 0, 320);
+        SetGpuReg(REG_OFFSET_WIN0H, 0xF0);
+        SetGpuReg(REG_OFFSET_BLDY, 0);
+        ++task->tState;
+        task->tCounter = 0;
+        task->tHalfBandwidth = 0;
+        sTransitionStructPtr->bldCnt = BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BD | BLDCNT_EFFECT_LIGHTEN;
+        SetVBlankCallback(VBCB_BT_Phase2Mugshot2_WhiteFade);
+    }
+    return FALSE;
+}
+
+bool8 BT_Phase2Mugshot_ExpandWhiteBand(struct Task *task)
+{
+    bool32 nextFunc;
+
+    sTransitionStructPtr->vblankDma = FALSE;
+    nextFunc = TRUE;
+    sTransitionStructPtr->bg0HOfsOpponent -= 8;
+    sTransitionStructPtr->bg0HOfsPlayer += 8;
+    if (task->tHalfBandwidth < 80)
+        task->tHalfBandwidth += 2;
+    if (task->tHalfBandwidth > 80)
+        task->tHalfBandwidth = 80;
+    if (++task->tCounter & 1)
+    {
+        s16 i;
+
+        for (i = 0, nextFunc = FALSE; i <= task->tHalfBandwidth; ++i)
+        {
+            s16 y1 = 80 - i;
+            s16 y2 = 80 + i;
+
+            if (gScanlineEffectRegBuffers[0][y1] <= 15)
+            {
+                nextFunc = TRUE;
+                ++gScanlineEffectRegBuffers[0][y1];
+            }
+            if (gScanlineEffectRegBuffers[0][y2] <= 15)
+            {
+                nextFunc = TRUE;
+                ++gScanlineEffectRegBuffers[0][y2];
+            }
+        }
+    }
+    if (task->tHalfBandwidth == 80 && !nextFunc)
+        ++task->tState;
+    ++sTransitionStructPtr->vblankDma;
+    return FALSE;
+}
+
+bool8 BT_Phase2Mugshot_StartBlackFade(struct Task *task)
+{
+    sTransitionStructPtr->vblankDma = FALSE;
+    BlendPalettes(0xFFFFFFFF, 0x10, RGB_WHITE);
+    sTransitionStructPtr->bldCnt = BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BD | BLDCNT_EFFECT_DARKEN;
+    task->tCounter = 0;
+    ++task->tState;
+    return TRUE;
+}
+
+bool8 BT_Phase2Mugshot_WaitForBlackFade(struct Task *task)
+{
+    sTransitionStructPtr->vblankDma = FALSE;
+    ++task->tCounter;
+    memset(gScanlineEffectRegBuffers[0], task->tCounter, 320);
+    if (task->tCounter > 15)
+        ++task->tState;
+    ++sTransitionStructPtr->vblankDma;
+    return FALSE;
+}
+
+bool8 BT_Phase2Mugshot_End(struct Task *task)
+{
+    DmaStop(0);
+    BT_BlendPalettesToBlack();
+    DestroyTask(FindTaskIdByFunc(task->func));
+    return FALSE;
+}
+
+void VBCB_BT_Phase2Mugshot1_Slide(void)
+{
+    DmaStop(0);
+    BT_VBSyncOamAndPltt();
+    if (sTransitionStructPtr->vblankDma)
+        DmaCopy16(3, gScanlineEffectRegBuffers[0], gScanlineEffectRegBuffers[1], 320);
+    SetGpuReg(REG_OFFSET_BG0VOFS, sTransitionStructPtr->bg0VOfs);
+    SetGpuReg(REG_OFFSET_WININ, sTransitionStructPtr->winIn);
+    SetGpuReg(REG_OFFSET_WINOUT, sTransitionStructPtr->winOut);
+    SetGpuReg(REG_OFFSET_WIN0V, sTransitionStructPtr->win0V);
+    DmaSet(0, gScanlineEffectRegBuffers[1], &REG_WIN0H, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 1);
+}
+
+void VBCB_BT_Phase2Mugshot2_WhiteFade(void)
+{
+    DmaStop(0);
+    BT_VBSyncOamAndPltt();
+    if (sTransitionStructPtr->vblankDma)
+        DmaCopy16(3, gScanlineEffectRegBuffers[0], gScanlineEffectRegBuffers[1], 320);
+    SetGpuReg(REG_OFFSET_BLDCNT, sTransitionStructPtr->bldCnt);
+    DmaSet(0, gScanlineEffectRegBuffers[1], &REG_BLDY, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 1);
+}
+
+void HBCB_BT_Phase2Mugshot(void)
+{
+    if (REG_VCOUNT < 80)
+        REG_BG0HOFS = sTransitionStructPtr->bg0HOfsOpponent;
+    else
+        REG_BG0HOFS = sTransitionStructPtr->bg0HOfsPlayer;
+}
+
+
+void BT_Phase2Mugshots_CreateSprites(struct Task *task)
+{
+    struct Sprite *opponentSprite, *playerSprite;
+    s16 mugshotId;
+
+    gReservedSpritePaletteCount = 10;
+    mugshotId = task->tWhichMugshot;
+    task->tOpponentSpriteId = CreateTrainerSprite(sMugshotsTrainerPicIDsTable[mugshotId], sMugshotsOpponentCoords[mugshotId][0] - 32, sMugshotsOpponentCoords[mugshotId][1] + 42, 0, gDecompressionBuffer);
+    task->tPlayerSpriteId = CreateTrainerSprite(PlayerGenderToFrontTrainerPicId_Debug(gSaveBlock2Ptr->playerGender, TRUE), 272, 106, 0, gDecompressionBuffer);
+    gReservedSpritePaletteCount = 12;
+    opponentSprite = &gSprites[task->tOpponentSpriteId];
+    playerSprite = &gSprites[task->tPlayerSpriteId];
+    opponentSprite->callback = SpriteCB_BT_Phase2Mugshots;
+    playerSprite->callback = SpriteCB_BT_Phase2Mugshots;
+    opponentSprite->oam.affineMode = 3;
+    playerSprite->oam.affineMode = 3;
+    opponentSprite->oam.matrixNum = AllocOamMatrix();
+    playerSprite->oam.matrixNum = AllocOamMatrix();
+    opponentSprite->oam.shape = 1;
+    playerSprite->oam.shape = 1;
+    opponentSprite->oam.size = 3;
+    playerSprite->oam.size = 3;
+    CalcCenterToCornerVec(opponentSprite, 1, 3, 3);
+    CalcCenterToCornerVec(playerSprite, 1, 3, 3);
+    SetOamMatrixRotationScaling(opponentSprite->oam.matrixNum, sMugshotsOpponentRotationScales[mugshotId][0], sMugshotsOpponentRotationScales[mugshotId][1], 0);
+    SetOamMatrixRotationScaling(playerSprite->oam.matrixNum, -512, 512, 0);
+}
+
+void SpriteCB_BT_Phase2Mugshots(struct Sprite *sprite)
+{
+    while (sBT_Phase2MugshotSpriteFuncs[sprite->spState](sprite));
+}
+
+bool8 BT_Phase2MugshotsSpriteFuncs_Wait(struct Sprite *sprite)
+{
+    return FALSE;
+}
+
+bool8 BT_Phase2MugshotsSpriteFuncs_InitParams(struct Sprite *sprite)
+{
+    s16 arr0[2];
+    s16 arr1[2];
+
+    memcpy(arr0, sMugShotSlideVelocity, sizeof(sMugShotSlideVelocity));
+    memcpy(arr1, sMugShotSlideDeceleration, sizeof(sMugShotSlideDeceleration));
+    ++sprite->spState;
+    sprite->spSpeed = arr0[sprite->spOpponentOrPlayer];
+    sprite->spAbsAcc = arr1[sprite->spOpponentOrPlayer];
+    return TRUE;
+}
+
+bool8 BT_Phase2MugshotsSpriteFuncs_SlideSpriteIn(struct Sprite *sprite)
+{
+    sprite->pos1.x += sprite->spSpeed;
+    if (sprite->spOpponentOrPlayer && sprite->pos1.x < 133)
+        ++sprite->spState;
+    else if (!sprite->spOpponentOrPlayer && sprite->pos1.x > 103)
+        ++sprite->spState;
+    return FALSE;
+}
+
+bool8 BT_Phase2MugshotsSpriteFuncs_DecelerateSprite(struct Sprite *sprite)
+{
+    sprite->spSpeed += sprite->spAbsAcc;
+    sprite->pos1.x += sprite->spSpeed;
+    if (sprite->spSpeed == 0)
+    {
+        ++sprite->spState;
+        sprite->spAbsAcc = -sprite->spAbsAcc;
+        sprite->sphasSlideFinished = 1;
+    }
+    return FALSE;
+}
+
+// not used
+bool8 BT_Phase2MugshotsSpriteFuncs_DecelerateSprite2(struct Sprite *sprite)
+{
+    sprite->spSpeed += sprite->spAbsAcc;
+    sprite->pos1.x += sprite->spSpeed;
+    if (sprite->pos1.x < -31 || sprite->pos1.x > 271)
+        ++sprite->spState;
+    return FALSE;
+}
+
+void BT_SetSpriteAsOpponentOrPlayer(s16 spriteId, bool16 value)
+{
+    gSprites[spriteId].spOpponentOrPlayer = value;
+}
+
+void BT_StartSpriteSlide(s16 spriteId)
+{
+    ++gSprites[spriteId].spState;
+}
+
+s16 BT_IsSpriteSlideFinished(s16 spriteId)
+{
+    return gSprites[spriteId].sphasSlideFinished;
+}
+
+#undef tTheta
+#undef tbg0HOfsOpponent
+#undef tbg0HOfsPlayer
+#undef tCounter
+#undef tHalfBandwidth
+#undef tOpponentSpriteId
+#undef tPlayerSpriteId
+#undef tWhichMugshot
+
+#undef spState
+#undef spSpeed
+#undef spAbsAcc
+#undef sphasSlideFinished
+#undef spOpponentOrPlayer
+
+#define tSpeed data[1]
+#define tAcc data[2]
+#define tJerk data[3]
+
+void BT_Phase2SlicedScreen(u8 taskId)
+{
+    while (sBT_Phase2SlicedScreenFuncs[gTasks[taskId].tState](&gTasks[taskId]));
+}
+
+bool8 BT_Phase2SlicedScreen_Init(struct Task *task)
+{
+    u16 i;
+
+    BT_InitCtrlBlk();
+    ScanlineEffect_Clear();
+    task->tAcc = 256;
+    task->tJerk = 1;
+    sTransitionStructPtr->winIn = 0x3F;
+    sTransitionStructPtr->winOut = 0;
+    sTransitionStructPtr->win0V = 160;
+    for (i = 0; i < 160; ++i)
+    {
+        gScanlineEffectRegBuffers[1][i] = sTransitionStructPtr->bg123HOfs;
+        gScanlineEffectRegBuffers[1][160 + i] = 0xF0;
+    }
+    EnableInterrupts(INTR_FLAG_HBLANK);
+    SetVBlankCallback(VBCB_BT_Phase2SlicedScreen);
+    SetHBlankCallback(HBCB_BT_Phase2SlicedScreen);
+    ++task->tState;
+    return TRUE;
+}
+
+bool8 BT_Phase2SlicedScreen_UpdateOffsets(struct Task *task)
+{
+    u16 i;
+
+    sTransitionStructPtr->vblankDma = FALSE;
+    task->tSpeed += (task->tAcc >> 8);
+    if (task->tSpeed > 0xF0)
+        task->tSpeed = 0xF0;
+    if (task->tAcc <= 0xFFF)
+        task->tAcc += task->tJerk;
+    if (task->tJerk < 128)
+        task->tJerk <<= 1;
+    for (i = 0; i < 160; ++i)
+    {
+        u16 *ofsBuffer = &gScanlineEffectRegBuffers[0][i];
+        u16 *win0HBuffer = &gScanlineEffectRegBuffers[0][i + 160];
+        if (i & 1)
+        {
+            *ofsBuffer = sTransitionStructPtr->bg123HOfs + task->tSpeed;
+            *win0HBuffer = 0xF0 - task->tSpeed;
+        }
+        else
+        {
+            *ofsBuffer = sTransitionStructPtr->bg123HOfs - task->tSpeed;
+            *win0HBuffer = (task->tSpeed << 8) | 0xF1;
+        }
+    }
+    if (task->tSpeed > 0xEF)
+        ++task->tState;
+    ++sTransitionStructPtr->vblankDma;
+    return FALSE;
+}
+
+bool8 BT_Phase2SlicedScreen_End(struct Task *task)
+{
+    DmaStop(0);
+    BT_BlendPalettesToBlack();
+    DestroyTask(FindTaskIdByFunc(BT_Phase2SlicedScreen));
+    return FALSE;
+}
+
+void VBCB_BT_Phase2SlicedScreen(void)
+{
+    DmaStop(0);
+    BT_VBSyncOamAndPltt();
+    SetGpuReg(REG_OFFSET_WININ, sTransitionStructPtr->winIn);
+    SetGpuReg(REG_OFFSET_WINOUT, sTransitionStructPtr->winOut);
+    SetGpuReg(REG_OFFSET_WIN0V, sTransitionStructPtr->win0V);
+    if (sTransitionStructPtr->vblankDma)
+        DmaCopy16(3, gScanlineEffectRegBuffers[0], gScanlineEffectRegBuffers[1], 640);
+    DmaSet(0, &gScanlineEffectRegBuffers[1][160], &REG_WIN0H, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_16BIT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 1);
+}
+
+void HBCB_BT_Phase2SlicedScreen(void)
+{
+    s16 offset = gScanlineEffectRegBuffers[1][REG_VCOUNT];
+    
+    REG_BG1HOFS = offset;
+    REG_BG2HOFS = offset;
+    REG_BG3HOFS = offset;
+}
+
+#undef tSpeed
+#undef tAcc
+#undef tJerk
+
+#define spBldyCounter data[0]
+#define spFinished data[1]
+#define spAltDelay data[2]
+#define spDelay data[5]
+#define spLastSprite data[6]
+
+void BT_Phase2WhiteFadeInStripes(u8 taskId)
+{
+    while (sBT_Phase2WhiteFadeInStripesFuncs[gTasks[taskId].tState](&gTasks[taskId]));
+}
+
+bool8 BT_Phase2WhiteFadeInStripes_Init(struct Task *task)
+{
+    u16 i;
+
+    BT_InitCtrlBlk();
+    ScanlineEffect_Clear();
+    sTransitionStructPtr->bldCnt = BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BD | BLDCNT_EFFECT_LIGHTEN;
+    sTransitionStructPtr->bldY = 0;
+    sTransitionStructPtr->winIn = 0x1E;
+    sTransitionStructPtr->winOut = 0x3F;
+    sTransitionStructPtr->win0V = 160;
+    for (i = 0; i < 160; ++i)
+    {
+        gScanlineEffectRegBuffers[1][i] = 0;
+        gScanlineEffectRegBuffers[1][i + 160] = 0xF0;
+    }
+    EnableInterrupts(INTR_FLAG_HBLANK);
+    SetHBlankCallback(HBCB_BT_Phase2WhiteFadeInStripes);
+    SetVBlankCallback(VBCB_BT_Phase2WhiteFadeInStripes1);
+    ++task->tState;
+    return FALSE;
+}
+
+bool8 BT_Phase2WhiteFadeInStripes_SetupSprites(struct Task *task)
+{
+    s16 i, posY;
+    s16 buffer[NELEMS(sWhiteStripeDelay)];
+    struct Sprite *sprite;
+
+    memcpy(buffer, sWhiteStripeDelay, sizeof(sWhiteStripeDelay));
+    for (i = 0, posY = 0; i < 6; ++i, posY += 0x1B)
+    {
+        sprite = &gSprites[CreateInvisibleSprite(SpriteCB_BT_Phase2WhiteFadeInStripes)];
+        sprite->pos1.x = 0xF0;
+        sprite->pos1.y = posY;
+        sprite->spDelay = buffer[i];
+    }
+    ++sprite->spLastSprite;
+    ++task->tState;
+    return FALSE;
+}
+
+bool8 BT_Phase2WhiteFadeInStripes_IsWhiteFadeDone(struct Task *task)
+{
+    sTransitionStructPtr->vblankDma = FALSE;
+    if (sTransitionStructPtr->counter > 5)
+    {
+        BlendPalettes(0xFFFFFFFF, 0x10, RGB_WHITE);
+        ++task->tState;
+    }
+    return FALSE;
+}
+
+bool8 BT_Phase2WhiteFadeInStripes_Stop(struct Task *task)
+{
+    sTransitionStructPtr->vblankDma = FALSE;
+    DmaStop(0);
+    SetVBlankCallback(NULL);
+    SetHBlankCallback(NULL);
+    sTransitionStructPtr->win0H = 240;
+    sTransitionStructPtr->bldY = 0;
+    sTransitionStructPtr->bldCnt = BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BD | BLDCNT_EFFECT_DARKEN;
+    sTransitionStructPtr->winIn = 0x3F;
+    sTransitionStructPtr->counter = 0;
+    SetVBlankCallback(VBCB_BT_Phase2WhiteFadeInStripes2);
+    ++task->tState;
+    return FALSE;
+}
+
+bool8 BT_Phase2WhiteFadeInStripes_IsDone(struct Task *task)
+{
+   sTransitionStructPtr->counter += 480;
+   sTransitionStructPtr->bldY = sTransitionStructPtr->counter >> 8;
+   if (sTransitionStructPtr->bldY > 16)
+   {
+       BT_BlendPalettesToBlack();
+       DestroyTask(FindTaskIdByFunc(BT_Phase2WhiteFadeInStripes));
+   }
+   return FALSE;
+}
+
+void VBCB_BT_Phase2WhiteFadeInStripes1(void)
+{
+    DmaStop(0);
+    BT_VBSyncOamAndPltt();
+    SetGpuReg(REG_OFFSET_BLDCNT, sTransitionStructPtr->bldCnt);
+    SetGpuReg(REG_OFFSET_WININ, sTransitionStructPtr->winIn);
+    SetGpuReg(REG_OFFSET_WINOUT, sTransitionStructPtr->winOut);
+    SetGpuReg(REG_OFFSET_WIN0V, sTransitionStructPtr->win0H); // BUG: This should obviously be sTransitionStructPtr->win0V
+    if (sTransitionStructPtr->vblankDma)
+        DmaCopy16(3, gScanlineEffectRegBuffers[0], gScanlineEffectRegBuffers[1], 640);
+    DmaSet(0, &gScanlineEffectRegBuffers[1][160], &REG_WIN0H, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_16BIT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 1);
+}
+
+void VBCB_BT_Phase2WhiteFadeInStripes2(void)
+{
+    BT_VBSyncOamAndPltt();
+    SetGpuReg(REG_OFFSET_BLDY, sTransitionStructPtr->bldY);
+    SetGpuReg(REG_OFFSET_BLDCNT, sTransitionStructPtr->bldCnt);
+    SetGpuReg(REG_OFFSET_WININ, sTransitionStructPtr->winIn);
+    SetGpuReg(REG_OFFSET_WINOUT, sTransitionStructPtr->winOut);
+    SetGpuReg(REG_OFFSET_WIN0H, sTransitionStructPtr->win0H);
+    SetGpuReg(REG_OFFSET_WIN0V, sTransitionStructPtr->win0V);
+}
+
+
+void HBCB_BT_Phase2WhiteFadeInStripes(void)
+{
+    vu16 index = REG_VCOUNT;
+
+    if (index == 227)
+        index = 0;
+    REG_BLDY = gScanlineEffectRegBuffers[1][index];
+}
+
+void SpriteCB_BT_Phase2WhiteFadeInStripes(struct Sprite *sprite)
+{
+    if (sprite->spDelay)
+    {
+        --sprite->spDelay;
+        if (sprite->spLastSprite)
+            sTransitionStructPtr->vblankDma = TRUE;
+    }
+    else
+    {
+        u16 i;
+        u16* bldY = &gScanlineEffectRegBuffers[0][sprite->pos1.y];
+        u16* win0H = &gScanlineEffectRegBuffers[0][sprite->pos1.y + 160];
+        u32 stripeWidth = sprite->spLastSprite ? 0x19 : 0x1B;
+        
+        for (i = 0; i < stripeWidth; ++i)
+        {
+            bldY[i] = sprite->spBldyCounter >> 8;
+            win0H[i] = (u8)(sprite->pos1.x);
+        }
+        if (sprite->pos1.x == 0 && sprite->spBldyCounter == 0x1000)
+            sprite->spFinished = 1;
+        sprite->pos1.x -= 24;
+        sprite->spBldyCounter += 192;
+        if (sprite->pos1.x < 0)
+            sprite->pos1.x = 0;
+        if (sprite->spBldyCounter > 0x1000)
+            sprite->spBldyCounter = 0x1000;
+        if (sprite->spLastSprite)
+            sTransitionStructPtr->vblankDma = TRUE;
+        if (sprite->spFinished)
+        {
+            if (sprite->spLastSprite == FALSE || (sTransitionStructPtr->counter > 4))
+            {
+                ++sTransitionStructPtr->counter;
+                DestroySprite(sprite);
+            }
+        }
+    }
+}
+
+#undef spBldyCounter
+#undef spFinished
+#undef spAltDelay
+#undef spDelay
+#undef spLastSprite
+
+#define tDelay data[1]
+#define tWhichGrid data[2]
+
+void BT_Phase2GridSquares(u8 taskId)
+{
+    while (sBT_Phase2GridSquaresFuncs[gTasks[taskId].tState](&gTasks[taskId]));
+}
+
+bool8 BT_Phase2GridSquares_LoadGfx(struct Task *task)
+{
+    u16 *tilemapAddr, *tilesetAddr;
+
+    BT_GetBg0TilemapAndTilesetBase(&tilemapAddr, &tilesetAddr);
+    CpuSet(sGridSquareTileset, tilesetAddr, 0x10);
+    CpuFill16(0xF000, tilemapAddr, 0x800);
+    LoadPalette(sSlidingPokeballBigPokeballPalette, 0xF0, 0x20);
+    ++task->tState;
+    return FALSE;
+}
+
+bool8 BT_Phase2GridSquares_UpdateTileset(struct Task *task)
+{
+    u16* tilesetAddr;
+
+    if (task->tDelay == 0)
+    {
+        BT_GetBg0TilesetBase(&tilesetAddr);
+        task->tDelay = 3;
+        ++task->tWhichGrid;
+        CpuSet(sGridSquareTileset + (task->tWhichGrid * 8), tilesetAddr, 0x10);
+        if (task->tWhichGrid > 0xD)
+        {
+            ++task->tState;
+            task->tDelay = 16;
+        }
+    }
+    --task->tDelay;
+    return FALSE;
+}
+
+bool8 BT_Phase2GridSquares_IsDone(struct Task *task)
+{
+    if (--task->tDelay == 0)
+    {
+        BT_BlendPalettesToBlack();
+        DestroyTask(FindTaskIdByFunc(BT_Phase2GridSquares));
+    }
+    return FALSE;
+}
+
+#undef tDelay
+#undef tWhichGrid
+
+#define tWhichBrush data[1]
+#define tWhichSide data[2]
+#define tDelay data[3]
+
+#define trCurrentPtX data[2]
+#define trCurrentPtY data[3]
+
+void BT_Phase2BlackDoodles(u8 taskId)
+{
+    while (sBT_Phase2BlackDoodlesFuncs[gTasks[taskId].tState](&gTasks[taskId]));
+}
+
+bool8 BT_Phase2BlackDoodles_Init(struct Task *task)
+{
+    u16 i;
+
+    BT_InitCtrlBlk();
+    ScanlineEffect_Clear();
+    sTransitionStructPtr->winIn = 0x3F;
+    sTransitionStructPtr->winOut = 0;
+    sTransitionStructPtr->win0V = 0xA0;
+    for (i = 0; i < 160; ++i)
+        gScanlineEffectRegBuffers[0][i] = 0x00F0;
+    CpuSet(gScanlineEffectRegBuffers[0], gScanlineEffectRegBuffers[1], 160);
+    SetVBlankCallback(VBCB_BT_Phase2BlackDoodles);
+    ++task->tState;
+    return TRUE;
+}
+
+bool8 BT_Phase2BlackDoodles_InitSingleBrush(struct Task *task)
+{
+    BT_DiagonalSegment_InitParams(sTransitionStructPtr->data, sBlackDoodlesSegments[task->tWhichBrush][0], sBlackDoodlesSegments[task->tWhichBrush][1], sBlackDoodlesSegments[task->tWhichBrush][2], sBlackDoodlesSegments[task->tWhichBrush][3], 1, 1);
+    task->tWhichSide = sBlackDoodlesSegments[task->tWhichBrush][4];
+    ++task->tState;
+    return TRUE;
+}
+
+bool8 BT_Phase2BlackDoodles_DrawSingleBrush(struct Task *task)
+{
+    s16 i;
+    bool8 nextFunc;
+
+    sTransitionStructPtr->vblankDma = FALSE;
+    for (i = 0, nextFunc = FALSE; i < 16; ++i)
+    {
+        s16 left = gScanlineEffectRegBuffers[0][sTransitionStructPtr->trCurrentPtY] >> 8;
+        s16 right = gScanlineEffectRegBuffers[0][sTransitionStructPtr->trCurrentPtY] & 0xFF;
+        if (task->tWhichSide == 0)
+        {
+            if (left < sTransitionStructPtr->trCurrentPtX)
+                left = sTransitionStructPtr->trCurrentPtX;
+            if (left > right)
+                left = right;
+        }
+        else
+        {
+            if (right > sTransitionStructPtr->trCurrentPtX)
+                right = sTransitionStructPtr->trCurrentPtX;
+            if (right <= left)
+                right = left;
+        }
+        gScanlineEffectRegBuffers[0][sTransitionStructPtr->trCurrentPtY] = right | (left << 8);
+        if (nextFunc)
+        {
+            ++task->tState;
+            break;
+        }
+        else
+            nextFunc = BT_DiagonalSegment_ComputePointOnSegment(sTransitionStructPtr->data, TRUE, TRUE);
+    }
+    ++sTransitionStructPtr->vblankDma;
+    return FALSE;
+}
+
+bool8 BT_Phase2BlackDoodles_IsDone(struct Task *task)
+{
+    if (++task->tWhichBrush < 7)
+    {
+        ++task->tState;
+        task->tDelay = sBlackDoodlesDelay[task->tWhichBrush - 1];
+        return TRUE;
+    }
+    else
+    {
+        DmaStop(0);
+        BT_BlendPalettesToBlack();
+        DestroyTask(FindTaskIdByFunc(BT_Phase2BlackDoodles));
+        return FALSE;
+    }
+}
+
+bool8 BT_Phase2BlackDoodles_NextBrush(struct Task *task)
+{
+    if (--task->tDelay == 0)
+    {
+        task->tState = 1;
+        return TRUE;
+    }
+    else
+        return FALSE;
+}
+
+void VBCB_BT_Phase2BlackDoodles(void)
+{
+    DmaStop(0);
+    BT_VBSyncOamAndPltt();
+    if (sTransitionStructPtr->vblankDma)
+        DmaCopy16(3, gScanlineEffectRegBuffers[0], gScanlineEffectRegBuffers[1], 320);
+    SetGpuReg(REG_OFFSET_WININ, sTransitionStructPtr->winIn);
+    SetGpuReg(REG_OFFSET_WINOUT, sTransitionStructPtr->winOut);
+    SetGpuReg(REG_OFFSET_WIN0V, sTransitionStructPtr->win0V);
+    SetGpuReg(REG_OFFSET_WIN0H, gScanlineEffectRegBuffers[1][0]);
+    DmaSet(0, gScanlineEffectRegBuffers[1], &REG_WIN0H, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_16BIT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 1);
+}
+
+#undef tWhichBrush
+#undef tWhichSide
+#undef tDelay
+
+#undef trCurrentPtX
+#undef trCurrentPtY
+
+#define tFadeOutDelay data[1]
+#define tFadeInDelay data[2]
+#define tBlinkTimes data[3]
+#define tFadeOutSpeed data[4]
+#define tFadeInSpeed data[5]
+#define tDelayCounter data[6]
+#define tCoeff data[7]
+
+void BT_CreatePhase1SubTask(s16 fadeOutDelay, s16 fadeInDelay, s16 blinkTimes, s16 fadeOutSpeed, s16 fadeInSpeed)
+{
+    u8 taskId = CreateTask(BT_Phase1SubTask, 3);
+    gTasks[taskId].tFadeOutDelay = fadeOutDelay;
+    gTasks[taskId].tFadeInDelay = fadeInDelay;
+    gTasks[taskId].tBlinkTimes = blinkTimes;
+    gTasks[taskId].tFadeOutSpeed = fadeOutSpeed;
+    gTasks[taskId].tFadeInSpeed = fadeInSpeed;
+    gTasks[taskId].tDelayCounter = fadeOutDelay;
+}
+
+bool8 BT_IsPhase1Done(void)
+{
+    if (FindTaskIdByFunc(BT_Phase1SubTask) == TASK_NONE)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+void BT_Phase1SubTask(u8 taskId)
+{
+    while (sBT_Phase1FadeFuncs[gTasks[taskId].tState](&gTasks[taskId]));
+}
+
+bool8 BT_Phase1_FadeOut(struct Task *task)
+{
+    if (task->tDelayCounter == 0 || --task->tDelayCounter == 0)
+    {
+        task->tDelayCounter = task->tFadeOutDelay;
+        task->tCoeff += task->tFadeOutSpeed;
+        if (task->tCoeff > 16)
+            task->tCoeff = 16;
+        BlendPalettes(-1, task->tCoeff, RGB(11, 11, 11));
+    }
+    if (task->tCoeff > 15)
+    {
+        ++task->tState;
+        task->tDelayCounter = task->tFadeInDelay;
+    }
+    return FALSE;
+}
+
+bool8 BT_Phase1_FadeIn(struct Task *task)
+{
+    if (task->tDelayCounter == 0 || --task->tDelayCounter == 0)
+    {
+        task->tDelayCounter = task->tFadeInDelay;
+        task->tCoeff -= task->tFadeInSpeed;
+        if (task->tCoeff < 0)
+            task->tCoeff = 0;
+        BlendPalettes(0xFFFFFFFF, task->tCoeff, RGB(11, 11, 11));
+    }
+    if (task->tCoeff == 0)
+    {
+        if (--task->tBlinkTimes == 0)
+        {
+            DestroyTask(FindTaskIdByFunc(BT_Phase1SubTask));
+        }
+        else
+        {
+            task->tDelayCounter = task->tFadeOutDelay;
+            task->tState = 0;
+        }
+    }
+    return FALSE;
+}
+
+#undef tFadeOutDelay
+#undef tFadeInDelay
+#undef tBlinkTimes
+#undef tFadeOutSpeed
+#undef tFadeInSpeed
+#undef tDelayCounter
+#undef tCoeff
+
+void BT_InitCtrlBlk(void)
+{
+    memset(sTransitionStructPtr, 0, sizeof(*sTransitionStructPtr));
+    sub_805A658(&sTransitionStructPtr->bg123HOfs, &sTransitionStructPtr->bg123VOfs);
+}
+
+void BT_VBSyncOamAndPltt(void)
+{
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+}
+
+void BT_GetBg0TilesetBase(u16 **tilesetPtr)
+{
+    u16 charBase;
+
+    charBase = GetGpuReg(REG_OFFSET_BG0CNT) >> 2;
+    charBase <<= 0xE;
+    *tilesetPtr = (u16*)(VRAM + charBase);
+}
+
+void BT_GetBg0TilemapAndTilesetBase(u16 **tilemapPtr, u16 **tilesetPtr)
+{
+    u16 screenBase, charBase;
+
+    screenBase = (GetGpuReg(REG_OFFSET_BG0CNT) >> 8) & 0x1F;
+    charBase = GetGpuReg(REG_OFFSET_BG0CNT) >> 2;
+    screenBase <<= 0xB;
+    charBase <<= 0xE;
+    *tilemapPtr = (u16*)(VRAM + screenBase);
+    *tilesetPtr = (u16*)(VRAM + charBase);
+}
+
+void BT_BlendPalettesToBlack(void)
+{
+    BlendPalettes(0xFFFFFFFF, 0x10, RGB_BLACK);
+}
+
+void BT_LoadWaveIntoBuffer(s16 *buffer, s16 offset, s16 theta, s16 frequency, s16 amplitude, s16 bufSize)
+{
+    u8 i;
+
+    for (i = 0; bufSize > 0; --bufSize, ++i, theta += frequency)
+        buffer[i] = offset + Sin(0xFF & theta, amplitude);
+}
+
+void BT_GenerateCircle(s16 *buffer, s16 x, s16 y, s16 radius)
+{
+    s16 i;
+
+    memset(buffer, 0xA, 320);
+    // 64 iterations because we only want to cover [0, π/2) discretely. 
+    for (i = 0; i < 64; ++i)
+    {
+        s16 sinResult, cosResult, leftX, topY, bottomY, nextTopY, nextBottomY, winVal;
+
+        // The loop variable i here does not stand for rotation angle, 
+        // but is the angle between segment (center, pointOnCircle) 
+        // and vertical line.   
+        sinResult = Sin(i, radius);
+        cosResult = Cos(i, radius);
+        leftX = x - sinResult;
+        winVal = x + sinResult;
+        topY = y - cosResult;
+        bottomY = y + cosResult;
+        if (leftX < 0)
+            leftX = 0;
+        if (winVal > 240)
+            winVal = 240;
+        if (topY < 0)
+            topY = 0;
+        if (bottomY > 159)
+            bottomY = 159;
+        winVal |= (leftX << 8);
+        buffer[topY] = winVal;
+        buffer[bottomY] = winVal;
+        cosResult = Cos(i + 1, radius);
+        nextTopY = y - cosResult;
+        nextBottomY = y + cosResult;
+        if (nextTopY < 0)
+            nextTopY = 0;
+        if (nextBottomY > 159)
+            nextBottomY = 159;
+        // fill everything in between with the same WIN0H value
+        while (topY > nextTopY)
+            buffer[--topY] = winVal;
+        while (topY < nextTopY)
+            buffer[++topY] = winVal;
+        while (bottomY > nextBottomY)
+            buffer[--bottomY] = winVal;
+        while (bottomY < nextBottomY)
+            buffer[++bottomY] = winVal;
+    }
+}
+
+#define trStartPtX data[0]
+#define trStartPtY data[1]
+#define trCurrentPtX data[2]
+#define trCurrentPtY data[3]
+#define trEndPtX data[4]
+#define trEndPtY data[5]
+#define trStepX data[6]
+#define trStepY data[7]
+#define trAbsDeltaX data[8]
+#define trAbsDeltaY data[9]
+#define trAccum data[10] // track one dimension based on slope
+
+void BT_DiagonalSegment_InitParams(s16 *data, s16 startPtX, s16 startPtY, s16 endPtX, s16 endPtY, s16 stepX, s16 stepY)
+{
+    trStartPtX = startPtX;
+    trStartPtY = startPtY;
+    trCurrentPtX = startPtX;
+    trCurrentPtY = startPtY;
+    trEndPtX = endPtX;
+    trEndPtY = endPtY;
+    trStepX = stepX;
+    trStepY = stepY;
+    trAbsDeltaX = endPtX - startPtX;
+    if (trAbsDeltaX < 0)
+    {
+        trAbsDeltaX = -trAbsDeltaX;
+        trStepX = -stepX;
+    }
+    trAbsDeltaY = endPtY - startPtY;
+    if (trAbsDeltaY < 0)
+    {
+        trAbsDeltaY = -trAbsDeltaY;
+        trStepY = -stepY;
+    }
+    trAccum = 0;
+}
+
+bool8 BT_DiagonalSegment_ComputePointOnSegment(s16 *data, bool8 checkBoundary1, bool8 checkBoundary2)
+{
+    u8 finish;
+
+    if (trAbsDeltaX > trAbsDeltaY)
+    {
+        trCurrentPtX += trStepX;
+        trAccum += trAbsDeltaY;
+        if (trAccum > trAbsDeltaX)
+        {
+            trCurrentPtY += trStepY;
+            trAccum -= trAbsDeltaX;
+        }
+    }
+    else
+    {
+        trCurrentPtY += trStepY;
+        trAccum += trAbsDeltaX;
+        if (trAccum > trAbsDeltaY)
+        {
+            trCurrentPtX += trStepX;
+            trAccum -= trAbsDeltaY;
+        }
+    }
+    finish = 0;
+    if ((trStepX > 0 && trCurrentPtX >= trEndPtX) || (trStepX < 0 && trCurrentPtX <= trEndPtX))
+    {
+        ++finish;
+        if (checkBoundary1)
+            trCurrentPtX = trEndPtX;
+    }
+    if ((trStepY > 0 && trCurrentPtY >= trEndPtY) || (trStepY < 0 && trCurrentPtY <= trEndPtY))
+    {
+        ++finish;
+        if (checkBoundary2)
+            trCurrentPtY = trEndPtY;
+    }
+    if (finish == 2)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+#undef trStartPtX
+#undef trStartPtY
+#undef trCurrentPtX
+#undef trCurrentPtY
+#undef trEndPtX
+#undef trEndPtY
+#undef trStepX
+#undef trStepY
+#undef trAbsDeltaX
+#undef trAbsDeltaY
+#undef trAccum

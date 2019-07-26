@@ -1500,19 +1500,242 @@ static void BT_Phase2AntiClockwiseSpiral(u8 taskId)
 }
 
 #ifdef NONMATCHING
-static void sub_80D1F64(s16 a1, s16 a2, bool8 a3)
+static void sub_80D1F64(s16 a1, s16 a2, u8 a3)
 {
-    s16 elem;
+    s16 i, j;
 
-    for (elem = 320; elem < NELEMS(gScanlineEffectRegBuffers[1]); ++elem)
-        gScanlineEffectRegBuffers[1][elem] = 120;
-    WILL DO IT LATER
-    LET ME RESOLVE OTHER STUFF FIRST
+    u8 theta = 0;
+    for (i = 320; i < 960; ++i)
+        gScanlineEffectRegBuffers[1][i] = 120;
+    for (i = 0; i < (a2 << 4); ++i, ++theta)
+    {
+        s16 res1, res2, res3, res4, diff, r8, r0;
+        
+        // PROBLEM #1: 
+        // (around line 50 in ASM)
+        // This part completely doesn't match.
+        // It's also not tail merge. 
+        if ((theta >> 3) != ((theta + 1) >> 3))
+        {
+            r8 = (theta >> 3) + a1;
+            ++r8;
+            r0 = (theta >> 3) + a1;
+        }
+        else
+        {
+            r0 = (theta >> 3) + a1;
+            r8 = (theta >> 3) + a1;
+        }
+        res1 = 80 - Sin(theta, r0);
+        res2 = Cos(theta, r0) + 120;
+        res3 = 80 - Sin(theta + 1, r8);
+        res4 = Cos(theta + 1, r8) + 120;
+        if ((res1 >= 0 || res3 >= 0) && (res1 <= 159 || res3 <= 159))
+        {
+            if (res1 < 0)
+                res1 = 0;
+            if (res1 > 159)
+                res1 = 159;
+            if (res2 < 0)
+                res2 = 0;
+            if (res2 > 255)
+                res2 = 255;
+            if (res3 < 0)
+                res3 = 0;
+            if (res3 > 159)
+                res3 = 159;
+            if (res4 < 0)
+                res4 = 0;
+            if (res4 > 255)
+                res4 = 255;
+            diff = res3 - res1;
+            if (theta - 64 >= 0)
+            {
+                gScanlineEffectRegBuffers[1][res1 + 320] = res2;
+                if (diff)
+                {
+                    s16 diff2 = res4 - res2;
+                    
+                    if (diff2 < -1 && res2 > 1)
+                        --res2;
+                    else if (diff2 > 1 && res2 <= 254)
+                        ++res2;
+                    // PROBLEM #2:
+                    // (around line 300 in ASM)
+                    // The current version matched the control flow, 
+                    // but it looks too weird and some shift doesn't match
 
+                    // functional equivalent:
+                    // for (j = diff; j < 0; ++j)
+                    //     gScanlineEffectRegBuffers[1][res1 + j + 480] = res2;
+                    // for (j = diff; j > 0; --j)
+                    //     gScanlineEffectRegBuffers[1][res1 + j + 480] = res2;
+                    if ((j = diff) < 0)
+                        do
+                            gScanlineEffectRegBuffers[1][res1 + j + 320] = res2;
+                        while (++j < 0);
+                    else
+                        while (j > 0)
+                        {
+                            gScanlineEffectRegBuffers[1][res1 + j + 320] = res2;
+                            ++j;
+                        }
+                }
+            }
+            else
+            {
+                gScanlineEffectRegBuffers[1][res1 + 480] = res2;
+                if (diff)
+                {
+                    s16 diff2 = res4 - res2;
+
+                    if (diff2 < -1 && res2 > 1)
+                        --res2;
+                    else if (diff2 > 1 && res2 <= 254)
+                        ++res2;
+                    // same as PROBLEM #2
+                    for (j = diff; j < 0; ++j)
+                        gScanlineEffectRegBuffers[1][res1 + j + 480] = res2;
+                    for (j = diff; j > 0; --j)
+                        gScanlineEffectRegBuffers[1][res1 + j + 480] = res2;
+                }
+            }
+        }
+    }
+    // PROBLEM #3: We need (a2 << 16) & 0x30000 here. 
+    // Is it because the programmer declared a s32 var to
+    // hold the value of a2 and then cast the result to s16? 
+    // Currently I have to write it explicitly. 
+    // (around line 460 in ASM)
+    if (!a3 || !((a2 << 16) & 0x30000))
+    {
+        for (i = 0; i < 160; ++i)
+            gScanlineEffectRegBuffers[1][i * 2 + a3] = (gScanlineEffectRegBuffers[1][i + 320] << 8) | gScanlineEffectRegBuffers[1][i + 480];
+    }
+    else
+    {
+        s16 res = Sin(a2 * 16, a1 + a2 * 2);
+        
+        switch (a2 / 4)
+        {
+        case 0:
+            if (res > 80)
+                res = 80;
+            // PROBLEM #4: 
+            // (around line 550 in ASM)
+            // Case 0-3 are very similar, so it's very likely
+            // that they have the same problem. 
+            // The code is definitely functional equivalent,
+            // but the vanilla game used some extra shifts and
+            // used unsigned comparison. Another difference is
+            // that I can't figure out a way to make gUnknown_83FA444[a2]
+            // happen outside the loop body. 
+            // It seems that sTransitionStructPtr->data[2] need
+            // to be used in the first statement so that the
+            // struct pointer sTransitionStructPtr will be loaded
+            // early enough. 
+            //
+            // Logically the generated code is following if + do-while structure.
+            // But it seems that it can only make the situation even worse.  
+            /*
+            i = res;
+            if (i > 0)
+            {
+                // This happens before loop body. 
+                s16 unk = gUnknown_83FA444[a2];
+                
+                do
+                {
+                    sTransitionStructPtr->data[2] = ((i * unk) >> 8) + 120;
+                    if (sTransitionStructPtr->data[2] <= 255)
+                    {
+                        sTransitionStructPtr->bg123HOfs = 400 - i;
+                        sTransitionStructPtr->data[10] = gScanlineEffectRegBuffers[1][400 - i];
+                        if (gScanlineEffectRegBuffers[1][560 - i] < sTransitionStructPtr->data[2])
+                            gScanlineEffectRegBuffers[1][560 - i] = 120;
+                        else if (gScanlineEffectRegBuffers[1][400 - i] < sTransitionStructPtr->data[2])
+                            gScanlineEffectRegBuffers[1][400 - i] = sTransitionStructPtr->data[2];
+                    }
+                }
+                while (--i > 0);
+            }
+            */
+            for (i = res; i > 0; --i)
+            {
+                sTransitionStructPtr->data[2] = ((i * gUnknown_83FA444[a2]) >> 8) + 120;
+                if (sTransitionStructPtr->data[2] <= 255)
+                {
+                    sTransitionStructPtr->bg123HOfs = 400 - i;
+                    sTransitionStructPtr->data[10] = gScanlineEffectRegBuffers[1][400 - i];
+                    if (gScanlineEffectRegBuffers[1][560 - i] < sTransitionStructPtr->data[2])
+                        gScanlineEffectRegBuffers[1][560 - i] = 120;
+                    else if (gScanlineEffectRegBuffers[1][400 - i] < sTransitionStructPtr->data[2])
+                        gScanlineEffectRegBuffers[1][400 - i] = sTransitionStructPtr->data[2];
+                }
+            }
+            break;
+        case 1:
+            if (res > 80)
+                res = 80; 
+            // same as PROBLEM #4
+            for (i = res; i > 0; --i)
+            {
+                s16 unkVal;
+                
+                sTransitionStructPtr->data[2] = ((i * gUnknown_83FA444[a2]) >> 8) + 120;
+                if (sTransitionStructPtr->data[2] <= 255)
+                {
+                    sTransitionStructPtr->bg123HOfs = 400 - i;
+                    sTransitionStructPtr->data[10] = gScanlineEffectRegBuffers[1][400 - i];
+                    if (gScanlineEffectRegBuffers[1][400 - i] < sTransitionStructPtr->data[2])
+                        gScanlineEffectRegBuffers[1][400 - i] = sTransitionStructPtr->data[2];
+                }
+            }
+            break;
+        case 2:
+            if (res < -79)
+                res = -79;
+            // same as PROBLEM #4
+            for (i = res; i <= 0; ++i)
+            {
+                sTransitionStructPtr->data[2] = ((i * gUnknown_83FA444[a2]) >> 8) + 120;
+                if (sTransitionStructPtr->data[2] <= 255)
+                {
+                    sTransitionStructPtr->bg123HOfs = 560 - i;
+                    sTransitionStructPtr->data[10] = gScanlineEffectRegBuffers[1][560 - i];
+                    if (gScanlineEffectRegBuffers[1][400 - i] >= sTransitionStructPtr->data[2])
+                        gScanlineEffectRegBuffers[1][400 - i] = 120;
+                    else if (gScanlineEffectRegBuffers[1][560 - i] > sTransitionStructPtr->data[2])
+                        gScanlineEffectRegBuffers[1][560 - i] = sTransitionStructPtr->data[2];
+                }
+            }
+            break;
+        case 3:
+            if (res < -79)
+                res = -79; 
+            // same as PROBLEM #4
+            for (i = res; i <= 0; ++i)
+            {
+                sTransitionStructPtr->data[2] = ((i * gUnknown_83FA444[a2]) >> 8) + 120;
+                if (sTransitionStructPtr->data[2] <= 255)
+                {
+                    sTransitionStructPtr->bg123HOfs = 560 - i;
+                    sTransitionStructPtr->data[10] = gScanlineEffectRegBuffers[1][560 - i];
+                    if (gScanlineEffectRegBuffers[1][560 - i] > sTransitionStructPtr->data[2])
+                        gScanlineEffectRegBuffers[1][560 - i] = sTransitionStructPtr->data[2];
+                }
+            }        
+            break;
+        default:
+            break;
+        }
+        for (i = 0; i < 160; ++i)
+            gScanlineEffectRegBuffers[1][2 * i + a3] = (gScanlineEffectRegBuffers[1][i + 320] << 8) | gScanlineEffectRegBuffers[1][i + 480];
+    }
 }
 #else
 NAKED
-static void sub_80D1F64(s16 a1, s16 a2, bool8 a3)
+static void sub_80D1F64(s16 a1, s16 a2, u8 a3)
 {
     asm_unified("\n\
         push {r4-r7,lr}\n\
@@ -2508,7 +2731,7 @@ static bool8 BT_Phase2Mugshot_VsBarsSlideIn(struct Task *task)
         task->tbg0HOfsOpponent = 0xF0;
     if (task->tCounter < 0)
         task->tCounter = 0;
-    mergedBg0hOfs = *(s32*)(&task->tbg0HOfsOpponent);
+    mergedBg0hOfs = *(s32 *)(&task->tbg0HOfsOpponent);
     if (mergedBg0hOfs == 0x00F0)
         ++task->tState;
     sTransitionStructPtr->bg0HOfsOpponent -= 8;

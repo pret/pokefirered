@@ -756,7 +756,7 @@ sub_80A28C4: @ 80A28C4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A28DE
@@ -1320,7 +1320,7 @@ _080A2D08:
 sub_80A2D10: @ 80A2D10
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A2D3C
@@ -1608,7 +1608,7 @@ _080A2F38: .4byte gSprites
 _080A2F3C:
 	adds r0, r2, 0
 	movs r1, 0x1
-	bl sub_80758E0
+	bl PrepareBattlerSpriteForRotScale
 	ldr r1, _080A2F68 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -1680,7 +1680,7 @@ _080A2FBE:
 	adds r0, r6, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl obj_id_set_rotscale
+	bl SetSpriteRotScale
 	adds r0, r6, 0
 	bl sub_8076440
 	ldrh r0, [r4, 0xA]
@@ -1730,7 +1730,7 @@ sub_80A3004: @ 80A3004
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r4, 0
-	bl sub_8075980
+	bl ResetSpriteRotScale
 	ldr r1, _080A305C @ =gSprites
 	lsls r0, r4, 4
 	adds r0, r4
@@ -2512,7 +2512,7 @@ _080A3638:
 	adds r0, r6, 0
 	adds r0, 0xA
 	strh r0, [r5, 0x3C]
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A3650
@@ -2712,7 +2712,7 @@ sub_80A37BC: @ 80A37BC
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	bne _080A3850
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A37E4
@@ -2908,7 +2908,7 @@ _080A3910:
 	movs r1, 0xFF
 	ands r0, r1
 	strh r0, [r4, 0x30]
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A395E
@@ -4224,7 +4224,7 @@ _080A4318:
 	bl sub_8075B30
 	lsls r0, 16
 	lsrs r4, r0, 16
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A437A
@@ -4557,7 +4557,7 @@ _080A45C8:
 	mov r8, r2
 	mov r1, r8
 	eors r0, r1
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A463E
@@ -4959,7 +4959,7 @@ _080A48E8:
 sub_80A48F0: @ 80A48F0
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A4906
@@ -4991,7 +4991,7 @@ _080A4906:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A4944
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A496C
@@ -5558,7 +5558,7 @@ _080A4D7A:
 	movs r1, 0x2
 	adds r0, r6, 0
 	eors r0, r1
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A4DC4
@@ -6388,7 +6388,7 @@ _080A53B6:
 	ldr r1, _080A53E0 @ =sub_80A53E8
 	adds r0, r4, 0
 	bl StoreSpriteCallbackInData6
-	ldr r0, _080A53E4 @ =sub_8074DC4
+	ldr r0, _080A53E4 @ =TranslateMonSpriteLinear
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
 	pop {r0}
@@ -6397,7 +6397,7 @@ _080A53B6:
 _080A53D8: .4byte gBattleAnimAttacker
 _080A53DC: .4byte gBattlerSpriteIds
 _080A53E0: .4byte sub_80A53E8
-_080A53E4: .4byte sub_8074DC4
+_080A53E4: .4byte TranslateMonSpriteLinear
 	thumb_func_end sub_80A5398
 
 	thumb_func_start sub_80A53E8
@@ -6415,7 +6415,7 @@ sub_80A53E8: @ 80A53E8
 	ldrb r0, [r0]
 	strh r0, [r5, 0x34]
 	movs r1, 0
-	bl sub_80758E0
+	bl PrepareBattlerSpriteForRotScale
 	ldrb r0, [r4]
 	bl GetBattlerSide
 	lsls r0, 24
@@ -6443,7 +6443,7 @@ _080A5424:
 	lsls r2, 1
 	ldrh r3, [r5, 0x38]
 	adds r1, r2, 0
-	bl obj_id_set_rotscale
+	bl SetSpriteRotScale
 	ldrh r0, [r5, 0x34]
 	lsls r0, 24
 	lsrs r0, 24
@@ -6498,7 +6498,7 @@ _080A5492:
 	ldr r1, _080A54BC @ =sub_80A5584
 	adds r0, r4, 0
 	bl StoreSpriteCallbackInData6
-	ldr r0, _080A54C0 @ =sub_8074DC4
+	ldr r0, _080A54C0 @ =TranslateMonSpriteLinear
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
 	pop {r0}
@@ -6507,7 +6507,7 @@ _080A5492:
 _080A54B4: .4byte gBattleAnimAttacker
 _080A54B8: .4byte gBattlerSpriteIds
 _080A54BC: .4byte sub_80A5584
-_080A54C0: .4byte sub_8074DC4
+_080A54C0: .4byte TranslateMonSpriteLinear
 	thumb_func_end sub_80A5474
 
 	thumb_func_start sub_80A54C4
@@ -6585,7 +6585,7 @@ _080A5538:
 	lsls r2, 1
 	ldrh r3, [r5, 0x38]
 	adds r1, r2, 0
-	bl obj_id_set_rotscale
+	bl SetSpriteRotScale
 	ldrh r0, [r5, 0x34]
 	lsls r0, 24
 	lsrs r0, 24
@@ -6600,7 +6600,7 @@ _080A5538:
 	ldrh r0, [r5, 0x34]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8075980
+	bl ResetSpriteRotScale
 	ldr r0, _080A5580 @ =sub_80A5584
 	str r0, [r5, 0x1C]
 _080A5578:
@@ -6674,7 +6674,7 @@ _080A55E4:
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl sub_80758E0
+	bl PrepareBattlerSpriteForRotScale
 	ldrh r0, [r4, 0x2E]
 	adds r0, 0x1
 	strh r0, [r4, 0x2E]
@@ -6690,7 +6690,7 @@ _080A55FA:
 	lsls r2, 1
 	ldrh r3, [r4, 0x38]
 	adds r1, r2, 0
-	bl obj_id_set_rotscale
+	bl SetSpriteRotScale
 	ldrh r0, [r4, 0x32]
 	lsls r0, 24
 	lsrs r0, 24
@@ -6728,7 +6728,7 @@ _080A564C:
 	lsls r2, 1
 	ldrh r3, [r4, 0x38]
 	adds r1, r2, 0
-	bl obj_id_set_rotscale
+	bl SetSpriteRotScale
 	ldrh r0, [r4, 0x32]
 	lsls r0, 24
 	lsrs r0, 24
@@ -6743,7 +6743,7 @@ _080A564C:
 	ldrh r0, [r4, 0x32]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8075980
+	bl ResetSpriteRotScale
 	adds r0, r4, 0
 	bl DestroyAnimSprite
 _080A568E:
@@ -6888,7 +6888,7 @@ _080A5792:
 	strh r1, [r4, 0x12]
 	ldrb r0, [r4, 0x8]
 	movs r1, 0
-	bl sub_80758E0
+	bl PrepareBattlerSpriteForRotScale
 	b _080A58A8
 _080A579E:
 	movs r3, 0xE
@@ -6904,7 +6904,7 @@ _080A579E:
 	lsls r2, 1
 	ldrh r3, [r4, 0x10]
 	adds r1, r2, 0
-	bl obj_id_set_rotscale
+	bl SetSpriteRotScale
 	ldrb r0, [r4, 0x8]
 	bl sub_80759DC
 	b _080A58D4
@@ -7095,7 +7095,7 @@ sub_80A58EC: @ 80A58EC
 	lsls r2, 1
 	ldrh r3, [r4, 0x10]
 	adds r1, r2, 0
-	bl obj_id_set_rotscale
+	bl SetSpriteRotScale
 	ldrb r0, [r4, 0x8]
 	bl sub_80759DC
 	ldrh r0, [r4, 0xE]
@@ -7106,7 +7106,7 @@ sub_80A58EC: @ 80A58EC
 _080A5928: .4byte gTasks
 _080A592C:
 	ldrb r0, [r4, 0x8]
-	bl sub_8075980
+	bl ResetSpriteRotScale
 	adds r0, r5, 0
 	bl DestroyAnimVisualTask
 _080A5938:
@@ -7559,7 +7559,7 @@ sub_80A5C68: @ 80A5C68
 	ldrh r5, [r5, 0x2]
 	adds r0, r5
 	strh r0, [r6, 0x22]
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A5CAC
@@ -7863,7 +7863,7 @@ _080A5EDC: .4byte gBattlersCount
 sub_80A5EE0: @ 80A5EE0
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A5EF6
@@ -8350,7 +8350,7 @@ _080A6262:
 	ldrh r1, [r5, 0x20]
 	strh r1, [r5, 0x3A]
 	strh r0, [r5, 0x3C]
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A62D4
@@ -8934,7 +8934,7 @@ _080A6710:
 	strh r1, [r5, 0x32]
 	ldrh r0, [r4, 0x4]
 	strh r0, [r5, 0x34]
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A6734

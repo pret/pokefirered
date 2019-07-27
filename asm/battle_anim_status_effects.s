@@ -358,7 +358,7 @@ sub_80783FC: @ 80783FC
 	ldr r1, _080784B4 @ =0xffdc0000
 	adds r0, r1
 	lsrs r4, r0, 16
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807843A

@@ -1393,7 +1393,7 @@ sub_80AFAE4: @ 80AFAE4
 	movs r1, 0
 	movs r2, 0
 	bl SetAnimBgAttribute
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AFB26
@@ -1433,7 +1433,7 @@ _080AFB26:
 	lsls r1, 4
 	movs r2, 0x20
 	bl LoadPalette
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AFB88
@@ -1619,7 +1619,7 @@ _080AFCD6:
 	adds r0, 0x1
 	strh r0, [r1, 0x20]
 _080AFCF8:
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AFD0C
@@ -1704,7 +1704,7 @@ sub_80AFD80: @ 80AFD80
 	movs r1, 0
 	movs r2, 0
 	bl SetAnimBgAttribute
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AFDC2
@@ -1744,7 +1744,7 @@ _080AFDC2:
 	lsls r1, 4
 	movs r2, 0x20
 	bl LoadPalette
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AFE24
@@ -1920,7 +1920,7 @@ _080AFF5E:
 	adds r0, 0x1
 	strh r0, [r1, 0x20]
 _080AFF80:
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AFF94
@@ -2111,7 +2111,7 @@ _080B00F8:
 	ldrh r1, [r5, 0x3C]
 	orrs r0, r1
 	strh r0, [r5, 0x3C]
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B012C
@@ -2213,7 +2213,7 @@ _080B01AA:
 	ldrh r0, [r4, 0x3C]
 	adds r0, 0x1
 	strh r0, [r4, 0x3C]
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B0200
@@ -2283,7 +2283,7 @@ _080B0230:
 	ldrh r1, [r4, 0x26]
 	adds r0, r1
 	strh r0, [r4, 0x26]
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B02AE
@@ -2361,7 +2361,7 @@ _080B02CE:
 	strh r0, [r4, 0x34]
 	adds r0, 0x4
 	strh r0, [r4, 0x36]
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B0328
@@ -2583,7 +2583,7 @@ sub_80B0458: @ 80B0458
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r5, 0
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B0544

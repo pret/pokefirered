@@ -4768,7 +4768,7 @@ sub_8158814: @ 8158814
 	adds r2, r1
 	ldrb r1, [r2]
 	strb r1, [r5]
-	ldr r4, _081588F4 @ =gUnknown_2037EEC
+	ldr r4, _081588F4 @ =gAnimMovePower
 	ldrb r2, [r6]
 	lsls r2, 9
 	mov r1, r12
@@ -4782,7 +4782,7 @@ sub_8158814: @ 8158814
 	lsls r1, 8
 	orrs r3, r1
 	strh r3, [r4]
-	ldr r4, _081588F8 @ =gUnknown_2037EE8
+	ldr r4, _081588F8 @ =gAnimMoveDmg
 	ldrb r2, [r6]
 	lsls r2, 9
 	mov r1, r12
@@ -4855,8 +4855,8 @@ sub_8158814: @ 8158814
 _081588E8: .4byte gUnknown_2022BC4
 _081588EC: .4byte gActiveBattler
 _081588F0: .4byte gAnimMoveTurn
-_081588F4: .4byte gUnknown_2037EEC
-_081588F8: .4byte gUnknown_2037EE8
+_081588F4: .4byte gAnimMovePower
+_081588F8: .4byte gAnimMoveDmg
 _081588FC: .4byte gUnknown_2037EFE
 _08158900: .4byte gUnknown_2037F00
 _08158904: .4byte gAnimDisableStructPtr

@@ -782,7 +782,7 @@ sub_80ACEA4: @ 80ACEA4
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl sub_80758E0
+	bl PrepareBattlerSpriteForRotScale
 	ldr r0, _080ACF10 @ =sub_80ACF14
 	str r0, [r4]
 	pop {r4,r5}
@@ -1147,7 +1147,7 @@ _080AD1A8:
 	ldrh r0, [r4, 0x26]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8075980
+	bl ResetSpriteRotScale
 	strh r5, [r4, 0xC]
 _080AD1D4:
 	ldrh r0, [r4, 0x8]
@@ -1877,7 +1877,7 @@ _080AD70C:
 	movs r1, 0xFF
 	ands r0, r1
 	strh r0, [r4, 0x30]
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AD7A8
@@ -1999,7 +1999,7 @@ _080AD826:
 	ldrb r1, [r0]
 	movs r0, 0x2
 	eors r0, r1
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, 0x1

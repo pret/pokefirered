@@ -721,10 +721,10 @@ gUnknown_2037EE3: @ 2037EE3
 gAnimDisableStructPtr: @ 2037EE4
 	.space 0x4
 
-gUnknown_2037EE8: @ 2037EE8
+gAnimMoveDmg: @ 2037EE8
 	.space 0x4
 
-gUnknown_2037EEC: @ 2037EEC
+gAnimMovePower: @ 2037EEC
 	.space 0x2
 
 gUnknown_2037EEE: @ 2037EEE

@@ -363,7 +363,7 @@ _080DD0BE:
 	bne _080DD0E8
 _080DD0CC:
 	adds r0, r4, 0
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DD0E8
@@ -475,7 +475,7 @@ _080DD19A:
 	bne _080DD1C4
 _080DD1A8:
 	adds r0, r4, 0
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DD1C4

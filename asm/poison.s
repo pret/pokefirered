@@ -166,7 +166,7 @@ sub_80B1744: @ 80B1744
 	adds r0, r1
 	strh r0, [r4, 0x36]
 	adds r0, r4, 0
-	bl sub_80754B8
+	bl InitSpriteDataForLinearTranslation
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	movs r2, 0x4

@@ -302,7 +302,7 @@ sub_80B1AB8: @ 80B1AB8
 	negs r0, r0
 	strh r0, [r1, 0x6]
 _080B1AE4:
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B1AFC
@@ -720,7 +720,7 @@ _080B1DC8:
 	lsrs r1, 16
 	cmp r1, 0x7F
 	bhi _080B1EBE
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B1E64
@@ -1017,7 +1017,7 @@ _080B2028:
 	ands r0, r1
 	cmp r0, 0
 	beq _080B20E6
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B20B6
@@ -1149,7 +1149,7 @@ _080B211C:
 	ands r0, r1
 	cmp r0, 0
 	beq _080B21DA
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B21AA
@@ -1281,7 +1281,7 @@ _080B2210:
 	ands r0, r1
 	cmp r0, 0
 	beq _080B22CE
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B229E
@@ -1422,7 +1422,7 @@ _080B2318:
 	ands r0, r1
 	cmp r0, 0
 	beq _080B23D6
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B23A6
@@ -1659,7 +1659,7 @@ sub_80B2514: @ 80B2514
 	strh r0, [r4, 0x32]
 	ldrh r0, [r5, 0x4]
 	strh r0, [r4, 0x34]
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B25C4

@@ -23,9 +23,9 @@ ClearBattleAnimationVars: @ 80724C0
 	ldr r0, _08072564 @ =gAnimDisableStructPtr
 	movs r1, 0
 	str r1, [r0]
-	ldr r0, _08072568 @ =gUnknown_2037EE8
+	ldr r0, _08072568 @ =gAnimMoveDmg
 	str r1, [r0]
-	ldr r0, _0807256C @ =gUnknown_2037EEC
+	ldr r0, _0807256C @ =gAnimMovePower
 	movs r2, 0
 	strh r1, [r0]
 	ldr r0, _08072570 @ =gUnknown_2037EFE
@@ -89,8 +89,8 @@ _08072558: .4byte gUnknown_2037EE1
 _0807255C: .4byte gUnknown_2037EE2
 _08072560: .4byte gUnknown_2037EE3
 _08072564: .4byte gAnimDisableStructPtr
-_08072568: .4byte gUnknown_2037EE8
-_0807256C: .4byte gUnknown_2037EEC
+_08072568: .4byte gAnimMoveDmg
+_0807256C: .4byte gAnimMovePower
 _08072570: .4byte gUnknown_2037EFE
 _08072574: .4byte gUnknown_2037F14
 _08072578: .4byte gAnimMoveTurn
@@ -989,7 +989,7 @@ _08072C60:
 _08072C62:
 	ldrb r5, [r0]
 	adds r0, r5, 0
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _08072D12
@@ -1073,7 +1073,7 @@ _08072D12:
 	cmp r6, 0x1
 	bls _08072DCE
 	adds r0, r5, 0
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _08072DCE
@@ -1169,8 +1169,8 @@ _08072DE8: .4byte gUnknown_2037F14
 _08072DEC: .4byte gUnknown_2037ED4
 	thumb_func_end sub_8072C30
 
-	thumb_func_start sub_8072DF0
-sub_8072DF0: @ 8072DF0
+	thumb_func_start IsBattlerSpriteVisible
+IsBattlerSpriteVisible: @ 8072DF0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1215,7 +1215,7 @@ _08072E42:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8072DF0
+	thumb_func_end IsBattlerSpriteVisible
 
 	thumb_func_start sub_8072E48
 sub_8072E48: @ 8072E48
@@ -1897,7 +1897,7 @@ _080733CC:
 _080733CE:
 	ldrb r4, [r0]
 	adds r0, r4, 0
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _08073416
@@ -1935,7 +1935,7 @@ _08073416:
 	cmp r5, 0x1
 	bls _08073464
 	adds r0, r4, 0
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _08073464
@@ -2016,7 +2016,7 @@ _080734B4:
 _080734B6:
 	ldrb r6, [r0]
 	adds r0, r6, 0
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _080734E0
@@ -2041,7 +2041,7 @@ _080734E0:
 	adds r4, r6, 0
 	eors r4, r0
 	adds r0, r4, 0
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _08073520
@@ -2127,7 +2127,7 @@ sub_8073558: @ 8073558
 	movs r7, 0
 _08073598:
 	adds r0, r4, 0
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _080735AA
@@ -2141,7 +2141,7 @@ _080735AA:
 	movs r0, 0x2
 	eors r6, r0
 	adds r0, r6, 0
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _080735CC
@@ -2397,11 +2397,11 @@ ScriptCmd_jump: @ 8073764
 _08073784: .4byte gUnknown_2037ED4
 	thumb_func_end ScriptCmd_jump
 
-	thumb_func_start sub_8073788
-sub_8073788: @ 8073788
+	thumb_func_start IsContest
+IsContest: @ 8073788
 	movs r0, 0
 	bx lr
-	thumb_func_end sub_8073788
+	thumb_func_end IsContest
 
 	thumb_func_start sub_807378C
 sub_807378C: @ 807378C

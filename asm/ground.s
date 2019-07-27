@@ -1224,7 +1224,7 @@ sub_80B94B4: @ 80B94B4
 _080B94D8: .4byte gTasks
 _080B94DC: .4byte gBattleAnimArgs
 _080B94E0:
-	ldr r0, _080B950C @ =gUnknown_2037EEC
+	ldr r0, _080B950C @ =gAnimMovePower
 	ldrh r0, [r0]
 	movs r1, 0xA
 	bl __udivsi3
@@ -1247,7 +1247,7 @@ _080B94EC:
 	ldr r0, _080B9514 @ =sub_80B9584
 	b _080B9576
 	.align 2, 0
-_080B950C: .4byte gUnknown_2037EEC
+_080B950C: .4byte gAnimMovePower
 _080B9510: .4byte gBattle_BG3_X
 _080B9514: .4byte sub_80B9584
 _080B9518:
@@ -1257,7 +1257,7 @@ _080B9518:
 _080B951E:
 	lsls r0, r5, 24
 	lsrs r0, 24
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B9548
@@ -1641,7 +1641,7 @@ sub_80B97D8: @ 80B97D8
 	lsrs r1, r0, 24
 	ldr r3, _080B97F8 @ =gBattleAnimArgs
 	movs r2, 0
-	ldr r0, _080B97FC @ =gUnknown_2037EEC
+	ldr r0, _080B97FC @ =gAnimMovePower
 	ldrh r0, [r0]
 	cmp r0, 0x63
 	bls _080B97EC
@@ -1654,7 +1654,7 @@ _080B97EC:
 	bx r0
 	.align 2, 0
 _080B97F8: .4byte gBattleAnimArgs
-_080B97FC: .4byte gUnknown_2037EEC
+_080B97FC: .4byte gAnimMovePower
 	thumb_func_end sub_80B97D8
 
 	thumb_func_start sub_80B9800

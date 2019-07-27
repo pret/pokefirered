@@ -745,7 +745,7 @@ _08074A1C:
 	ldrb r0, [r5]
 	movs r4, 0x2
 	eors r0, r4
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _08074A4A
@@ -757,7 +757,7 @@ _08074A38:
 	ldrb r0, [r5]
 	movs r4, 0x2
 	eors r0, r4
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	bne _08074A54
@@ -1265,8 +1265,8 @@ _08074DBC: .4byte gBattleAnimTarget
 _08074DC0: .4byte sub_8074C64
 	thumb_func_end sub_8074D80
 
-	thumb_func_start sub_8074DC4
-sub_8074DC4: @ 8074DC4
+	thumb_func_start TranslateMonSpriteLinear
+TranslateMonSpriteLinear: @ 8074DC4
 	push {r4,lr}
 	adds r3, r0, 0
 	ldrh r1, [r3, 0x2E]
@@ -1307,10 +1307,10 @@ _08074E0E:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8074DC4
+	thumb_func_end TranslateMonSpriteLinear
 
-	thumb_func_start sub_8074E14
-sub_8074E14: @ 8074E14
+	thumb_func_start TranslateMonSpriteLinearFixedPoint
+TranslateMonSpriteLinearFixedPoint: @ 8074E14
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrh r1, [r4, 0x2E]
@@ -1358,7 +1358,7 @@ _08074E6A:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8074E14
+	thumb_func_end TranslateMonSpriteLinearFixedPoint
 
 	thumb_func_start sub_8074E70
 sub_8074E70: @ 8074E70
@@ -2219,7 +2219,7 @@ sub_8075490: @ 8075490
 	ldrh r0, [r4, 0x22]
 	strh r0, [r4, 0x34]
 	adds r0, r4, 0
-	bl sub_80754B8
+	bl InitSpriteDataForLinearTranslation
 	ldr r1, _080754B4 @ =sub_8074D3C
 	str r1, [r4, 0x1C]
 	adds r0, r4, 0
@@ -2231,8 +2231,8 @@ sub_8075490: @ 8075490
 _080754B4: .4byte sub_8074D3C
 	thumb_func_end sub_8075490
 
-	thumb_func_start sub_80754B8
-sub_80754B8: @ 80754B8
+	thumb_func_start InitSpriteDataForLinearTranslation
+InitSpriteDataForLinearTranslation: @ 80754B8
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	ldrh r0, [r5, 0x32]
@@ -2262,7 +2262,7 @@ sub_80754B8: @ 80754B8
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80754B8
+	thumb_func_end InitSpriteDataForLinearTranslation
 
 	thumb_func_start obj_translate_based_on_private_1_2_3_4
 obj_translate_based_on_private_1_2_3_4: @ 80754F8
@@ -2745,8 +2745,8 @@ sub_8075830: @ 8075830
 _08075854: .4byte sub_80757E8
 	thumb_func_end sub_8075830
 
-	thumb_func_start obj_id_set_rotscale
-obj_id_set_rotscale: @ 8075858
+	thumb_func_start SetSpriteRotScale
+SetSpriteRotScale: @ 8075858
 	push {r4,r5,lr}
 	sub sp, 0x10
 	lsls r0, 24
@@ -2810,7 +2810,7 @@ _08075894:
 _080758D0: .4byte 0xffff0000
 _080758D4: .4byte gSprites
 _080758D8: .4byte gOamMatrices
-	thumb_func_end obj_id_set_rotscale
+	thumb_func_end SetSpriteRotScale
 
 	thumb_func_start sub_80758DC
 sub_80758DC: @ 80758DC
@@ -2818,8 +2818,8 @@ sub_80758DC: @ 80758DC
 	bx lr
 	thumb_func_end sub_80758DC
 
-	thumb_func_start sub_80758E0
-sub_80758E0: @ 80758E0
+	thumb_func_start PrepareBattlerSpriteForRotScale
+PrepareBattlerSpriteForRotScale: @ 80758E0
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2834,7 +2834,7 @@ sub_80758E0: @ 80758E0
 	lsls r0, 24
 	lsrs r0, 24
 	adds r6, r0, 0
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _08075914
@@ -2899,10 +2899,10 @@ _0807595C:
 	.align 2, 0
 _08075978: .4byte gSprites
 _0807597C: .4byte gUnknown_2024018
-	thumb_func_end sub_80758E0
+	thumb_func_end PrepareBattlerSpriteForRotScale
 
-	thumb_func_start sub_8075980
-sub_8075980: @ 8075980
+	thumb_func_start ResetSpriteRotScale
+ResetSpriteRotScale: @ 8075980
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -2912,7 +2912,7 @@ sub_8075980: @ 8075980
 	adds r0, r4, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl obj_id_set_rotscale
+	bl SetSpriteRotScale
 	ldr r1, _080759D8 @ =gSprites
 	lsls r0, r4, 4
 	adds r0, r4
@@ -2946,7 +2946,7 @@ sub_8075980: @ 8075980
 	bx r0
 	.align 2, 0
 _080759D8: .4byte gSprites
-	thumb_func_end sub_8075980
+	thumb_func_end ResetSpriteRotScale
 
 	thumb_func_start sub_80759DC
 sub_80759DC: @ 80759DC
@@ -3276,7 +3276,7 @@ _08075C40:
 	ldrb r0, [r6]
 	movs r5, 0x2
 	eors r0, r5
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _08075C64
@@ -3294,7 +3294,7 @@ _08075C64:
 	ldrb r0, [r6]
 	movs r5, 0x2
 	eors r0, r5
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _08075C88
@@ -3349,7 +3349,7 @@ sub_8075CB8: @ 8075CB8
 	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _08075CF2
@@ -3367,7 +3367,7 @@ _08075CF2:
 	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _08075D1E
@@ -3387,7 +3387,7 @@ _08075D1E:
 	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _08075D4A
@@ -3407,7 +3407,7 @@ _08075D4A:
 	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _08075D76
@@ -4155,7 +4155,7 @@ sub_80762D0: @ 80762D0
 	bl sub_80765C0
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80758E0
+	bl PrepareBattlerSpriteForRotScale
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -4223,7 +4223,7 @@ _08076356:
 	movs r3, 0x1E
 	ldrsh r2, [r4, r3]
 	ldrh r3, [r4, 0x20]
-	bl obj_id_set_rotscale
+	bl SetSpriteRotScale
 	ldrh r0, [r4, 0x26]
 	lsls r0, 24
 	lsrs r0, 24
@@ -4309,7 +4309,7 @@ _08076410:
 	ldrh r0, [r4, 0x26]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8075980
+	bl ResetSpriteRotScale
 	movs r0, 0
 	b _08076438
 	.align 2, 0
@@ -4633,7 +4633,7 @@ _08076672:
 	movs r3, 0x1C
 	ldrsh r2, [r4, r3]
 	movs r3, 0
-	bl obj_id_set_rotscale
+	bl SetSpriteRotScale
 	movs r0, 0x18
 	ldrsh r3, [r4, r0]
 	cmp r3, 0
@@ -4701,7 +4701,7 @@ sub_80766EC: @ 80766EC
 	adds r7, r4, 0
 	ldr r6, _080767E0 @ =gBattleAnimTarget
 	ldrb r0, [r6]
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807672C
@@ -4728,7 +4728,7 @@ _0807672C:
 	ldr r0, _080767EC @ =gBattleAnimAttacker
 	mov r8, r0
 	ldrb r0, [r0]
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _08076764
@@ -4756,7 +4756,7 @@ _08076764:
 	ldrb r0, [r6]
 	movs r5, 0x2
 	eors r0, r5
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807679C
@@ -4784,7 +4784,7 @@ _0807679C:
 	mov r1, r8
 	ldrb r0, [r1]
 	eors r0, r5
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _080767D4
@@ -4834,7 +4834,7 @@ _080767FE:
 	lsls r0, r5, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _08076840

@@ -3956,7 +3956,7 @@ sub_8030350: @ 8030350
 	ldrsh r6, [r4, r0]
 	lsls r0, r6, 24
 	lsrs r0, 24
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -8434,7 +8434,7 @@ _08032852:
 	adds r2, r1
 	ldrb r1, [r2]
 	strb r1, [r5]
-	ldr r4, _08032930 @ =gUnknown_2037EEC
+	ldr r4, _08032930 @ =gAnimMovePower
 	ldrb r2, [r6]
 	lsls r2, 9
 	mov r1, r12
@@ -8448,7 +8448,7 @@ _08032852:
 	lsls r1, 8
 	orrs r3, r1
 	strh r3, [r4]
-	ldr r4, _08032934 @ =gUnknown_2037EE8
+	ldr r4, _08032934 @ =gAnimMoveDmg
 	ldrb r2, [r6]
 	lsls r2, 9
 	mov r1, r12
@@ -8521,8 +8521,8 @@ _08032852:
 _08032924: .4byte gActiveBattler
 _08032928: .4byte gUnknown_2022BC4
 _0803292C: .4byte gAnimMoveTurn
-_08032930: .4byte gUnknown_2037EEC
-_08032934: .4byte gUnknown_2037EE8
+_08032930: .4byte gAnimMovePower
+_08032934: .4byte gAnimMoveDmg
 _08032938: .4byte gUnknown_2037EFE
 _0803293C: .4byte gUnknown_2037F00
 _08032940: .4byte gAnimDisableStructPtr

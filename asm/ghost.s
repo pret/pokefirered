@@ -358,12 +358,12 @@ sub_80B54E8: @ 80B54E8
 	lsrs r4, 24
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_80758E0
+	bl PrepareBattlerSpriteForRotScale
 	adds r0, r4, 0
 	movs r1, 0x80
 	movs r2, 0x80
 	movs r3, 0
-	bl obj_id_set_rotscale
+	bl SetSpriteRotScale
 	ldr r1, _080B5560 @ =gSprites
 	lsls r0, r4, 4
 	adds r0, r4
@@ -485,11 +485,11 @@ _080B55F0:
 	adds r0, r1, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl obj_id_set_rotscale
+	bl SetSpriteRotScale
 	b _080B5634
 _080B5618:
 	adds r0, r1, 0
-	bl sub_8075980
+	bl ResetSpriteRotScale
 	adds r0, r5, 0
 	bl DestroyAnimVisualTask
 	movs r0, 0x50
@@ -1818,7 +1818,7 @@ sub_80B6020: @ 80B6020
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0x8]
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B6090
@@ -1840,7 +1840,7 @@ _080B6092:
 	lsls r0, r4, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B615E
@@ -2253,7 +2253,7 @@ sub_80B63B4: @ 80B63B4
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B63FC
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B6414

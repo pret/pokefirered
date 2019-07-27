@@ -219,7 +219,7 @@ _080ADD7C:
 	ldrb r0, [r4]
 	movs r6, 0x2
 	eors r0, r6
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	bne _080ADD98
@@ -237,7 +237,7 @@ _080ADDA0:
 	ldrb r0, [r0]
 	movs r4, 0x2
 	eors r0, r4
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _080ADDC4
@@ -536,7 +536,7 @@ _080ADFFA:
 sub_80AE000: @ 80AE000
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AE01C
@@ -609,7 +609,7 @@ _080AE090:
 	ldr r0, _080AE118 @ =gBattleAnimAttacker
 _080AE092:
 	ldrb r6, [r0]
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AE0AA

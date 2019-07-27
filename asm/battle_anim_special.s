@@ -347,7 +347,7 @@ _080EEE9C:
 	movs r0, 0x4A
 	adds r1, r4, 0
 	bl SetGpuReg
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080EEF00
@@ -839,7 +839,7 @@ _080EF2D0:
 _080EF2D6:
 	adds r0, r5, 0
 	movs r1, 0
-	bl sub_80758E0
+	bl PrepareBattlerSpriteForRotScale
 	movs r0, 0x80
 	lsls r0, 1
 	strh r0, [r4, 0x1C]
@@ -853,7 +853,7 @@ _080EF2E6:
 	adds r0, r5, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl obj_id_set_rotscale
+	bl SetSpriteRotScale
 	adds r0, r5, 0
 	bl sub_8076440
 	movs r0, 0x1C
@@ -870,7 +870,7 @@ _080EF30A:
 _080EF314: .4byte 0x000002cf
 _080EF318:
 	adds r0, r5, 0
-	bl sub_8075980
+	bl ResetSpriteRotScale
 	ldr r1, _080EF340 @ =gSprites
 	lsls r0, r5, 4
 	adds r0, r5
@@ -1781,7 +1781,7 @@ _080EFA5C:
 _080EFA62:
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80758E0
+	bl PrepareBattlerSpriteForRotScale
 	movs r0, 0x80
 	lsls r0, 1
 	strh r0, [r5, 0x1C]
@@ -1824,7 +1824,7 @@ _080EFAB4:
 	adds r0, r4, 0
 	adds r1, r2, 0
 	movs r3, 0
-	bl obj_id_set_rotscale
+	bl SetSpriteRotScale
 	ldrh r0, [r5, 0xC]
 	ldrh r1, [r5, 0xE]
 	adds r0, r1
@@ -1850,7 +1850,7 @@ _080EFAF0: .4byte gSprites
 _080EFAF4: .4byte 0x0000047f
 _080EFAF8:
 	adds r0, r4, 0
-	bl sub_8075980
+	bl ResetSpriteRotScale
 	ldr r1, _080EFB1C @ =gSprites
 	lsls r0, r4, 4
 	adds r0, r4
@@ -5487,7 +5487,7 @@ sub_80F1720: @ 80F1720
 	bl GetMonData
 	adds r4, r0, 0
 	adds r0, r6, 0
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _080F17F8

@@ -4260,7 +4260,7 @@ _080D6522:
 	adds r2, r1
 	ldrb r1, [r2]
 	strb r1, [r5]
-	ldr r4, _080D6600 @ =gUnknown_2037EEC
+	ldr r4, _080D6600 @ =gAnimMovePower
 	ldrb r2, [r6]
 	lsls r2, 9
 	mov r1, r12
@@ -4274,7 +4274,7 @@ _080D6522:
 	lsls r1, 8
 	orrs r3, r1
 	strh r3, [r4]
-	ldr r4, _080D6604 @ =gUnknown_2037EE8
+	ldr r4, _080D6604 @ =gAnimMoveDmg
 	ldrb r2, [r6]
 	lsls r2, 9
 	mov r1, r12
@@ -4347,8 +4347,8 @@ _080D6522:
 _080D65F4: .4byte gActiveBattler
 _080D65F8: .4byte gUnknown_2022BC4
 _080D65FC: .4byte gAnimMoveTurn
-_080D6600: .4byte gUnknown_2037EEC
-_080D6604: .4byte gUnknown_2037EE8
+_080D6600: .4byte gAnimMovePower
+_080D6604: .4byte gAnimMoveDmg
 _080D6608: .4byte gUnknown_2037EFE
 _080D660C: .4byte gUnknown_2037F00
 _080D6610: .4byte gAnimDisableStructPtr

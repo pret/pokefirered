@@ -1733,7 +1733,7 @@ sub_80BA5F8: @ 80BA5F8
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BA61C
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080BA61C

@@ -143,7 +143,7 @@ _080B472E:
 	adds r2, r0
 	strh r2, [r5, 0x36]
 	adds r0, r5, 0
-	bl sub_80754B8
+	bl InitSpriteDataForLinearTranslation
 	strh r4, [r5, 0x34]
 	strh r4, [r5, 0x36]
 	ldr r0, _080B4774 @ =sub_8074D00
@@ -262,7 +262,7 @@ do_boulder_dust: @ 80B4810
 	movs r1, 0
 	movs r2, 0
 	bl SetAnimBgAttribute
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B4854
@@ -299,7 +299,7 @@ _080B4854:
 	lsls r1, 4
 	movs r2, 0x20
 	bl LoadCompressedPalette
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B48B0
@@ -512,7 +512,7 @@ _080B4A4C:
 	.align 2, 0
 _080B4A54: .4byte gTasks
 _080B4A58:
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B4A6C
@@ -1413,7 +1413,7 @@ sub_80B5148: @ 80B5148
 	push {lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
-	ldr r2, _080B5180 @ =gUnknown_2037EE8
+	ldr r2, _080B5180 @ =gAnimMoveDmg
 	ldr r0, [r2]
 	cmp r0, 0x20
 	bgt _080B515C
@@ -1441,7 +1441,7 @@ _080B5176:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080B5180: .4byte gUnknown_2037EE8
+_080B5180: .4byte gAnimMoveDmg
 _080B5184: .4byte gBattleAnimArgs
 	thumb_func_end sub_80B5148
 

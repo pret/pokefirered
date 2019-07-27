@@ -5489,7 +5489,7 @@ sub_80EA2B8: @ 80EA2B8
 	adds r2, r1
 	ldrb r1, [r2]
 	strb r1, [r5]
-	ldr r4, _080EA398 @ =gUnknown_2037EEC
+	ldr r4, _080EA398 @ =gAnimMovePower
 	ldrb r2, [r6]
 	lsls r2, 9
 	mov r1, r12
@@ -5503,7 +5503,7 @@ sub_80EA2B8: @ 80EA2B8
 	lsls r1, 8
 	orrs r3, r1
 	strh r3, [r4]
-	ldr r4, _080EA39C @ =gUnknown_2037EE8
+	ldr r4, _080EA39C @ =gAnimMoveDmg
 	ldrb r2, [r6]
 	lsls r2, 9
 	mov r1, r12
@@ -5576,8 +5576,8 @@ sub_80EA2B8: @ 80EA2B8
 _080EA38C: .4byte gUnknown_2022BC4
 _080EA390: .4byte gActiveBattler
 _080EA394: .4byte gAnimMoveTurn
-_080EA398: .4byte gUnknown_2037EEC
-_080EA39C: .4byte gUnknown_2037EE8
+_080EA398: .4byte gAnimMovePower
+_080EA39C: .4byte gAnimMoveDmg
 _080EA3A0: .4byte gUnknown_2037EFE
 _080EA3A4: .4byte gUnknown_2037F00
 _080EA3A8: .4byte gAnimDisableStructPtr

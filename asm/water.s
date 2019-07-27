@@ -753,7 +753,7 @@ sub_80AB168: @ 80AB168
 	bl sub_807685C
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AB1C2
@@ -1036,7 +1036,7 @@ sub_80AB38C: @ 80AB38C
 	bl SetAnimBgAttribute
 	mov r0, sp
 	bl sub_80752A0
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AB418
@@ -1140,7 +1140,7 @@ _080AB476:
 	lsls r0, 5
 	strh r0, [r7, 0xA]
 	strh r0, [r7, 0xC]
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
@@ -1461,7 +1461,7 @@ _080AB740: .4byte gBattle_BG1_X
 _080AB744: .4byte gBattle_BG1_Y
 _080AB748: .4byte gTasks
 _080AB74C:
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AB760
@@ -2012,7 +2012,7 @@ sub_80ABB28: @ 80ABB28
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl sub_80758E0
+	bl PrepareBattlerSpriteForRotScale
 	ldr r0, _080ABB80 @ =sub_80ABB84
 	str r0, [r4]
 	pop {r4}
@@ -2282,7 +2282,7 @@ _080ABD64:
 	ldrh r0, [r4, 0x26]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8075980
+	bl ResetSpriteRotScale
 	movs r0, 0x26
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 4
@@ -3047,7 +3047,7 @@ sub_80AC328: @ 80AC328
 	movs r1, 0x1
 _080AC36C:
 	strh r1, [r5, 0x16]
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AC380

@@ -76,7 +76,7 @@ _080B0924: .4byte gBattleAnimAttacker
 sub_80B0928: @ 80B0928
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B0944
@@ -1379,7 +1379,7 @@ _080B1332:
 	ands r0, r2
 	orrs r0, r1
 	strb r0, [r5, 0x5]
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B136C
@@ -1555,7 +1555,7 @@ _080B14A0:
 	movs r1, 0
 	bl sub_8075114
 _080B14A8:
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B14BC

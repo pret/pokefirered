@@ -9,7 +9,7 @@
 sub_80B3FAC: @ 80B3FAC
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B3FD8
@@ -105,7 +105,7 @@ _080B4078: .4byte DestroyAnimSprite
 sub_80B407C: @ 80B407C
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B40A0
@@ -185,7 +185,7 @@ _080B4124: .4byte DestroyAnimSprite
 sub_80B4128: @ 80B4128
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B4144
@@ -484,7 +484,7 @@ sub_80B4364: @ 80B4364
 	push {r4-r7,lr}
 	sub sp, 0x4
 	adds r7, r0, 0
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B4384
@@ -513,7 +513,7 @@ _080B4384:
 	negs r0, r0
 	strh r0, [r1, 0x6]
 _080B43A6:
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B43F6

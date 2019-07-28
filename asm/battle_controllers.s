@@ -54,7 +54,7 @@ sub_800D278: @ 800D278
 	movs r3, 0
 	ldr r1, _0800D2F0 @ =gUnknown_3004FE0
 	mov r12, r1
-	ldr r7, _0800D2F4 @ =gUnknown_2023BD6
+	ldr r7, _0800D2F4 @ =gBattlerPositions
 	movs r6, 0xFF
 	ldr r5, _0800D2F8 @ =gUnknown_2023FF8
 	ldr r4, _0800D2FC @ =gUnknown_2023FFC
@@ -97,7 +97,7 @@ _0800D2E4: .4byte gUnknown_3004F84
 _0800D2E8: .4byte nullsub_12
 _0800D2EC: .4byte nullsub_13
 _0800D2F0: .4byte gUnknown_3004FE0
-_0800D2F4: .4byte gUnknown_2023BD6
+_0800D2F4: .4byte gBattlerPositions
 _0800D2F8: .4byte gUnknown_2023FF8
 _0800D2FC: .4byte gUnknown_2023FFC
 _0800D300: .4byte gUnknown_2023BC8
@@ -173,7 +173,7 @@ sub_800D364: @ 800D364
 	ldr r2, _0800D3A4 @ =gUnknown_3004FE0
 	ldr r1, _0800D3A8 @ =sub_81560A4
 	str r1, [r2]
-	ldr r0, _0800D3AC @ =gUnknown_2023BD6
+	ldr r0, _0800D3AC @ =gBattlerPositions
 	strb r3, [r0]
 	str r1, [r2, 0x4]
 	strb r4, [r0, 0x1]
@@ -186,7 +186,7 @@ _0800D39C: .4byte gUnknown_3004F84
 _0800D3A0: .4byte sub_80123C0
 _0800D3A4: .4byte gUnknown_3004FE0
 _0800D3A8: .4byte sub_81560A4
-_0800D3AC: .4byte gUnknown_2023BD6
+_0800D3AC: .4byte gBattlerPositions
 _0800D3B0: .4byte gBattlersCount
 _0800D3B4:
 	movs r0, 0x80
@@ -217,7 +217,7 @@ _0800D3E4:
 _0800D3E8:
 	str r0, [r1]
 	adds r2, r1, 0
-	ldr r1, _0800D408 @ =gUnknown_2023BD6
+	ldr r1, _0800D408 @ =gBattlerPositions
 	movs r0, 0
 	strb r0, [r1]
 	ldr r0, _0800D40C @ =sub_8035A7C
@@ -230,7 +230,7 @@ _0800D3E8:
 	.align 2, 0
 _0800D400: .4byte gUnknown_3004FE0
 _0800D404: .4byte SetBankFuncToPlayerBufferRunCommand
-_0800D408: .4byte gUnknown_2023BD6
+_0800D408: .4byte gBattlerPositions
 _0800D40C: .4byte sub_8035A7C
 _0800D410: .4byte gBattlersCount
 _0800D414:
@@ -245,7 +245,7 @@ _0800D414:
 	ldr r3, _0800D44C @ =gUnknown_3004FE0
 	ldr r1, _0800D450 @ =sub_81560A4
 	str r1, [r3]
-	ldr r2, _0800D454 @ =gUnknown_2023BD6
+	ldr r2, _0800D454 @ =gBattlerPositions
 	movs r0, 0
 	strb r0, [r2]
 	str r1, [r3, 0x4]
@@ -262,12 +262,12 @@ _0800D444: .4byte gUnknown_3004F84
 _0800D448: .4byte sub_80123C0
 _0800D44C: .4byte gUnknown_3004FE0
 _0800D450: .4byte sub_81560A4
-_0800D454: .4byte gUnknown_2023BD6
+_0800D454: .4byte gBattlerPositions
 _0800D458:
 	ldr r2, _0800D480 @ =gUnknown_3004FE0
 	ldr r0, _0800D484 @ =SetBankFuncToPlayerBufferRunCommand
 	str r0, [r2]
-	ldr r1, _0800D488 @ =gUnknown_2023BD6
+	ldr r1, _0800D488 @ =gBattlerPositions
 	strb r3, [r1]
 	ldr r3, _0800D48C @ =sub_8035A7C
 	str r3, [r2, 0x4]
@@ -289,7 +289,7 @@ _0800D478:
 	.align 2, 0
 _0800D480: .4byte gUnknown_3004FE0
 _0800D484: .4byte SetBankFuncToPlayerBufferRunCommand
-_0800D488: .4byte gUnknown_2023BD6
+_0800D488: .4byte gBattlerPositions
 _0800D48C: .4byte sub_8035A7C
 _0800D490: .4byte gBattlersCount
 	thumb_func_end sub_800D364
@@ -318,7 +318,7 @@ sub_800D494: @ 800D494
 	ldr r2, _0800D4DC @ =gUnknown_3004FE0
 	ldr r0, _0800D4E0 @ =SetBankFuncToPlayerBufferRunCommand
 	str r0, [r2]
-	ldr r1, _0800D4E4 @ =gUnknown_2023BD6
+	ldr r1, _0800D4E4 @ =gBattlerPositions
 	strb r3, [r1]
 	ldr r0, _0800D4E8 @ =sub_803A668
 	str r0, [r2, 0x4]
@@ -332,14 +332,14 @@ _0800D4D4: .4byte gUnknown_3004F84
 _0800D4D8: .4byte sub_80123C0
 _0800D4DC: .4byte gUnknown_3004FE0
 _0800D4E0: .4byte SetBankFuncToPlayerBufferRunCommand
-_0800D4E4: .4byte gUnknown_2023BD6
+_0800D4E4: .4byte gBattlerPositions
 _0800D4E8: .4byte sub_803A668
 _0800D4EC: .4byte gBattlersCount
 _0800D4F0:
 	ldr r2, _0800D508 @ =gUnknown_3004FE0
 	ldr r0, _0800D50C @ =SetBankFuncToPlayerBufferRunCommand
 	str r0, [r2, 0x4]
-	ldr r1, _0800D510 @ =gUnknown_2023BD6
+	ldr r1, _0800D510 @ =gBattlerPositions
 	strb r4, [r1, 0x1]
 	ldr r0, _0800D514 @ =sub_803A668
 	str r0, [r2]
@@ -350,7 +350,7 @@ _0800D4F0:
 	.align 2, 0
 _0800D508: .4byte gUnknown_3004FE0
 _0800D50C: .4byte SetBankFuncToPlayerBufferRunCommand
-_0800D510: .4byte gUnknown_2023BD6
+_0800D510: .4byte gBattlerPositions
 _0800D514: .4byte sub_803A668
 _0800D518: .4byte gBattlersCount
 _0800D51C:
@@ -369,7 +369,7 @@ _0800D51C:
 	ldr r2, _0800D55C @ =gUnknown_3004FE0
 	ldr r4, _0800D560 @ =SetBankFuncToPlayerBufferRunCommand
 	str r4, [r2]
-	ldr r1, _0800D564 @ =gUnknown_2023BD6
+	ldr r1, _0800D564 @ =gBattlerPositions
 	movs r0, 0
 	strb r0, [r1]
 	ldr r3, _0800D568 @ =sub_803A668
@@ -387,13 +387,13 @@ _0800D554: .4byte gUnknown_3004F84
 _0800D558: .4byte sub_80123C0
 _0800D55C: .4byte gUnknown_3004FE0
 _0800D560: .4byte SetBankFuncToPlayerBufferRunCommand
-_0800D564: .4byte gUnknown_2023BD6
+_0800D564: .4byte gBattlerPositions
 _0800D568: .4byte sub_803A668
 _0800D56C:
 	ldr r2, _0800D590 @ =gUnknown_3004FE0
 	ldr r0, _0800D594 @ =SetBankFuncToPlayerBufferRunCommand
 	str r0, [r2, 0x4]
-	ldr r1, _0800D598 @ =gUnknown_2023BD6
+	ldr r1, _0800D598 @ =gBattlerPositions
 	strb r3, [r1, 0x1]
 	ldr r3, _0800D59C @ =sub_803A668
 	str r3, [r2]
@@ -411,7 +411,7 @@ _0800D588:
 	.align 2, 0
 _0800D590: .4byte gUnknown_3004FE0
 _0800D594: .4byte SetBankFuncToPlayerBufferRunCommand
-_0800D598: .4byte gUnknown_2023BD6
+_0800D598: .4byte gBattlerPositions
 _0800D59C: .4byte sub_803A668
 _0800D5A0: .4byte gBattlersCount
 _0800D5A4:
@@ -431,7 +431,7 @@ _0800D5BC:
 	mov r10, r0
 	ldr r1, _0800D5EC @ =gLinkPlayers
 	mov r12, r1
-	ldr r7, _0800D5F0 @ =gUnknown_2023BD6
+	ldr r7, _0800D5F0 @ =gBattlerPositions
 	mov r8, r0
 	ldr r6, _0800D5F4 @ =gBattlerPartyIndexes
 	movs r4, 0
@@ -452,7 +452,7 @@ _0800D5D0:
 _0800D5E4: .4byte gUnknown_3004F84
 _0800D5E8: .4byte sub_80123C0
 _0800D5EC: .4byte gLinkPlayers
-_0800D5F0: .4byte gUnknown_2023BD6
+_0800D5F0: .4byte gBattlerPositions
 _0800D5F4: .4byte gBattlerPartyIndexes
 _0800D5F8:
 	cmp r0, 0x3
@@ -680,7 +680,7 @@ _0800D78C:
 	movs r0, 0x1
 	add r0, r8
 	mov r10, r0
-	ldr r0, _0800D7B8 @ =gUnknown_2023BD6
+	ldr r0, _0800D7B8 @ =gBattlerPositions
 	add r0, r8
 	mov r9, r0
 	mov r0, r8
@@ -699,7 +699,7 @@ _0800D7A0:
 	ldr r0, _0800D7BC @ =gPlayerParty
 	b _0800D7C2
 	.align 2, 0
-_0800D7B8: .4byte gUnknown_2023BD6
+_0800D7B8: .4byte gBattlerPositions
 _0800D7BC: .4byte gPlayerParty
 _0800D7C0:
 	ldr r0, _0800D800 @ =gEnemyParty

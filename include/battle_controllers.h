@@ -242,7 +242,6 @@ void EmitCmd55(u8 bufferId, u8 arg1);
 
 // player controller
 void SetControllerToPlayer(void);
-void nullsub_21(void);
 void PlayerHandleGetRawMonData(void);
 void sub_80587B0(void);
 void sub_805CC00(struct Sprite *sprite);

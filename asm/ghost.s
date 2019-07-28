@@ -19,7 +19,7 @@ sub_80B5268: @ 80B5268
 	ldr r5, _080B52C8 @ =gBattleAnimTarget
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x32]
@@ -27,7 +27,7 @@ sub_80B5268: @ 80B5268
 	strh r0, [r4, 0x34]
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x36]
@@ -518,7 +518,7 @@ sub_80B563C: @ 80B563C
 	mov r8, r0
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
@@ -527,7 +527,7 @@ sub_80B563C: @ 80B563C
 	mov r1, r8
 	ldrb r0, [r1]
 	movs r1, 0x3
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x22]
@@ -637,13 +637,13 @@ _080B572E:
 	ldr r4, _080B5794 @ =gBattleAnimTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x30]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x32]
@@ -700,13 +700,13 @@ _080B5798:
 	ldr r4, _080B57E8 @ =gBattleAnimTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -1214,7 +1214,7 @@ _080B5B68:
 	adds r2, r0
 	lsls r2, 2
 	adds r2, r4
-	ldr r0, _080B5C18 @ =gUnknown_2024018
+	ldr r0, _080B5C18 @ =gBattleSpritesDataPtr
 	ldr r1, [r0]
 	ldr r0, _080B5C1C @ =gBattleAnimTarget
 	ldrb r0, [r0]
@@ -1260,7 +1260,7 @@ _080B5B68:
 	b _080B5C24
 	.align 2, 0
 _080B5C14: .4byte gSprites
-_080B5C18: .4byte gUnknown_2024018
+_080B5C18: .4byte gBattleSpritesDataPtr
 _080B5C1C: .4byte gBattleAnimTarget
 _080B5C20:
 	movs r1, 0x80
@@ -1614,12 +1614,12 @@ sub_80B5EC0: @ 80B5EC0
 	ldr r4, _080B5F00 @ =gBattleAnimAttacker
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 8
 	movs r2, 0xE0
@@ -1636,12 +1636,12 @@ _080B5F08:
 	ldr r4, _080B5FD0 @ =gBattleAnimTarget
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 8
 	movs r2, 0xE0
@@ -1652,13 +1652,13 @@ _080B5F08:
 _080B5F2C:
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 8
 	movs r1, 0xE0
@@ -1808,7 +1808,7 @@ sub_80B6020: @ 80B6020
 	ldr r4, _080B6178 @ =gBattleAnimAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x4]
@@ -1860,7 +1860,7 @@ _080B6092:
 	beq _080B615E
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
@@ -2872,7 +2872,7 @@ sub_80B68C8: @ 80B68C8
 	ldr r5, _080B6964 @ =gBattleAnimAttacker
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x1A]

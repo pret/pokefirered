@@ -302,7 +302,7 @@ _080DD772:
 sub_80DD778: @ 80DD778
 	push {lr}
 	ldr r2, _080DD7A0 @ =gSprites
-	ldr r1, _080DD7A4 @ =gUnknown_3004FF0
+	ldr r1, _080DD7A4 @ =gHealthboxSpriteIds
 	ldr r0, _080DD7A8 @ =gActiveBattler
 	ldrb r0, [r0]
 	adds r0, r1
@@ -322,7 +322,7 @@ _080DD79C:
 	bx r0
 	.align 2, 0
 _080DD7A0: .4byte gSprites
-_080DD7A4: .4byte gUnknown_3004FF0
+_080DD7A4: .4byte gHealthboxSpriteIds
 _080DD7A8: .4byte gActiveBattler
 _080DD7AC: .4byte SpriteCallbackDummy
 	thumb_func_end sub_80DD778
@@ -366,7 +366,7 @@ CompleteOnSpecialAnimDone_0: @ 80DD7F0
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080DD816
-	ldr r0, _080DD824 @ =gUnknown_2024018
+	ldr r0, _080DD824 @ =gBattleSpritesDataPtr
 	ldr r2, [r0]
 	ldr r0, _080DD828 @ =gActiveBattler
 	ldrb r1, [r0]
@@ -387,7 +387,7 @@ _080DD81A:
 	bx r0
 	.align 2, 0
 _080DD820: .4byte gUnknown_2024005
-_080DD824: .4byte gUnknown_2024018
+_080DD824: .4byte gBattleSpritesDataPtr
 _080DD828: .4byte gActiveBattler
 	thumb_func_end CompleteOnSpecialAnimDone_0
 
@@ -449,7 +449,7 @@ _080DD894: .4byte gSpecialVar_ItemId
 	thumb_func_start CompleteOnFinishedBattleAnimation_3
 CompleteOnFinishedBattleAnimation_3: @ 80DD898
 	push {lr}
-	ldr r0, _080DD8C0 @ =gUnknown_2024018
+	ldr r0, _080DD8C0 @ =gBattleSpritesDataPtr
 	ldr r2, [r0]
 	ldr r0, _080DD8C4 @ =gActiveBattler
 	ldrb r1, [r0]
@@ -468,7 +468,7 @@ _080DD8BA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DD8C0: .4byte gUnknown_2024018
+_080DD8C0: .4byte gBattleSpritesDataPtr
 _080DD8C4: .4byte gActiveBattler
 	thumb_func_end CompleteOnFinishedBattleAnimation_3
 
@@ -532,7 +532,7 @@ _080DD93C: .4byte gBitTable
 	thumb_func_start CompleteOnFinishedStatusAnimation_3
 CompleteOnFinishedStatusAnimation_3: @ 80DD940
 	push {lr}
-	ldr r0, _080DD968 @ =gUnknown_2024018
+	ldr r0, _080DD968 @ =gBattleSpritesDataPtr
 	ldr r2, [r0]
 	ldr r0, _080DD96C @ =gActiveBattler
 	ldrb r1, [r0]
@@ -551,7 +551,7 @@ _080DD962:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DD968: .4byte gUnknown_2024018
+_080DD968: .4byte gBattleSpritesDataPtr
 _080DD96C: .4byte gActiveBattler
 	thumb_func_end CompleteOnFinishedStatusAnimation_3
 
@@ -749,7 +749,7 @@ sub_80DDAC8: @ 80DDAC8
 	thumb_func_start sub_80DDAD4
 sub_80DDAD4: @ 80DDAD4
 	push {r4,r5,lr}
-	ldr r0, _080DDB14 @ =gUnknown_2024018
+	ldr r0, _080DDB14 @ =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r1, [r0, 0x8]
 	movs r0, 0x4
@@ -778,7 +778,7 @@ sub_80DDAD4: @ 80DDAD4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DDB14: .4byte gUnknown_2024018
+_080DDB14: .4byte gBattleSpritesDataPtr
 _080DDB18: .4byte gUnknown_2024005
 _080DDB1C: .4byte gActiveBattler
 _080DDB20: .4byte gUnknown_3004FE0
@@ -795,7 +795,7 @@ sub_80DDB28: @ 80DDB28
 	adds r1, 0x1
 	adds r0, r1
 	ldrb r1, [r0]
-	ldr r0, _080DDB78 @ =gUnknown_2024018
+	ldr r0, _080DDB78 @ =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	strb r1, [r0, 0x8]
@@ -824,7 +824,7 @@ sub_80DDB28: @ 80DDB28
 	.align 2, 0
 _080DDB70: .4byte gUnknown_2022BC4
 _080DDB74: .4byte gActiveBattler
-_080DDB78: .4byte gUnknown_2024018
+_080DDB78: .4byte gBattleSpritesDataPtr
 _080DDB7C: .4byte gUnknown_2024005
 _080DDB80: .4byte gUnknown_3004FE0
 _080DDB84: .4byte CompleteOnSpecialAnimDone_0
@@ -1081,7 +1081,7 @@ sub_80DDD68: @ 80DDD68
 	thumb_func_start SafariHandleStatusIconUpdate
 SafariHandleStatusIconUpdate: @ 80DDD74
 	push {lr}
-	ldr r0, _080DDDA0 @ =gUnknown_3004FF0
+	ldr r0, _080DDDA0 @ =gHealthboxSpriteIds
 	ldr r1, _080DDDA4 @ =gActiveBattler
 	ldrb r1, [r1]
 	adds r0, r1, r0
@@ -1100,7 +1100,7 @@ SafariHandleStatusIconUpdate: @ 80DDD74
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DDDA0: .4byte gUnknown_3004FF0
+_080DDDA0: .4byte gHealthboxSpriteIds
 _080DDDA4: .4byte gActiveBattler
 _080DDDA8: .4byte gBattlerPartyIndexes
 _080DDDAC: .4byte gPlayerParty
@@ -1332,7 +1332,7 @@ SafariHandleIntroSlide: @ 80DDF20
 	adds r0, r1
 	ldrb r0, [r0]
 	bl sub_80BC3A0
-	ldr r2, _080DDF50 @ =gUnknown_2023F4C
+	ldr r2, _080DDF50 @ =gIntroSlideFlags
 	ldrh r0, [r2]
 	movs r1, 0x1
 	orrs r0, r1
@@ -1343,13 +1343,13 @@ SafariHandleIntroSlide: @ 80DDF20
 	.align 2, 0
 _080DDF48: .4byte gUnknown_2022BC4
 _080DDF4C: .4byte gActiveBattler
-_080DDF50: .4byte gUnknown_2023F4C
+_080DDF50: .4byte gIntroSlideFlags
 	thumb_func_end SafariHandleIntroSlide
 
 	thumb_func_start SafariHandleIntroTrainerBallThrow
 SafariHandleIntroTrainerBallThrow: @ 80DDF54
 	push {r4,r5,lr}
-	ldr r5, _080DDF98 @ =gUnknown_3004FF0
+	ldr r5, _080DDF98 @ =gHealthboxSpriteIds
 	ldr r4, _080DDF9C @ =gActiveBattler
 	ldrb r1, [r4]
 	adds r0, r1, r5
@@ -1380,7 +1380,7 @@ SafariHandleIntroTrainerBallThrow: @ 80DDF54
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DDF98: .4byte gUnknown_3004FF0
+_080DDF98: .4byte gHealthboxSpriteIds
 _080DDF9C: .4byte gActiveBattler
 _080DDFA0: .4byte gBattlerPartyIndexes
 _080DDFA4: .4byte gPlayerParty

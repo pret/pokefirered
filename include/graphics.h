@@ -961,4 +961,20 @@ extern const u8 gFile_graphics_items_icon_palettes_sapphire_palette[];
 extern const u8 gFile_graphics_items_icons_return_to_field_arrow_sheet[];
 extern const u8 gFile_graphics_items_icon_palettes_return_to_field_arrow_palette[];
 
+extern const u32 gHealthboxSinglesPlayerGfx[];
+extern const u32 gHealthboxSinglesOpponentGfx[];
+extern const u32 gHealthboxDoublesPlayerGfx[];
+extern const u32 gHealthboxDoublesOpponentGfx[];
+extern const u32 gHealthboxSafariGfx[];
+extern const u32 gBlankGfxCompressed[];
+extern const u16 gBattleInterface_BallStatusBarPal[];
+extern const u16 gBattleInterface_BallDisplayPal[];
+extern const u32 gFile_graphics_interface_hp_numbers[];
+
+extern const u32 gGhostFrontPic[];
+extern const u32 gGhostPalette[];
+extern const u32 gSubstituteDollGfx[];
+extern const u32 gSubstituteDollTilemap[];
+extern const u16 gSubstituteDollPal[];
+
 #endif //GUARD_GRAPHICS_H

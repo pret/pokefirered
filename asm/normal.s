@@ -1185,7 +1185,7 @@ _080BA1D0:
 	cmp r0, 0
 	beq _080BA200
 	ldr r2, _080BA274 @ =gSprites
-	ldr r0, _080BA278 @ =gUnknown_3004FF0
+	ldr r0, _080BA278 @ =gHealthboxSpriteIds
 	add r0, r9
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -1258,7 +1258,7 @@ _080BA268: .4byte gBattleAnimAttacker
 _080BA26C: .4byte gBattleAnimTarget
 _080BA270: .4byte 0x0000ffff
 _080BA274: .4byte gSprites
-_080BA278: .4byte gUnknown_3004FF0
+_080BA278: .4byte gHealthboxSpriteIds
 	thumb_func_end sub_80BA16C
 
 	thumb_func_start sub_80BA27C

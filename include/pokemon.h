@@ -539,6 +539,7 @@ extern const u32 gExperienceTables[][MAX_MON_LEVEL + 1];
 extern const u16 *const gLevelUpLearnsets[];
 extern const u8 gFacilityClassToPicIndex[];
 extern const u8 gFacilityClassToTrainerClass[];
+extern const struct SpriteTemplate gUnknown_825DEF0[];
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon);
 void ZeroMonData(struct Pokemon *mon);
@@ -640,7 +641,7 @@ void ClearBattleMonForms(void);
 void PlayBattleBGM(void);
 void PlayMapChosenOrBattleBGM(u16 songId);
 const u32 *GetMonFrontSpritePal(struct Pokemon *mon);
-const u32 *GetFrontSpritePalFromSpeciesAndPersonality(u16 species, u32 otId, u32 personality);
+const u32 *GetMonSpritePalFromSpeciesAndPersonality(u16 species, u32 otId, u32 personality);
 const struct CompressedSpritePalette *GetMonSpritePalStruct(struct Pokemon *mon);
 const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u16 species, u32 otId , u32 personality);
 bool32 IsHMMove2(u16 move);

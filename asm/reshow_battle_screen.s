@@ -294,8 +294,8 @@ _080779B0:
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r4, 0
-	bl SetBankEnemyShadowSpriteCallback
-	bl sub_8075290
+	bl SetBattlerShadowSpriteCallback
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _08077A14
@@ -315,7 +315,7 @@ _080779B0:
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r4, 0
-	bl SetBankEnemyShadowSpriteCallback
+	bl SetBattlerShadowSpriteCallback
 _08077A14:
 	ldr r1, _08077A4C @ =gUnknown_2023FF8
 	ldr r0, _08077A50 @ =gBattlerInMenuId
@@ -455,7 +455,7 @@ _08077B1C:
 	ldr r1, _08077B60 @ =gEnemyParty
 	adds r0, r1
 	adds r1, r4, 0
-	bl sub_8034658
+	bl DecompressGhostFrontPic
 	b _08077C24
 	.align 2, 0
 _08077B54: .4byte gBattlersCount
@@ -463,7 +463,7 @@ _08077B58: .4byte gBattleTypeFlags
 _08077B5C: .4byte gBattlerPartyIndexes
 _08077B60: .4byte gEnemyParty
 _08077B64:
-	ldr r0, _08077B90 @ =gUnknown_2024018
+	ldr r0, _08077B90 @ =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r1, [r0]
 	lsls r0, r4, 2
@@ -485,13 +485,13 @@ _08077B64:
 	bl BattleLoadOpponentMonSpriteGfx
 	b _08077C24
 	.align 2, 0
-_08077B90: .4byte gUnknown_2024018
+_08077B90: .4byte gBattleSpritesDataPtr
 _08077B94: .4byte gBattlerPartyIndexes
 _08077B98: .4byte gEnemyParty
 _08077B9C:
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80350BC
+	bl BattleLoadSubstituteOrMonSpriteGfx
 	b _08077C24
 _08077BA6:
 	ldr r0, _08077BC0 @ =gBattleTypeFlags
@@ -524,7 +524,7 @@ _08077BDA:
 	bl sub_8034750
 	b _08077C24
 _08077BE2:
-	ldr r0, _08077C10 @ =gUnknown_2024018
+	ldr r0, _08077C10 @ =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r1, [r0]
 	lsls r0, r4, 2
@@ -543,16 +543,16 @@ _08077BE2:
 	ldr r1, _08077C18 @ =gPlayerParty
 	adds r0, r1
 	adds r1, r4, 0
-	bl sub_8034498
+	bl BattleLoadPlayerMonSpriteGfx
 	b _08077C24
 	.align 2, 0
-_08077C10: .4byte gUnknown_2024018
+_08077C10: .4byte gBattleSpritesDataPtr
 _08077C14: .4byte gBattlerPartyIndexes
 _08077C18: .4byte gPlayerParty
 _08077C1C:
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80350BC
+	bl BattleLoadSubstituteOrMonSpriteGfx
 _08077C24:
 	ldr r0, _08077C34 @ =gBattleScripting
 	adds r0, 0x22
@@ -598,7 +598,7 @@ _08077C50:
 _08077C6C: .4byte gBattlersCount
 _08077C70: .4byte gBattleTypeFlags
 _08077C74:
-	ldr r0, _08077C90 @ =gUnknown_2024018
+	ldr r0, _08077C90 @ =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r1, [r0]
 	lsls r0, r7, 2
@@ -612,10 +612,10 @@ _08077C74:
 	bl GetSubstituteSpriteDefault_Y
 	b _08077C9A
 	.align 2, 0
-_08077C90: .4byte gUnknown_2024018
+_08077C90: .4byte gBattleSpritesDataPtr
 _08077C94:
 	adds r0, r7, 0
-	bl GetBankSpriteDefault_Y
+	bl GetBattlerSpriteDefault_Y
 _08077C9A:
 	lsls r0, 24
 	lsrs r0, 24
@@ -665,7 +665,7 @@ _08077CD2:
 	ldr r5, _08077D98 @ =gMultiuseSpriteTemplate
 	adds r0, r7, 0
 	movs r1, 0x2
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -891,7 +891,7 @@ _08077EA8:
 	ldr r5, _08077FCC @ =gMultiuseSpriteTemplate
 	adds r0, r7, 0
 	movs r1, 0x2
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -965,7 +965,7 @@ _08077F84:
 	adds r2, r0
 	lsls r2, 2
 	adds r2, r1
-	ldr r0, _08077FE0 @ =gUnknown_2024018
+	ldr r0, _08077FE0 @ =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r1, [r0]
 	lsls r0, r7, 2
@@ -997,7 +997,7 @@ _08077FD0: .4byte gBattlerSpriteIds
 _08077FD4: .4byte gSprites
 _08077FD8: .4byte SpriteCallbackDummy
 _08077FDC: .4byte gBattleMonForms
-_08077FE0: .4byte gUnknown_2024018
+_08077FE0: .4byte gBattleSpritesDataPtr
 	thumb_func_end sub_8077C38
 
 	thumb_func_start CreateHealthboxSprite
@@ -1036,15 +1036,15 @@ _08078014:
 	b _08078166
 _08078026:
 	adds r0, r5, 0
-	bl CreateBankHealthboxSprites
+	bl CreateBattlerHealthboxSprites
 _0807802C:
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r0, _08078068 @ =gUnknown_3004FF0
+	ldr r0, _08078068 @ =gHealthboxSpriteIds
 	adds r4, r5, r0
 	strb r6, [r4]
 	adds r0, r5, 0
-	bl SetBankHealthboxSpritePos
+	bl InitBattlerHealthboxCoords
 	adds r0, r6, 0
 	bl SetHealthboxSpriteVisible
 	adds r0, r5, 0
@@ -1065,7 +1065,7 @@ _0807802C:
 	bl UpdateHealthboxAttribute
 	b _080780C0
 	.align 2, 0
-_08078068: .4byte gUnknown_3004FF0
+_08078068: .4byte gHealthboxSpriteIds
 _0807806C: .4byte gBattlerPartyIndexes
 _08078070: .4byte gEnemyParty
 _08078074:
@@ -1117,22 +1117,22 @@ _080780C0:
 	cmp r0, 0x2
 	bne _080780F8
 _080780DC:
-	ldr r0, _080780F4 @ =gUnknown_3004FF0
+	ldr r0, _080780F4 @ =gHealthboxSpriteIds
 	adds r0, r5, r0
 	ldrb r0, [r0]
 	movs r1, 0x1
-	bl nullsub_21
+	bl DummyBattleInterfaceFunc
 	b _08078104
 	.align 2, 0
 _080780EC: .4byte gBattlerPartyIndexes
 _080780F0: .4byte gPlayerParty
-_080780F4: .4byte gUnknown_3004FF0
+_080780F4: .4byte gHealthboxSpriteIds
 _080780F8:
-	ldr r0, _08078130 @ =gUnknown_3004FF0
+	ldr r0, _08078130 @ =gHealthboxSpriteIds
 	adds r0, r5, r0
 	ldrb r0, [r0]
 	movs r1, 0
-	bl nullsub_21
+	bl DummyBattleInterfaceFunc
 _08078104:
 	adds r0, r5, 0
 	bl GetBattlerSide
@@ -1154,7 +1154,7 @@ _08078104:
 	bl SetHealthboxSpriteInvisible
 	b _08078166
 	.align 2, 0
-_08078130: .4byte gUnknown_3004FF0
+_08078130: .4byte gHealthboxSpriteIds
 _08078134: .4byte gBattlerPartyIndexes
 _08078138: .4byte gEnemyParty
 _0807813C:

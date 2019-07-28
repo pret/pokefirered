@@ -62,5 +62,6 @@ void sub_81279E0(void);
 void ItemUseCB_Medicine(u8 taskId, TaskFunc followUpFunc);
 u8 GetItemEffectType(u16 itemId);
 u8 pokemon_order_func(u8);
+void sub_8127CAC(void);
 
 #endif // GUARD_PARTY_MENU_H

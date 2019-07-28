@@ -863,9 +863,9 @@ struct BattleAnimationInfo
 
 struct BattleHealthboxInfo
 {
-    u8 flag_x1 : 1;
-    u8 flag_x2 : 1;
-    u8 flag_x4 : 1;
+    u8 partyStatusSummaryShown : 1;
+    u8 healthboxIsBouncing : 1;
+    u8 battlerIsBouncing : 1;
     u8 ballAnimActive : 1; // 0x8
     u8 statusAnimActive : 1; // x10
     u8 animFromTableActive : 1; // x20
@@ -876,11 +876,11 @@ struct BattleHealthboxInfo
     u8 field_1_x20 : 1;
     u8 field_1_x40 : 1;
     u8 field_1_x80 : 1;
-    u8 field_2;
-    u8 field_3;
+    u8 healthboxBounceSpriteId;
+    u8 battlerBounceSpriteId;
     u8 animationState;
     u8 field_5;
-    u8 field_6;
+    u8 matrixNum;
     u8 shadowSpriteId;
     u8 field_8;
     u8 field_9;
@@ -894,12 +894,12 @@ struct BattleBarInfo
     s32 maxValue;
     s32 currentValue;
     s32 receivedValue;
-    s32 field_10;
+    s32 currValue;
 };
 
 struct BattleSpriteData
 {
-    struct BattleSpriteInfo *bankData;
+    struct BattleSpriteInfo *battlerData;
     struct BattleHealthboxInfo *healthBoxesData;
     struct BattleAnimationInfo *animationData;
     struct BattleBarInfo *battleBars;
@@ -949,6 +949,10 @@ extern u8 gPotentialItemEffectBattler;
 extern u8 gBattlersCount;
 extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
 extern s32 gBattleMoveDamage;
+extern u16 gIntroSlideFlags;
+extern u32 gTransformedPersonalities[MAX_BATTLERS_COUNT];
+extern u8 gBattlerPositions[MAX_BATTLERS_COUNT];
+extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
 
 extern u8 gBattleOutcome;
 extern u8 gBattleMonForms[MAX_BATTLERS_COUNT];

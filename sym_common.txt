@@ -120,7 +120,7 @@ gUnknown_3004FD4: @ 3004FD4
 gUnknown_3004FE0: @ 3004FE0
 	.space 0x10
 
-gUnknown_3004FF0: @ 3004FF0
+gHealthboxSpriteIds: @ 3004FF0
 	.space 0x4
 
 gUnknown_3004FF4: @ 3004FF4

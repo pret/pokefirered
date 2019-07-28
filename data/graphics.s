@@ -146,7 +146,7 @@ gFile_graphics_interface_ball_Open_sheet:: @ 8D022E8
 	.incbin "graphics/interface/ball_open.4bpp.lz"
 
 	.align 2
-gFile_graphics_interface_blank_sheet:: @ 8D02364
+gBlankGfxCompressed:: @ 8D02364
 	.incbin "graphics/interface/blank.4bpp.lz"
 
 	.align 2
@@ -1062,8 +1062,11 @@ gFile_graphics_unused_basic_frame_tilemap:: @ 8D11A78
 	.incbin "graphics/unused/basic_frame.bin.lz"
 
 	.align 2
-gUnknown_8D11B84:: @ 8D11B84
-	.incbin "baserom.gba", 0xD11B84, 0x40
+gBattleInterface_BallStatusBarPal:: @ 8D11B84
+	.incbin "baserom.gba", 0xD11B84, 0x20
+
+gBattleInterface_BallDisplayPal:: @ 8D11BA4
+	.incbin "baserom.gba", 0xD11BA4, 0x20
 
 gUnknown_8D11BC4:: @ 8D11BC4
 	.incbin "baserom.gba", 0xD11BC4, 0xF00
@@ -1761,23 +1764,23 @@ gFile_graphics_battle_anims_sprites_186_palette:: @ 8D1F31C
 	.incbin "graphics/battle_anims/sprites/186.gbapal.lz"
 	
 	.align 2
-gUnknown_8D1F340:: @ 8D1F340
+gHealthboxSinglesPlayerGfx:: @ 8D1F340
 	.incbin "baserom.gba", 0xD1F340, 0x2C4
 	
 	.align 2
-gUnknown_8D1F604:: @ 8D1F604
+gHealthboxSinglesOpponentGfx:: @ 8D1F604
 	.incbin "baserom.gba", 0xD1F604, 0x190
 	
 	.align 2
-gUnknown_8D1F794:: @ 8D1F794
+gHealthboxDoublesPlayerGfx:: @ 8D1F794
 	.incbin "baserom.gba", 0xD1F794, 0x194
 	
 	.align 2
-gUnknown_8D1F928:: @ 8D1F928
+gHealthboxDoublesOpponentGfx:: @ 8D1F928
 	.incbin "baserom.gba", 0xD1F928, 0x194
 	
 	.align 2
-gFile_graphics_battle_interface_healthbox_safari_sheet:: @ 8D1FABC
+gHealthboxSafariGfx:: @ 8D1FABC
 	.incbin "graphics/battle_interface/healthbox_safari.4bpp.lz"
 
 	.align 2
@@ -2365,15 +2368,15 @@ gFile_graphics_battle_anims_sprites_240_palette:: @ 8D2D068
 	.incbin "graphics/battle_anims/sprites/240.gbapal.lz"
 
 	.align 2
-gFile_graphics_battle_anims_sprites_substitute_palette:: @ 8D2D090
+gSubstituteDollPal:: @ 8D2D090
 	.incbin "graphics/battle_anims/sprites/substitute.gbapal.lz"
 
 	.align 2
-gFile_graphics_battle_anims_sprites_substitute_sheet:: @ 8D2D0B4
+gSubstituteDollGfx:: @ 8D2D0B4
 	.incbin "graphics/battle_anims/sprites/substitute.4bpp.lz"
 
 	.align 2
-gFile_graphics_battle_anims_sprites_substitute_tilemap:: @ 8D2D2F4
+gSubstituteDollTilemap:: @ 8D2D2F4
 	.incbin "graphics/battle_anims/sprites/substitute.bin.lz"
 
 	.align 2
@@ -15923,10 +15926,10 @@ gFile_graphics_battle_anims_sprites_271_sheet:: @ 8E93AB4
 	.incbin "graphics/battle_anims/sprites/271.4bpp.lz"
 
 	.align 2
-gUnknown_8E93B14:: @ 8E93B14
+gGhostPalette:: @ 8E93B14
 	.incbin "baserom.gba", 0xE93B14, 0x24
 
-gUnknown_8E93B38:: @ 8E93B38
+gGhostFrontPic:: @ 8E93B38
 	.incbin "baserom.gba", 0xE93B38, 0x368
 
 gUnknown_8E93EA0:: @ 8E93EA0

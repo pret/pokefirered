@@ -722,7 +722,7 @@ sub_80BACEC: @ 80BACEC
 	movs r0, 0xA
 	bl SetGpuReg
 _080BAD7A:
-	bl sub_8075290
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BADFE
@@ -1192,7 +1192,7 @@ _080BB130:
 	movs r2, 0x1
 	bl SetAnimBgAttribute
 _080BB18E:
-	bl sub_8075290
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BB20A
@@ -3186,7 +3186,7 @@ _080BC144:
 	adds r3, r4
 	lsls r3, 3
 	adds r3, r0
-	ldr r0, _080BC18C @ =gUnknown_2024018
+	ldr r0, _080BC18C @ =gBattleSpritesDataPtr
 	ldr r4, [r0]
 	ldr r2, _080BC190 @ =gBattleAnimAttacker
 	ldrb r0, [r2]
@@ -3217,7 +3217,7 @@ _080BC180:
 	bx r0
 	.align 2, 0
 _080BC188: .4byte gTasks
-_080BC18C: .4byte gUnknown_2024018
+_080BC18C: .4byte gBattleSpritesDataPtr
 _080BC190: .4byte gBattleAnimAttacker
 _080BC194: .4byte sub_80BC19C
 _080BC198: .4byte gUnknown_2037EE2
@@ -3235,7 +3235,7 @@ sub_80BC19C: @ 80BC19C
 	lsls r0, 5
 	cmp r1, r0
 	bne _080BC1E0
-	ldr r0, _080BC1EC @ =gUnknown_2024018
+	ldr r0, _080BC1EC @ =gBattleSpritesDataPtr
 	ldr r1, [r0]
 	ldr r0, _080BC1F0 @ =gBattleAnimAttacker
 	ldrb r3, [r0]
@@ -3264,7 +3264,7 @@ _080BC1E0:
 	bx r0
 	.align 2, 0
 _080BC1E8: .4byte gBattleAnimArgs
-_080BC1EC: .4byte gUnknown_2024018
+_080BC1EC: .4byte gBattleSpritesDataPtr
 _080BC1F0: .4byte gBattleAnimAttacker
 _080BC1F4: .4byte gTasks
 	thumb_func_end sub_80BC19C
@@ -3707,7 +3707,7 @@ _080BC544:
 	strh r0, [r1, 0xC]
 	movs r0, 0x20
 	strh r0, [r1, 0xE]
-	ldr r2, _080BC56C @ =gUnknown_2023F4C
+	ldr r2, _080BC56C @ =gIntroSlideFlags
 	ldrh r1, [r2]
 	ldr r0, _080BC570 @ =0x0000fffe
 	ands r0, r1
@@ -3715,7 +3715,7 @@ _080BC544:
 	b _080BC6BA
 	.align 2, 0
 _080BC568: .4byte gUnknown_2022986
-_080BC56C: .4byte gUnknown_2023F4C
+_080BC56C: .4byte gIntroSlideFlags
 _080BC570: .4byte 0x0000fffe
 _080BC574:
 	lsls r0, r4, 2
@@ -4075,7 +4075,7 @@ _080BC820:
 	strh r0, [r1, 0xE]
 	movs r0, 0x1
 	strh r0, [r1, 0x12]
-	ldr r2, _080BC850 @ =gUnknown_2023F4C
+	ldr r2, _080BC850 @ =gIntroSlideFlags
 	ldrh r1, [r2]
 	ldr r0, _080BC854 @ =0x0000fffe
 	ands r0, r1
@@ -4084,7 +4084,7 @@ _080BC820:
 	.align 2, 0
 _080BC848: .4byte gUnknown_2022986
 _080BC84C: .4byte gTasks
-_080BC850: .4byte gUnknown_2023F4C
+_080BC850: .4byte gIntroSlideFlags
 _080BC854: .4byte 0x0000fffe
 _080BC858:
 	ldr r0, _080BC890 @ =gTasks
@@ -4398,7 +4398,7 @@ _080BCAC0:
 	strh r0, [r1, 0xE]
 	movs r0, 0x1
 	strh r0, [r1, 0x12]
-	ldr r2, _080BCAF0 @ =gUnknown_2023F4C
+	ldr r2, _080BCAF0 @ =gIntroSlideFlags
 	ldrh r1, [r2]
 	ldr r0, _080BCAF4 @ =0x0000fffe
 	ands r0, r1
@@ -4407,7 +4407,7 @@ _080BCAC0:
 	.align 2, 0
 _080BCAE8: .4byte gUnknown_2022986
 _080BCAEC: .4byte gTasks
-_080BCAF0: .4byte gUnknown_2023F4C
+_080BCAF0: .4byte gIntroSlideFlags
 _080BCAF4: .4byte 0x0000fffe
 _080BCAF8:
 	lsls r0, r5, 2
@@ -4782,7 +4782,7 @@ _080BCDDC:
 	strh r0, [r1, 0xC]
 	movs r0, 0x20
 	strh r0, [r1, 0xE]
-	ldr r2, _080BCE00 @ =gUnknown_2023F4C
+	ldr r2, _080BCE00 @ =gIntroSlideFlags
 	ldrh r1, [r2]
 	ldr r0, _080BCE04 @ =0x0000fffe
 	ands r0, r1
@@ -4790,7 +4790,7 @@ _080BCDDC:
 	b _080BCEE6
 	.align 2, 0
 _080BCDFC: .4byte gUnknown_2022986
-_080BCE00: .4byte gUnknown_2023F4C
+_080BCE00: .4byte gIntroSlideFlags
 _080BCE04: .4byte 0x0000fffe
 _080BCE08:
 	ldr r2, _080BCECC @ =gUnknown_2022986

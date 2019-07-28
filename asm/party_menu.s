@@ -13549,7 +13549,7 @@ sub_8125554: @ 8125554
 	bl sub_81202F8
 	movs r0, 0x2
 	bl ScheduleBgCopyTilemapToVram
-	bl sub_803539C
+	bl HandleBattleLowHpMusicChange
 	ldr r1, _081255B4 @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
@@ -17909,7 +17909,7 @@ _081278B0: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
 	thumb_func_start sub_81278B4
 sub_81278B4: @ 81278B4
 	push {lr}
-	bl sub_8075290
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _081278C4
@@ -18425,7 +18425,7 @@ _08127CF4:
 	strb r0, [r6, 0x2]
 	b _08127D9C
 _08127D02:
-	bl sub_8075290
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _08127D40
@@ -18588,7 +18588,7 @@ _08127E26:
 	strb r0, [r5, 0x2]
 	b _08127EB6
 _08127E34:
-	bl sub_8075290
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _08127E6C

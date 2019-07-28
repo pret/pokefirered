@@ -196,7 +196,7 @@ gBattlersCount: @ 2023BCC
 gBattlerPartyIndexes: @ 2023BCE
 	.space 0x8
 
-gUnknown_2023BD6: @ 2023BD6
+gBattlerPositions: @ 2023BD6
 	.space 0x4
 
 gUnknown_2023BDA: @ 2023BDA
@@ -379,7 +379,7 @@ gBattleWeather: @ 2023F1C
 gUnknown_2023F20: @ 2023F20
 	.space 0x2C
 
-gUnknown_2023F4C: @ 2023F4C
+gIntroSlideFlags: @ 2023F4C
 	.space 0x2
 
 gUnknown_2023F4E: @ 2023F4E
@@ -427,10 +427,10 @@ gBattlerInMenuId: @ 2024004
 gUnknown_2024005: @ 2024005
 	.space 0x3
 
-gUnknown_2024008: @ 2024008
+gTransformedPersonalities: @ 2024008
 	.space 0x10
 
-gUnknown_2024018: @ 2024018
+gBattleSpritesDataPtr: @ 2024018
 	.space 0x4
 
 gMonSpritesGfxPtr: @ 202401C
@@ -703,13 +703,13 @@ gUnknown_2037ED4: @ 2037ED4
 gUnknown_2037ED8: @ 2037ED8
 	.space 0x4
 
-gUnknown_2037EDC: @ 2037EDC
+gAnimScriptCallback: @ 2037EDC
 	.space 0x4
 
 gUnknown_2037EE0: @ 2037EE0
 	.space 0x1
 
-gUnknown_2037EE1: @ 2037EE1
+gAnimScriptActive: @ 2037EE1
 	.space 0x1
 
 gUnknown_2037EE2: @ 2037EE2

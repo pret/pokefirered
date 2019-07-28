@@ -3920,7 +3920,7 @@ _08011D90: .4byte 0x00002108
 sub_8011D94: @ 8011D94
 	push {lr}
 	adds r2, r0, 0
-	ldr r0, _08011DC0 @ =gUnknown_2023F4C
+	ldr r0, _08011DC0 @ =gIntroSlideFlags
 	ldrh r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
@@ -3941,7 +3941,7 @@ _08011DBC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08011DC0: .4byte gUnknown_2023F4C
+_08011DC0: .4byte gIntroSlideFlags
 _08011DC4: .4byte sub_8011DC8
 	thumb_func_end sub_8011D94
 
@@ -3960,7 +3960,7 @@ sub_8011DC8: @ 8011DC8
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_804BD94
-	ldr r1, _08011E18 @ =gUnknown_3004FF0
+	ldr r1, _08011E18 @ =gHealthboxSpriteIds
 	movs r2, 0x2E
 	ldrsh r0, [r4, r2]
 	adds r0, r1
@@ -3985,7 +3985,7 @@ _08011E10:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08011E18: .4byte gUnknown_3004FF0
+_08011E18: .4byte gHealthboxSpriteIds
 _08011E1C: .4byte nullsub_10
 _08011E20: .4byte 0x00002108
 	thumb_func_end sub_8011DC8
@@ -4071,7 +4071,7 @@ sub_8011EA0: @ 8011EA0
 	ldrh r0, [r0, 0x2E]
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r0, _08011EC4 @ =gUnknown_2024018
+	ldr r0, _08011EC4 @ =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r1, [r0]
 	lsls r0, r6, 2
@@ -4082,7 +4082,7 @@ sub_8011EA0: @ 8011EA0
 	adds r4, r0, 0
 	b _08011ECC
 	.align 2, 0
-_08011EC4: .4byte gUnknown_2024018
+_08011EC4: .4byte gBattleSpritesDataPtr
 _08011EC8:
 	mov r0, r9
 	ldrh r4, [r0, 0x32]
@@ -4364,7 +4364,7 @@ _080120CC: .4byte oac_poke_ally_
 oac_poke_ally_: @ 80120D0
 	push {lr}
 	adds r2, r0, 0
-	ldr r0, _080120F8 @ =gUnknown_2023F4C
+	ldr r0, _080120F8 @ =gIntroSlideFlags
 	ldrh r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
@@ -4384,7 +4384,7 @@ _080120F4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080120F8: .4byte gUnknown_2023F4C
+_080120F8: .4byte gIntroSlideFlags
 _080120FC: .4byte nullsub_11
 	thumb_func_end oac_poke_ally_
 
@@ -4406,7 +4406,7 @@ nullsub_11: @ 801210C
 sub_8012110: @ 8012110
 	push {lr}
 	adds r2, r0, 0
-	ldr r0, _08012134 @ =gUnknown_2023F4C
+	ldr r0, _08012134 @ =gIntroSlideFlags
 	ldrh r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
@@ -4424,7 +4424,7 @@ _08012130:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08012134: .4byte gUnknown_2023F4C
+_08012134: .4byte gIntroSlideFlags
 	thumb_func_end sub_8012110
 
 	thumb_func_start dp11b_obj_instanciate
@@ -4447,7 +4447,7 @@ dp11b_obj_instanciate: @ 8012138
 	mov r10, r3
 	cmp r1, 0
 	beq _08012174
-	ldr r0, _08012170 @ =gUnknown_2024018
+	ldr r0, _08012170 @ =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r1, [r0, 0x4]
 	lsls r2, r4, 1
@@ -4458,9 +4458,9 @@ dp11b_obj_instanciate: @ 8012138
 	movs r0, 0x2
 	b _08012186
 	.align 2, 0
-_08012170: .4byte gUnknown_2024018
+_08012170: .4byte gBattleSpritesDataPtr
 _08012174:
-	ldr r0, _080121D0 @ =gUnknown_2024018
+	ldr r0, _080121D0 @ =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r1, [r0, 0x4]
 	lsls r2, r4, 1
@@ -4481,10 +4481,10 @@ _08012186:
 	mov r0, r8
 	cmp r0, 0x1
 	bne _080121E0
-	ldr r0, _080121D8 @ =gUnknown_3004FF0
+	ldr r0, _080121D8 @ =gHealthboxSpriteIds
 	adds r0, r4, r0
 	ldrb r7, [r0]
-	ldr r2, _080121D0 @ =gUnknown_2024018
+	ldr r2, _080121D0 @ =gBattleSpritesDataPtr
 	ldr r0, [r2]
 	ldr r0, [r0, 0x4]
 	adds r1, r6, r4
@@ -4506,15 +4506,15 @@ _08012186:
 	movs r1, 0x80
 	b _0801220E
 	.align 2, 0
-_080121D0: .4byte gUnknown_2024018
+_080121D0: .4byte gBattleSpritesDataPtr
 _080121D4: .4byte SpriteCB_HealthBoxBounce
-_080121D8: .4byte gUnknown_3004FF0
+_080121D8: .4byte gHealthboxSpriteIds
 _080121DC: .4byte gSprites
 _080121E0:
 	ldr r0, _0801224C @ =gBattlerSpriteIds
 	adds r0, r4, r0
 	ldrb r7, [r0]
-	ldr r2, _08012250 @ =gUnknown_2024018
+	ldr r2, _08012250 @ =gBattleSpritesDataPtr
 	ldr r0, [r2]
 	ldr r0, [r0, 0x4]
 	adds r1, r6, r4
@@ -4568,7 +4568,7 @@ _0801223C:
 	bx r0
 	.align 2, 0
 _0801224C: .4byte gBattlerSpriteIds
-_08012250: .4byte gUnknown_2024018
+_08012250: .4byte gBattleSpritesDataPtr
 _08012254: .4byte gSprites
 	thumb_func_end dp11b_obj_instanciate
 
@@ -4581,7 +4581,7 @@ dp11b_obj_free: @ 8012258
 	lsrs r1, 24
 	cmp r1, 0x1
 	bne _080122AC
-	ldr r6, _080122A4 @ =gUnknown_2024018
+	ldr r6, _080122A4 @ =gBattleSpritesDataPtr
 	ldr r0, [r6]
 	ldr r1, [r0, 0x4]
 	lsls r0, r2, 1
@@ -4611,10 +4611,10 @@ dp11b_obj_free: @ 8012258
 	negs r0, r0
 	b _080122E6
 	.align 2, 0
-_080122A4: .4byte gUnknown_2024018
+_080122A4: .4byte gBattleSpritesDataPtr
 _080122A8: .4byte gSprites
 _080122AC:
-	ldr r6, _08012300 @ =gUnknown_2024018
+	ldr r6, _08012300 @ =gBattleSpritesDataPtr
 	ldr r0, [r6]
 	ldr r1, [r0, 0x4]
 	lsls r0, r2, 1
@@ -4658,7 +4658,7 @@ _080122FA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08012300: .4byte gUnknown_2024018
+_08012300: .4byte gBattleSpritesDataPtr
 _08012304: .4byte gSprites
 	thumb_func_end dp11b_obj_free
 
@@ -4997,7 +4997,7 @@ _0801255C:
 	movs r0, 0
 	ldr r1, _0801273C @ =gBattleMoveDamage
 	str r0, [r1]
-	ldr r2, _08012740 @ =gUnknown_2023F4C
+	ldr r2, _08012740 @ =gIntroSlideFlags
 	strh r0, [r2]
 	mov r1, r9
 	ldr r0, _08012720 @ =gBattleScripting
@@ -5200,7 +5200,7 @@ _08012730: .4byte gUnknown_2023E7E
 _08012734: .4byte gUnknown_2023E82
 _08012738: .4byte gUnknown_2023E7C
 _0801273C: .4byte gBattleMoveDamage
-_08012740: .4byte gUnknown_2023F4C
+_08012740: .4byte gIntroSlideFlags
 _08012744: .4byte gUnknown_3004FD4
 _08012748: .4byte gAbsentBattlerFlags
 _0801274C: .4byte gBattleStruct

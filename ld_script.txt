@@ -71,7 +71,7 @@ SECTIONS {
         asm/battle_script_commands.o(.text);
         asm/battle_util2.o(.text);
         asm/battle_controller_player.o(.text);
-        asm/battle_gfx_sfx_util.o(.text);
+        src/battle_gfx_sfx_util.o(.text);
         asm/battle_controller_opponent.o(.text);
         asm/battle_ai_switch_items.o(.text);
         asm/battle_controller_link_opponent.o(.text);
@@ -384,7 +384,8 @@ SECTIONS {
         src/trig.o(.rodata);
         src/util.o(.rodata);
         src/daycare.o(.rodata);
-        data/data.o(.rodata.825EF0C);
+        src/battle_gfx_sfx_util.o(.rodata);
+        data/data.o(.rodata.8260270);
         data/tilesets.o(.rodata);
         data/maps.o(.rodata);
         src/fieldmap.o(.rodata);

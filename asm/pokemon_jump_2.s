@@ -6896,7 +6896,7 @@ _0814AE2A:
 	ldrh r0, [r7]
 	ldr r1, [r7, 0x4]
 	ldr r2, [r7, 0x8]
-	bl GetFrontSpritePalFromSpeciesAndPersonality
+	bl GetMonSpritePalFromSpeciesAndPersonality
 	str r0, [sp, 0x20]
 	add r0, sp, 0x20
 	ldr r1, [r0, 0x4]

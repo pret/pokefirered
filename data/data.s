@@ -166,7 +166,7 @@ gTrainerBackPicTable:: @ 8239FA4
 gUnknown_8239FD4:: @ 8239FD4
 	.incbin "baserom.gba", 0x239FD4, 0x30
 
-gUnknown_823A004:: @ 823A004
+gEnemyMonElevation:: @ 823A004
 	.incbin "baserom.gba", 0x23A004, 0x4554
 
 gTrainerClassNames:: @ 823E558
@@ -344,10 +344,10 @@ gUnknown_8250994:: @ 8250994
 gUnknown_82509F4:: @ 82509F4
 	.incbin "baserom.gba", 0x2509F4, 0x18
 
-gUnknown_8250A0C:: @ 8250A0C
+gSpriteSheet_EnemyShadow:: @ 8250A0C
 	.incbin "baserom.gba", 0x250A0C, 0x10
 
-gUnknown_8250A1C:: @ 8250A1C
+gSpriteTemplate_EnemyShadow:: @ 8250A1C
 	.incbin "baserom.gba", 0x250A1C, 0x18
 
 gUnknown_8250A34:: @ 8250A34
@@ -356,35 +356,10 @@ gUnknown_8250A34:: @ 8250A34
 gUnknown_8250B20:: @ 8250B20
 	.incbin "baserom.gba", 0x250B20, 0xE4
 
-	.section .rodata.825EF0C
+	.section .rodata.8260270
 
-	.align 2
-gUnknown_8260208:: @ 8260208
-	.incbin "baserom.gba", 0x260208, 0x8
-
-gUnknown_8260210:: @ 8260210
-	.incbin "baserom.gba", 0x260210, 0x8
-
-gUnknown_8260218:: @ 8260218
-	.incbin "baserom.gba", 0x260218, 0x8
-
-gUnknown_8260220:: @ 8260220
-	.incbin "baserom.gba", 0x260220, 0x8
-
-gUnknown_8260228:: @ 8260228
-	.incbin "baserom.gba", 0x260228, 0x8
-
-gUnknown_8260230:: @ 8260230
-	.incbin "baserom.gba", 0x260230, 0x8
-
-gUnknown_8260238:: @ 8260238
-	.incbin "baserom.gba", 0x260238, 0x8
-
-gUnknown_8260240:: @ 8260240
-	.incbin "baserom.gba", 0x260240, 0x20
-
-gUnknown_8260260:: @ 8260260
-	.incbin "baserom.gba", 0x260260, 0x18
+gUnknown_8260270:: @ 8260270
+	.incbin "baserom.gba", 0x260270, 0x8
 
 gUnknown_8260278:: @ 8260278
 	.incbin "baserom.gba", 0x260278, 0x30

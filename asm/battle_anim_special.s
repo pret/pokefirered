@@ -2538,7 +2538,7 @@ _080F0008:
 _080F0026:
 	cmp r1, 0x5F
 	bne _080F004C
-	ldr r0, _080F0044 @ =gUnknown_2024005
+	ldr r0, _080F0044 @ =gDoingBattleAnim
 	movs r1, 0
 	strb r1, [r0]
 	movs r0, 0x1
@@ -2548,7 +2548,7 @@ _080F0026:
 	bl PlaySE
 	b _080F0088
 	.align 2, 0
-_080F0044: .4byte gUnknown_2024005
+_080F0044: .4byte gDoingBattleAnim
 _080F0048: .4byte 0x0000013f
 _080F004C:
 	ldr r0, _080F0094 @ =0x0000013b
@@ -3062,7 +3062,7 @@ _080F03F0:
 	strh r5, [r7, 0x2E]
 	ldr r0, _080F0470 @ =sub_80F018C
 	str r0, [r7, 0x1C]
-	ldr r0, _080F0474 @ =gUnknown_2024005
+	ldr r0, _080F0474 @ =gDoingBattleAnim
 	strb r6, [r0]
 	movs r0, 0x1
 	bl UpdateOamPriorityInAllHealthboxes
@@ -3077,7 +3077,7 @@ _080F0464: .4byte gBattlerSpriteIds
 _080F0468: .4byte gBattleAnimTarget
 _080F046C: .4byte gBattleSpritesDataPtr
 _080F0470: .4byte sub_80F018C
-_080F0474: .4byte gUnknown_2024005
+_080F0474: .4byte gDoingBattleAnim
 	thumb_func_end sub_80F0378
 
 	thumb_func_start sub_80F0478
@@ -3164,7 +3164,7 @@ _080F050A:
 	strh r0, [r4, 0x2E]
 	ldr r0, _080F0524 @ =sub_80F018C
 	str r0, [r4, 0x1C]
-	ldr r1, _080F0528 @ =gUnknown_2024005
+	ldr r1, _080F0528 @ =gDoingBattleAnim
 	movs r0, 0
 	strb r0, [r1]
 	movs r0, 0x1
@@ -3175,7 +3175,7 @@ _080F051E:
 	bx r0
 	.align 2, 0
 _080F0524: .4byte sub_80F018C
-_080F0528: .4byte gUnknown_2024005
+_080F0528: .4byte gDoingBattleAnim
 	thumb_func_end sub_80F04B4
 
 	thumb_func_start sub_80F052C
@@ -3237,7 +3237,7 @@ _080F0590:
 	strh r0, [r4, 0x2E]
 	ldr r0, _080F05AC @ =sub_80F018C
 	str r0, [r4, 0x1C]
-	ldr r0, _080F05B0 @ =gUnknown_2024005
+	ldr r0, _080F05B0 @ =gDoingBattleAnim
 	strb r1, [r0]
 	movs r0, 0x1
 	bl UpdateOamPriorityInAllHealthboxes
@@ -3247,7 +3247,7 @@ _080F05A4:
 	bx r0
 	.align 2, 0
 _080F05AC: .4byte sub_80F018C
-_080F05B0: .4byte gUnknown_2024005
+_080F05B0: .4byte gDoingBattleAnim
 	thumb_func_end sub_80F0574
 
 	thumb_func_start sub_80F05B4

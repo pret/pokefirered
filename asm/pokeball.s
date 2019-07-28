@@ -14,7 +14,7 @@ DoPokeballSendOutAnimation: @ 804A938
 	lsrs r4, 16
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r1, _0804A98C @ =gUnknown_2024005
+	ldr r1, _0804A98C @ =gDoingBattleAnim
 	movs r0, 0x1
 	strb r0, [r1]
 	ldr r0, _0804A990 @ =gBattleSpritesDataPtr
@@ -49,7 +49,7 @@ DoPokeballSendOutAnimation: @ 804A938
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0804A98C: .4byte gUnknown_2024005
+_0804A98C: .4byte gDoingBattleAnim
 _0804A990: .4byte gBattleSpritesDataPtr
 _0804A994: .4byte gActiveBattler
 _0804A998: .4byte sub_804A9A0
@@ -1519,7 +1519,7 @@ _0804B52C:
 	movs r2, 0
 	movs r1, 0
 	strh r1, [r0, 0x26]
-	ldr r0, _0804B5C0 @ =gUnknown_2024005
+	ldr r0, _0804B5C0 @ =gDoingBattleAnim
 	strb r2, [r0]
 	ldr r4, _0804B5C4 @ =gBattleSpritesDataPtr
 	ldr r0, [r4]
@@ -1572,7 +1572,7 @@ _0804B5AE:
 _0804B5B4: .4byte 0xfffffee0
 _0804B5B8: .4byte gSprites
 _0804B5BC: .4byte gBattlerSpriteIds
-_0804B5C0: .4byte gUnknown_2024005
+_0804B5C0: .4byte gDoingBattleAnim
 _0804B5C4: .4byte gBattleSpritesDataPtr
 	thumb_func_end HandleBallAnimEnd
 
@@ -1592,7 +1592,7 @@ sub_804B5C8: @ 804B5C8
 	beq _0804B666
 	cmp r1, 0x5F
 	bne _0804B600
-	ldr r0, _0804B5F8 @ =gUnknown_2024005
+	ldr r0, _0804B5F8 @ =gDoingBattleAnim
 	movs r1, 0
 	strb r1, [r0]
 	bl m4aMPlayAllStop
@@ -1600,7 +1600,7 @@ sub_804B5C8: @ 804B5C8
 	bl PlaySE
 	b _0804B666
 	.align 2, 0
-_0804B5F8: .4byte gUnknown_2024005
+_0804B5F8: .4byte gDoingBattleAnim
 _0804B5FC: .4byte 0x0000013f
 _0804B600:
 	ldr r0, _0804B66C @ =0x0000013b

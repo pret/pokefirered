@@ -179,7 +179,7 @@ extern const u8 gUnknown_841623D[];
 extern const u8 gUnknown_84162BD[];
 extern const u8 gUnknown_841D148[];
 
-// pokemon.c
+// pokemon
 extern const u8 BattleText_Rose[];
 extern const u8 BattleText_UnknownString3[];
 extern const u8 BattleText_GetPumped[];
@@ -202,5 +202,10 @@ extern const u8 gString_BattleRecords_TotalRecord[];
 extern const u8 gString_BattleRecords_ColumnHeaders[];
 extern const u8 gString_BattleRecords_7Dashes[];
 extern const u8 gString_BattleRecords_4Dashes[];
+
+// battle_controller_safari
+extern const u8 gUnknown_83FDA4C[];
+extern const u8 gUnknown_83FE747[];
+extern const u8 gUnknown_83FE6E6[];
 
 #endif //GUARD_STRINGS_H

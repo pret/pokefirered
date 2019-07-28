@@ -1497,7 +1497,7 @@ _080CEAA0:
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80D87BC
+	bl BattlePutTextOnWindow
 	ldr r0, _080CEACC @ =gTasks
 	mov r2, r8
 	adds r1, r2, r7
@@ -1802,7 +1802,7 @@ _080CED3A:
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80D87BC
+	bl BattlePutTextOnWindow
 	ldr r0, _080CEDB0 @ =0x00000103
 	bl PlayBGM
 	ldr r2, _080CEDB4 @ =gTasks
@@ -2055,7 +2055,7 @@ _080CEF70:
 _080CEF78:
 	ldr r0, _080CEF90 @ =gStringVar4
 	movs r1, 0
-	bl sub_80D87BC
+	bl BattlePutTextOnWindow
 	ldr r1, _080CEF98 @ =gTasks
 	mov r2, r8
 	adds r0, r2, r7
@@ -2090,7 +2090,7 @@ _080CEFB6:
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, _080CEFF0 @ =gDisplayedStringBattle
 	movs r1, 0
-	bl sub_80D87BC
+	bl BattlePutTextOnWindow
 	ldr r0, _080CEFF4 @ =gTasks
 	mov r3, r8
 	adds r1, r3, r7
@@ -2193,7 +2193,7 @@ _080CF0A2:
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, _080CF0CC @ =gDisplayedStringBattle
 	movs r1, 0
-	bl sub_80D87BC
+	bl BattlePutTextOnWindow
 	ldr r0, _080CF0D0 @ =gTasks
 	mov r2, r8
 	adds r1, r2, r7
@@ -2225,7 +2225,7 @@ _080CF0EE:
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, _080CF114 @ =gDisplayedStringBattle
 	movs r1, 0
-	bl sub_80D87BC
+	bl BattlePutTextOnWindow
 	ldr r0, _080CF118 @ =gTasks
 	mov r3, r8
 	adds r1, r3, r7
@@ -2253,7 +2253,7 @@ _080CF11C:
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, _080CF1AC @ =gDisplayedStringBattle
 	movs r1, 0
-	bl sub_80D87BC
+	bl BattlePutTextOnWindow
 	ldr r0, _080CF1B0 @ =gTasks
 	mov r2, r8
 	adds r1, r2, r7
@@ -2289,7 +2289,7 @@ _080CF176:
 	bl sub_802DB7C
 	ldr r0, _080CF1B4 @ =gUnknown_83FE791
 	movs r1, 0xE
-	bl sub_80D87BC
+	bl BattlePutTextOnWindow
 	ldr r0, _080CF1B0 @ =gTasks
 	mov r3, r8
 	adds r1, r3, r7
@@ -2510,7 +2510,7 @@ _080CF34C:
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, _080CF390 @ =gDisplayedStringBattle
 	movs r1, 0
-	bl sub_80D87BC
+	bl BattlePutTextOnWindow
 	ldr r1, _080CF394 @ =gTasks
 	mov r2, r8
 	adds r0, r2, r7
@@ -2566,7 +2566,7 @@ _080CF3E0:
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, _080CF40C @ =gDisplayedStringBattle
 	movs r1, 0
-	bl sub_80D87BC
+	bl BattlePutTextOnWindow
 	ldr r0, _080CF410 @ =gTasks
 	mov r2, r8
 	adds r1, r2, r7
@@ -2598,7 +2598,7 @@ _080CF42E:
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, _080CF454 @ =gDisplayedStringBattle
 	movs r1, 0
-	bl sub_80D87BC
+	bl BattlePutTextOnWindow
 	ldr r0, _080CF458 @ =gTasks
 	mov r3, r8
 	adds r1, r3, r7
@@ -2629,7 +2629,7 @@ _080CF45C:
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, _080CF49C @ =gDisplayedStringBattle
 	movs r1, 0
-	bl sub_80D87BC
+	bl BattlePutTextOnWindow
 	ldr r1, _080CF4A0 @ =gTasks
 	mov r2, r8
 	adds r0, r2, r7
@@ -2648,7 +2648,7 @@ _080CF4A4:
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, _080CF4D0 @ =gDisplayedStringBattle
 	movs r1, 0
-	bl sub_80D87BC
+	bl BattlePutTextOnWindow
 	ldr r1, _080CF4D4 @ =gTasks
 	mov r3, r8
 	adds r0, r3, r7
@@ -2671,7 +2671,7 @@ _080CF4D8:
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, _080CF4FC @ =gDisplayedStringBattle
 	movs r1, 0
-	bl sub_80D87BC
+	bl BattlePutTextOnWindow
 	ldr r1, _080CF500 @ =gTasks
 	mov r2, r8
 	adds r0, r2, r7

@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80D7274
-sub_80D7274: @ 80D7274
+	thumb_func_start BufferStringBattle
+BufferStringBattle: @ 80D7274
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -701,7 +701,7 @@ _080D77E2:
 	bx r0
 	.align 2, 0
 _080D77F0: .4byte gUnknown_83FDF3C
-	thumb_func_end sub_80D7274
+	thumb_func_end BufferStringBattle
 
 	thumb_func_start BattleStringExpandPlaceholdersToDisplayedString
 BattleStringExpandPlaceholdersToDisplayedString: @ 80D77F4
@@ -2649,8 +2649,8 @@ _080D87B0:
 _080D87B8: .4byte gUnknown_83FD58E
 	thumb_func_end sub_80D8720
 
-	thumb_func_start sub_80D87BC
-sub_80D87BC: @ 80D87BC
+	thumb_func_start BattlePutTextOnWindow
+BattlePutTextOnWindow: @ 80D87BC
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -2907,7 +2907,7 @@ _080D89A4:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80D87BC
+	thumb_func_end BattlePutTextOnWindow
 
 	thumb_func_start sub_80D89B0
 sub_80D89B0: @ 80D89B0

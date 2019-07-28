@@ -317,7 +317,7 @@ _080779B0:
 	adds r0, r4, 0
 	bl SetBattlerShadowSpriteCallback
 _08077A14:
-	ldr r1, _08077A4C @ =gUnknown_2023FF8
+	ldr r1, _08077A4C @ =gActionSelectionCursor
 	ldr r0, _08077A50 @ =gBattlerInMenuId
 	ldrb r0, [r0]
 	adds r0, r1
@@ -340,7 +340,7 @@ _08077A14:
 	.align 2, 0
 _08077A44: .4byte gBattlerPartyIndexes
 _08077A48: .4byte gEnemyParty
-_08077A4C: .4byte gUnknown_2023FF8
+_08077A4C: .4byte gActionSelectionCursor
 _08077A50: .4byte gBattlerInMenuId
 _08077A54: .4byte gWirelessCommType
 _08077A58: .4byte gReceivedRemoteLinkPlayers
@@ -360,7 +360,7 @@ _08077A5C:
 	movs r0, 0x7F
 	ands r0, r1
 	strb r0, [r2, 0x8]
-	ldr r0, _08077AA4 @ =sub_8011100
+	ldr r0, _08077AA4 @ =BattleMainCB2
 	bl SetMainCallback2
 	bl sub_80357C8
 _08077A8A:
@@ -376,7 +376,7 @@ _08077A8A:
 	.align 2, 0
 _08077A9C: .4byte sub_80116F4
 _08077AA0: .4byte gPaletteFade
-_08077AA4: .4byte sub_8011100
+_08077AA4: .4byte BattleMainCB2
 _08077AA8: .4byte gBattleScripting
 	thumb_func_end sub_80777E8
 
@@ -759,7 +759,7 @@ _08077DAC:
 	adds r0, r4, 0
 	bl SetMultiuseSpriteTemplateToTrainerBack
 	ldr r6, _08077E08 @ =gMultiuseSpriteTemplate
-	ldr r1, _08077E0C @ =gUnknown_8239F8C
+	ldr r1, _08077E0C @ =gTrainerBackPicCoords
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x8]
 	lsls r0, 2
@@ -783,7 +783,7 @@ _08077DAC:
 _08077E00: .4byte gBattleTypeFlags
 _08077E04: .4byte gSaveBlock2Ptr
 _08077E08: .4byte gMultiuseSpriteTemplate
-_08077E0C: .4byte gUnknown_8239F8C
+_08077E0C: .4byte gTrainerBackPicCoords
 _08077E10:
 	ldr r0, [r0]
 	movs r1, 0x80
@@ -801,7 +801,7 @@ _08077E10:
 	movs r0, 0x5
 	bl SetMultiuseSpriteTemplateToTrainerBack
 	ldr r5, _08077E94 @ =gMultiuseSpriteTemplate
-	ldr r0, _08077E98 @ =gUnknown_8239F8C
+	ldr r0, _08077E98 @ =gTrainerBackPicCoords
 	ldrb r0, [r0, 0x14]
 	movs r4, 0x8
 	subs r4, r0
@@ -850,7 +850,7 @@ _08077E54:
 	b _08077F84
 	.align 2, 0
 _08077E94: .4byte gMultiuseSpriteTemplate
-_08077E98: .4byte gUnknown_8239F8C
+_08077E98: .4byte gTrainerBackPicCoords
 _08077E9C: .4byte gBattlerSpriteIds
 _08077EA0: .4byte gSprites
 _08077EA4: .4byte SpriteCallbackDummy

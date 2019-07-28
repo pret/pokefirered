@@ -201,7 +201,7 @@ SECTIONS {
         src/mystery_event_script.o(.text);
         asm/field_effect_helpers.o(.text);
         asm/battle_anim_sound_tasks.o(.text);
-        asm/battle_controller_safari.o(.text);
+        src/battle_controller_safari.o(.text);
         src/fldeff_sweetscent.o(.text);
         asm/battle_anim_effects_3.o(.text);
         asm/learn_move.o(.text);
@@ -423,6 +423,8 @@ SECTIONS {
         data/data_83F5738.o(.rodata.83FB134);
         src/save.o(.rodata);
         data/data_83FECCC.o(.rodata);
+        src/battle_controller_safari.o(.rodata);
+        data/data_83FECCC.o(.rodata.83FEDE4);
 		src/intro.o(.rodata);
         data/data_83FECCC.o(.rodata.battle_anim_special);
         src/diploma.o(.rodata);

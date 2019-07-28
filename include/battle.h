@@ -73,21 +73,22 @@
 #define SIDE_STATUS_MIST             (1 << 8)
 #define SIDE_STATUS_SPIKES_DAMAGED   (1 << 9)
 
-#define ACTION_USE_MOVE             0
-#define ACTION_USE_ITEM             1
-#define ACTION_SWITCH               2
-#define ACTION_RUN                  3
-#define ACTION_WATCHES_CAREFULLY    4
-#define ACTION_SAFARI_ZONE_BALL     5
-#define ACTION_POKEBLOCK_CASE       6
-#define ACTION_GO_NEAR              7
-#define ACTION_SAFARI_ZONE_RUN      8
-#define ACTION_9                    9
-#define ACTION_RUN_BATTLESCRIPT     10 // when executing an action
-#define ACTION_CANCEL_PARTNER       12 // when choosing an action
-#define ACTION_FINISHED             12 // when executing an action
-#define ACTION_NOTHING_FAINTED      13 // when choosing an action
-#define ACTION_INIT_VALUE           0xFF
+#define B_ACTION_USE_MOVE                  0
+#define B_ACTION_USE_ITEM                  1
+#define B_ACTION_SWITCH                    2
+#define B_ACTION_RUN                       3
+#define B_ACTION_SAFARI_WATCH_CAREFULLY    4
+#define B_ACTION_SAFARI_BALL               5
+#define B_ACTION_SAFARI_POKEBLOCK          6
+#define B_ACTION_SAFARI_GO_NEAR            7
+#define B_ACTION_SAFARI_RUN                8
+#define B_ACTION_9                         9
+#define B_ACTION_EXEC_SCRIPT               10
+#define B_ACTION_TRY_FINISH                11
+#define B_ACTION_FINISHED                  12
+#define B_ACTION_CANCEL_PARTNER            12 // when choosing an action
+#define B_ACTION_NOTHING_FAINTED           13 // when choosing an action
+#define B_ACTION_NONE                      0xFF
 
 #define MOVESTATUS_MISSED             (1 << 0)
 #define MOVESTATUS_SUPEREFFECTIVE     (1 << 1)
@@ -931,6 +932,18 @@ struct MonSpritesGfx
     void *field_17C;
 };
 
+extern u16 gBattle_BG0_X;
+extern u16 gBattle_BG0_Y;
+extern u16 gBattle_BG1_X;
+extern u16 gBattle_BG1_Y;
+extern u16 gBattle_BG2_X;
+extern u16 gBattle_BG2_Y;
+extern u16 gBattle_BG3_X;
+extern u16 gBattle_BG3_Y;
+extern u16 gBattle_WIN0H;
+extern u16 gBattle_WIN0V;
+extern u16 gBattle_WIN1H;
+extern u16 gBattle_WIN1V;
 extern struct BattleSpritesGfx* gMonSpritesGfx;
 extern u8 gBattleOutcome;
 extern u16 gLastUsedItem;
@@ -953,8 +966,14 @@ extern u16 gIntroSlideFlags;
 extern u32 gTransformedPersonalities[MAX_BATTLERS_COUNT];
 extern u8 gBattlerPositions[MAX_BATTLERS_COUNT];
 extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
-
 extern u8 gBattleOutcome;
 extern u8 gBattleMonForms[MAX_BATTLERS_COUNT];
+extern void (*gBattlerControllerFuncs[MAX_BATTLERS_COUNT])(void);
+extern u32 gBattleControllerExecFlags;
+extern u8 gBattleBufferA[MAX_BATTLERS_COUNT][0x200];
+extern u8 gBattleBufferB[MAX_BATTLERS_COUNT][0x200];
+extern u8 gActionSelectionCursor[MAX_BATTLERS_COUNT];
+extern void (*gPreBattleCallback1)(void);
+extern bool8 gDoingBattleAnim;
 
 #endif // GUARD_BATTLE_H

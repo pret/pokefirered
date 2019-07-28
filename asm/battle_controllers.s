@@ -52,11 +52,11 @@ sub_800D278: @ 800D278
 	ldr r0, _0800D2EC @ =nullsub_13
 	mov r8, r0
 	movs r3, 0
-	ldr r1, _0800D2F0 @ =gUnknown_3004FE0
+	ldr r1, _0800D2F0 @ =gBattlerControllerFuncs
 	mov r12, r1
 	ldr r7, _0800D2F4 @ =gBattlerPositions
 	movs r6, 0xFF
-	ldr r5, _0800D2F8 @ =gUnknown_2023FF8
+	ldr r5, _0800D2F8 @ =gActionSelectionCursor
 	ldr r4, _0800D2FC @ =gUnknown_2023FFC
 _0800D298:
 	mov r0, r8
@@ -77,7 +77,7 @@ _0800D298:
 	cmp r2, 0x3
 	ble _0800D298
 	bl sub_800D230
-	ldr r0, _0800D300 @ =gUnknown_2023BC8
+	ldr r0, _0800D300 @ =gBattleControllerExecFlags
 	movs r4, 0
 	str r4, [r0]
 	bl ClearBattleAnimationVars
@@ -96,11 +96,11 @@ _0800D298:
 _0800D2E4: .4byte gUnknown_3004F84
 _0800D2E8: .4byte nullsub_12
 _0800D2EC: .4byte nullsub_13
-_0800D2F0: .4byte gUnknown_3004FE0
+_0800D2F0: .4byte gBattlerControllerFuncs
 _0800D2F4: .4byte gBattlerPositions
-_0800D2F8: .4byte gUnknown_2023FF8
+_0800D2F8: .4byte gActionSelectionCursor
 _0800D2FC: .4byte gUnknown_2023FFC
-_0800D300: .4byte gUnknown_2023BC8
+_0800D300: .4byte gBattleControllerExecFlags
 _0800D304: .4byte gUnknown_2022B54
 _0800D308: .4byte gUnknown_2023DDC
 	thumb_func_end sub_800D278
@@ -170,7 +170,7 @@ sub_800D364: @ 800D364
 	ands r0, r2
 	cmp r0, 0
 	beq _0800D3B4
-	ldr r2, _0800D3A4 @ =gUnknown_3004FE0
+	ldr r2, _0800D3A4 @ =gBattlerControllerFuncs
 	ldr r1, _0800D3A8 @ =sub_81560A4
 	str r1, [r2]
 	ldr r0, _0800D3AC @ =gBattlerPositions
@@ -184,7 +184,7 @@ sub_800D364: @ 800D364
 _0800D398: .4byte gBattleTypeFlags
 _0800D39C: .4byte gUnknown_3004F84
 _0800D3A0: .4byte sub_80123C0
-_0800D3A4: .4byte gUnknown_3004FE0
+_0800D3A4: .4byte gBattlerControllerFuncs
 _0800D3A8: .4byte sub_81560A4
 _0800D3AC: .4byte gBattlerPositions
 _0800D3B0: .4byte gBattlersCount
@@ -193,26 +193,26 @@ _0800D3B4:
 	ands r0, r2
 	cmp r0, 0
 	beq _0800D3CC
-	ldr r1, _0800D3C4 @ =gUnknown_3004FE0
-	ldr r0, _0800D3C8 @ =sub_80DD538
+	ldr r1, _0800D3C4 @ =gBattlerControllerFuncs
+	ldr r0, _0800D3C8 @ =SetControllerToSafari
 	b _0800D3E8
 	.align 2, 0
-_0800D3C4: .4byte gUnknown_3004FE0
-_0800D3C8: .4byte sub_80DD538
+_0800D3C4: .4byte gBattlerControllerFuncs
+_0800D3C8: .4byte SetControllerToSafari
 _0800D3CC:
 	movs r0, 0x84
 	lsls r0, 2
 	ands r2, r0
 	cmp r2, 0
 	beq _0800D3E4
-	ldr r1, _0800D3DC @ =gUnknown_3004FE0
+	ldr r1, _0800D3DC @ =gBattlerControllerFuncs
 	ldr r0, _0800D3E0 @ =sub_80E75B0
 	b _0800D3E8
 	.align 2, 0
-_0800D3DC: .4byte gUnknown_3004FE0
+_0800D3DC: .4byte gBattlerControllerFuncs
 _0800D3E0: .4byte sub_80E75B0
 _0800D3E4:
-	ldr r1, _0800D400 @ =gUnknown_3004FE0
+	ldr r1, _0800D400 @ =gBattlerControllerFuncs
 	ldr r0, _0800D404 @ =SetBankFuncToPlayerBufferRunCommand
 _0800D3E8:
 	str r0, [r1]
@@ -228,7 +228,7 @@ _0800D3E8:
 	movs r0, 0x2
 	b _0800D478
 	.align 2, 0
-_0800D400: .4byte gUnknown_3004FE0
+_0800D400: .4byte gBattlerControllerFuncs
 _0800D404: .4byte SetBankFuncToPlayerBufferRunCommand
 _0800D408: .4byte gBattlerPositions
 _0800D40C: .4byte sub_8035A7C
@@ -242,7 +242,7 @@ _0800D414:
 	ands r3, r2
 	cmp r3, 0
 	beq _0800D458
-	ldr r3, _0800D44C @ =gUnknown_3004FE0
+	ldr r3, _0800D44C @ =gBattlerControllerFuncs
 	ldr r1, _0800D450 @ =sub_81560A4
 	str r1, [r3]
 	ldr r2, _0800D454 @ =gBattlerPositions
@@ -260,11 +260,11 @@ _0800D414:
 	.align 2, 0
 _0800D444: .4byte gUnknown_3004F84
 _0800D448: .4byte sub_80123C0
-_0800D44C: .4byte gUnknown_3004FE0
+_0800D44C: .4byte gBattlerControllerFuncs
 _0800D450: .4byte sub_81560A4
 _0800D454: .4byte gBattlerPositions
 _0800D458:
-	ldr r2, _0800D480 @ =gUnknown_3004FE0
+	ldr r2, _0800D480 @ =gBattlerControllerFuncs
 	ldr r0, _0800D484 @ =SetBankFuncToPlayerBufferRunCommand
 	str r0, [r2]
 	ldr r1, _0800D488 @ =gBattlerPositions
@@ -287,7 +287,7 @@ _0800D478:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800D480: .4byte gUnknown_3004FE0
+_0800D480: .4byte gBattlerControllerFuncs
 _0800D484: .4byte SetBankFuncToPlayerBufferRunCommand
 _0800D488: .4byte gBattlerPositions
 _0800D48C: .4byte sub_8035A7C
@@ -315,7 +315,7 @@ sub_800D494: @ 800D494
 	ldr r1, _0800D4D4 @ =gUnknown_3004F84
 	ldr r0, _0800D4D8 @ =sub_80123C0
 	str r0, [r1]
-	ldr r2, _0800D4DC @ =gUnknown_3004FE0
+	ldr r2, _0800D4DC @ =gBattlerControllerFuncs
 	ldr r0, _0800D4E0 @ =SetBankFuncToPlayerBufferRunCommand
 	str r0, [r2]
 	ldr r1, _0800D4E4 @ =gBattlerPositions
@@ -330,13 +330,13 @@ sub_800D494: @ 800D494
 _0800D4D0: .4byte gBattleTypeFlags
 _0800D4D4: .4byte gUnknown_3004F84
 _0800D4D8: .4byte sub_80123C0
-_0800D4DC: .4byte gUnknown_3004FE0
+_0800D4DC: .4byte gBattlerControllerFuncs
 _0800D4E0: .4byte SetBankFuncToPlayerBufferRunCommand
 _0800D4E4: .4byte gBattlerPositions
 _0800D4E8: .4byte sub_803A668
 _0800D4EC: .4byte gBattlersCount
 _0800D4F0:
-	ldr r2, _0800D508 @ =gUnknown_3004FE0
+	ldr r2, _0800D508 @ =gBattlerControllerFuncs
 	ldr r0, _0800D50C @ =SetBankFuncToPlayerBufferRunCommand
 	str r0, [r2, 0x4]
 	ldr r1, _0800D510 @ =gBattlerPositions
@@ -348,7 +348,7 @@ _0800D4F0:
 	movs r0, 0x2
 	b _0800D752
 	.align 2, 0
-_0800D508: .4byte gUnknown_3004FE0
+_0800D508: .4byte gBattlerControllerFuncs
 _0800D50C: .4byte SetBankFuncToPlayerBufferRunCommand
 _0800D510: .4byte gBattlerPositions
 _0800D514: .4byte sub_803A668
@@ -366,7 +366,7 @@ _0800D51C:
 	ldr r1, _0800D554 @ =gUnknown_3004F84
 	ldr r0, _0800D558 @ =sub_80123C0
 	str r0, [r1]
-	ldr r2, _0800D55C @ =gUnknown_3004FE0
+	ldr r2, _0800D55C @ =gBattlerControllerFuncs
 	ldr r4, _0800D560 @ =SetBankFuncToPlayerBufferRunCommand
 	str r4, [r2]
 	ldr r1, _0800D564 @ =gBattlerPositions
@@ -385,12 +385,12 @@ _0800D51C:
 	.align 2, 0
 _0800D554: .4byte gUnknown_3004F84
 _0800D558: .4byte sub_80123C0
-_0800D55C: .4byte gUnknown_3004FE0
+_0800D55C: .4byte gBattlerControllerFuncs
 _0800D560: .4byte SetBankFuncToPlayerBufferRunCommand
 _0800D564: .4byte gBattlerPositions
 _0800D568: .4byte sub_803A668
 _0800D56C:
-	ldr r2, _0800D590 @ =gUnknown_3004FE0
+	ldr r2, _0800D590 @ =gBattlerControllerFuncs
 	ldr r0, _0800D594 @ =SetBankFuncToPlayerBufferRunCommand
 	str r0, [r2, 0x4]
 	ldr r1, _0800D598 @ =gBattlerPositions
@@ -409,7 +409,7 @@ _0800D588:
 	strb r6, [r0]
 	b _0800D754
 	.align 2, 0
-_0800D590: .4byte gUnknown_3004FE0
+_0800D590: .4byte gBattlerControllerFuncs
 _0800D594: .4byte SetBankFuncToPlayerBufferRunCommand
 _0800D598: .4byte gBattlerPositions
 _0800D59C: .4byte sub_803A668
@@ -478,7 +478,7 @@ _0800D61A:
 	adds r3, r4, r0
 	ldrh r1, [r3, 0x18]
 	lsls r1, 2
-	ldr r2, _0800D644 @ =gUnknown_3004FE0
+	ldr r2, _0800D644 @ =gBattlerControllerFuncs
 	adds r1, r2
 	ldr r2, _0800D648 @ =SetBankFuncToPlayerBufferRunCommand
 	str r2, [r1]
@@ -493,7 +493,7 @@ _0800D61A:
 	b _0800D740
 	.align 2, 0
 _0800D640: .4byte gLinkPlayers
-_0800D644: .4byte gUnknown_3004FE0
+_0800D644: .4byte gBattlerControllerFuncs
 _0800D648: .4byte SetBankFuncToPlayerBufferRunCommand
 _0800D64C:
 	cmp r1, 0x3
@@ -550,7 +550,7 @@ _0800D6A6:
 	adds r2, r4, r0
 	ldrh r0, [r2, 0x18]
 	lsls r0, 2
-	ldr r1, _0800D6C8 @ =gUnknown_3004FE0
+	ldr r1, _0800D6C8 @ =gBattlerControllerFuncs
 	adds r0, r1
 	ldr r1, _0800D6CC @ =sub_80D4204
 	str r1, [r0]
@@ -563,7 +563,7 @@ _0800D6A6:
 	beq _0800D6D4
 	b _0800D740
 	.align 2, 0
-_0800D6C8: .4byte gUnknown_3004FE0
+_0800D6C8: .4byte gBattlerControllerFuncs
 _0800D6CC: .4byte sub_80D4204
 _0800D6D0:
 	cmp r1, 0x3
@@ -587,7 +587,7 @@ _0800D6EC:
 	adds r2, r4, r0
 	ldrh r0, [r2, 0x18]
 	lsls r0, 2
-	ldr r1, _0800D70C @ =gUnknown_3004FE0
+	ldr r1, _0800D70C @ =gBattlerControllerFuncs
 	adds r0, r1
 	ldr r1, _0800D710 @ =sub_803A668
 	str r1, [r0]
@@ -600,7 +600,7 @@ _0800D6EC:
 	beq _0800D718
 	b _0800D740
 	.align 2, 0
-_0800D70C: .4byte gUnknown_3004FE0
+_0800D70C: .4byte gBattlerControllerFuncs
 _0800D710: .4byte sub_803A668
 _0800D714:
 	cmp r0, 0x3
@@ -850,7 +850,7 @@ _0800D8E6:
 	movs r3, 0
 	cmp r3, r2
 	bge _0800D92E
-	ldr r6, _0800D908 @ =gUnknown_2022BC4
+	ldr r6, _0800D908 @ =gBattleBufferA
 	ldr r5, _0800D90C @ =gActiveBattler
 _0800D8F0:
 	ldrb r0, [r5]
@@ -865,7 +865,7 @@ _0800D8F0:
 	blt _0800D8F0
 	b _0800D92E
 	.align 2, 0
-_0800D908: .4byte gUnknown_2022BC4
+_0800D908: .4byte gBattleBufferA
 _0800D90C: .4byte gActiveBattler
 _0800D910:
 	movs r3, 0
@@ -1603,7 +1603,7 @@ _0800DEBC:
 	beq _0800DF64
 	b _0800DF7A
 _0800DEC2:
-	ldr r2, _0800DF2C @ =gUnknown_2023BC8
+	ldr r2, _0800DF2C @ =gBattleControllerExecFlags
 	ldr r1, _0800DF30 @ =gBitTable
 	lsls r0, r4, 2
 	adds r0, r1
@@ -1613,7 +1613,7 @@ _0800DEC2:
 	cmp r1, 0
 	bne _0800DF8C
 	lsls r0, r4, 9
-	ldr r1, _0800DF34 @ =gUnknown_2022BC4
+	ldr r1, _0800DF34 @ =gBattleBufferA
 	adds r0, r1
 	adds r1, r3, 0
 	adds r1, 0x8
@@ -1655,9 +1655,9 @@ _0800DEC2:
 	strb r0, [r2]
 	b _0800DF7A
 	.align 2, 0
-_0800DF2C: .4byte gUnknown_2023BC8
+_0800DF2C: .4byte gBattleControllerExecFlags
 _0800DF30: .4byte gBitTable
-_0800DF34: .4byte gUnknown_2022BC4
+_0800DF34: .4byte gBattleBufferA
 _0800DF38: .4byte gBattleTypeFlags
 _0800DF3C: .4byte sBattler_AI
 _0800DF40: .4byte gBattlerTarget
@@ -1676,7 +1676,7 @@ _0800DF4C:
 _0800DF60: .4byte gUnknown_20233C4
 _0800DF64:
 	ldrb r2, [r3, 0x8]
-	ldr r3, _0800DF98 @ =gUnknown_2023BC8
+	ldr r3, _0800DF98 @ =gBattleControllerExecFlags
 	ldr r1, _0800DF9C @ =gBitTable
 	lsls r0, r4, 2
 	adds r0, r1
@@ -1704,7 +1704,7 @@ _0800DF8C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800DF98: .4byte gUnknown_2023BC8
+_0800DF98: .4byte gBattleControllerExecFlags
 _0800DF9C: .4byte gBitTable
 _0800DFA0: .4byte gTasks
 	thumb_func_end Task_HandleCopyReceivedLinkBuffersData

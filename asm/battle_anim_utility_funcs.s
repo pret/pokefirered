@@ -3488,8 +3488,8 @@ _080BC396:
 	bx r1
 	thumb_func_end sub_80BC30C
 
-	thumb_func_start sub_80BC3A0
-sub_80BC3A0: @ 80BC3A0
+	thumb_func_start HandleIntroSlide
+HandleIntroSlide: @ 80BC3A0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -3549,7 +3549,7 @@ _080BC3E8:
 	.align 2, 0
 _080BC414: .4byte gUnknown_83E7CD4
 _080BC418: .4byte gTasks
-	thumb_func_end sub_80BC3A0
+	thumb_func_end HandleIntroSlide
 
 	thumb_func_start sub_80BC41C
 sub_80BC41C: @ 80BC41C

@@ -495,7 +495,7 @@ MarkAllBufferBanksForExecution: @ 80171D8
 	ldrb r0, [r4]
 	cmp r2, r0
 	bge _08017236
-	ldr r3, _08017210 @ =gUnknown_2023BC8
+	ldr r3, _08017210 @ =gBattleControllerExecFlags
 	ldr r5, _08017214 @ =gBitTable
 _080171F4:
 	ldm r5!, {r1}
@@ -511,7 +511,7 @@ _080171F4:
 	.align 2, 0
 _08017208: .4byte gBattleTypeFlags
 _0801720C: .4byte gBattlersCount
-_08017210: .4byte gUnknown_2023BC8
+_08017210: .4byte gBattleControllerExecFlags
 _08017214: .4byte gBitTable
 _08017218:
 	movs r2, 0
@@ -519,7 +519,7 @@ _08017218:
 	ldrb r0, [r4]
 	cmp r2, r0
 	bge _08017236
-	ldr r3, _08017240 @ =gUnknown_2023BC8
+	ldr r3, _08017240 @ =gBattleControllerExecFlags
 	ldr r5, _08017244 @ =gBitTable
 _08017226:
 	ldr r0, [r3]
@@ -536,7 +536,7 @@ _08017236:
 	bx r0
 	.align 2, 0
 _0801723C: .4byte gBattlersCount
-_08017240: .4byte gUnknown_2023BC8
+_08017240: .4byte gBattleControllerExecFlags
 _08017244: .4byte gBitTable
 	thumb_func_end MarkAllBufferBanksForExecution
 
@@ -551,7 +551,7 @@ MarkBufferBankForExecution: @ 8017248
 	ands r0, r1
 	cmp r0, 0
 	beq _0801727C
-	ldr r2, _08017274 @ =gUnknown_2023BC8
+	ldr r2, _08017274 @ =gBattleControllerExecFlags
 	ldr r1, _08017278 @ =gBitTable
 	lsls r0, r3, 2
 	adds r0, r1
@@ -563,10 +563,10 @@ MarkBufferBankForExecution: @ 8017248
 	b _0801728C
 	.align 2, 0
 _08017270: .4byte gBattleTypeFlags
-_08017274: .4byte gUnknown_2023BC8
+_08017274: .4byte gBattleControllerExecFlags
 _08017278: .4byte gBitTable
 _0801727C:
-	ldr r2, _08017290 @ =gUnknown_2023BC8
+	ldr r2, _08017290 @ =gBattleControllerExecFlags
 	ldr r1, _08017294 @ =gBitTable
 	lsls r0, r3, 2
 	adds r0, r1
@@ -578,7 +578,7 @@ _0801728C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08017290: .4byte gUnknown_2023BC8
+_08017290: .4byte gBattleControllerExecFlags
 _08017294: .4byte gBitTable
 	thumb_func_end MarkBufferBankForExecution
 
@@ -588,13 +588,13 @@ sub_8017298: @ 8017298
 	lsls r0, 24
 	lsrs r7, r0, 24
 	movs r4, 0
-	ldr r5, _080172AC @ =gUnknown_2023BC8
+	ldr r5, _080172AC @ =gBattleControllerExecFlags
 	ldr r1, _080172B0 @ =gBitTable
 	lsls r0, r7, 2
 	adds r6, r0, r1
 	b _080172C2
 	.align 2, 0
-_080172AC: .4byte gUnknown_2023BC8
+_080172AC: .4byte gBattleControllerExecFlags
 _080172B0: .4byte gBitTable
 _080172B4:
 	lsls r0, r4, 2
@@ -610,7 +610,7 @@ _080172C2:
 	lsrs r0, 24
 	cmp r4, r0
 	blt _080172B4
-	ldr r2, _080172E4 @ =gUnknown_2023BC8
+	ldr r2, _080172E4 @ =gBattleControllerExecFlags
 	movs r1, 0x80
 	lsls r1, 21
 	lsls r1, r7
@@ -621,7 +621,7 @@ _080172C2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080172E4: .4byte gUnknown_2023BC8
+_080172E4: .4byte gBattleControllerExecFlags
 	thumb_func_end sub_8017298
 
 	thumb_func_start CancelMultiTurnMoves
@@ -11970,7 +11970,7 @@ _0801D02C: .4byte 0xffffbfff
 	thumb_func_start sub_801D030
 sub_801D030: @ 801D030
 	push {lr}
-	ldr r0, _0801D050 @ =gUnknown_2023BC8
+	ldr r0, _0801D050 @ =gBattleControllerExecFlags
 	ldr r0, [r0]
 	cmp r0, 0
 	bne _0801D04C
@@ -11986,7 +11986,7 @@ _0801D04C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801D050: .4byte gUnknown_2023BC8
+_0801D050: .4byte gBattleControllerExecFlags
 _0801D054: .4byte gUnknown_825011C
 _0801D058: .4byte gUnknown_2023D74
 	thumb_func_end sub_801D030

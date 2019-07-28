@@ -157,7 +157,7 @@ gTrainerFrontPicPaletteTable:: @ 8239A1C
 gTrainerBackAnimsPtrTable:: @ 8239F74
 	.incbin "baserom.gba", 0x239F74, 0x18
 
-gUnknown_8239F8C:: @ 8239F8C
+gTrainerBackPicCoords:: @ 8239F8C
 	.incbin "baserom.gba", 0x239F8C, 0x18
 
 gTrainerBackPicTable:: @ 8239FA4

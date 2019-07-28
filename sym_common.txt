@@ -105,7 +105,7 @@ gUnknown_3004F70: @ 3004F70
 gUnknown_3004F74: @ 3004F74
 	.space 0xC
 
-gUnknown_3004F80: @ 3004F80
+gPreBattleCallback1: @ 3004F80
 	.space 0x4
 
 gUnknown_3004F84: @ 3004F84
@@ -117,7 +117,7 @@ gBattleResults: @ 3004F90
 gUnknown_3004FD4: @ 3004FD4
 	.space 0xC
 
-gUnknown_3004FE0: @ 3004FE0
+gBattlerControllerFuncs: @ 3004FE0
 	.space 0x10
 
 gHealthboxSpriteIds: @ 3004FF0

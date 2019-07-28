@@ -166,7 +166,7 @@ gUnknown_2022BBC: @ 2022BBC
 gUnknown_2022BC0: @ 2022BC0
 	.space 0x4
 
-gUnknown_2022BC4: @ 2022BC4
+gBattleBufferA: @ 2022BC4
 	.space 0x2
 
 gUnknown_2022BC6: @ 2022BC6
@@ -187,7 +187,7 @@ gUnknown_20233C8: @ 20233C8
 gActiveBattler: @ 2023BC4
 	.space 0x4
 
-gUnknown_2023BC8: @ 2023BC8
+gBattleControllerExecFlags: @ 2023BC8
 	.space 0x4
 
 gBattlersCount: @ 2023BCC
@@ -412,7 +412,7 @@ gUnknown_2023FF0: @ 2023FF0
 gBattleResources: @ 2023FF4
 	.space 0x4
 
-gUnknown_2023FF8: @ 2023FF8
+gActionSelectionCursor: @ 2023FF8
 	.space 0x4
 
 gUnknown_2023FFC: @ 2023FFC
@@ -424,7 +424,7 @@ gUnknown_2024000: @ 2024000
 gBattlerInMenuId: @ 2024004
 	.space 0x1
 
-gUnknown_2024005: @ 2024005
+gDoingBattleAnim: @ 2024005
 	.space 0x3
 
 gTransformedPersonalities: @ 2024008

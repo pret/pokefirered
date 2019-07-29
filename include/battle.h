@@ -29,9 +29,9 @@
 #define SIDE_PLAYER     0x0
 #define SIDE_OPPONENT   0x1
 
-#define GET_BANK_IDENTITY(bank)((gBanksByIdentity[bank]))
-#define GET_BANK_SIDE(bank)((GetBattlerPosition(bank) & BIT_SIDE))
-#define GET_BANK_SIDE2(bank)((GET_BANK_IDENTITY(bank) & BIT_SIDE))
+#define GET_BATTLER_POSITION(battler)((gBattlerPositions[battler]))
+#define GET_BATTLER_SIDE(battler)((GetBattlerPosition(battler) & BIT_SIDE))
+#define GET_BATTLER_SIDE2(battler)((GET_BATTLER_POSITION(battler) & BIT_SIDE))
 
 #define TRAINER_OPPONENT_3FE        0x3FE
 #define TRAINER_OPPONENT_C00        0xC00
@@ -567,11 +567,11 @@ struct BattleStruct
     u8 field_A6;
     u8 field_A7;
     u16 hpOnSwitchout[2];
-    u32 savedBattleTypeFlags;
     u8 abilityPreventingSwitchout;
     u8 hpScale;
     u8 synchronizeMoveEffect;
-    u8 field_B3;
+    u8 field_AF;
+    u32 savedBattleTypeFlags; // TODO: Is it correct to place it here?  
     u8 field_B4;
     u8 field_B5;
     u8 field_B6;
@@ -780,13 +780,13 @@ struct BattleScripting
     u8 animArg2;
     u16 tripleKickPower;
     u8 atk49_state;
-    u8 bankWithAbility;
+    u8 battlerWithAbility;
     u8 multihitMoveEffect;
-    u8 bank;
+    u8 battler;
     u8 animTurn;
     u8 animTargetsHit;
     u8 statChanger;
-    u8 field_1B;
+    bool8 statAnimPlayed;
     u8 atk23_state;
     u8 battleStyle;
     u8 atk6C_state;
@@ -795,11 +795,9 @@ struct BattleScripting
     u8 reshowMainState;
     u8 reshowHelperState;
     u8 field_23;
-    u8 field_24;
+    u8 windowsType; // TODO: what does this field do in firered? 
     u8 multiplayerId;
 };
-
-extern struct BattleScripting gBattleScripting;
 
 // functions
 
@@ -954,6 +952,8 @@ extern u16 gMoveToLearn;
 extern u16 gBattleMovePower;
 extern struct BattleEnigmaBerry gEnigmaBerries[MAX_BATTLERS_COUNT];
 extern u16 gCurrentMove;
+extern u16 gChosenMove;
+extern u16 gCalledMove;
 extern u8 gCritMultiplier;
 extern u16 gBattleWeather;
 extern u8 gLastUsedAbility;
@@ -978,5 +978,13 @@ extern bool8 gDoingBattleAnim;
 extern void *gUnknown_3005EE0[];
 extern u8 *gUnknown_2022BB8;
 extern u8 *gUnknown_2022BBC;
+extern void (*gBattleMainFunc)(void);
+extern u8 gMoveSelectionCursor[MAX_BATTLERS_COUNT];
+extern u32 gUnknown_2022B54;
+extern u8 gUnknown_2023DDC;
+extern u8 gBattlerAttacker;
+extern u8 gEffectBattler;
+extern u8 gUnknown_2023D72;
+extern struct BattleScripting gBattleScripting;
 
 #endif // GUARD_BATTLE_H

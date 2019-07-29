@@ -79,20 +79,7 @@ gUnknown_2022860: @ 2022860
 	.space 0xC
 
 	@ .include "src/link_rfu.o"
-gUnknown_202286C: @ 202286C
-	.space 0x1
-
-gUnknown_202286D: @ 202286D
-	.space 0x1
-
-gUnknown_202286E: @ 202286E
-	.space 0x2
-
-gUnknown_2022870: @ 2022870
-	.space 0x4
-
-gUnknown_2022874: @ 2022874
-	.space 0x100
+	.include "src/battle_controllers.o"
 
 gBattle_BG0_X: @ 2022974
 	.space 0x2
@@ -139,7 +126,7 @@ gBattleTextBuff1: @ 2022AB8
 gBattleTextBuff2: @ 2022AC8
 	.space 0x10
 
-gUnknown_2022AD8: @ 2022AD8
+gBattleTextBuff3: @ 2022AD8
 	.space 0x10
 
 gUnknown_2022AE8: @ 2022AE8
@@ -178,7 +165,7 @@ gUnknown_2022BC7: @ 2022BC7
 gUnknown_2022BC8: @ 2022BC8
 	.space 0x7FC
 
-gUnknown_20233C4: @ 20233C4
+gBattleBufferB: @ 20233C4
 	.space 0x4
 
 gUnknown_20233C8: @ 20233C8
@@ -244,7 +231,7 @@ gUnknown_2023D49: @ 2023D49
 gCurrentMove: @ 2023D4A
 	.space 0x2
 
-gUnknown_2023D4C: @ 2023D4C
+gChosenMove: @ 2023D4C
 	.space 0x2
 
 gUnknown_2023D4E: @ 2023D4E
@@ -259,13 +246,13 @@ gUnknown_2023D54: @ 2023D54
 gUnknown_2023D58: @ 2023D58
 	.space 0x10
 
-gUnknown_2023D68: @ 2023D68
+gLastUsedItem: @ 2023D68
 	.space 0x2
 
 gLastUsedAbility: @ 2023D6A
 	.space 0x1
 
-sBattler_AI: @ 2023D6B
+gBattlerAttacker: @ 2023D6B
 	.space 0x1
 
 gBattlerTarget: @ 2023D6C
@@ -274,7 +261,7 @@ gBattlerTarget: @ 2023D6C
 gUnknown_2023D6D: @ 2023D6D
 	.space 0x1
 
-gUnknown_2023D6E: @ 2023D6E
+gEffectBattler: @ 2023D6E
 	.space 0x1
 
 gPotentialItemEffectBattler: @ 2023D6F
@@ -415,7 +402,7 @@ gBattleResources: @ 2023FF4
 gActionSelectionCursor: @ 2023FF8
 	.space 0x4
 
-gUnknown_2023FFC: @ 2023FFC
+gMoveSelectionCursor: @ 2023FFC
 	.space 0x4
 
 gUnknown_2024000: @ 2024000

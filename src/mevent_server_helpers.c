@@ -155,7 +155,7 @@ static bool32 mevent_send_func(struct mevent_srv_sub * svr)
     switch (svr->seqno)
     {
         case 0:
-            if (sub_800A4BC())
+            if (IsLinkTaskFinished())
             {
                 header.ident = svr->sendIdent;
                 header.size = svr->sendSize;
@@ -167,7 +167,7 @@ static bool32 mevent_send_func(struct mevent_srv_sub * svr)
             }
             break;
         case 1:
-            if (sub_800A4BC())
+            if (IsLinkTaskFinished())
             {
                 if (mevent_has_received(svr->sendPlayerNo))
                 {
@@ -189,7 +189,7 @@ static bool32 mevent_send_func(struct mevent_srv_sub * svr)
             }
             break;
         case 2:
-            if (sub_800A4BC())
+            if (IsLinkTaskFinished())
             {
                 if (CalcCRC16WithTable(svr->sendBfr, svr->sendSize) != svr->sendCRC)
                     sub_80FA190();

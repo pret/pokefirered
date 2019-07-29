@@ -3078,7 +3078,7 @@ sub_80BC060: @ 80BC060
 	ldrb r1, [r1]
 	strb r1, [r2]
 	ldr r2, _080BC088 @ =gBattleAnimTarget
-	ldr r1, _080BC08C @ =gUnknown_2023D6E
+	ldr r1, _080BC08C @ =gEffectBattler
 	ldrb r1, [r1]
 	strb r1, [r2]
 	bl DestroyAnimVisualTask
@@ -3088,7 +3088,7 @@ sub_80BC060: @ 80BC060
 _080BC080: .4byte gBattleAnimAttacker
 _080BC084: .4byte gBattlerTarget
 _080BC088: .4byte gBattleAnimTarget
-_080BC08C: .4byte gUnknown_2023D6E
+_080BC08C: .4byte gEffectBattler
 	thumb_func_end sub_80BC060
 
 	thumb_func_start sub_80BC090
@@ -3151,11 +3151,11 @@ sub_80BC0FC: @ 80BC0FC
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080BC11C @ =gBattleAnimAttacker
-	ldr r1, _080BC120 @ =sBattler_AI
+	ldr r1, _080BC120 @ =gBattlerAttacker
 	ldrb r1, [r1]
 	strb r1, [r2]
 	ldr r2, _080BC124 @ =gBattleAnimTarget
-	ldr r1, _080BC128 @ =gUnknown_2023D6E
+	ldr r1, _080BC128 @ =gEffectBattler
 	ldrb r1, [r1]
 	strb r1, [r2]
 	bl DestroyAnimVisualTask
@@ -3163,9 +3163,9 @@ sub_80BC0FC: @ 80BC0FC
 	bx r0
 	.align 2, 0
 _080BC11C: .4byte gBattleAnimAttacker
-_080BC120: .4byte sBattler_AI
+_080BC120: .4byte gBattlerAttacker
 _080BC124: .4byte gBattleAnimTarget
-_080BC128: .4byte gUnknown_2023D6E
+_080BC128: .4byte gEffectBattler
 	thumb_func_end sub_80BC0FC
 
 	thumb_func_start sub_80BC12C

@@ -47,6 +47,7 @@ bool8 TryRunFromBattle(u8 bank);
 void sub_800FD9C(void);
 void sub_80120C4(struct Sprite *);
 void sub_8012100(struct Sprite *);
+void nullsub_12(void);
 
 extern const u8 gStatusConditionString_PoisonJpn[8];
 extern const u8 gStatusConditionString_SleepJpn[8];

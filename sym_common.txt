@@ -108,7 +108,7 @@ gUnknown_3004F74: @ 3004F74
 gPreBattleCallback1: @ 3004F80
 	.space 0x4
 
-gUnknown_3004F84: @ 3004F84
+gBattleMainFunc: @ 3004F84
 	.space 0xC
 
 gBattleResults: @ 3004F90

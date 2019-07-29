@@ -10,8 +10,8 @@ nullsub_81: @ 80E75AC
 	bx lr
 	thumb_func_end nullsub_81
 
-	thumb_func_start sub_80E75B0
-sub_80E75B0: @ 80E75B0
+	thumb_func_start SetControllerToOakOrOldman
+SetControllerToOakOrOldman: @ 80E75B0
 	ldr r1, _080E75DC @ =gBattlerControllerFuncs
 	ldr r0, _080E75E0 @ =gActiveBattler
 	ldrb r0, [r0]
@@ -39,7 +39,7 @@ _080E75DC: .4byte gBattlerControllerFuncs
 _080E75E0: .4byte gActiveBattler
 _080E75E4: .4byte sub_80E75EC
 _080E75E8: .4byte gBattleStruct
-	thumb_func_end sub_80E75B0
+	thumb_func_end SetControllerToOakOrOldman
 
 	thumb_func_start sub_80E75EC
 sub_80E75EC: @ 80E75EC
@@ -154,7 +154,7 @@ _080E76C8:
 	movs r0, 0x1
 	movs r1, 0x3
 	movs r2, 0
-	bl EmitTwoReturnValues
+	bl BtlController_EmitTwoReturnValues
 	b _080E781A
 _080E76D4:
 	movs r0, 0x20
@@ -316,7 +316,7 @@ _080E780A:
 	movs r1, 0xC
 _080E7814:
 	movs r2, 0
-	bl EmitTwoReturnValues
+	bl BtlController_EmitTwoReturnValues
 _080E781A:
 	bl WallyBufferExecCompleted
 	b _080E7838
@@ -410,7 +410,7 @@ _080E78B4:
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0
-	bl EmitTwoReturnValues
+	bl BtlController_EmitTwoReturnValues
 	bl WallyBufferExecCompleted
 _080E78D8:
 	pop {r4}
@@ -598,7 +598,7 @@ sub_80E7A14: @ 80E7A14
 	ldrb r1, [r0]
 	ldr r2, _080E7A58 @ =gUnknown_203B0DC
 	movs r0, 0x1
-	bl EmitChosenMonReturnValue
+	bl BtlController_EmitChosenMonReturnValue
 	b _080E7A66
 	.align 2, 0
 _080E7A44: .4byte gMain
@@ -611,7 +611,7 @@ _080E7A5C:
 	movs r0, 0x1
 	movs r1, 0x6
 	movs r2, 0
-	bl EmitChosenMonReturnValue
+	bl BtlController_EmitChosenMonReturnValue
 _080E7A66:
 	bl WallyBufferExecCompleted
 _080E7A6A:
@@ -710,7 +710,7 @@ _080E7B34:
 	ldr r0, _080E7B48 @ =gSpecialVar_ItemId
 	ldrh r1, [r0]
 	movs r0, 0x1
-	bl EmitOneReturnValue
+	bl BtlController_EmitOneReturnValue
 	bl WallyBufferExecCompleted
 _080E7B42:
 	pop {r0}
@@ -1145,7 +1145,7 @@ _080E7E4A:
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xB
-	bl EmitTwoReturnValues
+	bl BtlController_EmitTwoReturnValues
 	strb r5, [r4]
 	bl IsDoubleBattle
 	lsls r0, 24
@@ -1437,7 +1437,7 @@ _080E807C:
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xB
-	bl EmitTwoReturnValues
+	bl BtlController_EmitTwoReturnValues
 	strb r5, [r4]
 	ldr r0, _080E8158 @ =sub_80E8190
 	str r0, [r6]
@@ -2344,7 +2344,7 @@ _080E8880:
 	ldr r0, _080E88B8 @ =gSpecialVar_ItemId
 	ldrh r1, [r0]
 	movs r0, 0x1
-	bl EmitOneReturnValue
+	bl BtlController_EmitOneReturnValue
 	bl WallyBufferExecCompleted
 	ldr r0, _080E88BC @ =gBattleStruct
 	ldr r0, [r0]
@@ -2733,7 +2733,7 @@ _080E8B9E:
 	lsrs r1, 16
 	movs r0, 0x1
 	mov r2, sp
-	bl EmitDataTransfer
+	bl BtlController_EmitDataTransfer
 	bl WallyBufferExecCompleted
 	add sp, 0x100
 	pop {r4-r6}
@@ -6161,7 +6161,7 @@ _080EA83E:
 	lsls r2, 1
 	movs r0, 0x1
 	movs r1, 0xA
-	bl EmitTwoReturnValues
+	bl BtlController_EmitTwoReturnValues
 	bl WallyBufferExecCompleted
 _080EA866:
 	pop {r4}

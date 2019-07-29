@@ -1054,7 +1054,7 @@ sub_80EF490: @ 80EF490
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _080EF4B4 @ =gUnknown_2023D68
+	ldr r0, _080EF4B4 @ =gLastUsedItem
 	ldrh r0, [r0]
 	bl ItemIdToBallId
 	lsls r0, 24
@@ -1066,7 +1066,7 @@ sub_80EF490: @ 80EF490
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080EF4B4: .4byte gUnknown_2023D68
+_080EF4B4: .4byte gLastUsedItem
 	thumb_func_end sub_80EF490
 
 	thumb_func_start sub_80EF4B8
@@ -1075,7 +1075,7 @@ sub_80EF4B8: @ 80EF4B8
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _080EF4DC @ =gUnknown_2023D68
+	ldr r0, _080EF4DC @ =gLastUsedItem
 	ldrh r0, [r0]
 	bl ItemIdToBallId
 	lsls r0, 24
@@ -1087,7 +1087,7 @@ sub_80EF4B8: @ 80EF4B8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080EF4DC: .4byte gUnknown_2023D68
+_080EF4DC: .4byte gLastUsedItem
 	thumb_func_end sub_80EF4B8
 
 	thumb_func_start sub_80EF4E0
@@ -1210,7 +1210,7 @@ sub_80EF5AC: @ 80EF5AC
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
-	ldr r0, _080EF674 @ =gUnknown_2023D68
+	ldr r0, _080EF674 @ =gLastUsedItem
 	ldrh r0, [r0]
 	bl ItemIdToBallId
 	adds r1, r0, 0
@@ -1297,7 +1297,7 @@ sub_80EF5AC: @ 80EF5AC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080EF674: .4byte gUnknown_2023D68
+_080EF674: .4byte gLastUsedItem
 _080EF678: .4byte gUnknown_82606F4
 _080EF67C: .4byte gSprites
 _080EF680: .4byte gBattleAnimTarget
@@ -1369,7 +1369,7 @@ _080EF6F8:
 	bne _080EF708
 	movs r6, 0xD
 _080EF708:
-	ldr r0, _080EF7C8 @ =gUnknown_2023D68
+	ldr r0, _080EF7C8 @ =gLastUsedItem
 	ldrh r0, [r0]
 	bl ItemIdToBallId
 	adds r4, r0, 0
@@ -1457,7 +1457,7 @@ _080EF708:
 	bx r0
 	.align 2, 0
 _080EF7C4: .4byte gSaveBlock2Ptr
-_080EF7C8: .4byte gUnknown_2023D68
+_080EF7C8: .4byte gLastUsedItem
 _080EF7CC: .4byte gUnknown_82606F4
 _080EF7D0: .4byte gSprites
 _080EF7D4: .4byte gBattleAnimTarget
@@ -1654,7 +1654,7 @@ _080EF954:
 	strh r0, [r4, 0x38]
 	ldr r0, _080EF9A8 @ =sub_80EF9B4
 	str r0, [r4, 0x1C]
-	ldr r0, _080EF9AC @ =gUnknown_2023D68
+	ldr r0, _080EF9AC @ =gLastUsedItem
 	ldrh r0, [r0]
 	bl ItemIdToBallId
 	lsls r0, 24
@@ -1687,7 +1687,7 @@ _080EF99E:
 	bx r0
 	.align 2, 0
 _080EF9A8: .4byte sub_80EF9B4
-_080EF9AC: .4byte gUnknown_2023D68
+_080EF9AC: .4byte gLastUsedItem
 _080EF9B0: .4byte gBattleAnimTarget
 	thumb_func_end sub_80EF8F0
 
@@ -2873,7 +2873,7 @@ sub_80F02B0: @ 80F02B0
 	bl StartSpriteAffineAnim
 	ldr r0, _080F0364 @ =sub_80F0378
 	str r0, [r4, 0x1C]
-	ldr r0, _080F0368 @ =gUnknown_2023D68
+	ldr r0, _080F0368 @ =gLastUsedItem
 	ldrh r0, [r0]
 	bl ItemIdToBallId
 	lsls r0, 24
@@ -2949,7 +2949,7 @@ _080F0302:
 	bx r0
 	.align 2, 0
 _080F0364: .4byte sub_80F0378
-_080F0368: .4byte gUnknown_2023D68
+_080F0368: .4byte gLastUsedItem
 _080F036C: .4byte gBattleAnimTarget
 _080F0370: .4byte gSprites
 _080F0374: .4byte gBattlerSpriteIds
@@ -5446,7 +5446,7 @@ sub_80F1700: @ 80F1700
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080F1718 @ =gBattleAnimTarget
-	ldr r1, _080F171C @ =gUnknown_2023D6E
+	ldr r1, _080F171C @ =gEffectBattler
 	ldrb r1, [r1]
 	strb r1, [r2]
 	bl DestroyAnimVisualTask
@@ -5454,7 +5454,7 @@ sub_80F1700: @ 80F1700
 	bx r0
 	.align 2, 0
 _080F1718: .4byte gBattleAnimTarget
-_080F171C: .4byte gUnknown_2023D6E
+_080F171C: .4byte gEffectBattler
 	thumb_func_end sub_80F1700
 
 	thumb_func_start sub_80F1720

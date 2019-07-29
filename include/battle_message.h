@@ -35,11 +35,11 @@
 #define B_TXT_EFF_ABILITY 0x1B
 #define B_TXT_TRAINER1_CLASS 0x1C
 #define B_TXT_TRAINER1_NAME 0x1D
-#define B_TXT_1E 0x1E // trainer name for a link player
-#define B_TXT_1F 0x1F // trainer name for a link player
-#define B_TXT_20 0x20 // trainer name for a link player
-#define B_TXT_21 0x21 // trainer name for a link player
-#define B_TXT_22 0x22 // trainer name for a link player
+#define B_TXT_LINK_PLAYER_NAME 0x1E
+#define B_TXT_LINK_PARTNER_NAME 0x1F
+#define B_TXT_LINK_OPPONENT1_NAME 0x20
+#define B_TXT_LINK_OPPONENT2_NAME 0x21
+#define B_TXT_LINK_SCR_TRAINER_NAME 0x22
 #define B_TXT_PLAYER_NAME 0x23
 #define B_TXT_TRAINER1_LOSE_TEXT 0x24
 #define B_TXT_TRAINER1_WIN_TEXT 0x25
@@ -196,7 +196,7 @@
     textVar[4] = B_BUFF_EOS;                                    \
 }
 
-struct StringInfoBattle
+struct BattleMsgData
 {
     u16 currentMove;
     u16 originallyUsedMove;
@@ -205,7 +205,7 @@ struct StringInfoBattle
     u8 scrActive;
     u8 unk1605E;
     u8 hpScale;
-    u8 StringBank;
+    u8 itemEffectBattler;
     u8 moveType;
     u8 abilities[4];
     u8 textBuffs[3][0x10];
@@ -219,6 +219,8 @@ void SetPpNumbersPaletteInMoveSelection(void);
 u8 GetCurrentPpToMaxPpState(u8 currentPp, u8 maxPp);
 void BattlePutTextOnWindow(const u8* text, u8 arg1);
 bool8 sub_80D89B0(u16);
+
+extern struct BattleMsgData *gBattleMsgDataPtr;
 
 #define TEXT_BUFF_ARRAY_COUNT   16
 

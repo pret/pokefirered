@@ -18290,7 +18290,7 @@ _08127BD8:
 	ldrb r0, [r0, 0xB]
 	cmp r0, 0x4
 	bne _08127BEC
-	bl sub_8044348
+	bl SetMonPreventsSwitchingString
 	b _08127C8A
 	.align 2, 0
 _08127BE8: .4byte gUnknown_203B0A0

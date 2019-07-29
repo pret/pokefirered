@@ -145,6 +145,7 @@ extern struct LinkPlayer gLinkPlayers[];
 extern u16 word_3002910[];
 extern bool8 gReceivedRemoteLinkPlayers;
 extern bool8 gLinkVSyncDisabled;
+extern u8 gWirelessCommType;
 
 extern u8 gUnknown_3003F84;
 extern u64 gSioMlt_Recv;
@@ -199,15 +200,16 @@ void sub_8011BD0(void);
 u8 sub_800ABAC(void);
 u8 sub_800ABBC(void);
 void sub_800AC34(void);
-void sub_8009804(void);
-bool8 sub_800AA48(void);
-void sub_800A5BC(void);
+void OpenLink(void);
+bool8 IsLinkMaster(void);
+void CheckShouldAdvanceLinkState(void);
 void sub_800AA80(u8);
 void sub_80098D8(void);
 void CloseLink(void);
-bool8 sub_800A4BC(void);
+bool8 IsLinkTaskFinished(void);
 bool32 sub_800B270(void);
 void sub_800B388(void);
 void sub_8054A28(void);
+void sub_800B1F4(void);
 
 #endif // GUARD_LINK_H

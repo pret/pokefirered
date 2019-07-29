@@ -4996,7 +4996,7 @@ _080FAC58:
 	.align 2, 0
 _080FAC74: .4byte 0x0000099d
 _080FAC78:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FACD6
@@ -5103,7 +5103,7 @@ _080FAD3A:
 	.align 2, 0
 _080FAD50: .4byte gBlockSendBuffer
 _080FAD54:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FAD8A
@@ -6875,7 +6875,7 @@ sub_80FBA78: @ 80FBA78
 	adds r0, r2, 0
 	strh r0, [r1]
 	bl sub_800B1F4
-	bl sub_8009804
+	bl OpenLink
 	ldr r0, _080FBB00 @ =gMain
 	ldrh r0, [r0, 0x24]
 	bl SeedRng

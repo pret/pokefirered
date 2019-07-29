@@ -19,7 +19,6 @@
 #include "evolution_scene.h"
 #include "battle_message.h"
 #include "battle_util.h"
-#include "battle_ai_script_commands.h"
 #include "link.h"
 #include "m4a.h"
 #include "sound.h"
@@ -2592,7 +2591,7 @@ u8 CountAliveMonsInBattle(u8 caseId)
     case BATTLE_ALIVE_ATK_SIDE:
         for (i = 0; i < 4; i++)
         {
-            if (GetBattlerSide(i) == GetBattlerSide(sBattler_AI) && !(gAbsentBattlerFlags & gBitTable[i]))
+            if (GetBattlerSide(i) == GetBattlerSide(gBattlerAttacker) && !(gAbsentBattlerFlags & gBitTable[i]))
                 retVal++;
         }
         break;
@@ -6106,7 +6105,7 @@ const u8 *Battle_PrintStatBoosterEffectMessage(u16 itemId)
             }
             else
             {
-                sBattler_AI = gBattlerInMenuId;
+                gBattlerAttacker = gBattlerInMenuId;
                 BattleStringExpandPlaceholdersToDisplayedString(BattleText_GetPumped);
             }
         }
@@ -6114,7 +6113,7 @@ const u8 *Battle_PrintStatBoosterEffectMessage(u16 itemId)
 
     if (itemEffect[3] & 0x80)
     {
-        sBattler_AI = gBattlerInMenuId;
+        gBattlerAttacker = gBattlerInMenuId;
         BattleStringExpandPlaceholdersToDisplayedString(BattleText_MistShroud);
     }
 
@@ -7075,15 +7074,9 @@ void BoxMonRestorePP(struct BoxPokemon *boxMon)
     }
 }
 
-// SetMonPreventsSwitchingString
-void sub_8044348(void)
+void SetMonPreventsSwitchingString(void)
 {
-#ifdef NONMATCHING
-    gLastUsedAbility = gBattleStruct -> abilityPreventingSwitchout; // fixed from the original
-#else
-    gLastUsedAbility = ((u8 *) gBattleStruct)[0xac]; // huh? why is this wrong?
-#endif
-
+    gLastUsedAbility = gBattleStruct -> abilityPreventingSwitchout;
     gBattleTextBuff1[0] = B_BUFF_PLACEHOLDER_BEGIN;
     gBattleTextBuff1[1] = B_BUFF_MON_NICK_WITH_PREFIX;
     gBattleTextBuff1[2] = gBattleStruct->battlerPreventingSwitchout;

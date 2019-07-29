@@ -111,7 +111,7 @@ DoMoveAnim: @ 807259C
 	lsls r1, 16
 	lsrs r1, 16
 	ldr r2, _080725C0 @ =gBattleAnimAttacker
-	ldr r0, _080725C4 @ =sBattler_AI
+	ldr r0, _080725C4 @ =gBattlerAttacker
 	ldrb r0, [r0]
 	strb r0, [r2]
 	ldr r2, _080725C8 @ =gBattleAnimTarget
@@ -125,7 +125,7 @@ DoMoveAnim: @ 807259C
 	bx r0
 	.align 2, 0
 _080725C0: .4byte gBattleAnimAttacker
-_080725C4: .4byte sBattler_AI
+_080725C4: .4byte gBattlerAttacker
 _080725C8: .4byte gBattleAnimTarget
 _080725CC: .4byte gBattlerTarget
 _080725D0: .4byte gUnknown_81C68F4

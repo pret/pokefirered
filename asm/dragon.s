@@ -266,7 +266,7 @@ sub_80B7448: @ 80B7448
 	ldr r0, _080B74A0 @ =gBattleAnimArgs
 	ldrh r0, [r0]
 	strh r0, [r6, 0x3A]
-	ldr r4, _080B74A4 @ =sBattler_AI
+	ldr r4, _080B74A4 @ =gBattlerAttacker
 	ldrb r0, [r4]
 	movs r1, 0
 	bl sub_8076B2C
@@ -284,7 +284,7 @@ sub_80B7448: @ 80B7448
 	.align 2, 0
 _080B749C: .4byte gBattleAnimAttacker
 _080B74A0: .4byte gBattleAnimArgs
-_080B74A4: .4byte sBattler_AI
+_080B74A4: .4byte gBattlerAttacker
 _080B74A8:
 	lsrs r0, r1, 17
 _080B74AA:

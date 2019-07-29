@@ -40,7 +40,7 @@ ShouldSwitchIfPerishSong: @ 8039188
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r2, 0
-	bl EmitTwoReturnValues
+	bl BtlController_EmitTwoReturnValues
 	movs r0, 0x1
 	b _080391E6
 	.align 2, 0
@@ -84,7 +84,7 @@ _08039208:
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r2, 0
-	bl EmitTwoReturnValues
+	bl BtlController_EmitTwoReturnValues
 	movs r0, 0x1
 	b _0803935E
 	.align 2, 0
@@ -407,7 +407,7 @@ _080394A0:
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r2, 0
-	bl EmitTwoReturnValues
+	bl BtlController_EmitTwoReturnValues
 	movs r0, 0x1
 	b _0803958A
 	.align 2, 0
@@ -628,7 +628,7 @@ _08039668:
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r2, 0
-	bl EmitTwoReturnValues
+	bl BtlController_EmitTwoReturnValues
 _08039686:
 	movs r0, 0x1
 _08039688:
@@ -951,7 +951,7 @@ _080398EC:
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r2, 0
-	bl EmitTwoReturnValues
+	bl BtlController_EmitTwoReturnValues
 	movs r0, 0x1
 	b _08039A56
 	.align 2, 0
@@ -1518,7 +1518,7 @@ _08039D96:
 	lsls r2, 8
 	movs r0, 0x1
 	movs r1, 0
-	bl EmitTwoReturnValues
+	bl BtlController_EmitTwoReturnValues
 _08039DA8:
 	pop {r4-r6}
 	pop {r0}
@@ -2604,7 +2604,7 @@ _0803A5FC:
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0
-	bl EmitTwoReturnValues
+	bl BtlController_EmitTwoReturnValues
 	ldr r0, _0803A630 @ =gActiveBattler
 	ldrb r0, [r0]
 	lsrs r0, 1

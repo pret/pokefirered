@@ -10,8 +10,8 @@ nullsub_77: @ 80D4200
 	bx lr
 	thumb_func_end nullsub_77
 
-	thumb_func_start sub_80D4204
-sub_80D4204: @ 80D4204
+	thumb_func_start SetControllerToLinkPartner
+SetControllerToLinkPartner: @ 80D4204
 	ldr r1, _080D4214 @ =gBattlerControllerFuncs
 	ldr r0, _080D4218 @ =gActiveBattler
 	ldrb r0, [r0]
@@ -24,7 +24,7 @@ sub_80D4204: @ 80D4204
 _080D4214: .4byte gBattlerControllerFuncs
 _080D4218: .4byte gActiveBattler
 _080D421C: .4byte LinkPartnerBufferRunCommand
-	thumb_func_end sub_80D4204
+	thumb_func_end SetControllerToLinkPartner
 
 	thumb_func_start LinkPartnerBufferRunCommand
 LinkPartnerBufferRunCommand: @ 80D4220
@@ -1144,7 +1144,7 @@ _080D4B1A:
 	lsrs r1, 16
 	movs r0, 0x1
 	mov r2, sp
-	bl EmitDataTransfer
+	bl BtlController_EmitDataTransfer
 	bl sub_80D49E8
 	add sp, 0x100
 	pop {r4-r6}

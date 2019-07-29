@@ -406,7 +406,7 @@ _0807DE1E:
 	bl sub_800AB9C
 	b _0807DE32
 _0807DE24:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807DE50

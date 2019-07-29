@@ -236,7 +236,7 @@ sub_8009640: @ 8009640
 	ldr r2, _080096DC @ =0x00001111
 	adds r0, r2, 0
 	strh r0, [r1]
-	bl sub_8009804
+	bl OpenLink
 	ldr r0, _080096E0 @ =gMain
 	ldrh r0, [r0, 0x24]
 	bl SeedRng
@@ -431,8 +431,8 @@ _080097FC: .4byte gTasks
 _08009800: .4byte gUnknown_3003F84
 	thumb_func_end task02_080097CC
 
-	thumb_func_start sub_8009804
-sub_8009804: @ 8009804
+	thumb_func_start OpenLink
+OpenLink: @ 8009804
 	push {r4-r6,lr}
 	ldr r0, _0800984C @ =gWirelessCommType
 	ldrb r4, [r0]
@@ -505,7 +505,7 @@ _080098A8: .4byte gReceivedRemoteLinkPlayers
 _080098AC: .4byte gUnknown_3003EB8
 _080098B0: .4byte gUnknown_3003F30
 _080098B4: .4byte gUnknown_3003F2C
-	thumb_func_end sub_8009804
+	thumb_func_end OpenLink
 
 	thumb_func_start CloseLink
 CloseLink: @ 80098B8
@@ -1556,7 +1556,7 @@ sub_800A0B4: @ 800A0B4
 	str r1, [r0]
 	ldr r0, _0800A0CC @ =gLinkTimeOutCounter
 	strh r1, [r0]
-	bl sub_8009804
+	bl OpenLink
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -2115,8 +2115,8 @@ _0800A4B4: .4byte gUnknown_3003F90
 _0800A4B8: .4byte 0x0000cccc
 	thumb_func_end sub_800A474
 
-	thumb_func_start sub_800A4BC
-sub_800A4BC: @ 800A4BC
+	thumb_func_start IsLinkTaskFinished
+IsLinkTaskFinished: @ 800A4BC
 	push {lr}
 	ldr r0, _0800A4D0 @ =gWirelessCommType
 	ldrb r0, [r0]
@@ -2142,7 +2142,7 @@ _0800A4E2:
 	bx r1
 	.align 2, 0
 _0800A4E8: .4byte gUnknown_3003F80
-	thumb_func_end sub_800A4BC
+	thumb_func_end IsLinkTaskFinished
 
 	thumb_func_start GetBlockReceivedStatus
 GetBlockReceivedStatus: @ 800A4EC
@@ -2265,8 +2265,8 @@ _0800A5B2:
 _0800A5B8: .4byte gUnknown_3003EBC
 	thumb_func_end ResetBlockReceivedFlag
 
-	thumb_func_start sub_800A5BC
-sub_800A5BC: @ 800A5BC
+	thumb_func_start CheckShouldAdvanceLinkState
+CheckShouldAdvanceLinkState: @ 800A5BC
 	push {lr}
 	ldr r0, _0800A5DC @ =gUnknown_3003F20
 	ldr r1, [r0]
@@ -2287,7 +2287,7 @@ _0800A5D8:
 	.align 2, 0
 _0800A5DC: .4byte gUnknown_3003F20
 _0800A5E0: .4byte gUnknown_3003F84
-	thumb_func_end sub_800A5BC
+	thumb_func_end CheckShouldAdvanceLinkState
 
 	thumb_func_start LinkTestCalcBlockChecksum
 LinkTestCalcBlockChecksum: @ 800A5E4
@@ -2883,8 +2883,8 @@ GetLinkPlayerCount_2: @ 800AA38
 _0800AA44: .4byte gUnknown_3003F20
 	thumb_func_end GetLinkPlayerCount_2
 
-	thumb_func_start sub_800AA48
-sub_800AA48: @ 800AA48
+	thumb_func_start IsLinkMaster
+IsLinkMaster: @ 800AA48
 	push {lr}
 	ldr r0, _0800AA60 @ =gWirelessCommType
 	ldrb r0, [r0]
@@ -2906,7 +2906,7 @@ _0800AA68:
 _0800AA70:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800AA48
+	thumb_func_end IsLinkMaster
 
 	thumb_func_start sub_800AA74
 sub_800AA74: @ 800AA74

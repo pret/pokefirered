@@ -758,6 +758,7 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, u8 notTransform)
 void BattleLoadSubstituteOrMonSpriteGfx(u8 battlerId, bool8 loadMonSprite)
 {
     u8 position;
+    // variable i is actually u8, but needs to be 32-bit to make the inline ASM match. 
     s32 i;
     u32 palOffset;
     const void *substitutePal;

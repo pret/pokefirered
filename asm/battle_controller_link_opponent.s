@@ -10,8 +10,8 @@ nullsub_19: @ 803A664
 	bx lr
 	thumb_func_end nullsub_19
 
-	thumb_func_start sub_803A668
-sub_803A668: @ 803A668
+	thumb_func_start SetControllerToLinkOpponent
+SetControllerToLinkOpponent: @ 803A668
 	ldr r1, _0803A678 @ =gBattlerControllerFuncs
 	ldr r0, _0803A67C @ =gActiveBattler
 	ldrb r0, [r0]
@@ -24,7 +24,7 @@ sub_803A668: @ 803A668
 _0803A678: .4byte gBattlerControllerFuncs
 _0803A67C: .4byte gActiveBattler
 _0803A680: .4byte sub_803A684
-	thumb_func_end sub_803A668
+	thumb_func_end SetControllerToLinkOpponent
 
 	thumb_func_start sub_803A684
 sub_803A684: @ 803A684
@@ -1440,7 +1440,7 @@ _0803B1F6:
 	lsrs r1, 16
 	movs r0, 0x1
 	mov r2, sp
-	bl EmitDataTransfer
+	bl BtlController_EmitDataTransfer
 	bl RecordedOpponentBufferExecCompleted
 	add sp, 0x100
 	pop {r4-r6}

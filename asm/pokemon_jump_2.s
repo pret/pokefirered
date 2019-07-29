@@ -470,7 +470,7 @@ _08147E3C:
 	.align 2, 0
 _08147E60: .4byte gUnknown_203F3D4
 _08147E64:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08147F04

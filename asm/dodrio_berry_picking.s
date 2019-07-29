@@ -385,7 +385,7 @@ _08150B08:
 	bl sub_80FA42C
 	b _08150BDC
 _08150B16:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08150BFC
@@ -652,7 +652,7 @@ _08150D28:
 	bl sub_815F138
 	b _08150D52
 _08150D3A:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08150D74
@@ -673,7 +673,7 @@ _08150D52:
 	.align 2, 0
 _08150D60: .4byte gUnknown_203F3E0
 _08150D64:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08150D74
@@ -1025,7 +1025,7 @@ _08150FFE:
 	ldr r1, [r6]
 	b _0815106A
 _08151010:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08151092
@@ -1131,7 +1131,7 @@ _081510BE:
 	ldr r1, [r6]
 	b _08151140
 _081510DA:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0815118A
@@ -1276,7 +1276,7 @@ _081511DC:
 	ldr r1, [r6]
 	b _0815128A
 _08151202:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _081512AA
@@ -1463,7 +1463,7 @@ _0815136A:
 	.align 2, 0
 _08151388: .4byte gUnknown_203F3E0
 _0815138C:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08151480
@@ -1984,7 +1984,7 @@ _0815177E:
 _081517A0: .4byte gUnknown_203F3E0
 _081517A4: .4byte 0x0000318c
 _081517A8:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08151836

@@ -10,8 +10,8 @@ nullsub_17: @ 8035A78
 	bx lr
 	thumb_func_end nullsub_17
 
-	thumb_func_start sub_8035A7C
-sub_8035A7C: @ 8035A7C
+	thumb_func_start SetControllerToOpponent
+SetControllerToOpponent: @ 8035A7C
 	ldr r1, _08035A8C @ =gBattlerControllerFuncs
 	ldr r0, _08035A90 @ =gActiveBattler
 	ldrb r0, [r0]
@@ -24,7 +24,7 @@ sub_8035A7C: @ 8035A7C
 _08035A8C: .4byte gBattlerControllerFuncs
 _08035A90: .4byte gActiveBattler
 _08035A94: .4byte sub_8035A98
-	thumb_func_end sub_8035A7C
+	thumb_func_end SetControllerToOpponent
 
 	thumb_func_start sub_8035A98
 sub_8035A98: @ 8035A98
@@ -1406,7 +1406,7 @@ _080365C2:
 	lsrs r1, 16
 	movs r0, 0x1
 	mov r2, sp
-	bl EmitDataTransfer
+	bl BtlController_EmitDataTransfer
 	bl OpponentBufferExecCompleted
 	add sp, 0x100
 	pop {r4-r6}
@@ -2403,7 +2403,7 @@ _08036DDE:
 	ldrb r1, [r0]
 	movs r0, 0x1
 	adds r2, r4, 0
-	bl EmitDataTransfer
+	bl BtlController_EmitDataTransfer
 	bl OpponentBufferExecCompleted
 	add sp, 0x58
 	pop {r4-r7}
@@ -5261,7 +5261,7 @@ _080385F0:
 	movs r1, 0x3
 _080385F4:
 	movs r2, 0
-	bl EmitTwoReturnValues
+	bl BtlController_EmitTwoReturnValues
 	b _08038668
 _080385FC:
 	ldr r3, _08038670 @ =gBattleMoves
@@ -5316,7 +5316,7 @@ _08038656:
 	movs r0, 0x1
 	movs r1, 0xA
 	adds r2, r4, 0
-	bl EmitTwoReturnValues
+	bl BtlController_EmitTwoReturnValues
 _08038668:
 	bl OpponentBufferExecCompleted
 	b _08038712
@@ -5353,7 +5353,7 @@ _08038682:
 	movs r0, 0x1
 	movs r1, 0xA
 	adds r2, r4, 0
-	bl EmitTwoReturnValues
+	bl BtlController_EmitTwoReturnValues
 	b _0803870E
 	.align 2, 0
 _080386BC: .4byte gBattleMoves
@@ -5378,7 +5378,7 @@ _080386C4:
 	orrs r2, r4
 	movs r0, 0x1
 	movs r1, 0xA
-	bl EmitTwoReturnValues
+	bl BtlController_EmitTwoReturnValues
 	b _0803870E
 	.align 2, 0
 _080386F4: .4byte gBattleTypeFlags
@@ -5391,7 +5391,7 @@ _080386F8:
 	orrs r2, r4
 	movs r0, 0x1
 	movs r1, 0xA
-	bl EmitTwoReturnValues
+	bl BtlController_EmitTwoReturnValues
 _0803870E:
 	bl OpponentBufferExecCompleted
 _08038712:
@@ -5413,7 +5413,7 @@ sub_8038718: @ 8038718
 	adds r0, 0xC0
 	ldrb r1, [r0]
 	movs r0, 0x1
-	bl EmitOneReturnValue
+	bl BtlController_EmitOneReturnValue
 	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
@@ -5528,7 +5528,7 @@ _0803880A:
 	lsrs r1, 24
 	movs r0, 0x1
 	movs r2, 0
-	bl EmitChosenMonReturnValue
+	bl BtlController_EmitChosenMonReturnValue
 	bl OpponentBufferExecCompleted
 	pop {r4-r6}
 	pop {r0}

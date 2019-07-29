@@ -176,16 +176,16 @@ static void HandleInputChooseAction(void)
         switch (gActionSelectionCursor[gActiveBattler])
         {
         case 0:
-            EmitTwoReturnValues(1, B_ACTION_SAFARI_BALL, 0);
+            BtlController_EmitTwoReturnValues(1, B_ACTION_SAFARI_BALL, 0);
             break;
         case 1:
-            EmitTwoReturnValues(1, B_ACTION_SAFARI_POKEBLOCK, 0);
+            BtlController_EmitTwoReturnValues(1, B_ACTION_SAFARI_POKEBLOCK, 0);
             break;
         case 2:
-            EmitTwoReturnValues(1, B_ACTION_SAFARI_GO_NEAR, 0);
+            BtlController_EmitTwoReturnValues(1, B_ACTION_SAFARI_GO_NEAR, 0);
             break;
         case 3:
-            EmitTwoReturnValues(1, B_ACTION_SAFARI_RUN, 0);
+            BtlController_EmitTwoReturnValues(1, B_ACTION_SAFARI_RUN, 0);
             break;
         }
         SafariBufferExecCompleted();
@@ -276,7 +276,7 @@ static void CompleteWhenChosePokeblock(void)
 {
     if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
     {
-        EmitOneReturnValue(1, gSpecialVar_ItemId);
+        BtlController_EmitOneReturnValue(1, gSpecialVar_ItemId);
         SafariBufferExecCompleted();
     }
 }

@@ -341,7 +341,7 @@ _0814D8D4:
 	bl sub_80FA42C
 	b _0814D9BA
 _0814D8DA:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814D9C0

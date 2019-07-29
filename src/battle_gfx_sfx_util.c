@@ -758,10 +758,8 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, u8 notTransform)
 void BattleLoadSubstituteOrMonSpriteGfx(u8 battlerId, bool8 loadMonSprite)
 {
     u8 position;
-    // variable i is actually u8, but needs to be 32-bit to make the inline ASM match. 
     s32 i;
     u32 palOffset;
-    const void *substitutePal;
 
     if (!loadMonSprite)
     {
@@ -770,19 +768,16 @@ void BattleLoadSubstituteOrMonSpriteGfx(u8 battlerId, bool8 loadMonSprite)
             LZDecompressVram(gSubstituteDollGfx, gMonSpritesGfxPtr->sprites[position]);
         else
             LZDecompressVram(gSubstituteDollTilemap, gMonSpritesGfxPtr->sprites[position]);
-        i = 1;
-        palOffset = battlerId * 16;
-        substitutePal = gSubstituteDollPal;
-        for (; i < 4; ++i)
+        for (i = 1; i < 4; ++i)
         {
-            #ifndef NONMATCHING
-            register void *dmaSrc asm("r0") = gMonSpritesGfxPtr->sprites[position];
-            #endif
-            void *dmaDst = (i * 0x800) + dmaSrc;
+            u8 (*ptr)[4][0x800] = gMonSpritesGfxPtr->sprites[position];
 
-            DmaCopy32(3, dmaSrc, dmaDst, 0x800);
+            ++ptr;
+            --ptr;
+            DmaCopy32Defvars(3, (*ptr)[0], (*ptr)[i], 0x800);
         }
-        LoadCompressedPalette(substitutePal, palOffset + 0x100, 0x20);
+        palOffset = (battlerId * 16) + 0x100;
+        LoadCompressedPalette(gSubstituteDollPal, palOffset, 32);
     }
     else
     {

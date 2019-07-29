@@ -1028,7 +1028,7 @@ _0800DA3E:
 	adds r0, r5
 	movs r2, 0x24
 	ldrsh r1, [r0, r2]
-	ldr r4, _0800DB54 @ =gUnknown_2023FEC
+	ldr r4, _0800DB54 @ =gLinkBattleSendBuffer
 	ldr r0, [r4]
 	adds r0, r1
 	strb r6, [r0]
@@ -1161,7 +1161,7 @@ _0800DB2C:
 	.align 2, 0
 _0800DB4C: .4byte gTasks
 _0800DB50: .4byte gUnknown_202286C
-_0800DB54: .4byte gUnknown_2023FEC
+_0800DB54: .4byte gLinkBattleSendBuffer
 _0800DB58: .4byte gActiveBattler
 _0800DB5C: .4byte sBattler_AI
 _0800DB60: .4byte gBattlerTarget
@@ -1315,7 +1315,7 @@ _0800DC80:
 	adds r4, r7
 	movs r0, 0x26
 	ldrsh r1, [r4, r0]
-	ldr r5, _0800DCBC @ =gUnknown_2023FEC
+	ldr r5, _0800DCBC @ =gLinkBattleSendBuffer
 	ldr r0, [r5]
 	adds r1, r0
 	ldrb r0, [r1, 0x4]
@@ -1339,7 +1339,7 @@ _0800DC80:
 	strh r0, [r4, 0x1E]
 	b _0800DD20
 	.align 2, 0
-_0800DCBC: .4byte gUnknown_2023FEC
+_0800DCBC: .4byte gLinkBattleSendBuffer
 _0800DCC0:
 	subs r0, 0x1
 	strh r0, [r2, 0x22]
@@ -1356,7 +1356,7 @@ _0800DCC6:
 	adds r1, r0
 	movs r3, 0x26
 	ldrsh r2, [r1, r3]
-	ldr r0, _0800DD00 @ =gUnknown_2023FEC
+	ldr r0, _0800DD00 @ =gLinkBattleSendBuffer
 	ldr r0, [r0]
 	adds r2, r0
 	ldrb r0, [r2, 0x4]
@@ -1372,7 +1372,7 @@ _0800DCC6:
 	b _0800DD1C
 	.align 2, 0
 _0800DCFC: .4byte gTasks
-_0800DD00: .4byte gUnknown_2023FEC
+_0800DD00: .4byte gLinkBattleSendBuffer
 _0800DD04:
 	lsls r0, r4, 2
 	adds r0, r4
@@ -1477,7 +1477,7 @@ _0800DD70:
 	movs r1, 0
 	strh r1, [r0, 0x24]
 _0800DDD0:
-	ldr r2, _0800DE48 @ =gUnknown_2023FF0
+	ldr r2, _0800DE48 @ =gLinkBattleRecvBuffer
 	mov r4, r12
 	ldrb r1, [r4]
 	lsls r0, r1, 2
@@ -1537,7 +1537,7 @@ _0800DE38: .4byte gBitTable
 _0800DE3C: .4byte gBlockRecvBuffer + 4
 _0800DE40: .4byte gTasks
 _0800DE44: .4byte gUnknown_202286D
-_0800DE48: .4byte gUnknown_2023FF0
+_0800DE48: .4byte gLinkBattleRecvBuffer
 	thumb_func_end sub_800DD28
 
 	thumb_func_start Task_HandleCopyReceivedLinkBuffersData
@@ -1577,7 +1577,7 @@ _0800DE82:
 	adds r5, r0, r1
 	movs r0, 0x26
 	ldrsh r1, [r5, r0]
-	ldr r3, _0800DEB8 @ =gUnknown_2023FF0
+	ldr r3, _0800DEB8 @ =gLinkBattleRecvBuffer
 	mov r8, r3
 	ldr r0, [r3]
 	adds r3, r1, r0
@@ -1597,7 +1597,7 @@ _0800DE82:
 	b _0800DF7A
 	.align 2, 0
 _0800DEB4: .4byte gTasks
-_0800DEB8: .4byte gUnknown_2023FF0
+_0800DEB8: .4byte gLinkBattleRecvBuffer
 _0800DEBC:
 	cmp r0, 0x2
 	beq _0800DF64

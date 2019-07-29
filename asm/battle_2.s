@@ -9,7 +9,7 @@
 sub_800FD9C: @ 800FD9C
 	push {r4,lr}
 	bl MoveSaveBlocks_ResetHeap
-	bl sub_802E03C
+	bl AllocateBattleResources
 	bl AllocateBattleSpritesData
 	bl AllocateMonSpritesGfx
 	ldr r4, _0800FDCC @ =gBattleTypeFlags
@@ -2425,7 +2425,7 @@ FreeRestoreBattleData: @ 8011174
 	bl m4aSongNumStop
 	bl FreeMonSpritesGfx
 	bl FreeBattleSpritesData
-	bl sub_802E138
+	bl FreeBattleResources
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3738,7 +3738,7 @@ _08011C10:
 	bl sub_812C224
 	bl FreeMonSpritesGfx
 	bl FreeBattleSpritesData
-	bl sub_802E138
+	bl FreeBattleResources
 _08011C34:
 	add sp, 0x4
 	pop {r4}
@@ -11524,7 +11524,7 @@ _08015A70:
 	bne _08015A8E
 	bl FreeMonSpritesGfx
 	bl FreeBattleSpritesData
-	bl sub_802E138
+	bl FreeBattleResources
 _08015A8E:
 	pop {r0}
 	bx r0

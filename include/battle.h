@@ -236,7 +236,7 @@ extern const struct Trainer gTrainers[];
 
 #define TRAINER_ENCOUNTER_MUSIC(trainer)((gTrainers[trainer].encounterMusic_gender & 0x7F))
 
-struct UnknownFlags
+struct ResourceFlags
 {
     u32 flags[4];
 };
@@ -447,11 +447,11 @@ struct StatsArray
 
 struct BattleResources
 {
-    struct SecretBaseRecord* secretBase;
-    struct UnknownFlags *flags;
-    struct BattleScriptsStack* battleScriptsStack;
-    struct BattleCallbacksStack* battleCallbackStack;
-    struct StatsArray* statsBeforeLvlUp;
+    struct SecretBaseRecord *secretBase;
+    struct ResourceFlags *flags;
+    struct BattleScriptsStack *battleScriptsStack;
+    struct BattleCallbacksStack *battleCallbackStack;
+    struct StatsArray *beforeLvlUp;
     struct AI_ThinkingStruct *ai;
     struct BattleHistory *battleHistory;
     struct BattleScriptsStack *AI_ScriptsStack;
@@ -610,7 +610,7 @@ struct BattleStruct
     u8 field_2A2;
 };
 
-extern struct BattleStruct* gBattleStruct;
+extern struct BattleStruct *gBattleStruct;
 
 #define GET_MOVE_TYPE(move, typeArg)                        \
 {                                                           \
@@ -975,5 +975,8 @@ extern u8 gBattleBufferB[MAX_BATTLERS_COUNT][0x200];
 extern u8 gActionSelectionCursor[MAX_BATTLERS_COUNT];
 extern void (*gPreBattleCallback1)(void);
 extern bool8 gDoingBattleAnim;
+extern void *gUnknown_3005EE0[];
+extern u8 *gUnknown_2022BB8;
+extern u8 *gUnknown_2022BBC;
 
 #endif // GUARD_BATTLE_H

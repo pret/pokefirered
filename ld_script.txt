@@ -69,7 +69,7 @@ SECTIONS {
         asm/battle_2.o(.text);
         asm/battle_util.o(.text);
         asm/battle_script_commands.o(.text);
-        asm/battle_util2.o(.text);
+        src/battle_util2.o(.text);
         asm/battle_controller_player.o(.text);
         src/battle_gfx_sfx_util.o(.text);
         asm/battle_controller_opponent.o(.text);

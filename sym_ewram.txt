@@ -403,10 +403,10 @@ gUnknown_2023FC8: @ 2023FC8
 gBattleStruct: @ 2023FE8
 	.space 0x4
 
-gUnknown_2023FEC: @ 2023FEC
+gLinkBattleSendBuffer: @ 2023FEC
 	.space 0x4
 
-gUnknown_2023FF0: @ 2023FF0
+gLinkBattleRecvBuffer: @ 2023FF0
 	.space 0x4
 
 gBattleResources: @ 2023FF4

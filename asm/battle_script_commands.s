@@ -7510,7 +7510,7 @@ _08021392:
 	strb r0, [r1]
 _080213C8:
 	ldrb r0, [r7]
-	bl sub_802E228
+	bl AdjustFriendshipOnBattleFaint
 	b _0802142C
 	.align 2, 0
 _080213D0: .4byte gActiveBattler

@@ -631,7 +631,7 @@ u8 sub_815DA3C(void)
     return gFacilityClassToPicIndex[gUnknown_203F45C->unk_3D];
 }
 
-void sub_815DA54(void)
+void InitTrainerTowerBattleStruct(void)
 {
     u16 r10;
     s32 r9;
@@ -660,7 +660,7 @@ void sub_815DA54(void)
     sub_815DD2C();
 }
 
-void sub_815DBDC(void)
+void FreeTrainerTowerBattleStruct(void)
 {
     Free(gUnknown_203F45C);
     gUnknown_203F45C = NULL;
@@ -1122,7 +1122,7 @@ void sub_815E124(u8 taskId)
 
 void sub_815E160(void)
 {
-    gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_FACTORY;
+    gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_TRAINER_TOWER;
     if (gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_002 == 1)
         gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
     gTrainerBattleOpponent_A = 0;

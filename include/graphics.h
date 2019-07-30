@@ -975,6 +975,6 @@ extern const u32 gGhostFrontPic[];
 extern const u32 gGhostPalette[];
 extern const u32 gSubstituteDollGfx[];
 extern const u32 gSubstituteDollTilemap[];
-extern const u16 gSubstituteDollPal[];
+extern const u32 gSubstituteDollPal[];
 
 #endif //GUARD_GRAPHICS_H

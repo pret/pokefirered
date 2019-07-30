@@ -488,8 +488,7 @@ void sub_800DD28(void)
 {
     u8 i;
     s32 j;
-    u16 r6;
-    u8 *recvBuffer, *dest, *src;
+    u8 *recvBuffer;
 
     if (gReceivedRemoteLinkPlayers && (gBattleTypeFlags & BATTLE_TYPE_20) && (gLinkPlayers[0].linkType == 0x2211))
     {
@@ -501,7 +500,9 @@ void sub_800DD28(void)
                 ResetBlockReceivedFlag(i);
                 recvBuffer = (u8 *)gBlockRecvBuffer[i];
                 {
-                    r6 = gBlockRecvBuffer[i][2];
+                    u8 *dest, *src;
+                    u16 r6 = gBlockRecvBuffer[i][2];
+
                     if (gTasks[sLinkReceiveTaskId].data[14] + 9 + r6 > 0x1000)
                     {
                         gTasks[sLinkReceiveTaskId].data[12] = gTasks[sLinkReceiveTaskId].data[14];
@@ -511,8 +512,8 @@ void sub_800DD28(void)
                     src = recvBuffer;
                     for (j = 0; j < r6 + 8; ++j)
                         dest[j] = src[j];
+                    gTasks[sLinkReceiveTaskId].data[14] = gTasks[sLinkReceiveTaskId].data[14] + r6 + 8;
                 }
-                gTasks[sLinkReceiveTaskId].data[14] = gTasks[sLinkReceiveTaskId].data[14] + r6 + 8;
             }
         }
     }

@@ -252,7 +252,7 @@ static const u16 sDiscouragedPowerfulMoveEffects[] =
 extern u8 gBattlerAttacker;
 extern const u32 gBitTable[]; // util.h
 extern u32 gStatuses3[]; // battle_2.h
-extern u16 gSideAffecting[2];
+extern u16 gSideStatuses[2];
 extern const struct BattleMove gBattleMoves[];
 extern u16 gDynamicBasePower;
 extern u8 gMoveResultFlags;
@@ -720,7 +720,7 @@ static void BattleAICmd_if_status4(void)
     arg1 = GetBattlerPosition(index) & 1;
     arg2 = T1_READ_32(gAIScriptPtr + 2);
 
-    if ((gSideAffecting[arg1] & arg2) != 0)
+    if ((gSideStatuses[arg1] & arg2) != 0)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 6);
     else
         gAIScriptPtr += 10;
@@ -739,7 +739,7 @@ static void BattleAICmd_if_not_status4(void)
     arg1 = GetBattlerPosition(index) & 1;
     arg2 = T1_READ_32(gAIScriptPtr + 2);
 
-    if ((gSideAffecting[arg1] & arg2) == 0)
+    if ((gSideStatuses[arg1] & arg2) == 0)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 6);
     else
         gAIScriptPtr += 10;

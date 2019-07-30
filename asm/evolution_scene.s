@@ -1337,7 +1337,7 @@ sub_80CE8DC: @ 80CE8DC
 	strh r0, [r5, 0x8]
 	movs r2, 0x1
 	strh r2, [r5, 0x1A]
-	ldr r0, _080CE944 @ =gUnknown_2023E82
+	ldr r0, _080CE944 @ =gBattleCommunication
 	ldrb r1, [r0, 0x2]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -1349,7 +1349,7 @@ sub_80CE8DC: @ 80CE8DC
 	.align 2, 0
 _080CE93C: .4byte gTasks
 _080CE940: .4byte gPlayerParty
-_080CE944: .4byte gUnknown_2023E82
+_080CE944: .4byte gBattleCommunication
 _080CE948:
 	ldr r0, _080CE9A0 @ =gMain
 	ldrh r1, [r0, 0x2C]
@@ -1367,7 +1367,7 @@ _080CE948:
 	ldrsh r0, [r2, r3]
 	cmp r0, 0x8
 	bne _080CE9AC
-	ldr r4, _080CE9A8 @ =gUnknown_2023E82
+	ldr r4, _080CE9A8 @ =gBattleCommunication
 	ldrb r0, [r4, 0x2]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -1395,7 +1395,7 @@ _080CE948:
 	.align 2, 0
 _080CE9A0: .4byte gMain
 _080CE9A4: .4byte gTasks
-_080CE9A8: .4byte gUnknown_2023E82
+_080CE9A8: .4byte gBattleCommunication
 _080CE9AC:
 	mov r1, r8
 	adds r0, r1, r7
@@ -1584,7 +1584,7 @@ _080CEB68:
 	bl InitMovingBackgroundTask
 	movs r0, 0x11
 	bl LaunchTask_PreEvoSparklesSet1
-	ldr r1, _080CEB88 @ =gUnknown_2023E82
+	ldr r1, _080CEB88 @ =gBattleCommunication
 	strb r0, [r1, 0x2]
 	ldr r0, _080CEB8C @ =gTasks
 	mov r2, r8
@@ -1594,10 +1594,10 @@ _080CEB68:
 	b _080CEFDE
 	.align 2, 0
 _080CEB84: .4byte gPaletteFade
-_080CEB88: .4byte gUnknown_2023E82
+_080CEB88: .4byte gBattleCommunication
 _080CEB8C: .4byte gTasks
 _080CEB90:
-	ldr r4, _080CEBC8 @ =gUnknown_2023E82
+	ldr r4, _080CEBC8 @ =gBattleCommunication
 	ldrb r0, [r4, 0x2]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -1623,10 +1623,10 @@ _080CEBA6:
 	strb r0, [r4, 0x2]
 	bl _080CF528
 	.align 2, 0
-_080CEBC8: .4byte gUnknown_2023E82
+_080CEBC8: .4byte gBattleCommunication
 _080CEBCC: .4byte gUnknown_2039A20
 _080CEBD0:
-	ldr r4, _080CEC00 @ =gUnknown_2023E82
+	ldr r4, _080CEC00 @ =gBattleCommunication
 	ldrb r0, [r4, 0x2]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -1649,7 +1649,7 @@ _080CEBE6:
 	add r1, r10
 	b _080CEFDE
 	.align 2, 0
-_080CEC00: .4byte gUnknown_2023E82
+_080CEC00: .4byte gBattleCommunication
 _080CEC04: .4byte gUnknown_2039A20
 _080CEC08:
 	ldr r2, _080CEC44 @ =gUnknown_2039A20
@@ -1665,7 +1665,7 @@ _080CEC1C:
 	ldr r1, [r2]
 	movs r0, 0x3
 	strb r0, [r1, 0x3]
-	ldr r0, _080CEC48 @ =gUnknown_2023E82
+	ldr r0, _080CEC48 @ =gBattleCommunication
 	ldrb r1, [r0, 0x2]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -1683,10 +1683,10 @@ _080CEC38:
 	b _080CEFDE
 	.align 2, 0
 _080CEC44: .4byte gUnknown_2039A20
-_080CEC48: .4byte gUnknown_2023E82
+_080CEC48: .4byte gBattleCommunication
 _080CEC4C:
 	bl sub_80F5F74
-	ldr r1, _080CEC60 @ =gUnknown_2023E82
+	ldr r1, _080CEC60 @ =gBattleCommunication
 	strb r0, [r1, 0x2]
 	ldr r0, _080CEC64 @ =gTasks
 	mov r3, r8
@@ -1695,10 +1695,10 @@ _080CEC4C:
 	adds r1, r0
 	b _080CEFDE
 	.align 2, 0
-_080CEC60: .4byte gUnknown_2023E82
+_080CEC60: .4byte gBattleCommunication
 _080CEC64: .4byte gTasks
 _080CEC68:
-	ldr r6, _080CEC90 @ =gUnknown_2023E82
+	ldr r6, _080CEC90 @ =gBattleCommunication
 	ldrb r0, [r6, 0x2]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -1718,9 +1718,9 @@ _080CEC7E:
 	strb r0, [r6, 0x2]
 	b _080CEF2E
 	.align 2, 0
-_080CEC90: .4byte gUnknown_2023E82
+_080CEC90: .4byte gBattleCommunication
 _080CEC94:
-	ldr r0, _080CECBC @ =gUnknown_2023E82
+	ldr r0, _080CECBC @ =gBattleCommunication
 	ldrb r1, [r0, 0x2]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -1739,7 +1739,7 @@ _080CECAA:
 	add r1, r10
 	b _080CEFDE
 	.align 2, 0
-_080CECBC: .4byte gUnknown_2023E82
+_080CECBC: .4byte gBattleCommunication
 _080CECC0:
 	bl IsSEPlaying
 	lsls r0, 24
@@ -1971,7 +1971,7 @@ _080CEEC4: .4byte gPaletteFade
 _080CEEC8: .4byte gUnknown_2039A20
 _080CEECC: .4byte gUnknown_300537C
 _080CEED0:
-	ldr r0, _080CEF04 @ =gUnknown_2023E82
+	ldr r0, _080CEF04 @ =gBattleCommunication
 	ldrb r1, [r0, 0x2]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -1996,7 +1996,7 @@ _080CEEE4:
 	add r1, r10
 	b _080CEFDE
 	.align 2, 0
-_080CEF04: .4byte gUnknown_2023E82
+_080CEF04: .4byte gBattleCommunication
 _080CEF08: .4byte 0x0006001c
 _080CEF0C: .4byte 0x00007fff
 _080CEF10:
@@ -2299,7 +2299,7 @@ _080CF176:
 	adds r0, 0x1
 	movs r2, 0
 	strh r0, [r1, 0x14]
-	ldr r0, _080CF1B8 @ =gUnknown_2023E82
+	ldr r0, _080CF1B8 @ =gBattleCommunication
 	strb r2, [r0, 0x1]
 	bl sub_802DCB8
 	b _080CF528
@@ -2308,7 +2308,7 @@ _080CF1A8: .4byte gUnknown_83FDF3C
 _080CF1AC: .4byte gDisplayedStringBattle
 _080CF1B0: .4byte gTasks
 _080CF1B4: .4byte gUnknown_83FE791
-_080CF1B8: .4byte gUnknown_2023E82
+_080CF1B8: .4byte gBattleCommunication
 _080CF1BC:
 	ldr r0, _080CF244 @ =gMain
 	ldrh r1, [r0, 0x2E]
@@ -2316,7 +2316,7 @@ _080CF1BC:
 	ands r0, r1
 	cmp r0, 0
 	beq _080CF1E2
-	ldr r4, _080CF248 @ =gUnknown_2023E82
+	ldr r4, _080CF248 @ =gBattleCommunication
 	ldrb r0, [r4, 0x1]
 	cmp r0, 0
 	beq _080CF1E2
@@ -2333,7 +2333,7 @@ _080CF1E2:
 	ands r0, r1
 	cmp r0, 0
 	beq _080CF208
-	ldr r4, _080CF248 @ =gUnknown_2023E82
+	ldr r4, _080CF248 @ =gBattleCommunication
 	ldrb r0, [r4, 0x1]
 	cmp r0, 0
 	bne _080CF208
@@ -2359,7 +2359,7 @@ _080CF208:
 	bl sub_802DB7C
 	movs r0, 0x5
 	bl PlaySE
-	ldr r0, _080CF248 @ =gUnknown_2023E82
+	ldr r0, _080CF248 @ =gBattleCommunication
 	ldrb r2, [r0, 0x1]
 	cmp r2, 0
 	beq _080CF250
@@ -2373,7 +2373,7 @@ _080CF208:
 	b _080CF276
 	.align 2, 0
 _080CF244: .4byte gMain
-_080CF248: .4byte gUnknown_2023E82
+_080CF248: .4byte gBattleCommunication
 _080CF24C: .4byte gTasks
 _080CF250:
 	ldr r0, _080CF2AC @ =gTasks
@@ -2751,7 +2751,7 @@ sub_80CF53C: @ 80CF53C
 	strh r0, [r4, 0x8]
 	movs r2, 0x1
 	strh r2, [r4, 0x1A]
-	ldr r0, _080CF5C4 @ =gUnknown_2023E82
+	ldr r0, _080CF5C4 @ =gBattleCommunication
 	ldrb r1, [r0, 0x2]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -2784,7 +2784,7 @@ _080CF5B2:
 	.align 2, 0
 _080CF5BC: .4byte gTasks
 _080CF5C0: .4byte gPlayerParty
-_080CF5C4: .4byte gUnknown_2023E82
+_080CF5C4: .4byte gBattleCommunication
 _080CF5C8: .4byte _080CF5CC
 	.align 2, 0
 _080CF5CC:
@@ -2911,7 +2911,7 @@ _080CF6E0:
 	adds r5, 0x10
 	adds r0, r5, 0
 	bl LaunchTask_PreEvoSparklesSet1
-	ldr r1, _080CF730 @ =gUnknown_2023E82
+	ldr r1, _080CF730 @ =gBattleCommunication
 	strb r0, [r1, 0x2]
 	ldr r0, _080CF734 @ =gTasks
 	adds r1, r7, r6
@@ -2928,11 +2928,11 @@ _080CF6E0:
 _080CF724: .4byte gPaletteFade
 _080CF728: .4byte gSprites
 _080CF72C: .4byte gUnknown_2039A20
-_080CF730: .4byte gUnknown_2023E82
+_080CF730: .4byte gBattleCommunication
 _080CF734: .4byte gTasks
 _080CF738: .4byte 0x00000603
 _080CF73C:
-	ldr r4, _080CF770 @ =gUnknown_2023E82
+	ldr r4, _080CF770 @ =gBattleCommunication
 	ldrb r0, [r4, 0x2]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -2957,10 +2957,10 @@ _080CF752:
 	strb r0, [r4, 0x2]
 	bl _080D003A
 	.align 2, 0
-_080CF770: .4byte gUnknown_2023E82
+_080CF770: .4byte gBattleCommunication
 _080CF774: .4byte gUnknown_2039A20
 _080CF778:
-	ldr r4, _080CF7A4 @ =gUnknown_2023E82
+	ldr r4, _080CF7A4 @ =gBattleCommunication
 	ldrb r0, [r4, 0x2]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -2982,7 +2982,7 @@ _080CF78E:
 	adds r1, r5
 	b _080CFB1A
 	.align 2, 0
-_080CF7A4: .4byte gUnknown_2023E82
+_080CF7A4: .4byte gBattleCommunication
 _080CF7A8: .4byte gUnknown_2039A20
 _080CF7AC:
 	ldr r2, _080CF7E4 @ =gUnknown_2039A20
@@ -2998,7 +2998,7 @@ _080CF7C0:
 	ldr r1, [r2]
 	movs r0, 0x3
 	strb r0, [r1, 0x3]
-	ldr r0, _080CF7E8 @ =gUnknown_2023E82
+	ldr r0, _080CF7E8 @ =gBattleCommunication
 	ldrb r1, [r0, 0x2]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -3015,10 +3015,10 @@ _080CF7DC:
 	b _080CFB1A
 	.align 2, 0
 _080CF7E4: .4byte gUnknown_2039A20
-_080CF7E8: .4byte gUnknown_2023E82
+_080CF7E8: .4byte gBattleCommunication
 _080CF7EC:
 	bl sub_80F5F74
-	ldr r1, _080CF800 @ =gUnknown_2023E82
+	ldr r1, _080CF800 @ =gBattleCommunication
 	strb r0, [r1, 0x2]
 	ldr r0, _080CF804 @ =gTasks
 	adds r1, r7, r6
@@ -3026,10 +3026,10 @@ _080CF7EC:
 	adds r1, r0
 	b _080CFB1A
 	.align 2, 0
-_080CF800: .4byte gUnknown_2023E82
+_080CF800: .4byte gBattleCommunication
 _080CF804: .4byte gTasks
 _080CF808:
-	ldr r0, _080CF834 @ =gUnknown_2023E82
+	ldr r0, _080CF834 @ =gBattleCommunication
 	mov r8, r0
 	ldrb r0, [r0, 0x2]
 	lsls r1, r0, 2
@@ -3050,9 +3050,9 @@ _080CF820:
 	strb r0, [r1, 0x2]
 	b _080CFA90
 	.align 2, 0
-_080CF834: .4byte gUnknown_2023E82
+_080CF834: .4byte gBattleCommunication
 _080CF838:
-	ldr r0, _080CF85C @ =gUnknown_2023E82
+	ldr r0, _080CF85C @ =gBattleCommunication
 	ldrb r1, [r0, 0x2]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -3070,7 +3070,7 @@ _080CF84E:
 	adds r1, r5
 	b _080CFB1A
 	.align 2, 0
-_080CF85C: .4byte gUnknown_2023E82
+_080CF85C: .4byte gBattleCommunication
 _080CF860:
 	bl IsSEPlaying
 	lsls r0, 24
@@ -3261,7 +3261,7 @@ _080CFA08: .4byte gUnknown_2039A20
 _080CFA0C: .4byte gTextFlags
 _080CFA10: .4byte gUnknown_300537C
 _080CFA14:
-	ldr r0, _080CFA60 @ =gUnknown_2023E82
+	ldr r0, _080CFA60 @ =gBattleCommunication
 	ldrb r1, [r0, 0x2]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -3299,7 +3299,7 @@ _080CFA28:
 	adds r1, r5
 	b _080CFB1A
 	.align 2, 0
-_080CFA60: .4byte gUnknown_2023E82
+_080CFA60: .4byte gBattleCommunication
 _080CFA64: .4byte gSprites
 _080CFA68: .4byte gUnknown_2039A20
 _080CFA6C: .4byte 0x0004001c
@@ -3578,7 +3578,7 @@ _080CFCAE:
 	movs r2, 0
 	movs r3, 0x2
 	bl CreateYesNoMenu
-	ldr r3, _080CFCF8 @ =gUnknown_2023E82
+	ldr r3, _080CFCF8 @ =gBattleCommunication
 	strb r4, [r3, 0x1]
 	ldr r0, _080CFCF0 @ =gTasks
 	adds r1, r7, r6
@@ -3595,7 +3595,7 @@ _080CFCE8: .4byte gUnknown_83FDF3C
 _080CFCEC: .4byte gDisplayedStringBattle
 _080CFCF0: .4byte gTasks
 _080CFCF4: .4byte gUnknown_826D1CC
-_080CFCF8: .4byte gUnknown_2023E82
+_080CFCF8: .4byte gBattleCommunication
 _080CFCFC:
 	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
@@ -3614,7 +3614,7 @@ _080CFD16:
 	beq _080CFD70
 	b _080D003A
 _080CFD1C:
-	ldr r0, _080CFD60 @ =gUnknown_2023E82
+	ldr r0, _080CFD60 @ =gBattleCommunication
 	strb r4, [r0, 0x1]
 	ldr r0, _080CFD64 @ =gUnknown_83FDF3C
 	movs r3, 0x92
@@ -3648,12 +3648,12 @@ _080CFD56:
 	bl BeginNormalPaletteFade
 	b _080D003A
 	.align 2, 0
-_080CFD60: .4byte gUnknown_2023E82
+_080CFD60: .4byte gBattleCommunication
 _080CFD64: .4byte gUnknown_83FDF3C
 _080CFD68: .4byte gDisplayedStringBattle
 _080CFD6C: .4byte gTasks
 _080CFD70:
-	ldr r1, _080CFD9C @ =gUnknown_2023E82
+	ldr r1, _080CFD9C @ =gBattleCommunication
 	movs r0, 0x1
 	strb r0, [r1, 0x1]
 	ldr r0, _080CFDA0 @ =gUnknown_83FDF3C
@@ -3674,7 +3674,7 @@ _080CFD70:
 	strh r1, [r0, 0x14]
 	b _080D003A
 	.align 2, 0
-_080CFD9C: .4byte gUnknown_2023E82
+_080CFD9C: .4byte gBattleCommunication
 _080CFDA0: .4byte gUnknown_83FDF3C
 _080CFDA4: .4byte gDisplayedStringBattle
 _080CFDA8: .4byte gTasks

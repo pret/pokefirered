@@ -54,8 +54,8 @@ u8 GetBattleBank(u8 caseId);
 void PressurePPLose(u8 bankDef, u8 bankAtk, u16 move);
 void PressurePPLoseOnUsingPerishSong(u8 bankAtk);
 void PressurePPLoseOnUsingImprision(u8 bankAtk);
-void MarkAllBufferBanksForExecution(void); // unused
-void MarkBufferBankForExecution(u8 bank);
+void MarkAllBattlersForControllerExec(void); // unused
+void MarkBattlerForControllerExec(u8 bank);
 void sub_803F850(u8 arg0);
 void CancelMultiTurnMoves(u8 bank);
 bool8 WasUnableToUseMove(u8 bank);
@@ -70,8 +70,8 @@ u8 TrySetCantSelectMoveBattleScript(void);
 u8 CheckMoveLimitations(u8 bank, u8 unusableMoves, u8 check);
 bool8 AreAllMovesUnusable(void);
 u8 GetImprisonedMovesCount(u8 bank, u16 move);
-u8 UpdateTurnCounters(void);
-u8 TurnBasedEffects(void);
+u8 DoFieldEndTurnEffects(void);
+u8 DoBattlerEndTurnEffects(void);
 bool8 HandleWishPerishSongOnTurnEnd(void);
 bool8 HandleFaintedMonActions(void);
 void TryClearRageStatuses(void);
@@ -86,7 +86,7 @@ void ClearFuryCutterDestinyBondGrudge(u8 bank);
 void HandleAction_RunBattleScript(void);
 u8 GetMoveTarget(u16 move, u8 useMoveTarget);
 u8 IsMonDisobedient(void);
-void MarkBufferBankForExecution(u8 battlerId);
+void MarkBattlerForControllerExec(u8 battlerId);
 void sub_80174B8(u8 battlerId);
 void sub_8017298(u8 battlerId);
 

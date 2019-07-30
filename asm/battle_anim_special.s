@@ -6192,7 +6192,7 @@ sub_80F1CE4: @ 80F1CE4
 	push {lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
-	ldr r2, _080F1CF8 @ =gUnknown_2023E82
+	ldr r2, _080F1CF8 @ =gBattleCommunication
 	ldrb r0, [r2, 0x5]
 	cmp r0, 0x2
 	bls _080F1D00
@@ -6200,7 +6200,7 @@ sub_80F1CE4: @ 80F1CE4
 	movs r0, 0
 	b _080F1D04
 	.align 2, 0
-_080F1CF8: .4byte gUnknown_2023E82
+_080F1CF8: .4byte gBattleCommunication
 _080F1CFC: .4byte gBattleAnimArgs
 _080F1D00:
 	ldr r1, _080F1D10 @ =gBattleAnimArgs

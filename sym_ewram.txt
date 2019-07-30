@@ -189,7 +189,7 @@ gBattlerPositions: @ 2023BD6
 gUnknown_2023BDA: @ 2023BDA
 	.space 0x4
 
-gUnknown_2023BDE: @ 2023BDE
+gBattlerByTurnOrder: @ 2023BDE
 	.space 0x4
 
 gUnknown_2023BE2: @ 2023BE2
@@ -216,7 +216,7 @@ gUnknown_2023C0C: @ 2023C0C
 gUnknown_2023C30: @ 2023C30
 	.space 0x4
 
-gUnknown_2023C34: @ 2023C34
+gChosenMoveByBattler: @ 2023C34
 	.space 0x110
 
 gBattlerSpriteIds: @ 2023D44
@@ -243,7 +243,7 @@ gBattleMoveDamage: @ 2023D50
 gUnknown_2023D54: @ 2023D54
 	.space 0x4
 
-gUnknown_2023D58: @ 2023D58
+gTakenDmg: @ 2023D58
 	.space 0x10
 
 gLastUsedItem: @ 2023D68
@@ -258,7 +258,7 @@ gBattlerAttacker: @ 2023D6B
 gBattlerTarget: @ 2023D6C
 	.space 0x1
 
-gUnknown_2023D6D: @ 2023D6D
+gBattlerFainted: @ 2023D6D
 	.space 0x1
 
 gEffectBattler: @ 2023D6E
@@ -276,13 +276,13 @@ gCritMultiplier: @ 2023D71
 gUnknown_2023D72: @ 2023D72
 	.space 0x2
 
-gUnknown_2023D74: @ 2023D74
+gBattlescriptCurrInstr: @ 2023D74
 	.space 0x8
 
 gUnknown_2023D7C: @ 2023D7C
 	.space 0x4
 
-gUnknown_2023D80: @ 2023D80
+gSelectionBattleScripts: @ 2023D80
 	.space 0x10
 
 gUnknown_2023D90: @ 2023D90
@@ -312,19 +312,19 @@ gUnknown_2023DC4: @ 2023DC4
 gMoveResultFlags: @ 2023DCC
 	.space 0x4
 
-gUnknown_2023DD0: @ 2023DD0
+gHitMarker: @ 2023DD0
 	.space 0x4
 
 gUnknown_2023DD4: @ 2023DD4
 	.space 0x4
 
-gUnknown_2023DD8: @ 2023DD8
+gTakenDmgByBattler: @ 2023DD8
 	.space 0x4
 
 gUnknown_2023DDC: @ 2023DDC
 	.space 0x2
 
-gSideAffecting: @ 2023DDE
+gSideStatuses: @ 2023DDE
 	.space 0x6
 
 gSideTimers: @ 2023DE4
@@ -345,7 +345,7 @@ gUnknown_2023E7E: @ 2023E7E
 gUnknown_2023E80: @ 2023E80
 	.space 0x2
 
-gUnknown_2023E82: @ 2023E82
+gBattleCommunication: @ 2023E82
 	.space 0x1
 
 gUnknown_2023E83: @ 2023E83
@@ -354,22 +354,22 @@ gUnknown_2023E83: @ 2023E83
 gBattleOutcome: @ 2023E8A
 	.space 0x2
 
-gUnknown_2023E8C: @ 2023E8C
+gProtectStructs: @ 2023E8C
 	.space 0x40
 
-gUnknown_2023ECC: @ 2023ECC
+gSpecialStatuses: @ 2023ECC
 	.space 0x50
 
 gBattleWeather: @ 2023F1C
 	.space 0x4
 
-gUnknown_2023F20: @ 2023F20
+gWishFutureKnock: @ 2023F20
 	.space 0x2C
 
 gIntroSlideFlags: @ 2023F4C
 	.space 0x2
 
-gUnknown_2023F4E: @ 2023F4E
+gSentPokesToOpponent: @ 2023F4E
 	.space 0x2
 
 gDynamicBasePower: @ 2023F50

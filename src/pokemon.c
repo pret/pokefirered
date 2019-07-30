@@ -4170,7 +4170,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                                         r5 = gActiveBattler;
                                         gActiveBattler = sp34;
                                         BtlController_EmitGetMonData(0, 0, 0);
-                                        MarkBufferBankForExecution(gActiveBattler);
+                                        MarkBattlerForControllerExec(gActiveBattler);
                                         gActiveBattler = r5;
                                     }
                                 }
@@ -4709,7 +4709,7 @@ bool8 PokemonUseItemEffects2(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 m
                                         r5 = gActiveBattler;
                                         gActiveBattler = sp34;
                                         BtlController_EmitGetMonData(0, 0, 0);
-                                        MarkBufferBankForExecution(gActiveBattler);
+                                        MarkBattlerForControllerExec(gActiveBattler);
                                         gActiveBattler = r5;
                                     }
                                 }

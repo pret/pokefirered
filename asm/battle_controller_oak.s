@@ -2136,7 +2136,7 @@ _080E86DC: .4byte gActiveBattler
 _080E86E0:
 	bl OpponentBufferExecCompleted
 _080E86E4:
-	ldr r0, _080E86FC @ =gUnknown_2023E82
+	ldr r0, _080E86FC @ =gBattleCommunication
 	movs r1, 0
 	strb r1, [r0, 0x7]
 	ldr r0, _080E8700 @ =gBattleStruct
@@ -2149,7 +2149,7 @@ _080E86F2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E86FC: .4byte gUnknown_2023E82
+_080E86FC: .4byte gBattleCommunication
 _080E8700: .4byte gBattleStruct
 	thumb_func_end sub_80E85D4
 

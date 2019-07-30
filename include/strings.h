@@ -203,4 +203,9 @@ extern const u8 gString_BattleRecords_ColumnHeaders[];
 extern const u8 gString_BattleRecords_7Dashes[];
 extern const u8 gString_BattleRecords_4Dashes[];
 
+// slot_machine
+extern const u8 gString_OutOfCoins[];
+extern const u8 gString_QuitPlaying[];
+extern const u8 gString_SlotMachineControls[];
+
 #endif //GUARD_STRINGS_H

@@ -17,11 +17,8 @@
 #include "text_window.h"
 #include "random.h"
 #include "trig.h"
+#include "strings.h"
 #include "constants/songs.h"
-
-extern const u8 gUnknown_841B747[];
-extern const u8 gUnknown_841B76B[];
-extern const u8 gUnknown_841B779[];
 
 struct SlotMachineState
 {
@@ -2127,11 +2124,11 @@ bool8 sub_8141198(u8 * state, struct SlotMachineSetupTaskData * ptr)
         FillWindowPixelBuffer(1, 0xFF);
         PutWindowTilemap(1);
 
-        x = 0xEC - GetStringWidth(0, gUnknown_841B779, 0);
+        x = 0xEC - GetStringWidth(0, gString_SlotMachineControls, 0);
         textColor.fgColor = 15;
         textColor.bgColor = 1;
         textColor.shadowColor = 2;
-        AddTextPrinterParameterized3(1, 0, x, 0, &textColor, 0, gUnknown_841B779);
+        AddTextPrinterParameterized3(1, 0, x, 0, &textColor, 0, gString_SlotMachineControls);
         CopyBgTilemapBufferToVram(0);
 
         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | 0x20 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
@@ -2339,7 +2336,7 @@ bool8 sub_8141198(u8 * state, struct SlotMachineSetupTaskData * ptr)
                 "\tbl FillWindowPixelBuffer\n"
                 "\tmovs r0, 0x1\n"
                 "\tbl PutWindowTilemap\n"
-                "\tldr r4, _081413D8 @ =gUnknown_841B779\n"
+                "\tldr r4, _081413D8 @ =gString_SlotMachineControls\n"
                 "\tmovs r0, 0\n"
                 "\tadds r1, r4, 0\n"
                 "\tmovs r2, 0\n"
@@ -2401,7 +2398,7 @@ bool8 sub_8141198(u8 * state, struct SlotMachineSetupTaskData * ptr)
                 "_081413CC: .4byte 0x0000085c\n"
                 "_081413D0: .4byte gUnknown_8466620\n"
                 "_081413D4: .4byte gUnknown_8466998\n"
-                "_081413D8: .4byte gUnknown_841B779\n"
+                "_081413D8: .4byte gString_SlotMachineControls\n"
                 "_081413DC: .4byte sub_8141118\n"
                 "_081413E0: .4byte sub_8140E40\n"
                 "_081413E4:\n"
@@ -2550,7 +2547,7 @@ bool8 sub_8141584(u8 * state, struct SlotMachineSetupTaskData * ptr)
     switch (*state)
     {
     case 0:
-        sub_81417E4(gUnknown_841B747);
+        sub_81417E4(gString_OutOfCoins);
         CopyWindowToVram(0, 3);
         (*state)++;
         break;
@@ -2567,7 +2564,7 @@ bool8 sub_81415C8(u8 * state, struct SlotMachineSetupTaskData * ptr)
     switch (*state)
     {
     case 0:
-        sub_81417E4(gUnknown_841B76B);
+        sub_81417E4(gString_QuitPlaying);
         sub_8141AD8(0);
         CopyWindowToVram(0, 3);
         (*state)++;

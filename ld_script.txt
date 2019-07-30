@@ -255,7 +255,6 @@ SECTIONS {
         asm/itemfinder.o(.text);
         src/buy_menu_helpers.o(.text);
         src/slot_machine.o(.text);
-        asm/slot_machine.o(.text);
         src/roamer.o(.text);
         src/mystery_gift_menu.o(.text);
         src/mevent.o(.text);
@@ -454,7 +453,6 @@ SECTIONS {
         data/itemfinder.o(.rodata);
         src/buy_menu_helpers.o(.rodata);
         src/slot_machine.o(.rodata);
-        data/slot_machine.o(.rodata);
         src/roamer.o(.rodata);
         src/mystery_gift_menu.o(.rodata);
         src/mevent.o(.rodata);

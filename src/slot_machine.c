@@ -16,6 +16,7 @@
 #include "new_menu_helpers.h"
 #include "text_window.h"
 #include "random.h"
+#include "trig.h"
 #include "constants/songs.h"
 
 extern const u8 gUnknown_841B747[];
@@ -67,7 +68,9 @@ struct SlotMachineSetupTaskData
     // align 2
     s32 field_0024;
     u32 field_0028;
-    u8 filler_002C[0x830];
+    u16 field_002C[3][4];
+    u16 field_0044[3][4];
+    u8 field_005C[0x800];
     u8 field_085C[0x800];
     u8 field_105C[0x800];
     u8 field_185C[0x800];
@@ -525,9 +528,7 @@ const u16 gUnknown_84659B0[] = INCBIN_U16("graphics/slot_machine/unk_84659b0.gba
 const u32 gUnknown_84659D0[] = INCBIN_U32("graphics/slot_machine/unk_84659d0.4bpp.lz");
 const u32 gUnknown_84661D4[] = INCBIN_U32("graphics/slot_machine/unk_84661d4.bin.lz");
 const u16 gUnknown_84664BC[] = INCBIN_U16("graphics/slot_machine/unk_84664bc.gbapal");
-const u16 gUnknown_84664DC[] = INCBIN_U16("graphics/slot_machine/unk_84664dc.gbapal");
-const u16 gUnknown_84664FC[] = INCBIN_U16("graphics/slot_machine/unk_84664fc.gbapal");
-const u16 gUnknown_846651C[] = INCBIN_U16("graphics/slot_machine/unk_846651c.gbapal");
+const u16 gUnknown_84664DC[] = INCBIN_U16("graphics/slot_machine/unk_84664dc.gbapal","graphics/slot_machine/unk_84664fc.gbapal", "graphics/slot_machine/unk_846651c.gbapal");
 const u32 gUnknown_846653C[] = INCBIN_U32("graphics/slot_machine/unk_846653c.4bpp.lz");
 const u16 gUnknown_84665C0[] = INCBIN_U16("graphics/slot_machine/unk_84665c0.gbapal");
 const u16 gUnknown_84665E0[] = INCBIN_U16("graphics/slot_machine/unk_84665e0.gbapal");
@@ -618,6 +619,24 @@ const struct UnkStruct_8466C0C gUnknown_8466C0C[] = {
     { gUnknown_8466B8C, NELEMS(gUnknown_8466B8C) },
     { gUnknown_8466BB8, NELEMS(gUnknown_8466BB8) },
     { gUnknown_8466BE4, NELEMS(gUnknown_8466BE4) }
+};
+
+const u8 gUnknown_8466C34[2] = {2, 4};
+
+const struct WindowTemplate gUnknown_8466C38 = {
+    .bg = 0,
+    .tilemapLeft = 19,
+    .tilemapTop = 9,
+    .width = 6,
+    .height = 4,
+    .paletteNum = 15,
+    .baseBlock = 0x9F
+};
+
+const u16 gUnknown_8466C40[][4] = {
+    {0x0229, 0x022a, 0x0249, 0x024a},
+    {0x022e, 0x022f, 0x024e, 0x024f},
+    {0x0233, 0x0234, 0x0253, 0x0254}
 };
 
 void PlaySlotMachine(u16 machineIdx, MainCallback savedCallback)
@@ -2721,4 +2740,150 @@ void sub_81418C4(u16 * bgTilemapBuffer, u16 whichLine, u16 paletteNum)
         bgTilemapBuffer[*tileIdxs] |= palMask;
         tileIdxs++;
     }
+}
+
+void sub_814191C(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    s32 i;
+
+    switch (data[0])
+    {
+    case 0:
+        LoadPalette(gUnknown_84664BC, 0x60, 0x20);
+        for (i = 0; i < 5; i++)
+        {
+            if (sub_8140BF8(i))
+                sub_81418C4(GetBgTilemapBuffer(2), i, 6);
+        }
+        CopyBgTilemapBufferToVram(2);
+        data[0]++;
+        break;
+    case 1:
+        if (data[1] == 0)
+        {
+            u16 y = gSineTable[data[2]] >> 7;
+            LoadPalette(&gUnknown_84664DC[16 * y], 0x10, 0x20);
+            data[2] += 32;
+            data[2] &= 0x7F;
+            data[1] = 8;
+        }
+        else
+            data[1]--;
+
+        if (data[3] == 0)
+        {
+            data[4] += 8;
+            data[4] &= 0x7F;
+            data[5] = gSineTable[data[4]] >> 5;
+            BlendPalettes(0x00000040, data[5], RGB_BLACK);
+        }
+        else
+        {
+            data[4]++;
+            if (data[4] > 1)
+            {
+                data[4] = 0;
+                data[5]++;
+                data[5] &= 1;
+                BlendPalettes(0x00000040, data[5] * 8, RGB_BLACK);
+            }
+        }
+
+        for (i = 0; i < NELEMS(gUnknown_8466C34); i++)
+        {
+            gPlttBufferFaded[gUnknown_8466C34[i] + 0x60] = gPlttBufferUnfaded[gUnknown_8466C34[i] + 0x60];
+        }
+        break;
+    case 2:
+        for (i = 0; i < 5; i++)
+        {
+            if (sub_8140BF8(i))
+                sub_81418C4(GetBgTilemapBuffer(2), i, 4);
+        }
+        LoadPalette(gUnknown_8465950, 0x10, 0x20);
+        CopyBgTilemapBufferToVram(2);
+        data[0]++;
+        break;
+    case 3:
+        if (!IsDma3ManagerBusyWithBgCopy())
+            DestroyTask(taskId);
+        break;
+    }
+}
+
+void sub_8141AB0(void)
+{
+    gTasks[FindTaskIdByFunc(sub_814191C)].data[0] = 2;
+}
+
+void sub_8141AD8(u8 cursorPos)
+{
+    CreateYesNoMenu(&gUnknown_8466C38, 2, 0, 2, 10, 13, cursorPos);
+    Menu_MoveCursorNoWrapAround(cursorPos);
+    sub_814112C()->field_0028 = TRUE;
+}
+
+void sub_8141B18(void)
+{
+    struct SlotMachineSetupTaskData * data = sub_814112C();
+    if (data->field_0028)
+    {
+        DestroyYesNoMenu();
+        data->field_0028 = FALSE;
+    }
+}
+
+void sub_8141B34(void)
+{
+    s32 i, j;
+    struct SlotMachineSetupTaskData * data = sub_814112C();
+    u16 * buffer = GetBgTilemapBuffer(2);
+
+    for (i = 0; i < 3; i++)
+    {
+        for (j = 0; j < 4; j++)
+        {
+            u16 idx = gUnknown_8466C40[i][j];
+            data->field_0044[i][j] = buffer[idx];
+            data->field_002C[i][j] = j + 0xC0;
+        }
+    }
+}
+
+void sub_8141BA0(u8 reel)
+{
+    if (reel < 3)
+    {
+        s32 i;
+        struct SlotMachineSetupTaskData * data = sub_814112C();
+        u16 * buffer = GetBgTilemapBuffer(2);
+        for (i = 0; i < 4; i++)
+        {
+            u16 idx = gUnknown_8466C40[reel][i];
+            buffer[idx] = data->field_002C[reel][i];
+        }
+    }
+}
+
+void sub_8141BE4(void)
+{
+    s32 i, j;
+    struct SlotMachineSetupTaskData * data = sub_814112C();
+    u16 * buffer = GetBgTilemapBuffer(2);
+
+    for (i = 0; i < 3; i++)
+    {
+        for (j = 0; j < 4; j++)
+        {
+            u16 idx = gUnknown_8466C40[i][j];
+            buffer[idx] = data->field_0044[i][j];
+        }
+    }
+}
+
+void sub_8141C30(u8 a0, u8 a1)
+{
+    sub_814112C()->field_0020 = a0;
+    sub_8141148(12, a1);
 }

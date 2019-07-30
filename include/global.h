@@ -17,7 +17,7 @@
 // Get the IDE to stfu
 
 // We define it this way to fool preproc.
-#define INCBIN(x) {0}
+#define INCBIN(...) {0}
 #define INCBIN_U8  INCBIN
 #define INCBIN_U16 INCBIN
 #define INCBIN_U32 INCBIN

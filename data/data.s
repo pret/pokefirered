@@ -68,7 +68,52 @@ gUnknown_8234690:: @ 8234690
 	.incbin "baserom.gba", 0x234690, 0x4
 
 gUnknown_8234694:: @ 8234694
-	.incbin "baserom.gba", 0x234694, 0x328
+	.incbin "baserom.gba", 0x234694, 0x4
+
+gUnknown_8234698:: @ 8234698
+	.incbin "baserom.gba", 0x234698, 0x20
+
+gUnknown_82346B8:: @ 82346B8
+	.incbin "baserom.gba", 0x2346B8, 0x20
+
+gUnknown_82346D8:: @ 82346D8
+	.incbin "baserom.gba", 0x2346D8, 0x20
+
+gUnknown_82346F8:: @ 82346F8
+	.incbin "baserom.gba", 0x2346F8, 0x20
+
+gUnknown_8234718:: @ 8234718
+	.incbin "baserom.gba", 0x234718, 0x28
+
+gUnknown_8234740:: @ 8234740
+	.incbin "baserom.gba", 0x234740, 0x28
+
+gUnknown_8234768:: @ 8234768
+	.incbin "baserom.gba", 0x234768, 0x20
+
+gUnknown_8234788:: @ 8234788
+	.incbin "baserom.gba", 0x234788, 0x20
+
+gUnknown_82347A8:: @ 82347A8
+	.incbin "baserom.gba", 0x2347A8, 0x20
+
+gUnknown_82347C8:: @ 82347C8
+	.incbin "baserom.gba", 0x2347C8, 0x20
+
+gUnknown_82347E8:: @ 82347E8
+	.incbin "baserom.gba", 0x2347E8, 0xE0
+
+gUnknown_82348C8:: @ 82348C8
+	.incbin "baserom.gba", 0x2348C8, 0x24
+
+gUnknown_82348EC:: @ 82348EC
+	.incbin "baserom.gba", 0x2348EC, 0x58
+
+gUnknown_8234944:: @ 8234944
+	.incbin "baserom.gba", 0x234944, 0x58
+
+gUnknown_823499C:: @ 823499C
+	.incbin "baserom.gba", 0x23499C, 0x20
 
 gUnknown_82349BC:: @ 82349BC
 	.incbin "baserom.gba", 0x2349BC, 0x10
@@ -174,7 +219,16 @@ gUnknown_824EFF0:: @ 824EFF0
 	.incbin "baserom.gba", 0x24EFF0, 0x18
 
 gUnknown_824F008:: @ 824F008
-	.incbin "baserom.gba", 0x24F008, 0x40
+	.incbin "baserom.gba", 0x24F008, 0x8
+
+gUnknown_824F010:: @ 824F010
+	.incbin "baserom.gba", 0x24F010, 0x8
+
+gUnknown_824F018:: @ 824F018
+	.incbin "baserom.gba", 0x24F018, 0x8
+
+gUnknown_824F020:: @ 824F020
+	.incbin "baserom.gba", 0x24F020, 0x28
 
 gUnknown_824F048:: @ 824F048
 	.incbin "baserom.gba", 0x24F048, 0x8
@@ -301,251 +355,6 @@ gUnknown_8250A34:: @ 8250A34
 
 gUnknown_8250B20:: @ 8250B20
 	.incbin "baserom.gba", 0x250B20, 0xE4
-
-gBattleMoves:: @ 8250C04
-	.incbin "baserom.gba", 0x250C04, 0x10B4
-
-gUnknown_8251CB8:: @ 8251CB8
-	.incbin "baserom.gba", 0x251CB8, 0x336
-
-gUnknown_8251FEE:: @ 8251FEE
-	.incbin "baserom.gba", 0x251FEE, 0x336
-
-gUnknown_8252324:: @ 8252324
-	.incbin "baserom.gba", 0x252324, 0x338
-
-gSpindaSpotGraphics:: @ 825265C
-	.incbin "baserom.gba", 0x25265C, 0x260
-
-gItemEffectTable:: @ 82528BC
-	.incbin "baserom.gba", 0x2528BC, 0x28C
-
-gNatureStatTable:: @ 8252B48
-	.incbin "baserom.gba", 0x252B48, 0x80
-
-gTMHMLearnsets:: @ 8252BC8
-	.incbin "baserom.gba", 0x252BC8, 0xCE0
-
-gFacilityClassToPicIndex:: @ 82538A8
-	.incbin "baserom.gba", 0x2538A8, 0x96
-
-gFacilityClassToTrainerClass:: @ 825393E
-	.byte CLASS_AQUA_LEADER
-	.byte CLASS_TEAM_AQUA
-	.byte CLASS_TEAM_AQUA
-	.byte CLASS_AROMA_LADY
-	.byte CLASS_RUIN_MANIAC
-	.byte CLASS_INTERVIEWER
-	.byte CLASS_TUBER
-	.byte CLASS_TUBER_2
-	.byte CLASS_COOLTRAINER
-	.byte CLASS_COOLTRAINER
-	.byte CLASS_HEX_MANIAC
-	.byte CLASS_LADY
-	.byte CLASS_BEAUTY
-	.byte CLASS_RICH_BOY
-	.byte CLASS_POKEMANIAC
-	.byte CLASS_SWIMMER_MALE
-	.byte CLASS_BLACK_BELT
-	.byte CLASS_GUITARIST
-	.byte CLASS_KINDLER
-	.byte CLASS_CAMPER
-	.byte CLASS_BUG_MANIAC
-	.byte CLASS_PSYCHIC
-	.byte CLASS_PSYCHIC
-	.byte CLASS_GENTLEMAN
-	.byte CLASS_ELITE_FOUR
-	.byte CLASS_ELITE_FOUR
-	.byte CLASS_LEADER
-	.byte CLASS_LEADER
-	.byte CLASS_LEADER
-	.byte CLASS_SCHOOL_KID
-	.byte CLASS_SCHOOL_KID
-	.byte CLASS_SR_AND_JR
-	.byte CLASS_POKEFAN
-	.byte CLASS_POKEFAN
-	.byte CLASS_EXPERT
-	.byte CLASS_EXPERT
-	.byte CLASS_YOUNGSTER
-	.byte CLASS_CHAMPION
-	.byte CLASS_FISHERMAN
-	.byte CLASS_TRIATHLETE
-	.byte CLASS_TRIATHLETE
-	.byte CLASS_TRIATHLETE
-	.byte CLASS_TRIATHLETE
-	.byte CLASS_TRIATHLETE
-	.byte CLASS_TRIATHLETE
-	.byte CLASS_DRAGON_TAMER
-	.byte CLASS_BIRD_KEEPER
-	.byte CLASS_NINJA_BOY
-	.byte CLASS_BATTLE_GIRL
-	.byte CLASS_PARASOL_LADY
-	.byte CLASS_SWIMMER_FEMALE
-	.byte CLASS_PICNICKER
-	.byte CLASS_TWINS
-	.byte CLASS_SAILOR
-	.byte CLASS_BOARDER
-	.byte CLASS_BOARDER
-	.byte CLASS_COLLECTOR
-	.byte CLASS_PKMN_TRAINER_3
-	.byte CLASS_PKMN_TRAINER_3
-	.byte CLASS_PKMN_TRAINER_3
-	.byte CLASS_PKMN_TRAINER_3
-	.byte CLASS_PKMN_TRAINER_3
-	.byte CLASS_PKMN_TRAINER_3
-	.byte CLASS_PKMN_TRAINER_3
-	.byte CLASS_PKMN_BREEDER
-	.byte CLASS_PKMN_BREEDER
-	.byte CLASS_PKMN_RANGER
-	.byte CLASS_PKMN_RANGER
-	.byte CLASS_MAGMA_LEADER
-	.byte CLASS_TEAM_MAGMA
-	.byte CLASS_TEAM_MAGMA
-	.byte CLASS_LASS
-	.byte CLASS_BUG_CATCHER
-	.byte CLASS_HIKER
-	.byte CLASS_YOUNG_COUPLE
-	.byte CLASS_OLD_COUPLE
-	.byte CLASS_SIS_AND_BRO
-	.byte CLASS_AQUA_ADMIN
-	.byte CLASS_AQUA_ADMIN
-	.byte CLASS_MAGMA_ADMIN
-	.byte CLASS_MAGMA_ADMIN
-	.byte CLASS_LEADER
-	.byte CLASS_LEADER
-	.byte CLASS_LEADER
-	.byte CLASS_LEADER
-	.byte CLASS_LEADER
-	.byte CLASS_ELITE_FOUR
-	.byte CLASS_ELITE_FOUR
-	.byte CLASS_YOUNGSTER_2
-	.byte CLASS_BUG_CATCHER_2
-	.byte CLASS_LASS_2
-	.byte CLASS_SAILOR_2
-	.byte CLASS_CAMPER_2
-	.byte CLASS_PICNICKER_2
-	.byte CLASS_POKEMANIAC_2
-	.byte CLASS_SUPER_NERD
-	.byte CLASS_HIKER_2
-	.byte CLASS_BIKER
-	.byte CLASS_BURGLAR
-	.byte CLASS_ENGINEER
-	.byte CLASS_FISHERMAN_2
-	.byte CLASS_SWIMMER_MALE_2
-	.byte CLASS_CUE_BALL
-	.byte CLASS_GAMER
-	.byte CLASS_BEAUTY_2
-	.byte CLASS_SWIMMER_FEMALE_2
-	.byte CLASS_PSYCHIC_2
-	.byte CLASS_ROCKER
-	.byte CLASS_JUGGLER
-	.byte CLASS_TAMER
-	.byte CLASS_BIRD_KEEPER_2
-	.byte CLASS_BLACK_BELT_2
-	.byte CLASS_RIVAL
-	.byte CLASS_SCIENTIST
-	.byte CLASS_BOSS
-	.byte CLASS_TEAM_ROCKET
-	.byte CLASS_COOLTRAINER_2
-	.byte CLASS_COOLTRAINER_2
-	.byte CLASS_ELITE_FOUR_2
-	.byte CLASS_ELITE_FOUR_2
-	.byte CLASS_LEADER_2
-	.byte CLASS_LEADER_2
-	.byte CLASS_GENTLEMAN_2
-	.byte CLASS_RIVAL_2
-	.byte CLASS_CHAMPION_2
-	.byte CLASS_CHANNELER
-	.byte CLASS_TWINS_2
-	.byte CLASS_COOL_COUPLE
-	.byte CLASS_YOUNG_COUPLE_2
-	.byte CLASS_CRUSH_KIN
-	.byte CLASS_SIS_AND_BRO_2
-	.byte CLASS_PKMN_PROF
-	.byte CLASS_PLAYER
-	.byte CLASS_PLAYER
-	.byte CLASS_PLAYER
-	.byte CLASS_PLAYER
-	.byte CLASS_TEAM_ROCKET
-	.byte CLASS_PSYCHIC_2
-	.byte CLASS_CRUSH_GIRL
-	.byte CLASS_TUBER_3
-	.byte CLASS_PKMN_BREEDER_2
-	.byte CLASS_PKMN_RANGER_2
-	.byte CLASS_PKMN_RANGER_2
-	.byte CLASS_AROMA_LADY_2
-	.byte CLASS_RUIN_MANIAC_2
-	.byte CLASS_LADY_2
-	.byte CLASS_PAINTER
-	.byte CLASS_ELITE_FOUR_2
-	.byte CLASS_ELITE_FOUR_2
-	.byte CLASS_CHAMPION_2
-
-gUnknown_82539D4:: @ 82539D4
-	.incbin "baserom.gba", 0x2539D4, 0x110
-
-gExperienceTables:: @ 8253AE4
-	.incbin "baserom.gba", 0x253AE4, 0xCA0
-
-gBaseStats:: @ 8254784
-	.incbin "baserom.gba", 0x254784, 0x11
-
-gUnknown_8254795:: @ 8254795
-	.incbin "baserom.gba", 0x254795, 0x4FBF
-
-gEvolutionTable:: @ 8259754
-	.incbin "baserom.gba", 0x259754, 0x4060
-
-gLevelUpLearnsets:: @ 825D7B4
-	.incbin "baserom.gba", 0x25D7B4, 0x670
-
-gPokeblockFlavorCompatibilityTable:: @ 825DE24
-	.incbin "baserom.gba", 0x25DE24, 0x7D
-
-gUnknown_825DEA1:: @ 825DEA1
-	.incbin "baserom.gba", 0x25DEA1, 0x4
-
-gPPUpWriteMasks:: @ 825DEA5
-	.incbin "baserom.gba", 0x25DEA5, 0x4
-
-gUnknown_825DEA9:: @ 825DEA9
-	.incbin "baserom.gba", 0x25DEA9, 0x4
-
-gStatStageRatios:: @ 825DEAD
-	.incbin "baserom.gba", 0x25DEAD, 0x1F
-
-sHoldEffectToType:: @ 825DECC
-	.incbin "baserom.gba", 0x25DECC, 0x24
-
-gUnknown_825DEF0:: @ 825DEF0
-	.incbin "baserom.gba", 0x25DEF0, 0x60
-
-gUnknown_825DF50:: @ 825DF50
-	.incbin "baserom.gba", 0x25DF50, 0x90
-
-sSecretBaseFacilityClasses:: @ 825DFE0
-	.incbin "baserom.gba", 0x25DFE0, 0xA
-
-sGetMonDataEVConstants:: @ 825DFEA
-	.incbin "baserom.gba", 0x25DFEA, 0x6
-
-gUnknown_825DFF0:: @ 825DFF0
-	.incbin "baserom.gba", 0x25DFF0, 0x6
-
-sFriendshipEventDeltas:: @ 825DFF6
-	.incbin "baserom.gba", 0x25DFF6, 0x1E
-
-sHMMoves:: @ 825E014
-	.incbin "baserom.gba", 0x25E014, 0x12
-
-gUnknown_825E026:: @ 825E026
-	.incbin "baserom.gba", 0x25E026, 0xC
-
-gUnknown_825E032:: @ 825E032
-	.incbin "baserom.gba", 0x25E032, 0x2A
-
-gUnknown_825E05C:: @ 825E05C
-	.incbin "baserom.gba", 0x25E05C, 0x18
 
 	.section .rodata.825EF0C
 

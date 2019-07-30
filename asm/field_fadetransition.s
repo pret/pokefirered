@@ -245,7 +245,7 @@ _0807DCDC:
 sub_807DCE4: @ 807DCE4
 	push {lr}
 	bl ScriptContext2_Enable
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	bl sub_807DC00
 	ldr r0, _0807DD00 @ =task0A_nop_for_a_while
 	movs r1, 0xA
@@ -277,7 +277,7 @@ _0807DD1C:
 FieldCallback_ReturnToEventScript2: @ 807DD24
 	push {lr}
 	bl ScriptContext2_Enable
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	bl sub_807DC00
 	ldr r0, _0807DD40 @ =task0A_asap_script_env_2_enable_and_set_ctx_running
 	movs r1, 0xA
@@ -366,7 +366,7 @@ _0807DDCA:
 sub_807DDD0: @ 807DDD0
 	push {lr}
 	bl ScriptContext2_Enable
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	bl palette_bg_faded_fill_black
 	ldr r0, _0807DDEC @ =task_mpl_807DD60
 	movs r1, 0xA
@@ -434,7 +434,7 @@ _0807DE50:
 sub_807DE58: @ 807DE58
 	push {lr}
 	bl ScriptContext2_Enable
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	bl palette_bg_faded_fill_black
 	ldr r0, _0807DE74 @ =sub_807DDF0
 	movs r1, 0xA
@@ -563,7 +563,7 @@ _0807DF5E:
 	thumb_func_start sub_807DF64
 sub_807DF64: @ 807DF64
 	push {lr}
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	bl sub_8111CF0
 	movs r0, 0
 	bl sub_807DE78
@@ -575,7 +575,7 @@ sub_807DF64: @ 807DF64
 	thumb_func_start sub_807DF7C
 sub_807DF7C: @ 807DF7C
 	push {lr}
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	bl sub_8111CF0
 	movs r0, 0x1
 	bl sub_807DE78
@@ -587,7 +587,7 @@ sub_807DF7C: @ 807DF7C
 	thumb_func_start sub_807DF94
 sub_807DF94: @ 807DF94
 	push {lr}
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	bl pal_fill_for_maplights
 	bl sub_8111CF0
 	movs r0, 0x28
@@ -730,7 +730,7 @@ _0807E0AE:
 	ldr r1, _0807E0E8 @ =gMapObjects
 	adds r0, r1
 	movs r1, 0x10
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	movs r0, 0x8
 	strh r0, [r4, 0x8]
 	b _0807E206
@@ -783,7 +783,7 @@ _0807E10E:
 	lsls r0, 2
 	ldr r1, _0807E15C @ =gMapObjects
 	adds r0, r1
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	b _0807E1F2
 	.align 2, 0
 _0807E158: .4byte sub_807F204
@@ -807,7 +807,7 @@ _0807E160:
 	ldr r1, _0807E194 @ =gMapObjects
 	adds r0, r1
 	movs r1, 0x10
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	movs r0, 0x2
 	strh r0, [r4, 0x8]
 	b _0807E206
@@ -838,7 +838,7 @@ _0807E198:
 	lsls r0, 2
 	ldr r1, _0807E1D8 @ =gMapObjects
 	adds r0, r1
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	movs r0, 0x3
 	strh r0, [r4, 0x8]
 	b _0807E206
@@ -929,7 +929,7 @@ _0807E25E:
 	lsls r4, 2
 	ldr r0, _0807E2A4 @ =gMapObjects
 	adds r4, r0
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8063F84
@@ -937,7 +937,7 @@ _0807E25E:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	movs r0, 0x2
 	strh r0, [r5, 0x8]
 	b _0807E2C6
@@ -1112,7 +1112,7 @@ _0807E3E4:
 sub_807E3EC: @ 807E3EC
 	push {lr}
 	bl ScriptContext2_Enable
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	bl sub_807DC00
 	ldr r0, _0807E408 @ =task_mpl_807E3C8
 	movs r1, 0xA
@@ -1411,7 +1411,7 @@ _0807E632:
 	strh r0, [r4, 0x8]
 	b _0807E64A
 _0807E63A:
-	bl warp_in
+	bl WarpIntoMap
 	ldr r0, _0807E650 @ =sub_8056788
 	bl SetMainCallback2
 	adds r0, r5, 0
@@ -1494,8 +1494,8 @@ _0807E6DC:
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0807E6F4
-	bl warp_in
-	ldr r0, _0807E700 @ =sub_805671C
+	bl WarpIntoMap
+	ldr r0, _0807E700 @ =CB2_LoadMap
 	bl SetMainCallback2
 	adds r0, r5, 0
 	bl DestroyTask
@@ -1505,7 +1505,7 @@ _0807E6F4:
 	bx r0
 	.align 2, 0
 _0807E6FC: .4byte gReceivedRemoteLinkPlayers
-_0807E700: .4byte sub_805671C
+_0807E700: .4byte CB2_LoadMap
 	thumb_func_end sub_807E678
 
 	thumb_func_start sub_807E704
@@ -1563,8 +1563,8 @@ _0807E762:
 	strh r0, [r4, 0x8]
 	b _0807E77A
 _0807E76A:
-	bl warp_in
-	ldr r0, _0807E780 @ =sub_805671C
+	bl WarpIntoMap
+	ldr r0, _0807E780 @ =CB2_LoadMap
 	bl SetMainCallback2
 	adds r0, r5, 0
 	bl DestroyTask
@@ -1573,7 +1573,7 @@ _0807E77A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807E780: .4byte sub_805671C
+_0807E780: .4byte CB2_LoadMap
 	thumb_func_end sub_807E718
 
 	thumb_func_start sub_807E784
@@ -1630,8 +1630,8 @@ _0807E7EA:
 	strh r0, [r4, 0x8]
 	b _0807E802
 _0807E7F2:
-	bl warp_in
-	ldr r0, _0807E808 @ =sub_805671C
+	bl WarpIntoMap
+	ldr r0, _0807E808 @ =CB2_LoadMap
 	bl SetMainCallback2
 	adds r0, r5, 0
 	bl DestroyTask
@@ -1640,7 +1640,7 @@ _0807E802:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807E808: .4byte sub_805671C
+_0807E808: .4byte CB2_LoadMap
 	thumb_func_end sub_807E784
 
 	thumb_func_start sub_807E80C
@@ -1744,7 +1744,7 @@ _0807E8AE:
 	lsls r0, 2
 	adds r0, r4
 	movs r1, 0x11
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	movs r0, 0x2
 	strh r0, [r5, 0x8]
 	b _0807E976
@@ -1776,7 +1776,7 @@ _0807E8F4:
 	lsls r0, 2
 	ldr r1, _0807E93C @ =gMapObjects
 	adds r0, r1
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	movs r0, 0
 	bl sub_807DCB0
 	movs r0, 0x3
@@ -1871,12 +1871,12 @@ _0807E9DA:
 	b _0807EA92
 _0807E9E8:
 	adds r0, r6, 0
-	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl FieldObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807EA00
 	adds r0, r6, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807EAB0
@@ -1957,8 +1957,8 @@ _0807EA9A:
 	ldr r0, _0807EAB8 @ =gFieldCallback
 	ldr r1, _0807EABC @ =sub_807DF64
 	str r1, [r0]
-	bl warp_in
-	ldr r0, _0807EAC0 @ =sub_805671C
+	bl WarpIntoMap
+	ldr r0, _0807EAC0 @ =CB2_LoadMap
 	bl SetMainCallback2
 	adds r0, r4, 0
 	bl DestroyTask
@@ -1970,7 +1970,7 @@ _0807EAB0:
 	.align 2, 0
 _0807EAB8: .4byte gFieldCallback
 _0807EABC: .4byte sub_807DF64
-_0807EAC0: .4byte sub_805671C
+_0807EAC0: .4byte CB2_LoadMap
 	thumb_func_end sub_807E980
 
 	thumb_func_start sub_807EAC4
@@ -2033,7 +2033,7 @@ _0807EB08:
 	lsrs r0, 7
 	cmp r0, 0
 	beq _0807EB4C
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetStepInPlaceDelay16AnimId
@@ -2071,7 +2071,7 @@ sub_807EB64: @ 807EB64
 	lsls r4, 2
 	ldr r0, _0807EBB8 @ =gMapObjects
 	adds r4, r0
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetStepInPlaceDelay16AnimId
@@ -2188,7 +2188,7 @@ sub_807EC34: @ 807EC34
 	.align 2, 0
 _0807EC6C: .4byte gTasks+0x8
 _0807EC70:
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	bl pal_fill_for_maplights
 	bl ScriptContext2_Enable
 	adds r0, r5, 0x2

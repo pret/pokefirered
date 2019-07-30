@@ -46,9 +46,9 @@ void FieldObjectClearAnim(struct MapObject *);
 void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *);
 void SpawnFieldObjectsInView(s16, s16);
 u8 sprite_new(u8, u8, s16, s16, u8, u8);
-u8 AddPseudoFieldObject(u16, void (*)(struct Sprite *), s16, s16, u8);
+u8 AddPseudoEventObject(u16, SpriteCallback, s16, s16, u8);
 u8 show_sprite(u8, u8, u8);
-u8 SpawnSpecialFieldObjectParametrized(u8, u8, u8, s16, s16, u8);
+u8 SpawnSpecialFieldObjectParameterized(u8, u8, u8, s16, s16, u8);
 u8 SpawnSpecialFieldObject(struct MapObjectTemplate *);
 void sub_8093038(s16, s16, s16 *, s16 *);
 void CameraObjectReset1(void);
@@ -76,21 +76,25 @@ u8 GetStepInPlaceDelay32AnimId(u32);
 u8 npc_block_way(struct MapObject *, s16, s16, u32);
 void MoveCoords(u8, s16 *, s16 *);
 bool8 FieldObjectIsSpecialAnimActive(struct MapObject *);
-u8 FieldObjectClearAnimIfSpecialAnimFinished(struct MapObject *);
+u8 FieldObjectClearHeldMovementIfFinished(struct MapObject *);
 u8 GetFieldObjectIdByXYZ(u16 x, u16 y, u8 z);
 void sub_8063E28(struct MapObject *, struct Sprite *);
-void sub_8063CA4(struct MapObject *, u8);
+void FieldObjectSetHeldMovement(struct MapObject *, u8);
 void npc_coords_shift_still(struct MapObject *);
 void sub_805FE7C(struct MapObject *, u8);
 void npc_set_running_behaviour_etc(struct MapObject *, u8);
 u8 sub_80634F0(u8 direction);
 u8 sub_8063500(u8 a0);
-void sub_805F060(struct MapObject *mapObject, u8 a1);
+void EventObjectSetGraphicsId(struct MapObject *mapObject, u8 a1);
 u8 sub_805EB44(u8, u8, s16, s16);
 void npc_paltag_set_load(u8 mode);
+bool8 FieldObjectIsMovementOverridden(struct MapObject *mapObject);
+u8 FieldObjectCheckHeldMovementStatus(struct MapObject *mapObject);
 
 // Exported data declarations
 
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
+extern const struct SpritePalette gUnknown_83A5348;
+extern const struct SpriteTemplate * const gUnknown_83A0010[];
 
 #endif //GUARD_FIELD_MAP_OBJ_H

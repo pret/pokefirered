@@ -1222,7 +1222,7 @@ _080E6286:
 	adds r2, r3
 	ldr r1, [r4]
 	adds r1, r2
-	bl sub_803E0A4
+	bl CreateBattleTowerMon
 	adds r6, 0x1
 	cmp r6, 0x2
 	ble _080E6286
@@ -1251,7 +1251,7 @@ _080E62B2:
 	muls r2, r6
 	adds r2, 0x1C
 	adds r1, r2
-	bl sub_803E0A4
+	bl CreateBattleTowerMon
 	adds r6, 0x1
 	cmp r6, 0x2
 	ble _080E62B2
@@ -2010,14 +2010,14 @@ _080E68A8: .4byte gPlayerParty
 _080E68AC:
 	bl sub_80E7550
 _080E68B0:
-	ldr r0, _080E68C0 @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r0, _080E68C0 @ =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	bl SetMainCallback2
 	add sp, 0x4
 	pop {r4-r6}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E68C0: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
+_080E68C0: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
 	thumb_func_end sub_80E6854
 
 	thumb_func_start sub_80E68C4
@@ -2136,7 +2136,7 @@ _080E69A0:
 	adds r2, r1
 	ldr r1, [r4]
 	adds r1, r2
-	bl sub_803E0A4
+	bl CreateBattleTowerMon
 	adds r5, 0x1
 	cmp r5, 0x2
 	ble _080E69A0
@@ -2407,7 +2407,7 @@ _080E6C00:
 	adds r0, r2
 	ldrh r1, [r0]
 	movs r0, 0x20
-	bl sub_8054F00
+	bl SetGameStat
 	b _080E6C80
 	.align 2, 0
 _080E6C10: .4byte 0x0000057a
@@ -2599,7 +2599,7 @@ _080E6D9C:
 	adds r0, r1
 	ldrh r1, [r0]
 	movs r0, 0x20
-	bl sub_8054F00
+	bl SetGameStat
 	b _080E6E08
 	.align 2, 0
 _080E6DAC: .4byte 0x0000057a
@@ -2717,7 +2717,7 @@ _080E6E76:
 	adds r5, r0, 0
 	movs r0, 0x20
 	adds r1, r5, 0
-	bl sub_8054F00
+	bl SetGameStat
 	ldr r1, _080E6EA4 @ =0x0000270f
 	cmp r5, r1
 	bhi _080E6EB8
@@ -2731,7 +2731,7 @@ _080E6EA8:
 	ldrh r5, [r1]
 	movs r0, 0x20
 	adds r1, r5, 0
-	bl sub_8054F00
+	bl SetGameStat
 	ldr r1, _080E6EC4 @ =0x0000270f
 	cmp r5, r1
 	bls _080E6ECC
@@ -2894,7 +2894,7 @@ _080E6FF2:
 	bl sub_80E712C
 	ldr r4, _080E703C @ =gSaveBlock2Ptr
 	ldr r0, [r4]
-	ldr r1, _080E704C @ =gUnknown_2023E8A
+	ldr r1, _080E704C @ =gBattleOutcome
 	ldrb r1, [r1]
 	ldr r2, _080E7050 @ =0x0000055d
 	adds r0, r2
@@ -2930,7 +2930,7 @@ _080E703C: .4byte gSaveBlock2Ptr
 _080E7040: .4byte 0x0000055c
 _080E7044: .4byte gSpecialVar_0x8004
 _080E7048: .4byte 0x00000564
-_080E704C: .4byte gUnknown_2023E8A
+_080E704C: .4byte gBattleOutcome
 _080E7050: .4byte 0x0000055d
 _080E7054: .4byte 0x0000055e
 	thumb_func_end sub_80E6FB8
@@ -3612,7 +3612,7 @@ _080E754C: .4byte gSaveBlock2Ptr
 	thumb_func_start sub_80E7550
 sub_80E7550: @ 80E7550
 	push {lr}
-	ldr r0, _080E7564 @ =gUnknown_2023E8A
+	ldr r0, _080E7564 @ =gBattleOutcome
 	ldrb r0, [r0]
 	cmp r0, 0x3
 	bne _080E756C
@@ -3621,7 +3621,7 @@ sub_80E7550: @ 80E7550
 	strb r0, [r1]
 	b _080E7590
 	.align 2, 0
-_080E7564: .4byte gUnknown_2023E8A
+_080E7564: .4byte gBattleOutcome
 _080E7568: .4byte gStringVar4
 _080E756C:
 	cmp r0, 0x1

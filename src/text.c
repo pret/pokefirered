@@ -16,10 +16,9 @@ extern void FillWindowPixelRect(u8 windowId, u8 fillValue, u16 x, u16 y, u16 wid
 extern void BlitBitmapRectToWindow(u8 windowId, const u8 *pixels, u16 srcX, u16 srcY, u16 srcWidth, int srcHeight, u16 destX, u16 destY, u16 rectWidth, u16 rectHeight);
 extern u8 GetKeypadIconWidth(u8 keypadIconId);
 extern void CopyWindowToVram(u8 windowId, u8 mode);
-extern u16 Font6Func(struct TextPrinter *textPrinter);
 extern s32 GetGlyphWidthFont6(u16 glyphId, bool32 isJapanese);
 extern void PlaySE(u16 songNum);
-extern u8* UnkTextUtil_GetPtrI(u8 a1);
+extern u8* DynamicPlaceholderTextUtil_GetPlaceholderPtr(u8 a1);
 
 TextFlags gTextFlags;
 
@@ -1545,7 +1544,7 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
                 }
             case 0xF7:
                 if (bufferPointer == NULL)
-                    bufferPointer = UnkTextUtil_GetPtrI(*++str);
+                    bufferPointer = DynamicPlaceholderTextUtil_GetPlaceholderPtr(*++str);
                 while (*bufferPointer != 0xFF)
                 {
                     glyphWidth = func(*bufferPointer++, isJapanese);

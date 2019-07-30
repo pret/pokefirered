@@ -25,7 +25,7 @@ sub_807F620: @ 807F620
 	.align 2, 0
 _0807F640: .4byte gTasks+0x8
 _0807F644:
-	bl c3_80A0DD8_is_running
+	bl FldEffPoison_IsActive
 	cmp r0, 0
 	bne _0807F686
 	bl sub_812B478
@@ -46,7 +46,7 @@ _0807F65E:
 	ldr r0, _0807F68C @ =sub_800FD9C
 	bl SetMainCallback2
 	bl sub_806D7E8
-	bl overworld_poison_timer_set
+	bl ClearPoisonStepCounter
 	adds r0, r5, 0
 	bl DestroyTask
 _0807F686:
@@ -221,7 +221,7 @@ sub_807F7D8: @ 807F7D8
 	bl player_bitmagic
 	bl sub_805C780
 	ldr r1, _0807F804 @ =gMain
-	ldr r0, _0807F808 @ =sub_80A0F4C
+	ldr r0, _0807F808 @ =CB2_EndSafariBattle
 	str r0, [r1, 0x8]
 	ldr r1, _0807F80C @ =gBattleTypeFlags
 	movs r0, 0x80
@@ -235,7 +235,7 @@ sub_807F7D8: @ 807F7D8
 	bx r0
 	.align 2, 0
 _0807F804: .4byte gMain
-_0807F808: .4byte sub_80A0F4C
+_0807F808: .4byte CB2_EndSafariBattle
 _0807F80C: .4byte gBattleTypeFlags
 	thumb_func_end sub_807F7D8
 
@@ -300,7 +300,7 @@ sub_807F888: @ 807F888
 	bl CreateMaleMon
 	bl ScriptContext2_Enable
 	ldr r1, _0807F8B8 @ =gMain
-	ldr r0, _0807F8BC @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r0, _0807F8BC @ =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	str r0, [r1, 0x8]
 	ldr r1, _0807F8C0 @ =gBattleTypeFlags
 	movs r0, 0x80
@@ -314,7 +314,7 @@ sub_807F888: @ 807F888
 	.align 2, 0
 _0807F8B4: .4byte gEnemyParty
 _0807F8B8: .4byte gMain
-_0807F8BC: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
+_0807F8BC: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
 _0807F8C0: .4byte gBattleTypeFlags
 	thumb_func_end sub_807F888
 
@@ -623,7 +623,7 @@ sub_807FB40: @ 807FB40
 	movs r0, 0
 	movs r1, 0x80
 	bl ResetOamRange
-	ldr r0, _0807FB78 @ =gUnknown_2023E8A
+	ldr r0, _0807FB78 @ =gBattleOutcome
 	ldrb r0, [r0]
 	bl IsPlayerDefeated
 	cmp r0, 0x1
@@ -633,7 +633,7 @@ sub_807FB40: @ 807FB40
 	b _0807FB8C
 	.align 2, 0
 _0807FB74: .4byte 0x01000100
-_0807FB78: .4byte gUnknown_2023E8A
+_0807FB78: .4byte gBattleOutcome
 _0807FB7C: .4byte c2_whiteout
 _0807FB80:
 	ldr r0, _0807FB94 @ =CB2_ReturnToField
@@ -666,7 +666,7 @@ sub_807FBA0: @ 807FBA0
 	movs r0, 0
 	movs r1, 0x80
 	bl ResetOamRange
-	ldr r0, _0807FBD8 @ =gUnknown_2023E8A
+	ldr r0, _0807FBD8 @ =gBattleOutcome
 	ldrb r0, [r0]
 	bl IsPlayerDefeated
 	cmp r0, 0x1
@@ -676,17 +676,17 @@ sub_807FBA0: @ 807FBA0
 	b _0807FBE6
 	.align 2, 0
 _0807FBD4: .4byte 0x01000100
-_0807FBD8: .4byte gUnknown_2023E8A
+_0807FBD8: .4byte gBattleOutcome
 _0807FBDC: .4byte c2_whiteout
 _0807FBE0:
-	ldr r0, _0807FBEC @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r0, _0807FBEC @ =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	bl SetMainCallback2
 _0807FBE6:
 	add sp, 0x4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807FBEC: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
+_0807FBEC: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
 	thumb_func_end sub_807FBA0
 
 	thumb_func_start sub_807FBF0
@@ -704,7 +704,7 @@ sub_807FBF0: @ 807FBF0
 	movs r0, 0
 	movs r1, 0x80
 	bl ResetOamRange
-	ldr r4, _0807FC28 @ =gUnknown_2023E8A
+	ldr r4, _0807FC28 @ =gBattleOutcome
 	ldrb r0, [r4]
 	bl IsPlayerDefeated
 	adds r1, r0, 0
@@ -715,7 +715,7 @@ sub_807FBF0: @ 807FBF0
 	b _0807FC4C
 	.align 2, 0
 _0807FC24: .4byte 0x01000100
-_0807FC28: .4byte gUnknown_2023E8A
+_0807FC28: .4byte gBattleOutcome
 _0807FC2C: .4byte c2_whiteout
 _0807FC30:
 	ldrb r0, [r4]
@@ -731,7 +731,7 @@ _0807FC40:
 	movs r0, 0x1
 	strh r0, [r1]
 _0807FC46:
-	ldr r0, _0807FC58 @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r0, _0807FC58 @ =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	bl SetMainCallback2
 _0807FC4C:
 	add sp, 0x4
@@ -740,7 +740,7 @@ _0807FC4C:
 	bx r0
 	.align 2, 0
 _0807FC54: .4byte gSpecialVar_Result
-_0807FC58: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
+_0807FC58: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
 	thumb_func_end sub_807FBF0
 
 	thumb_func_start sub_807FC5C
@@ -1853,7 +1853,7 @@ sub_80804AC: @ 80804AC
 	ldrh r0, [r0]
 	cmp r0, 0x9
 	bne _08080508
-	ldr r0, _080804DC @ =gUnknown_2023E8A
+	ldr r0, _080804DC @ =gBattleOutcome
 	ldrb r0, [r0]
 	bl IsPlayerDefeated
 	adds r1, r0, 0
@@ -1870,7 +1870,7 @@ sub_80804AC: @ 80804AC
 	b _080804EE
 	.align 2, 0
 _080804D8: .4byte gUnknown_20386AC
-_080804DC: .4byte gUnknown_2023E8A
+_080804DC: .4byte gBattleOutcome
 _080804E0: .4byte gSpecialVar_Result
 _080804E4: .4byte gUnknown_20386CC
 _080804E8:
@@ -1878,14 +1878,14 @@ _080804E8:
 	movs r1, 0
 	strh r1, [r0]
 _080804EE:
-	ldr r0, _08080504 @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r0, _08080504 @ =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	bl SetMainCallback2
 	bl sub_80803FC
 	bl sub_81139BC
 	b _0808054E
 	.align 2, 0
 _08080500: .4byte gSpecialVar_Result
-_08080504: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
+_08080504: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
 _08080508:
 	ldr r0, _0808051C @ =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
@@ -1893,14 +1893,14 @@ _08080508:
 	lsls r0, 3
 	cmp r1, r0
 	bne _08080524
-	ldr r0, _08080520 @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r0, _08080520 @ =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	bl SetMainCallback2
 	b _0808054E
 	.align 2, 0
 _0808051C: .4byte gTrainerBattleOpponent_A
-_08080520: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
+_08080520: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
 _08080524:
-	ldr r0, _08080538 @ =gUnknown_2023E8A
+	ldr r0, _08080538 @ =gBattleOutcome
 	ldrb r0, [r0]
 	bl IsPlayerDefeated
 	cmp r0, 0x1
@@ -1910,10 +1910,10 @@ _08080530:
 	bl SetMainCallback2
 	b _0808054E
 	.align 2, 0
-_08080538: .4byte gUnknown_2023E8A
+_08080538: .4byte gBattleOutcome
 _0808053C: .4byte c2_whiteout
 _08080540:
-	ldr r0, _08080554 @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r0, _08080554 @ =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	bl SetMainCallback2
 	bl sub_80803FC
 	bl sub_81139BC
@@ -1921,7 +1921,7 @@ _0808054E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08080554: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
+_08080554: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
 	thumb_func_end sub_80804AC
 
 	thumb_func_start sub_8080558
@@ -1933,14 +1933,14 @@ sub_8080558: @ 8080558
 	lsls r0, 3
 	cmp r1, r0
 	bne _08080578
-	ldr r0, _08080574 @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r0, _08080574 @ =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	bl SetMainCallback2
 	b _080805A6
 	.align 2, 0
 _08080570: .4byte gTrainerBattleOpponent_A
-_08080574: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
+_08080574: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
 _08080578:
-	ldr r0, _0808058C @ =gUnknown_2023E8A
+	ldr r0, _0808058C @ =gBattleOutcome
 	ldrb r0, [r0]
 	bl IsPlayerDefeated
 	cmp r0, 0x1
@@ -1949,10 +1949,10 @@ _08080578:
 	bl SetMainCallback2
 	b _080805A6
 	.align 2, 0
-_0808058C: .4byte gUnknown_2023E8A
+_0808058C: .4byte gBattleOutcome
 _08080590: .4byte c2_whiteout
 _08080594:
-	ldr r0, _080805AC @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r0, _080805AC @ =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	bl SetMainCallback2
 	bl sub_80803FC
 	bl sub_810CDE8
@@ -1961,7 +1961,7 @@ _080805A6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080805AC: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
+_080805AC: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
 	thumb_func_end sub_8080558
 
 	thumb_func_start sub_80805B0
@@ -2051,7 +2051,7 @@ sub_8080628: @ 8080628
 	beq _080806BE
 	ldr r0, _08080668 @ =gTrainerBattleOpponent_A
 	ldrh r0, [r0]
-	bl sub_804367C
+	bl GetTrainerEncounterMusicId
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xD

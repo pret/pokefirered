@@ -6,6 +6,7 @@
 #include "window.h"
 #include "text_window.h"
 #include "menu_helpers.h"
+#include "new_menu_helpers.h"
 #include "menu.h"
 #include "money.h"
 #include "bag.h"
@@ -210,16 +211,16 @@ void sub_810B858(void)
     else
         InitWindows(gUnknown_84530E4);
     DeactivateAllTextPrinters();
-    sub_815001C(0, 0x64, 0xE0);
-    sub_814FEAC(0, 0x6D, 0xD0);
-    sub_814FF2C(0, 0x81, 0xC0);
+    TextWindow_SetUserSelectedFrame(0, 0x64, 0xE0);
+    TextWindow_LoadResourcesStdFrame0(0, 0x6D, 0xD0);
+    TextWindow_SetStdFrame0_WithPal(0, 0x81, 0xC0);
     LoadPalette(gUnknown_8453098, 0xF0, 0x20);
     for (i = 0; i < 3; i++)
     {
         FillWindowPixelBuffer(i, 0x00);
         PutWindowTilemap(i);
     }
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
     for (i = 0; i < 11; i++)
     {
         gUnknown_203AD34[i] = 0xFF;
@@ -228,19 +229,19 @@ void sub_810B858(void)
 
 void sub_810B8F0(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, s8 speed, u8 colorIdx)
 {
-    AddTextPrinterParametrized2(windowId, fontId, x, y, letterSpacing, lineSpacing, &gUnknown_84530B8[colorIdx], speed, str);
+    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, &gUnknown_84530B8[colorIdx], speed, str);
 }
 
 void sub_810B958(const u8 * str)
 {
     u32 x = 0x48 - GetStringWidth(1, str, 0);
-    box_print(2, 1, x / 2, 1, &gUnknown_84530B8[0], 0, str);
+    AddTextPrinterParameterized3(2, 1, x / 2, 1, &gUnknown_84530B8[0], 0, str);
 }
 
 void sub_810B994(void)
 {
     u32 x;
-    SetWindowBorderStyle(2, FALSE, 0x081, 0x0C);
+    DrawStdFrameWithCustomTileAndPalette(2, FALSE, 0x081, 0x0C);
     x = 0x40 - GetStringWidth(0, gText_DepositItem, 0);
     AddTextPrinterParameterized(2, 0, gText_DepositItem, x / 2, 1, 0, NULL);
 }
@@ -252,23 +253,23 @@ u8 sub_810B9DC(u8 a0, u8 a1)
         gUnknown_203AD34[a0] = AddWindow(&gUnknown_8453104[a0 + a1]);
         if (a0 != 6)
         {
-            SetWindowBorderStyle(gUnknown_203AD34[a0], FALSE, 0x064, 0x0E);
+            DrawStdFrameWithCustomTileAndPalette(gUnknown_203AD34[a0], FALSE, 0x064, 0x0E);
         }
         else
         {
-            SetWindowBorderStyle(gUnknown_203AD34[a0], FALSE, 0x081, 0x0C);
+            DrawStdFrameWithCustomTileAndPalette(gUnknown_203AD34[a0], FALSE, 0x081, 0x0C);
         }
-        schedule_bg_copy_tilemap_to_vram(0);
+        ScheduleBgCopyTilemapToVram(0);
     }
     return gUnknown_203AD34[a0];
 }
 
 void sub_810BA3C(u8 a0)
 {
-    sub_810F4D8(gUnknown_203AD34[a0], FALSE);
+    ClearStdWindowAndFrameToTransparent(gUnknown_203AD34[a0], FALSE);
     ClearWindowTilemap(gUnknown_203AD34[a0]);
     RemoveWindow(gUnknown_203AD34[a0]);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
     gUnknown_203AD34[a0] = 0xFF;
 }
 
@@ -285,11 +286,11 @@ void sub_810BA9C(u8 a0)
 {
     if (gUnknown_203AD34[a0] != 0xFF)
     {
-        sub_810F260(gUnknown_203AD34[a0], FALSE);
+        ClearDialogWindowAndFrameToTransparent(gUnknown_203AD34[a0], FALSE);
         ClearWindowTilemap(gUnknown_203AD34[a0]);
         RemoveWindow(gUnknown_203AD34[a0]);
         PutWindowTilemap(1);
-        schedule_bg_copy_tilemap_to_vram(0);
+        ScheduleBgCopyTilemapToVram(0);
         gUnknown_203AD34[a0] = 0xFF;
 
     }

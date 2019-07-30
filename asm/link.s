@@ -3288,7 +3288,7 @@ _0800AD30:
 	cmp r0, 0
 	beq _0800ADD8
 	bl DeactivateAllTextPrinters
-	bl reset_temp_tile_data_buffers
+	bl ResetTempTileDataBuffers
 	movs r0, 0x52
 	movs r1, 0
 	bl SetGpuReg
@@ -3387,7 +3387,7 @@ sub_800AE1C: @ 800AE1C
 	movs r1, 0x3
 	movs r2, 0x2
 	movs r3, 0x5
-	bl box_print
+	bl AddTextPrinterParameterized3
 	str r4, [sp]
 	str r5, [sp, 0x4]
 	ldr r0, _0800AECC @ =gUnknown_841DF05
@@ -3396,7 +3396,7 @@ sub_800AE1C: @ 800AE1C
 	movs r1, 0x3
 	movs r2, 0x2
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0
 	bl PutWindowTilemap
 	movs r0, 0x2
@@ -3444,7 +3444,7 @@ sub_800AED0: @ 800AED0
 	movs r1, 0x3
 	movs r2, 0x2
 	movs r3, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0x2
@@ -3522,7 +3522,7 @@ _0800AF7A:
 	movs r1, 0x3
 	movs r2, 0x2
 	movs r3, 0x14
-	bl box_print
+	bl AddTextPrinterParameterized3
 	b _0800AFC4
 	.align 2, 0
 _0800AF9C: .4byte gWirelessCommType
@@ -3541,7 +3541,7 @@ _0800AFA8:
 	movs r1, 0x3
 	movs r2, 0x2
 	movs r3, 0x14
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0800AFC4:
 	ldr r0, _0800B004 @ =gMain
 	movs r2, 0x87
@@ -4686,7 +4686,7 @@ _0800B85C:
 _0800B860:
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r2, _0800B8BC @ =gUnknown_3003FB4
+	ldr r2, _0800B8BC @ =gSioMlt_Recv
 	ldr r3, _0800B8C0 @ =0x04000120
 	ldr r0, [r3]
 	ldr r1, [r3, 0x4]
@@ -4731,7 +4731,7 @@ _0800B8A0:
 	.align 2, 0
 _0800B8B4: .4byte 0x0400012a
 _0800B8B8: .4byte 0x0000b9a0
-_0800B8BC: .4byte gUnknown_3003FB4
+_0800B8BC: .4byte gSioMlt_Recv
 _0800B8C0: .4byte 0x04000120
 _0800B8C4: .4byte gUnknown_3000E6B
 _0800B8C8: .4byte 0x00008fff

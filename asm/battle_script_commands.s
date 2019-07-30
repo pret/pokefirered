@@ -12,7 +12,7 @@ atk00_attackcanceler: @ 801D760
 	mov r6, r8
 	push {r6,r7}
 	sub sp, 0x4
-	ldr r0, _0801D77C @ =gUnknown_2023E8A
+	ldr r0, _0801D77C @ =gBattleOutcome
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0801D784
@@ -21,7 +21,7 @@ atk00_attackcanceler: @ 801D760
 	strb r0, [r1]
 	b _0801DAFC
 	.align 2, 0
-_0801D77C: .4byte gUnknown_2023E8A
+_0801D77C: .4byte gBattleOutcome
 _0801D780: .4byte gUnknown_2023BE3
 _0801D784:
 	ldr r2, _0801D7B4 @ =gBattleMons
@@ -9519,7 +9519,7 @@ _0802243C:
 	ble _0802240C
 	cmp r6, 0
 	bne _08022450
-	ldr r0, _0802253C @ =gUnknown_2023E8A
+	ldr r0, _0802253C @ =gBattleOutcome
 	ldrb r1, [r0]
 	movs r2, 0x2
 	orrs r1, r2
@@ -9553,7 +9553,7 @@ _08022484:
 	adds r5, 0x1
 	cmp r5, 0x5
 	ble _08022454
-	ldr r2, _0802253C @ =gUnknown_2023E8A
+	ldr r2, _0802253C @ =gBattleOutcome
 	cmp r6, 0
 	bne _08022498
 	ldrb r0, [r2]
@@ -9647,7 +9647,7 @@ _0802251E:
 	.align 2, 0
 _08022534: .4byte gUnknown_2023BC8
 _08022538: .4byte gPlayerParty
-_0802253C: .4byte gUnknown_2023E8A
+_0802253C: .4byte gBattleOutcome
 _08022540: .4byte gEnemyParty
 _08022544: .4byte gBattleTypeFlags
 _08022548: .4byte gBattlersCount
@@ -13273,7 +13273,7 @@ sub_80240D4: @ 80240D4
 	adds r1, r4
 	ldr r2, [r1]
 	movs r1, 0x2
-	bl sub_8044898
+	bl HandleSetPokedexFlag
 _0802412A:
 	ldr r2, _08024180 @ =gAbsentBattlerFlags
 	ldr r1, _08024184 @ =gBitTable
@@ -13398,7 +13398,7 @@ _08024228:
 	bl GetBankMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8043620
+	bl GetLinkTrainerFlankId
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x1
@@ -15311,7 +15311,7 @@ atk57: @ 80251C4
 	bl GetBattlerAtPosition
 	ldr r4, _080251F0 @ =gActiveBattler
 	strb r0, [r4]
-	ldr r0, _080251F4 @ =gUnknown_2023E8A
+	ldr r0, _080251F4 @ =gBattleOutcome
 	ldrb r1, [r0]
 	movs r0, 0
 	bl EmitCmd55
@@ -15326,7 +15326,7 @@ atk57: @ 80251C4
 	bx r0
 	.align 2, 0
 _080251F0: .4byte gActiveBattler
-_080251F4: .4byte gUnknown_2023E8A
+_080251F4: .4byte gBattleOutcome
 _080251F8: .4byte gUnknown_2023D74
 	thumb_func_end atk57
 
@@ -16141,7 +16141,7 @@ sub_80258AC: @ 80258AC
 	push {r7}
 	movs r6, 0
 	movs r5, 0
-	ldr r0, _080258F0 @ =gUnknown_2023E8A
+	ldr r0, _080258F0 @ =gBattleOutcome
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _080258C0
@@ -16171,7 +16171,7 @@ _080258C0:
 	mov r8, r0
 	b _080259E8
 	.align 2, 0
-_080258F0: .4byte gUnknown_2023E8A
+_080258F0: .4byte gBattleOutcome
 _080258F4: .4byte gTrainerBattleOpponent_A
 _080258F8: .4byte gBattleResources
 _080258FC: .4byte gBattleStruct
@@ -17903,7 +17903,7 @@ PutMonIconOnLvlUpBox: @ 8026688
 	orrs r0, r1
 	str r0, [sp, 0x4]
 	adds r0, r4, 0
-	bl sub_80971CC
+	bl GetValidMonIconPalettePtr
 	str r0, [sp, 0x8]
 	add r4, sp, 0x8
 	ldr r0, [r4, 0x4]
@@ -19745,7 +19745,7 @@ _0802753C:
 	cmp r0, 0
 	beq _080275AC
 	movs r0, 0x1
-	bl CountAliveMons
+	bl CountAliveMonsInBattle
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x2
@@ -21520,7 +21520,7 @@ _08028336:
 	bl GetBankMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8043620
+	bl GetLinkTrainerFlankId
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x1
@@ -21665,7 +21665,7 @@ _08028458:
 	bl GetBankMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8043620
+	bl GetLinkTrainerFlankId
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x1
@@ -22207,7 +22207,7 @@ _0802887C:
 	cmp r0, 0
 	beq _080288EC
 	movs r0, 0x1
-	bl CountAliveMons
+	bl CountAliveMonsInBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -32384,7 +32384,7 @@ _0802D9B4:
 	lsrs r0, 16
 	movs r1, 0x3
 	adds r2, r4, 0
-	bl sub_8044898
+	bl HandleSetPokedexFlag
 	ldr r1, _0802D9D4 @ =gUnknown_2023D74
 	ldr r0, [r1]
 	adds r0, 0x5

@@ -23,9 +23,9 @@ struct MEventStruct_Unk1442CC
 
 struct MEvent_Str_1
 {
-    u16 unk_000;
-    size_t unk_004;
-    const void * unk_008;
+    u16 status;
+    size_t size;
+    const void * data;
 };
 
 struct MEvent_Str_2

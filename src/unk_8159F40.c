@@ -28,7 +28,7 @@ void sub_8159F40(void)
     s32 opIdx = 0;
     const struct UnkStruct_84792D0 * data;
 
-    gBattleTypeFlags = BATTLE_TYPE_DOME;
+    gBattleTypeFlags = BATTLE_TYPE_POKEDUDE;
     ZeroPlayerPartyMons();
     ZeroEnemyPartyMons();
     data = gUnknown_84792D0[gSpecialVar_0x8004];
@@ -612,7 +612,7 @@ void sub_815A540(void)
         s16 x, y;
 
         PlayerGetDestCoords(&x, &y);
-        if (!MetatileBehavior_IsSurfable(MapGridGetMetatileBehaviorAt(x, y)) && TestPlayerAvatarFlags(0x08))
+        if (!MetatileBehavior_IsSurfable(MapGridGetMetatileBehaviorAt(x, y)) && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
         {
             struct MapObject *mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
             SetPlayerAvatarTransitionFlags(0x01);

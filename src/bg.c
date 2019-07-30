@@ -605,88 +605,25 @@ u16 Unused_LoadBgPalette(u8 bg, const void *src, u16 size, u16 destOffset)
     return (u8)cursor;
 }
 
-#ifdef NONMATCHING  // Matches everything but r5 and r6 are flipped, rrr
 bool8 IsDma3ManagerBusyWithBgCopy(void)
 {
-    u8 mod;
-    u8 div;
-    s8 reqSpace;
-
     int i;
 
     for (i = 0; i < 0x80; i++)
     {
-        div = i / 0x20;
-        mod = i % 0x20;
+        u8 div = i / 0x20;
+        u8 mod = i % 0x20;
 
-        if ((sDmaBusyBitfield[div] & (1 << mod)) != FALSE)
+        if ((sDmaBusyBitfield[div] & (1 << mod)))
         {
-            reqSpace = CheckForSpaceForDma3Request(i);
+            s8 reqSpace = CheckForSpaceForDma3Request(i);
             if (reqSpace == -1)
-            {
                 return TRUE;
-            }
-
             sDmaBusyBitfield[div] &= ~(1 << mod);
         }
     }
-
     return FALSE;
 }
-#else
-NAKED
-bool8 IsDma3ManagerBusyWithBgCopy(void)
-{
-    asm("push {r4-r7,lr}\n\
-    mov r5, #0\n\
-    mov r7, #0x1\n\
-    neg r7, r7\n\
-_08001ADC:\n\
-    add r0, r5, #0\n\
-    cmp r5, #0\n\
-    bge _08001AE4\n\
-    add r0, #0x1F\n\
-_08001AE4:\n\
-    asr r0, #5\n\
-    lsl r2, r0, #24\n\
-    lsl r0, #5\n\
-    sub r0, r5, r0\n\
-    lsl r0, #24\n\
-    lsr r0, #24\n\
-    ldr r1, =sDmaBusyBitfield\n\
-    lsr r2, #22\n\
-    add r4, r2, r1\n\
-    mov r6, #0x1\n\
-    lsl r6, r0\n\
-    ldr r0, [r4]\n\
-    and r0, r6\n\
-    cmp r0, #0\n\
-    beq _08001B22\n\
-    lsl r0, r5, #16\n\
-    asr r0, #16\n\
-    bl CheckForSpaceForDma3Request\n\
-    lsl r0, #24\n\
-    asr r0, #24\n\
-    cmp r0, r7\n\
-    bne _08001B1C\n\
-    mov r0, #0x1\n\
-    b _08001B2A\n\
-    .pool\n\
-_08001B1C:\n\
-    ldr r0, [r4]\n\
-    bic r0, r6\n\
-    str r0, [r4]\n\
-_08001B22:\n\
-    add r5, #0x1\n\
-    cmp r5, #0x7F\n\
-    ble _08001ADC\n\
-    mov r0, #0\n\
-_08001B2A:\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1\n");
-}
-#endif // NONMATCHING
 
 void ShowBg(u8 bg)
 {
@@ -928,79 +865,58 @@ void SetBgAffine(u8 bg, u32 srcCenterX, u32 srcCenterY, s16 dispCenterX, s16 dis
     SetBgAffineInternal(bg, srcCenterX, srcCenterY, dispCenterX, dispCenterY, scaleX, scaleY, rotationAngle);
 }
 
-u8 Unused_AdjustBgMosaic(u8 a1, u8 a2)
+u8 AdjustBgMosaic(u8 value, u8 mode)
 {
-    u16 result;
-    s16 test1;
-    s16 test2;
+    u16 mosaicSize;
+    s16 bgMosaicH;
+    s16 bgMosaicV;
+    mosaicSize = GetGpuReg(REG_OFFSET_MOSAIC);
+    bgMosaicH = mosaicSize & 0xF;
+    bgMosaicV = (mosaicSize >> 4) & 0xF;
+    mosaicSize &= 0xFF00;
 
-    result = GetGpuReg(REG_OFFSET_MOSAIC);
-
-    test1 = result & 0xF;
-    test2 = (result >> 4) & 0xF;
-    result &= 0xFF00;
-
-    switch (a2)
+    switch (mode)
     {
-        case 0:
-        default:
-            test1 = a1 & 0xF;
-            test2 = a1 >> 0x4;
-            break;
-        case 1:
-            test1 = a1 & 0xF;
-            break;
-        case 2:
-            if ((test1 + a1) > 0xF)
-            {
-                test1 = 0xF;
-            }
-            else
-            {
-                test1 += a1;
-            }
-            break;
-        case 3:
-            if ((test1 - a1) < 0)
-            {
-                test1 = 0x0;
-            }
-            else
-            {
-                test1 -= a1;
-            }
-            break;
-        case 4:
-            test2 = a1 & 0xF;
-            break;
-        case 5:
-            if ((test2 + a1) > 0xF)
-            {
-                test2 = 0xF;
-            }
-            else
-            {
-                test2 += a1;
-            }
-            break;
-        case 6:
-            if ((test2 - a1) < 0)
-            {
-                test2 = 0x0;
-            }
-            else
-            {
-                test2 -= a1;
-            }
-            break;
+    case BG_MOSAIC_SET:
+    default:
+        bgMosaicH = value & 0xF;
+        bgMosaicV = value >> 0x4;
+        break;
+    case BG_MOSAIC_SET_H:
+        bgMosaicH = value & 0xF;
+        break;
+    case BG_MOSAIC_INC_H:
+        if ((bgMosaicH + value) > 0xF)
+            bgMosaicH = 0xF;
+        else
+            bgMosaicH += value;
+        break;
+    case BG_MOSAIC_DEC_H:
+        if ((bgMosaicH - value) < 0)
+            bgMosaicH = 0x0;
+        else
+            bgMosaicH -= value;
+        break;
+    case BG_MOSAIC_SET_V:
+        bgMosaicV = value & 0xF;
+        break;
+    case BG_MOSAIC_INC_V:
+        if ((bgMosaicV + value) > 0xF)
+            bgMosaicV = 0xF;
+        else
+            bgMosaicV += value;
+        break;
+    case BG_MOSAIC_DEC_V:
+        if ((bgMosaicV - value) < 0)
+            bgMosaicV = 0x0;
+        else
+            bgMosaicV -= value;
+        break;
     }
-
-    result |= ((test2 << 0x4) & 0xF0);
-    result |= (test1 & 0xF);
-
-    SetGpuReg(REG_OFFSET_MOSAIC, result);
-
-    return result;
+    mosaicSize |= ((bgMosaicV << 0x4) & 0xF0);
+    mosaicSize |= (bgMosaicH & 0xF);
+    SetGpuReg(REG_OFFSET_MOSAIC, mosaicSize);
+    return mosaicSize;
 }
 
 void SetBgTilemapBuffer(u8 bg, void *tilemap)

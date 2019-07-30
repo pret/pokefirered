@@ -3,15 +3,41 @@ CPP := $(CC) -E
 LD := tools/binutils/bin/arm-none-eabi-ld
 OBJCOPY := tools/binutils/bin/arm-none-eabi-objcopy
 
+GAME_VERSION := FIRERED
+REVISION := 0
+GAME_LANGUAGE := ENGLISH
+
+# So long as baserom.gba is required, we error out if the
+# user tries to build any ROM other than FireRed.
+ifneq ($(GAME_VERSION),FIRERED)
+$(error We can only build English Pokemon FireRed v1.0 currently)
+else ifneq ($(REVISION),0)
+$(error We can only build English Pokemon FireRed v1.0 currently)
+else ifneq ($(GAME_LANGUAGE),ENGLISH)
+$(error We can only build English Pokemon FireRed v1.0 currently)
+endif
+
+ifeq ($(GAME_VERSION),FIRERED)
 TITLE       := POKEMON FIRE
-GAME_CODE   := BPRE
+GAME_CODE   := BPR
+BUILD_NAME  := firered
+else
+TITLE       := POKEMON LEAF
+GAME_CODE   := BPL
+BUILD_NAME  := leafgreen
+endif
+ifeq ($(GAME_LANGUAGE),ENGLISH)
+GAME_CODE   := $(GAME_CODE)E
+endif
+ifneq ($(REVISION),0)
+BUILD_NAME  := $(BUILD_NAME)_rev$(REVISION)
+endif
 MAKER_CODE  := 01
-REVISION    := 0
 
 SHELL := /bin/bash -o pipefail
 
-ROM := pokefirered.gba
-OBJ_DIR := build/firered
+ROM := poke$(BUILD_NAME).gba
+OBJ_DIR := build/$(BUILD_NAME)
 
 ELF = $(ROM:.gba=.elf)
 MAP = $(ROM:.gba=.map)
@@ -26,12 +52,12 @@ ASM_BUILDDIR = $(OBJ_DIR)/$(ASM_SUBDIR)
 DATA_ASM_BUILDDIR = $(OBJ_DIR)/$(DATA_ASM_SUBDIR)
 SONG_BUILDDIR = $(OBJ_DIR)/$(SONG_SUBDIR)
 
-ASFLAGS := -mcpu=arm7tdmi
+ASFLAGS := -mcpu=arm7tdmi --defsym $(GAME_VERSION)=1 --defsym REVISION=$(REVISION) --defsym $(GAME_LANGUAGE)=1
 
 CC1             := tools/agbcc/bin/agbcc
 override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
 
-CPPFLAGS := -I tools/agbcc -I tools/agbcc/include -iquote include -nostdinc -undef
+CPPFLAGS := -I tools/agbcc -I tools/agbcc/include -iquote include -nostdinc -undef -D$(GAME_VERSION) -DREVISION=$(REVISION) -D$(GAME_LANGUAGE)
 
 LDFLAGS = -Map ../../$(MAP)
 
@@ -46,6 +72,7 @@ PREPROC := tools/preproc/preproc
 RAMSCRGEN := tools/ramscrgen/ramscrgen
 FIX := tools/gbafix/gbafix
 MAPJSON := tools/mapjson/mapjson
+JSONPROC := tools/jsonproc/jsonproc
 
 # Clear the default suffixes
 .SUFFIXES:
@@ -60,6 +87,16 @@ MAPJSON := tools/mapjson/mapjson
 .PHONY: rom tools clean compare tidy
 
 $(shell mkdir -p $(C_BUILDDIR) $(ASM_BUILDDIR) $(DATA_ASM_BUILDDIR) $(SONG_BUILDDIR))
+
+infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
+
+# Build tools when building the rom
+# Disable dependency scanning for clean/tidy/tools
+ifeq (,$(filter-out all compare,$(MAKECMDGOALS)))
+$(call infoshell, $(MAKE) tools)
+else
+NODEP := 1
+endif
 
 C_SRCS := $(wildcard $(C_SUBDIR)/*.c)
 C_OBJS := $(patsubst $(C_SUBDIR)/%.c,$(C_BUILDDIR)/%.o,$(C_SRCS))
@@ -76,6 +113,10 @@ SONG_OBJS := $(patsubst $(SONG_SUBDIR)/%.s,$(SONG_BUILDDIR)/%.o,$(SONG_SRCS))
 OBJS := $(C_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS) $(SONG_OBJS)
 OBJS_REL := $(patsubst $(OBJ_DIR)/%,%,$(OBJS))
 
+MAKEFLAGS += --no-print-directory
+
+AUTO_GEN_TARGETS :=
+
 all: rom
 
 rom: $(ROM)
@@ -91,6 +132,7 @@ tools:
 	@$(MAKE) -C tools/mid2agb
 	@$(MAKE) -C tools/gbafix
 	@$(MAKE) -C tools/mapjson
+	@$(MAKE) -C tools/jsonproc
 
 # For contributors to make sure a change didn't affect the contents of the ROM.
 compare: rom
@@ -103,6 +145,7 @@ clean: tidy
 	rm -f $(DATA_ASM_SUBDIR)/layouts/layouts.inc $(DATA_ASM_SUBDIR)/layouts/layouts_table.inc
 	rm -f $(DATA_ASM_SUBDIR)/maps/connections.inc $(DATA_ASM_SUBDIR)/maps/events.inc $(DATA_ASM_SUBDIR)/maps/groups.inc $(DATA_ASM_SUBDIR)/maps/headers.inc
 	find $(DATA_ASM_SUBDIR)/maps \( -iname 'connections.inc' -o -iname 'events.inc' -o -iname 'header.inc' \) -exec rm {} +
+	rm -f $(AUTO_GEN_TARGETS)
 	@$(MAKE) clean -C berry_fix
 	@$(MAKE) clean -C tools/gbagfx
 	@$(MAKE) clean -C tools/scaninc
@@ -114,6 +157,7 @@ clean: tidy
 	@$(MAKE) clean -C tools/mid2agb
 	@$(MAKE) clean -C tools/gbafix
 	@$(MAKE) clean -C tools/mapjson
+	@$(MAKE) clean -C tools/jsonproc
 
 tidy:
 	rm -f $(ROM) $(ELF) $(MAP)
@@ -123,6 +167,7 @@ tidy:
 include graphics_file_rules.mk
 include tileset_rules.mk
 include map_data_rules.mk
+include json_data_rules.mk
 
 %.s: ;
 %.png: ;
@@ -199,10 +244,10 @@ $(OBJ_DIR)/ld_script.ld: ld_script.txt $(OBJ_DIR)/sym_bss.ld $(OBJ_DIR)/sym_comm
 
 $(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS)
 	cd $(OBJ_DIR) && ../../$(LD) $(LDFLAGS) -T ld_script.ld -o ../../$@ $(LIB)
+	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
 
 $(ROM): $(ELF)
-	$(OBJCOPY) -O binary $< $@
-	$(FIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
+	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
 
 berry_fix/berry_fix.gba:
 	@$(MAKE) -C berry_fix

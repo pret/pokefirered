@@ -90,7 +90,7 @@ EventScript_1652C0:: @ 81652C0
 	setvar VAR_0x8004, SPECIES_DEOXYS
 	setvar VAR_0x8005, 30
 	setvar VAR_0x8006, 0
-	special sub_8044838
+	special CreateObedientEnemyMon
 	setflag FLAG_0x807
 	special sub_807F9D8
 	waitstate

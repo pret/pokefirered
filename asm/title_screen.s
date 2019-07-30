@@ -113,13 +113,13 @@ _080789F0:
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r1, _08078A9C @ =gUnknown_8EAD390
 	str r6, [sp]
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r0, _08078AA0 @ =gUnknown_8EAD5E8
 	movs r1, 0xD0
 	movs r2, 0x20
@@ -129,13 +129,13 @@ _080789F0:
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r1, _08078AA8 @ =gUnknown_8EADEE4
 	str r6, [sp]
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r5, _08078AAC @ =gUnknown_8EAE094
 	adds r0, r5, 0
 	movs r1, 0xF0
@@ -146,13 +146,13 @@ _080789F0:
 	movs r0, 0x2
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r1, _08078AB4 @ =gUnknown_8EAE374
 	str r6, [sp]
 	movs r0, 0x2
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	adds r0, r5, 0
 	movs r1, 0xE0
 	movs r2, 0x20
@@ -162,13 +162,13 @@ _080789F0:
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r1, _08078ABC @ =gUnknown_83BF5A8
 	str r6, [sp]
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	bl sub_8079708
 	b _08078B18
 	.align 2, 0
@@ -184,7 +184,7 @@ _08078AB4: .4byte gUnknown_8EAE374
 _08078AB8: .4byte gUnknown_83BF58C
 _08078ABC: .4byte gUnknown_83BF5A8
 _08078AC0:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	cmp r0, 0
 	bne _08078B26
@@ -1056,7 +1056,11 @@ _080791DE:
 	lsrs r5, r0, 24
 	cmp r5, 0
 	bne _080792A6
-	movs r0, 0x6
+	.ifdef FIRERED
+	movs r0, 0x6 @ CHARIZARD
+	.else
+	movs r0, 0x3 @ VENUSAUR
+	.endif
 	movs r1, 0
 	bl PlayCry1
 	ldrb r0, [r4, 0xC]
@@ -1106,7 +1110,7 @@ _08079248:
 	bne _080792A6
 	bl SeedRngAndSetTrainerId
 	bl SetSaveBlocksPointers
-	bl sub_8054A28
+	bl ResetMenuAndMonGlobals
 	bl Save_ResetSaveCounters
 	movs r0, 0
 	bl Save_LoadGameData
@@ -1641,7 +1645,7 @@ _0807965C:
 	movs r1, 0xE0
 	movs r2, 0x20
 	bl LoadPalette
-	bl sub_80F6C14
+	bl ResetBgPositions
 	movs r1, 0xE0
 	lsls r1, 8
 	movs r0, 0
@@ -1688,13 +1692,13 @@ sub_80796E8: @ 80796E8
 	cmp r0, 0
 	bne _080796FE
 	bl m4aMPlayAllStop
-	ldr r0, _08079704 @ =sub_815F74C
+	ldr r0, _08079704 @ =mb_berry_fix_serve
 	bl SetMainCallback2
 _080796FE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08079704: .4byte sub_815F74C
+_08079704: .4byte mb_berry_fix_serve
 	thumb_func_end sub_80796E8
 
 	thumb_func_start sub_8079708
@@ -1704,7 +1708,7 @@ sub_8079708: @ 8079708
 	ldr r4, _08079728 @ =gUnknown_83BFB9C
 _0807970E:
 	adds r0, r4, 0
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	adds r4, 0x8
 	adds r5, 0x1
 	cmp r5, 0x3

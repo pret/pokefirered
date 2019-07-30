@@ -23,7 +23,7 @@ sub_809AAB0: @ 809AAB0
 	strb r0, [r4, 0x16]
 	movs r0, 0
 	strh r0, [r4, 0xC]
-	bl sub_80CBE00
+	bl ContextNpcGetTextColor
 	lsls r0, 24
 	cmp r0, 0
 	bne _0809AAF0
@@ -49,7 +49,7 @@ _0809AAF8:
 	strb r0, [r4]
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_80F7750
+	bl SetStdWindowBorderStyle
 	movs r0, 0x2
 	movs r1, 0
 	bl GetMenuCursorDimensionByFont
@@ -74,7 +74,7 @@ _0809AAF8:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl ProgramAndPlaceMenuCursorOnWindow
+	bl Menu_InitCursor
 	ldrb r0, [r4]
 	bl PutWindowTilemap
 	ldrb r0, [r4]
@@ -194,7 +194,7 @@ sub_809AC10: @ 809AC10
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
-	bl ProcessMenuInputNoWrapAround
+	bl Menu_ProcessInputNoWrapAround
 	lsls r0, 24
 	asrs r1, r0, 24
 	movs r0, 0x2
@@ -211,7 +211,7 @@ sub_809AC10: @ 809AC10
 	b _0809AC52
 _0809AC3C:
 	ldr r4, _0809AC58 @ =gUnknown_83DF09C
-	bl GetMenuCursorPos
+	bl Menu_GetCursorPos
 	lsls r0, 24
 	lsrs r0, 21
 	adds r4, 0x4
@@ -332,7 +332,7 @@ sub_809AD24: @ 809AD24
 	ldr r4, _0809AD3C @ =gUnknown_2039950
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_810F4D8
+	bl ClearStdWindowAndFrameToTransparent
 	ldrb r0, [r4]
 	bl RemoveWindow
 	pop {r4}
@@ -435,7 +435,7 @@ sub_809ADE4: @ 809ADE4
 	bl AnimateSprites
 	bl BuildOamBuffer
 	bl UpdatePaletteFade
-	bl do_scheduled_bg_tilemap_copies_to_vram
+	bl DoScheduledBgTilemapCopiesToVram
 	pop {r0}
 	bx r0
 	thumb_func_end sub_809ADE4
@@ -515,7 +515,7 @@ _0809AEA0: .4byte gTasks
 _0809AEA4: .4byte sub_809AE00
 _0809AEA8: .4byte sub_809ADE4
 _0809AEAC:
-	bl sub_80BF768
+	bl SetVBlankHBlankCallbacksToNull
 	str r4, [sp, 0x8]
 	movs r1, 0xE0
 	lsls r1, 19
@@ -523,13 +523,13 @@ _0809AEAC:
 	add r0, sp, 0x8
 	bl CpuFastSet
 	bl ScanlineEffect_Stop
-	bl reset_temp_tile_data_buffers
+	bl ResetTempTileDataBuffers
 	bl FreeAllSpritePalettes
 	bl ResetPaletteFade
 	bl ResetSpriteData
 	bl ResetTasks
-	bl clear_scheduled_bg_copies_to_vram
-	bl sub_80984D8
+	bl ClearScheduledBgCopiesToVram
+	bl ResetItemMenuIconState
 	bl sub_809AF6C
 	lsls r0, 24
 	cmp r0, 0
@@ -572,14 +572,14 @@ _0809AEAC:
 	ldrb r0, [r0, 0x16]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_813F66C
+	bl BuyMenuInitWindows
 	bl sub_809B080
 	b _0809AF5E
 	.align 2, 0
 _0809AF4C: .4byte 0x01000100
 _0809AF50: .4byte gUnknown_2039934
 _0809AF54:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	cmp r0, 0
 	bne _0809AF64
@@ -721,7 +721,7 @@ sub_809B080: @ 809B080
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x1
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r0, _0809B0B4 @ =gUnknown_2039934
 	ldrb r1, [r0, 0x16]
 	movs r0, 0xF
@@ -793,7 +793,7 @@ _0809B118:
 	movs r1, 0
 	movs r2, 0xE
 	movs r3, 0x1E
-	bl sub_80F6B08
+	bl SetBgRectPal
 	b _0809B14E
 	.align 2, 0
 _0809B138: .4byte gUnknown_2039934
@@ -805,10 +805,10 @@ _0809B13C:
 	movs r1, 0
 	movs r2, 0xC
 	movs r3, 0x1E
-	bl sub_80F6B08
+	bl SetBgRectPal
 _0809B14E:
 	movs r0, 0x1
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	add sp, 0x8
 	pop {r0}
 	bx r0
@@ -819,15 +819,15 @@ sub_809B15C: @ 809B15C
 	push {lr}
 	bl sub_809B764
 	bl sub_809BAFC
-	bl sub_813F6D0
+	bl BuyMenuDrawMoneyBox
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0x1
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0x3
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	pop {r0}
 	bx r0
 	thumb_func_end sub_809B15C
@@ -1069,7 +1069,7 @@ _0809B34A:
 	lsrs r1, 30
 	movs r0, 0x1
 	eors r0, r1
-	bl sub_8098940
+	bl DestroyItemMenuIcon
 	movs r0, 0x2
 	negs r0, r0
 	cmp r5, r0
@@ -1079,7 +1079,7 @@ _0809B34A:
 	ldrb r1, [r6, 0x17]
 	lsls r1, 29
 	lsrs r1, 30
-	bl sub_80988E8
+	bl CreateItemMenuIcon
 	b _0809B398
 	.align 2, 0
 _0809B384: .4byte gUnknown_8416757
@@ -1089,7 +1089,7 @@ _0809B38C:
 	ldrb r1, [r6, 0x17]
 	lsls r1, 29
 	lsrs r1, 30
-	bl sub_80988E8
+	bl CreateItemMenuIcon
 _0809B398:
 	ldr r3, _0809B3D4 @ =gUnknown_2039934
 	ldrb r2, [r3, 0x17]
@@ -1116,7 +1116,7 @@ _0809B398:
 	movs r1, 0x2
 	adds r2, r7, 0
 	movs r3, 0
-	bl sub_813F6F4
+	bl BuyMenuPrint
 	b _0809B400
 	.align 2, 0
 _0809B3D0: .4byte 0x00000177
@@ -1138,7 +1138,7 @@ _0809B3D8:
 	movs r1, 0x2
 	adds r2, r7, 0
 	movs r3, 0x2
-	bl sub_813F6F4
+	bl BuyMenuPrint
 _0809B400:
 	add sp, 0x14
 	pop {r4-r7}
@@ -1204,7 +1204,7 @@ _0809B45C:
 	adds r0, r6, 0
 	movs r1, 0
 	movs r3, 0x69
-	bl sub_813F6F4
+	bl BuyMenuPrint
 _0809B480:
 	add sp, 0x14
 	pop {r4-r6}
@@ -1251,7 +1251,7 @@ sub_809B494: @ 809B494
 	movs r1, 0
 	adds r2, r5, 0
 	movs r3, 0
-	bl sub_813F6F4
+	bl BuyMenuPrint
 	lsls r0, r7, 16
 	lsrs r0, 16
 	bl ItemIdToBattleMoveId
@@ -1273,7 +1273,7 @@ sub_809B494: @ 809B494
 	movs r1, 0x2
 	adds r2, r5, 0
 	movs r3, 0
-	bl sub_813F6F4
+	bl BuyMenuPrint
 	b _0809B55C
 	.align 2, 0
 _0809B514: .4byte gStringVar1
@@ -1294,7 +1294,7 @@ _0809B528:
 	movs r0, 0x6
 	movs r1, 0
 	movs r3, 0
-	bl sub_813F6F4
+	bl BuyMenuPrint
 	ldr r2, _0809B568 @ =gUnknown_8416217
 	movs r0, 0x10
 	str r0, [sp]
@@ -1305,7 +1305,7 @@ _0809B528:
 	movs r0, 0x6
 	movs r1, 0x2
 	movs r3, 0
-	bl sub_813F6F4
+	bl BuyMenuPrint
 _0809B55C:
 	add sp, 0x14
 	pop {r4-r7}
@@ -1388,7 +1388,7 @@ _0809B5E0:
 	movs r0, 0x4
 	movs r1, 0x2
 	movs r3, 0x1
-	bl sub_813F6F4
+	bl BuyMenuPrint
 _0809B5F8:
 	add sp, 0x14
 	pop {r4,r5}
@@ -1510,7 +1510,7 @@ _0809B6C4:
 	movs r2, 0x8
 	movs r3, 0x58
 _0809B6E2:
-	bl AddScrollIndicatorArrowPairParametrized
+	bl AddScrollIndicatorArrowPairParameterized
 	lsls r0, 3
 	ldrb r2, [r4, 0x17]
 	movs r1, 0x7
@@ -1542,7 +1542,7 @@ sub_809B6FC: @ 809B6FC
 	movs r1, 0x98
 	movs r2, 0x48
 	movs r3, 0x68
-	bl AddScrollIndicatorArrowPairParametrized
+	bl AddScrollIndicatorArrowPairParameterized
 	lsls r0, 3
 	ldrb r2, [r4, 0x17]
 	movs r1, 0x7
@@ -2017,7 +2017,7 @@ _0809BA56:
 	str r0, [sp]
 	adds r0, r4, 0
 	ldr r1, _0809BAF4 @ =SpriteCallbackDummy
-	bl AddPseudoFieldObject
+	bl AddPseudoEventObject
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r2, r0, 4
@@ -2134,7 +2134,7 @@ sub_809BB44: @ 809BB44
 	movs r1, 0
 	adds r2, r4, 0
 	movs r3, 0x2
-	bl sub_813F6F4
+	bl BuyMenuPrint
 	add sp, 0x14
 	pop {r4}
 	pop {r0}
@@ -2164,13 +2164,13 @@ sub_809BBC0: @ 809BBC0
 	cmp r0, 0
 	bne _0809BC8E
 	ldrb r0, [r5, 0xE]
-	bl ListMenuHandleInput
+	bl ListMenu_ProcessInput
 	adds r4, r0, 0
 	ldrb r0, [r5, 0xE]
 	ldr r7, _0809BC08 @ =gUnknown_2039942
 	subs r2, r7, 0x2
 	adds r1, r7, 0
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	movs r0, 0x2
 	negs r0, r0
 	cmp r4, r0
@@ -2223,7 +2223,7 @@ _0809BC1A:
 	ldr r1, _0809BC74 @ =gUnknown_8416842
 	ldr r2, _0809BC78 @ =sub_809BF98
 	adds r0, r6, 0
-	bl sub_813F75C
+	bl BuyMenuDisplayMessage
 	b _0809BC8E
 	.align 2, 0
 _0809BC70: .4byte gSaveBlock1Ptr
@@ -2236,7 +2236,7 @@ _0809BC7C:
 	ldr r1, _0809BC98 @ =gUnknown_8416766
 	ldr r2, _0809BC9C @ =sub_809BCA0
 	adds r0, r6, 0
-	bl sub_813F75C
+	bl BuyMenuDisplayMessage
 _0809BC8E:
 	pop {r4-r7}
 	pop {r0}
@@ -2259,13 +2259,13 @@ sub_809BCA0: @ 809BCA0
 	ldr r0, _0809BD40 @ =gTasks+0x8
 	adds r5, r0
 	ldrh r0, [r5, 0xA]
-	bl sub_809A7DC
+	bl BagGetQuantityByItemId
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_813F7C0
+	bl BuyMenuQuantityBoxThinBorder
 	ldr r0, _0809BD44 @ =gStringVar1
 	adds r1, r4, 0
 	movs r2, 0x1
@@ -2287,15 +2287,15 @@ sub_809BCA0: @ 809BCA0
 	movs r1, 0x2
 	adds r2, r6, 0
 	movs r3, 0
-	bl sub_813F6F4
+	bl BuyMenuPrint
 	strh r4, [r5, 0x2]
 	movs r0, 0x3
 	movs r1, 0
-	bl sub_813F7A8
+	bl BuyMenuQuantityBoxNormalBorder
 	adds r0, r7, 0
 	bl sub_809BB44
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r0, _0809BD50 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0xA4
@@ -2365,7 +2365,7 @@ sub_809BD8C: @ 809BD8C
 	adds r0, r4, 0x2
 	ldr r6, _0809BDD0 @ =gUnknown_2039934
 	ldrh r1, [r6, 0x14]
-	bl sub_80BF848
+	bl AdjustQuantityAccordingToDPadInput
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2396,10 +2396,10 @@ _0809BDD4:
 	bl sub_809B73C
 	movs r0, 0x3
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearStdWindowAndFrameToTransparent
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearStdWindowAndFrameToTransparent
 	movs r0, 0x3
 	bl ClearWindowTilemap
 	movs r0, 0x1
@@ -2423,7 +2423,7 @@ _0809BDD4:
 	ldr r1, _0809BE4C @ =gUnknown_841678E
 	ldr r2, _0809BE50 @ =sub_809BE90
 	adds r0, r5, 0
-	bl sub_813F75C
+	bl BuyMenuDisplayMessage
 	b _0809BE88
 	.align 2, 0
 _0809BE3C: .4byte gMain
@@ -2442,10 +2442,10 @@ _0809BE54:
 	bl sub_809B73C
 	movs r0, 0x3
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearStdWindowAndFrameToTransparent
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearStdWindowAndFrameToTransparent
 	movs r0, 0x3
 	bl ClearWindowTilemap
 	movs r0, 0x1
@@ -2464,7 +2464,7 @@ sub_809BE90: @ 809BE90
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _0809BEA0 @ =gUnknown_83DF0B4
-	bl sub_813F7D8
+	bl BuyMenuConfirmPurchase
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -2493,7 +2493,7 @@ sub_809BEA4: @ 809BEA4
 	ldr r1, _0809BEEC @ =gUnknown_84167E7
 	ldr r2, _0809BEF0 @ =sub_809BF0C
 	adds r0, r5, 0
-	bl sub_813F75C
+	bl BuyMenuDisplayMessage
 	adds r0, r5, 0
 	bl nullsub_52
 	ldrh r0, [r4, 0xA]
@@ -2509,7 +2509,7 @@ _0809BEF4:
 	ldr r1, _0809BF04 @ =gUnknown_8416861
 	ldr r2, _0809BF08 @ =sub_809BF98
 	adds r0, r5, 0
-	bl sub_813F75C
+	bl BuyMenuDisplayMessage
 _0809BEFE:
 	pop {r4,r5}
 	pop {r0}
@@ -2601,7 +2601,7 @@ sub_809BF98: @ 809BF98
 	adds r4, r5, r6
 	movs r0, 0x2
 	movs r1, 0
-	bl sub_810F260
+	bl ClearDialogWindowAndFrameToTransparent
 	ldrb r0, [r4, 0xE]
 	movs r1, 0x1
 	bl sub_809B57C
@@ -2621,7 +2621,7 @@ sub_809BF98: @ 809BF98
 	bl PutWindowTilemap
 _0809BFDC:
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	bl sub_809B690
 	adds r0, r6, 0
 	subs r0, 0x8
@@ -2691,7 +2691,7 @@ sub_809C04C: @ 809C04C
 	ldrb r0, [r2, 0xE]
 	movs r1, 0
 	movs r2, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	bl sub_809B604
 	ldr r0, _0809C090 @ =CB2_ReturnToField
 	bl SetMainCallback2

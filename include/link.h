@@ -147,7 +147,7 @@ extern bool8 gReceivedRemoteLinkPlayers;
 extern bool8 gLinkVSyncDisabled;
 
 extern u8 gUnknown_3003F84;
-extern u64 gUnknown_3003FB4;
+extern u64 gSioMlt_Recv;
 
 void Task_DestroySelf(u8);
 void OpenLink(void);
@@ -206,5 +206,8 @@ void sub_800AA80(u8);
 void sub_80098D8(void);
 void CloseLink(void);
 bool8 sub_800A4BC(void);
+bool32 sub_800B270(void);
+void sub_800B388(void);
+void sub_8054A28(void);
 
 #endif // GUARD_LINK_H

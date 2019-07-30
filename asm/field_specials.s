@@ -9,13 +9,13 @@
 sub_80CA618: @ 80CA618
 	push {lr}
 	bl sub_8112364
-	ldr r0, _080CA62C @ =sub_80F4C10
+	ldr r0, _080CA62C @ =CB2_ShowDiploma
 	bl SetMainCallback2
 	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CA62C: .4byte sub_80F4C10
+_080CA62C: .4byte CB2_ShowDiploma
 	thumb_func_end sub_80CA618
 
 	thumb_func_start sub_80CA630
@@ -178,11 +178,11 @@ _080CA748: .4byte gUnknown_8417FCC
 
 	thumb_func_start sub_80CA74C
 sub_80CA74C: @ 80CA74C
-	ldr r0, _080CA754 @ =gUnknown_2023E8A
+	ldr r0, _080CA754 @ =gBattleOutcome
 	ldrb r0, [r0]
 	bx lr
 	.align 2, 0
-_080CA754: .4byte gUnknown_2023E8A
+_080CA754: .4byte gBattleOutcome
 	thumb_func_end sub_80CA74C
 
 	thumb_func_start sub_80CA758
@@ -268,13 +268,13 @@ _080CA7E6:
 sub_80CA7EC: @ 80CA7EC
 	push {lr}
 	bl sub_8112364
-	ldr r1, _080CA800 @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r1, _080CA800 @ =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	movs r0, 0x1
 	bl sub_80BFF50
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CA800: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
+_080CA800: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
 	thumb_func_end sub_80CA7EC
 
 	thumb_func_start sub_80CA804
@@ -413,7 +413,7 @@ sub_80CA8F8: @ 80CA8F8
 	movs r4, 0
 	movs r7, 0
 	movs r5, 0
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r0, 0
@@ -510,7 +510,7 @@ sub_80CA9A8: @ 80CA9A8
 	movs r4, 0
 	movs r6, 0
 	movs r5, 0
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r0, 0
@@ -601,7 +601,7 @@ SpawnScriptFieldObject: @ 80CAA34
 	movs r0, 0x12
 	movs r1, 0x8
 	movs r2, 0x7F
-	bl SpawnSpecialFieldObjectParametrized
+	bl SpawnSpecialFieldObjectParameterized
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080CAA84 @ =gMapObjects
@@ -2071,12 +2071,12 @@ sub_80CB580: @ 80CB580
 	ldr r5, _080CB62C @ =0x0000021d
 	adds r1, r5, 0
 	movs r2, 0xD0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	ldrb r0, [r4]
 	movs r1, 0
 	adds r2, r5, 0
 	movs r3, 0xD
-	bl SetWindowBorderStyle
+	bl DrawStdFrameWithCustomTileAndPalette
 	ldrb r0, [r4]
 	ldr r2, _080CB630 @ =gUnknown_8418075
 	movs r1, 0x2
@@ -2141,7 +2141,7 @@ sub_80CB63C: @ 80CB63C
 	ldr r4, _080CB654 @ =gUnknown_2039A0C
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_810F4D8
+	bl ClearStdWindowAndFrameToTransparent
 	ldrb r0, [r4]
 	bl RemoveWindow
 	pop {r4}
@@ -2631,7 +2631,7 @@ _080CB9D2:
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
 	movs r1, 0
-	bl sub_80F7750
+	bl SetStdWindowBorderStyle
 	ldr r4, _080CBA70 @ =gUnknown_3005360
 	ldrh r0, [r5, 0xA]
 	strh r0, [r4, 0xC]
@@ -2753,7 +2753,7 @@ sub_80CBADC: @ 80CBADC
 	ldr r4, _080CBB20 @ =gUnknown_3005378
 	adds r1, r4, 0
 	movs r2, 0
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	ldr r1, _080CBB24 @ =gUnknown_2039A18
 	ldrh r0, [r4]
 	strh r0, [r1]
@@ -2781,7 +2781,7 @@ sub_80CBB28: @ 80CBB28
 	ldrh r0, [r6, 0x24]
 	lsls r0, 24
 	lsrs r0, 24
-	bl ListMenuHandleInput
+	bl ListMenu_ProcessInput
 	adds r4, r0, 0
 	movs r0, 0x2
 	negs r0, r0
@@ -2854,7 +2854,7 @@ sub_80CBBAC: @ 80CBBAC
 	lsrs r0, 24
 	movs r1, 0
 	movs r2, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	ldr r0, _080CBC28 @ =gUnknown_2039A14
 	ldr r0, [r0]
 	bl Free
@@ -2862,7 +2862,7 @@ sub_80CBBAC: @ 80CBBAC
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
-	bl sub_810F4D8
+	bl ClearStdWindowAndFrameToTransparent
 	ldrh r0, [r4, 0x22]
 	lsls r0, 24
 	lsrs r0, 24
@@ -3150,8 +3150,8 @@ _080CBDF8: .4byte gSelectedEventObject
 _080CBDFC: .4byte gUnknown_20370DA
 	thumb_func_end sub_80CBDE8
 
-	thumb_func_start sub_80CBE00
-sub_80CBE00: @ 80CBE00
+	thumb_func_start ContextNpcGetTextColor
+ContextNpcGetTextColor: @ 80CBE00
 	push {lr}
 	ldr r0, _080CBE18 @ =gUnknown_20370DA
 	ldrh r0, [r0]
@@ -3183,7 +3183,7 @@ _080CBE20:
 	lsls r0, 24
 	lsrs r0, 24
 _080CBE40:
-	bl sub_813CD24
+	bl GetColorFromTextColorTable
 _080CBE44:
 	lsls r0, 24
 	lsrs r0, 24
@@ -3192,7 +3192,7 @@ _080CBE48:
 	bx r1
 	.align 2, 0
 _080CBE4C: .4byte gMapObjects
-	thumb_func_end sub_80CBE00
+	thumb_func_end ContextNpcGetTextColor
 
 	thumb_func_start sub_80CBE50
 sub_80CBE50: @ 80CBE50
@@ -3469,7 +3469,7 @@ ChangeBoxPokemonNickname_CB: @ 80CC064
 	ldrb r1, [r1]
 	ldr r2, _080CC084 @ =gStringVar2
 	bl SetBoxMonNickFromAnyBox
-	bl c2_exit_to_overworld_1_continue_scripts_restart_music
+	bl CB2_ReturnToFieldContinueScriptPlayMapMusic
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3577,7 +3577,7 @@ ChangePokemonNickname_CB: @ 80CC144
 	ldr r2, _080CC16C @ =gStringVar2
 	movs r1, 0x2
 	bl SetMonData
-	bl c2_exit_to_overworld_1_continue_scripts_restart_music
+	bl CB2_ReturnToFieldContinueScriptPlayMapMusic
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -5152,7 +5152,7 @@ sub_80CCD84: @ 80CCD84
 	ldr r0, _080CCDC4 @ =0x00190018
 	cmp r1, r0
 	bne _080CCDC8
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2

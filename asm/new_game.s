@@ -159,7 +159,7 @@ sub_80549F8: @ 80549F8
 	movs r1, 0x1
 	movs r3, 0x6
 	bl Overworld_SetWarpDestination
-	bl warp_in
+	bl WarpIntoMap
 	add sp, 0x4
 	pop {r0}
 	bx r0
@@ -174,8 +174,8 @@ Sav2_ClearSetDefault: @ 8054A18
 	bx r0
 	thumb_func_end Sav2_ClearSetDefault
 
-	thumb_func_start sub_8054A28
-sub_8054A28: @ 8054A28
+	thumb_func_start ResetMenuAndMonGlobals
+ResetMenuAndMonGlobals: @ 8054A28
 	push {lr}
 	ldr r1, _08054A5C @ =gUnknown_2031DB0
 	movs r0, 0
@@ -195,7 +195,7 @@ sub_8054A28: @ 8054A28
 	bx r0
 	.align 2, 0
 _08054A5C: .4byte gUnknown_2031DB0
-	thumb_func_end sub_8054A28
+	thumb_func_end ResetMenuAndMonGlobals
 
 	thumb_func_start sub_8054A60
 sub_8054A60: @ 8054A60
@@ -262,7 +262,7 @@ sub_8054A60: @ 8054A60
 	ldr r1, _08054B68 @ =0x00000296
 	adds r0, r1
 	strh r5, [r0]
-	bl sub_809A2DC
+	bl ClearItemSlotsInAllBagPockets
 	bl sub_80EB658
 	bl sub_809C794
 	bl sub_80BDD34

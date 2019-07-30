@@ -499,7 +499,7 @@ _081287FE:
 	.align 2, 0
 _0812880C: .4byte gUnknown_203B0E0
 _08128810:
-	bl ProcessMenuInput
+	bl Menu_ProcessInput
 	lsls r0, 24
 	asrs r0, 8
 	lsrs r6, r0, 16
@@ -534,7 +534,7 @@ _08128848:
 	movs r0, 0x5
 	bl PlaySE
 	movs r0, 0x1
-	bl MoveMenuCursor
+	bl Menu_MoveCursor
 	b _081288CE
 	.align 2, 0
 _08128864: .4byte gMain
@@ -2362,10 +2362,10 @@ _08129664:
 	ldrb r1, [r4, 0x8]
 	cmp r0, r1
 	beq _081296EC
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	movs r0, 0
 	adds r1, r4, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	ldr r1, _08129684 @ =gUnknown_841B3AA
 	b _081296D8
 	.align 2, 0
@@ -2404,14 +2404,14 @@ _081296BE:
 	ldrb r5, [r5]
 	cmp r0, r5
 	beq _081296EC
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	movs r0, 0
 	adds r1, r4, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	ldr r1, _081296E8 @ =gUnknown_841B3BE
 _081296D8:
 	adds r0, r6, 0
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	movs r0, 0x1
 	b _081296EE
 	.align 2, 0
@@ -2999,7 +2999,7 @@ sub_8129B14: @ 8129B14
 	bl InitBgsFromTemplates
 	ldr r0, _08129B6C @ =gUnknown_845AA94
 	bl InitWindows
-	bl reset_temp_tile_data_buffers
+	bl ResetTempTileDataBuffers
 	bl sub_812AD50
 	ldr r0, [r4]
 	bl sub_8129BB8
@@ -3199,7 +3199,7 @@ _08129C9C: .4byte gUnknown_203B0E4
 sub_8129CA0: @ 8129CA0
 	push {r4,lr}
 	adds r4, r0, 0
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3957,11 +3957,11 @@ sub_812A240: @ 812A240
 	beq _0812A280
 	b _0812A28A
 _0812A250:
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	bl sub_8129814
 	adds r1, r0, 0
 	movs r0, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	movs r0, 0x5
 	movs r1, 0
 	bl sub_812A578
@@ -4122,11 +4122,11 @@ sub_812A378: @ 812A378
 	beq _0812A3BC
 	b _0812A3C6
 _0812A388:
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	ldr r0, _0812A3B4 @ =gSaveBlock2Ptr
 	ldr r1, [r0]
 	movs r0, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	movs r0, 0x9
 	movs r1, 0
 	bl sub_812A578
@@ -4299,7 +4299,7 @@ sub_812A424: @ 812A424
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl ProgramAndPlaceMenuCursorOnWindow
+	bl Menu_InitCursor
 _0812A4F0:
 	add sp, 0x14
 	pop {r3}
@@ -4329,7 +4329,7 @@ sub_812A51C: @ 812A51C
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearStdWindowAndFrameToTransparent
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x18]
 	bl ClearWindowTilemap
@@ -4366,7 +4366,7 @@ _0812A564: .4byte gUnknown_203B0E4
 	thumb_func_start sub_812A568
 sub_812A568: @ 812A568
 	push {lr}
-	bl ProcessMenuInput
+	bl Menu_ProcessInput
 	lsls r0, 24
 	asrs r0, 24
 	pop {r1}
@@ -4455,7 +4455,7 @@ _0812A5F8:
 	adds r0, r1, 0
 	adds r0, 0x22
 	ldr r1, [r4]
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	ldr r0, [r5]
 	adds r6, r0, 0
 	adds r6, 0x22
@@ -4516,7 +4516,7 @@ _0812A642:
 	adds r0, r5, 0
 	movs r1, 0x2
 	adds r2, r6, 0
-	bl sub_812E62C
+	bl AddTextPrinterParameterized5
 	b _0812A6DA
 	.align 2, 0
 _0812A6AC: .4byte gUnknown_845AB64
@@ -4539,7 +4539,7 @@ _0812A6B0:
 	adds r0, r5, 0
 	movs r1, 0x2
 	adds r2, r6, 0
-	bl sub_812E62C
+	bl AddTextPrinterParameterized5
 _0812A6DA:
 	ldr r0, _0812A6F0 @ =gUnknown_203B0E4
 	ldr r0, [r0]
@@ -4568,7 +4568,7 @@ sub_812A6F4: @ 812A6F4
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearStdWindowAndFrameToTransparent
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1E]
 	bl ClearWindowTilemap
@@ -4689,7 +4689,7 @@ _0812A7B4:
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0x34
 	pop {r3-r5}
 	mov r8, r3
@@ -4767,7 +4767,7 @@ _0812A866:
 	movs r0, 0x2
 	movs r1, 0
 	lsrs r2, r5, 24
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r4, 0x4
 	adds r7, 0x1
 	adds r0, r6, 0
@@ -4807,7 +4807,7 @@ _0812A8A8:
 	movs r4, 0x80
 	lsls r4, 19
 	lsrs r2, r4, 24
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r0, r7, 0x1
 	str r0, [sp, 0x48]
 	adds r6, 0xC
@@ -4858,7 +4858,7 @@ _0812A90C:
 	movs r0, 0x2
 	movs r1, 0
 	adds r3, r4, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r2, r7, 0
 	add r0, sp, 0xC
 	str r0, [sp]
@@ -4870,7 +4870,7 @@ _0812A90C:
 	movs r0, 0x2
 	movs r1, 0
 	adds r3, r4, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0812A960:
 	ldr r7, [sp, 0x48]
 	mov r4, r10
@@ -4987,7 +4987,7 @@ sub_812AA10: @ 812AA10
 	movs r1, 0x2
 	movs r2, 0xE
 	movs r3, 0x5
-	bl sub_810FC80
+	bl UnionRoomAndTradeMenuPrintOptions
 	bl sub_81296F4
 	lsls r0, 24
 	lsrs r0, 24
@@ -5000,7 +5000,7 @@ sub_812AA10: @ 812AA10
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0
-	bl ProgramAndPlaceMenuCursorOnWindow
+	bl Menu_InitCursor
 	movs r0, 0x3
 	bl PutWindowTilemap
 	add sp, 0xC
@@ -5015,7 +5015,7 @@ sub_812AA64: @ 812AA64
 	push {lr}
 	movs r0, 0x3
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearStdWindowAndFrameToTransparent
 	movs r0, 0x3
 	bl ClearWindowTilemap
 	pop {r0}
@@ -5063,7 +5063,7 @@ sub_812AA78: @ 812AA78
 	movs r1, 0x2
 	movs r2, 0
 	adds r3, r4, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0x10
 	pop {r4,r5}
 	pop {r0}
@@ -5224,7 +5224,7 @@ sub_812AC08: @ 812AC08
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r1, _0812AC54 @ =gUnknown_8EAAA6C
 	movs r0, 0x1
 	movs r2, 0
@@ -5256,7 +5256,7 @@ sub_812AC58: @ 812AC58
 	movs r0, 0x2
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r1, _0812AC98 @ =gUnknown_8EA1958
 	movs r0, 0x2
 	movs r2, 0
@@ -5350,11 +5350,11 @@ sub_812AD20: @ 812AD20
 	movs r0, 0x3
 	movs r1, 0x1
 	movs r2, 0xD0
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	movs r0, 0x3
 	movs r1, 0xA
 	movs r2, 0x20
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	ldr r0, _0812AD4C @ =gTMCaseMainWindowPalette
 	movs r1, 0xE0
 	movs r2, 0x20
@@ -5510,7 +5510,7 @@ sub_812AE70: @ 812AE70
 	ldr r4, _0812AE9C @ =gUnknown_845AF58
 _0812AE76:
 	adds r0, r4, 0
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	adds r4, 0x8
 	adds r5, 0x1
 	cmp r5, 0x4

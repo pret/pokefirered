@@ -229,7 +229,7 @@ _0814BCA2:
 	movs r0, 0
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 	b _0814BD12
 	.align 2, 0
 _0814BCE8: .4byte gStringVar4
@@ -250,7 +250,7 @@ _0814BCF0:
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x2
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 _0814BD12:
 	movs r0, 0
 	movs r1, 0x3
@@ -2758,7 +2758,7 @@ _0814D03C:
 	movs r3, 0x6
 	bl ConvertIntToDecimalStringN
 	ldr r4, _0814D080 @ =gStringVar2
-	bl sub_815EFA0
+	bl GetBerryPowder
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0
@@ -2868,7 +2868,7 @@ _0814D106:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -2946,7 +2946,7 @@ _0814D1A6:
 	strb r0, [r5, 0xC]
 	b _0814D238
 _0814D1CA:
-	bl sub_80F7858
+	bl DisplayYesNoMenuDefaultYes
 	b _0814D230
 _0814D1D0:
 	bl Menu_ProcessInputNoWrapClearOnChoose
@@ -2963,7 +2963,7 @@ _0814D1D0:
 	bl memset
 	cmp r4, 0
 	bne _0814D202
-	bl sub_8099FAC
+	bl CheckHasAtLeastOneBerry
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814D1FE
@@ -3232,7 +3232,7 @@ _0814D3C0:
 	str r1, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x2
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 	b _0814D40C
 	.align 2, 0
 _0814D3EC: .4byte gUnknown_846E328
@@ -3249,7 +3249,7 @@ _0814D3F0:
 	str r0, [sp, 0xC]
 	movs r0, 0
 	movs r1, 0x2
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 _0814D40C:
 	movs r0, 0
 	movs r1, 0x3

@@ -60,7 +60,7 @@ sub_810EBAC: @ 810EBAC
 	strb r0, [r4]
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_80F7750
+	bl SetStdWindowBorderStyle
 _0810EBD0:
 	ldrb r0, [r4]
 	pop {r4}
@@ -81,7 +81,7 @@ sub_810EBE0: @ 810EBE0
 	adds r4, r0
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearStdWindowAndFrameToTransparent
 	ldrb r0, [r4]
 	bl ClearWindowTilemap
 	ldrb r0, [r4]
@@ -154,7 +154,7 @@ _0810EC62:
 	movs r1, 0x2
 	movs r2, 0x8
 	adds r3, r5, 0
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 _0810EC82:
 	add sp, 0x34
 	pop {r4,r5}
@@ -303,7 +303,7 @@ sub_810ED80: @ 810ED80
 	movs r1, 0xC2
 	movs r2, 0xC
 	movs r3, 0x94
-	bl AddScrollIndicatorArrowPairParametrized
+	bl AddScrollIndicatorArrowPairParameterized
 	strb r0, [r4, 0xA]
 	add sp, 0x10
 	pop {r4}

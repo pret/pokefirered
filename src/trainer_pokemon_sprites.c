@@ -109,7 +109,7 @@ void LoadPicPaletteByTagOrSlot(u16 species, u32 otId, u32 personality, u8 palett
         else
         {
             sCreatingSpriteTemplate.paletteTag = paletteTag;
-            LoadCompressedObjectPalette(GetMonSpritePalStructFromOtIdPersonality(species, otId, personality));
+            LoadCompressedSpritePalette(GetMonSpritePalStructFromOtIdPersonality(species, otId, personality));
         }
     }
     else
@@ -122,7 +122,7 @@ void LoadPicPaletteByTagOrSlot(u16 species, u32 otId, u32 personality, u8 palett
         else
         {
             sCreatingSpriteTemplate.paletteTag = paletteTag;
-            LoadCompressedObjectPalette(&gTrainerFrontPicPaletteTable[species]);
+            LoadCompressedSpritePalette(&gTrainerFrontPicPaletteTable[species]);
         }
     }
 }

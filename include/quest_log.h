@@ -27,6 +27,11 @@ void sub_8115748(u16);
 u8 sub_8112CAC(void);
 bool8 sub_81119D4(void (*func)(void));
 void sub_8111F38(u16, u16);
+void sub_8111134(void);
+void sub_8112EDC(u8 a0);
+u8 sub_8112EB4(void);
+void sub_8113018(const u8 * text, u8 mode);
+void MapNamePopupWindowIdSetDummy(void);
 
 extern u8 gUnknown_203ADFA;
 

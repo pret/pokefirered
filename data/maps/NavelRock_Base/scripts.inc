@@ -63,7 +63,7 @@ NavelRock_Base_EventScript_165134:: @ 8165134
 	setvar VAR_0x8004, SPECIES_LUGIA
 	setvar VAR_0x8005, 70
 	setvar VAR_0x8006, 0
-	special sub_8044838
+	special CreateObedientEnemyMon
 	setflag FLAG_0x807
 	special sub_807F9D8
 	waitstate

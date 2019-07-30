@@ -9,7 +9,7 @@
 sub_80EB658: @ 80EB658
 	push {r4-r6,lr}
 	movs r4, 0
-	bl sub_809A2A4
+	bl ClearPCItemSlots
 	ldr r1, _080EB6A8 @ =gUnknown_8402220
 	ldrh r0, [r1]
 	cmp r0, 0
@@ -149,7 +149,7 @@ _080EB77E:
 	strh r0, [r7, 0x14]
 	ldrb r0, [r7, 0x14]
 	movs r1, 0
-	bl sub_80F7750
+	bl SetStdWindowBorderStyle
 	movs r0, 0x2
 	movs r1, 0
 	bl GetMenuCursorDimensionByFont
@@ -187,9 +187,9 @@ _080EB77E:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl ProgramAndPlaceMenuCursorOnWindow
+	bl Menu_InitCursor
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r1, _080EB814 @ =gTasks
 	mov r2, r8
 	lsls r0, r2, 2
@@ -223,7 +223,7 @@ sub_80EB81C: @ 80EB81C
 	lsls r6, r1, 3
 	ldr r7, _080EB870 @ =gTasks+0x8
 	adds r4, r6, r7
-	bl ProcessMenuInputNoWrapAround
+	bl Menu_ProcessInputNoWrapAround
 	lsls r0, 24
 	asrs r5, r0, 24
 	movs r0, 0x2
@@ -237,13 +237,13 @@ sub_80EB81C: @ 80EB81C
 	bl PlaySE
 	ldrb r0, [r4, 0x14]
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearStdWindowAndFrameToTransparent
 	ldrb r0, [r4, 0x14]
 	bl ClearWindowTilemap
 	ldrb r0, [r4, 0x14]
 	bl RemoveWindow
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	adds r0, r7, 0
 	subs r0, 0x8
 	adds r0, r6, r0
@@ -256,13 +256,13 @@ _080EB874: .4byte sub_80EB9B8
 _080EB878:
 	ldrb r0, [r4, 0x14]
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearStdWindowAndFrameToTransparent
 	ldrb r0, [r4, 0x14]
 	bl ClearWindowTilemap
 	ldrb r0, [r4, 0x14]
 	bl RemoveWindow
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	adds r2, r7, 0
 	subs r2, 0x8
 	adds r2, r6, r2
@@ -464,7 +464,7 @@ _080EBA1E:
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl sub_80F7750
+	bl SetStdWindowBorderStyle
 	movs r0, 0x2
 	movs r1, 0
 	bl GetMenuCursorDimensionByFont
@@ -488,9 +488,9 @@ _080EBA1E:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl ProgramAndPlaceMenuCursorOnWindow
+	bl Menu_InitCursor
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r1, _080EBA88 @ =gUnknown_84021DC
 	lsls r0, r7, 2
 	adds r0, r1
@@ -541,7 +541,7 @@ sub_80EBAB8: @ 80EBAB8
 	ands r0, r1
 	cmp r0, 0
 	beq _080EBAE8
-	bl GetMenuCursorPos
+	bl Menu_GetCursorPos
 	lsls r0, 24
 	cmp r0, 0
 	beq _080EBB64
@@ -557,7 +557,7 @@ _080EBAE8:
 	ands r0, r1
 	cmp r0, 0
 	beq _080EBB20
-	bl GetMenuCursorPos
+	bl Menu_GetCursorPos
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -566,9 +566,9 @@ _080EBAE8:
 	bl PlaySE
 	movs r0, 0x1
 _080EBB04:
-	bl MoveMenuCursor
+	bl Menu_MoveCursor
 	ldr r4, _080EBB1C @ =gUnknown_84021DC
-	bl GetMenuCursorPos
+	bl Menu_GetCursorPos
 	lsls r0, 24
 	lsrs r0, 22
 	adds r0, r4
@@ -586,7 +586,7 @@ _080EBB20:
 	movs r0, 0x5
 	bl PlaySE
 	ldr r4, _080EBB48 @ =gUnknown_8402208
-	bl GetMenuCursorPos
+	bl Menu_GetCursorPos
 	lsls r0, 24
 	lsrs r0, 21
 	adds r4, 0x4
@@ -727,7 +727,7 @@ sub_80EBC38: @ 80EBC38
 	lsls r6, r0, 3
 	ldr r7, _080EBC6C @ =gTasks+0x8
 	adds r4, r6, r7
-	bl sub_809A33C
+	bl CountItemsInPC
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x4]
@@ -752,7 +752,7 @@ _080EBC78: .4byte sub_80EBCAC
 _080EBC7C:
 	ldrb r0, [r4, 0x14]
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearStdWindowAndFrameToTransparent
 	ldrb r0, [r4, 0x14]
 	bl ClearWindowTilemap
 	ldrb r0, [r4, 0x14]
@@ -811,7 +811,7 @@ sub_80EBCD8: @ 80EBCD8
 	bl CleanupOverworldWindowsAndTilemaps
 	ldrb r0, [r5, 0xC]
 	ldr r1, _080EBD14 @ =CB2_ReturnToField
-	bl sub_810D3F4
+	bl ItemPc_Init
 	adds r0, r4, 0
 	bl DestroyTask
 _080EBD06:
@@ -837,7 +837,7 @@ sub_80EBD18: @ 80EBD18
 	ldr r0, _080EBD44 @ =sub_80EBCD8
 	str r0, [r1]
 	movs r0, 0
-	bl sub_810DE94
+	bl ItemPc_SetInitializedFlag
 	movs r0, 0x1
 	movs r1, 0
 	bl fade_screen
@@ -861,7 +861,7 @@ sub_80EBD48: @ 80EBD48
 	adds r4, r0
 	ldrb r0, [r4, 0x14]
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearStdWindowAndFrameToTransparent
 	ldrb r0, [r4, 0x14]
 	bl ClearWindowTilemap
 	ldrb r0, [r4, 0x14]
@@ -1084,7 +1084,7 @@ sub_80EBEB0: @ 80EBEB0
 	mov r2, r8
 	bl AddTextPrinterParameterized
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r4, _080EBF38 @ =gUnknown_203AAC4
 	adds r0, r4, 0
 	bl sub_810EC98
@@ -1134,7 +1134,7 @@ sub_80EBF40: @ 80EBF40
 	cmp r0, 0
 	bne _080EBFEA
 	ldrb r0, [r4, 0x16]
-	bl ListMenuHandleInput
+	bl ListMenu_ProcessInput
 	adds r6, r0, 0
 	ldrb r0, [r4, 0x16]
 	ldr r7, _080EBF9C @ =gUnknown_203AAC6
@@ -1142,7 +1142,7 @@ sub_80EBF40: @ 80EBF40
 	mov r8, r1
 	adds r1, r7, 0
 	mov r2, r8
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	movs r0, 0x2
 	negs r0, r0
 	cmp r6, r0
@@ -1174,9 +1174,9 @@ _080EBFB6:
 	ldrb r0, [r4, 0x16]
 	adds r1, r7, 0
 	mov r2, r8
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	mov r1, r8
 	ldrb r0, [r1, 0xA]
 	bl RemoveScrollIndicatorArrowPair
@@ -1288,9 +1288,9 @@ sub_80EC094: @ 80EC094
 	ldrb r0, [r4, 0x16]
 	movs r1, 0
 	movs r2, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	bl sub_810EDB0
 	adds r0, r5, 0
 	bl sub_80EB8BC
@@ -1341,9 +1341,9 @@ sub_80EC0D8: @ 80EC0D8
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl ProgramAndPlaceMenuCursorOnWindow
+	bl Menu_InitCursor
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r1, _080EC154 @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
@@ -1369,7 +1369,7 @@ sub_80EC15C: @ 80EC15C
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r6, r5, 0
-	bl ProcessMenuInput_other
+	bl Menu_ProcessInput_other
 	lsls r0, 24
 	asrs r4, r0, 24
 	movs r0, 0x2
@@ -1578,7 +1578,7 @@ sub_80EC2FC: @ 80EC2FC
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_80F7858
+	bl DisplayYesNoMenuDefaultYes
 	ldr r1, _080EC31C @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -1875,7 +1875,7 @@ sub_80EC53C: @ 80EC53C
 	adds r0, r4, 0
 	bl sub_80EBEB0
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r1, _080EC56C @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -1900,7 +1900,7 @@ sub_80EC574: @ 80EC574
 	movs r0, 0x2
 	bl sub_810EBE0
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r1, _080EC59C @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4

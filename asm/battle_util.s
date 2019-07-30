@@ -5775,7 +5775,7 @@ _08019C40:
 	mov r8, r0
 _08019C66:
 	adds r0, r7, 0
-	bl sub_8043620
+	bl GetLinkTrainerFlankId
 	lsls r0, 24
 	lsrs r6, r0, 24
 	lsls r0, r6, 1

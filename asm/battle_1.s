@@ -223,11 +223,11 @@ sub_800F380: @ 800F380
 	movs r0, 0x2
 	movs r1, 0x12
 	movs r2, 0x10
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	movs r0, 0x2
 	movs r1, 0x22
 	movs r2, 0x10
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	ldr r4, _0800F3F0 @ =gPlttBufferUnfaded
 	adds r0, r4, 0
 	adds r0, 0xB8
@@ -257,7 +257,7 @@ sub_800F380: @ 800F380
 	movs r0, 0
 	movs r1, 0x30
 	movs r2, 0x70
-	bl sub_814FEAC
+	bl TextWindow_LoadResourcesStdFrame0
 	adds r0, r4, 0
 	adds r0, 0xEC
 	movs r1, 0
@@ -517,7 +517,7 @@ _0800F5C8: .4byte 0x00006001
 	thumb_func_start sub_800F5CC
 sub_800F5CC: @ 800F5CC
 	push {lr}
-	ldr r0, _0800F5E0 @ =gUnknown_2023E8A
+	ldr r0, _0800F5E0 @ =gBattleOutcome
 	ldrb r2, [r0]
 	cmp r2, 0x3
 	bne _0800F5E8
@@ -526,7 +526,7 @@ sub_800F5CC: @ 800F5CC
 	bl sub_80D87BC
 	b _0800F6F0
 	.align 2, 0
-_0800F5E0: .4byte gUnknown_2023E8A
+_0800F5E0: .4byte gBattleOutcome
 _0800F5E4: .4byte gUnknown_83FE883
 _0800F5E8:
 	ldr r0, _0800F61C @ =gBattleTypeFlags
@@ -1197,7 +1197,7 @@ sub_800FAE0: @ 800FAE0
 	ldr r0, _0800FB8C @ =gBattle_BG2_Y
 	strh r1, [r0]
 	ldr r0, _0800FB90 @ =gUnknown_8248318
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	b _0800FC26
 	.align 2, 0
 _0800FB64: .4byte gBattleTypeFlags

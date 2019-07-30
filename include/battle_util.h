@@ -87,5 +87,6 @@ void HandleAction_RunBattleScript(void);
 u8 GetMoveTarget(u16 move, u8 useMoveTarget);
 u8 IsMonDisobedient(void);
 void MarkBufferBankForExecution(u8 battlerId);
+void sub_80174B8(u8 battlerId);
 
 #endif // GUARD_BATTLE_UTIL_H

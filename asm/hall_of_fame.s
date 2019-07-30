@@ -521,7 +521,7 @@ _080F21B2:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -1194,7 +1194,7 @@ sub_80F26D4: @ 80F26D4
 	ldr r1, _080F2758 @ =0x0000021d
 	movs r0, 0x1
 	movs r2, 0xD0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	movs r0, 0x78
 	strh r0, [r4, 0xE]
 	ldr r0, _080F275C @ =Task_Hof_WaitAndPrintPlayerInfo
@@ -1277,7 +1277,7 @@ _080F27AC:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -1607,7 +1607,7 @@ sub_80F2AA4: @ 80F2AA4
 	movs r1, 0x1E
 	movs r2, 0
 	movs r3, 0xC
-	bl CreateWindow_SnapRight_StdPal
+	bl CreateTopBarWindowLoadPalette
 	movs r0, 0x3
 	bl Save_LoadGameData
 	lsls r0, 24
@@ -1894,7 +1894,7 @@ _080F2CB4:
 	adds r0, r5, 0
 	movs r2, 0
 	movs r3, 0
-	bl Menu_PrintHelpSystemUIHeader
+	bl TopBarWindowPrintTwoStrings
 	b _080F2D34
 	.align 2, 0
 _080F2D08: .4byte 0xffff0000
@@ -1911,7 +1911,7 @@ _080F2D24:
 	adds r0, r5, 0
 	movs r2, 0
 	movs r3, 0
-	bl Menu_PrintHelpSystemUIHeader
+	bl TopBarWindowPrintTwoStrings
 _080F2D34:
 	ldr r0, _080F2D58 @ =gTasks
 	ldr r1, [sp, 0x14]
@@ -2298,7 +2298,7 @@ sub_80F3030: @ 80F3030
 	bl HideBg
 	movs r0, 0x3
 	bl HideBg
-	bl sub_810F740
+	bl DestroyTopBarWindow
 	bl FreeAllWindowBuffers
 	movs r0, 0x1
 	bl UnsetBgTilemapBuffer
@@ -2322,7 +2322,7 @@ _080F3082:
 	bl Free
 	str r4, [r5]
 _080F3090:
-	bl sub_80CA5A0
+	bl ReturnFromHallOfFamePC
 _080F3094:
 	pop {r4,r5}
 	pop {r0}
@@ -2342,7 +2342,7 @@ sub_80F30A4: @ 80F30A4
 	ldr r0, _080F30FC @ =gText_ABUTTONExit
 	movs r1, 0x8
 	movs r2, 0x1
-	bl PrintTextOnRightSnappedWindow
+	bl TopBarWindowPrintString
 	movs r0, 0
 	movs r1, 0
 	bl DrawDialogueFrame
@@ -2358,7 +2358,7 @@ sub_80F30A4: @ 80F30A4
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -2436,7 +2436,7 @@ HallOfFame_PrintWelcomeText: @ 80F313C
 	movs r1, 0x2
 	adds r2, r4, 0
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -2535,7 +2535,7 @@ _080F322E:
 	movs r1, 0x2
 	movs r2, 0x10
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 _080F3252:
 	movs r2, 0
 	ldrb r0, [r7, 0xA]
@@ -2606,7 +2606,7 @@ _080F32C4:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldrh r2, [r7, 0x8]
 	ldr r4, _080F3320 @ =0x000001ff
 	adds r0, r4, 0
@@ -2676,7 +2676,7 @@ _080F3348:
 	movs r1, 0x2
 	movs r2, 0x80
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r1, _080F33D4 @ =gUnknown_84160F4
 	add r0, sp, 0xC
 	bl StringCopy
@@ -2694,7 +2694,7 @@ _080F3348:
 	movs r1, 0x2
 	movs r2, 0x20
 	movs r3, 0x11
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r1, _080F33D8 @ =gUnknown_8416104
 	add r0, sp, 0xC
 	bl StringCopy
@@ -2711,7 +2711,7 @@ _080F3348:
 	movs r1, 0x2
 	movs r2, 0x60
 	movs r3, 0x11
-	bl box_print
+	bl AddTextPrinterParameterized3
 _080F33BA:
 	movs r0, 0
 	movs r1, 0x3
@@ -2750,7 +2750,7 @@ sub_80F33DC: @ 80F33DC
 	movs r0, 0x1
 	movs r1, 0
 	movs r3, 0xD
-	bl SetWindowBorderStyle
+	bl DrawStdFrameWithCustomTileAndPalette
 	movs r7, 0
 	str r7, [sp]
 	str r7, [sp, 0x4]
@@ -2764,7 +2764,7 @@ sub_80F33DC: @ 80F33DC
 	movs r1, 0x2
 	movs r2, 0x4
 	movs r3, 0x3
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	ldr r0, _080F35FC @ =gSaveBlock2Ptr
 	mov r10, r0
 	ldr r1, [r0]
@@ -2785,7 +2785,7 @@ sub_80F33DC: @ 80F33DC
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r3, 0x3
-	bl box_print
+	bl AddTextPrinterParameterized3
 	mov r1, r10
 	ldr r0, [r1]
 	ldrb r4, [r0, 0xA]
@@ -2801,7 +2801,7 @@ sub_80F33DC: @ 80F33DC
 	movs r1, 0x2
 	movs r2, 0x4
 	movs r3, 0x12
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add r1, sp, 0x14
 	mov r8, r1
 	ldr r1, _080F3604 @ =0x000186a0
@@ -2869,7 +2869,7 @@ sub_80F33DC: @ 80F33DC
 	movs r1, 0x2
 	adds r2, r6, 0
 	movs r3, 0x12
-	bl box_print
+	bl AddTextPrinterParameterized3
 	mov r1, r9
 	str r1, [sp]
 	str r7, [sp, 0x4]
@@ -2879,7 +2879,7 @@ sub_80F33DC: @ 80F33DC
 	movs r1, 0x2
 	movs r2, 0x4
 	movs r3, 0x20
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add r5, sp, 0x14
 	mov r0, r10
 	ldr r4, [r0]
@@ -2957,7 +2957,7 @@ _080F3582:
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r3, 0x20
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x1
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -3073,16 +3073,16 @@ sub_80F36BC: @ 80F36BC
 	bl ScanlineEffect_Stop
 	bl ResetTasks
 	bl ResetSpriteData
-	bl reset_temp_tile_data_buffers
+	bl ResetTempTileDataBuffers
 	bl ResetAllPicSprites
 	bl FreeAllSpritePalettes
 	ldr r1, _080F36EC @ =gReservedSpritePaletteCount
 	movs r0, 0x8
 	strb r0, [r1]
 	ldr r0, _080F36F0 @ =gUnknown_840C248
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	ldr r0, _080F36F4 @ =gUnknown_840C258
-	bl LoadCompressedObjectPalette
+	bl LoadCompressedSpritePalette
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3174,12 +3174,12 @@ _080F37A4:
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	b _080F3854
 	.align 2, 0
 _080F37B8: .4byte gUnknown_840C3BC
 _080F37BC:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	cmp r0, 0
 	beq _080F3854

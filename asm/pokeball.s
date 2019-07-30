@@ -432,7 +432,7 @@ sub_804AC94: @ 804AC94
 	strh r7, [r6, 0x38]
 	ldr r0, _0804ACF4 @ =sub_804AD00
 	str r0, [r6, 0x1C]
-	ldr r5, _0804ACF8 @ =gUnknown_2023D44
+	ldr r5, _0804ACF8 @ =gBattlerSpriteIds
 	movs r1, 0x3A
 	ldrsh r0, [r6, r1]
 	adds r0, r5
@@ -468,7 +468,7 @@ _0804ACEE:
 	bx r0
 	.align 2, 0
 _0804ACF4: .4byte sub_804AD00
-_0804ACF8: .4byte gUnknown_2023D44
+_0804ACF8: .4byte gBattlerSpriteIds
 _0804ACFC: .4byte gSprites
 	thumb_func_end sub_804AC94
 
@@ -487,7 +487,7 @@ sub_804AD00: @ 804AD00
 	bl PlaySE
 _0804AD18:
 	ldr r6, _0804AD64 @ =gSprites
-	ldr r5, _0804AD68 @ =gUnknown_2023D44
+	ldr r5, _0804AD68 @ =gBattlerSpriteIds
 	movs r1, 0x3A
 	ldrsh r0, [r4, r1]
 	adds r0, r5
@@ -525,7 +525,7 @@ _0804AD18:
 	b _0804AD90
 	.align 2, 0
 _0804AD64: .4byte gSprites
-_0804AD68: .4byte gUnknown_2023D44
+_0804AD68: .4byte gBattlerSpriteIds
 _0804AD6C: .4byte sub_804AD98
 _0804AD70:
 	ldrh r0, [r1, 0x30]
@@ -1363,7 +1363,7 @@ _0804B3F2:
 	strh r7, [r1, 0x10]
 	strh r2, [r1, 0x26]
 _0804B420:
-	ldr r5, _0804B47C @ =gUnknown_2023D44
+	ldr r5, _0804B47C @ =gBattlerSpriteIds
 	movs r1, 0x3A
 	ldrsh r0, [r6, r1]
 	adds r0, r5
@@ -1405,7 +1405,7 @@ _0804B420:
 	.align 2, 0
 _0804B474: .4byte Task_PlayCryWhenReleasedFromBall
 _0804B478: .4byte gTasks
-_0804B47C: .4byte gUnknown_2023D44
+_0804B47C: .4byte gBattlerSpriteIds
 _0804B480: .4byte gSprites
 	thumb_func_end sub_804B268
 
@@ -1437,7 +1437,7 @@ HandleBallAnimEnd: @ 804B4A4
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldr r4, _0804B508 @ =gSprites
-	ldr r0, _0804B50C @ =gUnknown_2023D44
+	ldr r0, _0804B50C @ =gBattlerSpriteIds
 	adds r3, r6, r0
 	ldrb r1, [r3]
 	lsls r0, r1, 4
@@ -1482,7 +1482,7 @@ _0804B4E6:
 	b _0804B52C
 	.align 2, 0
 _0804B508: .4byte gSprites
-_0804B50C: .4byte gUnknown_2023D44
+_0804B50C: .4byte gBattlerSpriteIds
 _0804B510:
 	ldr r2, _0804B5B4 @ =0xfffffee0
 	adds r0, r2, 0
@@ -1509,7 +1509,7 @@ _0804B52C:
 	cmp r7, 0
 	beq _0804B5AE
 	ldr r2, _0804B5B8 @ =gSprites
-	ldr r0, _0804B5BC @ =gUnknown_2023D44
+	ldr r0, _0804B5BC @ =gBattlerSpriteIds
 	adds r0, r6, r0
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -1571,7 +1571,7 @@ _0804B5AE:
 	.align 2, 0
 _0804B5B4: .4byte 0xfffffee0
 _0804B5B8: .4byte gSprites
-_0804B5BC: .4byte gUnknown_2023D44
+_0804B5BC: .4byte gBattlerSpriteIds
 _0804B5C0: .4byte gUnknown_2024005
 _0804B5C4: .4byte gUnknown_2024018
 	thumb_func_end HandleBallAnimEnd
@@ -1607,7 +1607,7 @@ _0804B600:
 	cmp r1, r0
 	bne _0804B666
 	ldr r5, _0804B670 @ =gSprites
-	ldr r4, _0804B674 @ =gUnknown_2023D44
+	ldr r4, _0804B674 @ =gBattlerSpriteIds
 	movs r1, 0x3A
 	ldrsh r0, [r6, r1]
 	adds r0, r4
@@ -1658,7 +1658,7 @@ _0804B666:
 	.align 2, 0
 _0804B66C: .4byte 0x0000013b
 _0804B670: .4byte gSprites
-_0804B674: .4byte gUnknown_2023D44
+_0804B674: .4byte gBattlerSpriteIds
 _0804B678: .4byte gMain
 _0804B67C: .4byte 0x00000439
 _0804B680: .4byte gUnknown_2024018
@@ -2029,9 +2029,9 @@ CreatePokeballSpriteToReleaseMon: @ 804B908
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r0, _0804B9D4 @ =gUnknown_826056C
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	ldr r0, _0804B9D8 @ =gUnknown_82605CC
-	bl sub_800F078
+	bl LoadCompressedSpritePaletteUsingHeap
 	ldr r0, _0804B9DC @ =gUnknown_82606F4
 	mov r1, r9
 	mov r2, r10
@@ -2362,9 +2362,9 @@ sub_804BB98: @ 804BB98
 	lsrs r0, 24
 	mov r9, r0
 	ldr r0, _0804BC3C @ =gUnknown_826056C
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	ldr r0, _0804BC40 @ =gUnknown_82605CC
-	bl sub_800F078
+	bl LoadCompressedSpritePaletteUsingHeap
 	ldr r0, _0804BC44 @ =gUnknown_82606F4
 	adds r1, r6, 0
 	mov r2, r8
@@ -2790,10 +2790,10 @@ LoadBallGfx: @ 804BEF4
 	cmp r0, r1
 	bne _0804BF1C
 	adds r0, r5, 0
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	ldr r0, _0804BF58 @ =gUnknown_82605CC
 	adds r0, r6, r0
-	bl sub_800F078
+	bl LoadCompressedSpritePaletteUsingHeap
 _0804BF1C:
 	cmp r4, 0x6
 	beq _0804BF48

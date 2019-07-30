@@ -70,7 +70,7 @@ _080D426C:
 sub_80D4270: @ 80D4270
 	push {lr}
 	ldr r2, _080D4298 @ =gSprites
-	ldr r1, _080D429C @ =gUnknown_2023D44
+	ldr r1, _080D429C @ =gBattlerSpriteIds
 	ldr r0, _080D42A0 @ =gActiveBattler
 	ldrb r0, [r0]
 	adds r0, r1
@@ -90,7 +90,7 @@ _080D4294:
 	bx r0
 	.align 2, 0
 _080D4298: .4byte gSprites
-_080D429C: .4byte gUnknown_2023D44
+_080D429C: .4byte gBattlerSpriteIds
 _080D42A0: .4byte gActiveBattler
 _080D42A4: .4byte SpriteCallbackDummy
 	thumb_func_end sub_80D4270
@@ -99,7 +99,7 @@ _080D42A4: .4byte SpriteCallbackDummy
 sub_80D42A8: @ 80D42A8
 	push {r4-r6,lr}
 	ldr r6, _080D4300 @ =gSprites
-	ldr r5, _080D4304 @ =gUnknown_2023D44
+	ldr r5, _080D4304 @ =gBattlerSpriteIds
 	ldr r4, _080D4308 @ =gActiveBattler
 	ldrb r0, [r4]
 	adds r0, r5
@@ -139,7 +139,7 @@ _080D42F8:
 	bx r0
 	.align 2, 0
 _080D4300: .4byte gSprites
-_080D4304: .4byte gUnknown_2023D44
+_080D4304: .4byte gBattlerSpriteIds
 _080D4308: .4byte gActiveBattler
 _080D430C: .4byte SpriteCallbackDummy
 	thumb_func_end sub_80D42A8
@@ -456,7 +456,7 @@ _080D458C: .4byte sub_80D4358
 sub_80D4590: @ 80D4590
 	push {lr}
 	ldr r2, _080D45C4 @ =gSprites
-	ldr r1, _080D45C8 @ =gUnknown_2023D44
+	ldr r1, _080D45C8 @ =gBattlerSpriteIds
 	ldr r0, _080D45CC @ =gActiveBattler
 	ldrb r0, [r0]
 	adds r0, r1
@@ -481,7 +481,7 @@ _080D45BE:
 	bx r0
 	.align 2, 0
 _080D45C4: .4byte gSprites
-_080D45C8: .4byte gUnknown_2023D44
+_080D45C8: .4byte gBattlerSpriteIds
 _080D45CC: .4byte gActiveBattler
 	thumb_func_end sub_80D4590
 
@@ -543,7 +543,7 @@ _080D463C: .4byte gPlayerParty
 sub_80D4640: @ 80D4640
 	push {r4-r6,lr}
 	ldr r6, _080D4698 @ =gSprites
-	ldr r5, _080D469C @ =gUnknown_2023D44
+	ldr r5, _080D469C @ =gBattlerSpriteIds
 	ldr r4, _080D46A0 @ =gActiveBattler
 	ldrb r0, [r4]
 	adds r0, r5
@@ -583,7 +583,7 @@ _080D4690:
 	bx r0
 	.align 2, 0
 _080D4698: .4byte gSprites
-_080D469C: .4byte gUnknown_2023D44
+_080D469C: .4byte gBattlerSpriteIds
 _080D46A0: .4byte gActiveBattler
 _080D46A4: .4byte gUnknown_3004FF0
 	thumb_func_end sub_80D4640
@@ -605,7 +605,7 @@ sub_80D46A8: @ 80D46A8
 	ands r0, r1
 	cmp r0, 0
 	bne _080D46FC
-	ldr r5, _080D470C @ =gUnknown_2023D44
+	ldr r5, _080D470C @ =gBattlerSpriteIds
 	adds r0, r2, r5
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -635,7 +635,7 @@ _080D46FC:
 	.align 2, 0
 _080D4704: .4byte gUnknown_2024018
 _080D4708: .4byte gActiveBattler
-_080D470C: .4byte gUnknown_2023D44
+_080D470C: .4byte gBattlerSpriteIds
 _080D4710: .4byte gSprites
 _080D4714: .4byte gUnknown_3004FF0
 	thumb_func_end sub_80D46A8
@@ -657,7 +657,7 @@ _080D472A:
 	thumb_func_start sub_80D4730
 sub_80D4730: @ 80D4730
 	push {r4,lr}
-	ldr r1, _080D476C @ =gUnknown_2023D44
+	ldr r1, _080D476C @ =gBattlerSpriteIds
 	ldr r0, _080D4770 @ =gActiveBattler
 	ldrb r0, [r0]
 	adds r0, r1
@@ -685,7 +685,7 @@ sub_80D4730: @ 80D4730
 	bl sub_80D49E8
 	b _080D47A6
 	.align 2, 0
-_080D476C: .4byte gUnknown_2023D44
+_080D476C: .4byte gBattlerSpriteIds
 _080D4770: .4byte gActiveBattler
 _080D4774: .4byte gSprites
 _080D4778: .4byte gUnknown_2024005
@@ -852,7 +852,7 @@ sub_80D484C: @ 80D484C
 	ldr r5, _080D492C @ =gPlayerParty
 	adds r0, r5
 	bl HandleLowHpMusicChange
-	ldr r1, _080D4930 @ =gUnknown_2023D44
+	ldr r1, _080D4930 @ =gBattlerSpriteIds
 	ldrb r0, [r7]
 	adds r0, r1
 	ldrb r1, [r0]
@@ -901,7 +901,7 @@ _080D4920: .4byte 0x000027f9
 _080D4924: .4byte c3_0802FDF4
 _080D4928: .4byte gBattlerPartyIndexes
 _080D492C: .4byte gPlayerParty
-_080D4930: .4byte gUnknown_2023D44
+_080D4930: .4byte gBattlerSpriteIds
 _080D4934: .4byte gSprites
 _080D4938: .4byte gUnknown_3004FF0
 _080D493C: .4byte gUnknown_3004FE0
@@ -3393,7 +3393,7 @@ LinkPartnerHandleLoadPokeSprite: @ 80D5DB4
 	adds r1, r5, 0
 	adds r2, r4, 0
 	bl CreateSprite
-	ldr r4, _080D5EB8 @ =gUnknown_2023D44
+	ldr r4, _080D5EB8 @ =gBattlerSpriteIds
 	ldrb r1, [r6]
 	adds r1, r4
 	strb r0, [r1]
@@ -3455,7 +3455,7 @@ _080D5EA8: .4byte gBattlerPartyIndexes
 _080D5EAC: .4byte gActiveBattler
 _080D5EB0: .4byte gPlayerParty
 _080D5EB4: .4byte gMultiuseSpriteTemplate
-_080D5EB8: .4byte gUnknown_2023D44
+_080D5EB8: .4byte gBattlerSpriteIds
 _080D5EBC: .4byte gSprites
 _080D5EC0: .4byte 0x0000ff10
 _080D5EC4: .4byte gBattleMonForms
@@ -3585,7 +3585,7 @@ sub_80D5F40: @ 80D5F40
 	adds r1, r5, 0
 	adds r2, r4, 0
 	bl CreateSprite
-	ldr r4, _080D609C @ =gUnknown_2023D44
+	ldr r4, _080D609C @ =gBattlerSpriteIds
 	adds r4, r6, r4
 	strb r0, [r4]
 	ldr r5, _080D60A0 @ =gSprites
@@ -3675,7 +3675,7 @@ _080D608C: .4byte gPlayerParty
 _080D6090: .4byte sub_8033E3C
 _080D6094: .4byte gUnknown_3004FFC
 _080D6098: .4byte gMultiuseSpriteTemplate
-_080D609C: .4byte gUnknown_2023D44
+_080D609C: .4byte gBattlerSpriteIds
 _080D60A0: .4byte gSprites
 _080D60A4: .4byte gBattleMonForms
 _080D60A8: .4byte SpriteCallbackDummy
@@ -3715,7 +3715,7 @@ _080D60E8: .4byte gUnknown_2024018
 _080D60EC: .4byte gUnknown_3004FE0
 _080D60F0: .4byte sub_80D613C
 _080D60F4:
-	ldr r5, _080D6130 @ =gUnknown_2023D44
+	ldr r5, _080D6130 @ =gBattlerSpriteIds
 	adds r0, r2, r5
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -3743,7 +3743,7 @@ _080D612A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D6130: .4byte gUnknown_2023D44
+_080D6130: .4byte gBattlerSpriteIds
 _080D6134: .4byte gSprites
 _080D6138: .4byte gUnknown_3004FF0
 	thumb_func_end LinkPartnerHandleReturnPokeToBall
@@ -3926,7 +3926,7 @@ _080D6258:
 	mov r1, r8
 	adds r2, r4, 0
 	bl CreateSprite
-	ldr r6, _080D6324 @ =gUnknown_2023D44
+	ldr r6, _080D6324 @ =gBattlerSpriteIds
 	ldrb r1, [r5]
 	adds r1, r6
 	strb r0, [r1]
@@ -3987,7 +3987,7 @@ _080D6258:
 _080D6318: .4byte gActiveBattler
 _080D631C: .4byte gMultiuseSpriteTemplate
 _080D6320: .4byte gUnknown_8239F8C
-_080D6324: .4byte gUnknown_2023D44
+_080D6324: .4byte gBattlerSpriteIds
 _080D6328: .4byte gSprites
 _080D632C: .4byte 0x0000fffe
 _080D6330: .4byte sub_8033EEC
@@ -4006,7 +4006,7 @@ sub_80D633C: @ 80D633C
 	thumb_func_start sub_80D6348
 sub_80D6348: @ 80D6348
 	push {r4-r6,lr}
-	ldr r6, _080D63D4 @ =gUnknown_2023D44
+	ldr r6, _080D63D4 @ =gBattlerSpriteIds
 	ldr r4, _080D63D8 @ =gActiveBattler
 	ldrb r0, [r4]
 	adds r0, r6
@@ -4074,7 +4074,7 @@ sub_80D6348: @ 80D6348
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D63D4: .4byte gUnknown_2023D44
+_080D63D4: .4byte gBattlerSpriteIds
 _080D63D8: .4byte gActiveBattler
 _080D63DC: .4byte gSprites
 _080D63E0: .4byte 0x0000ffd8
@@ -4150,7 +4150,7 @@ _080D6448:
 	movs r0, 0x10
 	bl PlaySE12WithPanning
 	ldr r2, _080D64CC @ =gSprites
-	ldr r3, _080D64D0 @ =gUnknown_2023D44
+	ldr r3, _080D64D0 @ =gBattlerSpriteIds
 	ldrb r0, [r5]
 	adds r0, r3
 	ldrb r1, [r0]
@@ -4192,7 +4192,7 @@ _080D64BE:
 _080D64C4: .4byte gBattlerPartyIndexes
 _080D64C8: .4byte gPlayerParty
 _080D64CC: .4byte gSprites
-_080D64D0: .4byte gUnknown_2023D44
+_080D64D0: .4byte gBattlerSpriteIds
 _080D64D4: .4byte sub_8012110
 _080D64D8: .4byte gUnknown_3004FE0
 _080D64DC: .4byte sub_80D4640
@@ -4254,7 +4254,7 @@ _080D6522:
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	ldr r5, _080D65FC @ =gUnknown_2037F16
+	ldr r5, _080D65FC @ =gAnimMoveTurn
 	mov r1, r12
 	adds r1, 0x3
 	adds r2, r1
@@ -4322,7 +4322,7 @@ _080D6522:
 	lsls r1, 8
 	orrs r3, r1
 	strh r3, [r4]
-	ldr r3, _080D6610 @ =gUnknown_2037EE4
+	ldr r3, _080D6610 @ =gAnimDisableStructPtr
 	ldrb r2, [r6]
 	lsls r2, 9
 	mov r1, r12
@@ -4346,12 +4346,12 @@ _080D6522:
 	.align 2, 0
 _080D65F4: .4byte gActiveBattler
 _080D65F8: .4byte gUnknown_2022BC4
-_080D65FC: .4byte gUnknown_2037F16
+_080D65FC: .4byte gAnimMoveTurn
 _080D6600: .4byte gUnknown_2037EEC
 _080D6604: .4byte gUnknown_2037EE8
 _080D6608: .4byte gUnknown_2037EFE
 _080D660C: .4byte gUnknown_2037F00
-_080D6610: .4byte gUnknown_2037EE4
+_080D6610: .4byte gAnimDisableStructPtr
 _080D6614: .4byte gUnknown_2024008
 _080D6618:
 	ldr r0, _080D663C @ =gUnknown_2024018
@@ -5058,7 +5058,7 @@ _080D6B6C: .4byte gUnknown_2022870
 LinkPartnerHandleHitAnimation: @ 80D6B70
 	push {r4,lr}
 	ldr r3, _080D6B98 @ =gSprites
-	ldr r2, _080D6B9C @ =gUnknown_2023D44
+	ldr r2, _080D6B9C @ =gBattlerSpriteIds
 	ldr r4, _080D6BA0 @ =gActiveBattler
 	ldrb r0, [r4]
 	adds r0, r2
@@ -5076,7 +5076,7 @@ LinkPartnerHandleHitAnimation: @ 80D6B70
 	b _080D6BCE
 	.align 2, 0
 _080D6B98: .4byte gSprites
-_080D6B9C: .4byte gUnknown_2023D44
+_080D6B9C: .4byte gBattlerSpriteIds
 _080D6BA0: .4byte gActiveBattler
 _080D6BA4:
 	ldr r1, _080D6BD4 @ =gUnknown_2024005
@@ -5234,7 +5234,7 @@ _080D6CD0: .4byte gUnknown_2023F4C
 	thumb_func_start sub_80D6CD4
 sub_80D6CD4: @ 80D6CD4
 	push {r4-r7,lr}
-	ldr r5, _080D6DDC @ =gUnknown_2023D44
+	ldr r5, _080D6DDC @ =gBattlerSpriteIds
 	ldr r6, _080D6DE0 @ =gActiveBattler
 	ldrb r0, [r6]
 	adds r0, r5
@@ -5358,7 +5358,7 @@ _080D6DC2:
 	adds r0, 0x2
 	b _080D6E0C
 	.align 2, 0
-_080D6DDC: .4byte gUnknown_2023D44
+_080D6DDC: .4byte gBattlerSpriteIds
 _080D6DE0: .4byte gActiveBattler
 _080D6DE4: .4byte gSprites
 _080D6DE8: .4byte 0x0000ffd8
@@ -5386,7 +5386,7 @@ _080D6E0C:
 	movs r2, 0x20
 	bl LoadCompressedPalette
 	ldr r2, _080D6EA8 @ =gSprites
-	ldr r1, _080D6EAC @ =gUnknown_2023D44
+	ldr r1, _080D6EAC @ =gBattlerSpriteIds
 	ldr r5, _080D6EB0 @ =gActiveBattler
 	ldrb r0, [r5]
 	adds r0, r1
@@ -5453,7 +5453,7 @@ _080D6E86:
 	.align 2, 0
 _080D6EA4: .4byte gUnknown_8239FD4
 _080D6EA8: .4byte gSprites
-_080D6EAC: .4byte gUnknown_2023D44
+_080D6EAC: .4byte gBattlerSpriteIds
 _080D6EB0: .4byte gActiveBattler
 _080D6EB4: .4byte sub_80D6ED0
 _080D6EB8: .4byte gTasks
@@ -5781,7 +5781,7 @@ LinkPartnerHandleSpriteInvisibility: @ 80D7144
 	cmp r0, 0
 	beq _080D718A
 	ldr r3, _080D7198 @ =gSprites
-	ldr r0, _080D719C @ =gUnknown_2023D44
+	ldr r0, _080D719C @ =gBattlerSpriteIds
 	ldrb r1, [r4]
 	adds r0, r1, r0
 	ldrb r0, [r0]
@@ -5814,7 +5814,7 @@ _080D718A:
 	.align 2, 0
 _080D7194: .4byte gActiveBattler
 _080D7198: .4byte gSprites
-_080D719C: .4byte gUnknown_2023D44
+_080D719C: .4byte gBattlerSpriteIds
 _080D71A0: .4byte gUnknown_2022BC4
 	thumb_func_end LinkPartnerHandleSpriteInvisibility
 
@@ -5890,7 +5890,7 @@ sub_80D7218: @ 80D7218
 	thumb_func_start LinkPartnerHandlecmd55
 LinkPartnerHandlecmd55: @ 80D7224
 	push {r4,lr}
-	ldr r2, _080D725C @ =gUnknown_2023E8A
+	ldr r2, _080D725C @ =gBattleOutcome
 	ldr r1, _080D7260 @ =gUnknown_2022BC4
 	ldr r4, _080D7264 @ =gActiveBattler
 	ldrb r0, [r4]
@@ -5914,7 +5914,7 @@ LinkPartnerHandlecmd55: @ 80D7224
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D725C: .4byte gUnknown_2023E8A
+_080D725C: .4byte gBattleOutcome
 _080D7260: .4byte gUnknown_2022BC4
 _080D7264: .4byte gActiveBattler
 _080D7268: .4byte gUnknown_3004FE0

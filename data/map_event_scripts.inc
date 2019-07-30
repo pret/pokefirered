@@ -1065,7 +1065,7 @@ Text_1A5446:: @ 81A5446
 	.string "Want to give a nickname to the\n"
 	.string "{STR_VAR_2} you received?$"
 
-gUnknown_81A5476:: @ 81A5476
+gText_PkmnFainted3:: @ 81A5476
 	.string "{STR_VAR_1} fainted…\p"
 	.string "$"
 
@@ -3257,31 +3257,9 @@ CeladonCity_GameCorner_EventScript_1B2867:: @ 81B2867
 	.incbin "baserom.gba", 0x1B2867, 0xD1
 
 FourIsland_House2_EventScript_1B2938:: @ 81B2938
-	.incbin "baserom.gba", 0x1B2938, 0x4E4
+	.incbin "baserom.gba", 0x1B2938, 0x4C0
 
-gUnknown_81B2E1C:: @ 81B2E1C
-	.string "How do I do this?$"
-
-gUnknown_81B2E2E:: @ 81B2E2E
-	.string "What does this term mean?$"
-
-gUnknown_81B2E48:: @ 81B2E48
-	.string "About this game$"
-
-gUnknown_81B2E58:: @ 81B2E58
-	.string "Type Matchup List$"
-
-gUnknown_81B2E6A:: @ 81B2E6A
-	.string "EXIT$"
-
-gUnknown_81B2E6F:: @ 81B2E6F
-	.incbin "baserom.gba", 0x1B2E6F, 0x15A
-
-gUnknown_81B2FC9:: @ 81B2FC9
-	.incbin "baserom.gba", 0x1B2FC9, 0x52
-
-gUnknown_81B301B:: @ 81B301B
-	.incbin "baserom.gba", 0x1B301B, 0x8199
+	.include "data/text/help_system.inc"
 
 CeladonCity_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
 CeruleanCity_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
@@ -3567,7 +3545,7 @@ CeruleanCave_B1F_EventScript_1BE00C:: @ 81BE00C
 CeruleanCave_1F_EventScript_1BE00C:: @ 81BE00C
 	.incbin "baserom.gba", 0x1BE00C, 0x58
 
-gUnknown_81BE064:: @ 81BE064
+EventScript_FldEffRockSmash:: @ 81BE064
 	.incbin "baserom.gba", 0x1BE064, 0xB9
 
 MtEmber_Exterior_EventScript_1BE11D:: @ 81BE11D
@@ -3588,7 +3566,7 @@ SeafoamIslands_B1F_EventScript_1BE11D:: @ 81BE11D
 VictoryRoad_2F_EventScript_1BE11D:: @ 81BE11D
 	.incbin "baserom.gba", 0x1BE11D, 0x51
 
-gUnknown_81BE16E:: @ 81BE16E
+EventScript_FldEffStrength:: @ 81BE16E
 	.incbin "baserom.gba", 0x1BE16E, 0x149
 
 gUnknown_81BE2B7:: @ 81BE2B7
@@ -3597,7 +3575,7 @@ gUnknown_81BE2B7:: @ 81BE2B7
 gUnknown_81BE2FF:: @ 81BE2FF
 	.incbin "baserom.gba", 0x1BE2FF, 0x265
 
-gUnknown_81BE564:: @ 81BE564
+EventScript_FailSweetScent:: @ 81BE564
 	.incbin "baserom.gba", 0x1BE564, 0x2A
 
 Route2_EventScript_1BE58E:: @ 81BE58E
@@ -4200,16 +4178,16 @@ gUnknown_81BFB5F:: @ 81BFB5F
 gUnknown_81BFB65:: @ 81BFB65
 	.incbin "baserom.gba", 0x1BFB65, 0x22
 
-gUnknown_81BFB87:: @ 81BFB87
+EventScript_SafariWarpOut:: @ 81BFB87
 	.incbin "baserom.gba", 0x1BFB87, 0x23
 
-gUnknown_81BFBAA:: @ 81BFBAA
+EventScript_SafariRetire:: @ 81BFBAA
 	.incbin "baserom.gba", 0x1BFBAA, 0x1B
 
-gUnknown_81BFBC5:: @ 81BFBC5
+EventScript_SafariTimesUp:: @ 81BFBC5
 	.incbin "baserom.gba", 0x1BFBC5, 0x12
 
-gUnknown_81BFBD7:: @ 81BFBD7
+EventScript_SafariOutOfBalls:: @ 81BFBD7
 	.incbin "baserom.gba", 0x1BFBD7, 0x2D5
 
 gUnknown_81BFEAC:: @ 81BFEAC

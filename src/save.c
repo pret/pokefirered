@@ -828,7 +828,7 @@ u32 TryCopySpecialSaveSection(u8 sector, u8* dst)
     return 1;
 }
 
-u32 sub_80DA5E0(u8 sector, u8* src)
+u32 TryWriteSpecialSaveSection(u8 sector, u8* src)
 {
     s32 i;
     s32 size;

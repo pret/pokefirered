@@ -4793,8 +4793,8 @@ _08149DF0:
 	bl InitBgsFromTemplates
 	ldr r0, _08149EEC @ =gUnknown_846D8E4
 	bl InitWindows
-	bl sub_80F6C14
-	bl reset_temp_tile_data_buffers
+	bl ResetBgPositions
+	bl ResetTempTileDataBuffers
 	ldr r0, [r6]
 	bl sub_814AD6C
 	bl sub_814A9C8
@@ -4807,14 +4807,14 @@ _08149DF0:
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r1, _08149EF8 @ =gUnknown_846BA00
 	movs r4, 0x1
 	str r4, [sp]
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r0, _08149EFC @ =gUnknown_846BBB0
 	movs r1, 0x30
 	movs r2, 0x20
@@ -4824,13 +4824,13 @@ _08149DF0:
 	movs r0, 0x2
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r1, _08149F04 @ =gUnknown_846C520
 	str r4, [sp]
 	movs r0, 0x2
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r0, _08149F08 @ =gUnknown_846C8D8
 	movs r1, 0x10
 	movs r2, 0x20
@@ -4840,13 +4840,13 @@ _08149DF0:
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r1, _08149F10 @ =gUnknown_846D3A8
 	str r4, [sp]
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r0, _08149F14 @ =gUnknown_846B794
 	movs r1, 0x20
 	movs r2, 0x20
@@ -4897,7 +4897,7 @@ _08149F0C: .4byte gUnknown_846C8F8
 _08149F10: .4byte gUnknown_846D3A8
 _08149F14: .4byte gUnknown_846B794
 _08149F18:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	cmp r0, 0
 	bne _08149F5A
@@ -5304,7 +5304,7 @@ sub_814A218: @ 814A218
 _0814A22C: .4byte gUnknown_203F3D8
 _0814A230:
 	bl sub_814A6CC
-	bl sub_81100E8
+	bl DestroyYesNoMenu
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 	ldr r1, [r5]
@@ -5644,20 +5644,20 @@ sub_814A468: @ 814A468
 	ldr r1, _0814A530 @ =gUnknown_846D94C
 	bl StringAppend
 _0814A4C2:
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	ldr r4, _0814A52C @ =gUnknown_203F3D8
 	ldr r1, [r4]
 	adds r1, 0x26
 	movs r0, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	ldr r1, [r4]
 	adds r1, 0x66
 	movs r0, 0x1
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	ldr r0, [r4]
 	adds r0, 0xA6
 	ldr r1, _0814A534 @ =gUnknown_841CBA9
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	movs r0, 0x4
 	movs r1, 0x8
 	movs r2, 0x16
@@ -5706,15 +5706,15 @@ sub_814A53C: @ 814A53C
 	ldr r1, [r4]
 	adds r1, 0x26
 	bl CopyItemName
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	ldr r1, [r4]
 	adds r1, 0x26
 	movs r0, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	ldr r0, [r4]
 	adds r0, 0xA6
 	ldr r1, _0814A5B0 @ =gUnknown_841CBCA
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	movs r0, 0x4
 	movs r1, 0x8
 	movs r2, 0x16
@@ -5761,15 +5761,15 @@ sub_814A5B4: @ 814A5B4
 	ldr r1, [r4]
 	adds r1, 0x26
 	bl CopyItemName
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	ldr r1, [r4]
 	adds r1, 0x26
 	movs r0, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	ldr r0, [r4]
 	adds r0, 0xA6
 	ldr r1, _0814A628 @ =gUnknown_841CBE4
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	movs r0, 0x4
 	movs r1, 0x9
 	movs r2, 0x16
@@ -6116,7 +6116,7 @@ sub_814A84C: @ 814A84C
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add r0, sp, 0xC
 	str r0, [sp]
 	str r4, [sp, 0x4]
@@ -6126,7 +6126,7 @@ sub_814A84C: @ 814A84C
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0x10
 	pop {r4}
 	pop {r0}
@@ -6582,7 +6582,7 @@ sub_814AB98: @ 814AB98
 	movs r1, 0
 	adds r2, r4, 0
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r0, [r6]
 	adds r0, 0x1C
 	add r0, r8
@@ -6777,7 +6777,7 @@ sub_814AD6C: @ 814AD6C
 	ldr r5, _0814ADAC @ =gUnknown_846E0B0
 _0814AD74:
 	adds r0, r5, 0
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	adds r5, 0x8
 	adds r4, 0x1
 	cmp r4, 0x4
@@ -6881,7 +6881,7 @@ _0814AE2A:
 	adds r0, r1
 	ldr r3, [r7, 0x8]
 	mov r1, r8
-	bl sub_800ECC4
+	bl HandleLoadSpecialPokePic
 	mov r3, r8
 	str r3, [sp, 0x18]
 	adds r4, r6, 0
@@ -6903,7 +6903,7 @@ _0814AE2A:
 	ands r1, r5
 	orrs r1, r4
 	str r1, [r0, 0x4]
-	bl LoadCompressedObjectPalette
+	bl LoadCompressedSpritePalette
 	mov r0, r8
 	bl Free
 	mov r0, r10
@@ -7930,7 +7930,7 @@ sub_814B5C4: @ 814B5C4
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0xD0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0xD
@@ -7950,7 +7950,7 @@ sub_814B5C4: @ 814B5C4
 	adds r0, r4, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl sub_812E62C
+	bl AddTextPrinterParameterized5
 	movs r7, 0
 	mov r8, r4
 	movs r1, 0xFF
@@ -7980,7 +7980,7 @@ _0814B63E:
 	mov r0, r8
 	movs r1, 0x2
 	movs r3, 0
-	bl sub_812E62C
+	bl AddTextPrinterParameterized5
 	ldr r0, [sp, 0x2C]
 	ldm r0!, {r1}
 	str r0, [sp, 0x2C]
@@ -8007,7 +8007,7 @@ _0814B63E:
 	mov r0, r8
 	movs r1, 0x2
 	adds r2, r5, 0
-	bl sub_812E62C
+	bl AddTextPrinterParameterized5
 	movs r0, 0xE0
 	lsls r0, 20
 	add r9, r0

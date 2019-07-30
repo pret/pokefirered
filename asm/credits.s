@@ -422,7 +422,7 @@ _080F3D0A:
 	movs r1, 0x1
 	movs r2, 0x8
 	movs r3, 0x29
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	ldr r1, [r7]
 	movs r0, 0x5
 	b _080F413C
@@ -649,7 +649,7 @@ _080F3EB4:
 	movs r1, 0x1
 	movs r2, 0x2
 	movs r3, 0x6
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	ldr r1, [r7]
 	movs r0, 0x8
 	b _080F3FB8
@@ -696,7 +696,7 @@ _080F3F24:
 	movs r1, 0x2
 	movs r2, 0x8
 	movs r3, 0x6
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	ldr r1, [r7]
 	movs r0, 0x9
 	b _080F3FB8
@@ -1987,7 +1987,7 @@ _080F49D8:
 	ands r1, r3
 	orrs r1, r2
 	str r1, [r0, 0x4]
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	ldr r0, _080F4A1C @ =gUnknown_8410E10
 	b _080F4A36
 	.align 2, 0
@@ -2005,7 +2005,7 @@ _080F4A20:
 	strh r1, [r0, 0x4]
 	ldrh r1, [r6, 0x2]
 	strh r1, [r0, 0x6]
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	ldr r0, _080F4A48 @ =gUnknown_8411BF8
 _080F4A36:
 	movs r1, 0xF8
@@ -2025,7 +2025,7 @@ _080F4A4C:
 	strh r1, [r0, 0x4]
 	ldrh r1, [r6, 0x2]
 	strh r1, [r0, 0x6]
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	ldr r0, _080F4ADC @ =gUnknown_84129A0
 	movs r1, 0xF8
 	lsls r1, 1
@@ -2107,7 +2107,7 @@ _080F4AFE:
 	strh r1, [r0, 0x4]
 	ldrh r1, [r6, 0x8]
 	strh r1, [r0, 0x6]
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	ldr r0, _080F4B1C @ =gUnknown_8413318
 	b _080F4B8A
 	.align 2, 0
@@ -2122,7 +2122,7 @@ _080F4B20:
 	strh r1, [r0, 0x4]
 	ldrh r1, [r6, 0x8]
 	strh r1, [r0, 0x6]
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	ldr r0, _080F4B4C @ =gUnknown_8413318
 	movs r1, 0xF0
 	lsls r1, 1
@@ -2144,7 +2144,7 @@ _080F4B54:
 	strh r1, [r0, 0x4]
 	ldrh r1, [r6, 0x8]
 	strh r1, [r0, 0x6]
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	ldr r0, _080F4B70 @ =gUnknown_8413854
 	b _080F4B8A
 	.align 2, 0
@@ -2159,7 +2159,7 @@ _080F4B74:
 	strh r1, [r0, 0x4]
 	ldrh r1, [r6, 0x8]
 	strh r1, [r0, 0x6]
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	ldr r0, _080F4BF0 @ =gUnknown_8413D98
 _080F4B8A:
 	movs r1, 0xF0

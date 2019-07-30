@@ -320,7 +320,7 @@ sub_806CAC8: @ 806CAC8
 	sub sp, 0x8
 	adds r5, r0, 0
 	bl sub_8069A54
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r6, r0, 24
 	mov r4, sp
@@ -629,7 +629,7 @@ _0806CD54:
 	ldrb r0, [r4, 0x2]
 	cmp r0, 0
 	beq _0806CDC0
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	ldrb r1, [r4, 0x2]
@@ -1033,7 +1033,7 @@ _0806D078:
 	lsls r0, 2
 	ldr r1, _0806D098 @ =gMapObjects
 	adds r0, r1
-	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
+	bl FieldObjectCheckHeldMovementStatus
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806D0A0
@@ -1817,7 +1817,7 @@ _0806D6E0: .4byte gUnknown_203ADFA
 _0806D6E4: .4byte gPlayerAvatar
 _0806D6E8: .4byte gUnknown_81A8CED
 _0806D6EC:
-	bl overworld_poison_step
+	bl DoPoisonFieldEffect_step
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1840,7 +1840,7 @@ _0806D704:
 	.align 2, 0
 _0806D71C: .4byte gUnknown_81BF546
 _0806D720:
-	bl sub_80A0F0C
+	bl SafariZoneTakeStep
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1901,8 +1901,8 @@ _0806D780: .4byte 0x00004021
 _0806D784: .4byte gPlayerParty
 	thumb_func_end AdjustFriendship_step
 
-	thumb_func_start overworld_poison_timer_set
-overworld_poison_timer_set: @ 806D788
+	thumb_func_start ClearPoisonStepCounter
+ClearPoisonStepCounter: @ 806D788
 	push {lr}
 	ldr r0, _0806D798 @ =0x00004022
 	movs r1, 0
@@ -1911,10 +1911,10 @@ overworld_poison_timer_set: @ 806D788
 	bx r0
 	.align 2, 0
 _0806D798: .4byte 0x00004022
-	thumb_func_end overworld_poison_timer_set
+	thumb_func_end ClearPoisonStepCounter
 
-	thumb_func_start overworld_poison_step
-overworld_poison_step: @ 806D79C
+	thumb_func_start DoPoisonFieldEffect_step
+DoPoisonFieldEffect_step: @ 806D79C
 	push {r4,lr}
 	ldr r0, _0806D7D8 @ =gMapHeader
 	ldrb r0, [r0, 0x17]
@@ -1933,7 +1933,7 @@ overworld_poison_step: @ 806D79C
 	lsls r0, 16
 	cmp r0, 0
 	bne _0806D7E0
-	bl overworld_poison
+	bl DoPoisonFieldEffect
 	cmp r0, 0x1
 	beq _0806D7E0
 	cmp r0, 0x1
@@ -1951,7 +1951,7 @@ _0806D7E2:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end overworld_poison_step
+	thumb_func_end DoPoisonFieldEffect_step
 
 	thumb_func_start sub_806D7E8
 sub_806D7E8: @ 806D7E8

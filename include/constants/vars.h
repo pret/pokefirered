@@ -35,8 +35,8 @@
 #define VAR_0x401D                 0x401D
 #define VAR_0x401E                 0x401E
 #define VAR_0x401F                 0x401F
-#define VAR_RECYCLE_GOODS          0x4020
-#define VAR_REPEL_STEP_COUNT       0x4021
+#define VAR_REPEL_STEP_COUNT       0x4020
+#define VAR_0x4021                 0x4021
 #define VAR_ICE_STEP_COUNT         0x4022
 #define VAR_0x4023                 0x4023
 #define VAR_MIRAGE_RND_H           0x4024
@@ -89,7 +89,7 @@
 #define VAR_MAP_SCENE_PALLET_TOWN                 0x4050
 #define VAR_0x4051                 0x4051
 #define VAR_0x4052                 0x4052
-#define VAR_0x4053                 0x4053
+#define VAR_VERMILION_CITY_TICKET_CHECK_TRIGGER                 0x4053
 #define VAR_0x4054                 0x4054
 #define VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB                 0x4055
 #define VAR_MAP_SCENE_PALLET_TOWN_PLAYERS_HOUSE_2F                 0x4056

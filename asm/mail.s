@@ -240,7 +240,7 @@ _080BEDE0:
 	b _080BF0F4
 _080BEDE6:
 	bl FreeAllSpritePalettes
-	bl reset_temp_tile_data_buffers
+	bl ResetTempTileDataBuffers
 	movs r0, 0x10
 	movs r1, 0
 	bl SetGpuReg
@@ -318,13 +318,13 @@ _080BEE88:
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	b _080BF0F4
 	.align 2, 0
 _080BEEB0: .4byte gUnknown_83EE9C8
 _080BEEB4: .4byte gUnknown_20399C4
 _080BEEB8:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	cmp r0, 0
 	bne _080BEEC4
@@ -623,7 +623,7 @@ _080BF112:
 	.align 2, 0
 _080BF128: .4byte sub_80BF368
 _080BF12C:
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -811,7 +811,7 @@ _080BF260:
 	str r0, [sp, 0x4]
 	str r5, [sp, 0x8]
 	movs r1, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	mov r1, r8
 	ldr r0, [r1]
 	adds r0, 0xF8
@@ -856,7 +856,7 @@ _080BF2CE:
 	str r4, [sp, 0x8]
 	movs r0, 0x1
 	movs r1, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r1, [r5]
 	adds r0, r1, 0
 	adds r0, 0xE9
@@ -875,7 +875,7 @@ _080BF2CE:
 	str r0, [sp, 0x8]
 	movs r0, 0x1
 	movs r1, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram

@@ -76,7 +76,7 @@ sub_80E469C: @ 80E469C
 	movs r0, 0
 	movs r2, 0x2
 	bl InitBgsFromTemplates
-	bl reset_temp_tile_data_buffers
+	bl ResetTempTileDataBuffers
 	ldr r0, _080E4778 @ =gUnknown_83FFA44
 	bl InitWindows
 	lsls r0, 16
@@ -119,7 +119,7 @@ _080E46C6:
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xE0
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	movs r0, 0xD0
 	movs r1, 0x1
 	bl sub_8107D38
@@ -736,7 +736,7 @@ _080E4C7E:
 	adds r1, r2, r3
 	ldr r6, _080E4CD4 @ =0x00000a6a
 	adds r2, r6
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	bl FreeAllWindowBuffers
 	ldr r0, _080E4CD8 @ =gPlayerParty
 	ldr r5, [r7]
@@ -1409,7 +1409,7 @@ sub_80E5204: @ 80E5204
 	ldr r1, _080E525C @ =0x00000263
 	adds r0, r1
 	ldrb r0, [r0]
-	bl ListMenuHandleInput
+	bl ListMenu_ProcessInput
 	ldr r0, _080E5260 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
@@ -1568,7 +1568,7 @@ sub_80E5340: @ 80E5340
 	movs r0, 0x2
 	movs r2, 0x1
 	movs r3, 0x4
-	bl blit_move_info_icon
+	bl BlitMoveInfoIcon
 	ldrb r0, [r4, 0x1]
 	cmp r0, 0x1
 	bhi _080E5388
@@ -1680,27 +1680,27 @@ sub_80E5444: @ 80E5444
 	movs r1, 0x13
 	movs r2, 0x1
 	movs r3, 0x4
-	bl blit_move_info_icon
+	bl BlitMoveInfoIcon
 	movs r0, 0x1
 	movs r1, 0x14
 	movs r2, 0
 	movs r3, 0x4
-	bl blit_move_info_icon
+	bl BlitMoveInfoIcon
 	movs r0, 0x1
 	movs r1, 0x15
 	movs r2, 0
 	movs r3, 0x13
-	bl blit_move_info_icon
+	bl BlitMoveInfoIcon
 	movs r0, 0
 	movs r1, 0x16
 	movs r2, 0x1
 	movs r3, 0x13
-	bl blit_move_info_icon
+	bl BlitMoveInfoIcon
 	movs r0, 0
 	movs r1, 0x17
 	movs r2, 0x1
 	movs r3, 0x22
-	bl blit_move_info_icon
+	bl BlitMoveInfoIcon
 	movs r0, 0
 	bl PutWindowTilemap
 	movs r0, 0x1
@@ -1936,7 +1936,7 @@ _080E563E:
 	movs r1, 0x3
 	adds r2, r7, 0
 	adds r3, r6, 0
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	add sp, 0x14
 	pop {r3-r5}
 	mov r8, r3

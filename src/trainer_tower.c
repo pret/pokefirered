@@ -35,45 +35,10 @@ struct UnkStruct_8479D34
     u8 flags3[8];
 };
 
-struct UnkSubstruct_203F458_000C_004
-{
-    /* 0x000 */ u8 unk_000[11];
-    /* 0x00B */ u8 unk_00B;
-    /* 0x00C */ u8 unk_00C;
-    /* 0x00E */ u16 unk_00E[6];
-    /* 0x01A */ u16 unk_01A[6];
-    /* 0x026 */ u16 unk_026[6];
-    /* 0x032 */ u16 unk_032[6];
-    /* 0x040 */ struct BattleTowerPokemon unk_040[PARTY_SIZE];
-}; // size: 328
-
-struct UnkSubstruct_203F458_000C
-{
-    /* 0x000 */ u8 unk_000;
-    /* 0x000 */ u8 unk_001;
-    /* 0x002 */ u8 unk_002;
-    /* 0x003 */ u8 unk_003;
-    /* 0x004 */ struct UnkSubstruct_203F458_000C_004 unk_004[3];
-    /* 0x3DC */ u8 filler_3DC[4];
-};
-
-struct Unk_203F458_Header
-{
-    u8 unk0;
-    u8 unk1;
-    u32 unk4;
-};
-
-struct UnkStruct_203F458_SaveBlock
-{
-    struct Unk_203F458_Header unk_0000;
-    struct UnkSubstruct_203F458_000C unk_0008[8];
-};
-
 struct UnkStruct_203F458
 {
     /* 0x0000 */ u8 unk_0000;
-    /* 0x0004 */ struct UnkStruct_203F458_SaveBlock unk_0004;
+    /* 0x0004 */ struct TrainerTowerData unk_0004;
 };
 
 struct UnkStruct_203F45C
@@ -112,6 +77,7 @@ struct UnkStruct_847A074
 
 EWRAM_DATA struct UnkStruct_203F458 * gUnknown_203F458 = NULL;
 EWRAM_DATA struct UnkStruct_203F45C * gUnknown_203F45C = NULL;
+EWRAM_DATA u8 unused_variable = 0;
 
 void sub_815D96C(void);
 void sub_815DC8C(void);  // setup
@@ -563,30 +529,7 @@ const u8 gUnknown_847A30E[][3] = {
 };
 
 extern const struct Unk_203F458_Header gUnknown_84827AC;
-extern const struct UnkSubstruct_203F458_000C *const gUnknown_84827B4[][8];
-
-bool32 sub_815D7BC(void * dest, void * buffer)
-{
-    if (TryCopySpecialSaveSection(30, buffer) != 1)
-        return FALSE;
-    memcpy(dest + 0x000, buffer, 0xF88);
-
-    if (TryCopySpecialSaveSection(31, buffer) != 1)
-        return FALSE;
-    memcpy(dest + 0xF88, buffer, 0xF80);
-
-    if (!sub_815D6B4(dest))
-        return FALSE;
-    return TRUE;
-}
-
-bool32 sub_815D80C(void * dest)
-{
-    void * buffer = AllocZeroed(0x1000);
-    bool32 success = sub_815D7BC(dest, buffer);
-    Free(buffer);
-    return success;
-}
+extern const struct TrainerTowerTrainer *const gUnknown_84827B4[][8];
 
 bool32 sub_815D834(void)
 {
@@ -623,10 +566,10 @@ void sub_815D8C8(void)
     }
 }
 
-void sub_815D8F8(void) // fakematching
+void sub_815D8F8(void)
 {
     u8 i;
-    register u32 found_map asm("r4") = 0xFF;
+    u8 found_map = 0xFF;
     for (i = 0; i < 15; i++)
     {
         if (gUnknown_8479D34[i].mapGroup == gSaveBlock1Ptr->location.mapGroup && gUnknown_8479D34[i].mapNum == gSaveBlock1Ptr->location.mapNum)
@@ -696,23 +639,23 @@ void sub_815DA54(void)
     sub_815DC8C();
     gUnknown_203F45C = AllocZeroed(sizeof(*gUnknown_203F45C));
     r10 = VarGet(VAR_0x4001);
-    StringCopyN(gUnknown_203F45C->unk_00, gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r10].unk_000, 11);
+    StringCopyN(gUnknown_203F45C->unk_00, gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r10].unk_000, 11);
 
     for (r9 = 0; r9 < 6; r9++)
     {
-        gUnknown_203F45C->unk_0C[r9] = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r10].unk_01A[r9];
-        gUnknown_203F45C->unk_18[r9] = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r10].unk_026[r9];
+        gUnknown_203F45C->unk_0C[r9] = gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r10].unk_01A[r9];
+        gUnknown_203F45C->unk_18[r9] = gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r10].unk_026[r9];
 
-        if (gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_002 == 1)
+        if (gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_002 == 1)
         {
-            gUnknown_203F45C->unk_24[r9] = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r10 + 1].unk_01A[r9];
-            gUnknown_203F45C->unk_30[r9] = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r10 + 1].unk_026[r9];
+            gUnknown_203F45C->unk_24[r9] = gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r10 + 1].unk_01A[r9];
+            gUnknown_203F45C->unk_30[r9] = gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r10 + 1].unk_026[r9];
         }
     }
 
-    gUnknown_203F45C->unk_3C = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_002;
-    gUnknown_203F45C->unk_3D = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r10].unk_00B;
-    gUnknown_203F45C->unk_3E = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r10].unk_00C;
+    gUnknown_203F45C->unk_3C = gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_002;
+    gUnknown_203F45C->unk_3D = gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r10].unk_00B;
+    gUnknown_203F45C->unk_3E = gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r10].unk_00C;
     SetVBlankCounter1Ptr(&gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk0);
     sub_815DD2C();
 }
@@ -750,12 +693,12 @@ void sub_815DC8C(void) // fakematching
 {
     u32 whichTimer = gSaveBlock1Ptr->unkArrayIdx;
     s32 r4;
-    const struct UnkSubstruct_203F458_000C *const * r7;
+    const struct TrainerTowerTrainer *const * r7;
 
     gUnknown_203F458 = AllocZeroed(sizeof(*gUnknown_203F458));
     gUnknown_203F458->unk_0000 = gMapHeader.mapDataId - 0x2A;
     if (sub_815D834() == TRUE)
-        sub_815D80C(&gUnknown_203F458->unk_0004);
+        CEReaderTool_LoadTrainerTower(&gUnknown_203F458->unk_0004);
     else
     {
         struct UnkStruct_203F458 * r0_ = gUnknown_203F458;
@@ -767,12 +710,12 @@ void sub_815DC8C(void) // fakematching
         for (r4 = 0; r4 < 8; r4++)
         {
             void * r0 = gUnknown_203F458;
-            r0 = r4 * sizeof(struct UnkSubstruct_203F458_000C) + r0;
-            r0 += offsetof(struct UnkStruct_203F458, unk_0004.unk_0008);
-            memcpy(r0, r7[r4], sizeof(struct UnkSubstruct_203F458_000C));
+            r0 = r4 * sizeof(struct TrainerTowerTrainer) + r0;
+            r0 += offsetof(struct UnkStruct_203F458, unk_0004.trainers);
+            memcpy(r0, r7[r4], sizeof(struct TrainerTowerTrainer));
 //            r0[r4] = *r7[r4];
         }
-        gUnknown_203F458->unk_0004.unk_0000.unk4 = CalcByteArraySum((void *)gUnknown_203F458->unk_0004.unk_0008, sizeof(gUnknown_203F458->unk_0004.unk_0008));
+        gUnknown_203F458->unk_0004.unk4 = CalcByteArraySum((void *)gUnknown_203F458->unk_0004.trainers, sizeof(gUnknown_203F458->unk_0004.trainers));
         sub_815EC0C();
     }
 }
@@ -799,7 +742,7 @@ void sub_815DC8C(void)
                 "\tbne _0815DCD0\n"
                 "\tldr r0, [r4]\n"
                 "\tadds r0, 0x4\n"
-                "\tbl sub_815D80C\n"
+                "\tbl CEReaderTool_LoadTrainerTower\n"
                 "\tb _0815DD18\n"
                 "\t.align 2, 0\n"
                 "_0815DCBC: .4byte gSaveBlock1Ptr\n"
@@ -860,14 +803,14 @@ void sub_815DD2C(void)
 
 void sub_815DD44(void)
 {
-    if (gMapHeader.mapDataId - 0x129 > gUnknown_203F458->unk_0004.unk_0000.unk0)
+    if (gMapHeader.mapDataId - 0x129 > gUnknown_203F458->unk_0004.count)
     {
         gSpecialVar_Result = 3;
         SetCurrentMapLayout(0x132);
     }
     else
     {
-        gSpecialVar_Result = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_002;
+        gSpecialVar_Result = gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_002;
         SetCurrentMapLayout(gUnknown_847A284[gUnknown_203F458->unk_0000][gSpecialVar_Result]);
         sub_815DDB0();
     }
@@ -877,10 +820,10 @@ void sub_815DDB0(void)
 {
     s32 r3, r4;
     u8 r1, r2, r4_;
-    switch (gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_002)
+    switch (gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_002)
     {
         case 0:
-            r2 = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[0].unk_00B;
+            r2 = gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[0].unk_00B;
             for (r3 = 0; r3 < NELEMS(gUnknown_8479ED8); r3++)
             {
                 if (gUnknown_8479ED8[r3].unk1 == r2)
@@ -893,7 +836,7 @@ void sub_815DDB0(void)
             VarSet(VAR_0x4011, r1);
             break;
         case 1:
-            r2 = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[0].unk_00B;
+            r2 = gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[0].unk_00B;
             for (r3 = 0; r3 < NELEMS(gUnknown_847A024); r3++)
             {
                 if (gUnknown_847A024[r3].unk2 == r2)
@@ -915,7 +858,7 @@ void sub_815DDB0(void)
         case 2:
             for (r4 = 0; r4 < 3; r4++)
             {
-                r2 = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r4].unk_00B;
+                r2 = gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r4].unk_00B;
                 for (r3 = 0; r3 < NELEMS(gUnknown_8479ED8); r3++)
                 {
                     if (gUnknown_8479ED8[r3].unk1 == r2)
@@ -962,25 +905,25 @@ void sub_815DF54(void)
 {
     u16 r4 = gSpecialVar_0x8006;
     u8 r1;
-    u8 r5 = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_002;
+    u8 r5 = gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_002;
     // HOW DO I MATCH THIS CONTROL FLOW?!?!
-    r1 = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r5 == 1 ? 0 : r4].unk_00B;
+    r1 = gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r5 == 1 ? 0 : r4].unk_00B;
     switch (gSpecialVar_0x8005)
     {
         case 2:
             sub_815E068(r5, r1);
-            sub_815DEFC(gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r4].unk_00E, gStringVar4);
+            sub_815DEFC(gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r4].unk_00E, gStringVar4);
             break;
         case 3:
             sub_815E068(r5, r1);
-            sub_815DEFC(gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r4].unk_01A, gStringVar4);
+            sub_815DEFC(gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r4].unk_01A, gStringVar4);
             break;
         case 4:
             sub_815E068(r5, r1);
-            sub_815DEFC(gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r4].unk_026, gStringVar4);
+            sub_815DEFC(gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r4].unk_026, gStringVar4);
             break;
         case 5:
-            sub_815DEFC(gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r4].unk_032, gStringVar4);
+            sub_815DEFC(gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r4].unk_032, gStringVar4);
             break;
     }
 }
@@ -1163,7 +1106,7 @@ void sub_815E068(u8 battleType, u8 facilityClass)
 
 void sub_815E114(void)
 {
-    SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+    SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
 void sub_815E124(u8 taskId)
@@ -1180,7 +1123,7 @@ void sub_815E124(u8 taskId)
 void sub_815E160(void)
 {
     gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_FACTORY;
-    if (gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_002 == 1)
+    if (gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_002 == 1)
         gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
     gTrainerBattleOpponent_A = 0;
     sub_815E9FC();
@@ -1192,7 +1135,7 @@ void sub_815E160(void)
 void sub_815E1C0(void)
 {
     if (!gSpecialVar_0x8005)
-        gSpecialVar_Result = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_002;
+        gSpecialVar_Result = gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_002;
 }
 
 void sub_815E1F0(void)
@@ -1203,7 +1146,7 @@ void sub_815E1F0(void)
 void sub_815E218(void)
 {
     u16 mapDataId = gMapHeader.mapDataId;
-    if (mapDataId - 0x12A == gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk8 && mapDataId - 0x129 <= gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_001)
+    if (mapDataId - 0x12A == gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk8 && mapDataId - 0x129 <= gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_001)
         gSpecialVar_Result = FALSE;
     else
         gSpecialVar_Result = TRUE;
@@ -1239,7 +1182,7 @@ void sub_815E394(void)
 
 void sub_815E408(void)
 {
-    u16 itemId = gUnknown_847A2B4[gUnknown_203F458->unk_0004.unk_0008->unk_003];
+    u16 itemId = gUnknown_847A2B4[gUnknown_203F458->unk_0004.trainers->unk_003];
     if (gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_0)
         gSpecialVar_Result = 2;
     else if (AddBagItem(itemId, 1) == 1)
@@ -1356,7 +1299,7 @@ void sub_815E720(void)
 void sub_815E88C(void)
 {
     u8 windowId = VarGet(VAR_0x4001);
-    sub_810F4D8(windowId, TRUE);
+    ClearStdWindowAndFrameToTransparent(windowId, TRUE);
     RemoveWindow(windowId);
 }
 
@@ -1367,9 +1310,9 @@ void sub_815E8B4(void)
 
 void sub_815E8CC(void)
 {
-    if (gUnknown_203F458->unk_0004.unk_0000.unk0 != gUnknown_203F458->unk_0004.unk_0008[0].unk_001)
+    if (gUnknown_203F458->unk_0004.count != gUnknown_203F458->unk_0004.trainers[0].unk_001)
     {
-        ConvertIntToDecimalStringN(gStringVar1, gUnknown_203F458->unk_0004.unk_0000.unk0, STR_CONV_MODE_LEFT_ALIGN, 1);
+        ConvertIntToDecimalStringN(gStringVar1, gUnknown_203F458->unk_0004.count, STR_CONV_MODE_LEFT_ALIGN, 1);
         gSpecialVar_Result = TRUE;
     }
     else
@@ -1394,7 +1337,7 @@ void sub_815E948(void)
 {
     s32 i;
     u16 var_4001 = VarGet(VAR_0x4001);
-    u8 r1 = gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[var_4001].unk_00B;
+    u8 r1 = gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[var_4001].unk_00B;
 
     for (i = 0; i < NELEMS(gUnknown_847A074); i++)
     {
@@ -1427,29 +1370,29 @@ void sub_815E9FC(void)
 
     ZeroEnemyPartyMons();
 
-    switch (gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_002)
+    switch (gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_002)
     {
         case 0:
         default:
             for (r6 = 0; r6 < 2; r6++)
             {
                 r2 = gUnknown_847A2EE[r5][r6];
-                gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r4].unk_040[r2].level = r9;
-                sub_803E0A4(&gEnemyParty[r6], &gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r4].unk_040[r2]);
+                gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r4].unk_040[r2].level = r9;
+                CreateBattleTowerMon(&gEnemyParty[r6], &gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r4].unk_040[r2]);
             }
             break;
         case 1:
             r2 = gUnknown_847A2FE[r5][0];
-            gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[0].unk_040[r2].level = r9;
-            sub_803E0A4(&gEnemyParty[0], &gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[0].unk_040[r2]);
+            gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[0].unk_040[r2].level = r9;
+            CreateBattleTowerMon(&gEnemyParty[0], &gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[0].unk_040[r2]);
             r2 = gUnknown_847A2FE[r5][1];
-            gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[1].unk_040[r2].level = r9;
-            sub_803E0A4(&gEnemyParty[1], &gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[1].unk_040[r2]);
+            gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[1].unk_040[r2].level = r9;
+            CreateBattleTowerMon(&gEnemyParty[1], &gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[1].unk_040[r2]);
             break;
         case 2:
             r2 = gUnknown_847A30E[r5][r4];
-            gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r4].unk_040[r2].level = r9;
-            sub_803E0A4(&gEnemyParty[0], &gUnknown_203F458->unk_0004.unk_0008[gUnknown_203F458->unk_0000].unk_004[r4].unk_040[r2]);
+            gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r4].unk_040[r2].level = r9;
+            CreateBattleTowerMon(&gEnemyParty[0], &gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r4].unk_040[r2]);
             break;
     }
 }
@@ -1474,15 +1417,15 @@ static s32 GetPartyMaxLevel(void)
 
 void sub_815EC0C(void)
 {
-    if (gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk9 != gUnknown_203F458->unk_0004.unk_0000.unk1)
+    if (gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk9 != gUnknown_203F458->unk_0004.id)
     {
-        gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk9 = gUnknown_203F458->unk_0004.unk_0000.unk1;
+        gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk9 = gUnknown_203F458->unk_0004.id;
         sub_815EDF4(&gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk4, 215999);
         gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_0 = FALSE;
     }
 }
 
-void sub_815EC8C(void)
+void PrintTrainerTowerRecords(void)
 {
     s32 i;
     u8 windowId = 0;
@@ -1490,14 +1433,14 @@ void sub_815EC8C(void)
     sub_815DC8C();
     FillWindowPixelRect(0, 0, 0, 0, 0xd8, 0x90);
     sub_815EC0C();
-    box_print(0, 2, 0x4a, 0, &gUnknown_847A22C, 0, gUnknown_83FE982);
+    AddTextPrinterParameterized3(0, 2, 0x4a, 0, &gUnknown_847A22C, 0, gUnknown_83FE982);
 
     for (i = 0; i < 4; i++)
     {
         PRINT_TOWER_TIME(sub_815EDDC(&gSaveBlock1Ptr->unkArray[i].unk4));
         StringExpandPlaceholders(gStringVar4, gUnknown_83FE998);
-        box_print(windowId, 2, 0x18, 0x24 + 0x14 * i, &gUnknown_847A22C, 0, gUnknown_83FE9C4[i]);
-        box_print(windowId, 2, 0x60, 0x24 + 0x14 * i, &gUnknown_847A22C, 0, gStringVar4);
+        AddTextPrinterParameterized3(windowId, 2, 0x18, 0x24 + 0x14 * i, &gUnknown_847A22C, 0, gUnknown_83FE9C4[i]);
+        AddTextPrinterParameterized3(windowId, 2, 0x60, 0x24 + 0x14 * i, &gUnknown_847A22C, 0, gStringVar4);
     }
 
     PutWindowTilemap(windowId);

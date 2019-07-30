@@ -713,8 +713,8 @@ _080BD5C2:
 	bx r1
 	thumb_func_end player_should_look_direction_be_enforced_upon_movement
 
-	thumb_func_start sub_80BD5C8
-sub_80BD5C8: @ 80BD5C8
+	thumb_func_start StartTransitionToFlipBikeState
+StartTransitionToFlipBikeState: @ 80BD5C8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -730,7 +730,7 @@ sub_80BD5C8: @ 80BD5C8
 	movs r0, 0x1
 	bl SetPlayerAvatarTransitionFlags
 	bl sav1_reset_battle_music_maybe
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	b _080BD618
 	.align 2, 0
 _080BD5F0: .4byte gUnknown_2036E2C
@@ -738,8 +738,8 @@ _080BD5F4: .4byte gPlayerAvatar
 _080BD5F8:
 	adds r0, r2, 0
 	bl SetPlayerAvatarTransitionFlags
-	movs r4, 0x8D
-	lsls r4, 1
+	movs r4, 0x8D @ BGM_FRLG_BICYCLE
+	lsls r4, 1    @ BGM_FRLG_BICYCLE
 	adds r0, r4, 0
 	bl sub_8056124
 	cmp r0, 0
@@ -752,7 +752,7 @@ _080BD618:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80BD5C8
+	thumb_func_end StartTransitionToFlipBikeState
 
 	thumb_func_start sub_80BD620
 sub_80BD620: @ 80BD620

@@ -593,7 +593,7 @@ _081029D0:
 	ldrb r0, [r1, 0x17]
 	adds r1, 0x62
 	movs r2, 0
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	bl sub_806E25C
 	cmp r0, 0
 	beq _081029F4
@@ -621,13 +621,13 @@ _08102A10: .4byte gUnknown_203ACF0
 _08102A14:
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x17]
-	bl ListMenuHandleInput
+	bl ListMenu_ProcessInput
 	ldr r1, [r4]
 	str r0, [r1, 0xC]
 	ldrb r0, [r1, 0x17]
 	adds r1, 0x62
 	movs r2, 0
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	ldr r0, _08102A4C @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r3, 0x1
@@ -754,7 +754,7 @@ _08102B24:
 	adds r1, r2, 0
 	adds r1, 0x12
 	adds r2, 0x10
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	movs r0, 0x20
 	str r0, [sp]
 	movs r0, 0x14
@@ -804,7 +804,7 @@ _08102B94:
 	adds r1, r2, 0
 	adds r1, 0x12
 	adds r2, 0x10
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	movs r0, 0x1
 	bl HideBg
 	ldr r0, [r4]
@@ -832,7 +832,7 @@ _08102BD8:
 	adds r1, r2, 0
 	adds r1, 0x12
 	adds r2, 0x10
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	movs r0, 0x1
 	bl HideBg
 	ldr r0, [r4]
@@ -1238,7 +1238,7 @@ _08102F60:
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0x3
-	bl sub_8107A9C
+	bl ListMenuOverrideSetColors
 	b _08102F7A
 	.align 2, 0
 _08102F6C: .4byte gUnknown_203ACF0
@@ -1246,7 +1246,7 @@ _08102F70:
 	movs r0, 0xA
 	movs r1, 0
 	movs r2, 0xB
-	bl sub_8107A9C
+	bl ListMenuOverrideSetColors
 _08102F7A:
 	pop {r0}
 	bx r0
@@ -1367,7 +1367,7 @@ _0810307C:
 	ldrb r0, [r1, 0x17]
 	adds r1, 0x62
 	movs r2, 0
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	bl sub_81039F0
 	ldr r1, [r4]
 	adds r1, 0x60
@@ -1379,13 +1379,13 @@ _08103098:
 	ldr r0, [r4]
 	adds r0, 0x41
 	ldrb r0, [r0]
-	bl ListMenuHandleInput
+	bl ListMenu_ProcessInput
 	ldr r1, [r4]
 	str r0, [r1, 0x30]
 	ldrb r0, [r1, 0x17]
 	adds r1, 0x62
 	movs r2, 0
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	ldr r0, _081030F0 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r3, 0x1
@@ -1687,7 +1687,7 @@ _08103344:
 	ldrb r0, [r1, 0x17]
 	adds r1, 0x62
 	movs r2, 0
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	bl sub_81039F0
 	ldr r1, [r4]
 	adds r1, 0x60
@@ -1700,13 +1700,13 @@ _08103362:
 	ldr r0, [r4]
 	adds r0, 0x41
 	ldrb r0, [r0]
-	bl ListMenuHandleInput
+	bl ListMenu_ProcessInput
 	ldr r1, [r4]
 	str r0, [r1, 0x30]
 	ldrb r0, [r1, 0x17]
 	adds r1, 0x62
 	movs r2, 0
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	ldr r0, _081033C4 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r2, 0x1
@@ -2433,7 +2433,7 @@ _08103964:
 	ldrh r3, [r0, 0x3C]
 _0810396E:
 	adds r0, r5, 0
-	bl Unused_ListMenuInit2
+	bl ListMenuInitInRect
 	ldr r1, [r4]
 	adds r1, 0x41
 	strb r0, [r1]
@@ -2467,7 +2467,7 @@ _0810399C:
 	adds r1, r2, 0
 	adds r1, 0x36
 	adds r2, 0x34
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	b _081039E8
 	.align 2, 0
 _081039B4: .4byte gUnknown_203ACF0
@@ -2480,7 +2480,7 @@ _081039B8:
 	adds r1, r2, 0
 	adds r1, 0x3A
 	adds r2, 0x38
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	b _081039E8
 	.align 2, 0
 _081039D0: .4byte gUnknown_203ACF0
@@ -2493,7 +2493,7 @@ _081039D4:
 	adds r1, r2, 0
 	adds r1, 0x3E
 	adds r2, 0x3C
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 _081039E8:
 	pop {r0}
 	bx r0
@@ -2572,7 +2572,7 @@ sub_8103A40: @ 8103A40
 	movs r1, 0
 	movs r2, 0x28
 	adds r3, r6, 0
-	bl blit_move_info_icon
+	bl BlitMoveInfoIcon
 	ldr r0, _08103AC4 @ =gBaseStats
 	lsls r4, r5, 3
 	subs r4, r5
@@ -2587,7 +2587,7 @@ sub_8103A40: @ 8103A40
 	lsrs r1, 24
 	movs r2, 0x78
 	adds r3, r6, 0
-	bl blit_move_info_icon
+	bl BlitMoveInfoIcon
 	ldrb r1, [r4, 0x7]
 	cmp r5, r1
 	beq _08103AB6
@@ -2599,7 +2599,7 @@ sub_8103A40: @ 8103A40
 	lsrs r1, 24
 	movs r2, 0x98
 	adds r3, r6, 0
-	bl blit_move_info_icon
+	bl BlitMoveInfoIcon
 _08103AB6:
 	add sp, 0x4
 	pop {r4-r7}
@@ -4266,7 +4266,7 @@ _08104852:
 	adds r0, r7, 0
 	adds r1, r5, 0
 	adds r2, r6, 0
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	add sp, 0x18
 	pop {r4-r7}
 	pop {r0}
@@ -7753,7 +7753,7 @@ _08106478:
 	lsrs r1, 24
 	movs r2, 0
 	movs r3, 0x1
-	bl blit_move_info_icon
+	bl BlitMoveInfoIcon
 	ldrb r1, [r4, 0x7]
 	cmp r5, r1
 	beq _08106504
@@ -7765,7 +7765,7 @@ _08106478:
 	lsrs r1, 24
 	movs r2, 0x20
 	movs r3, 0x1
-	bl blit_move_info_icon
+	bl BlitMoveInfoIcon
 _08106504:
 	ldr r7, _081066B8 @ =gUnknown_203ACF0
 	ldr r0, [r7]

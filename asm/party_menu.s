@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_811EA44
-sub_811EA44: @ 811EA44
+	thumb_func_start PartyMenuInit
+PartyMenuInit: @ 811EA44
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -181,7 +181,7 @@ _0811EB90: .4byte gUnknown_203B09C
 _0811EB94: .4byte gPlayerParty
 _0811EB98: .4byte gTextFlags
 _0811EB9C: .4byte sub_811EBD0
-	thumb_func_end sub_811EA44
+	thumb_func_end PartyMenuInit
 
 	thumb_func_start sub_811EBA0
 sub_811EBA0: @ 811EBA0
@@ -189,7 +189,7 @@ sub_811EBA0: @ 811EBA0
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer
-	bl do_scheduled_bg_tilemap_copies_to_vram
+	bl DoScheduledBgTilemapCopiesToVram
 	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
@@ -219,7 +219,7 @@ _0811EBD2:
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0811EBF6
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -276,9 +276,9 @@ _0811EC24:
 	.4byte _0811EDD0
 	.4byte _0811EDDE
 _0811EC80:
-	bl sub_80BF768
-	bl sub_80BF77C
-	bl clear_scheduled_bg_copies_to_vram
+	bl SetVBlankHBlankCallbacksToNull
+	bl ClearVramOamPltt
+	bl ClearScheduledBgCopiesToVram
 	b _0811EDFC
 _0811EC8E:
 	bl ScanlineEffect_Stop
@@ -299,7 +299,7 @@ _0811ECAE:
 	bl FreeAllSpritePalettes
 	b _0811EDFC
 _0811ECB4:
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	cmp r0, 0
 	beq _0811ECC0
@@ -565,7 +565,7 @@ _0811EEC8: .4byte gUnknown_203B0B8
 	thumb_func_start sub_811EECC
 sub_811EECC: @ 811EECC
 	push {r4,r5,lr}
-	bl sub_80BF7C8
+	bl ResetAllBgsCoordinatesAndBgCntRegs
 	ldr r5, _0811EF34 @ =gUnknown_203B0BC
 	movs r4, 0x80
 	lsls r4, 4
@@ -587,7 +587,7 @@ sub_811EECC: @ 811EECC
 	movs r0, 0x1
 	bl SetBgTilemapBuffer
 	movs r0, 0x1
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r1, 0x82
 	lsls r1, 5
 	movs r0, 0
@@ -649,7 +649,7 @@ _0811EF8C:
 	ldr r4, _0811EFAC @ =gUnknown_203B0B8
 	ldr r0, _0811EFB0 @ =gFile_graphics_interface_party_menu_misc_sheet
 	mov r1, sp
-	bl malloc_and_decompress
+	bl MallocAndDecompress
 	adds r1, r0, 0
 	str r1, [r4]
 	ldr r2, [sp]
@@ -883,7 +883,7 @@ sub_811F124: @ 811F124
 	ldrb r0, [r4, 0x8]
 	bl PutWindowTilemap
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	b _0811F22A
 	.align 2, 0
 _0811F16C: .4byte gUnknown_203B0A0
@@ -973,7 +973,7 @@ _0811F218:
 	ldrb r0, [r0, 0x8]
 	bl PutWindowTilemap
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 _0811F22A:
 	pop {r4,r5}
 	pop {r0}
@@ -1274,7 +1274,7 @@ _0811F47C:
 	cmp r0, 0x3
 	bne _0811F492
 	adds r0, r4, 0
-	bl sub_80A1150
+	bl GetItemCompatibilityRule
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1799,7 +1799,7 @@ _0811F884:
 	movs r1, 0x17
 	movs r2, 0x10
 	movs r3, 0x7
-	bl sub_80F6B08
+	bl SetBgRectPal
 	b _0811F8B0
 _0811F89E:
 	movs r0, 0x2
@@ -1809,7 +1809,7 @@ _0811F89E:
 	movs r1, 0x17
 	movs r2, 0x10
 	movs r3, 0x7
-	bl sub_80F6B08
+	bl SetBgRectPal
 _0811F8B0:
 	ldr r0, _0811F8BC @ =gUnknown_203B09C
 	ldr r0, [r0]
@@ -1857,7 +1857,7 @@ _0811F8F2:
 	movs r2, 0x12
 _0811F904:
 	movs r3, 0x7
-	bl sub_80F6B08
+	bl SetBgRectPal
 	b _0811F91E
 _0811F90C:
 	movs r0, 0x2
@@ -1867,7 +1867,7 @@ _0811F90C:
 	movs r1, 0x17
 	movs r2, 0x12
 	movs r3, 0x7
-	bl sub_80F6B08
+	bl SetBgRectPal
 _0811F91E:
 	ldr r0, _0811F940 @ =gUnknown_203B09C
 	ldr r0, [r0]
@@ -1878,7 +1878,7 @@ _0811F926:
 	mov r1, r8
 	bl sub_81227B8
 	movs r0, 0x1
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 _0811F934:
 	add sp, 0x8
 	pop {r3}
@@ -2000,7 +2000,7 @@ sub_811F9DC: @ 811F9DC
 	movs r3, 0x12
 	bl CopyToBgTilemapBufferRect_ChangePalette
 	movs r0, 0x1
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	add sp, 0xC
 	pop {r4-r6}
 	pop {r0}
@@ -2494,7 +2494,7 @@ _0811FDD6:
 	.align 2, 0
 _0811FDF0: .4byte gUnknown_203B0A0
 _0811FDF4:
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	cmp r0, 0
 	bne _0811FE04
@@ -3218,7 +3218,7 @@ sub_8120328: @ 8120328
 	lsrs r4, r0, 24
 	adds r5, r4, 0
 	movs r0, 0x6
-	bl sub_80BF518
+	bl RunTextPrinters_CheckActive
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x1
@@ -3234,7 +3234,7 @@ sub_8120328: @ 8120328
 	bne _0812035E
 	movs r0, 0x6
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearStdWindowAndFrameToTransparent
 	movs r0, 0x6
 	bl ClearWindowTilemap
 _0812035E:
@@ -3302,10 +3302,10 @@ sub_81203B8: @ 81203B8
 	beq _08120410
 	movs r0, 0x6
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearStdWindowAndFrameToTransparent
 	movs r0, 0x6
 	bl ClearWindowTilemap
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3366,7 +3366,7 @@ _0812043C:
 _08120448:
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	b _08120468
 	.align 2, 0
 _08120454: .4byte gUnknown_203B0A0
@@ -3376,7 +3376,7 @@ _0812045C:
 	movs r0, 0x6
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 _08120468:
 	ldr r1, _0812049C @ =gStringVar1
 	adds r0, r5, 0
@@ -3392,7 +3392,7 @@ _08120468:
 	adds r1, r6, 0
 	bl sub_81202F8
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -3418,7 +3418,7 @@ sub_81204AC: @ 81204AC
 	movs r0, 0x8
 	adds r1, r6, 0
 	adds r2, r4, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	ldr r1, _081204FC @ =gStringVar1
 	adds r0, r6, 0
 	bl GetMonNickname
@@ -3433,7 +3433,7 @@ sub_81204AC: @ 81204AC
 	adds r1, r5, 0
 	bl sub_81202F8
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -3467,7 +3467,7 @@ sub_812050C: @ 812050C
 	adds r1, r5, 0
 	bl sub_81202F8
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -3514,7 +3514,7 @@ sub_8120558: @ 8120558
 	adds r1, r6, 0
 	bl sub_81202F8
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -3536,14 +3536,14 @@ sub_81205C8: @ 81205C8
 	lsrs r4, r5, 16
 	adds r7, r4, 0
 	adds r0, r4, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _081205F2
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl sub_8097D38
+	bl GiveMailToMon
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -3627,7 +3627,7 @@ _08120678:
 _0812067E:
 	ldr r0, _08120698 @ =0x0000016d
 _08120680:
-	bl ItemId_GetItem
+	bl ItemId_GetName
 	adds r1, r0, 0
 _08120686:
 	ldr r0, _0812069C @ =gStringVar1
@@ -4121,7 +4121,7 @@ _08120A24:
 	movs r1, 0
 	bl sub_81202F8
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r1, _08120A50 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -4149,7 +4149,7 @@ sub_8120A58: @ 8120A58
 	movs r1, 0x1
 	bl sub_81202F8
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r1, _08120A88 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -4529,7 +4529,7 @@ sub_8120D08: @ 8120D08
 	ldr r5, _08120D38 @ =gTasks+0x8
 	adds r0, r4, r5
 	ldrb r0, [r0]
-	bl sub_80BF518
+	bl RunTextPrinters_CheckActive
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x1
@@ -4643,7 +4643,7 @@ sub_8120DE0: @ 8120DE0
 	ldr r6, _08120E14 @ =gTasks+0x8
 	adds r4, r5, r6
 	ldrb r0, [r4]
-	bl sub_80BF518
+	bl RunTextPrinters_CheckActive
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x1
@@ -4709,11 +4709,11 @@ sub_8120E58: @ 8120E58
 	movs r0, 0
 	movs r1, 0x4F
 	movs r2, 0xD0
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	movs r0, 0
 	movs r1, 0x58
 	movs r2, 0xF0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	ldr r0, _08120E94 @ =gUnknown_203B0A0
 	ldrb r0, [r0, 0xB]
 	cmp r0, 0x3
@@ -4878,7 +4878,7 @@ sub_8120FB0: @ 8120FB0
 	push {lr}
 	bl FreeRestoreBattleData
 	bl LoadPlayerParty
-	bl sub_815AC20
+	bl SetTeachyTvControllerModeToResume
 	ldr r0, _08120FC8 @ =CB2_ReturnToTeachyTV
 	bl SetMainCallback2
 	pop {r0}
@@ -5016,11 +5016,11 @@ _081210AC:
 	movs r0, 0
 	movs r1, 0x4F
 	movs r2, 0xD0
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	movs r0, 0
 	movs r1, 0x58
 	movs r2, 0xF0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	movs r0, 0x2
 	bl stdpal_get
 	movs r1, 0xC0
@@ -5084,7 +5084,7 @@ _0812110E:
 	adds r0, r4, 0
 	movs r1, 0
 	movs r3, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	adds r0, r4, 0
 	bl PutWindowTilemap
 	adds r0, r4, 0
@@ -5141,7 +5141,7 @@ _08121194:
 	movs r1, 0
 	adds r2, r5, 0
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	b _08121224
 	.align 2, 0
 _081211E0: .4byte gUnknown_845A108
@@ -5172,7 +5172,7 @@ _081211F0:
 	movs r1, 0
 	adds r2, r5, 0
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 _08121224:
 	adds r0, r6, 0
 	bl PutWindowTilemap
@@ -5180,7 +5180,7 @@ _08121224:
 	movs r1, 0x2
 	bl CopyWindowToVram
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 _08121238:
 	add sp, 0x14
 	pop {r4-r6}
@@ -5778,7 +5778,7 @@ sub_8121704: @ 8121704
 	str r1, [sp, 0x8]
 	movs r1, 0
 	adds r2, r5, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0xC
 	pop {r4,r5}
 	pop {r0}
@@ -6486,7 +6486,7 @@ _08121CAA:
 	ldr r1, [r1]
 	str r1, [sp, 0x8]
 	movs r1, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 _08121CD0:
 	add sp, 0xC
 	pop {r3}
@@ -6507,13 +6507,13 @@ sub_8121CE4: @ 8121CE4
 	cmp r0, 0xFF
 	beq _08121D04
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearStdWindowAndFrameToTransparent
 	ldrb r0, [r4]
 	bl RemoveWindow
 	movs r0, 0xFF
 	strb r0, [r4]
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 _08121D04:
 	pop {r4}
 	pop {r0}
@@ -6608,7 +6608,7 @@ _08121DB0:
 	movs r1, 0
 	movs r2, 0x58
 	movs r3, 0xF
-	bl SetWindowBorderStyle
+	bl DrawStdFrameWithCustomTileAndPalette
 	ldr r4, _08121DF0 @ =gStringVar4
 	ldr r1, _08121DF4 @ =gUnknown_845A2E8
 	lsls r0, r6, 2
@@ -6627,7 +6627,7 @@ _08121DB0:
 	movs r3, 0
 	bl AddTextPrinterParameterized
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 _08121DE8:
 	add sp, 0xC
 	pop {r4-r6}
@@ -6770,7 +6770,7 @@ _08121ED2:
 	movs r1, 0
 	movs r2, 0x4F
 	movs r3, 0xD
-	bl SetWindowBorderStyle
+	bl DrawStdFrameWithCustomTileAndPalette
 	cmp r4, 0x3
 	bne _08121F00
 	ldr r0, [r6]
@@ -6831,7 +6831,7 @@ _08121F3C:
 	str r1, [sp, 0x10]
 	movs r1, 0x2
 	mov r2, r9
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -6854,9 +6854,9 @@ _08121F7A:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl sub_810F774
+	bl Menu_InitCursorInternal
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r0, [r4]
 _08121FA2:
 	ldrb r0, [r0, 0xC]
@@ -6882,7 +6882,7 @@ sub_8121FC0: @ 8121FC0
 	movs r1, 0
 	movs r2, 0x4F
 	movs r3, 0xD
-	bl SetWindowBorderStyle
+	bl DrawStdFrameWithCustomTileAndPalette
 	ldr r2, _08122008 @ =gTextFlags
 	ldrb r0, [r2]
 	movs r1, 0x1
@@ -6903,7 +6903,7 @@ sub_8121FC0: @ 8121FC0
 	movs r0, 0x6
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 	add sp, 0x10
 	pop {r4}
 	pop {r0}
@@ -6947,7 +6947,7 @@ sub_8122034: @ 8122034
 	movs r1, 0
 	movs r2, 0x4F
 	movs r3, 0xD
-	bl SetWindowBorderStyle
+	bl DrawStdFrameWithCustomTileAndPalette
 	ldr r0, [r4]
 	ldrb r0, [r0, 0xC]
 	pop {r4}
@@ -7005,7 +7005,7 @@ sub_8122084: @ 8122084
 	adds r0, r4, 0
 	movs r1, 0x4
 	adds r2, r5, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 	add sp, 0x10
 	pop {r4,r5}
 	pop {r0}
@@ -7026,12 +7026,12 @@ sub_81220D4: @ 81220D4
 	adds r0, r4, 0
 	movs r1, 0x4F
 	movs r2, 0xE0
-	bl sub_814FEAC
+	bl TextWindow_LoadResourcesStdFrame0
 	adds r0, r4, 0
 	movs r1, 0x1
 	movs r2, 0x4F
 	movs r3, 0xE
-	bl sub_810EDC4
+	bl DrawDialogFrameWithCustomTileAndPalette
 	ldr r1, _0812210C @ =gUnknown_8417457
 	adds r0, r4, 0
 	bl sub_8122084
@@ -7054,11 +7054,11 @@ sub_8122110: @ 8122110
 	bl ClearWindowTilemap
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_810F260
+	bl ClearDialogWindowAndFrameToTransparent
 	adds r0, r4, 0
 	bl RemoveWindow
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -7084,7 +7084,7 @@ sub_8122138: @ 8122138
 	movs r0, 0xFF
 	strb r0, [r4, 0xE]
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	b _081221C0
 	.align 2, 0
 _08122168: .4byte gUnknown_203B09C
@@ -7121,11 +7121,11 @@ _0812217A:
 	movs r1, 0x2
 	movs r2, 0x3
 	movs r3, 0x6
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	ldrb r0, [r4, 0xE]
 	bl PutWindowTilemap
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 _081221C0:
 	add sp, 0x14
 	pop {r4,r5}
@@ -7553,7 +7553,7 @@ sub_81224D0: @ 81224D0
 	.align 2, 0
 _081224F4: .4byte gSprites
 _081224F8:
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812251C
@@ -7643,7 +7643,7 @@ _08122588:
 	adds r0, r7, r5
 	ldrb r4, [r0]
 	adds r0, r1, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -7676,7 +7676,7 @@ _081225CC:
 	adds r0, r5, r7
 	ldrb r4, [r0, 0x6]
 	adds r0, r1, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -8013,11 +8013,11 @@ _0812285C: .4byte 0x0000fffc
 sub_8122860: @ 8122860
 	push {lr}
 	ldr r0, _08122878 @ =gUnknown_845A474
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	ldr r0, _0812287C @ =gUnknown_845A4EC
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	ldr r0, _08122880 @ =gUnknown_845A47C
-	bl LoadCompressedObjectPalette
+	bl LoadCompressedSpritePalette
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -8164,9 +8164,9 @@ _0812297C: .4byte gSprites
 sub_8122980: @ 8122980
 	push {lr}
 	ldr r0, _08122994 @ =gUnknown_845A574
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	ldr r0, _08122998 @ =gUnknown_845A57C
-	bl LoadCompressedObjectPalette
+	bl LoadCompressedSpritePalette
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -8327,7 +8327,7 @@ _08122AB6:
 	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _08122AEC
@@ -8550,27 +8550,27 @@ sub_8122C5C: @ 8122C5C
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x3
 	bhi _08122CA0
-	bl ProcessMenuInputNoWrapAround_other
+	bl Menu_ProcessInputNoWrapAround_other
 	b _08122CA4
 	.align 2, 0
 _08122C94: .4byte gPaletteFade
 _08122C98: .4byte gTasks+0x8
 _08122C9C: .4byte gUnknown_203B09C
 _08122CA0:
-	bl ProcessMenuInput_other
+	bl Menu_ProcessInput_other
 _08122CA4:
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r0, 0
 	ldrsh r4, [r7, r0]
-	bl GetMenuCursorPos
+	bl Menu_GetCursorPos
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
 	beq _08122CCE
 	ldr r0, _08122D14 @ =gUnknown_203B09C
 	ldr r4, [r0]
-	bl GetMenuCursorPos
+	bl Menu_GetCursorPos
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, 0xF
@@ -8578,7 +8578,7 @@ _08122CA4:
 	ldrb r0, [r4]
 	bl sub_8122138
 _08122CCE:
-	bl GetMenuCursorPos
+	bl Menu_GetCursorPos
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r7]
@@ -8717,7 +8717,7 @@ sub_8122DBC: @ 8122DBC
 	str r1, [sp, 0x8]
 	movs r1, 0xFF
 	movs r3, 0x1
-	bl sub_811EA44
+	bl PartyMenuInit
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -8914,7 +8914,7 @@ _08122F56:
 	ldrb r0, [r6, 0x6]
 	str r0, [sp, 0x4]
 	movs r0, 0
-	bl sub_80F6B94
+	bl CopyRectIntoAltRect
 	ldr r1, [r5]
 	ldrb r2, [r6, 0x8]
 	ldrb r3, [r6, 0xA]
@@ -8923,7 +8923,7 @@ _08122F56:
 	ldrb r0, [r6, 0xE]
 	str r0, [sp, 0x4]
 	movs r0, 0
-	bl sub_80F6B94
+	bl CopyRectIntoAltRect
 	add r0, sp, 0x8
 	ldrb r0, [r0]
 	bl ClearWindowTilemap
@@ -9276,7 +9276,7 @@ _08123228:
 	bl sub_8123068
 _08123256:
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	add sp, 0x8
 	pop {r4-r6}
 	pop {r0}
@@ -9369,7 +9369,7 @@ sub_8123270: @ 8123270
 	ldrb r0, [r6, 0x6]
 	str r0, [sp, 0x4]
 	movs r0, 0
-	bl sub_80F6B94
+	bl CopyRectIntoAltRect
 	ldr r0, _08123380 @ =gUnknown_203B0CC
 	ldr r1, [r0]
 	ldrb r2, [r6, 0x8]
@@ -9379,7 +9379,7 @@ sub_8123270: @ 8123270
 	ldrb r0, [r6, 0xE]
 	str r0, [sp, 0x4]
 	movs r0, 0
-	bl sub_80F6B94
+	bl CopyRectIntoAltRect
 	movs r0, 0x9
 	ldrsb r0, [r4, r0]
 	ldr r1, [r5]
@@ -9454,7 +9454,7 @@ sub_8123388: @ 8123388
 	ldrb r0, [r0, 0x8]
 	bl PutWindowTilemap
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	adds r0, r6, 0
 	bl sub_81235E8
 	b _08123418
@@ -9928,7 +9928,7 @@ _081237AE:
 	str r1, [sp, 0x8]
 	movs r1, 0xFF
 	movs r3, 0x1
-	bl sub_811EA44
+	bl PartyMenuInit
 	b _08123814
 	.align 2, 0
 _081237BC: .4byte gUnknown_203B0D8
@@ -9937,7 +9937,7 @@ _081237C4: .4byte gPlayerParty
 _081237C8: .4byte sub_81238A4
 _081237CC:
 	ldrh r0, [r6]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _081237F8
@@ -9967,7 +9967,7 @@ _081237F8:
 	str r1, [sp, 0x8]
 	movs r1, 0xFF
 	movs r3, 0x1
-	bl sub_811EA44
+	bl PartyMenuInit
 _08123814:
 	add sp, 0xC
 	pop {r3}
@@ -10165,7 +10165,7 @@ _081239A4: .4byte gTasks
 _081239A8: .4byte sub_81203B8
 _081239AC:
 	ldrh r0, [r5]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _081239EC
@@ -10345,7 +10345,7 @@ sub_8123ACC: @ 8123ACC
 	str r1, [sp, 0x8]
 	movs r1, 0xFF
 	movs r3, 0x1
-	bl sub_811EA44
+	bl PartyMenuInit
 	b _08123B68
 	.align 2, 0
 _08123B38: .4byte gUnknown_203B0A0
@@ -10366,7 +10366,7 @@ _08123B4C:
 	str r1, [sp, 0x8]
 	movs r1, 0xFF
 	movs r3, 0x1
-	bl sub_811EA44
+	bl PartyMenuInit
 _08123B68:
 	add sp, 0xC
 	pop {r3}
@@ -10537,7 +10537,7 @@ _08123CC8:
 	bl sub_81202F8
 _08123CCE:
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r0, _08123CEC @ =gTasks
 	lsls r1, r7, 2
 	adds r1, r7
@@ -10675,7 +10675,7 @@ sub_8123DCC: @ 8123DCC
 	str r1, [sp, 0x8]
 	movs r1, 0xFF
 	movs r3, 0x1
-	bl sub_811EA44
+	bl PartyMenuInit
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -10776,7 +10776,7 @@ _08123EB2:
 	muls r0, r1
 	ldr r1, _08123EE8 @ =gPlayerParty
 	adds r0, r1
-	bl sub_809803C
+	bl TakeMailFromMon2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -11600,7 +11600,7 @@ sub_81245A4: @ 81245A4
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	bl GetMenuCursorPos
+	bl Menu_GetCursorPos
 	ldr r5, _08124610 @ =gUnknown_203B09C
 	ldr r1, [r5]
 	lsls r0, 24
@@ -11627,7 +11627,7 @@ _081245D6:
 	ldr r0, [r5]
 	adds r0, 0xD
 	bl sub_8121CE4
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -12237,7 +12237,7 @@ sub_8124AB0: @ 8124AB0
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_811EA44
+	bl PartyMenuInit
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -12577,7 +12577,7 @@ _08124D6A:
 	adds r1, r7, 0
 	movs r2, 0x3
 	movs r3, 0x1
-	bl sub_811EA44
+	bl PartyMenuInit
 	add sp, 0xC
 	pop {r3}
 	mov r8, r3
@@ -12617,7 +12617,7 @@ sub_8124DB0: @ 8124DB0
 	movs r0, 0x6
 	movs r1, 0
 	movs r2, 0xFF
-	bl sub_813CD50
+	bl InitBerryPouch
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8124DB0
@@ -12644,7 +12644,7 @@ sub_8124DE0: @ 8124DE0
 	push {r4,lr}
 	ldr r4, _08124E0C @ =gSpecialVar_ItemId
 	ldrh r0, [r4]
-	bl sub_80A1150
+	bl GetItemCompatibilityRule
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -12759,7 +12759,7 @@ _08124EC8:
 	str r1, [sp, 0x8]
 	movs r1, 0xFF
 	movs r2, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 _08124EE6:
 	add sp, 0xC
 	pop {r3}
@@ -12820,7 +12820,7 @@ sub_8124EFC: @ 8124EFC
 	movs r0, 0x4
 	adds r1, r5, 0
 	adds r3, r6, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	ldrh r1, [r7]
 	movs r0, 0xA9
 	lsls r0, 1
@@ -12852,7 +12852,7 @@ _08124F94:
 	ldr r1, [r4]
 	str r1, [sp, 0x8]
 	movs r1, 0xFF
-	bl sub_811EA44
+	bl PartyMenuInit
 _08124FB2:
 	add sp, 0xC
 	pop {r3}
@@ -13293,7 +13293,7 @@ _08125342:
 	movs r1, 0x1
 	bl sub_81202F8
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r1, _0812537C @ =gTasks
 	lsls r0, r7, 2
 	adds r0, r7
@@ -13312,7 +13312,7 @@ _08125380:
 	movs r0, 0x4
 	adds r1, r5, 0
 	adds r2, r6, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	adds r0, r7, 0
 	bl sub_8124DC0
 	ldr r1, _081253A8 @ =gUnknown_3005E98
@@ -13501,7 +13501,7 @@ _0812551C:
 	movs r1, 0x1
 	bl sub_81202F8
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r1, _08125550 @ =gTasks
 	mov r2, r9
 	lsls r0, r2, 2
@@ -13548,7 +13548,7 @@ sub_8125554: @ 8125554
 	movs r1, 0
 	bl sub_81202F8
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	bl sub_803539C
 	ldr r1, _081255B4 @ =gTasks
 	lsls r0, r5, 2
@@ -13684,9 +13684,9 @@ _08125680:
 	mov r1, r8
 	movs r2, 0
 	movs r3, 0x2
-	bl ProgramAndPlaceMenuCursorOnWindow
+	bl Menu_InitCursor
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	add sp, 0x10
 	pop {r3-r5}
 	mov r8, r3
@@ -13706,7 +13706,7 @@ sub_81256C0: @ 81256C0
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
-	bl ProcessMenuInput
+	bl Menu_ProcessInput
 	lsls r0, 24
 	asrs r1, r0, 24
 	movs r0, 0x2
@@ -13730,8 +13730,8 @@ _081256F2:
 	bx r0
 	thumb_func_end sub_81256C0
 
-	thumb_func_start sub_81256F8
-sub_81256F8: @ 81256F8
+	thumb_func_start ItemUseCB_PpRestore
+ItemUseCB_PpRestore: @ 81256F8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -13802,7 +13802,7 @@ _0812577E:
 _08125784: .4byte gUnknown_203B0A0
 _08125788: .4byte gTasks
 _0812578C: .4byte sub_81256C0
-	thumb_func_end sub_81256F8
+	thumb_func_end ItemUseCB_PpRestore
 
 	thumb_func_start sub_8125790
 sub_8125790: @ 8125790
@@ -13813,7 +13813,7 @@ sub_8125790: @ 8125790
 	ldr r0, [r0]
 	adds r0, 0xC
 	bl sub_8121CE4
-	bl GetMenuCursorPos
+	bl Menu_GetCursorPos
 	ldr r1, _081257C4 @ =gUnknown_203B0A0
 	lsls r0, 24
 	lsrs r0, 24
@@ -13897,7 +13897,7 @@ sub_812580C: @ 812580C
 	movs r1, 0x1
 	bl sub_81202F8
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r1, _08125874 @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
@@ -13958,7 +13958,7 @@ sub_8125898: @ 8125898
 	ldr r3, _08125940 @ =0x0000ffff
 	movs r0, 0x4
 	adds r1, r4, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	movs r0, 0x1
 	bl PlaySE
 	ldrh r0, [r6]
@@ -13984,7 +13984,7 @@ sub_8125898: @ 8125898
 	movs r1, 0x1
 	bl sub_81202F8
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r1, _08125950 @ =gTasks
 	mov r2, r8
 	lsls r0, r2, 2
@@ -14060,7 +14060,7 @@ _081259A0:
 	movs r0, 0x4
 	adds r1, r4, 0
 	adds r2, r5, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	movs r0, 0x1
 	bl PlaySE
 	adds r0, r5, 0
@@ -14086,7 +14086,7 @@ _081259F6:
 	movs r1, 0x1
 	bl sub_81202F8
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r1, _08125A34 @ =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
@@ -14225,7 +14225,7 @@ sub_8125AF0: @ 8125AF0
 	movs r1, 0x1
 	bl sub_81202F8
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -14315,7 +14315,7 @@ sub_8125B40: @ 8125B40
 	movs r0, 0x4
 	adds r1, r4, 0
 	adds r2, r5, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	adds r0, r6, 0
 	bl sub_8124DC0
 	ldr r1, _08125BEC @ =gUnknown_3005E98
@@ -14427,7 +14427,7 @@ _08125C84:
 	movs r1, 0x1
 	bl sub_81202F8
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r1, _08125CEC @ =gTasks
 	lsls r0, r7, 2
 	adds r0, r7
@@ -14712,7 +14712,7 @@ _08125EE8:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_811EA44
+	bl PartyMenuInit
 _08125F02:
 	add sp, 0xC
 	pop {r4,r5}
@@ -14799,7 +14799,7 @@ sub_8125F5C: @ 8125F5C
 	movs r0, 0x4
 	adds r1, r6, 0
 	adds r3, r4, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	ldr r1, _08125FF0 @ =gStringVar1
 	adds r0, r6, 0
 	bl GetMonNickname
@@ -14956,7 +14956,7 @@ sub_81260D8: @ 81260D8
 	movs r1, 0x1
 	bl sub_81202F8
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r1, _08126134 @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
@@ -15197,7 +15197,7 @@ _081262F6:
 	movs r1, 0x1
 	bl sub_81202F8
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r1, _0812632C @ =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
@@ -15268,7 +15268,7 @@ sub_8126350: @ 8126350
 	ldr r3, _08126424 @ =0x0000ffff
 	movs r0, 0x4
 	adds r1, r4, 0
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	movs r0, 0
 	bl PlayFanfareByFanfareNum
 	ldrb r0, [r6, 0x9]
@@ -15298,7 +15298,7 @@ sub_8126350: @ 8126350
 	movs r1, 0x1
 	bl sub_81202F8
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r1, _08126438 @ =gTasks
 	mov r2, r8
 	lsls r0, r2, 2
@@ -15381,7 +15381,7 @@ _0812647C:
 	movs r1, 0x1
 	bl sub_811F818
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -15502,7 +15502,7 @@ sub_8126570: @ 8126570
 	movs r1, 0x2
 	bl CopyWindowToVram
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	add sp, 0x8
 	pop {r4,r5}
 	pop {r0}
@@ -15533,7 +15533,7 @@ sub_81265BC: @ 81265BC
 	movs r1, 0x2
 	bl CopyWindowToVram
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
@@ -15765,7 +15765,7 @@ sub_8126770: @ 8126770
 	movs r1, 0x1
 	bl sub_81202F8
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldrh r0, [r6]
 	mov r1, r8
 	strh r0, [r1, 0xE]
@@ -15829,7 +15829,7 @@ sub_8126804: @ 8126804
 	movs r1, 0x1
 	bl sub_81202F8
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	mov r0, r8
 	strh r5, [r0, 0xE]
 	ldr r1, _0812688C @ =gTasks
@@ -16089,7 +16089,7 @@ _08126A4E:
 	movs r1, 0x1
 	bl sub_81202F8
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	b _08126ABE
 	.align 2, 0
 _08126A80: .4byte gUnknown_203B09C
@@ -16112,7 +16112,7 @@ _08126A94:
 	ldrh r2, [r0]
 	ldr r3, _08126AE0 @ =0x0000ffff
 	movs r0, 0x4
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 _08126AB4:
 	ldr r0, _08126ADC @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
@@ -16170,7 +16170,7 @@ sub_8126AFC: @ 8126AFC
 	movs r1, 0
 	bl sub_81202F8
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r1, _08126B58 @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
@@ -16221,7 +16221,7 @@ sub_8126B60: @ 8126B60
 	movs r1, 0x1
 	bl sub_81202F8
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r1, _08126BC4 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -16266,7 +16266,7 @@ sub_8126BD4: @ 8126BD4
 	ldrh r2, [r5]
 	ldr r3, _08126C20 @ =0x0000ffff
 	movs r0, 0x4
-	bl sub_80A2294
+	bl ItemUse_SetQuestLogEvent
 	ldrh r0, [r5]
 	movs r1, 0x1
 	bl RemoveBagItem
@@ -16640,7 +16640,7 @@ CB2_PartyMenuFromStartMenu: @ 8126EB0
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -16684,7 +16684,7 @@ _08126F0A:
 	movs r1, 0
 	movs r2, 0x5
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	ldr r1, _08126F38 @ =gUnknown_203B0A0
 	ldr r0, _08126F3C @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
@@ -16736,7 +16736,7 @@ _08126F84: .4byte gUnknown_203B0A0
 _08126F88: .4byte gPlayerParty
 _08126F8C:
 	ldrh r0, [r5]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _08126FA0
@@ -16780,7 +16780,7 @@ sub_8126FD8: @ 8126FD8
 	lsrs r4, r0, 24
 	ldr r5, _08127004 @ =gUnknown_203B0A0
 	ldrh r0, [r5, 0xC]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _08127010
@@ -16995,7 +16995,7 @@ _0812719C:
 	str r1, [sp, 0x8]
 	movs r1, 0xFF
 	movs r3, 0x1
-	bl sub_811EA44
+	bl PartyMenuInit
 _081271B8:
 	add sp, 0xC
 	pop {r4-r7}
@@ -17135,7 +17135,7 @@ _081272C4: .4byte gUnknown_203B0D8
 _081272C8: .4byte gStringVar4
 _081272CC:
 	adds r0, r4, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _081272F0
@@ -17205,7 +17205,7 @@ sub_812734C: @ 812734C
 	movs r1, 0x1
 	bl sub_81202F8
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r1, _0812737C @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -17233,7 +17233,7 @@ sub_8127384: @ 8127384
 	bne _081273A0
 	adds r0, r1, 0
 	movs r1, 0x1
-	bl sub_809A460
+	bl RemoveItemFromPC
 	b _081273A8
 	.align 2, 0
 _0812739C: .4byte gUnknown_203B0A0
@@ -17286,7 +17286,7 @@ sub_81273D8: @ 81273D8
 	movs r1, 0
 	movs r2, 0x7
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -17351,7 +17351,7 @@ _0812746C:
 	bl sub_81202F8
 _08127482:
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r0, _081274A0 @ =gTasks
 	lsls r1, r6, 2
 	adds r1, r6
@@ -17387,7 +17387,7 @@ sub_81274A8: @ 81274A8
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	ldr r1, _081274F4 @ =gUnknown_203B0A0
 	lsls r4, 6
 	ldrb r2, [r1, 0x8]
@@ -17824,7 +17824,7 @@ sub_81277F4: @ 81277F4
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -17844,30 +17844,30 @@ sub_812781C: @ 812781C
 	str r0, [sp]
 	ldr r0, _08127848 @ =sub_811FB28
 	str r0, [sp, 0x4]
-	ldr r0, _0812784C @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r0, _0812784C @ =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	str r0, [sp, 0x8]
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0xC
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	b _08127870
 	.align 2, 0
 _08127844: .4byte gSpecialVar_0x8005
 _08127848: .4byte sub_811FB28
-_0812784C: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
+_0812784C: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
 _08127850:
 	movs r0, 0x7F
 	str r0, [sp]
 	ldr r0, _08127878 @ =sub_8126DC8
 	str r0, [sp, 0x4]
-	ldr r0, _0812787C @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r0, _0812787C @ =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	str r0, [sp, 0x8]
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0xC
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	ldr r1, _08127880 @ =gUnknown_203B0A0
 	ldr r0, _08127884 @ =gSpecialVar_0x8007
 	ldrh r0, [r0]
@@ -17878,7 +17878,7 @@ _08127870:
 	bx r0
 	.align 2, 0
 _08127878: .4byte sub_8126DC8
-_0812787C: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
+_0812787C: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
 _08127880: .4byte gUnknown_203B0A0
 _08127884: .4byte gSpecialVar_0x8007
 	thumb_func_end sub_812781C
@@ -17891,19 +17891,19 @@ sub_8127888: @ 8127888
 	str r0, [sp]
 	ldr r0, _081278AC @ =sub_811FB28
 	str r0, [sp, 0x4]
-	ldr r0, _081278B0 @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r0, _081278B0 @ =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	str r0, [sp, 0x8]
 	movs r0, 0xB
 	movs r1, 0
 	movs r2, 0xD
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	add sp, 0xC
 	pop {r0}
 	bx r0
 	.align 2, 0
 _081278AC: .4byte sub_811FB28
-_081278B0: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
+_081278B0: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
 	thumb_func_end sub_8127888
 
 	thumb_func_start sub_81278B4
@@ -17960,7 +17960,7 @@ sub_81278DC: @ 81278DC
 	movs r0, 0x1
 	adds r2, r4, 0
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	movs r0, 0x8
 	bl sub_80EB2F4
 	b _08127950
@@ -17982,7 +17982,7 @@ _08127930:
 	movs r0, 0x1
 	adds r2, r4, 0
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 _08127950:
 	bl nullsub_44
 	bl pokemon_change_order
@@ -18012,7 +18012,7 @@ sub_8127968: @ 8127968
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	bl nullsub_44
 	bl pokemon_change_order
 	add sp, 0xC
@@ -18040,7 +18040,7 @@ sub_81279A4: @ 81279A4
 	movs r0, 0x1
 	movs r2, 0xE
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	bl nullsub_44
 	bl pokemon_change_order
 	add sp, 0xC
@@ -18079,7 +18079,7 @@ sub_81279E0: @ 81279E0
 	movs r0, 0x1
 	movs r2, 0x3
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	movs r0, 0x8
 	bl sub_80EB2F4
 	b _08127A62
@@ -18110,7 +18110,7 @@ _08127A44:
 	movs r0, 0x1
 	movs r2, 0x3
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 _08127A62:
 	bl nullsub_44
 	bl pokemon_change_order
@@ -18182,7 +18182,7 @@ sub_8127AC0: @ 8127AC0
 	bne _08127B08
 _08127AE6:
 	ldr r4, _08127AFC @ =gStringVar1
-	bl sub_80444C4
+	bl GetTrainerPartnerName
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
@@ -19069,7 +19069,7 @@ sub_8128198: @ 8128198
 	movs r1, 0x3
 	movs r2, 0
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -19314,7 +19314,7 @@ sub_8128370: @ 8128370
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -19343,7 +19343,7 @@ sub_81283A8: @ 81283A8
 	movs r1, 0
 	movs r2, 0xB
 	movs r3, 0
-	bl sub_811EA44
+	bl PartyMenuInit
 	add sp, 0xC
 	pop {r0}
 	bx r0

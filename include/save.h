@@ -121,7 +121,7 @@ u8 Save_LoadGameData(u8 a1);
 u32 TryCopySpecialSaveSection(u8 sector, u8* dst);
 u32 sub_8153634(u8 sector, u8* src);
 void sub_8153688(u8 taskId);
-u32 sub_80DA5E0(u8 sector, u8* src);
+u32 TryWriteSpecialSaveSection(u8 sector, u8* src);
 void sub_80DA634(u8 taskId);
 
 #endif // GUARD_SAVE_H

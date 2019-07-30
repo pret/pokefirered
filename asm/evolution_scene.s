@@ -1870,7 +1870,7 @@ _080CEDC6:
 	cmp r4, 0
 	bne _080CEE40
 	bl StopMapMusic
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 	ldrh r1, [r5, 0xE]
 	movs r0, 0x80
 	orrs r0, r1
@@ -1944,7 +1944,7 @@ _080CEE74:
 	cmp r0, 0
 	bne _080CEE90
 	bl StopMapMusic
-	bl sub_8055DC4
+	bl Overworld_PlaySpecialMapMusic
 _080CEE90:
 	movs r2, 0x1A
 	ldrsh r0, [r4, r2]

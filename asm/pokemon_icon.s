@@ -166,7 +166,7 @@ mon_icon_convert_unown_species_id: @ 8096F5C
 	cmp r2, 0xC9
 	bne _08096F86
 	adds r0, r1, 0
-	bl mon_icon_personality_to_unown_id
+	bl GetUnownLetterByPersonality
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0
@@ -195,8 +195,8 @@ _08096F92:
 	bx r1
 	thumb_func_end mon_icon_convert_unown_species_id
 
-	thumb_func_start mon_icon_personality_to_unown_id
-mon_icon_personality_to_unown_id: @ 8096F98
+	thumb_func_start GetUnownLetterByPersonality
+GetUnownLetterByPersonality: @ 8096F98
 	push {lr}
 	adds r2, r0, 0
 	cmp r2, 0
@@ -228,7 +228,7 @@ _08096FCE:
 _08096FD0:
 	pop {r1}
 	bx r1
-	thumb_func_end mon_icon_personality_to_unown_id
+	thumb_func_end GetUnownLetterByPersonality
 
 	thumb_func_start sub_8096FD4
 sub_8096FD4: @ 8096FD4
@@ -519,8 +519,8 @@ _080971C0:
 _080971C8: .4byte gUnknown_83D4038
 	thumb_func_end sub_8097198
 
-	thumb_func_start sub_80971CC
-sub_80971CC: @ 80971CC
+	thumb_func_start GetValidMonIconPalettePtr
+GetValidMonIconPalettePtr: @ 80971CC
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -542,7 +542,7 @@ _080971DC:
 	.align 2, 0
 _080971F0: .4byte gUnknown_83D4038
 _080971F4: .4byte gUnknown_83D3E80
-	thumb_func_end sub_80971CC
+	thumb_func_end GetValidMonIconPalettePtr
 
 	thumb_func_start sub_80971F8
 sub_80971F8: @ 80971F8

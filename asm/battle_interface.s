@@ -2381,7 +2381,7 @@ _08048DC4:
 	bge _08048DB0
 	mov r6, r10
 	adds r0, r4, r6
-	bl sub_800F034
+	bl LoadCompressedSpriteSheetUsingHeap
 	ldr r0, _08048E4C @ =gUnknown_826049C
 	adds r0, r4, r0
 	bl LoadSpriteSheet
@@ -3610,7 +3610,7 @@ _08049734:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r7, 0
-	bl sub_80448F8
+	bl CheckBattleTypeGhost
 	lsls r0, 24
 	cmp r0, 0
 	beq _08049754
@@ -3755,7 +3755,7 @@ sub_804981C: @ 804981C
 	ldr r6, _080498EC @ =gEnemyParty
 	adds r0, r6
 	adds r1, r4, 0
-	bl sub_80448F8
+	bl CheckBattleTypeGhost
 	lsls r0, 24
 	cmp r0, 0
 	bne _0804991C
@@ -4307,7 +4307,7 @@ UpdateLeftNoOfBallsTextOnHealthbox: @ 8049D10
 	ldr r1, _08049D84 @ =gUnknown_83FE81C
 	mov r0, sp
 	bl StringCopy
-	ldr r1, _08049D88 @ =gUnknown_2039994
+	ldr r1, _08049D88 @ =gNumSafariBalls
 	ldrb r1, [r1]
 	movs r2, 0
 	movs r3, 0x2
@@ -4351,7 +4351,7 @@ UpdateLeftNoOfBallsTextOnHealthbox: @ 8049D10
 	bx r0
 	.align 2, 0
 _08049D84: .4byte gUnknown_83FE81C
-_08049D88: .4byte gUnknown_2039994
+_08049D88: .4byte gNumSafariBalls
 _08049D8C: .4byte gSprites
 _08049D90: .4byte 0x060102c0
 _08049D94: .4byte 0x06010a00
@@ -5559,7 +5559,7 @@ AddTextPrinterAndCreateWindowOnHealthbox: @ 804A648
 	movs r1, 0
 	adds r2, r6, 0
 	mov r3, r8
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	mov r0, r10
 	str r4, [r0]
 	adds r0, r5, 0

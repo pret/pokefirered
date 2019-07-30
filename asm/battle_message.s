@@ -2683,7 +2683,7 @@ _080D87F2:
 	ands r0, r1
 	cmp r0, 0
 	beq _080D881C
-	bl sub_80CBE00
+	bl ContextNpcGetTextColor
 	lsls r0, 24
 	lsrs r0, 24
 	mov r2, sp

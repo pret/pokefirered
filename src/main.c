@@ -5,6 +5,7 @@
 #include "dma3.h"
 #include "gba/flash_internal.h"
 #include "battle.h"
+#include "help_system.h"
 
 extern u16 GetGpuReg(u8);
 extern void SetGpuReg(u8, u16);
@@ -32,7 +33,6 @@ extern u16 SetFlashTimerIntr(u8 timerNum, void (**intrFunc)(void));
 extern void ScanlineEffect_Stop(void);
 extern void sub_80F50F4(void);
 extern bool32 sub_80F5118(void);
-extern bool8 sub_813B870(void);
 
 extern struct SoundInfo gSoundInfo;
 extern u32 gFlashMemoryPresent;
@@ -55,7 +55,12 @@ static void VCountIntr(void);
 static void SerialIntr(void);
 static void IntrDummy(void);
 
-const u8 gGameVersion = VERSION_FIRE_RED;
+#if defined(FIRERED)
+#define GAME_VERSION VERSION_FIRE_RED
+#elif defined(LEAF_GREEN)
+#define GAME_VERSION VERSION_LEAF_GREEN
+#endif
+const u8 gGameVersion = GAME_VERSION;
 
 const u8 gGameLanguage = GAME_LANGUAGE;
 
@@ -96,12 +101,12 @@ u8 gUnknown_3003D84;
 
 static IntrFunc * const sTimerIntrFunc = gIntrTable + 0x7;
 
-extern u16 gTrainerId;
+EWRAM_DATA u8 gDecompressionBuffer[0x4000] = {0};
+EWRAM_DATA u16 gTrainerId = 0;
+
 extern bool8 gUnknown_3005ECC;
 extern bool8 gWirelessCommType;
 extern bool8 gUnknown_3005E88;
-
-EWRAM_DATA void (**gFlashTimerIntrFunc)(void) = NULL;
 
 static void UpdateLinkAndCallCallbacks(void);
 static void InitMainCallbacks(void);
@@ -116,7 +121,7 @@ void EnableVCountIntrAtLine150(void);
 void AgbMain()
 {
     RegisterRamReset(RESET_ALL);
-    *(vu16 *)BG_PLTT = 0x7FFF;
+    *(vu16 *)BG_PLTT = RGB_WHITE;
     InitGpuRegManager();
     REG_WAITCNT = WAITCNT_PREFETCH_ENABLE | WAITCNT_WS0_S_1 | WAITCNT_WS0_N_3;
     InitKeys();
@@ -206,7 +211,7 @@ static void InitMainCallbacks(void)
 
 static void CallCallbacks(void)
 {
-    if (!sub_80F5118() && !sub_813B870())
+    if (!sub_80F5118() && !RunHelpSystemCallback())
     {
         if (gMain.callback1)
             gMain.callback1();

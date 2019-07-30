@@ -50,7 +50,7 @@ _0814D61C:
 	movs r1, 0
 	bl SetGpuReg
 	bl ScanlineEffect_Stop
-	bl reset_temp_tile_data_buffers
+	bl ResetTempTileDataBuffers
 	b _0814D878
 _0814D63A:
 	add r0, sp, 0x8
@@ -175,12 +175,12 @@ _0814D73A:
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	b _0814D878
 	.align 2, 0
 _0814D764: .4byte gUnknown_8EAFFC0
 _0814D768:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814D774
@@ -1212,7 +1212,7 @@ sub_814DF44: @ 814DF44
 	movs r1, 0x2
 	adds r2, r4, 0
 	movs r3, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0xC
 	pop {r3}
 	mov r8, r3
@@ -1265,7 +1265,7 @@ _0814DFE0:
 	adds r4, r2, r4
 	str r4, [sp, 0x2C]
 _0814DFF0:
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	ldr r0, [sp, 0x10]
 	cmp r0, 0x1
 	beq _0814E0E4
@@ -1355,7 +1355,7 @@ _0814E048:
 	movs r1, 0x2
 	adds r2, r7, 0
 	adds r3, r4, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r1, [sp, 0x2C]
 	ldrb r0, [r1]
 	adds r2, r7, 0
@@ -1370,7 +1370,7 @@ _0814E048:
 	str r1, [sp, 0x8]
 	movs r1, 0x2
 	adds r3, r4, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	mov r9, r6
 _0814E0C8:
 	ldr r6, [sp, 0x20]
@@ -1509,7 +1509,7 @@ _0814E178:
 	ldr r1, _0814E1F8 @ =gStringVar4
 	str r1, [sp, 0x8]
 	movs r1, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	b _0814E27E
 	.align 2, 0
 _0814E1E4: .4byte gStringVar1
@@ -1573,7 +1573,7 @@ _0814E21A:
 	ldr r1, _0814E2A0 @ =gStringVar4
 	str r1, [sp, 0x8]
 	movs r1, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	mov r9, r4
 	mov r6, r8
 	adds r6, 0xA2
@@ -1610,10 +1610,10 @@ _0814E2B8:
 	ldr r0, [sp, 0xC]
 	adds r1, r0, r1
 	movs r0, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	ldr r0, _0814E324 @ =gStringVar4
 	adds r1, r4, 0
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	ldr r1, [sp, 0x2C]
 	ldrb r0, [r1]
 	mov r2, r9
@@ -1632,7 +1632,7 @@ _0814E2B8:
 	str r1, [sp, 0x8]
 	movs r1, 0x2
 	movs r2, 0x4
-	bl box_print
+	bl AddTextPrinterParameterized3
 	mov r2, r10
 	lsls r0, r2, 24
 	lsrs r0, 24
@@ -1702,7 +1702,7 @@ sub_814E32C: @ 814E32C
 	movs r1, 0x2
 	movs r2, 0x2
 	adds r3, r7, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r4, _0814E568 @ =gUnknown_841D088
 	movs r0, 0x2
 	adds r1, r4, 0
@@ -1722,7 +1722,7 @@ sub_814E32C: @ 814E32C
 	movs r1, 0x2
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r0, r6, 0
 	subs r0, 0x20
 	lsls r0, 24
@@ -1759,7 +1759,7 @@ sub_814E32C: @ 814E32C
 	movs r1, 0x2
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r4, _0814E57C @ =gUnknown_841D078
 	movs r0, 0x2
 	adds r1, r4, 0
@@ -1779,7 +1779,7 @@ sub_814E32C: @ 814E32C
 	movs r1, 0x2
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r0, r6, 0
 	subs r0, 0x9
 	lsls r0, 24
@@ -1806,7 +1806,7 @@ sub_814E32C: @ 814E32C
 	movs r1, 0x2
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r0, r7, 0
 	adds r0, 0xE
 	lsls r0, 24
@@ -1821,7 +1821,7 @@ sub_814E32C: @ 814E32C
 	movs r1, 0x2
 	movs r2, 0x2
 	adds r3, r7, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r4, _0814E588 @ =gUnknown_841D098
 	movs r0, 0x2
 	adds r1, r4, 0
@@ -1842,7 +1842,7 @@ sub_814E32C: @ 814E32C
 	movs r1, 0x3
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	mov r4, r8
 	ldrb r2, [r4, 0x16]
 	ldrh r0, [r4, 0x16]
@@ -1919,7 +1919,7 @@ _0814E4EA:
 	movs r1, 0x2
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	b _0814E5B6
 	.align 2, 0
 _0814E560: .4byte gUnknown_846E3DC
@@ -1949,7 +1949,7 @@ _0814E59C:
 	movs r1, 0x2
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 _0814E5B6:
 	adds r0, r7, 0
 	adds r0, 0xE
@@ -1970,7 +1970,7 @@ _0814E5B6:
 	movs r1, 0x2
 	movs r2, 0x2
 	adds r3, r7, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r0, _0814E638 @ =gStringVar1
 	ldr r4, [sp, 0x10]
 	ldrh r1, [r4, 0x8]
@@ -1998,7 +1998,7 @@ _0814E5B6:
 	movs r1, 0x2
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0x1C
 	pop {r3-r5}
 	mov r8, r3
@@ -2097,12 +2097,12 @@ _0814E6E0:
 	ldr r4, _0814E700 @ =0x0000021d
 	adds r1, r4, 0
 	movs r2, 0xD0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	ldrb r0, [r5]
 	movs r1, 0
 	adds r2, r4, 0
 	movs r3, 0xD
-	bl SetWindowBorderStyle
+	bl DrawStdFrameWithCustomTileAndPalette
 	b _0814E7F8
 	.align 2, 0
 _0814E700: .4byte 0x0000021d
@@ -2246,7 +2246,7 @@ sub_814E80C: @ 814E80C
 	adds r5, r4, r0
 	ldrb r0, [r5]
 	movs r1, 0x1
-	bl sub_810F4D8
+	bl ClearStdWindowAndFrameToTransparent
 	ldrb r0, [r5]
 	bl RemoveWindow
 	adds r0, r4, 0
@@ -2309,12 +2309,12 @@ _0814E876:
 	ldr r4, _0814E8AC @ =0x0000021d
 	adds r1, r4, 0
 	movs r2, 0xD0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	ldrb r0, [r7, 0x2]
 	movs r1, 0
 	adds r2, r4, 0
 	movs r3, 0xD
-	bl SetWindowBorderStyle
+	bl DrawStdFrameWithCustomTileAndPalette
 	b _0814EA66
 	.align 2, 0
 _0814E8A8: .4byte gUnknown_846E3F0
@@ -2341,7 +2341,7 @@ _0814E8B0:
 	str r5, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r5, _0814EA04 @ =gUnknown_841D124
 	movs r0, 0x2
 	adds r1, r5, 0
@@ -2358,7 +2358,7 @@ _0814E8B0:
 	str r5, [sp, 0x8]
 	movs r1, 0x2
 	movs r3, 0x12
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x2A
 	str r0, [sp, 0xC]
 	ldr r1, _0814EA08 @ =gStringVar4
@@ -2383,7 +2383,7 @@ _0814E90E:
 	movs r1, 0x2
 	movs r2, 0x4
 	ldr r3, [sp, 0xC]
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r3, 0
 	mov r0, r9
 	lsls r4, r0, 1
@@ -2456,7 +2456,7 @@ _0814E96E:
 	str r1, [sp, 0x8]
 	movs r1, 0x3
 	ldr r3, [sp, 0xC]
-	bl box_print
+	bl AddTextPrinterParameterized3
 	ldr r1, [sp, 0x10]
 	lsls r0, r1, 24
 	lsrs r0, 24
@@ -2499,7 +2499,7 @@ _0814EA3C: .4byte gMain
 _0814EA40:
 	ldrb r0, [r7, 0x2]
 	movs r1, 0x1
-	bl sub_810F4D8
+	bl ClearStdWindowAndFrameToTransparent
 	ldrb r0, [r7, 0x2]
 	bl ClearWindowTilemap
 	ldrb r0, [r7, 0x2]
@@ -2723,7 +2723,7 @@ _0814EBC6:
 	str r4, [sp, 0x10]
 	movs r1, 0x2
 	movs r3, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	b _0814EC4C
 	.align 2, 0
 _0814EC10: .4byte 0x000001bb
@@ -2752,7 +2752,7 @@ _0814EC18:
 	str r4, [sp, 0x10]
 	movs r1, 0x2
 	movs r3, 0x1
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 _0814EC4C:
 	ldr r1, _0814EC7C @ =0x000001bb
 	adds r0, r6, r1
@@ -2845,7 +2845,7 @@ sub_814ECE0: @ 814ECE0
 _0814ECF6:
 	lsls r0, r5, 3
 	adds r0, r4
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24

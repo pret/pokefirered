@@ -9525,7 +9525,7 @@ sub_80FCEA8: @ 80FCEA8
 	cmp r0, r1
 	bne _080FCEC0
 	adds r0, r4, 0
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 _080FCEC0:
 	ldr r0, _080FCEDC @ =gUnknown_843F27C
 	bl LoadSpritePalette

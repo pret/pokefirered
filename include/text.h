@@ -68,7 +68,8 @@
 #define CHAR_y              0xED
 #define CHAR_z              0xEE
 #define CHAR_SPECIAL_F7     0xF7
-#define CHAR_SPECIAL_F9     0xF9
+#define CHAR_KEYPAD_ICON    0xF8
+#define CHAR_EXTRA_EMOJI    0xF9
 #define CHAR_COLON          0xF0
 #define CHAR_PROMPT_SCROLL  0xFA // waits for button press and scrolls dialog
 #define CHAR_PROMPT_CLEAR   0xFB // waits for button press and clears dialog
@@ -89,6 +90,18 @@
 #define NUM_TEXT_PRINTERS 32
 
 #define TEXT_SPEED_FF 0xFF
+
+enum
+{
+    FONTATTR_MAX_LETTER_WIDTH,
+    FONTATTR_MAX_LETTER_HEIGHT,
+    FONTATTR_LETTER_SPACING,
+    FONTATTR_LINE_SPACING,
+    FONTATTR_UNKNOWN,   // dunno what this is yet
+    FONTATTR_COLOR_FOREGROUND,
+    FONTATTR_COLOR_BACKGROUND,
+    FONTATTR_COLOR_SHADOW
+};
 
 struct TextPrinterSubStruct
 {
@@ -192,6 +205,8 @@ extern u8 gStringVar2[];
 extern u8 gStringVar3[];
 extern u8 gStringVar4[];
 
+extern const u8 gKeypadIconTiles[];
+
 void SetFontsPointer(const struct FontInfo *fonts);
 void DeactivateAllTextPrinters(void);
 u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16));
@@ -215,6 +230,7 @@ u16 Font4Func(struct TextPrinter *textPrinter);
 u16 Font5Func(struct TextPrinter *textPrinter);
 u16 Font7Func(struct TextPrinter *textPrinter);
 u16 Font8Func(struct TextPrinter *textPrinter);
+u16 Font6Func(struct TextPrinter *textPrinter);
 
 void TextPrinterInitDownArrowCounters(struct TextPrinter *textPrinter);
 void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter);
@@ -248,6 +264,7 @@ s32 GetGlyphWidthFont1(u16 glyphId, bool32 isJapanese);
 void DecompressGlyphFont9(u16 glyphId);
 s32 GetGlyphWidthFont3(u16 glyphId, bool32 isJapanese);
 s32 GetGlyphWidthFont4(u16 glyphId, bool32 isJapanese);
+void DecompressGlyphFont5(u16 glyphId, bool32 isJapanese);
 s32 GetGlyphWidthFont5(u16 glyphId, bool32 isJapanese);
 void sub_80062B0(struct Sprite *sprite);
 u8 CreateTextCursorSpriteForOakSpeech(u8 sheetId, u16 x, u16 y, u8 priority, u8 subpriority);

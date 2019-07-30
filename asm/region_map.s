@@ -595,7 +595,7 @@ _080C02F0: .4byte gUnknown_20399D4
 _080C02F4: .4byte 0x00004796
 _080C02F8: .4byte gUnknown_83EF25A
 _080C02FC:
-	bl reset_temp_tile_data_buffers
+	bl ResetTempTileDataBuffers
 	b _080C03C8
 _080C0302:
 	ldr r1, _080C0330 @ =gUnknown_83EF61C
@@ -604,7 +604,7 @@ _080C0302:
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	ldr r0, _080C0334 @ =gUnknown_20399D4
 	ldr r0, [r0]
 	ldr r2, _080C0338 @ =0x00004796
@@ -617,7 +617,7 @@ _080C0302:
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	b _080C03C8
 	.align 2, 0
 _080C0330: .4byte gUnknown_83EF61C
@@ -625,7 +625,7 @@ _080C0334: .4byte gUnknown_20399D4
 _080C0338: .4byte 0x00004796
 _080C033C: .4byte gUnknown_83F1978
 _080C0340:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1600,7 +1600,7 @@ _080C0B44:
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0
 	bl PutWindowTilemap
 	movs r0, 0
@@ -1718,7 +1718,7 @@ sub_80C0BB0: @ 80C0BB0
 	movs r1, 0x2
 	movs r2, 0xC
 	movs r3, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0x1
@@ -3737,7 +3737,7 @@ _080C1CA8:
 	movs r1, 0x2
 	movs r2, 0x4
 	movs r3, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	bl sub_80C3580
 	lsls r0, 16
 	lsrs r0, 16
@@ -3750,7 +3750,7 @@ _080C1CA8:
 	movs r1, 0x2
 	movs r2, 0x2
 	movs r3, 0xE
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x2
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -9815,7 +9815,7 @@ _080C4E48:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x3
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -9860,7 +9860,7 @@ _080C4EA4:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r0, 0x4
 	movs r1, 0x3
 	bl CopyWindowToVram

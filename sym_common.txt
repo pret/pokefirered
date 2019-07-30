@@ -96,7 +96,7 @@ gUnknown_3003FA0: @ 3003FA0
 gUnknown_3003FB0: @ 3003FB0
 	.space 0x4
 
-gUnknown_3003FB4: @ 3003FB4
+gSioMlt_Recv: @ 3003FB4
 	.space 0xFBC
 
 gUnknown_3004F70: @ 3004F70
@@ -298,12 +298,9 @@ gUnknown_3005E10: @ 3005E10
 gUnknown_3005E20: @ 3005E20
 	.space 0x40
 
-gUnknown_3005E60: @ 3005E60
-	.space 0x10
-
-gMultiuseListMenuTemplate: @ 3005E70
-	.space 0x18
-
+	.align 4
+	.include "list_menu.o"
+	.align 2
 	.include "quest_log.o"
 
 gUnknown_3005E8C: @ 3005E8C
@@ -318,12 +315,8 @@ gUnknown_3005E94: @ 3005E94
 gUnknown_3005E98: @ 3005E98
 	.space 0x4
 
-gUnknown_3005E9C: @ 3005E9C
-	.space 0x4
-
-gUnknown_3005EA0: @ 3005EA0
-	.space 0x10
-
+	.include "help_system_812B1E0.o"
+	.align 4
 	.include "fame_checker.o"
 
 gUnknown_3005ECC: @ 3005ECC
@@ -333,20 +326,11 @@ gUnknown_3005ECC: @ 3005ECC
 
 	.align 4
 gUnknown_3005EE0: @ 3005EE0
+@ const u8 *gUnknown_3005EE0[4]
 	.space 0x10
 
-gUnknown_3005EF0: @ 3005EF0
-	.space 0x4
-
-gUnknown_3005EF4: @ 3005EF4
-	.space 0x4
-
-gUnknown_3005EF8: @ 3005EF8
-	.space 0x8
-
-gUnknown_3005F00: @ 3005F00
-	.space 0x50
-
+	.align 4
+	.include "berry_fix_program.o"
 	.include "m4a.o"
 	.include "agb_flash.o"
 

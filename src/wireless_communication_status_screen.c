@@ -10,7 +10,7 @@
 #include "scanline_effect.h"
 #include "m4a.h"
 #include "string_util.h"
-#include "unk_text_util.h"
+#include "dynamic_placeholder_text_util.h"
 #include "overworld.h"
 #include "sound.h"
 #include "menu.h"
@@ -208,7 +208,7 @@ void sub_814F1E4(void)
     ChangeBgY(1, 0, 0);
     LoadPalette(gUnknown_846F4D0, 0, 0x20);
     Menu_LoadStdPalAt(0xf0);
-    UnkTextUtil_Reset();
+    DynamicPlaceholderTextUtil_Reset();
     FillBgTilemapBufferRect(0, 0x000, 0, 0, 32, 32, 0xF);
     CopyBgTilemapBufferToVram(1);
     SetMainCallback2(sub_814F19C);
@@ -229,7 +229,7 @@ void sub_814F32C(void)
         Free(GetBgTilemapBuffer(i));
     }
     Free(gUnknown_3002040);
-    SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+    SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
 void sub_814F364(s16 * unk0, s16 * unk1)
@@ -359,7 +359,7 @@ void sub_814F65C(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 palIdx)
         break;
     // default: UB
     }
-    AddTextPrinterParametrized2(windowId, fontId,x, y, fontId == 0 ? 0 : 1, 0, &textColor, -1, str);
+    AddTextPrinterParameterized4(windowId, fontId,x, y, fontId == 0 ? 0 : 1, 0, &textColor, -1, str);
 }
 
 u32 sub_814F714(struct UnkStruct_x20 * unk20, u32 * arg1)

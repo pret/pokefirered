@@ -66,7 +66,7 @@ sub_8134230: @ 8134230
 	ands r2, r5
 	orrs r2, r1
 	str r2, [r0, 0x4]
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	ldr r0, _081343D0 @ =gUnknown_846341C
 	mov r3, r8
 	lsls r3, 4

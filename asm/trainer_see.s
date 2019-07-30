@@ -601,7 +601,7 @@ _08081F54:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 _08081F82:
@@ -658,12 +658,12 @@ sub_8081FD0: @ 8081FD0
 	adds r5, r1, 0
 	adds r4, r2, 0
 	adds r0, r4, 0
-	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl FieldObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _08081FEE
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08082022
@@ -680,7 +680,7 @@ _08081FEE:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	ldrh r0, [r5, 0xE]
 	subs r0, 0x1
 	strh r0, [r5, 0xE]
@@ -688,7 +688,7 @@ _08081FEE:
 _08082014:
 	adds r0, r4, 0
 	movs r1, 0x4A
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	strh r0, [r5, 0x8]
@@ -705,12 +705,12 @@ sub_808202C: @ 808202C
 	adds r5, r1, 0
 	adds r4, r2, 0
 	adds r0, r4, 0
-	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl FieldObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808204A
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080820AC
@@ -743,12 +743,12 @@ _0808204A:
 	ldr r1, _080820B8 @ =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl FieldObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _080820A2
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080820AC
@@ -780,12 +780,12 @@ sub_80820BC: @ 80820BC
 	ldr r1, _080820FC @ =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl FieldObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _080820E8
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080820EE
@@ -808,19 +808,19 @@ sub_8082100: @ 8082100
 	adds r5, r1, 0
 	adds r4, r2, 0
 	adds r0, r4, 0
-	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl FieldObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808211E
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808212C
 _0808211E:
 	adds r0, r4, 0
 	movs r1, 0x67
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	strh r0, [r5, 0x8]
@@ -836,7 +836,7 @@ sub_8082134: @ 8082134
 	push {r4,lr}
 	adds r4, r1, 0
 	adds r0, r2, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08082148
@@ -855,19 +855,19 @@ sub_8082150: @ 8082150
 	adds r5, r1, 0
 	adds r4, r2, 0
 	adds r0, r4, 0
-	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl FieldObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808216E
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808217C
 _0808216E:
 	adds r0, r4, 0
 	movs r1, 0x4A
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	strh r0, [r5, 0x8]
@@ -884,7 +884,7 @@ sub_8082184: @ 8082184
 	adds r5, r1, 0
 	adds r4, r2, 0
 	adds r0, r4, 0
-	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
+	bl FieldObjectCheckHeldMovementStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _080821CA
@@ -961,7 +961,7 @@ sub_80821DC: @ 80821DC
 	orrs r1, r2
 	strb r1, [r0, 0x5]
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
@@ -970,7 +970,7 @@ sub_80821DC: @ 80821DC
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	strh r0, [r5, 0x8]
@@ -1024,7 +1024,7 @@ sub_808226C: @ 808226C
 	movs r0, 0x12
 	movs r1, 0x7
 	movs r2, 0x7F
-	bl SpawnSpecialFieldObjectParametrized
+	bl SpawnSpecialFieldObjectParameterized
 	ldr r2, _080822C8 @ =gMapObjects
 	lsls r1, r0, 3
 	adds r1, r0
@@ -1069,7 +1069,7 @@ sub_80822CC: @ 80822CC
 	lsls r0, 2
 	ldr r4, _0808234C @ =gMapObjects
 	adds r0, r4
-	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl FieldObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _08082312
@@ -1079,7 +1079,7 @@ sub_80822CC: @ 80822CC
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808236E
@@ -1104,7 +1104,7 @@ _08082312:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	ldrh r0, [r5, 0x12]
 	adds r0, 0x1
 	strh r0, [r5, 0x12]
@@ -1160,7 +1160,7 @@ sub_808237C: @ 808237C
 	lsls r0, 2
 	ldr r4, _08082408 @ =gMapObjects
 	adds r0, r4
-	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl FieldObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _080823CC
@@ -1170,7 +1170,7 @@ sub_808237C: @ 808237C
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl FieldObjectClearAnimIfSpecialAnimFinished
+	bl FieldObjectClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808242E
@@ -1195,7 +1195,7 @@ _080823CC:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	ldrh r0, [r5, 0x12]
 	adds r0, 0x1
 	strh r0, [r5, 0x12]

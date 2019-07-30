@@ -78,11 +78,11 @@ _0804C674:
 	movs r0, 0
 	movs r1, 0x14
 	movs r2, 0xC0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	movs r0, 0x2
 	movs r1, 0x1
 	movs r2, 0xE0
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	bl sub_809707C
 	ldr r2, _0804C708 @ =gUnknown_2031DA8
 	ldr r0, [r2]
@@ -1909,7 +1909,7 @@ sub_804D638: @ 804D638
 	lsrs r1, 24
 	movs r0, 0x1C
 	bl SetGpuReg
-	bl sub_80F6CBC
+	bl RunTextPrinters_CheckPrinter0Active
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer
@@ -3379,7 +3379,7 @@ _0804E208:
 	movs r1, 0x3
 	movs r2, 0x10
 	movs r3, 0x2
-	bl sub_810FC80
+	bl UnionRoomAndTradeMenuPrintOptions
 	movs r0, 0x10
 	str r0, [sp]
 	movs r0, 0x2
@@ -3390,7 +3390,7 @@ _0804E208:
 	movs r1, 0x3
 	movs r2, 0
 	movs r3, 0
-	bl ProgramAndPlaceMenuCursorOnWindow
+	bl Menu_InitCursor
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0x1
@@ -3533,7 +3533,7 @@ _0804E384: .4byte 0x06010000
 sub_804E388: @ 804E388
 	push {lr}
 	sub sp, 0x4
-	bl ProcessMenuInputNoWrapAround
+	bl Menu_ProcessInputNoWrapAround
 	lsls r0, 24
 	asrs r0, 24
 	movs r1, 0x1
@@ -4827,7 +4827,7 @@ _0804ECEC:
 	str r0, [sp, 0x8]
 	adds r0, r5, 0
 	movs r3, 0x4
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add r6, sp, 0x28
 	adds r0, r6, 0
 	ldr r1, [sp, 0x60]
@@ -4847,7 +4847,7 @@ _0804ECEC:
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	adds r0, r5, 0
 	bl PutWindowTilemap
 	adds r0, r5, 0
@@ -5110,7 +5110,7 @@ sub_804EFB4: @ 804EFB4
 	adds r0, r4, 0
 	movs r1, 0
 	movs r3, 0x4
-	bl box_print
+	bl AddTextPrinterParameterized3
 	adds r0, r4, 0
 	bl PutWindowTilemap
 	adds r0, r4, 0
@@ -7292,7 +7292,7 @@ _08050040:
 	ldr r1, [r1, 0x8]
 	adds r2, r5, 0
 	adds r3, r7, 0
-	bl sub_800ECC4
+	bl HandleLoadSpecialPokePic
 	movs r4, 0
 	b _0805009A
 	.align 2, 0
@@ -7316,7 +7316,7 @@ _0805007C:
 _0805009A:
 	mov r0, r8
 	bl GetMonSpritePalStruct
-	bl LoadCompressedObjectPalette
+	bl LoadCompressedSpritePalette
 	ldr r0, _080500C4 @ =gUnknown_2031DAC
 	ldr r1, [r0]
 	adds r0, r1, 0
@@ -8135,7 +8135,7 @@ sub_80507A0: @ 80507A0
 	adds r0, r4, 0
 	movs r1, 0x3
 	adds r2, r5, 0
-	bl sub_8044898
+	bl HandleSetPokedexFlag
 _080507F4:
 	pop {r4,r5}
 	pop {r0}
@@ -10813,7 +10813,7 @@ _08052042:
 	ldr r1, [r1]
 	ldr r1, [r1, 0x10]
 	ldr r3, [r3, 0x6C]
-	bl sub_800ECC4
+	bl HandleLoadSpecialPokePic
 	ldr r1, [r7]
 	b _080522AC
 	.align 2, 0
@@ -13038,7 +13038,7 @@ _0805349E:
 	ldr r1, [r1]
 	ldr r1, [r1, 0x10]
 	ldr r3, [r3, 0x6C]
-	bl sub_800ECC4
+	bl HandleLoadSpecialPokePic
 	ldr r1, [r7]
 	b _08053708
 	.align 2, 0
@@ -13984,7 +13984,7 @@ sub_8053B48: @ 8053B48
 	ldrh r0, [r5, 0x28]
 	cmp r0, 0
 	beq _08053CC0
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _08053CB4
@@ -14989,7 +14989,7 @@ sub_8054508: @ 8054508
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	adds r0, r5, 0
 	movs r1, 0x3
 	bl CopyWindowToVram

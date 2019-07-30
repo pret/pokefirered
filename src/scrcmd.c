@@ -807,7 +807,7 @@ bool8 ScrCmd_warpteleport2(struct ScriptContext *ctx)
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
     Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
-    sub_805DAE4(player_get_direction_lower_nybble());
+    sub_805DAE4(GetPlayerFacingDirection());
     sub_807E500();
     ResetInitialPlayerAvatarState();
     return TRUE;
@@ -1154,7 +1154,7 @@ bool8 ScrCmd_faceplayer(struct ScriptContext *ctx)
     if (gMapObjects[gSelectedEventObject].active)
     {
         FieldObjectFaceOppositeDirection(&gMapObjects[gSelectedEventObject],
-                                         player_get_direction_lower_nybble());
+                                         GetPlayerFacingDirection());
     }
     return FALSE;
 }
@@ -1201,7 +1201,7 @@ bool8 ScrCmd_turnvobject(struct ScriptContext *ctx)
 
 bool8 ScrCmd_lockall(struct ScriptContext *ctx)
 {
-    if (is_c1_link_related_active())
+    if (IsUpdateLinkStateCBActive())
     {
         return FALSE;
     }
@@ -1215,7 +1215,7 @@ bool8 ScrCmd_lockall(struct ScriptContext *ctx)
 
 bool8 ScrCmd_lock(struct ScriptContext *ctx)
 {
-    if (is_c1_link_related_active())
+    if (IsUpdateLinkStateCBActive())
     {
         return FALSE;
     }
@@ -1241,7 +1241,7 @@ bool8 ScrCmd_releaseall(struct ScriptContext *ctx)
 
     HideFieldMessageBox();
     playerObjectId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
-    FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[playerObjectId]);
+    FieldObjectClearHeldMovementIfFinished(&gMapObjects[playerObjectId]);
     sub_80974D8();
     UnfreezeMapObjects();
     return FALSE;
@@ -1253,9 +1253,9 @@ bool8 ScrCmd_release(struct ScriptContext *ctx)
 
     HideFieldMessageBox();
     if (gMapObjects[gSelectedEventObject].active)
-        FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[gSelectedEventObject]);
+        FieldObjectClearHeldMovementIfFinished(&gMapObjects[gSelectedEventObject]);
     playerObjectId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
-    FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[playerObjectId]);
+    FieldObjectClearHeldMovementIfFinished(&gMapObjects[playerObjectId]);
     sub_80974D8();
     UnfreezeMapObjects();
     return FALSE;
@@ -1984,7 +1984,7 @@ bool8 ScrCmd_playslotmachine(struct ScriptContext *ctx)
 {
     u8 slotMachineIndex = VarGet(ScriptReadHalfword(ctx));
 
-    PlaySlotMachine(slotMachineIndex, c2_exit_to_overworld_1_continue_scripts_restart_music);
+    PlaySlotMachine(slotMachineIndex, CB2_ReturnToFieldContinueScriptPlayMapMusic);
     ScriptContext1_Stop();
     return TRUE;
 }

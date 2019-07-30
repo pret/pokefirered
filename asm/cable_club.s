@@ -55,7 +55,7 @@ sub_808078C: @ 808078C
 	lsrs r4, 24
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80F7750
+	bl SetStdWindowBorderStyle
 	ldr r5, _080807E0 @ =gStringVar4
 	ldr r1, _080807E4 @ =gUnknown_841DF82
 	adds r0, r5, 0
@@ -943,7 +943,7 @@ _08080E9A:
 	lsls r1, r5, 8
 	ldr r0, _08080ED4 @ =gBlockRecvBuffer
 	adds r1, r0
-	ldr r0, _08080ED8 @ =gUnknown_2039624
+	ldr r0, _08080ED8 @ =gTrainerCards
 	lsls r4, r5, 1
 	adds r4, r5
 	lsls r4, 5
@@ -958,12 +958,12 @@ _08080E9A:
 	.align 2, 0
 _08080ED0: .4byte gLinkPlayers
 _08080ED4: .4byte gBlockRecvBuffer
-_08080ED8: .4byte gUnknown_2039624
+_08080ED8: .4byte gTrainerCards
 _08080EDC:
 	lsls r1, r5, 8
 	ldr r0, _08080F3C @ =gBlockRecvBuffer
 	adds r1, r0
-	ldr r2, _08080F40 @ =gUnknown_2039624
+	ldr r2, _08080F40 @ =gTrainerCards
 	lsls r0, r5, 1
 	adds r0, r5
 	lsls r0, 5
@@ -1004,7 +1004,7 @@ _08080EF8:
 	b _08080F66
 	.align 2, 0
 _08080F3C: .4byte gBlockRecvBuffer
-_08080F40: .4byte gUnknown_2039624
+_08080F40: .4byte gTrainerCards
 _08080F44: .4byte gSpecialVar_Result
 _08080F48: .4byte gLinkType
 _08080F4C: .4byte 0x00004411
@@ -1935,12 +1935,12 @@ sub_8081668: @ 8081668
 	ldrb r0, [r0]
 	movs r5, 0x1
 	eors r0, r5
-	bl sub_80CD98C
+	bl TryRecordLinkBattleOutcome
 	ldr r0, _080816C0 @ =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0808170A
-	ldr r0, _080816C4 @ =gUnknown_2023E8A
+	ldr r0, _080816C4 @ =gBattleOutcome
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _080816C8
@@ -1953,7 +1953,7 @@ _080816B4: .4byte 0x0000ffdf
 _080816B8: .4byte gSpecialVar_0x8004
 _080816BC: .4byte gUnknown_300502C
 _080816C0: .4byte gWirelessCommType
-_080816C4: .4byte gUnknown_2023E8A
+_080816C4: .4byte gBattleOutcome
 _080816C8:
 	ldr r4, _080816E8 @ =gLinkPlayers
 	bl GetMultiplayerId
@@ -2387,13 +2387,13 @@ sp02A_crash_sound: @ 8081A1C
 	push {lr}
 	ldr r0, _08081A2C @ =gSpecialVar_0x8006
 	ldrb r0, [r0]
-	ldr r1, _08081A30 @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r1, _08081A30 @ =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	bl sub_808B700
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08081A2C: .4byte gSpecialVar_0x8006
-_08081A30: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
+_08081A30: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
 	thumb_func_end sp02A_crash_sound
 
 	thumb_func_start sub_8081A34

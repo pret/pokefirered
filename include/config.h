@@ -15,8 +15,6 @@
 // since not all baseroms and pointers have been dumped yet and will result in
 // a broken ROM.
 
-#define ENGLISH
-
 #ifdef ENGLISH
 #define UNITS_IMPERIAL
 #else

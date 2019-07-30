@@ -265,7 +265,7 @@ sub_814B8F0: @ 814B8F0
 	ldr r1, _0814B910 @ =sub_814B860
 	movs r0, 0x5
 	movs r2, 0
-	bl sub_813CD50
+	bl InitBerryPouch
 	pop {r0}
 	bx r0
 	.align 2, 0

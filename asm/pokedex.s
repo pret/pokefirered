@@ -220,8 +220,8 @@ _08088F7C:
 	bx r1
 	thumb_func_end sub_8088F58
 
-	thumb_func_start sub_8088F84
-sub_8088F84: @ 8088F84
+	thumb_func_start HasAllKantoMons
+HasAllKantoMons: @ 8088F84
 	push {r4,r5,lr}
 	movs r0, 0
 _08088F88:
@@ -277,6 +277,6 @@ _08088FE8:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8088F84
+	thumb_func_end HasAllKantoMons
 
 	.align 2, 0 @ Don't pad with nop.

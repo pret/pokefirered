@@ -1,6 +1,11 @@
 #ifndef GUARD_CONSTANTS_FLAGS_H
 #define GUARD_CONSTANTS_FLAGS_H
 
+// Sys Flags Maybe
+#define FLAG_SYS_SAFARI_MODE                                        0x800
+#define FLAG_WHITE_FLUTE_ACTIVE                                     0x803
+#define FLAG_BLACK_FLUTE_ACTIVE                                     0x804
+
 // World Map Flags
 #define FLAG_WORLD_MAP_PALLET_TOWN                                  0x890
 #define FLAG_WORLD_MAP_VIRIDIAN_CITY                                0x891
@@ -67,7 +72,8 @@
 #define FLAG_0x82C 0x82C
 #define FLAG_0x82F 0x82F
 #define FLAG_0x830 0x830
-#define FLAG_0x834 0x834
+#define FLAG_SYS_NOT_SOMEONES_PC 0x834
+#define FLAG_0x83C 0x83C
 #define FLAG_0x83E 0x83E
 #define FLAG_0x841 0x841
 #define FLAG_0x844 0x844
@@ -1431,7 +1437,7 @@
 #define FLAG_SYS_USE_STRENGTH     (CODE_FLAGS + 0x29)
 #define FLAG_SYS_WEATHER_CTRL     (CODE_FLAGS + 0x2A)
 #define FLAG_SYS_CYCLING_ROAD     (CODE_FLAGS + 0x2B)
-#define FLAG_SYS_SAFARI_MODE      (CODE_FLAGS + 0x2C)
+#define FLAG_0x88C                (CODE_FLAGS + 0x2C)
 #define FLAG_SYS_CRUISE_MODE      (CODE_FLAGS + 0x2D)
 
 #define FLAG_0x88E                (CODE_FLAGS + 0x2E)

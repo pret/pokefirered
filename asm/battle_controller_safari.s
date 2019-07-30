@@ -259,7 +259,7 @@ _080DD724: .4byte gActiveBattler
 sub_80DD728: @ 80DD728
 	push {lr}
 	ldr r2, _080DD750 @ =gSprites
-	ldr r1, _080DD754 @ =gUnknown_2023D44
+	ldr r1, _080DD754 @ =gBattlerSpriteIds
 	ldr r0, _080DD758 @ =gActiveBattler
 	ldrb r0, [r0]
 	adds r0, r1
@@ -279,7 +279,7 @@ _080DD74C:
 	bx r0
 	.align 2, 0
 _080DD750: .4byte gSprites
-_080DD754: .4byte gUnknown_2023D44
+_080DD754: .4byte gBattlerSpriteIds
 _080DD758: .4byte gActiveBattler
 _080DD75C: .4byte SpriteCallbackDummy
 	thumb_func_end sub_80DD728
@@ -646,7 +646,7 @@ SafariHandleDrawTrainerPic: @ 80DD9C4
 	movs r1, 0x50
 	movs r3, 0x1E
 	bl CreateSprite
-	ldr r6, _080DDA8C @ =gUnknown_2023D44
+	ldr r6, _080DDA8C @ =gBattlerSpriteIds
 	ldrb r1, [r5]
 	adds r1, r6
 	strb r0, [r1]
@@ -706,7 +706,7 @@ _080DDA7C: .4byte gSaveBlock2Ptr
 _080DDA80: .4byte gActiveBattler
 _080DDA84: .4byte gMultiuseSpriteTemplate
 _080DDA88: .4byte gUnknown_8239F8C
-_080DDA8C: .4byte gUnknown_2023D44
+_080DDA8C: .4byte gBattlerSpriteIds
 _080DDA90: .4byte gSprites
 _080DDA94: .4byte 0x0000fffe
 _080DDA98: .4byte sub_8033EEC
@@ -1487,7 +1487,7 @@ sub_80DE048: @ 80DE048
 	thumb_func_start SafariHandleCmd55
 SafariHandleCmd55: @ 80DE054
 	push {r4,lr}
-	ldr r2, _080DE098 @ =gUnknown_2023E8A
+	ldr r2, _080DE098 @ =gBattleOutcome
 	ldr r1, _080DE09C @ =gUnknown_2022BC4
 	ldr r4, _080DE0A0 @ =gActiveBattler
 	ldrb r0, [r4]
@@ -1518,7 +1518,7 @@ _080DE090:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DE098: .4byte gUnknown_2023E8A
+_080DE098: .4byte gBattleOutcome
 _080DE09C: .4byte gUnknown_2022BC4
 _080DE0A0: .4byte gActiveBattler
 _080DE0A4: .4byte gBattleTypeFlags

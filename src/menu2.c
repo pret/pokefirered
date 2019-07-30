@@ -424,7 +424,7 @@ static const u8 gUnknown_845FD54[][5] = {
     [SPECIES_OLD_UNOWN_QMARK - 1] = {0x20, 0x23, 0x08, 0x20, 0x2d}
 };
 
-void box_print(u8 windowId, u8 fontId, u8 x, u8 y, const struct TextColor * color, s8 speed, const u8 * str)
+void AddTextPrinterParameterized3(u8 windowId, u8 fontId, u8 x, u8 y, const struct TextColor * color, s8 speed, const u8 * str)
 {
     struct TextPrinterTemplate printer;
 
@@ -444,7 +444,7 @@ void box_print(u8 windowId, u8 fontId, u8 x, u8 y, const struct TextColor * colo
     AddTextPrinter(&printer, speed, NULL);
 }
 
-void AddTextPrinterParametrized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, const struct TextColor *color, s8 speed, const u8 *str)
+void AddTextPrinterParameterized4(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, const struct TextColor *color, s8 speed, const u8 *str)
 {
     struct TextPrinterTemplate printer;
 
@@ -464,7 +464,7 @@ void AddTextPrinterParametrized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSp
     AddTextPrinter(&printer, speed, NULL);
 }
 
-void sub_812E62C(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16), u8 letterSpacing, u8 lineSpacing)
+void AddTextPrinterParameterized5(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16), u8 letterSpacing, u8 lineSpacing)
 {
     struct TextPrinterTemplate printer;
 
@@ -498,13 +498,13 @@ void sub_812E6DC(u8 windowId, const u8 * src, u16 x, u16 y)
     }
     else
     {
-        sub_812E62C(windowId, 2, gStringVar4, x, y, 0xFF, NULL, 0, 0);
+        AddTextPrinterParameterized5(windowId, 2, gStringVar4, x, y, 0xFF, NULL, 0, 0);
     }
 }
 
 // Yeah, no, I'm not bothering with this
 NAKED
-void sub_819A080(void * a0, void * a1, u16 a2, u16 a3, u16 a4, u16 a5, u16 a6, u16 a7)
+static void sub_812E768(void * a0, void * a1, u16 a2, u16 a3, u16 a4, u16 a5, u16 a6, u16 a7)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                 "\tmov r7, r10\n"
@@ -820,7 +820,7 @@ u8 sub_812EA78(u16 species, u32 personality, u8 a2)
 {
     if (species == SPECIES_UNOWN)
     {
-        u8 unownLetter = GetUnownLetterByPersonality(personality);
+        u8 unownLetter = GetUnownLetterByPersonalityLoByte(personality);
         switch (unownLetter)
         {
         case 0:

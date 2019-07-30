@@ -1833,7 +1833,7 @@ bool32 sub_8140C0C(void)
     s32 i;
 
     for (i = 0; i < NELEMS(gUnknown_84655B0); i++)
-        LoadCompressedObjectPic(&gUnknown_84655B0[i]);
+        LoadCompressedSpriteSheet(&gUnknown_84655B0[i]);
     LoadSpritePalettes(gUnknown_84655C8);
     sSlotMachineGfxManager = Alloc(sizeof(*sSlotMachineGfxManager));
     if (sSlotMachineGfxManager == NULL)
@@ -2075,7 +2075,7 @@ bool8 sub_8141198(u8 * state, struct SlotMachineSetupTaskData * ptr)
         RequestDma3Fill(0, (void *)VRAM, 0x20, 1);
         RequestDma3Fill(0, (void *)(VRAM + 0xC000), 0x20, 1);
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
-        sub_80F6C14();
+        ResetBgPositions();
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, gUnknown_8466B10, NELEMS(gUnknown_8466B10));
         InitWindows(gUnknown_8466B20);
@@ -2084,9 +2084,9 @@ bool8 sub_8141198(u8 * state, struct SlotMachineSetupTaskData * ptr)
         FillBgTilemapBufferRect_Palette0(3, 0, 0, 0, 32, 32);
         CopyBgTilemapBufferToVram(3);
 
-        reset_temp_tile_data_buffers();
-        decompress_and_copy_tile_data_to_vram(2, gUnknown_84659D0, 0, 0x00, 0);
-        decompress_and_copy_tile_data_to_vram(2, gUnknown_846653C, 0, 0xC0, 0);
+        ResetTempTileDataBuffers();
+        DecompressAndCopyTileDataToVram(2, gUnknown_84659D0, 0, 0x00, 0);
+        DecompressAndCopyTileDataToVram(2, gUnknown_846653C, 0, 0xC0, 0);
         SetBgTilemapBuffer(2, ptr->field_185C);
         CopyToBgTilemapBuffer(2, gUnknown_84661D4, 0, 0x00);
         CopyBgTilemapBufferToVram(2);
@@ -2100,8 +2100,8 @@ bool8 sub_8141198(u8 * state, struct SlotMachineSetupTaskData * ptr)
 
         SetBgTilemapBuffer(0, ptr->field_085C);
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 2, 32, 30);
-        decompress_and_copy_tile_data_to_vram(1, gUnknown_8466620, 0, 0, 0);
-        decompress_and_copy_tile_data_to_vram(1, gUnknown_8466998, 0, 0, 1);
+        DecompressAndCopyTileDataToVram(1, gUnknown_8466620, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, gUnknown_8466998, 0, 0, 1);
         CopyBgTilemapBufferToVram(1);
 
         LoadPalette(stdpal_get(2), 0xE0, 0x20);
@@ -2112,7 +2112,7 @@ bool8 sub_8141198(u8 * state, struct SlotMachineSetupTaskData * ptr)
         textColor.fgColor = 15;
         textColor.bgColor = 1;
         textColor.shadowColor = 2;
-        box_print(1, 0, x, 0, &textColor, 0, gUnknown_841B779);
+        AddTextPrinterParameterized3(1, 0, x, 0, &textColor, 0, gUnknown_841B779);
         CopyBgTilemapBufferToVram(0);
 
         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | 0x20 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
@@ -2128,7 +2128,7 @@ bool8 sub_8141198(u8 * state, struct SlotMachineSetupTaskData * ptr)
         (*state)++;
         break;
     case 2:
-        if (!free_temp_tile_data_buffers_if_possible())
+        if (!FreeTempTileDataBuffersIfPossible())
         {
             ShowBg(0);
             ShowBg(3);
@@ -2210,7 +2210,7 @@ bool8 sub_8141198(u8 * state, struct SlotMachineSetupTaskData * ptr)
                 "\tmovs r0, 0\n"
                 "\tmovs r1, 0\n"
                 "\tbl SetGpuReg\n"
-                "\tbl sub_80F6C14\n"
+                "\tbl ResetBgPositions\n"
                 "\tmovs r0, 0\n"
                 "\tbl ResetBgsAndClearDma3BusyFlags\n"
                 "\tldr r1, _081413A0 @ =gUnknown_8466B10\n"
@@ -2233,20 +2233,20 @@ bool8 sub_8141198(u8 * state, struct SlotMachineSetupTaskData * ptr)
                 "\tbl FillBgTilemapBufferRect_Palette0\n"
                 "\tmovs r0, 0x3\n"
                 "\tbl CopyBgTilemapBufferToVram\n"
-                "\tbl reset_temp_tile_data_buffers\n"
+                "\tbl ResetTempTileDataBuffers\n"
                 "\tldr r1, _081413AC @ =gUnknown_84659D0\n"
                 "\tmovs r5, 0\n"
                 "\tstr r5, [sp]\n"
                 "\tmovs r0, 0x2\n"
                 "\tmovs r2, 0\n"
                 "\tmovs r3, 0\n"
-                "\tbl decompress_and_copy_tile_data_to_vram\n"
+                "\tbl DecompressAndCopyTileDataToVram\n"
                 "\tldr r1, _081413B0 @ =gUnknown_846653C\n"
                 "\tstr r5, [sp]\n"
                 "\tmovs r0, 0x2\n"
                 "\tmovs r2, 0\n"
                 "\tmovs r3, 0xC0\n"
-                "\tbl decompress_and_copy_tile_data_to_vram\n"
+                "\tbl DecompressAndCopyTileDataToVram\n"
                 "\tldr r1, _081413B4 @ =0x0000185c\n"
                 "\tadd r1, r8\n"
                 "\tmovs r0, 0x2\n"
@@ -2301,13 +2301,13 @@ bool8 sub_8141198(u8 * state, struct SlotMachineSetupTaskData * ptr)
                 "\tmovs r0, 0x1\n"
                 "\tmovs r2, 0\n"
                 "\tmovs r3, 0\n"
-                "\tbl decompress_and_copy_tile_data_to_vram\n"
+                "\tbl DecompressAndCopyTileDataToVram\n"
                 "\tldr r1, _081413D4 @ =gUnknown_8466998\n"
                 "\tstr r6, [sp]\n"
                 "\tmovs r0, 0x1\n"
                 "\tmovs r2, 0\n"
                 "\tmovs r3, 0\n"
-                "\tbl decompress_and_copy_tile_data_to_vram\n"
+                "\tbl DecompressAndCopyTileDataToVram\n"
                 "\tmovs r0, 0x1\n"
                 "\tbl CopyBgTilemapBufferToVram\n"
                 "\tmovs r0, 0x2\n"
@@ -2341,7 +2341,7 @@ bool8 sub_8141198(u8 * state, struct SlotMachineSetupTaskData * ptr)
                 "\tmovs r0, 0x1\n"
                 "\tmovs r1, 0\n"
                 "\tmovs r3, 0\n"
-                "\tbl box_print\n"
+                "\tbl AddTextPrinterParameterized3\n"
                 "\tmovs r0, 0\n"
                 "\tbl CopyBgTilemapBufferToVram\n"
                 "\tmovs r1, 0x83\n"
@@ -2386,7 +2386,7 @@ bool8 sub_8141198(u8 * state, struct SlotMachineSetupTaskData * ptr)
                 "_081413DC: .4byte sub_8141118\n"
                 "_081413E0: .4byte sub_8140E40\n"
                 "_081413E4:\n"
-                "\tbl free_temp_tile_data_buffers_if_possible\n"
+                "\tbl FreeTempTileDataBuffersIfPossible\n"
                 "\tlsls r0, 24\n"
                 "\tlsrs r5, r0, 24\n"
                 "\tcmp r5, 0\n"
@@ -2678,7 +2678,7 @@ void sub_81417E4(const u8 * str)
     FillWindowPixelBuffer(0, 0x11);
     PutWindowTilemap(0);
     DrawTextBorderOuter(0, 0x001, 15);
-    sub_812E62C(0, 2, str, 1, 2, -1, NULL, 1, 2);
+    AddTextPrinterParameterized5(0, 2, str, 1, 2, -1, NULL, 1, 2);
 }
 
 void sub_8141828(void)

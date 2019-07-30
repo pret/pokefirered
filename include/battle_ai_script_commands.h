@@ -3,6 +3,8 @@
 
 #include "global.h"
 
+extern u8 sBattler_AI;
+
 void BattleAI_HandleItemUseBeforeAISetup(u8 defaultScoreMoves);
 void BattleAI_SetupAIData(u8 defaultScoreMoves);
 u8 BattleAI_ChooseMoveOrAction(void);

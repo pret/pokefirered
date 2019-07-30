@@ -1373,8 +1373,8 @@ SpawnSpecialFieldObject: @ 805E7F4
 _0805E82C: .4byte gSaveBlock1Ptr
 	thumb_func_end SpawnSpecialFieldObject
 
-	thumb_func_start SpawnSpecialFieldObjectParametrized
-SpawnSpecialFieldObjectParametrized: @ 805E830
+	thumb_func_start SpawnSpecialFieldObjectParameterized
+SpawnSpecialFieldObjectParameterized: @ 805E830
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -1425,7 +1425,7 @@ SpawnSpecialFieldObjectParametrized: @ 805E830
 	bx r1
 	.align 2, 0
 _0805E894: .4byte 0xfff90000
-	thumb_func_end SpawnSpecialFieldObjectParametrized
+	thumb_func_end SpawnSpecialFieldObjectParameterized
 
 	thumb_func_start show_sprite
 show_sprite: @ 805E898
@@ -1550,8 +1550,8 @@ MakeObjectTemplateFromFieldObjectTemplate: @ 805E960
 	bx r0
 	thumb_func_end MakeObjectTemplateFromFieldObjectTemplate
 
-	thumb_func_start AddPseudoFieldObject
-AddPseudoFieldObject: @ 805E978
+	thumb_func_start AddPseudoEventObject
+AddPseudoEventObject: @ 805E978
 	push {r4-r6,lr}
 	sub sp, 0x1C
 	ldr r4, [sp, 0x2C]
@@ -1612,7 +1612,7 @@ _0805E9E4:
 	.align 2, 0
 _0805E9F0: .4byte 0x0000ffff
 _0805E9F4: .4byte gSprites
-	thumb_func_end AddPseudoFieldObject
+	thumb_func_end AddPseudoEventObject
 
 	thumb_func_start sprite_new
 sprite_new: @ 805E9F8
@@ -2440,8 +2440,8 @@ _0805F058: .4byte gPlayerAvatar
 _0805F05C: .4byte gMapObjects
 	thumb_func_end SetPlayerAvatarFieldObjectIdAndObjectId
 
-	thumb_func_start sub_805F060
-sub_805F060: @ 805F060
+	thumb_func_start EventObjectSetGraphicsId
+EventObjectSetGraphicsId: @ 805F060
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2625,7 +2625,7 @@ _0805F1BA:
 _0805F1CC: .4byte gSprites
 _0805F1D0: .4byte 0x000003ff
 _0805F1D4: .4byte 0xfffffc00
-	thumb_func_end sub_805F060
+	thumb_func_end EventObjectSetGraphicsId
 
 	thumb_func_start FieldObjectSetGraphicsIdByLocalIdAndMap
 FieldObjectSetGraphicsIdByLocalIdAndMap: @ 805F1D8
@@ -2652,7 +2652,7 @@ FieldObjectSetGraphicsIdByLocalIdAndMap: @ 805F1D8
 	ldr r1, _0805F214 @ =gMapObjects
 	adds r0, r1
 	adds r1, r4, 0
-	bl sub_805F060
+	bl EventObjectSetGraphicsId
 _0805F20C:
 	add sp, 0x4
 	pop {r4}
@@ -10353,7 +10353,7 @@ mss_npc_reset_oampriv3_1_unk2_unk3: @ 80628C0
 	ldrb r0, [r4]
 	cmp r0, 0
 	bne _080628D8
-	bl player_get_direction_lower_nybble
+	bl GetPlayerFacingDirection
 	strb r0, [r4]
 _080628D8:
 	movs r0, 0x1
@@ -13097,8 +13097,8 @@ FieldObjectMoveDestCoords: @ 8063C50
 	bx r0
 	thumb_func_end FieldObjectMoveDestCoords
 
-	thumb_func_start FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
-FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive: @ 8063C70
+	thumb_func_start FieldObjectIsMovementOverridden
+FieldObjectIsMovementOverridden: @ 8063C70
 	push {lr}
 	ldrb r1, [r0]
 	movs r0, 0x42
@@ -13112,7 +13112,7 @@ _08063C80:
 _08063C82:
 	pop {r1}
 	bx r1
-	thumb_func_end FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	thumb_func_end FieldObjectIsMovementOverridden
 
 	thumb_func_start FieldObjectIsSpecialAnimActive
 FieldObjectIsSpecialAnimActive: @ 8063C88
@@ -13134,8 +13134,8 @@ _08063CA0:
 	bx r1
 	thumb_func_end FieldObjectIsSpecialAnimActive
 
-	thumb_func_start sub_8063CA4
-sub_8063CA4: @ 8063CA4
+	thumb_func_start FieldObjectSetHeldMovement
+FieldObjectSetHeldMovement: @ 8063CA4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	lsls r1, 24
@@ -13146,7 +13146,7 @@ sub_8063CA4: @ 8063CA4
 	cmp r0, 0x1
 	beq _08063CC8
 	adds r0, r4, 0
-	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
+	bl FieldObjectIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _08063CCE
@@ -13180,7 +13180,7 @@ _08063CF4:
 	bx r1
 	.align 2, 0
 _08063CFC: .4byte gSprites
-	thumb_func_end sub_8063CA4
+	thumb_func_end FieldObjectSetHeldMovement
 
 	thumb_func_start FieldObjectForceSetSpecialAnim
 FieldObjectForceSetSpecialAnim: @ 8063D00
@@ -13191,7 +13191,7 @@ FieldObjectForceSetSpecialAnim: @ 8063D00
 	bl FieldObjectClearAnimIfSpecialAnimActive
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -13242,8 +13242,8 @@ FieldObjectClearAnim: @ 8063D34
 _08063D64: .4byte gSprites
 	thumb_func_end FieldObjectClearAnim
 
-	thumb_func_start FieldObjectCheckIfSpecialAnimFinishedOrInactive
-FieldObjectCheckIfSpecialAnimFinishedOrInactive: @ 8063D68
+	thumb_func_start FieldObjectCheckHeldMovementStatus
+FieldObjectCheckHeldMovementStatus: @ 8063D68
 	push {lr}
 	ldrb r1, [r0]
 	lsls r0, r1, 25
@@ -13256,13 +13256,13 @@ _08063D76:
 _08063D78:
 	pop {r1}
 	bx r1
-	thumb_func_end FieldObjectCheckIfSpecialAnimFinishedOrInactive
+	thumb_func_end FieldObjectCheckHeldMovementStatus
 
-	thumb_func_start FieldObjectClearAnimIfSpecialAnimFinished
-FieldObjectClearAnimIfSpecialAnimFinished: @ 8063D7C
+	thumb_func_start FieldObjectClearHeldMovementIfFinished
+FieldObjectClearHeldMovementIfFinished: @ 8063D7C
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
+	bl FieldObjectCheckHeldMovementStatus
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
@@ -13276,7 +13276,7 @@ _08063D96:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end FieldObjectClearAnimIfSpecialAnimFinished
+	thumb_func_end FieldObjectClearHeldMovementIfFinished
 
 	thumb_func_start FieldObjectGetSpecialAnim
 FieldObjectGetSpecialAnim: @ 8063DA0
@@ -14023,7 +14023,7 @@ FieldObjectFaceOppositeDirection: @ 80642C8
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8063CA4
+	bl FieldObjectSetHeldMovement
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4}

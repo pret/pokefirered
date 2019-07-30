@@ -82,5 +82,6 @@ bool8 FieldEffectActiveListContains(u8 id);
 void sub_80B69DC(void);
 void CreateTeleportFieldEffectTask(void);
 void FieldEffectActiveListRemove(u8 id);
+void sub_8085620(void);
 
 #endif //GUARD_FIELD_EFFECTS_H

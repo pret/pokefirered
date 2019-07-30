@@ -5,7 +5,7 @@
 #include "string_util.h"
 #include "constants/species.h"
 #include "constants/items.h"
-#include "mail.h"
+#include "mail_data.h"
 #include "pokemon_storage_system.h"
 #include "event_data.h"
 #include "random.h"
@@ -163,7 +163,7 @@ static const u8 *const sCompatibilityMessages[] =
 static const u8 sNewLineText[] = _("\n");
 static const u8 sJapaneseEggNickname[] = _("タマゴ"); // "tamago" ("egg" in Japanese)
 
-static const u16 sEggPalette[] = INCBIN_U16("graphics/pokemon/palettes/egg_palette.gbapal");
+static const u16 sEggPalette[] = INCBIN_U16("graphics/pokemon/egg/normal.gbapal");
 static const u8 sEggHatchTiles[] = INCBIN_U8("graphics/misc/egg_hatch.4bpp");
 static const u8 sEggShardTiles[] = INCBIN_U8("graphics/misc/egg_shard.4bpp");
 
@@ -1533,7 +1533,7 @@ static void DaycarePrintMonInfo(u8 windowId, s32 daycareSlotId, u8 y)
 
 static void Task_HandleDaycareLevelMenuInput(u8 taskId)
 {
-    u32 input = ListMenuHandleInput(gTasks[taskId].tMenuListTaskId);
+    u32 input = ListMenu_ProcessInput(gTasks[taskId].tMenuListTaskId);
 
     if (gMain.newKeys & A_BUTTON)
     {
@@ -1547,7 +1547,7 @@ static void Task_HandleDaycareLevelMenuInput(u8 taskId)
             gSpecialVar_Result = 2;
             break;
         }
-        DestroyListMenu(gTasks[taskId].tMenuListTaskId, NULL, NULL);
+        DestroyListMenuTask(gTasks[taskId].tMenuListTaskId, NULL, NULL);
         ClearStdWindowAndFrame(gTasks[taskId].tWindowId, TRUE);
         RemoveWindow(gTasks[taskId].tWindowId);
         DestroyTask(taskId);
@@ -1556,7 +1556,7 @@ static void Task_HandleDaycareLevelMenuInput(u8 taskId)
     else if (gMain.newKeys & B_BUTTON)
     {
         gSpecialVar_Result = 2;
-        DestroyListMenu(gTasks[taskId].tMenuListTaskId, NULL, NULL);
+        DestroyListMenuTask(gTasks[taskId].tMenuListTaskId, NULL, NULL);
         ClearStdWindowAndFrame(gTasks[taskId].tWindowId, TRUE);
         RemoveWindow(gTasks[taskId].tWindowId);
         DestroyTask(taskId);
@@ -1768,8 +1768,8 @@ static u8 EggHatchCreateMonSprite(u8 a0, u8 switchID, u8 pokeID, u16* speciesLoc
     {
         u16 species = GetMonData(mon, MON_DATA_SPECIES);
         u32 pid = GetMonData(mon, MON_DATA_PERSONALITY);
-        sub_800ECC4(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites[(a0 * 2) + 1], species, pid);
-        LoadCompressedObjectPalette(GetMonSpritePalStruct(mon));
+        HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites[(a0 * 2) + 1], species, pid);
+        LoadCompressedSpritePalette(GetMonSpritePalStruct(mon));
         *speciesLoc = species;
     }
         break;
@@ -1824,7 +1824,7 @@ static void CB2_EggHatch_0(void)
         SetVBlankCallback(VBlankCB_EggHatch);
         gSpecialVar_0x8005 = GetCurrentMapMusic();
 
-        reset_temp_tile_data_buffers();
+        ResetTempTileDataBuffers();
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, sBgTemplates_EggHatch, ARRAY_COUNT(sBgTemplates_EggHatch));
 
@@ -2205,5 +2205,5 @@ static void EggHatchPrintMessage(u8 windowId, u8* string, u8 x, u8 y, u8 speed)
     sEggHatchData->textColor.fgColor = 0;
     sEggHatchData->textColor.bgColor = 5;
     sEggHatchData->textColor.shadowColor = 6;
-    AddTextPrinterParametrized2(windowId, 3, x, y, 1, 1, &sEggHatchData->textColor, speed, string);
+    AddTextPrinterParameterized4(windowId, 3, x, y, 1, 1, &sEggHatchData->textColor, speed, string);
 }

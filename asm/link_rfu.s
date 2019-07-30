@@ -3259,7 +3259,7 @@ sub_80FEC54: @ 80FEC54
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl is_c1_link_related_active
+	bl IsUpdateLinkStateCBActive
 	cmp r0, 0
 	bne _080FEC70
 _080FEC62:
@@ -7823,7 +7823,7 @@ _08100E0A:
 	str r0, [sp, 0x8]
 	mov r0, r12
 	adds r2, r7, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add sp, 0x10
 	pop {r3,r4}
 	mov r8, r3
@@ -7851,7 +7851,7 @@ sub_8100E34: @ 8100E34
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0xE0
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0xE
@@ -9465,7 +9465,7 @@ sub_8101A90: @ 8101A90
 	ldr r4, _08101AC0 @ =gUnknown_843F938
 _08101AA2:
 	adds r0, r4, 0
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	adds r4, 0x8
 	adds r5, 0x1
 	cmp r5, 0x3

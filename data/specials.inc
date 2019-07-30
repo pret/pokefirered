@@ -139,7 +139,7 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special sub_80BDB1C
 	def_special nullsub_75
-	def_special sub_809A540
+	def_special RegisteredItemHandleBikeSwap
 	def_special CalculatePlayerPartyCount
 	def_special CountPartyNonEggMons
 	def_special CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
@@ -162,7 +162,7 @@ gSpecials:: @ 815FD60
 	def_special sub_80CA758
 	def_special nullsub_75
 	def_special nullsub_75
-	def_special sub_8055DC4
+	def_special Overworld_PlaySpecialMapMusic
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
@@ -205,7 +205,7 @@ gSpecials:: @ 815FD60
 	def_special ScriptHatchMon
 	def_special EggHatch
 	def_special sub_8046EAC
-	def_special sub_80CD228
+	def_special Special_BattleRecords
 	def_special IsEnoughForCostInVar0x8005
 	def_special SubtractMoneyFromVar0x8005
 	def_special ExecuteWhiteOut
@@ -214,8 +214,8 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
-	def_special sub_80A0EC4
-	def_special sub_80A0EEC
+	def_special EnterSafariMode
+	def_special ExitSafariMode
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
@@ -271,8 +271,8 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
-	def_special sp109_CreatePCMenu
-	def_special sub_80CA574
+	def_special ScrSpecial_CreatePCMenu
+	def_special HallOfFamePCBeginFade
 	def_special sub_80CA618
 	def_special nullsub_75
 	def_special nullsub_75
@@ -296,7 +296,7 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special sub_80CAAAC
 	def_special sub_80CAABC
-	def_special player_get_direction_lower_nybble
+	def_special GetPlayerFacingDirection
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
@@ -410,7 +410,7 @@ gSpecials:: @ 815FD60
 	def_special sub_8127888
 	def_special sub_80803FC
 	def_special sub_812B35C
-	def_special sub_815D334
+	def_special Special_SSAnneDepartureCutscene
 	def_special sub_8149A18
 	def_special sub_806E25C
 	def_special sub_815D9E8
@@ -420,7 +420,7 @@ gSpecials:: @ 815FD60
 	def_special sub_812B478
 	def_special sub_812B484
 	def_special sub_810B82C
-	def_special sub_8099FAC
+	def_special CheckHasAtLeastOneBerry
 	def_special sub_815F094
 	def_special sub_815F114
 	def_special sub_815EEB0
@@ -435,13 +435,13 @@ gSpecials:: @ 815FD60
 	def_special sub_809D764
 	def_special sub_809D8C0
 	def_special sub_8147500
-	def_special player_get_direction_lower_nybble
+	def_special GetPlayerFacingDirection
 	def_special sub_80CCDFC
 	def_special sub_80CD008
 	def_special sub_8147594
 	def_special sub_80CD034
 	def_special sub_815D834
-	def_special sub_8088F84
+	def_special HasAllKantoMons
 	def_special sub_80CD074
 	def_special sub_80CD098
 	def_special sub_811B15C
@@ -452,5 +452,5 @@ gSpecials:: @ 815FD60
 	def_special sub_80CB328
 	def_special sub_80CD154
 	def_special sub_80CD1B4
-	def_special sub_8044838
+	def_special CreateObedientEnemyMon
 gSpecialsEnd::

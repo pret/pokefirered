@@ -6474,7 +6474,7 @@ sub_81538D0: @ 81538D0
 	adds r0, r7, 0
 	adds r1, r4, 0
 	movs r2, 0xD0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	adds r0, r7, 0
 	adds r1, r4, 0
 	movs r2, 0xD
@@ -8351,7 +8351,7 @@ sub_8154720: @ 8154720
 	movs r0, 0
 	movs r1, 0xA
 	movs r2, 0xB0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8154720
@@ -9014,7 +9014,7 @@ _08154C4E:
 	str r4, [sp, 0x8]
 	movs r1, 0
 	movs r3, 0x1
-	bl box_print
+	bl AddTextPrinterParameterized3
 	mov r2, r10
 	ldr r0, [r2]
 	add r0, r9
@@ -9319,7 +9319,7 @@ _08154EC8:
 	movs r1, 0
 	movs r2, 0x1C
 	adds r3, r6, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	add r0, sp, 0xC
 	mov r1, r9
 	movs r2, 0x1
@@ -9563,7 +9563,7 @@ _081550EA:
 	str r6, [sp, 0x8]
 	movs r1, 0
 	movs r2, 0x2
-	bl box_print
+	bl AddTextPrinterParameterized3
 	movs r7, 0
 	mov r0, r9
 	adds r0, 0x1
@@ -9624,7 +9624,7 @@ _0815512E:
 	add r1, sp, 0xC
 	str r1, [sp, 0x8]
 	movs r1, 0
-	bl box_print
+	bl AddTextPrinterParameterized3
 	b _081551FA
 	.align 2, 0
 _081551A8: .4byte gUnknown_203F440
@@ -9983,7 +9983,7 @@ _08155480:
 	movs r1, 0
 	adds r2, r5, 0
 	bl AddTextPrinterParameterized
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	bl sub_8153390
 	lsls r0, 16
 	lsrs r0, 16
@@ -9992,10 +9992,10 @@ _08155480:
 	bl CopyItemName
 	movs r0, 0
 	adds r1, r5, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	ldr r1, _0815556C @ =gUnknown_841CD7A
 	add r0, sp, 0xC
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	ldr r0, [r4]
 	add r0, r10
 	ldrb r0, [r0]
@@ -10016,7 +10016,7 @@ _08155480:
 	beq _0815559E
 	cmp r4, 0x3
 	beq _0815559E
-	bl UnkTextUtil_Reset
+	bl DynamicPlaceholderTextUtil_Reset
 	bl sub_8153390
 	lsls r0, 16
 	lsrs r0, 16
@@ -10024,12 +10024,12 @@ _08155480:
 	bl CopyItemName
 	movs r0, 0
 	adds r1, r5, 0
-	bl UnkTextUtil_SetPtrI
+	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	cmp r4, 0x2
 	bne _08155574
 	ldr r1, _08155570 @ =gUnknown_841CD9F
 	add r0, sp, 0xC
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	b _08155580
 	.align 2, 0
 _08155558: .4byte 0x00000101
@@ -10044,7 +10044,7 @@ _08155574:
 	bne _08155580
 	ldr r1, _081555C4 @ =gUnknown_841CDBA
 	add r0, sp, 0xC
-	bl UnkTextUtil_StringExpandPlaceholders
+	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 _08155580:
 	ldr r0, _081555C8 @ =gUnknown_203F440
 	ldr r0, [r0]
@@ -10669,7 +10669,7 @@ _08155AA6:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized2
 	b _08155B08
 	.align 2, 0
 _08155ACC: .4byte gUnknown_8419F54
@@ -11348,7 +11348,7 @@ _08156020:
 	.align 2, 0
 _0815602C: .4byte gUnknown_84758A8
 _08156030:
-	bl reset_temp_tile_data_buffers
+	bl ResetTempTileDataBuffers
 	b _08156082
 _08156036:
 	ldr r1, _08156040 @ =gUnknown_8475B3C
@@ -11366,12 +11366,12 @@ _08156044:
 _0815604C:
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	b _08156082
 	.align 2, 0
 _08156058: .4byte gUnknown_84763CC
 _0815605C:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

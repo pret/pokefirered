@@ -411,13 +411,13 @@ _080A0368:
 	movs r0, 0x1
 	strh r0, [r1]
 _080A036E:
-	ldr r0, _080A037C @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r0, _080A037C @ =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080A0378: .4byte gSpecialVar_Result
-_080A037C: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
+_080A037C: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
 	thumb_func_end sub_80A0350
 
 	thumb_func_start sub_80A0380
@@ -455,14 +455,14 @@ _080A03B8:
 	movs r0, 0x1
 	strh r0, [r1]
 _080A03C2:
-	ldr r0, _080A03D4 @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+	ldr r0, _080A03D4 @ =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	bl SetMainCallback2
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080A03D0: .4byte gSpecialVar_Result
-_080A03D4: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
+_080A03D4: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
 	thumb_func_end sub_80A039C
 
 	thumb_func_start sub_80A03D8

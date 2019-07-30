@@ -95,5 +95,6 @@ void CreateRegionMapCursor(u16 tileTag, u16 paletteTag);
 u8 *GetMapName(u8 *, u16, u16);
 bool32 sub_8124668(u8 mapSecId);
 void sub_80C4DF8(u8 *, u8);
+void sub_80BFF50(u8 a0, void (*a1)(void));
 
 #endif //GUARD_REGION_MAP_H

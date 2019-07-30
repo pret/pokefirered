@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_813CD50
-sub_813CD50: @ 813CD50
+	thumb_func_start InitBerryPouch
+InitBerryPouch: @ 813CD50
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -92,7 +92,7 @@ _0813CDF0: .4byte gTextFlags
 _0813CDF4: .4byte gSpecialVar_ItemId
 _0813CDF8: .4byte sub_813CE30
 _0813CDFC: .4byte 0x0000080c
-	thumb_func_end sub_813CD50
+	thumb_func_end InitBerryPouch
 
 	thumb_func_start sub_813CE00
 sub_813CE00: @ 813CE00
@@ -100,7 +100,7 @@ sub_813CE00: @ 813CE00
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer
-	bl do_scheduled_bg_tilemap_copies_to_vram
+	bl DoScheduledBgTilemapCopiesToVram
 	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
@@ -130,7 +130,7 @@ _0813CE32:
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0813CE56
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -183,8 +183,8 @@ _0813CE84:
 	.4byte _0813CFB0
 	.4byte _0813CFBE
 _0813CED0:
-	bl sub_80BF768
-	bl clear_scheduled_bg_copies_to_vram
+	bl SetVBlankHBlankCallbacksToNull
+	bl ClearScheduledBgCopiesToVram
 	b _0813CFD2
 _0813CEDA:
 	bl ScanlineEffect_Stop
@@ -199,10 +199,10 @@ _0813CEEC:
 	bl ResetSpriteData
 	b _0813CFD2
 _0813CEF2:
-	bl sub_80984D8
+	bl ResetItemMenuIconState
 	b _0813CFD2
 _0813CEF8:
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813CFD2
@@ -386,7 +386,7 @@ _0813D078: .4byte gUnknown_203F370
 	thumb_func_start sub_813D07C
 sub_813D07C: @ 813D07C
 	push {r4,lr}
-	bl sub_80BF7C8
+	bl ResetAllBgsCoordinatesAndBgCntRegs
 	ldr r4, _0813D0DC @ =gUnknown_203F36C
 	ldr r0, [r4]
 	adds r0, 0xC
@@ -405,7 +405,7 @@ sub_813D07C: @ 813D07C
 	movs r0, 0x1
 	bl SetBgTilemapBuffer
 	movs r0, 0x1
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0x50
 	movs r1, 0
 	bl SetGpuReg
@@ -454,18 +454,18 @@ _0813D10C:
 	beq _0813D178
 	b _0813D190
 _0813D116:
-	bl reset_temp_tile_data_buffers
+	bl ResetTempTileDataBuffers
 	ldr r1, _0813D12C @ =gUnknown_8E859D0
 	str r4, [sp]
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
+	bl DecompressAndCopyTileDataToVram
 	b _0813D17E
 	.align 2, 0
 _0813D12C: .4byte gUnknown_8E859D0
 _0813D130:
-	bl free_temp_tile_data_buffers_if_possible
+	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -498,7 +498,7 @@ _0813D170: .4byte gSaveBlock2Ptr
 _0813D174: .4byte gUnknown_8E85BF4
 _0813D178:
 	ldr r0, _0813D18C @ =gUnknown_84644A8
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 _0813D17E:
 	ldr r1, [r5]
 	adds r1, r6
@@ -510,7 +510,7 @@ _0813D17E:
 _0813D18C: .4byte gUnknown_84644A8
 _0813D190:
 	ldr r0, _0813D1A8 @ =gUnknown_84644B0
-	bl LoadCompressedObjectPalette
+	bl LoadCompressedSpritePalette
 	ldr r0, _0813D1AC @ =gUnknown_203F36C
 	ldr r0, [r0]
 	ldr r1, _0813D1B0 @ =0x0000080c
@@ -798,7 +798,7 @@ _0813D3D6:
 	ldrb r1, [r0, 0x9]
 	movs r0, 0x1
 	eors r0, r1
-	bl sub_8098940
+	bl DestroyItemMenuIcon
 	ldr r1, [r4]
 	ldrb r0, [r1, 0x7]
 	cmp r0, r5
@@ -1028,9 +1028,9 @@ sub_813D594: @ 813D594
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0x1E
-	bl sub_80F6B08
+	bl SetBgRectPal
 	movs r0, 0x1
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	add sp, 0x8
 	pop {r0}
 	bx r0
@@ -1072,7 +1072,7 @@ _0813D5EA:
 	movs r1, 0xA0
 	movs r2, 0x8
 	movs r3, 0x78
-	bl AddScrollIndicatorArrowPairParametrized
+	bl AddScrollIndicatorArrowPairParameterized
 	ldr r1, [r4]
 	strb r0, [r1, 0x6]
 	add sp, 0x10
@@ -1102,7 +1102,7 @@ sub_813D614: @ 813D614
 	movs r1, 0xD4
 	movs r2, 0x78
 	movs r3, 0x98
-	bl AddScrollIndicatorArrowPairParametrized
+	bl AddScrollIndicatorArrowPairParameterized
 	ldr r1, [r4]
 	strb r0, [r1, 0x6]
 	add sp, 0x10
@@ -1132,7 +1132,7 @@ sub_813D64C: @ 813D64C
 	movs r1, 0x98
 	movs r2, 0x48
 	movs r3, 0x68
-	bl AddScrollIndicatorArrowPairParametrized
+	bl AddScrollIndicatorArrowPairParameterized
 	ldr r1, [r4]
 	strb r0, [r1, 0x6]
 	add sp, 0x10
@@ -1358,8 +1358,8 @@ _0813D800: .4byte gUnknown_203F37C
 _0813D804: .4byte gUnknown_203F380
 	thumb_func_end sub_813D7CC
 
-	thumb_func_start sub_813D808
-sub_813D808: @ 813D808
+	thumb_func_start BerryPouch_StartFadeToExitCallback
+BerryPouch_StartFadeToExitCallback: @ 813D808
 	push {r4,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -1387,7 +1387,7 @@ sub_813D808: @ 813D808
 	.align 2, 0
 _0813D83C: .4byte gTasks
 _0813D840: .4byte sub_813D844
-	thumb_func_end sub_813D808
+	thumb_func_end BerryPouch_StartFadeToExitCallback
 
 	thumb_func_start sub_813D844
 sub_813D844: @ 813D844
@@ -1409,7 +1409,7 @@ sub_813D844: @ 813D844
 	ldr r4, _0813D884 @ =gUnknown_203F37A
 	subs r2, r4, 0x2
 	adds r1, r4, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	ldr r0, _0813D888 @ =gUnknown_203F36C
 	ldr r0, [r0]
 	ldr r0, [r0]
@@ -1443,7 +1443,7 @@ sub_813D8AC: @ 813D8AC
 	push {r4,lr}
 	ldr r4, _0813D904 @ =gBagPockets + 0x20
 	adds r0, r4, 0
-	bl sub_809A720
+	bl SortAndCompactBagPocket
 	ldr r3, _0813D908 @ =gUnknown_203F36C
 	ldr r1, [r3]
 	movs r0, 0
@@ -1510,15 +1510,15 @@ _0813D92C:
 	bx r0
 	thumb_func_end sub_813D8AC
 
-	thumb_func_start sub_813D934
-sub_813D934: @ 813D934
+	thumb_func_start BerryPouch_SetExitCallback
+BerryPouch_SetExitCallback: @ 813D934
 	ldr r1, _0813D93C @ =gUnknown_203F36C
 	ldr r1, [r1]
 	str r0, [r1]
 	bx lr
 	.align 2, 0
 _0813D93C: .4byte gUnknown_203F36C
-	thumb_func_end sub_813D934
+	thumb_func_end BerryPouch_SetExitCallback
 
 	thumb_func_start sub_813D940
 sub_813D940: @ 813D940
@@ -1688,13 +1688,13 @@ _0813DA90:
 	b _0813DB9E
 _0813DA9E:
 	ldrb r0, [r7]
-	bl ListMenuHandleInput
+	bl ListMenu_ProcessInput
 	adds r5, r0, 0
 	ldrb r0, [r7]
 	ldr r4, _0813DAE0 @ =gUnknown_203F37A
 	subs r2, r4, 0x2
 	adds r1, r4, 0
-	bl get_coro_args_x18_x1A
+	bl ListMenuGetScrollAndRow
 	ldr r0, _0813DAE4 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x4
@@ -1767,7 +1767,7 @@ _0813DB46:
 	strh r0, [r1]
 _0813DB48:
 	adds r0, r6, 0
-	bl sub_813D808
+	bl BerryPouch_StartFadeToExitCallback
 	b _0813DB9E
 	.align 2, 0
 _0813DB50: .4byte gUnknown_203F36C
@@ -1869,7 +1869,7 @@ _0813DC18: .4byte gUnknown_203F384
 _0813DC1C: .4byte gUnknown_84643B0
 _0813DC20: .4byte gUnknown_203F388
 _0813DC24:
-	bl sub_80BF708
+	bl MenuHelpers_LinkSomething
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1974,7 +1974,7 @@ _0813DC86:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl ProgramAndPlaceMenuCursorOnWindow
+	bl Menu_InitCursor
 	movs r0, 0x6
 	bl sub_813EA08
 	adds r4, r0, 0
@@ -1985,7 +1985,7 @@ _0813DC86:
 	ldr r1, _0813DD68 @ =gStringVar1
 	bl sub_813D39C
 	ldr r5, _0813DD6C @ =gStringVar4
-	ldr r1, _0813DD70 @ =gUnknown_84162FF
+	ldr r1, _0813DD70 @ =gOtherText_StrVar1
 	adds r0, r5, 0
 	bl StringExpandPlaceholders
 	movs r0, 0x2
@@ -2014,7 +2014,7 @@ _0813DD60: .4byte gUnknown_203F388
 _0813DD64: .4byte gUnknown_846437C
 _0813DD68: .4byte gStringVar1
 _0813DD6C: .4byte gStringVar4
-_0813DD70: .4byte gUnknown_84162FF
+_0813DD70: .4byte gOtherText_StrVar1
 	thumb_func_end sub_813DBE4
 
 	thumb_func_start sub_813DD74
@@ -2051,7 +2051,7 @@ sub_813DDA0: @ 813DDA0
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0813DDFE
-	bl ProcessMenuInputNoWrapAround
+	bl Menu_ProcessInputNoWrapAround
 	lsls r0, 24
 	asrs r4, r0, 24
 	movs r0, 0x2
@@ -2111,9 +2111,9 @@ sub_813DE0C: @ 813DE0C
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r0, _0813DE60 @ =gUnknown_203F370
 	ldrb r0, [r0, 0x4]
 	cmp r0, 0x4
@@ -2124,7 +2124,7 @@ sub_813DE0C: @ 813DE0C
 	cmp r0, 0
 	bne _0813DE68
 	adds r0, r5, 0
-	bl sub_80A2238
+	bl FieldUseFunc_OakStopsYou
 	b _0813DEB0
 	.align 2, 0
 _0813DE5C: .4byte gUnknown_203F388
@@ -2309,9 +2309,9 @@ sub_813DFC8: @ 813DFC8
 	movs r0, 0
 	bl PutWindowTilemap
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldrb r0, [r4]
 	movs r1, 0x1
 	bl sub_813D4B0
@@ -2338,7 +2338,7 @@ sub_813E010: @ 813E010
 	adds r0, r4, 0
 	adds r0, 0x10
 	ldrh r1, [r4, 0x4]
-	bl sub_80BF848
+	bl AdjustQuantityAccordingToDPadInput
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2370,9 +2370,9 @@ _0813E048:
 	movs r0, 0
 	bl sub_813EA98
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	bl sub_813D684
 	adds r0, r5, 0
 	bl sub_813DF54
@@ -2395,9 +2395,9 @@ _0813E090:
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldrb r0, [r4]
 	movs r1, 0x1
 	bl sub_813D4B0
@@ -2504,7 +2504,7 @@ _0813E18A:
 	ldr r4, _0813E1F8 @ =gUnknown_203F37A
 	subs r2, r4, 0x2
 	adds r1, r4, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	bl sub_813D8AC
 	bl sub_813D6F4
 	bl sub_813D204
@@ -2519,7 +2519,7 @@ _0813E18A:
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldrb r0, [r5]
 	movs r1, 0x1
 	bl sub_813D4B0
@@ -2555,9 +2555,9 @@ sub_813E200: @ 813E200
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	cmp r0, 0
@@ -2577,7 +2577,7 @@ _0813E248:
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _0813E270 @ =sub_813D808
+	ldr r1, _0813E270 @ =BerryPouch_StartFadeToExitCallback
 	str r1, [r0]
 _0813E25E:
 	pop {r4}
@@ -2587,7 +2587,7 @@ _0813E25E:
 _0813E264: .4byte gUnknown_203F36C
 _0813E268: .4byte sub_8126EDC
 _0813E26C: .4byte gTasks
-_0813E270: .4byte sub_813D808
+_0813E270: .4byte BerryPouch_StartFadeToExitCallback
 	thumb_func_end sub_813E200
 
 	thumb_func_start sub_813E274
@@ -2598,7 +2598,7 @@ sub_813E274: @ 813E274
 	ldr r2, _0813E288 @ =gText_ThereIsNoPokemon
 	ldr r3, _0813E28C @ =sub_813E290
 	movs r1, 0x2
-	bl sub_813EB20
+	bl DisplayItemMessageInBerryPouch
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -2646,7 +2646,7 @@ sub_813E2B8: @ 813E2B8
 	ldr r4, _0813E318 @ =gUnknown_203F37A
 	subs r2, r4, 0x2
 	adds r1, r4, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	bl sub_813D8AC
 	bl sub_813D6F4
 	bl sub_813D204
@@ -2659,7 +2659,7 @@ sub_813E2B8: @ 813E2B8
 	lsrs r0, 24
 	strh r0, [r5]
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldrb r0, [r5]
 	movs r1, 0x1
 	bl sub_813D4B0
@@ -2693,9 +2693,9 @@ sub_813E320: @ 813E320
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r1, _0813E378 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -2745,7 +2745,7 @@ sub_813E37C: @ 813E37C
 	adds r0, r5, 0
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl sub_813EB20
+	bl DisplayItemMessageInBerryPouch
 	b _0813E3EA
 	.align 2, 0
 _0813E3C4: .4byte gTasks+0x8
@@ -2761,7 +2761,7 @@ _0813E3D8:
 	adds r0, r7, 0
 	subs r0, 0x8
 	adds r0, r6, r0
-	ldr r1, _0813E3F8 @ =sub_813D808
+	ldr r1, _0813E3F8 @ =BerryPouch_StartFadeToExitCallback
 	str r1, [r0]
 _0813E3EA:
 	pop {r4-r7}
@@ -2770,7 +2770,7 @@ _0813E3EA:
 	.align 2, 0
 _0813E3F0: .4byte gUnknown_203F36C
 _0813E3F4: .4byte c2_8123744
-_0813E3F8: .4byte sub_813D808
+_0813E3F8: .4byte BerryPouch_StartFadeToExitCallback
 	thumb_func_end sub_813E37C
 
 	thumb_func_start sub_813E3FC
@@ -2786,14 +2786,14 @@ sub_813E3FC: @ 813E3FC
 	adds r1, r0
 	lsls r1, 3
 	adds r1, r2
-	ldr r0, _0813E424 @ =sub_813D808
+	ldr r0, _0813E424 @ =BerryPouch_StartFadeToExitCallback
 	str r0, [r1]
 	bx lr
 	.align 2, 0
 _0813E418: .4byte gUnknown_203F36C
 _0813E41C: .4byte sub_808CE60
 _0813E420: .4byte gTasks
-_0813E424: .4byte sub_813D808
+_0813E424: .4byte BerryPouch_StartFadeToExitCallback
 	thumb_func_end sub_813E3FC
 
 	thumb_func_start sub_813E428
@@ -2827,7 +2827,7 @@ sub_813E428: @ 813E428
 	ldr r3, _0813E484 @ =sub_813E2B8
 	adds r0, r5, 0
 	adds r2, r4, 0
-	bl sub_813EB20
+	bl DisplayItemMessageInBerryPouch
 	b _0813E4CE
 	.align 2, 0
 _0813E470: .4byte gTasks+0x8
@@ -2867,7 +2867,7 @@ _0813E4A8:
 	ldr r3, _0813E4E0 @ =sub_813E5B8
 	adds r0, r7, 0
 	adds r2, r4, 0
-	bl sub_813EB20
+	bl DisplayItemMessageInBerryPouch
 _0813E4CE:
 	pop {r4-r7}
 	pop {r0}
@@ -2917,7 +2917,7 @@ sub_813E4E4: @ 813E4E4
 	ldr r3, _0813E550 @ =sub_813E554
 	adds r0, r5, 0
 	adds r2, r4, 0
-	bl sub_813EB20
+	bl DisplayItemMessageInBerryPouch
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -2964,7 +2964,7 @@ sub_813E568: @ 813E568
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldrb r0, [r4]
 	movs r1, 0x1
 	bl sub_813D4B0
@@ -3091,7 +3091,7 @@ sub_813E690: @ 813E690
 	adds r0, r5, 0
 	adds r0, 0x10
 	ldrh r1, [r5, 0x4]
-	bl sub_80BF848
+	bl AdjustQuantityAccordingToDPadInput
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3130,7 +3130,7 @@ _0813E6E4:
 	movs r0, 0
 	bl PutWindowTilemap
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	bl sub_813D684
 	adds r0, r4, 0
 	bl sub_813E4E4
@@ -3157,7 +3157,7 @@ _0813E718:
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	bl sub_813D684
 	ldrb r0, [r5]
 	movs r1, 0x1
@@ -3184,7 +3184,7 @@ sub_813E768: @ 813E768
 	movs r0, 0
 	bl PutWindowTilemap
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r0, _0813E7D8 @ =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, _0813E7DC @ =gStringVar1
@@ -3213,7 +3213,7 @@ sub_813E768: @ 813E768
 	adds r0, r5, 0
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl sub_813EB20
+	bl DisplayItemMessageInBerryPouch
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -3277,7 +3277,7 @@ sub_813E7F0: @ 813E7F0
 	ldr r4, _0813E8C8 @ =gUnknown_203F37A
 	subs r2, r4, 0x2
 	adds r1, r4, 0
-	bl DestroyListMenu
+	bl DestroyListMenuTask
 	bl sub_813D8AC
 	bl sub_813D6F4
 	bl sub_813D204
@@ -3367,15 +3367,15 @@ sub_813E910: @ 813E910
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xE0
-	bl sub_815001C
+	bl TextWindow_SetUserSelectedFrame
 	movs r0, 0
 	movs r1, 0x13
 	movs r2, 0xD0
-	bl sub_814FEAC
+	bl TextWindow_LoadResourcesStdFrame0
 	movs r0, 0
 	movs r1, 0xA
 	movs r2, 0xC0
-	bl sub_814FF2C
+	bl TextWindow_SetStdFrame0_WithPal
 	ldr r0, _0813E998 @ =gTMCaseMainWindowPalette
 	movs r1, 0xF0
 	movs r2, 0x20
@@ -3397,9 +3397,9 @@ _0813E946:
 	movs r0, 0x2
 	bl PutWindowTilemap
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r4, 0
 	ldr r3, _0813E99C @ =gUnknown_203F38C
 	movs r2, 0xFF
@@ -3465,7 +3465,7 @@ sub_813E9A0: @ 813E9A0
 	str r4, [sp, 0xC]
 	str r2, [sp, 0x10]
 	mov r2, r9
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized4
 	add sp, 0x14
 	pop {r3,r4}
 	mov r8, r3
@@ -3509,7 +3509,7 @@ _0813EA38:
 	movs r1, 0
 	movs r2, 0xA
 	movs r3, 0xC
-	bl SetWindowBorderStyle
+	bl DrawStdFrameWithCustomTileAndPalette
 	b _0813EA60
 	.align 2, 0
 _0813EA4C: .4byte gUnknown_203F38C
@@ -3519,10 +3519,10 @@ _0813EA54:
 	movs r1, 0
 	movs r2, 0x1
 	movs r3, 0xE
-	bl SetWindowBorderStyle
+	bl DrawStdFrameWithCustomTileAndPalette
 _0813EA60:
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	ldr r0, _0813EA74 @ =gUnknown_203F38C
 	adds r0, r4, r0
 	ldrb r0, [r0]
@@ -3545,7 +3545,7 @@ sub_813EA78: @ 813EA78
 	movs r1, 0
 	movs r2, 0x1
 	movs r3, 0xE
-	bl SetWindowBorderStyle
+	bl DrawStdFrameWithCustomTileAndPalette
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3562,13 +3562,13 @@ sub_813EA98: @ 813EA98
 	adds r4, r0
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_810F4D8
+	bl ClearStdWindowAndFrameToTransparent
 	ldrb r0, [r4]
 	bl ClearWindowTilemap
 	ldrb r0, [r4]
 	bl RemoveWindow
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0xFF
 	strb r0, [r4]
 	pop {r4}
@@ -3589,7 +3589,7 @@ sub_813EACC: @ 813EACC
 	cmp r0, 0xFF
 	beq _0813EB04
 	movs r1, 0
-	bl sub_810F260
+	bl ClearDialogWindowAndFrameToTransparent
 	ldrb r0, [r4]
 	bl ClearWindowTilemap
 	ldrb r0, [r4]
@@ -3597,9 +3597,9 @@ sub_813EACC: @ 813EACC
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	movs r0, 0xFF
 	strb r0, [r4]
 _0813EB04:
@@ -3622,8 +3622,8 @@ sub_813EB10: @ 813EB10
 _0813EB1C: .4byte gUnknown_203F38C
 	thumb_func_end sub_813EB10
 
-	thumb_func_start sub_813EB20
-sub_813EB20: @ 813EB20
+	thumb_func_start DisplayItemMessageInBerryPouch
+DisplayItemMessageInBerryPouch: @ 813EB20
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -3656,7 +3656,7 @@ _0813EB44:
 	movs r3, 0xD
 	bl DisplayMessageAndContinueTask
 	movs r0, 0x2
-	bl schedule_bg_copy_tilemap_to_vram
+	bl ScheduleBgCopyTilemapToVram
 	add sp, 0x10
 	pop {r3}
 	mov r8, r3
@@ -3666,7 +3666,7 @@ _0813EB44:
 	.align 2, 0
 _0813EB74: .4byte gUnknown_203F38C
 _0813EB78: .4byte gUnknown_8464400
-	thumb_func_end sub_813EB20
+	thumb_func_end DisplayItemMessageInBerryPouch
 
 	thumb_func_start sub_813EB7C
 sub_813EB7C: @ 813EB7C

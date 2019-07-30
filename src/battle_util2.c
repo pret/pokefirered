@@ -19,10 +19,7 @@ void AllocateBattleResources(void)
             *ptr++ = AllocZeroed(8);
         while (--i >= 0);
     }
-    // TODO: Figure out whether 0x200 is really the size of *gBattleStruct. 
-    // The following works in pokeem: 
-    // gBattleStruct = AllocZeroed(sizeof(*gBattleStruct));
-    gBattleStruct = AllocZeroed(0x200);
+    gBattleStruct = AllocZeroed(sizeof(*gBattleStruct));
     gBattleResources = AllocZeroed(sizeof(*gBattleResources));
     gBattleResources->secretBase = AllocZeroed(sizeof(*gBattleResources->secretBase));
     gBattleResources->flags = AllocZeroed(sizeof(*gBattleResources->flags));

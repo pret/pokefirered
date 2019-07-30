@@ -278,9 +278,9 @@ gUnknown_82500C4:: @ 82500C4
 gUnknown_82500CC:: @ 82500CC
 	.incbin "baserom.gba", 0x2500CC, 0x38
 
-sSoundMovesTable:: @ 8250104
-	.incbin "baserom.gba", 0x250104, 0x18
+	.section .rodata.825011C
 
+	.balign 4
 gUnknown_825011C:: @ 825011C
 	.incbin "baserom.gba", 0x25011C, 0x3E0
 

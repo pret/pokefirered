@@ -288,7 +288,7 @@ gSelectionBattleScripts: @ 2023D80
 gUnknown_2023D90: @ 2023D90
 	.space 0x8
 
-gLastUsedMove: @ 2023D98
+gLastMoves: @ 2023D98
 	.space 0x8
 
 gUnknown_2023DA0: @ 2023DA0

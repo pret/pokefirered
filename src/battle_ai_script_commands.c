@@ -34,7 +34,6 @@ enum
 
 extern const u8 *gAIScriptPtr;
 extern u8 *BattleAIs[];
-extern u16 gLastUsedMove[];
 
 static void BattleAICmd_if_random_less_than(void);
 static void BattleAICmd_if_random_greater_than(void);
@@ -466,7 +465,7 @@ void sub_80C7164(void)
     {
         if (BATTLE_HISTORY->usedMoves[gBattlerTarget >> 1][i] == 0)
         {
-            BATTLE_HISTORY->usedMoves[gBattlerTarget >> 1][i] = gLastUsedMove[gBattlerTarget];
+            BATTLE_HISTORY->usedMoves[gBattlerTarget >> 1][i] = gLastMoves[gBattlerTarget];
             return;
         }
     }
@@ -1035,9 +1034,9 @@ static void BattleAICmd_is_most_powerful_move(void)
 static void BattleAICmd_get_move(void)
 {
     if (gAIScriptPtr[1] == USER)
-        AI_THINKING_STRUCT->funcResult = gLastUsedMove[gBattlerAttacker];
+        AI_THINKING_STRUCT->funcResult = gLastMoves[gBattlerAttacker];
     else
-        AI_THINKING_STRUCT->funcResult = gLastUsedMove[gBattlerTarget];
+        AI_THINKING_STRUCT->funcResult = gLastMoves[gBattlerTarget];
 
     gAIScriptPtr += 2;
 }
@@ -1373,7 +1372,7 @@ static void BattleAICmd_get_weather(void)
         AI_THINKING_STRUCT->funcResult = WEATHER_TYPE_RAIN;
     if (gBattleWeather & WEATHER_SANDSTORM_ANY)
         AI_THINKING_STRUCT->funcResult = WEATHER_TYPE_SANDSTORM;
-    if (gBattleWeather & WEATHER_SUNNY_ANY)
+    if (gBattleWeather & WEATHER_SUN_ANY)
         AI_THINKING_STRUCT->funcResult = WEATHER_TYPE_SUNNY;
     if (gBattleWeather & WEATHER_HAIL)
         AI_THINKING_STRUCT->funcResult = WEATHER_TYPE_HAIL;
@@ -1931,7 +1930,7 @@ static void BattleAICmd_if_level_compare(void)
 
 static void BattleAICmd_if_taunted(void)
 {
-    if (gDisableStructs[gBattlerTarget].tauntTimer1 != 0)
+    if (gDisableStructs[gBattlerTarget].tauntTimer != 0)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -1939,7 +1938,7 @@ static void BattleAICmd_if_taunted(void)
 
 static void BattleAICmd_if_not_taunted(void)
 {
-    if (gDisableStructs[gBattlerTarget].tauntTimer1 == 0)
+    if (gDisableStructs[gBattlerTarget].tauntTimer == 0)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;

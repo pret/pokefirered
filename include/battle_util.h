@@ -8,7 +8,7 @@
 #define MOVE_LIMITATION_DISABLED                (1 << 2)
 #define MOVE_LIMITATION_TORMENTED               (1 << 3)
 #define MOVE_LIMITATION_TAUNT                   (1 << 4)
-#define MOVE_LIMITATION_IMPRISION               (1 << 5)
+#define MOVE_LIMITATION_IMPRISON                (1 << 5)
 
 #define ABILITYEFFECT_ON_SWITCHIN               0x0
 #define ABILITYEFFECT_ENDTURN                   0x1
@@ -37,6 +37,8 @@
 #define ABILITY_ON_FIELD2(abilityId)(AbilityBattleEffects(ABILITYEFFECT_FIELD_SPORT, 0, abilityId, 0, 0))
 
 #define ITEMEFFECT_ON_SWITCH_IN                 0x0
+#define ITEMEFFECT_MOVE_END                     0x3
+#define ITEMEFFECT_KINGSROCK_SHELLBELL          0x4
 
 #define WEATHER_HAS_EFFECT ((!AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, ABILITY_CLOUD_NINE, 0, 0) && !AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, ABILITY_AIR_LOCK, 0, 0)))
 #define WEATHER_HAS_EFFECT2 ((!AbilityBattleEffects(ABILITYEFFECT_FIELD_SPORT, 0, ABILITY_CLOUD_NINE, 0, 0) && !AbilityBattleEffects(ABILITYEFFECT_FIELD_SPORT, 0, ABILITY_AIR_LOCK, 0, 0)))
@@ -53,7 +55,7 @@
 u8 GetBattleBank(u8 caseId);
 void PressurePPLose(u8 bankDef, u8 bankAtk, u16 move);
 void PressurePPLoseOnUsingPerishSong(u8 bankAtk);
-void PressurePPLoseOnUsingImprision(u8 bankAtk);
+void PressurePPLoseOnUsingImprison(u8 bankAtk);
 void MarkAllBattlersForControllerExec(void); // unused
 void MarkBattlerForControllerExec(u8 bank);
 void sub_803F850(u8 arg0);
@@ -89,5 +91,6 @@ u8 IsMonDisobedient(void);
 void MarkBattlerForControllerExec(u8 battlerId);
 void sub_80174B8(u8 battlerId);
 void sub_8017298(u8 battlerId);
+bool8 HasNoMonsToSwitch(u8 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2);
 
 #endif // GUARD_BATTLE_UTIL_H

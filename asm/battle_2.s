@@ -4849,7 +4849,7 @@ sub_8012434: @ 8012434
 	mov r12, r1
 	ldr r0, _080126D4 @ =gUnknown_2023DA0
 	mov r9, r0
-	ldr r1, _080126D8 @ =gLastUsedMove
+	ldr r1, _080126D8 @ =gLastMoves
 	mov r8, r1
 	ldr r4, _080126DC @ =gDisableStructs
 	movs r5, 0
@@ -5174,7 +5174,7 @@ _080126AE:
 _080126CC: .4byte gUnknown_2023DB0
 _080126D0: .4byte gUnknown_2023DA8
 _080126D4: .4byte gUnknown_2023DA0
-_080126D8: .4byte gLastUsedMove
+_080126D8: .4byte gLastMoves
 _080126DC: .4byte gDisableStructs
 _080126E0: .4byte gUnknown_2023D90
 _080126E4: .4byte gUnknown_2023DB8
@@ -5579,7 +5579,7 @@ _08012A1A:
 	mov r1, r12
 	ldrb r0, [r1]
 	lsls r0, 1
-	ldr r3, _08012BAC @ =gLastUsedMove
+	ldr r3, _08012BAC @ =gLastMoves
 	adds r0, r3
 	movs r3, 0
 	strh r2, [r0]
@@ -5757,7 +5757,7 @@ _08012B9C: .4byte gMoveSelectionCursor
 _08012BA0: .4byte gCurrentMove
 _08012BA4: .4byte gBattleMoves
 _08012BA8: .4byte gMoveResultFlags
-_08012BAC: .4byte gLastUsedMove
+_08012BAC: .4byte gLastMoves
 _08012BB0: .4byte gUnknown_2023DA0
 _08012BB4: .4byte gUnknown_2023DA8
 _08012BB8: .4byte gUnknown_2023DB0
@@ -6047,7 +6047,7 @@ _08012CA8:
 	strb r1, [r0, 0x16]
 	ldrb r0, [r7]
 	lsls r0, 1
-	ldr r1, _08012F8C @ =gLastUsedMove
+	ldr r1, _08012F8C @ =gLastMoves
 	adds r0, r1
 	movs r3, 0
 	strh r2, [r0]
@@ -6249,7 +6249,7 @@ _08012F7C: .4byte gDisableStructs
 _08012F80: .4byte 0xfbffffff
 _08012F84: .4byte gBattleStruct
 _08012F88: .4byte 0xffff1fff
-_08012F8C: .4byte gLastUsedMove
+_08012F8C: .4byte gLastMoves
 _08012F90: .4byte gUnknown_2023DA0
 _08012F94: .4byte gUnknown_2023DA8
 _08012F98: .4byte gUnknown_2023DB0

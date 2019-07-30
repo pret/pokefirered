@@ -251,29 +251,29 @@ struct DisableStruct
     /*0x08*/ u8 protectUses;
     /*0x09*/ u8 stockpileCounter;
     /*0x0A*/ u8 substituteHP;
-    /*0x0B*/ u8 disableTimer1 : 4;
-    /*0x0B*/ u8 disableTimer2 : 4;
+    /*0x0B*/ u8 disableTimer : 4;
+    /*0x0B*/ u8 disableTimerStartValue : 4;
     /*0x0C*/ u8 encoredMovePos;
     /*0x0D*/ u8 unkD;
-    /*0x0E*/ u8 encoreTimer1 : 4;
-    /*0x0E*/ u8 encoreTimer2 : 4;
-    /*0x0F*/ u8 perishSongTimer1 : 4;
-    /*0x0F*/ u8 perishSongTimer2 : 4;
+    /*0x0E*/ u8 encoreTimer : 4;
+    /*0x0E*/ u8 encoreTimerStartValue : 4;
+    /*0x0F*/ u8 perishSongTimer : 4;
+    /*0x0F*/ u8 perishSongTimerStartValue : 4;
     /*0x10*/ u8 furyCutterCounter;
-    /*0x11*/ u8 rolloutCounter1 : 4;
-    /*0x11*/ u8 rolloutCounter2 : 4;
-    /*0x12*/ u8 chargeTimer1 : 4;
-    /*0x12*/ u8 chargeTimer2 : 4;
-    /*0x13*/ u8 tauntTimer1:4;
+    /*0x11*/ u8 rolloutTimer : 4;
+    /*0x11*/ u8 rolloutTimerStartValue : 4;
+    /*0x12*/ u8 chargeTimer : 4;
+    /*0x12*/ u8 chargeTimerStartValue : 4;
+    /*0x13*/ u8 tauntTimer:4;
     /*0x13*/ u8 tauntTimer2:4;
-    /*0x14*/ u8 bankPreventingEscape;
-    /*0x15*/ u8 bankWithSureHit;
+    /*0x14*/ u8 battlerPreventingEscape;
+    /*0x15*/ u8 battlerWithSureHit;
     /*0x16*/ u8 isFirstTurn;
     /*0x17*/ u8 unk17;
     /*0x18*/ u8 truantCounter : 1;
-    /*0x18*/ u8 truantUnknownBit : 1;
+    /*0x18*/ u8 truantSwitchInHack : 1;
     /*0x18*/ u8 unk18_a_2 : 2;
-    /*0x18*/ u8 unk18_b : 4;
+    /*0x18*/ u8 mimickedMoves : 4;
     /*0x19*/ u8 rechargeCounter;
     /*0x1A*/ u8 unk1A[2];
 };
@@ -285,7 +285,7 @@ struct ProtectStruct
     /* field_0 */
     u32 protected:1;
     u32 endured:1;
-    u32 onlyStruggle:1;
+    u32 noValidMoves:1;
     u32 helpingHand:1;
     u32 bounceMove:1;
     u32 stealMove:1;
@@ -296,7 +296,7 @@ struct ProtectStruct
     u32 targetNotAffected:1;
     u32 chargingTurn:1;
     u32 fleeFlag:2; // for RunAway and Smoke Ball
-    u32 usedImprisionedMove:1;
+    u32 usedImprisonedMove:1;
     u32 loveImmobility:1;
     u32 usedDisabledMove:1;
     /* field_2 */
@@ -313,8 +313,8 @@ struct ProtectStruct
 
     /* field_4 */ u32 physicalDmg;
     /* field_8 */ u32 specialDmg;
-    /* field_C */ u8 physicalBank;
-    /* field_D */ u8 specialBank;
+    /* field_C */ u8 physicalBattlerId;
+    /* field_D */ u8 specialBattlerId;
     /* field_E */ u16 fieldE;
 };
 
@@ -324,18 +324,18 @@ struct SpecialStatus
 {
     u8 statLowered : 1;             // 0x1
     u8 lightningRodRedirected : 1;  // 0x2
-    u8 restoredBankSprite: 1;       // 0x4
-    u8 intimidatedPoke : 1;         // 0x8
+    u8 restoredBattlerSprite: 1;    // 0x4
+    u8 intimidatedMon : 1;          // 0x8
     u8 traced : 1;                  // 0x10
-    u8 flag20 : 1;
+    u8 ppNotAffectedByPressure : 1;
     u8 flag40 : 1;
     u8 focusBanded : 1;
     u8 field1[3];
-    s32 moveturnLostHP;
-    s32 moveturnLostHP_physical;
-    s32 moveturnLostHP_special;
-    u8 moveturnPhysicalBank;
-    u8 moveturnSpecialBank;
+    s32 dmg;
+    s32 physicalDmg;
+    s32 specialDmg;
+    u8 physicalBattlerId;
+    u8 specialBattlerId;
     u8 field12;
     u8 field13;
 };
@@ -345,13 +345,13 @@ extern struct SpecialStatus gSpecialStatuses[BATTLE_BANKS_COUNT];
 struct SideTimer
 {
     /*0x00*/ u8 reflectTimer;
-    /*0x01*/ u8 reflectBank;
+    /*0x01*/ u8 reflectBattlerId;
     /*0x02*/ u8 lightscreenTimer;
-    /*0x03*/ u8 lightscreenBank;
+    /*0x03*/ u8 lightscreenBattlerId;
     /*0x04*/ u8 mistTimer;
-    /*0x05*/ u8 mistBank;
+    /*0x05*/ u8 mistBattlerId;
     /*0x06*/ u8 safeguardTimer;
-    /*0x07*/ u8 safeguardBank;
+    /*0x07*/ u8 safeguardBattlerId;
     /*0x08*/ u8 followmeTimer;
     /*0x09*/ u8 followmeTarget;
     /*0x0A*/ u8 spikesAmount;
@@ -362,14 +362,14 @@ extern struct SideTimer gSideTimers[];
 
 struct WishFutureKnock
 {
-    u8 futureSightCounter[BATTLE_BANKS_COUNT];
-    u8 futureSightAttacker[BATTLE_BANKS_COUNT];
-    s32 futureSightDmg[BATTLE_BANKS_COUNT];
-    u16 futureSightMove[BATTLE_BANKS_COUNT];
-    u8 wishCounter[BATTLE_BANKS_COUNT];
-    u8 wishUserID[BATTLE_BANKS_COUNT];
+    u8 futureSightCounter[MAX_BATTLERS_COUNT];
+    u8 futureSightAttacker[MAX_BATTLERS_COUNT];
+    s32 futureSightDmg[MAX_BATTLERS_COUNT];
+    u16 futureSightMove[MAX_BATTLERS_COUNT];
+    u8 wishCounter[MAX_BATTLERS_COUNT];
+    u8 wishUserID[MAX_BATTLERS_COUNT];
     u8 weatherDuration;
-    u8 knockedOffPokes[2];
+    u8 knockedOffMons[2];
 };
 
 extern struct WishFutureKnock gWishFutureKnock;
@@ -413,6 +413,12 @@ extern u8 gAbsentBattlerFlags;
 #define AI_SCRIPT_FIRST_BATTLE (1 << 31)
 
 extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
+
+struct UsedMoves
+{
+    u16 moves[MAX_BATTLERS_COUNT];
+    u16 unknown[MAX_BATTLERS_COUNT];
+};
 
 struct BattleHistory
 {
@@ -468,18 +474,18 @@ struct BattleResults
     u8 playerFaintCounter;    // 0x0
     u8 opponentFaintCounter;  // 0x1
     u8 playerSwitchesCounter; // 0x2
-    u8 unk3;                  // 0x3
-    u8 unk4;                  // 0x4
-    u8 unk5_0:1;              // 0x5
+    u8 numHealingItemsUsed;   // 0x3
+    u8 numRevivesUsed;        // 0x4
+    u8 playerMonWasDamaged:1; // 0x5
     u8 usedMasterBall:1;      // 0x5
     u8 caughtMonBall:4;       // 0x5
-    u8 unk5_6:1;              // 0x5
+    u8 shinyWildMon:1;        // 0x5
     u8 unk5_7:1;              // 0x5
     u16 playerMon1Species;    // 0x6
     u8 playerMon1Name[11];    // 0x8
     u8 battleTurnCounter;     // 0x13
     u8 playerMon2Name[11];    // 0x14
-    u8 field_1F;              // 0x1F
+    u8 pokeblockThrows;       // 0x1F
     u16 lastOpponentSpecies;  // 0x20
     u16 lastUsedMovePlayer;   // 0x22
     u16 lastUsedMoveOpponent; // 0x24
@@ -495,39 +501,31 @@ extern struct BattleResults gBattleResults;
 struct BattleStruct
 {
     u8 turnEffectsTracker;
-    u8 turnEffectsBank;
+    u8 turnEffectsBattlerId;
     u8 filler2;
-    u8 turncountersTracker;
-    u8 wrappedMove[8]; // ask gamefreak why they declared it that way
-    u8 moveTarget[4];
+    u8 turnCountersTracker;
+    u8 wrappedMove[MAX_BATTLERS_COUNT * 2]; // Leftover from Ruby's ewram access.
+    u8 moveTarget[MAX_BATTLERS_COUNT];
     u8 expGetterId;
     u8 field_11;
     u8 wildVictorySong;
     u8 dynamicMoveType;
     u8 wrappedBy[4];
-    u16 assistPossibleMoves[5 * 4]; // 5 mons, each of them knowing 4 moves
-    u8 field_40;
-    u8 field_41;
-    u8 field_42;
-    u8 field_43;
-    u8 field_44;
-    u8 field_45;
-    u8 field_46;
-    u8 field_47;
-    u8 focusPunchBank;
+    u16 assistPossibleMoves[PARTY_SIZE * MAX_MON_MOVES]; // 6 mons, each of them knowing 4 moves
+    u8 focusPunchBattlerId;
     u8 battlerPreventingSwitchout;
     u8 moneyMultiplier;
     u8 savedTurnActionNumber;
     u8 switchInAbilitiesCounter;
     u8 faintedActionsState;
-    u8 faintedActionsBank;
+    u8 faintedActionsBattlerId;
     u8 field_4F;
     u16 expValue;
     u8 field_52;
     u8 sentInPokes;
-    bool8 selectionScriptFinished[BATTLE_BANKS_COUNT];
+    bool8 selectionScriptFinished[MAX_BATTLERS_COUNT];
     u8 field_58[4];
-    u8 monToSwitchIntoId[BATTLE_BANKS_COUNT];
+    u8 monToSwitchIntoId[MAX_BATTLERS_COUNT];
     u8 field_60[4][3];
     u8 runTries;
     u8 caughtMonNick[11];
@@ -536,11 +534,11 @@ struct BattleStruct
     u8 safariPkblThrowCounter;
     u8 safariEscapeFactor;
     u8 safariCatchFactor;
-    u8 field_7D;
-    u8 field_7E;
+    u8 linkBattleVsSpriteId_V;
+    u8 linkBattleVsSpriteId_S;
     u8 formToChangeInto;
-    u8 chosenMovePositions[BATTLE_BANKS_COUNT];
-    u8 stateIdAfterSelScript[BATTLE_BANKS_COUNT];
+    u8 chosenMovePositions[MAX_BATTLERS_COUNT];
+    u8 stateIdAfterSelScript[MAX_BATTLERS_COUNT];
     u8 field_88;
     u8 field_89;
     u8 field_8A;
@@ -557,47 +555,41 @@ struct BattleStruct
     u8 wallyMovesState;
     u8 wallyWaitFrames;
     u8 wallyMoveFrames;
-    u8 mirrorMoves[8]; // ask gamefreak why they declared it that way
-    u8 field_A0;
-    u8 field_A1;
-    u8 field_A2;
-    u8 field_A3;
-    u8 field_A4;
-    u8 field_A5;
-    u8 field_A6;
-    u8 field_A7;
+    u8 lastTakenMove[MAX_BATTLERS_COUNT * 2 * 2]; // ask gamefreak why they declared it that way
     u16 hpOnSwitchout[2];
     u8 abilityPreventingSwitchout;
     u8 hpScale;
     u8 synchronizeMoveEffect;
     u8 field_AF;
-    u32 savedBattleTypeFlags; // TODO: Is it correct to place it here?  
+    u32 savedBattleTypeFlags; // TODO: Is it correct to place it here? Or simply not used?
     u8 field_B4;
     u8 field_B5;
     u8 field_B6;
     u8 field_B7;
     // void (*savedCallback)(void);
-    u16 usedHeldItems[BATTLE_BANKS_COUNT];
+    u16 usedHeldItems[MAX_BATTLERS_COUNT];
     u8 chosenItem[4]; // why is this an u8?
     u8 AI_itemType[2];
     u8 AI_itemFlags[2];
-    u16 choicedMove[BATTLE_BANKS_COUNT];
-    u16 changedItems[BATTLE_BANKS_COUNT];
-    u8 intimidateBank;
+    u16 choicedMove[MAX_BATTLERS_COUNT];
+    u16 changedItems[MAX_BATTLERS_COUNT];
+    u8 intimidateBattler;
     u8 switchInItemsCounter;
-    u8 field_DA;
+    u8 arenaTurnCounter; // not used in FR? 
     u8 turnSideTracker;
     u8 fillerDC[0xDF-0xDC];
-    u8 field_DF;
-    u8 mirrorMoveArrays[32];
-    u16 castformPalette[BATTLE_BANKS_COUNT][16];
+    u8 givenExpMons;
+    u8 lastTakenMoveFrom[MAX_BATTLERS_COUNT * MAX_BATTLERS_COUNT * 2];
+    u16 castformPalette[MAX_BATTLERS_COUNT][16];
+/*
+    // EM fields
     u8 field_180;
     u8 field_181;
     u8 field_182;
     u8 field_183;
     struct BattleEnigmaBerry battleEnigmaBerry;
     u8 wishPerishSongState;
-    u8 wishPerishSongBank;
+    u8 wishPerishSongBattlerId;
     bool8 overworldWeatherDone;
     u8 atkCancellerTracker;
     u8 field_1A4[96];
@@ -608,7 +600,13 @@ struct BattleStruct
     u8 field_2A0;
     u8 field_2A1;
     u8 field_2A2;
-};
+*/
+    u8 wishPerishSongState;
+    u8 wishPerishSongBattlerId;
+    u8 field_182; // overworldWeatherDone?
+    u8 field_183; // atkCancellerTracker?
+    u8 field_184[124]; // only for padding
+}; // size == 0x200 bytes
 
 extern struct BattleStruct *gBattleStruct;
 
@@ -795,8 +793,6 @@ struct BattleScripting
     u8 reshowMainState;
     u8 reshowHelperState;
     u8 field_23;
-    u8 windowsType; // TODO: what does this field do in firered? 
-    u8 multiplayerId;
 };
 
 // functions
@@ -986,5 +982,15 @@ extern u8 gBattlerAttacker;
 extern u8 gEffectBattler;
 extern u8 gUnknown_2023D72;
 extern struct BattleScripting gBattleScripting;
+extern u8 gBattlerFainted;
+extern u32 gStatuses3[MAX_BATTLERS_COUNT];
+extern u8 gSentPokesToOpponent[2];
+extern const u8 *gBattlescriptCurrInstr;
+extern const u8 *gSelectionBattleScripts[MAX_BATTLERS_COUNT];
+extern u16 gLastMoves[MAX_BATTLERS_COUNT];
+extern u8 gBattlerByTurnOrder[MAX_BATTLERS_COUNT];
+extern u8 gBattleCommunication[BATTLE_COMMUNICATION_ENTRIES_COUNT];
+extern u16 gSideStatuses[2];
+extern u32 gHitMarker;
 
 #endif // GUARD_BATTLE_H

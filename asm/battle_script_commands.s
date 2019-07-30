@@ -12270,7 +12270,7 @@ _080238E8:
 	ands r0, r1
 	cmp r0, 0
 	beq _0802394C
-	ldr r0, _08023940 @ =gLastUsedMove
+	ldr r0, _08023940 @ =gLastMoves
 	lsls r1, r4, 1
 	adds r1, r0
 	ldr r0, _0802392C @ =gChosenMove
@@ -12297,11 +12297,11 @@ _08023930: .4byte gAbsentBattlerFlags
 _08023934: .4byte gBitTable
 _08023938: .4byte gBattleStruct
 _0802393C: .4byte gBattleMoves
-_08023940: .4byte gLastUsedMove
+_08023940: .4byte gLastMoves
 _08023944: .4byte gUnknown_2023DB0
 _08023948: .4byte gCurrentMove
 _0802394C:
-	ldr r1, _080239B4 @ =gLastUsedMove
+	ldr r1, _080239B4 @ =gLastMoves
 	lsls r0, r4, 1
 	adds r0, r1
 	ldr r1, _080239B8 @ =0x0000ffff
@@ -12355,7 +12355,7 @@ _08023984:
 	strh r3, [r0]
 	b _08023A2C
 	.align 2, 0
-_080239B4: .4byte gLastUsedMove
+_080239B4: .4byte gLastMoves
 _080239B8: .4byte 0x0000ffff
 _080239BC: .4byte gUnknown_2023DB0
 _080239C0: .4byte gBattlerTarget
@@ -23783,7 +23783,7 @@ atk9D_mimicattackcopy: @ 8029578
 	ldr r1, _080295F4 @ =0x0000ffff
 	adds r7, r1, 0
 	strh r7, [r0]
-	ldr r5, _080295F8 @ =gLastUsedMove
+	ldr r5, _080295F8 @ =gLastMoves
 	ldr r6, _080295FC @ =gBattlerTarget
 	ldrb r0, [r6]
 	lsls r0, 1
@@ -23836,7 +23836,7 @@ _080295D2:
 	.align 2, 0
 _080295F0: .4byte gChosenMove
 _080295F4: .4byte 0x0000ffff
-_080295F8: .4byte gLastUsedMove
+_080295F8: .4byte gLastMoves
 _080295FC: .4byte gBattlerTarget
 _08029600: .4byte gBattleMons
 _08029604: .4byte gBattlerAttacker
@@ -23886,7 +23886,7 @@ _08029646:
 	mov r0, r12
 	adds r0, 0xC
 	adds r1, r0
-	ldr r2, _080296A4 @ =gLastUsedMove
+	ldr r2, _080296A4 @ =gLastMoves
 	ldr r3, _080296A8 @ =gBattlerTarget
 	ldrb r0, [r3]
 	lsls r0, 1
@@ -23918,7 +23918,7 @@ _08029646:
 	.align 2, 0
 _0802969C: .4byte gBattlescriptCurrInstr
 _080296A0: .4byte gUnknown_2023D48
-_080296A4: .4byte gLastUsedMove
+_080296A4: .4byte gLastMoves
 _080296A8: .4byte gBattlerTarget
 _080296AC: .4byte gBattleMoves
 _080296B0:
@@ -24402,7 +24402,7 @@ atkA3_disablelastusedattack: @ 8029A70
 	adds r7, r2, 0
 	adds r7, 0xC
 	adds r0, r7
-	ldr r5, _08029B78 @ =gLastUsedMove
+	ldr r5, _08029B78 @ =gLastMoves
 	lsls r1, 1
 	adds r1, r5
 	ldrh r0, [r0]
@@ -24521,7 +24521,7 @@ _08029AC4:
 	.align 2, 0
 _08029B70: .4byte gBattleMons
 _08029B74: .4byte gBattlerTarget
-_08029B78: .4byte gLastUsedMove
+_08029B78: .4byte gLastMoves
 _08029B7C: .4byte gDisableStructs
 _08029B80: .4byte gBattleTextBuff1
 _08029B84: .4byte gBattlescriptCurrInstr
@@ -24566,7 +24566,7 @@ atkA4_trysetencore: @ 8029BB4
 	adds r6, r3, 0
 	adds r6, 0xC
 	adds r0, r6
-	ldr r2, _08029CB0 @ =gLastUsedMove
+	ldr r2, _08029CB0 @ =gLastMoves
 	lsls r1, 1
 	adds r1, r2
 	ldrh r0, [r0]
@@ -24680,7 +24680,7 @@ _08029C24:
 	.align 2, 0
 _08029CA8: .4byte gBattleMons
 _08029CAC: .4byte gBattlerTarget
-_08029CB0: .4byte gLastUsedMove
+_08029CB0: .4byte gLastMoves
 _08029CB4: .4byte gDisableStructs
 _08029CB8: .4byte gBattlescriptCurrInstr
 _08029CBC:
@@ -25745,7 +25745,7 @@ atkAD_tryspiteppreduce: @ 802A4D8
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x4
-	ldr r4, _0802A658 @ =gLastUsedMove
+	ldr r4, _0802A658 @ =gLastMoves
 	ldr r1, _0802A65C @ =gBattlerTarget
 	ldrb r3, [r1]
 	lsls r0, r3, 1
@@ -25832,7 +25832,7 @@ _0802A57C:
 	strb r5, [r1]
 	movs r0, 0x2
 	strb r0, [r1, 0x1]
-	ldr r2, _0802A658 @ =gLastUsedMove
+	ldr r2, _0802A658 @ =gLastMoves
 	mov r3, r8
 	ldrb r0, [r3]
 	lsls r0, 1
@@ -25934,7 +25934,7 @@ _0802A630:
 	bl CancelMultiTurnMoves
 	b _0802A69A
 	.align 2, 0
-_0802A658: .4byte gLastUsedMove
+_0802A658: .4byte gLastMoves
 _0802A65C: .4byte gBattlerTarget
 _0802A660: .4byte 0x0000ffff
 _0802A664: .4byte gBattleMons
@@ -30155,7 +30155,7 @@ _0802C7BC:
 	lsrs r0, 24
 	mov r8, r0
 	ldrb r0, [r4]
-	bl PressurePPLoseOnUsingImprision
+	bl PressurePPLoseOnUsingImprison
 	movs r6, 0
 	b _0802C82E
 _0802C7D2:

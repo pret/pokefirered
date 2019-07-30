@@ -183,7 +183,7 @@ gUnknown_81D8E0B:: @ 81D8E0B
 BattleScript_MonTookFutureAttack:: @ 81D8E12
 	.incbin "baserom.gba", 0x1D8E12, 0x8E
 
-gUnknown_81D8EA0:: @ 81D8EA0
+BattleScript_NoMovesLeft:: @ 81D8EA0
 	.incbin "baserom.gba", 0x1D8EA0, 0x4
 
 BattleScript_SelectingMoveWithNoPP:: @ 81D8EA4

@@ -191,7 +191,7 @@ SECTIONS {
         asm/evolution_scene.o(.text);
         src/coins.o(.text);
         src/fldeff_strength.o(.text);
-        asm/battle_transition.o(.text);
+        src/battle_transition.o(.text);
         asm/battle_controller_link_partner.o(.text);
         asm/battle_message.o(.text);
         src/math_util.o(.text);
@@ -418,6 +418,8 @@ SECTIONS {
         data/data_83F5738.o(.rodata);
         src/battle_records.o(.rodata);
         data/data_83F5738.o(.rodata.83F6C90);
+        src/battle_transition.o(.rodata);
+        data/data_83F5738.o(.rodata.83FB134);
         src/save.o(.rodata);
         data/data_83FECCC.o(.rodata);
 		src/intro.o(.rodata);

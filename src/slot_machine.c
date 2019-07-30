@@ -74,6 +74,12 @@ struct SlotMachineSetupTaskData
     u8 field_205C[0x800];
 }; // size: 285C
 
+struct UnkStruct_8466C0C
+{
+    const u16 * tiles;
+    u32 count;
+};
+
 EWRAM_DATA struct SlotMachineState * sSlotMachineState = NULL;
 EWRAM_DATA struct SlotMachineGfxManager * sSlotMachineGfxManager = NULL;
 
@@ -129,6 +135,7 @@ bool8 sub_8141764(u8 *, struct SlotMachineSetupTaskData *);
 void sub_81417E4(const u8 * str);
 void sub_8141828(void);
 void sub_8141834(u16 * bgTilemapBuffer);
+void sub_81418C4(u16 * bgTilemapBuffer, u16 a0, u16 a1);
 void sub_814191C(u8 taskId);
 void sub_8141AB0(void);
 void sub_8141AD8(u8 a0);
@@ -583,6 +590,34 @@ const struct WindowTemplate gUnknown_8466B20[] = {
         .baseBlock = 0x013
     },
     DUMMY_WIN_TEMPLATE
+};
+
+const u16 gUnknown_8466B38[] = {
+    0x00a4, 0x00a5, 0x00a6, 0x00c4, 0x00c5, 0x00c6, 0x00c7, 0x00e7, 0x012c, 0x014c, 0x0191, 0x01b1, 0x01f6, 0x0216, 0x0217, 0x0218, 0x0219, 0x0237, 0x0238, 0x0239
+};
+
+const u16 gUnknown_8466B60[] = {
+    0x00e4, 0x00e5, 0x00e6, 0x00f7, 0x00f8, 0x00f9, 0x0104, 0x0105, 0x0106, 0x0107, 0x010c, 0x0111, 0x0116, 0x0117, 0x0118, 0x0119, 0x0124, 0x0125, 0x0126, 0x0137, 0x0138, 0x0139
+};
+
+const u16 gUnknown_8466B8C[] = {
+    0x0144, 0x0145, 0x0146, 0x0157, 0x0158, 0x0159, 0x0164, 0x0165, 0x0166, 0x0167, 0x016c, 0x0171, 0x0176, 0x0177, 0x0178, 0x0179, 0x0184, 0x0185, 0x0186, 0x0197, 0x0198, 0x0199
+};
+
+const u16 gUnknown_8466BB8[] = {
+    0x01a4, 0x01a5, 0x01a6, 0x01b7, 0x01b8, 0x01b9, 0x01c4, 0x01c5, 0x01c6, 0x01c7, 0x01cc, 0x01d1, 0x01d6, 0x01d7, 0x01d8, 0x01d9, 0x01e4, 0x01e5, 0x01e6, 0x01f7, 0x01f8, 0x01f9
+};
+
+const u16 gUnknown_8466BE4[] = {
+    0x0204, 0x0205, 0x0206, 0x0224, 0x0225, 0x0226, 0x01e7, 0x0207, 0x018c, 0x01ac, 0x0131, 0x0151, 0x00d6, 0x00f6, 0x00b7, 0x00b8, 0x00b9, 0x00d7, 0x00d8, 0x00d9
+};
+
+const struct UnkStruct_8466C0C gUnknown_8466C0C[] = {
+    { gUnknown_8466B38, NELEMS(gUnknown_8466B38) },
+    { gUnknown_8466B60, NELEMS(gUnknown_8466B60) },
+    { gUnknown_8466B8C, NELEMS(gUnknown_8466B8C) },
+    { gUnknown_8466BB8, NELEMS(gUnknown_8466BB8) },
+    { gUnknown_8466BE4, NELEMS(gUnknown_8466BE4) }
 };
 
 void PlaySlotMachine(u16 machineIdx, MainCallback savedCallback)
@@ -2636,4 +2671,54 @@ bool8 sub_8141764(u8 * state, struct SlotMachineSetupTaskData * ptr)
         return FALSE;
     }
     return TRUE;
+}
+
+void sub_81417E4(const u8 * str)
+{
+    FillWindowPixelBuffer(0, 0x11);
+    PutWindowTilemap(0);
+    DrawTextBorderOuter(0, 0x001, 15);
+    sub_812E62C(0, 2, str, 1, 2, -1, NULL, 1, 2);
+}
+
+void sub_8141828(void)
+{
+    rbox_fill_rectangle(0);
+}
+
+void sub_8141834(u16 * bgTilemapBuffer)
+{
+    switch (sub_8140BEC())
+    {
+    case 0:
+        sub_81418C4(bgTilemapBuffer, 0, 4);
+        sub_81418C4(bgTilemapBuffer, 1, 4);
+        sub_81418C4(bgTilemapBuffer, 2, 4);
+        sub_81418C4(bgTilemapBuffer, 3, 4);
+        sub_81418C4(bgTilemapBuffer, 4, 4);
+        break;
+    case 3:
+        sub_81418C4(bgTilemapBuffer, 0, 5);
+        sub_81418C4(bgTilemapBuffer, 4, 5);
+    case 2:
+        sub_81418C4(bgTilemapBuffer, 1, 5);
+        sub_81418C4(bgTilemapBuffer, 3, 5);
+    case 1:
+        sub_81418C4(bgTilemapBuffer, 2, 5);
+        break;
+    }
+}
+
+void sub_81418C4(u16 * bgTilemapBuffer, u16 whichLine, u16 paletteNum)
+{
+    s32 i;
+    const u16 * tileIdxs = gUnknown_8466C0C[whichLine].tiles;
+    u16 palMask = (paletteNum & 0xF) << 12;
+
+    for (i = 0; i < gUnknown_8466C0C[whichLine].count; i++)
+    {
+        bgTilemapBuffer[*tileIdxs] &= 0x0FFF;
+        bgTilemapBuffer[*tileIdxs] |= palMask;
+        tileIdxs++;
+    }
 }

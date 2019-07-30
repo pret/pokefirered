@@ -31,7 +31,13 @@ gUnknown_83A0010:: @ 83A0010
 	.incbin "baserom.gba", 0x3A0010, 0x3688
 
 gUnknown_83A3698:: @ 83A3698
-	.incbin "baserom.gba", 0x3A3698, 0x1AC0
+	.incbin "baserom.gba", 0x3A3698, 0x80
+
+gEventObjectBaseOam_32x32:: @ 83A3718
+	.incbin "baserom.gba", 0x3A3718, 0x8
+
+gUnknown_83A3720:: @ 83A3720
+	.incbin "baserom.gba", 0x3A3720, 0x1a38
 
 gUnknown_83A5158:: @ 83A5158
 	.incbin "baserom.gba", 0x3A5158, 0xB0

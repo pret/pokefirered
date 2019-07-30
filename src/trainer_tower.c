@@ -1111,7 +1111,7 @@ void sub_815E114(void)
 
 void sub_815E124(u8 taskId)
 {
-    if (sub_80D08F8() == TRUE)
+    if (BT_IsDone() == TRUE)
     {
         gMain.savedCallback = sub_815E114;
         CleanupOverworldWindowsAndTilemaps();
@@ -1129,7 +1129,7 @@ void sub_815E160(void)
     sub_815E9FC();
     CreateTask(sub_815E124, 1);
     PlayMapChosenOrBattleBGM(0);
-    sub_80D08B8(sub_8080060());
+    BT_StartOnField(sub_8080060());
 }
 
 void sub_815E1C0(void)

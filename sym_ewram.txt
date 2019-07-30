@@ -1055,10 +1055,7 @@ gUnknown_2039A24: @ 2039A24
 	.space 0x4
 
 	.include "src/coins.o"
-
-	.align 2
-gUnknown_2039A2C: @ 2039A2C
-	.space 0x4
+	.include "src/battle_transition.o"
 
 gUnknown_2039A30: @ 2039A30
 	.space 0x4

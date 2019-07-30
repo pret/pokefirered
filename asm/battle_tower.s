@@ -2025,7 +2025,7 @@ sub_80E68C4: @ 80E68C4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_80D08F8
+	bl BT_IsDone
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2114,7 +2114,7 @@ _080E6970:
 	bl sub_8080060
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80D08B8
+	bl BT_StartOnField
 	b _080E69E6
 	.align 2, 0
 _080E698C: .4byte gSaveBlock1Ptr
@@ -2154,7 +2154,7 @@ _080E69A0:
 	bl sub_8080060
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80D08B8
+	bl BT_StartOnField
 _080E69E6:
 	add sp, 0x4
 	pop {r4-r6}

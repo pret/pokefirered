@@ -106,6 +106,7 @@ extern bool8 (* gFieldCallback2)(void);
 void SetLastHealLocationWarp(u8 healLocaionId);
 void sub_8055864(u8 mapGroup, u8 mapNum);
 void CB2_Overworld(void);
+void CB2_OverworldBasic(void);
 void CB2_NewGame(void);
 bool8 Overworld_MapTypeAllowsTeleportAndFly(u8 mapType);
 void Overworld_ResetStateAfterTeleport(void);

@@ -30,13 +30,13 @@ _0807F644:
 	bne _0807F686
 	bl sub_812B478
 	ldrb r0, [r4, 0x2]
-	bl sub_80D08B8
+	bl BT_StartOnField
 	ldrh r0, [r4]
 	adds r0, 0x1
 	strh r0, [r4]
 	b _0807F686
 _0807F65E:
-	bl sub_80D08F8
+	bl BT_IsDone
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

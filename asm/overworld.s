@@ -3398,13 +3398,13 @@ sub_8056578: @ 8056578
 	bx r0
 	thumb_func_end sub_8056578
 
-	thumb_func_start sub_80565A8
-sub_80565A8: @ 80565A8
+	thumb_func_start CB2_OverworldBasic
+CB2_OverworldBasic: @ 80565A8
 	push {lr}
 	bl sub_8056578
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80565A8
+	thumb_func_end CB2_OverworldBasic
 
 	thumb_func_start sub_80565B4
 sub_80565B4: @ 80565B4

@@ -63,11 +63,14 @@ void sub_80796CC(void);
 void sub_80796E8(void);
 void sub_8079708(void);
 void sub_8079840(u8 taskId);
+void sub_807999C(u8 taskId, u8 field, u16 seed);
+u16 sub_80799B4(u8 taskId, u8 field);
 u32 sub_80799F0(void);
-void sub_8079A10(s16 a0);
+void sub_8079A10(bool32 a0);
 u8 sub_8079A40(void);
 void sub_8079A88(u8 spriteId);
 bool32 sub_8079AA8(u8 spriteId);
+void sub_8079AD8(struct Sprite * sprite);
 
 // bg3
 const u8 gUnknown_83BF58C[] = INCBIN_U8("data/graphics/title_screen/unk_83BF58C.4bpp.lz");
@@ -846,6 +849,7 @@ void sub_8079730(struct Sprite * sprite)
         DestroySprite(sprite);
         return;
     }
+#if defined(FIRERED)
     if (sprite->animEnded)
     {
         DestroySprite(sprite);
@@ -855,5 +859,198 @@ void sub_8079730(struct Sprite * sprite)
     {
         StartSpriteAnim(sprite, 0);
         sprite->invisible = FALSE;
+    }
+#elif defined(LEAFGREEN)
+    if (!data[5])
+    {
+        s32 r2;
+        s32 r1;
+        data[6]++;
+        r2 = data[1] * data[6];
+        r1 = data[6] * data[3];
+        r2 = (r2 * r2) >> 4;
+        r1 = (r1 * r1) >> 4;
+        if (r2 + r1 >= 0x510)
+            data[5] = TRUE;
+    }
+#endif
+}
+
+bool32 sub_80797AC(s32 x, s32 y, s32 xspeed, s32 yspeed, bool32 templateId)
+{
+    u8 spriteId;
+    if (templateId)
+    {
+        spriteId = CreateSprite(&gUnknown_83BFB04, x, y, 0);
+    }
+    else
+    {
+        spriteId = CreateSprite(&gUnknown_83BFB1C, x, y, 0);
+    }
+    if (spriteId != MAX_SPRITES)
+    {
+        gSprites[spriteId].data[0] = x << 4;
+        gSprites[spriteId].data[1] = xspeed;
+        gSprites[spriteId].data[2] = y << 4;
+        gSprites[spriteId].data[3] = yspeed;
+        gSprites[spriteId].data[4] = 0;
+        gSprites[spriteId].data[5] = (xspeed * yspeed) % 16;
+        gSprites[spriteId].data[6] = templateId;
+        gSprites[spriteId].callback = sub_8079730;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_8079840(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    s32 x, y, xspeed, yspeed, templateId;
+    s32 i;
+
+    switch (data[0])
+    {
+    case 0:
+        sub_807999C(taskId, 3, 0x7878);
+        data[0]++;
+        break;
+    case 1:
+        data[1]++;
+        if (data[1] >= data[2])
+        {
+            data[1] = 0;
+            sub_80799B4(taskId, 3);
+            data[2] = 18;
+            xspeed = (sub_80799B4(taskId, 3) % 4) - 2;
+            yspeed = (sub_80799B4(taskId, 3) % 8) - 16;
+            y = (sub_80799B4(taskId, 3) % 3) + 0x74;
+            x = sub_80799B4(taskId, 3) % 240;
+            sub_80797AC(
+                x,
+                y,
+                xspeed,
+                yspeed,
+                (sub_80799B4(taskId, 3) % 16) < 8 ? 0 : 1
+            );
+            for (i = 0; i < 15; i++)
+            {
+                sub_80797AC(
+                    data[5] + gUnknown_83BFBD4[i],
+                    y,
+                    xspeed,
+                    yspeed,
+                    1
+                );
+                xspeed = (sub_80799B4(taskId, 3) % 4) - 2;
+                yspeed = (sub_80799B4(taskId, 3) % 8) - 16;
+            }
+            data[5]++;
+            if (data[5] > 3)
+                data[5] = 0;
+        }
+    }
+}
+
+void sub_807999C(u8 taskId, u8 field, u16 seed)
+{
+    SetWordTaskArg(taskId, field, seed);
+}
+
+u16 sub_80799B4(u8 taskId, u8 field)
+{
+    u32 rngval;
+
+    rngval = GetWordTaskArg(taskId, field);
+    rngval = rngval * 1103515245 + 24691;
+    SetWordTaskArg(taskId, field, rngval);
+    return rngval >> 16;
+}
+
+u32 sub_80799F0(void)
+{
+    CreateSprite(&gUnknown_83BFB3C, 0x18, 0x90, 0);
+    return IndexOfSpritePaletteTag(2);
+}
+
+void sub_8079A10(bool32 mode)
+{
+    u32 palIdx;
+
+    if (mode)
+    {
+        palIdx = IndexOfSpritePaletteTag(2);
+        LoadPalette(gUnknown_8EAE488, palIdx * 16 + 0x100, 0x20);
+    }
+    else
+        sub_80799F0();
+}
+
+u8 sub_8079A40(void)
+{
+    u8 spriteId = CreateSprite(&gUnknown_83BFB5C, -0x20, 0x1B, 1);
+    if (spriteId != MAX_SPRITES)
+    {
+        gSprites[spriteId].callback = sub_8079AD8;
+        gSprites[spriteId].data[1] = 540;
+    }
+    return spriteId;
+}
+
+void sub_8079A88(u8 spriteId)
+{
+    if (spriteId != MAX_SPRITES)
+        gSprites[spriteId].data[2] = TRUE;
+}
+
+bool32 sub_8079AA8(u8 spriteId)
+{
+    if (spriteId != MAX_SPRITES)
+        return gSprites[spriteId].data[0] ^ 2 ? TRUE : FALSE;
+    else
+        return FALSE;
+}
+
+void sub_8079AD8(struct Sprite * sprite)
+{
+    switch (sprite->data[0])
+    {
+    case 0:
+        if (sprite->data[2])
+        {
+            sprite->invisible = TRUE;
+            sprite->data[0] = 2;
+        }
+        sprite->data[1]--;
+        if (sprite->data[1] == 0)
+        {
+            sprite->invisible = FALSE;
+            sprite->data[0] = 1;
+        }
+        break;
+    case 1:
+        sprite->pos1.x += 9;
+        if (sprite->pos1.x == 67)
+        {
+            sprite->pos1.y -= 7;
+        }
+        if (sprite->pos1.x == 148)
+        {
+            sprite->pos1.y += 7;
+        }
+        if (sprite->pos1.x > 272)
+        {
+            sprite->invisible = TRUE;
+            if (sprite->data[2])
+                sprite->data[0] = 2;
+            else
+            {
+                sprite->pos1.x = -0x20;
+                sprite->data[1] = 540;
+                sprite->data[0] = 0;
+            }
+        }
+        break;
+    case 2:
+        break;
     }
 }

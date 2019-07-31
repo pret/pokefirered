@@ -66,6 +66,7 @@ void RestoreSerialTimer3IntrHandlers(void);
 void SetVBlankCounter1Ptr(u32 *ptr);
 void DisableVBlankCounter1(void);
 void StartTimer1(void);
+void SeedRngAndSetTrainerId(void);
 
 extern const char RomHeaderGameCode[4];
 extern const char RomHeaderSoftwareVersion;

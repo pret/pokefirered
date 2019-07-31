@@ -16352,34 +16352,34 @@ gUnknown_8EAAB98:: @ 8EAAB98
 gUnknown_8EAB30C:: @ 8EAB30C
 	.incbin "baserom.gba", 0xEAB30C, 0x3B8
 
+	@ title_screen
 gUnknown_8EAB6C4:: @ 8EAB6C4
-	.incbin "baserom.gba", 0xEAB6C4, 0x200 @UNKNOWN
+	.incbin "graphics/title_screen/unk_8eab6c4.gbapal"
 
 gUnknown_8EAB8C4:: @ 8EAB8C4
-	.incbin "baserom.gba", 0xEAB8C4, 0x1ACC
+	.incbin "graphics/title_screen/unk_8eab8c4.8bpp.lz"
 
 gUnknown_8EAD390:: @ 8EAD390
-	.incbin "baserom.gba", 0xEAD390, 0x258
+	.incbin "graphics/title_screen/unk_8ead390.bin.lz"
 
 gUnknown_8EAD5E8:: @ 8EAD5E8
-	.incbin "baserom.gba", 0xEAD5E8, 0x20 @UNKNOWN
+	.incbin "graphics/title_screen/unk_8ead5e8.gbapal"
 
 gUnknown_8EAD608:: @ 8EAD608
-	.incbin "baserom.gba", 0xEAD608, 0x8DC
+	.incbin "graphics/title_screen/unk_8ead608.4bpp.lz"
 
 gUnknown_8EADEE4:: @ 8EADEE4
-	.incbin "baserom.gba", 0xEADEE4, 0x1B0
+	.incbin "graphics/title_screen/unk_8eadee4.bin.lz"
 
 gUnknown_8EAE094:: @ 8EAE094
-	.incbin "baserom.gba", 0xEAE094, 0x20 @UNKNOWN
+	.incbin "graphics/title_screen/unk_8eae094.gbapal"
 
 gUnknown_8EAE0B4:: @ 8EAE0B4
-	.incbin "baserom.gba", 0xEAE0B4, 0x2C0
+	.incbin "graphics/title_screen/unk_8eae0b4.4bpp.lz"
 
 gUnknown_8EAE374:: @ 8EAE374
-	.incbin "baserom.gba", 0xEAE374, 0x114
+	.incbin "graphics/title_screen/unk_8eae374.bin.lz"
 
-	@ title_screen
 gUnknown_8EAE488:: @ 8EAE488
 	.incbin "graphics/title_screen/unk_8eae488.gbapal"
 

@@ -769,9 +769,10 @@ gUnknown_2037F24: @ 2037F24
 gUnknown_2037F28: @ 2037F28
 	.space 0x8
 
-gUnknown_2037F30: @ 2037F30
-	.space 0x4
+	.align 2
+	.include "src/title_screen.o"
 
+	.align 2
 gUnknown_2037F34: @ 2037F34
 	.space 0x200
 

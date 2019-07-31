@@ -38,51 +38,51 @@ enum TitleScreenScene
 #define TITLE_SPECIES SPECIES_VENUSAUR
 #endif
 
-EWRAM_DATA u8 gUnknown_2037F30 = 0;
+static EWRAM_DATA u8 sTitleScreenTimerTaskId = 0;
 
-void sub_8078B34(void);
-void sub_8078B9C(void);
-void sub_8078BB4(void);
-void sub_8078BEC(u8 taskId);
-void sub_8078C24(u8 taskId);
-void sub_8078C90(s16 * data, u8 a1);
-void sub_8078C9C(s16 * data);
-void sub_8078D24(s16 * data);
-void sub_8078DA4(s16 * data);
-void sub_8078FC4(s16 * data);
-void sub_80790A0(void);
-void sub_80790CC(s16 * data);
-void sub_80791C0(s16 * data);
-void sub_80792C8(u8 taskId);
-void sub_807941C(u8 taskId);
-void sub_8079528(void);
-void sub_8079550(s16 a0);
-void sub_8079620(void);
-void sub_8079648(void);
-void sub_80796CC(void);
-void sub_80796E8(void);
-void sub_8079708(void);
-void sub_8079840(u8 taskId);
-void sub_807999C(u8 taskId, u8 field, u16 seed);
-u16 sub_80799B4(u8 taskId, u8 field);
-u32 sub_80799F0(void);
-void sub_8079A10(bool32 a0);
-u8 sub_8079A40(void);
-void sub_8079A88(u8 spriteId);
-bool32 sub_8079AA8(u8 spriteId);
-void sub_8079AD8(struct Sprite * sprite);
+static void ResetGpuRegs(void);
+static void CB2_TitleScreenRun(void);
+static void VBlankCB(void);
+static void Task_TitleScreenTimer(u8 taskId);
+static void Task_TitleScreenMain(u8 taskId);
+static void SetTitleScreenScene(s16 * data, u8 a1);
+static void SetTitleScreenScene_Init(s16 * data);
+static void SetTitleScreenScene_FlashSprite(s16 * data);
+static void SetTitleScreenScene_FadeIn(s16 * data);
+static void SetTitleScreenScene_Run(s16 * data);
+static void SetGpuRegsForTitleScreenRun(void);
+static void SetTitleScreenScene_Restart(s16 * data);
+static void SetTitleScreenScene_Cry(s16 * data);
+static void Task_TitleScreen_SlideWin0(u8 taskId);
+static void Task_TitleScreen_PaletteSomething(u8 taskId);
+static void SignalEndTitleScreenPaletteSomethingTask(void);
+static void UpdateScanlineEffectRegBuffer(s16 a0);
+static void ScheduleStopScanlineEffect(void);
+static void LoadMainTitleScreenPalsAndResetBgs(void);
+static void CB2_FadeOutTransitionToSaveClearScreen(void);
+static void CB2_FadeOutTransitionToBerryFix(void);
+static void LoadSpriteGfxAndPals(void);
+static void Task_FlameOrLeafSpawner(u8 taskId);
+static void TitleScreen_srand(u8 taskId, u8 field, u16 seed);
+static u16 TitleScreen_rand(u8 taskId, u8 field);
+static u32 CreateBlankSprite(void);
+static void sub_8079A10(bool32 a0);
+static u8 CreateSlashSprite(void);
+static void ScheduleHideSlashSprite(u8 spriteId);
+static bool32 IsSlashSpriteHidden(u8 spriteId);
+static void SpriteCallback_Slash(struct Sprite * sprite);
 
 // bg3
-const u8 gUnknown_83BF58C[] = INCBIN_U8("data/graphics/title_screen/unk_83BF58C.4bpp.lz");
-const u8 gUnknown_83BF5A8[] = INCBIN_U8("data/graphics/title_screen/unk_83BF5A8.bin.lz");
+static const u8 gUnknown_83BF58C[] = INCBIN_U8("data/graphics/title_screen/unk_83BF58C.4bpp.lz");
+static const u8 gUnknown_83BF5A8[] = INCBIN_U8("data/graphics/title_screen/unk_83BF5A8.bin.lz");
 
 //sprites
-const u8 gUnknown_83BF64C[] = INCBIN_U8("data/graphics/title_screen/unk_83bf64c.4bpp.lz");
-const u16 gUnknown_83BF77C[] = INCBIN_U16("data/graphics/title_screen/unk_83bf77c.gbapal");
-const u8 gUnknown_83BF79C[] = INCBIN_U8("data/graphics/title_screen/unk_83bf79c.4bpp.lz");
-const u8 gUnknown_83BFA14[] = INCBIN_U8("data/graphics/title_screen/unk_83bfa14.4bpp.lz");
+static const u8 gUnknown_83BF64C[] = INCBIN_U8("data/graphics/title_screen/unk_83bf64c.4bpp.lz");
+static const u16 gUnknown_83BF77C[] = INCBIN_U16("data/graphics/title_screen/unk_83bf77c.gbapal");
+static const u8 gUnknown_83BF79C[] = INCBIN_U8("data/graphics/title_screen/unk_83bf79c.4bpp.lz");
+static const u8 gUnknown_83BFA14[] = INCBIN_U8("data/graphics/title_screen/unk_83bfa14.4bpp.lz");
 
-const struct OamData gOamData_83BFAB4 = {
+static const struct OamData gOamData_83BFAB4 = {
     .objMode = ST_OAM_OBJ_NORMAL,
     .shape = ST_OAM_SQUARE,
     .size = ST_OAM_SIZE_1,
@@ -91,7 +91,7 @@ const struct OamData gOamData_83BFAB4 = {
     .paletteNum = 0
 };
 
-const union AnimCmd gSpriteAnims_83BFABC[] = {
+static const union AnimCmd gSpriteAnims_83BFABC[] = {
     ANIMCMD_FRAME(0x00, 3),
     ANIMCMD_FRAME(0x04, 6),
     ANIMCMD_FRAME(0x08, 6),
@@ -105,7 +105,7 @@ const union AnimCmd gSpriteAnims_83BFABC[] = {
     ANIMCMD_END
 };
 
-const union AnimCmd gSpriteAnims_83BFAE8[] = {
+static const union AnimCmd gSpriteAnims_83BFAE8[] = {
     ANIMCMD_FRAME(0x18, 6),
     ANIMCMD_FRAME(0x1c, 6),
     ANIMCMD_FRAME(0x20, 6),
@@ -113,12 +113,12 @@ const union AnimCmd gSpriteAnims_83BFAE8[] = {
     ANIMCMD_END
 };
 
-const union AnimCmd *const gSpriteAnimTable_83BFAFC[] = {
+static const union AnimCmd *const gSpriteAnimTable_83BFAFC[] = {
     gSpriteAnims_83BFABC,
     gSpriteAnims_83BFAE8
 };
 
-const struct SpriteTemplate gUnknown_83BFB04 = {
+static const struct SpriteTemplate sSpriteTemplate_FlameOrLeaf_State1 = {
     .tileTag = 0,
     .paletteTag = 0,
     .oam = &gOamData_83BFAB4,
@@ -128,7 +128,7 @@ const struct SpriteTemplate gUnknown_83BFB04 = {
     .callback = SpriteCallbackDummy
 };
 
-const struct SpriteTemplate gUnknown_83BFB1C = {
+static const struct SpriteTemplate sSpriteTemplate_FlameOrLeaf_State0 = {
     .tileTag = 1,
     .paletteTag = 0,
     .oam = &gOamData_83BFAB4,
@@ -138,7 +138,7 @@ const struct SpriteTemplate gUnknown_83BFB1C = {
     .callback = SpriteCallbackDummy
 };
 
-const struct OamData gOamData_83BFB34 = {
+static const struct OamData gOamData_83BFB34 = {
     .objMode = ST_OAM_OBJ_NORMAL,
     .shape = ST_OAM_V_RECTANGLE,
     .size = ST_OAM_SIZE_3,
@@ -147,7 +147,7 @@ const struct OamData gOamData_83BFB34 = {
     .paletteNum = 0
 };
 
-const struct SpriteTemplate gUnknown_83BFB3C = {
+static const struct SpriteTemplate sUnknownEmptySprite = {
     .tileTag = 2,
     .paletteTag = 2,
     .oam = &gOamData_83BFB34,
@@ -157,7 +157,7 @@ const struct SpriteTemplate gUnknown_83BFB3C = {
     .callback = SpriteCallbackDummy
 };
 
-const struct OamData gOamData_83BFB54 = {
+static const struct OamData gOamData_83BFB54 = {
     .objMode = ST_OAM_OBJ_WINDOW,
     .shape = ST_OAM_SQUARE,
     .size = ST_OAM_SIZE_3,
@@ -166,7 +166,7 @@ const struct OamData gOamData_83BFB54 = {
     .paletteNum = 0
 };
 
-const struct SpriteTemplate gUnknown_83BFB5C = {
+static const struct SpriteTemplate sSlashSpriteTemplate = {
     .tileTag = 3,
     .paletteTag = 2,
     .oam = &gOamData_83BFB54,
@@ -176,7 +176,7 @@ const struct SpriteTemplate gUnknown_83BFB5C = {
     .callback = SpriteCallbackDummy
 };
 
-const struct BgTemplate gUnknown_83BFB74[] = {
+static const struct BgTemplate gUnknown_83BFB74[] = {
     {
         .bg = 0,
         .charBaseIndex = 0,
@@ -212,29 +212,29 @@ const struct BgTemplate gUnknown_83BFB74[] = {
     }
 };
 
-void (*const gUnknown_83BFB84[])(s16 * data) = {
-    sub_8078C9C,
-    sub_8078D24,
-    sub_8078DA4,
-    sub_8078FC4,
-    sub_80790CC,
-    sub_80791C0
+static void (*const gUnknown_83BFB84[])(s16 * data) = {
+    SetTitleScreenScene_Init,
+    SetTitleScreenScene_FlashSprite,
+    SetTitleScreenScene_FadeIn,
+    SetTitleScreenScene_Run,
+    SetTitleScreenScene_Restart,
+    SetTitleScreenScene_Cry
 };
 
-const struct CompressedSpriteSheet gUnknown_83BFB9C[] = {
+static const struct CompressedSpriteSheet gUnknown_83BFB9C[] = {
     {(const void *)gUnknown_83BF79C, 0x500, 0},
     {(const void *)gUnknown_83BFA14, 0x500, 1},
     {(const void *)gUnknown_8EAE4A8, 0x400, 2},
     {(const void *)gUnknown_83BF64C, 0x800, 3}
 };
 
-const struct SpritePalette gUnknown_83BFBBC[] = {
+static const struct SpritePalette gUnknown_83BFBBC[] = {
     {gUnknown_83BF77C, 0},
     {gUnknown_8EAE488, 2},
     {}
 };
 
-const u8 gUnknown_83BFBD4[] = {
+static const u8 gUnknown_83BFBD4[] = {
     0x04, 0x10, 0x1a, 0x20, 0x30, 0xc8, 0xd8, 0xe0, 0xe8, 0x3c, 0x4c, 0x5c, 0x6c, 0x80, 0x90
 };
 
@@ -253,14 +253,14 @@ void CB2_InitTitleScreen(void)
         ResetSpriteData();
         FreeAllSpritePalettes();
         ResetPaletteFade();
-        sub_8078B34();
+        ResetGpuRegs();
         DmaFill16(3, 0, (void *)VRAM, VRAM_SIZE);
         DmaFill32(3, 0, (void *)OAM, OAM_SIZE);
         DmaFill16(3, 0, (void *)PLTT, PLTT_SIZE);
         ResetBgsAndClearDma3BusyFlags(FALSE);
         InitBgsFromTemplates(0, gUnknown_83BFB74, NELEMS(gUnknown_83BFB74));
         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
-        gUnknown_2037F30 = 0xFF;
+        sTitleScreenTimerTaskId = 0xFF;
         break;
     case 1:
         LoadPalette(gUnknown_8EAB6C4, 0, 0x1A0);
@@ -275,16 +275,16 @@ void CB2_InitTitleScreen(void)
         LoadPalette(gUnknown_8EAE094, 0xE0, 0x20);
         DecompressAndCopyTileDataToVram(3, gUnknown_83BF58C, 0, 0, 0);
         DecompressAndCopyTileDataToVram(3, gUnknown_83BF5A8, 0, 0, 1);
-        sub_8079708();
+        LoadSpriteGfxAndPals();
         break;
     case 2:
         if (!FreeTempTileDataBuffersIfPossible())
         {
             BlendPalettes(0x0000FFFF, 0x10, RGB_BLACK);
-            CreateTask(sub_8078C24, 4);
-            gUnknown_2037F30 = CreateTask(sub_8078BEC, 2);
-            SetVBlankCallback(sub_8078BB4);
-            SetMainCallback2(sub_8078B9C);
+            CreateTask(Task_TitleScreenMain, 4);
+            sTitleScreenTimerTaskId = CreateTask(Task_TitleScreenTimer, 2);
+            SetVBlankCallback(VBlankCB);
+            SetMainCallback2(CB2_TitleScreenRun);
             m4aSongNumStart(BGM_FRLG_TITLE);
         }
         return;
@@ -292,7 +292,7 @@ void CB2_InitTitleScreen(void)
     gMain.state++;
 }
 
-void sub_8078B34(void)
+static void ResetGpuRegs(void)
 {
     SetGpuReg(REG_OFFSET_DISPCNT,  0);
     SetGpuReg(REG_OFFSET_BLDCNT,   0);
@@ -308,7 +308,7 @@ void sub_8078B34(void)
     SetGpuReg(REG_OFFSET_BG3VOFS,  0);
 }
 
-void sub_8078B9C(void)
+static void CB2_TitleScreenRun(void)
 {
     RunTasks();
     AnimateSprites();
@@ -316,39 +316,39 @@ void sub_8078B9C(void)
     UpdatePaletteFade();
 }
 
-void sub_8078BB4(void)
+static void VBlankCB(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
     ScanlineEffect_InitHBlankDmaTransfer();
 
-    if (gUnknown_2037F30 != 0xFF)
-        gTasks[gUnknown_2037F30].data[0]++;
+    if (sTitleScreenTimerTaskId != 0xFF)
+        gTasks[sTitleScreenTimerTaskId].data[0]++;
 }
 
-void sub_8078BEC(u8 taskId)
+static void Task_TitleScreenTimer(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
     if (data[0] >= 2700)
     {
-        gUnknown_2037F30 = 0xFF;
+        sTitleScreenTimerTaskId = 0xFF;
         DestroyTask(taskId);
     }
 }
 
-void sub_8078C24(u8 taskId)
+static void Task_TitleScreenMain(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
     if (JOY_NEW(A_BUTTON | B_BUTTON | START_BUTTON)
     && data[0] != 3 && data[0] != 4 && data[0] != 5)
     {
-        sub_8079620();
-        sub_8079648();
+        ScheduleStopScanlineEffect();
+        LoadMainTitleScreenPalsAndResetBgs();
         sub_8079A10(data[5]);
-        sub_8078C90(data, TITLESCREENSCENE_RUN);
+        SetTitleScreenScene(data, TITLESCREENSCENE_RUN);
     }
     else
     {
@@ -356,13 +356,13 @@ void sub_8078C24(u8 taskId)
     }
 }
 
-void sub_8078C90(s16 * data, u8 a1)
+static void SetTitleScreenScene(s16 * data, u8 a1)
 {
     data[1] = 0;
     data[0] = a1;
 }
 
-void sub_8078C9C(s16 * data)
+static void SetTitleScreenScene_Init(s16 * data)
 {
     struct ScanlineEffectParams params;
 
@@ -381,10 +381,10 @@ void sub_8078C9C(s16 * data)
 
     ScanlineEffect_SetParams(params);
 
-    sub_8078C90(data, TITLESCREENSCENE_FLASHSPRITE);
+    SetTitleScreenScene(data, TITLESCREENSCENE_FLASHSPRITE);
 }
 
-void sub_8078D24(s16 * data)
+static void SetTitleScreenScene_FlashSprite(s16 * data)
 {
     switch (data[1])
     {
@@ -392,12 +392,12 @@ void sub_8078D24(s16 * data)
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_LIGHTEN);
         SetGpuReg(REG_OFFSET_BLDY, 0);
         data[2] = 0x80;
-        sub_8079550(0x80);
+        UpdateScanlineEffectRegBuffer(data[2]);
         data[1]++;
         break;
     case 1:
         data[2] -= 4;
-        sub_8079550(data[2]);
+        UpdateScanlineEffectRegBuffer(data[2]);
         if (data[2] < 0)
         {
             gScanlineEffect.state = 3;
@@ -407,11 +407,11 @@ void sub_8078D24(s16 * data)
     case 2:
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         SetGpuReg(REG_OFFSET_BLDY, 0);
-        sub_8078C90(data, TITLESCREENSCENE_FADEIN);
+        SetTitleScreenScene(data, TITLESCREENSCENE_FADEIN);
     }
 }
 
-void sub_8078DA4(s16 * data)
+static void SetTitleScreenScene_FadeIn(s16 * data)
 {
     u32 r4;
     switch (data[1])
@@ -440,7 +440,7 @@ void sub_8078DA4(s16 * data)
         data[2]++;
         if (data[2] > 36)
         {
-            CreateTask(sub_80792C8, 3);
+            CreateTask(Task_TitleScreen_SlideWin0, 3);
             sub_80717A8(0x2000, -4, 0x01, 0x10, RGB(30, 30, 31), 0, 0);
             data[2] = 0;
             data[1]++;
@@ -482,7 +482,7 @@ void sub_8078DA4(s16 * data)
         if (!sub_807185C(0))
         {
             data[5] = 1;
-            r4 = (0x10000 << sub_80799F0()) | 0x00001FFF;
+            r4 = (0x10000 << CreateBlankSprite()) | 0x00001FFF;
             BlendPalettes(r4, 0x10, RGB(30, 30, 31));
             BeginNormalPaletteFade(r4, 1, 0x10, 0x00, RGB(30, 30, 31));
             ShowBg(0);
@@ -494,7 +494,7 @@ void sub_8078DA4(s16 * data)
     case 9:
         if (!sub_807185C(0) && !gPaletteFade.active)
         {
-            sub_8078C90(data, TITLESCREENSCENE_RUN);
+            SetTitleScreenScene(data, TITLESCREENSCENE_RUN);
         }
         break;
     }
@@ -503,45 +503,45 @@ void sub_8078DA4(s16 * data)
 #define KEYSTROKE_DELSAVE (B_BUTTON | SELECT_BUTTON | DPAD_UP)
 #define KEYSTROKE_BERRY_FIX (B_BUTTON | SELECT_BUTTON)
 
-void sub_8078FC4(s16 * data)
+static void SetTitleScreenScene_Run(s16 * data)
 {
     switch (data[1])
     {
     case 0:
         HelpSystem_SetSomeVariable2(1);
-        CreateTask(sub_807941C, 0);
-        CreateTask(sub_8079840, 5);
-        sub_80790A0();
-        data[6] = sub_8079A40();
+        CreateTask(Task_TitleScreen_PaletteSomething, 0);
+        CreateTask(Task_FlameOrLeafSpawner, 5);
+        SetGpuRegsForTitleScreenRun();
+        data[6] = CreateSlashSprite();
         sub_812B484();
         data[1]++;
         // fallthrough
     case 1:
         if (JOY_HELD(KEYSTROKE_DELSAVE) == KEYSTROKE_DELSAVE)
         {
-            sub_8079A88(data[6]);
-            DestroyTask(FindTaskIdByFunc(sub_8078C24));
-            SetMainCallback2(sub_80796CC);
+            ScheduleHideSlashSprite(data[6]);
+            DestroyTask(FindTaskIdByFunc(Task_TitleScreenMain));
+            SetMainCallback2(CB2_FadeOutTransitionToSaveClearScreen);
         }
         else if (JOY_HELD(KEYSTROKE_BERRY_FIX) == KEYSTROKE_BERRY_FIX)
         {
-            sub_8079A88(data[6]);
-            DestroyTask(FindTaskIdByFunc(sub_8078C24));
-            SetMainCallback2(sub_80796E8);
+            ScheduleHideSlashSprite(data[6]);
+            DestroyTask(FindTaskIdByFunc(Task_TitleScreenMain));
+            SetMainCallback2(CB2_FadeOutTransitionToBerryFix);
         }
         else if (JOY_NEW(A_BUTTON | START_BUTTON))
         {
-            sub_8078C90(data, TITLESCREENSCENE_CRY);
+            SetTitleScreenScene(data, TITLESCREENSCENE_CRY);
         }
-        else if (!FuncIsActiveTask(sub_8078BEC))
+        else if (!FuncIsActiveTask(Task_TitleScreenTimer))
         {
-            sub_8078C90(data, TITLESCREENSCEEN_RESTART);
+            SetTitleScreenScene(data, TITLESCREENSCEEN_RESTART);
         }
         break;
     }
 }
 
-void sub_80790A0(void)
+static void SetGpuRegsForTitleScreenRun(void)
 {
     SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJWIN_ON);
     SetGpuReg(REG_OFFSET_WINOUT, WIN_RANGE(0x3F, 0x1F));
@@ -549,27 +549,27 @@ void sub_80790A0(void)
     SetGpuReg(REG_OFFSET_BLDY, 13);
 }
 
-void sub_80790CC(s16 * data)
+static void SetTitleScreenScene_Restart(s16 * data)
 {
     switch (data[1])
     {
     case 0:
-        sub_8079A88(data[6]);
+        ScheduleHideSlashSprite(data[6]);
         data[1]++;
         break;
     case 1:
-        if (!gPaletteFade.active && !sub_8079AA8(data[6]))
+        if (!gPaletteFade.active && !IsSlashSpriteHidden(data[6]))
         {
             FadeOutMapMusic(10);
             BeginNormalPaletteFade(0xFFFFFFFF, 3, 0, 0x10, RGB_BLACK);
-            sub_8079528();
+            SignalEndTitleScreenPaletteSomethingTask();
             data[1]++;
         }
         break;
     case 2:
         if (IsNotWaitingForBGMStop() && !gPaletteFade.active)
         {
-            DestroyTask(FindTaskIdByFunc(sub_807941C));
+            DestroyTask(FindTaskIdByFunc(Task_TitleScreen_PaletteSomething));
             data[2] = 0;
             data[1]++;
         }
@@ -578,19 +578,19 @@ void sub_80790CC(s16 * data)
         data[2]++;
         if (data[2] >= 20)
         {
-            DestroyTask(FindTaskIdByFunc(sub_807941C));
+            DestroyTask(FindTaskIdByFunc(Task_TitleScreen_PaletteSomething));
             data[1]++;
         }
         break;
     case 4:
         sub_812B478();
-        DestroyTask(FindTaskIdByFunc(sub_8078C24));
+        DestroyTask(FindTaskIdByFunc(Task_TitleScreenMain));
         SetMainCallback2(sub_80EC864);
         break;
     }
 }
 
-void sub_80791C0(s16 * data)
+static void SetTitleScreenScene_Cry(s16 * data)
 {
     switch (data[1])
     {
@@ -598,7 +598,7 @@ void sub_80791C0(s16 * data)
         if (!gPaletteFade.active)
         {
             PlayCry1(TITLE_SPECIES, 0);
-            sub_8079A88(data[6]);
+            ScheduleHideSlashSprite(data[6]);
             data[2] = 0;
             data[1]++;
         }
@@ -606,10 +606,10 @@ void sub_80791C0(s16 * data)
     case 1:
         if (data[2] < 90)
             data[2]++;
-        else if (!sub_8079AA8(data[6]))
+        else if (!IsSlashSpriteHidden(data[6]))
         {
             BeginNormalPaletteFade(0x0FFFFFFF, 0, 0, 0x10, RGB_WHITE);
-            sub_8079528();
+            SignalEndTitleScreenPaletteSomethingTask();
             FadeOutBGM(4);
             data[1]++;
         }
@@ -627,13 +627,13 @@ void sub_80791C0(s16 * data)
             SetPokemonCryStereo(gSaveBlock2Ptr->optionsSound);
             InitHeap(gHeap, HEAP_SIZE);
             SetMainCallback2(sub_800C300);
-            DestroyTask(FindTaskIdByFunc(sub_8078C24));
+            DestroyTask(FindTaskIdByFunc(Task_TitleScreenMain));
         }
         break;
     }
 }
 
-void sub_80792C8(u8 taskId)
+static void Task_TitleScreen_SlideWin0(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -692,7 +692,7 @@ void sub_80792C8(u8 taskId)
     }
 }
 
-void sub_807941C(u8 taskId)
+static void Task_TitleScreen_PaletteSomething(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     s32 i;
@@ -736,13 +736,13 @@ void sub_807941C(u8 taskId)
     }
 }
 
-void sub_8079528(void)
+static void SignalEndTitleScreenPaletteSomethingTask(void)
 {
-    u8 taskId = FindTaskIdByFunc(sub_807941C);
+    u8 taskId = FindTaskIdByFunc(Task_TitleScreen_PaletteSomething);
     gTasks[taskId].data[15] = TRUE;
 }
 
-void sub_8079550(s16 a0)
+static void UpdateScanlineEffectRegBuffer(s16 a0)
 {
     s32 i;
 
@@ -778,7 +778,7 @@ void sub_8079550(s16 a0)
     }
 }
 
-void sub_8079620(void)
+static void ScheduleStopScanlineEffect(void)
 {
     if (gScanlineEffect.state)
         gScanlineEffect.state = 3;
@@ -786,11 +786,11 @@ void sub_8079620(void)
     SetGpuReg(REG_OFFSET_BLDY, 0);
 }
 
-void sub_8079648(void)
+static void LoadMainTitleScreenPalsAndResetBgs(void)
 {
     u8 taskId;
 
-    taskId = FindTaskIdByFunc(sub_80792C8);
+    taskId = FindTaskIdByFunc(Task_TitleScreen_SlideWin0);
     if (taskId != 0xFF)
         DestroyTask(taskId);
 
@@ -808,13 +808,13 @@ void sub_8079648(void)
     ShowBg(3);
 }
 
-void sub_80796CC(void)
+static void CB2_FadeOutTransitionToSaveClearScreen(void)
 {
     if (!UpdatePaletteFade())
-        SetMainCallback2(sub_80F55A0);
+        SetMainCallback2(CB2_SaveClearScreen_Init);
 }
 
-void sub_80796E8(void)
+static void CB2_FadeOutTransitionToBerryFix(void)
 {
     if (!UpdatePaletteFade())
     {
@@ -823,7 +823,7 @@ void sub_80796E8(void)
     }
 }
 
-void sub_8079708(void)
+static void LoadSpriteGfxAndPals(void)
 {
     s32 i;
 
@@ -832,7 +832,7 @@ void sub_8079708(void)
     LoadSpritePalettes(gUnknown_83BFBBC);
 }
 
-void sub_8079730(struct Sprite * sprite)
+static void SpriteCallback_TitleScreenFlameOrLeaf(struct Sprite * sprite)
 {
     s16 * data = sprite->data;
     sprite->data[0] -= data[1];
@@ -876,16 +876,16 @@ void sub_8079730(struct Sprite * sprite)
 #endif
 }
 
-bool32 sub_80797AC(s32 x, s32 y, s32 xspeed, s32 yspeed, bool32 templateId)
+static bool32 CreateFlameOrLeafSprite(s32 x, s32 y, s32 xspeed, s32 yspeed, bool32 templateId)
 {
     u8 spriteId;
     if (templateId)
     {
-        spriteId = CreateSprite(&gUnknown_83BFB04, x, y, 0);
+        spriteId = CreateSprite(&sSpriteTemplate_FlameOrLeaf_State1, x, y, 0);
     }
     else
     {
-        spriteId = CreateSprite(&gUnknown_83BFB1C, x, y, 0);
+        spriteId = CreateSprite(&sSpriteTemplate_FlameOrLeaf_State0, x, y, 0);
     }
     if (spriteId != MAX_SPRITES)
     {
@@ -896,13 +896,13 @@ bool32 sub_80797AC(s32 x, s32 y, s32 xspeed, s32 yspeed, bool32 templateId)
         gSprites[spriteId].data[4] = 0;
         gSprites[spriteId].data[5] = (xspeed * yspeed) % 16;
         gSprites[spriteId].data[6] = templateId;
-        gSprites[spriteId].callback = sub_8079730;
+        gSprites[spriteId].callback = SpriteCallback_TitleScreenFlameOrLeaf;
         return TRUE;
     }
     return FALSE;
 }
 
-void sub_8079840(u8 taskId)
+static void Task_FlameOrLeafSpawner(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     s32 x, y, xspeed, yspeed, templateId;
@@ -911,7 +911,7 @@ void sub_8079840(u8 taskId)
     switch (data[0])
     {
     case 0:
-        sub_807999C(taskId, 3, 0x7878);
+        TitleScreen_srand(taskId, 3, 30840);
         data[0]++;
         break;
     case 1:
@@ -919,30 +919,30 @@ void sub_8079840(u8 taskId)
         if (data[1] >= data[2])
         {
             data[1] = 0;
-            sub_80799B4(taskId, 3);
+            TitleScreen_rand(taskId, 3);
             data[2] = 18;
-            xspeed = (sub_80799B4(taskId, 3) % 4) - 2;
-            yspeed = (sub_80799B4(taskId, 3) % 8) - 16;
-            y = (sub_80799B4(taskId, 3) % 3) + 0x74;
-            x = sub_80799B4(taskId, 3) % 240;
-            sub_80797AC(
+            xspeed = (TitleScreen_rand(taskId, 3) % 4) - 2;
+            yspeed = (TitleScreen_rand(taskId, 3) % 8) - 16;
+            y = (TitleScreen_rand(taskId, 3) % 3) + 0x74;
+            x = TitleScreen_rand(taskId, 3) % 240;
+            CreateFlameOrLeafSprite(
                 x,
                 y,
                 xspeed,
                 yspeed,
-                (sub_80799B4(taskId, 3) % 16) < 8 ? 0 : 1
+                (TitleScreen_rand(taskId, 3) % 16) < 8 ? 0 : 1
             );
             for (i = 0; i < 15; i++)
             {
-                sub_80797AC(
+                CreateFlameOrLeafSprite(
                     data[5] + gUnknown_83BFBD4[i],
                     y,
                     xspeed,
                     yspeed,
                     1
                 );
-                xspeed = (sub_80799B4(taskId, 3) % 4) - 2;
-                yspeed = (sub_80799B4(taskId, 3) % 8) - 16;
+                xspeed = (TitleScreen_rand(taskId, 3) % 4) - 2;
+                yspeed = (TitleScreen_rand(taskId, 3) % 8) - 16;
             }
             data[5]++;
             if (data[5] > 3)
@@ -951,12 +951,12 @@ void sub_8079840(u8 taskId)
     }
 }
 
-void sub_807999C(u8 taskId, u8 field, u16 seed)
+static void TitleScreen_srand(u8 taskId, u8 field, u16 seed)
 {
     SetWordTaskArg(taskId, field, seed);
 }
 
-u16 sub_80799B4(u8 taskId, u8 field)
+static u16 TitleScreen_rand(u8 taskId, u8 field)
 {
     u32 rngval;
 
@@ -966,13 +966,13 @@ u16 sub_80799B4(u8 taskId, u8 field)
     return rngval >> 16;
 }
 
-u32 sub_80799F0(void)
+static u32 CreateBlankSprite(void)
 {
-    CreateSprite(&gUnknown_83BFB3C, 0x18, 0x90, 0);
+    CreateSprite(&sUnknownEmptySprite, 0x18, 0x90, 0);
     return IndexOfSpritePaletteTag(2);
 }
 
-void sub_8079A10(bool32 mode)
+static void sub_8079A10(bool32 mode)
 {
     u32 palIdx;
 
@@ -982,27 +982,27 @@ void sub_8079A10(bool32 mode)
         LoadPalette(gUnknown_8EAE488, palIdx * 16 + 0x100, 0x20);
     }
     else
-        sub_80799F0();
+        CreateBlankSprite();
 }
 
-u8 sub_8079A40(void)
+static u8 CreateSlashSprite(void)
 {
-    u8 spriteId = CreateSprite(&gUnknown_83BFB5C, -0x20, 0x1B, 1);
+    u8 spriteId = CreateSprite(&sSlashSpriteTemplate, -0x20, 0x1B, 1);
     if (spriteId != MAX_SPRITES)
     {
-        gSprites[spriteId].callback = sub_8079AD8;
+        gSprites[spriteId].callback = SpriteCallback_Slash;
         gSprites[spriteId].data[1] = 540;
     }
     return spriteId;
 }
 
-void sub_8079A88(u8 spriteId)
+static void ScheduleHideSlashSprite(u8 spriteId)
 {
     if (spriteId != MAX_SPRITES)
         gSprites[spriteId].data[2] = TRUE;
 }
 
-bool32 sub_8079AA8(u8 spriteId)
+static bool32 IsSlashSpriteHidden(u8 spriteId)
 {
     if (spriteId != MAX_SPRITES)
         return gSprites[spriteId].data[0] ^ 2 ? TRUE : FALSE;
@@ -1010,7 +1010,7 @@ bool32 sub_8079AA8(u8 spriteId)
         return FALSE;
 }
 
-void sub_8079AD8(struct Sprite * sprite)
+static void SpriteCallback_Slash(struct Sprite * sprite)
 {
     switch (sprite->data[0])
     {

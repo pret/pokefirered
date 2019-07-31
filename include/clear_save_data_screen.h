@@ -1,6 +1,6 @@
 #ifndef GUARD_CLEAR_SAVE_DATA_SCREEN_H
 #define GUARD_CLEAR_SAVE_DATA_SCREEN_H
 
-void sub_80F55A0(void);
+void CB2_SaveClearScreen_Init(void);
 
 #endif //GUARD_CLEAR_SAVE_DATA_SCREEN_H

@@ -22,6 +22,7 @@ TEXTWINDOWGFXDIR := graphics/text_window
 TEACHYTVGFXDIR := graphics/teachy_tv
 SSANNEGFXDIR := graphics/ss_anne
 ITEMPCGFXDIR := graphics/item_pc
+TITLESCREENGFXDIR := graphics/title_screen
 
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
 contest_types := cool beauty cute smart tough
@@ -486,3 +487,6 @@ $(SSANNEGFXDIR)/unk_8479A38.4bpp: %.4bpp: %.png
 
 $(ITEMPCGFXDIR)/unk_8E85090.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 82
+
+$(TITLESCREENGFXDIR)/unk_8ead608.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 135

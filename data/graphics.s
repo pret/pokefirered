@@ -16353,37 +16353,37 @@ gUnknown_8EAB30C:: @ 8EAB30C
 	.incbin "baserom.gba", 0xEAB30C, 0x3B8
 
 	@ title_screen
-gUnknown_8EAB6C4:: @ 8EAB6C4
+gGraphics_TitleScreen_PokemonFireRedLogoPals:: @ 8EAB6C4
 	.incbin "graphics/title_screen/unk_8eab6c4.gbapal"
 
-gUnknown_8EAB8C4:: @ 8EAB8C4
+gGraphics_TitleScreen_PokemonFireRedLogoTiles:: @ 8EAB8C4
 	.incbin "graphics/title_screen/unk_8eab8c4.8bpp.lz"
 
-gUnknown_8EAD390:: @ 8EAD390
+gGraphics_TitleScreen_PokemonFireRedLogoMap:: @ 8EAD390
 	.incbin "graphics/title_screen/unk_8ead390.bin.lz"
 
-gUnknown_8EAD5E8:: @ 8EAD5E8
+gGraphics_TitleScreen_CharizardPals:: @ 8EAD5E8
 	.incbin "graphics/title_screen/unk_8ead5e8.gbapal"
 
-gUnknown_8EAD608:: @ 8EAD608
+gGraphics_TitleScreen_CharizardTiles:: @ 8EAD608
 	.incbin "graphics/title_screen/unk_8ead608.4bpp.lz"
 
-gUnknown_8EADEE4:: @ 8EADEE4
+gGraphics_TitleScreen_CharizardMap:: @ 8EADEE4
 	.incbin "graphics/title_screen/unk_8eadee4.bin.lz"
 
-gUnknown_8EAE094:: @ 8EAE094
+gGraphics_TitleScreen_BackgroundPals:: @ 8EAE094
 	.incbin "graphics/title_screen/unk_8eae094.gbapal"
 
-gUnknown_8EAE0B4:: @ 8EAE0B4
+gGraphics_TitleScreen_CopyrightPressStartTiles:: @ 8EAE0B4
 	.incbin "graphics/title_screen/unk_8eae0b4.4bpp.lz"
 
-gUnknown_8EAE374:: @ 8EAE374
+gGraphics_TitleScreen_CopyrightPressStartMap:: @ 8EAE374
 	.incbin "graphics/title_screen/unk_8eae374.bin.lz"
 
-gUnknown_8EAE488:: @ 8EAE488
+gGraphics_TitleScreen_FirePals:: @ 8EAE488
 	.incbin "graphics/title_screen/unk_8eae488.gbapal"
 
-gUnknown_8EAE4A8:: @ 8EAE4A8
+gGraphics_TitleScreen_BlankObjTiles:: @ 8EAE4A8
 	.incbin "graphics/title_screen/unk_8eae4a8.4bpp.lz"
 
 gUnknown_8EAE528:: @ 8EAE528

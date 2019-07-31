@@ -962,16 +962,16 @@ extern const u8 gFile_graphics_items_icons_return_to_field_arrow_sheet[];
 extern const u8 gFile_graphics_items_icon_palettes_return_to_field_arrow_palette[];
 
 // title_screen
-extern const u16 gUnknown_8EAB6C4[];
-extern const u8 gUnknown_8EAB8C4[];
-extern const u8 gUnknown_8EAD390[];
-extern const u16 gUnknown_8EAD5E8[];
-extern const u8 gUnknown_8EAD608[];
-extern const u8 gUnknown_8EADEE4[];
-extern u16 gUnknown_8EAE094[]; // If this is const, title_screen.c does not match
-extern const u8 gUnknown_8EAE0B4[];
-extern const u8 gUnknown_8EAE374[];
-extern const u16 gUnknown_8EAE488[];
-extern const u8 gUnknown_8EAE4A8[];
+extern const u16 gGraphics_TitleScreen_PokemonFireRedLogoPals[];
+extern const u8 gGraphics_TitleScreen_PokemonFireRedLogoTiles[];
+extern const u8 gGraphics_TitleScreen_PokemonFireRedLogoMap[];
+extern const u16 gGraphics_TitleScreen_CharizardPals[];
+extern const u8 gGraphics_TitleScreen_CharizardTiles[];
+extern const u8 gGraphics_TitleScreen_CharizardMap[];
+extern u16 gGraphics_TitleScreen_BackgroundPals[]; // If this is const, title_screen.c does not match
+extern const u8 gGraphics_TitleScreen_CopyrightPressStartTiles[];
+extern const u8 gGraphics_TitleScreen_CopyrightPressStartMap[];
+extern const u16 gGraphics_TitleScreen_FirePals[];
+extern const u8 gGraphics_TitleScreen_BlankObjTiles[];
 
 #endif //GUARD_GRAPHICS_H

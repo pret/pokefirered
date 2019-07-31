@@ -16379,11 +16379,12 @@ gUnknown_8EAE0B4:: @ 8EAE0B4
 gUnknown_8EAE374:: @ 8EAE374
 	.incbin "baserom.gba", 0xEAE374, 0x114
 
+	@ title_screen
 gUnknown_8EAE488:: @ 8EAE488
-	.incbin "baserom.gba", 0xEAE488, 0x20 @UNKNOWN
+	.incbin "graphics/title_screen/unk_8eae488.gbapal"
 
 gUnknown_8EAE4A8:: @ 8EAE4A8
-	.incbin "baserom.gba", 0xEAE4A8, 0x80
+	.incbin "graphics/title_screen/unk_8eae4a8.4bpp.lz"
 
 gUnknown_8EAE528:: @ 8EAE528
 	.incbin "baserom.gba", 0xEAE528, 0x20 @UNKNOWN

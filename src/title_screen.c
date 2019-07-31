@@ -16,6 +16,9 @@
 #include "new_game.h"
 #include "save.h"
 #include "main_menu.h"
+#include "clear_save_data_screen.h"
+#include "berry_fix_program.h"
+#include "decompress.h"
 #include "constants/songs.h"
 #include "constants/species.h"
 
@@ -624,5 +627,233 @@ void sub_80791C0(s16 * data)
             DestroyTask(FindTaskIdByFunc(sub_8078C24));
         }
         break;
+    }
+}
+
+void sub_80792C8(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    switch (data[0])
+    {
+    case 0:
+        SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
+        SetGpuReg(REG_OFFSET_WININ, WIN_RANGE(0x00, 0x3F));
+        SetGpuReg(REG_OFFSET_WINOUT, WIN_RANGE(0x00, 0x37));
+        SetGpuReg(REG_OFFSET_WIN0V, 0xA0);
+        SetGpuReg(REG_OFFSET_WIN0H, 0x00);
+        BlendPalettes(0x00004000, 0, RGB_BLACK);
+        data[0]++;
+        break;
+    case 1:
+        data[1] += 0x180;
+        data[2] = data[1] >> 4;
+        if (data[2] >= 0xF0)
+        {
+            data[2] = 0xF0;
+            data[0]++;
+        }
+        SetGpuReg(REG_OFFSET_WIN0H, data[2]);
+        break;
+    case 2:
+        data[3]++;
+        if (data[3] >= 10)
+        {
+            data[3] = 0;
+            data[0]++;
+        }
+        break;
+    case 3:
+        SetGpuReg(REG_OFFSET_WINOUT, WIN_RANGE(0, 0x3B));
+        SetGpuReg(REG_OFFSET_WIN0H, 0xF0F0);
+        ChangeBgX(2, -0xF000, 0);
+        BlendPalettes(0x00008000, 0, RGB_BLACK);
+        data[1] = 0xF00;
+        data[0]++;
+        break;
+    case 4:
+        data[1] -= 0x180;
+        data[2] = data[1] >> 4;
+        if (data[2] <= 0)
+        {
+            data[2] = 0;
+            data[0]++;
+        }
+        ChangeBgX(2, -data[2] << 8, 0);
+        SetGpuReg(REG_OFFSET_WIN0H, (data[2] << 8) | 0xF0);
+        break;
+    case 5:
+        ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
+        DestroyTask(taskId);
+        break;
+    }
+}
+
+void sub_807941C(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    s32 i;
+
+    if (data[15] && gPaletteFade.active)
+        data[14] = 1;
+    if (data[14] && !gPaletteFade.active)
+        DestroyTask(taskId);
+    else
+    {
+        if (!data[1])
+            data[2] = 60;
+        else
+            data[2] = 30;
+        data[0]++;
+        if (data[0] >= data[2])
+        {
+            data[0] = 0;
+            data[1] ^= 1;
+            if (data[1])
+            {
+                for (i = 0; i < 5; i++)
+                {
+                    gPlttBufferUnfaded[0xF1 + i] = gUnknown_8EAE094[6];
+                    gPlttBufferFaded[0xF1 + i] = gUnknown_8EAE094[6];
+                }
+            }
+            else
+            {
+                for (i = 0; i < 5; i++)
+                {
+                    gPlttBufferUnfaded[0xF1 + i] = gUnknown_8EAE094[1 + i];
+                    gPlttBufferFaded[0xF1 + i] = gUnknown_8EAE094[1 + i];
+                }
+            }
+            if (data[14])
+            {
+                BlendPalettes(0x00008000, gPaletteFade.y, gPaletteFade.blendColor);
+            }
+        }
+    }
+}
+
+void sub_8079528(void)
+{
+    u8 taskId = FindTaskIdByFunc(sub_807941C);
+    gTasks[taskId].data[15] = TRUE;
+}
+
+void sub_8079550(s16 a0)
+{
+    s32 i;
+
+    if (a0 >= 0)
+    {
+        gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][a0] = 16;
+    }
+
+    for (i = 0; i < 16; i++)
+    {
+        if (a0 + i >= 0)
+        {
+            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][a0 + i] = 15 - i;
+        }
+        if (a0 - i >= 0)
+        {
+            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][a0 - i] = 15 - i;
+        }
+    }
+    for (i = a0 + 16; i < 160; i++)
+    {
+        if (i >= 0)
+        {
+            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = 0;
+        }
+    }
+    for (i = a0 - 16; i >= 0; i--)
+    {
+        if (i >= 0)
+        {
+            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = 0;
+        }
+    }
+}
+
+void sub_8079620(void)
+{
+    if (gScanlineEffect.state)
+        gScanlineEffect.state = 3;
+    SetGpuReg(REG_OFFSET_BLDCNT, 0);
+    SetGpuReg(REG_OFFSET_BLDY, 0);
+}
+
+void sub_8079648(void)
+{
+    u8 taskId;
+
+    taskId = FindTaskIdByFunc(sub_80792C8);
+    if (taskId != 0xFF)
+        DestroyTask(taskId);
+
+    sub_8071898();
+    ResetPaletteFadeControl();
+    LoadPalette(gUnknown_8EAB6C4, 0x00, 0x1A0);
+    LoadPalette(gUnknown_8EAD5E8, 0xD0, 0x20);
+    LoadPalette(gUnknown_8EAE094, 0xF0, 0x20);
+    LoadPalette(gUnknown_8EAE094, 0xE0, 0x20);
+    ResetBgPositions();
+    ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON | DISPCNT_WIN1_ON | DISPCNT_OBJWIN_ON);
+    ShowBg(1);
+    ShowBg(2);
+    ShowBg(0);
+    ShowBg(3);
+}
+
+void sub_80796CC(void)
+{
+    if (!UpdatePaletteFade())
+        SetMainCallback2(sub_80F55A0);
+}
+
+void sub_80796E8(void)
+{
+    if (!UpdatePaletteFade())
+    {
+        m4aMPlayAllStop();
+        SetMainCallback2(mb_berry_fix_serve);
+    }
+}
+
+void sub_8079708(void)
+{
+    s32 i;
+
+    for (i = 0; i < NELEMS(gUnknown_83BFB9C); i++)
+        LoadCompressedSpriteSheet(&gUnknown_83BFB9C[i]);
+    LoadSpritePalettes(gUnknown_83BFBBC);
+}
+
+void sub_8079730(struct Sprite * sprite)
+{
+    s16 * data = sprite->data;
+    sprite->data[0] -= data[1];
+    sprite->pos1.x = sprite->data[0] >> 4;
+    if (sprite->pos1.x < -8)
+    {
+        DestroySprite(sprite);
+        return;
+    }
+    data[2] += data[3];
+    sprite->pos1.y = data[2] >> 4;
+    if (sprite->pos1.y < 0x10 || sprite->pos1.y > 0xc8)
+    {
+        DestroySprite(sprite);
+        return;
+    }
+    if (sprite->animEnded)
+    {
+        DestroySprite(sprite);
+        return;
+    }
+    if (data[7] != 0 && --data[7] == 0)
+    {
+        StartSpriteAnim(sprite, 0);
+        sprite->invisible = FALSE;
     }
 }

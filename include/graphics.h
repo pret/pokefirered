@@ -968,7 +968,7 @@ extern const u8 gUnknown_8EAD390[];
 extern const u16 gUnknown_8EAD5E8[];
 extern const u8 gUnknown_8EAD608[];
 extern const u8 gUnknown_8EADEE4[];
-extern const u16 gUnknown_8EAE094[];
+extern u16 gUnknown_8EAE094[]; // If this is const, title_screen.c does not match
 extern const u8 gUnknown_8EAE0B4[];
 extern const u8 gUnknown_8EAE374[];
 extern const u16 gUnknown_8EAE488[];

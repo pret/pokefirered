@@ -485,7 +485,7 @@ void RecordAbilityBattle(u8 a, u8 b)
         BATTLE_HISTORY->abilities[GetBattlerPosition(a) & 1] = b;
 }
 
-void sub_80C7208(u8 a, u8 b)
+void RecordItemEffectBattle(u8 a, u8 b)
 {
     if (GetBattlerSide(a) == 0)
         BATTLE_HISTORY->itemEffects[GetBattlerPosition(a) & 1] = b;

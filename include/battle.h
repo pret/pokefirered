@@ -987,6 +987,8 @@ extern u16 gChosenMoveByBattler[MAX_BATTLERS_COUNT];
 extern u8 gMoveResultFlags;
 extern s32 gTakenDmg[MAX_BATTLERS_COUNT];
 extern u8 gTakenDmgByBattler[MAX_BATTLERS_COUNT];
-
+extern u8 gCurrentActionFuncId;
+extern u8 gCurrMovePos;
+extern u8 gChosenMovePos;
 
 #endif // GUARD_BATTLE_H

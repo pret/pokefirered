@@ -281,7 +281,7 @@ gUnknown_82500CC:: @ 82500CC
 	.section .rodata.825011C
 
 	.balign 4
-gUnknown_825011C:: @ 825011C
+gBattleScriptingCommandsTable:: @ 825011C
 	.incbin "baserom.gba", 0x25011C, 0x3E0
 
 gUnknown_82504FC:: @ 82504FC

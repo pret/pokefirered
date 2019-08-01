@@ -195,7 +195,7 @@ gBattlerByTurnOrder: @ 2023BDE
 gUnknown_2023BE2: @ 2023BE2
 	.space 0x1
 
-gUnknown_2023BE3: @ 2023BE3
+gCurrentActionFuncId: @ 2023BE3
 	.space 0x1
 
 gBattleMons: @ 2023BE4
@@ -222,10 +222,10 @@ gUnknown_2023C34: @ 2023C34
 gBattlerSpriteIds: @ 2023D44
 	.space 0x4
 
-gUnknown_2023D48: @ 2023D48
+gCurrMovePos: @ 2023D48
 	.space 0x1
 
-gUnknown_2023D49: @ 2023D49
+gChosenMovePos: @ 2023D49
 	.space 0x1
 
 gCurrentMove: @ 2023D4A
@@ -234,7 +234,7 @@ gCurrentMove: @ 2023D4A
 gChosenMove: @ 2023D4C
 	.space 0x2
 
-gUnknown_2023D4E: @ 2023D4E
+gCalledMove: @ 2023D4E
 	.space 0x2
 
 gBattleMoveDamage: @ 2023D50

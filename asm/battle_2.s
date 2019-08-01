@@ -169,7 +169,7 @@ _0800FEA6:
 	ldr r1, _0800FF68 @ =gReservedSpritePaletteCount
 	movs r0, 0x4
 	strb r0, [r1]
-	ldr r0, _0800FF6C @ =sub_80116F4
+	ldr r0, _0800FF6C @ =VBlankCB_Battle
 	bl SetVBlankCallback
 	bl SetUpBattleVars
 	ldr r0, _0800FF70 @ =gBattleTypeFlags
@@ -199,7 +199,7 @@ _0800FF5C: .4byte gBattle_BG3_X
 _0800FF60: .4byte gBattle_BG3_Y
 _0800FF64: .4byte gUnknown_2022B50
 _0800FF68: .4byte gReservedSpritePaletteCount
-_0800FF6C: .4byte sub_80116F4
+_0800FF6C: .4byte VBlankCB_Battle
 _0800FF70: .4byte gBattleTypeFlags
 _0800FF74: .4byte sub_8010BA0
 _0800FF78:
@@ -1010,7 +1010,7 @@ _080105BC:
 	bne _080105C6
 	b _080108B8
 _080105C6:
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	b _080108B8
 	.align 2, 0
 _080105CC: .4byte gBattleCommunication
@@ -1064,7 +1064,7 @@ _0801062A:
 _08010634:
 	movs r0, 0
 	movs r1, 0
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 	b _080108B8
 	.align 2, 0
 _08010640: .4byte gBattleTypeFlags
@@ -1763,7 +1763,7 @@ _08010C44:
 	bne _08010C4E
 	b _080110F0
 _08010C4E:
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	b _080110F0
 	.align 2, 0
 _08010C54: .4byte gBattleCommunication
@@ -1813,7 +1813,7 @@ _08010CAA:
 _08010CB4:
 	movs r0, 0
 	movs r1, 0
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 	b _080110F0
 	.align 2, 0
 _08010CC0: .4byte gReceivedRemoteLinkPlayers
@@ -3121,8 +3121,8 @@ _080116EC: .4byte 0x04000006
 _080116F0: .4byte 0x04000008
 	thumb_func_end sub_80116CC
 
-	thumb_func_start sub_80116F4
-sub_80116F4: @ 80116F4
+	thumb_func_start VBlankCB_Battle
+VBlankCB_Battle: @ 80116F4
 	push {lr}
 	bl Random
 	ldr r0, _08011788 @ =gBattle_BG0_X
@@ -3192,7 +3192,7 @@ _080117A8: .4byte gUnknown_2022984
 _080117AC: .4byte gUnknown_2022986
 _080117B0: .4byte gUnknown_2022988
 _080117B4: .4byte gUnknown_202298A
-	thumb_func_end sub_80116F4
+	thumb_func_end VBlankCB_Battle
 
 	thumb_func_start nullsub_9
 nullsub_9: @ 80117B8
@@ -3612,7 +3612,7 @@ _08011A9C:
 	ldr r1, _08011B7C @ =gReservedSpritePaletteCount
 	movs r0, 0x4
 	strb r0, [r1]
-	ldr r0, _08011B80 @ =sub_80116F4
+	ldr r0, _08011B80 @ =VBlankCB_Battle
 	bl SetVBlankCallback
 	ldr r0, _08011B84 @ =sub_800F6FC
 	movs r1, 0
@@ -3657,7 +3657,7 @@ _08011B70: .4byte gBattle_BG3_X
 _08011B74: .4byte gBattle_BG3_Y
 _08011B78: .4byte gBattleTextboxPalette
 _08011B7C: .4byte gReservedSpritePaletteCount
-_08011B80: .4byte sub_80116F4
+_08011B80: .4byte VBlankCB_Battle
 _08011B84: .4byte sub_800F6FC
 _08011B88: .4byte gTasks
 _08011B8C: .4byte sub_8011B94

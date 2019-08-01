@@ -707,10 +707,10 @@ _08115E84:
 	beq _08115EC0
 	b _081161D8
 _08115E8E:
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0
 	movs r1, 0
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 	movs r0, 0x5
 	strb r0, [r5, 0x19]
 	ldrb r1, [r5, 0x13]
@@ -2475,10 +2475,10 @@ sub_8116D60: @ 8116D60
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	strb r1, [r4, 0xF]
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0
 	movs r1, 0
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 	ldrb r0, [r4, 0xE]
 	bl RedrawListMenu
 	ldr r5, _08116DD4 @ =gStringVar1
@@ -4188,10 +4188,10 @@ _08117C3C:
 	beq _08117C84
 	b _08117ECA
 _08117C42:
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0
 	movs r1, 0
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 	ldr r1, [r5]
 	ldrb r0, [r5, 0x13]
 	lsls r0, 5
@@ -4702,10 +4702,10 @@ _0811808E:
 	cmp r0, 0
 	bne _08118130
 	strb r2, [r5, 0xF]
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0
 	movs r1, 0
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 	ldrb r0, [r5, 0xE]
 	bl RedrawListMenu
 	ldr r4, _0811812C @ =gStringVar1
@@ -5118,10 +5118,10 @@ _0811843A:
 	beq _0811849C
 	strb r4, [r5, 0xF]
 	strb r4, [r5, 0x14]
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0
 	movs r1, 0
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 	ldr r0, [r5]
 	adds r4, r0, 0
 	adds r4, 0x10

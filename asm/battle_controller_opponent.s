@@ -3596,7 +3596,7 @@ sub_80377FC: @ 80377FC
 	adds r0, r6
 	bl DecompressGhostFrontPic
 	ldrb r0, [r4]
-	bl sub_8074900
+	bl GetGhostSpriteDefault_Y
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r3, _0803788C @ =gBattleSpritesDataPtr
@@ -3658,7 +3658,7 @@ _080378AA:
 	lsls r4, 24
 	lsrs r4, 24
 	ldrb r0, [r7]
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -3887,7 +3887,7 @@ sub_8037A28: @ 8037A28
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r6, 0
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -4219,7 +4219,7 @@ _08037D3A:
 	asrs r4, 16
 	mov r1, r8
 	ldrb r0, [r1]
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24

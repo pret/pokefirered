@@ -843,10 +843,10 @@ _080CE4CC:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080CE4E0
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0
 	movs r1, 0
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 _080CE4E0:
 	movs r0, 0x1
 	negs r0, r0

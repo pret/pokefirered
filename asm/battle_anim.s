@@ -634,7 +634,7 @@ _080729A8:
 	ldr r0, _08072A04 @ =gBattleAnimAttacker
 _080729AE:
 	ldrb r0, [r0]
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r4, 24

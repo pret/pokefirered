@@ -2630,7 +2630,7 @@ _080AEFF8:
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
 	ldrb r0, [r4]
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, 0x2

@@ -347,7 +347,7 @@ static void SafariHandleReturnMonToBall(void)
 
 static void SafariHandleDrawTrainerPic(void)
 {
-    sub_8034750(gSaveBlock2Ptr->playerGender, gActiveBattler);
+    DecompressTrainerBackPalette(gSaveBlock2Ptr->playerGender, gActiveBattler);
     SetMultiuseSpriteTemplateToTrainerBack(gSaveBlock2Ptr->playerGender, GetBattlerPosition(gActiveBattler));
     gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate,
                                                      80,

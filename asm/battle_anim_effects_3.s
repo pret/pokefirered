@@ -5735,7 +5735,7 @@ sub_80E0EDC: @ 80E0EDC
 _080E0F16:
 	ldr r0, _080E0F24 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	subs r0, 0x1
 	b _080E0F32
 	.align 2, 0
@@ -5743,7 +5743,7 @@ _080E0F24: .4byte gBattleAnimAttacker
 _080E0F28:
 	ldr r0, _080E0F74 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	adds r0, 0x1
 _080E0F32:
 	adds r1, r4, 0
@@ -7613,7 +7613,7 @@ _080E1DA2:
 	lsrs r0, 24
 	strh r0, [r5, 0x12]
 	adds r0, r4, 0
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x14]
@@ -8641,7 +8641,7 @@ _080E258A:
 	ldrsh r6, [r7, r1]
 	mov r1, r8
 	ldrb r0, [r1]
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	adds r3, r0, 0
 	subs r3, 0x5
 	lsls r3, 24
@@ -10654,7 +10654,7 @@ sub_80E34D0: @ 80E34D0
 	cmp r0, 0
 	bne _080E34FC
 	ldrb r0, [r4]
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	subs r0, 0x2
 	adds r1, r5, 0
 	adds r1, 0x43
@@ -10666,7 +10666,7 @@ _080E34F4: .4byte gBattleAnimTarget
 _080E34F8: .4byte 0x0000ff70
 _080E34FC:
 	ldrb r0, [r4]
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	adds r0, 0x2
 	adds r1, r5, 0
 	adds r1, 0x43

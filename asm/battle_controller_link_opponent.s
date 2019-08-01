@@ -3591,7 +3591,7 @@ LinkOpponentHandleLoadPokeSprite: @ 803C3B4
 	lsls r4, 24
 	lsrs r4, 24
 	ldrb r0, [r6]
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -3795,7 +3795,7 @@ sub_803C550: @ 803C550
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r6, 0
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -4270,7 +4270,7 @@ _0803C992:
 	asrs r4, 16
 	mov r1, r8
 	ldrb r0, [r1]
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24

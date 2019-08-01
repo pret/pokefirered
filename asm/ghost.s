@@ -2898,7 +2898,7 @@ sub_80B68C8: @ 80B68C8
 	lsrs r0, 24
 	strh r0, [r4, 0x12]
 	ldrb r0, [r5]
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, 0x2

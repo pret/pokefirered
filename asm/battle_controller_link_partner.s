@@ -3385,7 +3385,7 @@ LinkPartnerHandleLoadPokeSprite: @ 80D5DB4
 	lsls r4, 24
 	lsrs r4, 24
 	ldrb r0, [r6]
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -3577,7 +3577,7 @@ sub_80D5F40: @ 80D5F40
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r6, 0
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -3896,7 +3896,7 @@ _080D6258:
 	ldr r5, _080D6318 @ =gActiveBattler
 	ldrb r1, [r5]
 	adds r0, r4, 0
-	bl sub_8034750
+	bl DecompressTrainerBackPalette
 	ldrb r0, [r5]
 	bl GetBattlerPosition
 	adds r1, r0, 0
@@ -3918,7 +3918,7 @@ _080D6258:
 	adds r4, r0
 	asrs r4, 16
 	ldrb r0, [r5]
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24

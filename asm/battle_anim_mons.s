@@ -594,8 +594,8 @@ _080748F0:
 	bx r1
 	thumb_func_end GetSubstituteSpriteDefault_Y
 
-	thumb_func_start sub_8074900
-sub_8074900: @ 8074900
+	thumb_func_start GetGhostSpriteDefault_Y
+GetGhostSpriteDefault_Y: @ 8074900
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -618,7 +618,7 @@ _0807491E:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8074900
+	thumb_func_end GetGhostSpriteDefault_Y
 
 	thumb_func_start sub_807492C
 sub_807492C: @ 807492C
@@ -4839,7 +4839,7 @@ _080767FE:
 	cmp r0, 0
 	beq _08076840
 	adds r0, r4, 0
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	ldr r3, _08076858 @ =gBattlerSpriteIds
 	adds r3, r5, r3
 	ldrb r2, [r3]
@@ -4878,8 +4878,8 @@ _08076854: .4byte gSprites
 _08076858: .4byte gBattlerSpriteIds
 	thumb_func_end sub_80767F0
 
-	thumb_func_start sub_807685C
-sub_807685C: @ 807685C
+	thumb_func_start GetBattlerSpriteSubpriority
+GetBattlerSpriteSubpriority: @ 807685C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -4900,7 +4900,7 @@ _0807687E:
 	adds r0, r1, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_807685C
+	thumb_func_end GetBattlerSpriteSubpriority
 
 	thumb_func_start sub_8076884
 sub_8076884: @ 8076884
@@ -5946,7 +5946,7 @@ _08077064:
 	adds r0, 0x10
 	lsls r4, r0, 4
 	ldrb r0, [r7]
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x14]

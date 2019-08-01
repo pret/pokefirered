@@ -129,6 +129,7 @@ void oamt_add_pos2_onto_pos1(struct Sprite *sprite);
 u8 GetBattlerSpriteDefault_Y(u8 bank);
 u8 sub_80A82E4(u8 bank);
 u8 GetSubstituteSpriteDefault_Y(u8 bank);
+u8 GetGhostSpriteDefault_Y(u8 battlerId);
 
 // battle_anim_80A9C70.s
 void LaunchStatusAnimation(u8 bank, u8 statusAnimId);
@@ -148,6 +149,7 @@ void SetSpriteRotScale(u8 spriteId, s16 xScale, s16 yScale, u16 rotation);
 bool8 IsContest(void);
 void sub_80759DC(u8 spriteId);
 bool8 IsBattlerSpritePresent(u8 battlerId);
+u8 GetBattlerSpriteSubpriority(u8 battlerId);
 
 // battle_anim_mon_movement.c
 void AnimTask_ShakeMon(u8 taskId);

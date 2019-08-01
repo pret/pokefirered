@@ -750,7 +750,7 @@ sub_80AB168: @ 80AB168
 	ldr r6, _080AB1B8 @ =0x0000fff6
 	strh r6, [r4, 0x26]
 	ldrb r0, [r7]
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	lsls r0, 24
 	lsrs r5, r0, 24
 	bl IsContest
@@ -2408,7 +2408,7 @@ sub_80ABE4C: @ 80ABE4C
 	lsrs r6, r0, 24
 	movs r5, 0xAC
 	ldrb r0, [r4]
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	subs r0, 0x1
 	lsls r0, 24
 	lsrs r0, 24
@@ -3679,7 +3679,7 @@ _080AC826:
 	strh r0, [r4, 0x30]
 	ldr r0, _080AC870 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	subs r0, 0x1
 	adds r1, r4, 0
 	adds r1, 0x43
@@ -3737,7 +3737,7 @@ _080AC89C:
 	strh r0, [r4, 0x30]
 	ldr r0, _080AC8E8 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	subs r0, 0x1
 	adds r1, r4, 0
 	adds r1, 0x43

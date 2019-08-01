@@ -4966,7 +4966,7 @@ sub_80E9E6C: @ 80E9E6C
 	ldrb r0, [r0, 0x8]
 	ldr r6, _080E9ED0 @ =gActiveBattler
 	ldrb r1, [r6]
-	bl sub_8034750
+	bl DecompressTrainerBackPalette
 	ldr r0, [r4]
 	ldrb r5, [r0, 0x8]
 	ldrb r0, [r6]
@@ -5007,7 +5007,7 @@ _080E9EE0:
 	ldr r4, _080E9F8C @ =gActiveBattler
 	ldrb r1, [r4]
 	movs r0, 0x5
-	bl sub_8034750
+	bl DecompressTrainerBackPalette
 	ldrb r0, [r4]
 	bl GetBattlerPosition
 	adds r1, r0, 0
@@ -5112,7 +5112,7 @@ sub_80E9FB0: @ 80E9FB0
 	ldrb r0, [r0, 0x8]
 	ldr r6, _080EA014 @ =gActiveBattler
 	ldrb r1, [r6]
-	bl sub_8034750
+	bl DecompressTrainerBackPalette
 	ldr r0, [r4]
 	ldrb r5, [r0, 0x8]
 	ldrb r0, [r6]
@@ -5153,7 +5153,7 @@ _080EA024:
 	ldr r4, _080EA0D0 @ =gActiveBattler
 	ldrb r1, [r4]
 	movs r0, 0x5
-	bl sub_8034750
+	bl DecompressTrainerBackPalette
 	ldrb r0, [r4]
 	bl GetBattlerPosition
 	adds r1, r0, 0
@@ -7086,7 +7086,7 @@ sub_80EAF34: @ 80EAF34
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r6, 0
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24

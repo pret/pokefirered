@@ -177,10 +177,10 @@ _08128554:
 	bl CreateTask
 	ldr r1, [r4]
 	strb r0, [r1, 0xF]
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0xE8
 	movs r1, 0x96
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 _08128598:
 	add sp, 0x4
 	pop {r4-r6}

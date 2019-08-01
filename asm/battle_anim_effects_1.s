@@ -229,7 +229,7 @@ _080A24A2:
 	ble _080A24BC
 	ldr r0, _080A24B8 @ =gBattleAnimTarget
 	ldrb r0, [r0]
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	adds r0, 0x1
 	b _080A24C6
 	.align 2, 0
@@ -237,7 +237,7 @@ _080A24B8: .4byte gBattleAnimTarget
 _080A24BC:
 	ldr r0, _080A24FC @ =gBattleAnimTarget
 	ldrb r0, [r0]
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	adds r0, 0x6
 _080A24C6:
 	adds r1, r4, 0
@@ -306,7 +306,7 @@ sub_80A2500: @ 80A2500
 	ldr r4, _080A2578 @ =gUnknown_83E2A88
 	ldr r0, _080A257C @ =gBattleAnimTarget
 	ldrb r0, [r0]
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	adds r3, r0, 0
 	adds r3, 0x1
 	lsls r3, 24
@@ -868,7 +868,7 @@ sub_80A2974: @ 80A2974
 	bhi _080A29C0
 	ldr r0, _080A29BC @ =gBattleAnimAttacker
 	ldrb r0, [r0]
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	subs r0, 0x1
 	b _080A29CA
 	.align 2, 0
@@ -876,7 +876,7 @@ _080A29BC: .4byte gBattleAnimAttacker
 _080A29C0:
 	ldr r0, _080A29DC @ =gBattleAnimAttacker
 	ldrb r0, [r0]
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	adds r0, 0x1
 _080A29CA:
 	adds r1, r4, 0
@@ -2995,7 +2995,7 @@ sub_80A39C0: @ 80A39C0
 	adds r5, r0, r1
 	ldr r4, _080A3B18 @ =gBattleAnimTarget
 	ldrb r0, [r4]
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, 0x1

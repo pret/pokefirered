@@ -4058,10 +4058,10 @@ _08056B3C:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08056B62
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0
 	movs r1, 0
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 	b _08056B62
 	.align 2, 0
 _08056B54: .4byte gWirelessCommType
@@ -4389,10 +4389,10 @@ _08056E18:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08056E3E
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0
 	movs r1, 0
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 	b _08056E3E
 	.align 2, 0
 _08056E30: .4byte gWirelessCommType

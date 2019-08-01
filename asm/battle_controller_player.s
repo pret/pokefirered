@@ -4884,23 +4884,23 @@ ActionSelectionDestroyCursorAt: @ 8030A98
 	thumb_func_start sub_8030ADC
 sub_8030ADC: @ 8030ADC
 	push {lr}
-	ldr r0, _08030AE8 @ =sub_8077764
+	ldr r0, _08030AE8 @ =ReshowBattleScreenAfterMenu
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08030AE8: .4byte sub_8077764
+_08030AE8: .4byte ReshowBattleScreenAfterMenu
 	thumb_func_end sub_8030ADC
 
 	thumb_func_start sub_8030AEC
 sub_8030AEC: @ 8030AEC
 	push {lr}
-	ldr r0, _08030AF8 @ =sub_8077764
+	ldr r0, _08030AF8 @ =ReshowBattleScreenAfterMenu
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08030AF8: .4byte sub_8077764
+_08030AF8: .4byte ReshowBattleScreenAfterMenu
 	thumb_func_end sub_8030AEC
 
 	thumb_func_start CompleteOnFinishedStatusAnimation
@@ -7457,7 +7457,7 @@ sub_8031FF4: @ 8031FF4
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r6, 0
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -7803,7 +7803,7 @@ _08032342:
 	ldr r5, _08032404 @ =gActiveBattler
 	ldrb r1, [r5]
 	adds r0, r4, 0
-	bl sub_8034750
+	bl DecompressTrainerBackPalette
 	ldrb r0, [r5]
 	bl GetBattlerPosition
 	adds r1, r0, 0
@@ -7825,7 +7825,7 @@ _08032342:
 	adds r4, r0
 	asrs r4, 16
 	ldrb r0, [r5]
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -7980,7 +7980,7 @@ _080324BE:
 	ldr r5, _0803256C @ =gActiveBattler
 	ldrb r1, [r5]
 	adds r0, r4, 0
-	bl sub_8034750
+	bl DecompressTrainerBackPalette
 	ldrb r0, [r5]
 	bl GetBattlerPosition
 	adds r1, r0, 0

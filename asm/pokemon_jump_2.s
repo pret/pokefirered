@@ -442,10 +442,10 @@ _08147E0C:
 	ldr r0, [r4]
 	adds r0, 0xA4
 	bl sub_8149CEC
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0
 	movs r1, 0
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 	ldr r1, [r4]
 	b _08147EBC
 	.align 2, 0

@@ -393,10 +393,10 @@ _08150B16:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08150BDC
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0
 	movs r1, 0
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 	b _08150BDC
 	.align 2, 0
 _08150B38: .4byte gReceivedRemoteLinkPlayers

@@ -211,5 +211,7 @@ bool32 sub_800B270(void);
 void sub_800B388(void);
 void sub_8054A28(void);
 void sub_800B1F4(void);
+void LoadWirelessStatusIndicatorSpriteGfx(void);
+void CreateWirelessStatusIndicatorSprite(u8, u8);
 
 #endif // GUARD_LINK_H

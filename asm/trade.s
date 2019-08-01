@@ -435,10 +435,10 @@ _0804C9C4:
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0
 	movs r1, 0
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 	b _0804CEE6
 	.align 2, 0
 _0804C9E0: .4byte gWirelessCommType
@@ -1134,10 +1134,10 @@ _0804CFDC:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804CFF0
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0
 	movs r1, 0
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 _0804CFF0:
 	ldr r1, _0804D000 @ =gMain
 	movs r3, 0x87
@@ -7749,10 +7749,10 @@ _0805044C:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0805046C
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0
 	movs r1, 0
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 _0805046C:
 	ldr r0, _08050498 @ =sub_8053D84
 	bl SetMainCallback2

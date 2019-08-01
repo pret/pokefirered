@@ -15672,7 +15672,7 @@ _080254B6:
 	subs r2, 0x1
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r3, _080254F4 @ =sub_8077764
+	ldr r3, _080254F4 @ =ReshowBattleScreenAfterMenu
 	ldr r4, _080254F8 @ =gMoveToLearn
 	ldrh r4, [r4]
 	str r4, [sp]
@@ -15688,7 +15688,7 @@ _080254E4: .4byte gPaletteFade
 _080254E8: .4byte gPlayerParty
 _080254EC: .4byte gBattleStruct
 _080254F0: .4byte gPlayerPartyCount
-_080254F4: .4byte sub_8077764
+_080254F4: .4byte ReshowBattleScreenAfterMenu
 _080254F8: .4byte gMoveToLearn
 _080254FC: .4byte gBattleScripting
 _08025500:
@@ -32490,7 +32490,7 @@ _0802DA72:
 	ldr r2, _0802DAC0 @ =0x05006000
 	add r0, sp, 0x10
 	bl CpuSet
-	ldr r0, _0802DAC4 @ =sub_80116F4
+	ldr r0, _0802DAC4 @ =VBlankCB_Battle
 	bl SetVBlankCallback
 	ldrb r0, [r4]
 	adds r0, 0x1
@@ -32503,7 +32503,7 @@ _0802DAB4: .4byte BattleMainCB2
 _0802DAB8: .4byte gTasks
 _0802DABC: .4byte gBattleCommunication
 _0802DAC0: .4byte 0x05006000
-_0802DAC4: .4byte sub_80116F4
+_0802DAC4: .4byte VBlankCB_Battle
 _0802DAC8:
 	bl sub_800F34C
 	bl LoadBattleTextboxAndBackground

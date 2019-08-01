@@ -420,7 +420,7 @@ void BattleLoadPlayerMonSpriteGfx(struct Pokemon *mon, u8 battlerId)
     }
 }
 
-void DecompressGhostFrontPic(u16 frontPicId, u8 battlerId)
+void DecompressGhostFrontPic(struct Pokemon *unused, u8 battlerId)
 {
     u16 palOffset;
     void *buffer;
@@ -448,9 +448,9 @@ void DecompressTrainerFrontPic(u16 frontPicId, u8 battlerId)
     LoadCompressedSpritePaletteUsingHeap(&gTrainerFrontPicPaletteTable[frontPicId]);
 }
 
-void sub_8034750(u16 a1, u8 a2)
+void DecompressTrainerBackPalette(u16 index, u8 palette)
 {
-    LoadCompressedPalette(gUnknown_8239FD4[a1].data, (a2 + 16) * 16, 0x20);
+    LoadCompressedPalette(gUnknown_8239FD4[index].data, (palette + 16) * 16, 0x20);
 }
 
 void nullsub_16(u8 a1)

@@ -5266,7 +5266,7 @@ _080127B0:
 	ldrb r7, [r7]
 	cmp r5, r7
 	bge _08012824
-	ldr r0, _080128E0 @ =gChosenMoveByBattler
+	ldr r0, _080128E0 @ =gUnknown_2023C34
 	mov r8, r0
 	ldr r3, _080128C4 @ =gDisableStructs
 	ldr r4, _080128D4 @ =gStatuses3
@@ -5403,7 +5403,7 @@ _080128D0: .4byte gCurrentMove
 _080128D4: .4byte gStatuses3
 _080128D8: .4byte gBattleMons
 _080128DC: .4byte gBattlersCount
-_080128E0: .4byte gChosenMoveByBattler
+_080128E0: .4byte gUnknown_2023C34
 _080128E4: .4byte 0xfbffffff
 _080128E8: .4byte 0x15100007
 _080128EC: .4byte 0x0003043f
@@ -5431,7 +5431,7 @@ _0801290C:
 	ldrb r6, [r6]
 	cmp r5, r6
 	bge _0801296C
-	ldr r0, _08012B8C @ =gChosenMoveByBattler
+	ldr r0, _08012B8C @ =gUnknown_2023C34
 	mov r8, r0
 	ldr r6, _08012B90 @ =gBitTable
 	ldr r4, _08012B94 @ =gActiveBattler
@@ -5749,7 +5749,7 @@ _08012B7C: .4byte gBattleMons
 _08012B80: .4byte gBattleStruct
 _08012B84: .4byte gActionSelectionCursor
 _08012B88: .4byte gBattlersCount
-_08012B8C: .4byte gChosenMoveByBattler
+_08012B8C: .4byte gUnknown_2023C34
 _08012B90: .4byte gBitTable
 _08012B94: .4byte gActiveBattler
 _08012B98: .4byte 0xffff1fff
@@ -7571,7 +7571,7 @@ _08013A22:
 	mov r8, r1
 	movs r7, 0x6
 	ldr r6, _08013AF4 @ =gUnknown_2023D7C
-	ldr r2, _08013AF8 @ =gUnknown_2023DC4
+	ldr r2, _08013AF8 @ =gChosenMoveByBattler
 	movs r4, 0xFF
 	movs r3, 0
 _08013A32:
@@ -7671,7 +7671,7 @@ _08013AE8: .4byte gBattleStruct
 _08013AEC: .4byte gBattlersCount
 _08013AF0: .4byte gBattlerByTurnOrder
 _08013AF4: .4byte gUnknown_2023D7C
-_08013AF8: .4byte gUnknown_2023DC4
+_08013AF8: .4byte gChosenMoveByBattler
 _08013AFC: .4byte gAbsentBattlerFlags
 _08013B00: .4byte gBattleMainFunc
 _08013B04: .4byte sub_8014040
@@ -7894,7 +7894,7 @@ _08013CBC:
 	ldr r7, _08013D48 @ =gUnknown_2023D7C
 	movs r6, 0xFF
 	movs r5, 0
-	ldr r3, _08013D4C @ =gUnknown_2023DC4
+	ldr r3, _08013D4C @ =gChosenMoveByBattler
 _08013CDE:
 	adds r1, r2, r7
 	ldrb r0, [r1]
@@ -7946,7 +7946,7 @@ _08013D3C: .4byte gBattleMainFunc
 _08013D40: .4byte gAbsentBattlerFlags
 _08013D44: .4byte sub_8014040
 _08013D48: .4byte gUnknown_2023D7C
-_08013D4C: .4byte gUnknown_2023DC4
+_08013D4C: .4byte gChosenMoveByBattler
 _08013D50: .4byte gUnknown_2023E80
 	thumb_func_end BattleTurnPassed
 
@@ -8631,7 +8631,7 @@ _080142D8:
 	ldrh r2, [r0, 0x6]
 	cmp r2, 0
 	beq _0801432C
-	ldr r1, _08014320 @ =gUnknown_2023DC4
+	ldr r1, _08014320 @ =gChosenMoveByBattler
 	lsls r0, r4, 1
 	adds r0, r1
 	strh r2, [r0]
@@ -8655,7 +8655,7 @@ _080142D8:
 	.align 2, 0
 _08014318: .4byte gDisableStructs
 _0801431C: .4byte gActiveBattler
-_08014320: .4byte gUnknown_2023DC4
+_08014320: .4byte gChosenMoveByBattler
 _08014324: .4byte gBattleStruct
 _08014328: .4byte gBattleCommunication
 _0801432C:
@@ -9300,7 +9300,7 @@ _0801487C:
 	adds r0, r6
 	ldrb r0, [r0]
 	strb r0, [r1]
-	ldr r0, _080148CC @ =gUnknown_2023DC4
+	ldr r0, _080148CC @ =gChosenMoveByBattler
 	ldrb r2, [r2]
 	lsls r5, r2, 1
 	adds r5, r0
@@ -9329,7 +9329,7 @@ _0801487C:
 	b _08014B30
 	.align 2, 0
 _080148C8: .4byte gBattleStruct
-_080148CC: .4byte gUnknown_2023DC4
+_080148CC: .4byte gChosenMoveByBattler
 _080148D0: .4byte gBattleMons
 _080148D4: .4byte gBattleCommunication
 _080148D8:
@@ -10662,7 +10662,7 @@ TurnValuesCleanUp: @ 8015330
 	beq _08015428
 	ldr r7, _08015390 @ =gProtectStructs
 	adds r6, r5, 0
-	ldr r0, _08015394 @ =gChosenMoveByBattler
+	ldr r0, _08015394 @ =gUnknown_2023C34
 	mov r12, r0
 	ldr r1, _08015398 @ =gDisableStructs
 	mov r8, r1
@@ -10692,7 +10692,7 @@ _0801535E:
 _08015388: .4byte gActiveBattler
 _0801538C: .4byte gBattlersCount
 _08015390: .4byte gProtectStructs
-_08015394: .4byte gChosenMoveByBattler
+_08015394: .4byte gUnknown_2023C34
 _08015398: .4byte gDisableStructs
 _0801539C:
 	ldrb r0, [r6]
@@ -10866,7 +10866,7 @@ _080154CC:
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
-	ldr r1, _0801553C @ =gUnknown_2023DC4
+	ldr r1, _0801553C @ =gChosenMoveByBattler
 	ldrb r3, [r5]
 	lsls r0, r3, 1
 	adds r0, r1
@@ -10909,7 +10909,7 @@ _0801552C: .4byte gBattleStruct
 _08015530: .4byte gBattlersCount
 _08015534: .4byte gActiveBattler
 _08015538: .4byte gBattlerAttacker
-_0801553C: .4byte gUnknown_2023DC4
+_0801553C: .4byte gChosenMoveByBattler
 _08015540: .4byte gBattleMons
 _08015544: .4byte gDisableStructs
 _08015548: .4byte gProtectStructs
@@ -12046,7 +12046,7 @@ _08015EBC:
 	mov r1, r10
 	adds r1, 0xC
 	adds r0, r1
-	ldr r1, _08015F00 @ =gUnknown_2023DC4
+	ldr r1, _08015F00 @ =gChosenMoveByBattler
 	lsls r2, 1
 	adds r2, r1
 	ldrh r3, [r0]
@@ -12069,7 +12069,7 @@ _08015EF6:
 	b _08015F18
 	.align 2, 0
 _08015EFC: .4byte gBattlerAttacker
-_08015F00: .4byte gUnknown_2023DC4
+_08015F00: .4byte gChosenMoveByBattler
 _08015F04: .4byte gCurrentMove
 _08015F08: .4byte gChosenMove
 _08015F0C: .4byte gBattleStruct
@@ -12402,7 +12402,7 @@ _080161AA:
 	adds r1, r2
 	adds r1, 0x20
 	ldrb r1, [r1]
-	bl sub_80C71D0
+	bl RecordAbilityBattle
 	ldr r2, _080161F0 @ =gSpecialStatuses
 	ldrb r1, [r4]
 	lsls r0, r1, 2

@@ -10,27 +10,27 @@
 #define MOVE_LIMITATION_TAUNT                   (1 << 4)
 #define MOVE_LIMITATION_IMPRISON                (1 << 5)
 
-#define ABILITYEFFECT_ON_SWITCHIN               0x0
-#define ABILITYEFFECT_ENDTURN                   0x1
-#define ABILITYEFFECT_MOVES_BLOCK               0x2
-#define ABILITYEFFECT_ABSORBING                 0x3
-#define ABILITYEFFECT_CONTACT                   0x4
-#define ABILITYEFFECT_IMMUNITY                  0x5
-#define ABILITYEFFECT_FORECAST                  0x6
-#define ABILITYEFFECT_SYNCHRONIZE               0x7
-#define ABILITYEFFECT_ATK_SYNCHRONIZE           0x8
-#define ABILITYEFFECT_INTIMIDATE1               0x9
-#define ABILITYEFFECT_INTIMIDATE2               0xA
-#define ABILITYEFFECT_TRACE                     0xB
-#define ABILITYEFFECT_CHECK_OTHER_SIDE          0xC
-#define ABILITYEFFECT_CHECK_BANK_SIDE           0xD
-#define ABILITYEFFECT_FIELD_SPORT               0xE
-#define ABILITYEFFECT_CHECK_FIELD_EXCEPT_BANK   0xF
-#define ABILITYEFFECT_COUNT_OTHER_SIDE          0x10
-#define ABILITYEFFECT_COUNT_BANK_SIDE           0x11
-#define ABILITYEFFECT_COUNT_ON_FIELD            0x12
-#define ABILITYEFFECT_CHECK_ON_FIELD            0x13
-#define ABILITYEFFECT_SWITCH_IN_WEATHER         0xFF
+#define ABILITYEFFECT_ON_SWITCHIN                0x0
+#define ABILITYEFFECT_ENDTURN                    0x1
+#define ABILITYEFFECT_MOVES_BLOCK                0x2
+#define ABILITYEFFECT_ABSORBING                  0x3
+#define ABILITYEFFECT_MOVE_END                   0x4
+#define ABILITYEFFECT_IMMUNITY                   0x5
+#define ABILITYEFFECT_FORECAST                   0x6
+#define ABILITYEFFECT_SYNCHRONIZE                0x7
+#define ABILITYEFFECT_ATK_SYNCHRONIZE            0x8
+#define ABILITYEFFECT_INTIMIDATE1                0x9
+#define ABILITYEFFECT_INTIMIDATE2                0xA
+#define ABILITYEFFECT_TRACE                      0xB
+#define ABILITYEFFECT_CHECK_OTHER_SIDE           0xC
+#define ABILITYEFFECT_CHECK_BATTLER_SIDE         0xD
+#define ABILITYEFFECT_FIELD_SPORT                0xE
+#define ABILITYEFFECT_CHECK_FIELD_EXCEPT_BATTLER 0xF // TODO: Is it correct? 
+#define ABILITYEFFECT_COUNT_OTHER_SIDE           0x10
+#define ABILITYEFFECT_COUNT_BATTLER_SIDE         0x11
+#define ABILITYEFFECT_COUNT_ON_FIELD             0x12
+#define ABILITYEFFECT_CHECK_ON_FIELD             0x13
+#define ABILITYEFFECT_SWITCH_IN_WEATHER          0xFF
 
 #define ABILITY_ON_OPPOSING_FIELD(battlerId, abilityId)(AbilityBattleEffects(ABILITYEFFECT_CHECK_OTHER_SIDE, battlerId, abilityId, 0, 0))
 #define ABILITY_ON_FIELD(abilityId)(AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, abilityId, 0, 0))

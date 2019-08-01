@@ -290,7 +290,7 @@ _0801D98E:
 	mov r1, r8
 	ldrb r0, [r1]
 	ldrb r1, [r4]
-	bl sub_80C71D0
+	bl RecordAbilityBattle
 	b _0801DAFC
 	.align 2, 0
 _0801D9C8: .4byte gBattlersCount
@@ -2198,7 +2198,7 @@ _0801E8C0:
 	strb r1, [r0, 0x6]
 	ldrb r0, [r4]
 	ldrb r1, [r3]
-	bl sub_80C71D0
+	bl RecordAbilityBattle
 	b _0801E9D4
 	.align 2, 0
 _0801E910: .4byte gBattleMoves
@@ -2355,7 +2355,7 @@ _0801EA10:
 	strb r0, [r1, 0x6]
 	ldrb r0, [r5]
 	ldrb r1, [r3]
-	bl sub_80C71D0
+	bl RecordAbilityBattle
 _0801EA52:
 	ldr r0, _0801EA98 @ =gMoveResultFlags
 	ldrb r1, [r0]
@@ -2465,7 +2465,7 @@ _0801EB08:
 	strb r1, [r0, 0x6]
 	ldrb r0, [r3]
 	movs r1, 0x1A
-	bl sub_80C71D0
+	bl RecordAbilityBattle
 	b _0801ED18
 	.align 2, 0
 _0801EB3C: .4byte gBattleMons
@@ -2710,7 +2710,7 @@ _0801ECC2:
 	mov r1, r8
 	ldrb r0, [r1]
 	movs r1, 0x19
-	bl sub_80C71D0
+	bl RecordAbilityBattle
 _0801ED18:
 	pop {r3,r4}
 	mov r8, r3
@@ -5342,7 +5342,7 @@ _080201A6:
 	mov r3, r9
 	ldrb r0, [r3]
 	movs r1, 0x11
-	bl sub_80C71D0
+	bl RecordAbilityBattle
 	ldr r4, _080201D8 @ =gBattlescriptCurrInstr
 	ldr r0, [r4]
 	adds r0, 0x1
@@ -5465,7 +5465,7 @@ _0802028A:
 	mov r3, r9
 	ldrb r0, [r3]
 	movs r1, 0x29
-	bl sub_80C71D0
+	bl RecordAbilityBattle
 	ldr r4, _080202AC @ =gBattlescriptCurrInstr
 	ldr r0, [r4]
 	adds r0, 0x1
@@ -5656,7 +5656,7 @@ _08020402:
 	mov r3, r9
 	ldrb r0, [r3]
 	movs r1, 0x7
-	bl sub_80C71D0
+	bl RecordAbilityBattle
 	ldr r4, _08020424 @ =gBattlescriptCurrInstr
 	ldr r0, [r4]
 	adds r0, 0x1
@@ -5699,7 +5699,7 @@ _0802045A:
 	mov r1, r9
 	ldrb r0, [r1]
 	movs r1, 0x11
-	bl sub_80C71D0
+	bl RecordAbilityBattle
 	ldr r4, _08020498 @ =gBattlescriptCurrInstr
 	ldr r0, [r4]
 	adds r0, 0x1
@@ -6128,7 +6128,7 @@ _0802084C:
 	mov r1, r9
 	ldrb r0, [r1]
 	movs r1, 0x27
-	bl sub_80C71D0
+	bl RecordAbilityBattle
 	ldr r1, _08020868 @ =gBattlescriptCurrInstr
 	ldr r0, _0802086C @ =gUnknown_81D9452
 	str r0, [r1]
@@ -6737,7 +6737,7 @@ _08020D26:
 	strb r0, [r1]
 	ldrb r0, [r7]
 	ldrb r1, [r1]
-	bl sub_80C71D0
+	bl RecordAbilityBattle
 	b _0802110A
 	.align 2, 0
 _08020D64: .4byte gBattleTypeFlags
@@ -7075,7 +7075,7 @@ _08021018:
 	str r0, [r1]
 	ldrb r0, [r5]
 	movs r1, 0x3C
-	bl sub_80C71D0
+	bl RecordAbilityBattle
 	b _0802110A
 	.align 2, 0
 _0802104C: .4byte gLastUsedAbility
@@ -8017,7 +8017,7 @@ _080217C8:
 	ldrb r1, [r0]
 	adds r0, r4, 0
 _080217EC:
-	bl sub_80C71D0
+	bl RecordAbilityBattle
 	ldr r0, _08021800 @ =gBattleScripting
 	strb r4, [r0, 0x15]
 	b _0802180A
@@ -12164,7 +12164,7 @@ _0802381C:
 	ldr r2, _08023854 @ =gDisableStructs
 	ldr r5, _08023858 @ =0xfeffffff
 	adds r3, r0, 0
-	ldr r1, _0802385C @ =gChosenMoveByBattler
+	ldr r1, _0802385C @ =gUnknown_2023C34
 _0802382E:
 	ldrb r0, [r2, 0xA]
 	cmp r0, 0
@@ -12189,7 +12189,7 @@ _08023846:
 _08023850: .4byte gBattlersCount
 _08023854: .4byte gDisableStructs
 _08023858: .4byte 0xfeffffff
-_0802385C: .4byte gChosenMoveByBattler
+_0802385C: .4byte gUnknown_2023C34
 _08023860:
 	ldr r1, _08023914 @ =gHitMarker
 	ldr r3, [r1]
@@ -12709,7 +12709,7 @@ atk4A_typecalc2: @ 8023C38
 	strb r2, [r0, 0x6]
 	ldrb r0, [r7]
 	ldrb r1, [r3]
-	bl sub_80C71D0
+	bl RecordAbilityBattle
 	b _08023DAE
 	.align 2, 0
 _08023C9C: .4byte gBattleMoves
@@ -12910,7 +12910,7 @@ _08023DF0:
 	strb r0, [r1, 0x6]
 	ldrb r0, [r2]
 	ldrb r1, [r3]
-	bl sub_80C71D0
+	bl RecordAbilityBattle
 _08023E2A:
 	ldr r0, _08023E74 @ =gMoveResultFlags
 	ldrb r1, [r0]
@@ -18090,7 +18090,7 @@ atk70_recordlastability: @ 8026844
 	ldrb r0, [r1]
 	ldr r1, _08026874 @ =gLastUsedAbility
 	ldrb r1, [r1]
-	bl sub_80C71D0
+	bl RecordAbilityBattle
 	ldr r0, [r4]
 	adds r0, 0x1
 	str r0, [r4]
@@ -19248,7 +19248,7 @@ _0802718C:
 	adds r1, r6
 	adds r1, 0x20
 	ldrb r1, [r1]
-	bl sub_80C71D0
+	bl RecordAbilityBattle
 	ldr r1, _080271B8 @ =gBattlescriptCurrInstr
 	ldr r0, _080271BC @ =gUnknown_81D93AF
 	str r0, [r1]
@@ -20232,7 +20232,7 @@ _08027918:
 	str r4, [r5]
 	ldrb r1, [r2]
 	adds r0, r3, 0
-	bl sub_80C71D0
+	bl RecordAbilityBattle
 	b _08027942
 	.align 2, 0
 _08027930: .4byte gBattleMons
@@ -20820,7 +20820,7 @@ _08027DB4:
 	strb r0, [r1]
 	ldrb r0, [r2]
 	ldrb r1, [r1]
-	bl sub_80C71D0
+	bl RecordAbilityBattle
 	ldr r6, _08027DFC @ =gActiveBattler
 	ldrb r1, [r6]
 	lsls r0, r1, 2
@@ -20873,7 +20873,7 @@ _08027E0C:
 	strb r0, [r1]
 	ldrb r0, [r3]
 	ldrb r1, [r1]
-	bl sub_80C71D0
+	bl RecordAbilityBattle
 	b _08027D48
 	.align 2, 0
 _08027E58: .4byte gActiveBattler
@@ -20918,7 +20918,7 @@ _08027E8E:
 	strb r0, [r1]
 	ldrb r0, [r2]
 	ldrb r1, [r1]
-	bl sub_80C71D0
+	bl RecordAbilityBattle
 	b _08027D48
 	.align 2, 0
 _08027EBC: .4byte gActiveBattler
@@ -22333,7 +22333,7 @@ _08028998:
 	mov r1, r9
 	ldrb r0, [r1]
 	movs r1, 0x5
-	bl sub_80C71D0
+	bl RecordAbilityBattle
 	b _08028C48
 	.align 2, 0
 _080289D4: .4byte gPotentialItemEffectBattler
@@ -23030,7 +23030,7 @@ _08028F1C:
 	strb r2, [r0]
 	ldrb r0, [r5]
 	movs r1, 0xC
-	bl sub_80C71D0
+	bl RecordAbilityBattle
 	b _0802902C
 	.align 2, 0
 _08028F78: .4byte gBattlerPartyIndexes
@@ -26040,7 +26040,7 @@ _0802A738: .4byte 0xf7ffffff
 _0802A73C:
 	ldrb r1, [r1]
 	adds r0, r3, 0
-	bl sub_80C71D0
+	bl RecordAbilityBattle
 	ldrb r0, [r6, 0x5]
 	movs r1, 0x1
 	orrs r0, r1
@@ -26113,7 +26113,7 @@ _0802A7DC: .4byte 0xf7ffffff
 _0802A7E0:
 	ldrb r1, [r1]
 	adds r0, r3, 0
-	bl sub_80C71D0
+	bl RecordAbilityBattle
 	ldr r1, _0802A838 @ =gBattleCommunication
 	ldrb r0, [r1, 0x5]
 	mov r2, r9
@@ -27382,7 +27382,7 @@ _0802B1A2:
 	lsls r0, 31
 	cmp r0, 0
 	bne _0802B2A8
-	ldr r0, _0802B27C @ =gUnknown_2023DC4
+	ldr r0, _0802B27C @ =gChosenMoveByBattler
 	lsls r1, r3, 1
 	adds r1, r0
 	ldrh r0, [r1]
@@ -27454,7 +27454,7 @@ _0802B26C: .4byte gBattlerAttacker
 _0802B270: .4byte gBattleStruct
 _0802B274: .4byte gBattleMons
 _0802B278: .4byte gDisableStructs
-_0802B27C: .4byte gUnknown_2023DC4
+_0802B27C: .4byte gChosenMoveByBattler
 _0802B280: .4byte gBattlersCount
 _0802B284: .4byte gCurrentMove
 _0802B288: .4byte gUnknown_2023D48
@@ -29442,7 +29442,7 @@ _0802C224:
 	strb r0, [r1]
 	ldrb r0, [r7]
 	ldrb r1, [r1]
-	bl sub_80C71D0
+	bl RecordAbilityBattle
 	b _0802C37A
 	.align 2, 0
 _0802C24C: .4byte gBattlescriptCurrInstr
@@ -31575,7 +31575,7 @@ atkEC_pursuitrelated: @ 802D2A0
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0802D340
-	ldr r1, _0802D32C @ =gUnknown_2023DC4
+	ldr r1, _0802D32C @ =gChosenMoveByBattler
 	lsls r0, r3, 1
 	adds r0, r1
 	ldrh r2, [r0]
@@ -31606,7 +31606,7 @@ _0802D31C: .4byte gBattleTypeFlags
 _0802D320: .4byte gAbsentBattlerFlags
 _0802D324: .4byte gBitTable
 _0802D328: .4byte gUnknown_2023D7C
-_0802D32C: .4byte gUnknown_2023DC4
+_0802D32C: .4byte gChosenMoveByBattler
 _0802D330: .4byte gUnknown_2023BDA
 _0802D334: .4byte gCurrentMove
 _0802D338: .4byte gBattlescriptCurrInstr

@@ -2561,8 +2561,8 @@ _0807AF92:
 	bx r0
 	thumb_func_end sub_807AF00
 
-	thumb_func_start weather_get_current
-weather_get_current: @ 807AF98
+	thumb_func_start GetCurrentWeather
+GetCurrentWeather: @ 807AF98
 	ldr r0, _0807AFA4 @ =gUnknown_2037F34
 	movs r1, 0xDA
 	lsls r1, 3
@@ -2571,7 +2571,7 @@ weather_get_current: @ 807AF98
 	bx lr
 	.align 2, 0
 _0807AFA4: .4byte gUnknown_2037F34
-	thumb_func_end weather_get_current
+	thumb_func_end GetCurrentWeather
 
 	thumb_func_start SetRainStrengthFromSoundEffect
 SetRainStrengthFromSoundEffect: @ 807AFA8

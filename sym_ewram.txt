@@ -216,7 +216,7 @@ gUnknown_2023C0C: @ 2023C0C
 gUnknown_2023C30: @ 2023C30
 	.space 0x4
 
-gChosenMoveByBattler: @ 2023C34
+gUnknown_2023C34: @ 2023C34
 	.space 0x110
 
 gBattlerSpriteIds: @ 2023D44
@@ -306,7 +306,7 @@ gUnknown_2023DB8: @ 2023DB8
 gUnknown_2023DC0: @ 2023DC0
 	.space 0x4
 
-gUnknown_2023DC4: @ 2023DC4
+gChosenMoveByBattler: @ 2023DC4
 	.space 0x8
 
 gMoveResultFlags: @ 2023DCC

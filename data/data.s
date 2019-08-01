@@ -254,25 +254,25 @@ gUnknown_8250038:: @ 8250038
 gUnknown_8250070:: @ 8250070
 	.incbin "baserom.gba", 0x250070, 0x24
 
-gUnknown_8250094:: @ 8250094
+gStatusConditionString_PoisonJpn:: @ 8250094
 	.incbin "baserom.gba", 0x250094, 0x8
 
-gUnknown_825009C:: @ 825009C
+gStatusConditionString_SleepJpn:: @ 825009C
 	.incbin "baserom.gba", 0x25009C, 0x8
 
-gUnknown_82500A4:: @ 82500A4
+gStatusConditionString_ParalysisJpn:: @ 82500A4
 	.incbin "baserom.gba", 0x2500A4, 0x8
 
-gUnknown_82500AC:: @ 82500AC
+gStatusConditionString_BurnJpn:: @ 82500AC
 	.incbin "baserom.gba", 0x2500AC, 0x8
 
-gUnknown_82500B4:: @ 82500B4
+gStatusConditionString_IceJpn:: @ 82500B4
 	.incbin "baserom.gba", 0x2500B4, 0x8
 
-gUnknown_82500BC:: @ 82500BC
+gStatusConditionString_ConfusionJpn:: @ 82500BC
 	.incbin "baserom.gba", 0x2500BC, 0x8
 
-gUnknown_82500C4:: @ 82500C4
+gStatusConditionString_LoveJpn:: @ 82500C4
 	.incbin "baserom.gba", 0x2500C4, 0x8
 
 gUnknown_82500CC:: @ 82500CC

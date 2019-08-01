@@ -241,7 +241,7 @@ struct ResourceFlags
     u32 flags[4];
 };
 
-#define UNKNOWN_FLAG_FLASH_FIRE 1
+#define RESOURCE_FLAG_FLASH_FIRE 1
 
 struct DisableStruct
 {
@@ -274,7 +274,7 @@ struct DisableStruct
     /*0x18*/ u8 truantSwitchInHack : 1;
     /*0x18*/ u8 unk18_a_2 : 2;
     /*0x18*/ u8 mimickedMoves : 4;
-    /*0x19*/ u8 rechargeCounter;
+    /*0x19*/ u8 rechargeTimer;
     /*0x1A*/ u8 unk1A[2];
 };
 
@@ -559,13 +559,16 @@ struct BattleStruct
     u16 hpOnSwitchout[2];
     u8 abilityPreventingSwitchout;
     u8 hpScale;
-    u8 synchronizeMoveEffect;
+    u8 field_AE;
     u8 field_AF;
-    u32 savedBattleTypeFlags; // TODO: Is it correct to place it here? Or simply not used?
-    u8 field_B4;
+    u8 field_B0;
+    u8 field_B1;
+    u8 field_B2;
+    u8 field_B3;
+    u8 synchronizeMoveEffect;
     u8 field_B5;
     u8 field_B6;
-    u8 field_B7;
+    u8 atkCancellerTracker;
     // void (*savedCallback)(void);
     u16 usedHeldItems[MAX_BATTLERS_COUNT];
     u8 chosenItem[4]; // why is this an u8?
@@ -581,31 +584,11 @@ struct BattleStruct
     u8 givenExpMons;
     u8 lastTakenMoveFrom[MAX_BATTLERS_COUNT * MAX_BATTLERS_COUNT * 2];
     u16 castformPalette[MAX_BATTLERS_COUNT][16];
-/*
-    // EM fields
-    u8 field_180;
-    u8 field_181;
-    u8 field_182;
-    u8 field_183;
-    struct BattleEnigmaBerry battleEnigmaBerry;
-    u8 wishPerishSongState;
-    u8 wishPerishSongBattlerId;
-    bool8 overworldWeatherDone;
-    u8 atkCancellerTracker;
-    u8 field_1A4[96];
-    u8 field_204[104];
-    u8 field_26C[40];
-    u8 AI_monToSwitchIntoId[BATTLE_BANKS_COUNT];
-    u8 field_298[8];
-    u8 field_2A0;
-    u8 field_2A1;
-    u8 field_2A2;
-*/
     u8 wishPerishSongState;
     u8 wishPerishSongBattlerId;
     u8 field_182; // overworldWeatherDone?
-    u8 field_183; // atkCancellerTracker?
-    u8 field_184[124]; // only for padding
+    u8 field_183;
+    u8 field_184[124]; // currently unknown
 }; // size == 0x200 bytes
 
 extern struct BattleStruct *gBattleStruct;
@@ -620,6 +603,13 @@ extern struct BattleStruct *gBattleStruct;
 
 #define IS_TYPE_PHYSICAL(moveType)(moveType < TYPE_MYSTERY)
 #define IS_TYPE_SPECIAL(moveType)(moveType > TYPE_MYSTERY)
+#define TARGET_TURN_DAMAGED ((gSpecialStatuses[gBattlerTarget].physicalDmg != 0 || gSpecialStatuses[gBattlerTarget].specialDmg != 0))
+#define IS_BATTLER_OF_TYPE(battlerId, type)((gBattleMons[battlerId].type1 == type || gBattleMons[battlerId].type2 == type))
+#define SET_BATTLER_TYPE(battlerId, type)   \
+{                                           \
+    gBattleMons[battlerId].type1 = type;    \
+    gBattleMons[battlerId].type2 = type;    \
+}
 
 #define MOVE_EFFECT_SLEEP               0x1
 #define MOVE_EFFECT_POISON              0x2
@@ -734,6 +724,7 @@ extern struct BattleStruct *gBattleStruct;
 #define B_ANIM_STATUS_WRAPPED           0x9
 
 #define GET_STAT_BUFF_ID(n)((n & 0xF))              // first four bits 0x1, 0x2, 0x4, 0x8
+#define GET_STAT_BUFF_VALUE2(n)((n & 0xF0))
 #define GET_STAT_BUFF_VALUE(n)(((n >> 4) & 7))      // 0x10, 0x20, 0x40
 #define STAT_BUFF_NEGATIVE 0x80                     // 0x80, the sign bit
 
@@ -992,5 +983,10 @@ extern u8 gBattlerByTurnOrder[MAX_BATTLERS_COUNT];
 extern u8 gBattleCommunication[BATTLE_COMMUNICATION_ENTRIES_COUNT];
 extern u16 gSideStatuses[2];
 extern u32 gHitMarker;
+extern u16 gChosenMoveByBattler[MAX_BATTLERS_COUNT];
+extern u8 gMoveResultFlags;
+extern s32 gTakenDmg[MAX_BATTLERS_COUNT];
+extern u8 gTakenDmgByBattler[MAX_BATTLERS_COUNT];
+
 
 #endif // GUARD_BATTLE_H

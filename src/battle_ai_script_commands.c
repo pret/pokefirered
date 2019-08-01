@@ -479,7 +479,7 @@ void sub_80C71A8(u8 a)
         BATTLE_HISTORY->usedMoves[a / 2][i] = 0;
 }
 
-void sub_80C71D0(u8 a, u8 b)
+void RecordAbilityBattle(u8 a, u8 b)
 {
     if (GetBattlerSide(a) == 0)
         BATTLE_HISTORY->abilities[GetBattlerPosition(a) & 1] = b;

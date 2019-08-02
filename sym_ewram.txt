@@ -1387,11 +1387,8 @@ gUnknown_203F38C: @ 203F38C
 gUnknown_203F39C: @ 203F39C
 	.space 0x4
 
-gUnknown_203F3A0: @ 203F3A0
-	.space 0x4
-
-gUnknown_203F3A4: @ 203F3A4
-	.space 0x4
+	.align 2
+	.include "src/slot_machine.o"
 
 sLocationHistory: @ 203F3A8
 	.space 0x6

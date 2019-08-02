@@ -3067,13 +3067,13 @@ gText_HatchedFromEgg:: @ 841B6FD
 gText_NickHatchPrompt:: @ 841B716
 	.string "Would you like to nickname the newly\nhatched {STR_VAR_1}?$"
 
-gUnknown_841B747:: @ 841B747
+gString_OutOfCoins:: @ 841B747
 	.string "You've run out of COINS.\nGame over!$"
 
-gUnknown_841B76B:: @ 841B76B
+gString_QuitPlaying:: @ 841B76B
 	.string "Quit playing?$"
 
-gUnknown_841B779:: @ 841B779
+gString_SlotMachineControls:: @ 841B779
 	.string "{KEYGFX_DPAD_LEFT_RIGHT}COMBOS {KEYGFX_DPAD_DOWN}WAGER {KEYGFX_A_BUTTON}STOP {KEYGFX_B_BUTTON}EXIT$"
 
 gUnknown_841B798:: @ 0x841B798

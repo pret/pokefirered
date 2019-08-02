@@ -3,6 +3,6 @@
 
 #include "global.h"
 
-void PlaySlotMachine(u8, void *);
+void PlaySlotMachine(u16, void (*)(void));
 
 #endif // GUARD_SLOT_MACHINE_H

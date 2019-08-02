@@ -80,72 +80,72 @@ struct UnkStruct_8466C0C
     u32 count;
 };
 
-EWRAM_DATA struct SlotMachineState * sSlotMachineState = NULL;
-EWRAM_DATA struct SlotMachineGfxManager * sSlotMachineGfxManager = NULL;
+static EWRAM_DATA struct SlotMachineState * sSlotMachineState = NULL;
+static EWRAM_DATA struct SlotMachineGfxManager * sSlotMachineGfxManager = NULL;
 
-void sub_813F84C(struct SlotMachineState * ptr);
-void sub_813F898(void);
-void sub_813F92C(void);
-void sub_813F94C(void);
-void MainTask_SlotsGameLoop(u8 taskId);
-void MainTask_NoCoinsGameOver(u8 taskId);
-void MainTask_ShowHelp(u8 taskId);
-void MainTask_ConfirmExitGame(u8 taskId);
-void MainTask_DarnNoPayout(u8 taskId);
-void MainTask_WinHandlePayout(u8 taskId);
-void MainTask_ExitSlots(u8 taskId);
+static void sub_813F84C(struct SlotMachineState * ptr);
+static void sub_813F898(void);
+static void sub_813F92C(void);
+static void sub_813F94C(void);
+static void MainTask_SlotsGameLoop(u8 taskId);
+static void MainTask_NoCoinsGameOver(u8 taskId);
+static void MainTask_ShowHelp(u8 taskId);
+static void MainTask_ConfirmExitGame(u8 taskId);
+static void MainTask_DarnNoPayout(u8 taskId);
+static void MainTask_WinHandlePayout(u8 taskId);
+static void MainTask_ExitSlots(u8 taskId);
 static void SetMainTask(TaskFunc taskFunc);
-void sub_8140060(u8 taskId);
-void sub_8140148(void);
-void sub_814016C(u16 whichReel, u16 whichReel2);
-bool32 sub_81401A0(u16);
-void sub_81401F0(u16 whichReel);
-void sub_81403BC(u16 whichReel);
-void sub_81404B8(u16 whichReel);
-bool32 sub_814054C(s32, s32, s32, s32, s32);
-bool32 sub_81406E8(s32, s32, s32);
-bool32 sub_81408F4(s32, s32);
-void sub_81409B4(void);
-void sub_8140A70(void);
-u16 sub_8140A80(void);
-void sub_8140C6C(struct SlotMachineGfxManager * manager);
-void sub_8140D7C(const s16 *, const s16 *);
-bool32 sub_814104C(void);
-void sub_8141094(void);
-struct SlotMachineSetupTaskData * sub_814112C(void);
-void sub_81410CC(u8 taskId);
-void sub_8141148(u16 a0, u8 a1);
-bool32 sub_8141180(u8 a0);
-bool8 sub_8141198(u8 *, struct SlotMachineSetupTaskData *);
-bool8 sub_8141460(u8 *, struct SlotMachineSetupTaskData *);
-bool8 sub_81414AC(u8 *, struct SlotMachineSetupTaskData *);
-bool8 sub_81414EC(u8 *, struct SlotMachineSetupTaskData *);
-bool8 sub_81414FC(u8 *, struct SlotMachineSetupTaskData *);
-bool8 sub_8141518(u8 *, struct SlotMachineSetupTaskData *);
-bool8 sub_8141558(u8 *, struct SlotMachineSetupTaskData *);
-bool8 sub_8141568(u8 *, struct SlotMachineSetupTaskData *);
-bool8 sub_8141578(u8 *, struct SlotMachineSetupTaskData *);
-bool8 sub_8141584(u8 *, struct SlotMachineSetupTaskData *);
-bool8 sub_81415C8(u8 *, struct SlotMachineSetupTaskData *);
-bool8 sub_8141610(u8 *, struct SlotMachineSetupTaskData *);
-bool8 sub_8141650(u8 *, struct SlotMachineSetupTaskData *);
-bool8 sub_8141690(u8 *, struct SlotMachineSetupTaskData *);
-bool8 sub_81416C8(u8 *, struct SlotMachineSetupTaskData *);
-bool8 sub_8141764(u8 *, struct SlotMachineSetupTaskData *);
-void sub_81417E4(const u8 * str);
-void sub_8141828(void);
-void sub_8141834(u16 * bgTilemapBuffer);
-void sub_81418C4(u16 * bgTilemapBuffer, u16 a0, u16 a1);
-void sub_814191C(u8 taskId);
-void sub_8141AB0(void);
-void sub_8141AD8(u8 a0);
-void sub_8141B18(void);
-void sub_8141B34(void);
-void sub_8141BA0(u8 a0);
-void sub_8141BE4(void);
-void sub_8141C30(u8, u8);
+static void sub_8140060(u8 taskId);
+static void sub_8140148(void);
+static void sub_814016C(u16 whichReel, u16 whichReel2);
+static bool32 sub_81401A0(u16);
+static void sub_81401F0(u16 whichReel);
+static void sub_81403BC(u16 whichReel);
+static void sub_81404B8(u16 whichReel);
+static bool32 sub_814054C(s32, s32, s32, s32, s32);
+static bool32 sub_81406E8(s32, s32, s32);
+static bool32 sub_81408F4(s32, s32);
+static void sub_81409B4(void);
+static void sub_8140A70(void);
+static u16 sub_8140A80(void);
+static void sub_8140C6C(struct SlotMachineGfxManager * manager);
+static void sub_8140D7C(const s16 *, const s16 *);
+static bool32 sub_814104C(void);
+static void sub_8141094(void);
+static struct SlotMachineSetupTaskData * sub_814112C(void);
+static void sub_81410CC(u8 taskId);
+static void sub_8141148(u16 a0, u8 a1);
+static bool32 sub_8141180(u8 a0);
+static bool8 sub_8141198(u8 *, struct SlotMachineSetupTaskData *);
+static bool8 sub_8141460(u8 *, struct SlotMachineSetupTaskData *);
+static bool8 sub_81414AC(u8 *, struct SlotMachineSetupTaskData *);
+static bool8 sub_81414EC(u8 *, struct SlotMachineSetupTaskData *);
+static bool8 sub_81414FC(u8 *, struct SlotMachineSetupTaskData *);
+static bool8 sub_8141518(u8 *, struct SlotMachineSetupTaskData *);
+static bool8 sub_8141558(u8 *, struct SlotMachineSetupTaskData *);
+static bool8 sub_8141568(u8 *, struct SlotMachineSetupTaskData *);
+static bool8 sub_8141578(u8 *, struct SlotMachineSetupTaskData *);
+static bool8 sub_8141584(u8 *, struct SlotMachineSetupTaskData *);
+static bool8 sub_81415C8(u8 *, struct SlotMachineSetupTaskData *);
+static bool8 sub_8141610(u8 *, struct SlotMachineSetupTaskData *);
+static bool8 sub_8141650(u8 *, struct SlotMachineSetupTaskData *);
+static bool8 sub_8141690(u8 *, struct SlotMachineSetupTaskData *);
+static bool8 sub_81416C8(u8 *, struct SlotMachineSetupTaskData *);
+static bool8 sub_8141764(u8 *, struct SlotMachineSetupTaskData *);
+static void sub_81417E4(const u8 * str);
+static void sub_8141828(void);
+static void sub_8141834(u16 * bgTilemapBuffer);
+static void sub_81418C4(u16 * bgTilemapBuffer, u16 a0, u16 a1);
+static void sub_814191C(u8 taskId);
+static void sub_8141AB0(void);
+static void sub_8141AD8(u8 a0);
+static void sub_8141B18(void);
+static void sub_8141B34(void);
+static void sub_8141BA0(u8 a0);
+static void sub_8141BE4(void);
+static void sub_8141C30(u8, u8);
 
-const u8 gUnknown_8464890[][2] = {
+static const u8 gUnknown_8464890[][2] = {
     {0x00, 0x03},
     {0x00, 0x06},
     {0x03, 0x06},
@@ -167,7 +167,7 @@ const u8 gUnknown_8464890[][2] = {
     {0x04, 0x06}
 };
 
-const u8 gUnknown_84648AE[][3] = {
+static const u8 gUnknown_84648AE[][3] = {
     {0x00, 0x03, 0x06}, // top row
     {0x01, 0x04, 0x07}, // middle row
     {0x02, 0x05, 0x08}, // bottom row
@@ -175,7 +175,7 @@ const u8 gUnknown_84648AE[][3] = {
     {0x02, 0x04, 0x06}  // bl-tr
 };
 
-const u8 gUnknown_84648BD[][4] = {
+static const u8 gUnknown_84648BD[][4] = {
     {0x00, 0x04, 0x08, 0x03}, // tl-br
     {0x00, 0x03, 0x06, 0x02}, // top row
     {0x01, 0x04, 0x07, 0x01}, // middle row
@@ -183,7 +183,7 @@ const u8 gUnknown_84648BD[][4] = {
     {0x02, 0x04, 0x06, 0x03}  // bl-tr
 };
 
-const u16 gUnknown_84648D2[][7] = {
+static const u16 gUnknown_84648D2[][7] = {
     {0x1fa1, 0x2eab, 0x3630, 0x39f3, 0x3bd4, 0x3bfc, 0x0049},
     {0x1f97, 0x2ea2, 0x3627, 0x39e9, 0x3bca, 0x3bf8, 0x0049},
     {0x1f91, 0x2e9b, 0x3620, 0x39e3, 0x3bc4, 0x3bf4, 0x0049},
@@ -192,13 +192,13 @@ const u16 gUnknown_84648D2[][7] = {
     {0x1fc9, 0x2efc, 0x3696, 0x3a63, 0x3c49, 0x3c8b, 0x0073},
 };
 
-const u8 gUnknown_8464926[][21] = {
+static const u8 gUnknown_8464926[][21] = {
     {0x00, 0x03, 0x04, 0x01, 0x02, 0x06, 0x02, 0x05, 0x00, 0x06, 0x03, 0x01, 0x04, 0x02, 0x06, 0x00, 0x05, 0x02, 0x01, 0x06, 0x02},
     {0x00, 0x05, 0x04, 0x03, 0x01, 0x05, 0x04, 0x03, 0x02, 0x05, 0x04, 0x03, 0x00, 0x05, 0x04, 0x01, 0x03, 0x06, 0x05, 0x03, 0x04},
     {0x00, 0x03, 0x06, 0x05, 0x02, 0x03, 0x06, 0x05, 0x02, 0x03, 0x05, 0x06, 0x02, 0x03, 0x05, 0x06, 0x02, 0x03, 0x05, 0x06, 0x01},
 };
 
-const u16 gUnknown_8464966[] = {
+static const u16 gUnknown_8464966[] = {
       0,
       2,
       6,
@@ -208,24 +208,24 @@ const u16 gUnknown_8464966[] = {
     300
 };
 
-const u16 gUnknown_8464974[] = INCBIN_U16("graphics/slot_machine/unk_8464974.gbapal");
-const u16 gUnknown_8464994[] = INCBIN_U16("graphics/slot_machine/unk_8464994.gbapal");
-const u16 gUnknown_84649B4[] = INCBIN_U16("graphics/slot_machine/unk_84649b4.gbapal");
-const u16 gUnknown_84649D4[] = INCBIN_U16("graphics/slot_machine/unk_84649d4.gbapal");
-const u16 gUnknown_84649F4[] = INCBIN_U16("graphics/slot_machine/unk_84649f4.gbapal");
-const u32 gUnknown_8464A14[] = INCBIN_U32("graphics/slot_machine/unk_8464a14.4bpp.lz");
-const u16 gUnknown_846504C[] = INCBIN_U16("graphics/slot_machine/unk_846504c.gbapal");
-const u32 gUnknown_846506C[] = INCBIN_U32("graphics/slot_machine/unk_846506c.4bpp.lz");
-const u16 gUnknown_8465524[] = INCBIN_U16("graphics/slot_machine/unk_8465524.gbapal");
-const u32 gUnknown_8465544[] = INCBIN_U32("graphics/slot_machine/unk_8465544.4bpp.lz");
+static const u16 gUnknown_8464974[] = INCBIN_U16("graphics/slot_machine/unk_8464974.gbapal");
+static const u16 gUnknown_8464994[] = INCBIN_U16("graphics/slot_machine/unk_8464994.gbapal");
+static const u16 gUnknown_84649B4[] = INCBIN_U16("graphics/slot_machine/unk_84649b4.gbapal");
+static const u16 gUnknown_84649D4[] = INCBIN_U16("graphics/slot_machine/unk_84649d4.gbapal");
+static const u16 gUnknown_84649F4[] = INCBIN_U16("graphics/slot_machine/unk_84649f4.gbapal");
+static const u32 gUnknown_8464A14[] = INCBIN_U32("graphics/slot_machine/unk_8464a14.4bpp.lz");
+static const u16 gUnknown_846504C[] = INCBIN_U16("graphics/slot_machine/unk_846504c.gbapal");
+static const u32 gUnknown_846506C[] = INCBIN_U32("graphics/slot_machine/unk_846506c.4bpp.lz");
+static const u16 gUnknown_8465524[] = INCBIN_U16("graphics/slot_machine/unk_8465524.gbapal");
+static const u32 gUnknown_8465544[] = INCBIN_U32("graphics/slot_machine/unk_8465544.4bpp.lz");
 
-const struct CompressedSpriteSheet gUnknown_84655B0[] = {
+static const struct CompressedSpriteSheet gUnknown_84655B0[] = {
     {(const void *)gUnknown_8464A14, 0xe00, 0},
     {(const void *)gUnknown_846506C, 0xc00, 1},
     {(const void *)gUnknown_8465544, 0x280, 2},
 };
 
-const struct SpritePalette gUnknown_84655C8[] = {
+static const struct SpritePalette gUnknown_84655C8[] = {
     {gUnknown_8464974, 0},
     {gUnknown_8464994, 1},
     {gUnknown_84649B4, 2},
@@ -236,7 +236,7 @@ const struct SpritePalette gUnknown_84655C8[] = {
     {NULL}
 };
 
-const u16 gUnknown_8465608[] = {
+static const u16 gUnknown_8465608[] = {
     2,
     2,
     0,
@@ -246,7 +246,7 @@ const u16 gUnknown_8465608[] = {
     3
 };
 
-const u16 gUnknown_8465616[] = {
+static const u16 gUnknown_8465616[] = {
     0x0120, 0x011f, 0x011e, 0x011d, 0x011c, 0x011b, 0x011a, 0x0119, 0x0118, 0x0117, 0x0116, 0x0115, 0x0114, 0x0113, 0x0112, 0x0111,
     0x0110, 0x010f, 0x010e, 0x010d, 0x010c, 0x010b, 0x010a, 0x0109, 0x0108, 0x0107, 0x0106, 0x0105, 0x0104, 0x0103, 0x0102, 0x0101,
     0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100,
@@ -255,13 +255,13 @@ const u16 gUnknown_8465616[] = {
     0x0111, 0x0112, 0x0113, 0x0114, 0x0115, 0x0116, 0x0117, 0x0118, 0x0119, 0x011a, 0x011b, 0x011c, 0x011d, 0x011e, 0x011f, 0x0120
 };
 
-const u8 gUnknown_84656D6[] = {
+static const u8 gUnknown_84656D6[] = {
     0x10, 0x10, 0x10, 0x10, 0x0f, 0x0e, 0x0d, 0x0d, 0x0c, 0x0b, 0x0a, 0x0a, 0x09, 0x08, 0x07, 0x07, 0x06, 0x05, 0x04, 0x04, 0x03, 0x02, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x02, 0x03, 0x03, 0x04, 0x05, 0x06, 0x06, 0x07, 0x08, 0x09, 0x09, 0x0a, 0x0b, 0x0c, 0x0c, 0x0d, 0x0e, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f
 };
 
-const struct OamData gUnknown_8465738 = {
+static const struct OamData gUnknown_8465738 = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -277,67 +277,67 @@ const struct OamData gUnknown_8465738 = {
     .affineParam = 0
 };
 
-const union AnimCmd gUnknown_8465740[] = {
+static const union AnimCmd gUnknown_8465740[] = {
     ANIMCMD_FRAME(0x00, 4),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_8465748[] = {
+static const union AnimCmd gUnknown_8465748[] = {
     ANIMCMD_FRAME(0x10, 4),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_8465750[] = {
+static const union AnimCmd gUnknown_8465750[] = {
     ANIMCMD_FRAME(0x20, 4),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_8465758[] = {
+static const union AnimCmd gUnknown_8465758[] = {
     ANIMCMD_FRAME(0x30, 4),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_8465760[] = {
+static const union AnimCmd gUnknown_8465760[] = {
     ANIMCMD_FRAME(0x40, 4),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_8465768[] = {
+static const union AnimCmd gUnknown_8465768[] = {
     ANIMCMD_FRAME(0x50, 4),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_8465770[] = {
+static const union AnimCmd gUnknown_8465770[] = {
     ANIMCMD_FRAME(0x60, 4),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_8465778[] = {
+static const union AnimCmd gUnknown_8465778[] = {
     ANIMCMD_FRAME(0x20, 4),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_8465780[] = {
+static const union AnimCmd gUnknown_8465780[] = {
     ANIMCMD_FRAME(0x30, 4),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_8465788[] = {
+static const union AnimCmd gUnknown_8465788[] = {
     ANIMCMD_FRAME(0x40, 4),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_8465790[] = {
+static const union AnimCmd gUnknown_8465790[] = {
     ANIMCMD_FRAME(0x50, 4),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_8465798[] = {
+static const union AnimCmd gUnknown_8465798[] = {
     ANIMCMD_FRAME(0x60, 4),
     ANIMCMD_END
 };
 
-const union AnimCmd *const gUnknown_84657A0[] = {
+static const union AnimCmd *const gUnknown_84657A0[] = {
     gUnknown_8465740,
     gUnknown_8465748,
     gUnknown_8465750,
@@ -352,20 +352,20 @@ const union AnimCmd *const gUnknown_84657A0[] = {
     gUnknown_8465798
 };
 
-const union AffineAnimCmd gUnknown_84657D0[] = {
+static const union AffineAnimCmd gUnknown_84657D0[] = {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 1),
     AFFINEANIMCMD_END
 };
 
-const union AffineAnimCmd *const gUnknown_84657E0[] = {
+static const union AffineAnimCmd *const gUnknown_84657E0[] = {
     gUnknown_84657D0
 };
 
-const struct SpriteTemplate gUnknown_84657E4 = {
+static const struct SpriteTemplate gUnknown_84657E4 = {
     0, 0, &gUnknown_8465738, gUnknown_84657A0, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
-const struct OamData gUnknown_84657FC = {
+static const struct OamData gUnknown_84657FC = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -381,57 +381,57 @@ const struct OamData gUnknown_84657FC = {
     .affineParam = 0
 };
 
-const union AnimCmd gUnknown_8465804[] = {
+static const union AnimCmd gUnknown_8465804[] = {
     ANIMCMD_FRAME(0x00, 4),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_846580C[] = {
+static const union AnimCmd gUnknown_846580C[] = {
     ANIMCMD_FRAME(0x02, 4),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_8465814[] = {
+static const union AnimCmd gUnknown_8465814[] = {
     ANIMCMD_FRAME(0x04, 4),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_846581C[] = {
+static const union AnimCmd gUnknown_846581C[] = {
     ANIMCMD_FRAME(0x06, 4),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_8465824[] = {
+static const union AnimCmd gUnknown_8465824[] = {
     ANIMCMD_FRAME(0x08, 4),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_846582C[] = {
+static const union AnimCmd gUnknown_846582C[] = {
     ANIMCMD_FRAME(0x0a, 4),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_8465834[] = {
+static const union AnimCmd gUnknown_8465834[] = {
     ANIMCMD_FRAME(0x0c, 4),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_846583C[] = {
+static const union AnimCmd gUnknown_846583C[] = {
     ANIMCMD_FRAME(0x0e, 4),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_8465844[] = {
+static const union AnimCmd gUnknown_8465844[] = {
     ANIMCMD_FRAME(0x10, 4),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_846584C[] = {
+static const union AnimCmd gUnknown_846584C[] = {
     ANIMCMD_FRAME(0x12, 4),
     ANIMCMD_END
 };
 
-const union AnimCmd *const gUnknown_8465854[] = {
+static const union AnimCmd *const gUnknown_8465854[] = {
     gUnknown_8465804,
     gUnknown_846580C,
     gUnknown_8465814,
@@ -444,11 +444,11 @@ const union AnimCmd *const gUnknown_8465854[] = {
     gUnknown_846584C
 };
 
-const struct SpriteTemplate gUnknown_846587C = {
+static const struct SpriteTemplate gUnknown_846587C = {
     2, 6, &gUnknown_84657FC, gUnknown_8465854, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
-const struct OamData gUnknown_8465894 = {
+static const struct OamData gUnknown_8465894 = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -464,37 +464,37 @@ const struct OamData gUnknown_8465894 = {
     .affineParam = 0
 };
 
-const union AnimCmd gUnknown_846589C[] = {
+static const union AnimCmd gUnknown_846589C[] = {
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_84658A4[] = {
+static const union AnimCmd gUnknown_84658A4[] = {
     ANIMCMD_FRAME( 0, 24),
     ANIMCMD_FRAME(16, 24),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd gUnknown_84658B0[] = {
+static const union AnimCmd gUnknown_84658B0[] = {
     ANIMCMD_FRAME(32, 28),
     ANIMCMD_FRAME(48, 28),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd gUnknown_84658BC[] = {
+static const union AnimCmd gUnknown_84658BC[] = {
     ANIMCMD_FRAME(64, 12),
     ANIMCMD_FRAME(80, 12),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd *const gUnknown_84658C8[] = {
+static const union AnimCmd *const gUnknown_84658C8[] = {
     gUnknown_846589C,
     gUnknown_84658A4,
     gUnknown_84658B0,
     gUnknown_84658BC
 };
 
-const struct SpriteTemplate gUnknown_84658D8 = {
+static const struct SpriteTemplate gUnknown_84658D8 = {
     1, 5, &gUnknown_8465894, gUnknown_84658C8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
@@ -517,23 +517,23 @@ bool8 (*const gUnknown_84658F0[])(u8 *, struct SlotMachineSetupTaskData *) = {
     sub_8141764
 };
 
-const u16 gUnknown_8465930[] = INCBIN_U16("graphics/slot_machine/unk_8465930.gbapal");
-const u16 gUnknown_8465950[] = INCBIN_U16("graphics/slot_machine/unk_8465950.gbapal");
-const u16 gUnknown_8465970[] = INCBIN_U16("graphics/slot_machine/unk_8465970.gbapal");
-const u16 gUnknown_8465990[] = INCBIN_U16("graphics/slot_machine/unk_8465990.gbapal");
-const u16 gUnknown_84659B0[] = INCBIN_U16("graphics/slot_machine/unk_84659b0.gbapal");
-const u32 gUnknown_84659D0[] = INCBIN_U32("graphics/slot_machine/unk_84659d0.4bpp.lz");
-const u32 gUnknown_84661D4[] = INCBIN_U32("graphics/slot_machine/unk_84661d4.bin.lz");
-const u16 gUnknown_84664BC[] = INCBIN_U16("graphics/slot_machine/unk_84664bc.gbapal");
-const u16 gUnknown_84664DC[] = INCBIN_U16("graphics/slot_machine/unk_84664dc.gbapal","graphics/slot_machine/unk_84664fc.gbapal", "graphics/slot_machine/unk_846651c.gbapal");
-const u32 gUnknown_846653C[] = INCBIN_U32("graphics/slot_machine/unk_846653c.4bpp.lz");
-const u16 gUnknown_84665C0[] = INCBIN_U16("graphics/slot_machine/unk_84665c0.gbapal");
-const u16 gUnknown_84665E0[] = INCBIN_U16("graphics/slot_machine/unk_84665e0.gbapal");
-const u16 gUnknown_8466600[] = INCBIN_U16("graphics/slot_machine/unk_8466600.gbapal");
-const u32 gUnknown_8466620[] = INCBIN_U32("graphics/slot_machine/unk_8466620.4bpp.lz");
-const u32 gUnknown_8466998[] = INCBIN_U32("graphics/slot_machine/unk_8466998.bin.lz");
+static const u16 gUnknown_8465930[] = INCBIN_U16("graphics/slot_machine/unk_8465930.gbapal");
+static const u16 gUnknown_8465950[] = INCBIN_U16("graphics/slot_machine/unk_8465950.gbapal");
+static const u16 gUnknown_8465970[] = INCBIN_U16("graphics/slot_machine/unk_8465970.gbapal");
+static const u16 gUnknown_8465990[] = INCBIN_U16("graphics/slot_machine/unk_8465990.gbapal");
+static const u16 gUnknown_84659B0[] = INCBIN_U16("graphics/slot_machine/unk_84659b0.gbapal");
+static const u32 gUnknown_84659D0[] = INCBIN_U32("graphics/slot_machine/unk_84659d0.4bpp.lz");
+static const u32 gUnknown_84661D4[] = INCBIN_U32("graphics/slot_machine/unk_84661d4.bin.lz");
+static const u16 gUnknown_84664BC[] = INCBIN_U16("graphics/slot_machine/unk_84664bc.gbapal");
+static const u16 gUnknown_84664DC[] = INCBIN_U16("graphics/slot_machine/unk_84664dc.gbapal","graphics/slot_machine/unk_84664fc.gbapal", "graphics/slot_machine/unk_846651c.gbapal");
+static const u32 gUnknown_846653C[] = INCBIN_U32("graphics/slot_machine/unk_846653c.4bpp.lz");
+static const u16 gUnknown_84665C0[] = INCBIN_U16("graphics/slot_machine/unk_84665c0.gbapal");
+static const u16 gUnknown_84665E0[] = INCBIN_U16("graphics/slot_machine/unk_84665e0.gbapal");
+static const u16 gUnknown_8466600[] = INCBIN_U16("graphics/slot_machine/unk_8466600.gbapal");
+static const u32 gUnknown_8466620[] = INCBIN_U32("graphics/slot_machine/unk_8466620.4bpp.lz");
+static const u32 gUnknown_8466998[] = INCBIN_U32("graphics/slot_machine/unk_8466998.bin.lz");
 
-const struct BgTemplate gUnknown_8466B10[] = {
+static const struct BgTemplate gUnknown_8466B10[] = {
     {
         .bg = 0,
         .charBaseIndex = 0,
@@ -569,7 +569,7 @@ const struct BgTemplate gUnknown_8466B10[] = {
     }
 };
 
-const struct WindowTemplate gUnknown_8466B20[] = {
+static const struct WindowTemplate gUnknown_8466B20[] = {
     {
         .bg = 0,
         .tilemapLeft = 5,
@@ -590,27 +590,27 @@ const struct WindowTemplate gUnknown_8466B20[] = {
     DUMMY_WIN_TEMPLATE
 };
 
-const u16 gUnknown_8466B38[] = {
+static const u16 gUnknown_8466B38[] = {
     0x00a4, 0x00a5, 0x00a6, 0x00c4, 0x00c5, 0x00c6, 0x00c7, 0x00e7, 0x012c, 0x014c, 0x0191, 0x01b1, 0x01f6, 0x0216, 0x0217, 0x0218, 0x0219, 0x0237, 0x0238, 0x0239
 };
 
-const u16 gUnknown_8466B60[] = {
+static const u16 gUnknown_8466B60[] = {
     0x00e4, 0x00e5, 0x00e6, 0x00f7, 0x00f8, 0x00f9, 0x0104, 0x0105, 0x0106, 0x0107, 0x010c, 0x0111, 0x0116, 0x0117, 0x0118, 0x0119, 0x0124, 0x0125, 0x0126, 0x0137, 0x0138, 0x0139
 };
 
-const u16 gUnknown_8466B8C[] = {
+static const u16 gUnknown_8466B8C[] = {
     0x0144, 0x0145, 0x0146, 0x0157, 0x0158, 0x0159, 0x0164, 0x0165, 0x0166, 0x0167, 0x016c, 0x0171, 0x0176, 0x0177, 0x0178, 0x0179, 0x0184, 0x0185, 0x0186, 0x0197, 0x0198, 0x0199
 };
 
-const u16 gUnknown_8466BB8[] = {
+static const u16 gUnknown_8466BB8[] = {
     0x01a4, 0x01a5, 0x01a6, 0x01b7, 0x01b8, 0x01b9, 0x01c4, 0x01c5, 0x01c6, 0x01c7, 0x01cc, 0x01d1, 0x01d6, 0x01d7, 0x01d8, 0x01d9, 0x01e4, 0x01e5, 0x01e6, 0x01f7, 0x01f8, 0x01f9
 };
 
-const u16 gUnknown_8466BE4[] = {
+static const u16 gUnknown_8466BE4[] = {
     0x0204, 0x0205, 0x0206, 0x0224, 0x0225, 0x0226, 0x01e7, 0x0207, 0x018c, 0x01ac, 0x0131, 0x0151, 0x00d6, 0x00f6, 0x00b7, 0x00b8, 0x00b9, 0x00d7, 0x00d8, 0x00d9
 };
 
-const struct UnkStruct_8466C0C gUnknown_8466C0C[] = {
+static const struct UnkStruct_8466C0C gUnknown_8466C0C[] = {
     { gUnknown_8466B38, NELEMS(gUnknown_8466B38) },
     { gUnknown_8466B60, NELEMS(gUnknown_8466B60) },
     { gUnknown_8466B8C, NELEMS(gUnknown_8466B8C) },
@@ -618,9 +618,9 @@ const struct UnkStruct_8466C0C gUnknown_8466C0C[] = {
     { gUnknown_8466BE4, NELEMS(gUnknown_8466BE4) }
 };
 
-const u8 gUnknown_8466C34[2] = {2, 4};
+static const u8 gUnknown_8466C34[2] = {2, 4};
 
-const struct WindowTemplate gUnknown_8466C38 = {
+static const struct WindowTemplate gUnknown_8466C38 = {
     .bg = 0,
     .tilemapLeft = 19,
     .tilemapTop = 9,
@@ -630,7 +630,7 @@ const struct WindowTemplate gUnknown_8466C38 = {
     .baseBlock = 0x9F
 };
 
-const u16 gUnknown_8466C40[][4] = {
+static const u16 gUnknown_8466C40[][4] = {
     {0x0229, 0x022a, 0x0249, 0x024a},
     {0x022e, 0x022f, 0x024e, 0x024f},
     {0x0233, 0x0234, 0x0253, 0x0254}
@@ -653,7 +653,7 @@ void PlaySlotMachine(u16 machineIdx, MainCallback savedCallback)
     }
 }
 
-void sub_813F84C(struct SlotMachineState * ptr)
+static void sub_813F84C(struct SlotMachineState * ptr)
 {
     s32 i;
 
@@ -670,7 +670,7 @@ void sub_813F84C(struct SlotMachineState * ptr)
     }
 }
 
-void sub_813F898(void)
+static void sub_813F898(void)
 {
     RunTasks();
     AnimateSprites();
@@ -701,7 +701,7 @@ void sub_813F898(void)
     }
 }
 
-void sub_813F92C(void)
+static void sub_813F92C(void)
 {
     sub_8141094();
     if (sSlotMachineState != NULL)
@@ -711,7 +711,7 @@ void sub_813F92C(void)
     }
 }
 
-void sub_813F94C(void)
+static void sub_813F94C(void)
 {
     RunTasks();
     AnimateSprites();
@@ -719,7 +719,7 @@ void sub_813F94C(void)
     UpdatePaletteFade();
 }
 
-void MainTask_SlotsGameLoop(u8 taskId)
+static void MainTask_SlotsGameLoop(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -825,7 +825,7 @@ void MainTask_SlotsGameLoop(u8 taskId)
     }
 }
 
-void MainTask_NoCoinsGameOver(u8 taskId)
+static void MainTask_NoCoinsGameOver(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -846,7 +846,7 @@ void MainTask_NoCoinsGameOver(u8 taskId)
     }
 }
 
-void MainTask_ShowHelp(u8 taskId)
+static void MainTask_ShowHelp(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -874,7 +874,7 @@ void MainTask_ShowHelp(u8 taskId)
     }
 }
 
-void MainTask_ConfirmExitGame(u8 taskId)
+static void MainTask_ConfirmExitGame(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -914,7 +914,7 @@ void MainTask_ConfirmExitGame(u8 taskId)
     }
 }
 
-void MainTask_DarnNoPayout(u8 taskId)
+static void MainTask_DarnNoPayout(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -942,7 +942,7 @@ void MainTask_DarnNoPayout(u8 taskId)
     }
 }
 
-void MainTask_WinHandlePayout(u8 taskId)
+static void MainTask_WinHandlePayout(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -1020,7 +1020,7 @@ void MainTask_WinHandlePayout(u8 taskId)
     }
 }
 
-void MainTask_ExitSlots(u8 taskId)
+static void MainTask_ExitSlots(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -1046,7 +1046,7 @@ static void SetMainTask(TaskFunc taskFunc)
     gTasks[sSlotMachineState->field_10].data[0] = 0;
 }
 
-void sub_8140060(u8 taskId)
+static void sub_8140060(u8 taskId)
 {
     // taskId is never used
 
@@ -1076,7 +1076,7 @@ void sub_8140060(u8 taskId)
     sub_8140D7C(sSlotMachineState->field_20, sSlotMachineState->field_26);
 }
 
-void sub_8140148(void)
+static void sub_8140148(void)
 {
     s32 i;
 
@@ -1086,7 +1086,7 @@ void sub_8140148(void)
     }
 }
 
-void sub_814016C(u16 whichReel, u16 whichReel2)
+static void sub_814016C(u16 whichReel, u16 whichReel2)
 {
     switch (whichReel2)
     {
@@ -1102,12 +1102,12 @@ void sub_814016C(u16 whichReel, u16 whichReel2)
     }
 }
 
-bool32 sub_81401A0(u16 whichReel)
+static bool32 sub_81401A0(u16 whichReel)
 {
     return sSlotMachineState->field_14[whichReel];
 }
 
-s16 sub_81401B4(u16 whichReel)
+static s16 sub_81401B4(u16 whichReel)
 {
     s16 position = sSlotMachineState->field_20[whichReel];
     if (sSlotMachineState->field_26[whichReel] != 0)
@@ -1119,7 +1119,7 @@ s16 sub_81401B4(u16 whichReel)
     return position;
 }
 
-void sub_81401F0(u16 whichReel)
+static void sub_81401F0(u16 whichReel)
 {
     s32 i, j;
     s16 r2;
@@ -1184,7 +1184,7 @@ void sub_81401F0(u16 whichReel)
     sSlotMachineState->field_2C[whichReel] = r2;
 }
 
-void sub_81403BC(u16 whichReel)
+static void sub_81403BC(u16 whichReel)
 {
     s16 r2, r4, r7, sp10;
     s32 i;
@@ -1231,7 +1231,7 @@ void sub_81403BC(u16 whichReel)
     sSlotMachineState->field_2C[whichReel] = r2;
 }
 
-void sub_81404B8(u16 whichReel)
+static void sub_81404B8(u16 whichReel)
 {
     s32 i;
     s32 r6;
@@ -1269,15 +1269,15 @@ void sub_81404B8(u16 whichReel)
     sSlotMachineState->field_2C[whichReel] = r2;
 }
 
-bool32 sub_814054C(s32 a0, s32 a1, s32 a2, s32 a3, s32 a4)
+static bool32 sub_814054C(s32 a0, s32 a1, s32 a2, s32 a3, s32 a4)
 {
     s32 i;
     s32 r5;
     u8 sp0[9] = {};
-    
+
     for (i = 0; i < 9; i++)
         sp0[i] = 7;
-    
+
     for (i = 0; i < 3; i++)
     {
         sp0[3 * a0 + i] = gUnknown_8464926[a0][a1];
@@ -1344,7 +1344,7 @@ bool32 sub_814054C(s32 a0, s32 a1, s32 a2, s32 a3, s32 a4)
 }
 
 #ifdef NONMATCHING
-bool32 sub_81406E8(s32 a0, s32 a1, s32 a2)
+static bool32 sub_81406E8(s32 a0, s32 a1, s32 a2)
 {
     u8 sp0[9];
     s32 r3, r6;
@@ -1417,7 +1417,7 @@ bool32 sub_81406E8(s32 a0, s32 a1, s32 a2)
 }
 #else
 NAKED
-bool32 sub_81406E8(s32 a0, s32 a1, s32 a2)
+static bool32 sub_81406E8(s32 a0, s32 a1, s32 a2)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                 "\tmov r7, r10\n"
@@ -1702,7 +1702,7 @@ bool32 sub_81406E8(s32 a0, s32 a1, s32 a2)
 }
 #endif //NONMATCHING
 
-bool32 sub_81408F4(s32 a0, s32 a1)
+static bool32 sub_81408F4(s32 a0, s32 a1)
 {
     switch (a0)
     {
@@ -1724,7 +1724,7 @@ bool32 sub_81408F4(s32 a0, s32 a1)
     }
 }
 
-u8 sub_814096C(s32 a0)
+static u8 sub_814096C(s32 a0)
 {
     switch (a0)
     {
@@ -1744,7 +1744,7 @@ u8 sub_814096C(s32 a0)
     }
 }
 
-void sub_81409B4(void)
+static void sub_81409B4(void)
 {
     u16 r2 = Random() / 4;
     s32 i;
@@ -1771,12 +1771,12 @@ void sub_81409B4(void)
     }
 }
 
-void sub_8140A70(void)
+static void sub_8140A70(void)
 {
     sSlotMachineState->field_08 = 0;
 }
 
-u16 sub_8140A80(void)
+static u16 sub_8140A80(void)
 {
     u8 sp0[9] = {};
     s32 i;
@@ -1829,22 +1829,22 @@ u16 sub_8140A80(void)
     return r9;
 }
 
-u16 sub_8140BDC(void)
+static u16 sub_8140BDC(void)
 {
     return sSlotMachineState->payout;
 }
 
-u8 sub_8140BEC(void)
+static u8 sub_8140BEC(void)
 {
     return sSlotMachineState->bet;
 }
 
-bool32 sub_8140BF8(s32 a0)
+static bool32 sub_8140BF8(s32 a0)
 {
     return sSlotMachineState->field_3C[a0];
 }
 
-bool32 sub_8140C0C(void)
+static bool32 sub_8140C0C(void)
 {
     s32 i;
 
@@ -1858,7 +1858,7 @@ bool32 sub_8140C0C(void)
     return TRUE;
 }
 
-void sub_8140C50(void)
+static void sub_8140C50(void)
 {
     if (sSlotMachineGfxManager != NULL)
     {
@@ -1867,7 +1867,7 @@ void sub_8140C50(void)
     }
 }
 
-void sub_8140C6C(struct SlotMachineGfxManager * manager)
+static void sub_8140C6C(struct SlotMachineGfxManager * manager)
 {
     s32 i, j;
 
@@ -1881,7 +1881,7 @@ void sub_8140C6C(struct SlotMachineGfxManager * manager)
     }
 }
 
-void sub_8140CA0(void)
+static void sub_8140CA0(void)
 {
     struct Sprite * sprite;
     s32 i, j;
@@ -1907,7 +1907,7 @@ void sub_8140CA0(void)
     }
 }
 
-void sub_8140D7C(const s16 * a0, const s16 * a1)
+static void sub_8140D7C(const s16 * a0, const s16 * a1)
 {
     s32 i, j;
     s32 r6, r10;
@@ -1939,7 +1939,7 @@ void sub_8140D7C(const s16 * a0, const s16 * a1)
     }
 }
 
-void sub_8140E40(void)
+static void sub_8140E40(void)
 {
     s32 vcount = REG_VCOUNT - 0x2B;
     if (vcount >= 0 && vcount < 0x54)
@@ -1954,7 +1954,7 @@ void sub_8140E40(void)
     }
 }
 
-void sub_8140E9C(void)
+static void sub_8140E9C(void)
 {
     s32 i;
     s32 spriteId;
@@ -1968,7 +1968,7 @@ void sub_8140E9C(void)
     }
 }
 
-void sub_8140F2C(void)
+static void sub_8140F2C(void)
 {
     s32 coins = GetCoins();
     s32 payout = sub_8140BDC();
@@ -1988,7 +1988,7 @@ void sub_8140F2C(void)
     }
 }
 
-void sub_8140FC4(void)
+static void sub_8140FC4(void)
 {
     s32 spriteId;
 
@@ -1999,7 +1999,7 @@ void sub_8140FC4(void)
     sSlotMachineGfxManager->field_68[1]->hFlip = TRUE;
 }
 
-void sub_8141020(u8 a0)
+static void sub_8141020(u8 a0)
 {
     s32 i;
     for (i = 0; i < 2; i++)
@@ -2008,7 +2008,7 @@ void sub_8141020(u8 a0)
     }
 }
 
-bool32 sub_814104C(void)
+static bool32 sub_814104C(void)
 {
     s32 i;
 
@@ -2022,7 +2022,7 @@ bool32 sub_814104C(void)
     return FALSE;
 }
 
-void sub_8141094(void)
+static void sub_8141094(void)
 {
     if (FuncIsActiveTask(sub_81410CC))
     {
@@ -2033,7 +2033,7 @@ void sub_8141094(void)
     FreeAllWindowBuffers();
 }
 
-void sub_81410CC(u8 taskId)
+static void sub_81410CC(u8 taskId)
 {
     struct SlotMachineSetupTaskData * ptr = (void *)GetWordTaskArg(taskId, 0);
     s32 i;
@@ -2045,19 +2045,19 @@ void sub_81410CC(u8 taskId)
     }
 }
 
-void sub_8141118(void)
+static void sub_8141118(void)
 {
     TransferPlttBuffer();
     LoadOam();
     ProcessSpriteCopyRequests();
 }
 
-struct SlotMachineSetupTaskData * sub_814112C(void)
+static struct SlotMachineSetupTaskData * sub_814112C(void)
 {
     return (void *)GetWordTaskArg(FindTaskIdByFunc(sub_81410CC), 0);
 }
 
-void sub_8141148(u16 a0, u8 a1)
+static void sub_8141148(u16 a0, u8 a1)
 {
     struct SlotMachineSetupTaskData * ptr = sub_814112C();
     ptr->field_0000[a1].unk0 = a0;
@@ -2065,13 +2065,13 @@ void sub_8141148(u16 a0, u8 a1)
     ptr->field_0000[a1].unk3 = gUnknown_84658F0[a0](&ptr->field_0000[a1].unk2, ptr);
 }
 
-bool32 sub_8141180(u8 a0)
+static bool32 sub_8141180(u8 a0)
 {
     return sub_814112C()->field_0000[a0].unk3;
 }
 
 #ifdef NONMATCHING
-bool8 sub_8141198(u8 * state, struct SlotMachineSetupTaskData * ptr)
+static bool8 sub_8141198(u8 * state, struct SlotMachineSetupTaskData * ptr)
 {
     u16 pal;
     struct TextColor textColor;
@@ -2167,7 +2167,7 @@ bool8 sub_8141198(u8 * state, struct SlotMachineSetupTaskData * ptr)
 }
 #else
 NAKED
-bool8 sub_8141198(u8 * state, struct SlotMachineSetupTaskData * ptr)
+static bool8 sub_8141198(u8 * state, struct SlotMachineSetupTaskData * ptr)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                 "\tmov r7, r8\n"
@@ -2459,7 +2459,7 @@ bool8 sub_8141198(u8 * state, struct SlotMachineSetupTaskData * ptr)
 }
 #endif //NONMATCHING
 
-bool8 sub_8141460(u8 * state, struct SlotMachineSetupTaskData * ptr)
+static bool8 sub_8141460(u8 * state, struct SlotMachineSetupTaskData * ptr)
 {
     switch (*state)
     {
@@ -2475,7 +2475,7 @@ bool8 sub_8141460(u8 * state, struct SlotMachineSetupTaskData * ptr)
     return TRUE;
 }
 
-bool8 sub_81414AC(u8 * state, struct SlotMachineSetupTaskData * ptr)
+static bool8 sub_81414AC(u8 * state, struct SlotMachineSetupTaskData * ptr)
 {
     switch (*state)
     {
@@ -2492,20 +2492,20 @@ bool8 sub_81414AC(u8 * state, struct SlotMachineSetupTaskData * ptr)
     return TRUE;
 }
 
-bool8 sub_81414EC(u8 * state, struct SlotMachineSetupTaskData * ptr)
+static bool8 sub_81414EC(u8 * state, struct SlotMachineSetupTaskData * ptr)
 {
     sub_8141020(1);
     return FALSE;
 }
 
-bool8 sub_81414FC(u8 * state, struct SlotMachineSetupTaskData * ptr)
+static bool8 sub_81414FC(u8 * state, struct SlotMachineSetupTaskData * ptr)
 {
     sub_8141020(2);
     CreateTask(sub_814191C, 3);
     return FALSE;
 }
 
-bool8 sub_8141518(u8 * state, struct SlotMachineSetupTaskData * ptr)
+static bool8 sub_8141518(u8 * state, struct SlotMachineSetupTaskData * ptr)
 {
     switch (*state)
     {
@@ -2524,25 +2524,25 @@ bool8 sub_8141518(u8 * state, struct SlotMachineSetupTaskData * ptr)
     return TRUE;
 }
 
-bool8 sub_8141558(u8 * state, struct SlotMachineSetupTaskData * ptr)
+static bool8 sub_8141558(u8 * state, struct SlotMachineSetupTaskData * ptr)
 {
     sub_8141020(3);
     return FALSE;
 }
 
-bool8 sub_8141568(u8 * state, struct SlotMachineSetupTaskData * ptr)
+static bool8 sub_8141568(u8 * state, struct SlotMachineSetupTaskData * ptr)
 {
     sub_8141020(FALSE);
     return FALSE;
 }
 
-bool8 sub_8141578(u8 * state, struct SlotMachineSetupTaskData * ptr)
+static bool8 sub_8141578(u8 * state, struct SlotMachineSetupTaskData * ptr)
 {
     sub_8140F2C();
     return FALSE;
 }
 
-bool8 sub_8141584(u8 * state, struct SlotMachineSetupTaskData * ptr)
+static bool8 sub_8141584(u8 * state, struct SlotMachineSetupTaskData * ptr)
 {
     switch (*state)
     {
@@ -2559,7 +2559,7 @@ bool8 sub_8141584(u8 * state, struct SlotMachineSetupTaskData * ptr)
     return TRUE;
 }
 
-bool8 sub_81415C8(u8 * state, struct SlotMachineSetupTaskData * ptr)
+static bool8 sub_81415C8(u8 * state, struct SlotMachineSetupTaskData * ptr)
 {
     switch (*state)
     {
@@ -2577,7 +2577,7 @@ bool8 sub_81415C8(u8 * state, struct SlotMachineSetupTaskData * ptr)
     return TRUE;
 }
 
-bool8 sub_8141610(u8 * state, struct SlotMachineSetupTaskData * ptr)
+static bool8 sub_8141610(u8 * state, struct SlotMachineSetupTaskData * ptr)
 {
     switch (*state)
     {
@@ -2595,7 +2595,7 @@ bool8 sub_8141610(u8 * state, struct SlotMachineSetupTaskData * ptr)
     return TRUE;
 }
 
-bool8 sub_8141650(u8 * state, struct SlotMachineSetupTaskData * ptr)
+static bool8 sub_8141650(u8 * state, struct SlotMachineSetupTaskData * ptr)
 {
     switch (*state)
     {
@@ -2612,7 +2612,7 @@ bool8 sub_8141650(u8 * state, struct SlotMachineSetupTaskData * ptr)
     return TRUE;
 }
 
-bool8 sub_8141690(u8 * state, struct SlotMachineSetupTaskData * ptr)
+static bool8 sub_8141690(u8 * state, struct SlotMachineSetupTaskData * ptr)
 {
     switch (*state)
     {
@@ -2629,7 +2629,7 @@ bool8 sub_8141690(u8 * state, struct SlotMachineSetupTaskData * ptr)
     return TRUE;
 }
 
-bool8 sub_81416C8(u8 * state, struct SlotMachineSetupTaskData * ptr)
+static bool8 sub_81416C8(u8 * state, struct SlotMachineSetupTaskData * ptr)
 {
     switch (*state)
     {
@@ -2660,7 +2660,7 @@ bool8 sub_81416C8(u8 * state, struct SlotMachineSetupTaskData * ptr)
     return TRUE;
 }
 
-bool8 sub_8141764(u8 * state, struct SlotMachineSetupTaskData * ptr)
+static bool8 sub_8141764(u8 * state, struct SlotMachineSetupTaskData * ptr)
 {
     switch (*state)
     {
@@ -2689,7 +2689,7 @@ bool8 sub_8141764(u8 * state, struct SlotMachineSetupTaskData * ptr)
     return TRUE;
 }
 
-void sub_81417E4(const u8 * str)
+static void sub_81417E4(const u8 * str)
 {
     FillWindowPixelBuffer(0, 0x11);
     PutWindowTilemap(0);
@@ -2697,12 +2697,12 @@ void sub_81417E4(const u8 * str)
     AddTextPrinterParameterized5(0, 2, str, 1, 2, -1, NULL, 1, 2);
 }
 
-void sub_8141828(void)
+static void sub_8141828(void)
 {
     rbox_fill_rectangle(0);
 }
 
-void sub_8141834(u16 * bgTilemapBuffer)
+static void sub_8141834(u16 * bgTilemapBuffer)
 {
     switch (sub_8140BEC())
     {
@@ -2725,7 +2725,7 @@ void sub_8141834(u16 * bgTilemapBuffer)
     }
 }
 
-void sub_81418C4(u16 * bgTilemapBuffer, u16 whichLine, u16 paletteNum)
+static void sub_81418C4(u16 * bgTilemapBuffer, u16 whichLine, u16 paletteNum)
 {
     s32 i;
     const u16 * tileIdxs = gUnknown_8466C0C[whichLine].tiles;
@@ -2739,7 +2739,7 @@ void sub_81418C4(u16 * bgTilemapBuffer, u16 whichLine, u16 paletteNum)
     }
 }
 
-void sub_814191C(u8 taskId)
+static void sub_814191C(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     s32 i;
@@ -2809,19 +2809,19 @@ void sub_814191C(u8 taskId)
     }
 }
 
-void sub_8141AB0(void)
+static void sub_8141AB0(void)
 {
     gTasks[FindTaskIdByFunc(sub_814191C)].data[0] = 2;
 }
 
-void sub_8141AD8(u8 cursorPos)
+static void sub_8141AD8(u8 cursorPos)
 {
     CreateYesNoMenu(&gUnknown_8466C38, 2, 0, 2, 10, 13, cursorPos);
     Menu_MoveCursorNoWrapAround(cursorPos);
     sub_814112C()->field_0028 = TRUE;
 }
 
-void sub_8141B18(void)
+static void sub_8141B18(void)
 {
     struct SlotMachineSetupTaskData * data = sub_814112C();
     if (data->field_0028)
@@ -2831,7 +2831,7 @@ void sub_8141B18(void)
     }
 }
 
-void sub_8141B34(void)
+static void sub_8141B34(void)
 {
     s32 i, j;
     struct SlotMachineSetupTaskData * data = sub_814112C();
@@ -2848,7 +2848,7 @@ void sub_8141B34(void)
     }
 }
 
-void sub_8141BA0(u8 reel)
+static void sub_8141BA0(u8 reel)
 {
     if (reel < 3)
     {
@@ -2863,7 +2863,7 @@ void sub_8141BA0(u8 reel)
     }
 }
 
-void sub_8141BE4(void)
+static void sub_8141BE4(void)
 {
     s32 i, j;
     struct SlotMachineSetupTaskData * data = sub_814112C();
@@ -2879,7 +2879,7 @@ void sub_8141BE4(void)
     }
 }
 
-void sub_8141C30(u8 a0, u8 a1)
+static void sub_8141C30(u8 a0, u8 a1)
 {
     sub_814112C()->field_0020 = a0;
     sub_8141148(12, a1);

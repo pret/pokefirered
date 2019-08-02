@@ -152,7 +152,7 @@ _080B7386:
 	ldr r0, _080B73A0 @ =gBattleAnimArgs
 	ldrh r0, [r0, 0x8]
 	strh r0, [r5, 0x2E]
-	ldr r0, _080B73A4 @ =sub_8075590
+	ldr r0, _080B73A4 @ =StartAnimLinearTranslation
 	str r0, [r5, 0x1C]
 	ldr r1, _080B73A8 @ =move_anim_8074EE0
 	adds r0, r5, 0
@@ -162,7 +162,7 @@ _080B7386:
 	bx r0
 	.align 2, 0
 _080B73A0: .4byte gBattleAnimArgs
-_080B73A4: .4byte sub_8075590
+_080B73A4: .4byte StartAnimLinearTranslation
 _080B73A8: .4byte move_anim_8074EE0
 	thumb_func_end sub_80B72F8
 

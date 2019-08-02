@@ -807,7 +807,7 @@ CompleteOnHealthbarDone_4: @ 803ACCC
 	ldrb r1, [r1]
 	movs r2, 0
 	movs r3, 0
-	bl sub_8049FD8
+	bl MoveBattleBar
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -825,7 +825,7 @@ CompleteOnHealthbarDone_4: @ 803ACCC
 	adds r0, r5
 	ldrb r0, [r0]
 	movs r2, 0
-	bl sub_8048440
+	bl UpdateHpTextInHealthbox
 	b _0803AD18
 	.align 2, 0
 _0803AD0C: .4byte gActiveBattler
@@ -4256,7 +4256,7 @@ _0803C992:
 	bl SetMultiuseSpriteTemplateToTrainerBack
 	ldr r5, _0803CAD0 @ =gMultiuseSpriteTemplate
 	adds r6, r7, 0
-	ldr r1, _0803CAD4 @ =gUnknown_823932C
+	ldr r1, _0803CAD4 @ =gTrainerFrontPicCoords
 	mov r2, r9
 	lsls r0, r2, 2
 	adds r0, r1
@@ -4391,7 +4391,7 @@ _0803C992:
 _0803CAC8: .4byte gFacilityClassToPicIndex
 _0803CACC: .4byte gActiveBattler
 _0803CAD0: .4byte gMultiuseSpriteTemplate
-_0803CAD4: .4byte gUnknown_823932C
+_0803CAD4: .4byte gTrainerFrontPicCoords
 _0803CAD8: .4byte gBattlerSpriteIds
 _0803CADC: .4byte gSprites
 _0803CAE0: .4byte 0x0000ff10
@@ -4425,7 +4425,7 @@ sub_803CB0C: @ 803CB0C
 	lsls r0, 2
 	ldr r5, _0803CBA4 @ =gSprites
 	adds r0, r5
-	bl oamt_add_pos2_onto_pos1
+	bl SetSpritePrimaryCoordsFromSecondaryCoords
 	ldrb r0, [r4]
 	adds r0, r6
 	ldrb r1, [r0]
@@ -4463,7 +4463,7 @@ sub_803CB0C: @ 803CB0C
 	adds r1, r5, 0
 	adds r1, 0x1C
 	adds r0, r1
-	ldr r1, _0803CBA8 @ =sub_8075590
+	ldr r1, _0803CBA8 @ =StartAnimLinearTranslation
 	str r1, [r0]
 	ldrb r0, [r4]
 	adds r0, r6
@@ -4487,7 +4487,7 @@ sub_803CB0C: @ 803CB0C
 _0803CB9C: .4byte gBattlerSpriteIds
 _0803CBA0: .4byte gActiveBattler
 _0803CBA4: .4byte gSprites
-_0803CBA8: .4byte sub_8075590
+_0803CBA8: .4byte StartAnimLinearTranslation
 _0803CBAC: .4byte SpriteCallbackDummy
 _0803CBB0: .4byte gBattlerControllerFuncs
 _0803CBB4: .4byte sub_803A70C
@@ -4557,7 +4557,7 @@ _0803CC0C:
 	lsls r0, 2
 	adds r2, 0x1C
 	adds r0, r2
-	ldr r1, _0803CC58 @ =sub_8011EA0
+	ldr r1, _0803CC58 @ =SpriteCB_FaintOpponentMon
 	str r1, [r0]
 	ldr r1, _0803CC5C @ =gBattlerControllerFuncs
 	ldrb r0, [r5]
@@ -4572,7 +4572,7 @@ _0803CC48:
 	.align 2, 0
 _0803CC50: .4byte gSprites
 _0803CC54: .4byte gBattlerSpriteIds
-_0803CC58: .4byte sub_8011EA0
+_0803CC58: .4byte SpriteCB_FaintOpponentMon
 _0803CC5C: .4byte gBattlerControllerFuncs
 _0803CC60: .4byte sub_803AD20
 	thumb_func_end sub_803CBB8
@@ -4679,7 +4679,7 @@ _0803CCA6:
 	lsls r1, 24
 	orrs r3, r1
 	str r3, [r4]
-	ldr r3, _0803CD8C @ =gUnknown_2037EFE
+	ldr r3, _0803CD8C @ =gAnimFriendship
 	ldrb r1, [r6]
 	lsls r1, 9
 	mov r2, r12
@@ -4687,7 +4687,7 @@ _0803CCA6:
 	adds r1, r2
 	ldrb r1, [r1]
 	strb r1, [r3]
-	ldr r4, _0803CD90 @ =gUnknown_2037F00
+	ldr r4, _0803CD90 @ =gWeatherMoveAnim
 	ldrb r2, [r6]
 	lsls r2, 9
 	mov r1, r12
@@ -4728,8 +4728,8 @@ _0803CD7C: .4byte gBattleBufferA
 _0803CD80: .4byte gAnimMoveTurn
 _0803CD84: .4byte gAnimMovePower
 _0803CD88: .4byte gAnimMoveDmg
-_0803CD8C: .4byte gUnknown_2037EFE
-_0803CD90: .4byte gUnknown_2037F00
+_0803CD8C: .4byte gAnimFriendship
+_0803CD90: .4byte gWeatherMoveAnim
 _0803CD94: .4byte gAnimDisableStructPtr
 _0803CD98: .4byte gTransformedPersonalities
 _0803CD9C:
@@ -5531,8 +5531,8 @@ _0803D3AC: .4byte gActiveBattler
 _0803D3B0: .4byte gBattleBufferA
 	thumb_func_end RecordedOpponentHandlePlaySE
 
-	thumb_func_start LinkOpponentHandlecmd44
-LinkOpponentHandlecmd44: @ 803D3B4
+	thumb_func_start LinkOpponentHandlePlayFanfare
+LinkOpponentHandlePlayFanfare: @ 803D3B4
 	push {lr}
 	ldr r2, _0803D3DC @ =gBattleBufferA
 	ldr r0, _0803D3E0 @ =gActiveBattler
@@ -5553,7 +5553,7 @@ LinkOpponentHandlecmd44: @ 803D3B4
 	.align 2, 0
 _0803D3DC: .4byte gBattleBufferA
 _0803D3E0: .4byte gActiveBattler
-	thumb_func_end LinkOpponentHandlecmd44
+	thumb_func_end LinkOpponentHandlePlayFanfare
 
 	thumb_func_start RecordedOpponentHandleFaintingCry
 RecordedOpponentHandleFaintingCry: @ 803D3E4
@@ -5622,7 +5622,7 @@ sub_803D454: @ 803D454
 	lsls r0, 2
 	ldr r4, _0803D53C @ =gSprites
 	adds r0, r4
-	bl oamt_add_pos2_onto_pos1
+	bl SetSpritePrimaryCoordsFromSecondaryCoords
 	ldrb r0, [r6]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -5660,7 +5660,7 @@ sub_803D454: @ 803D454
 	adds r1, r4, 0
 	adds r1, 0x1C
 	adds r0, r1
-	ldr r1, _0803D540 @ =sub_8075590
+	ldr r1, _0803D540 @ =StartAnimLinearTranslation
 	str r1, [r0]
 	ldrb r0, [r6]
 	adds r0, r5
@@ -5696,14 +5696,14 @@ sub_803D454: @ 803D454
 	ands r0, r1
 	cmp r0, 0
 	beq _0803D516
-	ldr r0, _0803D554 @ =gUnknown_2024000
+	ldr r0, _0803D554 @ =gBattlerStatusSummaryTaskId
 	adds r0, r2, r0
 	ldrb r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
 	adds r0, r4
-	ldr r1, _0803D558 @ =sub_80491B0
+	ldr r1, _0803D558 @ =Task_HidePartyStatusSummary
 	str r1, [r0]
 _0803D516:
 	ldr r0, [r3]
@@ -5725,13 +5725,13 @@ _0803D516:
 _0803D534: .4byte gBattlerSpriteIds
 _0803D538: .4byte gActiveBattler
 _0803D53C: .4byte gSprites
-_0803D540: .4byte sub_8075590
+_0803D540: .4byte StartAnimLinearTranslation
 _0803D544: .4byte sub_803D648
 _0803D548: .4byte sub_803D564
 _0803D54C: .4byte gTasks
 _0803D550: .4byte gBattleSpritesDataPtr
-_0803D554: .4byte gUnknown_2024000
-_0803D558: .4byte sub_80491B0
+_0803D554: .4byte gBattlerStatusSummaryTaskId
+_0803D558: .4byte Task_HidePartyStatusSummary
 _0803D55C: .4byte gBattlerControllerFuncs
 _0803D560: .4byte nullsub_19
 	thumb_func_end sub_803D454
@@ -5957,8 +5957,8 @@ _0803D718:
 	subs r4, 0x2
 	adds r3, r4
 	ldrb r3, [r3]
-	bl sub_8048D14
-	ldr r2, _0803D780 @ =gUnknown_2024000
+	bl CreatePartyStatusSummarySprites
+	ldr r2, _0803D780 @ =gBattlerStatusSummaryTaskId
 	ldrb r1, [r5]
 	adds r1, r2
 	movs r3, 0
@@ -5999,7 +5999,7 @@ _0803D776:
 	bx r0
 	.align 2, 0
 _0803D77C: .4byte gUnknown_2022BC8
-_0803D780: .4byte gUnknown_2024000
+_0803D780: .4byte gBattlerStatusSummaryTaskId
 _0803D784: .4byte gBattleSpritesDataPtr
 _0803D788: .4byte gBattlerControllerFuncs
 _0803D78C: .4byte sub_803D790
@@ -6061,14 +6061,14 @@ RecordedOpponentHandleCmd49: @ 803D7D8
 	cmp r0, 0
 	beq _0803D80A
 	ldr r2, _0803D81C @ =gTasks
-	ldr r0, _0803D820 @ =gUnknown_2024000
+	ldr r0, _0803D820 @ =gBattlerStatusSummaryTaskId
 	adds r0, r3, r0
 	ldrb r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
 	adds r0, r2
-	ldr r1, _0803D824 @ =sub_80491B0
+	ldr r1, _0803D824 @ =Task_HidePartyStatusSummary
 	str r1, [r0]
 _0803D80A:
 	bl RecordedOpponentBufferExecCompleted
@@ -6078,8 +6078,8 @@ _0803D80A:
 _0803D814: .4byte gBattleSpritesDataPtr
 _0803D818: .4byte gActiveBattler
 _0803D81C: .4byte gTasks
-_0803D820: .4byte gUnknown_2024000
-_0803D824: .4byte sub_80491B0
+_0803D820: .4byte gBattlerStatusSummaryTaskId
+_0803D824: .4byte Task_HidePartyStatusSummary
 	thumb_func_end RecordedOpponentHandleCmd49
 
 	thumb_func_start sub_803D828

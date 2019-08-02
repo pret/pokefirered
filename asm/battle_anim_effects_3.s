@@ -265,7 +265,7 @@ _080DE49E:
 	strh r0, [r5, 0x2E]
 	strh r7, [r5, 0x32]
 	strh r6, [r5, 0x36]
-	ldr r0, _080DE4D4 @ =sub_8075590
+	ldr r0, _080DE4D4 @ =StartAnimLinearTranslation
 	str r0, [r5, 0x1C]
 	ldr r1, _080DE4D8 @ =DestroyAnimSprite
 	adds r0, r5, 0
@@ -277,7 +277,7 @@ _080DE49E:
 	.align 2, 0
 _080DE4CC: .4byte gBattleAnimTarget
 _080DE4D0: .4byte gBattleAnimArgs
-_080DE4D4: .4byte sub_8075590
+_080DE4D4: .4byte StartAnimLinearTranslation
 _080DE4D8: .4byte DestroyAnimSprite
 	thumb_func_end sub_80DE440
 
@@ -2404,7 +2404,7 @@ _080DF4C4:
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x36]
-	ldr r0, _080DF520 @ =sub_8075590
+	ldr r0, _080DF520 @ =StartAnimLinearTranslation
 	str r0, [r5, 0x1C]
 _080DF510:
 	pop {r4,r5}
@@ -2413,7 +2413,7 @@ _080DF510:
 	.align 2, 0
 _080DF518: .4byte DestroyAnimSprite
 _080DF51C: .4byte gBattleAnimTarget
-_080DF520: .4byte sub_8075590
+_080DF520: .4byte StartAnimLinearTranslation
 	thumb_func_end sub_80DF468
 
 	thumb_func_start sub_80DF524
@@ -11173,7 +11173,7 @@ sub_80E38D8: @ 80E38D8
 	ldr r3, _080E3924 @ =gBattleAnimArgs
 	movs r2, 0
 	strh r2, [r3, 0xE]
-	ldr r1, _080E3928 @ =gUnknown_2037EFE
+	ldr r1, _080E3928 @ =gAnimFriendship
 	ldrb r0, [r1]
 	ldrb r1, [r1]
 	adds r0, r1, 0
@@ -11209,7 +11209,7 @@ _080E3918:
 	bx r0
 	.align 2, 0
 _080E3924: .4byte gBattleAnimArgs
-_080E3928: .4byte gUnknown_2037EFE
+_080E3928: .4byte gAnimFriendship
 	thumb_func_end sub_80E38D8
 
 	thumb_func_start sub_80E392C
@@ -12703,7 +12703,7 @@ sub_80E44EC: @ 80E44EC
 	ldr r2, _080E4508 @ =gBattleAnimArgs
 	movs r0, 0
 	strh r0, [r2, 0xE]
-	ldr r0, _080E450C @ =gUnknown_2037F00
+	ldr r0, _080E450C @ =gWeatherMoveAnim
 	ldrh r1, [r0]
 	movs r0, 0x60
 	ands r0, r1
@@ -12713,7 +12713,7 @@ sub_80E44EC: @ 80E44EC
 	b _080E4532
 	.align 2, 0
 _080E4508: .4byte gBattleAnimArgs
-_080E450C: .4byte gUnknown_2037F00
+_080E450C: .4byte gWeatherMoveAnim
 _080E4510:
 	movs r0, 0x7
 	ands r0, r1

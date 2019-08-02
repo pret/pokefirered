@@ -626,7 +626,7 @@ void sub_815DA28(u8 * dest)
     StringCopyN(dest, gUnknown_203F45C->unk_00, 11);
 }
 
-u8 sub_815DA3C(void)
+u8 GetTrainerTowerTrainerFrontSpriteId(void)
 {
     return gFacilityClassToPicIndex[gUnknown_203F45C->unk_3D];
 }

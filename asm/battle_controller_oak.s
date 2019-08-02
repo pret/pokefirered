@@ -1362,7 +1362,7 @@ _080E807C:
 	adds r0, r7, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl sub_8049FD8
+	bl MoveBattleBar
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -2371,7 +2371,7 @@ sub_80E88C0: @ 80E88C0
 	ldrb r1, [r1]
 	movs r2, 0
 	movs r3, 0
-	bl sub_8049FD8
+	bl MoveBattleBar
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -2389,7 +2389,7 @@ sub_80E88C0: @ 80E88C0
 	adds r0, r6
 	ldrb r0, [r0]
 	movs r2, 0
-	bl sub_8048440
+	bl UpdateHpTextInHealthbox
 	b _080E8922
 	.align 2, 0
 _080E8900: .4byte gActiveBattler
@@ -5529,7 +5529,7 @@ sub_80EA2B8: @ 80EA2B8
 	lsls r1, 24
 	orrs r3, r1
 	str r3, [r4]
-	ldr r3, _080EA3A0 @ =gUnknown_2037EFE
+	ldr r3, _080EA3A0 @ =gAnimFriendship
 	ldrb r1, [r6]
 	lsls r1, 9
 	mov r2, r12
@@ -5537,7 +5537,7 @@ sub_80EA2B8: @ 80EA2B8
 	adds r1, r2
 	ldrb r1, [r1]
 	strb r1, [r3]
-	ldr r4, _080EA3A4 @ =gUnknown_2037F00
+	ldr r4, _080EA3A4 @ =gWeatherMoveAnim
 	ldrb r2, [r6]
 	lsls r2, 9
 	mov r1, r12
@@ -5578,8 +5578,8 @@ _080EA390: .4byte gActiveBattler
 _080EA394: .4byte gAnimMoveTurn
 _080EA398: .4byte gAnimMovePower
 _080EA39C: .4byte gAnimMoveDmg
-_080EA3A0: .4byte gUnknown_2037EFE
-_080EA3A4: .4byte gUnknown_2037F00
+_080EA3A0: .4byte gAnimFriendship
+_080EA3A4: .4byte gWeatherMoveAnim
 _080EA3A8: .4byte gAnimDisableStructPtr
 _080EA3AC: .4byte gTransformedPersonalities
 _080EA3B0:
@@ -6419,7 +6419,7 @@ _080EAA48:
 	ldrb r0, [r0]
 	movs r1, 0
 	movs r2, 0
-	bl sub_8048440
+	bl UpdateHpTextInHealthbox
 _080EAA82:
 	ldr r1, _080EAAAC @ =gBattlerControllerFuncs
 	ldr r0, _080EAAB0 @ =gActiveBattler
@@ -6822,7 +6822,7 @@ _080EAD64:
 	lsls r0, 2
 	ldr r5, _080EAEAC @ =gSprites
 	adds r0, r5
-	bl oamt_add_pos2_onto_pos1
+	bl SetSpritePrimaryCoordsFromSecondaryCoords
 	ldrb r0, [r7]
 	adds r0, r6
 	ldrb r1, [r0]
@@ -6859,7 +6859,7 @@ _080EAD64:
 	adds r1, r5, 0
 	adds r1, 0x1C
 	adds r0, r1
-	ldr r1, _080EAEB4 @ =sub_8075590
+	ldr r1, _080EAEB4 @ =StartAnimLinearTranslation
 	str r1, [r0]
 	ldrb r2, [r7]
 	adds r0, r2, r6
@@ -6941,14 +6941,14 @@ _080EAD64:
 	ands r0, r1
 	cmp r0, 0
 	beq _080EAE84
-	ldr r0, _080EAED4 @ =gUnknown_2024000
+	ldr r0, _080EAED4 @ =gBattlerStatusSummaryTaskId
 	adds r0, r2, r0
 	ldrb r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
 	adds r0, r4
-	ldr r1, _080EAED8 @ =sub_80491B0
+	ldr r1, _080EAED8 @ =Task_HidePartyStatusSummary
 	str r1, [r0]
 _080EAE84:
 	ldr r0, [r3]
@@ -6970,7 +6970,7 @@ _080EAEA4: .4byte gBattlerSpriteIds
 _080EAEA8: .4byte gActiveBattler
 _080EAEAC: .4byte gSprites
 _080EAEB0: .4byte 0x0000ffd8
-_080EAEB4: .4byte sub_8075590
+_080EAEB4: .4byte StartAnimLinearTranslation
 _080EAEB8: .4byte sub_80335F8
 _080EAEBC: .4byte 0x0000d6f8
 _080EAEC0: .4byte gUnknown_8239FD4
@@ -6978,8 +6978,8 @@ _080EAEC4: .4byte gSaveBlock2Ptr
 _080EAEC8: .4byte sub_80EB0A8
 _080EAECC: .4byte gTasks
 _080EAED0: .4byte gBattleSpritesDataPtr
-_080EAED4: .4byte gUnknown_2024000
-_080EAED8: .4byte sub_80491B0
+_080EAED4: .4byte gBattlerStatusSummaryTaskId
+_080EAED8: .4byte Task_HidePartyStatusSummary
 _080EAEDC: .4byte gBattlerControllerFuncs
 _080EAEE0: .4byte nullsub_13
 _080EAEE4:
@@ -6998,14 +6998,14 @@ _080EAEE4:
 	cmp r0, 0
 	beq _080EAF14
 	ldr r2, _080EAF28 @ =gTasks
-	ldr r0, _080EAF2C @ =gUnknown_2024000
+	ldr r0, _080EAF2C @ =gBattlerStatusSummaryTaskId
 	adds r0, r3, r0
 	ldrb r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
 	adds r0, r2
-	ldr r1, _080EAF30 @ =sub_80491B0
+	ldr r1, _080EAF30 @ =Task_HidePartyStatusSummary
 	str r1, [r0]
 _080EAF14:
 	bl WallyBufferExecCompleted
@@ -7017,8 +7017,8 @@ _080EAF18:
 _080EAF20: .4byte gBattleSpritesDataPtr
 _080EAF24: .4byte gActiveBattler
 _080EAF28: .4byte gTasks
-_080EAF2C: .4byte gUnknown_2024000
-_080EAF30: .4byte sub_80491B0
+_080EAF2C: .4byte gBattlerStatusSummaryTaskId
+_080EAF30: .4byte Task_HidePartyStatusSummary
 	thumb_func_end sub_80EAD54
 
 	thumb_func_start sub_80EAF34
@@ -7295,8 +7295,8 @@ _080EB14C:
 	subs r3, 0x2
 	adds r4, r3
 	ldrb r3, [r4]
-	bl sub_8048D14
-	ldr r2, _080EB19C @ =gUnknown_2024000
+	bl CreatePartyStatusSummarySprites
+	ldr r2, _080EB19C @ =gBattlerStatusSummaryTaskId
 	ldrb r1, [r5]
 	adds r1, r2
 	strb r0, [r1]
@@ -7309,7 +7309,7 @@ _080EB18A:
 _080EB190: .4byte gBattleSpritesDataPtr
 _080EB194: .4byte gActiveBattler
 _080EB198: .4byte gUnknown_2022BC8
-_080EB19C: .4byte gUnknown_2024000
+_080EB19C: .4byte gBattlerStatusSummaryTaskId
 	thumb_func_end sub_80EB11C
 
 	thumb_func_start sub_80EB1A0

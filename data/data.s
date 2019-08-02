@@ -145,7 +145,7 @@ gMonShinyPaletteTable:: @ 82380CC
 gTrainerFrontAnimsPtrTable:: @ 82390DC
 	.incbin "baserom.gba", 0x2390DC, 0x250
 
-gUnknown_823932C:: @ 823932C
+gTrainerFrontPicCoords:: @ 823932C
 	.incbin "baserom.gba", 0x23932C, 0x250
 
 gTrainerFrontPicTable:: @ 823957C
@@ -350,8 +350,7 @@ gSpriteSheet_EnemyShadow:: @ 8250A0C
 gSpriteTemplate_EnemyShadow:: @ 8250A1C
 	.incbin "baserom.gba", 0x250A1C, 0x18
 
-gUnknown_8250A34:: @ 8250A34
-	.incbin "baserom.gba", 0x250A34, 0xEC
+	.section .rodata.8250B20
 
 gUnknown_8250B20:: @ 8250B20
 	.incbin "baserom.gba", 0x250B20, 0xE4

@@ -405,7 +405,7 @@ gActionSelectionCursor: @ 2023FF8
 gMoveSelectionCursor: @ 2023FFC
 	.space 0x4
 
-gUnknown_2024000: @ 2024000
+gBattlerStatusSummaryTaskId: @ 2024000
 	.space 0x4
 
 gBattlerInMenuId: @ 2024004
@@ -717,10 +717,10 @@ gAnimMovePower: @ 2037EEC
 gUnknown_2037EEE: @ 2037EEE
 	.space 0x10
 
-gUnknown_2037EFE: @ 2037EFE
+gAnimFriendship: @ 2037EFE
 	.space 0x2
 
-gUnknown_2037F00: @ 2037F00
+gWeatherMoveAnim: @ 2037F00
 	.space 0x2
 
 gBattleAnimArgs: @ 2037F02

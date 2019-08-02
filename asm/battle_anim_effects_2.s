@@ -286,14 +286,14 @@ sub_80A7058: @ 80A7058
 	ldrh r1, [r0, 0x22]
 	adds r1, 0xF
 	strh r1, [r0, 0x36]
-	ldr r1, _080A7078 @ =sub_8075590
+	ldr r1, _080A7078 @ =StartAnimLinearTranslation
 	str r1, [r0, 0x1C]
 	ldr r1, _080A707C @ =sub_80A7080
 	bl StoreSpriteCallbackInData6
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A7078: .4byte sub_8075590
+_080A7078: .4byte StartAnimLinearTranslation
 _080A707C: .4byte sub_80A7080
 	thumb_func_end sub_80A7058
 
@@ -586,14 +586,14 @@ sub_80A72A0: @ 80A72A0
 	ldrh r1, [r0, 0x22]
 	subs r1, 0x20
 	strh r1, [r0, 0x36]
-	ldr r1, _080A72C0 @ =sub_8075590
+	ldr r1, _080A72C0 @ =StartAnimLinearTranslation
 	str r1, [r0, 0x1C]
 	ldr r1, _080A72C4 @ =DestroyAnimSprite
 	bl StoreSpriteCallbackInData6
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A72C0: .4byte sub_8075590
+_080A72C0: .4byte StartAnimLinearTranslation
 _080A72C4: .4byte DestroyAnimSprite
 	thumb_func_end sub_80A72A0
 
@@ -698,7 +698,7 @@ _080A7380:
 	mov r0, r8
 	strh r0, [r5, 0x32]
 	strh r7, [r5, 0x36]
-	ldr r0, _080A73C4 @ =sub_8075590
+	ldr r0, _080A73C4 @ =StartAnimLinearTranslation
 	str r0, [r5, 0x1C]
 	ldr r1, _080A73C8 @ =DestroyAnimSprite
 	adds r0, r5, 0
@@ -714,7 +714,7 @@ _080A73B4: .4byte gBattleAnimAttacker
 _080A73B8: .4byte gBattleAnimArgs
 _080A73BC: .4byte gBattleAnimTarget
 _080A73C0: .4byte 0xffffa000
-_080A73C4: .4byte sub_8075590
+_080A73C4: .4byte StartAnimLinearTranslation
 _080A73C8: .4byte DestroyAnimSprite
 	thumb_func_end sub_80A72C8
 
@@ -1764,7 +1764,7 @@ sub_80A7BC4: @ 80A7BC4
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x36]
-	ldr r0, _080A7C14 @ =sub_8075590
+	ldr r0, _080A7C14 @ =StartAnimLinearTranslation
 	str r0, [r4, 0x1C]
 	adds r2, r4, 0
 	adds r2, 0x2C
@@ -1780,7 +1780,7 @@ sub_80A7BC4: @ 80A7BC4
 	bx r0
 	.align 2, 0
 _080A7C10: .4byte gBattleAnimTarget
-_080A7C14: .4byte sub_8075590
+_080A7C14: .4byte StartAnimLinearTranslation
 _080A7C18: .4byte sub_80A7C1C
 	thumb_func_end sub_80A7BC4
 
@@ -1998,7 +1998,7 @@ _080A7D90:
 	lsrs r0, 24
 	adds r0, r6
 	strh r0, [r5, 0x36]
-	ldr r0, _080A7DF0 @ =sub_8075590
+	ldr r0, _080A7DF0 @ =StartAnimLinearTranslation
 	str r0, [r5, 0x1C]
 	ldr r1, _080A7DF4 @ =sub_80A7DF8
 	adds r0, r5, 0
@@ -2013,7 +2013,7 @@ _080A7DE0: .4byte 0x0000ffe0
 _080A7DE4: .4byte 0x0000fff0
 _080A7DE8: .4byte gBattleAnimArgs
 _080A7DEC: .4byte gBattleAnimTarget
-_080A7DF0: .4byte sub_8075590
+_080A7DF0: .4byte StartAnimLinearTranslation
 _080A7DF4: .4byte sub_80A7DF8
 	thumb_func_end sub_80A7D64
 
@@ -5442,7 +5442,7 @@ _080A9808:
 	ldrh r1, [r4, 0x6]
 	adds r0, r1
 	strh r0, [r5, 0x36]
-	ldr r0, _080A9858 @ =sub_8075590
+	ldr r0, _080A9858 @ =StartAnimLinearTranslation
 	str r0, [r5, 0x1C]
 	ldr r1, _080A985C @ =DestroyAnimSprite
 	adds r0, r5, 0
@@ -5457,7 +5457,7 @@ _080A9808:
 	.align 2, 0
 _080A9850: .4byte gBattleAnimAttacker
 _080A9854: .4byte gBattleAnimArgs
-_080A9858: .4byte sub_8075590
+_080A9858: .4byte StartAnimLinearTranslation
 _080A985C: .4byte DestroyAnimSprite
 	thumb_func_end sub_80A97E8
 
@@ -7733,7 +7733,7 @@ _080AA9C6:
 	str r0, [r6, 0x1C]
 	strh r5, [r6, 0x2E]
 	adds r0, r6, 0
-	bl oamt_add_pos2_onto_pos1
+	bl SetSpritePrimaryCoordsFromSecondaryCoords
 	movs r0, 0x5
 	strh r0, [r6, 0x32]
 	strh r5, [r6, 0x36]
@@ -7891,7 +7891,7 @@ _080AAB50:
 	ldrh r0, [r5, 0x22]
 	subs r0, 0x48
 	strh r0, [r5, 0x36]
-	ldr r0, _080AAB74 @ =sub_8075590
+	ldr r0, _080AAB74 @ =StartAnimLinearTranslation
 	str r0, [r5, 0x1C]
 	ldr r1, _080AAB78 @ =DestroyAnimSprite
 	adds r0, r5, 0
@@ -7901,7 +7901,7 @@ _080AAB50:
 	bx r0
 	.align 2, 0
 _080AAB70: .4byte gBattleAnimAttacker
-_080AAB74: .4byte sub_8075590
+_080AAB74: .4byte StartAnimLinearTranslation
 _080AAB78: .4byte DestroyAnimSprite
 	thumb_func_end sub_80AAAE4
 

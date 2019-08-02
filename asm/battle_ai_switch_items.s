@@ -1379,8 +1379,8 @@ _08039C76:
 	bx r1
 	thumb_func_end sub_8039A80
 
-	thumb_func_start sub_8039C84
-sub_8039C84: @ 8039C84
+	thumb_func_start AI_TrySwitchOrUseItem
+AI_TrySwitchOrUseItem: @ 8039C84
 	push {r4-r6,lr}
 	ldr r5, _08039CDC @ =gBattleTypeFlags
 	ldr r0, [r5]
@@ -1406,7 +1406,7 @@ _08039C94:
 	ldrb r0, [r0]
 	cmp r0, 0x6
 	bne _08039D5A
-	bl sub_8039E3C
+	bl GetMostSuitableMonToSwitchInto
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x6
@@ -1525,7 +1525,7 @@ _08039DA8:
 	bx r0
 	.align 2, 0
 _08039DB0: .4byte gActiveBattler
-	thumb_func_end sub_8039C84
+	thumb_func_end AI_TrySwitchOrUseItem
 
 	thumb_func_start sub_8039DB4
 sub_8039DB4: @ 8039DB4
@@ -1600,8 +1600,8 @@ _08039E26:
 _08039E38: .4byte gUnknown_824F050
 	thumb_func_end sub_8039DB4
 
-	thumb_func_start sub_8039E3C
-sub_8039E3C: @ 8039E3C
+	thumb_func_start GetMostSuitableMonToSwitchInto
+GetMostSuitableMonToSwitchInto: @ 8039E3C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2015,7 +2015,7 @@ _0803A188: .4byte gBattlerPartyIndexes
 _0803A18C: .4byte gBattleMoveDamage
 _0803A190: .4byte gActiveBattler
 _0803A194: .4byte gBattleMoves
-	thumb_func_end sub_8039E3C
+	thumb_func_end GetMostSuitableMonToSwitchInto
 
 	thumb_func_start sub_803A198
 sub_803A198: @ 803A198

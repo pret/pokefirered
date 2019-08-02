@@ -72,7 +72,7 @@ SECTIONS {
         src/battle_util2.o(.text);
         asm/battle_controller_player.o(.text);
         src/battle_gfx_sfx_util.o(.text);
-        asm/battle_controller_opponent.o(.text);
+        src/battle_controller_opponent.o(.text);
         asm/battle_ai_switch_items.o(.text);
         asm/battle_controller_link_opponent.o(.text);
         src/pokemon.o(.text);
@@ -382,6 +382,8 @@ SECTIONS {
         data/data.o(.rodata);
         src/battle_util.o(.rodata);
         data/data.o(.rodata.825011C);
+        src/battle_controller_opponent.o(.rodata);
+        data/data.o(.rodata.8250B20);
         src/pokemon.o(.rodata);
         src/trig.o(.rodata);
         src/util.o(.rodata);

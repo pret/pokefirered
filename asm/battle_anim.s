@@ -28,7 +28,7 @@ ClearBattleAnimationVars: @ 80724C0
 	ldr r0, _0807256C @ =gAnimMovePower
 	movs r2, 0
 	strh r1, [r0]
-	ldr r0, _08072570 @ =gUnknown_2037EFE
+	ldr r0, _08072570 @ =gAnimFriendship
 	strb r2, [r0]
 	ldr r4, _08072574 @ =gUnknown_2037F14
 	ldr r5, _08072578 @ =gAnimMoveTurn
@@ -91,7 +91,7 @@ _08072560: .4byte gUnknown_2037EE3
 _08072564: .4byte gAnimDisableStructPtr
 _08072568: .4byte gAnimMoveDmg
 _0807256C: .4byte gAnimMovePower
-_08072570: .4byte gUnknown_2037EFE
+_08072570: .4byte gAnimFriendship
 _08072574: .4byte gUnknown_2037F14
 _08072578: .4byte gAnimMoveTurn
 _0807257C: .4byte gUnknown_2037F17

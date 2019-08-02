@@ -96,6 +96,9 @@ void sub_80A6B90(struct BattleAnimBgData *, u32 arg1);
 u8 sub_80A82E4(u8 bank);
 bool8 AnimateBallThrow(struct Sprite *sprite);
 
+// battle_anim_special
+void sub_80F1720(u8 battler, struct Pokemon *mon);
+
 enum
 {
     BATTLER_COORD_X,
@@ -125,7 +128,7 @@ bool8 IsDoubleBattle(void);
 u8 sub_80A6D94(void);
 u8 sub_80A8364(u8);
 void StoreSpriteCallbackInData6(struct Sprite *sprite, void (*spriteCallback)(struct Sprite*));
-void oamt_add_pos2_onto_pos1(struct Sprite *sprite);
+void SetSpritePrimaryCoordsFromSecondaryCoords(struct Sprite *sprite);
 u8 GetBattlerSpriteDefault_Y(u8 bank);
 u8 sub_80A82E4(u8 bank);
 u8 GetSubstituteSpriteDefault_Y(u8 bank);
@@ -150,6 +153,7 @@ bool8 IsContest(void);
 void sub_80759DC(u8 spriteId);
 bool8 IsBattlerSpritePresent(u8 battlerId);
 u8 GetBattlerSpriteSubpriority(u8 battlerId);
+void StartAnimLinearTranslation(struct Sprite *sprite);
 
 // battle_anim_mon_movement.c
 void AnimTask_ShakeMon(u8 taskId);

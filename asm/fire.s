@@ -367,14 +367,14 @@ sub_80ACBB0: @ 80ACBB0
 	strh r1, [r0, 0x32]
 	movs r1, 0x50
 	strh r1, [r0, 0x36]
-	ldr r1, _080ACBD4 @ =sub_8075590
+	ldr r1, _080ACBD4 @ =StartAnimLinearTranslation
 	str r1, [r0, 0x1C]
 	ldr r1, _080ACBD8 @ =DestroyAnimSprite
 	bl StoreSpriteCallbackInData6
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080ACBD4: .4byte sub_8075590
+_080ACBD4: .4byte StartAnimLinearTranslation
 _080ACBD8: .4byte DestroyAnimSprite
 	thumb_func_end sub_80ACBB0
 

@@ -376,7 +376,7 @@ _080B1B72:
 	ldrh r3, [r5, 0x36]
 	adds r0, r3
 	strh r0, [r5, 0x36]
-	ldr r0, _080B1BA8 @ =sub_8075590
+	ldr r0, _080B1BA8 @ =StartAnimLinearTranslation
 	str r0, [r5, 0x1C]
 	ldr r1, _080B1BAC @ =DestroyAnimSprite
 	adds r0, r5, 0
@@ -390,7 +390,7 @@ _080B1B72:
 	.align 2, 0
 _080B1BA0: .4byte gBattleAnimTarget
 _080B1BA4: .4byte gBattleAnimArgs
-_080B1BA8: .4byte sub_8075590
+_080B1BA8: .4byte StartAnimLinearTranslation
 _080B1BAC: .4byte DestroyAnimSprite
 	thumb_func_end sub_80B1AB8
 

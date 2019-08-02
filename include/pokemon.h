@@ -50,7 +50,7 @@
 #define MON_DATA_SPATK_IV          43
 #define MON_DATA_SPDEF_IV          44
 #define MON_DATA_IS_EGG            45
-#define MON_DATA_ALT_ABILITY       46
+#define MON_DATA_ABILITY_NUM       46
 #define MON_DATA_TOUGH             47
 #define MON_DATA_SHEEN             48
 #define MON_DATA_OT_GENDER         49
@@ -244,7 +244,7 @@ struct PokemonSubstruct3
  /* 0x05 */ u32 spAttackIV:5;
  /* 0x06 */ u32 spDefenseIV:5;
  /* 0x07 */ u32 isEgg:1;
- /* 0x07 */ u32 altAbility:1;
+ /* 0x07 */ u32 abilityNum:1;
 
  /* 0x08 */ u32 coolRibbon:3;
  /* 0x08 */ u32 beautyRibbon:3;
@@ -342,7 +342,7 @@ struct BattleTowerPokemon
              u32 spAttackIV:5;
              u32 spDefenseIV:5;
              u32 gap:1;
-             u32 altAbility:1;
+             u32 abilityNum:1;
     /*0x1C*/ u32 personality;
     /*0x20*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
     /*0x2B*/ u8 friendship;
@@ -366,7 +366,7 @@ struct BattlePokemon
     /*0x16*/ u32 spAttackIV:5;
     /*0x17*/ u32 spDefenseIV:5;
     /*0x17*/ u32 isEgg:1;
-    /*0x17*/ u32 altAbility:1;
+    /*0x17*/ u32 abilityNum:1;
     /*0x18*/ s8 statStages[BATTLE_STATS_NO];
     /*0x20*/ u8 ability;
     /*0x21*/ u8 type1;
@@ -598,7 +598,7 @@ u8 GiveMonToPlayer(struct Pokemon *mon);
 u8 CalculatePlayerPartyCount(void);
 u8 CalculateEnemyPartyCount(void);
 u8 GetMonsStateToDoubles(void);
-u8 GetAbilityBySpecies(u16 species, bool8 altAbility);
+u8 GetAbilityBySpecies(u16 species, bool8 abilityNum);
 u8 GetMonAbility(struct Pokemon *mon);
 u8 GetSecretBaseTrainerPicIndex(void);
 u8 GetSecretBaseTrainerNameIndex(void);

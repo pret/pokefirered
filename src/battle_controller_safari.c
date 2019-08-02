@@ -260,7 +260,7 @@ static void sub_80DD7B0(void)
     }
 }
 
-static void CompleteOnSpecialAnimDone_0(void)
+static void CompleteOnSpecialAnimDone(void)
 {
     if (!gDoingBattleAnim || !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive)
         SafariBufferExecCompleted();
@@ -281,7 +281,7 @@ static void CompleteWhenChosePokeblock(void)
     }
 }
 
-static void CompleteOnFinishedBattleAnimation_3(void)
+static void CompleteOnFinishedBattleAnimation(void)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animFromTableActive)
         SafariBufferExecCompleted();
@@ -304,7 +304,7 @@ static void SafariBufferExecCompleted(void)
 }
 
 // not used
-static void CompleteOnFinishedStatusAnimation_3(void)
+static void CompleteOnFinishedStatusAnimation(void)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].statusAnimActive)
         SafariBufferExecCompleted();
@@ -385,7 +385,7 @@ static void SafariHandleSuccessBallThrowAnim(void)
     gBattleSpritesDataPtr->animationData->ballThrowCaseId = BALL_3_SHAKES_SUCCESS;
     gDoingBattleAnim = TRUE;
     InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), B_ANIM_SAFARI_BALL_THROW);
-    gBattlerControllerFuncs[gActiveBattler] = CompleteOnSpecialAnimDone_0;
+    gBattlerControllerFuncs[gActiveBattler] = CompleteOnSpecialAnimDone;
 }
 
 static void SafariHandleBallThrowAnim(void)
@@ -395,7 +395,7 @@ static void SafariHandleBallThrowAnim(void)
     gBattleSpritesDataPtr->animationData->ballThrowCaseId = ballThrowCaseId;
     gDoingBattleAnim = TRUE;
     InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), B_ANIM_SAFARI_BALL_THROW);
-    gBattlerControllerFuncs[gActiveBattler] = CompleteOnSpecialAnimDone_0;
+    gBattlerControllerFuncs[gActiveBattler] = CompleteOnSpecialAnimDone;
 }
 
 static void SafariHandlePause(void)
@@ -649,7 +649,7 @@ static void SafariHandleBattleAnimation(void)
     if (TryHandleLaunchBattleTableAnimation(gActiveBattler, gActiveBattler, gActiveBattler, animationId, argument))
         SafariBufferExecCompleted();
     else
-        gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedBattleAnimation_3;
+        gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedBattleAnimation;
 }
 
 static void SafariHandleLinkStandbyMsg(void)

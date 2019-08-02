@@ -253,7 +253,7 @@ _080B17F0:
 	strh r2, [r4, 0x32]
 	adds r1, r3
 	strh r1, [r4, 0x36]
-	ldr r0, _080B1830 @ =sub_8075590
+	ldr r0, _080B1830 @ =StartAnimLinearTranslation
 	str r0, [r4, 0x1C]
 	ldr r1, _080B1834 @ =DestroyAnimSprite
 	adds r0, r4, 0
@@ -265,7 +265,7 @@ _080B17F0:
 _080B1824: .4byte gBattleAnimTarget
 _080B1828: .4byte gBattleAnimAttacker
 _080B182C: .4byte gBattleAnimArgs
-_080B1830: .4byte sub_8075590
+_080B1830: .4byte StartAnimLinearTranslation
 _080B1834: .4byte DestroyAnimSprite
 	thumb_func_end sub_80B17C4
 

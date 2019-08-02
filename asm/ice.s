@@ -429,7 +429,7 @@ _080AF37A:
 	ldr r1, _080AF3B0 @ =DestroyAnimSprite
 	adds r0, r4, 0
 	bl StoreSpriteCallbackInData6
-	ldr r0, _080AF3B4 @ =sub_8075590
+	ldr r0, _080AF3B4 @ =StartAnimLinearTranslation
 	str r0, [r4, 0x1C]
 	pop {r4}
 	pop {r0}
@@ -438,7 +438,7 @@ _080AF37A:
 _080AF3A8: .4byte gBattleAnimArgs
 _080AF3AC: .4byte gBattleAnimTarget
 _080AF3B0: .4byte DestroyAnimSprite
-_080AF3B4: .4byte sub_8075590
+_080AF3B4: .4byte StartAnimLinearTranslation
 	thumb_func_end sub_80AF330
 
 	thumb_func_start sub_80AF3B8

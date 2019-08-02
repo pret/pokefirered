@@ -174,6 +174,7 @@ enum
     CONTROLLER_CMDS_COUNT
 };
 
+extern struct UnusedControllerStruct gUnknown_2022870;
 
 // general functions
 void HandleLinkBattleSetup(void);
@@ -243,6 +244,7 @@ void SetControllerToRecordedPlayer(void);
 
 // opponent controller
 void SetControllerToOpponent(void);
+void OpponentBufferExecCompleted(void);
 
 // player partner controller
 void SetControllerToPlayerPartner(void);
@@ -255,6 +257,11 @@ void SetControllerToPokedude(void);
 
 // oak controller
 void SetControllerToOakOrOldman(void);
+bool8 sub_80EB2E0(u8);
+void sub_80EB2F4(u8);
+void sub_80E8570(void);
+void sub_80E85C0(void);
+void sub_80E8598(void);
 
 // link opponent
 void SetControllerToLinkOpponent(void);

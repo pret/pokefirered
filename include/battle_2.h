@@ -10,7 +10,6 @@ void CB2_QuitRecordedBattle(void);
 void sub_8038528(struct Sprite* sprite);
 void sub_8038A04(void); // unused
 void VBlankCB_Battle(void);
-void nullsub_17(void);
 void sub_8038B74(struct Sprite *sprite);
 void sub_8038D64(void);
 u32 sub_80391E0(u8 arrayId, u8 caseId);
@@ -48,6 +47,7 @@ void sub_800FD9C(void);
 void sub_80120C4(struct Sprite *);
 void sub_8012100(struct Sprite *);
 void nullsub_12(void);
+void SpriteCB_FaintOpponentMon(struct Sprite *sprite);
 
 extern const u8 gStatusConditionString_PoisonJpn[8];
 extern const u8 gStatusConditionString_SleepJpn[8];

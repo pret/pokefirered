@@ -4061,8 +4061,8 @@ _08011E98: .4byte nullsub_10
 _08011E9C: .4byte gUnknown_2022AE8
 	thumb_func_end sub_8011E3C
 
-	thumb_func_start sub_8011EA0
-sub_8011EA0: @ 8011EA0
+	thumb_func_start SpriteCB_FaintOpponentMon
+SpriteCB_FaintOpponentMon: @ 8011EA0
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -4201,7 +4201,7 @@ _08011F8C:
 	.align 2, 0
 _08011FAC: .4byte gUnknown_82349CC
 _08011FB0: .4byte sub_8011FB4
-	thumb_func_end sub_8011EA0
+	thumb_func_end SpriteCB_FaintOpponentMon
 
 	thumb_func_start sub_8011FB4
 sub_8011FB4: @ 8011FB4

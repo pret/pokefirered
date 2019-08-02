@@ -2,8 +2,6 @@
 #define GUARD_BATTLE_H
 
 #include "global.h"
-
-// should they be included here or included individually by every file?
 #include "constants/battle.h"
 #include "battle_util.h"
 #include "battle_script_commands.h"
@@ -18,8 +16,6 @@
     0x1 bit is responsible for the side, 0 = player's side, 1 = opponent's side.
     0x2 bit is responsible for the id of sent out pokemon. 0 means it's the first sent out pokemon, 1 it's the second one. (Triple battle didn't exist at the time yet.)
 */
-
-#define BATTLE_BANKS_COUNT  4
 
 #define IDENTITY_PLAYER_MON1        0
 #define IDENTITY_OPPONENT_MON1      1
@@ -209,10 +205,10 @@ struct TrainerMonItemCustomMoves
 
 union TrainerMonPtr
 {
-    struct TrainerMonNoItemDefaultMoves* NoItemDefaultMoves;
-    struct TrainerMonNoItemCustomMoves* NoItemCustomMoves;
-    struct TrainerMonItemDefaultMoves* ItemDefaultMoves;
-    struct TrainerMonItemCustomMoves* ItemCustomMoves;
+    struct TrainerMonNoItemDefaultMoves *NoItemDefaultMoves;
+    struct TrainerMonNoItemCustomMoves *NoItemCustomMoves;
+    struct TrainerMonItemDefaultMoves *ItemDefaultMoves;
+    struct TrainerMonItemCustomMoves *ItemCustomMoves;
 };
 
 struct Trainer
@@ -278,7 +274,7 @@ struct DisableStruct
     /*0x1A*/ u8 unk1A[2];
 };
 
-extern struct DisableStruct gDisableStructs[BATTLE_BANKS_COUNT];
+extern struct DisableStruct gDisableStructs[MAX_BATTLERS_COUNT];
 
 struct ProtectStruct
 {
@@ -318,7 +314,7 @@ struct ProtectStruct
     /* field_E */ u16 fieldE;
 };
 
-extern struct ProtectStruct gProtectStructs[BATTLE_BANKS_COUNT];
+extern struct ProtectStruct gProtectStructs[MAX_BATTLERS_COUNT];
 
 struct SpecialStatus
 {
@@ -340,7 +336,7 @@ struct SpecialStatus
     u8 field13;
 };
 
-extern struct SpecialStatus gSpecialStatuses[BATTLE_BANKS_COUNT];
+extern struct SpecialStatus gSpecialStatuses[MAX_BATTLERS_COUNT];
 
 struct SideTimer
 {
@@ -463,7 +459,7 @@ struct BattleResources
     struct BattleScriptsStack *AI_ScriptsStack;
 };
 
-extern struct BattleResources* gBattleResources;
+extern struct BattleResources *gBattleResources;
 
 #define BATTLESCRIPTS_STACK     (gBattleResources->battleScriptsStack)
 #define BATTLE_CALLBACKS_STACK  (gBattleResources->battleCallbackStack)
@@ -546,15 +542,12 @@ struct BattleStruct
     u8 field_8C;
     u8 field_8D;
     u8 stringMoveType;
-    u8 expGetterBank;
+    u8 expGetterBattlerId;
     u8 field_90;
     u8 field_91;
-    u8 field_92;
-    u8 field_93;
-    u8 wallyBattleState;
-    u8 wallyMovesState;
-    u8 wallyWaitFrames;
-    u8 wallyMoveFrames;
+    u8 AI_monToSwitchIntoId[MAX_BATTLERS_COUNT];
+    u8 field_96;
+    u8 field_97;
     u8 lastTakenMove[MAX_BATTLERS_COUNT * 2 * 2]; // ask gamefreak why they declared it that way
     u16 hpOnSwitchout[2];
     u8 abilityPreventingSwitchout;
@@ -569,7 +562,6 @@ struct BattleStruct
     u8 field_B5;
     u8 field_B6;
     u8 atkCancellerTracker;
-    // void (*savedCallback)(void);
     u16 usedHeldItems[MAX_BATTLERS_COUNT];
     u8 chosenItem[4]; // why is this an u8?
     u8 AI_itemType[2];
@@ -859,8 +851,7 @@ struct BattleHealthboxInfo
     u8 specialAnimActive : 1; //x40
     u8 flag_x80 : 1;
     u8 field_1_x1 : 1;
-    u8 field_1_x1E : 4;
-    u8 field_1_x20 : 1;
+    u8 field_1_x1E : 5;
     u8 field_1_x40 : 1;
     u8 field_1_x80 : 1;
     u8 healthboxBounceSpriteId;
@@ -879,7 +870,7 @@ struct BattleBarInfo
 {
     u8 healthboxSpriteId;
     s32 maxValue;
-    s32 currentValue;
+    s32 oldValue;
     s32 receivedValue;
     s32 currValue;
 };
@@ -930,11 +921,11 @@ extern u16 gBattle_WIN0H;
 extern u16 gBattle_WIN0V;
 extern u16 gBattle_WIN1H;
 extern u16 gBattle_WIN1V;
-extern struct BattleSpritesGfx* gMonSpritesGfx;
+extern struct BattleSpritesGfx *gMonSpritesGfx;
 extern u8 gBattleOutcome;
 extern u16 gLastUsedItem;
 extern u32 gBattleTypeFlags;
-extern struct MonSpritesGfx* gMonSpritesGfxPtr;
+extern struct MonSpritesGfx *gMonSpritesGfxPtr;
 extern u16 gTrainerBattleOpponent_A;
 extern u16 gMoveToLearn;
 extern u16 gBattleMovePower;
@@ -991,5 +982,7 @@ extern u8 gTakenDmgByBattler[MAX_BATTLERS_COUNT];
 extern u8 gCurrentActionFuncId;
 extern u8 gCurrMovePos;
 extern u8 gChosenMovePos;
+extern u8 gUnknown_3004FFC[MAX_BATTLERS_COUNT];
+extern u8 gBattlerStatusSummaryTaskId[MAX_BATTLERS_COUNT];
 
 #endif // GUARD_BATTLE_H

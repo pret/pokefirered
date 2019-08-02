@@ -1201,8 +1201,8 @@ _08048424:
 _0804843C: .4byte 0x06010400
 	thumb_func_end UpdateLvlInHealthbox
 
-	thumb_func_start sub_8048440
-sub_8048440: @ 8048440
+	thumb_func_start UpdateHpTextInHealthbox
+UpdateHpTextInHealthbox: @ 8048440
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1425,7 +1425,7 @@ _08048608: .4byte gMonSpritesGfxPtr
 _0804860C: .4byte gSprites
 _08048610: .4byte 0x06010000
 _08048614: .4byte 0x04000008
-	thumb_func_end sub_8048440
+	thumb_func_end UpdateHpTextInHealthbox
 
 	thumb_func_start sub_8048618
 sub_8048618: @ 8048618
@@ -2279,8 +2279,8 @@ _08048D0C: .4byte gHealthboxSpriteIds
 _08048D10: .4byte gBattlersCount
 	thumb_func_end sub_8048A4C
 
-	thumb_func_start sub_8048D14
-sub_8048D14: @ 8048D14
+	thumb_func_start CreatePartyStatusSummarySprites
+CreatePartyStatusSummarySprites: @ 8048D14
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2866,10 +2866,10 @@ _08049172:
 	.align 2, 0
 _080491A8: .4byte TaskDummy
 _080491AC: .4byte gTasks
-	thumb_func_end sub_8048D14
+	thumb_func_end CreatePartyStatusSummarySprites
 
-	thumb_func_start sub_80491B0
-sub_80491B0: @ 80491B0
+	thumb_func_start Task_HidePartyStatusSummary
+Task_HidePartyStatusSummary: @ 80491B0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -3099,7 +3099,7 @@ _0804936E:
 	.align 2, 0
 _08049380: .4byte gTasks
 _08049384: .4byte sub_804948C
-	thumb_func_end sub_80491B0
+	thumb_func_end Task_HidePartyStatusSummary
 
 	thumb_func_start sub_8049388
 sub_8049388: @ 8049388
@@ -4426,7 +4426,7 @@ _08049E0C:
 	asrs r1, 16
 	adds r0, r6, 0
 	movs r2, 0
-	bl sub_8048440
+	bl UpdateHpTextInHealthbox
 _08049E26:
 	cmp r7, 0x2
 	beq _08049E2E
@@ -4441,7 +4441,7 @@ _08049E2E:
 	asrs r1, 16
 	adds r0, r6, 0
 	movs r2, 0x1
-	bl sub_8048440
+	bl UpdateHpTextInHealthbox
 _08049E44:
 	cmp r7, 0x5
 	beq _08049E4C
@@ -4468,7 +4468,7 @@ _08049E4C:
 	adds r1, r6, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8049FD8
+	bl MoveBattleBar
 _08049E80:
 	bl IsDoubleBattle
 	lsls r0, 24
@@ -4530,7 +4530,7 @@ _08049E96:
 	adds r1, r6, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl sub_8049FD8
+	bl MoveBattleBar
 _08049F06:
 	cmp r7, 0x4
 	beq _08049F0E
@@ -4607,7 +4607,7 @@ _08049F74:
 	adds r1, r6, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8049FD8
+	bl MoveBattleBar
 _08049FA8:
 	cmp r7, 0x4
 	beq _08049FB0
@@ -4636,8 +4636,8 @@ _08049FC6:
 	bx r0
 	thumb_func_end UpdateHealthboxAttribute
 
-	thumb_func_start sub_8049FD8
-sub_8049FD8: @ 8049FD8
+	thumb_func_start MoveBattleBar
+MoveBattleBar: @ 8049FD8
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -4765,7 +4765,7 @@ _0804A0BE:
 	bx r1
 	.align 2, 0
 _0804A0D0: .4byte gBattleSpritesDataPtr
-	thumb_func_end sub_8049FD8
+	thumb_func_end MoveBattleBar
 
 	thumb_func_start sub_804A0D4
 sub_804A0D4: @ 804A0D4

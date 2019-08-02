@@ -1715,8 +1715,8 @@ _080750F6:
 	bx r1
 	thumb_func_end sub_80750C8
 
-	thumb_func_start oamt_add_pos2_onto_pos1
-oamt_add_pos2_onto_pos1: @ 80750FC
+	thumb_func_start SetSpritePrimaryCoordsFromSecondaryCoords
+SetSpritePrimaryCoordsFromSecondaryCoords: @ 80750FC
 	ldrh r1, [r0, 0x24]
 	ldrh r2, [r0, 0x20]
 	adds r1, r2
@@ -1729,7 +1729,7 @@ oamt_add_pos2_onto_pos1: @ 80750FC
 	strh r2, [r0, 0x24]
 	strh r2, [r0, 0x26]
 	bx lr
-	thumb_func_end oamt_add_pos2_onto_pos1
+	thumb_func_end SetSpritePrimaryCoordsFromSecondaryCoords
 
 	thumb_func_start sub_8075114
 sub_8075114: @ 8075114
@@ -2347,8 +2347,8 @@ _08075574:
 _0807558C: .4byte 0x0000fffe
 	thumb_func_end obj_translate_based_on_private_1_2_3_4
 
-	thumb_func_start sub_8075590
-sub_8075590: @ 8075590
+	thumb_func_start StartAnimLinearTranslation
+StartAnimLinearTranslation: @ 8075590
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrh r0, [r4, 0x20]
@@ -2366,7 +2366,7 @@ sub_8075590: @ 8075590
 	bx r0
 	.align 2, 0
 _080755B4: .4byte sub_807563C
-	thumb_func_end sub_8075590
+	thumb_func_end StartAnimLinearTranslation
 
 	thumb_func_start sub_80755B8
 sub_80755B8: @ 80755B8
@@ -3547,7 +3547,7 @@ _08075E30:
 	ldrh r6, [r6, 0x6]
 	adds r0, r6
 	strh r0, [r5, 0x36]
-	ldr r0, _08075E78 @ =sub_8075590
+	ldr r0, _08075E78 @ =StartAnimLinearTranslation
 	str r0, [r5, 0x1C]
 	ldr r1, _08075E7C @ =DestroyAnimSprite
 	adds r0, r5, 0
@@ -3559,7 +3559,7 @@ _08075E30:
 _08075E6C: .4byte gBattleAnimArgs
 _08075E70: .4byte gBattleAnimAttacker
 _08075E74: .4byte gBattleAnimTarget
-_08075E78: .4byte sub_8075590
+_08075E78: .4byte StartAnimLinearTranslation
 _08075E7C: .4byte DestroyAnimSprite
 	thumb_func_end sub_8075DF4
 
@@ -3701,7 +3701,7 @@ _08075F62:
 	ldrh r4, [r4, 0x6]
 	adds r0, r4
 	strh r0, [r5, 0x36]
-	ldr r0, _08075FB4 @ =sub_8075590
+	ldr r0, _08075FB4 @ =StartAnimLinearTranslation
 	str r0, [r5, 0x1C]
 	ldr r1, _08075FB8 @ =DestroyAnimSprite
 	adds r0, r5, 0
@@ -3713,7 +3713,7 @@ _08075F62:
 _08075FA8: .4byte gBattleAnimTarget
 _08075FAC: .4byte gBattleAnimAttacker
 _08075FB0: .4byte gBattleAnimArgs
-_08075FB4: .4byte sub_8075590
+_08075FB4: .4byte StartAnimLinearTranslation
 _08075FB8: .4byte DestroyAnimSprite
 	thumb_func_end sub_8075F0C
 
@@ -4667,7 +4667,7 @@ sub_80766B8: @ 80766B8
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, _080766E4 @ =gUnknown_2037EFE
+	ldr r0, _080766E4 @ =gAnimFriendship
 	ldrb r0, [r0]
 	movs r1, 0
 	cmp r0, 0x1E
@@ -4687,7 +4687,7 @@ _080766D6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080766E4: .4byte gUnknown_2037EFE
+_080766E4: .4byte gAnimFriendship
 _080766E8: .4byte gBattleAnimArgs
 	thumb_func_end sub_80766B8
 
@@ -6327,7 +6327,7 @@ _08077390:
 	subs r0, 0x50
 _0807739E:
 	strh r0, [r4, 0x22]
-	ldr r0, _080773B4 @ =sub_8075590
+	ldr r0, _080773B4 @ =StartAnimLinearTranslation
 	str r0, [r4, 0x1C]
 	ldr r1, _080773B8 @ =DestroyAnimSprite
 	adds r0, r4, 0
@@ -6336,7 +6336,7 @@ _0807739E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080773B4: .4byte sub_8075590
+_080773B4: .4byte StartAnimLinearTranslation
 _080773B8: .4byte DestroyAnimSprite
 	thumb_func_end sub_8077350
 

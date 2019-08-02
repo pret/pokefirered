@@ -86,7 +86,7 @@ _080B4008:
 	ldrh r4, [r4, 0x6]
 	adds r0, r4
 	strh r0, [r6, 0x36]
-	ldr r0, _080B4074 @ =sub_8075590
+	ldr r0, _080B4074 @ =StartAnimLinearTranslation
 	str r0, [r6, 0x1C]
 	ldr r1, _080B4078 @ =DestroyAnimSprite
 	adds r0, r6, 0
@@ -97,7 +97,7 @@ _080B4008:
 	.align 2, 0
 _080B406C: .4byte gBattleAnimTarget
 _080B4070: .4byte gBattleAnimArgs
-_080B4074: .4byte sub_8075590
+_080B4074: .4byte StartAnimLinearTranslation
 _080B4078: .4byte DestroyAnimSprite
 	thumb_func_end sub_80B3FAC
 
@@ -166,7 +166,7 @@ _080B40BC:
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x36]
-	ldr r0, _080B4120 @ =sub_8075590
+	ldr r0, _080B4120 @ =StartAnimLinearTranslation
 	str r0, [r6, 0x1C]
 	ldr r1, _080B4124 @ =DestroyAnimSprite
 	adds r0, r6, 0
@@ -177,7 +177,7 @@ _080B40BC:
 	.align 2, 0
 _080B4118: .4byte gBattleAnimTarget
 _080B411C: .4byte gBattleAnimArgs
-_080B4120: .4byte sub_8075590
+_080B4120: .4byte StartAnimLinearTranslation
 _080B4124: .4byte DestroyAnimSprite
 	thumb_func_end sub_80B407C
 
@@ -603,7 +603,7 @@ _080B43F6:
 	strh r0, [r7, 0x2E]
 	strh r4, [r7, 0x32]
 	strh r5, [r7, 0x36]
-	ldr r0, _080B448C @ =sub_8075590
+	ldr r0, _080B448C @ =StartAnimLinearTranslation
 	str r0, [r7, 0x1C]
 	ldr r1, _080B4490 @ =DestroyAnimSprite
 	adds r0, r7, 0
@@ -616,7 +616,7 @@ _080B43F6:
 _080B4480: .4byte gBattleAnimAttacker
 _080B4484: .4byte gBattleAnimArgs
 _080B4488: .4byte gBattleAnimTarget
-_080B448C: .4byte sub_8075590
+_080B448C: .4byte StartAnimLinearTranslation
 _080B4490: .4byte DestroyAnimSprite
 	thumb_func_end sub_80B4364
 

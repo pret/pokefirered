@@ -3317,7 +3317,7 @@ CompleteOnHealthbarDone: @ 802FE24
 	ldrb r1, [r1]
 	movs r2, 0
 	movs r3, 0
-	bl sub_8049FD8
+	bl MoveBattleBar
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -3335,7 +3335,7 @@ CompleteOnHealthbarDone: @ 802FE24
 	adds r0, r6
 	ldrb r0, [r0]
 	movs r2, 0
-	bl sub_8048440
+	bl UpdateHpTextInHealthbox
 	b _0802FE86
 	.align 2, 0
 _0802FE64: .4byte gActiveBattler
@@ -3691,7 +3691,7 @@ _08030124:
 	adds r0, r7, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl sub_8049FD8
+	bl MoveBattleBar
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -8084,7 +8084,7 @@ PlayerHandleTrainerSlideBack: @ 8032590
 	lsls r0, 2
 	ldr r4, _08032638 @ =gSprites
 	adds r0, r4
-	bl oamt_add_pos2_onto_pos1
+	bl SetSpritePrimaryCoordsFromSecondaryCoords
 	ldrb r0, [r6]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -8121,7 +8121,7 @@ PlayerHandleTrainerSlideBack: @ 8032590
 	adds r1, r4, 0
 	adds r1, 0x1C
 	adds r0, r1
-	ldr r1, _08032640 @ =sub_8075590
+	ldr r1, _08032640 @ =StartAnimLinearTranslation
 	str r1, [r0]
 	ldrb r0, [r6]
 	adds r0, r5
@@ -8155,7 +8155,7 @@ _08032630: .4byte gBattlerSpriteIds
 _08032634: .4byte gActiveBattler
 _08032638: .4byte gSprites
 _0803263C: .4byte 0x0000ffd8
-_08032640: .4byte sub_8075590
+_08032640: .4byte StartAnimLinearTranslation
 _08032644: .4byte SpriteCallbackDummy
 _08032648: .4byte gBattlerControllerFuncs
 _0803264C: .4byte sub_802F7A0
@@ -8474,7 +8474,7 @@ _08032852:
 	lsls r1, 24
 	orrs r3, r1
 	str r3, [r4]
-	ldr r3, _08032938 @ =gUnknown_2037EFE
+	ldr r3, _08032938 @ =gAnimFriendship
 	ldrb r1, [r6]
 	lsls r1, 9
 	mov r2, r12
@@ -8482,7 +8482,7 @@ _08032852:
 	adds r1, r2
 	ldrb r1, [r1]
 	strb r1, [r3]
-	ldr r4, _0803293C @ =gUnknown_2037F00
+	ldr r4, _0803293C @ =gWeatherMoveAnim
 	ldrb r2, [r6]
 	lsls r2, 9
 	mov r1, r12
@@ -8523,8 +8523,8 @@ _08032928: .4byte gBattleBufferA
 _0803292C: .4byte gAnimMoveTurn
 _08032930: .4byte gAnimMovePower
 _08032934: .4byte gAnimMoveDmg
-_08032938: .4byte gUnknown_2037EFE
-_0803293C: .4byte gUnknown_2037F00
+_08032938: .4byte gAnimFriendship
+_0803293C: .4byte gWeatherMoveAnim
 _08032940: .4byte gAnimDisableStructPtr
 _08032944: .4byte gTransformedPersonalities
 _08032948:
@@ -9238,7 +9238,7 @@ _08032EDC:
 	ldrb r0, [r0]
 	movs r1, 0
 	movs r2, 0
-	bl sub_8048440
+	bl UpdateHpTextInHealthbox
 _08032F16:
 	ldr r1, _08032F40 @ =gBattlerControllerFuncs
 	ldr r0, _08032F44 @ =gActiveBattler
@@ -9940,7 +9940,7 @@ PlayerHandleIntroTrainerBallThrow: @ 8033478
 	lsls r0, 2
 	ldr r5, _080335C0 @ =gSprites
 	adds r0, r5
-	bl oamt_add_pos2_onto_pos1
+	bl SetSpritePrimaryCoordsFromSecondaryCoords
 	ldrb r0, [r7]
 	adds r0, r6
 	ldrb r1, [r0]
@@ -10059,14 +10059,14 @@ PlayerHandleIntroTrainerBallThrow: @ 8033478
 	ands r0, r1
 	cmp r0, 0
 	beq _0803359A
-	ldr r0, _080335E8 @ =gUnknown_2024000
+	ldr r0, _080335E8 @ =gBattlerStatusSummaryTaskId
 	adds r0, r2, r0
 	ldrb r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
 	adds r0, r4
-	ldr r1, _080335EC @ =sub_80491B0
+	ldr r1, _080335EC @ =Task_HidePartyStatusSummary
 	str r1, [r0]
 _0803359A:
 	ldr r0, [r3]
@@ -10097,8 +10097,8 @@ _080335D8: .4byte gSaveBlock2Ptr
 _080335DC: .4byte task05_08033660
 _080335E0: .4byte gTasks
 _080335E4: .4byte gBattleSpritesDataPtr
-_080335E8: .4byte gUnknown_2024000
-_080335EC: .4byte sub_80491B0
+_080335E8: .4byte gBattlerStatusSummaryTaskId
+_080335EC: .4byte Task_HidePartyStatusSummary
 _080335F0: .4byte gBattlerControllerFuncs
 _080335F4: .4byte nullsub_13
 	thumb_func_end PlayerHandleIntroTrainerBallThrow
@@ -10323,8 +10323,8 @@ _0803379C:
 	subs r4, 0x2
 	adds r3, r4
 	ldrb r3, [r3]
-	bl sub_8048D14
-	ldr r2, _08033824 @ =gUnknown_2024000
+	bl CreatePartyStatusSummarySprites
+	ldr r2, _08033824 @ =gBattlerStatusSummaryTaskId
 	ldrb r1, [r5]
 	adds r1, r2
 	movs r3, 0
@@ -10366,7 +10366,7 @@ _08033810:
 _08033818: .4byte gBattleSpritesDataPtr
 _0803381C: .4byte gActiveBattler
 _08033820: .4byte gUnknown_2022BC8
-_08033824: .4byte gUnknown_2024000
+_08033824: .4byte gBattlerStatusSummaryTaskId
 _08033828: .4byte gBattlerControllerFuncs
 _0803382C: .4byte sub_8033830
 	thumb_func_end PlayerHandleDrawPartyStatusSummary
@@ -10427,14 +10427,14 @@ PlayerHandleCmd49: @ 8033878
 	cmp r0, 0
 	beq _080338AA
 	ldr r2, _080338BC @ =gTasks
-	ldr r0, _080338C0 @ =gUnknown_2024000
+	ldr r0, _080338C0 @ =gBattlerStatusSummaryTaskId
 	adds r0, r3, r0
 	ldrb r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
 	adds r0, r2
-	ldr r1, _080338C4 @ =sub_80491B0
+	ldr r1, _080338C4 @ =Task_HidePartyStatusSummary
 	str r1, [r0]
 _080338AA:
 	bl PlayerBufferExecCompleted
@@ -10444,8 +10444,8 @@ _080338AA:
 _080338B4: .4byte gBattleSpritesDataPtr
 _080338B8: .4byte gActiveBattler
 _080338BC: .4byte gTasks
-_080338C0: .4byte gUnknown_2024000
-_080338C4: .4byte sub_80491B0
+_080338C0: .4byte gBattlerStatusSummaryTaskId
+_080338C4: .4byte Task_HidePartyStatusSummary
 	thumb_func_end PlayerHandleCmd49
 
 	thumb_func_start sub_80338C8

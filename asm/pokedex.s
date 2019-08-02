@@ -13,11 +13,11 @@ sub_8088E20: @ 8088E20
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08088E34 @ =gUnknown_844E850
+	ldr r1, _08088E34 @ =gPokedexEntries
 	adds r0, r1
 	bx lr
 	.align 2, 0
-_08088E34: .4byte gUnknown_844E850
+_08088E34: .4byte gPokedexEntries
 	thumb_func_end sub_8088E20
 
 	thumb_func_start sub_8088E38
@@ -34,7 +34,7 @@ sub_8088E38: @ 8088E38
 	movs r0, 0x1
 	b _08088E6C
 _08088E4E:
-	ldr r0, _08088E5C @ =gUnknown_844E850
+	ldr r0, _08088E5C @ =gPokedexEntries
 	lsls r1, r2, 3
 	adds r1, r2
 	lsls r1, 2
@@ -42,9 +42,9 @@ _08088E4E:
 	ldrh r0, [r1, 0xC]
 	b _08088E6C
 	.align 2, 0
-_08088E5C: .4byte gUnknown_844E850
+_08088E5C: .4byte gPokedexEntries
 _08088E60:
-	ldr r0, _08088E70 @ =gUnknown_844E850
+	ldr r0, _08088E70 @ =gPokedexEntries
 	lsls r1, r2, 3
 	adds r1, r2
 	lsls r1, 2
@@ -54,7 +54,7 @@ _08088E6C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08088E70: .4byte gUnknown_844E850
+_08088E70: .4byte gPokedexEntries
 	thumb_func_end sub_8088E38
 
 	thumb_func_start GetSetPokedexFlag

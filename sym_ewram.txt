@@ -756,9 +756,10 @@ gUnknown_2037F24: @ 2037F24
 gUnknown_2037F28: @ 2037F28
 	.space 0x8
 
-gUnknown_2037F30: @ 2037F30
-	.space 0x4
+	.align 2
+	.include "src/title_screen.o"
 
+	.align 2
 gUnknown_2037F34: @ 2037F34
 	.space 0x200
 
@@ -1374,11 +1375,8 @@ gUnknown_203F38C: @ 203F38C
 gUnknown_203F39C: @ 203F39C
 	.space 0x4
 
-gUnknown_203F3A0: @ 203F3A0
-	.space 0x4
-
-gUnknown_203F3A4: @ 203F3A4
-	.space 0x4
+	.align 2
+	.include "src/slot_machine.o"
 
 sLocationHistory: @ 203F3A8
 	.space 0x6

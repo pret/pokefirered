@@ -115,7 +115,7 @@ SECTIONS {
         src/task.o(.text);
         src/reshow_battle_screen.o(.text);
         asm/battle_anim_status_effects.o(.text);
-        asm/title_screen.o(.text);
+        src/title_screen.o(.text);
         src/reset_save_heap.o(.text);
         asm/field_weather.o(.text);
         asm/field_weather_effects.o(.text);
@@ -254,7 +254,7 @@ SECTIONS {
         asm/berry_pouch.o(.text);
         asm/itemfinder.o(.text);
         src/buy_menu_helpers.o(.text);
-        asm/slot_machine.o(.text);
+        src/slot_machine.o(.text);
         src/roamer.o(.text);
         src/mystery_gift_menu.o(.text);
         src/mevent.o(.text);
@@ -410,7 +410,7 @@ SECTIONS {
         data/battle_anim.o(.rodata);
         data/map_events.o(.rodata);
         data/battle_anim_status_effects.o(.rodata);
-        data/title_screen.o(.rodata);
+        src/title_screen.o(.rodata);
         data/field_weather.o(.rodata);
         data/data_835B488.o(.rodata);
         src/item_menu_icons.o(.rodata);
@@ -461,7 +461,7 @@ SECTIONS {
         data/berry_pouch.o(.rodata);
         data/itemfinder.o(.rodata);
         src/buy_menu_helpers.o(.rodata);
-        data/slot_machine.o(.rodata);
+        src/slot_machine.o(.rodata);
         src/roamer.o(.rodata);
         src/mystery_gift_menu.o(.rodata);
         src/mevent.o(.rodata);

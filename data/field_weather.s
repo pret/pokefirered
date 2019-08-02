@@ -1,6 +1,9 @@
 	.section .rodata
 	.align 2
 
+gUnknown_83BFBE4:: @ 83BFBE4
+	.incbin "baserom.gba", 0x3BFBE4, 0x2FD8
+
 gUnknown_83C2BBC:: @ 83C2BBC
 	.incbin "baserom.gba", 0x3C2BBC, 0x4
 

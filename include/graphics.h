@@ -961,6 +961,19 @@ extern const u8 gFile_graphics_items_icon_palettes_sapphire_palette[];
 extern const u8 gFile_graphics_items_icons_return_to_field_arrow_sheet[];
 extern const u8 gFile_graphics_items_icon_palettes_return_to_field_arrow_palette[];
 
+// title_screen
+extern const u16 gGraphics_TitleScreen_PokemonFireRedLogoPals[];
+extern const u8 gGraphics_TitleScreen_PokemonFireRedLogoTiles[];
+extern const u8 gGraphics_TitleScreen_PokemonFireRedLogoMap[];
+extern const u16 gGraphics_TitleScreen_CharizardPals[];
+extern const u8 gGraphics_TitleScreen_CharizardTiles[];
+extern const u8 gGraphics_TitleScreen_CharizardMap[];
+extern u16 gGraphics_TitleScreen_BackgroundPals[]; // If this is const, title_screen.c does not match
+extern const u8 gGraphics_TitleScreen_CopyrightPressStartTiles[];
+extern const u8 gGraphics_TitleScreen_CopyrightPressStartMap[];
+extern const u16 gGraphics_TitleScreen_FirePals[];
+extern const u8 gGraphics_TitleScreen_BlankObjTiles[];
+
 extern const u32 gHealthboxSinglesPlayerGfx[];
 extern const u32 gHealthboxSinglesOpponentGfx[];
 extern const u32 gHealthboxDoublesPlayerGfx[];

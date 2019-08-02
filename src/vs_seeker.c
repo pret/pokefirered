@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "task.h"
 #include "malloc.h"
@@ -22,7 +23,6 @@
 #include "map_obj_8097404.h"
 #include "unk_810c3a4.h"
 #include "constants/movement_commands.h"
-#include "constants/songs.h"
 #include "vs_seeker.h"
 
 typedef enum

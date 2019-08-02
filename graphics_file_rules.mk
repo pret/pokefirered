@@ -19,9 +19,11 @@ PSSGFXDIR := graphics/pokemon_storage
 EVENTOBJGFXDIR := graphics/event_objects
 MISCGFXDIR := graphics/misc
 TEXTWINDOWGFXDIR := graphics/text_window
+SLOTMACHINEGFXDIR := graphics/slot_machine
 TEACHYTVGFXDIR := graphics/teachy_tv
 SSANNEGFXDIR := graphics/ss_anne
 ITEMPCGFXDIR := graphics/item_pc
+TITLESCREENGFXDIR := graphics/title_screen
 
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
 contest_types := cool beauty cute smart tough
@@ -478,6 +480,12 @@ $(MISCGFXDIR)/unk_846B008.4bpp: %.4bpp: %.png
 $(TEXTWINDOWGFXDIR)/unk_8470B0C.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 19
 
+$(SLOTMACHINEGFXDIR)/unk_8466620.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 66
+
+$(SLOTMACHINEGFXDIR)/unk_84659d0.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 138
+
 $(TEACHYTVGFXDIR)/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 233
 
@@ -486,3 +494,6 @@ $(SSANNEGFXDIR)/unk_8479A38.4bpp: %.4bpp: %.png
 
 $(ITEMPCGFXDIR)/unk_8E85090.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 82
+
+$(TITLESCREENGFXDIR)/unk_8ead608.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 135

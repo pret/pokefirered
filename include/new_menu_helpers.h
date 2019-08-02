@@ -31,6 +31,7 @@ void DrawDialogueFrame(u8 windowId, bool8 transfer);
 void DrawStdWindowFrame(u8 windowId, bool8 copyNow);
 void ClearDialogWindowAndFrame(u8 windowId, bool8 copyToVram);
 void ClearStdWindowAndFrame(u8 taskId, bool8 copyNow);
+void sub_80F6C14(void);
 void sub_80F771C(bool8 copyToVram);
 void SetStdWindowBorderStyle(u8 windowId, bool8 copyToVram);
 void sub_80F7768(u8 windowId, bool8 copyToVram);

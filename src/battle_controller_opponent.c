@@ -1367,7 +1367,7 @@ static void OpponentHandleChooseMove(void)
     {
 
         BattleAI_SetupAIData();
-        chosenMoveId = BattleAI_GetAIActionToUse();
+        chosenMoveId = BattleAI_ChooseMoveOrAction();
 
         switch (chosenMoveId)
         {

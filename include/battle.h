@@ -984,5 +984,6 @@ extern u8 gCurrMovePos;
 extern u8 gChosenMovePos;
 extern u8 gUnknown_3004FFC[MAX_BATTLERS_COUNT];
 extern u8 gBattlerStatusSummaryTaskId[MAX_BATTLERS_COUNT];
+extern u16 gDynamicBasePower;
 
 #endif // GUARD_BATTLE_H

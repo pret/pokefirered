@@ -1,15 +1,16 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_2.h"
+#include "util.h"
 #include "item.h"
+#include "random.h"
 #include "pokemon.h"
+#include "battle_ai_script_commands.h"
 #include "constants/species.h"
 #include "constants/abilities.h"
 #include "constants/battle_ai.h"
 #include "constants/battle_move_effects.h"
 #include "constants/moves.h"
-
-extern u16 Random(void);
-extern void sub_80C7164(void);
 
 #define AI_ACTION_DONE          0x0001
 #define AI_ACTION_FLEE          0x0002
@@ -32,8 +33,16 @@ enum
     AIState_DoNotProcess
 };
 
+/*
+gAIScriptPtr is a pointer to the next battle AI cmd command to read.
+when a command finishes processing, gAIScriptPtr is incremented by
+the number of bytes that the current command had reserved for arguments
+in order to read the next command correctly. refer to battle_ai_scripts.s for the
+AI scripts.
+*/
+
 extern const u8 *gAIScriptPtr;
-extern u8 *BattleAIs[];
+extern u8 *gBattleAI_ScriptsTable[];
 
 static void BattleAICmd_if_random_less_than(void);
 static void BattleAICmd_if_random_greater_than(void);
@@ -129,6 +138,11 @@ static void BattleAICmd_end(void);
 static void BattleAICmd_if_level_compare(void);
 static void BattleAICmd_if_taunted(void);
 static void BattleAICmd_if_not_taunted(void);
+
+static void RecordLastUsedMoveByTarget(void);
+static void BattleAI_DoAIProcessing(void);
+static void AIStackPushVar(const u8 *ptr);
+static bool8 AIStackPop(void);
 
 typedef void (*BattleAICmdFunc)(void);
 
@@ -247,23 +261,6 @@ static const u16 sDiscouragedPowerfulMoveEffects[] =
     0xFFFF
 };
 
-// TODO: move these
-extern u8 gBattlerAttacker;
-extern const u32 gBitTable[]; // util.h
-extern u32 gStatuses3[]; // battle_2.h
-extern u16 gSideStatuses[2];
-extern const struct BattleMove gBattleMoves[];
-extern u16 gDynamicBasePower;
-extern u8 gMoveResultFlags;
-extern u8 gCritMultiplier;
-extern u16 gCurrentMove;
-extern s32 gBattleMoveDamage;
-
-void BattleAI_SetupAIData(void);
-void BattleAI_DoAIProcessing(void);
-void AIStackPushVar(const u8 *ptr);
-bool8 AIStackPop(void);
-
 void BattleAI_HandleItemUseBeforeAISetup(void)
 {
     s32 i;
@@ -274,9 +271,9 @@ void BattleAI_HandleItemUseBeforeAISetup(void)
 
     // Items are allowed to use in ONLY trainer battles.
     // TODO: Use proper flags
-    if ((gBattleTypeFlags & 0x8)
+    if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
         && (gTrainerBattleOpponent_A != 0x400)
-        && !(gBattleTypeFlags & 0x80982)
+        && !(gBattleTypeFlags & (BATTLE_TYPE_TRAINER_TOWER | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_SAFARI | BATTLE_TYPE_LINK))
         )
     {
         for (i = 0; i < 4; i++)
@@ -366,14 +363,14 @@ void BattleAI_SetupAIData(void)
     AI_THINKING_STRUCT->aiFlags = gTrainers[gTrainerBattleOpponent_A].aiFlags;
 }
 
-u8 BattleAI_GetAIActionToUse(void)
+u8 BattleAI_ChooseMoveOrAction(void)
 {
     u8 currentMoveArray[MAX_MON_MOVES];
     u8 consideredMoveArray[MAX_MON_MOVES];
     u8 numOfBestMoves;
     s32 i;
 
-    sub_80C7164();
+    RecordLastUsedMoveByTarget();
     while (AI_THINKING_STRUCT->aiFlags != 0)
     {
         if (AI_THINKING_STRUCT->aiFlags & 1)
@@ -414,7 +411,7 @@ u8 BattleAI_GetAIActionToUse(void)
     return consideredMoveArray[Random() % numOfBestMoves]; // break any ties that exist.
 }
 
-void BattleAI_DoAIProcessing(void)
+static void BattleAI_DoAIProcessing(void)
 {
     while (AI_THINKING_STRUCT->aiState != AIState_FinishedProcessing)
     {
@@ -423,7 +420,7 @@ void BattleAI_DoAIProcessing(void)
         case AIState_DoNotProcess: //Needed to match.
             break;
         case AIState_SettingUp:
-            gAIScriptPtr = BattleAIs[AI_THINKING_STRUCT->aiLogicId]; // set the AI ptr.
+            gAIScriptPtr = gBattleAI_ScriptsTable[AI_THINKING_STRUCT->aiLogicId]; // set the AI ptr.
             if (gBattleMons[gBattlerAttacker].pp[AI_THINKING_STRUCT->movesetIndex] == 0)
             {
                 AI_THINKING_STRUCT->moveConsidered = 0; // don't consider a move you have 0 PP for, idiot.
@@ -457,7 +454,7 @@ void BattleAI_DoAIProcessing(void)
     }
 }
 
-void sub_80C7164(void)
+static void RecordLastUsedMoveByTarget(void)
 {
     s32 i;
 
@@ -471,24 +468,25 @@ void sub_80C7164(void)
     }
 }
 
-void sub_80C71A8(u8 a)
+// not used
+static void ClearBattlerMoveHistory(u8 battlerId)
 {
     s32 i;
 
     for (i = 0; i < 8; i++)
-        BATTLE_HISTORY->usedMoves[a / 2][i] = 0;
+        BATTLE_HISTORY->usedMoves[battlerId / 2][i] = MOVE_NONE;
 }
 
-void RecordAbilityBattle(u8 a, u8 b)
+void RecordAbilityBattle(u8 battlerId, u8 abilityId)
 {
-    if (GetBattlerSide(a) == 0)
-        BATTLE_HISTORY->abilities[GetBattlerPosition(a) & 1] = b;
+    if (GetBattlerSide(battlerId) == 0)
+        BATTLE_HISTORY->abilities[GetBattlerPosition(battlerId) & 1] = abilityId;
 }
 
-void RecordItemEffectBattle(u8 a, u8 b)
+void RecordItemEffectBattle(u8 battlerId, u8 itemEffect)
 {
-    if (GetBattlerSide(a) == 0)
-        BATTLE_HISTORY->itemEffects[GetBattlerPosition(a) & 1] = b;
+    if (GetBattlerSide(battlerId) == 0)
+        BATTLE_HISTORY->itemEffects[GetBattlerPosition(battlerId) & 1] = itemEffect;
 }
 
 static void BattleAICmd_if_random_less_than(void)
@@ -1944,18 +1942,18 @@ static void BattleAICmd_if_not_taunted(void)
         gAIScriptPtr += 5;
 }
 
-void AIStackPushVar(const u8 *var)
+static void AIStackPushVar(const u8 *var)
 {
     gBattleResources->AI_ScriptsStack->ptr[gBattleResources->AI_ScriptsStack->size++] = var;
 }
 
 // unused
-void AIStackPushVar_cursor(void)
+static void AIStackPushVar_cursor(void)
 {
     gBattleResources->AI_ScriptsStack->ptr[gBattleResources->AI_ScriptsStack->size++] = gAIScriptPtr;
 }
 
-bool8 AIStackPop(void)
+static bool8 AIStackPop(void)
 {
     if (gBattleResources->AI_ScriptsStack->size != 0)
     {

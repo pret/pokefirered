@@ -115,7 +115,7 @@ SECTIONS {
         src/task.o(.text);
         asm/reshow_battle_screen.o(.text);
         asm/battle_anim_status_effects.o(.text);
-        asm/title_screen.o(.text);
+        src/title_screen.o(.text);
         src/reset_save_heap.o(.text);
         asm/field_weather.o(.text);
         asm/field_weather_effects.o(.text);
@@ -405,7 +405,7 @@ SECTIONS {
         data/battle_anim.o(.rodata);
         data/map_events.o(.rodata);
         data/battle_anim_status_effects.o(.rodata);
-        data/title_screen.o(.rodata);
+        src/title_screen.o(.rodata);
         data/field_weather.o(.rodata);
         data/data_835B488.o(.rodata);
         src/item_menu_icons.o(.rodata);

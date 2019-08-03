@@ -175,9 +175,6 @@ struct TrainerMonNoItemDefaultMoves
     u16 species;
 };
 
-u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg);
-u8 GetBattlerSide(u8 bank);
-
 struct TrainerMonItemDefaultMoves
 {
     u16 iv;
@@ -985,5 +982,7 @@ extern u8 gChosenMovePos;
 extern u8 gUnknown_3004FFC[MAX_BATTLERS_COUNT];
 extern u8 gBattlerStatusSummaryTaskId[MAX_BATTLERS_COUNT];
 extern u16 gDynamicBasePower;
+extern u16 gLastLandedMoves[MAX_BATTLERS_COUNT];
+extern u8 gLastHitBy[MAX_BATTLERS_COUNT];
 
 #endif // GUARD_BATTLE_H

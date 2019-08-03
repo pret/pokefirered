@@ -1439,7 +1439,7 @@ static void OpponentHandleChoosePokemon(void)
                 battler1 = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
                 battler2 = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
             }
-            for (chosenMonId = 0; chosenMonId < 6; ++chosenMonId)
+            for (chosenMonId = 0; chosenMonId < PARTY_SIZE; ++chosenMonId)
                 if (GetMonData(&gEnemyParty[chosenMonId], MON_DATA_HP) != 0
                  && chosenMonId != gBattlerPartyIndexes[battler1]
                  && chosenMonId != gBattlerPartyIndexes[battler2])

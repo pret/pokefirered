@@ -370,7 +370,7 @@ _0801DA5E:
 	movs r1, 0x1
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r1, _0801DAA4 @ =gUnknown_2023DA0
+	ldr r1, _0801DAA4 @ =gLastLandedMoves
 	ldr r3, _0801DAA8 @ =gBattlerTarget
 	ldrb r0, [r3]
 	lsls r0, 1
@@ -392,7 +392,7 @@ _0801DA94: .4byte gCurrentMove
 _0801DA98: .4byte gBattleMons
 _0801DA9C: .4byte gBattlerAttacker
 _0801DAA0: .4byte gMoveResultFlags
-_0801DAA4: .4byte gUnknown_2023DA0
+_0801DAA4: .4byte gLastLandedMoves
 _0801DAA8: .4byte gBattlerTarget
 _0801DAAC: .4byte gUnknown_2023DA8
 _0801DAB0: .4byte gBattleCommunication
@@ -458,7 +458,7 @@ JumpIfMoveFailed: @ 801DB10
 	ands r0, r1
 	cmp r0, 0
 	beq _0801DB70
-	ldr r1, _0801DB64 @ =gUnknown_2023DA0
+	ldr r1, _0801DB64 @ =gLastLandedMoves
 	ldr r3, _0801DB68 @ =gBattlerTarget
 	ldrb r0, [r3]
 	lsls r0, 1
@@ -484,7 +484,7 @@ JumpIfMoveFailed: @ 801DB10
 	.align 2, 0
 _0801DB5C: .4byte gBattlescriptCurrInstr
 _0801DB60: .4byte gMoveResultFlags
-_0801DB64: .4byte gUnknown_2023DA0
+_0801DB64: .4byte gLastLandedMoves
 _0801DB68: .4byte gBattlerTarget
 _0801DB6C: .4byte gUnknown_2023DA8
 _0801DB70:
@@ -2182,7 +2182,7 @@ _0801E8C0:
 	movs r1, 0x9
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r1, _0801E92C @ =gUnknown_2023DA0
+	ldr r1, _0801E92C @ =gLastLandedMoves
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r1
@@ -2208,22 +2208,22 @@ _0801E91C: .4byte gBattleMoveDamage
 _0801E920: .4byte gBattlerTarget
 _0801E924: .4byte gLastUsedAbility
 _0801E928: .4byte gMoveResultFlags
-_0801E92C: .4byte gUnknown_2023DA0
+_0801E92C: .4byte gLastLandedMoves
 _0801E930: .4byte gUnknown_2023DA8
 _0801E934: .4byte gBattleCommunication
 _0801E938:
-	ldr r1, _0801E944 @ =gUnknown_824F050
+	ldr r1, _0801E944 @ =gTypeEffectiveness
 	adds r0, r3, r1
 	ldrb r0, [r0]
 	adds r2, r1, 0
 	b _0801E9B4
 	.align 2, 0
-_0801E944: .4byte gUnknown_824F050
+_0801E944: .4byte gTypeEffectiveness
 _0801E948:
 	adds r3, 0x3
 	b _0801E9B0
 _0801E94C:
-	ldr r5, _0801EA84 @ =gUnknown_824F050
+	ldr r5, _0801EA84 @ =gTypeEffectiveness
 	adds r0, r3, r5
 	ldrb r0, [r0]
 	cmp r0, r8
@@ -2272,7 +2272,7 @@ _0801E9A8:
 	adds r3, 0x3
 	ldr r5, _0801EA88 @ =gBattleMons
 	ldr r4, _0801EA8C @ =gBattlerTarget
-	ldr r2, _0801EA84 @ =gUnknown_824F050
+	ldr r2, _0801EA84 @ =gTypeEffectiveness
 _0801E9B0:
 	adds r0, r3, r2
 	ldrb r0, [r0]
@@ -2339,7 +2339,7 @@ _0801EA10:
 	orrs r0, r4
 	mov r1, r8
 	strb r0, [r1]
-	ldr r1, _0801EAA4 @ =gUnknown_2023DA0
+	ldr r1, _0801EAA4 @ =gLastLandedMoves
 	ldrb r0, [r5]
 	lsls r0, 1
 	adds r0, r1
@@ -2384,7 +2384,7 @@ _0801EA70:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801EA84: .4byte gUnknown_824F050
+_0801EA84: .4byte gTypeEffectiveness
 _0801EA88: .4byte gBattleMons
 _0801EA8C: .4byte gBattlerTarget
 _0801EA90: .4byte gBattlerAttacker
@@ -2392,7 +2392,7 @@ _0801EA94: .4byte gCurrentMove
 _0801EA98: .4byte gMoveResultFlags
 _0801EA9C: .4byte gBattleMoves
 _0801EAA0: .4byte gLastUsedAbility
-_0801EAA4: .4byte gUnknown_2023DA0
+_0801EAA4: .4byte gLastLandedMoves
 _0801EAA8: .4byte gUnknown_2023DA8
 _0801EAAC: .4byte gBattleCommunication
 _0801EAB0: .4byte gProtectStructs
@@ -2473,13 +2473,13 @@ _0801EB40: .4byte gBattlerTarget
 _0801EB44: .4byte gLastUsedAbility
 _0801EB48: .4byte gBattleCommunication
 _0801EB4C:
-	ldr r1, _0801EB58 @ =gUnknown_824F050
+	ldr r1, _0801EB58 @ =gTypeEffectiveness
 	adds r0, r5, r1
 	ldrb r0, [r0]
 	adds r4, r1, 0
 	b _0801EC9E
 	.align 2, 0
-_0801EB58: .4byte gUnknown_824F050
+_0801EB58: .4byte gTypeEffectiveness
 _0801EB5C:
 	adds r0, r5, r4
 	ldrb r0, [r0]
@@ -2919,7 +2919,7 @@ _0801EE94: .4byte gBattleMoves
 _0801EE98: .4byte gBattleMons
 _0801EE9C: .4byte gBattleMoveDamage
 _0801EEA0:
-	ldr r1, _0801EEBC @ =gUnknown_824F050
+	ldr r1, _0801EEBC @ =gTypeEffectiveness
 	mov r2, r8
 	adds r0, r2, r1
 	ldrb r0, [r0]
@@ -2934,13 +2934,13 @@ _0801EEA0:
 	adds r0, r3, 0
 	b _0801EF3E
 	.align 2, 0
-_0801EEBC: .4byte gUnknown_824F050
+_0801EEBC: .4byte gTypeEffectiveness
 _0801EEC0:
 	movs r0, 0x3
 	add r8, r0
 	b _0801EF28
 _0801EEC6:
-	ldr r7, _0801EFC0 @ =gUnknown_824F050
+	ldr r7, _0801EFC0 @ =gTypeEffectiveness
 	mov r1, r8
 	adds r0, r1, r7
 	ldrb r0, [r0]
@@ -2988,7 +2988,7 @@ _0801EF20:
 	movs r1, 0x3
 	add r8, r1
 	ldr r5, _0801EFC4 @ =gBattleMons
-	ldr r2, _0801EFC0 @ =gUnknown_824F050
+	ldr r2, _0801EFC0 @ =gTypeEffectiveness
 _0801EF28:
 	mov r3, r8
 	adds r0, r3, r2
@@ -3070,7 +3070,7 @@ _0801EFAE:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801EFC0: .4byte gUnknown_824F050
+_0801EFC0: .4byte gTypeEffectiveness
 _0801EFC4: .4byte gBattleMons
 _0801EFC8: .4byte gBattleMoves
 	thumb_func_end TypeCalc
@@ -3129,7 +3129,7 @@ _0801F00C:
 	.align 2, 0
 _0801F030: .4byte gBattleMoves
 _0801F034:
-	ldr r0, _0801F0C0 @ =gUnknown_824F050
+	ldr r0, _0801F0C0 @ =gTypeEffectiveness
 	adds r1, r7, r0
 	ldrb r0, [r1]
 	cmp r0, 0xFF
@@ -3160,7 +3160,7 @@ _0801F05A:
 _0801F06C:
 	adds r4, 0x3
 	adds r7, 0x3
-	ldr r1, _0801F0C0 @ =gUnknown_824F050
+	ldr r1, _0801F0C0 @ =gTypeEffectiveness
 	adds r0, r7, r1
 	ldrb r0, [r0]
 	cmp r0, 0xFF
@@ -3205,7 +3205,7 @@ _0801F0B0:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801F0C0: .4byte gUnknown_824F050
+_0801F0C0: .4byte gTypeEffectiveness
 _0801F0C4: .4byte gBattleMoves
 	thumb_func_end AI_TypeCalc
 
@@ -12325,7 +12325,7 @@ _08023966:
 	ands r1, r0
 	cmp r1, 0
 	bne _08023984
-	ldr r0, _080239C4 @ =gUnknown_2023DC0
+	ldr r0, _080239C4 @ =gLastHitBy
 	adds r0, r3, r0
 	mov r3, r9
 	ldrb r1, [r3]
@@ -12348,7 +12348,7 @@ _08023984:
 	ldr r0, _080239B8 @ =0x0000ffff
 	cmp r3, r0
 	bne _080239D4
-	ldr r1, _080239D0 @ =gUnknown_2023DA0
+	ldr r1, _080239D0 @ =gLastLandedMoves
 	ldrb r0, [r2]
 	lsls r0, 1
 	adds r0, r1
@@ -12359,12 +12359,12 @@ _080239B4: .4byte gLastMoves
 _080239B8: .4byte 0x0000ffff
 _080239BC: .4byte gUnknown_2023DB0
 _080239C0: .4byte gBattlerTarget
-_080239C4: .4byte gUnknown_2023DC0
+_080239C4: .4byte gLastHitBy
 _080239C8: .4byte gMoveResultFlags
 _080239CC: .4byte gChosenMove
-_080239D0: .4byte gUnknown_2023DA0
+_080239D0: .4byte gLastLandedMoves
 _080239D4:
-	ldr r0, _080239F8 @ =gUnknown_2023DA0
+	ldr r0, _080239F8 @ =gLastLandedMoves
 	ldrb r1, [r2]
 	lsls r1, 1
 	adds r1, r0
@@ -12383,7 +12383,7 @@ _080239D4:
 	ands r0, r3
 	b _08023A2A
 	.align 2, 0
-_080239F8: .4byte gUnknown_2023DA0
+_080239F8: .4byte gLastLandedMoves
 _080239FC: .4byte gCurrentMove
 _08023A00: .4byte gUnknown_2023DA8
 _08023A04:
@@ -12402,7 +12402,7 @@ _08023A04:
 	.align 2, 0
 _08023A1C: .4byte gUnknown_2023DA8
 _08023A20:
-	ldr r0, _08023A38 @ =gUnknown_2023DA0
+	ldr r0, _08023A38 @ =gLastLandedMoves
 	ldrb r1, [r2]
 	lsls r1, 1
 	adds r1, r0
@@ -12416,7 +12416,7 @@ _08023A2C:
 	strb r0, [r4, 0x14]
 	b _08023BB4
 	.align 2, 0
-_08023A38: .4byte gUnknown_2023DA0
+_08023A38: .4byte gLastLandedMoves
 _08023A3C: .4byte 0x0000ffff
 _08023A40:
 	ldr r0, _08023B04 @ =gAbsentBattlerFlags
@@ -12699,7 +12699,7 @@ atk4A_typecalc2: @ 8023C38
 	movs r1, 0x9
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r1, _08023CB4 @ =gUnknown_2023DA0
+	ldr r1, _08023CB4 @ =gLastLandedMoves
 	ldrb r0, [r7]
 	lsls r0, 1
 	adds r0, r1
@@ -12718,7 +12718,7 @@ _08023CA4: .4byte gBattleMons
 _08023CA8: .4byte gBattlerTarget
 _08023CAC: .4byte gLastUsedAbility
 _08023CB0: .4byte gMoveResultFlags
-_08023CB4: .4byte gUnknown_2023DA0
+_08023CB4: .4byte gLastLandedMoves
 _08023CB8: .4byte gBattleCommunication
 _08023CBC:
 	ldr r0, _08023CC8 @ =gMoveResultFlags
@@ -12730,13 +12730,13 @@ _08023CBC:
 	.align 2, 0
 _08023CC8: .4byte gMoveResultFlags
 _08023CCC:
-	ldr r1, _08023CD8 @ =gUnknown_824F050
+	ldr r1, _08023CD8 @ =gTypeEffectiveness
 	adds r0, r5, r1
 	ldrb r0, [r0]
 	adds r6, r1, 0
 	b _08023D8E
 	.align 2, 0
-_08023CD8: .4byte gUnknown_824F050
+_08023CD8: .4byte gTypeEffectiveness
 _08023CDC:
 	adds r0, r5, r6
 	ldrb r0, [r0]
@@ -12899,7 +12899,7 @@ _08023DF0:
 	movs r1, 0x1
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r1, _08023E78 @ =gUnknown_2023DA0
+	ldr r1, _08023E78 @ =gLastLandedMoves
 	mov r2, r8
 	ldrb r0, [r2]
 	lsls r0, 1
@@ -12945,7 +12945,7 @@ _08023E68: .4byte gCurrentMove
 _08023E6C: .4byte gBattleMoves
 _08023E70: .4byte gLastUsedAbility
 _08023E74: .4byte gMoveResultFlags
-_08023E78: .4byte gUnknown_2023DA0
+_08023E78: .4byte gLastLandedMoves
 _08023E7C: .4byte gBattleCommunication
 _08023E80: .4byte gProtectStructs
 _08023E84: .4byte gBattlescriptCurrInstr
@@ -24813,7 +24813,7 @@ atkA6_settypetorandomresistance: @ 8029DAC
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
-	ldr r1, _08029E14 @ =gUnknown_2023DA0
+	ldr r1, _08029E14 @ =gLastLandedMoves
 	ldr r4, _08029E18 @ =gBattlerAttacker
 	ldrb r0, [r4]
 	lsls r0, 1
@@ -24830,7 +24830,7 @@ atkA6_settypetorandomresistance: @ 8029DAC
 	cmp r0, 0
 	beq _08029E94
 	ldr r1, _08029E20 @ =gBattleMons
-	ldr r2, _08029E24 @ =gUnknown_2023DC0
+	ldr r2, _08029E24 @ =gLastHitBy
 	ldrb r0, [r4]
 	adds r0, r2
 	ldrb r2, [r0]
@@ -24860,11 +24860,11 @@ _08029DF6:
 	str r1, [r3]
 	b _08029F80
 	.align 2, 0
-_08029E14: .4byte gUnknown_2023DA0
+_08029E14: .4byte gLastLandedMoves
 _08029E18: .4byte gBattlerAttacker
 _08029E1C: .4byte 0x0000ffff
 _08029E20: .4byte gBattleMons
-_08029E24: .4byte gUnknown_2023DC0
+_08029E24: .4byte gLastHitBy
 _08029E28: .4byte gBattlescriptCurrInstr
 _08029E2C:
 	mov r0, r12
@@ -24931,7 +24931,7 @@ _08029E9C:
 	bhi _08029E9C
 	lsls r0, r4, 1
 	adds r4, r0, r4
-	ldr r6, _08029F90 @ =gUnknown_824F050
+	ldr r6, _08029F90 @ =gTypeEffectiveness
 	adds r3, r4, r6
 	ldr r1, _08029F94 @ =gUnknown_2023DA8
 	ldr r2, _08029F98 @ =gBattlerAttacker
@@ -24979,7 +24979,7 @@ _08029EF8:
 	mov r8, r0
 	ldr r1, _08029FA4 @ =gBattlescriptCurrInstr
 	mov r12, r1
-	ldr r3, _08029F90 @ =gUnknown_824F050
+	ldr r3, _08029F90 @ =gTypeEffectiveness
 	adds r0, r4, 0x1
 	adds r0, r3
 	mov r9, r0
@@ -25050,7 +25050,7 @@ _08029F80:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08029F90: .4byte gUnknown_824F050
+_08029F90: .4byte gTypeEffectiveness
 _08029F94: .4byte gUnknown_2023DA8
 _08029F98: .4byte gBattlerAttacker
 _08029F9C: .4byte gBattleMons

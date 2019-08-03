@@ -59,4 +59,6 @@ extern const u8 gStatusConditionString_LoveJpn[8];
 
 extern const u8 * const gStatusConditionStringsTable[7][2];
 
+extern const u8 gTypeEffectiveness[336];
+
 #endif // GUARD_BATTLE_2_H

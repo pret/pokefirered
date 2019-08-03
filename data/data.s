@@ -233,7 +233,7 @@ gUnknown_824F020:: @ 824F020
 gUnknown_824F048:: @ 824F048
 	.incbin "baserom.gba", 0x24F048, 0x8
 
-gUnknown_824F050:: @ 824F050
+gTypeEffectiveness:: @ 824F050
 	.incbin "baserom.gba", 0x24F050, 0x150
 
 gUnknown_824F1A0:: @ 824F1A0

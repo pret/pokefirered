@@ -291,7 +291,7 @@ gUnknown_2023D90: @ 2023D90
 gLastMoves: @ 2023D98
 	.space 0x8
 
-gUnknown_2023DA0: @ 2023DA0
+gLastLandedMoves: @ 2023DA0
 	.space 0x8
 
 gUnknown_2023DA8: @ 2023DA8
@@ -303,7 +303,7 @@ gUnknown_2023DB0: @ 2023DB0
 gUnknown_2023DB8: @ 2023DB8
 	.space 0x8
 
-gUnknown_2023DC0: @ 2023DC0
+gLastHitBy: @ 2023DC0
 	.space 0x4
 
 gChosenMoveByBattler: @ 2023DC4

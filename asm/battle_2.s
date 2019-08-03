@@ -4847,7 +4847,7 @@ sub_8012434: @ 8012434
 	mov r10, r0
 	ldr r1, _080126D0 @ =gUnknown_2023DA8
 	mov r12, r1
-	ldr r0, _080126D4 @ =gUnknown_2023DA0
+	ldr r0, _080126D4 @ =gLastLandedMoves
 	mov r9, r0
 	ldr r1, _080126D8 @ =gLastMoves
 	mov r8, r1
@@ -4879,7 +4879,7 @@ _0801246C:
 	strh r3, [r0]
 	mov r1, r10
 	strh r3, [r1]
-	ldr r0, _080126F0 @ =gUnknown_2023DC0
+	ldr r0, _080126F0 @ =gLastHitBy
 	adds r1, r2, r0
 	movs r0, 0xFF
 	strb r0, [r1]
@@ -5173,14 +5173,14 @@ _080126AE:
 	.align 2, 0
 _080126CC: .4byte gUnknown_2023DB0
 _080126D0: .4byte gUnknown_2023DA8
-_080126D4: .4byte gUnknown_2023DA0
+_080126D4: .4byte gLastLandedMoves
 _080126D8: .4byte gLastMoves
 _080126DC: .4byte gDisableStructs
 _080126E0: .4byte gUnknown_2023D90
 _080126E4: .4byte gUnknown_2023DB8
 _080126E8: .4byte gStatuses3
 _080126EC: .4byte gUnknown_2023DD4
-_080126F0: .4byte gUnknown_2023DC0
+_080126F0: .4byte gLastHitBy
 _080126F4: .4byte gBattleResources
 _080126F8: .4byte gSideTimers
 _080126FC: .4byte gSideStatuses
@@ -5585,7 +5585,7 @@ _08012A1A:
 	strh r2, [r0]
 	ldrb r0, [r1]
 	lsls r0, 1
-	ldr r6, _08012BB0 @ =gUnknown_2023DA0
+	ldr r6, _08012BB0 @ =gLastLandedMoves
 	adds r0, r6
 	strh r2, [r0]
 	ldrb r0, [r1]
@@ -5606,7 +5606,7 @@ _08012A1A:
 	strh r2, [r0]
 	mov r1, r12
 	ldrb r0, [r1]
-	ldr r2, _08012BC0 @ =gUnknown_2023DC0
+	ldr r2, _08012BC0 @ =gLastHitBy
 	adds r0, r2
 	movs r1, 0xFF
 	strb r1, [r0]
@@ -5758,11 +5758,11 @@ _08012BA0: .4byte gCurrentMove
 _08012BA4: .4byte gBattleMoves
 _08012BA8: .4byte gMoveResultFlags
 _08012BAC: .4byte gLastMoves
-_08012BB0: .4byte gUnknown_2023DA0
+_08012BB0: .4byte gLastLandedMoves
 _08012BB4: .4byte gUnknown_2023DA8
 _08012BB8: .4byte gUnknown_2023DB0
 _08012BBC: .4byte gUnknown_2023D90
-_08012BC0: .4byte gUnknown_2023DC0
+_08012BC0: .4byte gLastHitBy
 _08012BC4: .4byte gBattleResources
 	thumb_func_end sub_8012760
 
@@ -6053,7 +6053,7 @@ _08012CA8:
 	strh r2, [r0]
 	ldrb r0, [r7]
 	lsls r0, 1
-	ldr r1, _08012F90 @ =gUnknown_2023DA0
+	ldr r1, _08012F90 @ =gLastLandedMoves
 	adds r0, r1
 	strh r2, [r0]
 	ldrb r0, [r7]
@@ -6072,7 +6072,7 @@ _08012CA8:
 	adds r0, r1
 	strh r2, [r0]
 	ldrb r0, [r7]
-	ldr r2, _08012FA0 @ =gUnknown_2023DC0
+	ldr r2, _08012FA0 @ =gLastHitBy
 	adds r0, r2
 	movs r1, 0xFF
 	strb r1, [r0]
@@ -6250,11 +6250,11 @@ _08012F80: .4byte 0xfbffffff
 _08012F84: .4byte gBattleStruct
 _08012F88: .4byte 0xffff1fff
 _08012F8C: .4byte gLastMoves
-_08012F90: .4byte gUnknown_2023DA0
+_08012F90: .4byte gLastLandedMoves
 _08012F94: .4byte gUnknown_2023DA8
 _08012F98: .4byte gUnknown_2023DB0
 _08012F9C: .4byte gUnknown_2023D90
-_08012FA0: .4byte gUnknown_2023DC0
+_08012FA0: .4byte gLastHitBy
 _08012FA4: .4byte gBattleResources
 _08012FA8: .4byte gBaseStats
 	thumb_func_end sub_8012BC8
@@ -13836,7 +13836,7 @@ HandleAction_ActionFinished: @ 8016D70
 	ldr r5, _08016E04 @ =gBattleScripting
 	strb r1, [r5, 0x18]
 	strb r1, [r5, 0x19]
-	ldr r2, _08016E08 @ =gUnknown_2023DA0
+	ldr r2, _08016E08 @ =gLastLandedMoves
 	ldr r3, _08016E0C @ =gBattlerAttacker
 	ldrb r0, [r3]
 	lsls r0, 1
@@ -13875,7 +13875,7 @@ _08016DF8: .4byte gCurrentMove
 _08016DFC: .4byte gBattleMoveDamage
 _08016E00: .4byte gMoveResultFlags
 _08016E04: .4byte gBattleScripting
-_08016E08: .4byte gUnknown_2023DA0
+_08016E08: .4byte gLastLandedMoves
 _08016E0C: .4byte gBattlerAttacker
 _08016E10: .4byte gUnknown_2023DA8
 _08016E14: .4byte gBattleStruct

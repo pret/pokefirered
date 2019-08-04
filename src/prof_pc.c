@@ -25,13 +25,13 @@ u16 Special_GetPokedexCount(void)
 {
     if (gSpecialVar_0x8004 == 0)
     {
-        gSpecialVar_0x8005 = sub_8088EDC(0);
-        gSpecialVar_0x8006 = sub_8088EDC(1);
+        gSpecialVar_0x8005 = GetKantoPokedexCount(0);
+        gSpecialVar_0x8006 = GetKantoPokedexCount(1);
     }
     else
     {
-        gSpecialVar_0x8005 = pokedex_count(0);
-        gSpecialVar_0x8006 = pokedex_count(1);
+        gSpecialVar_0x8005 = GetNationalPokedexCount(0);
+        gSpecialVar_0x8006 = GetNationalPokedexCount(1);
     }
     return sub_806E25C();
 }

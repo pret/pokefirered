@@ -1247,7 +1247,7 @@ static bool8 sub_812B780(u8 id)
             return FlagGet(FLAG_0x828);
         case 4:
         case 34:
-            if (sub_8088EDC(1) > 1)
+            if (GetKantoPokedexCount(1) > 1)
                 return TRUE;
             return FALSE;
         case 15:

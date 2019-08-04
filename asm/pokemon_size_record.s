@@ -128,7 +128,7 @@ GetMonSize: @ 80A0770
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0
-	bl sub_8088E38
+	bl GetPokedexHeightWeight
 	lsls r0, 16
 	lsrs r7, r0, 16
 	adds r0, r6, 0

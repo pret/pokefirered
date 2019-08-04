@@ -26,8 +26,8 @@ sub_80F558C: @ 80F558C
 	bx r0
 	thumb_func_end sub_80F558C
 
-	thumb_func_start sub_80F55A0
-sub_80F55A0: @ 80F55A0
+	thumb_func_start CB2_SaveClearScreen_Init
+CB2_SaveClearScreen_Init: @ 80F55A0
 	push {r4,lr}
 	ldr r4, _080F55D0 @ =gUnknown_203AB54
 	movs r0, 0x4
@@ -52,7 +52,7 @@ sub_80F55A0: @ 80F55A0
 _080F55D0: .4byte gUnknown_203AB54
 _080F55D4: .4byte sub_80F55DC
 _080F55D8: .4byte sub_80F5574
-	thumb_func_end sub_80F55A0
+	thumb_func_end CB2_SaveClearScreen_Init
 
 	thumb_func_start sub_80F55DC
 sub_80F55DC: @ 80F55DC

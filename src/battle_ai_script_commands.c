@@ -344,12 +344,12 @@ void BattleAI_SetupAIData(void)
     }
     else if (!(gBattleTypeFlags & (0x80900)) && (gTrainerBattleOpponent_A != 0x400)) // _080C6ECC
     {
-        if(gBattleTypeFlags & (0x80 << 10))
+        if (gBattleTypeFlags & (0x80 << 10))
         {
             AI_THINKING_STRUCT->aiFlags = 1;
             return;
         }
-        else if(gBattleTypeFlags & (0x80 << 11))
+        else if (gBattleTypeFlags & (0x80 << 11))
         {
             AI_THINKING_STRUCT->aiFlags = 7;
             return;
@@ -1704,22 +1704,22 @@ static void BattleAICmd_frlg_safari(void)
 {
     u8 var;
 
-    if(gBattleStruct->safariGoNearCounter)
+    if (gBattleStruct->safariGoNearCounter)
     {
         var = gBattleStruct->safariEscapeFactor * 2;
-        if(var > 20)
+        if (var > 20)
             var = 20;
     }
-    else if(gBattleStruct->safariPkblThrowCounter != 0) // _080C91DC
+    else if (gBattleStruct->safariPkblThrowCounter != 0) // _080C91DC
     {
         var = gBattleStruct->safariEscapeFactor / 4;
-        if(var == 0)
+        if (var == 0)
             var = 1;
     }
     else
         var = gBattleStruct->safariEscapeFactor;
     var *= 5;
-    if((u8)(Random() % 100) < var)
+    if ((u8)(Random() % 100) < var)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;

@@ -1198,7 +1198,7 @@ static void sub_80303A8(u8 taskId)
     s16 *data = gTasks[taskId].data;
     u8 battlerId = tExpTask_battler;
     u16 v5 = sub_80768B0(battlerId);
-    u32 v6 = ((v5 ^ BIT_SIDE)) != B_SIDE_PLAYER;
+    bool32 v6 = ((v5 ^ BIT_SIDE)) != B_SIDE_PLAYER;
     struct Sprite *sprite = &gSprites[gBattlerSpriteIds[battlerId]];
 
     switch (data[15])
@@ -1226,7 +1226,7 @@ static void sub_80303A8(u8 taskId)
     case 1:
         {
             u32 battlerIdAlt = battlerId;
-            u32 v6Alt = v6;
+            bool32 v6Alt = v6;
 
             sub_8072E48(battlerIdAlt, v6Alt);
         }
@@ -1407,7 +1407,7 @@ static void MoveSelectionDisplayPpNumber(void)
     if (gBattleBufferA[gActiveBattler][2] == TRUE) // check if we didn't want to display pp number
         return;
     SetPpNumbersPaletteInMoveSelection();
-    moveInfo = (struct ChooseMoveStruct*)(&gBattleBufferA[gActiveBattler][4]);
+    moveInfo = (struct ChooseMoveStruct *)(&gBattleBufferA[gActiveBattler][4]);
     txtPtr = ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[gMoveSelectionCursor[gActiveBattler]], STR_CONV_MODE_RIGHT_ALIGN, 2);
     *txtPtr = CHAR_SLASH;
     ConvertIntToDecimalStringN(++txtPtr, moveInfo->maxPp[gMoveSelectionCursor[gActiveBattler]], STR_CONV_MODE_RIGHT_ALIGN, 2);
@@ -2919,20 +2919,20 @@ static void sub_8033AC8(void)
         }
         switch (moveTarget)
         {
-        case 0:
-        case 1:
-        case 2:
-        case 4:
+        case MOVE_TARGET_SELECTED:
+        case MOVE_TARGET_DEPENDS:
+        case MOVE_TARGET_USER_OR_SELECTED:
+        case MOVE_TARGET_RANDOM:
             bitMask = 0xF0000;
             startY = 0;
             break;
-        case 8:
-        case 64:
+        case MOVE_TARGET_BOTH:
+        case MOVE_TARGET_OPPONENTS_FIELD:
             bitMask = (gBitTable[GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)] 
                      | gBitTable[GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)]) << 16; 
             startY = 8;
             break;
-        case 16:
+        case MOVE_TARGET_USER:
             switch (move)
             {
             case MOVE_HAZE:
@@ -2963,7 +2963,7 @@ static void sub_8033AC8(void)
             }
             startY = 8;
             break;
-        case 32:
+        case MOVE_TARGET_FOES_AND_ALLY:
             bitMask = (gBitTable[GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)] 
                      | gBitTable[GetBattlerAtPosition(GetBattlerPosition(gActiveBattler) ^ BIT_FLANK)] 
                      | gBitTable[GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)]) << 16;

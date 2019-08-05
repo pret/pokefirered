@@ -38,7 +38,7 @@ static bool8 ShouldSwitchIfWonderGuard(void)
     s32 i, j;
     u16 move;
 
-    if(gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
         return FALSE;
     if (gBattleMons[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)].ability == ABILITY_WONDER_GUARD)
     {

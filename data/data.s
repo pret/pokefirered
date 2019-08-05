@@ -163,7 +163,7 @@ gTrainerBackPicCoords:: @ 8239F8C
 gTrainerBackPicTable:: @ 8239FA4
 	.incbin "baserom.gba", 0x239FA4, 0x30
 
-gUnknown_8239FD4:: @ 8239FD4
+gTrainerBackPicPaletteTable:: @ 8239FD4
 	.incbin "baserom.gba", 0x239FD4, 0x30
 
 gEnemyMonElevation:: @ 823A004
@@ -236,7 +236,7 @@ gUnknown_824F048:: @ 824F048
 gTypeEffectiveness:: @ 824F050
 	.incbin "baserom.gba", 0x24F050, 0x150
 
-gUnknown_824F1A0:: @ 824F1A0
+gTypeNames:: @ 824F1A0
 	.incbin "baserom.gba", 0x24F1A0, 0x80
 
 gUnknown_824F220:: @ 824F220
@@ -329,11 +329,7 @@ gUnknown_8250888:: @ 8250888
 gUnknown_8250892:: @ 8250892
 	.incbin "baserom.gba", 0x250892, 0xA
 
-gUnknown_825089C:: @ 825089C
-	.incbin "baserom.gba", 0x25089C, 0xE4
-
-gUnknown_8250980:: @ 8250980
-	.incbin "baserom.gba", 0x250980, 0xC
+	.section .rodata.825098C
 
 gUnknown_825098C:: @ 825098C
 	.incbin "baserom.gba", 0x25098C, 0x8

@@ -17930,8 +17930,8 @@ _081278D6:
 	bx r1
 	thumb_func_end sub_81278B4
 
-	thumb_func_start sub_81278DC
-sub_81278DC: @ 81278DC
+	thumb_func_start OpenPartyMenuInBattle
+OpenPartyMenuInBattle: @ 81278DC
 	push {r4,lr}
 	sub sp, 0xC
 	lsls r0, 24
@@ -17955,7 +17955,7 @@ sub_81278DC: @ 81278DC
 	str r0, [sp]
 	ldr r0, _08127928 @ =sub_8120C3C
 	str r0, [sp, 0x4]
-	ldr r0, _0812792C @ =sub_8030ADC
+	ldr r0, _0812792C @ =SetCB2ToReshowScreenAfterMenu
 	str r0, [sp, 0x8]
 	movs r0, 0x1
 	adds r2, r4, 0
@@ -17967,7 +17967,7 @@ sub_81278DC: @ 81278DC
 	.align 2, 0
 _08127924: .4byte gBattleTypeFlags
 _08127928: .4byte sub_8120C3C
-_0812792C: .4byte sub_8030ADC
+_0812792C: .4byte SetCB2ToReshowScreenAfterMenu
 _08127930:
 	bl sub_81278B4
 	adds r1, r0, 0
@@ -17977,7 +17977,7 @@ _08127930:
 	str r0, [sp]
 	ldr r0, _08127960 @ =sub_811FB28
 	str r0, [sp, 0x4]
-	ldr r0, _08127964 @ =sub_8030ADC
+	ldr r0, _08127964 @ =SetCB2ToReshowScreenAfterMenu
 	str r0, [sp, 0x8]
 	movs r0, 0x1
 	adds r2, r4, 0
@@ -17992,8 +17992,8 @@ _08127950:
 	bx r0
 	.align 2, 0
 _08127960: .4byte sub_811FB28
-_08127964: .4byte sub_8030ADC
-	thumb_func_end sub_81278DC
+_08127964: .4byte SetCB2ToReshowScreenAfterMenu
+	thumb_func_end OpenPartyMenuInBattle
 
 	thumb_func_start sub_8127968
 sub_8127968: @ 8127968
@@ -18007,7 +18007,7 @@ sub_8127968: @ 8127968
 	str r0, [sp]
 	ldr r0, _0812799C @ =sub_8120EBC
 	str r0, [sp, 0x4]
-	ldr r0, _081279A0 @ =sub_8030ADC
+	ldr r0, _081279A0 @ =SetCB2ToReshowScreenAfterMenu
 	str r0, [sp, 0x8]
 	movs r0, 0x1
 	movs r2, 0
@@ -18020,7 +18020,7 @@ sub_8127968: @ 8127968
 	bx r0
 	.align 2, 0
 _0812799C: .4byte sub_8120EBC
-_081279A0: .4byte sub_8030ADC
+_081279A0: .4byte SetCB2ToReshowScreenAfterMenu
 	thumb_func_end sub_8127968
 
 	thumb_func_start sub_81279A4
@@ -19046,12 +19046,12 @@ _0812817A:
 sub_8128184: @ 8128184
 	push {lr}
 	bl sub_8108CF0
-	ldr r0, _08128194 @ =sub_8030ADC
+	ldr r0, _08128194 @ =SetCB2ToReshowScreenAfterMenu
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08128194: .4byte sub_8030ADC
+_08128194: .4byte SetCB2ToReshowScreenAfterMenu
 	thumb_func_end sub_8128184
 
 	thumb_func_start sub_8128198

@@ -29,7 +29,9 @@ struct Struct203B0A0
 };
 
 extern struct Struct203B0A0 gUnknown_203B0A0;
-
+extern u8 gUnknown_203B0C0;
+extern u8 gUnknown_203B0C1;
+extern u8 gUnknown_203B0DC[3];
 extern void (*gUnknown_3005E98)(u8 taskId, TaskFunc func);
 
 bool8 FieldCallback_PrepareFadeInFromMenu(void);
@@ -64,5 +66,6 @@ u8 GetItemEffectType(u16 itemId);
 u8 pokemon_order_func(u8);
 void sub_8127CAC(void);
 void sub_8127DA8(u8 battlerId, u8 multiplayerFlag);
+void OpenPartyMenuInBattle(u8 arg);
 
 #endif // GUARD_PARTY_MENU_H

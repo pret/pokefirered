@@ -12,7 +12,7 @@
 #include "util.h"
 #include "party_menu.h"
 #include "battle.h"
-#include "battle_2.h"
+#include "battle_main.h"
 #include "battle_controllers.h"
 #include "battle_ai_script_commands.h"
 #include "battle_anim.h"
@@ -450,7 +450,7 @@ void DecompressTrainerFrontPic(u16 frontPicId, u8 battlerId)
 
 void DecompressTrainerBackPalette(u16 index, u8 palette)
 {
-    LoadCompressedPalette(gUnknown_8239FD4[index].data, (palette + 16) * 16, 0x20);
+    LoadCompressedPalette(gTrainerBackPicPaletteTable[index].data, (palette + 16) * 16, 0x20);
 }
 
 void nullsub_16(u8 a1)

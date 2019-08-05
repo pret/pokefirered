@@ -2304,10 +2304,10 @@ _080D8504:
 	ldrb r0, [r0, 0x1]
 	lsls r1, r0, 3
 	subs r1, r0
-	ldr r0, _080D8510 @ =gUnknown_824F1A0
+	ldr r0, _080D8510 @ =gTypeNames
 	b _080D8616
 	.align 2, 0
-_080D8510: .4byte gUnknown_824F1A0
+_080D8510: .4byte gTypeNames
 _080D8514:
 	ldrb r0, [r4, 0x1]
 	bl GetBattlerSide

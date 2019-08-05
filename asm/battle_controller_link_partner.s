@@ -5375,7 +5375,7 @@ _080D6DFC:
 	adds r1, r4
 	ldrb r0, [r1, 0x13]
 _080D6E0C:
-	ldr r1, _080D6EA4 @ =gUnknown_8239FD4
+	ldr r1, _080D6EA4 @ =gTrainerBackPicPaletteTable
 	lsls r0, 3
 	adds r0, r1
 	ldr r0, [r0]
@@ -5451,7 +5451,7 @@ _080D6E86:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D6EA4: .4byte gUnknown_8239FD4
+_080D6EA4: .4byte gTrainerBackPicPaletteTable
 _080D6EA8: .4byte gSprites
 _080D6EAC: .4byte gBattlerSpriteIds
 _080D6EB0: .4byte gActiveBattler

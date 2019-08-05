@@ -4427,8 +4427,8 @@ _08012130:
 _08012134: .4byte gIntroSlideFlags
 	thumb_func_end sub_8012110
 
-	thumb_func_start dp11b_obj_instanciate
-dp11b_obj_instanciate: @ 8012138
+	thumb_func_start DoBounceEffect
+DoBounceEffect: @ 8012138
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -4570,10 +4570,10 @@ _0801223C:
 _0801224C: .4byte gBattlerSpriteIds
 _08012250: .4byte gBattleSpritesDataPtr
 _08012254: .4byte gSprites
-	thumb_func_end dp11b_obj_instanciate
+	thumb_func_end DoBounceEffect
 
-	thumb_func_start dp11b_obj_free
-dp11b_obj_free: @ 8012258
+	thumb_func_start EndBounceEffect
+EndBounceEffect: @ 8012258
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -4660,7 +4660,7 @@ _080122FA:
 	.align 2, 0
 _08012300: .4byte gBattleSpritesDataPtr
 _08012304: .4byte gSprites
-	thumb_func_end dp11b_obj_free
+	thumb_func_end EndBounceEffect
 
 	thumb_func_start SpriteCB_HealthBoxBounce
 SpriteCB_HealthBoxBounce: @ 8012308

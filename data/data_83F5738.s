@@ -387,7 +387,7 @@ gUnknown_83FE6B5:: @ 83FE6B5
 gUnknown_83FE6D0:: @ 83FE6D0
 	.incbin "baserom.gba", 0x3FE6D0, 0x5
 
-gUnknown_83FE6D5:: @ 83FE6D5
+gText_WhatWillPkmnDo:: @ 83FE6D5
 	.incbin "baserom.gba", 0x3FE6D5, 0x11
 
 gUnknown_83FE6E6:: @ 83FE6E6
@@ -396,7 +396,7 @@ gUnknown_83FE6E6:: @ 83FE6E6
 gUnknown_83FE6FA:: @ 83FE6FA
 	.incbin "baserom.gba", 0x3FE6FA, 0x1A
 
-gUnknown_83FE714:: @ 83FE714
+gText_LinkStandby:: @ 83FE714
 	.incbin "baserom.gba", 0x3FE714, 0x11
 
 gUnknown_83FE725:: @ 83FE725
@@ -405,10 +405,10 @@ gUnknown_83FE725:: @ 83FE725
 gUnknown_83FE747:: @ 83FE747
 	.incbin "baserom.gba", 0x3FE747, 0x1F
 
-gUnknown_83FE766:: @ 83FE766
+gText_MoveInterfacePP:: @ 83FE766
 	.incbin "baserom.gba", 0x3FE766, 0x4
 
-gUnknown_83FE76A:: @ 83FE76A
+gText_MoveInterfaceType:: @ 83FE76A
 	.incbin "baserom.gba", 0x3FE76A, 0x6
 
 gUnknown_83FE770:: @ 83FE770
@@ -417,7 +417,7 @@ gUnknown_83FE770:: @ 83FE770
 gUnknown_83FE791:: @ 83FE791
 	.incbin "baserom.gba", 0x3FE791, 0xF
 
-gUnknown_83FE7A0:: @ 83FE7A0
+gText_BattleSwitchWhich:: @ 83FE7A0
 	.incbin "baserom.gba", 0x3FE7A0, 0x6C
 
 gUnknown_83FE80C:: @ 83FE80C

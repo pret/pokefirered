@@ -17,7 +17,7 @@
 #include "battle_setup.h"
 #include "battle_transition.h"
 #include "battle.h"
-#include "battle_2.h"
+#include "battle_main.h"
 #include "overworld.h"
 #include "item.h"
 #include "window.h"

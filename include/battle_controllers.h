@@ -82,6 +82,9 @@ enum
 
 #define INSTANT_HP_BAR_DROP     32767
 
+// Special return values in gBattleBufferB from Battle Controller functions.
+#define RET_VALUE_LEVELED_UP   11
+
 struct UnusedControllerStruct
 {
     u8 field_0 : 7;
@@ -227,17 +230,20 @@ void BtlController_EmitResetActionMoveSelection(u8 bufferId, u8 caseId);
 void BtlController_EmitCmd55(u8 bufferId, u8 arg1);
 
 // player controller
+void nullsub_13(void);
 void SetControllerToPlayer(void);
 void PlayerHandleGetRawMonData(void);
-void sub_80587B0(void);
-void sub_805CC00(struct Sprite *sprite);
+void sub_80335F8(struct Sprite *sprite);
 void SetCB2ToReshowScreenAfterMenu(void);
 void SetCB2ToReshowScreenAfterMenu2(void);
 void c3_0802FDF4(u8 taskId);
 void ActionSelectionCreateCursorAt(u8 cursorPos, u8 unused);
 void ActionSelectionDestroyCursorAt(u8 cursorPos);
 void InitMoveSelectionsVarsAndStrings(void);
-void nullsub_13(void);
+void sub_802F6A8(void);
+void MoveSelectionCreateCursorAt(u8 cursorPos, u8 arg1);
+void MoveSelectionDestroyCursorAt(u8 cursorPos);
+void HandleInputChooseMove(void);
 
 // recorded player controller
 void SetControllerToRecordedPlayer(void);
@@ -262,6 +268,7 @@ void sub_80EB2F4(u8);
 void sub_80E8570(void);
 void sub_80E85C0(void);
 void sub_80E8598(void);
+void sub_80E7988(void);
 
 // link opponent
 void SetControllerToLinkOpponent(void);

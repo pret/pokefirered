@@ -213,4 +213,14 @@ extern const u8 gUnknown_83FDA4C[];
 extern const u8 gUnknown_83FE747[];
 extern const u8 gUnknown_83FE6E6[];
 
+// battle_controller_player
+extern const u8 gText_BattleSwitchWhich[];
+extern const u8 gUnknown_83FE770[];
+extern const u8 gText_MoveInterfacePP[];
+extern const u8 gUnknown_83FE770[];
+extern const u8 gText_MoveInterfaceType[];
+extern const u8 gText_LinkStandby[];
+extern const u8 gUnknown_83FE725[];
+extern const u8 gText_WhatWillPkmnDo[];
+
 #endif //GUARD_STRINGS_H

@@ -133,6 +133,8 @@ u8 GetBattlerSpriteDefault_Y(u8 bank);
 u8 sub_80A82E4(u8 bank);
 u8 GetSubstituteSpriteDefault_Y(u8 bank);
 u8 GetGhostSpriteDefault_Y(u8 battlerId);
+void sub_8072E48(u8 battlerId, u8);
+void sub_8073128(u8);
 
 // battle_anim_80A9C70.s
 void LaunchStatusAnimation(u8 bank, u8 statusAnimId);
@@ -154,6 +156,8 @@ void sub_80759DC(u8 spriteId);
 bool8 IsBattlerSpritePresent(u8 battlerId);
 u8 GetBattlerSpriteSubpriority(u8 battlerId);
 void StartAnimLinearTranslation(struct Sprite *sprite);
+void sub_80755B8(struct Sprite *sprite);
+u8 sub_80768B0(u8 battlerId);
 
 // battle_anim_mon_movement.c
 void AnimTask_ShakeMon(u8 taskId);

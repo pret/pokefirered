@@ -1945,8 +1945,8 @@ _08048A44: .4byte 0x060100c0
 _08048A48: .4byte 0x04000008
 	thumb_func_end sub_80487F8
 
-	thumb_func_start sub_8048A4C
-sub_8048A4C: @ 8048A4C
+	thumb_func_start SwapHpBarsWithHpText
+SwapHpBarsWithHpText: @ 8048A4C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2277,7 +2277,7 @@ _08048D04: .4byte gEnemyParty
 _08048D08: .4byte gBattleTypeFlags
 _08048D0C: .4byte gHealthboxSpriteIds
 _08048D10: .4byte gBattlersCount
-	thumb_func_end sub_8048A4C
+	thumb_func_end SwapHpBarsWithHpText
 
 	thumb_func_start CreatePartyStatusSummarySprites
 CreatePartyStatusSummarySprites: @ 8048D14

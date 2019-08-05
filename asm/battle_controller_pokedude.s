@@ -5191,7 +5191,7 @@ _08158B8E:
 	ldrb r0, [r0]
 	movs r1, 0
 	bl ActionSelectionCreateCursorAt
-	ldr r0, _08158BD4 @ =gUnknown_83FE6D5
+	ldr r0, _08158BD4 @ =gText_WhatWillPkmnDo
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, _08158BD8 @ =gDisplayedStringBattle
 	movs r1, 0x1
@@ -5204,7 +5204,7 @@ _08158BC4: .4byte sub_8158B20
 _08158BC8: .4byte gUnknown_83FDA4C
 _08158BCC: .4byte gUnknown_83FE725
 _08158BD0: .4byte gActionSelectionCursor
-_08158BD4: .4byte gUnknown_83FE6D5
+_08158BD4: .4byte gText_WhatWillPkmnDo
 _08158BD8: .4byte gDisplayedStringBattle
 _08158BDC:
 	ldr r0, _08158BF0 @ =gBattlerControllerFuncs
@@ -5272,7 +5272,7 @@ sub_8158C48: @ 8158C48
 	lsls r0, 24
 	cmp r0, 0
 	bne _08158C74
-	bl sub_8032CB4
+	bl InitMoveSelectionsVarsAndStrings
 	ldr r0, _08158C6C @ =gBattlerControllerFuncs
 	ldrb r1, [r4]
 	lsls r1, 2
@@ -6198,7 +6198,7 @@ sub_8159304: @ 8159304
 	bl AllocSpritePalette
 	adds r4, r0, 0
 	lsls r4, 24
-	ldr r0, _08159458 @ =gUnknown_8239FD4
+	ldr r0, _08159458 @ =gTrainerBackPicPaletteTable
 	ldr r0, [r0, 0x20]
 	lsrs r4, 20
 	movs r2, 0x80
@@ -6276,7 +6276,7 @@ _08159448: .4byte 0x0000ffd8
 _0815944C: .4byte StartAnimLinearTranslation
 _08159450: .4byte sub_80335F8
 _08159454: .4byte 0x0000d6f8
-_08159458: .4byte gUnknown_8239FD4
+_08159458: .4byte gTrainerBackPicPaletteTable
 _0815945C: .4byte sub_81595EC
 _08159460: .4byte gTasks
 _08159464: .4byte gBattleSpritesDataPtr
@@ -6591,10 +6591,10 @@ sub_81596F0: @ 81596F0
 	ldr r4, _08159710 @ =gActiveBattler
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl dp11b_obj_free
+	bl EndBounceEffect
 	ldrb r0, [r4]
 	movs r1, 0
-	bl dp11b_obj_free
+	bl EndBounceEffect
 	bl PlayerPartnerBufferExecCompleted
 	pop {r4}
 	pop {r0}
@@ -6675,10 +6675,10 @@ sub_815977C: @ 815977C
 	bgt _081597A4
 	adds r0, r2, 0
 	movs r1, 0x1
-	bl dp11b_obj_free
+	bl EndBounceEffect
 	ldrb r0, [r4]
 	movs r1, 0
-	bl dp11b_obj_free
+	bl EndBounceEffect
 _081597A4:
 	bl PlayerPartnerBufferExecCompleted
 	pop {r4}
@@ -6765,12 +6765,12 @@ sub_8159824: @ 8159824
 	movs r1, 0x1
 	movs r2, 0x7
 	movs r3, 0x1
-	bl dp11b_obj_instanciate
+	bl DoBounceEffect
 	ldrb r0, [r4]
 	movs r1, 0
 	movs r2, 0x7
 	movs r3, 0x1
-	bl dp11b_obj_instanciate
+	bl DoBounceEffect
 _0815985C:
 	ldr r6, _081598C0 @ =gUnknown_3005EE0
 	ldrb r2, [r4]

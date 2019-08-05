@@ -123,10 +123,10 @@ gBattlerControllerFuncs: @ 3004FE0
 gHealthboxSpriteIds: @ 3004FF0
 	.space 0x4
 
-gUnknown_3004FF4: @ 3004FF4
+gMultiUsePlayerCursor: @ 3004FF4
 	.space 0x4
 
-gUnknown_3004FF8: @ 3004FF8
+gNumberOfMovesToChoose: @ 3004FF8
 	.space 0x4
 
 gUnknown_3004FFC: @ 3004FFC

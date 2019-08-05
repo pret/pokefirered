@@ -101,12 +101,12 @@ sub_80E763C: @ 80E763C
 	movs r1, 0x1
 	movs r2, 0x7
 	movs r3, 0x1
-	bl dp11b_obj_instanciate
+	bl DoBounceEffect
 	ldrb r0, [r4]
 	movs r1, 0
 	movs r2, 0x7
 	movs r3, 0x1
-	bl dp11b_obj_instanciate
+	bl DoBounceEffect
 	ldr r0, _080E76A4 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r2, 0x1
@@ -329,7 +329,7 @@ _080E782C:
 	ands r0, r1
 	cmp r0, 0
 	beq _080E7838
-	bl sub_8048A4C
+	bl SwapHpBarsWithHpText
 _080E7838:
 	pop {r3}
 	mov r8, r3
@@ -511,7 +511,7 @@ _080E7984: .4byte gDoingBattleAnim
 	thumb_func_start sub_80E7988
 sub_80E7988: @ 80E7988
 	push {lr}
-	bl sub_802EA10
+	bl HandleInputChooseMove
 	ldr r2, _080E79AC @ =gBattleControllerExecFlags
 	ldr r1, _080E79B0 @ =gBitTable
 	ldr r0, _080E79B4 @ =gActiveBattler
@@ -562,7 +562,7 @@ sub_80E79B8: @ 80E79B8
 	bl DestroyTask
 	bl FreeAllWindowBuffers
 	adds r0, r4, 0
-	bl sub_81278DC
+	bl OpenPartyMenuInBattle
 _080E79F6:
 	pop {r4}
 	pop {r0}
@@ -6031,7 +6031,7 @@ _080EA71E:
 	ands r0, r1
 	cmp r0, 0
 	beq _080EA770
-	ldr r0, _080EA76C @ =gUnknown_83FE6D5
+	ldr r0, _080EA76C @ =gText_WhatWillPkmnDo
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	b _080EA776
 	.align 2, 0
@@ -6042,7 +6042,7 @@ _080EA75C: .4byte gUnknown_83FDA4C
 _080EA760: .4byte gUnknown_83FE725
 _080EA764: .4byte gActionSelectionCursor
 _080EA768: .4byte gBattleTypeFlags
-_080EA76C: .4byte gUnknown_83FE6D5
+_080EA76C: .4byte gText_WhatWillPkmnDo
 _080EA770:
 	ldr r0, _080EA784 @ =gUnknown_83FE6FA
 	bl BattleStringExpandPlaceholdersToDisplayedString
@@ -6108,7 +6108,7 @@ sub_80EA7DC: @ 80EA7DC
 	ands r0, r1
 	cmp r0, 0
 	beq _080EA810
-	bl sub_8032CB4
+	bl InitMoveSelectionsVarsAndStrings
 	ldr r1, _080EA804 @ =gBattlerControllerFuncs
 	ldr r0, _080EA808 @ =gActiveBattler
 	ldrb r0, [r0]
@@ -6135,7 +6135,7 @@ _080EA810:
 	.align 2, 0
 _080EA824: .4byte gBattleStruct
 _080EA828:
-	bl sub_8032CB4
+	bl InitMoveSelectionsVarsAndStrings
 	ldr r1, [r4]
 	adds r1, 0x95
 	ldrb r0, [r1]
@@ -6891,7 +6891,7 @@ _080EAD64:
 	bl AllocSpritePalette
 	adds r4, r0, 0
 	lsls r4, 24
-	ldr r1, _080EAEC0 @ =gUnknown_8239FD4
+	ldr r1, _080EAEC0 @ =gTrainerBackPicPaletteTable
 	ldr r0, _080EAEC4 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
@@ -6973,7 +6973,7 @@ _080EAEB0: .4byte 0x0000ffd8
 _080EAEB4: .4byte StartAnimLinearTranslation
 _080EAEB8: .4byte sub_80335F8
 _080EAEBC: .4byte 0x0000d6f8
-_080EAEC0: .4byte gUnknown_8239FD4
+_080EAEC0: .4byte gTrainerBackPicPaletteTable
 _080EAEC4: .4byte gSaveBlock2Ptr
 _080EAEC8: .4byte sub_80EB0A8
 _080EAECC: .4byte gTasks
@@ -7326,10 +7326,10 @@ sub_80EB1AC: @ 80EB1AC
 	ldr r4, _080EB1CC @ =gActiveBattler
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl dp11b_obj_free
+	bl EndBounceEffect
 	ldrb r0, [r4]
 	movs r1, 0
-	bl dp11b_obj_free
+	bl EndBounceEffect
 	bl WallyBufferExecCompleted
 	pop {r4}
 	pop {r0}
@@ -7410,10 +7410,10 @@ sub_80EB238: @ 80EB238
 	bgt _080EB260
 	adds r0, r2, 0
 	movs r1, 0x1
-	bl dp11b_obj_free
+	bl EndBounceEffect
 	ldrb r0, [r4]
 	movs r1, 0
-	bl dp11b_obj_free
+	bl EndBounceEffect
 _080EB260:
 	bl WallyBufferExecCompleted
 	pop {r4}

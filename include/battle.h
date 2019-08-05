@@ -5,7 +5,7 @@
 #include "constants/battle.h"
 #include "battle_util.h"
 #include "battle_script_commands.h"
-#include "battle_2.h"
+#include "battle_main.h"
 #include "battle_ai_switch_items.h"
 #include "battle_gfx_sfx_util.h"
 #include "battle_util2.h"
@@ -384,10 +384,6 @@ struct AI_ThinkingStruct
 extern u8 gActiveBattler;
 extern u8 gBattlerTarget;
 extern u8 gAbsentBattlerFlags;
-
-// TODO: move these to constants/battle.h
-#define MAX_BATTLERS_COUNT  4
-#define BIT_FLANK           2
 
 // script's table id to bit
 #define AI_SCRIPT_CHECK_BAD_MOVE (1 << 0)
@@ -984,5 +980,7 @@ extern u8 gBattlerStatusSummaryTaskId[MAX_BATTLERS_COUNT];
 extern u16 gDynamicBasePower;
 extern u16 gLastLandedMoves[MAX_BATTLERS_COUNT];
 extern u8 gLastHitBy[MAX_BATTLERS_COUNT];
+extern u8 gMultiUsePlayerCursor;
+extern u8 gNumberOfMovesToChoose;
 
 #endif // GUARD_BATTLE_H

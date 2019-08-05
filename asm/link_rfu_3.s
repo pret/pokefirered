@@ -7242,7 +7242,7 @@ _081196EC:
 	lsrs r2, 2
 	lsls r1, r2, 3
 	subs r1, r2
-	ldr r2, _0811972C @ =gUnknown_824F1A0
+	ldr r2, _0811972C @ =gTypeNames
 	adds r1, r2
 	bl StringCopy
 	ldr r1, _08119730 @ =gUnknown_8458ED0
@@ -7250,7 +7250,7 @@ _081196EC:
 	.align 2, 0
 _08119724: .4byte gStringVar1
 _08119728: .4byte gStringVar2
-_0811972C: .4byte gUnknown_824F1A0
+_0811972C: .4byte gTypeNames
 _08119730: .4byte gUnknown_8458ED0
 _08119734:
 	ldr r4, _08119774 @ =gStringVar1
@@ -7273,7 +7273,7 @@ _08119734:
 	lsrs r2, 2
 	lsls r1, r2, 3
 	subs r1, r2
-	ldr r2, _0811977C @ =gUnknown_824F1A0
+	ldr r2, _0811977C @ =gTypeNames
 	adds r1, r2
 	bl StringCopy
 	ldr r1, _08119780 @ =gUnknown_8458F04
@@ -7284,7 +7284,7 @@ _0811976A:
 	.align 2, 0
 _08119774: .4byte gStringVar1
 _08119778: .4byte gStringVar2
-_0811977C: .4byte gUnknown_824F1A0
+_0811977C: .4byte gTypeNames
 _08119780: .4byte gUnknown_8458F04
 _08119784:
 	adds r0, r6, 0

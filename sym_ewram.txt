@@ -673,8 +673,7 @@ gUnknown_2037101: @ 2037101
 gUnknown_2037104: @ 2037104
 	.space 0x4
 
-gUnknown_2037108: @ 2037108
-	.space 0xF0
+	.include "src/tileset_anims.o"
 
 gPlttBufferUnfaded: @ 20371F8
 	.space 0x400

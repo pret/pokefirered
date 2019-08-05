@@ -45,7 +45,7 @@ static void AppendTilesetAnimToBuffer(const u16 *src, u16 *dest, u16 size)
         sTilesetDMA3TransferBuffer[sTilesetDMA3TransferBufferSize].src = src;
         sTilesetDMA3TransferBuffer[sTilesetDMA3TransferBufferSize].dest = dest;
         sTilesetDMA3TransferBuffer[sTilesetDMA3TransferBufferSize].size = size;
-        sTilesetDMA3TransferBufferSize ++;
+        sTilesetDMA3TransferBufferSize++;
     }
 }
 
@@ -53,7 +53,7 @@ void TransferTilesetAnimsBuffer(void)
 {
     int i;
 
-    for (i = 0; i < sTilesetDMA3TransferBufferSize; i ++)
+    for (i = 0; i < sTilesetDMA3TransferBufferSize; i++)
         DmaCopy16(3, sTilesetDMA3TransferBuffer[i].src, sTilesetDMA3TransferBuffer[i].dest, sTilesetDMA3TransferBuffer[i].size);
 
     sTilesetDMA3TransferBufferSize = 0;

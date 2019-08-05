@@ -18,12 +18,12 @@ u16 GetPokedexHeightWeight(u16 dexNum, u8 data)
 {
     switch (data)
     {
-        case 0:  // height
-            return gPokedexEntries[dexNum].height;
-        case 1:  // weight
-            return gPokedexEntries[dexNum].weight;
-        default:
-            return 1;
+    case 0:  // height
+        return gPokedexEntries[dexNum].height;
+    case 1:  // weight
+        return gPokedexEntries[dexNum].weight;
+    default:
+        return 1;
     }
 }
 
@@ -63,14 +63,14 @@ u16 GetKantoPokedexCount(u8 caseID)
     {
         switch (caseID)
         {
-            case FLAG_GET_SEEN:
-                if (GetSetPokedexFlag(i + 1, FLAG_GET_SEEN))
-                    count++;
-                break;
-            case FLAG_GET_CAUGHT:
-                if (GetSetPokedexFlag(i + 1, FLAG_GET_CAUGHT))
-                    count++;
-                break;
+        case FLAG_GET_SEEN:
+            if (GetSetPokedexFlag(i + 1, FLAG_GET_SEEN))
+                count++;
+            break;
+        case FLAG_GET_CAUGHT:
+            if (GetSetPokedexFlag(i + 1, FLAG_GET_CAUGHT))
+                count++;
+            break;
         }
     }
     return count;
@@ -100,24 +100,24 @@ bool8 HasAllKantoMons(void)
     return TRUE;
 }
 
-u16 HasAllMons(void)
+bool16 HasAllMons(void)
 {
     u16 i;
 
     for (i = 0; i < NATIONAL_DEX_MEWTWO; i++)
     {
         if (!GetSetPokedexFlag(i + 1, FLAG_GET_CAUGHT))
-            return 0;
+            return FALSE;
     }
     for (i = NATIONAL_DEX_MEW; i < NATIONAL_DEX_TYRANITAR; i++)
     {
         if (!GetSetPokedexFlag(i + 1, FLAG_GET_CAUGHT))
-            return 0;
+            return FALSE;
     }
     for (i = NATIONAL_DEX_CELEBI; i < NATIONAL_DEX_RAYQUAZA; i++)
     {
         if (!GetSetPokedexFlag(i + 1, FLAG_GET_CAUGHT))
-            return 0;
+            return FALSE;
     }
-    return 1;
+    return TRUE;
 }

@@ -97,7 +97,7 @@ void WriteSequenceToBgTilemapBuffer(u8 bg, u16 firstTileNum, u8 x, u8 y, u8 widt
 u16 GetBgMetricTextMode(u8 bg, u8 whichMetric);
 u32 GetBgMetricAffineMode(u8 bg, u8 whichMetric);
 u32 GetTileMapIndexFromCoords(s32 x, s32 y, s32 screenSize, u32 screenWidth, u32 screenHeight);
-void CopyTileMapEntry(u16 *src, u16 *dest, s32 palette1, u32 tileOffset, u32 palette2);
+void CopyTileMapEntry(const u16 *src, u16 *dest, s32 palette1, s32 tileOffset, s32 palette2);
 u32 GetBgType(u8 bg);
 bool32 IsInvalidBg32(u8 bg);
 bool32 IsTileMapOutsideWram(u8 bg);

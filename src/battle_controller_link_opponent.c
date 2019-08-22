@@ -1,6 +1,6 @@
 #include "global.h"
 #include "bg.h"
-#include "data2.h"
+#include "data.h"
 #include "link.h"
 #include "main.h"
 #include "m4a.h"
@@ -535,7 +535,7 @@ static u32 CopyLinkOpponentMonData(u8 monId, u8 *dst)
             moveData.pp[size] = GetMonData(&gEnemyParty[monId], MON_DATA_PP1 + size);
         }
         moveData.ppBonuses = GetMonData(&gEnemyParty[monId], MON_DATA_PP_BONUSES);
-        src = (u8*)(&moveData);
+        src = (u8 *)(&moveData);
         for (size = 0; size < sizeof(moveData); ++size)
             dst[size] = src[size];
         break;

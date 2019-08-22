@@ -4,7 +4,7 @@
 #include "pokemon.h"
 #include "main.h"
 #include "link.h"
-#include "data2.h"
+#include "data.h"
 #include "sprite.h"
 #include "text.h"
 #include "gpu_regs.h"

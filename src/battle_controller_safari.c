@@ -5,7 +5,7 @@
 #include "battle_interface.h"
 #include "battle_message.h"
 #include "bg.h"
-#include "data2.h"
+#include "data.h"
 #include "item_menu.h"
 #include "link.h"
 #include "main.h"

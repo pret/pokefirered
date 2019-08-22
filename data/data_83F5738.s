@@ -133,10 +133,10 @@ gUnknown_83F846D:: @ 83F846D
 gUnknown_83F847D:: @ 83F847D
 	.incbin "baserom.gba", 0x3F847D, 0x323
 
-	.section .rodata.83FB134
+	.section .rodata.83FB218
 
-gUnknown_83FB134:: @ 83FB134
-	.incbin "baserom.gba", 0x3FB134, 0xA80
+gUnknown_83FB218:: @ 83FB218
+	.incbin "baserom.gba", 0x3FB218, 0x99C
 
 BattleText_MistShroud:: @ 83FBBB4
 	.incbin "baserom.gba", 0x3FBBB4, 0x35

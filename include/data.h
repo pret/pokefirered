@@ -1,5 +1,5 @@
-#ifndef GUARD_DATA2_H
-#define GUARD_DATA2_H
+#ifndef GUARD_DATA_H
+#define GUARD_DATA_H
 
 #include "global.h"
 #include "constants/species.h"
@@ -59,4 +59,4 @@ extern const struct SpriteFrameImage gUnknown_8234788[];
 extern const struct SpriteFrameImage gUnknown_82347A8[];
 extern const struct SpriteFrameImage gUnknown_82347C8[];
 
-#endif // GUARD_DATA2_H
+#endif // GUARD_DATA_H

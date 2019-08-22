@@ -8,7 +8,7 @@
 #include "decompress.h"
 #include "palette.h"
 #include "sprite.h"
-#include "data2.h"
+#include "data.h"
 #include "util.h"
 #include "party_menu.h"
 #include "battle.h"

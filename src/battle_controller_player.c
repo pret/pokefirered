@@ -1,6 +1,6 @@
 #include "global.h"
 #include "bg.h"
-#include "data2.h"
+#include "data.h"
 #include "item.h"
 #include "item_menu.h"
 #include "link.h"

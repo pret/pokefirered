@@ -3838,7 +3838,7 @@ sub_80D61C8: @ 80D61C8
 	movs r7, 0x5A
 _080D61E2:
 	ldrb r0, [r6]
-	bl GetBankMultiplayerId
+	bl GetBattlerMultiplayerId
 	ldr r5, _080D6244 @ =gLinkPlayers
 	lsls r1, r0, 3
 	subs r1, r0
@@ -3849,7 +3849,7 @@ _080D61E2:
 	cmp r0, 0x2
 	beq _080D6228
 	ldrb r0, [r6]
-	bl GetBankMultiplayerId
+	bl GetBattlerMultiplayerId
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -3860,7 +3860,7 @@ _080D61E2:
 	cmp r0, 0x1
 	beq _080D6228
 	ldrb r0, [r6]
-	bl GetBankMultiplayerId
+	bl GetBattlerMultiplayerId
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -3872,7 +3872,7 @@ _080D61E2:
 _080D6228:
 	ldr r0, _080D6240 @ =gActiveBattler
 	ldrb r0, [r0]
-	bl GetBankMultiplayerId
+	bl GetBattlerMultiplayerId
 	ldr r2, _080D6244 @ =gLinkPlayers
 	lsls r1, r0, 3
 	subs r1, r0
@@ -3886,7 +3886,7 @@ _080D6240: .4byte gActiveBattler
 _080D6244: .4byte gLinkPlayers
 _080D6248:
 	ldrb r0, [r6]
-	bl GetBankMultiplayerId
+	bl GetBattlerMultiplayerId
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -5314,7 +5314,7 @@ sub_80D6CD4: @ 80D6CD4
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldrb r0, [r6]
-	bl GetBankMultiplayerId
+	bl GetBattlerMultiplayerId
 	ldr r4, _080D6DF8 @ =gLinkPlayers
 	lsls r1, r0, 3
 	subs r1, r0
@@ -5325,7 +5325,7 @@ sub_80D6CD4: @ 80D6CD4
 	cmp r0, 0x2
 	beq _080D6DC2
 	ldrb r0, [r6]
-	bl GetBankMultiplayerId
+	bl GetBattlerMultiplayerId
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -5336,7 +5336,7 @@ sub_80D6CD4: @ 80D6CD4
 	cmp r0, 0x1
 	beq _080D6DC2
 	ldrb r0, [r6]
-	bl GetBankMultiplayerId
+	bl GetBattlerMultiplayerId
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -5348,7 +5348,7 @@ sub_80D6CD4: @ 80D6CD4
 _080D6DC2:
 	ldr r0, _080D6DE0 @ =gActiveBattler
 	ldrb r0, [r0]
-	bl GetBankMultiplayerId
+	bl GetBattlerMultiplayerId
 	ldr r2, _080D6DF8 @ =gLinkPlayers
 	lsls r1, r0, 3
 	subs r1, r0
@@ -5368,7 +5368,7 @@ _080D6DF4: .4byte 0x0000d6f9
 _080D6DF8: .4byte gLinkPlayers
 _080D6DFC:
 	ldrb r0, [r6]
-	bl GetBankMultiplayerId
+	bl GetBattlerMultiplayerId
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2

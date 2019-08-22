@@ -346,11 +346,6 @@ gSpriteSheet_EnemyShadow:: @ 8250A0C
 gSpriteTemplate_EnemyShadow:: @ 8250A1C
 	.incbin "baserom.gba", 0x250A1C, 0x18
 
-	.section .rodata.8250B20
-
-gUnknown_8250B20:: @ 8250B20
-	.incbin "baserom.gba", 0x250B20, 0xE4
-
 	.section .rodata.8260270
 
 gUnknown_8260270:: @ 8260270

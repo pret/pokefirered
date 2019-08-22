@@ -1871,7 +1871,7 @@ _080D819C:
 	movs r0, 0x3
 _080D81AA:
 	eors r0, r1
-	bl GetBankMultiplayerId
+	bl GetBattlerMultiplayerId
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -1883,7 +1883,7 @@ _080D81BC: .4byte gLinkPlayers
 _080D81C0:
 	ldr r0, _080D81D4 @ =gBattleScripting
 	ldrb r0, [r0, 0x17]
-	bl GetBankMultiplayerId
+	bl GetBattlerMultiplayerId
 _080D81C8:
 	lsls r1, r0, 3
 	subs r1, r0

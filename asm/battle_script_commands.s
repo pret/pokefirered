@@ -13395,7 +13395,7 @@ _08024204:
 _08024228:
 	movs r5, 0
 	ldrb r0, [r4]
-	bl GetBankMultiplayerId
+	bl GetBattlerMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetLinkTrainerFlankId
@@ -21517,7 +21517,7 @@ _08028336:
 	movs r7, 0
 	movs r6, 0
 	ldrb r0, [r5]
-	bl GetBankMultiplayerId
+	bl GetBattlerMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetLinkTrainerFlankId
@@ -21662,7 +21662,7 @@ _08028458:
 	lsrs r6, r0, 24
 	ldr r0, _08028490 @ =gBattlerTarget
 	ldrb r0, [r0]
-	bl GetBankMultiplayerId
+	bl GetBattlerMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetLinkTrainerFlankId

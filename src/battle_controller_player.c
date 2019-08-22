@@ -211,7 +211,7 @@ static void PlayerBufferRunCommand(void)
 {
     if (gBattleControllerExecFlags & gBitTable[gActiveBattler])
     {
-        if (gBattleBufferA[gActiveBattler][0] < ARRAY_COUNT(sPlayerBufferCommands))
+        if (gBattleBufferA[gActiveBattler][0] < NELEMS(sPlayerBufferCommands))
             sPlayerBufferCommands[gBattleBufferA[gActiveBattler][0]]();
         else
             PlayerBufferExecCompleted();
@@ -329,7 +329,7 @@ static void HandleInputChooseTarget(void)
     s32 i;
     u8 identities[4];
 
-    memcpy(identities, sTargetIdentities, ARRAY_COUNT(sTargetIdentities));
+    memcpy(identities, sTargetIdentities, NELEMS(sTargetIdentities));
     DoBounceEffect(gMultiUsePlayerCursor, BOUNCE_HEALTHBOX, 15, 1);
     i = 0;
     if (gBattlersCount != 0)

@@ -1482,7 +1482,7 @@ bool8 HasNoMonsToSwitch(u8 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
         {
-            playerId = GetBankMultiplayerId(battler);
+            playerId = GetBattlerMultiplayerId(battler);
             if (GetBattlerSide(battler) == B_SIDE_PLAYER)
                 party = gPlayerParty;
             else

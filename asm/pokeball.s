@@ -132,7 +132,7 @@ _0804AA12:
 	beq _0804AA60
 	ldr r4, _0804AA5C @ =gLinkPlayers
 	adds r0, r6, 0
-	bl GetBankMultiplayerId
+	bl GetBattlerMultiplayerId
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2

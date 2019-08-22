@@ -6482,7 +6482,7 @@ bool8 GetLinkTrainerFlankId(u8 linkPlayerId)
     return retVal;
 }
 
-s32 GetBankMultiplayerId(u16 a1)
+s32 GetBattlerMultiplayerId(u16 a1)
 {
     s32 id;
     for (id = 0; id < MAX_LINK_PLAYERS; id++)
@@ -7133,7 +7133,7 @@ static bool8 IsShinyOtIdPersonality(u32 otId, u32 personality)
 u8 *GetTrainerPartnerName(void)
 {
     u8 id = GetMultiplayerId();
-    return gLinkPlayers[GetBankMultiplayerId(gLinkPlayers[id].id ^ 2)].name;
+    return gLinkPlayers[GetBattlerMultiplayerId(gLinkPlayers[id].id ^ 2)].name;
 }
 
 u8 GetPlayerPartyHighestLevel(void)

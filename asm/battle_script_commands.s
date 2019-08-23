@@ -783,8 +783,8 @@ _0801DDBA:
 	bx r1
 	thumb_func_end AccuracyCalcHelper
 
-	thumb_func_start sub_801DDC4
-sub_801DDC4: @ 801DDC4
+	thumb_func_start atk01_accuracycheck
+atk01_accuracycheck: @ 801DDC4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1074,7 +1074,7 @@ _0801DFC0:
 	movs r0, 0x32
 	mov r8, r0
 _0801E012:
-	ldr r1, _0801E108 @ =gUnknown_82504FC
+	ldr r1, _0801E108 @ =sAccuracyStageRatios
 	lsls r0, r5, 24
 	asrs r0, 22
 	adds r0, r1
@@ -1191,7 +1191,7 @@ _0801E0D4:
 _0801E0FC: .4byte gBattlerAttacker
 _0801E100: .4byte gBattleMoves
 _0801E104: .4byte gBattleWeather
-_0801E108: .4byte gUnknown_82504FC
+_0801E108: .4byte sAccuracyStageRatios
 _0801E10C: .4byte gBattleMons
 _0801E110: .4byte gBattlerTarget
 _0801E114: .4byte gEnigmaBerries
@@ -1286,7 +1286,7 @@ _0801E1C2:
 	bx r0
 	.align 2, 0
 _0801E1D4: .4byte gBattleCommunication
-	thumb_func_end sub_801DDC4
+	thumb_func_end atk01_accuracycheck
 
 	thumb_func_start atk02_attackstring
 atk02_attackstring: @ 801E1D8
@@ -1563,8 +1563,8 @@ _0801E400: .4byte 0xfffff7ff
 _0801E404: .4byte gBattlescriptCurrInstr
 	thumb_func_end atk03_ppreduce
 
-	thumb_func_start sub_801E408
-sub_801E408: @ 801E408
+	thumb_func_start atk04_critcalc
+atk04_critcalc: @ 801E408
 	push {r4-r7,lr}
 	ldr r1, _0801E42C @ =gBattleMons
 	ldr r0, _0801E430 @ =gBattlerAttacker
@@ -1714,7 +1714,7 @@ _0801E4F0:
 	cmp r0, 0
 	bne _0801E580
 	bl Random
-	ldr r2, _0801E578 @ =gUnknown_8250530
+	ldr r2, _0801E578 @ =sCriticalHitChance
 	lsls r1, r5, 1
 	adds r1, r2
 	lsls r0, 16
@@ -1748,7 +1748,7 @@ _0801E55A:
 _0801E56C: .4byte gBattlerTarget
 _0801E570: .4byte gStatuses3
 _0801E574: .4byte gBattleTypeFlags
-_0801E578: .4byte gUnknown_8250530
+_0801E578: .4byte sCriticalHitChance
 _0801E57C: .4byte gCritMultiplier
 _0801E580:
 	ldr r1, _0801E594 @ =gCritMultiplier
@@ -1765,7 +1765,7 @@ _0801E584:
 	.align 2, 0
 _0801E594: .4byte gCritMultiplier
 _0801E598: .4byte gBattlescriptCurrInstr
-	thumb_func_end sub_801E408
+	thumb_func_end atk04_critcalc
 
 	thumb_func_start atk05_damagecalc
 atk05_damagecalc: @ 801E59C
@@ -3788,8 +3788,8 @@ _0801F580: .4byte gBattlescriptCurrInstr
 _0801F584: .4byte gUnknown_81D89F1
 	thumb_func_end atk09_attackanimation
 
-	thumb_func_start sub_801F588
-sub_801F588: @ 801F588
+	thumb_func_start atk0A_waitanimation
+atk0A_waitanimation: @ 801F588
 	push {lr}
 	ldr r0, _0801F5A0 @ =gBattleControllerExecFlags
 	ldr r0, [r0]
@@ -3805,7 +3805,7 @@ _0801F59A:
 	.align 2, 0
 _0801F5A0: .4byte gBattleControllerExecFlags
 _0801F5A4: .4byte gBattlescriptCurrInstr
-	thumb_func_end sub_801F588
+	thumb_func_end atk0A_waitanimation
 
 	thumb_func_start atk0B_healthbarupdate
 atk0B_healthbarupdate: @ 801F5A8
@@ -4979,8 +4979,8 @@ _0801FEE0: .4byte gActiveBattler
 _0801FEE4: .4byte gBattlerAttacker
 	thumb_func_end atk14_printselectionstringfromtable
 
-	thumb_func_start BankGetTurnOrder
-BankGetTurnOrder: @ 801FEE8
+	thumb_func_start GetBattlerTurnOrderNum
+GetBattlerTurnOrderNum: @ 801FEE8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -5010,7 +5010,7 @@ _0801FF0E:
 	.align 2, 0
 _0801FF18: .4byte gBattlersCount
 _0801FF1C: .4byte gBattlerByTurnOrder
-	thumb_func_end BankGetTurnOrder
+	thumb_func_end GetBattlerTurnOrderNum
 
 	thumb_func_start SetMoveEffect
 SetMoveEffect: @ 801FF20
@@ -5180,7 +5180,7 @@ _08020068:
 	bls _08020074
 	b _080206A2
 _08020074:
-	ldr r1, _080200B8 @ =gUnknown_825053C
+	ldr r1, _080200B8 @ =sStatusFlagsForMoveEffects
 	ldrb r0, [r6, 0x3]
 	lsls r0, 2
 	adds r0, r1
@@ -5208,7 +5208,7 @@ _080200A8: .4byte gBattleMons
 _080200AC: .4byte gHitMarker
 _080200B0: .4byte gBattleCommunication
 _080200B4: .4byte gSideStatuses
-_080200B8: .4byte gUnknown_825053C
+_080200B8: .4byte sStatusFlagsForMoveEffects
 _080200BC:
 	cmp r0, 0x40
 	bne _080200C2
@@ -5838,7 +5838,7 @@ _08020578:
 	ldr r0, [r0]
 	adds r0, 0x1
 	bl BattleScriptPush
-	ldr r1, _080205BC @ =gUnknown_825053C
+	ldr r1, _080205BC @ =sStatusFlagsForMoveEffects
 	ldr r0, _080205C0 @ =gBattleCommunication
 	ldrb r0, [r0, 0x3]
 	lsls r0, 2
@@ -5864,7 +5864,7 @@ _08020578:
 	.align 2, 0
 _080205B4: .4byte gMoveResultFlags
 _080205B8: .4byte gBattlescriptCurrInstr
-_080205BC: .4byte gUnknown_825053C
+_080205BC: .4byte sStatusFlagsForMoveEffects
 _080205C0: .4byte gBattleCommunication
 _080205C4: .4byte gBattleMons
 _080205C8: .4byte gEffectBattler
@@ -5881,7 +5881,7 @@ _080205CC:
 	str r0, [r1]
 _080205E0:
 	ldr r2, _08020638 @ =gBattlescriptCurrInstr
-	ldr r1, _0802063C @ =gUnknown_825062C
+	ldr r1, _0802063C @ =sMoveEffectBS_Ptrs
 	ldr r5, _08020640 @ =gBattleCommunication
 	ldrb r0, [r5, 0x3]
 	lsls r0, 2
@@ -5922,7 +5922,7 @@ _080205E0:
 _08020630: .4byte gBattleMons
 _08020634: .4byte gEffectBattler
 _08020638: .4byte gBattlescriptCurrInstr
-_0802063C: .4byte gUnknown_825062C
+_0802063C: .4byte sMoveEffectBS_Ptrs
 _08020640: .4byte gBattleCommunication
 _08020644: .4byte gActiveBattler
 _08020648: .4byte gUnknown_2023C30
@@ -5973,7 +5973,7 @@ _080206A2:
 	mov r0, r8
 	adds r0, 0x50
 	adds r1, r0
-	ldr r2, _080206DC @ =gUnknown_825053C
+	ldr r2, _080206DC @ =sStatusFlagsForMoveEffects
 	ldrb r3, [r6, 0x3]
 	lsls r0, r3, 2
 	adds r0, r2
@@ -5995,7 +5995,7 @@ _080206D0:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080206DC: .4byte gUnknown_825053C
+_080206DC: .4byte sStatusFlagsForMoveEffects
 _080206E0: .4byte _080206E4
 	.align 2, 0
 _080206E4:
@@ -6095,7 +6095,7 @@ _080207E6:
 	ldr r0, [r4]
 	adds r0, 0x1
 	bl BattleScriptPush
-	ldr r1, _08020824 @ =gUnknown_825062C
+	ldr r1, _08020824 @ =sMoveEffectBS_Ptrs
 	ldr r0, _08020828 @ =gBattleCommunication
 	ldrb r0, [r0, 0x3]
 	lsls r0, 2
@@ -6104,7 +6104,7 @@ _080207E6:
 	bl _08021108
 	.align 2, 0
 _08020820: .4byte gBattlescriptCurrInstr
-_08020824: .4byte gUnknown_825062C
+_08020824: .4byte sMoveEffectBS_Ptrs
 _08020828: .4byte gBattleCommunication
 _0802082C:
 	mov r0, r9
@@ -6139,7 +6139,7 @@ _08020868: .4byte gBattlescriptCurrInstr
 _0802086C: .4byte gUnknown_81D9452
 _08020870:
 	adds r0, r2, 0
-	bl BankGetTurnOrder
+	bl GetBattlerTurnOrderNum
 	ldr r1, _080208AC @ =gUnknown_2023BE2
 	lsls r0, 24
 	lsrs r0, 24
@@ -6155,7 +6155,7 @@ _08020886:
 	mov r0, r8
 	adds r0, 0x50
 	adds r2, r0
-	ldr r1, _080208B0 @ =gUnknown_825053C
+	ldr r1, _080208B0 @ =sStatusFlagsForMoveEffects
 	ldr r0, _080208B4 @ =gBattleCommunication
 	ldrb r0, [r0, 0x3]
 	lsls r0, 2
@@ -6167,7 +6167,7 @@ _08020886:
 	bl _080210EC
 	.align 2, 0
 _080208AC: .4byte gUnknown_2023BE2
-_080208B0: .4byte gUnknown_825053C
+_080208B0: .4byte sStatusFlagsForMoveEffects
 _080208B4: .4byte gBattleCommunication
 _080208B8:
 	mov r3, r9
@@ -6212,7 +6212,7 @@ _080208D4:
 	ldr r0, [r4]
 	adds r0, 0x1
 	bl BattleScriptPush
-	ldr r1, _0802092C @ =gUnknown_825062C
+	ldr r1, _0802092C @ =sMoveEffectBS_Ptrs
 	ldr r0, _08020930 @ =gBattleCommunication
 	ldrb r0, [r0, 0x3]
 	lsls r0, 2
@@ -6223,7 +6223,7 @@ _080208D4:
 _08020920: .4byte gUnknown_2023DB8
 _08020924: .4byte gCurrentMove
 _08020928: .4byte gBattlescriptCurrInstr
-_0802092C: .4byte gUnknown_825062C
+_0802092C: .4byte sMoveEffectBS_Ptrs
 _08020930: .4byte gBattleCommunication
 _08020934:
 	ldr r5, _08020984 @ =gBattlerAttacker
@@ -6258,7 +6258,7 @@ _0802096C:
 	ldr r0, [r4]
 	adds r0, 0x1
 	bl BattleScriptPush
-	ldr r1, _08020998 @ =gUnknown_825062C
+	ldr r1, _08020998 @ =sMoveEffectBS_Ptrs
 	ldr r0, _0802099C @ =gBattleCommunication
 	ldrb r0, [r0, 0x3]
 	lsls r0, 2
@@ -6271,7 +6271,7 @@ _08020988: .4byte gUnknown_2023E7E
 _0802098C: .4byte gBattleMons
 _08020990: .4byte 0x0000ffff
 _08020994: .4byte gBattlescriptCurrInstr
-_08020998: .4byte gUnknown_825062C
+_08020998: .4byte sMoveEffectBS_Ptrs
 _0802099C: .4byte gBattleCommunication
 _080209A0:
 	mov r4, r9
@@ -6390,7 +6390,7 @@ _08020A3C:
 	ldr r0, [r4]
 	adds r0, 0x1
 	bl BattleScriptPush
-	ldr r1, _08020AE0 @ =gUnknown_825062C
+	ldr r1, _08020AE0 @ =sMoveEffectBS_Ptrs
 	ldr r2, _08020AE4 @ =gBattleCommunication
 	ldrb r0, [r2, 0x3]
 	lsls r0, 2
@@ -6430,7 +6430,7 @@ _08020AD0: .4byte gBattleStruct
 _08020AD4: .4byte gCurrentMove
 _08020AD8: .4byte gBattlerAttacker
 _08020ADC: .4byte gBattlescriptCurrInstr
-_08020AE0: .4byte gUnknown_825062C
+_08020AE0: .4byte sMoveEffectBS_Ptrs
 _08020AE4: .4byte gBattleCommunication
 _08020AE8: .4byte gUnknown_83FE664
 _08020AEC:
@@ -6452,7 +6452,7 @@ _08020B04:
 	ldr r0, [r4]
 	adds r0, 0x1
 	bl BattleScriptPush
-	ldr r1, _08020B28 @ =gUnknown_825062C
+	ldr r1, _08020B28 @ =sMoveEffectBS_Ptrs
 	ldr r0, _08020B2C @ =gBattleCommunication
 	ldrb r0, [r0, 0x3]
 	lsls r0, 2
@@ -6463,7 +6463,7 @@ _08020B04:
 _08020B1C: .4byte gBattleMoveDamage
 _08020B20: .4byte gUnknown_2023D54
 _08020B24: .4byte gBattlescriptCurrInstr
-_08020B28: .4byte gUnknown_825062C
+_08020B28: .4byte sMoveEffectBS_Ptrs
 _08020B2C: .4byte gBattleCommunication
 _08020B30:
 	ldrb r1, [r6, 0x3]
@@ -6993,7 +6993,7 @@ _08020F8E:
 	ldr r0, [r4]
 	adds r0, 0x1
 	bl BattleScriptPush
-	ldr r1, _08020FB4 @ =gUnknown_825062C
+	ldr r1, _08020FB4 @ =sMoveEffectBS_Ptrs
 	ldr r0, _08020FB8 @ =gBattleCommunication
 	ldrb r0, [r0, 0x3]
 	lsls r0, 2
@@ -7004,7 +7004,7 @@ _08020F8E:
 _08020FA8: .4byte gBattleMoveDamage
 _08020FAC: .4byte gUnknown_2023D54
 _08020FB0: .4byte gBattlescriptCurrInstr
-_08020FB4: .4byte gUnknown_825062C
+_08020FB4: .4byte sMoveEffectBS_Ptrs
 _08020FB8: .4byte gBattleCommunication
 _08020FBC:
 	mov r4, r9
@@ -7344,7 +7344,7 @@ _08021264:
 	adds r1, 0x50
 _0802126E:
 	adds r2, r1
-	ldr r1, _0802129C @ =gUnknown_825053C
+	ldr r1, _0802129C @ =sStatusFlagsForMoveEffects
 	ldrb r0, [r3, 0x3]
 	lsls r0, 2
 	adds r0, r1
@@ -7365,7 +7365,7 @@ _0802126E:
 	bx r0
 	.align 2, 0
 _08021298: .4byte gBattleMons
-_0802129C: .4byte gUnknown_825053C
+_0802129C: .4byte sStatusFlagsForMoveEffects
 _080212A0: .4byte gBattleCommunication
 _080212A4: .4byte gBattlescriptCurrInstr
 _080212A8: .4byte gBattleScripting
@@ -7723,8 +7723,8 @@ _08021592:
 	bx r0
 	thumb_func_end atk19_tryfaintmon
 
-	thumb_func_start atk1A_faint_animation
-atk1A_faint_animation: @ 80215A0
+	thumb_func_start atk1A_dofaintanimation
+atk1A_dofaintanimation: @ 80215A0
 	push {r4,r5,lr}
 	ldr r0, _080215D0 @ =gBattleControllerExecFlags
 	ldr r0, [r0]
@@ -7751,10 +7751,10 @@ _080215CA:
 _080215D0: .4byte gBattleControllerExecFlags
 _080215D4: .4byte gBattlescriptCurrInstr
 _080215D8: .4byte gActiveBattler
-	thumb_func_end atk1A_faint_animation
+	thumb_func_end atk1A_dofaintanimation
 
-	thumb_func_start atk1B_faint_effects_clear
-atk1B_faint_effects_clear: @ 80215DC
+	thumb_func_start atk1B_cleareffectsonfaint
+atk1B_cleareffectsonfaint: @ 80215DC
 	push {r4-r6,lr}
 	sub sp, 0x4
 	ldr r0, _08021630 @ =gBattleControllerExecFlags
@@ -7799,7 +7799,7 @@ _08021630: .4byte gBattleControllerExecFlags
 _08021634: .4byte gBattlescriptCurrInstr
 _08021638: .4byte gActiveBattler
 _0802163C: .4byte gBattleMons
-	thumb_func_end atk1B_faint_effects_clear
+	thumb_func_end atk1B_cleareffectsonfaint
 
 	thumb_func_start atk1C_jumpifstatus
 atk1C_jumpifstatus: @ 8021640
@@ -8347,8 +8347,8 @@ _08021A60:
 	bx r0
 	thumb_func_end atk22_jumpiftype
 
-	thumb_func_start sub_8021A68
-sub_8021A68: @ 8021A68
+	thumb_func_start atk23_getexp
+atk23_getexp: @ 8021A68
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -9476,10 +9476,10 @@ _080223E8: .4byte gBattleControllerExecFlags
 _080223EC: .4byte gBattleMons
 _080223F0: .4byte gBattlerFainted
 _080223F4: .4byte gBattlescriptCurrInstr
-	thumb_func_end sub_8021A68
+	thumb_func_end atk23_getexp
 
-	thumb_func_start sub_80223F8
-sub_80223F8: @ 80223F8
+	thumb_func_start atk24
+atk24: @ 80223F8
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -9691,7 +9691,7 @@ _0802258A:
 	bx r0
 	.align 2, 0
 _08022594: .4byte gBattlescriptCurrInstr
-	thumb_func_end sub_80223F8
+	thumb_func_end atk24
 
 	thumb_func_start MoveValuesCleanUp
 MoveValuesCleanUp: @ 8022598
@@ -10641,8 +10641,8 @@ _08022C40: .4byte gBattlescriptCurrInstr
 _08022C44: .4byte gUnknown_2023E7C
 	thumb_func_end atk39_pause
 
-	thumb_func_start sub_8022C48
-sub_8022C48: @ 8022C48
+	thumb_func_start atk3A_waitstate
+atk3A_waitstate: @ 8022C48
 	push {lr}
 	ldr r0, _08022C60 @ =gBattleControllerExecFlags
 	ldr r0, [r0]
@@ -10658,7 +10658,7 @@ _08022C5A:
 	.align 2, 0
 _08022C60: .4byte gBattleControllerExecFlags
 _08022C64: .4byte gBattlescriptCurrInstr
-	thumb_func_end sub_8022C48
+	thumb_func_end atk3A_waitstate
 
 	thumb_func_start atk3B_healthbar_update
 atk3B_healthbar_update: @ 8022C68
@@ -10905,8 +10905,8 @@ _08022E2C: .4byte gBattlerAttacker
 _08022E30: .4byte gBattleStruct
 	thumb_func_end atk44_endselectionscript
 
-	thumb_func_start sub_8022E34
-sub_8022E34: @ 8022E34
+	thumb_func_start atk45_playanimation
+atk45_playanimation: @ 8022E34
 	push {r4-r6,lr}
 	ldr r4, _08022E84 @ =gBattlescriptCurrInstr
 	ldr r0, [r4]
@@ -10998,7 +10998,7 @@ _08022EEC:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8022E34
+	thumb_func_end atk45_playanimation
 
 	thumb_func_start atk46_playanimation2
 atk46_playanimation2: @ 8022EF4
@@ -13042,8 +13042,8 @@ _08023F40: .4byte gBattleStruct
 _08023F44: .4byte gBitTable
 	thumb_func_end atk4C_getswitchedmondata
 
-	thumb_func_start sub_8023F48
-sub_8023F48: @ 8023F48
+	thumb_func_start atk4D_switchindataupdate
+atk4D_switchindataupdate: @ 8023F48
 	push {r4-r7,lr}
 	sub sp, 0x58
 	ldr r0, _080240A0 @ =gBattleControllerExecFlags
@@ -13231,10 +13231,10 @@ _080240C4: .4byte gBattleMoves
 _080240C8: .4byte gCurrentMove
 _080240CC: .4byte gBattleScripting
 _080240D0: .4byte gBattleTextBuff1
-	thumb_func_end sub_8023F48
+	thumb_func_end atk4D_switchindataupdate
 
-	thumb_func_start sub_80240D4
-sub_80240D4: @ 80240D4
+	thumb_func_start atk4E_switchinanim
+atk4E_switchinanim: @ 80240D4
 	push {r4-r6,lr}
 	ldr r0, _08024168 @ =gBattleControllerExecFlags
 	ldr r0, [r0]
@@ -13314,10 +13314,10 @@ _0802417C: .4byte gBattleMons
 _08024180: .4byte gAbsentBattlerFlags
 _08024184: .4byte gBitTable
 _08024188: .4byte gBattlerPartyIndexes
-	thumb_func_end sub_80240D4
+	thumb_func_end atk4E_switchinanim
 
-	thumb_func_start sub_802418C
-sub_802418C: @ 802418C
+	thumb_func_start atk4F_jumpifcantswitch
+atk4F_jumpifcantswitch: @ 802418C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -13573,7 +13573,7 @@ _08024388:
 	bx r0
 	.align 2, 0
 _08024394: .4byte gBattlescriptCurrInstr
-	thumb_func_end sub_802418C
+	thumb_func_end atk4F_jumpifcantswitch
 
 	thumb_func_start sub_8024398
 sub_8024398: @ 8024398
@@ -13616,8 +13616,8 @@ _080243E4: .4byte gBattleStruct
 _080243E8: .4byte gBattlerPartyIndexes
 	thumb_func_end sub_8024398
 
-	thumb_func_start sub_80243EC
-sub_80243EC: @ 80243EC
+	thumb_func_start atk50_openpartyscreen
+atk50_openpartyscreen: @ 80243EC
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -14618,10 +14618,10 @@ _08024C2E:
 _08024C3C: .4byte gActiveBattler
 _08024C40: .4byte gAbsentBattlerFlags
 _08024C44: .4byte gBitTable
-	thumb_func_end sub_80243EC
+	thumb_func_end atk50_openpartyscreen
 
-	thumb_func_start sub_8024C48
-sub_8024C48: @ 8024C48
+	thumb_func_start atk51_switchhandleorder
+atk51_switchhandleorder: @ 8024C48
 	push {r4-r7,lr}
 	ldr r0, _08024C74 @ =gBattleControllerExecFlags
 	ldr r0, [r0]
@@ -14866,10 +14866,10 @@ _08024E28: .4byte gBattleTextBuff2
 _08024E2C: .4byte gActiveBattler
 _08024E30: .4byte gBattleBufferB
 _08024E34: .4byte gBattlescriptCurrInstr
-	thumb_func_end sub_8024C48
+	thumb_func_end atk51_switchhandleorder
 
-	thumb_func_start sub_8024E38
-sub_8024E38: @ 8024E38
+	thumb_func_start atk52_switchineffects
+atk52_switchineffects: @ 8024E38
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -15186,10 +15186,10 @@ _080250C6:
 	.align 2, 0
 _080250D4: .4byte gBattlersCount
 _080250D8: .4byte gAbsentBattlerFlags
-	thumb_func_end sub_8024E38
+	thumb_func_end atk52_switchineffects
 
-	thumb_func_start atk53_trainer_slide
-atk53_trainer_slide: @ 80250DC
+	thumb_func_start atk53_trainerslidein
+atk53_trainerslidein: @ 80250DC
 	push {lr}
 	ldr r0, _080250EC @ =gBattlescriptCurrInstr
 	ldr r0, [r0]
@@ -15220,7 +15220,7 @@ _080250F2:
 	.align 2, 0
 _08025114: .4byte gActiveBattler
 _08025118: .4byte gBattlescriptCurrInstr
-	thumb_func_end atk53_trainer_slide
+	thumb_func_end atk53_trainerslidein
 
 	thumb_func_start atk54_playse
 atk54_playse: @ 802511C
@@ -15251,8 +15251,8 @@ _08025150: .4byte gBattlerAttacker
 _08025154: .4byte gBattlescriptCurrInstr
 	thumb_func_end atk54_playse
 
-	thumb_func_start atk55_play_sound
-atk55_play_sound: @ 8025158
+	thumb_func_start atk55_fanfare
+atk55_fanfare: @ 8025158
 	push {r4,r5,lr}
 	ldr r5, _08025188 @ =gActiveBattler
 	ldr r0, _0802518C @ =gBattlerAttacker
@@ -15278,7 +15278,7 @@ atk55_play_sound: @ 8025158
 _08025188: .4byte gActiveBattler
 _0802518C: .4byte gBattlerAttacker
 _08025190: .4byte gBattlescriptCurrInstr
-	thumb_func_end atk55_play_sound
+	thumb_func_end atk55_fanfare
 
 	thumb_func_start atk56_playfaintcry
 atk56_playfaintcry: @ 8025194
@@ -15516,8 +15516,8 @@ _08025374: .4byte gBattleTypeFlags
 _08025378: .4byte gBattlescriptCurrInstr
 	thumb_func_end atk59_handlelearnnewmove
 
-	thumb_func_start sub_802537C
-sub_802537C: @ 802537C
+	thumb_func_start atk5A_yesnoboxlearnmove
+atk5A_yesnoboxlearnmove: @ 802537C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -15556,7 +15556,7 @@ _080253C4:
 	movs r1, 0x8
 	movs r2, 0x1D
 	movs r3, 0xD
-	bl sub_802DB7C
+	bl HandleBattleWindow
 	ldr r0, _080253F0 @ =gUnknown_83FE791
 	movs r1, 0xE
 	bl BattlePutTextOnWindow
@@ -15566,7 +15566,7 @@ _080253C4:
 	strb r0, [r1, 0x1F]
 	ldr r0, _080253F8 @ =gBattleCommunication
 	strb r4, [r0, 0x1]
-	bl sub_802DCB8
+	bl BattleCreateYesNoCursorAt
 	b _080256D0
 	.align 2, 0
 _080253F0: .4byte gUnknown_83FE791
@@ -15585,10 +15585,10 @@ _080253FC:
 	beq _08025422
 	movs r0, 0x5
 	bl PlaySE
-	bl sub_802DCF8
+	bl BattleDestroyYesNoCursorAt
 	movs r0, 0
 	strb r0, [r4, 0x1]
-	bl sub_802DCB8
+	bl BattleCreateYesNoCursorAt
 _08025422:
 	ldr r0, _08025484 @ =gMain
 	ldrh r1, [r0, 0x2E]
@@ -15602,10 +15602,10 @@ _08025422:
 	bne _08025448
 	movs r0, 0x5
 	bl PlaySE
-	bl sub_802DCF8
+	bl BattleDestroyYesNoCursorAt
 	movs r0, 0x1
 	strb r0, [r4, 0x1]
-	bl sub_802DCB8
+	bl BattleCreateYesNoCursorAt
 _08025448:
 	ldr r0, _08025484 @ =gMain
 	ldrh r1, [r0, 0x2E]
@@ -15625,7 +15625,7 @@ _08025448:
 	movs r1, 0x8
 	movs r2, 0x1D
 	movs r3, 0xD
-	bl sub_802DB7C
+	bl HandleBattleWindow
 	movs r0, 0x1
 	negs r0, r0
 	str r4, [sp]
@@ -15888,7 +15888,7 @@ _080256A4:
 	movs r1, 0x8
 	movs r2, 0x1D
 	movs r3, 0xD
-	bl sub_802DB7C
+	bl HandleBattleWindow
 	ldr r1, _080256C0 @ =gBattlescriptCurrInstr
 	ldr r0, [r1]
 	adds r0, 0x5
@@ -15912,10 +15912,10 @@ _080256D0:
 	bx r0
 	.align 2, 0
 _080256DC: .4byte gBattleControllerExecFlags
-	thumb_func_end sub_802537C
+	thumb_func_end atk5A_yesnoboxlearnmove
 
-	thumb_func_start sub_80256E0
-sub_80256E0: @ 80256E0
+	thumb_func_start atk5B_yesnoboxstoplearningmove
+atk5B_yesnoboxstoplearningmove: @ 80256E0
 	push {r4,r5,lr}
 	sub sp, 0x4
 	ldr r5, _080256F4 @ =gBattleScripting
@@ -15933,7 +15933,7 @@ _080256F8:
 	movs r1, 0x8
 	movs r2, 0x1D
 	movs r3, 0xD
-	bl sub_802DB7C
+	bl HandleBattleWindow
 	ldr r0, _08025720 @ =gUnknown_83FE791
 	movs r1, 0xE
 	bl BattlePutTextOnWindow
@@ -15942,7 +15942,7 @@ _080256F8:
 	strb r0, [r5, 0x1F]
 	ldr r0, _08025724 @ =gBattleCommunication
 	strb r4, [r0, 0x1]
-	bl sub_802DCB8
+	bl BattleCreateYesNoCursorAt
 	b _0802580E
 	.align 2, 0
 _08025720: .4byte gUnknown_83FE791
@@ -15960,10 +15960,10 @@ _08025728:
 	beq _0802574E
 	movs r0, 0x5
 	bl PlaySE
-	bl sub_802DCF8
+	bl BattleDestroyYesNoCursorAt
 	movs r0, 0
 	strb r0, [r4, 0x1]
-	bl sub_802DCB8
+	bl BattleCreateYesNoCursorAt
 _0802574E:
 	ldr r0, _080257AC @ =gMain
 	ldrh r1, [r0, 0x2E]
@@ -15977,10 +15977,10 @@ _0802574E:
 	bne _08025774
 	movs r0, 0x5
 	bl PlaySE
-	bl sub_802DCF8
+	bl BattleDestroyYesNoCursorAt
 	movs r0, 0x1
 	strb r0, [r4, 0x1]
-	bl sub_802DCB8
+	bl BattleCreateYesNoCursorAt
 _08025774:
 	ldr r0, _080257AC @ =gMain
 	ldrh r1, [r0, 0x2E]
@@ -16025,7 +16025,7 @@ _080257C0:
 	movs r1, 0x8
 	movs r2, 0x1D
 	movs r3, 0xD
-	bl sub_802DB7C
+	bl HandleBattleWindow
 	b _0802580E
 	.align 2, 0
 _080257D4: .4byte gBattlescriptCurrInstr
@@ -16054,7 +16054,7 @@ _080257D8:
 	movs r1, 0x8
 	movs r2, 0x1D
 	movs r3, 0xD
-	bl sub_802DB7C
+	bl HandleBattleWindow
 _0802580E:
 	add sp, 0x4
 	pop {r4,r5}
@@ -16062,10 +16062,10 @@ _0802580E:
 	bx r0
 	.align 2, 0
 _08025818: .4byte gBattlescriptCurrInstr
-	thumb_func_end sub_80256E0
+	thumb_func_end atk5B_yesnoboxstoplearningmove
 
-	thumb_func_start sub_802581C
-sub_802581C: @ 802581C
+	thumb_func_start atk5C_hitanimation
+atk5C_hitanimation: @ 802581C
 	push {r4,lr}
 	ldr r4, _08025888 @ =gBattlescriptCurrInstr
 	ldr r0, [r4]
@@ -16132,10 +16132,10 @@ _080258A6:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_802581C
+	thumb_func_end atk5C_hitanimation
 
-	thumb_func_start sub_80258AC
-sub_80258AC: @ 80258AC
+	thumb_func_start atk5D_getmoneyreward
+atk5D_getmoneyreward: @ 80258AC
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -16364,7 +16364,7 @@ _08025A62:
 	bx r0
 	.align 2, 0
 _08025A6C: .4byte gBattlescriptCurrInstr
-	thumb_func_end sub_80258AC
+	thumb_func_end atk5D_getmoneyreward
 
 	thumb_func_start atk5E
 atk5E: @ 8025A70
@@ -16456,8 +16456,8 @@ _08025B1C: .4byte gUnknown_20233C8
 _08025B20: .4byte gUnknown_2023C08
 	thumb_func_end atk5E
 
-	thumb_func_start atk5F
-atk5F: @ 8025B24
+	thumb_func_start atk5F_swapattackerwithtarget
+atk5F_swapattackerwithtarget: @ 8025B24
 	push {lr}
 	ldr r0, _08025B4C @ =gActiveBattler
 	ldr r2, _08025B50 @ =gBattlerAttacker
@@ -16496,7 +16496,7 @@ _08025B62:
 	bx r0
 	.align 2, 0
 _08025B70: .4byte gBattlescriptCurrInstr
-	thumb_func_end atk5F
+	thumb_func_end atk5F_swapattackerwithtarget
 
 	thumb_func_start atk60_incrementgamestat
 atk60_incrementgamestat: @ 8025B74
@@ -16619,8 +16619,8 @@ _08025C64: .4byte gActiveBattler
 _08025C68: .4byte gBattlescriptCurrInstr
 	thumb_func_end atk61_drawpartystatussummary
 
-	thumb_func_start atk62
-atk62: @ 8025C6C
+	thumb_func_start atk62_hidepartystatussummary
+atk62_hidepartystatussummary: @ 8025C6C
 	push {r4,r5,lr}
 	ldr r5, _08025C94 @ =gBattlescriptCurrInstr
 	ldr r0, [r5]
@@ -16641,10 +16641,10 @@ atk62: @ 8025C6C
 	.align 2, 0
 _08025C94: .4byte gBattlescriptCurrInstr
 _08025C98: .4byte gActiveBattler
-	thumb_func_end atk62
+	thumb_func_end atk62_hidepartystatussummary
 
-	thumb_func_start atk63_jumptorandomattack
-atk63_jumptorandomattack: @ 8025C9C
+	thumb_func_start atk63_jumptocalledmove
+atk63_jumptocalledmove: @ 8025C9C
 	push {r4,lr}
 	ldr r0, _08025CB4 @ =gBattlescriptCurrInstr
 	ldr r1, [r0]
@@ -16691,7 +16691,7 @@ _08025CF0: .4byte gCurrentMove
 _08025CF4: .4byte gCalledMove
 _08025CF8: .4byte gUnknown_81D65A8
 _08025CFC: .4byte gBattleMoves
-	thumb_func_end atk63_jumptorandomattack
+	thumb_func_end atk63_jumptocalledmove
 
 	thumb_func_start atk64_statusanimation
 atk64_statusanimation: @ 8025D00
@@ -16929,7 +16929,7 @@ _08025EE4:
 	movs r1, 0x8
 	movs r2, 0x1D
 	movs r3, 0xD
-	bl sub_802DB7C
+	bl HandleBattleWindow
 	ldr r0, _08025F08 @ =gUnknown_83FE791
 	movs r1, 0xE
 	bl BattlePutTextOnWindow
@@ -16937,7 +16937,7 @@ _08025EE4:
 	adds r0, 0x1
 	strb r0, [r5]
 	strb r4, [r5, 0x1]
-	bl sub_802DCB8
+	bl BattleCreateYesNoCursorAt
 	b _08025F9A
 	.align 2, 0
 _08025F08: .4byte gUnknown_83FE791
@@ -16953,10 +16953,10 @@ _08025F0C:
 	beq _08025F30
 	movs r0, 0x5
 	bl PlaySE
-	bl sub_802DCF8
+	bl BattleDestroyYesNoCursorAt
 	movs r0, 0
 	strb r0, [r5, 0x1]
-	bl sub_802DCB8
+	bl BattleCreateYesNoCursorAt
 _08025F30:
 	ldr r0, _08025F6C @ =gMain
 	ldrh r1, [r0, 0x2E]
@@ -16970,10 +16970,10 @@ _08025F30:
 	bne _08025F56
 	movs r0, 0x5
 	bl PlaySE
-	bl sub_802DCF8
+	bl BattleDestroyYesNoCursorAt
 	movs r0, 0x1
 	strb r0, [r4, 0x1]
-	bl sub_802DCB8
+	bl BattleCreateYesNoCursorAt
 _08025F56:
 	ldr r0, _08025F6C @ =gMain
 	ldrh r1, [r0, 0x2E]
@@ -17002,7 +17002,7 @@ _08025F7E:
 	movs r1, 0x8
 	movs r2, 0x1D
 	movs r3, 0xD
-	bl sub_802DB7C
+	bl HandleBattleWindow
 	ldr r1, _08025FA4 @ =gBattlescriptCurrInstr
 	ldr r0, [r1]
 	adds r0, 0x1
@@ -17415,7 +17415,7 @@ _080262B0:
 	movs r1, 0x7
 	movs r2, 0x1D
 	movs r3, 0x13
-	bl sub_802DB7C
+	bl HandleBattleWindow
 	ldr r1, _08026300 @ =gBattleScripting
 	movs r0, 0x4
 	strb r0, [r1, 0x1E]
@@ -17425,7 +17425,7 @@ _080262F8: .4byte gBattle_BG1_X
 _080262FC: .4byte gBattle_BG1_Y
 _08026300: .4byte gBattleScripting
 _08026304:
-	bl sub_8026404
+	bl DrawLevelUpWindow1
 	movs r0, 0xC
 	bl PutWindowTilemap
 	movs r0, 0xC
@@ -17450,7 +17450,7 @@ _08026330:
 	beq _080263F6
 	movs r0, 0x5
 	bl PlaySE
-	bl sub_8026448
+	bl DrawLevelUpWindow2
 	movs r0, 0xC
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -17470,7 +17470,7 @@ _08026350:
 	movs r1, 0x7
 	movs r2, 0x1D
 	movs r3, 0x13
-	bl sub_802DB7C
+	bl HandleBattleWindow
 _0802636E:
 	ldr r1, _0802637C @ =gBattleScripting
 	ldrb r0, [r1, 0x1E]
@@ -17537,8 +17537,8 @@ _080263F6:
 _08026400: .4byte gBattlescriptCurrInstr
 	thumb_func_end atk6C_drawlvlupbox
 
-	thumb_func_start sub_8026404
-sub_8026404: @ 8026404
+	thumb_func_start DrawLevelUpWindow1
+DrawLevelUpWindow1: @ 8026404
 	push {lr}
 	sub sp, 0x14
 	ldr r0, _0802643C @ =gBattleStruct
@@ -17568,10 +17568,10 @@ sub_8026404: @ 8026404
 _0802643C: .4byte gBattleStruct
 _08026440: .4byte gPlayerParty
 _08026444: .4byte gBattleResources
-	thumb_func_end sub_8026404
+	thumb_func_end DrawLevelUpWindow1
 
-	thumb_func_start sub_8026448
-sub_8026448: @ 8026448
+	thumb_func_start DrawLevelUpWindow2
+DrawLevelUpWindow2: @ 8026448
 	push {lr}
 	sub sp, 0x10
 	ldr r0, _08026478 @ =gBattleStruct
@@ -17596,7 +17596,7 @@ sub_8026448: @ 8026448
 	.align 2, 0
 _08026478: .4byte gBattleStruct
 _0802647C: .4byte gPlayerParty
-	thumb_func_end sub_8026448
+	thumb_func_end DrawLevelUpWindow2
 
 	thumb_func_start sub_8026480
 sub_8026480: @ 8026480
@@ -17915,7 +17915,7 @@ PutMonIconOnLvlUpBox: @ 8026688
 	bl LoadSpriteSheet
 	adds r0, r4, 0
 	bl LoadSpritePalette
-	ldr r0, _08026748 @ =gUnknown_82507C8
+	ldr r0, _08026748 @ =sSpriteTemplate_MonIconOnLvlUpBox
 	movs r1, 0x80
 	lsls r1, 1
 	movs r2, 0xA
@@ -17946,7 +17946,7 @@ _08026738: .4byte 0xffff0000
 _0802673C: .4byte 0x0000ffff
 _08026740: .4byte 0xd75a0000
 _08026744: .4byte 0x0000d75a
-_08026748: .4byte gUnknown_82507C8
+_08026748: .4byte sSpriteTemplate_MonIconOnLvlUpBox
 _0802674C: .4byte gSprites
 _08026750: .4byte gBattle_BG2_X
 	thumb_func_end PutMonIconOnLvlUpBox
@@ -18397,8 +18397,8 @@ _08026AA8: .4byte gLastUsedItem
 _08026AAC: .4byte gBattlescriptCurrInstr
 	thumb_func_end atk75_useitemonopponent
 
-	thumb_func_start sub_8026AB0
-sub_8026AB0: @ 8026AB0
+	thumb_func_start atk76_various
+atk76_various: @ 8026AB0
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -18973,7 +18973,7 @@ _08026F56:
 	bx r0
 	.align 2, 0
 _08026F64: .4byte gBattlescriptCurrInstr
-	thumb_func_end sub_8026AB0
+	thumb_func_end atk76_various
 
 	thumb_func_start atk77_setprotectlike
 atk77_setprotectlike: @ 8026F68
@@ -19011,7 +19011,7 @@ _08026F98:
 	bne _08026FA8
 	movs r6, 0
 _08026FA8:
-	ldr r2, _08027048 @ =gUnknown_82507E0
+	ldr r2, _08027048 @ =sProtectSuccessRates
 	mov r5, r8
 	ldrb r1, [r5]
 	lsls r0, r1, 3
@@ -19087,7 +19087,7 @@ _08027038: .4byte gBattlerAttacker
 _0802703C: .4byte gDisableStructs
 _08027040: .4byte gUnknown_2023BE2
 _08027044: .4byte gBattlersCount
-_08027048: .4byte gUnknown_82507E0
+_08027048: .4byte sProtectSuccessRates
 _0802704C: .4byte gBattleMoves
 _08027050: .4byte gCurrentMove
 _08027054: .4byte gProtectStructs
@@ -21485,8 +21485,8 @@ _08028304: .4byte gBattlescriptCurrInstr
 _08028308: .4byte gUnknown_81D8C10
 	thumb_func_end TryDoForceSwitchOut
 
-	thumb_func_start sub_802830C
-sub_802830C: @ 802830C
+	thumb_func_start atk8F_forcerandomswitch
+atk8F_forcerandomswitch: @ 802830C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -21846,7 +21846,7 @@ _080285F8:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_802830C
+	thumb_func_end atk8F_forcerandomswitch
 
 	thumb_func_start atk90_tryconversiontypechange
 atk90_tryconversiontypechange: @ 8028604
@@ -22718,8 +22718,8 @@ _08028CE8: .4byte gWishFutureKnock
 _08028CEC: .4byte gBattlescriptCurrInstr
 	thumb_func_end atk95_setsandstorm
 
-	thumb_func_start sub_8028CF0
-sub_8028CF0: @ 8028CF0
+	thumb_func_start atk96_weatherdamage
+atk96_weatherdamage: @ 8028CF0
 	push {r4,r5,lr}
 	sub sp, 0x4
 	ldr r0, _08028DBC @ =gBattleTypeFlags
@@ -22923,10 +22923,10 @@ _08028E80: .4byte gBattlerAttacker
 _08028E84: .4byte gAbsentBattlerFlags
 _08028E88: .4byte gBitTable
 _08028E8C: .4byte gBattlescriptCurrInstr
-	thumb_func_end sub_8028CF0
+	thumb_func_end atk96_weatherdamage
 
-	thumb_func_start sub_8028E90
-sub_8028E90: @ 8028E90
+	thumb_func_start atk97_tryinfatuating
+atk97_tryinfatuating: @ 8028E90
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -23126,10 +23126,10 @@ _0802902C:
 _0802903C: .4byte gBitTable
 _08029040: .4byte gBattlerAttacker
 _08029044: .4byte gBattlescriptCurrInstr
-	thumb_func_end sub_8028E90
+	thumb_func_end atk97_tryinfatuating
 
-	thumb_func_start sub_8029048
-sub_8029048: @ 8029048
+	thumb_func_start atk98_updatestatusicon
+atk98_updatestatusicon: @ 8029048
 	push {r4-r7,lr}
 	ldr r0, _080290B8 @ =gBattleControllerExecFlags
 	ldr r1, [r0]
@@ -23307,7 +23307,7 @@ _080291C0:
 	.align 2, 0
 _080291C8: .4byte gActiveBattler
 _080291CC: .4byte gBattleMons
-	thumb_func_end sub_8029048
+	thumb_func_end atk98_updatestatusicon
 
 	thumb_func_start atk99_setmist
 atk99_setmist: @ 80291D0
@@ -23738,7 +23738,7 @@ IsMoveUncopyableByMimic: @ 8029530
 	lsls r0, 16
 	lsrs r2, r0, 16
 	movs r3, 0
-	ldr r0, _08029570 @ =gUnknown_82507E8
+	ldr r0, _08029570 @ =sMovesForbiddenToCopy
 	ldrh r1, [r0]
 	ldr r4, _08029574 @ =0x0000fffe
 	adds r5, r0, 0
@@ -23768,7 +23768,7 @@ _08029558:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08029570: .4byte gUnknown_82507E8
+_08029570: .4byte sMovesForbiddenToCopy
 _08029574: .4byte 0x0000fffe
 	thumb_func_end IsMoveUncopyableByMimic
 
@@ -24013,7 +24013,7 @@ atk9E_metronome: @ 8029754
 	ldr r7, _080297D4 @ =gCurrentMove
 	movs r6, 0xB1
 	lsls r6, 1
-	ldr r5, _080297D8 @ =gUnknown_82507E8
+	ldr r5, _080297D8 @ =sMovesForbiddenToCopy
 	ldr r0, _080297DC @ =gBattlescriptCurrInstr
 	mov r8, r0
 _08029766:
@@ -24075,7 +24075,7 @@ _08029794:
 	bx r0
 	.align 2, 0
 _080297D4: .4byte gCurrentMove
-_080297D8: .4byte gUnknown_82507E8
+_080297D8: .4byte sMovesForbiddenToCopy
 _080297DC: .4byte gBattlescriptCurrInstr
 _080297E0: .4byte 0x000001ff
 _080297E4: .4byte 0x0000ffff
@@ -25703,7 +25703,7 @@ atkAC_remaininghptopower: @ 802A470
 	lsls r0, 24
 	lsrs r1, r0, 24
 	movs r3, 0
-	ldr r0, _0802A4CC @ =gUnknown_8250810
+	ldr r0, _0802A4CC @ =sFlailHpScaleToPowerTable
 	ldrb r2, [r0]
 	cmp r1, r2
 	ble _0802A4AA
@@ -25718,7 +25718,7 @@ _0802A49C:
 	bgt _0802A49C
 _0802A4AA:
 	ldr r2, _0802A4D0 @ =gDynamicBasePower
-	ldr r1, _0802A4CC @ =gUnknown_8250810
+	ldr r1, _0802A4CC @ =sFlailHpScaleToPowerTable
 	adds r0, r3, 0x1
 	adds r0, r1
 	ldrb r0, [r0]
@@ -25732,7 +25732,7 @@ _0802A4AA:
 	.align 2, 0
 _0802A4C4: .4byte gBattleMons
 _0802A4C8: .4byte gBattlerAttacker
-_0802A4CC: .4byte gUnknown_8250810
+_0802A4CC: .4byte sFlailHpScaleToPowerTable
 _0802A4D0: .4byte gDynamicBasePower
 _0802A4D4: .4byte gBattlescriptCurrInstr
 	thumb_func_end atkAC_remaininghptopower
@@ -27948,8 +27948,8 @@ _0802B66A:
 _0802B674: .4byte gBattlescriptCurrInstr
 	thumb_func_end atkC0_recoverbasedonsunlight
 
-	thumb_func_start sub_802B678
-sub_802B678: @ 802B678
+	thumb_func_start atkC1_hiddenpowercalc
+atkC1_hiddenpowercalc: @ 802B678
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -28071,7 +28071,7 @@ _0802B764: .4byte gBattlerAttacker
 _0802B768: .4byte gDynamicBasePower
 _0802B76C: .4byte gBattleStruct
 _0802B770: .4byte gBattlescriptCurrInstr
-	thumb_func_end sub_802B678
+	thumb_func_end atkC1_hiddenpowercalc
 
 	thumb_func_start atkC2_selectfirstvalidtarget
 atkC2_selectfirstvalidtarget: @ 802B774
@@ -28921,7 +28921,7 @@ atkCC_callterrainattack: @ 802BE18
 	ands r0, r1
 	str r0, [r2]
 	ldr r4, _0802BE70 @ =gCurrentMove
-	ldr r1, _0802BE74 @ =gUnknown_825081C
+	ldr r1, _0802BE74 @ =sNaturePowerMoves
 	ldr r0, _0802BE78 @ =gUnknown_2022B50
 	ldrb r0, [r0]
 	lsls r0, 1
@@ -28956,7 +28956,7 @@ atkCC_callterrainattack: @ 802BE18
 _0802BE68: .4byte gHitMarker
 _0802BE6C: .4byte 0xfffffbff
 _0802BE70: .4byte gCurrentMove
-_0802BE74: .4byte gUnknown_825081C
+_0802BE74: .4byte sNaturePowerMoves
 _0802BE78: .4byte gUnknown_2022B50
 _0802BE7C: .4byte gBattlerTarget
 _0802BE80: .4byte gUnknown_81D65A8
@@ -29269,8 +29269,8 @@ _0802C0D6:
 _0802C0DC: .4byte gBattlescriptCurrInstr
 	thumb_func_end atkD1_trysethelpinghand
 
-	thumb_func_start sub_802C0E0
-sub_802C0E0: @ 802C0E0
+	thumb_func_start atkD2_tryswapitems
+atkD2_tryswapitems: @ 802C0E0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -29597,7 +29597,7 @@ _0802C37A:
 	bx r0
 	.align 2, 0
 _0802C38C: .4byte gBattleCommunication
-	thumb_func_end sub_802C0E0
+	thumb_func_end atkD2_tryswapitems
 
 	thumb_func_start atkD3_trycopyability
 atkD3_trycopyability: @ 802C390
@@ -30108,8 +30108,8 @@ _0802C762:
 _0802C768: .4byte gBattlescriptCurrInstr
 	thumb_func_end atkDA_tryswapabilities
 
-	thumb_func_start atkDB_tryimprision
-atkDB_tryimprision: @ 802C76C
+	thumb_func_start atkDB_tryimprison
+atkDB_tryimprison: @ 802C76C
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -30246,7 +30246,7 @@ _0802C864: .4byte gBattlerAttacker
 _0802C868: .4byte gBattleMons
 _0802C86C: .4byte gBattlersCount
 _0802C870: .4byte gBattlescriptCurrInstr
-	thumb_func_end atkDB_tryimprision
+	thumb_func_end atkDB_tryimprison
 
 	thumb_func_start atkDC_trysetgrudge
 atkDC_trysetgrudge: @ 802C874
@@ -30301,7 +30301,7 @@ atkDD_weightdamagecalculation: @ 802C8CC
 	mov r7, r8
 	push {r7}
 	movs r5, 0
-	ldr r2, _0802C930 @ =gUnknown_8250830
+	ldr r2, _0802C930 @ =sWeightToDamageTable
 	ldrh r0, [r2]
 	ldr r1, _0802C934 @ =0x0000ffff
 	cmp r0, r1
@@ -30348,7 +30348,7 @@ _0802C916:
 	strh r1, [r0]
 	b _0802C94A
 	.align 2, 0
-_0802C930: .4byte gUnknown_8250830
+_0802C930: .4byte sWeightToDamageTable
 _0802C934: .4byte 0x0000ffff
 _0802C938: .4byte gBattleMons
 _0802C93C: .4byte gBattlerTarget
@@ -30372,8 +30372,8 @@ _0802C95C: .4byte gDynamicBasePower
 _0802C960: .4byte gBattlescriptCurrInstr
 	thumb_func_end atkDD_weightdamagecalculation
 
-	thumb_func_start atkDE_asistattackselect
-atkDE_asistattackselect: @ 802C964
+	thumb_func_start atkDE_assistattackselect
+atkDE_assistattackselect: @ 802C964
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -30450,7 +30450,7 @@ _0802C9E0:
 	adds r1, r5, 0x1
 	cmp r0, 0
 	bne _0802CA36
-	ldr r0, _0802CA9C @ =gUnknown_82507E8
+	ldr r0, _0802CA9C @ =sMovesForbiddenToCopy
 	ldrh r2, [r0]
 	adds r3, r0, 0
 	cmp r2, r8
@@ -30525,7 +30525,7 @@ _0802CA8C: .4byte gPlayerParty
 _0802CA90: .4byte gEnemyParty
 _0802CA94: .4byte gBattlerPartyIndexes
 _0802CA98: .4byte 0x0000ffff
-_0802CA9C: .4byte gUnknown_82507E8
+_0802CA9C: .4byte sMovesForbiddenToCopy
 _0802CAA0: .4byte gHitMarker
 _0802CAA4: .4byte 0xfffffbff
 _0802CAA8: .4byte gCalledMove
@@ -30556,7 +30556,7 @@ _0802CACE:
 	bx r0
 	.align 2, 0
 _0802CAE0: .4byte gBattlescriptCurrInstr
-	thumb_func_end atkDE_asistattackselect
+	thumb_func_end atkDE_assistattackselect
 
 	thumb_func_start atkDF_trysetmagiccoat
 atkDF_trysetmagiccoat: @ 802CAE4
@@ -30986,8 +30986,8 @@ _0802CE40: .4byte gBattleCommunication
 _0802CE44: .4byte gBattlescriptCurrInstr
 	thumb_func_end atkE4_getsecretpowereffect
 
-	thumb_func_start sub_802CE48
-sub_802CE48: @ 802CE48
+	thumb_func_start atkE5_pickup
+atkE5_pickup: @ 802CE48
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -31058,10 +31058,10 @@ _0802CEA2:
 	lsls r0, 16
 	lsrs r3, r0, 16
 	movs r2, 0
-	ldr r1, _0802CEE4 @ =gUnknown_8250848
+	ldr r1, _0802CEE4 @ =sPickupItems
 	b _0802CEF0
 	.align 2, 0
-_0802CEE4: .4byte gUnknown_8250848
+_0802CEE4: .4byte sPickupItems
 _0802CEE8:
 	adds r1, 0x4
 	adds r2, 0x1
@@ -31077,7 +31077,7 @@ _0802CEF6:
 	ldr r1, _0802CF24 @ =gPlayerParty
 	adds r0, r1
 	lsls r2, 2
-	ldr r1, _0802CF28 @ =gUnknown_8250848
+	ldr r1, _0802CF28 @ =sPickupItems
 	adds r2, r1
 	movs r1, 0xC
 	bl SetMonData
@@ -31096,9 +31096,9 @@ _0802CF0A:
 	bx r0
 	.align 2, 0
 _0802CF24: .4byte gPlayerParty
-_0802CF28: .4byte gUnknown_8250848
+_0802CF28: .4byte sPickupItems
 _0802CF2C: .4byte gBattlescriptCurrInstr
-	thumb_func_end sub_802CE48
+	thumb_func_end atkE5_pickup
 
 	thumb_func_start atkE6_docastformchangeanimation
 atkE6_docastformchangeanimation: @ 802CF30
@@ -31468,7 +31468,7 @@ atkEB_settypetoterrain: @ 802D1F0
 	movs r0, 0x21
 	adds r0, r3
 	mov r12, r0
-	ldr r5, _0802D268 @ =gUnknown_8250888
+	ldr r5, _0802D268 @ =sTerrainToType
 	ldr r4, _0802D26C @ =gUnknown_2022B50
 	ldrb r0, [r4]
 	adds r0, r5
@@ -31513,7 +31513,7 @@ atkEB_settypetoterrain: @ 802D1F0
 	.align 2, 0
 _0802D260: .4byte gBattleMons
 _0802D264: .4byte gBattlerAttacker
-_0802D268: .4byte gUnknown_8250888
+_0802D268: .4byte sTerrainToType
 _0802D26C: .4byte gUnknown_2022B50
 _0802D270: .4byte gBattleTextBuff1
 _0802D274: .4byte gBattlescriptCurrInstr
@@ -31633,8 +31633,8 @@ _0802D35A:
 _0802D360: .4byte gBattlescriptCurrInstr
 	thumb_func_end atkEC_pursuitrelated
 
-	thumb_func_start atkEF_snatchsetbanks
-atkEF_snatchsetbanks: @ 802D364
+	thumb_func_start atkED_snatchsetbattlers
+atkED_snatchsetbattlers: @ 802D364
 	push {r4,lr}
 	ldr r1, _0802D388 @ =gEffectBattler
 	ldr r3, _0802D38C @ =gBattlerAttacker
@@ -31674,7 +31674,7 @@ _0802D39E:
 	.align 2, 0
 _0802D3B0: .4byte gBattleScripting
 _0802D3B4: .4byte gBattlescriptCurrInstr
-	thumb_func_end atkEF_snatchsetbanks
+	thumb_func_end atkED_snatchsetbattlers
 
 	thumb_func_start atkEE_removelightscreenreflect
 atkEE_removelightscreenreflect: @ 802D3B8
@@ -31738,8 +31738,8 @@ _0802D42C: .4byte gBattleScripting
 _0802D430: .4byte gBattlescriptCurrInstr
 	thumb_func_end atkEE_removelightscreenreflect
 
-	thumb_func_start sub_802D434
-sub_802D434: @ 802D434
+	thumb_func_start atkEF_handleballthrow
+atkEF_handleballthrow: @ 802D434
 	push {r4-r6,lr}
 	movs r4, 0
 	ldr r0, _0802D474 @ =gBattleControllerExecFlags
@@ -31969,7 +31969,7 @@ _0802D608:
 	.align 2, 0
 _0802D61C: .4byte gBattleResults
 _0802D620:
-	ldr r1, _0802D694 @ =gUnknown_8250892
+	ldr r1, _0802D694 @ =sBallCatchBonuses
 	ldrh r0, [r2]
 	subs r0, 0x2
 	adds r0, r1
@@ -32027,7 +32027,7 @@ _0802D67A:
 	strb r1, [r0, 0x5]
 	b _0802D6BC
 	.align 2, 0
-_0802D694: .4byte gUnknown_8250892
+_0802D694: .4byte sBallCatchBonuses
 _0802D698: .4byte gBattleMons
 _0802D69C: .4byte gBattlerTarget
 _0802D6A0: .4byte gLastUsedItem
@@ -32186,10 +32186,10 @@ _0802D7EE:
 _0802D7F4: .4byte gBattleCommunication
 _0802D7F8: .4byte gBattlescriptCurrInstr
 _0802D7FC: .4byte gUnknown_81D9A93
-	thumb_func_end sub_802D434
+	thumb_func_end atkEF_handleballthrow
 
-	thumb_func_start sub_802D800
-sub_802D800: @ 802D800
+	thumb_func_start atkF0_givecaughtmon
+atkF0_givecaughtmon: @ 802D800
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -32334,10 +32334,10 @@ _0802D94C: .4byte gBattlerAttacker
 _0802D950: .4byte gBattlerPartyIndexes
 _0802D954: .4byte gEnemyParty
 _0802D958: .4byte gBattlescriptCurrInstr
-	thumb_func_end sub_802D800
+	thumb_func_end atkF0_givecaughtmon
 
-	thumb_func_start sub_802D95C
-sub_802D95C: @ 802D95C
+	thumb_func_start atkF1_trysetcaughtmondexflags
+atkF1_trysetcaughtmondexflags: @ 802D95C
 	push {r4,r5,lr}
 	ldr r4, _0802D9AC @ =gEnemyParty
 	adds r0, r4, 0
@@ -32395,10 +32395,10 @@ _0802D9CE:
 	bx r0
 	.align 2, 0
 _0802D9D4: .4byte gBattlescriptCurrInstr
-	thumb_func_end sub_802D95C
+	thumb_func_end atkF1_trysetcaughtmondexflags
 
-	thumb_func_start sub_802D9D8
-sub_802D9D8: @ 802D9D8
+	thumb_func_start atkF2_displaydexinfo
+atkF2_displaydexinfo: @ 802D9D8
 	push {r4,r5,lr}
 	sub sp, 0x18
 	ldr r0, _0802DA00 @ =gEnemyParty
@@ -32585,10 +32585,10 @@ _0802DB6C:
 	.align 2, 0
 _0802DB74: .4byte gPaletteFade
 _0802DB78: .4byte gBattlescriptCurrInstr
-	thumb_func_end sub_802D9D8
+	thumb_func_end atkF2_displaydexinfo
 
-	thumb_func_start sub_802DB7C
-sub_802DB7C: @ 802DB7C
+	thumb_func_start HandleBattleWindow
+HandleBattleWindow: @ 802DB7C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -32754,10 +32754,10 @@ _0802DCA2:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_802DB7C
+	thumb_func_end HandleBattleWindow
 
-	thumb_func_start sub_802DCB8
-sub_802DCB8: @ 802DCB8
+	thumb_func_start BattleCreateYesNoCursorAt
+BattleCreateYesNoCursorAt: @ 802DCB8
 	push {lr}
 	sub sp, 0x10
 	add r0, sp, 0xC
@@ -32787,10 +32787,10 @@ sub_802DCB8: @ 802DCB8
 	bx r0
 	.align 2, 0
 _0802DCF4: .4byte gBattleCommunication
-	thumb_func_end sub_802DCB8
+	thumb_func_end BattleCreateYesNoCursorAt
 
-	thumb_func_start sub_802DCF8
-sub_802DCF8: @ 802DCF8
+	thumb_func_start BattleDestroyYesNoCursorAt
+BattleDestroyYesNoCursorAt: @ 802DCF8
 	push {lr}
 	sub sp, 0x10
 	add r0, sp, 0xC
@@ -32821,10 +32821,10 @@ sub_802DCF8: @ 802DCF8
 	bx r0
 	.align 2, 0
 _0802DD34: .4byte gBattleCommunication
-	thumb_func_end sub_802DCF8
+	thumb_func_end BattleDestroyYesNoCursorAt
 
-	thumb_func_start sub_802DD38
-sub_802DD38: @ 802DD38
+	thumb_func_start atkF3_trygivecaughtmonnick
+atkF3_trygivecaughtmonnick: @ 802DD38
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -32860,7 +32860,7 @@ _0802DD78:
 	movs r1, 0x8
 	movs r2, 0x1D
 	movs r3, 0xD
-	bl sub_802DB7C
+	bl HandleBattleWindow
 	ldr r0, _0802DDA0 @ =gUnknown_83FE791
 	movs r1, 0xE
 	bl BattlePutTextOnWindow
@@ -32869,7 +32869,7 @@ _0802DD78:
 	adds r0, 0x1
 	strb r0, [r1]
 	strb r4, [r1, 0x1]
-	bl sub_802DCB8
+	bl BattleCreateYesNoCursorAt
 	b _0802DFA6
 	.align 2, 0
 _0802DDA0: .4byte gUnknown_83FE791
@@ -32886,10 +32886,10 @@ _0802DDA8:
 	beq _0802DDCC
 	movs r0, 0x5
 	bl PlaySE
-	bl sub_802DCF8
+	bl BattleDestroyYesNoCursorAt
 	movs r0, 0
 	strb r0, [r4, 0x1]
-	bl sub_802DCB8
+	bl BattleCreateYesNoCursorAt
 _0802DDCC:
 	ldr r0, _0802DE1C @ =gMain
 	ldrh r1, [r0, 0x2E]
@@ -32903,10 +32903,10 @@ _0802DDCC:
 	bne _0802DDF2
 	movs r0, 0x5
 	bl PlaySE
-	bl sub_802DCF8
+	bl BattleDestroyYesNoCursorAt
 	movs r0, 0x1
 	strb r0, [r4, 0x1]
-	bl sub_802DCB8
+	bl BattleCreateYesNoCursorAt
 _0802DDF2:
 	ldr r0, _0802DE1C @ =gMain
 	ldrh r1, [r0, 0x2E]
@@ -33118,7 +33118,7 @@ _0802DFA6:
 	bx r0
 	.align 2, 0
 _0802DFB8: .4byte gBattlescriptCurrInstr
-	thumb_func_end sub_802DD38
+	thumb_func_end atkF3_trygivecaughtmonnick
 
 	thumb_func_start atkF4_subattackerhpbydmg
 atkF4_subattackerhpbydmg: @ 802DFBC
@@ -33167,18 +33167,18 @@ _0802E00C: .4byte gBattlerAttacker
 _0802E010: .4byte gBattlescriptCurrInstr
 	thumb_func_end atkF5_removeattackerstatus1
 
-	thumb_func_start sub_802E014
-sub_802E014: @ 802E014
+	thumb_func_start atkF6_finishaction
+atkF6_finishaction: @ 802E014
 	ldr r1, _0802E01C @ =gCurrentActionFuncId
 	movs r0, 0xC
 	strb r0, [r1]
 	bx lr
 	.align 2, 0
 _0802E01C: .4byte gCurrentActionFuncId
-	thumb_func_end sub_802E014
+	thumb_func_end atkF6_finishaction
 
-	thumb_func_start sub_802E020
-sub_802E020: @ 802E020
+	thumb_func_start atkF7_finishturn
+atkF7_finishturn: @ 802E020
 	ldr r1, _0802E030 @ =gCurrentActionFuncId
 	movs r0, 0xC
 	strb r0, [r1]
@@ -33191,6 +33191,6 @@ sub_802E020: @ 802E020
 _0802E030: .4byte gCurrentActionFuncId
 _0802E034: .4byte gUnknown_2023BE2
 _0802E038: .4byte gBattlersCount
-	thumb_func_end sub_802E020
+	thumb_func_end atkF7_finishturn
 
 	.align 2, 0 @ Don't pad with nop.

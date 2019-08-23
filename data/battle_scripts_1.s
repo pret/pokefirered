@@ -313,10 +313,43 @@ gUnknown_81D9192:: @ 81D9192
 	.incbin "baserom.gba", 0x1D9192, 0xF
 
 gUnknown_81D91A1:: @ 81D91A1
-	.incbin "baserom.gba", 0x1D91A1, 0x26
+	.incbin "baserom.gba", 0x1D91A1, 0x18
+
+BattleScript_MoveEffectSleep:: @ 81D91B9
+	.incbin "baserom.gba", 0x1D91B9, 0xE
 
 BattleScript_YawnMakesAsleep:: @ 81D91C7
-	.incbin "baserom.gba", 0x1D91C7, 0xAA
+	.incbin "baserom.gba", 0x1D91C7, 0xE
+
+BattleScript_MoveEffectPoison:: @ 81D91D5
+	.incbin "baserom.gba", 0x1D91D5, 0xF
+
+BattleScript_MoveEffectBurn:: @ 81D91E4
+	.incbin "baserom.gba", 0x1D91E4, 0xF
+
+BattleScript_MoveEffectFreeze:: @ 81D91F3
+	.incbin "baserom.gba", 0x1D91F3, 0xF
+
+BattleScript_MoveEffectParalysis:: @ 81D9202
+	.incbin "baserom.gba", 0x1D9202, 0xF
+
+BattleScript_MoveEffectUproar:: @ 81D9211
+	.incbin "baserom.gba", 0x1D9211, 0x7
+
+BattleScript_MoveEffectToxic:: @ 81D9218
+	.incbin "baserom.gba", 0x1D9218, 0xD
+
+BattleScript_MoveEffectPayDay:: @ 81D9225
+	.incbin "baserom.gba", 0x1D9225, 0x7
+
+BattleScript_MoveEffectWrap:: @ 81D922C
+	.incbin "baserom.gba", 0x1D922C, 0x9
+
+BattleScript_MoveEffectConfusion:: @ 81D9235
+	.incbin "baserom.gba", 0x1D9235, 0xE
+
+BattleScript_MoveEffectRecoil:: @ 81D9243
+	.incbin "baserom.gba", 0x1D9243, 0x2E
 
 gUnknown_81D9271:: @ 81D9271
 	.incbin "baserom.gba", 0x1D9271, 0xE

@@ -538,7 +538,7 @@
 	.byte \bank_or_side
 	.endm
 
-	.macro atk62 bank_or_side
+	.macro atk62_hidepartystatussummary bank_or_side
 	.byte 0x62
 	.byte \bank_or_side
 	.endm

@@ -2286,7 +2286,7 @@ _080CF176:
 	movs r1, 0x8
 	movs r2, 0x1D
 	movs r3, 0xD
-	bl sub_802DB7C
+	bl HandleBattleWindow
 	ldr r0, _080CF1B4 @ =gUnknown_83FE791
 	movs r1, 0xE
 	bl BattlePutTextOnWindow
@@ -2301,7 +2301,7 @@ _080CF176:
 	strh r0, [r1, 0x14]
 	ldr r0, _080CF1B8 @ =gBattleCommunication
 	strb r2, [r0, 0x1]
-	bl sub_802DCB8
+	bl BattleCreateYesNoCursorAt
 	b _080CF528
 	.align 2, 0
 _080CF1A8: .4byte gUnknown_83FDF3C
@@ -2322,10 +2322,10 @@ _080CF1BC:
 	beq _080CF1E2
 	movs r0, 0x5
 	bl PlaySE
-	bl sub_802DCF8
+	bl BattleDestroyYesNoCursorAt
 	movs r0, 0
 	strb r0, [r4, 0x1]
-	bl sub_802DCB8
+	bl BattleCreateYesNoCursorAt
 _080CF1E2:
 	ldr r0, _080CF244 @ =gMain
 	ldrh r1, [r0, 0x2E]
@@ -2339,10 +2339,10 @@ _080CF1E2:
 	bne _080CF208
 	movs r0, 0x5
 	bl PlaySE
-	bl sub_802DCF8
+	bl BattleDestroyYesNoCursorAt
 	movs r0, 0x1
 	strb r0, [r4, 0x1]
-	bl sub_802DCB8
+	bl BattleCreateYesNoCursorAt
 _080CF208:
 	ldr r0, _080CF244 @ =gMain
 	ldrh r1, [r0, 0x2E]
@@ -2356,7 +2356,7 @@ _080CF208:
 	movs r1, 0x8
 	movs r2, 0x1D
 	movs r3, 0xD
-	bl sub_802DB7C
+	bl HandleBattleWindow
 	movs r0, 0x5
 	bl PlaySE
 	ldr r0, _080CF248 @ =gBattleCommunication
@@ -2409,7 +2409,7 @@ _080CF284:
 	movs r1, 0x8
 	movs r2, 0x1D
 	movs r3, 0xD
-	bl sub_802DB7C
+	bl HandleBattleWindow
 	movs r0, 0x5
 	bl PlaySE
 	ldr r1, _080CF2AC @ =gTasks

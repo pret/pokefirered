@@ -12250,14 +12250,14 @@ _08016048:
 	cmp r0, 0x1F
 	bne _08016096
 	adds r0, r2, 0
-	bl BankGetTurnOrder
+	bl GetBattlerTurnOrderNum
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, [sp]
 	cmp r0, r3
 	bcs _08016096
 	ldrb r0, [r4]
-	bl BankGetTurnOrder
+	bl GetBattlerTurnOrderNum
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp]

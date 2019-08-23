@@ -278,57 +278,6 @@ gStatusConditionString_LoveJpn:: @ 82500C4
 gUnknown_82500CC:: @ 82500CC
 	.incbin "baserom.gba", 0x2500CC, 0x38
 
-	.section .rodata.825011C
-
-	.balign 4
-gBattleScriptingCommandsTable:: @ 825011C
-	.incbin "baserom.gba", 0x25011C, 0x3E0
-
-gUnknown_82504FC:: @ 82504FC
-	.incbin "baserom.gba", 0x2504FC, 0x34
-
-gUnknown_8250530:: @ 8250530
-	.incbin "baserom.gba", 0x250530, 0xC
-
-gUnknown_825053C:: @ 825053C
-	.incbin "baserom.gba", 0x25053C, 0xF0
-
-gUnknown_825062C:: @ 825062C
-	.incbin "baserom.gba", 0x25062C, 0xA4
-
-gUnknown_82506D0:: @ 82506D0
-	.incbin "baserom.gba", 0x2506D0, 0x20
-
-gUnknown_82506F0:: @ 82506F0
-	.incbin "baserom.gba", 0x2506F0, 0xD8
-
-gUnknown_82507C8:: @ 82507C8
-	.incbin "baserom.gba", 0x2507C8, 0x18
-
-gUnknown_82507E0:: @ 82507E0
-	.incbin "baserom.gba", 0x2507E0, 0x8
-
-gUnknown_82507E8:: @ 82507E8
-	.incbin "baserom.gba", 0x2507E8, 0x28
-
-gUnknown_8250810:: @ 8250810
-	.incbin "baserom.gba", 0x250810, 0xC
-
-gUnknown_825081C:: @ 825081C
-	.incbin "baserom.gba", 0x25081C, 0x14
-
-gUnknown_8250830:: @ 8250830
-	.incbin "baserom.gba", 0x250830, 0x18
-
-gUnknown_8250848:: @ 8250848
-	.incbin "baserom.gba", 0x250848, 0x40
-
-gUnknown_8250888:: @ 8250888
-	.incbin "baserom.gba", 0x250888, 0xA
-
-gUnknown_8250892:: @ 8250892
-	.incbin "baserom.gba", 0x250892, 0xA
-
 	.section .rodata.825098C
 
 gUnknown_825098C:: @ 825098C

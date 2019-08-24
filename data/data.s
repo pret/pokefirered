@@ -239,7 +239,7 @@ gTypeEffectiveness:: @ 824F050
 gTypeNames:: @ 824F1A0
 	.incbin "baserom.gba", 0x24F1A0, 0x80
 
-gUnknown_824F220:: @ 824F220
+gTrainerMoneyTable:: @ 824F220
 	.incbin "baserom.gba", 0x24F220, 0x8E8
 
 gUnknown_824FB08:: @ 824FB08

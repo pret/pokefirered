@@ -8434,7 +8434,7 @@ sub_8138B4C: @ 8138B4C
 	bl IsUpdateLinkStateCBActive
 	cmp r0, 0
 	bne _08138B84
-	bl sub_811FA20
+	bl IsMultiBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -13244,7 +13244,7 @@ _0813B198:
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0813B1C4
-	bl sub_811FA20
+	bl IsMultiBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

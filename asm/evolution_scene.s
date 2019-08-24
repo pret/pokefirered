@@ -192,7 +192,7 @@ EvolutionScene: @ 80CDDF4
 	ldr r0, _080CE09C @ =gBattle_BG3_Y
 	movs r1, 0
 	strh r1, [r0]
-	ldr r1, _080CE0A0 @ =gUnknown_2022B50
+	ldr r1, _080CE0A0 @ =gBattleTerrain
 	movs r0, 0x9
 	strb r0, [r1]
 	bl sub_800F34C
@@ -409,7 +409,7 @@ _080CE090: .4byte gBattle_BG2_X
 _080CE094: .4byte gBattle_BG2_Y
 _080CE098: .4byte gBattle_BG3_X
 _080CE09C: .4byte gBattle_BG3_Y
-_080CE0A0: .4byte gUnknown_2022B50
+_080CE0A0: .4byte gBattleTerrain
 _080CE0A4: .4byte gReservedSpritePaletteCount
 _080CE0A8: .4byte gUnknown_2039A20
 _080CE0AC: .4byte gStringVar1
@@ -513,7 +513,7 @@ CB2_EvolutionSceneLoadGraphics: @ 80CE0E8
 	strh r0, [r1]
 	ldr r0, _080CE2AC @ =gBattle_BG3_Y
 	strh r4, [r0]
-	ldr r1, _080CE2B0 @ =gUnknown_2022B50
+	ldr r1, _080CE2B0 @ =gBattleTerrain
 	movs r0, 0x9
 	strb r0, [r1]
 	bl sub_800F34C
@@ -616,7 +616,7 @@ _080CE2A0: .4byte gBattle_BG2_X
 _080CE2A4: .4byte gBattle_BG2_Y
 _080CE2A8: .4byte gBattle_BG3_X
 _080CE2AC: .4byte gBattle_BG3_Y
-_080CE2B0: .4byte gUnknown_2022B50
+_080CE2B0: .4byte gBattleTerrain
 _080CE2B4: .4byte gReservedSpritePaletteCount
 _080CE2B8: .4byte gMonFrontPicTable
 _080CE2BC: .4byte gMonSpritesGfxPtr
@@ -2287,7 +2287,7 @@ _080CF176:
 	movs r2, 0x1D
 	movs r3, 0xD
 	bl HandleBattleWindow
-	ldr r0, _080CF1B4 @ =gUnknown_83FE791
+	ldr r0, _080CF1B4 @ =gText_BattleYesNoChoice
 	movs r1, 0xE
 	bl BattlePutTextOnWindow
 	ldr r0, _080CF1B0 @ =gTasks
@@ -2307,7 +2307,7 @@ _080CF176:
 _080CF1A8: .4byte gUnknown_83FDF3C
 _080CF1AC: .4byte gDisplayedStringBattle
 _080CF1B0: .4byte gTasks
-_080CF1B4: .4byte gUnknown_83FE791
+_080CF1B4: .4byte gText_BattleYesNoChoice
 _080CF1B8: .4byte gBattleCommunication
 _080CF1BC:
 	ldr r0, _080CF244 @ =gMain

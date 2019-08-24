@@ -1274,12 +1274,12 @@ _0800FC08:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0800FC20
-	ldr r0, _0800FC1C @ =gUnknown_2022B50
+	ldr r0, _0800FC1C @ =gBattleTerrain
 	ldrb r0, [r0]
 	bl sub_800F2AC
 	b _0800FC26
 	.align 2, 0
-_0800FC1C: .4byte gUnknown_2022B50
+_0800FC1C: .4byte gBattleTerrain
 _0800FC20:
 	movs r0, 0x8
 	bl sub_800F2AC
@@ -1309,12 +1309,12 @@ _0800FC48:
 	ands r0, r1
 	cmp r0, 0
 	beq _0800FC60
-	ldr r0, _0800FC5C @ =gUnknown_2022B50
+	ldr r0, _0800FC5C @ =gBattleTerrain
 	strb r2, [r0]
 	movs r0, 0
 	b _0800FCAA
 	.align 2, 0
-_0800FC5C: .4byte gUnknown_2022B50
+_0800FC5C: .4byte gBattleTerrain
 _0800FC60:
 	movs r0, 0x8
 	ands r1, r0
@@ -1351,13 +1351,13 @@ _0800FC90:
 	lsrs r0, 24
 	b _0800FCAA
 _0800FCA6:
-	ldr r0, _0800FCB0 @ =gUnknown_2022B50
+	ldr r0, _0800FCB0 @ =gBattleTerrain
 	ldrb r0, [r0]
 _0800FCAA:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0800FCB0: .4byte gUnknown_2022B50
+_0800FCB0: .4byte gBattleTerrain
 	thumb_func_end sub_800FC2C
 
 	thumb_func_start sub_800FCB4

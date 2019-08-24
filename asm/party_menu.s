@@ -2010,8 +2010,8 @@ _0811FA18: .4byte gUnknown_8459FC4
 _0811FA1C: .4byte gUnknown_8459FE0
 	thumb_func_end sub_811F9DC
 
-	thumb_func_start sub_811FA20
-sub_811FA20: @ 811FA20
+	thumb_func_start IsMultiBattle
+IsMultiBattle: @ 811FA20
 	push {lr}
 	ldr r0, _0811FA34 @ =gBattleTypeFlags
 	ldr r0, [r0]
@@ -2028,7 +2028,7 @@ _0811FA38:
 _0811FA3A:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_811FA20
+	thumb_func_end IsMultiBattle
 
 	thumb_func_start sub_811FA40
 sub_811FA40: @ 811FA40
@@ -7145,7 +7145,7 @@ party_menu_icon_anim: @ 81221D4
 	adds r7, r1, 0
 	adds r4, r2, 0
 	movs r6, 0x1
-	bl sub_811FA20
+	bl IsMultiBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -17916,7 +17916,7 @@ sub_81278B4: @ 81278B4
 	movs r0, 0
 	b _081278D6
 _081278C4:
-	bl sub_811FA20
+	bl IsMultiBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -18169,7 +18169,7 @@ sub_8127AC0: @ 8127AC0
 	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl sub_811FA20
+	bl IsMultiBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -18402,7 +18402,7 @@ sub_8127CCC: @ 8127CCC
 	adds r6, r0, 0
 	lsls r1, 24
 	lsrs r4, r1, 24
-	bl sub_811FA20
+	bl IsMultiBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -18565,7 +18565,7 @@ _08127E00:
 	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r6, r0, 24
-	bl sub_811FA20
+	bl IsMultiBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -18678,7 +18678,7 @@ sub_8127EC4: @ 8127EC4
 	lsls r2, 24
 	lsrs r6, r2, 24
 	movs r7, 0
-	bl sub_811FA20
+	bl IsMultiBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _08127F72

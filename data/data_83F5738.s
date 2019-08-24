@@ -369,10 +369,10 @@ gUnknown_83FDDEB:: @ 83FDDEB
 gUnknown_83FDF3C:: @ 83FDF3C
 	.incbin "baserom.gba", 0x3FDF3C, 0x5D8
 
-gUnknown_83FE514:: @ 83FE514
+gMissStringIds:: @ 83FE514
 	.incbin "baserom.gba", 0x3FE514, 0x150
 
-gUnknown_83FE664:: @ 83FE664
+gTrappingMoves:: @ 83FE664
 	.incbin "baserom.gba", 0x3FE664, 0xE
 
 gUnknown_83FE672:: @ 83FE672
@@ -414,7 +414,7 @@ gText_MoveInterfaceType:: @ 83FE76A
 gUnknown_83FE770:: @ 83FE770
 	.incbin "baserom.gba", 0x3FE770, 0x21
 
-gUnknown_83FE791:: @ 83FE791
+gText_BattleYesNoChoice:: @ 83FE791
 	.incbin "baserom.gba", 0x3FE791, 0xF
 
 gText_BattleSwitchWhich:: @ 83FE7A0

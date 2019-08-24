@@ -316,7 +316,6 @@ void atkF4_subattackerhpbydmg(void);
 void atkF5_removeattackerstatus1(void);
 void atkF6_finishaction(void);
 void atkF7_finishturn(void);
-void atkF8_trainerslideout(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
@@ -819,40 +818,31 @@ const u16 sWeightToDamageTable[] =
     0xFFFF, 0xFFFF
 };
 
-const u16 sPickupItems[] =
+struct PickupItem
 {
-    ITEM_ORAN_BERRY,
-    ITEM_BURN_HEAL,
-    ITEM_CHERI_BERRY,
-    ITEM_MAX_REVIVE,
-    ITEM_CHESTO_BERRY,
-    ITEM_MAX_ETHER,
-    ITEM_PECHA_BERRY,
-    ITEM_SACRED_ASH,
-    ITEM_RAWST_BERRY,
-    ITEM_037,
-    ITEM_ASPEAR_BERRY,
-    ITEM_IRON,
-    ITEM_PERSIM_BERRY,
-    ITEM_X_ATTACK,
-    ITEM_TM10,
-    ITEM_POKE_DOLL,
-    ITEM_PP_UP,
-    ITEM_ESCAPE_ROPE,
-    ITEM_RARE_CANDY,
-    ITEM_05A,
-    ITEM_NUGGET,
-    ITEM_FIRE_STONE,
-    ITEM_SPELON_BERRY,
-    ITEM_THUNDER_STONE,
-    ITEM_PAMTRE_BERRY,
-    ITEM_WATER_STONE,
-    ITEM_WATMEL_BERRY,
-    ITEM_LEAF_STONE,
-    ITEM_DURIN_BERRY,
-    ITEM_063,
-    ITEM_BELUE_BERRY,
-    ITEM_MASTER_BALL
+    u16 itemId;
+    u8 chance;
+};
+
+const struct PickupItem sPickupItems[] =
+{
+    { ITEM_ORAN_BERRY, 15 },
+    { ITEM_CHERI_BERRY, 25 },
+    { ITEM_CHESTO_BERRY, 35 },
+    { ITEM_PECHA_BERRY, 45 },
+    { ITEM_RAWST_BERRY, 55 },
+    { ITEM_ASPEAR_BERRY, 65 },
+    { ITEM_PERSIM_BERRY, 75 },
+    { ITEM_TM10, 80 },
+    { ITEM_PP_UP, 85 },
+    { ITEM_RARE_CANDY, 90 },
+    { ITEM_NUGGET, 95 },
+    { ITEM_SPELON_BERRY, 96 },
+    { ITEM_PAMTRE_BERRY, 97 },
+    { ITEM_WATMEL_BERRY, 98 },
+    { ITEM_DURIN_BERRY, 99 },
+    { ITEM_BELUE_BERRY, 1 },
+
 };
 
 const u8 sTerrainToType[] =

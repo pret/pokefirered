@@ -176,7 +176,7 @@ sub_80BA934: @ 80BA934
 	ldrsh r0, [r0, r1]
 	bl sub_80B9A14
 	adds r2, r0, 0
-	ldr r0, _080BA95C @ =gUnknown_2022B50
+	ldr r0, _080BA95C @ =gBattleTerrain
 	ldrb r0, [r0]
 	cmp r0, 0x9
 	bhi _080BAA0A
@@ -187,7 +187,7 @@ sub_80BA934: @ 80BA934
 	mov pc, r0
 	.align 2, 0
 _080BA958: .4byte gBattleAnimArgs
-_080BA95C: .4byte gUnknown_2022B50
+_080BA95C: .4byte gBattleTerrain
 _080BA960: .4byte _080BA964
 	.align 2, 0
 _080BA964:
@@ -2745,7 +2745,7 @@ sub_80BBDF0: @ 80BBDF0
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080BBE08 @ =gBattleAnimArgs
-	ldr r1, _080BBE0C @ =gUnknown_2022B50
+	ldr r1, _080BBE0C @ =gBattleTerrain
 	ldrb r1, [r1]
 	strh r1, [r2]
 	bl DestroyAnimVisualTask
@@ -2753,7 +2753,7 @@ sub_80BBDF0: @ 80BBDF0
 	bx r0
 	.align 2, 0
 _080BBE08: .4byte gBattleAnimArgs
-_080BBE0C: .4byte gUnknown_2022B50
+_080BBE0C: .4byte gBattleTerrain
 	thumb_func_end sub_80BBDF0
 
 	thumb_func_start sub_80BBE10

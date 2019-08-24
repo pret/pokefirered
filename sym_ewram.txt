@@ -135,7 +135,7 @@ gUnknown_2022AE8: @ 2022AE8
 gBattleTypeFlags: @ 2022B4C
 	.space 0x4
 
-gUnknown_2022B50: @ 2022B50
+gBattleTerrain: @ 2022B50
 	.space 0x4
 
 gUnknown_2022B54: @ 2022B54
@@ -186,13 +186,13 @@ gBattlerPartyIndexes: @ 2023BCE
 gBattlerPositions: @ 2023BD6
 	.space 0x4
 
-gUnknown_2023BDA: @ 2023BDA
+gActionsByTurnOrder: @ 2023BDA
 	.space 0x4
 
 gBattlerByTurnOrder: @ 2023BDE
 	.space 0x4
 
-gUnknown_2023BE2: @ 2023BE2
+gCurrentTurnActionNumber: @ 2023BE2
 	.space 0x1
 
 gCurrentActionFuncId: @ 2023BE3
@@ -240,7 +240,7 @@ gCalledMove: @ 2023D4E
 gBattleMoveDamage: @ 2023D50
 	.space 0x4
 
-gUnknown_2023D54: @ 2023D54
+gHpDealt: @ 2023D54
 	.space 0x4
 
 gTakenDmg: @ 2023D58
@@ -273,19 +273,19 @@ gAbsentBattlerFlags: @ 2023D70
 gCritMultiplier: @ 2023D71
 	.space 0x1
 
-gUnknown_2023D72: @ 2023D72
+gMultiHitCounter: @ 2023D72
 	.space 0x2
 
 gBattlescriptCurrInstr: @ 2023D74
 	.space 0x8
 
-gUnknown_2023D7C: @ 2023D7C
+gChosenActionByBattler: @ 2023D7C
 	.space 0x4
 
 gSelectionBattleScripts: @ 2023D80
 	.space 0x10
 
-gUnknown_2023D90: @ 2023D90
+gLastPrintedMoves: @ 2023D90
 	.space 0x8
 
 gLastMoves: @ 2023D98
@@ -294,13 +294,13 @@ gLastMoves: @ 2023D98
 gLastLandedMoves: @ 2023DA0
 	.space 0x8
 
-gUnknown_2023DA8: @ 2023DA8
+gLastHitByType: @ 2023DA8
 	.space 0x8
 
-gUnknown_2023DB0: @ 2023DB0
+gLastResultingMoves: @ 2023DB0
 	.space 0x8
 
-gUnknown_2023DB8: @ 2023DB8
+gLockedMoves: @ 2023DB8
 	.space 0x8
 
 gLastHitBy: @ 2023DC0
@@ -336,10 +336,10 @@ gStatuses3: @ 2023DFC
 gDisableStructs: @ 2023E0C
 	.space 0x70
 
-gUnknown_2023E7C: @ 2023E7C
+gPauseCounterBattle: @ 2023E7C
 	.space 0x2
 
-gUnknown_2023E7E: @ 2023E7E
+gPaydayMoney: @ 2023E7E
 	.space 0x2
 
 gUnknown_2023E80: @ 2023E80
@@ -375,7 +375,7 @@ gSentPokesToOpponent: @ 2023F4E
 gDynamicBasePower: @ 2023F50
 	.space 0x2
 
-gUnknown_2023F52: @ 2023F52
+gExpShareExp: @ 2023F52
 	.space 0x2
 
 gEnigmaBerries: @ 2023F54

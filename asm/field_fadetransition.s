@@ -49,7 +49,7 @@ pal_fill_for_maplights: @ 807DB58
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sav1_map_get_light_level
+	bl GetCurrentMapType
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -88,7 +88,7 @@ sub_807DBAC: @ 807DBAC
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sav1_map_get_light_level
+	bl GetCurrentMapType
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -148,7 +148,7 @@ sub_807DC18: @ 807DC18
 	cmp r0, 0
 	bne _0807DC58
 _0807DC36:
-	bl sav1_map_get_light_level
+	bl GetCurrentMapType
 	lsls r0, 24
 	lsrs r0, 24
 	ldrb r1, [r4, 0x17]
@@ -180,7 +180,7 @@ _0807DC6A:
 	thumb_func_start sub_807DC70
 sub_807DC70: @ 807DC70
 	push {r4,lr}
-	bl sav1_map_get_light_level
+	bl GetCurrentMapType
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -475,7 +475,7 @@ sub_807DE78: @ 807DE78
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sav1_map_get_light_level
+	bl GetCurrentMapType
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24

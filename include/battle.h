@@ -956,7 +956,7 @@ extern u32 gUnknown_2022B54;
 extern u8 gUnknown_2023DDC;
 extern u8 gBattlerAttacker;
 extern u8 gEffectBattler;
-extern u8 gUnknown_2023D72;
+extern u8 gMultiHitCounter;
 extern struct BattleScripting gBattleScripting;
 extern u8 gBattlerFainted;
 extern u32 gStatuses3[MAX_BATTLERS_COUNT];

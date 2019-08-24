@@ -114,7 +114,7 @@ gBattleMainFunc: @ 3004F84
 gBattleResults: @ 3004F90
 	.space 0x44
 
-gUnknown_3004FD4: @ 3004FD4
+gLeveledUpInBattle: @ 3004FD4
 	.space 0xC
 
 gBattlerControllerFuncs: @ 3004FE0

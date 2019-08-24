@@ -719,7 +719,7 @@ void BtlController_EmitMoveAnimation(u8 bufferId, u16 move, u8 turnOfMove, u16 m
     sBattleBuffersTransferData[8] = (dmg & 0x00FF0000) >> 16;
     sBattleBuffersTransferData[9] = (dmg & 0xFF000000) >> 24;
     sBattleBuffersTransferData[10] = friendship;
-    sBattleBuffersTransferData[11] = gUnknown_2023D72; // multihit in pokeem
+    sBattleBuffersTransferData[11] = gMultiHitCounter; // multihit in pokeem
     if (WEATHER_HAS_EFFECT2)
     {
         sBattleBuffersTransferData[12] = gBattleWeather;

@@ -151,7 +151,6 @@ void DoBgAffineSet(struct BgAffineDstData *dest, u32 texX, u32 texY, s16 scrX, s
     BgAffineSet(&src, dest, 1);
 }
 
-#ifdef NONMATCHING
 void CopySpriteTiles(u8 shape, u8 size, u8 *tiles, u16 *tilemap, u8 *output)
 {
     u8 x, y;
@@ -166,7 +165,7 @@ void CopySpriteTiles(u8 shape, u8 size, u8 *tiles, u16 *tilemap, u8 *output)
 
         for (x = 0; x < w; x++)
         {
-            int tile = (*tilemap & 0x3ff) * 32;
+            u16 tile = (*tilemap & 0x3ff) * 32;
             int attr = *tilemap & 0xc00;
 
             if (attr == 0)
@@ -177,7 +176,11 @@ void CopySpriteTiles(u8 shape, u8 size, u8 *tiles, u16 *tilemap, u8 *output)
             {
                 for (i = 0; i < 8; i++)
                 {
-                    DmaCopy32Defvars(3, (7 - i) * 4 + tile + tiles, output + i * 4, 4);
+                    u8 requiredForMatching = 0;
+
+                    ++requiredForMatching;
+                    --requiredForMatching;
+                    DmaCopy32Defvars(3, tile + (7 - i) * 4 + tiles, output + i * 4, 4);
                 }
             }
             else  // xflip
@@ -187,14 +190,16 @@ void CopySpriteTiles(u8 shape, u8 size, u8 *tiles, u16 *tilemap, u8 *output)
                     for (j = 0; j < 4; j++)
                     {
                         u8 i2 = i * 4;
-                        xflip[i2 + (3-j)] = (tiles[tile + i2 + j] & 0xf) << 4;
-                        xflip[i2 + (3-j)] |= tiles[tile + i2 + j] >> 4;
+                        xflip[i2 + (3 - j)] = (tiles[tile + i2 + j] & 0xf) << 4;
+                        xflip[i2 + (3 - j)] |= tiles[tile + i2 + j] >> 4;
                     }
                 }
                 if (*tilemap & 0x800)  // yflip
                 {
                     for (i = 0; i < 8; i++)
                     {
+                        ++tile;
+                        --tile;
                         DmaCopy32Defvars(3, (7 - i) * 4 + xflip, output + i * 4, 4);
                     }
                 }
@@ -209,247 +214,6 @@ void CopySpriteTiles(u8 shape, u8 size, u8 *tiles, u16 *tilemap, u8 *output)
         tilemap += filler;
     }
 }
-#else
-NAKED
-void CopySpriteTiles(u8 shape, u8 size, u8 *tiles, u16 *tilemap, u8 *output)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                "\tmov r7, r10\n"
-                "\tmov r6, r9\n"
-                "\tmov r5, r8\n"
-                "\tpush {r5-r7}\n"
-                "\tsub sp, 0x3C\n"
-                "\tstr r2, [sp, 0x20]\n"
-                "\tadds r4, r3, 0\n"
-                "\tldr r7, [sp, 0x5C]\n"
-                "\tlsls r0, 24\n"
-                "\tlsls r1, 24\n"
-                "\tldr r2, _0804504C @ =sSpriteDimensions\n"
-                "\tlsrs r1, 23\n"
-                "\tlsrs r0, 21\n"
-                "\tadds r1, r0\n"
-                "\tadds r0, r2, 0x1\n"
-                "\tadds r0, r1, r0\n"
-                "\tldrb r0, [r0]\n"
-                "\tstr r0, [sp, 0x24]\n"
-                "\tadds r1, r2\n"
-                "\tldrb r1, [r1]\n"
-                "\tstr r1, [sp, 0x28]\n"
-                "\tmovs r1, 0\n"
-                "\tcmp r1, r0\n"
-                "\tbcc _08044FF8\n"
-                "\tb _0804517A\n"
-                "_08044FF8:\n"
-                "\tmovs r0, 0x20\n"
-                "\tldr r2, [sp, 0x28]\n"
-                "\tsubs r0, r2\n"
-                "\tlsls r0, 1\n"
-                "\tstr r0, [sp, 0x2C]\n"
-                "_08045002:\n"
-                "\tmovs r2, 0\n"
-                "\tadds r1, 0x1\n"
-                "\tstr r1, [sp, 0x34]\n"
-                "\tldr r3, [sp, 0x28]\n"
-                "\tcmp r2, r3\n"
-                "\tbcc _08045010\n"
-                "\tb _08045168\n"
-                "_08045010:\n"
-                "\tldr r0, _08045050 @ =0x040000d4\n"
-                "\tmov r8, r0\n"
-                "_08045014:\n"
-                "\tldrh r1, [r4]\n"
-                "\tldr r0, _08045054 @ =0x000003ff\n"
-                "\tands r0, r1\n"
-                "\tlsls r0, 5\n"
-                "\tmov r12, r0\n"
-                "\tmovs r0, 0xC0\n"
-                "\tlsls r0, 4\n"
-                "\tands r0, r1\n"
-                "\tmov r3, sp\n"
-                "\tstrh r1, [r3, 0x38]\n"
-                "\tcmp r0, 0\n"
-                "\tbne _0804505C\n"
-                "\tldr r0, [sp, 0x20]\n"
-                "\tadd r0, r12\n"
-                "\tmov r1, r8\n"
-                "\tstr r0, [r1]\n"
-                "\tstr r7, [r1, 0x4]\n"
-                "\tldr r3, _08045058 @ =0x84000008\n"
-                "\tstr r3, [r1, 0x8]\n"
-                "\tldr r0, [r1, 0x8]\n"
-                "\tadds r4, 0x2\n"
-                "\tstr r4, [sp, 0x30]\n"
-                "\tadds r7, 0x20\n"
-                "\tmov r10, r7\n"
-                "\tadds r2, 0x1\n"
-                "\tmov r9, r2\n"
-                "\tb _08045156\n"
-                "\t.align 2, 0\n"
-                "_0804504C: .4byte sSpriteDimensions\n"
-                "_08045050: .4byte 0x040000d4\n"
-                "_08045054: .4byte 0x000003ff\n"
-                "_08045058: .4byte 0x84000008\n"
-                "_0804505C:\n"
-                "\tmovs r1, 0x80\n"
-                "\tlsls r1, 4\n"
-                "\tcmp r0, r1\n"
-                "\tbne _080450AC\n"
-                "\tmovs r3, 0\n"
-                "\tadds r4, 0x2\n"
-                "\tstr r4, [sp, 0x30]\n"
-                "\tmovs r0, 0x20\n"
-                "\tadds r0, r7\n"
-                "\tmov r10, r0\n"
-                "\tadds r2, 0x1\n"
-                "\tmov r9, r2\n"
-                "\tldr r4, _080450A4 @ =0x040000d4\n"
-                "\tldr r6, _080450A8 @ =0x84000001\n"
-                "\tmovs r5, 0x7\n"
-                "_0804507A:\n"
-                "\tlsls r2, r3, 24\n"
-                "\tasrs r2, 24\n"
-                "\tsubs r0, r5, r2\n"
-                "\tlsls r0, 2\n"
-                "\tadd r0, r12\n"
-                "\tldr r1, [sp, 0x20]\n"
-                "\tadds r0, r1, r0\n"
-                "\tlsls r1, r2, 2\n"
-                "\tadds r1, r7, r1\n"
-                "\tstr r0, [r4]\n"
-                "\tstr r1, [r4, 0x4]\n"
-                "\tstr r6, [r4, 0x8]\n"
-                "\tldr r0, [r4, 0x8]\n"
-                "\tadds r2, 0x1\n"
-                "\tlsls r2, 24\n"
-                "\tlsrs r3, r2, 24\n"
-                "\tasrs r2, 24\n"
-                "\tcmp r2, 0x7\n"
-                "\tble _0804507A\n"
-                "\tb _08045156\n"
-                "\t.align 2, 0\n"
-                "_080450A4: .4byte 0x040000d4\n"
-                "_080450A8: .4byte 0x84000001\n"
-                "_080450AC:\n"
-                "\tmovs r3, 0\n"
-                "\tadds r4, 0x2\n"
-                "\tstr r4, [sp, 0x30]\n"
-                "\tmovs r0, 0x20\n"
-                "\tadds r0, r7\n"
-                "\tmov r10, r0\n"
-                "\tadds r2, 0x1\n"
-                "\tmov r9, r2\n"
-                "_080450BC:\n"
-                "\tmovs r2, 0\n"
-                "\tlsls r4, r3, 24\n"
-                "\tlsls r0, r4, 2\n"
-                "\tlsrs r0, 24\n"
-                "\tadds r6, r0, 0x3\n"
-                "\tmov r1, r12\n"
-                "\tadds r5, r1, r0\n"
-                "_080450CA:\n"
-                "\tlsls r1, r2, 24\n"
-                "\tasrs r1, 24\n"
-                "\tsubs r0, r6, r1\n"
-                "\tmov r2, sp\n"
-                "\tadds r3, r2, r0\n"
-                "\tadds r0, r5, r1\n"
-                "\tldr r2, [sp, 0x20]\n"
-                "\tadds r0, r2, r0\n"
-                "\tldrb r2, [r0]\n"
-                "\tmovs r0, 0xF\n"
-                "\tands r0, r2\n"
-                "\tlsls r0, 4\n"
-                "\tlsrs r2, 4\n"
-                "\torrs r0, r2\n"
-                "\tstrb r0, [r3]\n"
-                "\tadds r1, 0x1\n"
-                "\tlsls r1, 24\n"
-                "\tlsrs r2, r1, 24\n"
-                "\tasrs r1, 24\n"
-                "\tcmp r1, 0x3\n"
-                "\tble _080450CA\n"
-                "\tmovs r3, 0x80\n"
-                "\tlsls r3, 17\n"
-                "\tadds r0, r4, r3\n"
-                "\tlsrs r3, r0, 24\n"
-                "\tasrs r0, 24\n"
-                "\tcmp r0, 0x7\n"
-                "\tble _080450BC\n"
-                "\tmovs r0, 0x80\n"
-                "\tlsls r0, 4\n"
-                "\tmov r1, sp\n"
-                "\tldrh r1, [r1, 0x38]\n"
-                "\tands r0, r1\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _08045148\n"
-                "\tmovs r3, 0\n"
-                "\tldr r4, _08045140 @ =0x040000d4\n"
-                "\tldr r6, _08045144 @ =0x84000001\n"
-                "\tmovs r5, 0x7\n"
-                "_08045118:\n"
-                "\tlsls r1, r3, 24\n"
-                "\tasrs r1, 24\n"
-                "\tsubs r0, r5, r1\n"
-                "\tlsls r0, 2\n"
-                "\tmov r3, sp\n"
-                "\tadds r2, r3, r0\n"
-                "\tlsls r0, r1, 2\n"
-                "\tadds r0, r7, r0\n"
-                "\tstr r2, [r4]\n"
-                "\tstr r0, [r4, 0x4]\n"
-                "\tstr r6, [r4, 0x8]\n"
-                "\tldr r0, [r4, 0x8]\n"
-                "\tadds r1, 0x1\n"
-                "\tlsls r1, 24\n"
-                "\tlsrs r3, r1, 24\n"
-                "\tasrs r1, 24\n"
-                "\tcmp r1, 0x7\n"
-                "\tble _08045118\n"
-                "\tb _08045156\n"
-                "\t.align 2, 0\n"
-                "_08045140: .4byte 0x040000d4\n"
-                "_08045144: .4byte 0x84000001\n"
-                "_08045148:\n"
-                "\tmov r0, sp\n"
-                "\tmov r1, r8\n"
-                "\tstr r0, [r1]\n"
-                "\tstr r7, [r1, 0x4]\n"
-                "\tldr r2, _0804518C @ =0x84000008\n"
-                "\tstr r2, [r1, 0x8]\n"
-                "\tldr r0, [r1, 0x8]\n"
-                "_08045156:\n"
-                "\tldr r4, [sp, 0x30]\n"
-                "\tmov r7, r10\n"
-                "\tmov r3, r9\n"
-                "\tlsls r0, r3, 24\n"
-                "\tlsrs r2, r0, 24\n"
-                "\tldr r0, [sp, 0x28]\n"
-                "\tcmp r2, r0\n"
-                "\tbcs _08045168\n"
-                "\tb _08045014\n"
-                "_08045168:\n"
-                "\tldr r1, [sp, 0x2C]\n"
-                "\tadds r4, r1\n"
-                "\tldr r2, [sp, 0x34]\n"
-                "\tlsls r0, r2, 24\n"
-                "\tlsrs r1, r0, 24\n"
-                "\tldr r3, [sp, 0x24]\n"
-                "\tcmp r1, r3\n"
-                "\tbcs _0804517A\n"
-                "\tb _08045002\n"
-                "_0804517A:\n"
-                "\tadd sp, 0x3C\n"
-                "\tpop {r3-r5}\n"
-                "\tmov r8, r3\n"
-                "\tmov r9, r4\n"
-                "\tmov r10, r5\n"
-                "\tpop {r4-r7}\n"
-                "\tpop {r0}\n"
-                "\tbx r0\n"
-                "\t.align 2, 0\n"
-                "_0804518C: .4byte 0x84000008");
-}
-#endif // NONMATCHING
 
 int CountTrailingZeroBits(u32 value)
 {

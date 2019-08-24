@@ -1380,10 +1380,9 @@ static bool8 BT_Phase2FullScreenWave_UpdateWave(struct Task *task)
     for (i = 0; i < 160; ++i, theta += frequency)
     {
         s16 var = theta >> 8;
-
-        #ifndef NONMATCHING
-        asm("");
-        #endif
+        
+        ++var;
+        --var;
         gScanlineEffectRegBuffers[0][i] = sTransitionStructPtr->bg123VOfs + Sin(var, amplitude);
     }
     if (++task->tDelayForFade == 41)

@@ -1504,13 +1504,13 @@ sub_800CF3C: @ 800CF3C
 	cmp r0, 0
 	beq _0800CF64
 	movs r0, 0x1
-	bl pokedex_count
+	bl GetNationalPokedexCount
 	b _0800CF6A
 	.align 2, 0
 _0800CF60: .4byte 0x00000829
 _0800CF64:
 	movs r0, 0x1
-	bl sub_8088EDC
+	bl GetKantoPokedexCount
 _0800CF6A:
 	lsls r0, 16
 	lsrs r6, r0, 16

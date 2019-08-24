@@ -132,7 +132,7 @@ static void Task_DiplomaInit(u8 taskId)
         CopyToBgTilemapBuffer(1, gUnknown_84154E8, 0, 0);
         break;
     case 4:
-        if (HasAllKantoMons())
+        if (HasAllMons())
         {
             SetGpuReg(REG_OFFSET_BG1HOFS, 0x100);
         }
@@ -265,7 +265,7 @@ static void DiplomaPrintText(void)
     u32 width;
     DynamicPlaceholderTextUtil_Reset();
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gSaveBlock2Ptr->playerName);
-    if (HasAllKantoMons())
+    if (HasAllMons())
     {
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gUnknown_841B68F);
     }

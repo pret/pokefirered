@@ -701,7 +701,7 @@ mapdata_load_assets_to_gpu_and_full_redraw: @ 8055148
 	ldr r0, [r4]
 	bl apply_map_tileset1_tileset2_palette
 	bl DrawWholeMapView
-	bl cur_mapheader_run_tileset_funcs_after_some_cpuset
+	bl InitTilesetAnimations
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1732,7 +1732,7 @@ _080558D4:
 	adds r4, 0x1
 	cmp r4, 0xC
 	ble _080558D4
-	bl sub_806FFB0
+	bl InitSecondaryTilesetAnimation
 	bl UpdateLocationHistoryForRoamer
 	bl RoamerMove
 	bl sub_8110920
@@ -3392,7 +3392,7 @@ sub_8056578: @ 8056578
 	bl UpdateCameraPanning
 	bl BuildOamBuffer
 	bl UpdatePaletteFade
-	bl sub_806FFBC
+	bl UpdateTilesetAnimations
 	bl DoScheduledBgTilemapCopiesToVram
 	pop {r0}
 	bx r0
@@ -4051,7 +4051,7 @@ _08056B30:
 	bl DrawWholeMapView
 	b _08056B62
 _08056B36:
-	bl cur_mapheader_run_tileset_funcs_after_some_cpuset
+	bl InitTilesetAnimations
 	b _08056B62
 _08056B3C:
 	ldr r0, _08056B54 @ =gWirelessCommType
@@ -4193,7 +4193,7 @@ _08056C6C:
 	bl DrawWholeMapView
 	b _08056CCA
 _08056C72:
-	bl cur_mapheader_run_tileset_funcs_after_some_cpuset
+	bl InitTilesetAnimations
 	b _08056CCA
 _08056C78:
 	bl sub_80561B4
@@ -4382,7 +4382,7 @@ _08056E0C:
 	bl DrawWholeMapView
 	b _08056E3E
 _08056E12:
-	bl cur_mapheader_run_tileset_funcs_after_some_cpuset
+	bl InitTilesetAnimations
 	b _08056E3E
 _08056E18:
 	ldr r0, _08056E30 @ =gWirelessCommType
@@ -5093,7 +5093,7 @@ _08057404:
 	bl DrawWholeMapView
 	b _08057412
 _0805740A:
-	bl cur_mapheader_run_tileset_funcs_after_some_cpuset
+	bl InitTilesetAnimations
 	bl sub_815A540
 _08057412:
 	ldrb r0, [r4]
@@ -5176,7 +5176,7 @@ _080574B8:
 	bl UpdateCameraPanning
 	bl BuildOamBuffer
 	bl UpdatePaletteFade
-	bl sub_806FFBC
+	bl UpdateTilesetAnimations
 	bl DoScheduledBgTilemapCopiesToVram
 	cmp r4, 0
 	beq _080574E0
@@ -5442,7 +5442,7 @@ _0805770C:
 	bl DrawWholeMapView
 	b _0805772A
 _08057712:
-	bl cur_mapheader_run_tileset_funcs_after_some_cpuset
+	bl InitTilesetAnimations
 	ldr r2, _08057734 @ =gPaletteFade
 	ldrb r1, [r2, 0x8]
 	movs r0, 0x7F

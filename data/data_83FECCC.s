@@ -633,10 +633,9 @@ gUnknown_84445FA:: @ 84445FA
 	.incbin "baserom.gba", 0x4445FA, 0x304
 
 gUnknown_84448FE:: @ 84448FE
-	.incbin "baserom.gba", 0x4448FE, 0x9F52
+	.incbin "baserom.gba", 0x4448FE, 0x336
 
-gUnknown_844E850:: @ 844E850
-	.incbin "baserom.gba", 0x44E850, 0x366C
+	.section .rodata.8451EBC
 
 gUnknown_8451EBC:: @ 8451EBC
 	.incbin "baserom.gba", 0x451EBC, 0x10

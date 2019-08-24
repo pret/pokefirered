@@ -107,7 +107,7 @@ SECTIONS {
         src/coord_event_weather.o(.text);
         asm/field_tasks.o(.text);
         asm/start_menu.o(.text);
-        asm/tileset_anims.o(.text);
+        src/tileset_anims.o(.text);
         asm/palette.o(.text);
         src/sound.o(.text);
         asm/battle_anim.o(.text);

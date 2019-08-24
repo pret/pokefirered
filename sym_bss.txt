@@ -104,27 +104,7 @@ gUnknown_3000FA8: @ 3000FA8
 gUnknown_3000FA9: @ 3000FA9
 	.space 0x3
 
-gUnknown_3000FAC: @ 3000FAC
-	.space 0x2
-
-sPrimaryTilesetCBCounter: @ 3000FAE
-	.space 0x2
-
-sPrimaryTilesetCBBufferSize: @ 3000FB0
-	.space 0x2
-
-sSecondaryTilesetCBCounter: @ 3000FB2
-	.space 0x2
-
-sSecondaryTilesetCBBufferSize: @ 3000FB4
-	.space 0x4
-
-sPrimaryTilesetCB: @ 3000FB8
-	.space 0x4
-
-sSecondaryTilesetCB: @ 3000FBC
-	.space 0x4
-
+	.include "src/tileset_anims.o"
 	.include "src/sound.o"
 
 	.align 2

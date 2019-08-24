@@ -16,7 +16,7 @@ CeladonCity_Condominiums_3F_EventScript_16C3ED:: @ 816C3ED
 CeladonCity_Condominiums_3F_EventScript_16C3F6:: @ 816C3F6
 	lock
 	faceplayer
-	specialvar VAR_RESULT, sub_8088F58
+	specialvar VAR_RESULT, HasAllKantoMons
 	compare_var_to_value VAR_RESULT, 1
 	goto_if_eq EventScript_16C412
 	msgbox gUnknown_8196356

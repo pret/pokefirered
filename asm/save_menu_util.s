@@ -59,11 +59,11 @@ _080F8034:
 	cmp r0, 0
 	beq _080F8044
 	movs r0, 0x1
-	bl pokedex_count
+	bl GetNationalPokedexCount
 	b _080F804A
 _080F8044:
 	movs r0, 0x1
-	bl sub_8088EDC
+	bl GetKantoPokedexCount
 _080F804A:
 	adds r1, r0, 0
 	lsls r1, 16

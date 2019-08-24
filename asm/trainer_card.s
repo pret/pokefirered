@@ -973,7 +973,7 @@ _080897EE:
 	ldr r0, _08089890 @ =0x00000829
 	bl FlagGet
 	strb r0, [r5, 0x2]
-	bl sub_8088F24
+	bl HasAllHoennMons
 	strb r0, [r5, 0x3]
 	bl sub_808A0E0
 	strh r0, [r5, 0xC]
@@ -1062,7 +1062,7 @@ _080898BA:
 	mov r0, r8
 	strb r0, [r5, 0x1]
 _080898BE:
-	bl sub_8088F58
+	bl HasAllKantoMons
 	lsls r0, 16
 	cmp r0, 0
 	beq _080898CE
@@ -1070,7 +1070,7 @@ _080898BE:
 	adds r0, 0x1
 	strb r0, [r5, 0x1]
 _080898CE:
-	bl HasAllKantoMons
+	bl HasAllMons
 	lsls r0, 16
 	cmp r0, 0
 	beq _080898DE
@@ -1115,9 +1115,9 @@ _08089918:
 	movs r0, 0x1
 	strb r0, [r5, 0x1]
 _0808991C:
-	bl sub_8088F58
-	strb r0, [r5, 0x3]
 	bl HasAllKantoMons
+	strb r0, [r5, 0x3]
+	bl HasAllMons
 	adds r6, r5, 0
 	adds r6, 0x4D
 	strb r0, [r6]
@@ -2043,11 +2043,11 @@ sub_808A0E0: @ 808A0E0
 	cmp r0, 0
 	bne _0808A0F2
 	movs r0, 0x1
-	bl sub_8088EDC
+	bl GetKantoPokedexCount
 	b _0808A0F8
 _0808A0F2:
 	movs r0, 0x1
-	bl pokedex_count
+	bl GetNationalPokedexCount
 _0808A0F8:
 	lsls r0, 16
 	lsrs r0, 16

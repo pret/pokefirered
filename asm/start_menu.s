@@ -820,7 +820,7 @@ sub_806F3CC: @ 806F3CC
 	cmp r1, r0
 	bne _0806F408
 	movs r0, 0
-	bl pokedex_count
+	bl GetNationalPokedexCount
 	lsls r0, 16
 	cmp r0, 0
 	bne _0806F408

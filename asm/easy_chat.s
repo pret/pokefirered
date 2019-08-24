@@ -51,7 +51,7 @@ start_menu_is_selected_item_valid: @ 80BD754
 	cmp r0, 0x15
 	bne _080BD76C
 	movs r0, 0
-	bl pokedex_count
+	bl GetNationalPokedexCount
 	lsls r0, 16
 	lsrs r0, 16
 	b _080BD782
@@ -1054,7 +1054,7 @@ sub_80BDE88: @ 80BDE88
 	ldr r1, [r4]
 	movs r0, 0
 	strh r0, [r1]
-	bl pokedex_count
+	bl GetNationalPokedexCount
 	lsls r0, 16
 	cmp r0, 0
 	beq _080BDEB0

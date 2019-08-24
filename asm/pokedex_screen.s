@@ -6230,7 +6230,7 @@ sub_8105800: @ 8105800
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r2, _08105860 @ =gUnknown_844E850
+	ldr r2, _08105860 @ =gPokedexEntries
 	adds r5, r1, r2
 	movs r4, 0
 	movs r1, 0x1
@@ -6260,7 +6260,7 @@ _08105840:
 	bls _08105840
 	b _08105878
 	.align 2, 0
-_08105860: .4byte gUnknown_844E850
+_08105860: .4byte gPokedexEntries
 _08105864:
 	movs r1, 0xAC
 _08105866:
@@ -6331,7 +6331,7 @@ sub_81058C4: @ 81058C4
 	mov r8, r3
 	adds r0, r1, 0
 	bl SpeciesToNationalPokedexNum
-	ldr r2, _08105974 @ =gUnknown_844E850
+	ldr r2, _08105974 @ =gPokedexEntries
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
@@ -6395,7 +6395,7 @@ _0810593A:
 	strb r0, [r1]
 	b _08105998
 	.align 2, 0
-_08105974: .4byte gUnknown_844E850
+_08105974: .4byte gPokedexEntries
 _08105978: .4byte gUnknown_8415F98
 _0810597C: .4byte 0x00002710
 _08105980:
@@ -6514,7 +6514,7 @@ sub_8105A3C: @ 8105A3C
 	mov r9, r3
 	adds r0, r1, 0
 	bl SpeciesToNationalPokedexNum
-	ldr r2, _08105ACC @ =gUnknown_844E850
+	ldr r2, _08105ACC @ =gPokedexEntries
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
@@ -6565,7 +6565,7 @@ _08105AAC:
 	strb r5, [r4]
 	b _08105ADC
 	.align 2, 0
-_08105ACC: .4byte gUnknown_844E850
+_08105ACC: .4byte gPokedexEntries
 _08105AD0: .4byte 0x000186a0
 _08105AD4: .4byte 0x000011b8
 _08105AD8:
@@ -6825,7 +6825,7 @@ sub_8105CB0: @ 8105CB0
 	lsls r0, 24
 	cmp r0, 0
 	beq _08105D5C
-	ldr r1, _08105D44 @ =gUnknown_844E850
+	ldr r1, _08105D44 @ =gPokedexEntries
 	lsls r0, r4, 3
 	adds r0, r4
 	lsls r0, 2
@@ -6876,7 +6876,7 @@ sub_8105CB0: @ 8105CB0
 	lsrs r5, r0, 24
 	b _08105D4A
 	.align 2, 0
-_08105D44: .4byte gUnknown_844E850
+_08105D44: .4byte gPokedexEntries
 _08105D48:
 	movs r5, 0
 _08105D4A:
@@ -7874,7 +7874,7 @@ _08106534:
 	adds r0, r1
 	lsls r0, 2
 	add r0, r10
-	ldr r1, _081066C8 @ =gUnknown_844E850
+	ldr r1, _081066C8 @ =gPokedexEntries
 	ldr r2, [sp, 0x18]
 	lsls r4, r2, 3
 	adds r4, r2
@@ -7979,7 +7979,7 @@ _081066B8: .4byte gUnknown_203ACF0
 _081066BC: .4byte gUnknown_8452368
 _081066C0: .4byte 0x0000ffff
 _081066C4: .4byte gSprites
-_081066C8: .4byte gUnknown_844E850
+_081066C8: .4byte gPokedexEntries
 _081066CC: .4byte gSaveBlock2Ptr
 _081066D0:
 	ldr r0, [r7]

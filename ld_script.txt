@@ -128,7 +128,7 @@ SECTIONS {
         asm/field_effect.o(.text);
         src/scanline_effect.o(.text);
         asm/option_menu.o(.text);
-        asm/pokedex.o(.text);
+        src/pokedex.o(.text);
         asm/trainer_card.o(.text);
         asm/pokemon_storage_system.o(.text);
         asm/pokemon_icon.o(.text);
@@ -422,13 +422,15 @@ SECTIONS {
         data/data_83F5738.o(.rodata.83FB134);
         src/save.o(.rodata);
         data/data_83FECCC.o(.rodata);
-		src/intro.o(.rodata);
+        src/intro.o(.rodata);
         data/data_83FECCC.o(.rodata.battle_anim_special);
         src/diploma.o(.rodata);
         data/strings.o(.rodata);
         data/data_83FECCC.o(.rodata.841EE44);
         src/new_menu_helpers.o(.rodata);
         data/data_83FECCC.o(.rodata.841F4B4);
+        src/pokedex.o(.rodata);
+        data/data_83FECCC.o(.rodata.8451EBC);
         src/list_menu.o(.rodata);
         data/data_83FECCC.o(.rodata.8452CF4);
         src/save_location.o(.rodata);
@@ -547,7 +549,7 @@ SECTIONS {
         data/multiboot_pokemon_colosseum.o(.rodata);
     } =0
 
-	. = 0x08D00000;
+    . = 0x08D00000;
     gfx_data :
     ALIGN(4)
     {

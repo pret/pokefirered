@@ -5766,8 +5766,8 @@ _08012BC0: .4byte gLastHitBy
 _08012BC4: .4byte gBattleResources
 	thumb_func_end SwitchInClearSetData
 
-	thumb_func_start sub_8012BC8
-sub_8012BC8: @ 8012BC8
+	thumb_func_start FaintClearSetData
+FaintClearSetData: @ 8012BC8
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -6257,7 +6257,7 @@ _08012F9C: .4byte gLastPrintedMoves
 _08012FA0: .4byte gLastHitBy
 _08012FA4: .4byte gBattleResources
 _08012FA8: .4byte gBaseStats
-	thumb_func_end sub_8012BC8
+	thumb_func_end FaintClearSetData
 
 	thumb_func_start BattleIntroGetMonsData
 BattleIntroGetMonsData: @ 8012FAC

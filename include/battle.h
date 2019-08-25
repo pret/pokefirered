@@ -432,12 +432,7 @@ struct BattleCallbacksStack
 
 struct StatsArray
 {
-    u16 hp;
-    u16 atk;
-    u16 def;
-    u16 spd;
-    u16 spAtk;
-    u16 spDef;
+    u16 stats[NUM_STATS];
 };
 
 struct BattleResources
@@ -495,7 +490,7 @@ struct BattleStruct
     u8 turnCountersTracker;
     u8 wrappedMove[MAX_BATTLERS_COUNT * 2]; // Leftover from Ruby's ewram access.
     u8 moveTarget[MAX_BATTLERS_COUNT];
-    u8 expGetterId;
+    u8 expGetterMonId;
     u8 field_11;
     u8 wildVictorySong;
     u8 dynamicMoveType;
@@ -571,7 +566,7 @@ struct BattleStruct
     u16 castformPalette[MAX_BATTLERS_COUNT][16];
     u8 wishPerishSongState;
     u8 wishPerishSongBattlerId;
-    u8 field_182; // overworldWeatherDone?
+    u8 field_182;
     u8 field_183;
     u8 field_184[124]; // currently unknown
 }; // size == 0x200 bytes
@@ -985,5 +980,10 @@ extern u8 gNumberOfMovesToChoose;
 extern u16 gLastHitByType[MAX_BATTLERS_COUNT];
 extern s32 gHpDealt;
 extern u16 gPauseCounterBattle;
+extern u16 gPaydayMoney;
+extern u16 gLockedMoves[MAX_BATTLERS_COUNT];
+extern u8 gCurrentTurnActionNumber;
+extern u16 gExpShareExp;
+extern u8 gLeveledUpInBattle;
 
 #endif // GUARD_BATTLE_H

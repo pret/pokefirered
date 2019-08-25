@@ -13,6 +13,16 @@ enum {
     AILMENT_BRN
 };
 
+enum
+{
+    PARTY_CHOOSE_MON,
+    PARTY_MUST_CHOOSE_MON,
+    PARTY_CANT_SWITCH,
+    PARTY_USE_ITEM_ON,
+    PARTY_ABILITY_PREVENTS,
+    PARTY_GIVE_ITEM,
+};
+
 struct Struct203B0A0
 {
     MainCallback exitCallback;

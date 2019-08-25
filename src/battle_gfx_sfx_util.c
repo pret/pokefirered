@@ -17,6 +17,7 @@
 #include "battle_ai_script_commands.h"
 #include "battle_anim.h"
 #include "battle_interface.h"
+#include "constants/battle_anim.h"
 #include "constants/species.h"
 #include "constants/moves.h"
 #include "constants/songs.h"

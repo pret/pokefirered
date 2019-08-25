@@ -623,7 +623,7 @@ u16 SpeciesToCryId(u16 species);
 void DrawSpindaSpots(u16 species, u32 personality, u8 *dest, u8 a4);
 void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies);
 bool8 sub_80435E0(void);
-bool8 GetLinkTrainerFlankId(u8 linkPlayerId);
+bool16 GetLinkTrainerFlankId(u8 linkPlayerId);
 s32 GetBattlerMultiplayerId(u16 a1);
 u8 GetTrainerEncounterMusicId(u16 trainer);
 void AdjustFriendship(struct Pokemon *mon, u8 event);

@@ -6465,9 +6465,9 @@ bool8 sub_80435E0(void)
     return retVal;
 }
 
-bool8 GetLinkTrainerFlankId(u8 linkPlayerId)
+bool16 GetLinkTrainerFlankId(u8 linkPlayerId)
 {
-    bool8 retVal = FALSE;
+    bool16 retVal = FALSE;
     switch (gLinkPlayers[linkPlayerId].id)
     {
     case 0:

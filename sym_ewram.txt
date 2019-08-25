@@ -1124,12 +1124,10 @@ gUnknown_203ABE4: @ 203ABE4
 gUnknown_203ABE8: @ 203ABE8
 	.space 0x4
 
-gUnknown_203ABEC: @ 203ABEC
-	.space 0x1
+	.align 2
+	.include "src/map_preview_screen.o"
 
-gUnknown_203ABED: @ 203ABED
-	.space 0x3
-
+	.align 2
 gUnknown_203ABF0: @ 203ABF0
 	.space 0x18
 

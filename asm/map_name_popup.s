@@ -388,7 +388,7 @@ sub_8098400: @ 8098400
 	ldrb r1, [r4, 0x14]
 	add r0, sp, 0xC
 	movs r2, 0
-	bl sub_80C4D78
+	bl GetMapName
 	adds r2, r0, 0
 	movs r0, 0x1A
 	ldrsb r0, [r4, r0]

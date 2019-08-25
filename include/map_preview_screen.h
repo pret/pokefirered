@@ -36,7 +36,7 @@ enum MapPreviewScreenId
 
 struct MapPreviewScreen
 {
-    u8 id;
+    u8 mapsec;
     bool8 forceFirstTime;
     u16 flagId;
     const void * tilesptr;

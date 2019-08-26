@@ -223,4 +223,7 @@ extern const u8 gText_LinkStandby[];
 extern const u8 gUnknown_83FE725[];
 extern const u8 gText_WhatWillPkmnDo[];
 
+// battle_script_commands
+extern const u8 gText_BattleYesNoChoice[];
+
 #endif //GUARD_STRINGS_H

@@ -270,8 +270,8 @@ _08134730: .4byte 0x00003204
 _08134734: .4byte sub_8135C34
 	thumb_func_end sub_81344F8
 
-	thumb_func_start sub_8134738
-sub_8134738: @ 8134738
+	thumb_func_start ShowSelectMovePokemonSummaryScreen
+ShowSelectMovePokemonSummaryScreen: @ 8134738
 	push {r4,r5,lr}
 	sub sp, 0x4
 	ldr r5, [sp, 0x10]
@@ -296,7 +296,7 @@ sub_8134738: @ 8134738
 	.align 2, 0
 _08134764: .4byte gUnknown_203B140
 _08134768: .4byte 0x00003260
-	thumb_func_end sub_8134738
+	thumb_func_end ShowSelectMovePokemonSummaryScreen
 
 	thumb_func_start sub_813476C
 sub_813476C: @ 813476C

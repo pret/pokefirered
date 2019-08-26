@@ -75,7 +75,7 @@ void sub_803B3AC(void); // unused
 void sub_803B598(void); // unused
 void BattleTurnPassed(void);
 u8 IsRunningFromBattleImpossible(void);
-void sub_803BDA0(u8 bank);
+void sub_8013F6C(u8 battlerId);
 void SwapTurnOrder(u8 id1, u8 id2);
 u8 GetWhoStrikesFirst(u8 bank1, u8 bank2, bool8 ignoreChosenMoves);
 void RunBattleScriptCommands_PopCallbacksStack(void);
@@ -98,5 +98,6 @@ extern const u8 gStatusConditionString_LoveJpn[8];
 extern const u8 * const gStatusConditionStringsTable[7][2];
 
 extern const u8 gTypeEffectiveness[336];
+extern const struct TrainerMoney gTrainerMoneyTable[];
 
 #endif // GUARD_BATTLE_MAIN_H

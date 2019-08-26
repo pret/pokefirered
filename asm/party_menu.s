@@ -14645,7 +14645,7 @@ sub_8125E4C: @ 8125E4C
 	ldr r3, _08125E80 @ =sub_8125E84
 	ldrh r4, [r4, 0xE]
 	str r4, [sp]
-	bl sub_8134738
+	bl ShowSelectMovePokemonSummaryScreen
 	add sp, 0x4
 	pop {r4}
 	pop {r0}

@@ -2449,7 +2449,7 @@ _080CF2C2:
 	ldr r4, _080CF308 @ =gMoveToLearn
 	ldrh r4, [r4]
 	str r4, [sp]
-	bl sub_8134738
+	bl ShowSelectMovePokemonSummaryScreen
 	ldrh r0, [r5, 0x14]
 	adds r0, 0x1
 	strh r0, [r5, 0x14]
@@ -3718,7 +3718,7 @@ _080CFDC6:
 	ldr r4, _080CFE2C @ =gMoveToLearn
 	ldrh r4, [r4]
 	str r4, [sp]
-	bl sub_8134738
+	bl ShowSelectMovePokemonSummaryScreen
 	ldrh r0, [r5, 0x14]
 	adds r0, 0x1
 	strh r0, [r5, 0x14]

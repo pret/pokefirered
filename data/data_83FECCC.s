@@ -1,3 +1,5 @@
+#include "constants/region_map.h"
+#include "constants/flags.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 	.section .rodata
@@ -382,17 +384,9 @@ gTMCaseMainWindowPalette:: @ 841F408
 	.section .rodata.841F4B4
 	.align 2
 gUnknown_841F4B4:: @ 841F4B4
-	.incbin "baserom.gba", 0x41F4B4, 0x1F534
+	.incbin "baserom.gba", 0x41f4b4, 0x20
 
-gUnknown_843E9E8:: @ 843E9E8
-	.incbin "baserom.gba", 0x43E9E8, 0x1C0
-
-gUnknown_843EBA8:: @ 843EBA8
-	.incbin "baserom.gba", 0x43EBA8, 0x8
-
-gUnknown_843EBB0:: @ 843EBB0
-	.incbin "baserom.gba", 0x43EBB0, 0x4
-
+	.section .rodata.843EBB4
 gUnknown_843EBB4:: @ 843EBB4
 	.incbin "baserom.gba", 0x43EBB4, 0x18
 

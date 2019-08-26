@@ -368,21 +368,21 @@ static u8 ListMenuInitInternal(struct ListMenuTemplate *listMenuTemplate, u16 sc
 
 static void ListMenuPrint(struct ListMenu *list, const u8 *str, u8 x, u8 y)
 {
-    struct TextColor colors;
+    u8 colors[3];
     if (gListMenuOverride.enabled)
     {
-        colors.fgColor = gListMenuOverride.fillValue;
-        colors.bgColor = gListMenuOverride.cursorPal;
-        colors.shadowColor = gListMenuOverride.cursorShadowPal;
-        AddTextPrinterParameterized4(list->template.windowId, gListMenuOverride.fontId, x, y, gListMenuOverride.lettersSpacing, 0, &colors, TEXT_SPEED_FF, str);
+        colors[0] = gListMenuOverride.fillValue;
+        colors[1] = gListMenuOverride.cursorPal;
+        colors[2] = gListMenuOverride.cursorShadowPal;
+        AddTextPrinterParameterized4(list->template.windowId, gListMenuOverride.fontId, x, y, gListMenuOverride.lettersSpacing, 0, colors, TEXT_SPEED_FF, str);
         gListMenuOverride.enabled = FALSE;
     }
     else
     {
-        colors.fgColor = list->template.fillValue;
-        colors.bgColor = list->template.cursorPal;
-        colors.shadowColor = list->template.cursorShadowPal;
-        AddTextPrinterParameterized4(list->template.windowId, list->template.fontId, x, y, list->template.lettersSpacing, 0, &colors, TEXT_SPEED_FF, str);
+        colors[0] = list->template.fillValue;
+        colors[1] = list->template.cursorPal;
+        colors[2] = list->template.cursorShadowPal;
+        AddTextPrinterParameterized4(list->template.windowId, list->template.fontId, x, y, list->template.lettersSpacing, 0, colors, TEXT_SPEED_FF, str);
     }
 }
 

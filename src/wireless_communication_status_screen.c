@@ -329,37 +329,37 @@ void sub_814F46C(u8 taskId)
 
 void sub_814F65C(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 palIdx)
 {
-    struct TextColor textColor;
+    u8 textColor[3];
     switch (palIdx)
     {
     case 0:
-        textColor.fgColor = 0;
-        textColor.bgColor = 2;
-        textColor.shadowColor = 3;
+        textColor[0] = 0;
+        textColor[1] = 2;
+        textColor[2] = 3;
         break;
     case 1:
-        textColor.fgColor = 0;
-        textColor.bgColor = 1;
-        textColor.shadowColor = 3;
+        textColor[0] = 0;
+        textColor[1] = 1;
+        textColor[2] = 3;
         break;
     case 2:
-        textColor.fgColor = 0;
-        textColor.bgColor = 4;
-        textColor.shadowColor = 5;
+        textColor[0] = 0;
+        textColor[1] = 4;
+        textColor[2] = 5;
         break;
     case 3:
-        textColor.fgColor = 0;
-        textColor.bgColor = 7;
-        textColor.shadowColor = 6;
+        textColor[0] = 0;
+        textColor[1] = 7;
+        textColor[2] = 6;
         break;
     case 4:
-        textColor.fgColor = 0;
-        textColor.bgColor = 1;
-        textColor.shadowColor = 2;
+        textColor[0] = 0;
+        textColor[1] = 1;
+        textColor[2] = 2;
         break;
     // default: UB
     }
-    AddTextPrinterParameterized4(windowId, fontId,x, y, fontId == 0 ? 0 : 1, 0, &textColor, -1, str);
+    AddTextPrinterParameterized4(windowId, fontId,x, y, fontId == 0 ? 0 : 1, 0, textColor, -1, str);
 }
 
 u32 sub_814F714(struct UnkStruct_x20 * unk20, u32 * arg1)

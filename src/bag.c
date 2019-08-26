@@ -14,7 +14,7 @@
 extern const u8 gText_DepositItem[];
 
 const u16 gUnknown_8453098[] = INCBIN_U16("data/bag/bag_window_pal.gbapal");
-const struct TextColor gUnknown_84530B8[] = {
+const u8 gUnknown_84530B8[][3] = {
     {0, 1, 2},
     {0, 2, 3},
     {0, 3, 2},
@@ -229,13 +229,13 @@ void sub_810B858(void)
 
 void sub_810B8F0(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, s8 speed, u8 colorIdx)
 {
-    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, &gUnknown_84530B8[colorIdx], speed, str);
+    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, gUnknown_84530B8[colorIdx], speed, str);
 }
 
 void sub_810B958(const u8 * str)
 {
     u32 x = 0x48 - GetStringWidth(1, str, 0);
-    AddTextPrinterParameterized3(2, 1, x / 2, 1, &gUnknown_84530B8[0], 0, str);
+    AddTextPrinterParameterized3(2, 1, x / 2, 1, gUnknown_84530B8[0], 0, str);
 }
 
 void sub_810B994(void)

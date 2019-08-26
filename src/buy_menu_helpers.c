@@ -148,23 +148,11 @@ static const struct WindowTemplate sShopBuyMenuYesNoWindowTemplate =
     .baseBlock = 0xC1,
 };
 
-static const struct TextColor sShopBuyMenuTextColors[] =
+static const u8 sShopBuyMenuTextColors[][3] =
 {
-    {
-        .fgColor = 0,
-        .bgColor = 1,
-        .shadowColor = 2,
-    },
-    {
-        .fgColor = 0,
-        .bgColor = 2,
-        .shadowColor = 3,
-    },
-    {
-        .fgColor = 0,
-        .bgColor = 3,
-        .shadowColor = 2,
-    },
+    {0, 1, 2},
+    {0, 2, 3},
+    {0, 3, 2}
 };
 
 void BuyMenuInitWindows(bool32 isSellingTM)
@@ -191,7 +179,7 @@ void BuyMenuDrawMoneyBox(void)
 
 void BuyMenuPrint(u8 windowId, u8 font, const u8 *text, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, s8 speed, u8 color)
 {
-    AddTextPrinterParameterized4(windowId, font, x, y, letterSpacing, lineSpacing, &sShopBuyMenuTextColors[color], speed, text);
+    AddTextPrinterParameterized4(windowId, font, x, y, letterSpacing, lineSpacing, sShopBuyMenuTextColors[color], speed, text);
 }
 
 void BuyMenuDisplayMessage(u8 taskId, const u8 *text, TaskFunc callback)

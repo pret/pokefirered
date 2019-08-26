@@ -61,7 +61,7 @@ void sub_81461D8(void);
 
 extern const struct OamData gOamData_83AC9F8;
 
-const struct TextColor gUnknown_8467068[] = {
+const u8 gUnknown_8467068[][3] = {
     {0, 2, 3},
     {0, 1, 2}
 };
@@ -348,28 +348,28 @@ void sub_8145D18(u8 whichWindow)
         case 0:
         {
             s32 x;
-            AddTextPrinterParameterized3(windowId, 3, 0, 1, &gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal1], 0, gUnknown_203F3C8->unk_018B);
+            AddTextPrinterParameterized3(windowId, 3, 0, 1, gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal1], 0, gUnknown_203F3C8->unk_018B);
             x = 160 - GetStringWidth(3, gUnknown_203F3C8->unk_01B4, GetFontAttribute(3, 2));
             if (x < 0)
                 x = 0;
-            AddTextPrinterParameterized3(windowId, 3, x, 17, &gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal1], 0, gUnknown_203F3C8->unk_01B4);
+            AddTextPrinterParameterized3(windowId, 3, x, 17, gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal1], 0, gUnknown_203F3C8->unk_01B4);
             if (gUnknown_203F3C8->unk_0000.unk_04 != 0)
             {
-                AddTextPrinterParameterized3(windowId, 2, 166, 17, &gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal1], 0, gUnknown_203F3C8->unk_01DD);
+                AddTextPrinterParameterized3(windowId, 2, 166, 17, gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal1], 0, gUnknown_203F3C8->unk_01DD);
             }
             break;
         }
         case 1:
             for (; sp0C < 4; sp0C++)
             {
-                AddTextPrinterParameterized3(windowId, 3, 0, 16 * sp0C + 2, &gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal2], 0, gUnknown_203F3C8->unk_01E4[sp0C]);
+                AddTextPrinterParameterized3(windowId, 3, 0, 16 * sp0C + 2, gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal2], 0, gUnknown_203F3C8->unk_01E4[sp0C]);
             }
             break;
         case 2:
-            AddTextPrinterParameterized3(windowId, 3, 0, gUnknown_8467070[gUnknown_203F3C8->unk_0000.unk_08_0], &gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal3], 0, gUnknown_203F3C8->unk_0288);
+            AddTextPrinterParameterized3(windowId, 3, 0, gUnknown_8467070[gUnknown_203F3C8->unk_0000.unk_08_0], gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal3], 0, gUnknown_203F3C8->unk_0288);
             if (gUnknown_203F3C8->unk_0000.unk_08_0 != 2)
             {
-                AddTextPrinterParameterized3(windowId, 3, 0, 16 + gUnknown_8467070[gUnknown_203F3C8->unk_0000.unk_08_0], &gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal3], 0, gUnknown_203F3C8->unk_02B1);
+                AddTextPrinterParameterized3(windowId, 3, 0, 16 + gUnknown_8467070[gUnknown_203F3C8->unk_0000.unk_08_0], gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal3], 0, gUnknown_203F3C8->unk_02B1);
             }
             else
             {
@@ -378,11 +378,11 @@ void sub_8145D18(u8 whichWindow)
                 s32 spacing = GetFontAttribute(3, 2);
                 for (; sp0C < gUnknown_203F3C8->unk_0175; sp0C++)
                 {
-                    AddTextPrinterParameterized3(windowId, 3, x, y, &gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal3], 0, gUnknown_203F3C8->unk_02DC[sp0C].unk_01);
+                    AddTextPrinterParameterized3(windowId, 3, x, y, gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal3], 0, gUnknown_203F3C8->unk_02DC[sp0C].unk_01);
                     if (gUnknown_203F3C8->unk_02DC[sp0C].unk_42[0] != EOS)
                     {
                         x += GetStringWidth(3, gUnknown_203F3C8->unk_02DC[sp0C].unk_01, spacing);
-                        AddTextPrinterParameterized3(windowId, 2, x, y, &gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal3], 0, gUnknown_203F3C8->unk_02DC[sp0C].unk_42);
+                        AddTextPrinterParameterized3(windowId, 2, x, y, gUnknown_8467068[gUnknown_203F3C8->unk_0170->textPal3], 0, gUnknown_203F3C8->unk_02DC[sp0C].unk_42);
                         x += GetStringWidth(3, gUnknown_203F3C8->unk_02DC[sp0C].unk_42, spacing) + gUnknown_203F3C8->unk_02DC[sp0C].unk_00;
                     }
                 }
@@ -471,7 +471,7 @@ void sub_8146980(void);
 void sub_8146A30(void);
 void sub_8146B58(void);
 
-const struct TextColor gUnknown_8468038[] = {
+const u8 gUnknown_8468038[][3] = {
     {0, 2, 3},
     {0, 1, 2}
 };
@@ -758,10 +758,10 @@ void sub_8146A30(void)
     x = (0xe0 - GetStringWidth(3, gUnknown_203F3CC->unk_01CE, GetFontAttribute(3, 2))) / 2;
     if (x < 0)
         x = 0;
-    AddTextPrinterParameterized3(gUnknown_203F3CC->unk_01C8[0], 3, x, 6, &gUnknown_8468038[gUnknown_203F3CC->unk_01BC->textPal1], 0, gUnknown_203F3CC->unk_01CE);
+    AddTextPrinterParameterized3(gUnknown_203F3CC->unk_01C8[0], 3, x, 6, gUnknown_8468038[gUnknown_203F3CC->unk_01BC->textPal1], 0, gUnknown_203F3CC->unk_01CE);
     for (; i < 10; ++i)
     {
-        AddTextPrinterParameterized3(gUnknown_203F3CC->unk_01C8[1], 3, 0, 16 * i + 2, &gUnknown_8468038[gUnknown_203F3CC->unk_01BC->textPal2], 0, gUnknown_203F3CC->unk_01F7[i]);
+        AddTextPrinterParameterized3(gUnknown_203F3CC->unk_01C8[1], 3, 0, 16 * i + 2, gUnknown_8468038[gUnknown_203F3CC->unk_01BC->textPal2], 0, gUnknown_203F3CC->unk_01F7[i]);
     }
     CopyWindowToVram(gUnknown_203F3CC->unk_01C8[0], 3);
     CopyWindowToVram(gUnknown_203F3CC->unk_01C8[1], 3);

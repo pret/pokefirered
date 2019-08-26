@@ -578,7 +578,7 @@ u16 sub_80F856C(u8 mapsec)
         return 0;
     }
     flagId = sMapPreviewScreenData[idx].flagId;
-    if (sMapPreviewScreenData[idx].forceFirstTime == 0)
+    if (!sMapPreviewScreenData[idx].forceFirstTime)
     {
         if (!FlagGet(flagId))
         {

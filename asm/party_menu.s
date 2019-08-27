@@ -15250,7 +15250,7 @@ sub_8126350: @ 8126350
 	lsls r2, 2
 	adds r1, r7, r2
 	adds r0, r4, 0
-	bl sub_811D130
+	bl GetMonLevelUpWindowStats
 	ldrb r0, [r6, 0x9]
 	ldr r5, _0812641C @ =gSpecialVar_ItemId
 	ldrh r1, [r5]
@@ -15260,7 +15260,7 @@ sub_8126350: @ 8126350
 	lsls r0, 2
 	adds r1, r7, r0
 	adds r0, r4, 0
-	bl sub_811D130
+	bl GetMonLevelUpWindowStats
 	ldr r1, _08126420 @ =gUnknown_203B0C0
 	movs r0, 0x1
 	strb r0, [r1]
@@ -15497,7 +15497,7 @@ sub_8126570: @ 8126570
 	str r1, [sp, 0x4]
 	adds r1, r4, 0
 	movs r3, 0x1
-	bl sub_811E7F0
+	bl DrawLevelUpWindowPg1
 	ldrb r0, [r4, 0x18]
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -15528,7 +15528,7 @@ sub_81265BC: @ 81265BC
 	str r2, [sp]
 	movs r2, 0x1
 	movs r3, 0x2
-	bl sub_811E93C
+	bl DrawLevelUpWindowPg2
 	ldrb r0, [r4, 0x18]
 	movs r1, 0x2
 	bl CopyWindowToVram

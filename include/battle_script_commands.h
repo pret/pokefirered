@@ -25,19 +25,6 @@
 
 #define ATK4F_DONT_CHECK_STATUSES   0x80
 
-#define VARIOUS_CANCEL_MULTI_TURN_MOVES         0
-#define VARIOUS_SET_MAGIC_COAT_TARGET           1
-#define VARIOUS_IS_RUNNING_IMPOSSIBLE           2
-#define VARIOUS_GET_MOVE_TARGET                 3
-#define VARIOUS_RESET_INTIMIDATE_TRACE_BITS     5
-#define VARIOUS_UPDATE_CHOICE_MOVE_ON_LVL_UP    6
-#define VARIOUS_EMIT_YESNOBOX                   13
-#define VARIOUS_WAIT_CRY                        18
-#define VARIOUS_RETURN_OPPONENT_MON1            19
-#define VARIOUS_RETURN_OPPONENT_MON2            20
-#define VARIOUS_SET_TELEPORT_OUTCOME            25
-#define VARIOUS_PLAY_TRAINER_DEFEATED_MUSIC     26
-
 #define ATK80_DMG_CHANGE_SIGN                               0
 #define ATK80_DMG_HALF_BY_TWO_NOT_MORE_THAN_HALF_MAX_HP     1
 #define ATK80_DMG_DOUBLED                                   2

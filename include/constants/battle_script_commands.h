@@ -61,28 +61,21 @@
 #define CMP_COMMON_BITS         0x4
 #define CMP_NO_COMMON_BITS      0x5
 
+// TODO: documentation
 // atk76, various
 #define VARIOUS_CANCEL_MULTI_TURN_MOVES         0
 #define VARIOUS_SET_MAGIC_COAT_TARGET           1
 #define VARIOUS_IS_RUNNING_IMPOSSIBLE           2
 #define VARIOUS_GET_MOVE_TARGET                 3
+#define VARIOUS_CASE_4                          4
 #define VARIOUS_RESET_INTIMIDATE_TRACE_BITS     5
 #define VARIOUS_UPDATE_CHOICE_MOVE_ON_LVL_UP    6
-#define VARIOUS_ARENA_JUDGMENT_WINDOW           9
-#define VARIOUS_ARENA_OPPONENT_MON_LOST         10
-#define VARIOUS_ARENA_PLAYER_MON_LOST           11
-#define VARIOUS_ARENA_BOTH_MONS_LOST            12
-#define VARIOUS_EMIT_YESNOBOX                   13
-#define VARIOUS_ARENA_JUDGMENT_STRING           16
-#define VARIOUS_ARENA_WAIT_STRING               17
-#define VARIOUS_WAIT_CRY                        18
-#define VARIOUS_RETURN_OPPONENT_MON1            19
-#define VARIOUS_RETURN_OPPONENT_MON2            20
-#define VARIOUS_VOLUME_DOWN                     21
-#define VARIOUS_VOLUME_UP                       22
-#define VARIOUS_SET_ALREADY_STATUS_MOVE_ATTEMPT 23
-#define VARIOUS_SET_TELEPORT_OUTCOME            25
-#define VARIOUS_PLAY_TRAINER_DEFEATED_MUSIC     26
+#define VARIOUS_CASE_7                          7
+#define VARIOUS_CASE_8                          8
+#define VARIOUS_RETURN_OPPONENT_MON1            9
+#define VARIOUS_RETURN_OPPONENT_MON2            10
+#define VARIOUS_CASE_11                         11
+#define VARIOUS_CASE_12                         12
 
 // atk80, dmg manipulation
 #define ATK80_DMG_CHANGE_SIGN                               0

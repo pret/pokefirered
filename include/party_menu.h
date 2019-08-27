@@ -10,7 +10,9 @@ enum {
     AILMENT_PRZ,
     AILMENT_SLP,
     AILMENT_FRZ,
-    AILMENT_BRN
+    AILMENT_BRN,
+    AILMENT_PKRS,
+    AILMENT_FNT
 };
 
 enum

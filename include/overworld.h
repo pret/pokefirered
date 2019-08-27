@@ -119,5 +119,6 @@ bool8 is_light_level_8_or_9(u8 mapType);
 bool32 sub_8055C9C(void);
 void Overworld_ResetStateAfterDigEscRope(void);
 bool32 sub_8058244(void);
+u8 GetCurrentMapType(void);
 
 #endif //GUARD_ROM4_H

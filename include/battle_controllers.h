@@ -77,6 +77,7 @@ enum
 #define BALL_3_SHAKES_FAIL      3
 #define BALL_3_SHAKES_SUCCESS   4
 #define BALL_TRAINER_BLOCK      5
+#define BALL_GHOST_DODGE        6
 
 #define RET_VALUE_LEVELLED_UP   11
 

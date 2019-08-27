@@ -45,4 +45,6 @@ u16 GetNationalPokedexCount(u8);
 u16 sub_80C0844(u8);
 u16 GetKantoPokedexCount(u8);
 
+u32 sub_8106B60(u16 species);
+
 #endif // GUARD_POKEDEX_H

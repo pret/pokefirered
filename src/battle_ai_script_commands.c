@@ -1647,7 +1647,7 @@ static void BattleAICmd_if_last_move_did_damage(void)
 
     if (gAIScriptPtr[2] == 0)
     {
-        if (gDisableStructs[index].disabledMove == 0)
+        if (gDisableStructs[index].disabledMove == MOVE_NONE)
         {
             gAIScriptPtr += 7;
             return;
@@ -1660,7 +1660,7 @@ static void BattleAICmd_if_last_move_did_damage(void)
         gAIScriptPtr += 7;
         return;
     }
-    else if (gDisableStructs[index].encoredMove != 0)
+    else if (gDisableStructs[index].encoredMove != MOVE_NONE)
     {
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
         return;

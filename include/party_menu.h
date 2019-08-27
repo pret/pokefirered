@@ -79,5 +79,7 @@ u8 pokemon_order_func(u8);
 void sub_8127CAC(void);
 void sub_8127DA8(u8 battlerId, u8 multiplayerFlag);
 void OpenPartyMenuInBattle(u8 arg);
+void sub_8127EC4(u8 battlerId, u8 unk, u8 arrayIndex);
+bool8 IsMultiBattle(void);
 
 #endif // GUARD_PARTY_MENU_H

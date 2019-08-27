@@ -39,13 +39,13 @@
 #define BS_EFFECT_BATTLER           2
 #define BS_FAINTED                  3
 #define BS_BATTLER_0                7
-#define BS_ATTACKER_WITH_PARTNER    4 // for atk98_status_icon_update
+#define BS_ATTACKER_WITH_PARTNER    4 // for atk98_updatestatusicon
 #define BS_ATTACKER_SIDE            8 // for atk1E_jumpifability
 #define BS_NOT_ATTACKER_SIDE        9 // for atk1E_jumpifability
 #define BS_SCRIPTING                10
 #define BS_PLAYER1                  11
 #define BS_OPPONENT1                12
-#define BS_PLAYER2                  13
+#define BS_PLAYER2                  13 // for atk98_updatestatusicon
 #define BS_OPPONENT2                14
 
 // atk 01, accuracy calc

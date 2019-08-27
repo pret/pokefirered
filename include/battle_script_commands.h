@@ -14,10 +14,6 @@
 #define CMP_COMMON_BITS         0x4
 #define CMP_NO_COMMON_BITS      0x5
 
-#define BS_ATTACKER_WITH_PARTNER        4 // for atk98_status_icon_update
-#define BS_GET_ATTACKER_SIDE            8 // for atk1E_jumpifability
-#define BS_GET_NOT_ATTACKER_SIDE        9 // for atk1E_jumpifability
-
 #define ATK48_STAT_NEGATIVE         0x1
 #define ATK48_STAT_BY_TWO           0x2
 #define ATK48_BIT_x4                0x4

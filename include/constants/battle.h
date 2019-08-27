@@ -212,7 +212,7 @@
 #define WEATHER_SUN_ANY           (WEATHER_SUN_TEMPORARY | WEATHER_SUN_PERMANENT)
 #define WEATHER_HAIL                (1 << 7)
 #define WEATHER_HAIL_ANY            (WEATHER_HAIL)
-#define WEATHER_ANY                 (WEATHER_RAIN_ANY | WEATHER_SANDSTORM_ANY | WEATHER_SUNNY_ANY | WEATHER_HAIL_ANY)
+#define WEATHER_ANY                 (WEATHER_RAIN_ANY | WEATHER_SANDSTORM_ANY | WEATHER_SUN_ANY | WEATHER_HAIL_ANY)
 
 // Move Effects
 #define MOVE_EFFECT_SLEEP               0x1
@@ -280,5 +280,18 @@
 #define MOVE_EFFECT_NOTHING_3F          0x3F
 #define MOVE_EFFECT_AFFECTS_USER        0x40
 #define MOVE_EFFECT_CERTAIN             0x80
+
+// Battle terrain defines for gBattleTerrain.
+#define BATTLE_TERRAIN_GRASS        0
+#define BATTLE_TERRAIN_LONG_GRASS   1
+#define BATTLE_TERRAIN_SAND         2
+#define BATTLE_TERRAIN_UNDERWATER   3
+#define BATTLE_TERRAIN_WATER        4
+#define BATTLE_TERRAIN_POND         5
+#define BATTLE_TERRAIN_MOUNTAIN     6
+#define BATTLE_TERRAIN_CAVE         7
+#define BATTLE_TERRAIN_BUILDING     8
+#define BATTLE_TERRAIN_PLAIN        9
+
 
 #endif // GUARD_CONSTANTS_BATTLE_H

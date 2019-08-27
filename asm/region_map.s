@@ -1589,7 +1589,7 @@ _080C0B44:
 	lsrs r1, 16
 	adds r0, r4, 0
 	movs r2, 0
-	bl sub_80C4D78
+	bl GetMapName
 	ldr r0, _080C0B94 @ =gUnknown_83F1A90
 	str r0, [sp]
 	movs r0, 0
@@ -9690,8 +9690,8 @@ _080C4D72:
 	bx r1
 	thumb_func_end sub_80C4D40
 
-	thumb_func_start sub_80C4D78
-sub_80C4D78: @ 80C4D78
+	thumb_func_start GetMapName
+GetMapName: @ 80C4D78
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	lsls r1, 16
@@ -9759,7 +9759,7 @@ _080C4DF2:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80C4D78
+	thumb_func_end GetMapName
 
 	thumb_func_start sub_80C4DF8
 sub_80C4DF8: @ 80C4DF8
@@ -9767,7 +9767,7 @@ sub_80C4DF8: @ 80C4DF8
 	lsls r1, 16
 	lsrs r1, 16
 	movs r2, 0
-	bl sub_80C4D78
+	bl GetMapName
 	pop {r1}
 	bx r1
 	thumb_func_end sub_80C4DF8

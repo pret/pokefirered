@@ -6370,7 +6370,7 @@ void atk7C_trymirrormove(void)
     u16 movesArray[4];
 
     // incorrect pointer load sequence
-    // and incorrect sequence of words in data pool
+    // and incorrect layout in data pools
     for (i = 0; i < 3; ++i)
         movesArray[i] = 0;
     for (validMovesCount = 0, i = 0; i < gBattlersCount; ++i)

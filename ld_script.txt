@@ -222,7 +222,7 @@ SECTIONS {
         src/new_menu_helpers.o(.text);
         asm/box_party_pokemon_dropdown.o(.text);
         asm/save_menu_util.o(.text);
-        asm/map_preview_screen.o(.text);
+        src/map_preview_screen.o(.text);
         asm/link_rfu_2.o(.text);
         asm/link_rfu.o(.text);
         asm/pokedex_screen.o(.text);
@@ -440,6 +440,8 @@ SECTIONS {
         data/data_83FECCC.o(.rodata.841EE44);
         src/new_menu_helpers.o(.rodata);
         data/data_83FECCC.o(.rodata.841F4B4);
+        src/map_preview_screen.o(.rodata);
+        data/data_83FECCC.o(.rodata.843EBB4);
         src/pokedex.o(.rodata);
         data/data_83FECCC.o(.rodata.8451EBC);
         src/list_menu.o(.rodata);

@@ -21,8 +21,8 @@
 #define AI_ACTION_UNK7          0x0040
 #define AI_ACTION_UNK8          0x0080
 
-#define AI_THINKING_STRUCT ((struct AI_ThinkingStruct *)(gBattleResources->ai))
-#define BATTLE_HISTORY ((struct BattleHistory *)(gBattleResources->battleHistory))
+#define AI_THINKING_STRUCT (gBattleResources->ai)
+#define BATTLE_HISTORY (gBattleResources->battleHistory)
 
 // AI states
 enum
@@ -1808,14 +1808,8 @@ static void BattleAICmd_get_used_held_item(void)
         battlerId = gBattlerAttacker;
     else
         battlerId = gBattlerTarget;
-
     // This is likely a leftover from Ruby's code and its ugly ewram access.
-    #ifdef NONMATCHING
-        AI_THINKING_STRUCT->funcResult = gBattleStruct->usedHeldItems[battlerId];
-    #else
-        AI_THINKING_STRUCT->funcResult = *(u8*)((u8*)(gBattleStruct) + offsetof(struct BattleStruct, usedHeldItems) + (battlerId * 2));
-    #endif // NONMATCHING
-
+    AI_THINKING_STRUCT->funcResult = ((u8 *)gBattleStruct->usedHeldItems)[battlerId * 2];
     gAIScriptPtr += 2;
 }
 

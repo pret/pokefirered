@@ -414,7 +414,7 @@ static void SafariHandlePrintString(void)
 
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
-    stringId = (u16*)(&gBattleBufferA[gActiveBattler][2]);
+    stringId = (u16 *)(&gBattleBufferA[gActiveBattler][2]);
     BufferStringBattle(*stringId);
     if (sub_80D89B0(*stringId))
         BattlePutTextOnWindow(gDisplayedStringBattle, 0x40);

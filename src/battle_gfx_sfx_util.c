@@ -220,13 +220,13 @@ bool8 TryHandleLaunchBattleTableAnimation(u8 activeBattler, u8 atkBattler, u8 de
         return TRUE;
     }
     else if (gBattleSpritesDataPtr->battlerData[activeBattler].behindSubstitute
-        && !ShouldAnimBeDoneRegardlessOfSubsitute(tableId))
+          && !ShouldAnimBeDoneRegardlessOfSubsitute(tableId))
     {
         return TRUE;
     }
     else if (gBattleSpritesDataPtr->battlerData[activeBattler].behindSubstitute
-        && tableId == B_ANIM_SUBSTITUTE_FADE
-        && gSprites[gBattlerSpriteIds[activeBattler]].invisible)
+          && tableId == B_ANIM_SUBSTITUTE_FADE
+          && gSprites[gBattlerSpriteIds[activeBattler]].invisible)
     {
         LoadBattleMonGfxAndAnimate(activeBattler, TRUE, gBattlerSpriteIds[activeBattler]);
         ClearBehindSubstituteBit(activeBattler);

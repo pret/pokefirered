@@ -1149,8 +1149,8 @@ static void LinkOpponentHandleDrawTrainerPic(void)
             trainerPicId = sub_80447AC();
         }
         else if ((gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_RUBY
-         || (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_SAPPHIRE
-         || (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_EMERALD)
+              || (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_SAPPHIRE
+              || (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_EMERALD)
         {
             if (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].gender != MALE)
                 trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PKMN_TRAINER_5];
@@ -1272,7 +1272,7 @@ static void LinkOpponentDoMoveAnimation(void)
     {
     case 0:
         if (gBattleSpritesDataPtr->battlerData[gActiveBattler].behindSubstitute
-            && !gBattleSpritesDataPtr->battlerData[gActiveBattler].flag_x8)
+         && !gBattleSpritesDataPtr->battlerData[gActiveBattler].flag_x8)
         {
             gBattleSpritesDataPtr->battlerData[gActiveBattler].flag_x8 = 1;
             InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, B_ANIM_SUBSTITUTE_TO_MON);

@@ -240,6 +240,7 @@ void sub_8017434(u8 battler)
     if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
     {
         u8 flank = ((battler & BIT_FLANK) >> 1);
+
         gSentPokesToOpponent[flank] = 0;
         for (i = 0; i < gBattlersCount; i += 2)
             if (!(gAbsentBattlerFlags & gBitTable[i]))
@@ -283,7 +284,7 @@ u8 TrySetCantSelectMoveBattleScript(void)
     u8 holdEffect;
     u8 limitations = 0;
     u16 move = gBattleMons[gActiveBattler].moves[gBattleBufferB[gActiveBattler][2]];
-    u16* choicedMove = &gBattleStruct->choicedMove[gActiveBattler];
+    u16 *choicedMove = &gBattleStruct->choicedMove[gActiveBattler];
 
     if (gDisableStructs[gActiveBattler].disabledMove == move && move != MOVE_NONE)
     {
@@ -444,7 +445,7 @@ u8 DoFieldEndTurnEffects(void)
                         SwapTurnOrder(i, j);
             }
             {
-                u8* var = &gBattleStruct->turnCountersTracker;
+                u8 *var = &gBattleStruct->turnCountersTracker;
                 
                 ++*var;
                 gBattleStruct->turnSideTracker = 0;

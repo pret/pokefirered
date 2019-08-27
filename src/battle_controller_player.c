@@ -668,7 +668,6 @@ static void HandleMoveSwitching(void)
             MoveSelectionDisplayMoveNames();
             for (i = 0; i < MAX_MON_MOVES; ++i)
                 perMovePPBonuses[i] = (gBattleMons[gActiveBattler].ppBonuses & (3 << (i * 2))) >> (i * 2);
-
             totalPPBonuses = perMovePPBonuses[gMoveSelectionCursor[gActiveBattler]];
             perMovePPBonuses[gMoveSelectionCursor[gActiveBattler]] = perMovePPBonuses[gMultiUsePlayerCursor];
             perMovePPBonuses[gMultiUsePlayerCursor] = totalPPBonuses;
@@ -746,7 +745,6 @@ static void HandleMoveSwitching(void)
                 MoveSelectionDestroyCursorAt(gMultiUsePlayerCursor);
             gMultiUsePlayerCursor ^= 1;
             PlaySE(SE_SELECT);
-
             if (gMultiUsePlayerCursor == gMoveSelectionCursor[gActiveBattler])
                 MoveSelectionCreateCursorAt(gMultiUsePlayerCursor, 0);
             else
@@ -763,7 +761,6 @@ static void HandleMoveSwitching(void)
                 MoveSelectionDestroyCursorAt(gMultiUsePlayerCursor);
             gMultiUsePlayerCursor ^= 1;
             PlaySE(SE_SELECT);
-
             if (gMultiUsePlayerCursor == gMoveSelectionCursor[gActiveBattler])
                 MoveSelectionCreateCursorAt(gMultiUsePlayerCursor, 0);
             else
@@ -780,7 +777,6 @@ static void HandleMoveSwitching(void)
                 MoveSelectionDestroyCursorAt(gMultiUsePlayerCursor);
             gMultiUsePlayerCursor ^= 2;
             PlaySE(SE_SELECT);
-
             if (gMultiUsePlayerCursor == gMoveSelectionCursor[gActiveBattler])
                 MoveSelectionCreateCursorAt(gMultiUsePlayerCursor, 0);
             else
@@ -797,7 +793,6 @@ static void HandleMoveSwitching(void)
                 MoveSelectionDestroyCursorAt(gMultiUsePlayerCursor);
             gMultiUsePlayerCursor ^= 2;
             PlaySE(SE_SELECT);
-
             if (gMultiUsePlayerCursor == gMoveSelectionCursor[gActiveBattler])
                 MoveSelectionCreateCursorAt(gMultiUsePlayerCursor, 0);
             else
@@ -981,7 +976,7 @@ static void sub_802FD18(void)
      && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive)
         sub_80F1720(gActiveBattler, &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]]);
     if (gSprites[gUnknown_3004FFC[gActiveBattler]].callback == SpriteCallbackDummy
-      && !(gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive))
+     && !(gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive))
     {
         DestroySprite(&gSprites[gUnknown_3004FFC[gActiveBattler]]);
         UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler],
@@ -1057,7 +1052,6 @@ static void Task_GiveExpToMon(u8 taskId)
             gActiveBattler = battlerId;
             BtlController_EmitTwoReturnValues(1, RET_VALUE_LEVELED_UP, gainedExp);
             gActiveBattler = savedActiveBattler;
-
             if (IsDoubleBattle() == TRUE
              && ((u16)(monId) == gBattlerPartyIndexes[battlerId] || (u16)(monId) == gBattlerPartyIndexes[battlerId ^ BIT_FLANK]))
                 gTasks[taskId].func = Task_LaunchLvlUpAnim;
@@ -2261,7 +2255,7 @@ static void PlayerHandleFaintAnimation(void)
     {
         if (gBattleSpritesDataPtr->battlerData[gActiveBattler].behindSubstitute)
             InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, B_ANIM_SUBSTITUTE_TO_MON);
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState++;
+        ++gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState;
     }
     else
     {
@@ -2345,7 +2339,7 @@ static void PlayerDoMoveAnimation(void)
     {
     case 0:
         if (gBattleSpritesDataPtr->battlerData[gActiveBattler].behindSubstitute
-            && !gBattleSpritesDataPtr->battlerData[gActiveBattler].flag_x8)
+         && !gBattleSpritesDataPtr->battlerData[gActiveBattler].flag_x8)
         {
             gBattleSpritesDataPtr->battlerData[gActiveBattler].flag_x8 = 1;
             InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, B_ANIM_SUBSTITUTE_TO_MON);
@@ -2587,7 +2581,7 @@ static void PlayerHandleDMA3Transfer(void)
                | (gBattleBufferA[gActiveBattler][4] << 24);
     u16 sizeArg = gBattleBufferA[gActiveBattler][5] | (gBattleBufferA[gActiveBattler][6] << 8);
     const u8 *src = &gBattleBufferA[gActiveBattler][7];
-    u8 *dst = (u8*)(dstArg);
+    u8 *dst = (u8 *)(dstArg);
     u32 size = sizeArg;
 
     while (TRUE)

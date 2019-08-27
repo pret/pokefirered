@@ -383,7 +383,7 @@ SECTIONS {
         src/battle_util.o(.rodata);
         src/battle_script_commands.o(.rodata);
         src/battle_controller_player.o(.rodata);
-        data/data.o(.rodata.825098C);
+        data/smokescreen.o(.rodata);
         src/battle_controller_opponent.o(.rodata);
         src/battle_controller_link_opponent.o(.rodata);
         src/pokemon.o(.rodata);

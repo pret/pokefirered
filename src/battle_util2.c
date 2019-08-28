@@ -12,12 +12,10 @@ void AllocateBattleResources(void)
         InitTrainerTowerBattleStruct();
     if (gBattleTypeFlags & BATTLE_TYPE_POKEDUDE)
     {
-        void **ptr = gUnknown_3005EE0;
-        s32 i = 3;
-        
-        do
-            *ptr++ = AllocZeroed(8);
-        while (--i >= 0);
+        s32 i;
+
+        for (i = 0; i < 4; ++i)
+            gUnknown_3005EE0[i] = AllocZeroed(8);
     }
     gBattleStruct = AllocZeroed(sizeof(*gBattleStruct));
     gBattleResources = AllocZeroed(sizeof(*gBattleResources));
@@ -43,16 +41,12 @@ void FreeBattleResources(void)
         FreeTrainerTowerBattleStruct();
     if (gBattleTypeFlags & BATTLE_TYPE_POKEDUDE)
     {
-        void **ptr = gUnknown_3005EE0;
-        void *nullPtr = NULL;
-        s32 i = 3;
-        
-        do
+        s32 i;
+
+        for (i = 0; i < 4; ++i)
         {
-            Free(*ptr);
-            *ptr++ = nullPtr;
+            FREE_AND_SET_NULL(gUnknown_3005EE0[i]);
         }
-        while (--i >= 0);
     }
     if (gBattleResources != NULL)
     {

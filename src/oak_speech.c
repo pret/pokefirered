@@ -37,7 +37,7 @@ struct OakSpeechResources
     u16 unk_0010;
     u16 unk_0012;
     u16 unk_0014[4];
-    struct TextColor textColor;
+    u8 textColor[3];
     u8 textSpeed;
     u8 filler_0020[0x1800];
     u8 bg2TilemapBuffer[0x400];
@@ -273,11 +273,11 @@ static const struct WindowTemplate sNewGameAdventureIntroWindowTemplates[] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-ALIGNED(4) const struct TextColor sTextColor_HelpSystem = {
+const u8 sTextColor_HelpSystem[4] = {
     0x00, 0x01, 0x02
 };
 
-ALIGNED(4) const struct TextColor sTextColor_OakSpeech = {
+const u8 sTextColor_OakSpeech[4] = {
     0x00, 0x02, 0x03
 };
 
@@ -576,7 +576,7 @@ static void CreateHelpDocsPage1(void)
     sOakSpeechResources->unk_0014[0] = AddWindow(sHelpDocsWindowTemplatePtrs[sOakSpeechResources->unk_0012]);
     PutWindowTilemap(sOakSpeechResources->unk_0014[0]);
     FillWindowPixelBuffer(sOakSpeechResources->unk_0014[0], 0x00);
-    AddTextPrinterParameterized4(sOakSpeechResources->unk_0014[0], 2, 2, 0, 1, 1, &sTextColor_HelpSystem, 0, gNewGame_HelpDocs1);
+    AddTextPrinterParameterized4(sOakSpeechResources->unk_0014[0], 2, 2, 0, 1, 1, sTextColor_HelpSystem, 0, gNewGame_HelpDocs1);
     CopyWindowToVram(sOakSpeechResources->unk_0014[0], 3);
     FillBgTilemapBufferRect_Palette0(1, 0x3000, 1, 3, 5, 16);
     CopyBgTilemapBufferToVram(1);
@@ -598,7 +598,7 @@ static void Task_OakSpeech4(u8 taskId)
             sOakSpeechResources->unk_0014[i] = AddWindow(&sHelpDocsWindowTemplatePtrs[sOakSpeechResources->unk_0012][i]);
             PutWindowTilemap(sOakSpeechResources->unk_0014[i]);
             FillWindowPixelBuffer(sOakSpeechResources->unk_0014[i], 0x00);
-            AddTextPrinterParameterized4(sOakSpeechResources->unk_0014[i], 2, 6, 0, 1, 1, &sTextColor_HelpSystem, 0, sHelpDocsPtrs[i + r7 * 3]);
+            AddTextPrinterParameterized4(sOakSpeechResources->unk_0014[i], 2, 6, 0, 1, 1, sTextColor_HelpSystem, 0, sHelpDocsPtrs[i + r7 * 3]);
             CopyWindowToVram(sOakSpeechResources->unk_0014[i], 3);
         }
 
@@ -730,7 +730,7 @@ static void Task_OakSpeech6(u8 taskId)
         sOakSpeechResources->unk_0012 = 0;
         gMain.state = 0;
         data[15] = 16;
-        AddTextPrinterParameterized4(data[14], 2, 3, 5, 1, 0, &sTextColor_OakSpeech, 0, sNewGameAdventureIntroTextPointers[0]);
+        AddTextPrinterParameterized4(data[14], 2, 3, 5, 1, 0, sTextColor_OakSpeech, 0, sNewGameAdventureIntroTextPointers[0]);
         data[5] = CreateTextCursorSpriteForOakSpeech(0, 0xe2, 0x91, 0, 0);
         gSprites[data[5]].oam.objMode = ST_OAM_OBJ_BLEND;
         gSprites[data[5]].oam.priority = 0;
@@ -790,7 +790,7 @@ static void Task_OakSpeech7(u8 taskId)
         if (data[15] <= 0)
         {
             FillWindowPixelBuffer(data[14], 0x00);
-            AddTextPrinterParameterized4(data[14], 2, 3, 5, 1, 0, &sTextColor_OakSpeech, 0, sNewGameAdventureIntroTextPointers[sOakSpeechResources->unk_0012]);
+            AddTextPrinterParameterized4(data[14], 2, 3, 5, 1, 0, sTextColor_OakSpeech, 0, sNewGameAdventureIntroTextPointers[sOakSpeechResources->unk_0012]);
             if (sOakSpeechResources->unk_0012 == 0)
             {
                 ClearTopBarWindow();
@@ -1056,14 +1056,14 @@ static void Task_OakSpeech19(u8 taskId)
         PutWindowTilemap(gTasks[taskId].data[13]);
         DrawStdFrameWithCustomTileAndPalette(gTasks[taskId].data[13], 1, GetStdWindowBaseTileNum(), 14);
         FillWindowPixelBuffer(gTasks[taskId].data[13], 0x11);
-        sOakSpeechResources->textColor.fgColor = 1;
-        sOakSpeechResources->textColor.bgColor = 2;
-        sOakSpeechResources->textColor.shadowColor = 3;
-        AddTextPrinterParameterized3(gTasks[taskId].data[13], 2, 8, 1, &sOakSpeechResources->textColor, 0, gText_Boy);
-        sOakSpeechResources->textColor.fgColor = 1;
-        sOakSpeechResources->textColor.bgColor = 2;
-        sOakSpeechResources->textColor.shadowColor = 3;
-        AddTextPrinterParameterized3(gTasks[taskId].data[13], 2, 8, 17, &sOakSpeechResources->textColor, 0, gText_Girl);
+        sOakSpeechResources->textColor[0] = 1;
+        sOakSpeechResources->textColor[1] = 2;
+        sOakSpeechResources->textColor[2] = 3;
+        AddTextPrinterParameterized3(gTasks[taskId].data[13], 2, 8, 1, sOakSpeechResources->textColor, 0, gText_Boy);
+        sOakSpeechResources->textColor[0] = 1;
+        sOakSpeechResources->textColor[1] = 2;
+        sOakSpeechResources->textColor[2] = 3;
+        AddTextPrinterParameterized3(gTasks[taskId].data[13], 2, 8, 17, sOakSpeechResources->textColor, 0, gText_Girl);
         Menu_InitCursor(gTasks[taskId].data[13], 2, 0, 1, GetFontAttribute(2, 1) + 2, 2, 0);
         CopyWindowToVram(gTasks[taskId].data[13], 3);
         gTasks[taskId].func = Task_OakSpeech20;

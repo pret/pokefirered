@@ -424,7 +424,7 @@ static const u8 gUnknown_845FD54[][5] = {
     [SPECIES_OLD_UNOWN_QMARK - 1] = {0x20, 0x23, 0x08, 0x20, 0x2d}
 };
 
-void AddTextPrinterParameterized3(u8 windowId, u8 fontId, u8 x, u8 y, const struct TextColor * color, s8 speed, const u8 * str)
+void AddTextPrinterParameterized3(u8 windowId, u8 fontId, u8 x, u8 y, const u8 * color, s8 speed, const u8 * str)
 {
     struct TextPrinterTemplate printer;
 
@@ -438,13 +438,13 @@ void AddTextPrinterParameterized3(u8 windowId, u8 fontId, u8 x, u8 y, const stru
     printer.letterSpacing = GetFontAttribute(fontId, 2);
     printer.lineSpacing = GetFontAttribute(fontId, 3);
     printer.unk = 0;
-    printer.fgColor = color->bgColor;
-    printer.bgColor = color->fgColor;
-    printer.shadowColor = color->shadowColor;
+    printer.fgColor = color[1];
+    printer.bgColor = color[0];
+    printer.shadowColor = color[2];
     AddTextPrinter(&printer, speed, NULL);
 }
 
-void AddTextPrinterParameterized4(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, const struct TextColor *color, s8 speed, const u8 *str)
+void AddTextPrinterParameterized4(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, const u8 *color, s8 speed, const u8 *str)
 {
     struct TextPrinterTemplate printer;
 
@@ -458,9 +458,9 @@ void AddTextPrinterParameterized4(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterS
     printer.letterSpacing = letterSpacing;
     printer.lineSpacing = lineSpacing;
     printer.unk = 0;
-    printer.fgColor = color->bgColor;
-    printer.bgColor = color->fgColor;
-    printer.shadowColor = color->shadowColor;
+    printer.fgColor = color[1];
+    printer.bgColor = color[0];
+    printer.shadowColor = color[2];
     AddTextPrinter(&printer, speed, NULL);
 }
 

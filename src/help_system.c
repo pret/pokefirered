@@ -25,7 +25,7 @@ struct HelpSystemVideoState
     /*0x0c*/ u16 savedBg0Hofs;
     /*0x0e*/ u16 savedBg0Vofs;
     /*0x10*/ u16 savedBldCnt;
-    /*0x12*/ struct TextColor savedTextColor;
+    /*0x12*/ u8 savedTextColor[3];
     /*0x15*/ u8 state;
 };
 
@@ -171,9 +171,9 @@ void SaveMapTiles(void)
 void SaveMapTextColors(void)
 {
     SaveTextColors(
-        &sVideoState.savedTextColor.fgColor,
-        &sVideoState.savedTextColor.bgColor,
-        &sVideoState.savedTextColor.shadowColor
+        &sVideoState.savedTextColor[0],
+        &sVideoState.savedTextColor[1],
+        &sVideoState.savedTextColor[2]
     );
 }
 
@@ -200,9 +200,9 @@ void RestoreMapTiles(void)
 void RestoreMapTextColors(void)
 {
     RestoreTextColors(
-        &sVideoState.savedTextColor.fgColor,
-        &sVideoState.savedTextColor.bgColor,
-        &sVideoState.savedTextColor.shadowColor
+        &sVideoState.savedTextColor[0],
+        &sVideoState.savedTextColor[1],
+        &sVideoState.savedTextColor[2]
     );
 }
 

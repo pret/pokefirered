@@ -2074,7 +2074,7 @@ static bool32 sub_8141180(u8 a0)
 static bool8 sub_8141198(u8 * state, struct SlotMachineSetupTaskData * ptr)
 {
     u16 pal;
-    struct TextColor textColor;
+    u8 textColor[3];
     u32 x;
 
     switch (*state)
@@ -2125,10 +2125,10 @@ static bool8 sub_8141198(u8 * state, struct SlotMachineSetupTaskData * ptr)
         PutWindowTilemap(1);
 
         x = 0xEC - GetStringWidth(0, gString_SlotMachineControls, 0);
-        textColor.fgColor = 15;
-        textColor.bgColor = 1;
-        textColor.shadowColor = 2;
-        AddTextPrinterParameterized3(1, 0, x, 0, &textColor, 0, gString_SlotMachineControls);
+        textColor[0] = 15;
+        textColor[1] = 1;
+        textColor[2] = 2;
+        AddTextPrinterParameterized3(1, 0, x, 0, textColor, 0, gString_SlotMachineControls);
         CopyBgTilemapBufferToVram(0);
 
         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | 0x20 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);

@@ -410,7 +410,7 @@ const struct WindowTemplate gUnknown_845661C[3] = {
     { 0, 0, 14, 30, 6, 15, 0x14c }
 };
 
-const struct TextColor gUnknown_8456634 = {15, 1, 12};
+const u8 gUnknown_8456634[3] = {15, 1, 12};
 
 const u16 gUnknown_8456638[] = INCBIN_U16("data/graphics/unknown_8456638.bin");
 
@@ -923,7 +923,7 @@ void sub_8111070(u8 a0)
         StringAppend(gStringVar4, gStringVar1);
     }
 
-    AddTextPrinterParameterized4(gUnknown_203ADFE[0], 2, 2, 2, 1, 2, &gUnknown_8456634, 0, gStringVar4);
+    AddTextPrinterParameterized4(gUnknown_203ADFE[0], 2, 2, 2, 1, 2, gUnknown_8456634, 0, gStringVar4);
     PutWindowTilemap(gUnknown_203ADFE[0]);
     PutWindowTilemap(gUnknown_203ADFE[1]);
     CopyWindowToVram(gUnknown_203ADFE[0], 2);
@@ -1418,7 +1418,7 @@ void sub_8111D10(void)
 
     PutWindowTilemap(gUnknown_203ADFE[2]);
     sub_8111D90(gUnknown_203ADFE[2]);
-    AddTextPrinterParameterized4(gUnknown_203ADFE[2], 2, 2, gUnknown_8456698[count], 1, 0, &gUnknown_8456634, 0, gStringVar4);
+    AddTextPrinterParameterized4(gUnknown_203ADFE[2], 2, 2, gUnknown_8456698[count], 1, 0, gUnknown_8456634, 0, gStringVar4);
     ScheduleBgCopyTilemapToVram(0);
 }
 
@@ -2463,13 +2463,13 @@ void sub_8112FD0(void)
     sub_8112F18(gUnknown_203B020);
 }
 
-const struct TextColor gUnknown_8456930 = {
+const u8 gUnknown_8456930[3] = {
     0, 10, 2
 };
 
 void sub_8112FE4(const u8 * a0)
 {
-    AddTextPrinterParameterized4(gUnknown_203B020, 0x02, 2, 5, 1, 1, &gUnknown_8456930, -1, a0);
+    AddTextPrinterParameterized4(gUnknown_203B020, 0x02, 2, 5, 1, 1, gUnknown_8456930, -1, a0);
 }
 
 void sub_8113018(const u8 * text, u8 mode)

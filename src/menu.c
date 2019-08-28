@@ -41,8 +41,7 @@ static void WindowFunc_DrawStdFrameWithCustomTileAndPalette(u8 bg, u8 tilemapLef
 static void WindowFunc_ClearStdWindowAndFrameToTransparent(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum);
 static u8 MultichoiceGrid_MoveCursor(s8 deltaX, s8 deltaY);
 
-static const u8 gUnknown_8456618[3] =
-{15, 1, 2};
+static const u8 gUnknown_8456618[3] = {15, 1, 2};
 
 void DrawDialogFrameWithCustomTileAndPalette(u8 windowId, bool8 copyToVram, u16 tileNum, u8 paletteNum)
 {

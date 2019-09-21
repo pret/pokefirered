@@ -1,5 +1,6 @@
 #include "global.h"
 #include "text.h"
+#include "blit.h"
 #include "gpu_regs.h"
 #include "task.h"
 #include "wild_encounter.h"
@@ -502,261 +503,75 @@ void sub_812E6DC(u8 windowId, const u8 * src, u16 x, u16 y)
     }
 }
 
-// Yeah, no, I'm not bothering with this
-NAKED
-static void sub_812E768(void * a0, void * a1, u16 a2, u16 a3, u16 a4, u16 a5, u16 a6, u16 a7)
+static void sub_812E768(const struct Bitmap *src, struct Bitmap *dst, u16 srcX, u16 srcY, u16 dstX, u16 dstY, u16 width, u16 height)
 {
-    asm_unified("\tpush {r4-r7,lr}\n"
-                "\tmov r7, r10\n"
-                "\tmov r6, r9\n"
-                "\tmov r5, r8\n"
-                "\tpush {r5-r7}\n"
-                "\tsub sp, 0x28\n"
-                "\tstr r0, [sp]\n"
-                "\tstr r1, [sp, 0x4]\n"
-                "\tldr r0, [sp, 0x48]\n"
-                "\tldr r4, [sp, 0x4C]\n"
-                "\tldr r1, [sp, 0x50]\n"
-                "\tldr r5, [sp, 0x54]\n"
-                "\tlsls r2, 16\n"
-                "\tlsrs r2, 16\n"
-                "\tstr r2, [sp, 0x8]\n"
-                "\tlsls r3, 16\n"
-                "\tlsrs r3, 16\n"
-                "\tlsls r0, 16\n"
-                "\tlsrs r0, 16\n"
-                "\tstr r0, [sp, 0xC]\n"
-                "\tlsls r4, 16\n"
-                "\tlsrs r4, 16\n"
-                "\tlsls r1, 16\n"
-                "\tlsrs r1, 16\n"
-                "\tlsls r5, 16\n"
-                "\tlsrs r5, 16\n"
-                "\tldr r2, [sp, 0x4]\n"
-                "\tldrh r0, [r2, 0x4]\n"
-                "\tldr r2, [sp, 0xC]\n"
-                "\tsubs r0, r2\n"
-                "\tldr r2, [sp, 0x8]\n"
-                "\tadds r2, r1, r2\n"
-                "\tstr r2, [sp, 0x10]\n"
-                "\tcmp r0, r1\n"
-                "\tbge _0812E7B4\n"
-                "\tldr r1, [sp, 0x8]\n"
-                "\tadds r0, r1\n"
-                "\tstr r0, [sp, 0x10]\n"
-                "_0812E7B4:\n"
-                "\tldr r2, [sp, 0x4]\n"
-                "\tldrh r1, [r2, 0x6]\n"
-                "\tsubs r0, r1, r4\n"
-                "\tcmp r0, r5\n"
-                "\tbge _0812E7C6\n"
-                "\tadds r0, r3, r1\n"
-                "\tsubs r0, r4\n"
-                "\tstr r0, [sp, 0x14]\n"
-                "\tb _0812E7CA\n"
-                "_0812E7C6:\n"
-                "\tadds r5, r3, r5\n"
-                "\tstr r5, [sp, 0x14]\n"
-                "_0812E7CA:\n"
-                "\tldr r0, [sp]\n"
-                "\tldrh r1, [r0, 0x4]\n"
-                "\tmovs r2, 0x7\n"
-                "\tadds r0, r1, 0\n"
-                "\tands r0, r2\n"
-                "\tadds r1, r0\n"
-                "\tasrs r1, 3\n"
-                "\tstr r1, [sp, 0x18]\n"
-                "\tldr r0, [sp, 0x4]\n"
-                "\tldrh r1, [r0, 0x4]\n"
-                "\tadds r0, r1, 0\n"
-                "\tands r0, r2\n"
-                "\tadds r1, r0\n"
-                "\tasrs r1, 3\n"
-                "\tstr r1, [sp, 0x1C]\n"
-                "\tmov r12, r3\n"
-                "\tmov r8, r4\n"
-                "\tldr r1, [sp, 0x14]\n"
-                "\tcmp r12, r1\n"
-                "\tblt _0812E7F4\n"
-                "\tb _0812E932\n"
-                "_0812E7F4:\n"
-                "\tldr r5, [sp, 0x8]\n"
-                "\tldr r6, [sp, 0xC]\n"
-                "\tmov r2, r12\n"
-                "\tadds r2, 0x1\n"
-                "\tstr r2, [sp, 0x20]\n"
-                "\tmov r0, r8\n"
-                "\tadds r0, 0x1\n"
-                "\tstr r0, [sp, 0x24]\n"
-                "\tldr r1, [sp, 0x10]\n"
-                "\tcmp r5, r1\n"
-                "\tblt _0812E80C\n"
-                "\tb _0812E922\n"
-                "_0812E80C:\n"
-                "\tmovs r7, 0x1\n"
-                "\tmovs r2, 0xF0\n"
-                "\tmov r10, r2\n"
-                "\tmovs r0, 0xF\n"
-                "\tmov r9, r0\n"
-                "_0812E816:\n"
-                "\tasrs r0, r5, 1\n"
-                "\tmovs r1, 0x3\n"
-                "\tands r0, r1\n"
-                "\tldr r2, [sp]\n"
-                "\tldr r1, [r2]\n"
-                "\tadds r1, r0\n"
-                "\tasrs r0, r5, 3\n"
-                "\tlsls r0, 5\n"
-                "\tadds r1, r0\n"
-                "\tmov r2, r12\n"
-                "\tasrs r0, r2, 3\n"
-                "\tldr r2, [sp, 0x18]\n"
-                "\tmuls r0, r2\n"
-                "\tlsls r0, 5\n"
-                "\tadds r1, r0\n"
-                "\tmov r2, r12\n"
-                "\tlsls r0, r2, 29\n"
-                "\tlsrs r0, 27\n"
-                "\tadds r3, r1, r0\n"
-                "\tasrs r0, r6, 1\n"
-                "\tmovs r1, 0x3\n"
-                "\tands r0, r1\n"
-                "\tldr r2, [sp, 0x4]\n"
-                "\tldr r1, [r2]\n"
-                "\tadds r1, r0\n"
-                "\tasrs r0, r6, 3\n"
-                "\tlsls r0, 5\n"
-                "\tadds r1, r0\n"
-                "\tmov r2, r8\n"
-                "\tasrs r0, r2, 3\n"
-                "\tldr r2, [sp, 0x1C]\n"
-                "\tmuls r0, r2\n"
-                "\tlsls r0, 5\n"
-                "\tadds r1, r0\n"
-                "\tmov r2, r8\n"
-                "\tlsls r0, r2, 29\n"
-                "\tlsrs r0, 27\n"
-                "\tadds r4, r1, r0\n"
-                "\tadds r0, r4, 0\n"
-                "\tands r0, r7\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _0812E8C2\n"
-                "\tsubs r4, 0x1\n"
-                "\tadds r0, r6, 0\n"
-                "\tands r0, r7\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _0812E89A\n"
-                "\tldrh r0, [r4]\n"
-                "\tldr r2, _0812E88C @ =0x00000fff\n"
-                "\tands r2, r0\n"
-                "\tadds r0, r5, 0\n"
-                "\tands r0, r7\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _0812E890\n"
-                "\tldrb r1, [r3]\n"
-                "\tmov r0, r10\n"
-                "\tands r0, r1\n"
-                "\tlsls r0, 8\n"
-                "\tb _0812E912\n"
-                "\t.align 2, 0\n"
-                "_0812E88C: .4byte 0x00000fff\n"
-                "_0812E890:\n"
-                "\tldrb r1, [r3]\n"
-                "\tmov r0, r9\n"
-                "\tands r0, r1\n"
-                "\tlsls r0, 12\n"
-                "\tb _0812E912\n"
-                "_0812E89A:\n"
-                "\tldrh r0, [r4]\n"
-                "\tldr r2, _0812E8B4 @ =0x0000f0ff\n"
-                "\tands r2, r0\n"
-                "\tadds r0, r5, 0\n"
-                "\tands r0, r7\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _0812E8B8\n"
-                "\tldrb r1, [r3]\n"
-                "\tmov r0, r10\n"
-                "\tands r0, r1\n"
-                "\tlsls r0, 4\n"
-                "\tb _0812E912\n"
-                "\t.align 2, 0\n"
-                "_0812E8B4: .4byte 0x0000f0ff\n"
-                "_0812E8B8:\n"
-                "\tldrb r1, [r3]\n"
-                "\tmov r0, r9\n"
-                "\tands r0, r1\n"
-                "\tlsls r0, 8\n"
-                "\tb _0812E912\n"
-                "_0812E8C2:\n"
-                "\tadds r0, r6, 0\n"
-                "\tands r0, r7\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _0812E8EE\n"
-                "\tldrh r0, [r4]\n"
-                "\tldr r2, _0812E8E0 @ =0x0000ff0f\n"
-                "\tands r2, r0\n"
-                "\tadds r0, r5, 0\n"
-                "\tands r0, r7\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _0812E8E4\n"
-                "\tldrb r1, [r3]\n"
-                "\tmov r0, r10\n"
-                "\tb _0812E910\n"
-                "\t.align 2, 0\n"
-                "_0812E8E0: .4byte 0x0000ff0f\n"
-                "_0812E8E4:\n"
-                "\tldrb r1, [r3]\n"
-                "\tmov r0, r9\n"
-                "\tands r0, r1\n"
-                "\tlsls r0, 4\n"
-                "\tb _0812E912\n"
-                "_0812E8EE:\n"
-                "\tldrh r0, [r4]\n"
-                "\tldr r2, _0812E908 @ =0x0000fff0\n"
-                "\tands r2, r0\n"
-                "\tadds r0, r5, 0\n"
-                "\tands r0, r7\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _0812E90C\n"
-                "\tldrb r1, [r3]\n"
-                "\tmov r0, r10\n"
-                "\tands r0, r1\n"
-                "\tlsrs r0, 4\n"
-                "\tb _0812E912\n"
-                "\t.align 2, 0\n"
-                "_0812E908: .4byte 0x0000fff0\n"
-                "_0812E90C:\n"
-                "\tldrb r1, [r3]\n"
-                "\tmov r0, r9\n"
-                "_0812E910:\n"
-                "\tands r0, r1\n"
-                "_0812E912:\n"
-                "\torrs r2, r0\n"
-                "\tstrh r2, [r4]\n"
-                "\tadds r5, 0x1\n"
-                "\tadds r6, 0x1\n"
-                "\tldr r0, [sp, 0x10]\n"
-                "\tcmp r5, r0\n"
-                "\tbge _0812E922\n"
-                "\tb _0812E816\n"
-                "_0812E922:\n"
-                "\tldr r1, [sp, 0x20]\n"
-                "\tmov r12, r1\n"
-                "\tldr r2, [sp, 0x24]\n"
-                "\tmov r8, r2\n"
-                "\tldr r0, [sp, 0x14]\n"
-                "\tcmp r12, r0\n"
-                "\tbge _0812E932\n"
-                "\tb _0812E7F4\n"
-                "_0812E932:\n"
-                "\tadd sp, 0x28\n"
-                "\tpop {r3-r5}\n"
-                "\tmov r8, r3\n"
-                "\tmov r9, r4\n"
-                "\tmov r10, r5\n"
-                "\tpop {r4-r7}\n"
-                "\tpop {r0}\n"
-                "\tbx r0");
+    s32 loopSrcY, loopDstY, loopSrcX, loopDstX, xEnd, yEnd, multiplierSrcY, multiplierDstY;
+    u16 toOrr;
+    const u8 *pixelsSrc;
+    u16 *pixelsDst;
+
+    if (dst->width - dstX < width)
+        xEnd = dst->width - dstX + srcX;
+    else
+        xEnd = width + srcX;
+
+    if (dst->height - dstY < height)
+        yEnd = srcY + dst->height - dstY;
+    else
+        yEnd = srcY + height;
+    multiplierSrcY = (src->width + (src->width & 7)) >> 3;
+    multiplierDstY = (dst->width + (dst->width & 7)) >> 3;
+    for (loopSrcY = srcY, loopDstY = dstY; loopSrcY < yEnd; loopSrcY++, loopDstY++)
+    {
+        for (loopSrcX = srcX, loopDstX = dstX; loopSrcX < xEnd; loopSrcX++, loopDstX++)
+        {
+            #ifndef NONMATCHING
+                asm("":::"r4");
+            #endif
+            pixelsSrc = src->pixels + ((loopSrcX >> 1) & 3) + ((loopSrcX >> 3) << 5) + (((loopSrcY >> 3) * multiplierSrcY) << 5) + ((u32)(loopSrcY << 0x1d) >> 0x1B);
+            pixelsDst = (u16 *)(dst->pixels + ((loopDstX >> 1) & 3) + ((loopDstX >> 3) << 5) + ((( loopDstY >> 3) * multiplierDstY) << 5) + ((u32)( loopDstY << 0x1d) >> 0x1B));
+
+            if ((uintptr_t)pixelsDst & 0x1)
+            {
+                pixelsDst = (void *)pixelsDst - 1;
+                if (loopDstX & 0x1)
+                {
+                    toOrr = *pixelsDst & 0x0fff;
+                    if (loopSrcX & 0x1)
+                        *pixelsDst = toOrr | ((*pixelsSrc & 0xf0) << 8);
+                    else
+                        *pixelsDst = toOrr | ((*pixelsSrc & 0x0f) << 12);
+                }
+                else
+                {
+                    toOrr = *pixelsDst & 0xf0ff;
+                    if (loopSrcX & 0x1)
+                        *pixelsDst = toOrr | ((*pixelsSrc & 0xf0) << 4);
+                    else
+                        *pixelsDst = toOrr | ((*pixelsSrc & 0x0f) << 8);
+                }
+            }
+            else
+            {
+                if (loopDstX & 1)
+                {
+                    toOrr = *pixelsDst & 0xff0f;
+                    if (loopSrcX & 1)
+                        *pixelsDst = toOrr | ((*pixelsSrc & 0xf0) << 0);
+                    else
+                        *pixelsDst = toOrr | ((*pixelsSrc & 0x0f) << 4);
+                }
+                else
+                {
+                    toOrr = *pixelsDst & 0xfff0;
+                    if (loopSrcX & 1)
+                        *pixelsDst = toOrr | ((*pixelsSrc & 0xf0) >> 4);
+                    else
+                        *pixelsDst = toOrr | ((*pixelsSrc & 0x0f) >> 0);
+                }
+            }
+        }
+    }
 }
 
 #define tEvA data[0]

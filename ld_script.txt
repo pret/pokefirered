@@ -212,6 +212,7 @@ SECTIONS {
         src/intro.o(.text);
         asm/battle_anim_special.o(.text);
         asm/hall_of_fame.o(.text);
+        src/credits.o(.text);
         asm/credits.o(.text);
         src/diploma.o(.text);
         asm/save_failed_screen.o(.text);
@@ -424,6 +425,8 @@ SECTIONS {
         data/data_83FECCC.o(.rodata);
         src/intro.o(.rodata);
         data/data_83FECCC.o(.rodata.battle_anim_special);
+        src/credits.o(.rodata);
+        data/credits.o(.rodata);
         src/diploma.o(.rodata);
         data/strings.o(.rodata);
         data/data_83FECCC.o(.rodata.841EE44);

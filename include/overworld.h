@@ -119,4 +119,7 @@ bool32 sub_8055C9C(void);
 void Overworld_ResetStateAfterDigEscRope(void);
 bool32 sub_8058244(void);
 
+void sub_80574A4(void);
+bool32 sub_805750C(u8 *, const char *, u8);
+
 #endif //GUARD_ROM4_H

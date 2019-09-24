@@ -208,4 +208,7 @@ extern const u8 gString_OutOfCoins[];
 extern const u8 gString_QuitPlaying[];
 extern const u8 gString_SlotMachineControls[];
 
+// credits
+extern const u8 gUnknown_841D198[];
+
 #endif //GUARD_STRINGS_H

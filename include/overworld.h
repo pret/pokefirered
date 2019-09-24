@@ -23,6 +23,13 @@ struct UCoords32
     u32 x, y;
 };
 
+struct CreditsOverworldCmd
+{
+    s16 unk_0;
+    u16 unk_2;
+    u16 unk_4;
+};
+
 extern struct UCoords32 gDirectionToVectors[];
 
 extern struct LinkPlayerMapObject gLinkPlayerMapObjects[4];
@@ -120,6 +127,6 @@ void Overworld_ResetStateAfterDigEscRope(void);
 bool32 sub_8058244(void);
 
 void sub_80574A4(void);
-bool32 sub_805750C(u8 *, const char *, u8);
+bool32 sub_805750C(u8 *, const struct CreditsOverworldCmd *, u8);
 
 #endif //GUARD_ROM4_H

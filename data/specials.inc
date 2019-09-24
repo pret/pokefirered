@@ -430,7 +430,7 @@ gSpecials:: @ 815FD60
 	def_special sub_814EA7C
 	def_special sub_80CCB94
 	def_special sub_80CCCF8
-	def_special sub_80F39B4
+	def_special Special_Credits
 	def_special sub_8153810
 	def_special sub_809D764
 	def_special sub_809D8C0

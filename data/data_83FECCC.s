@@ -230,59 +230,6 @@ gUnknown_840C39C:: @ 840C39C
 gUnknown_840C3BC:: @ 840C3BC
 	.incbin "baserom.gba", 0x40C3BC, 0x1E8
 
-gUnknown_840C5A4:: @ 840C5A4
-	.incbin "baserom.gba", 0x40C5A4, 0xC
-
-gUnknown_840C5B0:: @ 840C5B0
-	.incbin "baserom.gba", 0x40C5B0, 0x20
-
-gUnknown_840C5D0:: @ 840C5D0
-	.incbin "baserom.gba", 0x40C5D0, 0x20
-
-gUnknown_840C5F0:: @ 840C5F0
-	.incbin "baserom.gba", 0x40C5F0, 0x20
-
-gUnknown_840C610:: @ 840C610
-	.incbin "baserom.gba", 0x40C610, 0x20
-
-gUnknown_840C630:: @ 840C630
-	.incbin "baserom.gba", 0x40C630, 0x20
-
-gUnknown_840C650:: @ 840C650
-	.incbin "baserom.gba", 0x40C650, 0x404
-
-gUnknown_840CA54:: @ 840CA54
-	.incbin "baserom.gba", 0x40CA54, 0x138
-
-gUnknown_840CB8C:: @ 840CB8C
-	.incbin "baserom.gba", 0x40CB8C, 0x69C
-
-gUnknown_840D228:: @ 840D228
-	.incbin "baserom.gba", 0x40D228, 0xF30
-
-gUnknown_840E158:: @ 840E158
-	.incbin "baserom.gba", 0x40E158, 0x7AC
-
-gUnknown_840E904:: @ 840E904
-	.incbin "baserom.gba", 0x40E904, 0x93C
-
-gUnknown_840F240:: @ 840F240
-	.incbin "baserom.gba", 0x40F240, 0x704
-
-gUnknown_840F944:: @ 840F944
-	.incbin "baserom.gba", 0x40F944, 0x854
-
-gUnknown_8410198:: @ 8410198
-	.incbin "baserom.gba", 0x410198, 0x41C
-
-gUnknown_84105B4:: @ 84105B4
-	.incbin "baserom.gba", 0x4105B4, 0x728
-
-gUnknown_8410CDC:: @ 8410CDC
-	.incbin "baserom.gba", 0x410CDC, 0x18
-
-	@ strings
-
 	.section .rodata.841EE44
 	.align 2
 gUnknown_841EE44:: @ 841EE44

@@ -974,4 +974,12 @@ extern const u8 gGraphics_TitleScreen_CopyrightPressStartMap[];
 extern const u16 gGraphics_TitleScreen_FirePals[];
 extern const u8 gGraphics_TitleScreen_BlankObjTiles[];
 
+// credits
+extern const u32 gUnknown_8EAAB98[];
+extern const u32 gUnknown_8EAB30C[];
+extern const u16 gUnknown_8EAAB18[][16];
+extern const u16 gUnknown_8EAE528[];
+extern const u8 gUnknown_8EAE548[];
+extern const u8 gUnknown_8EAE900[];
+
 #endif //GUARD_GRAPHICS_H

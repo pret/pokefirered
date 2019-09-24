@@ -1,5 +1,6 @@
 #include "global.h"
 #include "malloc.h"
+#include "bg.h"
 #include "palette.h"
 #include "gpu_regs.h"
 #include "task.h"
@@ -7,9 +8,13 @@
 #include "event_data.h"
 #include "window.h"
 #include "new_menu_helpers.h"
-#include "menu.h"
+#include "decompress.h"
+#include "graphics.h"
 #include "strings.h"
-#include "field_weather.h"
+#include "trainer_pokemon_sprites.h"
+#include "sound.h"
+#include "constants/species.h"
+#include "constants/maps.h"
 
 struct CreditsResources
 {
@@ -22,7 +27,9 @@ struct CreditsResources
     u8 unk_09;
     u8 unk_0A;
     bool8 unk_0B;
-    u8 filler_0C[16];
+    u16 unk_0C;
+    u16 unk_0E;
+    u8 filler_10[12];
     u8 unk_1C;
     u8 unk_1D;
 };
@@ -41,6 +48,24 @@ struct UnkStruct_84145BC
     u8 unk_8;
 };
 
+struct CompressedGraphicsHeader
+{
+    const u8 * tiles;
+    const u8 * map;
+    const u16 * palette;
+};
+
+struct CreditsTaskData
+{
+    u8 field_00;
+    u8 field_01;
+    u16 field_02;
+    u16 field_04;
+    u8 field_06;
+    u16 field_08;
+    u16 field_0A;
+};
+
 EWRAM_DATA struct CreditsResources * gUnknown_203AB40 = NULL;
 
 void sub_80F39E8(void);
@@ -50,7 +75,246 @@ bool32 sub_80F4674(void);
 void sub_80F48D0(void);
 void sub_80F4930(u8 a0);
 
-/*
+const struct BgTemplate gUnknown_840C5A4[] = {
+    {
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 15,
+        .screenSize = 0,
+        .paletteMode = FALSE,
+        .priority = 0,
+        .baseTile = 0x0
+    }, {
+        .bg = 1,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 23,
+        .screenSize = 0,
+        .paletteMode = FALSE,
+        .priority = 1,
+        .baseTile = 0x0
+    }, {
+        .bg = 2,
+        .charBaseIndex = 3,
+        .mapBaseIndex = 31,
+        .screenSize = 1,
+        .paletteMode = TRUE,
+        .priority = 2,
+        .baseTile = 0x0
+    }
+};
+
+const struct WindowTemplate gUnknown_840C5B0[] = {
+    {
+        .bg = 0x00,
+        .tilemapLeft = 0x0b,
+        .tilemapTop = 0x06,
+        .width = 0x08,
+        .height = 0x08,
+        .paletteNum = 0x0a,
+        .baseBlock = 0x0008
+    }, {
+        .bg = 0x00,
+        .tilemapLeft = 0x0a,
+        .tilemapTop = 0x05,
+        .width = 0x0a,
+        .height = 0x0a,
+        .paletteNum = 0x0a,
+        .baseBlock = 0x0048
+    }, {
+        .bg = 0x00,
+        .tilemapLeft = 0x09,
+        .tilemapTop = 0x03,
+        .width = 0x0c,
+        .height = 0x0d,
+        .paletteNum = 0x0a,
+        .baseBlock = 0x00ac
+    }, DUMMY_WIN_TEMPLATE
+};
+
+const struct WindowTemplate gUnknown_840C5D0[] = {
+    {
+        .bg = 0x00,
+        .tilemapLeft = 0x0b,
+        .tilemapTop = 0x06,
+        .width = 0x08,
+        .height = 0x08,
+        .paletteNum = 0x0a,
+        .baseBlock = 0x0008
+    }, {
+        .bg = 0x00,
+        .tilemapLeft = 0x0a,
+        .tilemapTop = 0x05,
+        .width = 0x0a,
+        .height = 0x0a,
+        .paletteNum = 0x0a,
+        .baseBlock = 0x0048
+    }, {
+        .bg = 0x00,
+        .tilemapLeft = 0x09,
+        .tilemapTop = 0x05,
+        .width = 0x0c,
+        .height = 0x0a,
+        .paletteNum = 0x0a,
+        .baseBlock = 0x00ac
+    }, DUMMY_WIN_TEMPLATE
+};
+
+const struct WindowTemplate gUnknown_840C5F0[] = {
+    {
+        .bg = 0x00,
+        .tilemapLeft = 0x0b,
+        .tilemapTop = 0x06,
+        .width = 0x08,
+        .height = 0x08,
+        .paletteNum = 0x0a,
+        .baseBlock = 0x0008
+    }, {
+        .bg = 0x00,
+        .tilemapLeft = 0x0a,
+        .tilemapTop = 0x05,
+        .width = 0x0a,
+        .height = 0x0a,
+        .paletteNum = 0x0a,
+        .baseBlock = 0x0048
+    }, {
+        .bg = 0x00,
+        .tilemapLeft = 0x0a,
+        .tilemapTop = 0x04,
+        .width = 0x0a,
+        .height = 0x0c,
+        .paletteNum = 0x0a,
+        .baseBlock = 0x00ac
+    }, DUMMY_WIN_TEMPLATE
+};
+
+const struct WindowTemplate gUnknown_840C610[] = {
+    {
+        .bg = 0x00,
+        .tilemapLeft = 0x0b,
+        .tilemapTop = 0x06,
+        .width = 0x08,
+        .height = 0x08,
+        .paletteNum = 0x0a,
+        .baseBlock = 0x0008
+    }, {
+        .bg = 0x00,
+        .tilemapLeft = 0x0a,
+        .tilemapTop = 0x05,
+        .width = 0x0a,
+        .height = 0x0a,
+        .paletteNum = 0x0a,
+        .baseBlock = 0x0048
+    }, {
+        .bg = 0x00,
+        .tilemapLeft = 0x09,
+        .tilemapTop = 0x04,
+        .width = 0x0c,
+        .height = 0x0c,
+        .paletteNum = 0x0a,
+        .baseBlock = 0x00ac
+    }, DUMMY_WIN_TEMPLATE
+};
+
+const u16 gUnknown_840C630[] = INCBIN_U16("data/credits/unk_840C630.gbapal");
+const u32 gUnknown_840C650[] = INCBIN_U32("data/credits/unk_840C650.8bpp.lz");
+const u32 gUnknown_840CA54[] = INCBIN_U32("data/credits/unk_840CA54.bin.lz");
+const u32 gUnknown_840CB8C[] = INCBIN_U32("data/credits/unk_840CB8C.bin.lz");
+const u32 gUnknown_840D228[] = INCBIN_U32("data/credits/unk_840D228.bin.lz");
+const u32 gUnknown_840E158[] = INCBIN_U32("data/credits/unk_840E158.bin.lz");
+const u32 gUnknown_840E904[] = INCBIN_U32("data/credits/unk_840E904.bin.lz");
+const u32 gUnknown_840F240[] = INCBIN_U32("data/credits/unk_840F240.bin.lz");
+const u32 gUnknown_840F944[] = INCBIN_U32("data/credits/unk_840F944.bin.lz");
+const u32 gUnknown_8410198[] = INCBIN_U32("data/credits/unk_8410198.bin.lz");
+const u32 gUnknown_84105B4[] = INCBIN_U32("data/credits/unk_84105B4.bin.lz");
+
+const u32 filler_8410AFC = 0xF0;
+
+const u16 gUnknown_8410B00[] = INCBIN_U16("data/credits/unk_8410B20.gbapal");
+const u8 gUnknown_8410B20[] = INCBIN_U8("data/credits/unk_8410B20.4bpp.lz");
+const u8 gUnknown_8410B94[] = INCBIN_U8("data/credits/unk_8410B20.bin.lz");
+
+const struct CompressedGraphicsHeader gUnknown_8410CDC[] = {
+    {
+        .tiles = gUnknown_8EAE548,
+        .map = gUnknown_8EAE900,
+        .palette = gUnknown_8EAE528
+    }, {
+        .tiles = gUnknown_8410B20,
+        .map = gUnknown_8410B94,
+        .palette = gUnknown_8410B00
+    }
+};
+
+const struct UnkStruct_8410CF4 gUnknown_8410CF4[] = {
+    { 1, 0, 16 },
+    { 0, 0, 300 },
+    { 0, 1, 300 },
+    { 0, 2, 300 },
+    { 0, 42, 60 },
+    { 1, 1, 0 },
+    { 0, 3, 211 },
+    { 0, 4, 211 },
+    { 0, 5, 211 },
+    { 1, 2, 0 },
+    { 0, 6, 211 },
+    { 0, 7, 210 },
+    { 0, 8, 210 },
+    { 3, 0, 0 },
+    { 2, 3, 16 },
+    { 0, 9, 211 },
+    { 0, 10, 210 },
+    { 0, 11, 210 },
+    { 1, 4, 16 },
+    { 0, 12, 211 },
+    { 0, 13, 210 },
+    { 0, 14, 210 },
+    { 1, 5, 16 },
+    { 0, 15, 211 },
+    { 0, 16, 210 },
+    { 0, 17, 210 },
+    { 3, 1, 0 },
+    { 2, 6, 16 },
+    { 0, 18, 211 },
+    { 0, 19, 210 },
+    { 0, 20, 210 },
+    { 1, 7, 16 },
+    { 0, 21, 221 },
+    { 0, 22, 221 },
+    { 0, 23, 221 },
+    { 0, 24, 221 },
+    { 0, 42, 51 },
+    { 1, 8, 16 },
+    { 0, 25, 211 },
+    { 0, 26, 210 },
+    { 0, 27, 210 },
+    { 3, 2, 0 },
+    { 2, 9, 16 },
+    { 0, 28, 331 },
+    { 0, 29, 331 },
+    { 0, 30, 331 },
+    { 1, 10, 16 },
+    { 0, 31, 221 },
+    { 0, 32, 221 },
+    { 0, 33, 221 },
+    { 0, 34, 221 },
+    { 0, 42, 52 },
+    { 1, 11, 16 },
+    { 0, 41, 210 },
+    { 0, 35, 210 },
+    { 0, 36, 211 },
+    { 3, 3, 0 },
+    { 2, 12, 16 },
+    { 0, 37, 221 },
+    { 0, 40, 221 },
+    { 0, 38, 221 },
+    { 0, 39, 221 },
+    { 0, 42, 52 },
+    { 4, 0, 224 },
+    { 4, 1, 240 },
+    { 5, 0, 600 }
+};
+
+const ALIGNED(4) u8 gUnknown_8410FFC[3] = {0, 1, 2};
 const ALIGNED(4) u8 gUnknown_8410E00[3] = {0, 5, 2};
 const ALIGNED(4) u8 gUnknown_8410E04[3] = {0, 1, 2};
 
@@ -63,17 +327,274 @@ const struct WindowTemplate gUnknown_8410E08 = {
     .paletteNum = 15,
     .baseBlock = 0x008
 };
- */
 
-extern const struct UnkStruct_8410CF4 gUnknown_8410CF4[];
-extern const u8 gUnknown_8410E00[3];
-extern const u8 gUnknown_8410E04[3];
-extern const struct WindowTemplate gUnknown_8410E08;
+const u16 gUnknown_8410E10[] = INCBIN_U16("data/credits/unk_8410E10.gbapal");
+const u32 gUnknown_8410E30[] = INCBIN_U32("data/credits/unk_8410E30.4bpp.lz");
+const u16 gUnknown_8411BF8[] = INCBIN_U16("data/credits/unk_8411BF8.gbapal");
+const u32 gUnknown_8411C18[] = INCBIN_U32("data/credits/unk_8411C18.4bpp.lz");
+const u16 gUnknown_84129A0[] = INCBIN_U16("data/credits/unk_84129A0.gbapal");
+const u32 gUnknown_84129C0[] = INCBIN_U32("data/credits/unk_84129C0.4bpp.lz");
+const u16 gUnknown_8413318[] = INCBIN_U16("data/credits/unk_8413318.gbapal");
+const u32 gUnknown_8413338[] = INCBIN_U32("data/credits/unk_8413338.4bpp.lz");
+const u16 gUnknown_8413854[] = INCBIN_U16("data/credits/unk_8413854.gbapal");
+const u32 gUnknown_8413874[] = INCBIN_U32("data/credits/unk_8413874.4bpp.lz");
+const u16 gUnknown_8413D98[] = INCBIN_U16("data/credits/unk_8413D98.gbapal");
+const u32 gUnknown_8413DB8[] = INCBIN_U32("data/credits/unk_8413DB8.4bpp.lz");
 
-extern const char * gUnknown_8414588[];
-extern const struct UnkStruct_84145BC gUnknown_84145BC[];
+const u16 gUnknown_841431C[][3] = {
+    { 0, 3, 1 },
+    { 0, 2, 0 },
+    { 0, 3, 0 },
+    { 1, 1, 2 },
+    { 0, 0, 3 }
+};
 
-void sub_80F39B4(void)
+const struct OamData gOamData_841433C = {
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .mosaic = FALSE,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
+    .shape = ST_OAM_SQUARE,
+    .size = ST_OAM_SIZE_3,
+    .tileNum = 0x000,
+    .priority = 0,
+    .paletteNum = 15
+};
+
+const union AnimCmd gAnimCmds_8414344[] = {
+    ANIMCMD_FRAME(0x000, 8),
+    ANIMCMD_FRAME(0x040, 8),
+    ANIMCMD_FRAME(0x080, 8),
+    ANIMCMD_FRAME(0x0C0, 8),
+    ANIMCMD_FRAME(0x100, 8),
+    ANIMCMD_FRAME(0x140, 8),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd *const gAnimCmdTable_8414360[] = {
+    gAnimCmds_8414344
+};
+
+const struct SpriteTemplate gUnknown_8414364 = {
+    .oam = &gOamData_841433C,
+    .anims = gAnimCmdTable_8414360,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+const struct OamData gOamData_841437C = {
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .mosaic = FALSE,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
+    .shape = ST_OAM_H_RECTANGLE,
+    .size = ST_OAM_SIZE_3,
+    .tileNum = 0x000,
+    .priority = 0,
+    .paletteNum = 14
+};
+
+const union AnimCmd gAnimCmds_8414384[] = {
+    ANIMCMD_FRAME(0x00, 8),
+    ANIMCMD_FRAME(0x20, 8),
+    ANIMCMD_FRAME(0x40, 8),
+    ANIMCMD_FRAME(0x60, 8),
+    ANIMCMD_FRAME(0x80, 8),
+    ANIMCMD_FRAME(0xA0, 8),
+    ANIMCMD_FRAME(0xC0, 8),
+    ANIMCMD_FRAME(0xE0, 8),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gAnimCmds_84143A8[] = {
+    ANIMCMD_FRAME(0x00, 8),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd *const gAnimCmdTable_84143B0[] = {
+    gAnimCmds_8414384
+};
+
+const union AnimCmd *const gAnimCmdTable_84143B4[] = {
+    gAnimCmds_84143A8
+};
+
+const struct SpriteTemplate gUnknown_84143B8 = {
+    .oam = &gOamData_841437C,
+    .anims = gAnimCmdTable_84143B0,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+const struct SpriteTemplate gUnknown_84143D0 = {
+    .oam = &gOamData_841437C,
+    .anims = gAnimCmdTable_84143B4,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+const struct CreditsOverworldCmd gUnknown_84143E8[] = {
+    { 0x00fe, MAP_GROUP(ROUTE23), MAP_NUM(ROUTE23) },
+    { 0x000b, 0x006b, 0x0001 },
+    { 0x0000, 0x0001, 0x0500 }, // Scroll down
+    { 0x00fd, 0x00fd, 0x00fd }
+};
+
+const struct CreditsOverworldCmd gUnknown_8414408[] = {
+    { 0x00fe, MAP_GROUP(VIRIDIAN_CITY), MAP_NUM(VIRIDIAN_CITY) },
+    { 0x001e, 0x0022, 0x0001 },
+    { 0x0000, 0xffff, 0x0500 }, // Scroll up
+    { 0x00fd, 0x00fd, 0x00fd }
+};
+
+const struct CreditsOverworldCmd gUnknown_8414428[] = {
+    { 0x00fe, MAP_GROUP(PEWTER_CITY), MAP_NUM(PEWTER_CITY) },
+    { 0x0014, 0x001a, 0x0001 },
+    { 0x0000, 0xffff, 0x0500 }, // Scroll up
+    { 0x00fd, 0x00fd, 0x00fd }
+};
+
+// Charizard
+
+const struct CreditsOverworldCmd gUnknown_8414448[] = {
+    { 0x00fe, MAP_GROUP(CERULEAN_CITY), MAP_NUM(CERULEAN_CITY) },
+    { 0x0008, 0x0006, 0x0001 },
+    { 0x0001, 0x0001, 0x0500 }, // Scroll right and down
+    { 0x00fd, 0x00fd, 0x00fd }
+};
+
+const struct CreditsOverworldCmd gUnknown_8414468[] = {
+    { 0x00fe, MAP_GROUP(ROUTE25), MAP_NUM(ROUTE25) },
+    { 0x0019, 0x0006, 0x0001 },
+    { 0x0001, 0x0000, 0x0500 }, // Scroll right
+    { 0x00fd, 0x00fd, 0x00fd }
+};
+
+const struct CreditsOverworldCmd gUnknown_8414488[] = {
+    { 0x00fe, MAP_GROUP(VERMILION_CITY), MAP_NUM(VERMILION_CITY) },
+    { 0x0009, 0x0007, 0x0001 },
+    { 0x0001, 0x0001, 0x0500 }, // Scroll right and down
+    { 0x00fd, 0x00fd, 0x00fd }
+};
+
+// Venusaur
+
+const struct CreditsOverworldCmd gUnknown_84144A8[] = {
+    { 0x00fe, MAP_GROUP(ROUTE10), MAP_NUM(ROUTE10) },
+    { 0x000b, 0x0044, 0x0001 },
+    { 0x0000, 0x0001, 0x0500 }, // Scroll down
+    { 0x00fd, 0x00fd, 0x00fd }
+};
+
+const struct CreditsOverworldCmd gUnknown_84144C8[] = {
+    { 0x00fe, MAP_GROUP(CELADON_CITY), MAP_NUM(CELADON_CITY) },
+    { 0x0030, 0x0010, 0x0001 },
+    { 0xffff, 0x0000, 0x0500 }, // Scroll left
+    { 0x00fd, 0x00fd, 0x00fd }
+};
+
+const struct CreditsOverworldCmd gUnknown_84144E8[] = {
+    { 0x00fe, MAP_GROUP(SAFFRON_CITY_DUPLICATE), MAP_NUM(SAFFRON_CITY_DUPLICATE) },
+    { 0x0027, 0x0005, 0x0001 },
+    { 0x0000, 0x0001, 0x0500 }, // Scroll down
+    { 0x00fd, 0x00fd, 0x00fd }
+};
+
+// Blastoise
+
+const struct CreditsOverworldCmd gUnknown_8414508[] = {
+    { 0x00fe, MAP_GROUP(ROUTE17), MAP_NUM(ROUTE17) },
+    { 0x0007, 0x002b, 0x0001 },
+    { 0x0000, 0x0001, 0x0500 }, // Scroll down
+    { 0x00fd, 0x00fd, 0x00fd }
+};
+
+const struct CreditsOverworldCmd gUnknown_8414528[] = {
+    { 0x00fe, MAP_GROUP(FUCHSIA_CITY), MAP_NUM(FUCHSIA_CITY) },
+    { 0x001c, 0x0005, 0x0001 },
+    { 0x0000, 0x0001, 0x0500 }, // Scroll down
+    { 0x00fd, 0x00fd, 0x00fd }
+};
+
+const struct CreditsOverworldCmd gUnknown_8414548[] = {
+    { 0x00fe, MAP_GROUP(CINNABAR_ISLAND), MAP_NUM(CINNABAR_ISLAND) },
+    { 0x000d, 0x0011, 0x0001 },
+    { 0x0000, 0xffff, 0x0500 }, // Scroll up
+    { 0x00fd, 0x00fd, 0x00fd }
+};
+
+// Pikachu
+
+const struct CreditsOverworldCmd gUnknown_8414568[] = {
+    { 0x00fe, MAP_GROUP(ROUTE21_NORTH), MAP_NUM(ROUTE21_NORTH) },
+    { 0x0008, 0x0014, 0x0001 },
+    { 0x0000, 0xffff, 0x0500 }, // Scroll up
+    { 0x00fd, 0x00fd, 0x00fd },
+};
+
+const struct CreditsOverworldCmd *const gUnknown_8414588[] = {
+    gUnknown_84143E8,
+    gUnknown_8414408,
+    gUnknown_8414428,
+    gUnknown_8414448,
+    gUnknown_8414468,
+    gUnknown_8414488,
+    gUnknown_84144A8,
+    gUnknown_84144C8,
+    gUnknown_84144E8,
+    gUnknown_8414508,
+    gUnknown_8414528,
+    gUnknown_8414548,
+    gUnknown_8414568
+};
+
+const struct UnkStruct_84145BC gUnknown_84145BC[] = {
+    { gUnknown_841D1D8, gUnknown_841D1E8, 0 },
+    { gUnknown_841D200, gUnknown_841D224, 0 },
+    { gUnknown_841D248, gUnknown_841D284, 0 },
+    { gUnknown_841D2B4, gUnknown_841D2C8, 0 },
+    { gUnknown_841D314, gUnknown_841D330, 1 },
+    { gUnknown_841D370, gUnknown_841D388, 1 },
+    { gUnknown_841D3C0, gUnknown_841D3D8, 1 },
+    { gUnknown_841D3FC, gUnknown_841D414, 1 },
+    { gUnknown_841D434, gUnknown_841D448, 0 },
+    { gUnknown_841D45C, gUnknown_841D474, 0 },
+    { gUnknown_841D4A4, gUnknown_841D4BC, 0 },
+    { gUnknown_841D4F0, gUnknown_841D504, 1 },
+    { gUnknown_841D524, gUnknown_841D548, 0 },
+    { gUnknown_841D56C, gUnknown_841D588, 0 },
+    { gUnknown_841D5B8, gUnknown_841D5CC, 0 },
+    { gUnknown_841D5E4, gUnknown_841D5FC, 1 },
+    { gUnknown_841D640, gUnknown_841D658, 0 },
+    { gUnknown_841D698, gUnknown_841D6B0, 1 },
+    { gUnknown_841D6EC, gUnknown_841D708, 0 },
+    { gUnknown_841D74C, gUnknown_841D768, 0 },
+    { gUnknown_841D784, gUnknown_841D79C, 0 },
+    { gUnknown_841D7DC, gUnknown_841D7F4, 0 },
+    { gUnknown_841D834, gUnknown_841D84C, 0 },
+    { gUnknown_841D894, gUnknown_841D8B0, 0 },
+    { gUnknown_841D8CC, gUnknown_841D8EC, 0 },
+    { gUnknown_841D938, gUnknown_841D94C, 0 },
+    { gUnknown_841D98C, gUnknown_841D9A0, 1 },
+    { gUnknown_841D9C4, gUnknown_841D9D4, 0 },
+    { gUnknown_841DA08, gUnknown_841DA24, 0 },
+    { gUnknown_841DA3C, gUnknown_841DA58, 0 },
+    { gUnknown_841DA6C, gUnknown_841DA88, 0 },
+    { gUnknown_841DAA0, gUnknown_841DAC4, 0 },
+    { gUnknown_841DAE8, gUnknown_841DB04, 0 },
+    { gUnknown_841DB28, gUnknown_841DB3C, 0 },
+    { gUnknown_841DB7C, gUnknown_841DBA4, 1 },
+    { gUnknown_841DBDC, gUnknown_841DBF8, 1 },
+    { gUnknown_841DC2C, gUnknown_841DC48, 1 },
+    { gUnknown_841DCAC, gUnknown_841DCC8, 1 },
+    { gUnknown_841DD08, gUnknown_841DD20, 0 },
+    { gUnknown_841DD64, gUnknown_841DD7C, 0 },
+    { gUnknown_841DDC8, gUnknown_841DDE4, 0 },
+    { gUnknown_841DE24, gUnknown_841DE3C, 0 },
+    { gUnknown_84161CD, gUnknown_84161CD, 0 }
+};
+
+void Special_Credits(void)
 {
     gUnknown_203AB40 = AllocZeroed(sizeof(*gUnknown_203AB40));
     ResetTasks();
@@ -1114,3 +1635,412 @@ s32 sub_80F3BD0(void)
                 "_080F418C: .4byte gPaletteFade");
 }
 #endif //NONMATCHING
+
+void sub_80F4190(void)
+{
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+}
+
+void sub_80F41A4(u8 a0)
+{
+    switch (a0)
+    {
+    case 0:
+        InitWindows(gUnknown_840C5B0);
+        FillWindowPixelBuffer(0, PIXEL_FILL(0));
+        sub_810C228(SPECIES_CHARIZARD, 8, 0, TRUE, 10, 0);
+        CopyToWindowPixelBuffer(1, (const void *)gUnknown_840CB8C, 0, 0);
+        CopyToWindowPixelBuffer(2, (const void *)gUnknown_840D228, 0, 0);
+        break;
+    case 1:
+        InitWindows(gUnknown_840C5D0);
+        FillWindowPixelBuffer(0, PIXEL_FILL(0));
+        sub_810C228(SPECIES_VENUSAUR, 8, 0, TRUE, 10, 0);
+        CopyToWindowPixelBuffer(1, (const void *)gUnknown_840E158, 0, 0);
+        CopyToWindowPixelBuffer(2, (const void *)gUnknown_840E904, 0, 0);
+        break;
+    case 2:
+        InitWindows(gUnknown_840C5F0);
+        FillWindowPixelBuffer(0, PIXEL_FILL(0));
+        sub_810C228(SPECIES_BLASTOISE, 8, 0, TRUE, 10, 0);
+        CopyToWindowPixelBuffer(1, (const void *)gUnknown_840F240, 0, 0);
+        CopyToWindowPixelBuffer(2, (const void *)gUnknown_840F944, 0, 0);
+        break;
+    case 3:
+        InitWindows(gUnknown_840C610);
+        FillWindowPixelBuffer(0, PIXEL_FILL(0));
+        sub_810C228(SPECIES_PIKACHU, 8, 0, TRUE, 10, 0);
+        CopyToWindowPixelBuffer(1, (const void *)gUnknown_8410198, 0, 0);
+        CopyToWindowPixelBuffer(2, (const void *)gUnknown_84105B4, 0, 0);
+        break;
+    }
+    CopyWindowToVram(0, 2);
+    CopyWindowToVram(1, 2);
+    CopyWindowToVram(2, 2);
+}
+
+u16 sub_80F42F0(u8 a0)
+{
+    switch (a0)
+    {
+    case 0:
+        return SPECIES_CHARIZARD;
+    case 1:
+        return SPECIES_VENUSAUR;
+    case 2:
+        return SPECIES_BLASTOISE;
+    case 3:
+        return SPECIES_PIKACHU;
+    default:
+        return SPECIES_NONE;
+    }
+}
+
+bool32 sub_80F4328(void)
+{
+    switch (gUnknown_203AB40->unk_01)
+    {
+    case 0:
+        SetVBlankCallback(NULL);
+        SetHBlankCallback(NULL);
+        ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON | DISPCNT_WIN1_ON);
+        SetGpuReg(REG_OFFSET_WININ, 0);
+        SetGpuReg(REG_OFFSET_WINOUT, 0);
+        SetGpuReg(REG_OFFSET_BLDCNT, 0);
+        SetGpuReg(REG_OFFSET_BLDALPHA, 0);
+        SetGpuReg(REG_OFFSET_BLDY, 0);
+        ResetPaletteFade();
+        ResetSpriteData();
+        ResetTasks();
+        ResetBgsAndClearDma3BusyFlags(1);
+        InitBgsFromTemplates(1, gUnknown_840C5A4, NELEMS(gUnknown_840C5A4));
+        SetBgTilemapBuffer(0, Alloc(BG_SCREEN_SIZE));
+        ChangeBgX(0, 0, 0);
+        ChangeBgY(0, 0, 0);
+        ChangeBgX(1, 0, 0);
+        ChangeBgY(1, 0, 0);
+        gUnknown_203AB40->unk_0C = 0;
+        gUnknown_203AB40->unk_0E = 0;
+        SetBgAffine(2, 0x8000, 0x8000, 0x78, 0x50, gUnknown_203AB40->unk_0C, gUnknown_203AB40->unk_0C, 0);
+        DecompressAndLoadBgGfxUsingHeap(1, gUnknown_8EAAB98, 0x2000, 0, 0);
+        DecompressAndLoadBgGfxUsingHeap(2, gUnknown_840C650, 0x2000, 0, 0);
+        DecompressAndLoadBgGfxUsingHeap(1, gUnknown_8EAB30C, 0x500, 0, 1);
+        DecompressAndLoadBgGfxUsingHeap(2, gUnknown_840CA54, 0x400, 0, 1);
+        LoadPalette(gUnknown_8EAAB18[gUnknown_203AB40->unk_09], 0, 0x20);
+        LoadPalette(gUnknown_840C630, 0xF0, 0x20);
+        sub_80F41A4(gUnknown_203AB40->unk_09);
+        SetVBlankCallback(sub_80F4190);
+        EnableInterrupts(INTR_FLAG_VBLANK);
+        gUnknown_203AB40->unk_01++;
+        break;
+    case 1:
+        FillBgTilemapBufferRect(0, 0, 0, 0, 32, 32, PIXEL_FILL(1));
+        PutWindowTilemap(0);
+        CopyBgTilemapBufferToVram(2);
+        CopyBgTilemapBufferToVram(1);
+        CopyBgTilemapBufferToVram(0);
+        gUnknown_203AB40->unk_01++;
+        break;
+    case 2:
+        ShowBg(2);
+        ShowBg(0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        gUnknown_203AB40->unk_0C = 0x28;
+        gUnknown_203AB40->unk_01++;
+        break;
+    case 3:
+        if (gUnknown_203AB40->unk_0C != 0)
+            gUnknown_203AB40->unk_0C--;
+        else
+            gUnknown_203AB40->unk_01++;
+        break;
+    case 4:
+        if (!gPaletteFade.active)
+        {
+            gUnknown_203AB40->unk_0C = 8;
+            gUnknown_203AB40->unk_0E = 1;
+            gUnknown_203AB40->unk_01++;
+        }
+        break;
+    case 5:
+        if (gUnknown_203AB40->unk_0C != 0)
+            gUnknown_203AB40->unk_0C--;
+        else
+        {
+            if (gUnknown_203AB40->unk_0E < 3)
+            {
+                PutWindowTilemap(gUnknown_203AB40->unk_0E);
+                CopyBgTilemapBufferToVram(0);
+                gUnknown_203AB40->unk_0C = 4;
+                gUnknown_203AB40->unk_0E++;
+            }
+            else
+                gUnknown_203AB40->unk_01++;
+        }
+        break;
+    case 6:
+        if (gUnknown_203AB40->unk_0C < 256)
+        {
+            gUnknown_203AB40->unk_0C += 16;
+            SetBgAffine(2, 0x8000, 0x8000, 0x78, 0x50, gUnknown_203AB40->unk_0C, gUnknown_203AB40->unk_0C, 0);
+        }
+        else
+        {
+            SetBgAffine(2, 0x8000, 0x8000, 0x78, 0x50, 0x100, 0x100, 0);
+            gUnknown_203AB40->unk_0C = 32;
+            gUnknown_203AB40->unk_01++;
+        }
+        break;
+    case 7:
+        if (gUnknown_203AB40->unk_0C != 0)
+            gUnknown_203AB40->unk_0C--;
+        else
+        {
+            HideBg(2);
+            ShowBg(1);
+            PlayCry2(sub_80F42F0(gUnknown_203AB40->unk_09), 0, 125, 10);
+            gUnknown_203AB40->unk_0C = 128;
+            gUnknown_203AB40->unk_01++;
+        }
+        break;
+    case 8:
+        if (gUnknown_203AB40->unk_0C != 0)
+            gUnknown_203AB40->unk_0C--;
+        else
+        {
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            gUnknown_203AB40->unk_01++;
+        }
+        break;
+    case 9:
+        if (!gPaletteFade.active)
+        {
+            FreeAllWindowBuffers();
+            Free(GetBgTilemapBuffer(0));
+            gUnknown_203AB40->unk_01 = 0;
+            return TRUE;
+        }
+        break;
+    }
+    return FALSE;
+}
+
+bool32 sub_80F4674(void)
+{
+    switch (gUnknown_203AB40->unk_01)
+    {
+    case 0:
+        SetVBlankCallback(NULL);
+        SetHBlankCallback(NULL);
+        ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON | DISPCNT_WIN1_ON);
+        SetGpuReg(REG_OFFSET_WININ, 0);
+        SetGpuReg(REG_OFFSET_WINOUT, 0);
+        SetGpuReg(REG_OFFSET_BLDCNT, 0);
+        SetGpuReg(REG_OFFSET_BLDALPHA, 0);
+        SetGpuReg(REG_OFFSET_BLDY, 0);
+        ResetPaletteFade();
+        ResetSpriteData();
+        ResetTasks();
+        ResetBgsAndClearDma3BusyFlags(1);
+        InitBgsFromTemplates(0, gUnknown_840C5A4, 1);
+        ChangeBgX(0, 0, 0);
+        ChangeBgY(0, 0, 0);
+        DecompressAndLoadBgGfxUsingHeap(0, gUnknown_8410CDC[gUnknown_203AB40->unk_09].tiles, 0x2000, 0, 0);
+        DecompressAndLoadBgGfxUsingHeap(0, gUnknown_8410CDC[gUnknown_203AB40->unk_09].map, 0x800, 0, 1);
+        LoadPalette(gUnknown_8410CDC[gUnknown_203AB40->unk_09].palette, 0x00, 0x200);
+        SetVBlankCallback(sub_80F4190);
+        EnableInterrupts(INTR_FLAG_VBLANK);
+        gUnknown_203AB40->unk_01++;
+        break;
+    case 1:
+        CopyBgTilemapBufferToVram(0);
+        gUnknown_203AB40->unk_01++;
+        break;
+    case 2:
+        ShowBg(0);
+        if (gUnknown_203AB40->unk_09 != 0)
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0, RGB_BLACK);
+        else
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        gUnknown_203AB40->unk_01++;
+        break;
+    case 3:
+        if (!gPaletteFade.active)
+        {
+            gUnknown_203AB40->unk_01 = 0;
+            return TRUE;
+        }
+        break;
+    }
+    return FALSE;
+}
+
+void sub_80F47F8(u8 taskId)
+{
+    struct CreditsTaskData * data = (void *)gTasks[taskId].data;
+    switch (data->field_00)
+    {
+    case 0:
+        break;
+    case 1:
+        if (gSprites[data->field_01].pos1.x != 0xD0)
+        {
+            gSprites[data->field_01].pos1.x--;
+            gSprites[data->field_06].pos1.x--;
+        }
+        else
+        {
+            data->field_00 = 0;
+        }
+        break;
+    case 2:
+        if (gUnknown_203AB40->unk_1D & 1)
+        {
+            if (gSprites[data->field_01].pos1.y != 0x50)
+            {
+                gSprites[data->field_01].pos1.y--;
+                gSprites[data->field_06].pos1.y--;
+            }
+            else
+            {
+                data->field_00 = 0;
+            }
+        }
+        break;
+    case 3:
+        if (gUnknown_203AB40->unk_00 == 15)
+        {
+            gSprites[data->field_01].pos1.x--;
+            gSprites[data->field_06].pos1.x--;
+        }
+        break;
+    }
+}
+
+void sub_80F48D0(void)
+{
+    if (gUnknown_203AB40->unk_02 != 0xFF)
+    {
+        struct CreditsTaskData * data = (void *)gTasks[gUnknown_203AB40->unk_02].data;
+        FreeSpriteTilesByTag(data->field_02);
+        DestroySprite(&gSprites[data->field_01]);
+        FreeSpriteTilesByTag(data->field_08);
+        DestroySprite(&gSprites[data->field_06]);
+        DestroyTask(gUnknown_203AB40->unk_02);
+        gUnknown_203AB40->unk_02 = 0xFF;
+    }
+}
+
+void sub_80F4930(u8 a0)
+{
+    u8 taskId;
+    struct CreditsTaskData * data;
+    s32 r4, r9;
+    struct SpriteTemplate sp00;
+    struct CompressedSpriteSheet sp18;
+
+    if (gUnknown_203AB40->unk_02 == 0xFF)
+    {
+        taskId = CreateTask(sub_80F47F8, 0);
+        data = (void *)gTasks[taskId].data;
+        gUnknown_203AB40->unk_02 = taskId;
+        switch (gUnknown_841431C[a0][2])
+        {
+        default:
+        case 0:
+            r4 = 0xd0;
+            r9 = 0x50;
+            break;
+        case 1:
+            r4 = 0x110;
+            r9 = 0x50;
+            break;
+        case 2:
+            r4 = 0xd0;
+            r9 = 0xa0;
+            break;
+        }
+        data->field_00 = gUnknown_841431C[a0][2];
+        data->field_02 = 0x2000;
+        data->field_04 = 0xFFFF;
+        switch (gUnknown_841431C[a0][0])
+        {
+        case 0:
+            // Player
+            if (gSaveBlock2Ptr->playerGender == MALE)
+            {
+                sp18.data = gUnknown_8410E30;
+                sp18.size = 0x3000;
+                sp18.tag = data->field_02;
+                LoadCompressedSpriteSheet(&sp18);
+                LoadPalette(gUnknown_8410E10, 0x1F0, 0x20);
+            }
+            else
+            {
+                sp18.data = gUnknown_8411C18;
+                sp18.size = 0x3000;
+                sp18.tag = data->field_02;
+                LoadCompressedSpriteSheet(&sp18);
+                LoadPalette(gUnknown_8411BF8, 0x1F0, 0x20);
+            }
+            break;
+        case 1:
+            // Rival
+            sp18.data = gUnknown_84129C0;
+            sp18.size = 0x3000;
+            sp18.tag = data->field_02;
+            LoadCompressedSpriteSheet(&sp18);
+            LoadPalette(gUnknown_84129A0, 0x1F0, 0x20);
+            break;
+        }
+        sp00 = gUnknown_8414364;
+        sp00.tileTag = data->field_02;
+        data->field_01 = CreateSprite(&sp00, r4, r9, 0);
+        gSprites[data->field_01].oam.paletteNum = 0xF;
+        gSprites[data->field_01].subpriority = 0;
+
+        data->field_08 = 0x2001;
+        data->field_0A = 0xFFFF;
+        switch (gUnknown_841431C[a0][1])
+        {
+        case 0:
+            sp18.data = gUnknown_8413338;
+            sp18.size = 0x3000;
+            sp18.tag = data->field_08;
+            LoadCompressedSpriteSheet(&sp18);
+            LoadPalette(gUnknown_8413318, 0x1E0, 0x20);
+            sp00 = gUnknown_84143B8;
+            break;
+        case 1:
+            sp18.data = gUnknown_8413338;
+            sp18.size = 0x3000;
+            sp18.tag = data->field_08;
+            LoadCompressedSpriteSheet(&sp18);
+            LoadPalette(gUnknown_8413318, 0x1E0, 0x20);
+            sp00 = gUnknown_84143D0;
+            break;
+        case 2:
+            sp18.data = gUnknown_8413874;
+            sp18.size = 0x3000;
+            sp18.tag = data->field_08;
+            LoadCompressedSpriteSheet(&sp18);
+            LoadPalette(gUnknown_8413854, 0x1E0, 0x20);
+            sp00 = gUnknown_84143B8;
+            break;
+        case 3:
+            sp18.data = gUnknown_8413DB8;
+            sp18.size = 0x3000;
+            sp18.tag = data->field_08;
+            LoadCompressedSpriteSheet(&sp18);
+            LoadPalette(gUnknown_8413D98, 0x1E0, 0x20);
+            sp00 = gUnknown_84143B8;
+            break;
+        }
+        sp00.tileTag = data->field_08;
+        data->field_06 = CreateSprite(&sp00, r4, r9 + 0x26, 0);
+        gSprites[data->field_06].oam.paletteNum = 0xE;
+        gSprites[data->field_06].subpriority = 1;
+    }
+}

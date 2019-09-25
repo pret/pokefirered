@@ -3320,11 +3320,11 @@ gUnknown_841D18D:: @ 841D18D
 	.string "ROOFTOP$"
 
 	.align 2
-gUnknown_841D198:: @ 841D198
+gString_PokemonFireRed_Staff:: @ 841D198
 	.string "Pokémon FireRed Version\nStaff$"
 
 	.align 2
-gUnknown_841D1B8:: @ 0x841D1B6
+gString_PokemonLeafGreen_Staff:: @ 0x841D1B6
 	.string "Pokémon LeafGreen Version\nStaff$"
 
 	.align 2

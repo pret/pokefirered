@@ -1,6 +1,0 @@
-#ifndef GUARD_CREDITS_H
-#define GUARD_CREDITS_H
-
-
-
-#endif //GUARD_CREDITS_H

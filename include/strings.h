@@ -210,8 +210,8 @@ extern const u8 gString_SlotMachineControls[];
 
 // credits
 extern const u8 gUnknown_84161CD[];
-extern const u8 gUnknown_841D198[]; // FR
-extern const u8 gUnknown_841D1B8[]; // LG
+extern const u8 gString_PokemonFireRed_Staff[]; // FR
+extern const u8 gString_PokemonLeafGreen_Staff[]; // LG
 extern const u8 gUnknown_841D1D8[];
 extern const u8 gUnknown_841D1E8[];
 extern const u8 gUnknown_841D200[];

@@ -1,5 +1,5 @@
-#ifndef GUARD_ROM4_H
-#define GUARD_ROM4_H
+#ifndef GUARD_OVERWORLD_H
+#define GUARD_OVERWORLD_H
 
 #include "global.h"
 #include "main.h"
@@ -29,6 +29,11 @@ struct CreditsOverworldCmd
     u16 unk_2;
     u16 unk_4;
 };
+
+/* gDisableMapMusicChangeOnMapLoad */
+#define MUSIC_DISABLE_OFF 0
+#define MUSIC_DISABLE_STOP 1
+#define MUSIC_DISABLE_KEEP 2
 
 extern struct UCoords32 gDirectionToVectors[];
 
@@ -104,7 +109,7 @@ void ResetInitialPlayerAvatarState(void);
 void sub_8055D40(u16 mapDataId);
 void CleanupOverworldWindowsAndTilemaps(void);
 
-extern u8 gUnknown_2031DD8;
+extern u8 gDisableMapMusicChangeOnMapLoad;
 extern u8 gUnknown_2036E28;
 
 extern void (*gFieldCallback)(void);
@@ -126,7 +131,7 @@ bool32 sub_8055C9C(void);
 void Overworld_ResetStateAfterDigEscRope(void);
 bool32 sub_8058244(void);
 
-void sub_80574A4(void);
-bool32 sub_805750C(u8 *, const struct CreditsOverworldCmd *, u8);
+void Overworld_CreditsMainCB(void);
+bool32 Overworld_DoScrollSceneForCredits(u8 *, const struct CreditsOverworldCmd *, u8);
 
-#endif //GUARD_ROM4_H
+#endif //GUARD_OVERWORLD_H

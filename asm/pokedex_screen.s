@@ -4491,7 +4491,7 @@ sub_81049FC: @ 81049FC
 	adds r0, r5, 0
 	movs r1, 0x8
 	movs r3, 0x1
-	bl LoadMonPicForCredits
+	bl LoadMonPicInWindow
 	add sp, 0x8
 	pop {r4-r6}
 	pop {r0}

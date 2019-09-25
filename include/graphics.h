@@ -974,4 +974,12 @@ extern const u8 gGraphics_TitleScreen_CopyrightPressStartMap[];
 extern const u16 gGraphics_TitleScreen_FirePals[];
 extern const u8 gGraphics_TitleScreen_BlankObjTiles[];
 
+// credits
+extern const u32 gCreditsPokeballBgGfxTiles[];
+extern const u32 gCreditsPokeballBgGfxMap[];
+extern const u16 gCreditsMonBackdropPals[][16];
+extern const u16 gCreditsAllRightsReservedGfxPal[];
+extern const u8 gCreditsAllRightsReservedGfxTiles[];
+extern const u8 gCreditsAllRightsReservedGfxMap[];
+
 #endif //GUARD_GRAPHICS_H

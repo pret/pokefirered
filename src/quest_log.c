@@ -871,7 +871,7 @@ void sub_8110F90(u8 unused)
     gSaveBlock1Ptr->location.mapNum = 19;
     gSaveBlock1Ptr->location.warpId = -1;
     gUnknown_203ADF8 = 0;
-    gUnknown_2031DD8 = 1;
+    gDisableMapMusicChangeOnMapLoad = 1;
     sub_8082740(1);
     sub_8111368();
 }
@@ -1567,7 +1567,7 @@ void sub_81120AC(u8 taskId)
     switch (data[0])
     {
         case 0:
-            gUnknown_2031DD8 = 0;
+            gDisableMapMusicChangeOnMapLoad = 0;
             Overworld_PlaySpecialMapMusic();
             sub_811229C();
             FillWindowPixelRect(gUnknown_203ADFE[0], 0xF, 0, 0, gUnknown_845661C[0].width * 8, gUnknown_845661C[0].height * 8);

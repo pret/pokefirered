@@ -393,7 +393,7 @@ gFameCheckerText_Cancel:: @ 84161C1
 gOtherText_Exit:: @ 84161C8
 	.string "EXIT$"
 
-gUnknown_84161CD:: @ 84161CD
+gString_Dummy:: @ 84161CD
 	.string "$"
 
 gUnknown_84161CE::
@@ -3320,263 +3320,348 @@ gUnknown_841D18D:: @ 841D18D
 	.string "ROOFTOP$"
 
 	.align 2
-gUnknown_841D198:: @ 841D198
+gString_PokemonFireRed_Staff:: @ 841D198
 	.string "Pokémon FireRed Version\nStaff$"
 
-gUnknown_841D1B6:: @ 0x841D1B6
-	.string "  Pokémon LeafGreen Version\nStaff$"
+	.align 2
+gString_PokemonLeafGreen_Staff:: @ 0x841D1B8
+	.string "Pokémon LeafGreen Version\nStaff$"
 
-gUnknown_841D1D8:: @ 0x841D1D8
+	.align 2
+gCreditsString_Director:: @ 0x841D1D8
 	.string "\n\nDirector\n\n\n\n$"
 
-gUnknown_841D1E7:: @ 0x841D1E7
-	.string " \n\n\nJunichi Masuda\n\n\n$"
+	.align 2
+gCreditsString_Junichi_Masuda:: @ 0x841D1E8
+	.string "\n\n\nJunichi Masuda\n\n\n$"
 
-gUnknown_841D1FD:: @ 0x841D1FD
-	.string "   \nArt Director\n\nBattle Director\n\n\n$"
+	.align 2
+gCreditsString_Art_Director_Battle_Director:: @ 0x841D200
+	.string "\nArt Director\n\nBattle Director\n\n\n$"
 
-gUnknown_841D222:: @ 0x841D222
-	.string "  \n\nKen Sugimori\n\nShigeki Morimoto\n\n$"
+	.align 2
+gCreditsString_Ken_Sugimori_Shigeki_Morimoto:: @ 0x841D224
+	.string "\n\nKen Sugimori\n\nShigeki Morimoto\n\n$"
 
-gUnknown_841D247:: @ 0x841D247
-	.string " Program Leader\n\nPlanning Leader\n\nGraphic Design Leader\n\n$"
+	.align 2
+gCreditsString_Program_Leader_Planning_Leader_Graphic_Design_Leader:: @ 0x841D248
+	.string "Program Leader\n\nPlanning Leader\n\nGraphic Design Leader\n\n$"
 
-gUnknown_841D281:: @ 0x841D281
-	.string "   \nTetsuya Watanabe\n\nKoji Nishino\n\nTakao Unno\n$"
+	.align 2
+gCreditsString_Tetsuya_Watanabe_Koji_Nishino_Takao_Unno:: @ 0x841D284
+	.string "\nTetsuya Watanabe\n\nKoji Nishino\n\nTakao Unno\n$"
 
-gUnknown_841D2B1:: @ 0x841D2B1
-	.string "   Programmers\n\n\n\n\n$"
+	.align 2
+gCreditsString_Programmers:: @ 0x841D2B4
+	.string "Programmers\n\n\n\n\n$"
 
-gUnknown_841D2C5:: @ 0x841D2C5
-	.string "   \nHiroyuki Nakamura\nMasao Taya\nSatoshi Nohara\nMiyuki Iwasawa\nDaisuke Goto\n$"
+	.align 2
+gCreditsString_Hiroyuki_Nakamura_Masao_Taya_Satoshi_Nohara_Miyuki_Iwasawa_Daisuke_Goto:: @ 0x841D2C8
+	.string "\nHiroyuki Nakamura\nMasao Taya\nSatoshi Nohara\nMiyuki Iwasawa\nDaisuke Goto\n$"
 
-gUnknown_841D312:: @ 0x841D312
-	.string "  System Programmers\n\n\n\n\n\n$"
+	.align 2
+gCreditsString_System_Programmers:: @ 0x841D314
+	.string "System Programmers\n\n\n\n\n\n$"
 
-gUnknown_841D32D:: @ 0x841D32D
-	.string "   \nTetsuya Watanabe\nAkito Mori\nHisashi Sogabe\nSousuke Tamada\n\n$"
+	.align 2
+gCreditsString_Tetsuya_Watanabe_Akito_Mori_Hisashi_Sogabe_Sousuke_Tamada:: @ 0x841D330
+	.string "\nTetsuya Watanabe\nAkito Mori\nHisashi Sogabe\nSousuke Tamada\n\n$"
 
-gUnknown_841D36D:: @ 0x841D36D
-	.string "   Graphic Designers\n\n\n\n\n\n$"
+	.align 2
+gCreditsString_Graphic_Designers:: @ 0x841D370
+	.string "Graphic Designers\n\n\n\n\n\n$"
 
-gUnknown_841D388:: @ 0x841D388
+	.align 2
+gCreditsString_Takao_Unno_Asuka_Iwashita_Kanako_Eo_Hiroki_Fuchino:: @ 0x841D388
 	.string "\nTakao Unno\nAsuka Iwashita\nKanako Eo\nHiroki Fuchino\n\n$"
 
-gUnknown_841D3BE:: @ 0x841D3BE
-	.string "  \nGraphic Designers\n\n\n\n\n$"
+	.align 2
+gCreditsString_Graphic_Designers_2:: @ 0x841D3C0
+	.string "\nGraphic Designers\n\n\n\n\n$"
 
-gUnknown_841D3D8:: @ 0x841D3D8
+	.align 2
+gCreditsString_Ken_Sugimori_Hironobu_Yoshida:: @ 0x841D3D8
 	.string "\n\nKen Sugimori\nHironobu Yoshida\n\n\n$"
 
-gUnknown_841D3FB:: @ 0x841D3FB
-	.string " \nMusic Composition\n\n\n\n\n$"
+	.align 2
+gCreditsString_Music_Composition:: @ 0x841D3FC
+	.string "\nMusic Composition\n\n\n\n\n$"
 
-gUnknown_841D414:: @ 0x841D414
+	.align 2
+gCreditsString_Go_Ichinose_Junichi_Masuda:: @ 0x841D414
 	.string "\n\nGo Ichinose\nJunichi Masuda\n\n\n$"
 
-gUnknown_841D434:: @ 0x841D434
+	.align 2
+gCreditsString_Sound_Effects:: @ 0x841D434
 	.string "\n\nSound Effects\n\n\n\n$"
 
-gUnknown_841D448:: @ 0x841D448
+	.align 2
+gCreditsString_Go_Ichinose:: @ 0x841D448
 	.string "\n\n\nGo Ichinose\n\n\n$"
 
-gUnknown_841D45A:: @ 0x841D45A
-	.string "  \nGame Designers\n\n\n\n\n$"
+	.align 2
+gCreditsString_Game_Designers:: @ 0x841D45C
+	.string "\nGame Designers\n\n\n\n\n$"
 
-gUnknown_841D471:: @ 0x841D471
-	.string "   \n\nJunichi Masuda\nKoji Nishino\nTetsuji Ohta\n\n$"
+	.align 2
+gCreditsString_Junichi_Masuda_Koji_Nishino_Tetsuji_Ohta:: @ 0x841D474
+	.string "\n\nJunichi Masuda\nKoji Nishino\nTetsuji Ohta\n\n$"
 
-gUnknown_841D4A1:: @ 0x841D4A1
-	.string "   \nGame Designers\n\n\n\n\n$"
+	.align 2
+gCreditsString_Game_Designers_2:: @ 0x841D4A4
+	.string "\nGame Designers\n\n\n\n\n$"
 
-gUnknown_841D4B9:: @ 0x841D4B9
-	.string "   \n\nHitomi Sato\nShigeru Ohmori\nTadashi Takahashi\n\n$"
+	.align 2
+gCreditsString_Hitomi_Sato_Shigeru_Ohmori_Tadashi_Takahashi:: @ 0x841D4BC
+	.string "\n\nHitomi Sato\nShigeru Ohmori\nTadashi Takahashi\n\n$"
 
-gUnknown_841D4ED:: @ 0x841D4ED
-	.string "   \nGame Scenario\n\n\n\n\n$"
+	.align 2
+gCreditsString_Game_Scenario:: @ 0x841D4F0
+	.string "\nGame Scenario\n\n\n\n\n$"
 
-gUnknown_841D504:: @ 0x841D504
+	.align 2
+gCreditsString_Hitomi_Sato_Satoshi_Tajiri:: @ 0x841D504
 	.string "\n\nHitomi Sato\nSatoshi Tajiri\n\n\n$"
 
-gUnknown_841D524:: @ 0x841D524
+	.align 2
+gCreditsString_Script_Designer_Map_Designer:: @ 0x841D524
 	.string "\nScript Designer\n\nMap Designer\n\n\n$"
 
-gUnknown_841D546:: @ 0x841D546
-	.string "  \n\nSatoshi Nohara\n\nShigeru Ohmori\n\n$"
+	.align 2
+gCreditsString_Satoshi_Nohara_Shigeru_Ohmori:: @ 0x841D548
+	.string "\n\nSatoshi Nohara\n\nShigeru Ohmori\n\n$"
 
-gUnknown_841D56B:: @ 0x841D56B
-	.string " \nParametric Designers\n\n\n\n\n$"
+	.align 2
+gCreditsString_Parametric_Designers:: @ 0x841D56C
+	.string "\nParametric Designers\n\n\n\n\n$"
 
-gUnknown_841D587:: @ 0x841D587
-	.string " \n\nKoji Nishino\nTetsuji Ohta\nShigeki Morimoto\n\n$"
+	.align 2
+gCreditsString_Koji_Nishino_Tetsuji_Ohta_Shigeki_Morimoto:: @ 0x841D588
+	.string "\n\nKoji Nishino\nTetsuji Ohta\nShigeki Morimoto\n\n$"
 
-gUnknown_841D5B7:: @ 0x841D5B7
-	.string " \n\nPOKéDEX Text\n\n\n\n$"
+	.align 2
+gCreditsString_POKeDEX_Text:: @ 0x841D5B8
+	.string "\n\nPOKéDEX Text\n\n\n\n$"
 
-gUnknown_841D5CB:: @ 0x841D5CB
-	.string " \n\n\nKenji Matsushima\n\n\n$"
+	.align 2
+gCreditsString_Kenji_Matsushima:: @ 0x841D5CC
+	.string "\n\n\nKenji Matsushima\n\n\n$"
 
-gUnknown_841D5E3:: @ 0x841D5E3
-	.string " POKéMON Designers\n\n\n\n\n\n$"
-
-gUnknown_841D5FC:: @ 0x841D5FC
-	.string "\nKen Sugimori\nMotofumi Fujiwara\nShigeki Morimoto\nHironobu Yoshida\n\n$"
-
-gUnknown_841D640:: @ 0x841D640
+	.align 2
+gCreditsString_POKeMON_Designers:: @ 0x841D5E4
 	.string "POKéMON Designers\n\n\n\n\n\n$"
 
-gUnknown_841D658:: @ 0x841D658
+	.align 2
+gCreditsString_Ken_Sugimori_Motofumi_Fujiwara_Shigeki_Morimoto_Hironobu_Yoshida:: @ 0x841D5FC
+	.string "\nKen Sugimori\nMotofumi Fujiwara\nShigeki Morimoto\nHironobu Yoshida\n\n$"
+
+	.align 2
+gCreditsString_POKeMON_Designers_2:: @ 0x841D640
+	.string "POKéMON Designers\n\n\n\n\n\n$"
+
+	.align 2
+gCreditsString_Satoshi_Ohta_Asuka_Iwashita_Takao_Unno_Kanako_Eo_Aimi_Tomita:: @ 0x841D658
 	.string "\nSatoshi Ohta\nAsuka Iwashita\nTakao Unno\nKanako Eo\nAimi Tomita\n$"
 
-gUnknown_841D697:: @ 0x841D697
-	.string " POKéMON Designers\n\n\n\n\n\n$"
+	.align 2
+gCreditsString_POKeMON_Designers_3:: @ 0x841D698
+	.string "POKéMON Designers\n\n\n\n\n\n$"
 
-gUnknown_841D6B0:: @ 0x841D6B0
+	.align 2
+gCreditsString_Atsuko_Nishida_Muneo_Saito_Rena_Yoshikawa_Jun_Okutani:: @ 0x841D6B0
 	.string "\nAtsuko Nishida\nMuneo Saito\nRena Yoshikawa\nJun Okutani\n\n$"
 
-gUnknown_841D6E9:: @ 0x841D6E9
-	.string "   Supporting Programmers\n\n\n\n$"
+	.align 2
+gCreditsString_Supporting_Programmers:: @ 0x841D6EC
+	.string "Supporting Programmers\n\n\n\n$"
 
-gUnknown_841D707:: @ 0x841D707
-	.string " \nTeruyuki Yoshioka\nTakao Nakano\n\nSatoshi Mitsuhara\nDaisuke Hoshino\n$"
+	.align 2
+gCreditsString_Teruyuki_Yoshioka_Takao_Nakano_Satoshi_Mitsuhara_Daisuke_Hoshino:: @ 0x841D708
+	.string "\nTeruyuki Yoshioka\nTakao Nakano\n\nSatoshi Mitsuhara\nDaisuke Hoshino\n$"
 
-gUnknown_841D74C:: @ 0x841D74C
+	.align 2
+gCreditsString_NCL_Product_Testing:: @ 0x841D74C
 	.string "\n\nNCL Product Testing\n\n\n\n$"
 
-gUnknown_841D766:: @ 0x841D766
-	.string "  \n\n\nNCL Super Mario Club\n\n\n$"
+	.align 2
+gCreditsString_NCL_Super_Mario_Club:: @ 0x841D768
+	.string "\n\n\nNCL Super Mario Club\n\n\n$"
 
-gUnknown_841D783:: @ 0x841D783
-	.string " Special Thanks\n\n\n\n\n\n$"
-
-gUnknown_841D799:: @ 0x841D799
-	.string "   \nHiro Nakamura\nHiroyuki Uesugi\nTeruki Murakawa\n\nKazuya Suyama\n$"
-
-gUnknown_841D7DB:: @ 0x841D7DB
-	.string " Special Thanks\n\n\n\n\n\n$"
-
-gUnknown_841D7F1:: @ 0x841D7F1
-	.string "   \nKenji Tominaga\n\nKenjiro Ito\nTomotaka Komura\nMichiko Takizawa\n$"
-
-gUnknown_841D833:: @ 0x841D833
-	.string " Special Thanks\n\n\n\n\n\n$"
-
-gUnknown_841D849:: @ 0x841D849
-	.string "   \nMakiko Takada\nMikiko Ohashi\nShusaku Egami\nTakanao Kondo\nRui Kawaguchi\n$"
-
-gUnknown_841D894:: @ 0x841D894
-	.string "\n\nBraille Code Check\n\n\n\n$"
-
-gUnknown_841D8AD:: @ 0x841D8AD
-	.string "   \n\n\nJapan Braille Library\n\n\n$"
-
-gUnknown_841D8CC:: @ 0x841D8CC
-	.string "Information Supervisors\n\n\n\n\n\n$"
-
-gUnknown_841D8EA:: @ 0x841D8EA
-	.string "  \nHiroki Enomoto\nKazuyuki Terada\nYuri Sakurai\nYumi Funasaka\nNaoko Yanase\n$"
-
-gUnknown_841D935:: @ 0x841D935
-	.string "   Coordinators\n\n\n\n\n\n$"
-
-gUnknown_841D94B:: @ 0x841D94B
-	.string " \nAzusa Tajima\nAkira Kinashi\nKazuki Yoshihara\n\nRetsuji Nomoto\n$"
-
-gUnknown_841D98A:: @ 0x841D98A
-	.string "  \nTask Managers\n\n\n\n\n$"
-
-gUnknown_841D9A0:: @ 0x841D9A0
-	.string "\n\nHitoshi Yamagami\nGakuji Nomoto\n\n\n$"
-
-gUnknown_841D9C4:: @ 0x841D9C4
-	.string "\nProducers\n\n\n\n\n$"
-
-gUnknown_841D9D4:: @ 0x841D9D4
-	.string "\n\nHiroyuki Jinnai\nTakehiro Izushi\nHiroaki Tsuru\n\n$"
-
-gUnknown_841DA06:: @ 0x841DA06
-	.string "  \n\nExecutive Director\n\n\n\n$"
-
-gUnknown_841DA21:: @ 0x841DA21
-	.string "   \n\n\nSatoshi Tajiri\n\n\n$"
-
-gUnknown_841DA39:: @ 0x841DA39
-	.string "   \n\nExecutive Producer\n\n\n\n$"
-
-gUnknown_841DA55:: @ 0x841DA55
-	.string "   \n\n\nSatoru Iwata\n\n\n$"
-
-gUnknown_841DA6B:: @ 0x841DA6B
-	.string " \n\nExecutive Producer\n\n\n\n$"
-
-gUnknown_841DA85:: @ 0x841DA85
-	.string "   \n\n\nTsunekaz Ishihara\n\n\n$"
-
-gUnknown_841DAA0:: @ 0x841DAA0
-	.string "\nEnglish Version Coordinators\n\n\n\n\n$"
-
-gUnknown_841DAC3:: @ 0x841DAC3
-	.string " \n\nHiro Nakamura\nSeth McMahill\n\n\n$"
-
-gUnknown_841DAE5:: @ 0x841DAE5
-	.string "   \nTranslator\n\nText Editor\n\n\n$"
-
-gUnknown_841DB04:: @ 0x841DB04
-	.string "\n\nNob Ogasawara\n\nTeresa Lillygren\n\n$"
-
-gUnknown_841DB28:: @ 0x841DB28
-	.string "Programmers\n\n\n\n\n\n$"
-
-gUnknown_841DB3A:: @ 0x841DB3A
-	.string "  \nTeruki Murakawa\nSouichi Yamamoto\nYuichiro Ito\nAkira Kinashi\n\n$"
-
-gUnknown_841DB7B:: @ 0x841DB7B
-	.string " \nEnvironment を Tool Programmers\n\n\n\n\n$"
-
-gUnknown_841DBA1:: @ 0x841DBA1
-	.string "   \n\nTeruki Murakawa\nSouichi Yamamoto\nKimiko Nakamichi\n\n$"
-
-gUnknown_841DBDA:: @ 0x841DBDA
-	.string "  NOA Product Testing\n\n\n\n\n\n$"
-
-gUnknown_841DBF6:: @ 0x841DBF6
-	.string "  \nThomas Hertzog\nKathy Huguenard\nMika Kurosawa\n\n\n$"
-
-gUnknown_841DC29:: @ 0x841DC29
-	.string "   Braille Code Check\n\n\n\n\n\n$"
-
-gUnknown_841DC45:: @ 0x841DC45
-	.string "   \nNational Federation\n{CLEAR_TO 0x13}of the Blind\nPatricia A. Maurer\nJapan Braille Library\nEuropean Blind Union\n$"
-
-gUnknown_841DCAC:: @ 0x841DCAC
-	.string "\nBraille Code Check\n\n\n\n\n$"
-
-gUnknown_841DCC5:: @ 0x841DCC5
-	.string "   \n\nNational Information Library\n{CLEAR_TO 0x2D}Service\nMargaret Campion\n\n$"
-
-gUnknown_841DD05:: @ 0x841DD05
-	.string "   Special Thanks\n\n\n\n\n\n$"
-
-gUnknown_841DD1D:: @ 0x841DD1D
-	.string "   \nTakehiro Izushi\nMotoyasu Tojima\nHitoshi Yamagami\nHiroyuki Uesugi\n\n$"
-
-gUnknown_841DD64:: @ 0x841DD64
+	.align 2
+gCreditsString_Special_Thanks:: @ 0x841D784
 	.string "Special Thanks\n\n\n\n\n\n$"
 
-gUnknown_841DD79:: @ 0x841DD79
-	.string "   \nNicola Pratt-Barlow\nShellie Dow\nAnthony Howitt\nNaoko Saeki\nKyoko Onishi\n$"
+	.align 2
+gCreditsString_Hiro_Nakamura_Hiroyuki_Uesugi_Teruki_Murakawa_Kazuya_Suyama:: @ 0x841D79C
+	.string "\nHiro Nakamura\nHiroyuki Uesugi\nTeruki Murakawa\n\nKazuya Suyama\n$"
 
-gUnknown_841DDC6:: @ 0x841DDC6
-	.string "  \nBraille Code Check\n\n\n\n\n$"
+	.align 2
+gCreditsString_Special_Thanks_2:: @ 0x841D7DC
+	.string "Special Thanks\n\n\n\n\n\n$"
 
-gUnknown_841DDE1:: @ 0x841DDE1
-	.string "   \n\nThe Royal New Zealand\nFoundation of the Blind\nGreg Moran\n\n$"
+	.align 2
+gCreditsString_Kenji_Tominaga_Kenjiro_Ito_Tomotaka_Komura_Michiko_Takizawa:: @ 0x841D7F4
+	.string "\nKenji Tominaga\n\nKenjiro Ito\nTomotaka Komura\nMichiko Takizawa\n$"
 
-gUnknown_841DE21:: @ 0x841DE21
-	.string "   \n\nGraphic Designer\n\n\n\n$"
+	.align 2
+gCreditsString_Special_Thanks_3:: @ 0x841D834
+	.string "Special Thanks\n\n\n\n\n\n$"
 
-gUnknown_841DE3B:: @ 0x841DE3B
-	.string " \n\n\nAkira Kinashi\n\n\n$"
+	.align 2
+gCreditsString_Makiko_Takada_Mikiko_Ohashi_Shusaku_Egami_Takanao_Kondo_Rui_Kawaguchi:: @ 0x841D84C
+	.string "\nMakiko Takada\nMikiko Ohashi\nShusaku Egami\nTakanao Kondo\nRui Kawaguchi\n$"
+
+	.align 2
+gCreditsString_Braille_Code_Check:: @ 0x841D894
+	.string "\n\nBraille Code Check\n\n\n\n$"
+
+	.align 2
+gCreditsString_Japan_Braille_Library:: @ 0x841D8B0
+	.string "\n\n\nJapan Braille Library\n\n\n$"
+
+	.align 2
+gCreditsString_Information_Supervisors:: @ 0x841D8CC
+	.string "Information Supervisors\n\n\n\n\n\n$"
+
+	.align 2
+gCreditsString_Hiroki_Enomoto_Kazuyuki_Terada_Yuri_Sakurai_Yumi_Funasaka_Naoko_Yanase:: @ 0x841D8EC
+	.string "\nHiroki Enomoto\nKazuyuki Terada\nYuri Sakurai\nYumi Funasaka\nNaoko Yanase\n$"
+
+	.align 2
+gCreditsString_Coordinators:: @ 0x841D938
+	.string "Coordinators\n\n\n\n\n\n$"
+
+	.align 2
+gCreditsString_Azusa_Tajima_Akira_Kinashi_Kazuki_Yoshihara_Retsuji_Nomoto:: @ 0x841D94C
+	.string "\nAzusa Tajima\nAkira Kinashi\nKazuki Yoshihara\n\nRetsuji Nomoto\n$"
+
+	.align 2
+gCreditsString_Task_Managers:: @ 0x841D98C
+	.string "\nTask Managers\n\n\n\n\n$"
+
+	.align 2
+gCreditsString_Hitoshi_Yamagami_Gakuji_Nomoto:: @ 0x841D9A0
+	.string "\n\nHitoshi Yamagami\nGakuji Nomoto\n\n\n$"
+
+	.align 2
+gCreditsString_Producers:: @ 0x841D9C4
+	.string "\nProducers\n\n\n\n\n$"
+
+	.align 2
+gCreditsString_Hiroyuki_Jinnai_Takehiro_Izushi_Hiroaki_Tsuru:: @ 0x841D9D4
+	.string "\n\nHiroyuki Jinnai\nTakehiro Izushi\nHiroaki Tsuru\n\n$"
+
+	.align 2
+gCreditsString_Executive_Director:: @ 0x841DA08
+	.string "\n\nExecutive Director\n\n\n\n$"
+
+	.align 2
+gCreditsString_Satoshi_Tajiri:: @ 0x841DA24
+	.string "\n\n\nSatoshi Tajiri\n\n\n$"
+
+	.align 2
+gCreditsString_Executive_Producer:: @ 0x841DA3C
+	.string "\n\nExecutive Producer\n\n\n\n$"
+
+	.align 2
+gCreditsString_Satoru_Iwata:: @ 0x841DA58
+	.string "\n\n\nSatoru Iwata\n\n\n$"
+
+	.align 2
+gCreditsString_Executive_Producer_2:: @ 0x841DA6C
+	.string "\n\nExecutive Producer\n\n\n\n$"
+
+	.align 2
+gCreditsString_Tsunekaz_Ishihara:: @ 0x841DA88
+	.string "\n\n\nTsunekaz Ishihara\n\n\n$"
+
+	.align 2
+gCreditsString_English_Version_Coordinators:: @ 0x841DAA0
+	.string "\nEnglish Version Coordinators\n\n\n\n\n$"
+
+	.align 2
+gCreditsString_Hiro_Nakamura_Seth_McMahill:: @ 0x841DAC4
+	.string "\n\nHiro Nakamura\nSeth McMahill\n\n\n$"
+
+	.align 2
+gCreditsString_Translator_Text_Editor:: @ 0x841DAE8
+	.string "\nTranslator\n\nText Editor\n\n\n$"
+
+	.align 2
+gCreditsString_Nob_Ogasawara_Teresa_Lillygren:: @ 0x841DB04
+	.string "\n\nNob Ogasawara\n\nTeresa Lillygren\n\n$"
+
+	.align 2
+gCreditsString_Programmers_2:: @ 0x841DB28
+	.string "Programmers\n\n\n\n\n\n$"
+
+	.align 2
+gCreditsString_Teruki_Murakawa_Souichi_Yamamoto_Yuichiro_Ito_Akira_Kinashi:: @ 0x841DB3C
+	.string "\nTeruki Murakawa\nSouichi Yamamoto\nYuichiro Ito\nAkira Kinashi\n\n$"
+
+	.align 2
+gCreditsString_Environment_Tool_Programmers:: @ 0x841DB7C
+	.string "\nEnvironment を Tool Programmers\n\n\n\n\n$"
+
+	.align 2
+gCreditsString_Teruki_Murakawa_Souichi_Yamamoto_Kimiko_Nakamichi:: @ 0x841DBA4
+	.string "\n\nTeruki Murakawa\nSouichi Yamamoto\nKimiko Nakamichi\n\n$"
+
+	.align 2
+gCreditsString_NOA_Product_Testing:: @ 0x841DBDC
+	.string "NOA Product Testing\n\n\n\n\n\n$"
+
+	.align 2
+gCreditsString_Thomas_Hertzog_Kathy_Huguenard_Mika_Kurosawa:: @ 0x841DBF8
+	.string "\nThomas Hertzog\nKathy Huguenard\nMika Kurosawa\n\n\n$"
+
+	.align 2
+gCreditsString_Braille_Code_Check_2:: @ 0x841DC2C
+	.string "Braille Code Check\n\n\n\n\n\n$"
+
+	.align 2
+gCreditsString_National_Federation_of_the_Blind_Patricia_A_Maurer_Japan_Braille_Library_European_Blind_Union:: @ 0x841DC48
+	.string "\nNational Federation\n{CLEAR_TO 0x13}of the Blind\nPatricia A. Maurer\nJapan Braille Library\nEuropean Blind Union\n$"
+
+	.align 2
+gCreditsString_Braille_Code_Check_3:: @ 0x841DCAC
+	.string "\nBraille Code Check\n\n\n\n\n$"
+
+	.align 2
+gCreditsString_National_Information_Library_Service_Margaret_Campion:: @ 0x841DCC8
+	.string "\n\nNational Information Library\n{CLEAR_TO 0x2D}Service\nMargaret Campion\n\n$"
+
+	.align 2
+gCreditsString_Special_Thanks_4:: @ 0x841DD08
+	.string "Special Thanks\n\n\n\n\n\n$"
+
+	.align 2
+gCreditsString_Takehiro_Izushi_Motoyasu_Tojima_Hitoshi_Yamagami_Hiroyuki_Uesugi:: @ 0x841DD20
+	.string "\nTakehiro Izushi\nMotoyasu Tojima\nHitoshi Yamagami\nHiroyuki Uesugi\n\n$"
+
+	.align 2
+gCreditsString_Special_Thanks_5:: @ 0x841DD64
+	.string "Special Thanks\n\n\n\n\n\n$"
+
+	.align 2
+gCreditsString_Nicola_Pratt_Barlow_Shellie_Dow_Anthony_Howitt_Naoko_Saeki_Kyoko_Onishi:: @ 0x841DD7C
+	.string "\nNicola Pratt-Barlow\nShellie Dow\nAnthony Howitt\nNaoko Saeki\nKyoko Onishi\n$"
+
+	.align 2
+gCreditsString_Braille_Code_Check_4:: @ 0x841DDC8
+	.string "\nBraille Code Check\n\n\n\n\n$"
+
+	.align 2
+gCreditsString_The_Royal_New_Zealand_Foundation_of_the_Blind_Greg_Moran:: @ 0x841DDE4
+	.string "\n\nThe Royal New Zealand\nFoundation of the Blind\nGreg Moran\n\n$"
+
+	.align 2
+gCreditsString_Graphic_Designer:: @ 0x841DE24
+	.string "\n\nGraphic Designer\n\n\n\n$"
+
+	.align 2
+gCreditsString_Akira_Kinashi:: @ 0x841DE3C
+	.string "\n\n\nAkira Kinashi\n\n\n$"
 
 gJPText_MysteryGift:: @ 841DE50
 	.string "$"

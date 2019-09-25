@@ -278,7 +278,7 @@ u16 FreeAndDestroyMonPicSprite(u16 spriteId)
     return FreeAndDestroyPicSpriteInternal(spriteId);
 }
 
-u16 sub_810C228(u16 species, u32 otId, u32 personality, bool8 isFrontPic, u8 paletteSlot, u8 windowId)
+u16 LoadMonPicForCredits(u16 species, u32 otId, u32 personality, bool8 isFrontPic, u8 paletteSlot, u8 windowId)
 {
     return sub_810C0C0(species, otId, personality, isFrontPic, 0, 0, paletteSlot, windowId, FALSE);
 }

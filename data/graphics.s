@@ -16343,14 +16343,17 @@ gUnknown_8EAAA10:: @ 8EAAA10
 gUnknown_8EAAA6C:: @ 8EAAA6C
 	.incbin "baserom.gba", 0xEAAA6C, 0xAC
 
-gUnknown_8EAAB18:: @ 8EAAB18
-	.incbin "baserom.gba", 0xEAAB18, 0x80 @UNKNOWN
+gCreditsMonBackdropPals:: @ 8EAAB18
+	.incbin "graphics/credits/charizard.gbapal"
+	.incbin "graphics/credits/venusaur.gbapal"
+	.incbin "graphics/credits/blastoise.gbapal"
+	.incbin "graphics/credits/pikachu.gbapal"
 
-gUnknown_8EAAB98:: @ 8EAAB98
-	.incbin "baserom.gba", 0xEAAB98, 0x774
+gCreditsPokeballBgGfxTiles:: @ 8EAAB98
+	.incbin "graphics/credits/unk_8EAAB98.4bpp.lz"
 
-gUnknown_8EAB30C:: @ 8EAB30C
-	.incbin "baserom.gba", 0xEAB30C, 0x3B8
+gCreditsPokeballBgGfxMap:: @ 8EAB30C
+	.incbin "graphics/credits/unk_8EAB30C.bin.lz"
 
 	@ title_screen
 gGraphics_TitleScreen_PokemonFireRedLogoPals:: @ 8EAB6C4
@@ -16386,14 +16389,14 @@ gGraphics_TitleScreen_FirePals:: @ 8EAE488
 gGraphics_TitleScreen_BlankObjTiles:: @ 8EAE4A8
 	.incbin "graphics/title_screen/unk_8eae4a8.4bpp.lz"
 
-gUnknown_8EAE528:: @ 8EAE528
-	.incbin "baserom.gba", 0xEAE528, 0x20 @UNKNOWN
+gCreditsAllRightsReservedGfxPal:: @ 8EAE528
+	.incbin "graphics/credits/unk_8EAE548.gbapal"
 
-gUnknown_8EAE548:: @ 8EAE548
-	.incbin "baserom.gba", 0xEAE548, 0x3B8
+gCreditsAllRightsReservedGfxTiles:: @ 8EAE548
+	.incbin "graphics/credits/unk_8EAE548.4bpp.lz"
 
-gUnknown_8EAE900:: @ 8EAE900
-	.incbin "baserom.gba", 0xEAE900, 0x100
+gCreditsAllRightsReservedGfxMap:: @ 8EAE900
+	.incbin "graphics/credits/unk_8EAE548.bin.lz"
 
 gUnknown_8EAEA00:: @ 8EAEA00
 	.incbin "baserom.gba", 0xEAEA00, 0x20 @UNKNOWN

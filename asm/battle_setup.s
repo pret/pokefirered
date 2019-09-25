@@ -2107,12 +2107,12 @@ sub_80806C8: @ 80806C8
 	push {lr}
 	cmp r0, 0
 	bne _080806D0
-	ldr r0, _080806D4 @ =gUnknown_84161CD
+	ldr r0, _080806D4 @ =gString_Dummy
 _080806D0:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080806D4: .4byte gUnknown_84161CD
+_080806D4: .4byte gString_Dummy
 	thumb_func_end sub_80806C8
 
 	thumb_func_start sub_80806D8

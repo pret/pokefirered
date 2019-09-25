@@ -179,7 +179,7 @@ extern const u8 gUnknown_841623D[];
 extern const u8 gUnknown_84162BD[];
 extern const u8 gUnknown_841D148[];
 
-// pokemon.c
+// pokemon
 extern const u8 BattleText_Rose[];
 extern const u8 BattleText_UnknownString3[];
 extern const u8 BattleText_GetPumped[];
@@ -207,5 +207,112 @@ extern const u8 gString_BattleRecords_4Dashes[];
 extern const u8 gString_OutOfCoins[];
 extern const u8 gString_QuitPlaying[];
 extern const u8 gString_SlotMachineControls[];
+
+// battle_controller_safari
+extern const u8 gUnknown_83FDA4C[];
+extern const u8 gUnknown_83FE747[];
+extern const u8 gUnknown_83FE6E6[];
+
+// battle_controller_player
+extern const u8 gText_BattleSwitchWhich[];
+extern const u8 gUnknown_83FE770[];
+extern const u8 gText_MoveInterfacePP[];
+extern const u8 gUnknown_83FE770[];
+extern const u8 gText_MoveInterfaceType[];
+extern const u8 gText_LinkStandby[];
+extern const u8 gUnknown_83FE725[];
+extern const u8 gText_WhatWillPkmnDo[];
+
+// battle_script_commands
+extern const u8 gText_BattleYesNoChoice[];
+
+// credits
+extern const u8 gString_Dummy[];
+extern const u8 gString_PokemonFireRed_Staff[]; // FR
+extern const u8 gString_PokemonLeafGreen_Staff[]; // LG
+extern const u8 gCreditsString_Director[];
+extern const u8 gCreditsString_Junichi_Masuda[];
+extern const u8 gCreditsString_Art_Director_Battle_Director[];
+extern const u8 gCreditsString_Ken_Sugimori_Shigeki_Morimoto[];
+extern const u8 gCreditsString_Program_Leader_Planning_Leader_Graphic_Design_Leader[];
+extern const u8 gCreditsString_Tetsuya_Watanabe_Koji_Nishino_Takao_Unno[];
+extern const u8 gCreditsString_Programmers[];
+extern const u8 gCreditsString_Hiroyuki_Nakamura_Masao_Taya_Satoshi_Nohara_Miyuki_Iwasawa_Daisuke_Goto[];
+extern const u8 gCreditsString_System_Programmers[];
+extern const u8 gCreditsString_Tetsuya_Watanabe_Akito_Mori_Hisashi_Sogabe_Sousuke_Tamada[];
+extern const u8 gCreditsString_Graphic_Designers[];
+extern const u8 gCreditsString_Takao_Unno_Asuka_Iwashita_Kanako_Eo_Hiroki_Fuchino[];
+extern const u8 gCreditsString_Graphic_Designers_2[];
+extern const u8 gCreditsString_Ken_Sugimori_Hironobu_Yoshida[];
+extern const u8 gCreditsString_Music_Composition[];
+extern const u8 gCreditsString_Go_Ichinose_Junichi_Masuda[];
+extern const u8 gCreditsString_Sound_Effects[];
+extern const u8 gCreditsString_Go_Ichinose[];
+extern const u8 gCreditsString_Game_Designers[];
+extern const u8 gCreditsString_Junichi_Masuda_Koji_Nishino_Tetsuji_Ohta[];
+extern const u8 gCreditsString_Game_Designers_2[];
+extern const u8 gCreditsString_Hitomi_Sato_Shigeru_Ohmori_Tadashi_Takahashi[];
+extern const u8 gCreditsString_Game_Scenario[];
+extern const u8 gCreditsString_Hitomi_Sato_Satoshi_Tajiri[];
+extern const u8 gCreditsString_Script_Designer_Map_Designer[];
+extern const u8 gCreditsString_Satoshi_Nohara_Shigeru_Ohmori[];
+extern const u8 gCreditsString_Parametric_Designers[];
+extern const u8 gCreditsString_Koji_Nishino_Tetsuji_Ohta_Shigeki_Morimoto[];
+extern const u8 gCreditsString_POKeDEX_Text[];
+extern const u8 gCreditsString_Kenji_Matsushima[];
+extern const u8 gCreditsString_POKeMON_Designers[];
+extern const u8 gCreditsString_Ken_Sugimori_Motofumi_Fujiwara_Shigeki_Morimoto_Hironobu_Yoshida[];
+extern const u8 gCreditsString_POKeMON_Designers_2[];
+extern const u8 gCreditsString_Satoshi_Ohta_Asuka_Iwashita_Takao_Unno_Kanako_Eo_Aimi_Tomita[];
+extern const u8 gCreditsString_POKeMON_Designers_3[];
+extern const u8 gCreditsString_Atsuko_Nishida_Muneo_Saito_Rena_Yoshikawa_Jun_Okutani[];
+extern const u8 gCreditsString_Supporting_Programmers[];
+extern const u8 gCreditsString_Teruyuki_Yoshioka_Takao_Nakano_Satoshi_Mitsuhara_Daisuke_Hoshino[];
+extern const u8 gCreditsString_NCL_Product_Testing[];
+extern const u8 gCreditsString_NCL_Super_Mario_Club[];
+extern const u8 gCreditsString_Special_Thanks[];
+extern const u8 gCreditsString_Hiro_Nakamura_Hiroyuki_Uesugi_Teruki_Murakawa_Kazuya_Suyama[];
+extern const u8 gCreditsString_Special_Thanks_2[];
+extern const u8 gCreditsString_Kenji_Tominaga_Kenjiro_Ito_Tomotaka_Komura_Michiko_Takizawa[];
+extern const u8 gCreditsString_Special_Thanks_3[];
+extern const u8 gCreditsString_Makiko_Takada_Mikiko_Ohashi_Shusaku_Egami_Takanao_Kondo_Rui_Kawaguchi[];
+extern const u8 gCreditsString_Braille_Code_Check[];
+extern const u8 gCreditsString_Japan_Braille_Library[];
+extern const u8 gCreditsString_Information_Supervisors[];
+extern const u8 gCreditsString_Hiroki_Enomoto_Kazuyuki_Terada_Yuri_Sakurai_Yumi_Funasaka_Naoko_Yanase[];
+extern const u8 gCreditsString_Coordinators[];
+extern const u8 gCreditsString_Azusa_Tajima_Akira_Kinashi_Kazuki_Yoshihara_Retsuji_Nomoto[];
+extern const u8 gCreditsString_Task_Managers[];
+extern const u8 gCreditsString_Hitoshi_Yamagami_Gakuji_Nomoto[];
+extern const u8 gCreditsString_Producers[];
+extern const u8 gCreditsString_Hiroyuki_Jinnai_Takehiro_Izushi_Hiroaki_Tsuru[];
+extern const u8 gCreditsString_Executive_Director[];
+extern const u8 gCreditsString_Satoshi_Tajiri[];
+extern const u8 gCreditsString_Executive_Producer[];
+extern const u8 gCreditsString_Satoru_Iwata[];
+extern const u8 gCreditsString_Executive_Producer_2[];
+extern const u8 gCreditsString_Tsunekaz_Ishihara[];
+extern const u8 gCreditsString_English_Version_Coordinators[];
+extern const u8 gCreditsString_Hiro_Nakamura_Seth_McMahill[];
+extern const u8 gCreditsString_Translator_Text_Editor[];
+extern const u8 gCreditsString_Nob_Ogasawara_Teresa_Lillygren[];
+extern const u8 gCreditsString_Programmers_2[];
+extern const u8 gCreditsString_Teruki_Murakawa_Souichi_Yamamoto_Yuichiro_Ito_Akira_Kinashi[];
+extern const u8 gCreditsString_Environment_Tool_Programmers[];
+extern const u8 gCreditsString_Teruki_Murakawa_Souichi_Yamamoto_Kimiko_Nakamichi[];
+extern const u8 gCreditsString_NOA_Product_Testing[];
+extern const u8 gCreditsString_Thomas_Hertzog_Kathy_Huguenard_Mika_Kurosawa[];
+extern const u8 gCreditsString_Braille_Code_Check_2[];
+extern const u8 gCreditsString_National_Federation_of_the_Blind_Patricia_A_Maurer_Japan_Braille_Library_European_Blind_Union[];
+extern const u8 gCreditsString_Braille_Code_Check_3[];
+extern const u8 gCreditsString_National_Information_Library_Service_Margaret_Campion[];
+extern const u8 gCreditsString_Special_Thanks_4[];
+extern const u8 gCreditsString_Takehiro_Izushi_Motoyasu_Tojima_Hitoshi_Yamagami_Hiroyuki_Uesugi[];
+extern const u8 gCreditsString_Special_Thanks_5[];
+extern const u8 gCreditsString_Nicola_Pratt_Barlow_Shellie_Dow_Anthony_Howitt_Naoko_Saeki_Kyoko_Onishi[];
+extern const u8 gCreditsString_Braille_Code_Check_4[];
+extern const u8 gCreditsString_The_Royal_New_Zealand_Foundation_of_the_Blind_Greg_Moran[];
+extern const u8 gCreditsString_Graphic_Designer[];
+extern const u8 gCreditsString_Akira_Kinashi[];
 
 #endif //GUARD_STRINGS_H

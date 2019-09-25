@@ -344,7 +344,7 @@ sub_80783FC: @ 80783FC
 	ldr r4, _080784AC @ =gBattleAnimTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 8
 	ldr r1, _080784B0 @ =0xffe00000
@@ -352,13 +352,13 @@ sub_80783FC: @ 80783FC
 	lsrs r5, r0, 16
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 8
 	ldr r1, _080784B4 @ =0xffdc0000
 	adds r0, r1
 	lsrs r4, r0, 16
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807843A
@@ -662,7 +662,7 @@ sub_8078694: @ 8078694
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r3, 0
-	ldr r0, _080786B8 @ =gUnknown_2024018
+	ldr r0, _080786B8 @ =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	ldrh r0, [r0]
@@ -677,7 +677,7 @@ _080786AC:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080786B8: .4byte gUnknown_2024018
+_080786B8: .4byte gBattleSpritesDataPtr
 _080786BC: .4byte _080786C0
 	.align 2, 0
 _080786C0:
@@ -907,7 +907,7 @@ LaunchStatusAnimation: @ 807886C
 	strb r4, [r0]
 	ldr r0, _080788B0 @ =gUnknown_81C6E84
 	movs r2, 0
-	bl sub_80725D4
+	bl LaunchBattleAnimation
 	ldr r0, _080788B4 @ =task0A_80788BC
 	movs r1, 0xA
 	bl CreateTask
@@ -935,14 +935,14 @@ task0A_80788BC: @ 80788BC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _08078904 @ =gUnknown_2037EDC
+	ldr r0, _08078904 @ =gAnimScriptCallback
 	ldr r0, [r0]
 	bl _call_via_r0
-	ldr r0, _08078908 @ =gUnknown_2037EE1
+	ldr r0, _08078908 @ =gAnimScriptActive
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080788FE
-	ldr r0, _0807890C @ =gUnknown_2024018
+	ldr r0, _0807890C @ =gBattleSpritesDataPtr
 	ldr r2, [r0]
 	ldr r1, _08078910 @ =gTasks
 	lsls r0, r4, 2
@@ -968,9 +968,9 @@ _080788FE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08078904: .4byte gUnknown_2037EDC
-_08078908: .4byte gUnknown_2037EE1
-_0807890C: .4byte gUnknown_2024018
+_08078904: .4byte gAnimScriptCallback
+_08078908: .4byte gAnimScriptActive
+_0807890C: .4byte gBattleSpritesDataPtr
 _08078910: .4byte gTasks
 	thumb_func_end task0A_80788BC
 

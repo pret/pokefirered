@@ -31,5 +31,6 @@ void sub_8076918(u8 bank);
 void DoHitAnimHealthboxEffect(u8 bank);
 void LoadBallGfx(u8 ballId);
 void FreeBallGfx(u8 ballId);
+void sub_804BD94(u8 battler);
 
 #endif // GUARD_POKEBALL_H

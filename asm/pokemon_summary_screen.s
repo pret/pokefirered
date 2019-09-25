@@ -270,8 +270,8 @@ _08134730: .4byte 0x00003204
 _08134734: .4byte sub_8135C34
 	thumb_func_end sub_81344F8
 
-	thumb_func_start sub_8134738
-sub_8134738: @ 8134738
+	thumb_func_start ShowSelectMovePokemonSummaryScreen
+ShowSelectMovePokemonSummaryScreen: @ 8134738
 	push {r4,r5,lr}
 	sub sp, 0x4
 	ldr r5, [sp, 0x10]
@@ -296,7 +296,7 @@ sub_8134738: @ 8134738
 	.align 2, 0
 _08134764: .4byte gUnknown_203B140
 _08134768: .4byte 0x00003260
-	thumb_func_end sub_8134738
+	thumb_func_end ShowSelectMovePokemonSummaryScreen
 
 	thumb_func_start sub_813476C
 sub_813476C: @ 813476C
@@ -3476,7 +3476,7 @@ _0813622C:
 	ldr r0, [r6]
 	ldr r2, _08136308 @ =0x00003084
 	adds r0, r2
-	ldr r1, _0813630C @ =gUnknown_84161CD
+	ldr r1, _0813630C @ =gString_Dummy
 	bl StringCopy
 _08136238:
 	cmp r4, 0x20
@@ -3498,7 +3498,7 @@ _08136240:
 	ldr r0, [r5]
 	ldr r1, _08136308 @ =0x00003084
 	adds r0, r1
-	ldr r1, _0813630C @ =gUnknown_84161CD
+	ldr r1, _0813630C @ =gString_Dummy
 	bl StringCopy
 _08136264:
 	ldr r6, _08136310 @ =gUnknown_203B140
@@ -3572,7 +3572,7 @@ _08136264:
 	b _08136342
 	.align 2, 0
 _08136308: .4byte 0x00003084
-_0813630C: .4byte gUnknown_84161CD
+_0813630C: .4byte gString_Dummy
 _08136310: .4byte gUnknown_203B140
 _08136314: .4byte 0x00003034
 _08136318: .4byte gSpeciesNames
@@ -8434,7 +8434,7 @@ sub_8138B4C: @ 8138B4C
 	bl IsUpdateLinkStateCBActive
 	cmp r0, 0
 	bne _08138B84
-	bl sub_811FA20
+	bl IsMultiBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -13244,7 +13244,7 @@ _0813B198:
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0813B1C4
-	bl sub_811FA20
+	bl IsMultiBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

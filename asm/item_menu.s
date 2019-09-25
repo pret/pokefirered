@@ -154,14 +154,14 @@ _08107EC8: .4byte sub_80568A8
 	thumb_func_start sub_8107ECC
 sub_8107ECC: @ 8107ECC
 	push {lr}
-	ldr r2, _08107EDC @ =sub_8030AEC
+	ldr r2, _08107EDC @ =SetCB2ToReshowScreenAfterMenu2
 	movs r0, 0x5
 	movs r1, 0x3
 	bl sub_8107DB4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08107EDC: .4byte sub_8030AEC
+_08107EDC: .4byte SetCB2ToReshowScreenAfterMenu2
 	thumb_func_end sub_8107ECC
 
 	thumb_func_start sub_8107EE0
@@ -6124,14 +6124,14 @@ sub_810AF74: @ 810AF74
 	movs r0, 0x4
 	movs r1, 0x1
 	bl AddBagItem
-	ldr r2, _0810AF98 @ =sub_8030AEC
+	ldr r2, _0810AF98 @ =SetCB2ToReshowScreenAfterMenu2
 	movs r0, 0x6
 	movs r1, 0
 	bl sub_8107DB4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810AF98: .4byte sub_8030AEC
+_0810AF98: .4byte SetCB2ToReshowScreenAfterMenu2
 	thumb_func_end sub_810AF74
 
 	thumb_func_start sub_810AF9C
@@ -6348,13 +6348,13 @@ sub_810B108: @ 810B108
 	.align 2, 0
 _0810B15C: .4byte CB2_ReturnToTeachyTV
 _0810B160:
-	ldr r2, _0810B168 @ =sub_8030AEC
+	ldr r2, _0810B168 @ =SetCB2ToReshowScreenAfterMenu2
 	movs r0, 0x7
 	b _0810B170
 	.align 2, 0
-_0810B168: .4byte sub_8030AEC
+_0810B168: .4byte SetCB2ToReshowScreenAfterMenu2
 _0810B16C:
-	ldr r2, _0810B17C @ =sub_8030AEC
+	ldr r2, _0810B17C @ =SetCB2ToReshowScreenAfterMenu2
 	movs r0, 0x8
 _0810B170:
 	movs r1, 0
@@ -6363,7 +6363,7 @@ _0810B170:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810B17C: .4byte sub_8030AEC
+_0810B17C: .4byte SetCB2ToReshowScreenAfterMenu2
 	thumb_func_end sub_810B108
 
 	thumb_func_start sub_810B180

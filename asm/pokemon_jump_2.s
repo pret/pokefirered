@@ -442,10 +442,10 @@ _08147E0C:
 	ldr r0, [r4]
 	adds r0, 0xA4
 	bl sub_8149CEC
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0
 	movs r1, 0
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 	ldr r1, [r4]
 	b _08147EBC
 	.align 2, 0
@@ -470,7 +470,7 @@ _08147E3C:
 	.align 2, 0
 _08147E60: .4byte gUnknown_203F3D4
 _08147E64:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08147F04
@@ -6896,7 +6896,7 @@ _0814AE2A:
 	ldrh r0, [r7]
 	ldr r1, [r7, 0x4]
 	ldr r2, [r7, 0x8]
-	bl GetFrontSpritePalFromSpeciesAndPersonality
+	bl GetMonSpritePalFromSpeciesAndPersonality
 	str r0, [sp, 0x20]
 	add r0, sp, 0x20
 	ldr r1, [r0, 0x4]

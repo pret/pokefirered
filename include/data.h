@@ -1,13 +1,14 @@
-#ifndef GUARD_DATA2_H
-#define GUARD_DATA2_H
+#ifndef GUARD_DATA_H
+#define GUARD_DATA_H
 
 #include "global.h"
+#include "constants/species.h"
 
 struct MonCoords
 {
     // This would use a bitfield, but some function
     // uses it as a u8 and casting won't match.
-    u8 coords; // u8 x:4, y:4;
+    u8 size; // u8 width:4, height:4;
     u8 y_offset;
 };
 
@@ -23,8 +24,22 @@ extern const u16 gUnknown_8251FEE[];
 extern const u16 gUnknown_8252324[];
 extern const u16 gUnknown_82539D4[];
 
+extern const struct CompressedSpriteSheet gMonFrontPicTable[];
+extern const struct CompressedSpriteSheet gMonBackPicTable[];
 extern const struct CompressedSpritePalette gMonPaletteTable[];
 extern const struct CompressedSpritePalette gMonShinyPaletteTable[];
+extern const struct CompressedSpriteSheet gTrainerFrontPicTable[];
+extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
+extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
+
+extern const struct CompressedSpriteSheet gSpriteSheet_EnemyShadow;
+extern const struct SpriteTemplate gSpriteTemplate_EnemyShadow;
+
+extern const u8 gEnemyMonElevation[NUM_SPECIES];
+
+extern const u8 *const gBattleAnims_General[];
+extern const u8 *const gBattleAnims_Special[];
+
 extern const union AnimCmd *const *const gTrainerBackAnimsPtrTable[];
 extern const union AnimCmd *const *const gTrainerFrontAnimsPtrTable[];
 
@@ -44,4 +59,4 @@ extern const struct SpriteFrameImage gUnknown_8234788[];
 extern const struct SpriteFrameImage gUnknown_82347A8[];
 extern const struct SpriteFrameImage gUnknown_82347C8[];
 
-#endif // GUARD_DATA2_H
+#endif // GUARD_DATA_H

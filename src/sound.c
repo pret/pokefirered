@@ -15,7 +15,7 @@ struct Fanfare
 };
 
 // TODO: what are these
-extern u8 gUnknown_2031DD8;
+extern u8 gDisableMapMusicChangeOnMapLoad;
 extern u8 gUnknown_203ADFA;
 extern u8 gUnknown_203F174;
 
@@ -571,7 +571,7 @@ void PlayBGM(u16 songNum)
 
 void PlaySE(u16 songNum)
 {
-    if(gUnknown_2031DD8 == 0 && gUnknown_203ADFA != 2)
+    if(gDisableMapMusicChangeOnMapLoad == 0 && gUnknown_203ADFA != 2)
         m4aSongNumStart(songNum);
 }
 

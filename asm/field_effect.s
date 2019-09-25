@@ -5758,7 +5758,7 @@ _08086024: .4byte sub_8085DDC
 	thumb_func_start FldEff_FieldMoveShowMon
 FldEff_FieldMoveShowMon: @ 8086028
 	push {r4,lr}
-	bl sav1_map_get_light_level
+	bl GetCurrentMapType
 	lsls r0, 24
 	lsrs r0, 24
 	bl is_light_level_1_2_3_5_or_6

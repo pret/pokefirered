@@ -317,7 +317,7 @@ _08115B0C:
 	movs r2, 0
 	bl sub_80FAF58
 	bl sub_800B1F4
-	bl sub_8009804
+	bl OpenLink
 	ldrb r1, [r4]
 	movs r0, 0xF
 	ands r0, r1
@@ -707,10 +707,10 @@ _08115E84:
 	beq _08115EC0
 	b _081161D8
 _08115E8E:
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0
 	movs r1, 0
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 	movs r0, 0x5
 	strb r0, [r5, 0x19]
 	ldrb r1, [r5, 0x13]
@@ -1841,7 +1841,7 @@ _081167C0:
 	ldrb r0, [r0]
 	strb r0, [r1]
 	bl sub_800B1F4
-	bl sub_8009804
+	bl OpenLink
 	bl sub_80FBBD8
 	movs r0, 0x70
 	bl AllocZeroed
@@ -2475,10 +2475,10 @@ sub_8116D60: @ 8116D60
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	strb r1, [r4, 0xF]
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0
 	movs r1, 0
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 	ldrb r0, [r4, 0xE]
 	bl RedrawListMenu
 	ldr r5, _08116DD4 @ =gStringVar1
@@ -2595,7 +2595,7 @@ _08116E70:
 	movs r2, 0
 	bl sub_80FAF58
 	bl sub_800B1F4
-	bl sub_8009804
+	bl OpenLink
 	bl sub_80FBBD8
 	movs r0, 0x1
 	bl sub_80FB128
@@ -3864,7 +3864,7 @@ _08117968:
 	.align 2, 0
 _08117970: .4byte gPaletteFade
 _08117974:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08117988
@@ -3999,7 +3999,7 @@ _08117A7C:
 	movs r1, 0
 	bl sub_80FAF74
 	bl sub_800B1F4
-	bl sub_8009804
+	bl OpenLink
 	movs r0, 0x2
 	bl sub_80FBB8C
 	movs r0, 0x1
@@ -4188,10 +4188,10 @@ _08117C3C:
 	beq _08117C84
 	b _08117ECA
 _08117C42:
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0
 	movs r1, 0
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 	ldr r1, [r5]
 	ldrb r0, [r5, 0x13]
 	lsls r0, 5
@@ -4477,7 +4477,7 @@ _08117EB2:
 	strb r0, [r5, 0xC]
 	b _08117ECA
 _08117EBA:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08117ECA
@@ -4571,7 +4571,7 @@ _08117F7C:
 	movs r2, 0
 	bl sub_80FAF58
 	bl sub_800B1F4
-	bl sub_8009804
+	bl OpenLink
 	bl sub_80FBBD8
 	movs r0, 0x70
 	bl AllocZeroed
@@ -4702,10 +4702,10 @@ _0811808E:
 	cmp r0, 0
 	bne _08118130
 	strb r2, [r5, 0xF]
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0
 	movs r1, 0
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 	ldrb r0, [r5, 0xE]
 	bl RedrawListMenu
 	ldr r4, _0811812C @ =gStringVar1
@@ -4897,7 +4897,7 @@ _0811826C:
 	bl sub_800AB9C
 	b _08118288
 _08118278:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08118288
@@ -4990,7 +4990,7 @@ _08118340:
 	movs r2, 0
 	bl sub_80FAF58
 	bl sub_800B1F4
-	bl sub_8009804
+	bl OpenLink
 	bl sub_80FBBD8
 	movs r0, 0x70
 	bl AllocZeroed
@@ -5118,10 +5118,10 @@ _0811843A:
 	beq _0811849C
 	strb r4, [r5, 0xF]
 	strb r4, [r5, 0x14]
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0
 	movs r1, 0
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 	ldr r0, [r5]
 	adds r4, r0, 0
 	adds r4, 0x10
@@ -5302,7 +5302,7 @@ _081185E8:
 	bl sub_800AB9C
 	b _08118604
 _081185F4:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08118604
@@ -5582,7 +5582,7 @@ _0811887C:
 	ldrh r2, [r2, 0xC]
 	bl sub_80FAFA0
 	bl sub_800B1F4
-	bl sub_8009804
+	bl OpenLink
 	bl sub_80FBC00
 	ldr r0, [r6, 0x8]
 	movs r1, 0x1
@@ -6274,7 +6274,7 @@ _08118EAC:
 	.align 2, 0
 _08118EC4: .4byte gStringVar4
 _08118EC8:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _08118ED6
@@ -6796,7 +6796,7 @@ _08119354:
 	movs r0, 0xF
 	b _081198DA
 _0811935C:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _08119368
@@ -7242,7 +7242,7 @@ _081196EC:
 	lsrs r2, 2
 	lsls r1, r2, 3
 	subs r1, r2
-	ldr r2, _0811972C @ =gUnknown_824F1A0
+	ldr r2, _0811972C @ =gTypeNames
 	adds r1, r2
 	bl StringCopy
 	ldr r1, _08119730 @ =gUnknown_8458ED0
@@ -7250,7 +7250,7 @@ _081196EC:
 	.align 2, 0
 _08119724: .4byte gStringVar1
 _08119728: .4byte gStringVar2
-_0811972C: .4byte gUnknown_824F1A0
+_0811972C: .4byte gTypeNames
 _08119730: .4byte gUnknown_8458ED0
 _08119734:
 	ldr r4, _08119774 @ =gStringVar1
@@ -7273,7 +7273,7 @@ _08119734:
 	lsrs r2, 2
 	lsls r1, r2, 3
 	subs r1, r2
-	ldr r2, _0811977C @ =gUnknown_824F1A0
+	ldr r2, _0811977C @ =gTypeNames
 	adds r1, r2
 	bl StringCopy
 	ldr r1, _08119780 @ =gUnknown_8458F04
@@ -7284,7 +7284,7 @@ _0811976A:
 	.align 2, 0
 _08119774: .4byte gStringVar1
 _08119778: .4byte gStringVar2
-_0811977C: .4byte gUnknown_824F1A0
+_0811977C: .4byte gTypeNames
 _08119780: .4byte gUnknown_8458F04
 _08119784:
 	adds r0, r6, 0
@@ -7640,7 +7640,7 @@ _08119A3E:
 	movs r2, 0
 	bl sub_80FAF58
 	bl sub_800B1F4
-	bl sub_8009804
+	bl OpenLink
 	bl sub_80FBC00
 	movs r0, 0x1
 	bl sub_80FB128
@@ -13134,7 +13134,7 @@ _0811C48C:
 	.align 2, 0
 _0811C4A4: .4byte gMain
 _0811C4A8:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0811C516

@@ -263,7 +263,7 @@ _0804C80A:
 	cmp r0, 0
 	beq _0804C880
 	bl sub_800B1F4
-	bl sub_8009804
+	bl OpenLink
 	bl sub_80FBB20
 	b _0804C892
 	.align 2, 0
@@ -275,7 +275,7 @@ _0804C874: .4byte 0x00001122
 _0804C878: .4byte gUnknown_2031DA8
 _0804C87C: .4byte gWirelessCommType
 _0804C880:
-	bl sub_8009804
+	bl OpenLink
 	ldr r1, _0804C8A8 @ =gMain
 	movs r7, 0x87
 	lsls r7, 3
@@ -341,7 +341,7 @@ _0804C8F4:
 	bcs _0804C908
 	b _0804CEE6
 _0804C908:
-	bl sub_800AA48
+	bl IsLinkMaster
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804C940
@@ -357,7 +357,7 @@ _0804C908:
 	bhi _0804C928
 	b _0804CEE6
 _0804C928:
-	bl sub_800A5BC
+	bl CheckShouldAdvanceLinkState
 	ldr r1, _0804C93C @ =gMain
 	movs r3, 0x87
 	lsls r3, 3
@@ -435,10 +435,10 @@ _0804C9C4:
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0
 	movs r1, 0
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 	b _0804CEE6
 	.align 2, 0
 _0804C9E0: .4byte gWirelessCommType
@@ -1134,10 +1134,10 @@ _0804CFDC:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804CFF0
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0
 	movs r1, 0
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 _0804CFF0:
 	ldr r1, _0804D000 @ =gMain
 	movs r3, 0x87
@@ -2201,7 +2201,7 @@ _0804D8D8: .4byte gBlockSendBuffer
 _0804D8DC: .4byte gPlayerParty
 _0804D8E0: .4byte gUnknown_2031DA8
 _0804D8E4:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _0804D8F0
@@ -3875,7 +3875,7 @@ _0804E61C:
 	adds r0, 0x80
 	ldr r1, _0804E64C @ =0x0000bbbb
 	strh r1, [r0]
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804E668
@@ -3944,7 +3944,7 @@ _0804E6B0:
 	movs r0, 0x3
 	movs r1, 0x1
 	bl sub_804F488
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804E6DE
@@ -4285,7 +4285,7 @@ sub_804E944: @ 804E944
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804E988
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804E9AA
@@ -7508,7 +7508,7 @@ _08050240:
 	adds r0, r1
 	movs r1, 0x1
 	strb r1, [r0]
-	bl sub_8009804
+	bl OpenLink
 	ldr r1, _08050278 @ =gMain
 	movs r2, 0x87
 	lsls r2, 3
@@ -7549,7 +7549,7 @@ _08050298:
 	.align 2, 0
 _080502A4: .4byte gUnknown_2031DAC
 _080502A8:
-	bl sub_800AA48
+	bl IsLinkMaster
 	lsls r0, 24
 	cmp r0, 0
 	bne _080502B4
@@ -7571,7 +7571,7 @@ _080502B4:
 	bhi _080502D6
 	b _08050472
 _080502D6:
-	bl sub_800A5BC
+	bl CheckShouldAdvanceLinkState
 	ldr r1, _080502E8 @ =gMain
 	movs r2, 0x87
 	lsls r2, 3
@@ -7749,10 +7749,10 @@ _0805044C:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0805046C
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0
 	movs r1, 0
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 _0805046C:
 	ldr r0, _08050498 @ =sub_8053D84
 	bl SetMainCallback2
@@ -8274,7 +8274,7 @@ sub_80508F4: @ 80508F4
 	.align 2, 0
 _08050908: .4byte gUnknown_2031DAC
 _0805090C:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08050932
@@ -14405,7 +14405,7 @@ _08054080:
 	strb r1, [r0]
 	str r2, [r3, 0x64]
 _0805409C:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _080540A8
@@ -14420,7 +14420,7 @@ _080540A8:
 _080540B4: .4byte gUnknown_2031DAC
 _080540B8: .4byte gMain
 _080540BC:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _080540C8
@@ -14637,7 +14637,7 @@ _08054278:
 	str r0, [r1, 0x64]
 	b _08054396
 _0805427E:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805428A
@@ -14672,7 +14672,7 @@ _080542A0:
 	.align 2, 0
 _080542C0: .4byte gUnknown_2031DAC
 _080542C4:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08054396

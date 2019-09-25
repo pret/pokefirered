@@ -18,5 +18,6 @@ void MEvent_CreateTask_CardOrNewsOverWireless(u8);
 void MEvent_CreateTask_Leader(u8);
 void sub_80F9E2C(void * data);
 u8 sub_8116DE0(void);
+void sub_80FBB4C(void);
 
 #endif //GUARD_LINK_RFU_H

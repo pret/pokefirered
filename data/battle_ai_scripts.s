@@ -4,7 +4,7 @@
 
 	.section script_data, "aw", %progbits
 
-BattleAIs:: @ 81D9BF4
+gBattleAI_ScriptsTable:: @ 81D9BF4
 	.4byte AI_CheckBadMove
 	.4byte AI_TryToFaint
 	.4byte AI_CheckViability

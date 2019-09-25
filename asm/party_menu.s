@@ -2010,8 +2010,8 @@ _0811FA18: .4byte gUnknown_8459FC4
 _0811FA1C: .4byte gUnknown_8459FE0
 	thumb_func_end sub_811F9DC
 
-	thumb_func_start sub_811FA20
-sub_811FA20: @ 811FA20
+	thumb_func_start IsMultiBattle
+IsMultiBattle: @ 811FA20
 	push {lr}
 	ldr r0, _0811FA34 @ =gBattleTypeFlags
 	ldr r0, [r0]
@@ -2028,7 +2028,7 @@ _0811FA38:
 _0811FA3A:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_811FA20
+	thumb_func_end IsMultiBattle
 
 	thumb_func_start sub_811FA40
 sub_811FA40: @ 811FA40
@@ -7145,7 +7145,7 @@ party_menu_icon_anim: @ 81221D4
 	adds r7, r1, 0
 	adds r4, r2, 0
 	movs r6, 0x1
-	bl sub_811FA20
+	bl IsMultiBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -13549,7 +13549,7 @@ sub_8125554: @ 8125554
 	bl sub_81202F8
 	movs r0, 0x2
 	bl ScheduleBgCopyTilemapToVram
-	bl sub_803539C
+	bl HandleBattleLowHpMusicChange
 	ldr r1, _081255B4 @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
@@ -14645,7 +14645,7 @@ sub_8125E4C: @ 8125E4C
 	ldr r3, _08125E80 @ =sub_8125E84
 	ldrh r4, [r4, 0xE]
 	str r4, [sp]
-	bl sub_8134738
+	bl ShowSelectMovePokemonSummaryScreen
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
@@ -15250,7 +15250,7 @@ sub_8126350: @ 8126350
 	lsls r2, 2
 	adds r1, r7, r2
 	adds r0, r4, 0
-	bl sub_811D130
+	bl GetMonLevelUpWindowStats
 	ldrb r0, [r6, 0x9]
 	ldr r5, _0812641C @ =gSpecialVar_ItemId
 	ldrh r1, [r5]
@@ -15260,7 +15260,7 @@ sub_8126350: @ 8126350
 	lsls r0, 2
 	adds r1, r7, r0
 	adds r0, r4, 0
-	bl sub_811D130
+	bl GetMonLevelUpWindowStats
 	ldr r1, _08126420 @ =gUnknown_203B0C0
 	movs r0, 0x1
 	strb r0, [r1]
@@ -15497,7 +15497,7 @@ sub_8126570: @ 8126570
 	str r1, [sp, 0x4]
 	adds r1, r4, 0
 	movs r3, 0x1
-	bl sub_811E7F0
+	bl DrawLevelUpWindowPg1
 	ldrb r0, [r4, 0x18]
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -15528,7 +15528,7 @@ sub_81265BC: @ 81265BC
 	str r2, [sp]
 	movs r2, 0x1
 	movs r3, 0x2
-	bl sub_811E93C
+	bl DrawLevelUpWindowPg2
 	ldrb r0, [r4, 0x18]
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -17909,14 +17909,14 @@ _081278B0: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
 	thumb_func_start sub_81278B4
 sub_81278B4: @ 81278B4
 	push {lr}
-	bl sub_8075290
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _081278C4
 	movs r0, 0
 	b _081278D6
 _081278C4:
-	bl sub_811FA20
+	bl IsMultiBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -17930,8 +17930,8 @@ _081278D6:
 	bx r1
 	thumb_func_end sub_81278B4
 
-	thumb_func_start sub_81278DC
-sub_81278DC: @ 81278DC
+	thumb_func_start OpenPartyMenuInBattle
+OpenPartyMenuInBattle: @ 81278DC
 	push {r4,lr}
 	sub sp, 0xC
 	lsls r0, 24
@@ -17955,7 +17955,7 @@ sub_81278DC: @ 81278DC
 	str r0, [sp]
 	ldr r0, _08127928 @ =sub_8120C3C
 	str r0, [sp, 0x4]
-	ldr r0, _0812792C @ =sub_8030ADC
+	ldr r0, _0812792C @ =SetCB2ToReshowScreenAfterMenu
 	str r0, [sp, 0x8]
 	movs r0, 0x1
 	adds r2, r4, 0
@@ -17967,7 +17967,7 @@ sub_81278DC: @ 81278DC
 	.align 2, 0
 _08127924: .4byte gBattleTypeFlags
 _08127928: .4byte sub_8120C3C
-_0812792C: .4byte sub_8030ADC
+_0812792C: .4byte SetCB2ToReshowScreenAfterMenu
 _08127930:
 	bl sub_81278B4
 	adds r1, r0, 0
@@ -17977,7 +17977,7 @@ _08127930:
 	str r0, [sp]
 	ldr r0, _08127960 @ =sub_811FB28
 	str r0, [sp, 0x4]
-	ldr r0, _08127964 @ =sub_8030ADC
+	ldr r0, _08127964 @ =SetCB2ToReshowScreenAfterMenu
 	str r0, [sp, 0x8]
 	movs r0, 0x1
 	adds r2, r4, 0
@@ -17992,8 +17992,8 @@ _08127950:
 	bx r0
 	.align 2, 0
 _08127960: .4byte sub_811FB28
-_08127964: .4byte sub_8030ADC
-	thumb_func_end sub_81278DC
+_08127964: .4byte SetCB2ToReshowScreenAfterMenu
+	thumb_func_end OpenPartyMenuInBattle
 
 	thumb_func_start sub_8127968
 sub_8127968: @ 8127968
@@ -18007,7 +18007,7 @@ sub_8127968: @ 8127968
 	str r0, [sp]
 	ldr r0, _0812799C @ =sub_8120EBC
 	str r0, [sp, 0x4]
-	ldr r0, _081279A0 @ =sub_8030ADC
+	ldr r0, _081279A0 @ =SetCB2ToReshowScreenAfterMenu
 	str r0, [sp, 0x8]
 	movs r0, 0x1
 	movs r2, 0
@@ -18020,7 +18020,7 @@ sub_8127968: @ 8127968
 	bx r0
 	.align 2, 0
 _0812799C: .4byte sub_8120EBC
-_081279A0: .4byte sub_8030ADC
+_081279A0: .4byte SetCB2ToReshowScreenAfterMenu
 	thumb_func_end sub_8127968
 
 	thumb_func_start sub_81279A4
@@ -18169,7 +18169,7 @@ sub_8127AC0: @ 8127AC0
 	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl sub_811FA20
+	bl IsMultiBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -18290,7 +18290,7 @@ _08127BD8:
 	ldrb r0, [r0, 0xB]
 	cmp r0, 0x4
 	bne _08127BEC
-	bl sub_8044348
+	bl SetMonPreventsSwitchingString
 	b _08127C8A
 	.align 2, 0
 _08127BE8: .4byte gUnknown_203B0A0
@@ -18402,7 +18402,7 @@ sub_8127CCC: @ 8127CCC
 	adds r6, r0, 0
 	lsls r1, 24
 	lsrs r4, r1, 24
-	bl sub_811FA20
+	bl IsMultiBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -18425,7 +18425,7 @@ _08127CF4:
 	strb r0, [r6, 0x2]
 	b _08127D9C
 _08127D02:
-	bl sub_8075290
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _08127D40
@@ -18565,7 +18565,7 @@ _08127E00:
 	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r6, r0, 24
-	bl sub_811FA20
+	bl IsMultiBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -18588,7 +18588,7 @@ _08127E26:
 	strb r0, [r5, 0x2]
 	b _08127EB6
 _08127E34:
-	bl sub_8075290
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _08127E6C
@@ -18678,7 +18678,7 @@ sub_8127EC4: @ 8127EC4
 	lsls r2, 24
 	lsrs r6, r2, 24
 	movs r7, 0
-	bl sub_811FA20
+	bl IsMultiBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _08127F72
@@ -19046,12 +19046,12 @@ _0812817A:
 sub_8128184: @ 8128184
 	push {lr}
 	bl sub_8108CF0
-	ldr r0, _08128194 @ =sub_8030ADC
+	ldr r0, _08128194 @ =SetCB2ToReshowScreenAfterMenu
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08128194: .4byte sub_8030ADC
+_08128194: .4byte SetCB2ToReshowScreenAfterMenu
 	thumb_func_end sub_8128184
 
 	thumb_func_start sub_8128198

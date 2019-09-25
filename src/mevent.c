@@ -134,7 +134,7 @@ static void ResetTTDataBuffer(void)
 {
     memset(gDecompressionBuffer, 0, 0x2000);
     gLinkType = 0x5502;
-    sub_8009804();
+    OpenLink();
     SetSuppressLinkErrorMessage(TRUE);
 }
 
@@ -156,7 +156,7 @@ bool32 sub_81436EC(void)
 
 static bool32 IsEReaderConnectionSane(void)
 {
-    if (sub_800AA48() && GetLinkPlayerCount_2() == 2)
+    if (IsLinkMaster() && GetLinkPlayerCount_2() == 2)
         return TRUE;
     return FALSE;
 }
@@ -171,7 +171,7 @@ u32 sub_8143770(u8 * r4, u16 * r5)
     switch (*r4)
     {
         case 0:
-            if (sub_800AA48() && GetLinkPlayerCount_2() > 1)
+            if (IsLinkMaster() && GetLinkPlayerCount_2() > 1)
             {
                 *r4 = 1;
                 ;
@@ -193,7 +193,7 @@ u32 sub_8143770(u8 * r4, u16 * r5)
             if (GetLinkPlayerCount_2() == 2)
             {
                 PlaySE(SE_TOY_G);
-                sub_800A5BC();
+                CheckShouldAdvanceLinkState();
                 *r5 = 0;
                 *r4 = 3;
             }

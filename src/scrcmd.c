@@ -25,7 +25,7 @@
 #include "start_menu.h"
 #include "script_menu.h"
 #include "string_util.h"
-#include "data2.h"
+#include "data.h"
 #include "field_specials.h"
 #include "constants/items.h"
 #include "script_pokemon_util_80A0058.h"

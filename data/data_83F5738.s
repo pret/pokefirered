@@ -133,10 +133,10 @@ gUnknown_83F846D:: @ 83F846D
 gUnknown_83F847D:: @ 83F847D
 	.incbin "baserom.gba", 0x3F847D, 0x323
 
-	.section .rodata.83FB134
+	.section .rodata.83FB218
 
-gUnknown_83FB134:: @ 83FB134
-	.incbin "baserom.gba", 0x3FB134, 0xA80
+gUnknown_83FB218:: @ 83FB218
+	.incbin "baserom.gba", 0x3FB218, 0x99C
 
 BattleText_MistShroud:: @ 83FBBB4
 	.incbin "baserom.gba", 0x3FBBB4, 0x35
@@ -369,10 +369,10 @@ gUnknown_83FDDEB:: @ 83FDDEB
 gUnknown_83FDF3C:: @ 83FDF3C
 	.incbin "baserom.gba", 0x3FDF3C, 0x5D8
 
-gUnknown_83FE514:: @ 83FE514
+gMissStringIds:: @ 83FE514
 	.incbin "baserom.gba", 0x3FE514, 0x150
 
-gUnknown_83FE664:: @ 83FE664
+gTrappingMoves:: @ 83FE664
 	.incbin "baserom.gba", 0x3FE664, 0xE
 
 gUnknown_83FE672:: @ 83FE672
@@ -387,7 +387,7 @@ gUnknown_83FE6B5:: @ 83FE6B5
 gUnknown_83FE6D0:: @ 83FE6D0
 	.incbin "baserom.gba", 0x3FE6D0, 0x5
 
-gUnknown_83FE6D5:: @ 83FE6D5
+gText_WhatWillPkmnDo:: @ 83FE6D5
 	.incbin "baserom.gba", 0x3FE6D5, 0x11
 
 gUnknown_83FE6E6:: @ 83FE6E6
@@ -396,7 +396,7 @@ gUnknown_83FE6E6:: @ 83FE6E6
 gUnknown_83FE6FA:: @ 83FE6FA
 	.incbin "baserom.gba", 0x3FE6FA, 0x1A
 
-gUnknown_83FE714:: @ 83FE714
+gText_LinkStandby:: @ 83FE714
 	.incbin "baserom.gba", 0x3FE714, 0x11
 
 gUnknown_83FE725:: @ 83FE725
@@ -405,19 +405,19 @@ gUnknown_83FE725:: @ 83FE725
 gUnknown_83FE747:: @ 83FE747
 	.incbin "baserom.gba", 0x3FE747, 0x1F
 
-gUnknown_83FE766:: @ 83FE766
+gText_MoveInterfacePP:: @ 83FE766
 	.incbin "baserom.gba", 0x3FE766, 0x4
 
-gUnknown_83FE76A:: @ 83FE76A
+gText_MoveInterfaceType:: @ 83FE76A
 	.incbin "baserom.gba", 0x3FE76A, 0x6
 
 gUnknown_83FE770:: @ 83FE770
 	.incbin "baserom.gba", 0x3FE770, 0x21
 
-gUnknown_83FE791:: @ 83FE791
+gText_BattleYesNoChoice:: @ 83FE791
 	.incbin "baserom.gba", 0x3FE791, 0xF
 
-gUnknown_83FE7A0:: @ 83FE7A0
+gText_BattleSwitchWhich:: @ 83FE7A0
 	.incbin "baserom.gba", 0x3FE7A0, 0x6C
 
 gUnknown_83FE80C:: @ 83FE80C

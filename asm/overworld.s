@@ -1228,7 +1228,7 @@ sub_805550C: @ 805550C
 	lsrs r6, r0, 16
 	lsls r1, 16
 	lsrs r7, r1, 16
-	bl sav1_map_get_light_level
+	bl GetCurrentMapType
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -1911,7 +1911,7 @@ _08055A68: .4byte gUnknown_2031DD4
 	thumb_func_start sub_8055A6C
 sub_8055A6C: @ 8055A6C
 	push {r4-r7,lr}
-	bl sav1_map_get_light_level
+	bl GetCurrentMapType
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
@@ -2382,14 +2382,14 @@ sub_8055DB8: @ 8055DB8
 Overworld_PlaySpecialMapMusic: @ 8055DC4
 	push {r4,r5,lr}
 	sub sp, 0x4
-	ldr r0, _08055DD8 @ =gUnknown_2031DD8
+	ldr r0, _08055DD8 @ =gDisableMapMusicChangeOnMapLoad
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _08055DDC
 	bl StopMapMusic
 	b _08055E6C
 	.align 2, 0
-_08055DD8: .4byte gUnknown_2031DD8
+_08055DD8: .4byte gDisableMapMusicChangeOnMapLoad
 _08055DDC:
 	cmp r0, 0x2
 	beq _08055E6C
@@ -2488,14 +2488,14 @@ _08055E90: .4byte gSaveBlock1Ptr
 	thumb_func_start sub_8055E94
 sub_8055E94: @ 8055E94
 	push {r4-r6,lr}
-	ldr r0, _08055EA4 @ =gUnknown_2031DD8
+	ldr r0, _08055EA4 @ =gDisableMapMusicChangeOnMapLoad
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _08055EA8
 	bl StopMapMusic
 	b _08055F14
 	.align 2, 0
-_08055EA4: .4byte gUnknown_2031DD8
+_08055EA4: .4byte gDisableMapMusicChangeOnMapLoad
 _08055EA8:
 	cmp r0, 0x2
 	beq _08055F14
@@ -2701,7 +2701,7 @@ _08056014:
 	adds r0, 0x32
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, _08056050 @ =gUnknown_2031DD8
+	ldr r0, _08056050 @ =gDisableMapMusicChangeOnMapLoad
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _08056054
@@ -2709,7 +2709,7 @@ _08056014:
 	b _0805606A
 	.align 2, 0
 _0805604C: .4byte gUnknown_2031DDC
-_08056050: .4byte gUnknown_2031DD8
+_08056050: .4byte gDisableMapMusicChangeOnMapLoad
 _08056054:
 	cmp r0, 0x2
 	beq _0805606A
@@ -2884,8 +2884,8 @@ get_map_light_level_from_warp: @ 8056170
 	bx r1
 	thumb_func_end get_map_light_level_from_warp
 
-	thumb_func_start sav1_map_get_light_level
-sav1_map_get_light_level: @ 8056188
+	thumb_func_start GetCurrentMapType
+GetCurrentMapType: @ 8056188
 	push {lr}
 	ldr r0, _0805619C @ =gSaveBlock1Ptr
 	ldr r0, [r0]
@@ -2897,7 +2897,7 @@ sav1_map_get_light_level: @ 8056188
 	bx r1
 	.align 2, 0
 _0805619C: .4byte gSaveBlock1Ptr
-	thumb_func_end sav1_map_get_light_level
+	thumb_func_end GetCurrentMapType
 
 	thumb_func_start get_map_light_from_warp0
 get_map_light_from_warp0: @ 80561A0
@@ -4058,10 +4058,10 @@ _08056B3C:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08056B62
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0
 	movs r1, 0
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 	b _08056B62
 	.align 2, 0
 _08056B54: .4byte gWirelessCommType
@@ -4389,10 +4389,10 @@ _08056E18:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08056E3E
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0
 	movs r1, 0
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 	b _08056E3E
 	.align 2, 0
 _08056E30: .4byte gWirelessCommType
@@ -5158,8 +5158,8 @@ _0805749A:
 _080574A0: .4byte sub_8056534
 	thumb_func_end sub_8057430
 
-	thumb_func_start sub_80574A4
-sub_80574A4: @ 80574A4
+	thumb_func_start Overworld_CreditsMainCB
+Overworld_CreditsMainCB: @ 80574A4
 	push {r4,lr}
 	ldr r0, _080574E8 @ =gPaletteFade
 	ldrb r0, [r0, 0x7]
@@ -5187,7 +5187,7 @@ _080574E0:
 	bx r0
 	.align 2, 0
 _080574E8: .4byte gPaletteFade
-	thumb_func_end sub_80574A4
+	thumb_func_end Overworld_CreditsMainCB
 
 	thumb_func_start sub_80574EC
 sub_80574EC: @ 80574EC
@@ -5209,8 +5209,8 @@ _08057506:
 	bx r1
 	thumb_func_end sub_80574EC
 
-	thumb_func_start sub_805750C
-sub_805750C: @ 805750C
+	thumb_func_start Overworld_DoScrollSceneForCredits
+Overworld_DoScrollSceneForCredits: @ 805750C
 	push {lr}
 	ldr r3, _08057520 @ =gUnknown_2031DE4
 	str r1, [r3]
@@ -5223,7 +5223,7 @@ sub_805750C: @ 805750C
 	.align 2, 0
 _08057520: .4byte gUnknown_2031DE4
 _08057524: .4byte gUnknown_2036E28
-	thumb_func_end sub_805750C
+	thumb_func_end Overworld_DoScrollSceneForCredits
 
 	thumb_func_start sub_8057528
 sub_8057528: @ 8057528
@@ -5451,7 +5451,7 @@ _08057712:
 	ldr r2, _08057738 @ =0x3fffffff
 	movs r0, 0
 	movs r1, 0
-	bl sub_807A944
+	bl FieldWeather_StartFadingOutCreditsMap
 _0805772A:
 	ldrb r0, [r4]
 	adds r0, 0x1

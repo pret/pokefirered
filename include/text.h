@@ -83,7 +83,16 @@
 #define TEXT_COLOR_DARK_GREY    0x2
 
 // battle placeholders are located in battle_message.h
-
+#define EXT_CTRL_CODE_COLOR     0x1
+#define EXT_CTRL_CODE_HIGHLIGHT 0x2
+#define EXT_CTRL_CODE_SHADOW    0x3
+//
+#define EXT_CTRL_CODE_UNKNOWN_7 0x7
+//
+#define EXT_CTRL_CODE_CLEAR     0x11
+//
+#define EXT_CTRL_CODE_CLEAR_TO  0x13
+#define EXT_CTRL_CODE_MIN_LETTER_SPACING 0x14
 #define EXT_CTRL_CODE_JPN   0x15
 #define EXT_CTRL_CODE_ENG   0x16
 
@@ -105,18 +114,13 @@ enum
 
 struct TextPrinterSubStruct
 {
-    u8 font_type:4;  // 0x14
-    u8 font_type_upper:1;
+    u8 glyphId:4;  // 0x14
+    bool8 hasPrintBeenSpedUp:1;
     u8 font_type_5:3;
-    u8 field_1:5;
-    u8 field_1_upmid:2;
-    u8 field_1_top:1;
-    u8 frames_visible_counter;
-    u8 field_3;
-    u8 field_4; // 0x18
-    u8 field_5;
-    u8 field_6;
-    u8 active;
+    u8 downArrowDelay:5;
+    u8 downArrowYPosIdx:2;
+    u8 hasGlyphIdBeenSet:1;
+    u8 autoScrollDelay;
 };
 
 struct TextPrinterTemplate // TODO: Better name
@@ -138,18 +142,15 @@ struct TextPrinterTemplate // TODO: Better name
 
 struct TextPrinter
 {
-    struct TextPrinterTemplate subPrinter;
-
+    struct TextPrinterTemplate printerTemplate;
     void (*callback)(struct TextPrinterTemplate *, u16); // 0x10
-
-    union {
+    union __attribute__((packed)) {
         struct TextPrinterSubStruct sub;
-
-        u8 sub_fields[8];
-    } sub_union;
-
+        u8 fields[7];
+    } subUnion;
+    u8 active;
     u8 state;       // 0x1C
-    u8 text_speed;
+    u8 textSpeed;
     u8 delayCounter;
     u8 scrollDistance;
     u8 minLetterSpacing;  // 0x20
@@ -173,13 +174,13 @@ extern const struct FontInfo *gFonts;
 
 struct GlyphWidthFunc
 {
-    u32 font_id;
+    u32 fontId;
     s32 (*func)(u16 glyphId, bool32 isJapanese);
 };
 
 struct KeypadIcon
 {
-    u16 tile_offset;
+    u16 tileOffset;
     u8 width;
     u8 height;
 };
@@ -262,5 +263,6 @@ s32 GetGlyphWidthFont5(u16 glyphId, bool32 isJapanese);
 void sub_80062B0(struct Sprite *sprite);
 u8 CreateTextCursorSpriteForOakSpeech(u8 sheetId, u16 x, u16 y, u8 priority, u8 subpriority);
 void sub_8006398(u8 spriteId);
+s32 GetGlyphWidthFont6(u16 font_type, bool32 isJapanese);
 
 #endif // GUARD_TEXT_H

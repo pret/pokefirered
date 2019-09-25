@@ -3476,7 +3476,7 @@ _0813622C:
 	ldr r0, [r6]
 	ldr r2, _08136308 @ =0x00003084
 	adds r0, r2
-	ldr r1, _0813630C @ =gUnknown_84161CD
+	ldr r1, _0813630C @ =gString_Dummy
 	bl StringCopy
 _08136238:
 	cmp r4, 0x20
@@ -3498,7 +3498,7 @@ _08136240:
 	ldr r0, [r5]
 	ldr r1, _08136308 @ =0x00003084
 	adds r0, r1
-	ldr r1, _0813630C @ =gUnknown_84161CD
+	ldr r1, _0813630C @ =gString_Dummy
 	bl StringCopy
 _08136264:
 	ldr r6, _08136310 @ =gUnknown_203B140
@@ -3572,7 +3572,7 @@ _08136264:
 	b _08136342
 	.align 2, 0
 _08136308: .4byte 0x00003084
-_0813630C: .4byte gUnknown_84161CD
+_0813630C: .4byte gString_Dummy
 _08136310: .4byte gUnknown_203B140
 _08136314: .4byte 0x00003034
 _08136318: .4byte gSpeciesNames

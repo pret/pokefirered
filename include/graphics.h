@@ -990,4 +990,12 @@ extern const u32 gSubstituteDollGfx[];
 extern const u32 gSubstituteDollTilemap[];
 extern const u32 gSubstituteDollPal[];
 
+// credits
+extern const u32 gCreditsPokeballBgGfxTiles[];
+extern const u32 gCreditsPokeballBgGfxMap[];
+extern const u16 gCreditsMonBackdropPals[][16];
+extern const u16 gCreditsAllRightsReservedGfxPal[];
+extern const u8 gCreditsAllRightsReservedGfxTiles[];
+extern const u8 gCreditsAllRightsReservedGfxMap[];
+
 #endif //GUARD_GRAPHICS_H

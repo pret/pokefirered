@@ -516,7 +516,7 @@ gUnknown_2031DCC: @ 2031DCC
 gUnknown_2031DD4: @ 2031DD4
 	.space 0x4
 
-gUnknown_2031DD8: @ 2031DD8
+gDisableMapMusicChangeOnMapLoad: @ 2031DD8
 	.space 0x2
 
 gUnknown_2031DDA: @ 2031DDA
@@ -1086,8 +1086,7 @@ gUnknown_203AB38: @ 203AB38
 gUnknown_203AB3C: @ 203AB3C
 	.space 0x4
 
-gUnknown_203AB40: @ 203AB40
-	.space 0x4
+	.include "src/credits.o"
 
 gUnknown_203AB44: @ 203AB44
 	.space 0x4

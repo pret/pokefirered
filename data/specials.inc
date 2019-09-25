@@ -281,7 +281,7 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special nullsub_61
 	def_special DoSoftReset
-	def_special sub_80CA2E4
+	def_special Special_HallOfFame
 	def_special sub_80CB498
 	def_special nullsub_75
 	def_special SpawnScriptFieldObject
@@ -430,7 +430,7 @@ gSpecials:: @ 815FD60
 	def_special sub_814EA7C
 	def_special sub_80CCB94
 	def_special sub_80CCCF8
-	def_special sub_80F39B4
+	def_special Special_Credits
 	def_special sub_8153810
 	def_special sub_809D764
 	def_special sub_809D8C0

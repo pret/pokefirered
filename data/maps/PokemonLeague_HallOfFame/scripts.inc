@@ -37,7 +37,7 @@ EventScript_162D70:: @ 8162D70
 	call EventScript_1A651A
 	setrespawn SPAWN_PALLET_TOWN
 	fadescreenspeed 1, 24
-	special sub_80CA2E4
+	special Special_HallOfFame
 	waitstate
 	releaseall
 	end

@@ -59,7 +59,7 @@ EventScript_167264:: @ 8167264
 	setvar VAR_MAP_SCENE_INDIGO_PLATEAU_EXTERIOR, 0
 	removeobject 1
 	removeobject 2
-	special sub_80F39B4
+	special Special_Credits
 	waitstate
 	releaseall
 	end

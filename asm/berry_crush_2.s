@@ -146,7 +146,7 @@ _0814BC44:
 	bl sub_80FA42C
 	b _0814BC66
 _0814BC4A:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _0814BC66
@@ -362,7 +362,7 @@ _0814BDCC:
 	bl sub_80FA42C
 	b _0814BDFC
 _0814BDD2:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814BE02
@@ -497,7 +497,7 @@ _0814BED4:
 	bl sub_80FA42C
 	b _0814BFC0
 _0814BEDA:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814BFC6
@@ -519,7 +519,7 @@ _0814BEDA:
 	bl SendBlock
 	b _0814BFC0
 _0814BF0A:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814BFC6
@@ -653,7 +653,7 @@ _0814C008:
 	bl sub_80FA42C
 	b _0814C108
 _0814C01A:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814C10E
@@ -725,7 +725,7 @@ _0814C080:
 	.align 2, 0
 _0814C0AC: .4byte sub_814DB84
 _0814C0B0:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814C10E
@@ -751,7 +751,7 @@ _0814C0D2:
 	bl sub_80FA42C
 	b _0814C108
 _0814C0E4:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814C10E
@@ -907,7 +907,7 @@ _0814C1FC:
 	bl sub_80FA42C
 	b _0814C23C
 _0814C21E:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814C242
@@ -951,7 +951,7 @@ _0814C262:
 	beq _0814C298
 	b _0814C2EC
 _0814C26C:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814C2F2
@@ -972,7 +972,7 @@ _0814C292:
 	bl sub_80FA42C
 	b _0814C2EC
 _0814C298:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814C2F2
@@ -2070,7 +2070,7 @@ _0814CADA:
 	strh r0, [r4, 0x10]
 	b _0814CB12
 _0814CAF4:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814CB18
@@ -2172,7 +2172,7 @@ _0814CB8A:
 	bl SetGpuReg
 	b _0814CBFC
 _0814CBBC:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814CC02
@@ -2273,7 +2273,7 @@ _0814CC72:
 	bl SendBlock
 	b _0814CF8E
 _0814CC8A:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _0814CC96
@@ -2618,7 +2618,7 @@ _0814CF24:
 	bl SendBlock
 	b _0814CF8E
 _0814CF30:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814CF94
@@ -2849,7 +2849,7 @@ _0814D100:
 	bl sub_80FA42C
 	b _0814D178
 _0814D106:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814D17E
@@ -3031,7 +3031,7 @@ _0814D260:
 	bl sub_80FA42C
 	b _0814D30C
 _0814D266:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814D312
@@ -3047,7 +3047,7 @@ _0814D266:
 	bl SendBlock
 	b _0814D30C
 _0814D288:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814D312
@@ -3319,7 +3319,7 @@ _0814D482:
 	bl sub_80FA42C
 	b _0814D4B8
 _0814D488:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814D4BE

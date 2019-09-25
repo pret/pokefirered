@@ -929,8 +929,8 @@ _080E6062:
 _080E6074: .4byte gSaveBlock2Ptr
 	thumb_func_end sub_80E5E7C
 
-	thumb_func_start sub_80E6078
-sub_80E6078: @ 80E6078
+	thumb_func_start GetBattleTowerTrainerFrontSpriteId
+GetBattleTowerTrainerFrontSpriteId: @ 80E6078
 	push {lr}
 	ldr r0, _080E6094 @ =gSaveBlock2Ptr
 	ldr r3, [r0]
@@ -983,7 +983,7 @@ _080E60D6:
 	.align 2, 0
 _080E60DC: .4byte gFacilityClassToPicIndex
 _080E60E0: .4byte gUnknown_83FFAC4
-	thumb_func_end sub_80E6078
+	thumb_func_end GetBattleTowerTrainerFrontSpriteId
 
 	thumb_func_start sub_80E60E4
 sub_80E60E4: @ 80E60E4

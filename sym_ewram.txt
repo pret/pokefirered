@@ -79,20 +79,7 @@ gUnknown_2022860: @ 2022860
 	.space 0xC
 
 	@ .include "src/link_rfu.o"
-gUnknown_202286C: @ 202286C
-	.space 0x1
-
-gUnknown_202286D: @ 202286D
-	.space 0x1
-
-gUnknown_202286E: @ 202286E
-	.space 0x2
-
-gUnknown_2022870: @ 2022870
-	.space 0x4
-
-gUnknown_2022874: @ 2022874
-	.space 0x100
+	.include "src/battle_controllers.o"
 
 gBattle_BG0_X: @ 2022974
 	.space 0x2
@@ -139,7 +126,7 @@ gBattleTextBuff1: @ 2022AB8
 gBattleTextBuff2: @ 2022AC8
 	.space 0x10
 
-gUnknown_2022AD8: @ 2022AD8
+gBattleTextBuff3: @ 2022AD8
 	.space 0x10
 
 gUnknown_2022AE8: @ 2022AE8
@@ -148,7 +135,7 @@ gUnknown_2022AE8: @ 2022AE8
 gBattleTypeFlags: @ 2022B4C
 	.space 0x4
 
-gUnknown_2022B50: @ 2022B50
+gBattleTerrain: @ 2022B50
 	.space 0x4
 
 gUnknown_2022B54: @ 2022B54
@@ -166,7 +153,7 @@ gUnknown_2022BBC: @ 2022BBC
 gUnknown_2022BC0: @ 2022BC0
 	.space 0x4
 
-gUnknown_2022BC4: @ 2022BC4
+gBattleBufferA: @ 2022BC4
 	.space 0x2
 
 gUnknown_2022BC6: @ 2022BC6
@@ -178,7 +165,7 @@ gUnknown_2022BC7: @ 2022BC7
 gUnknown_2022BC8: @ 2022BC8
 	.space 0x7FC
 
-gUnknown_20233C4: @ 20233C4
+gBattleBufferB: @ 20233C4
 	.space 0x4
 
 gUnknown_20233C8: @ 20233C8
@@ -187,7 +174,7 @@ gUnknown_20233C8: @ 20233C8
 gActiveBattler: @ 2023BC4
 	.space 0x4
 
-gUnknown_2023BC8: @ 2023BC8
+gBattleControllerExecFlags: @ 2023BC8
 	.space 0x4
 
 gBattlersCount: @ 2023BCC
@@ -196,19 +183,19 @@ gBattlersCount: @ 2023BCC
 gBattlerPartyIndexes: @ 2023BCE
 	.space 0x8
 
-gUnknown_2023BD6: @ 2023BD6
+gBattlerPositions: @ 2023BD6
 	.space 0x4
 
-gUnknown_2023BDA: @ 2023BDA
+gActionsByTurnOrder: @ 2023BDA
 	.space 0x4
 
-gUnknown_2023BDE: @ 2023BDE
+gBattlerByTurnOrder: @ 2023BDE
 	.space 0x4
 
-gUnknown_2023BE2: @ 2023BE2
+gCurrentTurnActionNumber: @ 2023BE2
 	.space 0x1
 
-gUnknown_2023BE3: @ 2023BE3
+gCurrentActionFuncId: @ 2023BE3
 	.space 0x1
 
 gBattleMons: @ 2023BE4
@@ -235,46 +222,46 @@ gUnknown_2023C34: @ 2023C34
 gBattlerSpriteIds: @ 2023D44
 	.space 0x4
 
-gUnknown_2023D48: @ 2023D48
+gCurrMovePos: @ 2023D48
 	.space 0x1
 
-gUnknown_2023D49: @ 2023D49
+gChosenMovePos: @ 2023D49
 	.space 0x1
 
 gCurrentMove: @ 2023D4A
 	.space 0x2
 
-gUnknown_2023D4C: @ 2023D4C
+gChosenMove: @ 2023D4C
 	.space 0x2
 
-gUnknown_2023D4E: @ 2023D4E
+gCalledMove: @ 2023D4E
 	.space 0x2
 
 gBattleMoveDamage: @ 2023D50
 	.space 0x4
 
-gUnknown_2023D54: @ 2023D54
+gHpDealt: @ 2023D54
 	.space 0x4
 
-gUnknown_2023D58: @ 2023D58
+gTakenDmg: @ 2023D58
 	.space 0x10
 
-gUnknown_2023D68: @ 2023D68
+gLastUsedItem: @ 2023D68
 	.space 0x2
 
 gLastUsedAbility: @ 2023D6A
 	.space 0x1
 
-sBattler_AI: @ 2023D6B
+gBattlerAttacker: @ 2023D6B
 	.space 0x1
 
 gBattlerTarget: @ 2023D6C
 	.space 0x1
 
-gUnknown_2023D6D: @ 2023D6D
+gBattlerFainted: @ 2023D6D
 	.space 0x1
 
-gUnknown_2023D6E: @ 2023D6E
+gEffectBattler: @ 2023D6E
 	.space 0x1
 
 gPotentialItemEffectBattler: @ 2023D6F
@@ -286,58 +273,58 @@ gAbsentBattlerFlags: @ 2023D70
 gCritMultiplier: @ 2023D71
 	.space 0x1
 
-gUnknown_2023D72: @ 2023D72
+gMultiHitCounter: @ 2023D72
 	.space 0x2
 
-gUnknown_2023D74: @ 2023D74
+gBattlescriptCurrInstr: @ 2023D74
 	.space 0x8
 
-gUnknown_2023D7C: @ 2023D7C
+gChosenActionByBattler: @ 2023D7C
 	.space 0x4
 
-gUnknown_2023D80: @ 2023D80
+gSelectionBattleScripts: @ 2023D80
 	.space 0x10
 
-gUnknown_2023D90: @ 2023D90
+gLastPrintedMoves: @ 2023D90
 	.space 0x8
 
-gLastUsedMove: @ 2023D98
+gLastMoves: @ 2023D98
 	.space 0x8
 
-gUnknown_2023DA0: @ 2023DA0
+gLastLandedMoves: @ 2023DA0
 	.space 0x8
 
-gUnknown_2023DA8: @ 2023DA8
+gLastHitByType: @ 2023DA8
 	.space 0x8
 
-gUnknown_2023DB0: @ 2023DB0
+gLastResultingMoves: @ 2023DB0
 	.space 0x8
 
-gUnknown_2023DB8: @ 2023DB8
+gLockedMoves: @ 2023DB8
 	.space 0x8
 
-gUnknown_2023DC0: @ 2023DC0
+gLastHitBy: @ 2023DC0
 	.space 0x4
 
-gUnknown_2023DC4: @ 2023DC4
+gChosenMoveByBattler: @ 2023DC4
 	.space 0x8
 
 gMoveResultFlags: @ 2023DCC
 	.space 0x4
 
-gUnknown_2023DD0: @ 2023DD0
+gHitMarker: @ 2023DD0
 	.space 0x4
 
 gUnknown_2023DD4: @ 2023DD4
 	.space 0x4
 
-gUnknown_2023DD8: @ 2023DD8
+gTakenDmgByBattler: @ 2023DD8
 	.space 0x4
 
 gUnknown_2023DDC: @ 2023DDC
 	.space 0x2
 
-gSideAffecting: @ 2023DDE
+gSideStatuses: @ 2023DDE
 	.space 0x6
 
 gSideTimers: @ 2023DE4
@@ -349,16 +336,16 @@ gStatuses3: @ 2023DFC
 gDisableStructs: @ 2023E0C
 	.space 0x70
 
-gUnknown_2023E7C: @ 2023E7C
+gPauseCounterBattle: @ 2023E7C
 	.space 0x2
 
-gUnknown_2023E7E: @ 2023E7E
+gPaydayMoney: @ 2023E7E
 	.space 0x2
 
 gUnknown_2023E80: @ 2023E80
 	.space 0x2
 
-gUnknown_2023E82: @ 2023E82
+gBattleCommunication: @ 2023E82
 	.space 0x1
 
 gUnknown_2023E83: @ 2023E83
@@ -367,28 +354,28 @@ gUnknown_2023E83: @ 2023E83
 gBattleOutcome: @ 2023E8A
 	.space 0x2
 
-gUnknown_2023E8C: @ 2023E8C
+gProtectStructs: @ 2023E8C
 	.space 0x40
 
-gUnknown_2023ECC: @ 2023ECC
+gSpecialStatuses: @ 2023ECC
 	.space 0x50
 
 gBattleWeather: @ 2023F1C
 	.space 0x4
 
-gUnknown_2023F20: @ 2023F20
+gWishFutureKnock: @ 2023F20
 	.space 0x2C
 
-gUnknown_2023F4C: @ 2023F4C
+gIntroSlideFlags: @ 2023F4C
 	.space 0x2
 
-gUnknown_2023F4E: @ 2023F4E
+gSentPokesToOpponent: @ 2023F4E
 	.space 0x2
 
 gDynamicBasePower: @ 2023F50
 	.space 0x2
 
-gUnknown_2023F52: @ 2023F52
+gExpShareExp: @ 2023F52
 	.space 0x2
 
 gEnigmaBerries: @ 2023F54
@@ -403,34 +390,34 @@ gUnknown_2023FC8: @ 2023FC8
 gBattleStruct: @ 2023FE8
 	.space 0x4
 
-gUnknown_2023FEC: @ 2023FEC
+gLinkBattleSendBuffer: @ 2023FEC
 	.space 0x4
 
-gUnknown_2023FF0: @ 2023FF0
+gLinkBattleRecvBuffer: @ 2023FF0
 	.space 0x4
 
 gBattleResources: @ 2023FF4
 	.space 0x4
 
-gUnknown_2023FF8: @ 2023FF8
+gActionSelectionCursor: @ 2023FF8
 	.space 0x4
 
-gUnknown_2023FFC: @ 2023FFC
+gMoveSelectionCursor: @ 2023FFC
 	.space 0x4
 
-gUnknown_2024000: @ 2024000
+gBattlerStatusSummaryTaskId: @ 2024000
 	.space 0x4
 
 gBattlerInMenuId: @ 2024004
 	.space 0x1
 
-gUnknown_2024005: @ 2024005
+gDoingBattleAnim: @ 2024005
 	.space 0x3
 
-gUnknown_2024008: @ 2024008
+gTransformedPersonalities: @ 2024008
 	.space 0x10
 
-gUnknown_2024018: @ 2024018
+gBattleSpritesDataPtr: @ 2024018
 	.space 0x4
 
 gMonSpritesGfxPtr: @ 202401C
@@ -702,13 +689,13 @@ gUnknown_2037ED4: @ 2037ED4
 gUnknown_2037ED8: @ 2037ED8
 	.space 0x4
 
-gUnknown_2037EDC: @ 2037EDC
+gAnimScriptCallback: @ 2037EDC
 	.space 0x4
 
 gUnknown_2037EE0: @ 2037EE0
 	.space 0x1
 
-gUnknown_2037EE1: @ 2037EE1
+gAnimScriptActive: @ 2037EE1
 	.space 0x1
 
 gUnknown_2037EE2: @ 2037EE2
@@ -720,19 +707,19 @@ gUnknown_2037EE3: @ 2037EE3
 gAnimDisableStructPtr: @ 2037EE4
 	.space 0x4
 
-gUnknown_2037EE8: @ 2037EE8
+gAnimMoveDmg: @ 2037EE8
 	.space 0x4
 
-gUnknown_2037EEC: @ 2037EEC
+gAnimMovePower: @ 2037EEC
 	.space 0x2
 
 gUnknown_2037EEE: @ 2037EEE
 	.space 0x10
 
-gUnknown_2037EFE: @ 2037EFE
+gAnimFriendship: @ 2037EFE
 	.space 0x2
 
-gUnknown_2037F00: @ 2037F00
+gWeatherMoveAnim: @ 2037F00
 	.space 0x2
 
 gBattleAnimArgs: @ 2037F02

@@ -16568,7 +16568,7 @@ _08093C4E:
 	adds r1, r4
 	ldrh r0, [r1]
 	mov r1, r9
-	bl GetFrontSpritePalFromSpeciesAndPersonality
+	bl GetMonSpritePalFromSpeciesAndPersonality
 	ldr r1, [r5]
 	ldr r3, _08093CE8 @ =0x00000cd8
 	adds r2, r1, r3

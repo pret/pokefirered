@@ -4996,7 +4996,7 @@ _080FAC58:
 	.align 2, 0
 _080FAC74: .4byte 0x0000099d
 _080FAC78:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FACD6
@@ -5103,7 +5103,7 @@ _080FAD3A:
 	.align 2, 0
 _080FAD50: .4byte gBlockSendBuffer
 _080FAD54:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FAD8A
@@ -6875,7 +6875,7 @@ sub_80FBA78: @ 80FBA78
 	adds r0, r2, 0
 	strh r0, [r1]
 	bl sub_800B1F4
-	bl sub_8009804
+	bl OpenLink
 	ldr r0, _080FBB00 @ =gMain
 	ldrh r0, [r0, 0x24]
 	bl SeedRng
@@ -9368,8 +9368,8 @@ _080FCD6C: .4byte gUnknown_3005440
 _080FCD70: .4byte gUnknown_3005E00
 	thumb_func_end sub_80FCD50
 
-	thumb_func_start sub_80FCD74
-sub_80FCD74: @ 80FCD74
+	thumb_func_start CreateWirelessStatusIndicatorSprite
+CreateWirelessStatusIndicatorSprite: @ 80FCD74
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -9464,7 +9464,7 @@ _080FCE34: .4byte gUnknown_203ACE4
 _080FCE38: .4byte gSprites
 _080FCE3C: .4byte 0x00001234
 _080FCE40: .4byte gUnknown_843F274
-	thumb_func_end sub_80FCD74
+	thumb_func_end CreateWirelessStatusIndicatorSprite
 
 	thumb_func_start DestroyWirelessStatusIndicatorSprite
 DestroyWirelessStatusIndicatorSprite: @ 80FCE44
@@ -9514,8 +9514,8 @@ _080FCEA0: .4byte gDummyOamData
 _080FCEA4: .4byte 0x070003e8
 	thumb_func_end DestroyWirelessStatusIndicatorSprite
 
-	thumb_func_start sub_80FCEA8
-sub_80FCEA8: @ 80FCEA8
+	thumb_func_start LoadWirelessStatusIndicatorSpriteGfx
+LoadWirelessStatusIndicatorSpriteGfx: @ 80FCEA8
 	push {r4,lr}
 	ldr r4, _080FCED4 @ =gUnknown_843F274
 	ldrh r0, [r4, 0x6]
@@ -9540,7 +9540,7 @@ _080FCED4: .4byte gUnknown_843F274
 _080FCED8: .4byte 0xffff0000
 _080FCEDC: .4byte gUnknown_843F27C
 _080FCEE0: .4byte gUnknown_203ACE4
-	thumb_func_end sub_80FCEA8
+	thumb_func_end LoadWirelessStatusIndicatorSpriteGfx
 
 	thumb_func_start sub_80FCEE4
 sub_80FCEE4: @ 80FCEE4

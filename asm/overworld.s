@@ -1228,7 +1228,7 @@ sub_805550C: @ 805550C
 	lsrs r6, r0, 16
 	lsls r1, 16
 	lsrs r7, r1, 16
-	bl sav1_map_get_light_level
+	bl GetCurrentMapType
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -1911,7 +1911,7 @@ _08055A68: .4byte gUnknown_2031DD4
 	thumb_func_start sub_8055A6C
 sub_8055A6C: @ 8055A6C
 	push {r4-r7,lr}
-	bl sav1_map_get_light_level
+	bl GetCurrentMapType
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
@@ -2884,8 +2884,8 @@ get_map_light_level_from_warp: @ 8056170
 	bx r1
 	thumb_func_end get_map_light_level_from_warp
 
-	thumb_func_start sav1_map_get_light_level
-sav1_map_get_light_level: @ 8056188
+	thumb_func_start GetCurrentMapType
+GetCurrentMapType: @ 8056188
 	push {lr}
 	ldr r0, _0805619C @ =gSaveBlock1Ptr
 	ldr r0, [r0]
@@ -2897,7 +2897,7 @@ sav1_map_get_light_level: @ 8056188
 	bx r1
 	.align 2, 0
 _0805619C: .4byte gSaveBlock1Ptr
-	thumb_func_end sav1_map_get_light_level
+	thumb_func_end GetCurrentMapType
 
 	thumb_func_start get_map_light_from_warp0
 get_map_light_from_warp0: @ 80561A0
@@ -4058,10 +4058,10 @@ _08056B3C:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08056B62
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0
 	movs r1, 0
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 	b _08056B62
 	.align 2, 0
 _08056B54: .4byte gWirelessCommType
@@ -4389,10 +4389,10 @@ _08056E18:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08056E3E
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0
 	movs r1, 0
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 	b _08056E3E
 	.align 2, 0
 _08056E30: .4byte gWirelessCommType

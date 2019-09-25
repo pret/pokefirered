@@ -209,7 +209,7 @@ sub_80C9CE8: @ 80C9CE8
 	bl get_map_light_from_warp0
 	lsls r0, 24
 	lsrs r7, r0, 24
-	bl sav1_map_get_light_level
+	bl GetCurrentMapType
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r4, 0

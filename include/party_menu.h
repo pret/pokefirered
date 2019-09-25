@@ -10,7 +10,19 @@ enum {
     AILMENT_PRZ,
     AILMENT_SLP,
     AILMENT_FRZ,
-    AILMENT_BRN
+    AILMENT_BRN,
+    AILMENT_PKRS,
+    AILMENT_FNT
+};
+
+enum
+{
+    PARTY_CHOOSE_MON,
+    PARTY_MUST_CHOOSE_MON,
+    PARTY_CANT_SWITCH,
+    PARTY_USE_ITEM_ON,
+    PARTY_ABILITY_PREVENTS,
+    PARTY_GIVE_ITEM,
 };
 
 struct Struct203B0A0
@@ -29,7 +41,9 @@ struct Struct203B0A0
 };
 
 extern struct Struct203B0A0 gUnknown_203B0A0;
-
+extern u8 gUnknown_203B0C0;
+extern u8 gUnknown_203B0C1;
+extern u8 gUnknown_203B0DC[3];
 extern void (*gUnknown_3005E98)(u8 taskId, TaskFunc func);
 
 bool8 FieldCallback_PrepareFadeInFromMenu(void);
@@ -62,5 +76,10 @@ void sub_81279E0(void);
 void ItemUseCB_Medicine(u8 taskId, TaskFunc followUpFunc);
 u8 GetItemEffectType(u16 itemId);
 u8 pokemon_order_func(u8);
+void sub_8127CAC(void);
+void sub_8127DA8(u8 battlerId, u8 multiplayerFlag);
+void OpenPartyMenuInBattle(u8 arg);
+void sub_8127EC4(u8 battlerId, u8 unk, u8 arrayIndex);
+bool8 IsMultiBattle(void);
 
 #endif // GUARD_PARTY_MENU_H

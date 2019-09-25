@@ -16,6 +16,7 @@ void PlayRainStoppingSoundEffect(void);
 bool8 sub_807AA70(void);
 void SetWeatherScreenFadeOut(void);
 void sub_807B070(void);
+u8 GetCurrentWeather(void);
 void FieldWeather_StartFadingOutCreditsMap(u8, u8, u32);
 
 #endif // GUARD_WEATHER_H

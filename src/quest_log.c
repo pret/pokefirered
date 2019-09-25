@@ -1,7 +1,7 @@
 #include "global.h"
 #include "constants/species.h"
 #include "constants/items.h"
-#include "data2.h"
+#include "data.h"
 #include "malloc.h"
 #include "main.h"
 #include "task.h"

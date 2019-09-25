@@ -26,8 +26,10 @@ gUnknown_83FECF4:: @ 83FECF4
 gUnknown_83FECFA:: @ 83FECFA
 	.incbin "baserom.gba", 0x3FECFA, 0x6
 
-gUnknown_83FED00:: @ 83FED00
-	.incbin "baserom.gba", 0x3FED00, 0x380
+	.section .rodata.83FEDE4
+
+gUnknown_83FEDE4:: @ 83FEDE4
+	.incbin "baserom.gba", 0x3FEDE4, 0x29C
 
 gUnknown_83FF080:: @ 83FF080
 	.incbin "baserom.gba", 0x3FF080, 0xB0

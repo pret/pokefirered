@@ -367,14 +367,14 @@ sub_80ACBB0: @ 80ACBB0
 	strh r1, [r0, 0x32]
 	movs r1, 0x50
 	strh r1, [r0, 0x36]
-	ldr r1, _080ACBD4 @ =sub_8075590
+	ldr r1, _080ACBD4 @ =StartAnimLinearTranslation
 	str r1, [r0, 0x1C]
 	ldr r1, _080ACBD8 @ =DestroyAnimSprite
 	bl StoreSpriteCallbackInData6
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080ACBD4: .4byte sub_8075590
+_080ACBD4: .4byte StartAnimLinearTranslation
 _080ACBD8: .4byte DestroyAnimSprite
 	thumb_func_end sub_80ACBB0
 
@@ -484,7 +484,7 @@ sub_80ACC88: @ 80ACC88
 	ldr r4, _080ACCD8 @ =gBattleAnimTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x32]
@@ -492,7 +492,7 @@ sub_80ACC88: @ 80ACC88
 	strh r0, [r5, 0x34]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x36]
@@ -522,13 +522,13 @@ sub_80ACCE0: @ 80ACCE0
 	ldr r5, _080ACD20 @ =gBattleAnimTarget
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x20]
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x22]
@@ -782,7 +782,7 @@ sub_80ACEA4: @ 80ACEA4
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl sub_80758E0
+	bl PrepareBattlerSpriteForRotScale
 	ldr r0, _080ACF10 @ =sub_80ACF14
 	str r0, [r4]
 	pop {r4,r5}
@@ -1147,7 +1147,7 @@ _080AD1A8:
 	ldrh r0, [r4, 0x26]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8075980
+	bl ResetSpriteRotScale
 	strh r5, [r4, 0xC]
 _080AD1D4:
 	ldrh r0, [r4, 0x8]
@@ -1758,7 +1758,7 @@ _080AD612:
 	ldr r4, _080AD688 @ =gBattleAnimTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x32]
@@ -1766,7 +1766,7 @@ _080AD612:
 	strh r0, [r5, 0x34]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x36]
@@ -1877,7 +1877,7 @@ _080AD70C:
 	movs r1, 0xFF
 	ands r0, r1
 	strh r0, [r4, 0x30]
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AD7A8
@@ -1999,7 +1999,7 @@ _080AD826:
 	ldrb r1, [r0]
 	movs r0, 0x2
 	eors r0, r1
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, 0x1

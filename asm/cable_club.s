@@ -439,7 +439,7 @@ sub_8080A4C: @ 8080A4C
 	adds r4, r0, r1
 	movs r0, 0
 	strh r0, [r4, 0xE]
-	bl sub_800AA48
+	bl IsLinkMaster
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -644,7 +644,7 @@ _08080C3C:
 	beq _08080C5C
 	movs r0, 0x5
 	bl PlaySE
-	bl sub_800A5BC
+	bl CheckShouldAdvanceLinkState
 	ldr r0, _08080C64 @ =gTasks
 	lsls r1, r6, 2
 	adds r1, r6
@@ -1367,7 +1367,7 @@ sub_80811FC: @ 80811FC
 	ldrsh r2, [r4, r3]
 	cmp r2, 0
 	bne _08081230
-	bl sub_8009804
+	bl OpenLink
 	bl sub_800A270
 	ldr r0, _0808122C @ =sub_8081A90
 	movs r1, 0x50
@@ -1405,7 +1405,7 @@ sub_808124C: @ 808124C
 	lsrs r0, 24
 	cmp r0, 0x1
 	bls _08081292
-	bl sub_800AA48
+	bl IsLinkMaster
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1450,7 +1450,7 @@ sub_80812A0: @ 80812A0
 	lsls r0, 24
 	cmp r4, r0
 	bne _080812CA
-	bl sub_800A5BC
+	bl CheckShouldAdvanceLinkState
 	ldr r0, _080812D0 @ =gTasks
 	lsls r1, r5, 2
 	adds r1, r5
@@ -1790,7 +1790,7 @@ _08081560:
 	strh r0, [r6]
 	b _0808160A
 _0808156A:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808160A
@@ -1901,7 +1901,7 @@ _08081640:
 	strb r0, [r4]
 	b _0808165C
 _0808164C:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808165C
@@ -2283,7 +2283,7 @@ _08081950:
 	.align 2, 0
 _08081958: .4byte gUnknown_2031DA4
 _0808195C:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08081970

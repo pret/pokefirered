@@ -208,10 +208,10 @@ _0808919A:
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080891B6
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0xE6
 	movs r1, 0x96
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 _080891B6:
 	movs r0, 0x1
 	negs r0, r0

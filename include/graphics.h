@@ -974,6 +974,22 @@ extern const u8 gGraphics_TitleScreen_CopyrightPressStartMap[];
 extern const u16 gGraphics_TitleScreen_FirePals[];
 extern const u8 gGraphics_TitleScreen_BlankObjTiles[];
 
+extern const u32 gHealthboxSinglesPlayerGfx[];
+extern const u32 gHealthboxSinglesOpponentGfx[];
+extern const u32 gHealthboxDoublesPlayerGfx[];
+extern const u32 gHealthboxDoublesOpponentGfx[];
+extern const u32 gHealthboxSafariGfx[];
+extern const u32 gBlankGfxCompressed[];
+extern const u16 gBattleInterface_BallStatusBarPal[];
+extern const u16 gBattleInterface_BallDisplayPal[];
+extern const u32 gFile_graphics_interface_hp_numbers[];
+
+extern const u32 gGhostFrontPic[];
+extern const u32 gGhostPalette[];
+extern const u32 gSubstituteDollGfx[];
+extern const u32 gSubstituteDollTilemap[];
+extern const u32 gSubstituteDollPal[];
+
 // credits
 extern const u32 gCreditsPokeballBgGfxTiles[];
 extern const u32 gCreditsPokeballBgGfxMap[];

@@ -179,7 +179,7 @@ extern const u8 gUnknown_841623D[];
 extern const u8 gUnknown_84162BD[];
 extern const u8 gUnknown_841D148[];
 
-// pokemon.c
+// pokemon
 extern const u8 BattleText_Rose[];
 extern const u8 BattleText_UnknownString3[];
 extern const u8 BattleText_GetPumped[];
@@ -207,6 +207,24 @@ extern const u8 gString_BattleRecords_4Dashes[];
 extern const u8 gString_OutOfCoins[];
 extern const u8 gString_QuitPlaying[];
 extern const u8 gString_SlotMachineControls[];
+
+// battle_controller_safari
+extern const u8 gUnknown_83FDA4C[];
+extern const u8 gUnknown_83FE747[];
+extern const u8 gUnknown_83FE6E6[];
+
+// battle_controller_player
+extern const u8 gText_BattleSwitchWhich[];
+extern const u8 gUnknown_83FE770[];
+extern const u8 gText_MoveInterfacePP[];
+extern const u8 gUnknown_83FE770[];
+extern const u8 gText_MoveInterfaceType[];
+extern const u8 gText_LinkStandby[];
+extern const u8 gUnknown_83FE725[];
+extern const u8 gText_WhatWillPkmnDo[];
+
+// battle_script_commands
+extern const u8 gText_BattleYesNoChoice[];
 
 // credits
 extern const u8 gString_Dummy[];

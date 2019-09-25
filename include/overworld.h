@@ -108,6 +108,7 @@ void SetWarpDestinationToFixedHoleWarp(s16 x, s16 y);
 void ResetInitialPlayerAvatarState(void);
 void sub_8055D40(u16 mapDataId);
 void CleanupOverworldWindowsAndTilemaps(void);
+u32 sub_8054C04(void);
 
 extern u8 gDisableMapMusicChangeOnMapLoad;
 extern u8 gUnknown_2036E28;
@@ -130,6 +131,7 @@ bool8 is_light_level_8_or_9(u8 mapType);
 bool32 sub_8055C9C(void);
 void Overworld_ResetStateAfterDigEscRope(void);
 bool32 sub_8058244(void);
+u8 GetCurrentMapType(void);
 
 void Overworld_CreditsMainCB(void);
 bool32 Overworld_DoScrollSceneForCredits(u8 *, const struct CreditsOverworldCmd *, u8);

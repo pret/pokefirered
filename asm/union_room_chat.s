@@ -177,10 +177,10 @@ _08128554:
 	bl CreateTask
 	ldr r1, [r4]
 	strb r0, [r1, 0xF]
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0xE8
 	movs r1, 0x96
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 _08128598:
 	add sp, 0x4
 	pop {r4-r6}
@@ -295,7 +295,7 @@ _08128662:
 	adds r0, 0x1
 	strh r0, [r1, 0x6]
 _08128674:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _081286BC
@@ -321,7 +321,7 @@ _08128674:
 	.align 2, 0
 _081286A8: .4byte gUnknown_203B0E0
 _081286AC:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _081286BC
@@ -765,7 +765,7 @@ _08128A36:
 	.align 2, 0
 _08128A40: .4byte gUnknown_203B0E0
 _08128A44:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08128A94
@@ -888,7 +888,7 @@ _08128B28:
 	.align 2, 0
 _08128B48: .4byte gUnknown_203B0E0
 _08128B4C:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08128BFC
@@ -925,7 +925,7 @@ _08128B80:
 	.align 2, 0
 _08128B9C: .4byte gUnknown_203B0E0
 _08128BA0:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08128BFC
@@ -1016,7 +1016,7 @@ _08128C44:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08128CA2
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08128CA2
@@ -1134,7 +1134,7 @@ _08128D30:
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08128D9C
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08128D9C
@@ -1231,7 +1231,7 @@ _08128DEC:
 	adds r0, 0x1
 	strh r0, [r1, 0x6]
 _08128E00:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1277,7 +1277,7 @@ _08128E52:
 	.align 2, 0
 _08128E5C: .4byte gUnknown_203B0E0
 _08128E60:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08128E70

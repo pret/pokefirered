@@ -21,7 +21,7 @@
 #include "pokemon_storage_system.h"
 #include "string_util.h"
 #include "party_menu.h"
-#include "data2.h"
+#include "data.h"
 #include "scanline_effect.h"
 #include "sound.h"
 #include "strings.h"

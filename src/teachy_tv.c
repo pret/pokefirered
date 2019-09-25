@@ -23,7 +23,7 @@
 #include "event_data.h"
 #include "load_save.h"
 #include "battle_transition.h"
-#include "battle_2.h"
+#include "battle_main.h"
 #include "battle.h"
 #include "global.fieldmap.h"
 #include "teachy_tv.h"

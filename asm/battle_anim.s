@@ -14,7 +14,7 @@ ClearBattleAnimationVars: @ 80724C0
 	ldr r0, _08072554 @ =gUnknown_2037EE0
 	movs r1, 0
 	strb r1, [r0]
-	ldr r0, _08072558 @ =gUnknown_2037EE1
+	ldr r0, _08072558 @ =gAnimScriptActive
 	strb r1, [r0]
 	ldr r0, _0807255C @ =gUnknown_2037EE2
 	strb r1, [r0]
@@ -23,12 +23,12 @@ ClearBattleAnimationVars: @ 80724C0
 	ldr r0, _08072564 @ =gAnimDisableStructPtr
 	movs r1, 0
 	str r1, [r0]
-	ldr r0, _08072568 @ =gUnknown_2037EE8
+	ldr r0, _08072568 @ =gAnimMoveDmg
 	str r1, [r0]
-	ldr r0, _0807256C @ =gUnknown_2037EEC
+	ldr r0, _0807256C @ =gAnimMovePower
 	movs r2, 0
 	strh r1, [r0]
-	ldr r0, _08072570 @ =gUnknown_2037EFE
+	ldr r0, _08072570 @ =gAnimFriendship
 	strb r2, [r0]
 	ldr r4, _08072574 @ =gUnknown_2037F14
 	ldr r5, _08072578 @ =gAnimMoveTurn
@@ -85,13 +85,13 @@ _08072520:
 	bx r0
 	.align 2, 0
 _08072554: .4byte gUnknown_2037EE0
-_08072558: .4byte gUnknown_2037EE1
+_08072558: .4byte gAnimScriptActive
 _0807255C: .4byte gUnknown_2037EE2
 _08072560: .4byte gUnknown_2037EE3
 _08072564: .4byte gAnimDisableStructPtr
-_08072568: .4byte gUnknown_2037EE8
-_0807256C: .4byte gUnknown_2037EEC
-_08072570: .4byte gUnknown_2037EFE
+_08072568: .4byte gAnimMoveDmg
+_0807256C: .4byte gAnimMovePower
+_08072570: .4byte gAnimFriendship
 _08072574: .4byte gUnknown_2037F14
 _08072578: .4byte gAnimMoveTurn
 _0807257C: .4byte gUnknown_2037F17
@@ -111,7 +111,7 @@ DoMoveAnim: @ 807259C
 	lsls r1, 16
 	lsrs r1, 16
 	ldr r2, _080725C0 @ =gBattleAnimAttacker
-	ldr r0, _080725C4 @ =sBattler_AI
+	ldr r0, _080725C4 @ =gBattlerAttacker
 	ldrb r0, [r0]
 	strb r0, [r2]
 	ldr r2, _080725C8 @ =gBattleAnimTarget
@@ -120,19 +120,19 @@ DoMoveAnim: @ 807259C
 	strb r0, [r2]
 	ldr r0, _080725D0 @ =gUnknown_81C68F4
 	movs r2, 0x1
-	bl sub_80725D4
+	bl LaunchBattleAnimation
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080725C0: .4byte gBattleAnimAttacker
-_080725C4: .4byte sBattler_AI
+_080725C4: .4byte gBattlerAttacker
 _080725C8: .4byte gBattleAnimTarget
 _080725CC: .4byte gBattlerTarget
 _080725D0: .4byte gUnknown_81C68F4
 	thumb_func_end DoMoveAnim
 
-	thumb_func_start sub_80725D4
-sub_80725D4: @ 80725D4
+	thumb_func_start LaunchBattleAnimation
+LaunchBattleAnimation: @ 80725D4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -200,10 +200,10 @@ _08072658:
 	ldr r5, _080726C8 @ =gUnknown_2037ED4
 	mov r0, r8
 	lsls r3, r0, 2
-	ldr r6, _080726CC @ =gUnknown_2037EE1
+	ldr r6, _080726CC @ =gAnimScriptActive
 	ldr r1, _080726D0 @ =gUnknown_2037EE0
 	mov r12, r1
-	ldr r0, _080726D4 @ =gUnknown_2037EDC
+	ldr r0, _080726D4 @ =gAnimScriptCallback
 	mov r10, r0
 	ldr r7, _080726D8 @ =RunAnimScriptCommand
 	ldr r1, _080726DC @ =gBattleAnimArgs
@@ -253,9 +253,9 @@ _080726A6:
 _080726C0: .4byte gUnknown_2037F18
 _080726C4: .4byte gUnknown_2037F14
 _080726C8: .4byte gUnknown_2037ED4
-_080726CC: .4byte gUnknown_2037EE1
+_080726CC: .4byte gAnimScriptActive
 _080726D0: .4byte gUnknown_2037EE0
-_080726D4: .4byte gUnknown_2037EDC
+_080726D4: .4byte gAnimScriptCallback
 _080726D8: .4byte RunAnimScriptCommand
 _080726DC: .4byte gBattleAnimArgs
 _080726E0: .4byte 0x0000ffff
@@ -300,7 +300,7 @@ _08072730: .4byte gUnknown_2022984
 _08072734: .4byte gUnknown_2022986
 _08072738: .4byte gUnknown_2022988
 _0807273C: .4byte gUnknown_202298A
-	thumb_func_end sub_80725D4
+	thumb_func_end LaunchBattleAnimation
 
 	thumb_func_start DestroyAnimSprite
 DestroyAnimSprite: @ 8072740
@@ -419,14 +419,14 @@ WaitAnimFrameCount: @ 80727FC
 	ldrsb r0, [r2, r0]
 	cmp r0, 0
 	bgt _08072820
-	ldr r0, _08072818 @ =gUnknown_2037EDC
+	ldr r0, _08072818 @ =gAnimScriptCallback
 	ldr r1, _0807281C @ =RunAnimScriptCommand
 	str r1, [r0]
 	movs r0, 0
 	b _08072822
 	.align 2, 0
 _08072814: .4byte gUnknown_2037EE0
-_08072818: .4byte gUnknown_2037EDC
+_08072818: .4byte gAnimScriptCallback
 _0807281C: .4byte RunAnimScriptCommand
 _08072820:
 	subs r0, r1, 0x1
@@ -454,7 +454,7 @@ _0807282C:
 	asrs r0, 24
 	cmp r0, 0
 	bne _08072850
-	ldr r0, _08072864 @ =gUnknown_2037EE1
+	ldr r0, _08072864 @ =gAnimScriptActive
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0807282C
@@ -466,7 +466,7 @@ _08072850:
 _08072858: .4byte gUnknown_83ADF5C
 _0807285C: .4byte gUnknown_2037ED4
 _08072860: .4byte gUnknown_2037EE0
-_08072864: .4byte gUnknown_2037EE1
+_08072864: .4byte gAnimScriptActive
 	thumb_func_end RunAnimScriptCommand
 
 	thumb_func_start ScriptCmd_loadspritegfx
@@ -500,7 +500,7 @@ ScriptCmd_loadspritegfx: @ 8072868
 	ldr r1, _080728C4 @ =gUnknown_2037EE0
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r1, _080728C8 @ =gUnknown_2037EDC
+	ldr r1, _080728C8 @ =gAnimScriptCallback
 	ldr r0, _080728CC @ =WaitAnimFrameCount
 	str r0, [r1]
 	pop {r4-r6}
@@ -512,7 +512,7 @@ _080728B8: .4byte gUnknown_8399388
 _080728BC: .4byte gUnknown_8399C90
 _080728C0: .4byte 0xffffd8f0
 _080728C4: .4byte gUnknown_2037EE0
-_080728C8: .4byte gUnknown_2037EDC
+_080728C8: .4byte gAnimScriptCallback
 _080728CC: .4byte WaitAnimFrameCount
 	thumb_func_end ScriptCmd_loadspritegfx
 
@@ -634,7 +634,7 @@ _080729A8:
 	ldr r0, _08072A04 @ =gBattleAnimAttacker
 _080729AE:
 	ldrb r0, [r0]
-	bl sub_807685C
+	bl GetBattlerSpriteSubpriority
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r4, 24
@@ -651,13 +651,13 @@ _080729CC:
 	ldr r5, _08072A08 @ =gBattleAnimTarget
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -762,7 +762,7 @@ ScriptCmd_delay: @ 8072A8C
 _08072AAA:
 	adds r0, r2, 0x1
 	str r0, [r1]
-	ldr r1, _08072AC4 @ =gUnknown_2037EDC
+	ldr r1, _08072AC4 @ =gAnimScriptCallback
 	ldr r0, _08072AC8 @ =WaitAnimFrameCount
 	str r0, [r1]
 	pop {r4}
@@ -771,7 +771,7 @@ _08072AAA:
 	.align 2, 0
 _08072ABC: .4byte gUnknown_2037ED4
 _08072AC0: .4byte gUnknown_2037EE0
-_08072AC4: .4byte gUnknown_2037EDC
+_08072AC4: .4byte gAnimScriptCallback
 _08072AC8: .4byte WaitAnimFrameCount
 	thumb_func_end ScriptCmd_delay
 
@@ -913,7 +913,7 @@ _08072BB2:
 	bl sub_80767F0
 	movs r0, 0x1
 	bl UpdateOamPriorityInAllHealthboxes
-	ldr r0, _08072C04 @ =gUnknown_2037EE1
+	ldr r0, _08072C04 @ =gAnimScriptActive
 	mov r1, r8
 	strb r1, [r0]
 _08072BDC:
@@ -930,7 +930,7 @@ _08072BF4: .4byte 0x0000ffff
 _08072BF8: .4byte gUnknown_83ACC08
 _08072BFC: .4byte gUnknown_2037EEE
 _08072C00: .4byte gMPlayInfo_BGM
-_08072C04: .4byte gUnknown_2037EE1
+_08072C04: .4byte gAnimScriptActive
 	thumb_func_end sub_8072B08
 
 	thumb_func_start sub_8072C08
@@ -989,7 +989,7 @@ _08072C60:
 _08072C62:
 	ldrb r5, [r0]
 	adds r0, r5, 0
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _08072D12
@@ -1073,7 +1073,7 @@ _08072D12:
 	cmp r6, 0x1
 	bls _08072DCE
 	adds r0, r5, 0
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _08072DCE
@@ -1169,17 +1169,17 @@ _08072DE8: .4byte gUnknown_2037F14
 _08072DEC: .4byte gUnknown_2037ED4
 	thumb_func_end sub_8072C30
 
-	thumb_func_start sub_8072DF0
-sub_8072DF0: @ 8072DF0
+	thumb_func_start IsBattlerSpriteVisible
+IsBattlerSpriteVisible: @ 8072DF0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_8075224
+	bl IsBattlerSpritePresent
 	lsls r0, 24
 	cmp r0, 0
 	beq _08072E40
-	ldr r0, _08072E34 @ =gUnknown_2024018
+	ldr r0, _08072E34 @ =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r1, [r0]
 	lsls r0, r4, 2
@@ -1206,7 +1206,7 @@ _08072E30:
 	movs r0, 0x1
 	b _08072E42
 	.align 2, 0
-_08072E34: .4byte gUnknown_2024018
+_08072E34: .4byte gBattleSpritesDataPtr
 _08072E38: .4byte gSprites
 _08072E3C: .4byte gBattlerSpriteIds
 _08072E40:
@@ -1215,7 +1215,7 @@ _08072E42:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8072DF0
+	thumb_func_end IsBattlerSpriteVisible
 
 	thumb_func_start sub_8072E48
 sub_8072E48: @ 8072E48
@@ -1897,7 +1897,7 @@ _080733CC:
 _080733CE:
 	ldrb r4, [r0]
 	adds r0, r4, 0
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _08073416
@@ -1935,7 +1935,7 @@ _08073416:
 	cmp r5, 0x1
 	bls _08073464
 	adds r0, r4, 0
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _08073464
@@ -2016,7 +2016,7 @@ _080734B4:
 _080734B6:
 	ldrb r6, [r0]
 	adds r0, r6, 0
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _080734E0
@@ -2041,7 +2041,7 @@ _080734E0:
 	adds r4, r6, 0
 	eors r4, r0
 	adds r0, r4, 0
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _08073520
@@ -2127,7 +2127,7 @@ sub_8073558: @ 8073558
 	movs r7, 0
 _08073598:
 	adds r0, r4, 0
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _080735AA
@@ -2141,7 +2141,7 @@ _080735AA:
 	movs r0, 0x2
 	eors r6, r0
 	adds r0, r6, 0
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _080735CC
@@ -2397,11 +2397,11 @@ ScriptCmd_jump: @ 8073764
 _08073784: .4byte gUnknown_2037ED4
 	thumb_func_end ScriptCmd_jump
 
-	thumb_func_start sub_8073788
-sub_8073788: @ 8073788
+	thumb_func_start IsContest
+IsContest: @ 8073788
 	movs r0, 0
 	bx lr
-	thumb_func_end sub_8073788
+	thumb_func_end IsContest
 
 	thumb_func_start sub_807378C
 sub_807378C: @ 807378C
@@ -2772,7 +2772,7 @@ sub_8073A44: @ 8073A44
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _08073A78 @ =gUnknown_2024018
+	ldr r0, _08073A78 @ =gBattleSpritesDataPtr
 	ldr r1, [r0]
 	ldr r0, _08073A7C @ =gBattleAnimAttacker
 	ldrb r2, [r0]
@@ -2795,7 +2795,7 @@ sub_8073A44: @ 8073A44
 	movs r4, 0x3F
 	b _08073AE6
 	.align 2, 0
-_08073A78: .4byte gUnknown_2024018
+_08073A78: .4byte gBattleSpritesDataPtr
 _08073A7C: .4byte gBattleAnimAttacker
 _08073A80:
 	adds r0, r2, 0
@@ -2874,7 +2874,7 @@ sub_8073B08: @ 8073B08
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _08073B3C @ =gUnknown_2024018
+	ldr r0, _08073B3C @ =gBattleSpritesDataPtr
 	ldr r1, [r0]
 	ldr r0, _08073B40 @ =gBattleAnimAttacker
 	ldrb r2, [r0]
@@ -2897,7 +2897,7 @@ sub_8073B08: @ 8073B08
 	movs r4, 0x3F
 	b _08073B56
 	.align 2, 0
-_08073B3C: .4byte gUnknown_2024018
+_08073B3C: .4byte gBattleSpritesDataPtr
 _08073B40: .4byte gBattleAnimAttacker
 _08073B44:
 	adds r0, r2, 0
@@ -3942,7 +3942,7 @@ sub_8074320: @ 8074320
 	ldrb r7, [r0, 0x1]
 	adds r0, 0x2
 	str r0, [r1]
-	bl sub_8075290
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080743C2
@@ -4024,7 +4024,7 @@ sub_80743C8: @ 80743C8
 	ldrb r7, [r0, 0x1]
 	adds r0, 0x2
 	str r0, [r1]
-	bl sub_8075290
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807444C

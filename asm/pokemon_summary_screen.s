@@ -270,8 +270,8 @@ _08134730: .4byte 0x00003204
 _08134734: .4byte sub_8135C34
 	thumb_func_end sub_81344F8
 
-	thumb_func_start sub_8134738
-sub_8134738: @ 8134738
+	thumb_func_start ShowSelectMovePokemonSummaryScreen
+ShowSelectMovePokemonSummaryScreen: @ 8134738
 	push {r4,r5,lr}
 	sub sp, 0x4
 	ldr r5, [sp, 0x10]
@@ -296,7 +296,7 @@ sub_8134738: @ 8134738
 	.align 2, 0
 _08134764: .4byte gUnknown_203B140
 _08134768: .4byte 0x00003260
-	thumb_func_end sub_8134738
+	thumb_func_end ShowSelectMovePokemonSummaryScreen
 
 	thumb_func_start sub_813476C
 sub_813476C: @ 813476C
@@ -8434,7 +8434,7 @@ sub_8138B4C: @ 8138B4C
 	bl IsUpdateLinkStateCBActive
 	cmp r0, 0
 	bne _08138B84
-	bl sub_811FA20
+	bl IsMultiBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -13244,7 +13244,7 @@ _0813B198:
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0813B1C4
-	bl sub_811FA20
+	bl IsMultiBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

@@ -3,7 +3,7 @@
 
 #include "global.h"
 
-void nullsub_35(void);
+void nullsub_44(void);
 void ReshowBattleScreenAfterMenu(void);
 
 #endif // GUARD_RESHOW_BATTLE_SCREEN_H

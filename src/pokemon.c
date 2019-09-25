@@ -5,21 +5,20 @@
 #include "random.h"
 #include "main.h"
 #include "text.h"
-#include "data2.h"
+#include "data.h"
 #include "string_util.h"
 #include "battle.h"
-#include "battle_2.h"
+#include "battle_main.h"
 #include "item.h"
 #include "event_data.h"
 #include "util.h"
 #include "pokemon_storage_system.h"
-#include "data2.h"
+#include "data.h"
 #include "battle_gfx_sfx_util.h"
 #include "battle_controllers.h"
 #include "evolution_scene.h"
 #include "battle_message.h"
 #include "battle_util.h"
-#include "battle_ai_script_commands.h"
 #include "link.h"
 #include "m4a.h"
 #include "sound.h"
@@ -1792,7 +1791,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     if (gBaseStats[species].abilities[1])
     {
         value = personality & 1;
-        SetBoxMonData(boxMon, MON_DATA_ALT_ABILITY, &value);
+        SetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, &value);
     }
 
     GiveBoxMonInitialMoveset(boxMon);
@@ -1941,8 +1940,8 @@ void CreateBattleTowerMon(struct Pokemon *mon, struct BattleTowerPokemon *src)
     SetMonData(mon, MON_DATA_SPEED_EV, &src->speedEV);
     SetMonData(mon, MON_DATA_SPATK_EV, &src->spAttackEV);
     SetMonData(mon, MON_DATA_SPDEF_EV, &src->spDefenseEV);
-    value = src->altAbility;
-    SetMonData(mon, MON_DATA_ALT_ABILITY, &value);
+    value = src->abilityNum;
+    SetMonData(mon, MON_DATA_ABILITY_NUM, &value);
     value = src->hpIV;
     SetMonData(mon, MON_DATA_HP_IV, &value);
     value = src->attackIV;
@@ -1998,7 +1997,7 @@ void sub_803E23C(struct Pokemon *mon, struct BattleTowerPokemon *dest)
     dest->speedIV  = GetMonData(mon, MON_DATA_SPEED_IV, NULL);
     dest->spAttackIV  = GetMonData(mon, MON_DATA_SPATK_IV, NULL);
     dest->spDefenseIV  = GetMonData(mon, MON_DATA_SPDEF_IV, NULL);
-    dest->altAbility = GetMonData(mon, MON_DATA_ALT_ABILITY, NULL);
+    dest->abilityNum = GetMonData(mon, MON_DATA_ABILITY_NUM, NULL);
     dest->personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
     GetMonData(mon, MON_DATA_NICKNAME, dest->nickname);
 }
@@ -2553,7 +2552,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
                 damage /= 2;
 
             // sunny
-            if (gBattleWeather & WEATHER_SUNNY_ANY)
+            if (gBattleWeather & WEATHER_SUN_ANY)
             {
                 switch (type)
                 {
@@ -2568,7 +2567,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         }
 
         // flash fire triggered
-        if ((gBattleResources->flags->flags[battlerIdAtk] & UNKNOWN_FLAG_FLASH_FIRE) && type == TYPE_FIRE)
+        if ((gBattleResources->flags->flags[battlerIdAtk] & RESOURCE_FLAG_FLASH_FIRE) && type == TYPE_FIRE)
             damage = (15 * damage) / 10;
     }
 
@@ -2592,7 +2591,7 @@ u8 CountAliveMonsInBattle(u8 caseId)
     case BATTLE_ALIVE_ATK_SIDE:
         for (i = 0; i < 4; i++)
         {
-            if (GetBattlerSide(i) == GetBattlerSide(sBattler_AI) && !(gAbsentBattlerFlags & gBitTable[i]))
+            if (GetBattlerSide(i) == GetBattlerSide(gBattlerAttacker) && !(gAbsentBattlerFlags & gBitTable[i]))
                 retVal++;
         }
         break;
@@ -3100,8 +3099,8 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_IS_EGG:
         retVal = substruct3->isEgg;
         break;
-    case MON_DATA_ALT_ABILITY:
-        retVal = substruct3->altAbility;
+    case MON_DATA_ABILITY_NUM:
+        retVal = substruct3->abilityNum;
         break;
     case MON_DATA_COOL_RIBBON:
         retVal = substruct3->coolRibbon;
@@ -3503,8 +3502,8 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         else
             boxMon->isEgg = 0;
         break;
-    case MON_DATA_ALT_ABILITY:
-        SET8(substruct3->altAbility);
+    case MON_DATA_ABILITY_NUM:
+        SET8(substruct3->abilityNum);
         break;
     case MON_DATA_COOL_RIBBON:
         SET8(substruct3->coolRibbon);
@@ -3699,9 +3698,9 @@ u8 GetMonsStateToDoubles(void)
     return (aliveCount > 1) ? PLAYER_HAS_TWO_USABLE_MONS : PLAYER_HAS_ONE_USABLE_MON;
 }
 
-u8 GetAbilityBySpecies(u16 species, bool8 altAbility)
+u8 GetAbilityBySpecies(u16 species, bool8 abilityNum)
 {
-    if (altAbility)
+    if (abilityNum)
         gLastUsedAbility = gBaseStats[species].abilities[1];
     else
         gLastUsedAbility = gBaseStats[species].abilities[0];
@@ -3712,8 +3711,8 @@ u8 GetAbilityBySpecies(u16 species, bool8 altAbility)
 u8 GetMonAbility(struct Pokemon *mon)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
-    u8 altAbility = GetMonData(mon, MON_DATA_ALT_ABILITY, NULL);
-    return GetAbilityBySpecies(species, altAbility);
+    u8 abilityNum = GetMonData(mon, MON_DATA_ABILITY_NUM, NULL);
+    return GetAbilityBySpecies(species, abilityNum);
 }
 
 static void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord)
@@ -3859,11 +3858,11 @@ static void CopyPlayerPartyMonToBattleData(u8 battlerId, u8 partyIndex)
     gBattleMons[battlerId].spAttack = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPATK, NULL);
     gBattleMons[battlerId].spDefense = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPDEF, NULL);
     gBattleMons[battlerId].isEgg = GetMonData(&gPlayerParty[partyIndex], MON_DATA_IS_EGG, NULL);
-    gBattleMons[battlerId].altAbility = GetMonData(&gPlayerParty[partyIndex], MON_DATA_ALT_ABILITY, NULL);
+    gBattleMons[battlerId].abilityNum = GetMonData(&gPlayerParty[partyIndex], MON_DATA_ABILITY_NUM, NULL);
     gBattleMons[battlerId].otId = GetMonData(&gPlayerParty[partyIndex], MON_DATA_OT_ID, NULL);
     gBattleMons[battlerId].type1 = gBaseStats[gBattleMons[battlerId].species].type1;
     gBattleMons[battlerId].type2 = gBaseStats[gBattleMons[battlerId].species].type2;
-    gBattleMons[battlerId].ability = GetAbilityBySpecies(gBattleMons[battlerId].species, gBattleMons[battlerId].altAbility);
+    gBattleMons[battlerId].ability = GetAbilityBySpecies(gBattleMons[battlerId].species, gBattleMons[battlerId].abilityNum);
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, nickname);
     StringCopy10(gBattleMons[battlerId].nickname, nickname);
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_OT_NAME, gBattleMons[battlerId].otName);
@@ -4118,14 +4117,14 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                                 {
                                     gAbsentBattlerFlags &= ~gBitTable[sp34];
                                     CopyPlayerPartyMonToBattleData(sp34, pokemon_order_func(gBattlerPartyIndexes[sp34]));
-                                    if (GetBattlerSide(gActiveBattler) == 0 && gBattleResults.unk4 < 255)
-                                        gBattleResults.unk4++;
+                                    if (GetBattlerSide(gActiveBattler) == 0 && gBattleResults.numRevivesUsed < 255)
+                                        gBattleResults.numRevivesUsed++;
                                 }
                                 else
                                 {
                                     gAbsentBattlerFlags &= ~gBitTable[gActiveBattler ^ 2];
-                                    if (GetBattlerSide(gActiveBattler) == 0 && gBattleResults.unk4 < 255)
-                                        gBattleResults.unk4++;
+                                    if (GetBattlerSide(gActiveBattler) == 0 && gBattleResults.numRevivesUsed < 255)
+                                        gBattleResults.numRevivesUsed++;
                                 }
                             }
                         }
@@ -4165,13 +4164,13 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                                     gBattleMons[sp34].hp = data;
                                     if (!(r10 & 0x10) && GetBattlerSide(gActiveBattler) == 0)
                                     {
-                                        if (gBattleResults.unk3 < 255)
-                                            gBattleResults.unk3++;
+                                        if (gBattleResults.numHealingItemsUsed < 255)
+                                            gBattleResults.numHealingItemsUsed++;
                                         // I have to re-use this variable to match.
                                         r5 = gActiveBattler;
                                         gActiveBattler = sp34;
                                         BtlController_EmitGetMonData(0, 0, 0);
-                                        MarkBufferBankForExecution(gActiveBattler);
+                                        MarkBattlerForControllerExec(gActiveBattler);
                                         gActiveBattler = r5;
                                     }
                                 }
@@ -4205,7 +4204,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                                     SetMonData(pkmn, MON_DATA_PP1 + r5, &data);
                                     if (gMain.inBattle
                                      && sp34 != 4 && !(gBattleMons[sp34].status2 & 0x200000)
-                                     && !(gDisableStructs[sp34].unk18_b & gBitTable[r5]))
+                                     && !(gDisableStructs[sp34].mimickedMoves & gBitTable[r5]))
                                         gBattleMons[sp34].pp[r5] = data;
                                     retVal = FALSE;
                                 }
@@ -4230,7 +4229,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                                 SetMonData(pkmn, MON_DATA_PP1 + moveIndex, &data);
                                 if (gMain.inBattle
                                  && sp34 != 4 && !(gBattleMons[sp34].status2 & 0x200000)
-                                 && !(gDisableStructs[sp34].unk18_b & gBitTable[moveIndex]))
+                                 && !(gDisableStructs[sp34].mimickedMoves & gBitTable[moveIndex]))
                                     gBattleMons[sp34].pp[moveIndex] = data;
                                 retVal = FALSE;
                             }
@@ -4710,7 +4709,7 @@ bool8 PokemonUseItemEffects2(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 m
                                         r5 = gActiveBattler;
                                         gActiveBattler = sp34;
                                         BtlController_EmitGetMonData(0, 0, 0);
-                                        MarkBufferBankForExecution(gActiveBattler);
+                                        MarkBattlerForControllerExec(gActiveBattler);
                                         gActiveBattler = r5;
                                     }
                                 }
@@ -6106,7 +6105,7 @@ const u8 *Battle_PrintStatBoosterEffectMessage(u16 itemId)
             }
             else
             {
-                sBattler_AI = gBattlerInMenuId;
+                gBattlerAttacker = gBattlerInMenuId;
                 BattleStringExpandPlaceholdersToDisplayedString(BattleText_GetPumped);
             }
         }
@@ -6114,7 +6113,7 @@ const u8 *Battle_PrintStatBoosterEffectMessage(u16 itemId)
 
     if (itemEffect[3] & 0x80)
     {
-        sBattler_AI = gBattlerInMenuId;
+        gBattlerAttacker = gBattlerInMenuId;
         BattleStringExpandPlaceholdersToDisplayedString(BattleText_MistShroud);
     }
 
@@ -6466,9 +6465,9 @@ bool8 sub_80435E0(void)
     return retVal;
 }
 
-bool8 GetLinkTrainerFlankId(u8 linkPlayerId)
+bool16 GetLinkTrainerFlankId(u8 linkPlayerId)
 {
-    bool8 retVal = FALSE;
+    bool16 retVal = FALSE;
     switch (gLinkPlayers[linkPlayerId].id)
     {
     case 0:
@@ -6483,7 +6482,7 @@ bool8 GetLinkTrainerFlankId(u8 linkPlayerId)
     return retVal;
 }
 
-s32 GetBankMultiplayerId(u16 a1)
+s32 GetBattlerMultiplayerId(u16 a1)
 {
     s32 id;
     for (id = 0; id < MAX_LINK_PLAYERS; id++)
@@ -6962,10 +6961,10 @@ const u32 *GetMonFrontSpritePal(struct Pokemon *mon)
     u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
     u32 otId = GetMonData(mon, MON_DATA_OT_ID, 0);
     u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, 0);
-    return GetFrontSpritePalFromSpeciesAndPersonality(species, otId, personality);
+    return GetMonSpritePalFromSpeciesAndPersonality(species, otId, personality);
 }
 
-const u32 *GetFrontSpritePalFromSpeciesAndPersonality(u16 species, u32 otId, u32 personality)
+const u32 *GetMonSpritePalFromSpeciesAndPersonality(u16 species, u32 otId, u32 personality)
 {
     u32 shinyValue;
 
@@ -7075,15 +7074,9 @@ void BoxMonRestorePP(struct BoxPokemon *boxMon)
     }
 }
 
-// SetMonPreventsSwitchingString
-void sub_8044348(void)
+void SetMonPreventsSwitchingString(void)
 {
-#ifdef NONMATCHING
-    gLastUsedAbility = gBattleStruct -> abilityPreventingSwitchout; // fixed from the original
-#else
-    gLastUsedAbility = ((u8 *) gBattleStruct)[0xac]; // huh? why is this wrong?
-#endif
-
+    gLastUsedAbility = gBattleStruct -> abilityPreventingSwitchout;
     gBattleTextBuff1[0] = B_BUFF_PLACEHOLDER_BEGIN;
     gBattleTextBuff1[1] = B_BUFF_MON_NICK_WITH_PREFIX;
     gBattleTextBuff1[2] = gBattleStruct->battlerPreventingSwitchout;
@@ -7140,7 +7133,7 @@ static bool8 IsShinyOtIdPersonality(u32 otId, u32 personality)
 u8 *GetTrainerPartnerName(void)
 {
     u8 id = GetMultiplayerId();
-    return gLinkPlayers[GetBankMultiplayerId(gLinkPlayers[id].id ^ 2)].name;
+    return gLinkPlayers[GetBattlerMultiplayerId(gLinkPlayers[id].id ^ 2)].name;
 }
 
 u8 GetPlayerPartyHighestLevel(void)

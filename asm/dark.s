@@ -256,33 +256,33 @@ sub_80B7ACC: @ 80B7ACC
 	ldr r6, _080B7B38 @ =gBattleAnimTarget
 	ldrb r0, [r6]
 	movs r1, 0x2
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x30]
 	ldr r5, _080B7B3C @ =gBattleAnimAttacker
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x32]
 	ldrb r0, [r6]
 	movs r1, 0x3
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x34]
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x36]
 	movs r0, 0x7E
 	strh r0, [r4, 0x2E]
 	adds r0, r4, 0
-	bl sub_80754B8
+	bl InitSpriteDataForLinearTranslation
 	ldrh r0, [r4, 0x30]
 	negs r0, r0
 	strh r0, [r4, 0x34]
@@ -634,7 +634,7 @@ sub_80B7DA4: @ 80B7DA4
 	ldr r4, _080B7E0C @ =gBattleAnimAttacker
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, 0x1F
@@ -653,7 +653,7 @@ sub_80B7DA4: @ 80B7DA4
 	strh r1, [r5, 0x22]
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r0, 0
@@ -701,7 +701,7 @@ _080B7E16:
 	ldr r0, _080B7E70 @ =0x04000016
 	str r0, [sp]
 	movs r7, 0x2
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B7EA8
@@ -728,7 +728,7 @@ _080B7E78:
 	ldr r0, _080B7F38 @ =0x0400001a
 	str r0, [sp]
 	movs r7, 0x4
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B7EA8
@@ -995,7 +995,7 @@ _080B80A0:
 	.4byte _080B81E8
 	.4byte _080B8250
 _080B80B4:
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1087,7 +1087,7 @@ _080B817C:
 	ldr r4, _080B81C8 @ =gBattleAnimTarget
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, 0x1F
@@ -1104,7 +1104,7 @@ _080B817C:
 	strh r1, [r5, 0x22]
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	subs r1, r0, 0x4
@@ -1685,7 +1685,7 @@ sub_80B85B8: @ 80B85B8
 	ldrb r0, [r6]
 	movs r5, 0x2
 	eors r0, r5
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B8642
@@ -1744,7 +1744,7 @@ sub_80B8664: @ 80B8664
 	ldrb r1, [r4]
 	movs r0, 0x2
 	eors r0, r1
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B86A0
@@ -1827,7 +1827,7 @@ sub_80B86EC: @ 80B86EC
 	movs r1, 0
 	movs r2, 0
 	bl SetAnimBgAttribute
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B8750
@@ -1836,11 +1836,11 @@ sub_80B86EC: @ 80B86EC
 	movs r2, 0x1
 	bl SetAnimBgAttribute
 _080B8750:
-	bl sub_8075290
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B87CA
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B87CA
@@ -1860,7 +1860,7 @@ _080B8780:
 	ldrb r0, [r4]
 	movs r5, 0x2
 	eors r0, r5
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2155,7 +2155,7 @@ _080B89FC:
 	movs r0, 0x4A
 	adds r1, r4, 0
 	bl SetGpuReg
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B8A2E
@@ -2254,7 +2254,7 @@ _080B8AE0:
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B8B04

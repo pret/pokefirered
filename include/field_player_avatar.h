@@ -28,5 +28,8 @@ u8 GetPlayerAvatarObjectId(void);
 u8 PlayerGetZCoord(void);
 u8 GetPlayerAvatarGraphicsIdByCurrentState(void);
 void sub_805CB70(void);
+void sub_805CB04(bool8);
+void sub_805DC04(void);
+bool32 sub_805DC24(void);
 
 #endif //GUARD_FIELD_PLAYER_AVATAR_H

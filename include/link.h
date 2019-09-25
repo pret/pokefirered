@@ -213,5 +213,6 @@ void sub_8054A28(void);
 void sub_800B1F4(void);
 void LoadWirelessStatusIndicatorSpriteGfx(void);
 void CreateWirelessStatusIndicatorSprite(u8, u8);
+void sub_8009FE8(void);
 
 #endif // GUARD_LINK_H

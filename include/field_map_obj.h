@@ -90,6 +90,7 @@ u8 sub_805EB44(u8, u8, s16, s16);
 void npc_paltag_set_load(u8 mode);
 bool8 FieldObjectIsMovementOverridden(struct MapObject *mapObject);
 u8 FieldObjectCheckHeldMovementStatus(struct MapObject *mapObject);
+u8 sub_8063F84(u8 direction);
 
 // Exported data declarations
 

@@ -25,22 +25,21 @@
 #include "start_menu.h"
 #include "constants/songs.h"
 
-void sub_807DF4C(u8 a0);
-void sub_807DFBC(u8 taskId);
-void task_map_chg_seq_0807E20C(u8 taskId);
-void task_map_chg_seq_0807E2CC(u8 taskId);
-void sub_807E31C(u8 taskId);
-void sub_807E718(u8 taskId);
-void sub_807E784(u8 taskId);
-void sub_807E80C(u8 taskId);
-void sub_807E980(u8 taskId);
-void sub_807EB64(u16, s16*, s16*);
-void sub_807EBBC(u8 a0, s16 *a1, s16 *a2);
-void sub_807EAC4(s16, s16, s16*, s16*, s16*);
-void sub_807EC34(u8 taskId);
-void sub_807ECBC(s16 *, s16 *, s16 *, s16 *, s16 *);
-bool8 sub_807EDA0(s16 *, s16 *, s16 *, s16 *, s16 *);
-void sub_807F204(u8 taskId);
+static void sub_807DF4C(u8 a0);
+static void sub_807DFBC(u8 taskId);
+static void task_map_chg_seq_0807E20C(u8 taskId);
+static void task_map_chg_seq_0807E2CC(u8 taskId);
+static void sub_807E31C(u8 taskId);
+static void sub_807E718(u8 taskId);
+static void sub_807E784(u8 taskId);
+static void sub_807E80C(u8 taskId);
+static void sub_807E980(u8 taskId);
+static void sub_807EB64(u16, s16*, s16*);
+static void sub_807EBBC(u8 a0, s16 *a1, s16 *a2);
+static void sub_807EAC4(s16, s16, s16*, s16*, s16*);
+static void sub_807EC34(u8 taskId);
+static void sub_807ECBC(s16 *, s16 *, s16 *, s16 *, s16 *);
+static bool8 sub_807EDA0(s16 *, s16 *, s16 *, s16 *, s16 *);
 
 void palette_bg_faded_fill_white(void)
 {
@@ -69,7 +68,7 @@ void pal_fill_for_maplights(void)
     }
 }
 
-void sub_807DBAC(void)
+static void sub_807DBAC(void)
 {
     switch (sub_80C9DCC(get_map_light_from_warp0(), GetCurrentMapType()))
     {
@@ -112,7 +111,7 @@ void sub_807DC18(void)
     }
 }
 
-void sub_807DC70(void)
+static void sub_807DC70(void)
 {
     switch (sub_80C9D7C(GetCurrentMapType(), warp1_get_mapheader()->mapType))
     {
@@ -125,12 +124,12 @@ void sub_807DC70(void)
     }
 }
 
-void sub_807DCB0(bool8 arg)
+static void sub_807DCB0(bool8 arg)
 {
     sub_805CB04(!arg);
 }
 
-void task0A_nop_for_a_while(u8 taskId)
+static void task0A_nop_for_a_while(u8 taskId)
 {
     if (sub_807E418() == TRUE)
         DestroyTask(taskId);
@@ -144,7 +143,7 @@ void sub_807DCE4(void)
     CreateTask(task0A_nop_for_a_while, 10);
 }
 
-void task0A_asap_script_env_2_enable_and_set_ctx_running(u8 taskId)
+static void task0A_asap_script_env_2_enable_and_set_ctx_running(u8 taskId)
 {
     if (sub_807E418() == TRUE)
     {
@@ -168,7 +167,7 @@ void sub_807DD44(void)
     CreateTask(task0A_asap_script_env_2_enable_and_set_ctx_running, 10);
 }
 
-void task_mpl_807DD60(u8 taskId)
+static void task_mpl_807DD60(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     switch (task->data[0])
@@ -202,7 +201,7 @@ void sub_807DDD0(void)
     CreateTask(task_mpl_807DD60, 10);
 }
 
-void sub_807DDF0(u8 taskId)
+static void sub_807DDF0(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     switch (task->data[0])
@@ -237,7 +236,7 @@ void sub_807DE58(void)
     CreateTask(sub_807DDF0, 10);
 }
 
-void sub_807DE78(bool8 a0)
+static void sub_807DE78(bool8 a0)
 {
     s16 x, y;
     u32 behavior;
@@ -277,7 +276,7 @@ void sub_807DE78(bool8 a0)
     CreateTask(func, 10);
 }
 
-void sub_807DF4C(bool8 a0)
+static void sub_807DF4C(bool8 a0)
 {
     if (!a0)
         pal_fill_for_maplights();
@@ -301,7 +300,7 @@ void sub_807DF7C(void)
     ScriptContext2_Enable();
 }
 
-void sub_807DF94(void)
+static void sub_807DF94(void)
 {
     Overworld_PlaySpecialMapMusic();
     pal_fill_for_maplights();
@@ -311,7 +310,7 @@ void sub_807DF94(void)
     ScriptContext2_Enable();
 }
 
-void sub_807DFBC(u8 taskId)
+static void sub_807DFBC(u8 taskId)
 {
     struct Task * task = &gTasks[taskId];
     s16 *x = &task->data[2];
@@ -399,7 +398,7 @@ void sub_807DFBC(u8 taskId)
     }
 }
 
-void task_map_chg_seq_0807E20C(u8 taskId)
+static void task_map_chg_seq_0807E20C(u8 taskId)
 {
     struct Task * task = &gTasks[taskId];
     s16 *x = &task->data[2];
@@ -435,7 +434,7 @@ void task_map_chg_seq_0807E20C(u8 taskId)
     }
 }
 
-void task_map_chg_seq_0807E2CC(u8 taskId)
+static void task_map_chg_seq_0807E2CC(u8 taskId)
 {
     switch (gTasks[taskId].data[0])
     {
@@ -455,7 +454,7 @@ void task_map_chg_seq_0807E2CC(u8 taskId)
     }
 }
 
-void sub_807E31C(u8 taskId)
+static void sub_807E31C(u8 taskId)
 {
     switch (gTasks[taskId].data[0])
     {
@@ -476,7 +475,7 @@ void sub_807E31C(u8 taskId)
     }
 }
 
-void sub_807E378(u8 taskId)
+static void sub_807E378(u8 taskId)
 {
     if (sub_807E418() == TRUE)
     {
@@ -498,7 +497,7 @@ bool32 sub_807E3BC(void)
     return FALSE;
 }
 
-void task_mpl_807E3C8(u8 taskId)
+static void task_mpl_807E3C8(u8 taskId)
 {
     if (sub_807E418() == TRUE)
     {
@@ -516,7 +515,7 @@ void sub_807E3EC(void)
     CreateTask(task_mpl_807E3C8, 10);
 }
 
-bool32 sub_807E40C(void)
+static bool32 sub_807E40C(void)
 {
     return gPaletteFade.active;
 }
@@ -619,7 +618,7 @@ void sub_807E5C4(void)
     gFieldCallback = nullsub_60;
 }
 
-void sub_807E5EC(u8 taskId)
+static void sub_807E5EC(u8 taskId)
 {
     struct Task * task = &gTasks[taskId];
     switch (task->data[0])
@@ -649,7 +648,7 @@ void sub_807E654(void)
     CreateTask(sub_807E5EC, 10);
 }
 
-void sub_807E678(u8 taskId)
+static void sub_807E678(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     switch (data[0])
@@ -684,7 +683,7 @@ void sub_807E704(void)
     CreateTask(sub_807E678, 10);
 }
 
-void sub_807E718(u8 taskId)
+static void sub_807E718(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     switch (task->data[0])
@@ -706,7 +705,7 @@ void sub_807E718(u8 taskId)
     }
 }
 
-void sub_807E784(u8 taskId)
+static void sub_807E784(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     switch (task->data[0])
@@ -737,7 +736,7 @@ void sub_807E784(u8 taskId)
     }
 }
 
-void sub_807E80C(u8 taskId)
+static void sub_807E80C(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     s16 * xp = &task->data[2];
@@ -790,7 +789,7 @@ void sub_807E80C(u8 taskId)
     }
 }
 
-void sub_807E980(u8 taskId)
+static void sub_807E980(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     struct MapObject *playerObj = &gMapObjects[gPlayerAvatar.mapObjectId];
@@ -842,7 +841,7 @@ void sub_807E980(u8 taskId)
     }
 }
 
-void sub_807EAC4(s16 a0, s16 a1, s16 *a2, s16 *a3, s16 *a4)
+static void sub_807EAC4(s16 a0, s16 a1, s16 *a2, s16 *a3, s16 *a4)
 {
     struct Sprite *playerSpr = &gSprites[gPlayerAvatar.spriteId];
     struct MapObject *playerObj = &gMapObjects[gPlayerAvatar.mapObjectId];
@@ -858,13 +857,13 @@ void sub_807EAC4(s16 a0, s16 a1, s16 *a2, s16 *a3, s16 *a4)
     }
 }
 
-void sub_807EB64(u16 a0, s16 *a1, s16 *a2)
+static void sub_807EB64(u16 a0, s16 *a1, s16 *a2)
 {
     FieldObjectForceSetSpecialAnim(&gMapObjects[gPlayerAvatar.mapObjectId], GetStepInPlaceDelay16AnimId(GetPlayerFacingDirection()));
     sub_807EBBC(a0, a1, a2);
 }
 
-void sub_807EBBC(u8 a0, s16 *a1, s16 *a2)
+static void sub_807EBBC(u8 a0, s16 *a1, s16 *a2)
 {
     if (MetatileBehavior_IsUnknownWarp6C(a0))
     {
@@ -893,7 +892,7 @@ void sub_807EBBC(u8 a0, s16 *a1, s16 *a2)
     }
 }
 
-void sub_807EC34(u8 taskId)
+static void sub_807EC34(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     switch (data[0])
@@ -920,7 +919,7 @@ void sub_807EC34(u8 taskId)
     }
 }
 
-void sub_807ECBC(s16 *a0, s16 *a1, s16 *a2, s16 *a3, s16 *a4)
+static void sub_807ECBC(s16 *a0, s16 *a1, s16 *a2, s16 *a3, s16 *a4)
 {
     s16 x, y;
     u8 behavior;
@@ -944,7 +943,7 @@ void sub_807ECBC(s16 *a0, s16 *a1, s16 *a2, s16 *a3, s16 *a4)
     *a1 *= -1;
 }
 
-bool8 sub_807EDA0(s16 *a0, s16 *a1, s16 *a2, s16 *a3, s16 *a4)
+static bool8 sub_807EDA0(s16 *a0, s16 *a1, s16 *a2, s16 *a3, s16 *a4)
 {
     struct Sprite *sprite;
     sprite = &gSprites[gPlayerAvatar.spriteId];

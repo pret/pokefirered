@@ -119,7 +119,7 @@ SECTIONS {
         src/reset_save_heap.o(.text);
         asm/field_weather.o(.text);
         asm/field_weather_effects.o(.text);
-        asm/field_fadetransition.o(.text);
+        src/field_fadetransition.o(.text);;
         asm/field_screen_effect.o(.text);
         asm/battle_setup.o(.text);
         asm/cable_club.o(.text);

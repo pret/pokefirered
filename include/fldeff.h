@@ -13,6 +13,8 @@ bool8 CheckObjectGraphicsInFrontOfPlayer(u8 graphicsId);
 u8 oei_task_add(void);
 
 // flash
+u8 sub_80C9DCC(u8 lightLevel, u8 mapType);
+u8 sub_80C9D7C(u8 mapType1, u8 mapType2);
 
 // cut
 

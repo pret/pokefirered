@@ -461,7 +461,7 @@ u16 sub_80F8318(u8 mapsec)
     return windowId;
 }
 
-bool8 sub_80F83B0(void)
+bool32 sub_80F83B0(void)
 {
     if (FuncIsActiveTask(sub_80F83D0) == TRUE)
     {

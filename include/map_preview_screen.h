@@ -48,5 +48,6 @@ u16 sub_80F8318(u8 id);
 void sub_80F85BC(u16 a0);
 u16 sub_80F856C(u8 id);
 bool8 sub_80F8110(u8 mapsec, bool8 forceFirstTime);
+bool32 sub_80F83B0(void);
 
 #endif //GUARD_MAP_PREVIEW_SCREEN_H

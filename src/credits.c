@@ -828,7 +828,7 @@ static s32 RollCredits(void)
     {
     case CREDITSSCENE_INIT_WIN0:
         SwitchWin1OffWin0On();
-        SetGpuReg(REG_OFFSET_WIN0H, 0x40);
+        SetGpuReg(REG_OFFSET_WIN0H, 0xF0);
         SetGpuReg(REG_OFFSET_WIN0V, 0x4F51);
         sCreditsMgr->mainseqno = CREDITSSCENE_SETUP_DARKEN_EFFECT;
         return 0;
@@ -856,7 +856,7 @@ static s32 RollCredits(void)
         }
         return 0;
     case CREDITSSCENE_LOAD_PLAYER_SPRITE_AT_INDIGO:
-        if (sCreditsMgr->timer != 0)
+        if (sCreditsMgr->timer == 0)
         {
             LoadPlayerOrRivalSprite(0);
             sCreditsMgr->timer = 100;
@@ -937,14 +937,14 @@ static s32 RollCredits(void)
     case CREDITSSCENE_PRINT_ADDPRINTER1:
         if (!gPaletteFade.active)
         {
-            win0v[0] = sCreditsTexts[sCreditsScript[sCreditsMgr->scrcmdidx].unk1].unk_8; // unused
-            AddTextPrinterParameterized4(sCreditsMgr->windowId, 1, 2, 6, 0, 0, sTextColor_Header, -1, sCreditsTexts[sCreditsScript[sCreditsMgr->scrcmdidx].unk1].unk_0);
+            win0v[0] = sCreditsTexts[sCreditsScript[sCreditsMgr->scrcmdidx].param].unk_8; // unused
+            AddTextPrinterParameterized4(sCreditsMgr->windowId, 1, 2, 6, 0, 0, sTextColor_Header, -1, sCreditsTexts[sCreditsScript[sCreditsMgr->scrcmdidx].param].unk_0);
             sCreditsMgr->mainseqno = CREDITSSCENE_PRINT_ADDPRINTER2;
         }
         return sCreditsMgr->canSpeedThrough;
     case CREDITSSCENE_PRINT_ADDPRINTER2:
-        win0v[0] = sCreditsTexts[sCreditsScript[sCreditsMgr->scrcmdidx].unk1].unk_8;
-        AddTextPrinterParameterized4(sCreditsMgr->windowId, 1, 2, 6, 0, 0, sTextColor_Header, -1, sCreditsTexts[sCreditsScript[sCreditsMgr->scrcmdidx].unk1].unk_4);
+        win0v[0] = sCreditsTexts[sCreditsScript[sCreditsMgr->scrcmdidx].param].unk_8;
+        AddTextPrinterParameterized4(sCreditsMgr->windowId, 2, 8, 6, 0, 0, sTextColor_Header, -1, sCreditsTexts[sCreditsScript[sCreditsMgr->scrcmdidx].param].unk_4);
         sCreditsMgr->mainseqno = CREDITSSCENE_PRINT_DELAY;
         return sCreditsMgr->canSpeedThrough;
     case CREDITSSCENE_PRINT_DELAY:
@@ -974,10 +974,11 @@ static s32 RollCredits(void)
         {
             DestroyCreditsWindow();
             sCreditsMgr->subseqno = 0;
-            while (DoOverworldMapScrollScene(sCreditsMgr->whichMon))
+            while (!DoOverworldMapScrollScene(sCreditsMgr->whichMon))
             {}
             switch (sCreditsMgr->whichMon)
             {
+            case 3:
             default:
                 win0v[0] = 1;
                 break;

@@ -3,6 +3,7 @@
 
 #include "global.h"
 #include "task.h"
+#include "window.h"
 
 struct YesNoFuncTable
 {

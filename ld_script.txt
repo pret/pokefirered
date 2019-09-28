@@ -251,6 +251,7 @@ SECTIONS {
         src/help_system.o(.text);
         asm/wild_pokemon_area.o(.text);
         src/dynamic_placeholder_text_util.o(.text);
+        src/berry_pouch.o(.text);
         asm/berry_pouch.o(.text);
         asm/itemfinder.o(.text);
         src/buy_menu_helpers.o(.text);

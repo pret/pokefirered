@@ -176,7 +176,7 @@ extern const u32 gTradeGba_Gfx[];
 extern const u8 gUnknown_8E86240[];
 extern const u8 gUnknown_8E86BE8[];
 extern const u8 gUnknown_8E86D6C[];
-extern const u8 gUnknown_8E86F98[];
+extern const u32 gUnknown_8E86F98[];
 
 // berry_fix_program
 extern const u8 gBerryFixGameboy_Gfx[];
@@ -201,7 +201,7 @@ extern const u8 gBerryFixWindow_Pal[];
 // item_pc
 
 extern const u8 gItemPcTiles[];
-extern const u8 gItemPcBgPals[];
+extern const u32 gItemPcBgPals[];
 extern const u8 gItemPcTilemap[];
 
 // item_menu_icons

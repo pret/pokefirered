@@ -1,6 +1,8 @@
 #include "global.h"
 #include "malloc.h"
 #include "bg.h"
+#include "decompress.h"
+#include "gpu_regs.h"
 #include "palette.h"
 #include "text.h"
 #include "berry_pouch.h"
@@ -10,6 +12,7 @@
 #include "scanline_effect.h"
 #include "item_menu_icons.h"
 #include "list_menu.h"
+#include "graphics.h"
 #include "constants/items.h"
 
 struct BerryPouchStruct_203F36C
@@ -20,8 +23,8 @@ struct BerryPouchStruct_203F36C
     u8 filler_007[2];
     u8 unk_009;
     u8 filler_00a[2];
-    u8 filler_00c[0x800];
-    u16 unk_80C[4];
+    u8 unk_00C[BG_SCREEN_SIZE];
+    s16 unk_80C[4];
 };
 
 struct BerryPouchStruct_203F370
@@ -54,6 +57,37 @@ void sub_813D8AC(void);
 void sub_813DA68(u8 taskId);
 void sub_813E910(void);
 void sub_813EC08(void);
+
+static const struct BgTemplate gUnknown_846434C[] = {
+    {
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 31,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0x000
+    }, {
+        .bg = 1,
+        .charBaseIndex = 3,
+        .mapBaseIndex = 30,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 2,
+        .baseTile = 0x000
+    }, {
+        .bg = 2,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 29,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0x000
+    }
+};
+
+extern const struct CompressedSpriteSheet gUnknown_84644A8;
+extern const struct CompressedSpritePalette gUnknown_84644B0;
 
 void InitBerryPouch(u8 a0, void (*savedCallback)(void), u8 a2)
 {
@@ -230,4 +264,54 @@ void sub_813D048(u8 taskId)
         sub_813D7CC();
         DestroyTask(taskId);
     }
+}
+
+void sub_813D07C(void)
+{
+    ResetAllBgsCoordinatesAndBgCntRegs();
+    memset(gUnknown_203F36C->unk_00C, 0, BG_SCREEN_SIZE);
+    ResetBgsAndClearDma3BusyFlags(FALSE);
+    InitBgsFromTemplates(0, gUnknown_846434C, NELEMS(gUnknown_846434C));
+    SetBgTilemapBuffer(1, gUnknown_203F36C->unk_00C);
+    ScheduleBgCopyTilemapToVram(1);
+    SetGpuReg(REG_OFFSET_BLDCNT, 0);
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
+    ShowBg(0);
+    ShowBg(1);
+    ShowBg(2);
+}
+
+bool8 sub_813D0E4(void)
+{
+    switch (gUnknown_203F36C->unk_80C[0])
+    {
+    case 0:
+        ResetTempTileDataBuffers();
+        DecompressAndCopyTileDataToVram(1, gUnknown_8E859D0, 0, 0, 0);
+        gUnknown_203F36C->unk_80C[0]++;
+        break;
+    case 1:
+        if (FreeTempTileDataBuffersIfPossible() != TRUE)
+        {
+            LZDecompressWram(gUnknown_8E85C44, gUnknown_203F36C->unk_00C);
+            gUnknown_203F36C->unk_80C[0]++;
+        }
+        break;
+    case 2:
+        LoadCompressedPalette(gUnknown_8E85BA4, 0, 0x60);
+        if (gSaveBlock2Ptr->playerGender != MALE)
+            LoadCompressedPalette(gUnknown_8E85BF4, 0, 0x20);
+        gUnknown_203F36C->unk_80C[0]++;
+        break;
+    case 3:
+        LoadCompressedSpriteSheet(&gUnknown_84644A8);
+        gUnknown_203F36C->unk_80C[0]++;
+        break;
+    default:
+        LoadCompressedSpritePalette(&gUnknown_84644B0);
+        gUnknown_203F36C->unk_80C[0] = 0;
+        return TRUE;
+    }
+
+    return FALSE;
 }

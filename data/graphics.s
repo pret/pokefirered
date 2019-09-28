@@ -13989,22 +13989,22 @@ gItemPcTilemap:: @ 8E85458
 	.incbin "graphics/item_pc/unk_8E85458.bin.lz"
 
 gUnknown_8E8560C:: @ 8E8560C
-	.incbin "baserom.gba", 0xE8560C, 0x3C4
+	.incbin "graphics/berry_pouch/unk_8E8560C.4bpp.lz"
 
 gUnknown_8E859D0:: @ 8E859D0
-	.incbin "baserom.gba", 0xE859D0, 0x1D4
+	.incbin "graphics/berry_pouch/unk_8E859D0.4bpp.lz"
 
 gUnknown_8E85BA4:: @ 8E85BA4
-	.incbin "baserom.gba", 0xE85BA4, 0x50
+	.incbin "graphics/berry_pouch/unk_8E85BA4.gbapal.lz"
 
 gUnknown_8E85BF4:: @ 8E85BF4
-	.incbin "baserom.gba", 0xE85BF4, 0x28
+	.incbin "graphics/berry_pouch/unk_8E85BF4.gbapal.lz"
 
 gUnknown_8E85C1C:: @ 8E85C1C
-	.incbin "baserom.gba", 0xE85C1C, 0x28
+	.incbin "graphics/berry_pouch/unk_8E85C1C.gbapal.lz"
 
 gUnknown_8E85C44:: @ 8E85C44
-	.incbin "baserom.gba", 0xE85C44, 0x184
+	.incbin "graphics/berry_pouch/unk_8E85C44.bin.lz"
 
 gUnknown_8E85DC8:: @ 8E85DC8
 	.incbin "baserom.gba", 0xE85DC8, 0x134

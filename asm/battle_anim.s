@@ -152,7 +152,7 @@ LaunchBattleAnimation: @ 80725D4
 	movs r4, 0
 	ldr r6, _08072618 @ =gBattlerPartyIndexes
 	movs r7, 0x64
-	ldr r5, _0807261C @ =gUnknown_2037F1C
+	ldr r5, _0807261C @ =gAnimBattlerSpecies
 _08072600:
 	lsls r0, r4, 24
 	lsrs r0, 24
@@ -166,7 +166,7 @@ _08072600:
 	b _0807262A
 	.align 2, 0
 _08072618: .4byte gBattlerPartyIndexes
-_0807261C: .4byte gUnknown_2037F1C
+_0807261C: .4byte gAnimBattlerSpecies
 _08072620: .4byte gEnemyParty
 _08072624:
 	ldrh r0, [r6]
@@ -2767,8 +2767,8 @@ ScriptCmd_changebg: @ 8073A24
 _08073A40: .4byte gUnknown_2037ED4
 	thumb_func_end ScriptCmd_changebg
 
-	thumb_func_start sub_8073A44
-sub_8073A44: @ 8073A44
+	thumb_func_start BattleAnimAdjustPanning
+BattleAnimAdjustPanning: @ 8073A44
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -2867,7 +2867,7 @@ _08073AFC:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8073A44
+	thumb_func_end BattleAnimAdjustPanning
 
 	thumb_func_start sub_8073B08
 sub_8073B08: @ 8073B08
@@ -2916,8 +2916,8 @@ _08073B56:
 	bx r1
 	thumb_func_end sub_8073B08
 
-	thumb_func_start sub_8073B60
-sub_8073B60: @ 8073B60
+	thumb_func_start KeepPanInRange
+KeepPanInRange: @ 8073B60
 	push {lr}
 	lsls r0, 16
 	lsrs r1, r0, 16
@@ -2939,7 +2939,7 @@ _08073B7A:
 	bx r1
 	.align 2, 0
 _08073B84: .4byte 0x0000ffc0
-	thumb_func_end sub_8073B60
+	thumb_func_end KeepPanInRange
 
 	thumb_func_start CalculatePanIncrement
 CalculatePanIncrement: @ 8073B88
@@ -2994,7 +2994,7 @@ ScriptCmd_playsewithpan: @ 8073BC8
 	orrs r4, r0
 	movs r0, 0x2
 	ldrsb r0, [r1, r0]
-	bl sub_8073A44
+	bl BattleAnimAdjustPanning
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -3019,7 +3019,7 @@ ScriptCmd_setpan: @ 8073C00
 	str r0, [r4]
 	movs r0, 0x1
 	ldrsb r0, [r1, r0]
-	bl sub_8073A44
+	bl BattleAnimAdjustPanning
 	lsls r0, 24
 	asrs r0, 24
 	bl SE12PanpotControl
@@ -3058,14 +3058,14 @@ ScriptCmd_panse_1B: @ 8073C2C
 	ldrb r7, [r1, 0x5]
 	movs r0, 0x2
 	ldrsb r0, [r1, r0]
-	bl sub_8073A44
+	bl BattleAnimAdjustPanning
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
 	lsls r4, 24
 	asrs r4, 24
 	adds r0, r4, 0
-	bl sub_8073A44
+	bl BattleAnimAdjustPanning
 	mov r8, r0
 	lsls r5, 24
 	asrs r5, 24
@@ -3387,7 +3387,7 @@ ScriptCmd_loopsewithpan: @ 8073ED0
 	mov r9, r2
 	movs r0, 0x2
 	ldrsb r0, [r1, r0]
-	bl sub_8073A44
+	bl BattleAnimAdjustPanning
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -3498,7 +3498,7 @@ ScriptCmd_waitplaysewithpan: @ 8073FB4
 	mov r8, r0
 	movs r0, 0x2
 	ldrsb r0, [r1, r0]
-	bl sub_8073A44
+	bl BattleAnimAdjustPanning
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24

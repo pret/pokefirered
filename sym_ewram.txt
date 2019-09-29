@@ -669,7 +669,7 @@ gBattleAnimAttacker: @ 2037F1A
 gBattleAnimTarget: @ 2037F1B
 	.space 0x1
 
-gUnknown_2037F1C: @ 2037F1C
+gAnimBattlerSpecies: @ 2037F1C
 	.space 0x8
 
 gUnknown_2037F24: @ 2037F24

@@ -2099,7 +2099,7 @@ _080B3EFC:
 	beq _080B3FA4
 	movs r0, 0x40
 	negs r0, r0
-	bl sub_8073A44
+	bl BattleAnimAdjustPanning
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24

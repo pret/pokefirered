@@ -1414,7 +1414,7 @@ sub_80DED48: @ 80DED48
 	bne _080DEDA6
 	movs r0, 0x40
 	negs r0, r0
-	bl sub_8073A44
+	bl BattleAnimAdjustPanning
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -2109,7 +2109,7 @@ _080DF2A8:
 	lsrs r4, r0, 24
 	movs r0, 0x40
 	negs r0, r0
-	bl sub_8073A44
+	bl BattleAnimAdjustPanning
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -3603,7 +3603,7 @@ _080DFE66:
 	strh r0, [r1, 0x8]
 	movs r0, 0x40
 	negs r0, r0
-	bl sub_8073A44
+	bl BattleAnimAdjustPanning
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -10554,7 +10554,7 @@ _080E3412:
 	bne _080E34C6
 	movs r0, 0x40
 	negs r0, r0
-	bl sub_8073A44
+	bl BattleAnimAdjustPanning
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -10627,7 +10627,7 @@ _080E34A4:
 	bne _080E34C6
 	movs r0, 0x40
 	negs r0, r0
-	bl sub_8073A44
+	bl BattleAnimAdjustPanning
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -10724,7 +10724,7 @@ _080E3564:
 	cmp r0, 0
 	blt _080E365E
 	movs r0, 0x3F
-	bl sub_8073A44
+	bl BattleAnimAdjustPanning
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -10753,7 +10753,7 @@ _080E3588:
 	cmp r1, 0x7F
 	ble _080E365E
 	movs r0, 0x3F
-	bl sub_8073A44
+	bl BattleAnimAdjustPanning
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -10797,7 +10797,7 @@ _080E35F8:
 	cmp r0, 0x8
 	ble _080E365E
 	movs r0, 0x3F
-	bl sub_8073A44
+	bl BattleAnimAdjustPanning
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -11883,7 +11883,7 @@ _080E3E96:
 	cmp r1, r0
 	bne _080E3F28
 	movs r0, 0x3F
-	bl sub_8073A44
+	bl BattleAnimAdjustPanning
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24

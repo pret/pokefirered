@@ -65,6 +65,8 @@ extern u8 gUnknown_02038440;
 extern u8 gBattlerSpriteIds[MAX_BATTLERS_COUNT];
 extern u16 gAnimMovePower;
 extern s32 gAnimMoveDmg;
+extern u16 gAnimBattlerSpecies[MAX_BATTLERS_COUNT];
+extern u8 gUnknown_2037F24;
 
 void ClearBattleAnimationVars(void);
 void DoMoveAnim(u16 move);
@@ -80,6 +82,7 @@ s8 BattleAnimAdjustPanning2(s8 pan);
 s16 sub_80A52EC(s16 a);
 s16 CalculatePanIncrement(s16 sourcePan, s16 targetPan, s16 incrementPan);
 bool8 IsBattlerSpriteVisible(u8 battlerId);
+s16 KeepPanInRange(s16 a, s32 oldPan);
 
 // battle_anim_80FE840.s
 void SetAnimBgAttribute(u8 bgId, u8 attributeId, u8 value);

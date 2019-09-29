@@ -1118,7 +1118,7 @@ _080A7690:
 	strh r0, [r4, 0xA]
 	movs r0, 0x3F
 	negs r0, r0
-	bl sub_8073A44
+	bl BattleAnimAdjustPanning
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -1789,7 +1789,7 @@ sub_80A7C1C: @ 80A7C1C
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x3F
-	bl sub_8073A44
+	bl BattleAnimAdjustPanning
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -3626,7 +3626,7 @@ sub_80A8A1C: @ 80A8A1C
 	adds r0, 0x2
 	strh r0, [r4, 0x38]
 	movs r0, 0x3F
-	bl sub_8073A44
+	bl BattleAnimAdjustPanning
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r4, 0x3A]

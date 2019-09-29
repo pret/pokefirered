@@ -2279,12 +2279,12 @@ _080AED20:
 	movs r0, 0xC
 	strh r0, [r5, 0x1E]
 	subs r0, 0x4C
-	bl sub_8073A44
+	bl BattleAnimAdjustPanning
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r5, 0x20]
 	movs r0, 0x3F
-	bl sub_8073A44
+	bl BattleAnimAdjustPanning
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r5, 0x22]

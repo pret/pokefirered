@@ -806,13 +806,13 @@ _080B4C7A:
 	strh r4, [r6, 0x16]
 	movs r0, 0x40
 	negs r0, r0
-	bl sub_8073A44
+	bl BattleAnimAdjustPanning
 	adds r4, r0, 0
 	lsls r4, 24
 	asrs r4, 8
 	lsrs r4, 16
 	movs r0, 0x3F
-	bl sub_8073A44
+	bl BattleAnimAdjustPanning
 	lsls r0, 24
 	strh r4, [r6, 0x22]
 	asrs r0, 24

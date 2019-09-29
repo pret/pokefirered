@@ -512,14 +512,14 @@ sub_8074844: @ 8074844
 	ldrh r0, [r1, 0x2]
 	cmp r0, 0
 	bne _0807487C
-	ldr r1, _08074878 @ =gUnknown_2037F1C
+	ldr r1, _08074878 @ =gAnimBattlerSpecies
 	lsls r0, r2, 1
 	adds r0, r1
 	ldrh r1, [r0]
 	b _0807487E
 	.align 2, 0
 _08074874: .4byte gBattleSpritesDataPtr
-_08074878: .4byte gUnknown_2037F1C
+_08074878: .4byte gAnimBattlerSpecies
 _0807487C:
 	ldrh r1, [r1, 0x2]
 _0807487E:

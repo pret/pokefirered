@@ -315,4 +315,7 @@ extern const u8 gCreditsString_The_Royal_New_Zealand_Foundation_of_the_Blind_Gre
 extern const u8 gCreditsString_Graphic_Designer[];
 extern const u8 gCreditsString_Akira_Kinashi[];
 
+// berry_pouch
+extern const u8 gUnknown_8416716[];
+
 #endif //GUARD_STRINGS_H

@@ -28,8 +28,9 @@ gUnknown_84643B0:: @ 84643B0
 	.incbin "baserom.gba", 0x4643B0, 0x4
 
 gUnknown_84643B4:: @ 84643B4
-	.incbin "baserom.gba", 0x4643B4, 0x4
+	.string " $"
 
+	.align 2
 gUnknown_84643B8:: @ 84643B8
 	.incbin "baserom.gba", 0x4643B8, 0x20
 

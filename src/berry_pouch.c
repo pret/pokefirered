@@ -24,8 +24,8 @@
 
 struct BerryPouchStruct_203F36C
 {
-    u32 unk_000;
-    u8 filler_004[2];
+    void (*unk_000)(void);
+    u16 unk_004;
     u8 unk_006;
     u8 unk_007;
     u8 unk_008;
@@ -68,11 +68,13 @@ void sub_813D6A4(void);
 void sub_813D6F4(void);
 void sub_813D754(void);
 void sub_813D7CC(void);
+void sub_813D844(u8 taskId);
 void sub_813D8AC(void);
 void sub_813DA68(u8 taskId);
 void sub_813EC28(void);
 void sub_813E910(void);
 void sub_813E9A0(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorIdx);
+u8 sub_813EA08(u8);
 void sub_813EC08(void);
 
 static const struct BgTemplate gUnknown_846434C[] = {
@@ -125,7 +127,7 @@ void InitBerryPouch(u8 a0, void (*savedCallback)(void), u8 a2)
             gUnknown_203F370.unk_05 = a2;
         if (savedCallback != NULL)
             gUnknown_203F370.savedCallback = savedCallback;
-        gUnknown_203F36C->unk_000 = 0;
+        gUnknown_203F36C->unk_000 = NULL;
         gUnknown_203F36C->unk_009 = 0;
         gUnknown_203F36C->unk_006 = 0xFF;
         for (i = 0; i < 4; i++)
@@ -474,4 +476,148 @@ void sub_813D5BC(void)
         gUnknown_203F36C->unk_006 = AddScrollIndicatorArrowPairParameterized(2, 160, 8, 120, gUnknown_203F36C->unk_007 - gUnknown_203F36C->unk_008 + 1, 110, 110, &gUnknown_203F370.unk_0A);
     else
         gUnknown_203F36C->unk_006 = AddScrollIndicatorArrowPairParameterized(2, 160, 8, 120, gUnknown_203F36C->unk_007 - gUnknown_203F36C->unk_008, 110, 110, &gUnknown_203F370.unk_0A);
+}
+
+void sub_813D614(void)
+{
+    gUnknown_203F36C->unk_004 = 1;
+    gUnknown_203F36C->unk_006 = AddScrollIndicatorArrowPairParameterized(2, 212, 120, 152, 2, 110, 110, &gUnknown_203F36C->unk_004);
+}
+
+void sub_813D64C(void)
+{
+    gUnknown_203F36C->unk_004 = 1;
+    gUnknown_203F36C->unk_006 = AddScrollIndicatorArrowPairParameterized(2, 152, 72, 104, 2, 110, 110, &gUnknown_203F36C->unk_004);
+}
+
+void sub_813D684(void)
+{
+    if (gUnknown_203F36C->unk_006 != 0xFF)
+    {
+        RemoveScrollIndicatorArrowPair(gUnknown_203F36C->unk_006);
+        gUnknown_203F36C->unk_006 = 0xFF;
+    }
+}
+
+void sub_813D6A4(void)
+{
+    u32 slack = 72 - GetStringWidth(1, gUnknown_841670A, 0);
+    sub_813E9A0(2, 1, gUnknown_841670A, slack / 2, 1, 0, 0, 0, 0);
+}
+
+void sub_813D6E4(void)
+{
+    gUnknown_203F370.unk_08 = 0;
+    gUnknown_203F370.unk_0A = 0;
+}
+
+void sub_813D6F4(void)
+{
+    s32 r2;
+    if (gUnknown_203F370.unk_04 != 5)
+        r2 = gUnknown_203F36C->unk_007 + 1;
+    else
+        r2 = gUnknown_203F36C->unk_007;
+    if (gUnknown_203F370.unk_0A != 0 && gUnknown_203F370.unk_0A + gUnknown_203F36C->unk_008 > r2)
+        gUnknown_203F370.unk_0A = r2 - gUnknown_203F36C->unk_008;
+    if (gUnknown_203F370.unk_0A + gUnknown_203F370.unk_08 >= r2)
+    {
+        if (r2 == 0 || r2 == 1)
+            gUnknown_203F370.unk_08 = 0;
+        else
+            gUnknown_203F370.unk_08 = r2 - 1;
+    }
+}
+
+void sub_813D754(void)
+{
+    u8 lim;
+    u8 i;
+    if (gUnknown_203F370.unk_04 != 5)
+        lim = gUnknown_203F36C->unk_007 + 1;
+    else
+        lim = gUnknown_203F36C->unk_007;
+    if (gUnknown_203F370.unk_08 > 4)
+    {
+        for (i = 0; i <= gUnknown_203F370.unk_08 - 4; gUnknown_203F370.unk_08--, gUnknown_203F370.unk_0A++, i++)
+        {
+            if (gUnknown_203F370.unk_0A + gUnknown_203F36C->unk_008 == lim)
+                break;
+        }
+    }
+}
+
+void sub_813D7CC(void)
+{
+    if (gUnknown_203F36C != NULL)
+        Free(gUnknown_203F36C);
+    if (gUnknown_203F37C != NULL)
+        Free(gUnknown_203F37C);
+    if (gUnknown_203F380 != NULL)
+        Free(gUnknown_203F380);
+    FreeAllWindowBuffers();
+}
+
+void BerryPouch_StartFadeToExitCallback(u8 taskId)
+{
+    BeginNormalPaletteFade(0xFFFFFFFF, -2, 0, 16, RGB_BLACK);
+    gTasks[taskId].func = sub_813D844;
+}
+
+void sub_813D844(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    if (!gPaletteFade.active)
+    {
+        DestroyListMenuTask(data[0], &gUnknown_203F370.unk_0A, &gUnknown_203F370.unk_08);
+        if (gUnknown_203F36C->unk_000 != NULL)
+            SetMainCallback2(gUnknown_203F36C->unk_000);
+        else
+            SetMainCallback2(gUnknown_203F370.savedCallback);
+        sub_813D684();
+        sub_813D7CC();
+        DestroyTask(taskId);
+    }
+}
+
+void sub_813D8AC(void)
+{
+    u16 i;
+    u32 r2;
+    struct BagPocket *pocket = &gBagPockets[POCKET_BERRY_POUCH - 1];
+    SortAndCompactBagPocket(pocket);
+    gUnknown_203F36C->unk_007 = 0;
+    for (i = 0; i < pocket->capacity; i++)
+    {
+        if (pocket->itemSlots[i].itemId == ITEM_NONE)
+            break;
+        gUnknown_203F36C->unk_007++;
+    }
+    if (gUnknown_203F370.unk_04 != 5)
+        r2 = gUnknown_203F36C->unk_007 + 1;
+    else
+        r2 = gUnknown_203F36C->unk_007;
+    if (r2 > 7)
+        gUnknown_203F36C->unk_008 = 7;
+    else
+        gUnknown_203F36C->unk_008 = r2;
+}
+
+void BerryPouch_SetExitCallback(void (*callback)(void))
+{
+    gUnknown_203F36C->unk_000 = callback;
+}
+
+void sub_813D940(u8 taskId, const u8 * str)
+{
+    s16 * data = gTasks[taskId].data;
+    u8 windowId = sub_813EA08(8);
+    u8 windowId2;
+    sub_813D39C(data[1], gStringVar1);
+    StringExpandPlaceholders(gStringVar4, str);
+    sub_813E9A0(windowId, 2, gStringVar4, 0, 2, 1, 2, 0, 1);
+    windowId2 = sub_813EA08(0);
+    ConvertIntToDecimalStringN(gStringVar1, 1, STR_CONV_MODE_LEADING_ZEROS, 3);
+    StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+    sub_813E9A0(windowId2, 0, gStringVar4, 4, 10, 1, 0, 0, 1);
 }

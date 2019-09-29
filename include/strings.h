@@ -316,6 +316,7 @@ extern const u8 gCreditsString_Graphic_Designer[];
 extern const u8 gCreditsString_Akira_Kinashi[];
 
 // berry_pouch
+extern const u8 gUnknown_841670A[];
 extern const u8 gUnknown_8416716[];
 
 #endif //GUARD_STRINGS_H

@@ -5,527 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_813D614
-sub_813D614: @ 813D614
-	push {r4,lr}
-	sub sp, 0x10
-	ldr r4, _0813D648 @ =gUnknown_203F36C
-	ldr r1, [r4]
-	movs r0, 0x1
-	strh r0, [r1, 0x4]
-	movs r0, 0x2
-	str r0, [sp]
-	movs r0, 0x6E
-	str r0, [sp, 0x4]
-	str r0, [sp, 0x8]
-	adds r1, 0x4
-	str r1, [sp, 0xC]
-	movs r0, 0x2
-	movs r1, 0xD4
-	movs r2, 0x78
-	movs r3, 0x98
-	bl AddScrollIndicatorArrowPairParameterized
-	ldr r1, [r4]
-	strb r0, [r1, 0x6]
-	add sp, 0x10
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0813D648: .4byte gUnknown_203F36C
-	thumb_func_end sub_813D614
-
-	thumb_func_start sub_813D64C
-sub_813D64C: @ 813D64C
-	push {r4,lr}
-	sub sp, 0x10
-	ldr r4, _0813D680 @ =gUnknown_203F36C
-	ldr r1, [r4]
-	movs r0, 0x1
-	strh r0, [r1, 0x4]
-	movs r0, 0x2
-	str r0, [sp]
-	movs r0, 0x6E
-	str r0, [sp, 0x4]
-	str r0, [sp, 0x8]
-	adds r1, 0x4
-	str r1, [sp, 0xC]
-	movs r0, 0x2
-	movs r1, 0x98
-	movs r2, 0x48
-	movs r3, 0x68
-	bl AddScrollIndicatorArrowPairParameterized
-	ldr r1, [r4]
-	strb r0, [r1, 0x6]
-	add sp, 0x10
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0813D680: .4byte gUnknown_203F36C
-	thumb_func_end sub_813D64C
-
-	thumb_func_start sub_813D684
-sub_813D684: @ 813D684
-	push {r4,lr}
-	ldr r4, _0813D6A0 @ =gUnknown_203F36C
-	ldr r1, [r4]
-	ldrb r0, [r1, 0x6]
-	cmp r0, 0xFF
-	beq _0813D69A
-	bl RemoveScrollIndicatorArrowPair
-	ldr r1, [r4]
-	movs r0, 0xFF
-	strb r0, [r1, 0x6]
-_0813D69A:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0813D6A0: .4byte gUnknown_203F36C
-	thumb_func_end sub_813D684
-
-	thumb_func_start sub_813D6A4
-sub_813D6A4: @ 813D6A4
-	push {r4,lr}
-	sub sp, 0x14
-	ldr r4, _0813D6E0 @ =gUnknown_841670A
-	movs r0, 0x1
-	adds r1, r4, 0
-	movs r2, 0
-	bl GetStringWidth
-	movs r3, 0x48
-	subs r3, r0
-	lsrs r3, 1
-	lsls r3, 24
-	lsrs r3, 24
-	movs r0, 0x1
-	str r0, [sp]
-	movs r0, 0
-	str r0, [sp, 0x4]
-	str r0, [sp, 0x8]
-	str r0, [sp, 0xC]
-	str r0, [sp, 0x10]
-	movs r0, 0x2
-	movs r1, 0x1
-	adds r2, r4, 0
-	bl sub_813E9A0
-	add sp, 0x14
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0813D6E0: .4byte gUnknown_841670A
-	thumb_func_end sub_813D6A4
-
-	thumb_func_start sub_813D6E4
-sub_813D6E4: @ 813D6E4
-	ldr r1, _0813D6F0 @ =gUnknown_203F370
-	movs r0, 0
-	strh r0, [r1, 0x8]
-	strh r0, [r1, 0xA]
-	bx lr
-	.align 2, 0
-_0813D6F0: .4byte gUnknown_203F370
-	thumb_func_end sub_813D6E4
-
-	thumb_func_start sub_813D6F4
-sub_813D6F4: @ 813D6F4
-	push {r4,lr}
-	ldr r0, _0813D70C @ =gUnknown_203F370
-	ldrb r1, [r0, 0x4]
-	adds r4, r0, 0
-	cmp r1, 0x5
-	beq _0813D714
-	ldr r0, _0813D710 @ =gUnknown_203F36C
-	ldr r1, [r0]
-	ldrb r1, [r1, 0x7]
-	adds r2, r1, 0x1
-	adds r1, r0, 0
-	b _0813D71A
-	.align 2, 0
-_0813D70C: .4byte gUnknown_203F370
-_0813D710: .4byte gUnknown_203F36C
-_0813D714:
-	ldr r1, _0813D744 @ =gUnknown_203F36C
-	ldr r0, [r1]
-	ldrb r2, [r0, 0x7]
-_0813D71A:
-	ldrh r0, [r4, 0xA]
-	cmp r0, 0
-	beq _0813D72E
-	ldr r1, [r1]
-	ldrb r1, [r1, 0x8]
-	adds r0, r1
-	cmp r0, r2
-	ble _0813D72E
-	subs r0, r2, r1
-	strh r0, [r4, 0xA]
-_0813D72E:
-	adds r3, r4, 0
-	ldrh r0, [r3, 0xA]
-	ldrh r1, [r3, 0x8]
-	adds r0, r1
-	cmp r0, r2
-	blt _0813D74C
-	cmp r2, 0x1
-	bhi _0813D748
-	movs r0, 0
-	strh r0, [r3, 0x8]
-	b _0813D74C
-	.align 2, 0
-_0813D744: .4byte gUnknown_203F36C
-_0813D748:
-	subs r0, r2, 0x1
-	strh r0, [r4, 0x8]
-_0813D74C:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_813D6F4
-
-	thumb_func_start sub_813D754
-sub_813D754: @ 813D754
-	push {r4-r6,lr}
-	ldr r0, _0813D770 @ =gUnknown_203F370
-	ldrb r1, [r0, 0x4]
-	adds r5, r0, 0
-	cmp r1, 0x5
-	beq _0813D778
-	ldr r1, _0813D774 @ =gUnknown_203F36C
-	ldr r0, [r1]
-	ldrb r0, [r0, 0x7]
-	adds r0, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	b _0813D77E
-	.align 2, 0
-_0813D770: .4byte gUnknown_203F370
-_0813D774: .4byte gUnknown_203F36C
-_0813D778:
-	ldr r1, _0813D7C8 @ =gUnknown_203F36C
-	ldr r0, [r1]
-	ldrb r4, [r0, 0x7]
-_0813D77E:
-	adds r6, r1, 0
-	ldrh r0, [r5, 0x8]
-	cmp r0, 0x4
-	bls _0813D7C2
-	movs r3, 0
-	subs r0, 0x4
-	cmp r3, r0
-	bgt _0813D7C2
-	ldrh r0, [r5, 0xA]
-	ldr r1, [r6]
-	ldrb r1, [r1, 0x8]
-	adds r0, r1
-	cmp r0, r4
-	beq _0813D7C2
-	adds r2, r5, 0
-_0813D79C:
-	ldrh r0, [r2, 0x8]
-	subs r0, 0x1
-	strh r0, [r2, 0x8]
-	ldrh r0, [r2, 0xA]
-	adds r0, 0x1
-	strh r0, [r2, 0xA]
-	adds r0, r3, 0x1
-	lsls r0, 24
-	lsrs r3, r0, 24
-	ldrh r0, [r2, 0x8]
-	subs r0, 0x4
-	cmp r3, r0
-	bgt _0813D7C2
-	ldrh r0, [r5, 0xA]
-	ldr r1, [r6]
-	ldrb r1, [r1, 0x8]
-	adds r0, r1
-	cmp r0, r4
-	bne _0813D79C
-_0813D7C2:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0813D7C8: .4byte gUnknown_203F36C
-	thumb_func_end sub_813D754
-
-	thumb_func_start sub_813D7CC
-sub_813D7CC: @ 813D7CC
-	push {lr}
-	ldr r0, _0813D7FC @ =gUnknown_203F36C
-	ldr r0, [r0]
-	cmp r0, 0
-	beq _0813D7DA
-	bl Free
-_0813D7DA:
-	ldr r0, _0813D800 @ =gUnknown_203F37C
-	ldr r0, [r0]
-	cmp r0, 0
-	beq _0813D7E6
-	bl Free
-_0813D7E6:
-	ldr r0, _0813D804 @ =gUnknown_203F380
-	ldr r0, [r0]
-	cmp r0, 0
-	beq _0813D7F2
-	bl Free
-_0813D7F2:
-	bl FreeAllWindowBuffers
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0813D7FC: .4byte gUnknown_203F36C
-_0813D800: .4byte gUnknown_203F37C
-_0813D804: .4byte gUnknown_203F380
-	thumb_func_end sub_813D7CC
-
-	thumb_func_start BerryPouch_StartFadeToExitCallback
-BerryPouch_StartFadeToExitCallback: @ 813D808
-	push {r4,lr}
-	sub sp, 0x4
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	movs r0, 0x1
-	negs r0, r0
-	movs r1, 0x2
-	negs r1, r1
-	movs r2, 0
-	str r2, [sp]
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	ldr r1, _0813D83C @ =gTasks
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r0, r1
-	ldr r1, _0813D840 @ =sub_813D844
-	str r1, [r0]
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0813D83C: .4byte gTasks
-_0813D840: .4byte sub_813D844
-	thumb_func_end BerryPouch_StartFadeToExitCallback
-
-	thumb_func_start sub_813D844
-sub_813D844: @ 813D844
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	ldr r1, _0813D87C @ =gTasks+0x8
-	adds r2, r0, r1
-	ldr r0, _0813D880 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _0813D8A4
-	ldrb r0, [r2]
-	ldr r4, _0813D884 @ =gUnknown_203F37A
-	subs r2, r4, 0x2
-	adds r1, r4, 0
-	bl DestroyListMenuTask
-	ldr r0, _0813D888 @ =gUnknown_203F36C
-	ldr r0, [r0]
-	ldr r0, [r0]
-	cmp r0, 0
-	beq _0813D88C
-	bl SetMainCallback2
-	b _0813D896
-	.align 2, 0
-_0813D87C: .4byte gTasks+0x8
-_0813D880: .4byte gPaletteFade
-_0813D884: .4byte gUnknown_203F37A
-_0813D888: .4byte gUnknown_203F36C
-_0813D88C:
-	adds r0, r4, 0
-	subs r0, 0xA
-	ldr r0, [r0]
-	bl SetMainCallback2
-_0813D896:
-	bl sub_813D684
-	bl sub_813D7CC
-	adds r0, r5, 0
-	bl DestroyTask
-_0813D8A4:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_813D844
-
-	thumb_func_start sub_813D8AC
-sub_813D8AC: @ 813D8AC
-	push {r4,lr}
-	ldr r4, _0813D904 @ =gBagPockets + 0x20
-	adds r0, r4, 0
-	bl SortAndCompactBagPocket
-	ldr r3, _0813D908 @ =gUnknown_203F36C
-	ldr r1, [r3]
-	movs r0, 0
-	strb r0, [r1, 0x7]
-	movs r2, 0
-	ldrb r0, [r4, 0x4]
-	cmp r2, r0
-	bcs _0813D8EE
-	ldr r0, [r4]
-	ldrh r0, [r0]
-	cmp r0, 0
-	beq _0813D8EE
-_0813D8CE:
-	ldr r0, [r3]
-	ldrb r1, [r0, 0x7]
-	adds r1, 0x1
-	strb r1, [r0, 0x7]
-	adds r0, r2, 0x1
-	lsls r0, 16
-	lsrs r2, r0, 16
-	ldrb r0, [r4, 0x4]
-	cmp r2, r0
-	bcs _0813D8EE
-	ldr r0, [r4]
-	lsls r1, r2, 2
-	adds r1, r0
-	ldrh r0, [r1]
-	cmp r0, 0
-	bne _0813D8CE
-_0813D8EE:
-	ldr r0, _0813D90C @ =gUnknown_203F370
-	ldrb r0, [r0, 0x4]
-	cmp r0, 0x5
-	beq _0813D910
-	ldr r0, _0813D908 @ =gUnknown_203F36C
-	ldr r1, [r0]
-	ldrb r1, [r1, 0x7]
-	adds r2, r1, 0x1
-	adds r1, r0, 0
-	b _0813D916
-	.align 2, 0
-_0813D904: .4byte gBagPockets + 0x20
-_0813D908: .4byte gUnknown_203F36C
-_0813D90C: .4byte gUnknown_203F370
-_0813D910:
-	ldr r1, _0813D924 @ =gUnknown_203F36C
-	ldr r0, [r1]
-	ldrb r2, [r0, 0x7]
-_0813D916:
-	cmp r2, 0x7
-	bls _0813D928
-	ldr r1, [r1]
-	movs r0, 0x7
-	strb r0, [r1, 0x8]
-	b _0813D92C
-	.align 2, 0
-_0813D924: .4byte gUnknown_203F36C
-_0813D928:
-	ldr r0, [r1]
-	strb r2, [r0, 0x8]
-_0813D92C:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_813D8AC
-
-	thumb_func_start BerryPouch_SetExitCallback
-BerryPouch_SetExitCallback: @ 813D934
-	ldr r1, _0813D93C @ =gUnknown_203F36C
-	ldr r1, [r1]
-	str r0, [r1]
-	bx lr
-	.align 2, 0
-_0813D93C: .4byte gUnknown_203F36C
-	thumb_func_end BerryPouch_SetExitCallback
-
-	thumb_func_start sub_813D940
-sub_813D940: @ 813D940
-	push {r4-r6,lr}
-	mov r6, r10
-	mov r5, r9
-	mov r4, r8
-	push {r4-r6}
-	sub sp, 0x14
-	adds r6, r1, 0
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r4, r0, 2
-	adds r4, r0
-	lsls r4, 3
-	ldr r0, _0813D9E8 @ =gTasks+0x8
-	adds r4, r0
-	movs r0, 0x8
-	bl sub_813EA08
-	adds r5, r0, 0
-	lsls r5, 24
-	lsrs r5, 24
-	movs r1, 0x2
-	ldrsh r0, [r4, r1]
-	ldr r1, _0813D9EC @ =gStringVar1
-	mov r10, r1
-	bl sub_813D39C
-	ldr r0, _0813D9F0 @ =gStringVar4
-	mov r9, r0
-	adds r1, r6, 0
-	bl StringExpandPlaceholders
-	movs r0, 0x2
-	str r0, [sp]
-	movs r6, 0x1
-	str r6, [sp, 0x4]
-	str r0, [sp, 0x8]
-	movs r1, 0
-	mov r8, r1
-	str r1, [sp, 0xC]
-	str r6, [sp, 0x10]
-	adds r0, r5, 0
-	movs r1, 0x2
-	mov r2, r9
-	movs r3, 0
-	bl sub_813E9A0
-	movs r0, 0
-	bl sub_813EA08
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	mov r0, r10
-	movs r1, 0x1
-	movs r2, 0x2
-	movs r3, 0x3
-	bl ConvertIntToDecimalStringN
-	ldr r1, _0813D9F4 @ =gText_TimesStrVar1
-	mov r0, r9
-	bl StringExpandPlaceholders
-	movs r0, 0xA
-	str r0, [sp]
-	str r6, [sp, 0x4]
-	mov r0, r8
-	str r0, [sp, 0x8]
-	str r0, [sp, 0xC]
-	str r6, [sp, 0x10]
-	adds r0, r4, 0
-	movs r1, 0
-	mov r2, r9
-	movs r3, 0x4
-	bl sub_813E9A0
-	add sp, 0x14
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0813D9E8: .4byte gTasks+0x8
-_0813D9EC: .4byte gStringVar1
-_0813D9F0: .4byte gStringVar4
-_0813D9F4: .4byte gText_TimesStrVar1
-	thumb_func_end sub_813D940
-
 	thumb_func_start sub_813D9F8
 sub_813D9F8: @ 813D9F8
 	push {r4-r6,lr}
@@ -613,7 +92,7 @@ _0813DA9E:
 	bl ListMenu_ProcessInput
 	adds r5, r0, 0
 	ldrb r0, [r7]
-	ldr r4, _0813DAE0 @ =gUnknown_203F37A
+	ldr r4, _0813DAE0 @ =gUnknown_203F370 + 10
 	subs r2, r4, 0x2
 	adds r1, r4, 0
 	bl ListMenuGetScrollAndRow
@@ -637,7 +116,7 @@ _0813DA9E:
 	.align 2, 0
 _0813DAD8: .4byte gTasks+0x8
 _0813DADC: .4byte gPaletteFade
-_0813DAE0: .4byte gUnknown_203F37A
+_0813DAE0: .4byte gUnknown_203F370 + 10
 _0813DAE4: .4byte gMain
 _0813DAE8: .4byte gSpecialVar_ItemId
 _0813DAEC:
@@ -1423,7 +902,7 @@ _0813E18A:
 	movs r0, 0x9
 	bl sub_813EA98
 	ldrb r0, [r5]
-	ldr r4, _0813E1F8 @ =gUnknown_203F37A
+	ldr r4, _0813E1F8 @ =gUnknown_203F370 + 10
 	subs r2, r4, 0x2
 	adds r1, r4, 0
 	bl DestroyListMenuTask
@@ -1455,7 +934,7 @@ _0813E1E4:
 _0813E1EC: .4byte gTasks+0x8
 _0813E1F0: .4byte gMain
 _0813E1F4: .4byte gSpecialVar_ItemId
-_0813E1F8: .4byte gUnknown_203F37A
+_0813E1F8: .4byte gUnknown_203F370 + 10
 _0813E1FC: .4byte gMultiuseListMenuTemplate
 	thumb_func_end sub_813E164
 
@@ -1565,7 +1044,7 @@ sub_813E2B8: @ 813E2B8
 	movs r0, 0x5
 	bl sub_813EACC
 	ldrb r0, [r5]
-	ldr r4, _0813E318 @ =gUnknown_203F37A
+	ldr r4, _0813E318 @ =gUnknown_203F370 + 10
 	subs r2, r4, 0x2
 	adds r1, r4, 0
 	bl DestroyListMenuTask
@@ -1592,7 +1071,7 @@ sub_813E2B8: @ 813E2B8
 	bx r0
 	.align 2, 0
 _0813E314: .4byte gTasks+0x8
-_0813E318: .4byte gUnknown_203F37A
+_0813E318: .4byte gUnknown_203F370 + 10
 _0813E31C: .4byte gMultiuseListMenuTemplate
 	thumb_func_end sub_813E2B8
 
@@ -2196,7 +1675,7 @@ sub_813E7F0: @ 813E7F0
 	bl sub_809C09C
 	mov r3, r8
 	ldrb r0, [r3]
-	ldr r4, _0813E8C8 @ =gUnknown_203F37A
+	ldr r4, _0813E8C8 @ =gUnknown_203F370 + 10
 	subs r2, r4, 0x2
 	adds r1, r4, 0
 	bl DestroyListMenuTask
@@ -2243,7 +1722,7 @@ sub_813E7F0: @ 813E7F0
 _0813E8BC: .4byte gTasks+0x8
 _0813E8C0: .4byte gSpecialVar_ItemId
 _0813E8C4: .4byte gSaveBlock1Ptr
-_0813E8C8: .4byte gUnknown_203F37A
+_0813E8C8: .4byte gUnknown_203F370 + 10
 _0813E8CC: .4byte gMultiuseListMenuTemplate
 _0813E8D0: .4byte sub_813E8D4
 	thumb_func_end sub_813E7F0

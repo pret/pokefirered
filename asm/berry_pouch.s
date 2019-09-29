@@ -5,59 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_813D9F8
-sub_813D9F8: @ 813D9F8
-	push {r4-r6,lr}
-	sub sp, 0x14
-	adds r4, r1, 0
-	adds r5, r2, 0
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r4, 16
-	lsrs r4, 16
-	lsls r5, 24
-	lsrs r5, 24
-	bl sub_813EB10
-	adds r6, r0, 0
-	lsls r6, 24
-	lsrs r6, 24
-	adds r0, r6, 0
-	movs r1, 0x11
-	bl FillWindowPixelBuffer
-	ldr r0, _0813DA5C @ =gStringVar1
-	lsls r4, 16
-	asrs r4, 16
-	adds r1, r4, 0
-	movs r2, 0x2
-	adds r3, r5, 0
-	bl ConvertIntToDecimalStringN
-	ldr r4, _0813DA60 @ =gStringVar4
-	ldr r1, _0813DA64 @ =gText_TimesStrVar1
-	adds r0, r4, 0
-	bl StringExpandPlaceholders
-	movs r0, 0xA
-	str r0, [sp]
-	movs r1, 0x1
-	str r1, [sp, 0x4]
-	movs r0, 0
-	str r0, [sp, 0x8]
-	str r0, [sp, 0xC]
-	str r1, [sp, 0x10]
-	adds r0, r6, 0
-	movs r1, 0
-	adds r2, r4, 0
-	movs r3, 0x4
-	bl sub_813E9A0
-	add sp, 0x14
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0813DA5C: .4byte gStringVar1
-_0813DA60: .4byte gStringVar4
-_0813DA64: .4byte gText_TimesStrVar1
-	thumb_func_end sub_813D9F8
-
 	thumb_func_start sub_813DA68
 sub_813DA68: @ 813DA68
 	push {r4-r7,lr}

@@ -75,6 +75,7 @@ void sub_813EC28(void);
 void sub_813E910(void);
 void sub_813E9A0(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorIdx);
 u8 sub_813EA08(u8);
+u8 sub_813EB10(u8);
 void sub_813EC08(void);
 
 static const struct BgTemplate gUnknown_846434C[] = {
@@ -620,4 +621,13 @@ void sub_813D940(u8 taskId, const u8 * str)
     ConvertIntToDecimalStringN(gStringVar1, 1, STR_CONV_MODE_LEADING_ZEROS, 3);
     StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
     sub_813E9A0(windowId2, 0, gStringVar4, 4, 10, 1, 0, 0, 1);
+}
+
+void sub_813D9F8(u8 whichWindow, s16 quantity, u8 ndigits)
+{
+    u8 windowId = sub_813EB10(whichWindow);
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
+    ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEADING_ZEROS, ndigits);
+    StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+    sub_813E9A0(windowId, 0, gStringVar4, 4, 10, 1, 0, 0, 1);
 }

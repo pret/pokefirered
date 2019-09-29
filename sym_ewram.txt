@@ -1346,19 +1346,6 @@ gUnknown_203B170: @ 203B170
 	.include "src/dynamic_placeholder_text_util.o"
 	.align 2
 	.include "src/berry_pouch.o"
-
-gUnknown_203F384: @ 203F384
-	.space 0x4
-
-gUnknown_203F388: @ 203F388
-	.space 0x4
-
-gUnknown_203F38C: @ 203F38C
-	.space 0x10
-
-gUnknown_203F39C: @ 203F39C
-	.space 0x4
-
 	.align 2
 	.include "src/slot_machine.o"
 

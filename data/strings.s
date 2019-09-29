@@ -372,7 +372,7 @@ gUnknown_8416195::
 gOtherText_Use::
 	.string "USE$"
 
-gUnknown_84161A4::
+gOtherText_Toss::
 	.string "TOSS$"
 
 gUnknown_84161A9::

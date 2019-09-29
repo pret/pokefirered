@@ -3,9 +3,6 @@
 	.section .rodata
 	.align 2
 
-gUnknown_8464358:: @ 8464358
-	.incbin "baserom.gba", 0x464358, 0x14
-
 gUnknown_846436C:: @ 846436C
 	.incbin "baserom.gba", 0x46436C, 0x8
 
@@ -13,19 +10,23 @@ gUnknown_8464374:: @ 8464374
 	.incbin "baserom.gba", 0x464374, 0x8
 
 gUnknown_846437C:: @ 846437C
-	.incbin "baserom.gba", 0x46437C, 0x28
+	.4byte gOtherText_Use,  sub_813DE0C
+	.4byte gOtherText_Toss, sub_813DEBC
+	.4byte gOtherText_Give, sub_813E200
+	.4byte gOtherText_Exit, sub_813E320
+	.4byte gString_Dummy,   NULL
 
 gUnknown_84643A4:: @ 84643A4
-	.incbin "baserom.gba", 0x4643A4, 0x4
+	.byte 0, 2, 1, 3
 
 gUnknown_84643A8:: @ 84643A8
-	.incbin "baserom.gba", 0x4643A8, 0x4
+	.byte 2, 3, 4, 4
 
 gUnknown_84643AC:: @ 84643AC
-	.incbin "baserom.gba", 0x4643AC, 0x4
+	.byte 3, 4, 4, 4
 
 gUnknown_84643B0:: @ 84643B0
-	.incbin "baserom.gba", 0x4643B0, 0x4
+	.byte 0, 1, 3, 4
 
 gUnknown_84643B4:: @ 84643B4
 	.string " $"

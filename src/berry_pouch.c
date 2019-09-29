@@ -18,6 +18,8 @@
 #include "strings.h"
 #include "string_util.h"
 #include "sound.h"
+#include "link.h"
+#include "menu.h"
 #include "menu_indicators.h"
 #include "constants/items.h"
 #include "constants/songs.h"
@@ -49,6 +51,10 @@ EWRAM_DATA struct BerryPouchStruct_203F36C *gUnknown_203F36C = NULL;
 EWRAM_DATA struct BerryPouchStruct_203F370 gUnknown_203F370 = {};
 EWRAM_DATA struct ListMenuItem *gUnknown_203F37C = NULL;
 EWRAM_DATA u8 *gUnknown_203F380 = NULL;
+EWRAM_DATA const u8 *gUnknown_203F384 = NULL;
+EWRAM_DATA u8 gUnknown_203F388 = 0;
+ALIGNED(4) EWRAM_DATA u8 gUnknown_203F38C[14] = {};
+ALIGNED(4) EWRAM_DATA u8 gUnknown_203F39C = 0;
 
 void sub_813CE30(void);
 bool8 sub_813CE5C(void);
@@ -71,6 +77,15 @@ void sub_813D7CC(void);
 void sub_813D844(u8 taskId);
 void sub_813D8AC(void);
 void sub_813DA68(u8 taskId);
+void sub_813DD74(u8 taskId);
+void sub_813DDA0(u8 taskId);
+void sub_813DE0C(u8 taskId);
+void sub_813DEBC(u8 taskId);
+void sub_813E200(u8 taskId);
+void sub_813E320(u8 taskId);
+void sub_813E37C(u8 taskId);
+void sub_813E3FC(u8 taskId);
+void sub_813E428(u8 taskId);
 void sub_813EC28(void);
 void sub_813E910(void);
 void sub_813E9A0(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorIdx);
@@ -106,8 +121,20 @@ static const struct BgTemplate gUnknown_846434C[] = {
     }
 };
 
-extern const u8 gUnknown_84643B4[];
+const TaskFunc gUnknown_8464358[] = {
+    sub_813DD74,
+    sub_813E37C,
+    sub_813E428,
+    sub_813E3FC,
+    sub_813DD74
+};
 
+extern const struct MenuAction gUnknown_846437C[];
+extern const u8 gUnknown_84643A4[];
+extern const u8 gUnknown_84643A8[];
+extern const u8 gUnknown_84643AC[];
+extern const u8 gUnknown_84643B0[];
+extern const u8 gUnknown_84643B4[];
 extern const struct CompressedSpriteSheet gUnknown_84644A8;
 extern const struct CompressedSpritePalette gUnknown_84644B0;
 
@@ -630,4 +657,111 @@ void sub_813D9F8(u8 whichWindow, s16 quantity, u8 ndigits)
     ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEADING_ZEROS, ndigits);
     StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
     sub_813E9A0(windowId, 0, gStringVar4, 4, 10, 1, 0, 0, 1);
+}
+
+void sub_813DA68(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    s32 menuInput;
+    if (!gPaletteFade.active && sub_80BF72C() != TRUE)
+    {
+        menuInput = ListMenu_ProcessInput(data[0]);
+        ListMenuGetScrollAndRow(data[0], &gUnknown_203F370.unk_0A, &gUnknown_203F370.unk_08);
+        if (JOY_NEW(SELECT_BUTTON) && gUnknown_203F370.unk_05 == 1)
+        {
+            PlaySE(SE_SELECT);
+            gSpecialVar_ItemId = 0;
+            BerryPouch_StartFadeToExitCallback(taskId);
+        }
+        else
+        {
+            switch (menuInput)
+            {
+            case -1:
+                return;
+            case -2:
+                if (gUnknown_203F370.unk_04 != 5)
+                {
+                    PlaySE(SE_SELECT);
+                    gSpecialVar_ItemId = 0;
+                    BerryPouch_StartFadeToExitCallback(taskId);
+                }
+                break;
+            default:
+                PlaySE(SE_SELECT);
+                if (gUnknown_203F370.unk_04 == 5)
+                {
+                    gSpecialVar_ItemId = BagGetItemIdByPocketPosition(POCKET_BERRY_POUCH, menuInput);
+                    BerryPouch_StartFadeToExitCallback(taskId);
+                }
+                else if (menuInput == gUnknown_203F36C->unk_007)
+                {
+                    gSpecialVar_ItemId = 0;
+                    BerryPouch_StartFadeToExitCallback(taskId);
+                }
+                else
+                {
+                    sub_813D684();
+                    sub_813D594(1);
+                    sub_813D4B0(data[0], 2);
+                    data[1] = menuInput;
+                    data[2] = BagGetQuantityByPocketPosition(POCKET_BERRY_POUCH, menuInput);
+                    gSpecialVar_ItemId = BagGetItemIdByPocketPosition(POCKET_BERRY_POUCH, menuInput);
+                    gTasks[taskId].func = gUnknown_8464358[gUnknown_203F370.unk_04];
+                }
+                break;
+            }
+        }
+    }
+}
+
+void sub_813DBB4(u8 taskId)
+{
+    sub_813D594(0);
+    sub_813D5BC();
+    gTasks[taskId].func = sub_813DA68;
+}
+
+void sub_813DBE4(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    u8 windowId;
+    u8 windowId2;
+
+    if (gUnknown_203F370.unk_04 == 4)
+    {
+        gUnknown_203F384 = gUnknown_84643B0;
+        gUnknown_203F388 = 3;
+    }
+    else if (MenuHelpers_LinkSomething() == TRUE || InUnionRoom() == TRUE)
+    {
+        if (!sub_80BF6A8(gSpecialVar_ItemId))
+        {
+            gUnknown_203F384 = gUnknown_84643AC;
+            gUnknown_203F388 = 1;
+        }
+        else
+        {
+            gUnknown_203F384 = gUnknown_84643A8;
+            gUnknown_203F388 = 2;
+        }
+    }
+    else
+    {
+        gUnknown_203F384 = gUnknown_84643A4;
+        gUnknown_203F388 = 4;
+    }
+    windowId = sub_813EA08(gUnknown_203F388 + 9);
+    AddItemMenuActionTextPrinters(windowId, 2, GetMenuCursorDimensionByFont(2, 0), 2, GetFontAttribute(2, FONTATTR_LETTER_SPACING), GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) + 2, gUnknown_203F388, gUnknown_846437C, gUnknown_203F384);
+    Menu_InitCursor(windowId, 2, 0, 2, GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) + 2, gUnknown_203F388, 0);
+    windowId2 = sub_813EA08(6);
+    sub_813D39C(data[1], gStringVar1);
+    StringExpandPlaceholders(gStringVar4, gOtherText_StrVar1);
+    sub_813E9A0(windowId2, 2, gStringVar4, 0, 2, 1, 2, 0, 1);
+}
+
+void sub_813DD74(u8 taskId)
+{
+    sub_813DBE4(taskId);
+    gTasks[taskId].func = sub_813DDA0;
 }

@@ -999,11 +999,11 @@ extern const u8 gCreditsAllRightsReservedGfxTiles[];
 extern const u8 gCreditsAllRightsReservedGfxMap[];
 
 // berry_pouch
-extern const u8 gUnknown_8E8560C[];
+extern const u32 gUnknown_8E8560C[];
 extern const u8 gUnknown_8E859D0[];
 extern const u8 gUnknown_8E85BA4[];
 extern const u8 gUnknown_8E85BF4[];
-extern const u8 gUnknown_8E85C1C[];
+extern const u32 gUnknown_8E85C1C[];
 extern const u8 gUnknown_8E85C44[];
 
 #endif //GUARD_GRAPHICS_H

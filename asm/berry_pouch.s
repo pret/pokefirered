@@ -969,7 +969,7 @@ DisplayItemMessageInBerryPouch: @ 813EB20
 	ldrb r0, [r4, 0x5]
 	cmp r0, 0xFF
 	bne _0813EB44
-	ldr r0, _0813EB78 @ =gUnknown_8464400
+	ldr r0, _0813EB78 @ =gUnknown_84643D8 + 0x28
 	bl AddWindow
 	strb r0, [r4, 0x5]
 _0813EB44:
@@ -996,7 +996,7 @@ _0813EB44:
 	bx r0
 	.align 2, 0
 _0813EB74: .4byte gUnknown_203F38C
-_0813EB78: .4byte gUnknown_8464400
+_0813EB78: .4byte gUnknown_84643D8 + 0x28
 	thumb_func_end DisplayItemMessageInBerryPouch
 
 	thumb_func_start sub_813EB7C
@@ -1006,7 +1006,7 @@ sub_813EB7C: @ 813EB7C
 	adds r3, r1, 0
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _0813EBA4 @ =gUnknown_84643F0
+	ldr r1, _0813EBA4 @ =gUnknown_84643D8 + 0x18
 	movs r2, 0x2
 	str r2, [sp]
 	movs r2, 0x1
@@ -1021,7 +1021,7 @@ sub_813EB7C: @ 813EB7C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0813EBA4: .4byte gUnknown_84643F0
+_0813EBA4: .4byte gUnknown_84643D8 + 0x18
 	thumb_func_end sub_813EB7C
 
 	thumb_func_start sub_813EBA8
@@ -1031,7 +1031,7 @@ sub_813EBA8: @ 813EBA8
 	adds r3, r1, 0
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _0813EBD0 @ =gUnknown_84643F8
+	ldr r1, _0813EBD0 @ =gUnknown_84643D8 + 0x20
 	movs r2, 0x2
 	str r2, [sp]
 	movs r2, 0x1
@@ -1046,7 +1046,7 @@ sub_813EBA8: @ 813EBA8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0813EBD0: .4byte gUnknown_84643F8
+_0813EBD0: .4byte gUnknown_84643D8 + 0x20
 	thumb_func_end sub_813EBA8
 
 	thumb_func_start sub_813EBD4

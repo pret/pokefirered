@@ -200,8 +200,201 @@ const u8 gUnknown_84643B0[] = {
 
 const u8 gUnknown_84643B4[] = _(" ");
 
-extern const struct CompressedSpriteSheet gUnknown_84644A8;
-extern const struct CompressedSpritePalette gUnknown_84644B0;
+const struct WindowTemplate gUnknown_84643B8[] = {
+    {
+        .bg = 0,
+        .tilemapLeft = 11,
+        .tilemapTop = 1,
+        .width = 18,
+        .height = 14,
+        .paletteNum = 15,
+        .baseBlock = 0x027
+    }, {
+        .bg = 0,
+        .tilemapLeft = 5,
+        .tilemapTop = 16,
+        .width = 25,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 0x123
+    }, {
+        .bg = 2,
+        .tilemapLeft = 1,
+        .tilemapTop = 1,
+        .width = 9,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0x187
+    }, DUMMY_WIN_TEMPLATE
+};
+
+const struct WindowTemplate gUnknown_84643D8[] = {
+    {
+        .bg = 0x02,
+        .tilemapLeft = 0x18,
+        .tilemapTop = 0x0f,
+        .width = 0x05,
+        .height = 0x04,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x1d1
+    }, {
+        .bg = 0x02,
+        .tilemapLeft = 0x11,
+        .tilemapTop = 0x09,
+        .width = 0x0c,
+        .height = 0x04,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x1d1
+    }, {
+        .bg = 0x02,
+        .tilemapLeft = 0x01,
+        .tilemapTop = 0x01,
+        .width = 0x08,
+        .height = 0x03,
+        .paletteNum = 0x0c,
+        .baseBlock = 0x201
+    }, {
+        .bg = 0x02,
+        .tilemapLeft = 0x17,
+        .tilemapTop = 0x0f,
+        .width = 0x06,
+        .height = 0x04,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x219
+    }, {
+        .bg = 0x02,
+        .tilemapLeft = 0x15,
+        .tilemapTop = 0x09,
+        .width = 0x06,
+        .height = 0x04,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x219
+    }, {
+        .bg = 0x02,
+        .tilemapLeft = 0x02,
+        .tilemapTop = 0x0f,
+        .width = 0x1a,
+        .height = 0x04,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x231
+    }, {
+        .bg = 0x02,
+        .tilemapLeft = 0x06,
+        .tilemapTop = 0x0f,
+        .width = 0x0e,
+        .height = 0x04,
+        .paletteNum = 0x0c,
+        .baseBlock = 0x231
+    }, {
+        .bg = 0x02,
+        .tilemapLeft = 0x06,
+        .tilemapTop = 0x0f,
+        .width = 0x0f,
+        .height = 0x04,
+        .paletteNum = 0x0c,
+        .baseBlock = 0x269
+    }, {
+        .bg = 0x02,
+        .tilemapLeft = 0x06,
+        .tilemapTop = 0x0f,
+        .width = 0x10,
+        .height = 0x04,
+        .paletteNum = 0x0c,
+        .baseBlock = 0x2a5
+    }, {
+        .bg = 0x02,
+        .tilemapLeft = 0x06,
+        .tilemapTop = 0x0f,
+        .width = 0x17,
+        .height = 0x04,
+        .paletteNum = 0x0c,
+        .baseBlock = 0x2e5
+    }, {
+        .bg = 0x02,
+        .tilemapLeft = 0x16,
+        .tilemapTop = 0x11,
+        .width = 0x07,
+        .height = 0x02,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x199
+    }, {
+        .bg = 0x02,
+        .tilemapLeft = 0x16,
+        .tilemapTop = 0x0f,
+        .width = 0x07,
+        .height = 0x04,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x199
+    }, {
+        .bg = 0x02,
+        .tilemapLeft = 0x16,
+        .tilemapTop = 0x0d,
+        .width = 0x07,
+        .height = 0x06,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x199
+    }, {
+        .bg = 0x02,
+        .tilemapLeft = 0x16,
+        .tilemapTop = 0x0b,
+        .width = 0x07,
+        .height = 0x08,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x199
+    }
+};
+
+const u8 gUnknown_8464448[][3] = {
+    { 0, 1, 2 },
+    { 0, 2, 3 },
+    { 0, 3, 2 }
+};
+
+const struct OamData gOamData_8464454 = {
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .shape = ST_OAM_SQUARE,
+    .size = ST_OAM_SIZE_3,
+    .priority = 1
+};
+
+const union AnimCmd gSpriteAnims_846445C[] = {
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gSpriteAnimTable_8464464[] = {
+    gSpriteAnims_846445C
+};
+
+const union AffineAnimCmd gSpriteAffineAnims_8464468[] = {
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd gSpriteAffineAnims_8464478[] = {
+    AFFINEANIMCMD_FRAME(0, 0, -2, 2),
+    AFFINEANIMCMD_FRAME(0, 0,  2, 4),
+    AFFINEANIMCMD_FRAME(0, 0, -2, 4),
+    AFFINEANIMCMD_FRAME(0, 0,  2, 2),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_84644A0[] = {
+    gSpriteAffineAnims_8464468,
+    gSpriteAffineAnims_8464478
+};
+
+const struct CompressedSpriteSheet gUnknown_84644A8 = {
+    gUnknown_8E8560C, 0x800, 100
+};
+
+const struct CompressedSpritePalette gUnknown_84644B0 = {
+    gUnknown_8E85C1C, 100
+};
+
+const struct SpriteTemplate gUnknown_84644B8 = {
+    100, 100, &gOamData_8464454, gSpriteAnimTable_8464464, NULL, gSpriteAffineAnimTable_84644A0, SpriteCallbackDummy
+};
 
 void InitBerryPouch(u8 a0, void (*savedCallback)(void), u8 a2)
 {

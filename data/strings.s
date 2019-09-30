@@ -559,19 +559,19 @@ gUnknown_8416374:: @ 8416374
 	.string "The {STR_VAR_1} can't be held\nhere.$"
 
 gUnknown_841638F:: @ 841638F
-	.string "Deposit how many\n{STR_VAR_1}シsス?$"
+	.string "Deposit how many\n{STR_VAR_1}(s)?$"
 
 gUnknown_84163A7:: @ 84163A7
-	.string "Deposited {STR_VAR_2}\n{STR_VAR_1}シsス.$"
+	.string "Deposited {STR_VAR_2}\n{STR_VAR_1}(s).$"
 
 gUnknown_84163BB:: @ 84163BB
 	.string "There's no room to\nstore items.$"
 
 gUnknown_84163DB:: @ 84163DB
-	.string "Toss out how many\n{STR_VAR_1}シsス?$"
+	.string "Toss out how many\n{STR_VAR_1}(s)?$"
 
 gUnknown_84163F4:: @ 84163F4
-	.string "Threw away {STR_VAR_2}\n{STR_VAR_1}シsス.$"
+	.string "Threw away {STR_VAR_2}\n{STR_VAR_1}(s).$"
 
 gUnknown_8416409:: @ 8416409
 	.string "Throw away {STR_VAR_2} of\nthis item?$"

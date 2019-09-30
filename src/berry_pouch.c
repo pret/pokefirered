@@ -15,6 +15,8 @@
 #include "graphics.h"
 #include "berry.h"
 #include "item.h"
+#include "item_use.h"
+#include "party_menu.h"
 #include "strings.h"
 #include "string_util.h"
 #include "sound.h"
@@ -45,6 +47,15 @@ struct BerryPouchStruct_203F370
     u8 filler_06[2];
     u16 unk_08;
     u16 unk_0A;
+};
+
+enum
+{
+    BP_ACTION_USE = 0,
+    BP_ACTION_TOSS,
+    BP_ACTION_GIVE,
+    BP_ACTION_EXIT,
+    BP_ACTION_DUMMY
 };
 
 EWRAM_DATA struct BerryPouchStruct_203F36C *gUnknown_203F36C = NULL;
@@ -81,17 +92,29 @@ void sub_813DD74(u8 taskId);
 void sub_813DDA0(u8 taskId);
 void sub_813DE0C(u8 taskId);
 void sub_813DEBC(u8 taskId);
+void sub_813DF54(u8 taskId);
+void sub_813DFC8(u8 taskId);
+void sub_813E010(u8 taskId);
+void sub_813E0DC(u8 taskId);
+void sub_813E164(u8 taskId);
 void sub_813E200(u8 taskId);
+void sub_813E274(u8 taskId);
+void sub_813E290(u8 taskId);
 void sub_813E320(u8 taskId);
 void sub_813E37C(u8 taskId);
 void sub_813E3FC(u8 taskId);
 void sub_813E428(u8 taskId);
-void sub_813EC28(void);
+void sub_813E568(u8 taskId);
+void sub_813E768(u8 taskId);
 void sub_813E910(void);
 void sub_813E9A0(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorIdx);
 u8 sub_813EA08(u8);
+void sub_813EA98(u8);
+void sub_813EACC(u8);
 u8 sub_813EB10(u8);
+void sub_813EB7C(u8 taskId, const struct YesNoFuncTable * ptrs);
 void sub_813EC08(void);
+void sub_813EC28(void);
 
 static const struct BgTemplate gUnknown_846434C[] = {
     {
@@ -129,12 +152,54 @@ const TaskFunc gUnknown_8464358[] = {
     sub_813DD74
 };
 
-extern const struct MenuAction gUnknown_846437C[];
-extern const u8 gUnknown_84643A4[];
-extern const u8 gUnknown_84643A8[];
-extern const u8 gUnknown_84643AC[];
-extern const u8 gUnknown_84643B0[];
-extern const u8 gUnknown_84643B4[];
+const struct YesNoFuncTable gUnknown_846436C = {
+    .yesFunc = sub_813E0DC,
+    .noFunc  = sub_813DFC8
+};
+
+const struct YesNoFuncTable gUnknown_8464374 = {
+    .yesFunc = sub_813E768,
+    .noFunc  = sub_813E568
+};
+
+const struct MenuAction gUnknown_846437C[] = {
+    {gOtherText_Use,  sub_813DE0C},
+    {gOtherText_Toss, sub_813DEBC},
+    {gOtherText_Give, sub_813E200},
+    {gOtherText_Exit, sub_813E320},
+    {gString_Dummy,   NULL}
+};
+
+const u8 gUnknown_84643A4[] = {
+    BP_ACTION_USE,
+    BP_ACTION_GIVE,
+    BP_ACTION_TOSS,
+    BP_ACTION_EXIT
+};
+
+const u8 gUnknown_84643A8[] = {
+    BP_ACTION_GIVE,
+    BP_ACTION_EXIT,
+    BP_ACTION_DUMMY,
+    BP_ACTION_DUMMY
+};
+
+const u8 gUnknown_84643AC[] = {
+    BP_ACTION_EXIT,
+    BP_ACTION_DUMMY,
+    BP_ACTION_DUMMY,
+    BP_ACTION_DUMMY
+};
+
+const u8 gUnknown_84643B0[] = {
+    BP_ACTION_USE,
+    BP_ACTION_TOSS,
+    BP_ACTION_EXIT,
+    BP_ACTION_DUMMY
+};
+
+const u8 gUnknown_84643B4[] = _(" ");
+
 extern const struct CompressedSpriteSheet gUnknown_84644A8;
 extern const struct CompressedSpritePalette gUnknown_84644B0;
 
@@ -764,4 +829,194 @@ void sub_813DD74(u8 taskId)
 {
     sub_813DBE4(taskId);
     gTasks[taskId].func = sub_813DDA0;
+}
+
+void sub_813DDA0(u8 taskId)
+{
+    s8 input;
+    if (sub_80BF72C() != TRUE)
+    {
+        input = Menu_ProcessInputNoWrapAround();
+        switch (input)
+        {
+        case -2:
+            break;
+        case -1:
+            PlaySE(SE_SELECT);
+            gUnknown_846437C[BP_ACTION_EXIT].func.void_u8(taskId);
+            break;
+        default:
+            PlaySE(SE_SELECT);
+            gUnknown_846437C[gUnknown_203F384[input]].func.void_u8(taskId);
+            break;
+        }
+    }
+}
+
+void sub_813DE0C(u8 taskId)
+{
+    sub_813EA98(gUnknown_203F388 + 9);
+    sub_813EA98(6);
+    PutWindowTilemap(0);
+    PutWindowTilemap(1);
+    ScheduleBgCopyTilemapToVram(0);
+    ScheduleBgCopyTilemapToVram(2);
+    if (gUnknown_203F370.unk_04 == 4)
+    {
+        if (ItemId_GetBattleFunc(gSpecialVar_ItemId) == NULL)
+            FieldUseFunc_OakStopsYou(taskId);
+        else
+            ItemId_GetBattleFunc(gSpecialVar_ItemId)(taskId);
+    }
+    else if (CalculatePlayerPartyCount() == 0 && ItemId_GetType(gSpecialVar_ItemId) == 1)
+        sub_813E274(taskId);
+    else
+        ItemId_GetFieldFunc(gSpecialVar_ItemId)(taskId);
+}
+
+void sub_813DEBC(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    ClearWindowTilemap(sub_813EB10(gUnknown_203F388 + 9));
+    ClearWindowTilemap(sub_813EB10(6));
+    sub_813EA98(gUnknown_203F388 + 9);
+    sub_813EA98(6);
+    PutWindowTilemap(0);
+    data[8] = 1;
+    if (data[2] == 1)
+        sub_813DF54(taskId);
+    else
+    {
+        sub_813D940(taskId, gUnknown_84163DB);
+        sub_813D614();
+        gTasks[taskId].func = sub_813E010;
+    }
+}
+
+void sub_813DF54(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    ConvertIntToDecimalStringN(gStringVar2, data[8], STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringExpandPlaceholders(gStringVar4, gUnknown_8416409);
+    sub_813E9A0(sub_813EA08(7), 2, gStringVar4, 0, 2, 1, 2, 0, 1);
+    sub_813EB7C(taskId, &gUnknown_846436C);
+}
+
+void sub_813DFC8(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    sub_813EA98(7);
+    PutWindowTilemap(1);
+    PutWindowTilemap(0);
+    ScheduleBgCopyTilemapToVram(0);
+    ScheduleBgCopyTilemapToVram(2);
+    sub_813D4B0(data[0], 1);
+    sub_813DBB4(taskId);
+}
+
+void sub_813E010(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    if (AdjustQuantityAccordingToDPadInput(&data[8], data[2]) == TRUE)
+        sub_813D9F8(0, data[8], 3);
+    else if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        ClearWindowTilemap(sub_813EB10(8));
+        sub_813EA98(8);
+        sub_813EA98(0);
+        ScheduleBgCopyTilemapToVram(0);
+        ScheduleBgCopyTilemapToVram(2);
+        sub_813D684();
+        sub_813DF54(taskId);
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        sub_813EA98(8);
+        sub_813EA98(0);
+        PutWindowTilemap(0);
+        PutWindowTilemap(1);
+        ScheduleBgCopyTilemapToVram(0);
+        ScheduleBgCopyTilemapToVram(2);
+        sub_813D4B0(data[0], 1);
+        sub_813D684();
+        sub_813DBB4(taskId);
+    }
+}
+
+void sub_813E0DC(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    sub_813EA98(7);
+    sub_813D39C(data[1], gStringVar1);
+    ConvertIntToDecimalStringN(gStringVar2, data[8], STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringExpandPlaceholders(gStringVar4, gUnknown_84163F4);
+    sub_813E9A0(sub_813EA08(9), 2, gStringVar4, 0, 2, 1, 2, 0, 1);
+    gTasks[taskId].func = sub_813E164;
+}
+
+void sub_813E164(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        RemoveBagItem(gSpecialVar_ItemId, data[8]);
+        sub_813EA98(9);
+        DestroyListMenuTask(data[0], &gUnknown_203F370.unk_0A, &gUnknown_203F370.unk_08);
+        sub_813D8AC();
+        sub_813D6F4();
+        sub_813D204();
+        data[0] = ListMenuInit(&gMultiuseListMenuTemplate, gUnknown_203F370.unk_0A, gUnknown_203F370.unk_08);
+        PutWindowTilemap(1);
+        ScheduleBgCopyTilemapToVram(0);
+        sub_813D4B0(data[0], 1);
+        sub_813DBB4(taskId);
+    }
+}
+
+void sub_813E200(u8 taskId)
+{
+    sub_813EA98(gUnknown_203F388 + 9);
+    sub_813EA98(6);
+    PutWindowTilemap(0);
+    PutWindowTilemap(1);
+    ScheduleBgCopyTilemapToVram(0);
+    ScheduleBgCopyTilemapToVram(2);
+    if (CalculatePlayerPartyCount() == 0)
+        sub_813E274(taskId);
+    else
+    {
+        gUnknown_203F36C->unk_000 = sub_8126EDC;
+        gTasks[taskId].func = BerryPouch_StartFadeToExitCallback;
+    }
+}
+
+void sub_813E274(u8 taskId)
+{
+    DisplayItemMessageInBerryPouch(taskId, 2, gText_ThereIsNoPokemon, sub_813E290);
+}
+
+void sub_813E290(u8 taskId)
+{
+    if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        sub_813E2B8(taskId);
+    }
+}
+
+void sub_813E2B8(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    sub_813EACC(5);
+    DestroyListMenuTask(data[0], &gUnknown_203F370.unk_0A, &gUnknown_203F370.unk_08);
+    sub_813D8AC();
+    sub_813D6F4();
+    sub_813D204();
+    data[0] = ListMenuInit(&gMultiuseListMenuTemplate, gUnknown_203F370.unk_0A, gUnknown_203F370.unk_08);
+    ScheduleBgCopyTilemapToVram(0);
+    sub_813D4B0(data[0], 1);
+    sub_813DBB4(taskId);
 }

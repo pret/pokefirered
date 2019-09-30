@@ -94,6 +94,7 @@ extern const u8 gText_Pokemon[];
 extern const u8 gText_PkmnFainted3[];
 
 extern const u8 gOtherText_Use[];
+extern const u8 gOtherText_Toss[];
 extern const u8 gOtherText_Give[];
 extern const u8 gOtherText_Exit[];
 extern const u8 gText_ThreeHyphens[];
@@ -316,6 +317,9 @@ extern const u8 gCreditsString_Graphic_Designer[];
 extern const u8 gCreditsString_Akira_Kinashi[];
 
 // berry_pouch
+extern const u8 gUnknown_84163DB[];
+extern const u8 gUnknown_84163F4[];
+extern const u8 gUnknown_8416409[];
 extern const u8 gUnknown_841670A[];
 extern const u8 gUnknown_8416716[];
 

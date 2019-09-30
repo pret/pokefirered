@@ -17,6 +17,7 @@
 #include "item.h"
 #include "item_use.h"
 #include "party_menu.h"
+#include "text_window.h"
 #include "strings.h"
 #include "string_util.h"
 #include "sound.h"
@@ -118,15 +119,16 @@ void sub_813E7F0(u8 taskId);
 void sub_813E8D4(u8 taskId);
 void sub_813E910(void);
 void sub_813E9A0(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorIdx);
-u8 sub_813EA08(u8);
-void sub_813EA98(u8);
-void sub_813EACC(u8);
-u8 sub_813EB10(u8);
+u8 sub_813EA08(u8 winIdx);
+void sub_813EA98(u8 winIdx);
+void sub_813EACC(u8 winIdx);
+u8 sub_813EB10(u8 winIdx);
 void sub_813EB7C(u8 taskId, const struct YesNoFuncTable * ptrs);
 void sub_813EBA8(u8 taskId, const struct YesNoFuncTable * ptrs);
 void sub_813EBD4(void);
 void sub_813EC08(void);
 void sub_813EC28(void);
+void sub_813EC64(struct Sprite * sprite);
 
 static const struct BgTemplate gUnknown_846434C[] = {
     {
@@ -1402,5 +1404,126 @@ void sub_813E8D4(u8 taskId)
         sub_813EA98(2);
         PutWindowTilemap(2);
         sub_813E2B8(taskId);
+    }
+}
+
+void sub_813E910(void)
+{
+    u8 i;
+    InitWindows(gUnknown_84643B8);
+    DeactivateAllTextPrinters();
+    TextWindow_SetUserSelectedFrame(0, 0x001, 0xE0);
+    TextWindow_LoadResourcesStdFrame0(0, 0x013, 0xD0);
+    TextWindow_SetStdFrame0_WithPal(0, 0x00A, 0xC0);
+    LoadPalette(gTMCaseMainWindowPalette, 0xF0, 0x20);
+    for (i = 0; i < 3; i++)
+        FillWindowPixelBuffer(i, PIXEL_FILL(0));
+    PutWindowTilemap(0);
+    PutWindowTilemap(1);
+    PutWindowTilemap(2);
+    ScheduleBgCopyTilemapToVram(0);
+    ScheduleBgCopyTilemapToVram(2);
+    for (i = 0; i < 14; i++)
+        gUnknown_203F38C[i] = 0xFF;
+}
+
+void sub_813E9A0(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorIdx)
+{
+    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, gUnknown_8464448[colorIdx], speed, str);
+}
+
+u8 sub_813EA08(u8 winIdx)
+{
+    u8 retval = gUnknown_203F38C[winIdx];
+    if (retval == 0xFF)
+    {
+        gUnknown_203F38C[winIdx] = AddWindow(&gUnknown_84643D8[winIdx]);
+        if (winIdx == 2 || winIdx == 6 || winIdx == 7 || winIdx == 8 || winIdx == 9)
+            DrawStdFrameWithCustomTileAndPalette(gUnknown_203F38C[winIdx], FALSE, 0x00A, 0xC);
+        else
+            DrawStdFrameWithCustomTileAndPalette(gUnknown_203F38C[winIdx], FALSE, 0x001, 0xE);
+        ScheduleBgCopyTilemapToVram(2);
+        retval = gUnknown_203F38C[winIdx];
+    }
+    return retval;
+}
+
+void sub_813EA78(u8 winIdx)
+{
+    DrawStdFrameWithCustomTileAndPalette(gUnknown_203F38C[winIdx], FALSE, 0x001, 0xE);
+}
+
+void sub_813EA98(u8 winIdx)
+{
+    ClearStdWindowAndFrameToTransparent(gUnknown_203F38C[winIdx], FALSE);
+    ClearWindowTilemap(gUnknown_203F38C[winIdx]);
+    RemoveWindow(gUnknown_203F38C[winIdx]);
+    ScheduleBgCopyTilemapToVram(2);
+    gUnknown_203F38C[winIdx] = 0xFF;
+}
+
+void sub_813EACC(u8 winIdx)
+{
+    if (gUnknown_203F38C[winIdx] != 0xFF)
+    {
+        ClearDialogWindowAndFrameToTransparent(gUnknown_203F38C[winIdx], FALSE);
+        ClearWindowTilemap(gUnknown_203F38C[winIdx]);
+        RemoveWindow(gUnknown_203F38C[winIdx]);
+        PutWindowTilemap(1);
+        ScheduleBgCopyTilemapToVram(0);
+        ScheduleBgCopyTilemapToVram(2);
+        gUnknown_203F38C[winIdx] = 0xFF;
+    }
+}
+
+u8 sub_813EB10(u8 winIdx)
+{
+    return gUnknown_203F38C[winIdx];
+}
+
+void DisplayItemMessageInBerryPouch(u8 taskId, u8 fontId, const u8 * str, TaskFunc followUpFunc)
+{
+    if (gUnknown_203F38C[5] == 0xFF)
+        gUnknown_203F38C[5] = AddWindow(&gUnknown_84643D8[5]);
+    DisplayMessageAndContinueTask(taskId, gUnknown_203F38C[5], 0x013, 0xD, fontId, GetTextSpeedSetting(), str, followUpFunc);
+    ScheduleBgCopyTilemapToVram(2);
+}
+
+void sub_813EB7C(u8 taskId, const struct YesNoFuncTable * ptrs)
+{
+    CreateYesNoMenuWithCallbacks(taskId, &gUnknown_84643D8[3], 2, 0, 2, 0x001, 0xE, ptrs);
+}
+
+void sub_813EBA8(u8 taskId, const struct YesNoFuncTable * ptrs)
+{
+    CreateYesNoMenuWithCallbacks(taskId, &gUnknown_84643D8[4], 2, 0, 2, 0x001, 0xE, ptrs);
+}
+
+void sub_813EBD4(void)
+{
+    PrintMoneyAmountInMoneyBoxWithBorder(sub_813EA08(2), 0x00A, 0xC, GetMoney(&gSaveBlock1Ptr->money));
+}
+
+void sub_813EC08(void)
+{
+    gUnknown_203F39C = CreateSprite(&gUnknown_84644B8, 40, 76, 0);
+}
+
+void sub_813EC28(void)
+{
+    struct Sprite * sprite = &gSprites[gUnknown_203F39C];
+    if (sprite->affineAnimEnded)
+    {
+        StartSpriteAffineAnim(sprite, 1);
+        sprite->callback = sub_813EC64;
+    }
+}
+
+void sub_813EC64(struct Sprite * sprite)
+{
+    if (sprite->affineAnimEnded)
+    {
+        StartSpriteAffineAnim(sprite, 0);
+        sprite->callback = SpriteCallbackDummy;
     }
 }

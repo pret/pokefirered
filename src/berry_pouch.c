@@ -21,8 +21,11 @@
 #include "string_util.h"
 #include "sound.h"
 #include "link.h"
+#include "money.h"
+#include "shop.h"
 #include "menu.h"
 #include "menu_indicators.h"
+#include "pokemon_storage_system.h"
 #include "constants/items.h"
 #include "constants/songs.h"
 
@@ -104,8 +107,15 @@ void sub_813E320(u8 taskId);
 void sub_813E37C(u8 taskId);
 void sub_813E3FC(u8 taskId);
 void sub_813E428(u8 taskId);
+void sub_813E4E4(u8 taskId);
+void sub_813E554(u8 taskId);
 void sub_813E568(u8 taskId);
+void sub_813E5B8(u8 taskId);
+void sub_813E668(s32 price);
+void sub_813E690(u8 taskId);
 void sub_813E768(u8 taskId);
+void sub_813E7F0(u8 taskId);
+void sub_813E8D4(u8 taskId);
 void sub_813E910(void);
 void sub_813E9A0(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorIdx);
 u8 sub_813EA08(u8);
@@ -113,6 +123,8 @@ void sub_813EA98(u8);
 void sub_813EACC(u8);
 u8 sub_813EB10(u8);
 void sub_813EB7C(u8 taskId, const struct YesNoFuncTable * ptrs);
+void sub_813EBA8(u8 taskId, const struct YesNoFuncTable * ptrs);
+void sub_813EBD4(void);
 void sub_813EC08(void);
 void sub_813EC28(void);
 
@@ -1212,4 +1224,183 @@ void sub_813E2B8(u8 taskId)
     ScheduleBgCopyTilemapToVram(0);
     sub_813D4B0(data[0], 1);
     sub_813DBB4(taskId);
+}
+
+void sub_813E320(u8 taskId)
+{
+    sub_813EA98(gUnknown_203F388 + 9);
+    sub_813EA98(6);
+    PutWindowTilemap(0);
+    PutWindowTilemap(1);
+    ScheduleBgCopyTilemapToVram(0);
+    ScheduleBgCopyTilemapToVram(2);
+    sub_813D4B0(gTasks[taskId].data[0], 1);
+    sub_813DBB4(taskId);
+}
+
+void sub_813E37C(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    u16 itemId = BagGetItemIdByPocketPosition(POCKET_BERRY_POUCH, data[1]);
+    if (!sub_80BF6A8(itemId))
+    {
+        CopyItemName(itemId, gStringVar1);
+        StringExpandPlaceholders(gStringVar4, gUnknown_8416374);
+        DisplayItemMessageInBerryPouch(taskId, 2, gStringVar4, sub_813E290);
+    }
+    else
+    {
+        gUnknown_203F36C->unk_000 = c2_8123744;
+        gTasks[taskId].func = BerryPouch_StartFadeToExitCallback;
+    }
+}
+
+void sub_813E3FC(u8 taskId)
+{
+    gUnknown_203F36C->unk_000 = sub_808CE60;
+    gTasks[taskId].func = BerryPouch_StartFadeToExitCallback;
+}
+
+void sub_813E428(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    if (itemid_get_market_price(gSpecialVar_ItemId) == 0)
+    {
+        CopyItemName(gSpecialVar_ItemId, gStringVar1);
+        StringExpandPlaceholders(gStringVar4, gText_OhNoICantBuyThat);
+        DisplayItemMessageInBerryPouch(taskId, sub_80BF8E4(), gStringVar4, sub_813E2B8);
+    }
+    else
+    {
+        data[8] = 1;
+        if (data[2] == 1)
+        {
+            sub_813EBD4();
+            sub_813E4E4(taskId);
+        }
+        else
+        {
+            if (data[2] > 99)
+                data[2] = 99;
+            CopyItemName(gSpecialVar_ItemId, gStringVar1);
+            StringExpandPlaceholders(gStringVar4, gText_HowManyWouldYouLikeToSell);
+            DisplayItemMessageInBerryPouch(taskId, sub_80BF8E4(), gStringVar4, sub_813E5B8);
+        }
+    }
+}
+
+void sub_813E4E4(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    ConvertIntToDecimalStringN(gStringVar3, itemid_get_market_price(BagGetItemIdByPocketPosition(POCKET_BERRY_POUCH, data[1])) / 2 * data[8], STR_CONV_MODE_LEFT_ALIGN, 6);
+    StringExpandPlaceholders(gStringVar4, gText_ICanPayThisMuch_WouldThatBeOkay);
+    DisplayItemMessageInBerryPouch(taskId, sub_80BF8E4(), gStringVar4, sub_813E554);
+}
+
+void sub_813E554(u8 taskId)
+{
+    sub_813EBA8(taskId, &gUnknown_8464374);
+}
+
+void sub_813E568(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    sub_813EA98(2);
+    sub_813EACC(5);
+    PutWindowTilemap(2);
+    PutWindowTilemap(0);
+    PutWindowTilemap(1);
+    ScheduleBgCopyTilemapToVram(0);
+    sub_813D4B0(data[0], 1);
+    sub_813DBB4(taskId);
+}
+
+void sub_813E5B8(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    u8 windowId = sub_813EA08(1);
+    ConvertIntToDecimalStringN(gStringVar1, 1, STR_CONV_MODE_LEADING_ZEROS, 2);
+    StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+    sub_813E9A0(windowId, 0, gStringVar4, 4, 10, 1, 0, 0xFF, 1);
+    sub_813E668(itemid_get_market_price(BagGetItemIdByPocketPosition(POCKET_BERRY_POUCH, data[1])) / 2 * data[8]);
+    sub_813EBD4();
+    sub_813D64C();
+    gTasks[taskId].func = sub_813E690;
+}
+
+void sub_813E668(s32 price)
+{
+    PrintMoneyAmount(sub_813EB10(1), 56, 10, price, 0);
+}
+
+void sub_813E690(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    if (AdjustQuantityAccordingToDPadInput(&data[8], data[2]) == TRUE)
+    {
+        sub_813D9F8(1, data[8], 2);
+        sub_813E668(itemid_get_market_price(BagGetItemIdByPocketPosition(POCKET_BERRY_POUCH, data[1])) / 2 * data[8]);
+    }
+    else if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        sub_813EA98(1);
+        PutWindowTilemap(0);
+        ScheduleBgCopyTilemapToVram(0);
+        sub_813D684();
+        sub_813E4E4(taskId);
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        sub_813EA98(1);
+        sub_813EA98(2);
+        sub_813EACC(5);
+        PutWindowTilemap(2);
+        PutWindowTilemap(0);
+        PutWindowTilemap(1);
+        ScheduleBgCopyTilemapToVram(0);
+        sub_813D684();
+        sub_813D4B0(data[0], 1);
+        sub_813DBB4(taskId);
+    }
+}
+
+void sub_813E768(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    PutWindowTilemap(0);
+    ScheduleBgCopyTilemapToVram(0);
+    CopyItemName(gSpecialVar_ItemId, gStringVar1);
+    ConvertIntToDecimalStringN(gStringVar3, itemid_get_market_price(BagGetItemIdByPocketPosition(POCKET_BERRY_POUCH, data[1])) / 2 * data[8], STR_CONV_MODE_LEFT_ALIGN, 6);
+    StringExpandPlaceholders(gStringVar4, gText_TurnedOverItemsWorthYen);
+    DisplayItemMessageInBerryPouch(taskId, 2, gStringVar4, sub_813E7F0);
+}
+
+void sub_813E7F0(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    PlaySE(SE_CASHIER);
+    RemoveBagItem(gSpecialVar_ItemId, data[8]);
+    AddMoney(&gSaveBlock1Ptr->money, itemid_get_market_price(gSpecialVar_ItemId) / 2 * data[8]);
+    sub_809C09C(gSpecialVar_ItemId, data[8], 2);
+    DestroyListMenuTask(data[0], &gUnknown_203F370.unk_0A, &gUnknown_203F370.unk_08);
+    sub_813D8AC();
+    sub_813D6F4();
+    sub_813D204();
+    data[0] = ListMenuInit(&gMultiuseListMenuTemplate, gUnknown_203F370.unk_0A, gUnknown_203F370.unk_08);
+    sub_813D4B0(data[0], 2);
+    PrintMoneyAmountInMoneyBox(sub_813EB10(2), GetMoney(&gSaveBlock1Ptr->money), 0);
+    gTasks[taskId].func = sub_813E8D4;
+}
+
+void sub_813E8D4(u8 taskId)
+{
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        sub_813EA98(2);
+        PutWindowTilemap(2);
+        sub_813E2B8(taskId);
+    }
 }

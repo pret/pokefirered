@@ -607,20 +607,20 @@ static bool8 BerryPouchLoadGfx(void)
     {
     case 0:
         ResetTempTileDataBuffers();
-        DecompressAndCopyTileDataToVram(1, gUnknown_8E859D0, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, gBerryPouchBgGfx, 0, 0, 0);
         sResources->data[0]++;
         break;
     case 1:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            LZDecompressWram(gUnknown_8E85C44, sResources->bg1TilemapBuffer);
+            LZDecompressWram(gBerryPouchBg1Tilemap, sResources->bg1TilemapBuffer);
             sResources->data[0]++;
         }
         break;
     case 2:
-        LoadCompressedPalette(gUnknown_8E85BA4, 0, 0x60);
+        LoadCompressedPalette(gBerryPouchBgPals, 0, 0x60);
         if (gSaveBlock2Ptr->playerGender != MALE)
-            LoadCompressedPalette(gUnknown_8E85BF4, 0, 0x20);
+            LoadCompressedPalette(gBerryPouchBgPal0FemaleOverride, 0, 0x20);
         sResources->data[0]++;
         break;
     case 3:

@@ -2412,47 +2412,47 @@ gFile_graphics_battle_anims_sprites_243_palette:: @ 8D2D8CC
 	.incbin "graphics/battle_anims/sprites/243.gbapal.lz"
 
 	.align 2
-gFile_graphics_battle_anims_masks_stat_sheet:: @ 8D2D8F4
+gBattleStatMask_Gfx:: @ 8D2D8F4
 	.incbin "graphics/battle_anims/masks/stat.4bpp.lz"
 
 	.align 2
-gFile_graphics_battle_anims_masks_stat_tilemap_1_tilemap:: @ 8D2DB04
+gBattleStatMask1_Tilemap:: @ 8D2DB04
 	.incbin "graphics/battle_anims/masks/stat_tilemap_1.bin.lz"
 
 	.align 2
-gFile_graphics_battle_anims_masks_stat_tilemap_2_tilemap:: @ 8D2DC20
+gBattleStatMask2_Tilemap:: @ 8D2DC20
 	.incbin "graphics/battle_anims/masks/stat_tilemap_2.bin.lz"
 
 	.align 2
-gFile_graphics_battle_anims_masks_stat1_palette:: @ 8D2DD3C
+gBattleStatMask1_Pal:: @ 8D2DD3C
 	.incbin "graphics/battle_anims/masks/stat1.gbapal.lz"
 
 	.align 2
-gFile_graphics_battle_anims_masks_stat2_palette:: @ 8D2DD5C
+gBattleStatMask2_Pal:: @ 8D2DD5C
 	.incbin "graphics/battle_anims/masks/stat2.gbapal.lz"
 
 	.align 2
-gFile_graphics_battle_anims_masks_stat3_palette:: @ 8D2DD7C
+gBattleStatMask3_Pal:: @ 8D2DD7C
 	.incbin "graphics/battle_anims/masks/stat3.gbapal.lz"
 
 	.align 2
-gFile_graphics_battle_anims_masks_stat4_palette:: @ 8D2DD9C
+gBattleStatMask4_Pal:: @ 8D2DD9C
 	.incbin "graphics/battle_anims/masks/stat4.gbapal.lz"
 
 	.align 2
-gFile_graphics_battle_anims_masks_stat5_palette:: @ 8D2DDBC
+gBattleStatMask5_Pal:: @ 8D2DDBC
 	.incbin "graphics/battle_anims/masks/stat5.gbapal.lz"
 
 	.align 2
-gFile_graphics_battle_anims_masks_stat6_palette:: @ 8D2DDDC
+gBattleStatMask6_Pal:: @ 8D2DDDC
 	.incbin "graphics/battle_anims/masks/stat6.gbapal.lz"
 
 	.align 2
-gFile_graphics_battle_anims_masks_stat7_palette:: @ 8D2DDFC
+gBattleStatMask7_Pal:: @ 8D2DDFC
 	.incbin "graphics/battle_anims/masks/stat7.gbapal.lz"
 
 	.align 2
-gFile_graphics_battle_anims_masks_stat8_palette:: @ 8D2DE1C
+gBattleStatMask8_Pal:: @ 8D2DE1C
 	.incbin "graphics/battle_anims/masks/stat8.gbapal.lz"
 
 	.align 2

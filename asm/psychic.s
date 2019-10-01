@@ -696,7 +696,7 @@ sub_80B3418: @ 80B3418
 	ldr r0, _080B3448 @ =gTasks
 	adds r4, r0
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -750,7 +750,7 @@ sub_80B3480: @ 80B3480
 	ldr r0, _080B34CC @ =gTasks
 	adds r4, r1, r0
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
@@ -1804,7 +1804,7 @@ _080B3CAC: .4byte gTasks
 _080B3CB0:
 	ldr r1, _080B3CD4 @ =gBattleAnimArgs
 	ldrb r0, [r1]
-	bl duplicate_obj_of_side_rel2move_in_transparent_mode
+	bl CloneBattlerSpriteWithBlend
 	lsls r0, 16
 	lsrs r1, r0, 16
 	mov r9, r1
@@ -1871,7 +1871,7 @@ _080B3CD8:
 	bl CalcCenterToCornerVec
 	ldr r1, _080B3D70 @ =gBattleAnimArgs
 	ldrb r0, [r1]
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r7, 0x22]

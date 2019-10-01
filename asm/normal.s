@@ -121,7 +121,7 @@ sub_80B99D4: @ 80B99D4
 	ldr r4, _080B9A0C @ =gBattleAnimArgs
 	movs r1, 0
 	ldrsh r0, [r4, r1]
-	bl sub_80B9A14
+	bl UnpackSelectedBattleAnimPalettes
 	movs r1, 0x2
 	ldrsb r1, [r4, r1]
 	ldrb r2, [r4, 0x4]
@@ -146,8 +146,8 @@ _080B9A0C: .4byte gBattleAnimArgs
 _080B9A10: .4byte sub_80B9A5C
 	thumb_func_end sub_80B99D4
 
-	thumb_func_start sub_80B9A14
-sub_80B9A14: @ 80B9A14
+	thumb_func_start UnpackSelectedBattleAnimPalettes
+UnpackSelectedBattleAnimPalettes: @ 80B9A14
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -183,7 +183,7 @@ sub_80B9A14: @ 80B9A14
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80B9A14
+	thumb_func_end UnpackSelectedBattleAnimPalettes
 
 	thumb_func_start sub_80B9A5C
 sub_80B9A5C: @ 80B9A5C
@@ -226,7 +226,7 @@ sub_80B9A7C: @ 80B9A7C
 	strh r0, [r5, 0x3C]
 	movs r1, 0x3C
 	ldrsh r0, [r5, r1]
-	bl sub_80B9A14
+	bl UnpackSelectedBattleAnimPalettes
 	ldrb r1, [r4, 0x8]
 	ldrh r2, [r4, 0x6]
 	bl BlendPalettes
@@ -278,7 +278,7 @@ _080B9B04: .4byte sub_80B9B5C
 _080B9B08:
 	movs r2, 0x3C
 	ldrsh r0, [r4, r2]
-	bl sub_80B9A14
+	bl UnpackSelectedBattleAnimPalettes
 	adds r3, r0, 0
 	ldrh r1, [r4, 0x30]
 	movs r0, 0x80
@@ -331,7 +331,7 @@ sub_80B9B5C: @ 80B9B5C
 	bne _080B9B82
 	movs r1, 0x3C
 	ldrsh r0, [r4, r1]
-	bl sub_80B9A14
+	bl UnpackSelectedBattleAnimPalettes
 	movs r1, 0
 	movs r2, 0
 	bl BlendPalettes
@@ -444,7 +444,7 @@ sub_80B9C2C: @ 80B9C2C
 	adds r4, r1
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
-	bl sub_80B9A14
+	bl UnpackSelectedBattleAnimPalettes
 	movs r1, 0xA
 	ldrsb r1, [r4, r1]
 	ldrh r2, [r4, 0x12]
@@ -1827,7 +1827,7 @@ sub_80BA6C8: @ 80BA6C8
 	adds r4, r0, 0
 	ldr r5, _080BA728 @ =gBattleAnimArgs
 	ldrb r0, [r5]
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x2E]

@@ -1142,7 +1142,7 @@ sub_80AE470: @ 80AE470
 	ands r0, r5
 	orrs r0, r1
 	strh r0, [r6, 0x4]
-	ldr r1, _080AE4EC @ =gUnknown_2037EE2
+	ldr r1, _080AE4EC @ =gAnimVisualTaskCount
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
@@ -1160,7 +1160,7 @@ _080AE4DC: .4byte gUnknown_83E60B8
 _080AE4E0: .4byte gSprites
 _080AE4E4: .4byte 0x000003ff
 _080AE4E8: .4byte 0xfffffc00
-_080AE4EC: .4byte gUnknown_2037EE2
+_080AE4EC: .4byte gAnimVisualTaskCount
 _080AE4F0: .4byte sub_80AE4F4
 	thumb_func_end sub_80AE470
 
@@ -1559,7 +1559,7 @@ sub_80AE7DC: @ 80AE7DC
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x3A]
@@ -1672,7 +1672,7 @@ _080AE8D2:
 	b _080AEA04
 _080AE8D4:
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r6, 0

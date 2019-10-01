@@ -1505,7 +1505,7 @@ sub_80A2E64: @ 80A2E64
 	ands r0, r1
 	strb r0, [r2]
 	movs r0, 0x1
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	movs r0, 0x80
 	lsls r0, 1
 	strh r0, [r4, 0x2E]
@@ -1526,7 +1526,7 @@ sub_80A2EA0: @ 80A2EA0
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x1
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	movs r1, 0x32
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
@@ -1587,7 +1587,7 @@ sub_80A2F0C: @ 80A2F0C
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0x1
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldr r1, _080A2F38 @ =gSprites
@@ -1641,7 +1641,7 @@ sub_80A2F74: @ 80A2F74
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x1
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	adds r6, r0, 0
@@ -1725,7 +1725,7 @@ sub_80A3004: @ 80A3004
 	cmp r5, 0
 	bne _080A3074
 	movs r0, 0x1
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -3924,7 +3924,7 @@ _080A4100:
 	adds r0, r7
 	strh r0, [r4, 0x22]
 	movs r0, 0x1
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 _080A411A:
 	adds r0, r6, 0
 	bl sub_8076884
@@ -8506,7 +8506,7 @@ sub_80A63B4: @ 80A63B4
 	ldr r1, _080A6444 @ =gTasks
 	adds r6, r0, r1
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x8]
@@ -8598,7 +8598,7 @@ _080A6488:
 	cmp r5, 0x1
 	bhi _080A649A
 	movs r0, 0
-	bl duplicate_obj_of_side_rel2move_in_transparent_mode
+	bl CloneBattlerSpriteWithBlend
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0

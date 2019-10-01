@@ -170,7 +170,8 @@ SECTIONS {
         asm/dark.o(.text);
         asm/ground.o(.text);
         asm/normal.o(.text);
-        asm/battle_anim_utility_funcs.o(.text);
+        src/battle_anim_utility_funcs.o(.text);
+        asm/battle_intro.o(.text);
         asm/bike.o(.text);
         asm/easy_chat.o(.text);
         asm/mon_markings.o(.text);
@@ -420,6 +421,8 @@ SECTIONS {
         src/battle_anim_mon_movement.o(.rodata);
         src/item.o(.rodata);
         data/data_835B488.o(.rodata.83DF09C);
+        src/battle_anim_utility_funcs.o(.rodata);
+        data/data_835B488.o(.rodata.83E7CD4);
         src/heal_location.o(.rodata);
         data/data_835B488.o(.rodata.83EEC98);
         src/battle_ai_script_commands.o(.rodata);

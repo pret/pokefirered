@@ -408,7 +408,7 @@ sub_80B1BB0: @ 80B1BB0
 	ldr r0, _080B1BF0 @ =sub_80B1BF8
 	str r0, [r4, 0x1C]
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	ldr r2, _080B1BF4 @ =gSprites
 	lsls r0, 24
 	lsrs r0, 24
@@ -571,7 +571,7 @@ _080B1CE8:
 	ble _080B1D30
 _080B1D0A:
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	ldr r2, _080B1D38 @ =gSprites
 	lsls r0, 24
 	lsrs r0, 24
@@ -624,7 +624,7 @@ sub_80B1D3C: @ 80B1D3C
 _080B1D6E:
 	adds r0, r4, 0
 	bl DestroySprite
-	ldr r1, _080B1D84 @ =gUnknown_2037EE2
+	ldr r1, _080B1D84 @ =gAnimVisualTaskCount
 	ldrb r0, [r1]
 	subs r0, 0x1
 	strb r0, [r1]
@@ -633,7 +633,7 @@ _080B1D7C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080B1D84: .4byte gUnknown_2037EE2
+_080B1D84: .4byte gAnimVisualTaskCount
 	thumb_func_end sub_80B1D3C
 
 	thumb_func_start sub_80B1D88
@@ -2101,7 +2101,7 @@ sub_80B2868: @ 80B2868
 	ands r0, r1
 	cmp r0, 0
 	bne _080B28E2
-	ldr r1, _080B2904 @ =gUnknown_2037EE2
+	ldr r1, _080B2904 @ =gAnimVisualTaskCount
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
@@ -2159,7 +2159,7 @@ _080B28F6:
 	bx r0
 	.align 2, 0
 _080B2900: .4byte gTasks
-_080B2904: .4byte gUnknown_2037EE2
+_080B2904: .4byte gAnimVisualTaskCount
 _080B2908: .4byte gBattleAnimArgs
 _080B290C: .4byte gUnknown_83E7C98
 _080B2910: .4byte gBattleAnimTarget
@@ -2181,7 +2181,7 @@ _080B2926:
 	movs r1, 0x1
 	bl sub_8075160
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	ldr r2, _080B2954 @ =gSprites
 	lsls r0, 24
 	lsrs r0, 24
@@ -2273,7 +2273,7 @@ _080B29C0:
 	cmp r0, r1
 	bge _080B29FE
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	ldr r2, _080B2A04 @ =gSprites
 	lsls r0, 24
 	lsrs r0, 24
@@ -2311,7 +2311,7 @@ sub_80B2A08: @ 80B2A08
 	ldr r0, _080B2A48 @ =sub_80B2A50
 	str r0, [r4, 0x1C]
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	ldr r2, _080B2A4C @ =gSprites
 	lsls r0, 24
 	lsrs r0, 24
@@ -2900,7 +2900,7 @@ sub_80B2E64: @ 80B2E64
 	cmp r0, 0
 	bne _080B2E9C
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080B2E98 @ =gSprites
@@ -2918,7 +2918,7 @@ _080B2E94: .4byte gBattleAnimArgs
 _080B2E98: .4byte gSprites
 _080B2E9C:
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080B2EC8 @ =gSprites

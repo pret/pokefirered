@@ -572,7 +572,7 @@ sub_80DE6F0: @ 80DE6F0
 	adds r1, r2
 	ldr r0, _080DE710 @ =sub_80DE718
 	str r0, [r1]
-	ldr r1, _080DE714 @ =gUnknown_2037EE2
+	ldr r1, _080DE714 @ =gAnimVisualTaskCount
 	ldrb r0, [r1]
 	subs r0, 0x1
 	strb r0, [r1]
@@ -580,7 +580,7 @@ sub_80DE6F0: @ 80DE6F0
 	.align 2, 0
 _080DE70C: .4byte gTasks
 _080DE710: .4byte sub_80DE718
-_080DE714: .4byte gUnknown_2037EE2
+_080DE714: .4byte gAnimVisualTaskCount
 	thumb_func_end sub_80DE6F0
 
 	thumb_func_start sub_80DE718
@@ -674,7 +674,7 @@ sub_80DE7B4: @ 80DE7B4
 	adds r1, r2
 	ldr r0, _080DE7D4 @ =sub_80DE7DC
 	str r0, [r1]
-	ldr r1, _080DE7D8 @ =gUnknown_2037EE2
+	ldr r1, _080DE7D8 @ =gAnimVisualTaskCount
 	ldrb r0, [r1]
 	subs r0, 0x1
 	strb r0, [r1]
@@ -682,7 +682,7 @@ sub_80DE7B4: @ 80DE7B4
 	.align 2, 0
 _080DE7D0: .4byte gTasks
 _080DE7D4: .4byte sub_80DE7DC
-_080DE7D8: .4byte gUnknown_2037EE2
+_080DE7D8: .4byte gAnimVisualTaskCount
 	thumb_func_end sub_80DE7B4
 
 	thumb_func_start sub_80DE7DC
@@ -1127,10 +1127,10 @@ sub_80DEB20: @ 80DEB20
 	lsls r1, 8
 	movs r0, 0
 	bl SetGpuRegBits
-	ldr r0, _080DEB80 @ =gUnknown_2022984
+	ldr r0, _080DEB80 @ =gBattle_WIN0H
 	movs r1, 0
 	strh r1, [r0]
-	ldr r4, _080DEB84 @ =gUnknown_2022986
+	ldr r4, _080DEB84 @ =gBattle_WIN0V
 	strh r1, [r4]
 	movs r0, 0x40
 	movs r1, 0
@@ -1161,8 +1161,8 @@ sub_80DEB20: @ 80DEB20
 	bx r0
 	.align 2, 0
 _080DEB7C: .4byte 0x00001f3f
-_080DEB80: .4byte gUnknown_2022984
-_080DEB84: .4byte gUnknown_2022986
+_080DEB80: .4byte gBattle_WIN0H
+_080DEB84: .4byte gBattle_WIN0V
 _080DEB88: .4byte sub_80DEB8C
 	thumb_func_end sub_80DEB20
 
@@ -1488,11 +1488,11 @@ sub_80DEDD8: @ 80DEDD8
 	ldr r1, _080DEE20 @ =gUnknown_202298A
 	movs r0, 0xA0
 	strh r0, [r1]
-	ldr r0, _080DEE24 @ =gUnknown_2022984
+	ldr r0, _080DEE24 @ =gBattle_WIN0H
 	ldrh r1, [r0]
 	movs r0, 0x42
 	bl SetGpuReg
-	ldr r0, _080DEE28 @ =gUnknown_2022986
+	ldr r0, _080DEE28 @ =gBattle_WIN0V
 	ldrh r1, [r0]
 	movs r0, 0x46
 	bl SetGpuReg
@@ -1502,8 +1502,8 @@ _080DEE14: .4byte 0x00001f3f
 _080DEE18: .4byte gUnknown_2022988
 _080DEE1C: .4byte 0x000098f0
 _080DEE20: .4byte gUnknown_202298A
-_080DEE24: .4byte gUnknown_2022984
-_080DEE28: .4byte gUnknown_2022986
+_080DEE24: .4byte gBattle_WIN0H
+_080DEE28: .4byte gBattle_WIN0V
 _080DEE2C:
 	ldr r1, _080DEE68 @ =0x00001f3f
 	movs r0, 0x48
@@ -2021,7 +2021,7 @@ sub_80DF1DC: @ 80DF1DC
 	strh r0, [r4, 0x12]
 	strh r5, [r4, 0x14]
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x26]
@@ -2437,7 +2437,7 @@ sub_80DF524: @ 80DF524
 _080DF544: .4byte gTasks
 _080DF548:
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -2469,7 +2469,7 @@ sub_80DF580: @ 80DF580
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r1, 0x2E
@@ -2857,7 +2857,7 @@ sub_80DF848: @ 80DF848
 	cmp r0, 0
 	bne _080DF888
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -2901,7 +2901,7 @@ sub_80DF8A0: @ 80DF8A0
 	cmp r0, 0
 	bne _080DF8E0
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3002,7 +3002,7 @@ sub_80DF964: @ 80DF964
 	cmp r0, 0
 	bne _080DF9A4
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3417,7 +3417,7 @@ _080DFCCE:
 	ldr r1, _080DFD20 @ =gFile_graphics_battle_anims_masks_morning_sun_sheet
 	mov r2, sp
 	ldrh r2, [r2, 0xA]
-	bl sub_80753B4
+	bl AnimLoadCompressedBgGfx
 	ldr r0, _080DFD24 @ =gFile_graphics_battle_anims_masks_morning_sun_palette
 	mov r1, sp
 	ldrb r1, [r1, 0x8]
@@ -4059,7 +4059,7 @@ _080E01FC:
 	ldr r1, _080E0254 @ =gFile_graphics_battle_anims_masks_morning_sun_sheet
 	mov r2, sp
 	ldrh r2, [r2, 0xA]
-	bl sub_80753B4
+	bl AnimLoadCompressedBgGfx
 	ldr r0, _080E0258 @ =gFile_graphics_battle_anims_masks_morning_sun_palette
 	mov r1, sp
 	ldrb r1, [r1, 0x8]
@@ -4371,7 +4371,7 @@ sub_80E0488: @ 80E0488
 	cmp r0, 0
 	bne _080E04C8
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -4523,7 +4523,7 @@ _080E059C:
 	subs r0, 0x1
 	strh r0, [r4, 0x14]
 	ldrb r0, [r5]
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x26]
@@ -4874,7 +4874,7 @@ sub_80E0850: @ 80E0850
 	strh r0, [r4, 0x24]
 	ldr r0, _080E089C @ =gBattleAnimArgs
 	ldrb r0, [r0]
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x26]
@@ -5237,7 +5237,7 @@ _080E0B3E:
 	strh r0, [r2, 0x1E]
 	mov r1, r8
 	ldrb r0, [r1]
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r1, _080E0B7C @ =gTasks
@@ -5535,10 +5535,10 @@ sub_80E0D74: @ 80E0D74
 	lsls r1, 8
 	movs r0, 0
 	bl SetGpuRegBits
-	ldr r0, _080E0DDC @ =gUnknown_2022984
+	ldr r0, _080E0DDC @ =gBattle_WIN0H
 	movs r1, 0
 	strh r1, [r0]
-	ldr r4, _080E0DE0 @ =gUnknown_2022986
+	ldr r4, _080E0DE0 @ =gBattle_WIN0V
 	strh r1, [r4]
 	movs r0, 0x40
 	movs r1, 0
@@ -5572,8 +5572,8 @@ sub_80E0D74: @ 80E0D74
 	bx r0
 	.align 2, 0
 _080E0DD8: .4byte 0x00001f3f
-_080E0DDC: .4byte gUnknown_2022984
-_080E0DE0: .4byte gUnknown_2022986
+_080E0DDC: .4byte gBattle_WIN0H
+_080E0DE0: .4byte gBattle_WIN0V
 _080E0DE4: .4byte gBattleAnimArgs
 _080E0DE8: .4byte sub_80E0DEC
 	thumb_func_end sub_80E0D74
@@ -5825,7 +5825,7 @@ sub_80E0FB8: @ 80E0FB8
 	lsrs r0, 24
 	str r0, [sp, 0x18]
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	ldr r0, _080E1040 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
@@ -6276,7 +6276,7 @@ _080E136C:
 	strh r0, [r4, 0x24]
 	ldr r0, _080E13A8 @ =gBattleAnimArgs
 	ldrb r0, [r0]
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x26]
@@ -6743,7 +6743,7 @@ sub_80E1704: @ 80E1704
 	strh r0, [r4, 0x8]
 	ldr r0, _080E1740 @ =gBattleAnimArgs
 	ldrb r0, [r0]
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -7218,7 +7218,7 @@ _080E1AAA:
 	bgt _080E1ACA
 	adds r0, r5, 0
 	bl DestroyTask
-	ldr r1, _080E1AD4 @ =gUnknown_2037EE2
+	ldr r1, _080E1AD4 @ =gAnimVisualTaskCount
 	ldrb r0, [r1]
 	subs r0, 0x1
 	strb r0, [r1]
@@ -7229,7 +7229,7 @@ _080E1ACA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E1AD4: .4byte gUnknown_2037EE2
+_080E1AD4: .4byte gAnimVisualTaskCount
 	thumb_func_end sub_80E1990
 
 	thumb_func_start sub_80E1AD8
@@ -7619,7 +7619,7 @@ _080E1DA2:
 	strh r0, [r5, 0x14]
 	ldr r0, _080E1DF4 @ =gBattleAnimArgs
 	ldrb r0, [r0]
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -7892,7 +7892,7 @@ sub_80E1FC4: @ 80E1FC4
 	ldrh r0, [r1, 0x2]
 	strh r0, [r4, 0xA]
 	ldrb r0, [r1]
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080E2014 @ =gSprites
@@ -9091,7 +9091,7 @@ _080E28F8:
 	ldrh r0, [r2, 0x2]
 	strh r0, [r4, 0x8]
 	ldrb r0, [r2]
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -9613,7 +9613,7 @@ sub_80E2CE4: @ 80E2CE4
 	ldr r0, _080E2D34 @ =gTasks
 	adds r6, r1, r0
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x26]
@@ -10360,7 +10360,7 @@ sub_80E3294: @ 80E3294
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r2, r5, 0
@@ -10471,7 +10471,7 @@ sub_80E3374: @ 80E3374
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r3, r0, 24
 	ldr r1, _080E33A0 @ =gTasks
@@ -10856,7 +10856,7 @@ sub_80E3664: @ 80E3664
 	lsls r0, 24
 	lsrs r7, r0, 24
 	movs r0, 0x1
-	bl duplicate_obj_of_side_rel2move_in_transparent_mode
+	bl CloneBattlerSpriteWithBlend
 	lsls r0, 16
 	lsrs r1, r0, 16
 	str r1, [sp]
@@ -10864,7 +10864,7 @@ sub_80E3664: @ 80E3664
 	cmp r6, 0
 	blt _080E36A6
 	movs r0, 0x1
-	bl duplicate_obj_of_side_rel2move_in_transparent_mode
+	bl CloneBattlerSpriteWithBlend
 	lsls r0, 16
 	lsrs r1, r0, 16
 	mov r9, r1
@@ -11251,7 +11251,7 @@ _080E3964:
 	.4byte _080E3D90
 _080E3978:
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r1, _080E39C4 @ =gTasks
@@ -11392,7 +11392,7 @@ _080E3AA0:
 	ldrh r5, [r1, 0x2]
 _080E3AA2:
 	movs r0, 0x1
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	ldr r2, _080E3AC8 @ =gSprites
 	lsls r0, 24
 	lsrs r0, 24
@@ -11460,7 +11460,7 @@ _080E3B30:
 	ldrh r5, [r1, 0x2]
 _080E3B32:
 	movs r0, 0x1
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	ldr r2, _080E3BD0 @ =gSprites
 	lsls r0, 24
 	lsrs r0, 24
@@ -11682,7 +11682,7 @@ _080E3D04: .4byte 0x0000ffff
 _080E3D08: .4byte gTasks
 _080E3D0C:
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r1, _080E3D58 @ =gTasks
@@ -11746,7 +11746,7 @@ _080E3D82:
 _080E3D8C: .4byte gTasks
 _080E3D90:
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r1, _080E3E04 @ =gTasks
@@ -11917,7 +11917,7 @@ _080E3E96:
 	cmp r0, 0x1
 	bne _080E3FB8
 	movs r0, 0x1
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	ldr r2, _080E3F24 @ =gSprites
 	lsls r0, 24
 	lsrs r0, 24
@@ -12235,7 +12235,7 @@ sub_80E4160: @ 80E4160
 	ldr r0, _080E41C8 @ =gTasks
 	adds r4, r1, r0
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r5, 0
@@ -12757,7 +12757,7 @@ sub_80E4540: @ 80E4540
 	strh r0, [r4, 0x8]
 	ldr r0, _080E457C @ =gBattleAnimArgs
 	ldrb r0, [r0]
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24

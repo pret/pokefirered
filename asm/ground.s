@@ -473,7 +473,7 @@ _080B8F00:
 	.4byte _080B9064
 _080B8F14:
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x1C]
@@ -668,7 +668,7 @@ sub_80B908C: @ 80B908C
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080B90CC @ =gSprites
@@ -766,7 +766,7 @@ sub_80B912C: @ 80B912C
 _080B914C: .4byte gTasks
 _080B9150:
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x1C]
@@ -846,7 +846,7 @@ _080B91DC:
 	.4byte _080B92AC
 _080B91F0:
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x1C]
@@ -1286,7 +1286,7 @@ _080B9548:
 _080B9554: .4byte gBattlerSpriteIds
 _080B9558:
 	ldrb r0, [r6]
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x1A]

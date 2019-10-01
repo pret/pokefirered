@@ -18,10 +18,10 @@ sub_80EEC0C: @ 80EEC0C
 	str r0, [sp, 0x10]
 	ldr r0, _080EEDB4 @ =gBattleAnimAttacker
 	ldrb r4, [r0]
-	ldr r0, _080EEDB8 @ =gUnknown_2022984
+	ldr r0, _080EEDB8 @ =gBattle_WIN0H
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, _080EEDBC @ =gUnknown_2022986
+	ldr r0, _080EEDBC @ =gBattle_WIN0V
 	strh r1, [r0]
 	ldr r1, _080EEDC0 @ =0x00003f3f
 	movs r0, 0x48
@@ -161,7 +161,7 @@ sub_80EEC0C: @ 80EEC0C
 	ldr r1, _080EEDDC @ =gFile_graphics_battle_anims_masks_unknown_D2EC24_sheet
 	mov r2, sp
 	ldrh r2, [r2, 0xA]
-	bl sub_80753B4
+	bl AnimLoadCompressedBgGfx
 	ldr r0, _080EEDE0 @ =gFile_graphics_battle_anims_masks_cure_bubbles_palette
 	mov r1, sp
 	ldrb r1, [r1, 0x8]
@@ -204,8 +204,8 @@ sub_80EEC0C: @ 80EEC0C
 	bx r0
 	.align 2, 0
 _080EEDB4: .4byte gBattleAnimAttacker
-_080EEDB8: .4byte gUnknown_2022984
-_080EEDBC: .4byte gUnknown_2022986
+_080EEDB8: .4byte gBattle_WIN0H
+_080EEDBC: .4byte gBattle_WIN0V
 _080EEDC0: .4byte 0x00003f3f
 _080EEDC4: .4byte 0x00003f3d
 _080EEDC8: .4byte 0x00003f42
@@ -336,9 +336,9 @@ _080EEE9C:
 	bne _080EEFA8
 	movs r0, 0
 	bl sub_8073128
-	ldr r0, _080EEFB4 @ =gUnknown_2022984
+	ldr r0, _080EEFB4 @ =gBattle_WIN0H
 	strh r4, [r0]
-	ldr r0, _080EEFB8 @ =gUnknown_2022986
+	ldr r0, _080EEFB8 @ =gBattle_WIN0V
 	strh r4, [r0]
 	ldr r4, _080EEFBC @ =0x00003f3f
 	movs r0, 0x48
@@ -439,8 +439,8 @@ _080EEFA8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080EEFB4: .4byte gUnknown_2022984
-_080EEFB8: .4byte gUnknown_2022986
+_080EEFB4: .4byte gBattle_WIN0H
+_080EEFB8: .4byte gBattle_WIN0V
 _080EEFBC: .4byte 0x00003f3f
 _080EEFC0: .4byte gSprites
 _080EEFC4: .4byte gHealthboxSpriteIds

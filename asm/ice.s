@@ -2015,7 +2015,7 @@ _080B0008:
 	cmp r0, 0
 	bne _080B0064
 	movs r0, 0x1
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	ldr r2, _080B00CC @ =gSprites
 	lsls r0, 24
 	lsrs r0, 24
@@ -2420,7 +2420,7 @@ _080B0344:
 _080B0372:
 	adds r0, r4, 0
 	bl DestroySprite
-	ldr r1, _080B0388 @ =gUnknown_2037EE2
+	ldr r1, _080B0388 @ =gAnimVisualTaskCount
 	ldrb r0, [r1]
 	subs r0, 0x1
 	strb r0, [r1]
@@ -2429,7 +2429,7 @@ _080B0380:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080B0388: .4byte gUnknown_2037EE2
+_080B0388: .4byte gAnimVisualTaskCount
 	thumb_func_end sub_80B0148
 
 	thumb_func_start sub_80B038C

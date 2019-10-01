@@ -703,8 +703,8 @@ _080749CC:
 	bx r1
 	thumb_func_end sub_807492C
 
-	thumb_func_start GetAnimBankSpriteId
-GetAnimBankSpriteId: @ 80749D4
+	thumb_func_start GetAnimBattlerSpriteId
+GetAnimBattlerSpriteId: @ 80749D4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -779,7 +779,7 @@ _08074A5E:
 	bx r1
 	.align 2, 0
 _08074A64: .4byte gBattlerSpriteIds
-	thumb_func_end GetAnimBankSpriteId
+	thumb_func_end GetAnimBattlerSpriteId
 
 	thumb_func_start StoreSpriteCallbackInData6
 StoreSpriteCallbackInData6: @ 8074A68
@@ -2091,8 +2091,8 @@ sub_8075358: @ 8075358
 _080753B0: .4byte 0x05000800
 	thumb_func_end sub_8075358
 
-	thumb_func_start sub_80753B4
-sub_80753B4: @ 80753B4
+	thumb_func_start AnimLoadCompressedBgGfx
+AnimLoadCompressedBgGfx: @ 80753B4
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -2129,7 +2129,7 @@ sub_80753B4: @ 80753B4
 	.align 2, 0
 _080753FC: .4byte gUnknown_2022BB8
 _08075400: .4byte 0x05000800
-	thumb_func_end sub_80753B4
+	thumb_func_end AnimLoadCompressedBgGfx
 
 	thumb_func_start sub_8075404
 sub_8075404: @ 8075404
@@ -3717,12 +3717,12 @@ _08075FB4: .4byte StartAnimLinearTranslation
 _08075FB8: .4byte DestroyAnimSprite
 	thumb_func_end sub_8075F0C
 
-	thumb_func_start duplicate_obj_of_side_rel2move_in_transparent_mode
-duplicate_obj_of_side_rel2move_in_transparent_mode: @ 8075FBC
+	thumb_func_start CloneBattlerSpriteWithBlend
+CloneBattlerSpriteWithBlend: @ 8075FBC
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0xFF
@@ -3778,7 +3778,7 @@ _0807602A:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end duplicate_obj_of_side_rel2move_in_transparent_mode
+	thumb_func_end CloneBattlerSpriteWithBlend
 
 	thumb_func_start obj_delete_but_dont_free_vram
 obj_delete_but_dont_free_vram: @ 8076030
@@ -3954,7 +3954,7 @@ sub_807616C: @ 807616C
 	lsrs r4, r0, 24
 	ldr r0, _0807618C @ =gBattleAnimArgs
 	ldrb r0, [r0]
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0xFF
@@ -5894,7 +5894,7 @@ sub_8077030: @ 8077030
 	ldr r0, _080770C4 @ =gTasks
 	adds r5, r1, r0
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r6, 0
@@ -6107,7 +6107,7 @@ sub_80771E4: @ 80771E4
 	lsrs r1, 24
 	mov r8, r1
 	movs r0, 0
-	bl duplicate_obj_of_side_rel2move_in_transparent_mode
+	bl CloneBattlerSpriteWithBlend
 	lsls r0, 16
 	lsrs r7, r0, 16
 	asrs r0, 16

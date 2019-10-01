@@ -292,7 +292,7 @@ _080B4854:
 	ldr r1, _080B48F4 @ =gFile_graphics_battle_anims_backgrounds_sandstorm_brew_sheet
 	mov r2, sp
 	ldrh r2, [r2, 0xA]
-	bl sub_80753B4
+	bl AnimLoadCompressedBgGfx
 	ldr r0, _080B48F8 @ =gFile_graphics_battle_anims_sprites_261_palette
 	mov r1, sp
 	ldrb r1, [r1, 0x8]
@@ -825,7 +825,7 @@ _080B4C7A:
 	strh r0, [r6, 0x24]
 	strh r5, [r6, 0xA]
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x26]

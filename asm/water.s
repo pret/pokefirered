@@ -1084,7 +1084,7 @@ _080AB42E:
 	ldr r1, _080AB45C @ =gFile_graphics_battle_anims_backgrounds_water_sheet
 	mov r2, sp
 	ldrh r2, [r2, 0xA]
-	bl sub_80753B4
+	bl AnimLoadCompressedBgGfx
 	ldr r0, _080AB460 @ =gBattleAnimArgs
 	movs r1, 0
 	ldrsh r0, [r0, r1]
@@ -1991,7 +1991,7 @@ sub_80ABB28: @ 80ABB28
 	ldr r0, _080ABB78 @ =gTasks
 	adds r4, r0
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x26]
@@ -2727,7 +2727,7 @@ _080AC0AE:
 	ldr r1, [r0]
 	adds r0, r2, 0
 	bl _call_via_r1
-	ldr r1, _080AC144 @ =gUnknown_2037EE2
+	ldr r1, _080AC144 @ =gAnimVisualTaskCount
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
@@ -2748,7 +2748,7 @@ _080AC0F8:
 	ldr r1, [r0]
 	adds r0, r2, 0
 	bl _call_via_r1
-	ldr r1, _080AC144 @ =gUnknown_2037EE2
+	ldr r1, _080AC144 @ =gAnimVisualTaskCount
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
@@ -2769,7 +2769,7 @@ _080AC128:
 	.align 2, 0
 _080AC13C: .4byte gBattleAnimArgs
 _080AC140: .4byte sub_80B94B4
-_080AC144: .4byte gUnknown_2037EE2
+_080AC144: .4byte gAnimVisualTaskCount
 _080AC148:
 	movs r2, 0x1A
 	ldrsh r0, [r4, r2]

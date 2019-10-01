@@ -317,11 +317,11 @@ extern const u8 gCreditsString_Graphic_Designer[];
 extern const u8 gCreditsString_Akira_Kinashi[];
 
 // berry_pouch
-extern const u8 gUnknown_8416374[];
-extern const u8 gUnknown_84163DB[];
-extern const u8 gUnknown_84163F4[];
-extern const u8 gUnknown_8416409[];
-extern const u8 gUnknown_841670A[];
-extern const u8 gUnknown_8416716[];
+extern const u8 gText_TheStrVar1CantBeHeldHere[];
+extern const u8 gText_TossOutHowManyStrVar1s[];
+extern const u8 gText_ThrewAwayStrVar2StrVar1s[];
+extern const u8 gText_ThrowAwayStrVar2OfThisItemQM[];
+extern const u8 gText_BerryPouch[];
+extern const u8 gText_TheBerryPouchWillBePutAway[];
 
 #endif //GUARD_STRINGS_H

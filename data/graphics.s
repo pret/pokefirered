@@ -13988,7 +13988,7 @@ gItemPcBgPals:: @ 8E85408
 gItemPcTilemap:: @ 8E85458
 	.incbin "graphics/item_pc/unk_8E85458.bin.lz"
 
-gUnknown_8E8560C:: @ 8E8560C
+gBerryPouchSpriteTiles:: @ 8E8560C
 	.incbin "graphics/berry_pouch/unk_8E8560C.4bpp.lz"
 
 gUnknown_8E859D0:: @ 8E859D0
@@ -14000,7 +14000,7 @@ gUnknown_8E85BA4:: @ 8E85BA4
 gUnknown_8E85BF4:: @ 8E85BF4
 	.incbin "graphics/berry_pouch/unk_8E85BF4.gbapal.lz"
 
-gUnknown_8E85C1C:: @ 8E85C1C
+gBerryPouchSpritePalette:: @ 8E85C1C
 	.incbin "graphics/berry_pouch/unk_8E85C1C.gbapal.lz"
 
 gUnknown_8E85C44:: @ 8E85C44

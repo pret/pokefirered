@@ -23,7 +23,7 @@ void DisplayMessageAndContinueTask(u8 taskId, u8 windowId, u16 tileNum, u8 palet
 void CreateYesNoMenuWithCallbacks(u8 taskId, const struct WindowTemplate *template, u8 fontId, u8 left, u8 top, u16 tileStart, u8 palette, const struct YesNoFuncTable *yesNo);
 u8 GetLRKeysState(void);
 u8 sub_80BF66C(void);
-bool8 sub_80BF6A8(u16 itemId);
+bool8 itemid_link_can_give_berry(u16 itemId);
 bool8 itemid_80BF6D8_mail_related(u16 itemId);
 void ClearVramOamPltt(void);
 

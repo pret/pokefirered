@@ -64,8 +64,8 @@ enum
 static EWRAM_DATA struct BerryPouchStruct_203F36C *sResources = NULL;
 static EWRAM_DATA struct BerryPouchStruct_203F370 sStaticCnt = {};
 static EWRAM_DATA struct ListMenuItem *sListMenuItems = NULL;
-static EWRAM_DATA u8 *sListMenuStrbuf = NULL;
-static EWRAM_DATA const u8 *sContextMenuOptions = NULL;
+static EWRAM_DATA u8 * sListMenuStrbuf = NULL;
+static EWRAM_DATA const u8 * sContextMenuOptions = NULL;
 static EWRAM_DATA u8 sContextMenuNumOptions = 0;
 static ALIGNED(4) EWRAM_DATA u8 sVariableWindowIds[14] = {};
 static ALIGNED(4) EWRAM_DATA u8 sBerryPouchSpriteId = 0;
@@ -91,22 +91,22 @@ static void BerryPouch_DestroyResources(void);
 static void Task_BerryPouchFadeToExitCallback(u8 taskId);
 static void SortAndCountBerries(void);
 static void Task_BerryPouchMain(u8 taskId);
-static void Task_NormalContextMenu_0(u8 taskId);
-static void Task_NormalContextMenu_1(u8 taskId);
-static void Task_BerryPouch_Use_0(u8 taskId);
-static void Task_BerryPouch_Toss_0(u8 taskId);
+static void Task_NormalContextMenu(u8 taskId);
+static void Task_NormalContextMenu_HandleInput(u8 taskId);
+static void Task_BerryPouch_Use(u8 taskId);
+static void Task_BerryPouch_Toss(u8 taskId);
 static void Task_AskTossMultiple(u8 taskId);
 static void Task_TossNo(u8 taskId);
 static void Task_Toss_SelectMultiple(u8 taskId);
 static void Task_TossYes(u8 taskId);
 static void Task_WaitButtonThenTossBerries(u8 taskId);
-static void Task_BerryPouch_Give_0(u8 taskId);
+static void Task_BerryPouch_Give(u8 taskId);
 static void Task_Give_PrintThereIsNoPokemon(u8 taskId);
 static void Task_WaitButtonBeforeDialogueWindowDestruction(u8 taskId);
-static void Task_BerryPouch_Exit_0(u8 taskId);
-static void Task_ContextMenu_FromPartyGiveMenu_0(u8 taskId);
+static void Task_BerryPouch_Exit(u8 taskId);
+static void Task_ContextMenu_FromPartyGiveMenu(u8 taskId);
 static void Task_ContextMenu_FromPokemonPC(u8 taskId);
-static void Task_ContextMenu_Sell_0(u8 taskId);
+static void Task_ContextMenu_Sell(u8 taskId);
 static void Task_AskSellMultiple(u8 taskId);
 static void Task_SellMultiple_CreateYesNoMenu(u8 taskId);
 static void Task_SellNo(u8 taskId);
@@ -122,12 +122,12 @@ static u8 GetOrCreateVariableWindow(u8 winIdx);
 static void DestroyVariableWindow(u8 winIdx);
 static void TryDestroyVariableWindow(u8 winIdx);
 static u8 GetVariableWindowId(u8 winIdx);
-static void CreateYesNoMenuWin3(u8 taskId, const struct YesNoFuncTable * ptrs);
-static void CreateYesNoMenuWin4(u8 taskId, const struct YesNoFuncTable * ptrs);
+static void CreateYesNoMenuWin3(u8 taskId, const struct YesNoFuncTable *ptrs);
+static void CreateYesNoMenuWin4(u8 taskId, const struct YesNoFuncTable *ptrs);
 static void PrintMoneyInWin2(void);
 static void CreateBerryPouchSprite(void);
 static void StartBerryPouchSpriteWobbleAnim(void);
-static void SpriteCB_BerryPouchWaitWobbleAnim(struct Sprite * sprite);
+static void SpriteCB_BerryPouchWaitWobbleAnim(struct Sprite *sprite);
 
 static const struct BgTemplate sBgTemplates[] = {
     {
@@ -158,11 +158,11 @@ static const struct BgTemplate sBgTemplates[] = {
 };
 
 static const TaskFunc sBerryPouchContextMenuTasks[] = {
-    Task_NormalContextMenu_0,
-    Task_ContextMenu_FromPartyGiveMenu_0,
-    Task_ContextMenu_Sell_0,
+    Task_NormalContextMenu,
+    Task_ContextMenu_FromPartyGiveMenu,
+    Task_ContextMenu_Sell,
     Task_ContextMenu_FromPokemonPC,
-    Task_NormalContextMenu_0
+    Task_NormalContextMenu
 };
 
 static const struct YesNoFuncTable sYesNoFuncs_Toss = {
@@ -176,10 +176,10 @@ static const struct YesNoFuncTable sYesNoFuncs_Sell = {
 };
 
 static const struct MenuAction sContextMenuActions[] = {
-    {gOtherText_Use,  Task_BerryPouch_Use_0},
-    {gOtherText_Toss, Task_BerryPouch_Toss_0},
-    {gOtherText_Give, Task_BerryPouch_Give_0},
-    {gOtherText_Exit, Task_BerryPouch_Exit_0},
+    {gOtherText_Use,  Task_BerryPouch_Use},
+    {gOtherText_Toss, Task_BerryPouch_Toss},
+    {gOtherText_Give, Task_BerryPouch_Give},
+    {gOtherText_Exit, Task_BerryPouch_Exit},
     {gString_Dummy,   NULL}
 };
 
@@ -695,7 +695,7 @@ static void GetBerryNameAndIndexForMenu(u8 * dest, u16 itemId)
     StringCopy(dest, gStringVar4);
 }
 
-static void CopySelectedListMenuItemName(s16 itemIdx, u8 *dest)
+static void CopySelectedListMenuItemName(s16 itemIdx, u8 * dest)
 {
     StringCopy(dest, &sListMenuStrbuf[itemIdx * 27]);
 }
@@ -754,7 +754,7 @@ static void BerryPouchSetArrowCursorAt(u8 y, u8 colorIdx)
 
 static void PrintSelectedBerryDescription(s32 itemIdx)
 {
-    const u8 *str;
+    const u8 * str;
     if (itemIdx != sResources->listMenuNumItems)
         str = ItemId_GetDescription(BagGetItemIdByPocketPosition(POCKET_BERRY_POUCH, itemIdx));
     else
@@ -1031,13 +1031,13 @@ static void CreateNormalContextMenu(u8 taskId)
     BerryPouchPrint(windowId2, 2, gStringVar4, 0, 2, 1, 2, 0, 1);
 }
 
-static void Task_NormalContextMenu_0(u8 taskId)
+static void Task_NormalContextMenu(u8 taskId)
 {
     CreateNormalContextMenu(taskId);
-    gTasks[taskId].func = Task_NormalContextMenu_1;
+    gTasks[taskId].func = Task_NormalContextMenu_HandleInput;
 }
 
-static void Task_NormalContextMenu_1(u8 taskId)
+static void Task_NormalContextMenu_HandleInput(u8 taskId)
 {
     s8 input;
     if (sub_80BF72C() != TRUE)
@@ -1059,7 +1059,7 @@ static void Task_NormalContextMenu_1(u8 taskId)
     }
 }
 
-static void Task_BerryPouch_Use_0(u8 taskId)
+static void Task_BerryPouch_Use(u8 taskId)
 {
     DestroyVariableWindow(sContextMenuNumOptions + 9);
     DestroyVariableWindow(6);
@@ -1080,7 +1080,7 @@ static void Task_BerryPouch_Use_0(u8 taskId)
         ItemId_GetFieldFunc(gSpecialVar_ItemId)(taskId);
 }
 
-static void Task_BerryPouch_Toss_0(u8 taskId)
+static void Task_BerryPouch_Toss(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     ClearWindowTilemap(GetVariableWindowId(sContextMenuNumOptions + 9));
@@ -1182,7 +1182,7 @@ static void Task_WaitButtonThenTossBerries(u8 taskId)
     }
 }
 
-static void Task_BerryPouch_Give_0(u8 taskId)
+static void Task_BerryPouch_Give(u8 taskId)
 {
     DestroyVariableWindow(sContextMenuNumOptions + 9);
     DestroyVariableWindow(6);
@@ -1227,7 +1227,7 @@ void Task_BerryPouch_DestroyDialogueWindowAndRefreshListMenu(u8 taskId)
     Task_CleanUpAndReturnToMain(taskId);
 }
 
-static void Task_BerryPouch_Exit_0(u8 taskId)
+static void Task_BerryPouch_Exit(u8 taskId)
 {
     DestroyVariableWindow(sContextMenuNumOptions + 9);
     DestroyVariableWindow(6);
@@ -1239,7 +1239,7 @@ static void Task_BerryPouch_Exit_0(u8 taskId)
     Task_CleanUpAndReturnToMain(taskId);
 }
 
-static void Task_ContextMenu_FromPartyGiveMenu_0(u8 taskId)
+static void Task_ContextMenu_FromPartyGiveMenu(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     u16 itemId = BagGetItemIdByPocketPosition(POCKET_BERRY_POUCH, data[1]);
@@ -1262,7 +1262,7 @@ static void Task_ContextMenu_FromPokemonPC(u8 taskId)
     gTasks[taskId].func = BerryPouch_StartFadeToExitCallback;
 }
 
-static void Task_ContextMenu_Sell_0(u8 taskId)
+static void Task_ContextMenu_Sell(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     if (itemid_get_market_price(gSpecialVar_ItemId) == 0)
@@ -1488,12 +1488,12 @@ void DisplayItemMessageInBerryPouch(u8 taskId, u8 fontId, const u8 * str, TaskFu
     ScheduleBgCopyTilemapToVram(2);
 }
 
-static void CreateYesNoMenuWin3(u8 taskId, const struct YesNoFuncTable * ptrs)
+static void CreateYesNoMenuWin3(u8 taskId, const struct YesNoFuncTable *ptrs)
 {
     CreateYesNoMenuWithCallbacks(taskId, &sWindowTemplates_Variable[3], 2, 0, 2, 0x001, 0xE, ptrs);
 }
 
-static void CreateYesNoMenuWin4(u8 taskId, const struct YesNoFuncTable * ptrs)
+static void CreateYesNoMenuWin4(u8 taskId, const struct YesNoFuncTable *ptrs)
 {
     CreateYesNoMenuWithCallbacks(taskId, &sWindowTemplates_Variable[4], 2, 0, 2, 0x001, 0xE, ptrs);
 }
@@ -1510,7 +1510,7 @@ static void CreateBerryPouchSprite(void)
 
 static void StartBerryPouchSpriteWobbleAnim(void)
 {
-    struct Sprite * sprite = &gSprites[sBerryPouchSpriteId];
+    struct Sprite *sprite = &gSprites[sBerryPouchSpriteId];
     if (sprite->affineAnimEnded)
     {
         StartSpriteAffineAnim(sprite, 1);
@@ -1518,7 +1518,7 @@ static void StartBerryPouchSpriteWobbleAnim(void)
     }
 }
 
-static void SpriteCB_BerryPouchWaitWobbleAnim(struct Sprite * sprite)
+static void SpriteCB_BerryPouchWaitWobbleAnim(struct Sprite *sprite)
 {
     if (sprite->affineAnimEnded)
     {

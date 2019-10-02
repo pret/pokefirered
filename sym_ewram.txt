@@ -661,24 +661,7 @@ gUnknown_2037104: @ 2037104
 	.space 0x4
 
 	.include "src/tileset_anims.o"
-
-gPlttBufferUnfaded: @ 20371F8
-	.space 0x400
-
-gPlttBufferFaded: @ 20375F8
-	.space 0x400
-
-gUnknown_20379F8: @ 20379F8
-	.space 0xC0
-
-gPaletteFade: @ 2037AB8
-	.space 0x10
-
-gUnknown_2037AC8: @ 2037AC8
-	.space 0x4
-
-gUnknown_2037ACC: @ 2037ACC
-	.space 0x400
+	.include "src/palette.o"
 
 	.include "src/sound.o"
 

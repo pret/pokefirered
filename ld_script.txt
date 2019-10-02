@@ -108,7 +108,7 @@ SECTIONS {
         asm/field_tasks.o(.text);
         asm/start_menu.o(.text);
         src/tileset_anims.o(.text);
-        asm/palette.o(.text);
+        src/palette.o(.text);
         src/sound.o(.text);
         asm/battle_anim.o(.text);
         asm/battle_anim_mons.o(.text);
@@ -407,7 +407,7 @@ SECTIONS {
         data/field_tasks.o(.rodata);
         data/start_menu.o(.rodata);
         data/tileset_anims.o(.rodata);
-        data/palette.o(.rodata);
+        src/palette.o(.rodata);
         src/sound.o(.rodata);
         data/battle_anim.o(.rodata);
         data/map_events.o(.rodata);

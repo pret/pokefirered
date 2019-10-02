@@ -3283,7 +3283,7 @@ _0808AB50:
 	movs r1, 0x60
 	movs r2, 0
 	movs r3, 0
-	bl sub_8071660
+	bl TintPalette_CustomTone
 	b _0808AB88
 	.align 2, 0
 _0808AB64: .4byte 0x00000396
@@ -3297,7 +3297,7 @@ _0808AB68:
 	lsls r1, 1
 	str r1, [sp]
 	movs r1, 0x60
-	bl sub_8071660
+	bl TintPalette_CustomTone
 	b _0808AB88
 _0808AB80:
 	adds r0, r4, r5

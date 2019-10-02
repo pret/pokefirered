@@ -12,6 +12,8 @@ enum
     HARDWARE_FADE,
 };
 
+#define NUM_PALETTE_STRUCTS 16
+
 // unused palette struct
 struct PaletteStructTemplate
 {
@@ -53,7 +55,7 @@ static void sub_80718B8(u8 taskId);
 
 ALIGNED(4) EWRAM_DATA u16 gPlttBufferUnfaded[PLTT_BUFFER_SIZE] = {0};
 ALIGNED(4) EWRAM_DATA u16 gPlttBufferFaded[PLTT_BUFFER_SIZE] = {0};
-EWRAM_DATA struct PaletteStruct sPaletteStructs[0x10] = {0};
+static EWRAM_DATA struct PaletteStruct sPaletteStructs[NUM_PALETTE_STRUCTS] = {0};
 EWRAM_DATA struct PaletteFadeControl gPaletteFade = {0};
 static EWRAM_DATA u32 sPlttBufferTransferPending = 0;
 EWRAM_DATA u8 gPaletteDecompressionBuffer[PLTT_DECOMP_BUFFER_SIZE] = {0};
@@ -198,7 +200,7 @@ static void sub_8070718(u8 a1, u32 *a2)
 {
     u8 i;
 
-    for (i = 0; i < 16; ++i)
+    for (i = 0; i < NUM_PALETTE_STRUCTS; ++i)
     {
         struct PaletteStruct *palstruct = &sPaletteStructs[i];
 
@@ -387,7 +389,7 @@ static u8 GetPaletteNumByUid(u16 uid)
 {
     u8 i;
 
-    for (i = 0; i < 16; ++i)
+    for (i = 0; i < NUM_PALETTE_STRUCTS; ++i)
         if (sPaletteStructs[i].base->uid == uid)
             return i;
     return 16;
@@ -502,6 +504,7 @@ void TintPlttBuffer(u32 selectedPalettes, s8 r, s8 g, s8 b)
             for (i = 0; i < 16; ++i)
             {
                 struct PlttData *data = (struct PlttData *)&gPlttBufferFaded[paletteOffset + i];
+                
                 data->r += r;
                 data->g += g;
                 data->b += b;
@@ -625,7 +628,6 @@ static u8 UpdateFastPaletteFade(void)
             r = faded->r + 2;
             g = faded->g + 2;
             b = faded->b + 2;
-
             if (r > r0)
                 r = r0;
             if (g > g0)
@@ -946,7 +948,7 @@ void sub_8071898(void)
     while (TRUE)
     {
         taskId = FindTaskIdByFunc(sub_80718B8);
-        if (taskId == 0xFF)
+        if (taskId == TASK_NONE)
             break;
         DestroyTask(taskId);
     }

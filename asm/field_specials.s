@@ -185,8 +185,8 @@ sub_80CA74C: @ 80CA74C
 _080CA754: .4byte gBattleOutcome
 	thumb_func_end sub_80CA74C
 
-	thumb_func_start sub_80CA758
-sub_80CA758: @ 80CA758
+	thumb_func_start Special_SetHiddenItemFlag
+Special_SetHiddenItemFlag: @ 80CA758
 	push {lr}
 	ldr r0, _080CA768 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
@@ -195,7 +195,7 @@ sub_80CA758: @ 80CA758
 	bx r0
 	.align 2, 0
 _080CA768: .4byte gSpecialVar_0x8004
-	thumb_func_end sub_80CA758
+	thumb_func_end Special_SetHiddenItemFlag
 
 	thumb_func_start sub_80CA76C
 sub_80CA76C: @ 80CA76C

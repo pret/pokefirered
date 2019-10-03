@@ -1795,7 +1795,7 @@ EventScript_ItemInPocketMessage::
 	waitfanfare
 	waitmessage
 	msgbox gUnknown_81A5218
-	special sub_80CA758
+	special Special_SetHiddenItemFlag
 	releaseall
 	end
 
@@ -1834,7 +1834,7 @@ EventScript_PickUpHiddenCoins::
 	waitfanfare
 	waitmessage
 	msgbox Text_1A526C
-	special sub_80CA758
+	special Special_SetHiddenItemFlag
 	releaseall
 	end
 
@@ -2354,7 +2354,32 @@ VermilionCity_PokemonCenter_1F_EventScript_1A8D08:: @ 81A8D08
 	.incbin "baserom.gba", 0x1A8D08, 0x41
 
 EventScript_ItemfinderDigUpUnderfootItem:: @ 81A8D49
-	.incbin "baserom.gba", 0x1A8D49, 0x4E
+	lockall
+	textcolor 3
+	waitse
+	call EventScript_GiveItem
+	compare_var_to_value VAR_0x8007, 1
+	goto_if_eq EventScript_DigUpItemPutInPocket
+	compare_var_to_value VAR_0x8007, 0
+	goto_if_eq EventScript_DigUpItemBagIsFull
+	end
+
+EventScript_DigUpItemPutInPocket::
+	message Text_1A5700
+	waitfanfare
+	waitmessage
+	delay 60
+	msgbox gUnknown_81A5218
+	special Special_SetHiddenItemFlag
+	releaseall
+	end
+
+EventScript_DigUpItemBagIsFull::
+	msgbox Text_1A5700
+	msgbox gUnknown_81A5242
+	setvar VAR_RESULT, 0
+	releaseall
+	end
 
 gUnknown_81A8D97:: @ 81A8D97
 	.incbin "baserom.gba", 0x1A8D97, 0x41

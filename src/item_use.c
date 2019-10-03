@@ -274,7 +274,7 @@ void ItemUseOnFieldCB_Rod(u8 taskId)
 void ItemUseOutOfBattle_Itemfinder(u8 taskId)
 {
     IncrementGameStat(GAME_STAT_USED_ITEMFINDER);
-    sItemUseOnFieldCB = sub_813EC8C;
+    sItemUseOnFieldCB = ItemUseOnFieldCB_Itemfinder;
     sub_80A103C(taskId);
 }
 

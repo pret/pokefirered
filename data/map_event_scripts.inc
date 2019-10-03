@@ -2275,7 +2275,7 @@ ViridianCity_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
 VermilionCity_PokemonCenter_1F_EventScript_1A8D08:: @ 81A8D08
 	.incbin "baserom.gba", 0x1A8D08, 0x41
 
-gUnknown_81A8D49:: @ 81A8D49
+EventScript_ItemfinderDigUpUnderfootItem:: @ 81A8D49
 	.incbin "baserom.gba", 0x1A8D49, 0x4E
 
 gUnknown_81A8D97:: @ 81A8D97

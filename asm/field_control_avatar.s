@@ -1152,24 +1152,24 @@ _0806D174:
 _0806D17A:
 	ldr r0, [r5, 0x8]
 	movs r1, 0x3
-	bl sub_80CC44C
+	bl GetHiddenItemAttr
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x1
 	beq _0806D164
 	ldr r0, [r5, 0x8]
 	movs r1, 0
-	bl sub_80CC44C
+	bl GetHiddenItemAttr
 	ldr r1, _0806D1C4 @ =gSpecialVar_0x8005
 	strh r0, [r1]
 	ldr r0, [r5, 0x8]
 	movs r1, 0x1
-	bl sub_80CC44C
+	bl GetHiddenItemAttr
 	ldr r4, _0806D1C8 @ =gSpecialVar_0x8004
 	strh r0, [r4]
 	ldr r0, [r5, 0x8]
 	movs r1, 0x2
-	bl sub_80CC44C
+	bl GetHiddenItemAttr
 	ldr r1, _0806D1CC @ =gSpecialVar_0x8006
 	strh r0, [r1]
 	ldrh r0, [r4]

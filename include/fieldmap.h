@@ -23,5 +23,7 @@ bool8 MapGridIsImpassableAt(s32, s32);
 s32 GetMapBorderIdAt(s32, s32);
 bool32 CanCameraMoveInDirection(s32);
 u32 GetBehaviorByMetatileIdAndMapData(struct MapData *mapData, u16 metatile, u8 attr);
+const struct MapHeader * mapconnection_get_mapheader(struct MapConnection * connection);
+struct MapConnection * GetMapConnectionAtPos(s16 x, s16 y);
 
 #endif //GUARD_FIELDMAP_H

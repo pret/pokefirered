@@ -3942,8 +3942,8 @@ _080CC444: .4byte gSpecialVar_0x8004
 _080CC448: .4byte gSpecialVar_0x8006
 	thumb_func_end sub_80CC3CC
 
-	thumb_func_start sub_80CC44C
-sub_80CC44C: @ 80CC44C
+	thumb_func_start GetHiddenItemAttr
+GetHiddenItemAttr: @ 80CC44C
 	push {lr}
 	lsls r1, 24
 	lsrs r1, 24
@@ -3980,7 +3980,7 @@ _080CC484:
 _080CC486:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80CC44C
+	thumb_func_end GetHiddenItemAttr
 
 	thumb_func_start sub_80CC48C
 sub_80CC48C: @ 80CC48C

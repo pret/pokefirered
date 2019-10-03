@@ -207,11 +207,11 @@ static bool8 HiddenItemIsWithinRangeOfPlayer(struct MapEvents * events, u8 taskI
     gTasks[taskId].tHiddenItemFound = FALSE;
     for (i = 0; i < events->bgEventCount; i++)
     {
-        if (events->bgEvents[i].kind == 7 && !FlagGet(GetHiddenItemAttr(events->bgEvents[i].bgUnion.hiddenItem, 1)))
+        if (events->bgEvents[i].kind == 7 && !FlagGet(GetHiddenItemAttr(events->bgEvents[i].bgUnion.hiddenItem, HIDDEN_ITEM_FLAG)))
         {
             dx = events->bgEvents[i].x + 7 - x;
             dy = events->bgEvents[i].y + 7 - y;
-            if (GetHiddenItemAttr(events->bgEvents[i].bgUnion.hiddenItem, 3) == TRUE)
+            if (GetHiddenItemAttr(events->bgEvents[i].bgUnion.hiddenItem, HIDDEN_ITEM_UNDERFOOT) == TRUE)
             {
                 if (dx == 0 && dy == 0)
                 {
@@ -242,8 +242,8 @@ static bool8 HiddenItemIsWithinRangeOfPlayer(struct MapEvents * events, u8 taskI
 static void SetUnderfootHiddenItem(u8 taskId, struct HiddenItemStruct hiddenItem)
 {
     s16 *data = gTasks[taskId].data;
-    gSpecialVar_0x8004 = GetHiddenItemAttr(hiddenItem, 1);
-    gSpecialVar_0x8005 = GetHiddenItemAttr(hiddenItem, 0);
+    gSpecialVar_0x8004 = GetHiddenItemAttr(hiddenItem, HIDDEN_ITEM_FLAG);
+    gSpecialVar_0x8005 = GetHiddenItemAttr(hiddenItem, HIDDEN_ITEM_ID);
     gSpecialVar_0x8006 = 1;
     TV_PrintIntToStringVar(0, gSpecialVar_0x8005);
     tHiddenItemFound = TRUE;
@@ -300,8 +300,8 @@ static bool8 HiddenItemAtPos(struct MapEvents * events, s16 x, s16 y)
          && y == bgEvents[i].y
         )
         {
-            eventFlag = GetHiddenItemAttr(bgEvents[i].bgUnion.hiddenItem, 1);
-            if (GetHiddenItemAttr(bgEvents[i].bgUnion.hiddenItem, 3) != TRUE && !FlagGet(eventFlag))
+            eventFlag = GetHiddenItemAttr(bgEvents[i].bgUnion.hiddenItem, HIDDEN_ITEM_FLAG);
+            if (GetHiddenItemAttr(bgEvents[i].bgUnion.hiddenItem, HIDDEN_ITEM_UNDERFOOT) != TRUE && !FlagGet(eventFlag))
                 return TRUE;
             else
                 return FALSE;

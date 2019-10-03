@@ -122,9 +122,9 @@ struct CoordEvent
 
 struct HiddenItemStruct
 {
-    u32 quantity:16;
+    u32 itemId:16;
     u32 hiddenItemId:8; // flag offset to determine flag lookup
-    u32 field_03_0:7;
+    u32 quantity:7;
     u32 isUnderfoot:1;
 };
 

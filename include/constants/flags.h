@@ -668,7 +668,7 @@
 #define FLAG_0x240               0x240
 #define FLAG_0x241               0x241
 #define FLAG_0x242               0x242
-#define FLAG_0x243               0x243
+#define FLAG_GOT_COIN_CASE               0x243
 #define FLAG_0x244               0x244
 #define FLAG_0x245               0x245
 #define FLAG_0x246               0x246

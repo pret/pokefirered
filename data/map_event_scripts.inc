@@ -1576,27 +1576,23 @@ EventScript_1A661D:: @ 81A661D
 	waitmessage
 	applymovement VAR_LAST_TALKED, Movement_1A666C
 	waitmovement 0
-	loadword 0, Text_1A5511
-	callstd 4
+	msgbox Text_1A5511
 	return
 
 EventScript_1A6636:: @ 81A6636
 	checkflag 2114
 	goto_if_eq EventScript_1A661D
-	loadword 0, Text_1A552B
-	callstd 4
+	msgbox Text_1A552B
 	setflag 2114
 	message Text_1BCCCA
 	waitmessage
 	applymovement VAR_LAST_TALKED, Movement_1A666C
 	waitmovement 0
-	loadword 0, Text_1A5511
-	callstd 4
+	msgbox Text_1A5511
 	return
 
 EventScript_1A6663:: @ 81A6663
-	loadword 0, Text_1A5511
-	callstd 4
+	msgbox Text_1A5511
 	return
 
 Movement_1A666C:: @ 81A666C
@@ -1681,8 +1677,7 @@ EventScript_1A6749:: @ 81A6749
 	message Text_1A51F6
 	waitfanfare
 	waitmessage
-	loadword 0, gUnknown_81A5218
-	callstd 4
+	msgbox gUnknown_81A5218
 	setvar VAR_RESULT, 1
 	return
 
@@ -1717,8 +1712,7 @@ EventScript_1A6795:: @ 81A6795
 	message Text_1A52F0
 	waitfanfare
 	waitmessage
-	loadword 0, gUnknown_81A532F
-	callstd 4
+	msgbox gUnknown_81A532F
 	setvar VAR_RESULT, 1
 	return
 
@@ -1755,8 +1749,7 @@ EventScript_1A67EE:: @ 81A67EE
 	call_if 1, EventScript_1A6827
 	waitfanfare
 	waitmessage
-	loadword 0, gUnknown_81A5218
-	callstd 4
+	msgbox gUnknown_81A5218
 	return
 
 EventScript_1A6821:: @ 81A6821
@@ -1768,15 +1761,100 @@ EventScript_1A6827:: @ 81A6827
 	return
 
 EventScript_1A682D:: @ 81A682D
-	loadword 0, Text_1A51F6
-	callstd 4
-	loadword 0, gUnknown_81A5242
-	callstd 4
+	msgbox Text_1A51F6
+	msgbox gUnknown_81A5242
 	setvar VAR_RESULT, 0
 	return
 
-gUnknown_81A6843:: @ 81A6843
-	.incbin "baserom.gba", 0x1A6843, 0x112
+EventScript_PickUpHiddenItem:: @ 81A6843
+	lockall
+	textcolor 3
+	waitse
+	compare_var_to_value VAR_0x8005, 0
+	goto_if_eq EventScript_PickUpHiddenCoins
+	call EventScript_GiveItem
+	compare_var_to_value VAR_0x8007, 1
+	goto_if_eq EventScript_ItemInPocketMessage
+	compare_var_to_value VAR_0x8007, 0
+	goto_if_eq EventScript_BagIsFullMessage
+	end
+
+EventScript_GiveItem::
+	additem VAR_0x8005, VAR_0x8006
+	copyvar VAR_0x8007, VAR_RESULT
+	getitemname 1, VAR_0x8005
+	checkitemtype VAR_0x8005
+	call EventScript_1A66BC
+	return
+
+EventScript_ItemInPocketMessage::
+	compare_var_to_value VAR_0x8006, 1
+	call_if 1, EventScript_FoundSingleItemMessage
+	compare_var_to_value VAR_0x8006, 1
+	call_if 5, EventScript_FoundMultipleItemsMessage
+	waitfanfare
+	waitmessage
+	msgbox gUnknown_81A5218
+	special sub_80CA758
+	releaseall
+	end
+
+EventScript_FoundSingleItemMessage::
+	message Text_1A5231
+	return
+
+EventScript_FoundCoinsMessage::
+	getnumberstring 0, VAR_0x8006
+	message Text_1A525C
+	return
+
+EventScript_FoundMultipleItemsMessage::
+	getnumberstring 0, VAR_0x8006
+	message Text_1A52DD
+	return
+
+EventScript_BagIsFullMessage::
+	msgbox Text_1A5231
+	msgbox gUnknown_81A5242
+	setvar VAR_RESULT, 0
+	releaseall
+	end
+
+EventScript_PickUpHiddenCoins::
+	checkflag FLAG_GOT_COIN_CASE
+	goto_if 0, EventScript_HiddenCoinsButNoCoinCase
+	checkcoins VAR_RESULT
+	specialvar VAR_RESULT, Special_CheckAddCoins
+	compare_var_to_value VAR_RESULT, 0
+	goto_if_eq EventScript_HiddenCoinsButTheCoinCaseIsFull
+	givecoins VAR_0x8006
+	getstdstring 1, 0x17
+	call EventScript_1A6764
+	call EventScript_FoundCoinsMessage
+	waitfanfare
+	waitmessage
+	msgbox Text_1A526C
+	special sub_80CA758
+	releaseall
+	end
+
+EventScript_HiddenCoinsButTheCoinCaseIsFull::
+	getnumberstring 0, VAR_0x8006
+	getstdstring 1, 0x17
+	msgbox Text_1A525C
+	msgbox Text_1A5294
+	setvar VAR_RESULT, 0
+	releaseall
+	end
+
+EventScript_HiddenCoinsButNoCoinCase::
+	getnumberstring 0, VAR_0x8006
+	getstdstring 1, 0x17
+	msgbox Text_1A525C
+	msgbox Text_1A52B4
+	setvar VAR_RESULT, 0
+	releaseall
+	end
 
 gUnknown_81A6955:: @ 81A6955
 	.incbin "baserom.gba", 0x1A6955, 0x173

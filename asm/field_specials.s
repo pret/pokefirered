@@ -1566,8 +1566,9 @@ _080CB1D2:
 	bx r1
 	thumb_func_end sub_80CB198
 
-	thumb_func_start sub_80CB1D8
-sub_80CB1D8: @ 80CB1D8
+	thumb_func_start Special_CheckAddCoins
+Special_CheckAddCoins: @ 80CB1D8
+@ addcoins but it's a dry run
 	push {lr}
 	ldr r0, _080CB1F0 @ =gSpecialVar_Result
 	ldrh r1, [r0]
@@ -1588,7 +1589,7 @@ _080CB1FC:
 _080CB1FE:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80CB1D8
+	thumb_func_end Special_CheckAddCoins
 
 	thumb_func_start sub_80CB204
 sub_80CB204: @ 80CB204

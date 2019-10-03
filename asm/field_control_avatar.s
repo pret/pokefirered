@@ -1180,14 +1180,14 @@ _0806D17A:
 	beq _0806D164
 	ldr r0, _0806D1D0 @ =gSpecialVar_Facing
 	strh r6, [r0]
-	ldr r0, _0806D1D4 @ =gUnknown_81A6843
+	ldr r0, _0806D1D4 @ =EventScript_PickUpHiddenItem
 	b _0806D1E6
 	.align 2, 0
 _0806D1C4: .4byte gSpecialVar_0x8005
 _0806D1C8: .4byte gSpecialVar_0x8004
 _0806D1CC: .4byte gSpecialVar_0x8006
 _0806D1D0: .4byte gSpecialVar_Facing
-_0806D1D4: .4byte gUnknown_81A6843
+_0806D1D4: .4byte EventScript_PickUpHiddenItem
 _0806D1D8:
 	cmp r2, 0xFF
 	beq _0806D1E0

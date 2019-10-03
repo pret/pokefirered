@@ -12,7 +12,7 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_16CB7F:: @ 816CB7F
 CeladonCity_GameCorner_PrizeRoom_EventScript_16CB88:: @ 816CB88
 	lock
 	faceplayer
-	checkflag FLAG_0x243
+	checkflag FLAG_GOT_COIN_CASE
 	goto_if 0, EventScript_16CD99
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
@@ -191,7 +191,7 @@ EventScript_16CE12:: @ 816CE12
 CeladonCity_GameCorner_PrizeRoom_EventScript_16CE1D:: @ 816CE1D
 	lock
 	faceplayer
-	checkflag FLAG_0x243
+	checkflag FLAG_GOT_COIN_CASE
 	goto_if 0, EventScript_16CD99
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
@@ -289,7 +289,7 @@ EventScript_16CF79:: @ 816CF79
 CeladonCity_GameCorner_PrizeRoom_EventScript_16CF88:: @ 816CF88
 	lock
 	faceplayer
-	checkflag FLAG_0x243
+	checkflag FLAG_GOT_COIN_CASE
 	goto_if 0, EventScript_16CD99
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2

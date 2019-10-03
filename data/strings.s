@@ -582,13 +582,13 @@ gUnknown_8416425:: @ 8416425
 gUnknown_8416451:: @ 8416451
 	.string "You can't dismount your BIKE here.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416476:: @ 8416476
+gText_ItemfinderResponding:: @ 8416476
 	.string "Huh?\nThe ITEMFINDER's responding!\pThere's an item buried around here!{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_84164BE:: @ 84164BE
+gText_ItemfinderShakingWildly:: @ 84164BE
 	.string "Oh!\nThe ITEMFINDER's shaking wildly!\pThere's an item buried underfoot!\p‥ ‥ ‥ ‥ ‥ ‥{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416513:: @ 8416513
+gText_NopeTheresNoResponse:: @ 8416513
 	.string "‥ ‥ ‥ ‥Nope!\nThere's no response.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416537:: @ 8416537

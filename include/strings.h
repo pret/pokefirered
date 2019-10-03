@@ -324,4 +324,9 @@ extern const u8 gText_ThrowAwayStrVar2OfThisItemQM[];
 extern const u8 gText_BerryPouch[];
 extern const u8 gText_TheBerryPouchWillBePutAway[];
 
+// itemfinder
+extern const u8 gText_ItemfinderResponding[];
+extern const u8 gText_ItemfinderShakingWildly[];
+extern const u8 gText_NopeTheresNoResponse[];
+
 #endif //GUARD_STRINGS_H

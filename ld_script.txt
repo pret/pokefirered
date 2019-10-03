@@ -252,6 +252,7 @@ SECTIONS {
         asm/wild_pokemon_area.o(.text);
         src/dynamic_placeholder_text_util.o(.text);
         src/berry_pouch.o(.text);
+        src/itemfinder.o(.text);
         asm/itemfinder.o(.text);
         src/buy_menu_helpers.o(.text);
         src/slot_machine.o(.text);
@@ -467,6 +468,7 @@ SECTIONS {
         data/wild_pokemon_area.o(.rodata);
         src/dynamic_placeholder_text_util.o(.rodata);
         src/berry_pouch.o(.rodata);
+        src/itemfinder.o(.rodata);
         data/itemfinder.o(.rodata);
         src/buy_menu_helpers.o(.rodata);
         src/slot_machine.o(.rodata);

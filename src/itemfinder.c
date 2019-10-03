@@ -16,7 +16,7 @@
 static void Task_NoResponse_CleanUp(u8 taskId);
 static void Task_ItemfinderResponseSoundsAndAnims(u8 taskId);
 static void Task_ItemfinderUnderfootSoundsAndAnims(u8 taskId);
-static bool8 HiddenItemIsWithinRangeOfPlayer(struct MapEvents *events, u8 taskId);
+static bool8 HiddenItemIsWithinRangeOfPlayer(struct MapEvents * events, u8 taskId);
 static void SetUnderfootHiddenItem(u8 taskId, struct HiddenItemStruct hiddenItem);
 static void SetNormalHiddenItem(u8 taskId);
 static void FindHiddenItemsInConnectedMaps(u8 taskId);
@@ -158,7 +158,7 @@ static void Task_NoResponse_CleanUp(u8 taskId)
 
 static void Task_ItemfinderResponseSoundsAndAnims(u8 taskId)
 {
-    s16 * data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
     u8 direction;
     if (tDingTimer % 25 == 0)
     {
@@ -181,7 +181,7 @@ static void Task_ItemfinderResponseSoundsAndAnims(u8 taskId)
 
 static void Task_ItemfinderUnderfootSoundsAndAnims(u8 taskId)
 {
-    s16 * data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
     if (tDingTimer % 25 == 0)
     {
         if (tNumDingsRemaining == 0)
@@ -200,7 +200,7 @@ static void Task_ItemfinderUnderfootSoundsAndAnims(u8 taskId)
     tDingTimer++;
 }
 
-static bool8 HiddenItemIsWithinRangeOfPlayer(struct MapEvents *events, u8 taskId)
+static bool8 HiddenItemIsWithinRangeOfPlayer(struct MapEvents * events, u8 taskId)
 {
     s16 x, y, i, dx, dy;
     PlayerGetDestCoords(&x, &y);
@@ -241,7 +241,7 @@ static bool8 HiddenItemIsWithinRangeOfPlayer(struct MapEvents *events, u8 taskId
 
 static void SetUnderfootHiddenItem(u8 taskId, struct HiddenItemStruct hiddenItem)
 {
-    s16 * data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
     gSpecialVar_0x8004 = GetHiddenItemAttr(hiddenItem, 1);
     gSpecialVar_0x8005 = GetHiddenItemAttr(hiddenItem, 0);
     gSpecialVar_0x8006 = 1;
@@ -255,7 +255,7 @@ static void SetUnderfootHiddenItem(u8 taskId, struct HiddenItemStruct hiddenItem
 
 static void SetNormalHiddenItem(u8 taskId)
 {
-    s16 * data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
     s16 absY = tItemY;
     s16 absX = tItemX;
     
@@ -285,10 +285,10 @@ static void SetNormalHiddenItem(u8 taskId)
     }
 }
 
-static bool8 HiddenItemAtPos(struct MapEvents *events, s16 x, s16 y)
+static bool8 HiddenItemAtPos(struct MapEvents * events, s16 x, s16 y)
 {
     u8 bgEventCount = events->bgEventCount;
-    struct BgEvent *bgEvents = events->bgEvents;
+    struct BgEvent * bgEvents = events->bgEvents;
     u16 eventFlag;
     int i;
 
@@ -312,7 +312,7 @@ static bool8 HiddenItemAtPos(struct MapEvents *events, s16 x, s16 y)
 
 static bool8 HiddenItemInConnectedMapAtPos(struct MapConnection * connection, s32 x, s32 y)
 {
-    const struct MapHeader *mapHeader;
+    const struct MapHeader * mapHeader;
     u16 localX, localY;
     u32 localOffset;
     s32 localLength;
@@ -321,7 +321,7 @@ static bool8 HiddenItemInConnectedMapAtPos(struct MapConnection * connection, s3
 
     switch (connection->direction)
     {
-        // same weird temp variable behavior seen in HiddenItemAtPos
+    // same weird temp variable behavior seen in HiddenItemAtPos
     case 2:
         localOffset = connection->offset + 7;
         localX = x - localOffset;
@@ -373,7 +373,7 @@ static void FindHiddenItemsInConnectedMaps(u8 taskId)
                 || var2 > curY
                 || curY >= height)
             {
-                struct MapConnection *conn = GetMapConnectionAtPos(curX, curY);
+                struct MapConnection * conn = GetMapConnectionAtPos(curX, curY);
                 if (conn != NULL && HiddenItemInConnectedMapAtPos(conn, curX, curY) == TRUE)
                     RegisterHiddenItemRelativeCoordsIfCloser(taskId, curX - x, curY - y);
             }

@@ -941,11 +941,7 @@ gUnknown_83E7C38:: @ 83E7C38
 gUnknown_83E7C98:: @ 83E7C98
 	.incbin "baserom.gba", 0x3E7C98, 0x30
 
-	.section .rodata.83E7CD4
-	.balign 4
-
-gUnknown_83E7CD4:: @ 83E7CD4
-	.incbin "baserom.gba", 0x3E7CD4, 0x28
+	.section .rodata.83E7CFC
 
 gUnknown_83E7CFC:: @ 83E7CFC
 	.incbin "baserom.gba", 0x3E7CFC, 0x14

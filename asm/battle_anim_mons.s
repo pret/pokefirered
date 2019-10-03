@@ -4921,7 +4921,7 @@ _0807689E:
 	movs r0, 0x1
 _080768A0:
 	movs r1, 0x4
-	bl sub_80BC30C
+	bl GetAnimBgAttribute
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}

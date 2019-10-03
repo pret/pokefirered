@@ -77,22 +77,14 @@ bool8 IsBattlerSpriteVisible(u8 battlerId);
 s16 KeepPanInRange(s16 a, s32 oldPan);
 void sub_80730C0(u16, const u16 *, u16 *, u8);
 
-// battle_anim_80FE840.s
+// battle_intro.c
 void SetAnimBgAttribute(u8 bgId, u8 attributeId, u8 value);
-void sub_8118FBC(u8 arg0, u8 arg1, u8 arg2, u8 bankIdentity, u8 arg4, void *arg5, u16 *arg6, u16 arg7);
-void HandleIntroSlide(u8 terrainId);
+s32 GetAnimBgAttribute(u8 bgId, u8 attributeId);
+void HandleIntroSlide(u8 terrain);
+void sub_80BC41C(u8 taskId);
+void sub_80BCEF4(s32 bgId, u8 arg1, u8 arg2, u8 battlerPosition, u8 arg4, u8 *arg5, u16 *arg6, u16 tilesOffset);
 
-// battle_anim_80A5C6C.s
-void sub_80A6EEC(struct Sprite *sprite);
-void sub_80A68D4(struct Sprite *sprite);
-void sub_80A6F3C(struct Sprite *sprite);
-void sub_80A8278(void);
-void sub_80A6B30(struct BattleAnimBgData *);
-void sub_80A6B90(struct BattleAnimBgData *, u32 arg1);
-u8 sub_80A82E4(u8 bank);
-bool8 AnimateBallThrow(struct Sprite *sprite);
-
-// battle_anim_special
+// battle_anim_special.s
 void sub_80F1720(u8 battler, struct Pokemon *mon);
 
 enum
@@ -115,19 +107,19 @@ enum
     BATTLER_COORD_ATTR_RAW_BOTTOM,
 };
 
-u8 GetBattlerSpriteCoord(u8 bank, u8 attributeId);
+u8 GetBattlerSpriteCoord(u8 battlerId, u8 attributeId);
 
-bool8 IsBankSpritePresent(u8 bank);
+bool8 IsBankSpritePresent(u8 battlerId);
 void sub_80A6C68(u8 arg0);
 u8 GetAnimBattlerSpriteId(u8 wantedBank);
 bool8 IsDoubleBattle(void);
 u8 sub_80A6D94(void);
 u8 sub_80A8364(u8);
-void StoreSpriteCallbackInData6(struct Sprite *sprite, void (*spriteCallback)(struct Sprite*));
+void StoreSpriteCallbackInData6(struct Sprite *sprite, void (*spriteCallback)(struct Sprite *));
 void SetSpritePrimaryCoordsFromSecondaryCoords(struct Sprite *sprite);
-u8 GetBattlerSpriteDefault_Y(u8 bank);
-u8 sub_80A82E4(u8 bank);
-u8 GetSubstituteSpriteDefault_Y(u8 bank);
+u8 GetBattlerSpriteDefault_Y(u8 battlerId);
+u8 sub_80A82E4(u8 battlerId);
+u8 GetSubstituteSpriteDefault_Y(u8 battlerId);
 u8 GetGhostSpriteDefault_Y(u8 battlerId);
 void sub_8072E48(u8 battlerId, u8);
 void sub_8073128(u8);
@@ -146,7 +138,7 @@ void LaunchStatusAnimation(u8 bank, u8 statusAnimId);
 // battle_anim_special.s
 u8 ItemIdToBallId(u16 itemId);
 u8 LaunchBallStarsTask(u8 x, u8 y, u8 kindOfStars, u8 arg3, u8 ballId);
-u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 bank, u32 arg2, u8 ballId);
+u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 battlerId, u32 arg2, u8 ballId);
 
 // battle_anim_mons.s
 void TranslateMonSpriteLinear(struct Sprite * sprite);
@@ -173,6 +165,7 @@ u8 sub_8076E34(s32, u8, s32);
 void sub_8075358(u8 bgId);
 u32 sub_8075BE8(u8, u8, u8, u8, u8, u8, u8);
 void sub_8075458(bool8);
+bool8 AnimateBallThrow(struct Sprite *sprite);
 
 // battle_anim_mon_movement.c
 void AnimTask_ShakeMon(u8 taskId);

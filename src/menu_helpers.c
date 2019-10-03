@@ -95,7 +95,7 @@ u8 sub_80BF66C(void)
     return 0;
 }
 
-bool8 sub_80BF6A8(u16 itemId)
+bool8 itemid_link_can_give_berry(u16 itemId)
 {
     if (itemId != ITEM_ENIGMA_BERRY)
         return TRUE;

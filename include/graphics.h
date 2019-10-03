@@ -998,4 +998,12 @@ extern const u16 gCreditsAllRightsReservedGfxPal[];
 extern const u8 gCreditsAllRightsReservedGfxTiles[];
 extern const u8 gCreditsAllRightsReservedGfxMap[];
 
+// berry_pouch
+extern const u32 gBerryPouchSpriteTiles[];
+extern const u8 gBerryPouchBgGfx[];
+extern const u32 gBerryPouchBgPals[];
+extern const u32 gBerryPouchBgPal0FemaleOverride[];
+extern const u32 gBerryPouchSpritePalette[];
+extern const u8 gBerryPouchBg1Tilemap[];
+
 #endif //GUARD_GRAPHICS_H

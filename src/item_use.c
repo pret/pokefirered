@@ -435,7 +435,7 @@ void FieldUseFunc_BerryPouch(u8 taskId)
 
 void InitBerryPouchFromBag(void)
 {
-    InitBerryPouch(0, ReturnToBagFromKeyItem, 0);
+    InitBerryPouch(BERRYPOUCH_FROMFIELD, ReturnToBagFromKeyItem, 0);
 }
 
 void Task_InitBerryPouchFromField(u8 taskId)
@@ -444,7 +444,7 @@ void Task_InitBerryPouchFromField(u8 taskId)
     {
         CleanupOverworldWindowsAndTilemaps();
         sub_80A1184();
-        InitBerryPouch(0, CB2_ReturnToField, 1);
+        InitBerryPouch(BERRYPOUCH_FROMFIELD, CB2_ReturnToField, 1);
         DestroyTask(taskId);
     }
 }
@@ -457,7 +457,7 @@ void BattleUseFunc_BerryPouch(u8 taskId)
 
 void InitBerryPouchFromBattle(void)
 {
-    InitBerryPouch(4, sub_8107ECC, 0);
+    InitBerryPouch(BERRYPOUCH_FROMBATTLE, sub_8107ECC, 0);
 }
 
 void FieldUseFunc_TeachyTv(u8 taskId)
@@ -852,7 +852,7 @@ void FieldUseFunc_OakStopsYou(u8 taskId)
     if (GetPocketByItemId(gSpecialVar_ItemId) == POCKET_BERRY_POUCH)
     {
         StringExpandPlaceholders(gStringVar4, gUnknown_8416425);
-        DisplayItemMessageInBerryPouch(taskId, 4, gStringVar4, sub_813E2B8);
+        DisplayItemMessageInBerryPouch(taskId, 4, gStringVar4, Task_BerryPouch_DestroyDialogueWindowAndRefreshListMenu);
     }
     else
         sub_80A1110(taskId, gTasks[taskId].data[3]);

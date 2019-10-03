@@ -94,6 +94,7 @@ extern const u8 gText_Pokemon[];
 extern const u8 gText_PkmnFainted3[];
 
 extern const u8 gOtherText_Use[];
+extern const u8 gOtherText_Toss[];
 extern const u8 gOtherText_Give[];
 extern const u8 gOtherText_Exit[];
 extern const u8 gText_ThreeHyphens[];
@@ -314,5 +315,13 @@ extern const u8 gCreditsString_Braille_Code_Check_4[];
 extern const u8 gCreditsString_The_Royal_New_Zealand_Foundation_of_the_Blind_Greg_Moran[];
 extern const u8 gCreditsString_Graphic_Designer[];
 extern const u8 gCreditsString_Akira_Kinashi[];
+
+// berry_pouch
+extern const u8 gText_TheStrVar1CantBeHeldHere[];
+extern const u8 gText_TossOutHowManyStrVar1s[];
+extern const u8 gText_ThrewAwayStrVar2StrVar1s[];
+extern const u8 gText_ThrowAwayStrVar2OfThisItemQM[];
+extern const u8 gText_BerryPouch[];
+extern const u8 gText_TheBerryPouchWillBePutAway[];
 
 #endif //GUARD_STRINGS_H

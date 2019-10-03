@@ -372,7 +372,7 @@ gUnknown_8416195::
 gOtherText_Use::
 	.string "USE$"
 
-gUnknown_84161A4::
+gOtherText_Toss::
 	.string "TOSS$"
 
 gUnknown_84161A9::
@@ -555,25 +555,25 @@ gOtherText_WhereShouldTheStrVar1BePlaced:: @ 841633F
 gText_ItemCantBeHeld:: @ 841635E
 	.string "The {STR_VAR_1} can't be held.$"
 
-gUnknown_8416374:: @ 8416374
+gText_TheStrVar1CantBeHeldHere:: @ 8416374
 	.string "The {STR_VAR_1} can't be held\nhere.$"
 
 gUnknown_841638F:: @ 841638F
-	.string "Deposit how many\n{STR_VAR_1}シsス?$"
+	.string "Deposit how many\n{STR_VAR_1}(s)?$"
 
 gUnknown_84163A7:: @ 84163A7
-	.string "Deposited {STR_VAR_2}\n{STR_VAR_1}シsス.$"
+	.string "Deposited {STR_VAR_2}\n{STR_VAR_1}(s).$"
 
 gUnknown_84163BB:: @ 84163BB
 	.string "There's no room to\nstore items.$"
 
-gUnknown_84163DB:: @ 84163DB
-	.string "Toss out how many\n{STR_VAR_1}シsス?$"
+gText_TossOutHowManyStrVar1s:: @ 84163DB
+	.string "Toss out how many\n{STR_VAR_1}(s)?$"
 
-gUnknown_84163F4:: @ 84163F4
-	.string "Threw away {STR_VAR_2}\n{STR_VAR_1}シsス.$"
+gText_ThrewAwayStrVar2StrVar1s:: @ 84163F4
+	.string "Threw away {STR_VAR_2}\n{STR_VAR_1}(s).$"
 
-gUnknown_8416409:: @ 8416409
+gText_ThrowAwayStrVar2OfThisItemQM:: @ 8416409
 	.string "Throw away {STR_VAR_2} of\nthis item?$"
 
 gUnknown_8416425:: @ 8416425
@@ -654,10 +654,10 @@ gText_FontSize2:: @ 8416703
 gUnknown_8416707:: @ 8416707
 	.string "  $"
 
-gUnknown_841670A:: @ 841670A
+gText_BerryPouch:: @ 841670A
 	.string "BERRY POUCH$"
 
-gUnknown_8416716:: @ 8416716
+gText_TheBerryPouchWillBePutAway:: @ 8416716
 	.string "The BERRY POUCH will be\nput away.$"
 
 gUnknown_8416738:: @ 0x8416738

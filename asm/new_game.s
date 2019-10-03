@@ -184,7 +184,7 @@ ResetMenuAndMonGlobals: @ 8054A28
 	bl ZeroEnemyPartyMons
 	bl sub_81089BC
 	bl ResetTMCaseCursorPos
-	bl sub_813D6E4
+	bl BerryPouch_CursorResetToTop
 	bl sub_811089C
 	bl Random
 	lsls r0, 16

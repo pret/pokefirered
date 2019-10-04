@@ -11,7 +11,7 @@
 
 struct SeviiDexArea
 {
-    const u16 (* lut)[2];
+    const u16 (*lut)[2];
     s32 count;
 };
 
@@ -225,7 +225,7 @@ s32 BuildPokedexAreaSubspriteBuffer(u16 species, struct Subsprite * subsprites)
 static s32 GetRoamerIndex(u16 species)
 {
     s32 i;
-    for (i = 0; i < 3u; i++)
+    for (i = 0; i < NELEMS(sRoamerPairs); i++)
     {
         if (sRoamerPairs[i].roamer == species)
             return i;

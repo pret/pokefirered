@@ -123,7 +123,7 @@ MAKEFLAGS += --no-print-directory
 
 AUTO_GEN_TARGETS :=
 
-all: rom
+all: tools rom
 
 rom: $(ROM)
 ifeq ($(COMPARE),1)

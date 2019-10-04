@@ -55,7 +55,7 @@ gUnknown_83C7294:: @ 83C7294
 gUnknown_83C7388:: @ 83C7388
 	.incbin "baserom.gba", 0x3C7388, 0x2930
 
-gUnknown_83C9CB8:: @ 83C9CB8
+gWildMonHeaders:: @ 83C9CB8
 	.incbin "baserom.gba", 0x3C9CB8, 0xA64
 
 gUnknown_83CA71C:: @ 83CA71C

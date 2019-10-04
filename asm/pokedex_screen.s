@@ -7412,7 +7412,7 @@ sub_810603C: @ 810603C
 	movs r2, 0
 	movs r3, 0
 	bl FillBgTilemapBufferRect_Palette0
-	bl sub_80CC204
+	bl GetUnlockedSeviiAreas
 	ldr r1, [r6]
 	adds r1, 0x64
 	strb r0, [r1]

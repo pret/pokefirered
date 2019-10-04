@@ -3665,8 +3665,8 @@ sub_80CC1E4: @ 80CC1E4
 _080CC200: .4byte gSaveBlock2Ptr
 	thumb_func_end sub_80CC1E4
 
-	thumb_func_start sub_80CC204
-sub_80CC204: @ 80CC204
+	thumb_func_start GetUnlockedSeviiAreas
+GetUnlockedSeviiAreas: @ 80CC204
 	push {r4,lr}
 	movs r4, 0
 	ldr r0, _080CC2A4 @ =0x0000089b
@@ -3753,7 +3753,7 @@ _080CC2AC: .4byte 0x0000089d
 _080CC2B0: .4byte 0x0000089e
 _080CC2B4: .4byte 0x0000089f
 _080CC2B8: .4byte 0x000008a1
-	thumb_func_end sub_80CC204
+	thumb_func_end GetUnlockedSeviiAreas
 
 	thumb_func_start sub_80CC2BC
 sub_80CC2BC: @ 80CC2BC

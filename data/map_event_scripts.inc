@@ -1485,7 +1485,7 @@ gUnknown_81A6481:: @ 81A6481
 	setflag FLAG_0x09F
 	setflag FLAG_0x0A0
 	setflag FLAG_0x0AE
-	setvar VAR_MIRAGE_RND_L, 500
+	setvar VAR_0x4025, 500
 	end
 
 EventScript_1A651A:: @ 81A651A

@@ -246,10 +246,10 @@ SECTIONS {
         src/oak_speech.o(.text);
         src/tm_case.o(.text);
         src/menu_indicators.o(.text);
-        asm/pokedex_area_markers.o(.text);
+        src/pokedex_area_markers.o(.text);
         asm/pokemon_summary_screen.o(.text);
         src/help_system.o(.text);
-        asm/wild_pokemon_area.o(.text);
+        src/wild_pokemon_area.o(.text);
         src/dynamic_placeholder_text_util.o(.text);
         src/berry_pouch.o(.text);
         src/itemfinder.o(.text);
@@ -461,10 +461,10 @@ SECTIONS {
         src/oak_speech.o(.rodata);
         src/tm_case.o(.rodata);
         src/menu_indicators.o(.rodata);
-        data/pokedex_area_markers.o(.rodata);
+        src/pokedex_area_markers.o(.rodata);
         data/pokemon_summary_screen.o(.rodata);
         src/help_system.o(.rodata);
-        data/wild_pokemon_area.o(.rodata);
+        src/wild_pokemon_area.o(.rodata);
         src/dynamic_placeholder_text_util.o(.rodata);
         src/berry_pouch.o(.rodata);
         src/itemfinder.o(.rodata);

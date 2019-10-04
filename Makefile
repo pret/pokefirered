@@ -219,6 +219,11 @@ else
 $(DATA_ASM_BUILDDIR)/%.o: data_dep = $(shell $(SCANINC) -I . $(DATA_ASM_SUBDIR)/$*.s)
 endif
 
+berry_fix:
+	@$(MAKE) -C berry_fix COMPARE=$(COMPARE)
+
+berry_fix/berry_fix.gba: berry_fix
+
 $(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s $$(data_dep)
 	$(PREPROC) $< charmap.txt | $(CPP) -I include -nostdinc -undef -Wno-unicode - | $(AS) $(ASFLAGS) -o $@
 
@@ -237,14 +242,10 @@ $(OBJ_DIR)/sym_ewram.ld: sym_ewram.txt
 $(OBJ_DIR)/ld_script.ld: ld_script.txt $(OBJ_DIR)/sym_bss.ld $(OBJ_DIR)/sym_common.ld $(OBJ_DIR)/sym_ewram.ld
 	cd $(OBJ_DIR) && sed -f ../../ld_script.sed ../../$< | sed "s#tools/#../../tools/#g" > ld_script.ld
 
-$(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS) berry_fix
+$(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS)
 	cd $(OBJ_DIR) && ../../$(LD) $(LDFLAGS) -T ld_script.ld -o ../../$@ $(LIB)
 	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
 
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
 
-berry_fix/berry_fix.gba: berry_fix
-
-berry_fix:
-	@$(MAKE) -C berry_fix COMPARE=$(COMPARE)

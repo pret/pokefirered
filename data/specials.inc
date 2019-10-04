@@ -159,7 +159,7 @@ gSpecials:: @ 815FD60
 	def_special sub_80CA6BC
 	def_special sub_80CA6DC
 	def_special sub_80CA714
-	def_special sub_80CA758
+	def_special Special_SetHiddenItemFlag
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special Overworld_PlaySpecialMapMusic
@@ -359,7 +359,7 @@ gSpecials:: @ 815FD60
 	def_special sub_80CADEC
 	def_special sub_805D1A8
 	def_special sub_80CB0A8
-	def_special sub_80CB1D8
+	def_special Special_CheckAddCoins
 	def_special GetDaycarePokemonCount
 	def_special sub_80CB63C
 	def_special sub_80CBD80

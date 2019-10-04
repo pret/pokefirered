@@ -39,7 +39,7 @@ CeladonCity_GameCorner_EventScript_16C68D:: @ 816C68D
 	end
 
 EventScript_16C6E6:: @ 816C6E6
-	checkflag FLAG_0x243
+	checkflag FLAG_GOT_COIN_CASE
 	goto_if 0, EventScript_16C790
 	compare_var_to_value VAR_0x8009, 0
 	goto_if_eq EventScript_16C734
@@ -134,7 +134,7 @@ CeladonCity_GameCorner_EventScript_16C7E7:: @ 816C7E7
 	checkflag FLAG_0x26E
 	goto_if_eq EventScript_16C849
 	msgbox gUnknown_8196AF3
-	checkflag FLAG_0x243
+	checkflag FLAG_GOT_COIN_CASE
 	goto_if 0, EventScript_16C839
 	checkcoins VAR_0x4001
 	compare_var_to_value VAR_0x4001, 9990
@@ -198,7 +198,7 @@ CeladonCity_GameCorner_EventScript_16C89E:: @ 816C89E
 	checkflag FLAG_0x26F
 	goto_if_eq EventScript_16C8F0
 	msgbox gUnknown_8196D2B
-	checkflag FLAG_0x243
+	checkflag FLAG_GOT_COIN_CASE
 	goto_if 0, EventScript_16C839
 	checkcoins VAR_0x4001
 	compare_var_to_value VAR_0x4001, 9980
@@ -228,7 +228,7 @@ CeladonCity_GameCorner_EventScript_16C8FE:: @ 816C8FE
 	checkflag FLAG_0x270
 	goto_if_eq EventScript_16C950
 	msgbox gUnknown_8196DB7
-	checkflag FLAG_0x243
+	checkflag FLAG_GOT_COIN_CASE
 	goto_if 0, EventScript_16C839
 	checkcoins VAR_0x4001
 	compare_var_to_value VAR_0x4001, 9980
@@ -263,7 +263,7 @@ EventScript_16C96A:: @ 816C96A
 	end
 
 EventScript_16C96C:: @ 816C96C
-	checkflag FLAG_0x243
+	checkflag FLAG_GOT_COIN_CASE
 	goto_if 0, EventScript_16CAA0
 	msgbox gUnknown_8196F46, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0

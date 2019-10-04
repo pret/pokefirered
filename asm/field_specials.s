@@ -185,8 +185,8 @@ sub_80CA74C: @ 80CA74C
 _080CA754: .4byte gBattleOutcome
 	thumb_func_end sub_80CA74C
 
-	thumb_func_start sub_80CA758
-sub_80CA758: @ 80CA758
+	thumb_func_start Special_SetHiddenItemFlag
+Special_SetHiddenItemFlag: @ 80CA758
 	push {lr}
 	ldr r0, _080CA768 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
@@ -195,7 +195,7 @@ sub_80CA758: @ 80CA758
 	bx r0
 	.align 2, 0
 _080CA768: .4byte gSpecialVar_0x8004
-	thumb_func_end sub_80CA758
+	thumb_func_end Special_SetHiddenItemFlag
 
 	thumb_func_start sub_80CA76C
 sub_80CA76C: @ 80CA76C
@@ -1566,8 +1566,9 @@ _080CB1D2:
 	bx r1
 	thumb_func_end sub_80CB198
 
-	thumb_func_start sub_80CB1D8
-sub_80CB1D8: @ 80CB1D8
+	thumb_func_start Special_CheckAddCoins
+Special_CheckAddCoins: @ 80CB1D8
+@ addcoins but it's a dry run
 	push {lr}
 	ldr r0, _080CB1F0 @ =gSpecialVar_Result
 	ldrh r1, [r0]
@@ -1588,7 +1589,7 @@ _080CB1FC:
 _080CB1FE:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80CB1D8
+	thumb_func_end Special_CheckAddCoins
 
 	thumb_func_start sub_80CB204
 sub_80CB204: @ 80CB204
@@ -3942,8 +3943,8 @@ _080CC444: .4byte gSpecialVar_0x8004
 _080CC448: .4byte gSpecialVar_0x8006
 	thumb_func_end sub_80CC3CC
 
-	thumb_func_start sub_80CC44C
-sub_80CC44C: @ 80CC44C
+	thumb_func_start GetHiddenItemAttr
+GetHiddenItemAttr: @ 80CC44C
 	push {lr}
 	lsls r1, 24
 	lsrs r1, 24
@@ -3980,7 +3981,7 @@ _080CC484:
 _080CC486:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80CC44C
+	thumb_func_end GetHiddenItemAttr
 
 	thumb_func_start sub_80CC48C
 sub_80CC48C: @ 80CC48C

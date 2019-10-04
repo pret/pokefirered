@@ -833,7 +833,7 @@ s32 sub_80596FC(struct MapConnection *connection, s32 x, s32 y)
     return FALSE;
 }
 
-struct MapConnection *sub_805973C(s16 x, s16 y)
+struct MapConnection *GetMapConnectionAtPos(s16 x, s16 y)
 {
     s32 count;
     struct MapConnection *connection;

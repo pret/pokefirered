@@ -820,9 +820,6 @@ extern struct BattleSpriteData *gBattleSpritesDataPtr;
 extern u8 *gLinkBattleSendBuffer;
 extern u8 *gLinkBattleRecvBuffer;
 
-extern u8 *gUnknown_0202305C;
-extern u8 *gUnknown_02023060;
-
 // Move this somewhere else
 
 #include "sprite.h"

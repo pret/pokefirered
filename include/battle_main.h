@@ -67,7 +67,7 @@ void EndBounceEffect(u8 bank, bool8 b);
 void sub_8039E44(struct Sprite *sprite);
 void sub_8039E60(struct Sprite *sprite);
 void sub_8039E84(struct Sprite *sprite);
-void sub_8039E9C(struct Sprite *sprite);
+void sub_801236C(struct Sprite *sprite);
 void BeginBattleIntro(void);
 void SwitchInClearSetData(void);
 void FaintClearSetData(void);

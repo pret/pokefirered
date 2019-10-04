@@ -25,7 +25,7 @@ sub_80B78E0: @ 80B78E0
 	movs r0, 0x52
 	bl SetGpuReg
 	adds r0, r4, 0
-	bl sub_80768B0
+	bl GetBattlerSpriteBGPriorityRank
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -223,7 +223,7 @@ sub_80B7A80: @ 80B7A80
 	bl SetGpuReg
 	ldr r0, _080B7AAC @ =gBattleAnimAttacker
 	ldrb r0, [r0]
-	bl sub_80768B0
+	bl GetBattlerSpriteBGPriorityRank
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -472,7 +472,7 @@ sub_80B7C50: @ 80B7C50
 	cmp r0, 0
 	bne _080B7C82
 	adds r0, r3, 0
-	bl move_anim_8074EE0
+	bl DestroySpriteAndMatrix
 _080B7C82:
 	pop {r0}
 	bx r0
@@ -531,47 +531,47 @@ _080B7CE0:
 _080B7CEA:
 	adds r0, r5, 0
 	movs r1, 0x5
-	bl sub_8076B2C
+	bl GetBattlerSpriteCoordAttr
 	subs r0, 0x8
 	strh r0, [r4, 0x20]
 	adds r0, r5, 0
 	movs r1, 0x2
-	bl sub_8076B2C
+	bl GetBattlerSpriteCoordAttr
 	adds r0, 0x8
 	strh r0, [r4, 0x22]
 	b _080B7D58
 _080B7D04:
 	adds r0, r5, 0
 	movs r1, 0x5
-	bl sub_8076B2C
+	bl GetBattlerSpriteCoordAttr
 	subs r0, 0xE
 	strh r0, [r4, 0x20]
 	adds r0, r5, 0
 	movs r1, 0x2
-	bl sub_8076B2C
+	bl GetBattlerSpriteCoordAttr
 	adds r0, 0x10
 	strh r0, [r4, 0x22]
 	b _080B7D58
 _080B7D1E:
 	adds r0, r5, 0
 	movs r1, 0x4
-	bl sub_8076B2C
+	bl GetBattlerSpriteCoordAttr
 	adds r0, 0x8
 	strh r0, [r4, 0x20]
 	adds r0, r5, 0
 	movs r1, 0x2
-	bl sub_8076B2C
+	bl GetBattlerSpriteCoordAttr
 	adds r0, 0x8
 	b _080B7D4C
 _080B7D36:
 	adds r0, r5, 0
 	movs r1, 0x4
-	bl sub_8076B2C
+	bl GetBattlerSpriteCoordAttr
 	adds r0, 0xE
 	strh r0, [r4, 0x20]
 	adds r0, r5, 0
 	movs r1, 0x2
-	bl sub_8076B2C
+	bl GetBattlerSpriteCoordAttr
 	adds r0, 0x10
 _080B7D4C:
 	strh r0, [r4, 0x22]
@@ -593,7 +593,7 @@ _080B7D58:
 	ldr r0, _080B7D80 @ =0x0000fff4
 	strh r0, [r4, 0x38]
 	adds r0, r4, 0
-	bl sub_8075068
+	bl InitAnimArcTranslation
 	ldr r0, _080B7D84 @ =sub_80B7D88
 	str r0, [r4, 0x1C]
 	pop {r4-r7}
@@ -608,12 +608,12 @@ _080B7D84: .4byte sub_80B7D88
 sub_80B7D88: @ 80B7D88
 	push {r4,lr}
 	adds r4, r0, 0
-	bl AnimateBallThrow
+	bl TranslateAnimHorizontalArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B7D9C
 	adds r0, r4, 0
-	bl move_anim_8074EE0
+	bl DestroySpriteAndMatrix
 _080B7D9C:
 	pop {r4}
 	pop {r0}
@@ -642,7 +642,7 @@ sub_80B7DA4: @ 80B7DA4
 	strh r0, [r5, 0x16]
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_8076B2C
+	bl GetBattlerSpriteCoordAttr
 	subs r0, 0x7
 	strh r0, [r5, 0x14]
 	ldrh r1, [r5, 0x16]
@@ -678,7 +678,7 @@ _080B7E16:
 	strh r0, [r5, 0x18]
 	ldr r0, _080B7E64 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
-	bl sub_80768B0
+	bl GetBattlerSpriteBGPriorityRank
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0xE]
@@ -1022,7 +1022,7 @@ _080B80EC: .4byte 0x00003f3f
 _080B80F0:
 	ldr r0, _080B8110 @ =gBattleAnimTarget
 	ldrb r0, [r0]
-	bl sub_80768B0
+	bl GetBattlerSpriteBGPriorityRank
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0xE]
@@ -1095,7 +1095,7 @@ _080B817C:
 	strh r0, [r5, 0x16]
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_8076B2C
+	bl GetBattlerSpriteCoordAttr
 	subs r0, 0x7
 	strh r0, [r5, 0x14]
 	ldrh r1, [r5, 0x16]
@@ -1653,7 +1653,7 @@ sub_80B85B8: @ 80B85B8
 	mov r10, r0
 	ldr r6, _080B8658 @ =gBattleAnimAttacker
 	ldrb r0, [r6]
-	bl sub_80768B0
+	bl GetBattlerSpriteBGPriorityRank
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -1731,7 +1731,7 @@ sub_80B8664: @ 80B8664
 	lsrs r6, r0, 24
 	ldr r4, _080B86AC @ =gBattleAnimAttacker
 	ldrb r0, [r4]
-	bl sub_80768B0
+	bl GetBattlerSpriteBGPriorityRank
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -1778,7 +1778,7 @@ sub_80B86B0: @ 80B86B0
 	ldrb r1, [r1, 0x4]
 	adds r0, r4, 0
 	bl StartSpriteAnim
-	ldr r0, _080B86E4 @ =sub_8074F6C
+	ldr r0, _080B86E4 @ =RunStoredCallbackWhenAnimEnds
 	str r0, [r4, 0x1C]
 	ldr r1, _080B86E8 @ =DestroyAnimSprite
 	adds r0, r4, 0
@@ -1788,7 +1788,7 @@ sub_80B86B0: @ 80B86B0
 	bx r0
 	.align 2, 0
 _080B86E0: .4byte gBattleAnimArgs
-_080B86E4: .4byte sub_8074F6C
+_080B86E4: .4byte RunStoredCallbackWhenAnimEnds
 _080B86E8: .4byte DestroyAnimSprite
 	thumb_func_end sub_80B86B0
 
@@ -1952,7 +1952,7 @@ _080B8828:
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
 	ldr r1, _080B88C4 @ =gFile_graphics_battle_anims_masks_metal_shine_tilemap
-	bl sub_807543C
+	bl AnimLoadCompressedBgTilemap
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
 	ldr r1, _080B88C8 @ =gFile_graphics_battle_anims_masks_metal_shine_sheet
@@ -1991,7 +1991,7 @@ _080B8828:
 	bne _080B88E0
 	adds r0, r1, 0
 	movs r1, 0
-	bl sub_8075B48
+	bl SetGreyscaleOrOriginalPalette
 	b _080B88EC
 	.align 2, 0
 _080B88B8: .4byte gBattlerPartyIndexes
@@ -2093,7 +2093,7 @@ _080B894E:
 	bne _080B8990
 	adds r0, r1, 0
 	movs r1, 0x1
-	bl sub_8075B48
+	bl SetGreyscaleOrOriginalPalette
 _080B8990:
 	movs r0, 0x8
 	ldrsh r1, [r4, r0]
@@ -2279,7 +2279,7 @@ _080B8B06:
 	adds r0, 0x10
 	ldr r1, _080B8B34 @ =gBattleAnimArgs
 	ldrb r1, [r1, 0x2]
-	bl sub_8075B48
+	bl SetGreyscaleOrOriginalPalette
 _080B8B22:
 	adds r0, r5, 0
 	bl DestroyAnimVisualTask

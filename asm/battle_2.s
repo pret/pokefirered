@@ -4145,16 +4145,16 @@ _08011F3C:
 	lsls r0, 16
 	lsrs r0, 16
 _08011F46:
-	ldr r1, _08011F4C @ =gUnknown_82349CC
+	ldr r1, _08011F4C @ =gMonFrontPicCoords
 	lsls r0, 2
 	b _08011F88
 	.align 2, 0
-_08011F4C: .4byte gUnknown_82349CC
+_08011F4C: .4byte gMonFrontPicCoords
 _08011F50:
 	ldr r0, _08011F68 @ =0x00000181
 	cmp r4, r0
 	bne _08011F74
-	ldr r0, _08011F6C @ =gUnknown_83AE03C
+	ldr r0, _08011F6C @ =gCastformFrontSpriteCoords
 	ldr r1, _08011F70 @ =gBattleMonForms
 	adds r1, r6, r1
 	ldrb r1, [r1]
@@ -4164,19 +4164,19 @@ _08011F50:
 	b _08011F8C
 	.align 2, 0
 _08011F68: .4byte 0x00000181
-_08011F6C: .4byte gUnknown_83AE03C
+_08011F6C: .4byte gCastformFrontSpriteCoords
 _08011F70: .4byte gBattleMonForms
 _08011F74:
 	movs r0, 0xCE
 	lsls r0, 1
 	cmp r4, r0
 	bls _08011F84
-	ldr r0, _08011F80 @ =gUnknown_82349CC
+	ldr r0, _08011F80 @ =gMonFrontPicCoords
 	b _08011F8A
 	.align 2, 0
-_08011F80: .4byte gUnknown_82349CC
+_08011F80: .4byte gMonFrontPicCoords
 _08011F84:
-	ldr r1, _08011FAC @ =gUnknown_82349CC
+	ldr r1, _08011FAC @ =gMonFrontPicCoords
 	lsls r0, r4, 2
 _08011F88:
 	adds r0, r1
@@ -4199,7 +4199,7 @@ _08011F8C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08011FAC: .4byte gUnknown_82349CC
+_08011FAC: .4byte gMonFrontPicCoords
 _08011FB0: .4byte sub_8011FB4
 	thumb_func_end SpriteCB_FaintOpponentMon
 

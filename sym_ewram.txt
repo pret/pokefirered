@@ -675,10 +675,7 @@ gAnimBattlerSpecies: @ 2037F1C
 gUnknown_2037F24: @ 2037F24
 	.space 0x4
 
-gUnknown_2037F28: @ 2037F28
-	.space 0x8
-
-	.align 2
+	.include "src/battle_anim_mons.o"
 	.include "src/title_screen.o"
 
 	.align 2

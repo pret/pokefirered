@@ -18,11 +18,6 @@ struct LinkPlayerMapObject
     u8 mode;
 };
 
-struct UCoords32
-{
-    u32 x, y;
-};
-
 struct CreditsOverworldCmd
 {
     s16 unk_0;

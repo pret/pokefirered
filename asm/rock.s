@@ -21,7 +21,7 @@ sub_80B4634: @ 80B4634
 	adds r3, r5, 0
 	adds r3, 0x22
 	movs r1, 0
-	bl sub_8076D9C
+	bl SetAverageBattlerPositions
 _080B4654:
 	ldrh r0, [r6]
 	ldrh r1, [r5, 0x20]
@@ -49,7 +49,7 @@ _080B4654:
 	ldr r1, _080B46AC @ =sub_80B46B4
 	adds r0, r5, 0
 	bl StoreSpriteCallbackInData6
-	ldr r1, _080B46B0 @ =sub_8074BE4
+	ldr r1, _080B46B0 @ =TranslateSpriteInEllipseOverDuration
 	str r1, [r5, 0x1C]
 	adds r0, r5, 0
 	bl _call_via_r1
@@ -61,7 +61,7 @@ _080B46A0: .4byte gBattleAnimArgs
 _080B46A4: .4byte gBattleAnimTarget
 _080B46A8: .4byte 0x0000ffba
 _080B46AC: .4byte sub_80B46B4
-_080B46B0: .4byte sub_8074BE4
+_080B46B0: .4byte TranslateSpriteInEllipseOverDuration
 	thumb_func_end sub_80B4634
 
 	thumb_func_start sub_80B46B4
@@ -81,10 +81,10 @@ sub_80B46B4: @ 80B46B4
 	strh r0, [r4, 0x34]
 	ldr r0, _080B46EC @ =0x0000ffe8
 	strh r0, [r4, 0x36]
-	ldr r1, _080B46F0 @ =move_anim_8074EE0
+	ldr r1, _080B46F0 @ =DestroySpriteAndMatrix
 	adds r0, r4, 0
 	bl StoreSpriteCallbackInData6
-	ldr r1, _080B46F4 @ =sub_8074BE4
+	ldr r1, _080B46F4 @ =TranslateSpriteInEllipseOverDuration
 	str r1, [r4, 0x1C]
 	adds r0, r4, 0
 	bl _call_via_r1
@@ -93,8 +93,8 @@ sub_80B46B4: @ 80B46B4
 	bx r0
 	.align 2, 0
 _080B46EC: .4byte 0x0000ffe8
-_080B46F0: .4byte move_anim_8074EE0
-_080B46F4: .4byte sub_8074BE4
+_080B46F0: .4byte DestroySpriteAndMatrix
+_080B46F4: .4byte TranslateSpriteInEllipseOverDuration
 	thumb_func_end sub_80B46B4
 
 	thumb_func_start sub_80B46F8
@@ -146,9 +146,9 @@ _080B472E:
 	bl InitSpriteDataForLinearTranslation
 	strh r4, [r5, 0x34]
 	strh r4, [r5, 0x36]
-	ldr r0, _080B4774 @ =sub_8074D00
+	ldr r0, _080B4774 @ =TranslateSpriteLinearFixedPoint
 	str r0, [r5, 0x1C]
-	ldr r1, _080B4778 @ =move_anim_8074EE0
+	ldr r1, _080B4778 @ =DestroySpriteAndMatrix
 	adds r0, r5, 0
 	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
@@ -156,8 +156,8 @@ _080B472E:
 	bx r0
 	.align 2, 0
 _080B4770: .4byte gBattleAnimArgs
-_080B4774: .4byte sub_8074D00
-_080B4778: .4byte move_anim_8074EE0
+_080B4774: .4byte TranslateSpriteLinearFixedPoint
+_080B4778: .4byte DestroySpriteAndMatrix
 	thumb_func_end sub_80B46F8
 
 	thumb_func_start sub_80B477C
@@ -171,14 +171,14 @@ sub_80B477C: @ 80B477C
 	bne _080B4798
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_8075160
+	bl InitSpritePosToAnimAttacker
 	b _080B47A0
 	.align 2, 0
 _080B4794: .4byte gBattleAnimArgs
 _080B4798:
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_8075114
+	bl InitSpritePosToAnimTarget
 _080B47A0:
 	ldr r1, _080B47BC @ =gBattleAnimArgs
 	ldrh r0, [r1, 0x6]
@@ -286,7 +286,7 @@ _080B4854:
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
 	ldr r1, _080B48F0 @ =gFile_graphics_battle_anims_backgrounds_sandstorm_brew_tilemap
-	bl sub_807543C
+	bl AnimLoadCompressedBgTilemap
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
 	ldr r1, _080B48F4 @ =gFile_graphics_battle_anims_backgrounds_sandstorm_brew_sheet
@@ -673,7 +673,7 @@ sub_80B4B8C: @ 80B4B8C
 	bl StartSpriteAnim
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_8075160
+	bl InitSpritePosToAnimAttacker
 	ldrh r0, [r5, 0x6]
 	strh r0, [r4, 0x2E]
 	ldrh r0, [r4, 0x20]
@@ -1141,7 +1141,7 @@ _080B4ECC:
 	ands r1, r3
 	orrs r1, r2
 	strh r1, [r0, 0x4]
-	bl sub_8075068
+	bl InitAnimArcTranslation
 	ldrh r0, [r4, 0x1E]
 	adds r0, 0x1
 	strh r0, [r4, 0x1E]
@@ -1165,7 +1165,7 @@ _080B4F74: .4byte 0xfffffc00
 sub_80B4F78: @ 80B4F78
 	push {r4,lr}
 	adds r4, r0, 0
-	bl AnimateBallThrow
+	bl TranslateAnimHorizontalArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B4FAA
@@ -1316,7 +1316,7 @@ sub_80B5074: @ 80B5074
 	bl StartSpriteAffineAnim
 _080B5090:
 	adds r0, r4, 0
-	bl sub_8075DF4
+	bl TranslateAnimSpriteToTargetMonLocation
 	pop {r4}
 	pop {r0}
 	bx r0

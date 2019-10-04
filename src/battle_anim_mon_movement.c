@@ -844,7 +844,7 @@ static void sub_8099B54(u8 taskId)
     gTasks[taskId].data[3] += gTasks[taskId].data[4];
     SetSpriteRotScale(gTasks[taskId].data[5], 0x100, 0x100, gTasks[taskId].data[3]);
     if (gTasks[taskId].data[7])
-        sub_80759DC(gTasks[taskId].data[5]);
+        SetBattlerSpriteYOffsetFromRotation(gTasks[taskId].data[5]);
     if (++gTasks[taskId].data[1] >= gTasks[taskId].data[2])
     {
         switch (gTasks[taskId].data[6])

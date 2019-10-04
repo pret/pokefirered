@@ -9300,7 +9300,7 @@ _0805139C:
 	adds r1, r0
 	lsls r1, 2
 	adds r1, r3
-	ldr r2, _08051410 @ =gUnknown_82349CC
+	ldr r2, _08051410 @ =gMonFrontPicCoords
 	adds r0, r4, 0
 	adds r0, 0xF0
 	ldrh r0, [r0]
@@ -9324,7 +9324,7 @@ _0805139C:
 	.align 2, 0
 _08051408: .4byte gSprites
 _0805140C: .4byte 0x0000ff4c
-_08051410: .4byte gUnknown_82349CC
+_08051410: .4byte gMonFrontPicCoords
 _08051414:
 	ldr r5, [r7]
 	adds r6, r5, 0
@@ -10839,7 +10839,7 @@ _08052070:
 	adds r1, r0
 	lsls r1, 2
 	adds r1, r4
-	ldr r3, _08052120 @ =gUnknown_82349CC
+	ldr r3, _08052120 @ =gMonFrontPicCoords
 	adds r2, 0xF2
 	ldrh r0, [r2]
 	lsls r0, 2
@@ -10906,7 +10906,7 @@ _08052070:
 	b _080522AC
 	.align 2, 0
 _0805211C: .4byte gSprites
-_08052120: .4byte gUnknown_82349CC
+_08052120: .4byte gMonFrontPicCoords
 _08052124: .4byte 0x000fffff
 _08052128:
 	movs r1, 0xAA
@@ -11476,7 +11476,7 @@ _0805278C:
 	adds r1, r0
 	lsls r1, 2
 	adds r1, r3
-	ldr r2, _08052800 @ =gUnknown_82349CC
+	ldr r2, _08052800 @ =gMonFrontPicCoords
 	adds r0, r4, 0
 	adds r0, 0xF0
 	ldrh r0, [r0]
@@ -11500,7 +11500,7 @@ _0805278C:
 	.align 2, 0
 _080527F8: .4byte gSprites
 _080527FC: .4byte 0x0000ff4c
-_08052800: .4byte gUnknown_82349CC
+_08052800: .4byte gMonFrontPicCoords
 _08052804:
 	ldr r5, [r7]
 	adds r6, r5, 0
@@ -13064,7 +13064,7 @@ _080534CC:
 	adds r1, r0
 	lsls r1, 2
 	adds r1, r4
-	ldr r3, _0805357C @ =gUnknown_82349CC
+	ldr r3, _0805357C @ =gMonFrontPicCoords
 	adds r2, 0xF2
 	ldrh r0, [r2]
 	lsls r0, 2
@@ -13131,7 +13131,7 @@ _080534CC:
 	b _08053708
 	.align 2, 0
 _08053578: .4byte gSprites
-_0805357C: .4byte gUnknown_82349CC
+_0805357C: .4byte gMonFrontPicCoords
 _08053580: .4byte 0x000fffff
 _08053584:
 	movs r1, 0xAA

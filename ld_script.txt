@@ -111,7 +111,7 @@ SECTIONS {
         src/palette.o(.text);
         src/sound.o(.text);
         asm/battle_anim.o(.text);
-        asm/battle_anim_mons.o(.text);
+        src/battle_anim_mons.o(.text);
         src/task.o(.text);
         src/reshow_battle_screen.o(.text);
         asm/battle_anim_status_effects.o(.text);
@@ -412,6 +412,7 @@ SECTIONS {
         src/palette.o(.rodata);
         src/sound.o(.rodata);
         data/battle_anim.o(.rodata);
+        src/battle_anim_mons.o(.rodata);
         data/map_events.o(.rodata);
         data/battle_anim_status_effects.o(.rodata);
         src/title_screen.o(.rodata);

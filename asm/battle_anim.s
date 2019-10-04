@@ -3960,7 +3960,7 @@ sub_8074320: @ 8074320
 	cmp r7, 0
 	bne _08074370
 	ldrb r0, [r6]
-	bl sub_80768B0
+	bl GetBattlerSpriteBGPriorityRank
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0
@@ -3971,7 +3971,7 @@ _08074368: .4byte gBattleAnimAttacker
 _0807436C: .4byte gBattleAnimTarget
 _08074370:
 	ldrb r0, [r5]
-	bl sub_80768B0
+	bl GetBattlerSpriteBGPriorityRank
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0x1
@@ -4042,7 +4042,7 @@ sub_80743C8: @ 80743C8
 	cmp r7, 0
 	bne _08074418
 	ldrb r0, [r6]
-	bl sub_80768B0
+	bl GetBattlerSpriteBGPriorityRank
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0
@@ -4053,7 +4053,7 @@ _08074410: .4byte gBattleAnimAttacker
 _08074414: .4byte gBattleAnimTarget
 _08074418:
 	ldrb r0, [r5]
-	bl sub_80768B0
+	bl GetBattlerSpriteBGPriorityRank
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0x1

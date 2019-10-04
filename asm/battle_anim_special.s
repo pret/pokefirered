@@ -155,7 +155,7 @@ sub_80EEC0C: @ 80EEC0C
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
 	ldr r1, _080EEDD8 @ =gFile_graphics_battle_anims_masks_unknown_D2EC24_tilemap
-	bl sub_807543C
+	bl AnimLoadCompressedBgTilemap
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
 	ldr r1, _080EEDDC @ =gFile_graphics_battle_anims_masks_unknown_D2EC24_sheet
@@ -855,7 +855,7 @@ _080EF2E6:
 	movs r3, 0
 	bl SetSpriteRotScale
 	adds r0, r5, 0
-	bl sub_8076440
+	bl SetBattlerSpriteYOffsetFromYScale
 	movs r0, 0x1C
 	ldrsh r1, [r4, r0]
 	ldr r0, _080EF314 @ =0x000002cf
@@ -1585,7 +1585,7 @@ sub_80EF8C0: @ 80EF8C0
 	ldr r0, _080EF8E8 @ =0x0000ffd8
 	strh r0, [r4, 0x38]
 	adds r0, r4, 0
-	bl sub_8075068
+	bl InitAnimArcTranslation
 	ldr r0, _080EF8EC @ =sub_80EF8F0
 	str r0, [r4, 0x1C]
 	pop {r4}
@@ -1601,7 +1601,7 @@ sub_80EF8F0: @ 80EF8F0
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
-	bl AnimateBallThrow
+	bl TranslateAnimHorizontalArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _080EF99E
@@ -2804,7 +2804,7 @@ _080F01F2:
 	ldrsb r0, [r1, r0]
 	strh r0, [r5, 0x38]
 	adds r0, r5, 0
-	bl sub_8075068
+	bl InitAnimArcTranslation
 	add r4, r10
 	ldr r0, _080F0270 @ =sub_80F0278
 	str r0, [r4]
@@ -2849,7 +2849,7 @@ sub_80F0278: @ 80F0278
 	orrs r0, r1
 	strb r0, [r3]
 	adds r0, r4, 0
-	bl AnimateBallThrow
+	bl TranslateAnimHorizontalArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _080F02A8
@@ -3204,9 +3204,9 @@ sub_80F052C: @ 80F052C
 	movs r0, 0x20
 	strh r0, [r4, 0x38]
 	adds r0, r4, 0
-	bl sub_8075068
+	bl InitAnimArcTranslation
 	adds r0, r4, 0
-	bl sub_80750C8
+	bl TranslateAnimVerticalArc
 	ldr r0, _080F0570 @ =sub_80F0574
 	str r0, [r4, 0x1C]
 	pop {r4}
@@ -3220,7 +3220,7 @@ _080F0570: .4byte sub_80F0574
 sub_80F0574: @ 80F0574
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80750C8
+	bl TranslateAnimVerticalArc
 	lsls r0, 24
 	cmp r0, 0
 	bne _080F0590
@@ -5317,7 +5317,7 @@ _080F15F0:
 _080F15F6:
 	ldr r0, _080F1610 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
-	bl sub_80768B0
+	bl GetBattlerSpriteBGPriorityRank
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -5982,7 +5982,7 @@ sub_80F1B3C: @ 80F1B3C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r1, 0
-	bl sub_8075160
+	bl InitSpritePosToAnimAttacker
 	movs r0, 0x1E
 	strh r0, [r4, 0x2E]
 	movs r0, 0x1
@@ -6011,7 +6011,7 @@ sub_80F1B3C: @ 80F1B3C
 	ldr r0, _080F1BB4 @ =0x0000ffe0
 	strh r0, [r4, 0x38]
 	adds r0, r4, 0
-	bl sub_8075068
+	bl InitAnimArcTranslation
 	ldr r2, _080F1BB8 @ =gSprites
 	ldr r1, _080F1BBC @ =gBattlerSpriteIds
 	ldr r0, _080F1BC0 @ =gBattleAnimAttacker
@@ -6074,7 +6074,7 @@ _080F1C00: .4byte sub_80F1C04
 sub_80F1C04: @ 80F1C04
 	push {r4,lr}
 	adds r4, r0, 0
-	bl AnimateBallThrow
+	bl TranslateAnimHorizontalArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _080F1C26

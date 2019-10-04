@@ -110,7 +110,7 @@ sub_80ADC9C: @ 80ADC9C
 	cmp r0, 0
 	beq _080ADCB2
 	adds r0, r2, 0
-	bl move_anim_8074EE0
+	bl DestroySpriteAndMatrix
 _080ADCB2:
 	pop {r0}
 	bx r0
@@ -173,18 +173,18 @@ _080ADD1C:
 	strh r0, [r5, 0x32]
 	ldrh r0, [r2, 0x8]
 	strh r0, [r5, 0x34]
-	ldr r1, _080ADD44 @ =move_anim_8074EE0
+	ldr r1, _080ADD44 @ =DestroySpriteAndMatrix
 	adds r0, r5, 0
 	bl StoreSpriteCallbackInData6
-	ldr r0, _080ADD48 @ =sub_8074A80
+	ldr r0, _080ADD48 @ =TranslateSpriteInCircleOverDuration
 	str r0, [r5, 0x1C]
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080ADD40: .4byte gBattleAnimArgs
-_080ADD44: .4byte move_anim_8074EE0
-_080ADD48: .4byte sub_8074A80
+_080ADD44: .4byte DestroySpriteAndMatrix
+_080ADD48: .4byte TranslateSpriteInCircleOverDuration
 	thumb_func_end sub_80ADCB8
 
 	thumb_func_start sub_80ADD4C
@@ -315,7 +315,7 @@ _080ADE02:
 	cmp r0, 0
 	beq _080ADE66
 	adds r0, r4, 0
-	bl sub_8076884
+	bl GetBattlerSpriteBGPriority
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, 0x1
@@ -370,7 +370,7 @@ sub_80ADEB0: @ 80ADEB0
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	movs r1, 0x1
-	bl sub_8075160
+	bl InitSpritePosToAnimAttacker
 	ldr r5, _080ADF24 @ =gBattleAnimArgs
 	ldrh r0, [r5, 0x6]
 	strh r0, [r4, 0x2E]
@@ -392,7 +392,7 @@ sub_80ADEB0: @ 80ADEB0
 	lsrs r0, 24
 	strh r0, [r4, 0x36]
 	adds r0, r4, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimLinearTranslation
 	ldrh r0, [r5, 0x4]
 	strh r0, [r4, 0x38]
 	ldrh r0, [r5, 0xA]
@@ -432,7 +432,7 @@ _080ADF34: .4byte sub_80ADF38
 sub_80ADF38: @ 80ADF38
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80755E0
+	bl AnimTranslateLinear
 	lsls r0, 24
 	cmp r0, 0
 	bne _080ADFA2
@@ -743,7 +743,7 @@ sub_80AE1A0: @ 80AE1A0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r1, 0
-	bl sub_8075114
+	bl InitSpritePosToAnimTarget
 	ldrh r2, [r4, 0x4]
 	lsls r1, r2, 22
 	lsrs r1, 22
@@ -788,7 +788,7 @@ _080AE1FA:
 	ldr r0, _080AE214 @ =gBattleAnimArgs
 	ldrh r0, [r0, 0x4]
 	strh r0, [r4, 0x2E]
-	ldr r0, _080AE218 @ =sub_8074C44
+	ldr r0, _080AE218 @ =WaitAnimForDuration
 	str r0, [r4, 0x1C]
 	ldr r1, _080AE21C @ =DestroyAnimSprite
 	adds r0, r4, 0
@@ -798,7 +798,7 @@ _080AE1FA:
 	bx r0
 	.align 2, 0
 _080AE214: .4byte gBattleAnimArgs
-_080AE218: .4byte sub_8074C44
+_080AE218: .4byte WaitAnimForDuration
 _080AE21C: .4byte DestroyAnimSprite
 	thumb_func_end sub_80AE1A0
 
@@ -1344,11 +1344,11 @@ sub_80AE5BC: @ 80AE5BC
 	strh r0, [r4, 0x36]
 	strh r6, [r4, 0x38]
 	adds r0, r4, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimLinearTranslation
 	ldr r1, _080AE6B4 @ =sub_80AE704
 	adds r0, r4, 0
 	bl StoreSpriteCallbackInData6
-	ldr r0, _080AE6B8 @ =sub_8074F6C
+	ldr r0, _080AE6B8 @ =RunStoredCallbackWhenAnimEnds
 	str r0, [r4, 0x1C]
 	ldrh r0, [r5, 0x1A]
 	adds r0, 0x1
@@ -1390,7 +1390,7 @@ _080AE6A8: .4byte gUnknown_83E6120
 _080AE6AC: .4byte gSprites
 _080AE6B0: .4byte gUnknown_83E60D0
 _080AE6B4: .4byte sub_80AE704
-_080AE6B8: .4byte sub_8074F6C
+_080AE6B8: .4byte RunStoredCallbackWhenAnimEnds
 _080AE6BC:
 	movs r1, 0x16
 	ldrsh r0, [r5, r1]
@@ -1408,7 +1408,7 @@ _080AE6CA:
 sub_80AE6D0: @ 80AE6D0
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80755E0
+	bl AnimTranslateLinear
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AE6F8
@@ -1476,18 +1476,18 @@ _080AE73A:
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
-	ldr r1, _080AE76C @ =move_anim_8074EE0
+	ldr r1, _080AE76C @ =DestroySpriteAndMatrix
 	adds r0, r5, 0
 	bl StoreSpriteCallbackInData6
-	ldr r0, _080AE770 @ =sub_8074F50
+	ldr r0, _080AE770 @ =RunStoredCallbackWhenAffineAnimEnds
 	str r0, [r5, 0x1C]
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080AE768: .4byte gBattleAnimTarget
-_080AE76C: .4byte move_anim_8074EE0
-_080AE770: .4byte sub_8074F50
+_080AE76C: .4byte DestroySpriteAndMatrix
+_080AE770: .4byte RunStoredCallbackWhenAffineAnimEnds
 	thumb_func_end sub_80AE71C
 
 	thumb_func_start sub_80AE774
@@ -1527,7 +1527,7 @@ _080AE792:
 	ldr r1, _080AE7D4 @ =DestroyAnimSprite
 	adds r0, r5, 0
 	bl StoreSpriteCallbackInData6
-	ldr r0, _080AE7D8 @ =sub_8074F6C
+	ldr r0, _080AE7D8 @ =RunStoredCallbackWhenAnimEnds
 	str r0, [r5, 0x1C]
 	pop {r4,r5}
 	pop {r0}
@@ -1536,7 +1536,7 @@ _080AE792:
 _080AE7CC: .4byte gBattleAnimTarget
 _080AE7D0: .4byte gBattleAnimArgs
 _080AE7D4: .4byte DestroyAnimSprite
-_080AE7D8: .4byte sub_8074F6C
+_080AE7D8: .4byte RunStoredCallbackWhenAnimEnds
 	thumb_func_end sub_80AE774
 
 	thumb_func_start sub_80AE7DC
@@ -1632,7 +1632,7 @@ _080AE864:
 	cmp r0, r1
 	bls _080AE894
 	adds r0, r4, 0
-	bl move_anim_8074EE0
+	bl DestroySpriteAndMatrix
 _080AE894:
 	pop {r4}
 	pop {r0}
@@ -2203,7 +2203,7 @@ _080AECC4:
 	cmp r0, 0
 	beq _080AECD8
 	adds r0, r5, 0
-	bl move_anim_8074EE0
+	bl DestroySpriteAndMatrix
 _080AECD8:
 	pop {r4,r5}
 	pop {r0}

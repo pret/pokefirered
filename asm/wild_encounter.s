@@ -298,7 +298,7 @@ _0808290C:
 sub_8082934: @ 8082934
 	push {r4-r6,lr}
 	movs r4, 0
-	ldr r0, _08082990 @ =gUnknown_83C9CB8
+	ldr r0, _08082990 @ =gWildMonHeaders
 	ldrb r1, [r0]
 	adds r5, r0, 0
 	cmp r1, 0xFF
@@ -343,7 +343,7 @@ _08082980:
 	adds r0, r4, 0
 	b _080829B6
 	.align 2, 0
-_08082990: .4byte gUnknown_83C9CB8
+_08082990: .4byte gWildMonHeaders
 _08082994: .4byte 0x00007a01
 _08082998: .4byte gSaveBlock1Ptr
 _0808299C: .4byte 0x00004024
@@ -799,7 +799,7 @@ _08082CE4:
 	bl sub_8058F1C
 	cmp r0, 0x1
 	bne _08082D78
-	ldr r1, _08082D4C @ =gUnknown_83C9CB8
+	ldr r1, _08082D4C @ =gWildMonHeaders
 	lsls r2, r4, 2
 	adds r0, r2, r4
 	lsls r0, 2
@@ -822,7 +822,7 @@ _08082D06:
 	bne _08082D1E
 	b _08082E46
 _08082D1E:
-	ldr r1, _08082D4C @ =gUnknown_83C9CB8
+	ldr r1, _08082D4C @ =gWildMonHeaders
 	adds r0, r5, r4
 	lsls r0, 2
 	adds r1, 0x4
@@ -843,7 +843,7 @@ _08082D3A:
 	.align 2, 0
 _08082D44: .4byte gUnknown_20386DC
 _08082D48: .4byte 0x0000ffff
-_08082D4C: .4byte gUnknown_83C9CB8
+_08082D4C: .4byte gWildMonHeaders
 _08082D50:
 	bl TryStartRoamerEncounter
 	lsls r0, 24
@@ -884,7 +884,7 @@ _08082D78:
 	cmp r0, 0x1
 	bne _08082E46
 _08082DA8:
-	ldr r1, _08082E18 @ =gUnknown_83C9CB8
+	ldr r1, _08082E18 @ =gWildMonHeaders
 	lsls r2, r4, 2
 	adds r0, r2, r4
 	lsls r0, 2
@@ -904,7 +904,7 @@ _08082DA8:
 	cmp r0, 0
 	beq _08082E46
 _08082DD2:
-	ldr r1, _08082E18 @ =gUnknown_83C9CB8
+	ldr r1, _08082E18 @ =gWildMonHeaders
 	adds r0, r5, r4
 	lsls r0, 2
 	adds r1, 0x8
@@ -936,7 +936,7 @@ _08082DFA:
 	movs r0, 0x1
 	b _08082E48
 	.align 2, 0
-_08082E18: .4byte gUnknown_83C9CB8
+_08082E18: .4byte gWildMonHeaders
 _08082E1C: .4byte gSaveBlock1Ptr
 _08082E20: .4byte 0x000030d0
 _08082E24:
@@ -975,7 +975,7 @@ sub_8082E54: @ 8082E54
 	ldr r0, _08082EA4 @ =0x0000ffff
 	cmp r2, r0
 	beq _08082EB0
-	ldr r1, _08082EA8 @ =gUnknown_83C9CB8
+	ldr r1, _08082EA8 @ =gWildMonHeaders
 	lsls r0, r2, 2
 	adds r0, r2
 	lsls r0, 2
@@ -1006,7 +1006,7 @@ _08082E9C:
 	b _08082EB6
 	.align 2, 0
 _08082EA4: .4byte 0x0000ffff
-_08082EA8: .4byte gUnknown_83C9CB8
+_08082EA8: .4byte gWildMonHeaders
 _08082EAC: .4byte gSpecialVar_Result
 _08082EB0:
 	ldr r1, _08082EBC @ =gSpecialVar_Result
@@ -1049,7 +1049,7 @@ SweetScentWildEncounter: @ 8082EC0
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08082F3C
-	ldr r1, _08082F18 @ =gUnknown_83C9CB8
+	ldr r1, _08082F18 @ =gWildMonHeaders
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 2
@@ -1062,7 +1062,7 @@ SweetScentWildEncounter: @ 8082EC0
 	b _08082F58
 	.align 2, 0
 _08082F14: .4byte 0x0000ffff
-_08082F18: .4byte gUnknown_83C9CB8
+_08082F18: .4byte gWildMonHeaders
 _08082F1C:
 	mov r0, sp
 	movs r1, 0
@@ -1083,7 +1083,7 @@ _08082F3C:
 	movs r0, 0x1
 	b _08082F6E
 _08082F44:
-	ldr r1, _08082F68 @ =gUnknown_83C9CB8
+	ldr r1, _08082F68 @ =gWildMonHeaders
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 2
@@ -1100,7 +1100,7 @@ _08082F58:
 	movs r0, 0x1
 	b _08082F6E
 	.align 2, 0
-_08082F68: .4byte gUnknown_83C9CB8
+_08082F68: .4byte gWildMonHeaders
 _08082F6C:
 	movs r0, 0
 _08082F6E:
@@ -1119,7 +1119,7 @@ sub_8082F78: @ 8082F78
 	ldr r0, _08082FA0 @ =0x0000ffff
 	cmp r2, r0
 	beq _08082FA8
-	ldr r0, _08082FA4 @ =gUnknown_83C9CB8
+	ldr r0, _08082FA4 @ =gWildMonHeaders
 	lsls r1, r2, 2
 	adds r1, r2
 	lsls r1, 2
@@ -1132,7 +1132,7 @@ sub_8082F78: @ 8082F78
 	b _08082FAA
 	.align 2, 0
 _08082FA0: .4byte 0x0000ffff
-_08082FA4: .4byte gUnknown_83C9CB8
+_08082FA4: .4byte gWildMonHeaders
 _08082FA8:
 	movs r0, 0
 _08082FAA:
@@ -1146,7 +1146,7 @@ sub_8082FB0: @ 8082FB0
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r4, _08082FE4 @ =gUnknown_83C9CB8
+	ldr r4, _08082FE4 @ =gWildMonHeaders
 	bl sub_8082934
 	lsls r0, 16
 	lsrs r0, 16
@@ -1165,7 +1165,7 @@ sub_8082FB0: @ 8082FB0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08082FE4: .4byte gUnknown_83C9CB8
+_08082FE4: .4byte gWildMonHeaders
 	thumb_func_end sub_8082FB0
 
 	thumb_func_start GetLocalWildMon
@@ -1180,7 +1180,7 @@ GetLocalWildMon: @ 8082FE8
 	ldr r0, _08083020 @ =0x0000ffff
 	cmp r3, r0
 	beq _0808301A
-	ldr r2, _08083024 @ =gUnknown_83C9CB8
+	ldr r2, _08083024 @ =gWildMonHeaders
 	lsls r1, r3, 2
 	adds r1, r3
 	lsls r1, 2
@@ -1199,7 +1199,7 @@ _0808301A:
 	b _0808306E
 	.align 2, 0
 _08083020: .4byte 0x0000ffff
-_08083024: .4byte gUnknown_83C9CB8
+_08083024: .4byte gWildMonHeaders
 _08083028:
 	cmp r4, 0
 	bne _0808303C
@@ -1250,7 +1250,7 @@ GetLocalWaterMon: @ 8083074
 	ldr r0, _080830A8 @ =0x0000ffff
 	cmp r2, r0
 	beq _080830B0
-	ldr r1, _080830AC @ =gUnknown_83C9CB8
+	ldr r1, _080830AC @ =gWildMonHeaders
 	lsls r0, r2, 2
 	adds r0, r2
 	lsls r0, 2
@@ -1268,7 +1268,7 @@ GetLocalWaterMon: @ 8083074
 	b _080830B2
 	.align 2, 0
 _080830A8: .4byte 0x0000ffff
-_080830AC: .4byte gUnknown_83C9CB8
+_080830AC: .4byte gWildMonHeaders
 _080830B0:
 	movs r0, 0
 _080830B2:
@@ -1513,7 +1513,7 @@ sub_808324C: @ 808324C
 	beq _080832CC
 	cmp r4, 0x1
 	bne _0808328C
-	ldr r1, _08083288 @ =gUnknown_83C9CB8
+	ldr r1, _08083288 @ =gWildMonHeaders
 	lsls r0, r2, 2
 	adds r0, r2
 	lsls r0, 2
@@ -1530,11 +1530,11 @@ sub_808324C: @ 808324C
 	b _080832B8
 	.align 2, 0
 _08083284: .4byte 0x0000ffff
-_08083288: .4byte gUnknown_83C9CB8
+_08083288: .4byte gWildMonHeaders
 _0808328C:
 	cmp r5, 0x2
 	bne _080832CC
-	ldr r1, _080832AC @ =gUnknown_83C9CB8
+	ldr r1, _080832AC @ =gWildMonHeaders
 	lsls r0, r2, 2
 	adds r0, r2
 	lsls r0, 2
@@ -1550,7 +1550,7 @@ _080832A8:
 	movs r0, 0
 	b _080832CE
 	.align 2, 0
-_080832AC: .4byte gUnknown_83C9CB8
+_080832AC: .4byte gWildMonHeaders
 _080832B0:
 	cmp r1, 0x9
 	bhi _080832B8

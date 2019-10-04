@@ -51,7 +51,7 @@ EventScript_168DB9:: @ 8168DB9
 	compare_var_to_value VAR_RESULT, 2
 	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
-	compare_var_to_value VAR_MIRAGE_RND_L, 500
+	compare_var_to_value VAR_0x4025, 500
 	goto_if 0, EventScript_168E46
 	msgbox gUnknown_818D7D3, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0

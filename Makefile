@@ -1,3 +1,5 @@
+COMPARE ?= 0
+
 AS := tools/binutils/bin/arm-none-eabi-as
 CPP := $(CC) -E
 LD := tools/binutils/bin/arm-none-eabi-ld
@@ -84,8 +86,6 @@ JSONPROC := tools/jsonproc/jsonproc
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
 
-.PHONY: rom tools clean compare tidy
-
 $(shell mkdir -p $(C_BUILDDIR) $(ASM_BUILDDIR) $(DATA_ASM_BUILDDIR) $(SONG_BUILDDIR))
 
 infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
@@ -113,6 +113,12 @@ SONG_OBJS := $(patsubst $(SONG_SUBDIR)/%.s,$(SONG_BUILDDIR)/%.o,$(SONG_SRCS))
 OBJS := $(C_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS) $(SONG_OBJS)
 OBJS_REL := $(patsubst $(OBJ_DIR)/%,%,$(OBJS))
 
+TOOLDIRS := $(filter-out tools/agbcc tools/binutils,$(wildcard tools/*))
+TOOLBASE = $(TOOLDIRS:tools/%=%)
+TOOLS = $(foreach tool,$(TOOLBASE),tools/$(tool)/$(tool)$(EXE))
+
+.PHONY: all rom tools clean-tools mostlyclean clean compare tidy berry_fix $(TOOLDIRS)
+
 MAKEFLAGS += --no-print-directory
 
 AUTO_GEN_TARGETS :=
@@ -120,25 +126,20 @@ AUTO_GEN_TARGETS :=
 all: rom
 
 rom: $(ROM)
+ifeq ($(COMPARE),1)
+	@$(SHA1) rom.sha1
+endif
 
-tools:
-	@$(MAKE) -C tools/gbagfx
-	@$(MAKE) -C tools/scaninc
-	@$(MAKE) -C tools/preproc
-	@$(MAKE) -C tools/bin2c
-	@$(MAKE) -C tools/rsfont
-	@$(MAKE) -C tools/aif2pcm
-	@$(MAKE) -C tools/ramscrgen
-	@$(MAKE) -C tools/mid2agb
-	@$(MAKE) -C tools/gbafix
-	@$(MAKE) -C tools/mapjson
-	@$(MAKE) -C tools/jsonproc
+tools: $(TOOLDIRS)
+
+$(TOOLDIRS):
+	@$(MAKE) -C $@
 
 # For contributors to make sure a change didn't affect the contents of the ROM.
-compare: rom
-	@$(SHA1) rom.sha1
+compare:
+	@$(MAKE) COMPARE=1
 
-clean: tidy
+mostlyclean: tidy
 	rm -f sound/direct_sound_samples/*.bin
 	rm -f $(SONG_OBJS)
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
@@ -147,17 +148,11 @@ clean: tidy
 	find $(DATA_ASM_SUBDIR)/maps \( -iname 'connections.inc' -o -iname 'events.inc' -o -iname 'header.inc' \) -exec rm {} +
 	rm -f $(AUTO_GEN_TARGETS)
 	@$(MAKE) clean -C berry_fix
-	@$(MAKE) clean -C tools/gbagfx
-	@$(MAKE) clean -C tools/scaninc
-	@$(MAKE) clean -C tools/preproc
-	@$(MAKE) clean -C tools/bin2c
-	@$(MAKE) clean -C tools/rsfont
-	@$(MAKE) clean -C tools/aif2pcm
-	@$(MAKE) clean -C tools/ramscrgen
-	@$(MAKE) clean -C tools/mid2agb
-	@$(MAKE) clean -C tools/gbafix
-	@$(MAKE) clean -C tools/mapjson
-	@$(MAKE) clean -C tools/jsonproc
+
+clean-tools:
+	@$(foreach tooldir,$(TOOLDIRS),$(MAKE) clean -C $(tooldir);)
+
+clean: mostlyclean clean-tools
 
 tidy:
 	rm -f $(ROM) $(ELF) $(MAP)
@@ -242,12 +237,14 @@ $(OBJ_DIR)/sym_ewram.ld: sym_ewram.txt
 $(OBJ_DIR)/ld_script.ld: ld_script.txt $(OBJ_DIR)/sym_bss.ld $(OBJ_DIR)/sym_common.ld $(OBJ_DIR)/sym_ewram.ld
 	cd $(OBJ_DIR) && sed -f ../../ld_script.sed ../../$< | sed "s#tools/#../../tools/#g" > ld_script.ld
 
-$(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS)
+$(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS) berry_fix
 	cd $(OBJ_DIR) && ../../$(LD) $(LDFLAGS) -T ld_script.ld -o ../../$@ $(LIB)
 	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
 
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
 
-berry_fix/berry_fix.gba:
-	@$(MAKE) -C berry_fix
+berry_fix/berry_fix.gba: berry_fix
+
+berry_fix:
+	@$(MAKE) -C berry_fix COMPARE=$(COMPARE)

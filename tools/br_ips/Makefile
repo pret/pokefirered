@@ -1,7 +1,10 @@
 CC := gcc
 CFLAGS := -O3
 
+.PHONY: all
+
 all: br_ips ips_patch
+	@:
 
 clean:
 	rm -f br_ips ips_patch br_ips.exe ips_patch.exe

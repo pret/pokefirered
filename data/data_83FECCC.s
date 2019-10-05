@@ -670,20 +670,17 @@ gUnknown_8452F6C:: @ 8452F6C
 gUnknown_8452F7C:: @ 8452F7C
 	.incbin "baserom.gba", 0x452F7C, 0xC0
 
-	.section .rodata.8453F6C
-// mailbox_pc.o
-gUnknown_8453FE8:: @ 8453FE8
-	.incbin "baserom.gba", 0x453FE8, 0x18
-
-gUnknown_8454000:: @ 8454000
-	.incbin "baserom.gba", 0x454000, 0x3
-
-gUnknown_8454003:: @ 8454003
-	.incbin "baserom.gba", 0x454003, 0x2615
-
+	@ save_location.o
+	@ bag.o
+	@ trainer_pokemon_sprites.o
+	@ vs_seeker.o
+	@ item_pc.o
+	@ mailbox_pc.o
+	@ decorations.o
 	@ menu.o
 	@ quest_log.o
 	@ link_rfu_3.o
+
 	.section .rodata.8456C74
 gUnknown_8456C74:: @ 8456C74
 	.incbin "baserom.gba", 0x456C74, 0x5C

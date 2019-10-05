@@ -11,20 +11,7 @@
 	.include "src/window_8bpp.o"
 	.align 2
 	.include "src/sprite.o"
-
 	.align 2
-gStringVar1: @ 2021CD0
-	.space 0x20
-
-gStringVar2: @ 2021CF0
-	.space 0x14
-
-gStringVar3: @ 2021D04
-	.space 0x14
-
-gStringVar4: @ 2021D18
-	.space 0x3E8
-
     .include "src/string_util.o"
 
 	@ .include "src/link.o"

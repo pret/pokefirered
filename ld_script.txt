@@ -168,7 +168,7 @@ SECTIONS {
         asm/ghost.o(.text);
         asm/dragon.o(.text);
         asm/dark.o(.text);
-        asm/ground.o(.text);
+        src/ground.o(.text);
         asm/normal.o(.text);
         src/battle_anim_utility_funcs.o(.text);
         src/battle_intro.o(.text);
@@ -422,6 +422,8 @@ SECTIONS {
         src/battle_anim_mon_movement.o(.rodata);
         src/item.o(.rodata);
         data/data_835B488.o(.rodata.83DF09C);
+        src/ground.o(.rodata);
+        data/data_835B488.o(.rodata.83E7ADC);
         src/battle_anim_utility_funcs.o(.rodata);
         src/battle_intro.o(.rodata);
         data/data_835B488.o(.rodata.83E7CFC);

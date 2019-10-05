@@ -58,6 +58,10 @@ extern u16 gAnimBattlerSpecies[MAX_BATTLERS_COUNT];
 extern u8 gUnknown_2037F24;
 
 extern struct OamData gOamData_83ACA40;
+extern struct OamData gOamData_83AC9C8;
+extern struct OamData gOamData_83ACA38;
+extern struct OamData gOamData_83AC9D0;
+extern struct OamData gOamData_83AC9F8;
 
 void ClearBattleAnimationVars(void);
 void DoMoveAnim(u16 move);
@@ -261,8 +265,41 @@ void sub_8099BD4(u8 taskId);
 // normal.s
 u32 UnpackSelectedBattleAnimPalettes(s16 selector);
 
+// ground.c
+void sub_80B8E94(u8 taskId);
+void sub_80B90EC(u8 taskId);
+void sub_80B94B4(u8 taskId);
+void AnimTask_IsPowerOver99(u8 taskId);
+void sub_80B9800(u8 taskId);
+
 // battle_anim_utility_funcs.c
+void sub_80BA7F8(u8 taskId);
+void sub_80BA83C(u8 taskId);
+void AnimTask_SetCamouflageBlend(u8 taskId);
+void AnimTask_BlendParticle(u8 taskId);
+void sub_80BAB38(u8 taskId);
+void sub_80BAB98(u8 taskId);
+void sub_80BACEC(u8 taskId);
 void sub_80BB088(u8 taskId);
+void sub_80BB660(u8 taskId);
+void sub_80BB7DC(u8 taskId);
+void sub_80BB82C(u8 taskId);
+void AnimTask_GetAttackerSide(u8 taskId);
+void AnimTask_GetTargetSide(u8 taskId);
+void AnimTask_GetTargetIsAttackerPartner(u8 taskId);
+void sub_80BB9B0(u8 taskId);
 void sub_80BBA20(u8 taskId, s32 unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5, u8 arg6, u8 arg7, const u32 *gfx, const u32 *tilemap, const u32 *palette);
+void AnimTask_GetBattleTerrain(u8 taskId);
+void sub_80BBE10(u8 taskId);
+void sub_80BBE3C(u8 taskId);
+void sub_80BBE6C(u8 taskId);
+void sub_80BBF08(u8 taskId);
+void sub_80BBFA4(u8 taskId);
+void AnimTask_IsContest(u8 taskId);
+void sub_80BC060(u8 taskId);
+void AnimTask_IsTargetSameSide(u8 taskId);
+void sub_80BC0DC(u8 taskId);
+void sub_80BC0FC(u8 taskId);
+void sub_80BC12C(u8 taskId);
 
 #endif // GUARD_BATTLE_ANIM_H

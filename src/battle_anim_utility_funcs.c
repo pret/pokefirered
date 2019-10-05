@@ -148,7 +148,7 @@ void AnimTask_BlendParticle(u8 taskId)
     StartBlendAnimSpriteColor(taskId, selectedPalettes);
 }
 
-void StartBlendAnimSpriteColor(u8 taskId, u32 selectedPalettes)
+static void StartBlendAnimSpriteColor(u8 taskId, u32 selectedPalettes)
 {
     gTasks[taskId].data[0] = selectedPalettes;
     gTasks[taskId].data[1] = selectedPalettes >> 16;

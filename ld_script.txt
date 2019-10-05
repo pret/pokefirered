@@ -232,7 +232,7 @@ SECTIONS {
         src/trainer_pokemon_sprites.o(.text);
         src/vs_seeker.o(.text);
         src/item_pc.o(.text);
-        asm/mailbox_pc.o(.text);
+        src/mailbox_pc.o(.text);
         src/menu.o(.text);
         src/quest_log.o(.text);
         asm/link_rfu_3.o(.text);
@@ -451,7 +451,8 @@ SECTIONS {
         src/trainer_pokemon_sprites.o(.rodata);
         src/vs_seeker.o(.rodata);
         src/item_pc.o(.rodata);
-        data/data_83FECCC.o(.rodata.8453F6C);
+        src/mailbox_pc.o(.rodata);
+        data/decorations.o(.rodata);
         src/menu.o(.rodata);
         src/quest_log.o(.rodata);
         data/data_83FECCC.o(.rodata.8456C74);

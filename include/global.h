@@ -498,7 +498,8 @@ typedef union QuestLogScene QuestLogScene;
 #define BERRY_TREES_COUNT  128
 #define FLAGS_COUNT        288 // 300
 #define VARS_COUNT         256
-#define MAIL_COUNT         16
+#define MAIL_COUNT         (PARTY_SIZE + 10)
+#define PC_MAIL_NUM(i)     (PARTY_SIZE + (i))
 
 // Declare here so that it can be recursively referenced.
 union QuestLogMovement;

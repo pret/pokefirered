@@ -19,5 +19,8 @@ void MEvent_CreateTask_Leader(u8);
 void sub_80F9E2C(void * data);
 u8 sub_8116DE0(void);
 void sub_80FBB4C(void);
+void sub_80F86F4(void);
+void sub_80FB128(bool32 a0);
+u32 sub_80FD3A4(void);
 
 #endif //GUARD_LINK_RFU_H

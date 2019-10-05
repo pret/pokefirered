@@ -4,7 +4,7 @@ ThreeIsland_DunsparceTunnel_MapScripts:: @ 8164D26
 
 ThreeIsland_DunsparceTunnel_MapScript1_164D2C:: @ 8164D2C
 	setworldmapflag FLAG_WORLD_MAP_THREE_ISLAND_DUNSPARCE_TUNNEL
-	specialvar VAR_RESULT, sub_806E25C
+	specialvar VAR_RESULT, IsNationalPokedexEnabled
 	copyvar VAR_0x8008, VAR_RESULT
 	compare_var_to_value VAR_0x8008, 1
 	call_if 1, EventScript_164D50
@@ -26,7 +26,7 @@ ThreeIsland_DunsparceTunnel_EventScript_164D60:: @ 8164D60
 	faceplayer
 	checkflag FLAG_0x2E2
 	goto_if_eq EventScript_164DC2
-	specialvar VAR_RESULT, sub_806E25C
+	specialvar VAR_RESULT, IsNationalPokedexEnabled
 	compare_var_to_value VAR_RESULT, 1
 	goto_if_eq EventScript_164D90
 	msgbox gUnknown_817D13B

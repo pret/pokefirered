@@ -1321,7 +1321,7 @@ sub_80CE8DC: @ 80CE8DC
 	ldr r0, _080CE940 @ =gPlayerParty
 	adds r1, r0
 	mov r9, r1
-	bl sub_806E25C
+	bl IsNationalPokedexEnabled
 	mov r10, r4
 	cmp r0, 0
 	bne _080CE948
@@ -2736,7 +2736,7 @@ sub_80CF53C: @ 80CF53C
 	ldr r0, _080CF5C0 @ =gPlayerParty
 	adds r1, r0
 	mov r8, r1
-	bl sub_806E25C
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	bne _080CF598
 	movs r1, 0x8

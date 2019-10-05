@@ -5,368 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8009480
-sub_8009480: @ 8009480
-	push {lr}
-	ldr r0, _08009494 @ =gUnknown_203ADFA
-	ldrb r0, [r0]
-	subs r0, 0x2
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bhi _08009498
-	movs r0, 0
-	b _080094CE
-	.align 2, 0
-_08009494: .4byte gUnknown_203ADFA
-_08009498:
-	bl sub_800B1F4
-	bl sub_80F86F4
-	movs r0, 0x1
-	bl sub_80FB128
-	bl sub_80FD3A4
-	ldr r1, _080094C0 @ =0x00008001
-	cmp r0, r1
-	beq _080094C4
-	bl sub_800B210
-	bl CloseLink
-	bl RestoreSerialTimer3IntrHandlers
-	movs r0, 0
-	b _080094CE
-	.align 2, 0
-_080094C0: .4byte 0x00008001
-_080094C4:
-	bl rfu_REQ_stopMode
-	bl rfu_waitREQComplete
-	movs r0, 0x1
-_080094CE:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8009480
-
-	thumb_func_start sub_80094D4
-sub_80094D4: @ 80094D4
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	bl DestroyTask
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80094D4
-
-	thumb_func_start sub_80094E4
-sub_80094E4: @ 80094E4
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	adds r5, r0, 0
-	ldr r4, [sp, 0x18]
-	lsls r5, 24
-	lsrs r5, 24
-	lsls r1, 24
-	lsrs r1, 24
-	mov r8, r1
-	lsls r2, 24
-	lsrs r6, r2, 24
-	lsls r3, 24
-	lsrs r7, r3, 24
-	lsls r4, 16
-	lsrs r4, 16
-	ldr r0, _08009540 @ =gUnknown_8232578
-	lsls r1, r5, 4
-	movs r2, 0x20
-	bl LoadPalette
-	ldr r3, _08009544 @ =0x040000d4
-	ldr r0, _08009548 @ =gUnknown_8232598
-	str r0, [r3]
-	lsls r2, r7, 14
-	lsls r0, r4, 5
-	movs r1, 0xC0
-	lsls r1, 19
-	adds r0, r1
-	adds r2, r0
-	str r2, [r3, 0x4]
-	ldr r0, _0800954C @ =0x80001000
-	str r0, [r3, 0x8]
-	ldr r0, [r3, 0x8]
-	ldr r0, _08009550 @ =gUnknown_3003F70
-	str r6, [r0]
-	str r5, [r0, 0x4]
-	str r4, [r0, 0x8]
-	mov r0, r8
-	cmp r0, 0x2
-	beq _0800956E
-	cmp r0, 0x2
-	bgt _08009554
-	cmp r0, 0x1
-	beq _0800955C
-	b _08009590
-	.align 2, 0
-_08009540: .4byte gUnknown_8232578
-_08009544: .4byte 0x040000d4
-_08009548: .4byte gUnknown_8232598
-_0800954C: .4byte 0x80001000
-_08009550: .4byte gUnknown_3003F70
-_08009554:
-	mov r0, r8
-	cmp r0, 0x3
-	beq _08009580
-	b _08009590
-_0800955C:
-	lsls r1, r6, 8
-	movs r0, 0x1
-	orrs r1, r0
-	lsls r0, r7, 2
-	orrs r1, r0
-	movs r0, 0xA
-	bl SetGpuReg
-	b _08009590
-_0800956E:
-	lsls r1, r6, 8
-	movs r0, 0x1
-	orrs r1, r0
-	lsls r0, r7, 2
-	orrs r1, r0
-	movs r0, 0xC
-	bl SetGpuReg
-	b _08009590
-_08009580:
-	lsls r1, r6, 8
-	movs r0, 0x1
-	orrs r1, r0
-	lsls r0, r7, 2
-	orrs r1, r0
-	movs r0, 0xE
-	bl SetGpuReg
-_08009590:
-	mov r0, r8
-	lsls r4, r0, 2
-	adds r0, r4, 0
-	adds r0, 0x10
-	lsls r0, 24
-	lsrs r0, 24
-	movs r1, 0
-	bl SetGpuReg
-	adds r4, 0x12
-	lsls r4, 24
-	lsrs r4, 24
-	adds r0, r4, 0
-	movs r1, 0
-	bl SetGpuReg
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80094E4
-
-	thumb_func_start sub_80095BC
-sub_80095BC: @ 80095BC
-	push {r4-r6,lr}
-	mov r6, r8
-	push {r6}
-	mov r8, r0
-	adds r6, r1, 0
-	adds r4, r2, 0
-	adds r5, r3, 0
-	lsls r0, 24
-	lsrs r0, 24
-	mov r8, r0
-	lsls r6, 24
-	lsrs r6, 24
-	lsls r4, 24
-	lsrs r4, 24
-	lsls r5, 24
-	lsrs r5, 24
-	ldr r0, _08009628 @ =gUnknown_8232578
-	mov r2, r8
-	lsls r1, r2, 4
-	movs r2, 0x20
-	bl LoadPalette
-	ldr r2, _0800962C @ =0x040000d4
-	ldr r0, _08009630 @ =gUnknown_8232598
-	str r0, [r2]
-	lsls r0, r5, 14
-	movs r1, 0xC0
-	lsls r1, 19
-	adds r0, r1
-	str r0, [r2, 0x4]
-	ldr r0, _08009634 @ =0x80001000
-	str r0, [r2, 0x8]
-	ldr r0, [r2, 0x8]
-	ldr r0, _08009638 @ =gUnknown_3003F70
-	str r4, [r0]
-	mov r1, r8
-	str r1, [r0, 0x4]
-	movs r1, 0
-	str r1, [r0, 0x8]
-	ldr r0, _0800963C @ =gBGControlRegOffsets
-	adds r6, r0
-	ldrb r0, [r6]
-	lsls r4, 8
-	lsls r5, 2
-	orrs r4, r5
-	adds r1, r4, 0
-	bl SetGpuReg
-	pop {r3}
-	mov r8, r3
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08009628: .4byte gUnknown_8232578
-_0800962C: .4byte 0x040000d4
-_08009630: .4byte gUnknown_8232598
-_08009634: .4byte 0x80001000
-_08009638: .4byte gUnknown_3003F70
-_0800963C: .4byte gBGControlRegOffsets
-	thumb_func_end sub_80095BC
-
-	thumb_func_start sub_8009640
-sub_8009640: @ 8009640
-	push {r4,lr}
-	sub sp, 0x4
-	bl ResetSpriteData
-	bl FreeAllSpritePalettes
-	bl ResetTasks
-	ldr r0, _080096D4 @ =sub_800978C
-	bl SetVBlankCallback
-	bl ResetBlockSend
-	ldr r1, _080096D8 @ =gLinkType
-	ldr r2, _080096DC @ =0x00001111
-	adds r0, r2, 0
-	strh r0, [r1]
-	bl OpenLink
-	ldr r0, _080096E0 @ =gMain
-	ldrh r0, [r0, 0x24]
-	bl SeedRng
-	movs r4, 0
-_08009670:
-	bl Random
-	ldr r1, _080096E4 @ =gSaveBlock2Ptr
-	ldr r1, [r1]
-	adds r1, 0xA
-	adds r1, r4
-	strb r0, [r1]
-	adds r4, 0x1
-	cmp r4, 0x3
-	ble _08009670
-	movs r4, 0
-	str r4, [sp]
-	movs r0, 0
-	movs r1, 0x2
-	movs r2, 0x4
-	movs r3, 0
-	bl sub_80094E4
-	movs r1, 0xAA
-	lsls r1, 5
-	movs r0, 0
-	bl SetGpuReg
-	ldr r0, _080096E8 @ =sub_80094D4
-	movs r1, 0
-	bl CreateTask
-	bl RunTasks
-	bl AnimateSprites
-	bl BuildOamBuffer
-	bl UpdatePaletteFade
-	ldr r0, _080096EC @ =gUnknown_3000E58
-	str r4, [r0]
-	bl sub_8009708
-	ldr r0, _080096F0 @ =task00_link_test
-	movs r1, 0
-	bl CreateTask
-	ldr r0, _080096F4 @ =c2_08009A8C
-	bl SetMainCallback2
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080096D4: .4byte sub_800978C
-_080096D8: .4byte gLinkType
-_080096DC: .4byte 0x00001111
-_080096E0: .4byte gMain
-_080096E4: .4byte gSaveBlock2Ptr
-_080096E8: .4byte sub_80094D4
-_080096EC: .4byte gUnknown_3000E58
-_080096F0: .4byte task00_link_test
-_080096F4: .4byte c2_08009A8C
-	thumb_func_end sub_8009640
-
-	thumb_func_start sub_80096F8
-sub_80096F8: @ 80096F8
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, _08009704 @ =gLocalLinkPlayer
-	strh r0, [r1, 0x18]
-	bx lr
-	.align 2, 0
-_08009704: .4byte gLocalLinkPlayer
-	thumb_func_end sub_80096F8
-
-	thumb_func_start sub_8009708
-sub_8009708: @ 8009708
-	push {r4,r5,lr}
-	ldr r5, _08009774 @ =gLocalLinkPlayer
-	ldr r4, _08009778 @ =gSaveBlock2Ptr
-	ldr r1, [r4]
-	ldrb r2, [r1, 0xA]
-	ldrb r0, [r1, 0xB]
-	lsls r0, 8
-	orrs r2, r0
-	ldrb r0, [r1, 0xC]
-	lsls r0, 16
-	orrs r2, r0
-	ldrb r0, [r1, 0xD]
-	lsls r0, 24
-	orrs r2, r0
-	str r2, [r5, 0x4]
-	adds r0, r5, 0
-	adds r0, 0x8
-	bl StringCopy
-	ldr r0, [r4]
-	ldrb r0, [r0, 0x8]
-	strb r0, [r5, 0x13]
-	ldr r0, _0800977C @ =gLinkType
-	ldrh r0, [r0]
-	str r0, [r5, 0x14]
-	ldr r0, _08009780 @ =gGameLanguage
-	ldrb r0, [r0]
-	strh r0, [r5, 0x1A]
-	ldr r0, _08009784 @ =gGameVersion
-	ldrb r0, [r0]
-	movs r2, 0x80
-	lsls r2, 7
-	adds r1, r2, 0
-	adds r0, r1
-	strh r0, [r5]
-	movs r0, 0x80
-	lsls r0, 8
-	strh r0, [r5, 0x2]
-	bl sub_806E25C
-	strb r0, [r5, 0x10]
-	ldr r0, _08009788 @ =0x00000844
-	bl FlagGet
-	lsls r0, 24
-	cmp r0, 0
-	beq _0800976E
-	ldrb r0, [r5, 0x10]
-	movs r1, 0x10
-	orrs r0, r1
-	strb r0, [r5, 0x10]
-_0800976E:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08009774: .4byte gLocalLinkPlayer
-_08009778: .4byte gSaveBlock2Ptr
-_0800977C: .4byte gLinkType
-_08009780: .4byte gGameLanguage
-_08009784: .4byte gGameVersion
-_08009788: .4byte 0x00000844
-	thumb_func_end sub_8009708
-
 	thumb_func_start sub_800978C
 sub_800978C: @ 800978C
 	push {lr}
@@ -736,8 +374,8 @@ _08009A84: .4byte gLinkVSyncDisabled
 _08009A88: .4byte gUnknown_3003F80
 	thumb_func_end LinkTestProcessKeyInput
 
-	thumb_func_start c2_08009A8C
-c2_08009A8C: @ 8009A8C
+	thumb_func_start CB2_LinkTest
+CB2_LinkTest: @ 8009A8C
 	push {lr}
 	bl LinkTestProcessKeyInput
 	movs r0, 0x1
@@ -750,7 +388,7 @@ c2_08009A8C: @ 8009A8C
 	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
-	thumb_func_end c2_08009A8C
+	thumb_func_end CB2_LinkTest
 
 	thumb_func_start LinkMain2
 LinkMain2: @ 8009AB0
@@ -956,7 +594,7 @@ _08009C2C:
 _08009C30: .4byte 0x0000cafe
 _08009C34: .4byte 0x0000cccc
 _08009C38:
-	bl sub_8009708
+	bl InitLocalLinkPlayer
 	ldr r0, _08009C7C @ =gUnknown_3003E70
 	adds r2, r0, 0
 	adds r2, 0x10
@@ -2326,7 +1964,7 @@ PrintHexDigit: @ 800A614
 	lsls r1, 24
 	lsrs r1, 24
 	lsls r2, 24
-	ldr r4, _0800A648 @ =gUnknown_3003F70
+	ldr r4, _0800A648 @ =gLinkTestBGInfo
 	ldr r3, [r4]
 	lsls r3, 11
 	movs r5, 0xC0
@@ -2347,7 +1985,7 @@ PrintHexDigit: @ 800A614
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800A648: .4byte gUnknown_3003F70
+_0800A648: .4byte gLinkTestBGInfo
 	thumb_func_end PrintHexDigit
 
 	thumb_func_start sub_800A64C
@@ -2358,7 +1996,7 @@ sub_800A64C: @ 800A64C
 	lsls r1, 24
 	lsrs r1, 24
 	lsls r2, 24
-	ldr r4, _0800A680 @ =gUnknown_3003F70
+	ldr r4, _0800A680 @ =gLinkTestBGInfo
 	ldr r3, [r4]
 	lsls r3, 11
 	movs r5, 0xC0
@@ -2378,7 +2016,7 @@ sub_800A64C: @ 800A64C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800A680: .4byte gUnknown_3003F70
+_0800A680: .4byte gLinkTestBGInfo
 	thumb_func_end sub_800A64C
 
 	thumb_func_start sub_800A684
@@ -3315,7 +2953,7 @@ _0800AD30:
 	ldr r1, _0800AE0C @ =gSoftResetDisabled
 	movs r0, 0
 	strb r0, [r1]
-	ldr r0, _0800AE10 @ =sub_80094D4
+	ldr r0, _0800AE10 @ =Task_DestroySelf
 	movs r1, 0
 	bl CreateTask
 	bl StopMapMusic
@@ -3345,7 +2983,7 @@ _0800AE00: .4byte gUnknown_2022860
 _0800AE04: .4byte gUnknown_82345F0
 _0800AE08: .4byte gTMCaseMainWindowPalette
 _0800AE0C: .4byte gSoftResetDisabled
-_0800AE10: .4byte sub_80094D4
+_0800AE10: .4byte Task_DestroySelf
 _0800AE14: .4byte gMain
 _0800AE18: .4byte sub_800AF2C
 	thumb_func_end c2_800ACD4
@@ -3679,7 +3317,7 @@ _0800B0B0: .4byte gUnknown_3003EAC
 	thumb_func_start sub_800B0B4
 sub_800B0B4: @ 800B0B4
 	push {r4-r6,lr}
-	bl sub_8009708
+	bl InitLocalLinkPlayer
 	ldr r1, _0800B100 @ =gUnknown_3003E70
 	adds r2, r1, 0
 	adds r2, 0x10

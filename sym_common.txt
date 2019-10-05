@@ -75,7 +75,7 @@ gUnknown_3003F60: @ 3003F60
 gReceivedRemoteLinkPlayers: @ 3003F64
 	.space 0xC
 
-gUnknown_3003F70: @ 3003F70
+gLinkTestBGInfo: @ 3003F70
 	.space 0x10
 
 gUnknown_3003F80: @ 3003F80

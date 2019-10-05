@@ -6443,7 +6443,7 @@ _0804FA2C:
 	cmp r5, r7
 	blt _0804FA2C
 _0804FA4E:
-	bl sub_806E25C
+	bl IsNationalPokedexEnabled
 	mov r1, r9
 	lsls r4, r1, 2
 	cmp r0, 0

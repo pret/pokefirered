@@ -220,7 +220,7 @@ OneIsland_PokemonCenter_1F_EventScript_170EC5:: @ 8170EC5
 	goto_if_eq EventScript_171044
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4
 	goto_if_eq EventScript_1710F2
-	specialvar VAR_RESULT, sub_806E25C
+	specialvar VAR_RESULT, IsNationalPokedexEnabled
 	compare_var_to_value VAR_RESULT, 1
 	goto_if_eq EventScript_1710FC
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 3

@@ -797,7 +797,7 @@ _080BDCA4: .4byte 0x0000ffff
 	thumb_func_start sub_80BDCA8
 sub_80BDCA8: @ 80BDCA8
 	push {lr}
-	bl sub_806E25C
+	bl IsNationalPokedexEnabled
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -1116,7 +1116,7 @@ _080BDEB2:
 	movs r0, 0x13
 	strh r0, [r3]
 _080BDF0C:
-	bl sub_806E25C
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	beq _080BDF2A
 	ldr r0, _080BDF30 @ =gUnknown_20399BC

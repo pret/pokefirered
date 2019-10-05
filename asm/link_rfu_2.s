@@ -6866,7 +6866,7 @@ sub_80FBA78: @ 80FBA78
 	bl ResetPaletteFade
 	ldr r0, _080FBAF4 @ =sub_80FBA64
 	bl SetVBlankCallback
-	bl sub_8009480
+	bl IsWirelessAdapterConnected
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FBAEC
@@ -9184,7 +9184,7 @@ _080FCB88:
 	ands r4, r1
 	orrs r4, r0
 	strb r4, [r7]
-	bl sub_806E25C
+	bl IsNationalPokedexEnabled
 	ands r0, r6
 	ldrb r1, [r7, 0x1]
 	ands r5, r1

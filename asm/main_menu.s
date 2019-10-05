@@ -948,7 +948,7 @@ _0800CAEE:
 	movs r0, 0
 	b _0800CB22
 _0800CAF2:
-	bl sub_8009480
+	bl IsWirelessAdapterConnected
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0
@@ -1227,7 +1227,7 @@ sub_800CCF8: @ 800CCF8
 	beq _0800CD44
 	movs r0, 0x5
 	bl PlaySE
-	bl sub_8009480
+	bl IsWirelessAdapterConnected
 	movs r0, 0x1
 	negs r0, r0
 	movs r1, 0
@@ -1500,7 +1500,7 @@ sub_800CF3C: @ 800CF3C
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0800CFAE
-	bl sub_806E25C
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	beq _0800CF64
 	movs r0, 0x1

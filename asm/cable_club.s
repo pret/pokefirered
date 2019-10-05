@@ -2087,7 +2087,7 @@ _080817C0:
 	bl sub_8057F34
 	ldr r0, _080817DC @ =gSpecialVar_0x8005
 	ldrb r0, [r0]
-	bl sub_80096F8
+	bl SetLocalLinkPlayerId
 	movs r0, 0x2
 	strh r0, [r5, 0x8]
 	b _08081820

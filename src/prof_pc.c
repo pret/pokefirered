@@ -33,7 +33,7 @@ u16 Special_GetPokedexCount(void)
         gSpecialVar_0x8005 = GetNationalPokedexCount(0);
         gSpecialVar_0x8006 = GetNationalPokedexCount(1);
     }
-    return sub_806E25C();
+    return IsNationalPokedexEnabled();
 }
 
 const u8 * sub_80CA424(u16 count)

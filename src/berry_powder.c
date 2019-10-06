@@ -11,12 +11,12 @@
 
 EWRAM_DATA u8 gUnknown_203F464 = 0;
 
-u32 sub_815EE3C(u32 * a0)
+u32 DecryptBerryPowder(u32 * a0)
 {
     return *a0 ^ gSaveBlock2Ptr->encryptionKey;
 }
 
-void sub_815EE54(u32 * a0, u32 a1)
+void SetBerryPowder(u32 * a0, u32 a1)
 {
     *a0 = gSaveBlock2Ptr->encryptionKey ^ a1;
 }
@@ -28,7 +28,7 @@ void sub_815EE6C(u32 a0)
 
 bool8 sub_815EE88(u32 a0)
 {
-    if (sub_815EE3C(&gSaveBlock2Ptr->berryCrush.berryPowderAmount) < a0)
+    if (DecryptBerryPowder(&gSaveBlock2Ptr->berryCrush.berryPowderAmount) < a0)
         return FALSE;
     else
         return TRUE;
@@ -36,7 +36,7 @@ bool8 sub_815EE88(u32 a0)
 
 bool8 sub_815EEB0(void)
 {
-    if (sub_815EE3C(&gSaveBlock2Ptr->berryCrush.berryPowderAmount) < gSpecialVar_0x8004)
+    if (DecryptBerryPowder(&gSaveBlock2Ptr->berryCrush.berryPowderAmount) < gSpecialVar_0x8004)
         return FALSE;
     else
         return TRUE;
@@ -45,15 +45,15 @@ bool8 sub_815EEB0(void)
 bool8 sub_815EEE0(u32 a0)
 {
     u32 * ptr = &gSaveBlock2Ptr->berryCrush.berryPowderAmount;
-    u32 amount = sub_815EE3C(ptr) + a0;
+    u32 amount = DecryptBerryPowder(ptr) + a0;
     if (amount > 99999)
     {
-        sub_815EE54(ptr, 99999);
+        SetBerryPowder(ptr, 99999);
         return FALSE;
     }
     else
     {
-        sub_815EE54(ptr, amount);
+        SetBerryPowder(ptr, amount);
         return TRUE;
     }
 }
@@ -65,8 +65,8 @@ bool8 sub_815EF20(u32 a0)
         return FALSE;
     else
     {
-        u32 amount = sub_815EE3C(ptr);
-        sub_815EE54(ptr, amount - a0);
+        u32 amount = DecryptBerryPowder(ptr);
+        SetBerryPowder(ptr, amount - a0);
         return TRUE;
     }
 }
@@ -78,15 +78,15 @@ bool8 sub_815EF5C(void)
         return FALSE;
     else
     {
-        u32 amount = sub_815EE3C(ptr);
-        sub_815EE54(ptr, amount - gSpecialVar_0x8004);
+        u32 amount = DecryptBerryPowder(ptr);
+        SetBerryPowder(ptr, amount - gSpecialVar_0x8004);
         return TRUE;
     }
 }
 
 u32 GetBerryPowder(void)
 {
-    return sub_815EE3C(&gSaveBlock2Ptr->berryCrush.berryPowderAmount);
+    return DecryptBerryPowder(&gSaveBlock2Ptr->berryCrush.berryPowderAmount);
 }
 
 void sub_815EFBC(u8 windowId, u32 powder, u8 x, u8 y, u8 speed)

@@ -588,7 +588,7 @@ void DestroyWonderCard(void)
     ClearRamScript();
     sub_806E2D0();
     sub_806E370();
-    sub_80E7524(gSaveBlock2Ptr->unk_4A0);
+    sub_80E7524(gSaveBlock2Ptr->unk_B0.field_3F0);
 }
 
 bool32 sub_8143F68(const struct MEventBuffer_32E0_Sub * data)
@@ -769,7 +769,7 @@ void sub_81442CC(struct MEventStruct_Unk1442CC * data)
         data->unk_14 = 0;
     for (i = 0; i < 4; i++)
         data->unk_16[i] = gSaveBlock1Ptr->unk_3120.unk_338[i];
-    CopyUnalignedWord(data->unk_4C, gSaveBlock2Ptr->playerTrainerId);
+    CopyTrainerId(data->unk_4C, gSaveBlock2Ptr->playerTrainerId);
     StringCopy(data->unk_45, gSaveBlock2Ptr->playerName);
     for (i = 0; i < 6; i++)
         data->unk_50[i] = gSaveBlock1Ptr->unk2CA0[i];

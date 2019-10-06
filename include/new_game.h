@@ -3,17 +3,10 @@
 
 #include "global.h"
 
-void WriteUnalignedWord(u32 var, u8 *dataPtr);
-u32 ReadUnalignedWord(u8* dataPtr);
-void CopyUnalignedWord(u8 *copyTo, u8 *copyFrom);
-void InitPlayerTrainerId(void);
-void SetDefaultOptions(void);
-void ClearPokedexFlags(void);
-void WarpToTruck(void);
+void SetTrainerId(u32 trainerId, u8 *dst);
+void CopyTrainerId(u8 *dst, u8 *src);
 void NewGameInitData(void);
-void ResetMiniGamesResults(void);
-void sub_808447C(void);
-void Sav2_ClearSetDefault(void);
 void ResetMenuAndMonGlobals(void);
+void Sav2_ClearSetDefault(void);
 
 #endif // GUARD_NEW_GAME_H

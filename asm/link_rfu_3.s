@@ -3356,7 +3356,7 @@ sub_8117440: @ 8117440
 	asrs r5, 24
 	str r5, [sp]
 	adds r3, r4, 0
-	bl Overworld_SetWarpDestination
+	bl SetWarpDestination
 	ldr r0, [r6]
 	movs r1, 0x4
 	ldrsb r1, [r0, r1]
@@ -3423,7 +3423,7 @@ sub_81174B4: @ 81174B4
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r3, r8
-	bl Overworld_SetWarpDestination
+	bl SetWarpDestination
 	bl WarpIntoMap
 	add sp, 0x4
 	pop {r3}

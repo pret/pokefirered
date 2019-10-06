@@ -49,7 +49,7 @@ void IncrementGameStat(u8 index);
 void Overworld_SetMapObjTemplateCoords(u8, s16, s16);
 void Overworld_SetMapObjTemplateMovementType(u8, u8);
 
-void Overworld_SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
+void SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 
 void saved_warp2_set(int unused, s8 mapGroup, s8 mapNum, s8 warpId);
 void SetDynamicWarpWithCoords(int unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
@@ -137,6 +137,7 @@ u8 get_map_light_from_warp0(void);
 const struct MapHeader *warp1_get_mapheader(void);
 void sub_8055F88(void);
 void sub_8056788(void);
+void sub_8054E68(void);
 
 void Overworld_CreditsMainCB(void);
 bool32 Overworld_DoScrollSceneForCredits(u8 *, const struct CreditsOverworldCmd *, u8);

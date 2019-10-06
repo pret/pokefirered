@@ -1386,7 +1386,7 @@ _0806F81A:
 	cmp r0, 0x2
 	bne _0806F82E
 _0806F826:
-	ldr r0, _0806F83C @ =gUnknown_2031DB0
+	ldr r0, _0806F83C @ =gDifferentSaveFile
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0806F848
@@ -1397,7 +1397,7 @@ _0806F82E:
 	b _0806F864
 	.align 2, 0
 _0806F838: .4byte gSaveFileStatus
-_0806F83C: .4byte gUnknown_2031DB0
+_0806F83C: .4byte gDifferentSaveFile
 _0806F840: .4byte gUnknown_3000FA4
 _0806F844: .4byte sub_806F86C
 _0806F848:
@@ -1423,7 +1423,7 @@ _0806F866:
 	thumb_func_start sub_806F86C
 sub_806F86C: @ 806F86C
 	push {lr}
-	ldr r0, _0806F880 @ =gUnknown_2031DB0
+	ldr r0, _0806F880 @ =gDifferentSaveFile
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0806F88C
@@ -1432,7 +1432,7 @@ sub_806F86C: @ 806F86C
 	bl sub_806F69C
 	b _0806F894
 	.align 2, 0
-_0806F880: .4byte gUnknown_2031DB0
+_0806F880: .4byte gDifferentSaveFile
 _0806F884: .4byte gUnknown_81C566A
 _0806F888: .4byte sub_806F8C0
 _0806F88C:
@@ -1537,7 +1537,7 @@ sub_806F940: @ 806F940
 	push {r4,lr}
 	movs r0, 0
 	bl IncrementGameStat
-	ldr r4, _0806F95C @ =gUnknown_2031DB0
+	ldr r4, _0806F95C @ =gDifferentSaveFile
 	ldrb r0, [r4]
 	cmp r0, 0x1
 	bne _0806F960
@@ -1547,7 +1547,7 @@ sub_806F940: @ 806F940
 	strb r0, [r4]
 	b _0806F966
 	.align 2, 0
-_0806F95C: .4byte gUnknown_2031DB0
+_0806F95C: .4byte gDifferentSaveFile
 _0806F960:
 	movs r0, 0
 	bl TrySavingData

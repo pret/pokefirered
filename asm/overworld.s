@@ -1003,8 +1003,8 @@ WarpIntoMap: @ 8055378
 	bx r0
 	thumb_func_end WarpIntoMap
 
-	thumb_func_start Overworld_SetWarpDestination
-Overworld_SetWarpDestination: @ 805538C
+	thumb_func_start SetWarpDestination
+SetWarpDestination: @ 805538C
 	push {r4-r6,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
@@ -1034,7 +1034,7 @@ Overworld_SetWarpDestination: @ 805538C
 	bx r0
 	.align 2, 0
 _080553C4: .4byte gUnknown_2031DBC
-	thumb_func_end Overworld_SetWarpDestination
+	thumb_func_end SetWarpDestination
 
 	thumb_func_start warp1_set_2
 warp1_set_2: @ 80553C8
@@ -1049,7 +1049,7 @@ warp1_set_2: @ 80553C8
 	movs r3, 0x1
 	negs r3, r3
 	str r3, [sp]
-	bl Overworld_SetWarpDestination
+	bl SetWarpDestination
 	add sp, 0x4
 	pop {r0}
 	bx r0
@@ -1151,7 +1151,7 @@ sub_805546C: @ 805546C
 	lsls r4, 24
 	asrs r4, 24
 	str r4, [sp]
-	bl Overworld_SetWarpDestination
+	bl SetWarpDestination
 _0805549A:
 	add sp, 0x4
 	pop {r4}
@@ -1458,7 +1458,7 @@ _080556BC:
 	lsls r4, r6, 24
 	asrs r4, 24
 	str r4, [sp]
-	bl Overworld_SetWarpDestination
+	bl SetWarpDestination
 _080556D6:
 	add sp, 0x4
 	pop {r4-r6}
@@ -1627,7 +1627,7 @@ sub_80557C4: @ 80557C4
 	lsls r4, r5, 24
 	asrs r4, 24
 	str r4, [sp]
-	bl Overworld_SetWarpDestination
+	bl SetWarpDestination
 	b _08055818
 _080557FC:
 	bl mapheader_run_script_with_tag_x6
@@ -1700,7 +1700,7 @@ sub_8055864: @ 8055864
 	negs r3, r3
 	str r3, [sp]
 	adds r2, r3, 0
-	bl Overworld_SetWarpDestination
+	bl SetWarpDestination
 	bl sub_8055E94
 	bl warp_shift
 	bl set_current_map_header_from_sav1_save_old_name
@@ -3493,7 +3493,7 @@ CB2_NewGame: @ 8056644
 	bl sub_80569BC
 	bl StopMapMusic
 	bl sub_8056420
-	bl sub_8054A60
+	bl NewGameInitData
 	bl ResetInitialPlayerAvatarState
 	bl PlayTimeCounter_Start
 	bl ScriptContext1_Init

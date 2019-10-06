@@ -485,7 +485,7 @@ gUnknown_2031DA8: @ 2031DA8
 gUnknown_2031DAC: @ 2031DAC
 	.space 0x4
 
-gUnknown_2031DB0: @ 2031DB0
+gDifferentSaveFile: @ 2031DB0
 	.space 0x4
 
 gUnknown_2031DB4: @ 2031DB4

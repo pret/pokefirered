@@ -769,7 +769,7 @@ void sub_81442CC(struct MEventStruct_Unk1442CC * data)
         data->unk_14 = 0;
     for (i = 0; i < 4; i++)
         data->unk_16[i] = gSaveBlock1Ptr->unk_3120.unk_338[i];
-    CopyUnalignedWord(data->unk_4C, gSaveBlock2Ptr->playerTrainerId);
+    CopyTrainerId(data->unk_4C, gSaveBlock2Ptr->playerTrainerId);
     StringCopy(data->unk_45, gSaveBlock2Ptr->playerName);
     for (i = 0; i < 6; i++)
         data->unk_50[i] = gSaveBlock1Ptr->unk2CA0[i];

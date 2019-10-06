@@ -16,7 +16,7 @@ u32 sub_815EE3C(u32 * a0)
     return *a0 ^ gSaveBlock2Ptr->encryptionKey;
 }
 
-void sub_815EE54(u32 * a0, u32 a1)
+void SetBerryPowder(u32 * a0, u32 a1)
 {
     *a0 = gSaveBlock2Ptr->encryptionKey ^ a1;
 }
@@ -48,12 +48,12 @@ bool8 sub_815EEE0(u32 a0)
     u32 amount = sub_815EE3C(ptr) + a0;
     if (amount > 99999)
     {
-        sub_815EE54(ptr, 99999);
+        SetBerryPowder(ptr, 99999);
         return FALSE;
     }
     else
     {
-        sub_815EE54(ptr, amount);
+        SetBerryPowder(ptr, amount);
         return TRUE;
     }
 }
@@ -66,7 +66,7 @@ bool8 sub_815EF20(u32 a0)
     else
     {
         u32 amount = sub_815EE3C(ptr);
-        sub_815EE54(ptr, amount - a0);
+        SetBerryPowder(ptr, amount - a0);
         return TRUE;
     }
 }
@@ -79,7 +79,7 @@ bool8 sub_815EF5C(void)
     else
     {
         u32 amount = sub_815EE3C(ptr);
-        sub_815EE54(ptr, amount - gSpecialVar_0x8004);
+        SetBerryPowder(ptr, amount - gSpecialVar_0x8004);
         return TRUE;
     }
 }

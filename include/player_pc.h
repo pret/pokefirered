@@ -21,5 +21,6 @@ struct PlayerPC_Unk_203AAC4
 // Exported ROM declarations
 
 void sub_816B060(u8 taskId);
+void sub_80EB658(void);
 
 #endif //GUARD_PLAYER_PC_H

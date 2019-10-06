@@ -14,6 +14,7 @@ u32 GetBoxMonDataFromAnyBox(u8 boxId, u8 monPosition, u32 request);
 void sub_808BCB4(u8 boxId, u8 monPosition);
 u8 * GetBoxNamePtr(u8 boxId);
 void sub_808CE60(void);
+void sub_808C7E0(void);
 u8 StorageGetCurrentBox(void);
 
 #endif // GUARD_POKEMON_STORAGE_SYSTEM_H

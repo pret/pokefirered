@@ -125,23 +125,23 @@ void NewGameInitData(void)
     InitPlayerTrainerId();
     PlayTimeCounter_Reset();
     ClearPokedexFlags();
-    sub_806E0D0();
+    InitEventData();
     ResetFameChecker();
     SetMoney(&gSaveBlock1Ptr->money, 3000);
-    sub_8054E68();
-    InitLinkBattleRecords();
+    ResetGameStats();
+    ClearPlayerLinkBattleRecords();
     sub_80A0904();
     sub_80A0958();
     sub_806E190();
     gPlayerPartyCount = 0;
     ZeroPlayerPartyMons();
-    sub_808C7E0();
+    ResetPokemonStorageSystem();
     ClearRoamerData();
     gSaveBlock1Ptr->registeredItem = 0;
-    ClearItemSlotsInAllBagPockets();
-    sub_80EB658();
+    ClearBag();
+    NewGameInitPCItems();
     sub_809C794();
-    sub_80BDD34();
+    InitEasyChatPhrases();
     sub_8113044();
     copy_strings_to_sav1();
     ResetMiniGamesResults();
@@ -150,7 +150,7 @@ void NewGameInitData(void)
     WarpToPlayersRoom();
     ScriptContext2_RunNewScript(EventScript_ResetAllMapFlags);
     StringCopy(gSaveBlock1Ptr->rivalName, rivalName);
-    sub_815EE0C();
+    ResetTrainerTowerResults();
 }
 
 static void ResetMiniGamesResults(void)

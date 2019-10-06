@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_806E0D0
-sub_806E0D0: @ 806E0D0
+	thumb_func_start InitEventData
+InitEventData: @ 806E0D0
 	push {r4,lr}
 	ldr r4, _0806E108 @ =gSaveBlock1Ptr
 	ldr r0, [r4]
@@ -35,7 +35,7 @@ sub_806E0D0: @ 806E0D0
 	.align 2, 0
 _0806E108: .4byte gSaveBlock1Ptr
 _0806E10C: .4byte gUnknown_20370E0
-	thumb_func_end sub_806E0D0
+	thumb_func_end InitEventData
 
 	thumb_func_start sub_806E110
 sub_806E110: @ 806E110

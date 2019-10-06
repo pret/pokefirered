@@ -289,8 +289,8 @@ sub_8054E40: @ 8054E40
 _08054E64: .4byte 0x0000406e
 	thumb_func_end sub_8054E40
 
-	thumb_func_start sub_8054E68
-sub_8054E68: @ 8054E68
+	thumb_func_start ResetGameStats
+ResetGameStats: @ 8054E68
 	push {r4,r5,lr}
 	movs r2, 0
 	ldr r5, _08054E8C @ =gSaveBlock1Ptr
@@ -311,7 +311,7 @@ _08054E74:
 	bx r0
 	.align 2, 0
 _08054E8C: .4byte gSaveBlock1Ptr
-	thumb_func_end sub_8054E68
+	thumb_func_end ResetGameStats
 
 	thumb_func_start IncrementGameStat
 IncrementGameStat: @ 8054E90

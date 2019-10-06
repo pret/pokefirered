@@ -137,7 +137,7 @@ u8 get_map_light_from_warp0(void);
 const struct MapHeader *warp1_get_mapheader(void);
 void sub_8055F88(void);
 void sub_8056788(void);
-void sub_8054E68(void);
+void ResetGameStats(void);
 
 void Overworld_CreditsMainCB(void);
 bool32 Overworld_DoScrollSceneForCredits(u8 *, const struct CreditsOverworldCmd *, u8);

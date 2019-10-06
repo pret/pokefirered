@@ -1458,7 +1458,7 @@ void sub_815EDF4(u32 * counter, u32 value)
     *counter = value ^ gSaveBlock2Ptr->encryptionKey;
 }
 
-void sub_815EE0C(void)
+void ResetTrainerTowerResults(void)
 {
     s32 i;
 

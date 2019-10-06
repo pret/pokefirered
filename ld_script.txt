@@ -88,7 +88,7 @@ SECTIONS {
         src/load_save.o(.text);
         asm/trade.o(.text);
         src/play_time.o(.text);
-        asm/new_game.o(.text);
+        src/new_game.o(.text);
         asm/overworld.o(.text);
         src/fieldmap.o(.text);
         src/metatile_behavior.o(.text);

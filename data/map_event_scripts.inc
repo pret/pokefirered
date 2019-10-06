@@ -1435,7 +1435,7 @@ Text_1A644F:: @ 81A644F
 	.string "once. Is that okay?$"
 
 
-gUnknown_81A6481:: @ 81A6481
+EventScript_ResetAllMapFlags:: @ 81A6481
 	setflag FLAG_0x02B
 	setflag FLAG_0x02C
 	setflag FLAG_0x033

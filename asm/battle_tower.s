@@ -2799,7 +2799,7 @@ _080E6F0E:
 	ldr r4, _080E6FA4 @ =gSaveBlock2Ptr
 	ldr r1, [r4]
 	adds r1, 0xA
-	bl CopyUnalignedWord
+	bl CopyTrainerId
 	adds r0, r5, 0x4
 	ldr r1, [r4]
 	bl StringCopy7
@@ -3369,7 +3369,7 @@ _080E7372:
 	adds r0, 0xC
 	ldr r1, [r5]
 	adds r1, 0xA
-	bl CopyUnalignedWord
+	bl CopyTrainerId
 	adds r0, r7, 0x4
 	ldr r1, [r5]
 	bl StringCopy7

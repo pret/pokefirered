@@ -986,7 +986,7 @@ void sub_8111368(void)
 {
     gUnknown_203ADFA = 2;
     sub_806E6FC();
-    ClearItemSlotsInAllBagPockets();
+    ClearBag();
     ClearPCItemSlots();
     if (sub_8110AC8() == 1)
     {

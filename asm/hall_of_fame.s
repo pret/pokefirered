@@ -1458,7 +1458,7 @@ sub_80F2934: @ 80F2934
 	movs r0, 0x3 @ MAP_GROUP(INDIGO_PLATEAU_EXTERIOR)
 	movs r1, 0x9 @ MAP_NUM(INDIGO_PLATEAU_EXTERIOR)
 	movs r3, 0xB
-	bl Overworld_SetWarpDestination
+	bl SetWarpDestination
 	bl DoWarp
 	bl ResetInitialPlayerAvatarState
 	add sp, 0x4

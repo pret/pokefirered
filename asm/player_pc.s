@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80EB658
-sub_80EB658: @ 80EB658
+	thumb_func_start NewGameInitPCItems
+NewGameInitPCItems: @ 80EB658
 	push {r4-r6,lr}
 	movs r4, 0
 	bl ClearPCItemSlots
@@ -48,7 +48,7 @@ _080EB6A0:
 	bx r0
 	.align 2, 0
 _080EB6A8: .4byte gUnknown_8402220
-	thumb_func_end sub_80EB658
+	thumb_func_end NewGameInitPCItems
 
 	thumb_func_start sub_80EB6AC
 sub_80EB6AC: @ 80EB6AC

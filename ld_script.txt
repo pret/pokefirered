@@ -169,7 +169,7 @@ SECTIONS {
         asm/dragon.o(.text);
         asm/dark.o(.text);
         src/ground.o(.text);
-        asm/normal.o(.text);
+        src/normal.o(.text);
         src/battle_anim_utility_funcs.o(.text);
         src/battle_intro.o(.text);
         asm/bike.o(.text);
@@ -423,7 +423,7 @@ SECTIONS {
         src/item.o(.rodata);
         data/data_835B488.o(.rodata.83DF09C);
         src/ground.o(.rodata);
-        data/data_835B488.o(.rodata.83E7ADC);
+        src/normal.o(.rodata);
         src/battle_anim_utility_funcs.o(.rodata);
         src/battle_intro.o(.rodata);
         data/data_835B488.o(.rodata.83E7CFC);

@@ -315,7 +315,7 @@ static void sub_80B8ED4(u8 taskId)
         task->data[15] = var0 + 32;
         if (task->data[14] < 0)
             task->data[14] = 0;
-        gSprites[task->data[10]].invisible = 1;
+        gSprites[task->data[10]].invisible = TRUE;
         ++task->data[0];
         break;
     case 1:
@@ -353,7 +353,7 @@ static void sub_80B8ED4(u8 taskId)
         break;
     case 4:
         DestroyAnimVisualTask(taskId);
-        gSprites[task->data[10]].invisible = 1;
+        gSprites[task->data[10]].invisible = TRUE;
         break;
     }
 }
@@ -362,7 +362,7 @@ static void sub_80B908C(u8 taskId)
 {
     u8 spriteId = GetAnimBattlerSpriteId(0);
 
-    gSprites[spriteId].invisible = 1;
+    gSprites[spriteId].invisible = TRUE;
     gSprites[spriteId].pos2.x = 0;
     gSprites[spriteId].pos2.y = 0;
     if (GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) == 1)
@@ -392,7 +392,7 @@ static void sub_80B912C(u8 taskId)
     {
     case 0:
         task->data[10] = GetAnimBattlerSpriteId(0);
-        gSprites[task->data[10]].invisible = 0;
+        gSprites[task->data[10]].invisible = FALSE;
         gSprites[task->data[10]].pos2.x = 0;
         gSprites[task->data[10]].pos2.y = 160 - gSprites[task->data[10]].pos1.y;
         ++task->data[0];

@@ -62,6 +62,9 @@ extern struct OamData gOamData_83AC9C8;
 extern struct OamData gOamData_83ACA38;
 extern struct OamData gOamData_83AC9D0;
 extern struct OamData gOamData_83AC9F8;
+extern struct OamData gOamData_83AC9D8;
+extern struct OamData gOamData_83ACB58;
+extern struct OamData gOamData_83ACAF8;
 
 void ClearBattleAnimationVars(void);
 void DoMoveAnim(u16 move);
@@ -262,8 +265,14 @@ void sub_8099980(u8 taskId);
 void sub_8099A78(u8 taskId);
 void sub_8099BD4(u8 taskId);
 
-// normal.s
+// normal.c
 u32 UnpackSelectedBattleAnimPalettes(s16 selector);
+void sub_80B9BDC(u8 taskId);
+void sub_80B9CE4(u8 taskId);
+void sub_80B9E58(u8 taskId);
+void sub_80B9F6C(u8 taskId);
+void sub_80BA0E8(u8 taskId);
+void sub_80BA47C(u8 taskId);
 
 // ground.c
 void sub_80B8E94(u8 taskId);
@@ -271,6 +280,9 @@ void sub_80B90EC(u8 taskId);
 void sub_80B94B4(u8 taskId);
 void AnimTask_IsPowerOver99(u8 taskId);
 void sub_80B9800(u8 taskId);
+
+// flying.c
+void sub_80B1D3C(struct Sprite *sprite);
 
 // battle_anim_utility_funcs.c
 void sub_80BA7F8(u8 taskId);

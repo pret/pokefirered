@@ -267,7 +267,7 @@ _080B0A9C:
 	mov r1, r9
 	ldrh r0, [r1, 0x2]
 	strh r0, [r5, 0x2E]
-	ldr r0, _080B0B1C @ =gUnknown_83E7C08
+	ldr r0, _080B0B1C @ =gBasicHitSplatSpriteTemplate
 	movs r2, 0x20
 	ldrsh r1, [r5, r2]
 	movs r3, 0x22
@@ -315,7 +315,7 @@ _080B0B00:
 _080B0B10: .4byte gBattleAnimTarget
 _080B0B14: .4byte gBattlerPositions
 _080B0B18: .4byte 0xfff00000
-_080B0B1C: .4byte gUnknown_83E7C08
+_080B0B1C: .4byte gBasicHitSplatSpriteTemplate
 _080B0B20: .4byte gSprites
 _080B0B24: .4byte SpriteCallbackDummy
 _080B0B28: .4byte sub_80B0B2C

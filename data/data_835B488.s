@@ -932,20 +932,6 @@ gUnknown_83E7668:: @ 83E7668
 gUnknown_83E76E0:: @ 83E76E0
 	.incbin "baserom.gba", 0x3E76E0, 0x320
 
-	.section .rodata.83E7ADC
-
-gUnknown_83E7ADC:: @ 83E7ADC
-	.incbin "baserom.gba", 0x3E7ADC, 0x12C
-
-gUnknown_83E7C08:: @ 83E7C08
-	.incbin "baserom.gba", 0x3E7C08, 0x30
-
-gUnknown_83E7C38:: @ 83E7C38
-	.incbin "baserom.gba", 0x3E7C38, 0x60
-
-gUnknown_83E7C98:: @ 83E7C98
-	.incbin "baserom.gba", 0x3E7C98, 0x30
-
 	.section .rodata.83E7CFC
 
 gUnknown_83E7CFC:: @ 83E7CFC

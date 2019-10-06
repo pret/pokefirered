@@ -561,7 +561,7 @@ static bool8 sub_80EC62C(void)
         }
         break;
     case 142:
-        sub_800B388();
+        ResetSerial();
         SetMainCallback2(sub_80EC5B8);
         break;
     }

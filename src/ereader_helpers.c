@@ -51,7 +51,7 @@ int EReader_Send(size_t r6, const void * r5)
     {
         GetKeyInput();
         if (TEST_BUTTON(sJoyNew, B_BUTTON))
-            gUnknown_3003F84 = 2;
+            gShouldAdvanceLinkState = 2;
 
         sSendRecvStatus = EReaderHandleTransfer(1, r6, r5, NULL);
         if ((sSendRecvStatus & 0x13) == 0x10)
@@ -71,7 +71,7 @@ int EReader_Send(size_t r6, const void * r5)
         }
         else
         {
-            gUnknown_3003F84 = 0;
+            gShouldAdvanceLinkState = 0;
             VBlankIntrWait();
         }
     }
@@ -90,7 +90,7 @@ int EReader_Recv(void * r5)
     {
         GetKeyInput();
         if (TEST_BUTTON(sJoyNew, B_BUTTON))
-            gUnknown_3003F84 = 2;
+            gShouldAdvanceLinkState = 2;
 
         sSendRecvStatus = EReaderHandleTransfer(0, 0, NULL, r5);
         if ((sSendRecvStatus & 0x13) == 0x10)
@@ -110,7 +110,7 @@ int EReader_Recv(void * r5)
         }
         else
         {
-            gUnknown_3003F84 = 0;
+            gShouldAdvanceLinkState = 0;
             VBlankIntrWait();
         }
     }
@@ -150,7 +150,7 @@ static void OpenSerial32(void)
     REG_RCNT = 0;
     REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE;
     REG_SIOCNT |= SIO_MULTI_SD;
-    gUnknown_3003F84 = 0;
+    gShouldAdvanceLinkState = 0;
     sCounter1 = 0;
     sCounter2 = 0;
 }
@@ -167,7 +167,7 @@ u16 EReaderHandleTransfer(u8 mode, size_t size, const void * data, void * recvBu
     case 1:
         if (DetermineSendRecvState(mode))
             EnableSio();
-        if (gUnknown_3003F84 == 2)
+        if (gShouldAdvanceLinkState == 2)
         {
             sSendRecvMgr.field_04 = 2;
             sSendRecvMgr.state = 6;
@@ -179,7 +179,7 @@ u16 EReaderHandleTransfer(u8 mode, size_t size, const void * data, void * recvBu
         sSendRecvMgr.state = 3;
         // fallthrough
     case 3:
-        if (gUnknown_3003F84 == 2)
+        if (gShouldAdvanceLinkState == 2)
         {
             sSendRecvMgr.field_04 = 2;
             sSendRecvMgr.state = 6;

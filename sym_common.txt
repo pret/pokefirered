@@ -15,13 +15,13 @@ gUnknown_3003E6C: @ 3003E6C
 gUnknown_3003E70: @ 3003E70
 	.space 0x3C
 
-gUnknown_3003EAC: @ 3003EAC
+gLinkErrorOccurred: @ 3003EAC
 	.space 0x4
 
 gUnknown_3003EB0: @ 3003EB0
 	.space 0x8
 
-gUnknown_3003EB8: @ 3003EB8
+gRemoteLinkPlayersNotReceived: @ 3003EB8
 	.space 0x4
 
 gUnknown_3003EBC: @ 3003EBC
@@ -57,7 +57,7 @@ gUnknown_3003F30: @ 3003F30
 gUnknown_3003F34: @ 3003F34
 	.space 0x4
 
-gUnknown_3003F38: @ 3003F38
+gSuppressLinkErrorMessage: @ 3003F38
 	.space 0x4
 
 gWirelessCommType: @ 3003F3C
@@ -66,7 +66,7 @@ gWirelessCommType: @ 3003F3C
 gUnknown_3003F40: @ 3003F40
 	.space 0x10
 
-gUnknown_3003F50: @ 3003F50
+gSendCmd: @ 3003F50
 	.space 0x10
 
 gUnknown_3003F60: @ 3003F60
@@ -78,13 +78,13 @@ gReceivedRemoteLinkPlayers: @ 3003F64
 gLinkTestBGInfo: @ 3003F70
 	.space 0x10
 
-gUnknown_3003F80: @ 3003F80
+gLinkCallback: @ 3003F80
 	.space 0x4
 
-gUnknown_3003F84: @ 3003F84
+gShouldAdvanceLinkState: @ 3003F84
 	.space 0x4
 
-gUnknown_3003F88: @ 3003F88
+gLinkTestBlockChecksums: @ 3003F88
 	.space 0x8
 
 gUnknown_3003F90: @ 3003F90

@@ -138,7 +138,7 @@ extern u16 gRecvCmds[MAX_RFU_PLAYERS][CMD_LENGTH];
 extern u8 gBlockSendBuffer[BLOCK_BUFFER_SIZE];
 extern u16 gLinkType;
 extern u32 gLinkStatus;
-extern u16 gBlockRecvBuffer[MAX_LINK_PLAYERS][BLOCK_BUFFER_SIZE / 2];
+extern u16 gBlockRecvBuffer[MAX_RFU_PLAYERS][BLOCK_BUFFER_SIZE / 2];
 extern u16 gSendCmd[CMD_LENGTH];
 extern u8 gShouldAdvanceLinkState;
 extern struct LinkPlayer gLinkPlayers[];
@@ -147,7 +147,7 @@ extern bool8 gReceivedRemoteLinkPlayers;
 extern bool8 gLinkVSyncDisabled;
 extern u8 gWirelessCommType;
 
-extern u8 gUnknown_3003F84;
+extern u8 gShouldAdvanceLinkState;
 extern u64 gSioMlt_Recv;
 
 void Task_DestroySelf(u8);
@@ -208,7 +208,7 @@ void sub_80098D8(void);
 void CloseLink(void);
 bool8 IsLinkTaskFinished(void);
 bool32 sub_800B270(void);
-void sub_800B388(void);
+void ResetSerial(void);
 void sub_8054A28(void);
 void sub_800B1F4(void);
 void LoadWirelessStatusIndicatorSpriteGfx(void);

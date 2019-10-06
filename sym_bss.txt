@@ -6,58 +6,19 @@
 
 	.space 0x4
 
-	.include "src/bg.o"
-	.include "src/malloc.o"
-	.include "src/text_printer.o"
-	.include "src/sprite.o"
-
 	.align 2
-gUnknown_3000E08: @ 3000E08
-	.space 0x10
-
-gUnknown_3000E18: @ 3000E18
-	.space 0x30
-
-gUnknown_3000E48: @ 3000E48
-	.space 0x4
-
-gUnknown_3000E4C: @ 3000E4C
-	.space 0x4
-
-gUnknown_3000E50: @ 3000E50
-	.space 0x4
-
-gUnknown_3000E54: @ 3000E54
-	.space 0x4
-
-gUnknown_3000E58: @ 3000E58
-	.space 0x4
-
-gUnknown_3000E5C: @ 3000E5C
-	.space 0x4
-
-gUnknown_3000E60: @ 3000E60
-	.space 0x4
-
-gUnknown_3000E64: @ 3000E64
-	.space 0x1
-
-gUnknown_3000E65: @ 3000E65
-	.space 0x1
-
-gUnknown_3000E66: @ 3000E66
-	.space 0x2
-
-gUnknown_3000E68: @ 3000E68
-	.space 0x2
-
-gUnknown_3000E6A: @ 3000E6A
-	.space 0x1
-
-gUnknown_3000E6B: @ 3000E6B
-	.space 0x1
-
+	.include "src/bg.o"
+	.align 2
+	.include "src/malloc.o"
+	.align 2
+	.include "src/text_printer.o"
+	.align 2
+	.include "src/sprite.o"
+	.align 2
+	.include "src/link.o"
+	.align 2
 	.include "src/multiboot.o"
+	.align 2
 	.include "src/daycare.o"
 
 gUnknown_3000E78: @ 3000E78

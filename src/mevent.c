@@ -126,7 +126,7 @@ u8 sub_8143674(struct MEvent_Str_1 *mgr)
         resp = 2;
     if (mgr->status & 4)
         resp = 3;
-    gUnknown_3003F84 = 0;
+    gShouldAdvanceLinkState = 0;
     return resp;
 }
 

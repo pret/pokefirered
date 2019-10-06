@@ -29,6 +29,21 @@
 #define EXTRACT_RECEIVED_NOTHING(status) \
 (((status) >> LINK_STAT_RECEIVED_NOTHING_SHIFT) & 1)
 
+#define LINKCMD_SEND_LINK_TYPE 0x2222
+#define LINKCMD_0x2FFE             0x2FFE
+#define LINKCMD_SEND_HELD_KEYS     0x4444
+#define LINKCMD_0x5555             0x5555
+#define LINKCMD_0x5566             0x5566
+#define LINKCMD_0x5FFF             0x5FFF
+#define LINKCMD_0x6666             0x6666
+#define LINKCMD_0x7777             0x7777
+#define LINKCMD_CONT_BLOCK         0x8888
+#define LINKCMD_0xAAAA             0xAAAA
+#define LINKCMD_0xAAAB             0xAAAB
+#define LINKCMD_INIT_BLOCK         0xBBBB
+#define LINKCMD_SEND_HELD_KEYS_2   0xCAFE
+#define LINKCMD_0xCCCC             0xCCCC
+
 #define MASTER_HANDSHAKE 0x8FFF
 #define SLAVE_HANDSHAKE  0xB9A0
 
@@ -148,12 +163,11 @@ extern bool8 gLinkVSyncDisabled;
 extern u8 gWirelessCommType;
 
 extern u8 gShouldAdvanceLinkState;
-extern u64 gSioMlt_Recv;
 
 void Task_DestroySelf(u8);
 void OpenLink(void);
 void CloseLink(void);
-u16 LinkMain2(u16 *);
+u16 LinkMain2(const u16 *);
 void sub_8007B14(void);
 bool32 sub_8007B24(void);
 void ClearLinkCallback(void);

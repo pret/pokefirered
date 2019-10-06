@@ -71,4 +71,6 @@ void SeedRngAndSetTrainerId(void);
 extern const char RomHeaderGameCode[4];
 extern const char RomHeaderSoftwareVersion;
 
+extern u8 gLinkTransferringData;
+
 #endif // GUARD_MAIN_H

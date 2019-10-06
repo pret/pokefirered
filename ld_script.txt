@@ -380,6 +380,7 @@ SECTIONS {
         src/sprite.o(.rodata);
         src/bg_regs.o(.rodata);
         src/string_util.o(.rodata);
+        src/link.o(.rodata);
         data/data.o(.rodata);
         src/battle_util.o(.rodata);
         src/battle_script_commands.o(.rodata);

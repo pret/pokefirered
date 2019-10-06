@@ -7179,7 +7179,7 @@ _0804FF7A:
 	cmp r1, r0
 	bls _0804FFAC
 	bl CloseLink
-	ldr r0, _0804FFC0 @ =c2_800ACD4
+	ldr r0, _0804FFC0 @ =CB2_LinkError
 	bl SetMainCallback2
 	ldr r1, [r4]
 	adds r3, r1, 0
@@ -7203,7 +7203,7 @@ _0804FFAC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804FFC0: .4byte c2_800ACD4
+_0804FFC0: .4byte CB2_LinkError
 	thumb_func_end sub_804FF4C
 
 	thumb_func_start sub_804FFC4

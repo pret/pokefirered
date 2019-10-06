@@ -2460,7 +2460,7 @@ sub_8081A90: @ 8081A90
 	cmp r1, r0
 	ble _08081AC2
 	bl CloseLink
-	ldr r0, _08081ADC @ =c2_800ACD4
+	ldr r0, _08081ADC @ =CB2_LinkError
 	bl SetMainCallback2
 	adds r0, r4, 0
 	bl DestroyTask
@@ -2477,7 +2477,7 @@ _08081AD0:
 	bx r0
 	.align 2, 0
 _08081AD8: .4byte gTasks
-_08081ADC: .4byte c2_800ACD4
+_08081ADC: .4byte CB2_LinkError
 _08081AE0: .4byte gReceivedRemoteLinkPlayers
 	thumb_func_end sub_8081A90
 

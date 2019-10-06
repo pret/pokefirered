@@ -230,8 +230,8 @@ struct SaveBlock2
     /*0x0AC*/ u8 field_AC;
     /*0x0AD*/ u8 field_AD;
     /*0x0AE*/ u8 filler_AE[0x2];
-	/*0x0B0*/ u8 field_B0;
-	/*0x0B1*/ u8 filler_B1[0x3EF];
+    /*0x0B0*/ u8 field_B0;
+    /*0x0B1*/ u8 filler_B1[0x3EF];
     /*0x4A0*/ u32 unk_4A0[0x2F];
     /*0x55c*/ struct UnkSaveBlock2Substruct_55C unk_55C;
     /*0x574*/ u8 filler_574[0x324];
@@ -239,8 +239,8 @@ struct SaveBlock2
     /*0xA98*/ struct LinkBattleRecords linkBattleRecords;
     /*0xAF0*/ struct BerryCrush berryCrush;
     /*0xB00*/ struct PokemonJumpResults pokeJump;
-	/*0xB10*/ struct BerryPickingResults berryPick;
-	/*0xB20*/ u8 filler_B20[0x400];
+    /*0xB10*/ struct BerryPickingResults berryPick;
+    /*0xB20*/ u8 filler_B20[0x400];
     /*0xF20*/ u32 encryptionKey;
 };
 

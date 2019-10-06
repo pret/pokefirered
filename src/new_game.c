@@ -33,7 +33,7 @@
 extern const u8 EventScript_ResetAllMapFlags[];
 
 // this file's functions
-void ResetMiniGamesResults(void);
+static void ResetMiniGamesResults(void);
 
 // EWRAM vars
 EWRAM_DATA bool8 gDifferentSaveFile = FALSE;
@@ -53,13 +53,13 @@ void CopyTrainerId(u8 *dst, u8 *src)
         dst[i] = src[i];
 }
 
-/*static*/ void InitPlayerTrainerId(void)
+static void InitPlayerTrainerId(void)
 {
     u32 trainerId = (Random() << 0x10) | GetGeneratedTrainerIdLower();
     SetTrainerId(trainerId, gSaveBlock2Ptr->playerTrainerId);
 }
 
-/*static*/ void SetDefaultOptions(void)
+static void SetDefaultOptions(void)
 {
     gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_MID;
     gSaveBlock2Ptr->optionsWindowFrameType = 0;
@@ -67,21 +67,21 @@ void CopyTrainerId(u8 *dst, u8 *src)
     gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SHIFT;
     gSaveBlock2Ptr->optionsBattleSceneOff = FALSE;
     gSaveBlock2Ptr->regionMapZoom = FALSE;
-	gSaveBlock2Ptr->optionsButtonMode = OPTIONS_BUTTON_MODE_NORMAL;
+    gSaveBlock2Ptr->optionsButtonMode = OPTIONS_BUTTON_MODE_NORMAL;
 }
 
-/*static*/ void ClearPokedexFlags(void)
+static void ClearPokedexFlags(void)
 {
     memset(&gSaveBlock2Ptr->pokedex.owned, 0, sizeof(gSaveBlock2Ptr->pokedex.owned));
     memset(&gSaveBlock2Ptr->pokedex.seen, 0, sizeof(gSaveBlock2Ptr->pokedex.seen));
 }
 
-/*static*/ void sub_80549D4(void)
+static void sub_80549D4(void)
 {
     CpuFill32(0, &gSaveBlock2Ptr->field_B0, (u32) &gSaveBlock2Ptr->mapView - (u32) &gSaveBlock2Ptr->field_B0);
 }
 
-/*static*/ void WarpToPlayersRoom(void)
+static void WarpToPlayersRoom(void)
 {
     SetWarpDestination(MAP_GROUP(PALLET_TOWN_PLAYERS_HOUSE_2F), MAP_NUM(PALLET_TOWN_PLAYERS_HOUSE_2F), -1, 6, 6);
     WarpIntoMap();
@@ -96,73 +96,68 @@ void Sav2_ClearSetDefault(void)
 void ResetMenuAndMonGlobals(void)
 {
     gDifferentSaveFile = 0;
-	ZeroPlayerPartyMons();
+    ZeroPlayerPartyMons();
     ZeroEnemyPartyMons();
-	sub_81089BC();
+    sub_81089BC();
     ResetTMCaseCursorPos();
     BerryPouch_CursorResetToTop();
     sub_811089C();
     sub_8083214(Random());
-	sub_806E6FC();
+    sub_806E6FC();
 }
 
 void NewGameInitData(void)
 {
-	u8 rivalName[PLAYER_NAME_LENGTH];
-	StringCopy(rivalName, gSaveBlock1Ptr->rivalName);
-	gDifferentSaveFile = 1;
-	gSaveBlock2Ptr->encryptionKey = 0;
-	ZeroPlayerPartyMons();
+    u8 rivalName[PLAYER_NAME_LENGTH];
+
+    StringCopy(rivalName, gSaveBlock1Ptr->rivalName);
+    gDifferentSaveFile = 1;
+    gSaveBlock2Ptr->encryptionKey = 0;
+    ZeroPlayerPartyMons();
     ZeroEnemyPartyMons();
     sub_80549D4();
     ClearSav1();
     ClearMailData();
-	gSaveBlock2Ptr->specialSaveWarpFlags = 0;
+    gSaveBlock2Ptr->specialSaveWarpFlags = 0;
     gSaveBlock2Ptr->field_A8 = 0;
-	gSaveBlock2Ptr->field_AC = 1;
-	gSaveBlock2Ptr->field_AD = 0;
-	InitPlayerTrainerId();
+    gSaveBlock2Ptr->field_AC = 1;
+    gSaveBlock2Ptr->field_AD = 0;
+    InitPlayerTrainerId();
     PlayTimeCounter_Reset();
     ClearPokedexFlags();
-	sub_806E0D0();
-	ResetFameChecker();
-	SetMoney(&gSaveBlock1Ptr->money, 3000);
-	sub_8054E68();
-	InitLinkBattleRecords();
-	sub_80A0904();
-	sub_80A0958();
-	sub_806E190();
-	gPlayerPartyCount = 0;
+    sub_806E0D0();
+    ResetFameChecker();
+    SetMoney(&gSaveBlock1Ptr->money, 3000);
+    sub_8054E68();
+    InitLinkBattleRecords();
+    sub_80A0904();
+    sub_80A0958();
+    sub_806E190();
+    gPlayerPartyCount = 0;
     ZeroPlayerPartyMons();
-	sub_808C7E0();
-	ClearRoamerData();
-	gSaveBlock1Ptr->registeredItem = 0;
-	ClearItemSlotsInAllBagPockets();
-	sub_80EB658();
-	sub_809C794();
-	sub_80BDD34();
-	sub_8113044();
-	copy_strings_to_sav1();
-	ResetMiniGamesResults();
-	sub_8143D24();
-	sub_815D838();
-	WarpToPlayersRoom();
-	ScriptContext2_RunNewScript(EventScript_ResetAllMapFlags);
-	StringCopy(gSaveBlock1Ptr->rivalName, rivalName);
-	sub_815EE0C();
+    sub_808C7E0();
+    ClearRoamerData();
+    gSaveBlock1Ptr->registeredItem = 0;
+    ClearItemSlotsInAllBagPockets();
+    sub_80EB658();
+    sub_809C794();
+    sub_80BDD34();
+    sub_8113044();
+    copy_strings_to_sav1();
+    ResetMiniGamesResults();
+    sub_8143D24();
+    sub_815D838();
+    WarpToPlayersRoom();
+    ScriptContext2_RunNewScript(EventScript_ResetAllMapFlags);
+    StringCopy(gSaveBlock1Ptr->rivalName, rivalName);
+    sub_815EE0C();
 }
 
-/*static*/ void ResetMiniGamesResults(void)
+static void ResetMiniGamesResults(void)
 {
     CpuFill16(0, &gSaveBlock2Ptr->berryCrush, sizeof(struct BerryCrush));
     SetBerryPowder(&gSaveBlock2Ptr->berryCrush.berryPowderAmount, 0);
     ResetPokeJumpResults();
     CpuFill16(0, &gSaveBlock2Ptr->berryPick, sizeof(struct BerryPickingResults));
 }
-	
-	
-	
-	
-	
-	
-	
+ 

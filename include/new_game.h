@@ -1,6 +1,8 @@
 #ifndef GUARD_NEW_GAME_H
 #define GUARD_NEW_GAME_H
 
+#include "global.h"
+
 void SetTrainerId(u32 trainerId, u8 *dst);
 void CopyTrainerId(u8 *dst, u8 *src);
 void NewGameInitData(void);

@@ -205,6 +205,14 @@ struct UnkSaveBlock2Substruct_55C
     /* 0x016:0x572 */ u8 unk_16;
 }; // size: 0x018
 
+struct UnkSaveBlock2Substruct_B0
+{
+    /* 0x000:0x0B0 */ u8 field_0[0x3F0];
+    /* 0x3F0:0x4A0 */ u32 field_3F0[0x2F];
+    /* 0x4AC:0x55C */ struct UnkSaveBlock2Substruct_55C field_4AC;
+    /* 0x4C4:0x574 */ u8 field_4C4[0x324];
+}; // size: 0x7E8
+
 struct SaveBlock2
 {
     /*0x000*/ u8 playerName[PLAYER_NAME_LENGTH];
@@ -230,11 +238,7 @@ struct SaveBlock2
     /*0x0AC*/ u8 field_AC;
     /*0x0AD*/ u8 field_AD;
     /*0x0AE*/ u8 filler_AE[0x2];
-    /*0x0B0*/ u8 field_B0;
-    /*0x0B1*/ u8 filler_B1[0x3EF];
-    /*0x4A0*/ u32 unk_4A0[0x2F];
-    /*0x55c*/ struct UnkSaveBlock2Substruct_55C unk_55C;
-    /*0x574*/ u8 filler_574[0x324];
+    /*0x0B0*/ struct UnkSaveBlock2Substruct_B0 unk_B0;    
     /*0x898*/ u16 mapView[0x100];
     /*0xA98*/ struct LinkBattleRecords linkBattleRecords;
     /*0xAF0*/ struct BerryCrush berryCrush;

@@ -29,8 +29,7 @@
 #include "script.h"
 #include "berry_powder.h"
 #include "pokemon_jump.h"
-
-extern const u8 EventScript_ResetAllMapFlags[];
+#include "event_scripts.h"
 
 // this file's functions
 static void ResetMiniGamesResults(void);
@@ -78,7 +77,7 @@ static void ClearPokedexFlags(void)
 
 static void sub_80549D4(void)
 {
-    CpuFill32(0, &gSaveBlock2Ptr->field_B0, (u32) &gSaveBlock2Ptr->mapView - (u32) &gSaveBlock2Ptr->field_B0);
+    CpuFill32(0, &gSaveBlock2Ptr->unk_B0, sizeof(gSaveBlock2Ptr->unk_B0));
 }
 
 static void WarpToPlayersRoom(void)
@@ -95,7 +94,7 @@ void Sav2_ClearSetDefault(void)
 
 void ResetMenuAndMonGlobals(void)
 {
-    gDifferentSaveFile = 0;
+    gDifferentSaveFile = FALSE;
     ZeroPlayerPartyMons();
     ZeroEnemyPartyMons();
     sub_81089BC();
@@ -111,7 +110,7 @@ void NewGameInitData(void)
     u8 rivalName[PLAYER_NAME_LENGTH];
 
     StringCopy(rivalName, gSaveBlock1Ptr->rivalName);
-    gDifferentSaveFile = 1;
+    gDifferentSaveFile = TRUE;
     gSaveBlock2Ptr->encryptionKey = 0;
     ZeroPlayerPartyMons();
     ZeroEnemyPartyMons();
@@ -160,4 +159,3 @@ static void ResetMiniGamesResults(void)
     ResetPokeJumpResults();
     CpuFill16(0, &gSaveBlock2Ptr->berryPick, sizeof(struct BerryPickingResults));
 }
- 

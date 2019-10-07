@@ -201,12 +201,20 @@ struct RfuUnk5
 
 extern struct RfuStruct * gRfuState;
 
-extern struct RfuUnk5 * gUnknown_03007890;
-extern u32 *gUnknown_03007894;
-extern struct RfuUnk3 * gUnknown_03007898;
-extern struct RfuUnk2 * gUnknown_03007880[4];
-extern struct RfuUnk1 * gUnknown_03007870[4];
-extern void *sub_82E53F4;
+extern struct RfuUnk5 * gUnknown_3007460;
+extern u32 *gUnknown_3007464;
+extern struct RfuUnk3 * gUnknown_3007468;
+extern struct RfuUnk2 * gUnknown_3007450[4];
+extern struct RfuUnk1 * gUnknown_3007440[4];
+extern struct {
+    u8 unk0;
+    u8 unk1;
+    u16 unk2;
+    u16 unk4;
+    u8 fill6[4];
+    u16 unkA;
+} gUnknown_3007470;
+
 extern void rfu_STC_clearAPIVariables(void);
 
 void STWI_init_all(struct RfuIntrStruct * interruptStruct, IntrFunc *interrupt, bool8 copyInterruptToRam);

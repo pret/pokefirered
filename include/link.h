@@ -9,6 +9,9 @@
 #define QUEUE_CAPACITY 50
 #define BLOCK_BUFFER_SIZE 0x100
 
+#define LINK_SLAVE 0
+#define LINK_MASTER 8
+
 #define LINK_STAT_LOCAL_ID               0x00000003
 #define LINK_STAT_PLAYER_COUNT           0x0000001C
 #define LINK_STAT_PLAYER_COUNT_SHIFT     2
@@ -18,6 +21,8 @@
 #define LINK_STAT_CONN_ESTABLISHED_SHIFT 6
 #define LINK_STAT_RECEIVED_NOTHING       0x00000100
 #define LINK_STAT_RECEIVED_NOTHING_SHIFT 8
+#define LINK_STAT_UNK_FLAG_9             0x00000200
+#define LINK_STAT_UNK_FLAG_9_SHIFT       9
 #define LINK_STAT_ERRORS                 0x0007F000
 #define LINK_STAT_ERRORS_SHIFT           12
 
@@ -250,5 +255,6 @@ void CreateWirelessStatusIndicatorSprite(u8, u8);
 void sub_8009FE8(void);
 void ClearLinkCallback_2(void);
 void sub_80FA42C(void);
+void sub_800B284(struct LinkPlayer * linkPlayer);
 
 #endif // GUARD_LINK_H

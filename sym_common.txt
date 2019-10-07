@@ -4,98 +4,9 @@
 	.include "window.o"
 	.include "text.o"
 	.include "sprite.o"
+	.include "link.o"
 
 	.align 4
-gLinkPartnersHeldKeys: @ 3003E60
-	.space 0xC
-
-gLinkDebugSeed: @ 3003E6C
-	.space 0x4
-
-gLocalLinkPlayerBlock: @ 3003E70
-	.space 0x3C
-
-gLinkErrorOccurred: @ 3003EAC
-	.space 0x4
-
-gLinkDebugFlags: @ 3003EB0
-	.space 0x8
-
-gRemoteLinkPlayersNotReceived: @ 3003EB8
-	.space 0x4
-
-gBlockReceivedStatus: @ 3003EBC
-	.space 0x8
-
-gLinkHeldKeys: @ 3003EC4
-	.space 0xC
-
-gRecvCmds: @ 3003ED0
-	.space 0x50
-
-gLinkStatus: @ 3003F20
-	.space 0x4
-
-gUnknown_3003F24: @ 3003F24
-	.space 0x4
-
-gUnknown_3003F28: @ 3003F28
-	.space 0x4
-
-gUnknown_3003F2C: @ 3003F2C
-	.space 0x4
-
-gUnknown_3003F30: @ 3003F30
-	.space 0x4
-
-gUnknown_3003F34: @ 3003F34
-	.space 0x4
-
-gSuppressLinkErrorMessage: @ 3003F38
-	.space 0x4
-
-gWirelessCommType: @ 3003F3C
-	.space 0x4
-
-gSavedLinkPlayerCount: @ 3003F40
-	.space 0x10
-
-gSendCmd: @ 3003F50
-	.space 0x10
-
-gSavedMultiplayerId: @ 3003F60
-	.space 0x4
-
-gReceivedRemoteLinkPlayers: @ 3003F64
-	.space 0xC
-
-gLinkTestBGInfo: @ 3003F70
-	.space 0x10
-
-gLinkCallback: @ 3003F80
-	.space 0x4
-
-gShouldAdvanceLinkState: @ 3003F84
-	.space 0x4
-
-gLinkTestBlockChecksums: @ 3003F88
-	.space 0x8
-
-gBlockRequestType: @ 3003F90
-	.space 0x10
-
-gLastSendQueueCount: @ 3003FA0
-	.space 0x10
-
-gLink: @ 3003FB0
-	.space 0xFC0
-
-gLastRecvQueueCount: @ 3004F70
-	.space 0x4
-
-gLinkSavedIme: @ 3004F74
-	.space 0xC
-
 gPreBattleCallback1: @ 3004F80
 	.space 0x4
 

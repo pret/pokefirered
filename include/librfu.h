@@ -119,8 +119,8 @@ struct RfuStruct
     void (*callbackM)();
     void (*callbackS)();
     u32 callbackID;
-    union RfuPacket *txPacket;
-    union RfuPacket *rxPacket;
+    union RfuPacket * txPacket;
+    union RfuPacket * rxPacket;
     vu8 unk_2c;
     u8 padding[3];
 };
@@ -206,7 +206,7 @@ extern u32 *gUnknown_03007894;
 extern struct RfuUnk3 * gUnknown_03007898;
 extern struct RfuUnk2 * gUnknown_03007880[4];
 extern struct RfuUnk1 * gUnknown_03007870[4];
-extern void* sub_82E53F4;
+extern void *sub_82E53F4;
 extern void rfu_STC_clearAPIVariables(void);
 
 void STWI_init_all(struct RfuIntrStruct * interruptStruct, IntrFunc *interrupt, bool8 copyInterruptToRam);

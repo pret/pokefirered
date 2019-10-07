@@ -334,7 +334,7 @@ _0804C8F0: .4byte gUnknown_2031DA8
 _0804C8F4:
 	bl GetLinkPlayerCount_2
 	adds r4, r0, 0
-	bl sub_800A944
+	bl GetSavedPlayerCount
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -422,7 +422,7 @@ _0804C9B0:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804C9E8
-	bl IsNoOneConnected
+	bl IsRfuTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _0804C9C4
@@ -1832,7 +1832,7 @@ sub_804D5A4: @ 804D5A4
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804D5FC
-	bl IsNoOneConnected
+	bl IsRfuTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804D620
@@ -7557,7 +7557,7 @@ _080502A8:
 _080502B4:
 	bl GetLinkPlayerCount_2
 	adds r4, r0, 0
-	bl sub_800A944
+	bl GetSavedPlayerCount
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -14745,7 +14745,7 @@ _0805434C:
 	ldr r0, _08054378 @ =sub_804C718
 	cmp r1, r0
 	bne _08054384
-	bl IsNoOneConnected
+	bl IsRfuTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08054396

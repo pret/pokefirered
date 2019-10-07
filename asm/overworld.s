@@ -5643,7 +5643,7 @@ c1_link_related: @ 8057884
 	bl sub_80F90DC
 	cmp r0, 0
 	beq _0805789E
-	bl sub_800A00C
+	bl IsSendingKeysToLink
 	cmp r0, 0
 	bne _080578C0
 _0805789E:
@@ -6147,7 +6147,7 @@ _08057C72:
 	bl IsUpdateLinkStateCBActive
 	cmp r0, 0x1
 	bne _08057CA8
-	bl sub_800A00C
+	bl IsSendingKeysToLink
 	cmp r0, 0x1
 	bne _08057CA8
 	cmp r4, 0x11
@@ -7012,7 +7012,7 @@ sub_8058274: @ 8058274
 	bl IsUpdateLinkStateCBActive
 	cmp r0, 0x1
 	bne _080582D8
-	bl sub_800A00C
+	bl IsSendingKeysToLink
 	cmp r0, 0x1
 	bne _080582D8
 	ldr r0, _080582C4 @ =gUnknown_3000E84
@@ -7065,7 +7065,7 @@ sub_80582E0: @ 80582E0
 	bl IsUpdateLinkStateCBActive
 	cmp r0, 0x1
 	bne _08058304
-	bl sub_800A00C
+	bl IsSendingKeysToLink
 	cmp r0, 0x1
 	bne _08058304
 	ldr r0, _08058308 @ =gUnknown_3000E84
@@ -7093,7 +7093,7 @@ sub_8058318: @ 8058318
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08058334
-	bl sub_800A00C
+	bl IsSendingKeysToLink
 	cmp r0, 0
 	beq _08058334
 	movs r0, 0x1

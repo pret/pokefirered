@@ -142,7 +142,7 @@ sub_8080844: @ 8080844
 	lsrs r0, 24
 	lsls r1, 24
 	lsrs r1, 24
-	bl sub_800A0D0
+	bl GetLinkPlayerDataExchangeStatusTimed
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, 0x1
@@ -384,9 +384,9 @@ sub_80809F8: @ 80809F8
 	ldrsh r2, [r4, r3]
 	cmp r2, 0
 	bne _08080A30
-	bl sub_800A0B4
+	bl OpenLinkTimed
 	bl sub_800AA24
-	bl sub_800A270
+	bl ResetLinkPlayers
 	ldr r0, _08080A2C @ =gUnknown_83C6AB0
 	bl AddWindow
 	strh r0, [r4, 0xA]
@@ -608,7 +608,7 @@ sub_8080BC8: @ 8080BC8
 	lsls r0, 24
 	cmp r0, 0
 	bne _08080C5C
-	bl sub_800A944
+	bl GetSavedPlayerCount
 	adds r4, r0, 0
 	bl GetLinkPlayerCount_2
 	lsls r4, 24
@@ -685,7 +685,7 @@ sub_8080C6C: @ 8080C6C
 	beq _08080CCE
 	bl GetLinkPlayerCount_2
 	adds r4, r0, 0
-	bl sub_800A944
+	bl GetSavedPlayerCount
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -1368,7 +1368,7 @@ sub_80811FC: @ 80811FC
 	cmp r2, 0
 	bne _08081230
 	bl OpenLink
-	bl sub_800A270
+	bl ResetLinkPlayers
 	ldr r0, _0808122C @ =sub_8081A90
 	movs r1, 0x50
 	bl CreateTask
@@ -1443,7 +1443,7 @@ sub_80812A0: @ 80812A0
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl sub_800A944
+	bl GetSavedPlayerCount
 	adds r4, r0, 0
 	bl GetLinkPlayerCount_2
 	lsls r4, 24
@@ -1541,7 +1541,7 @@ _0808135C:
 	ldr r2, _08081378 @ =0x00002211
 	adds r0, r2, 0
 	strh r0, [r1]
-	bl sub_800A068
+	bl ClearLinkCallback_2
 	b _080813AA
 	.align 2, 0
 _08081374: .4byte gLinkType
@@ -1698,7 +1698,7 @@ _080814A0:
 	ldr r2, _080814C0 @ =0x00002211
 	adds r1, r2, 0
 	strh r1, [r0]
-	bl sub_800A068
+	bl ClearLinkCallback_2
 	movs r0, 0x1
 	strh r0, [r6]
 	b _0808160A
@@ -2180,7 +2180,7 @@ _08081882:
 	movs r0, 0x1
 	movs r1, 0
 	bl fade_screen
-	bl sub_800A068
+	bl ClearLinkCallback_2
 	b _080818B8
 _08081894:
 	ldr r0, _080818A4 @ =gPaletteFade
@@ -2256,7 +2256,7 @@ _0808191A:
 	movs r0, 0x1
 	movs r1, 0
 	bl fade_screen
-	bl sub_80F985C
+	bl Rfu_set_zero
 	b _08081950
 _0808192C:
 	ldr r0, _0808193C @ =gPaletteFade

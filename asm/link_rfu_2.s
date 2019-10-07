@@ -2148,8 +2148,8 @@ _080F9718: .4byte gUnknown_3005AF0
 _080F971C: .4byte gUnknown_30054BE
 	thumb_func_end sub_80F965C
 
-	thumb_func_start sub_80F9720
-sub_80F9720: @ 80F9720
+	thumb_func_start Rfu_SetBlockReceivedFlag
+Rfu_SetBlockReceivedFlag: @ 80F9720
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -2173,10 +2173,10 @@ _080F9740:
 _080F9748:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80F9720
+	thumb_func_end Rfu_SetBlockReceivedFlag
 
-	thumb_func_start sub_80F974C
-sub_80F974C: @ 80F974C
+	thumb_func_start Rfu_ResetBlockReceivedFlag
+Rfu_ResetBlockReceivedFlag: @ 80F974C
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, _080F976C @ =gUnknown_3005450
@@ -2194,7 +2194,7 @@ sub_80F974C: @ 80F974C
 	bx lr
 	.align 2, 0
 _080F976C: .4byte gUnknown_3005450
-	thumb_func_end sub_80F974C
+	thumb_func_end Rfu_ResetBlockReceivedFlag
 
 	thumb_func_start sub_80F9770
 sub_80F9770: @ 80F9770
@@ -2281,8 +2281,8 @@ sub_80F9800: @ 80F9800
 _080F9804: .4byte gUnknown_3005440
 	thumb_func_end sub_80F9800
 
-	thumb_func_start sub_80F9808
-sub_80F9808: @ 80F9808
+	thumb_func_start IsSendingKeysToRfu
+IsSendingKeysToRfu: @ 80F9808
 	push {lr}
 	movs r2, 0
 	ldr r0, _080F9820 @ =gUnknown_3005450
@@ -2298,7 +2298,7 @@ _080F9818:
 	.align 2, 0
 _080F9820: .4byte gUnknown_3005450
 _080F9824: .4byte rfu_func_080F97B8
-	thumb_func_end sub_80F9808
+	thumb_func_end IsSendingKeysToRfu
 
 	thumb_func_start sub_80F9828
 sub_80F9828: @ 80F9828
@@ -2326,15 +2326,15 @@ _080F9854: .4byte gUnknown_843EDC4
 _080F9858: .4byte rfu_func_080F97B8
 	thumb_func_end sub_80F9828
 
-	thumb_func_start sub_80F985C
-sub_80F985C: @ 80F985C
+	thumb_func_start Rfu_set_zero
+Rfu_set_zero: @ 80F985C
 	ldr r1, _080F9864 @ =gUnknown_3005450
 	movs r0, 0
 	str r0, [r1]
 	bx lr
 	.align 2, 0
 _080F9864: .4byte gUnknown_3005450
-	thumb_func_end sub_80F985C
+	thumb_func_end Rfu_set_zero
 
 	thumb_func_start sub_80F9868
 sub_80F9868: @ 80F9868
@@ -2597,7 +2597,7 @@ _080F9A4C:
 	mov r1, r8
 	lsls r0, r1, 24
 	lsrs r0, 24
-	bl sub_80F9720
+	bl Rfu_SetBlockReceivedFlag
 	bl sub_80F9800
 	ldrb r1, [r0, 0xA]
 	movs r0, 0x7F
@@ -2637,7 +2637,7 @@ _080F9A9C:
 	adds r2, 0x4
 	adds r1, r2
 	ldrh r1, [r1]
-	bl sub_80F9E60
+	bl Rfu_InitBlockSend
 	b _080F9BF4
 	.align 2, 0
 _080F9AB8: .4byte gUnknown_843EC64
@@ -2909,8 +2909,8 @@ sub_80F9CB4: @ 80F9CB4
 	bx lr
 	thumb_func_end sub_80F9CB4
 
-	thumb_func_start sub_80F9CC8
-sub_80F9CC8: @ 80F9CC8
+	thumb_func_start Rfu_GetBlockReceivedStatus
+Rfu_GetBlockReceivedStatus: @ 80F9CC8
 	push {r4,lr}
 	movs r2, 0
 	movs r1, 0
@@ -2942,7 +2942,7 @@ _080F9CEE:
 	bx r1
 	.align 2, 0
 _080F9D00: .4byte gUnknown_3005450
-	thumb_func_end sub_80F9CC8
+	thumb_func_end Rfu_GetBlockReceivedStatus
 
 	thumb_func_start sub_80F9D04
 sub_80F9D04: @ 80F9D04
@@ -3126,8 +3126,8 @@ _080F9E58: .4byte gSendCmd
 _080F9E5C: .4byte gUnknown_3005542
 	thumb_func_end sub_80F9E2C
 
-	thumb_func_start sub_80F9E60
-sub_80F9E60: @ 80F9E60
+	thumb_func_start Rfu_InitBlockSend
+Rfu_InitBlockSend: @ 80F9E60
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -3235,7 +3235,7 @@ _080F9F2A:
 _080F9F38: .4byte gBlockSendBuffer
 _080F9F3C: .4byte gUnknown_3005450
 _080F9F40: .4byte rfufunc_80F9F44
-	thumb_func_end sub_80F9E60
+	thumb_func_end Rfu_InitBlockSend
 
 	thumb_func_start rfufunc_80F9F44
 rfufunc_80F9F44: @ 80F9F44
@@ -4003,17 +4003,17 @@ _080FA4E6:
 	bx r1
 	thumb_func_end rfu_get_multiplayer_id
 
-	thumb_func_start sub_80FA4EC
-sub_80FA4EC: @ 80FA4EC
+	thumb_func_start GetRfuPlayerCount
+GetRfuPlayerCount: @ 80FA4EC
 	ldr r0, _080FA4F4 @ =gUnknown_3005450
 	ldrb r0, [r0, 0xD]
 	bx lr
 	.align 2, 0
 _080FA4F4: .4byte gUnknown_3005450
-	thumb_func_end sub_80FA4EC
+	thumb_func_end GetRfuPlayerCount
 
-	thumb_func_start IsNoOneConnected
-IsNoOneConnected: @ 80FA4F8
+	thumb_func_start IsRfuTaskFinished
+IsRfuTaskFinished: @ 80FA4F8
 	push {lr}
 	movs r1, 0
 	ldr r0, _080FA50C @ =gUnknown_3005450
@@ -4027,7 +4027,7 @@ _080FA506:
 	bx r1
 	.align 2, 0
 _080FA50C: .4byte gUnknown_3005450
-	thumb_func_end IsNoOneConnected
+	thumb_func_end IsRfuTaskFinished
 
 	thumb_func_start sub_80FA510
 sub_80FA510: @ 80FA510
@@ -4590,7 +4590,7 @@ _080FA940:
 	bl sub_800B110
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_80F974C
+	bl Rfu_ResetBlockReceivedFlag
 	adds r4, 0x1
 	ldrb r2, [r5, 0xD]
 	cmp r4, r2
@@ -6812,14 +6812,14 @@ sub_80FBA1C: @ 80FBA1C
 _080FBA28: .4byte gUnknown_3005450
 	thumb_func_end sub_80FBA1C
 
-	thumb_func_start sub_80FBA2C
-sub_80FBA2C: @ 80FBA2C
+	thumb_func_start Rfu_IsMaster
+Rfu_IsMaster: @ 80FBA2C
 	ldr r0, _080FBA34 @ =gUnknown_3005450
 	ldrb r0, [r0, 0xC]
 	bx lr
 	.align 2, 0
 _080FBA34: .4byte gUnknown_3005450
-	thumb_func_end sub_80FBA2C
+	thumb_func_end Rfu_IsMaster
 
 	thumb_func_start RFUVSync
 RFUVSync: @ 80FBA38

@@ -5,6 +5,7 @@
 #include "decompress.h"
 #include "malloc.h"
 #include "save.h"
+#include "battle.h"
 #include "quest_log.h"
 #include "link_rfu.h"
 #include "librfu.h"
@@ -13,7 +14,9 @@
 #include "event_data.h"
 #include "string_util.h"
 #include "item_menu.h"
+#include "trade.h"
 #include "link.h"
+#include "constants/battle.h"
 
 extern u16 gHeldKeyCodeToSend;
 
@@ -116,20 +119,29 @@ void InitLocalLinkPlayer(void);
 void sub_800978C(void);
 void CB2_LinkTest(void);
 void ProcessRecvCmds(u8 id);
-void InitBlockSend(const void * src, size_t size);
+void sub_800A040(void);
+void ResetBlockSend(void);
+bool32 InitBlockSend(const void * src, size_t size);
+void LinkCB_BlockSendBegin(void);
+void LinkCB_BlockSend(void);
+void LinkCB_BlockSendEnd(void);
+void sub_800A3CC(void);
+void SetBlockReceivedFlag(u8 id);
 u16 LinkTestCalcBlockChecksum(const u16 *src, u16 size);
 void LinkTest_prnthex(u32 pos, u8 a0, u8 a1, u8 a2);
 void LinkCB_RequestPlayerDataExchange(void);
-void ResetBlockSend(void);
-void task00_link_test(u8 taskId);
+void Task_PrintTestData(u8 taskId);
+void sub_800AB0C(void);
+void sub_800AB38(void);
+void sub_800ABD4(void);
+void sub_800AC00(void);
+void CheckErrorStatus(void);
 void EnableSerial(void);
 void sub_800B210(void);
 void sub_80F8DC0(void);
 void DisableSerial(void);
-void CheckErrorStatus(void);
 void sub_800B284(struct LinkPlayer * linkPlayer);
-void SetBlockReceivedFlag(u8 id);
-void sub_800A3CC(void);
+bool8 IsSioMultiMaster(void);
 
 ALIGNED(4) const u16 gWirelessLinkDisplayPal[] = INCBIN_U16("graphics/interface/wireless_link_display.gbapal");
 const u16 gWirelessLinkDisplay4bpp[] = INCBIN_U16("graphics/interface/wireless_link_display.4bpp.lz");
@@ -234,7 +246,7 @@ void LinkTestScreen(void)
     UpdatePaletteFade();
     gUnknown_3000E58 = 0;
     InitLocalLinkPlayer();
-    CreateTask(task00_link_test, 0);
+    CreateTask(Task_PrintTestData, 0);
     SetMainCallback2(CB2_LinkTest);
 }
 
@@ -638,5 +650,736 @@ void BuildSendCmd(u16 command)
         gSendCmd[0] = LINKCMD_SEND_HELD_KEYS_2;
         gSendCmd[1] = gHeldKeyCodeToSend;
         break;
+    }
+}
+
+void sub_8009FE8(void)
+{
+    if (gWirelessCommType)
+    {
+        sub_80F9828();
+    }
+    gLinkCallback = sub_800A040;
+}
+
+bool32 IsSendingKeysToLink(void)
+{
+    if (gWirelessCommType)
+    {
+        return IsSendingKeysToRfu();
+    }
+    if (gLinkCallback == sub_800A040)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_800A040(void)
+{
+    if (gReceivedRemoteLinkPlayers == TRUE)
+    {
+        BuildSendCmd(LINKCMD_SEND_HELD_KEYS_2);
+    }
+}
+
+void ClearLinkCallback(void)
+{
+    gLinkCallback = NULL;
+}
+
+void ClearLinkCallback_2(void)
+{
+    if (gWirelessCommType)
+    {
+        Rfu_set_zero();
+    }
+    else
+    {
+        gLinkCallback = NULL;
+    }
+}
+
+u8 GetLinkPlayerCount(void)
+{
+    if (gWirelessCommType)
+    {
+        return GetRfuPlayerCount();
+    }
+    return EXTRACT_PLAYER_COUNT(gLinkStatus);
+}
+
+void OpenLinkTimed(void)
+{
+    sPlayerDataExchangeStatus = 0;
+    gLinkTimeOutCounter = 0;
+    OpenLink();
+}
+
+u8 GetLinkPlayerDataExchangeStatusTimed(int lower, int upper)
+{
+    int i;
+    int count;
+    u32 index;
+    u8 cmpVal;
+    u32 linkType1;
+    u32 linkType2;
+
+    count = 0;
+    if (gReceivedRemoteLinkPlayers == TRUE)
+    {
+        cmpVal = GetLinkPlayerCount_2();
+        if (lower > cmpVal || cmpVal > upper)
+        {
+            sPlayerDataExchangeStatus = EXCHANGE_STAT_6;
+            return 6;
+        }
+        else
+        {
+            if (GetLinkPlayerCount() == 0)
+            {
+                gLinkErrorOccurred = TRUE;
+                CloseLink();
+            }
+            for (i = 0, index = 0; i < GetLinkPlayerCount(); index++, i++)
+            {
+                if (gLinkPlayers[index].linkType == gLinkPlayers[0].linkType)
+                {
+                    count++;
+                }
+            }
+            if (count == GetLinkPlayerCount())
+            {
+                if (gLinkPlayers[0].linkType == 0x1133)
+                {
+                    switch (sub_804FB34())
+                    {
+                    case 0:
+                        sPlayerDataExchangeStatus = EXCHANGE_COMPLETE;
+                        break;
+                    case 1:
+                        sPlayerDataExchangeStatus = EXCHANGE_STAT_4;
+                        break;
+                    case 2:
+                        sPlayerDataExchangeStatus = EXCHANGE_STAT_5;
+                        break;
+                    }
+                }
+                else
+                {
+                    sPlayerDataExchangeStatus = EXCHANGE_COMPLETE;
+                }
+            }
+            else
+            {
+                sPlayerDataExchangeStatus = EXCHANGE_IN_PROGRESS;
+            }
+        }
+    }
+    else if (++gLinkTimeOutCounter > 600)
+    {
+        sPlayerDataExchangeStatus = EXCHANGE_TIMED_OUT;
+    }
+    return sPlayerDataExchangeStatus;
+}
+
+bool8 IsLinkPlayerDataExchangeComplete(void)
+{
+    u8 i;
+    u8 count;
+    bool8 retval;
+
+    count = 0;
+    for (i = 0; i < GetLinkPlayerCount(); i++)
+    {
+        if (gLinkPlayers[i].linkType == gLinkPlayers[0].linkType)
+        {
+            count++;
+        }
+    }
+    if (count == GetLinkPlayerCount())
+    {
+        retval = TRUE;
+        sPlayerDataExchangeStatus = EXCHANGE_COMPLETE;
+    }
+    else
+    {
+        retval = FALSE;
+        sPlayerDataExchangeStatus = EXCHANGE_IN_PROGRESS;
+    }
+    return retval;
+}
+
+u32 GetLinkPlayerTrainerId(u8 who)
+{
+    return gLinkPlayers[who].trainerId;
+}
+
+void ResetLinkPlayers(void)
+{
+    int i;
+
+    for (i = 0; i <= MAX_LINK_PLAYERS; i++)
+    {
+        gLinkPlayers[i] = (struct LinkPlayer){};
+    }
+}
+
+void ResetBlockSend(void)
+{
+    sBlockSend.active = FALSE;
+    sBlockSend.pos = 0;
+    sBlockSend.size = 0;
+    sBlockSend.src = NULL;
+}
+
+bool32 InitBlockSend(const void *src, size_t size)
+{
+    if (sBlockSend.active)
+    {
+        return FALSE;
+    }
+    sBlockSend.multiplayerId = GetMultiplayerId();
+    sBlockSend.active = TRUE;
+    sBlockSend.size = size;
+    sBlockSend.pos = 0;
+    if (size > 0x100)
+    {
+        sBlockSend.src = src;
+    }
+    else
+    {
+        if (src != gBlockSendBuffer)
+        {
+            memcpy(gBlockSendBuffer, src, size);
+        }
+        sBlockSend.src = gBlockSendBuffer;
+    }
+    BuildSendCmd(LINKCMD_INIT_BLOCK);
+    gLinkCallback = LinkCB_BlockSendBegin;
+    sBlockSendDelayCounter = 0;
+    return TRUE;
+}
+
+void LinkCB_BlockSendBegin(void)
+{
+    if (++sBlockSendDelayCounter > 2)
+    {
+        gLinkCallback = LinkCB_BlockSend;
+    }
+}
+
+void LinkCB_BlockSend(void)
+{
+    int i;
+    const u8 *src;
+
+    src = sBlockSend.src;
+    gSendCmd[0] = LINKCMD_CONT_BLOCK;
+    for (i = 0; i < 7; i++)
+    {
+        gSendCmd[i + 1] = (src[sBlockSend.pos + i * 2 + 1] << 8) | src[sBlockSend.pos + i * 2];
+    }
+    sBlockSend.pos += 14;
+    if (sBlockSend.size <= sBlockSend.pos)
+    {
+        sBlockSend.active = FALSE;
+        gLinkCallback = LinkCB_BlockSendEnd;
+    }
+}
+
+void LinkCB_BlockSendEnd(void)
+{
+    gLinkCallback = NULL;
+}
+void sub_800A3AC(void)
+{
+    GetMultiplayerId();
+    BuildSendCmd(LINKCMD_SEND_HELD_KEYS);
+    gUnknown_2022114++;
+}
+
+void sub_800A3CC(void)
+{
+    gUnknown_2022114 = 0;
+    gLinkCallback = sub_800A3AC;
+}
+
+
+u32 sub_800A3E8(void)
+{
+    return gUnknown_2022114;
+}
+
+void sub_800A3F4(void)
+{
+    BuildSendCmd(LINKCMD_0xAAAA);
+}
+
+u8 GetMultiplayerId(void)
+{
+    if (gWirelessCommType == TRUE)
+    {
+        return rfu_get_multiplayer_id();
+    }
+    return SIO_MULTI_CNT->id;
+}
+
+u8 bitmask_all_link_players_but_self(void)
+{
+    u8 mpId;
+
+    mpId = GetMultiplayerId();
+    return ((1 << MAX_LINK_PLAYERS) - 1) ^ (1 << mpId);
+}
+
+bool8 SendBlock(u8 unused, const void *src, u16 size)
+{
+    if (gWirelessCommType == TRUE)
+    {
+        return Rfu_InitBlockSend(src, size);
+    }
+    return InitBlockSend(src, size);
+}
+
+bool8 sub_800A474(u8 a0)
+{
+    if (gWirelessCommType == TRUE)
+    {
+        return sub_80FA0F8(a0);
+    }
+    if (gLinkCallback == NULL)
+    {
+        gBlockRequestType = a0;
+        BuildSendCmd(LINKCMD_0xCCCC);
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 IsLinkTaskFinished(void)
+{
+    if (gWirelessCommType == TRUE)
+    {
+        return IsRfuTaskFinished();
+    }
+    return gLinkCallback == NULL;
+}
+
+u8 GetBlockReceivedStatus(void)
+{
+    if (gWirelessCommType == TRUE)
+    {
+        return Rfu_GetBlockReceivedStatus();
+    }
+    return (gBlockReceivedStatus[3] << 3) | (gBlockReceivedStatus[2] << 2) | (gBlockReceivedStatus[1] << 1) | (gBlockReceivedStatus[0] << 0);
+}
+
+void SetBlockReceivedFlag(u8 who)
+{
+    if (gWirelessCommType == TRUE)
+    {
+        Rfu_SetBlockReceivedFlag(who);
+    }
+    else
+    {
+        gBlockReceivedStatus[who] = TRUE;
+    }
+}
+
+void ResetBlockReceivedFlags(void)
+{
+    int i;
+
+    if (gWirelessCommType == TRUE)
+    {
+        for (i = 0; i < MAX_RFU_PLAYERS; i++)
+        {
+            Rfu_ResetBlockReceivedFlag(i);
+        }
+    }
+    else
+    {
+        for (i = 0; i < MAX_LINK_PLAYERS; i++)
+        {
+            gBlockReceivedStatus[i] = FALSE;
+        }
+    }
+}
+
+void ResetBlockReceivedFlag(u8 who)
+{
+    if (gWirelessCommType == TRUE)
+    {
+        Rfu_ResetBlockReceivedFlag(who);
+    }
+    else if (gBlockReceivedStatus[who])
+    {
+        gBlockReceivedStatus[who] = FALSE;
+    }
+}
+
+void CheckShouldAdvanceLinkState(void)
+{
+    if ((gLinkStatus & LINK_STAT_MASTER) && EXTRACT_PLAYER_COUNT(gLinkStatus) > 1)
+    {
+        gShouldAdvanceLinkState = 1;
+    }
+}
+
+u16 LinkTestCalcBlockChecksum(const u16 *src, u16 size)
+{
+    u16 chksum;
+    u16 i;
+
+    chksum = 0;
+    for (i = 0; i < size / 2; i++)
+    {
+        chksum += src[i];
+    }
+    return chksum;
+}
+
+void LinkTest_prnthexchar(char a0, u8 a1, u8 a2)
+{
+    u16 *vAddr;
+
+    vAddr = (u16 *)BG_SCREEN_ADDR(gLinkTestBGInfo.screenBaseBlock);
+    vAddr[a2 * 32 + a1] = (gLinkTestBGInfo.paletteNum << 12) | (a0 + 1 + gLinkTestBGInfo.dummy_8);
+}
+
+void LinkTest_prntchar(char a0, u8 a1, u8 a2)
+{
+    u16 *vAddr;
+
+    vAddr = (u16 *)BG_SCREEN_ADDR(gLinkTestBGInfo.screenBaseBlock);
+    vAddr[a2 * 32 + a1] = (gLinkTestBGInfo.paletteNum << 12) | (a0 + gLinkTestBGInfo.dummy_8);
+}
+
+void LinkTest_prnthex(u32 pos, u8 a0, u8 a1, u8 a2)
+{
+    char sp[32 / 2];
+    int i;
+
+    for (i = 0; i < a2; i++)
+    {
+        sp[i] = pos & 0xf;
+        pos >>= 4;
+    }
+    for (i = a2 - 1; i >= 0; i--)
+    {
+        LinkTest_prnthexchar(sp[i], a0, a1);
+        a0++;
+    }
+}
+
+void LinkTest_prntstr(const char *a0, u8 a1, u8 a2)
+{
+    int r6;
+    int i;
+    int r5;
+
+    r5 = 0;
+    r6 = 0;
+    for (i = 0; a0[i] != 0; a0++)
+    {
+        if (a0[i] == *"\n")
+        {
+            r5++;
+            r6 = 0;
+        }
+        else
+        {
+            LinkTest_prntchar(a0[i], a1 + r6, a2 + r5);
+            r6++;
+        }
+    }
+}
+
+void LinkCB_RequestPlayerDataExchange(void)
+{
+    if (gLinkStatus & LINK_STAT_MASTER)
+    {
+        BuildSendCmd(LINKCMD_SEND_LINK_TYPE);
+    }
+    gLinkCallback = NULL;
+}
+
+void Task_PrintTestData(u8 taskId)
+{
+    char sp[32];
+    int i;
+
+    strcpy(sp, gASCIITestPrint);
+    LinkTest_prntstr(sp, 5, 2);
+    LinkTest_prnthex(gShouldAdvanceLinkState, 2, 1, 2);
+    LinkTest_prnthex(gLinkStatus, 15, 1, 8);
+    LinkTest_prnthex(gLink.state, 2, 10, 2);
+    LinkTest_prnthex(EXTRACT_PLAYER_COUNT(gLinkStatus), 15, 10, 2);
+    LinkTest_prnthex(GetMultiplayerId(), 15, 12, 2);
+    LinkTest_prnthex(gLastSendQueueCount, 25, 1, 2);
+    LinkTest_prnthex(gLastRecvQueueCount, 25, 2, 2);
+    LinkTest_prnthex(GetBlockReceivedStatus(), 15, 5, 2);
+    LinkTest_prnthex(gLinkDebugSeed, 2, 12, 8);
+    LinkTest_prnthex(gLinkDebugFlags, 2, 13, 8);
+    LinkTest_prnthex(GetSioMultiSI(), 25, 5, 1);
+    LinkTest_prnthex(IsSioMultiMaster(), 25, 6, 1);
+    LinkTest_prnthex(IsLinkConnectionEstablished(), 25, 7, 1);
+    LinkTest_prnthex(HasLinkErrorOccurred(), 25, 8, 1);
+    for (i = 0; i < MAX_LINK_PLAYERS; i++)
+    {
+        LinkTest_prnthex(gLinkTestBlockChecksums[i], 10, 4 + i, 4);
+    }
+}
+
+void SetLinkDebugValues(u32 seed, u32 flags)
+{
+    gLinkDebugSeed = seed;
+    gLinkDebugFlags = flags;
+}
+
+u8 sub_800A8A4(void)
+{
+    int i;
+    u8 flags;
+
+    flags = 0;
+    for (i = 0; i < gSavedLinkPlayerCount; i++)
+    {
+        flags |= (1 << i);
+    }
+    return flags;
+}
+
+u8 sub_800A8D4(void)
+{
+    int i;
+    u8 flags;
+
+    flags = 0;
+    for (i = 0; i < GetLinkPlayerCount(); i++)
+    {
+        flags |= (1 << i);
+    }
+    return flags;
+}
+
+void sub_800A900(u8 a0)
+{
+    int i;
+
+    gSavedLinkPlayerCount = a0;
+    gSavedMultiplayerId = GetMultiplayerId();
+    for (i = 0; i < MAX_RFU_PLAYERS; i++)
+    {
+        gSavedLinkPlayers[i] = gLinkPlayers[i];
+    }
+}
+
+// The number of players when trading began. This is frequently compared against the
+// current number of connected players to check if anyone dropped out.
+u8 GetSavedPlayerCount(void)
+{
+    return gSavedLinkPlayerCount;
+}
+
+u8 GetSavedMultiplayerId(void)
+{
+    return gSavedMultiplayerId;
+}
+
+bool8 sub_800A95C(void)
+{
+    int i;
+    unsigned count;
+
+    count = 0;
+    for (i = 0; i < gSavedLinkPlayerCount; i++)
+    {
+        if (gLinkPlayers[i].trainerId == gSavedLinkPlayers[i].trainerId)
+        {
+            count++;
+        }
+    }
+    if (count == gSavedLinkPlayerCount)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_800A9A4(void)
+{
+    u8 i;
+
+    for (i = 0; i < gSavedLinkPlayerCount; i++)
+    {
+        if (gSavedLinkPlayers[i].trainerId != gLinkPlayers[i].trainerId || StringCompare(gSavedLinkPlayers[i].name, gLinkPlayers[i].name) != 0)
+        {
+            gLinkErrorOccurred = TRUE;
+            CloseLink();
+            SetMainCallback2(CB2_LinkError);
+        }
+    }
+}
+
+void sub_800AA24(void)
+{
+    gSavedLinkPlayerCount = 0;
+    gSavedMultiplayerId = 0;
+}
+
+u8 GetLinkPlayerCount_2(void)
+{
+    return EXTRACT_PLAYER_COUNT(gLinkStatus);
+}
+
+bool8 IsLinkMaster(void)
+{
+    if (gWirelessCommType)
+    {
+        return Rfu_IsMaster();
+    }
+    return EXTRACT_MASTER(gLinkStatus);
+}
+
+u8 sub_800AA74(void)
+{
+    return gUnknown_3000E50;
+}
+
+void sub_800AA80(u16 a0)
+{
+    if (gWirelessCommType == TRUE)
+    {
+        task_add_05_task_del_08FA224_when_no_RfuFunc();
+    }
+    else
+    {
+        if (gLinkCallback == NULL)
+        {
+            gLinkCallback = sub_800AB0C;
+            gUnknown_3003F24 = FALSE;
+            gUnknown_3003F34 = a0;
+        }
+    }
+}
+
+void sub_800AAC0(void)
+{
+    if (gWirelessCommType == TRUE)
+    {
+        task_add_05_task_del_08FA224_when_no_RfuFunc();
+    }
+    else
+    {
+        if (gLinkCallback != NULL)
+        {
+            gUnknown_202285C++;
+        }
+        else
+        {
+            gLinkCallback = sub_800AB0C;
+            gUnknown_3003F24 = FALSE;
+            gUnknown_3003F34 = 0;
+        }
+    }
+}
+
+void sub_800AB0C(void)
+{
+    if (gLastRecvQueueCount == 0)
+    {
+        BuildSendCmd(LINKCMD_0x5FFF);
+        gLinkCallback = sub_800AB38;
+    }
+}
+
+void sub_800AB38(void)
+{
+    int i;
+    unsigned count;
+    u8 linkPlayerCount;
+
+    linkPlayerCount = GetLinkPlayerCount();
+    count = 0;
+    for (i = 0; i < linkPlayerCount; i++)
+    {
+        if (gUnknown_3003F30[i])
+        {
+            count++;
+        }
+    }
+    if (count == linkPlayerCount)
+    {
+        gBattleTypeFlags &= ~(BATTLE_TYPE_20 | 0xFFFF0000);
+        gLinkVSyncDisabled = TRUE;
+        CloseLink();
+        gLinkCallback = NULL;
+        gUnknown_3003F24 = TRUE;
+    }
+}
+
+void sub_800AB9C(void)
+{
+    if (gWirelessCommType == TRUE)
+    {
+        sub_80FA42C();
+    }
+    else
+    {
+        if (gLinkCallback == NULL)
+        {
+            gLinkCallback = sub_800ABD4;
+        }
+        gUnknown_3003F24 = FALSE;
+    }
+}
+
+void sub_800ABD4(void)
+{
+    if (gLastRecvQueueCount == 0)
+    {
+        BuildSendCmd(LINKCMD_0x2FFE);
+        gLinkCallback = sub_800AC00;
+    }
+}
+
+void sub_800AC00(void)
+{
+    u8 i;
+    u8 linkPlayerCount;
+
+    linkPlayerCount = GetLinkPlayerCount();
+    for (i = 0; i < linkPlayerCount; i++)
+    {
+        if (!gUnknown_3003F2C[i])
+        {
+            break;
+        }
+    }
+    if (i == linkPlayerCount)
+    {
+        for (i = 0; i < MAX_LINK_PLAYERS; i++)
+        {
+            gUnknown_3003F2C[i] = FALSE;
+        }
+        gLinkCallback = NULL;
+    }
+}
+
+void CheckErrorStatus(void)
+{
+    if (gLinkOpen && EXTRACT_LINK_ERRORS(gLinkStatus))
+    {
+        if (!gSuppressLinkErrorMessage)
+        {
+            sLinkErrorBuffer.status = gLinkStatus;
+            sLinkErrorBuffer.lastRecvQueueCount = gLastRecvQueueCount;
+            sLinkErrorBuffer.lastSendQueueCount = gLastSendQueueCount;
+            SetMainCallback2(CB2_LinkError);
+        }
+        gLinkErrorOccurred = TRUE;
+        CloseLink();
     }
 }

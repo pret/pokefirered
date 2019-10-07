@@ -654,7 +654,7 @@ static void sub_807E678(u8 taskId)
     switch (data[0])
     {
     case 0:
-        sub_800A068();
+        ClearLinkCallback_2();
         fade_screen(1, 0);
         sub_8055F88();
         PlaySE(SE_KAIDAN);

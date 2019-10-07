@@ -163,27 +163,27 @@ static void DoSend(void);
 static void StopTimer(void);
 static void SendRecvDone(void);
 
-ALIGNED(4) const u16 gWirelessLinkDisplayPal[] = INCBIN_U16("graphics/interface/wireless_link_display.gbapal");
-const u16 gWirelessLinkDisplay4bpp[] = INCBIN_U16("graphics/interface/wireless_link_display.4bpp.lz");
-const u16 gWirelessLinkDisplayBin[] = INCBIN_U16("graphics/interface/wireless_link_display.bin.lz");
-const u16 gLinkTestFontPal[] = INCBIN_U16("graphics/interface/link_test_font.gbapal");
-const u16 gLinkTestFontGfx[] = INCBIN_U16("graphics/interface/link_test_font.4bpp");
+ALIGNED(4) static const u16 sWirelessLinkDisplayPal[] = INCBIN_U16("graphics/interface/wireless_link_display.gbapal");
+static const u16 sWirelessLinkDisplay4bpp[] = INCBIN_U16("graphics/interface/wireless_link_display.4bpp.lz");
+static const u16 sWirelessLinkDisplayBin[] = INCBIN_U16("graphics/interface/wireless_link_display.bin.lz");
+static const u16 sLinkTestFontPal[] = INCBIN_U16("graphics/interface/link_test_font.gbapal");
+static const u16 sLinkTestFontGfx[] = INCBIN_U16("graphics/interface/link_test_font.4bpp");
 
-const struct BlockRequest gUnknown_8234598[] = {
+static const struct BlockRequest sBlockRequests[] = {
     {gBlockSendBuffer, 200},
     {gBlockSendBuffer, 200},
     {gBlockSendBuffer, 100},
     {gBlockSendBuffer, 220},
     {gBlockSendBuffer,  40}
 };
-const char gASCIIGameFreakInc[] = "GameFreak inc.";
-const char gASCIITestPrint[] = "TEST PRINT\n"
+static const char sASCIIGameFreakInc[] = "GameFreak inc.";
+static const char sASCIITestPrint[] = "TEST PRINT\n"
                                "P0\n"
                                "P1\n"
                                "P2\n"
                                "P3";
 
-const struct BgTemplate gUnknown_82345E8[] = {
+static const struct BgTemplate sLinkErrorBgTemplates[] = {
     {
         .bg = 0,
         .charBaseIndex = 2,
@@ -197,7 +197,7 @@ const struct BgTemplate gUnknown_82345E8[] = {
     }
 };
 
-const struct WindowTemplate gUnknown_82345F0[] = {
+static const struct WindowTemplate sLinkErrorWindowTemplates[] = {
     {
         .bg = 0,
         .tilemapLeft = 0,
@@ -225,7 +225,7 @@ const struct WindowTemplate gUnknown_82345F0[] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-const u8 gUnknown_8234610[4] = { 0x00, 0x01, 0x02 };
+static const u8 sLinkErrorTextColor[] = { 0x00, 0x01, 0x02 };
 
 bool8 IsWirelessAdapterConnected(void)
 {
@@ -254,8 +254,8 @@ void Task_DestroySelf(u8 taskId)
 
 void InitLinkTestBG(u8 paletteNum, u8 bgNum, u8 screenBaseBlock, u8 charBaseBlock, u16 a4)
 {
-    LoadPalette(gLinkTestFontPal, paletteNum * 16, 0x20);
-    DmaCopy16(3, gLinkTestFontGfx, (u16 *)BG_CHAR_ADDR(charBaseBlock) + (16 * a4), sizeof gLinkTestFontGfx);
+    LoadPalette(sLinkTestFontPal, paletteNum * 16, 0x20);
+    DmaCopy16(3, sLinkTestFontGfx, (u16 *)BG_CHAR_ADDR(charBaseBlock) + (16 * a4), sizeof sLinkTestFontGfx);
     gLinkTestBGInfo.screenBaseBlock = screenBaseBlock;
     gLinkTestBGInfo.paletteNum = paletteNum;
     gLinkTestBGInfo.dummy_8 = a4;
@@ -277,8 +277,8 @@ void InitLinkTestBG(u8 paletteNum, u8 bgNum, u8 screenBaseBlock, u8 charBaseBloc
 
 void sub_80095BC(u8 paletteNum, u8 bgNum, u8 screenBaseBlock, u8 charBaseBlock)
 {
-    LoadPalette(gLinkTestFontPal, paletteNum * 16, 0x20);
-    DmaCopy16(3, gLinkTestFontGfx, (u16 *)BG_CHAR_ADDR(charBaseBlock), sizeof gLinkTestFontGfx);
+    LoadPalette(sLinkTestFontPal, paletteNum * 16, 0x20);
+    DmaCopy16(3, sLinkTestFontGfx, (u16 *)BG_CHAR_ADDR(charBaseBlock), sizeof sLinkTestFontGfx);
     gLinkTestBGInfo.screenBaseBlock = screenBaseBlock;
     gLinkTestBGInfo.paletteNum = paletteNum;
     gLinkTestBGInfo.dummy_8 = 0;
@@ -548,8 +548,8 @@ void ProcessRecvCmds(u8 unused)
             InitLocalLinkPlayer();
             block = &gLocalLinkPlayerBlock;
             block->linkPlayer = gLocalLinkPlayer;
-            memcpy(block->magic1, gASCIIGameFreakInc, sizeof(block->magic1) - 1);
-            memcpy(block->magic2, gASCIIGameFreakInc, sizeof(block->magic2) - 1);
+            memcpy(block->magic1, sASCIIGameFreakInc, sizeof(block->magic1) - 1);
+            memcpy(block->magic2, sASCIIGameFreakInc, sizeof(block->magic2) - 1);
             InitBlockSend(block, sizeof(*block));
             break;
         }
@@ -614,8 +614,8 @@ void ProcessRecvCmds(u8 unused)
                         linkPlayer->name[8] = 0;
                     }
                     sub_800B284(linkPlayer);
-                    if (strcmp(block->magic1, gASCIIGameFreakInc) != 0
-                        || strcmp(block->magic2, gASCIIGameFreakInc) != 0)
+                    if (strcmp(block->magic1, sASCIIGameFreakInc) != 0
+                        || strcmp(block->magic2, sASCIIGameFreakInc) != 0)
                     {
                         SetMainCallback2(CB2_LinkError);
                     }
@@ -641,7 +641,7 @@ void ProcessRecvCmds(u8 unused)
             sub_800A3CC();
             break;
         case LINKCMD_0xCCCC:
-            SendBlock(0, gUnknown_8234598[gRecvCmds[i][1]].address, gUnknown_8234598[gRecvCmds[i][1]].size);
+            SendBlock(0, sBlockRequests[gRecvCmds[i][1]].address, sBlockRequests[gRecvCmds[i][1]].size);
             break;
         case LINKCMD_SEND_HELD_KEYS_2:
             gLinkPartnersHeldKeys[i] = gRecvCmds[i][1];
@@ -1174,7 +1174,7 @@ static void Task_PrintTestData(u8 taskId)
     char sp[32];
     int i;
 
-    strcpy(sp, gASCIITestPrint);
+    strcpy(sp, sASCIITestPrint);
     LinkTest_prntstr(sp, 5, 2);
     LinkTest_prnthex(gShouldAdvanceLinkState, 2, 1, 2);
     LinkTest_prnthex(gLinkStatus, 15, 1, 8);
@@ -1481,10 +1481,10 @@ void CB2_LinkError(void)
     }
     SetVBlankCallback(sub_800978C);
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, gUnknown_82345E8, 2);
+    InitBgsFromTemplates(0, sLinkErrorBgTemplates, 2);
     gUnknown_2022860 = tilemapBuffer = malloc(0x800);
     SetBgTilemapBuffer(1, tilemapBuffer);
-    if (InitWindows(gUnknown_82345F0))
+    if (InitWindows(sLinkErrorWindowTemplates))
     {
         DeactivateAllTextPrinters();
         ResetTempTileDataBuffers();
@@ -1509,14 +1509,14 @@ void CB2_LinkError(void)
 
 void sub_800AE1C(void)
 {
-    DecompressAndLoadBgGfxUsingHeap(1, gWirelessLinkDisplay4bpp, FALSE, 0, 0);
-    CopyToBgTilemapBuffer(1, gWirelessLinkDisplayBin, 0, 0);
+    DecompressAndLoadBgGfxUsingHeap(1, sWirelessLinkDisplay4bpp, FALSE, 0, 0);
+    CopyToBgTilemapBuffer(1, sWirelessLinkDisplayBin, 0, 0);
     CopyBgTilemapBufferToVram(1);
-    LoadPalette(gWirelessLinkDisplayPal, 0, 0x20);
+    LoadPalette(sWirelessLinkDisplayPal, 0, 0x20);
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     FillWindowPixelBuffer(2, PIXEL_FILL(0));
-    AddTextPrinterParameterized3(0, 3, 2, 5, gUnknown_8234610, 0, gText_CommErrorEllipsis);
-    AddTextPrinterParameterized3(2, 3, 2, 2, gUnknown_8234610, 0, gText_MoveCloserToLinkPartner);
+    AddTextPrinterParameterized3(0, 3, 2, 5, sLinkErrorTextColor, 0, gText_CommErrorEllipsis);
+    AddTextPrinterParameterized3(2, 3, 2, 2, sLinkErrorTextColor, 0, gText_MoveCloserToLinkPartner);
     PutWindowTilemap(0);
     PutWindowTilemap(2);
     CopyWindowToVram(0, 0);
@@ -1529,7 +1529,7 @@ void sub_800AED0(void)
 {
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
     FillWindowPixelBuffer(2, PIXEL_FILL(0));
-    AddTextPrinterParameterized3(1, 3, 2, 0, gUnknown_8234610, 0, gText_CommErrorCheckConnections);
+    AddTextPrinterParameterized3(1, 3, 2, 0, sLinkErrorTextColor, 0, gText_CommErrorCheckConnections);
     PutWindowTilemap(1);
     PutWindowTilemap(2);
     CopyWindowToVram(1, 0);
@@ -1563,11 +1563,11 @@ static void CB2_PrintErrorMessage(void)
     case 130:
         if (gWirelessCommType == 2)
         {
-            AddTextPrinterParameterized3(0, 3, 2, 20, gUnknown_8234610, 0, gText_ABtnTitleScreen);
+            AddTextPrinterParameterized3(0, 3, 2, 20, sLinkErrorTextColor, 0, gText_ABtnTitleScreen);
         }
         else if (gWirelessCommType == 1)
         {
-            AddTextPrinterParameterized3(0, 3, 2, 20, gUnknown_8234610, 0, gText_ABtnRegistrationCounter);
+            AddTextPrinterParameterized3(0, 3, 2, 20, sLinkErrorTextColor, 0, gText_ABtnRegistrationCounter);
         }
         break;
     }
@@ -1633,8 +1633,8 @@ void sub_800B0B4(void)
     InitLocalLinkPlayer();
     block = &gLocalLinkPlayerBlock;
     block->linkPlayer = gLocalLinkPlayer;
-    memcpy(block->magic1, gASCIIGameFreakInc, sizeof(block->magic1) - 1);
-    memcpy(block->magic2, gASCIIGameFreakInc, sizeof(block->magic2) - 1);
+    memcpy(block->magic1, sASCIIGameFreakInc, sizeof(block->magic1) - 1);
+    memcpy(block->magic2, sASCIIGameFreakInc, sizeof(block->magic2) - 1);
     memcpy(gBlockSendBuffer, block, sizeof(*block));
 }
 
@@ -1648,7 +1648,7 @@ void sub_800B110(u32 who)
     player = &gLinkPlayers[who_];
     *player = block->linkPlayer;
     sub_800B284(player);
-    if (strcmp(block->magic1, gASCIIGameFreakInc) != 0 || strcmp(block->magic2, gASCIIGameFreakInc) != 0)
+    if (strcmp(block->magic1, sASCIIGameFreakInc) != 0 || strcmp(block->magic2, sASCIIGameFreakInc) != 0)
     {
         SetMainCallback2(CB2_LinkError);
     }

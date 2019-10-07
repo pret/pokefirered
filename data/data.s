@@ -7,8 +7,12 @@
 	.section .rodata
 
 	.align 2, 0
+gUnknown_8234614::
 	.string "$"
+
+gUnknown_8234615::
 	.string "\n$"
+
 	.align 2, 0
 gUnknown_8234618:: @ 8234618
 	.incbin "baserom.gba", 0x234618, 0x8

@@ -81,16 +81,16 @@ gUnknown_8415B44:: @ 0x8415B44
 gUnknown_8415BAA:: @ 0x8415BAA
 	.string "レポ-トの こうしんは\nしっぱいしました!\pバックアップカ-トリッジを\nこうかんしてください!\pくわしくは\nにんてんどう サ-ビスセンタ- まで\lおといあわせ ください$"
 
-gUnknown_8415BFF:: @ 8415BFF
+gText_SaveFileCorruptedPrevWillBeLoaded:: @ 8415BFF
 	.string "The save file is corrupted.\pThe previous save file will be\nloaded.$"
 
-gUnknown_8415C42:: @ 8415C42
+gText_SaveFileHasBeenDeleted:: @ 8415C42
 	.string "The save file has been\ndeleted...$"
 
-gUnknown_8415C64:: @ 8415C64
+gText_1MSubCircuitBoardNotInstalled:: @ 8415C64
 	.string "The 1M sub-circuit board is\nnot installed.$"
 
-gUnknown_8415C8F:: @ 0x8415C8F
+gTextJP_InternalBatteryHasRunDry:: @ 0x8415C8F
 	.string "でんちぎれの ために\nとけいが うごかなくなりました\pとけいに かんけいする できごとは おきませんが\nゲ-ムを つづけて あそぶことは できます$"
 
 gUnknown_8415CD9:: @ 0x8415CD9

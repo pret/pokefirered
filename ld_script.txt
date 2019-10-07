@@ -62,6 +62,7 @@ SECTIONS {
         src/string_util.o(.text);
         src/link.o(.text);
         src/multiboot.o(.text);
+        src/main_menu.o(.text);
         asm/main_menu.o(.text);
         src/battle_controllers.o(.text);
         src/decompress.o(.text);

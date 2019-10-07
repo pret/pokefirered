@@ -48,25 +48,25 @@ gText_EggNickname:: @ 8415A62
 gText_Pokemon:: @ 8415A66
 	.string "POKéMON$"
 
-gUnknown_8415A6E:: @ 8415A6E
+gText_NewGame:: @ 8415A6E
 	.string "NEW GAME$"
 
-gUnknown_8415A77:: @ 8415A77
+gText_Continue:: @ 8415A77
 	.string "CONTINUE$"
 
-gUnknown_8415A80:: @ 0x8415A80
+gTextJP_Options:: @ 0x8415A80
 	.string "せっていを かえる$"
 
-gUnknown_8415A8A:: @ 0x8415A8A
+gUnusedText_MysteryGift:: @ 0x8415A8A
 	.string "MYSTERY GIFT$"
 
-gUnknown_8415A97:: @ 8415A97
+gText_MysteryGift:: @ 8415A97
 	.string "MYSTERY GIFT$"
 
-gUnknown_8415AA4:: @ 8415AA4
+gText_WirelessAdapterIsNotConnected:: @ 8415AA4
 	.string "The Wireless Adapter is not\nconnected.$"
 
-gUnknown_8415ACB:: @ 8415ACB
+gText_MysteryGiftCantBeUsedWhileWirelessAdapterIsAttached:: @ 8415ACB
 	.string "MYSTERY GIFT can't be used while\nthe Wireless Adapter is attached.$"
 
 gUnknown_8415B0E:: @ 0x8415B0E
@@ -3037,16 +3037,16 @@ gUnknown_841B69E:: @ 841B69E
 gUnknown_841B6B9:: @ 841B6B9
 	.string "Clearing data‥\nPlease wait.$"
 
-gUnknown_841B6D5:: @ 841B6D5
+gText_Player:: @ 841B6D5
 	.string "PLAYER$"
 
-gUnknown_841B6DC:: @ 841B6DC
+gText_Time:: @ 841B6DC
 	.string "TIME$"
 
-gUnknown_841B6E1:: @ 0x841B6E1
+gText_Colon:: @ 0x841B6E1
 	.string ":$"
 
-gUnknown_841B6E3:: @ 841B6E3
+gText_Pokedex:: @ 841B6E3
 	.string "POKéDEX$"
 
 gUnknown_841B6EB:: @ 841B6EB
@@ -4199,7 +4199,7 @@ gText_WonderCardThrownAway:: @ 841ED7B
 gText_WonderNewsThrownAway:: @ 841ED9C
 	.string "The WONDER NEWS was thrown away.$"
 
-gText_MysteryGift:: @ 841EDBD
+gText_MysteryGift2:: @ 841EDBD
 	.string "MYSTERY GIFT$"
 
 gText_PickOKCancel:: @ 841EDCA

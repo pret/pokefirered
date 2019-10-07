@@ -42,14 +42,16 @@ gUnknown_8234688:: @ 8234688
 	.incbin "baserom.gba", 0x234688, 0x3
 
 gUnknown_823468B:: @ 823468B
-	.incbin "baserom.gba", 0x23468B, 0x5
+	.incbin "baserom.gba", 0x23468B, 0x3
 
+	.align 2
 gUnknown_8234690:: @ 8234690
 	.incbin "baserom.gba", 0x234690, 0x4
 
 gUnknown_8234694:: @ 8234694
 	.incbin "baserom.gba", 0x234694, 0x4
 
+	.align 2
 gUnknown_8234698:: @ 8234698
 	.incbin "baserom.gba", 0x234698, 0x20
 

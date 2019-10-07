@@ -93,7 +93,7 @@ static struct UnkStruct_300201C * gUnknown_300201C;
 static u16 gUnknown_3002020;
 
 EWRAM_DATA u8 gUnknown_203ADF8 = 0;
-EWRAM_DATA u8 gUnknown_203ADF9 = 0;
+static EWRAM_DATA u8 sNumScenes = 0;
 EWRAM_DATA u8 gUnknown_203ADFA = 0;
 EWRAM_DATA u16 gUnknown_203ADFC = 0;
 EWRAM_DATA u8 gUnknown_203ADFE[3] = {0};
@@ -840,19 +840,19 @@ bool8 sub_8110E68(struct UnkStruct_203AE98 * a0)
     return TRUE;
 }
 
-void sub_8110F14(u8 taskId)
+void TrySetUpQuestLogScenes_ElseContinueFromSave(u8 taskId)
 {
     u8 i;
 
     sub_811381C();
-    gUnknown_203ADF9 = 0;
+    sNumScenes = 0;
     for (i = 0; i < 4; i++)
     {
         if (gSaveBlock1Ptr->questLog[i].unk_000)
-            gUnknown_203ADF9++;
+            sNumScenes++;
     }
 
-    if (gUnknown_203ADF9 != 0)
+    if (sNumScenes != 0)
     {
         gUnknown_3005ECC = FALSE;
         sub_8110F90(taskId);
@@ -1221,7 +1221,7 @@ void sub_8111914(void)
         ScriptContext2_Enable();
         if (++gUnknown_203ADF8 < 4 && gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_000)
         {
-            gUnknown_203ADF9--;
+            sNumScenes--;
             sub_8111368();
         }
         else
@@ -1402,7 +1402,7 @@ bool8 sub_8111CD0(void)
 void sub_8111CF0(void)
 {
     if (gUnknown_203ADFA == 2)
-        sub_8111070(gUnknown_203ADF9);
+        sub_8111070(sNumScenes);
 }
 
 void sub_8111D10(void)

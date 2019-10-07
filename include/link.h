@@ -256,5 +256,6 @@ void sub_8009FE8(void);
 void ClearLinkCallback_2(void);
 void sub_80FA42C(void);
 void sub_800B284(struct LinkPlayer * linkPlayer);
+bool8 IsWirelessAdapterConnected(void);
 
 #endif // GUARD_LINK_H

@@ -543,7 +543,7 @@ void ProcessRecvCmds(u8 unused)
         {
         case LINKCMD_SEND_LINK_TYPE:
         {
-            struct LinkPlayerBlock *block;
+            struct LinkPlayerBlock * block;
 
             InitLocalLinkPlayer();
             block = &gLocalLinkPlayerBlock;
@@ -564,7 +564,7 @@ void ProcessRecvCmds(u8 unused)
             break;
         case LINKCMD_INIT_BLOCK:
         {
-            struct BlockTransfer *blockRecv;
+            struct BlockTransfer * blockRecv;
 
             blockRecv = &sBlockRecv[i];
             blockRecv->pos = 0;
@@ -601,8 +601,8 @@ void ProcessRecvCmds(u8 unused)
             {
                 if (gRemoteLinkPlayersNotReceived[i] == TRUE)
                 {
-                    struct LinkPlayerBlock *block;
-                    struct LinkPlayer *linkPlayer;
+                    struct LinkPlayerBlock * block;
+                    struct LinkPlayer * linkPlayer;
 
                     block = (struct LinkPlayerBlock *)&gBlockRecvBuffer[i];
                     linkPlayer = &gLinkPlayers[i];
@@ -1628,7 +1628,7 @@ bool8 HasLinkErrorOccurred(void)
 
 void sub_800B0B4(void)
 {
-    struct LinkPlayerBlock *block;
+    struct LinkPlayerBlock * block;
 
     InitLocalLinkPlayer();
     block = &gLocalLinkPlayerBlock;
@@ -1641,8 +1641,8 @@ void sub_800B0B4(void)
 void sub_800B110(u32 who)
 {
     u8 who_ = who;
-    struct LinkPlayerBlock *block;
-    struct LinkPlayer *player;
+    struct LinkPlayerBlock * block;
+    struct LinkPlayer * player;
 
     block = (struct LinkPlayerBlock *)gBlockRecvBuffer[who_];
     player = &gLinkPlayers[who_];

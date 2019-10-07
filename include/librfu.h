@@ -199,17 +199,17 @@ struct RfuUnk5
     struct RfuUnk5Sub unk_14[4];
 };
 
-extern struct RfuStruct *gRfuState;
+extern struct RfuStruct * gRfuState;
 
-extern struct RfuUnk5 *gUnknown_03007890;
+extern struct RfuUnk5 * gUnknown_03007890;
 extern u32 *gUnknown_03007894;
-extern struct RfuUnk3* gUnknown_03007898;
-extern struct RfuUnk2* gUnknown_03007880[4];
-extern struct RfuUnk1* gUnknown_03007870[4];
+extern struct RfuUnk3 * gUnknown_03007898;
+extern struct RfuUnk2 * gUnknown_03007880[4];
+extern struct RfuUnk1 * gUnknown_03007870[4];
 extern void* sub_82E53F4;
 extern void rfu_STC_clearAPIVariables(void);
 
-void STWI_init_all(struct RfuIntrStruct *interruptStruct, IntrFunc *interrupt, bool8 copyInterruptToRam);
+void STWI_init_all(struct RfuIntrStruct * interruptStruct, IntrFunc *interrupt, bool8 copyInterruptToRam);
 void rfu_REQ_stopMode(void);
 void rfu_waitREQComplete(void);
 u32 rfu_REQBN_softReset_and_checkID(void);

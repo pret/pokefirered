@@ -3714,22 +3714,22 @@ gUnknown_841DE9B:: @ 841DE9B
 gUnknown_841DE9C:: @ 841DE9C
 	.string "$"
 
-gUnknown_841DE9D:: @ 841DE9D
+gText_CommErrorCheckConnections:: @ 841DE9D
 	.string "Communication error…\n"
 	.string "Please check all connections,\n"
 	.string "then turn the power OFF and ON.$"
 
-gUnknown_841DEF0:: @ 841DEF0
+gText_CommErrorEllipsis:: @ 841DEF0
 	.string "Communication error…$"
 
-gUnknown_841DF05:: @ 841DF05
+gText_MoveCloserToLinkPartner:: @ 841DF05
 	.string "Move closer to your link partner(s).\n"
 	.string "Avoid obstacles between partners.$"
 
-gUnknown_841DF4C:: @ 841DF4C
+gText_ABtnRegistrationCounter:: @ 841DF4C
 	.string "A Button: Registration Counter$"
 
-gUnknown_841DF6B:: @ 841DF6B
+gText_ABtnTitleScreen:: @ 841DF6B
 	.string "A Button: Title Screen$"
 
 gUnknown_841DF82:: @ 841DF82

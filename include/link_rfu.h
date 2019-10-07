@@ -33,5 +33,10 @@ u8 Rfu_GetBlockReceivedStatus(void);
 void Rfu_SetBlockReceivedFlag(u8 who);
 void Rfu_ResetBlockReceivedFlag(u8 who);
 bool8 Rfu_IsMaster(void);
+void sub_80F85F8(void);
+bool32 sub_80FAE94(void);
+bool32 sub_80FAEF0(void);
+bool32 IsRfuRecvQueueEmpty(void);
+u32 GetRfuRecvQueueLength(void);
 
 #endif //GUARD_LINK_RFU_H

@@ -7,15 +7,9 @@
 	.section .rodata
 
 	.align 2, 0
-gUnknown_82345E8:: @ 82345E8
-	.incbin "baserom.gba", 0x2345E8, 0x8
-
-gUnknown_82345F0:: @ 82345F0
-	.incbin "baserom.gba", 0x2345F0, 0x20
-
-gUnknown_8234610:: @ 8234610
-	.incbin "baserom.gba", 0x234610, 0x8
-
+	.string "$"
+	.string "\n$"
+	.align 2, 0
 gUnknown_8234618:: @ 8234618
 	.incbin "baserom.gba", 0x234618, 0x8
 

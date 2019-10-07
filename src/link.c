@@ -1,5 +1,8 @@
 #include "global.h"
 #include "palette.h"
+#include "bg.h"
+#include "m4a.h"
+#include "scanline_effect.h"
 #include "bg_regs.h"
 #include "gpu_regs.h"
 #include "decompress.h"
@@ -15,8 +18,19 @@
 #include "string_util.h"
 #include "item_menu.h"
 #include "trade.h"
+#include "text.h"
+#include "sound.h"
+#include "menu.h"
+#include "overworld.h"
+#include "new_menu_helpers.h"
 #include "link.h"
+#include "window.h"
+#include "graphics.h"
+#include "strings.h"
+#include "help_system.h"
+#include "reset_save_heap.h"
 #include "constants/battle.h"
+#include "constants/songs.h"
 
 extern u16 gHeldKeyCodeToSend;
 
@@ -136,6 +150,7 @@ void sub_800AB38(void);
 void sub_800ABD4(void);
 void sub_800AC00(void);
 void CheckErrorStatus(void);
+void CB2_PrintErrorMessage(void);
 void EnableSerial(void);
 void sub_800B210(void);
 void sub_80F8DC0(void);
@@ -162,6 +177,50 @@ const char gASCIITestPrint[] = "TEST PRINT\n"
                                "P1\n"
                                "P2\n"
                                "P3";
+
+const struct BgTemplate gUnknown_82345E8[] = {
+    {
+        .bg = 0,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 31,
+        .priority = 0
+    }, {
+        .bg = 1,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 8,
+        .priority = 1
+    }
+};
+
+const struct WindowTemplate gUnknown_82345F0[] = {
+    {
+        .bg = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 0,
+        .width = 30,
+        .height = 5,
+        .paletteNum = 15,
+        .baseBlock = 0x002
+    }, {
+        .bg = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 6,
+        .width = 30,
+        .height = 7,
+        .paletteNum = 15,
+        .baseBlock = 0x098
+    }, {
+        .bg = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 13,
+        .width = 30,
+        .height = 7,
+        .paletteNum = 15,
+        .baseBlock = 0x16A
+    }, DUMMY_WIN_TEMPLATE
+};
+
+const u8 gUnknown_8234610[4] = { 0x00, 0x01, 0x02 };
 
 bool8 IsWirelessAdapterConnected(void)
 {
@@ -1382,4 +1441,322 @@ void CheckErrorStatus(void)
         gLinkErrorOccurred = TRUE;
         CloseLink();
     }
+}
+
+void sub_800ACBC(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount, u8 unk_06)
+{
+    sLinkErrorBuffer.status = status;
+    sLinkErrorBuffer.lastSendQueueCount = lastSendQueueCount;
+    sLinkErrorBuffer.lastRecvQueueCount = lastRecvQueueCount;
+    sLinkErrorBuffer.unk_06 = unk_06;
+}
+
+void CB2_LinkError(void)
+{
+    u8 *tilemapBuffer;
+
+    SetGpuReg(REG_OFFSET_DISPCNT, 0);
+    m4aMPlayStop(&gMPlayInfo_SE1);
+    m4aMPlayStop(&gMPlayInfo_SE2);
+    m4aMPlayStop(&gMPlayInfo_SE3);
+    InitHeap(gHeap, HEAP_SIZE);
+    ResetSpriteData();
+    FreeAllSpritePalettes();
+    ResetPaletteFadeControl();
+    FillPalette(0, 0, 2);
+    ResetTasks();
+    ScanlineEffect_Stop();
+    if (gWirelessCommType)
+    {
+        if (!sLinkErrorBuffer.unk_06)
+        {
+            gWirelessCommType = 3;
+        }
+        sub_80F85F8();
+    }
+    SetVBlankCallback(sub_800978C);
+    ResetBgsAndClearDma3BusyFlags(0);
+    InitBgsFromTemplates(0, gUnknown_82345E8, 2);
+    gUnknown_2022860 = tilemapBuffer = malloc(0x800);
+    SetBgTilemapBuffer(1, tilemapBuffer);
+    if (InitWindows(gUnknown_82345F0))
+    {
+        DeactivateAllTextPrinters();
+        ResetTempTileDataBuffers();
+        SetGpuReg(REG_OFFSET_BLDALPHA, 0);
+        SetGpuReg(REG_OFFSET_BG0HOFS, 0);
+        SetGpuReg(REG_OFFSET_BG0VOFS, 0);
+        SetGpuReg(REG_OFFSET_BG1HOFS, 0);
+        SetGpuReg(REG_OFFSET_BG1VOFS, 0);
+        ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON | DISPCNT_WIN1_ON | DISPCNT_OBJWIN_ON);
+        LoadPalette(gTMCaseMainWindowPalette, 0xf0, 0x20);
+        gSoftResetDisabled = FALSE;
+        CreateTask(Task_DestroySelf, 0);
+        StopMapMusic();
+        gMain.callback1 = NULL;
+        RunTasks();
+        AnimateSprites();
+        BuildOamBuffer();
+        UpdatePaletteFade();
+        SetMainCallback2(CB2_PrintErrorMessage);
+    }
+}
+
+void sub_800AE1C(void)
+{
+    DecompressAndLoadBgGfxUsingHeap(1, gWirelessLinkDisplay4bpp, FALSE, 0, 0);
+    CopyToBgTilemapBuffer(1, gWirelessLinkDisplayBin, 0, 0);
+    CopyBgTilemapBufferToVram(1);
+    LoadPalette(gWirelessLinkDisplayPal, 0, 0x20);
+    FillWindowPixelBuffer(0, PIXEL_FILL(0));
+    FillWindowPixelBuffer(2, PIXEL_FILL(0));
+    AddTextPrinterParameterized3(0, 3, 2, 5, gUnknown_8234610, 0, gText_CommErrorEllipsis);
+    AddTextPrinterParameterized3(2, 3, 2, 2, gUnknown_8234610, 0, gText_MoveCloserToLinkPartner);
+    PutWindowTilemap(0);
+    PutWindowTilemap(2);
+    CopyWindowToVram(0, 0);
+    CopyWindowToVram(2, 3);
+    ShowBg(0);
+    ShowBg(1);
+}
+
+void sub_800AED0(void)
+{
+    FillWindowPixelBuffer(1, PIXEL_FILL(0));
+    FillWindowPixelBuffer(2, PIXEL_FILL(0));
+    AddTextPrinterParameterized3(1, 3, 2, 0, gUnknown_8234610, 0, gText_CommErrorCheckConnections);
+    PutWindowTilemap(1);
+    PutWindowTilemap(2);
+    CopyWindowToVram(1, 0);
+    CopyWindowToVram(2, 3);
+    ShowBg(0);
+}
+
+void CB2_PrintErrorMessage(void)
+{
+    switch (gMain.state)
+    {
+    case  00:
+        if (sLinkErrorBuffer.unk_06)
+        {
+            sub_800AE1C();
+        }
+        else
+        {
+            sub_800AED0();
+        }
+        break;
+    case  30:
+        PlaySE(SE_BOO);
+        break;
+    case  60:
+        PlaySE(SE_BOO);
+        break;
+    case  90:
+        PlaySE(SE_BOO);
+        break;
+    case 130:
+        if (gWirelessCommType == 2)
+        {
+            AddTextPrinterParameterized3(0, 3, 2, 20, gUnknown_8234610, 0, gText_ABtnTitleScreen);
+        }
+        else if (gWirelessCommType == 1)
+        {
+            AddTextPrinterParameterized3(0, 3, 2, 20, gUnknown_8234610, 0, gText_ABtnRegistrationCounter);
+        }
+        break;
+    }
+    if (gMain.state == 160)
+    {
+        if (gWirelessCommType == 1)
+        {
+            if (JOY_NEW(A_BUTTON))
+            {
+                sub_812B484();
+                PlaySE(SE_PIN);
+                gWirelessCommType = 0;
+                sLinkErrorBuffer.unk_06 = 0;
+                sub_8079B7C();
+            }
+        }
+        else if (gWirelessCommType == 2)
+        {
+            if (JOY_NEW(A_BUTTON))
+            {
+                sub_812B484();
+                rfu_REQ_stopMode();
+                rfu_waitREQComplete();
+                DoSoftReset();
+            }
+        }
+    }
+    if (gMain.state != 160)
+    {
+        gMain.state++;
+    }
+}
+
+bool8 GetSioMultiSI(void)
+{
+    return (REG_SIOCNT & 0x04) != 0;
+}
+
+bool8 IsSioMultiMaster(void)
+{
+    return (REG_SIOCNT & 0x8) && !(REG_SIOCNT & 0x04);
+}
+
+bool8 IsLinkConnectionEstablished(void)
+{
+    return EXTRACT_CONN_ESTABLISHED(gLinkStatus);
+}
+
+void SetSuppressLinkErrorMessage(bool8 flag)
+{
+    gSuppressLinkErrorMessage = flag;
+}
+
+bool8 HasLinkErrorOccurred(void)
+{
+    return gLinkErrorOccurred;
+}
+
+void sub_800B0B4(void)
+{
+    struct LinkPlayerBlock *block;
+
+    InitLocalLinkPlayer();
+    block = &gLocalLinkPlayerBlock;
+    block->linkPlayer = gLocalLinkPlayer;
+    memcpy(block->magic1, gASCIIGameFreakInc, sizeof(block->magic1) - 1);
+    memcpy(block->magic2, gASCIIGameFreakInc, sizeof(block->magic2) - 1);
+    memcpy(gBlockSendBuffer, block, sizeof(*block));
+}
+
+void sub_800B110(u32 who)
+{
+    u8 who_ = who;
+    struct LinkPlayerBlock *block;
+    struct LinkPlayer *player;
+
+    block = (struct LinkPlayerBlock *)gBlockRecvBuffer[who_];
+    player = &gLinkPlayers[who_];
+    *player = block->linkPlayer;
+    sub_800B284(player);
+    if (strcmp(block->magic1, gASCIIGameFreakInc) != 0 || strcmp(block->magic2, gASCIIGameFreakInc) != 0)
+    {
+        SetMainCallback2(CB2_LinkError);
+    }
+}
+
+bool8 HandleLinkConnection(void)
+{
+    bool32 r4;
+    bool32 r5;
+
+    if (gWirelessCommType == 0)
+    {
+        gLinkStatus = LinkMain1(&gShouldAdvanceLinkState, gSendCmd, gRecvCmds);
+        LinkMain2(&gMain.heldKeys);
+        if ((gLinkStatus & LINK_STAT_RECEIVED_NOTHING) && sub_8058318() == TRUE)
+        {
+            return TRUE;
+        }
+    }
+    else
+    {
+        r4 = sub_80FAE94();
+        r5 = sub_80FAEF0();
+        if (sub_8058318() == TRUE)
+        {
+            if (r4 == TRUE || IsRfuRecvQueueEmpty() || r5)
+            {
+                return TRUE;
+            }
+        }
+    }
+    return FALSE;
+}
+
+void sub_800B1F4(void)
+{
+    if (gReceivedRemoteLinkPlayers == 0)
+    {
+        gWirelessCommType = 1;
+    }
+}
+
+void sub_800B210(void)
+{
+    if (gReceivedRemoteLinkPlayers == 0)
+    {
+        gWirelessCommType = 0;
+    }
+}
+
+void sub_800B22C(void)
+{
+    if (gReceivedRemoteLinkPlayers == 0)
+    {
+        gWirelessCommType = 0;
+    }
+}
+
+u32 GetLinkRecvQueueLength(void)
+{
+    if (gWirelessCommType != 0)
+    {
+        return GetRfuRecvQueueLength();
+    }
+    return gLink.recvQueue.count;
+}
+
+bool32 sub_800B270(void)
+{
+    if (GetLinkRecvQueueLength() > 2)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_800B284(struct LinkPlayer *player)
+{
+    player->name[10] = player->name[8];
+    ConvertInternationalString(player->name, player->language);
+}
+
+void DisableSerial(void)
+{
+    DisableInterrupts(INTR_FLAG_TIMER3 | INTR_FLAG_SERIAL);
+    REG_SIOCNT = SIO_MULTI_MODE;
+    REG_TM3CNT_H = 0;
+    REG_IF = INTR_FLAG_TIMER3 | INTR_FLAG_SERIAL;
+    REG_SIOMLT_SEND = 0;
+    REG_SIOMLT_RECV = 0;
+    CpuFill32(0, &gLink, sizeof(gLink));
+}
+
+void EnableSerial(void)
+{
+    DisableInterrupts(INTR_FLAG_TIMER3 | INTR_FLAG_SERIAL);
+    REG_RCNT = 0;
+    REG_SIOCNT = SIO_MULTI_MODE;
+    REG_SIOCNT |= SIO_115200_BPS | SIO_INTR_ENABLE;
+    EnableInterrupts(INTR_FLAG_SERIAL);
+    REG_SIOMLT_SEND = 0;
+    CpuFill32(0, &gLink, sizeof(gLink));
+    sNumVBlanksWithoutSerialIntr = 0;
+    sSendNonzeroCheck = 0;
+    sRecvNonzeroCheck = 0;
+    sChecksumAvailable = 0;
+    sHandshakePlayerCount = 0;
+    gLastSendQueueCount = 0;
+    gLastRecvQueueCount = 0;
+}
+
+void ResetSerial(void)
+{
+    EnableSerial();
+    DisableSerial();
 }

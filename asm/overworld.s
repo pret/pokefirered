@@ -5640,7 +5640,7 @@ c1_link_related: @ 8057884
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0805789E
-	bl sub_80F90DC
+	bl IsRfuRecvQueueEmpty
 	cmp r0, 0
 	beq _0805789E
 	bl IsSendingKeysToLink
@@ -6289,7 +6289,7 @@ sub_8057D5C: @ 8057D5C
 	movs r0, 0x11
 	b _08057D92
 _08057D70:
-	bl sub_800B248
+	bl GetLinkRecvQueueLength
 	cmp r0, 0x4
 	bls _08057D7C
 	movs r0, 0x1B
@@ -6344,7 +6344,7 @@ _08057DC4: .4byte sub_8057D98
 	thumb_func_start sub_8057DC8
 sub_8057DC8: @ 8057DC8
 	push {r4,lr}
-	bl sub_800B248
+	bl GetLinkRecvQueueLength
 	movs r4, 0x11
 	cmp r0, 0x2
 	bhi _08057DE0
@@ -6982,7 +6982,7 @@ sub_8058244: @ 8058244
 	movs r0, 0
 	b _0805826C
 _08058252:
-	bl sub_800B248
+	bl GetLinkRecvQueueLength
 	cmp r0, 0x2
 	bls _08058264
 	ldr r1, _08058260 @ =gUnknown_3000E88
@@ -7006,7 +7006,7 @@ _08058270: .4byte gUnknown_3000E88
 	thumb_func_start sub_8058274
 sub_8058274: @ 8058274
 	push {lr}
-	bl sub_800B248
+	bl GetLinkRecvQueueLength
 	cmp r0, 0x1
 	bls _080582D8
 	bl IsUpdateLinkStateCBActive

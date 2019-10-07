@@ -1360,8 +1360,8 @@ _080F90D4: .4byte 0x000008d4
 _080F90D8: .4byte 0x000008f2
 	thumb_func_end sub_80F906C
 
-	thumb_func_start sub_80F90DC
-sub_80F90DC: @ 80F90DC
+	thumb_func_start IsRfuRecvQueueEmpty
+IsRfuRecvQueueEmpty: @ 80F90DC
 	push {r4,lr}
 	ldr r0, _080F90EC @ =gUnknown_3007460
 	ldr r0, [r0]
@@ -1398,7 +1398,7 @@ _080F9110:
 	bx r1
 	.align 2, 0
 _080F9118: .4byte gRecvCmds
-	thumb_func_end sub_80F90DC
+	thumb_func_end IsRfuRecvQueueEmpty
 
 	thumb_func_start sub_80F911C
 sub_80F911C: @ 80F911C
@@ -2029,7 +2029,7 @@ _080F9618:
 	cmp r1, 0x6
 	bls _080F9618
 _080F9628:
-	bl sub_80F90DC
+	bl IsRfuRecvQueueEmpty
 	add sp, 0x58
 	pop {r3}
 	mov r8, r3
@@ -8105,8 +8105,8 @@ _080FC458: .4byte gUnknown_3005450
 _080FC45C: .4byte 0x000008d2
 	thumb_func_end sub_80FC44C
 
-	thumb_func_start sub_80FC460
-sub_80FC460: @ 80FC460
+	thumb_func_start GetRfuRecvQueueLength
+GetRfuRecvQueueLength: @ 80FC460
 	ldr r0, _080FC46C @ =gUnknown_3005450
 	ldr r1, _080FC470 @ =0x0000069e
 	adds r0, r1
@@ -8115,7 +8115,7 @@ sub_80FC460: @ 80FC460
 	.align 2, 0
 _080FC46C: .4byte gUnknown_3005450
 _080FC470: .4byte 0x0000069e
-	thumb_func_end sub_80FC460
+	thumb_func_end GetRfuRecvQueueLength
 
 	thumb_func_start nullsub_89
 nullsub_89: @ 80FC474

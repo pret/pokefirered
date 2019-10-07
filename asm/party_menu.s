@@ -16284,7 +16284,7 @@ _08126C20: .4byte 0x0000ffff
 	thumb_func_start sub_8126C24
 sub_8126C24: @ 8126C24
 	push {lr}
-	bl sub_806E25C
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	bne _08126C60
 	ldr r0, _08126C54 @ =gUnknown_203B0A0

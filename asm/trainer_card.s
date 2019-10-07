@@ -2039,7 +2039,7 @@ _0808A0DC: .4byte gUnknown_8419CE7
 	thumb_func_start sub_808A0E0
 sub_808A0E0: @ 808A0E0
 	push {lr}
-	bl sub_806E25C
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	bne _0808A0F2
 	movs r0, 0x1

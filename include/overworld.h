@@ -142,4 +142,6 @@ void ResetGameStats(void);
 void Overworld_CreditsMainCB(void);
 bool32 Overworld_DoScrollSceneForCredits(u8 *, const struct CreditsOverworldCmd *, u8);
 
+bool32 sub_8058318(void);
+
 #endif //GUARD_OVERWORLD_H

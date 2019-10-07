@@ -5640,16 +5640,16 @@ c1_link_related: @ 8057884
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0805789E
-	bl sub_80F90DC
+	bl IsRfuRecvQueueEmpty
 	cmp r0, 0
 	beq _0805789E
-	bl sub_800A00C
+	bl IsSendingKeysToLink
 	cmp r0, 0
 	bne _080578C0
 _0805789E:
 	ldr r0, _080578CC @ =gUnknown_300502C
 	ldrb r4, [r0]
-	ldr r0, _080578D0 @ =gUnknown_3003E60
+	ldr r0, _080578D0 @ =gLinkPartnersHeldKeys
 	adds r1, r4, 0
 	bl sub_8057BE4
 	ldr r0, _080578D4 @ =gUnknown_3000E84
@@ -5667,7 +5667,7 @@ _080578C0:
 	.align 2, 0
 _080578C8: .4byte gWirelessCommType
 _080578CC: .4byte gUnknown_300502C
-_080578D0: .4byte gUnknown_3003E60
+_080578D0: .4byte gLinkPartnersHeldKeys
 _080578D4: .4byte gUnknown_3000E84
 	thumb_func_end c1_link_related
 
@@ -5686,12 +5686,12 @@ _080578E8: .4byte sub_8057D5C
 	thumb_func_start sub_80578EC
 sub_80578EC: @ 80578EC
 	push {lr}
-	ldr r0, _080578F8 @ =gUnknown_3003E60
+	ldr r0, _080578F8 @ =gLinkPartnersHeldKeys
 	bl sub_8057D48
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080578F8: .4byte gUnknown_3003E60
+_080578F8: .4byte gLinkPartnersHeldKeys
 	thumb_func_end sub_80578EC
 
 	thumb_func_start c1_link_related_func_set
@@ -6126,14 +6126,14 @@ sub_8057C4C: @ 8057C4C
 	lsrs r0, 16
 	cmp r0, 0xC
 	bhi _08057C6C
-	ldr r0, _08057C68 @ =gUnknown_3005028
+	ldr r0, _08057C68 @ =gHeldKeyCodeToSend
 	strh r4, [r0]
 	b _08057C72
 	.align 2, 0
 _08057C64: .4byte 0xffef0000
-_08057C68: .4byte gUnknown_3005028
+_08057C68: .4byte gHeldKeyCodeToSend
 _08057C6C:
-	ldr r1, _08057CB0 @ =gUnknown_3005028
+	ldr r1, _08057CB0 @ =gHeldKeyCodeToSend
 	movs r0, 0x11
 	strh r0, [r1]
 _08057C72:
@@ -6147,7 +6147,7 @@ _08057C72:
 	bl IsUpdateLinkStateCBActive
 	cmp r0, 0x1
 	bne _08057CA8
-	bl sub_800A00C
+	bl IsSendingKeysToLink
 	cmp r0, 0x1
 	bne _08057CA8
 	cmp r4, 0x11
@@ -6159,7 +6159,7 @@ _08057C72:
 	cmp r4, 0x18
 	blt _08057CA8
 _08057CA2:
-	ldr r1, _08057CB0 @ =gUnknown_3005028
+	ldr r1, _08057CB0 @ =gHeldKeyCodeToSend
 	movs r0, 0
 	strh r0, [r1]
 _08057CA8:
@@ -6167,7 +6167,7 @@ _08057CA8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08057CB0: .4byte gUnknown_3005028
+_08057CB0: .4byte gHeldKeyCodeToSend
 _08057CB4: .4byte gWirelessCommType
 	thumb_func_end sub_8057C4C
 
@@ -6289,7 +6289,7 @@ sub_8057D5C: @ 8057D5C
 	movs r0, 0x11
 	b _08057D92
 _08057D70:
-	bl sub_800B248
+	bl GetLinkRecvQueueLength
 	cmp r0, 0x4
 	bls _08057D7C
 	movs r0, 0x1B
@@ -6344,7 +6344,7 @@ _08057DC4: .4byte sub_8057D98
 	thumb_func_start sub_8057DC8
 sub_8057DC8: @ 8057DC8
 	push {r4,lr}
-	bl sub_800B248
+	bl GetLinkRecvQueueLength
 	movs r4, 0x11
 	cmp r0, 0x2
 	bhi _08057DE0
@@ -6982,7 +6982,7 @@ sub_8058244: @ 8058244
 	movs r0, 0
 	b _0805826C
 _08058252:
-	bl sub_800B248
+	bl GetLinkRecvQueueLength
 	cmp r0, 0x2
 	bls _08058264
 	ldr r1, _08058260 @ =gUnknown_3000E88
@@ -7006,13 +7006,13 @@ _08058270: .4byte gUnknown_3000E88
 	thumb_func_start sub_8058274
 sub_8058274: @ 8058274
 	push {lr}
-	bl sub_800B248
+	bl GetLinkRecvQueueLength
 	cmp r0, 0x1
 	bls _080582D8
 	bl IsUpdateLinkStateCBActive
 	cmp r0, 0x1
 	bne _080582D8
-	bl sub_800A00C
+	bl IsSendingKeysToLink
 	cmp r0, 0x1
 	bne _080582D8
 	ldr r0, _080582C4 @ =gUnknown_3000E84
@@ -7065,7 +7065,7 @@ sub_80582E0: @ 80582E0
 	bl IsUpdateLinkStateCBActive
 	cmp r0, 0x1
 	bne _08058304
-	bl sub_800A00C
+	bl IsSendingKeysToLink
 	cmp r0, 0x1
 	bne _08058304
 	ldr r0, _08058308 @ =gUnknown_3000E84
@@ -7093,7 +7093,7 @@ sub_8058318: @ 8058318
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08058334
-	bl sub_800A00C
+	bl IsSendingKeysToLink
 	cmp r0, 0
 	beq _08058334
 	movs r0, 0x1
@@ -7114,14 +7114,14 @@ sub_805833C: @ 805833C
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0805835C
-	ldr r0, _08058354 @ =gUnknown_3003FB0
+	ldr r0, _08058354 @ =gLink
 	ldr r1, _08058358 @ =0x00000339
 	adds r0, r1
 	ldrb r0, [r0]
 	b _08058364
 	.align 2, 0
 _08058350: .4byte gWirelessCommType
-_08058354: .4byte gUnknown_3003FB0
+_08058354: .4byte gLink
 _08058358: .4byte 0x00000339
 _0805835C:
 	ldr r0, _08058368 @ =gUnknown_3005450

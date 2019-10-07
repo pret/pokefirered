@@ -126,7 +126,7 @@ u8 sub_8143674(struct MEvent_Str_1 *mgr)
         resp = 2;
     if (mgr->status & 4)
         resp = 3;
-    gUnknown_3003F84 = 0;
+    gShouldAdvanceLinkState = 0;
     return resp;
 }
 
@@ -143,7 +143,7 @@ bool32 sub_81436EC(void)
     vu16 imeBak = REG_IME;
     u16 data[4];
     REG_IME = 0;
-    *(u64 *)data = gSioMlt_Recv;
+    *(u64 *)data = *(u64 *)gLink.tempRecvBuffer;
     REG_IME = imeBak;
     if (   data[0] == 0xB9A0
         && data[1] == 0xCCD0

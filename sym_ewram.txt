@@ -13,57 +13,9 @@
 	.include "src/sprite.o"
 	.align 2
     .include "src/string_util.o"
-
-	@ .include "src/link.o"
-gLinkTestDebugValuesEnabled: @ 2022110
-	.space 0x1
-
-gUnknown_2022111: @ 2022111
-	.space 0x1
-
 	.align 2
-gUnknown_2022114: @ 2022114
-	.space 0x4
-
-gBlockRecvBuffer: @ 2022118
-	.space 0x500
-
-gBlockSendBuffer: @ 2022618
-	.space 0x100
-
-gLinkOpen: @ 2022718
-	.space 0x1
-
-	.align 1
-gLinkType: @ 202271A
-	.space 0x2
-
-gLinkTimeOutCounter: @ 202271C
-	.space 0x2
-
-	.align 2
-gLocalLinkPlayer: @ 2022720
-	.space 0x1C
-
-	.align 2
-gLinkPlayers: @ 202273C
-	.space 0x8C
-
-	.align 2
-gSavedLinkPlayers: @ 20227C8
-	.space 0x8C
-
-	.align 2
-sLinkErrorBuffer: @ 2022854
-	.space 0x8
-
-	.align 1
-gUnknown_202285C: @ 202285C
-	.space 0x2
-
-	.align 2
-gUnknown_2022860: @ 2022860
-	.space 0xC
+	.include "src/link.o"
+	.space 8
 
 	@ .include "src/link_rfu.o"
 	.include "src/battle_controllers.o"

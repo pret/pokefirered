@@ -6,43 +6,14 @@
 
 	.section .rodata
 
-	.align 2
-gUnknown_8231EC4:: @ 8231EC4
-	.incbin "baserom.gba", 0x231EC4, 0x20
+	.align 2, 0
+gUnknown_8234614::
+	.string "$"
 
-	.align 2
-gWirelessLinkDisplay4bpp:: @ 8231EE4
-	.incbin "graphics/interface/wireless_link_display.4bpp.lz"
+gUnknown_8234615::
+	.string "\n$"
 
-	.align 2
-gWirelessLinkDisplayBin:: @ 823238C
-	.incbin "graphics/interface/wireless_link_display.bin.lz"
-
-	.align 2
-gUnknown_8232578:: @ 8232578
-	.incbin "baserom.gba", 0x232578, 0x20
-
-gUnknown_8232598:: @ 8232598
-	.incbin "baserom.gba", 0x232598, 0x2000
-
-gUnknown_8234598:: @ 8234598
-	.incbin "baserom.gba", 0x234598, 0x28
-
-gUnknown_82345C0:: @ 82345C0
-	.incbin "baserom.gba", 0x2345C0, 0x10
-
-gUnknown_82345D0:: @ 82345D0
-	.incbin "baserom.gba", 0x2345D0, 0x18
-
-gUnknown_82345E8:: @ 82345E8
-	.incbin "baserom.gba", 0x2345E8, 0x8
-
-gUnknown_82345F0:: @ 82345F0
-	.incbin "baserom.gba", 0x2345F0, 0x20
-
-gUnknown_8234610:: @ 8234610
-	.incbin "baserom.gba", 0x234610, 0x8
-
+	.align 2, 0
 gUnknown_8234618:: @ 8234618
 	.incbin "baserom.gba", 0x234618, 0x8
 

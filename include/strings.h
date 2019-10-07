@@ -329,4 +329,11 @@ extern const u8 gText_ItemfinderResponding[];
 extern const u8 gText_ItemfinderShakingWildly[];
 extern const u8 gText_NopeTheresNoResponse[];
 
+// link
+extern const u8 gText_CommErrorEllipsis[];
+extern const u8 gText_MoveCloserToLinkPartner[];
+extern const u8 gText_CommErrorCheckConnections[];
+extern const u8 gText_ABtnTitleScreen[];
+extern const u8 gText_ABtnRegistrationCounter[];
+
 #endif //GUARD_STRINGS_H

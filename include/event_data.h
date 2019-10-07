@@ -36,9 +36,8 @@ bool32 sub_806E2BC(void);
 void sub_806E6FC(void);
 void sub_806E2D0(void);
 void sub_806E370(void);
-bool32 sub_806E25C(void);
+bool32 IsNationalPokedexEnabled(void);
 void sub_806E190(void);
-
 extern u16 gSpecialVar_0x8000;
 extern u16 gSpecialVar_0x8001;
 extern u16 gSpecialVar_0x8002;

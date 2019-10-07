@@ -371,7 +371,7 @@ gSpecials:: @ 815FD60
 	def_special sub_80CC2BC
 	def_special sub_80CC3CC
 	def_special sub_80CC524
-	def_special sub_8009480
+	def_special IsWirelessAdapterConnected
 	def_special sub_8115A24
 	def_special BerryBlenderLinkJoinGroup
 	def_special UnionRoomSpecial
@@ -412,7 +412,7 @@ gSpecials:: @ 815FD60
 	def_special sub_812B35C
 	def_special Special_SSAnneDepartureCutscene
 	def_special sub_8149A18
-	def_special sub_806E25C
+	def_special IsNationalPokedexEnabled
 	def_special sub_815D9E8
 	def_special sub_814B504
 	def_special sub_80CC8CC

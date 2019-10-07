@@ -193,8 +193,8 @@ _0806E254: .4byte gSaveBlock2Ptr
 _0806E258: .4byte 0x00006258
 	thumb_func_end EnableNationalPokedex
 
-	thumb_func_start sub_806E25C
-sub_806E25C: @ 806E25C
+	thumb_func_start IsNationalPokedexEnabled
+IsNationalPokedexEnabled: @ 806E25C
 	push {lr}
 	ldr r0, _0806E288 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
@@ -224,7 +224,7 @@ _0806E294:
 _0806E296:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806E25C
+	thumb_func_end IsNationalPokedexEnabled
 
 	thumb_func_start sub_806E29C
 sub_806E29C: @ 806E29C

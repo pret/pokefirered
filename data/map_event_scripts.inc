@@ -1492,7 +1492,7 @@ EventScript_1A651A:: @ 81A651A
 	clearflag FLAG_0x09D
 	call EventScript_1A6551
 	special sub_81130A8
-	specialvar VAR_RESULT, sub_806E25C
+	specialvar VAR_RESULT, IsNationalPokedexEnabled
 	compare_var_to_value VAR_RESULT, 0
 	call_if 1, EventScript_1A653B
 	call EventScript_1A6541

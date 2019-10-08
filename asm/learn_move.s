@@ -758,7 +758,7 @@ _080E4C7E:
 	adds r5, r4
 	ldrh r4, [r5]
 	str r4, [sp]
-	bl sub_8134738
+	bl ShowSelectMovePokemonSummaryScreen
 	ldr r1, [r7]
 	movs r0, 0x1C
 	b _080E4ED8

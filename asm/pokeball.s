@@ -14,10 +14,10 @@ DoPokeballSendOutAnimation: @ 804A938
 	lsrs r4, 16
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r1, _0804A98C @ =gUnknown_2024005
+	ldr r1, _0804A98C @ =gDoingBattleAnim
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r0, _0804A990 @ =gUnknown_2024018
+	ldr r0, _0804A990 @ =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r6, _0804A994 @ =gActiveBattler
 	ldrb r1, [r6]
@@ -49,8 +49,8 @@ DoPokeballSendOutAnimation: @ 804A938
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0804A98C: .4byte gUnknown_2024005
-_0804A990: .4byte gUnknown_2024018
+_0804A98C: .4byte gDoingBattleAnim
+_0804A990: .4byte gBattleSpritesDataPtr
 _0804A994: .4byte gActiveBattler
 _0804A998: .4byte sub_804A9A0
 _0804A99C: .4byte gTasks
@@ -132,7 +132,7 @@ _0804AA12:
 	beq _0804AA60
 	ldr r4, _0804AA5C @ =gLinkPlayers
 	adds r0, r6, 0
-	bl GetBankMultiplayerId
+	bl GetBattlerMultiplayerId
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -220,13 +220,13 @@ _0804AAF4: .4byte SpriteCB_PlayerMonSendOut_1
 _0804AAF8:
 	adds r0, r6, 0
 	movs r1, 0
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x20]
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, 0x18
@@ -276,13 +276,13 @@ _0804AB6C:
 	strh r0, [r4, 0x2E]
 	ldrb r0, [r5]
 	movs r1, 0
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x32]
 	ldrb r0, [r5]
 	movs r1, 0x1
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, 0x10
@@ -1265,11 +1265,11 @@ _0804B324:
 	cmp r5, r0
 	bne _0804B3A6
 _0804B34E:
-	bl sub_8075290
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804B3A6
-	ldr r0, _0804B390 @ =gUnknown_2024018
+	ldr r0, _0804B390 @ =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	ldrb r1, [r0, 0x9]
@@ -1293,7 +1293,7 @@ _0804B34E:
 	.align 2, 0
 _0804B388: .4byte gBattlerPartyIndexes
 _0804B38C: .4byte gPlayerParty
-_0804B390: .4byte gUnknown_2024018
+_0804B390: .4byte gBattleSpritesDataPtr
 _0804B394: .4byte gBattleTypeFlags
 _0804B398: .4byte gMPlayInfo_BGM
 _0804B39C:
@@ -1302,11 +1302,11 @@ _0804B39C:
 	movs r2, 0x80
 	bl m4aMPlayVolumeControl
 _0804B3A6:
-	bl sub_8075290
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804B3C0
-	ldr r0, _0804B3CC @ =gUnknown_2024018
+	ldr r0, _0804B3CC @ =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	ldrb r1, [r0, 0x9]
@@ -1320,7 +1320,7 @@ _0804B3C0:
 	.align 2, 0
 _0804B3C4: .4byte gMPlayInfo_BGM
 _0804B3C8: .4byte 0x0000ffff
-_0804B3CC: .4byte gUnknown_2024018
+_0804B3CC: .4byte gBattleSpritesDataPtr
 _0804B3D0:
 	movs r0, 0
 	bl GetBattlerAtPosition
@@ -1519,9 +1519,9 @@ _0804B52C:
 	movs r2, 0
 	movs r1, 0
 	strh r1, [r0, 0x26]
-	ldr r0, _0804B5C0 @ =gUnknown_2024005
+	ldr r0, _0804B5C0 @ =gDoingBattleAnim
 	strb r2, [r0]
-	ldr r4, _0804B5C4 @ =gUnknown_2024018
+	ldr r4, _0804B5C4 @ =gBattleSpritesDataPtr
 	ldr r0, [r4]
 	ldr r0, [r0, 0x4]
 	lsls r1, r6, 1
@@ -1572,8 +1572,8 @@ _0804B5AE:
 _0804B5B4: .4byte 0xfffffee0
 _0804B5B8: .4byte gSprites
 _0804B5BC: .4byte gBattlerSpriteIds
-_0804B5C0: .4byte gUnknown_2024005
-_0804B5C4: .4byte gUnknown_2024018
+_0804B5C0: .4byte gDoingBattleAnim
+_0804B5C4: .4byte gBattleSpritesDataPtr
 	thumb_func_end HandleBallAnimEnd
 
 	thumb_func_start sub_804B5C8
@@ -1592,7 +1592,7 @@ sub_804B5C8: @ 804B5C8
 	beq _0804B666
 	cmp r1, 0x5F
 	bne _0804B600
-	ldr r0, _0804B5F8 @ =gUnknown_2024005
+	ldr r0, _0804B5F8 @ =gDoingBattleAnim
 	movs r1, 0
 	strb r1, [r0]
 	bl m4aMPlayAllStop
@@ -1600,7 +1600,7 @@ sub_804B5C8: @ 804B5C8
 	bl PlaySE
 	b _0804B666
 	.align 2, 0
-_0804B5F8: .4byte gUnknown_2024005
+_0804B5F8: .4byte gDoingBattleAnim
 _0804B5FC: .4byte 0x0000013f
 _0804B600:
 	ldr r0, _0804B66C @ =0x0000013b
@@ -1639,7 +1639,7 @@ _0804B600:
 	ands r0, r1
 	cmp r0, 0
 	beq _0804B666
-	ldr r0, _0804B680 @ =gUnknown_2024018
+	ldr r0, _0804B680 @ =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0, 0x4]
 	lsls r1, r7, 1
@@ -1661,7 +1661,7 @@ _0804B670: .4byte gSprites
 _0804B674: .4byte gBattlerSpriteIds
 _0804B678: .4byte gMain
 _0804B67C: .4byte 0x00000439
-_0804B680: .4byte gUnknown_2024018
+_0804B680: .4byte gBattleSpritesDataPtr
 	thumb_func_end sub_804B5C8
 
 	thumb_func_start SpriteCB_PlayerMonSendOut_1
@@ -1674,7 +1674,7 @@ SpriteCB_PlayerMonSendOut_1: @ 804B684
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x32]
@@ -1682,7 +1682,7 @@ SpriteCB_PlayerMonSendOut_1: @ 804B684
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x3
-	bl sub_8074480
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, 0x18
@@ -1843,11 +1843,11 @@ _0804B7C8:
 	ldrb r0, [r5, 0x6]
 	strh r0, [r5, 0x3A]
 	strh r1, [r5, 0x2E]
-	bl sub_8075290
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804B828
-	ldr r0, _0804B820 @ =gUnknown_2024018
+	ldr r0, _0804B820 @ =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	ldrb r1, [r0, 0x9]
@@ -1866,7 +1866,7 @@ _0804B7C8:
 	ldr r0, _0804B824 @ =SpriteCB_ReleaseMon2FromBall
 	b _0804B82A
 	.align 2, 0
-_0804B820: .4byte gUnknown_2024018
+_0804B820: .4byte gBattleSpritesDataPtr
 _0804B824: .4byte SpriteCB_ReleaseMon2FromBall
 _0804B828:
 	ldr r0, _0804B840 @ =sub_804B268
@@ -1920,11 +1920,11 @@ SpriteCB_OpponentMonSendOut: @ 804B868
 	ble _0804B8BC
 	movs r0, 0
 	strh r0, [r5, 0x2E]
-	bl sub_8075290
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804B8B8
-	ldr r0, _0804B8B0 @ =gUnknown_2024018
+	ldr r0, _0804B8B0 @ =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	ldrb r1, [r0, 0x9]
@@ -1943,7 +1943,7 @@ SpriteCB_OpponentMonSendOut: @ 804B868
 	ldr r0, _0804B8B4 @ =SpriteCB_ReleaseMon2FromBall
 	b _0804B8BA
 	.align 2, 0
-_0804B8B0: .4byte gUnknown_2024018
+_0804B8B0: .4byte gBattleSpritesDataPtr
 _0804B8B4: .4byte SpriteCB_ReleaseMon2FromBall
 _0804B8B8:
 	ldr r0, _0804B8C4 @ =sub_804B268
@@ -2594,7 +2594,7 @@ sub_804BD94: @ 804BD94
 	lsls r0, 24
 	lsrs r0, 24
 	adds r5, r0, 0
-	ldr r0, _0804BE14 @ =gUnknown_3004FF0
+	ldr r0, _0804BE14 @ =gHealthboxSpriteIds
 	adds r0, r5, r0
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -2653,7 +2653,7 @@ _0804BE0C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804BE14: .4byte gUnknown_3004FF0
+_0804BE14: .4byte gHealthboxSpriteIds
 _0804BE18: .4byte gSprites
 _0804BE1C: .4byte sub_804BE48
 _0804BE20: .4byte sub_804BE24
@@ -2723,7 +2723,7 @@ DoHitAnimHealthboxEffect: @ 804BE70
 	adds r3, r1, r2
 	movs r0, 0x1
 	strh r0, [r3, 0x2E]
-	ldr r0, _0804BEB0 @ =gUnknown_3004FF0
+	ldr r0, _0804BEB0 @ =gHealthboxSpriteIds
 	adds r4, r0
 	ldrb r0, [r4]
 	strh r0, [r3, 0x30]
@@ -2736,7 +2736,7 @@ DoHitAnimHealthboxEffect: @ 804BE70
 	.align 2, 0
 _0804BEA8: .4byte SpriteCB_HitAnimHealthoxEffect
 _0804BEAC: .4byte gSprites
-_0804BEB0: .4byte gUnknown_3004FF0
+_0804BEB0: .4byte gHealthboxSpriteIds
 	thumb_func_end DoHitAnimHealthboxEffect
 
 	thumb_func_start SpriteCB_HitAnimHealthoxEffect

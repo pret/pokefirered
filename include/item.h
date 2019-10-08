@@ -62,20 +62,20 @@ u8 ItemId_GetBattleUsage(u16 itemId);
 ItemUseFunc ItemId_GetBattleFunc(u16 itemId);
 u8 ItemId_GetSecondaryId(u16 itemId);
 u16 itemid_get_market_price(u16 itemId);
-void ClearItemSlotsInAllBagPockets(void);
+void ClearBag(void);
 void ClearPCItemSlots(void);
-void CopyItemName(u16, u8 *);
 void sub_809A824(u16 itemId);
 bool8 AddBagItem(u16 itemId, u16 amount);
 
-void SortPocketAndPlaceHMsFirst(struct BagPocket *);
-u16 BagGetItemIdByPocketPosition(u8 a0, u16 a1);
-u16 BagGetQuantityByPocketPosition(u8 a0, u16 a1);
+void SortPocketAndPlaceHMsFirst(struct BagPocket * pocket);
+u16 BagGetItemIdByPocketPosition(u8 pocketId, u16 itemId);
+u16 BagGetQuantityByPocketPosition(u8 pocketId, u16 itemId);
 bool8 itemid_is_unique(u16 itemId);
 void BagPocketCompaction(struct ItemSlot * slots, u8 capacity);
 u16 GetPcItemQuantity(u16 *);
 
 void ItemPcCompaction(void);
 void RemoveItemFromPC(u16 itemId, u16 quantity);
+void SortAndCompactBagPocket(struct BagPocket * pocket);
 
 #endif // GUARD_ITEM_H

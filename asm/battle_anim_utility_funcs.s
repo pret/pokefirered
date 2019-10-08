@@ -137,7 +137,7 @@ _080BA8EA:
 	cmp r4, r0
 	beq _080BA914
 	adds r0, r4, 0
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BA914
@@ -176,7 +176,7 @@ sub_80BA934: @ 80BA934
 	ldrsh r0, [r0, r1]
 	bl sub_80B9A14
 	adds r2, r0, 0
-	ldr r0, _080BA95C @ =gUnknown_2022B50
+	ldr r0, _080BA95C @ =gBattleTerrain
 	ldrb r0, [r0]
 	cmp r0, 0x9
 	bhi _080BAA0A
@@ -187,7 +187,7 @@ sub_80BA934: @ 80BA934
 	mov pc, r0
 	.align 2, 0
 _080BA958: .4byte gBattleAnimArgs
-_080BA95C: .4byte gUnknown_2022B50
+_080BA95C: .4byte gBattleTerrain
 _080BA960: .4byte _080BA964
 	.align 2, 0
 _080BA964:
@@ -707,7 +707,7 @@ sub_80BACEC: @ 80BACEC
 	ldrh r1, [r4]
 	movs r0, 0xA
 	bl SetGpuReg
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080BAD7A
@@ -722,11 +722,11 @@ sub_80BACEC: @ 80BACEC
 	movs r0, 0xA
 	bl SetGpuReg
 _080BAD7A:
-	bl sub_8075290
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BADFE
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080BADFE
@@ -746,7 +746,7 @@ _080BADAA:
 	ldrb r0, [r5]
 	movs r6, 0x2
 	eors r0, r6
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -844,7 +844,7 @@ _080BAE5C:
 	ldrb r0, [r0, 0x9]
 	ldr r1, _080BAF18 @ =gFile_graphics_battle_anims_masks_curse_tilemap
 	bl sub_807543C
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BAEAC
@@ -967,7 +967,7 @@ sub_80BAF38: @ 80BAF38
 	movs r0, 0x4A
 	adds r1, r4, 0
 	bl SetGpuReg
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080BAFCA
@@ -1134,7 +1134,7 @@ _080BB0FA:
 	movs r1, 0x2
 	eors r0, r1
 	strb r0, [r2, 0x1]
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080BB12A
@@ -1144,7 +1144,7 @@ _080BB0FA:
 	cmp r0, 0
 	beq _080BB130
 	ldrb r0, [r1, 0x1]
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	bne _080BB130
@@ -1183,7 +1183,7 @@ _080BB130:
 	movs r1, 0
 	movs r2, 0
 	bl SetAnimBgAttribute
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080BB18E
@@ -1192,7 +1192,7 @@ _080BB130:
 	movs r2, 0x1
 	bl SetAnimBgAttribute
 _080BB18E:
-	bl sub_8075290
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BB20A
@@ -1217,7 +1217,7 @@ _080BB18E:
 _080BB1C0:
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0x1
@@ -1369,7 +1369,7 @@ _080BB30C:
 	ldr r1, _080BB354 @ =gFile_graphics_battle_anims_masks_stat_tilemap_2_tilemap
 	bl sub_807543C
 _080BB316:
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BB32E
@@ -1692,7 +1692,7 @@ _080BB582:
 	movs r0, 0x4A
 	adds r1, r4, 0
 	bl SetGpuReg
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080BB5B2
@@ -2234,7 +2234,7 @@ _080BB9BA:
 	beq _080BB9F8
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BB9F8
@@ -2313,7 +2313,7 @@ sub_80BBA20: @ 80BBA20
 	movs r0, 0x2
 	adds r6, r7, 0
 	eors r6, r0
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080BBA82
@@ -2321,7 +2321,7 @@ sub_80BBA20: @ 80BBA20
 	cmp r1, 0
 	beq _080BBA86
 	adds r0, r6, 0
-	bl sub_8072DF0
+	bl IsBattlerSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	bne _080BBA86
@@ -2370,7 +2370,7 @@ _080BBA86:
 	movs r1, 0x20
 	orrs r0, r1
 	strb r0, [r2]
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080BBAFC
@@ -2446,7 +2446,7 @@ _080BBB80:
 	ldrb r0, [r0, 0x9]
 	ldr r1, [sp, 0x58]
 	bl sub_807543C
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BBBA8
@@ -2669,7 +2669,7 @@ _080BBD00:
 	movs r0, 0x4A
 	adds r1, r4, 0
 	bl SetGpuReg
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080BBD7E
@@ -2745,7 +2745,7 @@ sub_80BBDF0: @ 80BBDF0
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080BBE08 @ =gBattleAnimArgs
-	ldr r1, _080BBE0C @ =gUnknown_2022B50
+	ldr r1, _080BBE0C @ =gBattleTerrain
 	ldrb r1, [r1]
 	strh r1, [r2]
 	bl DestroyAnimVisualTask
@@ -2753,7 +2753,7 @@ sub_80BBDF0: @ 80BBDF0
 	bx r0
 	.align 2, 0
 _080BBE08: .4byte gBattleAnimArgs
-_080BBE0C: .4byte gUnknown_2022B50
+_080BBE0C: .4byte gBattleTerrain
 	thumb_func_end sub_80BBDF0
 
 	thumb_func_start sub_80BBE10
@@ -3044,7 +3044,7 @@ sub_80BC02C: @ 80BC02C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -3078,7 +3078,7 @@ sub_80BC060: @ 80BC060
 	ldrb r1, [r1]
 	strb r1, [r2]
 	ldr r2, _080BC088 @ =gBattleAnimTarget
-	ldr r1, _080BC08C @ =gUnknown_2023D6E
+	ldr r1, _080BC08C @ =gEffectBattler
 	ldrb r1, [r1]
 	strb r1, [r2]
 	bl DestroyAnimVisualTask
@@ -3088,7 +3088,7 @@ sub_80BC060: @ 80BC060
 _080BC080: .4byte gBattleAnimAttacker
 _080BC084: .4byte gBattlerTarget
 _080BC088: .4byte gBattleAnimTarget
-_080BC08C: .4byte gUnknown_2023D6E
+_080BC08C: .4byte gEffectBattler
 	thumb_func_end sub_80BC060
 
 	thumb_func_start sub_80BC090
@@ -3151,11 +3151,11 @@ sub_80BC0FC: @ 80BC0FC
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080BC11C @ =gBattleAnimAttacker
-	ldr r1, _080BC120 @ =sBattler_AI
+	ldr r1, _080BC120 @ =gBattlerAttacker
 	ldrb r1, [r1]
 	strb r1, [r2]
 	ldr r2, _080BC124 @ =gBattleAnimTarget
-	ldr r1, _080BC128 @ =gUnknown_2023D6E
+	ldr r1, _080BC128 @ =gEffectBattler
 	ldrb r1, [r1]
 	strb r1, [r2]
 	bl DestroyAnimVisualTask
@@ -3163,9 +3163,9 @@ sub_80BC0FC: @ 80BC0FC
 	bx r0
 	.align 2, 0
 _080BC11C: .4byte gBattleAnimAttacker
-_080BC120: .4byte sBattler_AI
+_080BC120: .4byte gBattlerAttacker
 _080BC124: .4byte gBattleAnimTarget
-_080BC128: .4byte gUnknown_2023D6E
+_080BC128: .4byte gEffectBattler
 	thumb_func_end sub_80BC0FC
 
 	thumb_func_start sub_80BC12C
@@ -3173,7 +3173,7 @@ sub_80BC12C: @ 80BC12C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8073788
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BC144
@@ -3186,7 +3186,7 @@ _080BC144:
 	adds r3, r4
 	lsls r3, 3
 	adds r3, r0
-	ldr r0, _080BC18C @ =gUnknown_2024018
+	ldr r0, _080BC18C @ =gBattleSpritesDataPtr
 	ldr r4, [r0]
 	ldr r2, _080BC190 @ =gBattleAnimAttacker
 	ldrb r0, [r2]
@@ -3217,7 +3217,7 @@ _080BC180:
 	bx r0
 	.align 2, 0
 _080BC188: .4byte gTasks
-_080BC18C: .4byte gUnknown_2024018
+_080BC18C: .4byte gBattleSpritesDataPtr
 _080BC190: .4byte gBattleAnimAttacker
 _080BC194: .4byte sub_80BC19C
 _080BC198: .4byte gUnknown_2037EE2
@@ -3235,7 +3235,7 @@ sub_80BC19C: @ 80BC19C
 	lsls r0, 5
 	cmp r1, r0
 	bne _080BC1E0
-	ldr r0, _080BC1EC @ =gUnknown_2024018
+	ldr r0, _080BC1EC @ =gBattleSpritesDataPtr
 	ldr r1, [r0]
 	ldr r0, _080BC1F0 @ =gBattleAnimAttacker
 	ldrb r3, [r0]
@@ -3264,7 +3264,7 @@ _080BC1E0:
 	bx r0
 	.align 2, 0
 _080BC1E8: .4byte gBattleAnimArgs
-_080BC1EC: .4byte gUnknown_2024018
+_080BC1EC: .4byte gBattleSpritesDataPtr
 _080BC1F0: .4byte gBattleAnimAttacker
 _080BC1F4: .4byte gTasks
 	thumb_func_end sub_80BC19C
@@ -3488,8 +3488,8 @@ _080BC396:
 	bx r1
 	thumb_func_end sub_80BC30C
 
-	thumb_func_start sub_80BC3A0
-sub_80BC3A0: @ 80BC3A0
+	thumb_func_start HandleIntroSlide
+HandleIntroSlide: @ 80BC3A0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -3549,7 +3549,7 @@ _080BC3E8:
 	.align 2, 0
 _080BC414: .4byte gUnknown_83E7CD4
 _080BC418: .4byte gTasks
-	thumb_func_end sub_80BC3A0
+	thumb_func_end HandleIntroSlide
 
 	thumb_func_start sub_80BC41C
 sub_80BC41C: @ 80BC41C
@@ -3707,7 +3707,7 @@ _080BC544:
 	strh r0, [r1, 0xC]
 	movs r0, 0x20
 	strh r0, [r1, 0xE]
-	ldr r2, _080BC56C @ =gUnknown_2023F4C
+	ldr r2, _080BC56C @ =gIntroSlideFlags
 	ldrh r1, [r2]
 	ldr r0, _080BC570 @ =0x0000fffe
 	ands r0, r1
@@ -3715,7 +3715,7 @@ _080BC544:
 	b _080BC6BA
 	.align 2, 0
 _080BC568: .4byte gUnknown_2022986
-_080BC56C: .4byte gUnknown_2023F4C
+_080BC56C: .4byte gIntroSlideFlags
 _080BC570: .4byte 0x0000fffe
 _080BC574:
 	lsls r0, r4, 2
@@ -4075,7 +4075,7 @@ _080BC820:
 	strh r0, [r1, 0xE]
 	movs r0, 0x1
 	strh r0, [r1, 0x12]
-	ldr r2, _080BC850 @ =gUnknown_2023F4C
+	ldr r2, _080BC850 @ =gIntroSlideFlags
 	ldrh r1, [r2]
 	ldr r0, _080BC854 @ =0x0000fffe
 	ands r0, r1
@@ -4084,7 +4084,7 @@ _080BC820:
 	.align 2, 0
 _080BC848: .4byte gUnknown_2022986
 _080BC84C: .4byte gTasks
-_080BC850: .4byte gUnknown_2023F4C
+_080BC850: .4byte gIntroSlideFlags
 _080BC854: .4byte 0x0000fffe
 _080BC858:
 	ldr r0, _080BC890 @ =gTasks
@@ -4398,7 +4398,7 @@ _080BCAC0:
 	strh r0, [r1, 0xE]
 	movs r0, 0x1
 	strh r0, [r1, 0x12]
-	ldr r2, _080BCAF0 @ =gUnknown_2023F4C
+	ldr r2, _080BCAF0 @ =gIntroSlideFlags
 	ldrh r1, [r2]
 	ldr r0, _080BCAF4 @ =0x0000fffe
 	ands r0, r1
@@ -4407,7 +4407,7 @@ _080BCAC0:
 	.align 2, 0
 _080BCAE8: .4byte gUnknown_2022986
 _080BCAEC: .4byte gTasks
-_080BCAF0: .4byte gUnknown_2023F4C
+_080BCAF0: .4byte gIntroSlideFlags
 _080BCAF4: .4byte 0x0000fffe
 _080BCAF8:
 	lsls r0, r5, 2
@@ -4782,7 +4782,7 @@ _080BCDDC:
 	strh r0, [r1, 0xC]
 	movs r0, 0x20
 	strh r0, [r1, 0xE]
-	ldr r2, _080BCE00 @ =gUnknown_2023F4C
+	ldr r2, _080BCE00 @ =gIntroSlideFlags
 	ldrh r1, [r2]
 	ldr r0, _080BCE04 @ =0x0000fffe
 	ands r0, r1
@@ -4790,7 +4790,7 @@ _080BCDDC:
 	b _080BCEE6
 	.align 2, 0
 _080BCDFC: .4byte gUnknown_2022986
-_080BCE00: .4byte gUnknown_2023F4C
+_080BCE00: .4byte gIntroSlideFlags
 _080BCE04: .4byte 0x0000fffe
 _080BCE08:
 	ldr r2, _080BCECC @ =gUnknown_2022986

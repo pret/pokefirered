@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80EB658
-sub_80EB658: @ 80EB658
+	thumb_func_start NewGameInitPCItems
+NewGameInitPCItems: @ 80EB658
 	push {r4-r6,lr}
 	movs r4, 0
 	bl ClearPCItemSlots
@@ -48,7 +48,7 @@ _080EB6A0:
 	bx r0
 	.align 2, 0
 _080EB6A8: .4byte gUnknown_8402220
-	thumb_func_end sub_80EB658
+	thumb_func_end NewGameInitPCItems
 
 	thumb_func_start sub_80EB6AC
 sub_80EB6AC: @ 80EB6AC
@@ -369,7 +369,7 @@ _080EB95C:
 _080EB962:
 	ldr r0, _080EB990 @ =gUnknown_203AAC4
 	ldrb r0, [r0, 0x5]
-	bl sub_810EB6C
+	bl MailboxPC_InitBuffers
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1054,7 +1054,7 @@ sub_80EBEB0: @ 80EBEB0
 	lsls r6, 24
 	lsrs r6, 24
 	movs r0, 0
-	bl sub_810EBAC
+	bl MailboxPC_GetAddWindow
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -1066,7 +1066,7 @@ sub_80EBEB0: @ 80EBEB0
 	bl GetStringWidth
 	adds r5, r0, 0
 	movs r0, 0x1
-	bl sub_810EBAC
+	bl MailboxPC_GetAddWindow
 	movs r3, 0x50
 	subs r3, r5
 	lsrs r0, r3, 31
@@ -1087,7 +1087,7 @@ sub_80EBEB0: @ 80EBEB0
 	bl ScheduleBgCopyTilemapToVram
 	ldr r4, _080EBF38 @ =gUnknown_203AAC4
 	adds r0, r4, 0
-	bl sub_810EC98
+	bl MailboxPC_InitListMenu
 	ldr r2, _080EBF3C @ =gTasks
 	lsls r1, r6, 2
 	adds r1, r6
@@ -1097,7 +1097,7 @@ sub_80EBEB0: @ 80EBEB0
 	lsrs r0, 24
 	strh r0, [r1, 0x1E]
 	adds r0, r4, 0
-	bl sub_810ED80
+	bl MailboxPC_AddScrollIndicatorArrows
 	add sp, 0xC
 	pop {r3}
 	mov r8, r3
@@ -1168,9 +1168,9 @@ _080EBFB6:
 	movs r0, 0x5
 	bl PlaySE
 	movs r0, 0
-	bl sub_810EBE0
+	bl MailboxPC_RemoveWindow
 	movs r0, 0x1
-	bl sub_810EBE0
+	bl MailboxPC_RemoveWindow
 	ldrb r0, [r4, 0x16]
 	adds r1, r7, 0
 	mov r2, r8
@@ -1282,16 +1282,16 @@ sub_80EC094: @ 80EC094
 	ldr r0, _080EC0D4 @ =gTasks+0x8
 	adds r4, r0
 	movs r0, 0
-	bl sub_810EBE0
+	bl MailboxPC_RemoveWindow
 	movs r0, 0x1
-	bl sub_810EBE0
+	bl MailboxPC_RemoveWindow
 	ldrb r0, [r4, 0x16]
 	movs r1, 0
 	movs r2, 0
 	bl DestroyListMenuTask
 	movs r0, 0
 	bl ScheduleBgCopyTilemapToVram
-	bl sub_810EDB0
+	bl MailboxPC_DestroyListMenuBuffer
 	adds r0, r5, 0
 	bl sub_80EB8BC
 	pop {r4,r5}
@@ -1311,7 +1311,7 @@ sub_80EC0D8: @ 80EC0D8
 	lsls r5, 24
 	lsrs r5, 24
 	movs r0, 0x2
-	bl sub_810EBAC
+	bl MailboxPC_GetAddWindow
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -1437,7 +1437,7 @@ sub_80EC1D4: @ 80EC1D4
 	ands r0, r1
 	cmp r0, 0
 	bne _080EC216
-	bl sub_810EDB0
+	bl MailboxPC_DestroyListMenuBuffer
 	bl CleanupOverworldWindowsAndTilemaps
 	ldr r2, _080EC220 @ =gSaveBlock1Ptr
 	ldr r1, _080EC224 @ =gUnknown_203AAC4
@@ -1519,7 +1519,7 @@ _080EC27E:
 	lsrs r4, r0, 24
 	ldr r0, _080EC2AC @ =gUnknown_203AAC4
 	ldrb r0, [r0, 0x5]
-	bl sub_810EB6C
+	bl MailboxPC_InitBuffers
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1752,7 +1752,7 @@ sub_80EC444: @ 80EC444
 	ands r0, r1
 	cmp r0, 0
 	bne _080EC468
-	bl sub_810EDB0
+	bl MailboxPC_DestroyListMenuBuffer
 	bl CleanupOverworldWindowsAndTilemaps
 	bl sub_81273D8
 	adds r0, r4, 0
@@ -1810,7 +1810,7 @@ _080EC4C6:
 	bl sub_80F6E9C
 	ldr r0, _080EC4EC @ =gUnknown_203AAC4
 	ldrb r0, [r0, 0x5]
-	bl sub_810EB6C
+	bl MailboxPC_InitBuffers
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1898,7 +1898,7 @@ sub_80EC574: @ 80EC574
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x2
-	bl sub_810EBE0
+	bl MailboxPC_RemoveWindow
 	movs r0, 0
 	bl ScheduleBgCopyTilemapToVram
 	ldr r1, _080EC59C @ =gTasks

@@ -1,6 +1,6 @@
 #include "global.h"
 #include "bg.h"
-#include "data2.h"
+#include "data.h"
 #include "decompress.h"
 #include "gpu_regs.h"
 #include "graphics.h"
@@ -125,7 +125,7 @@ static const struct MenuAction sItemPcSubmenuOptions[] = {
     {gFameCheckerText_Cancel, {.void_u8 = Task_ItemPcCancel}}
 };
 
-static const struct TextColor gUnknown_8453F8C[] = {
+static const u8 gUnknown_8453F8C[][3] = {
     {0,  1, 2},
     {0,  2, 3},
     {0,  3, 2},
@@ -1111,7 +1111,7 @@ static void unused_ItemPc_AddTextPrinterParameterized(u8 windowId, const u8 * st
 
 static void ItemPc_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorIdx)
 {
-    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, &gUnknown_8453F8C[colorIdx], speed, str);
+    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, gUnknown_8453F8C[colorIdx], speed, str);
 }
 
 static void ItemPc_SetBorderStyleOnWindow(u8 windowId)

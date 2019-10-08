@@ -1153,4 +1153,9 @@ extern const u8 EventScript_SafariRetire[];
 extern const u8 EventScript_SafariWarpOut[];
 extern const u8 EventScript_SafariOutOfBalls[];
 
+extern const u8 EventScript_ItemfinderDigUpUnderfootItem[];
+
+// new_game
+extern const u8 EventScript_ResetAllMapFlags[];
+
 #endif //GUARD_EVENT_SCRIPTS_H

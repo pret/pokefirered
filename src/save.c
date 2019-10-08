@@ -68,7 +68,7 @@ const struct SaveSectionOffsets gSaveSectionOffsets[] =
 
 extern void DoSaveFailedScreen(u8 saveType); // save_failed_screen
 extern void sub_800AB9C(void); // link
-extern bool8 sub_800A4BC(void); // link
+extern bool8 IsLinkTaskFinished(void); // link
 extern void save_serialize_map(void); // fieldmap
 extern void sub_804C1C0(void); // load_save
 extern void sav2_gender2_inplace_and_xFE(void); // load_save
@@ -865,7 +865,7 @@ void sub_80DA634(u8 taskId)
         gTasks[taskId].data[0] = 2;
         break;
     case 2:
-        if (sub_800A4BC())
+        if (IsLinkTaskFinished())
         {
             save_serialize_map();
             gTasks[taskId].data[0] = 3;
@@ -899,7 +899,7 @@ void sub_80DA634(u8 taskId)
         gTasks[taskId].data[0] = 8;
         break;
     case 8:
-        if (sub_800A4BC())
+        if (IsLinkTaskFinished())
         {
             sub_80DA434();
             gTasks[taskId].data[0] = 9;
@@ -910,7 +910,7 @@ void sub_80DA634(u8 taskId)
         gTasks[taskId].data[0] = 10;
         break;
     case 10:
-        if (sub_800A4BC())
+        if (IsLinkTaskFinished())
             gTasks[taskId].data[0]++;
         break;
     case 11:

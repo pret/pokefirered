@@ -152,9 +152,9 @@ static const u16 sOakSpritePalette[] = INCBIN_U16("data/fame_checker/pal_845f580
 static const u16 gUnknown_845F5A0[] = INCBIN_U16("data/fame_checker/pal_845f5a0.gbapal"); // unused?
 static const u16 sSilhouettePalette[] = INCBIN_U16("data/fame_checker/pal_845f5c0.gbapal");
 
-static const struct TextColor sTextColor_White  = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,     TEXT_COLOR_DARK_GREY};
-static const struct TextColor sTextColor_DkGrey = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, 0x03};
-static const struct TextColor sTextColor_Green  = {TEXT_COLOR_TRANSPARENT, 0x06,                 0x07};
+static const u8 sTextColor_White[3]  = {0, 1, 2};
+static const u8 sTextColor_DkGrey[3] = {0, 2, 3};
+static const u8 sTextColor_Green[3]  = {0, 6, 7};
 
 static const u16 sTrainerIdxs[] = {
     FC_NONTRAINER_START + 0, // OAK
@@ -900,7 +900,7 @@ static void PrintUIHelp(u8 state)
     }
     width = GetStringWidth(0, src, 0);
     FillWindowPixelRect(FCWINDOWID_UIHELP, 0x00, 0, 0, 0xc0, 0x10);
-    AddTextPrinterParameterized4(FCWINDOWID_UIHELP, 0, 188 - width, 0, 0, 2, &sTextColor_White, -1, src);
+    AddTextPrinterParameterized4(FCWINDOWID_UIHELP, 0, 188 - width, 0, 0, 2, sTextColor_White, -1, src);
     FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_UIHELP);
 }
 
@@ -1213,10 +1213,10 @@ static void UpdateIconDescriptionBox(u8 whichText)
     gIconDescriptionBoxIsOpen = 1;
     FillWindowPixelRect(FCWINDOWID_ICONDESC, 0x00, 0, 0, 0x58, 0x20);
     width = (0x54 - GetStringWidth(0, sFlavorTextOriginLocationTexts[idx], 0)) / 2;
-    AddTextPrinterParameterized4(FCWINDOWID_ICONDESC, 0, width, 0, 0, 2, &sTextColor_DkGrey, -1, sFlavorTextOriginLocationTexts[idx]);
+    AddTextPrinterParameterized4(FCWINDOWID_ICONDESC, 0, width, 0, 0, 2, sTextColor_DkGrey, -1, sFlavorTextOriginLocationTexts[idx]);
     StringExpandPlaceholders(gStringVar1, sFlavorTextOriginObjectNameTexts[idx]);
     width = (0x54 - GetStringWidth(0, gStringVar1, 0)) / 2;
-    AddTextPrinterParameterized4(FCWINDOWID_ICONDESC, 0, width, 10, 0, 2, &sTextColor_DkGrey, -1, gStringVar1);
+    AddTextPrinterParameterized4(FCWINDOWID_ICONDESC, 0, width, 10, 0, 2, sTextColor_DkGrey, -1, gStringVar1);
     FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_ICONDESC);
 }
 
@@ -1341,14 +1341,14 @@ static void FC_DoMoveCursor(s32 itemIndex, bool8 onInit)
     u16 who;
     ListMenuGetScrollAndRow(sFameCheckerData->listMenuTaskId, &listY, &cursorY);
     who = listY + cursorY;
-    AddTextPrinterParameterized4(FCWINDOWID_LIST, 2, 8, 14 * cursorY + 4, 0, 0, &sTextColor_Green, 0, sListMenuItems[itemIndex].label);
+    AddTextPrinterParameterized4(FCWINDOWID_LIST, 2, 8, 14 * cursorY + 4, 0, 0, sTextColor_Green, 0, sListMenuItems[itemIndex].label);
     if (!onInit)
     {
         if (listY < sFameCheckerData->listMenuTopIdx2)
             sFameCheckerData->listMenuDrawnSelIdx++;
         else if (listY > sFameCheckerData->listMenuTopIdx2 && who != sFameCheckerData->numUnlockedPersons - 1)
             sFameCheckerData->listMenuDrawnSelIdx--;
-        AddTextPrinterParameterized4(FCWINDOWID_LIST, 2, 8, 14 * sFameCheckerData->listMenuDrawnSelIdx + 4, 0, 0, &sTextColor_DkGrey, 0, sListMenuItems[sFameCheckerData->listMenuCurIdx].label);
+        AddTextPrinterParameterized4(FCWINDOWID_LIST, 2, 8, 14 * sFameCheckerData->listMenuDrawnSelIdx + 4, 0, 0, sTextColor_DkGrey, 0, sListMenuItems[sFameCheckerData->listMenuCurIdx].label);
 
     }
     sFameCheckerData->listMenuCurIdx = itemIndex;
@@ -1546,7 +1546,7 @@ static void PlaceListMenuCursor(bool8 isActive)
 {
     u16 cursorY = ListMenuGetYCoordForPrintingArrowCursor(sFameCheckerData->listMenuTaskId);
     if (isActive == TRUE)
-        AddTextPrinterParameterized4(FCWINDOWID_LIST, 2, 0, cursorY, 0, 0, &sTextColor_DkGrey, 0, gFameCheckerText_ListMenuCursor);
+        AddTextPrinterParameterized4(FCWINDOWID_LIST, 2, 0, cursorY, 0, 0, sTextColor_DkGrey, 0, gFameCheckerText_ListMenuCursor);
     else
-        AddTextPrinterParameterized4(FCWINDOWID_LIST, 2, 0, cursorY, 0, 0, &sTextColor_White, 0, gFameCheckerText_ListMenuCursor);
+        AddTextPrinterParameterized4(FCWINDOWID_LIST, 2, 0, cursorY, 0, 0, sTextColor_White, 0, gFameCheckerText_ListMenuCursor);
 }

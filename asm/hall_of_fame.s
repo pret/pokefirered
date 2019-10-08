@@ -138,7 +138,7 @@ _080F1EC4:
 	bne _080F1EF0
 	ldr r0, _080F1EEC @ =sub_80F1DC0
 	bl SetMainCallback2
-	movs r0, 0x8F
+	movs r0, 0x8F @ BGM_FRLG_CONGRATULATIONS_HALL_OF_FAME >> 1
 	lsls r0, 1
 	bl PlayBGM
 	movs r0, 0
@@ -1448,17 +1448,17 @@ sub_80F2934: @ 80F2934
 	movs r0, 0x80
 	lsls r0, 7
 	bl FlagSet
-	ldr r1, _080F2974 @ =gUnknown_2031DD8
+	ldr r1, _080F2974 @ =gDisableMapMusicChangeOnMapLoad
 	movs r0, 0x2
 	strb r0, [r1]
 	movs r2, 0x1
 	negs r2, r2
 	movs r0, 0x6
 	str r0, [sp]
-	movs r0, 0x3
-	movs r1, 0x9
+	movs r0, 0x3 @ MAP_GROUP(INDIGO_PLATEAU_EXTERIOR)
+	movs r1, 0x9 @ MAP_NUM(INDIGO_PLATEAU_EXTERIOR)
 	movs r3, 0xB
-	bl Overworld_SetWarpDestination
+	bl SetWarpDestination
 	bl DoWarp
 	bl ResetInitialPlayerAvatarState
 	add sp, 0x4
@@ -1466,7 +1466,7 @@ sub_80F2934: @ 80F2934
 	bx r0
 	.align 2, 0
 _080F2970: .4byte 0x00004085
-_080F2974: .4byte gUnknown_2031DD8
+_080F2974: .4byte gDisableMapMusicChangeOnMapLoad
 	thumb_func_end sub_80F2934
 
 	thumb_func_start sub_80F2978

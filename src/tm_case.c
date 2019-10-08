@@ -21,7 +21,7 @@
 #include "pokemon_storage_system.h"
 #include "string_util.h"
 #include "party_menu.h"
-#include "data2.h"
+#include "data.h"
 #include "scanline_effect.h"
 #include "sound.h"
 #include "strings.h"
@@ -185,7 +185,7 @@ static const u8 sText_SingleSpace[] = _(" ");
 
 static ALIGNED(4) const u16 sPal3Override[] = {RGB(8, 8, 8), RGB(30, 16, 6)};
 
-static const struct TextColor sTextColors[] = {
+static const u8 sTextColors[][3] = {
     {0, 1, 2},
     {0, 2, 3},
     {0, 3, 6},
@@ -1317,7 +1317,7 @@ static void InitWindowTemplatesAndPals(void)
 
 static void AddTextPrinterParameterized_ColorByIndex(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorIdx)
 {
-    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, &sTextColors[colorIdx], speed, str);
+    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sTextColors[colorIdx], speed, str);
 }
 
 static void TMCase_SetWindowBorder1(u8 windowId)
@@ -1339,7 +1339,7 @@ static void TMCase_PrintMessageWithFollowupTask(u8 taskId, u8 windowId, const u8
 static void PrintStringTMCaseOnWindow3(void)
 {
     u32 distance = 72 - GetStringWidth(1, gText_TMCase, 0);
-    AddTextPrinterParameterized3(3, 1, distance / 2, 1, &sTextColors[0], 0, gText_TMCase);
+    AddTextPrinterParameterized3(3, 1, distance / 2, 1, sTextColors[0], 0, gText_TMCase);
 }
 
 static void DrawMoveInfoUIMarkers(void)

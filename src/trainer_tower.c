@@ -17,7 +17,7 @@
 #include "battle_setup.h"
 #include "battle_transition.h"
 #include "battle.h"
-#include "battle_2.h"
+#include "battle_main.h"
 #include "overworld.h"
 #include "item.h"
 #include "window.h"
@@ -423,7 +423,7 @@ const struct WindowTemplate gUnknown_847A218[] = {
 
 const u32 gUnknown_847A228 = 0x70;  // unused
 
-const struct TextColor gUnknown_847A22C = {0, 2, 3};
+const u8 gUnknown_847A22C[3] = {0, 2, 3};
 
 void (*const gUnknown_847A230[])(void) = {
     sub_815DD44,
@@ -626,12 +626,12 @@ void sub_815DA28(u8 * dest)
     StringCopyN(dest, gUnknown_203F45C->unk_00, 11);
 }
 
-u8 sub_815DA3C(void)
+u8 GetTrainerTowerTrainerFrontSpriteId(void)
 {
     return gFacilityClassToPicIndex[gUnknown_203F45C->unk_3D];
 }
 
-void sub_815DA54(void)
+void InitTrainerTowerBattleStruct(void)
 {
     u16 r10;
     s32 r9;
@@ -660,7 +660,7 @@ void sub_815DA54(void)
     sub_815DD2C();
 }
 
-void sub_815DBDC(void)
+void FreeTrainerTowerBattleStruct(void)
 {
     Free(gUnknown_203F45C);
     gUnknown_203F45C = NULL;
@@ -1122,7 +1122,7 @@ void sub_815E124(u8 taskId)
 
 void sub_815E160(void)
 {
-    gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_FACTORY;
+    gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_TRAINER_TOWER;
     if (gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_002 == 1)
         gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
     gTrainerBattleOpponent_A = 0;
@@ -1433,14 +1433,14 @@ void PrintTrainerTowerRecords(void)
     sub_815DC8C();
     FillWindowPixelRect(0, 0, 0, 0, 0xd8, 0x90);
     sub_815EC0C();
-    AddTextPrinterParameterized3(0, 2, 0x4a, 0, &gUnknown_847A22C, 0, gUnknown_83FE982);
+    AddTextPrinterParameterized3(0, 2, 0x4a, 0, gUnknown_847A22C, 0, gUnknown_83FE982);
 
     for (i = 0; i < 4; i++)
     {
         PRINT_TOWER_TIME(sub_815EDDC(&gSaveBlock1Ptr->unkArray[i].unk4));
         StringExpandPlaceholders(gStringVar4, gUnknown_83FE998);
-        AddTextPrinterParameterized3(windowId, 2, 0x18, 0x24 + 0x14 * i, &gUnknown_847A22C, 0, gUnknown_83FE9C4[i]);
-        AddTextPrinterParameterized3(windowId, 2, 0x60, 0x24 + 0x14 * i, &gUnknown_847A22C, 0, gStringVar4);
+        AddTextPrinterParameterized3(windowId, 2, 0x18, 0x24 + 0x14 * i, gUnknown_847A22C, 0, gUnknown_83FE9C4[i]);
+        AddTextPrinterParameterized3(windowId, 2, 0x60, 0x24 + 0x14 * i, gUnknown_847A22C, 0, gStringVar4);
     }
 
     PutWindowTilemap(windowId);
@@ -1458,7 +1458,7 @@ void sub_815EDF4(u32 * counter, u32 value)
     *counter = value ^ gSaveBlock2Ptr->encryptionKey;
 }
 
-void sub_815EE0C(void)
+void ResetTrainerTowerResults(void)
 {
     s32 i;
 

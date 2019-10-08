@@ -154,14 +154,14 @@ _08107EC8: .4byte sub_80568A8
 	thumb_func_start sub_8107ECC
 sub_8107ECC: @ 8107ECC
 	push {lr}
-	ldr r2, _08107EDC @ =sub_8030AEC
+	ldr r2, _08107EDC @ =SetCB2ToReshowScreenAfterMenu2
 	movs r0, 0x5
 	movs r1, 0x3
 	bl sub_8107DB4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08107EDC: .4byte sub_8030AEC
+_08107EDC: .4byte SetCB2ToReshowScreenAfterMenu2
 	thumb_func_end sub_8107ECC
 
 	thumb_func_start sub_8107EE0
@@ -3922,7 +3922,7 @@ sub_8109CC0: @ 8109CC0
 _08109D14: .4byte gTasks+0x8
 _08109D18:
 	ldrh r0, [r4, 0x2]
-	ldr r1, _08109D30 @ =gUnknown_84163DB
+	ldr r1, _08109D30 @ =gText_TossOutHowManyStrVar1s
 	bl sub_810971C
 	adds r0, r7, 0
 	subs r0, 0x8
@@ -3934,7 +3934,7 @@ _08109D2A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08109D30: .4byte gUnknown_84163DB
+_08109D30: .4byte gText_TossOutHowManyStrVar1s
 _08109D34: .4byte sub_8109DEC
 	thumb_func_end sub_8109CC0
 
@@ -3957,7 +3957,7 @@ sub_8109D38: @ 8109D38
 	movs r3, 0x3
 	bl ConvertIntToDecimalStringN
 	ldr r5, _08109DA4 @ =gStringVar4
-	ldr r1, _08109DA8 @ =gUnknown_8416409
+	ldr r1, _08109DA8 @ =gText_ThrowAwayStrVar2OfThisItemQM
 	adds r0, r5, 0
 	bl StringExpandPlaceholders
 	movs r0, 0x6
@@ -3988,7 +3988,7 @@ sub_8109D38: @ 8109D38
 _08109D9C: .4byte gTasks+0x8
 _08109DA0: .4byte gStringVar2
 _08109DA4: .4byte gStringVar4
-_08109DA8: .4byte gUnknown_8416409
+_08109DA8: .4byte gText_ThrowAwayStrVar2OfThisItemQM
 _08109DAC: .4byte gUnknown_8452F50
 	thumb_func_end sub_8109D38
 
@@ -4133,7 +4133,7 @@ sub_8109EA8: @ 8109EA8
 	movs r3, 0x3
 	bl ConvertIntToDecimalStringN
 	ldr r6, _08109F38 @ =gStringVar4
-	ldr r1, _08109F3C @ =gUnknown_84163F4
+	ldr r1, _08109F3C @ =gText_ThrewAwayStrVar2StrVar1s
 	adds r0, r6, 0
 	bl StringExpandPlaceholders
 	movs r0, 0x6
@@ -4167,7 +4167,7 @@ _08109F2C: .4byte gUnknown_203ACFC
 _08109F30: .4byte gStringVar1
 _08109F34: .4byte gStringVar2
 _08109F38: .4byte gStringVar4
-_08109F3C: .4byte gUnknown_84163F4
+_08109F3C: .4byte gText_ThrewAwayStrVar2StrVar1s
 _08109F40: .4byte sub_8109F44
 	thumb_func_end sub_8109EA8
 
@@ -4706,7 +4706,7 @@ _0810A3C4: .4byte gUnknown_841630F
 _0810A3C8: .4byte sub_810A1D0
 _0810A3CC:
 	movs r0, 0xB6
-	lsls r0, 1
+	lsls r0, 1 @ ITEM_TM_CASE
 	cmp r4, r0
 	bne _0810A3DC
 	ldr r0, _0810A3D8 @ =sub_810A434
@@ -4714,7 +4714,7 @@ _0810A3CC:
 	.align 2, 0
 _0810A3D8: .4byte sub_810A434
 _0810A3DC:
-	ldr r0, _0810A3F0 @ =0x0000016d
+	ldr r0, _0810A3F0 @ =ITEM_BERRY_POUCH
 	cmp r4, r0
 	bne _0810A3F8
 	ldr r0, _0810A3F4 @ =sub_810A448
@@ -4724,7 +4724,7 @@ _0810A3E4:
 	bl ItemMenu_StartFadeToExitCallback
 	b _0810A426
 	.align 2, 0
-_0810A3F0: .4byte 0x0000016d
+_0810A3F0: .4byte 0x0000016d @ ITEM_BERRY_POUCH
 _0810A3F4: .4byte sub_810A448
 _0810A3F8:
 	mov r1, r8
@@ -6124,14 +6124,14 @@ sub_810AF74: @ 810AF74
 	movs r0, 0x4
 	movs r1, 0x1
 	bl AddBagItem
-	ldr r2, _0810AF98 @ =sub_8030AEC
+	ldr r2, _0810AF98 @ =SetCB2ToReshowScreenAfterMenu2
 	movs r0, 0x6
 	movs r1, 0
 	bl sub_8107DB4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810AF98: .4byte sub_8030AEC
+_0810AF98: .4byte SetCB2ToReshowScreenAfterMenu2
 	thumb_func_end sub_810AF74
 
 	thumb_func_start sub_810AF9C
@@ -6348,13 +6348,13 @@ sub_810B108: @ 810B108
 	.align 2, 0
 _0810B15C: .4byte CB2_ReturnToTeachyTV
 _0810B160:
-	ldr r2, _0810B168 @ =sub_8030AEC
+	ldr r2, _0810B168 @ =SetCB2ToReshowScreenAfterMenu2
 	movs r0, 0x7
 	b _0810B170
 	.align 2, 0
-_0810B168: .4byte sub_8030AEC
+_0810B168: .4byte SetCB2ToReshowScreenAfterMenu2
 _0810B16C:
-	ldr r2, _0810B17C @ =sub_8030AEC
+	ldr r2, _0810B17C @ =SetCB2ToReshowScreenAfterMenu2
 	movs r0, 0x8
 _0810B170:
 	movs r1, 0
@@ -6363,7 +6363,7 @@ _0810B170:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810B17C: .4byte sub_8030AEC
+_0810B17C: .4byte SetCB2ToReshowScreenAfterMenu2
 	thumb_func_end sub_810B108
 
 	thumb_func_start sub_810B180

@@ -6,43 +6,14 @@
 
 	.section .rodata
 
-	.align 2
-gUnknown_8231EC4:: @ 8231EC4
-	.incbin "baserom.gba", 0x231EC4, 0x20
+	.align 2, 0
+gUnknown_8234614::
+	.string "$"
 
-	.align 2
-gWirelessLinkDisplay4bpp:: @ 8231EE4
-	.incbin "graphics/interface/wireless_link_display.4bpp.lz"
+gUnknown_8234615::
+	.string "\n$"
 
-	.align 2
-gWirelessLinkDisplayBin:: @ 823238C
-	.incbin "graphics/interface/wireless_link_display.bin.lz"
-
-	.align 2
-gUnknown_8232578:: @ 8232578
-	.incbin "baserom.gba", 0x232578, 0x20
-
-gUnknown_8232598:: @ 8232598
-	.incbin "baserom.gba", 0x232598, 0x2000
-
-gUnknown_8234598:: @ 8234598
-	.incbin "baserom.gba", 0x234598, 0x28
-
-gUnknown_82345C0:: @ 82345C0
-	.incbin "baserom.gba", 0x2345C0, 0x10
-
-gUnknown_82345D0:: @ 82345D0
-	.incbin "baserom.gba", 0x2345D0, 0x18
-
-gUnknown_82345E8:: @ 82345E8
-	.incbin "baserom.gba", 0x2345E8, 0x8
-
-gUnknown_82345F0:: @ 82345F0
-	.incbin "baserom.gba", 0x2345F0, 0x20
-
-gUnknown_8234610:: @ 8234610
-	.incbin "baserom.gba", 0x234610, 0x8
-
+	.align 2, 0
 gUnknown_8234618:: @ 8234618
 	.incbin "baserom.gba", 0x234618, 0x8
 
@@ -145,7 +116,7 @@ gMonShinyPaletteTable:: @ 82380CC
 gTrainerFrontAnimsPtrTable:: @ 82390DC
 	.incbin "baserom.gba", 0x2390DC, 0x250
 
-gUnknown_823932C:: @ 823932C
+gTrainerFrontPicCoords:: @ 823932C
 	.incbin "baserom.gba", 0x23932C, 0x250
 
 gTrainerFrontPicTable:: @ 823957C
@@ -157,16 +128,16 @@ gTrainerFrontPicPaletteTable:: @ 8239A1C
 gTrainerBackAnimsPtrTable:: @ 8239F74
 	.incbin "baserom.gba", 0x239F74, 0x18
 
-gUnknown_8239F8C:: @ 8239F8C
+gTrainerBackPicCoords:: @ 8239F8C
 	.incbin "baserom.gba", 0x239F8C, 0x18
 
 gTrainerBackPicTable:: @ 8239FA4
 	.incbin "baserom.gba", 0x239FA4, 0x30
 
-gUnknown_8239FD4:: @ 8239FD4
+gTrainerBackPicPaletteTable:: @ 8239FD4
 	.incbin "baserom.gba", 0x239FD4, 0x30
 
-gUnknown_823A004:: @ 823A004
+gEnemyMonElevation:: @ 823A004
 	.incbin "baserom.gba", 0x23A004, 0x4554
 
 gTrainerClassNames:: @ 823E558
@@ -233,13 +204,13 @@ gUnknown_824F020:: @ 824F020
 gUnknown_824F048:: @ 824F048
 	.incbin "baserom.gba", 0x24F048, 0x8
 
-gUnknown_824F050:: @ 824F050
+gTypeEffectiveness:: @ 824F050
 	.incbin "baserom.gba", 0x24F050, 0x150
 
-gUnknown_824F1A0:: @ 824F1A0
+gTypeNames:: @ 824F1A0
 	.incbin "baserom.gba", 0x24F1A0, 0x80
 
-gUnknown_824F220:: @ 824F220
+gTrainerMoneyTable:: @ 824F220
 	.incbin "baserom.gba", 0x24F220, 0x8E8
 
 gUnknown_824FB08:: @ 824FB08
@@ -254,137 +225,34 @@ gUnknown_8250038:: @ 8250038
 gUnknown_8250070:: @ 8250070
 	.incbin "baserom.gba", 0x250070, 0x24
 
-gUnknown_8250094:: @ 8250094
+gStatusConditionString_PoisonJpn:: @ 8250094
 	.incbin "baserom.gba", 0x250094, 0x8
 
-gUnknown_825009C:: @ 825009C
+gStatusConditionString_SleepJpn:: @ 825009C
 	.incbin "baserom.gba", 0x25009C, 0x8
 
-gUnknown_82500A4:: @ 82500A4
+gStatusConditionString_ParalysisJpn:: @ 82500A4
 	.incbin "baserom.gba", 0x2500A4, 0x8
 
-gUnknown_82500AC:: @ 82500AC
+gStatusConditionString_BurnJpn:: @ 82500AC
 	.incbin "baserom.gba", 0x2500AC, 0x8
 
-gUnknown_82500B4:: @ 82500B4
+gStatusConditionString_IceJpn:: @ 82500B4
 	.incbin "baserom.gba", 0x2500B4, 0x8
 
-gUnknown_82500BC:: @ 82500BC
+gStatusConditionString_ConfusionJpn:: @ 82500BC
 	.incbin "baserom.gba", 0x2500BC, 0x8
 
-gUnknown_82500C4:: @ 82500C4
+gStatusConditionString_LoveJpn:: @ 82500C4
 	.incbin "baserom.gba", 0x2500C4, 0x8
 
 gUnknown_82500CC:: @ 82500CC
 	.incbin "baserom.gba", 0x2500CC, 0x38
 
-gUnknown_8250104:: @ 8250104
-	.incbin "baserom.gba", 0x250104, 0x18
+	.section .rodata.8260270
 
-gUnknown_825011C:: @ 825011C
-	.incbin "baserom.gba", 0x25011C, 0x3E0
-
-gUnknown_82504FC:: @ 82504FC
-	.incbin "baserom.gba", 0x2504FC, 0x34
-
-gUnknown_8250530:: @ 8250530
-	.incbin "baserom.gba", 0x250530, 0xC
-
-gUnknown_825053C:: @ 825053C
-	.incbin "baserom.gba", 0x25053C, 0xF0
-
-gUnknown_825062C:: @ 825062C
-	.incbin "baserom.gba", 0x25062C, 0xA4
-
-gUnknown_82506D0:: @ 82506D0
-	.incbin "baserom.gba", 0x2506D0, 0x20
-
-gUnknown_82506F0:: @ 82506F0
-	.incbin "baserom.gba", 0x2506F0, 0xD8
-
-gUnknown_82507C8:: @ 82507C8
-	.incbin "baserom.gba", 0x2507C8, 0x18
-
-gUnknown_82507E0:: @ 82507E0
-	.incbin "baserom.gba", 0x2507E0, 0x8
-
-gUnknown_82507E8:: @ 82507E8
-	.incbin "baserom.gba", 0x2507E8, 0x28
-
-gUnknown_8250810:: @ 8250810
-	.incbin "baserom.gba", 0x250810, 0xC
-
-gUnknown_825081C:: @ 825081C
-	.incbin "baserom.gba", 0x25081C, 0x14
-
-gUnknown_8250830:: @ 8250830
-	.incbin "baserom.gba", 0x250830, 0x18
-
-gUnknown_8250848:: @ 8250848
-	.incbin "baserom.gba", 0x250848, 0x40
-
-gUnknown_8250888:: @ 8250888
-	.incbin "baserom.gba", 0x250888, 0xA
-
-gUnknown_8250892:: @ 8250892
-	.incbin "baserom.gba", 0x250892, 0xA
-
-gUnknown_825089C:: @ 825089C
-	.incbin "baserom.gba", 0x25089C, 0xE4
-
-gUnknown_8250980:: @ 8250980
-	.incbin "baserom.gba", 0x250980, 0xC
-
-gUnknown_825098C:: @ 825098C
-	.incbin "baserom.gba", 0x25098C, 0x8
-
-gUnknown_8250994:: @ 8250994
-	.incbin "baserom.gba", 0x250994, 0x60
-
-gUnknown_82509F4:: @ 82509F4
-	.incbin "baserom.gba", 0x2509F4, 0x18
-
-gUnknown_8250A0C:: @ 8250A0C
-	.incbin "baserom.gba", 0x250A0C, 0x10
-
-gUnknown_8250A1C:: @ 8250A1C
-	.incbin "baserom.gba", 0x250A1C, 0x18
-
-gUnknown_8250A34:: @ 8250A34
-	.incbin "baserom.gba", 0x250A34, 0xEC
-
-gUnknown_8250B20:: @ 8250B20
-	.incbin "baserom.gba", 0x250B20, 0xE4
-
-	.section .rodata.825EF0C
-
-	.align 2
-gUnknown_8260208:: @ 8260208
-	.incbin "baserom.gba", 0x260208, 0x8
-
-gUnknown_8260210:: @ 8260210
-	.incbin "baserom.gba", 0x260210, 0x8
-
-gUnknown_8260218:: @ 8260218
-	.incbin "baserom.gba", 0x260218, 0x8
-
-gUnknown_8260220:: @ 8260220
-	.incbin "baserom.gba", 0x260220, 0x8
-
-gUnknown_8260228:: @ 8260228
-	.incbin "baserom.gba", 0x260228, 0x8
-
-gUnknown_8260230:: @ 8260230
-	.incbin "baserom.gba", 0x260230, 0x8
-
-gUnknown_8260238:: @ 8260238
-	.incbin "baserom.gba", 0x260238, 0x8
-
-gUnknown_8260240:: @ 8260240
-	.incbin "baserom.gba", 0x260240, 0x20
-
-gUnknown_8260260:: @ 8260260
-	.incbin "baserom.gba", 0x260260, 0x18
+gUnknown_8260270:: @ 8260270
+	.incbin "baserom.gba", 0x260270, 0x8
 
 gUnknown_8260278:: @ 8260278
 	.incbin "baserom.gba", 0x260278, 0x30

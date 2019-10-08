@@ -63,7 +63,7 @@ struct EggHatchData
     u8 unused_9;
     u8 unused_A;
     u16 species;
-    struct TextColor textColor;
+    u8 textColor[3];
 };
 
 extern const u8 gText_MaleSymbol4[];
@@ -168,215 +168,215 @@ static const u8 sEggHatchTiles[] = INCBIN_U8("graphics/misc/egg_hatch.4bpp");
 static const u8 sEggShardTiles[] = INCBIN_U8("graphics/misc/egg_shard.4bpp");
 
 static const struct OamData sOamData_EggHatch =
-    {
-        .y = 0,
-        .affineMode = 0,
-        .objMode = 0,
-        .mosaic = 0,
-        .bpp = 0,
-        .shape = SPRITE_SHAPE(32x32),
-        .x = 0,
-        .matrixNum = 0,
-        .size = SPRITE_SIZE(32x32),
-        .tileNum = 0,
-        .priority = 1,
-        .paletteNum = 0,
-        .affineParam = 0,
-    };
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = SPRITE_SHAPE(32x32),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(32x32),
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
 
 static const union AnimCmd sSpriteAnim_EggHatch0[] =
-    {
-        ANIMCMD_FRAME(0, 5),
-        ANIMCMD_END
-    };
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END
+};
 
 static const union AnimCmd sSpriteAnim_EggHatch1[] =
-    {
-        ANIMCMD_FRAME(16, 5),
-        ANIMCMD_END
-    };
+{
+    ANIMCMD_FRAME(16, 5),
+    ANIMCMD_END
+};
 
 static const union AnimCmd sSpriteAnim_EggHatch2[] =
-    {
-        ANIMCMD_FRAME(32, 5),
-        ANIMCMD_END
-    };
+{
+    ANIMCMD_FRAME(32, 5),
+    ANIMCMD_END
+};
 
 static const union AnimCmd sSpriteAnim_EggHatch3[] =
-    {
-        ANIMCMD_FRAME(48, 5),
-        ANIMCMD_END
-    };
+{
+    ANIMCMD_FRAME(48, 5),
+    ANIMCMD_END
+};
 
 static const union AnimCmd *const sSpriteAnimTable_EggHatch[] =
-    {
-        sSpriteAnim_EggHatch0,
-        sSpriteAnim_EggHatch1,
-        sSpriteAnim_EggHatch2,
-        sSpriteAnim_EggHatch3,
-    };
+{
+    sSpriteAnim_EggHatch0,
+    sSpriteAnim_EggHatch1,
+    sSpriteAnim_EggHatch2,
+    sSpriteAnim_EggHatch3,
+};
 
 static const struct SpriteSheet sEggHatch_Sheet =
-    {
-        .data = sEggHatchTiles,
-        .size = 2048,
-        .tag = 12345,
-    };
+{
+    .data = sEggHatchTiles,
+    .size = 2048,
+    .tag = 12345,
+};
 
 static const struct SpriteSheet sEggShards_Sheet =
-    {
-        .data = sEggShardTiles,
-        .size = 128,
-        .tag = 23456,
-    };
+{
+    .data = sEggShardTiles,
+    .size = 128,
+    .tag = 23456,
+};
 
 static const struct SpritePalette sEgg_SpritePalette =
-    {
-        .data = sEggPalette,
-        .tag = 54321
-    };
+{
+    .data = sEggPalette,
+    .tag = 54321
+};
 
 static const struct SpriteTemplate sSpriteTemplate_EggHatch =
-    {
-        .tileTag = 12345,
-        .paletteTag = 54321,
-        .oam = &sOamData_EggHatch,
-        .anims = sSpriteAnimTable_EggHatch,
-        .images = NULL,
-        .affineAnims = gDummySpriteAffineAnimTable,
-        .callback = SpriteCallbackDummy
-    };
+{
+    .tileTag = 12345,
+    .paletteTag = 54321,
+    .oam = &sOamData_EggHatch,
+    .anims = sSpriteAnimTable_EggHatch,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
 
 static const struct OamData sOamData_EggShard =
-    {
-        .y = 0,
-        .affineMode = 0,
-        .objMode = 0,
-        .mosaic = 0,
-        .bpp = 0,
-        .shape = SPRITE_SHAPE(8x8),
-        .x = 0,
-        .matrixNum = 0,
-        .size = SPRITE_SIZE(8x8),
-        .tileNum = 0,
-        .priority = 2,
-        .paletteNum = 0,
-        .affineParam = 0,
-    };
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = SPRITE_SHAPE(8x8),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(8x8),
+    .tileNum = 0,
+    .priority = 2,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
 
 static const union AnimCmd sSpriteAnim_EggShard0[] =
-    {
-        ANIMCMD_FRAME(0, 5),
-        ANIMCMD_END
-    };
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END
+};
 
 static const union AnimCmd sSpriteAnim_EggShard1[] =
-    {
-        ANIMCMD_FRAME(1, 5),
-        ANIMCMD_END
-    };
+{
+    ANIMCMD_FRAME(1, 5),
+    ANIMCMD_END
+};
 
 static const union AnimCmd sSpriteAnim_EggShard2[] =
-    {
-        ANIMCMD_FRAME(2, 5),
-        ANIMCMD_END
-    };
+{
+    ANIMCMD_FRAME(2, 5),
+    ANIMCMD_END
+};
 
 static const union AnimCmd sSpriteAnim_EggShard3[] =
-    {
-        ANIMCMD_FRAME(3, 5),
-        ANIMCMD_END
-    };
+{
+    ANIMCMD_FRAME(3, 5),
+    ANIMCMD_END
+};
 
 static const union AnimCmd *const sSpriteAnimTable_EggShard[] =
-    {
-        sSpriteAnim_EggShard0,
-        sSpriteAnim_EggShard1,
-        sSpriteAnim_EggShard2,
-        sSpriteAnim_EggShard3,
-    };
+{
+    sSpriteAnim_EggShard0,
+    sSpriteAnim_EggShard1,
+    sSpriteAnim_EggShard2,
+    sSpriteAnim_EggShard3,
+};
 
 static const struct SpriteTemplate sSpriteTemplate_EggShard =
-    {
-        .tileTag = 23456,
-        .paletteTag = 54321,
-        .oam = &sOamData_EggShard,
-        .anims = sSpriteAnimTable_EggShard,
-        .images = NULL,
-        .affineAnims = gDummySpriteAffineAnimTable,
-        .callback = SpriteCB_EggShard
-    };
+{
+    .tileTag = 23456,
+    .paletteTag = 54321,
+    .oam = &sOamData_EggShard,
+    .anims = sSpriteAnimTable_EggShard,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_EggShard
+};
 
 static const struct BgTemplate sBgTemplates_EggHatch[2] =
-    {
-        {
-            .bg = 0,
-            .charBaseIndex = 2,
-            .mapBaseIndex = 24,
-            .screenSize = 3,
-            .paletteMode = 0,
-            .priority = 0,
-            .baseTile = 0
-        },
-
-        {
-            .bg = 1,
-            .charBaseIndex = 0,
-            .mapBaseIndex = 8,
-            .screenSize = 1,
-            .paletteMode = 0,
-            .priority = 2,
-            .baseTile = 0
-        },
-    };
-
-static const struct WindowTemplate sWinTemplates_EggHatch[2] =
-    {
-        {
-            .bg = 0,
-            .tilemapLeft = 2,
-            .tilemapTop = 15,
-            .width = 26,
-            .height = 4,
-            .paletteNum = 0,
-            .baseBlock = 64
-        },
-        DUMMY_WIN_TEMPLATE
-    };
-
-static const struct WindowTemplate sYesNoWinTemplate =
+{
     {
         .bg = 0,
-        .tilemapLeft = 21,
-        .tilemapTop = 9,
-        .width = 6,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 24,
+        .screenSize = 3,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0
+    },
+
+    {
+        .bg = 1,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 8,
+        .screenSize = 1,
+        .paletteMode = 0,
+        .priority = 2,
+        .baseTile = 0
+    },
+};
+
+static const struct WindowTemplate sWinTemplates_EggHatch[2] =
+{
+    {
+        .bg = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 15,
+        .width = 26,
         .height = 4,
-        .paletteNum = 15,
-        .baseBlock = 424
-    };
+        .paletteNum = 0,
+        .baseBlock = 64
+    },
+    DUMMY_WIN_TEMPLATE
+};
+
+static const struct WindowTemplate sYesNoWinTemplate =
+{
+    .bg = 0,
+    .tilemapLeft = 21,
+    .tilemapTop = 9,
+    .width = 6,
+    .height = 4,
+    .paletteNum = 15,
+    .baseBlock = 424
+};
 
 static const s16 sEggShardVelocities[][2] =
-    {
-        {Q_8_8(-1.5),       Q_8_8(-3.75)},
-        {Q_8_8(-5),         Q_8_8(-3)},
-        {Q_8_8(3.5),        Q_8_8(-3)},
-        {Q_8_8(-4),         Q_8_8(-3.75)},
-        {Q_8_8(2),          Q_8_8(-1.5)},
-        {Q_8_8(-0.5),       Q_8_8(-6.75)},
-        {Q_8_8(5),          Q_8_8(-2.25)},
-        {Q_8_8(-1.5),       Q_8_8(-3.75)},
-        {Q_8_8(4.5),        Q_8_8(-1.5)},
-        {Q_8_8(-1),         Q_8_8(-6.75)},
-        {Q_8_8(4),          Q_8_8(-2.25)},
-        {Q_8_8(-3.5),       Q_8_8(-3.75)},
-        {Q_8_8(1),          Q_8_8(-1.5)},
-        {Q_8_8(-3.515625),  Q_8_8(-6.75)},
-        {Q_8_8(4.5),        Q_8_8(-2.25)},
-        {Q_8_8(-0.5),       Q_8_8(-7.5)},
-        {Q_8_8(1),          Q_8_8(-4.5)},
-        {Q_8_8(-2.5),       Q_8_8(-2.25)},
-        {Q_8_8(2.5),        Q_8_8(-7.5)},
-    };
+{
+    {Q_8_8(-1.5),       Q_8_8(-3.75)},
+    {Q_8_8(-5),         Q_8_8(-3)},
+    {Q_8_8(3.5),        Q_8_8(-3)},
+    {Q_8_8(-4),         Q_8_8(-3.75)},
+    {Q_8_8(2),          Q_8_8(-1.5)},
+    {Q_8_8(-0.5),       Q_8_8(-6.75)},
+    {Q_8_8(5),          Q_8_8(-2.25)},
+    {Q_8_8(-1.5),       Q_8_8(-3.75)},
+    {Q_8_8(4.5),        Q_8_8(-1.5)},
+    {Q_8_8(-1),         Q_8_8(-6.75)},
+    {Q_8_8(4),          Q_8_8(-2.25)},
+    {Q_8_8(-3.5),       Q_8_8(-3.75)},
+    {Q_8_8(1),          Q_8_8(-1.5)},
+    {Q_8_8(-3.515625),  Q_8_8(-6.75)},
+    {Q_8_8(4.5),        Q_8_8(-2.25)},
+    {Q_8_8(-0.5),       Q_8_8(-7.5)},
+    {Q_8_8(1),          Q_8_8(-4.5)},
+    {Q_8_8(-2.5),       Q_8_8(-2.25)},
+    {Q_8_8(2.5),        Q_8_8(-7.5)},
+};
 
 // code
 
@@ -2202,8 +2202,8 @@ static void CreateEggShardSprite(u8 x, u8 y, s16 data1, s16 data2, s16 data3, u8
 static void EggHatchPrintMessage(u8 windowId, u8* string, u8 x, u8 y, u8 speed)
 {
     FillWindowPixelBuffer(windowId, 0xFF);
-    sEggHatchData->textColor.fgColor = 0;
-    sEggHatchData->textColor.bgColor = 5;
-    sEggHatchData->textColor.shadowColor = 6;
-    AddTextPrinterParameterized4(windowId, 3, x, y, 1, 1, &sEggHatchData->textColor, speed, string);
+    sEggHatchData->textColor[0] = 0;
+    sEggHatchData->textColor[1] = 5;
+    sEggHatchData->textColor[2] = 6;
+    AddTextPrinterParameterized4(windowId, 3, x, y, 1, 1, sEggHatchData->textColor, speed, string);
 }

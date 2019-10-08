@@ -447,21 +447,21 @@ u16 sub_80F8318(u8 mapsec)
 {
     u16 windowId;
     u32 xctr;
-    struct TextColor color[0];
+    u8 color[0];
 
     windowId = AddWindow(&sMapNameWindow);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     PutWindowTilemap(windowId);
-    color->fgColor = 1; // Access violation
-    color->bgColor = 4; // Access violation
-    color->shadowColor = 3; // Access violation
+    color[0] = 1; // Access violation
+    color[1] = 4; // Access violation
+    color[2] = 3; // Access violation
     GetMapName(gStringVar4, mapsec, 0);
     xctr = 104 - GetStringWidth(2, gStringVar4, 0);
     AddTextPrinterParameterized4(windowId, 2, xctr / 2, 2, 0, 0, color/* Access violation */, -1, gStringVar4);
     return windowId;
 }
 
-bool8 sub_80F83B0(void)
+bool32 sub_80F83B0(void)
 {
     if (FuncIsActiveTask(sub_80F83D0) == TRUE)
     {

@@ -1435,7 +1435,7 @@ Text_1A644F:: @ 81A644F
 	.string "once. Is that okay?$"
 
 
-gUnknown_81A6481:: @ 81A6481
+EventScript_ResetAllMapFlags:: @ 81A6481
 	setflag FLAG_0x02B
 	setflag FLAG_0x02C
 	setflag FLAG_0x033
@@ -1485,14 +1485,14 @@ gUnknown_81A6481:: @ 81A6481
 	setflag FLAG_0x09F
 	setflag FLAG_0x0A0
 	setflag FLAG_0x0AE
-	setvar VAR_MIRAGE_RND_L, 500
+	setvar VAR_0x4025, 500
 	end
 
 EventScript_1A651A:: @ 81A651A
 	clearflag FLAG_0x09D
 	call EventScript_1A6551
 	special sub_81130A8
-	specialvar VAR_RESULT, sub_806E25C
+	specialvar VAR_RESULT, IsNationalPokedexEnabled
 	compare_var_to_value VAR_RESULT, 0
 	call_if 1, EventScript_1A653B
 	call EventScript_1A6541
@@ -1576,27 +1576,23 @@ EventScript_1A661D:: @ 81A661D
 	waitmessage
 	applymovement VAR_LAST_TALKED, Movement_1A666C
 	waitmovement 0
-	loadword 0, Text_1A5511
-	callstd 4
+	msgbox Text_1A5511
 	return
 
 EventScript_1A6636:: @ 81A6636
 	checkflag 2114
 	goto_if_eq EventScript_1A661D
-	loadword 0, Text_1A552B
-	callstd 4
+	msgbox Text_1A552B
 	setflag 2114
 	message Text_1BCCCA
 	waitmessage
 	applymovement VAR_LAST_TALKED, Movement_1A666C
 	waitmovement 0
-	loadword 0, Text_1A5511
-	callstd 4
+	msgbox Text_1A5511
 	return
 
 EventScript_1A6663:: @ 81A6663
-	loadword 0, Text_1A5511
-	callstd 4
+	msgbox Text_1A5511
 	return
 
 Movement_1A666C:: @ 81A666C
@@ -1681,8 +1677,7 @@ EventScript_1A6749:: @ 81A6749
 	message Text_1A51F6
 	waitfanfare
 	waitmessage
-	loadword 0, gUnknown_81A5218
-	callstd 4
+	msgbox gUnknown_81A5218
 	setvar VAR_RESULT, 1
 	return
 
@@ -1717,8 +1712,7 @@ EventScript_1A6795:: @ 81A6795
 	message Text_1A52F0
 	waitfanfare
 	waitmessage
-	loadword 0, gUnknown_81A532F
-	callstd 4
+	msgbox gUnknown_81A532F
 	setvar VAR_RESULT, 1
 	return
 
@@ -1755,8 +1749,7 @@ EventScript_1A67EE:: @ 81A67EE
 	call_if 1, EventScript_1A6827
 	waitfanfare
 	waitmessage
-	loadword 0, gUnknown_81A5218
-	callstd 4
+	msgbox gUnknown_81A5218
 	return
 
 EventScript_1A6821:: @ 81A6821
@@ -1768,15 +1761,100 @@ EventScript_1A6827:: @ 81A6827
 	return
 
 EventScript_1A682D:: @ 81A682D
-	loadword 0, Text_1A51F6
-	callstd 4
-	loadword 0, gUnknown_81A5242
-	callstd 4
+	msgbox Text_1A51F6
+	msgbox gUnknown_81A5242
 	setvar VAR_RESULT, 0
 	return
 
-gUnknown_81A6843:: @ 81A6843
-	.incbin "baserom.gba", 0x1A6843, 0x112
+EventScript_PickUpHiddenItem:: @ 81A6843
+	lockall
+	textcolor 3
+	waitse
+	compare_var_to_value VAR_0x8005, 0
+	goto_if_eq EventScript_PickUpHiddenCoins
+	call EventScript_GiveItem
+	compare_var_to_value VAR_0x8007, 1
+	goto_if_eq EventScript_ItemInPocketMessage
+	compare_var_to_value VAR_0x8007, 0
+	goto_if_eq EventScript_BagIsFullMessage
+	end
+
+EventScript_GiveItem::
+	additem VAR_0x8005, VAR_0x8006
+	copyvar VAR_0x8007, VAR_RESULT
+	getitemname 1, VAR_0x8005
+	checkitemtype VAR_0x8005
+	call EventScript_1A66BC
+	return
+
+EventScript_ItemInPocketMessage::
+	compare_var_to_value VAR_0x8006, 1
+	call_if 1, EventScript_FoundSingleItemMessage
+	compare_var_to_value VAR_0x8006, 1
+	call_if 5, EventScript_FoundMultipleItemsMessage
+	waitfanfare
+	waitmessage
+	msgbox gUnknown_81A5218
+	special Special_SetHiddenItemFlag
+	releaseall
+	end
+
+EventScript_FoundSingleItemMessage::
+	message Text_1A5231
+	return
+
+EventScript_FoundCoinsMessage::
+	getnumberstring 0, VAR_0x8006
+	message Text_1A525C
+	return
+
+EventScript_FoundMultipleItemsMessage::
+	getnumberstring 0, VAR_0x8006
+	message Text_1A52DD
+	return
+
+EventScript_BagIsFullMessage::
+	msgbox Text_1A5231
+	msgbox gUnknown_81A5242
+	setvar VAR_RESULT, 0
+	releaseall
+	end
+
+EventScript_PickUpHiddenCoins::
+	checkflag FLAG_GOT_COIN_CASE
+	goto_if 0, EventScript_HiddenCoinsButNoCoinCase
+	checkcoins VAR_RESULT
+	specialvar VAR_RESULT, Special_CheckAddCoins
+	compare_var_to_value VAR_RESULT, 0
+	goto_if_eq EventScript_HiddenCoinsButTheCoinCaseIsFull
+	givecoins VAR_0x8006
+	getstdstring 1, 0x17
+	call EventScript_1A6764
+	call EventScript_FoundCoinsMessage
+	waitfanfare
+	waitmessage
+	msgbox Text_1A526C
+	special Special_SetHiddenItemFlag
+	releaseall
+	end
+
+EventScript_HiddenCoinsButTheCoinCaseIsFull::
+	getnumberstring 0, VAR_0x8006
+	getstdstring 1, 0x17
+	msgbox Text_1A525C
+	msgbox Text_1A5294
+	setvar VAR_RESULT, 0
+	releaseall
+	end
+
+EventScript_HiddenCoinsButNoCoinCase::
+	getnumberstring 0, VAR_0x8006
+	getstdstring 1, 0x17
+	msgbox Text_1A525C
+	msgbox Text_1A52B4
+	setvar VAR_RESULT, 0
+	releaseall
+	end
 
 gUnknown_81A6955:: @ 81A6955
 	.incbin "baserom.gba", 0x1A6955, 0x173
@@ -2275,8 +2353,33 @@ ViridianCity_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
 VermilionCity_PokemonCenter_1F_EventScript_1A8D08:: @ 81A8D08
 	.incbin "baserom.gba", 0x1A8D08, 0x41
 
-gUnknown_81A8D49:: @ 81A8D49
-	.incbin "baserom.gba", 0x1A8D49, 0x4E
+EventScript_ItemfinderDigUpUnderfootItem:: @ 81A8D49
+	lockall
+	textcolor 3
+	waitse
+	call EventScript_GiveItem
+	compare_var_to_value VAR_0x8007, 1
+	goto_if_eq EventScript_DigUpItemPutInPocket
+	compare_var_to_value VAR_0x8007, 0
+	goto_if_eq EventScript_DigUpItemBagIsFull
+	end
+
+EventScript_DigUpItemPutInPocket::
+	message Text_1A5700
+	waitfanfare
+	waitmessage
+	delay 60
+	msgbox gUnknown_81A5218
+	special Special_SetHiddenItemFlag
+	releaseall
+	end
+
+EventScript_DigUpItemBagIsFull::
+	msgbox Text_1A5700
+	msgbox gUnknown_81A5242
+	setvar VAR_RESULT, 0
+	releaseall
+	end
 
 gUnknown_81A8D97:: @ 81A8D97
 	.incbin "baserom.gba", 0x1A8D97, 0x41

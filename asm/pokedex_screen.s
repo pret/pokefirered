@@ -49,7 +49,7 @@ sub_810250C: @ 810250C
 	mov r6, r8
 	push {r6}
 	sub sp, 0xC
-	bl sub_806E25C
+	bl IsNationalPokedexEnabled
 	lsls r0, 24
 	lsrs r6, r0, 24
 	bl m4aSoundVSyncOff
@@ -594,7 +594,7 @@ _081029D0:
 	adds r1, 0x62
 	movs r2, 0
 	bl ListMenuGetScrollAndRow
-	bl sub_806E25C
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	beq _081029F4
 	ldr r0, _081029F0 @ =gUnknown_84520E4
@@ -915,7 +915,7 @@ sub_8102C28: @ 8102C28
 	bl AddWindow
 	ldr r1, [r7]
 	strb r0, [r1, 0x16]
-	bl sub_806E25C
+	bl IsNationalPokedexEnabled
 	adds r5, r0, 0
 	cmp r5, 0
 	bne _08102C9E
@@ -1904,7 +1904,7 @@ sub_8103518: @ 8103518
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_806E25C
+	bl IsNationalPokedexEnabled
 	movs r1, 0x97
 	str r1, [sp]
 	cmp r0, 0
@@ -4491,7 +4491,7 @@ sub_81049FC: @ 81049FC
 	adds r0, r5, 0
 	movs r1, 0x8
 	movs r3, 0x1
-	bl sub_810C228
+	bl LoadMonPicInWindow
 	add sp, 0x8
 	pop {r4-r6}
 	pop {r0}
@@ -5594,7 +5594,7 @@ sub_81052D0: @ 81052D0
 	sub sp, 0x8
 	lsls r0, 24
 	lsrs r6, r0, 24
-	bl sub_806E25C
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	beq _081052E8
 	ldr r0, _081052E4 @ =gUnknown_84406E0
@@ -7412,7 +7412,7 @@ sub_810603C: @ 810603C
 	movs r2, 0
 	movs r3, 0
 	bl FillBgTilemapBufferRect_Palette0
-	bl sub_80CC204
+	bl GetUnlockedSeviiAreas
 	ldr r1, [r6]
 	adds r1, 0x64
 	strb r0, [r1]
@@ -8137,7 +8137,7 @@ sub_8106810: @ 8106810
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
-	bl sub_806E25C
+	bl IsNationalPokedexEnabled
 	cmp r0, 0x1
 	beq _08106830
 	adds r0, r4, 0
@@ -8609,7 +8609,7 @@ sub_8106B60: @ 8106B60
 	movs r1, 0x3
 	movs r2, 0x1
 	bl sub_8104AB0
-	bl sub_806E25C
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	bne _08106BA4
 	adds r0, r5, 0

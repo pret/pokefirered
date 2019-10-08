@@ -3805,7 +3805,7 @@ _080C1D24:
 	ldrh r1, [r1]
 	str r1, [sp]
 	movs r1, 0x30
-	bl sub_8071660
+	bl TintPalette_CustomTone
 	ldr r0, [r7]
 	adds r0, r5
 	movs r1, 0xD0

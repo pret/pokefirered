@@ -176,7 +176,7 @@ extern const u32 gTradeGba_Gfx[];
 extern const u8 gUnknown_8E86240[];
 extern const u8 gUnknown_8E86BE8[];
 extern const u8 gUnknown_8E86D6C[];
-extern const u8 gUnknown_8E86F98[];
+extern const u32 gUnknown_8E86F98[];
 
 // berry_fix_program
 extern const u8 gBerryFixGameboy_Gfx[];
@@ -201,7 +201,7 @@ extern const u8 gBerryFixWindow_Pal[];
 // item_pc
 
 extern const u8 gItemPcTiles[];
-extern const u8 gItemPcBgPals[];
+extern const u32 gItemPcBgPals[];
 extern const u8 gItemPcTilemap[];
 
 // item_menu_icons
@@ -973,5 +973,37 @@ extern const u8 gGraphics_TitleScreen_CopyrightPressStartTiles[];
 extern const u8 gGraphics_TitleScreen_CopyrightPressStartMap[];
 extern const u16 gGraphics_TitleScreen_FirePals[];
 extern const u8 gGraphics_TitleScreen_BlankObjTiles[];
+
+extern const u32 gHealthboxSinglesPlayerGfx[];
+extern const u32 gHealthboxSinglesOpponentGfx[];
+extern const u32 gHealthboxDoublesPlayerGfx[];
+extern const u32 gHealthboxDoublesOpponentGfx[];
+extern const u32 gHealthboxSafariGfx[];
+extern const u32 gBlankGfxCompressed[];
+extern const u16 gBattleInterface_BallStatusBarPal[];
+extern const u16 gBattleInterface_BallDisplayPal[];
+extern const u32 gFile_graphics_interface_hp_numbers[];
+
+extern const u32 gGhostFrontPic[];
+extern const u32 gGhostPalette[];
+extern const u32 gSubstituteDollGfx[];
+extern const u32 gSubstituteDollTilemap[];
+extern const u32 gSubstituteDollPal[];
+
+// credits
+extern const u32 gCreditsPokeballBgGfxTiles[];
+extern const u32 gCreditsPokeballBgGfxMap[];
+extern const u16 gCreditsMonBackdropPals[][16];
+extern const u16 gCreditsAllRightsReservedGfxPal[];
+extern const u8 gCreditsAllRightsReservedGfxTiles[];
+extern const u8 gCreditsAllRightsReservedGfxMap[];
+
+// berry_pouch
+extern const u32 gBerryPouchSpriteTiles[];
+extern const u8 gBerryPouchBgGfx[];
+extern const u32 gBerryPouchBgPals[];
+extern const u32 gBerryPouchBgPal0FemaleOverride[];
+extern const u32 gBerryPouchSpritePalette[];
+extern const u8 gBerryPouchBg1Tilemap[];
 
 #endif //GUARD_GRAPHICS_H

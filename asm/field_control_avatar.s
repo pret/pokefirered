@@ -1152,24 +1152,24 @@ _0806D174:
 _0806D17A:
 	ldr r0, [r5, 0x8]
 	movs r1, 0x3
-	bl sub_80CC44C
+	bl GetHiddenItemAttr
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x1
 	beq _0806D164
 	ldr r0, [r5, 0x8]
 	movs r1, 0
-	bl sub_80CC44C
+	bl GetHiddenItemAttr
 	ldr r1, _0806D1C4 @ =gSpecialVar_0x8005
 	strh r0, [r1]
 	ldr r0, [r5, 0x8]
 	movs r1, 0x1
-	bl sub_80CC44C
+	bl GetHiddenItemAttr
 	ldr r4, _0806D1C8 @ =gSpecialVar_0x8004
 	strh r0, [r4]
 	ldr r0, [r5, 0x8]
 	movs r1, 0x2
-	bl sub_80CC44C
+	bl GetHiddenItemAttr
 	ldr r1, _0806D1CC @ =gSpecialVar_0x8006
 	strh r0, [r1]
 	ldrh r0, [r4]
@@ -1180,14 +1180,14 @@ _0806D17A:
 	beq _0806D164
 	ldr r0, _0806D1D0 @ =gSpecialVar_Facing
 	strh r6, [r0]
-	ldr r0, _0806D1D4 @ =gUnknown_81A6843
+	ldr r0, _0806D1D4 @ =EventScript_PickUpHiddenItem
 	b _0806D1E6
 	.align 2, 0
 _0806D1C4: .4byte gSpecialVar_0x8005
 _0806D1C8: .4byte gSpecialVar_0x8004
 _0806D1CC: .4byte gSpecialVar_0x8006
 _0806D1D0: .4byte gSpecialVar_Facing
-_0806D1D4: .4byte gUnknown_81A6843
+_0806D1D4: .4byte EventScript_PickUpHiddenItem
 _0806D1D8:
 	cmp r2, 0xFF
 	beq _0806D1E0

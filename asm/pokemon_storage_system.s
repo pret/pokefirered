@@ -1897,8 +1897,8 @@ _0808C7D8: .4byte mapldr_0808C6D8
 _0808C7DC: .4byte CB2_ReturnToField
 	thumb_func_end sub_808C7B4
 
-	thumb_func_start sub_808C7E0
-sub_808C7E0: @ 808C7E0
+	thumb_func_start ResetPokemonStorageSystem
+ResetPokemonStorageSystem: @ 808C7E0
 	push {r4-r6,lr}
 	movs r0, 0
 	bl sub_808BA00
@@ -1954,7 +1954,7 @@ _0808C832:
 	bx r0
 	.align 2, 0
 _0808C850: .4byte gUnknown_84186CD
-	thumb_func_end sub_808C7E0
+	thumb_func_end ResetPokemonStorageSystem
 
 	thumb_func_start sub_808C854
 sub_808C854: @ 808C854
@@ -16568,7 +16568,7 @@ _08093C4E:
 	adds r1, r4
 	ldrh r0, [r1]
 	mov r1, r9
-	bl GetFrontSpritePalFromSpeciesAndPersonality
+	bl GetMonSpritePalFromSpeciesAndPersonality
 	ldr r1, [r5]
 	ldr r3, _08093CE8 @ =0x00000cd8
 	adds r2, r1, r3

@@ -12,7 +12,7 @@ CeladonCity_Restaurant_EventScript_16D1F4:: @ 816D1F4
 CeladonCity_Restaurant_EventScript_16D1FD:: @ 816D1FD
 	lock
 	faceplayer
-	checkflag FLAG_0x243
+	checkflag FLAG_GOT_COIN_CASE
 	goto_if_eq EventScript_16D24B
 	msgbox gUnknown_81979C1
 	checkitemspace ITEM_COIN_CASE, 1
@@ -20,7 +20,7 @@ CeladonCity_Restaurant_EventScript_16D1FD:: @ 816D1FD
 	goto_if_eq EventScript_16D241
 	additem ITEM_COIN_CASE, 1
 	giveitemfanfaremsg gUnknown_8197A38, ITEM_COIN_CASE
-	setflag FLAG_0x243
+	setflag FLAG_GOT_COIN_CASE
 	release
 	end
 

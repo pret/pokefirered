@@ -797,7 +797,7 @@ _080BDCA4: .4byte 0x0000ffff
 	thumb_func_start sub_80BDCA8
 sub_80BDCA8: @ 80BDCA8
 	push {lr}
-	bl sub_806E25C
+	bl IsNationalPokedexEnabled
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -868,8 +868,8 @@ _080BDD2C: .4byte gUnknown_83ECED4
 _080BDD30: .4byte 0x0000ffff
 	thumb_func_end sub_80BDCB8
 
-	thumb_func_start sub_80BDD34
-sub_80BDD34: @ 80BDD34
+	thumb_func_start InitEasyChatPhrases
+InitEasyChatPhrases: @ 80BDD34
 	push {r4-r7,lr}
 	movs r4, 0
 	ldr r5, _080BDE00 @ =gSaveBlock1Ptr
@@ -988,7 +988,7 @@ _080BDE18: .4byte 0x0000ffff
 _080BDE1C: .4byte 0x00002cc4
 _080BDE20: .4byte 0x00002cd0
 _080BDE24: .4byte 0x00002f10
-	thumb_func_end sub_80BDD34
+	thumb_func_end InitEasyChatPhrases
 
 	thumb_func_start sub_80BDE28
 sub_80BDE28: @ 80BDE28
@@ -1116,7 +1116,7 @@ _080BDEB2:
 	movs r0, 0x13
 	strh r0, [r3]
 _080BDF0C:
-	bl sub_806E25C
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	beq _080BDF2A
 	ldr r0, _080BDF30 @ =gUnknown_20399BC

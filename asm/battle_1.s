@@ -523,7 +523,7 @@ sub_800F5CC: @ 800F5CC
 	bne _0800F5E8
 	ldr r0, _0800F5E4 @ =gUnknown_83FE883
 	movs r1, 0x15
-	bl sub_80D87BC
+	bl BattlePutTextOnWindow
 	b _0800F6F0
 	.align 2, 0
 _0800F5E0: .4byte gBattleOutcome
@@ -609,10 +609,10 @@ _0800F666:
 _0800F682:
 	ldr r0, _0800F69C @ =gUnknown_83FE874
 	movs r1, 0x17
-	bl sub_80D87BC
+	bl BattlePutTextOnWindow
 	ldr r0, _0800F6A0 @ =gUnknown_83FE87B
 	movs r1, 0x16
-	bl sub_80D87BC
+	bl BattlePutTextOnWindow
 	b _0800F6F0
 	.align 2, 0
 _0800F694: .4byte gLinkPlayers
@@ -635,10 +635,10 @@ _0800F6A4:
 _0800F6BC:
 	ldr r0, _0800F6D8 @ =gUnknown_83FE874
 	movs r1, 0x16
-	bl sub_80D87BC
+	bl BattlePutTextOnWindow
 	ldr r0, _0800F6DC @ =gUnknown_83FE87B
 	movs r1, 0x17
-	bl sub_80D87BC
+	bl BattlePutTextOnWindow
 	b _0800F6F0
 	.align 2, 0
 _0800F6D0: .4byte gLinkPlayers
@@ -648,10 +648,10 @@ _0800F6DC: .4byte gUnknown_83FE87B
 _0800F6E0:
 	ldr r0, _0800F6F4 @ =gUnknown_83FE874
 	movs r1, 0x17
-	bl sub_80D87BC
+	bl BattlePutTextOnWindow
 	ldr r0, _0800F6F8 @ =gUnknown_83FE87B
 	movs r1, 0x16
-	bl sub_80D87BC
+	bl BattlePutTextOnWindow
 _0800F6F0:
 	pop {r0}
 	bx r0
@@ -727,14 +727,14 @@ _0800F764:
 _0800F76E:
 	adds r0, r1, 0
 	movs r1, 0x11
-	bl sub_80D87BC
+	bl BattlePutTextOnWindow
 	ldrb r1, [r4, 0x18]
 	movs r0, 0x4
 	b _0800F79C
 _0800F77C:
 	adds r0, r1, 0
 	movs r1, 0x12
-	bl sub_80D87BC
+	bl BattlePutTextOnWindow
 	ldrb r1, [r4, 0x18]
 	movs r0, 0x4
 	str r0, [sp]
@@ -744,7 +744,7 @@ _0800F77C:
 _0800F790:
 	adds r0, r1, 0
 	movs r1, 0x13
-	bl sub_80D87BC
+	bl BattlePutTextOnWindow
 	ldrb r1, [r4, 0x18]
 	movs r0, 0x8
 _0800F79C:
@@ -758,7 +758,7 @@ _0800F7A2:
 _0800F7AA:
 	adds r0, r1, 0
 	movs r1, 0x14
-	bl sub_80D87BC
+	bl BattlePutTextOnWindow
 	ldrb r1, [r4, 0x18]
 	movs r0, 0x8
 	str r0, [sp]
@@ -799,14 +799,14 @@ _0800F7F0:
 	adds r1, r0, r4
 	adds r0, r1, 0
 	movs r1, 0xF
-	bl sub_80D87BC
+	bl BattlePutTextOnWindow
 	lsls r0, r6, 3
 	subs r0, r6
 	lsls r0, 2
 	adds r1, r0, r4
 	adds r0, r1, 0
 	movs r1, 0x10
-	bl sub_80D87BC
+	bl BattlePutTextOnWindow
 	movs r4, 0x7
 	str r4, [sp]
 	adds r0, r7, 0
@@ -1274,12 +1274,12 @@ _0800FC08:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0800FC20
-	ldr r0, _0800FC1C @ =gUnknown_2022B50
+	ldr r0, _0800FC1C @ =gBattleTerrain
 	ldrb r0, [r0]
 	bl sub_800F2AC
 	b _0800FC26
 	.align 2, 0
-_0800FC1C: .4byte gUnknown_2022B50
+_0800FC1C: .4byte gBattleTerrain
 _0800FC20:
 	movs r0, 0x8
 	bl sub_800F2AC
@@ -1309,12 +1309,12 @@ _0800FC48:
 	ands r0, r1
 	cmp r0, 0
 	beq _0800FC60
-	ldr r0, _0800FC5C @ =gUnknown_2022B50
+	ldr r0, _0800FC5C @ =gBattleTerrain
 	strb r2, [r0]
 	movs r0, 0
 	b _0800FCAA
 	.align 2, 0
-_0800FC5C: .4byte gUnknown_2022B50
+_0800FC5C: .4byte gBattleTerrain
 _0800FC60:
 	movs r0, 0x8
 	ands r1, r0
@@ -1351,13 +1351,13 @@ _0800FC90:
 	lsrs r0, 24
 	b _0800FCAA
 _0800FCA6:
-	ldr r0, _0800FCB0 @ =gUnknown_2022B50
+	ldr r0, _0800FCB0 @ =gBattleTerrain
 	ldrb r0, [r0]
 _0800FCAA:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0800FCB0: .4byte gUnknown_2022B50
+_0800FCB0: .4byte gBattleTerrain
 	thumb_func_end sub_800FC2C
 
 	thumb_func_start sub_800FCB4

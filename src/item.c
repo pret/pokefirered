@@ -326,7 +326,7 @@ void ClearPCItemSlots(void)
     }
 }
 
-void ClearItemSlotsInAllBagPockets(void)
+void ClearBag(void)
 {
     u16 i;
 

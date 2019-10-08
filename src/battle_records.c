@@ -58,7 +58,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-static const struct TextColor sTextColor = {
+static const u8 sTextColor[3] = {
     0, 2, 3
 };
 
@@ -279,7 +279,7 @@ static void ResetBGPos(void)
     ChangeBgY(3, 0, 0);
 }
 
-static void InitLinkBattleRecord(struct LinkBattleRecord * record)
+static void ClearLinkBattleRecord(struct LinkBattleRecord *record)
 {
     CpuFill16(0, record, sizeof(*record));
     record->name[0] = EOS;
@@ -289,12 +289,12 @@ static void InitLinkBattleRecord(struct LinkBattleRecord * record)
     record->draws = 0;
 }
 
-static void InitLinkBattleRecords_(struct LinkBattleRecords * records)
+static void ClearLinkBattleRecords(struct LinkBattleRecords *records)
 {
     s32 i;
 
     for (i = 0; i < LINK_B_RECORDS_COUNT; i++)
-        InitLinkBattleRecord(&records->entries[i]);
+        ClearLinkBattleRecord(&records->entries[i]);
     SetGameStat(GAME_STAT_LINK_BATTLE_WINS, 0);
     SetGameStat(GAME_STAT_LINK_BATTLE_LOSSES, 0);
     SetGameStat(GAME_STAT_LINK_BATTLE_DRAWS, 0);
@@ -404,7 +404,7 @@ static void AddOpponentLinkBattleRecord(struct LinkBattleRecords * records, cons
     {
         i = LINK_B_RECORDS_COUNT - 1;
         record = &records->entries[LINK_B_RECORDS_COUNT - 1];
-        InitLinkBattleRecord(record);
+        ClearLinkBattleRecord(record);
         StringCopyN(record->name, namebuf, OT_NAME_LENGTH);
         record->trainerId = trainerId;
     }
@@ -412,9 +412,9 @@ static void AddOpponentLinkBattleRecord(struct LinkBattleRecords * records, cons
     SortLinkBattleRecords(records);
 }
 
-void InitLinkBattleRecords(void)
+void ClearPlayerLinkBattleRecords(void)
 {
-    InitLinkBattleRecords_(&gSaveBlock2Ptr->linkBattleRecords);
+    ClearLinkBattleRecords(&gSaveBlock2Ptr->linkBattleRecords);
 }
 
 static void IncTrainerCardWinCount(s32 battlerId)
@@ -494,7 +494,7 @@ static void PrintTotalRecord(struct LinkBattleRecords * records)
     }
 
     StringExpandPlaceholders(gStringVar4, gString_BattleRecords_TotalRecord);
-    AddTextPrinterParameterized4(0, 2, 12, 24, 0, 2, &sTextColor, 0, gStringVar4);
+    AddTextPrinterParameterized4(0, 2, 12, 24, 0, 2, sTextColor, 0, gStringVar4);
 }
 
 static void PrintOpponentBattleRecord(struct LinkBattleRecord * record, u8 y)
@@ -504,7 +504,7 @@ static void PrintOpponentBattleRecord(struct LinkBattleRecord * record, u8 y)
 
     if (record->wins == 0 && record->losses == 0 && record->draws == 0)
     {
-        AddTextPrinterParameterized4(0, 2, 0, y, 0, 2, &sTextColor, 0, gString_BattleRecords_7Dashes);
+        AddTextPrinterParameterized4(0, 2, 0, y, 0, 2, sTextColor, 0, gString_BattleRecords_7Dashes);
         for (i = 0; i < 3; i++)
         {
             if (i == 0)
@@ -513,7 +513,7 @@ static void PrintOpponentBattleRecord(struct LinkBattleRecord * record, u8 y)
                 x = 0x84;
             else
                 x = 0xB4;
-            AddTextPrinterParameterized4(0, 2, x, y, 0, 2, &sTextColor, 0, gString_BattleRecords_4Dashes);
+            AddTextPrinterParameterized4(0, 2, x, y, 0, 2, sTextColor, 0, gString_BattleRecords_4Dashes);
         }
     }
     else
@@ -541,7 +541,7 @@ static void PrintOpponentBattleRecord(struct LinkBattleRecord * record, u8 y)
                 x = 0xB4;
                 ConvertIntToDecimalStringN(gStringVar1, record->draws, STR_CONV_MODE_RIGHT_ALIGN, 4);
             }
-            AddTextPrinterParameterized4(0, 2, x, y, 0, 2, &sTextColor, 0, gStringVar1);
+            AddTextPrinterParameterized4(0, 2, x, y, 0, 2, sTextColor, 0, gStringVar1);
         }
     }
 }
@@ -554,9 +554,9 @@ static void PrintBattleRecords(void)
     FillWindowPixelRect(0, PIXEL_FILL(0), 0, 0, 0xD8, 0x90);
     StringExpandPlaceholders(gStringVar4, gString_BattleRecords_PlayersBattleResults);
     left = 0xD0 - GetStringWidth(2, gStringVar4, -1);
-    AddTextPrinterParameterized4(0, 2, left / 2, 4, 0, 2, &sTextColor, 0, gStringVar4);
+    AddTextPrinterParameterized4(0, 2, left / 2, 4, 0, 2, sTextColor, 0, gStringVar4);
     PrintTotalRecord(&gSaveBlock2Ptr->linkBattleRecords);
-    AddTextPrinterParameterized4(0, 2, 0x54, 0x30, 0, 2, &sTextColor, 0, gString_BattleRecords_ColumnHeaders);
+    AddTextPrinterParameterized4(0, 2, 0x54, 0x30, 0, 2, sTextColor, 0, gString_BattleRecords_ColumnHeaders);
     for (i = 0; i < LINK_B_RECORDS_COUNT; i++)
         PrintOpponentBattleRecord(&gSaveBlock2Ptr->linkBattleRecords.entries[i], 0x3D + 14 * i);
     CommitWindow(0);

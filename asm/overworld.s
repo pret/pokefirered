@@ -289,8 +289,8 @@ sub_8054E40: @ 8054E40
 _08054E64: .4byte 0x0000406e
 	thumb_func_end sub_8054E40
 
-	thumb_func_start sub_8054E68
-sub_8054E68: @ 8054E68
+	thumb_func_start ResetGameStats
+ResetGameStats: @ 8054E68
 	push {r4,r5,lr}
 	movs r2, 0
 	ldr r5, _08054E8C @ =gSaveBlock1Ptr
@@ -311,7 +311,7 @@ _08054E74:
 	bx r0
 	.align 2, 0
 _08054E8C: .4byte gSaveBlock1Ptr
-	thumb_func_end sub_8054E68
+	thumb_func_end ResetGameStats
 
 	thumb_func_start IncrementGameStat
 IncrementGameStat: @ 8054E90
@@ -1003,8 +1003,8 @@ WarpIntoMap: @ 8055378
 	bx r0
 	thumb_func_end WarpIntoMap
 
-	thumb_func_start Overworld_SetWarpDestination
-Overworld_SetWarpDestination: @ 805538C
+	thumb_func_start SetWarpDestination
+SetWarpDestination: @ 805538C
 	push {r4-r6,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
@@ -1034,7 +1034,7 @@ Overworld_SetWarpDestination: @ 805538C
 	bx r0
 	.align 2, 0
 _080553C4: .4byte gUnknown_2031DBC
-	thumb_func_end Overworld_SetWarpDestination
+	thumb_func_end SetWarpDestination
 
 	thumb_func_start warp1_set_2
 warp1_set_2: @ 80553C8
@@ -1049,7 +1049,7 @@ warp1_set_2: @ 80553C8
 	movs r3, 0x1
 	negs r3, r3
 	str r3, [sp]
-	bl Overworld_SetWarpDestination
+	bl SetWarpDestination
 	add sp, 0x4
 	pop {r0}
 	bx r0
@@ -1151,7 +1151,7 @@ sub_805546C: @ 805546C
 	lsls r4, 24
 	asrs r4, 24
 	str r4, [sp]
-	bl Overworld_SetWarpDestination
+	bl SetWarpDestination
 _0805549A:
 	add sp, 0x4
 	pop {r4}
@@ -1228,7 +1228,7 @@ sub_805550C: @ 805550C
 	lsrs r6, r0, 16
 	lsls r1, 16
 	lsrs r7, r1, 16
-	bl sav1_map_get_light_level
+	bl GetCurrentMapType
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -1458,7 +1458,7 @@ _080556BC:
 	lsls r4, r6, 24
 	asrs r4, 24
 	str r4, [sp]
-	bl Overworld_SetWarpDestination
+	bl SetWarpDestination
 _080556D6:
 	add sp, 0x4
 	pop {r4-r6}
@@ -1627,7 +1627,7 @@ sub_80557C4: @ 80557C4
 	lsls r4, r5, 24
 	asrs r4, 24
 	str r4, [sp]
-	bl Overworld_SetWarpDestination
+	bl SetWarpDestination
 	b _08055818
 _080557FC:
 	bl mapheader_run_script_with_tag_x6
@@ -1700,7 +1700,7 @@ sub_8055864: @ 8055864
 	negs r3, r3
 	str r3, [sp]
 	adds r2, r3, 0
-	bl Overworld_SetWarpDestination
+	bl SetWarpDestination
 	bl sub_8055E94
 	bl warp_shift
 	bl set_current_map_header_from_sav1_save_old_name
@@ -1911,7 +1911,7 @@ _08055A68: .4byte gUnknown_2031DD4
 	thumb_func_start sub_8055A6C
 sub_8055A6C: @ 8055A6C
 	push {r4-r7,lr}
-	bl sav1_map_get_light_level
+	bl GetCurrentMapType
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
@@ -2382,14 +2382,14 @@ sub_8055DB8: @ 8055DB8
 Overworld_PlaySpecialMapMusic: @ 8055DC4
 	push {r4,r5,lr}
 	sub sp, 0x4
-	ldr r0, _08055DD8 @ =gUnknown_2031DD8
+	ldr r0, _08055DD8 @ =gDisableMapMusicChangeOnMapLoad
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _08055DDC
 	bl StopMapMusic
 	b _08055E6C
 	.align 2, 0
-_08055DD8: .4byte gUnknown_2031DD8
+_08055DD8: .4byte gDisableMapMusicChangeOnMapLoad
 _08055DDC:
 	cmp r0, 0x2
 	beq _08055E6C
@@ -2488,14 +2488,14 @@ _08055E90: .4byte gSaveBlock1Ptr
 	thumb_func_start sub_8055E94
 sub_8055E94: @ 8055E94
 	push {r4-r6,lr}
-	ldr r0, _08055EA4 @ =gUnknown_2031DD8
+	ldr r0, _08055EA4 @ =gDisableMapMusicChangeOnMapLoad
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _08055EA8
 	bl StopMapMusic
 	b _08055F14
 	.align 2, 0
-_08055EA4: .4byte gUnknown_2031DD8
+_08055EA4: .4byte gDisableMapMusicChangeOnMapLoad
 _08055EA8:
 	cmp r0, 0x2
 	beq _08055F14
@@ -2701,7 +2701,7 @@ _08056014:
 	adds r0, 0x32
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, _08056050 @ =gUnknown_2031DD8
+	ldr r0, _08056050 @ =gDisableMapMusicChangeOnMapLoad
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _08056054
@@ -2709,7 +2709,7 @@ _08056014:
 	b _0805606A
 	.align 2, 0
 _0805604C: .4byte gUnknown_2031DDC
-_08056050: .4byte gUnknown_2031DD8
+_08056050: .4byte gDisableMapMusicChangeOnMapLoad
 _08056054:
 	cmp r0, 0x2
 	beq _0805606A
@@ -2884,8 +2884,8 @@ get_map_light_level_from_warp: @ 8056170
 	bx r1
 	thumb_func_end get_map_light_level_from_warp
 
-	thumb_func_start sav1_map_get_light_level
-sav1_map_get_light_level: @ 8056188
+	thumb_func_start GetCurrentMapType
+GetCurrentMapType: @ 8056188
 	push {lr}
 	ldr r0, _0805619C @ =gSaveBlock1Ptr
 	ldr r0, [r0]
@@ -2897,7 +2897,7 @@ sav1_map_get_light_level: @ 8056188
 	bx r1
 	.align 2, 0
 _0805619C: .4byte gSaveBlock1Ptr
-	thumb_func_end sav1_map_get_light_level
+	thumb_func_end GetCurrentMapType
 
 	thumb_func_start get_map_light_from_warp0
 get_map_light_from_warp0: @ 80561A0
@@ -3493,7 +3493,7 @@ CB2_NewGame: @ 8056644
 	bl sub_80569BC
 	bl StopMapMusic
 	bl sub_8056420
-	bl sub_8054A60
+	bl NewGameInitData
 	bl ResetInitialPlayerAvatarState
 	bl PlayTimeCounter_Start
 	bl ScriptContext1_Init
@@ -4058,10 +4058,10 @@ _08056B3C:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08056B62
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0
 	movs r1, 0
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 	b _08056B62
 	.align 2, 0
 _08056B54: .4byte gWirelessCommType
@@ -4389,10 +4389,10 @@ _08056E18:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08056E3E
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0
 	movs r1, 0
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 	b _08056E3E
 	.align 2, 0
 _08056E30: .4byte gWirelessCommType
@@ -5158,8 +5158,8 @@ _0805749A:
 _080574A0: .4byte sub_8056534
 	thumb_func_end sub_8057430
 
-	thumb_func_start sub_80574A4
-sub_80574A4: @ 80574A4
+	thumb_func_start Overworld_CreditsMainCB
+Overworld_CreditsMainCB: @ 80574A4
 	push {r4,lr}
 	ldr r0, _080574E8 @ =gPaletteFade
 	ldrb r0, [r0, 0x7]
@@ -5187,7 +5187,7 @@ _080574E0:
 	bx r0
 	.align 2, 0
 _080574E8: .4byte gPaletteFade
-	thumb_func_end sub_80574A4
+	thumb_func_end Overworld_CreditsMainCB
 
 	thumb_func_start sub_80574EC
 sub_80574EC: @ 80574EC
@@ -5209,8 +5209,8 @@ _08057506:
 	bx r1
 	thumb_func_end sub_80574EC
 
-	thumb_func_start sub_805750C
-sub_805750C: @ 805750C
+	thumb_func_start Overworld_DoScrollSceneForCredits
+Overworld_DoScrollSceneForCredits: @ 805750C
 	push {lr}
 	ldr r3, _08057520 @ =gUnknown_2031DE4
 	str r1, [r3]
@@ -5223,7 +5223,7 @@ sub_805750C: @ 805750C
 	.align 2, 0
 _08057520: .4byte gUnknown_2031DE4
 _08057524: .4byte gUnknown_2036E28
-	thumb_func_end sub_805750C
+	thumb_func_end Overworld_DoScrollSceneForCredits
 
 	thumb_func_start sub_8057528
 sub_8057528: @ 8057528
@@ -5451,7 +5451,7 @@ _08057712:
 	ldr r2, _08057738 @ =0x3fffffff
 	movs r0, 0
 	movs r1, 0
-	bl sub_807A944
+	bl FieldWeather_StartFadingOutCreditsMap
 _0805772A:
 	ldrb r0, [r4]
 	adds r0, 0x1
@@ -5640,16 +5640,16 @@ c1_link_related: @ 8057884
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0805789E
-	bl sub_80F90DC
+	bl IsRfuRecvQueueEmpty
 	cmp r0, 0
 	beq _0805789E
-	bl sub_800A00C
+	bl IsSendingKeysToLink
 	cmp r0, 0
 	bne _080578C0
 _0805789E:
 	ldr r0, _080578CC @ =gUnknown_300502C
 	ldrb r4, [r0]
-	ldr r0, _080578D0 @ =gUnknown_3003E60
+	ldr r0, _080578D0 @ =gLinkPartnersHeldKeys
 	adds r1, r4, 0
 	bl sub_8057BE4
 	ldr r0, _080578D4 @ =gUnknown_3000E84
@@ -5667,7 +5667,7 @@ _080578C0:
 	.align 2, 0
 _080578C8: .4byte gWirelessCommType
 _080578CC: .4byte gUnknown_300502C
-_080578D0: .4byte gUnknown_3003E60
+_080578D0: .4byte gLinkPartnersHeldKeys
 _080578D4: .4byte gUnknown_3000E84
 	thumb_func_end c1_link_related
 
@@ -5686,12 +5686,12 @@ _080578E8: .4byte sub_8057D5C
 	thumb_func_start sub_80578EC
 sub_80578EC: @ 80578EC
 	push {lr}
-	ldr r0, _080578F8 @ =gUnknown_3003E60
+	ldr r0, _080578F8 @ =gLinkPartnersHeldKeys
 	bl sub_8057D48
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080578F8: .4byte gUnknown_3003E60
+_080578F8: .4byte gLinkPartnersHeldKeys
 	thumb_func_end sub_80578EC
 
 	thumb_func_start c1_link_related_func_set
@@ -6126,14 +6126,14 @@ sub_8057C4C: @ 8057C4C
 	lsrs r0, 16
 	cmp r0, 0xC
 	bhi _08057C6C
-	ldr r0, _08057C68 @ =gUnknown_3005028
+	ldr r0, _08057C68 @ =gHeldKeyCodeToSend
 	strh r4, [r0]
 	b _08057C72
 	.align 2, 0
 _08057C64: .4byte 0xffef0000
-_08057C68: .4byte gUnknown_3005028
+_08057C68: .4byte gHeldKeyCodeToSend
 _08057C6C:
-	ldr r1, _08057CB0 @ =gUnknown_3005028
+	ldr r1, _08057CB0 @ =gHeldKeyCodeToSend
 	movs r0, 0x11
 	strh r0, [r1]
 _08057C72:
@@ -6147,7 +6147,7 @@ _08057C72:
 	bl IsUpdateLinkStateCBActive
 	cmp r0, 0x1
 	bne _08057CA8
-	bl sub_800A00C
+	bl IsSendingKeysToLink
 	cmp r0, 0x1
 	bne _08057CA8
 	cmp r4, 0x11
@@ -6159,7 +6159,7 @@ _08057C72:
 	cmp r4, 0x18
 	blt _08057CA8
 _08057CA2:
-	ldr r1, _08057CB0 @ =gUnknown_3005028
+	ldr r1, _08057CB0 @ =gHeldKeyCodeToSend
 	movs r0, 0
 	strh r0, [r1]
 _08057CA8:
@@ -6167,7 +6167,7 @@ _08057CA8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08057CB0: .4byte gUnknown_3005028
+_08057CB0: .4byte gHeldKeyCodeToSend
 _08057CB4: .4byte gWirelessCommType
 	thumb_func_end sub_8057C4C
 
@@ -6289,7 +6289,7 @@ sub_8057D5C: @ 8057D5C
 	movs r0, 0x11
 	b _08057D92
 _08057D70:
-	bl sub_800B248
+	bl GetLinkRecvQueueLength
 	cmp r0, 0x4
 	bls _08057D7C
 	movs r0, 0x1B
@@ -6344,7 +6344,7 @@ _08057DC4: .4byte sub_8057D98
 	thumb_func_start sub_8057DC8
 sub_8057DC8: @ 8057DC8
 	push {r4,lr}
-	bl sub_800B248
+	bl GetLinkRecvQueueLength
 	movs r4, 0x11
 	cmp r0, 0x2
 	bhi _08057DE0
@@ -6982,7 +6982,7 @@ sub_8058244: @ 8058244
 	movs r0, 0
 	b _0805826C
 _08058252:
-	bl sub_800B248
+	bl GetLinkRecvQueueLength
 	cmp r0, 0x2
 	bls _08058264
 	ldr r1, _08058260 @ =gUnknown_3000E88
@@ -7006,13 +7006,13 @@ _08058270: .4byte gUnknown_3000E88
 	thumb_func_start sub_8058274
 sub_8058274: @ 8058274
 	push {lr}
-	bl sub_800B248
+	bl GetLinkRecvQueueLength
 	cmp r0, 0x1
 	bls _080582D8
 	bl IsUpdateLinkStateCBActive
 	cmp r0, 0x1
 	bne _080582D8
-	bl sub_800A00C
+	bl IsSendingKeysToLink
 	cmp r0, 0x1
 	bne _080582D8
 	ldr r0, _080582C4 @ =gUnknown_3000E84
@@ -7065,7 +7065,7 @@ sub_80582E0: @ 80582E0
 	bl IsUpdateLinkStateCBActive
 	cmp r0, 0x1
 	bne _08058304
-	bl sub_800A00C
+	bl IsSendingKeysToLink
 	cmp r0, 0x1
 	bne _08058304
 	ldr r0, _08058308 @ =gUnknown_3000E84
@@ -7093,7 +7093,7 @@ sub_8058318: @ 8058318
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08058334
-	bl sub_800A00C
+	bl IsSendingKeysToLink
 	cmp r0, 0
 	beq _08058334
 	movs r0, 0x1
@@ -7114,14 +7114,14 @@ sub_805833C: @ 805833C
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0805835C
-	ldr r0, _08058354 @ =gUnknown_3003FB0
+	ldr r0, _08058354 @ =gLink
 	ldr r1, _08058358 @ =0x00000339
 	adds r0, r1
 	ldrb r0, [r0]
 	b _08058364
 	.align 2, 0
 _08058350: .4byte gWirelessCommType
-_08058354: .4byte gUnknown_3003FB0
+_08058354: .4byte gLink
 _08058358: .4byte 0x00000339
 _0805835C:
 	ldr r0, _08058368 @ =gUnknown_3005450

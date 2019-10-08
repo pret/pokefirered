@@ -71,7 +71,7 @@ _080F863E:
 	adds r0, r4, 0
 	bl sub_80FC4D4
 	strh r5, [r7]
-	ldr r1, _080F86AC @ =gUnknown_3003F50
+	ldr r1, _080F86AC @ =gSendCmd
 	ldr r2, _080F86B0 @ =0x01000008
 	adds r0, r7, 0
 	bl CpuSet
@@ -97,7 +97,7 @@ _080F869C: .4byte gUnknown_3005450
 _080F86A0: .4byte 0x010004d6
 _080F86A4: .4byte gUnknown_30054BC
 _080F86A8: .4byte 0x00000634
-_080F86AC: .4byte gUnknown_3003F50
+_080F86AC: .4byte gSendCmd
 _080F86B0: .4byte 0x01000008
 _080F86B4: .4byte gRecvCmds
 _080F86B8: .4byte 0x01000028
@@ -1277,7 +1277,7 @@ _080F9034: .4byte 0x01000028
 	thumb_func_start sub_80F9038
 sub_80F9038: @ 80F9038
 	push {lr}
-	ldr r3, _080F9064 @ =gUnknown_3003F50
+	ldr r3, _080F9064 @ =gSendCmd
 	ldr r2, _080F9068 @ =gRecvCmds
 	movs r1, 0x6
 _080F9040:
@@ -1288,7 +1288,7 @@ _080F9040:
 	subs r1, 0x1
 	cmp r1, 0
 	bge _080F9040
-	ldr r1, _080F9064 @ =gUnknown_3003F50
+	ldr r1, _080F9064 @ =gSendCmd
 	movs r2, 0
 	adds r0, r1, 0
 	adds r0, 0xC
@@ -1300,7 +1300,7 @@ _080F9056:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F9064: .4byte gUnknown_3003F50
+_080F9064: .4byte gSendCmd
 _080F9068: .4byte gRecvCmds
 	thumb_func_end sub_80F9038
 
@@ -1360,8 +1360,8 @@ _080F90D4: .4byte 0x000008d4
 _080F90D8: .4byte 0x000008f2
 	thumb_func_end sub_80F906C
 
-	thumb_func_start sub_80F90DC
-sub_80F90DC: @ 80F90DC
+	thumb_func_start IsRfuRecvQueueEmpty
+IsRfuRecvQueueEmpty: @ 80F90DC
 	push {r4,lr}
 	ldr r0, _080F90EC @ =gUnknown_3007460
 	ldr r0, [r0]
@@ -1398,7 +1398,7 @@ _080F9110:
 	bx r1
 	.align 2, 0
 _080F9118: .4byte gRecvCmds
-	thumb_func_end sub_80F90DC
+	thumb_func_end IsRfuRecvQueueEmpty
 
 	thumb_func_start sub_80F911C
 sub_80F911C: @ 80F911C
@@ -2007,7 +2007,7 @@ _080F95E4:
 	ldrb r1, [r2]
 	strb r0, [r2]
 	bl sub_80FA510
-	ldr r5, _080F9658 @ =gUnknown_3003F50
+	ldr r5, _080F9658 @ =gSendCmd
 	add r4, sp, 0x48
 	adds r0, r5, 0
 	adds r1, r4, 0
@@ -2029,7 +2029,7 @@ _080F9618:
 	cmp r1, 0x6
 	bls _080F9618
 _080F9628:
-	bl sub_80F90DC
+	bl IsRfuRecvQueueEmpty
 	add sp, 0x58
 	pop {r3}
 	mov r8, r3
@@ -2045,7 +2045,7 @@ _080F9648: .4byte 0x0000099c
 _080F964C: .4byte gUnknown_3007460
 _080F9650: .4byte gReceivedRemoteLinkPlayers
 _080F9654: .4byte 0x00000988
-_080F9658: .4byte gUnknown_3003F50
+_080F9658: .4byte gSendCmd
 	thumb_func_end sub_80F9514
 
 	thumb_func_start sub_80F965C
@@ -2148,8 +2148,8 @@ _080F9718: .4byte gUnknown_3005AF0
 _080F971C: .4byte gUnknown_30054BE
 	thumb_func_end sub_80F965C
 
-	thumb_func_start sub_80F9720
-sub_80F9720: @ 80F9720
+	thumb_func_start Rfu_SetBlockReceivedFlag
+Rfu_SetBlockReceivedFlag: @ 80F9720
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -2173,10 +2173,10 @@ _080F9740:
 _080F9748:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80F9720
+	thumb_func_end Rfu_SetBlockReceivedFlag
 
-	thumb_func_start sub_80F974C
-sub_80F974C: @ 80F974C
+	thumb_func_start Rfu_ResetBlockReceivedFlag
+Rfu_ResetBlockReceivedFlag: @ 80F974C
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, _080F976C @ =gUnknown_3005450
@@ -2194,7 +2194,7 @@ sub_80F974C: @ 80F974C
 	bx lr
 	.align 2, 0
 _080F976C: .4byte gUnknown_3005450
-	thumb_func_end sub_80F974C
+	thumb_func_end Rfu_ResetBlockReceivedFlag
 
 	thumb_func_start sub_80F9770
 sub_80F9770: @ 80F9770
@@ -2244,7 +2244,7 @@ rfu_func_080F97B8: @ 80F97B8
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080F97EA
-	ldr r3, _080F97F4 @ =gUnknown_3005028
+	ldr r3, _080F97F4 @ =gHeldKeyCodeToSend
 	ldrh r2, [r3]
 	cmp r2, 0
 	beq _080F97EA
@@ -2268,7 +2268,7 @@ _080F97EA:
 	bx r0
 	.align 2, 0
 _080F97F0: .4byte gReceivedRemoteLinkPlayers
-_080F97F4: .4byte gUnknown_3005028
+_080F97F4: .4byte gHeldKeyCodeToSend
 _080F97F8: .4byte gLinkTransferringData
 _080F97FC: .4byte gUnknown_3001188
 	thumb_func_end rfu_func_080F97B8
@@ -2281,8 +2281,8 @@ sub_80F9800: @ 80F9800
 _080F9804: .4byte gUnknown_3005440
 	thumb_func_end sub_80F9800
 
-	thumb_func_start sub_80F9808
-sub_80F9808: @ 80F9808
+	thumb_func_start IsSendingKeysToRfu
+IsSendingKeysToRfu: @ 80F9808
 	push {lr}
 	movs r2, 0
 	ldr r0, _080F9820 @ =gUnknown_3005450
@@ -2298,7 +2298,7 @@ _080F9818:
 	.align 2, 0
 _080F9820: .4byte gUnknown_3005450
 _080F9824: .4byte rfu_func_080F97B8
-	thumb_func_end sub_80F9808
+	thumb_func_end IsSendingKeysToRfu
 
 	thumb_func_start sub_80F9828
 sub_80F9828: @ 80F9828
@@ -2326,15 +2326,15 @@ _080F9854: .4byte gUnknown_843EDC4
 _080F9858: .4byte rfu_func_080F97B8
 	thumb_func_end sub_80F9828
 
-	thumb_func_start sub_80F985C
-sub_80F985C: @ 80F985C
+	thumb_func_start Rfu_set_zero
+Rfu_set_zero: @ 80F985C
 	ldr r1, _080F9864 @ =gUnknown_3005450
 	movs r0, 0
 	str r0, [r1]
 	bx lr
 	.align 2, 0
 _080F9864: .4byte gUnknown_3005450
-	thumb_func_end sub_80F985C
+	thumb_func_end Rfu_set_zero
 
 	thumb_func_start sub_80F9868
 sub_80F9868: @ 80F9868
@@ -2444,12 +2444,12 @@ _080F9914:
 	beq _080F9924
 	b _080F9BF8
 _080F9924:
-	ldr r1, _080F9948 @ =gUnknown_3003ED2
+	ldr r1, _080F9948 @ =gRecvCmds + 2
 	adds r0, r2, r1
 	ldrh r0, [r0]
 	ldr r3, _080F993C @ =gUnknown_3005450
 	strb r0, [r3, 0xD]
-	ldr r4, _080F994C @ =gUnknown_3003ED4
+	ldr r4, _080F994C @ =gRecvCmds + 4
 	adds r0, r2, r4
 	bl sub_80F9770
 	ldr r1, _080F9950 @ =gUnknown_3005DD6
@@ -2459,8 +2459,8 @@ _080F9924:
 _080F993C: .4byte gUnknown_3005450
 _080F9940: .4byte gReceivedRemoteLinkPlayers
 _080F9944: .4byte gUnknown_3007460
-_080F9948: .4byte gUnknown_3003ED2
-_080F994C: .4byte gUnknown_3003ED4
+_080F9948: .4byte gRecvCmds + 2
+_080F994C: .4byte gRecvCmds + 4
 _080F9950: .4byte gUnknown_3005DD6
 _080F9954:
 	ldr r2, _080F99AC @ =gUnknown_3005450
@@ -2484,13 +2484,13 @@ _080F9974:
 	adds r0, 0x80
 	movs r2, 0
 	strh r4, [r0]
-	ldr r1, _080F99B0 @ =gUnknown_3003ED2
+	ldr r1, _080F99B0 @ =gRecvCmds + 2
 	adds r0, r5, r1
 	ldrh r0, [r0]
 	adds r1, r3, 0
 	adds r1, 0x82
 	strh r0, [r1]
-	ldr r1, _080F99B4 @ =gUnknown_3003ED4
+	ldr r1, _080F99B4 @ =gRecvCmds + 4
 	adds r0, r5, r1
 	ldrh r1, [r0]
 	adds r0, r3, 0
@@ -2510,8 +2510,8 @@ _080F9974:
 	b _080F9BF8
 	.align 2, 0
 _080F99AC: .4byte gUnknown_3005450
-_080F99B0: .4byte gUnknown_3003ED2
-_080F99B4: .4byte gUnknown_3003ED4
+_080F99B0: .4byte gRecvCmds + 2
+_080F99B4: .4byte gRecvCmds + 4
 _080F99B8:
 	ldr r4, _080F9A88 @ =gUnknown_3005450
 	mov r9, r4
@@ -2597,7 +2597,7 @@ _080F9A4C:
 	mov r1, r8
 	lsls r0, r1, 24
 	lsrs r0, 24
-	bl sub_80F9720
+	bl Rfu_SetBlockReceivedFlag
 	bl sub_80F9800
 	ldrb r1, [r0, 0xA]
 	movs r0, 0x7F
@@ -2628,7 +2628,7 @@ _080F9A94: .4byte gUnknown_843EBD4
 _080F9A98: .4byte gReceivedRemoteLinkPlayers
 _080F9A9C:
 	ldr r2, _080F9AB8 @ =gUnknown_843EC64
-	ldr r3, _080F9ABC @ =gUnknown_3003ED2
+	ldr r3, _080F9ABC @ =gRecvCmds + 2
 	adds r0, r5, r3
 	ldrh r1, [r0]
 	lsls r1, 3
@@ -2637,11 +2637,11 @@ _080F9A9C:
 	adds r2, 0x4
 	adds r1, r2
 	ldrh r1, [r1]
-	bl sub_80F9E60
+	bl Rfu_InitBlockSend
 	b _080F9BF4
 	.align 2, 0
 _080F9AB8: .4byte gUnknown_843EC64
-_080F9ABC: .4byte gUnknown_3003ED2
+_080F9ABC: .4byte gRecvCmds + 2
 _080F9AC0:
 	ldr r1, _080F9ACC @ =gUnknown_3005534
 	add r1, r8
@@ -2655,7 +2655,7 @@ _080F9AD0:
 	movs r4, 0x80
 	lsls r4, 1
 	adds r0, r2, r4
-	ldr r3, _080F9AFC @ =gUnknown_3003ED2
+	ldr r3, _080F9AFC @ =gRecvCmds + 2
 	adds r1, r5, r3
 	ldrh r0, [r0]
 	mov r6, r8
@@ -2673,7 +2673,7 @@ _080F9AEA:
 	b _080F9BF8
 	.align 2, 0
 _080F9AF8: .4byte gUnknown_3005450
-_080F9AFC: .4byte gUnknown_3003ED2
+_080F9AFC: .4byte gRecvCmds + 2
 _080F9B00:
 	ldr r7, _080F9B4C @ =gUnknown_3005450
 	ldrb r2, [r7, 0xC]
@@ -2685,7 +2685,7 @@ _080F9B00:
 	adds r6, 0x1
 	cmp r0, 0
 	beq _080F9BF8
-	ldr r0, _080F9B54 @ =gUnknown_3003ED2
+	ldr r0, _080F9B54 @ =gRecvCmds + 2
 	adds r4, r5, r0
 	ldrh r1, [r4]
 	ldr r0, _080F9B58 @ =gUnknown_3007460
@@ -2696,7 +2696,7 @@ _080F9B00:
 	beq _080F9B38
 	strb r2, [r3]
 	bl sub_80FEB14
-	ldr r1, _080F9B5C @ =gUnknown_3003ED4
+	ldr r1, _080F9B5C @ =gRecvCmds + 4
 	adds r0, r5, r1
 	ldrh r1, [r0]
 	ldr r2, _080F9B60 @ =0x0000099c
@@ -2714,21 +2714,21 @@ _080F9B38:
 	.align 2, 0
 _080F9B4C: .4byte gUnknown_3005450
 _080F9B50: .4byte gReceivedRemoteLinkPlayers
-_080F9B54: .4byte gUnknown_3003ED2
+_080F9B54: .4byte gRecvCmds + 2
 _080F9B58: .4byte gUnknown_3007460
-_080F9B5C: .4byte gUnknown_3003ED4
+_080F9B5C: .4byte gRecvCmds + 4
 _080F9B60: .4byte 0x0000099c
 _080F9B64: .4byte gRecvCmds
 _080F9B68:
 	movs r0, 0xEE
 	lsls r0, 8
 	bl sub_80F9D04
-	ldr r1, _080F9B90 @ =gUnknown_3003F50
-	ldr r3, _080F9B94 @ =gUnknown_3003ED2
+	ldr r1, _080F9B90 @ =gSendCmd
+	ldr r3, _080F9B94 @ =gRecvCmds + 2
 	adds r0, r5, r3
 	ldrh r0, [r0]
 	strh r0, [r1, 0x2]
-	ldr r4, _080F9B98 @ =gUnknown_3003ED4
+	ldr r4, _080F9B98 @ =gRecvCmds + 4
 	adds r0, r5, r4
 	ldrh r0, [r0]
 	strh r0, [r1, 0x4]
@@ -2739,9 +2739,9 @@ _080F9B68:
 	strh r0, [r1, 0x6]
 	b _080F9BF4
 	.align 2, 0
-_080F9B90: .4byte gUnknown_3003F50
-_080F9B94: .4byte gUnknown_3003ED2
-_080F9B98: .4byte gUnknown_3003ED4
+_080F9B90: .4byte gSendCmd
+_080F9B94: .4byte gRecvCmds + 2
+_080F9B98: .4byte gRecvCmds + 4
 _080F9B9C: .4byte gRecvCmds
 _080F9BA0:
 	ldr r4, _080F9BD0 @ =gUnknown_3005450
@@ -2752,13 +2752,13 @@ _080F9BA0:
 	bne _080F9C34
 	ldr r0, _080F9BD4 @ =0x0000099b
 	adds r2, r4, r0
-	ldr r1, _080F9BD8 @ =gUnknown_3003ED2
+	ldr r1, _080F9BD8 @ =gRecvCmds + 2
 	adds r3, r5, r1
 	ldrb r1, [r3]
 	ldrb r0, [r2]
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r2, _080F9BDC @ =gUnknown_3003ED4
+	ldr r2, _080F9BDC @ =gRecvCmds + 4
 	adds r0, r5, r2
 	ldrh r1, [r0]
 	ldr r2, _080F9BE0 @ =0x0000099c
@@ -2770,15 +2770,15 @@ _080F9BA0:
 	.align 2, 0
 _080F9BD0: .4byte gUnknown_3005450
 _080F9BD4: .4byte 0x0000099b
-_080F9BD8: .4byte gUnknown_3003ED2
-_080F9BDC: .4byte gUnknown_3003ED4
+_080F9BD8: .4byte gRecvCmds + 2
+_080F9BDC: .4byte gRecvCmds + 4
 _080F9BE0: .4byte 0x0000099c
 _080F9BE4:
-	ldr r0, _080F9C24 @ =gUnknown_3003E60
+	ldr r0, _080F9C24 @ =gLinkPartnersHeldKeys
 	mov r3, r8
 	lsls r1, r3, 1
 	adds r1, r0
-	ldr r4, _080F9C28 @ =gUnknown_3003ED2
+	ldr r4, _080F9C28 @ =gRecvCmds + 2
 	adds r0, r5, r4
 	ldrh r0, [r0]
 	strh r0, [r1]
@@ -2808,8 +2808,8 @@ _080F9BF8:
 	strb r1, [r2]
 	b _080F9C34
 	.align 2, 0
-_080F9C24: .4byte gUnknown_3003E60
-_080F9C28: .4byte gUnknown_3003ED2
+_080F9C24: .4byte gLinkPartnersHeldKeys
+_080F9C28: .4byte gRecvCmds + 2
 _080F9C2C: .4byte gUnknown_3005450
 _080F9C30:
 	adds r0, 0x1
@@ -2909,8 +2909,8 @@ sub_80F9CB4: @ 80F9CB4
 	bx lr
 	thumb_func_end sub_80F9CB4
 
-	thumb_func_start sub_80F9CC8
-sub_80F9CC8: @ 80F9CC8
+	thumb_func_start Rfu_GetBlockReceivedStatus
+Rfu_GetBlockReceivedStatus: @ 80F9CC8
 	push {r4,lr}
 	movs r2, 0
 	movs r1, 0
@@ -2942,14 +2942,14 @@ _080F9CEE:
 	bx r1
 	.align 2, 0
 _080F9D00: .4byte gUnknown_3005450
-	thumb_func_end sub_80F9CC8
+	thumb_func_end Rfu_GetBlockReceivedStatus
 
 	thumb_func_start sub_80F9D04
 sub_80F9D04: @ 80F9D04
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsrs r1, r0, 16
-	ldr r5, _080F9D34 @ =gUnknown_3003F50
+	ldr r5, _080F9D34 @ =gSendCmd
 	strh r1, [r5]
 	movs r0, 0xF0
 	lsls r0, 7
@@ -2970,7 +2970,7 @@ sub_80F9D04: @ 80F9D04
 	beq _080F9DFC
 	b _080F9E22
 	.align 2, 0
-_080F9D34: .4byte gUnknown_3003F50
+_080F9D34: .4byte gSendCmd
 _080F9D38:
 	movs r0, 0xCC
 	lsls r0, 7
@@ -3087,7 +3087,7 @@ _080F9E00:
 	.align 2, 0
 _080F9E18: .4byte gUnknown_3005542
 _080F9E1C:
-	ldr r0, _080F9E28 @ =gUnknown_3005028
+	ldr r0, _080F9E28 @ =gHeldKeyCodeToSend
 	ldrh r0, [r0]
 _080F9E20:
 	strh r0, [r5, 0x2]
@@ -3096,14 +3096,14 @@ _080F9E22:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F9E28: .4byte gUnknown_3005028
+_080F9E28: .4byte gHeldKeyCodeToSend
 	thumb_func_end sub_80F9D04
 
 	thumb_func_start sub_80F9E2C
 sub_80F9E2C: @ 80F9E2C
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, _080F9E58 @ =gUnknown_3003F50
+	ldr r0, _080F9E58 @ =gSendCmd
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080F9E52
@@ -3122,12 +3122,12 @@ _080F9E52:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F9E58: .4byte gUnknown_3003F50
+_080F9E58: .4byte gSendCmd
 _080F9E5C: .4byte gUnknown_3005542
 	thumb_func_end sub_80F9E2C
 
-	thumb_func_start sub_80F9E60
-sub_80F9E60: @ 80F9E60
+	thumb_func_start Rfu_InitBlockSend
+Rfu_InitBlockSend: @ 80F9E60
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -3146,7 +3146,7 @@ _080F9E7C:
 	ldr r0, [r5]
 	cmp r0, 0
 	bne _080F9EA4
-	ldr r0, _080F9EB8 @ =gUnknown_3003F50
+	ldr r0, _080F9EB8 @ =gSendCmd
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080F9EA4
@@ -3170,7 +3170,7 @@ _080F9EA8: .4byte gUnknown_843ED94
 _080F9EAC: .4byte 0x00000701
 _080F9EB0: .4byte gUnknown_843EDD8
 _080F9EB4: .4byte gUnknown_3005450
-_080F9EB8: .4byte gUnknown_3003F50
+_080F9EB8: .4byte gSendCmd
 _080F9EBC: .4byte gUnknown_203AC08
 _080F9EC0:
 	adds r0, r6, 0
@@ -3235,12 +3235,12 @@ _080F9F2A:
 _080F9F38: .4byte gBlockSendBuffer
 _080F9F3C: .4byte gUnknown_3005450
 _080F9F40: .4byte rfufunc_80F9F44
-	thumb_func_end sub_80F9E60
+	thumb_func_end Rfu_InitBlockSend
 
 	thumb_func_start rfufunc_80F9F44
 rfufunc_80F9F44: @ 80F9F44
 	push {r4,r5,lr}
-	ldr r0, _080F9F74 @ =gUnknown_3003F50
+	ldr r0, _080F9F74 @ =gSendCmd
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080F9F98
@@ -3263,7 +3263,7 @@ rfufunc_80F9F44: @ 80F9F44
 	bls _080F9F98
 	b _080F9F94
 	.align 2, 0
-_080F9F74: .4byte gUnknown_3003F50
+_080F9F74: .4byte gSendCmd
 _080F9F78: .4byte gUnknown_3005450
 _080F9F7C:
 	bl GetMultiplayerId
@@ -3295,7 +3295,7 @@ sub_80F9FA8: @ 80F9FA8
 	ldr r0, _080FA014 @ =gUnknown_3005450
 	mov r12, r0
 	ldr r5, [r0, 0x70]
-	ldr r3, _080FA018 @ =gUnknown_3003F50
+	ldr r3, _080FA018 @ =gSendCmd
 	mov r2, r12
 	adds r2, 0x6C
 	ldrh r1, [r2]
@@ -3348,7 +3348,7 @@ _080FA00C:
 	bx r0
 	.align 2, 0
 _080FA014: .4byte gUnknown_3005450
-_080FA018: .4byte gUnknown_3003F50
+_080FA018: .4byte gSendCmd
 _080FA01C: .4byte rfufunc_80FA020
 	thumb_func_end sub_80F9FA8
 
@@ -3367,7 +3367,7 @@ rfufunc_80FA020: @ 80FA020
 	ldrb r0, [r5, 0xC]
 	cmp r0, 0
 	bne _080FA0E8
-	ldr r3, _080FA0CC @ =gUnknown_3003F50
+	ldr r3, _080FA0CC @ =gSendCmd
 	adds r2, r5, 0
 	adds r2, 0x6E
 	ldrh r0, [r2]
@@ -3439,7 +3439,7 @@ _080FA05C:
 	b _080FA0EC
 	.align 2, 0
 _080FA0C8: .4byte gUnknown_3005450
-_080FA0CC: .4byte gUnknown_3003F50
+_080FA0CC: .4byte gSendCmd
 _080FA0D0: .4byte 0xffff8900
 _080FA0D4: .4byte gRecvCmds
 _080FA0D8: .4byte gUnknown_843EBD4
@@ -3624,7 +3624,7 @@ _080FA220: .4byte sub_80FA160
 	thumb_func_start sub_80FA224
 sub_80FA224: @ 80FA224
 	push {r4,lr}
-	ldr r0, _080FA250 @ =gUnknown_3003F50
+	ldr r0, _080FA250 @ =gSendCmd
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080FA248
@@ -3645,7 +3645,7 @@ _080FA248:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080FA250: .4byte gUnknown_3003F50
+_080FA250: .4byte gSendCmd
 _080FA254: .4byte gUnknown_3005450
 _080FA258: .4byte sub_80FA1C4
 	thumb_func_end sub_80FA224
@@ -3789,7 +3789,7 @@ sub_80FA350: @ 80FA350
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080FA372
-	ldr r0, _080FA380 @ =gUnknown_3003F50
+	ldr r0, _080FA380 @ =gSendCmd
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080FA372
@@ -3805,7 +3805,7 @@ _080FA372:
 	.align 2, 0
 _080FA378: .4byte gUnknown_3005450
 _080FA37C: .4byte 0x0000069e
-_080FA380: .4byte gUnknown_3003F50
+_080FA380: .4byte gSendCmd
 _080FA384: .4byte sub_80FA2B0
 	thumb_func_end sub_80FA350
 
@@ -3822,7 +3822,7 @@ sub_80FA388: @ 80FA388
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080FA416
-	ldr r0, _080FA3BC @ =gUnknown_3003F50
+	ldr r0, _080FA3BC @ =gSendCmd
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080FA416
@@ -3834,7 +3834,7 @@ sub_80FA388: @ 80FA388
 	.align 2, 0
 _080FA3B4: .4byte gUnknown_3005450
 _080FA3B8: .4byte 0x0000069e
-_080FA3BC: .4byte gUnknown_3003F50
+_080FA3BC: .4byte gSendCmd
 _080FA3C0: .4byte sub_80FA2B0
 _080FA3C4:
 	bl GetLinkPlayerCount
@@ -3869,7 +3869,7 @@ _080FA3F2:
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080FA416
-	ldr r0, _080FA424 @ =gUnknown_3003F50
+	ldr r0, _080FA424 @ =gSendCmd
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080FA416
@@ -3886,7 +3886,7 @@ _080FA416:
 	.align 2, 0
 _080FA41C: .4byte gUnknown_3005450
 _080FA420: .4byte 0x0000069e
-_080FA424: .4byte gUnknown_3003F50
+_080FA424: .4byte gSendCmd
 _080FA428: .4byte sub_80FA350
 	thumb_func_end sub_80FA388
 
@@ -4003,17 +4003,17 @@ _080FA4E6:
 	bx r1
 	thumb_func_end rfu_get_multiplayer_id
 
-	thumb_func_start sub_80FA4EC
-sub_80FA4EC: @ 80FA4EC
+	thumb_func_start GetRfuPlayerCount
+GetRfuPlayerCount: @ 80FA4EC
 	ldr r0, _080FA4F4 @ =gUnknown_3005450
 	ldrb r0, [r0, 0xD]
 	bx lr
 	.align 2, 0
 _080FA4F4: .4byte gUnknown_3005450
-	thumb_func_end sub_80FA4EC
+	thumb_func_end GetRfuPlayerCount
 
-	thumb_func_start IsNoOneConnected
-IsNoOneConnected: @ 80FA4F8
+	thumb_func_start IsRfuTaskFinished
+IsRfuTaskFinished: @ 80FA4F8
 	push {lr}
 	movs r1, 0
 	ldr r0, _080FA50C @ =gUnknown_3005450
@@ -4027,7 +4027,7 @@ _080FA506:
 	bx r1
 	.align 2, 0
 _080FA50C: .4byte gUnknown_3005450
-	thumb_func_end IsNoOneConnected
+	thumb_func_end IsRfuTaskFinished
 
 	thumb_func_start sub_80FA510
 sub_80FA510: @ 80FA510
@@ -4540,7 +4540,7 @@ _080FA8D8:
 	.align 2, 0
 _080FA8E8: .4byte gTasks
 _080FA8EC:
-	ldr r0, _080FA8FC @ =gUnknown_3003F50
+	ldr r0, _080FA8FC @ =gSendCmd
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080FA9BC
@@ -4549,7 +4549,7 @@ _080FA8F4:
 	strh r0, [r4, 0x8]
 	b _080FA9BC
 	.align 2, 0
-_080FA8FC: .4byte gUnknown_3003F50
+_080FA8FC: .4byte gSendCmd
 _080FA900:
 	ldrb r0, [r5, 0xD]
 	b _080FA92C
@@ -4590,7 +4590,7 @@ _080FA940:
 	bl sub_800B110
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_80F974C
+	bl Rfu_ResetBlockReceivedFlag
 	adds r4, 0x1
 	ldrb r2, [r5, 0xD]
 	cmp r4, r2
@@ -4831,7 +4831,7 @@ _080FAB0C:
 	.4byte _080FABEE
 	.4byte _080FAC78
 _080FAB24:
-	ldr r0, _080FAB40 @ =gUnknown_3003F50
+	ldr r0, _080FAB40 @ =gSendCmd
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _080FAB2E
@@ -4844,9 +4844,9 @@ _080FAB2E:
 	bl sub_80F9D04
 	b _080FAC2E
 	.align 2, 0
-_080FAB40: .4byte gUnknown_3003F50
+_080FAB40: .4byte gSendCmd
 _080FAB44:
-	ldr r0, _080FAB58 @ =gUnknown_3003F50
+	ldr r0, _080FAB58 @ =gSendCmd
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _080FAB4E
@@ -4857,7 +4857,7 @@ _080FAB4E:
 	adds r1, r3
 	b _080FAC36
 	.align 2, 0
-_080FAB58: .4byte gUnknown_3003F50
+_080FAB58: .4byte gSendCmd
 _080FAB5C:
 	bl GetBlockReceivedStatus
 	lsls r0, 24
@@ -4996,7 +4996,7 @@ _080FAC58:
 	.align 2, 0
 _080FAC74: .4byte 0x0000099d
 _080FAC78:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FACD6
@@ -5103,7 +5103,7 @@ _080FAD3A:
 	.align 2, 0
 _080FAD50: .4byte gBlockSendBuffer
 _080FAD54:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FAD8A
@@ -5159,7 +5159,7 @@ sub_80FAD98: @ 80FAD98
 	movs r0, 0x2
 	strb r0, [r1]
 _080FADC0:
-	ldr r4, _080FAE24 @ =c2_800ACD4
+	ldr r4, _080FAE24 @ =CB2_LinkError
 	adds r0, r4, 0
 	bl SetMainCallback2
 	str r4, [r6, 0x8]
@@ -5201,7 +5201,7 @@ _080FAE14: .4byte gUnknown_3005E10
 _080FAE18: .4byte gMain
 _080FAE1C: .4byte c2_mystery_gift_e_reader_run
 _080FAE20: .4byte gWirelessCommType
-_080FAE24: .4byte c2_800ACD4
+_080FAE24: .4byte CB2_LinkError
 _080FAE28: .4byte 0x0000069e
 _080FAE2C: .4byte 0x000008d2
 _080FAE30:
@@ -6812,14 +6812,14 @@ sub_80FBA1C: @ 80FBA1C
 _080FBA28: .4byte gUnknown_3005450
 	thumb_func_end sub_80FBA1C
 
-	thumb_func_start sub_80FBA2C
-sub_80FBA2C: @ 80FBA2C
+	thumb_func_start Rfu_IsMaster
+Rfu_IsMaster: @ 80FBA2C
 	ldr r0, _080FBA34 @ =gUnknown_3005450
 	ldrb r0, [r0, 0xC]
 	bx lr
 	.align 2, 0
 _080FBA34: .4byte gUnknown_3005450
-	thumb_func_end sub_80FBA2C
+	thumb_func_end Rfu_IsMaster
 
 	thumb_func_start RFUVSync
 RFUVSync: @ 80FBA38
@@ -6866,7 +6866,7 @@ sub_80FBA78: @ 80FBA78
 	bl ResetPaletteFade
 	ldr r0, _080FBAF4 @ =sub_80FBA64
 	bl SetVBlankCallback
-	bl sub_8009480
+	bl IsWirelessAdapterConnected
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FBAEC
@@ -6875,7 +6875,7 @@ sub_80FBA78: @ 80FBA78
 	adds r0, r2, 0
 	strh r0, [r1]
 	bl sub_800B1F4
-	bl sub_8009804
+	bl OpenLink
 	ldr r0, _080FBB00 @ =gMain
 	ldrh r0, [r0, 0x24]
 	bl SeedRng
@@ -7269,7 +7269,7 @@ sub_80FBDB8: @ 80FBDB8
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r6, _080FBE10 @ =gUnknown_3003F50
+	ldr r6, _080FBE10 @ =gSendCmd
 	ldrh r0, [r6]
 	cmp r0, 0
 	bne _080FBE08
@@ -7309,7 +7309,7 @@ _080FBE08:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080FBE10: .4byte gUnknown_3003F50
+_080FBE10: .4byte gSendCmd
 _080FBE14: .4byte gUnknown_3005450
 _080FBE18: .4byte gTasks
 _080FBE1C: .4byte gUnknown_843EC41
@@ -8105,8 +8105,8 @@ _080FC458: .4byte gUnknown_3005450
 _080FC45C: .4byte 0x000008d2
 	thumb_func_end sub_80FC44C
 
-	thumb_func_start sub_80FC460
-sub_80FC460: @ 80FC460
+	thumb_func_start GetRfuRecvQueueLength
+GetRfuRecvQueueLength: @ 80FC460
 	ldr r0, _080FC46C @ =gUnknown_3005450
 	ldr r1, _080FC470 @ =0x0000069e
 	adds r0, r1
@@ -8115,7 +8115,7 @@ sub_80FC460: @ 80FC460
 	.align 2, 0
 _080FC46C: .4byte gUnknown_3005450
 _080FC470: .4byte 0x0000069e
-	thumb_func_end sub_80FC460
+	thumb_func_end GetRfuRecvQueueLength
 
 	thumb_func_start nullsub_89
 nullsub_89: @ 80FC474
@@ -9184,7 +9184,7 @@ _080FCB88:
 	ands r4, r1
 	orrs r4, r0
 	strb r4, [r7]
-	bl sub_806E25C
+	bl IsNationalPokedexEnabled
 	ands r0, r6
 	ldrb r1, [r7, 0x1]
 	ands r5, r1
@@ -9368,8 +9368,8 @@ _080FCD6C: .4byte gUnknown_3005440
 _080FCD70: .4byte gUnknown_3005E00
 	thumb_func_end sub_80FCD50
 
-	thumb_func_start sub_80FCD74
-sub_80FCD74: @ 80FCD74
+	thumb_func_start CreateWirelessStatusIndicatorSprite
+CreateWirelessStatusIndicatorSprite: @ 80FCD74
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -9464,7 +9464,7 @@ _080FCE34: .4byte gUnknown_203ACE4
 _080FCE38: .4byte gSprites
 _080FCE3C: .4byte 0x00001234
 _080FCE40: .4byte gUnknown_843F274
-	thumb_func_end sub_80FCD74
+	thumb_func_end CreateWirelessStatusIndicatorSprite
 
 	thumb_func_start DestroyWirelessStatusIndicatorSprite
 DestroyWirelessStatusIndicatorSprite: @ 80FCE44
@@ -9514,8 +9514,8 @@ _080FCEA0: .4byte gDummyOamData
 _080FCEA4: .4byte 0x070003e8
 	thumb_func_end DestroyWirelessStatusIndicatorSprite
 
-	thumb_func_start sub_80FCEA8
-sub_80FCEA8: @ 80FCEA8
+	thumb_func_start LoadWirelessStatusIndicatorSpriteGfx
+LoadWirelessStatusIndicatorSpriteGfx: @ 80FCEA8
 	push {r4,lr}
 	ldr r4, _080FCED4 @ =gUnknown_843F274
 	ldrh r0, [r4, 0x6]
@@ -9540,7 +9540,7 @@ _080FCED4: .4byte gUnknown_843F274
 _080FCED8: .4byte 0xffff0000
 _080FCEDC: .4byte gUnknown_843F27C
 _080FCEE0: .4byte gUnknown_203ACE4
-	thumb_func_end sub_80FCEA8
+	thumb_func_end LoadWirelessStatusIndicatorSpriteGfx
 
 	thumb_func_start sub_80FCEE4
 sub_80FCEE4: @ 80FCEE4

@@ -1,3 +1,5 @@
+COMPARE ?= 0
+
 AS := ../../tools/binutils/bin/arm-none-eabi-as
 CPP := $(CC) -E
 LD := ../../tools/binutils/bin/arm-none-eabi-ld
@@ -85,11 +87,17 @@ $(C_BUILDDIR)/agb_flash_1m.o: CC1FLAGS := -O1 -mthumb-interwork
 $(C_BUILDDIR)/agb_flash_mx.o: CC1FLAGS := -O1 -mthumb-interwork
 $(C_BUILDDIR)/agb_flash_le.o: CC1FLAGS := -O1 -mthumb-interwork
 
+all: rom
+	@:
+
 rom: $(ROM)
+ifeq ($(COMPARE),1)
+	@$(SHA1) rom.sha1
+endif
 
 # For contributors to make sure a change didn't affect the contents of the ROM.
-compare: $(ROM)
-	@$(SHA1) rom.sha1
+compare:
+	@$(MAKE) COMPARE=1
 
 clean: tidy
 	rm -f sound/direct_sound_samples/*.bin

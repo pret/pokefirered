@@ -52,9 +52,12 @@ u8 SpawnSpecialFieldObjectParameterized(u8, u8, u8, s16, s16, u8);
 u8 SpawnSpecialFieldObject(struct MapObjectTemplate *);
 void sub_8093038(s16, s16, s16 *, s16 *);
 void CameraObjectReset1(void);
+void CameraObjectReset2(void);
 void FieldObjectSetGraphicsId(struct MapObject *, u8);
 void FieldObjectTurn(struct MapObject *, u8);
 void FieldObjectTurnByLocalIdAndMap(u8, u8, u8, u8);
+void FieldObjectForceSetSpecialAnim(struct MapObject *, u8);
+u8 sub_8064270(u8 a0);
 const struct MapObjectGraphicsInfo *GetFieldObjectGraphicsInfo(u8);
 void npc_by_local_id_and_map_set_field_1_bit_x20(u8, u8, u8, u8);
 void gpu_pal_allocator_reset__manage_upper_four(void);
@@ -90,6 +93,7 @@ u8 sub_805EB44(u8, u8, s16, s16);
 void npc_paltag_set_load(u8 mode);
 bool8 FieldObjectIsMovementOverridden(struct MapObject *mapObject);
 u8 FieldObjectCheckHeldMovementStatus(struct MapObject *mapObject);
+u8 sub_8063F84(u8 direction);
 
 // Exported data declarations
 

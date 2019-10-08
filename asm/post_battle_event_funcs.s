@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80CA2E4
-sub_80CA2E4: @ 80CA2E4
+	thumb_func_start Special_HallOfFame
+Special_HallOfFame: @ 80CA2E4
 	push {r4-r7,lr}
 	sub sp, 0x4
 	bl sp000_heal_pokemon
@@ -104,7 +104,7 @@ _080CA3B4: .4byte gSaveBlock2Ptr
 _080CA3B8: .4byte gPlayerParty
 _080CA3BC: .4byte 0x0000083b
 _080CA3C0: .4byte CB2_DoHallOfFameScreen
-	thumb_func_end sub_80CA2E4
+	thumb_func_end Special_HallOfFame
 
 	thumb_func_start sub_80CA3C4
 sub_80CA3C4: @ 80CA3C4

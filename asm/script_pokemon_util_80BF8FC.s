@@ -115,7 +115,7 @@ sub_80BF9BC: @ 80BF9BC
 	ldr r3, _080BF9FC @ =CB2_ReturnToField
 	movs r4, 0
 	str r4, [sp]
-	bl sub_8134738
+	bl ShowSelectMovePokemonSummaryScreen
 	movs r0, 0x3
 	bl sub_8138B38
 	ldr r1, _080BFA00 @ =gFieldCallback

@@ -319,7 +319,7 @@ static void Task_SeaGallop_3(void)
         gSpecialVar_0x8006 = 0;
 
     warpInfo = sSeaGallopSpawnTable[gSpecialVar_0x8006];
-    Overworld_SetWarpDestination(warpInfo[0], warpInfo[1], -1, warpInfo[2], warpInfo[3]);
+    SetWarpDestination(warpInfo[0], warpInfo[1], -1, warpInfo[2], warpInfo[3]);
     PlayRainStoppingSoundEffect();
     PlaySE(SE_KAIDAN);
     gFieldCallback = sub_807DF64;

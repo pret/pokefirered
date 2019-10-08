@@ -55,7 +55,7 @@ _080F8024:
 	.align 2, 0
 _080F8030: .4byte gSaveBlock2Ptr
 _080F8034:
-	bl sub_806E25C
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	beq _080F8044
 	movs r0, 0x1

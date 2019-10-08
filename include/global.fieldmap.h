@@ -120,26 +120,34 @@ struct CoordEvent
     u8 *script;
 };
 
+struct HiddenItemStruct
+{
+    u32 itemId:16;
+    u32 hiddenItemId:8; // flag offset to determine flag lookup
+    u32 quantity:7;
+    u32 isUnderfoot:1;
+};
+
+union BgUnion
+{ // carried over from diego's FR/LG work, seems to be the same struct
+    // in gen 3, "kind" (0x3 in BgEvent struct) determines the method to read the union.
+    u8 *script;
+
+    // hidden item type probably
+    struct HiddenItemStruct hiddenItem;
+
+    // secret base type
+    u32 secretBaseId;
+
+};
+
 struct BgEvent
 {
     u16 x, y;
     u8 unk4;
     u8 kind;
     // 0x2 padding for the union beginning.
-    union { // carried over from diego's FR/LG work, seems to be the same struct
-        // in gen 3, "kind" (0x3 in BgEvent struct) determines the method to read the union.
-        u8 *script;
-
-        // hidden item type probably
-        struct {
-            u8 filler6[0x2];
-            u16 hiddenItemId; // flag offset to determine flag lookup
-        } hiddenItem;
-
-        // secret base type
-        u32 secretBaseId;
-
-    } bgUnion;
+    union BgUnion bgUnion;
 };
 
 struct MapEvents

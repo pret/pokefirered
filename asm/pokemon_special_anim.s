@@ -1508,8 +1508,8 @@ sub_811D120: @ 811D120
 	bx r1
 	thumb_func_end sub_811D120
 
-	thumb_func_start sub_811D130
-sub_811D130: @ 811D130
+	thumb_func_start GetMonLevelUpWindowStats
+GetMonLevelUpWindowStats: @ 811D130
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -1539,7 +1539,7 @@ sub_811D130: @ 811D130
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_811D130
+	thumb_func_end GetMonLevelUpWindowStats
 
 	thumb_func_start sub_811D178
 sub_811D178: @ 811D178
@@ -2294,7 +2294,7 @@ sub_811D764: @ 811D764
 	adds r1, r4, 0
 	adds r2, r5, 0
 	movs r3, 0x1
-	bl sub_811E7F0
+	bl DrawLevelUpWindowPg1
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0x1
@@ -2316,7 +2316,7 @@ sub_811D7A0: @ 811D7A0
 	movs r0, 0x1
 	movs r2, 0x1
 	movs r3, 0x2
-	bl sub_811E93C
+	bl DrawLevelUpWindowPg2
 	movs r0, 0x1
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -4457,8 +4457,8 @@ _0811E7E8:
 _0811E7EC: .4byte gTasks
 	thumb_func_end sub_811E7B4
 
-	thumb_func_start sub_811E7F0
-sub_811E7F0: @ 811E7F0
+	thumb_func_start DrawLevelUpWindowPg1
+DrawLevelUpWindowPg1: @ 811E7F0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -4622,10 +4622,10 @@ _0811E8F4:
 _0811E930: .4byte gUnknown_8459B48
 _0811E934: .4byte gUnknown_841B2E5
 _0811E938: .4byte gUnknown_841B2DC
-	thumb_func_end sub_811E7F0
+	thumb_func_end DrawLevelUpWindowPg1
 
-	thumb_func_start sub_811E93C
-sub_811E93C: @ 811E93C
+	thumb_func_start DrawLevelUpWindowPg2
+DrawLevelUpWindowPg2: @ 811E93C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -4755,6 +4755,6 @@ _0811E9C0:
 	bx r0
 	.align 2, 0
 _0811EA40: .4byte gUnknown_8459B48
-	thumb_func_end sub_811E93C
+	thumb_func_end DrawLevelUpWindowPg2
 
 	.align 2, 0 @ Don't pad with nop.

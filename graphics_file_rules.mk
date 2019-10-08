@@ -24,6 +24,7 @@ TEACHYTVGFXDIR := graphics/teachy_tv
 SSANNEGFXDIR := graphics/ss_anne
 ITEMPCGFXDIR := graphics/item_pc
 TITLESCREENGFXDIR := graphics/title_screen
+CREDITSGFXDIR := graphics/credits
 
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
 contest_types := cool beauty cute smart tough
@@ -497,3 +498,20 @@ $(ITEMPCGFXDIR)/unk_8E85090.4bpp: %.4bpp: %.png
 
 $(TITLESCREENGFXDIR)/unk_8ead608.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 135
+
+$(CREDITSGFXDIR)/unk_8EAE548.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 77
+
+POKEDEXAREAMARKERSDATADIR := data/pokedex_area_markers
+
+POKEDEXAREAMARKERFILES := \
+	$(POKEDEXAREAMARKERSDATADIR)/marker_0.4bpp \
+	$(POKEDEXAREAMARKERSDATADIR)/marker_1.4bpp \
+	$(POKEDEXAREAMARKERSDATADIR)/marker_2.4bpp \
+	$(POKEDEXAREAMARKERSDATADIR)/marker_3.4bpp \
+	$(POKEDEXAREAMARKERSDATADIR)/marker_4.4bpp \
+	$(POKEDEXAREAMARKERSDATADIR)/marker_5.4bpp \
+	$(POKEDEXAREAMARKERSDATADIR)/marker_6.4bpp
+
+$(POKEDEXAREAMARKERSDATADIR)/marker.4bpp: $(POKEDEXAREAMARKERFILES)
+	cat $^ > $@

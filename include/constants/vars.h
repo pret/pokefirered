@@ -39,8 +39,8 @@
 #define VAR_0x4021                 0x4021
 #define VAR_ICE_STEP_COUNT         0x4022
 #define VAR_0x4023                 0x4023
-#define VAR_MIRAGE_RND_H           0x4024
-#define VAR_MIRAGE_RND_L           0x4025
+#define VAR_0x4024                 0x4024
+#define VAR_0x4025                 0x4025
 #define VAR_SECRET_BASE_MAP        0x4026
 #define VAR_0x4027                 0x4027
 #define VAR_0x4028                 0x4028

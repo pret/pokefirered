@@ -65,10 +65,9 @@
 	.endm
 
 	.macro subsprite x, y, priority, tile_num_offset, size
-	.2byte \x
-	.2byte \y
+	.byte \x
+	.byte \y
 	.2byte ((\priority) << 14) | ((\tile_num_offset) << 4) | SPRITE_SIZE_\size
-	.2byte 0 @ padding
 	.endm
 
 	.macro obj_image_anim_frame pic_id, duration, flags = 0

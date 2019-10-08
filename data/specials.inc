@@ -159,7 +159,7 @@ gSpecials:: @ 815FD60
 	def_special sub_80CA6BC
 	def_special sub_80CA6DC
 	def_special sub_80CA714
-	def_special sub_80CA758
+	def_special Special_SetHiddenItemFlag
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special Overworld_PlaySpecialMapMusic
@@ -281,7 +281,7 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special nullsub_61
 	def_special DoSoftReset
-	def_special sub_80CA2E4
+	def_special Special_HallOfFame
 	def_special sub_80CB498
 	def_special nullsub_75
 	def_special SpawnScriptFieldObject
@@ -359,7 +359,7 @@ gSpecials:: @ 815FD60
 	def_special sub_80CADEC
 	def_special sub_805D1A8
 	def_special sub_80CB0A8
-	def_special sub_80CB1D8
+	def_special Special_CheckAddCoins
 	def_special GetDaycarePokemonCount
 	def_special sub_80CB63C
 	def_special sub_80CBD80
@@ -371,7 +371,7 @@ gSpecials:: @ 815FD60
 	def_special sub_80CC2BC
 	def_special sub_80CC3CC
 	def_special sub_80CC524
-	def_special sub_8009480
+	def_special IsWirelessAdapterConnected
 	def_special sub_8115A24
 	def_special BerryBlenderLinkJoinGroup
 	def_special UnionRoomSpecial
@@ -412,7 +412,7 @@ gSpecials:: @ 815FD60
 	def_special sub_812B35C
 	def_special Special_SSAnneDepartureCutscene
 	def_special sub_8149A18
-	def_special sub_806E25C
+	def_special IsNationalPokedexEnabled
 	def_special sub_815D9E8
 	def_special sub_814B504
 	def_special sub_80CC8CC
@@ -430,7 +430,7 @@ gSpecials:: @ 815FD60
 	def_special sub_814EA7C
 	def_special sub_80CCB94
 	def_special sub_80CCCF8
-	def_special sub_80F39B4
+	def_special Special_Credits
 	def_special sub_8153810
 	def_special sub_809D764
 	def_special sub_809D8C0

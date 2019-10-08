@@ -236,10 +236,10 @@ _0814D7E8: .4byte gUnknown_846ED90
 _0814D7EC: .4byte gUnknown_846EEC0
 _0814D7F0: .4byte gUnknown_846F058
 _0814D7F4:
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0
 	movs r1, 0
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 	adds r0, r5, 0
 	bl sub_814ECE0
 	ldr r0, _0814D82C @ =gSpriteCoordOffsetY
@@ -341,7 +341,7 @@ _0814D8D4:
 	bl sub_80FA42C
 	b _0814D9BA
 _0814D8DA:
-	bl sub_800A4BC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814D9C0

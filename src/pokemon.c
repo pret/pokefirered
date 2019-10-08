@@ -5,21 +5,20 @@
 #include "random.h"
 #include "main.h"
 #include "text.h"
-#include "data2.h"
+#include "data.h"
 #include "string_util.h"
 #include "battle.h"
-#include "battle_2.h"
+#include "battle_main.h"
 #include "item.h"
 #include "event_data.h"
 #include "util.h"
 #include "pokemon_storage_system.h"
-#include "data2.h"
+#include "data.h"
 #include "battle_gfx_sfx_util.h"
 #include "battle_controllers.h"
 #include "evolution_scene.h"
 #include "battle_message.h"
 #include "battle_util.h"
-#include "battle_ai_script_commands.h"
 #include "link.h"
 #include "m4a.h"
 #include "sound.h"
@@ -1792,7 +1791,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     if (gBaseStats[species].abilities[1])
     {
         value = personality & 1;
-        SetBoxMonData(boxMon, MON_DATA_ALT_ABILITY, &value);
+        SetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, &value);
     }
 
     GiveBoxMonInitialMoveset(boxMon);
@@ -1941,8 +1940,8 @@ void CreateBattleTowerMon(struct Pokemon *mon, struct BattleTowerPokemon *src)
     SetMonData(mon, MON_DATA_SPEED_EV, &src->speedEV);
     SetMonData(mon, MON_DATA_SPATK_EV, &src->spAttackEV);
     SetMonData(mon, MON_DATA_SPDEF_EV, &src->spDefenseEV);
-    value = src->altAbility;
-    SetMonData(mon, MON_DATA_ALT_ABILITY, &value);
+    value = src->abilityNum;
+    SetMonData(mon, MON_DATA_ABILITY_NUM, &value);
     value = src->hpIV;
     SetMonData(mon, MON_DATA_HP_IV, &value);
     value = src->attackIV;
@@ -1998,7 +1997,7 @@ void sub_803E23C(struct Pokemon *mon, struct BattleTowerPokemon *dest)
     dest->speedIV  = GetMonData(mon, MON_DATA_SPEED_IV, NULL);
     dest->spAttackIV  = GetMonData(mon, MON_DATA_SPATK_IV, NULL);
     dest->spDefenseIV  = GetMonData(mon, MON_DATA_SPDEF_IV, NULL);
-    dest->altAbility = GetMonData(mon, MON_DATA_ALT_ABILITY, NULL);
+    dest->abilityNum = GetMonData(mon, MON_DATA_ABILITY_NUM, NULL);
     dest->personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
     GetMonData(mon, MON_DATA_NICKNAME, dest->nickname);
 }
@@ -2553,7 +2552,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
                 damage /= 2;
 
             // sunny
-            if (gBattleWeather & WEATHER_SUNNY_ANY)
+            if (gBattleWeather & WEATHER_SUN_ANY)
             {
                 switch (type)
                 {
@@ -2568,7 +2567,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         }
 
         // flash fire triggered
-        if ((gBattleResources->flags->flags[battlerIdAtk] & UNKNOWN_FLAG_FLASH_FIRE) && type == TYPE_FIRE)
+        if ((gBattleResources->flags->flags[battlerIdAtk] & RESOURCE_FLAG_FLASH_FIRE) && type == TYPE_FIRE)
             damage = (15 * damage) / 10;
     }
 
@@ -2592,7 +2591,7 @@ u8 CountAliveMonsInBattle(u8 caseId)
     case BATTLE_ALIVE_ATK_SIDE:
         for (i = 0; i < 4; i++)
         {
-            if (GetBattlerSide(i) == GetBattlerSide(sBattler_AI) && !(gAbsentBattlerFlags & gBitTable[i]))
+            if (GetBattlerSide(i) == GetBattlerSide(gBattlerAttacker) && !(gAbsentBattlerFlags & gBitTable[i]))
                 retVal++;
         }
         break;
@@ -3100,8 +3099,8 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_IS_EGG:
         retVal = substruct3->isEgg;
         break;
-    case MON_DATA_ALT_ABILITY:
-        retVal = substruct3->altAbility;
+    case MON_DATA_ABILITY_NUM:
+        retVal = substruct3->abilityNum;
         break;
     case MON_DATA_COOL_RIBBON:
         retVal = substruct3->coolRibbon;
@@ -3503,8 +3502,8 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         else
             boxMon->isEgg = 0;
         break;
-    case MON_DATA_ALT_ABILITY:
-        SET8(substruct3->altAbility);
+    case MON_DATA_ABILITY_NUM:
+        SET8(substruct3->abilityNum);
         break;
     case MON_DATA_COOL_RIBBON:
         SET8(substruct3->coolRibbon);
@@ -3699,9 +3698,9 @@ u8 GetMonsStateToDoubles(void)
     return (aliveCount > 1) ? PLAYER_HAS_TWO_USABLE_MONS : PLAYER_HAS_ONE_USABLE_MON;
 }
 
-u8 GetAbilityBySpecies(u16 species, bool8 altAbility)
+u8 GetAbilityBySpecies(u16 species, bool8 abilityNum)
 {
-    if (altAbility)
+    if (abilityNum)
         gLastUsedAbility = gBaseStats[species].abilities[1];
     else
         gLastUsedAbility = gBaseStats[species].abilities[0];
@@ -3712,8 +3711,8 @@ u8 GetAbilityBySpecies(u16 species, bool8 altAbility)
 u8 GetMonAbility(struct Pokemon *mon)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
-    u8 altAbility = GetMonData(mon, MON_DATA_ALT_ABILITY, NULL);
-    return GetAbilityBySpecies(species, altAbility);
+    u8 abilityNum = GetMonData(mon, MON_DATA_ABILITY_NUM, NULL);
+    return GetAbilityBySpecies(species, abilityNum);
 }
 
 static void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord)
@@ -3859,11 +3858,11 @@ static void CopyPlayerPartyMonToBattleData(u8 battlerId, u8 partyIndex)
     gBattleMons[battlerId].spAttack = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPATK, NULL);
     gBattleMons[battlerId].spDefense = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPDEF, NULL);
     gBattleMons[battlerId].isEgg = GetMonData(&gPlayerParty[partyIndex], MON_DATA_IS_EGG, NULL);
-    gBattleMons[battlerId].altAbility = GetMonData(&gPlayerParty[partyIndex], MON_DATA_ALT_ABILITY, NULL);
+    gBattleMons[battlerId].abilityNum = GetMonData(&gPlayerParty[partyIndex], MON_DATA_ABILITY_NUM, NULL);
     gBattleMons[battlerId].otId = GetMonData(&gPlayerParty[partyIndex], MON_DATA_OT_ID, NULL);
     gBattleMons[battlerId].type1 = gBaseStats[gBattleMons[battlerId].species].type1;
     gBattleMons[battlerId].type2 = gBaseStats[gBattleMons[battlerId].species].type2;
-    gBattleMons[battlerId].ability = GetAbilityBySpecies(gBattleMons[battlerId].species, gBattleMons[battlerId].altAbility);
+    gBattleMons[battlerId].ability = GetAbilityBySpecies(gBattleMons[battlerId].species, gBattleMons[battlerId].abilityNum);
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, nickname);
     StringCopy10(gBattleMons[battlerId].nickname, nickname);
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_OT_NAME, gBattleMons[battlerId].otName);
@@ -3884,7 +3883,7 @@ bool8 ExecuteTableBasedItemEffect(struct Pokemon *mon, u16 item, u8 partyIndex, 
     return PokemonUseItemEffects(mon, item, partyIndex, moveIndex, 0);
 }
 
-bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 moveIndex, u8 e)
+bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 moveIndex, u8 e)
 {
     u32 data;
     s32 friendship;
@@ -3900,7 +3899,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
     u8 r10;
     u32 r4;
 
-    heldItem = GetMonData(pkmn, MON_DATA_HELD_ITEM, NULL);
+    heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, NULL);
     if (heldItem == ITEM_ENIGMA_BERRY)
     {
         if (gMain.inBattle)
@@ -4024,27 +4023,27 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                 retVal = FALSE;
             }
             if ((itemEffect[cmdIndex] & 0x40)  // raise level
-             && GetMonData(pkmn, MON_DATA_LEVEL, NULL) != 100)
+             && GetMonData(mon, MON_DATA_LEVEL, NULL) != 100)
             {
-                data = gExperienceTables[gBaseStats[GetMonData(pkmn, MON_DATA_SPECIES, NULL)].growthRate][GetMonData(pkmn, MON_DATA_LEVEL, NULL) + 1];
-                SetMonData(pkmn, MON_DATA_EXP, &data);
-                CalculateMonStats(pkmn);
+                data = gExperienceTables[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].growthRate][GetMonData(mon, MON_DATA_LEVEL, NULL) + 1];
+                SetMonData(mon, MON_DATA_EXP, &data);
+                CalculateMonStats(mon);
                 retVal = FALSE;
             }
             if ((itemEffect[cmdIndex] & 0x20)
-             && HealStatusConditions(pkmn, partyIndex, 7, sp34) == 0)
+             && HealStatusConditions(mon, partyIndex, 7, sp34) == 0)
             {
                 if (sp34 != 4)
                     gBattleMons[sp34].status2 &= ~STATUS2_NIGHTMARE;
                 retVal = FALSE;
             }
-            if ((itemEffect[cmdIndex] & 0x10) && HealStatusConditions(pkmn, partyIndex, 0xF88, sp34) == 0)
+            if ((itemEffect[cmdIndex] & 0x10) && HealStatusConditions(mon, partyIndex, 0xF88, sp34) == 0)
                 retVal = FALSE;
-            if ((itemEffect[cmdIndex] & 8) && HealStatusConditions(pkmn, partyIndex, 16, sp34) == 0)
+            if ((itemEffect[cmdIndex] & 8) && HealStatusConditions(mon, partyIndex, 16, sp34) == 0)
                 retVal = FALSE;
-            if ((itemEffect[cmdIndex] & 4) && HealStatusConditions(pkmn, partyIndex, 32, sp34) == 0)
+            if ((itemEffect[cmdIndex] & 4) && HealStatusConditions(mon, partyIndex, 32, sp34) == 0)
                 retVal = FALSE;
-            if ((itemEffect[cmdIndex] & 2) && HealStatusConditions(pkmn, partyIndex, 64, sp34) == 0)
+            if ((itemEffect[cmdIndex] & 2) && HealStatusConditions(mon, partyIndex, 64, sp34) == 0)
                 retVal = FALSE;
             if ((itemEffect[cmdIndex] & 1)  // heal confusion
              && gMain.inBattle && sp34 != 4 && (gBattleMons[sp34].status2 & STATUS2_CONFUSION))
@@ -4059,16 +4058,16 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
             if (r10 & 0x20)
             {
                 r10 &= ~0x20;
-                data = (GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL) & gPPUpGetMask[moveIndex]) >> (moveIndex * 2);
-                sp28 = CalculatePPWithBonus(GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex, NULL), GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL), moveIndex);
+                data = (GetMonData(mon, MON_DATA_PP_BONUSES, NULL) & gPPUpGetMask[moveIndex]) >> (moveIndex * 2);
+                sp28 = CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL), GetMonData(mon, MON_DATA_PP_BONUSES, NULL), moveIndex);
                 if (data < 3 && sp28 > 4)
                 {
-                    data = GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL) + gPPUpAddMask[moveIndex];
-                    SetMonData(pkmn, MON_DATA_PP_BONUSES, &data);
+                    data = GetMonData(mon, MON_DATA_PP_BONUSES, NULL) + gPPUpAddMask[moveIndex];
+                    SetMonData(mon, MON_DATA_PP_BONUSES, &data);
 
-                    data = CalculatePPWithBonus(GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex, NULL), data, moveIndex) - sp28;
-                    data = GetMonData(pkmn, MON_DATA_PP1 + moveIndex, NULL) + data;
-                    SetMonData(pkmn, MON_DATA_PP1 + moveIndex, &data);
+                    data = CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL), data, moveIndex) - sp28;
+                    data = GetMonData(mon, MON_DATA_PP1 + moveIndex, NULL) + data;
+                    SetMonData(mon, MON_DATA_PP1 + moveIndex, &data);
                     retVal = FALSE;
                 }
             }
@@ -4084,10 +4083,10 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                     {
                     case 0:
                     case 1:
-                        evCount = GetMonEVCount(pkmn);
+                        evCount = GetMonEVCount(mon);
                         if (evCount >= 510)
                             return TRUE;
-                        data = GetMonData(pkmn, sGetMonDataEVConstants[sp28], NULL);
+                        data = GetMonData(mon, sGetMonDataEVConstants[sp28], NULL);
                         if (data < 100)
                         {
                             if (data + itemEffect[sp24] > 100)
@@ -4097,8 +4096,8 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                             if (evCount + r4 > 510)
                                 r4 += 510 - (evCount + r4);
                             data += r4;
-                            SetMonData(pkmn, sGetMonDataEVConstants[sp28], &data);
-                            CalculateMonStats(pkmn);
+                            SetMonData(mon, sGetMonDataEVConstants[sp28], &data);
+                            CalculateMonStats(mon);
                             sp24++;
                             retVal = FALSE;
                         }
@@ -4107,7 +4106,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                         // revive?
                         if (r10 & 0x10)
                         {
-                            if (GetMonData(pkmn, MON_DATA_HP, NULL) != 0)
+                            if (GetMonData(mon, MON_DATA_HP, NULL) != 0)
                             {
                                 sp24++;
                                 break;
@@ -4118,20 +4117,20 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                                 {
                                     gAbsentBattlerFlags &= ~gBitTable[sp34];
                                     CopyPlayerPartyMonToBattleData(sp34, pokemon_order_func(gBattlerPartyIndexes[sp34]));
-                                    if (GetBattlerSide(gActiveBattler) == 0 && gBattleResults.unk4 < 255)
-                                        gBattleResults.unk4++;
+                                    if (GetBattlerSide(gActiveBattler) == 0 && gBattleResults.numRevivesUsed < 255)
+                                        gBattleResults.numRevivesUsed++;
                                 }
                                 else
                                 {
                                     gAbsentBattlerFlags &= ~gBitTable[gActiveBattler ^ 2];
-                                    if (GetBattlerSide(gActiveBattler) == 0 && gBattleResults.unk4 < 255)
-                                        gBattleResults.unk4++;
+                                    if (GetBattlerSide(gActiveBattler) == 0 && gBattleResults.numRevivesUsed < 255)
+                                        gBattleResults.numRevivesUsed++;
                                 }
                             }
                         }
                         else
                         {
-                            if (GetMonData(pkmn, MON_DATA_HP, NULL) == 0)
+                            if (GetMonData(mon, MON_DATA_HP, NULL) == 0)
                             {
                                 sp24++;
                                 break;
@@ -4141,10 +4140,10 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                         switch (data)
                         {
                         case 0xFF:
-                            data = GetMonData(pkmn, MON_DATA_MAX_HP, NULL) - GetMonData(pkmn, MON_DATA_HP, NULL);
+                            data = GetMonData(mon, MON_DATA_MAX_HP, NULL) - GetMonData(mon, MON_DATA_HP, NULL);
                             break;
                         case 0xFE:
-                            data = GetMonData(pkmn, MON_DATA_MAX_HP, NULL) / 2;
+                            data = GetMonData(mon, MON_DATA_MAX_HP, NULL) / 2;
                             if (data == 0)
                                 data = 1;
                             break;
@@ -4152,26 +4151,26 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                             data = gBattleScripting.field_23;
                             break;
                         }
-                        if (GetMonData(pkmn, MON_DATA_MAX_HP, NULL) != GetMonData(pkmn, MON_DATA_HP, NULL))
+                        if (GetMonData(mon, MON_DATA_MAX_HP, NULL) != GetMonData(mon, MON_DATA_HP, NULL))
                         {
                             if (e == 0)
                             {
-                                data = GetMonData(pkmn, MON_DATA_HP, NULL) + data;
-                                if (data > GetMonData(pkmn, MON_DATA_MAX_HP, NULL))
-                                    data = GetMonData(pkmn, MON_DATA_MAX_HP, NULL);
-                                SetMonData(pkmn, MON_DATA_HP, &data);
+                                data = GetMonData(mon, MON_DATA_HP, NULL) + data;
+                                if (data > GetMonData(mon, MON_DATA_MAX_HP, NULL))
+                                    data = GetMonData(mon, MON_DATA_MAX_HP, NULL);
+                                SetMonData(mon, MON_DATA_HP, &data);
                                 if (gMain.inBattle && sp34 != 4)
                                 {
                                     gBattleMons[sp34].hp = data;
                                     if (!(r10 & 0x10) && GetBattlerSide(gActiveBattler) == 0)
                                     {
-                                        if (gBattleResults.unk3 < 255)
-                                            gBattleResults.unk3++;
+                                        if (gBattleResults.numHealingItemsUsed < 255)
+                                            gBattleResults.numHealingItemsUsed++;
                                         // I have to re-use this variable to match.
                                         r5 = gActiveBattler;
                                         gActiveBattler = sp34;
                                         BtlController_EmitGetMonData(0, 0, 0);
-                                        MarkBufferBankForExecution(gActiveBattler);
+                                        MarkBattlerForControllerExec(gActiveBattler);
                                         gActiveBattler = r5;
                                     }
                                 }
@@ -4191,21 +4190,21 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                             {
                                 u16 r4;
 
-                                data = GetMonData(pkmn, MON_DATA_PP1 + r5, NULL);
-                                r4 = GetMonData(pkmn, MON_DATA_MOVE1 + r5, NULL);
-                                if (data != CalculatePPWithBonus(r4, GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL), r5))
+                                data = GetMonData(mon, MON_DATA_PP1 + r5, NULL);
+                                r4 = GetMonData(mon, MON_DATA_MOVE1 + r5, NULL);
+                                if (data != CalculatePPWithBonus(r4, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), r5))
                                 {
                                     data += itemEffect[sp24];
-                                    r4 = GetMonData(pkmn, MON_DATA_MOVE1 + r5, NULL);
-                                    if (data > CalculatePPWithBonus(r4, GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL), r5))
+                                    r4 = GetMonData(mon, MON_DATA_MOVE1 + r5, NULL);
+                                    if (data > CalculatePPWithBonus(r4, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), r5))
                                     {
-                                        r4 = GetMonData(pkmn, MON_DATA_MOVE1 + r5, NULL);
-                                        data = CalculatePPWithBonus(r4, GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL), r5);
+                                        r4 = GetMonData(mon, MON_DATA_MOVE1 + r5, NULL);
+                                        data = CalculatePPWithBonus(r4, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), r5);
                                     }
-                                    SetMonData(pkmn, MON_DATA_PP1 + r5, &data);
+                                    SetMonData(mon, MON_DATA_PP1 + r5, &data);
                                     if (gMain.inBattle
                                      && sp34 != 4 && !(gBattleMons[sp34].status2 & 0x200000)
-                                     && !(gDisableStructs[sp34].unk18_b & gBitTable[r5]))
+                                     && !(gDisableStructs[sp34].mimickedMoves & gBitTable[r5]))
                                         gBattleMons[sp34].pp[r5] = data;
                                     retVal = FALSE;
                                 }
@@ -4216,21 +4215,21 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                         {
                             u16 r4;
 
-                            data = GetMonData(pkmn, MON_DATA_PP1 + moveIndex, NULL);
-                            r4 = GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex, NULL);
-                            if (data != CalculatePPWithBonus(r4, GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL), moveIndex))
+                            data = GetMonData(mon, MON_DATA_PP1 + moveIndex, NULL);
+                            r4 = GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL);
+                            if (data != CalculatePPWithBonus(r4, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), moveIndex))
                             {
                                 data += itemEffect[sp24++];
-                                r4 = GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex, NULL);
-                                if (data > CalculatePPWithBonus(r4, GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL), moveIndex))
+                                r4 = GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL);
+                                if (data > CalculatePPWithBonus(r4, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), moveIndex))
                                 {
-                                    r4 = GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex, NULL);
-                                    data = CalculatePPWithBonus(r4, GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL), moveIndex);
+                                    r4 = GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL);
+                                    data = CalculatePPWithBonus(r4, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), moveIndex);
                                 }
-                                SetMonData(pkmn, MON_DATA_PP1 + moveIndex, &data);
+                                SetMonData(mon, MON_DATA_PP1 + moveIndex, &data);
                                 if (gMain.inBattle
                                  && sp34 != 4 && !(gBattleMons[sp34].status2 & 0x200000)
-                                 && !(gDisableStructs[sp34].unk18_b & gBitTable[moveIndex]))
+                                 && !(gDisableStructs[sp34].mimickedMoves & gBitTable[moveIndex]))
                                     gBattleMons[sp34].pp[moveIndex] = data;
                                 retVal = FALSE;
                             }
@@ -4238,11 +4237,11 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                         break;
                     case 7:
                         {
-                            u16 targetSpecies = GetEvolutionTargetSpecies(pkmn, 2, item);
+                            u16 targetSpecies = GetEvolutionTargetSpecies(mon, 2, item);
 
                             if (targetSpecies != SPECIES_NONE)
                             {
-                                BeginEvolutionScene(pkmn, targetSpecies, 0, partyIndex);
+                                BeginEvolutionScene(mon, targetSpecies, 0, partyIndex);
                                 return FALSE;
                             }
                         }
@@ -4268,10 +4267,10 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                     case 1:
                     case 2:
                     case 3:
-                        evCount = GetMonEVCount(pkmn);
+                        evCount = GetMonEVCount(mon);
                         if (evCount >= 510)
                             return TRUE;
-                        data = GetMonData(pkmn, sGetMonDataEVConstants[sp28 + 2], NULL);
+                        data = GetMonData(mon, sGetMonDataEVConstants[sp28 + 2], NULL);
                         if (data < 100)
                         {
                             if (data + itemEffect[sp24] > 100)
@@ -4281,98 +4280,98 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                             if (evCount + r4 > 510)
                                 r4 += 510 - (evCount + r4);
                             data += r4;
-                            SetMonData(pkmn, sGetMonDataEVConstants[sp28 + 2], &data);
-                            CalculateMonStats(pkmn);
+                            SetMonData(mon, sGetMonDataEVConstants[sp28 + 2], &data);
+                            CalculateMonStats(mon);
                             retVal = FALSE;
                             sp24++;
                         }
                         break;
                     case 4:
-                        data = (GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL) & gPPUpGetMask[moveIndex]) >> (moveIndex * 2);
+                        data = (GetMonData(mon, MON_DATA_PP_BONUSES, NULL) & gPPUpGetMask[moveIndex]) >> (moveIndex * 2);
                         if (data < 3)
                         {
-                            r4 = CalculatePPWithBonus(GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex, NULL), GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL), moveIndex);
-                            data = GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL);
+                            r4 = CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL), GetMonData(mon, MON_DATA_PP_BONUSES, NULL), moveIndex);
+                            data = GetMonData(mon, MON_DATA_PP_BONUSES, NULL);
                             data &= gPPUpSetMask[moveIndex];
                             data += gPPUpAddMask[moveIndex] * 3;
 
-                            SetMonData(pkmn, MON_DATA_PP_BONUSES, &data);
-                            data = CalculatePPWithBonus(GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex, NULL), data, moveIndex) - r4;
-                            data = GetMonData(pkmn, MON_DATA_PP1 + moveIndex, NULL) + data;
-                            SetMonData(pkmn, MON_DATA_PP1 + moveIndex, &data);
+                            SetMonData(mon, MON_DATA_PP_BONUSES, &data);
+                            data = CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL), data, moveIndex) - r4;
+                            data = GetMonData(mon, MON_DATA_PP1 + moveIndex, NULL) + data;
+                            SetMonData(mon, MON_DATA_PP1 + moveIndex, &data);
                             retVal = FALSE;
                         }
                         break;
                     case 5:
-                        if (GetMonData(pkmn, MON_DATA_FRIENDSHIP, NULL) < 100 && retVal == 0 && sp2C == 0)
+                        if (GetMonData(mon, MON_DATA_FRIENDSHIP, NULL) < 100 && retVal == 0 && sp2C == 0)
                         {
                             sp2C = itemEffect[sp24];
-                            friendship = GetMonData(pkmn, MON_DATA_FRIENDSHIP, NULL);
+                            friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, NULL);
                             if (sp2C > 0 && holdEffect == HOLD_EFFECT_HAPPINESS_UP)
                                 friendship += 150 * sp2C / 100;
                             else
                                 friendship += sp2C;
                             if (sp2C > 0)
                             {
-                                if (GetMonData(pkmn, MON_DATA_POKEBALL, NULL) == 11)
+                                if (GetMonData(mon, MON_DATA_POKEBALL, NULL) == 11)
                                     friendship++;
-                                if (GetMonData(pkmn, MON_DATA_MET_LOCATION, NULL) == GetCurrentRegionMapSectionId())
+                                if (GetMonData(mon, MON_DATA_MET_LOCATION, NULL) == GetCurrentRegionMapSectionId())
                                     friendship++;
                             }
                             if (friendship < 0)
                                 friendship = 0;
                             if (friendship > 255)
                                 friendship = 255;
-                            SetMonData(pkmn, MON_DATA_FRIENDSHIP, &friendship);
+                            SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
                         }
                         sp24++;
                         break;
                     case 6:
-                        if (GetMonData(pkmn, MON_DATA_FRIENDSHIP, NULL) >= 100 && GetMonData(pkmn, MON_DATA_FRIENDSHIP, NULL) < 200
+                        if (GetMonData(mon, MON_DATA_FRIENDSHIP, NULL) >= 100 && GetMonData(mon, MON_DATA_FRIENDSHIP, NULL) < 200
                          && retVal == 0 && sp2C == 0)
                         {
                             sp2C = itemEffect[sp24];
-                            friendship = GetMonData(pkmn, MON_DATA_FRIENDSHIP, NULL);
+                            friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, NULL);
                             if (sp2C > 0 && holdEffect == HOLD_EFFECT_HAPPINESS_UP)
                                 friendship += 150 * sp2C / 100;
                             else
                                 friendship += sp2C;
                             if (sp2C > 0)
                             {
-                                if (GetMonData(pkmn, MON_DATA_POKEBALL, NULL) == 11)
+                                if (GetMonData(mon, MON_DATA_POKEBALL, NULL) == 11)
                                     friendship++;
-                                if (GetMonData(pkmn, MON_DATA_MET_LOCATION, NULL) == GetCurrentRegionMapSectionId())
+                                if (GetMonData(mon, MON_DATA_MET_LOCATION, NULL) == GetCurrentRegionMapSectionId())
                                     friendship++;
                             }
                             if (friendship < 0)
                                 friendship = 0;
                             if (friendship > 255)
                                 friendship = 255;
-                            SetMonData(pkmn, MON_DATA_FRIENDSHIP, &friendship);
+                            SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
                         }
                         sp24++;
                         break;
                     case 7:
-                        if (GetMonData(pkmn, MON_DATA_FRIENDSHIP, NULL) >= 200 && retVal == 0 && sp2C == 0)
+                        if (GetMonData(mon, MON_DATA_FRIENDSHIP, NULL) >= 200 && retVal == 0 && sp2C == 0)
                         {
                             sp2C = itemEffect[sp24];
-                            friendship = GetMonData(pkmn, MON_DATA_FRIENDSHIP, NULL);
+                            friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, NULL);
                             if (sp2C > 0 && holdEffect == HOLD_EFFECT_HAPPINESS_UP)
                                 friendship += 150 * sp2C / 100;
                             else
                                 friendship += sp2C;
                             if (sp2C > 0)
                             {
-                                if (GetMonData(pkmn, MON_DATA_POKEBALL, NULL) == 11)
+                                if (GetMonData(mon, MON_DATA_POKEBALL, NULL) == 11)
                                     friendship++;
-                                if (GetMonData(pkmn, MON_DATA_MET_LOCATION, NULL) == GetCurrentRegionMapSectionId())
+                                if (GetMonData(mon, MON_DATA_MET_LOCATION, NULL) == GetCurrentRegionMapSectionId())
                                     friendship++;
                             }
                             if (friendship < 0)
                                 friendship = 0;
                             if (friendship > 255)
                                 friendship = 255;
-                            SetMonData(pkmn, MON_DATA_FRIENDSHIP, &friendship);
+                            SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
                         }
                         sp24++;
                         break;
@@ -4405,73 +4404,59 @@ static bool8 HealStatusConditions(struct Pokemon *mon, u32 unused, u32 healMask,
     }
 }
 
-#ifdef NONMATCHING
-/*
- * This is nonmatching due to the compiler's insistence on avoiding the u8 cast
- * when loading gMain.inBattle. If it weren't for this absent cast, differing
- * the function would be a lot easier.
- */
-bool8 PokemonUseItemEffects2(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 moveIndex, u8 e)
-{ // BEGIN
+bool8 PokemonUseItemEffects2(struct Pokemon *mon, u16 item, u8 partyIndex, u8 moveIndex)
+{
     u32 data;
+    s32 tmp;
     s32 cmdIndex;
     bool8 retVal = TRUE;
     const u8 *itemEffect;
-    u8 sp24 = 6;
-    u32 sp28;
-    s8 sp2C = 0;
-    u8 sp34 = 4;
+    u8 r10 = 6;
+    u32 i;
+    s32 sp18 = 0;
+    u8 holdEffect;
+    u8 battlerId = 4;
     u16 heldItem;
-    u8 r10;
-    s32 r4;
+    u8 curEffect;
+    u32 curMoveId;
 
-    heldItem = GetMonData(pkmn, MON_DATA_HELD_ITEM, NULL);
+    heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, NULL);
+    // you have to write as such, because otherwise gMain.inBattle will lose its u8 cast
     if (heldItem == ITEM_ENIGMA_BERRY)
     {
         if (gMain.inBattle)
-            /*holdEffect = */gEnigmaBerries[gBattlerInMenuId].holdEffect;
+            holdEffect = gEnigmaBerries[gBattlerInMenuId].holdEffect;
         else
-            /*holdEffect = */gSaveBlock1Ptr->enigmaBerry.holdEffect;
+            holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
     }
     else
     {
-        /*holdEffect = */ItemId_GetHoldEffect(heldItem);
+        holdEffect = ItemId_GetHoldEffect(heldItem);
     }
-
     gPotentialItemEffectBattler = gBattlerInMenuId;
-
-    // grr. the original asm also u8 masks after loading the bitmask, despite
-    // the fact that is a useless operation. what's going on here? Something
-    // dumb I bet like dead code.
     if (gMain.inBattle)
     {
         gActiveBattler = gBattlerInMenuId;
-        if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
-            cmdIndex = 0;
-        else
-            cmdIndex = 1;
-        while (cmdIndex < gBattlersCount)
+        for (cmdIndex = GetBattlerSide(gActiveBattler) != B_SIDE_PLAYER;
+             cmdIndex < gBattlersCount;
+             cmdIndex += 2)
         {
-            if (gBattlerPartyIndexes[cmdIndex] == partyIndex)
+            if (gBattlerPartyIndexes[cmdIndex] == partyIndex) 
             {
-                sp34 = cmdIndex;
+                battlerId = cmdIndex;
                 break;
             }
-            cmdIndex += 2;
         }
     }
     else
     {
         gActiveBattler = 0;
-        sp34 = 4;
+        battlerId = 4;
     }
-
-    // _08042504
     if (!IS_POKEMON_ITEM(item))
         return TRUE;
     if (gItemEffectTable[item - 13] == NULL && item != ITEM_ENIGMA_BERRY)
         return TRUE;
-
     if (item == ITEM_ENIGMA_BERRY)
     {
         if (gMain.inBattle)
@@ -4483,1464 +4468,209 @@ bool8 PokemonUseItemEffects2(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 m
     {
         itemEffect = gItemEffectTable[item - 13];
     }
-
     for (cmdIndex = 0; cmdIndex < 6; cmdIndex++)
     {
         switch (cmdIndex)
         {
         // status healing effects
         case 0:
-            if ((itemEffect[cmdIndex] & 0x80)
-             && gMain.inBattle && sp34 != 4 && (gBattleMons[sp34].status2 & STATUS2_INFATUATION))
-            {
-                //gBattleMons[sp34].status2 &= ~STATUS2_INFATUATION;
+            if (itemEffect[cmdIndex] & 0x80
+             && gMain.inBattle
+             && battlerId != 4
+             && gBattleMons[battlerId].status2 & STATUS2_INFATUATION)
                 retVal = FALSE;
-            }
-            if ((itemEffect[cmdIndex] & 0x30)
+            if (itemEffect[cmdIndex] & 0x30
              && !(gBattleMons[gActiveBattler].status2 & STATUS2_FOCUS_ENERGY))
-            {
-                //gBattleMons[gActiveBattler].status2 |= STATUS2_FOCUS_ENERGY;
                 retVal = FALSE;
-            }
             if ((itemEffect[cmdIndex] & 0xF)
              && gBattleMons[gActiveBattler].statStages[STAT_STAGE_ATK] < 12)
-            {
-                //gBattleMons[gActiveBattler].statStages[STAT_STAGE_ATK] += itemEffect[cmdIndex] & 0xF;
-                //if (gBattleMons[gActiveBattler].statStages[STAT_STAGE_ATK] > 12)
-                //    gBattleMons[gActiveBattler].statStages[STAT_STAGE_ATK] = 12;
                 retVal = FALSE;
-            }
             break;
         // in-battle stat boosting effects?
         case 1:
             if ((itemEffect[cmdIndex] & 0xF0)
              && gBattleMons[gActiveBattler].statStages[STAT_STAGE_DEF] < 12)
-            {
-                //gBattleMons[gActiveBattler].statStages[STAT_STAGE_DEF] += (itemEffect[cmdIndex] & 0xF0) >> 4;
-                //if (gBattleMons[gActiveBattler].statStages[STAT_STAGE_DEF] > 12)
-                //    gBattleMons[gActiveBattler].statStages[STAT_STAGE_DEF] = 12;
                 retVal = FALSE;
-            }
             if ((itemEffect[cmdIndex] & 0xF)
              && gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPEED] < 12)
-            {
-                //gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPEED] += itemEffect[cmdIndex] & 0xF;
-                //if (gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPEED] > 12)
-                //    gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPEED] = 12;
                 retVal = FALSE;
-            }
             break;
         // more stat boosting effects?
         case 2:
             if ((itemEffect[cmdIndex] & 0xF0)
              && gBattleMons[gActiveBattler].statStages[STAT_STAGE_ACC] < 12)
-            {
-                //gBattleMons[gActiveBattler].statStages[STAT_STAGE_ACC] += (itemEffect[cmdIndex] & 0xF0) >> 4;
-                //if (gBattleMons[gActiveBattler].statStages[STAT_STAGE_ACC] > 12)
-                //    gBattleMons[gActiveBattler].statStages[STAT_STAGE_ACC] = 12;
                 retVal = FALSE;
-            }
             if ((itemEffect[cmdIndex] & 0xF)
              && gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPATK] < 12)
-            {
-                //gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPATK] += itemEffect[cmdIndex] & 0xF;
-                //if (gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPATK] > 12)
-                //    gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPATK] = 12;
                 retVal = FALSE;
-            }
             break;
         case 3:
             if ((itemEffect[cmdIndex] & 0x80)
              && gSideTimers[GetBattlerSide(gActiveBattler)].mistTimer == 0)
-            {
-                //gSideTimers[GetBattlerSide(gActiveBattler)].mistTimer = 5;
                 retVal = FALSE;
-            }
             if ((itemEffect[cmdIndex] & 0x40)  // raise level
-             && GetMonData(pkmn, MON_DATA_LEVEL, NULL) != 100)
-            {
-                //data = gExperienceTables[gBaseStats[GetMonData(pkmn, MON_DATA_SPECIES, NULL)].growthRate][GetMonData(pkmn, MON_DATA_LEVEL, NULL) + 1];
-                //SetMonData(pkmn, MON_DATA_EXP, &data);
-                //CalculateMonStats(pkmn);
+             && GetMonData(mon, MON_DATA_LEVEL, NULL) != 100)
                 retVal = FALSE;
-            }
             if ((itemEffect[cmdIndex] & 0x20)
-             && sub_8042BE8(pkmn, partyIndex, 7, sp34) == 0)
-            {
-                //if (sp34 != 4)
-                //    gBattleMons[sp34].status2 &= ~STATUS2_NIGHTMARE;
+             && sub_8042BE8(mon, partyIndex, 7, battlerId))
                 retVal = FALSE;
-            }
-            if ((itemEffect[cmdIndex] & 0x10) && sub_8042BE8(pkmn, partyIndex, 0xF88, sp34) == 0)
+            if ((itemEffect[cmdIndex] & 0x10) && sub_8042BE8(mon, partyIndex, 0xF88, battlerId))
                 retVal = FALSE;
-            if ((itemEffect[cmdIndex] & 8) && sub_8042BE8(pkmn, partyIndex, 16, sp34) == 0)
+            if ((itemEffect[cmdIndex] & 8) && sub_8042BE8(mon, partyIndex, 16, battlerId))
                 retVal = FALSE;
-            if ((itemEffect[cmdIndex] & 4) && sub_8042BE8(pkmn, partyIndex, 32, sp34) == 0)
+            if ((itemEffect[cmdIndex] & 4) && sub_8042BE8(mon, partyIndex, 32, battlerId))
                 retVal = FALSE;
-            if ((itemEffect[cmdIndex] & 2) && sub_8042BE8(pkmn, partyIndex, 64, sp34) == 0)
+            if ((itemEffect[cmdIndex] & 2) && sub_8042BE8(mon, partyIndex, 64, battlerId))
                 retVal = FALSE;
-            if ((itemEffect[cmdIndex] & 1)  // heal confusion
-             && gMain.inBattle && sp34 != 4 && (gBattleMons[sp34].status2 & STATUS2_CONFUSION))
-            {
-                //gBattleMons[sp34].status2 &= ~STATUS2_CONFUSION;
+            if (itemEffect[cmdIndex] & 1 // heal confusion
+             && gMain.inBattle && battlerId != 4 && (gBattleMons[battlerId].status2 & STATUS2_CONFUSION))
                 retVal = FALSE;
-            }
             break;
         // EV, HP, and PP raising effects
         case 4:
-            r10 = itemEffect[cmdIndex];
-            if (r10 & 0x20)
+            curEffect = itemEffect[cmdIndex];
+            if (curEffect & 0x20)
             {
-                r10 &= ~0x20;
-                data = (GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL) & gPPUpGetMask[moveIndex]) >> (moveIndex * 2);
-                sp28 = CalculatePPWithBonus(GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex, NULL), GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL), moveIndex);
-                if (data < 3 && sp28 > 4)
-                {
-                    //data = GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL) + gPPUpAddMask[moveIndex];
-                    //SetMonData(pkmn, MON_DATA_PP_BONUSES, &data);
-                    //
-                    //data = CalculatePPWithBonus(GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex, NULL), data, moveIndex) - sp28;
-                    //data = GetMonData(pkmn, MON_DATA_PP1 + moveIndex, NULL) + data;
-                    //SetMonData(pkmn, MON_DATA_PP1 + moveIndex, &data);
+                curEffect &= ~0x20;
+                data = (GetMonData(mon, MON_DATA_PP_BONUSES, NULL) & gPPUpGetMask[moveIndex]) >> (moveIndex * 2);
+                i = CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL), GetMonData(mon, MON_DATA_PP_BONUSES, NULL), moveIndex);
+                if (data < 3 && i > 4)
                     retVal = FALSE;
-                }
             }
-            sp28 = 0;
-            while (r10 != 0) // _080428C0
+            i = 0;
+            while (curEffect) // _080428C0
             {
-                if (r10 & 1)
+                if (curEffect & 1)
                 {
-                    u16 evCount;
-                    u16 targetSpecies;
-                    s32 r5;
-     
-                    switch (sp28)
+                    switch (i)
                     {
                     case 0:
                     case 1:
-                        evCount = GetMonEVCount(pkmn);
-                        if (evCount >= 510)
+                        if (GetMonEVCount(mon) >= 510)
                             return TRUE;
-                        data = GetMonData(pkmn, sGetMonDataEVConstants[sp28], NULL);
+                        data = GetMonData(mon, sGetMonDataEVConstants[i], NULL);
                         if (data < 100)
                         {
-                            //if (data + itemEffect[sp24] > 100)
-                            //    r4 = 100 - (data + itemEffect[sp24]) + itemEffect[sp24];
-                            //else
-                            //    r4 = itemEffect[sp24];
-                            //if (evCount + r4 > 510)
-                            //    r4 += 510 - (evCount + r4);
-                            //data += r4;
-                            //SetMonData(pkmn, sGetMonDataEVConstants[sp28], &data);
-                            //CalculateMonStats(pkmn);
-                            sp24++;
+                            r10++;
                             retVal = FALSE;
                         }
                         break;
                     case 2:
                         // revive?
-                        if (r10 & 0x10)
+                        if (curEffect & 0x10)
                         {
-                            if (GetMonData(pkmn, MON_DATA_HP, NULL) != 0)
+                            if (GetMonData(mon, MON_DATA_HP, NULL) != 0)
                             {
-                                sp24++;
+                                r10++;
                                 break;
                             }
-                            /*
-                            if (gMain.inBattle)
-                            {
-                                if (sp34 != 4)
-                                {
-                                    gAbsentBattlerFlags &= ~gBitTable[sp34];
-                                    CopyPlayerPartyMonToBattleData(sp34, pokemon_order_func(gBattlerPartyIndexes[sp34]));
-                                    if (GetBattlerSide(gActiveBattler) == 0 && gBattleResults.unk4 < 255)
-                                        gBattleResults.unk4++;
-                                }
-                                else
-                                {
-                                    gAbsentBattlerFlags &= ~gBitTable[gActiveBattler ^ 2];
-                                    if (GetBattlerSide(gActiveBattler) == 0 && gBattleResults.unk4 < 255)
-                                        gBattleResults.unk4++;
-                                }
-                            }
-                            */
                         }
                         else
                         {
-                            if (GetMonData(pkmn, MON_DATA_HP, NULL) == 0)
+                            if (GetMonData(mon, MON_DATA_HP, NULL) == 0)
                             {
-                                sp24++;
+                                r10++;
                                 break;
                             }
                         }
-                        /*
-                        data = itemEffect[sp24++];
-                        switch (data)
-                        {
-                        case 0xFF:
-                            data = GetMonData(pkmn, MON_DATA_MAX_HP, NULL) - GetMonData(pkmn, MON_DATA_HP, NULL);
-                            break;
-                        case 0xFE:
-                            data = GetMonData(pkmn, MON_DATA_MAX_HP, NULL) / 2;
-                            if (data == 0)
-                                data = 1;
-                            break;
-                        case 0xFD:
-                            data = gBattleScripting.field_23;
-                            break;
-                        }
-                        */
-                        if (GetMonData(pkmn, MON_DATA_MAX_HP, NULL) != GetMonData(pkmn, MON_DATA_HP, NULL))
-                        {
-                            /*
-                            if (e == 0)
-                            {
-                                data = GetMonData(pkmn, MON_DATA_HP, NULL) + data;
-                                if (data > GetMonData(pkmn, MON_DATA_MAX_HP, NULL))
-                                    data = GetMonData(pkmn, MON_DATA_MAX_HP, NULL);
-                                SetMonData(pkmn, MON_DATA_HP, &data);
-                                if (gMain.inBattle && sp34 != 4)
-                                {
-                                    gBattleMons[sp34].hp = data;
-                                    if (!(r10 & 0x10) && GetBattlerSide(gActiveBattler) == 0)
-                                    {
-                                        if (gBattleResults.unk3 < 255)
-                                            gBattleResults.unk3++;
-                                        // I have to re-use this variable to match.
-                                        r5 = gActiveBattler;
-                                        gActiveBattler = sp34;
-                                        BtlController_EmitGetMonData(0, 0, 0);
-                                        MarkBufferBankForExecution(gActiveBattler);
-                                        gActiveBattler = r5;
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                gBattleMoveDamage = -data;
-                            }
-                            */
+                        if (GetMonData(mon, MON_DATA_MAX_HP, NULL) != GetMonData(mon, MON_DATA_HP, NULL))
                             retVal = FALSE;
-                        }
-                        sp24++;
-                        r10 &= 0xEF;
+                        r10++;
+                        curEffect &= 0xEF;
                         break;
                     case 3:
-                        if (!(r10 & 2))
+                        if (!(curEffect & 2))
                         {
-                            for (r5 = 0; r5 < 4; r5++)
+                            for (tmp = 0; tmp < MAX_MON_MOVES; tmp++)
                             {
-                                data = GetMonData(pkmn, MON_DATA_PP1 + r5, NULL);
-                                r4 = GetMonData(pkmn, MON_DATA_MOVE1 + r5, NULL);
-                                if (data != CalculatePPWithBonus(r4, GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL), r5))
-                                {
-                                    /*
-                                    data += itemEffect[sp24];
-                                    r4 = GetMonData(pkmn, MON_DATA_MOVE1 + r5, NULL);
-                                    if (data > CalculatePPWithBonus(r4, GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL), r5))
-                                    {
-                                        r4 = GetMonData(pkmn, MON_DATA_MOVE1 + r5, NULL);
-                                        data = CalculatePPWithBonus(r4, GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL), r5);
-                                    }
-                                    SetMonData(pkmn, MON_DATA_PP1 + r5, &data);
-                                    if (gMain.inBattle
-                                     && sp34 != 4 && !(gBattleMons[sp34].status2 & 0x200000)
-                                     && !(gDisableStructs[sp34].unk18_b & gBitTable[r5]))
-                                        gBattleMons[sp34].pp[r5] = data;
-                                    */
+                                data = GetMonData(mon, MON_DATA_PP1 + tmp, NULL);
+                                if (data != CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + tmp, NULL), GetMonData(mon, MON_DATA_PP_BONUSES, NULL), tmp))
                                     retVal = FALSE;
-                                }
                             }
+                            r10++;
                         }
                         else // _080429FA
                         {
-                            data = GetMonData(pkmn, MON_DATA_PP1 + moveIndex, NULL);
-                            r4 = GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex, NULL);
-                            if (data != CalculatePPWithBonus(r4, GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL), moveIndex))
+                            data = GetMonData(mon, MON_DATA_PP1 + moveIndex, NULL);
+                            curMoveId = GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL);
+                            if (data != CalculatePPWithBonus(curMoveId, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), moveIndex))
                             {
-                                /*
-                                data += itemEffect[sp24++];
-                                r4 = GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex, NULL);
-                                if (data > CalculatePPWithBonus(r4, GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL), moveIndex))
-                                {
-                                    r4 = GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex, NULL);
-                                    data = CalculatePPWithBonus(r4, GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL), moveIndex);
-                                }
-                                SetMonData(pkmn, MON_DATA_PP1 + moveIndex, &data);
-                                if (gMain.inBattle
-                                 && sp34 != 4 && !(gBattleMons[sp34].status2 & 0x200000)
-                                 && !(gDisableStructs[sp34].unk18_b & gBitTable[moveIndex]))
-                                    gBattleMons[sp34].pp[moveIndex] = data;
-                                */
-                                sp24++;
+                                r10++;
                                 retVal = FALSE;
                             }
                         }
                         break;
                     case 7:
-                        {
-                            targetSpecies = GetEvolutionTargetSpecies(pkmn, 2, item);
-
-                            if (targetSpecies != SPECIES_NONE)
-                            {
-                                //BeginEvolutionScene(pkmn, targetSpecies, 0, partyIndex);
-                                return FALSE;
-                            }
-                        }
+                        if (GetEvolutionTargetSpecies(mon, 2, item) != SPECIES_NONE)
+                            return FALSE;
                         break;
                     }
                 }
-                sp28++;
-                r10 >>= 1;
+                i++;
+                curEffect >>= 1;
             }
             break;
         case 5:
-            r10 = itemEffect[cmdIndex];
-            sp28 = 0;
-            while (r10 != 0)
+            curEffect = itemEffect[cmdIndex];
+            i = 0;
+            while (curEffect)
             {
-                if (r10 & 1)
+                if (curEffect & 1)
                 {
-                    u16 evCount;
-
-                    switch (sp28)
+                    switch (i)
                     {
                     case 0:
                     case 1:
                     case 2:
                     case 3:
-                        evCount = GetMonEVCount(pkmn);
-                        if (evCount >= 510)
+                        if (GetMonEVCount(mon) >= 510)
                             return TRUE;
-                        data = GetMonData(pkmn, sGetMonDataEVConstants[sp28 + 2], NULL);
+                        data = GetMonData(mon, sGetMonDataEVConstants[i + 2], NULL);
                         if (data < 100)
                         {
-                            /*
-                            if (data + itemEffect[sp24] > 100)
-                                r4 = 100 - (data + itemEffect[sp24]) + itemEffect[sp24];
-                            else
-                                r4 = itemEffect[sp24];
-                            if (evCount + r4 > 510)
-                                r4 += 510 - (evCount + r4);
-                            data += r4;
-                            SetMonData(pkmn, sGetMonDataEVConstants[sp28 + 2], &data);
-                            CalculateMonStats(pkmn);
-                            */
                             retVal = FALSE;
-                            sp24++;
+                            r10++;
                         }
                         break;
                     case 4:
-                        data = (GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL) & gPPUpGetMask[moveIndex]) >> (moveIndex * 2);
-                        r4 = CalculatePPWithBonus(GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex, NULL), GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL), moveIndex);
-                        if (data < 3)
-                        {
-                            if (r4 <= 4)
-                                break;
-                            /*
-                            
-                            data = GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL);
-                            data &= gPPUpSetMask[moveIndex];
-                            data += gPPUpAddMask[moveIndex] * 3;
-
-                            SetMonData(pkmn, MON_DATA_PP_BONUSES, &data);
-                            data = CalculatePPWithBonus(GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex, NULL), data, moveIndex) - r4;
-                            data = GetMonData(pkmn, MON_DATA_PP1 + moveIndex, NULL) + data;
-                            SetMonData(pkmn, MON_DATA_PP1 + moveIndex, &data);
-                            */
+                        data = (GetMonData(mon, MON_DATA_PP_BONUSES, NULL) & gPPUpGetMask[moveIndex]) >> (moveIndex * 2);
+                        tmp = CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL), GetMonData(mon, MON_DATA_PP_BONUSES, NULL), moveIndex);
+                        if (data < 3 && tmp > 4)
                             retVal = FALSE;
-                        }
                         break;
                     case 5:
-                        if (GetMonData(pkmn, MON_DATA_FRIENDSHIP, NULL) < 100 && retVal == 0 && sp2C == 0)
-                        {
-                            sp2C = itemEffect[sp24];
-                            /*
-                            friendship = GetMonData(pkmn, MON_DATA_FRIENDSHIP, NULL);
-                            if (sp2C > 0 && holdEffect == HOLD_EFFECT_HAPPINESS_UP)
-                                friendship += 150 * sp2C / 100;
-                            else
-                                friendship += sp2C;
-                            if (sp2C > 0)
-                            {
-                                if (GetMonData(pkmn, MON_DATA_POKEBALL, NULL) == 11)
-                                    friendship++;
-                                if (GetMonData(pkmn, MON_DATA_MET_LOCATION, NULL) == GetCurrentRegionMapSectionId())
-                                    friendship++;
-                            }
-                            if (friendship < 0)
-                                friendship = 0;
-                            if (friendship > 255)
-                                friendship = 255;
-                            SetMonData(pkmn, MON_DATA_FRIENDSHIP, &friendship);
-                            */
-                        }
-                        sp24++;
+                        if (GetMonData(mon, MON_DATA_FRIENDSHIP, NULL) < 100
+                         && retVal == FALSE
+                         && sp18 == 0)
+                            sp18 = itemEffect[r10];
+                        r10++;
                         break;
                     case 6:
-                        if (GetMonData(pkmn, MON_DATA_FRIENDSHIP, NULL) >= 100 && GetMonData(pkmn, MON_DATA_FRIENDSHIP, NULL) < 200
-                         && retVal == 0 && sp2C == 0)
-                        {
-                            sp2C = itemEffect[sp24];
-                            /*
-                            friendship = GetMonData(pkmn, MON_DATA_FRIENDSHIP, NULL);
-                            if (sp2C > 0 && holdEffect == HOLD_EFFECT_HAPPINESS_UP)
-                                friendship += 150 * sp2C / 100;
-                            else
-                                friendship += sp2C;
-                            if (sp2C > 0)
-                            {
-                                if (GetMonData(pkmn, MON_DATA_POKEBALL, NULL) == 11)
-                                    friendship++;
-                                if (GetMonData(pkmn, MON_DATA_MET_LOCATION, NULL) == GetCurrentRegionMapSectionId())
-                                    friendship++;
-                            }
-                            if (friendship < 0)
-                                friendship = 0;
-                            if (friendship > 255)
-                                friendship = 255;
-                            SetMonData(pkmn, MON_DATA_FRIENDSHIP, &friendship);
-                            */
-                        }
-                        sp24++;
+                        if (GetMonData(mon, MON_DATA_FRIENDSHIP, NULL) >= 100
+                         && GetMonData(mon, MON_DATA_FRIENDSHIP, NULL) < 200
+                         && retVal == FALSE
+                         && sp18 == 0)
+                            sp18 = itemEffect[r10];
+                        r10++;
                         break;
-                    case 7:
-                        if (GetMonData(pkmn, MON_DATA_FRIENDSHIP, NULL) >= 200 && retVal == 0 && sp2C == 0)
-                        {
-                            sp2C = itemEffect[sp24];
-                            /*
-                            friendship = GetMonData(pkmn, MON_DATA_FRIENDSHIP, NULL);
-                            if (sp2C > 0 && holdEffect == HOLD_EFFECT_HAPPINESS_UP)
-                                friendship += 150 * sp2C / 100;
-                            else
-                                friendship += sp2C;
-                            if (sp2C > 0)
-                            {
-                                if (GetMonData(pkmn, MON_DATA_POKEBALL, NULL) == 11)
-                                    friendship++;
-                                if (GetMonData(pkmn, MON_DATA_MET_LOCATION, NULL) == GetCurrentRegionMapSectionId())
-                                    friendship++;
-                            }
-                            if (friendship < 0)
-                                friendship = 0;
-                            if (friendship > 255)
-                                friendship = 255;
-                            SetMonData(pkmn, MON_DATA_FRIENDSHIP, &friendship);
-                            */
-                        }
-                        sp24++;
+                    case 7:\
+
+                        if (GetMonData(mon, MON_DATA_FRIENDSHIP, NULL) >= 200
+                         && retVal == FALSE
+                         && sp18 == 0)
+                            sp18 = itemEffect[r10];
+                        r10++;
                         break;
                     }
                 }
-                sp28++;
-                r10 >>= 1;
+                i++;
+                curEffect >>= 1;
             }
             break;
         }
     }
     return retVal;
 }
-#else
-__attribute__((naked))
-bool8 PokemonUseItemEffects2(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 moveIndex, u8 e)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x20\n\
-    mov r8, r0\n\
-    lsls r1, 16\n\
-    lsrs r1, 16\n\
-    str r1, [sp]\n\
-    lsls r2, 24\n\
-    lsrs r2, 24\n\
-    str r2, [sp, 0x4]\n\
-    lsls r3, 24\n\
-    lsrs r3, 24\n\
-    str r3, [sp, 0x8]\n\
-    movs r0, 0x1\n\
-    str r0, [sp, 0x10]\n\
-    movs r1, 0x6\n\
-    mov r10, r1\n\
-    movs r2, 0\n\
-    str r2, [sp, 0x18]\n\
-    movs r0, 0x4\n\
-    str r0, [sp, 0x1C]\n\
-    mov r0, r8\n\
-    movs r1, 0xC\n\
-    bl GetMonData\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    cmp r0, 0xAF\n\
-    beq _08042458\n\
-    bl ItemId_GetHoldEffect\n\
-_08042458:\n\
-    ldr r1, _080424B0 @ =gPotentialItemEffectBattler\n\
-    ldr r0, _080424B4 @ =gBattlerInMenuId\n\
-    ldrb r2, [r0]\n\
-    strb r2, [r1]\n\
-    ldr r0, _080424B8 @ =gMain\n\
-    ldr r1, _080424BC @ =0x00000439\n\
-    adds r0, r1\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0x2\n\
-    ands r0, r1\n\
-    lsls r0, 24\n\
-    lsrs r1, r0, 24\n\
-    cmp r1, 0\n\
-    beq _080424F8\n\
-    ldr r0, _080424C0 @ =gActiveBattler\n\
-    strb r2, [r0]\n\
-    ldrb r0, [r0]\n\
-    bl GetBattlerSide\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    negs r1, r0\n\
-    orrs r1, r0\n\
-    lsrs r1, 31\n\
-    str r1, [sp, 0xC]\n\
-    ldr r0, _080424C4 @ =gBattlersCount\n\
-    ldr r4, [sp]\n\
-    subs r4, 0xD\n\
-    ldrb r0, [r0]\n\
-    cmp r1, r0\n\
-    bge _08042504\n\
-    ldr r2, _080424C8 @ =gBattlerPartyIndexes\n\
-    lsls r0, r1, 1\n\
-    adds r0, r2\n\
-    ldrh r3, [r0]\n\
-    ldr r1, [sp, 0x4]\n\
-    lsls r0, r1, 16\n\
-    lsrs r1, r0, 16\n\
-    adds r5, r0, 0\n\
-    cmp r3, r1\n\
-    bne _080424CC\n\
-    ldr r2, [sp, 0xC]\n\
-    str r2, [sp, 0x1C]\n\
-    b _08042504\n\
-    .align 2, 0\n\
-_080424B0: .4byte gPotentialItemEffectBattler\n\
-_080424B4: .4byte gBattlerInMenuId\n\
-_080424B8: .4byte gMain\n\
-_080424BC: .4byte 0x00000439\n\
-_080424C0: .4byte gActiveBattler\n\
-_080424C4: .4byte gBattlersCount\n\
-_080424C8: .4byte gBattlerPartyIndexes\n\
-_080424CC:\n\
-    ldr r0, [sp, 0xC]\n\
-    adds r0, 0x2\n\
-    str r0, [sp, 0xC]\n\
-    ldr r0, _080424F4 @ =gBattlersCount\n\
-    ldr r1, [sp, 0xC]\n\
-    ldrb r0, [r0]\n\
-    cmp r1, r0\n\
-    bge _08042504\n\
-    lsls r0, r1, 1\n\
-    adds r0, r2\n\
-    ldrh r1, [r0]\n\
-    lsrs r0, r5, 16\n\
-    cmp r1, r0\n\
-    bne _080424CC\n\
-    ldr r2, [sp, 0xC]\n\
-    lsls r0, r2, 24\n\
-    lsrs r0, 24\n\
-    str r0, [sp, 0x1C]\n\
-    b _08042504\n\
-    .align 2, 0\n\
-_080424F4: .4byte gBattlersCount\n\
-_080424F8:\n\
-    ldr r0, _08042520 @ =gActiveBattler\n\
-    strb r1, [r0]\n\
-    movs r0, 0x4\n\
-    str r0, [sp, 0x1C]\n\
-    ldr r4, [sp]\n\
-    subs r4, 0xD\n\
-_08042504:\n\
-    lsls r0, r4, 16\n\
-    lsrs r0, 16\n\
-    cmp r0, 0xA5\n\
-    bhi _08042578\n\
-    ldr r1, _08042524 @ =gItemEffectTable\n\
-    lsls r0, r4, 2\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    cmp r0, 0\n\
-    bne _08042528\n\
-    ldr r1, [sp]\n\
-    cmp r1, 0xAF\n\
-    beq _0804252E\n\
-    b _08042578\n\
-    .align 2, 0\n\
-_08042520: .4byte gActiveBattler\n\
-_08042524: .4byte gItemEffectTable\n\
-_08042528:\n\
-    ldr r2, [sp]\n\
-    cmp r2, 0xAF\n\
-    bne _0804257C\n\
-_0804252E:\n\
-    ldr r0, _08042550 @ =gMain\n\
-    ldr r1, _08042554 @ =0x00000439\n\
-    adds r0, r1\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0x2\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08042560\n\
-    ldr r0, _08042558 @ =gActiveBattler\n\
-    ldrb r1, [r0]\n\
-    lsls r0, r1, 3\n\
-    subs r0, r1\n\
-    lsls r0, 2\n\
-    ldr r1, _0804255C @ =gEnigmaBerries+0x8\n\
-    adds r0, r1\n\
-    b _0804257C\n\
-    .align 2, 0\n\
-_08042550: .4byte gMain\n\
-_08042554: .4byte 0x00000439\n\
-_08042558: .4byte gActiveBattler\n\
-_0804255C: .4byte gEnigmaBerries+0x8\n\
-_08042560:\n\
-    ldr r0, _0804256C @ =gSaveBlock1Ptr\n\
-    ldr r0, [r0]\n\
-    ldr r2, _08042570 @ =0x00003108\n\
-    adds r2, r0, r2\n\
-    str r2, [sp, 0x14]\n\
-    b _0804257E\n\
-    .align 2, 0\n\
-_0804256C: .4byte gSaveBlock1Ptr\n\
-_08042570: .4byte 0x00003108\n\
-_08042574:\n\
-    movs r0, 0\n\
-    b _08042BD8\n\
-_08042578:\n\
-    movs r0, 0x1\n\
-    b _08042BD8\n\
-_0804257C:\n\
-    str r0, [sp, 0x14]\n\
-_0804257E:\n\
-    movs r0, 0\n\
-    str r0, [sp, 0xC]\n\
-_08042582:\n\
-    ldr r1, [sp, 0xC]\n\
-    cmp r1, 0x5\n\
-    bls _0804258A\n\
-    b _08042BCA\n\
-_0804258A:\n\
-    lsls r0, r1, 2\n\
-    ldr r1, _08042594 @ =_08042598\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    mov pc, r0\n\
-    .align 2, 0\n\
-_08042594: .4byte _08042598\n\
-    .align 2, 0\n\
-_08042598:\n\
-    .4byte _080425B0\n\
-    .4byte _0804264C\n\
-    .4byte _080426A8\n\
-    .4byte _08042708\n\
-    .4byte _08042850\n\
-    .4byte _08042A6A\n\
-_080425B0:\n\
-    ldr r0, [sp, 0x14]\n\
-    ldr r1, [sp, 0xC]\n\
-    adds r2, r0, r1\n\
-    ldrb r1, [r2]\n\
-    movs r0, 0x80\n\
-    ands r0, r1\n\
-    adds r5, r2, 0\n\
-    cmp r0, 0\n\
-    beq _080425F4\n\
-    ldr r0, _0804263C @ =gMain\n\
-    ldr r2, _08042640 @ =0x00000439\n\
-    adds r0, r2\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0x2\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080425F4\n\
-    ldr r0, [sp, 0x1C]\n\
-    cmp r0, 0x4\n\
-    beq _080425F4\n\
-    ldr r1, _08042644 @ =gBattleMons\n\
-    movs r0, 0x58\n\
-    ldr r2, [sp, 0x1C]\n\
-    muls r0, r2\n\
-    adds r1, 0x50\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    movs r1, 0xF0\n\
-    lsls r1, 12\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080425F4\n\
-    movs r0, 0\n\
-    str r0, [sp, 0x10]\n\
-_080425F4:\n\
-    ldrb r1, [r5]\n\
-    movs r0, 0x30\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0804261C\n\
-    ldr r1, _08042644 @ =gBattleMons\n\
-    ldr r0, _08042648 @ =gActiveBattler\n\
-    ldrb r2, [r0]\n\
-    movs r0, 0x58\n\
-    muls r0, r2\n\
-    adds r1, 0x50\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    movs r1, 0x80\n\
-    lsls r1, 13\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _0804261C\n\
-    movs r1, 0\n\
-    str r1, [sp, 0x10]\n\
-_0804261C:\n\
-    ldrb r1, [r5]\n\
-    movs r0, 0xF\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _08042628\n\
-    b _08042BCA\n\
-_08042628:\n\
-    ldr r2, _08042644 @ =gBattleMons\n\
-    ldr r0, _08042648 @ =gActiveBattler\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0x58\n\
-    muls r0, r1\n\
-    adds r0, r2\n\
-    ldrb r0, [r0, 0x19]\n\
-    lsls r0, 24\n\
-    asrs r0, 24\n\
-    b _080426F2\n\
-    .align 2, 0\n\
-_0804263C: .4byte gMain\n\
-_08042640: .4byte 0x00000439\n\
-_08042644: .4byte gBattleMons\n\
-_08042648: .4byte gActiveBattler\n\
-_0804264C:\n\
-    ldr r0, [sp, 0x14]\n\
-    ldr r1, [sp, 0xC]\n\
-    adds r2, r0, r1\n\
-    ldrb r1, [r2]\n\
-    movs r0, 0xF0\n\
-    ands r0, r1\n\
-    adds r5, r2, 0\n\
-    cmp r0, 0\n\
-    beq _08042678\n\
-    ldr r2, _080426A0 @ =gBattleMons\n\
-    ldr r0, _080426A4 @ =gActiveBattler\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0x58\n\
-    muls r0, r1\n\
-    adds r0, r2\n\
-    ldrb r0, [r0, 0x1A]\n\
-    lsls r0, 24\n\
-    asrs r0, 24\n\
-    cmp r0, 0xB\n\
-    bgt _08042678\n\
-    movs r2, 0\n\
-    str r2, [sp, 0x10]\n\
-_08042678:\n\
-    ldrb r1, [r5]\n\
-    movs r0, 0xF\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _08042684\n\
-    b _08042BCA\n\
-_08042684:\n\
-    ldr r2, _080426A0 @ =gBattleMons\n\
-    ldr r0, _080426A4 @ =gActiveBattler\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0x58\n\
-    muls r0, r1\n\
-    adds r0, r2\n\
-    ldrb r0, [r0, 0x1B]\n\
-    lsls r0, 24\n\
-    asrs r0, 24\n\
-    cmp r0, 0xB\n\
-    ble _0804269C\n\
-    b _08042BCA\n\
-_0804269C:\n\
-    b _08042832\n\
-    .align 2, 0\n\
-_080426A0: .4byte gBattleMons\n\
-_080426A4: .4byte gActiveBattler\n\
-_080426A8:\n\
-    ldr r1, [sp, 0x14]\n\
-    ldr r0, [sp, 0xC]\n\
-    adds r2, r1, r0\n\
-    ldrb r1, [r2]\n\
-    movs r0, 0xF0\n\
-    ands r0, r1\n\
-    adds r5, r2, 0\n\
-    cmp r0, 0\n\
-    beq _080426D4\n\
-    ldr r2, _08042700 @ =gBattleMons\n\
-    ldr r0, _08042704 @ =gActiveBattler\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0x58\n\
-    muls r0, r1\n\
-    adds r0, r2\n\
-    ldrb r0, [r0, 0x1E]\n\
-    lsls r0, 24\n\
-    asrs r0, 24\n\
-    cmp r0, 0xB\n\
-    bgt _080426D4\n\
-    movs r1, 0\n\
-    str r1, [sp, 0x10]\n\
-_080426D4:\n\
-    ldrb r1, [r5]\n\
-    movs r0, 0xF\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _080426E0\n\
-    b _08042BCA\n\
-_080426E0:\n\
-    ldr r2, _08042700 @ =gBattleMons\n\
-    ldr r0, _08042704 @ =gActiveBattler\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0x58\n\
-    muls r0, r1\n\
-    adds r0, r2\n\
-    ldrb r0, [r0, 0x1C]\n\
-    lsls r0, 24\n\
-    asrs r0, 24\n\
-_080426F2:\n\
-    cmp r0, 0xB\n\
-    ble _080426F8\n\
-    b _08042BCA\n\
-_080426F8:\n\
-    movs r2, 0\n\
-    str r2, [sp, 0x10]\n\
-    b _08042BCA\n\
-    .align 2, 0\n\
-_08042700: .4byte gBattleMons\n\
-_08042704: .4byte gActiveBattler\n\
-_08042708:\n\
-    ldr r0, [sp, 0x14]\n\
-    ldr r1, [sp, 0xC]\n\
-    adds r2, r0, r1\n\
-    ldrb r1, [r2]\n\
-    movs r0, 0x80\n\
-    ands r0, r1\n\
-    adds r5, r2, 0\n\
-    cmp r0, 0\n\
-    beq _0804273A\n\
-    ldr r4, _08042838 @ =gSideTimers\n\
-    ldr r0, _0804283C @ =gActiveBattler\n\
-    ldrb r0, [r0]\n\
-    bl GetBattlerSide\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    lsls r1, r0, 1\n\
-    adds r1, r0\n\
-    lsls r1, 2\n\
-    adds r1, r4\n\
-    ldrb r0, [r1, 0x4]\n\
-    cmp r0, 0\n\
-    bne _0804273A\n\
-    movs r2, 0\n\
-    str r2, [sp, 0x10]\n\
-_0804273A:\n\
-    ldrb r1, [r5]\n\
-    movs r0, 0x40\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08042756\n\
-    mov r0, r8\n\
-    movs r1, 0x38\n\
-    movs r2, 0\n\
-    bl GetMonData\n\
-    cmp r0, 0x64\n\
-    beq _08042756\n\
-    movs r0, 0\n\
-    str r0, [sp, 0x10]\n\
-_08042756:\n\
-    ldrb r1, [r5]\n\
-    movs r0, 0x20\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08042776\n\
-    mov r0, r8\n\
-    ldr r1, [sp, 0x4]\n\
-    movs r2, 0x7\n\
-    ldr r3, [sp, 0x1C]\n\
-    bl sub_8042BE8\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _08042776\n\
-    movs r1, 0\n\
-    str r1, [sp, 0x10]\n\
-_08042776:\n\
-    ldrb r1, [r5]\n\
-    movs r0, 0x10\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08042796\n\
-    ldr r2, _08042840 @ =0x00000f88\n\
-    mov r0, r8\n\
-    ldr r1, [sp, 0x4]\n\
-    ldr r3, [sp, 0x1C]\n\
-    bl sub_8042BE8\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _08042796\n\
-    movs r2, 0\n\
-    str r2, [sp, 0x10]\n\
-_08042796:\n\
-    ldrb r1, [r5]\n\
-    movs r0, 0x8\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080427B6\n\
-    mov r0, r8\n\
-    ldr r1, [sp, 0x4]\n\
-    movs r2, 0x10\n\
-    ldr r3, [sp, 0x1C]\n\
-    bl sub_8042BE8\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _080427B6\n\
-    movs r0, 0\n\
-    str r0, [sp, 0x10]\n\
-_080427B6:\n\
-    ldrb r1, [r5]\n\
-    movs r0, 0x4\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080427D6\n\
-    mov r0, r8\n\
-    ldr r1, [sp, 0x4]\n\
-    movs r2, 0x20\n\
-    ldr r3, [sp, 0x1C]\n\
-    bl sub_8042BE8\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _080427D6\n\
-    movs r1, 0\n\
-    str r1, [sp, 0x10]\n\
-_080427D6:\n\
-    ldrb r1, [r5]\n\
-    movs r0, 0x2\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080427F6\n\
-    mov r0, r8\n\
-    ldr r1, [sp, 0x4]\n\
-    movs r2, 0x40\n\
-    ldr r3, [sp, 0x1C]\n\
-    bl sub_8042BE8\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _080427F6\n\
-    movs r2, 0\n\
-    str r2, [sp, 0x10]\n\
-_080427F6:\n\
-    ldrb r1, [r5]\n\
-    movs r0, 0x1\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _08042802\n\
-    b _08042BCA\n\
-_08042802:\n\
-    ldr r0, _08042844 @ =gMain\n\
-    ldr r1, _08042848 @ =0x00000439\n\
-    adds r0, r1\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0x2\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _08042814\n\
-    b _08042BCA\n\
-_08042814:\n\
-    ldr r2, [sp, 0x1C]\n\
-    cmp r2, 0x4\n\
-    bne _0804281C\n\
-    b _08042BCA\n\
-_0804281C:\n\
-    ldr r1, _0804284C @ =gBattleMons\n\
-    movs r0, 0x58\n\
-    muls r0, r2\n\
-    adds r1, 0x50\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    movs r1, 0x7\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _08042832\n\
-    b _08042BCA\n\
-_08042832:\n\
-    movs r0, 0\n\
-    str r0, [sp, 0x10]\n\
-    b _08042BCA\n\
-    .align 2, 0\n\
-_08042838: .4byte gSideTimers\n\
-_0804283C: .4byte gActiveBattler\n\
-_08042840: .4byte 0x00000f88\n\
-_08042844: .4byte gMain\n\
-_08042848: .4byte 0x00000439\n\
-_0804284C: .4byte gBattleMons\n\
-_08042850:\n\
-    ldr r1, [sp, 0x14]\n\
-    ldr r2, [sp, 0xC]\n\
-    adds r0, r1, r2\n\
-    ldrb r7, [r0]\n\
-    movs r0, 0x20\n\
-    ands r0, r7\n\
-    cmp r0, 0\n\
-    beq _080428B6\n\
-    movs r0, 0xDF\n\
-    ands r7, r0\n\
-    mov r0, r8\n\
-    movs r1, 0x15\n\
-    movs r2, 0\n\
-    bl GetMonData\n\
-    adds r5, r0, 0\n\
-    ldr r0, _080428DC @ =gPPUpGetMask\n\
-    ldr r1, [sp, 0x8]\n\
-    adds r0, r1, r0\n\
-    ldrb r0, [r0]\n\
-    ands r5, r0\n\
-    lsls r0, r1, 1\n\
-    lsrs r5, r0\n\
-    adds r1, 0xD\n\
-    mov r0, r8\n\
-    movs r2, 0\n\
-    bl GetMonData\n\
-    adds r4, r0, 0\n\
-    lsls r4, 16\n\
-    lsrs r4, 16\n\
-    mov r0, r8\n\
-    movs r1, 0x15\n\
-    movs r2, 0\n\
-    bl GetMonData\n\
-    adds r1, r0, 0\n\
-    lsls r1, 24\n\
-    lsrs r1, 24\n\
-    adds r0, r4, 0\n\
-    ldr r2, [sp, 0x8]\n\
-    bl CalculatePPWithBonus\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r5, 0x2\n\
-    bhi _080428B6\n\
-    cmp r0, 0x4\n\
-    bls _080428B6\n\
-    movs r2, 0\n\
-    str r2, [sp, 0x10]\n\
-_080428B6:\n\
-    movs r0, 0\n\
-    mov r9, r0\n\
-    cmp r7, 0\n\
-    bne _080428C0\n\
-    b _08042BCA\n\
-_080428C0:\n\
-    movs r0, 0x1\n\
-    ands r0, r7\n\
-    cmp r0, 0\n\
-    bne _080428CA\n\
-    b _08042A5C\n\
-_080428CA:\n\
-    mov r1, r9\n\
-    cmp r1, 0x7\n\
-    bls _080428D2\n\
-    b _08042A5C\n\
-_080428D2:\n\
-    lsls r0, r1, 2\n\
-    ldr r1, _080428E0 @ =_080428E4\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    mov pc, r0\n\
-    .align 2, 0\n\
-_080428DC: .4byte gPPUpGetMask\n\
-_080428E0: .4byte _080428E4\n\
-    .align 2, 0\n\
-_080428E4:\n\
-    .4byte _08042904\n\
-    .4byte _08042904\n\
-    .4byte _08042934\n\
-    .4byte _08042996\n\
-    .4byte _08042A5C\n\
-    .4byte _08042A5C\n\
-    .4byte _08042A5C\n\
-    .4byte _08042A4A\n\
-_08042904:\n\
-    mov r0, r8\n\
-    bl GetMonEVCount\n\
-    lsls r0, 16\n\
-    ldr r1, _0804292C @ =0x01fd0000\n\
-    cmp r0, r1\n\
-    bls _08042914\n\
-    b _08042578\n\
-_08042914:\n\
-    ldr r0, _08042930 @ =sGetMonDataEVConstants\n\
-    add r0, r9\n\
-    ldrb r1, [r0]\n\
-    mov r0, r8\n\
-    movs r2, 0\n\
-    bl GetMonData\n\
-    adds r5, r0, 0\n\
-    cmp r5, 0x63\n\
-    bls _0804292A\n\
-    b _08042A5C\n\
-_0804292A:\n\
-    b _08042A3A\n\
-    .align 2, 0\n\
-_0804292C: .4byte 0x01fd0000\n\
-_08042930: .4byte sGetMonDataEVConstants\n\
-_08042934:\n\
-    movs r0, 0x10\n\
-    ands r0, r7\n\
-    cmp r0, 0\n\
-    beq _08042952\n\
-    mov r0, r8\n\
-    movs r1, 0x39\n\
-    movs r2, 0\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    beq _08042968\n\
-    mov r0, r10\n\
-    adds r0, 0x1\n\
-    lsls r0, 24\n\
-    b _080429F4\n\
-_08042952:\n\
-    mov r0, r8\n\
-    movs r1, 0x39\n\
-    movs r2, 0\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    bne _08042968\n\
-    mov r0, r10\n\
-    adds r0, 0x1\n\
-    lsls r0, 24\n\
-    b _080429F4\n\
-_08042968:\n\
-    mov r0, r8\n\
-    movs r1, 0x3A\n\
-    movs r2, 0\n\
-    bl GetMonData\n\
-    adds r4, r0, 0\n\
-    mov r0, r8\n\
-    movs r1, 0x39\n\
-    movs r2, 0\n\
-    bl GetMonData\n\
-    cmp r4, r0\n\
-    beq _08042986\n\
-    movs r0, 0\n\
-    str r0, [sp, 0x10]\n\
-_08042986:\n\
-    mov r0, r10\n\
-    adds r0, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r10, r0\n\
-    movs r0, 0xEF\n\
-    ands r7, r0\n\
-    b _08042A5C\n\
-_08042996:\n\
-    movs r0, 0x2\n\
-    ands r0, r7\n\
-    cmp r0, 0\n\
-    bne _080429FA\n\
-    movs r6, 0\n\
-    movs r1, 0x1\n\
-    add r10, r1\n\
-_080429A4:\n\
-    adds r1, r6, 0\n\
-    adds r1, 0x11\n\
-    mov r0, r8\n\
-    movs r2, 0\n\
-    bl GetMonData\n\
-    adds r5, r0, 0\n\
-    adds r1, r6, 0\n\
-    adds r1, 0xD\n\
-    mov r0, r8\n\
-    movs r2, 0\n\
-    bl GetMonData\n\
-    adds r4, r0, 0\n\
-    lsls r4, 16\n\
-    lsrs r4, 16\n\
-    mov r0, r8\n\
-    movs r1, 0x15\n\
-    movs r2, 0\n\
-    bl GetMonData\n\
-    adds r1, r0, 0\n\
-    lsls r1, 24\n\
-    lsrs r1, 24\n\
-    lsls r2, r6, 24\n\
-    lsrs r2, 24\n\
-    adds r0, r4, 0\n\
-    bl CalculatePPWithBonus\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r5, r0\n\
-    beq _080429EA\n\
-    movs r2, 0\n\
-    str r2, [sp, 0x10]\n\
-_080429EA:\n\
-    adds r6, 0x1\n\
-    cmp r6, 0x3\n\
-    ble _080429A4\n\
-    mov r1, r10\n\
-    lsls r0, r1, 24\n\
-_080429F4:\n\
-    lsrs r0, 24\n\
-    mov r10, r0\n\
-    b _08042A5C\n\
-_080429FA:\n\
-    ldr r1, [sp, 0x8]\n\
-    adds r1, 0x11\n\
-    mov r0, r8\n\
-    movs r2, 0\n\
-    bl GetMonData\n\
-    adds r5, r0, 0\n\
-    ldr r1, [sp, 0x8]\n\
-    adds r1, 0xD\n\
-    mov r0, r8\n\
-    movs r2, 0\n\
-    bl GetMonData\n\
-    adds r4, r0, 0\n\
-    lsls r4, 16\n\
-    lsrs r4, 16\n\
-    mov r0, r8\n\
-    movs r1, 0x15\n\
-    movs r2, 0\n\
-    bl GetMonData\n\
-    adds r1, r0, 0\n\
-    lsls r1, 24\n\
-    lsrs r1, 24\n\
-    adds r0, r4, 0\n\
-    ldr r2, [sp, 0x8]\n\
-    bl CalculatePPWithBonus\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r5, r0\n\
-    beq _08042A5C\n\
-_08042A3A:\n\
-    mov r0, r10\n\
-    adds r0, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r10, r0\n\
-    movs r2, 0\n\
-    str r2, [sp, 0x10]\n\
-    b _08042A5C\n\
-_08042A4A:\n\
-    mov r0, r8\n\
-    movs r1, 0x2\n\
-    ldr r2, [sp]\n\
-    bl GetEvolutionTargetSpecies\n\
-    lsls r0, 16\n\
-    cmp r0, 0\n\
-    beq _08042A5C\n\
-    b _08042574\n\
-_08042A5C:\n\
-    movs r0, 0x1\n\
-    add r9, r0\n\
-    lsrs r7, 1\n\
-    cmp r7, 0\n\
-    beq _08042A68\n\
-    b _080428C0\n\
-_08042A68:\n\
-    b _08042BCA\n\
-_08042A6A:\n\
-    ldr r1, [sp, 0x14]\n\
-    ldr r2, [sp, 0xC]\n\
-    adds r0, r1, r2\n\
-    ldrb r7, [r0]\n\
-    movs r0, 0\n\
-    mov r9, r0\n\
-    cmp r7, 0\n\
-    bne _08042A7C\n\
-    b _08042BCA\n\
-_08042A7C:\n\
-    movs r0, 0x1\n\
-    ands r0, r7\n\
-    cmp r0, 0\n\
-    bne _08042A86\n\
-    b _08042BBE\n\
-_08042A86:\n\
-    mov r1, r9\n\
-    cmp r1, 0x7\n\
-    bls _08042A8E\n\
-    b _08042BBE\n\
-_08042A8E:\n\
-    lsls r0, r1, 2\n\
-    ldr r1, _08042A98 @ =_08042A9C\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    mov pc, r0\n\
-    .align 2, 0\n\
-_08042A98: .4byte _08042A9C\n\
-    .align 2, 0\n\
-_08042A9C:\n\
-    .4byte _08042ABC\n\
-    .4byte _08042ABC\n\
-    .4byte _08042ABC\n\
-    .4byte _08042ABC\n\
-    .4byte _08042AF4\n\
-    .4byte _08042B4C\n\
-    .4byte _08042B68\n\
-    .4byte _08042B92\n\
-_08042ABC:\n\
-    mov r0, r8\n\
-    bl GetMonEVCount\n\
-    lsls r0, 16\n\
-    ldr r1, _08042AEC @ =0x01fd0000\n\
-    cmp r0, r1\n\
-    bls _08042ACC\n\
-    b _08042578\n\
-_08042ACC:\n\
-    ldr r0, _08042AF0 @ =sGetMonDataEVConstants\n\
-    mov r1, r9\n\
-    adds r1, 0x2\n\
-    adds r1, r0\n\
-    ldrb r1, [r1]\n\
-    mov r0, r8\n\
-    movs r2, 0\n\
-    bl GetMonData\n\
-    adds r5, r0, 0\n\
-    cmp r5, 0x63\n\
-    bhi _08042BBE\n\
-    movs r2, 0\n\
-    str r2, [sp, 0x10]\n\
-    b _08042BB4\n\
-    .align 2, 0\n\
-_08042AEC: .4byte 0x01fd0000\n\
-_08042AF0: .4byte sGetMonDataEVConstants\n\
-_08042AF4:\n\
-    mov r0, r8\n\
-    movs r1, 0x15\n\
-    movs r2, 0\n\
-    bl GetMonData\n\
-    adds r5, r0, 0\n\
-    ldr r0, _08042B48 @ =gPPUpGetMask\n\
-    ldr r1, [sp, 0x8]\n\
-    adds r0, r1, r0\n\
-    ldrb r0, [r0]\n\
-    ands r5, r0\n\
-    lsls r0, r1, 1\n\
-    lsrs r5, r0\n\
-    adds r1, 0xD\n\
-    mov r0, r8\n\
-    movs r2, 0\n\
-    bl GetMonData\n\
-    adds r4, r0, 0\n\
-    lsls r4, 16\n\
-    lsrs r4, 16\n\
-    mov r0, r8\n\
-    movs r1, 0x15\n\
-    movs r2, 0\n\
-    bl GetMonData\n\
-    adds r1, r0, 0\n\
-    lsls r1, 24\n\
-    lsrs r1, 24\n\
-    adds r0, r4, 0\n\
-    ldr r2, [sp, 0x8]\n\
-    bl CalculatePPWithBonus\n\
-    lsls r0, 24\n\
-    lsrs r6, r0, 24\n\
-    cmp r5, 0x2\n\
-    bhi _08042BBE\n\
-    cmp r6, 0x4\n\
-    ble _08042BBE\n\
-    movs r2, 0\n\
-    str r2, [sp, 0x10]\n\
-    b _08042BBE\n\
-    .align 2, 0\n\
-_08042B48: .4byte gPPUpGetMask\n\
-_08042B4C:\n\
-    mov r0, r8\n\
-    movs r1, 0x20\n\
-    movs r2, 0\n\
-    bl GetMonData\n\
-    cmp r0, 0x63\n\
-    bhi _08042BB4\n\
-    ldr r0, [sp, 0x10]\n\
-    cmp r0, 0\n\
-    bne _08042BB4\n\
-    ldr r1, [sp, 0x18]\n\
-    cmp r1, 0\n\
-    bne _08042BB4\n\
-    b _08042BAC\n\
-_08042B68:\n\
-    mov r0, r8\n\
-    movs r1, 0x20\n\
-    movs r2, 0\n\
-    bl GetMonData\n\
-    cmp r0, 0x63\n\
-    bls _08042BB4\n\
-    mov r0, r8\n\
-    movs r1, 0x20\n\
-    movs r2, 0\n\
-    bl GetMonData\n\
-    cmp r0, 0xC7\n\
-    bhi _08042BB4\n\
-    ldr r2, [sp, 0x10]\n\
-    cmp r2, 0\n\
-    bne _08042BB4\n\
-    ldr r0, [sp, 0x18]\n\
-    cmp r0, 0\n\
-    bne _08042BB4\n\
-    b _08042BAC\n\
-_08042B92:\n\
-    mov r0, r8\n\
-    movs r1, 0x20\n\
-    movs r2, 0\n\
-    bl GetMonData\n\
-    cmp r0, 0xC7\n\
-    bls _08042BB4\n\
-    ldr r1, [sp, 0x10]\n\
-    cmp r1, 0\n\
-    bne _08042BB4\n\
-    ldr r2, [sp, 0x18]\n\
-    cmp r2, 0\n\
-    bne _08042BB4\n\
-_08042BAC:\n\
-    ldr r0, [sp, 0x14]\n\
-    add r0, r10\n\
-    ldrb r0, [r0]\n\
-    str r0, [sp, 0x18]\n\
-_08042BB4:\n\
-    mov r0, r10\n\
-    adds r0, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r10, r0\n\
-_08042BBE:\n\
-    movs r0, 0x1\n\
-    add r9, r0\n\
-    lsrs r7, 1\n\
-    cmp r7, 0\n\
-    beq _08042BCA\n\
-    b _08042A7C\n\
-_08042BCA:\n\
-    ldr r1, [sp, 0xC]\n\
-    adds r1, 0x1\n\
-    str r1, [sp, 0xC]\n\
-    cmp r1, 0x5\n\
-    bgt _08042BD6\n\
-    b _08042582\n\
-_08042BD6:\n\
-    ldr r0, [sp, 0x10]\n\
-_08042BD8:\n\
-    add sp, 0x20\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .syntax divided\n");
-}
-#endif
 
 static bool8 sub_8042BE8(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId)
 {
@@ -6106,7 +4836,7 @@ const u8 *Battle_PrintStatBoosterEffectMessage(u16 itemId)
             }
             else
             {
-                sBattler_AI = gBattlerInMenuId;
+                gBattlerAttacker = gBattlerInMenuId;
                 BattleStringExpandPlaceholdersToDisplayedString(BattleText_GetPumped);
             }
         }
@@ -6114,7 +4844,7 @@ const u8 *Battle_PrintStatBoosterEffectMessage(u16 itemId)
 
     if (itemEffect[3] & 0x80)
     {
-        sBattler_AI = gBattlerInMenuId;
+        gBattlerAttacker = gBattlerInMenuId;
         BattleStringExpandPlaceholdersToDisplayedString(BattleText_MistShroud);
     }
 
@@ -6231,7 +4961,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
                 if (gEvolutionTable[species][i].param == heldItem)
                 {
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
-                    if (sub_806E25C() || targetSpecies <= 151)
+                    if (IsNationalPokedexEnabled() || targetSpecies <= 151)
                     {
                         heldItem = 0;
                         SetMonData(mon, MON_DATA_HELD_ITEM, &heldItem);
@@ -6466,9 +5196,9 @@ bool8 sub_80435E0(void)
     return retVal;
 }
 
-bool8 GetLinkTrainerFlankId(u8 linkPlayerId)
+bool16 GetLinkTrainerFlankId(u8 linkPlayerId)
 {
-    bool8 retVal = FALSE;
+    bool16 retVal = FALSE;
     switch (gLinkPlayers[linkPlayerId].id)
     {
     case 0:
@@ -6483,7 +5213,7 @@ bool8 GetLinkTrainerFlankId(u8 linkPlayerId)
     return retVal;
 }
 
-s32 GetBankMultiplayerId(u16 a1)
+s32 GetBattlerMultiplayerId(u16 a1)
 {
     s32 id;
     for (id = 0; id < MAX_LINK_PLAYERS; id++)
@@ -6899,7 +5629,7 @@ u16 sub_8043F90(u16 species)
 {
     species = SpeciesToNationalPokedexNum(species);
 
-    if (!sub_806E25C() && species > 151)
+    if (!IsNationalPokedexEnabled() && species > 151)
         return 0xFFFF;
     return species;
 }
@@ -6962,10 +5692,10 @@ const u32 *GetMonFrontSpritePal(struct Pokemon *mon)
     u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
     u32 otId = GetMonData(mon, MON_DATA_OT_ID, 0);
     u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, 0);
-    return GetFrontSpritePalFromSpeciesAndPersonality(species, otId, personality);
+    return GetMonSpritePalFromSpeciesAndPersonality(species, otId, personality);
 }
 
-const u32 *GetFrontSpritePalFromSpeciesAndPersonality(u16 species, u32 otId, u32 personality)
+const u32 *GetMonSpritePalFromSpeciesAndPersonality(u16 species, u32 otId, u32 personality)
 {
     u32 shinyValue;
 
@@ -7075,15 +5805,9 @@ void BoxMonRestorePP(struct BoxPokemon *boxMon)
     }
 }
 
-// SetMonPreventsSwitchingString
-void sub_8044348(void)
+void SetMonPreventsSwitchingString(void)
 {
-#ifdef NONMATCHING
-    gLastUsedAbility = gBattleStruct -> abilityPreventingSwitchout; // fixed from the original
-#else
-    gLastUsedAbility = ((u8 *) gBattleStruct)[0xac]; // huh? why is this wrong?
-#endif
-
+    gLastUsedAbility = gBattleStruct -> abilityPreventingSwitchout;
     gBattleTextBuff1[0] = B_BUFF_PLACEHOLDER_BEGIN;
     gBattleTextBuff1[1] = B_BUFF_MON_NICK_WITH_PREFIX;
     gBattleTextBuff1[2] = gBattleStruct->battlerPreventingSwitchout;
@@ -7140,7 +5864,7 @@ static bool8 IsShinyOtIdPersonality(u32 otId, u32 personality)
 u8 *GetTrainerPartnerName(void)
 {
     u8 id = GetMultiplayerId();
-    return gLinkPlayers[GetBankMultiplayerId(gLinkPlayers[id].id ^ 2)].name;
+    return gLinkPlayers[GetBattlerMultiplayerId(gLinkPlayers[id].id ^ 2)].name;
 }
 
 u8 GetPlayerPartyHighestLevel(void)

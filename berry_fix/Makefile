@@ -1,3 +1,5 @@
+COMPARE ?= 0
+
 AS := ../tools/binutils/bin/arm-none-eabi-as
 CPP := $(CC) -E
 LD := ../tools/binutils/bin/arm-none-eabi-ld
@@ -57,7 +59,7 @@ FIX := ../tools/gbafix/gbafix$(EXE)
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
 
-.PHONY: rom clean compare tidy
+.PHONY: all rom clean compare tidy payload
 
 C_SRCS := $(wildcard $(C_SUBDIR)/*.c $(C_SUBDIR)/*/*.c $(C_SUBDIR)/*/*/*.c)
 C_OBJS := $(patsubst $(C_SUBDIR)/%.c,$(C_BUILDDIR)/%.o,$(C_SRCS))
@@ -81,11 +83,16 @@ SUBDIRS  := $(sort $(dir $(OBJS)))
 
 $(shell mkdir -p $(SUBDIRS))
 
+all: payload rom
+	@:
+
 rom: $(ROM)
+ifeq ($(COMPARE),1)
+	@$(SHA1) rom.sha1
+endif
 
 # For contributors to make sure a change didn't affect the contents of the ROM.
-compare: $(ROM)
-	@$(SHA1) rom.sha1
+compare: ; @$(MAKE) COMPARE=1
 
 clean: tidy
 	rm -f sound/direct_sound_samples/*.bin
@@ -138,10 +145,10 @@ else
 $(DATA_ASM_BUILDDIR)/%.o: data_dep = $(shell $(SCANINC) $(DATA_ASM_SUBDIR)/$*.s)
 endif
 
-payload: data/payload.gba.lz
+payload:
+	@$(MAKE) -C payload COMPARE=$(COMPARE)
 
-payload/payload.gba:
-	$(MAKE) -C payload/
+payload/payload.gba: payload
 
 data/payload.gba.lz: payload/payload.gba
 	$(GFX) $< $@ -search 1

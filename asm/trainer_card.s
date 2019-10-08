@@ -208,10 +208,10 @@ _0808919A:
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080891B6
-	bl sub_80FCEA8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0xE6
 	movs r1, 0x96
-	bl sub_80FCD74
+	bl CreateWirelessStatusIndicatorSprite
 _080891B6:
 	movs r0, 0x1
 	negs r0, r0
@@ -2039,7 +2039,7 @@ _0808A0DC: .4byte gUnknown_8419CE7
 	thumb_func_start sub_808A0E0
 sub_808A0E0: @ 808A0E0
 	push {lr}
-	bl sub_806E25C
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	bne _0808A0F2
 	movs r0, 0x1
@@ -3283,7 +3283,7 @@ _0808AB50:
 	movs r1, 0x60
 	movs r2, 0
 	movs r3, 0
-	bl sub_8071660
+	bl TintPalette_CustomTone
 	b _0808AB88
 	.align 2, 0
 _0808AB64: .4byte 0x00000396
@@ -3297,7 +3297,7 @@ _0808AB68:
 	lsls r1, 1
 	str r1, [sp]
 	movs r1, 0x60
-	bl sub_8071660
+	bl TintPalette_CustomTone
 	b _0808AB88
 _0808AB80:
 	adds r0, r4, r5

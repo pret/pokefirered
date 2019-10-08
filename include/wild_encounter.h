@@ -45,5 +45,6 @@ bool8 UpdateRepelCounter(void);
 void sub_8082740(u8);
 u8 GetUnownLetterByPersonalityLoByte(u32 personality);
 bool8 SweetScentWildEncounter(void);
+void sub_8083214(u16 randVal);
 
 #endif // GUARD_WILD_ENCOUNTER_H

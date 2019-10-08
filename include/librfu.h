@@ -1,3 +1,6 @@
+#ifndef GUARD_LIBRFU_H
+#define GUARD_LIBRFU_H
+
 #include "main.h"
 
 enum
@@ -116,8 +119,8 @@ struct RfuStruct
     void (*callbackM)();
     void (*callbackS)();
     u32 callbackID;
-    union RfuPacket *txPacket;
-    union RfuPacket *rxPacket;
+    union RfuPacket * txPacket;
+    union RfuPacket * rxPacket;
     vu8 unk_2c;
     u8 padding[3];
 };
@@ -130,6 +133,136 @@ struct RfuIntrStruct
     u8 block2[0x30];
 };
 
-extern struct RfuStruct *gRfuState;
+struct RfuUnk1
+{
+    u16 unk_0;
+    u8 unk_2;
+    u8 unk_3;
+    u8 fill_4[14];
+    u8 unk_12;
+    u32 unk_14;
+    u32 unk_18;
+    struct RfuIntrStruct unk_1c;
+};
 
-void STWI_init_all(struct RfuIntrStruct *interruptStruct, IntrFunc *interrupt, bool8 copyInterruptToRam);
+struct RfuUnk2
+{
+    u16 unk_0;
+    u16 unk_2;
+    u8 fill_4[0x16];
+    u8 unk_1a;
+    u8 fill_1b[0x19];
+    u16 unk_34;
+    u16 unk_36;
+    u8 fill_38[0x16];
+    u8 unk_4e;
+    u8 fill_4f[0x12];
+    u8 unk_61;
+    u8 fill_62[6];
+    void *unk_68;
+    void *unk_6c;
+    u8 unk_70[0x70];
+};
+
+struct RfuUnk3
+{
+    u32 unk_0;
+    u32 unk_4;
+    u8 unk_8[0xD4];
+    u32 unk_dc;
+};
+
+struct RfuUnk5Sub
+{
+    u16 unk_00;
+    u8 unk_02;
+    u16 unk_04;
+    struct UnkLinkRfuStruct_02022B14 unk_06;
+    u8 fill_13[1];
+    u8 playerName[PLAYER_NAME_LENGTH + 1];
+};
+
+struct RfuUnk5
+{
+    u8 unk_00;
+    u8 unk_01;
+    u8 unk_02;
+    u8 unk_03;
+    u8 unk_04;
+    u8 unk_05;
+    u8 unk_06;
+    u8 unk_07;
+    u8 unk_08;
+    u8 filler_09[1];
+    u8 unk_0a[4];
+    u8 filler_0e[6];
+    struct RfuUnk5Sub unk_14[4];
+};
+
+extern struct RfuStruct * gRfuState;
+
+extern struct RfuUnk5 * gUnknown_3007460;
+extern u32 *gUnknown_3007464;
+extern struct RfuUnk3 * gUnknown_3007468;
+extern struct RfuUnk2 * gUnknown_3007450[4];
+extern struct RfuUnk1 * gUnknown_3007440[4];
+extern struct {
+    u8 unk0;
+    u8 unk1;
+    u16 unk2;
+    u16 unk4;
+    u8 fill6[4];
+    u16 unkA;
+} gUnknown_3007470;
+
+extern void rfu_STC_clearAPIVariables(void);
+
+void STWI_init_all(struct RfuIntrStruct * interruptStruct, IntrFunc *interrupt, bool8 copyInterruptToRam);
+void rfu_REQ_stopMode(void);
+void rfu_waitREQComplete(void);
+u32 rfu_REQBN_softReset_and_checkID(void);
+void rfu_REQ_sendData(u8);
+void rfu_setMSCCallback(void (*func)(u16));
+void rfu_setREQCallback(void (*func)(u16, u16));
+bool8 rfu_getMasterSlave(void);
+void rfu_REQBN_watchLink(u16 a0, u8 *a1, u8 *a2, u8 *a3);
+bool16 rfu_syncVBlank(void);
+void rfu_REQ_reset(void);
+void rfu_REQ_configSystem(u16, u8, u8);
+void rfu_REQ_configGameData(u8, u16, struct UnkLinkRfuStruct_02022B14 *, u8 *);
+void rfu_REQ_startSearchChild(void);
+void rfu_REQ_pollSearchChild(void);
+void rfu_REQ_endSearchChild(void);
+void rfu_REQ_startSearchParent(void);
+void rfu_REQ_pollSearchParent(void);
+void rfu_REQ_endSearchParent(void);
+void rfu_REQ_startConnectParent(u16);
+void rfu_REQ_pollConnectParent(void);
+void rfu_REQ_endConnectParent(void);
+void rfu_REQ_CHILD_startConnectRecovery(u8);
+void rfu_REQ_CHILD_pollConnectRecovery(void);
+void rfu_REQ_CHILD_endConnectRecovery(void);
+void rfu_REQ_changeMasterSlave(void);
+void rfu_REQ_RFUStatus(void);
+void rfu_getRFUStatus(u8 *status);
+u8 *rfu_getSTWIRecvBuffer(void);
+u8 rfu_NI_CHILD_setSendGameName(u8 a0, u8 a1);
+void rfu_clearSlot(u8 a0, u8 a1);
+void rfu_clearAllSlot(void);
+bool16 rfu_CHILD_getConnectRecoveryStatus(u8 *status);
+bool16 rfu_getConnectParentStatus(u8 *status, u8 *a1);
+bool16 rfu_UNI_PARENT_getDRAC_ACK(u8 *a0);
+void rfu_REQ_disconnect(u8 who);
+void rfu_changeSendTarget(u8 a0, u8 who, u8 a2);
+void rfu_NI_stopReceivingData(u8 who);
+u16 rfu_initializeAPI(u32 *unk0, u16 unk1, IntrFunc *interrupt, bool8 copyInterruptToRam);
+void rfu_setTimerInterrupt(u8 which, IntrFunc *intr);
+void rfu_setRecvBuffer(u8 a0, u8 a1, void *a2, size_t a3);
+bool16 rfu_UNI_setSendData(u8 flag, void *ptr, u8 size);
+void rfu_REQ_recvData(void);
+void rfu_UNI_readySendData(u8 a0);
+void rfu_UNI_clearRecvNewDataFlag(u8 a0);
+void rfu_REQ_PARENT_resumeRetransmitAndChange(void);
+void rfu_NI_setSendData(u8, u8, const void *, u32);
+
+#endif // GUARD_LIBRFU_H

@@ -104,7 +104,6 @@ static IntrFunc * const sTimerIntrFunc = gIntrTable + 0x7;
 EWRAM_DATA u8 gDecompressionBuffer[0x4000] = {0};
 EWRAM_DATA u16 gTrainerId = 0;
 
-extern bool8 gHelpSystemEnabled;
 extern bool8 gWirelessCommType;
 extern bool8 gUnknown_3005E88;
 

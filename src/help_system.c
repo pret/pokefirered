@@ -16,6 +16,8 @@
 
 extern u8 gGlyphInfo[];
 
+bool8 gHelpSystemEnabled;
+
 struct HelpSystemVideoState
 {
     /*0x00*/ MainCallback savedVblankCb;

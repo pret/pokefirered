@@ -25,6 +25,30 @@
 #include "text_window_graphics.h"
 #include "constants/songs.h"
 
+enum MainMenuType
+{
+    MAIN_MENU_NEWGAME = 0,
+    MAIN_MENU_CONTINUE,
+    MAIN_MENU_MYSTERYGIFT
+};
+
+enum MainMenuWindow
+{
+    MAIN_MENU_WINDOW_NEWGAME_ONLY = 0,
+    MAIN_MENU_WINDOW_CONTINUE,
+    MAIN_MENU_WINDOW_NEWGAME,
+    MAIN_MENU_WINDOW_MYSTERYGIFT,
+    MAIN_MENU_WINDOW_ERROR,
+    MAIN_MENU_WINDOW_COUNT
+};
+
+#define tMenuType  data[0]
+#define tCursorPos data[1]
+
+#define tUnused8         data[8]
+#define tMGErrorMsgState data[9]
+#define tMGErrorType     data[10]
+
 static bool32 MainMenuGpuInit(u8 a0);
 static void Task_SetWin0BldRegsAndCheckSaveFile(u8 taskId);
 static void PrintSaveErrorStatus(u8 taskId, const u8 *str);
@@ -48,14 +72,14 @@ static void PrintDexCount(void);
 static void PrintBadgeCount(void);
 static void LoadUserFrameToBg(u8 bgId);
 static void SetStdFrame0OnBg(u8 bgId);
-static void DrawBubbleBorder(const struct WindowTemplate * template);
-static void DestroyWindowBubbleFrame(const struct WindowTemplate * template);
+static void MainMenu_DrawWindow(const struct WindowTemplate * template);
+static void MainMenu_EraseWindow(const struct WindowTemplate * template);
 
 static const u8 sString_Dummy[] = _("");
 static const u8 sString_Newline[] = _("\n");
 
 static const struct WindowTemplate sWindowTemplate[] = {
-    {
+    [MAIN_MENU_WINDOW_NEWGAME_ONLY] = {
         .bg = 0,
         .tilemapLeft = 3,
         .tilemapTop = 1,
@@ -63,7 +87,8 @@ static const struct WindowTemplate sWindowTemplate[] = {
         .height = 2,
         .paletteNum = 15,
         .baseBlock = 0x001
-    }, {
+    }, 
+    [MAIN_MENU_WINDOW_CONTINUE] = {
         .bg = 0,
         .tilemapLeft = 3,
         .tilemapTop = 1,
@@ -71,7 +96,8 @@ static const struct WindowTemplate sWindowTemplate[] = {
         .height = 10,
         .paletteNum = 15,
         .baseBlock = 0x001
-    }, {
+    }, 
+    [MAIN_MENU_WINDOW_NEWGAME] = {
         .bg = 0,
         .tilemapLeft = 3,
         .tilemapTop = 13,
@@ -79,7 +105,8 @@ static const struct WindowTemplate sWindowTemplate[] = {
         .height = 2,
         .paletteNum = 15,
         .baseBlock = 0x0f1
-    }, {
+    }, 
+    [MAIN_MENU_WINDOW_MYSTERYGIFT] = {
         .bg = 0,
         .tilemapLeft = 3,
         .tilemapTop = 17,
@@ -87,7 +114,8 @@ static const struct WindowTemplate sWindowTemplate[] = {
         .height = 2,
         .paletteNum = 15,
         .baseBlock = 0x121
-    }, {
+    }, 
+    [MAIN_MENU_WINDOW_ERROR] = {
         .bg = 0,
         .tilemapLeft = 3,
         .tilemapTop = 15,
@@ -95,7 +123,8 @@ static const struct WindowTemplate sWindowTemplate[] = {
         .height = 4,
         .paletteNum = 15,
         .baseBlock = 0x001
-    }, DUMMY_WIN_TEMPLATE
+    }, 
+    [MAIN_MENU_WINDOW_COUNT] = DUMMY_WIN_TEMPLATE
 };
 
 static const u16 sBgPal00[] = INCBIN_U16("data/main_menu/unk_8234648.gbapal");
@@ -114,7 +143,7 @@ static const struct BgTemplate sBgTemplate[] = {
     }
 };
 
-static const u8 gUnknown_8234694[] = { 0, 1, 2 };
+static const u8 sMenuCursorYMax[] = { 0, 1, 2 };
 
 static void CB2_MainMenu(void)
 {
@@ -186,10 +215,15 @@ static bool32 MainMenuGpuInit(u8 a0)
     SetMainCallback2(CB2_MainMenu);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON | DISPCNT_WIN0_ON);
     taskId = CreateTask(Task_SetWin0BldRegsAndCheckSaveFile, 0);
-    gTasks[taskId].data[1] = 0;
-    gTasks[taskId].data[8] = a0;
+    gTasks[taskId].tCursorPos = 0;
+    gTasks[taskId].tUnused8 = a0;
     return FALSE;
 }
+
+/*
+ * The entire screen is darkened slightly except at WIN0 to indicate
+ * the player cursor position.
+ */
 
 static void Task_SetWin0BldRegsAndCheckSaveFile(u8 taskId)
 {
@@ -204,45 +238,45 @@ static void Task_SetWin0BldRegsAndCheckSaveFile(u8 taskId)
         SetGpuReg(REG_OFFSET_BLDY, 7);
         switch (gSaveFileStatus)
         {
-        case 1:
+        case SAVE_STATUS_OK:
             LoadUserFrameToBg(0);
             if (Flag_0x839_IsSet() == TRUE)
             {
-                gTasks[taskId].data[0] = 2;
+                gTasks[taskId].tMenuType = MAIN_MENU_MYSTERYGIFT;
             }
             else
             {
-                gTasks[taskId].data[0] = 1;
+                gTasks[taskId].tMenuType = MAIN_MENU_CONTINUE;
             }
             gTasks[taskId].func = Task_SetWin0BldRegsNoSaveFileCheck;
             break;
-        case 2:
+        case SAVE_STATUS_INVALID:
             SetStdFrame0OnBg(0);
-            gTasks[taskId].data[0] = 0;
+            gTasks[taskId].tMenuType = MAIN_MENU_NEWGAME;
             PrintSaveErrorStatus(taskId, gText_SaveFileHasBeenDeleted);
             break;
-        case 0xFF:
+        case SAVE_STATUS_ERROR:
             SetStdFrame0OnBg(0);
-            gTasks[taskId].data[0] = 1;
+            gTasks[taskId].tMenuType = MAIN_MENU_CONTINUE;
             PrintSaveErrorStatus(taskId, gText_SaveFileCorruptedPrevWillBeLoaded);
             if (Flag_0x839_IsSet() == TRUE)
             {
-                gTasks[taskId].data[0] = 2;
+                gTasks[taskId].tMenuType = MAIN_MENU_MYSTERYGIFT;
             }
             else
             {
-                gTasks[taskId].data[0] = 1;
+                gTasks[taskId].tMenuType = MAIN_MENU_CONTINUE;
             }
             break;
-        case 0:
+        case SAVE_STATUS_EMPTY:
         default:
             LoadUserFrameToBg(0);
-            gTasks[taskId].data[0] = 0;
+            gTasks[taskId].tMenuType = MAIN_MENU_NEWGAME;
             gTasks[taskId].func = Task_SetWin0BldRegsNoSaveFileCheck;
             break;
-        case 4:
+        case SAVE_STATUS_NO_FLASH:
             SetStdFrame0OnBg(0);
-            gTasks[taskId].data[0] = 0;
+            gTasks[taskId].tMenuType = MAIN_MENU_NEWGAME;
             PrintSaveErrorStatus(taskId, gText_1MSubCircuitBoardNotInstalled);
             break;
         }
@@ -263,12 +297,12 @@ static void Task_SaveErrorStatus_RunPrinterThenWaitButton(u8 taskId)
     if (!gPaletteFade.active)
     {
         RunTextPrinters();
-        if (!IsTextPrinterActive(4) && JOY_NEW(A_BUTTON))
+        if (!IsTextPrinterActive(MAIN_MENU_WINDOW_ERROR) && JOY_NEW(A_BUTTON))
         {
-            ClearWindowTilemap(4);
-            DestroyWindowBubbleFrame(&sWindowTemplate[4]);
+            ClearWindowTilemap(MAIN_MENU_WINDOW_ERROR);
+            MainMenu_EraseWindow(&sWindowTemplate[MAIN_MENU_WINDOW_ERROR]);
             LoadUserFrameToBg(0);
-            if (gTasks[taskId].data[0] == 0)
+            if (gTasks[taskId].tMenuType == MAIN_MENU_NEWGAME)
                 gTasks[taskId].func = Task_SetWin0BldRegsNoSaveFileCheck;
             else
                 gTasks[taskId].func = Task_PrintMainMenuText;
@@ -284,12 +318,10 @@ static void Task_SetWin0BldRegsNoSaveFileCheck(u8 taskId)
         SetGpuReg(REG_OFFSET_WIN0V, 0);
         SetGpuReg(REG_OFFSET_WININ, 0x0001);
         SetGpuReg(REG_OFFSET_WINOUT, 0x0021);
-        SetGpuReg(REG_OFFSET_BLDCNT,
-                  BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_OBJ |
-                  BLDCNT_TGT1_BD | BLDCNT_EFFECT_DARKEN);
+        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BD | BLDCNT_EFFECT_DARKEN);
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 0));
         SetGpuReg(REG_OFFSET_BLDY, 7);
-        if (gTasks[taskId].data[0] == 0)
+        if (gTasks[taskId].tMenuType == 0)
             gTasks[taskId].func = Task_ExecuteMainMenuSelection;
         else
             gTasks[taskId].func = Task_WaitFadeAndPrintMainMenuText;
@@ -311,9 +343,7 @@ static void Task_PrintMainMenuText(u8 taskId)
     SetGpuReg(REG_OFFSET_WIN0V, 0);
     SetGpuReg(REG_OFFSET_WININ, 0x0001);
     SetGpuReg(REG_OFFSET_WINOUT, 0x0021);
-    SetGpuReg(REG_OFFSET_BLDCNT,
-              BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_OBJ |
-              BLDCNT_TGT1_BD | BLDCNT_EFFECT_DARKEN);
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BD | BLDCNT_EFFECT_DARKEN);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 0));
     SetGpuReg(REG_OFFSET_BLDY, 7);
     if (gSaveBlock2Ptr->playerGender == MALE)
@@ -321,47 +351,47 @@ static void Task_PrintMainMenuText(u8 taskId)
     else
         pal = RGB(31, 3, 21);
     LoadPalette(&pal, 0xF1, 2);
-    switch (gTasks[taskId].data[0])
+    switch (gTasks[taskId].tMenuType)
     {
-    case 0:
+    case MAIN_MENU_NEWGAME:
     default:
-        FillWindowPixelBuffer(0, PIXEL_FILL(10));
-        AddTextPrinterParameterized3(0, 2, 2, 2, sTextColor1, -1, gText_NewGame);
-        DrawBubbleBorder(&sWindowTemplate[0]);
-        PutWindowTilemap(0);
-        CopyWindowToVram(0, 3);
+        FillWindowPixelBuffer(MAIN_MENU_WINDOW_NEWGAME_ONLY, PIXEL_FILL(10));
+        AddTextPrinterParameterized3(MAIN_MENU_WINDOW_NEWGAME_ONLY, 2, 2, 2, sTextColor1, -1, gText_NewGame);
+        MainMenu_DrawWindow(&sWindowTemplate[MAIN_MENU_WINDOW_NEWGAME_ONLY]);
+        PutWindowTilemap(MAIN_MENU_WINDOW_NEWGAME_ONLY);
+        CopyWindowToVram(MAIN_MENU_WINDOW_NEWGAME_ONLY, 3);
         break;
-    case 1:
-        FillWindowPixelBuffer(1, PIXEL_FILL(10));
-        FillWindowPixelBuffer(2, PIXEL_FILL(10));
-        AddTextPrinterParameterized3(1, 2, 2, 2, sTextColor1, -1, gText_Continue);
-        AddTextPrinterParameterized3(2, 2, 2, 2, sTextColor1, -1, gText_NewGame);
+    case MAIN_MENU_CONTINUE:
+        FillWindowPixelBuffer(MAIN_MENU_WINDOW_CONTINUE, PIXEL_FILL(10));
+        FillWindowPixelBuffer(MAIN_MENU_WINDOW_NEWGAME, PIXEL_FILL(10));
+        AddTextPrinterParameterized3(MAIN_MENU_WINDOW_CONTINUE, 2, 2, 2, sTextColor1, -1, gText_Continue);
+        AddTextPrinterParameterized3(MAIN_MENU_WINDOW_NEWGAME, 2, 2, 2, sTextColor1, -1, gText_NewGame);
         PrintContinueStats();
-        DrawBubbleBorder(&sWindowTemplate[1]);
-        DrawBubbleBorder(&sWindowTemplate[2]);
-        PutWindowTilemap(1);
-        PutWindowTilemap(2);
-        CopyWindowToVram(1, 2);
-        CopyWindowToVram(2, 3);
+        MainMenu_DrawWindow(&sWindowTemplate[MAIN_MENU_WINDOW_CONTINUE]);
+        MainMenu_DrawWindow(&sWindowTemplate[MAIN_MENU_WINDOW_NEWGAME]);
+        PutWindowTilemap(MAIN_MENU_WINDOW_CONTINUE);
+        PutWindowTilemap(MAIN_MENU_WINDOW_NEWGAME);
+        CopyWindowToVram(MAIN_MENU_WINDOW_CONTINUE, 2);
+        CopyWindowToVram(MAIN_MENU_WINDOW_NEWGAME, 3);
         break;
-    case 2:
-        FillWindowPixelBuffer(1, PIXEL_FILL(10));
-        FillWindowPixelBuffer(2, PIXEL_FILL(10));
-        FillWindowPixelBuffer(3, PIXEL_FILL(10));
-        AddTextPrinterParameterized3(1, 2, 2, 2, sTextColor1, -1, gText_Continue);
-        AddTextPrinterParameterized3(2, 2, 2, 2, sTextColor1, -1, gText_NewGame);
-        gTasks[taskId].data[10] = 1;
-        AddTextPrinterParameterized3(3, 2, 2, 2, sTextColor1, -1, gText_MysteryGift);
+    case MAIN_MENU_MYSTERYGIFT:
+        FillWindowPixelBuffer(MAIN_MENU_WINDOW_CONTINUE, PIXEL_FILL(10));
+        FillWindowPixelBuffer(MAIN_MENU_WINDOW_NEWGAME, PIXEL_FILL(10));
+        FillWindowPixelBuffer(MAIN_MENU_WINDOW_MYSTERYGIFT, PIXEL_FILL(10));
+        AddTextPrinterParameterized3(MAIN_MENU_WINDOW_CONTINUE, 2, 2, 2, sTextColor1, -1, gText_Continue);
+        AddTextPrinterParameterized3(MAIN_MENU_WINDOW_NEWGAME, 2, 2, 2, sTextColor1, -1, gText_NewGame);
+        gTasks[taskId].tMGErrorType = 1;
+        AddTextPrinterParameterized3(MAIN_MENU_WINDOW_MYSTERYGIFT, 2, 2, 2, sTextColor1, -1, gText_MysteryGift);
         PrintContinueStats();
-        DrawBubbleBorder(&sWindowTemplate[1]);
-        DrawBubbleBorder(&sWindowTemplate[2]);
-        DrawBubbleBorder(&sWindowTemplate[3]);
-        PutWindowTilemap(1);
-        PutWindowTilemap(2);
-        PutWindowTilemap(3);
-        CopyWindowToVram(1, 2);
-        CopyWindowToVram(2, 2);
-        CopyWindowToVram(3, 3);
+        MainMenu_DrawWindow(&sWindowTemplate[MAIN_MENU_WINDOW_CONTINUE]);
+        MainMenu_DrawWindow(&sWindowTemplate[MAIN_MENU_WINDOW_NEWGAME]);
+        MainMenu_DrawWindow(&sWindowTemplate[MAIN_MENU_WINDOW_MYSTERYGIFT]);
+        PutWindowTilemap(MAIN_MENU_WINDOW_CONTINUE);
+        PutWindowTilemap(MAIN_MENU_WINDOW_NEWGAME);
+        PutWindowTilemap(MAIN_MENU_WINDOW_MYSTERYGIFT);
+        CopyWindowToVram(MAIN_MENU_WINDOW_CONTINUE, 2);
+        CopyWindowToVram(MAIN_MENU_WINDOW_NEWGAME, 2);
+        CopyWindowToVram(MAIN_MENU_WINDOW_MYSTERYGIFT, 3);
         break;
     }
     gTasks[taskId].func = Task_WaitDma3AndFadeIn;
@@ -380,7 +410,7 @@ static void Task_WaitDma3AndFadeIn(u8 taskId)
 
 static void Task_UpdateVisualSelection(u8 taskId)
 {
-    MoveWindowByMenuTypeAndCursorPos(gTasks[taskId].data[0], gTasks[taskId].data[1]);
+    MoveWindowByMenuTypeAndCursorPos(gTasks[taskId].tMenuType, gTasks[taskId].tCursorPos);
     gTasks[taskId].func = Task_HandleMenuInput;
 }
 
@@ -394,36 +424,36 @@ static void Task_HandleMenuInput(u8 taskId)
 
 static void Task_ExecuteMainMenuSelection(u8 taskId)
 {
-    s32 r0;
+    s32 menuAction;
     if (!gPaletteFade.active)
     {
-        switch (gTasks[taskId].data[0])
+        switch (gTasks[taskId].tMenuType)
         {
         default:
-        case 0:
-            r0 = 0;
+        case MAIN_MENU_NEWGAME:
+            menuAction = MAIN_MENU_NEWGAME;
             break;
-        case 1:
-            switch (gTasks[taskId].data[1])
+        case MAIN_MENU_CONTINUE:
+            switch (gTasks[taskId].tCursorPos)
             {
             default:
             case 0:
-                r0 = 1;
+                menuAction = MAIN_MENU_CONTINUE;
                 break;
             case 1:
-                r0 = 0;
+                menuAction = MAIN_MENU_NEWGAME;
                 break;
             }
             break;
-        case 2:
-            switch (gTasks[taskId].data[1])
+        case MAIN_MENU_MYSTERYGIFT:
+            switch (gTasks[taskId].tCursorPos)
             {
             default:
             case 0:
-                r0 = 1;
+                menuAction = MAIN_MENU_CONTINUE;
                 break;
             case 1:
-                r0 = 0;
+                menuAction = MAIN_MENU_NEWGAME;
                 break;
             case 2:
                 if (!IsWirelessAdapterConnected())
@@ -435,29 +465,29 @@ static void Task_ExecuteMainMenuSelection(u8 taskId)
                 }
                 else
                 {
-                    r0 = 2;
+                    menuAction = MAIN_MENU_MYSTERYGIFT;
                 }
                 break;
             }
             break;
         }
-        switch (r0)
+        switch (menuAction)
         {
         default:
-        case 0:
+        case MAIN_MENU_NEWGAME:
             gUnknown_2031DE0 = 0;
             FreeAllWindowBuffers();
             DestroyTask(taskId);
             StartNewGameScene();
             break;
-        case 1:
+        case MAIN_MENU_CONTINUE:
             gPlttBufferUnfaded[0] = RGB_BLACK;
             gPlttBufferFaded[0] = RGB_BLACK;
             gUnknown_2031DE0 = 0;
             FreeAllWindowBuffers();
             TrySetUpQuestLogScenes_ElseContinueFromSave(taskId);
             break;
-        case 2:
+        case MAIN_MENU_MYSTERYGIFT:
             SetMainCallback2(c2_mystery_gift);
             HelpSystem_Disable();
             FreeAllWindowBuffers();
@@ -469,24 +499,24 @@ static void Task_ExecuteMainMenuSelection(u8 taskId)
 
 static void Task_MysteryGiftError(u8 taskId)
 {
-    switch (gTasks[taskId].data[9])
+    switch (gTasks[taskId].tMGErrorMsgState)
     {
     case 0:
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
-        if (gTasks[taskId].data[10] == 1)
+        if (gTasks[taskId].tMGErrorType == 1)
             PrintMessageOnWindow4(gText_WirelessAdapterIsNotConnected);
         else
             PrintMessageOnWindow4(gText_MysteryGiftCantBeUsedWhileWirelessAdapterIsAttached);
-        gTasks[taskId].data[9]++;
+        gTasks[taskId].tMGErrorMsgState++;
         break;
     case 1:
         if (!gPaletteFade.active)
-            gTasks[taskId].data[9]++;
+            gTasks[taskId].tMGErrorMsgState++;
         break;
     case 2:
         RunTextPrinters();
         if (!IsTextPrinterActive(4))
-            gTasks[taskId].data[9]++;
+            gTasks[taskId].tMGErrorMsgState++;
         break;
     case 3:
         if (JOY_NEW(A_BUTTON | B_BUTTON))
@@ -510,36 +540,36 @@ static void Task_ReturnToTileScreen(u8 taskId)
 
 static void MoveWindowByMenuTypeAndCursorPos(u8 menuType, u8 cursorPos)
 {
-    u16 win0v1, win0v2;
+    u16 win0vTop, win0vBot;
     SetGpuReg(REG_OFFSET_WIN0H, 0x12DE);
     switch (menuType)
     {
     default:
-    case 0:
-        win0v1 = 0x00;
-        win0v2 = 0x20;
+    case MAIN_MENU_NEWGAME:
+        win0vTop = 0x00 << 8;
+        win0vBot = 0x20;
         break;
-    case 1:
-    case 2:
+    case MAIN_MENU_CONTINUE:
+    case MAIN_MENU_MYSTERYGIFT:
         switch (cursorPos)
         {
         default:
-        case 0:
-            win0v1 = 0x00;
-            win0v2 = 0x60;
+        case 0: // CONTINUE
+            win0vTop = 0x00 << 8;
+            win0vBot = 0x60;
             break;
-        case 1:
-            win0v1 = 0x60 << 8;
-            win0v2 = 0x80;
+        case 1: // NEW GAME
+            win0vTop = 0x60 << 8;
+            win0vBot = 0x80;
             break;
-        case 2:
-            win0v1 = 0x80 << 8;
-            win0v2 = 0xA0;
+        case 2: // MYSTERY GIFT
+            win0vTop = 0x80 << 8;
+            win0vBot = 0xA0;
             break;
         }
         break;
     }
-    SetGpuReg(REG_OFFSET_WIN0V, (win0v1 + (2 << 8)) | (win0v2 - 2));
+    SetGpuReg(REG_OFFSET_WIN0V, (win0vTop + (2 << 8)) | (win0vBot - 2));
 }
 
 static bool8 HandleMenuInput(u8 taskId)
@@ -559,14 +589,14 @@ static bool8 HandleMenuInput(u8 taskId)
         SetGpuReg(REG_OFFSET_WIN0V, 0xA0);
         gTasks[taskId].func = Task_ReturnToTileScreen;
     }
-    else if (JOY_NEW(DPAD_UP) && gTasks[taskId].data[1] > 0)
+    else if (JOY_NEW(DPAD_UP) && gTasks[taskId].tCursorPos > 0)
     {
-        gTasks[taskId].data[1]--;
+        gTasks[taskId].tCursorPos--;
         return TRUE;
     }
-    else if (JOY_NEW(DPAD_DOWN) && gTasks[taskId].data[1] < gUnknown_8234694[gTasks[taskId].data[0]])
+    else if (JOY_NEW(DPAD_DOWN) && gTasks[taskId].tCursorPos < sMenuCursorYMax[gTasks[taskId].tMenuType])
     {
-        gTasks[taskId].data[1]++;
+        gTasks[taskId].tCursorPos++;
         return TRUE;
     }
 
@@ -575,11 +605,11 @@ static bool8 HandleMenuInput(u8 taskId)
 
 static void PrintMessageOnWindow4(const u8 *str)
 {
-    FillWindowPixelBuffer(4, PIXEL_FILL(10));
-    DrawBubbleBorder(&sWindowTemplate[4]);
-    AddTextPrinterParameterized3(4, 2, 0, 2, sTextColor1, 2, str);
-    PutWindowTilemap(4);
-    CopyWindowToVram(4, 2);
+    FillWindowPixelBuffer(MAIN_MENU_WINDOW_ERROR, PIXEL_FILL(10));
+    MainMenu_DrawWindow(&sWindowTemplate[4]);
+    AddTextPrinterParameterized3(MAIN_MENU_WINDOW_ERROR, 2, 0, 2, sTextColor1, 2, str);
+    PutWindowTilemap(MAIN_MENU_WINDOW_ERROR);
+    CopyWindowToVram(MAIN_MENU_WINDOW_ERROR, 2);
     SetGpuReg(REG_OFFSET_WIN0H, 0x13DD);
     SetGpuReg(REG_OFFSET_WIN0V, 0x739D);
 }
@@ -597,12 +627,12 @@ static void PrintPlayerName(void)
     s32 i;
     u8 name[OT_NAME_LENGTH + 1];
     u8 *ptr;
-    AddTextPrinterParameterized3(1, 2, 2, 18, sTextColor2, -1, gText_Player);
+    AddTextPrinterParameterized3(MAIN_MENU_WINDOW_CONTINUE, 2, 2, 18, sTextColor2, -1, gText_Player);
     ptr = name;
     for (i = 0; i < OT_NAME_LENGTH; i++)
         *ptr++ = gSaveBlock2Ptr->playerName[i];
     *ptr = EOS;
-    AddTextPrinterParameterized3(1, 2, 62, 18, sTextColor2, -1, name);
+    AddTextPrinterParameterized3(MAIN_MENU_WINDOW_CONTINUE, 2, 62, 18, sTextColor2, -1, name);
 }
 
 static void PrintPlayTime(void)
@@ -610,11 +640,11 @@ static void PrintPlayTime(void)
     u8 strbuf[30];
     u8 *ptr;
 
-    AddTextPrinterParameterized3(1, 2, 2, 34, sTextColor2, -1, gText_Time);
+    AddTextPrinterParameterized3(MAIN_MENU_WINDOW_CONTINUE, 2, 2, 34, sTextColor2, -1, gText_Time);
     ptr = ConvertIntToDecimalStringN(strbuf, gSaveBlock2Ptr->playTimeHours, STR_CONV_MODE_LEFT_ALIGN, 3);
     *ptr++ = CHAR_COLON;
     ConvertIntToDecimalStringN(ptr, gSaveBlock2Ptr->playTimeMinutes, STR_CONV_MODE_LEADING_ZEROS, 2);
-    AddTextPrinterParameterized3(1, 2, 62, 34, sTextColor2, -1, strbuf);
+    AddTextPrinterParameterized3(MAIN_MENU_WINDOW_CONTINUE, 2, 62, 34, sTextColor2, -1, strbuf);
 }
 
 static void PrintDexCount(void)
@@ -628,10 +658,10 @@ static void PrintDexCount(void)
             dexcount = GetNationalPokedexCount(FLAG_GET_CAUGHT);
         else
             dexcount = GetKantoPokedexCount(FLAG_GET_CAUGHT);
-        AddTextPrinterParameterized3(1, 2, 2, 50, sTextColor2, -1, gText_Pokedex);
+        AddTextPrinterParameterized3(MAIN_MENU_WINDOW_CONTINUE, 2, 2, 50, sTextColor2, -1, gText_Pokedex);
         ptr = ConvertIntToDecimalStringN(strbuf, dexcount, STR_CONV_MODE_LEFT_ALIGN, 3);
         StringAppend(ptr, gTextJPDummy_Hiki);
-        AddTextPrinterParameterized3(1, 2, 62, 50, sTextColor2, -1, strbuf);
+        AddTextPrinterParameterized3(MAIN_MENU_WINDOW_CONTINUE, 2, 62, 50, sTextColor2, -1, strbuf);
     }
 }
 
@@ -646,40 +676,120 @@ static void PrintBadgeCount(void)
         if (FlagGet(flagId))
             nbadges++;
     }
-    AddTextPrinterParameterized3(1, 2, 2, 66, sTextColor2, -1, gText_Badges);
+    AddTextPrinterParameterized3(MAIN_MENU_WINDOW_CONTINUE, 2, 2, 66, sTextColor2, -1, gText_Badges);
     ptr = ConvertIntToDecimalStringN(strbuf, nbadges, STR_CONV_MODE_LEADING_ZEROS, 1);
     StringAppend(ptr, gTextJPDummy_Ko);
-    AddTextPrinterParameterized3(1, 2, 62, 66, sTextColor2, -1, strbuf);
+    AddTextPrinterParameterized3(MAIN_MENU_WINDOW_CONTINUE, 2, 62, 66, sTextColor2, -1, strbuf);
 }
 
 static void LoadUserFrameToBg(u8 bgId)
 {
     LoadBgTiles(bgId, GetUserFrameGraphicsInfo(gSaveBlock2Ptr->optionsWindowFrameType)->tiles, 0x120, 0x1B1);
     LoadPalette(GetUserFrameGraphicsInfo(gSaveBlock2Ptr->optionsWindowFrameType)->palette, 0x20, 0x20);
-    DestroyWindowBubbleFrame(&sWindowTemplate[4]);
+    MainMenu_EraseWindow(&sWindowTemplate[MAIN_MENU_WINDOW_ERROR]);
 }
 
 static void SetStdFrame0OnBg(u8 bgId)
 {
-    TextWindow_SetStdFrame0_WithPal(0, 0x1B1, 0x20);
-    DestroyWindowBubbleFrame(&sWindowTemplate[4]);
+    TextWindow_SetStdFrame0_WithPal(MAIN_MENU_WINDOW_NEWGAME_ONLY, 0x1B1, 0x20);
+    MainMenu_EraseWindow(&sWindowTemplate[MAIN_MENU_WINDOW_ERROR]);
 }
 
-static void DrawBubbleBorder(const struct WindowTemplate * windowTemplate)
+static void MainMenu_DrawWindow(const struct WindowTemplate * windowTemplate)
 {
-    FillBgTilemapBufferRect(windowTemplate->bg, 0x1B1, windowTemplate->tilemapLeft - 1, windowTemplate->tilemapTop - 1, 1, 1, 2);
-    FillBgTilemapBufferRect(windowTemplate->bg, 0x1B2, windowTemplate->tilemapLeft, windowTemplate->tilemapTop - 1, windowTemplate->width, windowTemplate->height, 2);
-    FillBgTilemapBufferRect(windowTemplate->bg, 0x1B3, windowTemplate->tilemapLeft + windowTemplate->width, windowTemplate->tilemapTop - 1, 1, 1, 2);
-    FillBgTilemapBufferRect(windowTemplate->bg, 0x1B4, windowTemplate->tilemapLeft - 1, windowTemplate->tilemapTop, 1, windowTemplate->height, 2);
-    FillBgTilemapBufferRect(windowTemplate->bg, 0x1B6, windowTemplate->tilemapLeft + windowTemplate->width, windowTemplate->tilemapTop, 1, windowTemplate->height, 2);
-    FillBgTilemapBufferRect(windowTemplate->bg, 0x1B7, windowTemplate->tilemapLeft - 1, windowTemplate->tilemapTop + windowTemplate->height, 1, 1, 2);
-    FillBgTilemapBufferRect(windowTemplate->bg, 0x1B8, windowTemplate->tilemapLeft, windowTemplate->tilemapTop + windowTemplate->height, windowTemplate->width, 1, 2);
-    FillBgTilemapBufferRect(windowTemplate->bg, 0x1B9, windowTemplate->tilemapLeft + windowTemplate->width, windowTemplate->tilemapTop + windowTemplate->height, 1, 1, 2);
+    FillBgTilemapBufferRect(
+        windowTemplate->bg, 
+        0x1B1, 
+        windowTemplate->tilemapLeft - 1, 
+        windowTemplate->tilemapTop - 1,
+        1,
+        1,
+        2
+    );
+    FillBgTilemapBufferRect(
+        windowTemplate->bg, 
+        0x1B2, 
+        windowTemplate->tilemapLeft, 
+        windowTemplate->tilemapTop - 1, 
+        windowTemplate->width, 
+        windowTemplate->height, 
+        2
+    );
+    FillBgTilemapBufferRect(
+        windowTemplate->bg, 
+        0x1B3, 
+        windowTemplate->tilemapLeft + 
+        windowTemplate->width, 
+        windowTemplate->tilemapTop - 1,
+        1,
+        1,
+        2
+    );
+    FillBgTilemapBufferRect(
+        windowTemplate->bg, 
+        0x1B4, 
+        windowTemplate->tilemapLeft - 1, 
+        windowTemplate->tilemapTop,
+        1, 
+        windowTemplate->height,
+        2
+    );
+    FillBgTilemapBufferRect(
+        windowTemplate->bg, 
+        0x1B6, 
+        windowTemplate->tilemapLeft + 
+        windowTemplate->width, 
+        windowTemplate->tilemapTop,
+        1, 
+        windowTemplate->height,
+        2
+    );
+    FillBgTilemapBufferRect(
+        windowTemplate->bg, 
+        0x1B7, 
+        windowTemplate->tilemapLeft - 1, 
+        windowTemplate->tilemapTop + 
+        windowTemplate->height,
+        1,
+        1,
+        2
+    );
+    FillBgTilemapBufferRect(
+        windowTemplate->bg, 
+        0x1B8, 
+        windowTemplate->tilemapLeft, 
+        windowTemplate->tilemapTop + 
+        windowTemplate->height, 
+        windowTemplate->width,
+        1,
+        2
+    );
+    FillBgTilemapBufferRect(
+        windowTemplate->bg, 
+        0x1B9, 
+        windowTemplate->tilemapLeft + 
+        windowTemplate->width, 
+        windowTemplate->tilemapTop + 
+        windowTemplate->height,
+        1,
+        1,
+        2
+    );
     CopyBgTilemapBufferToVram(windowTemplate->bg);
 }
 
-static void DestroyWindowBubbleFrame(const struct WindowTemplate * windowTemplate)
+static void MainMenu_EraseWindow(const struct WindowTemplate * windowTemplate)
 {
-    FillBgTilemapBufferRect(windowTemplate->bg, 0x000, windowTemplate->tilemapLeft - 1, windowTemplate->tilemapTop - 1,  windowTemplate->tilemapLeft + windowTemplate->width + 1, windowTemplate->tilemapTop + windowTemplate->height + 1, 2);
+    FillBgTilemapBufferRect(
+        windowTemplate->bg, 
+        0x000, 
+        windowTemplate->tilemapLeft - 1, 
+        windowTemplate->tilemapTop - 1,  
+        windowTemplate->tilemapLeft + 
+        windowTemplate->width + 1, 
+        windowTemplate->tilemapTop + 
+        windowTemplate->height + 1,
+        2
+    );
     CopyBgTilemapBufferToVram(windowTemplate->bg);
 }

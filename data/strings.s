@@ -3049,13 +3049,13 @@ gText_Colon:: @ 0x841B6E1
 gText_Pokedex:: @ 841B6E3
 	.string "POKéDEX$"
 
-gUnknown_841B6EB:: @ 841B6EB
+gTextJPDummy_Hiki:: @ 841B6EB
 	.string "$"
 
-gUnknown_841B6EC:: @ 841B6EC
+gText_Badges:: @ 841B6EC
 	.string "BADGES$"
 
-gUnknown_841B6F3:: @ 841B6F3
+gTextJPDummy_Ko:: @ 841B6F3
 	.string "$"
 
 gUnknown_841B6F4:: @ 0x841B6F4

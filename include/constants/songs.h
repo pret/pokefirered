@@ -254,7 +254,7 @@
 #define SE_SHIP_HORN 249
 #define SE_HELP_OPEN 250
 #define SE_HELP_CLOSE 251
-#define SE_HELP_PAGE 252
+#define SE_HELP_ERR 252
 
 #define MUS_ME_ASA 256
 #define MUS_FANFA1 257

@@ -49,15 +49,15 @@ u8 RunHelpSystemCallback(void)
     {
     case 0:
         sInHelpSystem = 0;
-        if (gSaveBlock2Ptr->optionsButtonMode != OPTIONS_BUTTON_MODE_NORMAL)
+        if (gSaveBlock2Ptr->optionsButtonMode != OPTIONS_BUTTON_MODE_HELP)
             return 0;
         if (JOY_NEW(R_BUTTON) && gUnknown_203F175 == 1)
             return 0;
         if (JOY_NEW(L_BUTTON | R_BUTTON))
         {
-            if (!sub_812B45C() || !gUnknown_3005ECC)
+            if (!sub_812B45C() || !gHelpSystemEnabled)
             {
-                PlaySE(SE_HELP_PAGE);
+                PlaySE(SE_HELP_ERR);
                 return 0;
             }
             m4aMPlayStop(&gMPlayInfo_SE1);

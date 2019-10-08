@@ -388,7 +388,7 @@ EvolutionScene: @ 80CDDF4
 	ldr r0, _080CE0E0 @ =sub_80D0050
 	bl SetVBlankCallback
 	bl m4aMPlayAllStop
-	bl sub_812B478
+	bl HelpSystem_Disable
 	ldr r0, _080CE0E4 @ =sub_80CE710
 	bl SetMainCallback2
 	add sp, 0x24
@@ -1852,7 +1852,7 @@ _080CEDB8:
 	beq _080CEDC6
 	b _080CF528
 _080CEDC6:
-	bl sub_812B484
+	bl HelpSystem_Enable
 	ldr r1, _080CEE20 @ =gTasks
 	mov r2, r8
 	adds r0, r2, r7

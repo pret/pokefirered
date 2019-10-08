@@ -179,7 +179,7 @@ static const struct SpriteTemplate sWakeSpriteTemplate = {
 void ScrSpecial_SeaGallopFerry(void)
 {
     SetVBlankCallback(NULL);
-    sub_812B478();
+    HelpSystem_Disable();
     SetMainCallback2(CB2_SetUpSeaGallopScene);
 }
 
@@ -306,7 +306,7 @@ static void Task_SeaGallop_2(u8 taskId)
     if (sub_8055FC4() && !gPaletteFade.active)
     {
         Task_SeaGallop_3();
-        sub_812B484();
+        HelpSystem_Enable();
         DestroyTask(taskId);
     }
 }

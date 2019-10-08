@@ -221,7 +221,7 @@ gUnknown_3005E98: @ 3005E98
 	.align 4
 	.include "fame_checker.o"
 
-gUnknown_3005ECC: @ 3005ECC
+gHelpSystemEnabled: @ 3005ECC
 	.space 0x4
 
 	.include "mevent.o"

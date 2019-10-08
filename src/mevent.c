@@ -475,7 +475,7 @@ void sub_8143910(u8 taskId)
                 data->state = 0;
             break;
         case 26:
-            sub_812B484();
+            HelpSystem_Enable();
             Free(data->t10);
             DestroyTask(taskId);
             SetMainCallback2(MainCB_FreeAllBuffersAndReturnToInitTitleScreen);

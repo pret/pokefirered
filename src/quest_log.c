@@ -854,7 +854,7 @@ void TrySetUpQuestLogScenes_ElseContinueFromSave(u8 taskId)
 
     if (sNumScenes != 0)
     {
-        gUnknown_3005ECC = FALSE;
+        gHelpSystemEnabled = FALSE;
         sub_8110F90(taskId);
         DestroyTask(taskId);
     }
@@ -1603,7 +1603,7 @@ void sub_81120AC(u8 taskId)
             gTextFlags.autoScroll = FALSE;
             gUnknown_2036E28 = 0;
             sub_8082740(0);
-            gUnknown_3005ECC = 1;
+            gHelpSystemEnabled = 1;
             DestroyTask(taskId);
             break;
     }

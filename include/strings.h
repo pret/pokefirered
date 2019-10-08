@@ -357,9 +357,9 @@ extern const u8 gText_Player[];
 extern const u8 gText_Time[];
 extern const u8 gText_Colon[];
 extern const u8 gText_Pokedex[];
-extern const u8 gUnknown_841B6EB[];
-extern const u8 gUnknown_841B6EC[];
-extern const u8 gUnknown_841B6F3[];
+extern const u8 gTextJPDummy_Hiki[];
+extern const u8 gText_Badges[];
+extern const u8 gTextJPDummy_Ko[];
 extern const u8 gUnknown_841B6F4[];
 
 // mystery_gift_menu

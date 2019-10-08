@@ -8327,7 +8327,7 @@ sub_81546EC: @ 81546EC
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r4, 0
-	bl sub_8069788
+	bl GetUserFrameGraphicsInfo
 	ldr r1, [r0]
 	movs r2, 0x90
 	lsls r2, 1
@@ -8335,7 +8335,7 @@ sub_81546EC: @ 81546EC
 	movs r3, 0x1
 	bl LoadBgTiles
 	adds r0, r4, 0
-	bl sub_8069788
+	bl GetUserFrameGraphicsInfo
 	ldr r0, [r0, 0x4]
 	movs r1, 0xA0
 	movs r2, 0x20

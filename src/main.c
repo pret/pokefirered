@@ -104,7 +104,7 @@ static IntrFunc * const sTimerIntrFunc = gIntrTable + 0x7;
 EWRAM_DATA u8 gDecompressionBuffer[0x4000] = {0};
 EWRAM_DATA u16 gTrainerId = 0;
 
-extern bool8 gUnknown_3005ECC;
+extern bool8 gHelpSystemEnabled;
 extern bool8 gWirelessCommType;
 extern bool8 gUnknown_3005E88;
 
@@ -138,7 +138,7 @@ void AgbMain()
     SetDefaultFontsPointer();
 
     gSoftResetDisabled = FALSE;
-    gUnknown_3005ECC = FALSE;
+    gHelpSystemEnabled = FALSE;
 
     sub_80F50F4();
 

@@ -95,7 +95,7 @@ void mb_berry_fix_serve(void) // noreturn
     ResetSpriteData();
     ResetTasks();
     ScanlineEffect_Stop();
-    gUnknown_3005ECC = 0;
+    gHelpSystemEnabled = 0;
     taskId = CreateTask(mb_berry_fix_task, 0);
     gTasks[taskId].data[0] = 0;
     SetMainCallback2(mb_berry_fix_maincb);

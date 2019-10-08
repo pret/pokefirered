@@ -22,7 +22,7 @@ sub_80BE478: @ 80BE478
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x14]
 	lsrs r0, 3
-	bl sub_8069788
+	bl GetUserFrameGraphicsInfo
 	ldr r3, _080BE4B4 @ =gUnknown_20399C0
 	ldr r2, [r3]
 	ldr r1, [r0]

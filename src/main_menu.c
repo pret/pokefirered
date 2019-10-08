@@ -19,43 +19,104 @@
 #include "sound.h"
 #include "title_screen.h"
 #include "help_system.h"
+#include "string_util.h"
+#include "pokedex.h"
+#include "text_window.h"
+#include "text_window_graphics.h"
 #include "constants/songs.h"
 
-bool32 sub_800C318(u8 a0);
-void sub_800C4D0(u8 taskId);
-void sub_800C634(u8 taskId, const u8 *str);
-void sub_800C688(u8 taskId);
-void sub_800C704(u8 taskId);
-void sub_800C780(u8 taskId);
-void sub_800C7A0(u8 taskId);
-void sub_800C9CC(u8 taskId);
-void sub_800CA28(u8 taskId);
-void sub_800CA54(u8 taskId);
-void sub_800CA94(u8 taskId);
-void sub_800CB90(u8 taskId);
-void sub_800CC68(u8 taskId);
-void sub_800CC94(u8 menuType, u8 cursorPos);
-bool8 sub_800CCF8(u8 taskId);
-void sub_800CDF8(const u8 *str);
-void sub_800CE58(void);
-void sub_800CE70(void);
-void sub_800CED4(void);
-void sub_800CF3C(void);
-void sub_800CFC4(void);
-void sub_800D044(u8 a0);
-void sub_800D094(u8 a0);
-void sub_800D0B4(const struct WindowTemplate * template);
-void sub_800D1E8(const struct WindowTemplate * template);
+static bool32 MainMenuGpuInit(u8 a0);
+static void Task_SetWin0BldRegsAndCheckSaveFile(u8 taskId);
+static void PrintSaveErrorStatus(u8 taskId, const u8 *str);
+static void Task_SaveErrorStatus_RunPrinterThenWaitButton(u8 taskId);
+static void Task_SetWin0BldRegsNoSaveFileCheck(u8 taskId);
+static void Task_WaitFadeAndPrintMainMenuText(u8 taskId);
+static void Task_PrintMainMenuText(u8 taskId);
+static void Task_WaitDma3AndFadeIn(u8 taskId);
+static void Task_UpdateVisualSelection(u8 taskId);
+static void Task_HandleMenuInput(u8 taskId);
+static void Task_ExecuteMainMenuSelection(u8 taskId);
+static void Task_MysteryGiftError(u8 taskId);
+static void Task_ReturnToTileScreen(u8 taskId);
+static void MoveWindowByMenuTypeAndCursorPos(u8 menuType, u8 cursorPos);
+static bool8 HandleMenuInput(u8 taskId);
+static void PrintMessageOnWindow4(const u8 *str);
+static void PrintContinueStats(void);
+static void PrintPlayerName(void);
+static void PrintPlayTime(void);
+static void PrintDexCount(void);
+static void PrintBadgeCount(void);
+static void LoadUserFrameToBg(u8 bgId);
+static void SetStdFrame0OnBg(u8 bgId);
+static void DrawBubbleBorder(const struct WindowTemplate * template);
+static void DestroyWindowBubbleFrame(const struct WindowTemplate * template);
 
-extern const struct WindowTemplate gUnknown_8234618[];
-extern const u16 gUnknown_8234648[];
-extern const u16 gUnknown_8234668[];
-extern const u8 gUnknown_8234688[];
-extern const u8 gUnknown_823468B[];
-extern const struct BgTemplate gUnknown_8234690[1];
-extern const u8 gUnknown_8234694[];
+static const u8 sString_Dummy[] = _("");
+static const u8 sString_Newline[] = _("\n");
 
-void sub_800C2D4(void)
+static const struct WindowTemplate sWindowTemplate[] = {
+    {
+        .bg = 0,
+        .tilemapLeft = 3,
+        .tilemapTop = 1,
+        .width = 24,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0x001
+    }, {
+        .bg = 0,
+        .tilemapLeft = 3,
+        .tilemapTop = 1,
+        .width = 24,
+        .height = 10,
+        .paletteNum = 15,
+        .baseBlock = 0x001
+    }, {
+        .bg = 0,
+        .tilemapLeft = 3,
+        .tilemapTop = 13,
+        .width = 24,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0x0f1
+    }, {
+        .bg = 0,
+        .tilemapLeft = 3,
+        .tilemapTop = 17,
+        .width = 24,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0x121
+    }, {
+        .bg = 0,
+        .tilemapLeft = 3,
+        .tilemapTop = 15,
+        .width = 24,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 0x001
+    }, DUMMY_WIN_TEMPLATE
+};
+
+static const u16 sBgPal00[] = INCBIN_U16("data/main_menu/unk_8234648.gbapal");
+static const u16 sBgPal15[] = INCBIN_U16("data/main_menu/unk_8234668.gbapal");
+
+static const u8 sTextColor1[] = { 10, 11, 12 };
+
+static const u8 sTextColor2[] = { 10,  1, 12 };
+
+static const struct BgTemplate sBgTemplate[] = {
+    {
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 30,
+        .priority = 0
+    }
+};
+
+static const u8 gUnknown_8234694[] = { 0, 1, 2 };
+
+static void CB2_MainMenu(void)
 {
     RunTasks();
     AnimateSprites();
@@ -63,24 +124,24 @@ void sub_800C2D4(void)
     UpdatePaletteFade();
 }
 
-void sub_800C2EC(void)
+static void VBlankCB_MainMenu(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-void sub_800C300(void)
+void CB2_InitMainMenu(void)
 {
-    sub_800C318(1);
+    MainMenuGpuInit(1);
 }
 
-void sub_800C30C(void)
+static void CB2_InitMainMenu_2(void)
 {
-    sub_800C318(1);
+    MainMenuGpuInit(1);
 }
 
-bool32 sub_800C318(u8 a0)
+static bool32 MainMenuGpuInit(u8 a0)
 {
     u8 taskId;
 
@@ -104,17 +165,17 @@ bool32 sub_800C318(u8 a0)
     FreeAllSpritePalettes();
     ResetPaletteFade();
     ResetBgsAndClearDma3BusyFlags(FALSE);
-    InitBgsFromTemplates(0, gUnknown_8234690, NELEMS(gUnknown_8234690));
+    InitBgsFromTemplates(0, sBgTemplate, NELEMS(sBgTemplate));
     ChangeBgX(0, 0, 0);
     ChangeBgY(0, 0, 0);
     ChangeBgX(1, 0, 0);
     ChangeBgY(1, 0, 0);
     ChangeBgX(2, 0, 0);
     ChangeBgY(2, 0, 0);
-    InitWindows(gUnknown_8234618);
+    InitWindows(sWindowTemplate);
     DeactivateAllTextPrinters();
-    LoadPalette(gUnknown_8234648, 0x00, 0x20);
-    LoadPalette(gUnknown_8234668, 0xF0, 0x20);
+    LoadPalette(sBgPal00, 0x00, 0x20);
+    LoadPalette(sBgPal15, 0xF0, 0x20);
     SetGpuReg(REG_OFFSET_WIN0H, 0);
     SetGpuReg(REG_OFFSET_WIN0V, 0);
     SetGpuReg(REG_OFFSET_WININ, 0);
@@ -122,15 +183,15 @@ bool32 sub_800C318(u8 a0)
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);
     SetGpuReg(REG_OFFSET_BLDY, 0);
-    SetMainCallback2(sub_800C2D4);
+    SetMainCallback2(CB2_MainMenu);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON | DISPCNT_WIN0_ON);
-    taskId = CreateTask(sub_800C4D0, 0);
+    taskId = CreateTask(Task_SetWin0BldRegsAndCheckSaveFile, 0);
     gTasks[taskId].data[1] = 0;
     gTasks[taskId].data[8] = a0;
     return FALSE;
 }
 
-void sub_800C4D0(u8 taskId)
+static void Task_SetWin0BldRegsAndCheckSaveFile(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -144,8 +205,8 @@ void sub_800C4D0(u8 taskId)
         switch (gSaveFileStatus)
         {
         case 1:
-            sub_800D044(0);
-            if (sub_806E2BC() == TRUE)
+            LoadUserFrameToBg(0);
+            if (Flag_0x839_IsSet() == TRUE)
             {
                 gTasks[taskId].data[0] = 2;
             }
@@ -153,18 +214,18 @@ void sub_800C4D0(u8 taskId)
             {
                 gTasks[taskId].data[0] = 1;
             }
-            gTasks[taskId].func = sub_800C704;
+            gTasks[taskId].func = Task_SetWin0BldRegsNoSaveFileCheck;
             break;
         case 2:
-            sub_800D094(0);
+            SetStdFrame0OnBg(0);
             gTasks[taskId].data[0] = 0;
-            sub_800C634(taskId, gText_SaveFileHasBeenDeleted);
+            PrintSaveErrorStatus(taskId, gText_SaveFileHasBeenDeleted);
             break;
         case 0xFF:
-            sub_800D094(0);
+            SetStdFrame0OnBg(0);
             gTasks[taskId].data[0] = 1;
-            sub_800C634(taskId, gText_SaveFileCorruptedPrevWillBeLoaded);
-            if (sub_806E2BC() == TRUE)
+            PrintSaveErrorStatus(taskId, gText_SaveFileCorruptedPrevWillBeLoaded);
+            if (Flag_0x839_IsSet() == TRUE)
             {
                 gTasks[taskId].data[0] = 2;
             }
@@ -175,29 +236,29 @@ void sub_800C4D0(u8 taskId)
             break;
         case 0:
         default:
-            sub_800D044(0);
+            LoadUserFrameToBg(0);
             gTasks[taskId].data[0] = 0;
-            gTasks[taskId].func = sub_800C704;
+            gTasks[taskId].func = Task_SetWin0BldRegsNoSaveFileCheck;
             break;
         case 4:
-            sub_800D094(0);
+            SetStdFrame0OnBg(0);
             gTasks[taskId].data[0] = 0;
-            sub_800C634(taskId, gText_1MSubCircuitBoardNotInstalled);
+            PrintSaveErrorStatus(taskId, gText_1MSubCircuitBoardNotInstalled);
             break;
         }
     }
 }
 
-void sub_800C634(u8 taskId, const u8 *str)
+static void PrintSaveErrorStatus(u8 taskId, const u8 *str)
 {
-    sub_800CDF8(str);
-    gTasks[taskId].func = sub_800C688;
+    PrintMessageOnWindow4(str);
+    gTasks[taskId].func = Task_SaveErrorStatus_RunPrinterThenWaitButton;
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0xFFFF);
     ShowBg(0);
-    SetVBlankCallback(sub_800C2EC);
+    SetVBlankCallback(VBlankCB_MainMenu);
 }
 
-void sub_800C688(u8 taskId)
+static void Task_SaveErrorStatus_RunPrinterThenWaitButton(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -205,17 +266,17 @@ void sub_800C688(u8 taskId)
         if (!IsTextPrinterActive(4) && JOY_NEW(A_BUTTON))
         {
             ClearWindowTilemap(4);
-            sub_800D1E8(&gUnknown_8234618[4]);
-            sub_800D044(0);
+            DestroyWindowBubbleFrame(&sWindowTemplate[4]);
+            LoadUserFrameToBg(0);
             if (gTasks[taskId].data[0] == 0)
-                gTasks[taskId].func = sub_800C704;
+                gTasks[taskId].func = Task_SetWin0BldRegsNoSaveFileCheck;
             else
-                gTasks[taskId].func = sub_800C7A0;
+                gTasks[taskId].func = Task_PrintMainMenuText;
         }
     }
 }
 
-void sub_800C704(u8 taskId)
+static void Task_SetWin0BldRegsNoSaveFileCheck(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -229,21 +290,21 @@ void sub_800C704(u8 taskId)
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 0));
         SetGpuReg(REG_OFFSET_BLDY, 7);
         if (gTasks[taskId].data[0] == 0)
-            gTasks[taskId].func = sub_800CA94;
+            gTasks[taskId].func = Task_ExecuteMainMenuSelection;
         else
-            gTasks[taskId].func = sub_800C780;
+            gTasks[taskId].func = Task_WaitFadeAndPrintMainMenuText;
     }
 }
 
-void sub_800C780(u8 taskId)
+static void Task_WaitFadeAndPrintMainMenuText(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        sub_800C7A0(taskId);
+        Task_PrintMainMenuText(taskId);
     }
 }
 
-void sub_800C7A0(u8 taskId)
+static void Task_PrintMainMenuText(u8 taskId)
 {
     u16 pal;
     SetGpuReg(REG_OFFSET_WIN0H, 0);
@@ -265,19 +326,19 @@ void sub_800C7A0(u8 taskId)
     case 0:
     default:
         FillWindowPixelBuffer(0, PIXEL_FILL(10));
-        AddTextPrinterParameterized3(0, 2, 2, 2, gUnknown_8234688, -1, gText_NewGame);
-        sub_800D0B4(&gUnknown_8234618[0]);
+        AddTextPrinterParameterized3(0, 2, 2, 2, sTextColor1, -1, gText_NewGame);
+        DrawBubbleBorder(&sWindowTemplate[0]);
         PutWindowTilemap(0);
         CopyWindowToVram(0, 3);
         break;
     case 1:
         FillWindowPixelBuffer(1, PIXEL_FILL(10));
         FillWindowPixelBuffer(2, PIXEL_FILL(10));
-        AddTextPrinterParameterized3(1, 2, 2, 2, gUnknown_8234688, -1, gText_Continue);
-        AddTextPrinterParameterized3(2, 2, 2, 2, gUnknown_8234688, -1, gText_NewGame);
-        sub_800CE58();
-        sub_800D0B4(&gUnknown_8234618[1]);
-        sub_800D0B4(&gUnknown_8234618[2]);
+        AddTextPrinterParameterized3(1, 2, 2, 2, sTextColor1, -1, gText_Continue);
+        AddTextPrinterParameterized3(2, 2, 2, 2, sTextColor1, -1, gText_NewGame);
+        PrintContinueStats();
+        DrawBubbleBorder(&sWindowTemplate[1]);
+        DrawBubbleBorder(&sWindowTemplate[2]);
         PutWindowTilemap(1);
         PutWindowTilemap(2);
         CopyWindowToVram(1, 2);
@@ -287,14 +348,14 @@ void sub_800C7A0(u8 taskId)
         FillWindowPixelBuffer(1, PIXEL_FILL(10));
         FillWindowPixelBuffer(2, PIXEL_FILL(10));
         FillWindowPixelBuffer(3, PIXEL_FILL(10));
-        AddTextPrinterParameterized3(1, 2, 2, 2, gUnknown_8234688, -1, gText_Continue);
-        AddTextPrinterParameterized3(2, 2, 2, 2, gUnknown_8234688, -1, gText_NewGame);
+        AddTextPrinterParameterized3(1, 2, 2, 2, sTextColor1, -1, gText_Continue);
+        AddTextPrinterParameterized3(2, 2, 2, 2, sTextColor1, -1, gText_NewGame);
         gTasks[taskId].data[10] = 1;
-        AddTextPrinterParameterized3(3, 2, 2, 2, gUnknown_8234688, -1, gText_MysteryGift);
-        sub_800CE58();
-        sub_800D0B4(&gUnknown_8234618[1]);
-        sub_800D0B4(&gUnknown_8234618[2]);
-        sub_800D0B4(&gUnknown_8234618[3]);
+        AddTextPrinterParameterized3(3, 2, 2, 2, sTextColor1, -1, gText_MysteryGift);
+        PrintContinueStats();
+        DrawBubbleBorder(&sWindowTemplate[1]);
+        DrawBubbleBorder(&sWindowTemplate[2]);
+        DrawBubbleBorder(&sWindowTemplate[3]);
         PutWindowTilemap(1);
         PutWindowTilemap(2);
         PutWindowTilemap(3);
@@ -303,35 +364,35 @@ void sub_800C7A0(u8 taskId)
         CopyWindowToVram(3, 3);
         break;
     }
-    gTasks[taskId].func = sub_800C9CC;
+    gTasks[taskId].func = Task_WaitDma3AndFadeIn;
 }
 
-void sub_800C9CC(u8 taskId)
+static void Task_WaitDma3AndFadeIn(u8 taskId)
 {
     if (CheckForSpaceForDma3Request(-1) != -1)
     {
-        gTasks[taskId].func = sub_800CA28;
+        gTasks[taskId].func = Task_UpdateVisualSelection;
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0xFFFF);
         ShowBg(0);
-        SetVBlankCallback(sub_800C2EC);
+        SetVBlankCallback(VBlankCB_MainMenu);
     }
 }
 
-void sub_800CA28(u8 taskId)
+static void Task_UpdateVisualSelection(u8 taskId)
 {
-    sub_800CC94(gTasks[taskId].data[0], gTasks[taskId].data[1]);
-    gTasks[taskId].func = sub_800CA54;
+    MoveWindowByMenuTypeAndCursorPos(gTasks[taskId].data[0], gTasks[taskId].data[1]);
+    gTasks[taskId].func = Task_HandleMenuInput;
 }
 
-void sub_800CA54(u8 taskId)
+static void Task_HandleMenuInput(u8 taskId)
 {
-    if (!gPaletteFade.active && sub_800CCF8(taskId))
+    if (!gPaletteFade.active && HandleMenuInput(taskId))
     {
-        gTasks[taskId].func = sub_800CA28;
+        gTasks[taskId].func = Task_UpdateVisualSelection;
     }
 }
 
-void sub_800CA94(u8 taskId)
+static void Task_ExecuteMainMenuSelection(u8 taskId)
 {
     s32 r0;
     if (!gPaletteFade.active)
@@ -367,8 +428,8 @@ void sub_800CA94(u8 taskId)
             case 2:
                 if (!IsWirelessAdapterConnected())
                 {
-                    sub_800D094(0);
-                    gTasks[taskId].func = sub_800CB90;
+                    SetStdFrame0OnBg(0);
+                    gTasks[taskId].func = Task_MysteryGiftError;
                     BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
                     return;
                 }
@@ -398,7 +459,7 @@ void sub_800CA94(u8 taskId)
             break;
         case 2:
             SetMainCallback2(c2_mystery_gift);
-            sub_812B478();
+            HelpSystem_Disable();
             FreeAllWindowBuffers();
             DestroyTask(taskId);
             break;
@@ -406,16 +467,16 @@ void sub_800CA94(u8 taskId)
     }
 }
 
-void sub_800CB90(u8 taskId)
+static void Task_MysteryGiftError(u8 taskId)
 {
     switch (gTasks[taskId].data[9])
     {
     case 0:
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
         if (gTasks[taskId].data[10] == 1)
-            sub_800CDF8(gText_WirelessAdapterIsNotConnected);
+            PrintMessageOnWindow4(gText_WirelessAdapterIsNotConnected);
         else
-            sub_800CDF8(gText_MysteryGiftCantBeUsedWhileWirelessAdapterIsAttached);
+            PrintMessageOnWindow4(gText_MysteryGiftCantBeUsedWhileWirelessAdapterIsAttached);
         gTasks[taskId].data[9]++;
         break;
     case 1:
@@ -432,13 +493,13 @@ void sub_800CB90(u8 taskId)
         {
             PlaySE(SE_SELECT);
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-            gTasks[taskId].func = sub_800CC68;
+            gTasks[taskId].func = Task_ReturnToTileScreen;
         }
         break;
     }
 }
 
-void sub_800CC68(u8 taskId)
+static void Task_ReturnToTileScreen(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -447,7 +508,7 @@ void sub_800CC68(u8 taskId)
     }
 }
 
-void sub_800CC94(u8 menuType, u8 cursorPos)
+static void MoveWindowByMenuTypeAndCursorPos(u8 menuType, u8 cursorPos)
 {
     u16 win0v1, win0v2;
     SetGpuReg(REG_OFFSET_WIN0H, 0x12DE);
@@ -481,14 +542,14 @@ void sub_800CC94(u8 menuType, u8 cursorPos)
     SetGpuReg(REG_OFFSET_WIN0V, (win0v1 + (2 << 8)) | (win0v2 - 2));
 }
 
-bool8 sub_800CCF8(u8 taskId)
+static bool8 HandleMenuInput(u8 taskId)
 {
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         IsWirelessAdapterConnected(); // called for its side effects only
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-        gTasks[taskId].func = sub_800CA94;
+        gTasks[taskId].func = Task_ExecuteMainMenuSelection;
     }
     else if (JOY_NEW(B_BUTTON))
     {
@@ -496,7 +557,7 @@ bool8 sub_800CCF8(u8 taskId)
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
         SetGpuReg(REG_OFFSET_WIN0H, 0xF0);
         SetGpuReg(REG_OFFSET_WIN0V, 0xA0);
-        gTasks[taskId].func = sub_800CC68;
+        gTasks[taskId].func = Task_ReturnToTileScreen;
     }
     else if (JOY_NEW(DPAD_UP) && gTasks[taskId].data[1] > 0)
     {
@@ -512,34 +573,113 @@ bool8 sub_800CCF8(u8 taskId)
     return FALSE;
 }
 
-void sub_800CDF8(const u8 *str)
+static void PrintMessageOnWindow4(const u8 *str)
 {
     FillWindowPixelBuffer(4, PIXEL_FILL(10));
-    sub_800D0B4(&gUnknown_8234618[4]);
-    AddTextPrinterParameterized3(4, 2, 0, 2, gUnknown_8234688, 2, str);
+    DrawBubbleBorder(&sWindowTemplate[4]);
+    AddTextPrinterParameterized3(4, 2, 0, 2, sTextColor1, 2, str);
     PutWindowTilemap(4);
     CopyWindowToVram(4, 2);
     SetGpuReg(REG_OFFSET_WIN0H, 0x13DD);
     SetGpuReg(REG_OFFSET_WIN0V, 0x739D);
 }
 
-void sub_800CE58(void)
+static void PrintContinueStats(void)
 {
-    sub_800CE70();
-    sub_800CF3C();
-    sub_800CED4();
-    sub_800CFC4();
+    PrintPlayerName();
+    PrintDexCount();
+    PrintPlayTime();
+    PrintBadgeCount();
 }
 
-void sub_800CE70(void)
+static void PrintPlayerName(void)
 {
     s32 i;
     u8 name[OT_NAME_LENGTH + 1];
     u8 *ptr;
-    AddTextPrinterParameterized3(1, 2, 2, 18, gUnknown_823468B, -1, gText_Player);
+    AddTextPrinterParameterized3(1, 2, 2, 18, sTextColor2, -1, gText_Player);
     ptr = name;
     for (i = 0; i < OT_NAME_LENGTH; i++)
         *ptr++ = gSaveBlock2Ptr->playerName[i];
     *ptr = EOS;
-    AddTextPrinterParameterized3(1, 2, 62, 18, gUnknown_823468B, -1, name);
+    AddTextPrinterParameterized3(1, 2, 62, 18, sTextColor2, -1, name);
+}
+
+static void PrintPlayTime(void)
+{
+    u8 strbuf[30];
+    u8 *ptr;
+
+    AddTextPrinterParameterized3(1, 2, 2, 34, sTextColor2, -1, gText_Time);
+    ptr = ConvertIntToDecimalStringN(strbuf, gSaveBlock2Ptr->playTimeHours, STR_CONV_MODE_LEFT_ALIGN, 3);
+    *ptr++ = CHAR_COLON;
+    ConvertIntToDecimalStringN(ptr, gSaveBlock2Ptr->playTimeMinutes, STR_CONV_MODE_LEADING_ZEROS, 2);
+    AddTextPrinterParameterized3(1, 2, 62, 34, sTextColor2, -1, strbuf);
+}
+
+static void PrintDexCount(void)
+{
+    u8 strbuf[30];
+    u8 *ptr;
+    u16 dexcount;
+    if (FlagGet(FLAG_0x829) == TRUE)
+    {
+        if (IsNationalPokedexEnabled())
+            dexcount = GetNationalPokedexCount(FLAG_GET_CAUGHT);
+        else
+            dexcount = GetKantoPokedexCount(FLAG_GET_CAUGHT);
+        AddTextPrinterParameterized3(1, 2, 2, 50, sTextColor2, -1, gText_Pokedex);
+        ptr = ConvertIntToDecimalStringN(strbuf, dexcount, STR_CONV_MODE_LEFT_ALIGN, 3);
+        StringAppend(ptr, gTextJPDummy_Hiki);
+        AddTextPrinterParameterized3(1, 2, 62, 50, sTextColor2, -1, strbuf);
+    }
+}
+
+static void PrintBadgeCount(void)
+{
+    u8 strbuf[30];
+    u8 *ptr;
+    u32 flagId;
+    u8 nbadges = 0;
+    for (flagId = FLAG_UNK820; flagId < FLAG_UNK820 + 8; flagId++)
+    {
+        if (FlagGet(flagId))
+            nbadges++;
+    }
+    AddTextPrinterParameterized3(1, 2, 2, 66, sTextColor2, -1, gText_Badges);
+    ptr = ConvertIntToDecimalStringN(strbuf, nbadges, STR_CONV_MODE_LEADING_ZEROS, 1);
+    StringAppend(ptr, gTextJPDummy_Ko);
+    AddTextPrinterParameterized3(1, 2, 62, 66, sTextColor2, -1, strbuf);
+}
+
+static void LoadUserFrameToBg(u8 bgId)
+{
+    LoadBgTiles(bgId, GetUserFrameGraphicsInfo(gSaveBlock2Ptr->optionsWindowFrameType)->tiles, 0x120, 0x1B1);
+    LoadPalette(GetUserFrameGraphicsInfo(gSaveBlock2Ptr->optionsWindowFrameType)->palette, 0x20, 0x20);
+    DestroyWindowBubbleFrame(&sWindowTemplate[4]);
+}
+
+static void SetStdFrame0OnBg(u8 bgId)
+{
+    TextWindow_SetStdFrame0_WithPal(0, 0x1B1, 0x20);
+    DestroyWindowBubbleFrame(&sWindowTemplate[4]);
+}
+
+static void DrawBubbleBorder(const struct WindowTemplate * windowTemplate)
+{
+    FillBgTilemapBufferRect(windowTemplate->bg, 0x1B1, windowTemplate->tilemapLeft - 1, windowTemplate->tilemapTop - 1, 1, 1, 2);
+    FillBgTilemapBufferRect(windowTemplate->bg, 0x1B2, windowTemplate->tilemapLeft, windowTemplate->tilemapTop - 1, windowTemplate->width, windowTemplate->height, 2);
+    FillBgTilemapBufferRect(windowTemplate->bg, 0x1B3, windowTemplate->tilemapLeft + windowTemplate->width, windowTemplate->tilemapTop - 1, 1, 1, 2);
+    FillBgTilemapBufferRect(windowTemplate->bg, 0x1B4, windowTemplate->tilemapLeft - 1, windowTemplate->tilemapTop, 1, windowTemplate->height, 2);
+    FillBgTilemapBufferRect(windowTemplate->bg, 0x1B6, windowTemplate->tilemapLeft + windowTemplate->width, windowTemplate->tilemapTop, 1, windowTemplate->height, 2);
+    FillBgTilemapBufferRect(windowTemplate->bg, 0x1B7, windowTemplate->tilemapLeft - 1, windowTemplate->tilemapTop + windowTemplate->height, 1, 1, 2);
+    FillBgTilemapBufferRect(windowTemplate->bg, 0x1B8, windowTemplate->tilemapLeft, windowTemplate->tilemapTop + windowTemplate->height, windowTemplate->width, 1, 2);
+    FillBgTilemapBufferRect(windowTemplate->bg, 0x1B9, windowTemplate->tilemapLeft + windowTemplate->width, windowTemplate->tilemapTop + windowTemplate->height, 1, 1, 2);
+    CopyBgTilemapBufferToVram(windowTemplate->bg);
+}
+
+static void DestroyWindowBubbleFrame(const struct WindowTemplate * windowTemplate)
+{
+    FillBgTilemapBufferRect(windowTemplate->bg, 0x000, windowTemplate->tilemapLeft - 1, windowTemplate->tilemapTop - 1,  windowTemplate->tilemapLeft + windowTemplate->width + 1, windowTemplate->tilemapTop + windowTemplate->height + 1, 2);
+    CopyBgTilemapBufferToVram(windowTemplate->bg);
 }

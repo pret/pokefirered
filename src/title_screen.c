@@ -513,7 +513,7 @@ static void SetTitleScreenScene_Run(s16 * data)
         CreateTask(Task_FlameOrLeafSpawner, 5);
         SetGpuRegsForTitleScreenRun();
         data[6] = CreateSlashSprite();
-        sub_812B484();
+        HelpSystem_Enable();
         data[1]++;
         // fallthrough
     case 1:
@@ -583,7 +583,7 @@ static void SetTitleScreenScene_Restart(s16 * data)
         }
         break;
     case 4:
-        sub_812B478();
+        HelpSystem_Disable();
         DestroyTask(FindTaskIdByFunc(Task_TitleScreenMain));
         SetMainCallback2(sub_80EC864);
         break;
@@ -626,7 +626,7 @@ static void SetTitleScreenScene_Cry(s16 * data)
                 Sav2_ClearSetDefault();
             SetPokemonCryStereo(gSaveBlock2Ptr->optionsSound);
             InitHeap(gHeap, HEAP_SIZE);
-            SetMainCallback2(sub_800C300);
+            SetMainCallback2(CB2_InitMainMenu);
             DestroyTask(FindTaskIdByFunc(Task_TitleScreenMain));
         }
         break;

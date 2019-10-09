@@ -1603,7 +1603,7 @@ void sub_81120AC(u8 taskId)
             gTextFlags.autoScroll = FALSE;
             gUnknown_2036E28 = 0;
             sub_8082740(0);
-            gHelpSystemEnabled = 1;
+            gHelpSystemEnabled = TRUE;
             DestroyTask(taskId);
             break;
     }

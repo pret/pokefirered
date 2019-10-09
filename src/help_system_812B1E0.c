@@ -1007,14 +1007,14 @@ bool8 sub_812B45C(void)
 
 void HelpSystem_Disable(void)
 {
-    gHelpSystemEnabled = 0;
+    gHelpSystemEnabled = FALSE;
 }
 
 void HelpSystem_Enable(void)
 {
     if (gUnknown_203ADFA != 2 && gUnknown_203ADFA != 3)
     {
-        gHelpSystemEnabled = 1;
+        gHelpSystemEnabled = TRUE;
         sub_812B4B8();
     }
 }

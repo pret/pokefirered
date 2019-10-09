@@ -17,7 +17,7 @@
 #define FLAG_WORLD_MAP_FUCHSIA_CITY                                 0x897
 #define FLAG_WORLD_MAP_CINNABAR_ISLAND                              0x898
 #define FLAG_WORLD_MAP_INDIGO_PLATEAU_EXTERIOR                      0x899
-#define FLAG_WORLD_MAP_SAFFRON_CITY_DUPLICATE                       0x89a
+#define FLAG_WORLD_MAP_SAFFRON_CITY                                 0x89a
 #define FLAG_WORLD_MAP_ONE_ISLAND                                   0x89b
 #define FLAG_WORLD_MAP_TWO_ISLAND                                   0x89c
 #define FLAG_WORLD_MAP_THREE_ISLAND                                 0x89d

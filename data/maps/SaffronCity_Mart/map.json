@@ -58,21 +58,21 @@
       "x": 3,
       "y": 7,
       "elevation": 3,
-      "dest_map": "MAP_SAFFRON_CITY_DUPLICATE",
+      "dest_map": "MAP_SAFFRON_CITY",
       "dest_warp_id": 5
     },
     {
       "x": 4,
       "y": 7,
       "elevation": 3,
-      "dest_map": "MAP_SAFFRON_CITY_DUPLICATE",
+      "dest_map": "MAP_SAFFRON_CITY",
       "dest_warp_id": 5
     },
     {
       "x": 5,
       "y": 7,
       "elevation": 3,
-      "dest_map": "MAP_SAFFRON_CITY_DUPLICATE",
+      "dest_map": "MAP_SAFFRON_CITY",
       "dest_warp_id": 5
     }
   ],

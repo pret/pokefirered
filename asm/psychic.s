@@ -57,7 +57,7 @@ _080B2EFE:
 	beq _080B2F3C
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8072E48
+	bl MoveBattlerSpriteToBG
 _080B2F3C:
 	movs r0, 0x2
 	adds r4, r0, 0
@@ -71,7 +71,7 @@ _080B2F3C:
 	eors r5, r0
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8072E48
+	bl MoveBattlerSpriteToBG
 _080B2F5A:
 	bl IsContest
 	lsls r0, 24

@@ -1624,15 +1624,15 @@ gFile_graphics_battle_anims_backgrounds_00_tilemap:: @ 8D1CFD4
 	.incbin "graphics/battle_anims/backgrounds/00.bin.lz"
 
 	.align 2
-gFile_graphics_battle_anims_masks_metal_shine_sheet:: @ 8D1D224
+gMetalShineGfx:: @ 8D1D224
 	.incbin "graphics/battle_anims/masks/metal_shine.4bpp.lz"
 
 	.align 2
-gFile_graphics_battle_anims_masks_metal_shine_palette:: @ 8D1D360
+gMetalShinePalette:: @ 8D1D360
 	.incbin "graphics/battle_anims/masks/metal_shine.gbapal.lz"
 
 	.align 2
-gFile_graphics_battle_anims_masks_metal_shine_tilemap:: @ 8D1D388
+gMetalShineTilemap:: @ 8D1D388
 	.incbin "graphics/battle_anims/masks/metal_shine.bin.lz"
 
 	.align 2

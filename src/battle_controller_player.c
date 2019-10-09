@@ -1222,7 +1222,7 @@ static void sub_80303A8(u8 taskId)
             u32 battlerIdAlt = battlerId;
             bool32 v6Alt = v6;
 
-            sub_8072E48(battlerIdAlt, v6Alt);
+            MoveBattlerSpriteToBG(battlerIdAlt, v6Alt);
         }
         ++data[15];
         break;

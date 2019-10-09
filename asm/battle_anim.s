@@ -1007,7 +1007,7 @@ _08072C62:
 _08072C88:
 	adds r0, r5, 0
 	adds r1, r7, 0
-	bl sub_8072E48
+	bl MoveBattlerSpriteToBG
 	ldr r0, _08072CDC @ =gBattlerSpriteIds
 	adds r0, r5, r0
 	ldrb r4, [r0]
@@ -1091,7 +1091,7 @@ _08072D12:
 _08072D3E:
 	adds r0, r5, 0
 	adds r1, r7, 0
-	bl sub_8072E48
+	bl MoveBattlerSpriteToBG
 	ldr r0, _08072D9C @ =gBattlerSpriteIds
 	adds r0, r5, r0
 	ldrb r4, [r0]
@@ -1217,8 +1217,8 @@ _08072E42:
 	bx r1
 	thumb_func_end IsBattlerSpriteVisible
 
-	thumb_func_start sub_8072E48
-sub_8072E48: @ 8072E48
+	thumb_func_start MoveBattlerSpriteToBG
+MoveBattlerSpriteToBG: @ 8072E48
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1490,7 +1490,7 @@ _080730B0: .4byte gBattle_BG2_Y
 _080730B4: .4byte gPlttBufferUnfaded + 0x200
 _080730B8: .4byte 0x05000120
 _080730BC: .4byte 0x04000008
-	thumb_func_end sub_8072E48
+	thumb_func_end MoveBattlerSpriteToBG
 
 	thumb_func_start sub_80730C0
 sub_80730C0: @ 80730C0
@@ -1914,7 +1914,7 @@ _080733CE:
 	movs r1, 0
 _080733F4:
 	adds r0, r4, 0
-	bl sub_8072E48
+	bl MoveBattlerSpriteToBG
 	ldr r2, _08073478 @ =gSprites
 	ldr r0, _0807347C @ =gBattlerSpriteIds
 	adds r0, r4, r0
@@ -1952,7 +1952,7 @@ _08073416:
 	movs r1, 0
 _08073442:
 	adds r0, r4, 0
-	bl sub_8072E48
+	bl MoveBattlerSpriteToBG
 	ldr r2, _08073478 @ =gSprites
 	ldr r0, _0807347C @ =gBattlerSpriteIds
 	adds r0, r4, r0

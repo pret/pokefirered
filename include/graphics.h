@@ -976,6 +976,11 @@ extern const u32 gBattleStatMask8_Pal[];
 extern const u32 gBattleStatMask1_Tilemap[];
 extern const u32 gBattleStatMask2_Tilemap[];
 
+// dark
+extern const u32 gMetalShineGfx[];
+extern const u32 gMetalShinePalette[];
+extern const u32 gMetalShineTilemap[];
+
 // title_screen
 extern const u16 gGraphics_TitleScreen_PokemonFireRedLogoPals[];
 extern const u8 gGraphics_TitleScreen_PokemonFireRedLogoTiles[];

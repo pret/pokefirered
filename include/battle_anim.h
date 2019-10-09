@@ -65,6 +65,8 @@ extern struct OamData gOamData_83AC9F8;
 extern struct OamData gOamData_83AC9D8;
 extern struct OamData gOamData_83ACB58;
 extern struct OamData gOamData_83ACAF8;
+extern struct OamData gOamData_83ACB60;
+extern struct OamData gOamData_83ACA30;
 
 void ClearBattleAnimationVars(void);
 void DoMoveAnim(u16 move);
@@ -127,7 +129,7 @@ u8 GetBattlerSpriteDefault_Y(u8 battlerId);
 u8 sub_80A82E4(u8 battlerId);
 u8 GetSubstituteSpriteDefault_Y(u8 battlerId);
 u8 GetGhostSpriteDefault_Y(u8 battlerId);
-void sub_8072E48(u8 battlerId, u8);
+void MoveBattlerSpriteToBG(u8 battlerId, u8);
 void sub_8073128(u8);
 
 // battle_anim_status_effects.s
@@ -281,8 +283,20 @@ void sub_80B94B4(u8 taskId);
 void AnimTask_IsPowerOver99(u8 taskId);
 void sub_80B9800(u8 taskId);
 
-// flying.c
+// flying.s
 void sub_80B1D3C(struct Sprite *sprite);
+
+// dark.c
+void sub_80B78E0(u8 taskId);
+void sub_80B79DC(u8 taskId);
+void sub_80B7A80(u8 taskId);
+void sub_80B7DA4(u8 taskId);
+void sub_80B8070(u8 taskId);
+void sub_80B85B8(u8 taskId);
+void sub_80B8664(u8 taskId);
+void AnimTask_MetallicShine(u8 taskId);
+void AnimTask_SetGreyscaleOrOriginalPal(u8 taskId);
+void sub_80B8B38(u8 taskId);
 
 // battle_anim_utility_funcs.c
 void sub_80BA7F8(u8 taskId);

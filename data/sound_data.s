@@ -2,8 +2,29 @@
 	.include "asm/macros/music_voice.inc"
 	.section .rodata
 
-voicegroup_pokemon_cry:: @ 8489C8C
-	.incbin "baserom.gba", 0x489C8C, 0x2C88
+voicegroup000:: @ 8489C8C
+	.incbin "baserom.gba", 0x489C8C, 0xF24
+
+voicegroup012:: @ 848ABB0
+	.incbin "baserom.gba", 0x48ABB0, 0x4C8
+
+voicegroup026:: @ 848B078
+	.incbin "baserom.gba", 0x48B078, 0x3FC
+
+voicegroup120:: @ 848B474
+	.incbin "baserom.gba", 0x48B474, 0x444
+
+voicegroup119:: @ 848B8B8
+	.incbin "baserom.gba", 0x48B8B8, 0x444
+
+voicegroup081:: @ 848BCFC
+	.incbin "baserom.gba", 0x48BCFC, 0x18
+
+voicegroup127:: @ 848BD14
+	.incbin "baserom.gba", 0x48BD14, 0x600
+
+voicegroup128:: @ 848C314
+	.incbin "baserom.gba", 0x48C314, 0x600
 
 	.align 2
 gCryTable:: @ 848C914
@@ -787,8 +808,182 @@ gCryTable2:: @ 848DB44
     cry2 Cry_Deoxys
     cry2 Cry_Chimecho
 
-gUnknown_848ED74:: @ 848ED74
-	.incbin "baserom.gba", 0x48ED74, 0x14528
+voicegroup129:: @ 848ED74
+	.incbin "baserom.gba", 0x48ED74, 0x600
+
+voicegroup130:: @ 848F374
+	.incbin "baserom.gba", 0x48F374, 0x600
+
+voicegroup131:: @ 848F974
+	.incbin "baserom.gba", 0x48F974, 0x600
+
+voicegroup132:: @ 848FF74
+	.incbin "baserom.gba", 0x48FF74, 0x600
+
+voicegroup133:: @ 8490574
+	.incbin "baserom.gba", 0x490574, 0x600
+
+voicegroup134:: @ 8490B74
+	.incbin "baserom.gba", 0x490B74, 0x438
+
+voicegroup135:: @ 8490FAC
+	.incbin "baserom.gba", 0x490FAC, 0x3E4
+
+voicegroup136:: @ 8491390
+	.incbin "baserom.gba", 0x491390, 0x600
+
+voicegroup137:: @ 8491990
+	.incbin "baserom.gba", 0x491990, 0x600
+
+voicegroup138:: @ 8491F90
+	.incbin "baserom.gba", 0x491F90, 0x600
+
+voicegroup139:: @ 8492590
+	.incbin "baserom.gba", 0x492590, 0x600
+
+voicegroup140:: @ 8492B90
+	.incbin "baserom.gba", 0x492B90, 0x30
+
+voicegroup141:: @ 8492BC0
+	.incbin "baserom.gba", 0x492BC0, 0x600
+
+voicegroup142:: @ 84931C0
+	.incbin "baserom.gba", 0x4931C0, 0x3F0
+
+voicegroup143:: @ 84935B0
+	.incbin "baserom.gba", 0x4935B0, 0x600
+
+voicegroup144:: @ 8493BB0
+	.incbin "baserom.gba", 0x493BB0, 0x600
+
+voicegroup145:: @ 84941B0
+	.incbin "baserom.gba", 0x4941B0, 0x600
+
+voicegroup146:: @ 84947B0
+	.incbin "baserom.gba", 0x4947B0, 0x600
+
+voicegroup147:: @ 8494DB0
+	.incbin "baserom.gba", 0x494DB0, 0x3F0
+
+voicegroup148:: @ 84951A0
+	.incbin "baserom.gba", 0x4951A0, 0x600
+
+voicegroup149:: @ 84957A0
+	.incbin "baserom.gba", 0x4957A0, 0x45C
+
+voicegroup150:: @ 8495BFC
+	.incbin "baserom.gba", 0x495BFC, 0x600
+
+voicegroup151:: @ 84961FC
+	.incbin "baserom.gba", 0x4961FC, 0x420
+
+voicegroup152:: @ 849661C
+	.incbin "baserom.gba", 0x49661C, 0x600
+
+voicegroup153:: @ 8496C1C
+	.incbin "baserom.gba", 0x496C1C, 0x600
+
+voicegroup154:: @ 849721C
+	.incbin "baserom.gba", 0x49721C, 0x45C
+
+voicegroup155:: @ 8497678
+	.incbin "baserom.gba", 0x497678, 0x600
+
+voicegroup156:: @ 8497C78
+	.incbin "baserom.gba", 0x497C78, 0x600
+
+voicegroup157:: @ 8498278
+	.incbin "baserom.gba", 0x498278, 0x600
+
+voicegroup158:: @ 8498878
+	.incbin "baserom.gba", 0x498878, 0x600
+
+voicegroup159:: @ 8498E78
+	.incbin "baserom.gba", 0x498E78, 0x600
+
+voicegroup160:: @ 8499478
+	.incbin "baserom.gba", 0x499478, 0x420
+
+voicegroup161:: @ 8499898
+	.incbin "baserom.gba", 0x499898, 0x600
+
+voicegroup162:: @ 8499E98
+	.incbin "baserom.gba", 0x499E98, 0x45C
+
+voicegroup163:: @ 849A2F4
+	.incbin "baserom.gba", 0x49A2F4, 0x600
+
+voicegroup164:: @ 849A8F4
+	.incbin "baserom.gba", 0x49A8F4, 0x600
+
+voicegroup165:: @ 849AEF4
+	.incbin "baserom.gba", 0x49AEF4, 0x600
+
+voicegroup166:: @ 849B4F4
+	.incbin "baserom.gba", 0x49B4F4, 0x600
+
+voicegroup167:: @ 849BAF4
+	.incbin "baserom.gba", 0x49BAF4, 0x600
+
+voicegroup168:: @ 849C0F4
+	.incbin "baserom.gba", 0x49C0F4, 0x600
+
+voicegroup169:: @ 849C6F4
+	.incbin "baserom.gba", 0x49C6F4, 0x600
+
+voicegroup170:: @ 849CCF4
+	.incbin "baserom.gba", 0x49CCF4, 0x3F0
+
+voicegroup171:: @ 849D0E4
+	.incbin "baserom.gba", 0x49D0E4, 0x444
+
+voicegroup172:: @ 849D528
+	.incbin "baserom.gba", 0x49D528, 0x600
+
+voicegroup173:: @ 849DB28
+	.incbin "baserom.gba", 0x49DB28, 0x600
+
+voicegroup174:: @ 849E128
+	.incbin "baserom.gba", 0x49E128, 0x75C
+
+voicegroup175:: @ 849E884
+	.incbin "baserom.gba", 0x49E884, 0x8E8
+
+voicegroup178:: @ 849F16C
+	.incbin "baserom.gba", 0x49F16C, 0x420
+
+voicegroup179:: @ 849F58C
+	.incbin "baserom.gba", 0x49F58C, 0x420
+
+voicegroup180:: @ 849F9AC
+	.incbin "baserom.gba", 0x49F9AC, 0x600
+
+voicegroup181:: @ 849FFAC
+	.incbin "baserom.gba", 0x49FFAC, 0x234
+
+voicegroup182:: @ 84A01E0
+	.incbin "baserom.gba", 0x4A01E0, 0x420
+
+voicegroup183:: @ 84A0600
+	.incbin "baserom.gba", 0x4A0600, 0x600
+
+voicegroup184:: @ 84A0C00
+	.incbin "baserom.gba", 0x4A0C00, 0x408
+
+voicegroup185:: @ 84A1008
+	.incbin "baserom.gba", 0x4A1008, 0x600
+
+voicegroup186:: @ 84A1608
+	.incbin "baserom.gba", 0x4A1608, 0x600
+
+voicegroup187:: @ 84A1C08
+	.incbin "baserom.gba", 0x4A1C08, 0x600
+
+voicegroup188:: @ 84A2208
+	.incbin "baserom.gba", 0x4A2208, 0x600
+
+voicegroup189:: @ 84A2808
+	.incbin "baserom.gba", 0x4A2808, 0xA94
 
 	.include "sound/music_player_table.inc"
 	.include "sound/song_table.inc"
@@ -2352,729 +2547,9 @@ Cry_Chimecho:: @ 869D4D0
 	.align 2
 	.incbin "baserom.gba", 0x69DEE0, 0x17760
 
-mus_dummy:: @ 0x86B5640
-	.incbin "baserom.gba", 0x6B5640, 0x20
-
-se_kaifuku:: @ 0x86B5660
-	.incbin "baserom.gba", 0x6B5660, 0x2C
-
-se_pc_login:: @ 0x86B568C
-	.incbin "baserom.gba", 0x6B568C, 0x24
-
-se_pc_off:: @ 0x86B56B0
-	.incbin "baserom.gba", 0x6B56B0, 0x44
-
-se_pc_on:: @ 0x86B56F4
-	.incbin "baserom.gba", 0x6B56F4, 0x2C
-
-se_select:: @ 0x86B5720
-	.incbin "baserom.gba", 0x6B5720, 0x1C
-
-se_win_open:: @ 0x86B573C
-	.incbin "baserom.gba", 0x6B573C, 0x1C
-
-se_wall_hit:: @ 0x86B5758
-	.incbin "baserom.gba", 0x6B5758, 0x1C
-
-se_door:: @ 0x86B5774
-	.incbin "baserom.gba", 0x6B5774, 0x34
-
-se_kaidan:: @ 0x86B57A8
-	.incbin "baserom.gba", 0x6B57A8, 0x24
-
-se_dansa:: @ 0x86B57CC
-	.incbin "baserom.gba", 0x6B57CC, 0x1C
-
-se_jitensya:: @ 0x86B57E8
-	.incbin "baserom.gba", 0x6B57E8, 0x2C
-
-se_kouka_l:: @ 0x86B5814
-	.incbin "baserom.gba", 0x6B5814, 0x4C
-
-se_kouka_m:: @ 0x86B5860
-	.incbin "baserom.gba", 0x6B5860, 0x7C
-
-se_kouka_h:: @ 0x86B58DC
-	.incbin "baserom.gba", 0x6B58DC, 0x54
-
-se_bowa2:: @ 0x86B5930
-	.incbin "baserom.gba", 0x6B5930, 0x54
-
-se_poke_dead:: @ 0x86B5984
-	.incbin "baserom.gba", 0x6B5984, 0x50
-
-se_nigeru:: @ 0x86B59D4
-	.incbin "baserom.gba", 0x6B59D4, 0x1C
-
-se_jido_doa:: @ 0x86B59F0
-	.incbin "baserom.gba", 0x6B59F0, 0x54
-
-se_naminori:: @ 0x86B5A44
-	.incbin "baserom.gba", 0x6B5A44, 0x48
-
-se_ban:: @ 0x86B5A8C
-	.incbin "baserom.gba", 0x6B5A8C, 0x2C
-
-se_pin:: @ 0x86B5AB8
-	.incbin "baserom.gba", 0x6B5AB8, 0x24
-
-se_boo:: @ 0x86B5ADC
-	.incbin "baserom.gba", 0x6B5ADC, 0x24
-
-se_bowa:: @ 0x86B5B00
-	.incbin "baserom.gba", 0x6B5B00, 0x84
-
-se_jyuni:: @ 0x86B5B84
-	.incbin "baserom.gba", 0x6B5B84, 0x2C
-
-se_seikai:: @ 0x86B5BB0
-	.incbin "baserom.gba", 0x6B5BB0, 0x30
-
-se_hazure:: @ 0x86B5BE0
-	.incbin "baserom.gba", 0x6B5BE0, 0x180
-
-se_exp:: @ 0x86B5D60
-	.incbin "baserom.gba", 0x6B5D60, 0x24
-
-se_jite_pyoko:: @ 0x86B5D84
-	.incbin "baserom.gba", 0x6B5D84, 0x24
-
-se_mu_pachi:: @ 0x86B5DA8
-	.incbin "baserom.gba", 0x6B5DA8, 0x24
-
-se_tk_kasya:: @ 0x86B5DCC
-	.incbin "baserom.gba", 0x6B5DCC, 0x30
-
-se_fu_zaku:: @ 0x86B5DFC
-	.incbin "baserom.gba", 0x6B5DFC, 0x24
-
-se_fu_zaku2:: @ 0x86B5E20
-	.incbin "baserom.gba", 0x6B5E20, 0x4C
-
-se_fu_zuzuzu:: @ 0x86B5E6C
-	.incbin "baserom.gba", 0x6B5E6C, 0x38
-
-se_ru_gashin:: @ 0x86B5EA4
-	.incbin "baserom.gba", 0x6B5EA4, 0x54
-
-se_ru_gasyan:: @ 0x86B5EF8
-	.incbin "baserom.gba", 0x6B5EF8, 0x3C
-
-se_ru_bari:: @ 0x86B5F34
-	.incbin "baserom.gba", 0x6B5F34, 0x58
-
-se_ru_hyuu:: @ 0x86B5F8C
-	.incbin "baserom.gba", 0x6B5F8C, 0x44
-
-se_ki_gasyan:: @ 0x86B5FD0
-	.incbin "baserom.gba", 0x6B5FD0, 0x3C
-
-se_tk_warpin:: @ 0x86B600C
-	.incbin "baserom.gba", 0x6B600C, 0x40
-
-se_tk_warpout:: @ 0x86B604C
-	.incbin "baserom.gba", 0x6B604C, 0x2C
-
-se_tu_saa:: @ 0x86B6078
-	.incbin "baserom.gba", 0x6B6078, 0x3C
-
-se_hi_turun:: @ 0x86B60B4
-	.incbin "baserom.gba", 0x6B60B4, 0xAC
-
-se_track_move:: @ 0x86B6160
-	.incbin "baserom.gba", 0x6B6160, 0x78
-
-se_track_stop:: @ 0x86B61D8
-	.incbin "baserom.gba", 0x6B61D8, 0x2C
-
-se_track_haiki:: @ 0x86B6204
-	.incbin "baserom.gba", 0x6B6204, 0x34
-
-se_track_door:: @ 0x86B6238
-	.incbin "baserom.gba", 0x6B6238, 0x2C
-
-se_moter:: @ 0x86B6264
-	.incbin "baserom.gba", 0x6B6264, 0x44
-
-se_save:: @ 0x86B62A8
-	.incbin "baserom.gba", 0x6B62A8, 0x2C
-
-se_kon:: @ 0x86B62D4
-	.incbin "baserom.gba", 0x6B62D4, 0x2C
-
-se_kon2:: @ 0x86B6300
-	.incbin "baserom.gba", 0x6B6300, 0x2C
-
-se_kon3:: @ 0x86B632C
-	.incbin "baserom.gba", 0x6B632C, 0x2C
-
-se_kon4:: @ 0x86B6358
-	.incbin "baserom.gba", 0x6B6358, 0x54
-
-se_suikomu:: @ 0x86B63AC
-	.incbin "baserom.gba", 0x6B63AC, 0x44
-
-se_nageru:: @ 0x86B63F0
-	.incbin "baserom.gba", 0x6B63F0, 0x34
-
-se_toy_c:: @ 0x86B6424
-	.incbin "baserom.gba", 0x6B6424, 0x38
-
-se_toy_d:: @ 0x86B645C
-	.incbin "baserom.gba", 0x6B645C, 0x38
-
-se_toy_e:: @ 0x86B6494
-	.incbin "baserom.gba", 0x6B6494, 0x38
-
-se_toy_f:: @ 0x86B64CC
-	.incbin "baserom.gba", 0x6B64CC, 0x38
-
-se_toy_g:: @ 0x86B6504
-	.incbin "baserom.gba", 0x6B6504, 0x38
-
-se_toy_a:: @ 0x86B653C
-	.incbin "baserom.gba", 0x6B653C, 0x38
-
-se_toy_b:: @ 0x86B6574
-	.incbin "baserom.gba", 0x6B6574, 0x38
-
-se_toy_c1:: @ 0x86B65AC
-	.incbin "baserom.gba", 0x6B65AC, 0x34
-
-se_mizu:: @ 0x86B65E0
-	.incbin "baserom.gba", 0x6B65E0, 0x24
-
-se_hashi:: @ 0x86B6604
-	.incbin "baserom.gba", 0x6B6604, 0x4C
-
-se_daugi:: @ 0x86B6650
-	.incbin "baserom.gba", 0x6B6650, 0x60
-
-se_pinpon:: @ 0x86B66B0
-	.incbin "baserom.gba", 0x6B66B0, 0x34
-
-se_fuusen1:: @ 0x86B66E4
-	.incbin "baserom.gba", 0x6B66E4, 0x30
-
-se_fuusen2:: @ 0x86B6714
-	.incbin "baserom.gba", 0x6B6714, 0x38
-
-se_fuusen3:: @ 0x86B674C
-	.incbin "baserom.gba", 0x6B674C, 0x44
-
-se_toy_kabe:: @ 0x86B6790
-	.incbin "baserom.gba", 0x6B6790, 0x30
-
-se_toy_dango:: @ 0x86B67C0
-	.incbin "baserom.gba", 0x6B67C0, 0x28
-
-se_doku:: @ 0x86B67E8
-	.incbin "baserom.gba", 0x6B67E8, 0x68
-
-se_esuka:: @ 0x86B6850
-	.incbin "baserom.gba", 0x6B6850, 0x3C
-
-se_t_ame:: @ 0x86B688C
-	.incbin "baserom.gba", 0x6B688C, 0x40
-
-se_t_ame_e:: @ 0x86B68CC
-	.incbin "baserom.gba", 0x6B68CC, 0x3C
-
-se_t_ooame:: @ 0x86B6908
-	.incbin "baserom.gba", 0x6B6908, 0x40
-
-se_t_ooame_e:: @ 0x86B6948
-	.incbin "baserom.gba", 0x6B6948, 0x3C
-
-se_t_koame:: @ 0x86B6984
-	.incbin "baserom.gba", 0x6B6984, 0x40
-
-se_t_koame_e:: @ 0x86B69C4
-	.incbin "baserom.gba", 0x6B69C4, 0x68
-
-se_t_kami:: @ 0x86B6A2C
-	.incbin "baserom.gba", 0x6B6A2C, 0x50
-
-se_t_kami2:: @ 0x86B6A7C
-	.incbin "baserom.gba", 0x6B6A7C, 0x3C
-
-se_elebeta:: @ 0x86B6AB8
-	.incbin "baserom.gba", 0x6B6AB8, 0x30
-
-se_hinsi:: @ 0x86B6AE8
-	.incbin "baserom.gba", 0x6B6AE8, 0x4C
-
-se_expmax:: @ 0x86B6B34
-	.incbin "baserom.gba", 0x6B6B34, 0x24
-
-se_tamakoro:: @ 0x86B6B58
-	.incbin "baserom.gba", 0x6B6B58, 0x54
-
-se_tamakoro_e:: @ 0x86B6BAC
-	.incbin "baserom.gba", 0x6B6BAC, 0x94
-
-se_basabasa:: @ 0x86B6C40
-	.incbin "baserom.gba", 0x6B6C40, 0x3C
-
-se_regi:: @ 0x86B6C7C
-	.incbin "baserom.gba", 0x6B6C7C, 0x24
-
-se_c_gaji:: @ 0x86B6CA0
-	.incbin "baserom.gba", 0x6B6CA0, 0x64
-
-se_c_maku_u:: @ 0x86B6D04
-	.incbin "baserom.gba", 0x6B6D04, 0x68
-
-se_c_maku_d:: @ 0x86B6D6C
-	.incbin "baserom.gba", 0x6B6D6C, 0x28
-
-se_c_pasi:: @ 0x86B6D94
-	.incbin "baserom.gba", 0x6B6D94, 0x34
-
-se_c_syu:: @ 0x86B6DC8
-	.incbin "baserom.gba", 0x6B6DC8, 0x2C
-
-se_c_pikon:: @ 0x86B6DF4
-	.incbin "baserom.gba", 0x6B6DF4, 0x7C
-
-se_reapoke:: @ 0x86B6E70
-	.incbin "baserom.gba", 0x6B6E70, 0xC0
-
-se_op_basyu:: @ 0x86B6F30
-	.incbin "baserom.gba", 0x6B6F30, 0xE8
-
-se_bt_start:: @ 0x86B7018
-	.incbin "baserom.gba", 0x6B7018, 0x118
-
-se_dendou:: @ 0x86B7130
-	.incbin "baserom.gba", 0x6B7130, 0x24
-
-se_jihanki:: @ 0x86B7154
-	.incbin "baserom.gba", 0x6B7154, 0x114
-
-se_tama:: @ 0x86B7268
-	.incbin "baserom.gba", 0x6B7268, 0x2C
-
-se_z_scroll:: @ 0x86B7294
-	.incbin "baserom.gba", 0x6B7294, 0x34
-
-se_z_page:: @ 0x86B72C8
-	.incbin "baserom.gba", 0x6B72C8, 0x64
-
-se_pn_on:: @ 0x86B732C
-	.incbin "baserom.gba", 0x6B732C, 0x68
-
-se_pn_off:: @ 0x86B7394
-	.incbin "baserom.gba", 0x6B7394, 0x1FC
-
-se_z_search:: @ 0x86B7590
-	.incbin "baserom.gba", 0x6B7590, 0x8C
-
-se_tamago:: @ 0x86B761C
-	.incbin "baserom.gba", 0x6B761C, 0x50
-
-se_tb_start:: @ 0x86B766C
-	.incbin "baserom.gba", 0x6B766C, 0x2C
-
-se_tb_kon:: @ 0x86B7698
-	.incbin "baserom.gba", 0x6B7698, 0x20
-
-se_tb_kara:: @ 0x86B76B8
-	.incbin "baserom.gba", 0x6B76B8, 0x3C
-
-se_bidoro:: @ 0x86B76F4
-	.incbin "baserom.gba", 0x6B76F4, 0x94
-
-se_w085:: @ 0x86B7788
-	.incbin "baserom.gba", 0x6B7788, 0x6C
-
-se_w085b:: @ 0x86B77F4
-	.incbin "baserom.gba", 0x6B77F4, 0x48
-
-se_w231:: @ 0x86B783C
-	.incbin "baserom.gba", 0x6B783C, 0xC4
-
-se_w171:: @ 0x86B7900
-	.incbin "baserom.gba", 0x6B7900, 0x54
-
-se_w233:: @ 0x86B7954
-	.incbin "baserom.gba", 0x6B7954, 0x80
-
-se_w233b:: @ 0x86B79D4
-	.incbin "baserom.gba", 0x6B79D4, 0x38
-
-se_w145:: @ 0x86B7A0C
-	.incbin "baserom.gba", 0x6B7A0C, 0x34
-
-se_w145b:: @ 0x86B7A40
-	.incbin "baserom.gba", 0x6B7A40, 0x40
-
-se_w145c:: @ 0x86B7A80
-	.incbin "baserom.gba", 0x6B7A80, 0x78
-
-se_w240:: @ 0x86B7AF8
-	.incbin "baserom.gba", 0x6B7AF8, 0x80
-
-se_w015:: @ 0x86B7B78
-	.incbin "baserom.gba", 0x6B7B78, 0x58
-
-se_w081:: @ 0x86B7BD0
-	.incbin "baserom.gba", 0x6B7BD0, 0xA4
-
-se_w081b:: @ 0x86B7C74
-	.incbin "baserom.gba", 0x6B7C74, 0x4C
-
-se_w088:: @ 0x86B7CC0
-	.incbin "baserom.gba", 0x6B7CC0, 0x7C
-
-se_w016:: @ 0x86B7D3C
-	.incbin "baserom.gba", 0x6B7D3C, 0x4C
-
-se_w016b:: @ 0x86B7D88
-	.incbin "baserom.gba", 0x6B7D88, 0x34
-
-se_w003:: @ 0x86B7DBC
-	.incbin "baserom.gba", 0x6B7DBC, 0x4C
-
-se_w104:: @ 0x86B7E08
-	.incbin "baserom.gba", 0x6B7E08, 0x60
-
-se_w013:: @ 0x86B7E68
-	.incbin "baserom.gba", 0x6B7E68, 0x4C
-
-se_w196:: @ 0x86B7EB4
-	.incbin "baserom.gba", 0x6B7EB4, 0x84
-
-se_w086:: @ 0x86B7F38
-	.incbin "baserom.gba", 0x6B7F38, 0x54
-
-se_w004:: @ 0x86B7F8C
-	.incbin "baserom.gba", 0x6B7F8C, 0xCC
-
-se_w025:: @ 0x86B8058
-	.incbin "baserom.gba", 0x6B8058, 0xA0
-
-se_w025b:: @ 0x86B80F8
-	.incbin "baserom.gba", 0x6B80F8, 0x3C
-
-se_w152:: @ 0x86B8134
-	.incbin "baserom.gba", 0x6B8134, 0x4C
-
-se_w026:: @ 0x86B8180
-	.incbin "baserom.gba", 0x6B8180, 0x84
-
-se_w172:: @ 0x86B8204
-	.incbin "baserom.gba", 0x6B8204, 0x70
-
-se_w172b:: @ 0x86B8274
-	.incbin "baserom.gba", 0x6B8274, 0xD4
-
-se_w053:: @ 0x86B8348
-	.incbin "baserom.gba", 0x6B8348, 0xA4
-
-se_w007:: @ 0x86B83EC
-	.incbin "baserom.gba", 0x6B83EC, 0x70
-
-se_w092:: @ 0x86B845C
-	.incbin "baserom.gba", 0x6B845C, 0x74
-
-se_w221:: @ 0x86B84D0
-	.incbin "baserom.gba", 0x6B84D0, 0xE0
-
-se_w221b:: @ 0x86B85B0
-	.incbin "baserom.gba", 0x6B85B0, 0x3C
-
-se_w052:: @ 0x86B85EC
-	.incbin "baserom.gba", 0x6B85EC, 0x68
-
-se_w036:: @ 0x86B8654
-	.incbin "baserom.gba", 0x6B8654, 0x7C
-
-se_w059:: @ 0x86B86D0
-	.incbin "baserom.gba", 0x6B86D0, 0x4C
-
-se_w059b:: @ 0x86B871C
-	.incbin "baserom.gba", 0x6B871C, 0x48
-
-se_w010:: @ 0x86B8764
-	.incbin "baserom.gba", 0x6B8764, 0x68
-
-se_w011:: @ 0x86B87CC
-	.incbin "baserom.gba", 0x6B87CC, 0x9C
-
-se_w017:: @ 0x86B8868
-	.incbin "baserom.gba", 0x6B8868, 0x164
-
-se_w019:: @ 0x86B89CC
-	.incbin "baserom.gba", 0x6B89CC, 0x68
-
-se_w028:: @ 0x86B8A34
-	.incbin "baserom.gba", 0x6B8A34, 0x44
-
-se_w013b:: @ 0x86B8A78
-	.incbin "baserom.gba", 0x6B8A78, 0x7C
-
-se_w044:: @ 0x86B8AF4
-	.incbin "baserom.gba", 0x6B8AF4, 0x6C
-
-se_w029:: @ 0x86B8B60
-	.incbin "baserom.gba", 0x6B8B60, 0x80
-
-se_w057:: @ 0x86B8BE0
-	.incbin "baserom.gba", 0x6B8BE0, 0x80
-
-se_w056:: @ 0x86B8C60
-	.incbin "baserom.gba", 0x6B8C60, 0x9C
-
-se_w250:: @ 0x86B8CFC
-	.incbin "baserom.gba", 0x6B8CFC, 0x4C
-
-se_w030:: @ 0x86B8D48
-	.incbin "baserom.gba", 0x6B8D48, 0x40
-
-se_w039:: @ 0x86B8D88
-	.incbin "baserom.gba", 0x6B8D88, 0x78
-
-se_w054:: @ 0x86B8E00
-	.incbin "baserom.gba", 0x6B8E00, 0x3C
-
-se_w077:: @ 0x86B8E3C
-	.incbin "baserom.gba", 0x6B8E3C, 0x58
-
-se_w020:: @ 0x86B8E94
-	.incbin "baserom.gba", 0x6B8E94, 0xC8
-
-se_w082:: @ 0x86B8F5C
-	.incbin "baserom.gba", 0x6B8F5C, 0xF4
-
-se_w047:: @ 0x86B9050
-	.incbin "baserom.gba", 0x6B9050, 0x110
-
-se_w195:: @ 0x86B9160
-	.incbin "baserom.gba", 0x6B9160, 0x88
-
-se_w006:: @ 0x86B91E8
-	.incbin "baserom.gba", 0x6B91E8, 0x48
-
-se_w091:: @ 0x86B9230
-	.incbin "baserom.gba", 0x6B9230, 0x60
-
-se_w146:: @ 0x86B9290
-	.incbin "baserom.gba", 0x6B9290, 0x4C
-
-se_w120:: @ 0x86B92DC
-	.incbin "baserom.gba", 0x6B92DC, 0x88
-
-se_w153:: @ 0x86B9364
-	.incbin "baserom.gba", 0x6B9364, 0xBC
-
-se_w071b:: @ 0x86B9420
-	.incbin "baserom.gba", 0x6B9420, 0x58
-
-se_w071:: @ 0x86B9478
-	.incbin "baserom.gba", 0x6B9478, 0x7C
-
-se_w103:: @ 0x86B94F4
-	.incbin "baserom.gba", 0x6B94F4, 0xC8
-
-se_w062:: @ 0x86B95BC
-	.incbin "baserom.gba", 0x6B95BC, 0xBC
-
-se_w062b:: @ 0x86B9678
-	.incbin "baserom.gba", 0x6B9678, 0xEC
-
-se_w048:: @ 0x86B9764
-	.incbin "baserom.gba", 0x6B9764, 0x40
-
-se_w187:: @ 0x86B97A4
-	.incbin "baserom.gba", 0x6B97A4, 0x5C
-
-se_w118:: @ 0x86B9800
-	.incbin "baserom.gba", 0x6B9800, 0x38
-
-se_w155:: @ 0x86B9838
-	.incbin "baserom.gba", 0x6B9838, 0xB4
-
-se_w122:: @ 0x86B98EC
-	.incbin "baserom.gba", 0x6B98EC, 0xA0
-
-se_w060:: @ 0x86B998C
-	.incbin "baserom.gba", 0x6B998C, 0x68
-
-se_w185:: @ 0x86B99F4
-	.incbin "baserom.gba", 0x6B99F4, 0x124
-
-se_w014:: @ 0x86B9B18
-	.incbin "baserom.gba", 0x6B9B18, 0x7C
-
-se_w043:: @ 0x86B9B94
-	.incbin "baserom.gba", 0x6B9B94, 0x5C
-
-se_w207:: @ 0x86B9BF0
-	.incbin "baserom.gba", 0x6B9BF0, 0x38
-
-se_w207b:: @ 0x86B9C28
-	.incbin "baserom.gba", 0x6B9C28, 0x50
-
-se_w215:: @ 0x86B9C78
-	.incbin "baserom.gba", 0x6B9C78, 0x8C
-
-se_w109:: @ 0x86B9D04
-	.incbin "baserom.gba", 0x6B9D04, 0x64
-
-se_w173:: @ 0x86B9D68
-	.incbin "baserom.gba", 0x6B9D68, 0x78
-
-se_w280:: @ 0x86B9DE0
-	.incbin "baserom.gba", 0x6B9DE0, 0x68
-
-se_w202:: @ 0x86B9E48
-	.incbin "baserom.gba", 0x6B9E48, 0x154
-
-se_w060b:: @ 0x86B9F9C
-	.incbin "baserom.gba", 0x6B9F9C, 0xD4
-
-se_w076:: @ 0x86BA070
-	.incbin "baserom.gba", 0x6BA070, 0x110
-
-se_w080:: @ 0x86BA180
-	.incbin "baserom.gba", 0x6BA180, 0xE4
-
-se_w100:: @ 0x86BA264
-	.incbin "baserom.gba", 0x6BA264, 0xE0
-
-se_w107:: @ 0x86BA344
-	.incbin "baserom.gba", 0x6BA344, 0x4C
-
-se_w166:: @ 0x86BA390
-	.incbin "baserom.gba", 0x6BA390, 0x8C
-
-se_w129:: @ 0x86BA41C
-	.incbin "baserom.gba", 0x6BA41C, 0x190
-
-se_w115:: @ 0x86BA5AC
-	.incbin "baserom.gba", 0x6BA5AC, 0x1A0
-
-se_w112:: @ 0x86BA74C
-	.incbin "baserom.gba", 0x6BA74C, 0x70
-
-se_w197:: @ 0x86BA7BC
-	.incbin "baserom.gba", 0x6BA7BC, 0x50
-
-se_w199:: @ 0x86BA80C
-	.incbin "baserom.gba", 0x6BA80C, 0x124
-
-se_w236:: @ 0x86BA930
-	.incbin "baserom.gba", 0x6BA930, 0x80
-
-se_w204:: @ 0x86BA9B0
-	.incbin "baserom.gba", 0x6BA9B0, 0xF0
-
-se_w268:: @ 0x86BAAA0
-	.incbin "baserom.gba", 0x6BAAA0, 0x64
-
-se_w070:: @ 0x86BAB04
-	.incbin "baserom.gba", 0x6BAB04, 0x5C
-
-se_w063:: @ 0x86BAB60
-	.incbin "baserom.gba", 0x6BAB60, 0xB4
-
-se_w127:: @ 0x86BAC14
-	.incbin "baserom.gba", 0x6BAC14, 0x1FC
-
-se_w179:: @ 0x86BAE10
-	.incbin "baserom.gba", 0x6BAE10, 0x120
-
-se_w151:: @ 0x86BAF30
-	.incbin "baserom.gba", 0x6BAF30, 0x170
-
-se_w201:: @ 0x86BB0A0
-	.incbin "baserom.gba", 0x6BB0A0, 0x70
-
-se_w161:: @ 0x86BB110
-	.incbin "baserom.gba", 0x6BB110, 0x98
-
-se_w161b:: @ 0x86BB1A8
-	.incbin "baserom.gba", 0x6BB1A8, 0x38
-
-se_w227:: @ 0x86BB1E0
-	.incbin "baserom.gba", 0x6BB1E0, 0xD8
-
-se_w227b:: @ 0x86BB2B8
-	.incbin "baserom.gba", 0x6BB2B8, 0xD8
-
-se_w226:: @ 0x86BB390
-	.incbin "baserom.gba", 0x6BB390, 0xAC
-
-se_w208:: @ 0x86BB43C
-	.incbin "baserom.gba", 0x6BB43C, 0x98
-
-se_w213:: @ 0x86BB4D4
-	.incbin "baserom.gba", 0x6BB4D4, 0x98
-
-se_w213b:: @ 0x86BB56C
-	.incbin "baserom.gba", 0x6BB56C, 0xA8
-
-se_w234:: @ 0x86BB614
-	.incbin "baserom.gba", 0x6BB614, 0x4C
-
-se_w260:: @ 0x86BB660
-	.incbin "baserom.gba", 0x6BB660, 0xFC
-
-se_w328:: @ 0x86BB75C
-	.incbin "baserom.gba", 0x6BB75C, 0x94
-
-se_w320:: @ 0x86BB7F0
-	.incbin "baserom.gba", 0x6BB7F0, 0x64
-
-se_w255:: @ 0x86BB854
-	.incbin "baserom.gba", 0x6BB854, 0x9C
-
-se_w291:: @ 0x86BB8F0
-	.incbin "baserom.gba", 0x6BB8F0, 0x208
-
-se_w089:: @ 0x86BBAF8
-	.incbin "baserom.gba", 0x6BBAF8, 0xFC
-
-se_w239:: @ 0x86BBBF4
-	.incbin "baserom.gba", 0x6BBBF4, 0xF0
-
-se_w230:: @ 0x86BBCE4
-	.incbin "baserom.gba", 0x6BBCE4, 0x84
-
-se_w281:: @ 0x86BBD68
-	.incbin "baserom.gba", 0x6BBD68, 0x74
-
-se_w327:: @ 0x86BBDDC
-	.incbin "baserom.gba", 0x6BBDDC, 0x180
-
-se_w287:: @ 0x86BBF5C
-	.incbin "baserom.gba", 0x6BBF5C, 0x104
-
-se_w257:: @ 0x86BC060
-	.incbin "baserom.gba", 0x6BC060, 0x60
-
-se_w253:: @ 0x86BC0C0
-	.incbin "baserom.gba", 0x6BC0C0, 0x70
-
-se_w258:: @ 0x86BC130
-	.incbin "baserom.gba", 0x6BC130, 0x11C
-
-se_w322:: @ 0x86BC24C
-	.incbin "baserom.gba", 0x6BC24C, 0xA4
-
-se_w298:: @ 0x86BC2F0
-	.incbin "baserom.gba", 0x6BC2F0, 0x170
-
-se_w287b:: @ 0x86BC460
-	.incbin "baserom.gba", 0x6BC460, 0x134
-
-se_w114:: @ 0x86BC594
-	.incbin "baserom.gba", 0x6BC594, 0x84
-
-se_w063b:: @ 0x86BC618
-	.incbin "baserom.gba", 0x6BC618, 0x58
-
+	.section .rodata.undumped.songs
+	.align 2, 0
+	.incbin "baserom.gba", 0x6bc628, 0x48
 mus_w_door:: @ 0x86BC670
 	.incbin "baserom.gba", 0x6BC670, 0x30
 
@@ -3118,277 +2593,4 @@ se_excellent:: @ 0x86BCBC8
 	.incbin "baserom.gba", 0x6BCBC8, 0x34
 
 se_nawamiss:: @ 0x86BCBFC
-	.incbin "baserom.gba", 0x6BCBFC, 0xBC
-
-mus_me_asa:: @ 0x86BCCB8
-	.incbin "baserom.gba", 0x6BCCB8, 0xE0
-
-mus_fanfa1:: @ 0x86BCD98
-	.incbin "baserom.gba", 0x6BCD98, 0x14C
-
-mus_fanfa4:: @ 0x86BCEE4
-	.incbin "baserom.gba", 0x6BCEE4, 0x19C
-
-mus_fanfa5:: @ 0x86BD080
-	.incbin "baserom.gba", 0x6BD080, 0x2D8
-
-mus_me_bachi:: @ 0x86BD358
-	.incbin "baserom.gba", 0x6BD358, 0x18C
-
-mus_me_waza:: @ 0x86BD4E4
-	.incbin "baserom.gba", 0x6BD4E4, 0xD8
-
-mus_me_kinomi:: @ 0x86BD5BC
-	.incbin "baserom.gba", 0x6BD5BC, 0x6C
-
-mus_me_shinka:: @ 0x86BD628
-	.incbin "baserom.gba", 0x6BD628, 0x570
-
-mus_shinka:: @ 0x86BDB98
-	.incbin "baserom.gba", 0x6BDB98, 0xE2C
-
-mus_battle32:: @ 0x86BE9C4
-	.incbin "baserom.gba", 0x6BE9C4, 0x10A4
-
-mus_battle20:: @ 0x86BFA68
-	.incbin "baserom.gba", 0x6BFA68, 0x358
-
-mus_p_school:: @ 0x86BFDC0
-	.incbin "baserom.gba", 0x6BFDC0, 0x220
-
-mus_me_b_big:: @ 0x86BFFE0
-	.incbin "baserom.gba", 0x6BFFE0, 0x140
-
-mus_me_b_small:: @ 0x86C0120
-	.incbin "baserom.gba", 0x6C0120, 0xE4
-
-mus_me_wasure:: @ 0x86C0204
-	.incbin "baserom.gba", 0x6C0204, 0xF8
-
-mus_me_zannen:: @ 0x86C02FC
-	.incbin "baserom.gba", 0x6C02FC, 0x4E8
-
-mus_annai:: @ 0x86C07E4
-	.incbin "baserom.gba", 0x6C07E4, 0xF3C
-
-mus_slot:: @ 0x86C1720
-	.incbin "baserom.gba", 0x6C1720, 0x1C24
-
-mus_ajito:: @ 0x86C3344
-	.incbin "baserom.gba", 0x6C3344, 0xA0C
-
-mus_gym:: @ 0x86C3D50
-	.incbin "baserom.gba", 0x6C3D50, 0x298
-
-mus_purin:: @ 0x86C3FE8
-	.incbin "baserom.gba", 0x6C3FE8, 0xB00
-
-mus_demo:: @ 0x86C4AE8
-	.incbin "baserom.gba", 0x6C4AE8, 0x1074
-
-mus_title:: @ 0x86C5B5C
-	.incbin "baserom.gba", 0x6C5B5C, 0xED4
-
-mus_guren:: @ 0x86C6A30
-	.incbin "baserom.gba", 0x6C6A30, 0xD2C
-
-mus_shion:: @ 0x86C775C
-	.incbin "baserom.gba", 0x6C775C, 0x54
-
-mus_kaihuku:: @ 0x86C77B0
-	.incbin "baserom.gba", 0x6C77B0, 0xC14
-
-mus_cycling:: @ 0x86C83C4
-	.incbin "baserom.gba", 0x6C83C4, 0x3C0
-
-mus_rocket:: @ 0x86C8784
-	.incbin "baserom.gba", 0x6C8784, 0x3B8
-
-mus_shoujo:: @ 0x86C8B3C
-	.incbin "baserom.gba", 0x6C8B3C, 0x4A8
-
-mus_shounen:: @ 0x86C8FE4
-	.incbin "baserom.gba", 0x6C8FE4, 0xABC
-
-mus_dendou:: @ 0x86C9AA0
-	.incbin "baserom.gba", 0x6C9AA0, 0x1218
-
-mus_t_mori:: @ 0x86CACB8
-	.incbin "baserom.gba", 0x6CACB8, 0x1450
-
-mus_otsukimi:: @ 0x86CC108
-	.incbin "baserom.gba", 0x6CC108, 0x123C
-
-mus_pokeyashi:: @ 0x86CD344
-	.incbin "baserom.gba", 0x6CD344, 0x4010
-
-mus_ending:: @ 0x86D1354
-	.incbin "baserom.gba", 0x6D1354, 0xA88
-
-mus_load01:: @ 0x86D1DDC
-	.incbin "baserom.gba", 0x6D1DDC, 0x870
-
-mus_opening:: @ 0x86D264C
-	.incbin "baserom.gba", 0x6D264C, 0xF3C
-
-mus_load02:: @ 0x86D3588
-	.incbin "baserom.gba", 0x6D3588, 0xD74
-
-mus_load03:: @ 0x86D42FC
-	.incbin "baserom.gba", 0x6D42FC, 0xD40
-
-mus_champ_r:: @ 0x86D503C
-	.incbin "baserom.gba", 0x6D503C, 0x1AE4
-
-mus_vs_gym:: @ 0x86D6B20
-	.incbin "baserom.gba", 0x6D6B20, 0x2B74
-
-mus_vs_tore:: @ 0x86D9694
-	.incbin "baserom.gba", 0x6D9694, 0x117C
-
-mus_vs_yasei:: @ 0x86DA810
-	.incbin "baserom.gba", 0x6DA810, 0x27D0
-
-mus_vs_last:: @ 0x86DCFE0
-	.incbin "baserom.gba", 0x6DCFE0, 0x864
-
-mus_masara:: @ 0x86DD844
-	.incbin "baserom.gba", 0x6DD844, 0x79C
-
-mus_kenkyu:: @ 0x86DDFE0
-	.incbin "baserom.gba", 0x6DDFE0, 0x98C
-
-mus_ohkido:: @ 0x86DE96C
-	.incbin "baserom.gba", 0x6DE96C, 0xA60
-
-mus_pokecen:: @ 0x86DF3CC
-	.incbin "baserom.gba", 0x6DF3CC, 0x12A4
-
-mus_santoan:: @ 0x86E0670
-	.incbin "baserom.gba", 0x6E0670, 0x978
-
-mus_naminori:: @ 0x86E0FE8
-	.incbin "baserom.gba", 0x6E0FE8, 0x8CC
-
-mus_p_tower:: @ 0x86E18B4
-	.incbin "baserom.gba", 0x6E18B4, 0x16F4
-
-mus_shiruhu:: @ 0x86E2FA8
-	.incbin "baserom.gba", 0x6E2FA8, 0xA3C
-
-mus_hanada:: @ 0x86E39E4
-	.incbin "baserom.gba", 0x6E39E4, 0xB80
-
-mus_tamamusi:: @ 0x86E4564
-	.incbin "baserom.gba", 0x6E4564, 0x1180
-
-mus_win_tre:: @ 0x86E56E4
-	.incbin "baserom.gba", 0x6E56E4, 0x538
-
-mus_win_yasei:: @ 0x86E5C1C
-	.incbin "baserom.gba", 0x6E5C1C, 0xEF0
-
-mus_win_gym:: @ 0x86E6B0C
-	.incbin "baserom.gba", 0x6E6B0C, 0xE14
-
-mus_kuchiba:: @ 0x86E7920
-	.incbin "baserom.gba", 0x6E7920, 0xEF0
-
-mus_nibi:: @ 0x86E8810
-	.incbin "baserom.gba", 0x6E8810, 0x83C
-
-mus_rival1:: @ 0x86E904C
-	.incbin "baserom.gba", 0x6E904C, 0x7D4
-
-mus_rival2:: @ 0x86E9820
-	.incbin "baserom.gba", 0x6E9820, 0x200
-
-mus_fan2:: @ 0x86E9A20
-	.incbin "baserom.gba", 0x6E9A20, 0x200
-
-mus_fan5:: @ 0x86E9C20
-	.incbin "baserom.gba", 0x6E9C20, 0x370
-
-mus_fan6:: @ 0x86E9F90
-	.incbin "baserom.gba", 0x6E9F90, 0x170
-
-mus_me_photo:: @ 0x86EA100
-	.incbin "baserom.gba", 0x6EA100, 0x904
-
-mus_titlerog:: @ 0x86EAA04
-	.incbin "baserom.gba", 0x6EAA04, 0x438
-
-mus_get_yasei:: @ 0x86EAE3C
-	.incbin "baserom.gba", 0x6EAE3C, 0x8C
-
-mus_sousa:: @ 0x86EAEC8
-	.incbin "baserom.gba", 0x6EAEC8, 0x1D0
-
-mus_sekaikan:: @ 0x86EB098
-	.incbin "baserom.gba", 0x6EB098, 0xBC
-
-mus_seibetu:: @ 0x86EB154
-	.incbin "baserom.gba", 0x6EB154, 0xF74
-
-mus_jump:: @ 0x86EC0C8
-	.incbin "baserom.gba", 0x6EC0C8, 0xF7C
-
-mus_union:: @ 0x86ED044
-	.incbin "baserom.gba", 0x6ED044, 0xA5C
-
-mus_network:: @ 0x86EDAA0
-	.incbin "baserom.gba", 0x6EDAA0, 0x480
-
-mus_okurimono:: @ 0x86EDF20
-	.incbin "baserom.gba", 0x6EDF20, 0xF2C
-
-mus_kinomikui:: @ 0x86EEE4C
-	.incbin "baserom.gba", 0x6EEE4C, 0x1404
-
-mus_nanadungeon:: @ 0x86F0250
-	.incbin "baserom.gba", 0x6F0250, 0x4F0
-
-mus_oshie_tv:: @ 0x86F0740
-	.incbin "baserom.gba", 0x6F0740, 0xEC0
-
-mus_nanashima:: @ 0x86F1600
-	.incbin "baserom.gba", 0x6F1600, 0x121C
-
-mus_nanaiseki:: @ 0x86F281C
-	.incbin "baserom.gba", 0x6F281C, 0xEF4
-
-mus_nana123:: @ 0x86F3710
-	.incbin "baserom.gba", 0x6F3710, 0x1028
-
-mus_nana45:: @ 0x86F4738
-	.incbin "baserom.gba", 0x6F4738, 0xF30
-
-mus_nana67:: @ 0x86F5668
-	.incbin "baserom.gba", 0x6F5668, 0x1C4
-
-mus_pokefue:: @ 0x86F582C
-	.incbin "baserom.gba", 0x6F582C, 0x2188
-
-mus_vs_deo:: @ 0x86F79B4
-	.incbin "baserom.gba", 0x6F79B4, 0x1178
-
-mus_vs_myu2:: @ 0x86F8B2C
-	.incbin "baserom.gba", 0x6F8B2C, 0x12B8
-
-mus_vs_den:: @ 0x86F9DE4
-	.incbin "baserom.gba", 0x6F9DE4, 0x444
-
-mus_exeye:: @ 0x86FA228
-	.incbin "baserom.gba", 0x6FA228, 0x948
-
-mus_deoeye:: @ 0x86FAB70
-	.incbin "baserom.gba", 0x6FAB70, 0xA00
-
-mus_t_tower:: @ 0x86FB570
-	.incbin "baserom.gba", 0x6FB570, 0x840
-
-mus_slowmasara:: @ 0x86FBDB0
-	.incbin "baserom.gba", 0x6FBDB0, 0xDC
-
-mus_tvnoize:: @ 0x86FBE8C
-	.incbin "baserom.gba", 0x6FBE8C, 0x18
+	.incbin "baserom.gba", 0x6BCBFC, 0xC

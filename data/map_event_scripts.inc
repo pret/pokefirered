@@ -196,8 +196,8 @@
 	.include "data/maps/FuchsiaCity/scripts.inc"
 	.include "data/maps/CinnabarIsland/scripts.inc"
 	.include "data/maps/IndigoPlateau_Exterior/scripts.inc"
-	.include "data/maps/SaffronCity_Duplicate/scripts.inc"
 	.include "data/maps/SaffronCity/scripts.inc"
+	.include "data/maps/SaffronCity_Classic/scripts.inc"
 	.include "data/maps/OneIsland/scripts.inc"
 	.include "data/maps/TwoIsland/scripts.inc"
 	.include "data/maps/ThreeIsland/scripts.inc"
@@ -529,7 +529,7 @@
 	.include "data/maps/CeladonCity/text.inc"
 	.include "data/maps/FuchsiaCity/text.inc"
 	.include "data/maps/CinnabarIsland/text.inc"
-	.include "data/maps/SaffronCity_Duplicate/text.inc"
+	.include "data/maps/SaffronCity/text.inc"
 	.include "data/maps/OneIsland/text.inc"
 	.include "data/maps/TwoIsland/text.inc"
 	.include "data/maps/ThreeIsland/text.inc"
@@ -745,7 +745,7 @@ gStdScript_ItemMessageAndFanfare:: @ 81A4E66
 	textcolor 3
 	compare_var_to_value VAR_0x8002, MUS_FANFA1
 	call_if 1, EventScript_1A4EA2
-	compare_var_to_value VAR_0x8002, BGM_FRLG_ME_KEYITEM
+	compare_var_to_value VAR_0x8002, MUS_FAN5
 	call_if 1, EventScript_1A4EA6
 	message 0x0
 	waitmessage
@@ -763,7 +763,7 @@ EventScript_1A4EA2:: @ 81A4EA2
 	return
 
 EventScript_1A4EA6:: @ 81A4EA6
-	playfanfare BGM_FRLG_ME_KEYITEM
+	playfanfare MUS_FAN5
 	return
 
 EventScript_1A4EAA:: @ 81A4EAA
@@ -3329,7 +3329,7 @@ SevenIsland_PokemonCenter_1F_EventScript_1ACFD4:: @ 81ACFD4
 SixIsland_Mart_EventScript_1ACFEF:: @ 81ACFEF
 	.incbin "baserom.gba", 0x1ACFEF, 0x4B
 
-SaffronCity_Duplicate_EventScript_1AD03A:: @ 81AD03A
+SaffronCity_EventScript_1AD03A:: @ 81AD03A
 	.incbin "baserom.gba", 0x1AD03A, 0x19
 
 CeladonCity_DepartmentStore_2F_EventScript_1AD053:: @ 81AD053

@@ -417,8 +417,8 @@ gSpecials:: @ 815FD60
 	def_special sub_814B504
 	def_special sub_80CC8CC
 	def_special sub_80CC948
-	def_special sub_812B478
-	def_special sub_812B484
+	def_special HelpSystem_Disable
+	def_special HelpSystem_Enable
 	def_special sub_810B82C
 	def_special CheckHasAtLeastOneBerry
 	def_special sub_815F094

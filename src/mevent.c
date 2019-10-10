@@ -192,7 +192,7 @@ u32 sub_8143770(u8 * r4, u16 * r5)
         case 2:
             if (GetLinkPlayerCount_2() == 2)
             {
-                PlaySE(SE_TOY_G);
+                PlaySE(SE_PINPON);
                 CheckShouldAdvanceLinkState();
                 *r5 = 0;
                 *r4 = 3;
@@ -475,7 +475,7 @@ void sub_8143910(u8 taskId)
                 data->state = 0;
             break;
         case 26:
-            sub_812B484();
+            HelpSystem_Enable();
             Free(data->t10);
             DestroyTask(taskId);
             SetMainCallback2(MainCB_FreeAllBuffersAndReturnToInitTitleScreen);

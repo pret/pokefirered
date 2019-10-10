@@ -2,7 +2,7 @@
   "id": "MAP_PALLET_TOWN",
   "name": "PalletTown",
   "layout": "LAYOUT_PALLET_TOWN",
-  "music": "BGM_FRLG_PALLET_TOWN",
+  "music": "MUS_MASARA",
   "region_map_section": "MAPSEC_PALLET_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

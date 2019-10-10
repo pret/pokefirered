@@ -38,7 +38,7 @@ MtEmber_Summit_EventScript_163B33:: @ 8163B33
 	waitmessage
 	waitmoncry
 	delay 10
-	playbgm BGM_FRLG_LEADER_EYE, 0
+	playbgm MUS_EXEYE, 0
 	waitbuttonpress
 	setflag FLAG_0x807
 	special sub_807F9D8

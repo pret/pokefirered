@@ -156,7 +156,7 @@ EventScript_168EF6:: @ 8168EF6
 	waitmovement 0
 	delay 12
 	additem ITEM_TOWN_MAP, 1
-	giveitemfanfaremsg gUnknown_818D661, ITEM_TOWN_MAP, 1, BGM_FRLG_ME_KEYITEM
+	giveitemfanfaremsg gUnknown_818D661, ITEM_TOWN_MAP, 1, MUS_FAN5
 	release
 	end
 

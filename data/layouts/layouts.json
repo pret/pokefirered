@@ -859,16 +859,16 @@
       "blockdata_filepath": "data/layouts/IndigoPlateau_Exterior/map.bin"
     },
     {
-      "id": "LAYOUT_SAFFRON_CITY",
-      "name": "SaffronCity_Layout",
+      "id": "LAYOUT_SAFFRON_CITY_CLASSIC",
+      "name": "SaffronCity_Classic_Layout",
       "width": 48,
       "height": 40,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4A94",
       "secondary_tileset": "gTileset_82D4B9C",
-      "border_filepath": "data/layouts/SaffronCity/border.bin",
-      "blockdata_filepath": "data/layouts/SaffronCity/map.bin"
+      "border_filepath": "data/layouts/SaffronCity_Classic/border.bin",
+      "blockdata_filepath": "data/layouts/SaffronCity_Classic/map.bin"
     },
     {
       "id": "LAYOUT_ROUTE1",
@@ -2276,16 +2276,16 @@
       "blockdata_filepath": "data/layouts/CinnabarIsland_PokemonLab_ExperimentRoom/map.bin"
     },
     {
-      "id": "LAYOUT_SAFFRON_CITY_DUPLICATE",
-      "name": "SaffronCity_Duplicate_Layout",
+      "id": "LAYOUT_SAFFRON_CITY",
+      "name": "SaffronCity_Layout",
       "width": 66,
       "height": 55,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4A94",
       "secondary_tileset": "gTileset_82D4B9C",
-      "border_filepath": "data/layouts/SaffronCity_Duplicate/border.bin",
-      "blockdata_filepath": "data/layouts/SaffronCity_Duplicate/map.bin"
+      "border_filepath": "data/layouts/SaffronCity/border.bin",
+      "blockdata_filepath": "data/layouts/SaffronCity/map.bin"
     },
     {
       "id": "LAYOUT_SAFFRON_CITY_NORTH_SOUTH_ENTRANCE",

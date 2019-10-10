@@ -2,7 +2,7 @@
   "id": "MAP_SAFFRON_CITY_GYM",
   "name": "SaffronCity_Gym",
   "layout": "LAYOUT_SAFFRON_CITY_GYM",
-  "music": "BGM_FRLG_GYM",
+  "music": "MUS_GYM",
   "region_map_section": "MAPSEC_SAFFRON_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -136,21 +136,21 @@
       "x": 13,
       "y": 23,
       "elevation": 3,
-      "dest_map": "MAP_SAFFRON_CITY_DUPLICATE",
+      "dest_map": "MAP_SAFFRON_CITY",
       "dest_warp_id": 3
     },
     {
       "x": 14,
       "y": 23,
       "elevation": 3,
-      "dest_map": "MAP_SAFFRON_CITY_DUPLICATE",
+      "dest_map": "MAP_SAFFRON_CITY",
       "dest_warp_id": 3
     },
     {
       "x": 15,
       "y": 23,
       "elevation": 3,
-      "dest_map": "MAP_SAFFRON_CITY_DUPLICATE",
+      "dest_map": "MAP_SAFFRON_CITY",
       "dest_warp_id": 3
     },
     {

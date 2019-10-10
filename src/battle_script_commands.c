@@ -3165,7 +3165,7 @@ static void atk23_getexp(void)
                  && !gBattleStruct->wildVictorySong)
                 {
                     BattleStopLowHpSound();
-                    PlayBGM(BGM_FRLG_KACHI_WILD_POKEMON);
+                    PlayBGM(MUS_WIN_YASEI);
                     ++gBattleStruct->wildVictorySong;
                 }
                 if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HP))

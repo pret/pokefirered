@@ -30,7 +30,7 @@ EventScript_16A205:: @ 816A205
 	msgbox gUnknown_819023A
 	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 1
 	additem ITEM_OAKS_PARCEL, 1
-	giveitemfanfaremsg gUnknown_8190289, ITEM_OAKS_PARCEL, 1, BGM_FRLG_ME_KEYITEM
+	giveitemfanfaremsg gUnknown_8190289, ITEM_OAKS_PARCEL, 1, MUS_FAN5
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 5
 	releaseall
 	end

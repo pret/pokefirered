@@ -10,7 +10,7 @@ IndigoPlateau_Exterior_MapScript1_167246:: @ 8167246
 	end
 
 EventScript_167255:: @ 8167255
-	playbgm BGM_FRLG_CREDITS, 0
+	playbgm MUS_ENDING, 0
 	return
 
 IndigoPlateau_Exterior_MapScript2_16725A:: @ 816725A

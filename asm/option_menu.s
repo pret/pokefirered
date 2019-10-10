@@ -459,7 +459,7 @@ _0808870C:
 	b _08088768
 _08088716:
 	ldrb r0, [r0, 0xA]
-	bl sub_8069788
+	bl GetUserFrameGraphicsInfo
 	ldr r1, [r0]
 	movs r2, 0x90
 	lsls r2, 1
@@ -470,7 +470,7 @@ _08088716:
 	b _0808876C
 _0808872E:
 	ldrb r0, [r0, 0xA]
-	bl sub_8069788
+	bl GetUserFrameGraphicsInfo
 	ldr r0, [r0, 0x4]
 	movs r1, 0x20
 	b _0808874C
@@ -590,7 +590,7 @@ _08088824:
 	ldr r4, _08088854 @ =gUnknown_2039620
 	ldr r0, [r4]
 	ldrb r0, [r0, 0xA]
-	bl sub_8069788
+	bl GetUserFrameGraphicsInfo
 	ldr r1, [r0]
 	movs r2, 0x90
 	lsls r2, 1
@@ -600,7 +600,7 @@ _08088824:
 	bl LoadBgTiles
 	ldr r0, [r4]
 	ldrb r0, [r0, 0xA]
-	bl sub_8069788
+	bl GetUserFrameGraphicsInfo
 	ldr r0, [r0, 0x4]
 	movs r1, 0x20
 	movs r2, 0x20

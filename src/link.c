@@ -982,7 +982,7 @@ void sub_800A3F4(void)
 
 u8 GetMultiplayerId(void)
 {
-    if (gWirelessCommType == TRUE)
+    if (gWirelessCommType == 1)
     {
         return rfu_get_multiplayer_id();
     }
@@ -999,7 +999,7 @@ u8 bitmask_all_link_players_but_self(void)
 
 bool8 SendBlock(u8 unused, const void *src, u16 size)
 {
-    if (gWirelessCommType == TRUE)
+    if (gWirelessCommType == 1)
     {
         return Rfu_InitBlockSend(src, size);
     }
@@ -1008,7 +1008,7 @@ bool8 SendBlock(u8 unused, const void *src, u16 size)
 
 bool8 sub_800A474(u8 a0)
 {
-    if (gWirelessCommType == TRUE)
+    if (gWirelessCommType == 1)
     {
         return sub_80FA0F8(a0);
     }
@@ -1023,7 +1023,7 @@ bool8 sub_800A474(u8 a0)
 
 bool8 IsLinkTaskFinished(void)
 {
-    if (gWirelessCommType == TRUE)
+    if (gWirelessCommType == 1)
     {
         return IsRfuTaskFinished();
     }
@@ -1032,7 +1032,7 @@ bool8 IsLinkTaskFinished(void)
 
 u8 GetBlockReceivedStatus(void)
 {
-    if (gWirelessCommType == TRUE)
+    if (gWirelessCommType == 1)
     {
         return Rfu_GetBlockReceivedStatus();
     }
@@ -1041,7 +1041,7 @@ u8 GetBlockReceivedStatus(void)
 
 void SetBlockReceivedFlag(u8 who)
 {
-    if (gWirelessCommType == TRUE)
+    if (gWirelessCommType == 1)
     {
         Rfu_SetBlockReceivedFlag(who);
     }
@@ -1055,7 +1055,7 @@ void ResetBlockReceivedFlags(void)
 {
     int i;
 
-    if (gWirelessCommType == TRUE)
+    if (gWirelessCommType == 1)
     {
         for (i = 0; i < MAX_RFU_PLAYERS; i++)
         {
@@ -1073,7 +1073,7 @@ void ResetBlockReceivedFlags(void)
 
 void ResetBlockReceivedFlag(u8 who)
 {
-    if (gWirelessCommType == TRUE)
+    if (gWirelessCommType == 1)
     {
         Rfu_ResetBlockReceivedFlag(who);
     }
@@ -1314,7 +1314,7 @@ u8 sub_800AA74(void)
 
 void sub_800AA80(u16 a0)
 {
-    if (gWirelessCommType == TRUE)
+    if (gWirelessCommType == 1)
     {
         task_add_05_task_del_08FA224_when_no_RfuFunc();
     }
@@ -1331,7 +1331,7 @@ void sub_800AA80(u16 a0)
 
 void sub_800AAC0(void)
 {
-    if (gWirelessCommType == TRUE)
+    if (gWirelessCommType == 1)
     {
         task_add_05_task_del_08FA224_when_no_RfuFunc();
     }
@@ -1386,7 +1386,7 @@ static void sub_800AB38(void)
 
 void sub_800AB9C(void)
 {
-    if (gWirelessCommType == TRUE)
+    if (gWirelessCommType == 1)
     {
         sub_80FA42C();
     }
@@ -1577,7 +1577,7 @@ static void CB2_PrintErrorMessage(void)
         {
             if (JOY_NEW(A_BUTTON))
             {
-                sub_812B484();
+                HelpSystem_Enable();
                 PlaySE(SE_PIN);
                 gWirelessCommType = 0;
                 sLinkErrorBuffer.unk_06 = 0;
@@ -1588,7 +1588,7 @@ static void CB2_PrintErrorMessage(void)
         {
             if (JOY_NEW(A_BUTTON))
             {
-                sub_812B484();
+                HelpSystem_Enable();
                 rfu_REQ_stopMode();
                 rfu_waitREQComplete();
                 DoSoftReset();

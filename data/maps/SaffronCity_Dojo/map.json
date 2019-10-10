@@ -2,7 +2,7 @@
   "id": "MAP_SAFFRON_CITY_DOJO",
   "name": "SaffronCity_Dojo",
   "layout": "LAYOUT_SAFFRON_CITY_DOJO",
-  "music": "BGM_FRLG_VIRIDIAN_CITY",
+  "music": "MUS_NIBI",
   "region_map_section": "MAPSEC_SAFFRON_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -110,21 +110,21 @@
       "x": 5,
       "y": 14,
       "elevation": 3,
-      "dest_map": "MAP_SAFFRON_CITY_DUPLICATE",
+      "dest_map": "MAP_SAFFRON_CITY",
       "dest_warp_id": 2
     },
     {
       "x": 6,
       "y": 14,
       "elevation": 3,
-      "dest_map": "MAP_SAFFRON_CITY_DUPLICATE",
+      "dest_map": "MAP_SAFFRON_CITY",
       "dest_warp_id": 2
     },
     {
       "x": 7,
       "y": 14,
       "elevation": 3,
-      "dest_map": "MAP_SAFFRON_CITY_DUPLICATE",
+      "dest_map": "MAP_SAFFRON_CITY",
       "dest_warp_id": 2
     }
   ],

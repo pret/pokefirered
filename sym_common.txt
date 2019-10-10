@@ -220,10 +220,8 @@ gUnknown_3005E98: @ 3005E98
 	.include "help_system_812B1E0.o"
 	.align 4
 	.include "fame_checker.o"
-
-gUnknown_3005ECC: @ 3005ECC
-	.space 0x4
-
+	.include "help_system.o"
+	.align 4
 	.include "mevent.o"
 
 	.align 4

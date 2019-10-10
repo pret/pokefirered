@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE7_EAST_ENTRANCE",
   "name": "Route7_EastEntrance",
   "layout": "LAYOUT_SAFFRON_CITY_EAST_WEST_ENTRANCE",
-  "music": "BGM_FRLG_VIRIDIAN_CITY",
+  "music": "MUS_NIBI",
   "region_map_section": "MAPSEC_ROUTE_7",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -46,14 +46,14 @@
       "x": 11,
       "y": 5,
       "elevation": 3,
-      "dest_map": "MAP_SAFFRON_CITY_DUPLICATE",
+      "dest_map": "MAP_SAFFRON_CITY",
       "dest_warp_id": 8
     },
     {
       "x": 11,
       "y": 6,
       "elevation": 3,
-      "dest_map": "MAP_SAFFRON_CITY_DUPLICATE",
+      "dest_map": "MAP_SAFFRON_CITY",
       "dest_warp_id": 8
     }
   ],

@@ -263,7 +263,7 @@ EventScript_16DC43:: @ 816DC43
 	end
 
 EventScript_16DC58:: @ 816DC58
-	playse SE_FU_ZAKU2
+	playse SE_KI_GASYAN
 	waitse
 	call EventScript_16E117
 	special DrawWholeMapView
@@ -346,7 +346,7 @@ EventScript_16DD1C:: @ 816DD1C
 	end
 
 EventScript_16DD31:: @ 816DD31
-	playse SE_FU_ZAKU2
+	playse SE_KI_GASYAN
 	waitse
 	call EventScript_16E157
 	special DrawWholeMapView
@@ -434,7 +434,7 @@ EventScript_16DDFA:: @ 816DDFA
 	end
 
 EventScript_16DE0F:: @ 816DE0F
-	playse SE_FU_ZAKU2
+	playse SE_KI_GASYAN
 	waitse
 	call EventScript_16E197
 	special DrawWholeMapView
@@ -513,7 +513,7 @@ EventScript_16DED1:: @ 816DED1
 	end
 
 EventScript_16DEE6:: @ 816DEE6
-	playse SE_FU_ZAKU2
+	playse SE_KI_GASYAN
 	waitse
 	call EventScript_16E1D7
 	special DrawWholeMapView
@@ -592,7 +592,7 @@ EventScript_16DFA8:: @ 816DFA8
 	end
 
 EventScript_16DFBD:: @ 816DFBD
-	playse SE_FU_ZAKU2
+	playse SE_KI_GASYAN
 	waitse
 	call EventScript_16E1F3
 	special DrawWholeMapView
@@ -671,7 +671,7 @@ EventScript_16E07F:: @ 816E07F
 	end
 
 EventScript_16E094:: @ 816E094
-	playse SE_FU_ZAKU2
+	playse SE_KI_GASYAN
 	waitse
 	call EventScript_16E233
 	special DrawWholeMapView

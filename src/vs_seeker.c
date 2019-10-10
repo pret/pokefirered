@@ -836,7 +836,7 @@ static void Task_VsSeeker_2(u8 taskId)
 
     if (data[2] != 2 && --data[1] == 0)
     {
-        PlaySE(SE_BASABASA);
+        PlaySE(SE_C_PIKON);
         data[1] = 11;
         data[2]++;
     }

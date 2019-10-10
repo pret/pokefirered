@@ -27,7 +27,7 @@ EventScript_168FC0:: @ 8168FC0
 EventScript_168FC6:: @ 8168FC6
 	setobjectxyperm 4, 6, 11
 	setobjectmovementtype 4, 7
-	savebgm BGM_FRLG_PROF_OAK
+	savebgm MUS_OHKIDO
 	return
 
 EventScript_168FD5:: @ 8168FD5
@@ -110,7 +110,7 @@ EventScript_169035:: @ 8169035
 	compare_var_to_value VAR_FACING, 3
 	call_if 1, EventScript_16986D
 	textcolor 3
-	playfanfare BGM_FRLG_ME_KEYITEM
+	playfanfare MUS_FAN5
 	message Text_18F0E8
 	waitmessage
 	waitfanfare
@@ -119,7 +119,7 @@ EventScript_169035:: @ 8169035
 	msgbox gUnknown_818F103
 	msgbox gUnknown_818F1DB
 	closemessage
-	playbgm BGM_FRLG_RIVAL_POSTBATTLE, 0
+	playbgm MUS_RIVAL2, 0
 	compare_var_to_value VAR_FACING, 2
 	call_if 1, EventScript_169B69
 	compare_var_to_value VAR_FACING, 1
@@ -137,7 +137,7 @@ EventScript_169035:: @ 8169035
 EventScript_169174:: @ 8169174
 	setobjectxyperm 8, 5, 10
 	addobject 8
-	playbgm BGM_FRLG_RIVAL, 0
+	playbgm MUS_RIVAL1, 0
 	applymovement 255, Movement_169B94
 	applymovement 8, Movement_169B9D
 	waitmovement 0
@@ -146,7 +146,7 @@ EventScript_169174:: @ 8169174
 EventScript_169194:: @ 8169194
 	setobjectxyperm 8, 6, 10
 	addobject 8
-	playbgm BGM_FRLG_RIVAL, 0
+	playbgm MUS_RIVAL1, 0
 	applymovement 4, Movement_1A75ED
 	applymovement 255, Movement_169B91
 	applymovement 8, Movement_169B9D
@@ -156,7 +156,7 @@ EventScript_169194:: @ 8169194
 EventScript_1691BB:: @ 81691BB
 	setobjectxyperm 8, 6, 10
 	addobject 8
-	playbgm BGM_FRLG_RIVAL, 0
+	playbgm MUS_RIVAL1, 0
 	applymovement 4, Movement_1A75ED
 	applymovement 8, Movement_169B9D
 	waitmovement 0
@@ -302,7 +302,7 @@ PalletTown_ProfessorOaksLab_EventScript_1692FF:: @ 81692FF
 
 EventScript_16930B:: @ 816930B
 	textcolor 0
-	playbgm BGM_FRLG_RIVAL, 0
+	playbgm MUS_RIVAL1, 0
 	applymovement 8, Movement_1A75ED
 	waitmovement 0
 	applymovement 255, Movement_1A75E9
@@ -491,7 +491,7 @@ EventScript_1694C2:: @ 81694C2
 	special sp000_heal_pokemon
 	msgbox gUnknown_818DE38
 	closemessage
-	playbgm BGM_FRLG_RIVAL_POSTBATTLE, 0
+	playbgm MUS_RIVAL2, 0
 	compare_var_to_value VAR_0x4002, 1
 	call_if 1, EventScript_169504
 	compare_var_to_value VAR_0x4002, 2
@@ -642,7 +642,7 @@ EventScript_16961E:: @ 816961E
 	call EventScript_1A6675
 	removeitem ITEM_OAKS_PARCEL, 1
 	msgbox gUnknown_818E4CA
-	playbgm BGM_FRLG_RIVAL, 0
+	playbgm MUS_RIVAL1, 0
 	msgbox gUnknown_818DE8D
 	closemessage
 	compare_var_to_value VAR_FACING, 2
@@ -701,7 +701,7 @@ EventScript_16961E:: @ 816961E
 	call_if 1, EventScript_16986D
 	delay 10
 	textcolor 3
-	playfanfare BGM_FRLG_ME_KEYITEM
+	playfanfare MUS_FAN5
 	message Text_18E5EA
 	waitmessage
 	waitfanfare
@@ -728,7 +728,7 @@ EventScript_16961E:: @ 816961E
 	call_if 1, EventScript_169B57
 	msgbox gUnknown_818DEF3
 	closemessage
-	playbgm BGM_FRLG_RIVAL_POSTBATTLE, 0
+	playbgm MUS_RIVAL2, 0
 	compare_var_to_value VAR_FACING, 2
 	call_if 1, EventScript_169B69
 	compare_var_to_value VAR_FACING, 1
@@ -1212,7 +1212,7 @@ EventScript_169C74:: @ 8169C74
 	getspeciesname 0, VAR_0x4002
 	message Text_18E30D
 	waitmessage
-	playfanfare BGM_FRLG_ME_KEYITEM
+	playfanfare MUS_FAN5
 	waitfanfare
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
@@ -1263,7 +1263,7 @@ EventScript_169D2F:: @ 8169D2F
 	getspeciesname 0, VAR_0x4003
 	message Text_18DD52
 	waitmessage
-	playfanfare BGM_FRLG_ME_KEYITEM
+	playfanfare MUS_FAN5
 	waitfanfare
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3
 	checkflag FLAG_0x83E

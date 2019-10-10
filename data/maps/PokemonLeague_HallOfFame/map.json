@@ -2,7 +2,7 @@
   "id": "MAP_POKEMON_LEAGUE_HALL_OF_FAME",
   "name": "PokemonLeague_HallOfFame",
   "layout": "LAYOUT_POKEMON_LEAGUE_HALL_OF_FAME",
-  "music": "BGM_FRLG_HALL_OF_FAME_PALLET_TOWN",
+  "music": "MUS_SLOWMASARA",
   "region_map_section": "MAPSEC_POKEMON_LEAGUE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

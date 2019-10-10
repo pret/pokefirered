@@ -2,7 +2,7 @@
   "id": "MAP_POKEMON_MANSION_3F",
   "name": "PokemonMansion_3F",
   "layout": "LAYOUT_POKEMON_MANSION_3F",
-  "music": "BGM_FRLG_POKEMON_MANSION",
+  "music": "MUS_POKEYASHI",
   "region_map_section": "MAPSEC_POKEMON_MANSION",
   "requires_flash": false,
   "weather": "WEATHER_CLOUDY",

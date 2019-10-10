@@ -496,7 +496,7 @@ void FieldUseFunc_SuperRepel(u8 taskId)
 {
     if (VarGet(VAR_REPEL_STEP_COUNT) == 0)
     {
-        PlaySE(SE_RU_GASYAN);
+        PlaySE(SE_TU_SAA);
         gTasks[taskId].func = sub_80A19E8;
     }
     else
@@ -551,7 +551,7 @@ void sub_80A1B48(u8 taskId)
 {
     if (++gTasks[taskId].data[8] > 7)
     {
-        PlaySE(SE_PN_ON);
+        PlaySE(SE_BIDORO);
         DisplayItemMessageInBag(taskId, 2, gStringVar4, sub_810A1F8);
     }
 }

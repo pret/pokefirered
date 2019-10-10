@@ -274,7 +274,7 @@ EventScript_16C0CB:: @ 816C0CB
 	call_if 1, EventScript_16C0C4
 	updatemoneybox 0, 0, 0
 	getitemname 0, VAR_0x4000
-	playse SE_C_PASI
+	playse SE_JIHANKI
 	msgbox gUnknown_8196076
 	additem VAR_0x4000, 1
 	goto EventScript_16C125

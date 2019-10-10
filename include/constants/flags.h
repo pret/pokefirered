@@ -17,7 +17,7 @@
 #define FLAG_WORLD_MAP_FUCHSIA_CITY                                 0x897
 #define FLAG_WORLD_MAP_CINNABAR_ISLAND                              0x898
 #define FLAG_WORLD_MAP_INDIGO_PLATEAU_EXTERIOR                      0x899
-#define FLAG_WORLD_MAP_SAFFRON_CITY_DUPLICATE                       0x89a
+#define FLAG_WORLD_MAP_SAFFRON_CITY                                 0x89a
 #define FLAG_WORLD_MAP_ONE_ISLAND                                   0x89b
 #define FLAG_WORLD_MAP_TWO_ISLAND                                   0x89c
 #define FLAG_WORLD_MAP_THREE_ISLAND                                 0x89d
@@ -1377,7 +1377,7 @@
 #define TRAINERS_FLAG_NO    0x356
 #define CODE_FLAGS          (FLAG_TRAINER_FLAG_START + TRAINERS_FLAG_NO + 0xA) // 0x860
 
-// TODO: Find what these are
+// TODO: These three are badge flags
 #define FLAG_UNK820         0x820
 #define FLAG_UNK824         0x824
 #define FLAG_UNK826         0x826

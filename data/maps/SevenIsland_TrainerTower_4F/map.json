@@ -2,7 +2,7 @@
   "id": "MAP_SEVEN_ISLAND_TRAINER_TOWER_4F",
   "name": "SevenIsland_TrainerTower_4F",
   "layout": "LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_4F",
-  "music": "BGM_FRLG_TRAINER_TOWER",
+  "music": "MUS_T_TOWER",
   "region_map_section": "MAPSEC_TRAINER_TOWER_2",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

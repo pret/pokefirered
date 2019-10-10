@@ -75,7 +75,7 @@ bool32 sub_815F2AC(u8 spriteId)
         // fallthrough
     case 1:
         if (sprite->data[2] == 0)
-            PlaySE(SE_TRACK_STOP);
+            PlaySE(SE_KON2);
         if (++sprite->data[2] >= 20)
         {
             sprite->data[2] = 0;
@@ -167,7 +167,7 @@ void sub_815F470(struct Sprite * sprite)
         sprite->pos2.y = data[5] >> 4;
         if (sprite->pos2.y >= 0)
         {
-            PlaySE(SE_TRACK_STOP);
+            PlaySE(SE_KON2);
             sprite->pos2.y = 0;
             data[0]++;
         }
@@ -176,7 +176,7 @@ void sub_815F470(struct Sprite * sprite)
         data[1] += 12;
         if (data[1] >= 128)
         {
-            PlaySE(SE_TRACK_STOP);
+            PlaySE(SE_KON2);
             data[1] = 0;
             data[0]++;
         }
@@ -187,7 +187,7 @@ void sub_815F470(struct Sprite * sprite)
         data[1] += 16;
         if (data[1] >= 128)
         {
-            PlaySE(SE_TRACK_STOP);
+            PlaySE(SE_KON2);
             data[1] = 0;
             data[0]++;
         }

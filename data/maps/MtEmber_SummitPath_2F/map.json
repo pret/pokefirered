@@ -2,7 +2,7 @@
   "id": "MAP_MT_EMBER_SUMMIT_PATH_2F",
   "name": "MtEmber_SummitPath_2F",
   "layout": "LAYOUT_MT_EMBER_SUMMIT_PATH_2F",
-  "music": "BGM_FRLG_MT_EMBER",
+  "music": "MUS_NANADUNGEON",
   "region_map_section": "MAPSEC_MT_EMBER",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

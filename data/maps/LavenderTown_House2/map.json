@@ -2,7 +2,7 @@
   "id": "MAP_LAVENDER_TOWN_HOUSE2",
   "name": "LavenderTown_House2",
   "layout": "LAYOUT_HOUSE5",
-  "music": "BGM_FRLG_CERULEAN_CITY",
+  "music": "MUS_HANADA",
   "region_map_section": "MAPSEC_LAVENDER_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

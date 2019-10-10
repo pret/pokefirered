@@ -74,7 +74,7 @@ EventScript_16C734:: @ 816C734
 EventScript_16C762:: @ 816C762
 	updatemoneybox 0, 0, 0
 	updatecoinsbox 0, 5
-	playse SE_CASHIER
+	playse SE_SHOP
 	msgbox gUnknown_8196A62
 	goto EventScript_16C77A
 	end
@@ -142,7 +142,7 @@ CeladonCity_GameCorner_EventScript_16C7E7:: @ 816C7E7
 	givecoins 10
 	textcolor 3
 	msgbox gUnknown_8196B0D
-	playse SE_CASHIER
+	playse SE_SHOP
 	waitse
 	setflag FLAG_0x26E
 	goto EventScript_16C7CA
@@ -206,7 +206,7 @@ CeladonCity_GameCorner_EventScript_16C89E:: @ 816C89E
 	givecoins 20
 	textcolor 3
 	msgbox gUnknown_8196D47
-	playse SE_CASHIER
+	playse SE_SHOP
 	waitse
 	setflag FLAG_0x26F
 	goto EventScript_16C7CA
@@ -236,7 +236,7 @@ CeladonCity_GameCorner_EventScript_16C8FE:: @ 816C8FE
 	givecoins 20
 	textcolor 3
 	msgbox gUnknown_8196DF8
-	playse SE_CASHIER
+	playse SE_SHOP
 	waitse
 	setflag FLAG_0x270
 	goto EventScript_16C7CA
@@ -418,7 +418,7 @@ CeladonCity_GameCorner_EventScript_16CAAA:: @ 816CAAA
 	end
 
 EventScript_16CABE:: @ 816CABE
-	playse SE_FU_ZAKU2
+	playse SE_KI_GASYAN
 	setmetatile 15, 2, 669, 0
 	setmetatile 16, 2, 670, 1
 	setmetatile 17, 2, 671, 1

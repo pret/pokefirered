@@ -35,7 +35,7 @@ EventScript_1606DD:: @ 81606DD
 	textcolor 0
 	message Text_172B64
 	waitmessage
-	playbgm BGM_FRLG_LEADER_EYE, 0
+	playbgm MUS_EXEYE, 0
 	waitbuttonpress
 	setvar VAR_LAST_TALKED, 3
 	trainerbattle 3, 170, 0, Text_172B99
@@ -61,7 +61,7 @@ MtMoon_B2F_EventScript_16071B:: @ 816071B
 	goto_if_eq EventScript_1607DE
 	removeobject 1
 	additem ITEM_DOME_FOSSIL, 1
-	giveitemfanfaremsg gUnknown_8172ECD, ITEM_DOME_FOSSIL, 1, BGM_FRLG_ME_KEYITEM
+	giveitemfanfaremsg gUnknown_8172ECD, ITEM_DOME_FOSSIL, 1, MUS_FAN5
 	closemessage
 	special sub_8112364
 	delay 10
@@ -69,7 +69,7 @@ MtMoon_B2F_EventScript_16071B:: @ 816071B
 	waitmovement 0
 	moveobjectoffscreen 3
 	textcolor 0
-	playfanfare BGM_FRLG_ME_KEYITEM
+	playfanfare MUS_FAN5
 	message Text_172BD6
 	waitmessage
 	waitfanfare
@@ -94,7 +94,7 @@ MtMoon_B2F_EventScript_16077F:: @ 816077F
 	goto_if_eq EventScript_1607DE
 	removeobject 2
 	additem ITEM_HELIX_FOSSIL, 1
-	giveitemfanfaremsg gUnknown_8172EB2, ITEM_HELIX_FOSSIL, 1, BGM_FRLG_ME_KEYITEM
+	giveitemfanfaremsg gUnknown_8172EB2, ITEM_HELIX_FOSSIL, 1, MUS_FAN5
 	closemessage
 	special sub_8112364
 	delay 10
@@ -102,7 +102,7 @@ MtMoon_B2F_EventScript_16077F:: @ 816077F
 	waitmovement 0
 	moveobjectoffscreen 3
 	textcolor 0
-	playfanfare BGM_FRLG_ME_KEYITEM
+	playfanfare MUS_FAN5
 	message Text_172BD6
 	waitmessage
 	waitfanfare

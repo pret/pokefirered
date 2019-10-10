@@ -2,7 +2,7 @@
   "id": "MAP_SILPH_CO_1F",
   "name": "SilphCo_1F",
   "layout": "LAYOUT_SILPH_CO_1F",
-  "music": "BGM_FRLG_SILPH",
+  "music": "MUS_SHIRUHU",
   "region_map_section": "MAPSEC_SILPH_CO",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -32,21 +32,21 @@
       "x": 7,
       "y": 21,
       "elevation": 0,
-      "dest_map": "MAP_SAFFRON_CITY_DUPLICATE",
+      "dest_map": "MAP_SAFFRON_CITY",
       "dest_warp_id": 0
     },
     {
       "x": 8,
       "y": 20,
       "elevation": 3,
-      "dest_map": "MAP_SAFFRON_CITY_DUPLICATE",
+      "dest_map": "MAP_SAFFRON_CITY",
       "dest_warp_id": 0
     },
     {
       "x": 9,
       "y": 20,
       "elevation": 3,
-      "dest_map": "MAP_SAFFRON_CITY_DUPLICATE",
+      "dest_map": "MAP_SAFFRON_CITY",
       "dest_warp_id": 0
     },
     {

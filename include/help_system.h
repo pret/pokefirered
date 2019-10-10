@@ -25,7 +25,7 @@ struct HelpSystemListMenu
 
 extern struct HelpSystemListMenu gHelpSystemListMenu;
 extern struct ListMenuItem gHelpSystemListMenuItems[];
-extern bool8 gUnknown_3005ECC;
+extern bool8 gHelpSystemEnabled;
 extern u8 gUnknown_203F175;
 
 // help_system_812B1E0
@@ -33,8 +33,8 @@ void sub_812B1E0(u8);
 void HelpSystem_SetSomeVariable2(u8);
 bool8 sub_812B40C(void);
 bool8 sub_812B45C(void);
-void sub_812B478(void);
-void sub_812B484(void);
+void HelpSystem_Disable(void);
+void HelpSystem_Enable(void);
 void sub_812B4B8(void);
 bool8 sub_812BB9C(struct HelpSystemListMenu * a0, struct ListMenuItem * a1);
 bool8 sub_812BC54(struct HelpSystemListMenu * a0, struct ListMenuItem * a1);

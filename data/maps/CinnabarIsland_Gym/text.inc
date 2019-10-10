@@ -6,7 +6,7 @@ Text_199543:: @ 8199543
     .string "and ready with intense heat!\p"
     .string "They incinerate all challengers!\p"
     .string "Hah!\n"
-    .string "You better have BURN HEAL!{PLAY_BGM}{BGM_FRLG_LEADER_EYE}$"
+    .string "You better have BURN HEAL!{PLAY_BGM}{MUS_EXEYE}$"
 
 Text_1995FA:: @ 81995FA
     .string "I have burned down to nothing!\n"

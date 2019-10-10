@@ -15,7 +15,7 @@ CinnabarIsland_MapScript1_166EE1:: @ 8166EE1
 	end
 
 EventScript_166F0B:: @ 8166F0B
-	savebgm BGM_FRLG_FOLLOW_ME
+	savebgm MUS_ANNAI
 	setflag FLAG_0x002
 	setobjectxyperm 3, 15, 12
 	setobjectmovementtype 3, 9

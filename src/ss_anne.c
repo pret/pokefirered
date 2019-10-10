@@ -83,7 +83,7 @@ void Special_SSAnneDepartureCutscene(void)
 {
     u8 taskId;
 
-    PlaySE(SE_SHIP_HORN);
+    PlaySE(SE_KITEKI);
     taskId = CreateTask(Task_SSAnneInit, 8);
     gTasks[taskId].data[0] = 50;
 }
@@ -118,7 +118,7 @@ static void Task_SSAnneRun(u8 taskId)
     boatObject = &gMapObjects[mapObjectId];
     if (gSprites[boatObject->spriteId].pos1.x + gSprites[boatObject->spriteId].pos2.x < -120)
     {
-        PlaySE(SE_SHIP_HORN);
+        PlaySE(SE_KITEKI);
         gTasks[taskId].func = Task_SSAnneFinish;
     }
     else

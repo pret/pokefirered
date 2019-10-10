@@ -131,7 +131,7 @@ bool8 FldEff_UseRockSmash(void)
 
 static void sub_80C9A60(void)
 {
-    PlaySE(SE_W145);
+    PlaySE(SE_W088);
     FieldEffectActiveListRemove(FLDEFF_USE_ROCK_SMASH);
     EnableBothScriptContexts();
 }

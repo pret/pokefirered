@@ -16,6 +16,8 @@
 
 extern u8 gGlyphInfo[];
 
+bool8 gHelpSystemEnabled;
+
 struct HelpSystemVideoState
 {
     /*0x00*/ MainCallback savedVblankCb;
@@ -49,20 +51,20 @@ u8 RunHelpSystemCallback(void)
     {
     case 0:
         sInHelpSystem = 0;
-        if (gSaveBlock2Ptr->optionsButtonMode != OPTIONS_BUTTON_MODE_NORMAL)
+        if (gSaveBlock2Ptr->optionsButtonMode != OPTIONS_BUTTON_MODE_HELP)
             return 0;
         if (JOY_NEW(R_BUTTON) && gUnknown_203F175 == 1)
             return 0;
         if (JOY_NEW(L_BUTTON | R_BUTTON))
         {
-            if (!sub_812B45C() || !gUnknown_3005ECC)
+            if (!sub_812B45C() || !gHelpSystemEnabled)
             {
-                PlaySE(SE_HELP_PAGE);
+                PlaySE(SE_HELP_NG);
                 return 0;
             }
             m4aMPlayStop(&gMPlayInfo_SE1);
             m4aMPlayStop(&gMPlayInfo_SE2);
-            PlaySE(SE_HELP_OPEN);
+            PlaySE(SE_HELP_OP);
             if (!gUnknown_203F174)
                 m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x80);
             SaveCallbacks();
@@ -110,7 +112,7 @@ u8 RunHelpSystemCallback(void)
     case 5:
         if (!sub_812BB9C(&gHelpSystemListMenu, gHelpSystemListMenuItems))
         {
-            PlaySE(SE_HELP_CLOSE);
+            PlaySE(SE_HELP_CL);
             sVideoState.state = 6;
         }
         break;

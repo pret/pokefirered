@@ -39,7 +39,7 @@ RocketHideout_B1F_EventScript_16120A:: @ 816120A
 
 EventScript_161225:: @ 8161225
 	call EventScript_16126A
-	playse SE_FU_ZAKU2
+	playse SE_KI_GASYAN
 	special DrawWholeMapView
 	waitse
 	release

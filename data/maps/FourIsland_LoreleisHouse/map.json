@@ -2,7 +2,7 @@
   "id": "MAP_FOUR_ISLAND_LORELEIS_HOUSE",
   "name": "FourIsland_LoreleisHouse",
   "layout": "LAYOUT_FOUR_ISLAND_LORELEIS_HOUSE",
-  "music": "BGM_FRLG_ISLAND_FOUR",
+  "music": "MUS_NANA45",
   "region_map_section": "MAPSEC_FOUR_ISLAND",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

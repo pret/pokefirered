@@ -23,7 +23,7 @@ VictoryRoad_1F_EventScript_160F33:: @ 8160F33
 	goto_if_eq EventScript_160F62
 	setmetatile 12, 14, 721, 0
 	setmetatile 12, 15, 737, 0
-	playse SE_MU_PACHI
+	playse SE_RU_GASYAN
 	special DrawWholeMapView
 	waitse
 	moveobjectoffscreen 5

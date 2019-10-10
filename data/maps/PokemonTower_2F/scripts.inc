@@ -19,7 +19,7 @@ PokemonTower_2F_EventScript_16329B:: @ 816329B
 
 EventScript_1632A7:: @ 81632A7
 	textcolor 0
-	playbgm BGM_FRLG_RIVAL, 0
+	playbgm MUS_RIVAL1, 0
 	compare_var_to_value VAR_0x4001, 0
 	call_if 1, EventScript_163339
 	compare_var_to_value VAR_0x4001, 1
@@ -38,7 +38,7 @@ EventScript_1632A7:: @ 81632A7
 	call_if 1, EventScript_163373
 	msgbox gUnknown_8179DD4
 	closemessage
-	playbgm BGM_FRLG_RIVAL_POSTBATTLE, 0
+	playbgm MUS_RIVAL2, 0
 	compare_var_to_value VAR_0x4001, 0
 	call_if 1, EventScript_16337E
 	compare_var_to_value VAR_0x4001, 1

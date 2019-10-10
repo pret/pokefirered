@@ -21,7 +21,7 @@ SilphCo_11F_EventScript_161DFE:: @ 8161DFE
 	compare_var_to_value VAR_RESULT, 0
 	goto_if_eq EventScript_161E6B
 	additem ITEM_MASTER_BALL, 1
-	giveitemfanfaremsg gUnknown_8176FBD, ITEM_MASTER_BALL, 1, BGM_FRLG_ME_KEYITEM
+	giveitemfanfaremsg gUnknown_8176FBD, ITEM_MASTER_BALL, 1, MUS_FAN5
 	msgbox gUnknown_8176FEB
 	setflag FLAG_0x250
 	release

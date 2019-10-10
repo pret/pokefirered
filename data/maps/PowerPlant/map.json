@@ -2,7 +2,7 @@
   "id": "MAP_POWER_PLANT",
   "name": "PowerPlant",
   "layout": "LAYOUT_POWER_PLANT",
-  "music": "BGM_FRLG_POKEMON_MANSION",
+  "music": "MUS_POKEYASHI",
   "region_map_section": "MAPSEC_POWER_PLANT",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

@@ -63,7 +63,7 @@ EventScript_17059C:: @ 817059C
 	applymovement 2, Movement_1706DB
 	waitmovement 0
 	removeobject 2
-	playse SE_EXPMAX
+	playse SE_C_MAKU_D
 	closedoor 10, 3
 	waitdooranim
 	setflag FLAG_0x002
@@ -114,7 +114,7 @@ EventScript_17064A:: @ 817064A
 	compare_var_to_value VAR_RESULT, 0
 	goto_if_eq EventScript_1706BE
 	additem ITEM_SS_TICKET, 1
-	giveitemfanfaremsg gUnknown_81A028E, ITEM_SS_TICKET, 1, BGM_FRLG_ME_KEYITEM
+	giveitemfanfaremsg gUnknown_81A028E, ITEM_SS_TICKET, 1, MUS_FAN5
 	setflag FLAG_0x235
 	setflag FLAG_0x031
 	setflag FLAG_0x234
@@ -191,7 +191,7 @@ EventScript_1706FA:: @ 81706FA
 	call EventScript_1707B6
 	setvar VAR_0x8004, 1
 	special sub_809C4A8
-	playse SE_FU_ZUZUZU
+	playse SE_TK_WARPIN
 	special sub_809C5FC
 	waitse
 	call EventScript_1707B6
@@ -211,7 +211,7 @@ EventScript_1706FA:: @ 81706FA
 	waitfanfare
 	applymovement 127, Movement_1707C3
 	waitmovement 0
-	playse SE_EXPMAX
+	playse SE_C_MAKU_D
 	closedoor 3, 3
 	waitdooranim
 	applymovement 1, Movement_170881

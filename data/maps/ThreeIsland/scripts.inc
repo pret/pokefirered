@@ -221,7 +221,7 @@ EventScript_167A59:: @ 8167A59
 	waitmovement 0
 	applymovement 5, Movement_167C57
 	waitmovement 0
-	playbgm BGM_FRLG_BOY_EYE, 0
+	playbgm MUS_SHOUNEN, 0
 	msgbox gUnknown_81823ED, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if_eq EventScript_167C35
@@ -234,7 +234,7 @@ EventScript_167A59:: @ 8167A59
 	closemessage
 	applymovement 7, Movement_167C57
 	waitmovement 0
-	playbgm BGM_FRLG_BOY_EYE, 0
+	playbgm MUS_SHOUNEN, 0
 	msgbox gUnknown_81824EF
 	setvar VAR_LAST_TALKED, 7
 	trainerbattle 3, 528, 0, Text_182521
@@ -244,7 +244,7 @@ EventScript_167A59:: @ 8167A59
 	closemessage
 	applymovement 4, Movement_167C57
 	waitmovement 0
-	playbgm BGM_FRLG_BOY_EYE, 0
+	playbgm MUS_SHOUNEN, 0
 	msgbox gUnknown_8182582
 	setvar VAR_LAST_TALKED, 4
 	trainerbattle 3, 529, 0, Text_1825D4
@@ -266,7 +266,7 @@ EventScript_167A59:: @ 8167A59
 	call_if 1, EventScript_167C03
 	compare_var_to_value VAR_0x4001, 4
 	call_if 1, EventScript_167C1C
-	playbgm BGM_FRLG_BOY_EYE, 0
+	playbgm MUS_SHOUNEN, 0
 	msgbox gUnknown_8182623
 	setvar VAR_LAST_TALKED, 3
 	trainerbattle 3, 742, 0, Text_1826B7

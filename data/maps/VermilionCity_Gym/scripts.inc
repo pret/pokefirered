@@ -183,7 +183,7 @@ EventScript_16B8CB:: @ 816B8CB
 	closemessage
 	call EventScript_16B717
 	special DrawWholeMapView
-	playse SE_FU_ZAKU2
+	playse SE_KI_GASYAN
 	waitse
 	setflag FLAG_0x264
 	releaseall

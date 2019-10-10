@@ -16,7 +16,7 @@ PokemonMansion_1F_EventScript_162212:: @ 8162212
 	lockall
 	setvar VAR_0x8004, 0
 	call EventScript_1A7AE2
-	playse SE_FU_ZAKU2
+	playse SE_KI_GASYAN
 	special DrawWholeMapView
 	waitse
 	releaseall

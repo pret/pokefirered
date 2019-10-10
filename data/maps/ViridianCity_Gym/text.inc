@@ -7,7 +7,7 @@ Text_18F352:: @ 818F352
     .string "So be it.\l"
     .string "This time, I'm not holding back!\p"
     .string "Once more, you shall face\n"
-    .string "GIOVANNI, the greatest TRAINER!{PLAY_BGM}{BGM_FRLG_SUSPICIOUS_EYE}$"
+    .string "GIOVANNI, the greatest TRAINER!{PLAY_BGM}{MUS_ROCKET}$"
 
 Text_18F43F:: @ 818F43F
     .string "Ha!\n"

@@ -2756,7 +2756,7 @@ static bool8 BT_Phase2Mugshot_StartSpriteSlide(struct Task *task)
     BT_SetSpriteAsOpponentOrPlayer(task->tOpponentSpriteId, FALSE);
     BT_SetSpriteAsOpponentOrPlayer(task->tPlayerSpriteId, TRUE);
     BT_StartSpriteSlide(task->tOpponentSpriteId);
-    PlaySE(SE_C_MAKU_U);
+    PlaySE(SE_BT_START);
     ++sTransitionStructPtr->vblankDma;
     return FALSE;
 }

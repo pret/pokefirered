@@ -2,7 +2,7 @@
   "id": "MAP_ONE_ISLAND_HARBOR",
   "name": "OneIsland_Harbor",
   "layout": "LAYOUT_ISLAND_HARBOR",
-  "music": "BGM_FRLG_ISLAND_ONE",
+  "music": "MUS_NANA123",
   "region_map_section": "MAPSEC_ONE_ISLAND",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

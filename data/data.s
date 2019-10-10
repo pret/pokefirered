@@ -6,41 +6,7 @@
 
 	.section .rodata
 
-	.align 2, 0
-gUnknown_8234614::
-	.string "$"
-
-gUnknown_8234615::
-	.string "\n$"
-
-	.align 2, 0
-gUnknown_8234618:: @ 8234618
-	.incbin "baserom.gba", 0x234618, 0x8
-
-gUnknown_8234620:: @ 8234620
-	.incbin "baserom.gba", 0x234620, 0x18
-
-gUnknown_8234638:: @ 8234638
-	.incbin "baserom.gba", 0x234638, 0x10
-
-gUnknown_8234648:: @ 8234648
-	.incbin "baserom.gba", 0x234648, 0x20
-
-gUnknown_8234668:: @ 8234668
-	.incbin "baserom.gba", 0x234668, 0x20
-
-gUnknown_8234688:: @ 8234688
-	.incbin "baserom.gba", 0x234688, 0x3
-
-gUnknown_823468B:: @ 823468B
-	.incbin "baserom.gba", 0x23468B, 0x5
-
-gUnknown_8234690:: @ 8234690
-	.incbin "baserom.gba", 0x234690, 0x4
-
-gUnknown_8234694:: @ 8234694
-	.incbin "baserom.gba", 0x234694, 0x4
-
+	.align 2
 gUnknown_8234698:: @ 8234698
 	.incbin "baserom.gba", 0x234698, 0x20
 

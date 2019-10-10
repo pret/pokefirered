@@ -704,7 +704,7 @@ static void BerryPouchMoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMen
 {
     if (onInit != TRUE)
     {
-        PlaySE(SE_W287B);
+        PlaySE(SE_BAG1);
         StartBerryPouchSpriteWobbleAnim();
     }
     DestroyItemMenuIcon(sResources->itemMenuIconId ^ 1);
@@ -1381,7 +1381,7 @@ static void Task_SellYes(u8 taskId)
 static void Task_SellBerries_PlaySfxAndRemoveBerries(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
-    PlaySE(SE_CASHIER);
+    PlaySE(SE_SHOP);
     RemoveBagItem(gSpecialVar_ItemId, data[8]);
     AddMoney(&gSaveBlock1Ptr->money, itemid_get_market_price(gSpecialVar_ItemId) / 2 * data[8]);
     sub_809C09C(gSpecialVar_ItemId, data[8], 2);

@@ -9,7 +9,7 @@ Text_19832E:: @ 819832E
     .string "Poison brings steady doom.\n"
     .string "Sleep renders foes helpless.\p"
     .string "Despair to the creeping horror of\n"
-    .string "POISON-type POKéMON!{PLAY_BGM}{BGM_FRLG_LEADER_EYE}$"
+    .string "POISON-type POKéMON!{PLAY_BGM}{MUS_EXEYE}$"
 
 Text_198444:: @ 8198444
     .string "Humph!\n"

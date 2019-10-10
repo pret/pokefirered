@@ -54,7 +54,7 @@ EventScript_1648C8:: @ 81648C8
 	waitmovement 0
 	setmetatile 17, 10, 692, 1
 	special DrawWholeMapView
-	playse SE_N
+	playse SE_TK_KASYA
 	waitse
 	setvar VAR_0x400D, 0
 	releaseall

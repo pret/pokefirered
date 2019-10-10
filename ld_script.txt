@@ -62,7 +62,7 @@ SECTIONS {
         src/string_util.o(.text);
         src/link.o(.text);
         src/multiboot.o(.text);
-        asm/main_menu.o(.text);
+        src/main_menu.o(.text);
         src/battle_controllers.o(.text);
         src/decompress.o(.text);
         asm/battle_1.o(.text);
@@ -381,6 +381,7 @@ SECTIONS {
         src/bg_regs.o(.rodata);
         src/string_util.o(.rodata);
         src/link.o(.rodata);
+        src/main_menu.o(.rodata);
         data/data.o(.rodata);
         src/battle_util.o(.rodata);
         src/battle_script_commands.o(.rodata);

@@ -34,8 +34,8 @@ CinnabarIsland_PokemonCenter_1F_EventScript_16E90A:: @ 816E90A
 	goto_if_eq EventScript_16E9A5
 	msgbox gUnknown_819A785
 	closemessage
-	playbgm BGM_FRLG_FOLLOW_ME, 1
-	savebgm BGM_FRLG_FOLLOW_ME
+	playbgm MUS_ANNAI, 1
+	savebgm MUS_ANNAI
 	setflag FLAG_SPECIAL_FLAG_0x4001
 	setflag FLAG_0x0A2
 	delay 20

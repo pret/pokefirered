@@ -2,7 +2,7 @@
   "id": "MAP_SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER",
   "name": "SevenIsland_TanobyRuins_MoneanChamber",
   "layout": "LAYOUT_SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER",
-  "music": "BGM_FRLG_TANOBY_RUINS",
+  "music": "MUS_NANAISEKI",
   "region_map_section": "MAPSEC_MONEAN_CHAMBER",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

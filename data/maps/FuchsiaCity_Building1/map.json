@@ -2,7 +2,7 @@
   "id": "MAP_FUCHSIA_CITY_BUILDING1",
   "name": "FuchsiaCity_Building1",
   "layout": "LAYOUT_FUCHSIA_CITY_BUILDING1",
-  "music": "BGM_FRLG_CERULEAN_CITY",
+  "music": "MUS_HANADA",
   "region_map_section": "MAPSEC_FUCHSIA_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

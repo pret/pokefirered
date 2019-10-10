@@ -2,7 +2,7 @@
   "id": "MAP_SEVEN_ISLAND_SEAVAULT_CANYON_TANOBY_KEY",
   "name": "SevenIsland_SeavaultCanyon_TanobyKey",
   "layout": "LAYOUT_SEVEN_ISLAND_SEAVAULT_CANYON_TANOBY_KEY",
-  "music": "BGM_FRLG_TANOBY_RUINS",
+  "music": "MUS_NANAISEKI",
   "region_map_section": "MAPSEC_TANOBY_KEY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

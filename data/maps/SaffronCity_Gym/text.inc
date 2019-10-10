@@ -5,7 +5,7 @@ Text_19B53C:: @ 819B53C
     .string "It started when a spoon I\n"
     .string "carelessly tossed, bent.\p"
     .string "I dislike battling, but if you wish,\n"
-    .string "I will show you my powers!{PLAY_BGM}{BGM_FRLG_LEADER_EYE}$"
+    .string "I will show you my powers!{PLAY_BGM}{MUS_EXEYE}$"
 
 Text_19B602:: @ 819B602
     .string "This loss shocks me!\n"

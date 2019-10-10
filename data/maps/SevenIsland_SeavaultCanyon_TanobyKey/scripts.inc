@@ -105,7 +105,7 @@ SevenIsland_SeavaultCanyon_TanobyKey_EventScript_164F0B:: @ 8164F0B
 
 EventScript_164F2E:: @ 8164F2E
 	addvar VAR_0x4008, 1
-	playse SE_RU_HYUU
+	playse SE_TRACK_MOVE
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 8
@@ -127,7 +127,7 @@ EventScript_164F51:: @ 8164F51
 	setvar VAR_0x8007, 2
 	special sub_80CAC28
 	delay 60
-	playse SE_EXP
+	playse SE_FU_ZUZUZU
 	waitse
 	return
 

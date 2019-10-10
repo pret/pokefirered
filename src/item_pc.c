@@ -379,7 +379,7 @@ static bool8 ItemPc_DoGfxSetup(void)
         {
             sub_80A0A48(0, 0, 0);
             ItemPc_SetInitializedFlag(1);
-            PlaySE(SE_PC_LOGON);
+            PlaySE(SE_PC_LOGIN);
         }
         gMain.state++;
         break;

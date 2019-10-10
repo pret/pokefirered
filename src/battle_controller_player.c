@@ -807,7 +807,7 @@ static void sub_802F610(void)
     {
         if (gReceivedRemoteLinkPlayers == 0)
         {
-            m4aSongNumStop(SE_T_OOAME);
+            m4aSongNumStop(SE_HINSI);
             gMain.inBattle = 0;
             gMain.callback1 = gPreBattleCallback1;
             SetMainCallback2(sub_8011A1C);
@@ -816,7 +816,7 @@ static void sub_802F610(void)
     }
     else if (IsLinkTaskFinished())
     {
-        m4aSongNumStop(SE_T_OOAME);
+        m4aSongNumStop(SE_HINSI);
         gMain.inBattle = 0;
         gMain.callback1 = gPreBattleCallback1;
         SetMainCallback2(sub_8011A1C);
@@ -838,7 +838,7 @@ void sub_802F6A8(void)
         }
         else
         {
-            m4aSongNumStop(SE_T_OOAME);
+            m4aSongNumStop(SE_HINSI);
             gMain.inBattle = 0;
             gMain.callback1 = gPreBattleCallback1;
             SetMainCallback2(gMain.savedCallback);
@@ -1087,7 +1087,7 @@ static void Task_PrepareToGiveExpWithExpBar(u8 taskId)
     exp -= currLvlExp;
     expToNextLvl = gExperienceTables[gBaseStats[species].growthRate][level + 1] - currLvlExp;
     SetBattleBarStruct(battlerId, gHealthboxSpriteIds[battlerId], expToNextLvl, exp, -gainedExp);
-    PlaySE(SE_U);
+    PlaySE(SE_EXP);
     gTasks[taskId].func = sub_80300F4;
 }
 
@@ -1113,7 +1113,7 @@ static void sub_80300F4(u8 taskId)
             u16 species;
             s32 expOnNextLvl;
 
-            m4aSongNumStop(SE_U);
+            m4aSongNumStop(SE_EXP);
             level = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
             currExp = GetMonData(&gPlayerParty[monId], MON_DATA_EXP);
             species = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES);
@@ -1227,7 +1227,7 @@ static void sub_80303A8(u8 taskId)
         ++data[15];
         break;
     case 2:
-        PlaySE(SE_T_KAMI2);
+        PlaySE(SE_REGI);
         if (IsMonGettingExpSentOut())
             sub_811E5B8(sprite->pos1.x + sprite->pos2.x,
                         sprite->pos1.y + sprite->pos2.y,

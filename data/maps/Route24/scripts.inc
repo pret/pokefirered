@@ -57,7 +57,7 @@ EventScript_1686B9:: @ 81686B9
 	giveitemfanfaremsg gUnknown_8188C93, ITEM_NUGGET
 	message Text_188CDB
 	waitmessage
-	playbgm BGM_FRLG_SUSPICIOUS_EYE, 0
+	playbgm MUS_ROCKET, 0
 	waitbuttonpress
 	setvar VAR_LAST_TALKED, 1
 	trainerbattle 3, 356, 0, Text_188DDC

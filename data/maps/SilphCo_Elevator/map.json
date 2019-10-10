@@ -2,7 +2,7 @@
   "id": "MAP_SILPH_CO_ELEVATOR",
   "name": "SilphCo_Elevator",
   "layout": "LAYOUT_SILPH_CO_ELEVATOR",
-  "music": "BGM_FRLG_SILPH",
+  "music": "MUS_SHIRUHU",
   "region_map_section": "MAPSEC_SILPH_CO",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

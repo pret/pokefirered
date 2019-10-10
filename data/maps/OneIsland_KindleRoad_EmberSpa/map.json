@@ -2,7 +2,7 @@
   "id": "MAP_ONE_ISLAND_KINDLE_ROAD_EMBER_SPA",
   "name": "OneIsland_KindleRoad_EmberSpa",
   "layout": "LAYOUT_ONE_ISLAND_KINDLE_ROAD_EMBER_SPA",
-  "music": "BGM_FRLG_CERULEAN_CITY",
+  "music": "MUS_HANADA",
   "region_map_section": "MAPSEC_EMBER_SPA",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

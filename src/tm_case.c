@@ -1104,7 +1104,7 @@ static void Task_DoSaleOfTMs(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
-    PlaySE(0xF8);
+    PlaySE(SE_SHOP);
     RemoveBagItem(gSpecialVar_ItemId, data[8]);
     AddMoney(&gSaveBlock1Ptr->money, itemid_get_market_price(gSpecialVar_ItemId) / 2 * data[8]);
     sub_809C09C(gSpecialVar_ItemId, data[8], 2);

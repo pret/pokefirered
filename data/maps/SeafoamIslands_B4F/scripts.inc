@@ -176,7 +176,7 @@ SeafoamIslands_B4F_EventScript_1631AC:: @ 81631AC
 	waitmessage
 	waitmoncry
 	delay 10
-	playbgm BGM_FRLG_LEADER_EYE, 0
+	playbgm MUS_EXEYE, 0
 	waitbuttonpress
 	setflag FLAG_0x807
 	special sub_807F9D8

@@ -12,7 +12,7 @@ PewterCity_EventScript_165B9D:: @ 8165B9D
 	faceplayer
 	msgbox gUnknown_817E67E
 	closemessage
-	playbgm BGM_FRLG_FOLLOW_ME, 0
+	playbgm MUS_ANNAI, 0
 	compare_var_to_value VAR_FACING, 4
 	call_if 1, EventScript_165BD3
 	msgbox gUnknown_817E6C7
@@ -444,7 +444,7 @@ EventScript_165DBE:: @ 8165DBE
 	textcolor 0
 	msgbox gUnknown_817E67E
 	closemessage
-	playbgm BGM_FRLG_FOLLOW_ME, 0
+	playbgm MUS_ANNAI, 0
 	compare_var_to_value VAR_0x4001, 0
 	call_if 1, EventScript_165E0A
 	compare_var_to_value VAR_0x4001, 1
@@ -1037,7 +1037,7 @@ PewterCity_EventScript_16607E:: @ 816607E
 	msgbox gUnknown_817E589
 	closemessage
 	delay 10
-	playbgm BGM_FRLG_FOLLOW_ME, 0
+	playbgm MUS_ANNAI, 0
 	compare_var_to_value VAR_FACING, 2
 	call_if 1, EventScript_1660EE
 	compare_var_to_value VAR_FACING, 1
@@ -1443,7 +1443,7 @@ EventScript_1662DE:: @ 81662DE
 	call_if 1, EventScript_1663FC
 	msgbox gUnknown_817E90C
 	textcolor 3
-	playfanfare BGM_FRLG_ME_KEYITEM
+	playfanfare MUS_FAN5
 	message Text_17E970
 	waitmessage
 	waitfanfare

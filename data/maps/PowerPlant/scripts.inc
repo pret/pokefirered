@@ -51,7 +51,7 @@ PowerPlant_EventScript_1637B8:: @ 81637B8
 	waitmessage
 	waitmoncry
 	delay 10
-	playbgm BGM_FRLG_LEADER_EYE, 0
+	playbgm MUS_EXEYE, 0
 	waitbuttonpress
 	setflag FLAG_0x807
 	special sub_807F9D8

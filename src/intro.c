@@ -738,7 +738,7 @@ static void sub_80ECC3C(struct IntroSequenceData * this)
     switch (this->field_0004)
     {
     case 0:
-        PlaySE(BGM_FRLG_GAMEFREAK_LOGO);
+        PlaySE(MUS_TITLEROG);
         sub_80EDC40();
         this->field_0012 = 0;
         this->field_0004++;
@@ -907,7 +907,7 @@ static void sub_80ECEA4(struct IntroSequenceData * this)
     case 3:
         if (!gPaletteFade.active)
         {
-            m4aSongNumStart(BGM_FRLG_OPENING);
+            m4aSongNumStart(MUS_DEMO);
             this->field_0012 = 0;
             this->field_0004++;
         }

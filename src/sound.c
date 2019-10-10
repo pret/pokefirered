@@ -53,9 +53,9 @@ static const struct Fanfare sFanfares[] = {
     { MUS_ME_B_BIG,             250 },
     { MUS_ME_B_SMALL,           150 },
     { MUS_ME_ZANNEN,            160 },
-    { BGM_FRLG_FLUTE,           450 },
-    { BGM_FRLG_ME_KEYITEM,      170 },
-    { BGM_FRLG_ME_POKEDEX_EVAL, 196 }
+    { MUS_POKEFUE,           450 },
+    { MUS_FAN5,      170 },
+    { MUS_FAN2, 196 }
 };
 
 extern u16 SpeciesToCryId(u16);

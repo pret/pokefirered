@@ -2,7 +2,7 @@
   "id": "MAP_UNKNOWN_MAP_00_01",
   "name": "UnknownMap_00_01",
   "layout": "LAYOUT_UNKNOWN_MAP_00_01",
-  "music": "BGM_FRLG_POKEMON_CENTER",
+  "music": "MUS_POKECEN",
   "region_map_section": "MAPSEC_SPECIAL_AREA",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

@@ -2,7 +2,7 @@
   "id": "MAP_SIX_ISLAND_OUTCAST_ISLAND",
   "name": "SixIsland_OutcastIsland",
   "layout": "LAYOUT_SIX_ISLAND_OUTCAST_ISLAND",
-  "music": "BGM_FRLG_SEVII_ISLANDS",
+  "music": "MUS_NANASHIMA",
   "region_map_section": "MAPSEC_OUTCAST_ISLAND",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

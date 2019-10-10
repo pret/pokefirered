@@ -39,7 +39,7 @@ EventScript_1619D3:: @ 81619D3
 
 EventScript_1619D4:: @ 81619D4
 	textcolor 0
-	playbgm BGM_FRLG_RIVAL, 0
+	playbgm MUS_RIVAL1, 0
 	applymovement 1, Movement_1A75DB
 	waitmovement 0
 	applymovement 255, Movement_1A75ED
@@ -60,12 +60,12 @@ EventScript_1619D4:: @ 81619D4
 	call_if 1, EventScript_161A96
 	msgbox gUnknown_8176827
 	closemessage
-	playbgm BGM_FRLG_RIVAL_POSTBATTLE, 0
+	playbgm MUS_RIVAL2, 0
 	compare_var_to_value VAR_0x4001, 0
 	call_if 1, EventScript_161AA1
 	compare_var_to_value VAR_0x4001, 1
 	call_if 1, EventScript_161AAC
-	playse SE_FU_ZUZUZU
+	playse SE_TK_WARPIN
 	fadedefaultbgm
 	removeobject 1
 	waitse

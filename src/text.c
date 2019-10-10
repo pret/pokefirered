@@ -12,6 +12,7 @@
 #include "window.h"
 #include "graphics.h"
 #include "dynamic_placeholder_text_util.h"
+#include "constants/songs.h"
 
 extern u8 gGlyphInfo[0x90];
 extern const struct OamData gOamData_83AC9D0;
@@ -552,7 +553,7 @@ bool16 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter)
         if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
             result = TRUE;
-            PlaySE(5);
+            PlaySE(SE_SELECT);
         }
     }
     return result;
@@ -570,7 +571,7 @@ bool16 TextPrinterWait(struct TextPrinter *textPrinter)
         if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
             result = TRUE;
-            PlaySE(5);
+            PlaySE(SE_SELECT);
         }
     }
     return result;

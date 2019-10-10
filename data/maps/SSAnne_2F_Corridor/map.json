@@ -2,7 +2,7 @@
   "id": "MAP_SSANNE_2F_CORRIDOR",
   "name": "SSAnne_2F_Corridor",
   "layout": "LAYOUT_SSANNE_2F_CORRIDOR",
-  "music": "BGM_FRLG_SS_ANNE",
+  "music": "MUS_SANTOAN",
   "region_map_section": "MAPSEC_S_S_ANNE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

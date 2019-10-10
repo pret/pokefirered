@@ -7,7 +7,7 @@ gUnknown_8177FA4:: @ 8177FA4
     .string "Your POKéMON will be at my mercy\n"
     .string "when they are frozen solid.\p"
     .string "Hahaha!\n"
-    .string "Are you ready?{PLAY_BGM}{BGM_FRLG_LEADER_EYE}$"
+    .string "Are you ready?{PLAY_BGM}{MUS_EXEYE}$"
 
 gUnknown_8178089:: @ 8178089
     .string "Welcome to the POKéMON LEAGUE.\p"
@@ -20,7 +20,7 @@ gUnknown_8178089:: @ 8178089
     .string "Your POKéMON will be at my mercy\n"
     .string "when they are frozen solid.\p"
     .string "Hahaha!\n"
-    .string "Are you ready?{PLAY_BGM}{BGM_FRLG_LEADER_EYE}$"
+    .string "Are you ready?{PLAY_BGM}{MUS_EXEYE}$"
 
 Text_178191:: @ 8178191
     .string "…Things shouldn't be this way!$"

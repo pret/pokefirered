@@ -87,7 +87,7 @@ EventScript_16A402:: @ 816A402
 	call_if 1, EventScript_16A460
 	compare_var_to_value VAR_0x4001, 2
 	call_if 1, EventScript_16A46B
-	playse SE_CASHIER
+	playse SE_SHOP
 	takemoney 50, 0
 	updatemoneybox 0, 0, 0
 	waitse
@@ -167,7 +167,7 @@ PewterCity_Museum_1F_EventScript_16A4AE:: @ 816A4AE
 	setflag FLAG_0x25E
 	removeobject 4
 	additem ITEM_OLD_AMBER, 1
-	giveitemfanfaremsg gUnknown_8190866, ITEM_OLD_AMBER, 1, BGM_FRLG_ME_KEYITEM
+	giveitemfanfaremsg gUnknown_8190866, ITEM_OLD_AMBER, 1, MUS_FAN5
 	release
 	end
 

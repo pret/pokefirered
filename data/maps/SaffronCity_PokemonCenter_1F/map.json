@@ -2,7 +2,7 @@
   "id": "MAP_SAFFRON_CITY_POKEMON_CENTER_1F",
   "name": "SaffronCity_PokemonCenter_1F",
   "layout": "LAYOUT_POKEMON_CENTER_1F",
-  "music": "BGM_FRLG_POKEMON_CENTER",
+  "music": "MUS_POKECEN",
   "region_map_section": "MAPSEC_SAFFRON_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

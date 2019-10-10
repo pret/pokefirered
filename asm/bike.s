@@ -738,8 +738,8 @@ _080BD5F4: .4byte gPlayerAvatar
 _080BD5F8:
 	adds r0, r2, 0
 	bl SetPlayerAvatarTransitionFlags
-	movs r4, 0x8D @ BGM_FRLG_BICYCLE
-	lsls r4, 1    @ BGM_FRLG_BICYCLE
+	movs r4, 0x8D @ MUS_CYCLING
+	lsls r4, 1    @ MUS_CYCLING
 	adds r0, r4, 0
 	bl sub_8056124
 	cmp r0, 0

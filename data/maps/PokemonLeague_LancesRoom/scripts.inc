@@ -43,7 +43,7 @@ EventScript_162987:: @ 8162987
 	waitmovement 0
 	setflag FLAG_0x002
 	call EventScript_1629A8
-	playse SE_FU_ZAKU2
+	playse SE_KI_GASYAN
 	special DrawWholeMapView
 	waitse
 	setvar VAR_0x4068, 4

@@ -2,7 +2,7 @@
   "id": "MAP_SIX_ISLAND_DOTTED_HOLE_SAPPHIRE_ROOM",
   "name": "SixIsland_DottedHole_SapphireRoom",
   "layout": "LAYOUT_SIX_ISLAND_DOTTED_HOLE_SAPPHIRE_ROOM",
-  "music": "BGM_FRLG_TANOBY_RUINS",
+  "music": "MUS_NANAISEKI",
   "region_map_section": "MAPSEC_DOTTED_HOLE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

@@ -2142,7 +2142,7 @@ static void SpriteCB_Egg_4(struct Sprite* sprite)
     sprite->data[0]++;
     if (!gPaletteFade.active)
     {
-        PlaySE(SE_JIHANKI);
+        PlaySE(SE_TAMAGO);
         sprite->invisible = TRUE;
         sprite->callback = SpriteCB_Egg_5;
         sprite->data[0] = 0;

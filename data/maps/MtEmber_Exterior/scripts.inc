@@ -41,7 +41,7 @@ EventScript_16399E:: @ 816399E
 EventScript_1639A8:: @ 81639A8
 	applymovement 2, Movement_1A75E1
 	waitmovement 0
-	playbgm BGM_FRLG_SUSPICIOUS_EYE, 0
+	playbgm MUS_ROCKET, 0
 	msgbox gUnknown_817AA06
 	trainerbattle 3, 537, 0, Text_17AA34
 	msgbox gUnknown_817AA3F
@@ -80,7 +80,7 @@ EventScript_163A1B:: @ 8163A1B
 	end
 
 EventScript_163A25:: @ 8163A25
-	playbgm BGM_FRLG_SUSPICIOUS_EYE, 0
+	playbgm MUS_ROCKET, 0
 	msgbox gUnknown_817AA56
 	trainerbattle 3, 538, 0, Text_17AA8A
 	msgbox gUnknown_817AA99

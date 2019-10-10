@@ -2,7 +2,7 @@
   "id": "MAP_LAVENDER_TOWN_HOUSE1",
   "name": "LavenderTown_House1",
   "layout": "LAYOUT_HOUSE5",
-  "music": "BGM_FRLG_LAVENDER_TOWN",
+  "music": "MUS_SHION",
   "region_map_section": "MAPSEC_LAVENDER_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

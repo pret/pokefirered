@@ -138,7 +138,7 @@ _080F1EC4:
 	bne _080F1EF0
 	ldr r0, _080F1EEC @ =sub_80F1DC0
 	bl SetMainCallback2
-	movs r0, 0x8F @ BGM_FRLG_CONGRATULATIONS_HALL_OF_FAME >> 1
+	movs r0, 0x8F @ MUS_DENDOU >> 1
 	lsls r0, 1
 	bl PlayBGM
 	movs r0, 0

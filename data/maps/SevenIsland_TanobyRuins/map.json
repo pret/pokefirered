@@ -2,7 +2,7 @@
   "id": "MAP_SEVEN_ISLAND_TANOBY_RUINS",
   "name": "SevenIsland_TanobyRuins",
   "layout": "LAYOUT_SEVEN_ISLAND_TANOBY_RUINS",
-  "music": "BGM_FRLG_SEVII_ISLANDS",
+  "music": "MUS_NANASHIMA",
   "region_map_section": "MAPSEC_TANOBY_RUINS",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

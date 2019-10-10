@@ -561,7 +561,7 @@ static void Task_OaksSpeech1(u8 taskId)
         ShowBg(0);
         ShowBg(1);
         SetVBlankCallback(VBlankCB_NewGameOaksSpeech);
-        PlayBGM(BGM_FRLG_GAME_EXPLANATION_START);
+        PlayBGM(MUS_SOUSA);
         gTasks[taskId].func = Task_OaksSpeech2;
         gMain.state = 0;
         return;
@@ -715,7 +715,7 @@ static void Task_OakSpeech6(u8 taskId)
         data[3]--;
     else
     {
-        PlayBGM(BGM_FRLG_GAME_EXPLANATION_MIDDLE);
+        PlayBGM(MUS_SEKAIKAN);
         ClearTopBarWindow();
         TopBarWindowPrintString(gText_ABUTTONNext, 0, 1);
         sOakSpeechResources->unk_0008 = MallocAndDecompress(sNewGameAdventureIntroTilemap, &sp14);
@@ -817,7 +817,7 @@ static void Task_OakSpeech7(u8 taskId)
         break;
     case 4:
         sub_8006398(gTasks[taskId].data[5]);
-        PlayBGM(BGM_FRLG_GAME_EXPLANATION_END);
+        PlayBGM(MUS_SEIBETU);
         data[15] = 24;
         gMain.state++;
         break;
@@ -876,7 +876,7 @@ static void Task_OakSpeech9(u8 taskId)
         CreateNidoranFSprite(taskId);
         LoadOaksSpeechTrainerPic(3, 0);
         CreatePikaOrGrassPlatformSpriteAndLinkToCurrentTask(taskId, 1);
-        PlayBGM(BGM_FRLG_ROUTE_24);
+        PlayBGM(MUS_OPENING);
         BeginNormalPaletteFade(0xFFFFFFFF, 5, 16, 0, RGB_BLACK);
         data[3] = 80;
         ShowBg(2);
@@ -1409,7 +1409,7 @@ static void Task_OakSpeech39(u8 taskId)
     if (sOakSpeechResources->unk_0012 % 20 == 0)
     {
         if (sOakSpeechResources->unk_0012 == 40)
-            PlaySE(SE_FU_ZUZUZU);
+            PlaySE(SE_TK_WARPIN);
         r0 = data[2];
         data[2] -= 32;
         x = sub_80D8B90(r0 - 8);

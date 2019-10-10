@@ -2,7 +2,7 @@
   "id": "MAP_SSANNE_CAPTAINS_OFFICE",
   "name": "SSAnne_CaptainsOffice",
   "layout": "LAYOUT_SSANNE_CAPTAINS_OFFICE",
-  "music": "BGM_FRLG_SS_ANNE",
+  "music": "MUS_SANTOAN",
   "region_map_section": "MAPSEC_S_S_ANNE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

@@ -2,7 +2,7 @@
   "id": "MAP_FIVE_ISLAND_MEADOW",
   "name": "FiveIsland_Meadow",
   "layout": "LAYOUT_FIVE_ISLAND_MEADOW",
-  "music": "BGM_FRLG_SEVII_ISLANDS",
+  "music": "MUS_NANASHIMA",
   "region_map_section": "MAPSEC_FIVE_ISLE_MEADOW",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

@@ -734,7 +734,7 @@ static void MainTask_SlotsGameLoop(u8 taskId)
         {
             sSlotMachineState->bet++;
             TakeCoins(1);
-            PlaySE(SE_T_KAMI2);
+            PlaySE(SE_REGI);
             sub_8141148(8, 0);
             sub_8141148(2, 1);
             data[0] = 1;
@@ -752,7 +752,7 @@ static void MainTask_SlotsGameLoop(u8 taskId)
                 sSlotMachineState->bet += GetCoins();
                 SetCoins(0);
             }
-            PlaySE(SE_T_KAMI2);
+            PlaySE(SE_REGI);
             sub_8141148(8, 0);
             sub_8141148(2, 1);
             data[0] = 1;

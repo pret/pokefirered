@@ -70,7 +70,7 @@ EventScript_17145F:: @ 817145F
 	waitse
 	applymovement 255, Movement_17152C
 	waitmovement 0
-	playbgm BGM_FRLG_BOY_EYE, 0
+	playbgm MUS_SHOUNEN, 0
 	addobject 2
 	applymovement 2, Movement_17152F
 	waitmovement 0

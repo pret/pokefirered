@@ -11,7 +11,7 @@ gUnknown_817844D:: @ 817844D
     .string "He's wrong.\n"
     .string "POKéMON are for battling!\p"
     .string "{PLAYER}! I'll show you how a real\n"
-    .string "TRAINER battles!{PLAY_BGM}{BGM_FRLG_LEADER_EYE}$"
+    .string "TRAINER battles!{PLAY_BGM}{MUS_EXEYE}$"
 
 gUnknown_817858D:: @ 817858D
     .string "I am AGATHA of the ELITE FOUR.\p"
@@ -26,7 +26,7 @@ gUnknown_817858D:: @ 817858D
     .string "He's wrong.\n"
     .string "POKéMON are for battling!\p"
     .string "{PLAYER}! I'll show you how a real\n"
-    .string "TRAINER battles!{PLAY_BGM}{BGM_FRLG_LEADER_EYE}$"
+    .string "TRAINER battles!{PLAY_BGM}{MUS_EXEYE}$"
 
 Text_1786D7:: @ 81786D7
     .string "Oh, my!\n"

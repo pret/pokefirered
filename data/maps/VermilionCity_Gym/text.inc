@@ -7,7 +7,7 @@ Text_194BA4:: @ 8194BA4
     .string "saved me during the war!\p"
     .string "They zapped my enemies into\n"
     .string "paralysis!\p"
-    .string "The same as I'll do to you!{PLAY_BGM}{BGM_FRLG_LEADER_EYE}$"
+    .string "The same as I'll do to you!{PLAY_BGM}{MUS_EXEYE}$"
 
 gUnknown_8194C8E:: @ 8194C8E
     .string "A little word of advice, kid!\p"

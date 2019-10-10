@@ -104,13 +104,13 @@ EventScript_170CB1:: @ 8170CB1
 	applymovement 255, Movement_1A75E9
 	waitmovement 0
 	msgbox gUnknown_81A0FB1
-	giveitemfanfaremsg gUnknown_81A10EE, ITEM_METEORITE, 1, BGM_FRLG_ME_KEYITEM
+	giveitemfanfaremsg gUnknown_81A10EE, ITEM_METEORITE, 1, MUS_FAN5
 	additem ITEM_METEORITE, 1
 	applymovement 3, Movement_1A75ED
 	waitmovement 0
 	msgbox gUnknown_81A1113
 	additem ITEM_TRI_PASS, 1
-	giveitemfanfaremsg gUnknown_81A231B, ITEM_TRI_PASS, 1, BGM_FRLG_ME_KEYITEM
+	giveitemfanfaremsg gUnknown_81A231B, ITEM_TRI_PASS, 1, MUS_FAN5
 	msgbox gUnknown_81A1150
 	compare_var_to_value VAR_0x4058, 2
 	call_if 4, EventScript_170E46
@@ -138,7 +138,7 @@ EventScript_170E3D:: @ 8170E3D
 
 EventScript_170E46:: @ 8170E46
 	textcolor 3
-	playfanfare BGM_FRLG_ME_KEYITEM
+	playfanfare MUS_FAN5
 	message Text_1A11EC
 	waitmessage
 	waitfanfare
@@ -149,7 +149,7 @@ EventScript_170E58:: @ 8170E58
 	setflag FLAG_0x039
 	setvar VAR_0x4058, 2
 	additem ITEM_TOWN_MAP, 1
-	giveitemfanfaremsg gUnknown_81A1218, ITEM_TOWN_MAP, 1, BGM_FRLG_ME_KEYITEM
+	giveitemfanfaremsg gUnknown_81A1218, ITEM_TOWN_MAP, 1, MUS_FAN5
 	return
 
 Movement_170E7D:: @ 8170E7D
@@ -279,7 +279,7 @@ EventScript_170FA5:: @ 8170FA5
 	closemessage
 	applymovement 3, Movement_171142
 	waitmovement 0
-	playse SE_N
+	playse SE_TK_KASYA
 	call EventScript_170C2C
 	special DrawWholeMapView
 	msgbox gUnknown_81A1D45
@@ -323,7 +323,7 @@ EventScript_171044:: @ 8171044
 	closemessage
 	applymovement 3, Movement_171142
 	waitmovement 0
-	playse SE_N
+	playse SE_TK_KASYA
 	call EventScript_170C22
 	special DrawWholeMapView
 	delay 30
@@ -350,11 +350,11 @@ EventScript_1710B2:: @ 81710B2
 	additem ITEM_RAINBOW_PASS, 1
 	setflag FLAG_0x846
 	textcolor 3
-	playfanfare BGM_FRLG_ME_KEYITEM
+	playfanfare MUS_FAN5
 	message Text_1A1B56
 	waitmessage
 	waitfanfare
-	playfanfare BGM_FRLG_ME_KEYITEM
+	playfanfare MUS_FAN5
 	message Text_1A1B8E
 	waitmessage
 	waitfanfare

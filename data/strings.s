@@ -875,7 +875,7 @@ gUnknown_8416EA4:: @ 8416EA4
 	.string "Which move should be forgotten?{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416EC6:: @ 8416EC6
-	.string "1, {PAUSE 0x0F}2, and{PAUSE 0x0F}‥ {PAUSE 0x0F}‥ {PAUSE 0x0F}‥ {PAUSE 0x0F}{PLAY_SE SE_TRACK_MOVE}Poof!\p{STR_VAR_1} forgot how to\nuse {STR_VAR_2}.\pAnd...{PAUSE_UNTIL_PRESS}$"
+	.string "1, {PAUSE 0x0F}2, and{PAUSE 0x0F}‥ {PAUSE 0x0F}‥ {PAUSE 0x0F}‥ {PAUSE 0x0F}{PLAY_SE SE_KON}Poof!\p{STR_VAR_1} forgot how to\nuse {STR_VAR_2}.\pAnd...{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416F10:: @ 8416F10
 	.string "{STR_VAR_1} already knows\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
@@ -3974,7 +3974,7 @@ gUnknown_841E481:: @ 841E481
 	.string "Stop learning {STR_VAR_2}?$"
 
 gUnknown_841E493:: @ 841E493
-	.string "{PAUSE 0x20}1, {PAUSE 0x0F}2, and {PAUSE 0x0F}‥ {PAUSE 0x0F}‥ {PAUSE 0x0F}‥ {PAUSE 0x0F}{PLAY_SE SE_TRACK_MOVE}Poof!\p$"
+	.string "{PAUSE 0x20}1, {PAUSE 0x0F}2, and {PAUSE 0x0F}‥ {PAUSE 0x0F}‥ {PAUSE 0x0F}‥ {PAUSE 0x0F}{PLAY_SE SE_KON}Poof!\p$"
 
 gUnknown_841E4C0:: @ 841E4C0
 	.string "{STR_VAR_1} forgot {STR_VAR_3}.\pAnd‥\p{STR_VAR_1}\nlearned {STR_VAR_2}.$"

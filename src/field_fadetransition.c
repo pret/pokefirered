@@ -305,7 +305,7 @@ static void sub_807DF94(void)
     Overworld_PlaySpecialMapMusic();
     pal_fill_for_maplights();
     sub_8111CF0();
-    PlaySE(SE_RU_GASHIN);
+    PlaySE(SE_TK_WARPOUT);
     CreateTask(sub_807E31C, 10);
     ScriptContext2_Enable();
 }
@@ -713,7 +713,7 @@ static void sub_807E784(u8 taskId)
     case 0:
         player_bitmagic();
         ScriptContext2_Enable();
-        PlaySE(SE_FU_ZUZUZU);
+        PlaySE(SE_TK_WARPIN);
         sub_805DAB0();
         task->data[0]++;
         break;

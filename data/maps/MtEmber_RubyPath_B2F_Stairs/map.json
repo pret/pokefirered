@@ -2,7 +2,7 @@
   "id": "MAP_MT_EMBER_RUBY_PATH_B2F_STAIRS",
   "name": "MtEmber_RubyPath_B2F_Stairs",
   "layout": "LAYOUT_MT_EMBER_RUBY_PATH_B2F_STAIRS",
-  "music": "BGM_FRLG_MT_EMBER",
+  "music": "MUS_NANADUNGEON",
   "region_map_section": "MAPSEC_MT_EMBER",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

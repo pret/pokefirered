@@ -24,7 +24,7 @@ Text_197114:: @ 8197114
     .string "…Oh, I'm sorry, I had no idea that\n"
     .string "you wished to challenge me.\p"
 
-    .string "Very well, but I shall not lose.{PLAY_BGM BGM_FRLG_LEADER_EYE}$"
+    .string "Very well, but I shall not lose.{PLAY_BGM MUS_EXEYE}$"
 
 Text_197260:: @ 8197260
     .string "Oh!\n"

@@ -21,7 +21,7 @@ EventScript_163D65:: @ 8163D65
 	delay 20
 	applymovement 255, Movement_163D7F
 	waitmovement 0
-	playse SE_FU_ZAKU
+	playse SE_RU_HYUU
 	delay 60
 	warphole MAP_FOUR_ISLAND_ICEFALL_CAVE_B1F
 	waitstate

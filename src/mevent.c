@@ -192,7 +192,7 @@ u32 sub_8143770(u8 * r4, u16 * r5)
         case 2:
             if (GetLinkPlayerCount_2() == 2)
             {
-                PlaySE(SE_TOY_G);
+                PlaySE(SE_PINPON);
                 CheckShouldAdvanceLinkState();
                 *r5 = 0;
                 *r4 = 3;

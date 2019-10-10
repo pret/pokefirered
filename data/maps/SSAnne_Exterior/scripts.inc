@@ -18,7 +18,7 @@ SSAnne_Exterior_160859:: @ 8160859
 	call_if 3, EventScript_1608A1
 	compare_var_to_value VAR_0x8005, 7
 	call_if 4, EventScript_1608AC
-	fadenewbgm BGM_FRLG_SURF
+	fadenewbgm MUS_NAMINORI
 	delay 50
 	special Special_SSAnneDepartureCutscene
 	waitstate

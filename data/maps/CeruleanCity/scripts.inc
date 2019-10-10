@@ -37,7 +37,7 @@ CeruleanCity_EventScript_1664B9:: @ 81664B9
 EventScript_1664CC:: @ 81664CC
 	textcolor 0
 	setvar VAR_0x4054, 2
-	playbgm BGM_FRLG_RIVAL, 0
+	playbgm MUS_RIVAL1, 0
 	addobject 8
 	applymovement 8, Movement_1665D3
 	waitmovement 0
@@ -54,7 +54,7 @@ EventScript_1664CC:: @ 81664CC
 	special SetFlavorTextFlagFromSpecialVars
 	msgbox gUnknown_817EB95
 	closemessage
-	playbgm BGM_FRLG_RIVAL_POSTBATTLE, 0
+	playbgm MUS_RIVAL2, 0
 	compare_var_to_value VAR_0x4001, 0
 	call_if 1, EventScript_1665A3
 	compare_var_to_value VAR_0x4001, 1
@@ -177,7 +177,7 @@ CeruleanCity_EventScript_166603:: @ 8166603
 	goto_if_eq EventScript_16662E
 	message Text_17EE0E
 	waitmessage
-	playbgm BGM_FRLG_SUSPICIOUS_EYE, 0
+	playbgm MUS_ROCKET, 0
 	waitbuttonpress
 	trainerbattle 3, 355, 0, Text_17EE70
 	setvar VAR_0x407D, 1

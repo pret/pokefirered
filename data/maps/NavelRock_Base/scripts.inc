@@ -41,14 +41,14 @@ NavelRock_Base_EventScript_165134:: @ 8165134
 	faceplayer
 	waitse
 	delay 20
-	playse SE_FUUSEN2
+	playse SE_T_AME_E
 	setvar VAR_0x8004, 0
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 4
 	setvar VAR_0x8007, 2
 	special sub_80CAC28
 	delay 30
-	playse SE_FUUSEN2
+	playse SE_T_AME_E
 	setvar VAR_0x8004, 0
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 4

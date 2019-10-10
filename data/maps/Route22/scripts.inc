@@ -29,7 +29,7 @@ EventScript_1682BD:: @ 81682BD
 
 EventScript_1682BE:: @ 81682BE
 	textcolor 0
-	playbgm BGM_FRLG_RIVAL, 0
+	playbgm MUS_RIVAL1, 0
 	addobject 1
 	compare_var_to_value VAR_0x4001, 0
 	call_if 1, EventScript_168350
@@ -48,7 +48,7 @@ EventScript_1682BE:: @ 81682BE
 	msgbox gUnknown_8188974
 	closemessage
 	delay 10
-	playbgm BGM_FRLG_RIVAL_POSTBATTLE, 0
+	playbgm MUS_RIVAL2, 0
 	compare_var_to_value VAR_0x4001, 0
 	call_if 1, EventScript_16839A
 	compare_var_to_value VAR_0x4001, 1
@@ -195,7 +195,7 @@ EventScript_16841E:: @ 816841E
 
 EventScript_16841F:: @ 816841F
 	textcolor 0
-	playbgm BGM_FRLG_RIVAL, 0
+	playbgm MUS_RIVAL1, 0
 	addobject 1
 	compare_var_to_value VAR_0x4001, 0
 	call_if 1, EventScript_16849C
@@ -214,7 +214,7 @@ EventScript_16841F:: @ 816841F
 	msgbox gUnknown_8188B29
 	closemessage
 	delay 10
-	playbgm BGM_FRLG_RIVAL_POSTBATTLE, 0
+	playbgm MUS_RIVAL2, 0
 	applymovement 1, Movement_1684DA
 	waitmovement 0
 	fadedefaultbgm

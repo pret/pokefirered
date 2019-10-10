@@ -9,7 +9,7 @@ gUnknown_817820F:: @ 817820F
     .string "{PLAYER}!\p"
     .string "We will grind you down with our\n"
     .string "superior power!\p"
-    .string "Hoo hah!{PLAY_BGM}{BGM_FRLG_LEADER_EYE}$"
+    .string "Hoo hah!{PLAY_BGM}{MUS_EXEYE}$"
 
 gUnknown_817830C:: @ 817830C
     .string "I am BRUNO of the ELITE FOUR!\p"
@@ -22,7 +22,7 @@ gUnknown_817830C:: @ 817830C
     .string "{PLAYER}!\p"
     .string "We will grind you down with our\n"
     .string "superior power!\p"
-    .string "Hoo hah!{PLAY_BGM}{BGM_FRLG_LEADER_EYE}$"
+    .string "Hoo hah!{PLAY_BGM}{MUS_EXEYE}$"
 
 Text_178409:: @ 8178409
     .string "Why?\n"

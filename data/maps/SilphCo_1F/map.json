@@ -2,7 +2,7 @@
   "id": "MAP_SILPH_CO_1F",
   "name": "SilphCo_1F",
   "layout": "LAYOUT_SILPH_CO_1F",
-  "music": "BGM_FRLG_SILPH",
+  "music": "MUS_SHIRUHU",
   "region_map_section": "MAPSEC_SILPH_CO",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

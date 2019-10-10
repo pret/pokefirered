@@ -745,7 +745,7 @@ gStdScript_ItemMessageAndFanfare:: @ 81A4E66
 	textcolor 3
 	compare_var_to_value VAR_0x8002, MUS_FANFA1
 	call_if 1, EventScript_1A4EA2
-	compare_var_to_value VAR_0x8002, BGM_FRLG_ME_KEYITEM
+	compare_var_to_value VAR_0x8002, MUS_FAN5
 	call_if 1, EventScript_1A4EA6
 	message 0x0
 	waitmessage
@@ -763,7 +763,7 @@ EventScript_1A4EA2:: @ 81A4EA2
 	return
 
 EventScript_1A4EA6:: @ 81A4EA6
-	playfanfare BGM_FRLG_ME_KEYITEM
+	playfanfare MUS_FAN5
 	return
 
 EventScript_1A4EAA:: @ 81A4EAA

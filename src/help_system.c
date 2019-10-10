@@ -59,12 +59,12 @@ u8 RunHelpSystemCallback(void)
         {
             if (!sub_812B45C() || !gHelpSystemEnabled)
             {
-                PlaySE(SE_HELP_ERR);
+                PlaySE(SE_HELP_NG);
                 return 0;
             }
             m4aMPlayStop(&gMPlayInfo_SE1);
             m4aMPlayStop(&gMPlayInfo_SE2);
-            PlaySE(SE_HELP_OPEN);
+            PlaySE(SE_HELP_OP);
             if (!gUnknown_203F174)
                 m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x80);
             SaveCallbacks();
@@ -112,7 +112,7 @@ u8 RunHelpSystemCallback(void)
     case 5:
         if (!sub_812BB9C(&gHelpSystemListMenu, gHelpSystemListMenuItems))
         {
-            PlaySE(SE_HELP_CLOSE);
+            PlaySE(SE_HELP_CL);
             sVideoState.state = 6;
         }
         break;

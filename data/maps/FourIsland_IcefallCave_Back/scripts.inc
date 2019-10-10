@@ -42,7 +42,7 @@ FourIsland_IcefallCave_Back_EventScript_163D98:: @ 8163D98
 	waitmovement 0
 	applymovement 2, Movement_163EE8
 	waitmovement 0
-	playbgm BGM_FRLG_SUSPICIOUS_EYE, 0
+	playbgm MUS_ROCKET, 0
 	textcolor 0
 	msgbox gUnknown_817B20B
 	setvar VAR_LAST_TALKED, 4

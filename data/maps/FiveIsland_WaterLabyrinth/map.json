@@ -2,7 +2,7 @@
   "id": "MAP_FIVE_ISLAND_WATER_LABYRINTH",
   "name": "FiveIsland_WaterLabyrinth",
   "layout": "LAYOUT_FIVE_ISLAND_WATER_LABYRINTH",
-  "music": "BGM_FRLG_SEVII_ISLANDS",
+  "music": "MUS_NANASHIMA",
   "region_map_section": "MAPSEC_WATER_LABYRINTH",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

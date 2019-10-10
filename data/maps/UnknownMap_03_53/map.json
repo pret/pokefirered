@@ -2,7 +2,7 @@
   "id": "MAP_UNKNOWN_MAP_03_53",
   "name": "UnknownMap_03_53",
   "layout": "LAYOUT_UNKNOWN_MAP_03_53",
-  "music": "BGM_FRLG_SEVII_ISLANDS",
+  "music": "MUS_NANASHIMA",
   "region_map_section": "MAPSEC_SEVII_ISLE_9",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

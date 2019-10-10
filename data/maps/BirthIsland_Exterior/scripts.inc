@@ -78,7 +78,7 @@ EventScript_1652C0:: @ 81652C0
 	setfieldeffectarg 1, 56
 	setfieldeffectarg 2, 2
 	dofieldeffect 68
-	playbgm BGM_FRLG_DEOXYS_EYE, 0
+	playbgm MUS_DEOEYE, 0
 	waitfieldeffect 68
 	applymovement 2, Movement_165353
 	waitmovement 0

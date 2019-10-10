@@ -12,7 +12,7 @@ LavenderTown_VolunteerPokemonHouse_EventScript_16B14A:: @ 816B14A
 	goto_if_eq EventScript_16B1A0
 	setflag FLAG_0x23D
 	additem ITEM_POKE_FLUTE, 1
-	giveitemfanfaremsg gUnknown_81937BD, ITEM_POKE_FLUTE, 1, BGM_FRLG_ME_KEYITEM
+	giveitemfanfaremsg gUnknown_81937BD, ITEM_POKE_FLUTE, 1, MUS_FAN5
 	msgbox gUnknown_81937E5
 	release
 	end

@@ -68,7 +68,7 @@ EventScript_162B76:: @ 8162B76
 	goto_if_eq EventScript_162C68
 	setflag FLAG_0x003
 	setflag FLAG_0x005
-	savebgm BGM_FRLG_KACHI_LEADER
+	savebgm MUS_WIN_GYM
 	checkflag FLAG_0x844
 	call_if 0, EventScript_162C6F
 	checkflag FLAG_0x844
@@ -78,7 +78,7 @@ EventScript_162B76:: @ 8162B76
 	setflag FLAG_0x4BC
 	setflag FLAG_0x004
 	msgbox gUnknown_8178F2F
-	playbgm BGM_FRLG_HALL_OF_FAME_PALLET_TOWN, 0
+	playbgm MUS_SLOWMASARA, 0
 	addobject 2
 	msgbox gUnknown_8178FC6
 	closemessage

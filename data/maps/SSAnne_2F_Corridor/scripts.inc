@@ -29,7 +29,7 @@ EventScript_160903:: @ 8160903
 	textcolor 0
 	playse SE_KAIDAN
 	delay 5
-	playbgm BGM_FRLG_RIVAL, 0
+	playbgm MUS_RIVAL1, 0
 	addobject 1
 	delay 10
 	applymovement 1, Movement_1A75ED
@@ -52,7 +52,7 @@ EventScript_160903:: @ 8160903
 	msgbox gUnknown_8173164
 	closemessage
 	delay 10
-	playbgm BGM_FRLG_RIVAL_POSTBATTLE, 0
+	playbgm MUS_RIVAL2, 0
 	compare_var_to_value VAR_0x4001, 0
 	call_if 1, EventScript_1609FD
 	compare_var_to_value VAR_0x4001, 1

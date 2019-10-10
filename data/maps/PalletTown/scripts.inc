@@ -63,7 +63,7 @@ EventScript_1654D8:: @ 81654D8
 	goto_if 0, EventScript_165593
 	msgbox gUnknown_817D9AA
 	closemessage
-	playbgm BGM_FRLG_FOLLOW_ME, 0
+	playbgm MUS_ANNAI, 0
 	applymovement 255, Movement_1655DD
 	applymovement 3, Movement_1655CC
 	waitmovement 0
@@ -189,7 +189,7 @@ EventScript_165605:: @ 8165605
 	special UpdatePickStateFromSpecialVar8005
 	textcolor 0
 	delay 30
-	playbgm BGM_FRLG_PROF_OAK, 0
+	playbgm MUS_OHKIDO, 0
 	message Text_17D72C
 	waitmessage
 	delay 85

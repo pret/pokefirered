@@ -42,20 +42,20 @@ extern struct ToneData gCryTable[];
 extern struct ToneData gCryTable2[];
 
 static const struct Fanfare sFanfares[] = {
-    { MUS_FANFA1,                80 },
-    { MUS_FANFA4,               160 },
-    { MUS_FANFA5,               220 },
-    { MUS_ME_WAZA,              220 },
-    { MUS_ME_ASA,               160 },
-    { MUS_ME_BACHI,             340 },
-    { MUS_ME_WASURE,            180 },
-    { MUS_ME_KINOMI,            120 },
-    { MUS_ME_B_BIG,             250 },
-    { MUS_ME_B_SMALL,           150 },
-    { MUS_ME_ZANNEN,            160 },
-    { MUS_POKEFUE,           450 },
-    { MUS_FAN5,      170 },
-    { MUS_FAN2, 196 }
+    { MUS_FANFA1,      80 },
+    { MUS_FANFA4,     160 },
+    { MUS_FANFA5,     220 },
+    { MUS_ME_WAZA,    220 },
+    { MUS_ME_ASA,     160 },
+    { MUS_ME_BACHI,   340 },
+    { MUS_ME_WASURE,  180 },
+    { MUS_ME_KINOMI,  120 },
+    { MUS_ME_B_BIG,   250 },
+    { MUS_ME_B_SMALL, 150 },
+    { MUS_ME_ZANNEN,  160 },
+    { MUS_POKEFUE,    450 },
+    { MUS_FAN5,       170 },
+    { MUS_FAN2,       196 }
 };
 
 extern u16 SpeciesToCryId(u16);

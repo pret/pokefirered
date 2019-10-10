@@ -51,7 +51,7 @@ static void StartSweetScentFieldEffect(void)
 {
     u8 taskId;
 
-    PlaySE(SE_W260);
+    PlaySE(SE_W230);
     gUnknown_203AAB0 = (u8 *)Alloc(0x400);
     CpuFastSet(gPlttBufferUnfaded, gUnknown_203AAB0, 0x100);
     CpuFastSet(gPlttBufferFaded, gPlttBufferUnfaded, 0x100);

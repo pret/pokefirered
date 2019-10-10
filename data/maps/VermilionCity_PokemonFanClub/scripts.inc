@@ -25,7 +25,7 @@ EventScript_16B4B1:: @ 816B4B1
 	goto_if_eq EventScript_16B4F2
 	setflag FLAG_0x241
 	additem ITEM_BIKE_VOUCHER, 1
-	giveitemfanfaremsg gUnknown_819474E, ITEM_BIKE_VOUCHER, 1, BGM_FRLG_ME_KEYITEM
+	giveitemfanfaremsg gUnknown_819474E, ITEM_BIKE_VOUCHER, 1, MUS_FAN5
 	msgbox gUnknown_819477C
 	release
 	end

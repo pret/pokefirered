@@ -2,7 +2,7 @@
   "id": "MAP_CELADON_CITY",
   "name": "CeladonCity",
   "layout": "LAYOUT_CELADON_CITY",
-  "music": "BGM_FRLG_CELADON_CITY",
+  "music": "MUS_TAMAMUSI",
   "region_map_section": "MAPSEC_CELADON_CITY",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

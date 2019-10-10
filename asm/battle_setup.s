@@ -28,7 +28,7 @@ _0807F644:
 	bl FldEffPoison_IsActive
 	cmp r0, 0
 	bne _0807F686
-	bl sub_812B478
+	bl HelpSystem_Disable
 	ldrb r0, [r4, 0x2]
 	bl BT_StartOnField
 	ldrh r0, [r4]
@@ -41,7 +41,7 @@ _0807F65E:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0807F686
-	bl sub_812B484
+	bl HelpSystem_Enable
 	bl CleanupOverworldWindowsAndTilemaps
 	ldr r0, _0807F68C @ =sub_800FD9C
 	bl SetMainCallback2

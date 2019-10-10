@@ -56,7 +56,7 @@ _080F1E04:
 	.4byte _080F1E88
 	.4byte _080F1EC4
 _080F1E18:
-	ldr r1, _080F1E40 @ =gUnknown_3005ECC
+	ldr r1, _080F1E40 @ =gHelpSystemEnabled
 	movs r0, 0
 	strb r0, [r1]
 	movs r0, 0
@@ -74,7 +74,7 @@ _080F1E18:
 	strb r1, [r0]
 	b _080F1EF0
 	.align 2, 0
-_080F1E40: .4byte gUnknown_3005ECC
+_080F1E40: .4byte gHelpSystemEnabled
 _080F1E44: .4byte gUnknown_203AB3C
 _080F1E48: .4byte 0x00002008
 _080F1E4C: .4byte gMain
@@ -138,7 +138,7 @@ _080F1EC4:
 	bne _080F1EF0
 	ldr r0, _080F1EEC @ =sub_80F1DC0
 	bl SetMainCallback2
-	movs r0, 0x8F @ BGM_FRLG_CONGRATULATIONS_HALL_OF_FAME >> 1
+	movs r0, 0x8F @ MUS_DENDOU >> 1
 	lsls r0, 1
 	bl PlayBGM
 	movs r0, 0

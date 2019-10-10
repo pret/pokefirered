@@ -2441,7 +2441,7 @@ _08055E40:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08055E5A
-	ldr r5, _08055E74 @ =0x00000131 @ BGM_FRLG_SURF
+	ldr r5, _08055E74 @ =0x00000131 @ MUS_NAMINORI
 	adds r0, r5, 0
 	bl sub_8056124
 	cmp r0, 0
@@ -2511,7 +2511,7 @@ _08055EA8:
 	bl GetCurrentMapMusic
 	lsls r0, 16
 	lsrs r6, r0, 16
-	ldr r5, _08055F08 @ =0x00000131 @ BGM_FRLG_SURF
+	ldr r5, _08055F08 @ =0x00000131 @ MUS_NAMINORI
 	cmp r6, r5
 	beq _08055F14
 	movs r0, 0x8

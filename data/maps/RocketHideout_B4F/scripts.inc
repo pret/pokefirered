@@ -24,7 +24,7 @@ RocketHideout_B4F_EventScript_161317:: @ 8161317
 	special SetFlavorTextFlagFromSpecialVars
 	message Text_175226
 	waitmessage
-	playbgm BGM_FRLG_SUSPICIOUS_EYE, 0
+	playbgm MUS_ROCKET, 0
 	waitbuttonpress
 	trainerbattle 3, 348, 0, Text_175318
 	msgbox gUnknown_817532D
@@ -112,7 +112,7 @@ EventScript_161433:: @ 8161433
 	end
 
 EventScript_161462:: @ 8161462
-	playse SE_FU_ZAKU2
+	playse SE_KI_GASYAN
 	special DrawWholeMapView
 	waitse
 	return

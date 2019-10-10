@@ -2,7 +2,7 @@
   "id": "MAP_FIVE_ISLAND_RESORT_GORGEOUS_HOUSE",
   "name": "FiveIsland_ResortGorgeous_House",
   "layout": "LAYOUT_FIVE_ISLAND_RESORT_GORGEOUS_HOUSE",
-  "music": "BGM_FRLG_ISLAND_FOUR",
+  "music": "MUS_NANA45",
   "region_map_section": "MAPSEC_RESORT_GORGEOUS",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

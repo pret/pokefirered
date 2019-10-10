@@ -2,7 +2,7 @@
   "id": "MAP_FIVE_ISLAND_ROCKET_WAREHOUSE",
   "name": "FiveIsland_RocketWarehouse",
   "layout": "LAYOUT_FIVE_ISLAND_ROCKET_WAREHOUSE",
-  "music": "BGM_FRLG_ROCKET_HIDEOUT",
+  "music": "MUS_AJITO",
   "region_map_section": "MAPSEC_ROCKET_WAREHOUSE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

@@ -12,7 +12,7 @@ gUnknown_8178764:: @ 8178764
     .string "There's no being clever with them.\p"
     .string "Well, are you ready to lose?\p"
     .string "Your LEAGUE challenge ends with\n"
-    .string "me, {PLAYER}!{PLAY_BGM}{BGM_FRLG_LEADER_EYE}$"
+    .string "me, {PLAYER}!{PLAY_BGM}{MUS_EXEYE}$"
 
 gUnknown_81788BD:: @ 81788BD
     .string "Ah!\n"
@@ -28,7 +28,7 @@ gUnknown_81788BD:: @ 81788BD
     .string "There's no being clever with them.\p"
     .string "Well, are you ready to lose?\p"
     .string "Your LEAGUE challenge ends with\n"
-    .string "me, {PLAYER}!{PLAY_BGM}{BGM_FRLG_LEADER_EYE}$"
+    .string "me, {PLAYER}!{PLAY_BGM}{MUS_EXEYE}$"
 
 Text_178A15:: @ 8178A15
     .string "That's it!\p"

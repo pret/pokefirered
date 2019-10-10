@@ -503,7 +503,7 @@ static void TeachyTvMainCallback(void)
             gTasks[taskId].data[0] = TeachyTvSetupWindow();
             gTasks[taskId].data[1] = TeachyTvSetupObjEventAndOam();
             TeachyTvSetupScrollIndicatorArrowPair();
-            PlayNewMapMusic(BGM_FRLG_TEACHY_TV);
+            PlayNewMapMusic(MUS_TVNOIZE);
             TeachyTvSetWindowRegs();
         }
         ScheduleBgCopyTilemapToVram(0);
@@ -779,7 +779,7 @@ static void TTVcmd_TransitionRenderBg2TeachyTvGraphicInitNpcPos(u8 taskId)
         ScheduleBgCopyTilemapToVram(2);
         data[2] = 0;
         ++data[3];
-        PlayNewMapMusic(BGM_FRLG_FOLLOW_ME);
+        PlayNewMapMusic(MUS_ANNAI);
     }
 }
 
@@ -1060,7 +1060,7 @@ static void TTVcmd_End(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     if (data[2] == 0)
-        PlayNewMapMusic(BGM_FRLG_TEACHY_TV);
+        PlayNewMapMusic(MUS_TVNOIZE);
     TeachyTvBg2AnimController();
     if (++data[2] > 63)
     {
@@ -1227,7 +1227,7 @@ static void TeachyTvRestorePlayerPartyCallback(void)
     if (gBattleOutcome == B_OUTCOME_DREW)
         SetTeachyTvControllerModeToResume();
     else
-        PlayNewMapMusic(BGM_FRLG_FOLLOW_ME);
+        PlayNewMapMusic(MUS_ANNAI);
     CB2_ReturnToTeachyTV();
 }
 

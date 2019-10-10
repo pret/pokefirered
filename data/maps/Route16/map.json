@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE16",
   "name": "Route16",
   "layout": "LAYOUT_ROUTE16",
-  "music": "BGM_FRLG_ROUTE_3",
+  "music": "MUS_LOAD02",
   "region_map_section": "MAPSEC_ROUTE_16",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

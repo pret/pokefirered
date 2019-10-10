@@ -2,7 +2,7 @@
   "id": "MAP_NAVEL_ROCK_BASE_PATH_B2F",
   "name": "NavelRock_BasePath_B2F",
   "layout": "LAYOUT_NAVEL_ROCK_BASE_PATH_B2F",
-  "music": "BGM_FRLG_MT_EMBER",
+  "music": "MUS_NANADUNGEON",
   "region_map_section": "MAPSEC_NAVEL_ROCK",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

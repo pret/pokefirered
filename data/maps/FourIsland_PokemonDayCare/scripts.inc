@@ -134,7 +134,7 @@ EventScript_171B05:: @ 8171B05
 	waitmovement 0
 	specialvar VAR_RESULT, TakePokemonFromDaycare
 	special SubtractMoneyFromVar0x8005
-	playse SE_T_KAMI2
+	playse SE_REGI
 	msgbox gUnknown_81BFA67
 	waitse
 	playmoncry VAR_RESULT, 0

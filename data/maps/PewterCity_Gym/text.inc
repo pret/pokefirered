@@ -12,7 +12,7 @@ Text_190CD4:: @ 8190CD4
     .string "That's the TRAINER's honor that\n"
     .string "compels you to challenge me.\p"
     .string "Fine, then!\n"
-    .string "Show me your best!{PLAY_BGM}{BGM_FRLG_LEADER_EYE}$"
+    .string "Show me your best!{PLAY_BGM}{MUS_EXEYE}$"
 
 Text_190E4F:: @ 8190E4F
     .string "I took you for granted, and so\n"

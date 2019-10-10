@@ -2,7 +2,7 @@
   "id": "MAP_SAFARI_ZONE_BUILDING2",
   "name": "SafariZone_Building2",
   "layout": "LAYOUT_SAFARI_ZONE_BUILDING",
-  "music": "BGM_FRLG_SAFARI_ZONE",
+  "music": "MUS_SHINKA",
   "region_map_section": "MAPSEC_KANTO_SAFARI_ZONE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

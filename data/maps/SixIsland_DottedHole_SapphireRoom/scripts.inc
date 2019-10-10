@@ -5,17 +5,17 @@ SixIsland_DottedHole_SapphireRoom_EventScript_1641B5:: @ 81641B5
 	lock
 	faceplayer
 	textcolor 3
-	playfanfare BGM_FRLG_ME_KEYITEM
+	playfanfare MUS_FAN5
 	message Text_17BD82
 	waitmessage
 	waitfanfare
 	closemessage
 	setobjectxyperm 2, 5, 0
 	addobject 2
-	playse SE_FU_ZAKU
+	playse SE_RU_HYUU
 	applymovement 2, Movement_16440F
 	waitmovement 0
-	playse SE_W115
+	playse SE_W070
 	compare_var_to_value VAR_FACING, 2
 	call_if 1, EventScript_16430F
 	compare_var_to_value VAR_FACING, 1

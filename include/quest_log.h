@@ -35,6 +35,7 @@ void MapNamePopupWindowIdSetDummy(void);
 void sub_8111CF0(void);
 void sub_811089C(void);
 void sub_8113044(void);
+void TrySetUpQuestLogScenes_ElseContinueFromSave(u8 taskId);
 
 extern u8 gUnknown_203ADFA;
 

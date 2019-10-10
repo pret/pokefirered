@@ -1005,16 +1005,16 @@ bool8 sub_812B45C(void)
     return TRUE;
 }
 
-void sub_812B478(void)
+void HelpSystem_Disable(void)
 {
-    gUnknown_3005ECC = 0;
+    gHelpSystemEnabled = FALSE;
 }
 
-void sub_812B484(void)
+void HelpSystem_Enable(void)
 {
     if (gUnknown_203ADFA != 2 && gUnknown_203ADFA != 3)
     {
-        gUnknown_3005ECC = 1;
+        gHelpSystemEnabled = TRUE;
         sub_812B4B8();
     }
 }

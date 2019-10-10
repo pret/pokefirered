@@ -37,7 +37,7 @@ CeruleanCave_B1F_EventScript_1624F5:: @ 81624F5
 	waitmessage
 	waitmoncry
 	delay 20
-	playbgm BGM_FRLG_LEADER_EYE, 0
+	playbgm MUS_EXEYE, 0
 	waitbuttonpress
 	setwildbattle SPECIES_MEWTWO, 70, ITEM_NONE
 	setflag FLAG_0x807

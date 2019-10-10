@@ -5,7 +5,7 @@ SevenIsland_SevaultCanyon_House_EventScript_172183:: @ 8172183
 	lock
 	checkflag FLAG_0x002
 	goto_if_eq EventScript_172211
-	playbgm BGM_FRLG_CHANSEY_DANCE, 0
+	playbgm MUS_P_SCHOOL, 0
 	applymovement 1, Movement_172231
 	waitmovement 0
 	fadedefaultbgm
@@ -23,7 +23,7 @@ SevenIsland_SevaultCanyon_House_EventScript_172183:: @ 8172183
 	compare_var_to_value VAR_FACING, 1
 	call_if 5, EventScript_172206
 	delay 30
-	playbgm BGM_FRLG_CHANSEY_DANCE, 0
+	playbgm MUS_P_SCHOOL, 0
 	applymovement 255, Movement_172231
 	waitmovement 0
 	fadedefaultbgm

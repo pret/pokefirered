@@ -23,7 +23,7 @@ EventScript_171D97:: @ 8171D97
 	textcolor 0
 	applymovement 2, Movement_1A75ED
 	waitmovement 0
-	playbgm BGM_FRLG_RIVAL, 0
+	playbgm MUS_RIVAL1, 0
 	applymovement 2, Movement_1A75DB
 	waitmovement 0
 	applymovement 2, Movement_1A75DD

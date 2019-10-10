@@ -2,7 +2,7 @@
   "id": "MAP_SSANNE_B1F_ROOM5",
   "name": "SSAnne_B1F_Room5",
   "layout": "LAYOUT_SSANNE_ROOM2",
-  "music": "BGM_FRLG_SS_ANNE",
+  "music": "MUS_SANTOAN",
   "region_map_section": "MAPSEC_S_S_ANNE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

@@ -2,7 +2,7 @@
   "id": "MAP_POKEMON_LEAGUE_BRUNOS_ROOM",
   "name": "PokemonLeague_BrunosRoom",
   "layout": "LAYOUT_POKEMON_LEAGUE_BRUNOS_ROOM",
-  "music": "BGM_FRLG_ROCKET_HIDEOUT",
+  "music": "MUS_AJITO",
   "region_map_section": "MAPSEC_POKEMON_LEAGUE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

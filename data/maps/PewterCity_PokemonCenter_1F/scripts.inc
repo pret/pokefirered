@@ -22,11 +22,11 @@ PewterCity_PokemonCenter_1F_EventScript_16A781:: @ 816A781
 	lock
 	faceplayer
 	fadeoutbgm 0
-	playbgm BGM_FRLG_JIGGLYPUFF, 0
+	playbgm MUS_PURIN, 0
 	message Text_1916EA
 	waitmessage
 	delay 455
-	playbgm BGM_FRLG_POKEMON_CENTER, 1
+	playbgm MUS_POKECEN, 1
 	release
 	end
 

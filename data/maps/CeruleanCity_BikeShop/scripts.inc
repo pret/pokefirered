@@ -33,7 +33,7 @@ EventScript_16AC15:: @ 816AC15
 
 EventScript_16AC22:: @ 816AC22
 	msgbox gUnknown_81927B2
-	giveitemfanfaremsg gUnknown_81927E1, ITEM_BICYCLE, 1, BGM_FRLG_ME_KEYITEM
+	giveitemfanfaremsg gUnknown_81927E1, ITEM_BICYCLE, 1, MUS_FAN5
 	setflag FLAG_0x271
 	additem ITEM_BICYCLE, 1
 	removeitem ITEM_BIKE_VOUCHER, 1

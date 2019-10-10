@@ -2,7 +2,7 @@
   "id": "MAP_SAFFRON_CITY_DOJO",
   "name": "SaffronCity_Dojo",
   "layout": "LAYOUT_SAFFRON_CITY_DOJO",
-  "music": "BGM_FRLG_VIRIDIAN_CITY",
+  "music": "MUS_NIBI",
   "region_map_section": "MAPSEC_SAFFRON_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

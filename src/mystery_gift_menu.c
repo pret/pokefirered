@@ -24,6 +24,7 @@
 #include "mevent_server.h"
 #include "menews_jisan.h"
 #include "help_system.h"
+#include "strings.h"
 #include "constants/songs.h"
 
 EWRAM_DATA u8 sDownArrowCounterAndYCoordIdx[8] = {};
@@ -32,69 +33,6 @@ EWRAM_DATA bool8 gGiftIsFromEReader = FALSE;
 void task_add_00_mystery_gift(void);
 void task00_mystery_gift(u8 taskId);
 void task_add_00_ereader(void);
-
-extern const u8 gText_PickOKExit[];
-extern const u8 gText_PickOKCancel[];
-extern const u8 gText_MysteryGift[];
-extern const u8 gJPText_MysteryGift[];
-extern const u8 gJPText_DecideStop[];
-extern const u8 gText_WhatToDoWithCards[];
-extern const u8 gText_WhatToDoWithNews[];
-extern const u8 gText_OkayToDiscardNews[];
-extern const u8 gText_IfThrowAwayCardEventWontHappen[];
-extern const u8 gText_WonderCardThrownAway[];
-extern const u8 gText_WonderNewsThrownAway[];
-extern const u8 gText_DataWillBeSaved[];
-extern const u8 gText_SaveCompletedPressA[];
-extern const u8 gText_WonderCards[];
-extern const u8 gText_WonderNews[];
-extern const u8 gText_Exit3[];
-extern const u8 gText_WirelessCommunication[];
-extern const u8 gText_Friend2[];
-extern const u8 gFameCheckerText_Cancel[];
-extern const u8 gText_Receive[];
-extern const u8 gText_Send[];
-extern const u8 gText_Toss[];
-extern const u8 gText_VarietyOfEventsImportedWireless[];
-extern const u8 gText_WonderCardsInPossession[];
-extern const u8 gText_ReadNewsThatArrived[];
-extern const u8 gText_ReturnToTitle[];
-extern const u8 gText_NothingSentOver[];
-extern const u8 gText_RecordUploadedViaWireless[];
-extern const u8 gText_WonderCardReceived[];
-extern const u8 gText_WonderCardReceivedFrom[];
-extern const u8 gText_WonderNewsReceived[];
-extern const u8 gText_WonderNewsReceivedFrom[];
-extern const u8 gText_NewStampReceived[];
-extern const u8 gText_AlreadyHadCard[];
-extern const u8 gText_AlreadyHadStamp[];
-extern const u8 gText_AlreadyHadNews[];
-extern const u8 gText_NoMoreRoomForStamps[];
-extern const u8 gText_CommunicationCanceled[];
-extern const u8 gText_CantAcceptCardFromTrainer[];
-extern const u8 gText_CantAcceptNewsFromTrainer[];
-extern const u8 gText_CommunicationError[];
-extern const u8 gText_NewTrainerReceived[];
-extern const u8 gText_WonderCardSentTo[];
-extern const u8 gText_WonderNewsSentTo[];
-extern const u8 gText_StampSentTo[];
-extern const u8 gText_OtherTrainerHasCard[];
-extern const u8 gText_OtherTrainerHasStamp[];
-extern const u8 gText_OtherTrainerHasNews[];
-extern const u8 gText_OtherTrainerCanceled[];
-extern const u8 gText_GiftSentTo[];
-extern const u8 gText_CantSendGiftToTrainer[];
-extern const u8 gText_DontHaveCardNewOneInput[];
-extern const u8 gText_DontHaveNewsNewOneInput[];
-extern const u8 gText_WhereShouldCardBeAccessed[];
-extern const u8 gText_WhereShouldNewsBeAccessed[];
-extern const u8 gText_Communicating[];
-extern const u8 gText_ThrowAwayWonderCard[];
-extern const u8 gText_HaventReceivedCardsGift[];
-extern const u8 gText_CommunicationCompleted[];
-extern const u8 gText_HaventReceivedGiftOkayToDiscard[];
-extern const u8 gText_SendingWonderCard[];
-extern const u8 gText_SendingWonderNews[];
 
 const u16 gUnkTextboxBorderPal[] = INCBIN_U16("graphics/interface/unk_textbox_border.gbapal");
 const u32 gUnkTextboxBorderGfx[] = INCBIN_U32("graphics/interface/unk_textbox_border.4bpp.lz");
@@ -490,7 +428,7 @@ bool32 HandleMysteryGiftOrEReaderSetup(s32 mg_or_ereader)
     case 3:
         ShowBg(0);
         ShowBg(3);
-        PlayBGM(BGM_FRLG_MYSTERY_GIFT);
+        PlayBGM(MUS_OKURIMONO);
         SetVBlankCallback(vblankcb_mystery_gift_e_reader_run);
         EnableInterrupts(INTR_FLAG_VBLANK | INTR_FLAG_VCOUNT | INTR_FLAG_TIMER3 | INTR_FLAG_SERIAL);
         return TRUE;
@@ -538,7 +476,7 @@ void PrintMysteryGiftOrEReaderTopMenu(bool8 mg_or_ereader, bool32 usePickOkCance
     if (!mg_or_ereader)
     {
         src = usePickOkCancel == TRUE ? gText_PickOKExit : gText_PickOKCancel;
-        AddTextPrinterParameterized4(0, 2, 2, 2, 0, 0, sMG_Ereader_TextColor_1, 0, gText_MysteryGift);
+        AddTextPrinterParameterized4(0, 2, 2, 2, 0, 0, sMG_Ereader_TextColor_1, 0, gText_MysteryGift2);
         width = 222 - GetStringWidth(0, src, 0);
         AddTextPrinterParameterized4(0, 0, width, 2, 0, 0, sMG_Ereader_TextColor_1, 0, src);
     }
@@ -1742,7 +1680,7 @@ void task00_mystery_gift(u8 taskId)
         break;
     case 37:
         CloseLink();
-        sub_812B484();
+        HelpSystem_Enable();
         Free(data->buffer);
         DestroyTask(taskId);
         SetMainCallback2(MainCB_FreeAllBuffersAndReturnToInitTitleScreen);

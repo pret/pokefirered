@@ -52,7 +52,7 @@ Text_17EE0E:: @ 817EE0E
     .string "…Huh?\n"
     .string "Me?\p"
     .string "I'm an innocent bystander!\n"
-    .string "Don't you believe me?{PLAY_BGM}{BGM_FRLG_SUSPICIOUS_EYE}$"
+    .string "Don't you believe me?{PLAY_BGM}{MUS_ROCKET}$"
 
 Text_17EE70:: @ 817EE70
     .string "GRUNT: Stop! I give up!\n"

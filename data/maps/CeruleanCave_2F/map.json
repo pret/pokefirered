@@ -2,7 +2,7 @@
   "id": "MAP_CERULEAN_CAVE_2F",
   "name": "CeruleanCave_2F",
   "layout": "LAYOUT_CERULEAN_CAVE_2F",
-  "music": "BGM_FRLG_ROCKET_HIDEOUT",
+  "music": "MUS_AJITO",
   "region_map_section": "MAPSEC_CERULEAN_CAVE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

@@ -5,7 +5,7 @@ Text_1921EF:: @ 81921EF
     .string "What is your approach when you\n"
     .string "catch and train POKéMON?\p"
     .string "My policy is an all-out offensive\n"
-    .string "with WATER-type POKéMON!{PLAY_BGM}{BGM_FRLG_LEADER_EYE}$"
+    .string "with WATER-type POKéMON!{PLAY_BGM}{MUS_EXEYE}$"
 
 gUnknown_81922BF:: @ 81922BF
     .string "TM03 teaches WATER PULSE.\p"

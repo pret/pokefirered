@@ -2,7 +2,7 @@
   "id": "MAP_SEVEN_ISLAND_SEVAULT_CANYON_ENTRANCE",
   "name": "SevenIsland_SevaultCanyon_Entrance",
   "layout": "LAYOUT_SEVEN_ISLAND_SEVAULT_CANYON_ENTRANCE",
-  "music": "BGM_FRLG_SEVII_ISLANDS",
+  "music": "MUS_NANASHIMA",
   "region_map_section": "MAPSEC_CANYON_ENTRANCE",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

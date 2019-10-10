@@ -2,7 +2,7 @@
   "id": "MAP_CELADON_CITY_DEPARTMENT_STORE_4F",
   "name": "CeladonCity_DepartmentStore_4F",
   "layout": "LAYOUT_CELADON_CITY_DEPARTMENT_STORE_4F",
-  "music": "BGM_FRLG_POKEMON_CENTER",
+  "music": "MUS_POKECEN",
   "region_map_section": "MAPSEC_CELADON_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

@@ -17,7 +17,7 @@ SSAnne_CaptainsOffice_EventScript_160B3A:: @ 8160B3A
 	waitmovement 0
 	msgbox gUnknown_81736A6
 	additem ITEM_HM01, 1
-	giveitemfanfaremsg gUnknown_81737AF, ITEM_HM01, 1, BGM_FRLG_ME_KEYITEM
+	giveitemfanfaremsg gUnknown_81737AF, ITEM_HM01, 1, MUS_FAN5
 	msgbox gUnknown_81737D2
 	setflag FLAG_0x237
 	setvar VAR_MAP_SCENE_VERMILION_CITY, 1

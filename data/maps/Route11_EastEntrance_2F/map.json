@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE11_EAST_ENTRANCE_2F",
   "name": "Route11_EastEntrance_2F",
   "layout": "LAYOUT_ENTRANCE_2F",
-  "music": "BGM_FRLG_VERMILION_CITY",
+  "music": "MUS_KUCHIBA",
   "region_map_section": "MAPSEC_ROUTE_11",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

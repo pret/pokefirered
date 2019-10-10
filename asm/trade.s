@@ -11140,7 +11140,7 @@ _0805230A:
 	ldr r0, _08052328 @ =CB2_ReturnToField
 	bl SetMainCallback2
 	bl sub_8053AE4
-	bl sub_812B484
+	bl HelpSystem_Enable
 _08052318:
 	movs r0, 0
 _0805231A:
@@ -13365,7 +13365,7 @@ _08053766:
 	ldr r0, _08053784 @ =CB2_ReturnToField
 	bl SetMainCallback2
 	bl sub_8053AE4
-	bl sub_812B484
+	bl HelpSystem_Enable
 _08053774:
 	movs r0, 0
 _08053776:
@@ -14854,7 +14854,7 @@ sub_8054440: @ 8054440
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	bl sub_812B478
+	bl HelpSystem_Disable
 	add sp, 0x4
 	pop {r0}
 	bx r0

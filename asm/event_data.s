@@ -248,8 +248,8 @@ sub_806E2AC: @ 806E2AC
 _0806E2B8: .4byte 0x00000839
 	thumb_func_end sub_806E2AC
 
-	thumb_func_start sub_806E2BC
-sub_806E2BC: @ 806E2BC
+	thumb_func_start Flag_0x839_IsSet
+Flag_0x839_IsSet: @ 806E2BC
 	push {lr}
 	ldr r0, _0806E2CC @ =0x00000839
 	bl FlagGet
@@ -259,7 +259,7 @@ sub_806E2BC: @ 806E2BC
 	bx r1
 	.align 2, 0
 _0806E2CC: .4byte 0x00000839
-	thumb_func_end sub_806E2BC
+	thumb_func_end Flag_0x839_IsSet
 
 	thumb_func_start sub_806E2D0
 sub_806E2D0: @ 806E2D0

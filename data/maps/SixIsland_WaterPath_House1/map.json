@@ -2,7 +2,7 @@
   "id": "MAP_SIX_ISLAND_WATER_PATH_HOUSE1",
   "name": "SixIsland_WaterPath_House1",
   "layout": "LAYOUT_HOUSE4",
-  "music": "BGM_FRLG_CERULEAN_CITY",
+  "music": "MUS_HANADA",
   "region_map_section": "MAPSEC_WATER_PATH",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

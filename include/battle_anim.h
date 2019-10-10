@@ -67,6 +67,7 @@ extern struct OamData gOamData_83ACB58;
 extern struct OamData gOamData_83ACAF8;
 extern struct OamData gOamData_83ACB60;
 extern struct OamData gOamData_83ACA30;
+extern struct OamData gOamData_83ACA98;
 
 void ClearBattleAnimationVars(void);
 void DoMoveAnim(u16 move);
@@ -282,6 +283,9 @@ void sub_80B90EC(u8 taskId);
 void sub_80B94B4(u8 taskId);
 void AnimTask_IsPowerOver99(u8 taskId);
 void sub_80B9800(u8 taskId);
+
+// dragon.c
+void sub_80B75E0(u8 taskId);
 
 // flying.s
 void sub_80B1D3C(struct Sprite *sprite);

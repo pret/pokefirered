@@ -166,7 +166,7 @@ SECTIONS {
         asm/bug.o(.text);
         asm/rock.o(.text);
         asm/ghost.o(.text);
-        asm/dragon.o(.text);
+        src/dragon.o(.text);
         src/dark.o(.text);
         src/ground.o(.text);
         src/normal.o(.text);
@@ -422,6 +422,7 @@ SECTIONS {
         src/battle_anim_mon_movement.o(.rodata);
         src/item.o(.rodata);
         data/data_835B488.o(.rodata.83DF09C);
+        src/dragon.o(.rodata);
         src/dark.o(.rodata);
         src/ground.o(.rodata);
         src/normal.o(.rodata);

@@ -878,9 +878,7 @@ gUnknown_203998C: @ 203998C
 gUnknown_203999C: @ 203999C
 	.space 0x8
 
-gUnknown_20399A4: @ 20399A4
-	.space 0x10
-
+	.include "src/dragon.o"
 	.include "src/battle_anim_utility_funcs.o"
 	.include "src/battle_intro.o"
 

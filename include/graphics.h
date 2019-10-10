@@ -981,6 +981,11 @@ extern const u32 gMetalShineGfx[];
 extern const u32 gMetalShinePalette[];
 extern const u32 gMetalShineTilemap[];
 
+// ghost
+extern const u32 gFile_graphics_battle_anims_backgrounds_scary_face_sheet[];
+extern const u32 gFile_graphics_battle_anims_backgrounds_scary_face_palette[];
+extern const u32 gFile_graphics_battle_anims_backgrounds_scary_face_player_tilemap[];
+
 // title_screen
 extern const u16 gGraphics_TitleScreen_PokemonFireRedLogoPals[];
 extern const u8 gGraphics_TitleScreen_PokemonFireRedLogoTiles[];
@@ -994,6 +999,7 @@ extern const u8 gGraphics_TitleScreen_CopyrightPressStartMap[];
 extern const u16 gGraphics_TitleScreen_FirePals[];
 extern const u8 gGraphics_TitleScreen_BlankObjTiles[];
 
+// battle_gfx_sfx_util
 extern const u32 gHealthboxSinglesPlayerGfx[];
 extern const u32 gHealthboxSinglesOpponentGfx[];
 extern const u32 gHealthboxDoublesPlayerGfx[];
@@ -1003,7 +1009,6 @@ extern const u32 gBlankGfxCompressed[];
 extern const u16 gBattleInterface_BallStatusBarPal[];
 extern const u16 gBattleInterface_BallDisplayPal[];
 extern const u32 gFile_graphics_interface_hp_numbers[];
-
 extern const u32 gGhostFrontPic[];
 extern const u32 gGhostPalette[];
 extern const u32 gSubstituteDollGfx[];

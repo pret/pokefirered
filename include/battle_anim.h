@@ -50,7 +50,6 @@ extern s16 gBattleAnimArgs[ANIM_ARGS_COUNT];
 extern u8 gAnimMoveTurn;
 extern u8 gBattleAnimAttacker;
 extern u8 gBattleAnimTarget;
-extern u8 gUnknown_02038440;
 extern u8 gBattlerSpriteIds[MAX_BATTLERS_COUNT];
 extern u16 gAnimMovePower;
 extern s32 gAnimMoveDmg;
@@ -68,6 +67,13 @@ extern struct OamData gOamData_83ACAF8;
 extern struct OamData gOamData_83ACB60;
 extern struct OamData gOamData_83ACA30;
 extern struct OamData gOamData_83ACA98;
+extern struct OamData gOamData_83ACA90;
+extern struct OamData gOamData_83ACAF0;
+extern struct OamData gOamData_83ACB10;
+extern struct OamData gOamData_83ACB18;
+extern struct OamData gOamData_83ACB38;
+extern struct OamData gOamData_83ACA18;
+extern struct OamData gOamData_83ACB20;
 
 void ClearBattleAnimationVars(void);
 void DoMoveAnim(u16 move);
@@ -84,7 +90,7 @@ s16 sub_80A52EC(s16 a);
 s16 CalculatePanIncrement(s16 sourcePan, s16 targetPan, s16 incrementPan);
 bool8 IsBattlerSpriteVisible(u8 battlerId);
 s16 KeepPanInRange(s16 a, s32 oldPan);
-void sub_80730C0(u16, const u16 *, u16 *, u8);
+void sub_80730C0(u16, const u16 *, s32, u8);
 
 // battle_intro.c
 void SetAnimBgAttribute(u8 bgId, u8 attributeId, u8 value);
@@ -286,6 +292,16 @@ void sub_80B9800(u8 taskId);
 
 // dragon.c
 void sub_80B75E0(u8 taskId);
+
+// ghost.c
+void sub_80B54E8(u8 taskId);
+void sub_80B58AC(u8 taskId);
+void sub_80B5AAC(u8 taskId);
+void sub_80B6020(u8 taskId);
+void sub_80B63B4(u8 taskId);
+void sub_80B68C8(u8 taskId);
+void sub_80B6BBC(u8 taskId);
+
 
 // flying.s
 void sub_80B1D3C(struct Sprite *sprite);

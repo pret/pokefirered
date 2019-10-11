@@ -160,3 +160,15 @@ gIngameTrades:: @ 826CF8C
 	.byte 10 @ sheen
 	.2byte SPECIES_PONYTA @ species requested
 	.align 2
+
+gUnknown_826D1A8:: @ 826D1A8
+	.2byte EC_WORD_THAT_S
+	.2byte EC_WORD_A
+	.2byte EC_WORD_HEALTHY
+	.2byte EC_POKEMON2(JYNX)
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_BE
+	.2byte EC_WORD_KIND
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_IT
+	.2byte 0

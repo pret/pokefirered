@@ -4,6 +4,7 @@
 #include "constants/region_map.h"
 #include "constants/species.h"
 #include "constants/items.h"
+#include "constants/easy_chat.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 
@@ -465,9 +466,6 @@ gUnknown_826CF88:: @ 826CF88
 	.incbin "baserom.gba", 0x26CF88, 0x4
 
 	.include "data/ingame_trades.inc"
-
-gUnknown_826D1A8:: @ 826D1A8
-	.incbin "baserom.gba", 0x26D1A8, 0x14
 
 gUnknown_826D1BC:: @ 826D1BC
 	.incbin "baserom.gba", 0x26D1BC, 0x10

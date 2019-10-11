@@ -2,7 +2,10 @@
 #include "constants/trainer_classes.h"
 #include "constants/songs.h"
 #include "constants/region_map.h"
-	.set NULL, 0
+#include "constants/species.h"
+#include "constants/items.h"
+	.include "asm/macros.inc"
+	.include "constants/constants.inc"
 
 	.section .rodata
 
@@ -461,8 +464,7 @@ gUnknown_826CF60:: @ 826CF60
 gUnknown_826CF88:: @ 826CF88
 	.incbin "baserom.gba", 0x26CF88, 0x4
 
-gUnknown_826CF8C:: @ 826CF8C
-	.incbin "baserom.gba", 0x26CF8C, 0x21C
+	.include "data/ingame_trades.inc"
 
 gUnknown_826D1A8:: @ 826D1A8
 	.incbin "baserom.gba", 0x26D1A8, 0x14

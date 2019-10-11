@@ -8917,7 +8917,7 @@ _08050EB4:
 	lsls r4, r0, 4
 	subs r4, r0
 	lsls r4, 2
-	ldr r0, _08050EFC @ =gUnknown_826CF8C
+	ldr r0, _08050EFC @ =gIngameTrades
 	adds r4, r0
 	ldr r0, _08050F00 @ =gStringVar1
 	adds r1, r4, 0
@@ -8945,7 +8945,7 @@ _08050EF0:
 	bx r0
 	.align 2, 0
 _08050EF8: .4byte gSpecialVar_0x8004
-_08050EFC: .4byte gUnknown_826CF8C
+_08050EFC: .4byte gIngameTrades
 _08050F00: .4byte gStringVar1
 _08050F04: .4byte gStringVar3
 _08050F08: .4byte gSpecialVar_0x8005
@@ -13787,7 +13787,7 @@ sub_8053A9C: @ 8053A9C
 	lsls r4, r0, 4
 	subs r4, r0
 	lsls r4, 2
-	ldr r0, _08053AD4 @ =gUnknown_826CF8C
+	ldr r0, _08053AD4 @ =gIngameTrades
 	adds r4, r0
 	ldr r0, _08053AD8 @ =gStringVar1
 	ldrh r1, [r4, 0x38]
@@ -13807,7 +13807,7 @@ sub_8053A9C: @ 8053A9C
 	bx r1
 	.align 2, 0
 _08053AD0: .4byte gSpecialVar_0x8004
-_08053AD4: .4byte gUnknown_826CF8C
+_08053AD4: .4byte gIngameTrades
 _08053AD8: .4byte gStringVar1
 _08053ADC: .4byte gSpeciesNames
 _08053AE0: .4byte gStringVar2
@@ -13822,7 +13822,7 @@ sub_8053AE4: @ 8053AE4
 	lsls r4, r0, 4
 	subs r4, r0
 	lsls r4, 2
-	ldr r0, _08053B30 @ =gUnknown_826CF8C
+	ldr r0, _08053B30 @ =gIngameTrades
 	adds r4, r0
 	ldr r0, _08053B34 @ =gSpecialVar_0x8005
 	ldrh r1, [r0]
@@ -13849,7 +13849,7 @@ sub_8053AE4: @ 8053AE4
 	bx r0
 	.align 2, 0
 _08053B2C: .4byte gSpecialVar_0x8004
-_08053B30: .4byte gUnknown_826CF8C
+_08053B30: .4byte gIngameTrades
 _08053B34: .4byte gSpecialVar_0x8005
 _08053B38: .4byte gPlayerParty
 _08053B3C: .4byte gStringVar1
@@ -13868,7 +13868,7 @@ sub_8053B48: @ 8053B48
 	lsls r2, r1, 4
 	subs r2, r1
 	lsls r2, 2
-	ldr r1, _08053CA4 @ =gUnknown_826CF8C
+	ldr r1, _08053CA4 @ =gIngameTrades
 	adds r5, r2, r1
 	movs r1, 0x64
 	muls r0, r1
@@ -14010,7 +14010,7 @@ sub_8053B48: @ 8053B48
 	bl SetMonData
 	b _08053CC0
 	.align 2, 0
-_08053CA4: .4byte gUnknown_826CF8C
+_08053CA4: .4byte gIngameTrades
 _08053CA8: .4byte gPlayerParty
 _08053CAC: .4byte gEnemyParty
 _08053CB0: .4byte gUnknown_2031CCC

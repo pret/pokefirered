@@ -78,6 +78,8 @@ extern struct OamData gOamData_83ACB50;
 extern struct OamData gOamData_83ACAB8;
 extern struct OamData gOamData_83ACA00;
 extern struct OamData gOamData_83ACBC0;
+extern struct OamData gOamData_83ACB00;
+extern struct OamData gOamData_83AC9E0;
 
 void ClearBattleAnimationVars(void);
 void DoMoveAnim(u16 move);
@@ -316,8 +318,13 @@ void AnimTask_GetSeismicTossDamageLevel(u8 taskId);
 void sub_80B5188(u8 taskId);
 void sub_80B51EC(u8 taskId);
 
-// flying.s
-void sub_80B1D3C(struct Sprite *sprite);
+// psychic.c
+void sub_80B3418(u8 taskId);
+void sub_80B3480(u8 taskId);
+void sub_80B3584(u8 taskId);
+void sub_80B3834(u8 taskId);
+void sub_80B3A58(u8 taskId);
+void sub_80B3C78(u8 taskId);
 
 // dark.c
 void sub_80B78E0(u8 taskId);
@@ -330,6 +337,9 @@ void sub_80B8664(u8 taskId);
 void AnimTask_MetallicShine(u8 taskId);
 void AnimTask_SetGreyscaleOrOriginalPal(u8 taskId);
 void sub_80B8B38(u8 taskId);
+
+// flying.s
+void sub_80B1D3C(struct Sprite *sprite);
 
 // battle_anim_utility_funcs.c
 void sub_80BA7F8(u8 taskId);

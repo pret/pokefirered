@@ -116,6 +116,7 @@ union AffineAnimCmd
     struct AffineAnimFrameCmd frame;
     struct AffineAnimLoopCmd loop;
     struct AffineAnimJumpCmd jump;
+    struct AffineAnimEndCmdAlt end;
 };
 
 #define AFFINEANIMCMDTYPE_LOOP 0x7FFD

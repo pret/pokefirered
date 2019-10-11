@@ -162,7 +162,7 @@ SECTIONS {
         asm/fighting.o(.text);
         asm/poison.o(.text);
         asm/flying.o(.text);
-        asm/psychic.o(.text);
+        src/psychic.o(.text);
         src/bug.o(.text);
         src/rock.o(.text);
         src/ghost.o(.text);
@@ -423,6 +423,7 @@ SECTIONS {
         src/battle_anim_mon_movement.o(.rodata);
         src/item.o(.rodata);
         data/data_835B488.o(.rodata.83DF09C);
+        src/psychic.o(.rodata);
         src/bug.o(.rodata);
         src/rock.o(.rodata);
         src/ghost.o(.rodata);

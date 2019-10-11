@@ -17,7 +17,6 @@ static void sub_80B42E8(struct Sprite *sprite);
 static void sub_80B4344(struct Sprite *sprite);
 static void AnimMissileArcStep(struct Sprite *sprite);
 
-
 static const union AffineAnimCmd gUnknown_83E71E8[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 30, 0),

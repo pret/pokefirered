@@ -8,9 +8,6 @@
 #include "trig.h"
 #include "constants/songs.h"
 
-extern const union AnimCmd *const gUnknown_83E5958[];
-extern const union AnimCmd *const gUnknown_83E5D48[];
-
 static void sub_80B4634(struct Sprite *sprite);
 static void sub_80B46F8(struct Sprite *sprite);
 static void AnimDirtParticleAcrossScreen(struct Sprite *sprite);

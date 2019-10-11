@@ -341,6 +341,12 @@ void sub_80B8B38(u8 taskId);
 // flying.s
 void sub_80B1D3C(struct Sprite *sprite);
 
+// water.s
+extern const union AnimCmd *const gUnknown_83E5958[];
+
+// fire.s
+extern const union AnimCmd *const gUnknown_83E5D48[];
+
 // battle_anim_utility_funcs.c
 void sub_80BA7F8(u8 taskId);
 void sub_80BA83C(u8 taskId);

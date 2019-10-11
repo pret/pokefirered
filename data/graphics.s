@@ -13554,7 +13554,7 @@ gFile_graphics_battle_anims_backgrounds_sandstorm_brew_sheet:: @ 8E794D0
 	.incbin "graphics/battle_anims/backgrounds/sandstorm_brew.4bpp.lz"
 
 	.align 2
-gFile_graphics_battle_anims_sprites_261_palette:: @ 8E799FC
+gBattleAnimSpritePal_FlyingDirt:: @ 8E799FC
 	.incbin "graphics/battle_anims/sprites/261.gbapal.lz"
 
 	.align 2

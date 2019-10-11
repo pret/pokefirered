@@ -74,6 +74,7 @@ extern struct OamData gOamData_83ACB18;
 extern struct OamData gOamData_83ACB38;
 extern struct OamData gOamData_83ACA18;
 extern struct OamData gOamData_83ACB20;
+extern struct OamData gOamData_83ACB50;
 
 void ClearBattleAnimationVars(void);
 void DoMoveAnim(u16 move);
@@ -101,6 +102,9 @@ void sub_80BCEF4(s32 bgId, u8 arg1, u8 arg2, u8 battlerPosition, u8 arg4, u8 *ar
 
 // battle_anim_special.s
 void sub_80F1720(u8 battler, struct Pokemon *mon);
+
+// battle_anim_effects_1.s
+void AnimMoveTwisterParticle(struct Sprite *sprite);
 
 enum
 {
@@ -302,6 +306,12 @@ void sub_80B63B4(u8 taskId);
 void sub_80B68C8(u8 taskId);
 void sub_80B6BBC(u8 taskId);
 
+// rock.c
+void AnimTask_LoadSandstormBackground(u8 taskId);
+void sub_80B4BD0(u8 taskId);
+void AnimTask_GetSeismicTossDamageLevel(u8 taskId);
+void sub_80B5188(u8 taskId);
+void sub_80B51EC(u8 taskId);
 
 // flying.s
 void sub_80B1D3C(struct Sprite *sprite);

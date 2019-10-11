@@ -596,6 +596,7 @@
 
 // BLDALPHA
 #define BLDALPHA_BLEND(target1, target2) (((target2) << 8) | (target1))
+#define BLDALPHA_BLEND2(target1, target2) ((target1) | ((target2) << 8))
 
 // SOUNDCNT_H
 #define SOUND_CGB_MIX_QUARTER 0x0000

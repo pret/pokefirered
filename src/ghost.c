@@ -942,9 +942,9 @@ void sub_80B63B4(u8 taskId)
         startX = 40;
     else
         startX = 200;
-    gBattle_WIN0H = (startX << 8) | startX;
+    gBattle_WIN0H = WIN_RANGE(startX, startX);
     startY = 40;
-    gBattle_WIN0V = (startY << 8) | startY;
+    gBattle_WIN0V = WIN_RANGE(startY, startY);
     leftDistance = startX;
     rightDistance = 240 - startX;
     topDistance = startY;
@@ -988,8 +988,8 @@ static void sub_80B6468(u8 taskId)
         BeginNormalPaletteFade(selectedPalettes, 0, 16, 16, RGB(0, 0, 0));
         gTasks[taskId].func = sub_80B65F0;
     }
-    gBattle_WIN0H = (left << 8) | right;
-    gBattle_WIN0V = (top  << 8) | bottom;
+    gBattle_WIN0H = WIN_RANGE(left, right);
+    gBattle_WIN0V = WIN_RANGE(top, bottom);
 }
 
 static void sub_80B65F0(u8 taskId)
@@ -1079,7 +1079,7 @@ static void sub_80B6728(struct Sprite *sprite)
     {
         sprite->data[1] = 0;
         ++sprite->data[2];
-        SetGpuReg(REG_OFFSET_BLDALPHA, (16 - sprite->data[2]) | (sprite->data[2] << 8));
+        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND2(16 - sprite->data[2], sprite->data[2]));
         if (sprite->data[2] == 16)
         {
             sprite->invisible = TRUE;

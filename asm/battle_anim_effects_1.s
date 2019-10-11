@@ -1316,8 +1316,8 @@ _080A2D08:
 	bx r0
 	thumb_func_end sub_80A2C68
 
-	thumb_func_start sub_80A2D10
-sub_80A2D10: @ 80A2D10
+	thumb_func_start AnimMoveTwisterParticle
+AnimMoveTwisterParticle: @ 80A2D10
 	push {r4,lr}
 	adds r4, r0, 0
 	bl IsContest
@@ -1361,7 +1361,7 @@ _080A2D3C:
 _080A2D64: .4byte gBattleAnimTarget
 _080A2D68: .4byte gBattleAnimArgs
 _080A2D6C: .4byte sub_80A2D70
-	thumb_func_end sub_80A2D10
+	thumb_func_end AnimMoveTwisterParticle
 
 	thumb_func_start sub_80A2D70
 sub_80A2D70: @ 80A2D70

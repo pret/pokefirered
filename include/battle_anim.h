@@ -75,6 +75,9 @@ extern struct OamData gOamData_83ACB38;
 extern struct OamData gOamData_83ACA18;
 extern struct OamData gOamData_83ACB20;
 extern struct OamData gOamData_83ACB50;
+extern struct OamData gOamData_83ACAB8;
+extern struct OamData gOamData_83ACA00;
+extern struct OamData gOamData_83ACBC0;
 
 void ClearBattleAnimationVars(void);
 void DoMoveAnim(u16 move);

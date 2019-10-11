@@ -921,7 +921,7 @@ gUnknown_83E7044:: @ 83E7044
 	.incbin "baserom.gba", 0x3E7044, 0xD0
 
 gUnknown_83E7114:: @ 83E7114
-	.incbin "baserom.gba", 0x3E7114, 0x27C
+	.incbin "baserom.gba", 0x3E7114, 0xD4
 
 	.section .rodata.83E7CFC
 

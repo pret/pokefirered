@@ -113,7 +113,6 @@ u32 sub_8054C04(void);
 extern u8 gDisableMapMusicChangeOnMapLoad;
 extern u8 gUnknown_2036E28;
 
-extern void (*gFieldCallback)(void);
 extern bool8 (* gFieldCallback2)(void);
 
 void SetLastHealLocationWarp(u8 healLocaionId);

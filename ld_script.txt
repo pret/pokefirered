@@ -208,7 +208,7 @@ SECTIONS {
         src/fldeff_softboiled.o(.text);
         asm/battle_tower.o(.text);
         asm/battle_controller_oak.o(.text);
-        asm/player_pc.o(.text);
+        src/player_pc.o(.text);
         src/intro.o(.text);
         asm/battle_anim_special.o(.text);
         asm/hall_of_fame.o(.text);
@@ -434,6 +434,7 @@ SECTIONS {
         data/data_83FECCC.o(.rodata);
         src/battle_controller_safari.o(.rodata);
         data/data_83FECCC.o(.rodata.83FEDE4);
+        src/player_pc.o(.rodata);
         src/intro.o(.rodata);
         data/data_83FECCC.o(.rodata.battle_anim_special);
         src/credits.o(.rodata);

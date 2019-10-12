@@ -11978,7 +11978,7 @@ task_launch_hm_phase_2: @ 81248C8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_807AA70
+	bl field_weather_is_fade_finished
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -17272,15 +17272,15 @@ _081273D0:
 	bx r1
 	thumb_func_end sub_81273AC
 
-	thumb_func_start sub_81273D8
-sub_81273D8: @ 81273D8
+	thumb_func_start PartyMenuInit_FromPlayerPc
+PartyMenuInit_FromPlayerPc: @ 81273D8
 	push {lr}
 	sub sp, 0xC
 	movs r0, 0x6
 	str r0, [sp]
 	ldr r0, _081273FC @ =sub_811FB28
 	str r0, [sp, 0x4]
-	ldr r0, _08127400 @ =sub_80EC500
+	ldr r0, _08127400 @ =CB2_PlayerPC_ReturnFromPartyMenu
 	str r0, [sp, 0x8]
 	movs r0, 0
 	movs r1, 0
@@ -17292,8 +17292,8 @@ sub_81273D8: @ 81273D8
 	bx r0
 	.align 2, 0
 _081273FC: .4byte sub_811FB28
-_08127400: .4byte sub_80EC500
-	thumb_func_end sub_81273D8
+_08127400: .4byte CB2_PlayerPC_ReturnFromPartyMenu
+	thumb_func_end PartyMenuInit_FromPlayerPc
 
 	thumb_func_start sub_8127404
 sub_8127404: @ 8127404
@@ -17311,7 +17311,7 @@ sub_8127404: @ 8127404
 	movs r0, 0
 	strb r0, [r1]
 	ldr r2, _0812745C @ =gSaveBlock1Ptr
-	ldr r0, _08127460 @ =gUnknown_203AAC4
+	ldr r0, _08127460 @ =gPlayerPcMenuManager
 	ldrh r1, [r0]
 	adds r1, 0x6
 	ldrh r0, [r0, 0x2]
@@ -17337,7 +17337,7 @@ _08127450: .4byte gUnknown_203B0A0
 _08127454: .4byte gPlayerParty
 _08127458: .4byte gUnknown_203B0C0
 _0812745C: .4byte gSaveBlock1Ptr
-_08127460: .4byte gUnknown_203AAC4
+_08127460: .4byte gPlayerPcMenuManager
 _08127464: .4byte 0x00002cd0
 _08127468: .4byte gUnknown_8416D17
 _0812746C:
@@ -19373,7 +19373,7 @@ task_hm_without_phase_2: @ 81283FC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_807AA70
+	bl field_weather_is_fade_finished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812841A

@@ -1158,4 +1158,7 @@ extern const u8 EventScript_ItemfinderDigUpUnderfootItem[];
 // new_game
 extern const u8 EventScript_ResetAllMapFlags[];
 
+// player_pc
+extern const u8 EventScript_PalletTown_PlayersHouse_2F_ShutDownPC[];
+
 #endif //GUARD_EVENT_SCRIPTS_H

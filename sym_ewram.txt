@@ -985,18 +985,9 @@ gUnknown_203AAB4: @ 203AAB4
 gUnknown_203AAB8: @ 203AAB8
 	.space 0x4
 
-gUnknown_203AABC: @ 203AABC
-	.space 0x4
-
-gUnknown_203AAC0: @ 203AAC0
-	.space 0x4
-
-gUnknown_203AAC4: @ 203AAC4
-	.space 0x2
-
-gUnknown_203AAC6: @ 203AAC6
-	.space 0xE
-
+    .align 2
+    .include "src/player_pc.o"
+    .align 2
 	.include "src/intro.o"
 
 	.align 2

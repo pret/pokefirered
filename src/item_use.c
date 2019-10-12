@@ -117,7 +117,7 @@ void sub_80A1084(void)
 
 void sub_80A109C(u8 taskId)
 {
-    if (sub_807AA70() == TRUE)
+    if (field_weather_is_fade_finished() == TRUE)
     {
         sItemUseOnFieldCB(taskId);
     }
@@ -172,7 +172,7 @@ bool8 sub_80A1194(void)
 
 void sub_80A11C0(u8 taskId)
 {
-    if (sub_807AA70() == TRUE)
+    if (field_weather_is_fade_finished() == TRUE)
     {
         UnfreezeMapObjects();
         ScriptContext2_Disable();

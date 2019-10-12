@@ -1455,7 +1455,7 @@ _0808C3E0:
 	.align 2, 0
 _0808C444: .4byte gUnknown_83CDA20
 _0808C448:
-	bl sub_807AA70
+	bl field_weather_is_fade_finished
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808C454

@@ -89,5 +89,7 @@ void HelpSystem_FillPanel3(void);
 void PrintListMenuItems(void);
 void PlaceListMenuCursor(void);
 bool8 MoveCursor(u8 by, u8 dirn);
+void sub_812B234(void);
+void sub_812B248(void);
 
 #endif //GUARD_HELP_SYSTEM_H

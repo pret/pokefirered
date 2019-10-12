@@ -426,4 +426,24 @@ extern const u8 gText_HaventReceivedGiftOkayToDiscard[];
 extern const u8 gText_SendingWonderCard[];
 extern const u8 gText_SendingWonderNews[];
 
+// player_pc
+extern const u8 gText_WhatWouldYouLikeToDo[];
+extern const u8 gText_TakeOutItemsFromThePC[];
+extern const u8 gText_StoreItemsInThePC[];
+extern const u8 gText_GoBackToThePreviousMenu[];
+extern const u8 gText_ItemStorage[];
+extern const u8 gText_Mailbox[];
+extern const u8 gText_TurnOff[];
+extern const u8 gText_WithdrawItem2[];
+extern const u8 gText_DepositItem2[];
+extern const u8 gOtherText_Read[];
+extern const u8 gOtherText_MoveToBag[];
+extern const u8 gOtherText_Give2[];
+extern const u8 gText_TheresNoMailHere[];
+extern const u8 gText_ThereAreNoItems[];
+extern const u8 gText_WhatWouldYouLikeToDoWithPlayersMail[];
+extern const u8 gText_MessageWillBeLost[];
+extern const u8 gText_BagIsFull[];
+extern const u8 gText_MailReturnedToBagMessageErased[];
+
 #endif //GUARD_STRINGS_H

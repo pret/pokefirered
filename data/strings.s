@@ -475,11 +475,11 @@ gUnknown_841623D:: @ 841623D
 	.string "YES\n"
 	.string "NO$"
 
-gUnknown_8416244::
+gText_GoBackToThePreviousMenu::
 	.string "Go back to the\n"
 	.string "previous menu.$"
 
-gUnknown_8416262:: @ 8416262
+gText_WhatWouldYouLikeToDo:: @ 8416262
 	.string "What would you like to do?$"
 
 gUnknown_841627D::
@@ -1135,37 +1135,37 @@ gUnknown_84176CE:: @ 0x84176CE
 gUnknown_84176CF:: @ 84176CF
 	.string "Cancel the battle?$"
 
-gUnknown_84176E2:: @ 0x84176E2
+gText_TurnOff:: @ 0x84176E2
 	.string "TURN OFF$"
 
 gUnknown_84176EB:: @ 0x84176EB
 	.string "もようがえ$"
 
-gUnknown_84176F1:: @ 0x84176F1
+gText_ItemStorage:: @ 0x84176F1
 	.string "ITEM STORAGE$"
 
-gUnknown_84176FE:: @ 84176FE
+gText_Mailbox:: @ 84176FE
 	.string "MAILBOX$"
 
-gUnknown_8417706:: @ 0x8417706
+gText_DepositItem2:: @ 0x8417706
 	.string "DEPOSIT ITEM$"
 
-gUnknown_8417713:: @ 0x8417713
+gText_WithdrawItem2:: @ 0x8417713
 	.string "WITHDRAW ITEM$"
 
 gUnknown_8417721:: @ 0x8417721
 	.string "どうぐを すてる$"
 
-gUnknown_841772A:: @ 0x841772A
+gText_StoreItemsInThePC:: @ 0x841772A
 	.string "Store items in the PC.$"
 
-gUnknown_8417741:: @ 0x8417741
+gText_TakeOutItemsFromThePC:: @ 0x8417741
 	.string "Take out items from the PC.$"
 
 gUnknown_841775D:: @ 0x841775D
 	.string "パソコンに あずけている\nどうぐを すてます$"
 
-gUnknown_8417774:: @ 8417774
+gText_ThereAreNoItems:: @ 8417774
 	.string "There are no items.{PAUSE_UNTIL_PRESS}$"
 
 gText_NoMoreRoomInBag:: @ 841778A
@@ -1189,19 +1189,19 @@ gOtherText_MoveToBag::
 gOtherText_Give2::
 	.string "GIVE$"
 
-gUnknown_84177EE:: @ 84177EE
+gText_TheresNoMailHere:: @ 84177EE
 	.string "There's no MAIL here.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8417806:: @ 8417806
+gText_WhatWouldYouLikeToDoWithPlayersMail:: @ 8417806
 	.string "What would you like to do with\n{STR_VAR_1}'s MAIL?$"
 
-gUnknown_8417830:: @ 8417830
+gText_MessageWillBeLost:: @ 8417830
 	.string "The message will be lost.\nIs that okay?$"
 
-gUnknown_8417858:: @ 8417858
+gText_BagIsFull:: @ 8417858
 	.string "The BAG is full.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_841786B:: @ 841786B
+gText_MailReturnedToBagMessageErased:: @ 841786B
 	.string "The MAIL was returned to the BAG\nwith its message erased.{PAUSE_UNTIL_PRESS}$"
 
 gText_WithdrawItem:: @ 84178A7

@@ -26,7 +26,7 @@
 
 #define PC_ITEM_ID  0
 #define PC_QUANTITY 1
-#define NEW_GAME_PC_ITEMS(i, type) ((u16)((u16 *)gNewGamePCItems + type)[i * 2])
+#define NEW_GAME_PC_ITEMS(i, type) (((u16 *)gNewGamePCItems + type)[i * 2])
 
 #define tCount          data[2]
 #define tPageItems      data[4]
@@ -55,7 +55,7 @@ static void Task_PlayerPcWithdrawItem(u8 taskId);
 static void CB2_ReturnFromWithdrawMenu(void);
 static void Task_WithdrawItemBeginFade(u8 taskId);
 static void Task_PlayerPcCancel(u8 taskId);
-static void Tsak_SetPageItemVars(u8 taskId);
+static void Task_SetPageItemVars(u8 taskId);
 static u8 CountPCMail(void);
 static void PCMailCompaction(void);
 static void Task_DrawMailboxPcMenu(u8 taskId);
@@ -237,7 +237,7 @@ static void Task_PlayerPcMailbox(u8 taskId)
         gPlayerPcMenuManager.selectedRow = 0;
         gPlayerPcMenuManager.scrollOffset = 0;
         PCMailCompaction();
-        Tsak_SetPageItemVars(taskId);
+        Task_SetPageItemVars(taskId);
         if (gPlayerPcMenuManager.unk_9 == 0)
             HelpSystem_SetSomeVariable2(34);
         else
@@ -407,7 +407,7 @@ static void Task_PlayerPcCancel(u8 taskId)
     Task_ReturnToTopMenu(taskId);
 }
 
-static void Tsak_SetPageItemVars(u8 taskId)
+static void Task_SetPageItemVars(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     if (tCount >= 8)
@@ -646,7 +646,7 @@ static void Task_TryPutMailInBag_DestroyMsgIfSuccessful(u8 taskId)
             if (gPlayerPcMenuManager.scrollOffset != 0)
                 gPlayerPcMenuManager.scrollOffset--;
         }
-        Tsak_SetPageItemVars(taskId);
+        Task_SetPageItemVars(taskId);
     }
 }
 
@@ -699,7 +699,7 @@ static void CB2_ReturnToMailboxPc_UpdateScrollVariables(void)
                 gPlayerPcMenuManager.scrollOffset--;
         }
     }
-    Tsak_SetPageItemVars(taskId);
+    Task_SetPageItemVars(taskId);
     sub_80F6E9C();
     if (MailboxPC_InitBuffers(gPlayerPcMenuManager.count) == TRUE)
         Task_DrawMailboxPcMenu(taskId);

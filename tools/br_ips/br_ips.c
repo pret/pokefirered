@@ -53,7 +53,7 @@ static int getline(char ** lineptr, size_t * n, FILE * stream) {
 static void getIncbinsFromFile(hunk_t ** hunks, size_t * num, size_t * maxnum, const char * fname, char ** strbuf, size_t * buffersize) {
     // Recursively find incbinned segments and encode them as hunks.
     FILE * file = fopen(fname, "r");
-    if (file == NULL) FATAL_ERROR("unable to open file \"%s\" for reading\n", fname);
+    if (file == NULL) return;
     hunk_t * data = *hunks;
     size_t nhunks = *num;
     size_t maxnhunks = *maxnum;

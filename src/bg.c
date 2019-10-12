@@ -356,7 +356,6 @@ void ResetBgsAndClearDma3BusyFlags(bool32 enableWindowTileAutoAlloc)
     }
 }
 
-#ifdef NONMATCHING
 void InitBgsFromTemplates(u8 bgMode, const struct BgTemplate *templates, u8 numTemplates)
 {
     int i;
@@ -390,121 +389,6 @@ void InitBgsFromTemplates(u8 bgMode, const struct BgTemplate *templates, u8 numT
         }
     }
 }
-#else
-NAKED
-void InitBgsFromTemplates(u8 bgMode, const struct BgTemplate *templates, u8 numTemplates)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x10\n\
-    adds r5, r1, 0\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    lsls r2, 24\n\
-    lsrs r4, r2, 24\n\
-    bl SetBgModeInternal\n\
-    bl ResetBgControlStructs\n\
-    cmp r4, 0\n\
-    beq _08001712\n\
-    movs r7, 0\n\
-    ldr r0, _08001724 @ =sGpuBgConfigs2\n\
-    mov r9, r0\n\
-    adds r6, r5, 0\n\
-    ldr r2, _08001728 @ =gpu_tile_allocation_map_bg\n\
-    mov r10, r2\n\
-    mov r8, r4\n\
-_08001688:\n\
-    ldr r4, [r6]\n\
-    lsls r0, r4, 30\n\
-    lsrs r5, r0, 30\n\
-    cmp r5, 0x3\n\
-    bhi _08001704\n\
-    lsls r1, r4, 28\n\
-    lsrs r1, 30\n\
-    lsls r2, r4, 23\n\
-    lsrs r2, 27\n\
-    lsls r3, r4, 21\n\
-    lsrs r3, 30\n\
-    lsls r0, r4, 20\n\
-    lsrs r0, 31\n\
-    str r0, [sp]\n\
-    lsls r0, r4, 18\n\
-    lsrs r0, 30\n\
-    str r0, [sp, 0x4]\n\
-    str r7, [sp, 0x8]\n\
-    str r7, [sp, 0xC]\n\
-    adds r0, r5, 0\n\
-    bl SetBgControlAttributes\n\
-    lsls r4, r5, 4\n\
-    mov r5, r9\n\
-    adds r3, r4, r5\n\
-    ldr r2, [r6]\n\
-    lsls r2, 8\n\
-    lsrs r2, 22\n\
-    ldrh r0, [r3]\n\
-    ldr r5, _0800172C @ =0xfffffc00\n\
-    adds r1, r5, 0\n\
-    ands r0, r1\n\
-    orrs r0, r2\n\
-    strh r0, [r3]\n\
-    ldrb r0, [r3, 0x1]\n\
-    movs r2, 0x3D\n\
-    negs r2, r2\n\
-    adds r1, r2, 0\n\
-    ands r0, r1\n\
-    strb r0, [r3, 0x1]\n\
-    ldr r0, [r3]\n\
-    ldr r1, _08001730 @ =0x00003fff\n\
-    ands r0, r1\n\
-    str r0, [r3]\n\
-    mov r0, r9\n\
-    adds r0, 0x4\n\
-    adds r0, r4, r0\n\
-    str r7, [r0]\n\
-    mov r0, r9\n\
-    adds r0, 0x8\n\
-    adds r0, r4, r0\n\
-    str r7, [r0]\n\
-    ldr r5, _08001734 @ =sGpuBgConfigs2 + 0xC\n\
-    adds r4, r5\n\
-    str r7, [r4]\n\
-    ldr r0, [r6]\n\
-    lsls r0, 28\n\
-    lsrs r0, 30\n\
-    lsls r0, 6\n\
-    add r0, r10\n\
-    movs r1, 0x1\n\
-    strb r1, [r0]\n\
-_08001704:\n\
-    adds r6, 0x4\n\
-    movs r0, 0x1\n\
-    negs r0, r0\n\
-    add r8, r0\n\
-    mov r2, r8\n\
-    cmp r2, 0\n\
-    bne _08001688\n\
-_08001712:\n\
-    add sp, 0x10\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_08001724: .4byte sGpuBgConfigs2\n\
-_08001728: .4byte gpu_tile_allocation_map_bg\n\
-_0800172C: .4byte 0xfffffc00\n\
-_08001730: .4byte 0x00003fff\n\
-_08001734: .4byte sGpuBgConfigs2 + 0xC\n\
-.syntax divided");
-}
-#endif // NONMATCHING
 
 void InitBgFromTemplate(const struct BgTemplate *template)
 {

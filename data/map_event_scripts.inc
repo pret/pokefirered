@@ -1608,8 +1608,6 @@ EventScript_1A6675:: @ 81A6675
 	copyvar VAR_MON_BOX_ID, VAR_MON_BOX_POS
 	return
 
-
-
 gStdScript_0:: @ 81A667B
 	copyvar VAR_MON_BOX_POS, VAR_MON_BOX_ID
 	textcolor 3
@@ -1857,238 +1855,961 @@ EventScript_HiddenCoinsButNoCoinCase::
 	end
 
 gUnknown_81A6955:: @ 81A6955
-	.incbin "baserom.gba", 0x1A6955, 0x173
+	special sub_8110AB4
+	compare_var_to_value VAR_RESULT, 2
+	goto_if 1, EventScript_1A7AE0
+	lockall
+	checkflag FLAG_0x841
+	goto_if 1, EventScript_1A698E
+	setvar VAR_0x8004, 27
+	special sub_812B220
+	setvar VAR_0x8004, 0
+	special sub_80CA86C
+	playse SE_PC_ON
+	loadword 0, Text_1A5075
+	callstd 4
+	goto EventScript_1A6998
+	end
 
-gUnknown_81A6AC8:: @ 81A6AC8
-	.incbin "baserom.gba", 0x1A6AC8, 0x45
+EventScript_1A698E:: @ 81A698E
+	loadword 0, Text_1A1390
+	callstd 4
+	releaseall
+	end
+
+EventScript_1A6998:: @ 81A6998
+	message gUnknown_81A508A
+	waitmessage
+	special ScrSpecial_CreatePCMenu
+	waitstate
+	goto EventScript_1A69A8
+	end
+
+EventScript_1A69A8:: @ 81A69A8
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1A6A05
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1A69F0
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1A6A7A
+	compare_var_to_value VAR_0x8000, 3
+	goto_if 1, EventScript_1A6A56
+	compare_var_to_value VAR_0x8000, 4
+	goto_if 1, EventScript_1A6A46
+	compare_var_to_value VAR_0x8000, 127
+	goto_if 1, EventScript_1A6A46
+	end
+
+EventScript_1A69F0:: @ 81A69F0
+	playse SE_PC_LOGIN
+	loadword 0, Text_1A50DD
+	callstd 4
+	special sub_80EB6FC
+	waitstate
+	goto EventScript_1A6998
+	end
+
+EventScript_1A6A05:: @ 81A6A05
+	playse SE_PC_LOGIN
+	checkflag FLAG_SYS_NOT_SOMEONES_PC
+	call_if 0, EventScript_1A6A34
+	checkflag FLAG_SYS_NOT_SOMEONES_PC
+	call_if 1, EventScript_1A6A3D
+	loadword 0, Text_1A50BE
+	callstd 4
+	special sub_808C6A8
+	waitstate
+	setvar VAR_0x8004, 27
+	special sub_812B220
+	goto EventScript_1A6998
+	end
+
+EventScript_1A6A34:: @ 81A6A34
+	loadword 0, Text_1A50A7
+	callstd 4
+	return
+
+EventScript_1A6A3D:: @ 81A6A3D
+	loadword 0, Text_1A50EF
+	callstd 4
+	return
+
+EventScript_1A6A46:: @ 81A6A46
+	setvar VAR_0x8004, 0
+	playse SE_PC_OFF
+	special sub_80CA9A8
+	special sub_812B35C
+	releaseall
+	end
+
+EventScript_1A6A56:: @ 81A6A56
+	checkflag FLAG_0x82C
+	goto_if 0, EventScript_1A6A46
+	playse SE_PC_LOGIN
+	setvar VAR_0x8004, 31
+	special sub_812B234
+	special sub_812B220
+	special HallOfFamePCBeginFade
+	waitstate
+	special sub_812B248
+	goto EventScript_1A69A8
+	end
+
+EventScript_1A6A7A:: @ 81A6A7A
+	checkflag FLAG_0x829
+	goto_if 0, EventScript_1A6A46
+	playse SE_PC_LOGIN
+	loadword 0, Text_1A5BC6
+	callstd 4
+	loadword 0, Text_1A5C03
+	callstd 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1A6AB2
+	setflag FLAG_0x2FF
+	call EventScript_1A73E0
+	clearflag FLAG_0x2FF
+	goto EventScript_1A6AB2
+	end
+
+EventScript_1A6AB2:: @ 81A6AB2
+	loadword 0, Text_1A5C2E
+	callstd 4
+	goto EventScript_1A6998
+	end
+
+EventScript_1A6AC0:: @ 81A6AC0
+	fadescreen 1
+	special sub_80FEE44
+	fadescreen 0
+	return
+
+EventScript_1A6AC8:: @ 81A6AC8
+	special sub_8110AB4
+	compare_var_to_value VAR_RESULT, 2
+	goto_if 1, EventScript_1A6AC8_End
+	checkpartymove MOVE_SURF
+	compare_var_to_value VAR_RESULT, 6
+	goto_if 1, EventScript_1A6AC8_End
+	getpartymonname 0, VAR_RESULT
+	setfieldeffectarg 0, VAR_RESULT
+	lockall
+	loadword 0, Text_1A556E
+	callstd 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1A6AC8_Release
+	loadword 0, Text_1A55A5
+	callstd 4
+	dofieldeffect 9
+EventScript_1A6AC8_Release:@ 81A6B0B
+	releaseall
+EventScript_1A6AC8_End: @ 81A6B0C
+	end
 
 gUnknown_81A6B0D:: @ 81A6B0D
-	.incbin "baserom.gba", 0x1A6B0D, 0xB
+	lockall
+	loadword 0, Text_1A55B3
+	callstd 4
+	releaseall
+	end
 
 EventScript_1A6B18:: @ 81A6B18
-	.incbin "baserom.gba", 0x1A6B18, 0xE1
+	copyvar VAR_0x8000, VAR_0x8008
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1A6B76
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1A6B7A
+	compare_var_to_value VAR_0x8000, 3
+	goto_if 1, EventScript_1A6B81
+	compare_var_to_value VAR_0x8000, 4
+	goto_if 1, EventScript_1A6B8B
+	compare_var_to_value VAR_0x8000, 5
+	goto_if 1, EventScript_1A6BA1
+	compare_var_to_value VAR_0x8000, 6
+	goto_if 1, EventScript_1A6BB4
+	compare_var_to_value VAR_0x8000, 7
+	goto_if 1, EventScript_1A6BCA
+	compare_var_to_value VAR_0x8000, 8
+	goto_if 1, EventScript_1A6BE0
+	end
+
+EventScript_1A6B76:: @ 81A6B76
+	settrainerflag 142
+	return
+
+EventScript_1A6B7A:: @ 81A6B7A
+	settrainerflag 150
+	settrainerflag 234
+	return
+
+EventScript_1A6B81:: @ 81A6B81
+	settrainerflag 141
+	settrainerflag 220
+	settrainerflag 423
+	return
+
+EventScript_1A6B8B:: @ 81A6B8B
+	settrainerflag 132
+	settrainerflag 133
+	settrainerflag 160
+	settrainerflag 265
+	settrainerflag 266
+	settrainerflag 267
+	settrainerflag 402
+	return
+
+EventScript_1A6BA1:: @ 81A6BA1
+	settrainerflag 294
+	settrainerflag 295
+	settrainerflag 288
+	settrainerflag 289
+	settrainerflag 292
+	settrainerflag 293
+	return
+
+EventScript_1A6BB4:: @ 81A6BB4
+	settrainerflag 280
+	settrainerflag 281
+	settrainerflag 282
+	settrainerflag 283
+	settrainerflag 462
+	settrainerflag 463
+	settrainerflag 464
+	return
+
+EventScript_1A6BCA:: @ 81A6BCA
+	settrainerflag 177
+	settrainerflag 178
+	settrainerflag 179
+	settrainerflag 180
+	settrainerflag 213
+	settrainerflag 214
+	settrainerflag 215
+	return
+
+EventScript_1A6BE0:: @ 81A6BE0
+	settrainerflag 296
+	settrainerflag 297
+	settrainerflag 322
+	settrainerflag 323
+	settrainerflag 324
+	settrainerflag 392
+	settrainerflag 400
+	settrainerflag 401
+	return
 
 EventScript_1A6BF9:: @ 81A6BF9
-	.incbin "baserom.gba", 0x1A6BF9, 0x2D
+	textcolor 3
+	loadword 0, gUnknown_81A5242
+	callstd 4
+	release
+	end
+
+EventScript_1A6C05:: @ 81A6C05
+	loadword 0, gUnknown_81A5242
+	callstd 4
+	return
+
+EventScript_1A6C0E:: @ 81A6C0E
+	loadword 0, Text_1A5301
+	callstd 4
+	release
+	end
+
+EventScript_1A6C18:: @ 81A6C18
+	loadword 0, Text_1A5301
+	callstd 4
+	return
+
+EventScript_1A6C21:: @ 81A6C21
+	playfanfare MUS_ME_BACHI
+	waitfanfare
+	return
 
 EventScript_1A6C26:: @ 81A6C26
-	.incbin "baserom.gba", 0x1A6C26, 0xC
+	fadescreen 1
+	playfanfare MUS_ME_ASA
+	waitfanfare
+	special sp000_heal_pokemon
+	fadescreen 0
+	return
 
 gUnknown_81A6C32:: @ 81A6C32
-	.incbin "baserom.gba", 0x1A6C32, 0xE5
+	lockall
+	loadword 0, Text_1C0DF1
+	callstd 4
+	special sub_8110AB4
+	compare_var_to_value VAR_RESULT, 2
+	goto_if 1, EventScript_1A7AE0
+	fadescreen 1
+	special sub_80CA7EC
+	waitstate
+	releaseall
+	end
 
+gUnknown_81A6C51:: @ 81A6C51
+	.string "OAK: Good to see you!\n"
+	.string "How is your POKéDEX coming along?\p"
+	.string "Here, let me take a look.$"
+
+Text_1A6CA3:: @ 81A6CA3
+	.string "The amount of progress you've made\n"
+	.string "on your POKéDEX is:\p"
+	.string "{STR_VAR_1} POKéMON seen and\n"
+	.string "{STR_VAR_2} POKéMON owned.\p"
+	.string "{SIZE}ÁPROF. OAK's rating:$"
 gUnknown_81A6D17:: @ 81A6D17
-	.incbin "baserom.gba", 0x1A6D17, 0x56
+	.string "You still have lots to do.\p"
+	.string "Go into every patch of grass you\n"
+	.string "see and look for POKéMON!$"
 
 gUnknown_81A6D6D:: @ 81A6D6D
-	.incbin "baserom.gba", 0x1A6D6D, 0x72
+	.string "It looks as if you're getting on\n"
+	.string "the right track!\p"
+	.string "I've given one of my AIDES a FLASH\n"
+	.string "HM. Make sure you go get it!$"
 
 gUnknown_81A6DDF:: @ 81A6DDF
-	.incbin "baserom.gba", 0x1A6DDF, 0x57
+	.string "Your POKéDEX could use a bit more\n"
+	.string "volume still!\p"
+	.string "Try to catch other species of\n"
+	.string "POKéMON!$"
 
 gUnknown_81A6E36:: @ 81A6E36
-	.incbin "baserom.gba", 0x1A6E36, 0x6E
+	.string "Good, it's apparent that you're\n"
+	.string "trying hard!\p"
+	.string "I've given one of my AIDES an\n"
+	.string "ITEMFINDER. Be sure to collect it!$"
 
 gUnknown_81A6EA4:: @ 81A6EA4
-	.incbin "baserom.gba", 0x1A6EA4, 0x67
+	.string "Your POKéDEX is coming along quite\n"
+	.string "well!\p"
+	.string "I've given one of my AIDES an\n"
+	.string "AMULET COIN. Be sure to get it!$"
 
 gUnknown_81A6F0B:: @ 81A6F0B
-	.incbin "baserom.gba", 0x1A6F0B, 0x66
+	.string "Ah, you've finally topped 50\n"
+	.string "species!\p"
+	.string "I've given one of my AIDES an EXP.\n"
+	.string "SHARE. Be sure to go get it!$"
 
 gUnknown_81A6F71:: @ 81A6F71
-	.incbin "baserom.gba", 0x1A6F71, 0x3A
+	.string "Hoho! This is turning into quite the\n"
+	.string "respectable POKéDEX!$"
 
 gUnknown_81A6FAB:: @ 81A6FAB
-	.incbin "baserom.gba", 0x1A6FAB, 0x46
+	.string "Very good!\p"
+	.string "I think you'll collect even more\n"
+	.string "POKéMON by going fishing!$"
 
 gUnknown_81A6FF1:: @ 81A6FF1
-	.incbin "baserom.gba", 0x1A6FF1, 0x40
+	.string "Wonderful! Let me guess… You\n"
+	.string "like to collect things, don't you?$"
 
 gUnknown_81A7031:: @ 81A7031
-	.incbin "baserom.gba", 0x1A7031, 0x32
+	.string "I'm impressed!\n"
+	.string "It must have been difficult to do!$"
 
 gUnknown_81A7063:: @ 81A7063
-	.incbin "baserom.gba", 0x1A7063, 0x42
+	.string "You've finally hit 100 species!\n"
+	.string "I can't believe how good you are!$"
 
 gUnknown_81A70A5:: @ 81A70A5
-	.incbin "baserom.gba", 0x1A70A5, 0x33
+	.string "You even have the evolved forms\n"
+	.string "of POKéMON! Super!$"
 
 gUnknown_81A70D8:: @ 81A70D8
-	.incbin "baserom.gba", 0x1A70D8, 0x30
+	.string "Excellent! Trade with friends to\n"
+	.string "get some more!$"
 
 gUnknown_81A7108:: @ 81A7108
-	.incbin "baserom.gba", 0x1A7108, 0x2F
+	.string "Outstanding!\n"
+	.string "You've become a real pro at this!$"
 
 gUnknown_81A7137:: @ 81A7137
-	.incbin "baserom.gba", 0x1A7137, 0x3E
+	.string "I have nothing left to say!\n"
+	.string "You're the POKéMON PROFESSOR now!$"
 
 gUnknown_81A7175:: @ 81A7175
-	.incbin "baserom.gba", 0x1A7175, 0x11C
+	.string "Your POKéDEX is entirely complete!\n"
+	.string "Congratulations!!$"
+
+Text_1A71AA:: @ 81A71AA
+	.string "And your NATIONAL POKéDEX is:\p"
+	.string "{STR_VAR_1} POKéMON seen and\n"
+	.string "{STR_VAR_2} POKéMON owned.$"
+
+Text_1A71EE:: @ 81A71EE
+	.string "I'll be looking forward to seeing\n"
+	.string "you fill the NATIONAL POKéDEX!$"
+
+Text_1A722F:: @ 81A722F
+	.string "Finally…\p"
+	.string "You've finally completed the\n"
+	.string "POKéDEX!\p"
+	.string "It's magnificent!\n"
+	.string "Truly, this is a fantastic feat!$"
 
 Text_1A7291:: @ 81A7291
-	.incbin "baserom.gba", 0x1A7291, 0x1C
+	.string "Wroooooooaaaaaarrrr!$"
+
+Text_1A72A6:: @ 81A72A6
+	.string "はあ はあ‥$"
 
 gUnknown_81A72AD:: @ 81A72AD
-	.incbin "baserom.gba", 0x1A72AD, 0xCE
+	.string "Thank you, {PLAYER}!\n"
+	.string "Sincerely, thank you!\l"
+	.string "You've made my dream a reality!$"
+
+Text_1A72F2:: @ 81A72F2
+	.string "OAK: Ah, welcome!\p"
+	.string "Tell me, how is your POKéDEX\n"
+	.string "coming along?\p"
+	.string "Wahaha!\p"
+	.string "Actually, I know how it is, but I\n"
+	.string "love seeing it anyway!\p"
+	.string "Let's see…$"
 
 EventScript_1A737B:: @ 81A737B
-	.incbin "baserom.gba", 0x1A737B, 0x170
+	special sub_8110AB4
+	compare_var_to_value VAR_RESULT, 2
+	goto_if 1, EventScript_1A7AE0
+	special sub_8112364
+	checkflag FLAG_0x2F4
+	call_if 1, EventScript_1A73A4
+	checkflag FLAG_0x2F4
+	call_if 0, EventScript_1A73AD
+	call EventScript_1A73E0
+	return
+
+EventScript_1A73A4:: @ 81A73A4
+	loadword 0, Text_1A72F2
+	callstd 4
+	return
+
+EventScript_1A73AD:: @ 81A73AD
+	loadword 0, gUnknown_81A6C51
+	callstd 4
+	return
+
+EventScript_1A73B6:: @ 81A73B6
+	copyvar VAR_0x8004, VAR_0x8009
+	special sub_80CA524
+	waitmessage
+	compare_var_to_value VAR_RESULT, 0
+	call_if 1, EventScript_1A73D8
+	compare_var_to_value VAR_RESULT, 1
+	call_if 1, EventScript_1A73DC
+	waitfanfare
+	waitbuttonpress
+	return
+
+EventScript_1A73D8:: @ 81A73D8
+	playfanfare MUS_FAN2
+	return
+
+EventScript_1A73DC:: @ 81A73DC
+	playfanfare MUS_FANFA5
+	return
+
+EventScript_1A73E0:: @ 81A73E0
+	setvar VAR_0x8004, 31
+	special sub_812B234
+	special sub_812B220
+	setvar VAR_0x8004, 0
+	specialvar VAR_RESULT, Special_GetPokedexCount
+	copyvar VAR_0x8008, VAR_0x8005
+	copyvar VAR_0x8009, VAR_0x8006
+	copyvar VAR_0x800A, VAR_RESULT
+	getnumberstring 0, VAR_0x8008
+	getnumberstring 1, VAR_0x8009
+	loadword 0, Text_1A6CA3
+	callstd 4
+	checkflag FLAG_0x2FF
+	call_if 0, EventScript_1A746D
+	call EventScript_1A73B6
+	compare_var_to_value VAR_0x800A, 0
+	goto_if 1, EventScript_1A748F
+	setvar VAR_0x8004, 1
+	specialvar VAR_RESULT, Special_GetPokedexCount
+	copyvar VAR_0x8008, VAR_0x8005
+	copyvar VAR_0x8009, VAR_0x8006
+	getnumberstring 0, VAR_0x8008
+	getnumberstring 1, VAR_0x8009
+	loadword 0, Text_1A71AA
+	callstd 4
+	specialvar VAR_RESULT, HasAllMons
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1A7470
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A747E
+	end
+
+EventScript_1A746D:: @ 81A746D
+	textcolor 0
+	return
+
+EventScript_1A7470:: @ 81A7470
+	loadword 0, Text_1A71EE
+	callstd 4
+	goto EventScript_1A748F
+	end
+
+EventScript_1A747E:: @ 81A747E
+	setflag FLAG_0x2F4
+	loadword 0, Text_1A722F
+	callstd 4
+	goto EventScript_1A748F
+	end
+
+EventScript_1A748F:: @ 81A748F
+	special sub_812B248
+	return
+
+EventScript_1A7493:: @ 81A7493
+	lockall
+	setvar VAR_0x4001, 1
+	goto EventScript_1A74B7
+	end
+
+EventScript_1A749F:: @ 81A749F
+	lockall
+	setvar VAR_0x4002, 1
+	goto EventScript_1A74B7
+	end
+
+EventScript_1A74AB:: @ 81A74AB
+	lockall
+	setvar VAR_0x4003, 1
+	goto EventScript_1A74B7
+	end
+
+EventScript_1A74B7:: @ 81A74B7
+	setvar VAR_0x8004, 1
+	setvar VAR_0x8005, 1
+	setvar VAR_0x8006, 8
+	setvar VAR_0x8007, 5
+	special sub_80CAC28
+	waitstate
+	releaseall
+	end
+
+EventScript_1A74D1:: @ 81A74D1
+	setvar VAR_0x4001, 1
+	setvar VAR_0x4002, 1
+	setvar VAR_0x4003, 1
+	setvar VAR_0x4004, 1
+	setvar VAR_0x4005, 1
+	return
 
 EventScript_1A74EB:: @ 81A74EB
-	.incbin "baserom.gba", 0x1A74EB, 0x1B
+	fadescreen 1
+	special ChangePokemonNickname
+	waitstate
+	return
+
+EventScript_1A74F2:: @ 81A74F2
+	getitemname 0, VAR_0x8004
+	playfanfare MUS_ME_WAZA
+	message Text_1A5690
+	waitmessage
+	waitfanfare
+	removeitem VAR_0x8004, 1
+	return
 
 EventScript_1A7506:: @ 81A7506
-	.incbin "baserom.gba", 0x1A7506, 0x19
+	applymovement 255, Movement_1A75FE
+	waitmovement 0
+	playse SE_DOOR
+	call EventScript_1A7538
+	special DrawWholeMapView
+	setflag FLAG_0x004
+	return
 
 EventScript_1A751F:: @ 81A751F
-	.incbin "baserom.gba", 0x1A751F, 0x19
+	applymovement 255, Movement_1A75F3
+	waitmovement 0
+	setflag FLAG_0x002
+	playse SE_KI_GASYAN
+	call EventScript_1A759C
+	special DrawWholeMapView
+	return
 
 EventScript_1A7538:: @ 81A7538
-	.incbin "baserom.gba", 0x1A7538, 0x2B
+	setmetatile 6, 1, 654, 1
+	setmetatile 6, 2, 662, 0
+	return
+
+EventScript_1A754B:: @ 81A754B
+	lockall
+	textcolor 0
+	loadword 0, Text_1A5C4D
+	callstd 4
+	closemessage
+	applymovement 255, Movement_1A75D3
+	waitmovement 0
+	releaseall
+	end
 
 EventScript_1A7563:: @ 81A7563
-	.incbin "baserom.gba", 0x1A7563, 0x26
+	applymovement 255, Movement_1A75FE
+	waitmovement 0
+	playse SE_DOOR
+	setmetatile 6, 4, 654, 1
+	setmetatile 6, 5, 662, 0
+	special DrawWholeMapView
+	setflag FLAG_0x004
+	return
 
 EventScript_1A7589:: @ 81A7589
-	.incbin "baserom.gba", 0x1A7589, 0x13
+	setmetatile 6, 4, 654, 1
+	setmetatile 6, 5, 662, 0
+	return
 
 EventScript_1A759C:: @ 81A759C
-	.incbin "baserom.gba", 0x1A759C, 0x39
+	setmetatile 5, 11, 669, 1
+	setmetatile 6, 11, 670, 1
+	setmetatile 7, 11, 671, 1
+	setmetatile 5, 12, 677, 1
+	setmetatile 6, 12, 678, 1
+	setmetatile 7, 12, 679, 1
+	return
+
+Movement_1A75D3:: @ 81A75D3
+	step_11
+	step_end
 
 EventScript_1A75D5:: @ 81A75D5
-	.incbin "baserom.gba", 0x1A75D5, 0x4
+	special sub_80CC974
+	return
 
 Movement_1A75D9:: @ 81A75D9
-	.incbin "baserom.gba", 0x1A75D9, 0x2
+	step_63
+	step_end
 
 Movement_1A75DB:: @ 81A75DB
-	.incbin "baserom.gba", 0x1A75DB, 0x2
+	step_62
+	step_end
 
 Movement_1A75DD:: @ 81A75DD
-	.incbin "baserom.gba", 0x1A75DD, 0x4
+	step_1c
+	step_1c
+	step_1c
+	step_end
 
 Movement_1A75E1:: @ 81A75E1
-	.incbin "baserom.gba", 0x1A75E1, 0x4
+	step_4a
+	step_end
+
+Movement_1A75E3:: @ 81A75E3
+	step_4b
+	step_end
 
 Movement_1A75E5:: @ 81A75E5
-	.incbin "baserom.gba", 0x1A75E5, 0x2
+	step_5a
+	step_end
 
 Movement_1A75E7:: @ 81A75E7
-	.incbin "baserom.gba", 0x1A75E7, 0x2
+	step_2f
+	step_end
 
 Movement_1A75E9:: @ 81A75E9
-	.incbin "baserom.gba", 0x1A75E9, 0x2
+	step_2e
+	step_end
 
 Movement_1A75EB:: @ 81A75EB
-	.incbin "baserom.gba", 0x1A75EB, 0x2
+	step_30
+	step_end
 
 Movement_1A75ED:: @ 81A75ED
-	.incbin "baserom.gba", 0x1A75ED, 0x2
+	step_2d
+	step_end
 
 Movement_1A75EF:: @ 81A75EF
-	.incbin "baserom.gba", 0x1A75EF, 0x2
+	step_03
+	step_end
 
 Movement_1A75F1:: @ 81A75F1
-	.incbin "baserom.gba", 0x1A75F1, 0x15
+	step_00
+	step_end
+
+Movement_1A75F3:: @ 81A75F3
+	step_11
+	step_11
+	step_11
+	step_11
+	step_11
+	step_end
+
+Movement_1A75F9:: @ 81A75F9
+	step_11
+	step_11
+	step_11
+	step_11
+	step_end
+
+Movement_1A75FE:: @ 81A75FE
+	step_1c
+	step_1c
+	step_end
+
+Movement_1A7601:: @ 81A7601
+	step_11
+	step_end
+
+Movement_1A7603:: @ 81A7603
+	step_11
+	step_11
+	step_end
 
 gUnknown_81A7606:: @ 81A7606
-	.incbin "baserom.gba", 0x1A7606, 0x9
+	loadword 0, gUnknown_81C0DB0
+	callstd 3
+	end
 
 gUnknown_81A760F:: @ 81A760F
-	.incbin "baserom.gba", 0x1A760F, 0x9
+	loadword 0, gUnknown_81C0DFD
+	callstd 3
+	end
 
 gUnknown_81A7618:: @ 81A7618
-	.incbin "baserom.gba", 0x1A7618, 0x9
+	loadword 0, gUnknown_81C0F99
+	callstd 3
+	end
 
 gUnknown_81A7621:: @ 81A7621
-	.incbin "baserom.gba", 0x1A7621, 0x9
+	loadword 0, gUnknown_81C12A7
+	callstd 3
+	end
 
 gUnknown_81A762A:: @ 81A762A
-	.incbin "baserom.gba", 0x1A762A, 0x9
+	loadword 0, gUnknown_81C10C1
+	callstd 3
+	end
 
 gUnknown_81A7633:: @ 81A7633
-	.incbin "baserom.gba", 0x1A7633, 0x9
+	loadword 0, gUnknown_81C1273
+	callstd 3
+	end
 
 gUnknown_81A763C:: @ 81A763C
-	.incbin "baserom.gba", 0x1A763C, 0x9
+	loadword 0, gUnknown_81C0FD8
+	callstd 3
+	end
 
 gUnknown_81A7645:: @ 81A7645
-	.incbin "baserom.gba", 0x1A7645, 0x9
+	loadword 0, gUnknown_81C12D6
+	callstd 3
+	end
 
 gUnknown_81A764E:: @ 81A764E
-	.incbin "baserom.gba", 0x1A764E, 0x9
+	loadword 0, gUnknown_81C1300
+	callstd 3
+	end
 
 gUnknown_81A7657:: @ 81A7657
-	.incbin "baserom.gba", 0x1A7657, 0x9
+	loadword 0, gUnknown_81C0E19
+	callstd 3
+	end
 
 gUnknown_81A7660:: @ 81A7660
-	.incbin "baserom.gba", 0x1A7660, 0x9
+	loadword 0, gUnknown_81C0E40
+	callstd 3
+	end
 
 gUnknown_81A7669:: @ 81A7669
-	.incbin "baserom.gba", 0x1A7669, 0x9
+	loadword 0, gUnknown_81C0E73
+	callstd 3
+	end
 
 gUnknown_81A7672:: @ 81A7672
-	.incbin "baserom.gba", 0x1A7672, 0x9
+	loadword 0, gUnknown_81C0EAC
+	callstd 3
+	end
 
 gUnknown_81A767B:: @ 81A767B
-	.incbin "baserom.gba", 0x1A767B, 0x9
+	loadword 0, gUnknown_81C101B
+	callstd 3
+	end
 
 gUnknown_81A7684:: @ 81A7684
-	.incbin "baserom.gba", 0x1A7684, 0x9
+	loadword 0, gUnknown_81C1060
+	callstd 3
+	end
 
 gUnknown_81A768D:: @ 81A768D
-	.incbin "baserom.gba", 0x1A768D, 0x9
+	loadword 0, gUnknown_81C109C
+	callstd 3
+	end
 
 gUnknown_81A7696:: @ 81A7696
-	.incbin "baserom.gba", 0x1A7696, 0x9
+	loadword 0, gUnknown_81C10FC
+	callstd 3
+	end
 
 gUnknown_81A769F:: @ 81A769F
-	.incbin "baserom.gba", 0x1A769F, 0x9
+	loadword 0, gUnknown_81C1134
+	callstd 3
+	end
 
 gUnknown_81A76A8:: @ 81A76A8
-	.incbin "baserom.gba", 0x1A76A8, 0x9
+	loadword 0, gUnknown_81C116E
+	callstd 3
+	end
 
 gUnknown_81A76B1:: @ 81A76B1
-	.incbin "baserom.gba", 0x1A76B1, 0x9
+	loadword 0, gUnknown_81C1194
+	callstd 3
+	end
 
 gUnknown_81A76BA:: @ 81A76BA
-	.incbin "baserom.gba", 0x1A76BA, 0x9
+	loadword 0, gUnknown_81C11BA
+	callstd 3
+	end
 
 gUnknown_81A76C3:: @ 81A76C3
-	.incbin "baserom.gba", 0x1A76C3, 0x9
+	loadword 0, gUnknown_81C11DC
+	callstd 3
+	end
 
 gUnknown_81A76CC:: @ 81A76CC
-	.incbin "baserom.gba", 0x1A76CC, 0x9
+	loadword 0, gUnknown_81C1217
+	callstd 3
+	end
 
 gUnknown_81A76D5:: @ 81A76D5
-	.incbin "baserom.gba", 0x1A76D5, 0x9
+	loadword 0, gUnknown_81C124B
+	callstd 3
+	end
 
 gUnknown_81A76DE:: @ 81A76DE
-	.incbin "baserom.gba", 0x1A76DE, 0x9
+	loadword 0, gUnknown_81C0ECB
+	callstd 3
+	end
 
 gUnknown_81A76E7:: @ 81A76E7
-	.incbin "baserom.gba", 0x1A76E7, 0x9
+	loadword 0, gUnknown_81C0EF7
+	callstd 3
+	end
 
 gUnknown_81A76F0:: @ 81A76F0
-	.incbin "baserom.gba", 0x1A76F0, 0x9
+	loadword 0, gUnknown_81C0F19
+	callstd 3
+	end
 
 gUnknown_81A76F9:: @ 81A76F9
-	.incbin "baserom.gba", 0x1A76F9, 0x9
+	loadword 0, gUnknown_81C0F59
+	callstd 3
+	end
 
 gUnknown_81A7702:: @ 81A7702
-	.incbin "baserom.gba", 0x1A7702, 0x9E
+	lockall
+	textcolor 3
+	loadword 0, Text_1A622C
+	callstd 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1A778A
+	setvar VAR_0x8004, 14
+	call EventScript_1A6AC0
+	lock
+	faceplayer
+	specialvar VAR_0x8008, sub_80CC4D4
+	textcolor 0
+	compare_var_to_value VAR_0x8004, 0
+	goto_if 1, EventScript_1A774D
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1A778A
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A778C
+	end
+
+EventScript_1A774D:: @ 81A774D
+	applymovement VAR_0x8008, Movement_1A75F1
+	waitmovement 0
+	playse SE_PIN
+	applymovement VAR_0x8008, Movement_1A75DB
+	waitmovement 0
+	applymovement VAR_0x8008, Movement_1A75DD
+	waitmovement 0
+	loadword 0, Text_1A62D3
+	callstd 4
+	setflag 2105
+	textcolor 3
+	special sub_80699BC
+	signmsg
+	loadword 0, Text_1A6359
+	callstd 4
+	normalmsg
+	releaseall
+	end
+
+EventScript_1A778A:: @ 81A778A
+	releaseall
+	end
+
+EventScript_1A778C:: @ 81A778C
+	applymovement VAR_0x8008, Movement_1A75F1
+	waitmovement 0
+	loadword 0, Text_1A6265
+	callstd 4
+	releaseall
+	end
 
 gUnknown_81A77A0:: @ 81A77A0
-	.incbin "baserom.gba", 0x1A77A0, 0x9
+	loadword 0, Text_1A5375
+	callstd 3
+	end
 
 EventScript_1A77A9:: @ 81A77A9
-	.incbin "baserom.gba", 0x1A77A9, 0x1
+	return
 
 EventScript_1A77AA:: @ 81A77AA
-	.incbin "baserom.gba", 0x1A77AA, 0x6
+	setvar VAR_RESULT, 1
+	return
 
 EventScript_1A77B0:: @ 81A77B0
-	.incbin "baserom.gba", 0x1A77B0, 0x6
+	setvar VAR_RESULT, 0
+	return
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	.include "data/script_dump_out.inc"
+
+
+
+
 
 Route16_NorthEntrance_1F_EventScript_1A77B6:: @ 81A77B6
 Route18_EastEntrance_1F_EventScript_1A77B6:: @ 81A77B6
@@ -4294,13 +5015,100 @@ EventScript_SafariOutOfBalls:: @ 81BFBD7
 	.incbin "baserom.gba", 0x1BFBD7, 0x2D5
 
 gUnknown_81BFEAC:: @ 81BFEAC
-	.incbin "baserom.gba", 0x1BFEAC, 0x1164
+	.incbin "baserom.gba", 0x1BFEAC, 0xF04
+
+gUnknown_81C0DB0:: @ 81C0DB0
+	.incbin "baserom.gba", 0x1C0DB0, 0x41
+
+Text_1C0DF1:: @ 81C0DF1
+	.incbin "baserom.gba", 0x1C0DF1, 0xC
+
+gUnknown_81C0DFD:: @ 81C0DFD
+	.incbin "baserom.gba", 0x1C0DFD, 0x1C
+
+gUnknown_81C0E19:: @ 81C0E19
+	.incbin "baserom.gba", 0x1C0E19, 0x27
+
+gUnknown_81C0E40:: @ 81C0E40
+	.incbin "baserom.gba", 0x1C0E40, 0x33
+
+gUnknown_81C0E73:: @ 81C0E73
+	.incbin "baserom.gba", 0x1C0E73, 0x39
+
+gUnknown_81C0EAC:: @ 81C0EAC
+	.incbin "baserom.gba", 0x1C0EAC, 0x1F
+
+gUnknown_81C0ECB:: @ 81C0ECB
+	.incbin "baserom.gba", 0x1C0ECB, 0x2C
+
+gUnknown_81C0EF7:: @ 81C0EF7
+	.incbin "baserom.gba", 0x1C0EF7, 0x22
+
+gUnknown_81C0F19:: @ 81C0F19
+	.incbin "baserom.gba", 0x1C0F19, 0x40
+
+gUnknown_81C0F59:: @ 81C0F59
+	.incbin "baserom.gba", 0x1C0F59, 0x40
+
+gUnknown_81C0F99:: @ 81C0F99
+	.incbin "baserom.gba", 0x1C0F99, 0x3F
+
+gUnknown_81C0FD8:: @ 81C0FD8
+	.incbin "baserom.gba", 0x1C0FD8, 0x38
 
 gUnknown_81C1010:: @ 81C1010
-	.incbin "baserom.gba", 0x1C1010, 0xC
+	.incbin "baserom.gba", 0x1C1010, 0xB
+
+gUnknown_81C101B:: @ 81C101B
+	.incbin "baserom.gba", 0x1C101B, 0x1
 
 gUnknown_81C101C:: @ 81C101C
-	.incbin "baserom.gba", 0x1C101C, 0x345
+	.incbin "baserom.gba", 0x1C101C, 0x44
+
+gUnknown_81C1060:: @ 81C1060
+	.incbin "baserom.gba", 0x1C1060, 0x3C
+
+gUnknown_81C109C:: @ 81C109C
+	.incbin "baserom.gba", 0x1C109C, 0x25
+
+gUnknown_81C10C1:: @ 81C10C1
+	.incbin "baserom.gba", 0x1C10C1, 0x3B
+
+gUnknown_81C10FC:: @ 81C10FC
+	.incbin "baserom.gba", 0x1C10FC, 0x38
+
+gUnknown_81C1134:: @ 81C1134
+	.incbin "baserom.gba", 0x1C1134, 0x3A
+
+gUnknown_81C116E:: @ 81C116E
+	.incbin "baserom.gba", 0x1C116E, 0x26
+
+gUnknown_81C1194:: @ 81C1194
+	.incbin "baserom.gba", 0x1C1194, 0x26
+
+gUnknown_81C11BA:: @ 81C11BA
+	.incbin "baserom.gba", 0x1C11BA, 0x22
+
+gUnknown_81C11DC:: @ 81C11DC
+	.incbin "baserom.gba", 0x1C11DC, 0x3B
+
+gUnknown_81C1217:: @ 81C1217
+	.incbin "baserom.gba", 0x1C1217, 0x34
+
+gUnknown_81C124B:: @ 81C124B
+	.incbin "baserom.gba", 0x1C124B, 0x28
+
+gUnknown_81C1273:: @ 81C1273
+	.incbin "baserom.gba", 0x1C1273, 0x34
+
+gUnknown_81C12A7:: @ 81C12A7
+	.incbin "baserom.gba", 0x1C12A7, 0x2F
+
+gUnknown_81C12D6:: @ 81C12D6
+	.incbin "baserom.gba", 0x1C12D6, 0x2A
+
+gUnknown_81C1300:: @ 81C1300
+	.incbin "baserom.gba", 0x1C1300, 0x61
 
 gUnknown_81C1361:: @ 81C1361
 	.incbin "baserom.gba", 0x1C1361, 0x1B

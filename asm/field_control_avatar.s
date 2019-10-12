@@ -1641,11 +1641,11 @@ _0806D570:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806D5A4
-	ldr r0, _0806D5A0 @ =gUnknown_81A6AC8
+	ldr r0, _0806D5A0 @ =EventScript_1A6AC8
 	b _0806D5E2
 	.align 2, 0
 _0806D59C: .4byte 0x00000824
-_0806D5A0: .4byte gUnknown_81A6AC8
+_0806D5A0: .4byte EventScript_1A6AC8
 _0806D5A4:
 	adds r0, r4, 0
 	bl MetatileBehavior_IsWaterfall

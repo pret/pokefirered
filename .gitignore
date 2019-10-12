@@ -39,6 +39,7 @@ cmake-build-*
 ld_script_ruby.txt
 ld_script_sapphire.txt
 sound/**/*.bin
+sound/songs/midi/*.s
 src/*.s
 src/data/items.h
 tags

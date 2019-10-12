@@ -80,6 +80,9 @@ extern struct OamData gOamData_83ACA00;
 extern struct OamData gOamData_83ACBC0;
 extern struct OamData gOamData_83ACB00;
 extern struct OamData gOamData_83AC9E0;
+extern struct OamData gOamData_83ACA20;
+extern struct OamData gOamData_83ACA80;
+extern struct OamData gOamData_83ACAA0;
 
 void ClearBattleAnimationVars(void);
 void DoMoveAnim(u16 move);
@@ -284,6 +287,8 @@ void sub_8099A78(u8 taskId);
 void sub_8099BD4(u8 taskId);
 
 // normal.c
+extern const struct SpriteTemplate gUnknown_83E7C98;
+
 u32 UnpackSelectedBattleAnimPalettes(s16 selector);
 void sub_80B9BDC(u8 taskId);
 void sub_80B9CE4(u8 taskId);
@@ -338,8 +343,10 @@ void AnimTask_MetallicShine(u8 taskId);
 void AnimTask_SetGreyscaleOrOriginalPal(u8 taskId);
 void sub_80B8B38(u8 taskId);
 
-// flying.s
+// flying.c
+void sub_80B194C(u8 taskId);
 void sub_80B1D3C(struct Sprite *sprite);
+void sub_80B2868(u8 taskId);
 
 // water.s
 extern const union AnimCmd *const gUnknown_83E5958[];

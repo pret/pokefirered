@@ -323,4 +323,40 @@ _080B1898: .4byte gBattleAnimAttacker
 _080B189C: .4byte sub_80B18A0
 	thumb_func_end sub_80B1838
 
+	thumb_func_start sub_80B18A0
+sub_80B18A0: @ 80B18A0
+	push {r4,lr}
+	adds r4, r0, 0
+	ldrh r0, [r4, 0x2E]
+	adds r0, 0xB
+	movs r1, 0xFF
+	ands r0, r1
+	strh r0, [r4, 0x2E]
+	movs r1, 0x2E
+	ldrsh r0, [r4, r1]
+	movs r1, 0x4
+	bl Sin
+	strh r0, [r4, 0x24]
+	ldrh r0, [r4, 0x30]
+	adds r0, 0x30
+	strh r0, [r4, 0x30]
+	lsls r0, 16
+	asrs r0, 24
+	negs r0, r0
+	strh r0, [r4, 0x26]
+	adds r0, r4, 0
+	adds r0, 0x3F
+	ldrb r1, [r0]
+	movs r0, 0x20
+	ands r0, r1
+	cmp r0, 0
+	beq _080B18DC
+	adds r0, r4, 0
+	bl DestroyAnimSprite
+_080B18DC:
+	pop {r4}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_80B18A0
+
 	.align 2, 0 @ Don't pad with nop.

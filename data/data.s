@@ -147,23 +147,96 @@ gSpriteAffineAnim_82348B0:: @ 82348B0
 	obj_rot_scal_anim_end
 
 	.align 2
-gUnknown_82348C8:: @ 82348C8
-	.incbin "baserom.gba", 0x2348C8, 0x24
+gSpriteAffineAnimTable_82348C8:: @ 82348C8
+	.4byte gSpriteAffineAnim_82347F8
+	.4byte gSpriteAffineAnim_8234818
+	.4byte gSpriteAffineAnim_8234830
+	.4byte gSpriteAffineAnim_8234848
+	.4byte gSpriteAffineAnim_8234868
+	.4byte gSpriteAffineAnim_8234878
+	.4byte gSpriteAffineAnim_82348A0
+	.4byte gSpriteAffineAnim_82348B0
+	.4byte gSpriteAffineAnim_8234888
 
-gUnknown_82348EC:: @ 82348EC
-	.incbin "baserom.gba", 0x2348EC, 0x58
+	.align 2
+gSpriteAffineAnim_82348EC:: @ 82348EC
+	obj_rot_scal_anim_frame 0xFFFC, 0xFFFC, 4, 63
+	obj_rot_scal_anim_end
 
-gUnknown_8234944:: @ 8234944
-	.incbin "baserom.gba", 0x234944, 0x58
+	.align 2
+gSpriteAffineAnim_82348FC:: @ 82348FC
+	obj_rot_scal_anim_frame 0x0, 0x0, 3, 5
+	obj_rot_scal_anim_frame 0x0, 0x0, -3, 5
+	obj_rot_scal_anim_end
 
-gUnknown_823499C:: @ 823499C
-	.incbin "baserom.gba", 0x23499C, 0x20
+	.align 2
+gSpriteAffineAnim_8234914:: @ 8234914
+	obj_rot_scal_anim_frame 0x0, 0x0, -5, 20
+	obj_rot_scal_anim_frame 0x0, 0x0, 0, 20
+	obj_rot_scal_anim_frame 0x0, 0x0, 5, 20
+	obj_rot_scal_anim_end
 
-gUnknown_82349BC:: @ 82349BC
-	.incbin "baserom.gba", 0x2349BC, 0x10
+	.align 2
+gSpriteAffineAnim_8234934:: @ 8234934
+	obj_rot_scal_anim_frame 0x0, 0x0, 9, 110
+	obj_rot_scal_anim_end
 
-gMonFrontPicCoords:: @ 82349CC
-	.incbin "baserom.gba", 0x2349CC, 0x6E0
+	.align 2
+gSpriteAffineAnimTable_8234944:: @ 8234944
+	.4byte gSpriteAffineAnim_82347F8
+	.4byte gSpriteAffineAnim_8234818
+	.4byte gSpriteAffineAnim_8234830
+	.4byte gSpriteAffineAnim_8234848
+	.4byte gSpriteAffineAnim_8234868
+	.4byte gSpriteAffineAnim_8234878
+	.4byte gSpriteAffineAnim_82348EC
+	.4byte gSpriteAffineAnim_82348FC
+	.4byte gSpriteAffineAnim_8234914
+	.4byte gSpriteAffineAnim_8234888
+	.4byte gSpriteAffineAnim_8234934
+
+	.align 2
+gSpriteAffineAnimTable_82349470:: @ 82349470
+	.4byte gSpriteAffineAnim_8234808
+	.4byte gSpriteAffineAnim_8234818
+	.4byte gSpriteAffineAnim_8234830
+	.4byte gSpriteAffineAnim_8234848
+	.4byte gSpriteAffineAnim_8234868
+	.4byte gSpriteAffineAnim_8234878
+	.4byte gSpriteAffineAnim_82348EC
+	.4byte gSpriteAffineAnim_82348FC
+	.4byte gSpriteAffineAnim_8234914
+	.4byte gSpriteAffineAnim_8234888
+	.4byte gSpriteAffineAnim_8234934
+
+	.align 2
+gSpriteAnim_823499C:: @ 823499C
+	obj_image_anim_frame 0, 0
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_82349A4:: @ 82349A4
+	obj_image_anim_frame 1, 0
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_82349AC:: @ 82349AC
+	obj_image_anim_frame 2, 0
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_82349B4:: @ 82349B4
+	obj_image_anim_frame 3, 0
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnimTable_82349BC:: @ 82349BC
+	.4byte gSpriteAnim_823499C
+	.4byte gSpriteAnim_82349A4
+	.4byte gSpriteAnim_82349AC
+	.4byte gSpriteAnim_82349B4
+
+	.section .rodata.82350AC
 
 gMonFrontPicTable:: @ 82350AC
 	.incbin "baserom.gba", 0x2350AC, 0xE8

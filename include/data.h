@@ -31,6 +31,8 @@ extern const struct CompressedSpritePalette gMonShinyPaletteTable[];
 extern const struct CompressedSpriteSheet gTrainerFrontPicTable[];
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
+extern const struct MonCoords gMonFrontPicCoords[];
+extern const struct MonCoords gMonBackPicCoords[];
 
 extern const struct CompressedSpriteSheet gSpriteSheet_EnemyShadow;
 extern const struct SpriteTemplate gSpriteTemplate_EnemyShadow;

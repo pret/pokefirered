@@ -6157,7 +6157,7 @@ sub_814A8B8: @ 814A8B8
 	movs r6, 0
 	cmp r6, r10
 	bge _0814A922
-	ldr r0, _0814A938 @ =gUnknown_82349CC
+	ldr r0, _0814A938 @ =gMonFrontPicCoords
 	mov r9, r0
 	ldr r1, _0814A93C @ =gUnknown_203F3D8
 	mov r8, r1
@@ -6200,7 +6200,7 @@ _0814A922:
 	bx r0
 	.align 2, 0
 _0814A934: .4byte gUnknown_846D9D4
-_0814A938: .4byte gUnknown_82349CC
+_0814A938: .4byte gMonFrontPicCoords
 _0814A93C: .4byte gUnknown_203F3D8
 	thumb_func_end sub_814A8B8
 

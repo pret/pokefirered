@@ -77,8 +77,6 @@
 #define RGB_BLACK RGB(0, 0, 0)
 #define RGB_WHITE RGB(31, 31, 31)
 
-#define WIN_RANGE(a, b) (((a) << 8) | (b))
-
 #define NAKED __attribute__((naked))
 #define UNUSED __attribute__((unused))
 

@@ -13,7 +13,6 @@
 #include "event_data.h"
 #include "util.h"
 #include "pokemon_storage_system.h"
-#include "data.h"
 #include "battle_gfx_sfx_util.h"
 #include "battle_controllers.h"
 #include "evolution_scene.h"

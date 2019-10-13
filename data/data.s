@@ -55,7 +55,7 @@ gUnknown_823499C:: @ 823499C
 gUnknown_82349BC:: @ 82349BC
 	.incbin "baserom.gba", 0x2349BC, 0x10
 
-gUnknown_82349CC:: @ 82349CC
+gMonFrontPicCoords:: @ 82349CC
 	.incbin "baserom.gba", 0x2349CC, 0x6E0
 
 gMonFrontPicTable:: @ 82350AC
@@ -64,7 +64,7 @@ gMonFrontPicTable:: @ 82350AC
 gUnknown_8235194:: @ 8235194
 	.incbin "baserom.gba", 0x235194, 0xCD8
 
-gUnknown_8235E6C:: @ 8235E6C
+gMonBackPicCoords:: @ 8235E6C
 	.incbin "baserom.gba", 0x235E6C, 0x6E0
 
 gMonBackPicTable:: @ 823654C

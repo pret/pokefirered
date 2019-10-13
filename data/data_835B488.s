@@ -843,13 +843,19 @@ gUnknown_83E4410:: @ 83E4410
 	.incbin "baserom.gba", 0x3E4410, 0x1488
 
 gUnknown_83E5898:: @ 83E5898
-	.incbin "baserom.gba", 0x3E5898, 0x248
+	.incbin "baserom.gba", 0x3E5898, 0xC0
+
+gUnknown_83E5958:: @ 83E5958
+	.incbin "baserom.gba", 0x3E5958, 0x188
 
 gUnknown_83E5AE0:: @ 83E5AE0
 	.incbin "baserom.gba", 0x3E5AE0, 0xA8
 
 gUnknown_83E5B88:: @ 83E5B88
-	.incbin "baserom.gba", 0x3E5B88, 0x2A4
+	.incbin "baserom.gba", 0x3E5B88, 0x1C0
+
+gUnknown_83E5D48:: @ 83E5D48
+	.incbin "baserom.gba", 0x3E5D48, 0xE4
 
 gUnknown_83E5E2C:: @ 83E5E2C
 	.incbin "baserom.gba", 0x3E5E2C, 0x18
@@ -900,58 +906,9 @@ gUnknown_83E652C:: @ 83E652C
 	.incbin "baserom.gba", 0x3E652C, 0x78
 
 gUnknown_83E65A4:: @ 83E65A4
-	.incbin "baserom.gba", 0x3E65A4, 0xA4C
+	.incbin "baserom.gba", 0x3E65A4, 0x544
 
-gUnknown_83E6FF0:: @ 83E6FF0
-	.incbin "baserom.gba", 0x3E6FF0, 0x1C
-
-gUnknown_83E700C:: @ 83E700C
-	.incbin "baserom.gba", 0x3E700C, 0x20
-
-gUnknown_83E702C:: @ 83E702C
-	.incbin "baserom.gba", 0x3E702C, 0x18
-
-gUnknown_83E7044:: @ 83E7044
-	.incbin "baserom.gba", 0x3E7044, 0xD0
-
-gUnknown_83E7114:: @ 83E7114
-	.incbin "baserom.gba", 0x3E7114, 0x35C
-
-gUnknown_83E7470:: @ 83E7470
-	.incbin "baserom.gba", 0x3E7470, 0x68
-
-gUnknown_83E74D8:: @ 83E74D8
-	.incbin "baserom.gba", 0x3E74D8, 0x18
-
-gUnknown_83E74F0:: @ 83E74F0
-	.incbin "baserom.gba", 0x3E74F0, 0x178
-
-gUnknown_83E7668:: @ 83E7668
-	.incbin "baserom.gba", 0x3E7668, 0x78
-
-gUnknown_83E76E0:: @ 83E76E0
-	.incbin "baserom.gba", 0x3E76E0, 0x528
-
-gUnknown_83E7C08:: @ 83E7C08
-	.incbin "baserom.gba", 0x3E7C08, 0x30
-
-gUnknown_83E7C38:: @ 83E7C38
-	.incbin "baserom.gba", 0x3E7C38, 0x60
-
-gUnknown_83E7C98:: @ 83E7C98
-	.incbin "baserom.gba", 0x3E7C98, 0x30
-
-gUnknown_83E7CC8:: @ 83E7CC8
-	.incbin "baserom.gba", 0x3E7CC8, 0x2
-
-gUnknown_83E7CCA:: @ 83E7CCA
-	.incbin "baserom.gba", 0x3E7CCA, 0x4
-
-gUnknown_83E7CCE:: @ 83E7CCE
-	.incbin "baserom.gba", 0x3E7CCE, 0x6
-
-gUnknown_83E7CD4:: @ 83E7CD4
-	.incbin "baserom.gba", 0x3E7CD4, 0x28
+	.section .rodata.83E7CFC
 
 gUnknown_83E7CFC:: @ 83E7CFC
 	.incbin "baserom.gba", 0x3E7CFC, 0x14

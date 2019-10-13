@@ -96,7 +96,7 @@ sub_80A2388: @ 80A2388
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r1, 0x1
-	bl sub_8075160
+	bl InitSpritePosToAnimAttacker
 	ldr r0, _080A23C8 @ =gBattleAnimArgs
 	ldrh r0, [r0, 0x4]
 	strh r0, [r4, 0x2E]
@@ -115,7 +115,7 @@ sub_80A2388: @ 80A2388
 	strh r0, [r4, 0x36]
 	ldr r0, _080A23D0 @ =StartAnimLinearTranslation
 	str r0, [r4, 0x1C]
-	ldr r1, _080A23D4 @ =move_anim_8074EE0
+	ldr r1, _080A23D4 @ =DestroySpriteAndMatrix
 	adds r0, r4, 0
 	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
@@ -125,7 +125,7 @@ sub_80A2388: @ 80A2388
 _080A23C8: .4byte gBattleAnimArgs
 _080A23CC: .4byte gBattleAnimAttacker
 _080A23D0: .4byte StartAnimLinearTranslation
-_080A23D4: .4byte move_anim_8074EE0
+_080A23D4: .4byte DestroySpriteAndMatrix
 	thumb_func_end sub_80A2388
 
 	thumb_func_start sub_80A23D8
@@ -133,7 +133,7 @@ sub_80A23D8: @ 80A23D8
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r1, 0x1
-	bl sub_8075160
+	bl InitSpritePosToAnimAttacker
 	ldr r5, _080A2420 @ =gBattleAnimArgs
 	ldrb r1, [r5, 0x6]
 	adds r0, r4, 0
@@ -173,7 +173,7 @@ sub_80A2430: @ 80A2430
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	movs r1, 0x1
-	bl sub_8075160
+	bl InitSpritePosToAnimAttacker
 	ldr r6, _080A2480 @ =gBattleAnimArgs
 	ldrh r0, [r6, 0x4]
 	strh r0, [r4, 0x2E]
@@ -195,7 +195,7 @@ sub_80A2430: @ 80A2430
 	lsrs r0, 24
 	strh r0, [r4, 0x36]
 	adds r0, r4, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimLinearTranslation
 	ldrh r0, [r6, 0x6]
 	strh r0, [r4, 0x38]
 	ldr r1, _080A2488 @ =sub_80A248C
@@ -215,7 +215,7 @@ _080A2488: .4byte sub_80A248C
 sub_80A248C: @ 80A248C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80755E0
+	bl AnimTranslateLinear
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A24A2
@@ -338,7 +338,7 @@ sub_80A2580: @ 80A2580
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	movs r1, 0x1
-	bl sub_8075114
+	bl InitSpritePosToAnimTarget
 	ldr r6, _080A25C4 @ =gBattleAnimArgs
 	ldrh r0, [r6, 0x6]
 	strh r0, [r4, 0x2E]
@@ -358,7 +358,7 @@ sub_80A2580: @ 80A2580
 	ldrh r0, [r6, 0x4]
 	strh r0, [r4, 0x38]
 	adds r0, r4, 0
-	bl sub_8075068
+	bl InitAnimArcTranslation
 	ldr r0, _080A25CC @ =sub_80A25D0
 	str r0, [r4, 0x1C]
 	pop {r4-r6}
@@ -374,7 +374,7 @@ _080A25CC: .4byte sub_80A25D0
 sub_80A25D0: @ 80A25D0
 	push {r4,lr}
 	adds r4, r0, 0
-	bl AnimateBallThrow
+	bl TranslateAnimHorizontalArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A25E4
@@ -451,7 +451,7 @@ _080A263C:
 	lsrs r0, 24
 	strh r0, [r5, 0x36]
 	adds r0, r5, 0
-	bl sub_8075804
+	bl InitAnimFastLinearTranslationWithSpeed
 	bl Random
 	movs r1, 0xFF
 	ands r1, r0
@@ -476,7 +476,7 @@ _080A26A0: .4byte sub_80A26A4
 sub_80A26A4: @ 80A26A4
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_807578C
+	bl AnimFastTranslateLinear
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A26BA
@@ -520,7 +520,7 @@ sub_80A26F0: @ 80A26F0
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	movs r1, 0x1
-	bl sub_8075160
+	bl InitSpritePosToAnimAttacker
 	ldr r0, _080A2750 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
@@ -555,7 +555,7 @@ _080A2710:
 	ldrh r0, [r4, 0xA]
 	strh r0, [r6, 0x38]
 	adds r0, r6, 0
-	bl sub_8075068
+	bl InitAnimArcTranslation
 	ldr r0, _080A275C @ =sub_80A2760
 	str r0, [r6, 0x1C]
 	pop {r4-r6}
@@ -572,7 +572,7 @@ _080A275C: .4byte sub_80A2760
 sub_80A2760: @ 80A2760
 	push {r4,lr}
 	adds r4, r0, 0
-	bl AnimateBallThrow
+	bl TranslateAnimHorizontalArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A278A
@@ -584,7 +584,7 @@ sub_80A2760: @ 80A2760
 	strb r0, [r2]
 	movs r0, 0xA
 	strh r0, [r4, 0x2E]
-	ldr r0, _080A2790 @ =sub_8074C44
+	ldr r0, _080A2790 @ =WaitAnimForDuration
 	str r0, [r4, 0x1C]
 	ldr r1, _080A2794 @ =sub_80A2798
 	adds r0, r4, 0
@@ -594,7 +594,7 @@ _080A278A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A2790: .4byte sub_8074C44
+_080A2790: .4byte WaitAnimForDuration
 _080A2794: .4byte sub_80A2798
 	thumb_func_end sub_80A2760
 
@@ -614,7 +614,7 @@ sub_80A2798: @ 80A2798
 	bl StartSpriteAnim
 	movs r0, 0x3C
 	strh r0, [r4, 0x2E]
-	ldr r0, _080A27C8 @ =sub_8074C44
+	ldr r0, _080A27C8 @ =WaitAnimForDuration
 	str r0, [r4, 0x1C]
 	ldr r1, _080A27CC @ =DestroyAnimSprite
 	adds r0, r4, 0
@@ -623,7 +623,7 @@ sub_80A2798: @ 80A2798
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A27C8: .4byte sub_8074C44
+_080A27C8: .4byte WaitAnimForDuration
 _080A27CC: .4byte DestroyAnimSprite
 	thumb_func_end sub_80A2798
 
@@ -632,7 +632,7 @@ sub_80A27D0: @ 80A27D0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r1, 0x1
-	bl sub_8075114
+	bl InitSpritePosToAnimTarget
 	ldr r5, _080A2814 @ =gBattleAnimArgs
 	ldrb r1, [r5, 0x8]
 	adds r0, r4, 0
@@ -694,7 +694,7 @@ sub_80A281C: @ 80A281C
 	bhi _080A2870
 	ldr r0, _080A286C @ =gBattleAnimTarget
 	ldrb r0, [r0]
-	bl sub_8076884
+	bl GetBattlerSpriteBGPriority
 	movs r1, 0x3
 	ands r1, r0
 	lsls r1, 2
@@ -709,7 +709,7 @@ _080A286C: .4byte gBattleAnimTarget
 _080A2870:
 	ldr r0, _080A28C0 @ =gBattleAnimTarget
 	ldrb r0, [r0]
-	bl sub_8076884
+	bl GetBattlerSpriteBGPriority
 	adds r0, 0x1
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -771,7 +771,7 @@ _080A28DE:
 _080A28E6:
 	ldr r0, _080A2904 @ =gBattleAnimTarget
 	ldrb r0, [r0]
-	bl sub_80768B0
+	bl GetBattlerSpriteBGPriorityRank
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -802,7 +802,7 @@ sub_80A2920: @ 80A2920
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r1, 0
-	bl sub_8075160
+	bl InitSpritePosToAnimAttacker
 	ldr r5, _080A2968 @ =gBattleAnimArgs
 	ldrh r0, [r5, 0x6]
 	strh r0, [r4, 0x2E]
@@ -821,7 +821,7 @@ sub_80A2920: @ 80A2920
 	adds r0, r5
 	strh r0, [r4, 0x36]
 	adds r0, r4, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimLinearTranslation
 	movs r0, 0x40
 	strh r0, [r4, 0x38]
 	ldr r1, _080A2970 @ =sub_80A2974
@@ -841,7 +841,7 @@ _080A2970: .4byte sub_80A2974
 sub_80A2974: @ 80A2974
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80755E0
+	bl AnimTranslateLinear
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A29E0
@@ -904,7 +904,7 @@ sub_80A29EC: @ 80A29EC
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r1, 0x1
-	bl sub_8075160
+	bl InitSpritePosToAnimAttacker
 	ldr r5, _080A2A34 @ =gBattleAnimArgs
 	ldrh r0, [r5, 0x6]
 	strh r0, [r4, 0x2E]
@@ -923,7 +923,7 @@ sub_80A29EC: @ 80A29EC
 	adds r0, r5
 	strh r0, [r4, 0x36]
 	adds r0, r4, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimLinearTranslation
 	movs r0, 0x40
 	strh r0, [r4, 0x38]
 	ldr r1, _080A2A3C @ =sub_80A2A40
@@ -943,7 +943,7 @@ _080A2A3C: .4byte sub_80A2A40
 sub_80A2A40: @ 80A2A40
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80755E0
+	bl AnimTranslateLinear
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A2A98
@@ -1132,7 +1132,7 @@ sub_80A2B9C: @ 80A2B9C
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r1, 0x1
-	bl sub_8075160
+	bl InitSpritePosToAnimAttacker
 	ldr r0, _080A2BF0 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
@@ -1180,7 +1180,7 @@ _080A2BFC:
 	adds r3, r5, 0
 	adds r3, 0x36
 	movs r1, 0x1
-	bl sub_8076D9C
+	bl SetAverageBattlerPositions
 	ldrh r0, [r6, 0x4]
 	ldrh r1, [r5, 0x32]
 	adds r0, r1
@@ -1194,7 +1194,7 @@ _080A2C1C:
 	ldrh r0, [r0, 0xA]
 	strh r0, [r5, 0x38]
 	adds r0, r5, 0
-	bl sub_8075068
+	bl InitAnimArcTranslation
 	ldr r0, _080A2C50 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
@@ -1235,7 +1235,7 @@ sub_80A2C68: @ 80A2C68
 	movs r0, 0x1
 	strh r0, [r6, 0x2E]
 	adds r0, r6, 0
-	bl AnimateBallThrow
+	bl TranslateAnimHorizontalArc
 	ldrh r0, [r6, 0x3C]
 	strh r5, [r6, 0x2E]
 	lsls r4, 16
@@ -1316,8 +1316,8 @@ _080A2D08:
 	bx r0
 	thumb_func_end sub_80A2C68
 
-	thumb_func_start sub_80A2D10
-sub_80A2D10: @ 80A2D10
+	thumb_func_start AnimMoveTwisterParticle
+AnimMoveTwisterParticle: @ 80A2D10
 	push {r4,lr}
 	adds r4, r0, 0
 	bl IsContest
@@ -1336,7 +1336,7 @@ sub_80A2D10: @ 80A2D10
 	adds r3, r4, 0
 	adds r3, 0x22
 	movs r1, 0x1
-	bl sub_8076D9C
+	bl SetAverageBattlerPositions
 _080A2D3C:
 	ldrh r0, [r4, 0x22]
 	adds r0, 0x20
@@ -1361,7 +1361,7 @@ _080A2D3C:
 _080A2D64: .4byte gBattleAnimTarget
 _080A2D68: .4byte gBattleAnimArgs
 _080A2D6C: .4byte sub_80A2D70
-	thumb_func_end sub_80A2D10
+	thumb_func_end AnimMoveTwisterParticle
 
 	thumb_func_start sub_80A2D70
 sub_80A2D70: @ 80A2D70
@@ -1419,7 +1419,7 @@ _080A2DAC:
 	bgt _080A2DEC
 	ldr r0, _080A2DE8 @ =gBattleAnimTarget
 	ldrb r0, [r0]
-	bl sub_8076884
+	bl GetBattlerSpriteBGPriority
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, 0x1
@@ -1429,7 +1429,7 @@ _080A2DE8: .4byte gBattleAnimTarget
 _080A2DEC:
 	ldr r0, _080A2E24 @ =gBattleAnimTarget
 	ldrb r0, [r0]
-	bl sub_8076884
+	bl GetBattlerSpriteBGPriority
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, 0x1
@@ -1464,7 +1464,7 @@ sub_80A2E28: @ 80A2E28
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	movs r1, 0
-	bl sub_8075114
+	bl InitSpritePosToAnimTarget
 	adds r2, r5, 0
 	adds r2, 0x2C
 	ldrb r0, [r2]
@@ -1505,7 +1505,7 @@ sub_80A2E64: @ 80A2E64
 	ands r0, r1
 	strb r0, [r2]
 	movs r0, 0x1
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	movs r0, 0x80
 	lsls r0, 1
 	strh r0, [r4, 0x2E]
@@ -1526,7 +1526,7 @@ sub_80A2EA0: @ 80A2EA0
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x1
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	movs r1, 0x32
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
@@ -1587,7 +1587,7 @@ sub_80A2F0C: @ 80A2F0C
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0x1
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldr r1, _080A2F38 @ =gSprites
@@ -1641,7 +1641,7 @@ sub_80A2F74: @ 80A2F74
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x1
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	adds r6, r0, 0
@@ -1682,7 +1682,7 @@ _080A2FBE:
 	movs r3, 0
 	bl SetSpriteRotScale
 	adds r0, r6, 0
-	bl sub_8076440
+	bl SetBattlerSpriteYOffsetFromYScale
 	ldrh r0, [r4, 0xA]
 	subs r0, 0x1
 	strh r0, [r4, 0xA]
@@ -1725,7 +1725,7 @@ sub_80A3004: @ 80A3004
 	cmp r5, 0
 	bne _080A3074
 	movs r0, 0x1
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -1866,7 +1866,7 @@ _080A3104:
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x36]
-	ldr r0, _080A3160 @ =sub_8075764
+	ldr r0, _080A3160 @ =InitAndRunAnimFastLinearTranslation
 	str r0, [r5, 0x1C]
 	ldr r1, _080A3164 @ =DestroyAnimSprite
 	adds r0, r5, 0
@@ -1877,7 +1877,7 @@ _080A3156:
 	bx r0
 	.align 2, 0
 _080A315C: .4byte gBattleAnimAttacker
-_080A3160: .4byte sub_8075764
+_080A3160: .4byte InitAndRunAnimFastLinearTranslation
 _080A3164: .4byte DestroyAnimSprite
 	thumb_func_end sub_80A3098
 
@@ -2370,7 +2370,7 @@ sub_80A3518: @ 80A3518
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r1, 0
-	bl sub_8075160
+	bl InitSpritePosToAnimAttacker
 	ldr r4, _080A3560 @ =gBattleAnimTarget
 	ldrb r0, [r4]
 	movs r1, 0
@@ -2546,7 +2546,7 @@ sub_80A3670: @ 80A3670
 	bne _080A368A
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_8075114
+	bl InitSpritePosToAnimTarget
 	ldr r0, _080A36B0 @ =gBattleAnimArgs
 	ldrh r0, [r0, 0x4]
 	strh r0, [r4, 0x30]
@@ -2579,7 +2579,7 @@ sub_80A36B4: @ 80A36B4
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r1, 0
-	bl sub_8075114
+	bl InitSpritePosToAnimTarget
 	ldr r4, _080A36FC @ =gBattleAnimAttacker
 	ldrb r0, [r4]
 	movs r1, 0
@@ -2672,7 +2672,7 @@ _080A3756:
 	cmp r0, 0
 	bne _080A378A
 	movs r0, 0x3F
-	bl sub_8073A44
+	bl BattleAnimAdjustPanning
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -2690,7 +2690,7 @@ _080A378A:
 	str r0, [r4, 0x1C]
 	movs r0, 0x40
 	negs r0, r0
-	bl sub_8073A44
+	bl BattleAnimAdjustPanning
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -3014,11 +3014,11 @@ sub_80A39C0: @ 80A39C0
 	strh r0, [r5, 0x16]
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_8076B2C
+	bl GetBattlerSpriteCoordAttr
 	strh r0, [r5, 0x1C]
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_8076B2C
+	bl GetBattlerSpriteCoordAttr
 	strh r0, [r5, 0x1E]
 	ldrb r0, [r4]
 	bl GetBattlerSide
@@ -3139,7 +3139,7 @@ _080A3A60:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl sub_8075068
+	bl InitAnimArcTranslation
 	ldr r0, _080A3B24 @ =sub_80A3B28
 	str r0, [r5]
 	pop {r4-r6}
@@ -3207,7 +3207,7 @@ _080A3B80:
 	adds r1, r2, 0
 	bl sub_80A3F24
 	adds r0, r4, 0
-	bl AnimateBallThrow
+	bl TranslateAnimHorizontalArc
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A3B96
@@ -3236,7 +3236,7 @@ _080A3BB4:
 	adds r1, r2, 0
 	bl sub_80A3F24
 	adds r0, r4, 0
-	bl AnimateBallThrow
+	bl TranslateAnimHorizontalArc
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A3BCA
@@ -3265,7 +3265,7 @@ _080A3BE6:
 	adds r1, r2, 0
 	bl sub_80A3F24
 	adds r0, r4, 0
-	bl AnimateBallThrow
+	bl TranslateAnimHorizontalArc
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A3BFC
@@ -3309,7 +3309,7 @@ _080A3C04:
 	adds r0, r4, 0
 	bl StartSpriteAnim
 	adds r0, r4, 0
-	bl sub_8075068
+	bl InitAnimArcTranslation
 	ldrh r0, [r6, 0x8]
 	adds r0, 0x1
 	b _080A3EFA
@@ -3318,7 +3318,7 @@ _080A3C54:
 	adds r1, r2, 0
 	bl sub_80A3F24
 	adds r0, r4, 0
-	bl AnimateBallThrow
+	bl TranslateAnimHorizontalArc
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A3C6A
@@ -3381,7 +3381,7 @@ _080A3C72:
 	adds r0, r4, 0
 	bl StartSpriteAnim
 	adds r0, r4, 0
-	bl sub_8075068
+	bl InitAnimArcTranslation
 	ldrh r0, [r6, 0x8]
 	adds r0, 0x1
 	b _080A3EFA
@@ -3440,7 +3440,7 @@ _080A3CE8:
 	adds r0, r4, 0
 	bl StartSpriteAnim
 	adds r0, r4, 0
-	bl sub_8075068
+	bl InitAnimArcTranslation
 	ldrh r0, [r6, 0x8]
 	adds r0, 0x1
 	b _080A3EFA
@@ -3449,7 +3449,7 @@ _080A3D62:
 	adds r1, r2, 0
 	bl sub_80A3F24
 	adds r0, r4, 0
-	bl AnimateBallThrow
+	bl TranslateAnimHorizontalArc
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A3D78
@@ -3494,7 +3494,7 @@ _080A3D80:
 	adds r0, r4, 0
 	bl StartSpriteAnim
 	adds r0, r4, 0
-	bl sub_8075068
+	bl InitAnimArcTranslation
 	ldrh r0, [r6, 0x8]
 	adds r0, 0x1
 	b _080A3EFA
@@ -3551,7 +3551,7 @@ _080A3DD2:
 	adds r0, r4, 0
 	bl StartSpriteAnim
 	adds r0, r4, 0
-	bl sub_8075068
+	bl InitAnimArcTranslation
 	ldrh r0, [r6, 0x8]
 	adds r0, 0x1
 	b _080A3EFA
@@ -3560,7 +3560,7 @@ _080A3E48:
 	adds r1, r2, 0
 	bl sub_80A3F24
 	adds r0, r4, 0
-	bl AnimateBallThrow
+	bl TranslateAnimHorizontalArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A3EFC
@@ -3603,7 +3603,7 @@ _080A3E64:
 	adds r0, r4, 0
 	bl StartSpriteAnim
 	adds r0, r4, 0
-	bl sub_8075068
+	bl InitAnimArcTranslation
 	ldrh r0, [r6, 0x8]
 	adds r0, 0x1
 	b _080A3EFA
@@ -3612,7 +3612,7 @@ _080A3EB6:
 	adds r1, r2, 0
 	bl sub_80A3F24
 	adds r0, r4, 0
-	bl AnimateBallThrow
+	bl TranslateAnimHorizontalArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A3EFC
@@ -3902,7 +3902,7 @@ _080A40D4:
 _080A40E4:
 	strh r0, [r4, 0x22]
 	adds r0, r6, 0
-	bl sub_8076884
+	bl GetBattlerSpriteBGPriority
 	movs r1, 0x3
 	ands r1, r0
 	lsls r1, 2
@@ -3924,10 +3924,10 @@ _080A4100:
 	adds r0, r7
 	strh r0, [r4, 0x22]
 	movs r0, 0x1
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 _080A411A:
 	adds r0, r6, 0
-	bl sub_8076884
+	bl GetBattlerSpriteBGPriority
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, 0x1
@@ -4008,7 +4008,7 @@ _080A41A4:
 	bgt _080A41BC
 _080A41B6:
 	adds r0, r4, 0
-	bl move_anim_8074EE0
+	bl DestroySpriteAndMatrix
 _080A41BC:
 	pop {r4,r5}
 	pop {r0}
@@ -4221,7 +4221,7 @@ _080A4318:
 	subs r1, r5
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_8075B30
+	bl ArcTan2Neg
 	lsls r0, 16
 	lsrs r4, r0, 16
 	bl IsContest
@@ -4239,7 +4239,7 @@ _080A437A:
 	adds r0, r6, 0
 	movs r1, 0
 	adds r2, r3, 0
-	bl sub_8075A1C
+	bl TrySetSpriteRotScale
 	ldr r0, _080A439C @ =sub_80A43A0
 	str r0, [r6, 0x1C]
 _080A438E:
@@ -4280,7 +4280,7 @@ sub_80A43A0: @ 80A43A0
 	b _080A43D6
 _080A43D0:
 	adds r0, r2, 0
-	bl move_anim_8074EE0
+	bl DestroySpriteAndMatrix
 _080A43D6:
 	pop {r4}
 	pop {r0}
@@ -4335,7 +4335,7 @@ _080A442C:
 	ldrh r1, [r4, 0x22]
 	adds r0, r1
 	strh r0, [r4, 0x22]
-	ldr r0, _080A4448 @ =sub_8074F6C
+	ldr r0, _080A4448 @ =RunStoredCallbackWhenAnimEnds
 	str r0, [r4, 0x1C]
 	ldr r1, _080A444C @ =DestroyAnimSprite
 	adds r0, r4, 0
@@ -4345,7 +4345,7 @@ _080A442C:
 	bx r0
 	.align 2, 0
 _080A4444: .4byte gBattleAnimArgs
-_080A4448: .4byte sub_8074F6C
+_080A4448: .4byte RunStoredCallbackWhenAnimEnds
 _080A444C: .4byte DestroyAnimSprite
 	thumb_func_end sub_80A43F8
 
@@ -4369,7 +4369,7 @@ _080A446A:
 	movs r0, 0
 	ldrsh r1, [r4, r0]
 	adds r0, r5, 0
-	bl sub_8074FF8
+	bl SetAnimSpriteInitialXOffset
 	ldrh r0, [r4, 0x2]
 	ldrh r1, [r5, 0x22]
 	adds r0, r1
@@ -4407,18 +4407,18 @@ sub_80A4494: @ 80A4494
 	ldrb r1, [r1, 0xC]
 	adds r0, r4, 0
 	bl StartSpriteAffineAnim
-	ldr r1, _080A44D8 @ =move_anim_8074EE0
+	ldr r1, _080A44D8 @ =DestroySpriteAndMatrix
 	adds r0, r4, 0
 	bl StoreSpriteCallbackInData6
-	ldr r0, _080A44DC @ =sub_8074E70
+	ldr r0, _080A44DC @ =TranslateSpriteLinearAndFlicker
 	str r0, [r4, 0x1C]
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080A44D4: .4byte gBattleAnimArgs
-_080A44D8: .4byte move_anim_8074EE0
-_080A44DC: .4byte sub_8074E70
+_080A44D8: .4byte DestroySpriteAndMatrix
+_080A44DC: .4byte TranslateSpriteLinearAndFlicker
 	thumb_func_end sub_80A4494
 
 	thumb_func_start sub_80A44E0
@@ -4717,7 +4717,7 @@ _080A46F2:
 	bl StoreSpriteCallbackInData6
 	movs r0, 0x3
 	strh r0, [r4, 0x2E]
-	ldr r0, _080A4734 @ =sub_8074C44
+	ldr r0, _080A4734 @ =WaitAnimForDuration
 	str r0, [r4, 0x1C]
 _080A4728:
 	pop {r4}
@@ -4725,7 +4725,7 @@ _080A4728:
 	bx r0
 	.align 2, 0
 _080A4730: .4byte DestroyAnimSprite
-_080A4734: .4byte sub_8074C44
+_080A4734: .4byte WaitAnimForDuration
 	thumb_func_end sub_80A46CC
 
 	thumb_func_start sub_80A4738
@@ -4971,7 +4971,7 @@ _080A4906:
 	ldr r6, _080A4968 @ =gBattleAnimAttacker
 	ldrb r0, [r6]
 	movs r1, 0
-	bl sub_8074844
+	bl GetBattlerSpriteCoord2
 	lsls r0, 24
 	ldr r4, _080A4964 @ =gBattleAnimArgs
 	lsrs r0, 24
@@ -4980,7 +4980,7 @@ _080A4906:
 	strh r0, [r5, 0x20]
 	ldrb r0, [r6]
 	movs r1, 0x1
-	bl sub_8074844
+	bl GetBattlerSpriteCoord2
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r4, [r4, 0x2]
@@ -4997,7 +4997,7 @@ _080A4906:
 	beq _080A496C
 _080A4944:
 	ldrb r0, [r6]
-	bl sub_8076884
+	bl GetBattlerSpriteBGPriority
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, 0x1
@@ -5016,7 +5016,7 @@ _080A4964: .4byte gBattleAnimArgs
 _080A4968: .4byte gBattleAnimAttacker
 _080A496C:
 	ldrb r0, [r6]
-	bl sub_8076884
+	bl GetBattlerSpriteBGPriority
 	movs r1, 0x3
 	ands r1, r0
 	lsls r1, 2
@@ -5185,14 +5185,14 @@ _080A4A80:
 	movs r1, 0x4
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r0, _080A4AC8 @ =sub_8074F88
+	ldr r0, _080A4AC8 @ =DestroyAnimSpriteAndDisableBlend
 	str r0, [r4, 0x1C]
 _080A4AC2:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A4AC8: .4byte sub_8074F88
+_080A4AC8: .4byte DestroyAnimSpriteAndDisableBlend
 	thumb_func_end sub_80A49D4
 
 	thumb_func_start sub_80A4ACC
@@ -5503,12 +5503,12 @@ sub_80A4D0C: @ 80A4D0C
 	cmp r0, 0
 	bne _080A4D20
 	adds r0, r4, 0
-	bl sub_8074FCC
+	bl SetSpriteCoordsToAnimAttackerCoords
 _080A4D20:
 	movs r0, 0
 	ldrsh r1, [r5, r0]
 	adds r0, r4, 0
-	bl sub_8074FF8
+	bl SetAnimSpriteInitialXOffset
 	ldrh r0, [r5, 0x2]
 	ldrh r1, [r4, 0x22]
 	adds r0, r1
@@ -5522,7 +5522,7 @@ _080A4D20:
 	ldr r1, _080A4D54 @ =DestroyAnimSprite
 	adds r0, r4, 0
 	bl StoreSpriteCallbackInData6
-	ldr r0, _080A4D58 @ =sub_8074D00
+	ldr r0, _080A4D58 @ =TranslateSpriteLinearFixedPoint
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
 	pop {r0}
@@ -5530,7 +5530,7 @@ _080A4D20:
 	.align 2, 0
 _080A4D50: .4byte gBattleAnimArgs
 _080A4D54: .4byte DestroyAnimSprite
-_080A4D58: .4byte sub_8074D00
+_080A4D58: .4byte TranslateSpriteLinearFixedPoint
 	thumb_func_end sub_80A4D0C
 
 	thumb_func_start sub_80A4D5C
@@ -5569,11 +5569,11 @@ _080A4D7A:
 	adds r3, r5, 0
 	adds r3, 0x22
 	adds r0, r6, 0
-	bl sub_8076D9C
+	bl SetAverageBattlerPositions
 	movs r2, 0
 	ldrsh r1, [r4, r2]
 	adds r0, r5, 0
-	bl sub_8074FF8
+	bl SetAnimSpriteInitialXOffset
 	ldrh r0, [r4, 0x2]
 	ldrh r1, [r5, 0x22]
 	adds r0, r1
@@ -5619,7 +5619,7 @@ _080A4DFA:
 	movs r2, 0
 	ldrsh r1, [r0, r2]
 	adds r0, r5, 0
-	bl sub_8074FF8
+	bl SetAnimSpriteInitialXOffset
 _080A4E14:
 	ldr r1, _080A4E34 @ =gBattleAnimArgs
 	ldrh r0, [r1, 0xA]
@@ -5631,7 +5631,7 @@ _080A4E14:
 	ldr r1, _080A4E38 @ =DestroyAnimSprite
 	adds r0, r5, 0
 	bl StoreSpriteCallbackInData6
-	ldr r0, _080A4E3C @ =sub_8074D00
+	ldr r0, _080A4E3C @ =TranslateSpriteLinearFixedPoint
 	str r0, [r5, 0x1C]
 	pop {r4-r6}
 	pop {r0}
@@ -5639,14 +5639,14 @@ _080A4E14:
 	.align 2, 0
 _080A4E34: .4byte gBattleAnimArgs
 _080A4E38: .4byte DestroyAnimSprite
-_080A4E3C: .4byte sub_8074D00
+_080A4E3C: .4byte TranslateSpriteLinearFixedPoint
 	thumb_func_end sub_80A4D5C
 
 	thumb_func_start sub_80A4E40
 sub_80A4E40: @ 80A4E40
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8074FCC
+	bl SetSpriteCoordsToAnimAttackerCoords
 	ldr r0, _080A4E6C @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
@@ -5738,7 +5738,7 @@ _080A4EEC:
 sub_80A4EF4: @ 80A4EF4
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8074FCC
+	bl SetSpriteCoordsToAnimAttackerCoords
 	ldr r0, _080A4F24 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide
@@ -5819,7 +5819,7 @@ sub_80A4F60: @ 80A4F60
 	cmp r0, 0x3C
 	ble _080A4FA4
 	adds r0, r4, 0
-	bl move_anim_8074EE0
+	bl DestroySpriteAndMatrix
 _080A4FA4:
 	pop {r4}
 	pop {r0}
@@ -5837,14 +5837,14 @@ sub_80A4FAC: @ 80A4FAC
 	strh r1, [r0, 0x22]
 	movs r1, 0x14
 	strh r1, [r0, 0x2E]
-	ldr r1, _080A4FCC @ =sub_8074C44
+	ldr r1, _080A4FCC @ =WaitAnimForDuration
 	str r1, [r0, 0x1C]
 	ldr r1, _080A4FD0 @ =sub_80A4FD4
 	bl StoreSpriteCallbackInData6
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A4FCC: .4byte sub_8074C44
+_080A4FCC: .4byte WaitAnimForDuration
 _080A4FD0: .4byte sub_80A4FD4
 	thumb_func_end sub_80A4FAC
 
@@ -5863,14 +5863,14 @@ sub_80A4FD4: @ 80A4FD4
 	b _080A506A
 _080A4FEA:
 	strh r1, [r5, 0x2E]
-	ldr r0, _080A4FFC @ =sub_8074C44
+	ldr r0, _080A4FFC @ =WaitAnimForDuration
 	str r0, [r5, 0x1C]
 	ldr r1, _080A5000 @ =sub_80A4FD4
 	adds r0, r5, 0
 	bl StoreSpriteCallbackInData6
 	b _080A506A
 	.align 2, 0
-_080A4FFC: .4byte sub_8074C44
+_080A4FFC: .4byte WaitAnimForDuration
 _080A5000: .4byte sub_80A4FD4
 _080A5004:
 	ldrh r3, [r5, 0x24]
@@ -5915,7 +5915,7 @@ _080A5004:
 	adds r0, r1
 	strh r0, [r5, 0x38]
 	movs r0, 0x3F
-	bl sub_8073A44
+	bl BattleAnimAdjustPanning
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -5946,14 +5946,14 @@ sub_80A5084: @ 80A5084
 	bne _080A50AC
 	movs r0, 0xA
 	strh r0, [r2, 0x2E]
-	ldr r0, _080A50A4 @ =sub_8074C44
+	ldr r0, _080A50A4 @ =WaitAnimForDuration
 	str r0, [r2, 0x1C]
 	ldr r1, _080A50A8 @ =sub_80A50B8
 	adds r0, r2, 0
 	bl StoreSpriteCallbackInData6
 	b _080A50B0
 	.align 2, 0
-_080A50A4: .4byte sub_8074C44
+_080A50A4: .4byte WaitAnimForDuration
 _080A50A8: .4byte sub_80A50B8
 _080A50AC:
 	ldr r0, _080A50B4 @ =sub_80A4FD4
@@ -5976,14 +5976,14 @@ sub_80A50B8: @ 80A50B8
 	strh r0, [r5, 0x2E]
 	strh r1, [r5, 0x30]
 	strh r1, [r5, 0x32]
-	ldr r0, _080A50D8 @ =sub_8074C44
+	ldr r0, _080A50D8 @ =WaitAnimForDuration
 	str r0, [r5, 0x1C]
 	ldr r1, _080A50DC @ =sub_80A5174
 	adds r0, r5, 0
 	bl StoreSpriteCallbackInData6
 	b _080A5160
 	.align 2, 0
-_080A50D8: .4byte sub_8074C44
+_080A50D8: .4byte WaitAnimForDuration
 _080A50DC: .4byte sub_80A5174
 _080A50E0:
 	ldrh r0, [r5, 0x6]
@@ -6126,7 +6126,7 @@ _080A51A4:
 	movs r2, 0x4
 	bl LoadPalette
 	movs r0, 0x3F
-	bl sub_8073A44
+	bl BattleAnimAdjustPanning
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -6447,7 +6447,7 @@ _080A5424:
 	ldrh r0, [r5, 0x34]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80759DC
+	bl SetBattlerSpriteYOffsetFromRotation
 	ldrh r0, [r5, 0x2E]
 	adds r0, 0x1
 	strh r0, [r5, 0x2E]
@@ -6589,7 +6589,7 @@ _080A5538:
 	ldrh r0, [r5, 0x34]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80759DC
+	bl SetBattlerSpriteYOffsetFromRotation
 	ldrh r0, [r5, 0x2E]
 	adds r0, 0x1
 	strh r0, [r5, 0x2E]
@@ -6694,7 +6694,7 @@ _080A55FA:
 	ldrh r0, [r4, 0x32]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80759DC
+	bl SetBattlerSpriteYOffsetFromRotation
 	ldrh r0, [r4, 0x30]
 	adds r0, 0x1
 	strh r0, [r4, 0x30]
@@ -6732,7 +6732,7 @@ _080A564C:
 	ldrh r0, [r4, 0x32]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80759DC
+	bl SetBattlerSpriteYOffsetFromRotation
 	ldrh r0, [r4, 0x30]
 	adds r0, 0x1
 	strh r0, [r4, 0x30]
@@ -6906,7 +6906,7 @@ _080A579E:
 	adds r1, r2, 0
 	bl SetSpriteRotScale
 	ldrb r0, [r4, 0x8]
-	bl sub_80759DC
+	bl SetBattlerSpriteYOffsetFromRotation
 	b _080A58D4
 _080A57C4:
 	movs r0, 0x8
@@ -7097,7 +7097,7 @@ sub_80A58EC: @ 80A58EC
 	adds r1, r2, 0
 	bl SetSpriteRotScale
 	ldrb r0, [r4, 0x8]
-	bl sub_80759DC
+	bl SetBattlerSpriteYOffsetFromRotation
 	ldrh r0, [r4, 0xE]
 	subs r0, 0x1
 	strh r0, [r4, 0xE]
@@ -7154,7 +7154,7 @@ _080A595E:
 	ldr r1, _080A59A0 @ =sub_80A5A8C
 	adds r0, r5, 0
 	bl StoreSpriteCallbackInData6
-	ldr r0, _080A59A4 @ =sub_8074F6C
+	ldr r0, _080A59A4 @ =RunStoredCallbackWhenAnimEnds
 	str r0, [r5, 0x1C]
 	pop {r4-r6}
 	pop {r0}
@@ -7162,7 +7162,7 @@ _080A595E:
 	.align 2, 0
 _080A599C: .4byte gBattleAnimTarget
 _080A59A0: .4byte sub_80A5A8C
-_080A59A4: .4byte sub_8074F6C
+_080A59A4: .4byte RunStoredCallbackWhenAnimEnds
 	thumb_func_end sub_80A5940
 
 	thumb_func_start sub_80A59A8
@@ -7187,7 +7187,7 @@ sub_80A59A8: @ 80A59A8
 	ldr r1, _080A59E8 @ =sub_80A5A44
 	adds r0, r4, 0
 	bl StoreSpriteCallbackInData6
-	ldr r0, _080A59EC @ =sub_8074F6C
+	ldr r0, _080A59EC @ =RunStoredCallbackWhenAnimEnds
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
 	pop {r0}
@@ -7196,7 +7196,7 @@ sub_80A59A8: @ 80A59A8
 _080A59E0: .4byte gBattleAnimTarget
 _080A59E4: .4byte 0x0000ffd0
 _080A59E8: .4byte sub_80A5A44
-_080A59EC: .4byte sub_8074F6C
+_080A59EC: .4byte RunStoredCallbackWhenAnimEnds
 	thumb_func_end sub_80A59A8
 
 	thumb_func_start sub_80A59F0
@@ -7259,7 +7259,7 @@ sub_80A5A44: @ 80A5A44
 	ldr r1, _080A5A74 @ =sub_80A5A7C
 	adds r0, r4, 0
 	bl StoreSpriteCallbackInData6
-	ldr r0, _080A5A78 @ =sub_8074CD0
+	ldr r0, _080A5A78 @ =TranslateSpriteLinear
 	str r0, [r4, 0x1C]
 _080A5A6E:
 	pop {r4}
@@ -7267,7 +7267,7 @@ _080A5A6E:
 	bx r0
 	.align 2, 0
 _080A5A74: .4byte sub_80A5A7C
-_080A5A78: .4byte sub_8074CD0
+_080A5A78: .4byte TranslateSpriteLinear
 	thumb_func_end sub_80A5A44
 
 	thumb_func_start sub_80A5A7C
@@ -7436,7 +7436,7 @@ sub_80A5B7C: @ 80A5B7C
 	strh r5, [r4, 0x34]
 	strh r5, [r4, 0x36]
 	subs r0, 0x42
-	bl sub_8073A44
+	bl BattleAnimAdjustPanning
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r4, 0x38]
@@ -7656,7 +7656,7 @@ sub_80A5D4C: @ 80A5D4C
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r1, 0
-	bl sub_8075114
+	bl InitSpritePosToAnimTarget
 	adds r2, r4, 0
 	adds r2, 0x2C
 	ldrb r0, [r2]
@@ -8042,7 +8042,7 @@ sub_80A5FC0: @ 80A5FC0
 	adds r5, 0x1E
 	adds r1, r5, 0
 	mov r2, r8
-	bl sub_80765C0
+	bl StorePointerInVars
 	ldr r0, _080A6098 @ =0x000027d2
 	bl IndexOfSpritePaletteTag
 	lsls r0, 24
@@ -8273,7 +8273,7 @@ _080A61EC:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x26
 	ldrsh r1, [r4, r2]
-	bl sub_80765C8
+	bl LoadPointerFromVars
 	ldr r1, _080A621C @ =0x00007fbb
 	str r1, [sp]
 	movs r1, 0
@@ -8506,7 +8506,7 @@ sub_80A63B4: @ 80A63B4
 	ldr r1, _080A6444 @ =gTasks
 	adds r6, r0, r1
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x8]
@@ -8598,7 +8598,7 @@ _080A6488:
 	cmp r5, 0x1
 	bhi _080A649A
 	movs r0, 0
-	bl duplicate_obj_of_side_rel2move_in_transparent_mode
+	bl CloneBattlerSpriteWithBlend
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0
@@ -8608,7 +8608,7 @@ _080A649A:
 	str r0, [r6]
 	ldr r0, _080A64C4 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
-	bl sub_80768B0
+	bl GetBattlerSpriteBGPriorityRank
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -8652,7 +8652,7 @@ sub_80A64E0: @ 80A64E0
 	bne _080A6532
 	ldr r0, _080A6518 @ =gBattleAnimAttacker
 	ldrb r0, [r0]
-	bl sub_80768B0
+	bl GetBattlerSpriteBGPriorityRank
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -8764,14 +8764,14 @@ sub_80A65CC: @ 80A65CC
 	adds r4, r0, 0
 	ldr r1, _080A65E0 @ =DestroyAnimSprite
 	bl StoreSpriteCallbackInData6
-	ldr r0, _080A65E4 @ =sub_8074F6C
+	ldr r0, _080A65E4 @ =RunStoredCallbackWhenAnimEnds
 	str r0, [r4, 0x1C]
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080A65E0: .4byte DestroyAnimSprite
-_080A65E4: .4byte sub_8074F6C
+_080A65E4: .4byte RunStoredCallbackWhenAnimEnds
 	thumb_func_end sub_80A65CC
 
 	thumb_func_start sub_80A65E8
@@ -8903,7 +8903,7 @@ sub_80A66D4: @ 80A66D4
 	push {r4-r6,lr}
 	sub sp, 0x4
 	adds r5, r0, 0
-	bl sub_8074FCC
+	bl SetSpriteCoordsToAnimAttackerCoords
 	ldr r4, _080A672C @ =gBattleAnimArgs
 	ldrb r1, [r4]
 	adds r0, r5, 0
@@ -9091,7 +9091,7 @@ _080A6800:
 	ble _080A6856
 _080A684E:
 	adds r0, r4, 0
-	bl move_anim_8074EE0
+	bl DestroySpriteAndMatrix
 	b _080A68A6
 _080A6856:
 	movs r0, 0x34
@@ -9267,7 +9267,7 @@ _080A699E:
 	cmp r0, 0x30
 	bne _080A69B2
 	adds r0, r4, 0
-	bl move_anim_8074EE0
+	bl DestroySpriteAndMatrix
 _080A69B2:
 	pop {r4}
 	pop {r0}
@@ -9314,7 +9314,7 @@ _080A69DE:
 	strh r0, [r5, 0x22]
 	movs r0, 0x8
 	strh r0, [r5, 0x2E]
-	ldr r0, _080A6A20 @ =sub_8074C44
+	ldr r0, _080A6A20 @ =WaitAnimForDuration
 	str r0, [r5, 0x1C]
 	ldr r1, _080A6A24 @ =DestroyAnimSprite
 	adds r0, r5, 0
@@ -9325,7 +9325,7 @@ _080A69DE:
 	.align 2, 0
 _080A6A18: .4byte 0x0000fff0
 _080A6A1C: .4byte gBattleAnimAttacker
-_080A6A20: .4byte sub_8074C44
+_080A6A20: .4byte WaitAnimForDuration
 _080A6A24: .4byte DestroyAnimSprite
 	thumb_func_end sub_80A69B8
 
@@ -9333,7 +9333,7 @@ _080A6A24: .4byte DestroyAnimSprite
 sub_80A6A28: @ 80A6A28
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	bl sub_8074FCC
+	bl SetSpriteCoordsToAnimAttackerCoords
 	ldrh r0, [r4, 0x22]
 	adds r0, 0x8
 	strh r0, [r4, 0x22]
@@ -9381,7 +9381,7 @@ _080A6A74:
 	subs r0, 0x28
 	strh r0, [r4, 0x36]
 	adds r0, r4, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimLinearTranslation
 	ldrh r0, [r5, 0x6]
 	strh r0, [r4, 0x38]
 	ldr r0, _080A6AAC @ =sub_80A6AB0
@@ -9400,7 +9400,7 @@ _080A6AAC: .4byte sub_80A6AB0
 sub_80A6AB0: @ 80A6AB0
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80755E0
+	bl AnimTranslateLinear
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A6B00
@@ -9458,13 +9458,13 @@ sub_80A6B0C: @ 80A6B0C
 	bne _080A6B2C
 	adds r0, r5, 0
 	movs r1, 0x5
-	bl sub_8076B2C
+	bl GetBattlerSpriteCoordAttr
 	adds r0, 0x8
 	b _080A6B36
 _080A6B2C:
 	adds r0, r5, 0
 	movs r1, 0x4
-	bl sub_8076B2C
+	bl GetBattlerSpriteCoordAttr
 	subs r0, 0x8
 _080A6B36:
 	strh r0, [r6, 0x20]
@@ -9474,7 +9474,7 @@ _080A6B36:
 	adds r4, r0, 0
 	adds r0, r5, 0
 	movs r1, 0
-	bl sub_8076B2C
+	bl GetBattlerSpriteCoordAttr
 	lsls r4, 24
 	lsrs r4, 24
 	lsls r0, 16
@@ -9529,7 +9529,7 @@ _080A6B82:
 	ldr r1, _080A6BC8 @ =sub_80A6BD0
 	adds r0, r5, 0
 	bl StoreSpriteCallbackInData6
-	ldr r0, _080A6BCC @ =sub_8074F6C
+	ldr r0, _080A6BCC @ =RunStoredCallbackWhenAnimEnds
 	str r0, [r5, 0x1C]
 	pop {r4,r5}
 	pop {r0}
@@ -9538,7 +9538,7 @@ _080A6B82:
 _080A6BC0: .4byte gBattleAnimTarget
 _080A6BC4: .4byte gBattleAnimArgs
 _080A6BC8: .4byte sub_80A6BD0
-_080A6BCC: .4byte sub_8074F6C
+_080A6BCC: .4byte RunStoredCallbackWhenAnimEnds
 	thumb_func_end sub_80A6B64
 
 	thumb_func_start sub_80A6BD0
@@ -9559,7 +9559,7 @@ sub_80A6BD0: @ 80A6BD0
 	lsrs r1, 24
 	adds r0, r4, 0
 	bl StartSpriteAnim
-	ldr r0, _080A6C04 @ =sub_8074F6C
+	ldr r0, _080A6C04 @ =RunStoredCallbackWhenAnimEnds
 	str r0, [r4, 0x1C]
 _080A6BF8:
 	pop {r4}
@@ -9567,7 +9567,7 @@ _080A6BF8:
 	bx r0
 	.align 2, 0
 _080A6C00: .4byte DestroyAnimSprite
-_080A6C04: .4byte sub_8074F6C
+_080A6C04: .4byte RunStoredCallbackWhenAnimEnds
 	thumb_func_end sub_80A6BD0
 
 	thumb_func_start sub_80A6C08
@@ -9595,7 +9595,7 @@ _080A6C26:
 	ldr r1, _080A6C48 @ =sub_80A6C50
 	adds r0, r4, 0
 	bl StoreSpriteCallbackInData6
-	ldr r0, _080A6C4C @ =sub_8074F50
+	ldr r0, _080A6C4C @ =RunStoredCallbackWhenAffineAnimEnds
 	str r0, [r4, 0x1C]
 	pop {r4}
 	pop {r0}
@@ -9603,7 +9603,7 @@ _080A6C26:
 	.align 2, 0
 _080A6C44: .4byte gBattleAnimTarget
 _080A6C48: .4byte sub_80A6C50
-_080A6C4C: .4byte sub_8074F50
+_080A6C4C: .4byte RunStoredCallbackWhenAffineAnimEnds
 	thumb_func_end sub_80A6C08
 
 	thumb_func_start sub_80A6C50
@@ -9620,18 +9620,18 @@ sub_80A6C50: @ 80A6C50
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl StartSpriteAffineAnim
-	ldr r1, _080A6C7C @ =move_anim_8074EE0
+	ldr r1, _080A6C7C @ =DestroySpriteAndMatrix
 	adds r0, r4, 0
 	bl StoreSpriteCallbackInData6
-	ldr r0, _080A6C80 @ =sub_8074F50
+	ldr r0, _080A6C80 @ =RunStoredCallbackWhenAffineAnimEnds
 	str r0, [r4, 0x1C]
 _080A6C76:
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A6C7C: .4byte move_anim_8074EE0
-_080A6C80: .4byte sub_8074F50
+_080A6C7C: .4byte DestroySpriteAndMatrix
+_080A6C80: .4byte RunStoredCallbackWhenAffineAnimEnds
 	thumb_func_end sub_80A6C50
 
 	thumb_func_start sub_80A6C84
@@ -9661,7 +9661,7 @@ _080A6CA2:
 	strh r0, [r4, 0x20]
 	adds r0, r5, 0
 	movs r1, 0x2
-	bl sub_8076B2C
+	bl GetBattlerSpriteCoordAttr
 	strh r0, [r4, 0x22]
 	lsls r0, 16
 	asrs r0, 16
@@ -9684,7 +9684,7 @@ _080A6CCA:
 	ldr r1, _080A6CF8 @ =sub_80A6D00
 	adds r0, r4, 0
 	bl StoreSpriteCallbackInData6
-	ldr r0, _080A6CFC @ =sub_8074F50
+	ldr r0, _080A6CFC @ =RunStoredCallbackWhenAffineAnimEnds
 	str r0, [r4, 0x1C]
 	pop {r4-r6}
 	pop {r0}
@@ -9692,7 +9692,7 @@ _080A6CCA:
 	.align 2, 0
 _080A6CF4: .4byte gBattleAnimTarget
 _080A6CF8: .4byte sub_80A6D00
-_080A6CFC: .4byte sub_8074F50
+_080A6CFC: .4byte RunStoredCallbackWhenAffineAnimEnds
 	thumb_func_end sub_80A6C84
 
 	thumb_func_start sub_80A6D00
@@ -9850,7 +9850,7 @@ sub_80A6DF0: @ 80A6DF0
 	ldr r1, _080A6E24 @ =sub_80A6E2C
 	adds r0, r4, 0
 	bl StoreSpriteCallbackInData6
-	ldr r0, _080A6E28 @ =sub_8074F6C
+	ldr r0, _080A6E28 @ =RunStoredCallbackWhenAnimEnds
 	str r0, [r4, 0x1C]
 _080A6E1E:
 	pop {r4}
@@ -9858,7 +9858,7 @@ _080A6E1E:
 	bx r0
 	.align 2, 0
 _080A6E24: .4byte sub_80A6E2C
-_080A6E28: .4byte sub_8074F6C
+_080A6E28: .4byte RunStoredCallbackWhenAnimEnds
 	thumb_func_end sub_80A6DF0
 
 	thumb_func_start sub_80A6E2C

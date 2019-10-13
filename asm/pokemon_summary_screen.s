@@ -10728,7 +10728,7 @@ sub_8139D90: @ 8139D90
 	lsls r0, 2
 	ldr r1, _08139DB8 @ =gSprites
 	adds r0, r1
-	bl DestroySpriteAndFreeResources_
+	bl DestroySpriteAndFreeResources2
 	pop {r0}
 	bx r0
 	.align 2, 0

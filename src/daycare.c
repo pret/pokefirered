@@ -2087,7 +2087,7 @@ struct UnkStruct_82349CC
     u8 field_3;
 };
 
-extern const struct UnkStruct_82349CC gUnknown_82349CC[NUM_SPECIES];
+extern const struct UnkStruct_82349CC gMonFrontPicCoords[NUM_SPECIES];
 
 static void SpriteCB_Egg_2(struct Sprite* sprite)
 {
@@ -2101,7 +2101,7 @@ static void SpriteCB_Egg_2(struct Sprite* sprite)
             sprite->data[0] = 0;
             species = GetMonData(&gPlayerParty[sEggHatchData->eggPartyID], MON_DATA_SPECIES);
             gSprites[sEggHatchData->pokeSpriteID].pos2.x = 0;
-            gSprites[sEggHatchData->pokeSpriteID].pos2.y = gUnknown_82349CC[species].field_1;
+            gSprites[sEggHatchData->pokeSpriteID].pos2.y = gMonFrontPicCoords[species].field_1;
         }
         else
         {

@@ -44,10 +44,10 @@ gBattle_BG3_X: @ 2022980
 gBattle_BG3_Y: @ 2022982
 	.space 0x2
 
-gUnknown_2022984: @ 2022984
+gBattle_WIN0H: @ 2022984
 	.space 0x2
 
-gUnknown_2022986: @ 2022986
+gBattle_WIN0V: @ 2022986
 	.space 0x2
 
 gUnknown_2022988: @ 2022988
@@ -621,7 +621,7 @@ gUnknown_2037EE0: @ 2037EE0
 gAnimScriptActive: @ 2037EE1
 	.space 0x1
 
-gUnknown_2037EE2: @ 2037EE2
+gAnimVisualTaskCount: @ 2037EE2
 	.space 0x1
 
 gUnknown_2037EE3: @ 2037EE3
@@ -669,16 +669,13 @@ gBattleAnimAttacker: @ 2037F1A
 gBattleAnimTarget: @ 2037F1B
 	.space 0x1
 
-gUnknown_2037F1C: @ 2037F1C
+gAnimBattlerSpecies: @ 2037F1C
 	.space 0x8
 
 gUnknown_2037F24: @ 2037F24
 	.space 0x4
 
-gUnknown_2037F28: @ 2037F28
-	.space 0x8
-
-	.align 2
+	.include "src/battle_anim_mons.o"
 	.include "src/title_screen.o"
 
 	.align 2
@@ -881,15 +878,11 @@ gUnknown_203998C: @ 203998C
 gUnknown_203999C: @ 203999C
 	.space 0x8
 
-gUnknown_20399A4: @ 20399A4
-	.space 0x10
+	.include "src/dragon.o"
+	.include "src/battle_anim_utility_funcs.o"
+	.include "src/battle_intro.o"
 
-gUnknown_20399B4: @ 20399B4
-	.space 0x4
-
-gUnknown_20399B8: @ 20399B8
-	.space 0x4
-
+	.align 2
 gUnknown_20399BC: @ 20399BC
 	.space 0x4
 

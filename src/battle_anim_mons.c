@@ -1369,18 +1369,18 @@ void sub_8075D9C(struct Sprite *sprite)
 // arg 5: lower 8 bits = location on attacking mon, upper 8 bits = location on target mon pick to target
 void TranslateAnimSpriteToTargetMonLocation(struct Sprite *sprite)
 {
-    bool8 v1;
+    bool8 respectMonPicOffsets;
     u8 coordType;
 
     if (!(gBattleAnimArgs[5] & 0xFF00))
-        v1 = TRUE;
+        respectMonPicOffsets = TRUE;
     else
-        v1 = FALSE;
+        respectMonPicOffsets = FALSE;
     if (!(gBattleAnimArgs[5] & 0xFF))
         coordType = BATTLER_COORD_Y_PIC_OFFSET;
     else
         coordType = BATTLER_COORD_Y;
-    InitSpritePosToAnimAttacker(sprite, v1);
+    InitSpritePosToAnimAttacker(sprite, respectMonPicOffsets);
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     sprite->data[0] = gBattleAnimArgs[4];
@@ -2183,6 +2183,7 @@ static void sub_8077118(u8 taskId)
 static void sub_80771E4(struct Task *task, u8 taskId)
 {
     s16 spriteId = CloneBattlerSpriteWithBlend(0);
+
     if (spriteId >= 0)
     {
         gSprites[spriteId].oam.priority = task->data[6];

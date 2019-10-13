@@ -727,7 +727,7 @@ static void sub_80B856C(u8 priority)
 
 void sub_80B85B8(u8 taskId)
 {
-    u8 toBG2 = GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) ^ 1 ? 1 : 0;
+    bool8 toBG2 = GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) ^ 1 ? TRUE : FALSE;
 
     MoveBattlerSpriteToBG(gBattleAnimAttacker, toBG2);
     gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].invisible = FALSE;
@@ -741,7 +741,7 @@ void sub_80B85B8(u8 taskId)
 
 void sub_80B8664(u8 taskId)
 {
-    u8 toBG2 = GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) ^ 1 ? 1 : 0;
+    bool8 toBG2 = GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) ^ 1 ? TRUE : FALSE;
     
     sub_8073128(toBG2);
     if (IsBattlerSpriteVisible(BATTLE_PARTNER(gBattleAnimAttacker)))

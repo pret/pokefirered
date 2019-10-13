@@ -430,13 +430,13 @@ static void sub_80B2ECC(struct Sprite *sprite)
         u8 battler = battlerCopy = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
         u8 rank = GetBattlerSpriteBGPriorityRank(battler);
         s32 var0 = 1;
-        u8 toBG_2 = (rank ^ var0) != 0;
+        bool8 toBG2 = (rank ^ var0) != 0;
 
         if (IsBattlerSpriteVisible(battler))
-            MoveBattlerSpriteToBG(battler, toBG_2);
+            MoveBattlerSpriteToBG(battler, toBG2);
         battler = BATTLE_PARTNER(battlerCopy);
         if (IsBattlerSpriteVisible(battler))
-            MoveBattlerSpriteToBG(battler, toBG_2 ^ var0);
+            MoveBattlerSpriteToBG(battler, toBG2 ^ var0);
     }
     if (!IsContest() && IsDoubleBattle())
     {
@@ -522,13 +522,13 @@ static void sub_80B3168(struct Sprite *sprite)
         u8 battler = battlerCopy = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
         u8 rank = GetBattlerSpriteBGPriorityRank(battler);
         s32 var0 = 1;
-        u8 toBG_2 = (rank ^ var0) != 0;
+        bool8 toBG2 = (rank ^ var0) != 0;
 
         if (IsBattlerSpriteVisible(battler))
-            sub_8073128(toBG_2);
+            sub_8073128(toBG2);
         battler = battlerCopy ^ 2;
         if (IsBattlerSpriteVisible(battler))
-            sub_8073128(toBG_2 ^ var0);
+            sub_8073128(toBG2 ^ var0);
     }
     sprite->callback = DestroyAnimSprite;
 }

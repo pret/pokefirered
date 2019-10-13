@@ -47,7 +47,7 @@ PalletTown_PlayersHouse_2F_EventScript_168CE4:: @ 8168CE4
 	releaseall
 	end
 
-gUnknown_8168D17:: @ 8168D17
+EventScript_PalletTown_PlayersHouse_2F_ShutDownPC:: @ 8168D17
 	setvar VAR_0x8004, 1
 	playse SE_PC_OFF
 	special sub_80CA9A8

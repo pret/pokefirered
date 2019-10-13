@@ -522,7 +522,7 @@ static bool32 sub_807E40C(void)
 
 bool32 sub_807E418(void)
 {
-    if (sub_807AA70() == TRUE && sub_80F83B0())
+    if (field_weather_is_fade_finished() == TRUE && sub_80F83B0())
         return TRUE;
     else
         return FALSE;

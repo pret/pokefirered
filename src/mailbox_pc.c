@@ -94,10 +94,10 @@ static void ItemPrintFunc(u8 windowId, s32 itemId, u8 y)
     }
 }
 
-u8 MailboxPC_InitListMenu(struct PlayerPC_Unk_203AAC4 * playerPcStruct)
+u8 MailboxPC_InitListMenu(struct PlayerPCItemPageStruct * playerPcStruct)
 {
     u16 i;
-    for (i = 0; i < playerPcStruct->unk_5; i++)
+    for (i = 0; i < playerPcStruct->count; i++)
     {
         sListMenuItems[i].label = sString_Dummy;
         sListMenuItems[i].index = i;
@@ -106,7 +106,7 @@ u8 MailboxPC_InitListMenu(struct PlayerPC_Unk_203AAC4 * playerPcStruct)
     sListMenuItems[i].index = -2;
 
     gMultiuseListMenuTemplate.items = sListMenuItems;
-    gMultiuseListMenuTemplate.totalItems = playerPcStruct->unk_5 + 1;
+    gMultiuseListMenuTemplate.totalItems = playerPcStruct->count + 1;
     gMultiuseListMenuTemplate.windowId = sWindowIds[1];
     gMultiuseListMenuTemplate.header_X = 0;
     gMultiuseListMenuTemplate.item_X = GetMenuCursorDimensionByFont(2, 0);
@@ -132,9 +132,9 @@ static void MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu * list)
         PlaySE(SE_SELECT);
 }
 
-void MailboxPC_AddScrollIndicatorArrows(struct PlayerPC_Unk_203AAC4 * playerPcStruct)
+void MailboxPC_AddScrollIndicatorArrows(struct PlayerPCItemPageStruct * playerPcStruct)
 {
-    playerPcStruct->unk_A = AddScrollIndicatorArrowPairParameterized(2, 0xC2, 0xC, 0x94, playerPcStruct->unk_5 - playerPcStruct->unk_4 + 1, 110, 110, &playerPcStruct->scrollOffset);
+    playerPcStruct->scrollIndicatorId = AddScrollIndicatorArrowPairParameterized(2, 0xC2, 0xC, 0x94, playerPcStruct->count - playerPcStruct->pageItems + 1, 110, 110, &playerPcStruct->scrollOffset);
 }
 
 void MailboxPC_DestroyListMenuBuffer(void)

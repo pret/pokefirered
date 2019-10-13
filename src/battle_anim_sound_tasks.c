@@ -110,7 +110,7 @@ static void sub_80DCFE8(u8 taskId)
 
         gTasks[taskId].data[10] = 0;
         dPan = gTasks[taskId].data[3];
-        oldPan = gTasks[taskId].data[11] ;
+        oldPan = gTasks[taskId].data[11];
         gTasks[taskId].data[11] = dPan + oldPan;
         gTasks[taskId].data[11] = KeepPanInRange(gTasks[taskId].data[11], oldPan);
     }

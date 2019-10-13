@@ -4151,7 +4151,7 @@ _08011F46:
 	.align 2, 0
 _08011F4C: .4byte gMonFrontPicCoords
 _08011F50:
-	ldr r0, _08011F68 @ =0x00000181
+	ldr r0, _08011F68 @ =0x00000181 @ SPECIES_CASTFORM
 	cmp r4, r0
 	bne _08011F74
 	ldr r0, _08011F6C @ =gCastformFrontSpriteCoords

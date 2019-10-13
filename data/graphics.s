@@ -13398,27 +13398,27 @@ gFile_graphics_trainers_palettes_painter:: @ 8E69E94
 	.incbin "graphics/trainers/palettes/painter.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_back_pics_red_back_pic:: @ 8E69EBC
+gTrainerBackPic_Red:: @ 8E69EBC
 	.incbin "graphics/trainers/back_pics/red_back_pic.4bpp"
 
 	.align 2
-gFile_graphics_trainers_back_pics_leaf_back_pic:: @ 8E6C6BC
+gTrainerBackPic_Leaf:: @ 8E6C6BC
 	.incbin "graphics/trainers/back_pics/leaf_back_pic.4bpp"
 
 	.align 2
-gFile_graphics_trainers_back_pics_pokedude_back_pic:: @ 8E6EEBC
+gTrainerBackPic_PokeDude:: @ 8E6EEBC
 	.incbin "graphics/trainers/back_pics/pokedude_back_pic.4bpp"
 
 	.align 2
-gFile_graphics_trainers_back_pics_old_man_back_pic:: @ 8E70EBC
+gTrainerBackPic_OldMan:: @ 8E70EBC
 	.incbin "graphics/trainers/back_pics/old_man_back_pic.4bpp"
 
 	.align 2
-gFile_graphics_trainers_back_pics_ruby_sapphire_brendan_back_pic:: @ 8E72EBC
+gTrainerBackPic_RubySapphireBrendan:: @ 8E72EBC
 	.incbin "graphics/trainers/back_pics/ruby_sapphire_brendan_back_pic.4bpp"
 
 	.align 2
-gFile_graphics_trainers_back_pics_ruby_sapphire_may_back_pic:: @ 8E74EBC
+gTrainerBackPic_RubySapphireMay:: @ 8E74EBC
 	.incbin "graphics/trainers/back_pics/ruby_sapphire_may_back_pic.4bpp"
 
 	.align 2

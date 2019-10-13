@@ -2,44 +2,151 @@
 #include "constants/trainer_classes.h"
 #include "constants/songs.h"
 #include "constants/region_map.h"
+	.include "asm/macros.inc"
+	.include "constants/constants.inc"
 	.set NULL, 0
 
 	.section .rodata
 
 	.align 2
 gUnknown_8234698:: @ 8234698
-	.incbin "baserom.gba", 0x234698, 0x20
+	obj_frame_tiles gHeap + 0x8000, 0x800
+	obj_frame_tiles gHeap + 0x8800, 0x800
+	obj_frame_tiles gHeap + 0x9000, 0x800
+	obj_frame_tiles gHeap + 0x9800, 0x800
 
+	.align 2
 gUnknown_82346B8:: @ 82346B8
-	.incbin "baserom.gba", 0x2346B8, 0x20
+	obj_frame_tiles gHeap + 0xA000, 0x800
+	obj_frame_tiles gHeap + 0xA800, 0x800
+	obj_frame_tiles gHeap + 0xB000, 0x800
+	obj_frame_tiles gHeap + 0xB800, 0x800
 
+	.align 2
 gUnknown_82346D8:: @ 82346D8
-	.incbin "baserom.gba", 0x2346D8, 0x20
+	obj_frame_tiles gHeap + 0xC000, 0x800
+	obj_frame_tiles gHeap + 0xC800, 0x800
+	obj_frame_tiles gHeap + 0xD000, 0x800
+	obj_frame_tiles gHeap + 0xD800, 0x800
 
+	.align 2
 gUnknown_82346F8:: @ 82346F8
-	.incbin "baserom.gba", 0x2346F8, 0x20
+	obj_frame_tiles gHeap + 0xE000, 0x800
+	obj_frame_tiles gHeap + 0xE800, 0x800
+	obj_frame_tiles gHeap + 0xF000, 0x800
+	obj_frame_tiles gHeap + 0xF800, 0x800
 
+	.align 2
 gUnknown_8234718:: @ 8234718
-	.incbin "baserom.gba", 0x234718, 0x28
+	obj_frame_tiles gTrainerBackPic_Red, 0x0800
+	obj_frame_tiles gTrainerBackPic_Red + 0x0800, 0x0800
+	obj_frame_tiles gTrainerBackPic_Red + 0x1000, 0x0800
+	obj_frame_tiles gTrainerBackPic_Red + 0x1800, 0x0800
+	obj_frame_tiles gTrainerBackPic_Red + 0x2000, 0x0800
 
+	.align 2
 gUnknown_8234740:: @ 8234740
-	.incbin "baserom.gba", 0x234740, 0x28
+	obj_frame_tiles gTrainerBackPic_Leaf, 0x0800
+	obj_frame_tiles gTrainerBackPic_Leaf + 0x0800, 0x0800
+	obj_frame_tiles gTrainerBackPic_Leaf + 0x1000, 0x0800
+	obj_frame_tiles gTrainerBackPic_Leaf + 0x1800, 0x0800
+	obj_frame_tiles gTrainerBackPic_Leaf + 0x2000, 0x0800
 
+	.align 2
 gUnknown_8234768:: @ 8234768
-	.incbin "baserom.gba", 0x234768, 0x20
+	obj_frame_tiles gTrainerBackPic_PokeDude, 0x0800
+	obj_frame_tiles gTrainerBackPic_PokeDude + 0x0800, 0x0800
+	obj_frame_tiles gTrainerBackPic_PokeDude + 0x1000, 0x0800
+	obj_frame_tiles gTrainerBackPic_PokeDude + 0x1800, 0x0800
 
+	.align 2
 gUnknown_8234788:: @ 8234788
-	.incbin "baserom.gba", 0x234788, 0x20
+	obj_frame_tiles gTrainerBackPic_OldMan, 0x0800
+	obj_frame_tiles gTrainerBackPic_OldMan + 0x0800, 0x0800
+	obj_frame_tiles gTrainerBackPic_OldMan + 0x1000, 0x0800
+	obj_frame_tiles gTrainerBackPic_OldMan + 0x1800, 0x0800
 
+	.align 2
 gUnknown_82347A8:: @ 82347A8
-	.incbin "baserom.gba", 0x2347A8, 0x20
+	obj_frame_tiles gTrainerBackPic_RubySapphireBrendan, 0x0800
+	obj_frame_tiles gTrainerBackPic_RubySapphireBrendan + 0x0800, 0x0800
+	obj_frame_tiles gTrainerBackPic_RubySapphireBrendan + 0x1000, 0x0800
+	obj_frame_tiles gTrainerBackPic_RubySapphireBrendan + 0x1800, 0x0800
 
+	.align 2
 gUnknown_82347C8:: @ 82347C8
-	.incbin "baserom.gba", 0x2347C8, 0x20
+	obj_frame_tiles gTrainerBackPic_RubySapphireMay, 0x0800
+	obj_frame_tiles gTrainerBackPic_RubySapphireMay + 0x0800, 0x0800
+	obj_frame_tiles gTrainerBackPic_RubySapphireMay + 0x1000, 0x0800
+	obj_frame_tiles gTrainerBackPic_RubySapphireMay + 0x1800, 0x0800
 
-gUnknown_82347E8:: @ 82347E8
-	.incbin "baserom.gba", 0x2347E8, 0xE0
+	.align 2
+gSpriteAnim_82347E8:: @ 82347E8
+	obj_image_anim_frame 0, 0
+	obj_image_anim_end
 
+	.align 2
+gSpriteAnim_82347F0:: @ 82347F0
+	obj_image_anim_frame 3, 0
+	obj_image_anim_end
+
+	.align 2
+gSpriteAffineAnim_82347F8:: @ 82347F8
+	obj_rot_scal_anim_frame 0x100, 0x100, 0, 0
+	obj_rot_scal_anim_end
+
+	.align 2
+gSpriteAffineAnim_8234808:: @ 8234808
+	obj_rot_scal_anim_frame 0xFF00, 0x100, 0, 0
+	obj_rot_scal_anim_end
+
+	.align 2
+gSpriteAffineAnim_8234818:: @ 8234818‬
+	obj_rot_scal_anim_frame 0x28, 0x28, 0, 0
+	obj_rot_scal_anim_frame 0x12, 0x12, 0, 12
+	obj_rot_scal_anim_end
+
+	.align 2
+gSpriteAffineAnim_8234830:: @ 8234830
+	obj_rot_scal_anim_frame 0xFFFE, 0xFFFE, 0, 18
+	obj_rot_scal_anim_frame 0xFFF0, 0xFFF0, 0, 15
+	obj_rot_scal_anim_end
+
+	.align 2
+gSpriteAffineAnim_8234848:: @ 8234848
+	obj_rot_scal_anim_frame 0xA0, 0x100, 0, 0
+	obj_rot_scal_anim_frame 0x4, 0x0, 0, 8
+	obj_rot_scal_anim_frame 0xFFFC, 0x0, 0, 8
+	obj_rot_scal_anim_jump 1
+
+	.align 2
+gSpriteAffineAnim_8234868:: @ 8234868
+	obj_rot_scal_anim_frame 0x2, 0x2, 0, 20
+	obj_rot_scal_anim_end
+
+	.align 2
+gSpriteAffineAnim_8234878:: @ 8234878
+	obj_rot_scal_anim_frame 0xFFFE, 0xFFFE, 0, 20
+	obj_rot_scal_anim_end
+
+	.align 2
+gSpriteAffineAnim_8234888:: @ 8234888
+	obj_rot_scal_anim_frame 0x100, 0x100, 0, 0
+	obj_rot_scal_anim_frame 0xFFF0, 0xFFF0, 0, 9
+	obj_rot_scal_anim_end
+
+	.align 2
+gSpriteAffineAnim_82348A0:: @ 82348A0
+	obj_rot_scal_anim_frame 0x4, 0x4, 0, 63
+	obj_rot_scal_anim_end
+
+	.align 2
+gSpriteAffineAnim_82348B0:: @ 82348B0
+	obj_rot_scal_anim_frame 0x0, 0x0, -3, 5
+	obj_rot_scal_anim_frame 0x0, 0x0, 3, 5
+	obj_rot_scal_anim_end
+
+	.align 2
 gUnknown_82348C8:: @ 82348C8
 	.incbin "baserom.gba", 0x2348C8, 0x24
 

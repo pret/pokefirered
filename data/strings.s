@@ -45,7 +45,7 @@ gExpandedPlaceholder_Green:: @ 8415A5C
 gText_EggNickname:: @ 8415A62
 	.string "EGG$"
 
-gText_Pokemon:: @ 8415A66
+gStartMenuText_Pokemon:: @ 8415A66
 	.string "POKéMON$"
 
 gText_NewGame:: @ 8415A6E
@@ -351,19 +351,19 @@ gUnknown_8416133:: @ 0x8416133
 gUnknown_8416146:: @ 0x8416146
 	.string "ポケモン$"
 
-gUnknown_841614B:: @ 841614B
+gText_SaveError_PleaseExchangeBackupMemory:: @ 841614B
 	.string "Save error.\pPlease exchange the\nbackup memory.$"
 
-gUnknown_841617A:: @ 841617A
+gSaveStatName_Player:: @ 841617A
 	.string "PLAYER$"
 
-gUnknown_8416181:: @ 8416181
+gSaveStatName_Badges:: @ 8416181
 	.string "BADGES$"
 
-gUnknown_8416188:: @ 8416188
+gSaveStatName_Pokedex:: @ 8416188
 	.string "POKéDEX$"
 
-gUnknown_8416190:: @ 8416190
+gSaveStatName_Time:: @ 8416190
 	.string "TIME$"
 
 gUnknown_8416195::
@@ -482,28 +482,28 @@ gText_GoBackToThePreviousMenu::
 gText_WhatWouldYouLikeToDo:: @ 8416262
 	.string "What would you like to do?$"
 
-gUnknown_841627D::
+gStartMenuText_Pokedex::
 	.string "POKéDEX$"
 
-gUnknown_8416285:: @ 8416285
+gStartMenuText_Bag:: @ 8416285
 	.string "BAG$"
 
 gUnknown_8416289::
 	.string "ポケナビ$"
 
-gUnknown_841628E::
+gStartMenuText_Player::
 	.string "{PLAYER}$"
 
-gUnknown_8416291::
+gStartMenuText_Save::
 	.string "SAVE$"
 
-gUnknown_8416296::
+gStartMenuText_Option::
 	.string "OPTION$"
 
-gUnknown_841629D::
+gStartMenuText_Exit::
 	.string "EXIT$"
 
-gUnknown_84162A2::
+gStartMenuText_Retire::
 	.string "RETIRE$"
 
 gUnknown_84162A9:: @ 84162A9
@@ -2820,38 +2820,38 @@ gUnknown_8419F10:: @ 0x8419F10
 gUnknown_8419F2D:: @ 0x8419F2D
 	.string "ゲ-ムない じかんの しゅうせい システムが\nつかえる ように なりました!$"
 
-gUnknown_8419F54:: @ 8419F54
+gText_SavingDontTurnOffThePower2:: @ 8419F54
 	.string "SAVING…\n"
 	.string "DON'T TURN OFF THE POWER.$"
 
 // Start menu option descriptions
-gUnknown_8419F76:: @ 8419F76 // Pokedex
+gStartMenuDesc_Pokedex:: @ 8419F76 // Pokedex
 	.string "A device that records POKéMON secrets\n"
 	.string "upon meeting or catching them.$"
 
-gUnknown_8419FBB:: @ 8419FBB // Pokemon
+gStartMenuDesc_Pokemon:: @ 8419FBB // Pokemon
 	.string "Check and organize POKéMON that are\n"
 	.string "traveling with you in your party.$"
 
-gUnknown_841A001:: @ 841A001 // Bag
+gStartMenuDesc_Bag:: @ 841A001 // Bag
 	.string "Equipped with pockets for storing items\n"
 	.string "you bought, received, or found.$"
 
-gUnknown_841A049:: @ 841A049 // {PLAYER}
+gStartMenuDesc_Player:: @ 841A049 // {PLAYER}
 	.string "Check your money and other game data.$"
 
-gUnknown_841A06F:: @ 841A06F // Save
+gStartMenuDesc_Save:: @ 841A06F // Save
 	.string "Save your game with a complete record\n"
 	.string "of your progress to take a break.$"
 
-gUnknown_841A0B7:: @ 841A0B7 // Options
+gStartMenuDesc_Option:: @ 841A0B7 // Options
 	.string "Adjust various game settings such as text\n"
 	.string "speed, game rules, etc.$"
 
-gUnknown_841A0F9:: @ 841A0F9 // Quit
+gStartMenuDesc_Exit:: @ 841A0F9 // Quit
 	.string "Close this MENU window.$"
 
-gUnknown_841A111:: @ 841A111 // Retire
+gStartMenuDesc_Retire:: @ 841A111 // Retire
 	.string "Retire from the SAFARI GAME and return to\n"
 	.string "the registration counter.$"
 

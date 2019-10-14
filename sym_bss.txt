@@ -53,19 +53,13 @@ gUnknown_3000E9C: @ 3000E9C
 gUnknown_3000EA0: @ 3000EA0
 	.space 0x8
 
+    .align 2
 	.include "src/script.o"
-
 	.align 2
-gUnknown_3000FA4: @ 3000FA4
-	.space 0x4
-
-gUnknown_3000FA8: @ 3000FA8
-	.space 0x1
-
-gUnknown_3000FA9: @ 3000FA9
-	.space 0x3
-
+	.include "src/start_menu.o"
+    .align 2
 	.include "src/tileset_anims.o"
+	.align 2
 	.include "src/sound.o"
 
 	.align 2

@@ -509,7 +509,7 @@ _080F21B2:
 	movs r0, 0
 	movs r1, 0
 	bl DrawDialogueFrame
-	ldr r2, _080F2214 @ =gUnknown_8419F54
+	ldr r2, _080F2214 @ =gText_SavingDontTurnOffThePower2
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x2
@@ -543,7 +543,7 @@ _080F21B2:
 _080F2208: .4byte 0x000001ff
 _080F220C: .4byte gDecompressionBuffer
 _080F2210: .4byte gUnknown_203AB38
-_080F2214: .4byte gUnknown_8419F54
+_080F2214: .4byte gText_SavingDontTurnOffThePower2
 _080F2218: .4byte gTasks
 _080F221C: .4byte sub_80F2220
 	thumb_func_end Task_Hof_InitTeamSaveData

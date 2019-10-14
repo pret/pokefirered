@@ -26,14 +26,14 @@ sub_8088374: @ 8088374
 	bx r0
 	thumb_func_end sub_8088374
 
-	thumb_func_start sub_8088388
-sub_8088388: @ 8088388
+	thumb_func_start CB2_OptionsMenuFromStartMenu
+CB2_OptionsMenuFromStartMenu: @ 8088388
 	push {r4-r6,lr}
 	ldr r1, _08088418 @ =gMain
 	ldr r0, [r1, 0x8]
 	cmp r0, 0
 	bne _08088396
-	ldr r0, _0808841C @ =sub_80568A8
+	ldr r0, _0808841C @ =CB2_ReturnToStartMenu
 	str r0, [r1, 0x8]
 _08088396:
 	ldr r4, _08088420 @ =gUnknown_2039620
@@ -101,12 +101,12 @@ _080883FA:
 	bx r0
 	.align 2, 0
 _08088418: .4byte gMain
-_0808841C: .4byte sub_80568A8
+_0808841C: .4byte CB2_ReturnToStartMenu
 _08088420: .4byte gUnknown_2039620
 _08088424: .4byte gSaveBlock2Ptr
 _08088428: .4byte gUnknown_83CC304
 _0808842C: .4byte sub_8088454
-	thumb_func_end sub_8088388
+	thumb_func_end CB2_OptionsMenuFromStartMenu
 
 	thumb_func_start sub_8088430
 sub_8088430: @ 8088430

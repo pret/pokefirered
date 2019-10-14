@@ -16,13 +16,13 @@
 #include "constants/maps.h"
 #include "constants/songs.h"
 
-static EWRAM_DATA u16 gUnknown_203B0EC = 0;
+static EWRAM_DATA u16 sSomeVariable = 0;
 static EWRAM_DATA u8 gUnknown_203B0EE = 0;
 
 u8 gUnknown_3005E9C[4];
-u16 gUnknown_3005EA0;
+u16 gSomeVariableBackup;
 
-static bool32 sub_812B27C(const u16 * mapIdxs);
+static bool32 IsCurrentMapInArray(const u16 * mapIdxs);
 static void sub_812B520(struct HelpSystemListMenu * a0, struct ListMenuItem * a1);
 static void sub_812B614(struct HelpSystemListMenu * a0, struct ListMenuItem * a1);
 static bool8 sub_812B754(void);
@@ -824,7 +824,7 @@ static const u8 gUnknown_845C4B6[][6] = {
     {0, 0, 0, 0, 0, 0}
 };
 
-static const u16 gUnknown_845C594[] = {
+static const u16 sMartMaps[] = {
     MAP_VIRIDIAN_CITY_MART,
     MAP_PEWTER_CITY_MART,
     MAP_CERULEAN_CITY_MART,
@@ -847,7 +847,7 @@ static const u16 gUnknown_845C594[] = {
     MAP_UNDEFINED
 };
 
-static const u16 gUnknown_845C5BC[] = {
+static const u16 sGymMaps[] = {
     MAP_PEWTER_CITY_GYM,
     MAP_CERULEAN_CITY_GYM,
     MAP_VERMILION_CITY_GYM,
@@ -859,7 +859,7 @@ static const u16 gUnknown_845C5BC[] = {
     MAP_UNDEFINED
 };
 
-static const u8 gUnknown_845C5CE[][3] = {
+static const u8 sDungeonMaps[][3] = {
     { MAP_GROUP(VIRIDIAN_FOREST), MAP_NUM(VIRIDIAN_FOREST), 1 },
     { MAP_GROUP(MT_MOON_1F), MAP_NUM(MT_MOON_1F), 3 },
     { MAP_GROUP(ROCK_TUNNEL_1F), MAP_NUM(ROCK_TUNNEL_1F), 2 },
@@ -878,14 +878,14 @@ static const u8 gUnknown_845C5CE[][3] = {
     { MAP_GROUP(SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER), MAP_NUM(SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER), 7 }
 };
 
-void sub_812B1E0(u8 a0)
+void HelpSystem_SetSomeVariable(u8 a0)
 {
-    gUnknown_203B0EC = a0;
+    sSomeVariable = a0;
 }
 
 void HelpSystem_SetSomeVariable2(u8 a0)
 {
-    switch (gUnknown_203B0EC)
+    switch (sSomeVariable)
     {
     case 23:
     case 24:
@@ -895,37 +895,37 @@ void HelpSystem_SetSomeVariable2(u8 a0)
             break;
         // fallthrough
     default:
-        gUnknown_203B0EC = a0;
+        sSomeVariable = a0;
         break;
     }
 }
 
-void sub_812B220(void)
+void Special_SetSomeVariable(void)
 {
-    gUnknown_203B0EC = gSpecialVar_0x8004;
+    sSomeVariable = gSpecialVar_0x8004;
 }
 
-void sub_812B234(void)
+void HelpSystem_BackupSomeVariable(void)
 {
-    gUnknown_3005EA0 = gUnknown_203B0EC;
+    gSomeVariableBackup = sSomeVariable;
 }
 
-void sub_812B248(void)
+void HelpSystem_RestoreSomeVariable(void)
 {
-    gUnknown_203B0EC = gUnknown_3005EA0;
+    sSomeVariable = gSomeVariableBackup;
 }
 
-static bool32 sub_812B25C(void)
+static bool32 IsInMartMap(void)
 {
-    return sub_812B27C(gUnknown_845C594);
+    return IsCurrentMapInArray(sMartMaps);
 }
 
-static bool32 sub_812B26C(void)
+static bool32 IsInGymMap(void)
 {
-    return sub_812B27C(gUnknown_845C5BC);
+    return IsCurrentMapInArray(sGymMaps);
 }
 
-static bool32 sub_812B27C(const u16 * mapIdxs)
+static bool32 IsCurrentMapInArray(const u16 * mapIdxs)
 {
     u16 mapIdx = (gSaveBlock1Ptr->location.mapGroup << 8) + gSaveBlock1Ptr->location.mapNum;
     s32 i;
@@ -939,18 +939,18 @@ static bool32 sub_812B27C(const u16 * mapIdxs)
     return FALSE;
 }
 
-static bool8 sub_812B2C4(void)
+static bool8 IsInDungeonMap(void)
 {
     u8 i, j;
 
     for (i = 0; i < 16; i++)
     {
-        for (j = 0; j < gUnknown_845C5CE[i][2]; j++)
+        for (j = 0; j < sDungeonMaps[i][2]; j++)
         {
             if (
-                   gUnknown_845C5CE[i][0] == gSaveBlock1Ptr->location.mapGroup
-                && gUnknown_845C5CE[i][1] + j == gSaveBlock1Ptr->location.mapNum
-                && (i != 15 || FlagGet(FLAG_0x849) == TRUE)
+                   sDungeonMaps[i][0] == gSaveBlock1Ptr->location.mapGroup
+                && sDungeonMaps[i][1] + j == gSaveBlock1Ptr->location.mapNum
+                && (i != 15 /* TANOBY */ || FlagGet(FLAG_0x849) == TRUE)
             )
                 return TRUE;
         }
@@ -964,7 +964,7 @@ void sub_812B35C(void)
     sub_812B4B8();
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
         HelpSystem_SetSomeVariable2(0x16);
-    else if (sub_812B2C4())
+    else if (IsInDungeonMap())
         HelpSystem_SetSomeVariable2(0x15);
     else if (is_light_level_8_or_9(gMapHeader.mapType))
     {
@@ -974,9 +974,9 @@ void sub_812B35C(void)
             HelpSystem_SetSomeVariable2(0x0F);
         else if (IsCurMapPokeCenter() == TRUE)
             HelpSystem_SetSomeVariable2(0x10);
-        else if (sub_812B25C() == TRUE)
+        else if (IsInMartMap() == TRUE)
             HelpSystem_SetSomeVariable2(0x11);
-        else if (sub_812B26C() == TRUE)
+        else if (IsInGymMap() == TRUE)
             HelpSystem_SetSomeVariable2(0x12);
         else
             HelpSystem_SetSomeVariable2(0x13);
@@ -1055,7 +1055,7 @@ static void sub_812B520(struct HelpSystemListMenu * a0, struct ListMenuItem * a1
     u8 r4 = 0;
     for (i = 0; i < 6; i++)
     {
-        if (gUnknown_845C4B6[gUnknown_203B0EC][gUnknown_845C4B0[i]] == 1)
+        if (gUnknown_845C4B6[sSomeVariable][gUnknown_845C4B0[i]] == 1)
         {
             a1[r4].label = gUnknown_845B080[gUnknown_845C4B0[i]];
             a1[r4].index = gUnknown_845C4B0[i];
@@ -1085,7 +1085,7 @@ static void sub_812B5A8(struct HelpSystemListMenu * a0, struct ListMenuItem * a1
 static void sub_812B614(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
 {
     u8 r6 = 0;
-    const u8 * r3 = gUnknown_845B9E0[gUnknown_203B0EC * 5 + gUnknown_3005E9C[1]];
+    const u8 * r3 = gUnknown_845B9E0[sSomeVariable * 5 + gUnknown_3005E9C[1]];
     u8 i;
     for (i = 0; r3[i] != 0xFF; i++)
     {

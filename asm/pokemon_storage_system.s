@@ -1417,7 +1417,7 @@ _0808C3E0:
 	adds r1, r5, 0
 	adds r1, 0x26
 	bl sub_808C72C
-	bl sub_80F6E9C
+	bl LoadStdWindowFrameGfx
 	movs r0, 0
 	movs r1, 0
 	bl DrawDialogueFrame

@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80F7FCC
-sub_80F7FCC: @ 80F7FCC
+	thumb_func_start SaveStatToString
+SaveStatToString: @ 80F7FCC
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -144,6 +144,6 @@ _080F80D8:
 	bx r0
 	.align 2, 0
 _080F80E0: .4byte 0x00000827
-	thumb_func_end sub_80F7FCC
+	thumb_func_end SaveStatToString
 
 	.align 2, 0 @ Don't pad with nop.

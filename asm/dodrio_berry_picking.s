@@ -10658,7 +10658,7 @@ _08155AA6:
 	movs r0, 0
 	movs r1, 0
 	bl DrawDialogueFrame
-	ldr r2, _08155ACC @ =gUnknown_8419F54
+	ldr r2, _08155ACC @ =gText_SavingDontTurnOffThePower2
 	str r4, [sp]
 	movs r0, 0x2
 	str r0, [sp, 0x4]
@@ -10672,7 +10672,7 @@ _08155AA6:
 	bl AddTextPrinterParameterized2
 	b _08155B08
 	.align 2, 0
-_08155ACC: .4byte gUnknown_8419F54
+_08155ACC: .4byte gText_SavingDontTurnOffThePower2
 _08155AD0:
 	movs r0, 0
 	movs r1, 0x3

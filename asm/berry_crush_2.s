@@ -2856,7 +2856,7 @@ _0814D106:
 	movs r0, 0
 	movs r1, 0
 	bl DrawDialogueFrame
-	ldr r2, _0814D148 @ =gUnknown_8419F54
+	ldr r2, _0814D148 @ =gText_SavingDontTurnOffThePower2
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x2
@@ -2877,7 +2877,7 @@ _0814D106:
 	bl CreateTask
 	b _0814D178
 	.align 2, 0
-_0814D148: .4byte gUnknown_8419F54
+_0814D148: .4byte gText_SavingDontTurnOffThePower2
 _0814D14C: .4byte sub_80DA634
 _0814D150:
 	ldr r0, _0814D160 @ =sub_80DA634

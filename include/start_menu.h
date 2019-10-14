@@ -4,7 +4,7 @@
 #include "global.h"
 
 void AppendToList(u8* list, u8* pos, u8 newEntry);
-void sub_806F1F0(u8 taskId);
-void sub_806F1D4(void);
+void Task_StartMenuHandleInput(u8 taskId);
+void SetUpReturnToStartMenu(void);
 
 #endif // GUARD_START_MENU_H

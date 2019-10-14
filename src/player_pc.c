@@ -154,7 +154,7 @@ void sub_80EB6AC(void)
     u8 taskId;
 
     gPlayerPcMenuManager.unk_9 = 0;
-    sub_812B234();
+    HelpSystem_BackupSomeVariable();
     sItemOrder = gUnknown_8402200;
     sTopMenuItemCount = 3;
     taskId = CreateTask(TaskDummy, 0);
@@ -166,7 +166,7 @@ void sub_80EB6FC(void)
     u8 taskId;
 
     gPlayerPcMenuManager.unk_9 = 1;
-    sub_812B234();
+    HelpSystem_BackupSomeVariable();
     sItemOrder = gUnknown_8402203;
     sTopMenuItemCount = 3;
     taskId = CreateTask(TaskDummy, 0);
@@ -215,7 +215,7 @@ static void Task_TopMenuHandleInput(u8 taskId)
 
 static void Task_ReturnToTopMenu(u8 taskId)
 {
-    sub_812B248();
+    HelpSystem_RestoreSomeVariable();
     DisplayItemMessageOnField(taskId, 2, gText_WhatWouldYouLikeToDo, Task_DrawPlayerPcTopMenu);
 }
 
@@ -343,7 +343,7 @@ static void Task_ReturnToItemStorageSubmenu(u8 taskId)
 static void CB2_ReturnFromDepositMenu(void)
 {
     u8 taskId;
-    sub_80F6E9C();
+    LoadStdWindowFrameGfx();
     DrawDialogueFrame(0, TRUE);
     taskId = CreateTask(Task_ReturnToItemStorageSubmenu, 0);
     Task_CreateItemStorageSubmenu(taskId, 1);
@@ -372,7 +372,7 @@ static void Task_PlayerPcWithdrawItem(u8 taskId)
 static void CB2_ReturnFromWithdrawMenu(void)
 {
     u8 taskId;
-    sub_80F6E9C();
+    LoadStdWindowFrameGfx();
     DrawDialogueFrame(0, TRUE);
     taskId = CreateTask(Task_ReturnToItemStorageSubmenu, 0);
     Task_CreateItemStorageSubmenu(taskId, 0);
@@ -584,7 +584,7 @@ static void CB2_ReturnToMailbox(void)
         HelpSystem_SetSomeVariable2(34);
     else
         HelpSystem_SetSomeVariable2(30);
-    sub_80F6E9C();
+    LoadStdWindowFrameGfx();
     taskId = CreateTask(Task_WaitFadeAndReturnToMailboxPcInputHandler, 0);
     if (MailboxPC_InitBuffers(gPlayerPcMenuManager.count) == TRUE)
         Task_DrawMailboxPcMenu(taskId);
@@ -700,7 +700,7 @@ static void CB2_ReturnToMailboxPc_UpdateScrollVariables(void)
         }
     }
     Task_SetPageItemVars(taskId);
-    sub_80F6E9C();
+    LoadStdWindowFrameGfx();
     if (MailboxPC_InitBuffers(gPlayerPcMenuManager.count) == TRUE)
         Task_DrawMailboxPcMenu(taskId);
     else

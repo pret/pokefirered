@@ -109,7 +109,7 @@ EWRAM_DATA u8 gUnknown_203AF9A[64][2] = {{0}};
 EWRAM_DATA u16 gUnknown_203B01A = 0;
 EWRAM_DATA u16 gUnknown_203B01C = 0;
 EWRAM_DATA u16 gUnknown_203B01E = 0;
-EWRAM_DATA u8 gUnknown_203B020 = 0;
+EWRAM_DATA u8 sHelpMessageWindowId = 0;
 EWRAM_DATA struct UnkStruct_203B024 gUnknown_203B024 = {0};
 EWRAM_DATA struct UnkStruct_203B044 gUnknown_203B044 = {0};
 EWRAM_DATA u8 gUnknown_203B048 = 0;
@@ -2294,37 +2294,37 @@ void sub_8112E3C(u8 a0, struct UnkStruct_300201C * a1, u16 a2)
 
 const u16 gUnknown_84566A8[] = INCBIN_U16("data/graphics/unknown_84566a8.bin");
 
-const struct WindowTemplate gUnknown_8456928 = {
+const struct WindowTemplate sHelpMessageWindowTemplate = {
     0x00, 0, 15, 30, 5, 15, 0x008F
 };
 
 void MapNamePopupWindowIdSetDummy(void)
 {
-    gUnknown_203B020 = 0xFF;
+    sHelpMessageWindowId = 0xFF;
 }
 
-u8 sub_8112EB4(void)
+u8 CreateHelpMessageWindow(void)
 {
-    if (gUnknown_203B020 == 0xFF)
+    if (sHelpMessageWindowId == 0xFF)
     {
-        gUnknown_203B020 = AddWindow(&gUnknown_8456928);
-        PutWindowTilemap(gUnknown_203B020);
+        sHelpMessageWindowId = AddWindow(&sHelpMessageWindowTemplate);
+        PutWindowTilemap(sHelpMessageWindowId);
     }
-    return gUnknown_203B020;
+    return sHelpMessageWindowId;
 }
 
-void sub_8112EDC(u8 a0)
+void DestroyHelpMessageWindow(u8 a0)
 {
-    if (gUnknown_203B020 != 0xFF)
+    if (sHelpMessageWindowId != 0xFF)
     {
-        FillWindowPixelBuffer(gUnknown_203B020, 0x00);
-        ClearWindowTilemap(gUnknown_203B020);
+        FillWindowPixelBuffer(sHelpMessageWindowId, PIXEL_FILL(0));
+        ClearWindowTilemap(sHelpMessageWindowId);
 
         if (a0)
-            CopyWindowToVram(gUnknown_203B020, a0);
+            CopyWindowToVram(sHelpMessageWindowId, a0);
 
-        RemoveWindow(gUnknown_203B020);
-        gUnknown_203B020 = 0xFF;
+        RemoveWindow(sHelpMessageWindowId);
+        sHelpMessageWindowId = 0xFF;
     }
 }
 
@@ -2460,7 +2460,7 @@ void sub_8112F18(u8 a0)
 
 void sub_8112FD0(void)
 {
-    sub_8112F18(gUnknown_203B020);
+    sub_8112F18(sHelpMessageWindowId);
 }
 
 const u8 gUnknown_8456930[3] = {
@@ -2469,15 +2469,15 @@ const u8 gUnknown_8456930[3] = {
 
 void sub_8112FE4(const u8 * a0)
 {
-    AddTextPrinterParameterized4(gUnknown_203B020, 0x02, 2, 5, 1, 1, gUnknown_8456930, -1, a0);
+    AddTextPrinterParameterized4(sHelpMessageWindowId, 0x02, 2, 5, 1, 1, gUnknown_8456930, -1, a0);
 }
 
-void sub_8113018(const u8 * text, u8 mode)
+void PrintTextOnHelpMessageWindow(const u8 * text, u8 mode)
 {
     sub_8112FD0();
     sub_8112FE4(text);
     if (mode)
-        CopyWindowToVram(gUnknown_203B020, mode);
+        CopyWindowToVram(sHelpMessageWindowId, mode);
 }
 
 void sub_8113044(void)

@@ -14443,7 +14443,7 @@ _080540DC:
 	movs r0, 0x32
 	strb r0, [r1]
 	ldr r4, _080540FC @ =gStringVar4
-	ldr r1, _08054100 @ =gUnknown_8419F54
+	ldr r1, _08054100 @ =gText_SavingDontTurnOffThePower2
 _080540EA:
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
@@ -14454,7 +14454,7 @@ _080540EA:
 	b _08054396
 	.align 2, 0
 _080540FC: .4byte gStringVar4
-_08054100: .4byte gUnknown_8419F54
+_08054100: .4byte gText_SavingDontTurnOffThePower2
 _08054104:
 	bl InUnionRoom
 	cmp r0, 0

@@ -36,7 +36,7 @@ PalletTown_PlayersHouse_2F_EventScript_168CE4:: @ 8168CE4
 	goto_if_eq EventScript_1A7AE0
 	lockall
 	setvar VAR_0x8004, 32
-	special sub_812B220
+	special Special_SetSomeVariable
 	setvar VAR_0x8004, 1
 	special sub_80CA86C
 	playse SE_PC_ON

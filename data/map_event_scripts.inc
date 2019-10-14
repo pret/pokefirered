@@ -774,7 +774,7 @@ EventScript_1A4EAE:: @ 81A4EAE
 	return
 
 EventScript_1A4EAF:: @ 81A4EAF
-	special sub_806F67C
+	special Field_AskSaveTheGame
 	waitstate
 	return
 
@@ -4447,21 +4447,33 @@ SevenIsland_TrainerTower_1F_EventScript_1C54EA:: @ 81C54EA
 gUnknown_81C555B:: @ 81C555B
 	.incbin "baserom.gba", 0x1C555B, 0x6E
 
-gUnknown_81C55C9:: @ 81C55C9
-	.incbin "baserom.gba", 0x1C55C9, 0x21
+gText_WouldYouLikeToSaveTheGame:: @ 81C55C9
+	.string "Would you like to save the game?$"
 
-gUnknown_81C55EA:: @ 81C55EA
-	.incbin "baserom.gba", 0x1C55EA, 0x3B
+gText_AlreadySaveFile_WouldLikeToOverwrite:: @ 81C55EA
+	.string "There is already a saved file.\n"
+	.string "Is it okay to overwrite it?$"
 
-gUnknown_81C5625:: @ 81C5625
-	.incbin "baserom.gba", 0x1C5625, 0x22
+gText_SavingDontTurnOffThePower:: @ 81C5625
+	.string "SAVING…\n"
+	.string "DON'T TURN OFF THE POWER.$"
 
-gUnknown_81C5647:: @ 81C5647
-	.incbin "baserom.gba", 0x1C5647, 0x23
+gText_PlayerSavedTheGame:: @ 81C5647
+	.string "{PLAYER} saved the game.$"
+
+gUnknown_81C565A::
+    .string "セーブに　しっぱい　しました‥$"
 
 @ 0xE5
-gUnknown_81C566A:: @ 81C566A
-	.incbin "baserom.gba", 0x1C566A, 0xE5
+gText_DifferentGameFile:: @ 81C566A
+	.string "WARNING!\p"
+	.string "There is a different game file that\n"
+	.string "is already saved.\p"
+	.string "If you save now, the other file's\n"
+	.string "adventure, including items and\l"
+	.string "POKéMON, will be entirely lost.\p"
+	.string "Are you sure you want to save now\n"
+	.string "and overwrite the other save file?$"
 
 gOtherText_NewName:: @ 81C574F
 	.string "NEW NAME$"

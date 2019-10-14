@@ -395,7 +395,7 @@ void ResetBg0(void)
     ChangeBgX(0, 0, 0);
     ChangeBgY(0, 0, 0);
     DeactivateAllTextPrinters();
-    sub_80F6E9C();
+    LoadStdWindowFrameGfx();
 }
 
 u16 RunTextPrinters_CheckPrinter0Active(void)
@@ -452,7 +452,7 @@ void AddTextPrinterWithCustomSpeedForMessage(bool8 allowSkippingDelayWithButtonP
     AddTextPrinterParameterized2(0, 2, gStringVar4, speed, NULL, 2, 1, 3);
 }
 
-void sub_80F6E9C(void)
+void LoadStdWindowFrameGfx(void)
 {
     if (gUnknown_203ADFA == 2)
     {
@@ -644,7 +644,7 @@ static u16 GetStdPalColor(u8 colorNum)
 
 void DisplayItemMessageOnField(u8 taskId, u8 bgId, const u8 *string, TaskFunc callback)
 {
-    sub_80F6E9C();
+    LoadStdWindowFrameGfx();
     DisplayMessageAndContinueTask(taskId, 0, DLG_WINDOW_BASE_TILE_NUM, DLG_WINDOW_PALETTE_NUM, bgId, GetTextSpeedSetting(), string, callback);
     CopyWindowToVram(0, 3);
 }
@@ -667,7 +667,7 @@ u8 GetTextSpeedSetting(void)
     return gUnknown_841F428[gSaveBlock2Ptr->optionsTextSpeed];
 }
 
-u8 sub_80F78E0(u8 height)
+u8 CreateStartMenuWindow(u8 height)
 {
     if (sStartMenuWindowId == 0xFF)
     {
@@ -702,15 +702,15 @@ u16 GetStdWindowBaseTileNum(void)
     return STD_WINDOW_BASE_TILE_NUM;
 }
 
-void sub_80F7974(const u8 * text)
+void DrawHelpMessageWindowWithText(const u8 * text)
 {
-    sub_814FE6C(sub_8112EB4(), DLG_WINDOW_BASE_TILE_NUM, 0x10 * DLG_WINDOW_PALETTE_NUM);
-    sub_8113018(text, 2);
+    sub_814FE6C(CreateHelpMessageWindow(), DLG_WINDOW_BASE_TILE_NUM, 0x10 * DLG_WINDOW_PALETTE_NUM);
+    PrintTextOnHelpMessageWindow(text, 2);
 }
 
-void sub_80F7998(void)
+void DestroyHelpMessageWindow_(void)
 {
-    sub_8112EDC(2);
+    DestroyHelpMessageWindow(2);
 }
 
 void sub_80F79A4(void)

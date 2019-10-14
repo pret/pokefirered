@@ -28,7 +28,7 @@ void sub_81AAC70(void);
 void sub_8108CF0(void);
 void sub_81089BC(void);
 void sub_810B108(u8);
-void ReturnToBagFromKeyItem(void);
+void CB2_BagMenuFromStartMenu(void);
 void ItemMenu_MoveItemSlotToNewPositionInArray(struct ItemSlot * slots, int pos1, int pos2);
 void ItemMenu_StartFadeToExitCallback(u8 taskId);
 void sub_8108CB4(void);

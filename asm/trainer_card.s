@@ -785,7 +785,7 @@ _0808967C:
 	.align 2, 0
 _0808968C: .4byte gMain
 _08089690:
-	bl sub_80F6E9C
+	bl LoadStdWindowFrameGfx
 	ldr r1, _080896A0 @ =gMain
 	movs r0, 0x87
 	lsls r0, 3
@@ -4723,8 +4723,8 @@ sub_808B66C: @ 808B66C
 _0808B694: .4byte sub_808B21C
 	thumb_func_end sub_808B66C
 
-	thumb_func_start sub_808B698
-sub_808B698: @ 808B698
+	thumb_func_start InitTrainerCard
+InitTrainerCard: @ 808B698
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	ldr r5, _0808B6C0 @ =gUnknown_20397A4
@@ -4770,10 +4770,10 @@ _0808B6F0: .4byte gUnknown_20397A4
 _0808B6F4: .4byte 0x00007bcf
 _0808B6F8: .4byte 0x0000045c
 _0808B6FC: .4byte sub_80895B8
-	thumb_func_end sub_808B698
+	thumb_func_end InitTrainerCard
 
-	thumb_func_start sub_808B700
-sub_808B700: @ 808B700
+	thumb_func_start InitLinkPartnerTrainerCard
+InitLinkPartnerTrainerCard: @ 808B700
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r6, r1, 0
@@ -4822,7 +4822,7 @@ _0808B764: .4byte gTrainerCards
 _0808B768: .4byte gLinkPlayers
 _0808B76C: .4byte 0x00007bcf
 _0808B770: .4byte sub_80895B8
-	thumb_func_end sub_808B700
+	thumb_func_end InitLinkPartnerTrainerCard
 
 	thumb_func_start sub_808B774
 sub_808B774: @ 808B774
@@ -5057,7 +5057,7 @@ _0808B948: .4byte 0x00000457
 	thumb_func_start sub_808B94C
 sub_808B94C: @ 808B94C
 	push {lr}
-	bl sub_808B698
+	bl InitTrainerCard
 	ldr r0, _0808B95C @ =sub_80895B8
 	bl SetMainCallback2
 	pop {r0}
@@ -5076,7 +5076,7 @@ sub_808B960: @ 808B960
 	bl memcpy
 	movs r0, 0
 	adds r1, r4, 0
-	bl sub_808B700
+	bl InitLinkPartnerTrainerCard
 	ldr r0, _0808B98C @ =sub_80895B8
 	bl SetMainCallback2
 	pop {r4}
@@ -5098,7 +5098,7 @@ sub_808B990: @ 808B990
 	bl memcpy
 	movs r0, 0
 	adds r1, r4, 0
-	bl sub_808B700
+	bl InitLinkPartnerTrainerCard
 	ldr r0, _0808B9BC @ =sub_80895B8
 	bl SetMainCallback2
 	pop {r4}

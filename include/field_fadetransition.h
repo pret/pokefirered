@@ -15,6 +15,7 @@ void sub_807DF64(void);
 void sub_807DC18(void);
 void FieldCallback_ReturnToEventScript2(void);
 void sub_807DC00(void);
+void FadeTransition_FadeInOnReturnToStartMenu(void);
 
 bool32 sub_807E418(void);
 

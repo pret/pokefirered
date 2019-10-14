@@ -53,11 +53,11 @@ gUnknown_3000E9C: @ 3000E9C
 gUnknown_3000EA0: @ 3000EA0
 	.space 0x8
 
-    .align 2
+	.align 2
 	.include "src/script.o"
 	.align 2
 	.include "src/start_menu.o"
-    .align 2
+	.align 2
 	.include "src/tileset_anims.o"
 	.align 2
 	.include "src/sound.o"
@@ -105,9 +105,9 @@ gUnknown_3002008: @ 3002008
 gUnknown_3002018: @ 3002018
 	.space 0x4
 
-    .include "src/quest_log.o"
+	.include "src/quest_log.o"
 
-    .align 2
+	.align 2
 gUnknown_3002024: @ 3002024
 	.space 0x4
 

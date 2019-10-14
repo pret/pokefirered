@@ -72,7 +72,7 @@ static ALIGNED(4) EWRAM_DATA u8 sSaveStatsWindowId = 0;
 
 static u8 (*sSaveDialogCB)(void);
 static u8 sSaveDialogDelay;
-static u8 sSaveDialogIsPrinting;
+static bool8 sSaveDialogIsPrinting;
 
 static void SetUpStartMenu_Link(void);
 static void SetUpStartMenu_UnionRoom(void);
@@ -601,14 +601,14 @@ static void StartMenu_PrepareForSave(void)
 {
     save_serialize_map();
     sSaveDialogCB = SaveDialogCB_PrintAskSaveText;
-    sSaveDialogIsPrinting = 0;
+    sSaveDialogIsPrinting = FALSE;
 }
 
 static u8 RunSaveDialogCB(void)
 {
     if (RunTextPrinters_CheckPrinter0Active() == TRUE)
         return 0;
-    sSaveDialogIsPrinting = 0;
+    sSaveDialogIsPrinting = FALSE;
     return sSaveDialogCB();
 }
 
@@ -620,13 +620,13 @@ void Field_AskSaveTheGame(void)
     CreateTask(task50_save_game, 80);
 }
 
-void PrintSaveTextWithFollowupFunc(const u8 *str, bool8 (*savecb)(void))
+void PrintSaveTextWithFollowupFunc(const u8 *str, bool8 (*saveDialogCB)(void))
 {
     StringExpandPlaceholders(gStringVar4, str);
     sub_80F7768(0, TRUE);
     AddTextPrinterForMessage(TRUE);
-    sSaveDialogIsPrinting = 1;
-    sSaveDialogCB = savecb;
+    sSaveDialogIsPrinting = TRUE;
+    sSaveDialogCB = saveDialogCB;
 }
 
 void task50_save_game(u8 taskId)

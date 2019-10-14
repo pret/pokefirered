@@ -12,7 +12,7 @@
 	.align 2
 	.include "src/sprite.o"
 	.align 2
-    .include "src/string_util.o"
+	.include "src/string_util.o"
 	.align 2
 	.include "src/link.o"
 	.space 8
@@ -510,9 +510,9 @@ gUnknown_203709C: @ 203709C
 	.space 0x4
 
 	.include "src/script.o"
-    .include "src/scrcmd.o"
+	.include "src/scrcmd.o"
 
-    .align 2
+	.align 2
 gSpecialVar_0x8000: @ 20370B8
 	.space 0x2
 
@@ -576,13 +576,13 @@ gUnknown_20370DE: @ 20370DE
 gUnknown_20370E0: @ 20370E0
 	.space 0x10
 
-    .align 2
-    .include "src/start_menu.o"
-    .align 2
+	.align 2
+	.include "src/start_menu.o"
+	.align 2
 	.include "src/tileset_anims.o"
 	.align 2
 	.include "src/palette.o"
-    .align 2
+	.align 2
 	.include "src/sound.o"
 
 	.align 2
@@ -958,9 +958,9 @@ gUnknown_203AAB4: @ 203AAB4
 gUnknown_203AAB8: @ 203AAB8
 	.space 0x4
 
-    .align 2
-    .include "src/player_pc.o"
-    .align 2
+	.align 2
+	.include "src/player_pc.o"
+	.align 2
 	.include "src/intro.o"
 
 	.align 2

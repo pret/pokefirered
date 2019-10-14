@@ -64,34 +64,57 @@ gText_MysteryGift:: @ 8415A97
 	.string "MYSTERY GIFT$"
 
 gText_WirelessAdapterIsNotConnected:: @ 8415AA4
-	.string "The Wireless Adapter is not\nconnected.$"
+	.string "The Wireless Adapter is not\n"
+	.string "connected.$"
 
 gText_MysteryGiftCantBeUsedWhileWirelessAdapterIsAttached:: @ 8415ACB
-	.string "MYSTERY GIFT can't be used while\nthe Wireless Adapter is attached.$"
+	.string "MYSTERY GIFT can't be used while\n"
+	.string "the Wireless Adapter is attached.$"
 
 gUnknown_8415B0E:: @ 0x8415B0E
-	.string "がいぶデ-タにより レポ-トを こうしんします\nしばらく おまちください$"
+	.string "がいぶデ-タにより レポ-トを こうしんします\n"
+	.string "しばらく おまちください$"
 
 gUnknown_8415B33:: @ 0x8415B33
 	.string "レポ-トが こうしんされました!$"
 
 gUnknown_8415B44:: @ 0x8415B44
-	.string "レポ-トが こうしんされました!\pこれいじょう\nレポ-トが かききれないので\lバックアップカ-トリッジを\lこうかんしてください!\pくわしくは\nにんてんどう サ-ビスセンタ- まで\lおといあわせ ください$"
+	.string "レポ-トが こうしんされました!\p"
+	.string "これいじょう\n"
+	.string "レポ-トが かききれないので\l"
+	.string "バックアップカ-トリッジを\l"
+	.string "こうかんしてください!\p"
+	.string "くわしくは\n"
+	.string "にんてんどう サ-ビスセンタ- まで\l"
+	.string "おといあわせ ください$"
 
 gUnknown_8415BAA:: @ 0x8415BAA
-	.string "レポ-トの こうしんは\nしっぱいしました!\pバックアップカ-トリッジを\nこうかんしてください!\pくわしくは\nにんてんどう サ-ビスセンタ- まで\lおといあわせ ください$"
+	.string "レポ-トの こうしんは\n"
+	.string "しっぱいしました!\p"
+	.string "バックアップカ-トリッジを\n"
+	.string "こうかんしてください!\p"
+	.string "くわしくは\n"
+	.string "にんてんどう サ-ビスセンタ- まで\l"
+	.string "おといあわせ ください$"
 
 gText_SaveFileCorruptedPrevWillBeLoaded:: @ 8415BFF
-	.string "The save file is corrupted.\pThe previous save file will be\nloaded.$"
+	.string "The save file is corrupted.\p"
+	.string "The previous save file will be\n"
+	.string "loaded.$"
 
 gText_SaveFileHasBeenDeleted:: @ 8415C42
-	.string "The save file has been\ndeleted...$"
+	.string "The save file has been\n"
+	.string "deleted...$"
 
 gText_1MSubCircuitBoardNotInstalled:: @ 8415C64
-	.string "The 1M sub-circuit board is\nnot installed.$"
+	.string "The 1M sub-circuit board is\n"
+	.string "not installed.$"
 
 gTextJP_InternalBatteryHasRunDry:: @ 0x8415C8F
-	.string "でんちぎれの ために\nとけいが うごかなくなりました\pとけいに かんけいする できごとは おきませんが\nゲ-ムを つづけて あそぶことは できます$"
+	.string "でんちぎれの ために\n"
+	.string "とけいが うごかなくなりました\p"
+	.string "とけいに かんけいする できごとは おきませんが\n"
+	.string "ゲ-ムを つづけて あそぶことは できます$"
 
 gUnknown_8415CD9:: @ 0x8415CD9
 	.string "しゅじんこう$"
@@ -311,20 +334,28 @@ gUnknown_8416008:: @ 8416008
 	.string "Welcome to the HALL OF FAME!$"
 
 gUnknown_8416025:: @ 0x8416025
-	.string "   みつけた ポケモン {STR_VAR_1}!\nつかまえた ポケモン {STR_VAR_2}!\pオダマキはかせの\nポケモンずかん ひょうか!\pオダマキ“どれどれ\p$"
+	.string "   みつけた ポケモン {STR_VAR_1}!\n"
+	.string "つかまえた ポケモン {STR_VAR_2}!\p"
+	.string "オダマキはかせの\n"
+	.string "ポケモンずかん ひょうか!\p"
+	.string "オダマキ“どれどれ\p"
+	.string "$"
 
 gUnknown_8416067:: @ 0x8416067
-	.string " ここまでの レポ-トを かきしるしています!\nでんげんを きらないでください$"
+	.string " ここまでの レポ-トを かきしるしています!\n"
+	.string "でんげんを きらないでください$"
 
 	.align 2
 gUnknown_8416090:: @ 8416090
-	.string "The HALL OF FAME data is\ncorrupted.$"
+	.string "The HALL OF FAME data is\n"
+	.string "corrupted.$"
 
 gUnknown_84160B4:: @ 84160B4
 	.string "HALL OF FAME No. {STR_VAR_1}$"
 
 gUnknown_84160C8:: @ 84160C8
-	.string "LEAGUE CHAMPION!\nCONGRATULATIONS!$"
+	.string "LEAGUE CHAMPION!\n"
+	.string "CONGRATULATIONS!$"
 
 	.align 2
 gUnknown_84160EC:: @ 84160EC
@@ -343,7 +374,8 @@ gUnknown_8416104:: @ 8416104
 	.string "IDNo.$"
 
 gUnknown_841610A:: @ 0x841610A
-	.string "{HIGHLIGHT WHITE2}{COLOR DARK_GREY}オダマキはかせが ピンチだ!\nポケモンを だして たすけてあげよう!$"
+	.string "{HIGHLIGHT WHITE2}{COLOR DARK_GREY}オダマキはかせが ピンチだ!\n"
+	.string "ポケモンを だして たすけてあげよう!$"
 
 gUnknown_8416133:: @ 0x8416133
 	.string "{HIGHLIGHT WHITE2}{COLOR DARK_GREY}このポケモンにしますか?$"
@@ -352,7 +384,9 @@ gUnknown_8416146:: @ 0x8416146
 	.string "ポケモン$"
 
 gText_SaveError_PleaseExchangeBackupMemory:: @ 841614B
-	.string "Save error.\pPlease exchange the\nbackup memory.$"
+	.string "Save error.\p"
+	.string "Please exchange the\n"
+	.string "backup memory.$"
 
 gSaveStatName_Player:: @ 841617A
 	.string "PLAYER$"
@@ -542,7 +576,8 @@ gText_IsSelected:: @ 8416301
 	.string "selected.$"
 
 gUnknown_841630F:: @ 841630F
-	.string "You can't write\nMAIL here.$"
+	.string "You can't write\n"
+	.string "MAIL here.$"
 
 gText_ThereIsNoPokemon:: @ 841632A
 	.string "There is no\n"
@@ -556,43 +591,58 @@ gText_ItemCantBeHeld:: @ 841635E
 	.string "The {STR_VAR_1} can't be held.$"
 
 gText_TheStrVar1CantBeHeldHere:: @ 8416374
-	.string "The {STR_VAR_1} can't be held\nhere.$"
+	.string "The {STR_VAR_1} can't be held\n"
+	.string "here.$"
 
 gUnknown_841638F:: @ 841638F
-	.string "Deposit how many\n{STR_VAR_1}(s)?$"
+	.string "Deposit how many\n"
+	.string "{STR_VAR_1}(s)?$"
 
 gUnknown_84163A7:: @ 84163A7
-	.string "Deposited {STR_VAR_2}\n{STR_VAR_1}(s).$"
+	.string "Deposited {STR_VAR_2}\n"
+	.string "{STR_VAR_1}(s).$"
 
 gUnknown_84163BB:: @ 84163BB
-	.string "There's no room to\nstore items.$"
+	.string "There's no room to\n"
+	.string "store items.$"
 
 gText_TossOutHowManyStrVar1s:: @ 84163DB
-	.string "Toss out how many\n{STR_VAR_1}(s)?$"
+	.string "Toss out how many\n"
+	.string "{STR_VAR_1}(s)?$"
 
 gText_ThrewAwayStrVar2StrVar1s:: @ 84163F4
-	.string "Threw away {STR_VAR_2}\n{STR_VAR_1}(s).$"
+	.string "Threw away {STR_VAR_2}\n"
+	.string "{STR_VAR_1}(s).$"
 
 gText_ThrowAwayStrVar2OfThisItemQM:: @ 8416409
-	.string "Throw away {STR_VAR_2} of\nthis item?$"
+	.string "Throw away {STR_VAR_2} of\n"
+	.string "this item?$"
 
 gUnknown_8416425:: @ 8416425
-	.string "OAK: {PLAYER}!\nThis isn't the time to use that!{PAUSE_UNTIL_PRESS}$"
+	.string "OAK: {PLAYER}!\n"
+	.string "This isn't the time to use that!{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416451:: @ 8416451
 	.string "You can't dismount your BIKE here.{PAUSE_UNTIL_PRESS}$"
 
 gText_ItemfinderResponding:: @ 8416476
-	.string "Huh?\nThe ITEMFINDER's responding!\pThere's an item buried around here!{PAUSE_UNTIL_PRESS}$"
+	.string "Huh?\n"
+	.string "The ITEMFINDER's responding!\p"
+	.string "There's an item buried around here!{PAUSE_UNTIL_PRESS}$"
 
 gText_ItemfinderShakingWildly:: @ 84164BE
-	.string "Oh!\nThe ITEMFINDER's shaking wildly!\pThere's an item buried underfoot!\p‥ ‥ ‥ ‥ ‥ ‥{PAUSE_UNTIL_PRESS}$"
+	.string "Oh!\n"
+	.string "The ITEMFINDER's shaking wildly!\p"
+	.string "There's an item buried underfoot!\p"
+	.string "‥ ‥ ‥ ‥ ‥ ‥{PAUSE_UNTIL_PRESS}$"
 
 gText_NopeTheresNoResponse:: @ 8416513
-	.string "‥ ‥ ‥ ‥Nope!\nThere's no response.{PAUSE_UNTIL_PRESS}$"
+	.string "‥ ‥ ‥ ‥Nope!\n"
+	.string "There's no response.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416537:: @ 8416537
-	.string "Your COINS:\n{STR_VAR_1}{PAUSE_UNTIL_PRESS}$"
+	.string "Your COINS:\n"
+	.string "{STR_VAR_1}{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416548:: @ 0x8416548
 	.string "わざマシンを きどうした!$"
@@ -601,19 +651,28 @@ gUnknown_8416556:: @ 0x8416556
 	.string "ひでんマシンを きどうした!$"
 
 gUnknown_8416565:: @ 0x8416565
-	.string "なかには {STR_VAR_1}が\nきろくされていた!\p{STR_VAR_1}を\nポケモンに おぼえさせますか?$"
+	.string "なかには {STR_VAR_1}が\n"
+	.string "きろくされていた!\p"
+	.string "{STR_VAR_1}を\n"
+	.string "ポケモンに おぼえさせますか?$"
 
 gUnknown_841658C:: @ 841658C
-	.string "{PLAYER} used the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
+	.string "{PLAYER} used the\n"
+	.string "{STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_841659E:: @ 841659E
-	.string "But the effects of a REPEL\nlingered from earlier.{PAUSE_UNTIL_PRESS}$"
+	.string "But the effects of a REPEL\n"
+	.string "lingered from earlier.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_84165D2:: @ 84165D2
-	.string "{PLAYER} used the\n{STR_VAR_2}.\pWild POKéMON will be lured.{PAUSE_UNTIL_PRESS}$"
+	.string "{PLAYER} used the\n"
+	.string "{STR_VAR_2}.\p"
+	.string "Wild POKéMON will be lured.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416600:: @ 8416600
-	.string "{PLAYER} used the\n{STR_VAR_2}.\pWild POKéMON will be repelled.{PAUSE_UNTIL_PRESS}$"
+	.string "{PLAYER} used the\n"
+	.string "{STR_VAR_2}.\p"
+	.string "Wild POKéMON will be repelled.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416631:: @ 8416631
 	.string "The BOX is full.{PAUSE_UNTIL_PRESS}$"
@@ -658,7 +717,8 @@ gText_BerryPouch:: @ 841670A
 	.string "BERRY POUCH$"
 
 gText_TheBerryPouchWillBePutAway:: @ 8416716
-	.string "The BERRY POUCH will be\nput away.$"
+	.string "The BERRY POUCH will be\n"
+	.string "put away.$"
 
 gUnknown_8416738:: @ 0x8416738
 	.string "BUY$"
@@ -676,43 +736,54 @@ gUnknown_8416757:: @ 8416757
 	.string "Quit shopping.$"
 
 gUnknown_8416766:: @ 8416766
-	.string "{STR_VAR_1}? Certainly.\nHow many would you like?$"
+	.string "{STR_VAR_1}? Certainly.\n"
+	.string "How many would you like?$"
 
 gUnknown_841678E:: @ 841678E
-	.string "{STR_VAR_1}, and you want {STR_VAR_2}.\nThat will be ¥{STR_VAR_3}. Okay?$"
+	.string "{STR_VAR_1}, and you want {STR_VAR_2}.\n"
+	.string "That will be ¥{STR_VAR_3}. Okay?$"
 
 gUnknown_84167BB:: @ 0x84167BB
-	.string "{STR_VAR_1} だね!\n{STR_VAR_2}¥ だけど かうかい?$"
+	.string "{STR_VAR_1} だね!\n"
+	.string "{STR_VAR_2}¥ だけど かうかい?$"
 
 gUnknown_84167D0:: @ 0x84167D0
-	.string "{STR_VAR_1} ですね!\n{STR_VAR_2}¥ だけど かいますか?$"
+	.string "{STR_VAR_1} ですね!\n"
+	.string "{STR_VAR_2}¥ だけど かいますか?$"
 
 gUnknown_84167E7:: @ 84167E7
-	.string "Here you are!\nThank you!$"
+	.string "Here you are!\n"
+	.string "Thank you!$"
 
 gUnknown_8416800:: @ 0x8416800
-	.string "どうも ありがとう!\nじたくの パソコンに おくって おきますね!$"
+	.string "どうも ありがとう!\n"
+	.string "じたくの パソコンに おくって おきますね!$"
 
 gUnknown_8416822:: @ 0x8416822
-	.string "どうも ありがとう!\nじたくの パソコンに おくって おくね!$"
+	.string "どうも ありがとう!\n"
+	.string "じたくの パソコンに おくって おくね!$"
 
 gUnknown_8416842:: @ 8416842
 	.string "You don't have enough money.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416861:: @ 8416861
-	.string "You have no more room for this\nitem.{PAUSE_UNTIL_PRESS}$"
+	.string "You have no more room for this\n"
+	.string "item.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416888:: @ 0x8416888
-	.string "{STR_VAR_1}を\nいれる ばしょが いっぱいです{PAUSE_UNTIL_PRESS}$"
+	.string "{STR_VAR_1}を\n"
+	.string "いれる ばしょが いっぱいです{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_841689E:: @ 841689E
 	.string "Is there anything else I can do?$"
 
 gUnknown_84168BF:: @ 0x84168BF
-	.string "その ほかに\nなにか ちからに なれることは?$"
+	.string "その ほかに\n"
+	.string "なにか ちからに なれることは?$"
 
 gUnknown_84168D7:: @ 0x84168D7
-	.string "プレミアボ-ル 1コ\nおまけ しておきますね!{PAUSE_UNTIL_PRESS}$"
+	.string "プレミアボ-ル 1コ\n"
+	.string "おまけ しておきますね!{PAUSE_UNTIL_PRESS}$"
 
 gText_OhNoICantBuyThat:: @ 84168F1
 	.string "{STR_VAR_1}? Oh, no.\n"
@@ -727,7 +798,8 @@ gText_ICanPayThisMuch_WouldThatBeOkay:: @ 8416936
 	.string "Would that be okay?$"
 
 gText_TurnedOverItemsWorthYen:: @ 8416959
-	.string "Turned over the {STR_VAR_1}シSス\nworth ¥{STR_VAR_3}.$"
+	.string "Turned over the {STR_VAR_1}シSス\n"
+	.string "worth ¥{STR_VAR_3}.$"
 
 gText_PokedollarVar1:: @ 841697A
 	.string "¥{STR_VAR_1}$"
@@ -788,34 +860,43 @@ gUnknown_84169F8:: @ 84169F8
 	.string "that POKéMON.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416A1E:: @ 8416A1E
-	.string "{STR_VAR_1} can't be switched\nout!{PAUSE_UNTIL_PRESS}$"
+	.string "{STR_VAR_1} can't be switched\n"
+	.string "out!{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416A3A:: @ 8416A3A
-	.string "{STR_VAR_1} is already\nin battle!{PAUSE_UNTIL_PRESS}$"
+	.string "{STR_VAR_1} is already\n"
+	.string "in battle!{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416A55:: @ 8416A55
-	.string "{STR_VAR_1} has already been\nselected.{PAUSE_UNTIL_PRESS}$"
+	.string "{STR_VAR_1} has already been\n"
+	.string "selected.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416A75:: @ 8416A75
-	.string "{STR_VAR_1} has no energy\nleft to battle!{PAUSE_UNTIL_PRESS}$"
+	.string "{STR_VAR_1} has no energy\n"
+	.string "left to battle!{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416A98:: @ 8416A98
-	.string "You can't switch {STR_VAR_1}'s\nPOKéMON with one of yours!{PAUSE_UNTIL_PRESS}$"
+	.string "You can't switch {STR_VAR_1}'s\n"
+	.string "POKéMON with one of yours!{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416ACB:: @ 8416ACB
 	.string "An EGG can't battle!{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416AE2:: @ 8416AE2
-	.string "This can't be used until a new\nBADGE is obtained.{PAUSE_UNTIL_PRESS}$"
+	.string "This can't be used until a new\n"
+	.string "BADGE is obtained.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416B16:: @ 8416B16
-	.string "No more than three POKéMON\nmay enter.{PAUSE_UNTIL_PRESS}$"
+	.string "No more than three POKéMON\n"
+	.string "may enter.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416B3E:: @ 8416B3E
-	.string "No more than two POKéMON\nmay enter.{PAUSE_UNTIL_PRESS}$"
+	.string "No more than two POKéMON\n"
+	.string "may enter.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416B64:: @ 8416B64
-	.string "Send the removed MAIL to\nyour PC?$"
+	.string "Send the removed MAIL to\n"
+	.string "your PC?$"
 
 gUnknown_8416B86:: @ 8416B86
 	.string "The MAIL was sent to your PC.{PAUSE_UNTIL_PRESS}$"
@@ -824,71 +905,101 @@ gUnknown_8416BA6:: @ 8416BA6
 	.string "Your PC's MAILBOX is full.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416BC3:: @ 8416BC3
-	.string "If the MAIL is removed, the\nmessage will be lost. Okay?$"
+	.string "If the MAIL is removed, the\n"
+	.string "message will be lost. Okay?$"
 
 gUnknown_8416BFB:: @ 8416BFB
-	.string "MAIL must be removed before\nholding an item.{PAUSE_UNTIL_PRESS}$"
+	.string "MAIL must be removed before\n"
+	.string "holding an item.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416C2A:: @ 8416C2A
-	.string "{STR_VAR_1} was given the\n{STR_VAR_2} to hold.{PAUSE_UNTIL_PRESS}$"
+	.string "{STR_VAR_1} was given the\n"
+	.string "{STR_VAR_2} to hold.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416C49:: @ 8416C49
-	.string "{STR_VAR_1} is already holding\none {STR_VAR_2}.\pWould you like to switch the\ntwo items?$"
+	.string "{STR_VAR_1} is already holding\n"
+	.string "one {STR_VAR_2}.\p"
+	.string "Would you like to switch the\n"
+	.string "two items?$"
 
 gUnknown_8416C8F:: @ 8416C8F
-	.string "{STR_VAR_1} isn't holding\nanything.{PAUSE_UNTIL_PRESS}$"
+	.string "{STR_VAR_1} isn't holding\n"
+	.string "anything.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416CAC:: @ 8416CAC
-	.string "Received the {STR_VAR_2}\nfrom {STR_VAR_1}.{PAUSE_UNTIL_PRESS}$"
+	.string "Received the {STR_VAR_2}\n"
+	.string "from {STR_VAR_1}.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416CC7:: @ 8416CC7
-	.string "MAIL was taken from the\nPOKéMON.{PAUSE_UNTIL_PRESS}$"
+	.string "MAIL was taken from the\n"
+	.string "POKéMON.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416CEA:: @ 8416CEA
-	.string "The {STR_VAR_2} was taken and\nreplaced with the {STR_VAR_1}.{PAUSE_UNTIL_PRESS}$"
+	.string "The {STR_VAR_2} was taken and\n"
+	.string "replaced with the {STR_VAR_1}.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416D17:: @ 8416D17
-	.string "This POKéMON is holding an\nitem. It cannot hold MAIL.{PAUSE_UNTIL_PRESS}$"
+	.string "This POKéMON is holding an\n"
+	.string "item. It cannot hold MAIL.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416D4F:: @ 8416D4F
-	.string "MAIL was transferred from\nthe MAILBOX.{PAUSE_UNTIL_PRESS}$"
+	.string "MAIL was transferred from\n"
+	.string "the MAILBOX.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416D78:: @ 8416D78
-	.string "The {STR_VAR_1} is full. The POKéMON's\nitem could not be removed.{PAUSE_UNTIL_PRESS}$"
+	.string "The {STR_VAR_1} is full. The POKéMON's\n"
+	.string "item could not be removed.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416DB3:: @ 8416DB3
-	.string "{STR_VAR_1} learned\n{STR_VAR_2}!$"
+	.string "{STR_VAR_1} learned\n"
+	.string "{STR_VAR_2}!$"
 
 gUnknown_8416DC2:: @ 8416DC2
-	.string "{STR_VAR_1} and {STR_VAR_2}\nare not compatible.\p{STR_VAR_2} can't be\nlearned.{PAUSE_UNTIL_PRESS}$"
+	.string "{STR_VAR_1} and {STR_VAR_2}\n"
+	.string "are not compatible.\p"
+	.string "{STR_VAR_2} can't be\n"
+	.string "learned.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416DF7:: @ 8416DF7
-	.string "{STR_VAR_1} wants to learn the\nmove {STR_VAR_2}.\pHowever, {STR_VAR_1} already\nknows four moves.\pShould a move be deleted and\nreplaced with {STR_VAR_2}?$"
+	.string "{STR_VAR_1} wants to learn the\n"
+	.string "move {STR_VAR_2}.\p"
+	.string "However, {STR_VAR_1} already\n"
+	.string "knows four moves.\p"
+	.string "Should a move be deleted and\n"
+	.string "replaced with {STR_VAR_2}?$"
 
 gUnknown_8416E6B:: @ 8416E6B
-	.string "Stop trying to teach\n{STR_VAR_2}?$"
+	.string "Stop trying to teach\n"
+	.string "{STR_VAR_2}?$"
 
 gUnknown_8416E84:: @ 8416E84
-	.string "{STR_VAR_1} did not learn the\nmove {STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
+	.string "{STR_VAR_1} did not learn the\n"
+	.string "move {STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416EA4:: @ 8416EA4
 	.string "Which move should be forgotten?{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416EC6:: @ 8416EC6
-	.string "1, {PAUSE 0x0F}2, and{PAUSE 0x0F}‥ {PAUSE 0x0F}‥ {PAUSE 0x0F}‥ {PAUSE 0x0F}{PLAY_SE SE_KON}Poof!\p{STR_VAR_1} forgot how to\nuse {STR_VAR_2}.\pAnd...{PAUSE_UNTIL_PRESS}$"
+	.string "1, {PAUSE 0x0F}2, and{PAUSE 0x0F}‥ {PAUSE 0x0F}‥ {PAUSE 0x0F}‥ {PAUSE 0x0F}{PLAY_SE SE_KON}Poof!\p"
+	.string "{STR_VAR_1} forgot how to\n"
+	.string "use {STR_VAR_2}.\p"
+	.string "And...{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416F10:: @ 8416F10
-	.string "{STR_VAR_1} already knows\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
+	.string "{STR_VAR_1} already knows\n"
+	.string "{STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416F27:: @ 8416F27
 	.string "{STR_VAR_1}'s HP was restored\n"
 	.string "by {STR_VAR_2} point(s).{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416F4E:: @ 8416F4E
-	.string "{STR_VAR_1} was cured of its\npoisoning.{PAUSE_UNTIL_PRESS}$"
+	.string "{STR_VAR_1} was cured of its\n"
+	.string "poisoning.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416F6F:: @ 8416F6F
-	.string "{STR_VAR_1} was cured of\nparalysis.{PAUSE_UNTIL_PRESS}$"
+	.string "{STR_VAR_1} was cured of\n"
+	.string "paralysis.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416F8C:: @ 8416F8C
 	.string "{STR_VAR_1} woke up.{PAUSE_UNTIL_PRESS}$"
@@ -903,7 +1014,8 @@ gUnknown_8416FC7:: @ 8416FC7
 	.string "PP was restored.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416FDA:: @ 0x8416FDA
-	.string "{STR_VAR_1}は\nげんきを とりもどした!{PAUSE_UNTIL_PRESS}$"
+	.string "{STR_VAR_1}は\n"
+	.string "げんきを とりもどした!{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416FED:: @ 8416FED
 	.string "{STR_VAR_1} became healthy.{PAUSE_UNTIL_PRESS}$"
@@ -912,39 +1024,49 @@ gUnknown_8417002:: @ 8417002
 	.string "{STR_VAR_1}'s PP increased.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8417017:: @ 8417017
-	.string "{STR_VAR_1} was elevated to\nLv. {STR_VAR_2}.$"
+	.string "{STR_VAR_1} was elevated to\n"
+	.string "Lv. {STR_VAR_2}.$"
 
 gUnknown_8417032:: @ 8417032
-	.string "{STR_VAR_1}'s base {STR_VAR_2}\nstat was raised.{PAUSE_UNTIL_PRESS}$"
+	.string "{STR_VAR_1}'s base {STR_VAR_2}\n"
+	.string "stat was raised.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8417052:: @ 8417052
-	.string "{STR_VAR_1} snapped out of its\nconfusion.{PAUSE_UNTIL_PRESS}$"
+	.string "{STR_VAR_1} snapped out of its\n"
+	.string "confusion.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8417075:: @ 8417075
-	.string "{STR_VAR_1} got over its\ninfatuation.{PAUSE_UNTIL_PRESS}$"
+	.string "{STR_VAR_1} got over its\n"
+	.string "infatuation.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8417094:: @ 0x8417094
-	.string "That's your only\nPOKéMON for battle.$"
+	.string "That's your only\n"
+	.string "POKéMON for battle.$"
 
 	.align 2
 gUnknown_84170BC:: @ 84170BC
-	.string "That POKéMON can't be traded\nnow.$"
+	.string "That POKéMON can't be traded\n"
+	.string "now.$"
 
 	.align 2
 gUnknown_84170E0:: @ 84170E0
 	.string "An EGG can't be traded now.$"
 
 gUnknown_84170FC:: @ 0x84170FC
-	.string "The other TRAINER's POKéMON\ncan't be traded now.$"
+	.string "The other TRAINER's POKéMON\n"
+	.string "can't be traded now.$"
 
 gUnknown_841712D:: @ 0x841712D
-	.string "   The other TRAINER can't accept\nthat POKéMON now.$"
+	.string "   The other TRAINER can't accept\n"
+	.string "that POKéMON now.$"
 
 gUnknown_8417161:: @ 0x8417161
-	.string "   You can't trade with that\nTRAINER now.$"
+	.string "   You can't trade with that\n"
+	.string "TRAINER now.$"
 
 gUnknown_841718B:: @ 0x841718B
-	.string " That isn't the type of POKéMON\nthat the other TRAINER wants.$"
+	.string " That isn't the type of POKéMON\n"
+	.string "that the other TRAINER wants.$"
 
 gUnknown_84171C9:: @ 0x84171C9
 	.string "   That isn't an EGG.$"
@@ -1058,10 +1180,17 @@ gUnknown_841744F:: @ 0x841744F
 	.string "LEARNED$"
 
 gUnknown_8417457:: @ 8417457
-	.string "OAK: It's important to get to know\nyour POKéMON thoroughly.\p$"
+	.string "OAK: It's important to get to know\n"
+	.string "your POKéMON thoroughly.\p"
+	.string "$"
 
 gUnknown_8417494:: @ 8417494
-	.string "This is a list of your POKéMON,\n{PLAYER}.\pOpen this to check the skills\nand moves of your POKéMON.\pYou also choose POKéMON here if\nyou want to use an item on one.{PAUSE_UNTIL_PRESS}$"
+	.string "This is a list of your POKéMON,\n"
+	.string "{PLAYER}.\p"
+	.string "Open this to check the skills\n"
+	.string "and moves of your POKéMON.\p"
+	.string "You also choose POKéMON here if\n"
+	.string "you want to use an item on one.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8417533:: @ 0x8417533
 	.string "Cut a tree or grass.$"
@@ -1100,10 +1229,12 @@ gUnknown_84175FB:: @ 0x84175FB
 	.string "Return to a healing spot.$"
 
 gUnknown_8417615:: @ 8417615
-	.string "Want to escape from here and return\nto {STR_VAR_1}?$"
+	.string "Want to escape from here and return\n"
+	.string "to {STR_VAR_1}?$"
 
 gUnknown_8417640:: @ 8417640
-	.string "Want to return to the healing spot\nused last in {STR_VAR_1}?$"
+	.string "Want to return to the healing spot\n"
+	.string "used last in {STR_VAR_1}?$"
 
 gUnknown_8417674:: @ 8417674
 	.string "ATTACK$"
@@ -1163,7 +1294,8 @@ gText_TakeOutItemsFromThePC:: @ 0x8417741
 	.string "Take out items from the PC.$"
 
 gUnknown_841775D:: @ 0x841775D
-	.string "パソコンに あずけている\nどうぐを すてます$"
+	.string "パソコンに あずけている\n"
+	.string "どうぐを すてます$"
 
 gText_ThereAreNoItems:: @ 8417774
 	.string "There are no items.{PAUSE_UNTIL_PRESS}$"
@@ -1193,16 +1325,19 @@ gText_TheresNoMailHere:: @ 84177EE
 	.string "There's no MAIL here.{PAUSE_UNTIL_PRESS}$"
 
 gText_WhatWouldYouLikeToDoWithPlayersMail:: @ 8417806
-	.string "What would you like to do with\n{STR_VAR_1}'s MAIL?$"
+	.string "What would you like to do with\n"
+	.string "{STR_VAR_1}'s MAIL?$"
 
 gText_MessageWillBeLost:: @ 8417830
-	.string "The message will be lost.\nIs that okay?$"
+	.string "The message will be lost.\n"
+	.string "Is that okay?$"
 
 gText_BagIsFull:: @ 8417858
 	.string "The BAG is full.{PAUSE_UNTIL_PRESS}$"
 
 gText_MailReturnedToBagMessageErased:: @ 841786B
-	.string "The MAIL was returned to the BAG\nwith its message erased.{PAUSE_UNTIL_PRESS}$"
+	.string "The MAIL was returned to the BAG\n"
+	.string "with its message erased.{PAUSE_UNTIL_PRESS}$"
 
 gText_WithdrawItem:: @ 84178A7
 	.string "WITHDRAW\n"
@@ -2059,16 +2194,20 @@ gUnknown_84185A5:: @ 0x84185A5
 	.string "SEE YA!$"
 
 gUnknown_84185AD:: @ 0x84185AD
-	.string "You can withdraw a POKéMON if you\nhave any in a BOX.$"
+	.string "You can withdraw a POKéMON if you\n"
+	.string "have any in a BOX.$"
 
 gUnknown_84185E2:: @ 0x84185E2
-	.string "You can deposit your party\nPOKéMON in any BOX.$"
+	.string "You can deposit your party\n"
+	.string "POKéMON in any BOX.$"
 
 gUnknown_8418611:: @ 0x8418611
-	.string "You can move POKéMON that are\nstored in any BOX.$"
+	.string "You can move POKéMON that are\n"
+	.string "stored in any BOX.$"
 
 gUnknown_8418642:: @ 0x8418642
-	.string "You can move items held by any\nPOKéMON in a BOX or your party.$"
+	.string "You can move items held by any\n"
+	.string "POKéMON in a BOX or your party.$"
 
 gUnknown_8418681:: @ 0x8418681
 	.string "See you later!$"
@@ -2251,31 +2390,40 @@ gUnknown_8418B17:: @ 0x8418B17
 	.string "って$"
 
 gUnknown_8418B1A:: @ 0x8418B1A
-	.string "\nそう おもわない?$"
+	.string "\n"
+	.string "そう おもわない?$"
 
 gUnknown_8418B25:: @ 0x8418B25
-	.string "たびに でたいな-\nどこか いい ところ しらない?$"
+	.string "たびに でたいな-\n"
+	.string "どこか いい ところ しらない?$"
 
 gUnknown_8418B40:: @ 0x8418B40
-	.string "120しょくの クレヨン かったんだ-\nいいでしょう?$"
+	.string "120しょくの クレヨン かったんだ-\n"
+	.string "いいでしょう?$"
 
 gUnknown_8418B5C:: @ 0x8418B5C
-	.string "しゃぼんだまに のって とべるように\nならないかな-$"
+	.string "しゃぼんだまに のって とべるように\n"
+	.string "ならないかな-$"
 
 gUnknown_8418B77:: @ 0x8418B77
-	.string "すなはまに かいた もじは\nすぐに きえちゃうのが かなしいよね-$"
+	.string "すなはまに かいた もじは\n"
+	.string "すぐに きえちゃうのが かなしいよね-$"
 
 gUnknown_8418B99:: @ 0x8418B99
-	.string "うみの そこって どうなってるのかな-\nいちどで いいから みて みたいな-$"
+	.string "うみの そこって どうなってるのかな-\n"
+	.string "いちどで いいから みて みたいな-$"
 
 gUnknown_8418BC0:: @ 0x8418BC0
-	.string "ゆうやけを みると\nウチに かえりたく ならない?$"
+	.string "ゆうやけを みると\n"
+	.string "ウチに かえりたく ならない?$"
 
 gUnknown_8418BDA:: @ 0x8418BDA
-	.string "みどりの しばで ねころがると\nきもちいいよね-$"
+	.string "みどりの しばで ねころがると\n"
+	.string "きもちいいよね-$"
 
 gUnknown_8418BF3:: @ 0x8418BF3
-	.string "ひみつきち って いいよね!\nなんか わくわく してこない?$"
+	.string "ひみつきち って いいよね!\n"
+	.string "なんか わくわく してこない?$"
 
 gUnknown_8418C12:: @ 0x8418C12
 	.string "ポケモン リ-グ$"
@@ -2311,7 +2459,11 @@ gUnknown_8418C6F:: @ 0x8418C6F
 	.string "もう これいじょう たべない みたい‥$"
 
 gUnknown_8418C83:: @ 8418C83
-	.string "Save failed.\nChecking the backup memory‥\nPlease wait.\n“Time required:\nabout 1 minute”$"
+	.string "Save failed.\n"
+	.string "Checking the backup memory‥\n"
+	.string "Please wait.\n"
+	.string "“Time required:\n"
+	.string "about 1 minute”$"
 
 gUnknown_8418CD9:: @ 8418CD9
 	.string "The backup memory is damaged or\n"
@@ -2321,16 +2473,22 @@ gUnknown_8418CD9:: @ 8418CD9
 	.string "“Please press the A Button.”$"
 
 gUnknown_8418D70:: @ 8418D70
-	.string "{COLOR RED}“このまま ぼうけんをつづけることは できません\nタイトルに もどります”$"
+	.string "{COLOR RED}“このまま ぼうけんをつづけることは できません\n"
+	.string "タイトルに もどります”$"
 
 gUnknown_8418D99:: @ 0x8418D99
-	.string "けんさが しゅうりょうしました!\nもういちど レポ-トを かきこみます\nしばらくおまちください$"
+	.string "けんさが しゅうりょうしました!\n"
+	.string "もういちど レポ-トを かきこみます\n"
+	.string "しばらくおまちください$"
 
 gUnknown_8418DC9:: @ 0x8418DC9
-	.string "レポ-トの かきこみは しゅうりょうしました\n{COLOR RED}“このまま ぼうけんをつづけることは できません\nタイトルに もどります”$"
+	.string "レポ-トの かきこみは しゅうりょうしました\n"
+	.string "{COLOR RED}“このまま ぼうけんをつづけることは できません\n"
+	.string "タイトルに もどります”$"
 
 gUnknown_8418E09:: @ 8418E09
-	.string "Save completed.\n“Please press the A Button.”$"
+	.string "Save completed.\n"
+	.string "“Please press the A Button.”$"
 
 gUnknown_8418E36:: @ 0x8418E36
 	.string "れんらくせん$"
@@ -2590,34 +2748,49 @@ gUnknown_84199AB:: @ 84199AB
 	.string "{UNKNOWN_F7 0x02} at {EXTRA_LV} {UNKNOWN_F7 0x01}).$"
 
 gUnknown_84199F4:: @ 84199F4
-	.string "{UNKNOWN_F7 0x00} nature. Apparently met in\na fateful encounter シhatched:\n{UNKNOWN_F7 0x02} at {EXTRA_LV} {UNKNOWN_F7 0x01}ス.$"
+	.string "{UNKNOWN_F7 0x00} nature. Apparently met in\n"
+	.string "a fateful encounter シhatched:\n"
+	.string "{UNKNOWN_F7 0x02} at {EXTRA_LV} {UNKNOWN_F7 0x01}ス.$"
 
 gUnknown_8419A3D:: @ 0x8419A3D
-	.string "An odd POKéMON EGG found by the\nDAY-CARE couple.$"
+	.string "An odd POKéMON EGG found by the\n"
+	.string "DAY-CARE couple.$"
 
 gUnknown_8419A6E:: @ 0x8419A6E
-	.string "An odd POKéMON EGG obtained from\nthe traveling man.$"
+	.string "An odd POKéMON EGG obtained from\n"
+	.string "the traveling man.$"
 
 gUnknown_8419AA2:: @ 0x8419AA2
-	.string "A wondrously peculiar POKéMON EGG\nobtained at a nice place.$"
+	.string "A wondrously peculiar POKéMON EGG\n"
+	.string "obtained at a nice place.$"
 
 gUnknown_8419ADE:: @ 0x8419ADE
-	.string "An odd POKéMON EGG obtained from\nan old woman at the SPA.$"
+	.string "An odd POKéMON EGG obtained from\n"
+	.string "an old woman at the SPA.$"
 
 gUnknown_8419B18:: @ 0x8419B18
-	.string "A peculiar POKéMON EGG obtained\nin a trade.$"
+	.string "A peculiar POKéMON EGG obtained\n"
+	.string "in a trade.$"
 
 gUnknown_8419B44:: @ 0x8419B44
-	.string "It looks like this\nEGG will take a\nlong time to hatch.$"
+	.string "It looks like this\n"
+	.string "EGG will take a\n"
+	.string "long time to hatch.$"
 
 gUnknown_8419B7B:: @ 0x8419B7B
-	.string "What will hatch\nfrom this? It will\ntake some time.$"
+	.string "What will hatch\n"
+	.string "from this? It will\n"
+	.string "take some time.$"
 
 gUnknown_8419BAE:: @ 0x8419BAE
-	.string "It occasionally\nmoves. It should\nhatch soon.$"
+	.string "It occasionally\n"
+	.string "moves. It should\n"
+	.string "hatch soon.$"
 
 gUnknown_8419BDB:: @ 0x8419BDB
-	.string "It's making sounds.\nIt's almost ready\nto hatch!$"
+	.string "It's making sounds.\n"
+	.string "It's almost ready\n"
+	.string "to hatch!$"
 
 gUnknown_8419C0B:: @ 8419C0B
 	.string "a trade$"
@@ -2665,7 +2838,8 @@ gUnknown_8419CA9:: @ 8419CA9
 	.string "{KEYGFX_DPAD_UP_DOWN}PICK {KEYGFX_A_BUTTON}DELETE$"
 
 gUnknown_8419CB9:: @ 8419CB9
-	.string "HM moves can't be\nforgotten now.$"
+	.string "HM moves can't be\n"
+	.string "forgotten now.$"
 
 gUnknown_8419CDA:: @ 8419CDA
 	.string "NAME: $"
@@ -2722,7 +2896,8 @@ gUnknown_8419D7D:: @ 8419D7D
 	.string "BERRY CRUSH$"
 
 gUnknown_8419D89:: @ 8419D89
-	.string "Waiting for the other TRAINER to\nfinish reading your TRAINER CARD.$"
+	.string "Waiting for the other TRAINER to\n"
+	.string "finish reading your TRAINER CARD.$"
 
 gUnknown_8419DCC:: @ 8419DCC
 	.string "OPTION$"
@@ -2794,7 +2969,8 @@ gUnknown_8419E57:: @ 8419E57
 	.string "{KEYGFX_DPAD_UP_DOWN}PICK {KEYGFX_DPAD_LEFT_RIGHT}SWITCH {KEYGFX_A_BUTTON}{KEYGFX_B_BUTTON}CANCEL$"
 
 gUnknown_8419E72:: @ 0x8419E72
-	.string "RTCを リセットします\nAで けってい Bで キャンセル$"
+	.string "RTCを リセットします\n"
+	.string "Aで けってい Bで キャンセル$"
 
 gUnknown_8419E90:: @ 0x8419E90
 	.string "げんざいの ゲ-ムない じかん$"
@@ -2806,19 +2982,23 @@ gUnknown_8419EB0:: @ 0x8419EB0
 	.string "じかんを さいせってい してください$"
 
 gUnknown_8419EC3:: @ 0x8419EC3
-	.string "じかんを さいせってい しました!\nレポ-トを かいています おまちください$"
+	.string "じかんを さいせってい しました!\n"
+	.string "レポ-トを かいています おまちください$"
 
 gUnknown_8419EEA:: @ 0x8419EEA
 	.string "レポ-トを かきこみました!$"
 
 gUnknown_8419EF9:: @ 0x8419EF9
-	.string "レポ-トの かきこみに\nしっぱい しました‥$"
+	.string "レポ-トの かきこみに\n"
+	.string "しっぱい しました‥$"
 
 gUnknown_8419F10:: @ 0x8419F10
-	.string "レポ-トが ないので\nじかんの せっていは できません!$"
+	.string "レポ-トが ないので\n"
+	.string "じかんの せっていは できません!$"
 
 gUnknown_8419F2D:: @ 0x8419F2D
-	.string "ゲ-ムない じかんの しゅうせい システムが\nつかえる ように なりました!$"
+	.string "ゲ-ムない じかんの しゅうせい システムが\n"
+	.string "つかえる ように なりました!$"
 
 gText_SavingDontTurnOffThePower2:: @ 8419F54
 	.string "SAVING…\n"
@@ -2858,13 +3038,15 @@ gStartMenuDesc_Retire:: @ 841A111 // Retire
 	.include "data/text/quest_log.inc"
 
 gUnknown_841B285:: @ 841B285
-	.string " was used on\n$"
+	.string " was used on\n"
+	.string "$"
 
 gUnknown_841B293:: @ 841B293
 	.string ".$"
 
 gUnknown_841B295:: @ 841B295
-	.string "'s level rose to\n$"
+	.string "'s level rose to\n"
+	.string "$"
 
 gUnknown_841B2A7:: @ 841B2A7
 	.string ".$"
@@ -2900,22 +3082,28 @@ gUnknown_841B2F1:: @ 841B2F1
 	.string "2, and ‥ ‥ ‥ $"
 
 gUnknown_841B2FF:: @ 0x841B2FF
-	.string "Poof!\p$"
+	.string "Poof!\p"
+	.string "$"
 
 gUnknown_841B306:: @ 841B306
-	.string "{UNKNOWN_F7 0x00} forgot\n{UNKNOWN_F7 0x01}.\p$"
+	.string "{UNKNOWN_F7 0x00} forgot\n"
+	.string "{UNKNOWN_F7 0x01}.\p"
+	.string "$"
 
 gUnknown_841B315:: @ 841B315
-	.string "And‥\p$"
+	.string "And‥\p"
+	.string "$"
 
 gUnknown_841B31B:: @ 841B31B
-	.string "Machine set!\p$"
+	.string "Machine set!\p"
+	.string "$"
 
 gUnknown_841B329:: @ 841B329
 	.string "Huh?$"
 
 gUnknown_841B32E:: @ 841B32E
-	.string "{UNKNOWN_F7 0x00} learned\n{UNKNOWN_F7 0x01}!$"
+	.string "{UNKNOWN_F7 0x00} learned\n"
+	.string "{UNKNOWN_F7 0x01}!$"
 
 gUnknown_841B33D:: @ 0x841B33D
 	.string "UPPER$"
@@ -2963,22 +3151,27 @@ gUnknown_841B3E9:: @ 0x841B3E9
 	.string "Exiting the chat‥$"
 
 gUnknown_841B3FB:: @ 0x841B3FB
-	.string "The LEADER, {UNKNOWN_F7 0x00}, has\nleft, ending the chat.$"
+	.string "The LEADER, {UNKNOWN_F7 0x00}, has\n"
+	.string "left, ending the chat.$"
 
 gUnknown_841B426:: @ 0x841B426
-	.string "The registered text has been changed.\nIs it okay to save the game?$"
+	.string "The registered text has been changed.\n"
+	.string "Is it okay to save the game?$"
 
 gUnknown_841B469:: @ 0x841B469
-	.string "There is already a saved file.\nIs it okay to overwrite it?$"
+	.string "There is already a saved file.\n"
+	.string "Is it okay to overwrite it?$"
 
 gUnknown_841B4A4:: @ 0x841B4A4
-	.string "SAVING‥\nDON'T TURN OFF THE POWER.$"
+	.string "SAVING‥\n"
+	.string "DON'T TURN OFF THE POWER.$"
 
 gUnknown_841B4C6:: @ 0x841B4C6
 	.string "{UNKNOWN_F7 0x00} saved the game.$"
 
 gUnknown_841B4D9:: @ 0x841B4D9
-	.string "If the LEADER leaves, the chat\nwill end. Is that okay?$"
+	.string "If the LEADER leaves, the chat\n"
+	.string "will end. Is that okay?$"
 
 gUnknown_841B510:: @ 841B510
 	.string "HELLO$"
@@ -3011,16 +3204,25 @@ gUnknown_841B54B:: @ 841B54B
 	.string "BYE-BYE!$"
 
 gUnknown_841B554:: @ 841B554
-	.string "{PLAYER} scurried to a POKéMON CENTER,\nprotecting the exhausted and fainted\nPOKéMON from further harm‥\p$"
+	.string "{PLAYER} scurried to a POKéMON CENTER,\n"
+	.string "protecting the exhausted and fainted\n"
+	.string "POKéMON from further harm‥\p"
+	.string "$"
 
 gUnknown_841B5B6:: @ 841B5B6
-	.string "{PLAYER} scurried back home, protecting\nthe exhausted and fainted POKéMON from\nfurther harm‥\p$"
+	.string "{PLAYER} scurried back home, protecting\n"
+	.string "the exhausted and fainted POKéMON from\n"
+	.string "further harm‥\p"
+	.string "$"
 
 gUnknown_841B60E:: @ 841B60E
 	.string "PLAYER: {UNKNOWN_F7 0x00}$"
 
 gUnknown_841B619:: @ 841B619
-	.string "This document is issued in\nrecognition of your magnificent\nachievement - the completion of\nthe {UNKNOWN_F7 0x01} POKéDEX.$"
+	.string "This document is issued in\n"
+	.string "recognition of your magnificent\n"
+	.string "achievement - the completion of\n"
+	.string "the {UNKNOWN_F7 0x01} POKéDEX.$"
 
 gUnknown_841B684:: @ 841B684
 	.string "GAME FREAK$"
@@ -3035,7 +3237,8 @@ gUnknown_841B69E:: @ 841B69E
 	.string "Clear all save data areas?$"
 
 gUnknown_841B6B9:: @ 841B6B9
-	.string "Clearing data‥\nPlease wait.$"
+	.string "Clearing data‥\n"
+	.string "Please wait.$"
 
 gText_Player:: @ 841B6D5
 	.string "PLAYER$"
@@ -3065,10 +3268,12 @@ gText_HatchedFromEgg:: @ 841B6FD
 	.string "{STR_VAR_1} hatched from the EGG!$"
 
 gText_NickHatchPrompt:: @ 841B716
-	.string "Would you like to nickname the newly\nhatched {STR_VAR_1}?$"
+	.string "Would you like to nickname the newly\n"
+	.string "hatched {STR_VAR_1}?$"
 
 gString_OutOfCoins:: @ 841B747
-	.string "You've run out of COINS.\nGame over!$"
+	.string "You've run out of COINS.\n"
+	.string "Game over!$"
 
 gString_QuitPlaying:: @ 841B76B
 	.string "Quit playing?$"
@@ -3321,347 +3526,677 @@ gUnknown_841D18D:: @ 841D18D
 
 	.align 2
 gString_PokemonFireRed_Staff:: @ 841D198
-	.string "Pokémon FireRed Version\nStaff$"
+	.string "Pokémon FireRed Version\n"
+	.string "Staff$"
 
 	.align 2
 gString_PokemonLeafGreen_Staff:: @ 0x841D1B8
-	.string "Pokémon LeafGreen Version\nStaff$"
+	.string "Pokémon LeafGreen Version\n"
+	.string "Staff$"
 
 	.align 2
 gCreditsString_Director:: @ 0x841D1D8
-	.string "\n\nDirector\n\n\n\n$"
+	.string "\n"
+	.string "\nDirector\n"
+	.string "\n\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Junichi_Masuda:: @ 0x841D1E8
-	.string "\n\n\nJunichi Masuda\n\n\n$"
+	.string "\n"
+	.string "\n\n"
+	.string "Junichi Masuda\n"
+	.string "\n\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Art_Director_Battle_Director:: @ 0x841D200
-	.string "\nArt Director\n\nBattle Director\n\n\n$"
+	.string "\n"
+	.string "Art Director\n"
+	.string "\nBattle Director\n"
+	.string "\n\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Ken_Sugimori_Shigeki_Morimoto:: @ 0x841D224
-	.string "\n\nKen Sugimori\n\nShigeki Morimoto\n\n$"
+	.string "\n"
+	.string "\nKen Sugimori\n"
+	.string "\nShigeki Morimoto\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Program_Leader_Planning_Leader_Graphic_Design_Leader:: @ 0x841D248
-	.string "Program Leader\n\nPlanning Leader\n\nGraphic Design Leader\n\n$"
+	.string "Program Leader\n"
+	.string "\nPlanning Leader\n"
+	.string "\nGraphic Design Leader\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Tetsuya_Watanabe_Koji_Nishino_Takao_Unno:: @ 0x841D284
-	.string "\nTetsuya Watanabe\n\nKoji Nishino\n\nTakao Unno\n$"
+	.string "\n"
+	.string "Tetsuya Watanabe\n"
+	.string "\nKoji Nishino\n"
+	.string "\nTakao Unno\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Programmers:: @ 0x841D2B4
-	.string "Programmers\n\n\n\n\n$"
+	.string "Programmers\n"
+	.string "\n\n"
+	.string "\n\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Hiroyuki_Nakamura_Masao_Taya_Satoshi_Nohara_Miyuki_Iwasawa_Daisuke_Goto:: @ 0x841D2C8
-	.string "\nHiroyuki Nakamura\nMasao Taya\nSatoshi Nohara\nMiyuki Iwasawa\nDaisuke Goto\n$"
+	.string "\n"
+	.string "Hiroyuki Nakamura\n"
+	.string "Masao Taya\n"
+	.string "Satoshi Nohara\n"
+	.string "Miyuki Iwasawa\n"
+	.string "Daisuke Goto\n"
+	.string "$"
 
 	.align 2
 gCreditsString_System_Programmers:: @ 0x841D314
-	.string "System Programmers\n\n\n\n\n\n$"
+	.string "System Programmers\n"
+	.string "\n\n"
+	.string "\n\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Tetsuya_Watanabe_Akito_Mori_Hisashi_Sogabe_Sousuke_Tamada:: @ 0x841D330
-	.string "\nTetsuya Watanabe\nAkito Mori\nHisashi Sogabe\nSousuke Tamada\n\n$"
+	.string "\n"
+	.string "Tetsuya Watanabe\n"
+	.string "Akito Mori\n"
+	.string "Hisashi Sogabe\n"
+	.string "Sousuke Tamada\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Graphic_Designers:: @ 0x841D370
-	.string "Graphic Designers\n\n\n\n\n\n$"
+	.string "Graphic Designers\n"
+	.string "\n\n"
+	.string "\n\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Takao_Unno_Asuka_Iwashita_Kanako_Eo_Hiroki_Fuchino:: @ 0x841D388
-	.string "\nTakao Unno\nAsuka Iwashita\nKanako Eo\nHiroki Fuchino\n\n$"
+	.string "\n"
+	.string "Takao Unno\n"
+	.string "Asuka Iwashita\n"
+	.string "Kanako Eo\n"
+	.string "Hiroki Fuchino\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Graphic_Designers_2:: @ 0x841D3C0
-	.string "\nGraphic Designers\n\n\n\n\n$"
+	.string "\n"
+	.string "Graphic Designers\n"
+	.string "\n\n"
+	.string "\n\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Ken_Sugimori_Hironobu_Yoshida:: @ 0x841D3D8
-	.string "\n\nKen Sugimori\nHironobu Yoshida\n\n\n$"
+	.string "\n"
+	.string "\nKen Sugimori\n"
+	.string "Hironobu Yoshida\n"
+	.string "\n\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Music_Composition:: @ 0x841D3FC
-	.string "\nMusic Composition\n\n\n\n\n$"
+	.string "\n"
+	.string "Music Composition\n"
+	.string "\n\n"
+	.string "\n\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Go_Ichinose_Junichi_Masuda:: @ 0x841D414
-	.string "\n\nGo Ichinose\nJunichi Masuda\n\n\n$"
+	.string "\n"
+	.string "\nGo Ichinose\n"
+	.string "Junichi Masuda\n"
+	.string "\n\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Sound_Effects:: @ 0x841D434
-	.string "\n\nSound Effects\n\n\n\n$"
+	.string "\n"
+	.string "\nSound Effects\n"
+	.string "\n\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Go_Ichinose:: @ 0x841D448
-	.string "\n\n\nGo Ichinose\n\n\n$"
+	.string "\n"
+	.string "\n\n"
+	.string "Go Ichinose\n"
+	.string "\n\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Game_Designers:: @ 0x841D45C
-	.string "\nGame Designers\n\n\n\n\n$"
+	.string "\n"
+	.string "Game Designers\n"
+	.string "\n\n"
+	.string "\n\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Junichi_Masuda_Koji_Nishino_Tetsuji_Ohta:: @ 0x841D474
-	.string "\n\nJunichi Masuda\nKoji Nishino\nTetsuji Ohta\n\n$"
+	.string "\n"
+	.string "\nJunichi Masuda\n"
+	.string "Koji Nishino\n"
+	.string "Tetsuji Ohta\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Game_Designers_2:: @ 0x841D4A4
-	.string "\nGame Designers\n\n\n\n\n$"
+	.string "\n"
+	.string "Game Designers\n"
+	.string "\n\n"
+	.string "\n\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Hitomi_Sato_Shigeru_Ohmori_Tadashi_Takahashi:: @ 0x841D4BC
-	.string "\n\nHitomi Sato\nShigeru Ohmori\nTadashi Takahashi\n\n$"
+	.string "\n"
+	.string "\nHitomi Sato\n"
+	.string "Shigeru Ohmori\n"
+	.string "Tadashi Takahashi\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Game_Scenario:: @ 0x841D4F0
-	.string "\nGame Scenario\n\n\n\n\n$"
+	.string "\n"
+	.string "Game Scenario\n"
+	.string "\n\n"
+	.string "\n\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Hitomi_Sato_Satoshi_Tajiri:: @ 0x841D504
-	.string "\n\nHitomi Sato\nSatoshi Tajiri\n\n\n$"
+	.string "\n"
+	.string "\nHitomi Sato\n"
+	.string "Satoshi Tajiri\n"
+	.string "\n\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Script_Designer_Map_Designer:: @ 0x841D524
-	.string "\nScript Designer\n\nMap Designer\n\n\n$"
+	.string "\n"
+	.string "Script Designer\n"
+	.string "\nMap Designer\n"
+	.string "\n\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Satoshi_Nohara_Shigeru_Ohmori:: @ 0x841D548
-	.string "\n\nSatoshi Nohara\n\nShigeru Ohmori\n\n$"
+	.string "\n"
+	.string "\nSatoshi Nohara\n"
+	.string "\nShigeru Ohmori\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Parametric_Designers:: @ 0x841D56C
-	.string "\nParametric Designers\n\n\n\n\n$"
+	.string "\n"
+	.string "Parametric Designers\n"
+	.string "\n\n"
+	.string "\n\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Koji_Nishino_Tetsuji_Ohta_Shigeki_Morimoto:: @ 0x841D588
-	.string "\n\nKoji Nishino\nTetsuji Ohta\nShigeki Morimoto\n\n$"
+	.string "\n"
+	.string "\nKoji Nishino\n"
+	.string "Tetsuji Ohta\n"
+	.string "Shigeki Morimoto\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_POKeDEX_Text:: @ 0x841D5B8
-	.string "\n\nPOKéDEX Text\n\n\n\n$"
+	.string "\n"
+	.string "\nPOKéDEX Text\n"
+	.string "\n\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Kenji_Matsushima:: @ 0x841D5CC
-	.string "\n\n\nKenji Matsushima\n\n\n$"
+	.string "\n"
+	.string "\n\n"
+	.string "Kenji Matsushima\n"
+	.string "\n\n"
+	.string "$"
 
 	.align 2
 gCreditsString_POKeMON_Designers:: @ 0x841D5E4
-	.string "POKéMON Designers\n\n\n\n\n\n$"
+	.string "POKéMON Designers\n"
+	.string "\n\n"
+	.string "\n\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Ken_Sugimori_Motofumi_Fujiwara_Shigeki_Morimoto_Hironobu_Yoshida:: @ 0x841D5FC
-	.string "\nKen Sugimori\nMotofumi Fujiwara\nShigeki Morimoto\nHironobu Yoshida\n\n$"
+	.string "\n"
+	.string "Ken Sugimori\n"
+	.string "Motofumi Fujiwara\n"
+	.string "Shigeki Morimoto\n"
+	.string "Hironobu Yoshida\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_POKeMON_Designers_2:: @ 0x841D640
-	.string "POKéMON Designers\n\n\n\n\n\n$"
+	.string "POKéMON Designers\n"
+	.string "\n\n"
+	.string "\n\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Satoshi_Ohta_Asuka_Iwashita_Takao_Unno_Kanako_Eo_Aimi_Tomita:: @ 0x841D658
-	.string "\nSatoshi Ohta\nAsuka Iwashita\nTakao Unno\nKanako Eo\nAimi Tomita\n$"
+	.string "\n"
+	.string "Satoshi Ohta\n"
+	.string "Asuka Iwashita\n"
+	.string "Takao Unno\n"
+	.string "Kanako Eo\n"
+	.string "Aimi Tomita\n"
+	.string "$"
 
 	.align 2
 gCreditsString_POKeMON_Designers_3:: @ 0x841D698
-	.string "POKéMON Designers\n\n\n\n\n\n$"
+	.string "POKéMON Designers\n"
+	.string "\n\n"
+	.string "\n\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Atsuko_Nishida_Muneo_Saito_Rena_Yoshikawa_Jun_Okutani:: @ 0x841D6B0
-	.string "\nAtsuko Nishida\nMuneo Saito\nRena Yoshikawa\nJun Okutani\n\n$"
+	.string "\n"
+	.string "Atsuko Nishida\n"
+	.string "Muneo Saito\n"
+	.string "Rena Yoshikawa\n"
+	.string "Jun Okutani\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Supporting_Programmers:: @ 0x841D6EC
-	.string "Supporting Programmers\n\n\n\n$"
+	.string "Supporting Programmers\n"
+	.string "\n\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Teruyuki_Yoshioka_Takao_Nakano_Satoshi_Mitsuhara_Daisuke_Hoshino:: @ 0x841D708
-	.string "\nTeruyuki Yoshioka\nTakao Nakano\n\nSatoshi Mitsuhara\nDaisuke Hoshino\n$"
+	.string "\n"
+	.string "Teruyuki Yoshioka\n"
+	.string "Takao Nakano\n"
+	.string "\nSatoshi Mitsuhara\n"
+	.string "Daisuke Hoshino\n"
+	.string "$"
 
 	.align 2
 gCreditsString_NCL_Product_Testing:: @ 0x841D74C
-	.string "\n\nNCL Product Testing\n\n\n\n$"
+	.string "\n"
+	.string "\nNCL Product Testing\n"
+	.string "\n\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_NCL_Super_Mario_Club:: @ 0x841D768
-	.string "\n\n\nNCL Super Mario Club\n\n\n$"
+	.string "\n"
+	.string "\n\n"
+	.string "NCL Super Mario Club\n"
+	.string "\n\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Special_Thanks:: @ 0x841D784
-	.string "Special Thanks\n\n\n\n\n\n$"
+	.string "Special Thanks\n"
+	.string "\n\n"
+	.string "\n\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Hiro_Nakamura_Hiroyuki_Uesugi_Teruki_Murakawa_Kazuya_Suyama:: @ 0x841D79C
-	.string "\nHiro Nakamura\nHiroyuki Uesugi\nTeruki Murakawa\n\nKazuya Suyama\n$"
+	.string "\n"
+	.string "Hiro Nakamura\n"
+	.string "Hiroyuki Uesugi\n"
+	.string "Teruki Murakawa\n"
+	.string "\nKazuya Suyama\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Special_Thanks_2:: @ 0x841D7DC
-	.string "Special Thanks\n\n\n\n\n\n$"
+	.string "Special Thanks\n"
+	.string "\n\n"
+	.string "\n\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Kenji_Tominaga_Kenjiro_Ito_Tomotaka_Komura_Michiko_Takizawa:: @ 0x841D7F4
-	.string "\nKenji Tominaga\n\nKenjiro Ito\nTomotaka Komura\nMichiko Takizawa\n$"
+	.string "\n"
+	.string "Kenji Tominaga\n"
+	.string "\nKenjiro Ito\n"
+	.string "Tomotaka Komura\n"
+	.string "Michiko Takizawa\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Special_Thanks_3:: @ 0x841D834
-	.string "Special Thanks\n\n\n\n\n\n$"
+	.string "Special Thanks\n"
+	.string "\n\n"
+	.string "\n\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Makiko_Takada_Mikiko_Ohashi_Shusaku_Egami_Takanao_Kondo_Rui_Kawaguchi:: @ 0x841D84C
-	.string "\nMakiko Takada\nMikiko Ohashi\nShusaku Egami\nTakanao Kondo\nRui Kawaguchi\n$"
+	.string "\n"
+	.string "Makiko Takada\n"
+	.string "Mikiko Ohashi\n"
+	.string "Shusaku Egami\n"
+	.string "Takanao Kondo\n"
+	.string "Rui Kawaguchi\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Braille_Code_Check:: @ 0x841D894
-	.string "\n\nBraille Code Check\n\n\n\n$"
+	.string "\n"
+	.string "\nBraille Code Check\n"
+	.string "\n\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Japan_Braille_Library:: @ 0x841D8B0
-	.string "\n\n\nJapan Braille Library\n\n\n$"
+	.string "\n"
+	.string "\n\n"
+	.string "Japan Braille Library\n"
+	.string "\n\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Information_Supervisors:: @ 0x841D8CC
-	.string "Information Supervisors\n\n\n\n\n\n$"
+	.string "Information Supervisors\n"
+	.string "\n\n"
+	.string "\n\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Hiroki_Enomoto_Kazuyuki_Terada_Yuri_Sakurai_Yumi_Funasaka_Naoko_Yanase:: @ 0x841D8EC
-	.string "\nHiroki Enomoto\nKazuyuki Terada\nYuri Sakurai\nYumi Funasaka\nNaoko Yanase\n$"
+	.string "\n"
+	.string "Hiroki Enomoto\n"
+	.string "Kazuyuki Terada\n"
+	.string "Yuri Sakurai\n"
+	.string "Yumi Funasaka\n"
+	.string "Naoko Yanase\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Coordinators:: @ 0x841D938
-	.string "Coordinators\n\n\n\n\n\n$"
+	.string "Coordinators\n"
+	.string "\n\n"
+	.string "\n\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Azusa_Tajima_Akira_Kinashi_Kazuki_Yoshihara_Retsuji_Nomoto:: @ 0x841D94C
-	.string "\nAzusa Tajima\nAkira Kinashi\nKazuki Yoshihara\n\nRetsuji Nomoto\n$"
+	.string "\n"
+	.string "Azusa Tajima\n"
+	.string "Akira Kinashi\n"
+	.string "Kazuki Yoshihara\n"
+	.string "\nRetsuji Nomoto\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Task_Managers:: @ 0x841D98C
-	.string "\nTask Managers\n\n\n\n\n$"
+	.string "\n"
+	.string "Task Managers\n"
+	.string "\n\n"
+	.string "\n\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Hitoshi_Yamagami_Gakuji_Nomoto:: @ 0x841D9A0
-	.string "\n\nHitoshi Yamagami\nGakuji Nomoto\n\n\n$"
+	.string "\n"
+	.string "\nHitoshi Yamagami\n"
+	.string "Gakuji Nomoto\n"
+	.string "\n\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Producers:: @ 0x841D9C4
-	.string "\nProducers\n\n\n\n\n$"
+	.string "\n"
+	.string "Producers\n"
+	.string "\n\n"
+	.string "\n\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Hiroyuki_Jinnai_Takehiro_Izushi_Hiroaki_Tsuru:: @ 0x841D9D4
-	.string "\n\nHiroyuki Jinnai\nTakehiro Izushi\nHiroaki Tsuru\n\n$"
+	.string "\n"
+	.string "\nHiroyuki Jinnai\n"
+	.string "Takehiro Izushi\n"
+	.string "Hiroaki Tsuru\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Executive_Director:: @ 0x841DA08
-	.string "\n\nExecutive Director\n\n\n\n$"
+	.string "\n"
+	.string "\nExecutive Director\n"
+	.string "\n\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Satoshi_Tajiri:: @ 0x841DA24
-	.string "\n\n\nSatoshi Tajiri\n\n\n$"
+	.string "\n"
+	.string "\n\n"
+	.string "Satoshi Tajiri\n"
+	.string "\n\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Executive_Producer:: @ 0x841DA3C
-	.string "\n\nExecutive Producer\n\n\n\n$"
+	.string "\n"
+	.string "\nExecutive Producer\n"
+	.string "\n\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Satoru_Iwata:: @ 0x841DA58
-	.string "\n\n\nSatoru Iwata\n\n\n$"
+	.string "\n"
+	.string "\n\n"
+	.string "Satoru Iwata\n"
+	.string "\n\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Executive_Producer_2:: @ 0x841DA6C
-	.string "\n\nExecutive Producer\n\n\n\n$"
+	.string "\n"
+	.string "\nExecutive Producer\n"
+	.string "\n\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Tsunekaz_Ishihara:: @ 0x841DA88
-	.string "\n\n\nTsunekaz Ishihara\n\n\n$"
+	.string "\n"
+	.string "\n\n"
+	.string "Tsunekaz Ishihara\n"
+	.string "\n\n"
+	.string "$"
 
 	.align 2
 gCreditsString_English_Version_Coordinators:: @ 0x841DAA0
-	.string "\nEnglish Version Coordinators\n\n\n\n\n$"
+	.string "\n"
+	.string "English Version Coordinators\n"
+	.string "\n\n"
+	.string "\n\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Hiro_Nakamura_Seth_McMahill:: @ 0x841DAC4
-	.string "\n\nHiro Nakamura\nSeth McMahill\n\n\n$"
+	.string "\n"
+	.string "\nHiro Nakamura\n"
+	.string "Seth McMahill\n"
+	.string "\n\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Translator_Text_Editor:: @ 0x841DAE8
-	.string "\nTranslator\n\nText Editor\n\n\n$"
+	.string "\n"
+	.string "Translator\n"
+	.string "\nText Editor\n"
+	.string "\n\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Nob_Ogasawara_Teresa_Lillygren:: @ 0x841DB04
-	.string "\n\nNob Ogasawara\n\nTeresa Lillygren\n\n$"
+	.string "\n"
+	.string "\nNob Ogasawara\n"
+	.string "\nTeresa Lillygren\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Programmers_2:: @ 0x841DB28
-	.string "Programmers\n\n\n\n\n\n$"
+	.string "Programmers\n"
+	.string "\n\n"
+	.string "\n\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Teruki_Murakawa_Souichi_Yamamoto_Yuichiro_Ito_Akira_Kinashi:: @ 0x841DB3C
-	.string "\nTeruki Murakawa\nSouichi Yamamoto\nYuichiro Ito\nAkira Kinashi\n\n$"
+	.string "\n"
+	.string "Teruki Murakawa\n"
+	.string "Souichi Yamamoto\n"
+	.string "Yuichiro Ito\n"
+	.string "Akira Kinashi\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Environment_Tool_Programmers:: @ 0x841DB7C
-	.string "\nEnvironment を Tool Programmers\n\n\n\n\n$"
+	.string "\n"
+	.string "Environment を Tool Programmers\n"
+	.string "\n\n"
+	.string "\n\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Teruki_Murakawa_Souichi_Yamamoto_Kimiko_Nakamichi:: @ 0x841DBA4
-	.string "\n\nTeruki Murakawa\nSouichi Yamamoto\nKimiko Nakamichi\n\n$"
+	.string "\n"
+	.string "\nTeruki Murakawa\n"
+	.string "Souichi Yamamoto\n"
+	.string "Kimiko Nakamichi\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_NOA_Product_Testing:: @ 0x841DBDC
-	.string "NOA Product Testing\n\n\n\n\n\n$"
+	.string "NOA Product Testing\n"
+	.string "\n\n"
+	.string "\n\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Thomas_Hertzog_Kathy_Huguenard_Mika_Kurosawa:: @ 0x841DBF8
-	.string "\nThomas Hertzog\nKathy Huguenard\nMika Kurosawa\n\n\n$"
+	.string "\n"
+	.string "Thomas Hertzog\n"
+	.string "Kathy Huguenard\n"
+	.string "Mika Kurosawa\n"
+	.string "\n\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Braille_Code_Check_2:: @ 0x841DC2C
-	.string "Braille Code Check\n\n\n\n\n\n$"
+	.string "Braille Code Check\n"
+	.string "\n\n"
+	.string "\n\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_National_Federation_of_the_Blind_Patricia_A_Maurer_Japan_Braille_Library_European_Blind_Union:: @ 0x841DC48
-	.string "\nNational Federation\n{CLEAR_TO 0x13}of the Blind\nPatricia A. Maurer\nJapan Braille Library\nEuropean Blind Union\n$"
+	.string "\n"
+	.string "National Federation\n"
+	.string "{CLEAR_TO 0x13}of the Blind\n"
+	.string "Patricia A. Maurer\n"
+	.string "Japan Braille Library\n"
+	.string "European Blind Union\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Braille_Code_Check_3:: @ 0x841DCAC
-	.string "\nBraille Code Check\n\n\n\n\n$"
+	.string "\n"
+	.string "Braille Code Check\n"
+	.string "\n\n"
+	.string "\n\n"
+	.string "$"
 
 	.align 2
 gCreditsString_National_Information_Library_Service_Margaret_Campion:: @ 0x841DCC8
-	.string "\n\nNational Information Library\n{CLEAR_TO 0x2D}Service\nMargaret Campion\n\n$"
+	.string "\n"
+	.string "\nNational Information Library\n"
+	.string "{CLEAR_TO 0x2D}Service\n"
+	.string "Margaret Campion\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Special_Thanks_4:: @ 0x841DD08
-	.string "Special Thanks\n\n\n\n\n\n$"
+	.string "Special Thanks\n"
+	.string "\n\n"
+	.string "\n\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Takehiro_Izushi_Motoyasu_Tojima_Hitoshi_Yamagami_Hiroyuki_Uesugi:: @ 0x841DD20
-	.string "\nTakehiro Izushi\nMotoyasu Tojima\nHitoshi Yamagami\nHiroyuki Uesugi\n\n$"
+	.string "\n"
+	.string "Takehiro Izushi\n"
+	.string "Motoyasu Tojima\n"
+	.string "Hitoshi Yamagami\n"
+	.string "Hiroyuki Uesugi\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Special_Thanks_5:: @ 0x841DD64
-	.string "Special Thanks\n\n\n\n\n\n$"
+	.string "Special Thanks\n"
+	.string "\n\n"
+	.string "\n\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Nicola_Pratt_Barlow_Shellie_Dow_Anthony_Howitt_Naoko_Saeki_Kyoko_Onishi:: @ 0x841DD7C
-	.string "\nNicola Pratt-Barlow\nShellie Dow\nAnthony Howitt\nNaoko Saeki\nKyoko Onishi\n$"
+	.string "\n"
+	.string "Nicola Pratt-Barlow\n"
+	.string "Shellie Dow\n"
+	.string "Anthony Howitt\n"
+	.string "Naoko Saeki\n"
+	.string "Kyoko Onishi\n"
+	.string "$"
 
 	.align 2
 gCreditsString_Braille_Code_Check_4:: @ 0x841DDC8
-	.string "\nBraille Code Check\n\n\n\n\n$"
+	.string "\n"
+	.string "Braille Code Check\n"
+	.string "\n\n"
+	.string "\n\n"
+	.string "$"
 
 	.align 2
 gCreditsString_The_Royal_New_Zealand_Foundation_of_the_Blind_Greg_Moran:: @ 0x841DDE4
-	.string "\n\nThe Royal New Zealand\nFoundation of the Blind\nGreg Moran\n\n$"
+	.string "\n"
+	.string "\nThe Royal New Zealand\n"
+	.string "Foundation of the Blind\n"
+	.string "Greg Moran\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Graphic_Designer:: @ 0x841DE24
-	.string "\n\nGraphic Designer\n\n\n\n$"
+	.string "\n"
+	.string "\nGraphic Designer\n"
+	.string "\n\n"
+	.string "\n$"
 
 	.align 2
 gCreditsString_Akira_Kinashi:: @ 0x841DE3C
-	.string "\n\n\nAkira Kinashi\n\n\n$"
+	.string "\n"
+	.string "\n\n"
+	.string "Akira Kinashi\n"
+	.string "\n\n"
+	.string "$"
 
 gJPText_MysteryGift:: @ 841DE50
 	.string "$"
@@ -3679,7 +4214,8 @@ gUnknown_841DE54:: @ 841DE54
 	.string "$"
 
 gUnknown_841DE55:: @ 841DE55
-	.string "カ-ドeリ-ダ-{EXTRA_PLUS}の ‘つうしん'を\nえらんで Aボタンを おしてください$"
+	.string "カ-ドeリ-ダ-{EXTRA_PLUS}の ‘つうしん'を\n"
+	.string "えらんで Aボタンを おしてください$"
 
 gUnknown_841DE7C:: @ 841DE7C
 	.string "$"
@@ -3688,7 +4224,8 @@ gUnknown_841DE7D:: @ 841DE7D
 	.string "$"
 
 gUnknown_841DE7E:: @ 841DE7E
-	.string "カ-ドeリ-ダ-{EXTRA_PLUS}と\nつうしん できません$"
+	.string "カ-ドeリ-ダ-{EXTRA_PLUS}と\n"
+	.string "つうしん できません$"
 
 gUnknown_841DE95:: @ 841DE95
 	.string "$"
@@ -3935,7 +4472,8 @@ gUnknown_841E2EC:: @ 841E2EC
 	.string "{KEYGFX_B_BUTTON}CANCEL$"
 
 gUnknown_841E2F5:: @ 841E2F5
-	.string "{COLOR BLUE}{SHADOW YELLOW}   たいせんの くみあわせ\n{COLOR RED}{SHADOW GREEN}じぶんの ばしょをきめて ください$"
+	.string "{COLOR BLUE}{SHADOW YELLOW}   たいせんの くみあわせ\n"
+	.string "{COLOR RED}{SHADOW GREEN}じぶんの ばしょをきめて ください$"
 
 gUnknown_841E322:: @ 841E322
 	.string "{EXTRA_ID}$"
@@ -3965,31 +4503,44 @@ gUnknown_841E3FB:: @ 841E3FB
 	.string "Teach {STR_VAR_2}?$"
 
 gUnknown_841E405:: @ 841E405
-	.string "{STR_VAR_1} learned\n{STR_VAR_2}.$"
+	.string "{STR_VAR_1} learned\n"
+	.string "{STR_VAR_2}.$"
 
 gUnknown_841E414:: @ 841E414
-	.string "{STR_VAR_1} is trying to learn\n{STR_VAR_2}.\pBut {STR_VAR_1} can't learn more\nthan four moves.\pDelete an older move to make\nroom for {STR_VAR_2}?$"
+	.string "{STR_VAR_1} is trying to learn\n"
+	.string "{STR_VAR_2}.\p"
+	.string "But {STR_VAR_1} can't learn more\n"
+	.string "than four moves.\p"
+	.string "Delete an older move to make\n"
+	.string "room for {STR_VAR_2}?$"
 
 gUnknown_841E481:: @ 841E481
 	.string "Stop learning {STR_VAR_2}?$"
 
 gUnknown_841E493:: @ 841E493
-	.string "{PAUSE 0x20}1, {PAUSE 0x0F}2, and {PAUSE 0x0F}‥ {PAUSE 0x0F}‥ {PAUSE 0x0F}‥ {PAUSE 0x0F}{PLAY_SE SE_KON}Poof!\p$"
+	.string "{PAUSE 0x20}1, {PAUSE 0x0F}2, and {PAUSE 0x0F}‥ {PAUSE 0x0F}‥ {PAUSE 0x0F}‥ {PAUSE 0x0F}{PLAY_SE SE_KON}Poof!\p"
+	.string "$"
 
 gUnknown_841E4C0:: @ 841E4C0
-	.string "{STR_VAR_1} forgot {STR_VAR_3}.\pAnd‥\p{STR_VAR_1}\nlearned {STR_VAR_2}.$"
+	.string "{STR_VAR_1} forgot {STR_VAR_3}.\p"
+	.string "And‥\p"
+	.string "{STR_VAR_1}\n"
+	.string "learned {STR_VAR_2}.$"
 
 gUnknown_841E4E2:: @ 841E4E2
-	.string "Give up trying to teach a new\nmove to {STR_VAR_1}?$"
+	.string "Give up trying to teach a new\n"
+	.string "move to {STR_VAR_1}?$"
 
 gUnknown_841E50C:: @ 841E50C
-	.string "Which move should be forgotten?\p$"
+	.string "Which move should be forgotten?\p"
+	.string "$"
 
 gUnknown_841E52D:: @ 0x841E52D
 	.string "----------$"
 
 gUnknown_841E538:: @ 841E538
-	.string "Communication standby‥\nAwaiting another player to choose.$"
+	.string "Communication standby‥\n"
+	.string "Awaiting another player to choose.$"
 
 gUnknown_841E572:: @ 841E572
 	.string "The battle was refused.{PAUSE 0x3C}$"

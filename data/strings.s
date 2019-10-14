@@ -4402,7 +4402,7 @@ gUnknown_841E20D:: @ 841E20D
 gUnknown_841E21E:: @ 841E21E
 	.string "Take good care of {STR_VAR_3}!$"
 
-gUnknown_841E234:: @ 841E234
+gText_From:: @ 841E234
 	.string "From $"
 
 gUnknown_841E23A:: @ 841E23A

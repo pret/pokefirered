@@ -17,5 +17,7 @@ u8 sub_8096ECC(u16, void (*)(struct Sprite *), s16, s16, u8, bool32);
 void sub_8097070(struct Sprite *);
 u16 GetUnownLetterByPersonality(u32 personality);
 u8 UpdateMonIconFrame(struct Sprite *sprite);
+void sub_80970E0(u16 iconId);
+void sub_8097168(u16 iconId);
 
 #endif // GUARD_POKEMON_ICON_H

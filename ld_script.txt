@@ -175,7 +175,7 @@ SECTIONS {
         asm/bike.o(.text);
         asm/easy_chat.o(.text);
         asm/mon_markings.o(.text);
-        asm/mail.o(.text);
+        src/mail.o(.text);
         src/menu_helpers.o(.text);
         asm/script_pokemon_util_80BF8FC.o(.text);
         src/heal_location.o(.text);
@@ -435,6 +435,7 @@ SECTIONS {
         src/battle_anim_utility_funcs.o(.rodata);
         src/battle_intro.o(.rodata);
         data/data_835B488.o(.rodata.83E7CFC);
+        src/mail.o(.rodata);
         src/heal_location.o(.rodata);
         data/data_835B488.o(.rodata.83EEC98);
         src/battle_ai_script_commands.o(.rodata);

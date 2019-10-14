@@ -869,9 +869,9 @@ gUnknown_20399BC: @ 20399BC
 gUnknown_20399C0: @ 20399C0
 	.space 0x4
 
-gUnknown_20399C4: @ 20399C4
-	.space 0x4
-
+	.align 2
+	.include "src/mail.o"
+	.align 2
 	.include "src/menu_helpers.o"
 
 	.align 2

@@ -332,7 +332,7 @@ static s8 DoDrawStartMenu(void)
     return FALSE;
 }
 
-void DrawStartMenuInOneGo(void)
+static void DrawStartMenuInOneGo(void)
 {
     sDrawStartMenuState[0] = 0;
     sDrawStartMenuState[1] = 0;
@@ -620,7 +620,7 @@ void Field_AskSaveTheGame(void)
     CreateTask(task50_save_game, 80);
 }
 
-void PrintSaveTextWithFollowupFunc(const u8 *str, bool8 (*saveDialogCB)(void))
+static void PrintSaveTextWithFollowupFunc(const u8 *str, bool8 (*saveDialogCB)(void))
 {
     StringExpandPlaceholders(gStringVar4, str);
     sub_80F7768(0, TRUE);
@@ -629,7 +629,7 @@ void PrintSaveTextWithFollowupFunc(const u8 *str, bool8 (*saveDialogCB)(void))
     sSaveDialogCB = saveDialogCB;
 }
 
-void task50_save_game(u8 taskId)
+static void task50_save_game(u8 taskId)
 {
     switch (RunSaveDialogCB())
     {
@@ -681,7 +681,7 @@ static bool8 SaveDialog_Wait60FramesOrAButtonHeld(void)
     }
 }
 
-bool8 SaveDialog_Wait60FramesThenCheckAButtonHeld(void)
+static bool8 SaveDialog_Wait60FramesThenCheckAButtonHeld(void)
 {
     if (sSaveDialogDelay == 0)
     {

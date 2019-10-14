@@ -4,7 +4,6 @@
 #include "constants/region_map.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
-	.set NULL, 0
 
 	.section .rodata
 

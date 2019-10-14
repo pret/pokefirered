@@ -5,1048 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_804C600
-sub_804C600: @ 804C600
-	push {r4,r5,lr}
-	sub sp, 0xC
-	bl ResetSpriteData
-	bl FreeAllSpritePalettes
-	bl ResetTasks
-	bl ResetPaletteFade
-	ldr r2, _0804C6F8 @ =gPaletteFade
-	ldrb r0, [r2, 0x8]
-	movs r1, 0x80
-	orrs r0, r1
-	strb r0, [r2, 0x8]
-	ldr r0, _0804C6FC @ =sub_804D4F8
-	bl SetVBlankCallback
-	ldr r4, _0804C700 @ =gTMCaseMainWindowPalette
-	adds r0, r4, 0
-	movs r1, 0xF0
-	movs r2, 0x14
-	bl LoadPalette
-	adds r0, r4, 0
-	movs r1, 0xD0
-	movs r2, 0x14
-	bl LoadPalette
-	movs r0, 0
-	bl ResetBgsAndClearDma3BusyFlags
-	ldr r1, _0804C704 @ =gUnknown_8261F1C
-	movs r0, 0
-	movs r2, 0x4
-	bl InitBgsFromTemplates
-	ldr r0, _0804C708 @ =gUnknown_2031DA8
-	ldr r1, [r0]
-	movs r0, 0x8F
-	lsls r0, 4
-	adds r1, r0
-	movs r0, 0x1
-	bl SetBgTilemapBuffer
-	ldr r0, _0804C70C @ =gUnknown_8261F2C
-	bl InitWindows
-	lsls r0, 16
-	cmp r0, 0
-	beq _0804C6F0
-	bl DeactivateAllTextPrinters
-	ldr r1, _0804C710 @ =gUnknown_3000E78
-	ldr r2, _0804C714 @ =0x0000024e
-	adds r0, r2, 0
-	strh r0, [r1]
-	movs r5, 0
-_0804C674:
-	lsls r4, r5, 24
-	lsrs r4, 24
-	adds r0, r4, 0
-	bl ClearWindowTilemap
-	adds r0, r4, 0
-	movs r1, 0
-	bl FillWindowPixelBuffer
-	adds r5, 0x1
-	cmp r5, 0x11
-	bls _0804C674
-	movs r0, 0x1E
-	str r0, [sp]
-	movs r0, 0x14
-	str r0, [sp, 0x4]
-	movs r0, 0xF
-	str r0, [sp, 0x8]
-	movs r0, 0
-	movs r1, 0
-	movs r2, 0
-	movs r3, 0
-	bl FillBgTilemapBufferRect
-	movs r0, 0
-	movs r1, 0x14
-	movs r2, 0xC0
-	bl TextWindow_SetStdFrame0_WithPal
-	movs r0, 0x2
-	movs r1, 0x1
-	movs r2, 0xE0
-	bl TextWindow_SetUserSelectedFrame
-	bl sub_809707C
-	ldr r2, _0804C708 @ =gUnknown_2031DA8
-	ldr r0, [r2]
-	adds r0, 0x69
-	movs r1, 0
-	strb r1, [r0]
-	ldr r0, [r2]
-	adds r0, 0x6F
-	strb r1, [r0]
-	ldr r0, [r2]
-	adds r0, 0x70
-	strb r1, [r0]
-	ldr r0, [r2]
-	adds r0, 0x74
-	strb r1, [r0]
-	ldr r0, [r2]
-	adds r0, 0x75
-	strb r1, [r0]
-	ldr r0, [r2]
-	adds r0, 0x7A
-	strb r1, [r0]
-	ldr r0, [r2]
-	adds r0, 0x7B
-	strb r1, [r0]
-	ldr r0, [r2]
-	adds r0, 0xA8
-	strb r1, [r0]
-_0804C6F0:
-	add sp, 0xC
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0804C6F8: .4byte gPaletteFade
-_0804C6FC: .4byte sub_804D4F8
-_0804C700: .4byte gTMCaseMainWindowPalette
-_0804C704: .4byte gUnknown_8261F1C
-_0804C708: .4byte gUnknown_2031DA8
-_0804C70C: .4byte gUnknown_8261F2C
-_0804C710: .4byte gUnknown_3000E78
-_0804C714: .4byte 0x0000024e
-	thumb_func_end sub_804C600
-
-	thumb_func_start sub_804C718
-sub_804C718: @ 804C718
-	push {lr}
-	ldr r0, _0804C724 @ =sub_804C728
-	bl SetMainCallback2
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0804C724: .4byte sub_804C728
-	thumb_func_end sub_804C718
-
-	thumb_func_start sub_804C728
-sub_804C728: @ 804C728
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	sub sp, 0x28
-	ldr r1, _0804C74C @ =gMain
-	movs r2, 0x87
-	lsls r2, 3
-	adds r0, r1, r2
-	ldrb r0, [r0]
-	adds r3, r1, 0
-	cmp r0, 0x16
-	bls _0804C742
-	b _0804CEE6
-_0804C742:
-	lsls r0, 2
-	ldr r1, _0804C750 @ =_0804C754
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_0804C74C: .4byte gMain
-_0804C750: .4byte _0804C754
-	.align 2, 0
-_0804C754:
-	.4byte _0804C7B0
-	.4byte _0804C7FC
-	.4byte _0804C8C8
-	.4byte _0804C8F4
-	.4byte _0804C950
-	.4byte _0804C9B0
-	.4byte _0804C9F0
-	.4byte _0804CA10
-	.4byte _0804CB50
-	.4byte _0804CB78
-	.4byte _0804CB9C
-	.4byte _0804CC30
-	.4byte _0804CC3E
-	.4byte _0804CD10
-	.4byte _0804CDE0
-	.4byte _0804CE20
-	.4byte _0804CE3A
-	.4byte _0804CE48
-	.4byte _0804CE5C
-	.4byte _0804CE7C
-	.4byte _0804CE9C
-	.4byte _0804CEB0
-	.4byte _0804CED0
-_0804C7B0:
-	ldr r4, _0804C7E8 @ =gUnknown_2031DA8
-	ldr r0, _0804C7EC @ =0x000010f0
-	bl AllocZeroed
-	str r0, [r4]
-	bl sub_804C600
-	ldr r4, _0804C7F0 @ =gUnknown_2031C90
-	movs r0, 0xE0
-	lsls r0, 4
-	bl AllocZeroed
-	str r0, [r4]
-	movs r6, 0
-	ldr r2, _0804C7F4 @ =gUnknown_2031C94
-_0804C7CE:
-	lsls r1, r6, 8
-	ldr r0, [r4]
-	adds r0, r1
-	stm r2!, {r0}
-	adds r6, 0x1
-	cmp r6, 0xD
-	ble _0804C7CE
-	ldr r1, _0804C7F8 @ =gMain
-	movs r3, 0x87
-	lsls r3, 3
-	adds r1, r3
-	b _0804CEC2
-	.align 2, 0
-_0804C7E8: .4byte gUnknown_2031DA8
-_0804C7EC: .4byte 0x000010f0
-_0804C7F0: .4byte gUnknown_2031C90
-_0804C7F4: .4byte gUnknown_2031C94
-_0804C7F8: .4byte gMain
-_0804C7FC:
-	ldr r2, _0804C864 @ =gPaletteFade
-	ldrb r1, [r2, 0x8]
-	movs r0, 0x7F
-	ands r0, r1
-	strb r0, [r2, 0x8]
-	movs r6, 0
-	movs r4, 0
-_0804C80A:
-	movs r0, 0x64
-	muls r0, r6
-	ldr r1, _0804C868 @ =gEnemyParty
-	adds r0, r1
-	str r4, [sp]
-	str r4, [sp, 0x4]
-	str r4, [sp, 0x8]
-	str r4, [sp, 0xC]
-	movs r1, 0
-	movs r2, 0
-	movs r3, 0x20
-	bl CreateMon
-	adds r6, 0x1
-	cmp r6, 0x5
-	ble _0804C80A
-	movs r0, 0
-	bl sub_804F5BC
-	movs r0, 0
-	bl ShowBg
-	ldr r0, _0804C86C @ =gReceivedRemoteLinkPlayers
-	ldrb r2, [r0]
-	cmp r2, 0
-	bne _0804C8B4
-	ldr r1, _0804C870 @ =gLinkType
-	ldr r5, _0804C874 @ =0x00001122
-	adds r0, r5, 0
-	strh r0, [r1]
-	ldr r0, _0804C878 @ =gUnknown_2031DA8
-	ldr r0, [r0]
-	adds r0, 0xA8
-	strb r2, [r0]
-	ldr r0, _0804C87C @ =gWirelessCommType
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _0804C880
-	bl sub_800B1F4
-	bl OpenLink
-	bl sub_80FBB20
-	b _0804C892
-	.align 2, 0
-_0804C864: .4byte gPaletteFade
-_0804C868: .4byte gEnemyParty
-_0804C86C: .4byte gReceivedRemoteLinkPlayers
-_0804C870: .4byte gLinkType
-_0804C874: .4byte 0x00001122
-_0804C878: .4byte gUnknown_2031DA8
-_0804C87C: .4byte gWirelessCommType
-_0804C880:
-	bl OpenLink
-	ldr r1, _0804C8A8 @ =gMain
-	movs r7, 0x87
-	lsls r7, 3
-	adds r1, r7
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-_0804C892:
-	ldr r0, _0804C8AC @ =gWirelessCommType
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _0804C89C
-	b _0804CEE6
-_0804C89C:
-	ldr r0, _0804C8B0 @ =sub_8081A90
-	movs r1, 0x1
-	bl CreateTask
-	b _0804CEE6
-	.align 2, 0
-_0804C8A8: .4byte gMain
-_0804C8AC: .4byte gWirelessCommType
-_0804C8B0: .4byte sub_8081A90
-_0804C8B4:
-	ldr r0, _0804C8C4 @ =gMain
-	movs r1, 0x87
-	lsls r1, 3
-	adds r0, r1
-	movs r1, 0x4
-	strb r1, [r0]
-	b _0804CEE6
-	.align 2, 0
-_0804C8C4: .4byte gMain
-_0804C8C8:
-	ldr r2, _0804C8F0 @ =gUnknown_2031DA8
-	ldr r1, [r2]
-	adds r1, 0xA8
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	ldr r0, [r2]
-	adds r1, r0, 0
-	adds r1, 0xA8
-	ldrb r0, [r1]
-	cmp r0, 0xB
-	bhi _0804C8E2
-	b _0804CEE6
-_0804C8E2:
-	movs r0, 0
-	strb r0, [r1]
-	movs r2, 0x87
-	lsls r2, 3
-	adds r1, r3, r2
-	b _0804CEC2
-	.align 2, 0
-_0804C8F0: .4byte gUnknown_2031DA8
-_0804C8F4:
-	bl GetLinkPlayerCount_2
-	adds r4, r0, 0
-	bl GetSavedPlayerCount
-	lsls r4, 24
-	lsls r0, 24
-	cmp r4, r0
-	bcs _0804C908
-	b _0804CEE6
-_0804C908:
-	bl IsLinkMaster
-	lsls r0, 24
-	cmp r0, 0
-	beq _0804C940
-	ldr r0, _0804C938 @ =gUnknown_2031DA8
-	ldr r1, [r0]
-	adds r1, 0xA8
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1E
-	bhi _0804C928
-	b _0804CEE6
-_0804C928:
-	bl CheckShouldAdvanceLinkState
-	ldr r1, _0804C93C @ =gMain
-	movs r3, 0x87
-	lsls r3, 3
-	adds r1, r3
-	b _0804CEC2
-	.align 2, 0
-_0804C938: .4byte gUnknown_2031DA8
-_0804C93C: .4byte gMain
-_0804C940:
-	ldr r1, _0804C94C @ =gMain
-	movs r5, 0x87
-	lsls r5, 3
-	adds r1, r5
-	b _0804CEC2
-	.align 2, 0
-_0804C94C: .4byte gMain
-_0804C950:
-	ldr r0, _0804C9A0 @ =gReceivedRemoteLinkPlayers
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	beq _0804C95A
-	b _0804CEE6
-_0804C95A:
-	bl IsLinkPlayerDataExchangeComplete
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _0804C968
-	b _0804CEE6
-_0804C968:
-	bl sub_80FBB4C
-	bl CalculatePlayerPartyCount
-	ldr r1, _0804C9A4 @ =gMain
-	movs r7, 0x87
-	lsls r7, 3
-	adds r1, r7
-	ldrb r0, [r1]
-	adds r0, 0x1
-	movs r2, 0
-	strb r0, [r1]
-	ldr r0, _0804C9A8 @ =gUnknown_2031DA8
-	ldr r0, [r0]
-	adds r0, 0xA8
-	strb r2, [r0]
-	ldr r0, _0804C9AC @ =gWirelessCommType
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _0804C992
-	b _0804CEE6
-_0804C992:
-	movs r0, 0x1
-	bl sub_80FA484
-	bl sub_800AB9C
-	b _0804CEE6
-	.align 2, 0
-_0804C9A0: .4byte gReceivedRemoteLinkPlayers
-_0804C9A4: .4byte gMain
-_0804C9A8: .4byte gUnknown_2031DA8
-_0804C9AC: .4byte gWirelessCommType
-_0804C9B0:
-	ldr r0, _0804C9E0 @ =gWirelessCommType
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _0804C9E8
-	bl IsRfuTaskFinished
-	lsls r0, 24
-	cmp r0, 0
-	bne _0804C9C4
-	b _0804CEE6
-_0804C9C4:
-	ldr r1, _0804C9E4 @ =gMain
-	movs r0, 0x87
-	lsls r0, 3
-	adds r1, r0
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	bl LoadWirelessStatusIndicatorSpriteGfx
-	movs r0, 0
-	movs r1, 0
-	bl CreateWirelessStatusIndicatorSprite
-	b _0804CEE6
-	.align 2, 0
-_0804C9E0: .4byte gWirelessCommType
-_0804C9E4: .4byte gMain
-_0804C9E8:
-	movs r2, 0x87
-	lsls r2, 3
-	adds r1, r3, r2
-	b _0804CEC2
-_0804C9F0:
-	bl shedinja_maker_maybe
-	lsls r0, 24
-	cmp r0, 0
-	bne _0804C9FC
-	b _0804CEE6
-_0804C9FC:
-	bl sub_804F9D8
-	ldr r1, _0804CA0C @ =gMain
-	movs r3, 0x87
-	lsls r3, 3
-	adds r1, r3
-	b _0804CEC2
-	.align 2, 0
-_0804CA0C: .4byte gMain
-_0804CA10:
-	bl CalculateEnemyPartyCount
-	movs r0, 0
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x50
-	movs r1, 0
-	bl SetGpuReg
-	ldr r2, _0804CB2C @ =gUnknown_2031DA8
-	ldr r0, [r2]
-	ldr r1, _0804CB30 @ =gPlayerPartyCount
-	ldrb r1, [r1]
-	adds r0, 0x36
-	strb r1, [r0]
-	ldr r0, [r2]
-	ldr r1, _0804CB34 @ =gEnemyPartyCount
-	ldrb r1, [r1]
-	adds r0, 0x37
-	strb r1, [r0]
-	movs r6, 0
-	ldr r0, [r2]
-	adds r0, 0x36
-	ldrb r0, [r0]
-	cmp r6, r0
-	bge _0804CAA8
-	mov r8, r2
-	ldr r7, _0804CB38 @ =gUnknown_8261E40
-_0804CA4A:
-	movs r0, 0x64
-	adds r4, r6, 0
-	muls r4, r0
-	ldr r0, _0804CB3C @ =gPlayerParty
-	adds r4, r0
-	adds r0, r4, 0
-	movs r1, 0x41
-	bl GetMonData
-	adds r5, r0, 0
-	lsls r5, 16
-	lsrs r5, 16
-	adds r0, r4, 0
-	movs r1, 0
-	bl GetMonData
-	ldrb r2, [r7]
-	lsls r2, 19
-	movs r1, 0xE0
-	lsls r1, 12
-	adds r2, r1
-	asrs r2, 16
-	ldrb r3, [r7, 0x1]
-	lsls r3, 19
-	ldr r1, _0804CB40 @ =0xfff40000
-	adds r3, r1
-	asrs r3, 16
-	movs r1, 0x1
-	str r1, [sp]
-	str r0, [sp, 0x4]
-	str r1, [sp, 0x8]
-	adds r0, r5, 0
-	ldr r1, _0804CB44 @ =sub_809718C
-	bl sub_8096E18
-	mov r2, r8
-	ldr r1, [r2]
-	adds r1, 0x28
-	adds r1, r6
-	strb r0, [r1]
-	adds r7, 0x2
-	adds r6, 0x1
-	ldr r0, [r2]
-	adds r0, 0x36
-	ldrb r0, [r0]
-	cmp r6, r0
-	blt _0804CA4A
-_0804CAA8:
-	movs r6, 0
-	ldr r1, _0804CB2C @ =gUnknown_2031DA8
-	ldr r0, [r1]
-	adds r0, 0x37
-	ldrb r0, [r0]
-	cmp r6, r0
-	bge _0804CB20
-	ldr r0, _0804CB38 @ =gUnknown_8261E40
-	mov r8, r1
-	adds r7, r0, 0
-	adds r7, 0xC
-_0804CABE:
-	movs r0, 0x64
-	adds r4, r6, 0
-	muls r4, r0
-	ldr r0, _0804CB48 @ =gEnemyParty
-	adds r4, r0
-	adds r0, r4, 0
-	movs r1, 0x41
-	movs r2, 0
-	bl GetMonData
-	adds r5, r0, 0
-	lsls r5, 16
-	lsrs r5, 16
-	adds r0, r4, 0
-	movs r1, 0
-	bl GetMonData
-	ldrb r2, [r7]
-	lsls r2, 19
-	movs r3, 0xE0
-	lsls r3, 12
-	adds r2, r3
-	asrs r2, 16
-	ldrb r3, [r7, 0x1]
-	lsls r3, 19
-	ldr r1, _0804CB40 @ =0xfff40000
-	adds r3, r1
-	asrs r3, 16
-	movs r1, 0x1
-	str r1, [sp]
-	str r0, [sp, 0x4]
-	movs r0, 0
-	str r0, [sp, 0x8]
-	adds r0, r5, 0
-	ldr r1, _0804CB44 @ =sub_809718C
-	bl sub_8096E18
-	mov r2, r8
-	ldr r1, [r2]
-	adds r1, 0x2E
-	adds r1, r6
-	strb r0, [r1]
-	adds r7, 0x2
-	adds r6, 0x1
-	ldr r0, [r2]
-	adds r0, 0x37
-	ldrb r0, [r0]
-	cmp r6, r0
-	blt _0804CABE
-_0804CB20:
-	ldr r1, _0804CB4C @ =gMain
-	movs r3, 0x87
-	lsls r3, 3
-	adds r1, r3
-	b _0804CEC2
-	.align 2, 0
-_0804CB2C: .4byte gUnknown_2031DA8
-_0804CB30: .4byte gPlayerPartyCount
-_0804CB34: .4byte gEnemyPartyCount
-_0804CB38: .4byte gUnknown_8261E40
-_0804CB3C: .4byte gPlayerParty
-_0804CB40: .4byte 0xfff40000
-_0804CB44: .4byte sub_809718C
-_0804CB48: .4byte gEnemyParty
-_0804CB4C: .4byte gMain
-_0804CB50:
-	bl sub_8122550
-	ldr r0, _0804CB70 @ =gUnknown_2031DA8
-	ldr r1, [r0]
-	adds r0, r1, 0
-	adds r0, 0x36
-	adds r1, 0x28
-	movs r2, 0
-	bl sub_812256C
-	ldr r1, _0804CB74 @ =gMain
-	movs r5, 0x87
-	lsls r5, 3
-	adds r1, r5
-	b _0804CEC2
-	.align 2, 0
-_0804CB70: .4byte gUnknown_2031DA8
-_0804CB74: .4byte gMain
-_0804CB78:
-	ldr r0, _0804CB94 @ =gUnknown_2031DA8
-	ldr r1, [r0]
-	adds r0, r1, 0
-	adds r0, 0x36
-	adds r1, 0x28
-	movs r2, 0x1
-	bl sub_812256C
-	ldr r1, _0804CB98 @ =gMain
-	movs r7, 0x87
-	lsls r7, 3
-	adds r1, r7
-	b _0804CEC2
-	.align 2, 0
-_0804CB94: .4byte gUnknown_2031DA8
-_0804CB98: .4byte gMain
-_0804CB9C:
-	ldr r0, _0804CC14 @ =gSaveBlock2Ptr
-	ldr r0, [r0]
-	ldr r6, _0804CC18 @ =gUnknown_2031C94
-	ldr r1, [r6]
-	ldr r5, _0804CC1C @ =gDecompressionBuffer
-	str r5, [sp]
-	movs r4, 0x3
-	str r4, [sp, 0x4]
-	movs r2, 0
-	movs r3, 0
-	bl sub_808BEB4
-	bl GetMultiplayerId
-	lsls r0, 24
-	movs r1, 0x80
-	lsls r1, 17
-	eors r1, r0
-	lsrs r1, 24
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	ldr r1, _0804CC20 @ =gLinkPlayers + 8
-	adds r0, r1
-	ldr r1, [r6, 0xC]
-	str r5, [sp]
-	str r4, [sp, 0x4]
-	movs r2, 0
-	movs r3, 0
-	bl sub_808BEB4
-	ldr r4, _0804CC24 @ =gUnknown_8261ECC
-	ldr r0, [r4]
-	ldr r1, [r6, 0x18]
-	str r5, [sp]
-	movs r2, 0x2
-	str r2, [sp, 0x4]
-	movs r2, 0
-	movs r3, 0
-	bl sub_808BEB4
-	ldr r0, [r4, 0x4]
-	ldr r1, [r6, 0x20]
-	movs r2, 0x18
-	bl sub_804F728
-	ldr r1, _0804CC28 @ =gMain
-	movs r0, 0x87
-	lsls r0, 3
-	adds r1, r0
-	ldrb r0, [r1]
-	adds r0, 0x1
-	movs r2, 0
-	strb r0, [r1]
-	ldr r0, _0804CC2C @ =gUnknown_2031DA8
-	ldr r0, [r0]
-	adds r0, 0xA8
-	strb r2, [r0]
-	b _0804CEE6
-	.align 2, 0
-_0804CC14: .4byte gSaveBlock2Ptr
-_0804CC18: .4byte gUnknown_2031C94
-_0804CC1C: .4byte gDecompressionBuffer
-_0804CC20: .4byte gLinkPlayers + 8
-_0804CC24: .4byte gUnknown_8261ECC
-_0804CC28: .4byte gMain
-_0804CC2C: .4byte gUnknown_2031DA8
-_0804CC30:
-	bl sub_804F610
-	lsls r0, 24
-	cmp r0, 0
-	bne _0804CC3C
-	b _0804CEE6
-_0804CC3C:
-	b _0804CEBA
-_0804CC3E:
-	ldr r0, _0804CCFC @ =gSaveBlock2Ptr
-	ldr r1, [r0]
-	movs r0, 0x1
-	movs r2, 0
-	bl GetStringWidth
-	adds r1, r0, 0
-	movs r0, 0x38
-	subs r0, r1
-	lsrs r1, r0, 31
-	adds r0, r1
-	movs r6, 0
-	add r5, sp, 0x10
-	ldr r3, _0804CD00 @ =gUnknown_8261E8A
-	mov r8, r3
-	asrs r0, 1
-	ldrb r7, [r3, 0x4]
-	adds r4, r0, r7
-_0804CC62:
-	add r1, sp, 0x10
-	ldr r0, _0804CD04 @ =gUnknown_8261CC8
-	ldm r0!, {r2,r3,r7}
-	stm r1!, {r2,r3,r7}
-	ldm r0!, {r2,r3,r7}
-	stm r1!, {r2,r3,r7}
-	ldrh r0, [r5]
-	adds r0, r6
-	strh r0, [r5]
-	lsls r1, r4, 16
-	asrs r1, 16
-	add r0, sp, 0x10
-	mov r3, r8
-	ldrb r2, [r3, 0x5]
-	movs r3, 0x1
-	bl CreateSprite
-	adds r4, 0x20
-	adds r6, 0x1
-	cmp r6, 0x2
-	ble _0804CC62
-	bl GetMultiplayerId
-	lsls r0, 24
-	movs r1, 0x80
-	lsls r1, 17
-	eors r1, r0
-	lsrs r1, 24
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	ldr r1, _0804CD08 @ =gLinkPlayers + 8
-	adds r1, r0, r1
-	movs r0, 0x1
-	movs r2, 0
-	bl GetStringWidth
-	adds r1, r0, 0
-	movs r0, 0x38
-	subs r0, r1
-	lsrs r1, r0, 31
-	adds r0, r1
-	movs r6, 0
-	add r5, sp, 0x10
-	ldr r7, _0804CD00 @ =gUnknown_8261E8A
-	mov r8, r7
-	asrs r0, 1
-	mov r1, r8
-	ldrb r1, [r1, 0x6]
-	adds r4, r0, r1
-_0804CCC6:
-	add r1, sp, 0x10
-	ldr r0, _0804CD04 @ =gUnknown_8261CC8
-	ldm r0!, {r2,r3,r7}
-	stm r1!, {r2,r3,r7}
-	ldm r0!, {r2,r3,r7}
-	stm r1!, {r2,r3,r7}
-	adds r0, r6, 0x3
-	ldrh r1, [r5]
-	adds r0, r1
-	strh r0, [r5]
-	lsls r1, r4, 16
-	asrs r1, 16
-	add r0, sp, 0x10
-	mov r3, r8
-	ldrb r2, [r3, 0x7]
-	movs r3, 0x1
-	bl CreateSprite
-	adds r4, 0x20
-	adds r6, 0x1
-	cmp r6, 0x2
-	ble _0804CCC6
-	ldr r1, _0804CD0C @ =gMain
-	movs r5, 0x87
-	lsls r5, 3
-	adds r1, r5
-	b _0804CEC2
-	.align 2, 0
-_0804CCFC: .4byte gSaveBlock2Ptr
-_0804CD00: .4byte gUnknown_8261E8A
-_0804CD04: .4byte gUnknown_8261CC8
-_0804CD08: .4byte gLinkPlayers + 8
-_0804CD0C: .4byte gMain
-_0804CD10:
-	ldr r4, _0804CDCC @ =gUnknown_8261CC8
-	add r1, sp, 0x10
-	adds r0, r4, 0
-	ldm r0!, {r2,r3,r7}
-	stm r1!, {r2,r3,r7}
-	ldm r0!, {r2,r5,r7}
-	stm r1!, {r2,r5,r7}
-	add r1, sp, 0x10
-	adds r0, r1, 0
-	ldrh r0, [r0]
-	adds r0, 0x6
-	strh r0, [r1]
-	adds r0, r1, 0
-	movs r1, 0xD7
-	movs r2, 0x97
-	movs r3, 0x1
-	bl CreateSprite
-	add r0, sp, 0x10
-	ldm r4!, {r3,r5,r7}
-	stm r0!, {r3,r5,r7}
-	ldm r4!, {r1-r3}
-	stm r0!, {r1-r3}
-	add r1, sp, 0x10
-	adds r0, r1, 0
-	ldrh r0, [r0]
-	adds r0, 0x7
-	strh r0, [r1]
-	adds r0, r1, 0
-	movs r1, 0xF7
-	movs r2, 0x97
-	movs r3, 0x1
-	bl CreateSprite
-	movs r6, 0
-	add r4, sp, 0x10
-	movs r5, 0xC0
-	lsls r5, 13
-_0804CD5C:
-	add r1, sp, 0x10
-	ldr r0, _0804CDCC @ =gUnknown_8261CC8
-	ldm r0!, {r2,r3,r7}
-	stm r1!, {r2,r3,r7}
-	ldm r0!, {r2,r3,r7}
-	stm r1!, {r2,r3,r7}
-	adds r0, r6, 0
-	adds r0, 0x8
-	ldrh r7, [r4]
-	adds r0, r7
-	strh r0, [r4]
-	asrs r1, r5, 16
-	add r0, sp, 0x10
-	movs r2, 0x96
-	movs r3, 0x1
-	bl CreateSprite
-	movs r0, 0x80
-	lsls r0, 14
-	adds r5, r0
-	adds r6, 0x1
-	cmp r6, 0x5
-	ble _0804CD5C
-	ldr r0, _0804CDD0 @ =gUnknown_8261CB0
-	ldr r2, _0804CDD4 @ =gUnknown_8261E40
-	ldrb r1, [r2]
-	lsls r1, 19
-	movs r3, 0x80
-	lsls r3, 14
-	adds r1, r3
-	asrs r1, 16
-	ldrb r2, [r2, 0x1]
-	lsls r2, 3
-	movs r3, 0x2
-	bl CreateSprite
-	ldr r2, _0804CDD8 @ =gUnknown_2031DA8
-	ldr r1, [r2]
-	adds r1, 0x34
-	movs r3, 0
-	strb r0, [r1]
-	ldr r0, [r2]
-	adds r0, 0x35
-	strb r3, [r0]
-	ldr r1, _0804CDDC @ =gMain
-	movs r5, 0x87
-	lsls r5, 3
-	adds r1, r5
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	movs r0, 0
-	bl rbox_fill_rectangle
-	b _0804CEE6
-	.align 2, 0
-_0804CDCC: .4byte gUnknown_8261CC8
-_0804CDD0: .4byte gUnknown_8261CB0
-_0804CDD4: .4byte gUnknown_8261E40
-_0804CDD8: .4byte gUnknown_2031DA8
-_0804CDDC: .4byte gMain
-_0804CDE0:
-	movs r0, 0
-	bl sub_804F748
-	movs r0, 0
-	bl sub_804F020
-	ldr r2, _0804CE14 @ =gUnknown_2031DA8
-	ldr r0, [r2]
-	movs r1, 0
-	strb r1, [r0]
-	ldr r0, [r2]
-	strb r1, [r0, 0x1]
-	bl sub_804D764
-	ldr r1, _0804CE18 @ =gMain
-	movs r7, 0x87
-	lsls r7, 3
-	adds r1, r7
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	ldr r0, _0804CE1C @ =0x00000111
-	bl PlayBGM
-	b _0804CEE6
-	.align 2, 0
-_0804CE14: .4byte gUnknown_2031DA8
-_0804CE18: .4byte gMain
-_0804CE1C: .4byte 0x00000111
-_0804CE20:
-	movs r0, 0x1
-	bl sub_804F748
-	movs r0, 0x1
-	bl sub_804F020
-	ldr r1, _0804CE44 @ =gMain
-	movs r0, 0x87
-	lsls r0, 3
-	adds r1, r0
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-_0804CE3A:
-	movs r0, 0
-	bl sub_804D694
-	b _0804CEBA
-	.align 2, 0
-_0804CE44: .4byte gMain
-_0804CE48:
-	movs r0, 0x1
-	bl sub_804D694
-	ldr r1, _0804CE58 @ =gMain
-	movs r3, 0x87
-	lsls r3, 3
-	adds r1, r3
-	b _0804CEC2
-	.align 2, 0
-_0804CE58: .4byte gMain
-_0804CE5C:
-	movs r0, 0x1
-	negs r0, r0
-	movs r1, 0
-	str r1, [sp]
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	ldr r1, _0804CE78 @ =gMain
-	movs r5, 0x87
-	lsls r5, 3
-	adds r1, r5
-	b _0804CEC2
-	.align 2, 0
-_0804CE78: .4byte gMain
-_0804CE7C:
-	movs r1, 0x82
-	lsls r1, 5
-	movs r0, 0
-	bl SetGpuReg
-	movs r0, 0x2
-	bl sub_804D694
-	ldr r1, _0804CE98 @ =gMain
-	movs r7, 0x87
-	lsls r7, 3
-	adds r1, r7
-	b _0804CEC2
-	.align 2, 0
-_0804CE98: .4byte gMain
-_0804CE9C:
-	movs r0, 0
-	bl sub_804F890
-	ldr r1, _0804CEAC @ =gMain
-	movs r0, 0x87
-	lsls r0, 3
-	adds r1, r0
-	b _0804CEC2
-	.align 2, 0
-_0804CEAC: .4byte gMain
-_0804CEB0:
-	movs r0, 0x1
-	bl sub_804F890
-	bl sub_804F964
-_0804CEBA:
-	ldr r1, _0804CECC @ =gMain
-	movs r2, 0x87
-	lsls r2, 3
-	adds r1, r2
-_0804CEC2:
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	b _0804CEE6
-	.align 2, 0
-_0804CECC: .4byte gMain
-_0804CED0:
-	ldr r0, _0804CF08 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _0804CEE6
-	ldr r0, _0804CF0C @ =sub_804DFF0
-	str r0, [r3]
-	ldr r0, _0804CF10 @ =sub_804D638
-	bl SetMainCallback2
-_0804CEE6:
-	bl RunTextPrinters
-	bl RunTasks
-	bl AnimateSprites
-	bl BuildOamBuffer
-	bl UpdatePaletteFade
-	add sp, 0x28
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0804CF08: .4byte gPaletteFade
-_0804CF0C: .4byte sub_804DFF0
-_0804CF10: .4byte sub_804D638
-	thumb_func_end sub_804C728
-
 	thumb_func_start sub_804CF14
 sub_804CF14: @ 804CF14
 	push {r4-r7,lr}
@@ -1178,7 +136,7 @@ _0804D00C:
 	cmp r6, r0
 	bge _0804D0A8
 	mov r8, r4
-	ldr r7, _0804D138 @ =gUnknown_8261E40
+	ldr r7, _0804D138 @ =gTradeMonSpriteCoords
 _0804D048:
 	movs r0, 0x64
 	adds r4, r6, 0
@@ -1212,7 +170,7 @@ _0804D048:
 	str r1, [sp, 0x8]
 	adds r0, r5, 0
 	ldr r1, _0804D144 @ =sub_809718C
-	bl sub_8096E18
+	bl CreateMonIcon
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, 0x28
@@ -1233,7 +191,7 @@ _0804D0A8:
 	ldrb r0, [r0]
 	cmp r6, r0
 	bge _0804D120
-	ldr r0, _0804D138 @ =gUnknown_8261E40
+	ldr r0, _0804D138 @ =gTradeMonSpriteCoords
 	mov r8, r1
 	adds r7, r0, 0
 	adds r7, 0xC
@@ -1271,7 +229,7 @@ _0804D0BE:
 	str r0, [sp, 0x8]
 	adds r0, r5, 0
 	ldr r1, _0804D144 @ =sub_809718C
-	bl sub_8096E18
+	bl CreateMonIcon
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, 0x2E
@@ -1294,14 +252,14 @@ _0804D120:
 _0804D12C: .4byte gUnknown_2031DA8
 _0804D130: .4byte gPlayerPartyCount
 _0804D134: .4byte gEnemyPartyCount
-_0804D138: .4byte gUnknown_8261E40
+_0804D138: .4byte gTradeMonSpriteCoords
 _0804D13C: .4byte gPlayerParty
 _0804D140: .4byte 0xfff40000
 _0804D144: .4byte sub_809718C
 _0804D148: .4byte gEnemyParty
 _0804D14C: .4byte gMain
 _0804D150:
-	bl sub_8122550
+	bl LoadHeldItemIcons
 	ldr r0, _0804D170 @ =gUnknown_2031DA8
 	ldr r1, [r0]
 	adds r0, r1, 0
@@ -1424,7 +382,7 @@ _0804D24C:
 	adds r0, r1
 	movs r6, 0
 	add r5, sp, 0xC
-	ldr r3, _0804D310 @ =gUnknown_8261E8A
+	ldr r3, _0804D310 @ =gTradeUnknownSpriteCoords
 	mov r8, r3
 	asrs r0, 1
 	ldrb r7, [r3, 0x4]
@@ -1471,7 +429,7 @@ _0804D270:
 	adds r0, r1
 	movs r6, 0
 	add r5, sp, 0xC
-	ldr r7, _0804D310 @ =gUnknown_8261E8A
+	ldr r7, _0804D310 @ =gTradeUnknownSpriteCoords
 	mov r8, r7
 	asrs r0, 1
 	mov r1, r8
@@ -1506,7 +464,7 @@ _0804D2D4:
 	b _0804D4B4
 	.align 2, 0
 _0804D30C: .4byte gSaveBlock2Ptr
-_0804D310: .4byte gUnknown_8261E8A
+_0804D310: .4byte gTradeUnknownSpriteCoords
 _0804D314: .4byte gUnknown_8261CC8
 _0804D318: .4byte gLinkPlayers + 8
 _0804D31C: .4byte gMain
@@ -1590,7 +548,7 @@ _0804D3C0:
 	adds r1, 0x35
 	strb r0, [r1]
 	ldr r0, _0804D404 @ =gUnknown_8261CB0
-	ldr r3, _0804D408 @ =gUnknown_8261E40
+	ldr r3, _0804D408 @ =gTradeMonSpriteCoords
 	ldr r4, _0804D40C @ =gUnknown_2031DA8
 	ldr r1, [r4]
 	adds r1, 0x35
@@ -1621,7 +579,7 @@ _0804D3C0:
 	b _0804D4D2
 	.align 2, 0
 _0804D404: .4byte gUnknown_8261CB0
-_0804D408: .4byte gUnknown_8261E40
+_0804D408: .4byte gTradeMonSpriteCoords
 _0804D40C: .4byte gUnknown_2031DA8
 _0804D410: .4byte gMain
 _0804D414:
@@ -3214,7 +2172,7 @@ _0804E0CC:
 	adds r1, r0
 	lsls r1, 2
 	adds r1, r5
-	ldr r2, _0804E130 @ =gUnknown_8261E40
+	ldr r2, _0804E130 @ =gTradeMonSpriteCoords
 	lsls r3, r6, 1
 	adds r0, r3, r2
 	ldrb r0, [r0]
@@ -3245,7 +2203,7 @@ _0804E120:
 	.align 2, 0
 _0804E128: .4byte gUnknown_2031DA8
 _0804E12C: .4byte gSprites
-_0804E130: .4byte gUnknown_8261E40
+_0804E130: .4byte gTradeMonSpriteCoords
 	thumb_func_end TradeMenuMoveCursor
 
 	thumb_func_start sub_804E134
@@ -4622,7 +3580,7 @@ _0804EBA2:
 	adds r2, r0
 	lsls r2, 2
 	add r2, r8
-	ldr r5, _0804ECA8 @ =gUnknown_8261E40
+	ldr r5, _0804ECA8 @ =gTradeMonSpriteCoords
 	lsls r6, 2
 	adds r0, r6, r5
 	ldrb r0, [r0]
@@ -4697,7 +3655,7 @@ _0804EC98:
 	.align 2, 0
 _0804ECA0: .4byte gSprites
 _0804ECA4: .4byte gUnknown_2031DA8
-_0804ECA8: .4byte gUnknown_8261E40
+_0804ECA8: .4byte gTradeMonSpriteCoords
 _0804ECAC: .4byte sub_809718C
 _0804ECB0: .4byte gUnknown_8260A32
 _0804ECB4:
@@ -4762,7 +3720,7 @@ _0804ECEC:
 	adds r2, r0
 	lsls r2, 2
 	adds r2, r6
-	ldr r5, _0804EE14 @ =gUnknown_8261E40
+	ldr r5, _0804EE14 @ =gTradeMonSpriteCoords
 	lsls r3, 2
 	adds r0, r3, r5
 	ldrb r0, [r0]
@@ -4865,7 +3823,7 @@ _0804ECEC:
 _0804EE08: .4byte gUnknown_8260834
 _0804EE0C: .4byte gSprites
 _0804EE10: .4byte gUnknown_2031DA8
-_0804EE14: .4byte gUnknown_8261E40
+_0804EE14: .4byte gTradeMonSpriteCoords
 _0804EE18: .4byte gUnknown_8261F18
 _0804EE1C:
 	ldr r0, _0804EE64 @ =gUnknown_8262055
@@ -5507,7 +4465,7 @@ sub_804F2E8: @ 804F2E8
 	add r0, r12
 	lsls r2, r0, 1
 	mov r10, r2
-	ldr r1, _0804F3B0 @ =gUnknown_8261E40
+	ldr r1, _0804F3B0 @ =gTradeMonSpriteCoords
 	movs r2, 0
 	mov r8, r2
 	lsls r0, 2
@@ -5585,7 +4543,7 @@ _0804F39A:
 	.align 2, 0
 _0804F3A8: .4byte gUnknown_2031DA8
 _0804F3AC: .4byte gSprites
-_0804F3B0: .4byte gUnknown_8261E40
+_0804F3B0: .4byte gTradeMonSpriteCoords
 	thumb_func_end sub_804F2E8
 
 	thumb_func_start sub_804F3B4

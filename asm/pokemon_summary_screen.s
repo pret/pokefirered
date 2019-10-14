@@ -10814,7 +10814,7 @@ _08139E58:
 	adds r0, r5, 0
 	movs r2, 0x18
 	movs r3, 0x20
-	bl sub_8096E18
+	bl CreateMonIcon
 	ldr r1, [r6]
 	ldr r2, _08139E9C @ =0x00003014
 	adds r1, r2

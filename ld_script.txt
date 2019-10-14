@@ -85,6 +85,7 @@ SECTIONS {
         asm/smokescreen.o(.text);
         asm/pokeball.o(.text);
         src/load_save.o(.text);
+        src/trade.o(.text);
         asm/trade.o(.text);
         src/play_time.o(.text);
         src/new_game.o(.text);

@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8096E18
-sub_8096E18: @ 8096E18
+	thumb_func_start CreateMonIcon
+CreateMonIcon: @ 8096E18
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -89,7 +89,7 @@ _08096EBC: .4byte gUnknown_83D40E0
 _08096EC0: .4byte gUnknown_83D3E80
 _08096EC4: .4byte 0x0000dac0
 _08096EC8: .4byte gSprites
-	thumb_func_end sub_8096E18
+	thumb_func_end CreateMonIcon
 
 	thumb_func_start sub_8096ECC
 sub_8096ECC: @ 8096ECC
@@ -330,8 +330,8 @@ sub_8097070: @ 8097070
 	bx r0
 	thumb_func_end sub_8097070
 
-	thumb_func_start sub_809707C
-sub_809707C: @ 809707C
+	thumb_func_start LoadMonIconPalettes
+LoadMonIconPalettes: @ 809707C
 	push {r4,r5,lr}
 	movs r4, 0
 	ldr r5, _0809709C @ =gUnknown_83D4038
@@ -349,7 +349,7 @@ _08097082:
 	bx r0
 	.align 2, 0
 _0809709C: .4byte gUnknown_83D4038
-	thumb_func_end sub_809707C
+	thumb_func_end LoadMonIconPalettes
 
 	thumb_func_start SafeLoadMonIconPalette
 SafeLoadMonIconPalette: @ 80970A0

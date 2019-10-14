@@ -323,7 +323,7 @@ gUnknown_8261D00:: @ 8261D00
 gUnknown_8261D08:: @ 8261D08
 	.incbin "baserom.gba", 0x261D08, 0x138
 
-gUnknown_8261E40:: @ 8261E40
+gTradeMonSpriteCoords:: @ 8261E40
 	.incbin "baserom.gba", 0x261E40, 0x1A
 
 gUnknown_8261E5A:: @ 8261E5A
@@ -332,24 +332,36 @@ gUnknown_8261E5A:: @ 8261E5A
 gUnknown_8261E72:: @ 8261E72
 	.incbin "baserom.gba", 0x261E72, 0x18
 
-gUnknown_8261E8A:: @ 8261E8A
+gTradeUnknownSpriteCoords:: @ 8261E8A
 	.incbin "baserom.gba", 0x261E8A, 0x2C
 
 gUnknown_8261EB6:: @ 8261EB6
-	.incbin "baserom.gba", 0x261EB6, 0xB
+	.string "$"
+
+gUnknown_8261EB7::
+	.string "{COLOR DARK_GREY}{HIGHLIGHT TRANSPARENT}{SHADOW RED}$"
 
 gText_MaleSymbol4:: @ 8261EC1
-	.incbin "baserom.gba", 0x261EC1, 0x2
+	.string "♂$"
 
 gText_FemaleSymbol4:: @ 8261EC3
-	.incbin "baserom.gba", 0x261EC3, 0x2
+	.string "♀$"
 
 gText_GenderlessSymbol:: @ 8261EC5
-	.incbin "baserom.gba", 0x261EC5, 0x2
+	.string "$"
+
+gUnknown_8261EC6::
+	.string "$"
 
 gUnknown_8261EC7:: @ 8261EC7
-	.incbin "baserom.gba", 0x261EC7, 0x5
+	.string "\n$"
 
+gUnknown_8261EC9::
+	.string "/$"
+
+	@ trade
+
+	.align 2
 gUnknown_8261ECC:: @ 8261ECC
 	.incbin "baserom.gba", 0x261ECC, 0x18
 
@@ -481,6 +493,8 @@ gUnknown_826D1E4:: @ 826D1E4
 
 gUnknown_826D250:: @ 826D250
 	.incbin "baserom.gba", 0x26D250, 0x44
+
+	@ overworld
 
 gUnknown_826D294:: @ 826D294
 	.incbin "baserom.gba", 0x26D294, 0xA

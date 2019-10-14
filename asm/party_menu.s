@@ -364,7 +364,7 @@ _0811ED14:
 _0811ED30: .4byte gUnknown_203B0A0
 _0811ED34: .4byte gUnknown_203B09C
 _0811ED38:
-	bl sub_8122550
+	bl LoadHeldItemIcons
 	b _0811EDFC
 _0811ED3E:
 	bl sub_8122860
@@ -373,7 +373,7 @@ _0811ED44:
 	bl sub_8122980
 	b _0811EDFC
 _0811ED4A:
-	bl sub_809707C
+	bl LoadMonIconPalettes
 	b _0811EDFC
 _0811ED50:
 	bl party_menu_add_per_mon_objects
@@ -7216,7 +7216,7 @@ party_menu_link_mon_icon_anim: @ 812224C
 	ldr r0, [sp, 0x20]
 	str r0, [sp, 0x8]
 	adds r0, r5, 0
-	bl sub_8096E18
+	bl CreateMonIcon
 	strb r0, [r4, 0x9]
 	ldr r2, _081222A8 @ =gSprites
 	ldrb r0, [r4, 0x9]
@@ -7598,8 +7598,8 @@ _08122544:
 _0812254C: .4byte gSprites
 	thumb_func_end sub_81224D0
 
-	thumb_func_start sub_8122550
-sub_8122550: @ 8122550
+	thumb_func_start LoadHeldItemIcons
+LoadHeldItemIcons: @ 8122550
 	push {lr}
 	ldr r0, _08122564 @ =gUnknown_845A42C
 	bl LoadSpriteSheet
@@ -7610,7 +7610,7 @@ sub_8122550: @ 8122550
 	.align 2, 0
 _08122564: .4byte gUnknown_845A42C
 _08122568: .4byte gUnknown_845A434
-	thumb_func_end sub_8122550
+	thumb_func_end LoadHeldItemIcons
 
 	thumb_func_start sub_812256C
 sub_812256C: @ 812256C

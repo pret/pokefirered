@@ -200,7 +200,7 @@ s32 FadeToWonderCardMenu(void)
             CopyBgTilemapBufferToVram(1);
             break;
         case 6:
-            sub_809707C();
+            LoadMonIconPalettes();
             break;
         case 7:
             ShowBg(1);

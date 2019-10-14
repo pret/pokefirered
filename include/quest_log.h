@@ -28,14 +28,18 @@ u8 sub_8112CAC(void);
 bool8 sub_81119D4(void (*func)(void));
 void sub_8111F38(u16, u16);
 void sub_8111134(void);
-void sub_8112EDC(u8 a0);
-u8 sub_8112EB4(void);
-void sub_8113018(const u8 * text, u8 mode);
+void DestroyHelpMessageWindow(u8 a0);
+u8 CreateHelpMessageWindow(void);
+void PrintTextOnHelpMessageWindow(const u8 * text, u8 mode);
 void MapNamePopupWindowIdSetDummy(void);
 void sub_8111CF0(void);
 void sub_811089C(void);
 void sub_8113044(void);
 void TrySetUpQuestLogScenes_ElseContinueFromSave(u8 taskId);
+void sub_8112450(void);
+void sub_8112364(void);
+u8 sub_8112CAC(void);
+void sub_81138F8(void);
 
 extern u8 gUnknown_203ADFA;
 

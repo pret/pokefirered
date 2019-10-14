@@ -38,6 +38,7 @@ extern MainCallback gFieldCallback;
 extern struct WarpData gUnknown_2031DBC;
 
 extern u8 gUnknown_2031DE0;
+extern u8 gUnknown_300502C;
 
 void IncrementGameStat(u8 index);
 
@@ -137,5 +138,7 @@ void Overworld_CreditsMainCB(void);
 bool32 Overworld_DoScrollSceneForCredits(u8 *, const struct CreditsOverworldCmd *, u8);
 
 bool32 sub_8058318(void);
+
+void CB2_ReturnToStartMenu(void);
 
 #endif //GUARD_OVERWORLD_H

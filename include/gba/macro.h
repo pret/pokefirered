@@ -121,9 +121,30 @@
     }                                                     \
 }
 
+#define DmaFillLarge(dmaNum, value, dest, size, block, bit) \
+{                                                           \
+    void *_dest = (void *)dest;                                     \
+    u32 _size = size;                                       \
+    while (1)                                               \
+    {                                                       \
+        DmaFill##bit(dmaNum, value, _dest, (block));       \
+        _dest += (block);                                   \
+        _size -= (block);                                   \
+        if (_size <= (block))                               \
+        {                                                   \
+            DmaFill##bit(dmaNum, value, _dest, _size);     \
+            break;                                          \
+        }                                                   \
+    }                                                       \
+}
+
 #define DmaCopyLarge16(dmaNum, src, dest, size, block) DmaCopyLarge(dmaNum, src, dest, size, block, 16)
 
 #define DmaCopyLarge32(dmaNum, src, dest, size, block) DmaCopyLarge(dmaNum, src, dest, size, block, 32)
+
+#define DmaFillLarge16(dmaNum, value, dest, size, block) DmaFillLarge(dmaNum, value, dest, size, block, 16)
+
+#define DmaFillLarge32(dmaNum, value, dest, size, block) DmaFillLarge(dmaNum, value, dest, size, block, 32)
 
 #define DmaClearLarge16(dmaNum, dest, size, block) DmaClearLarge(dmaNum, dest, size, block, 16)
 #define DmaClearLarge32(dmaNum, dest, size, block) DmaClearLarge(dmaNum, dest, size, block, 32)
@@ -138,5 +159,15 @@
 
 #define DmaCopy16Defvars(dmaNum, src, dest, size) DmaCopyDefvars(dmaNum, src, dest, size, 16)
 #define DmaCopy32Defvars(dmaNum, src, dest, size) DmaCopyDefvars(dmaNum, src, dest, size, 32)
+
+#define DmaFillDefvars(dmaNum, value, dest, size, bit) \
+{                                                      \
+    void *_dest = (void *)dest;                                \
+    u32 _size = size;                                  \
+    DmaFill##bit(dmaNum, value, _dest, _size);         \
+}
+
+#define DmaFill16Defvars(dmaNum, value, dest, size) DmaFillDefvars(dmaNum, value, dest, size, 16)
+#define DmaFill32Defvars(dmaNum, value, dest, size) DmaFillDefvars(dmaNum, value, dest, size, 32)
 
 #endif // GUARD_GBA_MACRO_H

@@ -3616,10 +3616,10 @@ sub_8120658: @ 8120658
 	beq _08120678
 	cmp r0, 0x5
 	beq _0812067E
-	ldr r1, _08120674 @ =gUnknown_8416285
+	ldr r1, _08120674 @ =gStartMenuText_Bag
 	b _08120686
 	.align 2, 0
-_08120674: .4byte gUnknown_8416285
+_08120674: .4byte gStartMenuText_Bag
 _08120678:
 	movs r0, 0xB6
 	lsls r0, 1
@@ -12231,7 +12231,7 @@ sub_8124AB0: @ 8124AB0
 	str r0, [sp]
 	ldr r0, _08124AD4 @ =sub_811FB28
 	str r0, [sp, 0x4]
-	ldr r0, _08124AD8 @ =sub_80568A8
+	ldr r0, _08124AD8 @ =CB2_ReturnToStartMenu
 	str r0, [sp, 0x8]
 	movs r0, 0
 	movs r1, 0
@@ -12243,7 +12243,7 @@ sub_8124AB0: @ 8124AB0
 	bx r0
 	.align 2, 0
 _08124AD4: .4byte sub_811FB28
-_08124AD8: .4byte sub_80568A8
+_08124AD8: .4byte CB2_ReturnToStartMenu
 	thumb_func_end sub_8124AB0
 
 	thumb_func_start hm2_waterfall
@@ -16634,7 +16634,7 @@ CB2_PartyMenuFromStartMenu: @ 8126EB0
 	str r0, [sp]
 	ldr r0, _08126ED4 @ =sub_811FB28
 	str r0, [sp, 0x4]
-	ldr r0, _08126ED8 @ =sub_80568A8
+	ldr r0, _08126ED8 @ =CB2_ReturnToStartMenu
 	str r0, [sp, 0x8]
 	movs r0, 0
 	movs r1, 0
@@ -16646,7 +16646,7 @@ CB2_PartyMenuFromStartMenu: @ 8126EB0
 	bx r0
 	.align 2, 0
 _08126ED4: .4byte sub_811FB28
-_08126ED8: .4byte sub_80568A8
+_08126ED8: .4byte CB2_ReturnToStartMenu
 	thumb_func_end CB2_PartyMenuFromStartMenu
 
 	thumb_func_start sub_8126EDC

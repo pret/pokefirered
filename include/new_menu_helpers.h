@@ -26,7 +26,7 @@ u16 AddTextPrinterParameterized2(u8 windowId, u8 fontId, const u8 *str, u8 speed
 void AddTextPrinterDiffStyle(bool8 allowSkippingDelayWithButtonPress);
 void AddTextPrinterForMessage(bool8 allowSkippingDelayWithButtonPress);
 void AddTextPrinterWithCustomSpeedForMessage(bool8 allowSkippingDelayWithButtonPress, u8 speed);
-void sub_80F6E9C(void);
+void LoadStdWindowFrameGfx(void);
 void DrawDialogueFrame(u8 windowId, bool8 transfer);
 void DrawStdWindowFrame(u8 windowId, bool8 copyNow);
 void ClearDialogWindowAndFrame(u8 windowId, bool8 copyToVram);
@@ -41,12 +41,12 @@ void DisplayItemMessageOnField(u8 taskId, u8 bgId, const u8 *src, TaskFunc callb
 void DisplayYesNoMenuDefaultYes(void);
 void DisplayYesNoMenuDefaultNo(void);
 u8 GetTextSpeedSetting(void);
-u8 sub_80F78E0(u8 height);
+u8 CreateStartMenuWindow(u8 height);
 u8 GetStartMenuWindowId(void);
 void RemoveStartMenuWindow(void);
 u16 GetStdWindowBaseTileNum(void);
-void sub_80F7974(const u8 * text);
-void sub_80F7998(void);
+void DrawHelpMessageWindowWithText(const u8 * text);
+void DestroyHelpMessageWindow_(void);
 void sub_80F79A4(void);
 void SetDefaultFontsPointer(void);
 

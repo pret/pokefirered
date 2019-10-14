@@ -1284,14 +1284,14 @@ bool8 ScrCmd_loadhelp(struct ScriptContext *ctx)
 
     if (msg == NULL)
         msg = (const u8 *)ctx->data[0];
-    sub_80F7974(msg);
+    DrawHelpMessageWindowWithText(msg);
     CopyWindowToVram(GetStartMenuWindowId(), 1);
     return FALSE;
 }
 
 bool8 ScrCmd_unloadhelp(struct ScriptContext *ctx)
 {
-    sub_80F7998();
+    DestroyHelpMessageWindow_();
     return FALSE;
 }
 
@@ -1566,7 +1566,7 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
     if (ptr == NULL)
         ptr = (u8 *)ctx->data[0];
 
-    sub_80F6E9C();
+    LoadStdWindowFrameGfx();
     DrawDialogueFrame(0, 1);
     AddTextPrinterParameterized(0, 6, ptr, 0, 1, 0, NULL);
     return FALSE;

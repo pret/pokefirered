@@ -191,7 +191,7 @@ void sub_80A1208(void)
     struct MailStruct mail;
 
     mail.itemId = gSpecialVar_ItemId;
-    sub_80BEBEC(&mail, ReturnToBagFromKeyItem, 0);
+    sub_80BEBEC(&mail, CB2_BagMenuFromStartMenu, 0);
 }
 
 void FieldUseFunc_MachBike(u8 taskId)
@@ -404,7 +404,7 @@ void FieldUseFunc_TmCase(u8 taskId)
 
 void InitTMCaseFromBag(void)
 {
-    InitTMCase(0, ReturnToBagFromKeyItem, 0);
+    InitTMCase(0, CB2_BagMenuFromStartMenu, 0);
 }
 
 void Task_InitTMCaseFromField(u8 taskId)
@@ -435,7 +435,7 @@ void FieldUseFunc_BerryPouch(u8 taskId)
 
 void InitBerryPouchFromBag(void)
 {
-    InitBerryPouch(BERRYPOUCH_FROMFIELD, ReturnToBagFromKeyItem, 0);
+    InitBerryPouch(BERRYPOUCH_FROMFIELD, CB2_BagMenuFromStartMenu, 0);
 }
 
 void Task_InitBerryPouchFromField(u8 taskId)
@@ -478,7 +478,7 @@ void FieldUseFunc_TeachyTv(u8 taskId)
 
 void InitTeachyTvFromBag(void)
 {
-    InitTeachyTvController(0, ReturnToBagFromKeyItem);
+    InitTeachyTvController(0, CB2_BagMenuFromStartMenu);
 }
 
 void Task_InitTeachyTvFromField(u8 taskId)
@@ -608,7 +608,7 @@ void FieldUseFunc_TownMap(u8 taskId)
 
 void sub_80A1CAC(void)
 {
-    sub_80BFF50(0, ReturnToBagFromKeyItem);
+    sub_80BFF50(0, CB2_BagMenuFromStartMenu);
 }
 
 void sub_80A1CC0(u8 taskId)
@@ -640,7 +640,7 @@ void FieldUseFunc_FameChecker(u8 taskId)
 
 void sub_80A1D58(void)
 {
-    UseFameChecker(ReturnToBagFromKeyItem);
+    UseFameChecker(CB2_BagMenuFromStartMenu);
 }
 
 void sub_80A1D68(u8 taskId)

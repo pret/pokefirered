@@ -3252,7 +3252,7 @@ _08117384:
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _081173BC @ =CB2_ReturnToField
-	bl sub_808B700
+	bl InitLinkPartnerTrainerCard
 _081173A2:
 	bl RunTasks
 	bl RunTextPrinters
@@ -5840,7 +5840,7 @@ _08118AD4:
 	bl sub_811BEDC
 	bl _081198DC
 _08118ADE:
-	ldr r0, _08118B00 @ =sub_806F1F0
+	ldr r0, _08118B00 @ =Task_StartMenuHandleInput
 	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
@@ -5854,7 +5854,7 @@ _08118AEE:
 	movs r0, 0x4
 	bl _081198DA
 	.align 2, 0
-_08118B00: .4byte sub_806F1F0
+_08118B00: .4byte Task_StartMenuHandleInput
 _08118B04:
 	bl sub_811A0E0
 	movs r3, 0x2
@@ -6975,7 +6975,7 @@ _081194DC:
 	movs r0, 0x2F
 	bl sub_8118664
 _081194E4:
-	bl sub_80F7998
+	bl DestroyHelpMessageWindow_
 	b _081198DC
 	.align 2, 0
 _081194EC: .4byte gUnknown_8458B44
@@ -7171,7 +7171,7 @@ _08119670:
 _0811967A:
 	movs r0, 0x1
 	bl sub_811B258
-	bl sub_80F7998
+	bl DestroyHelpMessageWindow_
 	movs r0, 0x4
 	b _081198DA
 	.align 2, 0
@@ -8482,7 +8482,7 @@ _0811A0B0: .4byte gTasks+0x8
 sub_811A0B4: @ 811A0B4
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80F6E9C
+	bl LoadStdWindowFrameGfx
 	movs r0, 0
 	movs r1, 0x1
 	bl DrawDialogueFrame
@@ -8528,7 +8528,7 @@ sub_811A0F8: @ 811A0F8
 	beq _0811A130
 	b _0811A142
 _0811A10A:
-	bl sub_80F6E9C
+	bl LoadStdWindowFrameGfx
 	movs r0, 0
 	movs r1, 0x1
 	bl DrawDialogueFrame

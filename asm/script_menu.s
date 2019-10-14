@@ -1127,7 +1127,7 @@ _0809D1FA:
 	adds r1, r4, 0
 	adds r2, r7, 0
 	movs r3, 0x12
-	bl sub_812E6DC
+	bl Menu_PrintFormatIntlPlayerName
 	movs r0, 0x10
 	str r0, [sp]
 	mov r0, r9

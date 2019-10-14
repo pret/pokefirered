@@ -40,4 +40,7 @@ struct TrainerCard
 
 extern struct TrainerCard gTrainerCards[4];
 
+void InitTrainerCard(MainCallback callback);
+void InitLinkPartnerTrainerCard(u8 whoseCard, MainCallback callback);
+
 #endif //GUARD_TRAINER_CARD_H

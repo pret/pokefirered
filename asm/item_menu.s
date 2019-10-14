@@ -138,18 +138,18 @@ _08107EB0: .4byte gUnknown_203AD10
 _08107EB4: .4byte gUnknown_203ACFC
 	thumb_func_end sub_8107DB4
 
-	thumb_func_start ReturnToBagFromKeyItem
-ReturnToBagFromKeyItem: @ 8107EB8
+	thumb_func_start CB2_BagMenuFromStartMenu
+CB2_BagMenuFromStartMenu: @ 8107EB8
 	push {lr}
-	ldr r2, _08107EC8 @ =sub_80568A8
+	ldr r2, _08107EC8 @ =CB2_ReturnToStartMenu
 	movs r0, 0
 	movs r1, 0x3
 	bl sub_8107DB4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08107EC8: .4byte sub_80568A8
-	thumb_func_end ReturnToBagFromKeyItem
+_08107EC8: .4byte CB2_ReturnToStartMenu
+	thumb_func_end CB2_BagMenuFromStartMenu
 
 	thumb_func_start sub_8107ECC
 sub_8107ECC: @ 8107ECC

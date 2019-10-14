@@ -510,7 +510,7 @@ static void TeachyTvMainCallback(void)
         ScheduleBgCopyTilemapToVram(1);
         ScheduleBgCopyTilemapToVram(2);
         ScheduleBgCopyTilemapToVram(3);
-        sub_812B1E0(9); // help system something
+        HelpSystem_SetSomeVariable(9); // help system something
         BlendPalettes(0xFFFFFFFF, 0x10, 0);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
         SetVBlankCallback(TeachyTvVblankHandler);
@@ -736,7 +736,7 @@ static void TeachyTvOptionListController(u8 taskId)
     {
         input = ListMenu_ProcessInput(data[0]);
         ListMenuGetScrollAndRow(data[0], &sStaticResources.scrollOffset, &sStaticResources.selectedRow);
-        if ((JOY_NEW(SELECT_BUTTON) && sStaticResources.callback != ReturnToBagFromKeyItem))
+        if ((JOY_NEW(SELECT_BUTTON) && sStaticResources.callback != CB2_BagMenuFromStartMenu))
         {
             PlaySE(SE_SELECT);
             TeachyTvQuitBeginFade(taskId);

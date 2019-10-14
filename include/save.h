@@ -84,7 +84,7 @@ extern u16 gSaveUnusedVar;
 extern u16 gSaveFileStatus;
 extern void (*gGameContinueCallback)(void);
 extern struct SaveBlockChunk gRamSaveSectionLocations[0xE];
-extern u16 gUnknown_3005420;
+extern u16 gSaveSucceeded;
 
 extern struct SaveSection gSaveDataBuffer;
 

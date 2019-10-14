@@ -158,16 +158,16 @@ _080F5240:
 	adds r1, r0, 0
 	cmp r1, 0x1
 	bne _080F5260
-	ldr r0, _080F5258 @ =gUnknown_3005420
+	ldr r0, _080F5258 @ =gSaveSucceeded
 	strh r1, [r0]
 	ldr r0, _080F525C @ =gUnknown_8418E09
 	bl sub_80F5404
 	b _080F526C
 	.align 2, 0
-_080F5258: .4byte gUnknown_3005420
+_080F5258: .4byte gSaveSucceeded
 _080F525C: .4byte gUnknown_8418E09
 _080F5260:
-	ldr r0, _080F5274 @ =gUnknown_3005420
+	ldr r0, _080F5274 @ =gSaveSucceeded
 	movs r1, 0xFF
 	strh r1, [r0]
 	ldr r0, _080F5278 @ =gUnknown_8418CD9
@@ -178,7 +178,7 @@ _080F526C:
 	strb r0, [r1]
 	b _080F52D6
 	.align 2, 0
-_080F5274: .4byte gUnknown_3005420
+_080F5274: .4byte gSaveSucceeded
 _080F5278: .4byte gUnknown_8418CD9
 _080F527C: .4byte gUnknown_203AB50
 _080F5280:

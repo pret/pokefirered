@@ -117,163 +117,160 @@ static EWRAM_DATA u8 gUnknown_203B049 = 0;
 static EWRAM_DATA u8 gUnknown_203B04A = 0;
 static EWRAM_DATA u8 gUnknown_203B04B = 0;
 
-void sub_8110A00(void);
-void sub_8110A3C(void);
-void sub_8110BB0(u8);
-void sub_8110BE8(u8);
-void sub_8110E3C(void);
-void sub_8110D94(void);
-void sub_8110E20(void);
-void sub_8110D48(u8);
-u8 sub_8110E68(struct UnkStruct_203AE98 *);
-void sub_8110F90(u8);
-void sub_8111150(u8);
-void sub_8111368(void);
-void sub_81115E8(void);
-u16 sub_8111618(void);
-u16 sub_811164C(void);
-void sub_8111688(void);
-void sub_811175C(u8, struct UnkStruct_203AE98 *);
-void sub_81118F4(s8);
-void sub_8111914(void);
-void sub_8111984(void);
-void sub_8111A34(u8);
-void sub_8111AD8(void);
-void sub_8111B80(void);
-u8 sub_8111BD4(void);
-void sub_8111D10(void);
-void sub_8111D90(u8);
-void sub_8111E20(void);
-void sub_8111E64(s8);
-void sub_8111E84(void);
-bool8 sub_8111F60(void);
-void sub_8111F8C(u8);
-void sub_8111FCC(u8);
-void sub_8112044(u8);
-void sub_81120AC(u8);
-bool8 sub_81121D8(u8);
-void sub_811229C(void);
-void sub_8112364(void);
-void sub_8112888(u8);
-void sub_8112940(u8, struct UnkStruct_203AE98 *, u16);
-u8 sub_8112CAC(void);
-bool8 sub_8112CEC(void);
-bool8 sub_8112D1C(void);
-void sub_8113078(struct Var4038Struct *);
-void sub_81130BC(struct Var4038Struct *);
-u8 sub_8113194(struct Var4038Struct *);
-u16 sub_81132A0(struct Var4038Struct *);
-void sub_81132E0(struct Var4038Struct *);
-bool16 sub_811337C(struct Var4038Struct *);
-void sub_8113390(struct Var4038Struct *);
-void sub_8113414(struct LinkBattleRecords *, u8, u8);
-void sub_81134CC(struct Var4038Struct *);
-bool8 sub_8113508(struct Var4038Struct * );
-void sub_8113524(struct Var4038Struct *);
-bool8 sub_81136D4(void);
-bool8 sub_8113778(u16, u16 *);
-bool8 sub_81137E4(u16, u16 *);
-u16 * sub_8113828(u16, u16 *);
-bool8 sub_81138A0(u16, u16 *);
-bool8 sub_8113954(u16, u16 *);
-void sub_8113A1C(u16);
-void sub_811381C(void);
-void sub_81138F8(void);
-bool8 sub_8113A44(u16, u16 *);
-u16 * sub_8113A78(u16 *, u16 **);
-void sub_8113ABC(u16 *);
-bool8 sub_8113AE8(u16 *);
-bool8 sub_8113B44(u16 *);
-void sub_8113B88(void);
-void sub_8113B94(u16);
-void sub_8113BD8(void);
-u16 * sub_8113BF4(u16 *);
-u16 * sub_8113C20(u16 *, struct UnkStruct_203AE98 *);
-u16 * sub_8113C5C(u16 *, u16);
-u16 * sub_8113C8C(u16 *, struct UnkStruct_203AE98 *);
-u16 * sub_8113CC8(u16 *, struct UnkStruct_203AE98 *);
-u16 * sub_8113D08(u16 *, struct UnkStruct_203AE98 *);
-u16 * sub_8113D48(u16 *, struct UnkStruct_203AE98 *);
-u16 * sub_8113D94(u16 *, struct UnkStruct_203AE98 *);
-u16 * sub_8113F14(u16 *, const u16 *);
-const u16 * sub_8113F3C(const u16 *);
-u16 * sub_8113F80(u16 *, const u16 *);
-const u16 * sub_8113FBC(const u16 *);
-u16 * sub_8114174(u16 *, const u16 *);
-const u16 * sub_8114188(const u16 *);
-u16 * sub_81141D0(u16 *, const u16 *);
-const u16 * sub_81141E4(const u16 *);
-u16 * sub_811422C(u16 *, const u16 *);
-const u16 * sub_8114240(const u16 *);
-u16 * sub_8114288(u16 *, const u16 *);
-const u16 * sub_811429C(const u16 *);
-u16 * sub_8114310(u16 *, const u16 *);
-const u16 * sub_8114324(const u16 *);
-u16 * sub_8114380(u16 *, const u16 *);
-const u16 * sub_8114394(const u16 *);
-u16 * sub_81143F0(u16 *, const u16 *);
-const u16 * sub_811443C(const u16 *);
-u16 * sub_811445C(u16 *, const u16 *);
-const u16 * sub_811448C(const u16 *);
-u16 * sub_81144EC(u16 *, const u16 *);
-const u16 * sub_8114518(const u16 *);
-u16 * sub_8114578(u16 *, const u16 *);
-const u16 * sub_81145A4(const u16 *);
-u16 * sub_8114604(u16 *, const u16 *);
-const u16 * sub_811464C(const u16 *);
-u16 * sub_8114710(u16 *, const u16 *);
-const u16 * sub_8114724(const u16 *);
-u16 * sub_8114744(u16 *, const u16 *);
-const u16 * sub_8114758(const u16 *);
-u16 * sub_8114778(u16 *, const u16 *);
-const u16 * sub_81147A8(const u16 *);
-u16 * sub_8114808(u16 *, const u16 *);
-const u16 * sub_8114834(const u16 *);
-u16 * sub_811488C(u16 *, const u16 *);
-const u16 * sub_81148BC(const u16 *);
-u16 * sub_8114918(u16 *, const u16 *);
-const u16 * sub_8114944(const u16 *);
-u16 * sub_8114990(u16 *, const u16 *);
-const u16 * sub_81149D0(const u16 *);
-u16 * sub_8114A1C(u16 *, const u16 *);
-const u16 * sub_8114A4C(const u16 *);
-u16 * sub_8114AA0(u16 *, const u16 *);
-const u16 * sub_8114AC8(const u16 *);
-u16 * sub_8114B0C(u16 *, const u16 *);
-const u16 * sub_8114B34(const u16 *);
-u16 * sub_8114B78(u16 *, const u16 *);
-const u16 * sub_8114BA0(const u16 *);
-u16 * sub_8114BE4(u16 *, const u16 *);
-const u16 * sub_8114C0C(const u16 *);
-u16 * sub_8114C68(u16 *, const u16 *);
-const u16 * sub_8114C8C(const u16 *);
-u16 * sub_8114CC0(u16 *, const u16 *);
-const u16 * sub_8114CE4(const u16 *);
-u16 * sub_8114D4C(u16 *, const u16 *);
-const u16 * sub_8114D68(const u16 *);
-u16 * sub_8114DE8(u16 *, const u16 *);
-const u16 * sub_8114E68(const u16 *);
-bool8 sub_8114FBC(u16);
-u16 * sub_8114FF0(u16 *, const u16 *);
-const u16 * sub_811500C(const u16 *);
-u16 * sub_8115078(u16 *, const u16 *);
-const u16 * sub_81150CC(const u16 *);
-u16 * sub_81151C0(u16 *, const u16 *);
-const u16 * sub_81151DC(const u16 *);
-u16 * sub_8115280(u16 *, const u16 *);
-const u16 * sub_81152BC(const u16 *);
-bool8 sub_81153A8(u16, u16 *);
-bool8 sub_81153E4(u16, u16 *);
-u16 * sub_8115410(u16 *, const u16 *);
-const u16 * sub_8115460(const u16 *);
-u16 * sub_81154DC(u16 *, const u16 *);
-const u16 * sub_8115518(const u16 *);
-u16 * sub_81155A4(u16 *, const u16 *);
-const u16 * sub_81155E0(const u16 *);
-u16 * sub_81156D8(u16 *, const u16 *);
-const u16 * sub_8115700(const u16 *);
-u16 * sub_81157DC(u16 *, const u16 *);
-const u16 * sub_8115800(const u16 *);
+static void sub_8110A00(void);
+static void sub_8110A3C(void);
+static void sub_8110BB0(u8);
+static void sub_8110BE8(u8);
+static void sub_8110E3C(void);
+static void sub_8110D94(void);
+static void sub_8110E20(void);
+static void sub_8110D48(u8);
+static u8 sub_8110E68(struct UnkStruct_203AE98 *);
+static void sub_8110F90(u8);
+static void sub_8111150(u8);
+static void sub_8111368(void);
+static void sub_81115E8(void);
+static u16 sub_8111618(void);
+static u16 sub_811164C(void);
+static void sub_8111688(void);
+static void sub_811175C(u8, struct UnkStruct_203AE98 *);
+static void sub_81118F4(s8);
+static void sub_8111914(void);
+static void sub_8111984(void);
+static void sub_8111A34(u8);
+static void sub_8111AD8(void);
+static void sub_8111B80(void);
+static u8 sub_8111BD4(void);
+static void sub_8111D10(void);
+static void sub_8111D90(u8);
+static void sub_8111E20(void);
+static void sub_8111E64(s8);
+static void sub_8111E84(void);
+static bool8 sub_8111F60(void);
+static void sub_8111F8C(u8);
+static void sub_8111FCC(u8);
+static void sub_8112044(u8);
+static void sub_81120AC(u8);
+static bool8 sub_81121D8(u8);
+static void sub_811229C(void);
+static void sub_8112888(u8);
+static void sub_8112940(u8, struct UnkStruct_203AE98 *, u16);
+static bool8 sub_8112CEC(void);
+static bool8 sub_8112D1C(void);
+static void sub_8113078(struct Var4038Struct *);
+static void sub_81130BC(struct Var4038Struct *);
+static u8 sub_8113194(struct Var4038Struct *);
+static u16 sub_81132A0(struct Var4038Struct *);
+static void sub_81132E0(struct Var4038Struct *);
+static bool16 sub_811337C(struct Var4038Struct *);
+static void sub_8113390(struct Var4038Struct *);
+static void sub_8113414(struct LinkBattleRecords *, u8, u8);
+static void sub_81134CC(struct Var4038Struct *);
+static bool8 sub_8113508(struct Var4038Struct * );
+static void sub_8113524(struct Var4038Struct *);
+static bool8 sub_81136D4(void);
+static bool8 sub_8113778(u16, u16 *);
+static bool8 sub_81137E4(u16, u16 *);
+static u16 * sub_8113828(u16, u16 *);
+static bool8 sub_81138A0(u16, u16 *);
+static bool8 sub_8113954(u16, u16 *);
+static void sub_8113A1C(u16);
+static void sub_811381C(void);
+static bool8 sub_8113A44(u16, u16 *);
+static u16 * sub_8113A78(u16 *, u16 **);
+static void sub_8113ABC(u16 *);
+static bool8 sub_8113AE8(u16 *);
+static bool8 sub_8113B44(u16 *);
+static void sub_8113B88(void);
+static void sub_8113B94(u16);
+static void sub_8113BD8(void);
+static u16 * sub_8113BF4(u16 *);
+static u16 * sub_8113C20(u16 *, struct UnkStruct_203AE98 *);
+static u16 * sub_8113C5C(u16 *, u16);
+static u16 * sub_8113C8C(u16 *, struct UnkStruct_203AE98 *);
+static u16 * sub_8113CC8(u16 *, struct UnkStruct_203AE98 *);
+static u16 * sub_8113D08(u16 *, struct UnkStruct_203AE98 *);
+static u16 * sub_8113D48(u16 *, struct UnkStruct_203AE98 *);
+static u16 * sub_8113D94(u16 *, struct UnkStruct_203AE98 *);
+static u16 * sub_8113F14(u16 *, const u16 *);
+static const u16 * sub_8113F3C(const u16 *);
+static u16 * sub_8113F80(u16 *, const u16 *);
+static const u16 * sub_8113FBC(const u16 *);
+static u16 * sub_8114174(u16 *, const u16 *);
+static const u16 * sub_8114188(const u16 *);
+static u16 * sub_81141D0(u16 *, const u16 *);
+static const u16 * sub_81141E4(const u16 *);
+static u16 * sub_811422C(u16 *, const u16 *);
+static const u16 * sub_8114240(const u16 *);
+static u16 * sub_8114288(u16 *, const u16 *);
+static const u16 * sub_811429C(const u16 *);
+static u16 * sub_8114310(u16 *, const u16 *);
+static const u16 * sub_8114324(const u16 *);
+static u16 * sub_8114380(u16 *, const u16 *);
+static const u16 * sub_8114394(const u16 *);
+static u16 * sub_81143F0(u16 *, const u16 *);
+static const u16 * sub_811443C(const u16 *);
+static u16 * sub_811445C(u16 *, const u16 *);
+static const u16 * sub_811448C(const u16 *);
+static u16 * sub_81144EC(u16 *, const u16 *);
+static const u16 * sub_8114518(const u16 *);
+static u16 * sub_8114578(u16 *, const u16 *);
+static const u16 * sub_81145A4(const u16 *);
+static u16 * sub_8114604(u16 *, const u16 *);
+static const u16 * sub_811464C(const u16 *);
+static u16 * sub_8114710(u16 *, const u16 *);
+static const u16 * sub_8114724(const u16 *);
+static u16 * sub_8114744(u16 *, const u16 *);
+static const u16 * sub_8114758(const u16 *);
+static u16 * sub_8114778(u16 *, const u16 *);
+static const u16 * sub_81147A8(const u16 *);
+static u16 * sub_8114808(u16 *, const u16 *);
+static const u16 * sub_8114834(const u16 *);
+static u16 * sub_811488C(u16 *, const u16 *);
+static const u16 * sub_81148BC(const u16 *);
+static u16 * sub_8114918(u16 *, const u16 *);
+static const u16 * sub_8114944(const u16 *);
+static u16 * sub_8114990(u16 *, const u16 *);
+static const u16 * sub_81149D0(const u16 *);
+static u16 * sub_8114A1C(u16 *, const u16 *);
+static const u16 * sub_8114A4C(const u16 *);
+static u16 * sub_8114AA0(u16 *, const u16 *);
+static const u16 * sub_8114AC8(const u16 *);
+static u16 * sub_8114B0C(u16 *, const u16 *);
+static const u16 * sub_8114B34(const u16 *);
+static u16 * sub_8114B78(u16 *, const u16 *);
+static const u16 * sub_8114BA0(const u16 *);
+static u16 * sub_8114BE4(u16 *, const u16 *);
+static const u16 * sub_8114C0C(const u16 *);
+static u16 * sub_8114C68(u16 *, const u16 *);
+static const u16 * sub_8114C8C(const u16 *);
+static u16 * sub_8114CC0(u16 *, const u16 *);
+static const u16 * sub_8114CE4(const u16 *);
+static u16 * sub_8114D4C(u16 *, const u16 *);
+static const u16 * sub_8114D68(const u16 *);
+static u16 * sub_8114DE8(u16 *, const u16 *);
+static const u16 * sub_8114E68(const u16 *);
+static bool8 sub_8114FBC(u16);
+static u16 * sub_8114FF0(u16 *, const u16 *);
+static const u16 * sub_811500C(const u16 *);
+static u16 * sub_8115078(u16 *, const u16 *);
+static const u16 * sub_81150CC(const u16 *);
+static u16 * sub_81151C0(u16 *, const u16 *);
+static const u16 * sub_81151DC(const u16 *);
+static u16 * sub_8115280(u16 *, const u16 *);
+static const u16 * sub_81152BC(const u16 *);
+static bool8 sub_81153A8(u16, u16 *);
+static bool8 sub_81153E4(u16, u16 *);
+static u16 * sub_8115410(u16 *, const u16 *);
+static const u16 * sub_8115460(const u16 *);
+static u16 * sub_81154DC(u16 *, const u16 *);
+static const u16 * sub_8115518(const u16 *);
+static u16 * sub_81155A4(u16 *, const u16 *);
+static const u16 * sub_81155E0(const u16 *);
+static u16 * sub_81156D8(u16 *, const u16 *);
+static const u16 * sub_8115700(const u16 *);
+static u16 * sub_81157DC(u16 *, const u16 *);
+static const u16 * sub_8115800(const u16 *);
 void sub_8115834(u8 *);
 
 extern const u8 gUnknown_841A155[];
@@ -404,17 +401,17 @@ extern const u8 gUnknown_841B277[];
 extern const u8 gUnknown_8418C1B[];
 
 
-const struct WindowTemplate gUnknown_845661C[3] = {
+static const struct WindowTemplate gUnknown_845661C[3] = {
     { 0, 0,  0, 30, 2, 15, 0x0e9 },
     { 0, 0, 18, 30, 2, 15, 0x0ad },
     { 0, 0, 14, 30, 6, 15, 0x14c }
 };
 
-const u8 gUnknown_8456634[3] = {15, 1, 12};
+static const u8 gUnknown_8456634[3] = {15, 1, 12};
 
-const u16 gUnknown_8456638[] = INCBIN_U16("data/graphics/unknown_8456638.bin");
+static const u16 gUnknown_8456638[] = INCBIN_U16("data/graphics/unknown_8456638.bin");
 
-const u8 gUnknown_8456698[] = {17, 10, 3};
+static const u8 gUnknown_8456698[] = {17, 10, 3};
 
 void sub_8110840(void * oldPointer)
 {
@@ -493,7 +490,7 @@ void sub_81109CC(u8 a0)
         gUnknown_203AE8C = sub_8110A3C;
 }
 
-void sub_8110A00(void)
+static void sub_8110A00(void)
 {
     if (sub_8110E68(gUnknown_203AE98) != 1)
     {
@@ -504,7 +501,7 @@ void sub_8110A00(void)
     }
 }
 
-void sub_8110A3C(void)
+static void sub_8110A3C(void)
 {
     if (gUnknown_203AE94.unk_0_0 == 2)
         gUnknown_203AE94.unk_0_0 = 0;
@@ -556,7 +553,7 @@ void sub_8110AEC(u16 a0)
     sub_81109CC(1);
 }
 
-void sub_8110BB0(u8 a0)
+static void sub_8110BB0(u8 a0)
 {
     struct QuestLog * questLog = &gSaveBlock1Ptr->questLog[a0];
     questLog->unk_001 = gSaveBlock1Ptr->location.mapGroup;
@@ -567,7 +564,7 @@ void sub_8110BB0(u8 a0)
 }
 
 #ifdef NONMATCHING
-void sub_8110BE8(u8 a0)
+static void sub_8110BE8(u8 a0)
 {
     struct QuestLog * questLog = &gSaveBlock1Ptr->questLog[a0];
     u16 i; // r6
@@ -602,7 +599,7 @@ void sub_8110BE8(u8 a0)
 }
 #else
 NAKED
-void sub_8110BE8(u8 a0)
+static void sub_8110BE8(u8 a0)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                 "\tmov r7, r10\n"
@@ -767,7 +764,7 @@ void sub_8110BE8(u8 a0)
 }
 #endif // NONMATCHING
 
-void sub_8110D48(u8 a0)
+static void sub_8110D48(u8 a0)
 {
     struct QuestLog * questLog = &gSaveBlock1Ptr->questLog[a0];
 
@@ -775,7 +772,7 @@ void sub_8110D48(u8 a0)
     CpuCopy16(gSaveBlock1Ptr->vars, questLog->vars, VARS_COUNT * sizeof(u16));
 }
 
-void sub_8110D94(void)
+static void sub_8110D94(void)
 {
     u16 i, j;
     u16 sp0[4];
@@ -794,19 +791,19 @@ void sub_8110D94(void)
     }
 }
 
-void sub_8110E20(void)
+static void sub_8110E20(void)
 {
     VarSet(VAR_0x40AE, gSaveBlock1Ptr->mapDataId);
 }
 
-void sub_8110E3C(void)
+static void sub_8110E3C(void)
 {
     sub_8113BF4(gUnknown_203AE08);
     if (++gUnknown_203ADF8 > 3)
         gUnknown_203ADF8 = 0;
 }
 
-bool8 sub_8110E68(struct UnkStruct_203AE98 * a0)
+static bool8 sub_8110E68(struct UnkStruct_203AE98 * a0)
 {
     u16 i;
 
@@ -865,7 +862,7 @@ void TrySetUpQuestLogScenes_ElseContinueFromSave(u8 taskId)
     }
 }
 
-void sub_8110F90(u8 unused)
+static void sub_8110F90(u8 unused)
 {
     gSaveBlock1Ptr->location.mapGroup = 3;
     gSaveBlock1Ptr->location.mapNum = 19;
@@ -937,7 +934,7 @@ void sub_8111134(void)
     CopyWindowToVram(gUnknown_203ADFE[1], 1);
 }
 
-void sub_8111150(u8 a0)
+static void sub_8111150(u8 a0)
 {
     struct QuestLog *questLog = &gSaveBlock1Ptr->questLog[a0];
     u16 i;
@@ -982,7 +979,7 @@ void sub_8111274(u8 a0, u8 a1)
     }
 }
 
-void sub_8111368(void)
+static void sub_8111368(void)
 {
     gUnknown_203ADFA = 2;
     sub_806E6FC();
@@ -1091,14 +1088,14 @@ void sub_8111438(void)
     Free(r9);
 }
 
-void sub_81115E8(void)
+static void sub_81115E8(void)
 {
     u16 r4 = sub_8111618();
     u16 r1 = sub_811164C();
     VarSet(VAR_0x4027, (r4 << 12) + r1);
 }
 
-u16 sub_8111618(void)
+static u16 sub_8111618(void)
 {
     u16 count = 0;
     u16 i;
@@ -1112,7 +1109,7 @@ u16 sub_8111618(void)
     return count;
 }
 
-u16 sub_811164C(void)
+static u16 sub_811164C(void)
 {
     u16 count = 0;
     u16 i, j;
@@ -1129,7 +1126,7 @@ u16 sub_811164C(void)
     return count;
 }
 
-void sub_8111688(void)
+static void sub_8111688(void)
 {
     u16 i, j;
     u16 sp0[4];
@@ -1161,7 +1158,7 @@ void sub_8111708(void)
     }
 }
 
-void sub_811175C(u8 a0, struct UnkStruct_203AE98 * a1)
+static void sub_811175C(u8 a0, struct UnkStruct_203AE98 * a1)
 {
     u16 i;
     u16 *r4;
@@ -1208,13 +1205,13 @@ void sub_811175C(u8 a0, struct UnkStruct_203AE98 * a1)
     }
 }
 
-void sub_81118F4(s8 a0)
+static void sub_81118F4(s8 a0)
 {
     fade_screen(1, a0);
     gUnknown_203AE8C = sub_8111914;
 }
 
-void sub_8111914(void)
+static void sub_8111914(void)
 {
     if (!gPaletteFade.active)
     {
@@ -1232,7 +1229,7 @@ void sub_8111914(void)
     }
 }
 
-void sub_8111984(void)
+static void sub_8111984(void)
 {
     sub_806E6FC();
     Save_ResetSaveCounters();
@@ -1269,7 +1266,7 @@ bool8 sub_81119D4(void (*a0)(void))
     return FALSE;
 }
 
-void sub_8111A34(u8 taskId)
+static void sub_8111A34(u8 taskId)
 {
     void (*routine)(void);
     s16 * data = gTasks[taskId].data;
@@ -1298,7 +1295,7 @@ void sub_8111A34(u8 taskId)
     }
 }
 
-void sub_8111AD8(void)
+static void sub_8111AD8(void)
 {
     if (gUnknown_203AE94.unk_0_0 == 1)
     {
@@ -1327,7 +1324,7 @@ void sub_8111AD8(void)
     }
 }
 
-void sub_8111B80(void)
+static void sub_8111B80(void)
 {
     if (gUnknown_203AE94.unk_0_0 == 0)
     {
@@ -1344,7 +1341,7 @@ void sub_8111B80(void)
     sub_8112888(1);
 }
 
-u8 sub_8111BD4(void)
+static u8 sub_8111BD4(void)
 {
     u16 i;
     u16 count = 0;
@@ -1405,7 +1402,7 @@ void sub_8111CF0(void)
         sub_8111070(sNumScenes);
 }
 
-void sub_8111D10(void)
+static void sub_8111D10(void)
 {
     u16 i;
     u8 count = 0;
@@ -1422,7 +1419,7 @@ void sub_8111D10(void)
     ScheduleBgCopyTilemapToVram(0);
 }
 
-void sub_8111D90(u8 a0)
+static void sub_8111D90(u8 a0)
 {
     const u16 * src = gUnknown_8456638;
     u16 * buffer = Alloc(0x1680);
@@ -1459,7 +1456,7 @@ void sub_8111D90(u8 a0)
     }
 }
 
-void sub_8111E20(void)
+static void sub_8111E20(void)
 {
     ClearWindowTilemap(gUnknown_203ADFE[2]);
     FillWindowPixelRect(gUnknown_203ADFE[2], 15, 0, 0, 0xf0, 0x30);
@@ -1468,13 +1465,13 @@ void sub_8111E20(void)
     CopyWindowToVram(gUnknown_203ADFE[1], 1);
 }
 
-void sub_8111E64(s8 a0)
+static void sub_8111E64(s8 a0)
 {
     fade_screen(1, a0);
     gUnknown_203AE8C = sub_8111E84;
 }
 
-void sub_8111E84(void)
+static void sub_8111E84(void)
 {
     if (!gPaletteFade.active)
     {
@@ -1501,7 +1498,7 @@ void sub_8111F38(u16 a0, u16 a1)
     CpuSet(gPlttBufferUnfaded + a0, gUnknown_203AE90 + a0, a1);
 }
 
-bool8 sub_8111F60(void)
+static bool8 sub_8111F60(void)
 {
     LoadPalette(stdpal_get(4), 0xF0, 0x20);
     sub_8111070(0);
@@ -1510,7 +1507,7 @@ bool8 sub_8111F60(void)
     return TRUE;
 }
 
-void sub_8111F8C(u8 taskId)
+static void sub_8111F8C(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -1524,7 +1521,7 @@ void sub_8111F8C(u8 taskId)
     }
 }
 
-void sub_8111FCC(u8 taskId)
+static void sub_8111FCC(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -1544,7 +1541,7 @@ void sub_8111FCC(u8 taskId)
     }
 }
 
-void sub_8112044(u8 taskId)
+static void sub_8112044(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -1559,7 +1556,7 @@ void sub_8112044(u8 taskId)
         task->data[0]++;
 }
 
-void sub_81120AC(u8 taskId)
+static void sub_81120AC(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     u8 i;
@@ -1609,7 +1606,7 @@ void sub_81120AC(u8 taskId)
     }
 }
 
-bool8 sub_81121D8(u8 taskId)
+static bool8 sub_81121D8(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -1626,7 +1623,7 @@ bool8 sub_81121D8(u8 taskId)
     return FALSE;
 }
 
-void sub_811229C(void)
+static void sub_811229C(void)
 {
     u16 * buffer = Alloc(0x400);
     CpuCopy16(gUnknown_203AE90, buffer, 0x400);
@@ -1833,7 +1830,7 @@ void sub_81127F8(struct UnkStruct_3005E90 * a0)
     }
 }
 
-void sub_8112888(u8 a0)
+static void sub_8112888(u8 a0)
 {
     switch (a0)
     {
@@ -1875,7 +1872,7 @@ void sub_81128BC(u8 a0)
     }
 }
 
-void sub_8112940(u8 a0, struct UnkStruct_203AE98 *a1, u16 a2)
+static void sub_8112940(u8 a0, struct UnkStruct_203AE98 *a1, u16 a2)
 {
     s32 i;
 
@@ -2218,21 +2215,21 @@ u8 sub_8112CAC(void)
     }
 }
 
-bool8 sub_8112CEC(void)
+static bool8 sub_8112CEC(void)
 {
     if (gUnknown_203AF98 >= gUnknown_3005E8C || ScriptContext2_IsEnabled() == TRUE)
         return TRUE;
     return FALSE;
 }
 
-bool8 sub_8112D1C(void)
+static bool8 sub_8112D1C(void)
 {
     if (gUnknown_203AF98 >= gUnknown_3005E8C)
         return TRUE;
     return FALSE;
 }
 
-const struct UnkStruct_300201C gUnknown_84566A4 = {
+static const struct UnkStruct_300201C gUnknown_84566A4 = {
     0,
     FALSE,
     0x7FFF
@@ -2294,7 +2291,7 @@ void sub_8112E3C(u8 a0, struct UnkStruct_300201C * a1, u16 a2)
 
 const u16 gUnknown_84566A8[] = INCBIN_U16("data/graphics/unknown_84566a8.bin");
 
-const struct WindowTemplate sHelpMessageWindowTemplate = {
+static const struct WindowTemplate sHelpMessageWindowTemplate = {
     0x00, 0, 15, 30, 5, 15, 0x008F
 };
 
@@ -2463,7 +2460,7 @@ void sub_8112FD0(void)
     sub_8112F18(sHelpMessageWindowId);
 }
 
-const u8 gUnknown_8456930[3] = {
+static const u8 gUnknown_8456930[3] = {
     0, 10, 2
 };
 
@@ -2491,7 +2488,7 @@ void sub_8113064(void)
     sub_8113078(VAR_0x4038_STRUCT);
 }
 
-void sub_8113078(struct Var4038Struct * varPtr)
+static void sub_8113078(struct Var4038Struct * varPtr)
 {
     if (sub_8113508(varPtr))
     {
@@ -2505,7 +2502,7 @@ void sub_81130A8(void)
     sub_81130BC(VAR_0x4038_STRUCT);
 }
 
-void sub_81130BC(struct Var4038Struct * varPtr)
+static void sub_81130BC(struct Var4038Struct * varPtr)
 {
     if (!varPtr->unk_0_7)
     {
@@ -2543,11 +2540,11 @@ u8 sub_8113114(struct Var4038Struct * a0, u8 a1)
     return a0->unk_0_0;
 }
 
-const u8 gUnknown_8456938[] = {
+static const u8 gUnknown_8456938[] = {
     1, 3, 5, 0, 7, 6, 4, 2
 };
 
-u8 sub_8113194(struct Var4038Struct * a0)
+static u8 sub_8113194(struct Var4038Struct * a0)
 {
     u8 i;
     u8 retval = 0;
@@ -2568,7 +2565,7 @@ u8 sub_8113194(struct Var4038Struct * a0)
     return gUnknown_8456938[retval];
 }
 
-const u8 gUnknown_8456940[] = {
+static const u8 gUnknown_8456940[] = {
     5, 6, 3, 7, 4, 1, 0, 2
 };
 
@@ -2602,7 +2599,7 @@ u16 sub_8113288(void)
     return sub_81132A0(VAR_0x4038_STRUCT);
 }
 
-u16 sub_81132A0(struct Var4038Struct * a0)
+static u16 sub_81132A0(struct Var4038Struct * a0)
 {
     u8 count = 0;
     u8 i;
@@ -2621,7 +2618,7 @@ void sub_81132CC(void)
     sub_81132E0(VAR_0x4038_STRUCT);
 }
 
-void sub_81132E0(struct Var4038Struct * a0)
+static void sub_81132E0(struct Var4038Struct * a0)
 {
     u8 i = 0;
     u16 var_4039;
@@ -2653,12 +2650,12 @@ bool16 sub_8113364(void)
     return sub_811337C(VAR_0x4038_STRUCT);
 }
 
-bool16 sub_811337C(struct Var4038Struct * a0)
+static bool16 sub_811337C(struct Var4038Struct * a0)
 {
     return (a0->unk_1 >> gSpecialVar_0x8004) & 1;
 }
 
-void sub_8113390(struct Var4038Struct * a0)
+static void sub_8113390(struct Var4038Struct * a0)
 {
     a0->unk_1 |= 1;
     a0->unk_1 |= 2;
@@ -2697,7 +2694,7 @@ void sub_81133A4(void)
     sub_8113414(&gSaveBlock2Ptr->linkBattleRecords, r3, r2);
 }
 
-void sub_8113414(struct LinkBattleRecords * a0, u8 a1, u8 a2)
+static void sub_8113414(struct LinkBattleRecords * a0, u8 a1, u8 a2)
 {
     u8 * str;
     const u8 * src = a0->entries[a1].name;
@@ -2742,7 +2739,7 @@ void sub_81134B8(void)
     sub_81134CC(VAR_0x4038_STRUCT);
 }
 
-void sub_81134CC(struct Var4038Struct * a0)
+static void sub_81134CC(struct Var4038Struct * a0)
 {
     if (VarGet(VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB) == 2)
     {
@@ -2754,7 +2751,7 @@ void sub_81134CC(struct Var4038Struct * a0)
     }
 }
 
-bool8 sub_8113508(struct Var4038Struct * a0)
+static bool8 sub_8113508(struct Var4038Struct * a0)
 {
     return a0->unk_0_7;
 }
@@ -2764,7 +2761,7 @@ void sub_8113510(void)
     sub_8113524(VAR_0x4038_STRUCT);
 }
 
-void sub_8113524(struct Var4038Struct * a0)
+static void sub_8113524(struct Var4038Struct * a0)
 {
     a0->unk_0_7 = TRUE;
 }
@@ -3092,7 +3089,7 @@ void sub_8113550(u16 a0, const u16 * a1)
 }
 #endif // NONMATCHING
 
-bool8 sub_81136D4(void)
+static bool8 sub_81136D4(void)
 {
     if (gSaveBlock1Ptr->location.mapGroup == 2 && (gSaveBlock1Ptr->location.mapNum == 1 || gSaveBlock1Ptr->location.mapNum == 2 || gSaveBlock1Ptr->location.mapNum == 3 || gSaveBlock1Ptr->location.mapNum == 4 || gSaveBlock1Ptr->location.mapNum == 5 || gSaveBlock1Ptr->location.mapNum == 6 || gSaveBlock1Ptr->location.mapNum == 7 || gSaveBlock1Ptr->location.mapNum == 8 || gSaveBlock1Ptr->location.mapNum == 9 || gSaveBlock1Ptr->location.mapNum == 10 || gSaveBlock1Ptr->location.mapNum == 11))
         return TRUE;
@@ -3123,7 +3120,7 @@ bool8 sub_8113748(void)
     return FALSE;
 }
 
-bool8 sub_8113778(u16 a0, u16 * a1)
+static bool8 sub_8113778(u16 a0, u16 * a1)
 {
     if (a0 == 36 || a0 == 11)
         return TRUE;
@@ -3143,7 +3140,7 @@ bool8 sub_8113778(u16 a0, u16 * a1)
     return FALSE;
 }
 
-bool8 sub_81137E4(u16 a0, u16 * a1)
+static bool8 sub_81137E4(u16 a0, u16 * a1)
 {
     if (a0 == 34)
     {
@@ -3158,12 +3155,12 @@ bool8 sub_81137E4(u16 a0, u16 * a1)
     return FALSE;
 }
 
-void sub_811381C(void)
+static void sub_811381C(void)
 {
     gUnknown_203B048 = 0;
 }
 
-u16 * sub_8113828(u16 a0, u16 * a1)
+static u16 * sub_8113828(u16 a0, u16 * a1)
 {
     if (sub_8113778(a0, a1) == TRUE)
         return NULL;
@@ -3182,7 +3179,7 @@ u16 * sub_8113828(u16 a0, u16 * a1)
     return sQuestLogStorageCBs[a0](gUnknown_203AE08, a1);
 }
 
-bool8 sub_81138A0(u16 a0, u16 * a1)
+static bool8 sub_81138A0(u16 a0, u16 * a1)
 {
     if (a0 < 12 || a0 > 19)
         return FALSE;
@@ -3218,7 +3215,7 @@ void sub_811390C(void)
     }
 }
 
-bool8 sub_8113954(u16 a0, u16 * a1)
+static bool8 sub_8113954(u16 a0, u16 * a1)
 {
     if (a0 != 34 && a0 != 30 && a0 != 32 && a0 != 33)
         return FALSE;
@@ -3250,13 +3247,13 @@ void sub_81139BC(void)
     }
 }
 
-void sub_8113A1C(u16 a0)
+static void sub_8113A1C(u16 a0)
 {
     gUnknown_203AE08 = sub_8113C5C(gUnknown_203AE08, a0);
     gUnknown_203AF98++;
 }
 
-bool8 sub_8113A44(u16 a0, u16 *a1)
+static bool8 sub_8113A44(u16 a0, u16 *a1)
 {
     if (a0 != 31)
         return FALSE;
@@ -3316,7 +3313,7 @@ static const u16 * (*const sQuestLogScriptParsingCBs[])(const u16 *) = {
     sub_8115800
 };
 
-const u8 gUnknown_8456AA0[] = {
+static const u8 gUnknown_8456AA0[] = {
     0x08,
     0x08,
     0x08,
@@ -3362,7 +3359,7 @@ const u8 gUnknown_8456AA0[] = {
     0x06
 };
 
-u16 * sub_8113A78(u16 * a0, u16 **a1)
+static u16 * sub_8113A78(u16 * a0, u16 **a1)
 {
     u16 r2 = a0[0] & 0xfff;
     u16 r4 = a0[0] >> 12;
@@ -3374,7 +3371,7 @@ u16 * sub_8113A78(u16 * a0, u16 **a1)
     return gUnknown_8456AA0[r2] + (gUnknown_8456AA0[r2] - 4) * r4 + (void *)a0;
 }
 
-void sub_8113ABC(u16 * a0)
+static void sub_8113ABC(u16 * a0)
 {
     u8 * r2 = (u8 *)(a0 + 2);
     if ((a0[0] & 0xFFF) != 35)
@@ -3384,7 +3381,7 @@ void sub_8113ABC(u16 * a0)
 }
 
 #ifdef NONMATCHING
-bool8 sub_8113AE8(u16 * a0)
+static bool8 sub_8113AE8(u16 * a0)
 {
     if (a0 == NULL || a0[1] > gUnknown_203AF98)
         return FALSE;
@@ -3398,7 +3395,7 @@ bool8 sub_8113AE8(u16 * a0)
 }
 #else
 NAKED
-bool8 sub_8113AE8(u16 * a0)
+static bool8 sub_8113AE8(u16 * a0)
 {
     asm_unified("\tpush {r4,lr}\n"
                 "\tadds r4, r0, 0\n"
@@ -3449,7 +3446,7 @@ bool8 sub_8113AE8(u16 * a0)
 }
 #endif
 
-bool8 sub_8113B44(u16 * a0)
+static bool8 sub_8113B44(u16 * a0)
 {
     if (gUnknown_203B044.unk_2 == 0)
         return FALSE;
@@ -3461,12 +3458,12 @@ bool8 sub_8113B44(u16 * a0)
     return TRUE;
 }
 
-void sub_8113B88(void)
+static void sub_8113B88(void)
 {
     gUnknown_203B044 = (struct UnkStruct_203B044){};
 }
 
-void sub_8113B94(u16 a0)
+static void sub_8113B94(u16 a0)
 {
     if (gUnknown_203B044.unk_0 != (u8)a0 || gUnknown_203B044.unk_2 != gUnknown_203AF98)
     {
@@ -3478,14 +3475,14 @@ void sub_8113B94(u16 a0)
         gUnknown_203B044.unk_1++;
 }
 
-void sub_8113BD8(void)
+static void sub_8113BD8(void)
 {
     gUnknown_203B049 = 0;
     gUnknown_203B04A = 0;
     gUnknown_203B04B = 0;
 }
 
-u16 * sub_8113BF4(u16 * a0)
+static u16 * sub_8113BF4(u16 * a0)
 {
     if (!sub_8110988(a0, gUnknown_8456AA0[39]))
         return NULL;
@@ -3493,7 +3490,7 @@ u16 * sub_8113BF4(u16 * a0)
     return a0 + 1;
 }
 
-u16 * sub_8113C20(u16 * a0, struct UnkStruct_203AE98 * a1)
+static u16 * sub_8113C20(u16 * a0, struct UnkStruct_203AE98 * a1)
 {
     if (!sub_8110988(a0, gUnknown_8456AA0[39]))
         return NULL;
@@ -3506,7 +3503,7 @@ u16 * sub_8113C20(u16 * a0, struct UnkStruct_203AE98 * a1)
     return a0 + 1;
 }
 
-u16 * sub_8113C5C(u16 * a0, u16 a1)
+static u16 * sub_8113C5C(u16 * a0, u16 a1)
 {
     if (!sub_8110988(a0, gUnknown_8456AA0[41]))
         return NULL;
@@ -3515,7 +3512,7 @@ u16 * sub_8113C5C(u16 * a0, u16 a1)
     return a0 + 2;
 }
 
-u16 * sub_8113C8C(u16 * a0, struct UnkStruct_203AE98 * a1)
+static u16 * sub_8113C8C(u16 * a0, struct UnkStruct_203AE98 * a1)
 {
     if (!sub_8110988(a0, gUnknown_8456AA0[41]))
         return NULL;
@@ -3528,7 +3525,7 @@ u16 * sub_8113C8C(u16 * a0, struct UnkStruct_203AE98 * a1)
     return a0 + 2;
 }
 
-u16 * sub_8113CC8(u16 * a0, struct UnkStruct_203AE98 * a1)
+static u16 * sub_8113CC8(u16 * a0, struct UnkStruct_203AE98 * a1)
 {
     u8 * r6 = (u8 *)a0 + 4;
 
@@ -3543,7 +3540,7 @@ u16 * sub_8113CC8(u16 * a0, struct UnkStruct_203AE98 * a1)
     return (u16 *)(r6 + 4);
 }
 
-u16 * sub_8113D08(u16 * a0, struct UnkStruct_203AE98 * a1)
+static u16 * sub_8113D08(u16 * a0, struct UnkStruct_203AE98 * a1)
 {
     u8 * r6 = (u8 *)a0 + 4;
 
@@ -3558,7 +3555,7 @@ u16 * sub_8113D08(u16 * a0, struct UnkStruct_203AE98 * a1)
     return (u16 *)(r6 + 4);
 }
 
-u16 * sub_8113D48(u16 * a0, struct UnkStruct_203AE98 * a1)
+static u16 * sub_8113D48(u16 * a0, struct UnkStruct_203AE98 * a1)
 {
     u16 * r4 = a0;
     u8 * r6 = (u8 *)a0 + 4;
@@ -3577,7 +3574,7 @@ u16 * sub_8113D48(u16 * a0, struct UnkStruct_203AE98 * a1)
     return (u16 *)(r6 + 4);
 }
 
-u16 * sub_8113D94(u16 * a0, struct UnkStruct_203AE98 * a1)
+static u16 * sub_8113D94(u16 * a0, struct UnkStruct_203AE98 * a1)
 {
     u16 * r5 = a0;
     u8 * r6 = (u8 *)a0 + 4;
@@ -3636,7 +3633,7 @@ u16 * sub_8113DE0(u16 a0, u16 * a1)
     return r5;
 }
 
-const u16 * sub_8113E88(u16 a0, const u16 * a1)
+static const u16 * sub_8113E88(u16 a0, const u16 * a1)
 {
     a1 = (const void *)a1 + (gUnknown_203B044.unk_2 * (gUnknown_8456AA0[a0] - 4) + 4);
     return a1;
@@ -3663,7 +3660,7 @@ void QuestLog_AutoGetSpeciesName(u16 a0, u8 * a1, u8 a2)
     }
 }
 
-u16 * sub_8113F14(u16 * a0, const u16 * a1)
+static u16 * sub_8113F14(u16 * a0, const u16 * a1)
 {
     u16 * r2 = sub_8113DE0(3, a0);
     if (r2 == NULL)
@@ -3674,7 +3671,7 @@ u16 * sub_8113F14(u16 * a0, const u16 * a1)
     return r2 + 2;
 }
 
-const u16 * sub_8113F3C(const u16 * a0)
+static const u16 * sub_8113F3C(const u16 * a0)
 {
     const u16 * r4 = sub_8113E88(3, a0);
     QuestLog_AutoGetSpeciesName(r4[0], gStringVar1, 0);
@@ -3684,7 +3681,7 @@ const u16 * sub_8113F3C(const u16 * a0)
     return r4;
 }
 
-u16 * sub_8113F80(u16 * a0, const u16 * a1)
+static u16 * sub_8113F80(u16 * a0, const u16 * a1)
 {
     u16 * r2 = sub_8113DE0(4, a0);
     if (r2 == NULL)
@@ -3700,7 +3697,7 @@ u16 * sub_8113F80(u16 * a0, const u16 * a1)
     return r2 + 3;
 }
 
-const u16 * sub_8113FBC(const u16 * a0)
+static const u16 * sub_8113FBC(const u16 * a0)
 {
     const u16 * r5 = sub_8113E88(4, a0);
 
@@ -3763,12 +3760,12 @@ u16 * sub_811414C(u16 a0, u16 * a1, const u16 * a2)
     return r1 + 2;
 }
 
-u16 * sub_8114174(u16 * a0, const u16 * a1)
+static u16 * sub_8114174(u16 * a0, const u16 * a1)
 {
     return sub_811414C(5, a0, a1);
 }
 
-const u16 * sub_8114188(const u16 * a0)
+static const u16 * sub_8114188(const u16 * a0)
 {
     const u16 * r4 = sub_8113E88(5, a0);
     QuestLog_AutoGetSpeciesName(r4[1], gStringVar1, 0);
@@ -3778,12 +3775,12 @@ const u16 * sub_8114188(const u16 * a0)
     return r4;
 }
 
-u16 * sub_81141D0(u16 * a0, const u16 * a1)
+static u16 * sub_81141D0(u16 * a0, const u16 * a1)
 {
     return sub_811414C(6, a0, a1);
 }
 
-const u16 * sub_81141E4(const u16 * a0)
+static const u16 * sub_81141E4(const u16 * a0)
 {
     const u16 * r4 = sub_8113E88(6, a0);
 
@@ -3794,12 +3791,12 @@ const u16 * sub_81141E4(const u16 * a0)
     return r4;
 }
 
-u16 * sub_811422C(u16 * a0, const u16 * a1)
+static u16 * sub_811422C(u16 * a0, const u16 * a1)
 {
     return sub_811414C(7, a0, a1);
 }
 
-const u16 * sub_8114240(const u16 * a0)
+static const u16 * sub_8114240(const u16 * a0)
 {
     const u16 * r4 = sub_8113E88(7, a0);
 
@@ -3810,12 +3807,12 @@ const u16 * sub_8114240(const u16 * a0)
     return r4;
 }
 
-u16 * sub_8114288(u16 * a0, const u16 * a1)
+static u16 * sub_8114288(u16 * a0, const u16 * a1)
 {
     return sub_811414C(8, a0, a1);
 }
 
-const u16 * sub_811429C(const u16 * a0)
+static const u16 * sub_811429C(const u16 * a0)
 {
     const u16 * r4 = sub_8113E88(8, a0);
 
@@ -3838,12 +3835,12 @@ u16 * sub_81142E4(u16 a0, u16 * a1, const u16 * a2)
     return r1 + 3;
 }
 
-u16 * sub_8114310(u16 * a0, const u16 * a1)
+static u16 * sub_8114310(u16 * a0, const u16 * a1)
 {
     return sub_81142E4(9, a0, a1);
 }
 
-const u16 * sub_8114324(const u16 * a0)
+static const u16 * sub_8114324(const u16 * a0)
 {
     const u16 * r4 = sub_8113E88(9, a0);
     QuestLog_AutoGetSpeciesName(r4[2], gStringVar1, 0);
@@ -3854,12 +3851,12 @@ const u16 * sub_8114324(const u16 * a0)
     return r4;
 }
 
-u16 * sub_8114380(u16 * a0, const u16 * a1)
+static u16 * sub_8114380(u16 * a0, const u16 * a1)
 {
     return sub_81142E4(10, a0, a1);
 }
 
-const u16 * sub_8114394(const u16 * a0)
+static const u16 * sub_8114394(const u16 * a0)
 {
     const u16 * r4 = sub_8113E88(10, a0);
     QuestLog_AutoGetSpeciesName(r4[2], gStringVar2, 0);
@@ -3870,7 +3867,7 @@ const u16 * sub_8114394(const u16 * a0)
     return r4;
 }
 
-u16 * sub_81143F0(u16 * a0, const u16 * a1)
+static u16 * sub_81143F0(u16 * a0, const u16 * a1)
 {
     u16 * r4 = a0;
     if (gUnknown_203B044.unk_0 == 11 && gUnknown_203B044.unk_1 != 0)
@@ -3884,14 +3881,14 @@ u16 * sub_81143F0(u16 * a0, const u16 * a1)
     return r4 + 2;
 }
 
-const u16 * sub_811443C(const u16 * a0)
+static const u16 * sub_811443C(const u16 * a0)
 {
     StringExpandPlaceholders(gStringVar4, gUnknown_841A2B0);
     a0 += 2;
     return a0;
 }
 
-u16 * sub_811445C(u16 * a0, const u16 * a1)
+static u16 * sub_811445C(u16 * a0, const u16 * a1)
 {
     u16 * r4 = a0 + 4;
 
@@ -3905,7 +3902,7 @@ u16 * sub_811445C(u16 * a0, const u16 * a1)
     return r4;
 }
 
-const u16 * sub_811448C(const u16 * a0)
+static const u16 * sub_811448C(const u16 * a0)
 {
     const u16 * r6 = a0 + 4;
 
@@ -3920,25 +3917,25 @@ const u16 * sub_811448C(const u16 * a0)
     return r6;
 }
 
-const u8 *const gUnknown_8456ACC[] = {
+static const u8 *const gUnknown_8456ACC[] = {
     gUnknown_841A74E,
     gUnknown_841A756,
     gUnknown_841A762
 };
 
-const u8 *const gUnknown_8456AD8[] = {
+static const u8 *const gUnknown_8456AD8[] = {
     gUnknown_841AF98,
     gUnknown_841A762,
     gUnknown_841AF9F
 };
 
-const u8 *const gUnknown_8456AE4[] = {
+static const u8 *const gUnknown_8456AE4[] = {
     gUnknown_841A502,
     gUnknown_841A506,
     gUnknown_841AFD1
 };
 
-u16 * sub_81144EC(u16 * a0, const u16 * a1)
+static u16 * sub_81144EC(u16 * a0, const u16 * a1)
 {
     a0[0] = 13;
     a0[1] = gUnknown_203AF98;
@@ -3948,7 +3945,7 @@ u16 * sub_81144EC(u16 * a0, const u16 * a1)
     return a0;
 }
 
-const u16 * sub_8114518(const u16 * a0)
+static const u16 * sub_8114518(const u16 * a0)
 {
     DynamicPlaceholderTextUtil_Reset();
 
@@ -3962,7 +3959,7 @@ const u16 * sub_8114518(const u16 * a0)
     return a0;
 }
 
-u16 * sub_8114578(u16 * a0, const u16 * a1)
+static u16 * sub_8114578(u16 * a0, const u16 * a1)
 {
     a0[0] = 14;
     a0[1] = gUnknown_203AF98;
@@ -3972,7 +3969,7 @@ u16 * sub_8114578(u16 * a0, const u16 * a1)
     return a0;
 }
 
-const u16 * sub_81145A4(const u16 * a0)
+static const u16 * sub_81145A4(const u16 * a0)
 {
     DynamicPlaceholderTextUtil_Reset();
 
@@ -3986,7 +3983,7 @@ const u16 * sub_81145A4(const u16 * a0)
     return a0;
 }
 
-u16 * sub_8114604(u16 * a0, const u16 * a1)
+static u16 * sub_8114604(u16 * a0, const u16 * a1)
 {
     a0[0] = 15;
     a0[1] = gUnknown_203AF98;
@@ -3998,7 +3995,7 @@ u16 * sub_8114604(u16 * a0, const u16 * a1)
     return a0;
 }
 
-const u16 * sub_811464C(const u16 * a0)
+static const u16 * sub_811464C(const u16 * a0)
 {
     DynamicPlaceholderTextUtil_Reset();
 
@@ -4021,35 +4018,35 @@ const u16 * sub_811464C(const u16 * a0)
     return a0;
 }
 
-u16 * sub_8114710(u16 * a0, const u16 * a1)
+static u16 * sub_8114710(u16 * a0, const u16 * a1)
 {
     a0[0] = 16;
     a0[1] = gUnknown_203AF98;
     return a0 + 2;
 }
 
-const u16 * sub_8114724(const u16 * a0)
+static const u16 * sub_8114724(const u16 * a0)
 {
     StringExpandPlaceholders(gStringVar4, gUnknown_841A50B);
     a0 += 2;
     return a0;
 }
 
-u16 * sub_8114744(u16 * a0, const u16 * a1)
+static u16 * sub_8114744(u16 * a0, const u16 * a1)
 {
     a0[0] = 17;
     a0[1] = gUnknown_203AF98;
     return a0 + 2;
 }
 
-const u16 * sub_8114758(const u16 * a0)
+static const u16 * sub_8114758(const u16 * a0)
 {
     StringExpandPlaceholders(gStringVar4, gUnknown_841A732);
     a0 += 2;
     return a0;
 }
 
-u16 * sub_8114778(u16 * a0, const u16 * a1)
+static u16 * sub_8114778(u16 * a0, const u16 * a1)
 {
     u8 * r4 = (u8 *)(a0 + 4);
     a0[0] = 18;
@@ -4061,7 +4058,7 @@ u16 * sub_8114778(u16 * a0, const u16 * a1)
     return (u16 *)r4;
 }
 
-const u16 * sub_81147A8(const u16 * a0)
+static const u16 * sub_81147A8(const u16 * a0)
 {
     const u8 * r6 = (const u8 *)(a0 + 4);
     memset(gStringVar1, EOS, 8);
@@ -4074,7 +4071,7 @@ const u16 * sub_81147A8(const u16 * a0)
     return (const u16 *)r6;
 }
 
-u16 * sub_8114808(u16 * a0, const u16 * a1)
+static u16 * sub_8114808(u16 * a0, const u16 * a1)
 {
     a0[0] = 19;
     a0[1] = gUnknown_203AF98;
@@ -4084,7 +4081,7 @@ u16 * sub_8114808(u16 * a0, const u16 * a1)
     return a0;
 }
 
-const u16 * sub_8114834(const u16 * a0)
+static const u16 * sub_8114834(const u16 * a0)
 {
     memset(gStringVar1, EOS, 8);
     memcpy(gStringVar1, (const u8 *)a0 + 5, 7);
@@ -4095,7 +4092,7 @@ const u16 * sub_8114834(const u16 * a0)
     return a0;
 }
 
-u16 * sub_811488C(u16 * a0, const u16 * a1)
+static u16 * sub_811488C(u16 * a0, const u16 * a1)
 {
     a0 = sub_8113DE0(20, a0);
     if (a0 == NULL)
@@ -4107,7 +4104,7 @@ u16 * sub_811488C(u16 * a0, const u16 * a1)
     return a0 + 3;
 }
 
-const u16 * sub_81148BC(const u16 * a0)
+static const u16 * sub_81148BC(const u16 * a0)
 {
     const u8 * boxIdxs;
     a0 = sub_8113E88(20, a0);
@@ -4121,7 +4118,7 @@ const u16 * sub_81148BC(const u16 * a0)
     return a0 + 3;
 }
 
-u16 * sub_8114918(u16 * a0, const u16 * a1)
+static u16 * sub_8114918(u16 * a0, const u16 * a1)
 {
     a0 = sub_8113DE0(21, a0);
     if (a0 == NULL)
@@ -4132,7 +4129,7 @@ u16 * sub_8114918(u16 * a0, const u16 * a1)
     return a0 + 3;
 }
 
-const u16 * sub_8114944(const u16 * a0)
+static const u16 * sub_8114944(const u16 * a0)
 {
     const u8 * boxIdxs;
     a0 = sub_8113E88(21, a0);
@@ -4145,7 +4142,7 @@ const u16 * sub_8114944(const u16 * a0)
     return a0 + 3;
 }
 
-u16 * sub_8114990(u16 * a0, const u16 * a1)
+static u16 * sub_8114990(u16 * a0, const u16 * a1)
 {
     u16 * r2;
     u16 * ret;
@@ -4168,7 +4165,7 @@ u16 * sub_8114990(u16 * a0, const u16 * a1)
     return ret + 1;
 }
 
-const u16 * sub_81149D0(const u16 * a0)
+static const u16 * sub_81149D0(const u16 * a0)
 {
     const u8 * boxIdxs;
     a0 = sub_8113E88(22, a0);
@@ -4181,7 +4178,7 @@ const u16 * sub_81149D0(const u16 * a0)
     return a0 + 3;
 }
 
-u16 * sub_8114A1C(u16 * a0, const u16 * a1)
+static u16 * sub_8114A1C(u16 * a0, const u16 * a1)
 {
     u16 * r2;
     u16 * ret;
@@ -4195,7 +4192,7 @@ u16 * sub_8114A1C(u16 * a0, const u16 * a1)
     return ret + 1;
 }
 
-const u16 * sub_8114A4C(const u16 * a0)
+static const u16 * sub_8114A4C(const u16 * a0)
 {
     const u8 * boxIdxs;
     a0 = sub_8113E88(23, a0);
@@ -4208,7 +4205,7 @@ const u16 * sub_8114A4C(const u16 * a0)
     return (const u16 *)boxIdxs + 1;
 }
 
-u16 * sub_8114AA0(u16 * a0, const u16 * a1)
+static u16 * sub_8114AA0(u16 * a0, const u16 * a1)
 {
     u16 * r2;
     r2 = sub_8113DE0(24, a0);
@@ -4219,7 +4216,7 @@ u16 * sub_8114AA0(u16 * a0, const u16 * a1)
     return r2 + 2;
 }
 
-const u16 * sub_8114AC8(const u16 * a0)
+static const u16 * sub_8114AC8(const u16 * a0)
 {
     const u8 * boxIdxs;
     a0 = sub_8113E88(24, a0);
@@ -4231,7 +4228,7 @@ const u16 * sub_8114AC8(const u16 * a0)
     return (const u16 *)boxIdxs + 1;
 }
 
-u16 * sub_8114B0C(u16 * a0, const u16 * a1)
+static u16 * sub_8114B0C(u16 * a0, const u16 * a1)
 {
     u16 * r2;
     r2 = sub_8113DE0(25, a0);
@@ -4242,7 +4239,7 @@ u16 * sub_8114B0C(u16 * a0, const u16 * a1)
     return r2 + 2;
 }
 
-const u16 * sub_8114B34(const u16 * a0)
+static const u16 * sub_8114B34(const u16 * a0)
 {
     const u8 * boxIdxs;
     a0 = sub_8113E88(25, a0);
@@ -4254,7 +4251,7 @@ const u16 * sub_8114B34(const u16 * a0)
     return (const u16 *)boxIdxs + 1;
 }
 
-u16 * sub_8114B78(u16 * a0, const u16 * a1)
+static u16 * sub_8114B78(u16 * a0, const u16 * a1)
 {
     u16 * r2;
     r2 = sub_8113DE0(26, a0);
@@ -4265,7 +4262,7 @@ u16 * sub_8114B78(u16 * a0, const u16 * a1)
     return r2 + 2;
 }
 
-const u16 * sub_8114BA0(const u16 * a0)
+static const u16 * sub_8114BA0(const u16 * a0)
 {
     const u8 * boxIdxs;
     a0 = sub_8113E88(26, a0);
@@ -4277,7 +4274,7 @@ const u16 * sub_8114BA0(const u16 * a0)
     return (const u16 *)boxIdxs + 1;
 }
 
-u16 * sub_8114BE4(u16 * a0, const u16 * a1)
+static u16 * sub_8114BE4(u16 * a0, const u16 * a1)
 {
     u16 * r2;
     r2 = sub_8113DE0(27, a0);
@@ -4288,7 +4285,7 @@ u16 * sub_8114BE4(u16 * a0, const u16 * a1)
     return r2 + 1;
 }
 
-const u16 * sub_8114C0C(const u16 * a0)
+static const u16 * sub_8114C0C(const u16 * a0)
 {
     const u16 *r4 = sub_8113E88(27, a0);
     DynamicPlaceholderTextUtil_Reset();
@@ -4301,7 +4298,7 @@ const u16 * sub_8114C0C(const u16 * a0)
     return r4 + 1;
 }
 
-u16 * sub_8114C68(u16 * a0, const u16 * a1)
+static u16 * sub_8114C68(u16 * a0, const u16 * a1)
 {
     a0 = sub_8113DE0(28, a0);
     if (a0 == NULL)
@@ -4310,7 +4307,7 @@ u16 * sub_8114C68(u16 * a0, const u16 * a1)
     return a0 + 1;
 }
 
-const u16 * sub_8114C8C(const u16 * a0)
+static const u16 * sub_8114C8C(const u16 * a0)
 {
     const u16 *r4 = sub_8113E88(28, a0);
     CopyItemName(r4[0], gStringVar1);
@@ -4318,7 +4315,7 @@ const u16 * sub_8114C8C(const u16 * a0)
     return r4 + 1;
 }
 
-u16 * sub_8114CC0(u16 * a0, const u16 * a1)
+static u16 * sub_8114CC0(u16 * a0, const u16 * a1)
 {
     a0 = sub_8113DE0(29, a0);
     if (a0 == NULL)
@@ -4327,7 +4324,7 @@ u16 * sub_8114CC0(u16 * a0, const u16 * a1)
     return a0 + 1;
 }
 
-const u16 * sub_8114CE4(const u16 * a0)
+static const u16 * sub_8114CE4(const u16 * a0)
 {
     const u16 *r4 = sub_8113E88(29, a0);
     CopyItemName(r4[0], gStringVar1);
@@ -4348,13 +4345,13 @@ u16 * sub_8114D18(u16 a0, u16 * a1, const u16 * a2)
     return a1 + 4;
 }
 
-u16 * sub_8114D4C(u16 * a0, const u16 * a1)
+static u16 * sub_8114D4C(u16 * a0, const u16 * a1)
 {
     gUnknown_203B048 = TRUE;
     return sub_8114D18(30, a0, a1);
 }
 
-const u16 * sub_8114D68(const u16 * a0)
+static const u16 * sub_8114D68(const u16 * a0)
 {
     const u8 * r6;
     a0 = sub_8113E88(30, a0);
@@ -4370,7 +4367,7 @@ const u16 * sub_8114D68(const u16 * a0)
     return a0 + 4;
 }
 
-u16 * sub_8114DE8(u16 * a0, const u16 * a1)
+static u16 * sub_8114DE8(u16 * a0, const u16 * a1)
 {
     u16 * r4 = a0;
     u8 * r5 = (u8 *)a0 + 8;
@@ -4393,7 +4390,7 @@ u16 * sub_8114DE8(u16 * a0, const u16 * a1)
     return (u16 *)(r5 + 4);
 }
 
-const u16 * sub_8114E68(const u16 * a0)
+static const u16 * sub_8114E68(const u16 * a0)
 {
     const u8 * r6;
     if (!sub_8110944(a0, gUnknown_8456AA0[31]))
@@ -4441,7 +4438,7 @@ const u16 * sub_8114E68(const u16 * a0)
     return (const u16 *)(r6 + 4);
 }
 
-bool8 sub_8114FBC(u16 a0)
+static bool8 sub_8114FBC(u16 a0)
 {
     switch (a0)
     {
@@ -4454,13 +4451,13 @@ bool8 sub_8114FBC(u16 a0)
     return FALSE;
 }
 
-u16 * sub_8114FF0(u16 * a0, const u16 * a1)
+static u16 * sub_8114FF0(u16 * a0, const u16 * a1)
 {
     gUnknown_203B048 = TRUE;
     return sub_8114D18(32, a0, a1);
 }
 
-const u16 * sub_811500C(const u16 * a0)
+static const u16 * sub_811500C(const u16 * a0)
 {
     const u8 * r5;
     a0 = sub_8113E88(32, a0);
@@ -4474,7 +4471,7 @@ const u16 * sub_811500C(const u16 * a0)
     return a0 + 4;
 }
 
-u16 * sub_8115078(u16 * a0, const u16 * a1)
+static u16 * sub_8115078(u16 * a0, const u16 * a1)
 {
     if (!sub_8110944(a0, gUnknown_8456AA0[33]))
         return NULL;
@@ -4487,7 +4484,7 @@ u16 * sub_8115078(u16 * a0, const u16 * a1)
     return a0 + 5;
 }
 
-const u16 * sub_81150CC(const u16 * a0)
+static const u16 * sub_81150CC(const u16 * a0)
 {
     const u8 * r5;
     if (!sub_8110944(a0, gUnknown_8456AA0[33]))
@@ -4518,13 +4515,13 @@ const u16 * sub_81150CC(const u16 * a0)
     return (const u16 *)(r5 + 2);
 }
 
-u16 * sub_81151C0(u16 * a0, const u16 * a1)
+static u16 * sub_81151C0(u16 * a0, const u16 * a1)
 {
     gUnknown_203B048 = TRUE;
     return sub_8114D18(34, a0, a1);
 }
 
-const u16 * sub_81151DC(const u16 * a0)
+static const u16 * sub_81151DC(const u16 * a0)
 {
     const u16 * r5 = sub_8113E88(34, a0);
     const u8 * r6 = (const u8 *)r5 + 6;
@@ -4546,7 +4543,7 @@ const u16 * sub_81151DC(const u16 * a0)
     return (const u16 *)(r6 + 2);
 }
 
-const u8 *const gUnknown_8456AF0[] = {
+static const u8 *const gUnknown_8456AF0[] = {
         gUnknown_841B09F,
         gUnknown_841B0A4,
         gUnknown_841B0B5,
@@ -4600,7 +4597,7 @@ const u8 *const gUnknown_8456AF0[] = {
         gUnknown_841B277
 };
 
-const u8 *const gUnknown_8456BBC[] = {
+static const u8 *const gUnknown_8456BBC[] = {
         gUnknown_841A53A,
         gUnknown_841AD9E,
         gUnknown_841ADC8,
@@ -4613,7 +4610,7 @@ const u8 *const gUnknown_8456BBC[] = {
         gUnknown_841B005
 };
 
-const u8 gUnknown_8456BE4[] = {
+static const u8 gUnknown_8456BE4[] = {
         0x03,
         0x04,
         0x05,
@@ -4667,7 +4664,7 @@ const u8 gUnknown_8456BE4[] = {
         0x07
 };
 
-const u8 gUnknown_8456C17[] = {
+static const u8 gUnknown_8456C17[] = {
         0x5a,
         0x5b,
         0x5d,
@@ -4678,7 +4675,7 @@ const u8 gUnknown_8456C17[] = {
         0x59
 };
 
-const u8 *const gUnknown_8456C20[] = {
+static const u8 *const gUnknown_8456C20[] = {
         gUnknown_841AC51,
         gUnknown_841ABAB,
         gUnknown_841ABCD,
@@ -4693,7 +4690,7 @@ const u8 *const gUnknown_8456C20[] = {
         gUnknown_841AD3C
 };
 
-u16 * sub_8115280(u16 * a0, const u16 * a1)
+static u16 * sub_8115280(u16 * a0, const u16 * a1)
 {
     u16 * r2 = sub_8113DE0(35, a0);
     if (r2 == NULL)
@@ -4704,7 +4701,7 @@ u16 * sub_8115280(u16 * a0, const u16 * a1)
     return r2 + 1;
 }
 
-const u16 * sub_81152BC(const u16 * a0)
+static const u16 * sub_81152BC(const u16 * a0)
 {
     u8 r4, r6;
     const u16 * r5 = sub_8113E88(35, a0);
@@ -4738,7 +4735,7 @@ void sub_811539C(void)
     gUnknown_203B04B = TRUE;
 }
 
-bool8 sub_81153A8(u16 a0, u16 * a1)
+static bool8 sub_81153A8(u16 a0, u16 * a1)
 {
     if (a0 != 35)
     {
@@ -4751,7 +4748,7 @@ bool8 sub_81153A8(u16 a0, u16 * a1)
     return TRUE;
 }
 
-bool8 sub_81153E4(u16 a0, u16 * a1)
+static bool8 sub_81153E4(u16 a0, u16 * a1)
 {
     if (a0 != 35)
         return TRUE;
@@ -4761,7 +4758,7 @@ bool8 sub_81153E4(u16 a0, u16 * a1)
     return TRUE;
 }
 
-u16 * sub_8115410(u16 * a0, const u16 * a1)
+static u16 * sub_8115410(u16 * a0, const u16 * a1)
 {
     u8 * r3;
     a0 = sub_8113DE0(36, a0);
@@ -4778,7 +4775,7 @@ u16 * sub_8115410(u16 * a0, const u16 * a1)
     return (u16 *)(r3 + 2);
 }
 
-const u16 * sub_8115460(const u16 * a0)
+static const u16 * sub_8115460(const u16 * a0)
 {
     const u16 * r4 = sub_8113E88(36, a0);
     const u8 * r5 = (const u8 *)r4 + 2;
@@ -4796,7 +4793,7 @@ const u16 * sub_8115460(const u16 * a0)
     return (const u16 *)(r5 + 2);
 }
 
-u16 * sub_81154DC(u16 * a0, const u16 * a1)
+static u16 * sub_81154DC(u16 * a0, const u16 * a1)
 {
     a0 = sub_8113DE0(37, a0);
     if (a0 == NULL)
@@ -4810,7 +4807,7 @@ u16 * sub_81154DC(u16 * a0, const u16 * a1)
     return a0 + 5;
 }
 
-const u16 * sub_8115518(const u16 * a0)
+static const u16 * sub_8115518(const u16 * a0)
 {
     const u16 * r4 = sub_8113E88(37, a0);
     const u8 * r7 = (const u8 *)r4 + 8;
@@ -4830,7 +4827,7 @@ const u16 * sub_8115518(const u16 * a0)
     return (const u16 *)(r7 + 2);
 }
 
-u16 * sub_81155A4(u16 * a0, const u16 * a1)
+static u16 * sub_81155A4(u16 * a0, const u16 * a1)
 {
     a0 = sub_8113DE0(38, a0);
     if (a0 == NULL)
@@ -4844,7 +4841,7 @@ u16 * sub_81155A4(u16 * a0, const u16 * a1)
     return a0 + 5;
 }
 
-const u16 * sub_81155E0(const u16 * a0) {
+static const u16 * sub_81155E0(const u16 * a0) {
     const u16 *r5 = sub_8113E88(38, a0);
     const u8 *r7 = (const u8 *) r5 + 8;
     u32 r6 = (r5[2] << 16) + r5[3];
@@ -4876,7 +4873,7 @@ const u16 * sub_81155E0(const u16 * a0) {
     return (const u16 *)(r7 + 2);
 }
 
-u16 * sub_81156D8(u16 * a0, const u16 * a1)
+static u16 * sub_81156D8(u16 * a0, const u16 * a1)
 {
     a0 = sub_8113DE0(40, a0);
     if (a0 == NULL)
@@ -4886,7 +4883,7 @@ u16 * sub_81156D8(u16 * a0, const u16 * a1)
     return a0 + 2;
 }
 
-const u16 * sub_8115700(const u16 * a0)
+static const u16 * sub_8115700(const u16 * a0)
 {
     const u16 * r4 = sub_8113E88(40, a0);
     const u8 * r5 = (const u8 *)r4 + 2;
@@ -4896,7 +4893,7 @@ const u16 * sub_8115700(const u16 * a0)
     return (const u16 *)(r5 + 2);
 }
 
-const u16 gUnknown_8456C50[] = {
+static const u16 gUnknown_8456C50[] = {
         0x0891,
         0x0892,
         0x0893,
@@ -4993,7 +4990,7 @@ void sub_8115798(void)
     }
 }
 
-u16 * sub_81157DC(u16 * a0, const u16 * a1)
+static u16 * sub_81157DC(u16 * a0, const u16 * a1)
 {
     a0 = sub_8113DE0(42, a0);
     if (a0 == NULL)
@@ -5002,7 +4999,7 @@ u16 * sub_81157DC(u16 * a0, const u16 * a1)
     return a0 + 1;
 }
 
-const u16 * sub_8115800(const u16 * a0)
+static const u16 * sub_8115800(const u16 * a0)
 {
     const u16 * r4 = sub_8113E88(42, a0);
     sub_80C4DF8(gStringVar1, r4[0]);

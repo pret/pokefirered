@@ -21,7 +21,8 @@
 #define FIRST_MAIL_IDX ITEM_ORANGE_MAIL
 
 #define ITEM_TO_MAIL(itemId) (itemId - FIRST_MAIL_IDX)
+#define MAIL(name) (ITEM_TO_MAIL(ITEM_##name##_MAIL))
 
-void ReadMail(struct MailStruct * mail, void (* callback)(void), bool8 messageExists);
+void ReadMail(struct MailStruct * mail, void (*savedCallback)(void), bool8 messageExists);
 
 #endif // GUARD_MAIL_H

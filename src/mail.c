@@ -145,84 +145,84 @@ static const u16 sGenderPals[][2] = {
 
 static const struct MailGfxData sGfxHeaders[] = {
 
-    [ITEM_TO_MAIL(ITEM_ORANGE_MAIL)]  = {
+    [MAIL(ORANGE)]  = {
         .pal = gFile_graphics_mail_orange_palette_pal,
         .tiles = gFile_graphics_mail_orange_tiles_sheet,
         .map = gFile_graphics_mail_orange_map_tilemap,
         .size = 0x2c0,
         .textpals = { RGB(10, 10, 10), RGB(25, 25, 25) }
     },
-    [ITEM_TO_MAIL(ITEM_HARBOR_MAIL)]  = {
+    [MAIL(HARBOR)]  = {
         .pal = gFile_graphics_mail_harbor_palette_pal,
         .tiles = gFile_graphics_mail_harbor_tiles_sheet,
         .map = gFile_graphics_mail_harbor_map_tilemap,
         .size = 0x2e0,
         .textpals = { RGB(31, 31, 31), RGB(17, 17, 17) }
     },
-    [ITEM_TO_MAIL(ITEM_GLITTER_MAIL)] = {
+    [MAIL(GLITTER)] = {
         .pal = gFile_graphics_mail_glitter_palette_pal,
         .tiles = gFile_graphics_mail_glitter_tiles_sheet,
         .map = gFile_graphics_mail_glitter_map_tilemap,
         .size = 0x400,
         .textpals = { RGB(10, 10, 10), RGB(25, 25, 25) }
     },
-    [ITEM_TO_MAIL(ITEM_MECH_MAIL)]    = {
+    [MAIL(MECH)]    = {
         .pal = gFile_graphics_mail_mech_palette_pal,
         .tiles = gFile_graphics_mail_mech_tiles_sheet,
         .map = gFile_graphics_mail_mech_map_tilemap,
         .size = 0x1e0,
         .textpals = { RGB(31, 31, 31), RGB(17, 17, 17) }
     },
-    [ITEM_TO_MAIL(ITEM_WOOD_MAIL)]    = {
+    [MAIL(WOOD)]    = {
         .pal = gFile_graphics_mail_wood_palette_pal,
         .tiles = gFile_graphics_mail_wood_tiles_sheet,
         .map = gFile_graphics_mail_wood_map_tilemap,
         .size = 0x2e0,
         .textpals = { RGB(31, 31, 31), RGB(17, 17, 17) }
     },
-    [ITEM_TO_MAIL(ITEM_WAVE_MAIL)]    = {
+    [MAIL(WAVE)]    = {
         .pal = gFile_graphics_mail_wave_palette_pal,
         .tiles = gFile_graphics_mail_wave_tiles_sheet,
         .map = gFile_graphics_mail_wave_map_tilemap,
         .size = 0x300,
         .textpals = { RGB(10, 10, 10), RGB(25, 25, 25) }
     },
-    [ITEM_TO_MAIL(ITEM_BEAD_MAIL)]    = {
+    [MAIL(BEAD)]    = {
         .pal = gFile_graphics_mail_bead_palette_pal,
         .tiles = gFile_graphics_mail_bead_tiles_sheet,
         .map = gFile_graphics_mail_bead_map_tilemap,
         .size = 0x140,
         .textpals = { RGB(31, 31, 31), RGB(17, 17, 17) }
     },
-    [ITEM_TO_MAIL(ITEM_SHADOW_MAIL)]  = {
+    [MAIL(SHADOW)]  = {
         .pal = gFile_graphics_mail_shadow_palette_pal,
         .tiles = gFile_graphics_mail_shadow_tiles_sheet,
         .map = gFile_graphics_mail_shadow_map_tilemap,
         .size = 0x300,
         .textpals = { RGB(31, 31, 31), RGB(17, 17, 17) }
     },
-    [ITEM_TO_MAIL(ITEM_TROPIC_MAIL)]  = {
+    [MAIL(TROPIC)]  = {
         .pal = gFile_graphics_mail_tropic_palette_pal,
         .tiles = gFile_graphics_mail_tropic_tiles_sheet,
         .map = gFile_graphics_mail_tropic_map_tilemap,
         .size = 0x220,
         .textpals = { RGB(10, 10, 10), RGB(25, 25, 25) }
     },
-    [ITEM_TO_MAIL(ITEM_DREAM_MAIL)]   = {
+    [MAIL(DREAM)]   = {
         .pal = gFile_graphics_mail_dream_palette_pal,
         .tiles = gFile_graphics_mail_dream_tiles_sheet,
         .map = gFile_graphics_mail_dream_map_tilemap,
         .size = 0x340,
         .textpals = { RGB(10, 10, 10), RGB(25, 25, 25) }
     },
-    [ITEM_TO_MAIL(ITEM_FAB_MAIL)]     = {
+    [MAIL(FAB)]     = {
         .pal = gFile_graphics_mail_fab_palette_pal,
         .tiles = gFile_graphics_mail_fab_tiles_sheet,
         .map = gFile_graphics_mail_fab_map_tilemap,
         .size = 0x2a0,
         .textpals = { RGB(10, 10, 10), RGB(25, 25, 25) }
     },
-    [ITEM_TO_MAIL(ITEM_RETRO_MAIL)]   = {
+    [MAIL(RETRO)]   = {
         .pal = gFile_graphics_mail_retro_palette_pal,
         .tiles = gFile_graphics_mail_retro_tiles_sheet,
         .map = gFile_graphics_mail_retro_map_tilemap,
@@ -238,7 +238,7 @@ static const struct MailEcWordLayout sLayout_3x3[] = {
 };
 
 static const struct MailAttrStruct sMessageLayouts_3x3[] = {
-    [ITEM_TO_MAIL(ITEM_ORANGE_MAIL)]  = {
+    [MAIL(ORANGE)]  = {
     	.numRows = 3,
     	.nameY = 0,
     	.nameX = 0,
@@ -246,7 +246,7 @@ static const struct MailAttrStruct sMessageLayouts_3x3[] = {
     	.messageLeft = 4,
     	.linesLayout = sLayout_3x3
     },
-    [ITEM_TO_MAIL(ITEM_HARBOR_MAIL)]  = {
+    [MAIL(HARBOR)]  = {
     	.numRows = 3,
     	.nameY = 0,
     	.nameX = 0,
@@ -254,7 +254,7 @@ static const struct MailAttrStruct sMessageLayouts_3x3[] = {
     	.messageLeft = 4,
     	.linesLayout = sLayout_3x3
     },
-    [ITEM_TO_MAIL(ITEM_GLITTER_MAIL)] = {
+    [MAIL(GLITTER)] = {
     	.numRows = 3,
     	.nameY = 0,
     	.nameX = 0,
@@ -262,7 +262,7 @@ static const struct MailAttrStruct sMessageLayouts_3x3[] = {
     	.messageLeft = 4,
     	.linesLayout = sLayout_3x3
     },
-    [ITEM_TO_MAIL(ITEM_MECH_MAIL)]    = {
+    [MAIL(MECH)]    = {
     	.numRows = 3,
     	.nameY = 0,
     	.nameX = 0,
@@ -270,7 +270,7 @@ static const struct MailAttrStruct sMessageLayouts_3x3[] = {
     	.messageLeft = 4,
     	.linesLayout = sLayout_3x3
     },
-    [ITEM_TO_MAIL(ITEM_WOOD_MAIL)]    = {
+    [MAIL(WOOD)]    = {
     	.numRows = 3,
     	.nameY = 0,
     	.nameX = 0,
@@ -278,7 +278,7 @@ static const struct MailAttrStruct sMessageLayouts_3x3[] = {
     	.messageLeft = 4,
     	.linesLayout = sLayout_3x3
     },
-    [ITEM_TO_MAIL(ITEM_WAVE_MAIL)]    = {
+    [MAIL(WAVE)]    = {
     	.numRows = 3,
     	.nameY = 0,
     	.nameX = 0,
@@ -286,7 +286,7 @@ static const struct MailAttrStruct sMessageLayouts_3x3[] = {
     	.messageLeft = 4,
     	.linesLayout = sLayout_3x3
     },
-    [ITEM_TO_MAIL(ITEM_BEAD_MAIL)]    = {
+    [MAIL(BEAD)]    = {
     	.numRows = 3,
     	.nameY = 0,
     	.nameX = 0,
@@ -294,7 +294,7 @@ static const struct MailAttrStruct sMessageLayouts_3x3[] = {
     	.messageLeft = 4,
     	.linesLayout = sLayout_3x3
     },
-    [ITEM_TO_MAIL(ITEM_SHADOW_MAIL)]  = {
+    [MAIL(SHADOW)]  = {
     	.numRows = 3,
     	.nameY = 0,
     	.nameX = 0,
@@ -302,7 +302,7 @@ static const struct MailAttrStruct sMessageLayouts_3x3[] = {
     	.messageLeft = 4,
     	.linesLayout = sLayout_3x3
     },
-    [ITEM_TO_MAIL(ITEM_TROPIC_MAIL)]  = {
+    [MAIL(TROPIC)]  = {
     	.numRows = 3,
     	.nameY = 0,
     	.nameX = 0,
@@ -310,7 +310,7 @@ static const struct MailAttrStruct sMessageLayouts_3x3[] = {
     	.messageLeft = 4,
     	.linesLayout = sLayout_3x3
     },
-    [ITEM_TO_MAIL(ITEM_DREAM_MAIL)]   = {
+    [MAIL(DREAM)]   = {
     	.numRows = 3,
     	.nameY = 0,
     	.nameX = 0,
@@ -318,7 +318,7 @@ static const struct MailAttrStruct sMessageLayouts_3x3[] = {
     	.messageLeft = 4,
     	.linesLayout = sLayout_3x3
     },
-    [ITEM_TO_MAIL(ITEM_FAB_MAIL)]     = {
+    [MAIL(FAB)]     = {
     	.numRows = 3,
     	.nameY = 8,
     	.nameX = 0,
@@ -326,7 +326,7 @@ static const struct MailAttrStruct sMessageLayouts_3x3[] = {
     	.messageLeft = 4,
     	.linesLayout = sLayout_3x3
     },
-    [ITEM_TO_MAIL(ITEM_RETRO_MAIL)]   = {
+    [MAIL(RETRO)]   = {
     	.numRows = 3,
     	.nameY = 0,
     	.nameX = 0,
@@ -345,7 +345,7 @@ static const struct MailEcWordLayout sLayout_5x2[] = {
 };
 
 static const struct MailAttrStruct sMessageLayouts_5x2[] = {
-    [ITEM_TO_MAIL(ITEM_ORANGE_MAIL)]  = {
+    [MAIL(ORANGE)]  = {
       	.numRows = 5,
       	.nameY = 0,
       	.nameX = 8,
@@ -353,7 +353,7 @@ static const struct MailAttrStruct sMessageLayouts_5x2[] = {
       	.messageLeft = 8,
       	.linesLayout = sLayout_5x2
     },
-    [ITEM_TO_MAIL(ITEM_HARBOR_MAIL)]  = {
+    [MAIL(HARBOR)]  = {
       	.numRows = 5,
       	.nameY = 3,
       	.nameX = 14,
@@ -361,7 +361,7 @@ static const struct MailAttrStruct sMessageLayouts_5x2[] = {
       	.messageLeft = 8,
       	.linesLayout = sLayout_5x2
     },
-    [ITEM_TO_MAIL(ITEM_GLITTER_MAIL)] = {
+    [MAIL(GLITTER)] = {
       	.numRows = 5,
       	.nameY = 0,
       	.nameX = 16,
@@ -369,7 +369,7 @@ static const struct MailAttrStruct sMessageLayouts_5x2[] = {
       	.messageLeft = 8,
       	.linesLayout = sLayout_5x2
     },
-    [ITEM_TO_MAIL(ITEM_MECH_MAIL)]    = {
+    [MAIL(MECH)]    = {
       	.numRows = 5,
       	.nameY = 0,
       	.nameX = 14,
@@ -377,7 +377,7 @@ static const struct MailAttrStruct sMessageLayouts_5x2[] = {
       	.messageLeft = 8,
       	.linesLayout = sLayout_5x2
     },
-    [ITEM_TO_MAIL(ITEM_WOOD_MAIL)]    = {
+    [MAIL(WOOD)]    = {
       	.numRows = 5,
       	.nameY = 3,
       	.nameX = 12,
@@ -385,7 +385,7 @@ static const struct MailAttrStruct sMessageLayouts_5x2[] = {
       	.messageLeft = 8,
       	.linesLayout = sLayout_5x2
     },
-    [ITEM_TO_MAIL(ITEM_WAVE_MAIL)]    = {
+    [MAIL(WAVE)]    = {
       	.numRows = 5,
       	.nameY = 0,
       	.nameX = 18,
@@ -393,7 +393,7 @@ static const struct MailAttrStruct sMessageLayouts_5x2[] = {
       	.messageLeft = 8,
       	.linesLayout = sLayout_5x2
     },
-    [ITEM_TO_MAIL(ITEM_BEAD_MAIL)]    = {
+    [MAIL(BEAD)]    = {
       	.numRows = 5,
       	.nameY = 0,
       	.nameX = 20,
@@ -401,7 +401,7 @@ static const struct MailAttrStruct sMessageLayouts_5x2[] = {
       	.messageLeft = 8,
       	.linesLayout = sLayout_5x2
     },
-    [ITEM_TO_MAIL(ITEM_SHADOW_MAIL)]  = {
+    [MAIL(SHADOW)]  = {
       	.numRows = 5,
       	.nameY = 6,
       	.nameX = 20,
@@ -409,7 +409,7 @@ static const struct MailAttrStruct sMessageLayouts_5x2[] = {
       	.messageLeft = 8,
       	.linesLayout = sLayout_5x2
     },
-    [ITEM_TO_MAIL(ITEM_TROPIC_MAIL)]  = {
+    [MAIL(TROPIC)]  = {
       	.numRows = 5,
       	.nameY = 0,
       	.nameX = 16,
@@ -417,7 +417,7 @@ static const struct MailAttrStruct sMessageLayouts_5x2[] = {
       	.messageLeft = 8,
       	.linesLayout = sLayout_5x2
     },
-    [ITEM_TO_MAIL(ITEM_DREAM_MAIL)]   = {
+    [MAIL(DREAM)]   = {
       	.numRows = 5,
       	.nameY = 0,
       	.nameX = 14,
@@ -425,7 +425,7 @@ static const struct MailAttrStruct sMessageLayouts_5x2[] = {
       	.messageLeft = 8,
       	.linesLayout = sLayout_5x2
     },
-    [ITEM_TO_MAIL(ITEM_FAB_MAIL)]     = {
+    [MAIL(FAB)]     = {
       	.numRows = 5,
       	.nameY = 8,
       	.nameX = 16,
@@ -433,7 +433,7 @@ static const struct MailAttrStruct sMessageLayouts_5x2[] = {
       	.messageLeft = 8,
       	.linesLayout = sLayout_5x2
     },
-    [ITEM_TO_MAIL(ITEM_RETRO_MAIL)]   = {
+    [MAIL(RETRO)]   = {
       	.numRows = 5,
       	.nameY = 0,
       	.nameX = 16,
@@ -443,7 +443,7 @@ static const struct MailAttrStruct sMessageLayouts_5x2[] = {
     },
 };
 
-void ReadMail(struct MailStruct * mail, void (* savedCallback)(void), bool8 messageExists)
+void ReadMail(struct MailStruct * mail, void (*savedCallback)(void), bool8 messageExists)
 {
     u16 sp0;
     u16 species;
@@ -458,8 +458,8 @@ void ReadMail(struct MailStruct * mail, void (* savedCallback)(void), bool8 mess
     }
     else
     {
-        sMailViewResources->mailType = 0;
-        messageExists = 0;
+        sMailViewResources->mailType = MAIL(ORANGE);
+        messageExists = FALSE;
     }
     switch (sMailViewResources->mailArrangementType)
     {
@@ -479,10 +479,10 @@ void ReadMail(struct MailStruct * mail, void (* savedCallback)(void), bool8 mess
         default:
             sMailViewResources->monIconType = MAIL_ICON_NONE;
             break;
-        case ITEM_TO_MAIL(ITEM_BEAD_MAIL):
+        case MAIL(BEAD):
             sMailViewResources->monIconType = MAIL_ICON_BEAD;
             break;
-        case ITEM_TO_MAIL(ITEM_DREAM_MAIL):
+        case MAIL(DREAM):
             sMailViewResources->monIconType = MAIL_ICON_DREAM;
             break;
         }

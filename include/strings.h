@@ -77,8 +77,8 @@ extern const u8 gText_Ferry[];
 extern const u8 gText_SecretBase[];
 extern const u8 gText_Hideout[];
 extern const u8 gText_FlyToWhere[];
-extern const u8 gText_PokemonLeague[];
-extern const u8 gText_PokemonCenter[];
+extern const u8 gStartMenuText_PokemonLeague[];
+extern const u8 gStartMenuText_PokemonCenter[];
 extern const u8 gText_ApostropheSBase[];
 extern const u8 gText_NoRegistry[];
 extern const u8 gText_OkayToDeleteFromRegistry[];
@@ -90,7 +90,7 @@ extern const u8 gText_IsThisTheCorrectTime[];
 extern const u8 gText_PkmnFainted3[];
 extern const u8 gText_Coins[];
 extern const u8 gText_EggNickname[];
-extern const u8 gText_Pokemon[];
+extern const u8 gStartMenuText_Pokemon[];
 extern const u8 gText_PkmnFainted3[];
 
 extern const u8 gOtherText_Use[];
@@ -425,5 +425,51 @@ extern const u8 gText_CommunicationCompleted[];
 extern const u8 gText_HaventReceivedGiftOkayToDiscard[];
 extern const u8 gText_SendingWonderCard[];
 extern const u8 gText_SendingWonderNews[];
+
+// player_pc
+extern const u8 gText_WhatWouldYouLikeToDo[];
+extern const u8 gText_TakeOutItemsFromThePC[];
+extern const u8 gText_StoreItemsInThePC[];
+extern const u8 gText_GoBackToThePreviousMenu[];
+extern const u8 gText_ItemStorage[];
+extern const u8 gText_Mailbox[];
+extern const u8 gText_TurnOff[];
+extern const u8 gText_WithdrawItem2[];
+extern const u8 gText_DepositItem2[];
+extern const u8 gOtherText_Read[];
+extern const u8 gOtherText_MoveToBag[];
+extern const u8 gOtherText_Give2[];
+extern const u8 gText_TheresNoMailHere[];
+extern const u8 gText_ThereAreNoItems[];
+extern const u8 gText_WhatWouldYouLikeToDoWithPlayersMail[];
+extern const u8 gText_MessageWillBeLost[];
+extern const u8 gText_BagIsFull[];
+extern const u8 gText_MailReturnedToBagMessageErased[];
+
+// start_menu
+extern const u8 gStartMenuText_Pokedex[];
+extern const u8 gStartMenuText_Pokemon[];
+extern const u8 gStartMenuText_Bag[];
+extern const u8 gStartMenuText_Player[];
+extern const u8 gStartMenuText_Save[];
+extern const u8 gStartMenuText_Option[];
+extern const u8 gStartMenuText_Exit[];
+extern const u8 gStartMenuText_Retire[];
+extern const u8 gUnknown_84162A9[];
+extern const u8 gStartMenuDesc_Pokedex[];
+extern const u8 gStartMenuDesc_Pokemon[];
+extern const u8 gStartMenuDesc_Bag[];
+extern const u8 gStartMenuDesc_Player[];
+extern const u8 gStartMenuDesc_Save[];
+extern const u8 gStartMenuDesc_Option[];
+extern const u8 gStartMenuDesc_Exit[];
+extern const u8 gStartMenuDesc_Retire[];
+extern const u8 gStartMenuDesc_Player[];
+extern const u8 gText_SaveError_PleaseExchangeBackupMemory[];
+extern const u8 gText_SavingDontTurnOffThePower2[];
+extern const u8 gSaveStatName_Player[];
+extern const u8 gSaveStatName_Badges[];
+extern const u8 gSaveStatName_Pokedex[];
+extern const u8 gSaveStatName_Time[];
 
 #endif //GUARD_STRINGS_H

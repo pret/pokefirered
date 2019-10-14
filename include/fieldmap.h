@@ -26,4 +26,6 @@ u32 GetBehaviorByMetatileIdAndMapData(struct MapData *mapData, u16 metatile, u8 
 const struct MapHeader * mapconnection_get_mapheader(struct MapConnection * connection);
 struct MapConnection * GetMapConnectionAtPos(s16 x, s16 y);
 
+void save_serialize_map(void);
+
 #endif //GUARD_FIELDMAP_H

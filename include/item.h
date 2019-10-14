@@ -77,5 +77,6 @@ u16 GetPcItemQuantity(u16 *);
 void ItemPcCompaction(void);
 void RemoveItemFromPC(u16 itemId, u16 quantity);
 void SortAndCompactBagPocket(struct BagPocket * pocket);
+u8 CountItemsInPC(void);
 
 #endif // GUARD_ITEM_H

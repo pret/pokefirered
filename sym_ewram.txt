@@ -12,7 +12,7 @@
 	.align 2
 	.include "src/sprite.o"
 	.align 2
-    .include "src/string_util.o"
+	.include "src/string_util.o"
 	.align 2
 	.include "src/link.o"
 	.space 8
@@ -44,10 +44,10 @@ gBattle_BG3_X: @ 2022980
 gBattle_BG3_Y: @ 2022982
 	.space 0x2
 
-gUnknown_2022984: @ 2022984
+gBattle_WIN0H: @ 2022984
 	.space 0x2
 
-gUnknown_2022986: @ 2022986
+gBattle_WIN0V: @ 2022986
 	.space 0x2
 
 gUnknown_2022988: @ 2022988
@@ -510,9 +510,9 @@ gUnknown_203709C: @ 203709C
 	.space 0x4
 
 	.include "src/script.o"
-    .include "src/scrcmd.o"
+	.include "src/scrcmd.o"
 
-    .align 2
+	.align 2
 gSpecialVar_0x8000: @ 20370B8
 	.space 0x2
 
@@ -576,33 +576,13 @@ gUnknown_20370DE: @ 20370DE
 gUnknown_20370E0: @ 20370E0
 	.space 0x10
 
-gUnknown_20370F0: @ 20370F0
-	.space 0x4
-
-gUnknown_20370F4: @ 20370F4
-	.space 0x1
-
-gUnknown_20370F5: @ 20370F5
-	.space 0x1
-
-gUnknown_20370F6: @ 20370F6
-	.space 0x9
-
-gUnknown_20370FF: @ 20370FF
-	.space 0x1
-
-gUnknown_2037100: @ 2037100
-	.space 0x1
-
-gUnknown_2037101: @ 2037101
-	.space 0x3
-
-gUnknown_2037104: @ 2037104
-	.space 0x4
-
+	.align 2
+	.include "src/start_menu.o"
+	.align 2
 	.include "src/tileset_anims.o"
+	.align 2
 	.include "src/palette.o"
-
+	.align 2
 	.include "src/sound.o"
 
 	.align 2
@@ -621,7 +601,7 @@ gUnknown_2037EE0: @ 2037EE0
 gAnimScriptActive: @ 2037EE1
 	.space 0x1
 
-gUnknown_2037EE2: @ 2037EE2
+gAnimVisualTaskCount: @ 2037EE2
 	.space 0x1
 
 gUnknown_2037EE3: @ 2037EE3
@@ -669,16 +649,13 @@ gBattleAnimAttacker: @ 2037F1A
 gBattleAnimTarget: @ 2037F1B
 	.space 0x1
 
-gUnknown_2037F1C: @ 2037F1C
+gAnimBattlerSpecies: @ 2037F1C
 	.space 0x8
 
 gUnknown_2037F24: @ 2037F24
 	.space 0x4
 
-gUnknown_2037F28: @ 2037F28
-	.space 0x8
-
-	.align 2
+	.include "src/battle_anim_mons.o"
 	.include "src/title_screen.o"
 
 	.align 2
@@ -881,15 +858,11 @@ gUnknown_203998C: @ 203998C
 gUnknown_203999C: @ 203999C
 	.space 0x8
 
-gUnknown_20399A4: @ 20399A4
-	.space 0x10
+	.include "src/dragon.o"
+	.include "src/battle_anim_utility_funcs.o"
+	.include "src/battle_intro.o"
 
-gUnknown_20399B4: @ 20399B4
-	.space 0x4
-
-gUnknown_20399B8: @ 20399B8
-	.space 0x4
-
+	.align 2
 gUnknown_20399BC: @ 20399BC
 	.space 0x4
 
@@ -985,18 +958,9 @@ gUnknown_203AAB4: @ 203AAB4
 gUnknown_203AAB8: @ 203AAB8
 	.space 0x4
 
-gUnknown_203AABC: @ 203AABC
-	.space 0x4
-
-gUnknown_203AAC0: @ 203AAC0
-	.space 0x4
-
-gUnknown_203AAC4: @ 203AAC4
-	.space 0x2
-
-gUnknown_203AAC6: @ 203AAC6
-	.space 0xE
-
+	.align 2
+	.include "src/player_pc.o"
+	.align 2
 	.include "src/intro.o"
 
 	.align 2

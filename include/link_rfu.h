@@ -41,5 +41,6 @@ u32 GetRfuRecvQueueLength(void);
 void sub_80F8DC0(void);
 void sub_80FBB20(void);
 bool8 sub_80FA484(bool32 a0);
+void var_800D_set_xB(void);
 
 #endif //GUARD_LINK_RFU_H

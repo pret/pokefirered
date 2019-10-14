@@ -18,11 +18,6 @@ struct LinkPlayerMapObject
     u8 mode;
 };
 
-struct UCoords32
-{
-    u32 x, y;
-};
-
 struct CreditsOverworldCmd
 {
     s16 unk_0;
@@ -43,6 +38,7 @@ extern MainCallback gFieldCallback;
 extern struct WarpData gUnknown_2031DBC;
 
 extern u8 gUnknown_2031DE0;
+extern u8 gUnknown_300502C;
 
 void IncrementGameStat(u8 index);
 
@@ -113,7 +109,6 @@ u32 sub_8054C04(void);
 extern u8 gDisableMapMusicChangeOnMapLoad;
 extern u8 gUnknown_2036E28;
 
-extern void (*gFieldCallback)(void);
 extern bool8 (* gFieldCallback2)(void);
 
 void SetLastHealLocationWarp(u8 healLocaionId);
@@ -143,5 +138,7 @@ void Overworld_CreditsMainCB(void);
 bool32 Overworld_DoScrollSceneForCredits(u8 *, const struct CreditsOverworldCmd *, u8);
 
 bool32 sub_8058318(void);
+
+void CB2_ReturnToStartMenu(void);
 
 #endif //GUARD_OVERWORLD_H

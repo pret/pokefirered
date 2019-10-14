@@ -29,7 +29,7 @@ extern bool8 gHelpSystemEnabled;
 extern u8 gUnknown_203F175;
 
 // help_system_812B1E0
-void sub_812B1E0(u8);
+void HelpSystem_SetSomeVariable(u8);
 void HelpSystem_SetSomeVariable2(u8);
 bool8 sub_812B40C(void);
 bool8 sub_812B45C(void);
@@ -89,5 +89,7 @@ void HelpSystem_FillPanel3(void);
 void PrintListMenuItems(void);
 void PlaceListMenuCursor(void);
 bool8 MoveCursor(u8 by, u8 dirn);
+void HelpSystem_BackupSomeVariable(void);
+void HelpSystem_RestoreSomeVariable(void);
 
 #endif //GUARD_HELP_SYSTEM_H

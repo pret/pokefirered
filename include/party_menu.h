@@ -83,5 +83,7 @@ void sub_8127EC4(u8 battlerId, u8 unk, u8 arrayIndex);
 bool8 IsMultiBattle(void);
 void sub_8126EDC(void);
 void sub_812256C(u8 *partyCount, u8 *icons, u8 side);
+void PartyMenuInit_FromPlayerPc(void);
+void CB2_PartyMenuFromStartMenu(void);
 
 #endif // GUARD_PARTY_MENU_H

@@ -538,6 +538,40 @@
 #define BGCNT_AFF512x512        0x8000
 #define BGCNT_AFF1024x1024      0xC000
 
+// WININ/OUT
+#define WININ_WIN0_BG0      (1 << 0)
+#define WININ_WIN0_BG1      (1 << 1)
+#define WININ_WIN0_BG2      (1 << 2)
+#define WININ_WIN0_BG3      (1 << 3)
+#define WININ_WIN0_BG_ALL   (WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_BG3)
+#define WININ_WIN0_OBJ      (1 << 4)
+#define WININ_WIN0_CLR      (1 << 5)
+#define WININ_WIN1_BG0      (1 << 8)
+#define WININ_WIN1_BG1      (1 << 9)
+#define WININ_WIN1_BG2      (1 << 10)
+#define WININ_WIN1_BG3      (1 << 11)
+#define WININ_WIN1_BG_ALL   (WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG2 | WININ_WIN1_BG3)
+#define WININ_WIN1_OBJ      (1 << 12)
+#define WININ_WIN1_CLR      (1 << 13)
+
+#define WINOUT_WIN01_BG0    (1 << 0)
+#define WINOUT_WIN01_BG1    (1 << 1)
+#define WINOUT_WIN01_BG2    (1 << 2)
+#define WINOUT_WIN01_BG3    (1 << 3)
+#define WINOUT_WIN01_BG_ALL (WINOUT_WIN01_BG0 | WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2 | WINOUT_WIN01_BG3)
+#define WINOUT_WIN01_OBJ    (1 << 4)
+#define WINOUT_WIN01_CLR    (1 << 5)
+#define WINOUT_WINOBJ_BG0   (1 << 8)
+#define WINOUT_WINOBJ_BG1   (1 << 9)
+#define WINOUT_WINOBJ_BG2   (1 << 10)
+#define WINOUT_WINOBJ_BG3   (1 << 11)
+#define WINOUT_WINOBJ_BG_ALL (WINOUT_WINOBJ_BG0 | WINOUT_WINOBJ_BG1 | WINOUT_WINOBJ_BG2 | WINOUT_WINOBJ_BG3)
+#define WINOUT_WINOBJ_OBJ   (1 << 12)
+#define WINOUT_WINOBJ_CLR   (1 << 13)
+
+#define WIN_RANGE(a, b) (((a) << 8) | (b))
+#define WIN_RANGE2(a, b) ((b) | ((a) << 8))
+
 // BLDCNT
 // Bits 0-5 select layers for the 1st target
 #define BLDCNT_TGT1_BG0      (1 << 0)
@@ -558,9 +592,11 @@
 #define BLDCNT_TGT2_BG3      (1 << 11)
 #define BLDCNT_TGT2_OBJ      (1 << 12)
 #define BLDCNT_TGT2_BD       (1 << 13)
+#define BLDCNT_TGT2_ALL      (BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD)
 
 // BLDALPHA
 #define BLDALPHA_BLEND(target1, target2) (((target2) << 8) | (target1))
+#define BLDALPHA_BLEND2(target1, target2) ((target1) | ((target2) << 8))
 
 // SOUNDCNT_H
 #define SOUND_CGB_MIX_QUARTER 0x0000

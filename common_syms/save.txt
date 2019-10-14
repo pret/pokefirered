@@ -9,4 +9,4 @@ gSaveUnusedVar
 gSaveFileStatus
 gGameContinueCallback
 gRamSaveSectionLocations
-gUnknown_3005420
+gSaveSucceeded

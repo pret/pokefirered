@@ -204,7 +204,7 @@ _080BED8C:
 	movs r0, 0
 	movs r1, 0
 	bl SetGpuReg
-	ldr r0, _080BEDB0 @ =gUnknown_203AAC4
+	ldr r0, _080BEDB0 @ =gPlayerPcMenuManager
 	ldrb r0, [r0, 0x9]
 	cmp r0, 0
 	bne _080BEDB4
@@ -212,7 +212,7 @@ _080BED8C:
 	bl HelpSystem_SetSomeVariable2
 	b _080BF0F4
 	.align 2, 0
-_080BEDB0: .4byte gUnknown_203AAC4
+_080BEDB0: .4byte gPlayerPcMenuManager
 _080BEDB4:
 	movs r0, 0x1E
 	bl HelpSystem_SetSomeVariable2

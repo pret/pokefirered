@@ -552,7 +552,7 @@ static void Task_TopMenuHandleInput(u8 taskId)
     if (FindTaskIdByFunc(Task_FCOpenOrCloseInfoBox) == 0xFF)
     {
         RunTextPrinters();
-        if ((JOY_NEW(SELECT_BUTTON)) && !sFameCheckerData->inPickMode && sFameCheckerData->savedCallback != ReturnToBagFromKeyItem)
+        if ((JOY_NEW(SELECT_BUTTON)) && !sFameCheckerData->inPickMode && sFameCheckerData->savedCallback != CB2_BagMenuFromStartMenu)
             task->func = Task_StartToCloseFameChecker;
         else if (JOY_NEW(START_BUTTON))
         {
@@ -802,7 +802,7 @@ static void WipeMsgBoxAndTransfer(void)
 
 static void Setup_DrawMsgAndListBoxes(void)
 {
-    sub_80F6E9C();
+    LoadStdWindowFrameGfx();
     DrawDialogueFrame(FCWINDOWID_MSGBOX, TRUE);
     FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_MSGBOX);
     FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_LIST);

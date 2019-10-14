@@ -1158,4 +1158,14 @@ extern const u8 EventScript_ItemfinderDigUpUnderfootItem[];
 // new_game
 extern const u8 EventScript_ResetAllMapFlags[];
 
+// player_pc
+extern const u8 EventScript_PalletTown_PlayersHouse_2F_ShutDownPC[];
+
+// start_menu
+extern const u8 gText_WouldYouLikeToSaveTheGame[];
+extern const u8 gText_AlreadySaveFile_WouldLikeToOverwrite[];
+extern const u8 gText_SavingDontTurnOffThePower[];
+extern const u8 gText_PlayerSavedTheGame[];
+extern const u8 gText_DifferentGameFile[];
+
 #endif //GUARD_EVENT_SCRIPTS_H

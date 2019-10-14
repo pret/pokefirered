@@ -1496,7 +1496,7 @@ _08081308: .4byte gReceivedRemoteLinkPlayers
 	thumb_func_start sub_808130C
 sub_808130C: @ 808130C
 	push {lr}
-	bl sub_806F67C
+	bl Field_AskSaveTheGame
 	pop {r0}
 	bx r0
 	thumb_func_end sub_808130C
@@ -2001,7 +2001,7 @@ _08081724:
 	ldr r0, _0808173C @ =c2_8056854
 _08081728:
 	str r0, [r1, 0x8]
-	ldr r0, _08081740 @ =sub_806FB7C
+	ldr r0, _08081740 @ =CB2_SetUpSaveAfterLinkBattle
 	bl SetMainCallback2
 	pop {r4,r5}
 	pop {r0}
@@ -2009,7 +2009,7 @@ _08081728:
 	.align 2, 0
 _08081738: .4byte gMain
 _0808173C: .4byte c2_8056854
-_08081740: .4byte sub_806FB7C
+_08081740: .4byte CB2_SetUpSaveAfterLinkBattle
 	thumb_func_end sub_8081668
 
 	thumb_func_start sub_8081744
@@ -2388,7 +2388,7 @@ sp02A_crash_sound: @ 8081A1C
 	ldr r0, _08081A2C @ =gSpecialVar_0x8006
 	ldrb r0, [r0]
 	ldr r1, _08081A30 @ =CB2_ReturnToFieldContinueScriptPlayMapMusic
-	bl sub_808B700
+	bl InitLinkPartnerTrainerCard
 	pop {r0}
 	bx r0
 	.align 2, 0

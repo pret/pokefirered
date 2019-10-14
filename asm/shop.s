@@ -386,7 +386,7 @@ sub_809AD8C: @ 809AD8C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_807AA70
+	bl field_weather_is_fade_finished
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

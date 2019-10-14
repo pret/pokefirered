@@ -139,37 +139,6 @@ gUnknown_84020E6:: @ 84020E6
 gUnknown_84020F8:: @ 84020F8
 	.incbin "baserom.gba", 0x4020F8, 0xE4
 
-gUnknown_84021DC:: @ 84021DC
-	.incbin "baserom.gba", 0x4021DC, 0xC
-
-gUnknown_84021E8:: @ 84021E8
-	.incbin "baserom.gba", 0x4021E8, 0x18
-
-gUnknown_8402200:: @ 8402200
-	.incbin "baserom.gba", 0x402200, 0x3
-
-gUnknown_8402203:: @ 8402203
-	.incbin "baserom.gba", 0x402203, 0x5
-
-gUnknown_8402208:: @ 8402208
-	.incbin "baserom.gba", 0x402208, 0x18
-
-gUnknown_8402220:: @ 8402220
-	.incbin "baserom.gba", 0x402220, 0x8
-
-gUnknown_8402228:: @ 8402228
-	.incbin "baserom.gba", 0x402228, 0x20
-
-gUnknown_8402248:: @ 8402248
-	.incbin "baserom.gba", 0x402248, 0x8
-
-gUnknown_8402250:: @ 8402250
-	.incbin "baserom.gba", 0x402250, 0x8
-
-gUnknown_8402258:: @ 8402258
-	.incbin "baserom.gba", 0x402258, 0x8
-
-
 	.section .rodata.battle_anim_special
 
 gUnknown_840BF3C:: @ 840BF3C

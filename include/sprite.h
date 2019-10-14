@@ -116,6 +116,7 @@ union AffineAnimCmd
     struct AffineAnimFrameCmd frame;
     struct AffineAnimLoopCmd loop;
     struct AffineAnimJumpCmd jump;
+    struct AffineAnimEndCmdAlt end;
 };
 
 #define AFFINEANIMCMDTYPE_LOOP 0x7FFD
@@ -251,6 +252,7 @@ extern s16 gSpriteCoordOffsetX;
 extern s16 gSpriteCoordOffsetY;
 extern const struct SpriteTemplate gDummySpriteTemplate;
 extern struct Sprite gSprites[];
+extern struct OamMatrix gOamMatrices[];
 
 void ResetSpriteData(void);
 void AnimateSprites(void);

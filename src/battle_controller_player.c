@@ -1191,7 +1191,7 @@ static void sub_80303A8(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     u8 battlerId = tExpTask_battler;
-    u16 v5 = sub_80768B0(battlerId);
+    u16 v5 = GetBattlerSpriteBGPriorityRank(battlerId);
     bool32 v6 = ((v5 ^ BIT_SIDE)) != B_SIDE_PLAYER;
     struct Sprite *sprite = &gSprites[gBattlerSpriteIds[battlerId]];
 
@@ -1222,7 +1222,7 @@ static void sub_80303A8(u8 taskId)
             u32 battlerIdAlt = battlerId;
             bool32 v6Alt = v6;
 
-            sub_8072E48(battlerIdAlt, v6Alt);
+            MoveBattlerSpriteToBG(battlerIdAlt, v6Alt);
         }
         ++data[15];
         break;

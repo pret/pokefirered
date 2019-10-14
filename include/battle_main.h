@@ -49,7 +49,7 @@ void CB2_QuitRecordedBattle(void);
 void sub_8038528(struct Sprite* sprite);
 void sub_8038A04(void); // unused
 void VBlankCB_Battle(void);
-void sub_8038B74(struct Sprite *sprite);
+void sub_801182C(struct Sprite *sprite);
 void sub_8011A1C(void);
 u32 sub_80391E0(u8 arrayId, u8 caseId);
 u32 sub_80397C4(u32 setId, u32 tableId);
@@ -67,7 +67,7 @@ void EndBounceEffect(u8 bank, bool8 b);
 void sub_8039E44(struct Sprite *sprite);
 void sub_8039E60(struct Sprite *sprite);
 void sub_8039E84(struct Sprite *sprite);
-void sub_8039E9C(struct Sprite *sprite);
+void sub_801236C(struct Sprite *sprite);
 void BeginBattleIntro(void);
 void SwitchInClearSetData(void);
 void FaintClearSetData(void);

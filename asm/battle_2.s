@@ -99,10 +99,10 @@ sub_800FE24: @ 800FE24
 	movs r0, 0x4A
 	movs r1, 0
 	bl SetGpuReg
-	ldr r1, _0800FF30 @ =gUnknown_2022984
+	ldr r1, _0800FF30 @ =gBattle_WIN0H
 	movs r0, 0xF0
 	strh r0, [r1]
-	ldr r0, _0800FF34 @ =gUnknown_2022986
+	ldr r0, _0800FF34 @ =gBattle_WIN0V
 	strh r4, [r0]
 	bl ScanlineEffect_Clear
 	ldr r0, _0800FF38 @ =gScanlineEffectRegBuffers
@@ -184,8 +184,8 @@ _0800FEA6:
 	.align 2, 0
 _0800FF28: .4byte 0x05006000
 _0800FF2C: .4byte 0x00005051
-_0800FF30: .4byte gUnknown_2022984
-_0800FF34: .4byte gUnknown_2022986
+_0800FF30: .4byte gBattle_WIN0H
+_0800FF34: .4byte gBattle_WIN0V
 _0800FF38: .4byte gScanlineEffectRegBuffers
 _0800FF3C: .4byte gUnknown_824EFE4
 _0800FF40: .4byte 0x0000ff10
@@ -3157,11 +3157,11 @@ VBlankCB_Battle: @ 80116F4
 	ldrh r1, [r0]
 	movs r0, 0x1E
 	bl SetGpuReg
-	ldr r0, _080117A8 @ =gUnknown_2022984
+	ldr r0, _080117A8 @ =gBattle_WIN0H
 	ldrh r1, [r0]
 	movs r0, 0x40
 	bl SetGpuReg
-	ldr r0, _080117AC @ =gUnknown_2022986
+	ldr r0, _080117AC @ =gBattle_WIN0V
 	ldrh r1, [r0]
 	movs r0, 0x44
 	bl SetGpuReg
@@ -3188,8 +3188,8 @@ _08011798: .4byte gBattle_BG2_X
 _0801179C: .4byte gBattle_BG2_Y
 _080117A0: .4byte gBattle_BG3_X
 _080117A4: .4byte gBattle_BG3_Y
-_080117A8: .4byte gUnknown_2022984
-_080117AC: .4byte gUnknown_2022986
+_080117A8: .4byte gBattle_WIN0H
+_080117AC: .4byte gBattle_WIN0V
 _080117B0: .4byte gUnknown_2022988
 _080117B4: .4byte gUnknown_202298A
 	thumb_func_end VBlankCB_Battle
@@ -3543,10 +3543,10 @@ sub_8011A1C: @ 8011A1C
 	movs r0, 0x4A
 	movs r1, 0
 	bl SetGpuReg
-	ldr r1, _08011B48 @ =gUnknown_2022984
+	ldr r1, _08011B48 @ =gBattle_WIN0H
 	movs r0, 0xF0
 	strh r0, [r1]
-	ldr r0, _08011B4C @ =gUnknown_2022986
+	ldr r0, _08011B4C @ =gBattle_WIN0V
 	strh r4, [r0]
 	bl ScanlineEffect_Clear
 	ldr r0, _08011B50 @ =gScanlineEffectRegBuffers
@@ -3643,8 +3643,8 @@ _08011A9C:
 	.align 2, 0
 _08011B40: .4byte 0x05006000
 _08011B44: .4byte 0x00005051
-_08011B48: .4byte gUnknown_2022984
-_08011B4C: .4byte gUnknown_2022986
+_08011B48: .4byte gBattle_WIN0H
+_08011B4C: .4byte gBattle_WIN0V
 _08011B50: .4byte gScanlineEffectRegBuffers
 _08011B54: .4byte 0x0000ff10
 _08011B58: .4byte gBattle_BG0_X
@@ -4145,16 +4145,16 @@ _08011F3C:
 	lsls r0, 16
 	lsrs r0, 16
 _08011F46:
-	ldr r1, _08011F4C @ =gUnknown_82349CC
+	ldr r1, _08011F4C @ =gMonFrontPicCoords
 	lsls r0, 2
 	b _08011F88
 	.align 2, 0
-_08011F4C: .4byte gUnknown_82349CC
+_08011F4C: .4byte gMonFrontPicCoords
 _08011F50:
-	ldr r0, _08011F68 @ =0x00000181
+	ldr r0, _08011F68 @ =0x00000181 @ SPECIES_CASTFORM
 	cmp r4, r0
 	bne _08011F74
-	ldr r0, _08011F6C @ =gUnknown_83AE03C
+	ldr r0, _08011F6C @ =gCastformFrontSpriteCoords
 	ldr r1, _08011F70 @ =gBattleMonForms
 	adds r1, r6, r1
 	ldrb r1, [r1]
@@ -4164,19 +4164,19 @@ _08011F50:
 	b _08011F8C
 	.align 2, 0
 _08011F68: .4byte 0x00000181
-_08011F6C: .4byte gUnknown_83AE03C
+_08011F6C: .4byte gCastformFrontSpriteCoords
 _08011F70: .4byte gBattleMonForms
 _08011F74:
 	movs r0, 0xCE
 	lsls r0, 1
 	cmp r4, r0
 	bls _08011F84
-	ldr r0, _08011F80 @ =gUnknown_82349CC
+	ldr r0, _08011F80 @ =gMonFrontPicCoords
 	b _08011F8A
 	.align 2, 0
-_08011F80: .4byte gUnknown_82349CC
+_08011F80: .4byte gMonFrontPicCoords
 _08011F84:
-	ldr r1, _08011FAC @ =gUnknown_82349CC
+	ldr r1, _08011FAC @ =gMonFrontPicCoords
 	lsls r0, r4, 2
 _08011F88:
 	adds r0, r1
@@ -4199,7 +4199,7 @@ _08011F8C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08011FAC: .4byte gUnknown_82349CC
+_08011FAC: .4byte gMonFrontPicCoords
 _08011FB0: .4byte sub_8011FB4
 	thumb_func_end SpriteCB_FaintOpponentMon
 

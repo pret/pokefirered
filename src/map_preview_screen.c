@@ -495,7 +495,7 @@ static void sub_80F83D0(u8 taskId)
         }
         break;
     case 2:
-        if (sub_807AA70())
+        if (field_weather_is_fade_finished())
         {
             Overworld_PlaySpecialMapMusic();
             data[0]++;

@@ -85,7 +85,7 @@ u16 gSaveUnusedVar;
 u16 gSaveFileStatus;
 void (*gGameContinueCallback)(void);
 struct SaveBlockChunk gRamSaveSectionLocations[0xE];
-u16 gUnknown_3005420;
+u16 gSaveSucceeded;
 
 EWRAM_DATA struct SaveSection gSaveDataBuffer = {0};
 EWRAM_DATA u32 gSaveUnusedVar2 = 0;
@@ -702,11 +702,11 @@ u8 TrySavingData(u8 saveType)
         else
             goto OK; // really?
     }
-    gUnknown_3005420 = 0xFF;
+    gSaveSucceeded = 0xFF;
     return 0xFF;
 
 OK:
-    gUnknown_3005420 = 1;
+    gSaveSucceeded = 1;
     return 1;
 }
 

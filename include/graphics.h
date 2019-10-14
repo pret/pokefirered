@@ -961,6 +961,36 @@ extern const u8 gFile_graphics_items_icon_palettes_sapphire_palette[];
 extern const u8 gFile_graphics_items_icons_return_to_field_arrow_sheet[];
 extern const u8 gFile_graphics_items_icon_palettes_return_to_field_arrow_palette[];
 
+// battle_anim_utility_funcs
+extern const u32 gFile_graphics_battle_anims_masks_curse_sheet[];
+extern const u32 gFile_graphics_battle_anims_masks_curse_tilemap[];
+extern const u32 gBattleStatMask_Gfx[];
+extern const u32 gBattleStatMask1_Pal[];
+extern const u32 gBattleStatMask2_Pal[];
+extern const u32 gBattleStatMask3_Pal[];
+extern const u32 gBattleStatMask4_Pal[];
+extern const u32 gBattleStatMask5_Pal[];
+extern const u32 gBattleStatMask6_Pal[];
+extern const u32 gBattleStatMask7_Pal[];
+extern const u32 gBattleStatMask8_Pal[];
+extern const u32 gBattleStatMask1_Tilemap[];
+extern const u32 gBattleStatMask2_Tilemap[];
+
+// dark
+extern const u32 gMetalShineGfx[];
+extern const u32 gMetalShinePalette[];
+extern const u32 gMetalShineTilemap[];
+
+// ghost
+extern const u32 gFile_graphics_battle_anims_backgrounds_scary_face_sheet[];
+extern const u32 gFile_graphics_battle_anims_backgrounds_scary_face_palette[];
+extern const u32 gFile_graphics_battle_anims_backgrounds_scary_face_player_tilemap[];
+
+// rock
+extern const u32 gFile_graphics_battle_anims_backgrounds_sandstorm_brew_tilemap[];
+extern const u32 gFile_graphics_battle_anims_backgrounds_sandstorm_brew_sheet[];
+extern const u32 gBattleAnimSpritePal_FlyingDirt[];
+
 // title_screen
 extern const u16 gGraphics_TitleScreen_PokemonFireRedLogoPals[];
 extern const u8 gGraphics_TitleScreen_PokemonFireRedLogoTiles[];
@@ -974,6 +1004,7 @@ extern const u8 gGraphics_TitleScreen_CopyrightPressStartMap[];
 extern const u16 gGraphics_TitleScreen_FirePals[];
 extern const u8 gGraphics_TitleScreen_BlankObjTiles[];
 
+// battle_gfx_sfx_util
 extern const u32 gHealthboxSinglesPlayerGfx[];
 extern const u32 gHealthboxSinglesOpponentGfx[];
 extern const u32 gHealthboxDoublesPlayerGfx[];
@@ -983,7 +1014,6 @@ extern const u32 gBlankGfxCompressed[];
 extern const u16 gBattleInterface_BallStatusBarPal[];
 extern const u16 gBattleInterface_BallDisplayPal[];
 extern const u32 gFile_graphics_interface_hp_numbers[];
-
 extern const u32 gGhostFrontPic[];
 extern const u32 gGhostPalette[];
 extern const u32 gSubstituteDollGfx[];

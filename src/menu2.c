@@ -485,7 +485,7 @@ void AddTextPrinterParameterized5(u8 windowId, u8 fontId, const u8 *str, u8 x, u
     AddTextPrinter(&printer, speed, callback);
 }
 
-void sub_812E6DC(u8 windowId, const u8 * src, u16 x, u16 y)
+void Menu_PrintFormatIntlPlayerName(u8 windowId, const u8 * src, u16 x, u16 y)
 {
     s32 i;
 

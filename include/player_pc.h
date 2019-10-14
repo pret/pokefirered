@@ -6,14 +6,16 @@
 
 // Exported type declarations
 
-struct PlayerPC_Unk_203AAC4
+struct PlayerPCItemPageStruct
 {
     u16 selectedRow;
     u16 scrollOffset;
-    u8 unk_4;
-    u8 unk_5;
-    u8 filler_6[4];
-    u8 unk_A;
+    u8 pageItems;
+    u8 count;
+    u8 filler_6[3];
+    u8 unk_9;
+    u8 scrollIndicatorId;
+    u8 filler_B[5];
 };
 
 // Exported RAM declarations

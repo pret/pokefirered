@@ -475,25 +475,25 @@ static void sub_807E31C(u8 taskId)
     }
 }
 
-static void sub_807E378(u8 taskId)
+static void Task_WaitFadeAndCreateStartMenuTask(u8 taskId)
 {
     if (sub_807E418() == TRUE)
     {
         DestroyTask(taskId);
-        CreateTask(sub_806F1F0, 80);
+        CreateTask(Task_StartMenuHandleInput, 80);
     }
 }
 
-void sub_807E3A0(void)
+void FadeTransition_FadeInOnReturnToStartMenu(void)
 {
     sub_807DC00();
-    CreateTask(sub_807E378, 80);
+    CreateTask(Task_WaitFadeAndCreateStartMenuTask, 80);
     ScriptContext2_Enable();
 }
 
-bool32 sub_807E3BC(void)
+bool8 FieldCB2_ReturnToStartMenuInit(void)
 {
-    sub_806F1D4();
+    SetUpReturnToStartMenu();
     return FALSE;
 }
 
@@ -522,7 +522,7 @@ static bool32 sub_807E40C(void)
 
 bool32 sub_807E418(void)
 {
-    if (sub_807AA70() == TRUE && sub_80F83B0())
+    if (field_weather_is_fade_finished() == TRUE && sub_80F83B0())
         return TRUE;
     else
         return FALSE;

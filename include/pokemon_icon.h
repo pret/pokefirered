@@ -18,5 +18,6 @@ void sub_8097070(struct Sprite *);
 u16 GetUnownLetterByPersonality(u32 personality);
 void sub_809718C(void);
 u8 CreateMonIcon(u16 species, void (*callback)(void), s16 x, s16 y, u8 subpriority, u32 personality, bool32 extra);
+u8 UpdateMonIconFrame(struct Sprite *sprite);
 
 #endif // GUARD_POKEMON_ICON_H

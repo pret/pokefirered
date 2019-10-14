@@ -290,7 +290,7 @@ _0804AB6C:
 	ldr r0, _0804ABC8 @ =0x0000ffd8
 	strh r0, [r4, 0x38]
 	adds r0, r4, 0
-	bl sub_8075068
+	bl InitAnimArcTranslation
 	mov r0, sp
 	ldrh r0, [r0]
 	strh r0, [r4, 0x6]
@@ -328,7 +328,7 @@ SpriteCB_TestBallThrow: @ 804ABD4
 	push {r7}
 	sub sp, 0x4
 	adds r7, r0, 0
-	bl AnimateBallThrow
+	bl TranslateAnimHorizontalArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804AC74
@@ -1692,7 +1692,7 @@ SpriteCB_PlayerMonSendOut_1: @ 804B684
 	ldrh r0, [r4, 0x3A]
 	strh r0, [r4, 0x6]
 	adds r0, r4, 0
-	bl sub_8075068
+	bl InitAnimArcTranslation
 	ldr r0, _0804B6D0 @ =SpriteCB_PlayerMonSendOut_2
 	str r0, [r4, 0x1C]
 	pop {r4}
@@ -1754,7 +1754,7 @@ SpriteCB_PlayerMonSendOut_2: @ 804B6D4
 _0804B736:
 	ldrh r4, [r5, 0x2E]
 	adds r0, r5, 0
-	bl sub_80755E0
+	bl AnimTranslateLinear
 	movs r1, 0x3A
 	ldrsh r0, [r5, r1]
 	movs r1, 0x3
@@ -1825,7 +1825,7 @@ _0804B78E:
 	b _0804B834
 _0804B7C8:
 	adds r0, r5, 0
-	bl AnimateBallThrow
+	bl TranslateAnimHorizontalArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804B834
@@ -2580,13 +2580,13 @@ _0804BD80:
 _0804BD84: .4byte SpriteCallbackDummy
 	thumb_func_end sub_804BD6C
 
-	thumb_func_start DestroySpriteAndFreeResources_
-DestroySpriteAndFreeResources_: @ 804BD88
+	thumb_func_start DestroySpriteAndFreeResources2
+DestroySpriteAndFreeResources2: @ 804BD88
 	push {lr}
 	bl DestroySpriteAndFreeResources
 	pop {r0}
 	bx r0
-	thumb_func_end DestroySpriteAndFreeResources_
+	thumb_func_end DestroySpriteAndFreeResources2
 
 	thumb_func_start sub_804BD94
 sub_804BD94: @ 804BD94

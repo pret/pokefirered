@@ -289,8 +289,8 @@ _081026D0:
 _08102758: .4byte gUnknown_84404C8
 	thumb_func_end sub_810250C
 
-	thumb_func_start sub_810275C
-sub_810275C: @ 810275C
+	thumb_func_start CB2_OpenPokedexFromStartMenu
+CB2_OpenPokedexFromStartMenu: @ 810275C
 	push {lr}
 	bl sub_810250C
 	movs r1, 0xC0
@@ -314,7 +314,7 @@ sub_810275C: @ 810275C
 	bx r0
 	.align 2, 0
 _08102794: .4byte sub_81024D4
-	thumb_func_end sub_810275C
+	thumb_func_end CB2_OpenPokedexFromStartMenu
 
 	thumb_func_start sub_8102798
 sub_8102798: @ 8102798
@@ -428,13 +428,13 @@ sub_8102858: @ 8102858
 	lsls r1, 7
 	movs r0, 0
 	bl SetGpuRegBits
-	ldr r0, _08102878 @ =sub_80568A8
+	ldr r0, _08102878 @ =CB2_ReturnToStartMenu
 	bl SetMainCallback2
 _08102874:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08102878: .4byte sub_80568A8
+_08102878: .4byte CB2_ReturnToStartMenu
 	thumb_func_end sub_8102858
 
 	thumb_func_start sub_810287C

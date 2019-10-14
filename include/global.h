@@ -76,6 +76,18 @@ extern u8 gStringVar2[];
 extern u8 gStringVar3[];
 extern u8 gStringVar4[];
 
+struct Coords8
+{
+    s8 x;
+    s8 y;
+};
+
+struct UCoords8
+{
+    u8 x;
+    u8 y;
+};
+
 struct Coords16
 {
     s16 x;
@@ -86,6 +98,18 @@ struct UCoords16
 {
     u16 x;
     u16 y;
+};
+
+struct Coords32
+{
+    s32 x;
+    s32 y;
+};
+
+struct UCoords32
+{
+    u32 x;
+    u32 y;
 };
 
 struct Time

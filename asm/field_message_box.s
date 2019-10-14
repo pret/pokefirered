@@ -75,7 +75,7 @@ _080693C4:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080693D4
-	bl sub_80F6E9C
+	bl LoadStdWindowFrameGfx
 	b _080693E2
 _080693D4:
 	bl sub_80F79A4

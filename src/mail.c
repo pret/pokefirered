@@ -600,11 +600,11 @@ static bool8 DoInitMailView(void)
         switch (sMailViewResources->monIconType)
         {
         case MAIL_ICON_BEAD:
-            sub_80970E0(iconId);
+            LoadMonIconPalette(iconId);
             sMailViewResources->monIconSpriteId = sub_8096ECC(iconId, SpriteCallbackDummy, 0x60, 0x80, 0, FALSE);
             break;
         case MAIL_ICON_DREAM:
-            sub_80970E0(iconId);
+            LoadMonIconPalette(iconId);
             sMailViewResources->monIconSpriteId = sub_8096ECC(iconId, SpriteCallbackDummy, 0x28, 0x80, 0, FALSE);
             break;
         }
@@ -726,7 +726,7 @@ static void ShowMailCB_Teardown(void)
         {
         case MAIL_ICON_BEAD:
         case MAIL_ICON_DREAM:
-            sub_8097168(sub_8096FD4(sMailViewResources->mail->species));
+            FreeMonIconPalette(sub_8096FD4(sMailViewResources->mail->species));
             sub_8097070(&gSprites[sMailViewResources->monIconSpriteId]);
             break;
         }

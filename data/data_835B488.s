@@ -514,27 +514,10 @@ gUnknown_83D3728:: @ 83D3728
 gUnknown_83D3740:: @ 83D3740
 	.incbin "baserom.gba", 0x3D3740, 0x60
 
-gUnknown_83D37A0:: @ 83D37A0
-	.incbin "baserom.gba", 0x3D37A0, 0x6E0
-
-gUnknown_83D3E80:: @ 83D3E80
-	.incbin "baserom.gba", 0x3D3E80, 0x1B8
-
-gUnknown_83D4038:: @ 83D4038
-	.incbin "baserom.gba", 0x3D4038, 0x30
-
-gUnknown_83D4068:: @ 83D4068
-	.incbin "baserom.gba", 0x3D4068, 0x44
-
-gUnknown_83D40AC:: @ 83D40AC
-	.incbin "baserom.gba", 0x3D40AC, 0x34
-
-gUnknown_83D40E0:: @ 83D40E0
-	.incbin "baserom.gba", 0x3D40E0, 0x8
-
-gUnknown_83D40E8:: @ 83D40E8
-	.incbin "baserom.gba", 0x3D40E8, 0x18
-
+	@ pokemon_icon
+	.section .rodata.83D4100
+	.align 2
+	@ fldeff_cut
 gUnknown_83D4100:: @ 83D4100
 	.incbin "baserom.gba", 0x3D4100, 0x4C
 

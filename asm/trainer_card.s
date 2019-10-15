@@ -3203,7 +3203,7 @@ _0808AAA4:
 	ldrh r0, [r1]
 	cmp r0, 0
 	beq _0808AAEE
-	bl sub_8097218
+	bl GetMonIconPaletteIndexFromSpecies
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r4, 20
@@ -3322,7 +3322,7 @@ _0808AB9A:
 	adds r0, r1
 	ldrh r0, [r0]
 	movs r1, 0
-	bl sub_8097028
+	bl GetMonIconTiles
 	adds r1, r0, 0
 	lsls r3, r4, 20
 	movs r0, 0x80

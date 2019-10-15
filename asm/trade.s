@@ -522,7 +522,7 @@ _0804CA4A:
 	str r1, [sp, 0x8]
 	adds r0, r5, 0
 	ldr r1, _0804CB44 @ =sub_809718C
-	bl sub_8096E18
+	bl CreateMonIcon
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, 0x28
@@ -581,7 +581,7 @@ _0804CABE:
 	str r0, [sp, 0x8]
 	adds r0, r5, 0
 	ldr r1, _0804CB44 @ =sub_809718C
-	bl sub_8096E18
+	bl CreateMonIcon
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, 0x2E
@@ -1212,7 +1212,7 @@ _0804D048:
 	str r1, [sp, 0x8]
 	adds r0, r5, 0
 	ldr r1, _0804D144 @ =sub_809718C
-	bl sub_8096E18
+	bl CreateMonIcon
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, 0x28
@@ -1271,7 +1271,7 @@ _0804D0BE:
 	str r0, [sp, 0x8]
 	adds r0, r5, 0
 	ldr r1, _0804D144 @ =sub_809718C
-	bl sub_8096E18
+	bl CreateMonIcon
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, 0x2E

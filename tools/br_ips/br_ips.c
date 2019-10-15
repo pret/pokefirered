@@ -19,7 +19,7 @@ static const char HELP[] = "br_ips\n"
                            "Options:\n"
                            "    -h - show this message and exit\n";
 
-#if !defined(__CYGWIN32__) && !defined(__APPLE__) && (_POSIX_C_SOURCE < 200809L || !_GNU_SOURCE)
+#if !defined(__CYGWIN__) && !defined(__APPLE__) && (_POSIX_C_SOURCE < 200809L || !_GNU_SOURCE)
 static int getline(char ** lineptr, size_t * n, FILE * stream) {
     // Static implementation of GNU getline
     int i = 0;

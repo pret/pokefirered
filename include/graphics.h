@@ -1487,8 +1487,8 @@ extern const u8 gMonIcon_Unown_W[];
 extern const u8 gMonIcon_Unown_X[];
 extern const u8 gMonIcon_Unown_Y[];
 extern const u8 gMonIcon_Unown_Z[];
-extern const u8 gMonIcon_Unown_Exclamation_Mark[];
-extern const u8 gMonIcon_Unown_Question_Mark[];
-extern const u8 gMonIcon_Question_Mark[];
+extern const u8 gMonIcon_Unown_ExclamationMark[];
+extern const u8 gMonIcon_Unown_QuestionMark[];
+extern const u8 gMonIcon_QuestionMark[];
 
 #endif //GUARD_GRAPHICS_H

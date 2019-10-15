@@ -23,7 +23,7 @@ static void DestroyMonIconInternal(struct Sprite * sprite);
 const u16 gMonIconPalettes[][16] = INCBIN_U16("graphics/pokemon/icon_palettes/icon_palette_0.gbapal", "graphics/pokemon/icon_palettes/icon_palette_1.gbapal", "graphics/pokemon/icon_palettes/icon_palette_2.gbapal");
 
 const u8 *const gMonIconTable[] = {
-    [SPECIES_NONE]        = gMonIcon_Question_Mark,
+    [SPECIES_NONE]        = gMonIcon_QuestionMark,
     [SPECIES_BULBASAUR]   = gMonIcon_Bulbasaur,
     [SPECIES_IVYSAUR]     = gMonIcon_Ivysaur,
     [SPECIES_VENUSAUR]    = gMonIcon_Venusaur,
@@ -275,31 +275,31 @@ const u8 *const gMonIconTable[] = {
     [SPECIES_LUGIA]       = gMonIcon_Lugia,
     [SPECIES_HO_OH]       = gMonIcon_Ho_Oh,
     [SPECIES_CELEBI]      = gMonIcon_Celebi,
-    [SPECIES_OLD_UNOWN_B] = gMonIcon_Question_Mark,
-    [SPECIES_OLD_UNOWN_C] = gMonIcon_Question_Mark,
-    [SPECIES_OLD_UNOWN_D] = gMonIcon_Question_Mark,
-    [SPECIES_OLD_UNOWN_E] = gMonIcon_Question_Mark,
-    [SPECIES_OLD_UNOWN_F] = gMonIcon_Question_Mark,
-    [SPECIES_OLD_UNOWN_G] = gMonIcon_Question_Mark,
-    [SPECIES_OLD_UNOWN_H] = gMonIcon_Question_Mark,
-    [SPECIES_OLD_UNOWN_I] = gMonIcon_Question_Mark,
-    [SPECIES_OLD_UNOWN_J] = gMonIcon_Question_Mark,
-    [SPECIES_OLD_UNOWN_K] = gMonIcon_Question_Mark,
-    [SPECIES_OLD_UNOWN_L] = gMonIcon_Question_Mark,
-    [SPECIES_OLD_UNOWN_M] = gMonIcon_Question_Mark,
-    [SPECIES_OLD_UNOWN_N] = gMonIcon_Question_Mark,
-    [SPECIES_OLD_UNOWN_O] = gMonIcon_Question_Mark,
-    [SPECIES_OLD_UNOWN_P] = gMonIcon_Question_Mark,
-    [SPECIES_OLD_UNOWN_Q] = gMonIcon_Question_Mark,
-    [SPECIES_OLD_UNOWN_R] = gMonIcon_Question_Mark,
-    [SPECIES_OLD_UNOWN_S] = gMonIcon_Question_Mark,
-    [SPECIES_OLD_UNOWN_T] = gMonIcon_Question_Mark,
-    [SPECIES_OLD_UNOWN_U] = gMonIcon_Question_Mark,
-    [SPECIES_OLD_UNOWN_V] = gMonIcon_Question_Mark,
-    [SPECIES_OLD_UNOWN_W] = gMonIcon_Question_Mark,
-    [SPECIES_OLD_UNOWN_X] = gMonIcon_Question_Mark,
-    [SPECIES_OLD_UNOWN_Y] = gMonIcon_Question_Mark,
-    [SPECIES_OLD_UNOWN_Z] = gMonIcon_Question_Mark,
+    [SPECIES_OLD_UNOWN_B] = gMonIcon_QuestionMark,
+    [SPECIES_OLD_UNOWN_C] = gMonIcon_QuestionMark,
+    [SPECIES_OLD_UNOWN_D] = gMonIcon_QuestionMark,
+    [SPECIES_OLD_UNOWN_E] = gMonIcon_QuestionMark,
+    [SPECIES_OLD_UNOWN_F] = gMonIcon_QuestionMark,
+    [SPECIES_OLD_UNOWN_G] = gMonIcon_QuestionMark,
+    [SPECIES_OLD_UNOWN_H] = gMonIcon_QuestionMark,
+    [SPECIES_OLD_UNOWN_I] = gMonIcon_QuestionMark,
+    [SPECIES_OLD_UNOWN_J] = gMonIcon_QuestionMark,
+    [SPECIES_OLD_UNOWN_K] = gMonIcon_QuestionMark,
+    [SPECIES_OLD_UNOWN_L] = gMonIcon_QuestionMark,
+    [SPECIES_OLD_UNOWN_M] = gMonIcon_QuestionMark,
+    [SPECIES_OLD_UNOWN_N] = gMonIcon_QuestionMark,
+    [SPECIES_OLD_UNOWN_O] = gMonIcon_QuestionMark,
+    [SPECIES_OLD_UNOWN_P] = gMonIcon_QuestionMark,
+    [SPECIES_OLD_UNOWN_Q] = gMonIcon_QuestionMark,
+    [SPECIES_OLD_UNOWN_R] = gMonIcon_QuestionMark,
+    [SPECIES_OLD_UNOWN_S] = gMonIcon_QuestionMark,
+    [SPECIES_OLD_UNOWN_T] = gMonIcon_QuestionMark,
+    [SPECIES_OLD_UNOWN_U] = gMonIcon_QuestionMark,
+    [SPECIES_OLD_UNOWN_V] = gMonIcon_QuestionMark,
+    [SPECIES_OLD_UNOWN_W] = gMonIcon_QuestionMark,
+    [SPECIES_OLD_UNOWN_X] = gMonIcon_QuestionMark,
+    [SPECIES_OLD_UNOWN_Y] = gMonIcon_QuestionMark,
+    [SPECIES_OLD_UNOWN_Z] = gMonIcon_QuestionMark,
     [SPECIES_TREECKO]     = gMonIcon_Treecko,
     [SPECIES_GROVYLE]     = gMonIcon_Grovyle,
     [SPECIES_SCEPTILE]    = gMonIcon_Sceptile,
@@ -461,8 +461,8 @@ const u8 *const gMonIconTable[] = {
     [SPECIES_UNOWN_X]     = gMonIcon_Unown_X,
     [SPECIES_UNOWN_Y]     = gMonIcon_Unown_Y,
     [SPECIES_UNOWN_Z]     = gMonIcon_Unown_Z,
-    [SPECIES_UNOWN_EMARK] = gMonIcon_Unown_Exclamation_Mark,
-    [SPECIES_UNOWN_QMARK] = gMonIcon_Unown_Question_Mark
+    [SPECIES_UNOWN_EMARK] = gMonIcon_Unown_ExclamationMark,
+    [SPECIES_UNOWN_QMARK] = gMonIcon_Unown_QuestionMark
 };
 
 const u8 gMonIconPaletteIndices[] = {
@@ -1102,9 +1102,9 @@ u16 MailSpeciesToIconSpecies(u16 species)
     }
 }
 
-const u8* GetMonIconTiles(u16 species, bool32 extra)
+const u8 *GetMonIconTiles(u16 species, bool32 extra)
 {
-    const u8* iconSprite = gMonIconTable[species];
+    const u8 *iconSprite = gMonIconTable[species];
     if (species == SPECIES_DEOXYS && extra == TRUE)
         iconSprite += 0x400;
     return iconSprite;
@@ -1151,6 +1151,7 @@ void FreeMonIconPalettes(void)
     for (i = 0; i < 6; i++)
         FreeSpritePaletteByTag(gMonIconPaletteTable[i].tag);
 }
+
 void SafeFreeMonIconPalette(u16 species)
 {
     u8 palIndex;
@@ -1184,7 +1185,8 @@ void LoadMonIconPalettesAt(u16 offset)
         }
     }
 }
-const u16* GetValidMonIconPalettePtr(u16 species)
+
+const u16 *GetValidMonIconPalettePtr(u16 species)
 {
     if (species > NUM_SPECIES)
         species = SPECIES_NONE;
@@ -1239,7 +1241,7 @@ u8 UpdateMonIconFrame(struct Sprite *sprite)
     return result;
 }
 
-static u8 CreateMonIconSprite(const struct MonIconSpriteTemplate *iconTemplate, s16 x, s16 y, u8 subpriority)
+static u8 CreateMonIconSprite(const struct MonIconSpriteTemplate * iconTemplate, s16 x, s16 y, u8 subpriority)
 {
     u8 spriteId;
 
@@ -1247,7 +1249,7 @@ static u8 CreateMonIconSprite(const struct MonIconSpriteTemplate *iconTemplate, 
 
     struct SpriteTemplate spriteTemplate =
     {
-        .tileTag = 0xFFFF,
+        .tileTag = SPRITE_INVALID_TAG,
         .paletteTag = iconTemplate->paletteTag,
         .oam = iconTemplate->oam,
         .anims = iconTemplate->anims,

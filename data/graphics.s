@@ -12196,7 +12196,7 @@ gFile_graphics_pokemon_back_pics_unown_exclamation_mark_back_pic:: @ 8E47FD4
 	.incbin "graphics/pokemon/unown/exclamation_mark/back.4bpp.lz"
 
 	.align 2
-gMonIcon_Unown_Exclamation_Mark:: @ 8E4819C
+gMonIcon_Unown_ExclamationMark:: @ 8E4819C
 	.incbin "graphics/pokemon/unown/exclamation_mark/icon.4bpp"
 
 	.align 2
@@ -12208,7 +12208,7 @@ gFile_graphics_pokemon_back_pics_unown_question_mark_back_pic:: @ 8E48758
 	.incbin "graphics/pokemon/unown/question_mark/back.4bpp.lz"
 
 	.align 2
-gMonIcon_Unown_Question_Mark:: @ 8E48958
+gMonIcon_Unown_QuestionMark:: @ 8E48958
 	.incbin "graphics/pokemon/unown/question_mark/icon.4bpp"
 
 	.align 2
@@ -13436,7 +13436,7 @@ gFile_graphics_trainers_palettes_old_man_back_pic:: @ 8E76F34
 	.incbin "graphics/trainers/palettes/old_man_back_pic.gbapal.lz"
 
 	.align 2
-gMonIcon_Question_Mark:: @ 8E76F5C
+gMonIcon_QuestionMark:: @ 8E76F5C
 	.incbin "graphics/pokemon/question_mark/icon.4bpp"
 
 	.align 2

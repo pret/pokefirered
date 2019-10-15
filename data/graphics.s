@@ -2608,7 +2608,7 @@ gFile_graphics_pokemon_palettes_bulbasaur_shiny_palette:: @ 8D30164
 	.incbin "graphics/pokemon/bulbasaur/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_bulbasaur_icon:: @ 8D3018C
+gMonIcon_Bulbasaur:: @ 8D3018C
 	.incbin "graphics/pokemon/bulbasaur/icon.4bpp"
 
 	.align 2
@@ -2632,7 +2632,7 @@ gFile_graphics_pokemon_palettes_ivysaur_shiny_palette:: @ 8D30C64
 	.incbin "graphics/pokemon/ivysaur/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_ivysaur_icon:: @ 8D30C8C
+gMonIcon_Ivysaur:: @ 8D30C8C
 	.incbin "graphics/pokemon/ivysaur/icon.4bpp"
 
 	.align 2
@@ -2656,7 +2656,7 @@ gFile_graphics_pokemon_palettes_venusaur_shiny_palette:: @ 8D31ADC
 	.incbin "graphics/pokemon/venusaur/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_venusaur_icon:: @ 8D31B04
+gMonIcon_Venusaur:: @ 8D31B04
 	.incbin "graphics/pokemon/venusaur/icon.4bpp"
 
 	.align 2
@@ -2680,7 +2680,7 @@ gFile_graphics_pokemon_palettes_charmander_shiny_palette:: @ 8D32470
 	.incbin "graphics/pokemon/charmander/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_charmander_icon:: @ 8D32498
+gMonIcon_Charmander:: @ 8D32498
 	.incbin "graphics/pokemon/charmander/icon.4bpp"
 
 	.align 2
@@ -2704,7 +2704,7 @@ gFile_graphics_pokemon_palettes_charmeleon_shiny_palette:: @ 8D32F80
 	.incbin "graphics/pokemon/charmeleon/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_charmeleon_icon:: @ 8D32FA8
+gMonIcon_Charmeleon:: @ 8D32FA8
 	.incbin "graphics/pokemon/charmeleon/icon.4bpp"
 
 	.align 2
@@ -2728,7 +2728,7 @@ gFile_graphics_pokemon_palettes_charizard_shiny_palette:: @ 8D33CF8
 	.incbin "graphics/pokemon/charizard/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_charizard_icon:: @ 8D33D20
+gMonIcon_Charizard:: @ 8D33D20
 	.incbin "graphics/pokemon/charizard/icon.4bpp"
 
 	.align 2
@@ -2752,7 +2752,7 @@ gFile_graphics_pokemon_palettes_squirtle_shiny_palette:: @ 8D3468C
 	.incbin "graphics/pokemon/squirtle/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_squirtle_icon:: @ 8D346B4
+gMonIcon_Squirtle:: @ 8D346B4
 	.incbin "graphics/pokemon/squirtle/icon.4bpp"
 
 	.align 2
@@ -2776,7 +2776,7 @@ gFile_graphics_pokemon_palettes_wartortle_shiny_palette:: @ 8D351F0
 	.incbin "graphics/pokemon/wartortle/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_wartortle_icon:: @ 8D35218
+gMonIcon_Wartortle:: @ 8D35218
 	.incbin "graphics/pokemon/wartortle/icon.4bpp"
 
 	.align 2
@@ -2800,7 +2800,7 @@ gFile_graphics_pokemon_palettes_blastoise_shiny_palette:: @ 8D35F78
 	.incbin "graphics/pokemon/blastoise/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_blastoise_icon:: @ 8D35FA0
+gMonIcon_Blastoise:: @ 8D35FA0
 	.incbin "graphics/pokemon/blastoise/icon.4bpp"
 
 	.align 2
@@ -2824,7 +2824,7 @@ gFile_graphics_pokemon_palettes_caterpie_shiny_palette:: @ 8D368C8
 	.incbin "graphics/pokemon/caterpie/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_caterpie_icon:: @ 8D368F0
+gMonIcon_Caterpie:: @ 8D368F0
 	.incbin "graphics/pokemon/caterpie/icon.4bpp"
 
 	.align 2
@@ -2848,7 +2848,7 @@ gFile_graphics_pokemon_palettes_metapod_shiny_palette:: @ 8D37168
 	.incbin "graphics/pokemon/metapod/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_metapod_icon:: @ 8D37188
+gMonIcon_Metapod:: @ 8D37188
 	.incbin "graphics/pokemon/metapod/icon.4bpp"
 
 	.align 2
@@ -2872,7 +2872,7 @@ gFile_graphics_pokemon_palettes_butterfree_shiny_palette:: @ 8D37D4C
 	.incbin "graphics/pokemon/butterfree/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_butterfree_icon:: @ 8D37D74
+gMonIcon_Butterfree:: @ 8D37D74
 	.incbin "graphics/pokemon/butterfree/icon.4bpp"
 
 	.align 2
@@ -2896,7 +2896,7 @@ gFile_graphics_pokemon_palettes_weedle_shiny_palette:: @ 8D38660
 	.incbin "graphics/pokemon/weedle/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_weedle_icon:: @ 8D38688
+gMonIcon_Weedle:: @ 8D38688
 	.incbin "graphics/pokemon/weedle/icon.4bpp"
 
 	.align 2
@@ -2920,7 +2920,7 @@ gFile_graphics_pokemon_palettes_kakuna_shiny_palette:: @ 8D38F90
 	.incbin "graphics/pokemon/kakuna/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_kakuna_icon:: @ 8D38FB4
+gMonIcon_Kakuna:: @ 8D38FB4
 	.incbin "graphics/pokemon/kakuna/icon.4bpp"
 
 	.align 2
@@ -2944,7 +2944,7 @@ gFile_graphics_pokemon_palettes_beedrill_shiny_palette:: @ 8D39B90
 	.incbin "graphics/pokemon/beedrill/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_beedrill_icon:: @ 8D39BB8
+gMonIcon_Beedrill:: @ 8D39BB8
 	.incbin "graphics/pokemon/beedrill/icon.4bpp"
 
 	.align 2
@@ -2968,7 +2968,7 @@ gFile_graphics_pokemon_palettes_pidgey_shiny_palette:: @ 8D3A5CC
 	.incbin "graphics/pokemon/pidgey/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_pidgey_icon:: @ 8D3A5F4
+gMonIcon_Pidgey:: @ 8D3A5F4
 	.incbin "graphics/pokemon/pidgey/icon.4bpp"
 
 	.align 2
@@ -2992,7 +2992,7 @@ gFile_graphics_pokemon_palettes_pidgeotto_shiny_palette:: @ 8D3B120
 	.incbin "graphics/pokemon/pidgeotto/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_pidgeotto_icon:: @ 8D3B148
+gMonIcon_Pidgeotto:: @ 8D3B148
 	.incbin "graphics/pokemon/pidgeotto/icon.4bpp"
 
 	.align 2
@@ -3016,7 +3016,7 @@ gFile_graphics_pokemon_palettes_pidgeot_shiny_palette:: @ 8D3BE64
 	.incbin "graphics/pokemon/pidgeot/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_pidgeot_icon:: @ 8D3BE8C
+gMonIcon_Pidgeot:: @ 8D3BE8C
 	.incbin "graphics/pokemon/pidgeot/icon.4bpp"
 
 	.align 2
@@ -3040,7 +3040,7 @@ gFile_graphics_pokemon_palettes_rattata_shiny_palette:: @ 8D3C7E4
 	.incbin "graphics/pokemon/rattata/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_rattata_icon:: @ 8D3C80C
+gMonIcon_Rattata:: @ 8D3C80C
 	.incbin "graphics/pokemon/rattata/icon.4bpp"
 
 	.align 2
@@ -3064,7 +3064,7 @@ gFile_graphics_pokemon_palettes_raticate_shiny_palette:: @ 8D3D2F4
 	.incbin "graphics/pokemon/raticate/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_raticate_icon:: @ 8D3D31C
+gMonIcon_Raticate:: @ 8D3D31C
 	.incbin "graphics/pokemon/raticate/icon.4bpp"
 
 	.align 2
@@ -3088,7 +3088,7 @@ gFile_graphics_pokemon_palettes_spearow_shiny_palette:: @ 8D3DD00
 	.incbin "graphics/pokemon/spearow/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_spearow_icon:: @ 8D3DD28
+gMonIcon_Spearow:: @ 8D3DD28
 	.incbin "graphics/pokemon/spearow/icon.4bpp"
 
 	.align 2
@@ -3112,7 +3112,7 @@ gFile_graphics_pokemon_palettes_fearow_shiny_palette:: @ 8D3E924
 	.incbin "graphics/pokemon/fearow/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_fearow_icon:: @ 8D3E94C
+gMonIcon_Fearow:: @ 8D3E94C
 	.incbin "graphics/pokemon/fearow/icon.4bpp"
 
 	.align 2
@@ -3136,7 +3136,7 @@ gFile_graphics_pokemon_palettes_ekans_shiny_palette:: @ 8D3F34C
 	.incbin "graphics/pokemon/ekans/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_ekans_icon:: @ 8D3F374
+gMonIcon_Ekans:: @ 8D3F374
 	.incbin "graphics/pokemon/ekans/icon.4bpp"
 
 	.align 2
@@ -3160,7 +3160,7 @@ gFile_graphics_pokemon_palettes_arbok_shiny_palette:: @ 8D3FEB8
 	.incbin "graphics/pokemon/arbok/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_arbok_icon:: @ 8D3FEE0
+gMonIcon_Arbok:: @ 8D3FEE0
 	.incbin "graphics/pokemon/arbok/icon.4bpp"
 
 	.align 2
@@ -3184,7 +3184,7 @@ gFile_graphics_pokemon_palettes_pikachu_shiny_palette:: @ 8D408D0
 	.incbin "graphics/pokemon/pikachu/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_pikachu_icon:: @ 8D408F8
+gMonIcon_Pikachu:: @ 8D408F8
 	.incbin "graphics/pokemon/pikachu/icon.4bpp"
 
 	.align 2
@@ -3208,7 +3208,7 @@ gFile_graphics_pokemon_palettes_raichu_shiny_palette:: @ 8D41458
 	.incbin "graphics/pokemon/raichu/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_raichu_icon:: @ 8D41480
+gMonIcon_Raichu:: @ 8D41480
 	.incbin "graphics/pokemon/raichu/icon.4bpp"
 
 	.align 2
@@ -3232,7 +3232,7 @@ gFile_graphics_pokemon_palettes_sandshrew_shiny_palette:: @ 8D41ECC
 	.incbin "graphics/pokemon/sandshrew/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_sandshrew_icon:: @ 8D41EF4
+gMonIcon_Sandshrew:: @ 8D41EF4
 	.incbin "graphics/pokemon/sandshrew/icon.4bpp"
 
 	.align 2
@@ -3256,7 +3256,7 @@ gFile_graphics_pokemon_palettes_sandslash_shiny_palette:: @ 8D42B70
 	.incbin "graphics/pokemon/sandslash/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_sandslash_icon:: @ 8D42B98
+gMonIcon_Sandslash:: @ 8D42B98
 	.incbin "graphics/pokemon/sandslash/icon.4bpp"
 
 	.align 2
@@ -3280,7 +3280,7 @@ gFile_graphics_pokemon_palettes_nidoran_f_shiny_palette:: @ 8D43524
 	.incbin "graphics/pokemon/nidoran_f/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_nidoran_f_icon:: @ 8D4354C
+gMonIcon_Nidoran_f:: @ 8D4354C
 	.incbin "graphics/pokemon/nidoran_f/icon.4bpp"
 
 	.align 2
@@ -3304,7 +3304,7 @@ gFile_graphics_pokemon_palettes_nidorina_shiny_palette:: @ 8D44048
 	.incbin "graphics/pokemon/nidorina/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_nidorina_icon:: @ 8D44070
+gMonIcon_Nidorina:: @ 8D44070
 	.incbin "graphics/pokemon/nidorina/icon.4bpp"
 
 	.align 2
@@ -3328,7 +3328,7 @@ gFile_graphics_pokemon_palettes_nidoqueen_shiny_palette:: @ 8D44CA8
 	.incbin "graphics/pokemon/nidoqueen/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_nidoqueen_icon:: @ 8D44CD0
+gMonIcon_Nidoqueen:: @ 8D44CD0
 	.incbin "graphics/pokemon/nidoqueen/icon.4bpp"
 
 	.align 2
@@ -3352,7 +3352,7 @@ gFile_graphics_pokemon_palettes_nidoran_m_shiny_palette:: @ 8D456D8
 	.incbin "graphics/pokemon/nidoran_m/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_nidoran_m_icon:: @ 8D45700
+gMonIcon_Nidoran_m:: @ 8D45700
 	.incbin "graphics/pokemon/nidoran_m/icon.4bpp"
 
 	.align 2
@@ -3376,7 +3376,7 @@ gFile_graphics_pokemon_palettes_nidorino_shiny_palette:: @ 8D46288
 	.incbin "graphics/pokemon/nidorino/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_nidorino_icon:: @ 8D462B0
+gMonIcon_Nidorino:: @ 8D462B0
 	.incbin "graphics/pokemon/nidorino/icon.4bpp"
 
 	.align 2
@@ -3400,7 +3400,7 @@ gFile_graphics_pokemon_palettes_nidoking_shiny_palette:: @ 8D47070
 	.incbin "graphics/pokemon/nidoking/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_nidoking_icon:: @ 8D47098
+gMonIcon_Nidoking:: @ 8D47098
 	.incbin "graphics/pokemon/nidoking/icon.4bpp"
 
 	.align 2
@@ -3424,7 +3424,7 @@ gFile_graphics_pokemon_palettes_clefairy_shiny_palette:: @ 8D47A4C
 	.incbin "graphics/pokemon/clefairy/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_clefairy_icon:: @ 8D47A74
+gMonIcon_Clefairy:: @ 8D47A74
 	.incbin "graphics/pokemon/clefairy/icon.4bpp"
 
 	.align 2
@@ -3448,7 +3448,7 @@ gFile_graphics_pokemon_palettes_clefable_shiny_palette:: @ 8D48534
 	.incbin "graphics/pokemon/clefable/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_clefable_icon:: @ 8D4855C
+gMonIcon_Clefable:: @ 8D4855C
 	.incbin "graphics/pokemon/clefable/icon.4bpp"
 
 	.align 2
@@ -3472,7 +3472,7 @@ gFile_graphics_pokemon_palettes_vulpix_shiny_palette:: @ 8D48FD4
 	.incbin "graphics/pokemon/vulpix/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_vulpix_icon:: @ 8D48FFC
+gMonIcon_Vulpix:: @ 8D48FFC
 	.incbin "graphics/pokemon/vulpix/icon.4bpp"
 
 	.align 2
@@ -3496,7 +3496,7 @@ gFile_graphics_pokemon_palettes_ninetales_shiny_palette:: @ 8D49C84
 	.incbin "graphics/pokemon/ninetales/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_ninetales_icon:: @ 8D49CA8
+gMonIcon_Ninetales:: @ 8D49CA8
 	.incbin "graphics/pokemon/ninetales/icon.4bpp"
 
 	.align 2
@@ -3520,7 +3520,7 @@ gFile_graphics_pokemon_palettes_jigglypuff_shiny_palette:: @ 8D4A5D0
 	.incbin "graphics/pokemon/jigglypuff/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_jigglypuff_icon:: @ 8D4A5F8
+gMonIcon_Jigglypuff:: @ 8D4A5F8
 	.incbin "graphics/pokemon/jigglypuff/icon.4bpp"
 
 	.align 2
@@ -3544,7 +3544,7 @@ gFile_graphics_pokemon_palettes_wigglytuff_shiny_palette:: @ 8D4B04C
 	.incbin "graphics/pokemon/wigglytuff/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_wigglytuff_icon:: @ 8D4B074
+gMonIcon_Wigglytuff:: @ 8D4B074
 	.incbin "graphics/pokemon/wigglytuff/icon.4bpp"
 
 	.align 2
@@ -3568,7 +3568,7 @@ gFile_graphics_pokemon_palettes_zubat_shiny_palette:: @ 8D4BA34
 	.incbin "graphics/pokemon/zubat/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_zubat_icon:: @ 8D4BA5C
+gMonIcon_Zubat:: @ 8D4BA5C
 	.incbin "graphics/pokemon/zubat/icon.4bpp"
 
 	.align 2
@@ -3592,7 +3592,7 @@ gFile_graphics_pokemon_palettes_golbat_shiny_palette:: @ 8D4C500
 	.incbin "graphics/pokemon/golbat/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_golbat_icon:: @ 8D4C528
+gMonIcon_Golbat:: @ 8D4C528
 	.incbin "graphics/pokemon/golbat/icon.4bpp"
 
 	.align 2
@@ -3616,7 +3616,7 @@ gFile_graphics_pokemon_palettes_oddish_shiny_palette:: @ 8D4CE74
 	.incbin "graphics/pokemon/oddish/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_oddish_icon:: @ 8D4CE9C
+gMonIcon_Oddish:: @ 8D4CE9C
 	.incbin "graphics/pokemon/oddish/icon.4bpp"
 
 	.align 2
@@ -3640,7 +3640,7 @@ gFile_graphics_pokemon_palettes_gloom_shiny_palette:: @ 8D4D9CC
 	.incbin "graphics/pokemon/gloom/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_gloom_icon:: @ 8D4D9F4
+gMonIcon_Gloom:: @ 8D4D9F4
 	.incbin "graphics/pokemon/gloom/icon.4bpp"
 
 	.align 2
@@ -3664,7 +3664,7 @@ gFile_graphics_pokemon_palettes_vileplume_shiny_palette:: @ 8D4E5DC
 	.incbin "graphics/pokemon/vileplume/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_vileplume_icon:: @ 8D4E604
+gMonIcon_Vileplume:: @ 8D4E604
 	.incbin "graphics/pokemon/vileplume/icon.4bpp"
 
 	.align 2
@@ -3688,7 +3688,7 @@ gFile_graphics_pokemon_palettes_paras_shiny_palette:: @ 8D4EF58
 	.incbin "graphics/pokemon/paras/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_paras_icon:: @ 8D4EF80
+gMonIcon_Paras:: @ 8D4EF80
 	.incbin "graphics/pokemon/paras/icon.4bpp"
 
 	.align 2
@@ -3712,7 +3712,7 @@ gFile_graphics_pokemon_palettes_parasect_shiny_palette:: @ 8D4FA54
 	.incbin "graphics/pokemon/parasect/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_parasect_icon:: @ 8D4FA7C
+gMonIcon_Parasect:: @ 8D4FA7C
 	.incbin "graphics/pokemon/parasect/icon.4bpp"
 
 	.align 2
@@ -3736,7 +3736,7 @@ gFile_graphics_pokemon_palettes_venonat_shiny_palette:: @ 8D50514
 	.incbin "graphics/pokemon/venonat/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_venonat_icon:: @ 8D5053C
+gMonIcon_Venonat:: @ 8D5053C
 	.incbin "graphics/pokemon/venonat/icon.4bpp"
 
 	.align 2
@@ -3760,7 +3760,7 @@ gFile_graphics_pokemon_palettes_venomoth_shiny_palette:: @ 8D5112C
 	.incbin "graphics/pokemon/venomoth/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_venomoth_icon:: @ 8D51154
+gMonIcon_Venomoth:: @ 8D51154
 	.incbin "graphics/pokemon/venomoth/icon.4bpp"
 
 	.align 2
@@ -3784,7 +3784,7 @@ gFile_graphics_pokemon_palettes_diglett_shiny_palette:: @ 8D519B8
 	.incbin "graphics/pokemon/diglett/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_diglett_icon:: @ 8D519E0
+gMonIcon_Diglett:: @ 8D519E0
 	.incbin "graphics/pokemon/diglett/icon.4bpp"
 
 	.align 2
@@ -3808,7 +3808,7 @@ gFile_graphics_pokemon_palettes_dugtrio_shiny_palette:: @ 8D52400
 	.incbin "graphics/pokemon/dugtrio/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_dugtrio_icon:: @ 8D52428
+gMonIcon_Dugtrio:: @ 8D52428
 	.incbin "graphics/pokemon/dugtrio/icon.4bpp"
 
 	.align 2
@@ -3832,7 +3832,7 @@ gFile_graphics_pokemon_palettes_meowth_shiny_palette:: @ 8D52E40
 	.incbin "graphics/pokemon/meowth/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_meowth_icon:: @ 8D52E68
+gMonIcon_Meowth:: @ 8D52E68
 	.incbin "graphics/pokemon/meowth/icon.4bpp"
 
 	.align 2
@@ -3856,7 +3856,7 @@ gFile_graphics_pokemon_palettes_persian_shiny_palette:: @ 8D53968
 	.incbin "graphics/pokemon/persian/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_persian_icon:: @ 8D53990
+gMonIcon_Persian:: @ 8D53990
 	.incbin "graphics/pokemon/persian/icon.4bpp"
 
 	.align 2
@@ -3880,7 +3880,7 @@ gFile_graphics_pokemon_palettes_psyduck_shiny_palette:: @ 8D54358
 	.incbin "graphics/pokemon/psyduck/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_psyduck_icon:: @ 8D54380
+gMonIcon_Psyduck:: @ 8D54380
 	.incbin "graphics/pokemon/psyduck/icon.4bpp"
 
 	.align 2
@@ -3904,7 +3904,7 @@ gFile_graphics_pokemon_palettes_golduck_shiny_palette:: @ 8D54EAC
 	.incbin "graphics/pokemon/golduck/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_golduck_icon:: @ 8D54ED4
+gMonIcon_Golduck:: @ 8D54ED4
 	.incbin "graphics/pokemon/golduck/icon.4bpp"
 
 	.align 2
@@ -3928,7 +3928,7 @@ gFile_graphics_pokemon_palettes_mankey_shiny_palette:: @ 8D5597C
 	.incbin "graphics/pokemon/mankey/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_mankey_icon:: @ 8D559A4
+gMonIcon_Mankey:: @ 8D559A4
 	.incbin "graphics/pokemon/mankey/icon.4bpp"
 
 	.align 2
@@ -3952,7 +3952,7 @@ gFile_graphics_pokemon_palettes_primeape_shiny_palette:: @ 8D564E8
 	.incbin "graphics/pokemon/primeape/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_primeape_icon:: @ 8D56510
+gMonIcon_Primeape:: @ 8D56510
 	.incbin "graphics/pokemon/primeape/icon.4bpp"
 
 	.align 2
@@ -3976,7 +3976,7 @@ gFile_graphics_pokemon_palettes_growlithe_shiny_palette:: @ 8D56FBC
 	.incbin "graphics/pokemon/growlithe/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_growlithe_icon:: @ 8D56FE4
+gMonIcon_Growlithe:: @ 8D56FE4
 	.incbin "graphics/pokemon/growlithe/icon.4bpp"
 
 	.align 2
@@ -4000,7 +4000,7 @@ gFile_graphics_pokemon_palettes_arcanine_shiny_palette:: @ 8D57D08
 	.incbin "graphics/pokemon/arcanine/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_arcanine_icon:: @ 8D57D30
+gMonIcon_Arcanine:: @ 8D57D30
 	.incbin "graphics/pokemon/arcanine/icon.4bpp"
 
 	.align 2
@@ -4024,7 +4024,7 @@ gFile_graphics_pokemon_palettes_poliwag_shiny_palette:: @ 8D58678
 	.incbin "graphics/pokemon/poliwag/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_poliwag_icon:: @ 8D586A0
+gMonIcon_Poliwag:: @ 8D586A0
 	.incbin "graphics/pokemon/poliwag/icon.4bpp"
 
 	.align 2
@@ -4048,7 +4048,7 @@ gFile_graphics_pokemon_palettes_poliwhirl_shiny_palette:: @ 8D590E4
 	.incbin "graphics/pokemon/poliwhirl/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_poliwhirl_icon:: @ 8D5910C
+gMonIcon_Poliwhirl:: @ 8D5910C
 	.incbin "graphics/pokemon/poliwhirl/icon.4bpp"
 
 	.align 2
@@ -4072,7 +4072,7 @@ gFile_graphics_pokemon_palettes_poliwrath_shiny_palette:: @ 8D59C0C
 	.incbin "graphics/pokemon/poliwrath/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_poliwrath_icon:: @ 8D59C34
+gMonIcon_Poliwrath:: @ 8D59C34
 	.incbin "graphics/pokemon/poliwrath/icon.4bpp"
 
 	.align 2
@@ -4096,7 +4096,7 @@ gFile_graphics_pokemon_palettes_abra_shiny_palette:: @ 8D5A620
 	.incbin "graphics/pokemon/abra/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_abra_icon:: @ 8D5A644
+gMonIcon_Abra:: @ 8D5A644
 	.incbin "graphics/pokemon/abra/icon.4bpp"
 
 	.align 2
@@ -4120,7 +4120,7 @@ gFile_graphics_pokemon_palettes_kadabra_shiny_palette:: @ 8D5B300
 	.incbin "graphics/pokemon/kadabra/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_kadabra_icon:: @ 8D5B328
+gMonIcon_Kadabra:: @ 8D5B328
 	.incbin "graphics/pokemon/kadabra/icon.4bpp"
 
 	.align 2
@@ -4144,7 +4144,7 @@ gFile_graphics_pokemon_palettes_alakazam_shiny_palette:: @ 8D5BF88
 	.incbin "graphics/pokemon/alakazam/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_alakazam_icon:: @ 8D5BFB0
+gMonIcon_Alakazam:: @ 8D5BFB0
 	.incbin "graphics/pokemon/alakazam/icon.4bpp"
 
 	.align 2
@@ -4168,7 +4168,7 @@ gFile_graphics_pokemon_palettes_machop_shiny_palette:: @ 8D5C964
 	.incbin "graphics/pokemon/machop/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_machop_icon:: @ 8D5C98C
+gMonIcon_Machop:: @ 8D5C98C
 	.incbin "graphics/pokemon/machop/icon.4bpp"
 
 	.align 2
@@ -4192,7 +4192,7 @@ gFile_graphics_pokemon_palettes_machoke_shiny_palette:: @ 8D5D4F0
 	.incbin "graphics/pokemon/machoke/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_machoke_icon:: @ 8D5D518
+gMonIcon_Machoke:: @ 8D5D518
 	.incbin "graphics/pokemon/machoke/icon.4bpp"
 
 	.align 2
@@ -4216,7 +4216,7 @@ gFile_graphics_pokemon_palettes_machamp_shiny_palette:: @ 8D5E2A8
 	.incbin "graphics/pokemon/machamp/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_machamp_icon:: @ 8D5E2D0
+gMonIcon_Machamp:: @ 8D5E2D0
 	.incbin "graphics/pokemon/machamp/icon.4bpp"
 
 	.align 2
@@ -4240,7 +4240,7 @@ gFile_graphics_pokemon_palettes_bellsprout_shiny_palette:: @ 8D5EC40
 	.incbin "graphics/pokemon/bellsprout/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_bellsprout_icon:: @ 8D5EC68
+gMonIcon_Bellsprout:: @ 8D5EC68
 	.incbin "graphics/pokemon/bellsprout/icon.4bpp"
 
 	.align 2
@@ -4264,7 +4264,7 @@ gFile_graphics_pokemon_palettes_weepinbell_shiny_palette:: @ 8D5F6D0
 	.incbin "graphics/pokemon/weepinbell/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_weepinbell_icon:: @ 8D5F6F8
+gMonIcon_Weepinbell:: @ 8D5F6F8
 	.incbin "graphics/pokemon/weepinbell/icon.4bpp"
 
 	.align 2
@@ -4288,7 +4288,7 @@ gFile_graphics_pokemon_palettes_victreebel_shiny_palette:: @ 8D60304
 	.incbin "graphics/pokemon/victreebel/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_victreebel_icon:: @ 8D6032C
+gMonIcon_Victreebel:: @ 8D6032C
 	.incbin "graphics/pokemon/victreebel/icon.4bpp"
 
 	.align 2
@@ -4312,7 +4312,7 @@ gFile_graphics_pokemon_palettes_tentacool_shiny_palette:: @ 8D60CE8
 	.incbin "graphics/pokemon/tentacool/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_tentacool_icon:: @ 8D60D10
+gMonIcon_Tentacool:: @ 8D60D10
 	.incbin "graphics/pokemon/tentacool/icon.4bpp"
 
 	.align 2
@@ -4336,7 +4336,7 @@ gFile_graphics_pokemon_palettes_tentacruel_shiny_palette:: @ 8D619E8
 	.incbin "graphics/pokemon/tentacruel/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_tentacruel_icon:: @ 8D61A10
+gMonIcon_Tentacruel:: @ 8D61A10
 	.incbin "graphics/pokemon/tentacruel/icon.4bpp"
 
 	.align 2
@@ -4360,7 +4360,7 @@ gFile_graphics_pokemon_palettes_geodude_shiny_palette:: @ 8D62374
 	.incbin "graphics/pokemon/geodude/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_geodude_icon:: @ 8D62390
+gMonIcon_Geodude:: @ 8D62390
 	.incbin "graphics/pokemon/geodude/icon.4bpp"
 
 	.align 2
@@ -4384,7 +4384,7 @@ gFile_graphics_pokemon_palettes_graveler_shiny_palette:: @ 8D62E4C
 	.incbin "graphics/pokemon/graveler/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_graveler_icon:: @ 8D62E70
+gMonIcon_Graveler:: @ 8D62E70
 	.incbin "graphics/pokemon/graveler/icon.4bpp"
 
 	.align 2
@@ -4408,7 +4408,7 @@ gFile_graphics_pokemon_palettes_golem_shiny_palette:: @ 8D639A8
 	.incbin "graphics/pokemon/golem/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_golem_icon:: @ 8D639D0
+gMonIcon_Golem:: @ 8D639D0
 	.incbin "graphics/pokemon/golem/icon.4bpp"
 
 	.align 2
@@ -4432,7 +4432,7 @@ gFile_graphics_pokemon_palettes_ponyta_shiny_palette:: @ 8D644E4
 	.incbin "graphics/pokemon/ponyta/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_ponyta_icon:: @ 8D6450C
+gMonIcon_Ponyta:: @ 8D6450C
 	.incbin "graphics/pokemon/ponyta/icon.4bpp"
 
 	.align 2
@@ -4456,7 +4456,7 @@ gFile_graphics_pokemon_palettes_rapidash_shiny_palette:: @ 8D651EC
 	.incbin "graphics/pokemon/rapidash/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_rapidash_icon:: @ 8D65214
+gMonIcon_Rapidash:: @ 8D65214
 	.incbin "graphics/pokemon/rapidash/icon.4bpp"
 
 	.align 2
@@ -4480,7 +4480,7 @@ gFile_graphics_pokemon_palettes_slowpoke_shiny_palette:: @ 8D65B94
 	.incbin "graphics/pokemon/slowpoke/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_slowpoke_icon:: @ 8D65BBC
+gMonIcon_Slowpoke:: @ 8D65BBC
 	.incbin "graphics/pokemon/slowpoke/icon.4bpp"
 
 	.align 2
@@ -4504,7 +4504,7 @@ gFile_graphics_pokemon_palettes_slowbro_shiny_palette:: @ 8D66840
 	.incbin "graphics/pokemon/slowbro/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_slowbro_icon:: @ 8D66868
+gMonIcon_Slowbro:: @ 8D66868
 	.incbin "graphics/pokemon/slowbro/icon.4bpp"
 
 	.align 2
@@ -4528,7 +4528,7 @@ gFile_graphics_pokemon_palettes_magnemite_shiny_palette:: @ 8D67070
 	.incbin "graphics/pokemon/magnemite/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_magnemite_icon:: @ 8D67094
+gMonIcon_Magnemite:: @ 8D67094
 	.incbin "graphics/pokemon/magnemite/icon.4bpp"
 
 	.align 2
@@ -4552,7 +4552,7 @@ gFile_graphics_pokemon_palettes_magneton_shiny_palette:: @ 8D67B98
 	.incbin "graphics/pokemon/magneton/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_magneton_icon:: @ 8D67BC0
+gMonIcon_Magneton:: @ 8D67BC0
 	.incbin "graphics/pokemon/magneton/icon.4bpp"
 
 	.align 2
@@ -4576,7 +4576,7 @@ gFile_graphics_pokemon_palettes_farfetch_d_shiny_palette:: @ 8D686C8
 	.incbin "graphics/pokemon/farfetch_d/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_farfetch_d_icon:: @ 8D686F0
+gMonIcon_Farfetch_d:: @ 8D686F0
 	.incbin "graphics/pokemon/farfetch_d/icon.4bpp"
 
 	.align 2
@@ -4600,7 +4600,7 @@ gFile_graphics_pokemon_palettes_doduo_shiny_palette:: @ 8D69138
 	.incbin "graphics/pokemon/doduo/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_doduo_icon:: @ 8D6915C
+gMonIcon_Doduo:: @ 8D6915C
 	.incbin "graphics/pokemon/doduo/icon.4bpp"
 
 	.align 2
@@ -4624,7 +4624,7 @@ gFile_graphics_pokemon_palettes_dodrio_shiny_palette:: @ 8D69E48
 	.incbin "graphics/pokemon/dodrio/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_dodrio_icon:: @ 8D69E70
+gMonIcon_Dodrio:: @ 8D69E70
 	.incbin "graphics/pokemon/dodrio/icon.4bpp"
 
 	.align 2
@@ -4648,7 +4648,7 @@ gFile_graphics_pokemon_palettes_seel_shiny_palette:: @ 8D6A8C8
 	.incbin "graphics/pokemon/seel/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_seel_icon:: @ 8D6A8F0
+gMonIcon_Seel:: @ 8D6A8F0
 	.incbin "graphics/pokemon/seel/icon.4bpp"
 
 	.align 2
@@ -4672,7 +4672,7 @@ gFile_graphics_pokemon_palettes_dewgong_shiny_palette:: @ 8D6B398
 	.incbin "graphics/pokemon/dewgong/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_dewgong_icon:: @ 8D6B3BC
+gMonIcon_Dewgong:: @ 8D6B3BC
 	.incbin "graphics/pokemon/dewgong/icon.4bpp"
 
 	.align 2
@@ -4696,7 +4696,7 @@ gFile_graphics_pokemon_palettes_grimer_shiny_palette:: @ 8D6BDEC
 	.incbin "graphics/pokemon/grimer/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_grimer_icon:: @ 8D6BE10
+gMonIcon_Grimer:: @ 8D6BE10
 	.incbin "graphics/pokemon/grimer/icon.4bpp"
 
 	.align 2
@@ -4720,7 +4720,7 @@ gFile_graphics_pokemon_palettes_muk_shiny_palette:: @ 8D6C8DC
 	.incbin "graphics/pokemon/muk/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_muk_icon:: @ 8D6C900
+gMonIcon_Muk:: @ 8D6C900
 	.incbin "graphics/pokemon/muk/icon.4bpp"
 
 	.align 2
@@ -4744,7 +4744,7 @@ gFile_graphics_pokemon_palettes_shellder_shiny_palette:: @ 8D6D2CC
 	.incbin "graphics/pokemon/shellder/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_shellder_icon:: @ 8D6D2F0
+gMonIcon_Shellder:: @ 8D6D2F0
 	.incbin "graphics/pokemon/shellder/icon.4bpp"
 
 	.align 2
@@ -4768,7 +4768,7 @@ gFile_graphics_pokemon_palettes_cloyster_shiny_palette:: @ 8D6DF7C
 	.incbin "graphics/pokemon/cloyster/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_cloyster_icon:: @ 8D6DFA0
+gMonIcon_Cloyster:: @ 8D6DFA0
 	.incbin "graphics/pokemon/cloyster/icon.4bpp"
 
 	.align 2
@@ -4792,7 +4792,7 @@ gFile_graphics_pokemon_palettes_gastly_shiny_palette:: @ 8D6EAC4
 	.incbin "graphics/pokemon/gastly/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_gastly_icon:: @ 8D6EAEC
+gMonIcon_Gastly:: @ 8D6EAEC
 	.incbin "graphics/pokemon/gastly/icon.4bpp"
 
 	.align 2
@@ -4816,7 +4816,7 @@ gFile_graphics_pokemon_palettes_haunter_shiny_palette:: @ 8D6F5FC
 	.incbin "graphics/pokemon/haunter/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_haunter_icon:: @ 8D6F620
+gMonIcon_Haunter:: @ 8D6F620
 	.incbin "graphics/pokemon/haunter/icon.4bpp"
 
 	.align 2
@@ -4840,7 +4840,7 @@ gFile_graphics_pokemon_palettes_gengar_shiny_palette:: @ 8D70104
 	.incbin "graphics/pokemon/gengar/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_gengar_icon:: @ 8D70128
+gMonIcon_Gengar:: @ 8D70128
 	.incbin "graphics/pokemon/gengar/icon.4bpp"
 
 	.align 2
@@ -4864,7 +4864,7 @@ gFile_graphics_pokemon_palettes_onix_shiny_palette:: @ 8D70DB0
 	.incbin "graphics/pokemon/onix/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_onix_icon:: @ 8D70DCC
+gMonIcon_Onix:: @ 8D70DCC
 	.incbin "graphics/pokemon/onix/icon.4bpp"
 
 	.align 2
@@ -4888,7 +4888,7 @@ gFile_graphics_pokemon_palettes_drowzee_shiny_palette:: @ 8D7178C
 	.incbin "graphics/pokemon/drowzee/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_drowzee_icon:: @ 8D717B0
+gMonIcon_Drowzee:: @ 8D717B0
 	.incbin "graphics/pokemon/drowzee/icon.4bpp"
 
 	.align 2
@@ -4912,7 +4912,7 @@ gFile_graphics_pokemon_palettes_hypno_shiny_palette:: @ 8D7235C
 	.incbin "graphics/pokemon/hypno/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_hypno_icon:: @ 8D72380
+gMonIcon_Hypno:: @ 8D72380
 	.incbin "graphics/pokemon/hypno/icon.4bpp"
 
 	.align 2
@@ -4936,7 +4936,7 @@ gFile_graphics_pokemon_palettes_krabby_shiny_palette:: @ 8D72E78
 	.incbin "graphics/pokemon/krabby/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_krabby_icon:: @ 8D72EA0
+gMonIcon_Krabby:: @ 8D72EA0
 	.incbin "graphics/pokemon/krabby/icon.4bpp"
 
 	.align 2
@@ -4960,7 +4960,7 @@ gFile_graphics_pokemon_palettes_kingler_shiny_palette:: @ 8D73AEC
 	.incbin "graphics/pokemon/kingler/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_kingler_icon:: @ 8D73B14
+gMonIcon_Kingler:: @ 8D73B14
 	.incbin "graphics/pokemon/kingler/icon.4bpp"
 
 	.align 2
@@ -4984,7 +4984,7 @@ gFile_graphics_pokemon_palettes_voltorb_shiny_palette:: @ 8D743D4
 	.incbin "graphics/pokemon/voltorb/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_voltorb_icon:: @ 8D743F8
+gMonIcon_Voltorb:: @ 8D743F8
 	.incbin "graphics/pokemon/voltorb/icon.4bpp"
 
 	.align 2
@@ -5008,7 +5008,7 @@ gFile_graphics_pokemon_palettes_electrode_shiny_palette:: @ 8D74D18
 	.incbin "graphics/pokemon/electrode/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_electrode_icon:: @ 8D74D3C
+gMonIcon_Electrode:: @ 8D74D3C
 	.incbin "graphics/pokemon/electrode/icon.4bpp"
 
 	.align 2
@@ -5032,7 +5032,7 @@ gFile_graphics_pokemon_palettes_exeggcute_shiny_palette:: @ 8D75818
 	.incbin "graphics/pokemon/exeggcute/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_exeggcute_icon:: @ 8D7583C
+gMonIcon_Exeggcute:: @ 8D7583C
 	.incbin "graphics/pokemon/exeggcute/icon.4bpp"
 
 	.align 2
@@ -5056,7 +5056,7 @@ gFile_graphics_pokemon_palettes_exeggutor_shiny_palette:: @ 8D764A0
 	.incbin "graphics/pokemon/exeggutor/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_exeggutor_icon:: @ 8D764C8
+gMonIcon_Exeggutor:: @ 8D764C8
 	.incbin "graphics/pokemon/exeggutor/icon.4bpp"
 
 	.align 2
@@ -5080,7 +5080,7 @@ gFile_graphics_pokemon_palettes_cubone_shiny_palette:: @ 8D76F0C
 	.incbin "graphics/pokemon/cubone/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_cubone_icon:: @ 8D76F34
+gMonIcon_Cubone:: @ 8D76F34
 	.incbin "graphics/pokemon/cubone/icon.4bpp"
 
 	.align 2
@@ -5104,7 +5104,7 @@ gFile_graphics_pokemon_palettes_marowak_shiny_palette:: @ 8D77A10
 	.incbin "graphics/pokemon/marowak/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_marowak_icon:: @ 8D77A38
+gMonIcon_Marowak:: @ 8D77A38
 	.incbin "graphics/pokemon/marowak/icon.4bpp"
 
 	.align 2
@@ -5128,7 +5128,7 @@ gFile_graphics_pokemon_palettes_hitmonlee_shiny_palette:: @ 8D78498
 	.incbin "graphics/pokemon/hitmonlee/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_hitmonlee_icon:: @ 8D784C0
+gMonIcon_Hitmonlee:: @ 8D784C0
 	.incbin "graphics/pokemon/hitmonlee/icon.4bpp"
 
 	.align 2
@@ -5152,7 +5152,7 @@ gFile_graphics_pokemon_palettes_hitmonchan_shiny_palette:: @ 8D78F8C
 	.incbin "graphics/pokemon/hitmonchan/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_hitmonchan_icon:: @ 8D78FB4
+gMonIcon_Hitmonchan:: @ 8D78FB4
 	.incbin "graphics/pokemon/hitmonchan/icon.4bpp"
 
 	.align 2
@@ -5176,7 +5176,7 @@ gFile_graphics_pokemon_palettes_lickitung_shiny_palette:: @ 8D79A78
 	.incbin "graphics/pokemon/lickitung/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_lickitung_icon:: @ 8D79AA0
+gMonIcon_Lickitung:: @ 8D79AA0
 	.incbin "graphics/pokemon/lickitung/icon.4bpp"
 
 	.align 2
@@ -5200,7 +5200,7 @@ gFile_graphics_pokemon_palettes_koffing_shiny_palette:: @ 8D7A4E8
 	.incbin "graphics/pokemon/koffing/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_koffing_icon:: @ 8D7A510
+gMonIcon_Koffing:: @ 8D7A510
 	.incbin "graphics/pokemon/koffing/icon.4bpp"
 
 	.align 2
@@ -5224,7 +5224,7 @@ gFile_graphics_pokemon_palettes_weezing_shiny_palette:: @ 8D7B198
 	.incbin "graphics/pokemon/weezing/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_weezing_icon:: @ 8D7B1C0
+gMonIcon_Weezing:: @ 8D7B1C0
 	.incbin "graphics/pokemon/weezing/icon.4bpp"
 
 	.align 2
@@ -5248,7 +5248,7 @@ gFile_graphics_pokemon_palettes_rhyhorn_shiny_palette:: @ 8D7BD44
 	.incbin "graphics/pokemon/rhyhorn/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_rhyhorn_icon:: @ 8D7BD64
+gMonIcon_Rhyhorn:: @ 8D7BD64
 	.incbin "graphics/pokemon/rhyhorn/icon.4bpp"
 
 	.align 2
@@ -5272,7 +5272,7 @@ gFile_graphics_pokemon_palettes_rhydon_shiny_palette:: @ 8D7CAF0
 	.incbin "graphics/pokemon/rhydon/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_rhydon_icon:: @ 8D7CB18
+gMonIcon_Rhydon:: @ 8D7CB18
 	.incbin "graphics/pokemon/rhydon/icon.4bpp"
 
 	.align 2
@@ -5296,7 +5296,7 @@ gFile_graphics_pokemon_palettes_chansey_shiny_palette:: @ 8D7D4E8
 	.incbin "graphics/pokemon/chansey/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_chansey_icon:: @ 8D7D50C
+gMonIcon_Chansey:: @ 8D7D50C
 	.incbin "graphics/pokemon/chansey/icon.4bpp"
 
 	.align 2
@@ -5320,7 +5320,7 @@ gFile_graphics_pokemon_palettes_tangela_shiny_palette:: @ 8D7E0D0
 	.incbin "graphics/pokemon/tangela/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_tangela_icon:: @ 8D7E0F4
+gMonIcon_Tangela:: @ 8D7E0F4
 	.incbin "graphics/pokemon/tangela/icon.4bpp"
 
 	.align 2
@@ -5344,7 +5344,7 @@ gFile_graphics_pokemon_palettes_kangaskhan_shiny_palette:: @ 8D7EE14
 	.incbin "graphics/pokemon/kangaskhan/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_kangaskhan_icon:: @ 8D7EE3C
+gMonIcon_Kangaskhan:: @ 8D7EE3C
 	.incbin "graphics/pokemon/kangaskhan/icon.4bpp"
 
 	.align 2
@@ -5368,7 +5368,7 @@ gFile_graphics_pokemon_palettes_horsea_shiny_palette:: @ 8D7F7D0
 	.incbin "graphics/pokemon/horsea/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_horsea_icon:: @ 8D7F7F8
+gMonIcon_Horsea:: @ 8D7F7F8
 	.incbin "graphics/pokemon/horsea/icon.4bpp"
 
 	.align 2
@@ -5392,7 +5392,7 @@ gFile_graphics_pokemon_palettes_seadra_shiny_palette:: @ 8D80368
 	.incbin "graphics/pokemon/seadra/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_seadra_icon:: @ 8D80390
+gMonIcon_Seadra:: @ 8D80390
 	.incbin "graphics/pokemon/seadra/icon.4bpp"
 
 	.align 2
@@ -5416,7 +5416,7 @@ gFile_graphics_pokemon_palettes_goldeen_shiny_palette:: @ 8D80EB0
 	.incbin "graphics/pokemon/goldeen/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_goldeen_icon:: @ 8D80ED8
+gMonIcon_Goldeen:: @ 8D80ED8
 	.incbin "graphics/pokemon/goldeen/icon.4bpp"
 
 	.align 2
@@ -5440,7 +5440,7 @@ gFile_graphics_pokemon_palettes_seaking_shiny_palette:: @ 8D81AE4
 	.incbin "graphics/pokemon/seaking/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_seaking_icon:: @ 8D81B0C
+gMonIcon_Seaking:: @ 8D81B0C
 	.incbin "graphics/pokemon/seaking/icon.4bpp"
 
 	.align 2
@@ -5464,7 +5464,7 @@ gFile_graphics_pokemon_palettes_staryu_shiny_palette:: @ 8D8246C
 	.incbin "graphics/pokemon/staryu/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_staryu_icon:: @ 8D82494
+gMonIcon_Staryu:: @ 8D82494
 	.incbin "graphics/pokemon/staryu/icon.4bpp"
 
 	.align 2
@@ -5488,7 +5488,7 @@ gFile_graphics_pokemon_palettes_starmie_shiny_palette:: @ 8D82F20
 	.incbin "graphics/pokemon/starmie/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_starmie_icon:: @ 8D82F48
+gMonIcon_Starmie:: @ 8D82F48
 	.incbin "graphics/pokemon/starmie/icon.4bpp"
 
 	.align 2
@@ -5512,7 +5512,7 @@ gFile_graphics_pokemon_palettes_mr_mime_shiny_palette:: @ 8D83A80
 	.incbin "graphics/pokemon/mr_mime/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_mr_mime_icon:: @ 8D83AA8
+gMonIcon_Mr_Mime:: @ 8D83AA8
 	.incbin "graphics/pokemon/mr_mime/icon.4bpp"
 
 	.align 2
@@ -5536,7 +5536,7 @@ gFile_graphics_pokemon_palettes_scyther_shiny_palette:: @ 8D84730
 	.incbin "graphics/pokemon/scyther/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_scyther_icon:: @ 8D84758
+gMonIcon_Scyther:: @ 8D84758
 	.incbin "graphics/pokemon/scyther/icon.4bpp"
 
 	.align 2
@@ -5560,7 +5560,7 @@ gFile_graphics_pokemon_palettes_jynx_shiny_palette:: @ 8D85258
 	.incbin "graphics/pokemon/jynx/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_jynx_icon:: @ 8D85280
+gMonIcon_Jynx:: @ 8D85280
 	.incbin "graphics/pokemon/jynx/icon.4bpp"
 
 	.align 2
@@ -5584,7 +5584,7 @@ gFile_graphics_pokemon_palettes_electabuzz_shiny_palette:: @ 8D85E30
 	.incbin "graphics/pokemon/electabuzz/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_electabuzz_icon:: @ 8D85E58
+gMonIcon_Electabuzz:: @ 8D85E58
 	.incbin "graphics/pokemon/electabuzz/icon.4bpp"
 
 	.align 2
@@ -5608,7 +5608,7 @@ gFile_graphics_pokemon_palettes_magmar_shiny_palette:: @ 8D86A08
 	.incbin "graphics/pokemon/magmar/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_magmar_icon:: @ 8D86A30
+gMonIcon_Magmar:: @ 8D86A30
 	.incbin "graphics/pokemon/magmar/icon.4bpp"
 
 	.align 2
@@ -5632,7 +5632,7 @@ gFile_graphics_pokemon_palettes_pinsir_shiny_palette:: @ 8D875F8
 	.incbin "graphics/pokemon/pinsir/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_pinsir_icon:: @ 8D8761C
+gMonIcon_Pinsir:: @ 8D8761C
 	.incbin "graphics/pokemon/pinsir/icon.4bpp"
 
 	.align 2
@@ -5656,7 +5656,7 @@ gFile_graphics_pokemon_palettes_tauros_shiny_palette:: @ 8D88178
 	.incbin "graphics/pokemon/tauros/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_tauros_icon:: @ 8D881A0
+gMonIcon_Tauros:: @ 8D881A0
 	.incbin "graphics/pokemon/tauros/icon.4bpp"
 
 	.align 2
@@ -5680,7 +5680,7 @@ gFile_graphics_pokemon_palettes_magikarp_shiny_palette:: @ 8D88C60
 	.incbin "graphics/pokemon/magikarp/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_magikarp_icon:: @ 8D88C88
+gMonIcon_Magikarp:: @ 8D88C88
 	.incbin "graphics/pokemon/magikarp/icon.4bpp"
 
 	.align 2
@@ -5704,7 +5704,7 @@ gFile_graphics_pokemon_palettes_gyarados_shiny_palette:: @ 8D89B2C
 	.incbin "graphics/pokemon/gyarados/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_gyarados_icon:: @ 8D89B54
+gMonIcon_Gyarados:: @ 8D89B54
 	.incbin "graphics/pokemon/gyarados/icon.4bpp"
 
 	.align 2
@@ -5728,7 +5728,7 @@ gFile_graphics_pokemon_palettes_lapras_shiny_palette:: @ 8D8A6C0
 	.incbin "graphics/pokemon/lapras/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_lapras_icon:: @ 8D8A6E8
+gMonIcon_Lapras:: @ 8D8A6E8
 	.incbin "graphics/pokemon/lapras/icon.4bpp"
 
 	.align 2
@@ -5752,7 +5752,7 @@ gFile_graphics_pokemon_palettes_ditto_shiny_palette:: @ 8D8AF18
 	.incbin "graphics/pokemon/ditto/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_ditto_icon:: @ 8D8AF38
+gMonIcon_Ditto:: @ 8D8AF38
 	.incbin "graphics/pokemon/ditto/icon.4bpp"
 
 	.align 2
@@ -5776,7 +5776,7 @@ gFile_graphics_pokemon_palettes_eevee_shiny_palette:: @ 8D8B994
 	.incbin "graphics/pokemon/eevee/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_eevee_icon:: @ 8D8B9BC
+gMonIcon_Eevee:: @ 8D8B9BC
 	.incbin "graphics/pokemon/eevee/icon.4bpp"
 
 	.align 2
@@ -5800,7 +5800,7 @@ gFile_graphics_pokemon_palettes_vaporeon_shiny_palette:: @ 8D8C460
 	.incbin "graphics/pokemon/vaporeon/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_vaporeon_icon:: @ 8D8C488
+gMonIcon_Vaporeon:: @ 8D8C488
 	.incbin "graphics/pokemon/vaporeon/icon.4bpp"
 
 	.align 2
@@ -5824,7 +5824,7 @@ gFile_graphics_pokemon_palettes_jolteon_shiny_palette:: @ 8D8CFCC
 	.incbin "graphics/pokemon/jolteon/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_jolteon_icon:: @ 8D8CFF4
+gMonIcon_Jolteon:: @ 8D8CFF4
 	.incbin "graphics/pokemon/jolteon/icon.4bpp"
 
 	.align 2
@@ -5848,7 +5848,7 @@ gFile_graphics_pokemon_palettes_flareon_shiny_palette:: @ 8D8DB50
 	.incbin "graphics/pokemon/flareon/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_flareon_icon:: @ 8D8DB78
+gMonIcon_Flareon:: @ 8D8DB78
 	.incbin "graphics/pokemon/flareon/icon.4bpp"
 
 	.align 2
@@ -5872,7 +5872,7 @@ gFile_graphics_pokemon_palettes_porygon_shiny_palette:: @ 8D8E52C
 	.incbin "graphics/pokemon/porygon/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_porygon_icon:: @ 8D8E550
+gMonIcon_Porygon:: @ 8D8E550
 	.incbin "graphics/pokemon/porygon/icon.4bpp"
 
 	.align 2
@@ -5896,7 +5896,7 @@ gFile_graphics_pokemon_palettes_omanyte_shiny_palette:: @ 8D8EF74
 	.incbin "graphics/pokemon/omanyte/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_omanyte_icon:: @ 8D8EF9C
+gMonIcon_Omanyte:: @ 8D8EF9C
 	.incbin "graphics/pokemon/omanyte/icon.4bpp"
 
 	.align 2
@@ -5920,7 +5920,7 @@ gFile_graphics_pokemon_palettes_omastar_shiny_palette:: @ 8D8FAE4
 	.incbin "graphics/pokemon/omastar/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_omastar_icon:: @ 8D8FB0C
+gMonIcon_Omastar:: @ 8D8FB0C
 	.incbin "graphics/pokemon/omastar/icon.4bpp"
 
 	.align 2
@@ -5944,7 +5944,7 @@ gFile_graphics_pokemon_palettes_kabuto_shiny_palette:: @ 8D90414
 	.incbin "graphics/pokemon/kabuto/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_kabuto_icon:: @ 8D9043C
+gMonIcon_Kabuto:: @ 8D9043C
 	.incbin "graphics/pokemon/kabuto/icon.4bpp"
 
 	.align 2
@@ -5968,7 +5968,7 @@ gFile_graphics_pokemon_palettes_kabutops_shiny_palette:: @ 8D91034
 	.incbin "graphics/pokemon/kabutops/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_kabutops_icon:: @ 8D91058
+gMonIcon_Kabutops:: @ 8D91058
 	.incbin "graphics/pokemon/kabutops/icon.4bpp"
 
 	.align 2
@@ -5992,7 +5992,7 @@ gFile_graphics_pokemon_palettes_aerodactyl_shiny_palette:: @ 8D91BF4
 	.incbin "graphics/pokemon/aerodactyl/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_aerodactyl_icon:: @ 8D91C1C
+gMonIcon_Aerodactyl:: @ 8D91C1C
 	.incbin "graphics/pokemon/aerodactyl/icon.4bpp"
 
 	.align 2
@@ -6016,7 +6016,7 @@ gFile_graphics_pokemon_palettes_snorlax_shiny_palette:: @ 8D92654
 	.incbin "graphics/pokemon/snorlax/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_snorlax_icon:: @ 8D9267C
+gMonIcon_Snorlax:: @ 8D9267C
 	.incbin "graphics/pokemon/snorlax/icon.4bpp"
 
 	.align 2
@@ -6040,7 +6040,7 @@ gFile_graphics_pokemon_palettes_articuno_shiny_palette:: @ 8D93218
 	.incbin "graphics/pokemon/articuno/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_articuno_icon:: @ 8D93240
+gMonIcon_Articuno:: @ 8D93240
 	.incbin "graphics/pokemon/articuno/icon.4bpp"
 
 	.align 2
@@ -6064,7 +6064,7 @@ gFile_graphics_pokemon_palettes_zapdos_shiny_palette:: @ 8D93E14
 	.incbin "graphics/pokemon/zapdos/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_zapdos_icon:: @ 8D93E3C
+gMonIcon_Zapdos:: @ 8D93E3C
 	.incbin "graphics/pokemon/zapdos/icon.4bpp"
 
 	.align 2
@@ -6088,7 +6088,7 @@ gFile_graphics_pokemon_palettes_moltres_shiny_palette:: @ 8D94A8C
 	.incbin "graphics/pokemon/moltres/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_moltres_icon:: @ 8D94AB4
+gMonIcon_Moltres:: @ 8D94AB4
 	.incbin "graphics/pokemon/moltres/icon.4bpp"
 
 	.align 2
@@ -6112,7 +6112,7 @@ gFile_graphics_pokemon_palettes_dratini_shiny_palette:: @ 8D95444
 	.incbin "graphics/pokemon/dratini/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_dratini_icon:: @ 8D95468
+gMonIcon_Dratini:: @ 8D95468
 	.incbin "graphics/pokemon/dratini/icon.4bpp"
 
 	.align 2
@@ -6136,7 +6136,7 @@ gFile_graphics_pokemon_palettes_dragonair_shiny_palette:: @ 8D95F58
 	.incbin "graphics/pokemon/dragonair/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_dragonair_icon:: @ 8D95F80
+gMonIcon_Dragonair:: @ 8D95F80
 	.incbin "graphics/pokemon/dragonair/icon.4bpp"
 
 	.align 2
@@ -6160,7 +6160,7 @@ gFile_graphics_pokemon_palettes_dragonite_shiny_palette:: @ 8D96C10
 	.incbin "graphics/pokemon/dragonite/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_dragonite_icon:: @ 8D96C38
+gMonIcon_Dragonite:: @ 8D96C38
 	.incbin "graphics/pokemon/dragonite/icon.4bpp"
 
 	.align 2
@@ -6184,7 +6184,7 @@ gFile_graphics_pokemon_palettes_mewtwo_shiny_palette:: @ 8D97884
 	.incbin "graphics/pokemon/mewtwo/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_mewtwo_icon:: @ 8D978A8
+gMonIcon_Mewtwo:: @ 8D978A8
 	.incbin "graphics/pokemon/mewtwo/icon.4bpp"
 
 	.align 2
@@ -6208,7 +6208,7 @@ gFile_graphics_pokemon_palettes_mew_shiny_palette:: @ 8D982FC
 	.incbin "graphics/pokemon/mew/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_mew_icon:: @ 8D98320
+gMonIcon_Mew:: @ 8D98320
 	.incbin "graphics/pokemon/mew/icon.4bpp"
 
 	.align 2
@@ -6232,7 +6232,7 @@ gFile_graphics_pokemon_palettes_chikorita_shiny_palette:: @ 8D98C94
 	.incbin "graphics/pokemon/chikorita/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_chikorita_icon:: @ 8D98CBC
+gMonIcon_Chikorita:: @ 8D98CBC
 	.incbin "graphics/pokemon/chikorita/icon.4bpp"
 
 	.align 2
@@ -6256,7 +6256,7 @@ gFile_graphics_pokemon_palettes_bayleef_shiny_palette:: @ 8D99868
 	.incbin "graphics/pokemon/bayleef/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_bayleef_icon:: @ 8D99890
+gMonIcon_Bayleef:: @ 8D99890
 	.incbin "graphics/pokemon/bayleef/icon.4bpp"
 
 	.align 2
@@ -6280,7 +6280,7 @@ gFile_graphics_pokemon_palettes_meganium_shiny_palette:: @ 8D9A584
 	.incbin "graphics/pokemon/meganium/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_meganium_icon:: @ 8D9A5AC
+gMonIcon_Meganium:: @ 8D9A5AC
 	.incbin "graphics/pokemon/meganium/icon.4bpp"
 
 	.align 2
@@ -6304,7 +6304,7 @@ gFile_graphics_pokemon_palettes_cyndaquil_shiny_palette:: @ 8D9AFAC
 	.incbin "graphics/pokemon/cyndaquil/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_cyndaquil_icon:: @ 8D9AFD4
+gMonIcon_Cyndaquil:: @ 8D9AFD4
 	.incbin "graphics/pokemon/cyndaquil/icon.4bpp"
 
 	.align 2
@@ -6328,7 +6328,7 @@ gFile_graphics_pokemon_palettes_quilava_shiny_palette:: @ 8D9BAAC
 	.incbin "graphics/pokemon/quilava/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_quilava_icon:: @ 8D9BAD4
+gMonIcon_Quilava:: @ 8D9BAD4
 	.incbin "graphics/pokemon/quilava/icon.4bpp"
 
 	.align 2
@@ -6352,7 +6352,7 @@ gFile_graphics_pokemon_palettes_typhlosion_shiny_palette:: @ 8D9C748
 	.incbin "graphics/pokemon/typhlosion/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_typhlosion_icon:: @ 8D9C770
+gMonIcon_Typhlosion:: @ 8D9C770
 	.incbin "graphics/pokemon/typhlosion/icon.4bpp"
 
 	.align 2
@@ -6376,7 +6376,7 @@ gFile_graphics_pokemon_palettes_totodile_shiny_palette:: @ 8D9D13C
 	.incbin "graphics/pokemon/totodile/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_totodile_icon:: @ 8D9D164
+gMonIcon_Totodile:: @ 8D9D164
 	.incbin "graphics/pokemon/totodile/icon.4bpp"
 
 	.align 2
@@ -6400,7 +6400,7 @@ gFile_graphics_pokemon_palettes_croconaw_shiny_palette:: @ 8D9DC64
 	.incbin "graphics/pokemon/croconaw/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_croconaw_icon:: @ 8D9DC8C
+gMonIcon_Croconaw:: @ 8D9DC8C
 	.incbin "graphics/pokemon/croconaw/icon.4bpp"
 
 	.align 2
@@ -6424,7 +6424,7 @@ gFile_graphics_pokemon_palettes_feraligatr_shiny_palette:: @ 8D9EB0C
 	.incbin "graphics/pokemon/feraligatr/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_feraligatr_icon:: @ 8D9EB34
+gMonIcon_Feraligatr:: @ 8D9EB34
 	.incbin "graphics/pokemon/feraligatr/icon.4bpp"
 
 	.align 2
@@ -6448,7 +6448,7 @@ gFile_graphics_pokemon_palettes_sentret_shiny_palette:: @ 8D9F4FC
 	.incbin "graphics/pokemon/sentret/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_sentret_icon:: @ 8D9F524
+gMonIcon_Sentret:: @ 8D9F524
 	.incbin "graphics/pokemon/sentret/icon.4bpp"
 
 	.align 2
@@ -6472,7 +6472,7 @@ gFile_graphics_pokemon_palettes_furret_shiny_palette:: @ 8D9FFC8
 	.incbin "graphics/pokemon/furret/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_furret_icon:: @ 8D9FFF0
+gMonIcon_Furret:: @ 8D9FFF0
 	.incbin "graphics/pokemon/furret/icon.4bpp"
 
 	.align 2
@@ -6496,7 +6496,7 @@ gFile_graphics_pokemon_palettes_hoothoot_shiny_palette:: @ 8DA09C4
 	.incbin "graphics/pokemon/hoothoot/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_hoothoot_icon:: @ 8DA09EC
+gMonIcon_Hoothoot:: @ 8DA09EC
 	.incbin "graphics/pokemon/hoothoot/icon.4bpp"
 
 	.align 2
@@ -6520,7 +6520,7 @@ gFile_graphics_pokemon_palettes_noctowl_shiny_palette:: @ 8DA14E4
 	.incbin "graphics/pokemon/noctowl/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_noctowl_icon:: @ 8DA150C
+gMonIcon_Noctowl:: @ 8DA150C
 	.incbin "graphics/pokemon/noctowl/icon.4bpp"
 
 	.align 2
@@ -6544,7 +6544,7 @@ gFile_graphics_pokemon_palettes_ledyba_shiny_palette:: @ 8DA1F78
 	.incbin "graphics/pokemon/ledyba/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_ledyba_icon:: @ 8DA1FA0
+gMonIcon_Ledyba:: @ 8DA1FA0
 	.incbin "graphics/pokemon/ledyba/icon.4bpp"
 
 	.align 2
@@ -6568,7 +6568,7 @@ gFile_graphics_pokemon_palettes_ledian_shiny_palette:: @ 8DA2AC8
 	.incbin "graphics/pokemon/ledian/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_ledian_icon:: @ 8DA2AF0
+gMonIcon_Ledian:: @ 8DA2AF0
 	.incbin "graphics/pokemon/ledian/icon.4bpp"
 
 	.align 2
@@ -6592,7 +6592,7 @@ gFile_graphics_pokemon_palettes_spinarak_shiny_palette:: @ 8DA3410
 	.incbin "graphics/pokemon/spinarak/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_spinarak_icon:: @ 8DA3438
+gMonIcon_Spinarak:: @ 8DA3438
 	.incbin "graphics/pokemon/spinarak/icon.4bpp"
 
 	.align 2
@@ -6616,7 +6616,7 @@ gFile_graphics_pokemon_palettes_ariados_shiny_palette:: @ 8DA3FB8
 	.incbin "graphics/pokemon/ariados/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_ariados_icon:: @ 8DA3FE0
+gMonIcon_Ariados:: @ 8DA3FE0
 	.incbin "graphics/pokemon/ariados/icon.4bpp"
 
 	.align 2
@@ -6640,7 +6640,7 @@ gFile_graphics_pokemon_palettes_crobat_shiny_palette:: @ 8DA4AE0
 	.incbin "graphics/pokemon/crobat/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_crobat_icon:: @ 8DA4B08
+gMonIcon_Crobat:: @ 8DA4B08
 	.incbin "graphics/pokemon/crobat/icon.4bpp"
 
 	.align 2
@@ -6664,7 +6664,7 @@ gFile_graphics_pokemon_palettes_chinchou_shiny_palette:: @ 8DA5520
 	.incbin "graphics/pokemon/chinchou/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_chinchou_icon:: @ 8DA5548
+gMonIcon_Chinchou:: @ 8DA5548
 	.incbin "graphics/pokemon/chinchou/icon.4bpp"
 
 	.align 2
@@ -6688,7 +6688,7 @@ gFile_graphics_pokemon_palettes_lanturn_shiny_palette:: @ 8DA6000
 	.incbin "graphics/pokemon/lanturn/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_lanturn_icon:: @ 8DA6028
+gMonIcon_Lanturn:: @ 8DA6028
 	.incbin "graphics/pokemon/lanturn/icon.4bpp"
 
 	.align 2
@@ -6712,7 +6712,7 @@ gFile_graphics_pokemon_palettes_pichu_shiny_palette:: @ 8DA68E8
 	.incbin "graphics/pokemon/pichu/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_pichu_icon:: @ 8DA6910
+gMonIcon_Pichu:: @ 8DA6910
 	.incbin "graphics/pokemon/pichu/icon.4bpp"
 
 	.align 2
@@ -6736,7 +6736,7 @@ gFile_graphics_pokemon_palettes_cleffa_shiny_palette:: @ 8DA7174
 	.incbin "graphics/pokemon/cleffa/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_cleffa_icon:: @ 8DA719C
+gMonIcon_Cleffa:: @ 8DA719C
 	.incbin "graphics/pokemon/cleffa/icon.4bpp"
 
 	.align 2
@@ -6760,7 +6760,7 @@ gFile_graphics_pokemon_palettes_igglybuff_shiny_palette:: @ 8DA7A08
 	.incbin "graphics/pokemon/igglybuff/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_igglybuff_icon:: @ 8DA7A30
+gMonIcon_Igglybuff:: @ 8DA7A30
 	.incbin "graphics/pokemon/igglybuff/icon.4bpp"
 
 	.align 2
@@ -6784,7 +6784,7 @@ gFile_graphics_pokemon_palettes_togepi_shiny_palette:: @ 8DA82C0
 	.incbin "graphics/pokemon/togepi/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_togepi_icon:: @ 8DA82E8
+gMonIcon_Togepi:: @ 8DA82E8
 	.incbin "graphics/pokemon/togepi/icon.4bpp"
 
 	.align 2
@@ -6808,7 +6808,7 @@ gFile_graphics_pokemon_palettes_togetic_shiny_palette:: @ 8DA8CD0
 	.incbin "graphics/pokemon/togetic/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_togetic_icon:: @ 8DA8CF8
+gMonIcon_Togetic:: @ 8DA8CF8
 	.incbin "graphics/pokemon/togetic/icon.4bpp"
 
 	.align 2
@@ -6832,7 +6832,7 @@ gFile_graphics_pokemon_palettes_natu_shiny_palette:: @ 8DA9520
 	.incbin "graphics/pokemon/natu/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_natu_icon:: @ 8DA9548
+gMonIcon_Natu:: @ 8DA9548
 	.incbin "graphics/pokemon/natu/icon.4bpp"
 
 	.align 2
@@ -6856,7 +6856,7 @@ gFile_graphics_pokemon_palettes_xatu_shiny_palette:: @ 8DA9FE4
 	.incbin "graphics/pokemon/xatu/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_xatu_icon:: @ 8DAA00C
+gMonIcon_Xatu:: @ 8DAA00C
 	.incbin "graphics/pokemon/xatu/icon.4bpp"
 
 	.align 2
@@ -6880,7 +6880,7 @@ gFile_graphics_pokemon_palettes_mareep_shiny_palette:: @ 8DAA9FC
 	.incbin "graphics/pokemon/mareep/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_mareep_icon:: @ 8DAAA24
+gMonIcon_Mareep:: @ 8DAAA24
 	.incbin "graphics/pokemon/mareep/icon.4bpp"
 
 	.align 2
@@ -6904,7 +6904,7 @@ gFile_graphics_pokemon_palettes_flaaffy_shiny_palette:: @ 8DAB488
 	.incbin "graphics/pokemon/flaaffy/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_flaaffy_icon:: @ 8DAB4B0
+gMonIcon_Flaaffy:: @ 8DAB4B0
 	.incbin "graphics/pokemon/flaaffy/icon.4bpp"
 
 	.align 2
@@ -6928,7 +6928,7 @@ gFile_graphics_pokemon_palettes_ampharos_shiny_palette:: @ 8DABFCC
 	.incbin "graphics/pokemon/ampharos/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_ampharos_icon:: @ 8DABFF4
+gMonIcon_Ampharos:: @ 8DABFF4
 	.incbin "graphics/pokemon/ampharos/icon.4bpp"
 
 	.align 2
@@ -6952,7 +6952,7 @@ gFile_graphics_pokemon_palettes_bellossom_shiny_palette:: @ 8DAC9D0
 	.incbin "graphics/pokemon/bellossom/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_bellossom_icon:: @ 8DAC9F8
+gMonIcon_Bellossom:: @ 8DAC9F8
 	.incbin "graphics/pokemon/bellossom/icon.4bpp"
 
 	.align 2
@@ -6976,7 +6976,7 @@ gFile_graphics_pokemon_palettes_marill_shiny_palette:: @ 8DAD3B0
 	.incbin "graphics/pokemon/marill/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_marill_icon:: @ 8DAD3D8
+gMonIcon_Marill:: @ 8DAD3D8
 	.incbin "graphics/pokemon/marill/icon.4bpp"
 
 	.align 2
@@ -7000,7 +7000,7 @@ gFile_graphics_pokemon_palettes_azumarill_shiny_palette:: @ 8DADDDC
 	.incbin "graphics/pokemon/azumarill/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_azumarill_icon:: @ 8DADE04
+gMonIcon_Azumarill:: @ 8DADE04
 	.incbin "graphics/pokemon/azumarill/icon.4bpp"
 
 	.align 2
@@ -7024,7 +7024,7 @@ gFile_graphics_pokemon_palettes_sudowoodo_shiny_palette:: @ 8DAE8C0
 	.incbin "graphics/pokemon/sudowoodo/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_sudowoodo_icon:: @ 8DAE8E8
+gMonIcon_Sudowoodo:: @ 8DAE8E8
 	.incbin "graphics/pokemon/sudowoodo/icon.4bpp"
 
 	.align 2
@@ -7048,7 +7048,7 @@ gFile_graphics_pokemon_palettes_politoed_shiny_palette:: @ 8DAF328
 	.incbin "graphics/pokemon/politoed/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_politoed_icon:: @ 8DAF350
+gMonIcon_Politoed:: @ 8DAF350
 	.incbin "graphics/pokemon/politoed/icon.4bpp"
 
 	.align 2
@@ -7072,7 +7072,7 @@ gFile_graphics_pokemon_palettes_hoppip_shiny_palette:: @ 8DAFD2C
 	.incbin "graphics/pokemon/hoppip/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_hoppip_icon:: @ 8DAFD54
+gMonIcon_Hoppip:: @ 8DAFD54
 	.incbin "graphics/pokemon/hoppip/icon.4bpp"
 
 	.align 2
@@ -7096,7 +7096,7 @@ gFile_graphics_pokemon_palettes_skiploom_shiny_palette:: @ 8DB0704
 	.incbin "graphics/pokemon/skiploom/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_skiploom_icon:: @ 8DB072C
+gMonIcon_Skiploom:: @ 8DB072C
 	.incbin "graphics/pokemon/skiploom/icon.4bpp"
 
 	.align 2
@@ -7120,7 +7120,7 @@ gFile_graphics_pokemon_palettes_jumpluff_shiny_palette:: @ 8DB12D8
 	.incbin "graphics/pokemon/jumpluff/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_jumpluff_icon:: @ 8DB1300
+gMonIcon_Jumpluff:: @ 8DB1300
 	.incbin "graphics/pokemon/jumpluff/icon.4bpp"
 
 	.align 2
@@ -7144,7 +7144,7 @@ gFile_graphics_pokemon_palettes_aipom_shiny_palette:: @ 8DB1D38
 	.incbin "graphics/pokemon/aipom/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_aipom_icon:: @ 8DB1D60
+gMonIcon_Aipom:: @ 8DB1D60
 	.incbin "graphics/pokemon/aipom/icon.4bpp"
 
 	.align 2
@@ -7168,7 +7168,7 @@ gFile_graphics_pokemon_palettes_sunkern_shiny_palette:: @ 8DB26A4
 	.incbin "graphics/pokemon/sunkern/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_sunkern_icon:: @ 8DB26CC
+gMonIcon_Sunkern:: @ 8DB26CC
 	.incbin "graphics/pokemon/sunkern/icon.4bpp"
 
 	.align 2
@@ -7192,7 +7192,7 @@ gFile_graphics_pokemon_palettes_sunflora_shiny_palette:: @ 8DB320C
 	.incbin "graphics/pokemon/sunflora/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_sunflora_icon:: @ 8DB3234
+gMonIcon_Sunflora:: @ 8DB3234
 	.incbin "graphics/pokemon/sunflora/icon.4bpp"
 
 	.align 2
@@ -7216,7 +7216,7 @@ gFile_graphics_pokemon_palettes_yanma_shiny_palette:: @ 8DB3DB4
 	.incbin "graphics/pokemon/yanma/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_yanma_icon:: @ 8DB3DDC
+gMonIcon_Yanma:: @ 8DB3DDC
 	.incbin "graphics/pokemon/yanma/icon.4bpp"
 
 	.align 2
@@ -7240,7 +7240,7 @@ gFile_graphics_pokemon_palettes_wooper_shiny_palette:: @ 8DB46F0
 	.incbin "graphics/pokemon/wooper/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_wooper_icon:: @ 8DB4718
+gMonIcon_Wooper:: @ 8DB4718
 	.incbin "graphics/pokemon/wooper/icon.4bpp"
 
 	.align 2
@@ -7264,7 +7264,7 @@ gFile_graphics_pokemon_palettes_quagsire_shiny_palette:: @ 8DB51D0
 	.incbin "graphics/pokemon/quagsire/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_quagsire_icon:: @ 8DB51F8
+gMonIcon_Quagsire:: @ 8DB51F8
 	.incbin "graphics/pokemon/quagsire/icon.4bpp"
 
 	.align 2
@@ -7288,7 +7288,7 @@ gFile_graphics_pokemon_palettes_espeon_shiny_palette:: @ 8DB5C58
 	.incbin "graphics/pokemon/espeon/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_espeon_icon:: @ 8DB5C7C
+gMonIcon_Espeon:: @ 8DB5C7C
 	.incbin "graphics/pokemon/espeon/icon.4bpp"
 
 	.align 2
@@ -7312,7 +7312,7 @@ gFile_graphics_pokemon_palettes_umbreon_shiny_palette:: @ 8DB66EC
 	.incbin "graphics/pokemon/umbreon/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_umbreon_icon:: @ 8DB6714
+gMonIcon_Umbreon:: @ 8DB6714
 	.incbin "graphics/pokemon/umbreon/icon.4bpp"
 
 	.align 2
@@ -7336,7 +7336,7 @@ gFile_graphics_pokemon_palettes_murkrow_shiny_palette:: @ 8DB7154
 	.incbin "graphics/pokemon/murkrow/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_murkrow_icon:: @ 8DB717C
+gMonIcon_Murkrow:: @ 8DB717C
 	.incbin "graphics/pokemon/murkrow/icon.4bpp"
 
 	.align 2
@@ -7360,7 +7360,7 @@ gFile_graphics_pokemon_palettes_slowking_shiny_palette:: @ 8DB7D04
 	.incbin "graphics/pokemon/slowking/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_slowking_icon:: @ 8DB7D2C
+gMonIcon_Slowking:: @ 8DB7D2C
 	.incbin "graphics/pokemon/slowking/icon.4bpp"
 
 	.align 2
@@ -7384,7 +7384,7 @@ gFile_graphics_pokemon_palettes_misdreavus_shiny_palette:: @ 8DB8758
 	.incbin "graphics/pokemon/misdreavus/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_misdreavus_icon:: @ 8DB8780
+gMonIcon_Misdreavus:: @ 8DB8780
 	.incbin "graphics/pokemon/misdreavus/icon.4bpp"
 
 	.align 2
@@ -7408,7 +7408,7 @@ gFile_graphics_pokemon_palettes_unown_shiny_palette:: @ 8DB8F94
 	.incbin "graphics/pokemon/unown/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_unown_a_icon:: @ 8DB8FB4
+gMonIcon_Unown_A:: @ 8DB8FB4
 	.incbin "graphics/pokemon/unown/a/icon.4bpp"
 
 	.align 2
@@ -7432,7 +7432,7 @@ gFile_graphics_pokemon_palettes_wobbuffet_shiny_palette:: @ 8DB9990
 	.incbin "graphics/pokemon/wobbuffet/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_wobbuffet_icon:: @ 8DB99B8
+gMonIcon_Wobbuffet:: @ 8DB99B8
 	.incbin "graphics/pokemon/wobbuffet/icon.4bpp"
 
 	.align 2
@@ -7456,7 +7456,7 @@ gFile_graphics_pokemon_palettes_girafarig_shiny_palette:: @ 8DBA5B0
 	.incbin "graphics/pokemon/girafarig/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_girafarig_icon:: @ 8DBA5D8
+gMonIcon_Girafarig:: @ 8DBA5D8
 	.incbin "graphics/pokemon/girafarig/icon.4bpp"
 
 	.align 2
@@ -7480,7 +7480,7 @@ gFile_graphics_pokemon_palettes_pineco_shiny_palette:: @ 8DBB034
 	.incbin "graphics/pokemon/pineco/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_pineco_icon:: @ 8DBB058
+gMonIcon_Pineco:: @ 8DBB058
 	.incbin "graphics/pokemon/pineco/icon.4bpp"
 
 	.align 2
@@ -7504,7 +7504,7 @@ gFile_graphics_pokemon_palettes_forretress_shiny_palette:: @ 8DBBB7C
 	.incbin "graphics/pokemon/forretress/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_forretress_icon:: @ 8DBBBA4
+gMonIcon_Forretress:: @ 8DBBBA4
 	.incbin "graphics/pokemon/forretress/icon.4bpp"
 
 	.align 2
@@ -7528,7 +7528,7 @@ gFile_graphics_pokemon_palettes_dunsparce_shiny_palette:: @ 8DBC5F8
 	.incbin "graphics/pokemon/dunsparce/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_dunsparce_icon:: @ 8DBC620
+gMonIcon_Dunsparce:: @ 8DBC620
 	.incbin "graphics/pokemon/dunsparce/icon.4bpp"
 
 	.align 2
@@ -7552,7 +7552,7 @@ gFile_graphics_pokemon_palettes_gligar_shiny_palette:: @ 8DBD268
 	.incbin "graphics/pokemon/gligar/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_gligar_icon:: @ 8DBD290
+gMonIcon_Gligar:: @ 8DBD290
 	.incbin "graphics/pokemon/gligar/icon.4bpp"
 
 	.align 2
@@ -7576,7 +7576,7 @@ gFile_graphics_pokemon_palettes_steelix_shiny_palette:: @ 8DBDFA8
 	.incbin "graphics/pokemon/steelix/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_steelix_icon:: @ 8DBDFCC
+gMonIcon_Steelix:: @ 8DBDFCC
 	.incbin "graphics/pokemon/steelix/icon.4bpp"
 
 	.align 2
@@ -7600,7 +7600,7 @@ gFile_graphics_pokemon_palettes_snubbull_shiny_palette:: @ 8DBEA10
 	.incbin "graphics/pokemon/snubbull/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_snubbull_icon:: @ 8DBEA38
+gMonIcon_Snubbull:: @ 8DBEA38
 	.incbin "graphics/pokemon/snubbull/icon.4bpp"
 
 	.align 2
@@ -7624,7 +7624,7 @@ gFile_graphics_pokemon_palettes_granbull_shiny_palette:: @ 8DBF530
 	.incbin "graphics/pokemon/granbull/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_granbull_icon:: @ 8DBF558
+gMonIcon_Granbull:: @ 8DBF558
 	.incbin "graphics/pokemon/granbull/icon.4bpp"
 
 	.align 2
@@ -7648,7 +7648,7 @@ gFile_graphics_pokemon_palettes_qwilfish_shiny_palette:: @ 8DBFF40
 	.incbin "graphics/pokemon/qwilfish/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_qwilfish_icon:: @ 8DBFF68
+gMonIcon_Qwilfish:: @ 8DBFF68
 	.incbin "graphics/pokemon/qwilfish/icon.4bpp"
 
 	.align 2
@@ -7672,7 +7672,7 @@ gFile_graphics_pokemon_palettes_scizor_shiny_palette:: @ 8DC0C18
 	.incbin "graphics/pokemon/scizor/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_scizor_icon:: @ 8DC0C40
+gMonIcon_Scizor:: @ 8DC0C40
 	.incbin "graphics/pokemon/scizor/icon.4bpp"
 
 	.align 2
@@ -7696,7 +7696,7 @@ gFile_graphics_pokemon_palettes_shuckle_shiny_palette:: @ 8DC15A8
 	.incbin "graphics/pokemon/shuckle/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_shuckle_icon:: @ 8DC15D0
+gMonIcon_Shuckle:: @ 8DC15D0
 	.incbin "graphics/pokemon/shuckle/icon.4bpp"
 
 	.align 2
@@ -7720,7 +7720,7 @@ gFile_graphics_pokemon_palettes_heracross_shiny_palette:: @ 8DC2178
 	.incbin "graphics/pokemon/heracross/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_heracross_icon:: @ 8DC21A0
+gMonIcon_Heracross:: @ 8DC21A0
 	.incbin "graphics/pokemon/heracross/icon.4bpp"
 
 gUnknown_heracross_icon:: @ 8DC25A0
@@ -7747,7 +7747,7 @@ gFile_graphics_pokemon_palettes_sneasel_shiny_palette:: @ 8DC3050
 	.incbin "graphics/pokemon/sneasel/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_sneasel_icon:: @ 8DC3078
+gMonIcon_Sneasel:: @ 8DC3078
 	.incbin "graphics/pokemon/sneasel/icon.4bpp"
 
 	.align 2
@@ -7771,7 +7771,7 @@ gFile_graphics_pokemon_palettes_teddiursa_shiny_palette:: @ 8DC39E0
 	.incbin "graphics/pokemon/teddiursa/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_teddiursa_icon:: @ 8DC3A08
+gMonIcon_Teddiursa:: @ 8DC3A08
 	.incbin "graphics/pokemon/teddiursa/icon.4bpp"
 
 	.align 2
@@ -7795,7 +7795,7 @@ gFile_graphics_pokemon_palettes_ursaring_shiny_palette:: @ 8DC4610
 	.incbin "graphics/pokemon/ursaring/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_ursaring_icon:: @ 8DC4638
+gMonIcon_Ursaring:: @ 8DC4638
 	.incbin "graphics/pokemon/ursaring/icon.4bpp"
 
 	.align 2
@@ -7819,7 +7819,7 @@ gFile_graphics_pokemon_palettes_slugma_shiny_palette:: @ 8DC4FD8
 	.incbin "graphics/pokemon/slugma/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_slugma_icon:: @ 8DC4FFC
+gMonIcon_Slugma:: @ 8DC4FFC
 	.incbin "graphics/pokemon/slugma/icon.4bpp"
 
 	.align 2
@@ -7843,7 +7843,7 @@ gFile_graphics_pokemon_palettes_magcargo_shiny_palette:: @ 8DC5BA4
 	.incbin "graphics/pokemon/magcargo/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_magcargo_icon:: @ 8DC5BCC
+gMonIcon_Magcargo:: @ 8DC5BCC
 	.incbin "graphics/pokemon/magcargo/icon.4bpp"
 
 	.align 2
@@ -7867,7 +7867,7 @@ gFile_graphics_pokemon_palettes_swinub_shiny_palette:: @ 8DC644C
 	.incbin "graphics/pokemon/swinub/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_swinub_icon:: @ 8DC6474
+gMonIcon_Swinub:: @ 8DC6474
 	.incbin "graphics/pokemon/swinub/icon.4bpp"
 
 	.align 2
@@ -7891,7 +7891,7 @@ gFile_graphics_pokemon_palettes_piloswine_shiny_palette:: @ 8DC6E30
 	.incbin "graphics/pokemon/piloswine/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_piloswine_icon:: @ 8DC6E58
+gMonIcon_Piloswine:: @ 8DC6E58
 	.incbin "graphics/pokemon/piloswine/icon.4bpp"
 
 	.align 2
@@ -7915,7 +7915,7 @@ gFile_graphics_pokemon_palettes_corsola_shiny_palette:: @ 8DC7848
 	.incbin "graphics/pokemon/corsola/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_corsola_icon:: @ 8DC7870
+gMonIcon_Corsola:: @ 8DC7870
 	.incbin "graphics/pokemon/corsola/icon.4bpp"
 
 	.align 2
@@ -7939,7 +7939,7 @@ gFile_graphics_pokemon_palettes_remoraid_shiny_palette:: @ 8DC8234
 	.incbin "graphics/pokemon/remoraid/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_remoraid_icon:: @ 8DC825C
+gMonIcon_Remoraid:: @ 8DC825C
 	.incbin "graphics/pokemon/remoraid/icon.4bpp"
 
 	.align 2
@@ -7963,7 +7963,7 @@ gFile_graphics_pokemon_palettes_octillery_shiny_palette:: @ 8DC8C90
 	.incbin "graphics/pokemon/octillery/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_octillery_icon:: @ 8DC8CB8
+gMonIcon_Octillery:: @ 8DC8CB8
 	.incbin "graphics/pokemon/octillery/icon.4bpp"
 
 	.align 2
@@ -7987,7 +7987,7 @@ gFile_graphics_pokemon_palettes_delibird_shiny_palette:: @ 8DC9830
 	.incbin "graphics/pokemon/delibird/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_delibird_icon:: @ 8DC9858
+gMonIcon_Delibird:: @ 8DC9858
 	.incbin "graphics/pokemon/delibird/icon.4bpp"
 
 	.align 2
@@ -8011,7 +8011,7 @@ gFile_graphics_pokemon_palettes_mantine_shiny_palette:: @ 8DCA3DC
 	.incbin "graphics/pokemon/mantine/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_mantine_icon:: @ 8DCA404
+gMonIcon_Mantine:: @ 8DCA404
 	.incbin "graphics/pokemon/mantine/icon.4bpp"
 
 	.align 2
@@ -8035,7 +8035,7 @@ gFile_graphics_pokemon_palettes_skarmory_shiny_palette:: @ 8DCB030
 	.incbin "graphics/pokemon/skarmory/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_skarmory_icon:: @ 8DCB058
+gMonIcon_Skarmory:: @ 8DCB058
 	.incbin "graphics/pokemon/skarmory/icon.4bpp"
 
 	.align 2
@@ -8059,7 +8059,7 @@ gFile_graphics_pokemon_palettes_houndour_shiny_palette:: @ 8DCB9D8
 	.incbin "graphics/pokemon/houndour/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_houndour_icon:: @ 8DCBA00
+gMonIcon_Houndour:: @ 8DCBA00
 	.incbin "graphics/pokemon/houndour/icon.4bpp"
 
 	.align 2
@@ -8083,7 +8083,7 @@ gFile_graphics_pokemon_palettes_houndoom_shiny_palette:: @ 8DCC56C
 	.incbin "graphics/pokemon/houndoom/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_houndoom_icon:: @ 8DCC594
+gMonIcon_Houndoom:: @ 8DCC594
 	.incbin "graphics/pokemon/houndoom/icon.4bpp"
 
 	.align 2
@@ -8107,7 +8107,7 @@ gFile_graphics_pokemon_palettes_kingdra_shiny_palette:: @ 8DCD1B0
 	.incbin "graphics/pokemon/kingdra/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_kingdra_icon:: @ 8DCD1D8
+gMonIcon_Kingdra:: @ 8DCD1D8
 	.incbin "graphics/pokemon/kingdra/icon.4bpp"
 
 	.align 2
@@ -8131,7 +8131,7 @@ gFile_graphics_pokemon_palettes_phanpy_shiny_palette:: @ 8DCDB40
 	.incbin "graphics/pokemon/phanpy/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_phanpy_icon:: @ 8DCDB68
+gMonIcon_Phanpy:: @ 8DCDB68
 	.incbin "graphics/pokemon/phanpy/icon.4bpp"
 
 	.align 2
@@ -8155,7 +8155,7 @@ gFile_graphics_pokemon_palettes_donphan_shiny_palette:: @ 8DCE720
 	.incbin "graphics/pokemon/donphan/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_donphan_icon:: @ 8DCE748
+gMonIcon_Donphan:: @ 8DCE748
 	.incbin "graphics/pokemon/donphan/icon.4bpp"
 
 	.align 2
@@ -8179,7 +8179,7 @@ gFile_graphics_pokemon_palettes_porygon2_shiny_palette:: @ 8DCF134
 	.incbin "graphics/pokemon/porygon2/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_porygon2_icon:: @ 8DCF15C
+gMonIcon_Porygon2:: @ 8DCF15C
 	.incbin "graphics/pokemon/porygon2/icon.4bpp"
 
 	.align 2
@@ -8203,7 +8203,7 @@ gFile_graphics_pokemon_palettes_stantler_shiny_palette:: @ 8DCFD04
 	.incbin "graphics/pokemon/stantler/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_stantler_icon:: @ 8DCFD2C
+gMonIcon_Stantler:: @ 8DCFD2C
 	.incbin "graphics/pokemon/stantler/icon.4bpp"
 
 	.align 2
@@ -8227,7 +8227,7 @@ gFile_graphics_pokemon_palettes_smeargle_shiny_palette:: @ 8DD082C
 	.incbin "graphics/pokemon/smeargle/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_smeargle_icon:: @ 8DD0854
+gMonIcon_Smeargle:: @ 8DD0854
 	.incbin "graphics/pokemon/smeargle/icon.4bpp"
 
 	.align 2
@@ -8251,7 +8251,7 @@ gFile_graphics_pokemon_palettes_tyrogue_shiny_palette:: @ 8DD1244
 	.incbin "graphics/pokemon/tyrogue/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_tyrogue_icon:: @ 8DD126C
+gMonIcon_Tyrogue:: @ 8DD126C
 	.incbin "graphics/pokemon/tyrogue/icon.4bpp"
 
 	.align 2
@@ -8275,7 +8275,7 @@ gFile_graphics_pokemon_palettes_hitmontop_shiny_palette:: @ 8DD1E68
 	.incbin "graphics/pokemon/hitmontop/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_hitmontop_icon:: @ 8DD1E90
+gMonIcon_Hitmontop:: @ 8DD1E90
 	.incbin "graphics/pokemon/hitmontop/icon.4bpp"
 
 gUnknown_hitmontop_unknown_data:: @ 8DD2290
@@ -8302,7 +8302,7 @@ gFile_graphics_pokemon_palettes_smoochum_shiny_palette:: @ 8DD29A8
 	.incbin "graphics/pokemon/smoochum/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_smoochum_icon:: @ 8DD29D0
+gMonIcon_Smoochum:: @ 8DD29D0
 	.incbin "graphics/pokemon/smoochum/icon.4bpp"
 
 	.align 2
@@ -8326,7 +8326,7 @@ gFile_graphics_pokemon_palettes_elekid_shiny_palette:: @ 8DD3478
 	.incbin "graphics/pokemon/elekid/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_elekid_icon:: @ 8DD34A0
+gMonIcon_Elekid:: @ 8DD34A0
 	.incbin "graphics/pokemon/elekid/icon.4bpp"
 
 	.align 2
@@ -8350,7 +8350,7 @@ gFile_graphics_pokemon_palettes_magby_shiny_palette:: @ 8DD3E18
 	.incbin "graphics/pokemon/magby/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_magby_icon:: @ 8DD3E40
+gMonIcon_Magby:: @ 8DD3E40
 	.incbin "graphics/pokemon/magby/icon.4bpp"
 
 	.align 2
@@ -8374,7 +8374,7 @@ gFile_graphics_pokemon_palettes_miltank_shiny_palette:: @ 8DD49D4
 	.incbin "graphics/pokemon/miltank/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_miltank_icon:: @ 8DD49FC
+gMonIcon_Miltank:: @ 8DD49FC
 	.incbin "graphics/pokemon/miltank/icon.4bpp"
 
 	.align 2
@@ -8398,7 +8398,7 @@ gFile_graphics_pokemon_palettes_blissey_shiny_palette:: @ 8DD54F8
 	.incbin "graphics/pokemon/blissey/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_blissey_icon:: @ 8DD5520
+gMonIcon_Blissey:: @ 8DD5520
 	.incbin "graphics/pokemon/blissey/icon.4bpp"
 
 	.align 2
@@ -8422,7 +8422,7 @@ gFile_graphics_pokemon_palettes_raikou_shiny_palette:: @ 8DD628C
 	.incbin "graphics/pokemon/raikou/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_raikou_icon:: @ 8DD62B4
+gMonIcon_Raikou:: @ 8DD62B4
 	.incbin "graphics/pokemon/raikou/icon.4bpp"
 
 	.align 2
@@ -8446,7 +8446,7 @@ gFile_graphics_pokemon_palettes_entei_shiny_palette:: @ 8DD711C
 	.incbin "graphics/pokemon/entei/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_entei_icon:: @ 8DD7144
+gMonIcon_Entei:: @ 8DD7144
 	.incbin "graphics/pokemon/entei/icon.4bpp"
 
 	.align 2
@@ -8470,7 +8470,7 @@ gFile_graphics_pokemon_palettes_suicune_shiny_palette:: @ 8DD7FEC
 	.incbin "graphics/pokemon/suicune/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_suicune_icon:: @ 8DD8014
+gMonIcon_Suicune:: @ 8DD8014
 	.incbin "graphics/pokemon/suicune/icon.4bpp"
 
 	.align 2
@@ -8494,7 +8494,7 @@ gFile_graphics_pokemon_palettes_larvitar_shiny_palette:: @ 8DD8964
 	.incbin "graphics/pokemon/larvitar/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_larvitar_icon:: @ 8DD898C
+gMonIcon_Larvitar:: @ 8DD898C
 	.incbin "graphics/pokemon/larvitar/icon.4bpp"
 
 	.align 2
@@ -8518,7 +8518,7 @@ gFile_graphics_pokemon_palettes_pupitar_shiny_palette:: @ 8DD93FC
 	.incbin "graphics/pokemon/pupitar/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_pupitar_icon:: @ 8DD9424
+gMonIcon_Pupitar:: @ 8DD9424
 	.incbin "graphics/pokemon/pupitar/icon.4bpp"
 
 	.align 2
@@ -8542,7 +8542,7 @@ gFile_graphics_pokemon_palettes_tyranitar_shiny_palette:: @ 8DDA194
 	.incbin "graphics/pokemon/tyranitar/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_tyranitar_icon:: @ 8DDA1BC
+gMonIcon_Tyranitar:: @ 8DDA1BC
 	.incbin "graphics/pokemon/tyranitar/icon.4bpp"
 
 	.align 2
@@ -8566,7 +8566,7 @@ gFile_graphics_pokemon_palettes_lugia_shiny_palette:: @ 8DDAE9C
 	.incbin "graphics/pokemon/lugia/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_lugia_icon:: @ 8DDAEC4
+gMonIcon_Lugia:: @ 8DDAEC4
 	.incbin "graphics/pokemon/lugia/icon.4bpp"
 
 	.align 2
@@ -8590,7 +8590,7 @@ gFile_graphics_pokemon_palettes_ho_oh_shiny_palette:: @ 8DDBD70
 	.incbin "graphics/pokemon/ho_oh/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_ho_oh_icon:: @ 8DDBD98
+gMonIcon_Ho_Oh:: @ 8DDBD98
 	.incbin "graphics/pokemon/ho_oh/icon.4bpp"
 
 	.align 2
@@ -8614,7 +8614,7 @@ gFile_graphics_pokemon_palettes_celebi_shiny_palette:: @ 8DDC804
 	.incbin "graphics/pokemon/celebi/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_celebi_icon:: @ 8DDC82C
+gMonIcon_Celebi:: @ 8DDC82C
 	.incbin "graphics/pokemon/celebi/icon.4bpp"
 
 	.align 2
@@ -8654,7 +8654,7 @@ gFile_graphics_pokemon_palettes_treecko_shiny_palette:: @ 8DDD5AC
 	.incbin "graphics/pokemon/treecko/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_treecko_icon:: @ 8DDD5D4
+gMonIcon_Treecko:: @ 8DDD5D4
 	.incbin "graphics/pokemon/treecko/icon.4bpp"
 
 	.align 2
@@ -8678,7 +8678,7 @@ gFile_graphics_pokemon_palettes_grovyle_shiny_palette:: @ 8DDE1E4
 	.incbin "graphics/pokemon/grovyle/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_grovyle_icon:: @ 8DDE20C
+gMonIcon_Grovyle:: @ 8DDE20C
 	.incbin "graphics/pokemon/grovyle/icon.4bpp"
 
 	.align 2
@@ -8702,7 +8702,7 @@ gFile_graphics_pokemon_palettes_sceptile_shiny_palette:: @ 8DDEF54
 	.incbin "graphics/pokemon/sceptile/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_sceptile_icon:: @ 8DDEF7C
+gMonIcon_Sceptile:: @ 8DDEF7C
 	.incbin "graphics/pokemon/sceptile/icon.4bpp"
 
 	.align 2
@@ -8726,7 +8726,7 @@ gFile_graphics_pokemon_palettes_torchic_shiny_palette:: @ 8DDF938
 	.incbin "graphics/pokemon/torchic/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_torchic_icon:: @ 8DDF960
+gMonIcon_Torchic:: @ 8DDF960
 	.incbin "graphics/pokemon/torchic/icon.4bpp"
 
 	.align 2
@@ -8750,7 +8750,7 @@ gFile_graphics_pokemon_palettes_combusken_shiny_palette:: @ 8DE0564
 	.incbin "graphics/pokemon/combusken/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_combusken_icon:: @ 8DE058C
+gMonIcon_Combusken:: @ 8DE058C
 	.incbin "graphics/pokemon/combusken/icon.4bpp"
 
 	.align 2
@@ -8774,7 +8774,7 @@ gFile_graphics_pokemon_palettes_blaziken_shiny_palette:: @ 8DE1228
 	.incbin "graphics/pokemon/blaziken/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_blaziken_icon:: @ 8DE1250
+gMonIcon_Blaziken:: @ 8DE1250
 	.incbin "graphics/pokemon/blaziken/icon.4bpp"
 
 	.align 2
@@ -8798,7 +8798,7 @@ gFile_graphics_pokemon_palettes_mudkip_shiny_palette:: @ 8DE1C30
 	.incbin "graphics/pokemon/mudkip/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_mudkip_icon:: @ 8DE1C58
+gMonIcon_Mudkip:: @ 8DE1C58
 	.incbin "graphics/pokemon/mudkip/icon.4bpp"
 
 	.align 2
@@ -8822,7 +8822,7 @@ gFile_graphics_pokemon_palettes_marshtomp_shiny_palette:: @ 8DE27D8
 	.incbin "graphics/pokemon/marshtomp/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_marshtomp_icon:: @ 8DE2800
+gMonIcon_Marshtomp:: @ 8DE2800
 	.incbin "graphics/pokemon/marshtomp/icon.4bpp"
 
 	.align 2
@@ -8846,7 +8846,7 @@ gFile_graphics_pokemon_palettes_swampert_shiny_palette:: @ 8DE3578
 	.incbin "graphics/pokemon/swampert/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_swampert_icon:: @ 8DE35A0
+gMonIcon_Swampert:: @ 8DE35A0
 	.incbin "graphics/pokemon/swampert/icon.4bpp"
 
 	.align 2
@@ -8870,7 +8870,7 @@ gFile_graphics_pokemon_palettes_poochyena_shiny_palette:: @ 8DE3FDC
 	.incbin "graphics/pokemon/poochyena/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_poochyena_icon:: @ 8DE4004
+gMonIcon_Poochyena:: @ 8DE4004
 	.incbin "graphics/pokemon/poochyena/icon.4bpp"
 
 	.align 2
@@ -8894,7 +8894,7 @@ gFile_graphics_pokemon_palettes_mightyena_shiny_palette:: @ 8DE4BFC
 	.incbin "graphics/pokemon/mightyena/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_mightyena_icon:: @ 8DE4C24
+gMonIcon_Mightyena:: @ 8DE4C24
 	.incbin "graphics/pokemon/mightyena/icon.4bpp"
 
 	.align 2
@@ -8918,7 +8918,7 @@ gFile_graphics_pokemon_palettes_zigzagoon_shiny_palette:: @ 8DE577C
 	.incbin "graphics/pokemon/zigzagoon/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_zigzagoon_icon:: @ 8DE57A4
+gMonIcon_Zigzagoon:: @ 8DE57A4
 	.incbin "graphics/pokemon/zigzagoon/icon.4bpp"
 
 	.align 2
@@ -8942,7 +8942,7 @@ gFile_graphics_pokemon_palettes_linoone_shiny_palette:: @ 8DE6230
 	.incbin "graphics/pokemon/linoone/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_linoone_icon:: @ 8DE6258
+gMonIcon_Linoone:: @ 8DE6258
 	.incbin "graphics/pokemon/linoone/icon.4bpp"
 
 	.align 2
@@ -8966,7 +8966,7 @@ gFile_graphics_pokemon_palettes_wurmple_shiny_palette:: @ 8DE6B74
 	.incbin "graphics/pokemon/wurmple/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_wurmple_icon:: @ 8DE6B9C
+gMonIcon_Wurmple:: @ 8DE6B9C
 	.incbin "graphics/pokemon/wurmple/icon.4bpp"
 
 	.align 2
@@ -8990,7 +8990,7 @@ gFile_graphics_pokemon_palettes_silcoon_shiny_palette:: @ 8DE7480
 	.incbin "graphics/pokemon/silcoon/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_silcoon_icon:: @ 8DE74A8
+gMonIcon_Silcoon:: @ 8DE74A8
 	.incbin "graphics/pokemon/silcoon/icon.4bpp"
 
 	.align 2
@@ -9014,7 +9014,7 @@ gFile_graphics_pokemon_palettes_beautifly_shiny_palette:: @ 8DE7FF8
 	.incbin "graphics/pokemon/beautifly/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_beautifly_icon:: @ 8DE8020
+gMonIcon_Beautifly:: @ 8DE8020
 	.incbin "graphics/pokemon/beautifly/icon.4bpp"
 
 	.align 2
@@ -9038,7 +9038,7 @@ gFile_graphics_pokemon_palettes_cascoon_shiny_palette:: @ 8DE88E4
 	.incbin "graphics/pokemon/cascoon/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_cascoon_icon:: @ 8DE890C
+gMonIcon_Cascoon:: @ 8DE890C
 	.incbin "graphics/pokemon/cascoon/icon.4bpp"
 
 	.align 2
@@ -9062,7 +9062,7 @@ gFile_graphics_pokemon_palettes_dustox_shiny_palette:: @ 8DE9314
 	.incbin "graphics/pokemon/dustox/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_dustox_icon:: @ 8DE933C
+gMonIcon_Dustox:: @ 8DE933C
 	.incbin "graphics/pokemon/dustox/icon.4bpp"
 
 	.align 2
@@ -9086,7 +9086,7 @@ gFile_graphics_pokemon_palettes_lotad_shiny_palette:: @ 8DE9CCC
 	.incbin "graphics/pokemon/lotad/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_lotad_icon:: @ 8DE9CF4
+gMonIcon_Lotad:: @ 8DE9CF4
 	.incbin "graphics/pokemon/lotad/icon.4bpp"
 
 	.align 2
@@ -9110,7 +9110,7 @@ gFile_graphics_pokemon_palettes_lombre_shiny_palette:: @ 8DEA750
 	.incbin "graphics/pokemon/lombre/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_lombre_icon:: @ 8DEA778
+gMonIcon_Lombre:: @ 8DEA778
 	.incbin "graphics/pokemon/lombre/icon.4bpp"
 
 	.align 2
@@ -9134,7 +9134,7 @@ gFile_graphics_pokemon_palettes_ludicolo_shiny_palette:: @ 8DEB3A0
 	.incbin "graphics/pokemon/ludicolo/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_ludicolo_icon:: @ 8DEB3C8
+gMonIcon_Ludicolo:: @ 8DEB3C8
 	.incbin "graphics/pokemon/ludicolo/icon.4bpp"
 
 	.align 2
@@ -9158,7 +9158,7 @@ gFile_graphics_pokemon_palettes_seedot_shiny_palette:: @ 8DEBD84
 	.incbin "graphics/pokemon/seedot/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_seedot_icon:: @ 8DEBDAC
+gMonIcon_Seedot:: @ 8DEBDAC
 	.incbin "graphics/pokemon/seedot/icon.4bpp"
 
 	.align 2
@@ -9182,7 +9182,7 @@ gFile_graphics_pokemon_palettes_nuzleaf_shiny_palette:: @ 8DEC7A8
 	.incbin "graphics/pokemon/nuzleaf/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_nuzleaf_icon:: @ 8DEC7D0
+gMonIcon_Nuzleaf:: @ 8DEC7D0
 	.incbin "graphics/pokemon/nuzleaf/icon.4bpp"
 
 	.align 2
@@ -9206,7 +9206,7 @@ gFile_graphics_pokemon_palettes_shiftry_shiny_palette:: @ 8DED398
 	.incbin "graphics/pokemon/shiftry/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_shiftry_icon:: @ 8DED3C0
+gMonIcon_Shiftry:: @ 8DED3C0
 	.incbin "graphics/pokemon/shiftry/icon.4bpp"
 
 	.align 2
@@ -9230,7 +9230,7 @@ gFile_graphics_pokemon_palettes_nincada_shiny_palette:: @ 8DEDD60
 	.incbin "graphics/pokemon/nincada/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_nincada_icon:: @ 8DEDD88
+gMonIcon_Nincada:: @ 8DEDD88
 	.incbin "graphics/pokemon/nincada/icon.4bpp"
 
 	.align 2
@@ -9254,7 +9254,7 @@ gFile_graphics_pokemon_palettes_ninjask_shiny_palette:: @ 8DEE90C
 	.incbin "graphics/pokemon/ninjask/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_ninjask_icon:: @ 8DEE934
+gMonIcon_Ninjask:: @ 8DEE934
 	.incbin "graphics/pokemon/ninjask/icon.4bpp"
 
 	.align 2
@@ -9278,7 +9278,7 @@ gFile_graphics_pokemon_palettes_shedinja_shiny_palette:: @ 8DEF43C
 	.incbin "graphics/pokemon/shedinja/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_shedinja_icon:: @ 8DEF464
+gMonIcon_Shedinja:: @ 8DEF464
 	.incbin "graphics/pokemon/shedinja/icon.4bpp"
 
 	.align 2
@@ -9302,7 +9302,7 @@ gFile_graphics_pokemon_palettes_taillow_shiny_palette:: @ 8DEFD24
 	.incbin "graphics/pokemon/taillow/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_taillow_icon:: @ 8DEFD4C
+gMonIcon_Taillow:: @ 8DEFD4C
 	.incbin "graphics/pokemon/taillow/icon.4bpp"
 
 	.align 2
@@ -9326,7 +9326,7 @@ gFile_graphics_pokemon_palettes_swellow_shiny_palette:: @ 8DF0890
 	.incbin "graphics/pokemon/swellow/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_swellow_icon:: @ 8DF08B8
+gMonIcon_Swellow:: @ 8DF08B8
 	.incbin "graphics/pokemon/swellow/icon.4bpp"
 
 	.align 2
@@ -9350,7 +9350,7 @@ gFile_graphics_pokemon_palettes_shroomish_shiny_palette:: @ 8DF1248
 	.incbin "graphics/pokemon/shroomish/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_shroomish_icon:: @ 8DF1270
+gMonIcon_Shroomish:: @ 8DF1270
 	.incbin "graphics/pokemon/shroomish/icon.4bpp"
 
 	.align 2
@@ -9374,7 +9374,7 @@ gFile_graphics_pokemon_palettes_breloom_shiny_palette:: @ 8DF1E80
 	.incbin "graphics/pokemon/breloom/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_breloom_icon:: @ 8DF1EA8
+gMonIcon_Breloom:: @ 8DF1EA8
 	.incbin "graphics/pokemon/breloom/icon.4bpp"
 
 	.align 2
@@ -9398,7 +9398,7 @@ gFile_graphics_pokemon_palettes_spinda_shiny_palette:: @ 8DF292C
 	.incbin "graphics/pokemon/spinda/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_spinda_icon:: @ 8DF2954
+gMonIcon_Spinda:: @ 8DF2954
 	.incbin "graphics/pokemon/spinda/icon.4bpp"
 
 	.align 2
@@ -9422,7 +9422,7 @@ gFile_graphics_pokemon_palettes_wingull_shiny_palette:: @ 8DF3328
 	.incbin "graphics/pokemon/wingull/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_wingull_icon:: @ 8DF3350
+gMonIcon_Wingull:: @ 8DF3350
 	.incbin "graphics/pokemon/wingull/icon.4bpp"
 
 	.align 2
@@ -9446,7 +9446,7 @@ gFile_graphics_pokemon_palettes_pelipper_shiny_palette:: @ 8DF3EB0
 	.incbin "graphics/pokemon/pelipper/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_pelipper_icon:: @ 8DF3ED8
+gMonIcon_Pelipper:: @ 8DF3ED8
 	.incbin "graphics/pokemon/pelipper/icon.4bpp"
 
 	.align 2
@@ -9470,7 +9470,7 @@ gFile_graphics_pokemon_palettes_surskit_shiny_palette:: @ 8DF4764
 	.incbin "graphics/pokemon/surskit/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_surskit_icon:: @ 8DF478C
+gMonIcon_Surskit:: @ 8DF478C
 	.incbin "graphics/pokemon/surskit/icon.4bpp"
 
 	.align 2
@@ -9494,7 +9494,7 @@ gFile_graphics_pokemon_palettes_masquerain_shiny_palette:: @ 8DF52C8
 	.incbin "graphics/pokemon/masquerain/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_masquerain_icon:: @ 8DF52F0
+gMonIcon_Masquerain:: @ 8DF52F0
 	.incbin "graphics/pokemon/masquerain/icon.4bpp"
 
 	.align 2
@@ -9518,7 +9518,7 @@ gFile_graphics_pokemon_palettes_wailmer_shiny_palette:: @ 8DF5BFC
 	.incbin "graphics/pokemon/wailmer/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_wailmer_icon:: @ 8DF5C24
+gMonIcon_Wailmer:: @ 8DF5C24
 	.incbin "graphics/pokemon/wailmer/icon.4bpp"
 
 	.align 2
@@ -9542,7 +9542,7 @@ gFile_graphics_pokemon_palettes_wailord_shiny_palette:: @ 8DF6648
 	.incbin "graphics/pokemon/wailord/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_wailord_icon:: @ 8DF6670
+gMonIcon_Wailord:: @ 8DF6670
 	.incbin "graphics/pokemon/wailord/icon.4bpp"
 
 	.align 2
@@ -9566,7 +9566,7 @@ gFile_graphics_pokemon_palettes_skitty_shiny_palette:: @ 8DF7100
 	.incbin "graphics/pokemon/skitty/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_skitty_icon:: @ 8DF7128
+gMonIcon_Skitty:: @ 8DF7128
 	.incbin "graphics/pokemon/skitty/icon.4bpp"
 
 	.align 2
@@ -9590,7 +9590,7 @@ gFile_graphics_pokemon_palettes_delcatty_shiny_palette:: @ 8DF7C98
 	.incbin "graphics/pokemon/delcatty/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_delcatty_icon:: @ 8DF7CC0
+gMonIcon_Delcatty:: @ 8DF7CC0
 	.incbin "graphics/pokemon/delcatty/icon.4bpp"
 
 	.align 2
@@ -9614,7 +9614,7 @@ gFile_graphics_pokemon_palettes_kecleon_shiny_palette:: @ 8DF8860
 	.incbin "graphics/pokemon/kecleon/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_kecleon_icon:: @ 8DF8888
+gMonIcon_Kecleon:: @ 8DF8888
 	.incbin "graphics/pokemon/kecleon/icon.4bpp"
 
 	.align 2
@@ -9638,7 +9638,7 @@ gFile_graphics_pokemon_palettes_baltoy_shiny_palette:: @ 8DF9194
 	.incbin "graphics/pokemon/baltoy/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_baltoy_icon:: @ 8DF91B4
+gMonIcon_Baltoy:: @ 8DF91B4
 	.incbin "graphics/pokemon/baltoy/icon.4bpp"
 
 	.align 2
@@ -9662,7 +9662,7 @@ gFile_graphics_pokemon_palettes_claydol_shiny_palette:: @ 8DF9D88
 	.incbin "graphics/pokemon/claydol/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_claydol_icon:: @ 8DF9DB0
+gMonIcon_Claydol:: @ 8DF9DB0
 	.incbin "graphics/pokemon/claydol/icon.4bpp"
 
 	.align 2
@@ -9686,7 +9686,7 @@ gFile_graphics_pokemon_palettes_nosepass_shiny_palette:: @ 8DFA764
 	.incbin "graphics/pokemon/nosepass/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_nosepass_icon:: @ 8DFA78C
+gMonIcon_Nosepass:: @ 8DFA78C
 	.incbin "graphics/pokemon/nosepass/icon.4bpp"
 
 	.align 2
@@ -9710,7 +9710,7 @@ gFile_graphics_pokemon_palettes_torkoal_shiny_palette:: @ 8DFB348
 	.incbin "graphics/pokemon/torkoal/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_torkoal_icon:: @ 8DFB370
+gMonIcon_Torkoal:: @ 8DFB370
 	.incbin "graphics/pokemon/torkoal/icon.4bpp"
 
 	.align 2
@@ -9734,7 +9734,7 @@ gFile_graphics_pokemon_palettes_sableye_shiny_palette:: @ 8DFBDB4
 	.incbin "graphics/pokemon/sableye/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_sableye_icon:: @ 8DFBDDC
+gMonIcon_Sableye:: @ 8DFBDDC
 	.incbin "graphics/pokemon/sableye/icon.4bpp"
 
 	.align 2
@@ -9758,7 +9758,7 @@ gFile_graphics_pokemon_palettes_barboach_shiny_palette:: @ 8DFC744
 	.incbin "graphics/pokemon/barboach/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_barboach_icon:: @ 8DFC76C
+gMonIcon_Barboach:: @ 8DFC76C
 	.incbin "graphics/pokemon/barboach/icon.4bpp"
 
 	.align 2
@@ -9782,7 +9782,7 @@ gFile_graphics_pokemon_palettes_whiscash_shiny_palette:: @ 8DFD278
 	.incbin "graphics/pokemon/whiscash/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_whiscash_icon:: @ 8DFD2A0
+gMonIcon_Whiscash:: @ 8DFD2A0
 	.incbin "graphics/pokemon/whiscash/icon.4bpp"
 
 	.align 2
@@ -9806,7 +9806,7 @@ gFile_graphics_pokemon_palettes_luvdisc_shiny_palette:: @ 8DFDA78
 	.incbin "graphics/pokemon/luvdisc/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_luvdisc_icon:: @ 8DFDA9C
+gMonIcon_Luvdisc:: @ 8DFDA9C
 	.incbin "graphics/pokemon/luvdisc/icon.4bpp"
 
 	.align 2
@@ -9830,7 +9830,7 @@ gFile_graphics_pokemon_palettes_corphish_shiny_palette:: @ 8DFE55C
 	.incbin "graphics/pokemon/corphish/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_corphish_icon:: @ 8DFE584
+gMonIcon_Corphish:: @ 8DFE584
 	.incbin "graphics/pokemon/corphish/icon.4bpp"
 
 	.align 2
@@ -9854,7 +9854,7 @@ gFile_graphics_pokemon_palettes_crawdaunt_shiny_palette:: @ 8DFF240
 	.incbin "graphics/pokemon/crawdaunt/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_crawdaunt_icon:: @ 8DFF268
+gMonIcon_Crawdaunt:: @ 8DFF268
 	.incbin "graphics/pokemon/crawdaunt/icon.4bpp"
 
 	.align 2
@@ -9878,7 +9878,7 @@ gFile_graphics_pokemon_palettes_feebas_shiny_palette:: @ 8DFFC74
 	.incbin "graphics/pokemon/feebas/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_feebas_icon:: @ 8DFFC9C
+gMonIcon_Feebas:: @ 8DFFC9C
 	.incbin "graphics/pokemon/feebas/icon.4bpp"
 
 	.align 2
@@ -9902,7 +9902,7 @@ gFile_graphics_pokemon_palettes_milotic_shiny_palette:: @ 8E00868
 	.incbin "graphics/pokemon/milotic/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_milotic_icon:: @ 8E00890
+gMonIcon_Milotic:: @ 8E00890
 	.incbin "graphics/pokemon/milotic/icon.4bpp"
 
 	.align 2
@@ -9926,7 +9926,7 @@ gFile_graphics_pokemon_palettes_carvanha_shiny_palette:: @ 8E01314
 	.incbin "graphics/pokemon/carvanha/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_carvanha_icon:: @ 8E0133C
+gMonIcon_Carvanha:: @ 8E0133C
 	.incbin "graphics/pokemon/carvanha/icon.4bpp"
 
 	.align 2
@@ -9950,7 +9950,7 @@ gFile_graphics_pokemon_palettes_sharpedo_shiny_palette:: @ 8E01E6C
 	.incbin "graphics/pokemon/sharpedo/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_sharpedo_icon:: @ 8E01E94
+gMonIcon_Sharpedo:: @ 8E01E94
 	.incbin "graphics/pokemon/sharpedo/icon.4bpp"
 
 	.align 2
@@ -9974,7 +9974,7 @@ gFile_graphics_pokemon_palettes_trapinch_shiny_palette:: @ 8E02718
 	.incbin "graphics/pokemon/trapinch/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_trapinch_icon:: @ 8E02740
+gMonIcon_Trapinch:: @ 8E02740
 	.incbin "graphics/pokemon/trapinch/icon.4bpp"
 
 	.align 2
@@ -9998,7 +9998,7 @@ gFile_graphics_pokemon_palettes_vibrava_shiny_palette:: @ 8E03170
 	.incbin "graphics/pokemon/vibrava/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_vibrava_icon:: @ 8E03198
+gMonIcon_Vibrava:: @ 8E03198
 	.incbin "graphics/pokemon/vibrava/icon.4bpp"
 
 	.align 2
@@ -10022,7 +10022,7 @@ gFile_graphics_pokemon_palettes_flygon_shiny_palette:: @ 8E03F0C
 	.incbin "graphics/pokemon/flygon/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_flygon_icon:: @ 8E03F34
+gMonIcon_Flygon:: @ 8E03F34
 	.incbin "graphics/pokemon/flygon/icon.4bpp"
 
 	.align 2
@@ -10046,7 +10046,7 @@ gFile_graphics_pokemon_palettes_makuhita_shiny_palette:: @ 8E04984
 	.incbin "graphics/pokemon/makuhita/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_makuhita_icon:: @ 8E049A8
+gMonIcon_Makuhita:: @ 8E049A8
 	.incbin "graphics/pokemon/makuhita/icon.4bpp"
 
 	.align 2
@@ -10070,7 +10070,7 @@ gFile_graphics_pokemon_palettes_hariyama_shiny_palette:: @ 8E05680
 	.incbin "graphics/pokemon/hariyama/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_hariyama_icon:: @ 8E056A8
+gMonIcon_Hariyama:: @ 8E056A8
 	.incbin "graphics/pokemon/hariyama/icon.4bpp"
 
 	.align 2
@@ -10094,7 +10094,7 @@ gFile_graphics_pokemon_palettes_electrike_shiny_palette:: @ 8E0600C
 	.incbin "graphics/pokemon/electrike/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_electrike_icon:: @ 8E06034
+gMonIcon_Electrike:: @ 8E06034
 	.incbin "graphics/pokemon/electrike/icon.4bpp"
 
 	.align 2
@@ -10118,7 +10118,7 @@ gFile_graphics_pokemon_palettes_manectric_shiny_palette:: @ 8E069D8
 	.incbin "graphics/pokemon/manectric/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_manectric_icon:: @ 8E06A00
+gMonIcon_Manectric:: @ 8E06A00
 	.incbin "graphics/pokemon/manectric/icon.4bpp"
 
 	.align 2
@@ -10142,7 +10142,7 @@ gFile_graphics_pokemon_palettes_numel_shiny_palette:: @ 8E073D4
 	.incbin "graphics/pokemon/numel/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_numel_icon:: @ 8E073FC
+gMonIcon_Numel:: @ 8E073FC
 	.incbin "graphics/pokemon/numel/icon.4bpp"
 
 	.align 2
@@ -10166,7 +10166,7 @@ gFile_graphics_pokemon_palettes_camerupt_shiny_palette:: @ 8E07F20
 	.incbin "graphics/pokemon/camerupt/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_camerupt_icon:: @ 8E07F48
+gMonIcon_Camerupt:: @ 8E07F48
 	.incbin "graphics/pokemon/camerupt/icon.4bpp"
 
 	.align 2
@@ -10190,7 +10190,7 @@ gFile_graphics_pokemon_palettes_spheal_shiny_palette:: @ 8E08800
 	.incbin "graphics/pokemon/spheal/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_spheal_icon:: @ 8E08828
+gMonIcon_Spheal:: @ 8E08828
 	.incbin "graphics/pokemon/spheal/icon.4bpp"
 
 	.align 2
@@ -10214,7 +10214,7 @@ gFile_graphics_pokemon_palettes_sealeo_shiny_palette:: @ 8E0926C
 	.incbin "graphics/pokemon/sealeo/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_sealeo_icon:: @ 8E09294
+gMonIcon_Sealeo:: @ 8E09294
 	.incbin "graphics/pokemon/sealeo/icon.4bpp"
 
 	.align 2
@@ -10238,7 +10238,7 @@ gFile_graphics_pokemon_palettes_walrein_shiny_palette:: @ 8E09F04
 	.incbin "graphics/pokemon/walrein/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_walrein_icon:: @ 8E09F2C
+gMonIcon_Walrein:: @ 8E09F2C
 	.incbin "graphics/pokemon/walrein/icon.4bpp"
 
 	.align 2
@@ -10262,7 +10262,7 @@ gFile_graphics_pokemon_palettes_cacnea_shiny_palette:: @ 8E0A9E4
 	.incbin "graphics/pokemon/cacnea/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_cacnea_icon:: @ 8E0AA0C
+gMonIcon_Cacnea:: @ 8E0AA0C
 	.incbin "graphics/pokemon/cacnea/icon.4bpp"
 
 	.align 2
@@ -10286,7 +10286,7 @@ gFile_graphics_pokemon_palettes_cacturne_shiny_palette:: @ 8E0B58C
 	.incbin "graphics/pokemon/cacturne/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_cacturne_icon:: @ 8E0B5B4
+gMonIcon_Cacturne:: @ 8E0B5B4
 	.incbin "graphics/pokemon/cacturne/icon.4bpp"
 
 	.align 2
@@ -10310,7 +10310,7 @@ gFile_graphics_pokemon_palettes_snorunt_shiny_palette:: @ 8E0BFA4
 	.incbin "graphics/pokemon/snorunt/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_snorunt_icon:: @ 8E0BFCC
+gMonIcon_Snorunt:: @ 8E0BFCC
 	.incbin "graphics/pokemon/snorunt/icon.4bpp"
 
 	.align 2
@@ -10334,7 +10334,7 @@ gFile_graphics_pokemon_palettes_glalie_shiny_palette:: @ 8E0CB8C
 	.incbin "graphics/pokemon/glalie/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_glalie_icon:: @ 8E0CBB4
+gMonIcon_Glalie:: @ 8E0CBB4
 	.incbin "graphics/pokemon/glalie/icon.4bpp"
 
 	.align 2
@@ -10358,7 +10358,7 @@ gFile_graphics_pokemon_palettes_lunatone_shiny_palette:: @ 8E0D67C
 	.incbin "graphics/pokemon/lunatone/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_lunatone_icon:: @ 8E0D6A4
+gMonIcon_Lunatone:: @ 8E0D6A4
 	.incbin "graphics/pokemon/lunatone/icon.4bpp"
 
 	.align 2
@@ -10382,7 +10382,7 @@ gFile_graphics_pokemon_palettes_solrock_shiny_palette:: @ 8E0E324
 	.incbin "graphics/pokemon/solrock/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_solrock_icon:: @ 8E0E34C
+gMonIcon_Solrock:: @ 8E0E34C
 	.incbin "graphics/pokemon/solrock/icon.4bpp"
 
 	.align 2
@@ -10406,7 +10406,7 @@ gFile_graphics_pokemon_palettes_azurill_shiny_palette:: @ 8E0ED74
 	.incbin "graphics/pokemon/azurill/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_azurill_icon:: @ 8E0ED9C
+gMonIcon_Azurill:: @ 8E0ED9C
 	.incbin "graphics/pokemon/azurill/icon.4bpp"
 
 	.align 2
@@ -10430,7 +10430,7 @@ gFile_graphics_pokemon_palettes_spoink_shiny_palette:: @ 8E0F690
 	.incbin "graphics/pokemon/spoink/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_spoink_icon:: @ 8E0F6B8
+gMonIcon_Spoink:: @ 8E0F6B8
 	.incbin "graphics/pokemon/spoink/icon.4bpp"
 
 	.align 2
@@ -10454,7 +10454,7 @@ gFile_graphics_pokemon_palettes_grumpig_shiny_palette:: @ 8E1021C
 	.incbin "graphics/pokemon/grumpig/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_grumpig_icon:: @ 8E10244
+gMonIcon_Grumpig:: @ 8E10244
 	.incbin "graphics/pokemon/grumpig/icon.4bpp"
 
 	.align 2
@@ -10478,7 +10478,7 @@ gFile_graphics_pokemon_palettes_plusle_shiny_palette:: @ 8E10BD0
 	.incbin "graphics/pokemon/plusle/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_plusle_icon:: @ 8E10BF8
+gMonIcon_Plusle:: @ 8E10BF8
 	.incbin "graphics/pokemon/plusle/icon.4bpp"
 
 	.align 2
@@ -10502,7 +10502,7 @@ gFile_graphics_pokemon_palettes_minun_shiny_palette:: @ 8E11570
 	.incbin "graphics/pokemon/minun/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_minun_icon:: @ 8E11598
+gMonIcon_Minun:: @ 8E11598
 	.incbin "graphics/pokemon/minun/icon.4bpp"
 
 	.align 2
@@ -10526,7 +10526,7 @@ gFile_graphics_pokemon_palettes_mawile_shiny_palette:: @ 8E1219C
 	.incbin "graphics/pokemon/mawile/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_mawile_icon:: @ 8E121C4
+gMonIcon_Mawile:: @ 8E121C4
 	.incbin "graphics/pokemon/mawile/icon.4bpp"
 
 	.align 2
@@ -10550,7 +10550,7 @@ gFile_graphics_pokemon_palettes_meditite_shiny_palette:: @ 8E12B8C
 	.incbin "graphics/pokemon/meditite/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_meditite_icon:: @ 8E12BB0
+gMonIcon_Meditite:: @ 8E12BB0
 	.incbin "graphics/pokemon/meditite/icon.4bpp"
 
 	.align 2
@@ -10574,7 +10574,7 @@ gFile_graphics_pokemon_palettes_medicham_shiny_palette:: @ 8E13660
 	.incbin "graphics/pokemon/medicham/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_medicham_icon:: @ 8E13688
+gMonIcon_Medicham:: @ 8E13688
 	.incbin "graphics/pokemon/medicham/icon.4bpp"
 
 	.align 2
@@ -10598,7 +10598,7 @@ gFile_graphics_pokemon_palettes_swablu_shiny_palette:: @ 8E14160
 	.incbin "graphics/pokemon/swablu/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_swablu_icon:: @ 8E14188
+gMonIcon_Swablu:: @ 8E14188
 	.incbin "graphics/pokemon/swablu/icon.4bpp"
 
 	.align 2
@@ -10622,7 +10622,7 @@ gFile_graphics_pokemon_palettes_altaria_shiny_palette:: @ 8E14D24
 	.incbin "graphics/pokemon/altaria/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_altaria_icon:: @ 8E14D4C
+gMonIcon_Altaria:: @ 8E14D4C
 	.incbin "graphics/pokemon/altaria/icon.4bpp"
 
 	.align 2
@@ -10646,7 +10646,7 @@ gFile_graphics_pokemon_palettes_wynaut_shiny_palette:: @ 8E156BC
 	.incbin "graphics/pokemon/wynaut/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_wynaut_icon:: @ 8E156E4
+gMonIcon_Wynaut:: @ 8E156E4
 	.incbin "graphics/pokemon/wynaut/icon.4bpp"
 
 	.align 2
@@ -10670,7 +10670,7 @@ gFile_graphics_pokemon_palettes_duskull_shiny_palette:: @ 8E160CC
 	.incbin "graphics/pokemon/duskull/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_duskull_icon:: @ 8E160F4
+gMonIcon_Duskull:: @ 8E160F4
 	.incbin "graphics/pokemon/duskull/icon.4bpp"
 
 	.align 2
@@ -10694,7 +10694,7 @@ gFile_graphics_pokemon_palettes_dusclops_shiny_palette:: @ 8E16BC8
 	.incbin "graphics/pokemon/dusclops/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_dusclops_icon:: @ 8E16BF0
+gMonIcon_Dusclops:: @ 8E16BF0
 	.incbin "graphics/pokemon/dusclops/icon.4bpp"
 
 	.align 2
@@ -10718,7 +10718,7 @@ gFile_graphics_pokemon_palettes_roselia_shiny_palette:: @ 8E1776C
 	.incbin "graphics/pokemon/roselia/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_roselia_icon:: @ 8E17794
+gMonIcon_Roselia:: @ 8E17794
 	.incbin "graphics/pokemon/roselia/icon.4bpp"
 
 	.align 2
@@ -10742,7 +10742,7 @@ gFile_graphics_pokemon_palettes_slakoth_shiny_palette:: @ 8E181AC
 	.incbin "graphics/pokemon/slakoth/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_slakoth_icon:: @ 8E181D4
+gMonIcon_Slakoth:: @ 8E181D4
 	.incbin "graphics/pokemon/slakoth/icon.4bpp"
 
 	.align 2
@@ -10766,7 +10766,7 @@ gFile_graphics_pokemon_palettes_vigoroth_shiny_palette:: @ 8E18CE0
 	.incbin "graphics/pokemon/vigoroth/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_vigoroth_icon:: @ 8E18D08
+gMonIcon_Vigoroth:: @ 8E18D08
 	.incbin "graphics/pokemon/vigoroth/icon.4bpp"
 
 	.align 2
@@ -10790,7 +10790,7 @@ gFile_graphics_pokemon_palettes_slaking_shiny_palette:: @ 8E199E8
 	.incbin "graphics/pokemon/slaking/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_slaking_icon:: @ 8E19A10
+gMonIcon_Slaking:: @ 8E19A10
 	.incbin "graphics/pokemon/slaking/icon.4bpp"
 
 	.align 2
@@ -10814,7 +10814,7 @@ gFile_graphics_pokemon_palettes_gulpin_shiny_palette:: @ 8E1A2F4
 	.incbin "graphics/pokemon/gulpin/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_gulpin_icon:: @ 8E1A31C
+gMonIcon_Gulpin:: @ 8E1A31C
 	.incbin "graphics/pokemon/gulpin/icon.4bpp"
 
 	.align 2
@@ -10838,7 +10838,7 @@ gFile_graphics_pokemon_palettes_swalot_shiny_palette:: @ 8E1ADF0
 	.incbin "graphics/pokemon/swalot/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_swalot_icon:: @ 8E1AE18
+gMonIcon_Swalot:: @ 8E1AE18
 	.incbin "graphics/pokemon/swalot/icon.4bpp"
 
 	.align 2
@@ -10862,7 +10862,7 @@ gFile_graphics_pokemon_palettes_tropius_shiny_palette:: @ 8E1BAFC
 	.incbin "graphics/pokemon/tropius/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_tropius_icon:: @ 8E1BB24
+gMonIcon_Tropius:: @ 8E1BB24
 	.incbin "graphics/pokemon/tropius/icon.4bpp"
 
 	.align 2
@@ -10886,7 +10886,7 @@ gFile_graphics_pokemon_palettes_whismur_shiny_palette:: @ 8E1C470
 	.incbin "graphics/pokemon/whismur/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_whismur_icon:: @ 8E1C498
+gMonIcon_Whismur:: @ 8E1C498
 	.incbin "graphics/pokemon/whismur/icon.4bpp"
 
 	.align 2
@@ -10910,7 +10910,7 @@ gFile_graphics_pokemon_palettes_loudred_shiny_palette:: @ 8E1D0C8
 	.incbin "graphics/pokemon/loudred/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_loudred_icon:: @ 8E1D0F0
+gMonIcon_Loudred:: @ 8E1D0F0
 	.incbin "graphics/pokemon/loudred/icon.4bpp"
 
 	.align 2
@@ -10934,7 +10934,7 @@ gFile_graphics_pokemon_palettes_exploud_shiny_palette:: @ 8E1DEAC
 	.incbin "graphics/pokemon/exploud/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_exploud_icon:: @ 8E1DED4
+gMonIcon_Exploud:: @ 8E1DED4
 	.incbin "graphics/pokemon/exploud/icon.4bpp"
 
 	.align 2
@@ -10958,7 +10958,7 @@ gFile_graphics_pokemon_palettes_clamperl_shiny_palette:: @ 8E1E888
 	.incbin "graphics/pokemon/clamperl/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_clamperl_icon:: @ 8E1E8B0
+gMonIcon_Clamperl:: @ 8E1E8B0
 	.incbin "graphics/pokemon/clamperl/icon.4bpp"
 
 	.align 2
@@ -10982,7 +10982,7 @@ gFile_graphics_pokemon_palettes_huntail_shiny_palette:: @ 8E1F418
 	.incbin "graphics/pokemon/huntail/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_huntail_icon:: @ 8E1F440
+gMonIcon_Huntail:: @ 8E1F440
 	.incbin "graphics/pokemon/huntail/icon.4bpp"
 
 	.align 2
@@ -11006,7 +11006,7 @@ gFile_graphics_pokemon_palettes_gorebyss_shiny_palette:: @ 8E1FE80
 	.incbin "graphics/pokemon/gorebyss/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_gorebyss_icon:: @ 8E1FEA8
+gMonIcon_Gorebyss:: @ 8E1FEA8
 	.incbin "graphics/pokemon/gorebyss/icon.4bpp"
 
 	.align 2
@@ -11030,7 +11030,7 @@ gFile_graphics_pokemon_palettes_absol_shiny_palette:: @ 8E20A80
 	.incbin "graphics/pokemon/absol/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_absol_icon:: @ 8E20AA8
+gMonIcon_Absol:: @ 8E20AA8
 	.incbin "graphics/pokemon/absol/icon.4bpp"
 
 	.align 2
@@ -11054,7 +11054,7 @@ gFile_graphics_pokemon_palettes_shuppet_shiny_palette:: @ 8E213C0
 	.incbin "graphics/pokemon/shuppet/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_shuppet_icon:: @ 8E213E8
+gMonIcon_Shuppet:: @ 8E213E8
 	.incbin "graphics/pokemon/shuppet/icon.4bpp"
 
 	.align 2
@@ -11078,7 +11078,7 @@ gFile_graphics_pokemon_palettes_banette_shiny_palette:: @ 8E21D60
 	.incbin "graphics/pokemon/banette/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_banette_icon:: @ 8E21D88
+gMonIcon_Banette:: @ 8E21D88
 	.incbin "graphics/pokemon/banette/icon.4bpp"
 
 	.align 2
@@ -11102,7 +11102,7 @@ gFile_graphics_pokemon_palettes_seviper_shiny_palette:: @ 8E22A7C
 	.incbin "graphics/pokemon/seviper/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_seviper_icon:: @ 8E22AA4
+gMonIcon_Seviper:: @ 8E22AA4
 	.incbin "graphics/pokemon/seviper/icon.4bpp"
 
 	.align 2
@@ -11126,7 +11126,7 @@ gFile_graphics_pokemon_palettes_zangoose_shiny_palette:: @ 8E2362C
 	.incbin "graphics/pokemon/zangoose/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_zangoose_icon:: @ 8E23654
+gMonIcon_Zangoose:: @ 8E23654
 	.incbin "graphics/pokemon/zangoose/icon.4bpp"
 
 	.align 2
@@ -11150,7 +11150,7 @@ gFile_graphics_pokemon_palettes_relicanth_shiny_palette:: @ 8E24188
 	.incbin "graphics/pokemon/relicanth/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_relicanth_icon:: @ 8E241B0
+gMonIcon_Relicanth:: @ 8E241B0
 	.incbin "graphics/pokemon/relicanth/icon.4bpp"
 
 	.align 2
@@ -11174,7 +11174,7 @@ gFile_graphics_pokemon_palettes_aron_shiny_palette:: @ 8E24A08
 	.incbin "graphics/pokemon/aron/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_aron_icon:: @ 8E24A30
+gMonIcon_Aron:: @ 8E24A30
 	.incbin "graphics/pokemon/aron/icon.4bpp"
 
 	.align 2
@@ -11198,7 +11198,7 @@ gFile_graphics_pokemon_palettes_lairon_shiny_palette:: @ 8E25530
 	.incbin "graphics/pokemon/lairon/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_lairon_icon:: @ 8E25558
+gMonIcon_Lairon:: @ 8E25558
 	.incbin "graphics/pokemon/lairon/icon.4bpp"
 
 	.align 2
@@ -11222,7 +11222,7 @@ gFile_graphics_pokemon_palettes_aggron_shiny_palette:: @ 8E26344
 	.incbin "graphics/pokemon/aggron/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_aggron_icon:: @ 8E2636C
+gMonIcon_Aggron:: @ 8E2636C
 	.incbin "graphics/pokemon/aggron/icon.4bpp"
 
 	.align 2
@@ -11246,7 +11246,7 @@ gFile_graphics_pokemon_palettes_castform_shiny_palette:: @ 8E27C50
 	.incbin "graphics/pokemon/castform/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_castform_icon:: @ 8E27CCC
+gMonIcon_Castform:: @ 8E27CCC
 	.incbin "graphics/pokemon/castform/icon.4bpp"
 
 	.align 2
@@ -11270,7 +11270,7 @@ gFile_graphics_pokemon_palettes_volbeat_shiny_palette:: @ 8E28804
 	.incbin "graphics/pokemon/volbeat/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_volbeat_icon:: @ 8E2882C
+gMonIcon_Volbeat:: @ 8E2882C
 	.incbin "graphics/pokemon/volbeat/icon.4bpp"
 
 	.align 2
@@ -11294,7 +11294,7 @@ gFile_graphics_pokemon_palettes_illumise_shiny_palette:: @ 8E29304
 	.incbin "graphics/pokemon/illumise/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_illumise_icon:: @ 8E2932C
+gMonIcon_Illumise:: @ 8E2932C
 	.incbin "graphics/pokemon/illumise/icon.4bpp"
 
 	.align 2
@@ -11318,7 +11318,7 @@ gFile_graphics_pokemon_palettes_lileep_shiny_palette:: @ 8E29DFC
 	.incbin "graphics/pokemon/lileep/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_lileep_icon:: @ 8E29E24
+gMonIcon_Lileep:: @ 8E29E24
 	.incbin "graphics/pokemon/lileep/icon.4bpp"
 
 	.align 2
@@ -11342,7 +11342,7 @@ gFile_graphics_pokemon_palettes_cradily_shiny_palette:: @ 8E2AA84
 	.incbin "graphics/pokemon/cradily/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_cradily_icon:: @ 8E2AAAC
+gMonIcon_Cradily:: @ 8E2AAAC
 	.incbin "graphics/pokemon/cradily/icon.4bpp"
 
 	.align 2
@@ -11366,7 +11366,7 @@ gFile_graphics_pokemon_palettes_anorith_shiny_palette:: @ 8E2B460
 	.incbin "graphics/pokemon/anorith/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_anorith_icon:: @ 8E2B488
+gMonIcon_Anorith:: @ 8E2B488
 	.incbin "graphics/pokemon/anorith/icon.4bpp"
 
 	.align 2
@@ -11390,7 +11390,7 @@ gFile_graphics_pokemon_palettes_armaldo_shiny_palette:: @ 8E2C288
 	.incbin "graphics/pokemon/armaldo/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_armaldo_icon:: @ 8E2C2B0
+gMonIcon_Armaldo:: @ 8E2C2B0
 	.incbin "graphics/pokemon/armaldo/icon.4bpp"
 
 	.align 2
@@ -11414,7 +11414,7 @@ gFile_graphics_pokemon_palettes_ralts_shiny_palette:: @ 8E2CB64
 	.incbin "graphics/pokemon/ralts/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_ralts_icon:: @ 8E2CB8C
+gMonIcon_Ralts:: @ 8E2CB8C
 	.incbin "graphics/pokemon/ralts/icon.4bpp"
 
 	.align 2
@@ -11438,7 +11438,7 @@ gFile_graphics_pokemon_palettes_kirlia_shiny_palette:: @ 8E2D644
 	.incbin "graphics/pokemon/kirlia/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_kirlia_icon:: @ 8E2D66C
+gMonIcon_Kirlia:: @ 8E2D66C
 	.incbin "graphics/pokemon/kirlia/icon.4bpp"
 
 	.align 2
@@ -11462,7 +11462,7 @@ gFile_graphics_pokemon_palettes_gardevoir_shiny_palette:: @ 8E2E164
 	.incbin "graphics/pokemon/gardevoir/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_gardevoir_icon:: @ 8E2E18C
+gMonIcon_Gardevoir:: @ 8E2E18C
 	.incbin "graphics/pokemon/gardevoir/icon.4bpp"
 
 	.align 2
@@ -11486,7 +11486,7 @@ gFile_graphics_pokemon_palettes_bagon_shiny_palette:: @ 8E2EB34
 	.incbin "graphics/pokemon/bagon/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_bagon_icon:: @ 8E2EB5C
+gMonIcon_Bagon:: @ 8E2EB5C
 	.incbin "graphics/pokemon/bagon/icon.4bpp"
 
 	.align 2
@@ -11510,7 +11510,7 @@ gFile_graphics_pokemon_palettes_shelgon_shiny_palette:: @ 8E2F590
 	.incbin "graphics/pokemon/shelgon/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_shelgon_icon:: @ 8E2F5B8
+gMonIcon_Shelgon:: @ 8E2F5B8
 	.incbin "graphics/pokemon/shelgon/icon.4bpp"
 
 	.align 2
@@ -11534,7 +11534,7 @@ gFile_graphics_pokemon_palettes_salamence_shiny_palette:: @ 8E30148
 	.incbin "graphics/pokemon/salamence/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_salamence_icon:: @ 8E30170
+gMonIcon_Salamence:: @ 8E30170
 	.incbin "graphics/pokemon/salamence/icon.4bpp"
 
 	.align 2
@@ -11558,7 +11558,7 @@ gFile_graphics_pokemon_palettes_beldum_shiny_palette:: @ 8E30B18
 	.incbin "graphics/pokemon/beldum/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_beldum_icon:: @ 8E30B40
+gMonIcon_Beldum:: @ 8E30B40
 	.incbin "graphics/pokemon/beldum/icon.4bpp"
 
 	.align 2
@@ -11582,7 +11582,7 @@ gFile_graphics_pokemon_palettes_metang_shiny_palette:: @ 8E31708
 	.incbin "graphics/pokemon/metang/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_metang_icon:: @ 8E31730
+gMonIcon_Metang:: @ 8E31730
 	.incbin "graphics/pokemon/metang/icon.4bpp"
 
 	.align 2
@@ -11606,7 +11606,7 @@ gFile_graphics_pokemon_palettes_metagross_shiny_palette:: @ 8E322A8
 	.incbin "graphics/pokemon/metagross/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_metagross_icon:: @ 8E322D0
+gMonIcon_Metagross:: @ 8E322D0
 	.incbin "graphics/pokemon/metagross/icon.4bpp"
 
 	.align 2
@@ -11630,7 +11630,7 @@ gFile_graphics_pokemon_palettes_regirock_shiny_palette:: @ 8E33020
 	.incbin "graphics/pokemon/regirock/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_regirock_icon:: @ 8E33048
+gMonIcon_Regirock:: @ 8E33048
 	.incbin "graphics/pokemon/regirock/icon.4bpp"
 
 	.align 2
@@ -11654,7 +11654,7 @@ gFile_graphics_pokemon_palettes_regice_shiny_palette:: @ 8E33BC8
 	.incbin "graphics/pokemon/regice/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_regice_icon:: @ 8E33BF0
+gMonIcon_Regice:: @ 8E33BF0
 	.incbin "graphics/pokemon/regice/icon.4bpp"
 
 	.align 2
@@ -11678,7 +11678,7 @@ gFile_graphics_pokemon_palettes_registeel_shiny_palette:: @ 8E347F8
 	.incbin "graphics/pokemon/registeel/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_registeel_icon:: @ 8E34820
+gMonIcon_Registeel:: @ 8E34820
 	.incbin "graphics/pokemon/registeel/icon.4bpp"
 
 	.align 2
@@ -11702,7 +11702,7 @@ gFile_graphics_pokemon_palettes_kyogre_shiny_palette:: @ 8E35350
 	.incbin "graphics/pokemon/kyogre/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_kyogre_icon:: @ 8E35378
+gMonIcon_Kyogre:: @ 8E35378
 	.incbin "graphics/pokemon/kyogre/icon.4bpp"
 
 	.align 2
@@ -11726,7 +11726,7 @@ gFile_graphics_pokemon_palettes_groudon_shiny_palette:: @ 8E361BC
 	.incbin "graphics/pokemon/groudon/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_groudon_icon:: @ 8E361E4
+gMonIcon_Groudon:: @ 8E361E4
 	.incbin "graphics/pokemon/groudon/icon.4bpp"
 
 	.align 2
@@ -11750,7 +11750,7 @@ gFile_graphics_pokemon_palettes_rayquaza_shiny_palette:: @ 8E36E74
 	.incbin "graphics/pokemon/rayquaza/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_rayquaza_icon:: @ 8E36E9C
+gMonIcon_Rayquaza:: @ 8E36E9C
 	.incbin "graphics/pokemon/rayquaza/icon.4bpp"
 
 	.align 2
@@ -11774,7 +11774,7 @@ gFile_graphics_pokemon_palettes_latias_shiny_palette:: @ 8E37A04
 	.incbin "graphics/pokemon/latias/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_latias_icon:: @ 8E37A2C
+gMonIcon_Latias:: @ 8E37A2C
 	.incbin "graphics/pokemon/latias/icon.4bpp"
 
 	.align 2
@@ -11798,7 +11798,7 @@ gFile_graphics_pokemon_palettes_latios_shiny_palette:: @ 8E38628
 	.incbin "graphics/pokemon/latios/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_latios_icon:: @ 8E38650
+gMonIcon_Latios:: @ 8E38650
 	.incbin "graphics/pokemon/latios/icon.4bpp"
 
 	.align 2
@@ -11822,7 +11822,7 @@ gFile_graphics_pokemon_palettes_jirachi_shiny_palette:: @ 8E39144
 	.incbin "graphics/pokemon/jirachi/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_jirachi_icon:: @ 8E3916C
+gMonIcon_Jirachi:: @ 8E3916C
 	.incbin "graphics/pokemon/jirachi/icon.4bpp"
 
 	.align 2
@@ -11846,11 +11846,9 @@ gFile_graphics_pokemon_palettes_deoxys_shiny_palette:: @ 8E3A360
 	.incbin "graphics/pokemon/deoxys/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_deoxys_icon:: @ 8E3A388
+gMonIcon_Deoxys:: @ 8E3A388
 	.incbin "graphics/pokemon/deoxys/icon.4bpp"
-
-	.align 2
-gFile_graphics_pokemon_icons_deoxys_speed_icon:: @ 8E3A788
+	@ Referenced as part of the same array as normal deoxys
 	.incbin "graphics/pokemon/deoxys/speed_icon.4bpp"
 
 	.align 2
@@ -11874,7 +11872,7 @@ gFile_graphics_pokemon_palettes_chimecho_shiny_palette:: @ 8E3B090
 	.incbin "graphics/pokemon/chimecho/shiny.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_chimecho_icon:: @ 8E3B0B8
+gMonIcon_Chimecho:: @ 8E3B0B8
 	.incbin "graphics/pokemon/chimecho/icon.4bpp"
 
 	.align 2
@@ -11898,7 +11896,7 @@ gFile_graphics_pokemon_back_pics_unown_b_back_pic:: @ 8E3B884
 	.incbin "graphics/pokemon/unown/b/back.4bpp.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_unown_B_icon:: @ 8E3BA88
+gMonIcon_Unown_B:: @ 8E3BA88
 	.incbin "graphics/pokemon/unown/b/icon.4bpp"
 
 	.align 2
@@ -11910,7 +11908,7 @@ gFile_graphics_pokemon_back_pics_unown_c_back_pic:: @ 8E3C09C
 	.incbin "graphics/pokemon/unown/c/back.4bpp.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_unown_C_icon:: @ 8E3C348
+gMonIcon_Unown_C:: @ 8E3C348
 	.incbin "graphics/pokemon/unown/c/icon.4bpp"
 
 	.align 2
@@ -11922,7 +11920,7 @@ gFile_graphics_pokemon_back_pics_unown_d_back_pic:: @ 8E3C940
 	.incbin "graphics/pokemon/unown/d/back.4bpp.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_unown_D_icon:: @ 8E3CB98
+gMonIcon_Unown_D:: @ 8E3CB98
 	.incbin "graphics/pokemon/unown/d/icon.4bpp"
 
 	.align 2
@@ -11934,7 +11932,7 @@ gFile_graphics_pokemon_back_pics_unown_e_back_pic:: @ 8E3D150
 	.incbin "graphics/pokemon/unown/e/back.4bpp.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_unown_E_icon:: @ 8E3D350
+gMonIcon_Unown_E:: @ 8E3D350
 	.incbin "graphics/pokemon/unown/e/icon.4bpp"
 
 	.align 2
@@ -11946,7 +11944,7 @@ gFile_graphics_pokemon_back_pics_unown_f_back_pic:: @ 8E3D944
 	.incbin "graphics/pokemon/unown/f/back.4bpp.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_unown_F_icon:: @ 8E3DB60
+gMonIcon_Unown_F:: @ 8E3DB60
 	.incbin "graphics/pokemon/unown/f/icon.4bpp"
 
 	.align 2
@@ -11958,7 +11956,7 @@ gFile_graphics_pokemon_back_pics_unown_g_back_pic:: @ 8E3E13C
 	.incbin "graphics/pokemon/unown/g/back.4bpp.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_unown_G_icon:: @ 8E3E388
+gMonIcon_Unown_G:: @ 8E3E388
 	.incbin "graphics/pokemon/unown/g/icon.4bpp"
 
 	.align 2
@@ -11970,7 +11968,7 @@ gFile_graphics_pokemon_back_pics_unown_h_back_pic:: @ 8E3E9CC
 	.incbin "graphics/pokemon/unown/h/back.4bpp.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_unown_H_icon:: @ 8E3EC90
+gMonIcon_Unown_H:: @ 8E3EC90
 	.incbin "graphics/pokemon/unown/h/icon.4bpp"
 
 	.align 2
@@ -11982,7 +11980,7 @@ gFile_graphics_pokemon_back_pics_unown_i_back_pic:: @ 8E3F228
 	.incbin "graphics/pokemon/unown/i/back.4bpp.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_unown_I_icon:: @ 8E3F3D0
+gMonIcon_Unown_I:: @ 8E3F3D0
 	.incbin "graphics/pokemon/unown/i/icon.4bpp"
 
 	.align 2
@@ -11994,7 +11992,7 @@ gFile_graphics_pokemon_back_pics_unown_j_back_pic:: @ 8E3F994
 	.incbin "graphics/pokemon/unown/j/back.4bpp.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_unown_J_icon:: @ 8E3FB7C
+gMonIcon_Unown_J:: @ 8E3FB7C
 	.incbin "graphics/pokemon/unown/j/icon.4bpp"
 
 	.align 2
@@ -12006,7 +12004,7 @@ gFile_graphics_pokemon_back_pics_unown_k_back_pic:: @ 8E4014C
 	.incbin "graphics/pokemon/unown/k/back.4bpp.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_unown_K_icon:: @ 8E40344
+gMonIcon_Unown_K:: @ 8E40344
 	.incbin "graphics/pokemon/unown/k/icon.4bpp"
 
 	.align 2
@@ -12018,7 +12016,7 @@ gFile_graphics_pokemon_back_pics_unown_l_back_pic:: @ 8E408F4
 	.incbin "graphics/pokemon/unown/l/back.4bpp.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_unown_L_icon:: @ 8E40AC8
+gMonIcon_Unown_L:: @ 8E40AC8
 	.incbin "graphics/pokemon/unown/l/icon.4bpp"
 
 	.align 2
@@ -12030,7 +12028,7 @@ gFile_graphics_pokemon_back_pics_unown_m_back_pic:: @ 8E410EC
 	.incbin "graphics/pokemon/unown/m/back.4bpp.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_unown_M_icon:: @ 8E41394
+gMonIcon_Unown_M:: @ 8E41394
 	.incbin "graphics/pokemon/unown/m/icon.4bpp"
 
 	.align 2
@@ -12042,7 +12040,7 @@ gFile_graphics_pokemon_back_pics_unown_n_back_pic:: @ 8E4198C
 	.incbin "graphics/pokemon/unown/n/back.4bpp.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_unown_N_icon:: @ 8E41BF8
+gMonIcon_Unown_N:: @ 8E41BF8
 	.incbin "graphics/pokemon/unown/n/icon.4bpp"
 
 	.align 2
@@ -12054,7 +12052,7 @@ gFile_graphics_pokemon_back_pics_unown_o_back_pic:: @ 8E42230
 	.incbin "graphics/pokemon/unown/o/back.4bpp.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_unown_O_icon:: @ 8E424F0
+gMonIcon_Unown_O:: @ 8E424F0
 	.incbin "graphics/pokemon/unown/o/icon.4bpp"
 
 	.align 2
@@ -12066,7 +12064,7 @@ gFile_graphics_pokemon_back_pics_unown_p_back_pic:: @ 8E42A90
 	.incbin "graphics/pokemon/unown/p/back.4bpp.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_unown_P_icon:: @ 8E42C54
+gMonIcon_Unown_P:: @ 8E42C54
 	.incbin "graphics/pokemon/unown/p/icon.4bpp"
 
 	.align 2
@@ -12078,7 +12076,7 @@ gFile_graphics_pokemon_back_pics_unown_q_back_pic:: @ 8E43208
 	.incbin "graphics/pokemon/unown/q/back.4bpp.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_unown_Q_icon:: @ 8E433D4
+gMonIcon_Unown_Q:: @ 8E433D4
 	.incbin "graphics/pokemon/unown/q/icon.4bpp"
 
 	.align 2
@@ -12090,7 +12088,7 @@ gFile_graphics_pokemon_back_pics_unown_r_back_pic:: @ 8E43978
 	.incbin "graphics/pokemon/unown/r/back.4bpp.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_unown_R_icon:: @ 8E43B40
+gMonIcon_Unown_R:: @ 8E43B40
 	.incbin "graphics/pokemon/unown/r/icon.4bpp"
 
 	.align 2
@@ -12102,7 +12100,7 @@ gFile_graphics_pokemon_back_pics_unown_s_back_pic:: @ 8E44128
 	.incbin "graphics/pokemon/unown/s/back.4bpp.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_unown_S_icon:: @ 8E4437C
+gMonIcon_Unown_S:: @ 8E4437C
 	.incbin "graphics/pokemon/unown/s/icon.4bpp"
 
 	.align 2
@@ -12114,7 +12112,7 @@ gFile_graphics_pokemon_back_pics_unown_t_back_pic:: @ 8E4492C
 	.incbin "graphics/pokemon/unown/t/back.4bpp.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_unown_T_icon:: @ 8E44AE0
+gMonIcon_Unown_T:: @ 8E44AE0
 	.incbin "graphics/pokemon/unown/t/icon.4bpp"
 
 	.align 2
@@ -12126,7 +12124,7 @@ gFile_graphics_pokemon_back_pics_unown_u_back_pic:: @ 8E450F8
 	.incbin "graphics/pokemon/unown/u/back.4bpp.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_unown_U_icon:: @ 8E4534C
+gMonIcon_Unown_U:: @ 8E4534C
 	.incbin "graphics/pokemon/unown/u/icon.4bpp"
 
 	.align 2
@@ -12138,7 +12136,7 @@ gFile_graphics_pokemon_back_pics_unown_v_back_pic:: @ 8E45930
 	.incbin "graphics/pokemon/unown/v/back.4bpp.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_unown_V_icon:: @ 8E45B60
+gMonIcon_Unown_V:: @ 8E45B60
 	.incbin "graphics/pokemon/unown/v/icon.4bpp"
 
 	.align 2
@@ -12150,7 +12148,7 @@ gFile_graphics_pokemon_back_pics_unown_w_back_pic:: @ 8E46134
 	.incbin "graphics/pokemon/unown/w/back.4bpp.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_unown_W_icon:: @ 8E46338
+gMonIcon_Unown_W:: @ 8E46338
 	.incbin "graphics/pokemon/unown/w/icon.4bpp"
 
 	.align 2
@@ -12162,7 +12160,7 @@ gFile_graphics_pokemon_back_pics_unown_x_back_pic:: @ 8E468FC
 	.incbin "graphics/pokemon/unown/x/back.4bpp.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_unown_X_icon:: @ 8E46AEC
+gMonIcon_Unown_X:: @ 8E46AEC
 	.incbin "graphics/pokemon/unown/x/icon.4bpp"
 
 	.align 2
@@ -12174,7 +12172,7 @@ gFile_graphics_pokemon_back_pics_unown_y_back_pic:: @ 8E470C4
 	.incbin "graphics/pokemon/unown/y/back.4bpp.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_unown_Y_icon:: @ 8E472B8
+gMonIcon_Unown_Y:: @ 8E472B8
 	.incbin "graphics/pokemon/unown/y/icon.4bpp"
 
 	.align 2
@@ -12186,7 +12184,7 @@ gFile_graphics_pokemon_back_pics_unown_z_back_pic:: @ 8E47868
 	.incbin "graphics/pokemon/unown/z/back.4bpp.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_unown_Z_icon:: @ 8E47A44
+gMonIcon_Unown_Z:: @ 8E47A44
 	.incbin "graphics/pokemon/unown/z/icon.4bpp"
 
 	.align 2
@@ -12198,7 +12196,7 @@ gFile_graphics_pokemon_back_pics_unown_exclamation_mark_back_pic:: @ 8E47FD4
 	.incbin "graphics/pokemon/unown/exclamation_mark/back.4bpp.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_unown_exclamation_mark_icon:: @ 8E4819C
+gMonIcon_Unown_Exclamation_Mark:: @ 8E4819C
 	.incbin "graphics/pokemon/unown/exclamation_mark/icon.4bpp"
 
 	.align 2
@@ -12210,7 +12208,7 @@ gFile_graphics_pokemon_back_pics_unown_question_mark_back_pic:: @ 8E48758
 	.incbin "graphics/pokemon/unown/question_mark/back.4bpp.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_unown_question_mark_icon:: @ 8E48958
+gMonIcon_Unown_Question_Mark:: @ 8E48958
 	.incbin "graphics/pokemon/unown/question_mark/icon.4bpp"
 
 	.align 2
@@ -13438,7 +13436,7 @@ gFile_graphics_trainers_palettes_old_man_back_pic:: @ 8E76F34
 	.incbin "graphics/trainers/palettes/old_man_back_pic.gbapal.lz"
 
 	.align 2
-gFile_graphics_pokemon_icons_question_mark_icon:: @ 8E76F5C
+gMonIcon_Question_Mark:: @ 8E76F5C
 	.incbin "graphics/pokemon/question_mark/icon.4bpp"
 
 	.align 2
@@ -13698,7 +13696,7 @@ gFile_graphics_battle_interface_ball_status_bar_sheet:: @ 8E7BB04
 	.incbin "graphics/battle_interface/ball_status_bar.4bpp.lz"
 	
 	.align 2
-gUnknown_8E7BBB8:: @ 8E7BB88
+gMonIcon_Egg:: @ 8E7BB88
 	.incbin "baserom.gba", 0xE7BB88, 0x400 @UNKNOWN
 
 	.align 2

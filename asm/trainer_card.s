@@ -3250,7 +3250,7 @@ _0808AB0C: .4byte 0x00000457
 sub_808AB10: @ 808AB10
 	push {r4,r5,lr}
 	sub sp, 0x4
-	ldr r0, _0808AB40 @ =gUnknown_83D3740
+	ldr r0, _0808AB40 @ =gMonIconPalettes
 	ldr r4, _0808AB44 @ =gUnknown_20397A4
 	ldr r1, [r4]
 	ldr r5, _0808AB48 @ =0x00000396
@@ -3271,7 +3271,7 @@ sub_808AB10: @ 808AB10
 	beq _0808AB80
 	b _0808AB88
 	.align 2, 0
-_0808AB40: .4byte gUnknown_83D3740
+_0808AB40: .4byte gMonIconPalettes
 _0808AB44: .4byte gUnknown_20397A4
 _0808AB48: .4byte 0x00000396
 _0808AB4C: .4byte 0x000004aa

@@ -511,9 +511,6 @@ gUnknown_83D35DC:: @ 83D35DC
 gUnknown_83D3728:: @ 83D3728
 	.incbin "baserom.gba", 0x3D3728, 0x18
 
-gUnknown_83D3740:: @ 83D3740
-	.incbin "baserom.gba", 0x3D3740, 0x60
-
 	@ pokemon_icon
 	.section .rodata.83D4100
 	.align 2

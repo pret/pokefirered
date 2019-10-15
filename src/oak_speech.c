@@ -111,8 +111,6 @@ extern const u8 gText_ABUTTONNext_BBUTTONBack[];
 extern const u8 gText_Boy[];
 extern const u8 gText_Girl[];
 
-extern const struct CompressedSpritePalette gUnknown_82373F4;
-
 ALIGNED(4) static const u16 sHelpDocsPalette[] = INCBIN_U16("data/oak_speech/help_docs_palette.gbapal");
 static const u32 sOakSpeechGfx_GameStartHelpUI[] = INCBIN_U32("data/oak_speech/oak_speech_gfx_game_start_help_u_i.4bpp.lz");
 static const u32 sNewGameAdventureIntroTilemap[] = INCBIN_U32("data/oak_speech/new_game_adventure_intro_tilemap.bin.lz");
@@ -1613,7 +1611,7 @@ static void CreateNidoranFSprite(u8 taskId)
     u8 spriteId;
 
     DecompressPicFromTable(&gMonFrontPicTable[SPECIES_NIDORAN_F], OakSpeechNidoranFGetBuffer(0), SPECIES_NIDORAN_F);
-    LoadCompressedSpritePaletteUsingHeap(&gUnknown_82373F4);
+    LoadCompressedSpritePaletteUsingHeap(&gMonPaletteTable[SPECIES_NIDORAN_F]);
     SetMultiuseSpriteTemplateToPokemon(SPECIES_NIDORAN_F, 0);
     spriteId = CreateSprite(&gMultiuseSpriteTemplate, 0x60, 0x60, 1);
     gSprites[spriteId].callback = SpriteCallbackDummy;

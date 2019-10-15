@@ -7,14 +7,8 @@
 
 	.section .rodata
 
-gMonPaletteTable:: @ 823730C
-	.incbin "baserom.gba", 0x23730C, 0xE8
-
-gUnknown_82373F4:: @ 82373F4
-	.incbin "baserom.gba", 0x2373F4, 0xCD8
-
-gMonShinyPaletteTable:: @ 82380CC
-	.incbin "baserom.gba", 0x2380CC, 0x1010
+gUnknown_8238E8C:: @ 8238E8C
+	.incbin "baserom.gba", 0x238E8C, 0x250
 
 gTrainerFrontAnimsPtrTable:: @ 82390DC
 	.incbin "baserom.gba", 0x2390DC, 0x250

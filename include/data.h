@@ -4,6 +4,8 @@
 #include "global.h"
 #include "constants/species.h"
 
+#define SPECIES_SHINY_TAG 500
+
 struct MonCoords
 {
     // This would use a bitfield, but some function

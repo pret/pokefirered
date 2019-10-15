@@ -8688,7 +8688,7 @@ _0808FFA8: .4byte 0x00004037
 	thumb_func_start sub_808FFAC
 sub_808FFAC: @ 808FFAC
 	push {r4-r6,lr}
-	bl sub_809707C
+	bl LoadMonIconPalettes
 	movs r2, 0
 	ldr r3, _0809003C @ =gUnknown_20397B0
 	ldr r5, _08090040 @ =0x00000b04
@@ -19235,7 +19235,7 @@ _0809515A:
 	movs r0, 0
 	bl HideBg
 	movs r0, 0x80
-	bl sub_8097198
+	bl LoadMonIconPalettesAt
 	b _080951F8
 _08095168:
 	adds r0, r1, 0x2

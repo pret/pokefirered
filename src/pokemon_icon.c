@@ -18,7 +18,7 @@ struct MonIconSpriteTemplate
 };
 
 static u8 CreateMonIconSprite(const struct MonIconSpriteTemplate * template, s16 x, s16 y, u8 subpriority);
-void sub_80973D8(struct Sprite * sprite);
+static void DestroyMonIconInternal(struct Sprite * sprite);
 
 const u16 gMonIconPalettes[][16] = INCBIN_U16("graphics/pokemon/icon_palettes/icon_palette_0.gbapal", "graphics/pokemon/icon_palettes/icon_palette_1.gbapal", "graphics/pokemon/icon_palettes/icon_palette_2.gbapal");
 
@@ -1029,7 +1029,7 @@ u8 CreateMonIcon(u16 species, SpriteCallback callback, s16 x, s16 y, u8 subprior
     return spriteId;
 }
 
-u8 sub_8096ECC(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u8 subpriority, bool32 extra)
+u8 CreateMonIcon_HandleDeoxys(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u8 subpriority, bool32 extra)
 {
     u8 spriteId;
     struct MonIconSpriteTemplate iconTemplate =
@@ -1082,7 +1082,7 @@ u16 GetUnownLetterByPersonality(u32 personality)
         return (((personality & 0x3000000) >> 18) | ((personality & 0x30000) >> 12) | ((personality & 0x300) >> 6) | (personality & 0x3)) % 0x1C;
 }
 
-u16 sub_8096FD4(u16 species)
+u16 MailSpeciesToIconSpecies(u16 species)
 {
     u16 value;
 
@@ -1115,12 +1115,12 @@ const u8 *GetMonIconPtr(u16 species, u32 personality, bool32 extra)
     return GetMonIconTiles(GetIconSpecies(species, personality), extra);
 }
 
-void sub_8097070(struct Sprite * sprite)
+void DestroyMonIcon(struct Sprite * sprite)
 {
-    sub_80973D8(sprite);
+    DestroyMonIconInternal(sprite);
 }
 
-void sub_809707C(void)
+void LoadMonIconPalettes(void)
 {
     u8 i;
     for (i = 0; i < NELEMS(gMonIconPaletteTable); i++)
@@ -1167,12 +1167,12 @@ void FreeMonIconPalette(u16 species)
     FreeSpritePaletteByTag(gMonIconPaletteTable[palIndex].tag);
 }
 
-void sub_809718C(struct Sprite * sprite)
+void SpriteCB_MonIcon(struct Sprite * sprite)
 {
     UpdateMonIconFrame(sprite);
 }
 
-void sub_8097198(u16 offset)
+void LoadMonIconPalettesAt(u16 offset)
 {
     int i;
     if (offset <= 0x100 - 0x60)
@@ -1263,14 +1263,14 @@ static u8 CreateMonIconSprite(const struct MonIconSpriteTemplate *iconTemplate, 
     return spriteId;
 }
 
-void sub_80973D8(struct Sprite *sprite)
+static void DestroyMonIconInternal(struct Sprite *sprite)
 {
     struct SpriteFrameImage image = { NULL, sSpriteImageSizes[sprite->oam.shape][sprite->oam.size] };
     sprite->images = &image;
     DestroySprite(sprite);
 }
 
-void sub_8097414(struct Sprite *sprite, u8 animNum)
+void MonIcon_SetAnim(struct Sprite *sprite, u8 animNum)
 {
     sprite->animNum = animNum;
     sprite->animDelayCounter = 0;

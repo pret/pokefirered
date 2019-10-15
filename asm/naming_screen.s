@@ -2849,7 +2849,7 @@ _0809EFEC: .4byte gUnknown_83E252C
 sub_809EFF0: @ 809EFF0
 	push {lr}
 	sub sp, 0xC
-	bl sub_809707C
+	bl LoadMonIconPalettes
 	ldr r0, _0809F038 @ =gUnknown_203998C
 	ldr r3, [r0]
 	ldr r1, _0809F03C @ =0x00001e34

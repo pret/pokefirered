@@ -596,16 +596,16 @@ static bool8 DoInitMailView(void)
         gPaletteFade.bufferTransferDisabled = TRUE;
         break;
     case 17:
-        iconId = sub_8096FD4(sMailViewResources->mail->species);
+        iconId = MailSpeciesToIconSpecies(sMailViewResources->mail->species);
         switch (sMailViewResources->monIconType)
         {
         case MAIL_ICON_BEAD:
             LoadMonIconPalette(iconId);
-            sMailViewResources->monIconSpriteId = sub_8096ECC(iconId, SpriteCallbackDummy, 0x60, 0x80, 0, FALSE);
+            sMailViewResources->monIconSpriteId = CreateMonIcon_HandleDeoxys(iconId, SpriteCallbackDummy, 0x60, 0x80, 0, FALSE);
             break;
         case MAIL_ICON_DREAM:
             LoadMonIconPalette(iconId);
-            sMailViewResources->monIconSpriteId = sub_8096ECC(iconId, SpriteCallbackDummy, 0x28, 0x80, 0, FALSE);
+            sMailViewResources->monIconSpriteId = CreateMonIcon_HandleDeoxys(iconId, SpriteCallbackDummy, 0x28, 0x80, 0, FALSE);
             break;
         }
         break;
@@ -726,8 +726,8 @@ static void ShowMailCB_Teardown(void)
         {
         case MAIL_ICON_BEAD:
         case MAIL_ICON_DREAM:
-            FreeMonIconPalette(sub_8096FD4(sMailViewResources->mail->species));
-            sub_8097070(&gSprites[sMailViewResources->monIconSpriteId]);
+            FreeMonIconPalette(MailSpeciesToIconSpecies(sMailViewResources->mail->species));
+            DestroyMonIcon(&gSprites[sMailViewResources->monIconSpriteId]);
             break;
         }
         *sMailViewResources = (struct MailViewResources){};

@@ -10926,7 +10926,7 @@ sub_8139F20: @ 8139F20
 	lsls r0, 2
 	ldr r1, _08139F60 @ =gSprites
 	adds r0, r1
-	bl sub_8097070
+	bl DestroyMonIcon
 	pop {r4}
 	pop {r0}
 	bx r0

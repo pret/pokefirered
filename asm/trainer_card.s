@@ -1215,7 +1215,7 @@ _080899AE:
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8096FD4
+	bl MailSpeciesToIconSpecies
 	adds r1, r5, 0
 	adds r1, 0x54
 	strh r0, [r1]
@@ -1223,7 +1223,7 @@ _080899AE:
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8096FD4
+	bl MailSpeciesToIconSpecies
 	adds r1, r5, 0
 	adds r1, 0x56
 	strh r0, [r1]
@@ -1231,7 +1231,7 @@ _080899AE:
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8096FD4
+	bl MailSpeciesToIconSpecies
 	adds r1, r5, 0
 	adds r1, 0x58
 	strh r0, [r1]
@@ -1239,7 +1239,7 @@ _080899AE:
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8096FD4
+	bl MailSpeciesToIconSpecies
 	adds r1, r5, 0
 	adds r1, 0x5A
 	strh r0, [r1]
@@ -1247,7 +1247,7 @@ _080899AE:
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8096FD4
+	bl MailSpeciesToIconSpecies
 	adds r1, r5, 0
 	adds r1, 0x5C
 	strh r0, [r1]
@@ -1255,7 +1255,7 @@ _080899AE:
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8096FD4
+	bl MailSpeciesToIconSpecies
 	adds r1, r5, 0
 	adds r1, 0x5E
 	strh r0, [r1]

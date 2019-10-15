@@ -1,0 +1,12 @@
+#include "global.h"
+#include "malloc.h"
+#include "battle.h"
+#include "data.h"
+#include "graphics.h"
+#include "constants/items.h"
+#include "constants/moves.h"
+#include "constants/species.h"
+#include "constants/trainers.h"
+#include "constants/battle_ai.h"
+
+#include "data/pokemon_graphics/front_pic_coordinates.h"

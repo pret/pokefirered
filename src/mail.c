@@ -144,7 +144,6 @@ static const u16 sGenderPals[][2] = {
 };
 
 static const struct MailGfxData sGfxHeaders[] = {
-
     [ITEM_TO_MAIL(ITEM_ORANGE_MAIL)]  = {
         .pal = gFile_graphics_mail_orange_palette_pal,
         .tiles = gFile_graphics_mail_orange_tiles_sheet,

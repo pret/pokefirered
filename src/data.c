@@ -271,4 +271,7 @@ const union AnimCmd *const gSpriteAnimTable_82349BC[] =
     gSpriteAnim_82349B4,
 };
 
+#define SPECIES_SPRITE(species, sprite) [SPECIES_##species] = {sprite, 0x800, SPECIES_##species}
+
 #include "data/pokemon_graphics/front_pic_coordinates.h"
+#include "data/pokemon_graphics/front_pic_table.h"

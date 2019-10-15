@@ -24,6 +24,7 @@
 #include "math_util.h"
 #include "overworld.h"
 #include "random.h"
+#include "data.h"
 #include "oak_speech.h"
 #include "constants/species.h"
 #include "constants/songs.h"
@@ -110,7 +111,6 @@ extern const u8 gText_ABUTTONNext_BBUTTONBack[];
 extern const u8 gText_Boy[];
 extern const u8 gText_Girl[];
 
-extern const struct CompressedSpriteSheet gUnknown_8235194[];
 extern const struct CompressedSpritePalette gUnknown_82373F4;
 
 ALIGNED(4) static const u16 sHelpDocsPalette[] = INCBIN_U16("data/oak_speech/help_docs_palette.gbapal");
@@ -1612,7 +1612,7 @@ static void CreateNidoranFSprite(u8 taskId)
 {
     u8 spriteId;
 
-    DecompressPicFromTable(gUnknown_8235194, OakSpeechNidoranFGetBuffer(0), SPECIES_NIDORAN_F);
+    DecompressPicFromTable(&gMonFrontPicTable[SPECIES_NIDORAN_F], OakSpeechNidoranFGetBuffer(0), SPECIES_NIDORAN_F);
     LoadCompressedSpritePaletteUsingHeap(&gUnknown_82373F4);
     SetMultiuseSpriteTemplateToPokemon(SPECIES_NIDORAN_F, 0);
     spriteId = CreateSprite(&gMultiuseSpriteTemplate, 0x60, 0x60, 1);

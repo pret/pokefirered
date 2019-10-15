@@ -7,12 +7,6 @@
 
 	.section .rodata
 
-gMonFrontPicTable:: @ 82350AC
-	.incbin "baserom.gba", 0x2350AC, 0xE8
-
-gUnknown_8235194:: @ 8235194
-	.incbin "baserom.gba", 0x235194, 0xCD8
-
 gMonBackPicCoords:: @ 8235E6C
 	.incbin "baserom.gba", 0x235E6C, 0x6E0
 

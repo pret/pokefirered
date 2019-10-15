@@ -1,4 +1,3 @@
-#define _POSIX_C_SOURCE 200808L // Don't use GNU getline
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -20,6 +19,7 @@ static const char HELP[] = "br_ips\n"
                            "Options:\n"
                            "    -h - show this message and exit\n";
 
+#if !defined(__CYGWIN32__) && !defined(__APPLE__) && (_POSIX_C_SOURCE < 200809L || !_GNU_SOURCE)
 static int getline(char ** lineptr, size_t * n, FILE * stream) {
     // Static implementation of GNU getline
     int i = 0;
@@ -49,6 +49,7 @@ static int getline(char ** lineptr, size_t * n, FILE * stream) {
     buf[i] = 0;
     return i;
 }
+#endif
 
 static void getIncbinsFromFile(hunk_t ** hunks, size_t * num, size_t * maxnum, const char * fname, char ** strbuf, size_t * buffersize) {
     // Recursively find incbinned segments and encode them as hunks.

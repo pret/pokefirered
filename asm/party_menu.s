@@ -10642,7 +10642,7 @@ sub_8123D84: @ 8123D84
 	adds r0, r1
 	ldr r1, _08123DC8 @ =sub_8123DCC
 	movs r2, 0x1
-	bl sub_80BEBEC
+	bl ReadMail
 	pop {r0}
 	bx r0
 	.align 2, 0

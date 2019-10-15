@@ -191,7 +191,7 @@ void sub_80A1208(void)
     struct MailStruct mail;
 
     mail.itemId = gSpecialVar_ItemId;
-    sub_80BEBEC(&mail, CB2_BagMenuFromStartMenu, 0);
+    ReadMail(&mail, CB2_BagMenuFromStartMenu, 0);
 }
 
 void FieldUseFunc_MachBike(u8 taskId)

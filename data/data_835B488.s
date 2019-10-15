@@ -961,27 +961,6 @@ gUnknown_83EE8D0:: @ 83EE8D0
 gUnknown_83EE958:: @ 83EE958
 	.incbin "baserom.gba", 0x3EE958, 0x40
 
-gUnknown_83EE998:: @ 83EE998
-	.incbin "baserom.gba", 0x3EE998, 0xC
-
-gUnknown_83EE9A4:: @ 83EE9A4
-	.incbin "baserom.gba", 0x3EE9A4, 0x18
-
-gUnknown_83EE9BC:: @ 83EE9BC
-	.incbin "baserom.gba", 0x3EE9BC, 0x4
-
-gUnknown_83EE9C0:: @ 83EE9C0
-	.incbin "baserom.gba", 0x3EE9C0, 0x8
-
-gUnknown_83EE9C8:: @ 83EE9C8
-	.incbin "baserom.gba", 0x3EE9C8, 0xFC
-
-gUnknown_83EEAC4:: @ 83EEAC4
-	.incbin "baserom.gba", 0x3EEAC4, 0xA4
-
-gUnknown_83EEB68:: @ 83EEB68
-	.incbin "baserom.gba", 0x3EEB68, 0x90
-
 	.section .rodata.83EEC98
 
 	.include "data/text/map_section_names.inc"

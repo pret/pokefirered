@@ -472,4 +472,7 @@ extern const u8 gSaveStatName_Badges[];
 extern const u8 gSaveStatName_Pokedex[];
 extern const u8 gSaveStatName_Time[];
 
+// mail
+extern const u8 gText_From[];
+
 #endif //GUARD_STRINGS_H

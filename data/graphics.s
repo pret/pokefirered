@@ -15932,9 +15932,42 @@ gGhostPalette:: @ 8E93B14
 gGhostFrontPic:: @ 8E93B38
 	.incbin "baserom.gba", 0xE93B38, 0x368
 
-gUnknown_8E93EA0:: @ 8E93EA0
-	.incbin "baserom.gba", 0xE93EA0, 0x180 @UNKNOWN
-	
+gFile_graphics_mail_orange_palette_pal:: @ 8E93EA0
+	.incbin "graphics/mail/orange/palette.gbapal"
+
+gFile_graphics_mail_harbor_palette_pal:: @ 8E93EC0
+	.incbin "graphics/mail/harbor/palette.gbapal"
+
+gFile_graphics_mail_glitter_palette_pal:: @ 8E93EE0
+	.incbin "graphics/mail/glitter/palette.gbapal"
+
+gFile_graphics_mail_mech_palette_pal:: @ 8E93F00
+	.incbin "graphics/mail/mech/palette.gbapal"
+
+gFile_graphics_mail_wood_palette_pal:: @ 8E93F20
+	.incbin "graphics/mail/wood/palette.gbapal"
+
+gFile_graphics_mail_wave_palette_pal:: @ 8E93F40
+	.incbin "graphics/mail/wave/palette.gbapal"
+
+gFile_graphics_mail_bead_palette_pal:: @ 8E93F60
+	.incbin "graphics/mail/bead/palette.gbapal"
+
+gFile_graphics_mail_shadow_palette_pal:: @ 8E93F80
+	.incbin "graphics/mail/shadow/palette.gbapal"
+
+gFile_graphics_mail_tropic_palette_pal:: @ 8E93FA0
+	.incbin "graphics/mail/tropic/palette.gbapal"
+
+gFile_graphics_mail_dream_palette_pal:: @ 8E93FC0
+	.incbin "graphics/mail/dream/palette.gbapal"
+
+gFile_graphics_mail_fab_palette_pal:: @ 8E93FE0
+	.incbin "graphics/mail/fab/palette.gbapal"
+
+gFile_graphics_mail_retro_palette_pal:: @ 8E94000
+	.incbin "graphics/mail/retro/palette.gbapal"
+
 	.align 2
 gFile_graphics_mail_orange_tiles_sheet:: @ 8E94020
 	.incbin "graphics/mail/orange/tiles.4bpp.lz"

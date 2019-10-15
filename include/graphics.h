@@ -2561,7 +2561,6 @@ extern const u8 gUnknown_08DDB2C4[];
 extern const u16 gUnknown_08DDAFE0[];
 
 // fame_checker
-
 extern const u16 gFameCheckerBgPals[0x30];
 extern const u16 gFameCheckerBgTiles[0xa50];
 extern const u16 gFameCheckerBg3Tilemap[0x400];
@@ -3456,5 +3455,43 @@ extern const u8 gTrainerBackPic_PokeDude[];
 extern const u8 gTrainerBackPic_OldMan[];
 extern const u8 gTrainerBackPic_RubySapphireBrendan[];
 extern const u8 gTrainerBackPic_RubySapphireMay[];
+
+// mail
+extern const u16 gFile_graphics_mail_orange_palette_pal[];
+extern const u16 gFile_graphics_mail_harbor_palette_pal[];
+extern const u16 gFile_graphics_mail_glitter_palette_pal[];
+extern const u16 gFile_graphics_mail_mech_palette_pal[];
+extern const u16 gFile_graphics_mail_wood_palette_pal[];
+extern const u16 gFile_graphics_mail_wave_palette_pal[];
+extern const u16 gFile_graphics_mail_bead_palette_pal[];
+extern const u16 gFile_graphics_mail_shadow_palette_pal[];
+extern const u16 gFile_graphics_mail_tropic_palette_pal[];
+extern const u16 gFile_graphics_mail_dream_palette_pal[];
+extern const u16 gFile_graphics_mail_fab_palette_pal[];
+extern const u16 gFile_graphics_mail_retro_palette_pal[];
+extern const u32 gFile_graphics_mail_orange_tiles_sheet[];
+extern const u32 gFile_graphics_mail_harbor_tiles_sheet[];
+extern const u32 gFile_graphics_mail_glitter_tiles_sheet[];
+extern const u32 gFile_graphics_mail_mech_tiles_sheet[];
+extern const u32 gFile_graphics_mail_wood_tiles_sheet[];
+extern const u32 gFile_graphics_mail_wave_tiles_sheet[];
+extern const u32 gFile_graphics_mail_bead_tiles_sheet[];
+extern const u32 gFile_graphics_mail_shadow_tiles_sheet[];
+extern const u32 gFile_graphics_mail_tropic_tiles_sheet[];
+extern const u32 gFile_graphics_mail_dream_tiles_sheet[];
+extern const u32 gFile_graphics_mail_fab_tiles_sheet[];
+extern const u32 gFile_graphics_mail_retro_tiles_sheet[];
+extern const u32 gFile_graphics_mail_orange_map_tilemap[];
+extern const u32 gFile_graphics_mail_harbor_map_tilemap[];
+extern const u32 gFile_graphics_mail_glitter_map_tilemap[];
+extern const u32 gFile_graphics_mail_mech_map_tilemap[];
+extern const u32 gFile_graphics_mail_wood_map_tilemap[];
+extern const u32 gFile_graphics_mail_wave_map_tilemap[];
+extern const u32 gFile_graphics_mail_bead_map_tilemap[];
+extern const u32 gFile_graphics_mail_shadow_map_tilemap[];
+extern const u32 gFile_graphics_mail_tropic_map_tilemap[];
+extern const u32 gFile_graphics_mail_dream_map_tilemap[];
+extern const u32 gFile_graphics_mail_fab_map_tilemap[];
+extern const u32 gFile_graphics_mail_retro_map_tilemap[];
 
 #endif //GUARD_GRAPHICS_H

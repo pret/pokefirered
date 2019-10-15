@@ -7,9 +7,6 @@
 
 	.section .rodata
 
-gMonBackPicCoords:: @ 8235E6C
-	.incbin "baserom.gba", 0x235E6C, 0x6E0
-
 gMonBackPicTable:: @ 823654C
 	.incbin "baserom.gba", 0x23654C, 0xDC0
 

@@ -7,9 +7,6 @@
 
 	.section .rodata
 
-gMonBackPicTable:: @ 823654C
-	.incbin "baserom.gba", 0x23654C, 0xDC0
-
 gMonPaletteTable:: @ 823730C
 	.incbin "baserom.gba", 0x23730C, 0xE8
 

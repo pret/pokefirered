@@ -1470,7 +1470,7 @@ const struct SpriteTemplate gUnknown_825DEF0[] =
         .oam = &gUnknown_824F018,
         .anims = NULL, 
         .images = gUnknown_8234698,
-        .affineAnims = gUnknown_82348C8,
+        .affineAnims = gSpriteAffineAnimTable_82348C8,
         .callback = sub_80120C4,
     },
     {
@@ -1479,7 +1479,7 @@ const struct SpriteTemplate gUnknown_825DEF0[] =
         .oam = &gUnknown_824F010,
         .anims = NULL, 
         .images = gUnknown_82346B8,
-        .affineAnims = gUnknown_8234944,
+        .affineAnims = gSpriteAffineAnimTable_8234944,
         .callback = oac_poke_opponent,
     },
     {
@@ -1488,7 +1488,7 @@ const struct SpriteTemplate gUnknown_825DEF0[] =
         .oam = &gUnknown_824F018,
         .anims = NULL, 
         .images = gUnknown_82346D8,
-        .affineAnims = gUnknown_82348C8,
+        .affineAnims = gSpriteAffineAnimTable_82348C8,
         .callback = sub_80120C4,
     },
     {
@@ -1497,7 +1497,7 @@ const struct SpriteTemplate gUnknown_825DEF0[] =
         .oam = &gUnknown_824F010,
         .anims = NULL, 
         .images = gUnknown_82346F8,
-        .affineAnims = gUnknown_8234944,
+        .affineAnims = gSpriteAffineAnimTable_8234944,
         .callback = oac_poke_opponent,
     },
 };
@@ -1510,7 +1510,7 @@ const struct SpriteTemplate gUnknown_825DF50[] =
         .oam = &gUnknown_824F018,
         .anims = NULL, 
         .images = gUnknown_8234718,
-        .affineAnims = gUnknown_82348C8,
+        .affineAnims = gSpriteAffineAnimTable_82348C8,
         .callback = sub_80120C4,
     },
     {
@@ -1519,7 +1519,7 @@ const struct SpriteTemplate gUnknown_825DF50[] =
         .oam = &gUnknown_824F018,
         .anims = NULL, 
         .images = gUnknown_8234740,
-        .affineAnims = gUnknown_82348C8,
+        .affineAnims = gSpriteAffineAnimTable_82348C8,
         .callback = sub_80120C4,
     },
     {
@@ -1528,7 +1528,7 @@ const struct SpriteTemplate gUnknown_825DF50[] =
         .oam = &gUnknown_824F018,
         .anims = NULL, 
         .images = gUnknown_82347A8,
-        .affineAnims = gUnknown_82348C8,
+        .affineAnims = gSpriteAffineAnimTable_82348C8,
         .callback = sub_80120C4,
     },
     {
@@ -1537,7 +1537,7 @@ const struct SpriteTemplate gUnknown_825DF50[] =
         .oam = &gUnknown_824F018,
         .anims = NULL, 
         .images = gUnknown_82347C8,
-        .affineAnims = gUnknown_82348C8,
+        .affineAnims = gSpriteAffineAnimTable_82348C8,
         .callback = sub_80120C4,
     },
     {
@@ -1546,7 +1546,7 @@ const struct SpriteTemplate gUnknown_825DF50[] =
         .oam = &gUnknown_824F018,
         .anims = NULL, 
         .images = gUnknown_8234768,
-        .affineAnims = gUnknown_82348C8,
+        .affineAnims = gSpriteAffineAnimTable_82348C8,
         .callback = sub_80120C4,
     },
     {
@@ -1555,7 +1555,7 @@ const struct SpriteTemplate gUnknown_825DF50[] =
         .oam = &gUnknown_824F018,
         .anims = NULL, 
         .images = gUnknown_8234788,
-        .affineAnims = gUnknown_82348C8,
+        .affineAnims = gSpriteAffineAnimTable_82348C8,
         .callback = sub_80120C4,
     },
 };
@@ -2698,7 +2698,7 @@ void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition)
         }
     }
     gMultiuseSpriteTemplate.paletteTag = speciesTag;
-    gMultiuseSpriteTemplate.anims = gUnknown_82349BC;
+    gMultiuseSpriteTemplate.anims = gSpriteAnimTable_82349BC;
 }
 
 void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerSpriteId, u8 battlerPosition)
@@ -6089,7 +6089,7 @@ static void OakSpeechNidoranFSetupTemplateDummy(struct OakSpeechNidoranFStruct *
         for (j = 0; j < structPtr->frameCount; ++j)
             structPtr->frameImages[i * structPtr->spriteCount + j].data = &structPtr->bufferPtrs[i][j * 0x800];
         structPtr->templates[i].images = &structPtr->frameImages[i * structPtr->spriteCount]; // should be frameCount logically
-        structPtr->templates[i].anims = gUnknown_82349BC;
+        structPtr->templates[i].anims = gSpriteAnimTable_82349BC;
         structPtr->templates[i].paletteTag = i;
     }
 }

@@ -566,7 +566,7 @@ static void Task_WaitFadeAndReadSelectedMail(u8 taskId)
     {
         MailboxPC_DestroyListMenuBuffer();
         CleanupOverworldWindowsAndTilemaps();
-        sub_80BEBEC(&SELECTED_MAIL, CB2_SetCbToReturnToMailbox, 1);
+        ReadMail(&SELECTED_MAIL, CB2_SetCbToReturnToMailbox, 1);
         DestroyTask(taskId);
     }
 }

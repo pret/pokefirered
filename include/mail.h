@@ -18,7 +18,10 @@
                               || itemId == ITEM_FAB_MAIL            \
                               || itemId == ITEM_RETRO_MAIL))
 
+#define FIRST_MAIL_IDX ITEM_ORANGE_MAIL
 
-void sub_80BEBEC(struct MailStruct * mail, void (* callback)(void), u8 a2);
+#define ITEM_TO_MAIL(itemId) (itemId - FIRST_MAIL_IDX)
+
+void ReadMail(struct MailStruct * mail, void (*savedCallback)(void), bool8 messageExists);
 
 #endif // GUARD_MAIL_H

@@ -19,6 +19,7 @@ struct PlayerPCItemPageStruct
 };
 
 // Exported RAM declarations
+extern struct PlayerPCItemPageStruct gPlayerPcMenuManager;
 
 // Exported ROM declarations
 

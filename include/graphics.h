@@ -1036,4 +1036,11 @@ extern const u32 gBerryPouchBgPal0FemaleOverride[];
 extern const u32 gBerryPouchSpritePalette[];
 extern const u8 gBerryPouchBg1Tilemap[];
 
+extern const u8 gTrainerBackPic_Red[];
+extern const u8 gTrainerBackPic_Leaf[];
+extern const u8 gTrainerBackPic_PokeDude[];
+extern const u8 gTrainerBackPic_OldMan[];
+extern const u8 gTrainerBackPic_RubySapphireBrendan[];
+extern const u8 gTrainerBackPic_RubySapphireMay[];
+
 #endif //GUARD_GRAPHICS_H

@@ -4652,8 +4652,7 @@ bool8 PokemonUseItemEffects2(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mo
                             sp18 = itemEffect[r10];
                         r10++;
                         break;
-                    case 7:\
-
+                    case 7:
                         if (GetMonData(mon, MON_DATA_FRIENDSHIP, NULL) >= 200
                          && retVal == FALSE
                          && sp18 == 0)

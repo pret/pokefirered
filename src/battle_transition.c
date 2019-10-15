@@ -27,7 +27,7 @@ struct TransitionData
     u16 winOut;
     u16 win0H;
     u16 win0V;
-    u16 unused_A;
+    u16 win1H; // not used
     u16 win1V;
     u16 bldCnt;
     u16 bldAlpha;

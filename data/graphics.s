@@ -13438,11 +13438,11 @@ gFile_graphics_trainers_palettes_old_man_back_pic:: @ 8E76F34
 	.incbin "graphics/trainers/palettes/old_man_back_pic.gbapal.lz"
 
 	.align 2
-gMonIcon_Question:: @ 8E76F5C
+gMonIcon_QuestionMark:: @ 8E76F5C
 	.incbin "graphics/pokemon/question_mark/icon.4bpp"
 
 	.align 2
-gMonFootprint_Question:: @ 8E7735C
+gMonFootprint_QuestionMark:: @ 8E7735C
 	.incbin "graphics/pokemon/question_mark/footprint.1bpp"
 
 	.align 2

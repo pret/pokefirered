@@ -524,7 +524,7 @@ SECTIONS {
         data/sound_data.o(.rodata);
     } =0
 
-    songs :
+    song_data :
     ALIGN(4)
     {
         sound/songs/midi/mus_dummy.o(.rodata);

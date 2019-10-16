@@ -1866,14 +1866,12 @@ gUnknown_81A6955:: @ 81A6955
 	setvar VAR_0x8004, 0
 	special sub_80CA86C
 	playse SE_PC_ON
-	loadword 0, Text_1A5075
-	callstd 4
+	msgbox Text_1A5075
 	goto EventScript_1A6998
 	end
 
 EventScript_1A698E:: @ 81A698E
-	loadword 0, Text_1A1390
-	callstd 4
+	msgbox Text_1A1390
 	releaseall
 	end
 
@@ -1903,8 +1901,7 @@ EventScript_1A69A8:: @ 81A69A8
 
 EventScript_1A69F0:: @ 81A69F0
 	playse SE_PC_LOGIN
-	loadword 0, Text_1A50DD
-	callstd 4
+	msgbox Text_1A50DD
 	special sub_80EB6FC
 	waitstate
 	goto EventScript_1A6998
@@ -1916,8 +1913,7 @@ EventScript_1A6A05:: @ 81A6A05
 	call_if 0, EventScript_1A6A34
 	checkflag FLAG_SYS_NOT_SOMEONES_PC
 	call_if 1, EventScript_1A6A3D
-	loadword 0, Text_1A50BE
-	callstd 4
+	msgbox Text_1A50BE
 	special sub_808C6A8
 	waitstate
 	setvar VAR_0x8004, 27
@@ -1926,13 +1922,11 @@ EventScript_1A6A05:: @ 81A6A05
 	end
 
 EventScript_1A6A34:: @ 81A6A34
-	loadword 0, Text_1A50A7
-	callstd 4
+	msgbox Text_1A50A7
 	return
 
 EventScript_1A6A3D:: @ 81A6A3D
-	loadword 0, Text_1A50EF
-	callstd 4
+	msgbox Text_1A50EF
 	return
 
 EventScript_1A6A46:: @ 81A6A46
@@ -1960,10 +1954,8 @@ EventScript_1A6A7A:: @ 81A6A7A
 	checkflag FLAG_0x829
 	goto_if 0, EventScript_1A6A46
 	playse SE_PC_LOGIN
-	loadword 0, Text_1A5BC6
-	callstd 4
-	loadword 0, Text_1A5C03
-	callstd 5
+	msgbox Text_1A5BC6
+	msgbox Text_1A5C03, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1A6AB2
 	setflag FLAG_0x2FF
@@ -1973,8 +1965,7 @@ EventScript_1A6A7A:: @ 81A6A7A
 	end
 
 EventScript_1A6AB2:: @ 81A6AB2
-	loadword 0, Text_1A5C2E
-	callstd 4
+	msgbox Text_1A5C2E
 	goto EventScript_1A6998
 	end
 
@@ -1994,12 +1985,10 @@ EventScript_1A6AC8:: @ 81A6AC8
 	getpartymonname 0, VAR_RESULT
 	setfieldeffectarg 0, VAR_RESULT
 	lockall
-	loadword 0, Text_1A556E
-	callstd 5
+	msgbox Text_1A556E, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1A6AC8_Release
-	loadword 0, Text_1A55A5
-	callstd 4
+	msgbox Text_1A55A5
 	dofieldeffect 9
 EventScript_1A6AC8_Release:@ 81A6B0B
 	releaseall
@@ -2008,8 +1997,7 @@ EventScript_1A6AC8_End: @ 81A6B0C
 
 gUnknown_81A6B0D:: @ 81A6B0D
 	lockall
-	loadword 0, Text_1A55B3
-	callstd 4
+	msgbox Text_1A55B3
 	releaseall
 	end
 
@@ -2100,25 +2088,21 @@ EventScript_1A6BE0:: @ 81A6BE0
 
 EventScript_1A6BF9:: @ 81A6BF9
 	textcolor 3
-	loadword 0, gUnknown_81A5242
-	callstd 4
+	msgbox gUnknown_81A5242
 	release
 	end
 
 EventScript_1A6C05:: @ 81A6C05
-	loadword 0, gUnknown_81A5242
-	callstd 4
+	msgbox gUnknown_81A5242
 	return
 
 EventScript_1A6C0E:: @ 81A6C0E
-	loadword 0, Text_1A5301
-	callstd 4
+	msgbox Text_1A5301
 	release
 	end
 
 EventScript_1A6C18:: @ 81A6C18
-	loadword 0, Text_1A5301
-	callstd 4
+	msgbox Text_1A5301
 	return
 
 EventScript_1A6C21:: @ 81A6C21
@@ -2136,8 +2120,7 @@ EventScript_1A6C26:: @ 81A6C26
 
 gUnknown_81A6C32:: @ 81A6C32
 	lockall
-	loadword 0, Text_1C0DF1
-	callstd 4
+	msgbox Text_1C0DF1
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
 	goto_if 1, EventScript_1A7AE0
@@ -2283,13 +2266,11 @@ EventScript_1A737B:: @ 81A737B
 	return
 
 EventScript_1A73A4:: @ 81A73A4
-	loadword 0, Text_1A72F2
-	callstd 4
+	msgbox Text_1A72F2
 	return
 
 EventScript_1A73AD:: @ 81A73AD
-	loadword 0, gUnknown_81A6C51
-	callstd 4
+	msgbox gUnknown_81A6C51
 	return
 
 EventScript_1A73B6:: @ 81A73B6
@@ -2323,8 +2304,7 @@ EventScript_1A73E0:: @ 81A73E0
 	copyvar VAR_0x800A, VAR_RESULT
 	getnumberstring 0, VAR_0x8008
 	getnumberstring 1, VAR_0x8009
-	loadword 0, Text_1A6CA3
-	callstd 4
+	msgbox Text_1A6CA3
 	checkflag FLAG_0x2FF
 	call_if 0, EventScript_1A746D
 	call EventScript_1A73B6
@@ -2336,8 +2316,7 @@ EventScript_1A73E0:: @ 81A73E0
 	copyvar VAR_0x8009, VAR_0x8006
 	getnumberstring 0, VAR_0x8008
 	getnumberstring 1, VAR_0x8009
-	loadword 0, Text_1A71AA
-	callstd 4
+	msgbox Text_1A71AA
 	specialvar VAR_RESULT, HasAllMons
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1A7470
@@ -2350,15 +2329,13 @@ EventScript_1A746D:: @ 81A746D
 	return
 
 EventScript_1A7470:: @ 81A7470
-	loadword 0, Text_1A71EE
-	callstd 4
+	msgbox Text_1A71EE
 	goto EventScript_1A748F
 	end
 
 EventScript_1A747E:: @ 81A747E
 	setflag FLAG_0x2F4
-	loadword 0, Text_1A722F
-	callstd 4
+	msgbox Text_1A722F
 	goto EventScript_1A748F
 	end
 
@@ -2443,8 +2420,7 @@ EventScript_1A7538:: @ 81A7538
 EventScript_1A754B:: @ 81A754B
 	lockall
 	textcolor 0
-	loadword 0, Text_1A5C4D
-	callstd 4
+	msgbox Text_1A5C4D
 	closemessage
 	applymovement 255, Movement_1A75D3
 	waitmovement 0
@@ -2563,150 +2539,121 @@ Movement_1A7603:: @ 81A7603
 	step_end
 
 gUnknown_81A7606:: @ 81A7606
-	loadword 0, gUnknown_81C0DB0
-	callstd 3
+	msgbox gUnknown_81C0DB0, 3
 	end
 
 gUnknown_81A760F:: @ 81A760F
-	loadword 0, gUnknown_81C0DFD
-	callstd 3
+	msgbox gUnknown_81C0DFD, 3
 	end
 
 gUnknown_81A7618:: @ 81A7618
-	loadword 0, gUnknown_81C0F99
-	callstd 3
+	msgbox gUnknown_81C0F99, 3
 	end
 
 gUnknown_81A7621:: @ 81A7621
-	loadword 0, gUnknown_81C12A7
-	callstd 3
+	msgbox gUnknown_81C12A7, 3
 	end
 
 gUnknown_81A762A:: @ 81A762A
-	loadword 0, gUnknown_81C10C1
-	callstd 3
+	msgbox gUnknown_81C10C1, 3
 	end
 
 gUnknown_81A7633:: @ 81A7633
-	loadword 0, gUnknown_81C1273
-	callstd 3
+	msgbox gUnknown_81C1273, 3
 	end
 
 gUnknown_81A763C:: @ 81A763C
-	loadword 0, gUnknown_81C0FD8
-	callstd 3
+	msgbox gUnknown_81C0FD8, 3
 	end
 
 gUnknown_81A7645:: @ 81A7645
-	loadword 0, gUnknown_81C12D6
-	callstd 3
+	msgbox gUnknown_81C12D6, 3
 	end
 
 gUnknown_81A764E:: @ 81A764E
-	loadword 0, gUnknown_81C1300
-	callstd 3
+	msgbox gUnknown_81C1300, 3
 	end
 
 gUnknown_81A7657:: @ 81A7657
-	loadword 0, gUnknown_81C0E19
-	callstd 3
+	msgbox gUnknown_81C0E19, 3
 	end
 
 gUnknown_81A7660:: @ 81A7660
-	loadword 0, gUnknown_81C0E40
-	callstd 3
+	msgbox gUnknown_81C0E40, 3
 	end
 
 gUnknown_81A7669:: @ 81A7669
-	loadword 0, gUnknown_81C0E73
-	callstd 3
+	msgbox gUnknown_81C0E73, 3
 	end
 
 gUnknown_81A7672:: @ 81A7672
-	loadword 0, gUnknown_81C0EAC
-	callstd 3
+	msgbox gUnknown_81C0EAC, 3
 	end
 
 gUnknown_81A767B:: @ 81A767B
-	loadword 0, gUnknown_81C101B
-	callstd 3
+	msgbox gUnknown_81C101B, 3
 	end
 
 gUnknown_81A7684:: @ 81A7684
-	loadword 0, gUnknown_81C1060
-	callstd 3
+	msgbox gUnknown_81C1060, 3
 	end
 
 gUnknown_81A768D:: @ 81A768D
-	loadword 0, gUnknown_81C109C
-	callstd 3
+	msgbox gUnknown_81C109C, 3
 	end
 
 gUnknown_81A7696:: @ 81A7696
-	loadword 0, gUnknown_81C10FC
-	callstd 3
+	msgbox gUnknown_81C10FC, 3
 	end
 
 gUnknown_81A769F:: @ 81A769F
-	loadword 0, gUnknown_81C1134
-	callstd 3
+	msgbox gUnknown_81C1134, 3
 	end
 
 gUnknown_81A76A8:: @ 81A76A8
-	loadword 0, gUnknown_81C116E
-	callstd 3
+	msgbox gUnknown_81C116E, 3
 	end
 
 gUnknown_81A76B1:: @ 81A76B1
-	loadword 0, gUnknown_81C1194
-	callstd 3
+	msgbox gUnknown_81C1194, 3
 	end
 
 gUnknown_81A76BA:: @ 81A76BA
-	loadword 0, gUnknown_81C11BA
-	callstd 3
+	msgbox gUnknown_81C11BA, 3
 	end
 
 gUnknown_81A76C3:: @ 81A76C3
-	loadword 0, gUnknown_81C11DC
-	callstd 3
+	msgbox gUnknown_81C11DC, 3
 	end
 
 gUnknown_81A76CC:: @ 81A76CC
-	loadword 0, gUnknown_81C1217
-	callstd 3
+	msgbox gUnknown_81C1217, 3
 	end
 
 gUnknown_81A76D5:: @ 81A76D5
-	loadword 0, gUnknown_81C124B
-	callstd 3
+	msgbox gUnknown_81C124B, 3
 	end
 
 gUnknown_81A76DE:: @ 81A76DE
-	loadword 0, gUnknown_81C0ECB
-	callstd 3
+	msgbox gUnknown_81C0ECB, 3
 	end
 
 gUnknown_81A76E7:: @ 81A76E7
-	loadword 0, gUnknown_81C0EF7
-	callstd 3
+	msgbox gUnknown_81C0EF7, 3
 	end
 
 gUnknown_81A76F0:: @ 81A76F0
-	loadword 0, gUnknown_81C0F19
-	callstd 3
+	msgbox gUnknown_81C0F19, 3
 	end
 
 gUnknown_81A76F9:: @ 81A76F9
-	loadword 0, gUnknown_81C0F59
-	callstd 3
+	msgbox gUnknown_81C0F59, 3
 	end
 
 gUnknown_81A7702:: @ 81A7702
 	lockall
 	textcolor 3
-	loadword 0, Text_1A622C
-	callstd 5
+	msgbox Text_1A622C, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1A778A
 	setvar VAR_0x8004, 14
@@ -2731,14 +2678,12 @@ EventScript_1A774D:: @ 81A774D
 	waitmovement 0
 	applymovement VAR_0x8008, Movement_1A75DD
 	waitmovement 0
-	loadword 0, Text_1A62D3
-	callstd 4
+	msgbox Text_1A62D3
 	setflag 2105
 	textcolor 3
 	special sub_80699BC
 	signmsg
-	loadword 0, Text_1A6359
-	callstd 4
+	msgbox Text_1A6359
 	normalmsg
 	releaseall
 	end
@@ -2750,14 +2695,12 @@ EventScript_1A778A:: @ 81A778A
 EventScript_1A778C:: @ 81A778C
 	applymovement VAR_0x8008, Movement_1A75F1
 	waitmovement 0
-	loadword 0, Text_1A6265
-	callstd 4
+	msgbox Text_1A6265
 	releaseall
 	end
 
 gUnknown_81A77A0:: @ 81A77A0
-	loadword 0, Text_1A5375
-	callstd 3
+	msgbox Text_1A5375, 3
 	end
 
 EventScript_1A77A9:: @ 81A77A9
@@ -2787,11 +2730,9 @@ Route18_EastEntrance_1F_EventScript_1A77C1:: @ 81A77C1
 	end
 
 EventScript_1A77C9:: @ 81A77C9
-	loadword 0, Text_1A572A
-	callstd 4
+	msgbox Text_1A572A
 	playse SE_BOO
-	loadword 0, Text_1A5776
-	callstd 4
+	msgbox Text_1A5776
 	release
 	end
 
@@ -2815,8 +2756,7 @@ EventScript_1A77EC:: @ 81A77EC
 	end
 
 EventScript_1A77F9:: @ 81A77F9
-	loadword 0, Text_1A5839
-	callstd 4
+	msgbox Text_1A5839
 	release
 	end
 
@@ -2923,8 +2863,7 @@ EventScript_1A794D:: @ 81A794D
 	end
 
 EventScript_1A795F:: @ 81A795F
-	loadword 0, Text_1A5839
-	callstd 4
+	msgbox Text_1A5839
 	copyvar VAR_0x405F, VAR_0x4001
 	release
 	end
@@ -3001,11 +2940,9 @@ EventScript_1A7A41:: @ 81A7A41
 	end
 
 EventScript_1A7A50:: @ 81A7A50
-	loadword 0, Text_1A572A
-	callstd 4
+	msgbox Text_1A572A
 	playse SE_BOO
-	loadword 0, Text_1A5776
-	callstd 4
+	msgbox Text_1A5776
 	closemessage
 	applymovement 255, Movement_1A7AB7
 	applymovement VAR_0x8009, Movement_1A75ED
@@ -3037,8 +2974,7 @@ EventScript_1A7A96:: @ 81A7A96
 	end
 
 EventScript_1A7AA8:: @ 81A7AA8
-	loadword 0, Text_1A5839
-	callstd 4
+	msgbox Text_1A5839
 	copyvar VAR_0x405F, VAR_0x4001
 	releaseall
 	end
@@ -3052,20 +2988,17 @@ EventScript_1A7AB9:: @ 81A7AB9
 	return
 
 EventScript_1A7ABD:: @ 81A7ABD
-	loadword 0, Text_1A58A7
-	callstd 4
+	msgbox Text_1A58A7
 	release
 	end
 
 EventScript_1A7AC7:: @ 81A7AC7
-	loadword 0, Text_1A594D
-	callstd 4
+	msgbox Text_1A594D
 	release
 	end
 
 EventScript_1A7AD1:: @ 81A7AD1
-	loadword 0, Text_1A5909
-	callstd 4
+	msgbox Text_1A5909
 	release
 	end
 
@@ -3079,12 +3012,10 @@ EventScript_1A7AE0:: @ 81A7AE0
 	end
 
 EventScript_1A7AE2:: @ 81A7AE2
-	loadword 0, Text_177460
-	callstd 5
+	msgbox Text_177460, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1A7B70
-	loadword 0, Text_17747B
-	callstd 4
+	msgbox Text_17747B
 	checkflag FLAG_0x26C
 	goto_if 1, EventScript_1A7B3B
 	setflag FLAG_0x26C
@@ -3113,8 +3044,7 @@ EventScript_1A7B3B:: @ 81A7B3B
 	end
 
 EventScript_1A7B70:: @ 81A7B70
-	loadword 0, Text_177489
-	callstd 4
+	msgbox Text_177489
 	releaseall
 	end
 
@@ -3316,14 +3246,12 @@ EventScript_1A80FE:: @ 81A80FE
 	end
 
 EventScript_1A8135:: @ 81A8135
-	loadword 0, Text_1A5BAD
-	callstd 4
+	msgbox Text_1A5BAD
 	releaseall
 	end
 
 EventScript_1A813F:: @ 81A813F
-	loadword 0, Text_1A5CDF
-	callstd 4
+	msgbox Text_1A5CDF
 	releaseall
 	end
 
@@ -3853,8 +3781,7 @@ EventScript_1A8B23:: @ 81A8B23
 
 EventScript_1A8B32:: @ 81A8B32
 	playfanfare MUS_FANFA1
-	loadword 0, Text_1A5B88
-	callstd 4
+	msgbox Text_1A5B88
 	waitfanfare
 	compare_var_to_value VAR_0x4001, 1
 	call_if 1, EventScript_1A8532
@@ -3931,30 +3858,26 @@ EventScript_1A8C57:: @ 81A8C57
 	specialvar VAR_RESULT, sub_80CC7B4
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A8C70
-	loadword 0, Text_1A5CF1
-	callstd 4
+	msgbox Text_1A5CF1
 	return
 
 EventScript_1A8C70:: @ 81A8C70
 	specialvar VAR_RESULT, get_unknown_box_id
 	bufferboxname 2, 32781
-	loadword 0, Text_1A5D6E
-	callstd 4
+	msgbox Text_1A5D6E
 	return
 
 EventScript_1A8C82:: @ 81A8C82
 	specialvar VAR_RESULT, sub_80CC7B4
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A8C9B
-	loadword 0, Text_1A5D31
-	callstd 4
+	msgbox Text_1A5D31
 	return
 
 EventScript_1A8C9B:: @ 81A8C9B
 	specialvar VAR_RESULT, get_unknown_box_id
 	bufferboxname 2, 32781
-	loadword 0, Text_1A5DB1
-	callstd 4
+	msgbox Text_1A5DB1
 	return
 
 EventScript_1A8CAD:: @ 81A8CAD
@@ -4068,22 +3991,19 @@ VermilionCity_PokemonCenter_1F_EventScript_1A8D08:: @ 81A8D08
 	faceplayer
 	checkflag FLAG_0x292
 	goto_if 1, EventScript_1A8D3F
-	loadword 0, Text_194234
-	callstd 4
+	msgbox Text_194234
 	setflag FLAG_0x292
 	setorcopyvar VAR_0x8000, 362
 	setorcopyvar VAR_0x8001, 1
 	callstd 0
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1A6BF9
-	loadword 0, Text_19430F
-	callstd 4
+	msgbox Text_19430F
 	release
 	end
 
 EventScript_1A8D3F:: @ 81A8D3F
-	loadword 0, Text_194381
-	callstd 4
+	msgbox Text_194381
 	release
 	end
 
@@ -4118,8 +4038,7 @@ EventScript_DigUpItemBagIsFull::
 gUnknown_81A8D97:: @ 81A8D97
 	lockall
 	textcolor 1
-	loadword 0, Text_1A5E89
-	callstd 4
+	msgbox Text_1A5E89
 	call EventScript_1A65CE
 	checkflag FLAG_0x4B0
 	call_if 0, EventScript_1A8DC6
@@ -4132,13 +4051,11 @@ gUnknown_81A8D97:: @ 81A8D97
 	end
 
 EventScript_1A8DC6:: @ 81A8DC6
-	loadword 0, Text_1A5EC0
-	callstd 4
+	msgbox Text_1A5EC0
 	return
 
 EventScript_1A8DCF:: @ 81A8DCF
-	loadword 0, Text_1A5F9B
-	callstd 4
+	msgbox Text_1A5F9B
 	return
 
 gUnknown_81A8DD8:: @ 81A8DD8
@@ -4146,11 +4063,9 @@ gUnknown_81A8DD8:: @ 81A8DD8
 	textcolor 1
 	applymovement 1, Movement_1A75ED
 	waitmovement 0
-	loadword 0, Text_1A5FDF
-	callstd 4
+	msgbox Text_1A5FDF
 	call EventScript_1A6C26
-	loadword 0, Text_1A6046
-	callstd 4
+	msgbox Text_1A6046
 	fadedefaultbgm
 	releaseall
 	end
@@ -4174,15 +4089,13 @@ EventScript_1A8E11:: @ 81A8E11
 	end
 
 EventScript_1A8E2E:: @ 81A8E2E
-	loadword 0, Text_1A61E5
-	callstd 4
+	msgbox Text_1A61E5
 	goto EventScript_1A8E4D
 	end
 
 EventScript_1A8E3C:: @ 81A8E3C
 	special sub_8054C48
-	loadword 0, Text_1A6197
-	callstd 4
+	msgbox Text_1A6197
 	goto EventScript_1A8E4D
 	end
 
@@ -4198,8 +4111,7 @@ gStdScript_8:: @ 81A8E58
 	bufferitemnameplural 1, VAR_0x8000, VAR_0x8001
 	checkitemtype VAR_0x8000
 	call EventScript_1A8E6F
-	loadword 0, gUnknown_81A5218
-	callstd 4
+	msgbox gUnknown_81A5218
 	return
 
 EventScript_1A8E6F:: @ 81A8E6F
@@ -4362,14 +4274,12 @@ EventScript_1A909E:: @ 81A909E
 	end
 
 EventScript_1A90BE:: @ 81A90BE
-	loadword 0, Text_17FB67
-	callstd 4
+	msgbox Text_17FB67
 	goto EventScript_1A90DA
 	end
 
 EventScript_1A90CC:: @ 81A90CC
-	loadword 0, Text_1A641B
-	callstd 4
+	msgbox Text_1A641B
 	goto EventScript_1A90DA
 	end
 
@@ -4498,8 +4408,7 @@ EventScript_1A9236:: @ 81A9236
 	removeobject VAR_LAST_TALKED
 	fadescreen 0
 	getspeciesname 0, VAR_0x8004
-	loadword 0, Text_1A63C4
-	callstd 4
+	msgbox Text_1A63C4
 	release
 	end
 
@@ -4508,8 +4417,7 @@ EventScript_1A924B:: @ 81A924B
 	waitmessage
 	playfanfare MUS_POKEFUE
 	waitfanfare
-	loadword 0, Text_185354
-	callstd 4
+	msgbox Text_185354
 	return
 
 EventScript_1A925E:: @ 81A925E
@@ -4529,8 +4437,7 @@ EventScript_1A926C:: @ 81A926C
 
 EventScript_1A927C:: @ 81A927C
 	textcolor 3
-	loadword 0, gUnknown_81A5E31
-	callstd 4
+	msgbox gUnknown_81A5E31
 	release
 	end
 
@@ -4656,14 +4563,12 @@ Route3_EventScript_1A93C9:: @ 81A93C9
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A93F0
-	loadword 0, Text_1835B4
-	callstd 6
+	msgbox Text_1835B4, 6
 	end
 
 EventScript_1A93F0:: @ 81A93F0
 	trainerbattle 5, 89, 0, Text_1C149D, Text_1835A0
-	loadword 0, Text_1835B4
-	callstd 6
+	msgbox Text_1835B4, 6
 	end
 
 Route3_EventScript_1A9407:: @ 81A9407
@@ -4671,14 +4576,12 @@ Route3_EventScript_1A9407:: @ 81A9407
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A942E
-	loadword 0, Text_1837CF
-	callstd 6
+	msgbox Text_1837CF, 6
 	end
 
 EventScript_1A942E:: @ 81A942E
 	trainerbattle 5, 90, 0, Text_1C1588, Text_1837BD
-	loadword 0, Text_1837CF
-	callstd 6
+	msgbox Text_1837CF, 6
 	end
 
 Route3_EventScript_1A9445:: @ 81A9445
@@ -4686,14 +4589,12 @@ Route3_EventScript_1A9445:: @ 81A9445
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A946C
-	loadword 0, Text_18351C
-	callstd 6
+	msgbox Text_18351C, 6
 	end
 
 EventScript_1A946C:: @ 81A946C
 	trainerbattle 5, 105, 0, Text_1C147A, Text_183509
-	loadword 0, Text_18351C
-	callstd 6
+	msgbox Text_18351C, 6
 	end
 
 Route3_EventScript_1A9483:: @ 81A9483
@@ -4701,14 +4602,12 @@ Route3_EventScript_1A9483:: @ 81A9483
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A94AA
-	loadword 0, Text_1836D9
-	callstd 6
+	msgbox Text_1836D9, 6
 	end
 
 EventScript_1A94AA:: @ 81A94AA
 	trainerbattle 5, 106, 0, Text_1C1521, Text_1836B3
-	loadword 0, Text_1836D9
-	callstd 6
+	msgbox Text_1836D9, 6
 	end
 
 Route3_EventScript_1A94C1:: @ 81A94C1
@@ -4716,14 +4615,12 @@ Route3_EventScript_1A94C1:: @ 81A94C1
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A94E8
-	loadword 0, Text_183849
-	callstd 6
+	msgbox Text_183849, 6
 	end
 
 EventScript_1A94E8:: @ 81A94E8
 	trainerbattle 5, 107, 0, Text_1C15C5, Text_183837
-	loadword 0, Text_183849
-	callstd 6
+	msgbox Text_183849, 6
 	end
 
 Route3_EventScript_1A94FF:: @ 81A94FF
@@ -4731,14 +4628,12 @@ Route3_EventScript_1A94FF:: @ 81A94FF
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A9526
-	loadword 0, Text_18364C
-	callstd 6
+	msgbox Text_18364C, 6
 	end
 
 EventScript_1A9526:: @ 81A9526
 	trainerbattle 5, 116, 0, Text_1C14F3, Text_18363F
-	loadword 0, Text_18364C
-	callstd 6
+	msgbox Text_18364C, 6
 	end
 
 Route3_EventScript_1A953D:: @ 81A953D
@@ -4746,14 +4641,12 @@ Route3_EventScript_1A953D:: @ 81A953D
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A9564
-	loadword 0, Text_18374F
-	callstd 6
+	msgbox Text_18374F, 6
 	end
 
 EventScript_1A9564:: @ 81A9564
 	trainerbattle 5, 117, 0, Text_1C155D, Text_183746
-	loadword 0, Text_18374F
-	callstd 6
+	msgbox Text_18374F, 6
 	end
 
 Route3_EventScript_1A957B:: @ 81A957B
@@ -4761,14 +4654,12 @@ Route3_EventScript_1A957B:: @ 81A957B
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A95A2
-	loadword 0, Text_18389C
-	callstd 6
+	msgbox Text_18389C, 6
 	end
 
 EventScript_1A95A2:: @ 81A95A2
 	trainerbattle 5, 118, 0, Text_1C15F9, Text_183891
-	loadword 0, Text_18389C
-	callstd 6
+	msgbox Text_18389C, 6
 	end
 
 Route4_EventScript_1A95B9:: @ 81A95B9
@@ -4776,14 +4667,12 @@ Route4_EventScript_1A95B9:: @ 81A95B9
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A95E0
-	loadword 0, Text_183957
-	callstd 6
+	msgbox Text_183957, 6
 	end
 
 EventScript_1A95E0:: @ 81A95E0
 	trainerbattle 5, 119, 0, Text_1C160F, Text_183938
-	loadword 0, Text_183957
-	callstd 6
+	msgbox Text_183957, 6
 	end
 
 Route24_EventScript_1A95F7:: @ 81A95F7
@@ -4791,14 +4680,12 @@ Route24_EventScript_1A95F7:: @ 81A95F7
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A961E
-	loadword 0, Text_188FA7
-	callstd 6
+	msgbox Text_188FA7, 6
 	end
 
 EventScript_1A961E:: @ 81A961E
 	trainerbattle 5, 92, 0, Text_1C3657, Text_188F95
-	loadword 0, Text_188FA7
-	callstd 6
+	msgbox Text_188FA7, 6
 	end
 
 Route24_EventScript_1A9635:: @ 81A9635
@@ -4806,14 +4693,12 @@ Route24_EventScript_1A9635:: @ 81A9635
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A965C
-	loadword 0, Text_18909E
-	callstd 6
+	msgbox Text_18909E, 6
 	end
 
 EventScript_1A965C:: @ 81A965C
 	trainerbattle 5, 110, 0, Text_1C36DA, Text_18908C
-	loadword 0, Text_18909E
-	callstd 6
+	msgbox Text_18909E, 6
 	end
 
 Route24_EventScript_1A9673:: @ 81A9673
@@ -4821,14 +4706,12 @@ Route24_EventScript_1A9673:: @ 81A9673
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A969A
-	loadword 0, Text_188F53
-	callstd 6
+	msgbox Text_188F53, 6
 	end
 
 EventScript_1A969A:: @ 81A969A
 	trainerbattle 5, 122, 0, Text_1C3624, Text_188F46
-	loadword 0, Text_188F53
-	callstd 6
+	msgbox Text_188F53, 6
 	end
 
 Route24_EventScript_1A96B1:: @ 81A96B1
@@ -4836,14 +4719,12 @@ Route24_EventScript_1A96B1:: @ 81A96B1
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A96D8
-	loadword 0, Text_188FF9
-	callstd 6
+	msgbox Text_188FF9, 6
 	end
 
 EventScript_1A96D8:: @ 81A96D8
 	trainerbattle 5, 123, 0, Text_1C3685, Text_188FE7
-	loadword 0, Text_188FF9
-	callstd 6
+	msgbox Text_188FF9, 6
 	end
 
 Route24_EventScript_1A96EF:: @ 81A96EF
@@ -4851,14 +4732,12 @@ Route24_EventScript_1A96EF:: @ 81A96EF
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A9716
-	loadword 0, Text_188EA3
-	callstd 6
+	msgbox Text_188EA3, 6
 	end
 
 EventScript_1A9716:: @ 81A9716
 	trainerbattle 5, 143, 0, Text_1C35EE, Text_188E94
-	loadword 0, Text_188EA3
-	callstd 6
+	msgbox Text_188EA3, 6
 	end
 
 Route24_EventScript_1A972D:: @ 81A972D
@@ -4866,14 +4745,12 @@ Route24_EventScript_1A972D:: @ 81A972D
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A9754
-	loadword 0, Text_188F0A
-	callstd 6
+	msgbox Text_188F0A, 6
 	end
 
 EventScript_1A9754:: @ 81A9754
 	trainerbattle 5, 144, 0, Text_1C360E, Text_188EFA
-	loadword 0, Text_188F0A
-	callstd 6
+	msgbox Text_188F0A, 6
 	end
 
 Route25_EventScript_1A976B:: @ 81A976B
@@ -4881,14 +4758,12 @@ Route25_EventScript_1A976B:: @ 81A976B
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A9792
-	loadword 0, Text_1890F5
-	callstd 6
+	msgbox Text_1890F5, 6
 	end
 
 EventScript_1A9792:: @ 81A9792
 	trainerbattle 5, 93, 0, Text_1C33E7, Text_1890E6
-	loadword 0, Text_1890F5
-	callstd 6
+	msgbox Text_1890F5, 6
 	end
 
 Route25_EventScript_1A97A9:: @ 81A97A9
@@ -4896,14 +4771,12 @@ Route25_EventScript_1A97A9:: @ 81A97A9
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A97D0
-	loadword 0, Text_1891B3
-	callstd 6
+	msgbox Text_1891B3, 6
 	end
 
 EventScript_1A97D0:: @ 81A97D0
 	trainerbattle 5, 94, 0, Text_1C3404, Text_1891A6
-	loadword 0, Text_1891B3
-	callstd 6
+	msgbox Text_1891B3, 6
 	end
 
 Route25_EventScript_1A97E7:: @ 81A97E7
@@ -4911,14 +4784,12 @@ Route25_EventScript_1A97E7:: @ 81A97E7
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A980E
-	loadword 0, Text_1892EF
-	callstd 6
+	msgbox Text_1892EF, 6
 	end
 
 EventScript_1A980E:: @ 81A980E
 	trainerbattle 5, 95, 0, Text_1C34D4, Text_1892D9
-	loadword 0, Text_1892EF
-	callstd 6
+	msgbox Text_1892EF, 6
 	end
 
 Route25_EventScript_1A9825:: @ 81A9825
@@ -4926,14 +4797,12 @@ Route25_EventScript_1A9825:: @ 81A9825
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A984C
-	loadword 0, Text_189281
-	callstd 6
+	msgbox Text_189281, 6
 	end
 
 EventScript_1A984C:: @ 81A984C
 	trainerbattle 5, 153, 0, Text_1C349C, Text_189261
-	loadword 0, Text_189281
-	callstd 6
+	msgbox Text_189281, 6
 	end
 
 Route25_EventScript_1A9863:: @ 81A9863
@@ -4941,14 +4810,12 @@ Route25_EventScript_1A9863:: @ 81A9863
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A988A
-	loadword 0, Text_189378
-	callstd 6
+	msgbox Text_189378, 6
 	end
 
 EventScript_1A988A:: @ 81A988A
 	trainerbattle 5, 125, 0, Text_1C350A, Text_189364
-	loadword 0, Text_189378
-	callstd 6
+	msgbox Text_189378, 6
 	end
 
 Route25_EventScript_1A98A1:: @ 81A98A1
@@ -4956,14 +4823,12 @@ Route25_EventScript_1A98A1:: @ 81A98A1
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A98C8
-	loadword 0, Text_1893FB
-	callstd 6
+	msgbox Text_1893FB, 6
 	end
 
 EventScript_1A98C8:: @ 81A98C8
 	trainerbattle 5, 182, 0, Text_1C353B, Text_1893EA
-	loadword 0, Text_1893FB
-	callstd 6
+	msgbox Text_1893FB, 6
 	end
 
 Route25_EventScript_1A98DF:: @ 81A98DF
@@ -4971,14 +4836,12 @@ Route25_EventScript_1A98DF:: @ 81A98DF
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A9906
-	loadword 0, Text_18947E
-	callstd 6
+	msgbox Text_18947E, 6
 	end
 
 EventScript_1A9906:: @ 81A9906
 	trainerbattle 5, 183, 0, Text_1C357E, Text_189459
-	loadword 0, Text_18947E
-	callstd 6
+	msgbox Text_18947E, 6
 	end
 
 Route25_EventScript_1A991D:: @ 81A991D
@@ -4986,14 +4849,12 @@ Route25_EventScript_1A991D:: @ 81A991D
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A9944
-	loadword 0, Text_18951C
-	callstd 6
+	msgbox Text_18951C, 6
 	end
 
 EventScript_1A9944:: @ 81A9944
 	trainerbattle 5, 184, 0, Text_1C35BC, Text_18950A
-	loadword 0, Text_18951C
-	callstd 6
+	msgbox Text_18951C, 6
 	end
 
 Route25_EventScript_1A995B:: @ 81A995B
@@ -5001,14 +4862,12 @@ Route25_EventScript_1A995B:: @ 81A995B
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A9982
-	loadword 0, Text_18921D
-	callstd 6
+	msgbox Text_18921D, 6
 	end
 
 EventScript_1A9982:: @ 81A9982
 	trainerbattle 5, 471, 0, Text_1C3445, Text_189212
-	loadword 0, Text_18921D
-	callstd 6
+	msgbox Text_18921D, 6
 	end
 
 Route6_EventScript_1A9999:: @ 81A9999
@@ -5016,14 +4875,12 @@ Route6_EventScript_1A9999:: @ 81A9999
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A99C0
-	loadword 0, Text_183ED4
-	callstd 6
+	msgbox Text_183ED4, 6
 	end
 
 EventScript_1A99C0:: @ 81A99C0
 	trainerbattle 5, 111, 0, Text_1C16E2, Text_183EC0
-	loadword 0, Text_183ED4
-	callstd 6
+	msgbox Text_183ED4, 6
 	end
 
 Route6_EventScript_1A99D7:: @ 81A99D7
@@ -5031,14 +4888,12 @@ Route6_EventScript_1A99D7:: @ 81A99D7
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A99FE
-	loadword 0, Text_18402B
-	callstd 6
+	msgbox Text_18402B, 6
 	end
 
 EventScript_1A99FE:: @ 81A99FE
 	trainerbattle 5, 112, 0, Text_1C176B, Text_18401A
-	loadword 0, Text_18402B
-	callstd 6
+	msgbox Text_18402B, 6
 	end
 
 Route6_EventScript_1A9A15:: @ 81A9A15
@@ -5046,14 +4901,12 @@ Route6_EventScript_1A9A15:: @ 81A9A15
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A9A3C
-	loadword 0, Text_183E3C
-	callstd 6
+	msgbox Text_183E3C, 6
 	end
 
 EventScript_1A9A3C:: @ 81A9A3C
 	trainerbattle 5, 145, 0, Text_1C163C, Text_183E2A
-	loadword 0, Text_183E3C
-	callstd 6
+	msgbox Text_183E3C, 6
 	end
 
 Route6_EventScript_1A9A53:: @ 81A9A53
@@ -5061,14 +4914,12 @@ Route6_EventScript_1A9A53:: @ 81A9A53
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A9A7A
-	loadword 0, Text_183F51
-	callstd 6
+	msgbox Text_183F51, 6
 	end
 
 EventScript_1A9A7A:: @ 81A9A7A
 	trainerbattle 5, 146, 0, Text_1C1723, Text_183F24
-	loadword 0, Text_183F51
-	callstd 6
+	msgbox Text_183F51, 6
 	end
 
 Route6_EventScript_1A9A91:: @ 81A9A91
@@ -5076,14 +4927,12 @@ Route6_EventScript_1A9A91:: @ 81A9A91
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A9AB8
-	loadword 0, Text_183E8D
-	callstd 6
+	msgbox Text_183E8D, 6
 	end
 
 EventScript_1A9AB8:: @ 81A9AB8
 	trainerbattle 5, 151, 0, Text_1C166D, Text_183E79
-	loadword 0, Text_183E8D
-	callstd 6
+	msgbox Text_183E8D, 6
 	end
 
 Route6_EventScript_1A9ACF:: @ 81A9ACF
@@ -5091,14 +4940,12 @@ Route6_EventScript_1A9ACF:: @ 81A9ACF
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A9AF6
-	loadword 0, Text_183FC4
-	callstd 6
+	msgbox Text_183FC4, 6
 	end
 
 EventScript_1A9AF6:: @ 81A9AF6
 	trainerbattle 5, 152, 0, Text_1C1746, Text_183FAB
-	loadword 0, Text_183FC4
-	callstd 6
+	msgbox Text_183FC4, 6
 	end
 
 Route11_EventScript_1A9B0D:: @ 81A9B0D
@@ -5106,14 +4953,12 @@ Route11_EventScript_1A9B0D:: @ 81A9B0D
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A9B34
-	loadword 0, Text_184FEF
-	callstd 6
+	msgbox Text_184FEF, 6
 	end
 
 EventScript_1A9B34:: @ 81A9B34
 	trainerbattle 5, 97, 0, Text_1C1DB5, Text_184FD8
-	loadword 0, Text_184FEF
-	callstd 6
+	msgbox Text_184FEF, 6
 	end
 
 Route11_EventScript_1A9B4B:: @ 81A9B4B
@@ -5121,14 +4966,12 @@ Route11_EventScript_1A9B4B:: @ 81A9B4B
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A9B72
-	loadword 0, Text_1850CF
-	callstd 6
+	msgbox Text_1850CF, 6
 	end
 
 EventScript_1A9B72:: @ 81A9B72
 	trainerbattle 5, 98, 0, Text_1C1E1F, Text_18509B
-	loadword 0, Text_1850CF
-	callstd 6
+	msgbox Text_1850CF, 6
 	end
 
 Route11_EventScript_1A9B89:: @ 81A9B89
@@ -5136,14 +4979,12 @@ Route11_EventScript_1A9B89:: @ 81A9B89
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A9BB0
-	loadword 0, Text_1851D2
-	callstd 6
+	msgbox Text_1851D2, 6
 	end
 
 EventScript_1A9BB0:: @ 81A9BB0
 	trainerbattle 5, 99, 0, Text_1C1EE2, Text_1851AC
-	loadword 0, Text_1851D2
-	callstd 6
+	msgbox Text_1851D2, 6
 	end
 
 Route11_EventScript_1A9BC7:: @ 81A9BC7
@@ -5151,14 +4992,12 @@ Route11_EventScript_1A9BC7:: @ 81A9BC7
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A9BEE
-	loadword 0, Text_1852E3
-	callstd 6
+	msgbox Text_1852E3, 6
 	end
 
 EventScript_1A9BEE:: @ 81A9BEE
 	trainerbattle 5, 100, 0, Text_1C1F40, Text_1852C1
-	loadword 0, Text_1852E3
-	callstd 6
+	msgbox Text_1852E3, 6
 	end
 
 Route11_EventScript_1A9C05:: @ 81A9C05
@@ -5166,14 +5005,12 @@ Route11_EventScript_1A9C05:: @ 81A9C05
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A9C2C
-	loadword 0, Text_18504A
-	callstd 6
+	msgbox Text_18504A, 6
 	end
 
 EventScript_1A9C2C:: @ 81A9C2C
 	trainerbattle 5, 221, 0, Text_1C1DE1, Text_185037
-	loadword 0, Text_18504A
-	callstd 6
+	msgbox Text_18504A, 6
 	end
 
 Route11_EventScript_1A9C43:: @ 81A9C43
@@ -5181,14 +5018,12 @@ Route11_EventScript_1A9C43:: @ 81A9C43
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A9C6A
-	loadword 0, Text_185266
-	callstd 6
+	msgbox Text_185266, 6
 	end
 
 EventScript_1A9C6A:: @ 81A9C6A
 	trainerbattle 5, 222, 0, Text_1C1F1D, Text_185250
-	loadword 0, Text_185266
-	callstd 6
+	msgbox Text_185266, 6
 	end
 
 Route11_EventScript_1A9C81:: @ 81A9C81
@@ -5196,14 +5031,12 @@ Route11_EventScript_1A9C81:: @ 81A9C81
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A9CA8
-	loadword 0, Text_184F2E
-	callstd 6
+	msgbox Text_184F2E, 6
 	end
 
 EventScript_1A9CA8:: @ 81A9CA8
 	trainerbattle 5, 258, 0, Text_1C1D50, Text_184F15
-	loadword 0, Text_184F2E
-	callstd 6
+	msgbox Text_184F2E, 6
 	end
 
 Route11_EventScript_1A9CBF:: @ 81A9CBF
@@ -5211,14 +5044,12 @@ Route11_EventScript_1A9CBF:: @ 81A9CBF
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A9CE6
-	loadword 0, Text_184F8E
-	callstd 6
+	msgbox Text_184F8E, 6
 	end
 
 EventScript_1A9CE6:: @ 81A9CE6
 	trainerbattle 5, 259, 0, Text_1C1D79, Text_184F7E
-	loadword 0, Text_184F8E
-	callstd 6
+	msgbox Text_184F8E, 6
 	end
 
 Route11_EventScript_1A9CFD:: @ 81A9CFD
@@ -5226,14 +5057,12 @@ Route11_EventScript_1A9CFD:: @ 81A9CFD
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A9D24
-	loadword 0, Text_185114
-	callstd 6
+	msgbox Text_185114, 6
 	end
 
 EventScript_1A9D24:: @ 81A9D24
 	trainerbattle 5, 260, 0, Text_1C1E57, Text_185105
-	loadword 0, Text_185114
-	callstd 6
+	msgbox Text_185114, 6
 	end
 
 Route11_EventScript_1A9D3B:: @ 81A9D3B
@@ -5241,14 +5070,12 @@ Route11_EventScript_1A9D3B:: @ 81A9D3B
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A9D62
-	loadword 0, Text_185161
-	callstd 6
+	msgbox Text_185161, 6
 	end
 
 EventScript_1A9D62:: @ 81A9D62
 	trainerbattle 5, 261, 0, Text_1C1E9F, Text_18514E
-	loadword 0, Text_185161
-	callstd 6
+	msgbox Text_185161, 6
 	end
 
 Route9_EventScript_1A9D79:: @ 81A9D79
@@ -5256,14 +5083,12 @@ Route9_EventScript_1A9D79:: @ 81A9D79
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A9DA0
-	loadword 0, Text_184A8C
-	callstd 6
+	msgbox Text_184A8C, 6
 	end
 
 EventScript_1A9DA0:: @ 81A9DA0
 	trainerbattle 5, 114, 0, Text_1C1B83, Text_184A6A
-	loadword 0, Text_184A8C
-	callstd 6
+	msgbox Text_184A8C, 6
 	end
 
 Route9_EventScript_1A9DB7:: @ 81A9DB7
@@ -5271,14 +5096,12 @@ Route9_EventScript_1A9DB7:: @ 81A9DB7
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A9DDE
-	loadword 0, Text_184B3B
-	callstd 6
+	msgbox Text_184B3B, 6
 	end
 
 EventScript_1A9DDE:: @ 81A9DDE
 	trainerbattle 5, 115, 0, Text_1C1BDC, Text_184B32
-	loadword 0, Text_184B3B
-	callstd 6
+	msgbox Text_184B3B, 6
 	end
 
 Route9_EventScript_1A9DF5:: @ 81A9DF5
@@ -5286,14 +5109,12 @@ Route9_EventScript_1A9DF5:: @ 81A9DF5
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A9E1C
-	loadword 0, Text_184890
-	callstd 6
+	msgbox Text_184890, 6
 	end
 
 EventScript_1A9E1C:: @ 81A9E1C
 	trainerbattle 5, 148, 0, Text_1C1A5D, Text_18487E
-	loadword 0, Text_184890
-	callstd 6
+	msgbox Text_184890, 6
 	end
 
 Route9_EventScript_1A9E33:: @ 81A9E33
@@ -5301,14 +5122,12 @@ Route9_EventScript_1A9E33:: @ 81A9E33
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A9E5A
-	loadword 0, Text_1848DE
-	callstd 6
+	msgbox Text_1848DE, 6
 	end
 
 EventScript_1A9E5A:: @ 81A9E5A
 	trainerbattle 5, 149, 0, Text_1C1A9B, Text_1848CC
-	loadword 0, Text_1848DE
-	callstd 6
+	msgbox Text_1848DE, 6
 	end
 
 Route9_EventScript_1A9E71:: @ 81A9E71
@@ -5316,14 +5135,12 @@ Route9_EventScript_1A9E71:: @ 81A9E71
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A9E98
-	loadword 0, Text_1847F0
-	callstd 6
+	msgbox Text_1847F0, 6
 	end
 
 EventScript_1A9E98:: @ 81A9E98
 	trainerbattle 5, 154, 0, Text_1C1A2E, Text_1847DF
-	loadword 0, Text_1847F0
-	callstd 6
+	msgbox Text_1847F0, 6
 	end
 
 Route9_EventScript_1A9EAF:: @ 81A9EAF
@@ -5331,14 +5148,12 @@ Route9_EventScript_1A9EAF:: @ 81A9EAF
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A9ED6
-	loadword 0, Text_184931
-	callstd 6
+	msgbox Text_184931, 6
 	end
 
 EventScript_1A9ED6:: @ 81A9ED6
 	trainerbattle 5, 155, 0, Text_1C1AFB, Text_18491C
-	loadword 0, Text_184931
-	callstd 6
+	msgbox Text_184931, 6
 	end
 
 Route9_EventScript_1A9EED:: @ 81A9EED
@@ -5346,14 +5161,12 @@ Route9_EventScript_1A9EED:: @ 81A9EED
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A9F14
-	loadword 0, Text_184AF1
-	callstd 6
+	msgbox Text_184AF1, 6
 	end
 
 EventScript_1A9F14:: @ 81A9F14
 	trainerbattle 5, 185, 0, Text_1C1BBE, Text_184AD5
-	loadword 0, Text_184AF1
-	callstd 6
+	msgbox Text_184AF1, 6
 	end
 
 Route9_EventScript_1A9F2B:: @ 81A9F2B
@@ -5361,14 +5174,12 @@ Route9_EventScript_1A9F2B:: @ 81A9F2B
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A9F52
-	loadword 0, Text_184A11
-	callstd 6
+	msgbox Text_184A11, 6
 	end
 
 EventScript_1A9F52:: @ 81A9F52
 	trainerbattle 5, 186, 0, Text_1C1B5E, Text_184A04
-	loadword 0, Text_184A11
-	callstd 6
+	msgbox Text_184A11, 6
 	end
 
 Route9_EventScript_1A9F69:: @ 81A9F69
@@ -5376,14 +5187,12 @@ Route9_EventScript_1A9F69:: @ 81A9F69
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A9F90
-	loadword 0, Text_1849B0
-	callstd 6
+	msgbox Text_1849B0, 6
 	end
 
 EventScript_1A9F90:: @ 81A9F90
 	trainerbattle 5, 465, 0, Text_1C1B37, Text_18497F
-	loadword 0, Text_1849B0
-	callstd 6
+	msgbox Text_1849B0, 6
 	end
 
 Route10_EventScript_1A9FA7:: @ 81A9FA7
@@ -5391,14 +5200,12 @@ Route10_EventScript_1A9FA7:: @ 81A9FA7
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1A9FCE
-	loadword 0, Text_184D4D
-	callstd 6
+	msgbox Text_184D4D, 6
 	end
 
 EventScript_1A9FCE:: @ 81A9FCE
 	trainerbattle 5, 156, 0, Text_1C1C9A, Text_184D31
-	loadword 0, Text_184D4D
-	callstd 6
+	msgbox Text_184D4D, 6
 	end
 
 Route10_EventScript_1A9FE5:: @ 81A9FE5
@@ -5406,14 +5213,12 @@ Route10_EventScript_1A9FE5:: @ 81A9FE5
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA00C
-	loadword 0, Text_184E5E
-	callstd 6
+	msgbox Text_184E5E, 6
 	end
 
 EventScript_1AA00C:: @ 81AA00C
 	trainerbattle 5, 157, 0, Text_1C1D14, Text_184E3B
-	loadword 0, Text_184E5E
-	callstd 6
+	msgbox Text_184E5E, 6
 	end
 
 Route10_EventScript_1AA023:: @ 81AA023
@@ -5421,14 +5226,12 @@ Route10_EventScript_1AA023:: @ 81AA023
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA04A
-	loadword 0, Text_184BFB
-	callstd 6
+	msgbox Text_184BFB, 6
 	end
 
 EventScript_1AA04A:: @ 81AA04A
 	trainerbattle 5, 162, 0, Text_1C1BFA, Text_184BE5
-	loadword 0, Text_184BFB
-	callstd 6
+	msgbox Text_184BFB, 6
 	end
 
 Route10_EventScript_1AA061:: @ 81AA061
@@ -5436,14 +5239,12 @@ Route10_EventScript_1AA061:: @ 81AA061
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA088
-	loadword 0, Text_184CBB
-	callstd 6
+	msgbox Text_184CBB, 6
 	end
 
 EventScript_1AA088:: @ 81AA088
 	trainerbattle 5, 163, 0, Text_1C1C76, Text_184CA7
-	loadword 0, Text_184CBB
-	callstd 6
+	msgbox Text_184CBB, 6
 	end
 
 Route10_EventScript_1AA09F:: @ 81AA09F
@@ -5451,14 +5252,12 @@ Route10_EventScript_1AA09F:: @ 81AA09F
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA0C6
-	loadword 0, Text_184C60
-	callstd 6
+	msgbox Text_184C60, 6
 	end
 
 EventScript_1AA0C6:: @ 81AA0C6
 	trainerbattle 5, 187, 0, Text_1C1C4F, Text_184C2D
-	loadword 0, Text_184C60
-	callstd 6
+	msgbox Text_184C60, 6
 	end
 
 Route10_EventScript_1AA0DD:: @ 81AA0DD
@@ -5466,14 +5265,12 @@ Route10_EventScript_1AA0DD:: @ 81AA0DD
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA104
-	loadword 0, Text_184DE4
-	callstd 6
+	msgbox Text_184DE4, 6
 	end
 
 EventScript_1AA104:: @ 81AA104
 	trainerbattle 5, 188, 0, Text_1C1CD3, Text_184DCE
-	loadword 0, Text_184DE4
-	callstd 6
+	msgbox Text_184DE4, 6
 	end
 
 Route8_EventScript_1AA11B:: @ 81AA11B
@@ -5481,14 +5278,12 @@ Route8_EventScript_1AA11B:: @ 81AA11B
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA142
-	loadword 0, Text_18421B
-	callstd 6
+	msgbox Text_18421B, 6
 	end
 
 EventScript_1AA142:: @ 81AA142
 	trainerbattle 5, 128, 0, Text_1C1834, Text_184210
-	loadword 0, Text_18421B
-	callstd 6
+	msgbox Text_18421B, 6
 	end
 
 Route8_EventScript_1AA159:: @ 81AA159
@@ -5496,14 +5291,12 @@ Route8_EventScript_1AA159:: @ 81AA159
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA180
-	loadword 0, Text_184350
-	callstd 6
+	msgbox Text_184350, 6
 	end
 
 EventScript_1AA180:: @ 81AA180
 	trainerbattle 5, 129, 0, Text_1C18AA, Text_184346
-	loadword 0, Text_184350
-	callstd 6
+	msgbox Text_184350, 6
 	end
 
 Route8_EventScript_1AA197:: @ 81AA197
@@ -5511,14 +5304,12 @@ Route8_EventScript_1AA197:: @ 81AA197
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA1BE
-	loadword 0, Text_1843D2
-	callstd 6
+	msgbox Text_1843D2, 6
 	end
 
 EventScript_1AA1BE:: @ 81AA1BE
 	trainerbattle 5, 130, 0, Text_1C18DC, Text_1843A6
-	loadword 0, Text_1843D2
-	callstd 6
+	msgbox Text_1843D2, 6
 	end
 
 Route8_EventScript_1AA1D5:: @ 81AA1D5
@@ -5526,14 +5317,12 @@ Route8_EventScript_1AA1D5:: @ 81AA1D5
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA1FC
-	loadword 0, Text_1844FD
-	callstd 6
+	msgbox Text_1844FD, 6
 	end
 
 EventScript_1AA1FC:: @ 81AA1FC
 	trainerbattle 5, 131, 0, Text_1C1955, Text_1844D6
-	loadword 0, Text_1844FD
-	callstd 6
+	msgbox Text_1844FD, 6
 	end
 
 Route8_EventScript_1AA213:: @ 81AA213
@@ -5541,14 +5330,12 @@ Route8_EventScript_1AA213:: @ 81AA213
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA23A
-	loadword 0, Text_18410E
-	callstd 6
+	msgbox Text_18410E, 6
 	end
 
 EventScript_1AA23A:: @ 81AA23A
 	trainerbattle 5, 171, 0, Text_1C1793, Text_184100
-	loadword 0, Text_18410E
-	callstd 6
+	msgbox Text_18410E, 6
 	end
 
 Route8_EventScript_1AA251:: @ 81AA251
@@ -5556,14 +5343,12 @@ Route8_EventScript_1AA251:: @ 81AA251
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA278
-	loadword 0, Text_1841C8
-	callstd 6
+	msgbox Text_1841C8, 6
 	end
 
 EventScript_1AA278:: @ 81AA278
 	trainerbattle 5, 172, 0, Text_1C17F1, Text_1841B6
-	loadword 0, Text_1841C8
-	callstd 6
+	msgbox Text_1841C8, 6
 	end
 
 Route8_EventScript_1AA28F:: @ 81AA28F
@@ -5571,14 +5356,12 @@ Route8_EventScript_1AA28F:: @ 81AA28F
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA2B6
-	loadword 0, Text_1842B3
-	callstd 6
+	msgbox Text_1842B3, 6
 	end
 
 EventScript_1AA2B6:: @ 81AA2B6
 	trainerbattle 5, 173, 0, Text_1C1873, Text_18427A
-	loadword 0, Text_1842B3
-	callstd 6
+	msgbox Text_1842B3, 6
 	end
 
 Route8_EventScript_1AA2CD:: @ 81AA2CD
@@ -5586,14 +5369,12 @@ Route8_EventScript_1AA2CD:: @ 81AA2CD
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA2F4
-	loadword 0, Text_184162
-	callstd 6
+	msgbox Text_184162, 6
 	end
 
 EventScript_1AA2F4:: @ 81AA2F4
 	trainerbattle 5, 262, 0, Text_1C17CD, Text_18414D
-	loadword 0, Text_184162
-	callstd 6
+	msgbox Text_184162, 6
 	end
 
 Route8_EventScript_1AA30B:: @ 81AA30B
@@ -5601,14 +5382,12 @@ Route8_EventScript_1AA30B:: @ 81AA30B
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA332
-	loadword 0, Text_184466
-	callstd 6
+	msgbox Text_184466, 6
 	end
 
 EventScript_1AA332:: @ 81AA332
 	trainerbattle 5, 264, 0, Text_1C191F, Text_18444F
-	loadword 0, Text_184466
-	callstd 6
+	msgbox Text_184466, 6
 	end
 
 Route8_EventScript_1AA349:: @ 81AA349
@@ -5616,14 +5395,12 @@ Route8_EventScript_1AA349:: @ 81AA349
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA374
-	loadword 0, Text_1845F2
-	callstd 6
+	msgbox Text_1845F2, 6
 	end
 
 EventScript_1AA374:: @ 81AA374
 	trainerbattle 7, 484, 0, Text_1C19E5, Text_1845D0, Text_184616
-	loadword 0, Text_1845F2
-	callstd 6
+	msgbox Text_1845F2, 6
 	end
 
 Route8_EventScript_1AA38F:: @ 81AA38F
@@ -5631,14 +5408,12 @@ Route8_EventScript_1AA38F:: @ 81AA38F
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA3BA
-	loadword 0, Text_18468B
-	callstd 6
+	msgbox Text_18468B, 6
 	end
 
 EventScript_1AA3BA:: @ 81AA3BA
 	trainerbattle 7, 484, 0, Text_1C1A0D, Text_184675, Text_1846AF
-	loadword 0, Text_18468B
-	callstd 6
+	msgbox Text_18468B, 6
 	end
 
 Route8_EventScript_1AA3D5:: @ 81AA3D5
@@ -5646,14 +5421,12 @@ Route8_EventScript_1AA3D5:: @ 81AA3D5
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA3FC
-	loadword 0, Text_184719
-	callstd 6
+	msgbox Text_184719, 6
 	end
 
 EventScript_1AA3FC:: @ 81AA3FC
 	trainerbattle 5, 535, 0, Text_1C199C, Text_1846FC
-	loadword 0, Text_184719
-	callstd 6
+	msgbox Text_184719, 6
 	end
 
 Route8_EventScript_1AA413:: @ 81AA413
@@ -5661,14 +5434,12 @@ Route8_EventScript_1AA413:: @ 81AA413
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA43A
-	loadword 0, Text_18477A
-	callstd 6
+	msgbox Text_18477A, 6
 	end
 
 EventScript_1AA43A:: @ 81AA43A
 	trainerbattle 5, 536, 0, Text_1C19BC, Text_184767
-	loadword 0, Text_18477A
-	callstd 6
+	msgbox Text_18477A, 6
 	end
 
 Route12_EventScript_1AA451:: @ 81AA451
@@ -5676,14 +5447,12 @@ Route12_EventScript_1AA451:: @ 81AA451
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA478
-	loadword 0, Text_185432
-	callstd 6
+	msgbox Text_185432, 6
 	end
 
 EventScript_1AA478:: @ 81AA478
 	trainerbattle 5, 225, 0, Text_1C1F9D, Text_18541B
-	loadword 0, Text_185432
-	callstd 6
+	msgbox Text_185432, 6
 	end
 
 Route12_EventScript_1AA48F:: @ 81AA48F
@@ -5691,14 +5460,12 @@ Route12_EventScript_1AA48F:: @ 81AA48F
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA4B6
-	loadword 0, Text_185488
-	callstd 6
+	msgbox Text_185488, 6
 	end
 
 EventScript_1AA4B6:: @ 81AA4B6
 	trainerbattle 5, 226, 0, Text_1C1FD8, Text_185475
-	loadword 0, Text_185488
-	callstd 6
+	msgbox Text_185488, 6
 	end
 
 Route12_EventScript_1AA4CD:: @ 81AA4CD
@@ -5706,14 +5473,12 @@ Route12_EventScript_1AA4CD:: @ 81AA4CD
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA4F4
-	loadword 0, Text_185616
-	callstd 6
+	msgbox Text_185616, 6
 	end
 
 EventScript_1AA4F4:: @ 81AA4F4
 	trainerbattle 5, 227, 0, Text_1C209C, Text_185606
-	loadword 0, Text_185616
-	callstd 6
+	msgbox Text_185616, 6
 	end
 
 Route12_EventScript_1AA50B:: @ 81AA50B
@@ -5721,14 +5486,12 @@ Route12_EventScript_1AA50B:: @ 81AA50B
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA532
-	loadword 0, Text_1856DF
-	callstd 6
+	msgbox Text_1856DF, 6
 	end
 
 EventScript_1AA532:: @ 81AA532
 	trainerbattle 5, 228, 0, Text_1C20D4, Text_1856D0
-	loadword 0, Text_1856DF
-	callstd 6
+	msgbox Text_1856DF, 6
 	end
 
 Route12_EventScript_1AA549:: @ 81AA549
@@ -5736,14 +5499,12 @@ Route12_EventScript_1AA549:: @ 81AA549
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA570
-	loadword 0, Text_18574D
-	callstd 6
+	msgbox Text_18574D, 6
 	end
 
 EventScript_1AA570:: @ 81AA570
 	trainerbattle 5, 233, 0, Text_1C2134, Text_185744
-	loadword 0, Text_18574D
-	callstd 6
+	msgbox Text_18574D, 6
 	end
 
 Route12_EventScript_1AA587:: @ 81AA587
@@ -5751,14 +5512,12 @@ Route12_EventScript_1AA587:: @ 81AA587
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA5AE
-	loadword 0, Text_1855A6
-	callstd 6
+	msgbox Text_1855A6, 6
 	end
 
 EventScript_1AA5AE:: @ 81AA5AE
 	trainerbattle 5, 285, 0, Text_1C203B, Text_18559B
-	loadword 0, Text_1855A6
-	callstd 6
+	msgbox Text_1855A6, 6
 	end
 
 Route12_EventScript_1AA5C5:: @ 81AA5C5
@@ -5766,14 +5525,12 @@ Route12_EventScript_1AA5C5:: @ 81AA5C5
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA5EC
-	loadword 0, Text_1854F2
-	callstd 6
+	msgbox Text_1854F2, 6
 	end
 
 EventScript_1AA5EC:: @ 81AA5EC
 	trainerbattle 5, 477, 0, Text_1C2008, Text_1854ED
-	loadword 0, Text_1854F2
-	callstd 6
+	msgbox Text_1854F2, 6
 	end
 
 Route12_EventScript_1AA603:: @ 81AA603
@@ -5781,14 +5538,12 @@ Route12_EventScript_1AA603:: @ 81AA603
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA62E
-	loadword 0, Text_18581F
-	callstd 6
+	msgbox Text_18581F, 6
 	end
 
 EventScript_1AA62E:: @ 81AA62E
 	trainerbattle 7, 486, 0, Text_1C216B, Text_1857F1, Text_185842
-	loadword 0, Text_18581F
-	callstd 6
+	msgbox Text_18581F, 6
 	end
 
 Route12_EventScript_1AA649:: @ 81AA649
@@ -5796,14 +5551,12 @@ Route12_EventScript_1AA649:: @ 81AA649
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA674
-	loadword 0, Text_1858E2
-	callstd 6
+	msgbox Text_1858E2, 6
 	end
 
 EventScript_1AA674:: @ 81AA674
 	trainerbattle 7, 486, 0, Text_1C219B, Text_1858D0, Text_185908
-	loadword 0, Text_1858E2
-	callstd 6
+	msgbox Text_1858E2, 6
 	end
 
 Route13_EventScript_1AA68F:: @ 81AA68F
@@ -5811,14 +5564,12 @@ Route13_EventScript_1AA68F:: @ 81AA68F
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA6B6
-	loadword 0, Text_185D33
-	callstd 6
+	msgbox Text_185D33, 6
 	end
 
 EventScript_1AA6B6:: @ 81AA6B6
 	trainerbattle 5, 195, 0, Text_1C236B, Text_185D1D
-	loadword 0, Text_185D33
-	callstd 6
+	msgbox Text_185D33, 6
 	end
 
 Route13_EventScript_1AA6CD:: @ 81AA6CD
@@ -5826,14 +5577,12 @@ Route13_EventScript_1AA6CD:: @ 81AA6CD
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA6F4
-	loadword 0, Text_185C35
-	callstd 6
+	msgbox Text_185C35, 6
 	end
 
 EventScript_1AA6F4:: @ 81AA6F4
 	trainerbattle 5, 268, 0, Text_1C2306, Text_185C1F
-	loadword 0, Text_185C35
-	callstd 6
+	msgbox Text_185C35, 6
 	end
 
 Route13_EventScript_1AA70B:: @ 81AA70B
@@ -5841,14 +5590,12 @@ Route13_EventScript_1AA70B:: @ 81AA70B
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA732
-	loadword 0, Text_185CA8
-	callstd 6
+	msgbox Text_185CA8, 6
 	end
 
 EventScript_1AA732:: @ 81AA732
 	trainerbattle 5, 269, 0, Text_1C2340, Text_185C95
-	loadword 0, Text_185CA8
-	callstd 6
+	msgbox Text_185CA8, 6
 	end
 
 Route13_EventScript_1AA749:: @ 81AA749
@@ -5856,14 +5603,12 @@ Route13_EventScript_1AA749:: @ 81AA749
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA770
-	loadword 0, Text_1859A2
-	callstd 6
+	msgbox Text_1859A2, 6
 	end
 
 EventScript_1AA770:: @ 81AA770
 	trainerbattle 5, 300, 0, Text_1C21EE, Text_18597E
-	loadword 0, Text_1859A2
-	callstd 6
+	msgbox Text_1859A2, 6
 	end
 
 Route13_EventScript_1AA787:: @ 81AA787
@@ -5871,14 +5616,12 @@ Route13_EventScript_1AA787:: @ 81AA787
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA7AE
-	loadword 0, Text_185BDB
-	callstd 6
+	msgbox Text_185BDB, 6
 	end
 
 EventScript_1AA7AE:: @ 81AA7AE
 	trainerbattle 5, 301, 0, Text_1C22CA, Text_185BCA
-	loadword 0, Text_185BDB
-	callstd 6
+	msgbox Text_185BDB, 6
 	end
 
 Route13_EventScript_1AA7C5:: @ 81AA7C5
@@ -5886,14 +5629,12 @@ Route13_EventScript_1AA7C5:: @ 81AA7C5
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA7EC
-	loadword 0, Text_185D89
-	callstd 6
+	msgbox Text_185D89, 6
 	end
 
 EventScript_1AA7EC:: @ 81AA7EC
 	trainerbattle 5, 302, 0, Text_1C2383, Text_185D7B
-	loadword 0, Text_185D89
-	callstd 6
+	msgbox Text_185D89, 6
 	end
 
 Route13_EventScript_1AA803:: @ 81AA803
@@ -5901,14 +5642,12 @@ Route13_EventScript_1AA803:: @ 81AA803
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA82A
-	loadword 0, Text_185B67
-	callstd 6
+	msgbox Text_185B67, 6
 	end
 
 EventScript_1AA82A:: @ 81AA82A
 	trainerbattle 5, 466, 0, Text_1C2299, Text_185B48
-	loadword 0, Text_185B67
-	callstd 6
+	msgbox Text_185B67, 6
 	end
 
 Route13_EventScript_1AA841:: @ 81AA841
@@ -5916,14 +5655,12 @@ Route13_EventScript_1AA841:: @ 81AA841
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA868
-	loadword 0, Text_1859F9
-	callstd 6
+	msgbox Text_1859F9, 6
 	end
 
 EventScript_1AA868:: @ 81AA868
 	trainerbattle 5, 467, 0, Text_1C220C, Text_1859EC
-	loadword 0, Text_1859F9
-	callstd 6
+	msgbox Text_1859F9, 6
 	end
 
 Route13_EventScript_1AA87F:: @ 81AA87F
@@ -5931,14 +5668,12 @@ Route13_EventScript_1AA87F:: @ 81AA87F
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA8A6
-	loadword 0, Text_185A62
-	callstd 6
+	msgbox Text_185A62, 6
 	end
 
 EventScript_1AA8A6:: @ 81AA8A6
 	trainerbattle 5, 468, 0, Text_1C223C, Text_185A56
-	loadword 0, Text_185A62
-	callstd 6
+	msgbox Text_185A62, 6
 	end
 
 Route13_EventScript_1AA8BD:: @ 81AA8BD
@@ -5946,14 +5681,12 @@ Route13_EventScript_1AA8BD:: @ 81AA8BD
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA8E4
-	loadword 0, Text_185ADE
-	callstd 6
+	msgbox Text_185ADE, 6
 	end
 
 EventScript_1AA8E4:: @ 81AA8E4
 	trainerbattle 5, 469, 0, Text_1C225B, Text_185AC1
-	loadword 0, Text_185ADE
-	callstd 6
+	msgbox Text_185ADE, 6
 	end
 
 Route14_EventScript_1AA8FB:: @ 81AA8FB
@@ -5961,14 +5694,12 @@ Route14_EventScript_1AA8FB:: @ 81AA8FB
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA922
-	loadword 0, Text_18636E
-	callstd 6
+	msgbox Text_18636E, 6
 	end
 
 EventScript_1AA922:: @ 81AA922
 	trainerbattle 5, 196, 0, Text_1C25D6, Text_186362
-	loadword 0, Text_18636E
-	callstd 6
+	msgbox Text_18636E, 6
 	end
 
 Route14_EventScript_1AA939:: @ 81AA939
@@ -5976,14 +5707,12 @@ Route14_EventScript_1AA939:: @ 81AA939
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA960
-	loadword 0, Text_186239
-	callstd 6
+	msgbox Text_186239, 6
 	end
 
 EventScript_1AA960:: @ 81AA960
 	trainerbattle 5, 207, 0, Text_1C2531, Text_186223
-	loadword 0, Text_186239
-	callstd 6
+	msgbox Text_186239, 6
 	end
 
 Route14_EventScript_1AA977:: @ 81AA977
@@ -5991,14 +5720,12 @@ Route14_EventScript_1AA977:: @ 81AA977
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA99E
-	loadword 0, Text_18629D
-	callstd 6
+	msgbox Text_18629D, 6
 	end
 
 EventScript_1AA99E:: @ 81AA99E
 	trainerbattle 5, 208, 0, Text_1C2572, Text_186291
-	loadword 0, Text_18629D
-	callstd 6
+	msgbox Text_18629D, 6
 	end
 
 Route14_EventScript_1AA9B5:: @ 81AA9B5
@@ -6006,14 +5733,12 @@ Route14_EventScript_1AA9B5:: @ 81AA9B5
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AA9DC
-	loadword 0, Text_1862F8
-	callstd 6
+	msgbox Text_1862F8, 6
 	end
 
 EventScript_1AA9DC:: @ 81AA9DC
 	trainerbattle 5, 209, 0, Text_1C259E, Text_1862EF
-	loadword 0, Text_1862F8
-	callstd 6
+	msgbox Text_1862F8, 6
 	end
 
 Route14_EventScript_1AA9F3:: @ 81AA9F3
@@ -6021,14 +5746,12 @@ Route14_EventScript_1AA9F3:: @ 81AA9F3
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AAA1A
-	loadword 0, Text_18611D
-	callstd 6
+	msgbox Text_18611D, 6
 	end
 
 EventScript_1AAA1A:: @ 81AAA1A
 	trainerbattle 5, 303, 0, Text_1C24CB, Text_18610A
-	loadword 0, Text_18611D
-	callstd 6
+	msgbox Text_18611D, 6
 	end
 
 Route14_EventScript_1AAA31:: @ 81AAA31
@@ -6036,14 +5759,12 @@ Route14_EventScript_1AAA31:: @ 81AAA31
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AAA58
-	loadword 0, Text_1861BE
-	callstd 6
+	msgbox Text_1861BE, 6
 	end
 
 EventScript_1AAA58:: @ 81AAA58
 	trainerbattle 5, 304, 0, Text_1C2505, Text_1861B3
-	loadword 0, Text_1861BE
-	callstd 6
+	msgbox Text_1861BE, 6
 	end
 
 Route14_EventScript_1AAA6F:: @ 81AAA6F
@@ -6051,14 +5772,12 @@ Route14_EventScript_1AAA6F:: @ 81AAA6F
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AAA96
-	loadword 0, Text_185E9C
-	callstd 6
+	msgbox Text_185E9C, 6
 	end
 
 EventScript_1AAA96:: @ 81AAA96
 	trainerbattle 5, 313, 0, Text_1C23C1, Text_185E81
-	loadword 0, Text_185E9C
-	callstd 6
+	msgbox Text_185E9C, 6
 	end
 
 Route14_EventScript_1AAAAD:: @ 81AAAAD
@@ -6066,14 +5785,12 @@ Route14_EventScript_1AAAAD:: @ 81AAAAD
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AAAD4
-	loadword 0, Text_185F1A
-	callstd 6
+	msgbox Text_185F1A, 6
 	end
 
 EventScript_1AAAD4:: @ 81AAAD4
 	trainerbattle 5, 314, 0, Text_1C23EF, Text_185F0B
-	loadword 0, Text_185F1A
-	callstd 6
+	msgbox Text_185F1A, 6
 	end
 
 Route14_EventScript_1AAAEB:: @ 81AAAEB
@@ -6081,14 +5798,12 @@ Route14_EventScript_1AAAEB:: @ 81AAAEB
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AAB12
-	loadword 0, Text_185FBB
-	callstd 6
+	msgbox Text_185FBB, 6
 	end
 
 EventScript_1AAB12:: @ 81AAB12
 	trainerbattle 5, 315, 0, Text_1C2425, Text_185FAE
-	loadword 0, Text_185FBB
-	callstd 6
+	msgbox Text_185FBB, 6
 	end
 
 Route14_EventScript_1AAB29:: @ 81AAB29
@@ -6096,14 +5811,12 @@ Route14_EventScript_1AAB29:: @ 81AAB29
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AAB50
-	loadword 0, Text_186091
-	callstd 6
+	msgbox Text_186091, 6
 	end
 
 EventScript_1AAB50:: @ 81AAB50
 	trainerbattle 5, 316, 0, Text_1C2461, Text_18607C
-	loadword 0, Text_186091
-	callstd 6
+	msgbox Text_186091, 6
 	end
 
 Route14_EventScript_1AAB67:: @ 81AAB67
@@ -6111,14 +5824,12 @@ Route14_EventScript_1AAB67:: @ 81AAB67
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AAB92
-	loadword 0, Text_18640D
-	callstd 6
+	msgbox Text_18640D, 6
 	end
 
 EventScript_1AAB92:: @ 81AAB92
 	trainerbattle 7, 487, 0, Text_1C25FB, Text_1863EA, Text_18642E
-	loadword 0, Text_18640D
-	callstd 6
+	msgbox Text_18640D, 6
 	end
 
 Route14_EventScript_1AABAD:: @ 81AABAD
@@ -6126,14 +5837,12 @@ Route14_EventScript_1AABAD:: @ 81AABAD
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AABD8
-	loadword 0, Text_18649C
-	callstd 6
+	msgbox Text_18649C, 6
 	end
 
 EventScript_1AABD8:: @ 81AABD8
 	trainerbattle 7, 487, 0, Text_1C261B, Text_186487, Text_1864D3
-	loadword 0, Text_18649C
-	callstd 6
+	msgbox Text_18649C, 6
 	end
 
 Route15_EventScript_1AABF3:: @ 81AABF3
@@ -6141,14 +5850,12 @@ Route15_EventScript_1AABF3:: @ 81AABF3
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AAC1A
-	loadword 0, Text_1868F1
-	callstd 6
+	msgbox Text_1868F1, 6
 	end
 
 EventScript_1AAC1A:: @ 81AAC1A
 	trainerbattle 5, 197, 0, Text_1C27E7, Text_1868E8
-	loadword 0, Text_1868F1
-	callstd 6
+	msgbox Text_1868F1, 6
 	end
 
 Route15_EventScript_1AAC31:: @ 81AAC31
@@ -6156,14 +5863,12 @@ Route15_EventScript_1AAC31:: @ 81AAC31
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AAC58
-	loadword 0, Text_18697C
-	callstd 6
+	msgbox Text_18697C, 6
 	end
 
 EventScript_1AAC58:: @ 81AAC58
 	trainerbattle 5, 198, 0, Text_1C2814, Text_186968
-	loadword 0, Text_18697C
-	callstd 6
+	msgbox Text_18697C, 6
 	end
 
 Route15_EventScript_1AAC6F:: @ 81AAC6F
@@ -6171,14 +5876,12 @@ Route15_EventScript_1AAC6F:: @ 81AAC6F
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AAC96
-	loadword 0, Text_1867DA
-	callstd 6
+	msgbox Text_1867DA, 6
 	end
 
 EventScript_1AAC96:: @ 81AAC96
 	trainerbattle 5, 273, 0, Text_1C2753, Text_1867C1
-	loadword 0, Text_1867DA
-	callstd 6
+	msgbox Text_1867DA, 6
 	end
 
 Route15_EventScript_1AACAD:: @ 81AACAD
@@ -6186,14 +5889,12 @@ Route15_EventScript_1AACAD:: @ 81AACAD
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AACD4
-	loadword 0, Text_18686F
-	callstd 6
+	msgbox Text_18686F, 6
 	end
 
 EventScript_1AACD4:: @ 81AACD4
 	trainerbattle 5, 274, 0, Text_1C279D, Text_186841
-	loadword 0, Text_18686F
-	callstd 6
+	msgbox Text_18686F, 6
 	end
 
 Route15_EventScript_1AACEB:: @ 81AACEB
@@ -6201,14 +5902,12 @@ Route15_EventScript_1AACEB:: @ 81AACEB
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AAD12
-	loadword 0, Text_18668D
-	callstd 6
+	msgbox Text_18668D, 6
 	end
 
 EventScript_1AAD12:: @ 81AAD12
 	trainerbattle 5, 305, 0, Text_1C26D3, Text_18667A
-	loadword 0, Text_18668D
-	callstd 6
+	msgbox Text_18668D, 6
 	end
 
 Route15_EventScript_1AAD29:: @ 81AAD29
@@ -6216,14 +5915,12 @@ Route15_EventScript_1AAD29:: @ 81AAD29
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AAD50
-	loadword 0, Text_18671A
-	callstd 6
+	msgbox Text_18671A, 6
 	end
 
 EventScript_1AAD50:: @ 81AAD50
 	trainerbattle 5, 306, 0, Text_1C2717, Text_186707
-	loadword 0, Text_18671A
-	callstd 6
+	msgbox Text_18671A, 6
 	end
 
 Route15_EventScript_1AAD67:: @ 81AAD67
@@ -6231,14 +5928,12 @@ Route15_EventScript_1AAD67:: @ 81AAD67
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AAD8E
-	loadword 0, Text_186A55
-	callstd 6
+	msgbox Text_186A55, 6
 	end
 
 EventScript_1AAD8E:: @ 81AAD8E
 	trainerbattle 5, 478, 0, Text_1C287D, Text_186A40
-	loadword 0, Text_186A55
-	callstd 6
+	msgbox Text_186A55, 6
 	end
 
 Route15_EventScript_1AADA5:: @ 81AADA5
@@ -6246,14 +5941,12 @@ Route15_EventScript_1AADA5:: @ 81AADA5
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AADCC
-	loadword 0, Text_18655A
-	callstd 6
+	msgbox Text_18655A, 6
 	end
 
 EventScript_1AADCC:: @ 81AADCC
 	trainerbattle 5, 479, 0, Text_1C2650, Text_186549
-	loadword 0, Text_18655A
-	callstd 6
+	msgbox Text_18655A, 6
 	end
 
 Route15_EventScript_1AADE3:: @ 81AADE3
@@ -6261,14 +5954,12 @@ Route15_EventScript_1AADE3:: @ 81AADE3
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AAE0A
-	loadword 0, Text_18661D
-	callstd 6
+	msgbox Text_18661D, 6
 	end
 
 EventScript_1AAE0A:: @ 81AAE0A
 	trainerbattle 5, 480, 0, Text_1C268D, Text_186612
-	loadword 0, Text_18661D
-	callstd 6
+	msgbox Text_18661D, 6
 	end
 
 Route15_EventScript_1AAE21:: @ 81AAE21
@@ -6276,14 +5967,12 @@ Route15_EventScript_1AAE21:: @ 81AAE21
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AAE48
-	loadword 0, Text_1869F4
-	callstd 6
+	msgbox Text_1869F4, 6
 	end
 
 EventScript_1AAE48:: @ 81AAE48
 	trainerbattle 5, 481, 0, Text_1C2846, Text_1869E6
-	loadword 0, Text_1869F4
-	callstd 6
+	msgbox Text_1869F4, 6
 	end
 
 Route15_EventScript_1AAE5F:: @ 81AAE5F
@@ -6291,14 +5980,12 @@ Route15_EventScript_1AAE5F:: @ 81AAE5F
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AAE8A
-	loadword 0, Text_186B0A
-	callstd 6
+	msgbox Text_186B0A, 6
 	end
 
 EventScript_1AAE8A:: @ 81AAE8A
 	trainerbattle 7, 488, 0, Text_1C28A1, Text_186ACB, Text_186B46
-	loadword 0, Text_186B0A
-	callstd 6
+	msgbox Text_186B0A, 6
 	end
 
 Route15_EventScript_1AAEA5:: @ 81AAEA5
@@ -6306,14 +5993,12 @@ Route15_EventScript_1AAEA5:: @ 81AAEA5
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AAED0
-	loadword 0, Text_186BD2
-	callstd 6
+	msgbox Text_186BD2, 6
 	end
 
 EventScript_1AAED0:: @ 81AAED0
 	trainerbattle 7, 488, 0, Text_1C28EC, Text_186BB1, Text_186BFE
-	loadword 0, Text_186BD2
-	callstd 6
+	msgbox Text_186BD2, 6
 	end
 
 Route16_EventScript_1AAEEB:: @ 81AAEEB
@@ -6321,14 +6006,12 @@ Route16_EventScript_1AAEEB:: @ 81AAEEB
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AAF12
-	loadword 0, Text_186C75
-	callstd 6
+	msgbox Text_186C75, 6
 	end
 
 EventScript_1AAF12:: @ 81AAF12
 	trainerbattle 5, 199, 0, Text_1C2913, Text_186C5F
-	loadword 0, Text_186C75
-	callstd 6
+	msgbox Text_186C75, 6
 	end
 
 Route16_EventScript_1AAF29:: @ 81AAF29
@@ -6336,14 +6019,12 @@ Route16_EventScript_1AAF29:: @ 81AAF29
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AAF50
-	loadword 0, Text_186D5A
-	callstd 6
+	msgbox Text_186D5A, 6
 	end
 
 EventScript_1AAF50:: @ 81AAF50
 	trainerbattle 5, 201, 0, Text_1C297B, Text_186D52
-	loadword 0, Text_186D5A
-	callstd 6
+	msgbox Text_186D5A, 6
 	end
 
 Route16_EventScript_1AAF67:: @ 81AAF67
@@ -6351,14 +6032,12 @@ Route16_EventScript_1AAF67:: @ 81AAF67
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AAF8E
-	loadword 0, Text_186EC7
-	callstd 6
+	msgbox Text_186EC7, 6
 	end
 
 EventScript_1AAF8E:: @ 81AAF8E
 	trainerbattle 5, 202, 0, Text_1C29EB, Text_186EB4
-	loadword 0, Text_186EC7
-	callstd 6
+	msgbox Text_186EC7, 6
 	end
 
 Route16_EventScript_1AAFA5:: @ 81AAFA5
@@ -6366,14 +6045,12 @@ Route16_EventScript_1AAFA5:: @ 81AAFA5
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AAFCC
-	loadword 0, Text_186CC5
-	callstd 6
+	msgbox Text_186CC5, 6
 	end
 
 EventScript_1AAFCC:: @ 81AAFCC
 	trainerbattle 5, 249, 0, Text_1C2925, Text_186CBB
-	loadword 0, Text_186CC5
-	callstd 6
+	msgbox Text_186CC5, 6
 	end
 
 Route16_EventScript_1AAFE3:: @ 81AAFE3
@@ -6381,14 +6058,12 @@ Route16_EventScript_1AAFE3:: @ 81AAFE3
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB00A
-	loadword 0, Text_186D16
-	callstd 6
+	msgbox Text_186D16, 6
 	end
 
 EventScript_1AB00A:: @ 81AB00A
 	trainerbattle 5, 250, 0, Text_1C2944, Text_186D06
-	loadword 0, Text_186D16
-	callstd 6
+	msgbox Text_186D16, 6
 	end
 
 Route16_EventScript_1AB021:: @ 81AB021
@@ -6396,14 +6071,12 @@ Route16_EventScript_1AB021:: @ 81AB021
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB048
-	loadword 0, Text_186E1C
-	callstd 6
+	msgbox Text_186E1C, 6
 	end
 
 EventScript_1AB048:: @ 81AB048
 	trainerbattle 5, 251, 0, Text_1C29B0, Text_186E0D
-	loadword 0, Text_186E1C
-	callstd 6
+	msgbox Text_186E1C, 6
 	end
 
 Route16_EventScript_1AB05F:: @ 81AB05F
@@ -6411,14 +6084,12 @@ Route16_EventScript_1AB05F:: @ 81AB05F
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB08A
-	loadword 0, Text_187027
-	callstd 6
+	msgbox Text_187027, 6
 	end
 
 EventScript_1AB08A:: @ 81AB08A
 	trainerbattle 7, 489, 0, Text_1C2A19, Text_186FFA, Text_187057
-	loadword 0, Text_187027
-	callstd 6
+	msgbox Text_187027, 6
 	end
 
 Route16_EventScript_1AB0A5:: @ 81AB0A5
@@ -6426,14 +6097,12 @@ Route16_EventScript_1AB0A5:: @ 81AB0A5
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB0D0
-	loadword 0, Text_1870F9
-	callstd 6
+	msgbox Text_1870F9, 6
 	end
 
 EventScript_1AB0D0:: @ 81AB0D0
 	trainerbattle 7, 489, 0, Text_1C2A53, Text_1870CC, Text_187120
-	loadword 0, Text_1870F9
-	callstd 6
+	msgbox Text_1870F9, 6
 	end
 
 Route17_EventScript_1AB0EB:: @ 81AB0EB
@@ -6441,14 +6110,12 @@ Route17_EventScript_1AB0EB:: @ 81AB0EB
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB112
-	loadword 0, Text_1872EB
-	callstd 6
+	msgbox Text_1872EB, 6
 	end
 
 EventScript_1AB112:: @ 81AB112
 	trainerbattle 5, 203, 0, Text_1C2B06, Text_1872E3
-	loadword 0, Text_1872EB
-	callstd 6
+	msgbox Text_1872EB, 6
 	end
 
 Route17_EventScript_1AB129:: @ 81AB129
@@ -6456,14 +6123,12 @@ Route17_EventScript_1AB129:: @ 81AB129
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB150
-	loadword 0, Text_187333
-	callstd 6
+	msgbox Text_187333, 6
 	end
 
 EventScript_1AB150:: @ 81AB150
 	trainerbattle 5, 204, 0, Text_1C2B2C, Text_187325
-	loadword 0, Text_187333
-	callstd 6
+	msgbox Text_187333, 6
 	end
 
 Route17_EventScript_1AB167:: @ 81AB167
@@ -6471,14 +6136,12 @@ Route17_EventScript_1AB167:: @ 81AB167
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB18E
-	loadword 0, Text_187479
-	callstd 6
+	msgbox Text_187479, 6
 	end
 
 EventScript_1AB18E:: @ 81AB18E
 	trainerbattle 5, 205, 0, Text_1C2BE6, Text_187472
-	loadword 0, Text_187479
-	callstd 6
+	msgbox Text_187479, 6
 	end
 
 Route17_EventScript_1AB1A5:: @ 81AB1A5
@@ -6486,14 +6149,12 @@ Route17_EventScript_1AB1A5:: @ 81AB1A5
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB1CC
-	loadword 0, Text_1874C9
-	callstd 6
+	msgbox Text_1874C9, 6
 	end
 
 EventScript_1AB1CC:: @ 81AB1CC
 	trainerbattle 5, 206, 0, Text_1C2C10, Text_1874B6
-	loadword 0, Text_1874C9
-	callstd 6
+	msgbox Text_1874C9, 6
 	end
 
 Route17_EventScript_1AB1E3:: @ 81AB1E3
@@ -6501,14 +6162,12 @@ Route17_EventScript_1AB1E3:: @ 81AB1E3
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB20A
-	loadword 0, Text_1871BA
-	callstd 6
+	msgbox Text_1871BA, 6
 	end
 
 EventScript_1AB20A:: @ 81AB20A
 	trainerbattle 5, 252, 0, Text_1C2A88, Text_1871AE
-	loadword 0, Text_1871BA
-	callstd 6
+	msgbox Text_1871BA, 6
 	end
 
 Route17_EventScript_1AB221:: @ 81AB221
@@ -6516,14 +6175,12 @@ Route17_EventScript_1AB221:: @ 81AB221
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB248
-	loadword 0, Text_18725A
-	callstd 6
+	msgbox Text_18725A, 6
 	end
 
 EventScript_1AB248:: @ 81AB248
 	trainerbattle 5, 253, 0, Text_1C2AC4, Text_187254
-	loadword 0, Text_18725A
-	callstd 6
+	msgbox Text_18725A, 6
 	end
 
 Route17_EventScript_1AB25F:: @ 81AB25F
@@ -6531,14 +6188,12 @@ Route17_EventScript_1AB25F:: @ 81AB25F
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB286
-	loadword 0, Text_18739F
-	callstd 6
+	msgbox Text_18739F, 6
 	end
 
 EventScript_1AB286:: @ 81AB286
 	trainerbattle 5, 254, 0, Text_1C2B5E, Text_187395
-	loadword 0, Text_18739F
-	callstd 6
+	msgbox Text_18739F, 6
 	end
 
 Route17_EventScript_1AB29D:: @ 81AB29D
@@ -6546,14 +6201,12 @@ Route17_EventScript_1AB29D:: @ 81AB29D
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB2C4
-	loadword 0, Text_1873FF
-	callstd 6
+	msgbox Text_1873FF, 6
 	end
 
 EventScript_1AB2C4:: @ 81AB2C4
 	trainerbattle 5, 255, 0, Text_1C2B9C, Text_1873EB
-	loadword 0, Text_1873FF
-	callstd 6
+	msgbox Text_1873FF, 6
 	end
 
 Route17_EventScript_1AB2DB:: @ 81AB2DB
@@ -6561,14 +6214,12 @@ Route17_EventScript_1AB2DB:: @ 81AB2DB
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB302
-	loadword 0, Text_187432
-	callstd 6
+	msgbox Text_187432, 6
 	end
 
 EventScript_1AB302:: @ 81AB302
 	trainerbattle 5, 256, 0, Text_1C2BDA, Text_187429
-	loadword 0, Text_187432
-	callstd 6
+	msgbox Text_187432, 6
 	end
 
 Route17_EventScript_1AB319:: @ 81AB319
@@ -6576,14 +6227,12 @@ Route17_EventScript_1AB319:: @ 81AB319
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB340
-	loadword 0, Text_1872A5
-	callstd 6
+	msgbox Text_1872A5, 6
 	end
 
 EventScript_1AB340:: @ 81AB340
 	trainerbattle 5, 470, 0, Text_1C2AF0, Text_187295
-	loadword 0, Text_1872A5
-	callstd 6
+	msgbox Text_1872A5, 6
 	end
 
 Route18_EventScript_1AB357:: @ 81AB357
@@ -6591,14 +6240,12 @@ Route18_EventScript_1AB357:: @ 81AB357
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB37E
-	loadword 0, Text_187677
-	callstd 6
+	msgbox Text_187677, 6
 	end
 
 EventScript_1AB37E:: @ 81AB37E
 	trainerbattle 5, 307, 0, Text_1C2C2B, Text_187672
-	loadword 0, Text_187677
-	callstd 6
+	msgbox Text_187677, 6
 	end
 
 Route18_EventScript_1AB395:: @ 81AB395
@@ -6606,14 +6253,12 @@ Route18_EventScript_1AB395:: @ 81AB395
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB3BC
-	loadword 0, Text_1876C5
-	callstd 6
+	msgbox Text_1876C5, 6
 	end
 
 EventScript_1AB3BC:: @ 81AB3BC
 	trainerbattle 5, 308, 0, Text_1C2C7B, Text_1876B3
-	loadword 0, Text_1876C5
-	callstd 6
+	msgbox Text_1876C5, 6
 	end
 
 Route18_EventScript_1AB3D3:: @ 81AB3D3
@@ -6621,14 +6266,12 @@ Route18_EventScript_1AB3D3:: @ 81AB3D3
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB3FA
-	loadword 0, Text_18772C
-	callstd 6
+	msgbox Text_18772C, 6
 	end
 
 EventScript_1AB3FA:: @ 81AB3FA
 	trainerbattle 5, 309, 0, Text_1C2CA8, Text_187726
-	loadword 0, Text_18772C
-	callstd 6
+	msgbox Text_18772C, 6
 	end
 
 Route19_EventScript_1AB411:: @ 81AB411
@@ -6636,14 +6279,12 @@ Route19_EventScript_1AB411:: @ 81AB411
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB438
-	loadword 0, Text_1877EE
-	callstd 6
+	msgbox Text_1877EE, 6
 	end
 
 EventScript_1AB438:: @ 81AB438
 	trainerbattle 5, 235, 0, Text_1C2CEE, Text_1877DF
-	loadword 0, Text_1877EE
-	callstd 6
+	msgbox Text_1877EE, 6
 	end
 
 Route19_EventScript_1AB44F:: @ 81AB44F
@@ -6651,14 +6292,12 @@ Route19_EventScript_1AB44F:: @ 81AB44F
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB476
-	loadword 0, Text_187852
-	callstd 6
+	msgbox Text_187852, 6
 	end
 
 EventScript_1AB476:: @ 81AB476
 	trainerbattle 5, 236, 0, Text_1C2D19, Text_18783E
-	loadword 0, Text_187852
-	callstd 6
+	msgbox Text_187852, 6
 	end
 
 Route19_EventScript_1AB48D:: @ 81AB48D
@@ -6666,14 +6305,12 @@ Route19_EventScript_1AB48D:: @ 81AB48D
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB4B4
-	loadword 0, Text_1878B1
-	callstd 6
+	msgbox Text_1878B1, 6
 	end
 
 EventScript_1AB4B4:: @ 81AB4B4
 	trainerbattle 5, 237, 0, Text_1C2D4B, Text_1878A5
-	loadword 0, Text_1878B1
-	callstd 6
+	msgbox Text_1878B1, 6
 	end
 
 Route19_EventScript_1AB4CB:: @ 81AB4CB
@@ -6681,14 +6318,12 @@ Route19_EventScript_1AB4CB:: @ 81AB4CB
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB4F2
-	loadword 0, Text_1878FE
-	callstd 6
+	msgbox Text_1878FE, 6
 	end
 
 EventScript_1AB4F2:: @ 81AB4F2
 	trainerbattle 5, 238, 0, Text_1C2D7D, Text_1878F8
-	loadword 0, Text_1878FE
-	callstd 6
+	msgbox Text_1878FE, 6
 	end
 
 Route19_EventScript_1AB509:: @ 81AB509
@@ -6696,14 +6331,12 @@ Route19_EventScript_1AB509:: @ 81AB509
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB530
-	loadword 0, Text_18795B
-	callstd 6
+	msgbox Text_18795B, 6
 	end
 
 EventScript_1AB530:: @ 81AB530
 	trainerbattle 5, 239, 0, Text_1C2DA7, Text_187955
-	loadword 0, Text_18795B
-	callstd 6
+	msgbox Text_18795B, 6
 	end
 
 Route19_EventScript_1AB547:: @ 81AB547
@@ -6711,14 +6344,12 @@ Route19_EventScript_1AB547:: @ 81AB547
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB56E
-	loadword 0, Text_1879D3
-	callstd 6
+	msgbox Text_1879D3, 6
 	end
 
 EventScript_1AB56E:: @ 81AB56E
 	trainerbattle 5, 240, 0, Text_1C2DE9, Text_1879C3
-	loadword 0, Text_1879D3
-	callstd 6
+	msgbox Text_1879D3, 6
 	end
 
 Route19_EventScript_1AB585:: @ 81AB585
@@ -6726,14 +6357,12 @@ Route19_EventScript_1AB585:: @ 81AB585
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB5AC
-	loadword 0, Text_187B35
-	callstd 6
+	msgbox Text_187B35, 6
 	end
 
 EventScript_1AB5AC:: @ 81AB5AC
 	trainerbattle 5, 241, 0, Text_1C2EC0, Text_187B25
-	loadword 0, Text_187B35
-	callstd 6
+	msgbox Text_187B35, 6
 	end
 
 Route19_EventScript_1AB5C3:: @ 81AB5C3
@@ -6741,14 +6370,12 @@ Route19_EventScript_1AB5C3:: @ 81AB5C3
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB5EA
-	loadword 0, Text_187A50
-	callstd 6
+	msgbox Text_187A50, 6
 	end
 
 EventScript_1AB5EA:: @ 81AB5EA
 	trainerbattle 5, 276, 0, Text_1C2E4A, Text_187A44
-	loadword 0, Text_187A50
-	callstd 6
+	msgbox Text_187A50, 6
 	end
 
 Route19_EventScript_1AB601:: @ 81AB601
@@ -6756,14 +6383,12 @@ Route19_EventScript_1AB601:: @ 81AB601
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB628
-	loadword 0, Text_187ACA
-	callstd 6
+	msgbox Text_187ACA, 6
 	end
 
 EventScript_1AB628:: @ 81AB628
 	trainerbattle 5, 277, 0, Text_1C2E9D, Text_187AC1
-	loadword 0, Text_187ACA
-	callstd 6
+	msgbox Text_187ACA, 6
 	end
 
 Route19_EventScript_1AB63F:: @ 81AB63F
@@ -6771,14 +6396,12 @@ Route19_EventScript_1AB63F:: @ 81AB63F
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB666
-	loadword 0, Text_187B94
-	callstd 6
+	msgbox Text_187B94, 6
 	end
 
 EventScript_1AB666:: @ 81AB666
 	trainerbattle 5, 278, 0, Text_1C2EFC, Text_187B85
-	loadword 0, Text_187B94
-	callstd 6
+	msgbox Text_187B94, 6
 	end
 
 Route19_EventScript_1AB67D:: @ 81AB67D
@@ -6786,14 +6409,12 @@ Route19_EventScript_1AB67D:: @ 81AB67D
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB6A8
-	loadword 0, Text_187C9E
-	callstd 6
+	msgbox Text_187C9E, 6
 	end
 
 EventScript_1AB6A8:: @ 81AB6A8
 	trainerbattle 7, 490, 0, Text_1C2F41, Text_187C6F, Text_187CF2
-	loadword 0, Text_187C9E
-	callstd 6
+	msgbox Text_187C9E, 6
 	end
 
 Route19_EventScript_1AB6C3:: @ 81AB6C3
@@ -6801,14 +6422,12 @@ Route19_EventScript_1AB6C3:: @ 81AB6C3
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB6EE
-	loadword 0, Text_187DAD
-	callstd 6
+	msgbox Text_187DAD, 6
 	end
 
 EventScript_1AB6EE:: @ 81AB6EE
 	trainerbattle 7, 490, 0, Text_1C2FAE, Text_187D7E, Text_187DE8
-	loadword 0, Text_187DAD
-	callstd 6
+	msgbox Text_187DAD, 6
 	end
 
 Route20_EventScript_1AB709:: @ 81AB709
@@ -6816,14 +6435,12 @@ Route20_EventScript_1AB709:: @ 81AB709
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB730
-	loadword 0, Text_187E83
-	callstd 6
+	msgbox Text_187E83, 6
 	end
 
 EventScript_1AB730:: @ 81AB730
 	trainerbattle 5, 242, 0, Text_1C2FF3, Text_187E7B
-	loadword 0, Text_187E83
-	callstd 6
+	msgbox Text_187E83, 6
 	end
 
 Route20_EventScript_1AB747:: @ 81AB747
@@ -6831,14 +6448,12 @@ Route20_EventScript_1AB747:: @ 81AB747
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB76E
-	loadword 0, Text_187FFE
-	callstd 6
+	msgbox Text_187FFE, 6
 	end
 
 EventScript_1AB76E:: @ 81AB76E
 	trainerbattle 5, 243, 0, Text_1C30B0, Text_187FF7
-	loadword 0, Text_187FFE
-	callstd 6
+	msgbox Text_187FFE, 6
 	end
 
 Route20_EventScript_1AB785:: @ 81AB785
@@ -6846,14 +6461,12 @@ Route20_EventScript_1AB785:: @ 81AB785
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB7AC
-	loadword 0, Text_18806D
-	callstd 6
+	msgbox Text_18806D, 6
 	end
 
 EventScript_1AB7AC:: @ 81AB7AC
 	trainerbattle 5, 244, 0, Text_1C30ED, Text_18805C
-	loadword 0, Text_18806D
-	callstd 6
+	msgbox Text_18806D, 6
 	end
 
 Route20_EventScript_1AB7C3:: @ 81AB7C3
@@ -6861,14 +6474,12 @@ Route20_EventScript_1AB7C3:: @ 81AB7C3
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB7EA
-	loadword 0, Text_187F61
-	callstd 6
+	msgbox Text_187F61, 6
 	end
 
 EventScript_1AB7EA:: @ 81AB7EA
 	trainerbattle 5, 270, 0, Text_1C305F, Text_187F5A
-	loadword 0, Text_187F61
-	callstd 6
+	msgbox Text_187F61, 6
 	end
 
 Route20_EventScript_1AB801:: @ 81AB801
@@ -6876,14 +6487,12 @@ Route20_EventScript_1AB801:: @ 81AB801
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB828
-	loadword 0, Text_188139
-	callstd 6
+	msgbox Text_188139, 6
 	end
 
 EventScript_1AB828:: @ 81AB828
 	trainerbattle 5, 271, 0, Text_1C3149, Text_188119
-	loadword 0, Text_188139
-	callstd 6
+	msgbox Text_188139, 6
 	end
 
 Route20_EventScript_1AB83F:: @ 81AB83F
@@ -6891,14 +6500,12 @@ Route20_EventScript_1AB83F:: @ 81AB83F
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB866
-	loadword 0, Text_18827B
-	callstd 6
+	msgbox Text_18827B, 6
 	end
 
 EventScript_1AB866:: @ 81AB866
 	trainerbattle 5, 272, 0, Text_1C31C4, Text_18825C
-	loadword 0, Text_18827B
-	callstd 6
+	msgbox Text_18827B, 6
 	end
 
 Route20_EventScript_1AB87D:: @ 81AB87D
@@ -6906,14 +6513,12 @@ Route20_EventScript_1AB87D:: @ 81AB87D
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB8A4
-	loadword 0, Text_187EF6
-	callstd 6
+	msgbox Text_187EF6, 6
 	end
 
 EventScript_1AB8A4:: @ 81AB8A4
 	trainerbattle 5, 279, 0, Text_1C302E, Text_187EED
-	loadword 0, Text_187EF6
-	callstd 6
+	msgbox Text_187EF6, 6
 	end
 
 Route20_EventScript_1AB8BB:: @ 81AB8BB
@@ -6921,14 +6526,12 @@ Route20_EventScript_1AB8BB:: @ 81AB8BB
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB8E2
-	loadword 0, Text_1880C8
-	callstd 6
+	msgbox Text_1880C8, 6
 	end
 
 EventScript_1AB8E2:: @ 81AB8E2
 	trainerbattle 5, 310, 0, Text_1C312C, Text_1880AB
-	loadword 0, Text_1880C8
-	callstd 6
+	msgbox Text_1880C8, 6
 	end
 
 Route20_EventScript_1AB8F9:: @ 81AB8F9
@@ -6936,14 +6539,12 @@ Route20_EventScript_1AB8F9:: @ 81AB8F9
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB920
-	loadword 0, Text_1881B8
-	callstd 6
+	msgbox Text_1881B8, 6
 	end
 
 EventScript_1AB920:: @ 81AB920
 	trainerbattle 5, 472, 0, Text_1C3185, Text_1881A3
-	loadword 0, Text_1881B8
-	callstd 6
+	msgbox Text_1881B8, 6
 	end
 
 Route20_EventScript_1AB937:: @ 81AB937
@@ -6951,14 +6552,12 @@ Route20_EventScript_1AB937:: @ 81AB937
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB95E
-	loadword 0, Text_187FA3
-	callstd 6
+	msgbox Text_187FA3, 6
 	end
 
 EventScript_1AB95E:: @ 81AB95E
 	trainerbattle 5, 473, 0, Text_1C3095, Text_187F92
-	loadword 0, Text_187FA3
-	callstd 6
+	msgbox Text_187FA3, 6
 	end
 
 Route21_North_EventScript_1AB975:: @ 81AB975
@@ -6966,14 +6565,12 @@ Route21_North_EventScript_1AB975:: @ 81AB975
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB99C
-	loadword 0, Text_188389
-	callstd 6
+	msgbox Text_188389, 6
 	end
 
 EventScript_1AB99C:: @ 81AB99C
 	trainerbattle 5, 229, 0, Text_1C3208, Text_188383
-	loadword 0, Text_188389
-	callstd 6
+	msgbox Text_188389, 6
 	end
 
 Route21_South_EventScript_1AB9B3:: @ 81AB9B3
@@ -6981,14 +6578,12 @@ Route21_South_EventScript_1AB9B3:: @ 81AB9B3
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AB9DA
-	loadword 0, Text_188632
-	callstd 6
+	msgbox Text_188632, 6
 	end
 
 EventScript_1AB9DA:: @ 81AB9DA
 	trainerbattle 5, 230, 0, Text_1C331D, Text_1885F8
-	loadword 0, Text_188632
-	callstd 6
+	msgbox Text_188632, 6
 	end
 
 Route21_North_EventScript_1AB9F1:: @ 81AB9F1
@@ -6996,14 +6591,12 @@ Route21_North_EventScript_1AB9F1:: @ 81AB9F1
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ABA18
-	loadword 0, Text_18841D
-	callstd 6
+	msgbox Text_18841D, 6
 	end
 
 EventScript_1ABA18:: @ 81ABA18
 	trainerbattle 5, 231, 0, Text_1C3231, Text_1883E9
-	loadword 0, Text_18841D
-	callstd 6
+	msgbox Text_18841D, 6
 	end
 
 Route21_South_EventScript_1ABA2F:: @ 81ABA2F
@@ -7011,14 +6604,12 @@ Route21_South_EventScript_1ABA2F:: @ 81ABA2F
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ABA56
-	loadword 0, Text_1886C5
-	callstd 6
+	msgbox Text_1886C5, 6
 	end
 
 EventScript_1ABA56:: @ 81ABA56
 	trainerbattle 5, 232, 0, Text_1C3356, Text_1886AE
-	loadword 0, Text_1886C5
-	callstd 6
+	msgbox Text_1886C5, 6
 	end
 
 Route21_North_EventScript_1ABA6D:: @ 81ABA6D
@@ -7026,14 +6617,12 @@ Route21_North_EventScript_1ABA6D:: @ 81ABA6D
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ABA94
-	loadword 0, Text_188465
-	callstd 6
+	msgbox Text_188465, 6
 	end
 
 EventScript_1ABA94:: @ 81ABA94
 	trainerbattle 5, 245, 0, Text_1C3264, Text_18845F
-	loadword 0, Text_188465
-	callstd 6
+	msgbox Text_188465, 6
 	end
 
 Route21_South_EventScript_1ABAAB:: @ 81ABAAB
@@ -7041,14 +6630,12 @@ Route21_South_EventScript_1ABAAB:: @ 81ABAAB
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ABAD2
-	loadword 0, Text_1884FF
-	callstd 6
+	msgbox Text_1884FF, 6
 	end
 
 EventScript_1ABAD2:: @ 81ABAD2
 	trainerbattle 5, 246, 0, Text_1C3298, Text_1884F0
-	loadword 0, Text_1884FF
-	callstd 6
+	msgbox Text_1884FF, 6
 	end
 
 Route21_South_EventScript_1ABAE9:: @ 81ABAE9
@@ -7056,14 +6643,12 @@ Route21_South_EventScript_1ABAE9:: @ 81ABAE9
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ABB10
-	loadword 0, Text_188555
-	callstd 6
+	msgbox Text_188555, 6
 	end
 
 EventScript_1ABB10:: @ 81ABB10
 	trainerbattle 5, 247, 0, Text_1C32D3, Text_188543
-	loadword 0, Text_188555
-	callstd 6
+	msgbox Text_188555, 6
 	end
 
 Route21_South_EventScript_1ABB27:: @ 81ABB27
@@ -7071,14 +6656,12 @@ Route21_South_EventScript_1ABB27:: @ 81ABB27
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ABB4E
-	loadword 0, Text_1885BF
-	callstd 6
+	msgbox Text_1885BF, 6
 	end
 
 EventScript_1ABB4E:: @ 81ABB4E
 	trainerbattle 5, 248, 0, Text_1C32FD, Text_1885B2
-	loadword 0, Text_1885BF
-	callstd 6
+	msgbox Text_1885BF, 6
 	end
 
 Route21_North_EventScript_1ABB65:: @ 81ABB65
@@ -7086,14 +6669,12 @@ Route21_North_EventScript_1ABB65:: @ 81ABB65
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ABB90
-	loadword 0, Text_188734
-	callstd 6
+	msgbox Text_188734, 6
 	end
 
 EventScript_1ABB90:: @ 81ABB90
 	trainerbattle 7, 491, 0, Text_1C3378, Text_188712, Text_18875E
-	loadword 0, Text_188734
-	callstd 6
+	msgbox Text_188734, 6
 	end
 
 Route21_North_EventScript_1ABBAB:: @ 81ABBAB
@@ -7101,14 +6682,12 @@ Route21_North_EventScript_1ABBAB:: @ 81ABBAB
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ABBD6
-	loadword 0, Text_188812
-	callstd 6
+	msgbox Text_188812, 6
 	end
 
 EventScript_1ABBD6:: @ 81ABBD6
 	trainerbattle 7, 491, 0, Text_1C33AE, Text_1887F1, Text_188850
-	loadword 0, Text_188812
-	callstd 6
+	msgbox Text_188812, 6
 	end
 
 OneIsland_KindleRoad_EventScript_1ABBF1:: @ 81ABBF1
@@ -7116,14 +6695,12 @@ OneIsland_KindleRoad_EventScript_1ABBF1:: @ 81ABBF1
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ABC18
-	loadword 0, Text_189657
-	callstd 6
+	msgbox Text_189657, 6
 	end
 
 EventScript_1ABC18:: @ 81ABC18
 	trainerbattle 5, 547, 0, Text_1C37B5, Text_18964D
-	loadword 0, Text_189657
-	callstd 6
+	msgbox Text_189657, 6
 	end
 
 OneIsland_KindleRoad_EventScript_1ABC2F:: @ 81ABC2F
@@ -7131,14 +6708,12 @@ OneIsland_KindleRoad_EventScript_1ABC2F:: @ 81ABC2F
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ABC56
-	loadword 0, Text_1896C1
-	callstd 6
+	msgbox Text_1896C1, 6
 	end
 
 EventScript_1ABC56:: @ 81ABC56
 	trainerbattle 5, 548, 0, Text_1C37E7, Text_1896AC
-	loadword 0, Text_1896C1
-	callstd 6
+	msgbox Text_1896C1, 6
 	end
 
 OneIsland_KindleRoad_EventScript_1ABC6D:: @ 81ABC6D
@@ -7146,14 +6721,12 @@ OneIsland_KindleRoad_EventScript_1ABC6D:: @ 81ABC6D
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ABC94
-	loadword 0, Text_189740
-	callstd 6
+	msgbox Text_189740, 6
 	end
 
 EventScript_1ABC94:: @ 81ABC94
 	trainerbattle 5, 549, 0, Text_1C3807, Text_189728
-	loadword 0, Text_189740
-	callstd 6
+	msgbox Text_189740, 6
 	end
 
 OneIsland_KindleRoad_EventScript_1ABCAB:: @ 81ABCAB
@@ -7161,14 +6734,12 @@ OneIsland_KindleRoad_EventScript_1ABCAB:: @ 81ABCAB
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ABCD2
-	loadword 0, Text_1897C5
-	callstd 6
+	msgbox Text_1897C5, 6
 	end
 
 EventScript_1ABCD2:: @ 81ABCD2
 	trainerbattle 5, 550, 0, Text_1C3835, Text_1897A4
-	loadword 0, Text_1897C5
-	callstd 6
+	msgbox Text_1897C5, 6
 	end
 
 OneIsland_KindleRoad_EventScript_1ABCE9:: @ 81ABCE9
@@ -7176,14 +6747,12 @@ OneIsland_KindleRoad_EventScript_1ABCE9:: @ 81ABCE9
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ABD10
-	loadword 0, Text_18984B
-	callstd 6
+	msgbox Text_18984B, 6
 	end
 
 EventScript_1ABD10:: @ 81ABD10
 	trainerbattle 5, 551, 0, Text_1C386A, Text_189833
-	loadword 0, Text_18984B
-	callstd 6
+	msgbox Text_18984B, 6
 	end
 
 OneIsland_KindleRoad_EventScript_1ABD27:: @ 81ABD27
@@ -7191,14 +6760,12 @@ OneIsland_KindleRoad_EventScript_1ABD27:: @ 81ABD27
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ABD4E
-	loadword 0, Text_1898C4
-	callstd 6
+	msgbox Text_1898C4, 6
 	end
 
 EventScript_1ABD4E:: @ 81ABD4E
 	trainerbattle 5, 518, 0, Text_1C389F, Text_1898AB
-	loadword 0, Text_1898C4
-	callstd 6
+	msgbox Text_1898C4, 6
 	end
 
 OneIsland_KindleRoad_EventScript_1ABD65:: @ 81ABD65
@@ -7206,14 +6773,12 @@ OneIsland_KindleRoad_EventScript_1ABD65:: @ 81ABD65
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ABD8C
-	loadword 0, Text_18992C
-	callstd 6
+	msgbox Text_18992C, 6
 	end
 
 EventScript_1ABD8C:: @ 81ABD8C
 	trainerbattle 5, 552, 0, Text_1C38CA, Text_18991B
-	loadword 0, Text_18992C
-	callstd 6
+	msgbox Text_18992C, 6
 	end
 
 OneIsland_KindleRoad_EventScript_1ABDA3:: @ 81ABDA3
@@ -7221,14 +6786,12 @@ OneIsland_KindleRoad_EventScript_1ABDA3:: @ 81ABDA3
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ABDCA
-	loadword 0, Text_189998
-	callstd 6
+	msgbox Text_189998, 6
 	end
 
 EventScript_1ABDCA:: @ 81ABDCA
 	trainerbattle 5, 553, 0, Text_1C38FA, Text_18998C
-	loadword 0, Text_189998
-	callstd 6
+	msgbox Text_189998, 6
 	end
 
 OneIsland_KindleRoad_EventScript_1ABDE1:: @ 81ABDE1
@@ -7236,14 +6799,12 @@ OneIsland_KindleRoad_EventScript_1ABDE1:: @ 81ABDE1
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ABE08
-	loadword 0, Text_189A13
-	callstd 6
+	msgbox Text_189A13, 6
 	end
 
 EventScript_1ABE08:: @ 81ABE08
 	trainerbattle 5, 554, 0, Text_1C3943, Text_189A0A
-	loadword 0, Text_189A13
-	callstd 6
+	msgbox Text_189A13, 6
 	end
 
 OneIsland_KindleRoad_EventScript_1ABE1F:: @ 81ABE1F
@@ -7251,14 +6812,12 @@ OneIsland_KindleRoad_EventScript_1ABE1F:: @ 81ABE1F
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ABE46
-	loadword 0, Text_189A9F
-	callstd 6
+	msgbox Text_189A9F, 6
 	end
 
 EventScript_1ABE46:: @ 81ABE46
 	trainerbattle 5, 555, 0, Text_1C3987, Text_189A92
-	loadword 0, Text_189A9F
-	callstd 6
+	msgbox Text_189A9F, 6
 	end
 
 OneIsland_KindleRoad_EventScript_1ABE5D:: @ 81ABE5D
@@ -7266,14 +6825,12 @@ OneIsland_KindleRoad_EventScript_1ABE5D:: @ 81ABE5D
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ABE84
-	loadword 0, Text_189B24
-	callstd 6
+	msgbox Text_189B24, 6
 	end
 
 EventScript_1ABE84:: @ 81ABE84
 	trainerbattle 5, 556, 0, Text_1C39C6, Text_189B0B
-	loadword 0, Text_189B24
-	callstd 6
+	msgbox Text_189B24, 6
 	end
 
 OneIsland_KindleRoad_EventScript_1ABE9B:: @ 81ABE9B
@@ -7281,14 +6838,12 @@ OneIsland_KindleRoad_EventScript_1ABE9B:: @ 81ABE9B
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ABEC6
-	loadword 0, Text_189BA3
-	callstd 6
+	msgbox Text_189BA3, 6
 	end
 
 EventScript_1ABEC6:: @ 81ABEC6
 	trainerbattle 7, 557, 0, Text_1C3A05, Text_189B84, Text_189BDE
-	loadword 0, Text_189BA3
-	callstd 6
+	msgbox Text_189BA3, 6
 	end
 
 OneIsland_KindleRoad_EventScript_1ABEE1:: @ 81ABEE1
@@ -7296,14 +6851,12 @@ OneIsland_KindleRoad_EventScript_1ABEE1:: @ 81ABEE1
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ABF0C
-	loadword 0, Text_189C7E
-	callstd 6
+	msgbox Text_189C7E, 6
 	end
 
 EventScript_1ABF0C:: @ 81ABF0C
 	trainerbattle 7, 557, 0, Text_1C3A55, Text_189C62, Text_189CAB
-	loadword 0, Text_189C7E
-	callstd 6
+	msgbox Text_189C7E, 6
 	end
 
 OneIsland_TreasureBeach_EventScript_1ABF27:: @ 81ABF27
@@ -7311,14 +6864,12 @@ OneIsland_TreasureBeach_EventScript_1ABF27:: @ 81ABF27
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ABF4E
-	loadword 0, Text_189DA3
-	callstd 6
+	msgbox Text_189DA3, 6
 	end
 
 EventScript_1ABF4E:: @ 81ABF4E
 	trainerbattle 5, 546, 0, Text_1C3773, Text_189D8B
-	loadword 0, Text_189DA3
-	callstd 6
+	msgbox Text_189DA3, 6
 	end
 
 ThreeIsland_BondBridge_EventScript_1ABF65:: @ 81ABF65
@@ -7326,14 +6877,12 @@ ThreeIsland_BondBridge_EventScript_1ABF65:: @ 81ABF65
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ABF8C
-	loadword 0, Text_189E9E
-	callstd 6
+	msgbox Text_189E9E, 6
 	end
 
 EventScript_1ABF8C:: @ 81ABF8C
 	trainerbattle 5, 523, 0, Text_1C3AA7, Text_189E72
-	loadword 0, Text_189E9E
-	callstd 6
+	msgbox Text_189E9E, 6
 	end
 
 ThreeIsland_BondBridge_EventScript_1ABFA3:: @ 81ABFA3
@@ -7341,14 +6890,12 @@ ThreeIsland_BondBridge_EventScript_1ABFA3:: @ 81ABFA3
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ABFCA
-	loadword 0, Text_189F21
-	callstd 6
+	msgbox Text_189F21, 6
 	end
 
 EventScript_1ABFCA:: @ 81ABFCA
 	trainerbattle 5, 558, 0, Text_1C3ABF, Text_189EFA
-	loadword 0, Text_189F21
-	callstd 6
+	msgbox Text_189F21, 6
 	end
 
 ThreeIsland_BondBridge_EventScript_1ABFE1:: @ 81ABFE1
@@ -7356,14 +6903,12 @@ ThreeIsland_BondBridge_EventScript_1ABFE1:: @ 81ABFE1
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC008
-	loadword 0, Text_189FA8
-	callstd 6
+	msgbox Text_189FA8, 6
 	end
 
 EventScript_1AC008:: @ 81AC008
 	trainerbattle 5, 519, 0, Text_1C3AF2, Text_189F9A
-	loadword 0, Text_189FA8
-	callstd 6
+	msgbox Text_189FA8, 6
 	end
 
 ThreeIsland_BondBridge_EventScript_1AC01F:: @ 81AC01F
@@ -7371,14 +6916,12 @@ ThreeIsland_BondBridge_EventScript_1AC01F:: @ 81AC01F
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC046
-	loadword 0, Text_18A000
-	callstd 6
+	msgbox Text_18A000, 6
 	end
 
 EventScript_1AC046:: @ 81AC046
 	trainerbattle 5, 559, 0, Text_1C3B1D, Text_189FEE
-	loadword 0, Text_18A000
-	callstd 6
+	msgbox Text_18A000, 6
 	end
 
 ThreeIsland_BondBridge_EventScript_1AC05D:: @ 81AC05D
@@ -7386,14 +6929,12 @@ ThreeIsland_BondBridge_EventScript_1AC05D:: @ 81AC05D
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC084
-	loadword 0, Text_18A082
-	callstd 6
+	msgbox Text_18A082, 6
 	end
 
 EventScript_1AC084:: @ 81AC084
 	trainerbattle 5, 561, 0, Text_1C3B30, Text_18A053
-	loadword 0, Text_18A082
-	callstd 6
+	msgbox Text_18A082, 6
 	end
 
 ThreeIsland_BondBridge_EventScript_1AC09B:: @ 81AC09B
@@ -7401,14 +6942,12 @@ ThreeIsland_BondBridge_EventScript_1AC09B:: @ 81AC09B
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC0C6
-	loadword 0, Text_18A106
-	callstd 6
+	msgbox Text_18A106, 6
 	end
 
 EventScript_1AC0C6:: @ 81AC0C6
 	trainerbattle 7, 560, 0, Text_1C3B6E, Text_18A0F7, Text_18A138
-	loadword 0, Text_18A106
-	callstd 6
+	msgbox Text_18A106, 6
 	end
 
 ThreeIsland_BondBridge_EventScript_1AC0E1:: @ 81AC0E1
@@ -7416,14 +6955,12 @@ ThreeIsland_BondBridge_EventScript_1AC0E1:: @ 81AC0E1
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC10C
-	loadword 0, Text_18A1B2
-	callstd 6
+	msgbox Text_18A1B2, 6
 	end
 
 EventScript_1AC10C:: @ 81AC10C
 	trainerbattle 7, 560, 0, Text_1C3B99, Text_18A1A3, Text_18A1CD
-	loadword 0, Text_18A1B2
-	callstd 6
+	msgbox Text_18A1B2, 6
 	end
 
 FiveIsland_ResortGorgeous_EventScript_1AC127:: @ 81AC127
@@ -7431,14 +6968,12 @@ FiveIsland_ResortGorgeous_EventScript_1AC127:: @ 81AC127
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC14E
-	loadword 0, Text_18A430
-	callstd 6
+	msgbox Text_18A430, 6
 	end
 
 EventScript_1AC14E:: @ 81AC14E
 	trainerbattle 5, 526, 0, Text_1C3BF6, Text_18A40E
-	loadword 0, Text_18A430
-	callstd 6
+	msgbox Text_18A430, 6
 	end
 
 FiveIsland_ResortGorgeous_EventScript_1AC165:: @ 81AC165
@@ -7446,14 +6981,12 @@ FiveIsland_ResortGorgeous_EventScript_1AC165:: @ 81AC165
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC18C
-	loadword 0, Text_18A4C6
-	callstd 6
+	msgbox Text_18A4C6, 6
 	end
 
 EventScript_1AC18C:: @ 81AC18C
 	trainerbattle 5, 562, 0, Text_1C3C28, Text_18A49E
-	loadword 0, Text_18A4C6
-	callstd 6
+	msgbox Text_18A4C6, 6
 	end
 
 FiveIsland_ResortGorgeous_EventScript_1AC1A3:: @ 81AC1A3
@@ -7461,14 +6994,12 @@ FiveIsland_ResortGorgeous_EventScript_1AC1A3:: @ 81AC1A3
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC1CA
-	loadword 0, Text_18A555
-	callstd 6
+	msgbox Text_18A555, 6
 	end
 
 EventScript_1AC1CA:: @ 81AC1CA
 	trainerbattle 5, 563, 0, Text_1C3C70, Text_18A535
-	loadword 0, Text_18A555
-	callstd 6
+	msgbox Text_18A555, 6
 	end
 
 FiveIsland_ResortGorgeous_EventScript_1AC1E1:: @ 81AC1E1
@@ -7476,14 +7007,12 @@ FiveIsland_ResortGorgeous_EventScript_1AC1E1:: @ 81AC1E1
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC208
-	loadword 0, Text_18A601
-	callstd 6
+	msgbox Text_18A601, 6
 	end
 
 EventScript_1AC208:: @ 81AC208
 	trainerbattle 5, 525, 0, Text_1C3CB0, Text_18A5EE
-	loadword 0, Text_18A601
-	callstd 6
+	msgbox Text_18A601, 6
 	end
 
 FiveIsland_ResortGorgeous_EventScript_1AC21F:: @ 81AC21F
@@ -7491,14 +7020,12 @@ FiveIsland_ResortGorgeous_EventScript_1AC21F:: @ 81AC21F
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC246
-	loadword 0, Text_18A699
-	callstd 6
+	msgbox Text_18A699, 6
 	end
 
 EventScript_1AC246:: @ 81AC246
 	trainerbattle 5, 564, 0, Text_1C3CF1, Text_18A67F
-	loadword 0, Text_18A699
-	callstd 6
+	msgbox Text_18A699, 6
 	end
 
 FiveIsland_ResortGorgeous_EventScript_1AC25D:: @ 81AC25D
@@ -7506,14 +7033,12 @@ FiveIsland_ResortGorgeous_EventScript_1AC25D:: @ 81AC25D
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC284
-	loadword 0, Text_18A715
-	callstd 6
+	msgbox Text_18A715, 6
 	end
 
 EventScript_1AC284:: @ 81AC284
 	trainerbattle 5, 565, 0, Text_1C3D47, Text_18A6FE
-	loadword 0, Text_18A715
-	callstd 6
+	msgbox Text_18A715, 6
 	end
 
 FiveIsland_ResortGorgeous_EventScript_1AC29B:: @ 81AC29B
@@ -7521,14 +7046,12 @@ FiveIsland_ResortGorgeous_EventScript_1AC29B:: @ 81AC29B
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC2C2
-	loadword 0, Text_18A7AC
-	callstd 6
+	msgbox Text_18A7AC, 6
 	end
 
 EventScript_1AC2C2:: @ 81AC2C2
 	trainerbattle 5, 566, 0, Text_1C3D73, Text_18A786
-	loadword 0, Text_18A7AC
-	callstd 6
+	msgbox Text_18A7AC, 6
 	end
 
 FiveIsland_WaterLabyrinth_EventScript_1AC2D9:: @ 81AC2D9
@@ -7536,14 +7059,12 @@ FiveIsland_WaterLabyrinth_EventScript_1AC2D9:: @ 81AC2D9
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC300
-	loadword 0, Text_18AB37
-	callstd 6
+	msgbox Text_18AB37, 6
 	end
 
 EventScript_1AC300:: @ 81AC300
 	trainerbattle 5, 520, 0, Text_1C3BB7, Text_18AB0B
-	loadword 0, Text_18AB37
-	callstd 6
+	msgbox Text_18AB37, 6
 	end
 
 FiveIsland_MemorialPillar_EventScript_1AC317:: @ 81AC317
@@ -7551,14 +7072,12 @@ FiveIsland_MemorialPillar_EventScript_1AC317:: @ 81AC317
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC33E
-	loadword 0, Text_18AEB6
-	callstd 6
+	msgbox Text_18AEB6, 6
 	end
 
 EventScript_1AC33E:: @ 81AC33E
 	trainerbattle 5, 570, 0, Text_1C3DA2, Text_18AEA8
-	loadword 0, Text_18AEB6
-	callstd 6
+	msgbox Text_18AEB6, 6
 	end
 
 FiveIsland_MemorialPillar_EventScript_1AC355:: @ 81AC355
@@ -7566,14 +7085,12 @@ FiveIsland_MemorialPillar_EventScript_1AC355:: @ 81AC355
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC37C
-	loadword 0, Text_18AF45
-	callstd 6
+	msgbox Text_18AF45, 6
 	end
 
 EventScript_1AC37C:: @ 81AC37C
 	trainerbattle 5, 571, 0, Text_1C3E0F, Text_18AF39
-	loadword 0, Text_18AF45
-	callstd 6
+	msgbox Text_18AF45, 6
 	end
 
 FiveIsland_MemorialPillar_EventScript_1AC393:: @ 81AC393
@@ -7581,14 +7098,12 @@ FiveIsland_MemorialPillar_EventScript_1AC393:: @ 81AC393
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC3BA
-	loadword 0, Text_18AFF2
-	callstd 6
+	msgbox Text_18AFF2, 6
 	end
 
 EventScript_1AC3BA:: @ 81AC3BA
 	trainerbattle 5, 572, 0, Text_1C3E6A, Text_18AFCC
-	loadword 0, Text_18AFF2
-	callstd 6
+	msgbox Text_18AFF2, 6
 	end
 
 SixIsland_OutcastIsland_EventScript_1AC3D1:: @ 81AC3D1
@@ -7596,14 +7111,12 @@ SixIsland_OutcastIsland_EventScript_1AC3D1:: @ 81AC3D1
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC3F8
-	loadword 0, Text_18B451
-	callstd 6
+	msgbox Text_18B451, 6
 	end
 
 EventScript_1AC3F8:: @ 81AC3F8
 	trainerbattle 5, 573, 0, Text_1C3ED0, Text_18B43B
-	loadword 0, Text_18B451
-	callstd 6
+	msgbox Text_18B451, 6
 	end
 
 SixIsland_OutcastIsland_EventScript_1AC40F:: @ 81AC40F
@@ -7611,14 +7124,12 @@ SixIsland_OutcastIsland_EventScript_1AC40F:: @ 81AC40F
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC436
-	loadword 0, Text_18B4D1
-	callstd 6
+	msgbox Text_18B4D1, 6
 	end
 
 EventScript_1AC436:: @ 81AC436
 	trainerbattle 5, 574, 0, Text_1C3F11, Text_18B4C5
-	loadword 0, Text_18B4D1
-	callstd 6
+	msgbox Text_18B4D1, 6
 	end
 
 SixIsland_OutcastIsland_EventScript_1AC44D:: @ 81AC44D
@@ -7626,14 +7137,12 @@ SixIsland_OutcastIsland_EventScript_1AC44D:: @ 81AC44D
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC474
-	loadword 0, Text_18B573
-	callstd 6
+	msgbox Text_18B573, 6
 	end
 
 EventScript_1AC474:: @ 81AC474
 	trainerbattle 5, 575, 0, Text_1C3F51, Text_18B539
-	loadword 0, Text_18B573
-	callstd 6
+	msgbox Text_18B573, 6
 	end
 
 SixIsland_OutcastIsland_EventScript_1AC48B:: @ 81AC48B
@@ -7641,14 +7150,12 @@ SixIsland_OutcastIsland_EventScript_1AC48B:: @ 81AC48B
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC4B6
-	loadword 0, Text_18B62E
-	callstd 6
+	msgbox Text_18B62E, 6
 	end
 
 EventScript_1AC4B6:: @ 81AC4B6
 	trainerbattle 7, 576, 0, Text_1C3F7B, Text_18B5F4, Text_18B660
-	loadword 0, Text_18B62E
-	callstd 6
+	msgbox Text_18B62E, 6
 	end
 
 SixIsland_OutcastIsland_EventScript_1AC4D1:: @ 81AC4D1
@@ -7656,14 +7163,12 @@ SixIsland_OutcastIsland_EventScript_1AC4D1:: @ 81AC4D1
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC4FC
-	loadword 0, Text_18B720
-	callstd 6
+	msgbox Text_18B720, 6
 	end
 
 EventScript_1AC4FC:: @ 81AC4FC
 	trainerbattle 7, 576, 0, Text_1C3FB3, Text_18B6EF, Text_18B762
-	loadword 0, Text_18B720
-	callstd 6
+	msgbox Text_18B720, 6
 	end
 
 SixIsland_GreenPath_EventScript_1AC517:: @ 81AC517
@@ -7671,14 +7176,12 @@ SixIsland_GreenPath_EventScript_1AC517:: @ 81AC517
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC53E
-	loadword 0, Text_18B7FD
-	callstd 6
+	msgbox Text_18B7FD, 6
 	end
 
 EventScript_1AC53E:: @ 81AC53E
 	trainerbattle 5, 517, 0, Text_1C3FE9, Text_18B7F0
-	loadword 0, Text_18B7FD
-	callstd 6
+	msgbox Text_18B7FD, 6
 	end
 
 SixIsland_WaterPath_EventScript_1AC555:: @ 81AC555
@@ -7686,14 +7189,12 @@ SixIsland_WaterPath_EventScript_1AC555:: @ 81AC555
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC57C
-	loadword 0, Text_18B8F7
-	callstd 6
+	msgbox Text_18B8F7, 6
 	end
 
 EventScript_1AC57C:: @ 81AC57C
 	trainerbattle 5, 577, 0, Text_1C4028, Text_18B8C8
-	loadword 0, Text_18B8F7
-	callstd 6
+	msgbox Text_18B8F7, 6
 	end
 
 SixIsland_WaterPath_EventScript_1AC593:: @ 81AC593
@@ -7701,14 +7202,12 @@ SixIsland_WaterPath_EventScript_1AC593:: @ 81AC593
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC5BA
-	loadword 0, Text_18B9A5
-	callstd 6
+	msgbox Text_18B9A5, 6
 	end
 
 EventScript_1AC5BA:: @ 81AC5BA
 	trainerbattle 5, 291, 0, Text_1C4057, Text_18B988
-	loadword 0, Text_18B9A5
-	callstd 6
+	msgbox Text_18B9A5, 6
 	end
 
 SixIsland_WaterPath_EventScript_1AC5D1:: @ 81AC5D1
@@ -7716,14 +7215,12 @@ SixIsland_WaterPath_EventScript_1AC5D1:: @ 81AC5D1
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC5F8
-	loadword 0, Text_18BA57
-	callstd 6
+	msgbox Text_18BA57, 6
 	end
 
 EventScript_1AC5F8:: @ 81AC5F8
 	trainerbattle 5, 578, 0, Text_1C407F, Text_18BA47
-	loadword 0, Text_18BA57
-	callstd 6
+	msgbox Text_18BA57, 6
 	end
 
 SixIsland_WaterPath_EventScript_1AC60F:: @ 81AC60F
@@ -7731,14 +7228,12 @@ SixIsland_WaterPath_EventScript_1AC60F:: @ 81AC60F
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC636
-	loadword 0, Text_18BAE0
-	callstd 6
+	msgbox Text_18BAE0, 6
 	end
 
 EventScript_1AC636:: @ 81AC636
 	trainerbattle 5, 579, 0, Text_1C40D9, Text_18BAC0
-	loadword 0, Text_18BAE0
-	callstd 6
+	msgbox Text_18BAE0, 6
 	end
 
 SixIsland_WaterPath_EventScript_1AC64D:: @ 81AC64D
@@ -7746,14 +7241,12 @@ SixIsland_WaterPath_EventScript_1AC64D:: @ 81AC64D
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC678
-	loadword 0, Text_18BBF6
-	callstd 6
+	msgbox Text_18BBF6, 6
 	end
 
 EventScript_1AC678:: @ 81AC678
 	trainerbattle 7, 580, 0, Text_1C4138, Text_18BBE2, Text_18BC24
-	loadword 0, Text_18BBF6
-	callstd 6
+	msgbox Text_18BBF6, 6
 	end
 
 SixIsland_WaterPath_EventScript_1AC693:: @ 81AC693
@@ -7761,14 +7254,12 @@ SixIsland_WaterPath_EventScript_1AC693:: @ 81AC693
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC6BE
-	loadword 0, Text_18BCAE
-	callstd 6
+	msgbox Text_18BCAE, 6
 	end
 
 EventScript_1AC6BE:: @ 81AC6BE
 	trainerbattle 7, 580, 0, Text_1C4166, Text_18BC84, Text_18BCCF
-	loadword 0, Text_18BCAE
-	callstd 6
+	msgbox Text_18BCAE, 6
 	end
 
 SixIsland_WaterPath_EventScript_1AC6D9:: @ 81AC6D9
@@ -7776,14 +7267,12 @@ SixIsland_WaterPath_EventScript_1AC6D9:: @ 81AC6D9
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC700
-	loadword 0, Text_18BB8B
-	callstd 6
+	msgbox Text_18BB8B, 6
 	end
 
 EventScript_1AC700:: @ 81AC700
 	trainerbattle 5, 581, 0, Text_1C40FA, Text_18BB62
-	loadword 0, Text_18BB8B
-	callstd 6
+	msgbox Text_18BB8B, 6
 	end
 
 SixIsland_RuinValley_EventScript_1AC717:: @ 81AC717
@@ -7791,14 +7280,12 @@ SixIsland_RuinValley_EventScript_1AC717:: @ 81AC717
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC73E
-	loadword 0, Text_18BEA0
-	callstd 6
+	msgbox Text_18BEA0, 6
 	end
 
 EventScript_1AC73E:: @ 81AC73E
 	trainerbattle 5, 524, 0, Text_1C4196, Text_18BE9B
-	loadword 0, Text_18BEA0
-	callstd 6
+	msgbox Text_18BEA0, 6
 	end
 
 SixIsland_RuinValley_EventScript_1AC755:: @ 81AC755
@@ -7806,14 +7293,12 @@ SixIsland_RuinValley_EventScript_1AC755:: @ 81AC755
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC77C
-	loadword 0, Text_18BF6C
-	callstd 6
+	msgbox Text_18BF6C, 6
 	end
 
 EventScript_1AC77C:: @ 81AC77C
 	trainerbattle 5, 582, 0, Text_1C41D4, Text_18BF33
-	loadword 0, Text_18BF6C
-	callstd 6
+	msgbox Text_18BF6C, 6
 	end
 
 SixIsland_RuinValley_EventScript_1AC793:: @ 81AC793
@@ -7821,14 +7306,12 @@ SixIsland_RuinValley_EventScript_1AC793:: @ 81AC793
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC7BA
-	loadword 0, Text_18C04C
-	callstd 6
+	msgbox Text_18C04C, 6
 	end
 
 EventScript_1AC7BA:: @ 81AC7BA
 	trainerbattle 5, 583, 0, Text_1C4210, Text_18C03B
-	loadword 0, Text_18C04C
-	callstd 6
+	msgbox Text_18C04C, 6
 	end
 
 SixIsland_RuinValley_EventScript_1AC7D1:: @ 81AC7D1
@@ -7836,14 +7319,12 @@ SixIsland_RuinValley_EventScript_1AC7D1:: @ 81AC7D1
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC7F8
-	loadword 0, Text_18C0EA
-	callstd 6
+	msgbox Text_18C0EA, 6
 	end
 
 EventScript_1AC7F8:: @ 81AC7F8
 	trainerbattle 5, 584, 0, Text_1C4280, Text_18C0BB
-	loadword 0, Text_18C0EA
-	callstd 6
+	msgbox Text_18C0EA, 6
 	end
 
 SixIsland_RuinValley_EventScript_1AC80F:: @ 81AC80F
@@ -7851,14 +7332,12 @@ SixIsland_RuinValley_EventScript_1AC80F:: @ 81AC80F
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC836
-	loadword 0, Text_18C17A
-	callstd 6
+	msgbox Text_18C17A, 6
 	end
 
 EventScript_1AC836:: @ 81AC836
 	trainerbattle 5, 585, 0, Text_1C42A0, Text_18C140
-	loadword 0, Text_18C17A
-	callstd 6
+	msgbox Text_18C17A, 6
 	end
 
 SevenIsland_TrainerTower_EventScript_1AC84D:: @ 81AC84D
@@ -7866,14 +7345,12 @@ SevenIsland_TrainerTower_EventScript_1AC84D:: @ 81AC84D
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC874
-	loadword 0, Text_18C20E
-	callstd 6
+	msgbox Text_18C20E, 6
 	end
 
 EventScript_1AC874:: @ 81AC874
 	trainerbattle 5, 586, 0, Text_1C42D6, Text_18C205
-	loadword 0, Text_18C20E
-	callstd 6
+	msgbox Text_18C20E, 6
 	end
 
 SevenIsland_TrainerTower_EventScript_1AC88B:: @ 81AC88B
@@ -7881,14 +7358,12 @@ SevenIsland_TrainerTower_EventScript_1AC88B:: @ 81AC88B
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC8B2
-	loadword 0, Text_18C2D5
-	callstd 6
+	msgbox Text_18C2D5, 6
 	end
 
 EventScript_1AC8B2:: @ 81AC8B2
 	trainerbattle 5, 587, 0, Text_1C42EE, Text_18C2BC
-	loadword 0, Text_18C2D5
-	callstd 6
+	msgbox Text_18C2D5, 6
 	end
 
 SevenIsland_SevaultCanyon_Entrance_EventScript_1AC8C9:: @ 81AC8C9
@@ -7896,14 +7371,12 @@ SevenIsland_SevaultCanyon_Entrance_EventScript_1AC8C9:: @ 81AC8C9
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC8F0
-	loadword 0, Text_18C3FF
-	callstd 6
+	msgbox Text_18C3FF, 6
 	end
 
 EventScript_1AC8F0:: @ 81AC8F0
 	trainerbattle 5, 588, 0, Text_1C4327, Text_18C3E7
-	loadword 0, Text_18C3FF
-	callstd 6
+	msgbox Text_18C3FF, 6
 	end
 
 SevenIsland_SevaultCanyon_Entrance_EventScript_1AC907:: @ 81AC907
@@ -7911,14 +7384,12 @@ SevenIsland_SevaultCanyon_Entrance_EventScript_1AC907:: @ 81AC907
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC932
-	loadword 0, Text_18C683
-	callstd 6
+	msgbox Text_18C683, 6
 	end
 
 EventScript_1AC932:: @ 81AC932
 	trainerbattle 7, 589, 0, Text_1C4416, Text_18C662, Text_18C6AB
-	loadword 0, Text_18C683
-	callstd 6
+	msgbox Text_18C683, 6
 	end
 
 SevenIsland_SevaultCanyon_Entrance_EventScript_1AC94D:: @ 81AC94D
@@ -7926,14 +7397,12 @@ SevenIsland_SevaultCanyon_Entrance_EventScript_1AC94D:: @ 81AC94D
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC978
-	loadword 0, Text_18C773
-	callstd 6
+	msgbox Text_18C773, 6
 	end
 
 EventScript_1AC978:: @ 81AC978
 	trainerbattle 7, 589, 0, Text_1C444C, Text_18C73B, Text_18C7BD
-	loadword 0, Text_18C773
-	callstd 6
+	msgbox Text_18C773, 6
 	end
 
 SevenIsland_SevaultCanyon_Entrance_EventScript_1AC993:: @ 81AC993
@@ -7941,14 +7410,12 @@ SevenIsland_SevaultCanyon_Entrance_EventScript_1AC993:: @ 81AC993
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC9BA
-	loadword 0, Text_18C4BA
-	callstd 6
+	msgbox Text_18C4BA, 6
 	end
 
 EventScript_1AC9BA:: @ 81AC9BA
 	trainerbattle 5, 590, 0, Text_1C4374, Text_18C473
-	loadword 0, Text_18C4BA
-	callstd 6
+	msgbox Text_18C4BA, 6
 	end
 
 SevenIsland_SevaultCanyon_Entrance_EventScript_1AC9D1:: @ 81AC9D1
@@ -7956,14 +7423,12 @@ SevenIsland_SevaultCanyon_Entrance_EventScript_1AC9D1:: @ 81AC9D1
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1AC9F8
-	loadword 0, Text_18C54B
-	callstd 6
+	msgbox Text_18C54B, 6
 	end
 
 EventScript_1AC9F8:: @ 81AC9F8
 	trainerbattle 5, 521, 0, Text_1C43AD, Text_18C543
-	loadword 0, Text_18C54B
-	callstd 6
+	msgbox Text_18C54B, 6
 	end
 
 SevenIsland_SevaultCanyon_Entrance_EventScript_1ACA0F:: @ 81ACA0F
@@ -7971,14 +7436,12 @@ SevenIsland_SevaultCanyon_Entrance_EventScript_1ACA0F:: @ 81ACA0F
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ACA36
-	loadword 0, Text_18C5F5
-	callstd 6
+	msgbox Text_18C5F5, 6
 	end
 
 EventScript_1ACA36:: @ 81ACA36
 	trainerbattle 5, 522, 0, Text_1C43EC, Text_18C5CD
-	loadword 0, Text_18C5F5
-	callstd 6
+	msgbox Text_18C5F5, 6
 	end
 
 SevenIsland_SevaultCanyon_EventScript_1ACA4D:: @ 81ACA4D
@@ -7986,14 +7449,12 @@ SevenIsland_SevaultCanyon_EventScript_1ACA4D:: @ 81ACA4D
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ACA74
-	loadword 0, Text_18C8C2
-	callstd 6
+	msgbox Text_18C8C2, 6
 	end
 
 EventScript_1ACA74:: @ 81ACA74
 	trainerbattle 5, 591, 0, Text_1C4491, Text_18C8A6
-	loadword 0, Text_18C8C2
-	callstd 6
+	msgbox Text_18C8C2, 6
 	end
 
 SevenIsland_SevaultCanyon_EventScript_1ACA8B:: @ 81ACA8B
@@ -8001,14 +7462,12 @@ SevenIsland_SevaultCanyon_EventScript_1ACA8B:: @ 81ACA8B
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ACAB2
-	loadword 0, Text_18C999
-	callstd 6
+	msgbox Text_18C999, 6
 	end
 
 EventScript_1ACAB2:: @ 81ACAB2
 	trainerbattle 5, 593, 0, Text_1C44CB, Text_18C980
-	loadword 0, Text_18C999
-	callstd 6
+	msgbox Text_18C999, 6
 	end
 
 SevenIsland_SevaultCanyon_EventScript_1ACAC9:: @ 81ACAC9
@@ -8016,14 +7475,12 @@ SevenIsland_SevaultCanyon_EventScript_1ACAC9:: @ 81ACAC9
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ACAF0
-	loadword 0, Text_18CA9C
-	callstd 6
+	msgbox Text_18CA9C, 6
 	end
 
 EventScript_1ACAF0:: @ 81ACAF0
 	trainerbattle 5, 596, 0, Text_1C454E, Text_18CA6F
-	loadword 0, Text_18CA9C
-	callstd 6
+	msgbox Text_18CA9C, 6
 	end
 
 SevenIsland_SevaultCanyon_EventScript_1ACB07:: @ 81ACB07
@@ -8031,14 +7488,12 @@ SevenIsland_SevaultCanyon_EventScript_1ACB07:: @ 81ACB07
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ACB2E
-	loadword 0, Text_18CB6C
-	callstd 6
+	msgbox Text_18CB6C, 6
 	end
 
 EventScript_1ACB2E:: @ 81ACB2E
 	trainerbattle 5, 598, 0, Text_1C458E, Text_18CB3E
-	loadword 0, Text_18CB6C
-	callstd 6
+	msgbox Text_18CB6C, 6
 	end
 
 SevenIsland_SevaultCanyon_EventScript_1ACB45:: @ 81ACB45
@@ -8046,14 +7501,12 @@ SevenIsland_SevaultCanyon_EventScript_1ACB45:: @ 81ACB45
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ACB6C
-	loadword 0, Text_18CC09
-	callstd 6
+	msgbox Text_18CC09, 6
 	end
 
 EventScript_1ACB6C:: @ 81ACB6C
 	trainerbattle 5, 599, 0, Text_1C45C2, Text_18CBE0
-	loadword 0, Text_18CC09
-	callstd 6
+	msgbox Text_18CC09, 6
 	end
 
 SevenIsland_SevaultCanyon_EventScript_1ACB83:: @ 81ACB83
@@ -8061,14 +7514,12 @@ SevenIsland_SevaultCanyon_EventScript_1ACB83:: @ 81ACB83
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ACBAA
-	loadword 0, Text_18CCEA
-	callstd 6
+	msgbox Text_18CCEA, 6
 	end
 
 EventScript_1ACBAA:: @ 81ACBAA
 	trainerbattle 5, 600, 0, Text_1C45FB, Text_18CCAE
-	loadword 0, Text_18CCEA
-	callstd 6
+	msgbox Text_18CCEA, 6
 	end
 
 SevenIsland_SevaultCanyon_EventScript_1ACBC1:: @ 81ACBC1
@@ -8076,14 +7527,12 @@ SevenIsland_SevaultCanyon_EventScript_1ACBC1:: @ 81ACBC1
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ACBEC
-	loadword 0, Text_18CD9C
-	callstd 6
+	msgbox Text_18CD9C, 6
 	end
 
 EventScript_1ACBEC:: @ 81ACBEC
 	trainerbattle 7, 601, 0, Text_1C4662, Text_18CD75, Text_18CDE2
-	loadword 0, Text_18CD9C
-	callstd 6
+	msgbox Text_18CD9C, 6
 	end
 
 SevenIsland_SevaultCanyon_EventScript_1ACC07:: @ 81ACC07
@@ -8091,14 +7540,12 @@ SevenIsland_SevaultCanyon_EventScript_1ACC07:: @ 81ACC07
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ACC32
-	loadword 0, Text_18CE78
-	callstd 6
+	msgbox Text_18CE78, 6
 	end
 
 EventScript_1ACC32:: @ 81ACC32
 	trainerbattle 7, 601, 0, Text_1C4699, Text_18CE5A, Text_18CEF4
-	loadword 0, Text_18CE78
-	callstd 6
+	msgbox Text_18CE78, 6
 	end
 
 SevenIsland_TanobyRuins_EventScript_1ACC4D:: @ 81ACC4D
@@ -8106,14 +7553,12 @@ SevenIsland_TanobyRuins_EventScript_1ACC4D:: @ 81ACC4D
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ACC74
-	loadword 0, Text_18D061
-	callstd 6
+	msgbox Text_18D061, 6
 	end
 
 EventScript_1ACC74:: @ 81ACC74
 	trainerbattle 5, 602, 0, Text_1C46D3, Text_18D02A
-	loadword 0, Text_18D061
-	callstd 6
+	msgbox Text_18D061, 6
 	end
 
 SevenIsland_TanobyRuins_EventScript_1ACC8B:: @ 81ACC8B
@@ -8121,14 +7566,12 @@ SevenIsland_TanobyRuins_EventScript_1ACC8B:: @ 81ACC8B
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ACCB2
-	loadword 0, Text_18D125
-	callstd 6
+	msgbox Text_18D125, 6
 	end
 
 EventScript_1ACCB2:: @ 81ACCB2
 	trainerbattle 5, 603, 0, Text_1C470A, Text_18D108
-	loadword 0, Text_18D125
-	callstd 6
+	msgbox Text_18D125, 6
 	end
 
 SevenIsland_TanobyRuins_EventScript_1ACCC9:: @ 81ACCC9
@@ -8136,14 +7579,12 @@ SevenIsland_TanobyRuins_EventScript_1ACCC9:: @ 81ACCC9
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ACCF0
-	loadword 0, Text_18D1E3
-	callstd 6
+	msgbox Text_18D1E3, 6
 	end
 
 EventScript_1ACCF0:: @ 81ACCF0
 	trainerbattle 5, 604, 0, Text_1C4739, Text_18D1B5
-	loadword 0, Text_18D1E3
-	callstd 6
+	msgbox Text_18D1E3, 6
 	end
 
 SevenIsland_TanobyRuins_EventScript_1ACD07:: @ 81ACD07
@@ -8151,14 +7592,12 @@ SevenIsland_TanobyRuins_EventScript_1ACD07:: @ 81ACD07
 	specialvar VAR_RESULT, sub_810CD4C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1ACD2E
-	loadword 0, Text_18D284
-	callstd 6
+	msgbox Text_18D284, 6
 	end
 
 EventScript_1ACD2E:: @ 81ACD2E
 	trainerbattle 5, 605, 0, Text_1C476A, Text_18D26D
-	loadword 0, Text_18D284
-	callstd 6
+	msgbox Text_18D284, 6
 	end
 
 @ Test message!
@@ -8177,8 +7616,7 @@ ViridianCity_House2_EventScript_1ACD65:: @ 81ACD65
 	setvar VAR_0x8005, 3
 	special SetFlavorTextFlagFromSpecialVars
 	textcolor 3
-	loadword 0, gUnknown_81B1AB9
-	callstd 4
+	msgbox gUnknown_81B1AB9
 	release
 	end
 
@@ -8192,8 +7630,7 @@ EventScript_1ACD8D:: @ 81ACD8D
 	setvar VAR_0x8005, 4
 	special SetFlavorTextFlagFromSpecialVars
 	textcolor 3
-	loadword 0, gUnknown_81B1AB9
-	callstd 4
+	msgbox gUnknown_81B1AB9
 	release
 	end
 
@@ -8204,8 +7641,7 @@ EventScript_1ACDB5:: @ 81ACDB5
 	setvar VAR_0x8005, 4
 	special SetFlavorTextFlagFromSpecialVars
 	textcolor 3
-	loadword 0, gUnknown_81B1AB9
-	callstd 4
+	msgbox gUnknown_81B1AB9
 	release
 	end
 
@@ -8215,8 +7651,7 @@ FourIsland_PokemonCenter_1F_EventScript_1ACDD0:: @ 81ACDD0
 	setvar VAR_0x8005, 5
 	special SetFlavorTextFlagFromSpecialVars
 	textcolor 3
-	loadword 0, gUnknown_81B1B3D
-	callstd 4
+	msgbox gUnknown_81B1B3D
 	releaseall
 	end
 
@@ -8226,8 +7661,7 @@ Route4_EventScript_1ACDEA:: @ 81ACDEA
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 3
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, Text_183D26
-	callstd 4
+	msgbox Text_183D26
 	release
 	end
 
@@ -8237,8 +7671,7 @@ MtMoon_1F_EventScript_1ACE03:: @ 81ACE03
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 4
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, Text_172B00
-	callstd 4
+	msgbox Text_172B00
 	release
 	end
 
@@ -8248,8 +7681,7 @@ PewterCity_Museum_1F_EventScript_1ACE1C:: @ 81ACE1C
 	setvar VAR_0x8005, 5
 	special SetFlavorTextFlagFromSpecialVars
 	textcolor 3
-	loadword 0, gUnknown_81B146A
-	callstd 4
+	msgbox gUnknown_81B146A
 	releaseall
 	end
 
@@ -8259,8 +7691,7 @@ Route20_EventScript_1ACE36:: @ 81ACE36
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, Text_1882E1
-	callstd 4
+	msgbox Text_1882E1
 	release
 	end
 
@@ -8270,8 +7701,7 @@ Route25_EventScript_1ACE4F:: @ 81ACE4F
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 4
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, Text_189569
-	callstd 4
+	msgbox Text_189569
 	release
 	end
 
@@ -8282,8 +7712,7 @@ CeruleanCity_PokemonCenter_1F_EventScript_1ACE68:: @ 81ACE68
 	setvar VAR_0x8005, 5
 	special SetFlavorTextFlagFromSpecialVars
 	textcolor 3
-	loadword 0, gUnknown_81B14E8
-	callstd 4
+	msgbox gUnknown_81B14E8
 	release
 	end
 
@@ -8293,8 +7722,7 @@ VermilionCity_PokemonCenter_1F_EventScript_1ACE83:: @ 81ACE83
 	setvar VAR_0x8005, 5
 	special SetFlavorTextFlagFromSpecialVars
 	textcolor 3
-	loadword 0, gUnknown_81B1558
-	callstd 4
+	msgbox gUnknown_81B1558
 	releaseall
 	end
 
@@ -8305,8 +7733,7 @@ CeladonCity_Condominiums_2F_EventScript_1ACE9D:: @ 81ACE9D
 	setvar VAR_0x8005, 5
 	special SetFlavorTextFlagFromSpecialVars
 	textcolor 3
-	loadword 0, gUnknown_81B161B
-	callstd 4
+	msgbox gUnknown_81B161B
 	release
 	end
 
@@ -8317,8 +7744,7 @@ FuchsiaCity_Building1_EventScript_1ACEB8:: @ 81ACEB8
 	setvar VAR_0x8005, 4
 	special SetFlavorTextFlagFromSpecialVars
 	textcolor 3
-	loadword 0, gUnknown_81B16A8
-	callstd 4
+	msgbox gUnknown_81B16A8
 	release
 	end
 
@@ -8328,8 +7754,7 @@ SafariZone_Building3_EventScript_1ACED3:: @ 81ACED3
 	setvar VAR_0x8004, 6
 	setvar VAR_0x8005, 5
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, Text_177C47
-	callstd 4
+	msgbox Text_177C47
 	release
 	end
 
@@ -8340,8 +7765,7 @@ SaffronCity_PokemonCenter_1F_EventScript_1ACEEC:: @ 81ACEEC
 	setvar VAR_0x8005, 4
 	special SetFlavorTextFlagFromSpecialVars
 	textcolor 3
-	loadword 0, gUnknown_81B1753
-	callstd 4
+	msgbox gUnknown_81B1753
 	release
 	end
 
@@ -8353,8 +7777,7 @@ CinnabarIsland_Gym_EventScript_1ACF07:: @ 81ACF07
 	setvar VAR_0x8004, 14
 	setvar VAR_0x8005, 4
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, Text_199E8A
-	callstd 4
+	msgbox Text_199E8A
 	releaseall
 	end
 
@@ -8364,8 +7787,7 @@ FiveIsland_ResortGorgeous_House_EventScript_1ACF2C:: @ 81ACF2C
 	setvar VAR_0x8005, 5
 	special SetFlavorTextFlagFromSpecialVars
 	textcolor 3
-	loadword 0, gUnknown_81B17E9
-	callstd 4
+	msgbox gUnknown_81B17E9
 	releaseall
 	end
 
@@ -8375,8 +7797,7 @@ FourIsland_Mart_EventScript_1ACF46:: @ 81ACF46
 	setvar VAR_0x8004, 9
 	setvar VAR_0x8005, 2
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, Text_1A3A60
-	callstd 4
+	msgbox Text_1A3A60
 	release
 	end
 
@@ -8387,8 +7808,7 @@ FiveIsland_PokemonCenter_1F_EventScript_1ACF5F:: @ 81ACF5F
 	setvar VAR_0x8005, 3
 	special SetFlavorTextFlagFromSpecialVars
 	textcolor 3
-	loadword 0, gUnknown_81B187F
-	callstd 4
+	msgbox gUnknown_81B187F
 	release
 	end
 
@@ -8399,8 +7819,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_1ACF7A:: @ 81ACF7A
 	setvar VAR_0x8005, 2
 	special SetFlavorTextFlagFromSpecialVars
 	textcolor 3
-	loadword 0, gUnknown_81B1913
-	callstd 4
+	msgbox gUnknown_81B1913
 	release
 	end
 
@@ -8410,8 +7829,7 @@ SevenIsland_SevaultCanyon_EventScript_1ACF95:: @ 81ACF95
 	setvar VAR_0x8004, 10
 	setvar VAR_0x8005, 5
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, Text_18CF4D
-	callstd 4
+	msgbox Text_18CF4D
 	release
 	end
 
@@ -8424,8 +7842,7 @@ IndigoPlateau_PokemonCenter_1F_EventScript_1ACFAE:: @ 81ACFAE
 	setvar VAR_0x8004, 11
 	setvar VAR_0x8005, 2
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, Text_19A9E7
-	callstd 4
+	msgbox Text_19A9E7
 	release
 	end
 
@@ -8436,8 +7853,7 @@ SevenIsland_PokemonCenter_1F_EventScript_1ACFD4:: @ 81ACFD4
 	setvar VAR_0x8005, 3
 	special SetFlavorTextFlagFromSpecialVars
 	textcolor 3
-	loadword 0, gUnknown_81B19A8
-	callstd 4
+	msgbox gUnknown_81B19A8
 	release
 	end
 
@@ -8447,8 +7863,7 @@ SixIsland_Mart_EventScript_1ACFEF:: @ 81ACFEF
 	setvar VAR_0x8004, 11
 	setvar VAR_0x8005, 5
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, Text_1A41CA
-	callstd 4
+	msgbox Text_1A41CA
 	release
 	end
 
@@ -8458,8 +7873,7 @@ EventScript_1AD008:: @ 81AD008
 	setvar VAR_0x8004, 12
 	setvar VAR_0x8005, 0
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, gFameCheckerFlavorText_Lance0
-	callstd 4
+	msgbox gFameCheckerFlavorText_Lance0
 	release
 	end
 
@@ -8469,8 +7883,7 @@ EventScript_1AD021:: @ 81AD021
 	setvar VAR_0x8004, 12
 	setvar VAR_0x8005, 1
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, Text_181569
-	callstd 4
+	msgbox Text_181569
 	release
 	end
 
@@ -8480,8 +7893,7 @@ SaffronCity_EventScript_1AD03A:: @ 81AD03A
 	setvar VAR_0x8004, 12
 	setvar VAR_0x8005, 2
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, Text_181569
-	callstd 4
+	msgbox Text_181569
 	release
 	end
 
@@ -8491,8 +7903,7 @@ CeladonCity_DepartmentStore_2F_EventScript_1AD053:: @ 81AD053
 	setvar VAR_0x8004, 12
 	setvar VAR_0x8005, 3
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, Text_19566B
-	callstd 4
+	msgbox Text_19566B
 	release
 	end
 
@@ -8503,8 +7914,7 @@ IndigoPlateau_PokemonCenter_1F_EventScript_1AD06C:: @ 81AD06C
 	setvar VAR_0x8005, 4
 	special SetFlavorTextFlagFromSpecialVars
 	textcolor 3
-	loadword 0, gUnknown_81B1A31
-	callstd 4
+	msgbox gUnknown_81B1A31
 	release
 	end
 
@@ -8514,8 +7924,7 @@ IndigoPlateau_PokemonCenter_1F_EventScript_1AD087:: @ 81AD087
 	setvar VAR_0x8004, 12
 	setvar VAR_0x8005, 5
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, Text_19AB16
-	callstd 4
+	msgbox Text_19AB16
 	release
 	end
 
@@ -8525,8 +7934,7 @@ LavenderTown_PokemonCenter_1F_EventScript_1AD0A0:: @ 81AD0A0
 	setvar VAR_0x8004, 14
 	setvar VAR_0x8005, 3
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, Text_19358E
-	callstd 4
+	msgbox Text_19358E
 	release
 	end
 
@@ -8537,8 +7945,7 @@ CinnabarIsland_PokemonCenter_1F_EventScript_1AD0B9:: @ 81AD0B9
 	setvar VAR_0x8005, 5
 	special SetFlavorTextFlagFromSpecialVars
 	textcolor 3
-	loadword 0, gUnknown_81B1BD1
-	callstd 4
+	msgbox gUnknown_81B1BD1
 	release
 	end
 
@@ -8548,8 +7955,7 @@ SilphCo_5F_EventScript_1AD0D4:: @ 81AD0D4
 	setvar VAR_0x8004, 15
 	setvar VAR_0x8005, 1
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, Text_175E99
-	callstd 4
+	msgbox Text_175E99
 	release
 	end
 SilphCo_8F_EventScript_1AD0ED:: @ 81AD0ED
@@ -8558,8 +7964,7 @@ SilphCo_8F_EventScript_1AD0ED:: @ 81AD0ED
 	setvar VAR_0x8004, 15
 	setvar VAR_0x8005, 2
 	special SetFlavorTextFlagFromSpecialVars
-	loadword 0, Text_176ACB
-	callstd 4
+	msgbox Text_176ACB
 	release
 	end
 
@@ -8568,8 +7973,7 @@ SilphCo_8F_EventScript_1AD0ED:: @ 81AD0ED
 CeladonCity_GameCorner_EventScript_1B2867:: @ 81B2867
 	lockall
 	showmoneybox 0, 0, 0
-	loadword 0, gUnknown_81B1D7D
-	callstd 5
+	msgbox gUnknown_81B1D7D, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1B2926
 	checkmoney 50, 0
@@ -8628,8 +8032,7 @@ EventScript_1B2907:: @ 81B2907
 	dofieldeffect 69
 	delay 60
 	special sub_80CC2BC
-	loadword 0, gUnknown_81B1E7D
-	callstd 4
+	msgbox gUnknown_81B1E7D
 	hidemoneybox
 	nop
 	nop
@@ -8644,8 +8047,7 @@ EventScript_1B2926:: @ 81B2926
 	end
 
 EventScript_1B292B:: @ 81B292B
-	loadword 0, gUnknown_81B1E07
-	callstd 4
+	msgbox gUnknown_81B1E07
 	hidemoneybox
 	nop
 	nop
@@ -8663,8 +8065,7 @@ FourIsland_House2_EventScript_1B2938:: @ 81B2938
 
 EventScript_1B2951:: @ 81B2951
 	setflag FLAG_0x290
-	loadword 0, gUnknown_81B1EB3
-	callstd 4
+	msgbox gUnknown_81B1EB3
 	applymovement 1, Movement_1A75E1
 	waitmovement 0
 	playse SE_PIN
@@ -8698,8 +8099,7 @@ EventScript_1B29C5:: @ 81B29C5
 	end
 
 EventScript_1B29C6:: @ 81B29C6
-	loadword 0, gUnknown_81B1FEF
-	callstd 4
+	msgbox gUnknown_81B1FEF
 	release
 	end
 
@@ -8809,8 +8209,7 @@ EventScript_1B2B4C:: @ 81B2B4C
 	end
 
 EventScript_1B2B8E:: @ 81B2B8E
-	loadword 0, gUnknown_81B1EF8
-	callstd 4
+	msgbox gUnknown_81B1EF8
 	release
 	end
 
@@ -8829,8 +8228,7 @@ EventScript_1B2BC5:: @ 81B2BC5
 	compare_var_to_value VAR_BIRCH_STATE, 1
 	goto_if 1, EventScript_1B2C3D
 	setvar VAR_BIRCH_STATE, 1
-	loadword 0, gUnknown_81B206E
-	callstd 4
+	msgbox gUnknown_81B206E
 	goto EventScript_1B2C51
 
 EventScript_1B2BE2:: @ 81B2BE2
@@ -8840,8 +8238,7 @@ EventScript_1B2BE3:: @ 81B2BE3
 	compare_var_to_value VAR_BIRCH_STATE, 2
 	goto_if 1, EventScript_1B2C3D
 	setvar VAR_BIRCH_STATE, 2
-	loadword 0, gUnknown_81B20CF
-	callstd 4
+	msgbox gUnknown_81B20CF
 	goto EventScript_1B2C51
 
 EventScript_1B2C00:: @ 81B2C00
@@ -8851,8 +8248,7 @@ EventScript_1B2C01:: @ 81B2C01
 	compare_var_to_value VAR_BIRCH_STATE, 3
 	goto_if 1, EventScript_1B2C3D
 	setvar VAR_BIRCH_STATE, 3
-	loadword 0, gUnknown_81B2133
-	callstd 4
+	msgbox gUnknown_81B2133
 	goto EventScript_1B2C51
 
 EventScript_1B2C1E:: @ 81B2C1E
@@ -8862,22 +8258,19 @@ EventScript_1B2C1F:: @ 81B2C1F
 	compare_var_to_value VAR_BIRCH_STATE, 4
 	goto_if 1, EventScript_1B2C47
 	setvar VAR_BIRCH_STATE, 4
-	loadword 0, gUnknown_81B21C4
-	callstd 4
+	msgbox gUnknown_81B21C4
 	goto EventScript_1B2C51
 
 EventScript_1B2C3C:: @ 81B2C3C
 	end
 
 EventScript_1B2C3D:: @ 81B2C3D
-	loadword 0, gUnknown_81B227C
-	callstd 4
+	msgbox gUnknown_81B227C
 	release
 	end
 
 EventScript_1B2C47:: @ 81B2C47
-	loadword 0, gUnknown_81B22B0
-	callstd 4
+	msgbox gUnknown_81B22B0
 	release
 	end
 
@@ -8906,8 +8299,7 @@ EventScript_1B2C8F:: @ 81B2C8F
 	compare_var_to_value VAR_CRUISE_STEP_COUNT, 1
 	goto_if 1, EventScript_1B2D07
 	setvar VAR_CRUISE_STEP_COUNT, 1
-	loadword 0, gUnknown_81B2308
-	callstd 4
+	msgbox gUnknown_81B2308
 	goto EventScript_1B2D1B
 
 EventScript_1B2CAC:: @ 81B2CAC
@@ -8917,8 +8309,7 @@ EventScript_1B2CAD:: @ 81B2CAD
 	compare_var_to_value VAR_CRUISE_STEP_COUNT, 2
 	goto_if 1, EventScript_1B2D07
 	setvar VAR_CRUISE_STEP_COUNT, 2
-	loadword 0, gUnknown_81B2372
-	callstd 4
+	msgbox gUnknown_81B2372
 	goto EventScript_1B2D1B
 
 EventScript_1B2CCA:: @ 81B2CCA
@@ -8928,8 +8319,7 @@ EventScript_1B2CCB:: @ 81B2CCB
 	compare_var_to_value VAR_CRUISE_STEP_COUNT, 3
 	goto_if 1, EventScript_1B2D07
 	setvar VAR_CRUISE_STEP_COUNT, 3
-	loadword 0, gUnknown_81B23E0
-	callstd 4
+	msgbox gUnknown_81B23E0
 	goto EventScript_1B2D1B
 
 EventScript_1B2CE8:: @ 81B2CE8
@@ -8939,22 +8329,19 @@ EventScript_1B2CE9:: @ 81B2CE9
 	compare_var_to_value VAR_CRUISE_STEP_COUNT, 4
 	goto_if 1, EventScript_1B2D11
 	setvar VAR_CRUISE_STEP_COUNT, 4
-	loadword 0, gUnknown_81B2448
-	callstd 4
+	msgbox gUnknown_81B2448
 	goto EventScript_1B2D1B
 
 EventScript_1B2D06:: @ 81B2D06
 	end
 
 EventScript_1B2D07:: @ 81B2D07
-	loadword 0, gUnknown_81B251B
-	callstd 4
+	msgbox gUnknown_81B251B
 	release
 	end
 
 EventScript_1B2D11:: @ 81B2D11
-	loadword 0, gUnknown_81B254F
-	callstd 4
+	msgbox gUnknown_81B254F
 	release
 	end
 
@@ -8983,8 +8370,7 @@ EventScript_1B2D59:: @ 81B2D59
 	compare_var_to_value VAR_POKELOT_RND1, 1
 	goto_if 1, EventScript_1B2DD1
 	setvar VAR_POKELOT_RND1, 1
-	loadword 0, gUnknown_81B25A7
-	callstd 4
+	msgbox gUnknown_81B25A7
 	goto EventScript_1B2DE5
 
 EventScript_1B2D76:: @ 81B2D76
@@ -8994,8 +8380,7 @@ EventScript_1B2D77:: @ 81B2D77
 	compare_var_to_value VAR_POKELOT_RND1, 2
 	goto_if 1, EventScript_1B2DD1
 	setvar VAR_POKELOT_RND1, 2
-	loadword 0, gUnknown_81B2609
-	callstd 4
+	msgbox gUnknown_81B2609
 	goto EventScript_1B2DE5
 
 EventScript_1B2D94:: @ 81B2D94
@@ -9005,8 +8390,7 @@ EventScript_1B2D95:: @ 81B2D95
 	compare_var_to_value VAR_POKELOT_RND1, 3
 	goto_if 1, EventScript_1B2DD1
 	setvar VAR_POKELOT_RND1, 3
-	loadword 0, gUnknown_81B267B
-	callstd 4
+	msgbox gUnknown_81B267B
 	goto EventScript_1B2DE5
 
 EventScript_1B2DB2:: @ 81B2DB2
@@ -9016,22 +8400,19 @@ EventScript_1B2DB3:: @ 81B2DB3
 	compare_var_to_value VAR_POKELOT_RND1, 4
 	goto_if 1, EventScript_1B2DDB
 	setvar VAR_POKELOT_RND1, 4
-	loadword 0, gUnknown_81B26F6
-	callstd 4
+	msgbox gUnknown_81B26F6
 	goto EventScript_1B2DE5
 
 EventScript_1B2DD0:: @ 81B2DD0
 	end
 
 EventScript_1B2DD1:: @ 81B2DD1
-	loadword 0, gUnknown_81B27DB
-	callstd 4
+	msgbox gUnknown_81B27DB
 	release
 	end
 
 EventScript_1B2DDB:: @ 81B2DDB
-	loadword 0, gUnknown_81B280F
-	callstd 4
+	msgbox gUnknown_81B280F
 	release
 	end
 
@@ -9111,8 +8492,7 @@ ViridianCity_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
 	execram
 
 EventScript_1BB1E4:: @ 81BB1E4
-	loadword 0, Text_1A6393
-	callstd 2
+	msgbox Text_1A6393, 2
 	end
 
 CeladonCity_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
@@ -9344,14 +8724,12 @@ EventScript_1BB415:: @ 81BB415
 	textcolor 1
 	applymovement 255, Movement_1A75E9
 	waitmovement 0
-	loadword 0, gUnknown_81BD898
-	callstd 4
+	msgbox gUnknown_81BD898
 	closemessage
 	applymovement 255, Movement_1BB447
 	waitmovement 0
 	delay 30
-	loadword 0, gUnknown_81BD966
-	callstd 4
+	msgbox gUnknown_81BD966
 	setvar VAR_0x407C, 2
 	releaseall
 	end
@@ -9369,8 +8747,7 @@ EventScript_1BB44A:: @ 81BB44A
 	end
 
 EventScript_1BB459:: @ 81BB459
-	loadword 0, gUnknown_81BC35E
-	callstd 4
+	msgbox gUnknown_81BC35E
 	goto EventScript_1BB467
 	end
 
@@ -9415,8 +8792,7 @@ EventScript_1BB4AE:: @ 81BB4AE
 	end
 
 EventScript_1BB501:: @ 81BB501
-	loadword 0, gUnknown_81BD390
-	callstd 4
+	msgbox gUnknown_81BD390
 	goto EventScript_1BB4AE
 
 EventScript_1BB50E:: @ 81BB50E
@@ -9440,8 +8816,7 @@ EventScript_1BB532:: @ 81BB532
 	end
 
 EventScript_1BB533:: @ 81BB533
-	loadword 0, gUnknown_81BC409
-	callstd 4
+	msgbox gUnknown_81BC409
 	goto EventScript_1BB4AE
 
 EventScript_1BB540:: @ 81BB540
@@ -9538,8 +8913,7 @@ EventScript_1BB667:: @ 81BB667
 
 EventScript_1BB668:: @ 81BB668
 	special CloseLink
-	loadword 0, gUnknown_81BC736
-	callstd 4
+	msgbox gUnknown_81BC736
 	goto EventScript_1BB69B
 
 EventScript_1BB678:: @ 81BB678
@@ -9547,8 +8921,7 @@ EventScript_1BB678:: @ 81BB678
 
 EventScript_1BB679:: @ 81BB679
 	special CloseLink
-	loadword 0, gUnknown_81BC700
-	callstd 4
+	msgbox gUnknown_81BC700
 	goto EventScript_1BB69B
 
 EventScript_1BB689:: @ 81BB689
@@ -9556,8 +8929,7 @@ EventScript_1BB689:: @ 81BB689
 
 EventScript_1BB68A:: @ 81BB68A
 	special CloseLink
-	loadword 0, gUnknown_81BC6CA
-	callstd 4
+	msgbox gUnknown_81BC6CA
 	goto EventScript_1BB69B
 
 EventScript_1BB69A:: @ 81BB69A
@@ -9566,8 +8938,7 @@ EventScript_1BB69A:: @ 81BB69A
 EventScript_1BB69B:: @ 81BB69B
 	special CloseLink
 	special HelpSystem_Enable
-	loadword 0, gUnknown_81BC76B
-	callstd 4
+	msgbox gUnknown_81BC76B
 	release
 	end
 
@@ -9643,14 +9014,12 @@ EventScript_1BB79C:: @ 81BB79C
 	return
 
 EventScript_1BB7C2:: @ 81BB7C2
-	loadword 0, gUnknown_81BC442
-	callstd 4
+	msgbox gUnknown_81BC442
 	setvar VAR_RESULT, 0
 	return
 
 EventScript_1BB7D0:: @ 81BB7D0
-	loadword 0, gUnknown_81BC47C
-	callstd 4
+	msgbox gUnknown_81BC47C
 	setvar VAR_RESULT, 0
 	return
 
@@ -9660,56 +9029,49 @@ EventScript_1BB7DE:: @ 81BB7DE
 EventScript_1BB7DF:: @ 81BB7DF
 	special CloseLink
 	special HelpSystem_Enable
-	loadword 0, gUnknown_81BC95C
-	callstd 4
+	msgbox gUnknown_81BC95C
 	release
 	end
 
 EventScript_1BB7EF:: @ 81BB7EF
 	special CloseLink
 	special HelpSystem_Enable
-	loadword 0, gUnknown_81BC9C0
-	callstd 4
+	msgbox gUnknown_81BC9C0
 	release
 	end
 
 EventScript_1BB7FF:: @ 81BB7FF
 	special CloseLink
 	special HelpSystem_Enable
-	loadword 0, gUnknown_81BC615
-	callstd 4
+	msgbox gUnknown_81BC615
 	release
 	end
 
 EventScript_1BB80F:: @ 81BB80F
 	special CloseLink
 	special HelpSystem_Enable
-	loadword 0, gUnknown_81BC5C0
-	callstd 4
+	msgbox gUnknown_81BC5C0
 	release
 	end
 
 EventScript_1BB81F:: @ 81BB81F
 	special CloseLink
 	special HelpSystem_Enable
-	loadword 0, gUnknown_81BC64E
-	callstd 4
+	msgbox gUnknown_81BC64E
 	release
 	end
 
 EventScript_1BB82F:: @ 81BB82F
 	special CloseLink
 	special HelpSystem_Enable
-	loadword 0, gUnknown_81BC68A
-	callstd 4
+	msgbox gUnknown_81BC68A
 	release
 	end
 
 EventScript_1BB83F:: @ 81BB83F
 	special CloseLink
 	special HelpSystem_Enable
-	loadword 0, gUnknown_81BCFD1
-	callstd 4
+	msgbox gUnknown_81BCFD1
 	release
 	end
 
@@ -9722,28 +9084,24 @@ EventScript_1BB84F:: @ 81BB84F
 EventScript_1BB857:: @ 81BB857
 	special CloseLink
 	special HelpSystem_Enable
-	loadword 0, gUnknown_81BC6A1
-	callstd 4
+	msgbox gUnknown_81BC6A1
 	release
 	end
 
 EventScript_1BB867:: @ 81BB867
 	special CloseLink
 	special HelpSystem_Enable
-	loadword 0, gUnknown_81BC9E0
-	callstd 4
+	msgbox gUnknown_81BC9E0
 	release
 	end
 
 EventScript_1BB877:: @ 81BB877
-	loadword 0, Text_1A561A
-	callstd 4
+	msgbox Text_1A561A
 	release
 	end
 
 EventScript_1BB881:: @ 81BB881
-	loadword 0, Text_1A5667
-	callstd 4
+	msgbox Text_1A5667
 	releaseall
 	end
 
@@ -9914,8 +9272,7 @@ UnknownMap_00_02_EventScript_1BB980:: @ 81BB980
 
 gUnknown_81BB981:: @ 81BB981
 	textcolor 3
-	loadword 0, gUnknown_81BC84B
-	callstd 4
+	msgbox gUnknown_81BC84B
 	fadescreen 1
 	special sp02A_crash_sound
 	waitstate
@@ -9923,8 +9280,7 @@ gUnknown_81BB981:: @ 81BB981
 
 gUnknown_81BB992:: @ 81BB992
 	textcolor 3
-	loadword 0, gUnknown_81BC874
-	callstd 4
+	msgbox gUnknown_81BC874
 	fadescreen 1
 	special sp02A_crash_sound
 	waitstate
@@ -9932,16 +9288,14 @@ gUnknown_81BB992:: @ 81BB992
 
 gUnknown_81BB9A3:: @ 81BB9A3
 	textcolor 3
-	loadword 0, gUnknown_81BC827
-	callstd 4
+	msgbox gUnknown_81BC827
 	closemessage
 	end
 
 UnknownMap_00_00_EventScript_1BB9AF:: @ 81BB9AF
 	textcolor 3
 	special sub_8069740
-	loadword 0, gUnknown_81BC8AD
-	callstd 4
+	msgbox gUnknown_81BC8AD
 	special sub_8069768
 	closemessage
 	end
@@ -9949,8 +9303,7 @@ UnknownMap_00_00_EventScript_1BB9AF:: @ 81BB9AF
 UnknownMap_00_01_EventScript_1BB9C1:: @ 81BB9C1
 	textcolor 3
 	special sub_8069740
-	loadword 0, gUnknown_81BC8DA
-	callstd 4
+	msgbox gUnknown_81BC8DA
 	special sub_8069768
 	closemessage
 	end
@@ -9960,8 +9313,7 @@ UnknownMap_00_02_EventScript_1BB9D3:: @ 81BB9D3
 
 gUnknown_81BB9D4:: @ 81BB9D4
 	textcolor 3
-	loadword 0, gUnknown_81BC7A1
-	callstd 5
+	msgbox gUnknown_81BC7A1, 5
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1BB9F0
 	erasebox 0, 0, 29, 19
@@ -10032,8 +9384,7 @@ EventScript_1BBA94:: @ 81BBA94
 	call EventScript_1A4EAF
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1BB82F
-	loadword 0, gUnknown_81BD86A
-	callstd 4
+	msgbox gUnknown_81BD86A
 	closemessage
 	special sp000_heal_pokemon
 	setvar VAR_0x8004, 6
@@ -10073,24 +9424,21 @@ EventScript_1BBB1E:: @ 81BBB1E
 	return
 
 EventScript_1BBB44:: @ 81BBB44
-	loadword 0, gUnknown_81BCBC3
-	callstd 4
+	msgbox gUnknown_81BCBC3
 	goto EventScript_1A77B0
 
 EventScript_1BBB51:: @ 81BBB51
 	end
 
 EventScript_1BBB52:: @ 81BBB52
-	loadword 0, gUnknown_81BCC00
-	callstd 4
+	msgbox gUnknown_81BCC00
 	goto EventScript_1A77B0
 
 EventScript_1BBB5F:: @ 81BBB5F
 	end
 
 EventScript_1BBB60:: @ 81BBB60
-	loadword 0, gUnknown_81BCC3A
-	callstd 4
+	msgbox gUnknown_81BCC3A
 	release
 	return
 
@@ -10099,18 +9447,15 @@ EventScript_1BBB6A:: @ 81BBB6A
 	faceplayer
 	checkflag FLAG_0x829
 	goto_if 0, EventScript_1BB877
-	loadword 0, gUnknown_81BDB85
-	callstd 5
+	msgbox gUnknown_81BDB85, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1BBB92
-	loadword 0, gUnknown_81BDBF8
-	callstd 4
+	msgbox gUnknown_81BDBF8
 	release
 	return
 
 EventScript_1BBB92:: @ 81BBB92
-	loadword 0, gUnknown_81BDEDF
-	callstd 4
+	msgbox gUnknown_81BDEDF
 	release
 	return
 
@@ -10168,8 +9513,7 @@ EventScript_1BBC32:: @ 81BBC32
 	end
 
 EventScript_1BBC69:: @ 81BBC69
-	loadword 0, gUnknown_81BD317
-	callstd 5
+	msgbox gUnknown_81BD317, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1BB82F
 	call EventScript_1BB79C
@@ -10218,8 +9562,7 @@ EventScript_1BBD0D:: @ 81BBD0D
 	end
 
 EventScript_1BBD0E:: @ 81BBD0E
-	loadword 0, gUnknown_81BC409
-	callstd 4
+	msgbox gUnknown_81BC409
 	goto EventScript_1BBC97
 
 EventScript_1BBD1B:: @ 81BBD1B
@@ -10233,16 +9576,14 @@ EventScript_1BBD26:: @ 81BBD26
 	end
 
 EventScript_1BBD27:: @ 81BBD27
-	loadword 0, gUnknown_81BD390
-	callstd 4
+	msgbox gUnknown_81BD390
 	goto EventScript_1BBC97
 
 EventScript_1BBD34:: @ 81BBD34
 	end
 
 EventScript_1BBD35:: @ 81BBD35
-	loadword 0, gUnknown_81BD362
-	callstd 5
+	msgbox gUnknown_81BD362, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1BB82F
 	special CheckHasAtLeastOneBerry
@@ -10255,8 +9596,7 @@ EventScript_1BBD60:: @ 81BBD60
 	end
 
 EventScript_1BBD61:: @ 81BBD61
-	loadword 0, gUnknown_81BCB81
-	callstd 4
+	msgbox gUnknown_81BCB81
 	goto EventScript_1BBBE7
 
 EventScript_1BBD6E:: @ 81BBD6E
@@ -10448,15 +9788,13 @@ gUnknown_81BBFD8:: @ 81BBFD8
 	fadescreen 1
 	special sub_814F1D4
 	waitstate
-	loadword 0, gUnknown_81BCA43
-	callstd 4
+	msgbox gUnknown_81BCA43
 	special HelpSystem_Enable
 	releaseall
 	end
 
 EventScript_1BC016:: @ 81BC016
-	loadword 0, gUnknown_81BCA13
-	callstd 4
+	msgbox gUnknown_81BCA13
 	releaseall
 	end
 
@@ -10528,20 +9866,17 @@ EventScript_1BC060:: @ 81BC060
 	end
 
 EventScript_1BC0B0:: @ 81BC0B0
-	loadword 0, gUnknown_81BCD4D
-	callstd 4
+	msgbox gUnknown_81BCD4D
 	release
 	end
 
 EventScript_1BC0BA:: @ 81BC0BA
-	loadword 0, gUnknown_81BCE73
-	callstd 4
+	msgbox gUnknown_81BCE73
 	release
 	end
 
 EventScript_1BC0C4:: @ 81BC0C4
-	loadword 0, gUnknown_81BCF2E
-	callstd 4
+	msgbox gUnknown_81BCF2E
 	release
 	end
 
@@ -10578,8 +9913,7 @@ EventScript_1BC13A:: @ 81BC13A
 	special sub_8149A18
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1BC2A6
-	loadword 0, gUnknown_81BD059
-	callstd 4
+	msgbox gUnknown_81BD059
 	setvar VAR_0x8005, 0
 	special sub_8127888
 	waitstate
@@ -10599,8 +9933,7 @@ EventScript_1BC184:: @ 81BC184
 	special sub_81537C0
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1BC2A6
-	loadword 0, gUnknown_81BD059
-	callstd 4
+	msgbox gUnknown_81BD059
 	setvar VAR_0x8005, 1
 	special sub_8127888
 	waitstate
@@ -10675,14 +10008,12 @@ EventScript_1BC262:: @ 81BC262
 	end
 
 EventScript_1BC29C:: @ 81BC29C
-	loadword 0, gUnknown_81BCFE8
-	callstd 4
+	msgbox gUnknown_81BCFE8
 	release
 	end
 
 EventScript_1BC2A6:: @ 81BC2A6
-	loadword 0, gUnknown_81BD0CF
-	callstd 5
+	msgbox gUnknown_81BD0CF, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1BB83F
 	compare_var_to_value VAR_0x8005, 0
@@ -10695,13 +10026,11 @@ EventScript_1BC2D4:: @ 81BC2D4
 	end
 
 EventScript_1BC2D5:: @ 81BC2D5
-	loadword 0, gUnknown_81BD14B
-	callstd 4
+	msgbox gUnknown_81BD14B
 	return
 
 EventScript_1BC2DE:: @ 81BC2DE
-	loadword 0, gUnknown_81BD213
-	callstd 4
+	msgbox gUnknown_81BD213
 	return
 
 TwoIsland_JoyfulGameCorner_EventScript_1BC2E7:: @ 81BC2E7
@@ -11212,12 +10541,10 @@ ViridianCity_EventScript_1BDF13:: @ 81BDF13
 	setfieldeffectarg 0, VAR_RESULT
 	getpartymonname 0, VAR_RESULT
 	getmovename 1, MOVE_CUT
-	loadword 0, gUnknown_81BDF94
-	callstd 5
+	msgbox gUnknown_81BDF94, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1BDF91
-	loadword 0, gUnknown_81BDFD7
-	callstd 4
+	msgbox gUnknown_81BDFD7
 	closemessage
 	dofieldeffect 2
 	waitstate
@@ -11243,8 +10570,7 @@ Movement_1BDF85:: @ 81BDF85
 	step_end
 
 EventScript_1BDF87:: @ 81BDF87
-	loadword 0, gUnknown_81BDFE3
-	callstd 3
+	msgbox gUnknown_81BDFE3, 3
 	releaseall
 	end
 
@@ -11293,12 +10619,10 @@ CeruleanCave_1F_EventScript_1BE00C:: @ 81BE00C
 	setfieldeffectarg 0, VAR_RESULT
 	getpartymonname 0, VAR_RESULT
 	getmovename 1, MOVE_ROCK_SMASH
-	loadword 0, Text_1BE09D
-	callstd 5
+	msgbox Text_1BE09D, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1BE09A
-	loadword 0, gUnknown_81BDFD7
-	callstd 4
+	msgbox gUnknown_81BDFD7
 	closemessage
 	dofieldeffect 37
 	waitstate
@@ -11332,8 +10656,7 @@ Movement_1BE08F:: @ 81BE08F
 	step_end
 
 EventScript_1BE091:: @ 81BE091
-	loadword 0, gUnknown_81BE0E2
-	callstd 3
+	msgbox gUnknown_81BE0E2, 3
 	end
 
 EventScript_1BE09A:: @ 81BE09A
@@ -11377,8 +10700,7 @@ VictoryRoad_2F_EventScript_1BE11D:: @ 81BE11D
 	compare_var_to_value VAR_RESULT, 6
 	goto_if 1, EventScript_1BE185
 	setfieldeffectarg 0, VAR_RESULT
-	loadword 0, gUnknown_81BE19A
-	callstd 5
+	msgbox gUnknown_81BE19A, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1BE197
 	closemessage
@@ -11396,18 +10718,15 @@ EventScript_FldEffStrength:: @ 81BE16E
 
 EventScript_1BE179:: @ 81BE179
 	setflag FLAG_0x805
-	loadword 0, gUnknown_81BE1FA
-	callstd 3
+	msgbox gUnknown_81BE1FA, 3
 	end
 
 EventScript_1BE185:: @ 81BE185
-	loadword 0, gUnknown_81BE244
-	callstd 3
+	msgbox gUnknown_81BE244, 3
 	end
 
 EventScript_1BE18E:: @ 81BE18E
-	loadword 0, gUnknown_81BE284
-	callstd 3
+	msgbox gUnknown_81BE284, 3
 	end
 
 EventScript_1BE197:: @ 81BE197
@@ -11443,20 +10762,17 @@ gUnknown_81BE2B7:: @ 81BE2B7
 	goto_if 1, EventScript_1BE300
 	getpartymonname 0, VAR_RESULT
 	setfieldeffectarg 0, VAR_RESULT
-	loadword 0, gUnknown_81BE33F
-	callstd 5
+	msgbox gUnknown_81BE33F, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1BE308
-	loadword 0, gUnknown_81BE378
-	callstd 4
+	msgbox gUnknown_81BE378
 	dofieldeffect 43
 	goto EventScript_1BE308
 
 EventScript_81BE2FF:: @ 81BE2FF
 	lockall
 EventScript_1BE300:
-	loadword 0, gUnknown_81BE30A
-	callstd 4
+	msgbox gUnknown_81BE30A
 EventScript_1BE308:
 	releaseall
 	end
@@ -11480,20 +10796,17 @@ EventScript_1BE38B:: @ 81BE38B
 	getpartymonname 0, VAR_RESULT
 	setfieldeffectarg 0, VAR_RESULT
 	setfieldeffectarg 1, 1
-	loadword 0, gUnknown_81BE469
-	callstd 5
+	msgbox gUnknown_81BE469, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1BE3D2
-	loadword 0, gUnknown_81BE49B
-	callstd 4
+	msgbox gUnknown_81BE49B
 	dofieldeffect 44
 	goto EventScript_1BE3D2
 
 EventScript_1BE3C9:: @ 81BE3C9
 	lockall
 EventScript_1BE3CA:
-	loadword 0, Text_1BE42B
-	callstd 4
+	msgbox Text_1BE42B
 EventScript_1BE3D2:
 	releaseall
 	end
@@ -11506,25 +10819,21 @@ EventScript_1BE3D4:: @ 81BE3D4
 	getpartymonname 0, VAR_RESULT
 	setfieldeffectarg 0, VAR_RESULT
 	setfieldeffectarg 1, 1
-	loadword 0, gUnknown_81BE4EF
-	callstd 5
+	msgbox gUnknown_81BE4EF, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1BE429
-	loadword 0, gUnknown_81BE49B
-	callstd 4
+	msgbox gUnknown_81BE49B
 	dofieldeffect 44
 	goto EventScript_1BE429
 
 EventScript_1BE412:: @ 81BE412
 	lockall
-	loadword 0, gUnknown_81BE4A9
-	callstd 4
+	msgbox gUnknown_81BE4A9
 	goto EventScript_1BE429
 
 EventScript_1BE420:: @ 81BE420
 	lockall
-	loadword 0, gUnknown_81BE52F
-	callstd 4
+	msgbox gUnknown_81BE52F
 EventScript_1BE429:
 	releaseall
 	end
@@ -11553,8 +10862,7 @@ gUnknown_81BE52F:: @ 81BE52F
 	.string "DIVE can't be used here.$"
 
 EventScript_FailSweetScent:: @ 81BE564
-	loadword 0, Text_1BE56D
-	callstd 3
+	msgbox Text_1BE56D, 3
 	end
 
 Text_1BE56D:: @ 81BE56D
@@ -12575,14 +11883,12 @@ PewterCity_PokemonCenter_1F_EventScript_1BEE16:: @ 81BEE16
 	goto_if 1, EventScript_1BEE3A
 	checkflag 2093
 	goto_if 1, EventScript_1BEECD
-	loadword 0, Text_1BEF88
-	callstd 4
+	msgbox Text_1BEF88
 	goto EventScript_1BEE44
 	end
 
 EventScript_1BEE3A:: @ 81BEE3A
-	loadword 0, gUnknown_81BF36A
-	callstd 4
+	msgbox gUnknown_81BF36A
 	release
 	end
 
@@ -12602,21 +11908,18 @@ EventScript_1BEE44:: @ 81BEE44
 	end
 
 EventScript_1BEE81:: @ 81BEE81
-	loadword 0, gUnknown_81BF053
-	callstd 4
+	msgbox gUnknown_81BF053
 	goto EventScript_1BEE44
 	end
 
 EventScript_1BEE8F:: @ 81BEE8F
-	loadword 0, gUnknown_81BF166
-	callstd 4
+	msgbox gUnknown_81BF166
 	closemessage
 	goto EventScript_1BEF5A
 	end
 
 EventScript_1BEE9E:: @ 81BEE9E
-	loadword 0, gUnknown_81BF1B2
-	callstd 4
+	msgbox gUnknown_81BF1B2
 	release
 	end
 
@@ -12626,20 +11929,17 @@ EventScript_1BEEA8:: @ 81BEEA8
 	special sub_80BDA7C
 	waitmessage
 	delay 80
-	loadword 0, gUnknown_81BF28E
-	callstd 4
+	msgbox gUnknown_81BF28E
 	release
 	end
 
 EventScript_1BEEC3:: @ 81BEEC3
-	loadword 0, gUnknown_81BF17B
-	callstd 4
+	msgbox gUnknown_81BF17B
 	release
 	end
 
 EventScript_1BEECD:: @ 81BEECD
-	loadword 0, gUnknown_81BF1E8
-	callstd 4
+	msgbox gUnknown_81BF1E8
 	goto EventScript_1BEEDB
 	end
 
@@ -12659,21 +11959,18 @@ EventScript_1BEEDB:: @ 81BEEDB
 	end
 
 EventScript_1BEF18:: @ 81BEF18
-	loadword 0, gUnknown_81BF053
-	callstd 4
+	msgbox gUnknown_81BF053
 	goto EventScript_1BEEDB
 	end
 
 EventScript_1BEF26:: @ 81BEF26
-	loadword 0, gUnknown_81BF222
-	callstd 4
+	msgbox gUnknown_81BF222
 	closemessage
 	goto EventScript_1BEF5A
 	end
 
 EventScript_1BEF35:: @ 81BEF35
-	loadword 0, gUnknown_81BF252
-	callstd 4
+	msgbox gUnknown_81BF252
 	release
 	end
 
@@ -12683,8 +11980,7 @@ EventScript_1BEF3F:: @ 81BEF3F
 	special sub_80BDA7C
 	waitmessage
 	delay 80
-	loadword 0, gUnknown_81BF30D
-	callstd 4
+	msgbox gUnknown_81BF30D
 	release
 	end
 
@@ -12779,12 +12075,10 @@ Route5_PokemonDayCare_EventScript_1BF398:: @ 81BF398
 	specialvar VAR_RESULT, IsThereMonInRoute5Daycare
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1BF46E
-	loadword 0, Text_19DD66
-	callstd 5
+	msgbox Text_19DD66, 5
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1BF3DD
-	loadword 0, Text_19DDB2
-	callstd 4
+	msgbox Text_19DDB2
 	goto EventScript_1BF541
 	end
 
@@ -12792,8 +12086,7 @@ EventScript_1BF3DD:: @ 81BF3DD
 	specialvar VAR_RESULT, CountPartyNonEggMons
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1BF452
-	loadword 0, Text_19DDBE
-	callstd 4
+	msgbox Text_19DDBE
 	fadescreen 1
 	hidemoneybox
 	nop
@@ -12807,12 +12100,10 @@ EventScript_1BF3DD:: @ 81BF3DD
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1BF460
 	specialvar VAR_0x8005, GetSelectedMonNickAndSpecies
-	loadword 0, Text_19DDF9
-	callstd 4
+	msgbox Text_19DDF9
 	waitse
 	playmoncry VAR_0x8005, 0
-	loadword 0, Text_19DE24
-	callstd 4
+	msgbox Text_19DE24
 	waitmoncry
 	special PutMonInRoute5Daycare
 	incrementgamestat 47
@@ -12820,20 +12111,17 @@ EventScript_1BF3DD:: @ 81BF3DD
 	end
 
 EventScript_1BF444:: @ 81BF444
-	loadword 0, Text_19DDDC
-	callstd 4
+	msgbox Text_19DDDC
 	goto EventScript_1BF541
 	end
 
 EventScript_1BF452:: @ 81BF452
-	loadword 0, Text_19DEF5
-	callstd 4
+	msgbox Text_19DEF5
 	goto EventScript_1BF541
 	end
 
 EventScript_1BF460:: @ 81BF460
-	loadword 0, Text_19DF1D
-	callstd 4
+	msgbox Text_19DF1D
 	goto EventScript_1BF541
 	end
 
@@ -12845,21 +12133,18 @@ EventScript_1BF46E:: @ 81BF46E
 	compare_var_to_value VAR_RESULT, 0
 	call_if 1, EventScript_1BF4B3
 	special GetCostToWithdrawRoute5DaycareMon
-	loadword 0, Text_19DE80
-	callstd 5
+	msgbox Text_19DE80, 5
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1BF4BC
 	goto EventScript_1BF444
 	end
 
 EventScript_1BF4AA:: @ 81BF4AA
-	loadword 0, Text_19DF56
-	callstd 4
+	msgbox Text_19DF56
 	return
 
 EventScript_1BF4B3:: @ 81BF4B3
-	loadword 0, Text_19DE3C
-	callstd 4
+	msgbox Text_19DE3C
 	return
 
 EventScript_1BF4BC:: @ 81BF4BC
@@ -12869,8 +12154,7 @@ EventScript_1BF4BC:: @ 81BF4BC
 	specialvar VAR_RESULT, IsEnoughForCostInVar0x8005
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1BF4EA
-	loadword 0, Text_19E001
-	callstd 4
+	msgbox Text_19E001
 	goto EventScript_1BF541
 	end
 
@@ -12884,21 +12168,18 @@ EventScript_1BF4EA:: @ 81BF4EA
 	subvar VAR_RESULT, 1
 	getpartymonname 0, VAR_RESULT
 	copyvar VAR_RESULT, VAR_0x8008
-	loadword 0, Text_19DEAF
-	callstd 4
+	msgbox Text_19DEAF
 	textcolor 3
 	waitse
 	playmoncry VAR_RESULT, 0
-	loadword 0, Text_19DECF
-	callstd 4
+	msgbox Text_19DECF
 	call EventScript_1A6675
 	waitmoncry
 	goto EventScript_1BF541
 	end
 
 EventScript_1BF533:: @ 81BF533
-	loadword 0, Text_19DFC2
-	callstd 4
+	msgbox Text_19DFC2
 	goto EventScript_1BF541
 	end
 
@@ -12911,8 +12192,7 @@ EventScript_1BF541:: @ 81BF541
 
 EventScript_81BF546:: @ 81BF546
 	lockall
-	loadword 0, Text_1BFB5A
-	callstd 4
+	msgbox Text_1BFB5A
 	special EggHatch
 	waitstate
 	releaseall
@@ -13053,8 +12333,7 @@ EventScript_81BFB5F:: @ 81BFB5F
 	end
 
 EventScript_1BFB65:: @ 81BFB65
-	loadword 0, Text_1BFB6E
-	callstd 3
+	msgbox Text_1BFB6E, 3
 	end
 
 Text_1BFB6E:: @ 81BFB6E
@@ -13075,8 +12354,7 @@ EventScript_1BFB98:: @ 81BFB98
 
 EventScript_SafariRetire:: @ 81BFBAA
 	lockall
-	loadword 0, Text_1BFBE9
-	callstd 5
+	msgbox Text_1BFBE9, 5
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1BFBC0
 	releaseall
@@ -13088,16 +12366,14 @@ EventScript_1BFBC0:: @ 81BFBC0
 EventScript_SafariTimesUp:: @ 81BFBC5
 	lockall
 	playse SE_PINPON
-	loadword 0, gUnknown_81BFC1B
-	callstd 4
+	msgbox gUnknown_81BFC1B
 	goto EventScript_1BFB98
 	end
 
 EventScript_SafariOutOfBalls:: @ 81BFBD7
 	lockall
 	playse SE_PINPON
-	loadword 0, gUnknown_81BFC53
-	callstd 4
+	msgbox gUnknown_81BFC53
 	goto EventScript_1BFB98
 	end
 
@@ -14740,15 +14016,13 @@ VictoryRoad_2F_EventScript_1C47AE:: @ 81C47AE
 	faceplayer
 	checkflag FLAG_0x2C0
 	goto_if 1, EventScript_1C480C
-	loadword 0, Text_1749F9
-	callstd 5
+	msgbox Text_1749F9, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1C4802
 	call EventScript_1C4F37
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1C4802
-	loadword 0, Text_174AE2
-	callstd 4
+	msgbox Text_174AE2
 	setvar VAR_0x8005, 4
 	call EventScript_1C4F30
 	compare_var_to_value VAR_RESULT, 0
@@ -14758,14 +14032,12 @@ VictoryRoad_2F_EventScript_1C47AE:: @ 81C47AE
     end
 
 EventScript_1C4802:: @ 81C4802
-	loadword 0, Text_174ABC
-	callstd 4
+	msgbox Text_174ABC
 	release
 	end
 
 EventScript_1C480C:: @ 81C480C
-	loadword 0, Text_174B0C
-	callstd 4
+	msgbox Text_174B0C
 	release
 	end
 
@@ -14774,15 +14046,13 @@ EventScript_1C4816:: @ 81C4816
 	faceplayer
 	checkflag FLAG_0x2C1
 	goto_if 1, EventScript_1C4874
-	loadword 0, Text_175711
-	callstd 5
+	msgbox Text_175711, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1C486A
 	call EventScript_1C4F37
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1C486A
-	loadword 0, Text_1757C1
-	callstd 4
+	msgbox Text_1757C1
 	setvar VAR_0x8005, 11
 	call EventScript_1C4F30
 	compare_var_to_value VAR_RESULT, 0
@@ -14792,14 +14062,12 @@ EventScript_1C4816:: @ 81C4816
     end
 
 EventScript_1C486A:: @ 81C486A
-	loadword 0, Text_17579D
-	callstd 4
+	msgbox Text_17579D
 	release
 	end
 
 EventScript_1C4874:: @ 81C4874
-	loadword 0, Text_1757EC
-	callstd 4
+	msgbox Text_1757EC
 	release
 	end
 
@@ -14808,15 +14076,13 @@ RockTunnel_B1F_EventScript_1C487E:: @ 81C487E
 	faceplayer
 	checkflag FLAG_0x2C2
 	goto_if 1, EventScript_1C48DC
-	loadword 0, Text_1799E0
-	callstd 5
+	msgbox Text_1799E0, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1C48D2
 	call EventScript_1C4F37
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1C48D2
-	loadword 0, Text_179AE1
-	callstd 4
+	msgbox Text_179AE1
 	setvar VAR_0x8005, 13
 	call EventScript_1C4F30
 	compare_var_to_value VAR_RESULT, 0
@@ -14826,14 +14092,12 @@ RockTunnel_B1F_EventScript_1C487E:: @ 81C487E
     end
 
 EventScript_1C48D2:: @ 81C48D2
-	loadword 0, Text_179AC0
-	callstd 4
+	msgbox Text_179AC0
 	release
 	end
 
 EventScript_1C48DC:: @ 81C48DC
-	loadword 0, Text_179B0A
-	callstd 4
+	msgbox Text_179B0A
 	release
 	end
 
@@ -14842,15 +14106,13 @@ MtEmber_Exterior_EventScript_1C48E6:: @ 81C48E6
 	faceplayer
 	checkflag FLAG_0x2C3
 	goto_if 1, EventScript_1C4944
-	loadword 0, Text_17A642
-	callstd 5
+	msgbox Text_17A642, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1C493A
 	call EventScript_1C4F37
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1C493A
-	loadword 0, Text_17A717
-	callstd 4
+	msgbox Text_17A717
 	setvar VAR_0x8005, 12
 	call EventScript_1C4F30
 	compare_var_to_value VAR_RESULT, 0
@@ -14860,14 +14122,12 @@ MtEmber_Exterior_EventScript_1C48E6:: @ 81C48E6
     end
 
 EventScript_1C493A:: @ 81C493A
-	loadword 0, Text_17A6ED
-	callstd 4
+	msgbox Text_17A6ED
 	release
 	end
 
 EventScript_1C4944:: @ 81C4944
-	loadword 0, Text_17A756
-	callstd 4
+	msgbox Text_17A756
 	release
 	end
 
@@ -14876,15 +14136,13 @@ Route4_EventScript_1C494E:: @ 81C494E
 	faceplayer
 	checkflag FLAG_0x2C4
 	goto_if 1, EventScript_1C49AC
-	loadword 0, Text_1839D5
-	callstd 5
+	msgbox Text_1839D5, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1C49A2
 	call EventScript_1C4F37
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1C49A2
-	loadword 0, Text_183ABF
-	callstd 4
+	msgbox Text_183ABF
 	setvar VAR_0x8005, 0
 	call EventScript_1C4F30
 	compare_var_to_value VAR_RESULT, 0
@@ -14894,14 +14152,12 @@ Route4_EventScript_1C494E:: @ 81C494E
     end
 
 EventScript_1C49A2:: @ 81C49A2
-	loadword 0, Text_183A83
-	callstd 4
+	msgbox Text_183A83
 	release
 	end
 
 EventScript_1C49AC:: @ 81C49AC
-	loadword 0, Text_183AE2
-	callstd 4
+	msgbox Text_183AE2
 	release
 	end
 
@@ -14910,15 +14166,13 @@ Route4_EventScript_1C49B6:: @ 81C49B6
 	faceplayer
 	checkflag FLAG_0x2C5
 	goto_if 1, EventScript_1C4A14
-	loadword 0, Text_183B74
-	callstd 5
+	msgbox Text_183B74, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1C4A0A
 	call EventScript_1C4F37
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1C4A0A
-	loadword 0, Text_183C68
-	callstd 4
+	msgbox Text_183C68
 	setvar VAR_0x8005, 2
 	call EventScript_1C4F30
 	compare_var_to_value VAR_RESULT, 0
@@ -14928,14 +14182,12 @@ Route4_EventScript_1C49B6:: @ 81C49B6
     end
 
 EventScript_1C4A0A:: @ 81C4A0A
-	loadword 0, Text_183C25
-	callstd 4
+	msgbox Text_183C25
 	release
 	end
 
 EventScript_1C4A14:: @ 81C4A14
-	loadword 0, Text_183C94
-	callstd 4
+	msgbox Text_183C94
 	release
 	end
 
@@ -14944,15 +14196,13 @@ EventScript_1C4A1E:: @ 81C4A1E
 	faceplayer
 	checkflag FLAG_0x2C6
 	goto_if 1, EventScript_1C4A7C
-	loadword 0, Text_17E316
-	callstd 5
+	msgbox Text_17E316, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1C4A72
 	call EventScript_1C4F37
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1C4A72
-	loadword 0, Text_17E3F1
-	callstd 4
+	msgbox Text_17E3F1
 	setvar VAR_0x8005, 10
 	call EventScript_1C4F30
 	compare_var_to_value VAR_RESULT, 0
@@ -14962,14 +14212,12 @@ EventScript_1C4A1E:: @ 81C4A1E
     end
 
 EventScript_1C4A72:: @ 81C4A72
-	loadword 0, Text_17E3E9
-	callstd 4
+	msgbox Text_17E3E9
 	release
 	end
 
 EventScript_1C4A7C:: @ 81C4A7C
-	loadword 0, Text_17E41B
-	callstd 4
+	msgbox Text_17E41B
 	release
 	end
 
@@ -14978,15 +14226,13 @@ EventScript_1C4A86:: @ 81C4A86
 	faceplayer
 	checkflag FLAG_0x2C7
 	goto_if 1, EventScript_1C4AE4
-	loadword 0, Text_180388
-	callstd 5
+	msgbox Text_180388, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1C4ADA
 	call EventScript_1C4F37
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1C4ADA
-	loadword 0, Text_180484
-	callstd 4
+	msgbox Text_180484
 	setvar VAR_0x8005, 9
 	call EventScript_1C4F30
 	compare_var_to_value VAR_RESULT, 0
@@ -14996,14 +14242,12 @@ EventScript_1C4A86:: @ 81C4A86
     end
 
 EventScript_1C4ADA:: @ 81C4ADA
-	loadword 0, Text_18043F
-	callstd 4
+	msgbox Text_18043F
 	release
 	end
 
 EventScript_1C4AE4:: @ 81C4AE4
-	loadword 0, Text_1804C4
-	callstd 4
+	msgbox Text_1804C4
 	release
 	end
 
@@ -15012,15 +14256,13 @@ FuchsiaCity_EventScript_1C4AEE:: @ 81C4AEE
 	faceplayer
 	checkflag FLAG_0x2C8
 	goto_if 1, EventScript_1C4B4C
-	loadword 0, Text_180948
-	callstd 5
+	msgbox Text_180948, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1C4B42
 	call EventScript_1C4F37
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1C4B42
-	loadword 0, Text_180A57
-	callstd 4
+	msgbox Text_180A57
 	setvar VAR_0x8005, 14
 	call EventScript_1C4F30
 	compare_var_to_value VAR_RESULT, 0
@@ -15030,14 +14272,12 @@ FuchsiaCity_EventScript_1C4AEE:: @ 81C4AEE
     end
 
 EventScript_1C4B42:: @ 81C4B42
-	loadword 0, Text_180A32
-	callstd 4
+	msgbox Text_180A32
 	release
 	end
 
 EventScript_1C4B4C:: @ 81C4B4C
-	loadword 0, Text_180A80
-	callstd 4
+	msgbox Text_180A80
 	release
 	end
 
@@ -15046,15 +14286,13 @@ SevenIsland_EventScript_1C4B56:: @ 81C4B56
 	faceplayer
 	checkflag FLAG_0x2C9
 	goto_if 1, EventScript_1C4BB4
-	loadword 0, Text_182F01
-	callstd 5
+	msgbox Text_182F01, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1C4BAA
 	call EventScript_1C4F37
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1C4BAA
-	loadword 0, Text_182FD9
-	callstd 4
+	msgbox Text_182FD9
 	setvar VAR_0x8005, 1
 	call EventScript_1C4F30
 	compare_var_to_value VAR_RESULT, 0
@@ -15064,14 +14302,12 @@ SevenIsland_EventScript_1C4B56:: @ 81C4B56
     end
 
 EventScript_1C4BAA:: @ 81C4BAA
-	loadword 0, Text_182FC1
-	callstd 4
+	msgbox Text_182FC1
 	release
 	end
 
 EventScript_1C4BB4:: @ 81C4BB4
-	loadword 0, Text_18300D
-	callstd 4
+	msgbox Text_18300D
 	release
 	end
 
@@ -15080,15 +14316,13 @@ PewterCity_Museum_1F_EventScript_1C4BBE:: @ 81C4BBE
 	faceplayer
 	checkflag FLAG_0x2CA
 	goto_if 1, EventScript_1C4C1C
-	loadword 0, Text_1909A3
-	callstd 5
+	msgbox Text_1909A3, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1C4C12
 	call EventScript_1C4F37
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1C4C12
-	loadword 0, Text_190AD5
-	callstd 4
+	msgbox Text_190AD5
 	setvar VAR_0x8005, 6
 	call EventScript_1C4F30
 	compare_var_to_value VAR_RESULT, 0
@@ -15098,14 +14332,12 @@ PewterCity_Museum_1F_EventScript_1C4BBE:: @ 81C4BBE
     end
 
 EventScript_1C4C12:: @ 81C4C12
-	loadword 0, Text_190AA9
-	callstd 4
+	msgbox Text_190AA9
 	release
 	end
 
 EventScript_1C4C1C:: @ 81C4C1C
-	loadword 0, Text_190B00
-	callstd 4
+	msgbox Text_190B00
 	release
 	end
 
@@ -15114,15 +14346,13 @@ EventScript_1C4C26:: @ 81C4C26
 	faceplayer
 	checkflag FLAG_0x2CB
 	goto_if 1, EventScript_1C4C84
-	loadword 0, Text_195928
-	callstd 5
+	msgbox Text_195928, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1C4C7A
 	call EventScript_1C4F37
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1C4C7A
-	loadword 0, Text_195A08
-	callstd 4
+	msgbox Text_195A08
 	setvar VAR_0x8005, 5
 	call EventScript_1C4F30
 	compare_var_to_value VAR_RESULT, 0
@@ -15132,14 +14362,12 @@ EventScript_1C4C26:: @ 81C4C26
     end
 
 EventScript_1C4C7A:: @ 81C4C7A
-	loadword 0, Text_1959CC
-	callstd 4
+	msgbox Text_1959CC
 	release
 	end
 
 EventScript_1C4C84:: @ 81C4C84
-	loadword 0, Text_195A31
-	callstd 4
+	msgbox Text_195A31
 	release
 	end
 
@@ -15148,15 +14376,13 @@ EventScript_1C4C8E:: @ 81C4C8E
 	faceplayer
 	checkflag FLAG_0x2CC
 	goto_if 1, EventScript_1C4CEC
-	loadword 0, Text_19A137
-	callstd 5
+	msgbox Text_19A137, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1C4CE2
 	call EventScript_1C4F37
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1C4CE2
-	loadword 0, Text_19A1EA
-	callstd 4
+	msgbox Text_19A1EA
 	setvar VAR_0x8005, 8
 	call EventScript_1C4F30
 	compare_var_to_value VAR_RESULT, 0
@@ -15166,29 +14392,25 @@ EventScript_1C4C8E:: @ 81C4C8E
     end
 
 EventScript_1C4CE2:: @ 81C4CE2
-	loadword 0, Text_19A1CB
-	callstd 4
+	msgbox Text_19A1CB
 	release
 	end
 
 EventScript_1C4CEC:: @ 81C4CEC
-	loadword 0, Text_19A20E
-	callstd 4
+	msgbox Text_19A20E
 	release
 	end
 
 EventScript_1C4CF6:: @ 81C4CF6
 	checkflag FLAG_0x2CD
 	goto_if 1, EventScript_1C4D59
-	loadword 0, Text_19AD85
-	callstd 5
+	msgbox Text_19AD85, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1C4D4F
 	call EventScript_1C4F37
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1C4D4F
-	loadword 0, Text_19ADEE
-	callstd 4
+	msgbox Text_19ADEE
 	setvar VAR_0x8005, 7
 	call EventScript_1C4F30
 	lock
@@ -15201,8 +14423,7 @@ EventScript_1C4CF6:: @ 81C4CF6
     end
 
 EventScript_1C4D4F:: @ 81C4D4F
-	loadword 0, Text_19ADD8
-	callstd 4
+	msgbox Text_19ADD8
 	release
 	end
 
@@ -15216,13 +14437,11 @@ EventScript_1C4D59:: @ 81C4D59
 	end
 
 EventScript_1C4D72:: @ 81C4D72
-	loadword 0, Text_19AE1C
-	callstd 4
+	msgbox Text_19AE1C
 	return
 
 EventScript_1C4D7B:: @ 81C4D7B
-	loadword 0, Text_19AE90
-	callstd 4
+	msgbox Text_19AE90
 	return
 
 FourIsland_House1_EventScript_1C4D84:: @ 81C4D84
@@ -15230,15 +14449,13 @@ FourIsland_House1_EventScript_1C4D84:: @ 81C4D84
 	faceplayer
 	checkflag FLAG_0x2CE
 	goto_if 1, EventScript_1C4DE2
-	loadword 0, Text_1A3505
-	callstd 5
+	msgbox Text_1A3505, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1C4DD8
 	call EventScript_1C4F37
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1C4DD8
-	loadword 0, Text_1A35DA
-	callstd 4
+	msgbox Text_1A35DA
 	setvar VAR_0x8005, 3
 	call EventScript_1C4F30
 	compare_var_to_value VAR_RESULT, 0
@@ -15248,14 +14465,12 @@ FourIsland_House1_EventScript_1C4D84:: @ 81C4D84
     end
 
 EventScript_1C4DD8:: @ 81C4DD8
-	loadword 0, Text_1A35C7
-	callstd 4
+	msgbox Text_1A35C7
 	release
 	end
 
 EventScript_1C4DE2:: @ 81C4DE2
-	loadword 0, Text_1A3609
-	callstd 4
+	msgbox Text_1A3609
 	release
 	end
 
@@ -15271,8 +14486,7 @@ TwoIsland_CapeBrink_House_EventScript_1C4DEC:: @ 81C4DEC
 	checkflag FLAG_0x002
 	goto_if 1, EventScript_1C4E97
 	getfirstpartymonname 0
-	loadword 0, Text_1A46C6
-	callstd 4
+	msgbox Text_1A46C6
 	specialvar VAR_RESULT, sub_80CCB94
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1C4F26
@@ -15285,15 +14499,13 @@ TwoIsland_CapeBrink_House_EventScript_1C4DEC:: @ 81C4DEC
 	call_if 1, EventScript_1C4F06
 	compare_var_to_value VAR_FACING, 3
 	call_if 1, EventScript_1C4F11
-	loadword 0, Text_1A4751
-	callstd 5
+	msgbox Text_1A4751, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1C4F1C
 	call EventScript_1C4F37
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1C4F1C
-	loadword 0, Text_1A4814
-	callstd 4
+	msgbox Text_1A4814
 	closemessage
 	fadescreen 1
 	goto EventScript_1C4EDA
@@ -15304,14 +14516,12 @@ EventScript_1C4E8F:: @ 81C4E8F
 	end
 
 EventScript_1C4E97:: @ 81C4E97
-	loadword 0, Text_1A48B3
-	callstd 4
+	msgbox Text_1A48B3
 	release
 	end
 
 EventScript_1C4EA1:: @ 81C4EA1
-	loadword 0, Text_1A4972
-	callstd 4
+	msgbox Text_1A4972
 	release
 	end
 
@@ -15320,15 +14530,13 @@ EventScript_1C4EAB:: @ 81C4EAB
 	specialvar VAR_RESULT, sub_80CCCF8
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1C4ECD
-	loadword 0, Text_1A4865
-	callstd 4
+	msgbox Text_1A4865
 	setflag FLAG_0x002
 	release
 	end
 
 EventScript_1C4ECD:: @ 81C4ECD
-	loadword 0, Text_1A48F3
-	callstd 4
+	msgbox Text_1A48F3
 	setflag FLAG_0x2E1
 	release
 	end
@@ -15361,14 +14569,12 @@ EventScript_1C4F11:: @ 81C4F11
 	return
 
 EventScript_1C4F1C:: @ 81C4F1C
-	loadword 0, Text_1A47E5
-	callstd 4
+	msgbox Text_1A47E5
 	release
 	end
 
 EventScript_1C4F26:: @ 81C4F26
-	loadword 0, Text_1A4737
-	callstd 4
+	msgbox Text_1A4737
 	release
 	end
 
@@ -15383,8 +14589,7 @@ EventScript_1C4F37:: @ 81C4F37
 	textcolor 3
 	special sub_80699BC
 	signmsg
-	loadword 0, Text_1A644F
-	callstd 5
+	msgbox Text_1A644F, 5
 	normalmsg
 	call EventScript_1A6675
 	return
@@ -15544,8 +14749,7 @@ EventScript_1C50C2:
 	setvar VAR_0x8005, 2
 	setvar VAR_0x8006, 0
 	special sub_815D9E8
-	loadword 0, gStringVar4
-	callstd 4
+	msgbox gStringVar4
 	closemessage
 	goto EventScript_1C5219
 
@@ -15554,8 +14758,7 @@ EventScript_1C510D:: @ 81C510D
 	setvar VAR_0x8005, 2
 	copyvar VAR_0x8006, VAR_0x4003
 	special sub_815D9E8
-	loadword 0, gStringVar4
-	callstd 4
+	msgbox gStringVar4
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
 	addvar VAR_0x4003, 1
@@ -15565,8 +14768,7 @@ EventScript_1C510D:: @ 81C510D
 EventScript_1C5146:
 	copyvar VAR_0x8006, VAR_0x4003
 	special sub_815D9E8
-	loadword 0, gStringVar4
-	callstd 4
+	msgbox gStringVar4
 	closemessage
 	goto EventScript_1C5219
 
@@ -15614,8 +14816,7 @@ EventScript_1C51FE:
 	setvar VAR_0x8005, 2
 	copyvar VAR_0x8006, VAR_0x4001
 	special sub_815D9E8
-	loadword 0, gStringVar4
-	callstd 4
+	msgbox gStringVar4
 	closemessage
 EventScript_1C5219:
 	setvar VAR_0x8004, 2
@@ -15726,8 +14927,7 @@ EventScript_1C5391:
 	special sub_815D9E8
 	lock
 	faceplayer
-	loadword 0, gStringVar4
-	callstd 4
+	msgbox gStringVar4
 	release
 	return
 
@@ -15744,8 +14944,7 @@ EventScript_1C53AA:: @ 81C53AA
 	compare_var_to_value VAR_0x8000, 2
 	goto_if 1, EventScript_1C5492
 EventScript_1C53DA:
-	loadword 0, Text_17CA5A
-	callstd 4
+	msgbox Text_17CA5A
 EventScript_1C53E2:
 	setvar VAR_0x8004, 8
 	special sub_815D9E8
@@ -15757,24 +14956,20 @@ EventScript_1C53E2:
 	compare_var_to_value VAR_0x8000, 2
 	goto_if 1, EventScript_1C544F
 EventScript_1C5410:
-	loadword 0, Text_17CB09
-	callstd 4
+	msgbox Text_17CB09
 	textcolor 3
 	playfanfare MUS_FANFA1
 	message Text_1A51F6
 	waitfanfare
 	waitmessage
 	getstdstring 2, 24
-	loadword 0, gUnknown_81A5218
-	callstd 4
+	msgbox gUnknown_81A5218
 	call EventScript_1A6675
 	goto EventScript_1C544F
 
 EventScript_1C543A:: @ 81C543A
-	loadword 0, Text_17CB09
-	callstd 4
-	loadword 0, gUnknown_81A5207
-	callstd 4
+	msgbox Text_17CB09
+	msgbox gUnknown_81A5207
 	goto EventScript_1C544F
 
 EventScript_1C544F:: @ 81C544F
@@ -15788,16 +14983,13 @@ EventScript_1C544F:: @ 81C544F
 	compare_var_to_value VAR_0x8000, 2
 	goto_if 1, EventScript_1C5492
 EventScript_1C547D:
-	loadword 0, Text_17CB1A
-	callstd 4
+	msgbox Text_17CB1A
 	goto EventScript_1C5492
 
 EventScript_1C548A:: @ 81C548A
-	loadword 0, Text_17CBC0
-	callstd 4
+	msgbox Text_17CBC0
 EventScript_1C5492:
-	loadword 0, Text_17CBF5
-	callstd 4
+	msgbox Text_17CBF5
 	release
 	return
 
@@ -15805,8 +14997,7 @@ EventScript_1C549C:: @ 81C549C
 	lockall
 	setvar VAR_0x8004, 13
 	special sub_815D9E8
-	loadword 0, Text_17CC56
-	callstd 4
+	msgbox Text_17CC56
 	releaseall
 	end
 
@@ -15866,8 +15057,7 @@ EventScript_1C551B:
 EventScript_1C5528:: @ 81C5528
 	lockall
 	playse SE_PINPON
-	loadword 0, Text_17CC73
-	callstd 4
+	msgbox Text_17CC73
 	closemessage
 	applymovement 255, Movement_1C5544
 	waitmovement 0
@@ -15905,18 +15095,15 @@ Movement_1C5550:: @ 81C5550
 	step_end
 
 EventScript_1C5550:: @ 81C5552
-	loadword 0, Text_1C556D
-	callstd 2
+	msgbox Text_1C556D, 2
 	end
 
 EventScript_1C555B:: @ 81C555B
-	loadword 0, Text_1C558D
-	callstd 3
+	msgbox Text_1C558D, 3
 	end
 
 EventScript_1C5564:: @ 81C5564
-	loadword 0, Text_1C55A4
-	callstd 3
+	msgbox Text_1C55A4, 3
 	end
 
 Text_1C556D:: @ 81C556D

@@ -7,9 +7,6 @@
 
 	.section .rodata
 
-gTrainerFrontPicCoords:: @ 823932C
-	.incbin "baserom.gba", 0x23932C, 0x250
-
 gTrainerFrontPicTable:: @ 823957C
 	.incbin "baserom.gba", 0x23957C, 0x4A0
 

@@ -744,7 +744,7 @@ _080D7834:
 	ldr r5, [sp]
 	ldr r4, [sp, 0x4]
 	movs r3, 0
-	ldr r2, _080D7850 @ =gUnknown_82500CC
+	ldr r2, _080D7850 @ =gStatusConditionStringsTable
 _080D783C:
 	ldr r1, [r2]
 	ldr r0, [r1]
@@ -756,7 +756,7 @@ _080D783C:
 	ldr r0, [r2, 0x4]
 	b _080D785E
 	.align 2, 0
-_080D7850: .4byte gUnknown_82500CC
+_080D7850: .4byte gStatusConditionStringsTable
 _080D7854:
 	adds r2, 0x8
 	adds r3, 0x1
@@ -1647,13 +1647,13 @@ _080D7FF0:
 	ldrb r1, [r0]
 	movs r0, 0xD
 	muls r1, r0
-	ldr r0, _080D8004 @ =gUnknown_824FC40
+	ldr r0, _080D8004 @ =gAbilityNames
 	adds r4, r1, r0
 	b _080D8382
 	.align 2, 0
 _080D7FFC: .4byte gUnknown_2039A30
 _080D8000: .4byte gEffectBattler
-_080D8004: .4byte gUnknown_824FC40
+_080D8004: .4byte gAbilityNames
 _080D8008:
 	ldr r3, _080D8020 @ =gTrainerBattleOpponent_A
 	ldrh r1, [r3]
@@ -2430,7 +2430,7 @@ _080D860C:
 	ldrb r1, [r0, 0x1]
 	movs r0, 0xD
 	muls r1, r0
-	ldr r0, _080D8624 @ =gUnknown_824FC40
+	ldr r0, _080D8624 @ =gAbilityNames
 _080D8616:
 	adds r1, r0
 _080D8618:
@@ -2439,7 +2439,7 @@ _080D8618:
 	adds r5, 0x2
 	b _080D86B0
 	.align 2, 0
-_080D8624: .4byte gUnknown_824FC40
+_080D8624: .4byte gAbilityNames
 _080D8628:
 	adds r0, r5, r7
 	ldrb r2, [r0, 0x1]

@@ -278,7 +278,7 @@ EvolutionScene: @ 80CDDF4
 	adds r6, r7, 0
 	adds r6, 0x1C
 	adds r0, r1, r6
-	ldr r2, _080CE0CC @ =nullsub_10
+	ldr r2, _080CE0CC @ =SpriteCallbackDummy2
 	str r2, [r0]
 	adds r1, r7
 	ldrb r2, [r1, 0x5]
@@ -331,7 +331,7 @@ EvolutionScene: @ 80CDDF4
 	adds r1, r3
 	lsls r1, 2
 	adds r6, r1, r6
-	ldr r2, _080CE0CC @ =nullsub_10
+	ldr r2, _080CE0CC @ =SpriteCallbackDummy2
 	str r2, [r6]
 	adds r1, r7
 	ldrb r0, [r1, 0x5]
@@ -420,7 +420,7 @@ _080CE0BC: .4byte gMonSpritesGfxPtr
 _080CE0C0: .4byte gMultiuseSpriteTemplate
 _080CE0C4: .4byte gDummySpriteAffineAnimTable
 _080CE0C8: .4byte gSprites
-_080CE0CC: .4byte nullsub_10
+_080CE0CC: .4byte SpriteCallbackDummy2
 _080CE0D0: .4byte sub_80CE8DC
 _080CE0D4: .4byte gTasks
 _080CE0D8: .4byte gPlttBufferUnfaded + 0x40
@@ -562,7 +562,7 @@ CB2_EvolutionSceneLoadGraphics: @ 80CE0E8
 	adds r0, r3, 0
 	adds r0, 0x1C
 	adds r0, r1, r0
-	ldr r2, _080CE2CC @ =nullsub_10
+	ldr r2, _080CE2CC @ =SpriteCallbackDummy2
 	str r2, [r0]
 	adds r1, r3
 	ldrb r2, [r1, 0x5]
@@ -623,7 +623,7 @@ _080CE2BC: .4byte gMonSpritesGfxPtr
 _080CE2C0: .4byte gMultiuseSpriteTemplate
 _080CE2C4: .4byte gDummySpriteAffineAnimTable
 _080CE2C8: .4byte gSprites
-_080CE2CC: .4byte nullsub_10
+_080CE2CC: .4byte SpriteCallbackDummy2
 _080CE2D0: .4byte nullsub_76
 _080CE2D4: .4byte sub_80D0050
 _080CE2D8: .4byte sub_80CE710
@@ -813,7 +813,7 @@ _080CE45C:
 	adds r0, r3, 0
 	adds r0, 0x1C
 	adds r0, r1, r0
-	ldr r2, _080CE4C4 @ =nullsub_10
+	ldr r2, _080CE4C4 @ =SpriteCallbackDummy2
 	str r2, [r0]
 	adds r1, r3
 	ldrb r2, [r1, 0x5]
@@ -836,7 +836,7 @@ _080CE4B4: .4byte gMultiuseSpriteTemplate
 _080CE4B8: .4byte gDummySpriteAffineAnimTable
 _080CE4BC: .4byte gUnknown_2039A20
 _080CE4C0: .4byte gSprites
-_080CE4C4: .4byte nullsub_10
+_080CE4C4: .4byte SpriteCallbackDummy2
 _080CE4C8: .4byte gMain
 _080CE4CC:
 	ldr r0, _080CE4FC @ =gWirelessCommType
@@ -989,7 +989,7 @@ TradeEvolutionScene: @ 80CE540
 	adds r0, r3, 0
 	adds r0, 0x1C
 	adds r0, r1, r0
-	ldr r2, _080CE6D8 @ =nullsub_10
+	ldr r2, _080CE6D8 @ =SpriteCallbackDummy2
 	str r2, [r0]
 	adds r1, r3
 	ldrb r2, [r1, 0x5]
@@ -1074,7 +1074,7 @@ _080CE6C8: .4byte gMonSpritesGfxPtr
 _080CE6CC: .4byte gMultiuseSpriteTemplate
 _080CE6D0: .4byte gDummySpriteAffineAnimTable
 _080CE6D4: .4byte gSprites
-_080CE6D8: .4byte nullsub_10
+_080CE6D8: .4byte SpriteCallbackDummy2
 _080CE6DC: .4byte sub_80CF53C
 _080CE6E0: .4byte gTasks
 _080CE6E4: .4byte gBattle_BG0_X

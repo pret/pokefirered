@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_800FD9C
-sub_800FD9C: @ 800FD9C
+	thumb_func_start CB2_InitBattle
+CB2_InitBattle: @ 800FD9C
 	push {r4,lr}
 	bl MoveSaveBlocks_ResetHeap
 	bl AllocateBattleResources
@@ -19,7 +19,7 @@ sub_800FD9C: @ 800FD9C
 	cmp r0, 0
 	beq _0800FDD8
 	bl HandleLinkBattleSetup
-	ldr r0, _0800FDD0 @ =sub_80109C8
+	ldr r0, _0800FDD0 @ =CB2_PreInitMultiBattle
 	bl SetMainCallback2
 	ldr r1, _0800FDD4 @ =gBattleCommunication
 	movs r0, 0
@@ -27,10 +27,10 @@ sub_800FD9C: @ 800FD9C
 	b _0800FE1C
 	.align 2, 0
 _0800FDCC: .4byte gBattleTypeFlags
-_0800FDD0: .4byte sub_80109C8
+_0800FDD0: .4byte CB2_PreInitMultiBattle
 _0800FDD4: .4byte gBattleCommunication
 _0800FDD8:
-	bl sub_800FE24
+	bl CB2_InitBattleInternal
 	ldr r1, [r4]
 	movs r0, 0x2
 	ands r0, r1
@@ -66,10 +66,10 @@ _0800FE1C:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_800FD9C
+	thumb_func_end CB2_InitBattle
 
-	thumb_func_start sub_800FE24
-sub_800FE24: @ 800FE24
+	thumb_func_start CB2_InitBattleInternal
+CB2_InitBattleInternal: @ 800FE24
 	push {r4,r5,lr}
 	sub sp, 0x4
 	movs r0, 0
@@ -120,7 +120,7 @@ _0800FE88:
 	cmp r1, 0
 	bge _0800FE88
 	movs r1, 0x50
-	ldr r4, _0800FF3C @ =gUnknown_824EFE4
+	ldr r4, _0800FF3C @ =sIntroScanlineParams16Bit
 	ldr r0, _0800FF38 @ =gScanlineEffectRegBuffers
 	ldr r3, _0800FF40 @ =0x0000ff10
 	movs r5, 0x82
@@ -178,7 +178,7 @@ _0800FEA6:
 	ands r0, r1
 	cmp r0, 0
 	beq _0800FF78
-	ldr r0, _0800FF74 @ =sub_8010BA0
+	ldr r0, _0800FF74 @ =CB2_HandleStartMultiBattle
 	bl SetMainCallback2
 	b _0800FF7E
 	.align 2, 0
@@ -187,7 +187,7 @@ _0800FF2C: .4byte 0x00005051
 _0800FF30: .4byte gBattle_WIN0H
 _0800FF34: .4byte gBattle_WIN0V
 _0800FF38: .4byte gScanlineEffectRegBuffers
-_0800FF3C: .4byte gUnknown_824EFE4
+_0800FF3C: .4byte sIntroScanlineParams16Bit
 _0800FF40: .4byte 0x0000ff10
 _0800FF44: .4byte gBattle_BG0_X
 _0800FF48: .4byte gBattle_BG0_Y
@@ -201,9 +201,9 @@ _0800FF64: .4byte gBattleTerrain
 _0800FF68: .4byte gReservedSpritePaletteCount
 _0800FF6C: .4byte VBlankCB_Battle
 _0800FF70: .4byte gBattleTypeFlags
-_0800FF74: .4byte sub_8010BA0
+_0800FF74: .4byte CB2_HandleStartMultiBattle
 _0800FF78:
-	ldr r0, _0800FFCC @ =sub_8010508
+	ldr r0, _0800FFCC @ =CB2_HandleStartBattle
 	bl SetMainCallback2
 _0800FF7E:
 	ldr r0, _0800FFD0 @ =gBattleTypeFlags
@@ -215,7 +215,7 @@ _0800FF7E:
 	ldr r0, _0800FFD4 @ =gEnemyParty
 	ldr r1, _0800FFD8 @ =gTrainerBattleOpponent_A
 	ldrh r1, [r1]
-	bl sub_80112E0
+	bl CreateNPCTrainerParty
 	bl SetWildMonHeldItem
 _0800FF98:
 	ldr r0, _0800FFDC @ =gMain
@@ -244,7 +244,7 @@ _0800FFAE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800FFCC: .4byte sub_8010508
+_0800FFCC: .4byte CB2_HandleStartBattle
 _0800FFD0: .4byte gBattleTypeFlags
 _0800FFD4: .4byte gEnemyParty
 _0800FFD8: .4byte gTrainerBattleOpponent_A
@@ -252,7 +252,7 @@ _0800FFDC: .4byte gMain
 _0800FFE0: .4byte 0x00000439
 _0800FFE4: .4byte gPlayerParty
 _0800FFE8: .4byte gBattleCommunication
-	thumb_func_end sub_800FE24
+	thumb_func_end CB2_InitBattleInternal
 
 	thumb_func_start sub_800FFEC
 sub_800FFEC: @ 800FFEC
@@ -361,8 +361,8 @@ _080100B0: .4byte gPlayerParty
 _080100B4: .4byte gBattleStruct
 	thumb_func_end sub_800FFEC
 
-	thumb_func_start sub_80100B8
-sub_80100B8: @ 80100B8
+	thumb_func_start SetPlayerBerryDataInBattleStruct
+SetPlayerBerryDataInBattleStruct: @ 80100B8
 	push {r4-r7,lr}
 	ldr r0, _08010120 @ =gBattleStruct
 	ldr r5, [r0]
@@ -460,10 +460,10 @@ _08010174:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80100B8
+	thumb_func_end SetPlayerBerryDataInBattleStruct
 
-	thumb_func_start sub_801017C
-sub_801017C: @ 801017C
+	thumb_func_start SetAllPlayersBerryData
+SetAllPlayersBerryData: @ 801017C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -798,7 +798,7 @@ _080103FC:
 	.align 2, 0
 _0801040C: .4byte gEnigmaBerries
 _08010410: .4byte gBlockRecvBuffer + 4
-	thumb_func_end sub_801017C
+	thumb_func_end SetAllPlayersBerryData
 
 	thumb_func_start sub_8010414
 sub_8010414: @ 8010414
@@ -936,8 +936,8 @@ _080104FC:
 	bx r0
 	thumb_func_end sub_8010414
 
-	thumb_func_start sub_8010508
-sub_8010508: @ 8010508
+	thumb_func_start CB2_HandleStartBattle
+CB2_HandleStartBattle: @ 8010508
 	push {r4-r6,lr}
 	bl RunTasks
 	bl AnimateSprites
@@ -1045,7 +1045,7 @@ _080105EC:
 	adds r0, r1
 	strb r6, [r0]
 	bl sub_800FFEC
-	bl sub_80100B8
+	bl SetPlayerBerryDataInBattleStruct
 	bl bitmask_all_link_players_but_self
 	lsls r0, 24
 	lsrs r0, 24
@@ -1080,7 +1080,7 @@ _08010658:
 	ldr r1, _0801066C @ =gBattleCommunication
 	movs r0, 0xF
 	strb r0, [r1]
-	bl sub_801017C
+	bl SetAllPlayersBerryData
 	b _080108B8
 	.align 2, 0
 _0801066C: .4byte gBattleCommunication
@@ -1096,7 +1096,7 @@ _0801067E:
 	movs r0, 0x2
 	adds r1, r4, 0
 	bl sub_8010414
-	bl sub_801017C
+	bl SetAllPlayersBerryData
 	ldr r0, _080106E0 @ =sub_800F6FC
 	movs r1, 0
 	bl CreateTask
@@ -1253,21 +1253,21 @@ _080107CC:
 	bl memcpy
 	ldr r1, _08010828 @ =0xfffffe70
 	adds r0, r4, r1
-	bl sub_8011D0C
+	bl TryCorrectShedinjaLanguage
 	ldr r1, _0801082C @ =0xfffffed4
 	adds r0, r4, r1
-	bl sub_8011D0C
+	bl TryCorrectShedinjaLanguage
 	adds r0, r4, 0
 	subs r0, 0xC8
-	bl sub_8011D0C
+	bl TryCorrectShedinjaLanguage
 	adds r0, r4, 0
 	subs r0, 0x64
-	bl sub_8011D0C
+	bl TryCorrectShedinjaLanguage
 	adds r0, r4, 0
-	bl sub_8011D0C
+	bl TryCorrectShedinjaLanguage
 	adds r0, r4, 0
 	adds r0, 0x64
-	bl sub_8011D0C
+	bl TryCorrectShedinjaLanguage
 	ldr r1, _08010830 @ =gBattleCommunication
 	b _080108B2
 	.align 2, 0
@@ -1299,7 +1299,7 @@ _0801084C:
 	ldr r1, _08010888 @ =gMain
 	ldr r0, [r1]
 	str r0, [r2]
-	ldr r0, _0801088C @ =sub_80123E4
+	ldr r0, _0801088C @ =BattleMainCB1
 	str r0, [r1]
 	ldr r0, _08010890 @ =BattleMainCB2
 	bl SetMainCallback2
@@ -1317,7 +1317,7 @@ _0801084C:
 _08010880: .4byte gUnknown_2023E83
 _08010884: .4byte gPreBattleCallback1
 _08010888: .4byte gMain
-_0801088C: .4byte sub_80123E4
+_0801088C: .4byte BattleMainCB1
 _08010890: .4byte BattleMainCB2
 _08010894: .4byte gBattleTypeFlags
 _08010898:
@@ -1345,7 +1345,7 @@ _080108B8:
 	bx r0
 	.align 2, 0
 _080108C0: .4byte gBattleCommunication
-	thumb_func_end sub_8010508
+	thumb_func_end CB2_HandleStartBattle
 
 	thumb_func_start sub_80108C4
 sub_80108C4: @ 80108C4
@@ -1472,8 +1472,8 @@ _080109C0: .4byte gPlayerParty
 _080109C4: .4byte gBattleStruct
 	thumb_func_end sub_80108C4
 
-	thumb_func_start sub_80109C8
-sub_80109C8: @ 80109C8
+	thumb_func_start CB2_PreInitMultiBattle
+CB2_PreInitMultiBattle: @ 80109C8
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -1608,7 +1608,7 @@ _08010ABA:
 	ldr r0, [r0]
 	mov r2, r8
 	strh r0, [r2]
-	ldr r0, _08010AF8 @ =sub_80109C8
+	ldr r0, _08010AF8 @ =CB2_PreInitMultiBattle
 	str r0, [r1, 0x8]
 	bl sub_8128198
 	b _08010B82
@@ -1618,7 +1618,7 @@ _08010AE8: .4byte gUnknown_2022B58
 _08010AEC: .4byte gBattleCommunication
 _08010AF0: .4byte gMain
 _08010AF4: .4byte gBattleTypeFlags
-_08010AF8: .4byte sub_80109C8
+_08010AF8: .4byte CB2_PreInitMultiBattle
 _08010AFC:
 	ldr r0, _08010B1C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
@@ -1657,14 +1657,14 @@ _08010B2A:
 	mov r2, r9
 	ldr r0, [r2]
 	str r0, [r1, 0x8]
-	ldr r0, _08010B60 @ =sub_800FE24
+	ldr r0, _08010B60 @ =CB2_InitBattleInternal
 	bl SetMainCallback2
 	b _08010B82
 	.align 2, 0
 _08010B54: .4byte gWirelessCommType
 _08010B58: .4byte gBattleTypeFlags
 _08010B5C: .4byte gMain
-_08010B60: .4byte sub_800FE24
+_08010B60: .4byte CB2_InitBattleInternal
 _08010B64:
 	ldr r0, _08010B90 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
@@ -1678,7 +1678,7 @@ _08010B64:
 	mov r2, r9
 	ldr r0, [r2]
 	str r0, [r1, 0x8]
-	ldr r0, _08010B9C @ =sub_800FE24
+	ldr r0, _08010B9C @ =CB2_InitBattleInternal
 	bl SetMainCallback2
 _08010B82:
 	pop {r3,r4}
@@ -1691,11 +1691,11 @@ _08010B82:
 _08010B90: .4byte gReceivedRemoteLinkPlayers
 _08010B94: .4byte gBattleTypeFlags
 _08010B98: .4byte gMain
-_08010B9C: .4byte sub_800FE24
-	thumb_func_end sub_80109C8
+_08010B9C: .4byte CB2_InitBattleInternal
+	thumb_func_end CB2_PreInitMultiBattle
 
-	thumb_func_start sub_8010BA0
-sub_8010BA0: @ 8010BA0
+	thumb_func_start CB2_HandleStartMultiBattle
+CB2_HandleStartMultiBattle: @ 8010BA0
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1792,7 +1792,7 @@ _08010C66:
 	movs r0, 0x2
 	strb r0, [r1]
 	bl sub_800FFEC
-	bl sub_80100B8
+	bl SetPlayerBerryDataInBattleStruct
 	bl bitmask_all_link_players_but_self
 	lsls r0, 24
 	lsrs r0, 24
@@ -1833,7 +1833,7 @@ _08010CE2:
 	movs r0, 0x4
 	adds r1, r7, 0
 	bl sub_8010414
-	bl sub_801017C
+	bl SetAllPlayersBerryData
 	bl SetDeoxysStats
 	ldr r0, _08010D4C @ =gDecompressionBuffer
 	ldr r1, _08010D50 @ =gPlayerParty
@@ -2233,46 +2233,46 @@ _08010FDE:
 	ble _08010F20
 	ldr r4, _08011060 @ =gPlayerParty
 	adds r0, r4, 0
-	bl sub_8011D0C
+	bl TryCorrectShedinjaLanguage
 	adds r0, r4, 0
 	adds r0, 0x64
-	bl sub_8011D0C
+	bl TryCorrectShedinjaLanguage
 	adds r0, r4, 0
 	adds r0, 0xC8
-	bl sub_8011D0C
+	bl TryCorrectShedinjaLanguage
 	movs r1, 0x96
 	lsls r1, 1
 	adds r0, r4, r1
-	bl sub_8011D0C
+	bl TryCorrectShedinjaLanguage
 	movs r2, 0xC8
 	lsls r2, 1
 	adds r0, r4, r2
-	bl sub_8011D0C
+	bl TryCorrectShedinjaLanguage
 	movs r1, 0xFA
 	lsls r1, 1
 	adds r0, r4, r1
-	bl sub_8011D0C
+	bl TryCorrectShedinjaLanguage
 	ldr r4, _08011064 @ =gEnemyParty
 	adds r0, r4, 0
-	bl sub_8011D0C
+	bl TryCorrectShedinjaLanguage
 	adds r0, r4, 0
 	adds r0, 0x64
-	bl sub_8011D0C
+	bl TryCorrectShedinjaLanguage
 	adds r0, r4, 0
 	adds r0, 0xC8
-	bl sub_8011D0C
+	bl TryCorrectShedinjaLanguage
 	movs r2, 0x96
 	lsls r2, 1
 	adds r0, r4, r2
-	bl sub_8011D0C
+	bl TryCorrectShedinjaLanguage
 	movs r1, 0xC8
 	lsls r1, 1
 	adds r0, r4, r1
-	bl sub_8011D0C
+	bl TryCorrectShedinjaLanguage
 	movs r2, 0xFA
 	lsls r2, 1
 	adds r0, r4, r2
-	bl sub_8011D0C
+	bl TryCorrectShedinjaLanguage
 	ldr r1, _08011068 @ =gBattleCommunication
 	b _080110EA
 	.align 2, 0
@@ -2303,7 +2303,7 @@ _08011084:
 	ldr r1, _080110C0 @ =gMain
 	ldr r0, [r1]
 	str r0, [r2]
-	ldr r0, _080110C4 @ =sub_80123E4
+	ldr r0, _080110C4 @ =BattleMainCB1
 	str r0, [r1]
 	ldr r0, _080110C8 @ =BattleMainCB2
 	bl SetMainCallback2
@@ -2321,7 +2321,7 @@ _08011084:
 _080110B8: .4byte gUnknown_2023E83
 _080110BC: .4byte gPreBattleCallback1
 _080110C0: .4byte gMain
-_080110C4: .4byte sub_80123E4
+_080110C4: .4byte BattleMainCB1
 _080110C8: .4byte BattleMainCB2
 _080110CC: .4byte gBattleTypeFlags
 _080110D0:
@@ -2351,7 +2351,7 @@ _080110F0:
 	bx r0
 	.align 2, 0
 _080110FC: .4byte gBattleCommunication
-	thumb_func_end sub_8010BA0
+	thumb_func_end CB2_HandleStartMultiBattle
 
 	thumb_func_start BattleMainCB2
 BattleMainCB2: @ 8011100
@@ -2389,7 +2389,7 @@ BattleMainCB2: @ 8011100
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r0, _08011170 @ =CB2_QuitRecordedBattle
+	ldr r0, _08011170 @ =CB2_QuitPokeDudeBattle
 	bl SetMainCallback2
 _08011158:
 	add sp, 0x4
@@ -2400,7 +2400,7 @@ _08011160: .4byte gMain
 _08011164: .4byte gBattleTypeFlags
 _08011168: .4byte gSpecialVar_Result
 _0801116C: .4byte gBattleOutcome
-_08011170: .4byte CB2_QuitRecordedBattle
+_08011170: .4byte CB2_QuitPokeDudeBattle
 	thumb_func_end BattleMainCB2
 
 	thumb_func_start FreeRestoreBattleData
@@ -2435,8 +2435,8 @@ _080111B4: .4byte gScanlineEffect
 _080111B8: .4byte 0x00000439
 	thumb_func_end FreeRestoreBattleData
 
-	thumb_func_start CB2_QuitRecordedBattle
-CB2_QuitRecordedBattle: @ 80111BC
+	thumb_func_start CB2_QuitPokeDudeBattle
+CB2_QuitPokeDudeBattle: @ 80111BC
 	push {lr}
 	bl UpdatePaletteFade
 	ldr r0, _080111E4 @ =gPaletteFade
@@ -2456,7 +2456,7 @@ _080111DE:
 	.align 2, 0
 _080111E4: .4byte gPaletteFade
 _080111E8: .4byte gMain
-	thumb_func_end CB2_QuitRecordedBattle
+	thumb_func_end CB2_QuitPokeDudeBattle
 
 	thumb_func_start sub_80111EC
 sub_80111EC: @ 80111EC
@@ -2575,7 +2575,7 @@ _080112A0:
 	movs r0, 0
 	str r0, [r4]
 _080112CA:
-	ldr r0, _080112DC @ =sub_800FD9C
+	ldr r0, _080112DC @ =CB2_InitBattle
 	bl SetMainCallback2
 _080112D0:
 	pop {r4-r7}
@@ -2583,11 +2583,11 @@ _080112D0:
 	bx r0
 	.align 2, 0
 _080112D8: .4byte gUnknown_2022BC0
-_080112DC: .4byte sub_800FD9C
+_080112DC: .4byte CB2_InitBattle
 	thumb_func_end sub_80111FC
 
-	thumb_func_start sub_80112E0
-sub_80112E0: @ 80112E0
+	thumb_func_start CreateNPCTrainerParty
+CreateNPCTrainerParty: @ 80112E0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -3096,7 +3096,7 @@ _080116BC: .4byte gSpeciesNames
 _080116C0: .4byte gBattleMoves+0x4
 _080116C4: .4byte gTrainers
 _080116C8: .4byte gBattleTypeFlags
-	thumb_func_end sub_80112E0
+	thumb_func_end CreateNPCTrainerParty
 
 	thumb_func_start sub_80116CC
 sub_80116CC: @ 80116CC
@@ -3165,11 +3165,11 @@ VBlankCB_Battle: @ 80116F4
 	ldrh r1, [r0]
 	movs r0, 0x44
 	bl SetGpuReg
-	ldr r0, _080117B0 @ =gUnknown_2022988
+	ldr r0, _080117B0 @ =gBattle_WIN1H
 	ldrh r1, [r0]
 	movs r0, 0x42
 	bl SetGpuReg
-	ldr r0, _080117B4 @ =gUnknown_202298A
+	ldr r0, _080117B4 @ =gBattle_WIN1V
 	ldrh r1, [r0]
 	movs r0, 0x46
 	bl SetGpuReg
@@ -3190,8 +3190,8 @@ _080117A0: .4byte gBattle_BG3_X
 _080117A4: .4byte gBattle_BG3_Y
 _080117A8: .4byte gBattle_WIN0H
 _080117AC: .4byte gBattle_WIN0V
-_080117B0: .4byte gUnknown_2022988
-_080117B4: .4byte gUnknown_202298A
+_080117B0: .4byte gBattle_WIN1H
+_080117B4: .4byte gBattle_WIN1V
 	thumb_func_end VBlankCB_Battle
 
 	thumb_func_start nullsub_9
@@ -3776,7 +3776,7 @@ _08011C64:
 	.4byte _08011CE4
 	.4byte _08011CF8
 _08011C80:
-	ldr r0, _08011C90 @ =gUnknown_8248320
+	ldr r0, _08011C90 @ =gBattleBgTemplates
 	lsls r1, r2, 2
 	adds r1, r0
 	ldrb r0, [r1]
@@ -3784,9 +3784,9 @@ _08011C80:
 	lsrs r0, 30
 	b _08011D04
 	.align 2, 0
-_08011C90: .4byte gUnknown_8248320
+_08011C90: .4byte gBattleBgTemplates
 _08011C94:
-	ldr r0, _08011CA4 @ =gUnknown_8248320
+	ldr r0, _08011CA4 @ =gBattleBgTemplates
 	lsls r1, r2, 2
 	adds r1, r0
 	ldrb r0, [r1]
@@ -3794,9 +3794,9 @@ _08011C94:
 	lsrs r0, 30
 	b _08011D04
 	.align 2, 0
-_08011CA4: .4byte gUnknown_8248320
+_08011CA4: .4byte gBattleBgTemplates
 _08011CA8:
-	ldr r0, _08011CB8 @ =gUnknown_8248320
+	ldr r0, _08011CB8 @ =gBattleBgTemplates
 	lsls r1, r2, 2
 	adds r1, r0
 	ldrh r0, [r1]
@@ -3804,9 +3804,9 @@ _08011CA8:
 	lsrs r0, 27
 	b _08011D04
 	.align 2, 0
-_08011CB8: .4byte gUnknown_8248320
+_08011CB8: .4byte gBattleBgTemplates
 _08011CBC:
-	ldr r0, _08011CCC @ =gUnknown_8248320
+	ldr r0, _08011CCC @ =gBattleBgTemplates
 	lsls r1, r2, 2
 	adds r1, r0
 	ldrb r0, [r1, 0x1]
@@ -3814,9 +3814,9 @@ _08011CBC:
 	lsrs r0, 30
 	b _08011D04
 	.align 2, 0
-_08011CCC: .4byte gUnknown_8248320
+_08011CCC: .4byte gBattleBgTemplates
 _08011CD0:
-	ldr r0, _08011CE0 @ =gUnknown_8248320
+	ldr r0, _08011CE0 @ =gBattleBgTemplates
 	lsls r1, r2, 2
 	adds r1, r0
 	ldrb r0, [r1, 0x1]
@@ -3824,9 +3824,9 @@ _08011CD0:
 	lsrs r0, 31
 	b _08011D04
 	.align 2, 0
-_08011CE0: .4byte gUnknown_8248320
+_08011CE0: .4byte gBattleBgTemplates
 _08011CE4:
-	ldr r0, _08011CF4 @ =gUnknown_8248320
+	ldr r0, _08011CF4 @ =gBattleBgTemplates
 	lsls r1, r2, 2
 	adds r1, r0
 	ldrb r0, [r1, 0x1]
@@ -3834,9 +3834,9 @@ _08011CE4:
 	lsrs r0, 30
 	b _08011D04
 	.align 2, 0
-_08011CF4: .4byte gUnknown_8248320
+_08011CF4: .4byte gBattleBgTemplates
 _08011CF8:
-	ldr r0, _08011D08 @ =gUnknown_8248320
+	ldr r0, _08011D08 @ =gBattleBgTemplates
 	lsls r1, r2, 2
 	adds r1, r0
 	ldr r0, [r1]
@@ -3846,11 +3846,11 @@ _08011D04:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08011D08: .4byte gUnknown_8248320
+_08011D08: .4byte gBattleBgTemplates
 	thumb_func_end sub_8011C44
 
-	thumb_func_start sub_8011D0C
-sub_8011D0C: @ 8011D0C
+	thumb_func_start TryCorrectShedinjaLanguage
+TryCorrectShedinjaLanguage: @ 8011D0C
 	push {r4,r5,lr}
 	sub sp, 0x10
 	adds r4, r0, 0
@@ -3873,7 +3873,7 @@ sub_8011D0C: @ 8011D0C
 	movs r1, 0x2
 	mov r2, sp
 	bl GetMonData
-	ldr r1, _08011D60 @ =gUnknown_824F008
+	ldr r1, _08011D60 @ =sText_ShedinjaJpnName
 	mov r0, sp
 	bl StringCompareWithoutExtCtrlCodes
 	cmp r0, 0
@@ -3889,14 +3889,14 @@ _08011D54:
 	bx r0
 	.align 2, 0
 _08011D5C: .4byte 0x0000012f
-_08011D60: .4byte gUnknown_824F008
-	thumb_func_end sub_8011D0C
+_08011D60: .4byte sText_ShedinjaJpnName
+	thumb_func_end TryCorrectShedinjaLanguage
 
-	thumb_func_start oac_poke_opponent
-oac_poke_opponent: @ 8011D64
+	thumb_func_start SpriteCB_WildMon
+SpriteCB_WildMon: @ 8011D64
 	push {lr}
 	sub sp, 0x4
-	ldr r1, _08011D8C @ =sub_8011D94
+	ldr r1, _08011D8C @ =SpriteCB_MoveWildMonToRight
 	str r1, [r0, 0x1C]
 	movs r1, 0
 	bl StartSpriteAnimIfDifferent
@@ -3912,12 +3912,12 @@ oac_poke_opponent: @ 8011D64
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08011D8C: .4byte sub_8011D94
+_08011D8C: .4byte SpriteCB_MoveWildMonToRight
 _08011D90: .4byte 0x00002108
-	thumb_func_end oac_poke_opponent
+	thumb_func_end SpriteCB_WildMon
 
-	thumb_func_start sub_8011D94
-sub_8011D94: @ 8011D94
+	thumb_func_start SpriteCB_MoveWildMonToRight
+SpriteCB_MoveWildMonToRight: @ 8011D94
 	push {lr}
 	adds r2, r0, 0
 	ldr r0, _08011DC0 @ =gIntroSlideFlags
@@ -3932,7 +3932,7 @@ sub_8011D94: @ 8011D94
 	lsls r0, 16
 	cmp r0, 0
 	bne _08011DBC
-	ldr r0, _08011DC4 @ =sub_8011DC8
+	ldr r0, _08011DC4 @ =SpriteCB_WildMonShowHealthbox
 	str r0, [r2, 0x1C]
 	ldrh r0, [r2, 0x32]
 	movs r1, 0x19
@@ -3942,11 +3942,11 @@ _08011DBC:
 	bx r0
 	.align 2, 0
 _08011DC0: .4byte gIntroSlideFlags
-_08011DC4: .4byte sub_8011DC8
-	thumb_func_end sub_8011D94
+_08011DC4: .4byte SpriteCB_WildMonShowHealthbox
+	thumb_func_end SpriteCB_MoveWildMonToRight
 
-	thumb_func_start sub_8011DC8
-sub_8011DC8: @ 8011DC8
+	thumb_func_start SpriteCB_WildMonShowHealthbox
+SpriteCB_WildMonShowHealthbox: @ 8011DC8
 	push {r4,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -3966,7 +3966,7 @@ sub_8011DC8: @ 8011DC8
 	adds r0, r1
 	ldrb r0, [r0]
 	bl SetHealthboxSpriteVisible
-	ldr r0, _08011E1C @ =nullsub_10
+	ldr r0, _08011E1C @ =SpriteCallbackDummy2
 	str r0, [r4, 0x1C]
 	adds r0, r4, 0
 	movs r1, 0
@@ -3986,14 +3986,14 @@ _08011E10:
 	bx r0
 	.align 2, 0
 _08011E18: .4byte gHealthboxSpriteIds
-_08011E1C: .4byte nullsub_10
+_08011E1C: .4byte SpriteCallbackDummy2
 _08011E20: .4byte 0x00002108
-	thumb_func_end sub_8011DC8
+	thumb_func_end SpriteCB_WildMonShowHealthbox
 
-	thumb_func_start nullsub_10
-nullsub_10: @ 8011E24
+	thumb_func_start SpriteCallbackDummy2
+SpriteCallbackDummy2: @ 8011E24
 	bx lr
-	thumb_func_end nullsub_10
+	thumb_func_end SpriteCallbackDummy2
 
 	thumb_func_start sub_8011E28
 sub_8011E28: @ 8011E28
@@ -4048,7 +4048,7 @@ sub_8011E3C: @ 8011E3C
 	ands r0, r1
 	mov r1, r12
 	strb r0, [r1]
-	ldr r0, _08011E98 @ =nullsub_10
+	ldr r0, _08011E98 @ =SpriteCallbackDummy2
 	str r0, [r3, 0x1C]
 	ldr r0, _08011E9C @ =gUnknown_2022AE8
 	str r2, [r0]
@@ -4057,7 +4057,7 @@ _08011E90:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08011E98: .4byte nullsub_10
+_08011E98: .4byte SpriteCallbackDummy2
 _08011E9C: .4byte gUnknown_2022AE8
 	thumb_func_end sub_8011E3C
 
@@ -4190,7 +4190,7 @@ _08011F8C:
 	strh r0, [r1, 0x34]
 	movs r0, 0x1
 	strh r0, [r1, 0x36]
-	ldr r0, _08011FB0 @ =sub_8011FB4
+	ldr r0, _08011FB0 @ =SpriteCB_AnimFaintOpponent
 	str r0, [r1, 0x1C]
 	pop {r3,r4}
 	mov r8, r3
@@ -4200,11 +4200,11 @@ _08011F8C:
 	bx r0
 	.align 2, 0
 _08011FAC: .4byte gMonFrontPicCoords
-_08011FB0: .4byte sub_8011FB4
+_08011FB0: .4byte SpriteCB_AnimFaintOpponent
 	thumb_func_end SpriteCB_FaintOpponentMon
 
-	thumb_func_start sub_8011FB4
-sub_8011FB4: @ 8011FB4
+	thumb_func_start SpriteCB_AnimFaintOpponent
+SpriteCB_AnimFaintOpponent: @ 8011FB4
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrh r0, [r4, 0x36]
@@ -4274,7 +4274,7 @@ _08012034:
 	.align 2, 0
 _0801203C: .4byte gMonSpritesGfxPtr
 _08012040: .4byte gBattleMonForms
-	thumb_func_end sub_8011FB4
+	thumb_func_end SpriteCB_AnimFaintOpponent
 
 	thumb_func_start sub_8012044
 sub_8012044: @ 8012044
@@ -4344,11 +4344,11 @@ sub_8012098: @ 8012098
 	strb r1, [r2]
 	movs r1, 0
 	strh r1, [r0, 0x36]
-	ldr r1, _080120C0 @ =nullsub_10
+	ldr r1, _080120C0 @ =SpriteCallbackDummy2
 	str r1, [r0, 0x1C]
 	bx lr
 	.align 2, 0
-_080120C0: .4byte nullsub_10
+_080120C0: .4byte SpriteCallbackDummy2
 	thumb_func_end sub_8012098
 
 	thumb_func_start sub_80120C4
@@ -4377,7 +4377,7 @@ oac_poke_ally_: @ 80120D0
 	asrs r1, r0, 16
 	cmp r1, 0
 	bne _080120F4
-	ldr r0, _080120FC @ =nullsub_11
+	ldr r0, _080120FC @ =SpriteCallbackDummy3
 	str r0, [r2, 0x1C]
 	strh r1, [r2, 0x30]
 _080120F4:
@@ -4385,22 +4385,22 @@ _080120F4:
 	bx r0
 	.align 2, 0
 _080120F8: .4byte gIntroSlideFlags
-_080120FC: .4byte nullsub_11
+_080120FC: .4byte SpriteCallbackDummy3
 	thumb_func_end oac_poke_ally_
 
 	thumb_func_start sub_8012100
 sub_8012100: @ 8012100
-	ldr r1, _08012108 @ =nullsub_11
+	ldr r1, _08012108 @ =SpriteCallbackDummy3
 	str r1, [r0, 0x1C]
 	bx lr
 	.align 2, 0
-_08012108: .4byte nullsub_11
+_08012108: .4byte SpriteCallbackDummy3
 	thumb_func_end sub_8012100
 
-	thumb_func_start nullsub_11
-nullsub_11: @ 801210C
+	thumb_func_start SpriteCallbackDummy3
+SpriteCallbackDummy3: @ 801210C
 	bx lr
-	thumb_func_end nullsub_11
+	thumb_func_end SpriteCallbackDummy3
 
 	thumb_func_start sub_8012110
 sub_8012110: @ 8012110
@@ -4474,7 +4474,7 @@ _08012186:
 	adds r6, r2, 0
 	cmp r0, 0
 	bne _0801223C
-	ldr r0, _080121D4 @ =SpriteCB_HealthBoxBounce
+	ldr r0, _080121D4 @ =SpriteCB_BounceEffect
 	bl CreateInvisibleSpriteWithCallback
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -4507,7 +4507,7 @@ _08012186:
 	b _0801220E
 	.align 2, 0
 _080121D0: .4byte gBattleSpritesDataPtr
-_080121D4: .4byte SpriteCB_HealthBoxBounce
+_080121D4: .4byte SpriteCB_BounceEffect
 _080121D8: .4byte gHealthboxSpriteIds
 _080121DC: .4byte gSprites
 _080121E0:
@@ -4662,8 +4662,8 @@ _08012300: .4byte gBattleSpritesDataPtr
 _08012304: .4byte gSprites
 	thumb_func_end EndBounceEffect
 
-	thumb_func_start SpriteCB_HealthBoxBounce
-SpriteCB_HealthBoxBounce: @ 8012308
+	thumb_func_start SpriteCB_BounceEffect
+SpriteCB_BounceEffect: @ 8012308
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	ldrh r0, [r4, 0x34]
@@ -4702,7 +4702,7 @@ _08012324:
 	bx r0
 	.align 2, 0
 _08012350: .4byte gSprites
-	thumb_func_end SpriteCB_HealthBoxBounce
+	thumb_func_end SpriteCB_BounceEffect
 
 	thumb_func_start sub_8012354
 sub_8012354: @ 8012354
@@ -4757,14 +4757,14 @@ sub_8012398: @ 8012398
 	ands r0, r1
 	cmp r0, 0
 	beq _080123B2
-	ldr r0, _080123B8 @ =nullsub_11
+	ldr r0, _080123B8 @ =SpriteCallbackDummy3
 	str r0, [r4, 0x1C]
 _080123B2:
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080123B8: .4byte nullsub_11
+_080123B8: .4byte SpriteCallbackDummy3
 	thumb_func_end sub_8012398
 
 	thumb_func_start nullsub_12
@@ -4775,7 +4775,7 @@ nullsub_12: @ 80123BC
 	thumb_func_start BeginBattleIntro
 BeginBattleIntro: @ 80123C0
 	push {lr}
-	bl sub_8012434
+	bl BattleStartClearSetData
 	ldr r1, _080123D8 @ =gBattleCommunication
 	movs r0, 0
 	strb r0, [r1, 0x1]
@@ -4790,8 +4790,8 @@ _080123DC: .4byte gBattleMainFunc
 _080123E0: .4byte BattleIntroGetMonsData
 	thumb_func_end BeginBattleIntro
 
-	thumb_func_start sub_80123E4
-sub_80123E4: @ 80123E4
+	thumb_func_start BattleMainCB1
+BattleMainCB1: @ 80123E4
 	push {r4,r5,lr}
 	ldr r0, _08012424 @ =gBattleMainFunc
 	ldr r0, [r0]
@@ -4829,10 +4829,10 @@ _08012424: .4byte gBattleMainFunc
 _08012428: .4byte gActiveBattler
 _0801242C: .4byte gBattlersCount
 _08012430: .4byte gBattlerControllerFuncs
-	thumb_func_end sub_80123E4
+	thumb_func_end BattleMainCB1
 
-	thumb_func_start sub_8012434
-sub_8012434: @ 8012434
+	thumb_func_start BattleStartClearSetData
+BattleStartClearSetData: @ 8012434
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -5208,7 +5208,7 @@ _08012750: .4byte gEnemyParty
 _08012754: .4byte gBaseStats
 _08012758: .4byte 0x000004fb
 _0801275C: .4byte gBattleResults
-	thumb_func_end sub_8012434
+	thumb_func_end BattleStartClearSetData
 
 	thumb_func_start SwitchInClearSetData
 SwitchInClearSetData: @ 8012760
@@ -6336,7 +6336,7 @@ BattleIntroPrepareBackgroundSlide: @ 8013020
 	ldrb r0, [r4]
 	bl MarkBattlerForControllerExec
 	ldr r1, _08013064 @ =gBattleMainFunc
-	ldr r0, _08013068 @ =sub_8013070
+	ldr r0, _08013068 @ =BattleIntroDrawTrainersOrMonsSprites
 	str r0, [r1]
 	ldr r0, _0801306C @ =gBattleCommunication
 	strb r5, [r0]
@@ -6350,12 +6350,12 @@ _08013058: .4byte gBattleControllerExecFlags
 _0801305C: .4byte gActiveBattler
 _08013060: .4byte gBattleTerrain
 _08013064: .4byte gBattleMainFunc
-_08013068: .4byte sub_8013070
+_08013068: .4byte BattleIntroDrawTrainersOrMonsSprites
 _0801306C: .4byte gBattleCommunication
 	thumb_func_end BattleIntroPrepareBackgroundSlide
 
-	thumb_func_start sub_8013070
-sub_8013070: @ 8013070
+	thumb_func_start BattleIntroDrawTrainersOrMonsSprites
+BattleIntroDrawTrainersOrMonsSprites: @ 8013070
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -6691,7 +6691,7 @@ _0801332C: .4byte gActiveBattler
 _08013330: .4byte gBattlersCount
 _08013334: .4byte gBattleMainFunc
 _08013338: .4byte BattleIntroDrawPartySummaryScreens
-	thumb_func_end sub_8013070
+	thumb_func_end BattleIntroDrawTrainersOrMonsSprites
 
 	thumb_func_start BattleIntroDrawPartySummaryScreens
 BattleIntroDrawPartySummaryScreens: @ 801333C
@@ -6909,7 +6909,7 @@ BattleIntroPrintTrainerWantsToBattle: @ 80134DC
 	movs r0, 0
 	bl PrepareStringBattle
 	ldr r1, _0801350C @ =gBattleMainFunc
-	ldr r0, _08013510 @ =sub_8013568
+	ldr r0, _08013510 @ =BattleIntroPrintWildMonAttacked
 	str r0, [r1]
 _080134FE:
 	pop {r0}
@@ -6918,7 +6918,7 @@ _080134FE:
 _08013504: .4byte gBattleControllerExecFlags
 _08013508: .4byte gActiveBattler
 _0801350C: .4byte gBattleMainFunc
-_08013510: .4byte sub_8013568
+_08013510: .4byte BattleIntroPrintWildMonAttacked
 	thumb_func_end BattleIntroPrintTrainerWantsToBattle
 
 	thumb_func_start sub_8013514
@@ -6929,7 +6929,7 @@ sub_8013514: @ 8013514
 	cmp r0, 0
 	bne _0801354A
 	ldr r1, _08013554 @ =gBattleMainFunc
-	ldr r0, _08013558 @ =sub_80136E4
+	ldr r0, _08013558 @ =BattleIntroPrintPlayerSendsOut
 	str r0, [r1]
 	movs r0, 0
 	movs r1, 0
@@ -6953,14 +6953,14 @@ _0801354A:
 	.align 2, 0
 _08013550: .4byte gBattleControllerExecFlags
 _08013554: .4byte gBattleMainFunc
-_08013558: .4byte sub_80136E4
+_08013558: .4byte BattleIntroPrintPlayerSendsOut
 _0801355C: .4byte gBattleTypeFlags
 _08013560: .4byte gBattleScripting
 _08013564: .4byte gUnknown_81D91A1
 	thumb_func_end sub_8013514
 
-	thumb_func_start sub_8013568
-sub_8013568: @ 8013568
+	thumb_func_start BattleIntroPrintWildMonAttacked
+BattleIntroPrintWildMonAttacked: @ 8013568
 	push {lr}
 	ldr r0, _08013590 @ =gBattleControllerExecFlags
 	ldr r0, [r0]
@@ -6974,7 +6974,7 @@ sub_8013568: @ 8013568
 	movs r0, 0x1
 	bl PrepareStringBattle
 	ldr r1, _08013594 @ =gBattleMainFunc
-	ldr r0, _08013598 @ =sub_801359C
+	ldr r0, _08013598 @ =BattleIntroOpponentSendsOutMonAnimation
 	str r0, [r1]
 _0801358A:
 	pop {r0}
@@ -6982,11 +6982,11 @@ _0801358A:
 	.align 2, 0
 _08013590: .4byte gBattleControllerExecFlags
 _08013594: .4byte gBattleMainFunc
-_08013598: .4byte sub_801359C
-	thumb_func_end sub_8013568
+_08013598: .4byte BattleIntroOpponentSendsOutMonAnimation
+	thumb_func_end BattleIntroPrintWildMonAttacked
 
-	thumb_func_start sub_801359C
-sub_801359C: @ 801359C
+	thumb_func_start BattleIntroOpponentSendsOutMonAnimation
+BattleIntroOpponentSendsOutMonAnimation: @ 801359C
 	push {r4,lr}
 	ldr r0, _08013614 @ =gBattleControllerExecFlags
 	ldr r1, [r0]
@@ -7039,7 +7039,7 @@ _080135F4:
 	bcc _080135B4
 _08013606:
 	ldr r1, _08013624 @ =gBattleMainFunc
-	ldr r0, _08013628 @ =sub_801362C
+	ldr r0, _08013628 @ =BattleIntroRecordMonsToDex
 	str r0, [r1]
 _0801360C:
 	pop {r4}
@@ -7051,11 +7051,11 @@ _08013618: .4byte gActiveBattler
 _0801361C: .4byte gBattlersCount
 _08013620: .4byte gBattleTypeFlags
 _08013624: .4byte gBattleMainFunc
-_08013628: .4byte sub_801362C
-	thumb_func_end sub_801359C
+_08013628: .4byte BattleIntroRecordMonsToDex
+	thumb_func_end BattleIntroOpponentSendsOutMonAnimation
 
-	thumb_func_start sub_801362C
-sub_801362C: @ 801362C
+	thumb_func_start BattleIntroRecordMonsToDex
+BattleIntroRecordMonsToDex: @ 801362C
 	push {r4-r7,lr}
 	ldr r0, _080136A4 @ =gBattleControllerExecFlags
 	ldr r1, [r0]
@@ -7110,7 +7110,7 @@ _08013684:
 	bcc _0801364C
 _08013696:
 	ldr r1, _080136BC @ =gBattleMainFunc
-	ldr r0, _080136C0 @ =sub_80136E4
+	ldr r0, _080136C0 @ =BattleIntroPrintPlayerSendsOut
 	str r0, [r1]
 _0801369C:
 	pop {r4-r7}
@@ -7124,8 +7124,8 @@ _080136B0: .4byte gBattleMons
 _080136B4: .4byte gBattleTypeFlags
 _080136B8: .4byte 0x0001aa02
 _080136BC: .4byte gBattleMainFunc
-_080136C0: .4byte sub_80136E4
-	thumb_func_end sub_801362C
+_080136C0: .4byte BattleIntroPrintPlayerSendsOut
+	thumb_func_end BattleIntroRecordMonsToDex
 
 	thumb_func_start sub_80136C4
 sub_80136C4: @ 80136C4
@@ -7135,7 +7135,7 @@ sub_80136C4: @ 80136C4
 	cmp r0, 0
 	bne _080136D4
 	ldr r1, _080136DC @ =gBattleMainFunc
-	ldr r0, _080136E0 @ =sub_80136E4
+	ldr r0, _080136E0 @ =BattleIntroPrintPlayerSendsOut
 	str r0, [r1]
 _080136D4:
 	pop {r0}
@@ -7143,11 +7143,11 @@ _080136D4:
 	.align 2, 0
 _080136D8: .4byte gBattleControllerExecFlags
 _080136DC: .4byte gBattleMainFunc
-_080136E0: .4byte sub_80136E4
+_080136E0: .4byte BattleIntroPrintPlayerSendsOut
 	thumb_func_end sub_80136C4
 
-	thumb_func_start sub_80136E4
-sub_80136E4: @ 80136E4
+	thumb_func_start BattleIntroPrintPlayerSendsOut
+BattleIntroPrintPlayerSendsOut: @ 80136E4
 	push {lr}
 	ldr r0, _08013718 @ =gBattleControllerExecFlags
 	ldr r0, [r0]
@@ -7168,7 +7168,7 @@ sub_80136E4: @ 80136E4
 	bl PrepareStringBattle
 _0801370C:
 	ldr r1, _08013720 @ =gBattleMainFunc
-	ldr r0, _08013724 @ =sub_8013728
+	ldr r0, _08013724 @ =BattleIntroPlayerSendsOutMonAnimation
 	str r0, [r1]
 _08013712:
 	pop {r0}
@@ -7177,11 +7177,11 @@ _08013712:
 _08013718: .4byte gBattleControllerExecFlags
 _0801371C: .4byte gBattleTypeFlags
 _08013720: .4byte gBattleMainFunc
-_08013724: .4byte sub_8013728
-	thumb_func_end sub_80136E4
+_08013724: .4byte BattleIntroPlayerSendsOutMonAnimation
+	thumb_func_end BattleIntroPrintPlayerSendsOut
 
-	thumb_func_start sub_8013728
-sub_8013728: @ 8013728
+	thumb_func_start BattleIntroPlayerSendsOutMonAnimation
+BattleIntroPlayerSendsOutMonAnimation: @ 8013728
 	push {r4,lr}
 	ldr r0, _080137B4 @ =gBattleControllerExecFlags
 	ldr r1, [r0]
@@ -7244,7 +7244,7 @@ _08013790:
 	adds r0, 0xB6
 	strb r1, [r0]
 	ldr r1, _080137C8 @ =gBattleMainFunc
-	ldr r0, _080137CC @ =sub_801385C
+	ldr r0, _080137CC @ =TryDoEventsBeforeFirstTurn
 	str r0, [r1]
 _080137AC:
 	pop {r4}
@@ -7257,8 +7257,8 @@ _080137BC: .4byte gBattlersCount
 _080137C0: .4byte gBattleTypeFlags
 _080137C4: .4byte gBattleStruct
 _080137C8: .4byte gBattleMainFunc
-_080137CC: .4byte sub_801385C
-	thumb_func_end sub_8013728
+_080137CC: .4byte TryDoEventsBeforeFirstTurn
+	thumb_func_end BattleIntroPlayerSendsOutMonAnimation
 
 	thumb_func_start sub_80137D0
 sub_80137D0: @ 80137D0
@@ -7313,7 +7313,7 @@ _0801381E:
 	adds r0, 0xB6
 	strb r1, [r0]
 	ldr r1, _08013854 @ =gBattleMainFunc
-	ldr r0, _08013858 @ =sub_801385C
+	ldr r0, _08013858 @ =TryDoEventsBeforeFirstTurn
 	str r0, [r1]
 _0801383A:
 	pop {r4,r5}
@@ -7326,11 +7326,11 @@ _08013848: .4byte gBattlersCount
 _0801384C: .4byte gBattlerPartyIndexes
 _08013850: .4byte gBattleStruct
 _08013854: .4byte gBattleMainFunc
-_08013858: .4byte sub_801385C
+_08013858: .4byte TryDoEventsBeforeFirstTurn
 	thumb_func_end sub_80137D0
 
-	thumb_func_start sub_801385C
-sub_801385C: @ 801385C
+	thumb_func_start TryDoEventsBeforeFirstTurn
+TryDoEventsBeforeFirstTurn: @ 801385C
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -7599,7 +7599,7 @@ _08013A32:
 	ldrb r1, [r1]
 	strb r1, [r0]
 	ldr r1, _08013B00 @ =gBattleMainFunc
-	ldr r0, _08013B04 @ =sub_8014040
+	ldr r0, _08013B04 @ =HandleTurnActionSelectionState
 	str r0, [r1]
 	bl ResetSentPokesToOpponentValue
 	ldr r1, _08013B08 @ =gBattleCommunication
@@ -7656,7 +7656,7 @@ _08013AA6:
 	strb r1, [r0, 0x3]
 	strb r1, [r7]
 	bl Random
-	ldr r1, _08013B18 @ =gUnknown_2023E80
+	ldr r1, _08013B18 @ =gRandomTurnNumber
 	strh r0, [r1]
 _08013ADA:
 	add sp, 0x8
@@ -7674,16 +7674,16 @@ _08013AF4: .4byte gChosenActionByBattler
 _08013AF8: .4byte gChosenMoveByBattler
 _08013AFC: .4byte gAbsentBattlerFlags
 _08013B00: .4byte gBattleMainFunc
-_08013B04: .4byte sub_8014040
+_08013B04: .4byte HandleTurnActionSelectionState
 _08013B08: .4byte gBattleCommunication
 _08013B0C: .4byte gBattleScripting
 _08013B10: .4byte gMoveResultFlags
 _08013B14: .4byte gBattleMons
-_08013B18: .4byte gUnknown_2023E80
-	thumb_func_end sub_801385C
+_08013B18: .4byte gRandomTurnNumber
+	thumb_func_end TryDoEventsBeforeFirstTurn
 
-	thumb_func_start sub_8013B1C
-sub_8013B1C: @ 8013B1C
+	thumb_func_start HandleEndTurn_ContinueBattle
+HandleEndTurn_ContinueBattle: @ 8013B1C
 	push {r4-r6,lr}
 	ldr r0, _08013BB4 @ =gBattleControllerExecFlags
 	ldr r0, [r0]
@@ -7772,7 +7772,7 @@ _08013BC4: .4byte gBattleCommunication
 _08013BC8: .4byte gBattleMons
 _08013BCC: .4byte gBattleStruct
 _08013BD0: .4byte gMoveResultFlags
-	thumb_func_end sub_8013B1C
+	thumb_func_end HandleEndTurn_ContinueBattle
 
 	thumb_func_start BattleTurnPassed
 BattleTurnPassed: @ 8013BD4
@@ -7886,7 +7886,7 @@ _08013CBC:
 	mov r10, r1
 	ldr r0, _08013D40 @ =gAbsentBattlerFlags
 	mov r12, r0
-	ldr r1, _08013D44 @ =sub_8014040
+	ldr r1, _08013D44 @ =HandleTurnActionSelectionState
 	mov r9, r1
 	ldrb r0, [r4]
 	cmp r2, r0
@@ -7928,7 +7928,7 @@ _08013CF8:
 	mov r1, r10
 	str r0, [r1]
 	bl Random
-	ldr r1, _08013D50 @ =gUnknown_2023E80
+	ldr r1, _08013D50 @ =gRandomTurnNumber
 	strh r0, [r1]
 _08013D20:
 	pop {r3-r5}
@@ -7944,10 +7944,10 @@ _08013D34: .4byte gBattlersCount
 _08013D38: .4byte gBattleStruct
 _08013D3C: .4byte gBattleMainFunc
 _08013D40: .4byte gAbsentBattlerFlags
-_08013D44: .4byte sub_8014040
+_08013D44: .4byte HandleTurnActionSelectionState
 _08013D48: .4byte gChosenActionByBattler
 _08013D4C: .4byte gChosenMoveByBattler
-_08013D50: .4byte gUnknown_2023E80
+_08013D50: .4byte gRandomTurnNumber
 	thumb_func_end BattleTurnPassed
 
 	thumb_func_start IsRunningFromBattleImpossible
@@ -8327,8 +8327,8 @@ _08014032:
 _0801403C: .4byte gUnknown_203B0DC
 	thumb_func_end sub_8013F6C
 
-	thumb_func_start sub_8014040
-sub_8014040: @ 8014040
+	thumb_func_start HandleTurnActionSelectionState
+HandleTurnActionSelectionState: @ 8014040
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -8753,7 +8753,7 @@ _080143D4:
 	ldrb r0, [r3]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _0801441C @ =gUnknown_81D96A4
+	ldr r1, _0801441C @ =BattleScript_ActionSelectionItemsCantBeUsed
 	str r1, [r0]
 	ldr r0, _08014420 @ =gBattleCommunication
 	ldrb r1, [r3]
@@ -8775,7 +8775,7 @@ _080143D4:
 _08014410: .4byte gBattleTypeFlags
 _08014414: .4byte 0x00000902
 _08014418: .4byte gSelectionBattleScripts
-_0801441C: .4byte gUnknown_81D96A4
+_0801441C: .4byte BattleScript_ActionSelectionItemsCantBeUsed
 _08014420: .4byte gBattleCommunication
 _08014424: .4byte gBattleStruct
 _08014428:
@@ -9777,7 +9777,7 @@ _08014C68:
 	cmp r0, r2
 	bne _08014C78
 	ldr r1, _08014C9C @ =gBattleMainFunc
-	ldr r0, _08014CA0 @ =sub_80150A8
+	ldr r0, _08014CA0 @ =SetActionsAndBattlersTurnOrder
 	str r0, [r1]
 _08014C78:
 	add sp, 0x1C
@@ -9795,8 +9795,8 @@ _08014C90: .4byte gActiveBattler
 _08014C94: .4byte gBattleCommunication
 _08014C98: .4byte gBattlersCount
 _08014C9C: .4byte gBattleMainFunc
-_08014CA0: .4byte sub_80150A8
-	thumb_func_end sub_8014040
+_08014CA0: .4byte SetActionsAndBattlersTurnOrder
+	thumb_func_end HandleTurnActionSelectionState
 
 	thumb_func_start SwapTurnOrder
 SwapTurnOrder: @ 8014CA4
@@ -10029,7 +10029,7 @@ _08014E46:
 _08014E64:
 	cmp r6, 0x1A
 	bne _08014E80
-	ldr r0, _08014ED0 @ =gUnknown_2023E80
+	ldr r0, _08014ED0 @ =gRandomTurnNumber
 	ldrh r4, [r0]
 	lsls r0, r5, 16
 	subs r0, r5
@@ -10078,7 +10078,7 @@ _08014E80:
 _08014EC4: .4byte gBattleTypeFlags
 _08014EC8: .4byte 0x00000822
 _08014ECC: .4byte gBattleMons
-_08014ED0: .4byte gUnknown_2023E80
+_08014ED0: .4byte gRandomTurnNumber
 _08014ED4: .4byte gStatStageRatios
 _08014ED8: .4byte gEnigmaBerries
 _08014EDC:
@@ -10134,7 +10134,7 @@ _08014F26:
 _08014F42:
 	cmp r6, 0x1A
 	bne _08014F5C
-	ldr r0, _08014F74 @ =gUnknown_2023E80
+	ldr r0, _08014F74 @ =gRandomTurnNumber
 	ldrh r4, [r0]
 	lsls r0, r5, 16
 	subs r0, r5
@@ -10154,7 +10154,7 @@ _08014F5C:
 _08014F68: .4byte gBattleTypeFlags
 _08014F6C: .4byte 0x00000822
 _08014F70: .4byte gBattleMons
-_08014F74: .4byte gUnknown_2023E80
+_08014F74: .4byte gRandomTurnNumber
 _08014F78:
 	ldr r0, _08014F98 @ =gChosenActionByBattler
 	mov r3, r9
@@ -10316,8 +10316,8 @@ _08015096:
 	bx r1
 	thumb_func_end GetWhoStrikesFirst
 
-	thumb_func_start sub_80150A8
-sub_80150A8: @ 80150A8
+	thumb_func_start SetActionsAndBattlersTurnOrder
+SetActionsAndBattlersTurnOrder: @ 80150A8
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -10640,7 +10640,7 @@ _08015320: .4byte gBattlersCount
 _08015324: .4byte gBattleMainFunc
 _08015328: .4byte CheckFocusPunch_ClearVarsBeforeTurnStarts
 _0801532C: .4byte gBattleStruct
-	thumb_func_end sub_80150A8
+	thumb_func_end SetActionsAndBattlersTurnOrder
 
 	thumb_func_start TurnValuesCleanUp
 TurnValuesCleanUp: @ 8015330
@@ -10985,7 +10985,7 @@ _080155D8:
 	ldr r4, _08015628 @ =gCurrentTurnActionNumber
 	ldrb r1, [r4]
 	strb r1, [r0]
-	ldr r1, _0801562C @ =gUnknown_8250038
+	ldr r1, _0801562C @ =sTurnActionsFuncsTable
 	ldrb r0, [r2]
 	lsls r0, 2
 	adds r0, r1
@@ -11002,7 +11002,7 @@ _080155D8:
 	ands r0, r1
 	str r0, [r2]
 	ldr r3, _0801563C @ =gBattleMainFunc
-	ldr r2, _08015640 @ =gUnknown_8250070
+	ldr r2, _08015640 @ =sEndTurnFuncsTable
 	ldrb r1, [r6]
 	movs r0, 0x7F
 	ands r0, r1
@@ -11016,12 +11016,12 @@ _0801561C: .4byte gBattleOutcome
 _08015620: .4byte gCurrentActionFuncId
 _08015624: .4byte gBattleStruct
 _08015628: .4byte gCurrentTurnActionNumber
-_0801562C: .4byte gUnknown_8250038
+_0801562C: .4byte sTurnActionsFuncsTable
 _08015630: .4byte gBattlersCount
 _08015634: .4byte gHitMarker
 _08015638: .4byte 0xffefffff
 _0801563C: .4byte gBattleMainFunc
-_08015640: .4byte gUnknown_8250070
+_08015640: .4byte sEndTurnFuncsTable
 _08015644:
 	ldr r0, [r5]
 	adds r0, 0x4B
@@ -11045,8 +11045,8 @@ _08015668: .4byte 0xfffffdff
 _0801566C: .4byte 0xfff7ffff
 	thumb_func_end RunTurnActionsFunctions
 
-	thumb_func_start sub_8015670
-sub_8015670: @ 8015670
+	thumb_func_start HandleEndTurn_BattleWon
+HandleEndTurn_BattleWon: @ 8015670
 	push {r4,lr}
 	ldr r1, _080156A8 @ =gCurrentActionFuncId
 	movs r0, 0
@@ -11155,7 +11155,7 @@ _0801576C:
 	str r0, [r1]
 _0801576E:
 	ldr r1, _08015784 @ =gBattleMainFunc
-	ldr r0, _08015788 @ =sub_8015910
+	ldr r0, _08015788 @ =HandleEndTurn_FinishBattle
 	str r0, [r1]
 	pop {r4}
 	pop {r0}
@@ -11164,11 +11164,11 @@ _0801576E:
 _0801577C: .4byte gBattlescriptCurrInstr
 _08015780: .4byte gUnknown_81D8803
 _08015784: .4byte gBattleMainFunc
-_08015788: .4byte sub_8015910
-	thumb_func_end sub_8015670
+_08015788: .4byte HandleEndTurn_FinishBattle
+	thumb_func_end HandleEndTurn_BattleWon
 
-	thumb_func_start sub_801578C
-sub_801578C: @ 801578C
+	thumb_func_start HandleEndTurn_BattleLost
+HandleEndTurn_BattleLost: @ 801578C
 	push {r4,lr}
 	ldr r1, _080157C4 @ =gCurrentActionFuncId
 	movs r0, 0
@@ -11247,7 +11247,7 @@ _0801582A:
 	str r0, [r1]
 _08015830:
 	ldr r1, _08015848 @ =gBattleMainFunc
-	ldr r0, _0801584C @ =sub_8015910
+	ldr r0, _0801584C @ =HandleEndTurn_FinishBattle
 	str r0, [r1]
 	pop {r4}
 	pop {r0}
@@ -11257,11 +11257,11 @@ _0801583C: .4byte gBattleCommunication
 _08015840: .4byte gBattlescriptCurrInstr
 _08015844: .4byte gUnknown_81D8806
 _08015848: .4byte gBattleMainFunc
-_0801584C: .4byte sub_8015910
-	thumb_func_end sub_801578C
+_0801584C: .4byte HandleEndTurn_FinishBattle
+	thumb_func_end HandleEndTurn_BattleLost
 
-	thumb_func_start sub_8015850
-sub_8015850: @ 8015850
+	thumb_func_start HandleEndTurn_RanFromBattle
+HandleEndTurn_RanFromBattle: @ 8015850
 	push {lr}
 	ldr r1, _08015878 @ =gCurrentActionFuncId
 	movs r0, 0
@@ -11300,7 +11300,7 @@ _0801589C:
 _080158A0:
 	str r0, [r1]
 	ldr r1, _080158B4 @ =gBattleMainFunc
-	ldr r0, _080158B8 @ =sub_8015910
+	ldr r0, _080158B8 @ =HandleEndTurn_FinishBattle
 	str r0, [r1]
 	pop {r0}
 	bx r0
@@ -11308,11 +11308,11 @@ _080158A0:
 _080158AC: .4byte gBattlescriptCurrInstr
 _080158B0: .4byte gUnknown_81D890F
 _080158B4: .4byte gBattleMainFunc
-_080158B8: .4byte sub_8015910
-	thumb_func_end sub_8015850
+_080158B8: .4byte HandleEndTurn_FinishBattle
+	thumb_func_end HandleEndTurn_RanFromBattle
 
-	thumb_func_start sub_80158BC
-sub_80158BC: @ 80158BC
+	thumb_func_start HandleEndTurn_MonFled
+HandleEndTurn_MonFled: @ 80158BC
 	ldr r1, _080158F0 @ =gCurrentActionFuncId
 	movs r0, 0
 	strb r0, [r1]
@@ -11336,7 +11336,7 @@ sub_80158BC: @ 80158BC
 	ldr r0, _08015904 @ =gUnknown_81D891D
 	str r0, [r1]
 	ldr r1, _08015908 @ =gBattleMainFunc
-	ldr r0, _0801590C @ =sub_8015910
+	ldr r0, _0801590C @ =HandleEndTurn_FinishBattle
 	str r0, [r1]
 	bx lr
 	.align 2, 0
@@ -11347,11 +11347,11 @@ _080158FC: .4byte gBattlerPartyIndexes
 _08015900: .4byte gBattlescriptCurrInstr
 _08015904: .4byte gUnknown_81D891D
 _08015908: .4byte gBattleMainFunc
-_0801590C: .4byte sub_8015910
-	thumb_func_end sub_80158BC
+_0801590C: .4byte HandleEndTurn_FinishBattle
+	thumb_func_end HandleEndTurn_MonFled
 
-	thumb_func_start sub_8015910
-sub_8015910: @ 8015910
+	thumb_func_start HandleEndTurn_FinishBattle
+HandleEndTurn_FinishBattle: @ 8015910
 	push {r4-r7,lr}
 	ldr r0, _08015974 @ =gCurrentActionFuncId
 	ldrb r0, [r0]
@@ -11446,7 +11446,7 @@ _080159D0:
 	movs r0, 0x5
 	bl FadeOutMapMusic
 	ldr r1, _080159F4 @ =gBattleMainFunc
-	ldr r0, _080159F8 @ =sub_8015A30
+	ldr r0, _080159F8 @ =FreeResetData_ReturnToOvOrDoEvolutions
 	str r0, [r1]
 	ldr r1, _080159FC @ =gUnknown_300537C
 	ldr r0, _08015A00 @ =BattleMainCB2
@@ -11456,7 +11456,7 @@ _080159D0:
 _080159EC: .4byte gBattlersCount
 _080159F0: .4byte gBattleTypeFlags
 _080159F4: .4byte gBattleMainFunc
-_080159F8: .4byte sub_8015A30
+_080159F8: .4byte FreeResetData_ReturnToOvOrDoEvolutions
 _080159FC: .4byte gUnknown_300537C
 _08015A00: .4byte BattleMainCB2
 _08015A04:
@@ -11480,10 +11480,10 @@ _08015A1E:
 _08015A24: .4byte gBattleControllerExecFlags
 _08015A28: .4byte gBattleScriptingCommandsTable
 _08015A2C: .4byte gBattlescriptCurrInstr
-	thumb_func_end sub_8015910
+	thumb_func_end HandleEndTurn_FinishBattle
 
-	thumb_func_start sub_8015A30
-sub_8015A30: @ 8015A30
+	thumb_func_start FreeResetData_ReturnToOvOrDoEvolutions
+FreeResetData_ReturnToOvOrDoEvolutions: @ 8015A30
 	push {lr}
 	ldr r0, _08015A58 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
@@ -11512,7 +11512,7 @@ _08015A64: .4byte gBattleMainFunc
 _08015A68: .4byte ReturnFromBattleToOverworld
 _08015A6C:
 	ldr r1, _08015A94 @ =gBattleMainFunc
-	ldr r0, _08015A98 @ =sub_8015AA0
+	ldr r0, _08015A98 @ =TryEvolvePokemon
 _08015A70:
 	str r0, [r1]
 	bl FreeAllWindowBuffers
@@ -11530,12 +11530,12 @@ _08015A8E:
 	bx r0
 	.align 2, 0
 _08015A94: .4byte gBattleMainFunc
-_08015A98: .4byte sub_8015AA0
+_08015A98: .4byte TryEvolvePokemon
 _08015A9C: .4byte gBattleTypeFlags
-	thumb_func_end sub_8015A30
+	thumb_func_end FreeResetData_ReturnToOvOrDoEvolutions
 
-	thumb_func_start sub_8015AA0
-sub_8015AA0: @ 8015AA0
+	thumb_func_start TryEvolvePokemon
+TryEvolvePokemon: @ 8015AA0
 	push {r4,r5,lr}
 	ldr r0, _08015AF4 @ =gLeveledUpInBattle
 	ldrb r1, [r0]
@@ -11569,7 +11569,7 @@ _08015AAE:
 	cmp r2, 0
 	beq _08015B08
 	ldr r0, _08015B00 @ =gBattleMainFunc
-	ldr r1, _08015B04 @ =sub_8015B30
+	ldr r1, _08015B04 @ =WaitForEvoSceneToFinish
 	str r1, [r0]
 	lsls r3, r5, 24
 	lsrs r3, 24
@@ -11583,7 +11583,7 @@ _08015AF4: .4byte gLeveledUpInBattle
 _08015AF8: .4byte gBitTable
 _08015AFC: .4byte gPlayerParty
 _08015B00: .4byte gBattleMainFunc
-_08015B04: .4byte sub_8015B30
+_08015B04: .4byte WaitForEvoSceneToFinish
 _08015B08:
 	adds r5, 0x1
 	ldr r3, _08015B24 @ =gLeveledUpInBattle
@@ -11604,10 +11604,10 @@ _08015B1C:
 _08015B24: .4byte gLeveledUpInBattle
 _08015B28: .4byte gBattleMainFunc
 _08015B2C: .4byte ReturnFromBattleToOverworld
-	thumb_func_end sub_8015AA0
+	thumb_func_end TryEvolvePokemon
 
-	thumb_func_start sub_8015B30
-sub_8015B30: @ 8015B30
+	thumb_func_start WaitForEvoSceneToFinish
+WaitForEvoSceneToFinish: @ 8015B30
 	push {lr}
 	ldr r0, _08015B48 @ =gMain
 	ldr r1, [r0, 0x4]
@@ -11615,7 +11615,7 @@ sub_8015B30: @ 8015B30
 	cmp r1, r0
 	bne _08015B42
 	ldr r1, _08015B50 @ =gBattleMainFunc
-	ldr r0, _08015B54 @ =sub_8015AA0
+	ldr r0, _08015B54 @ =TryEvolvePokemon
 	str r0, [r1]
 _08015B42:
 	pop {r0}
@@ -11624,8 +11624,8 @@ _08015B42:
 _08015B48: .4byte gMain
 _08015B4C: .4byte BattleMainCB2
 _08015B50: .4byte gBattleMainFunc
-_08015B54: .4byte sub_8015AA0
-	thumb_func_end sub_8015B30
+_08015B54: .4byte TryEvolvePokemon
+	thumb_func_end WaitForEvoSceneToFinish
 
 	thumb_func_start ReturnFromBattleToOverworld
 ReturnFromBattleToOverworld: @ 8015B58
@@ -11787,8 +11787,8 @@ _08015C98: .4byte gBattleScriptingCommandsTable
 _08015C9C: .4byte gBattlescriptCurrInstr
 	thumb_func_end RunBattleScriptCommands
 
-	thumb_func_start sub_8015CA0
-sub_8015CA0: @ 8015CA0
+	thumb_func_start HandleAction_UseMove
+HandleAction_UseMove: @ 8015CA0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -12598,10 +12598,10 @@ _08016364: .4byte gBattleScriptsForMoveEffects
 _08016368: .4byte gBattleMoves
 _0801636C: .4byte gCurrentMove
 _08016370: .4byte gCurrentActionFuncId
-	thumb_func_end sub_8015CA0
+	thumb_func_end HandleAction_UseMove
 
-	thumb_func_start sub_8016374
-sub_8016374: @ 8016374
+	thumb_func_start HandleAction_Switch
+HandleAction_Switch: @ 8016374
 	push {r4,lr}
 	ldr r3, _080163E0 @ =gBattlerAttacker
 	ldr r1, _080163E4 @ =gBattlerByTurnOrder
@@ -12672,10 +12672,10 @@ _08016408: .4byte gBattlescriptCurrInstr
 _0801640C: .4byte gUnknown_81D894D
 _08016410: .4byte gCurrentActionFuncId
 _08016414: .4byte gBattleResults
-	thumb_func_end sub_8016374
+	thumb_func_end HandleAction_Switch
 
-	thumb_func_start sub_8016418
-sub_8016418: @ 8016418
+	thumb_func_start HandleAction_UseItem
+HandleAction_UseItem: @ 8016418
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -12714,7 +12714,7 @@ sub_8016418: @ 8016418
 	cmp r1, 0xC
 	bhi _0801649C
 	ldr r2, _08016494 @ =gBattlescriptCurrInstr
-	ldr r1, _08016498 @ =gUnknown_81D99B0
+	ldr r1, _08016498 @ =gBattlescriptsForBallThrow
 	ldrh r0, [r5]
 	lsls r0, 2
 	adds r0, r1
@@ -12731,7 +12731,7 @@ _08016488: .4byte gBattle_BG0_Y
 _0801648C: .4byte gLastUsedItem
 _08016490: .4byte gBattleBufferB
 _08016494: .4byte gBattlescriptCurrInstr
-_08016498: .4byte gUnknown_81D99B0
+_08016498: .4byte gBattlescriptsForBallThrow
 _0801649C:
 	adds r0, r3, 0
 	subs r0, 0x50
@@ -13053,7 +13053,7 @@ _08016738: .4byte gBattlerAttacker
 _0801673C: .4byte gBattlescriptCurrInstr
 _08016740: .4byte gUnknown_81D99E4
 _08016744: .4byte gCurrentActionFuncId
-	thumb_func_end sub_8016418
+	thumb_func_end HandleAction_UseItem
 
 	thumb_func_start TryRunFromBattle
 TryRunFromBattle: @ 8016748
@@ -13227,8 +13227,8 @@ _0801689C: .4byte gBattlersCount
 _080168A0: .4byte gBattleOutcome
 	thumb_func_end TryRunFromBattle
 
-	thumb_func_start sub_80168A4
-sub_80168A4: @ 80168A4
+	thumb_func_start HandleAction_Run
+HandleAction_Run: @ 80168A4
 	push {r4-r6,lr}
 	ldr r4, _080168F4 @ =gBattlerAttacker
 	ldr r1, _080168F8 @ =gBattlerByTurnOrder
@@ -13379,10 +13379,10 @@ _080169D8:
 	.align 2, 0
 _080169E0: .4byte gBattlersCount
 _080169E4: .4byte gBattleOutcome
-	thumb_func_end sub_80168A4
+	thumb_func_end HandleAction_Run
 
-	thumb_func_start sub_80169E8
-sub_80169E8: @ 80169E8
+	thumb_func_start HandleAction_WatchesCarefully
+HandleAction_WatchesCarefully: @ 80169E8
 	push {r4,r5,lr}
 	ldr r2, _08016A44 @ =gBattlerAttacker
 	ldr r1, _08016A48 @ =gBattlerByTurnOrder
@@ -13467,7 +13467,7 @@ _08016A98:
 	strb r5, [r0, 0x5]
 _08016A9C:
 	ldr r1, _08016AB4 @ =gBattlescriptCurrInstr
-	ldr r0, _08016AB8 @ =gUnknown_81D9A04
+	ldr r0, _08016AB8 @ =gBattlescriptsForSafariActions
 	ldr r0, [r0]
 	str r0, [r1]
 	ldr r1, _08016ABC @ =gCurrentActionFuncId
@@ -13479,12 +13479,12 @@ _08016A9C:
 	.align 2, 0
 _08016AB0: .4byte gBattleCommunication
 _08016AB4: .4byte gBattlescriptCurrInstr
-_08016AB8: .4byte gUnknown_81D9A04
+_08016AB8: .4byte gBattlescriptsForSafariActions
 _08016ABC: .4byte gCurrentActionFuncId
-	thumb_func_end sub_80169E8
+	thumb_func_end HandleAction_WatchesCarefully
 
-	thumb_func_start sub_8016AC0
-sub_8016AC0: @ 8016AC0
+	thumb_func_start HandleAction_SafariZoneBallThrow
+HandleAction_SafariZoneBallThrow: @ 8016AC0
 	ldr r2, _08016AF8 @ =gBattlerAttacker
 	ldr r1, _08016AFC @ =gBattlerByTurnOrder
 	ldr r0, _08016B00 @ =gCurrentTurnActionNumber
@@ -13505,7 +13505,7 @@ sub_8016AC0: @ 8016AC0
 	movs r0, 0x5
 	strh r0, [r1]
 	ldr r1, _08016B14 @ =gBattlescriptCurrInstr
-	ldr r0, _08016B18 @ =gUnknown_81D99B0
+	ldr r0, _08016B18 @ =gBattlescriptsForBallThrow
 	ldr r0, [r0, 0x14]
 	str r0, [r1]
 	ldr r1, _08016B1C @ =gCurrentActionFuncId
@@ -13521,12 +13521,12 @@ _08016B08: .4byte gBattle_BG0_Y
 _08016B0C: .4byte gNumSafariBalls
 _08016B10: .4byte gLastUsedItem
 _08016B14: .4byte gBattlescriptCurrInstr
-_08016B18: .4byte gUnknown_81D99B0
+_08016B18: .4byte gBattlescriptsForBallThrow
 _08016B1C: .4byte gCurrentActionFuncId
-	thumb_func_end sub_8016AC0
+	thumb_func_end HandleAction_SafariZoneBallThrow
 
-	thumb_func_start sub_8016B20
-sub_8016B20: @ 8016B20
+	thumb_func_start HandleAction_ThrowPokeblock
+HandleAction_ThrowPokeblock: @ 8016B20
 	push {r4-r7,lr}
 	ldr r2, _08016B9C @ =gBattlerAttacker
 	ldr r1, _08016BA0 @ =gBattlerByTurnOrder
@@ -13579,7 +13579,7 @@ _08016B66:
 	strb r0, [r1]
 _08016B86:
 	ldr r1, _08016BB4 @ =gBattlescriptCurrInstr
-	ldr r0, _08016BB8 @ =gUnknown_81D9A04
+	ldr r0, _08016BB8 @ =gBattlescriptsForSafariActions
 	ldr r0, [r0, 0x8]
 	str r0, [r1]
 	ldr r1, _08016BBC @ =gCurrentActionFuncId
@@ -13596,12 +13596,12 @@ _08016BA8: .4byte gBattle_BG0_X
 _08016BAC: .4byte gBattle_BG0_Y
 _08016BB0: .4byte gBattleStruct
 _08016BB4: .4byte gBattlescriptCurrInstr
-_08016BB8: .4byte gUnknown_81D9A04
+_08016BB8: .4byte gBattlescriptsForSafariActions
 _08016BBC: .4byte gCurrentActionFuncId
-	thumb_func_end sub_8016B20
+	thumb_func_end HandleAction_ThrowPokeblock
 
-	thumb_func_start sub_8016BC0
-sub_8016BC0: @ 8016BC0
+	thumb_func_start HandleAction_GoNear
+HandleAction_GoNear: @ 8016BC0
 	push {r4-r7,lr}
 	ldr r2, _08016C3C @ =gBattlerAttacker
 	ldr r1, _08016C40 @ =gBattlerByTurnOrder
@@ -13654,7 +13654,7 @@ _08016C06:
 	strb r0, [r1]
 _08016C26:
 	ldr r1, _08016C54 @ =gBattlescriptCurrInstr
-	ldr r0, _08016C58 @ =gUnknown_81D9A04
+	ldr r0, _08016C58 @ =gBattlescriptsForSafariActions
 	ldr r0, [r0, 0x4]
 	str r0, [r1]
 	ldr r1, _08016C5C @ =gCurrentActionFuncId
@@ -13671,12 +13671,12 @@ _08016C48: .4byte gBattle_BG0_X
 _08016C4C: .4byte gBattle_BG0_Y
 _08016C50: .4byte gBattleStruct
 _08016C54: .4byte gBattlescriptCurrInstr
-_08016C58: .4byte gUnknown_81D9A04
+_08016C58: .4byte gBattlescriptsForSafariActions
 _08016C5C: .4byte gCurrentActionFuncId
-	thumb_func_end sub_8016BC0
+	thumb_func_end HandleAction_GoNear
 
-	thumb_func_start HandleAction_SafriZoneRun
-HandleAction_SafriZoneRun: @ 8016C60
+	thumb_func_start HandleAction_SafariZoneRun
+HandleAction_SafariZoneRun: @ 8016C60
 	push {r4,lr}
 	ldr r2, _08016C88 @ =gBattlerAttacker
 	ldr r1, _08016C8C @ =gBattlerByTurnOrder
@@ -13702,10 +13702,10 @@ _08016C8C: .4byte gBattlerByTurnOrder
 _08016C90: .4byte gCurrentTurnActionNumber
 _08016C94: .4byte gBattlersCount
 _08016C98: .4byte gBattleOutcome
-	thumb_func_end HandleAction_SafriZoneRun
+	thumb_func_end HandleAction_SafariZoneRun
 
-	thumb_func_start HandleAction_Action9
-HandleAction_Action9: @ 8016C9C
+	thumb_func_start HandleAction_OldManBallThrow
+HandleAction_OldManBallThrow: @ 8016C9C
 	ldr r3, _08016CE8 @ =gBattlerAttacker
 	ldr r1, _08016CEC @ =gBattlerByTurnOrder
 	ldr r0, _08016CF0 @ =gCurrentTurnActionNumber
@@ -13733,7 +13733,7 @@ HandleAction_Action9: @ 8016C9C
 	movs r0, 0xFF
 	strb r0, [r1, 0x4]
 	ldr r1, _08016D04 @ =gBattlescriptCurrInstr
-	ldr r0, _08016D08 @ =gUnknown_81D9A04
+	ldr r0, _08016D08 @ =gBattlescriptsForSafariActions
 	ldr r0, [r0, 0xC]
 	str r0, [r1]
 	ldr r1, _08016D0C @ =gCurrentActionFuncId
@@ -13752,13 +13752,13 @@ _08016CF8: .4byte gBattle_BG0_Y
 _08016CFC: .4byte gBattleTextBuff1
 _08016D00: .4byte gBattlerPartyIndexes
 _08016D04: .4byte gBattlescriptCurrInstr
-_08016D08: .4byte gUnknown_81D9A04
+_08016D08: .4byte gBattlescriptsForSafariActions
 _08016D0C: .4byte gCurrentActionFuncId
 _08016D10: .4byte gActionsByTurnOrder
-	thumb_func_end HandleAction_Action9
+	thumb_func_end HandleAction_OldManBallThrow
 
-	thumb_func_start HandleAction_Action11
-HandleAction_Action11: @ 8016D14
+	thumb_func_start HandleAction_TryFinish
+HandleAction_TryFinish: @ 8016D14
 	push {lr}
 	bl HandleFaintedMonActions
 	lsls r0, 24
@@ -13778,7 +13778,7 @@ _08016D30:
 	.align 2, 0
 _08016D34: .4byte gBattleStruct
 _08016D38: .4byte gCurrentActionFuncId
-	thumb_func_end HandleAction_Action11
+	thumb_func_end HandleAction_TryFinish
 
 	thumb_func_start HandleAction_NothingIsFainted
 HandleAction_NothingIsFainted: @ 8016D3C

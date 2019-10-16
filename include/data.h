@@ -45,8 +45,8 @@ extern const u8 *const gBattleAnims_Special[];
 extern const union AnimCmd *const *const gTrainerBackAnimsPtrTable[];
 extern const union AnimCmd *const *const gTrainerFrontAnimsPtrTable[];
 
-extern const struct OamData gUnknown_824F010;
-extern const struct OamData gUnknown_824F018;
+extern const struct OamData gOamData_824F010;
+extern const struct OamData gOamData_824F018;
 extern const union AnimCmd *const gSpriteAnimTable_82349BC[];
 extern const union AffineAnimCmd *const gSpriteAffineAnimTable_82348C8[];
 extern const union AffineAnimCmd *const gSpriteAffineAnimTable_8234944[];

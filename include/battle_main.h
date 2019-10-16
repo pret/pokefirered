@@ -45,7 +45,7 @@ struct UnknownPokemonStruct4
 
 void CB2_InitBattle(void);
 void BattleMainCB2(void);
-void CB2_QuitRecordedBattle(void);
+void CB2_QuitPokeDudeBattle(void);
 void sub_8038528(struct Sprite* sprite);
 void sub_8038A04(void); // unused
 void VBlankCB_Battle(void);
@@ -53,7 +53,7 @@ void sub_801182C(struct Sprite *sprite);
 void sub_8011A1C(void);
 u32 sub_80391E0(u8 arrayId, u8 caseId);
 u32 sub_80397C4(u32 setId, u32 tableId);
-void oac_poke_opponent(struct Sprite *sprite);
+void SpriteCB_WildMon(struct Sprite *sprite);
 void SpriteCallbackDummy_2(struct Sprite *sprite);
 void sub_8039934(struct Sprite *sprite);
 void sub_8012098(struct Sprite *sprite);
@@ -81,7 +81,7 @@ u8 GetWhoStrikesFirst(u8 bank1, u8 bank2, bool8 ignoreChosenMoves);
 void RunBattleScriptCommands_PopCallbacksStack(void);
 void RunBattleScriptCommands(void);
 bool8 TryRunFromBattle(u8 bank);
-void sub_800FD9C(void);
+void CB2_InitBattle(void);
 void sub_80120C4(struct Sprite *);
 void sub_8012100(struct Sprite *);
 void nullsub_12(void);

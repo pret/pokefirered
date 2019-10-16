@@ -50,10 +50,10 @@ gBattle_WIN0H: @ 2022984
 gBattle_WIN0V: @ 2022986
 	.space 0x2
 
-gUnknown_2022988: @ 2022988
+gBattle_WIN1H: @ 2022988
 	.space 0x2
 
-gUnknown_202298A: @ 202298A
+gBattle_WIN1V: @ 202298A
 	.space 0x2
 
 gDisplayedStringBattle: @ 202298C
@@ -281,7 +281,7 @@ gPauseCounterBattle: @ 2023E7C
 gPaydayMoney: @ 2023E7E
 	.space 0x2
 
-gUnknown_2023E80: @ 2023E80
+gRandomTurnNumber: @ 2023E80
 	.space 0x2
 
 gBattleCommunication: @ 2023E82

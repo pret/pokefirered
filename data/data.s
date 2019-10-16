@@ -316,7 +316,7 @@ gUnknown_8248300:: @ 8248300
 gUnknown_8248318:: @ 8248318
 	.incbin "baserom.gba", 0x248318, 0x8
 
-gUnknown_8248320:: @ 8248320
+gBattleBgTemplates:: @ 8248320
 	.incbin "baserom.gba", 0x248320, 0x10
 
 gUnknown_8248330:: @ 8248330
@@ -327,73 +327,7 @@ gUnknown_824EE34:: @ 824EE34
 
 gUnknown_824EFC4:: @ 824EFC4
 	.incbin "baserom.gba", 0x24EFC4, 0x20
-
-gUnknown_824EFE4:: @ 824EFE4
-	.incbin "baserom.gba", 0x24EFE4, 0xC
-
-gUnknown_824EFF0:: @ 824EFF0
-	.incbin "baserom.gba", 0x24EFF0, 0x18
-
-gUnknown_824F008:: @ 824F008
-	.incbin "baserom.gba", 0x24F008, 0x8
-
-gUnknown_824F010:: @ 824F010
-	.incbin "baserom.gba", 0x24F010, 0x8
-
-gUnknown_824F018:: @ 824F018
-	.incbin "baserom.gba", 0x24F018, 0x8
-
-gUnknown_824F020:: @ 824F020
-	.incbin "baserom.gba", 0x24F020, 0x28
-
-gUnknown_824F048:: @ 824F048
-	.incbin "baserom.gba", 0x24F048, 0x8
-
-gTypeEffectiveness:: @ 824F050
-	.incbin "baserom.gba", 0x24F050, 0x150
-
-gTypeNames:: @ 824F1A0
-	.incbin "baserom.gba", 0x24F1A0, 0x80
-
-gTrainerMoneyTable:: @ 824F220
-	.incbin "baserom.gba", 0x24F220, 0x8E8
-
-gUnknown_824FB08:: @ 824FB08
-	.incbin "baserom.gba", 0x24FB08, 0x138
-
-gUnknown_824FC40:: @ 824FC40
-	.incbin "baserom.gba", 0x24FC40, 0x3F8
-
-gUnknown_8250038:: @ 8250038
-	.incbin "baserom.gba", 0x250038, 0x38
-
-gUnknown_8250070:: @ 8250070
-	.incbin "baserom.gba", 0x250070, 0x24
-
-gStatusConditionString_PoisonJpn:: @ 8250094
-	.incbin "baserom.gba", 0x250094, 0x8
-
-gStatusConditionString_SleepJpn:: @ 825009C
-	.incbin "baserom.gba", 0x25009C, 0x8
-
-gStatusConditionString_ParalysisJpn:: @ 82500A4
-	.incbin "baserom.gba", 0x2500A4, 0x8
-
-gStatusConditionString_BurnJpn:: @ 82500AC
-	.incbin "baserom.gba", 0x2500AC, 0x8
-
-gStatusConditionString_IceJpn:: @ 82500B4
-	.incbin "baserom.gba", 0x2500B4, 0x8
-
-gStatusConditionString_ConfusionJpn:: @ 82500BC
-	.incbin "baserom.gba", 0x2500BC, 0x8
-
-gStatusConditionString_LoveJpn:: @ 82500C4
-	.incbin "baserom.gba", 0x2500C4, 0x8
-
-gUnknown_82500CC:: @ 82500CC
-	.incbin "baserom.gba", 0x2500CC, 0x38
-
+	
 	.section .rodata.8260270
 
 gUnknown_8260270:: @ 8260270

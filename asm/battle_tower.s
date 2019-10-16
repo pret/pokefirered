@@ -2034,7 +2034,7 @@ sub_80E68C4: @ 80E68C4
 	ldr r1, _080E68F8 @ =sub_80E6854
 	str r1, [r0, 0x8]
 	bl CleanupOverworldWindowsAndTilemaps
-	ldr r0, _080E68FC @ =sub_800FD9C
+	ldr r0, _080E68FC @ =CB2_InitBattle
 	bl SetMainCallback2
 	adds r0, r4, 0
 	bl DestroyTask
@@ -2045,7 +2045,7 @@ _080E68EC:
 	.align 2, 0
 _080E68F4: .4byte gMain
 _080E68F8: .4byte sub_80E6854
-_080E68FC: .4byte sub_800FD9C
+_080E68FC: .4byte CB2_InitBattle
 	thumb_func_end sub_80E68C4
 
 	thumb_func_start sub_80E6900

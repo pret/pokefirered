@@ -424,7 +424,28 @@ gUnknown_83FE80C:: @ 83FE80C
 	.incbin "baserom.gba", 0x3FE80C, 0x10
 
 gUnknown_83FE81C:: @ 83FE81C
-	.incbin "baserom.gba", 0x3FE81C, 0x3D
+	.incbin "baserom.gba", 0x3FE81C, 0xE
+
+gText_Sleep:: @ 83FE82A
+	.incbin "baserom.gba", 0x3FE82A, 0x6
+
+gText_Poison:: @ 83FE830
+	.incbin "baserom.gba", 0x3FE830, 0x7
+
+gText_Burn:: @ 83FE837
+	.incbin "baserom.gba", 0x3FE837, 0x5
+
+gText_Paralysis:: @ 83FE83C
+	.incbin "baserom.gba", 0x3FE83C, 0xA
+
+gText_Ice:: @ 83FE846
+	.incbin "baserom.gba", 0x3FE846, 0x4
+
+gText_Confusion:: @ 83FE84A
+	.incbin "baserom.gba", 0x3FE84A, 0xA
+	
+gText_Love:: @ 83FE854
+	.incbin "baserom.gba", 0x3FE854, 0x5
 
 gUnknown_83FE859:: @ 83FE859
 	.incbin "baserom.gba", 0x3FE859, 0x3

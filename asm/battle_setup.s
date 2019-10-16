@@ -43,7 +43,7 @@ _0807F65E:
 	bne _0807F686
 	bl HelpSystem_Enable
 	bl CleanupOverworldWindowsAndTilemaps
-	ldr r0, _0807F68C @ =sub_800FD9C
+	ldr r0, _0807F68C @ =CB2_InitBattle
 	bl SetMainCallback2
 	bl sub_806D7E8
 	bl ClearPoisonStepCounter
@@ -54,7 +54,7 @@ _0807F686:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807F68C: .4byte sub_800FD9C
+_0807F68C: .4byte CB2_InitBattle
 	thumb_func_end sub_807F620
 
 	thumb_func_start sub_807F690

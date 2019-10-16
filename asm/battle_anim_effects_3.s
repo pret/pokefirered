@@ -1481,11 +1481,11 @@ sub_80DEDD8: @ 80DEDD8
 	ldr r1, _080DEE14 @ =0x00001f3f
 	movs r0, 0x48
 	bl SetGpuReg
-	ldr r1, _080DEE18 @ =gUnknown_2022988
+	ldr r1, _080DEE18 @ =gBattle_WIN1H
 	ldr r2, _080DEE1C @ =0x000098f0
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r1, _080DEE20 @ =gUnknown_202298A
+	ldr r1, _080DEE20 @ =gBattle_WIN1V
 	movs r0, 0xA0
 	strh r0, [r1]
 	ldr r0, _080DEE24 @ =gBattle_WIN0H
@@ -1499,19 +1499,19 @@ sub_80DEDD8: @ 80DEDD8
 	b _080DEE5C
 	.align 2, 0
 _080DEE14: .4byte 0x00001f3f
-_080DEE18: .4byte gUnknown_2022988
+_080DEE18: .4byte gBattle_WIN1H
 _080DEE1C: .4byte 0x000098f0
-_080DEE20: .4byte gUnknown_202298A
+_080DEE20: .4byte gBattle_WIN1V
 _080DEE24: .4byte gBattle_WIN0H
 _080DEE28: .4byte gBattle_WIN0V
 _080DEE2C:
 	ldr r1, _080DEE68 @ =0x00001f3f
 	movs r0, 0x48
 	bl SetGpuReg
-	ldr r1, _080DEE6C @ =gUnknown_2022988
+	ldr r1, _080DEE6C @ =gBattle_WIN1H
 	movs r0, 0xF0
 	strh r0, [r1]
-	ldr r4, _080DEE70 @ =gUnknown_202298A
+	ldr r4, _080DEE70 @ =gBattle_WIN1V
 	ldr r1, _080DEE74 @ =0x000078a0
 	adds r0, r1, 0
 	strh r0, [r4]
@@ -1533,8 +1533,8 @@ _080DEE5C:
 	bx r0
 	.align 2, 0
 _080DEE68: .4byte 0x00001f3f
-_080DEE6C: .4byte gUnknown_2022988
-_080DEE70: .4byte gUnknown_202298A
+_080DEE6C: .4byte gBattle_WIN1H
+_080DEE70: .4byte gBattle_WIN1V
 _080DEE74: .4byte 0x000078a0
 	thumb_func_end sub_80DEDD8
 
@@ -1546,10 +1546,10 @@ sub_80DEE78: @ 80DEE78
 	ldr r1, _080DEEB0 @ =0x00003f3f
 	movs r0, 0x48
 	bl SetGpuReg
-	ldr r0, _080DEEB4 @ =gUnknown_2022988
+	ldr r0, _080DEEB4 @ =gBattle_WIN1H
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, _080DEEB8 @ =gUnknown_202298A
+	ldr r0, _080DEEB8 @ =gBattle_WIN1V
 	strh r1, [r0]
 	bl IsContest
 	lsls r0, 24
@@ -1567,8 +1567,8 @@ _080DEEA4:
 	bx r0
 	.align 2, 0
 _080DEEB0: .4byte 0x00003f3f
-_080DEEB4: .4byte gUnknown_2022988
-_080DEEB8: .4byte gUnknown_202298A
+_080DEEB4: .4byte gBattle_WIN1H
+_080DEEB8: .4byte gBattle_WIN1V
 	thumb_func_end sub_80DEE78
 
 	thumb_func_start sub_80DEEBC

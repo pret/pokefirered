@@ -179,7 +179,7 @@ sub_800F324: @ 800F324
 	push {lr}
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
-	ldr r1, _0800F344 @ =gUnknown_8248320
+	ldr r1, _0800F344 @ =gBattleBgTemplates
 	movs r0, 0
 	movs r2, 0x4
 	bl InitBgsFromTemplates
@@ -189,7 +189,7 @@ sub_800F324: @ 800F324
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800F344: .4byte gUnknown_8248320
+_0800F344: .4byte gBattleBgTemplates
 _0800F348: .4byte gUnknown_8248330
 	thumb_func_end sub_800F324
 

@@ -4033,13 +4033,13 @@ _081366B8:
 	adds r0, r1
 	movs r1, 0xD
 	muls r1, r4
-	ldr r2, _081367A0 @ =gUnknown_824FC40
+	ldr r2, _081367A0 @ =gAbilityNames
 	adds r1, r2
 	bl StringCopy
 	ldr r0, [r6]
 	ldr r2, _081367A4 @ =0x000031cc
 	adds r0, r2
-	ldr r1, _081367A8 @ =gUnknown_824FB08
+	ldr r1, _081367A8 @ =gAbilityDescriptionPointers
 	lsls r4, 2
 	adds r4, r1
 	ldr r1, [r4]
@@ -4088,9 +4088,9 @@ _08136790: .4byte gExperienceTables
 _08136794: .4byte gBaseStats
 _08136798: .4byte 0x000031b0
 _0813679C: .4byte 0x000031bc
-_081367A0: .4byte gUnknown_824FC40
+_081367A0: .4byte gAbilityNames
 _081367A4: .4byte 0x000031cc
-_081367A8: .4byte gUnknown_824FB08
+_081367A8: .4byte gAbilityDescriptionPointers
 _081367AC: .4byte 0x0000326c
 	thumb_func_end sub_8136350
 

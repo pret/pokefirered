@@ -1374,7 +1374,7 @@ void task00_mystery_gift(u8 taskId)
         }
         break;
     case 13:
-        if (IsRfuTaskFinished())
+        if (IsLinkRfuTaskFinished())
         {
             DestroyWirelessStatusIndicatorSprite();
             data->state = 14;
@@ -1650,7 +1650,7 @@ void task00_mystery_gift(u8 taskId)
         data->state = 34;
         break;
     case 34:
-        if (IsRfuTaskFinished())
+        if (IsLinkRfuTaskFinished())
         {
             DestroyWirelessStatusIndicatorSprite();
             data->state = 35;

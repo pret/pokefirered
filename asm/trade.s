@@ -422,7 +422,7 @@ _0804C9B0:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804C9E8
-	bl IsRfuTaskFinished
+	bl IsLinkRfuTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _0804C9C4
@@ -1832,7 +1832,7 @@ sub_804D5A4: @ 804D5A4
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804D5FC
-	bl IsRfuTaskFinished
+	bl IsLinkRfuTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804D620
@@ -14745,7 +14745,7 @@ _0805434C:
 	ldr r0, _08054378 @ =sub_804C718
 	cmp r1, r0
 	bne _08054384
-	bl IsRfuTaskFinished
+	bl IsLinkRfuTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08054396

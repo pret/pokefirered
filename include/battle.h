@@ -528,14 +528,10 @@ struct BattleStruct
     u16 hpOnSwitchout[2];
     u8 abilityPreventingSwitchout;
     u8 hpScale;
-    u8 field_AE;
-    u8 field_AF;
-    u8 field_B0;
-    u8 field_B1;
-    u8 field_B2;
-    u8 field_B3;
+    u16 savedBattleTypeFlags; // ???
+    void (*savedCallback)(void);
     u8 synchronizeMoveEffect;
-    u8 field_B5;
+    u8 multiplayerId;
     u8 field_B6;
     u8 atkCancellerTracker;
     u16 usedHeldItems[MAX_BATTLERS_COUNT];
@@ -556,7 +552,12 @@ struct BattleStruct
     u8 wishPerishSongBattlerId;
     u8 field_182;
     u8 field_183;
-    u8 field_184[124]; // currently unknown
+    u8 field_184;
+    u8 field_185;
+    u8 field_186;
+    u8 field_187;
+    struct BattleEnigmaBerry battleEnigmaBerry;
+    u8 field_1A4[0x5C]; // currently unknown
 }; // size == 0x200 bytes
 
 extern struct BattleStruct *gBattleStruct;
@@ -929,5 +930,7 @@ extern u16 gLastPrintedMoves[MAX_BATTLERS_COUNT];
 extern u8 gActionsByTurnOrder[MAX_BATTLERS_COUNT];
 extern u8 gChosenActionByBattler[MAX_BATTLERS_COUNT];
 extern u8 gBattleTerrain;
+extern struct UnknownPokemonStruct4 gUnknown_2022B58[3];
+extern u16 *gUnknown_2022BC0;
 
 #endif // GUARD_BATTLE_H

@@ -73,7 +73,7 @@ void CopyItemName(u16 itemId, u8 * dest)
 {
     if (itemId == ITEM_ENIGMA_BERRY)
     {
-        StringCopy(dest, sub_809C8A0(43)->name);
+        StringCopy(dest, GetBerryInfo(43)->name);
         StringAppend(dest, gUnknown_84162BD);
     }
     else

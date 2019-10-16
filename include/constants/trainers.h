@@ -1,6 +1,8 @@
 #ifndef GUARD_TRAINERS_H
 #define GUARD_TRAINERS_H
 
+#define TRAINER_SECRET_BASE                 1024
+
 #define F_TRAINER_FEMALE (1 << 7)
 
 // All trainer parties specify the IV, level, and species for each Pokémon in the

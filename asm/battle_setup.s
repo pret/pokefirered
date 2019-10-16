@@ -743,8 +743,8 @@ _0807FC54: .4byte gSpecialVar_Result
 _0807FC58: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
 	thumb_func_end sub_807FBF0
 
-	thumb_func_start sub_807FC5C
-sub_807FC5C: @ 807FC5C
+	thumb_func_start BattleSetup_GetTerrainId
+BattleSetup_GetTerrainId: @ 807FC5C
 	push {r4,r5,lr}
 	sub sp, 0x4
 	mov r4, sp
@@ -891,7 +891,7 @@ _0807FD88:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_807FC5C
+	thumb_func_end BattleSetup_GetTerrainId
 
 	thumb_func_start GetBattleTransitionTypeByMap
 GetBattleTransitionTypeByMap: @ 807FD90

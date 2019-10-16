@@ -4,6 +4,8 @@
 #include "global.h"
 #include "constants/species.h"
 
+#define SPECIES_SHINY_TAG 500
+
 struct MonCoords
 {
     // This would use a bitfield, but some function
@@ -54,11 +56,11 @@ extern const struct SpriteFrameImage gUnknown_8234698[];
 extern const struct SpriteFrameImage gUnknown_82346B8[];
 extern const struct SpriteFrameImage gUnknown_82346D8[];
 extern const struct SpriteFrameImage gUnknown_82346F8[];
-extern const struct SpriteFrameImage gUnknown_8234718[];
-extern const struct SpriteFrameImage gUnknown_8234740[];
-extern const struct SpriteFrameImage gUnknown_8234768[];
-extern const struct SpriteFrameImage gUnknown_8234788[];
-extern const struct SpriteFrameImage gUnknown_82347A8[];
-extern const struct SpriteFrameImage gUnknown_82347C8[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_Red[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_Leaf[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_PokeDude[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_OldMan[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_RubySapphireBrendan[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_RubySapphireMay[];
 
 #endif // GUARD_DATA_H

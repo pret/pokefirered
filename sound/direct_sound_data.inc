@@ -3,229 +3,229 @@
 gDirectSoundWaveData_0:: @ 84A3DA8
 	.incbin "baserom.gba", 0x4A3DA8, 0x6A4
 
-gUnknown_84A444C:: @ 84A444C
+gDirectSoundWaveData_1:: @ 84A444C
 	.incbin "baserom.gba", 0x4A444C, 0x7F8
 
-gUnknown_84A4C44:: @ 84A4C44
+gDirectSoundWaveData_2:: @ 84A4C44
 	.incbin "baserom.gba", 0x4A4C44, 0xBCC
 
-gUnknown_84A5810:: @ 84A5810
+gDirectSoundWaveData_3:: @ 84A5810
 	.incbin "baserom.gba", 0x4A5810, 0xF38
 
-gUnknown_84A6748:: @ 84A6748
+gDirectSoundWaveData_4:: @ 84A6748
 	.incbin "baserom.gba", 0x4A6748, 0xC74
 
-gUnknown_84A73BC:: @ 84A73BC
+gDirectSoundWaveData_5:: @ 84A73BC
 	.incbin "baserom.gba", 0x4A73BC, 0x14D0
 
-gUnknown_84A888C:: @ 84A888C
+gDirectSoundWaveData_6:: @ 84A888C
 	.incbin "baserom.gba", 0x4A888C, 0x16B0
 
-gUnknown_84A9F3C:: @ 84A9F3C
+gDirectSoundWaveData_7:: @ 84A9F3C
 	.incbin "baserom.gba", 0x4A9F3C, 0x1344
 
-gUnknown_84AB280:: @ 84AB280
+gDirectSoundWaveData_8:: @ 84AB280
 	.incbin "baserom.gba", 0x4AB280, 0xAA4
 
-gUnknown_84ABD24:: @ 84ABD24
+gDirectSoundWaveData_9:: @ 84ABD24
 	.incbin "baserom.gba", 0x4ABD24, 0x1314
 
-gUnknown_84AD038:: @ 84AD038
+gDirectSoundWaveData_10:: @ 84AD038
 	.incbin "baserom.gba", 0x4AD038, 0x35FC
 
-gUnknown_84B0634:: @ 84B0634
+gDirectSoundWaveData_11:: @ 84B0634
 	.incbin "baserom.gba", 0x4B0634, 0x4D8
 
-gUnknown_84B0B0C:: @ 84B0B0C
+gDirectSoundWaveData_12:: @ 84B0B0C
 	.incbin "baserom.gba", 0x4B0B0C, 0x18DC
 
-gUnknown_84B23E8:: @ 84B23E8
+gDirectSoundWaveData_13:: @ 84B23E8
 	.incbin "baserom.gba", 0x4B23E8, 0x1328
 
-gUnknown_84B3710:: @ 84B3710
+gDirectSoundWaveData_14:: @ 84B3710
 	.incbin "baserom.gba", 0x4B3710, 0x4A0
 
-gUnknown_84B3BB0:: @ 84B3BB0
+gDirectSoundWaveData_15:: @ 84B3BB0
 	.incbin "baserom.gba", 0x4B3BB0, 0x6F4
 
-gUnknown_84B42A4:: @ 84B42A4
+gDirectSoundWaveData_16:: @ 84B42A4
 	.incbin "baserom.gba", 0x4B42A4, 0x890
 
-gUnknown_84B4B34:: @ 84B4B34
+gDirectSoundWaveData_17:: @ 84B4B34
 	.incbin "baserom.gba", 0x4B4B34, 0x878
 
-gUnknown_84B53AC:: @ 84B53AC
+gDirectSoundWaveData_18:: @ 84B53AC
 	.incbin "baserom.gba", 0x4B53AC, 0x8B4
 
-gUnknown_84B5C60:: @ 84B5C60
+gDirectSoundWaveData_19:: @ 84B5C60
 	.incbin "baserom.gba", 0x4B5C60, 0x8E4
 
-gUnknown_84B6544:: @ 84B6544
+gDirectSoundWaveData_20:: @ 84B6544
 	.incbin "baserom.gba", 0x4B6544, 0xF2C
 
-gUnknown_84B7470:: @ 84B7470
+gDirectSoundWaveData_21:: @ 84B7470
 	.incbin "baserom.gba", 0x4B7470, 0x518
 
-gUnknown_84B7988:: @ 84B7988
+gDirectSoundWaveData_22:: @ 84B7988
 	.incbin "baserom.gba", 0x4B7988, 0x5C8
 
-gUnknown_84B7F50:: @ 84B7F50
+gDirectSoundWaveData_23:: @ 84B7F50
 	.incbin "baserom.gba", 0x4B7F50, 0xF18
 
-gUnknown_84B8E68:: @ 84B8E68
+gDirectSoundWaveData_24:: @ 84B8E68
 	.incbin "baserom.gba", 0x4B8E68, 0x1974
 
-gUnknown_84BA7DC:: @ 84BA7DC
+gDirectSoundWaveData_25:: @ 84BA7DC
 	.incbin "baserom.gba", 0x4BA7DC, 0x20DC
 
-gUnknown_84BC8B8:: @ 84BC8B8
+gDirectSoundWaveData_26:: @ 84BC8B8
 	.incbin "baserom.gba", 0x4BC8B8, 0x7830
 
-gUnknown_84C40E8:: @ 84C40E8
+gDirectSoundWaveData_27:: @ 84C40E8
 	.incbin "baserom.gba", 0x4C40E8, 0x9B8
 
-gUnknown_84C4AA0:: @ 84C4AA0
+gDirectSoundWaveData_28:: @ 84C4AA0
 	.incbin "baserom.gba", 0x4C4AA0, 0xE80
 
-gUnknown_84C5920:: @ 84C5920
+gDirectSoundWaveData_29:: @ 84C5920
 	.incbin "baserom.gba", 0x4C5920, 0xE74
 
-gUnknown_84C6794:: @ 84C6794
+gDirectSoundWaveData_30:: @ 84C6794
 	.incbin "baserom.gba", 0x4C6794, 0x1814
 
-gUnknown_84C7FA8:: @ 84C7FA8
+gDirectSoundWaveData_31:: @ 84C7FA8
 	.incbin "baserom.gba", 0x4C7FA8, 0x15A4
 
-gUnknown_84C954C:: @ 84C954C
+gDirectSoundWaveData_32:: @ 84C954C
 	.incbin "baserom.gba", 0x4C954C, 0x15E4
 
-gUnknown_84CAB30:: @ 84CAB30
+gDirectSoundWaveData_33:: @ 84CAB30
 	.incbin "baserom.gba", 0x4CAB30, 0x10F4
 
-gUnknown_84CBC24:: @ 84CBC24
+gDirectSoundWaveData_34:: @ 84CBC24
 	.incbin "baserom.gba", 0x4CBC24, 0xF60
 
-gUnknown_84CCB84:: @ 84CCB84
+gDirectSoundWaveData_35:: @ 84CCB84
 	.incbin "baserom.gba", 0x4CCB84, 0x1660
 
-gUnknown_84CE1E4:: @ 84CE1E4
+gDirectSoundWaveData_36:: @ 84CE1E4
 	.incbin "baserom.gba", 0x4CE1E4, 0x155C
 
-gUnknown_84CF740:: @ 84CF740
+gDirectSoundWaveData_37:: @ 84CF740
 	.incbin "baserom.gba", 0x4CF740, 0xB8C
 
-gUnknown_84D02CC:: @ 84D02CC
+gDirectSoundWaveData_38:: @ 84D02CC
 	.incbin "baserom.gba", 0x4D02CC, 0x35A4
 
-gUnknown_84D3870:: @ 84D3870
+gDirectSoundWaveData_39:: @ 84D3870
 	.incbin "baserom.gba", 0x4D3870, 0x231C
 
-gUnknown_84D5B8C:: @ 84D5B8C
+gDirectSoundWaveData_40:: @ 84D5B8C
 	.incbin "baserom.gba", 0x4D5B8C, 0x36CC
 
-gUnknown_84D9258:: @ 84D9258
+gDirectSoundWaveData_41:: @ 84D9258
 	.incbin "baserom.gba", 0x4D9258, 0x1350
 
-gUnknown_84DA5A8:: @ 84DA5A8
+gDirectSoundWaveData_42:: @ 84DA5A8
 	.incbin "baserom.gba", 0x4DA5A8, 0x1510
 
-gUnknown_84DBAB8:: @ 84DBAB8
+gDirectSoundWaveData_43:: @ 84DBAB8
 	.incbin "baserom.gba", 0x4DBAB8, 0x1420
 
-gUnknown_84DCED8:: @ 84DCED8
+gDirectSoundWaveData_44:: @ 84DCED8
 	.incbin "baserom.gba", 0x4DCED8, 0x109C
 
-gUnknown_84DDF74:: @ 84DDF74
+gDirectSoundWaveData_45:: @ 84DDF74
 	.incbin "baserom.gba", 0x4DDF74, 0x105C
 
-gUnknown_84DEFD0:: @ 84DEFD0
+gDirectSoundWaveData_46:: @ 84DEFD0
 	.incbin "baserom.gba", 0x4DEFD0, 0x6F94
 
-gUnknown_84E5F64:: @ 84E5F64
+gDirectSoundWaveData_47:: @ 84E5F64
 	.incbin "baserom.gba", 0x4E5F64, 0x4584
 
-gUnknown_84EA4E8:: @ 84EA4E8
+gDirectSoundWaveData_48:: @ 84EA4E8
 	.incbin "baserom.gba", 0x4EA4E8, 0x764
 
-gUnknown_84EAC4C:: @ 84EAC4C
+gDirectSoundWaveData_49:: @ 84EAC4C
 	.incbin "baserom.gba", 0x4EAC4C, 0x1C50
 
-gUnknown_84EC89C:: @ 84EC89C
+gDirectSoundWaveData_50:: @ 84EC89C
 	.incbin "baserom.gba", 0x4EC89C, 0x14D0
 
-gUnknown_84EDD6C:: @ 84EDD6C
+gDirectSoundWaveData_51:: @ 84EDD6C
 	.incbin "baserom.gba", 0x4EDD6C, 0xA0C
 
-gUnknown_84EE778:: @ 84EE778
+gDirectSoundWaveData_52:: @ 84EE778
 	.incbin "baserom.gba", 0x4EE778, 0x1C14
 
-gUnknown_84F038C:: @ 84F038C
+gDirectSoundWaveData_53:: @ 84F038C
 	.incbin "baserom.gba", 0x4F038C, 0x1960
 
-gUnknown_84F1CEC:: @ 84F1CEC
+gDirectSoundWaveData_54:: @ 84F1CEC
 	.incbin "baserom.gba", 0x4F1CEC, 0x14C4
 
-gUnknown_84F31B0:: @ 84F31B0
+gDirectSoundWaveData_55:: @ 84F31B0
 	.incbin "baserom.gba", 0x4F31B0, 0x73C
 
-gUnknown_84F38EC:: @ 84F38EC
+gDirectSoundWaveData_56:: @ 84F38EC
 	.incbin "baserom.gba", 0x4F38EC, 0x1BF0
 
-gUnknown_84F54DC:: @ 84F54DC
+gDirectSoundWaveData_57:: @ 84F54DC
 	.incbin "baserom.gba", 0x4F54DC, 0x13B4
 
-gUnknown_84F6890:: @ 84F6890
+gDirectSoundWaveData_58:: @ 84F6890
 	.incbin "baserom.gba", 0x4F6890, 0x2684
 
-gUnknown_84F8F14:: @ 84F8F14
+gDirectSoundWaveData_59:: @ 84F8F14
 	.incbin "baserom.gba", 0x4F8F14, 0x1244
 
-gUnknown_84FA158:: @ 84FA158
+gDirectSoundWaveData_60:: @ 84FA158
 	.incbin "baserom.gba", 0x4FA158, 0x1010
 
-gUnknown_84FB168:: @ 84FB168
+gDirectSoundWaveData_61:: @ 84FB168
 	.incbin "baserom.gba", 0x4FB168, 0x1308
 
-gUnknown_84FC470:: @ 84FC470
+gDirectSoundWaveData_62:: @ 84FC470
 	.incbin "baserom.gba", 0x4FC470, 0x210C
 
-gUnknown_84FE57C:: @ 84FE57C
+gDirectSoundWaveData_63:: @ 84FE57C
 	.incbin "baserom.gba", 0x4FE57C, 0x1FDC
 
-gUnknown_8500558:: @ 8500558
+gDirectSoundWaveData_64:: @ 8500558
 	.incbin "baserom.gba", 0x500558, 0x2210
 
-gUnknown_8502768:: @ 8502768
+gDirectSoundWaveData_65:: @ 8502768
 	.incbin "baserom.gba", 0x502768, 0x7CC
 
-gUnknown_8502F34:: @ 8502F34
+gDirectSoundWaveData_66:: @ 8502F34
 	.incbin "baserom.gba", 0x502F34, 0x1970
 
-gUnknown_85048A4:: @ 85048A4
+gDirectSoundWaveData_67:: @ 85048A4
 	.incbin "baserom.gba", 0x5048A4, 0x414
 
-gUnknown_8504CB8:: @ 8504CB8
+gDirectSoundWaveData_68:: @ 8504CB8
 	.incbin "baserom.gba", 0x504CB8, 0x1FB0
 
-gUnknown_8506C68:: @ 8506C68
+gDirectSoundWaveData_69:: @ 8506C68
 	.incbin "baserom.gba", 0x506C68, 0x32E0
 
-gUnknown_8509F48:: @ 8509F48
+gDirectSoundWaveData_70:: @ 8509F48
 	.incbin "baserom.gba", 0x509F48, 0xA30
 
-gUnknown_850A978:: @ 850A978
+gDirectSoundWaveData_71:: @ 850A978
 	.incbin "baserom.gba", 0x50A978, 0xA34
 
-gUnknown_850B3AC:: @ 850B3AC
+gDirectSoundWaveData_72:: @ 850B3AC
 	.incbin "baserom.gba", 0x50B3AC, 0x1B40
 
-gUnknown_850CEEC:: @ 850CEEC
+gDirectSoundWaveData_73:: @ 850CEEC
 	.incbin "baserom.gba", 0x50CEEC, 0x8C8
 
-gUnknown_850D7B4:: @ 850D7B4
+gDirectSoundWaveData_74:: @ 850D7B4
 	.incbin "baserom.gba", 0x50D7B4, 0x13D0
 
-gUnknown_850EB84:: @ 850EB84
+gDirectSoundWaveData_75:: @ 850EB84
 	.incbin "baserom.gba", 0x50EB84, 0x1040
 
 	.align 2
@@ -1782,41 +1782,41 @@ Cry_Chimecho:: @ 869D4D0
 
 	.align 2
 
-gUnknown_869DEE0:: @ 869DEE0
+gDirectSoundWaveData_76:: @ 869DEE0
 	.incbin "baserom.gba", 0x69DEE0, 0x1F60
 
-gUnknown_869FE40:: @ 869FE40
+gDirectSoundWaveData_77:: @ 869FE40
 	.incbin "baserom.gba", 0x69FE40, 0x1AA0
 
-gUnknown_86A18E0:: @ 86A18E0
+gDirectSoundWaveData_78:: @ 86A18E0
 	.incbin "baserom.gba", 0x6A18E0, 0x1F70
 
-gUnknown_86A3850:: @ 86A3850
+gDirectSoundWaveData_79:: @ 86A3850
 	.incbin "baserom.gba", 0x6A3850, 0x1838
 
-gUnknown_86A5088:: @ 86A5088
+gDirectSoundWaveData_80:: @ 86A5088
 	.incbin "baserom.gba", 0x6A5088, 0x13D0
 
-gUnknown_86A6458:: @ 86A6458
+gDirectSoundWaveData_81:: @ 86A6458
 	.incbin "baserom.gba", 0x6A6458, 0x11C4
 
-gUnknown_86A761C:: @ 86A761C
+gDirectSoundWaveData_82:: @ 86A761C
 	.incbin "baserom.gba", 0x6A761C, 0x1E70
 
-gUnknown_86A948C:: @ 86A948C
+gDirectSoundWaveData_83:: @ 86A948C
 	.incbin "baserom.gba", 0x6A948C, 0x2FF0
 
-gUnknown_86AC47C:: @ 86AC47C
+gDirectSoundWaveData_84:: @ 86AC47C
 	.incbin "baserom.gba", 0x6AC47C, 0x2C54
 
-gUnknown_86AF0D0:: @ 86AF0D0
+gDirectSoundWaveData_85:: @ 86AF0D0
 	.incbin "baserom.gba", 0x6AF0D0, 0xA60
 
-gUnknown_86AFB30:: @ 86AFB30
+gDirectSoundWaveData_86:: @ 86AFB30
 	.incbin "baserom.gba", 0x6AFB30, 0x2668
 
-gUnknown_86B2198:: @ 86B2198
+gDirectSoundWaveData_87:: @ 86B2198
 	.incbin "baserom.gba", 0x6B2198, 0x13A8
 
-gUnknown_86B3540:: @ 86B3540
+gDirectSoundWaveData_88:: @ 86B3540
 	.incbin "baserom.gba", 0x6B3540, 0x2100

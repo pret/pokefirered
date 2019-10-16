@@ -1033,7 +1033,7 @@ u8 CreateMonIcon(u16 species, SpriteCallback callback, s16 x, s16 y, u8 subprior
     return spriteId;
 }
 
-u8 CreateMonIcon_HandleDeoxys(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u8 subpriority, bool32 extra)
+u8 CreateMonIcon_HandleDeoxys(u16 species, SpriteCallback callback, s16 x, s16 y, u8 subpriority, bool32 extra)
 {
     u8 spriteId;
     struct MonIconSpriteTemplate iconTemplate =
@@ -1209,7 +1209,7 @@ u8 GetMonIconPaletteIndexFromSpecies(u16 species)
     return gMonIconPaletteIndices[species];
 }
 
-u8 UpdateMonIconFrame(struct Sprite *sprite)
+u8 UpdateMonIconFrame(struct Sprite * sprite)
 {
     u8 result = 0;
 
@@ -1269,14 +1269,14 @@ static u8 CreateMonIconSprite(const struct MonIconSpriteTemplate * iconTemplate,
     return spriteId;
 }
 
-static void DestroyMonIconInternal(struct Sprite *sprite)
+static void DestroyMonIconInternal(struct Sprite * sprite)
 {
     struct SpriteFrameImage image = { NULL, sSpriteImageSizes[sprite->oam.shape][sprite->oam.size] };
     sprite->images = &image;
     DestroySprite(sprite);
 }
 
-void MonIcon_SetAnim(struct Sprite *sprite, u8 animNum)
+void MonIcon_SetAnim(struct Sprite * sprite, u8 animNum)
 {
     sprite->animNum = animNum;
     sprite->animDelayCounter = 0;

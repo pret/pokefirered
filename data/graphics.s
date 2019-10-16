@@ -11848,9 +11848,7 @@ gMonShinyPalette_Deoxys:: @ 8E3A360
 	.align 2
 gMonIcon_Deoxys:: @ 8E3A388
 	.incbin "graphics/pokemon/deoxys/icon.4bpp"
-
-	.align 2
-gMonIcon_DeoxysAttack:: @ 8E3A788
+	@ Referenced as part of the same array as normal deoxys
 	.incbin "graphics/pokemon/deoxys/icon_attack.4bpp"
 
 	.align 2
@@ -11982,6 +11980,7 @@ gMonBackPic_UnownI:: @ 8E3F228
 	.incbin "graphics/pokemon/unown/i/back.4bpp.lz"
 
 	.align 2
+
 gMonIcon_UnownI:: @ 8E3F3D0
 	.incbin "graphics/pokemon/unown/i/icon.4bpp"
 
@@ -13698,7 +13697,7 @@ gFile_graphics_battle_interface_ball_status_bar_sheet:: @ 8E7BB04
 	.incbin "graphics/battle_interface/ball_status_bar.4bpp.lz"
 	
 	.align 2
-gUnknown_8E7BBB8:: @ 8E7BB88
+gMonIcon_Egg:: @ 8E7BB88
 	.incbin "baserom.gba", 0xE7BB88, 0x400 @UNKNOWN
 
 	.align 2

@@ -8688,7 +8688,7 @@ _0808FFA8: .4byte 0x00004037
 	thumb_func_start sub_808FFAC
 sub_808FFAC: @ 808FFAC
 	push {r4-r6,lr}
-	bl sub_809707C
+	bl LoadMonIconPalettes
 	movs r2, 0
 	ldr r3, _0809003C @ =gUnknown_20397B0
 	ldr r5, _08090040 @ =0x00000b04
@@ -11179,7 +11179,7 @@ _08091248:
 	lsrs r4, 16
 	adds r0, r3, 0
 	movs r1, 0x1
-	bl sub_8097028
+	bl GetMonIconTiles
 	lsls r1, r4, 5
 	ldr r2, _08091288 @ =0x06010000
 	adds r1, r2
@@ -11271,11 +11271,11 @@ sub_80912E0: @ 80912E0
 	ldm r0!, {r3,r5,r7}
 	stm r2!, {r3,r5,r7}
 	adds r0, r6, 0
-	bl mon_icon_convert_unown_species_id
+	bl GetIconSpecies
 	mov r10, r0
 	mov r6, r10
 	mov r2, sp
-	ldr r1, _08091394 @ =gUnknown_83D3E80
+	ldr r1, _08091394 @ =gMonIconPaletteIndices
 	adds r1, r6, r1
 	ldr r3, _08091398 @ =0x0000dac0
 	adds r0, r3, 0
@@ -11329,7 +11329,7 @@ sub_80912E0: @ 80912E0
 	b _080913B4
 	.align 2, 0
 _08091390: .4byte gUnknown_83CEBF0
-_08091394: .4byte gUnknown_83D3E80
+_08091394: .4byte gMonIconPaletteIndices
 _08091398: .4byte 0x0000dac0
 _0809139C: .4byte 0x0000ffff
 _080913A0: .4byte gSprites
@@ -19235,7 +19235,7 @@ _0809515A:
 	movs r0, 0
 	bl HideBg
 	movs r0, 0x80
-	bl sub_8097198
+	bl LoadMonIconPalettesAt
 	b _080951F8
 _08095168:
 	adds r0, r1, 0x2
@@ -19954,7 +19954,7 @@ sub_80956A4: @ 80956A4
 	bl GetMonIconPtr
 	adds r4, r0, 0
 	adds r0, r5, 0
-	bl sub_80971F8
+	bl GetValidMonIconPalIndex
 	adds r0, 0x8
 	lsls r0, 24
 	lsrs r0, 24

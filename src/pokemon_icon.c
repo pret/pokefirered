@@ -20,7 +20,11 @@ struct MonIconSpriteTemplate
 static u8 CreateMonIconSprite(const struct MonIconSpriteTemplate * template, s16 x, s16 y, u8 subpriority);
 static void DestroyMonIconInternal(struct Sprite * sprite);
 
-const u16 gMonIconPalettes[][16] = INCBIN_U16("graphics/pokemon/icon_palettes/icon_palette_0.gbapal", "graphics/pokemon/icon_palettes/icon_palette_1.gbapal", "graphics/pokemon/icon_palettes/icon_palette_2.gbapal");
+const u16 gMonIconPalettes[][16] = {
+    INCBIN_U16("graphics/pokemon/icon_palettes/icon_palette_0.gbapal"),
+    INCBIN_U16("graphics/pokemon/icon_palettes/icon_palette_1.gbapal"),
+    INCBIN_U16("graphics/pokemon/icon_palettes/icon_palette_2.gbapal")
+};
 
 const u8 *const gMonIconTable[] = {
     [SPECIES_NONE]        = gMonIcon_QuestionMark,

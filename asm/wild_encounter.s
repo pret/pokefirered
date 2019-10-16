@@ -1302,14 +1302,14 @@ sub_80830B8: @ 80830B8
 	bl VarSet
 	cmp r4, 0
 	bne _08083104
-	ldr r0, _08083100 @ =gUnknown_81BFB65
+	ldr r0, _08083100 @ =EventScript_1BFB65
 	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 	b _08083106
 	.align 2, 0
 _080830F8: .4byte gUnknown_203ADFA
 _080830FC: .4byte 0x00004020
-_08083100: .4byte gUnknown_81BFB65
+_08083100: .4byte EventScript_1BFB65
 _08083104:
 	movs r0, 0
 _08083106:

@@ -1834,11 +1834,11 @@ _0806D704:
 	beq _0806D720
 	movs r0, 0xD
 	bl IncrementGameStat
-	ldr r0, _0806D71C @ =gUnknown_81BF546
+	ldr r0, _0806D71C @ =EventScript_81BF546
 	bl ScriptContext1_SetupScript
 	b _0806D730
 	.align 2, 0
-_0806D71C: .4byte gUnknown_81BF546
+_0806D71C: .4byte EventScript_81BF546
 _0806D720:
 	bl SafariZoneTakeStep
 	lsls r0, 24

@@ -11461,6 +11461,1604 @@ EventScript_1BE308:
 	releaseall
 	end
 
+gUnknown_81BE30A:: @ 81BE30A
+	.string "A wall of water is crashing down\n"
+	.string "with a mighty roar.$"
+
+gUnknown_81BE33F:: @ 81BE33F
+	.string "It's a large waterfall.\n"
+	.string "Would you like to use WATERFALL?$"
+
+gUnknown_81BE378:: @ 81BE378
+	.string "{STR_VAR_1} used WATERFALL.$"
+
+EventScript_1BE38B:: @ 81BE38B
+	lockall
+	checkpartymove MOVE_DIVE
+	compare_var_to_value VAR_RESULT, 6
+	goto_if 1, EventScript_1BE3CA
+	getpartymonname 0, VAR_RESULT
+	setfieldeffectarg 0, VAR_RESULT
+	setfieldeffectarg 1, 1
+	loadword 0, gUnknown_81BE469
+	callstd 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BE3D2
+	loadword 0, gUnknown_81BE49B
+	callstd 4
+	dofieldeffect 44
+	goto EventScript_1BE3D2
+
+EventScript_1BE3C9:: @ 81BE3C9
+	lockall
+EventScript_1BE3CA:
+	loadword 0, Text_1BE42B
+	callstd 4
+EventScript_1BE3D2:
+	releaseall
+	end
+
+EventScript_1BE3D4:: @ 81BE3D4
+	lockall
+	checkpartymove MOVE_DIVE
+	compare_var_to_value VAR_RESULT, 6
+	goto_if 1, EventScript_1BE412
+	getpartymonname 0, VAR_RESULT
+	setfieldeffectarg 0, VAR_RESULT
+	setfieldeffectarg 1, 1
+	loadword 0, gUnknown_81BE4EF
+	callstd 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BE429
+	loadword 0, gUnknown_81BE49B
+	callstd 4
+	dofieldeffect 44
+	goto EventScript_1BE429
+
+EventScript_1BE412:: @ 81BE412
+	lockall
+	loadword 0, gUnknown_81BE4A9
+	callstd 4
+	goto EventScript_1BE429
+
+EventScript_1BE420:: @ 81BE420
+	lockall
+	loadword 0, gUnknown_81BE52F
+	callstd 4
+EventScript_1BE429:
+	releaseall
+	end
+
+Text_1BE42B:: @ 81BE42B
+	.string "The sea is deep here. A POKéMON\n"
+	.string "may be able to go underwater.$"
+
+gUnknown_81BE469:: @ 81BE469
+	.string "The sea is deep here.\n"
+	.string "Would you like to use DIVE?$"
+
+gUnknown_81BE49B:: @ 81BE49B
+	.string "{STR_VAR_1} used DIVE.$"
+
+gUnknown_81BE4A9:: @ 81BE4A9
+	.string "Light is filtering down from above.\n"
+	.string "A POKéMON may be able to surface.$"
+
+gUnknown_81BE4EF:: @ 81BE4EF
+	.string "Light is filtering down from above.\n"
+	.string "Would you like to use DIVE?$"
+
+gUnknown_81BE52F:: @ 81BE52F
+	.string "There is an obstacle above.\n"
+	.string "DIVE can't be used here.$"
+
+EventScript_FailSweetScent:: @ 81BE564
+	loadword 0, Text_1BE56D
+	callstd 3
+	end
+
+Text_1BE56D:: @ 81BE56D
+	.string "Looks like there's nothing here…$"
+
+Route2_EventScript_1BE58E:: @ 81BE58E
+	setorcopyvar VAR_0x8000, 34
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+Route2_EventScript_1BE59B:: @ 81BE59B
+	setorcopyvar VAR_0x8000, 18
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+ViridianForest_EventScript_1BE5A8:: @ 81BE5A8
+	setorcopyvar VAR_0x8000, 4
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+ViridianForest_EventScript_1BE5B5:: @ 81BE5B5
+	setorcopyvar VAR_0x8000, 14
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+ViridianForest_EventScript_1BE5C2:: @ 81BE5C2
+	setorcopyvar VAR_0x8000, 13
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+MtMoon_1F_EventScript_1BE5CF:: @ 81BE5CF
+	setorcopyvar VAR_0x8000, 18
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+MtMoon_1F_EventScript_1BE5DC:: @ 81BE5DC
+	setorcopyvar VAR_0x8000, 297
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+MtMoon_1F_EventScript_1BE5E9:: @ 81BE5E9
+	setorcopyvar VAR_0x8000, 13
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+MtMoon_1F_EventScript_1BE5F6:: @ 81BE5F6
+	setorcopyvar VAR_0x8000, 68
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+MtMoon_1F_EventScript_1BE603:: @ 81BE603
+	setorcopyvar VAR_0x8000, 85
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+MtMoon_1F_EventScript_1BE610:: @ 81BE610
+	setorcopyvar VAR_0x8000, 94
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+MtMoon_B2F_EventScript_1BE61D:: @ 81BE61D
+	setorcopyvar VAR_0x8000, 109
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+MtMoon_B2F_EventScript_1BE62A:: @ 81BE62A
+	setorcopyvar VAR_0x8000, 334
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+Route4_EventScript_1BE637:: @ 81BE637
+	setorcopyvar VAR_0x8000, 293
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+Route24_EventScript_1BE644:: @ 81BE644
+	setorcopyvar VAR_0x8000, 333
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+Route25_EventScript_1BE651:: @ 81BE651
+	setorcopyvar VAR_0x8000, 331
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SSAnne_1F_Room2_EventScript_1BE65E:: @ 81BE65E
+	setorcopyvar VAR_0x8000, 319
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SSAnne_2F_Room2_EventScript_1BE66B:: @ 81BE66B
+	setorcopyvar VAR_0x8000, 108
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SSAnne_2F_Room4_EventScript_1BE678:: @ 81BE678
+	setorcopyvar VAR_0x8000, 75
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SSAnne_B1F_Room2_EventScript_1BE685:: @ 81BE685
+	setorcopyvar VAR_0x8000, 332
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SSAnne_B1F_Room3_EventScript_1BE692:: @ 81BE692
+	setorcopyvar VAR_0x8000, 34
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SSAnne_B1F_Room5_EventScript_1BE69F:: @ 81BE69F
+	setorcopyvar VAR_0x8000, 22
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SSAnne_Kitchen_EventScript_1BE6AC:: @ 81BE6AC
+	setorcopyvar VAR_0x8000, 3
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+Route9_EventScript_1BE6B9:: @ 81BE6B9
+	setorcopyvar VAR_0x8000, 328
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+RocketHideout_B1F_EventScript_1BE6C6:: @ 81BE6C6
+	setorcopyvar VAR_0x8000, 85
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+RocketHideout_B1F_EventScript_1BE6D3:: @ 81BE6D3
+	setorcopyvar VAR_0x8000, 21
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+RocketHideout_B2F_EventScript_1BE6E0:: @ 81BE6E0
+	setorcopyvar VAR_0x8000, 77
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+RocketHideout_B2F_EventScript_1BE6ED:: @ 81BE6ED
+	setorcopyvar VAR_0x8000, 94
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+RocketHideout_B2F_EventScript_1BE6FA:: @ 81BE6FA
+	setorcopyvar VAR_0x8000, 300
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+RocketHideout_B2F_EventScript_1BE707:: @ 81BE707
+	setorcopyvar VAR_0x8000, 22
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+RocketHideout_B3F_EventScript_1BE714:: @ 81BE714
+	setorcopyvar VAR_0x8000, 68
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+RocketHideout_B3F_EventScript_1BE721:: @ 81BE721
+	setorcopyvar VAR_0x8000, 309
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+RocketHideout_B4F_EventScript_1BE72E:: @ 81BE72E
+	setorcopyvar VAR_0x8000, 337
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+RocketHideout_B4F_EventScript_1BE73B:: @ 81BE73B
+	setorcopyvar VAR_0x8000, 35
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+RocketHideout_B4F_EventScript_1BE748:: @ 81BE748
+	setorcopyvar VAR_0x8000, 67
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+PokemonTower_3F_EventScript_1BE755:: @ 81BE755
+	setorcopyvar VAR_0x8000, 85
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+PokemonTower_4F_EventScript_1BE762:: @ 81BE762
+	setorcopyvar VAR_0x8000, 36
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+PokemonTower_4F_EventScript_1BE76F:: @ 81BE76F
+	setorcopyvar VAR_0x8000, 17
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+PokemonTower_4F_EventScript_1BE77C:: @ 81BE77C
+	setorcopyvar VAR_0x8000, 3
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+PokemonTower_5F_EventScript_1BE789:: @ 81BE789
+	setorcopyvar VAR_0x8000, 110
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+PokemonTower_6F_EventScript_1BE796:: @ 81BE796
+	setorcopyvar VAR_0x8000, 68
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+PokemonTower_6F_EventScript_1BE7A3:: @ 81BE7A3
+	setorcopyvar VAR_0x8000, 78
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+Route12_EventScript_1BE7B0:: @ 81BE7B0
+	setorcopyvar VAR_0x8000, 336
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+Route12_EventScript_1BE7BD:: @ 81BE7BD
+	setorcopyvar VAR_0x8000, 65
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+Route15_EventScript_1BE7CA:: @ 81BE7CA
+	setorcopyvar VAR_0x8000, 306
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SafariZone_Center_EventScript_1BE7D7:: @ 81BE7D7
+	setorcopyvar VAR_0x8000, 110
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SafariZone_East_EventScript_1BE7E4:: @ 81BE7E4
+	setorcopyvar VAR_0x8000, 20
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SafariZone_East_EventScript_1BE7F1:: @ 81BE7F1
+	setorcopyvar VAR_0x8000, 19
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SafariZone_East_EventScript_1BE7FE:: @ 81BE7FE
+	setorcopyvar VAR_0x8000, 299
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SafariZone_East_EventScript_1BE80B:: @ 81BE80B
+	setorcopyvar VAR_0x8000, 98
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SafariZone_North_EventScript_1BE818:: @ 81BE818
+	setorcopyvar VAR_0x8000, 64
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SafariZone_North_EventScript_1BE825:: @ 81BE825
+	setorcopyvar VAR_0x8000, 335
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SafariZone_West_EventScript_1BE832:: @ 81BE832
+	setorcopyvar VAR_0x8000, 320
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SafariZone_West_EventScript_1BE83F:: @ 81BE83F
+	setorcopyvar VAR_0x8000, 353
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SafariZone_West_EventScript_1BE84C:: @ 81BE84C
+	setorcopyvar VAR_0x8000, 20
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SafariZone_West_EventScript_1BE859:: @ 81BE859
+	setorcopyvar VAR_0x8000, 25
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SilphCo_3F_EventScript_1BE866:: @ 81BE866
+	setorcopyvar VAR_0x8000, 21
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SilphCo_4F_EventScript_1BE873:: @ 81BE873
+	setorcopyvar VAR_0x8000, 25
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SilphCo_4F_EventScript_1BE880:: @ 81BE880
+	setorcopyvar VAR_0x8000, 85
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SilphCo_4F_EventScript_1BE88D:: @ 81BE88D
+	setorcopyvar VAR_0x8000, 23
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SilphCo_5F_EventScript_1BE89A:: @ 81BE89A
+	setorcopyvar VAR_0x8000, 64
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SilphCo_5F_EventScript_1BE8A7:: @ 81BE8A7
+	setorcopyvar VAR_0x8000, 289
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SilphCo_5F_EventScript_1BE8B4:: @ 81BE8B4
+	setorcopyvar VAR_0x8000, 355
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SilphCo_6F_EventScript_1BE8C1:: @ 81BE8C1
+	setorcopyvar VAR_0x8000, 63
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SilphCo_6F_EventScript_1BE8CE:: @ 81BE8CE
+	setorcopyvar VAR_0x8000, 79
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SilphCo_7F_EventScript_1BE8DB:: @ 81BE8DB
+	setorcopyvar VAR_0x8000, 67
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SilphCo_7F_EventScript_1BE8E8:: @ 81BE8E8
+	setorcopyvar VAR_0x8000, 296
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SilphCo_10F_EventScript_1BE8F5:: @ 81BE8F5
+	setorcopyvar VAR_0x8000, 66
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SilphCo_10F_EventScript_1BE902:: @ 81BE902
+	setorcopyvar VAR_0x8000, 2
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SilphCo_10F_EventScript_1BE90F:: @ 81BE90F
+	setorcopyvar VAR_0x8000, 68
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+PowerPlant_EventScript_1BE91C:: @ 81BE91C
+	setorcopyvar VAR_0x8000, 20
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+PowerPlant_EventScript_1BE929:: @ 81BE929
+	setorcopyvar VAR_0x8000, 305
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+PowerPlant_EventScript_1BE936:: @ 81BE936
+	setorcopyvar VAR_0x8000, 313
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+PowerPlant_EventScript_1BE943:: @ 81BE943
+	setorcopyvar VAR_0x8000, 96
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+PowerPlant_EventScript_1BE950:: @ 81BE950
+	setorcopyvar VAR_0x8000, 36
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+PokemonMansion_1F_EventScript_1BE95D:: @ 81BE95D
+	setorcopyvar VAR_0x8000, 66
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+PokemonMansion_1F_EventScript_1BE96A:: @ 81BE96A
+	setorcopyvar VAR_0x8000, 85
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+PokemonMansion_2F_EventScript_1BE977:: @ 81BE977
+	setorcopyvar VAR_0x8000, 67
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+PokemonMansion_3F_EventScript_1BE984:: @ 81BE984
+	setorcopyvar VAR_0x8000, 20
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+PokemonMansion_3F_EventScript_1BE991:: @ 81BE991
+	setorcopyvar VAR_0x8000, 65
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+PokemonMansion_B1F_EventScript_1BE99E:: @ 81BE99E
+	setorcopyvar VAR_0x8000, 302
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+PokemonMansion_B1F_EventScript_1BE9AB:: @ 81BE9AB
+	setorcopyvar VAR_0x8000, 19
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+PokemonMansion_B1F_EventScript_1BE9B8:: @ 81BE9B8
+	setorcopyvar VAR_0x8000, 310
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+PokemonMansion_B1F_EventScript_1BE9C5:: @ 81BE9C5
+	setorcopyvar VAR_0x8000, 351
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+VictoryRoad_1F_EventScript_1BE9D2:: @ 81BE9D2
+	setorcopyvar VAR_0x8000, 68
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+VictoryRoad_1F_EventScript_1BE9DF:: @ 81BE9DF
+	setorcopyvar VAR_0x8000, 290
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+VictoryRoad_2F_EventScript_1BE9EC:: @ 81BE9EC
+	setorcopyvar VAR_0x8000, 73
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+VictoryRoad_2F_EventScript_1BE9F9:: @ 81BE9F9
+	setorcopyvar VAR_0x8000, 295
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+VictoryRoad_2F_EventScript_1BEA06:: @ 81BEA06
+	setorcopyvar VAR_0x8000, 23
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+VictoryRoad_2F_EventScript_1BEA13:: @ 81BEA13
+	setorcopyvar VAR_0x8000, 325
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+VictoryRoad_3F_EventScript_1BEA20:: @ 81BEA20
+	setorcopyvar VAR_0x8000, 25
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+VictoryRoad_3F_EventScript_1BEA2D:: @ 81BEA2D
+	setorcopyvar VAR_0x8000, 338
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+CeruleanCave_1F_EventScript_1BEA3A:: @ 81BEA3A
+	setorcopyvar VAR_0x8000, 37
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+CeruleanCave_1F_EventScript_1BEA47:: @ 81BEA47
+	setorcopyvar VAR_0x8000, 110
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+CeruleanCave_1F_EventScript_1BEA54:: @ 81BEA54
+	setorcopyvar VAR_0x8000, 19
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+CeruleanCave_2F_EventScript_1BEA61:: @ 81BEA61
+	setorcopyvar VAR_0x8000, 19
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+CeruleanCave_2F_EventScript_1BEA6E:: @ 81BEA6E
+	setorcopyvar VAR_0x8000, 69
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+CeruleanCave_2F_EventScript_1BEA7B:: @ 81BEA7B
+	setorcopyvar VAR_0x8000, 2
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+CeruleanCave_B1F_EventScript_1BEA88:: @ 81BEA88
+	setorcopyvar VAR_0x8000, 25
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+CeruleanCave_B1F_EventScript_1BEA95:: @ 81BEA95
+	setorcopyvar VAR_0x8000, 2
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+FuchsiaCity_Building1_EventScript_1BEAA2:: @ 81BEAA2
+	setorcopyvar VAR_0x8000, 68
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+TwoIsland_EventScript_1BEAAF:: @ 81BEAAF
+	setorcopyvar VAR_0x8000, 24
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+ThreeIsland_EventScript_1BEABC:: @ 81BEABC
+	setorcopyvar VAR_0x8000, 70
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+ViridianForest_EventScript_1BEAC9:: @ 81BEAC9
+	setorcopyvar VAR_0x8000, 13
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+MtMoon_B2F_EventScript_1BEAD6:: @ 81BEAD6
+	setorcopyvar VAR_0x8000, 24
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+MtMoon_B2F_EventScript_1BEAE3:: @ 81BEAE3
+	setorcopyvar VAR_0x8000, 14
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+Route11_EventScript_1BEAF0:: @ 81BEAF0
+	setorcopyvar VAR_0x8000, 76
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+Route9_EventScript_1BEAFD:: @ 81BEAFD
+	setorcopyvar VAR_0x8000, 15
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+RockTunnel_1F_EventScript_1BEB0A:: @ 81BEB0A
+	setorcopyvar VAR_0x8000, 86
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+RockTunnel_1F_EventScript_1BEB17:: @ 81BEB17
+	setorcopyvar VAR_0x8000, 106
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+RockTunnel_1F_EventScript_1BEB24:: @ 81BEB24
+	setorcopyvar VAR_0x8000, 85
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+RockTunnel_B1F_EventScript_1BEB31:: @ 81BEB31
+	setorcopyvar VAR_0x8000, 24
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+RockTunnel_B1F_EventScript_1BEB3E:: @ 81BEB3E
+	setorcopyvar VAR_0x8000, 35
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SilphCo_8F_EventScript_1BEB4B:: @ 81BEB4B
+	setorcopyvar VAR_0x8000, 65
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SilphCo_11F_EventScript_1BEB58:: @ 81BEB58
+	setorcopyvar VAR_0x8000, 70
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+PokemonMansion_1F_EventScript_1BEB65:: @ 81BEB65
+	setorcopyvar VAR_0x8000, 64
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+PokemonMansion_2F_EventScript_1BEB72:: @ 81BEB72
+	setorcopyvar VAR_0x8000, 70
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+PokemonMansion_2F_EventScript_1BEB7F:: @ 81BEB7F
+	setorcopyvar VAR_0x8000, 63
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+ViridianCity_EventScript_1BEB8C:: @ 81BEB8C
+	setorcopyvar VAR_0x8000, 13
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+Route11_EventScript_1BEB99:: @ 81BEB99
+	setorcopyvar VAR_0x8000, 3
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+Route11_EventScript_1BEBA6:: @ 81BEBA6
+	setorcopyvar VAR_0x8000, 17
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+PokemonTower_5F_EventScript_1BEBB3:: @ 81BEBB3
+	setorcopyvar VAR_0x8000, 190
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+CeladonCity_EventScript_1BEBC0:: @ 81BEBC0
+	setorcopyvar VAR_0x8000, 34
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+RocketHideout_B3F_EventScript_1BEBCD:: @ 81BEBCD
+	setorcopyvar VAR_0x8000, 206
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SafariZone_North_EventScript_1BEBDA:: @ 81BEBDA
+	setorcopyvar VAR_0x8000, 183
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SeafoamIslands_1F_EventScript_1BEBE7:: @ 81BEBE7
+	setorcopyvar VAR_0x8000, 16
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SeafoamIslands_B1F_EventScript_1BEBF4:: @ 81BEBF4
+	setorcopyvar VAR_0x8000, 97
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SeafoamIslands_B1F_EventScript_1BEC01:: @ 81BEC01
+	setorcopyvar VAR_0x8000, 24
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SeafoamIslands_B2F_EventScript_1BEC0E:: @ 81BEC0E
+	setorcopyvar VAR_0x8000, 107
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SeafoamIslands_B4F_EventScript_1BEC1B:: @ 81BEC1B
+	setorcopyvar VAR_0x8000, 2
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+FourIsland_EventScript_1BEC28:: @ 81BEC28
+	setorcopyvar VAR_0x8000, 109
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+FourIsland_EventScript_1BEC35:: @ 81BEC35
+	setorcopyvar VAR_0x8000, 108
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+OneIsland_KindleRoad_EventScript_1BEC42:: @ 81BEC42
+	setorcopyvar VAR_0x8000, 34
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+OneIsland_KindleRoad_EventScript_1BEC4F:: @ 81BEC4F
+	setorcopyvar VAR_0x8000, 84
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+OneIsland_KindleRoad_EventScript_1BEC5C:: @ 81BEC5C
+	setorcopyvar VAR_0x8000, 66
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+FiveIsland_Meadow_EventScript_1BEC69:: @ 81BEC69
+	setorcopyvar VAR_0x8000, 20
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+FiveIsland_Meadow_EventScript_1BEC76:: @ 81BEC76
+	setorcopyvar VAR_0x8000, 69
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+FiveIsland_MemorialPillar_EventScript_1BEC83:: @ 81BEC83
+	setorcopyvar VAR_0x8000, 199
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SixIsland_OutcastIsland_EventScript_1BEC90:: @ 81BEC90
+	setorcopyvar VAR_0x8000, 69
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SixIsland_WaterPath_EventScript_1BEC9D:: @ 81BEC9D
+	setorcopyvar VAR_0x8000, 36
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SixIsland_WaterPath_EventScript_1BECAA:: @ 81BECAA
+	setorcopyvar VAR_0x8000, 201
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SixIsland_RuinValley_EventScript_1BECB7:: @ 81BECB7
+	setorcopyvar VAR_0x8000, 19
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SixIsland_RuinValley_EventScript_1BECC4:: @ 81BECC4
+	setorcopyvar VAR_0x8000, 63
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SixIsland_RuinValley_EventScript_1BECD1:: @ 81BECD1
+	setorcopyvar VAR_0x8000, 93
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SevenIsland_SevaultCanyon_EventScript_1BECDE:: @ 81BECDE
+	setorcopyvar VAR_0x8000, 187
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SevenIsland_SevaultCanyon_EventScript_1BECEB:: @ 81BECEB
+	setorcopyvar VAR_0x8000, 37
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SevenIsland_SevaultCanyon_EventScript_1BECF8:: @ 81BECF8
+	setorcopyvar VAR_0x8000, 110
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+ThreeIsland_BerryForest_EventScript_1BED05:: @ 81BED05
+	setorcopyvar VAR_0x8000, 35
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+ThreeIsland_BerryForest_EventScript_1BED12:: @ 81BED12
+	setorcopyvar VAR_0x8000, 23
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+ThreeIsland_BerryForest_EventScript_1BED1F:: @ 81BED1F
+	setorcopyvar VAR_0x8000, 37
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+MtEmber_Exterior_EventScript_1BED2C:: @ 81BED2C
+	setorcopyvar VAR_0x8000, 2
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+MtEmber_Exterior_EventScript_1BED39:: @ 81BED39
+	setorcopyvar VAR_0x8000, 95
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+MtEmber_Exterior_EventScript_1BED46:: @ 81BED46
+	setorcopyvar VAR_0x8000, 74
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+FourIsland_IcefallCave_1F_EventScript_1BED53:: @ 81BED53
+	setorcopyvar VAR_0x8000, 2
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+FourIsland_IcefallCave_1F_EventScript_1BED60:: @ 81BED60
+	setorcopyvar VAR_0x8000, 345
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+FourIsland_IcefallCave_B1F_EventScript_1BED6D:: @ 81BED6D
+	setorcopyvar VAR_0x8000, 19
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+FourIsland_IcefallCave_B1F_EventScript_1BED7A:: @ 81BED7A
+	setorcopyvar VAR_0x8000, 212
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+FiveIsland_RocketWarehouse_EventScript_1BED87:: @ 81BED87
+	setorcopyvar VAR_0x8000, 107
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+FiveIsland_RocketWarehouse_EventScript_1BED94:: @ 81BED94
+	setorcopyvar VAR_0x8000, 324
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+FiveIsland_RocketWarehouse_EventScript_1BEDA1:: @ 81BEDA1
+	setorcopyvar VAR_0x8000, 106
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+FiveIsland_RocketWarehouse_EventScript_1BEDAE:: @ 81BEDAE
+	setorcopyvar VAR_0x8000, 218
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+FiveIsland_LostCave_Room10_EventScript_1BEDBB:: @ 81BEDBB
+	setorcopyvar VAR_0x8000, 217
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+FiveIsland_LostCave_Room11_EventScript_1BEDC8:: @ 81BEDC8
+	setorcopyvar VAR_0x8000, 221
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+FiveIsland_LostCave_Room12_EventScript_1BEDD5:: @ 81BEDD5
+	setorcopyvar VAR_0x8000, 220
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+FiveIsland_LostCave_Room13_EventScript_1BEDE2:: @ 81BEDE2
+	setorcopyvar VAR_0x8000, 25
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+FiveIsland_LostCave_Room14_EventScript_1BEDEF:: @ 81BEDEF
+	setorcopyvar VAR_0x8000, 68
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SevenIsland_SevaultCanyon_House_EventScript_1BEDFC:: @ 81BEDFC
+	setorcopyvar VAR_0x8000, 222
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+SilphCo_4F_EventScript_1BEE09:: @ 81BEE09
+	setorcopyvar VAR_0x8000, 329
+	setorcopyvar VAR_0x8001, 1
+	callstd 1
+	end
+
+PewterCity_PokemonCenter_1F_EventScript_1BEE16:: @ 81BEE16
+	lock
+	faceplayer
+	compare_var_to_value VAR_0x4001, 1
+	goto_if 1, EventScript_1BEE3A
+	checkflag 2093
+	goto_if 1, EventScript_1BEECD
+	loadword 0, Text_1BEF88
+	callstd 4
+	goto EventScript_1BEE44
+	end
+
+EventScript_1BEE3A:: @ 81BEE3A
+	loadword 0, gUnknown_81BF36A
+	callstd 4
+	release
+	end
+
+EventScript_1BEE44:: @ 81BEE44
+	message Text_1BF017
+	waitmessage
+	multichoice 18, 6, 18, 0
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1BEE8F
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1BEEC3
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1BEE81
+	compare_var_to_value VAR_0x8000, 127
+	goto_if 1, EventScript_1BEEC3
+	end
+
+EventScript_1BEE81:: @ 81BEE81
+	loadword 0, gUnknown_81BF053
+	callstd 4
+	goto EventScript_1BEE44
+	end
+
+EventScript_1BEE8F:: @ 81BEE8F
+	loadword 0, gUnknown_81BF166
+	callstd 4
+	closemessage
+	goto EventScript_1BEF5A
+	end
+
+EventScript_1BEE9E:: @ 81BEE9E
+	loadword 0, gUnknown_81BF1B2
+	callstd 4
+	release
+	end
+
+EventScript_1BEEA8:: @ 81BEEA8
+	setvar VAR_0x4001, 1
+	setvar VAR_0x8004, 0
+	special sub_80BDA7C
+	waitmessage
+	delay 80
+	loadword 0, gUnknown_81BF28E
+	callstd 4
+	release
+	end
+
+EventScript_1BEEC3:: @ 81BEEC3
+	loadword 0, gUnknown_81BF17B
+	callstd 4
+	release
+	end
+
+EventScript_1BEECD:: @ 81BEECD
+	loadword 0, gUnknown_81BF1E8
+	callstd 4
+	goto EventScript_1BEEDB
+	end
+
+EventScript_1BEEDB:: @ 81BEEDB
+	message Text_1BF1FB
+	waitmessage
+	multichoice 18, 6, 18, 0
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1BEF26
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1BEF35
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1BEF18
+	compare_var_to_value VAR_0x8000, 127
+	goto_if 1, EventScript_1BEF35
+	end
+
+EventScript_1BEF18:: @ 81BEF18
+	loadword 0, gUnknown_81BF053
+	callstd 4
+	goto EventScript_1BEEDB
+	end
+
+EventScript_1BEF26:: @ 81BEF26
+	loadword 0, gUnknown_81BF222
+	callstd 4
+	closemessage
+	goto EventScript_1BEF5A
+	end
+
+EventScript_1BEF35:: @ 81BEF35
+	loadword 0, gUnknown_81BF252
+	callstd 4
+	release
+	end
+
+EventScript_1BEF3F:: @ 81BEF3F
+	setvar VAR_0x4001, 1
+	setvar VAR_0x8004, 0
+	special sub_80BDA7C
+	waitmessage
+	delay 80
+	loadword 0, gUnknown_81BF30D
+	callstd 4
+	release
+	end
+
+EventScript_1BEF5A:: @ 81BEF5A
+	setvar VAR_0x8004, 0
+	call EventScript_1A6AC0
+	lock
+	faceplayer
+	compare_var_to_value VAR_0x8004, 0
+	goto_if 1, EventScript_1BEF3F
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BEE9E
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1BEEA8
+	end
+
+Text_1BEF88:: @ 81BEF88
+	.string "Hi, glad to meet you!\p"
+	.string "…That's unfriendly of you.\n"
+	.string "How about saying hi back?\p"
+	.string "So, come on, tell me about\n"
+	.string "yourself.\p"
+	.string "I'd love to hear your profile!$"
+
+Text_1BF017:: @ 81BF017
+	.string "Tell me something good about\n"
+	.string "yourself. What's your profile?$"
+
+gUnknown_81BF053:: @ 81BF053
+	.string "A profile is written using four\n"
+	.string "words or phrases.\p"
+	.string "There're plenty of words to choose\n"
+	.string "from for your profile.\p"
+	.string "The words and phrases are placed\n"
+	.string "in several convenient groups.\p"
+	.string "First, choose a group, then choose\n"
+	.string "a word or phrase.\p"
+	.string "…It's easier than it sounds.\n"
+	.string "Why don't you try it?$"
+
+gUnknown_81BF166:: @ 81BF166
+	.string "What's your profile?$"
+
+gUnknown_81BF17B:: @ 81BF17B
+	.string "Aww… Don't be like that.\n"
+	.string "You can tell me your profile.$"
+
+gUnknown_81BF1B2:: @ 81BF1B2
+	.string "Oh, you've decided not to?\n"
+	.string "You're fickle, aren't you?$"
+
+gUnknown_81BF1E8:: @ 81BF1E8
+	.string "Hi!\n"
+	.string "We meet again!$"
+
+Text_1BF1FB:: @ 81BF1FB
+	.string "Would you like to change your\n"
+	.string "profile?$"
+
+gUnknown_81BF222:: @ 81BF222
+	.string "What are you like now?\n"
+	.string "I'd really like to know.$"
+
+gUnknown_81BF252:: @ 81BF252
+	.string "Okay, you like your profile the\n"
+	.string "way it is.\p"
+	.string "I think so, too.$"
+
+gUnknown_81BF28E:: @ 81BF28E
+	.string "Hmhm…\p"
+	.string "Your profile really says something\n"
+	.string "about who you are.\p"
+	.string "Now that I know you better, it \n"
+	.string "makes us better friends than ever!$"
+
+gUnknown_81BF30D:: @ 81BF30D
+	.string "Oh, I've heard that before…\p"
+	.string "My cousin, who lives far away,\n"
+	.string "always used to say that, I think.$"
+
+gUnknown_81BF36A:: @ 81BF36A
+	.string "Please tell me more about\n"
+	.string "yourself next time!$"
+
+Route5_PokemonDayCare_EventScript_1BF398:: @ 81BF398
+	special sub_8110AB4
+	compare_var_to_value VAR_RESULT, 2
+	goto_if 1, EventScript_1A7AE0
+	lock
+	faceplayer
+	showmoneybox 0, 0, 0
+	specialvar VAR_RESULT, IsThereMonInRoute5Daycare
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1BF46E
+	loadword 0, Text_19DD66
+	callstd 5
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1BF3DD
+	loadword 0, Text_19DDB2
+	callstd 4
+	goto EventScript_1BF541
+	end
+
+EventScript_1BF3DD:: @ 81BF3DD
+	specialvar VAR_RESULT, CountPartyNonEggMons
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1BF452
+	loadword 0, Text_19DDBE
+	callstd 4
+	fadescreen 1
+	hidemoneybox
+	nop
+	nop
+	special ChooseSendDaycareMon
+	waitstate
+	showmoneybox 0, 0, 0
+	compare_var_to_value VAR_0x8004, 6
+	goto_if 4, EventScript_1BF444
+	specialvar VAR_RESULT, CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BF460
+	specialvar VAR_0x8005, GetSelectedMonNickAndSpecies
+	loadword 0, Text_19DDF9
+	callstd 4
+	waitse
+	playmoncry VAR_0x8005, 0
+	loadword 0, Text_19DE24
+	callstd 4
+	waitmoncry
+	special PutMonInRoute5Daycare
+	incrementgamestat 47
+	goto EventScript_1BF541
+	end
+
+EventScript_1BF444:: @ 81BF444
+	loadword 0, Text_19DDDC
+	callstd 4
+	goto EventScript_1BF541
+	end
+
+EventScript_1BF452:: @ 81BF452
+	loadword 0, Text_19DEF5
+	callstd 4
+	goto EventScript_1BF541
+	end
+
+EventScript_1BF460:: @ 81BF460
+	loadword 0, Text_19DF1D
+	callstd 4
+	goto EventScript_1BF541
+	end
+
+EventScript_1BF46E:: @ 81BF46E
+	setvar VAR_0x8004, 0
+	specialvar VAR_RESULT, GetNumLevelsGainedForRoute5DaycareMon
+	compare_var_to_value VAR_RESULT, 0
+	call_if 5, EventScript_1BF4AA
+	compare_var_to_value VAR_RESULT, 0
+	call_if 1, EventScript_1BF4B3
+	special GetCostToWithdrawRoute5DaycareMon
+	loadword 0, Text_19DE80
+	callstd 5
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1BF4BC
+	goto EventScript_1BF444
+	end
+
+EventScript_1BF4AA:: @ 81BF4AA
+	loadword 0, Text_19DF56
+	callstd 4
+	return
+
+EventScript_1BF4B3:: @ 81BF4B3
+	loadword 0, Text_19DE3C
+	callstd 4
+	return
+
+EventScript_1BF4BC:: @ 81BF4BC
+	specialvar VAR_RESULT, CalculatePlayerPartyCount
+	compare_var_to_value VAR_RESULT, 6
+	goto_if 1, EventScript_1BF533
+	specialvar VAR_RESULT, IsEnoughForCostInVar0x8005
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1BF4EA
+	loadword 0, Text_19E001
+	callstd 4
+	goto EventScript_1BF541
+	end
+
+EventScript_1BF4EA:: @ 81BF4EA
+	setvar VAR_0x8004, 0
+	specialvar VAR_RESULT, TakePokemonFromRoute5Daycare
+	special SubtractMoneyFromVar0x8005
+	updatemoneybox 0, 0, 0
+	copyvar VAR_0x8008, VAR_RESULT
+	countpokemon
+	subvar VAR_RESULT, 1
+	getpartymonname 0, VAR_RESULT
+	copyvar VAR_RESULT, VAR_0x8008
+	loadword 0, Text_19DEAF
+	callstd 4
+	textcolor 3
+	waitse
+	playmoncry VAR_RESULT, 0
+	loadword 0, Text_19DECF
+	callstd 4
+	call EventScript_1A6675
+	waitmoncry
+	goto EventScript_1BF541
+	end
+
+EventScript_1BF533:: @ 81BF533
+	loadword 0, Text_19DFC2
+	callstd 4
+	goto EventScript_1BF541
+	end
+
+EventScript_1BF541:: @ 81BF541
+	hidemoneybox
+	nop
+	nop
+	release
+	end
+
+EventScript_81BF546:: @ 81BF546
+	lockall
+	loadword 0, Text_1BFB5A
+	callstd 4
+	special EggHatch
+	waitstate
+	releaseall
+	end
+
+gUnknown_81BF555:: @ 81BF555
+	.string "I'm the DAY-CARE MAN.\p"
+	.string "I help take care of the precious\n"
+	.string "POKéMON of TRAINERS.\p"
+	.string "If you'd like me to raise your\n"
+	.string "POKéMON, have a word with my wife.$"
+
+gUnknown_81BF5E3:: @ 81BF5E3
+	.string "Ah, it's you!\p"
+	.string "We were raising your POKéMON, and\n"
+	.string "my goodness, were we surprised!\p"
+	.string "Your POKéMON had an EGG!\p"
+	.string "We don't know how it got there,\n"
+	.string "but your POKéMON had it.\p"
+	.string "You do want it, yes?$"
+
+gUnknown_81BF69A:: @ 81BF69A
+	.string "Ah, it's you! Good to see you.\n"
+	.string "Your {STR_VAR_1}'s doing fine.$"
+
+gUnknown_81BF6CF:: @ 81BF6CF
+	.string "Well then, I'll keep it.\n"
+	.string "Thanks!$"
+
+gUnknown_81BF6F0:: @ 81BF6F0
+	.string "You have no room for it…\n"
+	.string "Come back when you've made room.$"
+
+Text_1BF72A:: @ 81BF72A
+	.string "{PLAYER} received the EGG from\n"
+	.string "the DAY-CARE MAN.$"
+
+gUnknown_81BF755:: @ 81BF755
+	.string "Take good care of it.$"
+
+Text_1BF76B:: @ 81BF76B
+	.string "ポケモンを　ひきとりたい　ときは\n"
+	.string "ばさんに　いって　おくれ$"
+
+gUnknown_81BF789:: @ 81BF789
+	.string "Ah, it's you! Your {STR_VAR_1} and\n"
+	.string "{STR_VAR_2} are doing fine.$"
+
+gUnknown_81BF7B6:: @ 81BF7B6
+	.string "I really will keep it.\n"
+	.string "You do want this, yes?$"
+
+gUnknown_81BF7E4:: @ 81BF7E4
+	.string "I'm the DAY-CARE LADY.\p"
+	.string "We can raise POKéMON for you.\p"
+	.string "Would you like us to raise one?$"
+
+gUnknown_81BF839:: @ 81BF839
+	.string "Which POKéMON should we raise for\n"
+	.string "you?$"
+
+gUnknown_81BF860:: @ 81BF860
+	.string "Fine, we'll raise your {STR_VAR_1}\n"
+	.string "for a while.\p"
+	.string "Come back for it later.$"
+
+gUnknown_81BF89F:: @ 81BF89F
+	.string "We can raise two of your POKéMON.\p"
+	.string "Would you like us to raise one\n"
+	.string "more POKéMON for you?$"
+
+gUnknown_81BF8F6:: @ 81BF8F6
+	.string "My husband was looking for you.$"
+
+gUnknown_81BF916:: @ 81BF916
+	.string "Oh, fine, then.\n"
+	.string "Come again.$"
+
+gUnknown_81BF932:: @ 81BF932
+	.string "You don't have enough money…$"
+
+gUnknown_81BF94F:: @ 81BF94F
+	.string "Will you take back the other one,\n"
+	.string "too?$"
+
+gUnknown_81BF976:: @ 81BF976
+	.string "Fine.\n"
+	.string "Come again.$"
+
+gUnknown_81BF988:: @ 81BF988
+	.string "Ah, it's you!\n"
+	.string "Good to see you.\p"
+	.string "Your POKéMON can only be doing\n"
+	.string "good!$"
+
+gUnknown_81BF9CC:: @ 81BF9CC
+	.string "By level, your {STR_VAR_1} has\n"
+	.string "grown by {STR_VAR_2}.$"
+
+gUnknown_81BF9EF:: @ 81BF9EF
+	.string "Your POKéMON party is full.\n"
+	.string "Make room, then come see me.$"
+
+Text_1BFA28:: @ 81BFA28
+	.string "どっちの　ポケモンを　ひきとるかい？$"
+
+gUnknown_81BFA3B:: @ 81BFA3B
+	.string "If you want your {STR_VAR_1} back,\n"
+	.string "it will cost ¥{STR_VAR_2}.$"
+
+gUnknown_81BFA67:: @ 81BFA67
+	.string "Perfect!\n"
+	.string "Here's your POKéMON.$"
+
+gUnknown_81BFA85:: @ 81BFA85
+	.string "{PLAYER} took back {STR_VAR_1} from\n"
+	.string "the DAY-CARE LADY.$"
+
+gUnknown_81BFAAD:: @ 81BFAAD
+	.string "Oh? But you have just one\n"
+	.string "POKéMON.\p"
+	.string "Come back another time.$"
+
+gUnknown_81BFAE8:: @ 81BFAE8
+	.string "Will you take your POKéMON back?$"
+
+gUnknown_81BFB09:: @ 81BFB09
+	.string "If you leave me that POKéMON,\n"
+	.string "what will you battle with?\p"
+	.string "Come back another time.$"
+
+Text_1BFB5A:: @ 81BFB5A
+	.string "Huh?$"
+
+EventScript_81BFB5F:: @ 81BFB5F
+	animateflash 0
+	setflashradius 0
+	end
+
+EventScript_1BFB65:: @ 81BFB65
+	loadword 0, Text_1BFB6E
+	callstd 3
+	end
+
+Text_1BFB6E:: @ 81BFB6E
+	.string "REPEL's effect wore off…$"
 
 
 
@@ -11494,640 +13092,14 @@ EventScript_1BE308:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-	.include "data/script_dump_out.inc"
+@	.include "data/script_dump_out.inc"
 @	.include "data/script_dump.inc"
 
 
 
-
-
-
-
-
 @ ???
-gUnknown_81BE30A:: @ 81BE30A
-	.incbin "baserom.gba", 0x1BE30A, 0x35
 
-gUnknown_81BE33F:: @ 81BE33F
-	.incbin "baserom.gba", 0x1BE33F, 0x39
 
-gUnknown_81BE378:: @ 81BE378
-	.incbin "baserom.gba", 0x1BE378, 0x1EC
-
-EventScript_FailSweetScent:: @ 81BE564
-	.incbin "baserom.gba", 0x1BE564, 0x2A
-
-Route2_EventScript_1BE58E:: @ 81BE58E
-	.incbin "baserom.gba", 0x1BE58E, 0xD
-
-Route2_EventScript_1BE59B:: @ 81BE59B
-	.incbin "baserom.gba", 0x1BE59B, 0xD
-
-ViridianForest_EventScript_1BE5A8:: @ 81BE5A8
-	.incbin "baserom.gba", 0x1BE5A8, 0xD
-
-ViridianForest_EventScript_1BE5B5:: @ 81BE5B5
-	.incbin "baserom.gba", 0x1BE5B5, 0xD
-
-ViridianForest_EventScript_1BE5C2:: @ 81BE5C2
-	.incbin "baserom.gba", 0x1BE5C2, 0xD
-
-MtMoon_1F_EventScript_1BE5CF:: @ 81BE5CF
-	.incbin "baserom.gba", 0x1BE5CF, 0xD
-
-MtMoon_1F_EventScript_1BE5DC:: @ 81BE5DC
-	.incbin "baserom.gba", 0x1BE5DC, 0xD
-
-MtMoon_1F_EventScript_1BE5E9:: @ 81BE5E9
-	.incbin "baserom.gba", 0x1BE5E9, 0xD
-
-MtMoon_1F_EventScript_1BE5F6:: @ 81BE5F6
-	.incbin "baserom.gba", 0x1BE5F6, 0xD
-
-MtMoon_1F_EventScript_1BE603:: @ 81BE603
-	.incbin "baserom.gba", 0x1BE603, 0xD
-
-MtMoon_1F_EventScript_1BE610:: @ 81BE610
-	.incbin "baserom.gba", 0x1BE610, 0xD
-
-MtMoon_B2F_EventScript_1BE61D:: @ 81BE61D
-	.incbin "baserom.gba", 0x1BE61D, 0xD
-
-MtMoon_B2F_EventScript_1BE62A:: @ 81BE62A
-	.incbin "baserom.gba", 0x1BE62A, 0xD
-
-Route4_EventScript_1BE637:: @ 81BE637
-	.incbin "baserom.gba", 0x1BE637, 0xD
-
-Route24_EventScript_1BE644:: @ 81BE644
-	.incbin "baserom.gba", 0x1BE644, 0xD
-
-Route25_EventScript_1BE651:: @ 81BE651
-	.incbin "baserom.gba", 0x1BE651, 0xD
-
-SSAnne_1F_Room2_EventScript_1BE65E:: @ 81BE65E
-	.incbin "baserom.gba", 0x1BE65E, 0xD
-
-SSAnne_2F_Room2_EventScript_1BE66B:: @ 81BE66B
-	.incbin "baserom.gba", 0x1BE66B, 0xD
-
-SSAnne_2F_Room4_EventScript_1BE678:: @ 81BE678
-	.incbin "baserom.gba", 0x1BE678, 0xD
-
-SSAnne_B1F_Room2_EventScript_1BE685:: @ 81BE685
-	.incbin "baserom.gba", 0x1BE685, 0xD
-
-SSAnne_B1F_Room3_EventScript_1BE692:: @ 81BE692
-	.incbin "baserom.gba", 0x1BE692, 0xD
-
-SSAnne_B1F_Room5_EventScript_1BE69F:: @ 81BE69F
-	.incbin "baserom.gba", 0x1BE69F, 0xD
-
-SSAnne_Kitchen_EventScript_1BE6AC:: @ 81BE6AC
-	.incbin "baserom.gba", 0x1BE6AC, 0xD
-
-Route9_EventScript_1BE6B9:: @ 81BE6B9
-	.incbin "baserom.gba", 0x1BE6B9, 0xD
-
-RocketHideout_B1F_EventScript_1BE6C6:: @ 81BE6C6
-	.incbin "baserom.gba", 0x1BE6C6, 0xD
-
-RocketHideout_B1F_EventScript_1BE6D3:: @ 81BE6D3
-	.incbin "baserom.gba", 0x1BE6D3, 0xD
-
-RocketHideout_B2F_EventScript_1BE6E0:: @ 81BE6E0
-	.incbin "baserom.gba", 0x1BE6E0, 0xD
-
-RocketHideout_B2F_EventScript_1BE6ED:: @ 81BE6ED
-	.incbin "baserom.gba", 0x1BE6ED, 0xD
-
-RocketHideout_B2F_EventScript_1BE6FA:: @ 81BE6FA
-	.incbin "baserom.gba", 0x1BE6FA, 0xD
-
-RocketHideout_B2F_EventScript_1BE707:: @ 81BE707
-	.incbin "baserom.gba", 0x1BE707, 0xD
-
-RocketHideout_B3F_EventScript_1BE714:: @ 81BE714
-	.incbin "baserom.gba", 0x1BE714, 0xD
-
-RocketHideout_B3F_EventScript_1BE721:: @ 81BE721
-	.incbin "baserom.gba", 0x1BE721, 0xD
-
-RocketHideout_B4F_EventScript_1BE72E:: @ 81BE72E
-	.incbin "baserom.gba", 0x1BE72E, 0xD
-
-RocketHideout_B4F_EventScript_1BE73B:: @ 81BE73B
-	.incbin "baserom.gba", 0x1BE73B, 0xD
-
-RocketHideout_B4F_EventScript_1BE748:: @ 81BE748
-	.incbin "baserom.gba", 0x1BE748, 0xD
-
-PokemonTower_3F_EventScript_1BE755:: @ 81BE755
-	.incbin "baserom.gba", 0x1BE755, 0xD
-
-PokemonTower_4F_EventScript_1BE762:: @ 81BE762
-	.incbin "baserom.gba", 0x1BE762, 0xD
-
-PokemonTower_4F_EventScript_1BE76F:: @ 81BE76F
-	.incbin "baserom.gba", 0x1BE76F, 0xD
-
-PokemonTower_4F_EventScript_1BE77C:: @ 81BE77C
-	.incbin "baserom.gba", 0x1BE77C, 0xD
-
-PokemonTower_5F_EventScript_1BE789:: @ 81BE789
-	.incbin "baserom.gba", 0x1BE789, 0xD
-
-PokemonTower_6F_EventScript_1BE796:: @ 81BE796
-	.incbin "baserom.gba", 0x1BE796, 0xD
-
-PokemonTower_6F_EventScript_1BE7A3:: @ 81BE7A3
-	.incbin "baserom.gba", 0x1BE7A3, 0xD
-
-Route12_EventScript_1BE7B0:: @ 81BE7B0
-	.incbin "baserom.gba", 0x1BE7B0, 0xD
-
-Route12_EventScript_1BE7BD:: @ 81BE7BD
-	.incbin "baserom.gba", 0x1BE7BD, 0xD
-
-Route15_EventScript_1BE7CA:: @ 81BE7CA
-	.incbin "baserom.gba", 0x1BE7CA, 0xD
-
-SafariZone_Center_EventScript_1BE7D7:: @ 81BE7D7
-	.incbin "baserom.gba", 0x1BE7D7, 0xD
-
-SafariZone_East_EventScript_1BE7E4:: @ 81BE7E4
-	.incbin "baserom.gba", 0x1BE7E4, 0xD
-
-SafariZone_East_EventScript_1BE7F1:: @ 81BE7F1
-	.incbin "baserom.gba", 0x1BE7F1, 0xD
-
-SafariZone_East_EventScript_1BE7FE:: @ 81BE7FE
-	.incbin "baserom.gba", 0x1BE7FE, 0xD
-
-SafariZone_East_EventScript_1BE80B:: @ 81BE80B
-	.incbin "baserom.gba", 0x1BE80B, 0xD
-
-SafariZone_North_EventScript_1BE818:: @ 81BE818
-	.incbin "baserom.gba", 0x1BE818, 0xD
-
-SafariZone_North_EventScript_1BE825:: @ 81BE825
-	.incbin "baserom.gba", 0x1BE825, 0xD
-
-SafariZone_West_EventScript_1BE832:: @ 81BE832
-	.incbin "baserom.gba", 0x1BE832, 0xD
-
-SafariZone_West_EventScript_1BE83F:: @ 81BE83F
-	.incbin "baserom.gba", 0x1BE83F, 0xD
-
-SafariZone_West_EventScript_1BE84C:: @ 81BE84C
-	.incbin "baserom.gba", 0x1BE84C, 0xD
-
-SafariZone_West_EventScript_1BE859:: @ 81BE859
-	.incbin "baserom.gba", 0x1BE859, 0xD
-
-SilphCo_3F_EventScript_1BE866:: @ 81BE866
-	.incbin "baserom.gba", 0x1BE866, 0xD
-
-SilphCo_4F_EventScript_1BE873:: @ 81BE873
-	.incbin "baserom.gba", 0x1BE873, 0xD
-
-SilphCo_4F_EventScript_1BE880:: @ 81BE880
-	.incbin "baserom.gba", 0x1BE880, 0xD
-
-SilphCo_4F_EventScript_1BE88D:: @ 81BE88D
-	.incbin "baserom.gba", 0x1BE88D, 0xD
-
-SilphCo_5F_EventScript_1BE89A:: @ 81BE89A
-	.incbin "baserom.gba", 0x1BE89A, 0xD
-
-SilphCo_5F_EventScript_1BE8A7:: @ 81BE8A7
-	.incbin "baserom.gba", 0x1BE8A7, 0xD
-
-SilphCo_5F_EventScript_1BE8B4:: @ 81BE8B4
-	.incbin "baserom.gba", 0x1BE8B4, 0xD
-
-SilphCo_6F_EventScript_1BE8C1:: @ 81BE8C1
-	.incbin "baserom.gba", 0x1BE8C1, 0xD
-
-SilphCo_6F_EventScript_1BE8CE:: @ 81BE8CE
-	.incbin "baserom.gba", 0x1BE8CE, 0xD
-
-SilphCo_7F_EventScript_1BE8DB:: @ 81BE8DB
-	.incbin "baserom.gba", 0x1BE8DB, 0xD
-
-SilphCo_7F_EventScript_1BE8E8:: @ 81BE8E8
-	.incbin "baserom.gba", 0x1BE8E8, 0xD
-
-SilphCo_10F_EventScript_1BE8F5:: @ 81BE8F5
-	.incbin "baserom.gba", 0x1BE8F5, 0xD
-
-SilphCo_10F_EventScript_1BE902:: @ 81BE902
-	.incbin "baserom.gba", 0x1BE902, 0xD
-
-SilphCo_10F_EventScript_1BE90F:: @ 81BE90F
-	.incbin "baserom.gba", 0x1BE90F, 0xD
-
-PowerPlant_EventScript_1BE91C:: @ 81BE91C
-	.incbin "baserom.gba", 0x1BE91C, 0xD
-
-PowerPlant_EventScript_1BE929:: @ 81BE929
-	.incbin "baserom.gba", 0x1BE929, 0xD
-
-PowerPlant_EventScript_1BE936:: @ 81BE936
-	.incbin "baserom.gba", 0x1BE936, 0xD
-
-PowerPlant_EventScript_1BE943:: @ 81BE943
-	.incbin "baserom.gba", 0x1BE943, 0xD
-
-PowerPlant_EventScript_1BE950:: @ 81BE950
-	.incbin "baserom.gba", 0x1BE950, 0xD
-
-PokemonMansion_1F_EventScript_1BE95D:: @ 81BE95D
-	.incbin "baserom.gba", 0x1BE95D, 0xD
-
-PokemonMansion_1F_EventScript_1BE96A:: @ 81BE96A
-	.incbin "baserom.gba", 0x1BE96A, 0xD
-
-PokemonMansion_2F_EventScript_1BE977:: @ 81BE977
-	.incbin "baserom.gba", 0x1BE977, 0xD
-
-PokemonMansion_3F_EventScript_1BE984:: @ 81BE984
-	.incbin "baserom.gba", 0x1BE984, 0xD
-
-PokemonMansion_3F_EventScript_1BE991:: @ 81BE991
-	.incbin "baserom.gba", 0x1BE991, 0xD
-
-PokemonMansion_B1F_EventScript_1BE99E:: @ 81BE99E
-	.incbin "baserom.gba", 0x1BE99E, 0xD
-
-PokemonMansion_B1F_EventScript_1BE9AB:: @ 81BE9AB
-	.incbin "baserom.gba", 0x1BE9AB, 0xD
-
-PokemonMansion_B1F_EventScript_1BE9B8:: @ 81BE9B8
-	.incbin "baserom.gba", 0x1BE9B8, 0xD
-
-PokemonMansion_B1F_EventScript_1BE9C5:: @ 81BE9C5
-	.incbin "baserom.gba", 0x1BE9C5, 0xD
-
-VictoryRoad_1F_EventScript_1BE9D2:: @ 81BE9D2
-	.incbin "baserom.gba", 0x1BE9D2, 0xD
-
-VictoryRoad_1F_EventScript_1BE9DF:: @ 81BE9DF
-	.incbin "baserom.gba", 0x1BE9DF, 0xD
-
-VictoryRoad_2F_EventScript_1BE9EC:: @ 81BE9EC
-	.incbin "baserom.gba", 0x1BE9EC, 0xD
-
-VictoryRoad_2F_EventScript_1BE9F9:: @ 81BE9F9
-	.incbin "baserom.gba", 0x1BE9F9, 0xD
-
-VictoryRoad_2F_EventScript_1BEA06:: @ 81BEA06
-	.incbin "baserom.gba", 0x1BEA06, 0xD
-
-VictoryRoad_2F_EventScript_1BEA13:: @ 81BEA13
-	.incbin "baserom.gba", 0x1BEA13, 0xD
-
-VictoryRoad_3F_EventScript_1BEA20:: @ 81BEA20
-	.incbin "baserom.gba", 0x1BEA20, 0xD
-
-VictoryRoad_3F_EventScript_1BEA2D:: @ 81BEA2D
-	.incbin "baserom.gba", 0x1BEA2D, 0xD
-
-CeruleanCave_1F_EventScript_1BEA3A:: @ 81BEA3A
-	.incbin "baserom.gba", 0x1BEA3A, 0xD
-
-CeruleanCave_1F_EventScript_1BEA47:: @ 81BEA47
-	.incbin "baserom.gba", 0x1BEA47, 0xD
-
-CeruleanCave_1F_EventScript_1BEA54:: @ 81BEA54
-	.incbin "baserom.gba", 0x1BEA54, 0xD
-
-CeruleanCave_2F_EventScript_1BEA61:: @ 81BEA61
-	.incbin "baserom.gba", 0x1BEA61, 0xD
-
-CeruleanCave_2F_EventScript_1BEA6E:: @ 81BEA6E
-	.incbin "baserom.gba", 0x1BEA6E, 0xD
-
-CeruleanCave_2F_EventScript_1BEA7B:: @ 81BEA7B
-	.incbin "baserom.gba", 0x1BEA7B, 0xD
-
-CeruleanCave_B1F_EventScript_1BEA88:: @ 81BEA88
-	.incbin "baserom.gba", 0x1BEA88, 0xD
-
-CeruleanCave_B1F_EventScript_1BEA95:: @ 81BEA95
-	.incbin "baserom.gba", 0x1BEA95, 0xD
-
-FuchsiaCity_Building1_EventScript_1BEAA2:: @ 81BEAA2
-	.incbin "baserom.gba", 0x1BEAA2, 0xD
-
-TwoIsland_EventScript_1BEAAF:: @ 81BEAAF
-	.incbin "baserom.gba", 0x1BEAAF, 0xD
-
-ThreeIsland_EventScript_1BEABC:: @ 81BEABC
-	.incbin "baserom.gba", 0x1BEABC, 0xD
-
-ViridianForest_EventScript_1BEAC9:: @ 81BEAC9
-	.incbin "baserom.gba", 0x1BEAC9, 0xD
-
-MtMoon_B2F_EventScript_1BEAD6:: @ 81BEAD6
-	.incbin "baserom.gba", 0x1BEAD6, 0xD
-
-MtMoon_B2F_EventScript_1BEAE3:: @ 81BEAE3
-	.incbin "baserom.gba", 0x1BEAE3, 0xD
-
-Route11_EventScript_1BEAF0:: @ 81BEAF0
-	.incbin "baserom.gba", 0x1BEAF0, 0xD
-
-Route9_EventScript_1BEAFD:: @ 81BEAFD
-	.incbin "baserom.gba", 0x1BEAFD, 0xD
-
-RockTunnel_1F_EventScript_1BEB0A:: @ 81BEB0A
-	.incbin "baserom.gba", 0x1BEB0A, 0xD
-
-RockTunnel_1F_EventScript_1BEB17:: @ 81BEB17
-	.incbin "baserom.gba", 0x1BEB17, 0xD
-
-RockTunnel_1F_EventScript_1BEB24:: @ 81BEB24
-	.incbin "baserom.gba", 0x1BEB24, 0xD
-
-RockTunnel_B1F_EventScript_1BEB31:: @ 81BEB31
-	.incbin "baserom.gba", 0x1BEB31, 0xD
-
-RockTunnel_B1F_EventScript_1BEB3E:: @ 81BEB3E
-	.incbin "baserom.gba", 0x1BEB3E, 0xD
-
-SilphCo_8F_EventScript_1BEB4B:: @ 81BEB4B
-	.incbin "baserom.gba", 0x1BEB4B, 0xD
-
-SilphCo_11F_EventScript_1BEB58:: @ 81BEB58
-	.incbin "baserom.gba", 0x1BEB58, 0xD
-
-PokemonMansion_1F_EventScript_1BEB65:: @ 81BEB65
-	.incbin "baserom.gba", 0x1BEB65, 0xD
-
-PokemonMansion_2F_EventScript_1BEB72:: @ 81BEB72
-	.incbin "baserom.gba", 0x1BEB72, 0xD
-
-PokemonMansion_2F_EventScript_1BEB7F:: @ 81BEB7F
-	.incbin "baserom.gba", 0x1BEB7F, 0xD
-
-ViridianCity_EventScript_1BEB8C:: @ 81BEB8C
-	.incbin "baserom.gba", 0x1BEB8C, 0xD
-
-Route11_EventScript_1BEB99:: @ 81BEB99
-	.incbin "baserom.gba", 0x1BEB99, 0xD
-
-Route11_EventScript_1BEBA6:: @ 81BEBA6
-	.incbin "baserom.gba", 0x1BEBA6, 0xD
-
-PokemonTower_5F_EventScript_1BEBB3:: @ 81BEBB3
-	.incbin "baserom.gba", 0x1BEBB3, 0xD
-
-CeladonCity_EventScript_1BEBC0:: @ 81BEBC0
-	.incbin "baserom.gba", 0x1BEBC0, 0xD
-
-RocketHideout_B3F_EventScript_1BEBCD:: @ 81BEBCD
-	.incbin "baserom.gba", 0x1BEBCD, 0xD
-
-SafariZone_North_EventScript_1BEBDA:: @ 81BEBDA
-	.incbin "baserom.gba", 0x1BEBDA, 0xD
-
-SeafoamIslands_1F_EventScript_1BEBE7:: @ 81BEBE7
-	.incbin "baserom.gba", 0x1BEBE7, 0xD
-
-SeafoamIslands_B1F_EventScript_1BEBF4:: @ 81BEBF4
-	.incbin "baserom.gba", 0x1BEBF4, 0xD
-
-SeafoamIslands_B1F_EventScript_1BEC01:: @ 81BEC01
-	.incbin "baserom.gba", 0x1BEC01, 0xD
-
-SeafoamIslands_B2F_EventScript_1BEC0E:: @ 81BEC0E
-	.incbin "baserom.gba", 0x1BEC0E, 0xD
-
-SeafoamIslands_B4F_EventScript_1BEC1B:: @ 81BEC1B
-	.incbin "baserom.gba", 0x1BEC1B, 0xD
-
-FourIsland_EventScript_1BEC28:: @ 81BEC28
-	.incbin "baserom.gba", 0x1BEC28, 0xD
-
-FourIsland_EventScript_1BEC35:: @ 81BEC35
-	.incbin "baserom.gba", 0x1BEC35, 0xD
-
-OneIsland_KindleRoad_EventScript_1BEC42:: @ 81BEC42
-	.incbin "baserom.gba", 0x1BEC42, 0xD
-
-OneIsland_KindleRoad_EventScript_1BEC4F:: @ 81BEC4F
-	.incbin "baserom.gba", 0x1BEC4F, 0xD
-
-OneIsland_KindleRoad_EventScript_1BEC5C:: @ 81BEC5C
-	.incbin "baserom.gba", 0x1BEC5C, 0xD
-
-FiveIsland_Meadow_EventScript_1BEC69:: @ 81BEC69
-	.incbin "baserom.gba", 0x1BEC69, 0xD
-
-FiveIsland_Meadow_EventScript_1BEC76:: @ 81BEC76
-	.incbin "baserom.gba", 0x1BEC76, 0xD
-
-FiveIsland_MemorialPillar_EventScript_1BEC83:: @ 81BEC83
-	.incbin "baserom.gba", 0x1BEC83, 0xD
-
-SixIsland_OutcastIsland_EventScript_1BEC90:: @ 81BEC90
-	.incbin "baserom.gba", 0x1BEC90, 0xD
-
-SixIsland_WaterPath_EventScript_1BEC9D:: @ 81BEC9D
-	.incbin "baserom.gba", 0x1BEC9D, 0xD
-
-SixIsland_WaterPath_EventScript_1BECAA:: @ 81BECAA
-	.incbin "baserom.gba", 0x1BECAA, 0xD
-
-SixIsland_RuinValley_EventScript_1BECB7:: @ 81BECB7
-	.incbin "baserom.gba", 0x1BECB7, 0xD
-
-SixIsland_RuinValley_EventScript_1BECC4:: @ 81BECC4
-	.incbin "baserom.gba", 0x1BECC4, 0xD
-
-SixIsland_RuinValley_EventScript_1BECD1:: @ 81BECD1
-	.incbin "baserom.gba", 0x1BECD1, 0xD
-
-SevenIsland_SevaultCanyon_EventScript_1BECDE:: @ 81BECDE
-	.incbin "baserom.gba", 0x1BECDE, 0xD
-
-SevenIsland_SevaultCanyon_EventScript_1BECEB:: @ 81BECEB
-	.incbin "baserom.gba", 0x1BECEB, 0xD
-
-SevenIsland_SevaultCanyon_EventScript_1BECF8:: @ 81BECF8
-	.incbin "baserom.gba", 0x1BECF8, 0xD
-
-ThreeIsland_BerryForest_EventScript_1BED05:: @ 81BED05
-	.incbin "baserom.gba", 0x1BED05, 0xD
-
-ThreeIsland_BerryForest_EventScript_1BED12:: @ 81BED12
-	.incbin "baserom.gba", 0x1BED12, 0xD
-
-ThreeIsland_BerryForest_EventScript_1BED1F:: @ 81BED1F
-	.incbin "baserom.gba", 0x1BED1F, 0xD
-
-MtEmber_Exterior_EventScript_1BED2C:: @ 81BED2C
-	.incbin "baserom.gba", 0x1BED2C, 0xD
-
-MtEmber_Exterior_EventScript_1BED39:: @ 81BED39
-	.incbin "baserom.gba", 0x1BED39, 0xD
-
-MtEmber_Exterior_EventScript_1BED46:: @ 81BED46
-	.incbin "baserom.gba", 0x1BED46, 0xD
-
-FourIsland_IcefallCave_1F_EventScript_1BED53:: @ 81BED53
-	.incbin "baserom.gba", 0x1BED53, 0xD
-
-FourIsland_IcefallCave_1F_EventScript_1BED60:: @ 81BED60
-	.incbin "baserom.gba", 0x1BED60, 0xD
-
-FourIsland_IcefallCave_B1F_EventScript_1BED6D:: @ 81BED6D
-	.incbin "baserom.gba", 0x1BED6D, 0xD
-
-FourIsland_IcefallCave_B1F_EventScript_1BED7A:: @ 81BED7A
-	.incbin "baserom.gba", 0x1BED7A, 0xD
-
-FiveIsland_RocketWarehouse_EventScript_1BED87:: @ 81BED87
-	.incbin "baserom.gba", 0x1BED87, 0xD
-
-FiveIsland_RocketWarehouse_EventScript_1BED94:: @ 81BED94
-	.incbin "baserom.gba", 0x1BED94, 0xD
-
-FiveIsland_RocketWarehouse_EventScript_1BEDA1:: @ 81BEDA1
-	.incbin "baserom.gba", 0x1BEDA1, 0xD
-
-FiveIsland_RocketWarehouse_EventScript_1BEDAE:: @ 81BEDAE
-	.incbin "baserom.gba", 0x1BEDAE, 0xD
-
-FiveIsland_LostCave_Room10_EventScript_1BEDBB:: @ 81BEDBB
-	.incbin "baserom.gba", 0x1BEDBB, 0xD
-
-FiveIsland_LostCave_Room11_EventScript_1BEDC8:: @ 81BEDC8
-	.incbin "baserom.gba", 0x1BEDC8, 0xD
-
-FiveIsland_LostCave_Room12_EventScript_1BEDD5:: @ 81BEDD5
-	.incbin "baserom.gba", 0x1BEDD5, 0xD
-
-FiveIsland_LostCave_Room13_EventScript_1BEDE2:: @ 81BEDE2
-	.incbin "baserom.gba", 0x1BEDE2, 0xD
-
-FiveIsland_LostCave_Room14_EventScript_1BEDEF:: @ 81BEDEF
-	.incbin "baserom.gba", 0x1BEDEF, 0xD
-
-SevenIsland_SevaultCanyon_House_EventScript_1BEDFC:: @ 81BEDFC
-	.incbin "baserom.gba", 0x1BEDFC, 0xD
-
-SilphCo_4F_EventScript_1BEE09:: @ 81BEE09
-	.incbin "baserom.gba", 0x1BEE09, 0xD
-
-PewterCity_PokemonCenter_1F_EventScript_1BEE16:: @ 81BEE16
-	.incbin "baserom.gba", 0x1BEE16, 0x582
-
-Route5_PokemonDayCare_EventScript_1BF398:: @ 81BF398
-	.incbin "baserom.gba", 0x1BF398, 0x1AE
-
-gUnknown_81BF546:: @ 81BF546
-	.incbin "baserom.gba", 0x1BF546, 0xF
-
-gUnknown_81BF555:: @ 81BF555
-	.incbin "baserom.gba", 0x1BF555, 0x8E
-
-gUnknown_81BF5E3:: @ 81BF5E3
-	.incbin "baserom.gba", 0x1BF5E3, 0xB7
-
-gUnknown_81BF69A:: @ 81BF69A
-	.incbin "baserom.gba", 0x1BF69A, 0x35
-
-gUnknown_81BF6CF:: @ 81BF6CF
-	.incbin "baserom.gba", 0x1BF6CF, 0x21
-
-gUnknown_81BF6F0:: @ 81BF6F0
-	.incbin "baserom.gba", 0x1BF6F0, 0x3A
-
-Text_1BF72A:: @ 81BF72A
-	.incbin "baserom.gba", 0x1BF72A, 0x2B
-
-gUnknown_81BF755:: @ 81BF755
-	.incbin "baserom.gba", 0x1BF755, 0x34
-
-gUnknown_81BF789:: @ 81BF789
-	.incbin "baserom.gba", 0x1BF789, 0x2D
-
-gUnknown_81BF7B6:: @ 81BF7B6
-	.incbin "baserom.gba", 0x1BF7B6, 0x2E
-
-gUnknown_81BF7E4:: @ 81BF7E4
-	.incbin "baserom.gba", 0x1BF7E4, 0x55
-
-gUnknown_81BF839:: @ 81BF839
-	.incbin "baserom.gba", 0x1BF839, 0x27
-
-gUnknown_81BF860:: @ 81BF860
-	.incbin "baserom.gba", 0x1BF860, 0x3F
-
-gUnknown_81BF89F:: @ 81BF89F
-	.incbin "baserom.gba", 0x1BF89F, 0x57
-
-gUnknown_81BF8F6:: @ 81BF8F6
-	.incbin "baserom.gba", 0x1BF8F6, 0x20
-
-gUnknown_81BF916:: @ 81BF916
-	.incbin "baserom.gba", 0x1BF916, 0x1C
-
-gUnknown_81BF932:: @ 81BF932
-	.incbin "baserom.gba", 0x1BF932, 0x1D
-
-gUnknown_81BF94F:: @ 81BF94F
-	.incbin "baserom.gba", 0x1BF94F, 0x27
-
-gUnknown_81BF976:: @ 81BF976
-	.incbin "baserom.gba", 0x1BF976, 0x12
-
-gUnknown_81BF988:: @ 81BF988
-	.incbin "baserom.gba", 0x1BF988, 0x44
-
-gUnknown_81BF9CC:: @ 81BF9CC
-	.incbin "baserom.gba", 0x1BF9CC, 0x23
-
-gUnknown_81BF9EF:: @ 81BF9EF
-	.incbin "baserom.gba", 0x1BF9EF, 0x4C
-
-gUnknown_81BFA3B:: @ 81BFA3B
-	.incbin "baserom.gba", 0x1BFA3B, 0x2C
-
-gUnknown_81BFA67:: @ 81BFA67
-	.incbin "baserom.gba", 0x1BFA67, 0x1E
-
-gUnknown_81BFA85:: @ 81BFA85
-	.incbin "baserom.gba", 0x1BFA85, 0x28
-
-gUnknown_81BFAAD:: @ 81BFAAD
-	.incbin "baserom.gba", 0x1BFAAD, 0x3B
-
-gUnknown_81BFAE8:: @ 81BFAE8
-	.incbin "baserom.gba", 0x1BFAE8, 0x21
-
-gUnknown_81BFB09:: @ 81BFB09
-	.incbin "baserom.gba", 0x1BFB09, 0x56
-
-gUnknown_81BFB5F:: @ 81BFB5F
-	.incbin "baserom.gba", 0x1BFB5F, 0x6
-
-gUnknown_81BFB65:: @ 81BFB65
-	.incbin "baserom.gba", 0x1BFB65, 0x22
 
 EventScript_SafariWarpOut:: @ 81BFB87
 	.incbin "baserom.gba", 0x1BFB87, 0x23

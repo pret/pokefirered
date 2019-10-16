@@ -1552,7 +1552,7 @@ EventScript_1A65B8:: @ 81A65B8
 EventScript_1A65CE:: @ 81A65CE
 	applymovement VAR_LAST_TALKED, Movement_1A75E7
 	waitmovement 0
-	dofieldeffect 25
+	dofieldeffect FLDEFF_POKEBALL
 	waitfieldeffect 25
 	applymovement VAR_LAST_TALKED, Movement_1A75ED
 	waitmovement 0
@@ -1989,7 +1989,7 @@ EventScript_1A6AC8:: @ 81A6AC8
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1A6AC8_Release
 	msgbox Text_1A55A5
-	dofieldeffect 9
+	dofieldeffect FLDEFF_USE_SURF
 EventScript_1A6AC8_Release:@ 81A6B0B
 	releaseall
 EventScript_1A6AC8_End: @ 81A6B0C
@@ -8029,7 +8029,7 @@ EventScript_1B2907:: @ 81B2907
 	message gUnknown_81B1E42
 	waitmessage
 	playse MUS_ME_PHOTO
-	dofieldeffect 69
+	FLDEFF_UNK_45 69
 	delay 60
 	special sub_80CC2BC
 	msgbox gUnknown_81B1E7D
@@ -10546,14 +10546,14 @@ ViridianCity_EventScript_1BDF13:: @ 81BDF13
 	goto_if 1, EventScript_1BDF91
 	msgbox gUnknown_81BDFD7
 	closemessage
-	dofieldeffect 2
+	dofieldeffect FLDEFF_USE_CUT_ON_TREE
 	waitstate
 	goto EventScript_1BDF76
 	end
 
 gUnknown_81BDF6B:: @ 81BDF6B
 	lockall
-	dofieldeffect 2
+	dofieldeffect FLDEFF_USE_CUT_ON_TREE
 	waitstate
 	goto EventScript_1BDF76
 	end
@@ -10624,14 +10624,14 @@ CeruleanCave_1F_EventScript_1BE00C:: @ 81BE00C
 	goto_if 1, EventScript_1BE09A
 	msgbox gUnknown_81BDFD7
 	closemessage
-	dofieldeffect 37
+	dofieldeffect FLDEFF_USE_ROCK_SMASH
 	waitstate
 	goto EventScript_1BE06F
 	end
 
 EventScript_FldEffRockSmash:: @ 81BE064
 	lockall
-	dofieldeffect 37
+	dofieldeffect FLDEFF_USE_ROCK_SMASH
 	waitstate
 	goto EventScript_1BE06F
 	end
@@ -10704,14 +10704,14 @@ VictoryRoad_2F_EventScript_1BE11D:: @ 81BE11D
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1BE197
 	closemessage
-	dofieldeffect 40
+	dofieldeffect FLDEFF_USE_STRENGTH
 	waitstate
 	goto EventScript_1BE179
 	end
 
 EventScript_FldEffStrength:: @ 81BE16E
 	lockall
-	dofieldeffect 40
+	dofieldeffect FLDEFF_USE_STRENGTH
 	waitstate
 	goto EventScript_1BE179
 	end
@@ -10766,7 +10766,7 @@ gUnknown_81BE2B7:: @ 81BE2B7
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1BE308
 	msgbox gUnknown_81BE378
-	dofieldeffect 43
+	dofieldeffect FLDEFF_USE_WATERFALL
 	goto EventScript_1BE308
 
 EventScript_81BE2FF:: @ 81BE2FF
@@ -10800,7 +10800,7 @@ EventScript_1BE38B:: @ 81BE38B
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1BE3D2
 	msgbox gUnknown_81BE49B
-	dofieldeffect 44
+	dofieldeffect FLDEFF_USE_DIVE
 	goto EventScript_1BE3D2
 
 EventScript_1BE3C9:: @ 81BE3C9
@@ -10823,7 +10823,7 @@ EventScript_1BE3D4:: @ 81BE3D4
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1BE429
 	msgbox gUnknown_81BE49B
-	dofieldeffect 44
+	dofieldeffect FLDEFF_USE_DIVE
 	goto EventScript_1BE429
 
 EventScript_1BE412:: @ 81BE412

@@ -10,9 +10,9 @@
 #include "constants/vars.h"
 #include "constants/battle.h"
 #include "constants/spawn_points.h"
+#include "constants/field_effects.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
-@	.include "constants/constants.inc"
 
 	.section script_data, "aw", %progbits
 

@@ -1,232 +1,232 @@
 
 	.align 2
 gDirectSoundWaveData_0:: @ 84A3DA8
-	.incbin "baserom.gba", 0x4A3DA8, 0x6A4
+	.incbin "sound/direct_sound_samples/wave_0.bin"
 
 gDirectSoundWaveData_1:: @ 84A444C
-	.incbin "baserom.gba", 0x4A444C, 0x7F8
+	.incbin "sound/direct_sound_samples/wave_1.bin"
 
 gDirectSoundWaveData_2:: @ 84A4C44
-	.incbin "baserom.gba", 0x4A4C44, 0xBCC
+	.incbin "sound/direct_sound_samples/wave_2.bin"
 
 gDirectSoundWaveData_3:: @ 84A5810
-	.incbin "baserom.gba", 0x4A5810, 0xF38
+	.incbin "sound/direct_sound_samples/wave_3.bin"
 
 gDirectSoundWaveData_4:: @ 84A6748
-	.incbin "baserom.gba", 0x4A6748, 0xC74
+	.incbin "sound/direct_sound_samples/wave_4.bin"
 
 gDirectSoundWaveData_5:: @ 84A73BC
-	.incbin "baserom.gba", 0x4A73BC, 0x14D0
+	.incbin "sound/direct_sound_samples/wave_5.bin"
 
 gDirectSoundWaveData_6:: @ 84A888C
-	.incbin "baserom.gba", 0x4A888C, 0x16B0
+	.incbin "sound/direct_sound_samples/wave_6.bin"
 
 gDirectSoundWaveData_7:: @ 84A9F3C
-	.incbin "baserom.gba", 0x4A9F3C, 0x1344
+	.incbin "sound/direct_sound_samples/wave_7.bin"
 
 gDirectSoundWaveData_8:: @ 84AB280
-	.incbin "baserom.gba", 0x4AB280, 0xAA4
+	.incbin "sound/direct_sound_samples/wave_8.bin"
 
 gDirectSoundWaveData_9:: @ 84ABD24
-	.incbin "baserom.gba", 0x4ABD24, 0x1314
+	.incbin "sound/direct_sound_samples/wave_9.bin"
 
 gDirectSoundWaveData_10:: @ 84AD038
-	.incbin "baserom.gba", 0x4AD038, 0x35FC
+	.incbin "sound/direct_sound_samples/wave_10.bin"
 
 gDirectSoundWaveData_11:: @ 84B0634
-	.incbin "baserom.gba", 0x4B0634, 0x4D8
+	.incbin "sound/direct_sound_samples/wave_11.bin"
 
 gDirectSoundWaveData_12:: @ 84B0B0C
-	.incbin "baserom.gba", 0x4B0B0C, 0x18DC
+	.incbin "sound/direct_sound_samples/wave_12.bin"
 
 gDirectSoundWaveData_13:: @ 84B23E8
-	.incbin "baserom.gba", 0x4B23E8, 0x1328
+	.incbin "sound/direct_sound_samples/wave_13.bin"
 
 gDirectSoundWaveData_14:: @ 84B3710
-	.incbin "baserom.gba", 0x4B3710, 0x4A0
+	.incbin "sound/direct_sound_samples/wave_14.bin"
 
 gDirectSoundWaveData_15:: @ 84B3BB0
-	.incbin "baserom.gba", 0x4B3BB0, 0x6F4
+	.incbin "sound/direct_sound_samples/wave_15.bin"
 
 gDirectSoundWaveData_16:: @ 84B42A4
-	.incbin "baserom.gba", 0x4B42A4, 0x890
+	.incbin "sound/direct_sound_samples/wave_16.bin"
 
 gDirectSoundWaveData_17:: @ 84B4B34
-	.incbin "baserom.gba", 0x4B4B34, 0x878
+	.incbin "sound/direct_sound_samples/wave_17.bin"
 
 gDirectSoundWaveData_18:: @ 84B53AC
-	.incbin "baserom.gba", 0x4B53AC, 0x8B4
+	.incbin "sound/direct_sound_samples/wave_18.bin"
 
 gDirectSoundWaveData_19:: @ 84B5C60
-	.incbin "baserom.gba", 0x4B5C60, 0x8E4
+	.incbin "sound/direct_sound_samples/wave_19.bin"
 
 gDirectSoundWaveData_20:: @ 84B6544
-	.incbin "baserom.gba", 0x4B6544, 0xF2C
+	.incbin "sound/direct_sound_samples/wave_20.bin"
 
 gDirectSoundWaveData_21:: @ 84B7470
-	.incbin "baserom.gba", 0x4B7470, 0x518
+	.incbin "sound/direct_sound_samples/wave_21.bin"
 
 gDirectSoundWaveData_22:: @ 84B7988
-	.incbin "baserom.gba", 0x4B7988, 0x5C8
+	.incbin "sound/direct_sound_samples/wave_22.bin"
 
 gDirectSoundWaveData_23:: @ 84B7F50
-	.incbin "baserom.gba", 0x4B7F50, 0xF18
+	.incbin "sound/direct_sound_samples/wave_23.bin"
 
 gDirectSoundWaveData_24:: @ 84B8E68
-	.incbin "baserom.gba", 0x4B8E68, 0x1974
+	.incbin "sound/direct_sound_samples/wave_24.bin"
 
 gDirectSoundWaveData_25:: @ 84BA7DC
-	.incbin "baserom.gba", 0x4BA7DC, 0x20DC
+	.incbin "sound/direct_sound_samples/wave_25.bin"
 
 gDirectSoundWaveData_26:: @ 84BC8B8
-	.incbin "baserom.gba", 0x4BC8B8, 0x7830
+	.incbin "sound/direct_sound_samples/wave_26.bin"
 
 gDirectSoundWaveData_27:: @ 84C40E8
-	.incbin "baserom.gba", 0x4C40E8, 0x9B8
+	.incbin "sound/direct_sound_samples/wave_27.bin"
 
 gDirectSoundWaveData_28:: @ 84C4AA0
-	.incbin "baserom.gba", 0x4C4AA0, 0xE80
+	.incbin "sound/direct_sound_samples/wave_28.bin"
 
 gDirectSoundWaveData_29:: @ 84C5920
-	.incbin "baserom.gba", 0x4C5920, 0xE74
+	.incbin "sound/direct_sound_samples/wave_29.bin"
 
 gDirectSoundWaveData_30:: @ 84C6794
-	.incbin "baserom.gba", 0x4C6794, 0x1814
+	.incbin "sound/direct_sound_samples/wave_30.bin"
 
 gDirectSoundWaveData_31:: @ 84C7FA8
-	.incbin "baserom.gba", 0x4C7FA8, 0x15A4
+	.incbin "sound/direct_sound_samples/wave_31.bin"
 
 gDirectSoundWaveData_32:: @ 84C954C
-	.incbin "baserom.gba", 0x4C954C, 0x15E4
+	.incbin "sound/direct_sound_samples/wave_32.bin"
 
 gDirectSoundWaveData_33:: @ 84CAB30
-	.incbin "baserom.gba", 0x4CAB30, 0x10F4
+	.incbin "sound/direct_sound_samples/wave_33.bin"
 
 gDirectSoundWaveData_34:: @ 84CBC24
-	.incbin "baserom.gba", 0x4CBC24, 0xF60
+	.incbin "sound/direct_sound_samples/wave_34.bin"
 
 gDirectSoundWaveData_35:: @ 84CCB84
-	.incbin "baserom.gba", 0x4CCB84, 0x1660
+	.incbin "sound/direct_sound_samples/wave_35.bin"
 
 gDirectSoundWaveData_36:: @ 84CE1E4
-	.incbin "baserom.gba", 0x4CE1E4, 0x155C
+	.incbin "sound/direct_sound_samples/wave_36.bin"
 
 gDirectSoundWaveData_37:: @ 84CF740
-	.incbin "baserom.gba", 0x4CF740, 0xB8C
+	.incbin "sound/direct_sound_samples/wave_37.bin"
 
 gDirectSoundWaveData_38:: @ 84D02CC
-	.incbin "baserom.gba", 0x4D02CC, 0x35A4
+	.incbin "sound/direct_sound_samples/wave_38.bin"
 
 gDirectSoundWaveData_39:: @ 84D3870
-	.incbin "baserom.gba", 0x4D3870, 0x231C
+	.incbin "sound/direct_sound_samples/wave_39.bin"
 
 gDirectSoundWaveData_40:: @ 84D5B8C
-	.incbin "baserom.gba", 0x4D5B8C, 0x36CC
+	.incbin "sound/direct_sound_samples/wave_40.bin"
 
 gDirectSoundWaveData_41:: @ 84D9258
-	.incbin "baserom.gba", 0x4D9258, 0x1350
+	.incbin "sound/direct_sound_samples/wave_41.bin"
 
 gDirectSoundWaveData_42:: @ 84DA5A8
-	.incbin "baserom.gba", 0x4DA5A8, 0x1510
+	.incbin "sound/direct_sound_samples/wave_42.bin"
 
 gDirectSoundWaveData_43:: @ 84DBAB8
-	.incbin "baserom.gba", 0x4DBAB8, 0x1420
+	.incbin "sound/direct_sound_samples/wave_43.bin"
 
 gDirectSoundWaveData_44:: @ 84DCED8
-	.incbin "baserom.gba", 0x4DCED8, 0x109C
+	.incbin "sound/direct_sound_samples/wave_44.bin"
 
 gDirectSoundWaveData_45:: @ 84DDF74
-	.incbin "baserom.gba", 0x4DDF74, 0x105C
+	.incbin "sound/direct_sound_samples/wave_45.bin"
 
 gDirectSoundWaveData_46:: @ 84DEFD0
-	.incbin "baserom.gba", 0x4DEFD0, 0x6F94
+	.incbin "sound/direct_sound_samples/wave_46.bin"
 
 gDirectSoundWaveData_47:: @ 84E5F64
-	.incbin "baserom.gba", 0x4E5F64, 0x4584
+	.incbin "sound/direct_sound_samples/wave_47.bin"
 
 gDirectSoundWaveData_48:: @ 84EA4E8
-	.incbin "baserom.gba", 0x4EA4E8, 0x764
+	.incbin "sound/direct_sound_samples/wave_48.bin"
 
 gDirectSoundWaveData_49:: @ 84EAC4C
-	.incbin "baserom.gba", 0x4EAC4C, 0x1C50
+	.incbin "sound/direct_sound_samples/wave_49.bin"
 
 gDirectSoundWaveData_50:: @ 84EC89C
-	.incbin "baserom.gba", 0x4EC89C, 0x14D0
+	.incbin "sound/direct_sound_samples/wave_50.bin"
 
 gDirectSoundWaveData_51:: @ 84EDD6C
-	.incbin "baserom.gba", 0x4EDD6C, 0xA0C
+	.incbin "sound/direct_sound_samples/wave_51.bin"
 
 gDirectSoundWaveData_52:: @ 84EE778
-	.incbin "baserom.gba", 0x4EE778, 0x1C14
+	.incbin "sound/direct_sound_samples/wave_52.bin"
 
 gDirectSoundWaveData_53:: @ 84F038C
-	.incbin "baserom.gba", 0x4F038C, 0x1960
+	.incbin "sound/direct_sound_samples/wave_53.bin"
 
 gDirectSoundWaveData_54:: @ 84F1CEC
-	.incbin "baserom.gba", 0x4F1CEC, 0x14C4
+	.incbin "sound/direct_sound_samples/wave_54.bin"
 
 gDirectSoundWaveData_55:: @ 84F31B0
-	.incbin "baserom.gba", 0x4F31B0, 0x73C
+	.incbin "sound/direct_sound_samples/wave_55.bin"
 
 gDirectSoundWaveData_56:: @ 84F38EC
-	.incbin "baserom.gba", 0x4F38EC, 0x1BF0
+	.incbin "sound/direct_sound_samples/wave_56.bin"
 
 gDirectSoundWaveData_57:: @ 84F54DC
-	.incbin "baserom.gba", 0x4F54DC, 0x13B4
+	.incbin "sound/direct_sound_samples/wave_57.bin"
 
 gDirectSoundWaveData_58:: @ 84F6890
-	.incbin "baserom.gba", 0x4F6890, 0x2684
+	.incbin "sound/direct_sound_samples/wave_58.bin"
 
 gDirectSoundWaveData_59:: @ 84F8F14
-	.incbin "baserom.gba", 0x4F8F14, 0x1244
+	.incbin "sound/direct_sound_samples/wave_59.bin"
 
 gDirectSoundWaveData_60:: @ 84FA158
-	.incbin "baserom.gba", 0x4FA158, 0x1010
+	.incbin "sound/direct_sound_samples/wave_60.bin"
 
 gDirectSoundWaveData_61:: @ 84FB168
-	.incbin "baserom.gba", 0x4FB168, 0x1308
+	.incbin "sound/direct_sound_samples/wave_61.bin"
 
 gDirectSoundWaveData_62:: @ 84FC470
-	.incbin "baserom.gba", 0x4FC470, 0x210C
+	.incbin "sound/direct_sound_samples/wave_62.bin"
 
 gDirectSoundWaveData_63:: @ 84FE57C
-	.incbin "baserom.gba", 0x4FE57C, 0x1FDC
+	.incbin "sound/direct_sound_samples/wave_63.bin"
 
 gDirectSoundWaveData_64:: @ 8500558
-	.incbin "baserom.gba", 0x500558, 0x2210
+	.incbin "sound/direct_sound_samples/wave_64.bin"
 
 gDirectSoundWaveData_65:: @ 8502768
-	.incbin "baserom.gba", 0x502768, 0x7CC
+	.incbin "sound/direct_sound_samples/wave_65.bin"
 
 gDirectSoundWaveData_66:: @ 8502F34
-	.incbin "baserom.gba", 0x502F34, 0x1970
+	.incbin "sound/direct_sound_samples/wave_66.bin"
 
 gDirectSoundWaveData_67:: @ 85048A4
-	.incbin "baserom.gba", 0x5048A4, 0x414
+	.incbin "sound/direct_sound_samples/wave_67.bin"
 
 gDirectSoundWaveData_68:: @ 8504CB8
-	.incbin "baserom.gba", 0x504CB8, 0x1FB0
+	.incbin "sound/direct_sound_samples/wave_68.bin"
 
 gDirectSoundWaveData_69:: @ 8506C68
-	.incbin "baserom.gba", 0x506C68, 0x32E0
+	.incbin "sound/direct_sound_samples/wave_69.bin"
 
 gDirectSoundWaveData_70:: @ 8509F48
-	.incbin "baserom.gba", 0x509F48, 0xA30
+	.incbin "sound/direct_sound_samples/wave_70.bin"
 
 gDirectSoundWaveData_71:: @ 850A978
-	.incbin "baserom.gba", 0x50A978, 0xA34
+	.incbin "sound/direct_sound_samples/wave_71.bin"
 
 gDirectSoundWaveData_72:: @ 850B3AC
-	.incbin "baserom.gba", 0x50B3AC, 0x1B40
+	.incbin "sound/direct_sound_samples/wave_72.bin"
 
 gDirectSoundWaveData_73:: @ 850CEEC
-	.incbin "baserom.gba", 0x50CEEC, 0x8C8
+	.incbin "sound/direct_sound_samples/wave_73.bin"
 
 gDirectSoundWaveData_74:: @ 850D7B4
-	.incbin "baserom.gba", 0x50D7B4, 0x13D0
+	.incbin "sound/direct_sound_samples/wave_74.bin"
 
 gDirectSoundWaveData_75:: @ 850EB84
-	.incbin "baserom.gba", 0x50EB84, 0x1040
+	.incbin "sound/direct_sound_samples/wave_75.bin"
 
 	.align 2
 Cry_Bulbasaur:: @ 850FBC4
@@ -1783,40 +1783,40 @@ Cry_Chimecho:: @ 869D4D0
 	.align 2
 
 gDirectSoundWaveData_76:: @ 869DEE0
-	.incbin "baserom.gba", 0x69DEE0, 0x1F60
+	.incbin "sound/direct_sound_samples/wave_76.bin"
 
 gDirectSoundWaveData_77:: @ 869FE40
-	.incbin "baserom.gba", 0x69FE40, 0x1AA0
+	.incbin "sound/direct_sound_samples/wave_77.bin"
 
 gDirectSoundWaveData_78:: @ 86A18E0
-	.incbin "baserom.gba", 0x6A18E0, 0x1F70
+	.incbin "sound/direct_sound_samples/wave_78.bin"
 
 gDirectSoundWaveData_79:: @ 86A3850
-	.incbin "baserom.gba", 0x6A3850, 0x1838
+	.incbin "sound/direct_sound_samples/wave_79.bin"
 
 gDirectSoundWaveData_80:: @ 86A5088
-	.incbin "baserom.gba", 0x6A5088, 0x13D0
+	.incbin "sound/direct_sound_samples/wave_80.bin"
 
 gDirectSoundWaveData_81:: @ 86A6458
-	.incbin "baserom.gba", 0x6A6458, 0x11C4
+	.incbin "sound/direct_sound_samples/wave_81.bin"
 
 gDirectSoundWaveData_82:: @ 86A761C
-	.incbin "baserom.gba", 0x6A761C, 0x1E70
+	.incbin "sound/direct_sound_samples/wave_82.bin"
 
 gDirectSoundWaveData_83:: @ 86A948C
-	.incbin "baserom.gba", 0x6A948C, 0x2FF0
+	.incbin "sound/direct_sound_samples/wave_83.bin"
 
 gDirectSoundWaveData_84:: @ 86AC47C
-	.incbin "baserom.gba", 0x6AC47C, 0x2C54
+	.incbin "sound/direct_sound_samples/wave_84.bin"
 
 gDirectSoundWaveData_85:: @ 86AF0D0
-	.incbin "baserom.gba", 0x6AF0D0, 0xA60
+	.incbin "sound/direct_sound_samples/wave_85.bin"
 
 gDirectSoundWaveData_86:: @ 86AFB30
-	.incbin "baserom.gba", 0x6AFB30, 0x2668
+	.incbin "sound/direct_sound_samples/wave_86.bin"
 
 gDirectSoundWaveData_87:: @ 86B2198
-	.incbin "baserom.gba", 0x6B2198, 0x13A8
+	.incbin "sound/direct_sound_samples/wave_87.bin"
 
 gDirectSoundWaveData_88:: @ 86B3540
-	.incbin "baserom.gba", 0x6B3540, 0x2100
+	.incbin "sound/direct_sound_samples/wave_88.bin"

@@ -11980,7 +11980,6 @@ gMonBackPic_UnownI:: @ 8E3F228
 	.incbin "graphics/pokemon/unown/i/back.4bpp.lz"
 
 	.align 2
-
 gMonIcon_UnownI:: @ 8E3F3D0
 	.incbin "graphics/pokemon/unown/i/icon.4bpp"
 

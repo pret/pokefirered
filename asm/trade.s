@@ -83,7 +83,7 @@ _0804C674:
 	movs r1, 0x1
 	movs r2, 0xE0
 	bl TextWindow_SetUserSelectedFrame
-	bl sub_809707C
+	bl LoadMonIconPalettes
 	ldr r2, _0804C708 @ =gUnknown_2031DA8
 	ldr r0, [r2]
 	adds r0, 0x69
@@ -521,8 +521,8 @@ _0804CA4A:
 	str r0, [sp, 0x4]
 	str r1, [sp, 0x8]
 	adds r0, r5, 0
-	ldr r1, _0804CB44 @ =sub_809718C
-	bl sub_8096E18
+	ldr r1, _0804CB44 @ =SpriteCB_MonIcon
+	bl CreateMonIcon
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, 0x28
@@ -580,8 +580,8 @@ _0804CABE:
 	movs r0, 0
 	str r0, [sp, 0x8]
 	adds r0, r5, 0
-	ldr r1, _0804CB44 @ =sub_809718C
-	bl sub_8096E18
+	ldr r1, _0804CB44 @ =SpriteCB_MonIcon
+	bl CreateMonIcon
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, 0x2E
@@ -607,7 +607,7 @@ _0804CB34: .4byte gEnemyPartyCount
 _0804CB38: .4byte gUnknown_8261E40
 _0804CB3C: .4byte gPlayerParty
 _0804CB40: .4byte 0xfff40000
-_0804CB44: .4byte sub_809718C
+_0804CB44: .4byte SpriteCB_MonIcon
 _0804CB48: .4byte gEnemyParty
 _0804CB4C: .4byte gMain
 _0804CB50:
@@ -1211,8 +1211,8 @@ _0804D048:
 	str r0, [sp, 0x4]
 	str r1, [sp, 0x8]
 	adds r0, r5, 0
-	ldr r1, _0804D144 @ =sub_809718C
-	bl sub_8096E18
+	ldr r1, _0804D144 @ =SpriteCB_MonIcon
+	bl CreateMonIcon
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, 0x28
@@ -1270,8 +1270,8 @@ _0804D0BE:
 	movs r0, 0
 	str r0, [sp, 0x8]
 	adds r0, r5, 0
-	ldr r1, _0804D144 @ =sub_809718C
-	bl sub_8096E18
+	ldr r1, _0804D144 @ =SpriteCB_MonIcon
+	bl CreateMonIcon
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, 0x2E
@@ -1297,7 +1297,7 @@ _0804D134: .4byte gEnemyPartyCount
 _0804D138: .4byte gUnknown_8261E40
 _0804D13C: .4byte gPlayerParty
 _0804D140: .4byte 0xfff40000
-_0804D144: .4byte sub_809718C
+_0804D144: .4byte SpriteCB_MonIcon
 _0804D148: .4byte gEnemyParty
 _0804D14C: .4byte gMain
 _0804D150:
@@ -4651,7 +4651,7 @@ _0804EBA2:
 	adds r0, r1
 	lsls r0, 2
 	add r0, r8
-	ldr r1, _0804ECAC @ =sub_809718C
+	ldr r1, _0804ECAC @ =SpriteCB_MonIcon
 	bl StoreSpriteCallbackInData6
 	ldr r2, _0804ECA4 @ =gUnknown_2031DA8
 	ldr r1, [r2]
@@ -4698,7 +4698,7 @@ _0804EC98:
 _0804ECA0: .4byte gSprites
 _0804ECA4: .4byte gUnknown_2031DA8
 _0804ECA8: .4byte gUnknown_8261E40
-_0804ECAC: .4byte sub_809718C
+_0804ECAC: .4byte SpriteCB_MonIcon
 _0804ECB0: .4byte gUnknown_8260A32
 _0804ECB4:
 	ldr r2, _0804ECE4 @ =gSprites
@@ -4717,7 +4717,7 @@ _0804ECB4:
 	adds r2, 0x1C
 	adds r0, r2
 	ldr r1, [r0]
-	ldr r0, _0804ECE8 @ =sub_809718C
+	ldr r0, _0804ECE8 @ =SpriteCB_MonIcon
 	cmp r1, r0
 	beq _0804ECDC
 	b _0804EE54
@@ -4727,7 +4727,7 @@ _0804ECDC:
 	b _0804EE54
 	.align 2, 0
 _0804ECE4: .4byte gSprites
-_0804ECE8: .4byte sub_809718C
+_0804ECE8: .4byte SpriteCB_MonIcon
 _0804ECEC:
 	ldr r1, _0804EE08 @ =gUnknown_8260834
 	ldr r0, [sp, 0x60]
@@ -6356,7 +6356,7 @@ _0804F988:
 	subs r1, r2
 	lsls r1, 24
 	lsrs r1, 24
-	bl sub_8097414
+	bl MonIcon_SetAnim
 	adds r4, 0x1
 	ldr r0, [r6]
 	adds r0, 0x36

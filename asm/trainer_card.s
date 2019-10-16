@@ -1215,7 +1215,7 @@ _080899AE:
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8096FD4
+	bl MailSpeciesToIconSpecies
 	adds r1, r5, 0
 	adds r1, 0x54
 	strh r0, [r1]
@@ -1223,7 +1223,7 @@ _080899AE:
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8096FD4
+	bl MailSpeciesToIconSpecies
 	adds r1, r5, 0
 	adds r1, 0x56
 	strh r0, [r1]
@@ -1231,7 +1231,7 @@ _080899AE:
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8096FD4
+	bl MailSpeciesToIconSpecies
 	adds r1, r5, 0
 	adds r1, 0x58
 	strh r0, [r1]
@@ -1239,7 +1239,7 @@ _080899AE:
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8096FD4
+	bl MailSpeciesToIconSpecies
 	adds r1, r5, 0
 	adds r1, 0x5A
 	strh r0, [r1]
@@ -1247,7 +1247,7 @@ _080899AE:
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8096FD4
+	bl MailSpeciesToIconSpecies
 	adds r1, r5, 0
 	adds r1, 0x5C
 	strh r0, [r1]
@@ -1255,7 +1255,7 @@ _080899AE:
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8096FD4
+	bl MailSpeciesToIconSpecies
 	adds r1, r5, 0
 	adds r1, 0x5E
 	strh r0, [r1]
@@ -3203,7 +3203,7 @@ _0808AAA4:
 	ldrh r0, [r1]
 	cmp r0, 0
 	beq _0808AAEE
-	bl sub_8097218
+	bl GetMonIconPaletteIndexFromSpecies
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r4, 20
@@ -3250,7 +3250,7 @@ _0808AB0C: .4byte 0x00000457
 sub_808AB10: @ 808AB10
 	push {r4,r5,lr}
 	sub sp, 0x4
-	ldr r0, _0808AB40 @ =gUnknown_83D3740
+	ldr r0, _0808AB40 @ =gMonIconPalettes
 	ldr r4, _0808AB44 @ =gUnknown_20397A4
 	ldr r1, [r4]
 	ldr r5, _0808AB48 @ =0x00000396
@@ -3271,7 +3271,7 @@ sub_808AB10: @ 808AB10
 	beq _0808AB80
 	b _0808AB88
 	.align 2, 0
-_0808AB40: .4byte gUnknown_83D3740
+_0808AB40: .4byte gMonIconPalettes
 _0808AB44: .4byte gUnknown_20397A4
 _0808AB48: .4byte 0x00000396
 _0808AB4C: .4byte 0x000004aa
@@ -3322,7 +3322,7 @@ _0808AB9A:
 	adds r0, r1
 	ldrh r0, [r0]
 	movs r1, 0
-	bl sub_8097028
+	bl GetMonIconTiles
 	adds r1, r0, 0
 	lsls r3, r4, 20
 	movs r0, 0x80

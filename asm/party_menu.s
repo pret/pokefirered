@@ -373,7 +373,7 @@ _0811ED44:
 	bl sub_8122980
 	b _0811EDFC
 _0811ED4A:
-	bl sub_809707C
+	bl LoadMonIconPalettes
 	b _0811EDFC
 _0811ED50:
 	bl party_menu_add_per_mon_objects
@@ -7206,7 +7206,7 @@ party_menu_link_mon_icon_anim: @ 812224C
 	lsrs r7, r3, 24
 	cmp r5, 0
 	beq _0812229A
-	ldr r1, _081222A4 @ =sub_809718C
+	ldr r1, _081222A4 @ =SpriteCB_MonIcon
 	ldr r0, [r4, 0x4]
 	ldrb r2, [r0]
 	ldrb r3, [r0, 0x1]
@@ -7216,7 +7216,7 @@ party_menu_link_mon_icon_anim: @ 812224C
 	ldr r0, [sp, 0x20]
 	str r0, [sp, 0x8]
 	adds r0, r5, 0
-	bl sub_8096E18
+	bl CreateMonIcon
 	strb r0, [r4, 0x9]
 	ldr r2, _081222A8 @ =gSprites
 	ldrb r0, [r4, 0x9]
@@ -7240,7 +7240,7 @@ _0812229A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081222A4: .4byte sub_809718C
+_081222A4: .4byte SpriteCB_MonIcon
 _081222A8: .4byte gSprites
 	thumb_func_end party_menu_link_mon_icon_anim
 
@@ -7276,7 +7276,7 @@ _081222D4:
 	ldr r1, _081222F0 @ =gSprites
 	adds r0, r1
 	movs r1, 0
-	bl sub_8097414
+	bl MonIcon_SetAnim
 	b _0812234C
 	.align 2, 0
 _081222F0: .4byte gSprites
@@ -7287,7 +7287,7 @@ _081222F4:
 	ldr r1, _08122308 @ =gSprites
 	adds r0, r1
 	movs r1, 0x1
-	bl sub_8097414
+	bl MonIcon_SetAnim
 	b _0812234C
 	.align 2, 0
 _08122308: .4byte gSprites
@@ -7298,7 +7298,7 @@ _0812230C:
 	ldr r1, _08122320 @ =gSprites
 	adds r0, r1
 	movs r1, 0x2
-	bl sub_8097414
+	bl MonIcon_SetAnim
 	b _0812234C
 	.align 2, 0
 _08122320: .4byte gSprites
@@ -7309,7 +7309,7 @@ _08122324:
 	ldr r1, _08122338 @ =gSprites
 	adds r0, r1
 	movs r1, 0x3
-	bl sub_8097414
+	bl MonIcon_SetAnim
 	b _0812234C
 	.align 2, 0
 _08122338: .4byte gSprites
@@ -7320,7 +7320,7 @@ _0812233C:
 	ldr r1, _08122354 @ =gSprites
 	adds r0, r1
 	movs r1, 0x4
-	bl sub_8097414
+	bl MonIcon_SetAnim
 _0812234C:
 	pop {r4}
 	pop {r0}

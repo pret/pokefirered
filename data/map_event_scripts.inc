@@ -13060,916 +13060,2350 @@ EventScript_1BFB65:: @ 81BFB65
 Text_1BFB6E:: @ 81BFB6E
 	.string "REPEL's effect wore off…$"
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@	.include "data/script_dump_out.inc"
-@	.include "data/script_dump.inc"
-
-
-
-@ ???
-
-
-
 EventScript_SafariWarpOut:: @ 81BFB87
-	.incbin "baserom.gba", 0x1BFB87, 0x23
+	setvar VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 3
+	special ExitSafariMode
+	setwarp MAP_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 255, 4, 1
+	end
+
+EventScript_1BFB98:: @ 81BFB98
+	setvar VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 1
+	special ExitSafariMode
+	warp MAP_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 255, 4, 1
+	waitstate
+	end
 
 EventScript_SafariRetire:: @ 81BFBAA
-	.incbin "baserom.gba", 0x1BFBAA, 0x1B
+	lockall
+	loadword 0, Text_1BFBE9
+	callstd 5
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1BFBC0
+	releaseall
+	end
+
+EventScript_1BFBC0:: @ 81BFBC0
+	goto EventScript_1BFB98
 
 EventScript_SafariTimesUp:: @ 81BFBC5
-	.incbin "baserom.gba", 0x1BFBC5, 0x12
+	lockall
+	playse SE_PINPON
+	loadword 0, gUnknown_81BFC1B
+	callstd 4
+	goto EventScript_1BFB98
+	end
 
 EventScript_SafariOutOfBalls:: @ 81BFBD7
-	.incbin "baserom.gba", 0x1BFBD7, 0x2D5
+	lockall
+	playse SE_PINPON
+	loadword 0, gUnknown_81BFC53
+	callstd 4
+	goto EventScript_1BFB98
+	end
+
+Text_1BFBE9:: @ 81BFBE9
+	.string "Would you like to exit the SAFARI\n"
+	.string "ZONE right now?$"
+
+gUnknown_81BFC1B:: @ 81BFC1B
+	.string "PA: Ding-dong!\p"
+	.string "Time's up!\p"
+	.string "PA: Your SAFARI GAME is over!$"
+
+gUnknown_81BFC53:: @ 81BFC53
+	.string "PA: Ding-dong!\p"
+	.string "You are out of SAFARI BALLS!\p"
+	.string "PA: Your SAFARI GAME is over!$"
+
+Text_1BFC9D:: @ 81BFC9D
+	.string "サファリゾーンへ　ようこそ！\p"
+	.string "ここでは　ホウエンでは　なかなか\n"
+	.string "みることの　できない　ポケモンを\p"
+	.string "しぜんの　すがたの　まま\n"
+	.string "めに　することが　できます\p"
+	.string "また　ポケモントレーナーの\n"
+	.string "ようぼうに　おこたえ　して\p"
+	.string "ポケモンを\n"
+	.string "つかまえる　ことも　できます！\p"
+	.string "サファリゾーンを　たのしんで　いってね！$"
+
+Text_1BFD30:: @ 81BFD30
+	.string "サファリゾーンへ　ようこそ！\n"
+	.string "サファリゾーンは　はじめて　ですか？$"
+
+Text_1BFD52:: @ 81BFD52
+	.string "サファリゾーンを　たのしんで　いってね！$"
+
+Text_1BFD67:: @ 81BFD67
+	.string "サファリゾーンでは\n"
+	.string "30この　サファリボールを　つかって\l"
+	.string "ポケモンを　つかまえる　ことが　できます\p"
+	.string "サファリボールを　つかいきるか\n"
+	.string "500ぽ　あるくと\p"
+	.string "ゲームは　しゅうりょう　です\p"
+	.string "サファリゾーンを　たのしんで　いってね！$"
+
+Text_1BFDD7:: @ 81BFDD7
+	.string "サファリゾーンへ　ようこそ！\p"
+	.string "500えんで　ポケモン　つかまえほうだい！\n"
+	.string "サファリゲームに　さんか　しますか？$"
+
+Text_1BFE0F:: @ 81BFE0F
+	.string "そうですか\n"
+	.string "こんど　ぜひ　さんか　してください！$"
+
+Text_1BFE28:: @ 81BFE28
+	.string "おかねが　たりませんよ！$"
+
+Text_1BFE35:: @ 81BFE35
+	.string "それでは　500えん　いただきます$"
+
+Text_1BFE47:: @ 81BFE47
+	.string "では　サファリボールを　どうぞ！$"
+
+Text_1BFE58:: @ 81BFE58
+	.string "{PLAYER}は　サファリボールを\n"
+	.string "30こ　うけとった！$"
+
+Text_1BFE70:: @ 81BFE70
+	.string "じかんに　なりましたら\n"
+	.string "こちらから　おしらせ　しますので\p"
+	.string "ぞんぶんに　おたのしみ　ください！\n"
+	.string "では　いってらっしゃい！$"
 
 gUnknown_81BFEAC:: @ 81BFEAC
-	.incbin "baserom.gba", 0x1BFEAC, 0xF04
+	.string "Excuse me!\n"
+	.string "Your PC BOX is full.$"
+
+Text_1BFECC:: @ 81BFECC
+	.string "あ！　おきゃくさん\n"
+	.string "ポロックケースを　おもちで　ないですね？\p"
+	.string "サファリゾーンは　ポロックを　つかうと\n"
+	.string "より　おたのしみ　いただけますので\p"
+	.string "ぜひ　ポロックケースを\n"
+	.string "おもちに　なって　おこし　ください！$"
+
+Text_1BFF30:: @ 81BFF30
+	.string "まだ　じかんが　のこっていますが\n"
+	.string "サファリゾーンを　やめますか？$"
+
+Text_1BFF51:: @ 81BFF51
+	.string "では　ひきつづき　おたのしみ　ください！$"
+
+Text_1BFF66:: @ 81BFF66
+	.string "わかりました\p"
+	.string "それでは　のこりの　サファリボールを\n"
+	.string "おあずかり　します\p"
+	.string "おつかれさまでした\n"
+	.string "また　ごりよう　ください$"
+
+Text_1BFFA1:: @ 81BFFA1
+	.string "それでは　いってらっしゃい！\l"
+	.string "なにか　ありましたら\n"
+	.string "わたしに　こえを　かけて　くださいね$"
+
+Text_1BFFCE:: @ 81BFFCE
+	.string "しってた？\p"
+	.string "あの　しかくい　はこに　ポロックを　おくと\n"
+	.string "ポケモンが　あつまって　くるんだよ！$"
+
+Text_1BFFFD:: @ 81BFFFD
+	.string "この　さきに　いきたい　けど\n"
+	.string "じてんしゃ　もって　くるの　わすれた‥‥\p"
+	.string "おくに　めずらしい　ポケモンが\n"
+	.string "いそうな　きが　するのに！$"
+
+Text_1C003F:: @ 81C003F
+	.string "ポケモンに　ポロックを　なげても\n"
+	.string "しらんぷり　される　ときが　あるのよ\p"
+	.string "ポケモンにも　すききらいが　あるのかしら？$"
+
+Text_1C0079:: @ 81C0079
+	.string "ぜぇ‥‥　ぜぇ‥‥\n"
+	.string "やっと　ここまで　きたけど‥‥\p"
+	.string "つかれちゃって　ポケモン　つかまえる\n"
+	.string "げんきも　のこって　ないよ‥‥$"
+
+Text_1C00B6:: @ 81C00B6
+	.string "ホウエンに　いない　みずポケモンを\n"
+	.string "さがしに　きたんだけど‥‥\p"
+	.string "みずうみは　どこにあるのか\n"
+	.string "きみ　しってるかい？$"
+
+Text_1C00EF:: @ 81C00EF
+	.string "ここで　めずらしい　ポケモンを\n"
+	.string "たくさん　つかまえて\l"
+	.string "ともだちと　こうかん　するんだ！$"
+
+Text_1C011B:: @ 81C011B
+	.string "ポロックおきばに　おいた　ポロックが\n"
+	.string "いつのまにか　なくなっていた‥‥\p"
+	.string "しらない　うちに\n"
+	.string "ポケモンが　たべちゃったのかな？$"
+
+Text_1C0159:: @ 81C0159
+	.string "サファリゾーンの　おとくな　じょうほう！\p"
+	.string "であった　ポケモンに\n"
+	.string "ポロックを　なげると　にげにくく　なります！$"
+
+Text_1C0190:: @ 81C0190
+	.string "あるき　つかれたら　ちょっと　ひといき！\n"
+	.string "‘みんなの　きゅうけいじょ'$"
+
+Text_1C01B4:: @ 81C01B4
+	.string "おれ　ポロック　もってないけど\n"
+	.string "ポケモン　たくさん　つかまえたよ\p"
+	.string "ちかづいて　ボールを　なげる　だけで\n"
+	.string "けっこう　つかまえられる　もんだよ！$"
+
+Text_1C01FB:: @ 81C01FB
+	.string "ポロックを　つかうと　いつもより\n"
+	.string "ちょっぴり　にげにくく　なるみたい\p"
+	.string "だから　にげにくい　ポケモンに　つかっても\n"
+	.string "あんまり　いみが　ないかもね$"
+
+Text_1C0243:: @ 81C0243
+	.string "ポロックおきばに　ポロック　おいて\n"
+	.string "ポケモンを　つかまえると\p"
+	.string "おなじ　ような　せいかくの　ポケモンが\n"
+	.string "あつまる　きが　するなあ$"
+
+Text_1C0283:: @ 81C0283
+	.string "わしは　おおきな　{STR_VAR_1}に\n"
+	.string "とても　きょうみが　ある！\p"
+	.string "ん？　きみ　{STR_VAR_1}　もってるの？\n"
+	.string "ちょ　ちょ　ちょっと···\l"
+	.string "おじさんに　みせて　おくれ！$"
+
+Text_1C02CB:: @ 81C02CB
+	.string "おお！　こいつは　でかい！\n"
+	.string "とても　すばらしい　{STR_VAR_1}だ！\p"
+	.string "みせて　くれて　ありがとう\n"
+	.string "おれいに　これを　もって　いきなさい$"
+
+Text_1C0309:: @ 81C0309
+	.string "{PLAYER}は\n"
+	.string "{STR_VAR_2}を　もらった！$"
+
+Text_1C0317:: @ 81C0317
+	.string "ありゃ？\n"
+	.string "きみ　もちもの　いっぱいだね$"
+
+Text_1C032B:: @ 81C032B
+	.string "ううむ　わしは　これより　おおきい\n"
+	.string "{STR_VAR_1}を　みたこと　あるな···$"
+
+Text_1C034D:: @ 81C034D
+	.string "おお　こいつは　なかなか···って\n"
+	.string "これ　{STR_VAR_1}じゃ　ないよ！$"
+
+Text_1C036C:: @ 81C036C
+	.string "おおきい　{STR_VAR_1}　もってないの？\l"
+	.string "それは　ざんねん···\n"
+	.string "こんど　おおきい　{STR_VAR_1}　みせてね$"
+
+Text_1C0399:: @ 81C0399
+	.string "しじょう　さいだいの　{STR_VAR_1}！\n"
+	.string "{STR_VAR_2}の　{STR_VAR_3}cmのやつ！$"
+
+Text_1C03B5:: @ 81C03B5
+	.string "パパ“{PLAYER}！　よく　きたな！\n"
+	.string "{PLAYER}あての　てがみが　とどけられたぞ$"
+
+Text_1C03D7:: @ 81C03D7
+	.string "パパ“わたしも　みたことのない\n"
+	.string "ふねの　チケット　だな‥‥\l"
+	.string "ミナモに　いってみると　いいだろう$"
+
+Text_1C0407:: @ 81C0407
+	.string "カイナいき　れんらくせん‥‥\p"
+	.string "あら？\n"
+	.string "その　チケットは‥‥！$"
+
+Text_1C0426:: @ 81C0426
+	.string "ヘンテコな　チケットを\n"
+	.string "もってきたのは　おまえさんか？\p"
+	.string "おまえが　いこうと　しているのは\n"
+	.string "みなみの　はての　ちっぽけな　しま‥‥\p"
+	.string "そこでは　なにが　おこるのか\n"
+	.string "だれも　わからねえ‥‥\l"
+	.string "ううむ　ふなのりの　ちが　さわぐぜ！\p"
+	.string "さあ　のりな！$"
+
+Text_1C049D:: @ 81C049D
+	.string "なにもねえ　ちんけな　しま　だな‥‥\n"
+	.string "ミナモへ　かえるか？$"
+
+Text_1C04BB:: @ 81C04BB
+	.string "ùÏ! ÉÇñÑ ÒñÉ!$"
+
+Text_1C04C9:: @ 81C04C9
+	.string "そうかい\n"
+	.string "まあ　すきにするが　いいさ$"
+
+Text_1C04DC:: @ 81C04DC
+	.string "すべての　ゆめは　もうひとつの　げんじつ\n"
+	.string "それを　わすれるべからず‥‥$"
+
+Text_1C0500:: @ 81C0500
+	.string "きおく　かすみし　ものは\n"
+	.string "こころに　きざみつける　ことを　のぞむ‥‥$"
+
+Text_1C0523:: @ 81C0523
+	.string "パパ“やあ　{PLAYER}！\p"
+	.string "めずらしい　きのみを　てに　いれたから\n"
+	.string "プレゼント　するよ！$"
+
+Text_1C054C:: @ 81C054C
+	.string "ふかふかの　つちに　はえている　きのみは\n"
+	.string "じゆうに　とっても　よいのじゃが‥\p"
+	.string "1つだけ　きのみを　おなじ　ばしょに　うめる\n"
+	.string "それが　れいぎと　いうものじゃ\p"
+	.string "ほれ　これを　わけてやろう$"
+
+Text_1C05A8:: @ 81C05A8
+	.string "あんた　みたところ　トレーナーじゃろ？\p"
+	.string "トレーナーは　よく　きのみを　ポケモンに\n"
+	.string "もたせとるわい\p"
+	.string "ふやすも　つかうも　あんた　しだいじゃ$"
+
+Text_1C05ED:: @ 81C05ED
+	.string "いつも　みずを　あげてたら\n"
+	.string "たくさん　はなが　さいたんだ\p"
+	.string "そしたら　きのみも　たくさん　できた！\p"
+	.string "はい！\n"
+	.string "これ　あげる$"
+
+Text_1C0629:: @ 81C0629
+	.string "がんばって　あかいポロック　つくるんだ！\n"
+	.string "{STR_VAR_1}も　がんばってね！$"
+
+Text_1C064A:: @ 81C064A
+	.string "きょうは　なにいろの　きのみを\n"
+	.string "さがそっかなー$"
+
+Text_1C0662:: @ 81C0662
+	.string "ポケモンコンテストの　ゆうしょうを　めざして\n"
+	.string "きのみを　あつめているんだ\p"
+	.string "よかったら　きみにも　わけて　あげるよ！$"
+
+Text_1C069C:: @ 81C069C
+	.string "きみも　がんばれ！$"
+
+Text_1C06A6:: @ 81C06A6
+	.string "きょうは　どの　きのみを　うめるか‥\n"
+	.string "そして　なにいろの　ポロックを　つくるか‥\p"
+	.string "なやむのも　また　たのしいよ$"
+
+Text_1C06DE:: @ 81C06DE
+	.string "ケースを　ふると　でてくる　ポロック‥\p"
+	.string "そして　それを　キャッチして\n"
+	.string "たべてくれる　ポケモン‥\p"
+	.string "これって　あい　だよね？$"
+
+Text_1C071B:: @ 81C071B
+	.string "うん　うん！\n"
+	.string "やっぱ　わかるひとには　わかるよね\p"
+	.string "これ　あげる$"
+
+Text_1C073B:: @ 81C073B
+	.string "そっか‥‥\n"
+	.string "でも　ちがうと　かんじることも　たいせつだね\p"
+	.string "これ　あげる$"
+
+Text_1C075F:: @ 81C075F
+	.string "その　きのみは　めずらしいもの　らしいから\n"
+	.string "たいせつに　そだててね！$"
+
+Text_1C0782:: @ 81C0782
+	.string "また　きのみめいじんに　もらって　こようっと$"
+
+Text_1C0799:: @ 81C0799
+	.string "やっぱり\p"
+	.string "わたしに　スーツが　にあうように\n"
+	.string "うみには　しおかぜが　にあうな\l"
+	.string "そして　きみには　きのみが　にあいそうだ‥‥\p"
+	.string "なんでだろうね？$"
+
+Text_1C07DF:: @ 81C07DF
+	.string "やっぱり　それは‥‥‥‥\p"
+	.string "きみが　トレーナーだからだ！$"
+
+Text_1C07FB:: @ 81C07FB
+	.string "やっぱり\p"
+	.string "わたしに　シンプルさが　にあうように\n"
+	.string "ポケモンには　ポロックが　にあうな$"
+
+Text_1C0825:: @ 81C0825
+	.string "わしは　きのみめいじんと　よばれておる\p"
+	.string "わしは　せかいじゅうを　うつくしい　はなで\n"
+	.string "うめつくそうと　きのみを　そだてて\l"
+	.string "そして　くばり　まくって　おるのじゃ\p"
+	.string "きみにも　きのみを　わけて　あげよう！$"
+
+Text_1C0888:: @ 81C0888
+	.string "ほれ　えんりょ　せずに　もう　ひとつ！$"
+
+Text_1C089C:: @ 81C089C
+	.string "カナズミの　ちかくにある　サン·トウカという\n"
+	.string "フラワーショップも　よろしくの\p"
+	.string "せかいに　はなを　さかせましょう！$"
+
+Text_1C08D5:: @ 81C08D5
+	.string "きょうは　もう　おしまいじゃ\n"
+	.string "また　おいで\p"
+	.string "せかいに　はなを　さかせましょう！$"
+
+Text_1C08FD:: @ 81C08FD
+	.string "じいさんの　きのみの　そだてかたは\n"
+	.string "そりゃあ　せかいいちじゃ\p"
+	.string "わしも　はなが　たかいわい\p"
+	.string "ところで　あんた\n"
+	.string "いい　ことばを　きいたことが　ないかい？$"
+
+Text_1C0948:: @ 81C0948
+	.string "おお！　とても　よい　ことばじゃ！\n"
+	.string "かんどう　したわい\p"
+	.string "ほれ　これを　もっていきなされ$"
+
+Text_1C0974:: @ 81C0974
+	.string "おお！　なかなか　よい　ことばじゃ\n"
+	.string "あんたも　たいしたもんじゃ\p"
+	.string "ほれ　これを　もっていきなされ$"
+
+Text_1C09A4:: @ 81C09A4
+	.string "まごたち　4にんも　じいさんを　しのぐ\n"
+	.string "おおものに　なるじゃろうて\p"
+	.string "じんせい　たのしいことが　つきんのう！$"
+
+Text_1C09DA:: @ 81C09DA
+	.string "ほう‥‥$"
+
+Text_1C09DF:: @ 81C09DF
+	.string "こんにちは！\p"
+	.string "はなを　せかいに　ひろめる\n"
+	.string "フラワーショップ　サン·トウカです！$"
+
+Text_1C0A07:: @ 81C0A07
+	.string "{PLAYER}{KUN}　きのみの　こと　しりたい？$"
+
+Text_1C0A1A:: @ 81C0A1A
+	.string "あなたの　なまえは‥‥\p"
+	.string "{PLAYER}{KUN}ね！\n"
+	.string "とっても　いい　なまえだね！\l"
+	.string "{PLAYER}{KUN}　きのみのこと　しりたい？$"
+
+Text_1C0A4E:: @ 81C0A4E
+	.string "きのみはね　くろい　ふかふかの　つちの\n"
+	.string "ところで　たまに　とれるの\l"
+	.string "でね‥‥\p"
+	.string "とったら　その1つを　また　うめるの！\p"
+	.string "そうすると　その　きのみ　から\n"
+	.string "めがでて　みきが　できて　はながさいて\l"
+	.string "また　きのみ　が　できるの\p"
+	.string "そうやって　はなを　ふやして\n"
+	.string "せかいじゅうを　はなに　するのが\l"
+	.string "わたしの　ゆめ　なんだ！\p"
+	.string "だから　{PLAYER}{KUN}も　きのみを　うめて\n"
+	.string "せかいに　はなを　ふやしてね！$"
+
+Text_1C0B0B:: @ 81C0B0B
+	.string "おはなって　とっても　しあわせな　きぶんに\n"
+	.string "してくれるよね$"
+
+Text_1C0B29:: @ 81C0B29
+	.string "こんにちは！\p"
+	.string "おはなは　せわを　すれば　するほど\n"
+	.string "たくさん　きれいに　さいて　くれるの\p"
+	.string "あなたも　せわを　したく　なった　でしょ？\n"
+	.string "これ　あげるわ$"
+
+Text_1C0B73:: @ 81C0B73
+	.string "きのみが　そだつ　たびに\n"
+	.string "じょうろで　みずを　あげてね！\p"
+	.string "あとね\p"
+	.string "きのみは　ずっと　ずっと　ほうっておくと\n"
+	.string "じめんに　おちてしまうの\l"
+	.string "でもね　そこから　また　めがでて　くるの！\p"
+	.string "すごいよね！\n"
+	.string "いきものの　ちからを　かんじるよね$"
+
+Text_1C0BE5:: @ 81C0BE5
+	.string "おねーちゃんたちを　みならって\n"
+	.string "がんばって　おはなを　そだててるの\p"
+	.string "はい！　これあげる！$"
+
+Text_1C0C12:: @ 81C0C12
+	.string "きのみは　うめて　おおきく　したり\n"
+	.string "ポケモンに　もたせたり　できるの\p"
+	.string "でも　さいきん　きのみを　いくつか　まぜると\n"
+	.string "ポケモンの　おかしになる　きかいが\l"
+	.string "ある　らしいんだ\p"
+	.string "あたしも　おかし　ほしー$"
+
+Text_1C0C74:: @ 81C0C74
+	.string "{STR_VAR_1}　なまえ　なんていうの？\p"
+	.string "‥‥‥　‥‥‥　‥‥‥\n"
+	.string "へー　いいねー\p"
+	.string "わたしは　キリ　っていう　なまえなの\p"
+	.string "パパと　ママが　すくすくと　そだって\n"
+	.string "こころの　あたたかい　おんなのこに　なって\l"
+	.string "ほしいっていう　ねがいを　こめたんだって！\p"
+	.string "{STR_VAR_1}にも　これ　あげる$"
+
+Text_1C0CF5:: @ 81C0CF5
+	.string "あと　{STR_VAR_1}には　キリの　だいすきな\n"
+	.string "この　きのみも　あげちゃう！$"
+
+Text_1C0D16:: @ 81C0D16
+	.string "{STR_VAR_1}の　なまえには\n"
+	.string "どんな　ねがいが　こめられてるの？$"
+
+Text_1C0D32:: @ 81C0D32
+	.string "はる　なつ　あき　ふゆ\n"
+	.string "はるに　うまれると　はるが　すきで\l"
+	.string "なつに　うまれると　なつが　すきなのかな？$"
+
+Text_1C0D66:: @ 81C0D66
+	.string "じゃあ　キリは　あきに　うまれたから\n"
+	.string "あきが　だいすき！\p"
+	.string "{STR_VAR_1}は　いつが　すき？$"
+
+Text_1C0D8F:: @ 81C0D8F
+	.string "そっか‥\n"
+	.string "かんけいないのか‥\p"
+	.string "しりたいことって　たくさんあるなー$"
 
 gUnknown_81C0DB0:: @ 81C0DB0
-	.incbin "baserom.gba", 0x1C0DB0, 0x41
+	.string "It's crammed full of POKéMON\n"
+	.string "books.$"
+
+Text_1C0DD4:: @ 81C0DD4
+	.string "ほんだなに　ならんでいるのは\n"
+	.string "ポケモンの　ほん　ばかりだ$"
 
 Text_1C0DF1:: @ 81C0DF1
-	.incbin "baserom.gba", 0x1C0DF1, 0xC
+	.string "A TOWN MAP.$"
 
 gUnknown_81C0DFD:: @ 81C0DFD
-	.incbin "baserom.gba", 0x1C0DFD, 0x1C
+	.string "Wow!\n"
+	.string "Tons of POKéMON stuff!$"
 
 gUnknown_81C0E19:: @ 81C0E19
-	.incbin "baserom.gba", 0x1C0E19, 0x27
+	.string "Dishes and plates are neatly\n"
+	.string "lined up.$"
 
 gUnknown_81C0E40:: @ 81C0E40
-	.incbin "baserom.gba", 0x1C0E40, 0x33
+	.string "It smells delicious!\n"
+	.string "Somebody's been cooking here.$"
 
 gUnknown_81C0E73:: @ 81C0E73
-	.incbin "baserom.gba", 0x1C0E73, 0x39
+	.string "It's a nicely made dresser.\n"
+	.string "It will hold a lot of stuff.$"
 
 gUnknown_81C0EAC:: @ 81C0EAC
-	.incbin "baserom.gba", 0x1C0EAC, 0x1F
+	.string "There's a pile of snacks here.$"
 
 gUnknown_81C0ECB:: @ 81C0ECB
-	.incbin "baserom.gba", 0x1C0ECB, 0x2C
+	.string "All your item needs fulfilled!\n"
+	.string "POKéMON MART$"
 
 gUnknown_81C0EF7:: @ 81C0EF7
-	.incbin "baserom.gba", 0x1C0EF7, 0x22
+	.string "Heal Your POKéMON!\n"
+	.string "POKéMON CENTER$"
 
 gUnknown_81C0F19:: @ 81C0F19
-	.incbin "baserom.gba", 0x1C0F19, 0x40
+	.string "INDIGO PLATEAU\p"
+	.string "The ultimate goal of TRAINERS!\n"
+	.string "POKéMON LEAGUE HQ$"
 
 gUnknown_81C0F59:: @ 81C0F59
-	.incbin "baserom.gba", 0x1C0F59, 0x40
+	.string "INDIGO PLATEAU\p"
+	.string "The highest POKéMON authority!\n"
+	.string "POKéMON LEAGUE HQ$"
 
 gUnknown_81C0F99:: @ 81C0F99
-	.incbin "baserom.gba", 0x1C0F99, 0x3F
+	.string "It should be packed with all kinds\n"
+	.string "of delicious things to eat.$"
 
 gUnknown_81C0FD8:: @ 81C0FD8
-	.incbin "baserom.gba", 0x1C0FD8, 0x38
-
-gUnknown_81C1010:: @ 81C1010
-	.incbin "baserom.gba", 0x1C1010, 0xB
+	.string "It's a blueprint of some sort.\n"
+	.string "It's filled with diagrams and text.$"
 
 gUnknown_81C101B:: @ 81C101B
-	.incbin "baserom.gba", 0x1C101B, 0x1
-
-gUnknown_81C101C:: @ 81C101C
-	.incbin "baserom.gba", 0x1C101C, 0x44
+	.string "It's a pretty picture of a POKéMON.\n"
+	.string "It looks like it's feeling good.$"
 
 gUnknown_81C1060:: @ 81C1060
-	.incbin "baserom.gba", 0x1C1060, 0x3C
+	.string "What could this machine be?\n"
+	.string "Better not mess around with it!$"
 
 gUnknown_81C109C:: @ 81C109C
-	.incbin "baserom.gba", 0x1C109C, 0x25
+	.string "It's a telephone.\n"
+	.string "Better not use it.$"
 
 gUnknown_81C10C1:: @ 81C10C1
-	.incbin "baserom.gba", 0x1C10C1, 0x3B
+	.string "It's all complicated words and\n"
+	.string "numbers that make no sense…$"
 
 gUnknown_81C10FC:: @ 81C10FC
-	.incbin "baserom.gba", 0x1C10FC, 0x38
+	.string "It's an advertising poster about\n"
+	.string "all kinds of products.$"
 
 gUnknown_81C1134:: @ 81C1134
-	.incbin "baserom.gba", 0x1C1134, 0x3A
+	.string "Oh, that smells tasty!\n"
+	.string "It might get the stomach growling!$"
 
 gUnknown_81C116E:: @ 81C116E
-	.incbin "baserom.gba", 0x1C116E, 0x26
+	.string "Inside this…\n"
+	.string "……\p"
+	.string "There's nothing here!$"
 
 gUnknown_81C1194:: @ 81C1194
-	.incbin "baserom.gba", 0x1C1194, 0x26
+	.string "It's a cup with a POKéMON mark\n"
+	.string "on it.$"
 
 gUnknown_81C11BA:: @ 81C11BA
-	.incbin "baserom.gba", 0x1C11BA, 0x22
+	.string "The window is very well polished.$"
 
 gUnknown_81C11DC:: @ 81C11DC
-	.incbin "baserom.gba", 0x1C11DC, 0x3B
+	.string "Outside the window…\p"
+	.string "The sky looks fantastically\n"
+	.string "beautiful.$"
 
 gUnknown_81C1217:: @ 81C1217
-	.incbin "baserom.gba", 0x1C1217, 0x34
+	.string "Lights in different colors are\n"
+	.string "flashing on and off.$"
 
 gUnknown_81C124B:: @ 81C124B
-	.incbin "baserom.gba", 0x1C124B, 0x28
+	.string "All sorts of tools are lined up\n"
+	.string "neatly.$"
 
 gUnknown_81C1273:: @ 81C1273
-	.incbin "baserom.gba", 0x1C1273, 0x34
+	.string "It's a machine of some sort.\n"
+	.string "It sure is impressive.$"
 
 gUnknown_81C12A7:: @ 81C12A7
-	.incbin "baserom.gba", 0x1C12A7, 0x2F
+	.string "It's the latest video game!\n"
+	.string "It sure looks fun!$"
 
 gUnknown_81C12D6:: @ 81C12D6
-	.incbin "baserom.gba", 0x1C12D6, 0x2A
+	.string "There are obvious signs of burglary\n"
+	.string "here…$"
 
 gUnknown_81C1300:: @ 81C1300
-	.incbin "baserom.gba", 0x1C1300, 0x61
+	.string "There's a POKéMON on TV!\n"
+	.string "It looks like it's having fun.$"
 
-gUnknown_81C1361:: @ 81C1361
-	.incbin "baserom.gba", 0x1C1361, 0x1B
+EventScript_1C1338:: @ 81C1338
+	waitse
+	setdivewarp MAP_UNKNOWN_MAP_00_00, 72, 7187, 8
+	nop
+	copyvar VAR_0x4030, 1
+	end
+
+EventScript_1C1348:: @ 81C1348
+	lockall
+	delay 20
+	applymovement 255, Movement_1C137A
+	waitmovement 0
+	playse SE_RU_HYUU
+	delay 60
+	warphole 0xFFFF
+	waitstate
+	end
+
+EventScript_1C1361:: @ 81C1361
+	lockall
+	delay 20
+	applymovement 255, Movement_1C137A
+	waitmovement 0
+	playse SE_RU_HYUU
+	delay 60
+	special DoFallWarp
+	waitstate
+	end
+
+Movement_1C137A:: @ 81C137A
+	step_60
+	step_end
 
 gUnknown_81C137C:: @ 81C137C
-	.incbin "baserom.gba", 0x1C137C, 0x5A
+	.string "The battery isn't charged enough.\p"
+	.string "No. of steps required to fully\n"
+	.string "charge the battery: {STR_VAR_1}{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_81C13D6:: @ 81C13D6
-	.incbin "baserom.gba", 0x1C13D6, 0x53
+	.string "There are no TRAINERS within range\n"
+	.string "who can battle…\p"
+	.string "The VS SEEKER was turned off.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_81C1429:: @ 81C1429
-	.incbin "baserom.gba", 0x1C1429, 0x51
+	.string "The other TRAINERS don't appear\n"
+	.string "to be ready for battle.\p"
+	.string "Let's wait till later.{PAUSE_UNTIL_PRESS}$"
 
 Text_1C147A:: @ 81C147A
-	.incbin "baserom.gba", 0x1C147A, 0x23
+	.string "Hey!\n"
+	.string "I saw you in VIRIDIAN FOREST!$"
 
 Text_1C149D:: @ 81C149D
-	.incbin "baserom.gba", 0x1C149D, 0x56
+	.string "Hi! I like shorts!\n"
+	.string "They're comfy and easy to wear!\p"
+	.string "You should be wearing shorts, too!$"
 
 Text_1C14F3:: @ 81C14F3
-	.incbin "baserom.gba", 0x1C14F3, 0x2E
+	.string "Excuse me!\n"
+	.string "You keep looking at me, don't you?$"
 
 Text_1C1521:: @ 81C1521
-	.incbin "baserom.gba", 0x1C1521, 0x3C
+	.string "You're a TRAINER, aren't you?\n"
+	.string "Let's get with it right away!$"
 
 Text_1C155D:: @ 81C155D
-	.incbin "baserom.gba", 0x1C155D, 0x2B
+	.string "That look you give me…\n"
+	.string "It intrigues me so!$"
 
 Text_1C1588:: @ 81C1588
-	.incbin "baserom.gba", 0x1C1588, 0x3D
+	.string "Hey! What's wrong with you?\n"
+	.string "You're still not wearing shorts!$"
 
 Text_1C15C5:: @ 81C15C5
-	.incbin "baserom.gba", 0x1C15C5, 0x34
+	.string "I'll battle you with the POKéMON\n"
+	.string "I started raising.$"
 
 Text_1C15F9:: @ 81C15F9
-	.incbin "baserom.gba", 0x1C15F9, 0x16
+	.string "Eek!\n"
+	.string "Did you push me?$"
 
 Text_1C160F:: @ 81C160F
-	.incbin "baserom.gba", 0x1C160F, 0x2D
+	.string "I always catch mushroom POKéMON\n"
+	.string "on MT. MOON.$"
 
 Text_1C163C:: @ 81C163C
-	.incbin "baserom.gba", 0x1C163C, 0x31
+	.string "Oh! You're that nosy kid who\n"
+	.string "eavesdropped on us!$"
 
 Text_1C166D:: @ 81C166D
-	.incbin "baserom.gba", 0x1C166D, 0x75
+	.string "Excuse me! Didn't I tell you that\n"
+	.string "this is a private conversation?\p"
+	.string "You shouldn't be listening in,\n"
+	.string "you uncouth person!$"
 
 Text_1C16E2:: @ 81C16E2
-	.incbin "baserom.gba", 0x1C16E2, 0x41
+	.string "I'm trying to find something good\n"
+	.string "that's not a BUG POKéMON, but…$"
 
 Text_1C1723:: @ 81C1723
-	.incbin "baserom.gba", 0x1C1723, 0x23
+	.string "Huh?\n"
+	.string "You want to go with me again?$"
 
 Text_1C1746:: @ 81C1746
-	.incbin "baserom.gba", 0x1C1746, 0x25
+	.string "Me?\n"
+	.string "Well, okay. I'll play this once.$"
 
 Text_1C176B:: @ 81C176B
-	.incbin "baserom.gba", 0x1C176B, 0x28
+	.string "Hey, long time!\n"
+	.string "Have you gotten better?$"
 
 Text_1C1793:: @ 81C1793
-	.incbin "baserom.gba", 0x1C1793, 0x3A
+	.string "You are good at POKéMON, but how\n"
+	.string "is your chemistry grade?$"
 
 Text_1C17CD:: @ 81C17CD
-	.incbin "baserom.gba", 0x1C17CD, 0x24
+	.string "All right!\n"
+	.string "Let's play another game!$"
 
 Text_1C17F1:: @ 81C17F1
-	.incbin "baserom.gba", 0x1C17F1, 0x43
+	.string "You need strategy to win at\n"
+	.string "battling.\p"
+	.string "Are you following my advice?$"
 
 Text_1C1834:: @ 81C1834
-	.incbin "baserom.gba", 0x1C1834, 0x3F
+	.string "I've collected many NIDORAN.\n"
+	.string "I don't want them to evolve, but…$"
 
 Text_1C1873:: @ 81C1873
-	.incbin "baserom.gba", 0x1C1873, 0x37
+	.string "School is fun, but I still think\n"
+	.string "POKéMON are fun, too.$"
 
 Text_1C18AA:: @ 81C18AA
-	.incbin "baserom.gba", 0x1C18AA, 0x32
+	.string "MEOWTH and PERSIAN are so cute,\n"
+	.string "meow, meow, meow!$"
 
 Text_1C18DC:: @ 81C18DC
-	.incbin "baserom.gba", 0x1C18DC, 0x43
+	.string "We may look silly standing here\n"
+	.string "like this, but I can still battle.$"
 
 Text_1C191F:: @ 81C191F
-	.incbin "baserom.gba", 0x1C191F, 0x36
+	.string "I'm a rambling, gaming dude!\n"
+	.string "I'm on a winning streak!$"
 
 Text_1C1955:: @ 81C1955
-	.incbin "baserom.gba", 0x1C1955, 0x47
+	.string "What's a cute, round, and fluffy\n"
+	.string "POKéMON?\p"
+	.string "You already know, don't you?$"
 
 Text_1C199C:: @ 81C199C
-	.incbin "baserom.gba", 0x1C199C, 0x20
+	.string "My bike's still acting up, man.$"
 
 Text_1C19BC:: @ 81C19BC
-	.incbin "baserom.gba", 0x1C19BC, 0x29
+	.string "Okay, kid!\n"
+	.string "Don't expect mercy this time!$"
 
 Text_1C19E5:: @ 81C19E5
-	.incbin "baserom.gba", 0x1C19E5, 0x28
+	.string "ELI: Our twin power became even\n"
+	.string "better!$"
 
 Text_1C1A0D:: @ 81C1A0D
-	.incbin "baserom.gba", 0x1C1A0D, 0x21
+	.string "ANNE: Our twin power powered up!$"
 
 Text_1C1A2E:: @ 81C1A2E
-	.incbin "baserom.gba", 0x1C1A2E, 0x2F
+	.string "We're to battle again?\n"
+	.string "This time, you're mine!$"
 
 Text_1C1A5D:: @ 81C1A5D
-	.incbin "baserom.gba", 0x1C1A5D, 0x3E
+	.string "I haven't forgotten you were with\n"
+	.string "those good-looking POKéMON.$"
 
 Text_1C1A9B:: @ 81C1A9B
-	.incbin "baserom.gba", 0x1C1A9B, 0x60
+	.string "I'm taking ROCK TUNNEL to go to\n"
+	.string "LAVENDER…\p"
+	.string "But I keep getting stopped by\n"
+	.string "everyone along the way…$"
 
 Text_1C1AFB:: @ 81C1AFB
-	.incbin "baserom.gba", 0x1C1AFB, 0x3C
+	.string "Don't you dare patronize me today!\n"
+	.string "We're playing for keeps!$"
 
 Text_1C1B37:: @ 81C1B37
-	.incbin "baserom.gba", 0x1C1B37, 0x27
+	.string "Bwahaha!\n"
+	.string "Great! I was bored again, eh!$"
 
 Text_1C1B5E:: @ 81C1B5E
-	.incbin "baserom.gba", 0x1C1B5E, 0x25
+	.string "Hahaha!\n"
+	.string "A little toughie, as always!$"
 
 Text_1C1B83:: @ 81C1B83
-	.incbin "baserom.gba", 0x1C1B83, 0x3B
+	.string "I got up early every day to train\n"
+	.string "my POKéMON from cocoons!$"
 
 Text_1C1BBE:: @ 81C1BBE
-	.incbin "baserom.gba", 0x1C1BBE, 0x1E
+	.string "Hahahaha!\n"
+	.string "I'll win this time!$"
 
 Text_1C1BDC:: @ 81C1BDC
-	.incbin "baserom.gba", 0x1C1BDC, 0x1E
+	.string "Go win, my super BUG POKéMON!$"
 
 Text_1C1BFA:: @ 81C1BFA
-	.incbin "baserom.gba", 0x1C1BFA, 0x55
+	.string "Wow, you came here again?\n"
+	.string "Maybe you're a POKéMANIAC, too?\l"
+	.string "Want to see my collection?$"
 
 Text_1C1C4F:: @ 81C1C4F
-	.incbin "baserom.gba", 0x1C1C4F, 0x27
+	.string "Ha-hahah-ah-ha!\n"
+	.string "I can't stop sneezing!$"
 
 Text_1C1C76:: @ 81C1C76
-	.incbin "baserom.gba", 0x1C1C76, 0x24
+	.string "Hi, kid!\n"
+	.string "Did I show you my POKéMON?$"
 
 Text_1C1C9A:: @ 81C1C9A
-	.incbin "baserom.gba", 0x1C1C9A, 0x39
+	.string "I went out to a POKéMON GYM again.\p"
+	.string "…But I lost as usual.$"
 
 Text_1C1CD3:: @ 81C1CD3
-	.incbin "baserom.gba", 0x1C1CD3, 0x41
+	.string "Ah!\n"
+	.string "This mountain air is delicious!\l"
+	.string "It's so good, I can't leave!$"
 
 Text_1C1D14:: @ 81C1D14
-	.incbin "baserom.gba", 0x1C1D14, 0x3C
+	.string "My head is starting to spin.\n"
+	.string "I've been hiking for too long…$"
 
 Text_1C1D50:: @ 81C1D50
-	.incbin "baserom.gba", 0x1C1D50, 0x29
+	.string "Win, lose, or draw!\n"
+	.string "Now for our rematch!$"
 
 Text_1C1D79:: @ 81C1D79
-	.incbin "baserom.gba", 0x1C1D79, 0x3C
+	.string "Competing is the ultimate thrill.\n"
+	.string "I still can't get enough!$"
 
 Text_1C1DB5:: @ 81C1DB5
-	.incbin "baserom.gba", 0x1C1DB5, 0x2C
+	.string "You know, right?\n"
+	.string "Let's go, but don't cheat!$"
 
 Text_1C1DE1:: @ 81C1DE1
-	.incbin "baserom.gba", 0x1C1DE1, 0x3E
+	.string "Hi, there!\p"
+	.string "But be careful!\n"
+	.string "I'm still laying down some cables!$"
 
 Text_1C1E1F:: @ 81C1E1F
-	.incbin "baserom.gba", 0x1C1E1F, 0x38
+	.string "I became a TRAINER a while ago.\n"
+	.string "But, I think I can win.$"
 
 Text_1C1E57:: @ 81C1E57
-	.incbin "baserom.gba", 0x1C1E57, 0x48
+	.string "Fwahaha!\n"
+	.string "I have never lost!\p"
+	.string "…And if I did, I've forgotten all\n"
+	.string "about it!$"
 
 Text_1C1E9F:: @ 81C1E9F
-	.incbin "baserom.gba", 0x1C1E9F, 0x43
+	.string "I have never won before…\p"
+	.string "Perhaps I am destined to remain\n"
+	.string "that way…$"
 
 Text_1C1EE2:: @ 81C1EE2
-	.incbin "baserom.gba", 0x1C1EE2, 0x3B
+	.string "I'm the best in my class.\n"
+	.string "I train every morning and night!$"
 
 Text_1C1F1D:: @ 81C1F1D
-	.incbin "baserom.gba", 0x1C1F1D, 0x23
+	.string "Keep your eyes out for live wires!$"
 
 Text_1C1F40:: @ 81C1F40
-	.incbin "baserom.gba", 0x1C1F40, 0x5D
+	.string "I raised my POKéMON carefully.\n"
+	.string "They should be ready by now.\l"
+	.string "This time, they should win, too.$"
 
 Text_1C1F9D:: @ 81C1F9D
-	.incbin "baserom.gba", 0x1C1F9D, 0x3B
+	.string "Yeah!\n"
+	.string "I got a bite, here!\l"
+	.string "Th-this might be the real thing!$"
 
 Text_1C1FD8:: @ 81C1FD8
-	.incbin "baserom.gba", 0x1C1FD8, 0x30
+	.string "You're finally here.\n"
+	.string "Fishing is a waiting game.$"
 
 Text_1C2008:: @ 81C2008
-	.incbin "baserom.gba", 0x1C2008, 0x33
+	.string "Still can't find a MOON STONE…\n"
+	.string "Have you found one?$"
 
 Text_1C203B:: @ 81C203B
-	.incbin "baserom.gba", 0x1C203B, 0x61
+	.string "Electricity has always been my\n"
+	.string "specialty.\p"
+	.string "I don't know a thing about POKéMON\n"
+	.string "of the sea, though.$"
 
 Text_1C209C:: @ 81C209C
-	.incbin "baserom.gba", 0x1C209C, 0x38
+	.string "The FISHING FOOL vs. POKéMON KID!\n"
+	.string "Another round, fight!$"
 
 Text_1C20D4:: @ 81C20D4
-	.incbin "baserom.gba", 0x1C20D4, 0x60
+	.string "I love fishing, don't get me wrong.\n"
+	.string "But, I wish I had more work…\l"
+	.string "…It's hard to give up fishing!$"
 
 Text_1C2134:: @ 81C2134
-	.incbin "baserom.gba", 0x1C2134, 0x37
+	.string "What's catching?\p"
+	.string "You'll never know unless you beat\n"
+	.string "me!$"
 
 Text_1C216B:: @ 81C216B
-	.incbin "baserom.gba", 0x1C216B, 0x30
+	.string "JES: I'll win here today and\n"
+	.string "propose to my GIA.$"
 
 Text_1C219B:: @ 81C219B
-	.incbin "baserom.gba", 0x1C219B, 0x53
+	.string "GIA: Hey, JES…\n"
+	.string "I've been waiting a long time now.\p"
+	.string "If we win today, I'll marry you!$"
 
 Text_1C21EE:: @ 81C21EE
-	.incbin "baserom.gba", 0x1C21EE, 0x1E
+	.string "My bird POKéMON remember you!$"
 
 Text_1C220C:: @ 81C220C
-	.incbin "baserom.gba", 0x1C220C, 0x30
+	.string "I want to be the best TRAINER \n"
+	.string "while I'm a kid!$"
 
 Text_1C223C:: @ 81C223C
-	.incbin "baserom.gba", 0x1C223C, 0x1F
+	.string "Wow!\n"
+	.string "You got more cool BADGES!$"
 
 Text_1C225B:: @ 81C225B
-	.incbin "baserom.gba", 0x1C225B, 0x3E
+	.string "My cutely grown POKéMON wish to\n"
+	.string "become reacquainted with you.$"
 
 Text_1C2299:: @ 81C2299
-	.incbin "baserom.gba", 0x1C2299, 0x31
+	.string "I cleaned out my savings and\n"
+	.string "bought more CARBOS.$"
 
 Text_1C22CA:: @ 81C22CA
-	.incbin "baserom.gba", 0x1C22CA, 0x3C
+	.string "I'm not going to lose this time.\n"
+	.string "The wind's blowing my way!$"
 
 Text_1C2306:: @ 81C2306
-	.incbin "baserom.gba", 0x1C2306, 0x3A
+	.string "Oh, you're back?\p"
+	.string "Sure, I'll play again with you,\n"
+	.string "sweetie.$"
 
 Text_1C2340:: @ 81C2340
-	.incbin "baserom.gba", 0x1C2340, 0x2B
+	.string "Can't you forget that you battled\n"
+	.string "with me?$"
 
 Text_1C236B:: @ 81C236B
-	.incbin "baserom.gba", 0x1C236B, 0x18
+	.string "What're you starin' at?$"
 
 Text_1C2383:: @ 81C2383
-	.incbin "baserom.gba", 0x1C2383, 0x3E
+	.string "I always go with bird POKéMON.\n"
+	.string "I've dedicated myself to them.$"
 
 Text_1C23C1:: @ 81C23C1
-	.incbin "baserom.gba", 0x1C23C1, 0x2E
+	.string "I used TMs to teach good moves\n"
+	.string "to my POKéMON.$"
 
 Text_1C23EF:: @ 81C23EF
-	.incbin "baserom.gba", 0x1C23EF, 0x36
+	.string "My bird POKéMON should be ready\n"
+	.string "for battle this time.$"
 
 Text_1C2425:: @ 81C2425
-	.incbin "baserom.gba", 0x1C2425, 0x3C
+	.string "Are you using TMs on POKéMON?\n"
+	.string "Just holding them is useless.$"
 
 Text_1C2461:: @ 81C2461
-	.incbin "baserom.gba", 0x1C2461, 0x6A
+	.string "Have you taught your bird POKéMON\n"
+	.string "how to FLY?\p"
+	.string "You'll be able to soar with it into\n"
+	.string "the sky! Give it a try.$"
 
 Text_1C24CB:: @ 81C24CB
-	.incbin "baserom.gba", 0x1C24CB, 0x3A
+	.string "The legend of the winged mirages…\n"
+	.string "You've heard it, right?$"
 
 Text_1C2505:: @ 81C2505
-	.incbin "baserom.gba", 0x1C2505, 0x2C
+	.string "I'm really not into it, but okay.\n"
+	.string "Let's go!$"
 
 Text_1C2531:: @ 81C2531
-	.incbin "baserom.gba", 0x1C2531, 0x41
+	.string "Hey!\n"
+	.string "I remember you!\p"
+	.string "C'mon, c'mon.\n"
+	.string "Let's go, let's go, let's go!$"
 
 Text_1C2572:: @ 81C2572
-	.incbin "baserom.gba", 0x1C2572, 0x2C
+	.string "You're here again, huh?\n"
+	.string "Shut up and battle.$"
 
 Text_1C259E:: @ 81C259E
-	.incbin "baserom.gba", 0x1C259E, 0x38
+	.string "We've been riding here because of\n"
+	.string "the wide-open spaces.$"
 
 Text_1C25D6:: @ 81C25D6
-	.incbin "baserom.gba", 0x1C25D6, 0x25
+	.string "POKéMON battle, right?\n"
+	.string "Cool! Rumble!$"
 
 Text_1C25FB:: @ 81C25FB
-	.incbin "baserom.gba", 0x1C25FB, 0x20
+	.string "KIRI: JAN, I hope we win today.$"
 
 Text_1C261B:: @ 81C261B
-	.incbin "baserom.gba", 0x1C261B, 0x35
+	.string "JAN: KIRI, here we go!\n"
+	.string "Let's win for sure this time!$"
 
 Text_1C2650:: @ 81C2650
-	.incbin "baserom.gba", 0x1C2650, 0x3D
+	.string "I'm going to keep battling with the\n"
+	.string "POKéMON I got in trades.$"
 
 Text_1C268D:: @ 81C268D
-	.incbin "baserom.gba", 0x1C268D, 0x46
+	.string "You look gentle, so I think I can\n"
+	.string "beat you.\p"
+	.string "I'll give it one more go!$"
 
 Text_1C26D3:: @ 81C26D3
-	.incbin "baserom.gba", 0x1C26D3, 0x44
+	.string "When I whistle, bird POKéMON\n"
+	.string "gather around.\p"
+	.string "They're amazingly cute!$"
 
 Text_1C2717:: @ 81C2717
-	.incbin "baserom.gba", 0x1C2717, 0x3C
+	.string "Hmm? My birds are shivering!\n"
+	.string "Wait, aren't you that TRAINER…$"
 
 Text_1C2753:: @ 81C2753
-	.incbin "baserom.gba", 0x1C2753, 0x4A
+	.string "Oh, you're a little cutie!\n"
+	.string "So like a darling POKéMON!\l"
+	.string "I remember you now!$"
 
 Text_1C279D:: @ 81C279D
-	.incbin "baserom.gba", 0x1C279D, 0x4A
+	.string "I raise POKéMON for protection\n"
+	.string "because I live alone.\p"
+	.string "That hasn't changed.$"
 
 Text_1C27E7:: @ 81C27E7
-	.incbin "baserom.gba", 0x1C27E7, 0x2D
+	.string "Hey, kid! C'mon!\n"
+	.string "I got these off some loser!$"
 
 Text_1C2814:: @ 81C2814
-	.incbin "baserom.gba", 0x1C2814, 0x32
+	.string "Fork over all your cash when you\n"
+	.string "lose to me, kid!$"
 
 Text_1C2846:: @ 81C2846
-	.incbin "baserom.gba", 0x1C2846, 0x37
+	.string "What's cool and happening?\n"
+	.string "Trading POKéMON, of course.$"
 
 Text_1C287D:: @ 81C287D
-	.incbin "baserom.gba", 0x1C287D, 0x24
+	.string "Want to play with my POKéMON\n"
+	.string "again?$"
 
 Text_1C28A1:: @ 81C28A1
-	.incbin "baserom.gba", 0x1C28A1, 0x4B
+	.string "MYA: Hi, we keep meeting,\n"
+	.string "don't we?\p"
+	.string "Help me train my little brother\n"
+	.string "again?$"
 
 Text_1C28EC:: @ 81C28EC
-	.incbin "baserom.gba", 0x1C28EC, 0x27
+	.string "RON: My sister's gotten more\n"
+	.string "powerful…$"
 
 Text_1C2913:: @ 81C2913
-	.incbin "baserom.gba", 0x1C2913, 0x12
+	.string "What do you want?$"
 
 Text_1C2925:: @ 81C2925
-	.incbin "baserom.gba", 0x1C2925, 0x1F
+	.string "Nice BIKE!\n"
+	.string "Hand it over quick!$"
 
 Text_1C2944:: @ 81C2944
-	.incbin "baserom.gba", 0x1C2944, 0x37
+	.string "Come out and play, little mouse.\n"
+	.string "I'll treat you right!$"
 
 Text_1C297B:: @ 81C297B
-	.incbin "baserom.gba", 0x1C297B, 0x35
+	.string "Hey, wait a second!\n"
+	.string "Don't call me and then run away!$"
 
 Text_1C29B0:: @ 81C29B0
-	.incbin "baserom.gba", 0x1C29B0, 0x3B
+	.string "I'm feeling hungry and mean!\n"
+	.string "I really need a punching bag!$"
 
 Text_1C29EB:: @ 81C29EB
-	.incbin "baserom.gba", 0x1C29EB, 0x2E
+	.string "Hey, there!\n"
+	.string "We'll have ourselves a good time!$"
 
 Text_1C2A19:: @ 81C2A19
-	.incbin "baserom.gba", 0x1C2A19, 0x3A
+	.string "JED: Are you here to see our\n"
+	.string "love, which knows no bounds?$"
 
 Text_1C2A53:: @ 81C2A53
-	.incbin "baserom.gba", 0x1C2A53, 0x35
+	.string "LEA: Sometimes, the intensity of\n"
+	.string "our love scares me.$"
 
 Text_1C2A88:: @ 81C2A88
-	.incbin "baserom.gba", 0x1C2A88, 0x3C
+	.string "I told you, there's no getting rich\n"
+	.string "quick in battling kids.$"
 
 Text_1C2AC4:: @ 81C2AC4
-	.incbin "baserom.gba", 0x1C2AC4, 0x2C
+	.string "I'm mighty proud of my bod, kiddo.\n"
+	.string "Come on!$"
 
 Text_1C2AF0:: @ 81C2AF0
-	.incbin "baserom.gba", 0x1C2AF0, 0x16
+	.string "You out for a stroll?$"
 
 Text_1C2B06:: @ 81C2B06
-	.incbin "baserom.gba", 0x1C2B06, 0x26
+	.string "We're BIKERS!\n"
+	.string "We rule the roads, man!$"
 
 Text_1C2B2C:: @ 81C2B2C
-	.incbin "baserom.gba", 0x1C2B2C, 0x32
+	.string "VOLTORB's going to seriously\n"
+	.string "electrify you today!$"
 
 Text_1C2B5E:: @ 81C2B5E
-	.incbin "baserom.gba", 0x1C2B5E, 0x3E
+	.string "I leveled up my POKéMON, but it\n"
+	.string "absolutely won't evolve. Why?$"
 
 Text_1C2B9C:: @ 81C2B9C
-	.incbin "baserom.gba", 0x1C2B9C, 0x3E
+	.string "Gaah! I really need to exercise\n"
+	.string "and seriously trim some flab!$"
 
 Text_1C2BDA:: @ 81C2BDA
-	.incbin "baserom.gba", 0x1C2BDA, 0xC
+	.string "Be a rebel!$"
 
 Text_1C2BE6:: @ 81C2BE6
-	.incbin "baserom.gba", 0x1C2BE6, 0x2A
+	.string "Yep, that's a nice BIKE!\n"
+	.string "How's it handle?$"
 
 Text_1C2C10:: @ 81C2C10
-	.incbin "baserom.gba", 0x1C2C10, 0x1B
+	.string "Get lost, kid!\n"
+	.string "I'm bushed!$"
 
 Text_1C2C2B:: @ 81C2C2B
-	.incbin "baserom.gba", 0x1C2C2B, 0x50
+	.string "I've been checking every grassy\n"
+	.string "area for new POKéMON.\p"
+	.string "But it's not always easy…$"
 
 Text_1C2C7B:: @ 81C2C7B
-	.incbin "baserom.gba", 0x1C2C7B, 0x2D
+	.string "Koorukukukoo!\n"
+	.string "Is my birdcall getting better?$"
 
 Text_1C2CA8:: @ 81C2CA8
-	.incbin "baserom.gba", 0x1C2CA8, 0x46
+	.string "I warned you before, this is my\n"
+	.string "turf!\p"
+	.string "I don't want you coming around.$"
 
 Text_1C2CEE:: @ 81C2CEE
-	.incbin "baserom.gba", 0x1C2CEE, 0x2B
+	.string "I'm almost warmed up to go\n"
+	.string "out for a swim.$"
 
 Text_1C2D19:: @ 81C2D19
-	.incbin "baserom.gba", 0x1C2D19, 0x32
+	.string "Wait! Slow down!\n"
+	.string "What if you have a heart attack?$"
 
 Text_1C2D4B:: @ 81C2D4B
-	.incbin "baserom.gba", 0x1C2D4B, 0x32
+	.string "I love swimming!\n"
+	.string "I guess you're the surfing type.$"
 
 Text_1C2D7D:: @ 81C2D7D
-	.incbin "baserom.gba", 0x1C2D7D, 0x2A
+	.string "What's beyond the horizon?\n"
+	.string "Have you seen?$"
 
 Text_1C2DA7:: @ 81C2DA7
-	.incbin "baserom.gba", 0x1C2DA7, 0x42
+	.string "I tried diving for POKéMON again,\n"
+	.string "but it was a no-go like before.$"
 
 Text_1C2DE9:: @ 81C2DE9
-	.incbin "baserom.gba", 0x1C2DE9, 0x61
+	.string "I look at the sea to forget all\n"
+	.string "the bad things that happened.\p"
+	.string "…Like losing to you the last time!$"
 
 Text_1C2E4A:: @ 81C2E4A
-	.incbin "baserom.gba", 0x1C2E4A, 0x53
+	.string "You always get to ride your\n"
+	.string "POKéMON…\p"
+	.string "It looks so relaxing.\n"
+	.string "Can I have it if I win?$"
 
 Text_1C2E9D:: @ 81C2E9D
-	.incbin "baserom.gba", 0x1C2E9D, 0x23
+	.string "Swimming's great!\n"
+	.string "Sunburns aren't!$"
 
 Text_1C2EC0:: @ 81C2EC0
-	.incbin "baserom.gba", 0x1C2EC0, 0x3C
+	.string "These waters are treacherous!\n"
+	.string "You shouldn't come back here!$"
 
 Text_1C2EFC:: @ 81C2EFC
-	.incbin "baserom.gba", 0x1C2EFC, 0x45
+	.string "I swam here with my friends…\n"
+	.string "I'm tired…\l"
+	.string "Must we really battle again?$"
 
 Text_1C2F41:: @ 81C2F41
-	.incbin "baserom.gba", 0x1C2F41, 0x6D
+	.string "LIA: You know my brother just\n"
+	.string "became a TRAINER, right?\p"
+	.string "I want to make him better, so I\n"
+	.string "need your help again.$"
 
 Text_1C2FAE:: @ 81C2FAE
-	.incbin "baserom.gba", 0x1C2FAE, 0x45
+	.string "LUC: My big sis taught me all\n"
+	.string "about POKéMON.\p"
+	.string "I wonder if I'm better?$"
 
 Text_1C2FF3:: @ 81C2FF3
-	.incbin "baserom.gba", 0x1C2FF3, 0x3B
+	.string "The water is shallow here.\n"
+	.string "There are many people swimming.$"
 
 Text_1C302E:: @ 81C302E
-	.incbin "baserom.gba", 0x1C302E, 0x31
+	.string "Are you jealous that I'm\n"
+	.string "vacationing on SEAFOAM?$"
 
 Text_1C305F:: @ 81C305F
-	.incbin "baserom.gba", 0x1C305F, 0x36
+	.string "I love floating with the fishes\n"
+	.string "here among the waves.$"
 
 Text_1C3095:: @ 81C3095
-	.incbin "baserom.gba", 0x1C3095, 0x1B
+	.string "Were you on vacation, too?$"
 
 Text_1C30B0:: @ 81C30B0
-	.incbin "baserom.gba", 0x1C30B0, 0x3D
+	.string "Check out my physique!\p"
+	.string "It's even more buff than ever\n"
+	.string "before!$"
 
 Text_1C30ED:: @ 81C30ED
-	.incbin "baserom.gba", 0x1C30ED, 0x3F
+	.string "Why are you riding a POKéMON?\n"
+	.string "Haven't you learned to swim yet?$"
 
 Text_1C312C:: @ 81C312C
-	.incbin "baserom.gba", 0x1C312C, 0x1D
+	.string "I rode my bird POKéMON here.$"
 
 Text_1C3149:: @ 81C3149
-	.incbin "baserom.gba", 0x1C3149, 0x3C
+	.string "My boyfriend gave me big pearls.\n"
+	.string "And, they've grown bigger!$"
 
 Text_1C3185:: @ 81C3185
-	.incbin "baserom.gba", 0x1C3185, 0x3F
+	.string "I swam here from CINNABAR ISLAND.\n"
+	.string "It wasn't easy, like I said.$"
 
 Text_1C31C4:: @ 81C31C4
-	.incbin "baserom.gba", 0x1C31C4, 0x44
+	.string "CINNABAR, in the west, has a LAB\n"
+	.string "for POKéMON.\p"
+	.string "My daddy works there.$"
 
 Text_1C3208:: @ 81C3208
-	.incbin "baserom.gba", 0x1C3208, 0x29
+	.string "You want to know if the fish are\n"
+	.string "biting?$"
 
 Text_1C3231:: @ 81C3231
-	.incbin "baserom.gba", 0x1C3231, 0x33
+	.string "I got a big haul again!\n"
+	.string "Wanna go for it once more?$"
 
 Text_1C3264:: @ 81C3264
-	.incbin "baserom.gba", 0x1C3264, 0x34
+	.string "The sea cleanses my body and soul!$"
+
+Text_1C3287:: @ 81C3287
+	.string "きょうも　およぎに\n"
+	.string "きちまったぜ$"
 
 Text_1C3298:: @ 81C3298
-	.incbin "baserom.gba", 0x1C3298, 0x3B
+	.string "I caught my POKéMON at sea.\n"
+	.string "And that's where I train them.$"
 
 Text_1C32D3:: @ 81C32D3
-	.incbin "baserom.gba", 0x1C32D3, 0x2A
+	.string "Right now, I'm in another triathlon\n"
+	.string "meet!$"
 
 Text_1C32FD:: @ 81C32FD
-	.incbin "baserom.gba", 0x1C32FD, 0x20
+	.string "Ahh!\n"
+	.string "Feel the sun and the wind!$"
 
 Text_1C331D:: @ 81C331D
-	.incbin "baserom.gba", 0x1C331D, 0x39
+	.string "Hey, cut it out already.\n"
+	.string "You always scare away the fish!$"
 
 Text_1C3356:: @ 81C3356
-	.incbin "baserom.gba", 0x1C3356, 0x22
+	.string "Keep me company till I get a hit.$"
 
 Text_1C3378:: @ 81C3378
-	.incbin "baserom.gba", 0x1C3378, 0x36
+	.string "LIL: Huh? A battle again?\n"
+	.string "IAN, can't you do it alone?$"
 
 Text_1C33AE:: @ 81C33AE
-	.incbin "baserom.gba", 0x1C33AE, 0x39
+	.string "IAN: My sis is still a slob.\n"
+	.string "Help me get her into shape!$"
 
 Text_1C33E7:: @ 81C33E7
-	.incbin "baserom.gba", 0x1C33E7, 0x1D
+	.string "I won't lose while I'm here!$"
 
 Text_1C3404:: @ 81C3404
-	.incbin "baserom.gba", 0x1C3404, 0x41
+	.string "Dad took me to a great party on\n"
+	.string "the S.S. ANNE at VERMILION CITY.$"
 
 Text_1C3445:: @ 81C3445
-	.incbin "baserom.gba", 0x1C3445, 0x57
+	.string "I'm a cool guy.\n"
+	.string "I've got a girlfriend!\p"
+	.string "I'll show her how cool I am for\n"
+	.string "sure this time!$"
 
 Text_1C349C:: @ 81C349C
-	.incbin "baserom.gba", 0x1C349C, 0x38
+	.string "Hi!\n"
+	.string "My boyfriend is cool!\l"
+	.string "My conditioning's good today!$"
 
 Text_1C34D4:: @ 81C34D4
-	.incbin "baserom.gba", 0x1C34D4, 0x36
+	.string "I had this feeling…\n"
+	.string "I knew I had to battle you again!$"
 
 Text_1C350A:: @ 81C350A
-	.incbin "baserom.gba", 0x1C350A, 0x31
+	.string "My friend has many cute POKéMON.\n"
+	.string "I'm so jealous!$"
 
 Text_1C353B:: @ 81C353B
-	.incbin "baserom.gba", 0x1C353B, 0x43
+	.string "I just trained up on MT. MOON,\n"
+	.string "but I've still got gas in the tank!$"
 
 Text_1C357E:: @ 81C357E
-	.incbin "baserom.gba", 0x1C357E, 0x3E
+	.string "A POKéMANIAC lives on the cape.\n"
+	.string "Have you seen his collection?$"
 
 Text_1C35BC:: @ 81C35BC
-	.incbin "baserom.gba", 0x1C35BC, 0x32
+	.string "You're going to see BILL again?\n"
+	.string "First, we battle!$"
 
 Text_1C35EE:: @ 81C35EE
-	.incbin "baserom.gba", 0x1C35EE, 0x20
+	.string "I saw your feat from the grass!$"
 
 Text_1C360E:: @ 81C360E
-	.incbin "baserom.gba", 0x1C360E, 0x16
+	.string "Okay!\n"
+	.string "I'll stomp you!$"
 
 Text_1C3624:: @ 81C3624
-	.incbin "baserom.gba", 0x1C3624, 0x33
+	.string "You always look so busy…\n"
+	.string "Aren't you getting tired?$"
 
 Text_1C3657:: @ 81C3657
-	.incbin "baserom.gba", 0x1C3657, 0x2E
+	.string "You really must love coming to\n"
+	.string "NUGGET BRIDGE.$"
 
 Text_1C3685:: @ 81C3685
-	.incbin "baserom.gba", 0x1C3685, 0x55
+	.string "The time we battled…\p"
+	.string "Even though I was the second in\n"
+	.string "line, I was the best, wasn't I?$"
 
 Text_1C36DA:: @ 81C36DA
-	.incbin "baserom.gba", 0x1C36DA, 0x99
+	.string "People call this the NUGGET\n"
+	.string "BRIDGE!\p"
+	.string "You've already beaten us, so you're\n"
+	.string "not allowed to take the challenge…\p"
+	.string "…But, you're welcome to battle with\n"
+	.string "us again.$"
 
 Text_1C3773:: @ 81C3773
-	.incbin "baserom.gba", 0x1C3773, 0x42
+	.string "Lying back, rocked by the waves…\n"
+	.string "I don't notice time slipping by…$"
 
 Text_1C37B5:: @ 81C37B5
-	.incbin "baserom.gba", 0x1C37B5, 0x32
+	.string "The weather's gorgeous!\n"
+	.string "I'll try not to spoil it.$"
 
 Text_1C37E7:: @ 81C37E7
-	.incbin "baserom.gba", 0x1C37E7, 0x20
+	.string "My sunburn is starting to hurt…$"
 
 Text_1C3807:: @ 81C3807
-	.incbin "baserom.gba", 0x1C3807, 0x2E
+	.string "The fire bird's mountain casts\n"
+	.string "a huge shadow…$"
 
 Text_1C3835:: @ 81C3835
-	.incbin "baserom.gba", 0x1C3835, 0x35
+	.string "I have this strong feeling that\n"
+	.string "I can win this time!$"
 
 Text_1C386A:: @ 81C386A
-	.incbin "baserom.gba", 0x1C386A, 0x35
+	.string "Wait! Wait a second!\n"
+	.string "I'm sure I've hooked a big one!$"
 
 Text_1C389F:: @ 81C389F
-	.incbin "baserom.gba", 0x1C389F, 0x2B
+	.string "You'll help me out with my\n"
+	.string "training again?$"
 
 Text_1C38CA:: @ 81C38CA
-	.incbin "baserom.gba", 0x1C38CA, 0x30
+	.string "We haven't missed a single day of\n"
+	.string "training yet!$"
 
 Text_1C38FA:: @ 81C38FA
-	.incbin "baserom.gba", 0x1C38FA, 0x49
+	.string "Every morning, before breakfast,\n"
+	.string "I swim around this island…\l"
+	.string "Three times!$"
 
 Text_1C3943:: @ 81C3943
-	.incbin "baserom.gba", 0x1C3943, 0x44
+	.string "Dress appropriately for battle!\n"
+	.string "Lose that frivolous outfit, I said!$"
 
 Text_1C3987:: @ 81C3987
-	.incbin "baserom.gba", 0x1C3987, 0x3F
+	.string "You know, everything tastes great\n"
+	.string "when you're out in the wild.$"
 
 Text_1C39C6:: @ 81C39C6
-	.incbin "baserom.gba", 0x1C39C6, 0x3F
+	.string "I ate too much again, so will you\n"
+	.string "battle us for some exercise?$"
 
 Text_1C3A05:: @ 81C3A05
-	.incbin "baserom.gba", 0x1C3A05, 0x50
+	.string "KIA: My big brother and I make\n"
+	.string "an awesome combination!\p"
+	.string "We won't lose this time!$"
 
 Text_1C3A55:: @ 81C3A55
-	.incbin "baserom.gba", 0x1C3A55, 0x52
+	.string "MIK: Together with KIA, we're\n"
+	.string "afraid of nothing!\p"
+	.string "We'll prove it to you this time!$"
 
 Text_1C3AA7:: @ 81C3AA7
-	.incbin "baserom.gba", 0x1C3AA7, 0x18
+	.string "Are we to battle again?$"
 
 Text_1C3ABF:: @ 81C3ABF
-	.incbin "baserom.gba", 0x1C3ABF, 0x33
+	.string "From where have you come, and\n"
+	.string "where are you bound?$"
 
 Text_1C3AF2:: @ 81C3AF2
-	.incbin "baserom.gba", 0x1C3AF2, 0x2B
+	.string "I want to swim without my float\n"
+	.string "ring soon.$"
 
 Text_1C3B1D:: @ 81C3B1D
-	.incbin "baserom.gba", 0x1C3B1D, 0x13
+	.string "Yay, yay!\n"
+	.string "POKéMON!$"
 
 Text_1C3B30:: @ 81C3B30
-	.incbin "baserom.gba", 0x1C3B30, 0x3E
+	.string "Oh, no, didn't I tell you already?\n"
+	.string "Please, stay away from me!$"
 
 Text_1C3B6E:: @ 81C3B6E
-	.incbin "baserom.gba", 0x1C3B6E, 0x2B
+	.string "JOY: We've gotten stronger!\n"
+	.string "Lots and lots!$"
 
 Text_1C3B99:: @ 81C3B99
-	.incbin "baserom.gba", 0x1C3B99, 0x1E
+	.string "MEG: You can't beat us today!$"
 
 Text_1C3BB7:: @ 81C3BB7
-	.incbin "baserom.gba", 0x1C3BB7, 0x3F
+	.string "Oh, hello!\p"
+	.string "Are you raising your POKéMON in a\n"
+	.string "good environment?$"
 
 Text_1C3BF6:: @ 81C3BF6
-	.incbin "baserom.gba", 0x1C3BF6, 0x32
+	.string "With these hands, I will create\n"
+	.string "my victory today.$"
 
 Text_1C3C28:: @ 81C3C28
-	.incbin "baserom.gba", 0x1C3C28, 0x48
+	.string "Must I repeat myself?\n"
+	.string "I'm trying to paint.\l"
+	.string "Please keep out of my sight!$"
 
 Text_1C3C70:: @ 81C3C70
-	.incbin "baserom.gba", 0x1C3C70, 0x40
+	.string "I haven't made any progress…\n"
+	.string "I still can't get the right angle…$"
 
 Text_1C3CB0:: @ 81C3CB0
-	.incbin "baserom.gba", 0x1C3CB0, 0x41
+	.string "Oh, you will give me another\n"
+	.string "opportunity to match wits with you?$"
 
 Text_1C3CF1:: @ 81C3CF1
-	.incbin "baserom.gba", 0x1C3CF1, 0x56
+	.string "They're almost finished making the\n"
+	.string "pool for my POKéMON.\p"
+	.string "You must drop in for a visit.$"
 
 Text_1C3D47:: @ 81C3D47
-	.incbin "baserom.gba", 0x1C3D47, 0x2C
+	.string "I'm a good runner.\n"
+	.string "I've gotten even faster!$"
 
 Text_1C3D73:: @ 81C3D73
-	.incbin "baserom.gba", 0x1C3D73, 0x2F
+	.string "I say, friend!\n"
+	.string "Let us enjoy our time together!$"
 
 Text_1C3DA2:: @ 81C3DA2
-	.incbin "baserom.gba", 0x1C3DA2, 0x6D
+	.string "I'm the eldest of the BIRD\n"
+	.string "BROTHERS. Remember me?\p"
+	.string "That's right, I'm the one who loves\n"
+	.string "birds for their beaks!$"
 
 Text_1C3E0F:: @ 81C3E0F
-	.incbin "baserom.gba", 0x1C3E0F, 0x5B
+	.string "I'm the middle kid of the BIRD\n"
+	.string "BROTHERS.\p"
+	.string "I'm the one that loves wings.\n"
+	.string "Let's battle again!$"
 
 Text_1C3E6A:: @ 81C3E6A
-	.incbin "baserom.gba", 0x1C3E6A, 0x66
+	.string "I'm the youngest of the BIRD\n"
+	.string "BROTHERS.\p"
+	.string "I love birds for their down.\n"
+	.string "I didn't think I'd see you again!$"
 
 Text_1C3ED0:: @ 81C3ED0
-	.incbin "baserom.gba", 0x1C3ED0, 0x41
+	.string "I'm still having no luck at all.\n"
+	.string "A battle'd be a change of pace!$"
 
 Text_1C3F11:: @ 81C3F11
-	.incbin "baserom.gba", 0x1C3F11, 0x40
+	.string "Gasp… Gasp…\p"
+	.string "I swam here from SIX ISLAND's port\n"
+	.string "in one go again.$"
 
 Text_1C3F51:: @ 81C3F51
-	.incbin "baserom.gba", 0x1C3F51, 0x2A
+	.string "You always come along while I'm\n"
+	.string "swimming.$"
 
 Text_1C3F7B:: @ 81C3F7B
-	.incbin "baserom.gba", 0x1C3F7B, 0x38
+	.string "AVA: Let's have another\n"
+	.string "two-on-two marine battle today!$"
 
 Text_1C3FB3:: @ 81C3FB3
-	.incbin "baserom.gba", 0x1C3FB3, 0x36
+	.string "GEB: My big sister and I are way\n"
+	.string "tougher than before!$"
 
 Text_1C3FE9:: @ 81C3FE9
-	.incbin "baserom.gba", 0x1C3FE9, 0x3F
+	.string "…Huh?\p"
+	.string "I envision my house, but TELEPORT\n"
+	.string "always brings me here!$"
 
 Text_1C4028:: @ 81C4028
-	.incbin "baserom.gba", 0x1C4028, 0x2F
+	.string "Oh, hello.\n"
+	.string "A pleasant breeze is blowing again.$"
 
 Text_1C4057:: @ 81C4057
-	.incbin "baserom.gba", 0x1C4057, 0x28
+	.string "Hehehe, I'm practicing in secret\n"
+	.string "again.$"
 
 Text_1C407F:: @ 81C407F
-	.incbin "baserom.gba", 0x1C407F, 0x5A
+	.string "What, you're sick of seeing\n"
+	.string "SWIMMERS like me?\p"
+	.string "Aww, don't be hatin'!\n"
+	.string "Battle with me again.$"
 
 Text_1C40D9:: @ 81C40D9
-	.incbin "baserom.gba", 0x1C40D9, 0x21
+	.string "Sigh…\n"
+	.string "My boyfriend's busy again…$"
 
 Text_1C40FA:: @ 81C40FA
-	.incbin "baserom.gba", 0x1C40FA, 0x3E
+	.string "Come on, tell me, where are the\n"
+	.string "mountains around these parts?$"
 
 Text_1C4138:: @ 81C4138
-	.incbin "baserom.gba", 0x1C4138, 0x2E
+	.string "MIU: Hello, POKéMON!\n"
+	.string "It's time to play again!$"
 
 Text_1C4166:: @ 81C4166
-	.incbin "baserom.gba", 0x1C4166, 0x30
+	.string "MIA: Hello, POKéMON!\n"
+	.string "It's time to battle again!$"
 
 Text_1C4196:: @ 81C4196
-	.incbin "baserom.gba", 0x1C4196, 0x3E
+	.string "There appear to be many secrets\n"
+	.string "still unsolved in this world.$"
 
 Text_1C41D4:: @ 81C41D4
-	.incbin "baserom.gba", 0x1C41D4, 0x3C
+	.string "Hi, didn't we meet before?\n"
+	.string "What compelled you to come back?$"
 
 Text_1C4210:: @ 81C4210
-	.incbin "baserom.gba", 0x1C4210, 0x70
+	.string "It's been said that there are\n"
+	.string "mysterious stones on this island.\p"
+	.string "Have you discovered anything since\n"
+	.string "we last met?$"
 
 Text_1C4280:: @ 81C4280
-	.incbin "baserom.gba", 0x1C4280, 0x20
+	.string "A rematch with you, so high up!$"
 
 Text_1C42A0:: @ 81C42A0
-	.incbin "baserom.gba", 0x1C42A0, 0x36
+	.string "I'm pretty familiar with the land\n"
+	.string "around these parts.$"
 
 Text_1C42D6:: @ 81C42D6
-	.incbin "baserom.gba", 0x1C42D6, 0x18
+	.string "I sensed your approach.$"
 
 Text_1C42EE:: @ 81C42EE
-	.incbin "baserom.gba", 0x1C42EE, 0x39
+	.string "Somewhere on this island, peculiar\n"
+	.string "POKéMON are sleeping.$"
 
 Text_1C4327:: @ 81C4327
-	.incbin "baserom.gba", 0x1C4327, 0x4D
+	.string "Kyahaha!\p"
+	.string "Coming back won't change a thing.\n"
+	.string "I'll flick you away effortlessly!$"
 
 Text_1C4374:: @ 81C4374
-	.incbin "baserom.gba", 0x1C4374, 0x39
+	.string "Howdy! You're a member of my\n"
+	.string "fan club, isn't that right?$"
 
 Text_1C43AD:: @ 81C43AD
-	.incbin "baserom.gba", 0x1C43AD, 0x3F
+	.string "This island is too spread out…\n"
+	.string "Patrolling the place is a drag…$"
 
 Text_1C43EC:: @ 81C43EC
-	.incbin "baserom.gba", 0x1C43EC, 0x2A
+	.string "I don't forgive people who abuse\n"
+	.string "POKéMON!$"
 
 Text_1C4416:: @ 81C4416
-	.incbin "baserom.gba", 0x1C4416, 0x36
+	.string "EVE: I'll team up with JON and\n"
+	.string "battle together again.$"
 
 Text_1C444C:: @ 81C444C
-	.incbin "baserom.gba", 0x1C444C, 0x45
+	.string "JON: When I'm with EVE, it feels\n"
+	.string "like we could never lose, not ever.$"
 
 Text_1C4491:: @ 81C4491
-	.incbin "baserom.gba", 0x1C4491, 0x3A
+	.string "Let's have another battle.\n"
+	.string "My conditioning's in top form!$"
 
 Text_1C44CB:: @ 81C44CB
-	.incbin "baserom.gba", 0x1C44CB, 0x83
+	.string "It doesn't matter if you happen to\n"
+	.string "have the strongest POKéMON…\p"
+	.string "It doesn't mean a thing if you don't\n"
+	.string "know how to use them properly!$"
 
 Text_1C454E:: @ 81C454E
-	.incbin "baserom.gba", 0x1C454E, 0x40
+	.string "I work to protect the environment.\n"
+	.string "In turn, nature protects me!$"
 
 Text_1C458E:: @ 81C458E
-	.incbin "baserom.gba", 0x1C458E, 0x34
+	.string "Every time we meet, you have those\n"
+	.string "snazzy shoes on.$"
 
 Text_1C45C2:: @ 81C45C2
-	.incbin "baserom.gba", 0x1C45C2, 0x39
+	.string "You must have gotten tougher.\n"
+	.string "Let me battle you, please!$"
 
 Text_1C45FB:: @ 81C45FB
-	.incbin "baserom.gba", 0x1C45FB, 0x67
+	.string "I was given the best possible\n"
+	.string "education to become this strong.\p"
+	.string "I won't lose this time.\n"
+	.string "Absolutely not!$"
 
 Text_1C4662:: @ 81C4662
-	.incbin "baserom.gba", 0x1C4662, 0x37
+	.string "LEX: My darling NYA, together\n"
+	.string "we will win for certain!$"
 
 Text_1C4699:: @ 81C4699
-	.incbin "baserom.gba", 0x1C4699, 0x3A
+	.string "NYA: I won't drag down my mentor\n"
+	.string "LEX! We're going to win!$"
 
 Text_1C46D3:: @ 81C46D3
-	.incbin "baserom.gba", 0x1C46D3, 0x37
+	.string "Have you discovered anything about\n"
+	.string "this stone chamber?$"
 
 Text_1C470A:: @ 81C470A
-	.incbin "baserom.gba", 0x1C470A, 0x2F
+	.string "A mystic POKéMON is said to sleep\n"
+	.string "inside here.$"
 
 Text_1C4739:: @ 81C4739
-	.incbin "baserom.gba", 0x1C4739, 0x31
+	.string "My teacher is showing me how to\n"
+	.string "paint some more.$"
 
 Text_1C476A:: @ 81C476A
-	.incbin "baserom.gba", 0x1C476A, 0x44
+	.string "Today, in addition to our lesson,\n"
+	.string "we came to see the chamber again.$"
 
 VictoryRoad_2F_EventScript_1C47AE:: @ 81C47AE
-	.incbin "baserom.gba", 0x1C47AE, 0x68
+	lock
+	faceplayer
+	checkflag FLAG_0x2C0
+	goto_if 1, EventScript_1C480C
+	loadword 0, Text_1749F9
+	callstd 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4802
+	call EventScript_1C4F37
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4802
+	loadword 0, Text_174AE2
+	callstd 4
+	setvar VAR_0x8005, 4
+	call EventScript_1C4F30
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4802
+	setflag FLAG_0x2C0
+	goto EventScript_1C480C
+    end
+
+EventScript_1C4802:: @ 81C4802
+	loadword 0, Text_174ABC
+	callstd 4
+	release
+	end
+
+EventScript_1C480C:: @ 81C480C
+	loadword 0, Text_174B0C
+	callstd 4
+	release
+	end
 
 EventScript_1C4816:: @ 81C4816
-	.incbin "baserom.gba", 0x1C4816, 0x68
+	lock
+	faceplayer
+	checkflag FLAG_0x2C1
+	goto_if 1, EventScript_1C4874
+	loadword 0, Text_175711
+	callstd 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C486A
+	call EventScript_1C4F37
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C486A
+	loadword 0, Text_1757C1
+	callstd 4
+	setvar VAR_0x8005, 11
+	call EventScript_1C4F30
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C486A
+	setflag FLAG_0x2C1
+	goto EventScript_1C4874
+    end
+
+EventScript_1C486A:: @ 81C486A
+	loadword 0, Text_17579D
+	callstd 4
+	release
+	end
+
+EventScript_1C4874:: @ 81C4874
+	loadword 0, Text_1757EC
+	callstd 4
+	release
+	end
 
 RockTunnel_B1F_EventScript_1C487E:: @ 81C487E
-	.incbin "baserom.gba", 0x1C487E, 0x68
+	lock
+	faceplayer
+	checkflag FLAG_0x2C2
+	goto_if 1, EventScript_1C48DC
+	loadword 0, Text_1799E0
+	callstd 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C48D2
+	call EventScript_1C4F37
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C48D2
+	loadword 0, Text_179AE1
+	callstd 4
+	setvar VAR_0x8005, 13
+	call EventScript_1C4F30
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C48D2
+	setflag FLAG_0x2C2
+	goto EventScript_1C48DC
+    end
+
+EventScript_1C48D2:: @ 81C48D2
+	loadword 0, Text_179AC0
+	callstd 4
+	release
+	end
+
+EventScript_1C48DC:: @ 81C48DC
+	loadword 0, Text_179B0A
+	callstd 4
+	release
+	end
 
 MtEmber_Exterior_EventScript_1C48E6:: @ 81C48E6
-	.incbin "baserom.gba", 0x1C48E6, 0x68
+	lock
+	faceplayer
+	checkflag FLAG_0x2C3
+	goto_if 1, EventScript_1C4944
+	loadword 0, Text_17A642
+	callstd 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C493A
+	call EventScript_1C4F37
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C493A
+	loadword 0, Text_17A717
+	callstd 4
+	setvar VAR_0x8005, 12
+	call EventScript_1C4F30
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C493A
+	setflag FLAG_0x2C3
+	goto EventScript_1C4944
+    end
+
+EventScript_1C493A:: @ 81C493A
+	loadword 0, Text_17A6ED
+	callstd 4
+	release
+	end
+
+EventScript_1C4944:: @ 81C4944
+	loadword 0, Text_17A756
+	callstd 4
+	release
+	end
 
 Route4_EventScript_1C494E:: @ 81C494E
-	.incbin "baserom.gba", 0x1C494E, 0x68
+	lock
+	faceplayer
+	checkflag FLAG_0x2C4
+	goto_if 1, EventScript_1C49AC
+	loadword 0, Text_1839D5
+	callstd 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C49A2
+	call EventScript_1C4F37
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C49A2
+	loadword 0, Text_183ABF
+	callstd 4
+	setvar VAR_0x8005, 0
+	call EventScript_1C4F30
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C49A2
+	setflag FLAG_0x2C4
+	goto EventScript_1C49AC
+    end
+
+EventScript_1C49A2:: @ 81C49A2
+	loadword 0, Text_183A83
+	callstd 4
+	release
+	end
+
+EventScript_1C49AC:: @ 81C49AC
+	loadword 0, Text_183AE2
+	callstd 4
+	release
+	end
 
 Route4_EventScript_1C49B6:: @ 81C49B6
-	.incbin "baserom.gba", 0x1C49B6, 0x68
+	lock
+	faceplayer
+	checkflag FLAG_0x2C5
+	goto_if 1, EventScript_1C4A14
+	loadword 0, Text_183B74
+	callstd 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4A0A
+	call EventScript_1C4F37
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4A0A
+	loadword 0, Text_183C68
+	callstd 4
+	setvar VAR_0x8005, 2
+	call EventScript_1C4F30
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4A0A
+	setflag FLAG_0x2C5
+	goto EventScript_1C4A14
+    end
+
+EventScript_1C4A0A:: @ 81C4A0A
+	loadword 0, Text_183C25
+	callstd 4
+	release
+	end
+
+EventScript_1C4A14:: @ 81C4A14
+	loadword 0, Text_183C94
+	callstd 4
+	release
+	end
 
 EventScript_1C4A1E:: @ 81C4A1E
-	.incbin "baserom.gba", 0x1C4A1E, 0x68
+	lock
+	faceplayer
+	checkflag FLAG_0x2C6
+	goto_if 1, EventScript_1C4A7C
+	loadword 0, Text_17E316
+	callstd 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4A72
+	call EventScript_1C4F37
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4A72
+	loadword 0, Text_17E3F1
+	callstd 4
+	setvar VAR_0x8005, 10
+	call EventScript_1C4F30
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4A72
+	setflag FLAG_0x2C6
+	goto EventScript_1C4A7C
+    end
+
+EventScript_1C4A72:: @ 81C4A72
+	loadword 0, Text_17E3E9
+	callstd 4
+	release
+	end
+
+EventScript_1C4A7C:: @ 81C4A7C
+	loadword 0, Text_17E41B
+	callstd 4
+	release
+	end
 
 EventScript_1C4A86:: @ 81C4A86
-	.incbin "baserom.gba", 0x1C4A86, 0x68
+	lock
+	faceplayer
+	checkflag FLAG_0x2C7
+	goto_if 1, EventScript_1C4AE4
+	loadword 0, Text_180388
+	callstd 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4ADA
+	call EventScript_1C4F37
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4ADA
+	loadword 0, Text_180484
+	callstd 4
+	setvar VAR_0x8005, 9
+	call EventScript_1C4F30
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4ADA
+	setflag FLAG_0x2C7
+	goto EventScript_1C4AE4
+    end
+
+EventScript_1C4ADA:: @ 81C4ADA
+	loadword 0, Text_18043F
+	callstd 4
+	release
+	end
+
+EventScript_1C4AE4:: @ 81C4AE4
+	loadword 0, Text_1804C4
+	callstd 4
+	release
+	end
 
 FuchsiaCity_EventScript_1C4AEE:: @ 81C4AEE
-	.incbin "baserom.gba", 0x1C4AEE, 0x68
+	lock
+	faceplayer
+	checkflag FLAG_0x2C8
+	goto_if 1, EventScript_1C4B4C
+	loadword 0, Text_180948
+	callstd 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4B42
+	call EventScript_1C4F37
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4B42
+	loadword 0, Text_180A57
+	callstd 4
+	setvar VAR_0x8005, 14
+	call EventScript_1C4F30
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4B42
+	setflag FLAG_0x2C8
+	goto EventScript_1C4B4C
+    end
+
+EventScript_1C4B42:: @ 81C4B42
+	loadword 0, Text_180A32
+	callstd 4
+	release
+	end
+
+EventScript_1C4B4C:: @ 81C4B4C
+	loadword 0, Text_180A80
+	callstd 4
+	release
+	end
 
 SevenIsland_EventScript_1C4B56:: @ 81C4B56
-	.incbin "baserom.gba", 0x1C4B56, 0x68
+	lock
+	faceplayer
+	checkflag FLAG_0x2C9
+	goto_if 1, EventScript_1C4BB4
+	loadword 0, Text_182F01
+	callstd 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4BAA
+	call EventScript_1C4F37
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4BAA
+	loadword 0, Text_182FD9
+	callstd 4
+	setvar VAR_0x8005, 1
+	call EventScript_1C4F30
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4BAA
+	setflag FLAG_0x2C9
+	goto EventScript_1C4BB4
+    end
+
+EventScript_1C4BAA:: @ 81C4BAA
+	loadword 0, Text_182FC1
+	callstd 4
+	release
+	end
+
+EventScript_1C4BB4:: @ 81C4BB4
+	loadword 0, Text_18300D
+	callstd 4
+	release
+	end
 
 PewterCity_Museum_1F_EventScript_1C4BBE:: @ 81C4BBE
-	.incbin "baserom.gba", 0x1C4BBE, 0x68
+	lock
+	faceplayer
+	checkflag FLAG_0x2CA
+	goto_if 1, EventScript_1C4C1C
+	loadword 0, Text_1909A3
+	callstd 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4C12
+	call EventScript_1C4F37
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4C12
+	loadword 0, Text_190AD5
+	callstd 4
+	setvar VAR_0x8005, 6
+	call EventScript_1C4F30
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4C12
+	setflag FLAG_0x2CA
+	goto EventScript_1C4C1C
+    end
+
+EventScript_1C4C12:: @ 81C4C12
+	loadword 0, Text_190AA9
+	callstd 4
+	release
+	end
+
+EventScript_1C4C1C:: @ 81C4C1C
+	loadword 0, Text_190B00
+	callstd 4
+	release
+	end
 
 EventScript_1C4C26:: @ 81C4C26
-	.incbin "baserom.gba", 0x1C4C26, 0x68
+	lock
+	faceplayer
+	checkflag FLAG_0x2CB
+	goto_if 1, EventScript_1C4C84
+	loadword 0, Text_195928
+	callstd 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4C7A
+	call EventScript_1C4F37
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4C7A
+	loadword 0, Text_195A08
+	callstd 4
+	setvar VAR_0x8005, 5
+	call EventScript_1C4F30
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4C7A
+	setflag FLAG_0x2CB
+	goto EventScript_1C4C84
+    end
+
+EventScript_1C4C7A:: @ 81C4C7A
+	loadword 0, Text_1959CC
+	callstd 4
+	release
+	end
+
+EventScript_1C4C84:: @ 81C4C84
+	loadword 0, Text_195A31
+	callstd 4
+	release
+	end
 
 EventScript_1C4C8E:: @ 81C4C8E
-	.incbin "baserom.gba", 0x1C4C8E, 0x68
+	lock
+	faceplayer
+	checkflag FLAG_0x2CC
+	goto_if 1, EventScript_1C4CEC
+	loadword 0, Text_19A137
+	callstd 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4CE2
+	call EventScript_1C4F37
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4CE2
+	loadword 0, Text_19A1EA
+	callstd 4
+	setvar VAR_0x8005, 8
+	call EventScript_1C4F30
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4CE2
+	setflag FLAG_0x2CC
+	goto EventScript_1C4CEC
+    end
+
+EventScript_1C4CE2:: @ 81C4CE2
+	loadword 0, Text_19A1CB
+	callstd 4
+	release
+	end
+
+EventScript_1C4CEC:: @ 81C4CEC
+	loadword 0, Text_19A20E
+	callstd 4
+	release
+	end
 
 EventScript_1C4CF6:: @ 81C4CF6
-	.incbin "baserom.gba", 0x1C4CF6, 0x8E
+	checkflag FLAG_0x2CD
+	goto_if 1, EventScript_1C4D59
+	loadword 0, Text_19AD85
+	callstd 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4D4F
+	call EventScript_1C4F37
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4D4F
+	loadword 0, Text_19ADEE
+	callstd 4
+	setvar VAR_0x8005, 7
+	call EventScript_1C4F30
+	lock
+	faceplayer
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4D4F
+	removeitem ITEM_POKE_DOLL, 1
+	setflag FLAG_0x2CD
+	goto EventScript_1C4D59
+    end
+
+EventScript_1C4D4F:: @ 81C4D4F
+	loadword 0, Text_19ADD8
+	callstd 4
+	release
+	end
+
+EventScript_1C4D59:: @ 81C4D59
+	checkplayergender
+	compare_var_to_value VAR_RESULT, 0
+	call_if 1, EventScript_1C4D72
+	compare_var_to_value VAR_RESULT, 1
+	call_if 1, EventScript_1C4D7B
+	release
+	end
+
+EventScript_1C4D72:: @ 81C4D72
+	loadword 0, Text_19AE1C
+	callstd 4
+	return
+
+EventScript_1C4D7B:: @ 81C4D7B
+	loadword 0, Text_19AE90
+	callstd 4
+	return
 
 FourIsland_House1_EventScript_1C4D84:: @ 81C4D84
-	.incbin "baserom.gba", 0x1C4D84, 0x68
+	lock
+	faceplayer
+	checkflag FLAG_0x2CE
+	goto_if 1, EventScript_1C4DE2
+	loadword 0, Text_1A3505
+	callstd 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4DD8
+	call EventScript_1C4F37
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4DD8
+	loadword 0, Text_1A35DA
+	callstd 4
+	setvar VAR_0x8005, 3
+	call EventScript_1C4F30
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4DD8
+	setflag FLAG_0x2CE
+	goto EventScript_1C4DE2
+    end
+
+EventScript_1C4DD8:: @ 81C4DD8
+	loadword 0, Text_1A35C7
+	callstd 4
+	release
+	end
+
+EventScript_1C4DE2:: @ 81C4DE2
+	loadword 0, Text_1A3609
+	callstd 4
+	release
+	end
 
 TwoIsland_CapeBrink_House_EventScript_1C4DEC:: @ 81C4DEC
-	.incbin "baserom.gba", 0x1C4DEC, 0x168
+	special sub_8110AB4
+	compare_var_to_value VAR_RESULT, 2
+	goto_if 1, EventScript_1A7AE0
+	special sub_8112364
+	lock
+	faceplayer
+	checkflag FLAG_0x2E1
+	goto_if 1, EventScript_1C4EA1
+	checkflag FLAG_0x002
+	goto_if 1, EventScript_1C4E97
+	getfirstpartymonname 0
+	loadword 0, Text_1A46C6
+	callstd 4
+	specialvar VAR_RESULT, sub_80CCB94
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4F26
+	copyvar VAR_0x8009, VAR_0x8005
+	compare_var_to_value VAR_FACING, 2
+	call_if 1, EventScript_1C4EF0
+	compare_var_to_value VAR_FACING, 1
+	call_if 1, EventScript_1C4EFB
+	compare_var_to_value VAR_FACING, 4
+	call_if 1, EventScript_1C4F06
+	compare_var_to_value VAR_FACING, 3
+	call_if 1, EventScript_1C4F11
+	loadword 0, Text_1A4751
+	callstd 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4F1C
+	call EventScript_1C4F37
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4F1C
+	loadword 0, Text_1A4814
+	callstd 4
+	closemessage
+	fadescreen 1
+	goto EventScript_1C4EDA
+
+EventScript_1C4E8F:: @ 81C4E8F
+	fadescreen 0
+	goto EventScript_1C4EAB
+	end
+
+EventScript_1C4E97:: @ 81C4E97
+	loadword 0, Text_1A48B3
+	callstd 4
+	release
+	end
+
+EventScript_1C4EA1:: @ 81C4EA1
+	loadword 0, Text_1A4972
+	callstd 4
+	release
+	end
+
+EventScript_1C4EAB:: @ 81C4EAB
+	copyvar VAR_0x8005, VAR_0x8009
+	specialvar VAR_RESULT, sub_80CCCF8
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1C4ECD
+	loadword 0, Text_1A4865
+	callstd 4
+	setflag FLAG_0x002
+	release
+	end
+
+EventScript_1C4ECD:: @ 81C4ECD
+	loadword 0, Text_1A48F3
+	callstd 4
+	setflag FLAG_0x2E1
+	release
+	end
+
+EventScript_1C4EDA:: @ 81C4EDA
+	call EventScript_1C4F30
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C4F1C
+	goto EventScript_1C4EAB
+	end
+
+EventScript_1C4EF0:: @ 81C4EF0
+	applymovement 1, Movement_1C4F4C
+	waitmovement 0
+	return
+
+EventScript_1C4EFB:: @ 81C4EFB
+	applymovement 1, Movement_1C4F4E
+	waitmovement 0
+	return
+
+EventScript_1C4F06:: @ 81C4F06
+	applymovement 1, Movement_1C4F50
+	waitmovement 0
+	return
+
+EventScript_1C4F11:: @ 81C4F11
+	applymovement 1, Movement_1C4F52
+	waitmovement 0
+	return
+
+EventScript_1C4F1C:: @ 81C4F1C
+	loadword 0, Text_1A47E5
+	callstd 4
+	release
+	end
+
+EventScript_1C4F26:: @ 81C4F26
+	loadword 0, Text_1A4737
+	callstd 4
+	release
+	end
+
+EventScript_1C4F30:: @ 81C4F30
+	special sub_812781C
+	waitstate
+	lock
+	faceplayer
+	return
+
+EventScript_1C4F37:: @ 81C4F37
+	textcolor 3
+	special sub_80699BC
+	signmsg
+	loadword 0, Text_1A644F
+	callstd 5
+	normalmsg
+	call EventScript_1A6675
+	return
+
+Movement_1C4F4C:: @ 81C4F4C
+	step_52
+	step_end
+
+Movement_1C4F4E:: @ 81C4F4E
+	step_53
+	step_end
+
+Movement_1C4F50:: @ 81C4F50
+	step_54
+	step_end
+
+Movement_1C4F52:: @ 81C4F52
+	step_55
+	step_end
 
 SevenIsland_TrainerTower_1F_MapScript1_1C4F54:: @ 81C4F54
 SevenIsland_TrainerTower_2F_MapScript1_1C4F54:: @ 81C4F54
@@ -13981,7 +15415,10 @@ SevenIsland_TrainerTower_7F_MapScript1_1C4F54:: @ 81C4F54
 SevenIsland_TrainerTower_8F_MapScript1_1C4F54:: @ 81C4F54
 SevenIsland_TrainerTower_Elevator_MapScript1_1C4F54:: @ 81C4F54
 SevenIsland_TrainerTower_Roof_MapScript1_1C4F54:: @ 81C4F54
-	.incbin "baserom.gba", 0x1C4F54, 0xE
+	setvar VAR_0x4002, 0
+	setvar VAR_0x8004, 10
+	special sub_815D9E8
+	end
 
 SevenIsland_TrainerTower_1F_MapScript2_1C4F62:: @ 81C4F62
 SevenIsland_TrainerTower_2F_MapScript2_1C4F62:: @ 81C4F62
@@ -13991,7 +15428,65 @@ SevenIsland_TrainerTower_5F_MapScript2_1C4F62:: @ 81C4F62
 SevenIsland_TrainerTower_6F_MapScript2_1C4F62:: @ 81C4F62
 SevenIsland_TrainerTower_7F_MapScript2_1C4F62:: @ 81C4F62
 SevenIsland_TrainerTower_8F_MapScript2_1C4F62:: @ 81C4F62
-	.incbin "baserom.gba", 0x1C4F62, 0xE4
+	setvar VAR_0x8004, 0
+	special sub_815D9E8
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1C4FA7
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1C4FC5
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1C5019
+	setflag FLAG_0x002
+	setflag FLAG_0x003
+	setflag FLAG_0x004
+	setflag FLAG_0x005
+	setvar VAR_0x400E, 1
+	setvar VAR_0x400F, 1
+	end
+
+EventScript_1C4FA7:: @ 81C4FA7
+	setflag FLAG_0x002
+	setflag FLAG_0x004
+	setflag FLAG_0x005
+	setvar VAR_0x400F, 1
+	setobjectxyperm 3, 15, 13
+	setobjectmovementtype 3, 9
+	goto EventScript_1C5042
+
+EventScript_1C4FC5:: @ 81C4FC5
+	setflag FLAG_0x003
+	setflag FLAG_0x004
+	setvar VAR_0x400E, 1
+	setvar VAR_0x8004, 5
+	special sub_815D9E8
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1C4FFE
+	setobjectxyperm 2, 10, 12
+	setobjectmovementtype 2, 9
+	setobjectxyperm 5, 10, 13
+	setobjectmovementtype 5, 9
+	goto EventScript_1C5042
+
+EventScript_1C4FFE:: @ 81C4FFE
+	setobjectxyperm 2, 10, 12
+	setobjectmovementtype 2, 8
+	setobjectxyperm 5, 11, 12
+	setobjectmovementtype 5, 8
+	goto EventScript_1C5042
+
+EventScript_1C5019:: @ 81C5019
+	setflag FLAG_0x005
+	setvar VAR_0x400F, 1
+	setobjectxyperm 2, 10, 10
+	setobjectmovementtype 2, 8
+	setobjectxyperm 3, 14, 13
+	setobjectmovementtype 3, 9
+	setobjectxyperm 4, 10, 16
+	setobjectmovementtype 4, 7
+EventScript_1C5042:
+	setflag FLAG_0x006
+	end
 
 SevenIsland_TrainerTower_1F_MapScript3_1C5046:: @ 81C5046
 SevenIsland_TrainerTower_2F_MapScript3_1C5046:: @ 81C5046
@@ -14003,25 +15498,317 @@ SevenIsland_TrainerTower_7F_MapScript3_1C5046:: @ 81C5046
 SevenIsland_TrainerTower_8F_MapScript3_1C5046:: @ 81C5046
 SevenIsland_TrainerTower_Elevator_MapScript2_1C5046:: @ 81C5046
 SevenIsland_TrainerTower_Roof_MapScript2_1C5046:: @ 81C5046
-	.incbin "baserom.gba", 0x1C5046, 0x2AE
+	map_script_2 VAR_0x4002, 0, EventScript_1C5050
+	.2byte 0
+
+EventScript_1C5050:: @ 81C5050
+	setvar VAR_0x4002, 1
+	setvar VAR_0x8004, 5
+	special sub_815D9E8
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1C5072
+	setvar VAR_0x400E, 1
+	setvar VAR_0x400F, 1
+EventScript_1C5072:
+	setvar VAR_0x8004, 18
+	special sub_815D9E8
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1C5086
+	end
+
+EventScript_1C5086:: @ 81C5086
+	warp MAP_SEVEN_ISLAND_TRAINER_TOWER_LOBBY, 255, 9, 7
+	waitstate
+EventScript_1C508F::
+	setvar VAR_0x8004, 3
+	setvar VAR_0x8005, 0
+	special sub_815D9E8
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1C50C2
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1C510D
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1C515C
+EventScript_1C50C2:
+	setvar VAR_0x8004, 19
+	special sub_815D9E8
+	applymovement 3, Movement_1A75DB
+	waitmovement 0
+	applymovement 3, Movement_1A75DD
+	waitmovement 0
+	setvar VAR_0x400E, 1
+	applymovement 3, Movement_1C5541
+	waitmovement 0
+	setvar VAR_0x8004, 1
+	setvar VAR_0x8005, 2
+	setvar VAR_0x8006, 0
+	special sub_815D9E8
+	loadword 0, gStringVar4
+	callstd 4
+	closemessage
+	goto EventScript_1C5219
+
+EventScript_1C510D:: @ 81C510D
+	setvar VAR_0x8004, 1
+	setvar VAR_0x8005, 2
+	copyvar VAR_0x8006, VAR_0x4003
+	special sub_815D9E8
+	loadword 0, gStringVar4
+	callstd 4
+	setvar VAR_0x8004, 1
+	setvar VAR_0x8005, 2
+	addvar VAR_0x4003, 1
+	compare_var_to_value VAR_0x4003, 1
+	goto_if 1, EventScript_1C5146
+	setvar VAR_0x4003, 0
+EventScript_1C5146:
+	copyvar VAR_0x8006, VAR_0x4003
+	special sub_815D9E8
+	loadword 0, gStringVar4
+	callstd 4
+	closemessage
+	goto EventScript_1C5219
+
+EventScript_1C515C:: @ 81C515C
+	copyvar VAR_0x8000, VAR_0x4001
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1C5182
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1C51AD
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1C51D8
+EventScript_1C5182:
+	setvar VAR_0x8004, 19
+	special sub_815D9E8
+	applymovement 4, Movement_1A75DB
+	waitmovement 0
+	applymovement 4, Movement_1A75DD
+	waitmovement 0
+	applymovement 4, Movement_1C5546
+	waitmovement 0
+	goto EventScript_1C51FE
+
+EventScript_1C51AD:: @ 81C51AD
+	setvar VAR_0x8004, 19
+	special sub_815D9E8
+	applymovement 2, Movement_1A75DB
+	waitmovement 0
+	applymovement 2, Movement_1A75DD
+	waitmovement 0
+	applymovement 2, Movement_1C5549
+	waitmovement 0
+	goto EventScript_1C51FE
+
+EventScript_1C51D8:: @ 81C51D8
+	setvar VAR_0x8004, 19
+	special sub_815D9E8
+	applymovement 3, Movement_1A75DB
+	waitmovement 0
+	applymovement 3, Movement_1A75DD
+	waitmovement 0
+	applymovement 3, Movement_1C5542
+	waitmovement 0
+EventScript_1C51FE:
+	setvar VAR_0x8004, 1
+	setvar VAR_0x8005, 2
+	copyvar VAR_0x8006, VAR_0x4001
+	special sub_815D9E8
+	loadword 0, gStringVar4
+	callstd 4
+	closemessage
+EventScript_1C5219:
+	setvar VAR_0x8004, 2
+	setvar VAR_0x8005, 0
+	special sub_815D9E8
+	waitstate
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1C524D
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1C52E0
+	compare_var_to_value VAR_0x8000, 3
+	goto_if 1, EventScript_1C52E0
+EventScript_1C524D:
+	setvar VAR_0x8004, 3
+	setvar VAR_0x8005, 0
+	special sub_815D9E8
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1C52D7
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1C52BA
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1C5280
+EventScript_1C5280:
+	copyvar VAR_0x8000, VAR_0x4001
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1C52A6
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1C52B0
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1C52D0
+EventScript_1C52A6:
+	addvar VAR_0x4001, 1
+	goto EventScript_1C515C
+
+EventScript_1C52B0:: @ 81C52B0
+	addvar VAR_0x4001, 1
+	goto EventScript_1C515C
+
+EventScript_1C52BA:: @ 81C52BA
+	applymovement 5, Movement_1C554C
+	waitmovement 0
+	applymovement 2, Movement_1C5550
+	goto EventScript_1C52D7
+
+EventScript_1C52D0:: @ 81C52D0
+	applymovement 3, Movement_1C554D
+EventScript_1C52D7:
+	setvar VAR_0x8004, 4
+	special sub_815D9E8
+	end
+
+EventScript_1C52E0:: @ 81C52E0
+	special sp000_heal_pokemon
+	setvar VAR_0x8004, 11
+	special sub_815D9E8
+	warp MAP_SEVEN_ISLAND_TRAINER_TOWER_LOBBY, 255, 9, 7
+	waitstate
 
 EventScript_1C52F4:: @ 81C52F4
-	.incbin "baserom.gba", 0x1C52F4, 0x47
+	setvar VAR_0x8004, 3
+	setvar VAR_0x8005, 0
+	special sub_815D9E8
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1C5327
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1C5327
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1C5331
+EventScript_1C5327:
+	setvar VAR_0x8006, 0
+	goto EventScript_1C5391
+
+EventScript_1C5331:: @ 81C5331
+	setvar VAR_0x8006, 1
+	goto EventScript_1C5391
 
 EventScript_1C533B:: @ 81C533B
-	.incbin "baserom.gba", 0x1C533B, 0x47
+	setvar VAR_0x8004, 3
+	setvar VAR_0x8005, 0
+	special sub_815D9E8
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1C536E
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1C536E
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1C5378
+EventScript_1C536E:
+	setvar VAR_0x8006, 0
+	goto EventScript_1C5391
+
+EventScript_1C5378:: @ 81C5378
+	setvar VAR_0x8006, 2
+	goto EventScript_1C5391
 
 EventScript_1C5382:: @ 81C5382
-	.incbin "baserom.gba", 0x1C5382, 0xA
+	setvar VAR_0x8006, 0
+	goto EventScript_1C5391
 
 EventScript_1C538C:: @ 81C538C
-	.incbin "baserom.gba", 0x1C538C, 0x1E
+	setvar VAR_0x8006, 1
+EventScript_1C5391:
+	setvar VAR_0x8004, 1
+	setvar VAR_0x8005, 5
+	special sub_815D9E8
+	lock
+	faceplayer
+	loadword 0, gStringVar4
+	callstd 4
+	release
+	return
 
 EventScript_1C53AA:: @ 81C53AA
-	.incbin "baserom.gba", 0x1C53AA, 0xF2
+	lock
+	faceplayer
+	setvar VAR_0x8004, 7
+	special sub_815D9E8
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1C53DA
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1C53E2
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1C5492
+EventScript_1C53DA:
+	loadword 0, Text_17CA5A
+	callstd 4
+EventScript_1C53E2:
+	setvar VAR_0x8004, 8
+	special sub_815D9E8
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1C5410
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1C543A
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1C544F
+EventScript_1C5410:
+	loadword 0, Text_17CB09
+	callstd 4
+	textcolor 3
+	playfanfare MUS_FANFA1
+	message Text_1A51F6
+	waitfanfare
+	waitmessage
+	getstdstring 2, 24
+	loadword 0, gUnknown_81A5218
+	callstd 4
+	call EventScript_1A6675
+	goto EventScript_1C544F
 
-gUnknown_81C549C:: @ 81C549C
-	.incbin "baserom.gba", 0x1C549C, 0x13
+EventScript_1C543A:: @ 81C543A
+	loadword 0, Text_17CB09
+	callstd 4
+	loadword 0, gUnknown_81A5207
+	callstd 4
+	goto EventScript_1C544F
+
+EventScript_1C544F:: @ 81C544F
+	setvar VAR_0x8004, 9
+	special sub_815D9E8
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1C547D
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1C548A
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1C5492
+EventScript_1C547D:
+	loadword 0, Text_17CB1A
+	callstd 4
+	goto EventScript_1C5492
+
+EventScript_1C548A:: @ 81C548A
+	loadword 0, Text_17CBC0
+	callstd 4
+EventScript_1C5492:
+	loadword 0, Text_17CBF5
+	callstd 4
+	release
+	return
+
+EventScript_1C549C:: @ 81C549C
+	lockall
+	setvar VAR_0x8004, 13
+	special sub_815D9E8
+	loadword 0, Text_17CC56
+	callstd 4
+	releaseall
+	end
 
 SevenIsland_TrainerTower_2F_EventScript_1C54AF:: @ 81C54AF
 SevenIsland_TrainerTower_4F_EventScript_1C54AF:: @ 81C54AF
@@ -14031,7 +15818,7 @@ SevenIsland_TrainerTower_5F_EventScript_1C54AF:: @ 81C54AF
 SevenIsland_TrainerTower_7F_EventScript_1C54AF:: @ 81C54AF
 SevenIsland_TrainerTower_3F_EventScript_1C54AF:: @ 81C54AF
 SevenIsland_TrainerTower_1F_EventScript_1C54AF:: @ 81C54AF
-	.incbin "baserom.gba", 0x1C54AF, 0x5
+	goto EventScript_1C508F
 
 SevenIsland_TrainerTower_2F_EventScript_1C54B4:: @ 81C54B4
 SevenIsland_TrainerTower_4F_EventScript_1C54B4:: @ 81C54B4
@@ -14041,7 +15828,17 @@ SevenIsland_TrainerTower_5F_EventScript_1C54B4:: @ 81C54B4
 SevenIsland_TrainerTower_7F_EventScript_1C54B4:: @ 81C54B4
 SevenIsland_TrainerTower_3F_EventScript_1C54B4:: @ 81C54B4
 SevenIsland_TrainerTower_1F_EventScript_1C54B4:: @ 81C54B4
-	.incbin "baserom.gba", 0x1C54B4, 0x36
+	setvar VAR_0x4003, 0
+	setvar VAR_0x8004, 16
+	special sub_815D9E8
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 5, EventScript_1C5528
+	setvar VAR_0x8004, 19
+	special sub_815D9E8
+	applymovement 2, Movement_1A75DB
+	waitmovement 0
+	applymovement 2, Movement_1A75DD
+	goto EventScript_1C551B
 
 SevenIsland_TrainerTower_2F_EventScript_1C54EA:: @ 81C54EA
 SevenIsland_TrainerTower_4F_EventScript_1C54EA:: @ 81C54EA
@@ -14051,10 +15848,91 @@ SevenIsland_TrainerTower_5F_EventScript_1C54EA:: @ 81C54EA
 SevenIsland_TrainerTower_7F_EventScript_1C54EA:: @ 81C54EA
 SevenIsland_TrainerTower_3F_EventScript_1C54EA:: @ 81C54EA
 SevenIsland_TrainerTower_1F_EventScript_1C54EA:: @ 81C54EA
-	.incbin "baserom.gba", 0x1C54EA, 0x71
+	setvar VAR_0x4003, 1
+	setvar VAR_0x8004, 16
+	special sub_815D9E8
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 5, EventScript_1C5528
+	setvar VAR_0x8004, 19
+	special sub_815D9E8
+	applymovement 5, Movement_1A75DB
+	waitmovement 0
+	applymovement 5, Movement_1A75DD
+EventScript_1C551B:
+	waitmovement 0
+	setvar VAR_0x400F, 1
+	goto EventScript_1C508F
 
-gUnknown_81C555B:: @ 81C555B
-	.incbin "baserom.gba", 0x1C555B, 0x6E
+EventScript_1C5528:: @ 81C5528
+	lockall
+	playse SE_PINPON
+	loadword 0, Text_17CC73
+	callstd 4
+	closemessage
+	applymovement 255, Movement_1C5544
+	waitmovement 0
+	releaseall
+	end
+
+Movement_1C5541:
+	step_12
+Movement_1C5542:: @ 81C5542
+	step_12
+	step_12
+Movement_1C5544:
+	step_12
+	step_end
+
+Movement_1C5546:: @ 81C5546
+	step_11
+	step_11
+	step_end
+
+Movement_1C5549:: @ 81C5549
+	step_10
+	step_10
+	step_end
+
+Movement_1C554C:: @ 81C554C
+	step_13
+Movement_1C554D:
+	step_11
+	step_00
+	step_end
+
+Movement_1C5550:: @ 81C5550
+	step_00
+	step_end
+
+EventScript_1C5550:: @ 81C5552
+	loadword 0, Text_1C556D
+	callstd 2
+	end
+
+EventScript_1C555B:: @ 81C555B
+	loadword 0, Text_1C558D
+	callstd 3
+	end
+
+EventScript_1C5564:: @ 81C5564
+	loadword 0, Text_1C55A4
+	callstd 3
+	end
+
+Text_1C556D:: @ 81C556D
+	.string "テストよう　メッセージです！\n"
+	.string "ポケモンの　せかいへ　ようこそ！$"
+
+Text_1C558D:: @ 81C558D
+	.string "テストよう　メッセージです！\n"
+	.string "かんばん　です$"
+
+Text_1C55A4:: @ 81C55A4
+	.string "テストよう　メッセージです！\n"
+	.string "ざひょう　チェックの　イベントです$"
+
+Text_1C55C5:: @ 81C55C5
+	.string "   $"
 
 gText_WouldYouLikeToSaveTheGame:: @ 81C55C9
 	.string "Would you like to save the game?$"
@@ -14073,7 +15951,6 @@ gText_PlayerSavedTheGame:: @ 81C5647
 gUnknown_81C565A::
     .string "セーブに　しっぱい　しました‥$"
 
-@ 0xE5
 gText_DifferentGameFile:: @ 81C566A
 	.string "WARNING!\p"
 	.string "There is a different game file that\n"

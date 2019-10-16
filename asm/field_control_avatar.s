@@ -1100,11 +1100,11 @@ sub_806D0E4: @ 806D0E4
 	ldr r0, [r5, 0x8]
 	cmp r0, 0
 	bne _0806D120
-	ldr r0, _0806D11C @ =gUnknown_81C555B
+	ldr r0, _0806D11C @ =EventScript_1C555B
 	b _0806D1E6
 	.align 2, 0
 _0806D118: .4byte gMapHeader
-_0806D11C: .4byte gUnknown_81C555B
+_0806D11C: .4byte EventScript_1C555B
 _0806D120:
 	adds r0, r7, 0
 	adds r1, r6, 0
@@ -1330,10 +1330,10 @@ _0806D2F0:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806D308
-	ldr r0, _0806D304 @ =gUnknown_81C549C
+	ldr r0, _0806D304 @ =EventScript_1C549C
 	b _0806D53E
 	.align 2, 0
-_0806D304: .4byte gUnknown_81C549C
+_0806D304: .4byte EventScript_1C549C
 _0806D308:
 	adds r0, r4, 0
 	adds r1, r5, 0
@@ -2150,13 +2150,13 @@ _0806D950:
 	ldr r0, [r0, 0x8]
 	cmp r0, 0
 	bne _0806D958
-	ldr r0, _0806D960 @ =gUnknown_81C555B
+	ldr r0, _0806D960 @ =EventScript_1C555B
 _0806D958:
 	pop {r4}
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806D960: .4byte gUnknown_81C555B
+_0806D960: .4byte EventScript_1C555B
 	thumb_func_end sub_806D928
 
 	thumb_func_start mapheader_run_first_tag2_script_list_match_conditionally
@@ -2332,12 +2332,12 @@ _0806DAC4:
 	cmp r0, 0x1
 	bne _0806DAE4
 	bl ResetInitialPlayerAvatarState
-	ldr r0, _0806DAE0 @ =gUnknown_81C1361
+	ldr r0, _0806DAE0 @ =EventScript_1C1361
 	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 	b _0806DAEE
 	.align 2, 0
-_0806DAE0: .4byte gUnknown_81C1361
+_0806DAE0: .4byte EventScript_1C1361
 _0806DAE4:
 	bl DoWarp
 	movs r0, 0x1

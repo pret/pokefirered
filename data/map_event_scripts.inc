@@ -2771,6 +2771,8707 @@ EventScript_1A77B0:: @ 81A77B0
 	setvar VAR_RESULT, 0
 	return
 
+Route16_NorthEntrance_1F_EventScript_1A77B6:: @ 81A77B6
+Route18_EastEntrance_1F_EventScript_1A77B6:: @ 81A77B6
+	lockall
+	clearflag FLAG_0x830
+	setvar VAR_MAP_SCENE_ROUTE16, 0
+	releaseall
+	end
+
+Route16_NorthEntrance_1F_EventScript_1A77C1:: @ 81A77C1
+Route18_EastEntrance_1F_EventScript_1A77C1:: @ 81A77C1
+	lockall
+	setvar VAR_MAP_SCENE_ROUTE16, 1
+	releaseall
+	end
+
+EventScript_1A77C9:: @ 81A77C9
+	loadword 0, Text_1A572A
+	callstd 4
+	playse SE_BOO
+	loadword 0, Text_1A5776
+	callstd 4
+	release
+	end
+
+EventScript_1A77DE:: @ 81A77DE
+	message Text_1A57C1
+	waitmessage
+	playse SE_BOO
+	waitbuttonpress
+	closemessage
+	waitse
+	release
+	end
+
+EventScript_1A77EC:: @ 81A77EC
+	message Text_1A579D
+	waitmessage
+	playfanfare MUS_FANFA1
+	waitfanfare
+	waitbuttonpress
+	release
+	end
+
+EventScript_1A77F9:: @ 81A77F9
+	loadword 0, Text_1A5839
+	callstd 4
+	release
+	end
+
+EventScript_1A7803:: @ 81A7803
+	compare_var_to_var VAR_0x405F, VAR_0x4001
+	goto_if 4, EventScript_1A77EC
+	copyvar VAR_0x8000, VAR_0x4001
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1A78D5
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1A78E4
+	compare_var_to_value VAR_0x8000, 3
+	goto_if 1, EventScript_1A78F3
+	compare_var_to_value VAR_0x8000, 4
+	goto_if 1, EventScript_1A7902
+	compare_var_to_value VAR_0x8000, 5
+	goto_if 1, EventScript_1A7911
+	compare_var_to_value VAR_0x8000, 6
+	goto_if 1, EventScript_1A7920
+	compare_var_to_value VAR_0x8000, 7
+	goto_if 1, EventScript_1A792F
+	compare_var_to_value VAR_0x8000, 8
+	goto_if 1, EventScript_1A793E
+	end
+
+EventScript_1A786C:: @ 81A786C
+	compare_var_to_var VAR_0x405F, VAR_0x4001
+	goto_if 4, EventScript_1A77F9
+	copyvar VAR_0x8000, VAR_0x4001
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1A78D5
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1A78E4
+	compare_var_to_value VAR_0x8000, 3
+	goto_if 1, EventScript_1A78F3
+	compare_var_to_value VAR_0x8000, 4
+	goto_if 1, EventScript_1A7902
+	compare_var_to_value VAR_0x8000, 5
+	goto_if 1, EventScript_1A7911
+	compare_var_to_value VAR_0x8000, 6
+	goto_if 1, EventScript_1A7920
+	compare_var_to_value VAR_0x8000, 7
+	goto_if 1, EventScript_1A792F
+	compare_var_to_value VAR_0x8000, 8
+	goto_if 1, EventScript_1A793E
+	end
+
+EventScript_1A78D5:: @ 81A78D5
+	checkflag FLAG_UNK820
+	goto_if 1, EventScript_1A794D
+	goto EventScript_1A77C9
+	end
+
+EventScript_1A78E4:: @ 81A78E4
+	checkflag FLAG_0x821
+	goto_if 1, EventScript_1A795F
+	goto EventScript_1A77DE
+	end
+
+EventScript_1A78F3:: @ 81A78F3
+	checkflag FLAG_0x822
+	goto_if 1, EventScript_1A795F
+	goto EventScript_1A77DE
+	end
+
+EventScript_1A7902:: @ 81A7902
+	checkflag FLAG_0x823
+	goto_if 1, EventScript_1A795F
+	goto EventScript_1A77DE
+	end
+
+EventScript_1A7911:: @ 81A7911
+	checkflag FLAG_UNK824
+	goto_if 1, EventScript_1A795F
+	goto EventScript_1A77DE
+	end
+
+EventScript_1A7920:: @ 81A7920
+	checkflag FLAG_0x825
+	goto_if 1, EventScript_1A795F
+	goto EventScript_1A77DE
+	end
+
+EventScript_1A792F:: @ 81A792F
+	checkflag FLAG_UNK826
+	goto_if 1, EventScript_1A795F
+	goto EventScript_1A77DE
+	end
+
+EventScript_1A793E:: @ 81A793E
+	checkflag FLAG_0x827
+	goto_if 1, EventScript_1A795F
+	goto EventScript_1A77DE
+	end
+
+EventScript_1A794D:: @ 81A794D
+	message Text_1A579D
+	waitmessage
+	playfanfare MUS_FANFA1
+	waitfanfare
+	waitbuttonpress
+	copyvar VAR_0x405F, VAR_0x4001
+	release
+	end
+
+EventScript_1A795F:: @ 81A795F
+	loadword 0, Text_1A5839
+	callstd 4
+	copyvar VAR_0x405F, VAR_0x4001
+	release
+	end
+
+EventScript_1A796E:: @ 81A796E
+	textcolor 0
+	applymovement VAR_0x8009, Movement_1A75E7
+	waitmovement 0
+	copyvar VAR_0x8000, VAR_0x4001
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1A79D8
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1A79E7
+	compare_var_to_value VAR_0x8000, 3
+	goto_if 1, EventScript_1A79F6
+	compare_var_to_value VAR_0x8000, 4
+	goto_if 1, EventScript_1A7A05
+	compare_var_to_value VAR_0x8000, 5
+	goto_if 1, EventScript_1A7A14
+	compare_var_to_value VAR_0x8000, 6
+	goto_if 1, EventScript_1A7A23
+	compare_var_to_value VAR_0x8000, 7
+	goto_if 1, EventScript_1A7A32
+	compare_var_to_value VAR_0x8000, 8
+	goto_if 1, EventScript_1A7A41
+	end
+
+EventScript_1A79D8:: @ 81A79D8
+	checkflag FLAG_UNK820
+	goto_if 1, EventScript_1A7A96
+	goto EventScript_1A7A50
+	end
+
+EventScript_1A79E7:: @ 81A79E7
+	checkflag FLAG_0x821
+	goto_if 1, EventScript_1A7AA8
+	goto EventScript_1A7A77
+	end
+
+EventScript_1A79F6:: @ 81A79F6
+	checkflag FLAG_0x822
+	goto_if 1, EventScript_1A7AA8
+	goto EventScript_1A7A77
+	end
+
+EventScript_1A7A05:: @ 81A7A05
+	checkflag FLAG_0x823
+	goto_if 1, EventScript_1A7AA8
+	goto EventScript_1A7A77
+	end
+
+EventScript_1A7A14:: @ 81A7A14
+	checkflag FLAG_UNK824
+	goto_if 1, EventScript_1A7AA8
+	goto EventScript_1A7A77
+	end
+
+EventScript_1A7A23:: @ 81A7A23
+	checkflag FLAG_0x825
+	goto_if 1, EventScript_1A7AA8
+	goto EventScript_1A7A77
+	end
+
+EventScript_1A7A32:: @ 81A7A32
+	checkflag FLAG_UNK826
+	goto_if 1, EventScript_1A7AA8
+	goto EventScript_1A7A77
+	end
+
+EventScript_1A7A41:: @ 81A7A41
+	checkflag FLAG_0x827
+	goto_if 1, EventScript_1A7AA8
+	goto EventScript_1A7A77
+	end
+
+EventScript_1A7A50:: @ 81A7A50
+	loadword 0, Text_1A572A
+	callstd 4
+	playse SE_BOO
+	loadword 0, Text_1A5776
+	callstd 4
+	closemessage
+	applymovement 255, Movement_1A7AB7
+	applymovement VAR_0x8009, Movement_1A75ED
+	waitmovement 0
+	releaseall
+	end
+
+EventScript_1A7A77:: @ 81A7A77
+	message Text_1A57C1
+	waitmessage
+	playse SE_BOO
+	waitbuttonpress
+	closemessage
+	waitse
+	applymovement 255, Movement_1A7AB7
+	applymovement VAR_0x8009, Movement_1A75ED
+	waitmovement 0
+	releaseall
+	end
+
+EventScript_1A7A96:: @ 81A7A96
+	message Text_1A579D
+	waitmessage
+	playfanfare MUS_FANFA1
+	waitfanfare
+	waitbuttonpress
+	copyvar VAR_0x405F, VAR_0x4001
+	releaseall
+	end
+
+EventScript_1A7AA8:: @ 81A7AA8
+	loadword 0, Text_1A5839
+	callstd 4
+	copyvar VAR_0x405F, VAR_0x4001
+	releaseall
+	end
+
+Movement_1A7AB7:: @ 81A7AB7
+	step_10
+	step_end
+
+EventScript_1A7AB9:: @ 81A7AB9
+	special sub_80CB204
+	return
+
+EventScript_1A7ABD:: @ 81A7ABD
+	loadword 0, Text_1A58A7
+	callstd 4
+	release
+	end
+
+EventScript_1A7AC7:: @ 81A7AC7
+	loadword 0, Text_1A594D
+	callstd 4
+	release
+	end
+
+EventScript_1A7AD1:: @ 81A7AD1
+	loadword 0, Text_1A5909
+	callstd 4
+	release
+	end
+
+gUnknown_81A7ADB:: @ 81A7ADB
+	special sub_80CADC4
+	release
+	end
+
+EventScript_1A7AE0:: @ 81A7AE0
+	release
+	end
+
+EventScript_1A7AE2:: @ 81A7AE2
+	loadword 0, Text_177460
+	callstd 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1A7B70
+	loadword 0, Text_17747B
+	callstd 4
+	checkflag FLAG_0x26C
+	goto_if 1, EventScript_1A7B3B
+	setflag FLAG_0x26C
+	copyvar VAR_0x8000, VAR_0x8004
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1A7B7A
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1A7D3E
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1A7E72
+	compare_var_to_value VAR_0x8000, 3
+	goto_if 1, EventScript_1A7F4C
+	end
+
+EventScript_1A7B3B:: @ 81A7B3B
+	clearflag FLAG_0x26C
+	copyvar VAR_0x8000, VAR_0x8004
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1A7C5C
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1A7DD8
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1A7EDF
+	compare_var_to_value VAR_0x8000, 3
+	goto_if 1, EventScript_1A8025
+	end
+
+EventScript_1A7B70:: @ 81A7B70
+	loadword 0, Text_177489
+	callstd 4
+	releaseall
+	end
+
+EventScript_1A7B7A:: @ 81A7B7A
+	setmetatile 22, 10, 645, 0
+	setmetatile 23, 10, 644, 0
+	setmetatile 24, 10, 644, 0
+	setmetatile 22, 11, 645, 0
+	setmetatile 23, 11, 644, 0
+	setmetatile 24, 11, 644, 0
+	setmetatile 27, 25, 645, 0
+	setmetatile 28, 25, 644, 0
+	setmetatile 29, 25, 644, 0
+	setmetatile 27, 26, 645, 0
+	setmetatile 28, 26, 644, 0
+	setmetatile 29, 26, 644, 0
+	setmetatile 32, 25, 645, 0
+	setmetatile 33, 25, 644, 0
+	setmetatile 34, 25, 644, 0
+	setmetatile 32, 26, 645, 0
+	setmetatile 33, 26, 644, 0
+	setmetatile 34, 26, 644, 0
+	setmetatile 31, 18, 760, 1
+	setmetatile 32, 18, 761, 1
+	setmetatile 33, 18, 762, 1
+	setmetatile 31, 19, 768, 1
+	setmetatile 32, 19, 769, 1
+	setmetatile 33, 19, 770, 1
+	setmetatile 5, 4, 845, 0
+	return
+
+EventScript_1A7C5C:: @ 81A7C5C
+	setmetatile 22, 10, 760, 1
+	setmetatile 23, 10, 761, 1
+	setmetatile 24, 10, 762, 1
+	setmetatile 22, 11, 768, 1
+	setmetatile 23, 11, 769, 1
+	setmetatile 24, 11, 770, 1
+	setmetatile 27, 25, 760, 1
+	setmetatile 28, 25, 761, 1
+	setmetatile 29, 25, 762, 1
+	setmetatile 27, 26, 768, 1
+	setmetatile 28, 26, 769, 1
+	setmetatile 29, 26, 770, 1
+	setmetatile 32, 25, 760, 1
+	setmetatile 33, 25, 761, 1
+	setmetatile 34, 25, 762, 1
+	setmetatile 32, 26, 768, 1
+	setmetatile 33, 26, 769, 1
+	setmetatile 34, 26, 770, 1
+	setmetatile 31, 18, 645, 0
+	setmetatile 32, 18, 644, 0
+	setmetatile 33, 18, 644, 0
+	setmetatile 31, 19, 645, 0
+	setmetatile 32, 19, 644, 0
+	setmetatile 33, 19, 644, 0
+	setmetatile 5, 4, 788, 0
+	return
+
+EventScript_1A7D3E:: @ 81A7D3E
+	setmetatile 24, 14, 645, 0
+	setmetatile 25, 14, 644, 0
+	setmetatile 26, 14, 644, 0
+	setmetatile 24, 15, 645, 0
+	setmetatile 25, 15, 644, 0
+	setmetatile 26, 15, 644, 0
+	setmetatile 10, 28, 677, 1
+	setmetatile 10, 29, 685, 1
+	setmetatile 10, 30, 645, 0
+	setmetatile 10, 31, 644, 0
+	setmetatile 10, 32, 693, 0
+	setmetatile 12, 4, 848, 1
+	setmetatile 12, 5, 856, 1
+	setmetatile 12, 6, 864, 1
+	setmetatile 12, 7, 872, 1
+	setmetatile 12, 8, 880, 1
+	setmetatile 2, 15, 845, 0
+	return
+
+EventScript_1A7DD8:: @ 81A7DD8
+	setmetatile 24, 14, 760, 1
+	setmetatile 25, 14, 761, 1
+	setmetatile 26, 14, 762, 1
+	setmetatile 24, 15, 768, 1
+	setmetatile 25, 15, 769, 1
+	setmetatile 26, 15, 770, 1
+	setmetatile 10, 28, 848, 1
+	setmetatile 10, 29, 856, 1
+	setmetatile 10, 30, 864, 1
+	setmetatile 10, 31, 872, 1
+	setmetatile 10, 32, 880, 1
+	setmetatile 12, 4, 677, 1
+	setmetatile 12, 5, 685, 1
+	setmetatile 12, 6, 645, 0
+	setmetatile 12, 7, 644, 0
+	setmetatile 12, 8, 693, 0
+	setmetatile 2, 15, 788, 0
+	return
+
+EventScript_1A7E72:: @ 81A7E72
+	setmetatile 17, 11, 645, 0
+	setmetatile 18, 11, 644, 0
+	setmetatile 19, 11, 644, 0
+	setmetatile 17, 12, 645, 0
+	setmetatile 18, 12, 644, 0
+	setmetatile 19, 12, 644, 0
+	setmetatile 21, 4, 848, 1
+	setmetatile 21, 5, 856, 1
+	setmetatile 21, 6, 864, 1
+	setmetatile 21, 7, 872, 1
+	setmetatile 21, 8, 880, 1
+	setmetatile 12, 4, 845, 0
+	return
+
+EventScript_1A7EDF:: @ 81A7EDF
+	setmetatile 17, 11, 760, 1
+	setmetatile 18, 11, 761, 1
+	setmetatile 19, 11, 762, 1
+	setmetatile 17, 12, 768, 1
+	setmetatile 18, 12, 769, 1
+	setmetatile 19, 12, 770, 1
+	setmetatile 21, 4, 677, 1
+	setmetatile 21, 5, 685, 1
+	setmetatile 21, 6, 645, 0
+	setmetatile 21, 7, 644, 0
+	setmetatile 21, 8, 693, 0
+	setmetatile 12, 4, 788, 0
+	return
+
+EventScript_1A7F4C:: @ 81A7F4C
+	setmetatile 33, 20, 760, 1
+	setmetatile 34, 20, 761, 1
+	setmetatile 35, 20, 762, 1
+	setmetatile 33, 21, 852, 1
+	setmetatile 34, 21, 853, 1
+	setmetatile 35, 21, 854, 1
+	setmetatile 16, 26, 848, 1
+	setmetatile 16, 27, 856, 1
+	setmetatile 16, 28, 866, 1
+	setmetatile 16, 29, 874, 1
+	setmetatile 16, 30, 882, 1
+	setmetatile 12, 8, 677, 1
+	setmetatile 12, 9, 685, 1
+	setmetatile 12, 10, 647, 0
+	setmetatile 12, 11, 646, 0
+	setmetatile 12, 12, 688, 0
+	setmetatile 20, 22, 647, 0
+	setmetatile 21, 22, 646, 0
+	setmetatile 22, 22, 646, 0
+	setmetatile 20, 23, 647, 0
+	setmetatile 21, 23, 646, 0
+	setmetatile 22, 23, 646, 0
+	setmetatile 24, 28, 847, 0
+	setmetatile 27, 4, 847, 0
+	return
+
+EventScript_1A8025:: @ 81A8025
+	setmetatile 33, 20, 647, 0
+	setmetatile 34, 20, 646, 0
+	setmetatile 35, 20, 646, 0
+	setmetatile 33, 21, 647, 0
+	setmetatile 34, 21, 646, 0
+	setmetatile 35, 21, 646, 0
+	setmetatile 16, 26, 677, 1
+	setmetatile 16, 27, 685, 1
+	setmetatile 16, 28, 647, 0
+	setmetatile 16, 29, 646, 0
+	setmetatile 16, 30, 688, 0
+	setmetatile 12, 8, 848, 1
+	setmetatile 12, 9, 856, 1
+	setmetatile 12, 10, 866, 1
+	setmetatile 12, 11, 874, 1
+	setmetatile 12, 12, 882, 1
+	setmetatile 20, 22, 760, 1
+	setmetatile 21, 22, 761, 1
+	setmetatile 22, 22, 762, 1
+	setmetatile 20, 23, 852, 1
+	setmetatile 21, 23, 853, 1
+	setmetatile 22, 23, 854, 1
+	setmetatile 24, 28, 790, 0
+	setmetatile 27, 4, 790, 0
+	return
+
+EventScript_1A80FE:: @ 81A80FE
+	lockall
+	applymovement VAR_0x8004, Movement_1A75E7
+	waitmovement 0
+	delay 20
+	applymovement VAR_0x8004, Movement_1A75E9
+	waitmovement 0
+	delay 20
+	applymovement VAR_0x8004, Movement_1A75EB
+	waitmovement 0
+	delay 20
+	applymovement VAR_0x8004, Movement_1A75ED
+	waitmovement 0
+	delay 20
+	releaseall
+	end
+
+EventScript_1A8135:: @ 81A8135
+	loadword 0, Text_1A5BAD
+	callstd 4
+	releaseall
+	end
+
+EventScript_1A813F:: @ 81A813F
+	loadword 0, Text_1A5CDF
+	callstd 4
+	releaseall
+	end
+
+EventScript_1A8149:: @ 81A8149
+	setmetatile 5, 8, 944, 1
+	setmetatile 6, 8, 945, 1
+	setmetatile 5, 9, 952, 1
+	setmetatile 6, 9, 953, 1
+	setmetatile 6, 10, 821, 0
+	return
+
+EventScript_1A8177:: @ 81A8177
+	setmetatile 5, 15, 944, 1
+	setmetatile 6, 15, 945, 1
+	setmetatile 5, 16, 952, 1
+	setmetatile 6, 16, 953, 1
+	setmetatile 6, 17, 821, 0
+	return
+
+EventScript_1A81A5:: @ 81A81A5
+	setmetatile 9, 11, 960, 1
+	setmetatile 10, 11, 961, 1
+	setmetatile 9, 12, 962, 1
+	setmetatile 10, 12, 963, 1
+	setmetatile 9, 13, 964, 1
+	setmetatile 10, 13, 965, 1
+	return
+
+EventScript_1A81DC:: @ 81A81DC
+	setmetatile 20, 11, 960, 1
+	setmetatile 21, 11, 961, 1
+	setmetatile 20, 12, 962, 1
+	setmetatile 21, 12, 963, 1
+	setmetatile 20, 13, 964, 1
+	setmetatile 21, 13, 965, 1
+	return
+
+EventScript_1A8213:: @ 81A8213
+	setmetatile 3, 16, 944, 1
+	setmetatile 4, 16, 945, 1
+	setmetatile 3, 17, 952, 1
+	setmetatile 4, 17, 953, 1
+	setmetatile 4, 18, 821, 0
+	return
+
+EventScript_1A8241:: @ 81A8241
+	setmetatile 14, 11, 944, 1
+	setmetatile 15, 11, 945, 1
+	setmetatile 14, 12, 952, 1
+	setmetatile 15, 12, 953, 1
+	setmetatile 15, 13, 821, 0
+	return
+
+EventScript_1A826F:: @ 81A826F
+	setmetatile 7, 8, 960, 1
+	setmetatile 8, 8, 961, 1
+	setmetatile 7, 9, 962, 1
+	setmetatile 8, 9, 963, 1
+	setmetatile 7, 10, 964, 1
+	setmetatile 8, 10, 965, 1
+	return
+
+EventScript_1A82A6:: @ 81A82A6
+	setmetatile 7, 17, 960, 1
+	setmetatile 8, 17, 961, 1
+	setmetatile 7, 18, 962, 1
+	setmetatile 8, 18, 963, 1
+	setmetatile 7, 19, 964, 1
+	setmetatile 8, 19, 965, 1
+	return
+
+EventScript_1A82DD:: @ 81A82DD
+	setmetatile 18, 12, 960, 1
+	setmetatile 19, 12, 961, 1
+	setmetatile 18, 13, 962, 1
+	setmetatile 19, 13, 963, 1
+	setmetatile 18, 14, 964, 1
+	setmetatile 19, 14, 965, 1
+	return
+
+EventScript_1A8314:: @ 81A8314
+	setmetatile 5, 14, 960, 1
+	setmetatile 6, 14, 961, 1
+	setmetatile 5, 15, 962, 1
+	setmetatile 6, 15, 963, 1
+	setmetatile 5, 16, 964, 1
+	setmetatile 6, 16, 965, 1
+	return
+
+EventScript_1A834B:: @ 81A834B
+	setmetatile 11, 8, 944, 1
+	setmetatile 12, 8, 945, 1
+	setmetatile 11, 9, 952, 1
+	setmetatile 12, 9, 953, 1
+	setmetatile 12, 10, 821, 0
+	return
+
+EventScript_1A8379:: @ 81A8379
+	setmetatile 24, 7, 944, 1
+	setmetatile 25, 7, 945, 1
+	setmetatile 24, 8, 952, 1
+	setmetatile 25, 8, 953, 1
+	setmetatile 25, 9, 821, 0
+	return
+
+EventScript_1A83A7:: @ 81A83A7
+	setmetatile 25, 13, 944, 1
+	setmetatile 26, 13, 945, 1
+	setmetatile 25, 14, 952, 1
+	setmetatile 26, 14, 953, 1
+	setmetatile 26, 15, 821, 0
+	return
+
+EventScript_1A83D5:: @ 81A83D5
+	setmetatile 5, 9, 960, 1
+	setmetatile 6, 9, 961, 1
+	setmetatile 5, 10, 962, 1
+	setmetatile 6, 10, 963, 1
+	setmetatile 5, 11, 964, 1
+	setmetatile 6, 11, 965, 1
+	return
+
+EventScript_1A840C:: @ 81A840C
+	setmetatile 2, 9, 960, 1
+	setmetatile 3, 9, 961, 1
+	setmetatile 2, 10, 962, 1
+	setmetatile 3, 10, 963, 1
+	setmetatile 2, 11, 964, 1
+	setmetatile 3, 11, 965, 1
+	return
+
+EventScript_1A8443:: @ 81A8443
+	setmetatile 12, 15, 960, 1
+	setmetatile 13, 15, 961, 1
+	setmetatile 12, 16, 962, 1
+	setmetatile 13, 16, 963, 1
+	setmetatile 12, 17, 964, 1
+	setmetatile 13, 17, 965, 1
+	return
+
+EventScript_1A847A:: @ 81A847A
+	setmetatile 21, 6, 944, 1
+	setmetatile 22, 6, 945, 1
+	setmetatile 21, 7, 952, 1
+	setmetatile 22, 7, 953, 1
+	setmetatile 22, 8, 821, 0
+	return
+
+EventScript_1A84A8:: @ 81A84A8
+	setmetatile 21, 12, 944, 1
+	setmetatile 22, 12, 945, 1
+	setmetatile 21, 13, 952, 1
+	setmetatile 22, 13, 953, 1
+	setmetatile 22, 14, 821, 0
+	return
+
+EventScript_1A84D6:: @ 81A84D6
+	setmetatile 12, 11, 944, 1
+	setmetatile 13, 11, 945, 1
+	setmetatile 12, 12, 952, 1
+	setmetatile 13, 12, 953, 1
+	setmetatile 13, 13, 821, 0
+	return
+
+EventScript_1A8504:: @ 81A8504
+	setmetatile 5, 16, 944, 1
+	setmetatile 6, 16, 945, 1
+	setmetatile 5, 17, 952, 1
+	setmetatile 6, 17, 953, 1
+	setmetatile 6, 18, 821, 0
+	return
+
+EventScript_1A8532:: @ 81A8532
+	setmetatile 5, 8, 821, 0
+	setmetatile 6, 8, 820, 0
+	setmetatile 5, 9, 821, 0
+	setmetatile 6, 9, 820, 0
+	setmetatile 6, 10, 820, 0
+	return
+
+EventScript_1A8560:: @ 81A8560
+	setmetatile 5, 15, 821, 0
+	setmetatile 6, 15, 820, 0
+	setmetatile 5, 16, 821, 0
+	setmetatile 6, 16, 820, 0
+	setmetatile 6, 17, 820, 0
+	return
+
+EventScript_1A858E:: @ 81A858E
+	setmetatile 9, 11, 839, 1
+	setmetatile 10, 11, 838, 1
+	setmetatile 9, 12, 821, 0
+	setmetatile 10, 12, 821, 0
+	setmetatile 9, 13, 825, 0
+	setmetatile 10, 13, 826, 0
+	return
+
+EventScript_1A85C5:: @ 81A85C5
+	setmetatile 20, 11, 839, 1
+	setmetatile 21, 11, 838, 1
+	setmetatile 20, 12, 821, 0
+	setmetatile 21, 12, 821, 0
+	setmetatile 20, 13, 825, 0
+	setmetatile 21, 13, 826, 0
+	return
+
+EventScript_1A85FC:: @ 81A85FC
+	setmetatile 3, 16, 821, 0
+	setmetatile 4, 16, 820, 0
+	setmetatile 3, 17, 821, 0
+	setmetatile 4, 17, 820, 0
+	setmetatile 4, 18, 820, 0
+	return
+
+EventScript_1A862A:: @ 81A862A
+	setmetatile 14, 11, 821, 0
+	setmetatile 15, 11, 820, 0
+	setmetatile 14, 12, 821, 0
+	setmetatile 15, 12, 820, 0
+	setmetatile 15, 13, 820, 0
+	return
+
+EventScript_1A8658:: @ 81A8658
+	setmetatile 7, 8, 839, 1
+	setmetatile 8, 8, 838, 1
+	setmetatile 7, 9, 821, 0
+	setmetatile 8, 9, 821, 0
+	setmetatile 7, 10, 825, 0
+	setmetatile 8, 10, 826, 0
+	return
+
+EventScript_1A868F:: @ 81A868F
+	setmetatile 7, 17, 839, 1
+	setmetatile 8, 17, 838, 1
+	setmetatile 7, 18, 821, 0
+	setmetatile 8, 18, 821, 0
+	setmetatile 7, 19, 825, 0
+	setmetatile 8, 19, 826, 0
+	return
+
+EventScript_1A86C6:: @ 81A86C6
+	setmetatile 18, 12, 839, 1
+	setmetatile 19, 12, 838, 1
+	setmetatile 18, 13, 821, 0
+	setmetatile 19, 13, 821, 0
+	setmetatile 18, 14, 825, 0
+	setmetatile 19, 14, 826, 0
+	return
+
+EventScript_1A86FD:: @ 81A86FD
+	setmetatile 5, 14, 839, 1
+	setmetatile 6, 14, 838, 1
+	setmetatile 5, 15, 821, 0
+	setmetatile 6, 15, 821, 0
+	setmetatile 5, 16, 825, 0
+	setmetatile 6, 16, 826, 0
+	return
+
+EventScript_1A8734:: @ 81A8734
+	setmetatile 11, 8, 821, 0
+	setmetatile 12, 8, 820, 0
+	setmetatile 11, 9, 821, 0
+	setmetatile 12, 9, 820, 0
+	setmetatile 12, 10, 820, 0
+	return
+
+EventScript_1A8762:: @ 81A8762
+	setmetatile 24, 7, 821, 0
+	setmetatile 25, 7, 820, 0
+	setmetatile 24, 8, 821, 0
+	setmetatile 25, 8, 820, 0
+	setmetatile 25, 9, 820, 0
+	return
+
+EventScript_1A8790:: @ 81A8790
+	setmetatile 25, 13, 821, 0
+	setmetatile 26, 13, 820, 0
+	setmetatile 25, 14, 821, 0
+	setmetatile 26, 14, 820, 0
+	setmetatile 26, 15, 820, 0
+	return
+
+EventScript_1A87BE:: @ 81A87BE
+	setmetatile 5, 9, 839, 1
+	setmetatile 6, 9, 838, 1
+	setmetatile 5, 10, 821, 0
+	setmetatile 6, 10, 821, 0
+	setmetatile 5, 11, 825, 0
+	setmetatile 6, 11, 826, 0
+	return
+
+EventScript_1A87F5:: @ 81A87F5
+	setmetatile 2, 9, 839, 1
+	setmetatile 3, 9, 838, 1
+	setmetatile 2, 10, 821, 0
+	setmetatile 3, 10, 821, 0
+	setmetatile 2, 11, 825, 0
+	setmetatile 3, 11, 826, 0
+	return
+
+EventScript_1A882C:: @ 81A882C
+	setmetatile 12, 15, 839, 1
+	setmetatile 13, 15, 838, 1
+	setmetatile 12, 16, 821, 0
+	setmetatile 13, 16, 821, 0
+	setmetatile 12, 17, 825, 0
+	setmetatile 13, 17, 826, 0
+	return
+
+EventScript_1A8863:: @ 81A8863
+	setmetatile 21, 6, 821, 0
+	setmetatile 22, 6, 820, 0
+	setmetatile 21, 7, 821, 0
+	setmetatile 22, 7, 820, 0
+	setmetatile 22, 8, 820, 0
+	return
+
+EventScript_1A8891:: @ 81A8891
+	setmetatile 21, 12, 821, 0
+	setmetatile 22, 12, 820, 0
+	setmetatile 21, 13, 821, 0
+	setmetatile 22, 13, 820, 0
+	setmetatile 22, 14, 820, 0
+	return
+
+EventScript_1A88BF:: @ 81A88BF
+	setmetatile 12, 11, 821, 0
+	setmetatile 13, 11, 820, 0
+	setmetatile 12, 12, 821, 0
+	setmetatile 13, 12, 820, 0
+	setmetatile 13, 13, 820, 0
+	return
+
+EventScript_1A88ED:: @ 81A88ED
+	setmetatile 5, 16, 821, 0
+	setmetatile 6, 16, 820, 0
+	setmetatile 5, 17, 821, 0
+	setmetatile 6, 17, 820, 0
+	setmetatile 6, 18, 820, 0
+	return
+
+SilphCo_2F_EventScript_1A891B:: @ 81A891B
+	lockall
+	setvar VAR_0x4001, 1
+	setvar VAR_0x8004, 634
+	checkflag FLAG_0x27A
+	goto_if 1, EventScript_1A813F
+	goto EventScript_1A8B23
+	end
+
+SilphCo_2F_EventScript_1A8935:: @ 81A8935
+	lockall
+	setvar VAR_0x4001, 2
+	setvar VAR_0x8004, 635
+	checkflag FLAG_0x27B
+	goto_if 1, EventScript_1A813F
+	goto EventScript_1A8B23
+	end
+
+SilphCo_3F_EventScript_1A894F:: @ 81A894F
+	lockall
+	setvar VAR_0x4001, 3
+	setvar VAR_0x8004, 636
+	checkflag FLAG_0x27C
+	goto_if 1, EventScript_1A813F
+	goto EventScript_1A8B23
+	end
+
+SilphCo_3F_EventScript_1A8969:: @ 81A8969
+	lockall
+	setvar VAR_0x4001, 4
+	setvar VAR_0x8004, 637
+	checkflag FLAG_0x27D
+	goto_if 1, EventScript_1A813F
+	goto EventScript_1A8B23
+	end
+
+SilphCo_4F_EventScript_1A8983:: @ 81A8983
+	lockall
+	setvar VAR_0x4001, 5
+	setvar VAR_0x8004, 638
+	checkflag FLAG_0x27E
+	goto_if 1, EventScript_1A813F
+	goto EventScript_1A8B23
+	end
+
+SilphCo_4F_EventScript_1A899D:: @ 81A899D
+	lockall
+	setvar VAR_0x4001, 6
+	setvar VAR_0x8004, 639
+	checkflag FLAG_0x27F
+	goto_if 1, EventScript_1A813F
+	goto EventScript_1A8B23
+	end
+
+SilphCo_5F_EventScript_1A89B7:: @ 81A89B7
+	lockall
+	setvar VAR_0x4001, 7
+	setvar VAR_0x8004, 640
+	checkflag FLAG_0x280
+	goto_if 1, EventScript_1A813F
+	goto EventScript_1A8B23
+	end
+
+SilphCo_5F_EventScript_1A89D1:: @ 81A89D1
+	lockall
+	setvar VAR_0x4001, 8
+	setvar VAR_0x8004, 641
+	checkflag FLAG_0x281
+	goto_if 1, EventScript_1A813F
+	goto EventScript_1A8B23
+	end
+
+SilphCo_5F_EventScript_1A89EB:: @ 81A89EB
+	lockall
+	setvar VAR_0x4001, 9
+	setvar VAR_0x8004, 642
+	checkflag FLAG_0x282
+	goto_if 1, EventScript_1A813F
+	goto EventScript_1A8B23
+	end
+
+SilphCo_6F_EventScript_1A8A05:: @ 81A8A05
+	lockall
+	setvar VAR_0x4001, 10
+	setvar VAR_0x8004, 643
+	checkflag FLAG_0x283
+	goto_if 1, EventScript_1A813F
+	goto EventScript_1A8B23
+	end
+
+SilphCo_7F_EventScript_1A8A1F:: @ 81A8A1F
+	lockall
+	setvar VAR_0x4001, 11
+	setvar VAR_0x8004, 644
+	checkflag FLAG_0x284
+	goto_if 1, EventScript_1A813F
+	goto EventScript_1A8B23
+	end
+
+SilphCo_7F_EventScript_1A8A39:: @ 81A8A39
+	lockall
+	setvar VAR_0x4001, 12
+	setvar VAR_0x8004, 645
+	checkflag FLAG_0x285
+	goto_if 1, EventScript_1A813F
+	goto EventScript_1A8B23
+	end
+
+SilphCo_7F_EventScript_1A8A53:: @ 81A8A53
+	lockall
+	setvar VAR_0x4001, 13
+	setvar VAR_0x8004, 646
+	checkflag FLAG_0x286
+	goto_if 1, EventScript_1A813F
+	goto EventScript_1A8B23
+	end
+
+SilphCo_8F_EventScript_1A8A6D:: @ 81A8A6D
+	lockall
+	setvar VAR_0x4001, 14
+	setvar VAR_0x8004, 647
+	checkflag FLAG_0x287
+	goto_if 1, EventScript_1A813F
+	goto EventScript_1A8B23
+	end
+
+SilphCo_9F_EventScript_1A8A87:: @ 81A8A87
+	lockall
+	setvar VAR_0x4001, 15
+	setvar VAR_0x8004, 648
+	checkflag FLAG_0x288
+	goto_if 1, EventScript_1A813F
+	goto EventScript_1A8B23
+	end
+
+SilphCo_9F_EventScript_1A8AA1:: @ 81A8AA1
+	lockall
+	setvar VAR_0x4001, 16
+	setvar VAR_0x8004, 649
+	checkflag FLAG_0x289
+	goto_if 1, EventScript_1A813F
+	goto EventScript_1A8B23
+	end
+
+SilphCo_9F_EventScript_1A8ABB:: @ 81A8ABB
+	lockall
+	setvar VAR_0x4001, 17
+	setvar VAR_0x8004, 650
+	checkflag FLAG_0x28A
+	goto_if 1, EventScript_1A813F
+	goto EventScript_1A8B23
+	end
+
+SilphCo_9F_EventScript_1A8AD5:: @ 81A8AD5
+	lockall
+	setvar VAR_0x4001, 18
+	setvar VAR_0x8004, 651
+	checkflag FLAG_0x28B
+	goto_if 1, EventScript_1A813F
+	goto EventScript_1A8B23
+	end
+
+SilphCo_10F_EventScript_1A8AEF:: @ 81A8AEF
+	lockall
+	setvar VAR_0x4001, 19
+	setvar VAR_0x8004, 652
+	checkflag FLAG_0x28C
+	goto_if 1, EventScript_1A813F
+	goto EventScript_1A8B23
+	end
+
+SilphCo_11F_EventScript_1A8B09:: @ 81A8B09
+	lockall
+	setvar VAR_0x4001, 20
+	setvar VAR_0x8004, 653
+	checkflag FLAG_0x28D
+	goto_if 1, EventScript_1A813F
+	goto EventScript_1A8B23
+	end
+
+EventScript_1A8B23:: @ 81A8B23
+	checkflag FLAG_0x192
+	goto_if 1, EventScript_1A8B32
+	goto EventScript_1A8135
+	end
+
+EventScript_1A8B32:: @ 81A8B32
+	playfanfare MUS_FANFA1
+	loadword 0, Text_1A5B88
+	callstd 4
+	waitfanfare
+	compare_var_to_value VAR_0x4001, 1
+	call_if 1, EventScript_1A8532
+	compare_var_to_value VAR_0x4001, 2
+	call_if 1, EventScript_1A8560
+	compare_var_to_value VAR_0x4001, 3
+	call_if 1, EventScript_1A858E
+	compare_var_to_value VAR_0x4001, 4
+	call_if 1, EventScript_1A85C5
+	compare_var_to_value VAR_0x4001, 5
+	call_if 1, EventScript_1A85FC
+	compare_var_to_value VAR_0x4001, 6
+	call_if 1, EventScript_1A862A
+	compare_var_to_value VAR_0x4001, 7
+	call_if 1, EventScript_1A8658
+	compare_var_to_value VAR_0x4001, 8
+	call_if 1, EventScript_1A868F
+	compare_var_to_value VAR_0x4001, 9
+	call_if 1, EventScript_1A86C6
+	compare_var_to_value VAR_0x4001, 10
+	call_if 1, EventScript_1A86FD
+	compare_var_to_value VAR_0x4001, 11
+	call_if 1, EventScript_1A8734
+	compare_var_to_value VAR_0x4001, 12
+	call_if 1, EventScript_1A8762
+	compare_var_to_value VAR_0x4001, 13
+	call_if 1, EventScript_1A8790
+	compare_var_to_value VAR_0x4001, 14
+	call_if 1, EventScript_1A87BE
+	compare_var_to_value VAR_0x4001, 15
+	call_if 1, EventScript_1A87F5
+	compare_var_to_value VAR_0x4001, 16
+	call_if 1, EventScript_1A882C
+	compare_var_to_value VAR_0x4001, 17
+	call_if 1, EventScript_1A8863
+	compare_var_to_value VAR_0x4001, 18
+	call_if 1, EventScript_1A8891
+	compare_var_to_value VAR_0x4001, 19
+	call_if 1, EventScript_1A88BF
+	compare_var_to_value VAR_0x4001, 20
+	call_if 1, EventScript_1A88ED
+	waitse
+	playse SE_KI_GASYAN
+	special DrawWholeMapView
+	waitse
+	special Special_SetHiddenItemFlag
+	releaseall
+	end
+
+EventScript_1A8C27:: @ 81A8C27
+	countpokemon
+	subvar VAR_RESULT, 1
+	copyvar VAR_0x8004, VAR_RESULT
+	return
+
+EventScript_1A8C33:: @ 81A8C33
+	fadescreen 1
+	special ChangeBoxPokemonNickname
+	waitstate
+	lock
+	faceplayer
+	return
+
+EventScript_1A8C3C:: @ 81A8C3C
+	bufferboxname 0, 16439
+	getspeciesname 1, 16385
+	checkflag FLAG_SYS_NOT_SOMEONES_PC
+	call_if 0, EventScript_1A8C57
+	checkflag FLAG_SYS_NOT_SOMEONES_PC
+	call_if 1, EventScript_1A8C82
+	return
+
+EventScript_1A8C57:: @ 81A8C57
+	specialvar VAR_RESULT, sub_80CC7B4
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A8C70
+	loadword 0, Text_1A5CF1
+	callstd 4
+	return
+
+EventScript_1A8C70:: @ 81A8C70
+	specialvar VAR_RESULT, get_unknown_box_id
+	bufferboxname 2, 32781
+	loadword 0, Text_1A5D6E
+	callstd 4
+	return
+
+EventScript_1A8C82:: @ 81A8C82
+	specialvar VAR_RESULT, sub_80CC7B4
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A8C9B
+	loadword 0, Text_1A5D31
+	callstd 4
+	return
+
+EventScript_1A8C9B:: @ 81A8C9B
+	specialvar VAR_RESULT, get_unknown_box_id
+	bufferboxname 2, 32781
+	loadword 0, Text_1A5DB1
+	callstd 4
+	return
+
+EventScript_1A8CAD:: @ 81A8CAD
+	copyvar VAR_0x8004, VAR_0x8008
+	specialvar VAR_RESULT, sub_8053A9C
+	copyvar VAR_0x8009, VAR_RESULT
+	return
+
+EventScript_1A8CBD:: @ 81A8CBD
+	special sub_80BF8FC
+	waitstate
+	lock
+	faceplayer
+	copyvar VAR_0x800A, VAR_0x8004
+	return
+
+EventScript_1A8CC9:: @ 81A8CC9
+	copyvar VAR_0x8005, VAR_0x800A
+	specialvar VAR_RESULT, sub_8053D2C
+	copyvar VAR_0x800B, VAR_RESULT
+	return
+
+EventScript_1A8CD9:: @ 81A8CD9
+	copyvar VAR_0x8004, VAR_0x8008
+	copyvar VAR_0x8005, VAR_0x800A
+	special sub_8053D68
+	special sub_8054440
+	waitstate
+	lock
+	faceplayer
+	return
+
+gUnknown_81A8CED:: @ 81A8CED
+	special sub_810C3A4
+	waitstate
+	special sub_810C444
+	releaseall
+	end
+
+CeruleanCity_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
+CinnabarIsland_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
+FiveIsland_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
+FuchsiaCity_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
+OneIsland_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
+PewterCity_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
+SevenIsland_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
+VermilionCity_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
+FourIsland_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
+SixIsland_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
+ThreeIsland_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
+TwoIsland_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
+Route10_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
+Route10_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
+Route4_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
+SaffronCity_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
+IndigoPlateau_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
+CeladonCity_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
+LavenderTown_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
+ViridianCity_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
+	call EventScript_1BBA04
+	end
+
+CeruleanCity_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
+CinnabarIsland_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
+FiveIsland_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
+FuchsiaCity_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
+OneIsland_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
+PewterCity_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
+SevenIsland_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
+VermilionCity_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
+FourIsland_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
+SixIsland_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
+ThreeIsland_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
+TwoIsland_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
+Route10_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
+Route10_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
+Route4_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
+SaffronCity_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
+IndigoPlateau_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
+CeladonCity_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
+LavenderTown_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
+ViridianCity_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
+	call EventScript_1BBB6A
+	end
+
+CeruleanCity_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
+CinnabarIsland_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
+FiveIsland_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
+FuchsiaCity_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
+OneIsland_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
+PewterCity_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
+SevenIsland_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
+VermilionCity_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
+FourIsland_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
+SixIsland_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
+ThreeIsland_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
+TwoIsland_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
+Route10_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
+Route10_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
+Route4_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
+SaffronCity_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
+IndigoPlateau_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
+CeladonCity_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
+LavenderTown_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
+ViridianCity_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
+	call EventScript_1BBB9C
+	end
+
+VermilionCity_PokemonCenter_1F_EventScript_1A8D08:: @ 81A8D08
+	lock
+	faceplayer
+	checkflag FLAG_0x292
+	goto_if 1, EventScript_1A8D3F
+	loadword 0, Text_194234
+	callstd 4
+	setflag FLAG_0x292
+	setorcopyvar VAR_0x8000, 362
+	setorcopyvar VAR_0x8001, 1
+	callstd 0
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1A6BF9
+	loadword 0, Text_19430F
+	callstd 4
+	release
+	end
+
+EventScript_1A8D3F:: @ 81A8D3F
+	loadword 0, Text_194381
+	callstd 4
+	release
+	end
+
+EventScript_ItemfinderDigUpUnderfootItem:: @ 81A8D49
+	lockall
+	textcolor 3
+	waitse
+	call EventScript_GiveItem
+	compare_var_to_value VAR_0x8007, 1
+	goto_if_eq EventScript_DigUpItemPutInPocket
+	compare_var_to_value VAR_0x8007, 0
+	goto_if_eq EventScript_DigUpItemBagIsFull
+	end
+
+EventScript_DigUpItemPutInPocket::
+	message Text_1A5700
+	waitfanfare
+	waitmessage
+	delay 60
+	msgbox gUnknown_81A5218
+	special Special_SetHiddenItemFlag
+	releaseall
+	end
+
+EventScript_DigUpItemBagIsFull::
+	msgbox Text_1A5700
+	msgbox gUnknown_81A5242
+	setvar VAR_RESULT, 0
+	releaseall
+	end
+
+gUnknown_81A8D97:: @ 81A8D97
+	lockall
+	textcolor 1
+	loadword 0, Text_1A5E89
+	callstd 4
+	call EventScript_1A65CE
+	checkflag FLAG_0x4B0
+	call_if 0, EventScript_1A8DC6
+	checkflag FLAG_0x4B0
+	call_if 1, EventScript_1A8DCF
+	applymovement VAR_LAST_TALKED, Movement_1A666C
+	waitmovement 0
+	fadedefaultbgm
+	releaseall
+	end
+
+EventScript_1A8DC6:: @ 81A8DC6
+	loadword 0, Text_1A5EC0
+	callstd 4
+	return
+
+EventScript_1A8DCF:: @ 81A8DCF
+	loadword 0, Text_1A5F9B
+	callstd 4
+	return
+
+gUnknown_81A8DD8:: @ 81A8DD8
+	lockall
+	textcolor 1
+	applymovement 1, Movement_1A75ED
+	waitmovement 0
+	loadword 0, Text_1A5FDF
+	callstd 4
+	call EventScript_1A6C26
+	loadword 0, Text_1A6046
+	callstd 4
+	fadedefaultbgm
+	releaseall
+	end
+
+gUnknown_81A8DFD:: @ 81A8DFD
+	lockall
+	textcolor 3
+	special ExecuteWhiteOut
+	waitstate
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A8E11
+	releaseall
+	end
+
+EventScript_1A8E11:: @ 81A8E11
+	checkmoney 1, 0
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1A8E2E
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A8E3C
+	end
+
+EventScript_1A8E2E:: @ 81A8E2E
+	loadword 0, Text_1A61E5
+	callstd 4
+	goto EventScript_1A8E4D
+	end
+
+EventScript_1A8E3C:: @ 81A8E3C
+	special sub_8054C48
+	loadword 0, Text_1A6197
+	callstd 4
+	goto EventScript_1A8E4D
+	end
+
+EventScript_1A8E4D:: @ 81A8E4D
+	special sub_807F0B0
+	waitstate
+	fadescreen 1
+	special sub_80CA3C4
+	waitstate
+	end
+
+gStdScript_8:: @ 81A8E58
+	bufferitemnameplural 1, VAR_0x8000, VAR_0x8001
+	checkitemtype VAR_0x8000
+	call EventScript_1A8E6F
+	loadword 0, gUnknown_81A5218
+	callstd 4
+	return
+
+EventScript_1A8E6F:: @ 81A8E6F
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1A8EAC
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1A8EB1
+	compare_var_to_value VAR_0x8000, 3
+	goto_if 1, EventScript_1A8EB6
+	compare_var_to_value VAR_0x8000, 4
+	goto_if 1, EventScript_1A8EBB
+	compare_var_to_value VAR_0x8000, 5
+	goto_if 1, EventScript_1A8EC0
+	end
+
+EventScript_1A8EAC:: @ 81A8EAC
+	getstdstring 2, 24
+	return
+
+EventScript_1A8EB1:: @ 81A8EB1
+	getstdstring 2, 25
+	return
+
+EventScript_1A8EB6:: @ 81A8EB6
+	getstdstring 2, 26
+	return
+
+EventScript_1A8EBB:: @ 81A8EBB
+	getstdstring 2, 27
+	return
+
+EventScript_1A8EC0:: @ 81A8EC0
+	getstdstring 2, 28
+	return
+
+EventScript_1A8EC5:: @ 81A8EC5
+	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
+	goto_if 4, EventScript_1A911E
+	compare_var_to_value VAR_0x4071, 4
+	goto_if 4, EventScript_1A8F12
+	multichoice 19, 6, 44, 0
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1A8FF9
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1A9004
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1A90F6
+	compare_var_to_value VAR_0x8000, 127
+	goto_if 1, EventScript_1A90F6
+	end
+
+EventScript_1A8F12:: @ 81A8F12
+	multichoice 19, 5, 58, 0
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1A8FE3
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1A8FF9
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1A9004
+	compare_var_to_value VAR_0x8000, 3
+	goto_if 1, EventScript_1A90F6
+	compare_var_to_value VAR_0x8000, 127
+	goto_if 1, EventScript_1A90F6
+	end
+
+EventScript_1A8F54:: @ 81A8F54
+	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
+	goto_if 4, EventScript_1A911E
+	compare_var_to_value VAR_0x4071, 4
+	goto_if 4, EventScript_1A8FA1
+	multichoice 19, 6, 45, 0
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1A8FEE
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1A9004
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1A90F6
+	compare_var_to_value VAR_0x8000, 127
+	goto_if 1, EventScript_1A90F6
+	end
+
+EventScript_1A8FA1:: @ 81A8FA1
+	multichoice 19, 5, 59, 0
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1A8FE3
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1A8FEE
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1A9004
+	compare_var_to_value VAR_0x8000, 3
+	goto_if 1, EventScript_1A90F6
+	compare_var_to_value VAR_0x8000, 127
+	goto_if 1, EventScript_1A90F6
+	end
+
+EventScript_1A8FE3:: @ 81A8FE3
+	setvar VAR_0x8006, 0
+	goto EventScript_1A909E
+	end
+
+EventScript_1A8FEE:: @ 81A8FEE
+	setvar VAR_0x8006, 1
+	goto EventScript_1A909E
+	end
+
+EventScript_1A8FF9:: @ 81A8FF9
+	setvar VAR_0x8006, 2
+	goto EventScript_1A909E
+	end
+
+EventScript_1A9004:: @ 81A9004
+	setvar VAR_0x8006, 3
+	goto EventScript_1A909E
+	end
+
+EventScript_1A900F:: @ 81A900F
+	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
+	goto_if 4, EventScript_1A911E
+	compare_var_to_value VAR_0x4071, 4
+	goto_if 4, EventScript_1A905C
+	multichoice 19, 6, 46, 0
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1A8FEE
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1A8FF9
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1A90F6
+	compare_var_to_value VAR_0x8000, 127
+	goto_if 1, EventScript_1A90F6
+	end
+
+EventScript_1A905C:: @ 81A905C
+	multichoice 19, 5, 60, 0
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1A8FE3
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1A8FEE
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1A8FF9
+	compare_var_to_value VAR_0x8000, 3
+	goto_if 1, EventScript_1A90F6
+	compare_var_to_value VAR_0x8000, 127
+	goto_if 1, EventScript_1A90F6
+	end
+
+EventScript_1A909E:: @ 81A909E
+	specialvar VAR_RESULT, sub_8147500
+	getnumberstring 0, VAR_RESULT
+	compare_var_to_value VAR_0x8004, 0
+	goto_if 1, EventScript_1A90BE
+	compare_var_to_value VAR_0x8004, 0
+	goto_if 5, EventScript_1A90CC
+	end
+
+EventScript_1A90BE:: @ 81A90BE
+	loadword 0, Text_17FB67
+	callstd 4
+	goto EventScript_1A90DA
+	end
+
+EventScript_1A90CC:: @ 81A90CC
+	loadword 0, Text_1A641B
+	callstd 4
+	goto EventScript_1A90DA
+	end
+
+EventScript_1A90DA:: @ 81A90DA
+	closemessage
+	delay 20
+	special sub_8110AB4
+	compare_var_to_value VAR_RESULT, 2
+	goto_if 1, EventScript_1A7AE0
+	special sub_8112364
+	fadescreen 1
+	special ScrSpecial_SeaGallopFerry
+	waitstate
+	end
+
+EventScript_1A90F6:: @ 81A90F6
+	specialvar VAR_RESULT, sub_8147594
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A9108
+	release
+	end
+
+EventScript_1A9108:: @ 81A9108
+	closemessage
+	applymovement 6, Movement_1A75E5
+	applymovement 255, Movement_1A911C
+	waitmovement 0
+	releaseall
+	end
+
+Movement_1A911C:: @ 81A911C
+	step_11
+	step_end
+
+EventScript_1A911E:: @ 81A911E
+	setvar VAR_0x8005, 0
+	special sub_809D764
+	waitstate
+	specialvar VAR_0x8006, sub_809D8C0
+	copyvar VAR_0x8000, VAR_0x8006
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1A91D5
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1A91E0
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1A91EB
+	compare_var_to_value VAR_0x8000, 3
+	goto_if 1, EventScript_1A91F6
+	compare_var_to_value VAR_0x8000, 4
+	goto_if 1, EventScript_1A9201
+	compare_var_to_value VAR_0x8000, 254
+	goto_if 1, EventScript_1A917F
+	compare_var_to_value VAR_0x8000, 127
+	goto_if 1, EventScript_1A90F6
+	end
+
+EventScript_1A917F:: @ 81A917F
+	setvar VAR_0x8005, 1
+	special sub_809D764
+	waitstate
+	specialvar VAR_0x8006, sub_809D8C0
+	copyvar VAR_0x8000, VAR_0x8006
+	compare_var_to_value VAR_0x8000, 4
+	goto_if 1, EventScript_1A9201
+	compare_var_to_value VAR_0x8000, 5
+	goto_if 1, EventScript_1A920C
+	compare_var_to_value VAR_0x8000, 6
+	goto_if 1, EventScript_1A9217
+	compare_var_to_value VAR_0x8000, 7
+	goto_if 1, EventScript_1A9222
+	compare_var_to_value VAR_0x8000, 254
+	goto_if 1, EventScript_1A911E
+	compare_var_to_value VAR_0x8000, 127
+	goto_if 1, EventScript_1A90F6
+	end
+
+EventScript_1A91D5:: @ 81A91D5
+	setvar VAR_0x8006, 0
+	goto EventScript_1A909E
+	end
+
+EventScript_1A91E0:: @ 81A91E0
+	setvar VAR_0x8006, 1
+	goto EventScript_1A909E
+	end
+
+EventScript_1A91EB:: @ 81A91EB
+	setvar VAR_0x8006, 2
+	goto EventScript_1A909E
+	end
+
+EventScript_1A91F6:: @ 81A91F6
+	setvar VAR_0x8006, 3
+	goto EventScript_1A909E
+	end
+
+EventScript_1A9201:: @ 81A9201
+	setvar VAR_0x8006, 4
+	goto EventScript_1A909E
+	end
+
+EventScript_1A920C:: @ 81A920C
+	setvar VAR_0x8006, 5
+	goto EventScript_1A909E
+	end
+
+EventScript_1A9217:: @ 81A9217
+	setvar VAR_0x8006, 6
+	goto EventScript_1A909E
+	end
+
+EventScript_1A9222:: @ 81A9222
+	setvar VAR_0x8006, 7
+	goto EventScript_1A909E
+	end
+
+EventScript_1A922D:: @ 81A922D
+	fadescreen 1
+	removeobject VAR_LAST_TALKED
+	fadescreen 0
+	release
+	end
+
+EventScript_1A9236:: @ 81A9236
+	fadescreen 1
+	removeobject VAR_LAST_TALKED
+	fadescreen 0
+	getspeciesname 0, VAR_0x8004
+	loadword 0, Text_1A63C4
+	callstd 4
+	release
+	end
+
+EventScript_1A924B:: @ 81A924B
+	message Text_1853E8
+	waitmessage
+	playfanfare MUS_POKEFUE
+	waitfanfare
+	loadword 0, Text_185354
+	callstd 4
+	return
+
+EventScript_1A925E:: @ 81A925E
+	checkflag FLAG_0x849
+	goto_if 1, EventScript_1A77A9
+	setweather 11
+	doweather
+	return
+
+EventScript_1A926C:: @ 81A926C
+	special sub_80CD098
+	waitbuttonpress
+	playse SE_SELECT
+	setvar VAR_0x8006, 1
+	special sub_80CD098
+	return
+
+EventScript_1A927C:: @ 81A927C
+	textcolor 3
+	loadword 0, gUnknown_81A5E31
+	callstd 4
+	release
+	end
+
+gUnknown_81A9288:: @ 81A9288
+	.braille "UP$"
+
+gUnknown_81A928B:: @ 81A928B
+	.braille "DOWN$"
+
+gUnknown_81A9290:: @ 81A9290
+	.braille "RIGHT$"
+
+gUnknown_81A9296:: @ 81A9296
+	.braille "LEFT$"
+
+gUnknown_81A929B:: @ 81A929B
+	.braille "CUT$"
+
+gUnknown_81A929F:: @ 81A929F
+	.braille "ABC$"
+
+gUnknown_81A92A3:: @ 81A92A3
+	.braille "GHI$"
+
+gUnknown_81A92A7:: @ 81A92A7
+	.braille "MNO$"
+
+gUnknown_81A92AB:: @ 81A92AB
+	.braille "TUV$"
+
+gUnknown_81A92AF:: @ 81A92AF
+	.braille "DEF$"
+
+gUnknown_81A92B3:: @ 81A92B3
+	.braille "JKL$"
+
+gUnknown_81A92B7:: @ 81A92B7
+	.braille "PQRS$"
+
+gUnknown_81A92BC:: @ 81A92BC
+	.braille "WXYZ$"
+
+gUnknown_81A92C1:: @ 81A92C1
+	.braille ".$"
+
+gUnknown_81A92C3:: @ 81A92C3
+	.braille ",$"
+
+gUnknown_81A92C5:: @ 81A92C5
+	.braille "EVERYTHING$"
+
+gUnknown_81A92D0:: @ 81A92D0
+	.braille "HAS MEANING$"
+
+gUnknown_81A92DC:: @ 81A92DC
+	.braille "EXISTENCE$"
+
+gUnknown_81A92E6:: @ 81A92E6
+	.braille "HAS MEANING$"
+
+gUnknown_81A92F2:: @ 81A92F2
+	.braille "BEING ALIVE$"
+
+gUnknown_81A92FE:: @ 81A92FE
+	.braille "HAS MEANING$"
+
+gUnknown_81A930A:: @ 81A930A
+	.braille "HAVE DREAMS$"
+
+gUnknown_81A9316:: @ 81A9316
+	.braille "USE POWER.$"
+
+gUnknown_81A9321:: @ 81A9321
+	.braille "LET THE TWO$"
+
+gUnknown_81A932D:: @ 81A932D
+	.braille "GLITTERING$"
+
+gUnknown_81A9338:: @ 81A9338
+	.braille "STONES$"
+
+gUnknown_81A933F:: @ 81A933F
+	.braille "ONE IN RED$"
+
+gUnknown_81A934A:: @ 81A934A
+	.braille "ONE IN BLUE$"
+
+gUnknown_81A9356:: @ 81A9356
+	.braille "CONNECT THE$"
+
+gUnknown_81A9362:: @ 81A9362
+	.braille "PAST.$"
+
+gUnknown_81A9368:: @ 81A9368
+	.braille "TWO FRIENDS$"
+
+gUnknown_81A9374:: @ 81A9374
+	.braille "SHARING$"
+
+gUnknown_81A937C:: @ 81A937C
+	.braille "POWER OPEN$"
+
+gUnknown_81A9387:: @ 81A9387
+	.braille "A WINDOW TO$"
+
+gUnknown_81A9393:: @ 81A9393
+	.braille "A NEW WORLD$"
+
+gUnknown_81A939F:: @ 81A939F
+	.braille "THAT GLOWS.$"
+
+gUnknown_81A93AB:: @ 81A93AB
+	.braille "THE NEXT$"
+
+gUnknown_81A93B4:: @ 81A93B4
+	.braille "WORLD WAITS$"
+
+gUnknown_81A93C0:: @ 81A93C0
+	.braille "FOR YOU.$"
+
+Route3_EventScript_1A93C9:: @ 81A93C9
+	trainerbattle 0, 89, 0, Text_183560, Text_1835A0
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A93F0
+	loadword 0, Text_1835B4
+	callstd 6
+	end
+
+EventScript_1A93F0:: @ 81A93F0
+	trainerbattle 5, 89, 0, Text_1C149D, Text_1835A0
+	loadword 0, Text_1835B4
+	callstd 6
+	end
+
+Route3_EventScript_1A9407:: @ 81A9407
+	trainerbattle 0, 90, 0, Text_183786, Text_1837BD
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A942E
+	loadword 0, Text_1837CF
+	callstd 6
+	end
+
+EventScript_1A942E:: @ 81A942E
+	trainerbattle 5, 90, 0, Text_1C1588, Text_1837BD
+	loadword 0, Text_1837CF
+	callstd 6
+	end
+
+Route3_EventScript_1A9445:: @ 81A9445
+	trainerbattle 0, 105, 0, Text_1834E6, Text_183509
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A946C
+	loadword 0, Text_18351C
+	callstd 6
+	end
+
+EventScript_1A946C:: @ 81A946C
+	trainerbattle 5, 105, 0, Text_1C147A, Text_183509
+	loadword 0, Text_18351C
+	callstd 6
+	end
+
+Route3_EventScript_1A9483:: @ 81A9483
+	trainerbattle 0, 106, 0, Text_183682, Text_1836B3
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A94AA
+	loadword 0, Text_1836D9
+	callstd 6
+	end
+
+EventScript_1A94AA:: @ 81A94AA
+	trainerbattle 5, 106, 0, Text_1C1521, Text_1836B3
+	loadword 0, Text_1836D9
+	callstd 6
+	end
+
+Route3_EventScript_1A94C1:: @ 81A94C1
+	trainerbattle 0, 107, 0, Text_183807, Text_183837
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A94E8
+	loadword 0, Text_183849
+	callstd 6
+	end
+
+EventScript_1A94E8:: @ 81A94E8
+	trainerbattle 5, 107, 0, Text_1C15C5, Text_183837
+	loadword 0, Text_183849
+	callstd 6
+	end
+
+Route3_EventScript_1A94FF:: @ 81A94FF
+	trainerbattle 0, 116, 0, Text_183616, Text_18363F
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A9526
+	loadword 0, Text_18364C
+	callstd 6
+	end
+
+EventScript_1A9526:: @ 81A9526
+	trainerbattle 5, 116, 0, Text_1C14F3, Text_18363F
+	loadword 0, Text_18364C
+	callstd 6
+	end
+
+Route3_EventScript_1A953D:: @ 81A953D
+	trainerbattle 0, 117, 0, Text_18371B, Text_183746
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A9564
+	loadword 0, Text_18374F
+	callstd 6
+	end
+
+EventScript_1A9564:: @ 81A9564
+	trainerbattle 5, 117, 0, Text_1C155D, Text_183746
+	loadword 0, Text_18374F
+	callstd 6
+	end
+
+Route3_EventScript_1A957B:: @ 81A957B
+	trainerbattle 0, 118, 0, Text_18387A, Text_183891
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A95A2
+	loadword 0, Text_18389C
+	callstd 6
+	end
+
+EventScript_1A95A2:: @ 81A95A2
+	trainerbattle 5, 118, 0, Text_1C15F9, Text_183891
+	loadword 0, Text_18389C
+	callstd 6
+	end
+
+Route4_EventScript_1A95B9:: @ 81A95B9
+	trainerbattle 0, 119, 0, Text_183906, Text_183938
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A95E0
+	loadword 0, Text_183957
+	callstd 6
+	end
+
+EventScript_1A95E0:: @ 81A95E0
+	trainerbattle 5, 119, 0, Text_1C160F, Text_183938
+	loadword 0, Text_183957
+	callstd 6
+	end
+
+Route24_EventScript_1A95F7:: @ 81A95F7
+	trainerbattle 0, 92, 0, Text_188F76, Text_188F95
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A961E
+	loadword 0, Text_188FA7
+	callstd 6
+	end
+
+EventScript_1A961E:: @ 81A961E
+	trainerbattle 5, 92, 0, Text_1C3657, Text_188F95
+	loadword 0, Text_188FA7
+	callstd 6
+	end
+
+Route24_EventScript_1A9635:: @ 81A9635
+	trainerbattle 0, 110, 0, Text_18901B, Text_18908C
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A965C
+	loadword 0, Text_18909E
+	callstd 6
+	end
+
+EventScript_1A965C:: @ 81A965C
+	trainerbattle 5, 110, 0, Text_1C36DA, Text_18908C
+	loadword 0, Text_18909E
+	callstd 6
+	end
+
+Route24_EventScript_1A9673:: @ 81A9673
+	trainerbattle 0, 122, 0, Text_188F2C, Text_188F46
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A969A
+	loadword 0, Text_188F53
+	callstd 6
+	end
+
+EventScript_1A969A:: @ 81A969A
+	trainerbattle 5, 122, 0, Text_1C3624, Text_188F46
+	loadword 0, Text_188F53
+	callstd 6
+	end
+
+Route24_EventScript_1A96B1:: @ 81A96B1
+	trainerbattle 0, 123, 0, Text_188FC9, Text_188FE7
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A96D8
+	loadword 0, Text_188FF9
+	callstd 6
+	end
+
+EventScript_1A96D8:: @ 81A96D8
+	trainerbattle 5, 123, 0, Text_1C3685, Text_188FE7
+	loadword 0, Text_188FF9
+	callstd 6
+	end
+
+Route24_EventScript_1A96EF:: @ 81A96EF
+	trainerbattle 0, 143, 0, Text_188E74, Text_188E94
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A9716
+	loadword 0, Text_188EA3
+	callstd 6
+	end
+
+EventScript_1A9716:: @ 81A9716
+	trainerbattle 5, 143, 0, Text_1C35EE, Text_188E94
+	loadword 0, Text_188EA3
+	callstd 6
+	end
+
+Route24_EventScript_1A972D:: @ 81A972D
+	trainerbattle 0, 144, 0, Text_188ED9, Text_188EFA
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A9754
+	loadword 0, Text_188F0A
+	callstd 6
+	end
+
+EventScript_1A9754:: @ 81A9754
+	trainerbattle 5, 144, 0, Text_1C360E, Text_188EFA
+	loadword 0, Text_188F0A
+	callstd 6
+	end
+
+Route25_EventScript_1A976B:: @ 81A976B
+	trainerbattle 0, 93, 0, Text_1890C0, Text_1890E6
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A9792
+	loadword 0, Text_1890F5
+	callstd 6
+	end
+
+EventScript_1A9792:: @ 81A9792
+	trainerbattle 5, 93, 0, Text_1C33E7, Text_1890E6
+	loadword 0, Text_1890F5
+	callstd 6
+	end
+
+Route25_EventScript_1A97A9:: @ 81A97A9
+	trainerbattle 0, 94, 0, Text_189165, Text_1891A6
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A97D0
+	loadword 0, Text_1891B3
+	callstd 6
+	end
+
+EventScript_1A97D0:: @ 81A97D0
+	trainerbattle 5, 94, 0, Text_1C3404, Text_1891A6
+	loadword 0, Text_1891B3
+	callstd 6
+	end
+
+Route25_EventScript_1A97E7:: @ 81A97E7
+	trainerbattle 0, 95, 0, Text_1892A9, Text_1892D9
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A980E
+	loadword 0, Text_1892EF
+	callstd 6
+	end
+
+EventScript_1A980E:: @ 81A980E
+	trainerbattle 5, 95, 0, Text_1C34D4, Text_1892D9
+	loadword 0, Text_1892EF
+	callstd 6
+	end
+
+Route25_EventScript_1A9825:: @ 81A9825
+	trainerbattle 0, 153, 0, Text_189247, Text_189261
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A984C
+	loadword 0, Text_189281
+	callstd 6
+	end
+
+EventScript_1A984C:: @ 81A984C
+	trainerbattle 5, 153, 0, Text_1C349C, Text_189261
+	loadword 0, Text_189281
+	callstd 6
+	end
+
+Route25_EventScript_1A9863:: @ 81A9863
+	trainerbattle 0, 125, 0, Text_189333, Text_189364
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A988A
+	loadword 0, Text_189378
+	callstd 6
+	end
+
+EventScript_1A988A:: @ 81A988A
+	trainerbattle 5, 125, 0, Text_1C350A, Text_189364
+	loadword 0, Text_189378
+	callstd 6
+	end
+
+Route25_EventScript_1A98A1:: @ 81A98A1
+	trainerbattle 0, 182, 0, Text_1893A7, Text_1893EA
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A98C8
+	loadword 0, Text_1893FB
+	callstd 6
+	end
+
+EventScript_1A98C8:: @ 81A98C8
+	trainerbattle 5, 182, 0, Text_1C353B, Text_1893EA
+	loadword 0, Text_1893FB
+	callstd 6
+	end
+
+Route25_EventScript_1A98DF:: @ 81A98DF
+	trainerbattle 0, 183, 0, Text_189423, Text_189459
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A9906
+	loadword 0, Text_18947E
+	callstd 6
+	end
+
+EventScript_1A9906:: @ 81A9906
+	trainerbattle 5, 183, 0, Text_1C357E, Text_189459
+	loadword 0, Text_18947E
+	callstd 6
+	end
+
+Route25_EventScript_1A991D:: @ 81A991D
+	trainerbattle 0, 184, 0, Text_1894DE, Text_18950A
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A9944
+	loadword 0, Text_18951C
+	callstd 6
+	end
+
+EventScript_1A9944:: @ 81A9944
+	trainerbattle 5, 184, 0, Text_1C35BC, Text_18950A
+	loadword 0, Text_18951C
+	callstd 6
+	end
+
+Route25_EventScript_1A995B:: @ 81A995B
+	trainerbattle 0, 471, 0, Text_1891EB, Text_189212
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A9982
+	loadword 0, Text_18921D
+	callstd 6
+	end
+
+EventScript_1A9982:: @ 81A9982
+	trainerbattle 5, 471, 0, Text_1C3445, Text_189212
+	loadword 0, Text_18921D
+	callstd 6
+	end
+
+Route6_EventScript_1A9999:: @ 81A9999
+	trainerbattle 0, 111, 0, Text_183E9F, Text_183EC0
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A99C0
+	loadword 0, Text_183ED4
+	callstd 6
+	end
+
+EventScript_1A99C0:: @ 81A99C0
+	trainerbattle 5, 111, 0, Text_1C16E2, Text_183EC0
+	loadword 0, Text_183ED4
+	callstd 6
+	end
+
+Route6_EventScript_1A99D7:: @ 81A99D7
+	trainerbattle 0, 112, 0, Text_183FF0, Text_18401A
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A99FE
+	loadword 0, Text_18402B
+	callstd 6
+	end
+
+EventScript_1A99FE:: @ 81A99FE
+	trainerbattle 5, 112, 0, Text_1C176B, Text_18401A
+	loadword 0, Text_18402B
+	callstd 6
+	end
+
+Route6_EventScript_1A9A15:: @ 81A9A15
+	trainerbattle 0, 145, 0, Text_183E04, Text_183E2A
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A9A3C
+	loadword 0, Text_183E3C
+	callstd 6
+	end
+
+EventScript_1A9A3C:: @ 81A9A3C
+	trainerbattle 5, 145, 0, Text_1C163C, Text_183E2A
+	loadword 0, Text_183E3C
+	callstd 6
+	end
+
+Route6_EventScript_1A9A53:: @ 81A9A53
+	trainerbattle 0, 146, 0, Text_183F07, Text_183F24
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A9A7A
+	loadword 0, Text_183F51
+	callstd 6
+	end
+
+EventScript_1A9A7A:: @ 81A9A7A
+	trainerbattle 5, 146, 0, Text_1C1723, Text_183F24
+	loadword 0, Text_183F51
+	callstd 6
+	end
+
+Route6_EventScript_1A9A91:: @ 81A9A91
+	trainerbattle 0, 151, 0, Text_183E4E, Text_183E79
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A9AB8
+	loadword 0, Text_183E8D
+	callstd 6
+	end
+
+EventScript_1A9AB8:: @ 81A9AB8
+	trainerbattle 5, 151, 0, Text_1C166D, Text_183E79
+	loadword 0, Text_183E8D
+	callstd 6
+	end
+
+Route6_EventScript_1A9ACF:: @ 81A9ACF
+	trainerbattle 0, 152, 0, Text_183F90, Text_183FAB
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A9AF6
+	loadword 0, Text_183FC4
+	callstd 6
+	end
+
+EventScript_1A9AF6:: @ 81A9AF6
+	trainerbattle 5, 152, 0, Text_1C1746, Text_183FAB
+	loadword 0, Text_183FC4
+	callstd 6
+	end
+
+Route11_EventScript_1A9B0D:: @ 81A9B0D
+	trainerbattle 0, 97, 0, Text_184FBD, Text_184FD8
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A9B34
+	loadword 0, Text_184FEF
+	callstd 6
+	end
+
+EventScript_1A9B34:: @ 81A9B34
+	trainerbattle 5, 97, 0, Text_1C1DB5, Text_184FD8
+	loadword 0, Text_184FEF
+	callstd 6
+	end
+
+Route11_EventScript_1A9B4B:: @ 81A9B4B
+	trainerbattle 0, 98, 0, Text_18506A, Text_18509B
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A9B72
+	loadword 0, Text_1850CF
+	callstd 6
+	end
+
+EventScript_1A9B72:: @ 81A9B72
+	trainerbattle 5, 98, 0, Text_1C1E1F, Text_18509B
+	loadword 0, Text_1850CF
+	callstd 6
+	end
+
+Route11_EventScript_1A9B89:: @ 81A9B89
+	trainerbattle 0, 99, 0, Text_18517B, Text_1851AC
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A9BB0
+	loadword 0, Text_1851D2
+	callstd 6
+	end
+
+EventScript_1A9BB0:: @ 81A9BB0
+	trainerbattle 5, 99, 0, Text_1C1EE2, Text_1851AC
+	loadword 0, Text_1851D2
+	callstd 6
+	end
+
+Route11_EventScript_1A9BC7:: @ 81A9BC7
+	trainerbattle 0, 100, 0, Text_185285, Text_1852C1
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A9BEE
+	loadword 0, Text_1852E3
+	callstd 6
+	end
+
+EventScript_1A9BEE:: @ 81A9BEE
+	trainerbattle 5, 100, 0, Text_1C1F40, Text_1852C1
+	loadword 0, Text_1852E3
+	callstd 6
+	end
+
+Route11_EventScript_1A9C05:: @ 81A9C05
+	trainerbattle 0, 221, 0, Text_185011, Text_185037
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A9C2C
+	loadword 0, Text_18504A
+	callstd 6
+	end
+
+EventScript_1A9C2C:: @ 81A9C2C
+	trainerbattle 5, 221, 0, Text_1C1DE1, Text_185037
+	loadword 0, Text_18504A
+	callstd 6
+	end
+
+Route11_EventScript_1A9C43:: @ 81A9C43
+	trainerbattle 0, 222, 0, Text_185236, Text_185250
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A9C6A
+	loadword 0, Text_185266
+	callstd 6
+	end
+
+EventScript_1A9C6A:: @ 81A9C6A
+	trainerbattle 5, 222, 0, Text_1C1F1D, Text_185250
+	loadword 0, Text_185266
+	callstd 6
+	end
+
+Route11_EventScript_1A9C81:: @ 81A9C81
+	trainerbattle 0, 258, 0, Text_184F01, Text_184F15
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A9CA8
+	loadword 0, Text_184F2E
+	callstd 6
+	end
+
+EventScript_1A9CA8:: @ 81A9CA8
+	trainerbattle 5, 258, 0, Text_1C1D50, Text_184F15
+	loadword 0, Text_184F2E
+	callstd 6
+	end
+
+Route11_EventScript_1A9CBF:: @ 81A9CBF
+	trainerbattle 0, 259, 0, Text_184F5D, Text_184F7E
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A9CE6
+	loadword 0, Text_184F8E
+	callstd 6
+	end
+
+EventScript_1A9CE6:: @ 81A9CE6
+	trainerbattle 5, 259, 0, Text_1C1D79, Text_184F7E
+	loadword 0, Text_184F8E
+	callstd 6
+	end
+
+Route11_EventScript_1A9CFD:: @ 81A9CFD
+	trainerbattle 0, 260, 0, Text_1850E9, Text_185105
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A9D24
+	loadword 0, Text_185114
+	callstd 6
+	end
+
+EventScript_1A9D24:: @ 81A9D24
+	trainerbattle 5, 260, 0, Text_1C1E57, Text_185105
+	loadword 0, Text_185114
+	callstd 6
+	end
+
+Route11_EventScript_1A9D3B:: @ 81A9D3B
+	trainerbattle 0, 261, 0, Text_185135, Text_18514E
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A9D62
+	loadword 0, Text_185161
+	callstd 6
+	end
+
+EventScript_1A9D62:: @ 81A9D62
+	trainerbattle 5, 261, 0, Text_1C1E9F, Text_18514E
+	loadword 0, Text_185161
+	callstd 6
+	end
+
+Route9_EventScript_1A9D79:: @ 81A9D79
+	trainerbattle 0, 114, 0, Text_184A2F, Text_184A6A
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A9DA0
+	loadword 0, Text_184A8C
+	callstd 6
+	end
+
+EventScript_1A9DA0:: @ 81A9DA0
+	trainerbattle 5, 114, 0, Text_1C1B83, Text_184A6A
+	loadword 0, Text_184A8C
+	callstd 6
+	end
+
+Route9_EventScript_1A9DB7:: @ 81A9DB7
+	trainerbattle 0, 115, 0, Text_184B18, Text_184B32
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A9DDE
+	loadword 0, Text_184B3B
+	callstd 6
+	end
+
+EventScript_1A9DDE:: @ 81A9DDE
+	trainerbattle 5, 115, 0, Text_1C1BDC, Text_184B32
+	loadword 0, Text_184B3B
+	callstd 6
+	end
+
+Route9_EventScript_1A9DF5:: @ 81A9DF5
+	trainerbattle 0, 148, 0, Text_184844, Text_18487E
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A9E1C
+	loadword 0, Text_184890
+	callstd 6
+	end
+
+EventScript_1A9E1C:: @ 81A9E1C
+	trainerbattle 5, 148, 0, Text_1C1A5D, Text_18487E
+	loadword 0, Text_184890
+	callstd 6
+	end
+
+Route9_EventScript_1A9E33:: @ 81A9E33
+	trainerbattle 0, 149, 0, Text_18489E, Text_1848CC
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A9E5A
+	loadword 0, Text_1848DE
+	callstd 6
+	end
+
+EventScript_1A9E5A:: @ 81A9E5A
+	trainerbattle 5, 149, 0, Text_1C1A9B, Text_1848CC
+	loadword 0, Text_1848DE
+	callstd 6
+	end
+
+Route9_EventScript_1A9E71:: @ 81A9E71
+	trainerbattle 0, 154, 0, Text_1847B7, Text_1847DF
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A9E98
+	loadword 0, Text_1847F0
+	callstd 6
+	end
+
+EventScript_1A9E98:: @ 81A9E98
+	trainerbattle 5, 154, 0, Text_1C1A2E, Text_1847DF
+	loadword 0, Text_1847F0
+	callstd 6
+	end
+
+Route9_EventScript_1A9EAF:: @ 81A9EAF
+	trainerbattle 0, 155, 0, Text_1848FF, Text_18491C
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A9ED6
+	loadword 0, Text_184931
+	callstd 6
+	end
+
+EventScript_1A9ED6:: @ 81A9ED6
+	trainerbattle 5, 155, 0, Text_1C1AFB, Text_18491C
+	loadword 0, Text_184931
+	callstd 6
+	end
+
+Route9_EventScript_1A9EED:: @ 81A9EED
+	trainerbattle 0, 185, 0, Text_184ABE, Text_184AD5
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A9F14
+	loadword 0, Text_184AF1
+	callstd 6
+	end
+
+EventScript_1A9F14:: @ 81A9F14
+	trainerbattle 5, 185, 0, Text_1C1BBE, Text_184AD5
+	loadword 0, Text_184AF1
+	callstd 6
+	end
+
+Route9_EventScript_1A9F2B:: @ 81A9F2B
+	trainerbattle 0, 186, 0, Text_1849DF, Text_184A04
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A9F52
+	loadword 0, Text_184A11
+	callstd 6
+	end
+
+EventScript_1A9F52:: @ 81A9F52
+	trainerbattle 5, 186, 0, Text_1C1B5E, Text_184A04
+	loadword 0, Text_184A11
+	callstd 6
+	end
+
+Route9_EventScript_1A9F69:: @ 81A9F69
+	trainerbattle 0, 465, 0, Text_18495E, Text_18497F
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A9F90
+	loadword 0, Text_1849B0
+	callstd 6
+	end
+
+EventScript_1A9F90:: @ 81A9F90
+	trainerbattle 5, 465, 0, Text_1C1B37, Text_18497F
+	loadword 0, Text_1849B0
+	callstd 6
+	end
+
+Route10_EventScript_1A9FA7:: @ 81A9FA7
+	trainerbattle 0, 156, 0, Text_184CF1, Text_184D31
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1A9FCE
+	loadword 0, Text_184D4D
+	callstd 6
+	end
+
+EventScript_1A9FCE:: @ 81A9FCE
+	trainerbattle 5, 156, 0, Text_1C1C9A, Text_184D31
+	loadword 0, Text_184D4D
+	callstd 6
+	end
+
+Route10_EventScript_1A9FE5:: @ 81A9FE5
+	trainerbattle 0, 157, 0, Text_184E04, Text_184E3B
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA00C
+	loadword 0, Text_184E5E
+	callstd 6
+	end
+
+EventScript_1AA00C:: @ 81AA00C
+	trainerbattle 5, 157, 0, Text_1C1D14, Text_184E3B
+	loadword 0, Text_184E5E
+	callstd 6
+	end
+
+Route10_EventScript_1AA023:: @ 81AA023
+	trainerbattle 0, 162, 0, Text_184B8A, Text_184BE5
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA04A
+	loadword 0, Text_184BFB
+	callstd 6
+	end
+
+EventScript_1AA04A:: @ 81AA04A
+	trainerbattle 5, 162, 0, Text_1C1BFA, Text_184BE5
+	loadword 0, Text_184BFB
+	callstd 6
+	end
+
+Route10_EventScript_1AA061:: @ 81AA061
+	trainerbattle 0, 163, 0, Text_184C86, Text_184CA7
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA088
+	loadword 0, Text_184CBB
+	callstd 6
+	end
+
+EventScript_1AA088:: @ 81AA088
+	trainerbattle 5, 163, 0, Text_1C1C76, Text_184CA7
+	loadword 0, Text_184CBB
+	callstd 6
+	end
+
+Route10_EventScript_1AA09F:: @ 81AA09F
+	trainerbattle 0, 187, 0, Text_184C1D, Text_184C2D
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA0C6
+	loadword 0, Text_184C60
+	callstd 6
+	end
+
+EventScript_1AA0C6:: @ 81AA0C6
+	trainerbattle 5, 187, 0, Text_1C1C4F, Text_184C2D
+	loadword 0, Text_184C60
+	callstd 6
+	end
+
+Route10_EventScript_1AA0DD:: @ 81AA0DD
+	trainerbattle 0, 188, 0, Text_184DAA, Text_184DCE
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA104
+	loadword 0, Text_184DE4
+	callstd 6
+	end
+
+EventScript_1AA104:: @ 81AA104
+	trainerbattle 5, 188, 0, Text_1C1CD3, Text_184DCE
+	loadword 0, Text_184DE4
+	callstd 6
+	end
+
+Route8_EventScript_1AA11B:: @ 81AA11B
+	trainerbattle 0, 128, 0, Text_1841ED, Text_184210
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA142
+	loadword 0, Text_18421B
+	callstd 6
+	end
+
+EventScript_1AA142:: @ 81AA142
+	trainerbattle 5, 128, 0, Text_1C1834, Text_184210
+	loadword 0, Text_18421B
+	callstd 6
+	end
+
+Route8_EventScript_1AA159:: @ 81AA159
+	trainerbattle 0, 129, 0, Text_184321, Text_184346
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA180
+	loadword 0, Text_184350
+	callstd 6
+	end
+
+EventScript_1AA180:: @ 81AA180
+	trainerbattle 5, 129, 0, Text_1C18AA, Text_184346
+	loadword 0, Text_184350
+	callstd 6
+	end
+
+Route8_EventScript_1AA197:: @ 81AA197
+	trainerbattle 0, 130, 0, Text_18437A, Text_1843A6
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA1BE
+	loadword 0, Text_1843D2
+	callstd 6
+	end
+
+EventScript_1AA1BE:: @ 81AA1BE
+	trainerbattle 5, 130, 0, Text_1C18DC, Text_1843A6
+	loadword 0, Text_1843D2
+	callstd 6
+	end
+
+Route8_EventScript_1AA1D5:: @ 81AA1D5
+	trainerbattle 0, 131, 0, Text_1844AC, Text_1844D6
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA1FC
+	loadword 0, Text_1844FD
+	callstd 6
+	end
+
+EventScript_1AA1FC:: @ 81AA1FC
+	trainerbattle 5, 131, 0, Text_1C1955, Text_1844D6
+	loadword 0, Text_1844FD
+	callstd 6
+	end
+
+Route8_EventScript_1AA213:: @ 81AA213
+	trainerbattle 0, 171, 0, Text_1840C5, Text_184100
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA23A
+	loadword 0, Text_18410E
+	callstd 6
+	end
+
+EventScript_1AA23A:: @ 81AA23A
+	trainerbattle 5, 171, 0, Text_1C1793, Text_184100
+	loadword 0, Text_18410E
+	callstd 6
+	end
+
+Route8_EventScript_1AA251:: @ 81AA251
+	trainerbattle 0, 172, 0, Text_18417C, Text_1841B6
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA278
+	loadword 0, Text_1841C8
+	callstd 6
+	end
+
+EventScript_1AA278:: @ 81AA278
+	trainerbattle 5, 172, 0, Text_1C17F1, Text_1841B6
+	loadword 0, Text_1841C8
+	callstd 6
+	end
+
+Route8_EventScript_1AA28F:: @ 81AA28F
+	trainerbattle 0, 173, 0, Text_184257, Text_18427A
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA2B6
+	loadword 0, Text_1842B3
+	callstd 6
+	end
+
+EventScript_1AA2B6:: @ 81AA2B6
+	trainerbattle 5, 173, 0, Text_1C1873, Text_18427A
+	loadword 0, Text_1842B3
+	callstd 6
+	end
+
+Route8_EventScript_1AA2CD:: @ 81AA2CD
+	trainerbattle 0, 262, 0, Text_18412F, Text_18414D
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA2F4
+	loadword 0, Text_184162
+	callstd 6
+	end
+
+EventScript_1AA2F4:: @ 81AA2F4
+	trainerbattle 5, 262, 0, Text_1C17CD, Text_18414D
+	loadword 0, Text_184162
+	callstd 6
+	end
+
+Route8_EventScript_1AA30B:: @ 81AA30B
+	trainerbattle 0, 264, 0, Text_184432, Text_18444F
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA332
+	loadword 0, Text_184466
+	callstd 6
+	end
+
+EventScript_1AA332:: @ 81AA332
+	trainerbattle 5, 264, 0, Text_1C191F, Text_18444F
+	loadword 0, Text_184466
+	callstd 6
+	end
+
+Route8_EventScript_1AA349:: @ 81AA349
+	trainerbattle 4, 484, 0, Text_1845A4, Text_1845D0, Text_184616
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA374
+	loadword 0, Text_1845F2
+	callstd 6
+	end
+
+EventScript_1AA374:: @ 81AA374
+	trainerbattle 7, 484, 0, Text_1C19E5, Text_1845D0, Text_184616
+	loadword 0, Text_1845F2
+	callstd 6
+	end
+
+Route8_EventScript_1AA38F:: @ 81AA38F
+	trainerbattle 4, 484, 0, Text_18464A, Text_184675, Text_1846AF
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA3BA
+	loadword 0, Text_18468B
+	callstd 6
+	end
+
+EventScript_1AA3BA:: @ 81AA3BA
+	trainerbattle 7, 484, 0, Text_1C1A0D, Text_184675, Text_1846AF
+	loadword 0, Text_18468B
+	callstd 6
+	end
+
+Route8_EventScript_1AA3D5:: @ 81AA3D5
+	trainerbattle 0, 535, 0, Text_1846E2, Text_1846FC
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA3FC
+	loadword 0, Text_184719
+	callstd 6
+	end
+
+EventScript_1AA3FC:: @ 81AA3FC
+	trainerbattle 5, 535, 0, Text_1C199C, Text_1846FC
+	loadword 0, Text_184719
+	callstd 6
+	end
+
+Route8_EventScript_1AA413:: @ 81AA413
+	trainerbattle 0, 536, 0, Text_184742, Text_184767
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA43A
+	loadword 0, Text_18477A
+	callstd 6
+	end
+
+EventScript_1AA43A:: @ 81AA43A
+	trainerbattle 5, 536, 0, Text_1C19BC, Text_184767
+	loadword 0, Text_18477A
+	callstd 6
+	end
+
+Route12_EventScript_1AA451:: @ 81AA451
+	trainerbattle 0, 225, 0, Text_185402, Text_18541B
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA478
+	loadword 0, Text_185432
+	callstd 6
+	end
+
+EventScript_1AA478:: @ 81AA478
+	trainerbattle 5, 225, 0, Text_1C1F9D, Text_18541B
+	loadword 0, Text_185432
+	callstd 6
+	end
+
+Route12_EventScript_1AA48F:: @ 81AA48F
+	trainerbattle 0, 226, 0, Text_18544E, Text_185475
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA4B6
+	loadword 0, Text_185488
+	callstd 6
+	end
+
+EventScript_1AA4B6:: @ 81AA4B6
+	trainerbattle 5, 226, 0, Text_1C1FD8, Text_185475
+	loadword 0, Text_185488
+	callstd 6
+	end
+
+Route12_EventScript_1AA4CD:: @ 81AA4CD
+	trainerbattle 0, 227, 0, Text_1855E1, Text_185606
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA4F4
+	loadword 0, Text_185616
+	callstd 6
+	end
+
+EventScript_1AA4F4:: @ 81AA4F4
+	trainerbattle 5, 227, 0, Text_1C209C, Text_185606
+	loadword 0, Text_185616
+	callstd 6
+	end
+
+Route12_EventScript_1AA50B:: @ 81AA50B
+	trainerbattle 0, 228, 0, Text_185682, Text_1856D0
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA532
+	loadword 0, Text_1856DF
+	callstd 6
+	end
+
+EventScript_1AA532:: @ 81AA532
+	trainerbattle 5, 228, 0, Text_1C20D4, Text_1856D0
+	loadword 0, Text_1856DF
+	callstd 6
+	end
+
+Route12_EventScript_1AA549:: @ 81AA549
+	trainerbattle 0, 233, 0, Text_18570E, Text_185744
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA570
+	loadword 0, Text_18574D
+	callstd 6
+	end
+
+EventScript_1AA570:: @ 81AA570
+	trainerbattle 5, 233, 0, Text_1C2134, Text_185744
+	loadword 0, Text_18574D
+	callstd 6
+	end
+
+Route12_EventScript_1AA587:: @ 81AA587
+	trainerbattle 0, 285, 0, Text_185547, Text_18559B
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA5AE
+	loadword 0, Text_1855A6
+	callstd 6
+	end
+
+EventScript_1AA5AE:: @ 81AA5AE
+	trainerbattle 5, 285, 0, Text_1C203B, Text_18559B
+	loadword 0, Text_1855A6
+	callstd 6
+	end
+
+Route12_EventScript_1AA5C5:: @ 81AA5C5
+	trainerbattle 0, 477, 0, Text_1854B9, Text_1854ED
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA5EC
+	loadword 0, Text_1854F2
+	callstd 6
+	end
+
+EventScript_1AA5EC:: @ 81AA5EC
+	trainerbattle 5, 477, 0, Text_1C2008, Text_1854ED
+	loadword 0, Text_1854F2
+	callstd 6
+	end
+
+Route12_EventScript_1AA603:: @ 81AA603
+	trainerbattle 4, 486, 0, Text_1857C5, Text_1857F1, Text_185842
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA62E
+	loadword 0, Text_18581F
+	callstd 6
+	end
+
+EventScript_1AA62E:: @ 81AA62E
+	trainerbattle 7, 486, 0, Text_1C216B, Text_1857F1, Text_185842
+	loadword 0, Text_18581F
+	callstd 6
+	end
+
+Route12_EventScript_1AA649:: @ 81AA649
+	trainerbattle 4, 486, 0, Text_1858A6, Text_1858D0, Text_185908
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA674
+	loadword 0, Text_1858E2
+	callstd 6
+	end
+
+EventScript_1AA674:: @ 81AA674
+	trainerbattle 7, 486, 0, Text_1C219B, Text_1858D0, Text_185908
+	loadword 0, Text_1858E2
+	callstd 6
+	end
+
+Route13_EventScript_1AA68F:: @ 81AA68F
+	trainerbattle 0, 195, 0, Text_185D05, Text_185D1D
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA6B6
+	loadword 0, Text_185D33
+	callstd 6
+	end
+
+EventScript_1AA6B6:: @ 81AA6B6
+	trainerbattle 5, 195, 0, Text_1C236B, Text_185D1D
+	loadword 0, Text_185D33
+	callstd 6
+	end
+
+Route13_EventScript_1AA6CD:: @ 81AA6CD
+	trainerbattle 0, 268, 0, Text_185BFC, Text_185C1F
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA6F4
+	loadword 0, Text_185C35
+	callstd 6
+	end
+
+EventScript_1AA6F4:: @ 81AA6F4
+	trainerbattle 5, 268, 0, Text_1C2306, Text_185C1F
+	loadword 0, Text_185C35
+	callstd 6
+	end
+
+Route13_EventScript_1AA70B:: @ 81AA70B
+	trainerbattle 0, 269, 0, Text_185C69, Text_185C95
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA732
+	loadword 0, Text_185CA8
+	callstd 6
+	end
+
+EventScript_1AA732:: @ 81AA732
+	trainerbattle 5, 269, 0, Text_1C2340, Text_185C95
+	loadword 0, Text_185CA8
+	callstd 6
+	end
+
+Route13_EventScript_1AA749:: @ 81AA749
+	trainerbattle 0, 300, 0, Text_185955, Text_18597E
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA770
+	loadword 0, Text_1859A2
+	callstd 6
+	end
+
+EventScript_1AA770:: @ 81AA770
+	trainerbattle 5, 300, 0, Text_1C21EE, Text_18597E
+	loadword 0, Text_1859A2
+	callstd 6
+	end
+
+Route13_EventScript_1AA787:: @ 81AA787
+	trainerbattle 0, 301, 0, Text_185B8F, Text_185BCA
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA7AE
+	loadword 0, Text_185BDB
+	callstd 6
+	end
+
+EventScript_1AA7AE:: @ 81AA7AE
+	trainerbattle 5, 301, 0, Text_1C22CA, Text_185BCA
+	loadword 0, Text_185BDB
+	callstd 6
+	end
+
+Route13_EventScript_1AA7C5:: @ 81AA7C5
+	trainerbattle 0, 302, 0, Text_185D3D, Text_185D7B
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA7EC
+	loadword 0, Text_185D89
+	callstd 6
+	end
+
+EventScript_1AA7EC:: @ 81AA7EC
+	trainerbattle 5, 302, 0, Text_1C2383, Text_185D7B
+	loadword 0, Text_185D89
+	callstd 6
+	end
+
+Route13_EventScript_1AA803:: @ 81AA803
+	trainerbattle 0, 466, 0, Text_185B12, Text_185B48
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA82A
+	loadword 0, Text_185B67
+	callstd 6
+	end
+
+EventScript_1AA82A:: @ 81AA82A
+	trainerbattle 5, 466, 0, Text_1C2299, Text_185B48
+	loadword 0, Text_185B67
+	callstd 6
+	end
+
+Route13_EventScript_1AA841:: @ 81AA841
+	trainerbattle 0, 467, 0, Text_1859CF, Text_1859EC
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA868
+	loadword 0, Text_1859F9
+	callstd 6
+	end
+
+EventScript_1AA868:: @ 81AA868
+	trainerbattle 5, 467, 0, Text_1C220C, Text_1859EC
+	loadword 0, Text_1859F9
+	callstd 6
+	end
+
+Route13_EventScript_1AA87F:: @ 81AA87F
+	trainerbattle 0, 468, 0, Text_185A37, Text_185A56
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA8A6
+	loadword 0, Text_185A62
+	callstd 6
+	end
+
+EventScript_1AA8A6:: @ 81AA8A6
+	trainerbattle 5, 468, 0, Text_1C223C, Text_185A56
+	loadword 0, Text_185A62
+	callstd 6
+	end
+
+Route13_EventScript_1AA8BD:: @ 81AA8BD
+	trainerbattle 0, 469, 0, Text_185A91, Text_185AC1
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA8E4
+	loadword 0, Text_185ADE
+	callstd 6
+	end
+
+EventScript_1AA8E4:: @ 81AA8E4
+	trainerbattle 5, 469, 0, Text_1C225B, Text_185AC1
+	loadword 0, Text_185ADE
+	callstd 6
+	end
+
+Route14_EventScript_1AA8FB:: @ 81AA8FB
+	trainerbattle 0, 196, 0, Text_186344, Text_186362
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA922
+	loadword 0, Text_18636E
+	callstd 6
+	end
+
+EventScript_1AA922:: @ 81AA922
+	trainerbattle 5, 196, 0, Text_1C25D6, Text_186362
+	loadword 0, Text_18636E
+	callstd 6
+	end
+
+Route14_EventScript_1AA939:: @ 81AA939
+	trainerbattle 0, 207, 0, Text_1861F7, Text_186223
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA960
+	loadword 0, Text_186239
+	callstd 6
+	end
+
+EventScript_1AA960:: @ 81AA960
+	trainerbattle 5, 207, 0, Text_1C2531, Text_186223
+	loadword 0, Text_186239
+	callstd 6
+	end
+
+Route14_EventScript_1AA977:: @ 81AA977
+	trainerbattle 0, 208, 0, Text_186263, Text_186291
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA99E
+	loadword 0, Text_18629D
+	callstd 6
+	end
+
+EventScript_1AA99E:: @ 81AA99E
+	trainerbattle 5, 208, 0, Text_1C2572, Text_186291
+	loadword 0, Text_18629D
+	callstd 6
+	end
+
+Route14_EventScript_1AA9B5:: @ 81AA9B5
+	trainerbattle 0, 209, 0, Text_1862BD, Text_1862EF
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AA9DC
+	loadword 0, Text_1862F8
+	callstd 6
+	end
+
+EventScript_1AA9DC:: @ 81AA9DC
+	trainerbattle 5, 209, 0, Text_1C259E, Text_1862EF
+	loadword 0, Text_1862F8
+	callstd 6
+	end
+
+Route14_EventScript_1AA9F3:: @ 81AA9F3
+	trainerbattle 0, 303, 0, Text_1860D9, Text_18610A
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AAA1A
+	loadword 0, Text_18611D
+	callstd 6
+	end
+
+EventScript_1AAA1A:: @ 81AAA1A
+	trainerbattle 5, 303, 0, Text_1C24CB, Text_18610A
+	loadword 0, Text_18611D
+	callstd 6
+	end
+
+Route14_EventScript_1AAA31:: @ 81AAA31
+	trainerbattle 0, 304, 0, Text_18618E, Text_1861B3
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AAA58
+	loadword 0, Text_1861BE
+	callstd 6
+	end
+
+EventScript_1AAA58:: @ 81AAA58
+	trainerbattle 5, 304, 0, Text_1C2505, Text_1861B3
+	loadword 0, Text_1861BE
+	callstd 6
+	end
+
+Route14_EventScript_1AAA6F:: @ 81AAA6F
+	trainerbattle 0, 313, 0, Text_185E4D, Text_185E81
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AAA96
+	loadword 0, Text_185E9C
+	callstd 6
+	end
+
+EventScript_1AAA96:: @ 81AAA96
+	trainerbattle 5, 313, 0, Text_1C23C1, Text_185E81
+	loadword 0, Text_185E9C
+	callstd 6
+	end
+
+Route14_EventScript_1AAAAD:: @ 81AAAAD
+	trainerbattle 0, 314, 0, Text_185EDF, Text_185F0B
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AAAD4
+	loadword 0, Text_185F1A
+	callstd 6
+	end
+
+EventScript_1AAAD4:: @ 81AAAD4
+	trainerbattle 5, 314, 0, Text_1C23EF, Text_185F0B
+	loadword 0, Text_185F1A
+	callstd 6
+	end
+
+Route14_EventScript_1AAAEB:: @ 81AAAEB
+	trainerbattle 0, 315, 0, Text_185F46, Text_185FAE
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AAB12
+	loadword 0, Text_185FBB
+	callstd 6
+	end
+
+EventScript_1AAB12:: @ 81AAB12
+	trainerbattle 5, 315, 0, Text_1C2425, Text_185FAE
+	loadword 0, Text_185FBB
+	callstd 6
+	end
+
+Route14_EventScript_1AAB29:: @ 81AAB29
+	trainerbattle 0, 316, 0, Text_186021, Text_18607C
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AAB50
+	loadword 0, Text_186091
+	callstd 6
+	end
+
+EventScript_1AAB50:: @ 81AAB50
+	trainerbattle 5, 316, 0, Text_1C2461, Text_18607C
+	loadword 0, Text_186091
+	callstd 6
+	end
+
+Route14_EventScript_1AAB67:: @ 81AAB67
+	trainerbattle 4, 487, 0, Text_1863B7, Text_1863EA, Text_18642E
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AAB92
+	loadword 0, Text_18640D
+	callstd 6
+	end
+
+EventScript_1AAB92:: @ 81AAB92
+	trainerbattle 7, 487, 0, Text_1C25FB, Text_1863EA, Text_18642E
+	loadword 0, Text_18640D
+	callstd 6
+	end
+
+Route14_EventScript_1AABAD:: @ 81AABAD
+	trainerbattle 4, 487, 0, Text_18645B, Text_186487, Text_1864D3
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AABD8
+	loadword 0, Text_18649C
+	callstd 6
+	end
+
+EventScript_1AABD8:: @ 81AABD8
+	trainerbattle 7, 487, 0, Text_1C261B, Text_186487, Text_1864D3
+	loadword 0, Text_18649C
+	callstd 6
+	end
+
+Route15_EventScript_1AABF3:: @ 81AABF3
+	trainerbattle 0, 197, 0, Text_1868B6, Text_1868E8
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AAC1A
+	loadword 0, Text_1868F1
+	callstd 6
+	end
+
+EventScript_1AAC1A:: @ 81AAC1A
+	trainerbattle 5, 197, 0, Text_1C27E7, Text_1868E8
+	loadword 0, Text_1868F1
+	callstd 6
+	end
+
+Route15_EventScript_1AAC31:: @ 81AAC31
+	trainerbattle 0, 198, 0, Text_186936, Text_186968
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AAC58
+	loadword 0, Text_18697C
+	callstd 6
+	end
+
+EventScript_1AAC58:: @ 81AAC58
+	trainerbattle 5, 198, 0, Text_1C2814, Text_186968
+	loadword 0, Text_18697C
+	callstd 6
+	end
+
+Route15_EventScript_1AAC6F:: @ 81AAC6F
+	trainerbattle 0, 273, 0, Text_18678B, Text_1867C1
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AAC96
+	loadword 0, Text_1867DA
+	callstd 6
+	end
+
+EventScript_1AAC96:: @ 81AAC96
+	trainerbattle 5, 273, 0, Text_1C2753, Text_1867C1
+	loadword 0, Text_1867DA
+	callstd 6
+	end
+
+Route15_EventScript_1AACAD:: @ 81AACAD
+	trainerbattle 0, 274, 0, Text_18680C, Text_186841
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AACD4
+	loadword 0, Text_18686F
+	callstd 6
+	end
+
+EventScript_1AACD4:: @ 81AACD4
+	trainerbattle 5, 274, 0, Text_1C279D, Text_186841
+	loadword 0, Text_18686F
+	callstd 6
+	end
+
+Route15_EventScript_1AACEB:: @ 81AACEB
+	trainerbattle 0, 305, 0, Text_18664F, Text_18667A
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AAD12
+	loadword 0, Text_18668D
+	callstd 6
+	end
+
+EventScript_1AAD12:: @ 81AAD12
+	trainerbattle 5, 305, 0, Text_1C26D3, Text_18667A
+	loadword 0, Text_18668D
+	callstd 6
+	end
+
+Route15_EventScript_1AAD29:: @ 81AAD29
+	trainerbattle 0, 306, 0, Text_1866D1, Text_186707
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AAD50
+	loadword 0, Text_18671A
+	callstd 6
+	end
+
+EventScript_1AAD50:: @ 81AAD50
+	trainerbattle 5, 306, 0, Text_1C2717, Text_186707
+	loadword 0, Text_18671A
+	callstd 6
+	end
+
+Route15_EventScript_1AAD67:: @ 81AAD67
+	trainerbattle 0, 478, 0, Text_186A22, Text_186A40
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AAD8E
+	loadword 0, Text_186A55
+	callstd 6
+	end
+
+EventScript_1AAD8E:: @ 81AAD8E
+	trainerbattle 5, 478, 0, Text_1C287D, Text_186A40
+	loadword 0, Text_186A55
+	callstd 6
+	end
+
+Route15_EventScript_1AADA5:: @ 81AADA5
+	trainerbattle 0, 479, 0, Text_18650B, Text_186549
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AADCC
+	loadword 0, Text_18655A
+	callstd 6
+	end
+
+EventScript_1AADCC:: @ 81AADCC
+	trainerbattle 5, 479, 0, Text_1C2650, Text_186549
+	loadword 0, Text_18655A
+	callstd 6
+	end
+
+Route15_EventScript_1AADE3:: @ 81AADE3
+	trainerbattle 0, 480, 0, Text_1865D3, Text_186612
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AAE0A
+	loadword 0, Text_18661D
+	callstd 6
+	end
+
+EventScript_1AAE0A:: @ 81AAE0A
+	trainerbattle 5, 480, 0, Text_1C268D, Text_186612
+	loadword 0, Text_18661D
+	callstd 6
+	end
+
+Route15_EventScript_1AAE21:: @ 81AAE21
+	trainerbattle 0, 481, 0, Text_1869BA, Text_1869E6
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AAE48
+	loadword 0, Text_1869F4
+	callstd 6
+	end
+
+EventScript_1AAE48:: @ 81AAE48
+	trainerbattle 5, 481, 0, Text_1C2846, Text_1869E6
+	loadword 0, Text_1869F4
+	callstd 6
+	end
+
+Route15_EventScript_1AAE5F:: @ 81AAE5F
+	trainerbattle 4, 488, 0, Text_186A95, Text_186ACB, Text_186B46
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AAE8A
+	loadword 0, Text_186B0A
+	callstd 6
+	end
+
+EventScript_1AAE8A:: @ 81AAE8A
+	trainerbattle 7, 488, 0, Text_1C28A1, Text_186ACB, Text_186B46
+	loadword 0, Text_186B0A
+	callstd 6
+	end
+
+Route15_EventScript_1AAEA5:: @ 81AAEA5
+	trainerbattle 4, 488, 0, Text_186B89, Text_186BB1, Text_186BFE
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AAED0
+	loadword 0, Text_186BD2
+	callstd 6
+	end
+
+EventScript_1AAED0:: @ 81AAED0
+	trainerbattle 7, 488, 0, Text_1C28EC, Text_186BB1, Text_186BFE
+	loadword 0, Text_186BD2
+	callstd 6
+	end
+
+Route16_EventScript_1AAEEB:: @ 81AAEEB
+	trainerbattle 0, 199, 0, Text_186C4D, Text_186C5F
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AAF12
+	loadword 0, Text_186C75
+	callstd 6
+	end
+
+EventScript_1AAF12:: @ 81AAF12
+	trainerbattle 5, 199, 0, Text_1C2913, Text_186C5F
+	loadword 0, Text_186C75
+	callstd 6
+	end
+
+Route16_EventScript_1AAF29:: @ 81AAF29
+	trainerbattle 0, 201, 0, Text_186D39, Text_186D52
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AAF50
+	loadword 0, Text_186D5A
+	callstd 6
+	end
+
+EventScript_1AAF50:: @ 81AAF50
+	trainerbattle 5, 201, 0, Text_1C297B, Text_186D52
+	loadword 0, Text_186D5A
+	callstd 6
+	end
+
+Route16_EventScript_1AAF67:: @ 81AAF67
+	trainerbattle 0, 202, 0, Text_186E86, Text_186EB4
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AAF8E
+	loadword 0, Text_186EC7
+	callstd 6
+	end
+
+EventScript_1AAF8E:: @ 81AAF8E
+	trainerbattle 5, 202, 0, Text_1C29EB, Text_186EB4
+	loadword 0, Text_186EC7
+	callstd 6
+	end
+
+Route16_EventScript_1AAFA5:: @ 81AAFA5
+	trainerbattle 0, 249, 0, Text_186CA2, Text_186CBB
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AAFCC
+	loadword 0, Text_186CC5
+	callstd 6
+	end
+
+EventScript_1AAFCC:: @ 81AAFCC
+	trainerbattle 5, 249, 0, Text_1C2925, Text_186CBB
+	loadword 0, Text_186CC5
+	callstd 6
+	end
+
+Route16_EventScript_1AAFE3:: @ 81AAFE3
+	trainerbattle 0, 250, 0, Text_186CE5, Text_186D06
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB00A
+	loadword 0, Text_186D16
+	callstd 6
+	end
+
+EventScript_1AB00A:: @ 81AB00A
+	trainerbattle 5, 250, 0, Text_1C2944, Text_186D06
+	loadword 0, Text_186D16
+	callstd 6
+	end
+
+Route16_EventScript_1AB021:: @ 81AB021
+	trainerbattle 0, 251, 0, Text_186DD9, Text_186E0D
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB048
+	loadword 0, Text_186E1C
+	callstd 6
+	end
+
+EventScript_1AB048:: @ 81AB048
+	trainerbattle 5, 251, 0, Text_1C29B0, Text_186E0D
+	loadword 0, Text_186E1C
+	callstd 6
+	end
+
+Route16_EventScript_1AB05F:: @ 81AB05F
+	trainerbattle 4, 489, 0, Text_186FBD, Text_186FFA, Text_187057
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB08A
+	loadword 0, Text_187027
+	callstd 6
+	end
+
+EventScript_1AB08A:: @ 81AB08A
+	trainerbattle 7, 489, 0, Text_1C2A19, Text_186FFA, Text_187057
+	loadword 0, Text_187027
+	callstd 6
+	end
+
+Route16_EventScript_1AB0A5:: @ 81AB0A5
+	trainerbattle 4, 489, 0, Text_187097, Text_1870CC, Text_187120
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB0D0
+	loadword 0, Text_1870F9
+	callstd 6
+	end
+
+EventScript_1AB0D0:: @ 81AB0D0
+	trainerbattle 7, 489, 0, Text_1C2A53, Text_1870CC, Text_187120
+	loadword 0, Text_1870F9
+	callstd 6
+	end
+
+Route17_EventScript_1AB0EB:: @ 81AB0EB
+	trainerbattle 0, 203, 0, Text_1872BD, Text_1872E3
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB112
+	loadword 0, Text_1872EB
+	callstd 6
+	end
+
+EventScript_1AB112:: @ 81AB112
+	trainerbattle 5, 203, 0, Text_1C2B06, Text_1872E3
+	loadword 0, Text_1872EB
+	callstd 6
+	end
+
+Route17_EventScript_1AB129:: @ 81AB129
+	trainerbattle 0, 204, 0, Text_18730A, Text_187325
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB150
+	loadword 0, Text_187333
+	callstd 6
+	end
+
+EventScript_1AB150:: @ 81AB150
+	trainerbattle 5, 204, 0, Text_1C2B2C, Text_187325
+	loadword 0, Text_187333
+	callstd 6
+	end
+
+Route17_EventScript_1AB167:: @ 81AB167
+	trainerbattle 0, 205, 0, Text_187456, Text_187472
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB18E
+	loadword 0, Text_187479
+	callstd 6
+	end
+
+EventScript_1AB18E:: @ 81AB18E
+	trainerbattle 5, 205, 0, Text_1C2BE6, Text_187472
+	loadword 0, Text_187479
+	callstd 6
+	end
+
+Route17_EventScript_1AB1A5:: @ 81AB1A5
+	trainerbattle 0, 206, 0, Text_18749B, Text_1874B6
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB1CC
+	loadword 0, Text_1874C9
+	callstd 6
+	end
+
+EventScript_1AB1CC:: @ 81AB1CC
+	trainerbattle 5, 206, 0, Text_1C2C10, Text_1874B6
+	loadword 0, Text_1874C9
+	callstd 6
+	end
+
+Route17_EventScript_1AB1E3:: @ 81AB1E3
+	trainerbattle 0, 252, 0, Text_18717E, Text_1871AE
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB20A
+	loadword 0, Text_1871BA
+	callstd 6
+	end
+
+EventScript_1AB20A:: @ 81AB20A
+	trainerbattle 5, 252, 0, Text_1C2A88, Text_1871AE
+	loadword 0, Text_1871BA
+	callstd 6
+	end
+
+Route17_EventScript_1AB221:: @ 81AB221
+	trainerbattle 0, 253, 0, Text_187228, Text_187254
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB248
+	loadword 0, Text_18725A
+	callstd 6
+	end
+
+EventScript_1AB248:: @ 81AB248
+	trainerbattle 5, 253, 0, Text_1C2AC4, Text_187254
+	loadword 0, Text_18725A
+	callstd 6
+	end
+
+Route17_EventScript_1AB25F:: @ 81AB25F
+	trainerbattle 0, 254, 0, Text_187362, Text_187395
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB286
+	loadword 0, Text_18739F
+	callstd 6
+	end
+
+EventScript_1AB286:: @ 81AB286
+	trainerbattle 5, 254, 0, Text_1C2B5E, Text_187395
+	loadword 0, Text_18739F
+	callstd 6
+	end
+
+Route17_EventScript_1AB29D:: @ 81AB29D
+	trainerbattle 0, 255, 0, Text_1873D1, Text_1873EB
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB2C4
+	loadword 0, Text_1873FF
+	callstd 6
+	end
+
+EventScript_1AB2C4:: @ 81AB2C4
+	trainerbattle 5, 255, 0, Text_1C2B9C, Text_1873EB
+	loadword 0, Text_1873FF
+	callstd 6
+	end
+
+Route17_EventScript_1AB2DB:: @ 81AB2DB
+	trainerbattle 0, 256, 0, Text_18741D, Text_187429
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB302
+	loadword 0, Text_187432
+	callstd 6
+	end
+
+EventScript_1AB302:: @ 81AB302
+	trainerbattle 5, 256, 0, Text_1C2BDA, Text_187429
+	loadword 0, Text_187432
+	callstd 6
+	end
+
+Route17_EventScript_1AB319:: @ 81AB319
+	trainerbattle 0, 470, 0, Text_18727D, Text_187295
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB340
+	loadword 0, Text_1872A5
+	callstd 6
+	end
+
+EventScript_1AB340:: @ 81AB340
+	trainerbattle 5, 470, 0, Text_1C2AF0, Text_187295
+	loadword 0, Text_1872A5
+	callstd 6
+	end
+
+Route18_EventScript_1AB357:: @ 81AB357
+	trainerbattle 0, 307, 0, Text_187640, Text_187672
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB37E
+	loadword 0, Text_187677
+	callstd 6
+	end
+
+EventScript_1AB37E:: @ 81AB37E
+	trainerbattle 5, 307, 0, Text_1C2C2B, Text_187672
+	loadword 0, Text_187677
+	callstd 6
+	end
+
+Route18_EventScript_1AB395:: @ 81AB395
+	trainerbattle 0, 308, 0, Text_18768C, Text_1876B3
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB3BC
+	loadword 0, Text_1876C5
+	callstd 6
+	end
+
+EventScript_1AB3BC:: @ 81AB3BC
+	trainerbattle 5, 308, 0, Text_1C2C7B, Text_1876B3
+	loadword 0, Text_1876C5
+	callstd 6
+	end
+
+Route18_EventScript_1AB3D3:: @ 81AB3D3
+	trainerbattle 0, 309, 0, Text_187704, Text_187726
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB3FA
+	loadword 0, Text_18772C
+	callstd 6
+	end
+
+EventScript_1AB3FA:: @ 81AB3FA
+	trainerbattle 5, 309, 0, Text_1C2CA8, Text_187726
+	loadword 0, Text_18772C
+	callstd 6
+	end
+
+Route19_EventScript_1AB411:: @ 81AB411
+	trainerbattle 0, 235, 0, Text_1877A3, Text_1877DF
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB438
+	loadword 0, Text_1877EE
+	callstd 6
+	end
+
+EventScript_1AB438:: @ 81AB438
+	trainerbattle 5, 235, 0, Text_1C2CEE, Text_1877DF
+	loadword 0, Text_1877EE
+	callstd 6
+	end
+
+Route19_EventScript_1AB44F:: @ 81AB44F
+	trainerbattle 0, 236, 0, Text_187811, Text_18783E
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB476
+	loadword 0, Text_187852
+	callstd 6
+	end
+
+EventScript_1AB476:: @ 81AB476
+	trainerbattle 5, 236, 0, Text_1C2D19, Text_18783E
+	loadword 0, Text_187852
+	callstd 6
+	end
+
+Route19_EventScript_1AB48D:: @ 81AB48D
+	trainerbattle 0, 237, 0, Text_187884, Text_1878A5
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB4B4
+	loadword 0, Text_1878B1
+	callstd 6
+	end
+
+EventScript_1AB4B4:: @ 81AB4B4
+	trainerbattle 5, 237, 0, Text_1C2D4B, Text_1878A5
+	loadword 0, Text_1878B1
+	callstd 6
+	end
+
+Route19_EventScript_1AB4CB:: @ 81AB4CB
+	trainerbattle 0, 238, 0, Text_1878DD, Text_1878F8
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB4F2
+	loadword 0, Text_1878FE
+	callstd 6
+	end
+
+EventScript_1AB4F2:: @ 81AB4F2
+	trainerbattle 5, 238, 0, Text_1C2D7D, Text_1878F8
+	loadword 0, Text_1878FE
+	callstd 6
+	end
+
+Route19_EventScript_1AB509:: @ 81AB509
+	trainerbattle 0, 239, 0, Text_187925, Text_187955
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB530
+	loadword 0, Text_18795B
+	callstd 6
+	end
+
+EventScript_1AB530:: @ 81AB530
+	trainerbattle 5, 239, 0, Text_1C2DA7, Text_187955
+	loadword 0, Text_18795B
+	callstd 6
+	end
+
+Route19_EventScript_1AB547:: @ 81AB547
+	trainerbattle 0, 240, 0, Text_187985, Text_1879C3
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB56E
+	loadword 0, Text_1879D3
+	callstd 6
+	end
+
+EventScript_1AB56E:: @ 81AB56E
+	trainerbattle 5, 240, 0, Text_1C2DE9, Text_1879C3
+	loadword 0, Text_1879D3
+	callstd 6
+	end
+
+Route19_EventScript_1AB585:: @ 81AB585
+	trainerbattle 0, 241, 0, Text_187AFA, Text_187B25
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB5AC
+	loadword 0, Text_187B35
+	callstd 6
+	end
+
+EventScript_1AB5AC:: @ 81AB5AC
+	trainerbattle 5, 241, 0, Text_1C2EC0, Text_187B25
+	loadword 0, Text_187B35
+	callstd 6
+	end
+
+Route19_EventScript_1AB5C3:: @ 81AB5C3
+	trainerbattle 0, 276, 0, Text_187A11, Text_187A44
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB5EA
+	loadword 0, Text_187A50
+	callstd 6
+	end
+
+EventScript_1AB5EA:: @ 81AB5EA
+	trainerbattle 5, 276, 0, Text_1C2E4A, Text_187A44
+	loadword 0, Text_187A50
+	callstd 6
+	end
+
+Route19_EventScript_1AB601:: @ 81AB601
+	trainerbattle 0, 277, 0, Text_187A9E, Text_187AC1
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB628
+	loadword 0, Text_187ACA
+	callstd 6
+	end
+
+EventScript_1AB628:: @ 81AB628
+	trainerbattle 5, 277, 0, Text_1C2E9D, Text_187AC1
+	loadword 0, Text_187ACA
+	callstd 6
+	end
+
+Route19_EventScript_1AB63F:: @ 81AB63F
+	trainerbattle 0, 278, 0, Text_187B5D, Text_187B85
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB666
+	loadword 0, Text_187B94
+	callstd 6
+	end
+
+EventScript_1AB666:: @ 81AB666
+	trainerbattle 5, 278, 0, Text_1C2EFC, Text_187B85
+	loadword 0, Text_187B94
+	callstd 6
+	end
+
+Route19_EventScript_1AB67D:: @ 81AB67D
+	trainerbattle 4, 490, 0, Text_187C32, Text_187C6F, Text_187CF2
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB6A8
+	loadword 0, Text_187C9E
+	callstd 6
+	end
+
+EventScript_1AB6A8:: @ 81AB6A8
+	trainerbattle 7, 490, 0, Text_1C2F41, Text_187C6F, Text_187CF2
+	loadword 0, Text_187C9E
+	callstd 6
+	end
+
+Route19_EventScript_1AB6C3:: @ 81AB6C3
+	trainerbattle 4, 490, 0, Text_187D45, Text_187D7E, Text_187DE8
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB6EE
+	loadword 0, Text_187DAD
+	callstd 6
+	end
+
+EventScript_1AB6EE:: @ 81AB6EE
+	trainerbattle 7, 490, 0, Text_1C2FAE, Text_187D7E, Text_187DE8
+	loadword 0, Text_187DAD
+	callstd 6
+	end
+
+Route20_EventScript_1AB709:: @ 81AB709
+	trainerbattle 0, 242, 0, Text_187E40, Text_187E7B
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB730
+	loadword 0, Text_187E83
+	callstd 6
+	end
+
+EventScript_1AB730:: @ 81AB730
+	trainerbattle 5, 242, 0, Text_1C2FF3, Text_187E7B
+	loadword 0, Text_187E83
+	callstd 6
+	end
+
+Route20_EventScript_1AB747:: @ 81AB747
+	trainerbattle 0, 243, 0, Text_187FDB, Text_187FF7
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB76E
+	loadword 0, Text_187FFE
+	callstd 6
+	end
+
+EventScript_1AB76E:: @ 81AB76E
+	trainerbattle 5, 243, 0, Text_1C30B0, Text_187FF7
+	loadword 0, Text_187FFE
+	callstd 6
+	end
+
+Route20_EventScript_1AB785:: @ 81AB785
+	trainerbattle 0, 244, 0, Text_18802E, Text_18805C
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB7AC
+	loadword 0, Text_18806D
+	callstd 6
+	end
+
+EventScript_1AB7AC:: @ 81AB7AC
+	trainerbattle 5, 244, 0, Text_1C30ED, Text_18805C
+	loadword 0, Text_18806D
+	callstd 6
+	end
+
+Route20_EventScript_1AB7C3:: @ 81AB7C3
+	trainerbattle 0, 270, 0, Text_187F24, Text_187F5A
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB7EA
+	loadword 0, Text_187F61
+	callstd 6
+	end
+
+EventScript_1AB7EA:: @ 81AB7EA
+	trainerbattle 5, 270, 0, Text_1C305F, Text_187F5A
+	loadword 0, Text_187F61
+	callstd 6
+	end
+
+Route20_EventScript_1AB801:: @ 81AB801
+	trainerbattle 0, 271, 0, Text_1880F8, Text_188119
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB828
+	loadword 0, Text_188139
+	callstd 6
+	end
+
+EventScript_1AB828:: @ 81AB828
+	trainerbattle 5, 271, 0, Text_1C3149, Text_188119
+	loadword 0, Text_188139
+	callstd 6
+	end
+
+Route20_EventScript_1AB83F:: @ 81AB83F
+	trainerbattle 0, 272, 0, Text_188218, Text_18825C
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB866
+	loadword 0, Text_18827B
+	callstd 6
+	end
+
+EventScript_1AB866:: @ 81AB866
+	trainerbattle 5, 272, 0, Text_1C31C4, Text_18825C
+	loadword 0, Text_18827B
+	callstd 6
+	end
+
+Route20_EventScript_1AB87D:: @ 81AB87D
+	trainerbattle 0, 279, 0, Text_187EBB, Text_187EED
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB8A4
+	loadword 0, Text_187EF6
+	callstd 6
+	end
+
+EventScript_1AB8A4:: @ 81AB8A4
+	trainerbattle 5, 279, 0, Text_1C302E, Text_187EED
+	loadword 0, Text_187EF6
+	callstd 6
+	end
+
+Route20_EventScript_1AB8BB:: @ 81AB8BB
+	trainerbattle 0, 310, 0, Text_18808E, Text_1880AB
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB8E2
+	loadword 0, Text_1880C8
+	callstd 6
+	end
+
+EventScript_1AB8E2:: @ 81AB8E2
+	trainerbattle 5, 310, 0, Text_1C312C, Text_1880AB
+	loadword 0, Text_1880C8
+	callstd 6
+	end
+
+Route20_EventScript_1AB8F9:: @ 81AB8F9
+	trainerbattle 0, 472, 0, Text_188165, Text_1881A3
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB920
+	loadword 0, Text_1881B8
+	callstd 6
+	end
+
+EventScript_1AB920:: @ 81AB920
+	trainerbattle 5, 472, 0, Text_1C3185, Text_1881A3
+	loadword 0, Text_1881B8
+	callstd 6
+	end
+
+Route20_EventScript_1AB937:: @ 81AB937
+	trainerbattle 0, 473, 0, Text_187F78, Text_187F92
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB95E
+	loadword 0, Text_187FA3
+	callstd 6
+	end
+
+EventScript_1AB95E:: @ 81AB95E
+	trainerbattle 5, 473, 0, Text_1C3095, Text_187F92
+	loadword 0, Text_187FA3
+	callstd 6
+	end
+
+Route21_North_EventScript_1AB975:: @ 81AB975
+	trainerbattle 0, 229, 0, Text_18835A, Text_188383
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB99C
+	loadword 0, Text_188389
+	callstd 6
+	end
+
+EventScript_1AB99C:: @ 81AB99C
+	trainerbattle 5, 229, 0, Text_1C3208, Text_188383
+	loadword 0, Text_188389
+	callstd 6
+	end
+
+Route21_South_EventScript_1AB9B3:: @ 81AB9B3
+	trainerbattle 0, 230, 0, Text_1885D8, Text_1885F8
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AB9DA
+	loadword 0, Text_188632
+	callstd 6
+	end
+
+EventScript_1AB9DA:: @ 81AB9DA
+	trainerbattle 5, 230, 0, Text_1C331D, Text_1885F8
+	loadword 0, Text_188632
+	callstd 6
+	end
+
+Route21_North_EventScript_1AB9F1:: @ 81AB9F1
+	trainerbattle 0, 231, 0, Text_1883C6, Text_1883E9
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ABA18
+	loadword 0, Text_18841D
+	callstd 6
+	end
+
+EventScript_1ABA18:: @ 81ABA18
+	trainerbattle 5, 231, 0, Text_1C3231, Text_1883E9
+	loadword 0, Text_18841D
+	callstd 6
+	end
+
+Route21_South_EventScript_1ABA2F:: @ 81ABA2F
+	trainerbattle 0, 232, 0, Text_18868C, Text_1886AE
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ABA56
+	loadword 0, Text_1886C5
+	callstd 6
+	end
+
+EventScript_1ABA56:: @ 81ABA56
+	trainerbattle 5, 232, 0, Text_1C3356, Text_1886AE
+	loadword 0, Text_1886C5
+	callstd 6
+	end
+
+Route21_North_EventScript_1ABA6D:: @ 81ABA6D
+	trainerbattle 0, 245, 0, Text_18843C, Text_18845F
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ABA94
+	loadword 0, Text_188465
+	callstd 6
+	end
+
+EventScript_1ABA94:: @ 81ABA94
+	trainerbattle 5, 245, 0, Text_1C3264, Text_18845F
+	loadword 0, Text_188465
+	callstd 6
+	end
+
+Route21_South_EventScript_1ABAAB:: @ 81ABAAB
+	trainerbattle 0, 246, 0, Text_1884D4, Text_1884F0
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ABAD2
+	loadword 0, Text_1884FF
+	callstd 6
+	end
+
+EventScript_1ABAD2:: @ 81ABAD2
+	trainerbattle 5, 246, 0, Text_1C3298, Text_1884F0
+	loadword 0, Text_1884FF
+	callstd 6
+	end
+
+Route21_South_EventScript_1ABAE9:: @ 81ABAE9
+	trainerbattle 0, 247, 0, Text_18851F, Text_188543
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ABB10
+	loadword 0, Text_188555
+	callstd 6
+	end
+
+EventScript_1ABB10:: @ 81ABB10
+	trainerbattle 5, 247, 0, Text_1C32D3, Text_188543
+	loadword 0, Text_188555
+	callstd 6
+	end
+
+Route21_South_EventScript_1ABB27:: @ 81ABB27
+	trainerbattle 0, 248, 0, Text_188592, Text_1885B2
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ABB4E
+	loadword 0, Text_1885BF
+	callstd 6
+	end
+
+EventScript_1ABB4E:: @ 81ABB4E
+	trainerbattle 5, 248, 0, Text_1C32FD, Text_1885B2
+	loadword 0, Text_1885BF
+	callstd 6
+	end
+
+Route21_North_EventScript_1ABB65:: @ 81ABB65
+	trainerbattle 4, 491, 0, Text_1886E2, Text_188712, Text_18875E
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ABB90
+	loadword 0, Text_188734
+	callstd 6
+	end
+
+EventScript_1ABB90:: @ 81ABB90
+	trainerbattle 7, 491, 0, Text_1C3378, Text_188712, Text_18875E
+	loadword 0, Text_188734
+	callstd 6
+	end
+
+Route21_North_EventScript_1ABBAB:: @ 81ABBAB
+	trainerbattle 4, 491, 0, Text_1887B4, Text_1887F1, Text_188850
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ABBD6
+	loadword 0, Text_188812
+	callstd 6
+	end
+
+EventScript_1ABBD6:: @ 81ABBD6
+	trainerbattle 7, 491, 0, Text_1C33AE, Text_1887F1, Text_188850
+	loadword 0, Text_188812
+	callstd 6
+	end
+
+OneIsland_KindleRoad_EventScript_1ABBF1:: @ 81ABBF1
+	trainerbattle 0, 547, 0, Text_18961F, Text_18964D
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ABC18
+	loadword 0, Text_189657
+	callstd 6
+	end
+
+EventScript_1ABC18:: @ 81ABC18
+	trainerbattle 5, 547, 0, Text_1C37B5, Text_18964D
+	loadword 0, Text_189657
+	callstd 6
+	end
+
+OneIsland_KindleRoad_EventScript_1ABC2F:: @ 81ABC2F
+	trainerbattle 0, 548, 0, Text_18968C, Text_1896AC
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ABC56
+	loadword 0, Text_1896C1
+	callstd 6
+	end
+
+EventScript_1ABC56:: @ 81ABC56
+	trainerbattle 5, 548, 0, Text_1C37E7, Text_1896AC
+	loadword 0, Text_1896C1
+	callstd 6
+	end
+
+OneIsland_KindleRoad_EventScript_1ABC6D:: @ 81ABC6D
+	trainerbattle 0, 549, 0, Text_1896F9, Text_189728
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ABC94
+	loadword 0, Text_189740
+	callstd 6
+	end
+
+EventScript_1ABC94:: @ 81ABC94
+	trainerbattle 5, 549, 0, Text_1C3807, Text_189728
+	loadword 0, Text_189740
+	callstd 6
+	end
+
+OneIsland_KindleRoad_EventScript_1ABCAB:: @ 81ABCAB
+	trainerbattle 0, 550, 0, Text_189767, Text_1897A4
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ABCD2
+	loadword 0, Text_1897C5
+	callstd 6
+	end
+
+EventScript_1ABCD2:: @ 81ABCD2
+	trainerbattle 5, 550, 0, Text_1C3835, Text_1897A4
+	loadword 0, Text_1897C5
+	callstd 6
+	end
+
+OneIsland_KindleRoad_EventScript_1ABCE9:: @ 81ABCE9
+	trainerbattle 0, 551, 0, Text_1897FF, Text_189833
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ABD10
+	loadword 0, Text_18984B
+	callstd 6
+	end
+
+EventScript_1ABD10:: @ 81ABD10
+	trainerbattle 5, 551, 0, Text_1C386A, Text_189833
+	loadword 0, Text_18984B
+	callstd 6
+	end
+
+OneIsland_KindleRoad_EventScript_1ABD27:: @ 81ABD27
+	trainerbattle 0, 518, 0, Text_189883, Text_1898AB
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ABD4E
+	loadword 0, Text_1898C4
+	callstd 6
+	end
+
+EventScript_1ABD4E:: @ 81ABD4E
+	trainerbattle 5, 518, 0, Text_1C389F, Text_1898AB
+	loadword 0, Text_1898C4
+	callstd 6
+	end
+
+OneIsland_KindleRoad_EventScript_1ABD65:: @ 81ABD65
+	trainerbattle 0, 552, 0, Text_1898F0, Text_18991B
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ABD8C
+	loadword 0, Text_18992C
+	callstd 6
+	end
+
+EventScript_1ABD8C:: @ 81ABD8C
+	trainerbattle 5, 552, 0, Text_1C38CA, Text_18991B
+	loadword 0, Text_18992C
+	callstd 6
+	end
+
+OneIsland_KindleRoad_EventScript_1ABDA3:: @ 81ABDA3
+	trainerbattle 0, 553, 0, Text_189950, Text_18998C
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ABDCA
+	loadword 0, Text_189998
+	callstd 6
+	end
+
+EventScript_1ABDCA:: @ 81ABDCA
+	trainerbattle 5, 553, 0, Text_1C38FA, Text_18998C
+	loadword 0, Text_189998
+	callstd 6
+	end
+
+OneIsland_KindleRoad_EventScript_1ABDE1:: @ 81ABDE1
+	trainerbattle 0, 554, 0, Text_1899CE, Text_189A0A
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ABE08
+	loadword 0, Text_189A13
+	callstd 6
+	end
+
+EventScript_1ABE08:: @ 81ABE08
+	trainerbattle 5, 554, 0, Text_1C3943, Text_189A0A
+	loadword 0, Text_189A13
+	callstd 6
+	end
+
+OneIsland_KindleRoad_EventScript_1ABE1F:: @ 81ABE1F
+	trainerbattle 0, 555, 0, Text_189A53, Text_189A92
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ABE46
+	loadword 0, Text_189A9F
+	callstd 6
+	end
+
+EventScript_1ABE46:: @ 81ABE46
+	trainerbattle 5, 555, 0, Text_1C3987, Text_189A92
+	loadword 0, Text_189A9F
+	callstd 6
+	end
+
+OneIsland_KindleRoad_EventScript_1ABE5D:: @ 81ABE5D
+	trainerbattle 0, 556, 0, Text_189ACB, Text_189B0B
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ABE84
+	loadword 0, Text_189B24
+	callstd 6
+	end
+
+EventScript_1ABE84:: @ 81ABE84
+	trainerbattle 5, 556, 0, Text_1C39C6, Text_189B0B
+	loadword 0, Text_189B24
+	callstd 6
+	end
+
+OneIsland_KindleRoad_EventScript_1ABE9B:: @ 81ABE9B
+	trainerbattle 4, 557, 0, Text_189B4D, Text_189B84, Text_189BDE
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ABEC6
+	loadword 0, Text_189BA3
+	callstd 6
+	end
+
+EventScript_1ABEC6:: @ 81ABEC6
+	trainerbattle 7, 557, 0, Text_1C3A05, Text_189B84, Text_189BDE
+	loadword 0, Text_189BA3
+	callstd 6
+	end
+
+OneIsland_KindleRoad_EventScript_1ABEE1:: @ 81ABEE1
+	trainerbattle 4, 557, 0, Text_189C33, Text_189C62, Text_189CAB
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ABF0C
+	loadword 0, Text_189C7E
+	callstd 6
+	end
+
+EventScript_1ABF0C:: @ 81ABF0C
+	trainerbattle 7, 557, 0, Text_1C3A55, Text_189C62, Text_189CAB
+	loadword 0, Text_189C7E
+	callstd 6
+	end
+
+OneIsland_TreasureBeach_EventScript_1ABF27:: @ 81ABF27
+	trainerbattle 0, 546, 0, Text_189D5A, Text_189D8B
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ABF4E
+	loadword 0, Text_189DA3
+	callstd 6
+	end
+
+EventScript_1ABF4E:: @ 81ABF4E
+	trainerbattle 5, 546, 0, Text_1C3773, Text_189D8B
+	loadword 0, Text_189DA3
+	callstd 6
+	end
+
+ThreeIsland_BondBridge_EventScript_1ABF65:: @ 81ABF65
+	trainerbattle 0, 523, 0, Text_189E42, Text_189E72
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ABF8C
+	loadword 0, Text_189E9E
+	callstd 6
+	end
+
+EventScript_1ABF8C:: @ 81ABF8C
+	trainerbattle 5, 523, 0, Text_1C3AA7, Text_189E72
+	loadword 0, Text_189E9E
+	callstd 6
+	end
+
+ThreeIsland_BondBridge_EventScript_1ABFA3:: @ 81ABFA3
+	trainerbattle 0, 558, 0, Text_189ED4, Text_189EFA
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ABFCA
+	loadword 0, Text_189F21
+	callstd 6
+	end
+
+EventScript_1ABFCA:: @ 81ABFCA
+	trainerbattle 5, 558, 0, Text_1C3ABF, Text_189EFA
+	loadword 0, Text_189F21
+	callstd 6
+	end
+
+ThreeIsland_BondBridge_EventScript_1ABFE1:: @ 81ABFE1
+	trainerbattle 0, 519, 0, Text_189F63, Text_189F9A
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC008
+	loadword 0, Text_189FA8
+	callstd 6
+	end
+
+EventScript_1AC008:: @ 81AC008
+	trainerbattle 5, 519, 0, Text_1C3AF2, Text_189F9A
+	loadword 0, Text_189FA8
+	callstd 6
+	end
+
+ThreeIsland_BondBridge_EventScript_1AC01F:: @ 81AC01F
+	trainerbattle 0, 559, 0, Text_189FDB, Text_189FEE
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC046
+	loadword 0, Text_18A000
+	callstd 6
+	end
+
+EventScript_1AC046:: @ 81AC046
+	trainerbattle 5, 559, 0, Text_1C3B1D, Text_189FEE
+	loadword 0, Text_18A000
+	callstd 6
+	end
+
+ThreeIsland_BondBridge_EventScript_1AC05D:: @ 81AC05D
+	trainerbattle 0, 561, 0, Text_18A01F, Text_18A053
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC084
+	loadword 0, Text_18A082
+	callstd 6
+	end
+
+EventScript_1AC084:: @ 81AC084
+	trainerbattle 5, 561, 0, Text_1C3B30, Text_18A053
+	loadword 0, Text_18A082
+	callstd 6
+	end
+
+ThreeIsland_BondBridge_EventScript_1AC09B:: @ 81AC09B
+	trainerbattle 4, 560, 0, Text_18A0C4, Text_18A0F7, Text_18A138
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC0C6
+	loadword 0, Text_18A106
+	callstd 6
+	end
+
+EventScript_1AC0C6:: @ 81AC0C6
+	trainerbattle 7, 560, 0, Text_1C3B6E, Text_18A0F7, Text_18A138
+	loadword 0, Text_18A106
+	callstd 6
+	end
+
+ThreeIsland_BondBridge_EventScript_1AC0E1:: @ 81AC0E1
+	trainerbattle 4, 560, 0, Text_18A179, Text_18A1A3, Text_18A1CD
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC10C
+	loadword 0, Text_18A1B2
+	callstd 6
+	end
+
+EventScript_1AC10C:: @ 81AC10C
+	trainerbattle 7, 560, 0, Text_1C3B99, Text_18A1A3, Text_18A1CD
+	loadword 0, Text_18A1B2
+	callstd 6
+	end
+
+FiveIsland_ResortGorgeous_EventScript_1AC127:: @ 81AC127
+	trainerbattle 0, 526, 0, Text_18A3E2, Text_18A40E
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC14E
+	loadword 0, Text_18A430
+	callstd 6
+	end
+
+EventScript_1AC14E:: @ 81AC14E
+	trainerbattle 5, 526, 0, Text_1C3BF6, Text_18A40E
+	loadword 0, Text_18A430
+	callstd 6
+	end
+
+FiveIsland_ResortGorgeous_EventScript_1AC165:: @ 81AC165
+	trainerbattle 0, 562, 0, Text_18A461, Text_18A49E
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC18C
+	loadword 0, Text_18A4C6
+	callstd 6
+	end
+
+EventScript_1AC18C:: @ 81AC18C
+	trainerbattle 5, 562, 0, Text_1C3C28, Text_18A49E
+	loadword 0, Text_18A4C6
+	callstd 6
+	end
+
+FiveIsland_ResortGorgeous_EventScript_1AC1A3:: @ 81AC1A3
+	trainerbattle 0, 563, 0, Text_18A50E, Text_18A535
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC1CA
+	loadword 0, Text_18A555
+	callstd 6
+	end
+
+EventScript_1AC1CA:: @ 81AC1CA
+	trainerbattle 5, 563, 0, Text_1C3C70, Text_18A535
+	loadword 0, Text_18A555
+	callstd 6
+	end
+
+FiveIsland_ResortGorgeous_EventScript_1AC1E1:: @ 81AC1E1
+	trainerbattle 0, 525, 0, Text_18A5B9, Text_18A5EE
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC208
+	loadword 0, Text_18A601
+	callstd 6
+	end
+
+EventScript_1AC208:: @ 81AC208
+	trainerbattle 5, 525, 0, Text_1C3CB0, Text_18A5EE
+	loadword 0, Text_18A601
+	callstd 6
+	end
+
+FiveIsland_ResortGorgeous_EventScript_1AC21F:: @ 81AC21F
+	trainerbattle 0, 564, 0, Text_18A645, Text_18A67F
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC246
+	loadword 0, Text_18A699
+	callstd 6
+	end
+
+EventScript_1AC246:: @ 81AC246
+	trainerbattle 5, 564, 0, Text_1C3CF1, Text_18A67F
+	loadword 0, Text_18A699
+	callstd 6
+	end
+
+FiveIsland_ResortGorgeous_EventScript_1AC25D:: @ 81AC25D
+	trainerbattle 0, 565, 0, Text_18A6DA, Text_18A6FE
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC284
+	loadword 0, Text_18A715
+	callstd 6
+	end
+
+EventScript_1AC284:: @ 81AC284
+	trainerbattle 5, 565, 0, Text_1C3D47, Text_18A6FE
+	loadword 0, Text_18A715
+	callstd 6
+	end
+
+FiveIsland_ResortGorgeous_EventScript_1AC29B:: @ 81AC29B
+	trainerbattle 0, 566, 0, Text_18A74A, Text_18A786
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC2C2
+	loadword 0, Text_18A7AC
+	callstd 6
+	end
+
+EventScript_1AC2C2:: @ 81AC2C2
+	trainerbattle 5, 566, 0, Text_1C3D73, Text_18A786
+	loadword 0, Text_18A7AC
+	callstd 6
+	end
+
+FiveIsland_WaterLabyrinth_EventScript_1AC2D9:: @ 81AC2D9
+	trainerbattle 0, 520, 0, Text_18AAD5, Text_18AB0B
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC300
+	loadword 0, Text_18AB37
+	callstd 6
+	end
+
+EventScript_1AC300:: @ 81AC300
+	trainerbattle 5, 520, 0, Text_1C3BB7, Text_18AB0B
+	loadword 0, Text_18AB37
+	callstd 6
+	end
+
+FiveIsland_MemorialPillar_EventScript_1AC317:: @ 81AC317
+	trainerbattle 0, 570, 0, Text_18AE50, Text_18AEA8
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC33E
+	loadword 0, Text_18AEB6
+	callstd 6
+	end
+
+EventScript_1AC33E:: @ 81AC33E
+	trainerbattle 5, 570, 0, Text_1C3DA2, Text_18AEA8
+	loadword 0, Text_18AEB6
+	callstd 6
+	end
+
+FiveIsland_MemorialPillar_EventScript_1AC355:: @ 81AC355
+	trainerbattle 0, 571, 0, Text_18AEDC, Text_18AF39
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC37C
+	loadword 0, Text_18AF45
+	callstd 6
+	end
+
+EventScript_1AC37C:: @ 81AC37C
+	trainerbattle 5, 571, 0, Text_1C3E0F, Text_18AF39
+	loadword 0, Text_18AF45
+	callstd 6
+	end
+
+FiveIsland_MemorialPillar_EventScript_1AC393:: @ 81AC393
+	trainerbattle 0, 572, 0, Text_18AF72, Text_18AFCC
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC3BA
+	loadword 0, Text_18AFF2
+	callstd 6
+	end
+
+EventScript_1AC3BA:: @ 81AC3BA
+	trainerbattle 5, 572, 0, Text_1C3E6A, Text_18AFCC
+	loadword 0, Text_18AFF2
+	callstd 6
+	end
+
+SixIsland_OutcastIsland_EventScript_1AC3D1:: @ 81AC3D1
+	trainerbattle 0, 573, 0, Text_18B400, Text_18B43B
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC3F8
+	loadword 0, Text_18B451
+	callstd 6
+	end
+
+EventScript_1AC3F8:: @ 81AC3F8
+	trainerbattle 5, 573, 0, Text_1C3ED0, Text_18B43B
+	loadword 0, Text_18B451
+	callstd 6
+	end
+
+SixIsland_OutcastIsland_EventScript_1AC40F:: @ 81AC40F
+	trainerbattle 0, 574, 0, Text_18B48F, Text_18B4C5
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC436
+	loadword 0, Text_18B4D1
+	callstd 6
+	end
+
+EventScript_1AC436:: @ 81AC436
+	trainerbattle 5, 574, 0, Text_1C3F11, Text_18B4C5
+	loadword 0, Text_18B4D1
+	callstd 6
+	end
+
+SixIsland_OutcastIsland_EventScript_1AC44D:: @ 81AC44D
+	trainerbattle 0, 575, 0, Text_18B4FA, Text_18B539
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC474
+	loadword 0, Text_18B573
+	callstd 6
+	end
+
+EventScript_1AC474:: @ 81AC474
+	trainerbattle 5, 575, 0, Text_1C3F51, Text_18B539
+	loadword 0, Text_18B573
+	callstd 6
+	end
+
+SixIsland_OutcastIsland_EventScript_1AC48B:: @ 81AC48B
+	trainerbattle 4, 576, 0, Text_18B5C8, Text_18B5F4, Text_18B660
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC4B6
+	loadword 0, Text_18B62E
+	callstd 6
+	end
+
+EventScript_1AC4B6:: @ 81AC4B6
+	trainerbattle 7, 576, 0, Text_1C3F7B, Text_18B5F4, Text_18B660
+	loadword 0, Text_18B62E
+	callstd 6
+	end
+
+SixIsland_OutcastIsland_EventScript_1AC4D1:: @ 81AC4D1
+	trainerbattle 4, 576, 0, Text_18B6C1, Text_18B6EF, Text_18B762
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC4FC
+	loadword 0, Text_18B720
+	callstd 6
+	end
+
+EventScript_1AC4FC:: @ 81AC4FC
+	trainerbattle 7, 576, 0, Text_1C3FB3, Text_18B6EF, Text_18B762
+	loadword 0, Text_18B720
+	callstd 6
+	end
+
+SixIsland_GreenPath_EventScript_1AC517:: @ 81AC517
+	trainerbattle 0, 517, 0, Text_18B7B0, Text_18B7F0
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC53E
+	loadword 0, Text_18B7FD
+	callstd 6
+	end
+
+EventScript_1AC53E:: @ 81AC53E
+	trainerbattle 5, 517, 0, Text_1C3FE9, Text_18B7F0
+	loadword 0, Text_18B7FD
+	callstd 6
+	end
+
+SixIsland_WaterPath_EventScript_1AC555:: @ 81AC555
+	trainerbattle 0, 577, 0, Text_18B896, Text_18B8C8
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC57C
+	loadword 0, Text_18B8F7
+	callstd 6
+	end
+
+EventScript_1AC57C:: @ 81AC57C
+	trainerbattle 5, 577, 0, Text_1C4028, Text_18B8C8
+	loadword 0, Text_18B8F7
+	callstd 6
+	end
+
+SixIsland_WaterPath_EventScript_1AC593:: @ 81AC593
+	trainerbattle 0, 291, 0, Text_18B959, Text_18B988
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC5BA
+	loadword 0, Text_18B9A5
+	callstd 6
+	end
+
+EventScript_1AC5BA:: @ 81AC5BA
+	trainerbattle 5, 291, 0, Text_1C4057, Text_18B988
+	loadword 0, Text_18B9A5
+	callstd 6
+	end
+
+SixIsland_WaterPath_EventScript_1AC5D1:: @ 81AC5D1
+	trainerbattle 0, 578, 0, Text_18B9EC, Text_18BA47
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC5F8
+	loadword 0, Text_18BA57
+	callstd 6
+	end
+
+EventScript_1AC5F8:: @ 81AC5F8
+	trainerbattle 5, 578, 0, Text_1C407F, Text_18BA47
+	loadword 0, Text_18BA57
+	callstd 6
+	end
+
+SixIsland_WaterPath_EventScript_1AC60F:: @ 81AC60F
+	trainerbattle 0, 579, 0, Text_18BA86, Text_18BAC0
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC636
+	loadword 0, Text_18BAE0
+	callstd 6
+	end
+
+EventScript_1AC636:: @ 81AC636
+	trainerbattle 5, 579, 0, Text_1C40D9, Text_18BAC0
+	loadword 0, Text_18BAE0
+	callstd 6
+	end
+
+SixIsland_WaterPath_EventScript_1AC64D:: @ 81AC64D
+	trainerbattle 4, 580, 0, Text_18BBBA, Text_18BBE2, Text_18BC24
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC678
+	loadword 0, Text_18BBF6
+	callstd 6
+	end
+
+EventScript_1AC678:: @ 81AC678
+	trainerbattle 7, 580, 0, Text_1C4138, Text_18BBE2, Text_18BC24
+	loadword 0, Text_18BBF6
+	callstd 6
+	end
+
+SixIsland_WaterPath_EventScript_1AC693:: @ 81AC693
+	trainerbattle 4, 580, 0, Text_18BC5A, Text_18BC84, Text_18BCCF
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC6BE
+	loadword 0, Text_18BCAE
+	callstd 6
+	end
+
+EventScript_1AC6BE:: @ 81AC6BE
+	trainerbattle 7, 580, 0, Text_1C4166, Text_18BC84, Text_18BCCF
+	loadword 0, Text_18BCAE
+	callstd 6
+	end
+
+SixIsland_WaterPath_EventScript_1AC6D9:: @ 81AC6D9
+	trainerbattle 0, 581, 0, Text_18BB2D, Text_18BB62
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC700
+	loadword 0, Text_18BB8B
+	callstd 6
+	end
+
+EventScript_1AC700:: @ 81AC700
+	trainerbattle 5, 581, 0, Text_1C40FA, Text_18BB62
+	loadword 0, Text_18BB8B
+	callstd 6
+	end
+
+SixIsland_RuinValley_EventScript_1AC717:: @ 81AC717
+	trainerbattle 0, 524, 0, Text_18BE5D, Text_18BE9B
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC73E
+	loadword 0, Text_18BEA0
+	callstd 6
+	end
+
+EventScript_1AC73E:: @ 81AC73E
+	trainerbattle 5, 524, 0, Text_1C4196, Text_18BE9B
+	loadword 0, Text_18BEA0
+	callstd 6
+	end
+
+SixIsland_RuinValley_EventScript_1AC755:: @ 81AC755
+	trainerbattle 0, 582, 0, Text_18BF05, Text_18BF33
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC77C
+	loadword 0, Text_18BF6C
+	callstd 6
+	end
+
+EventScript_1AC77C:: @ 81AC77C
+	trainerbattle 5, 582, 0, Text_1C41D4, Text_18BF33
+	loadword 0, Text_18BF6C
+	callstd 6
+	end
+
+SixIsland_RuinValley_EventScript_1AC793:: @ 81AC793
+	trainerbattle 0, 583, 0, Text_18BFC5, Text_18C03B
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC7BA
+	loadword 0, Text_18C04C
+	callstd 6
+	end
+
+EventScript_1AC7BA:: @ 81AC7BA
+	trainerbattle 5, 583, 0, Text_1C4210, Text_18C03B
+	loadword 0, Text_18C04C
+	callstd 6
+	end
+
+SixIsland_RuinValley_EventScript_1AC7D1:: @ 81AC7D1
+	trainerbattle 0, 584, 0, Text_18C09C, Text_18C0BB
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC7F8
+	loadword 0, Text_18C0EA
+	callstd 6
+	end
+
+EventScript_1AC7F8:: @ 81AC7F8
+	trainerbattle 5, 584, 0, Text_1C4280, Text_18C0BB
+	loadword 0, Text_18C0EA
+	callstd 6
+	end
+
+SixIsland_RuinValley_EventScript_1AC80F:: @ 81AC80F
+	trainerbattle 0, 585, 0, Text_18C10A, Text_18C140
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC836
+	loadword 0, Text_18C17A
+	callstd 6
+	end
+
+EventScript_1AC836:: @ 81AC836
+	trainerbattle 5, 585, 0, Text_1C42A0, Text_18C140
+	loadword 0, Text_18C17A
+	callstd 6
+	end
+
+SevenIsland_TrainerTower_EventScript_1AC84D:: @ 81AC84D
+	trainerbattle 0, 586, 0, Text_18C1ED, Text_18C205
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC874
+	loadword 0, Text_18C20E
+	callstd 6
+	end
+
+EventScript_1AC874:: @ 81AC874
+	trainerbattle 5, 586, 0, Text_1C42D6, Text_18C205
+	loadword 0, Text_18C20E
+	callstd 6
+	end
+
+SevenIsland_TrainerTower_EventScript_1AC88B:: @ 81AC88B
+	trainerbattle 0, 587, 0, Text_18C283, Text_18C2BC
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC8B2
+	loadword 0, Text_18C2D5
+	callstd 6
+	end
+
+EventScript_1AC8B2:: @ 81AC8B2
+	trainerbattle 5, 587, 0, Text_1C42EE, Text_18C2BC
+	loadword 0, Text_18C2D5
+	callstd 6
+	end
+
+SevenIsland_SevaultCanyon_Entrance_EventScript_1AC8C9:: @ 81AC8C9
+	trainerbattle 0, 588, 0, Text_18C3BC, Text_18C3E7
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC8F0
+	loadword 0, Text_18C3FF
+	callstd 6
+	end
+
+EventScript_1AC8F0:: @ 81AC8F0
+	trainerbattle 5, 588, 0, Text_1C4327, Text_18C3E7
+	loadword 0, Text_18C3FF
+	callstd 6
+	end
+
+SevenIsland_SevaultCanyon_Entrance_EventScript_1AC907:: @ 81AC907
+	trainerbattle 4, 589, 0, Text_18C632, Text_18C662, Text_18C6AB
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC932
+	loadword 0, Text_18C683
+	callstd 6
+	end
+
+EventScript_1AC932:: @ 81AC932
+	trainerbattle 7, 589, 0, Text_1C4416, Text_18C662, Text_18C6AB
+	loadword 0, Text_18C683
+	callstd 6
+	end
+
+SevenIsland_SevaultCanyon_Entrance_EventScript_1AC94D:: @ 81AC94D
+	trainerbattle 4, 589, 0, Text_18C700, Text_18C73B, Text_18C7BD
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC978
+	loadword 0, Text_18C773
+	callstd 6
+	end
+
+EventScript_1AC978:: @ 81AC978
+	trainerbattle 7, 589, 0, Text_1C444C, Text_18C73B, Text_18C7BD
+	loadword 0, Text_18C773
+	callstd 6
+	end
+
+SevenIsland_SevaultCanyon_Entrance_EventScript_1AC993:: @ 81AC993
+	trainerbattle 0, 590, 0, Text_18C44B, Text_18C473
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC9BA
+	loadword 0, Text_18C4BA
+	callstd 6
+	end
+
+EventScript_1AC9BA:: @ 81AC9BA
+	trainerbattle 5, 590, 0, Text_1C4374, Text_18C473
+	loadword 0, Text_18C4BA
+	callstd 6
+	end
+
+SevenIsland_SevaultCanyon_Entrance_EventScript_1AC9D1:: @ 81AC9D1
+	trainerbattle 0, 521, 0, Text_18C500, Text_18C543
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1AC9F8
+	loadword 0, Text_18C54B
+	callstd 6
+	end
+
+EventScript_1AC9F8:: @ 81AC9F8
+	trainerbattle 5, 521, 0, Text_1C43AD, Text_18C543
+	loadword 0, Text_18C54B
+	callstd 6
+	end
+
+SevenIsland_SevaultCanyon_Entrance_EventScript_1ACA0F:: @ 81ACA0F
+	trainerbattle 0, 522, 0, Text_18C5AA, Text_18C5CD
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ACA36
+	loadword 0, Text_18C5F5
+	callstd 6
+	end
+
+EventScript_1ACA36:: @ 81ACA36
+	trainerbattle 5, 522, 0, Text_1C43EC, Text_18C5CD
+	loadword 0, Text_18C5F5
+	callstd 6
+	end
+
+SevenIsland_SevaultCanyon_EventScript_1ACA4D:: @ 81ACA4D
+	trainerbattle 0, 591, 0, Text_18C887, Text_18C8A6
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ACA74
+	loadword 0, Text_18C8C2
+	callstd 6
+	end
+
+EventScript_1ACA74:: @ 81ACA74
+	trainerbattle 5, 591, 0, Text_1C4491, Text_18C8A6
+	loadword 0, Text_18C8C2
+	callstd 6
+	end
+
+SevenIsland_SevaultCanyon_EventScript_1ACA8B:: @ 81ACA8B
+	trainerbattle 0, 593, 0, Text_18C8FD, Text_18C980
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ACAB2
+	loadword 0, Text_18C999
+	callstd 6
+	end
+
+EventScript_1ACAB2:: @ 81ACAB2
+	trainerbattle 5, 593, 0, Text_1C44CB, Text_18C980
+	loadword 0, Text_18C999
+	callstd 6
+	end
+
+SevenIsland_SevaultCanyon_EventScript_1ACAC9:: @ 81ACAC9
+	trainerbattle 0, 596, 0, Text_18CA2F, Text_18CA6F
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ACAF0
+	loadword 0, Text_18CA9C
+	callstd 6
+	end
+
+EventScript_1ACAF0:: @ 81ACAF0
+	trainerbattle 5, 596, 0, Text_1C454E, Text_18CA6F
+	loadword 0, Text_18CA9C
+	callstd 6
+	end
+
+SevenIsland_SevaultCanyon_EventScript_1ACB07:: @ 81ACB07
+	trainerbattle 0, 598, 0, Text_18CB16, Text_18CB3E
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ACB2E
+	loadword 0, Text_18CB6C
+	callstd 6
+	end
+
+EventScript_1ACB2E:: @ 81ACB2E
+	trainerbattle 5, 598, 0, Text_1C458E, Text_18CB3E
+	loadword 0, Text_18CB6C
+	callstd 6
+	end
+
+SevenIsland_SevaultCanyon_EventScript_1ACB45:: @ 81ACB45
+	trainerbattle 0, 599, 0, Text_18CBB4, Text_18CBE0
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ACB6C
+	loadword 0, Text_18CC09
+	callstd 6
+	end
+
+EventScript_1ACB6C:: @ 81ACB6C
+	trainerbattle 5, 599, 0, Text_1C45C2, Text_18CBE0
+	loadword 0, Text_18CC09
+	callstd 6
+	end
+
+SevenIsland_SevaultCanyon_EventScript_1ACB83:: @ 81ACB83
+	trainerbattle 0, 600, 0, Text_18CC4F, Text_18CCAE
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ACBAA
+	loadword 0, Text_18CCEA
+	callstd 6
+	end
+
+EventScript_1ACBAA:: @ 81ACBAA
+	trainerbattle 5, 600, 0, Text_1C45FB, Text_18CCAE
+	loadword 0, Text_18CCEA
+	callstd 6
+	end
+
+SevenIsland_SevaultCanyon_EventScript_1ACBC1:: @ 81ACBC1
+	trainerbattle 4, 601, 0, Text_18CD49, Text_18CD75, Text_18CDE2
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ACBEC
+	loadword 0, Text_18CD9C
+	callstd 6
+	end
+
+EventScript_1ACBEC:: @ 81ACBEC
+	trainerbattle 7, 601, 0, Text_1C4662, Text_18CD75, Text_18CDE2
+	loadword 0, Text_18CD9C
+	callstd 6
+	end
+
+SevenIsland_SevaultCanyon_EventScript_1ACC07:: @ 81ACC07
+	trainerbattle 4, 601, 0, Text_18CE20, Text_18CE5A, Text_18CEF4
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ACC32
+	loadword 0, Text_18CE78
+	callstd 6
+	end
+
+EventScript_1ACC32:: @ 81ACC32
+	trainerbattle 7, 601, 0, Text_1C4699, Text_18CE5A, Text_18CEF4
+	loadword 0, Text_18CE78
+	callstd 6
+	end
+
+SevenIsland_TanobyRuins_EventScript_1ACC4D:: @ 81ACC4D
+	trainerbattle 0, 602, 0, Text_18CFFB, Text_18D02A
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ACC74
+	loadword 0, Text_18D061
+	callstd 6
+	end
+
+EventScript_1ACC74:: @ 81ACC74
+	trainerbattle 5, 602, 0, Text_1C46D3, Text_18D02A
+	loadword 0, Text_18D061
+	callstd 6
+	end
+
+SevenIsland_TanobyRuins_EventScript_1ACC8B:: @ 81ACC8B
+	trainerbattle 0, 603, 0, Text_18D0D9, Text_18D108
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ACCB2
+	loadword 0, Text_18D125
+	callstd 6
+	end
+
+EventScript_1ACCB2:: @ 81ACCB2
+	trainerbattle 5, 603, 0, Text_1C470A, Text_18D108
+	loadword 0, Text_18D125
+	callstd 6
+	end
+
+SevenIsland_TanobyRuins_EventScript_1ACCC9:: @ 81ACCC9
+	trainerbattle 0, 604, 0, Text_18D18F, Text_18D1B5
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ACCF0
+	loadword 0, Text_18D1E3
+	callstd 6
+	end
+
+EventScript_1ACCF0:: @ 81ACCF0
+	trainerbattle 5, 604, 0, Text_1C4739, Text_18D1B5
+	loadword 0, Text_18D1E3
+	callstd 6
+	end
+
+SevenIsland_TanobyRuins_EventScript_1ACD07:: @ 81ACD07
+	trainerbattle 0, 605, 0, Text_18D22F, Text_18D26D
+	specialvar VAR_RESULT, sub_810CD4C
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1ACD2E
+	loadword 0, Text_18D284
+	callstd 6
+	end
+
+EventScript_1ACD2E:: @ 81ACD2E
+	trainerbattle 5, 605, 0, Text_1C476A, Text_18D26D
+	loadword 0, Text_18D284
+	callstd 6
+	end
+
+@ Test message!
+@ Welcome to the world of Pokémon!
+Text_1ACD45:: @ 81ACD45
+	.string "テストよう　メッセージです！\n"
+	.string "ポケモンの　せかいへ　ようこそ！$"
+
+ViridianCity_House2_EventScript_1ACD65:: @ 81ACD65
+	lock
+	faceplayer
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, 3
+	special SetFlavorTextFlagFromSpecialVars
+	setvar VAR_0x8004, 1
+	setvar VAR_0x8005, 3
+	special SetFlavorTextFlagFromSpecialVars
+	textcolor 3
+	loadword 0, gUnknown_81B1AB9
+	callstd 4
+	release
+	end
+
+EventScript_1ACD8D:: @ 81ACD8D
+	lock
+	faceplayer
+	setvar VAR_0x8004, 1
+	setvar VAR_0x8005, 1
+	special SetFlavorTextFlagFromSpecialVars
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, 4
+	special SetFlavorTextFlagFromSpecialVars
+	textcolor 3
+	loadword 0, gUnknown_81B1AB9
+	callstd 4
+	release
+	end
+
+EventScript_1ACDB5:: @ 81ACDB5
+	lock
+	faceplayer
+	setvar VAR_0x8004, 1
+	setvar VAR_0x8005, 4
+	special SetFlavorTextFlagFromSpecialVars
+	textcolor 3
+	loadword 0, gUnknown_81B1AB9
+	callstd 4
+	release
+	end
+
+FourIsland_PokemonCenter_1F_EventScript_1ACDD0:: @ 81ACDD0
+	lockall
+	setvar VAR_0x8004, 1
+	setvar VAR_0x8005, 5
+	special SetFlavorTextFlagFromSpecialVars
+	textcolor 3
+	loadword 0, gUnknown_81B1B3D
+	callstd 4
+	releaseall
+	end
+
+Route4_EventScript_1ACDEA:: @ 81ACDEA
+	lock
+	faceplayer
+	setvar VAR_0x8004, 2
+	setvar VAR_0x8005, 3
+	special SetFlavorTextFlagFromSpecialVars
+	loadword 0, Text_183D26
+	callstd 4
+	release
+	end
+
+MtMoon_1F_EventScript_1ACE03:: @ 81ACE03
+	lock
+	faceplayer
+	setvar VAR_0x8004, 2
+	setvar VAR_0x8005, 4
+	special SetFlavorTextFlagFromSpecialVars
+	loadword 0, Text_172B00
+	callstd 4
+	release
+	end
+
+PewterCity_Museum_1F_EventScript_1ACE1C:: @ 81ACE1C
+	lockall
+	setvar VAR_0x8004, 2
+	setvar VAR_0x8005, 5
+	special SetFlavorTextFlagFromSpecialVars
+	textcolor 3
+	loadword 0, gUnknown_81B146A
+	callstd 4
+	releaseall
+	end
+
+Route20_EventScript_1ACE36:: @ 81ACE36
+	lock
+	faceplayer
+	setvar VAR_0x8004, 3
+	setvar VAR_0x8005, 3
+	special SetFlavorTextFlagFromSpecialVars
+	loadword 0, Text_1882E1
+	callstd 4
+	release
+	end
+
+Route25_EventScript_1ACE4F:: @ 81ACE4F
+	lock
+	faceplayer
+	setvar VAR_0x8004, 3
+	setvar VAR_0x8005, 4
+	special SetFlavorTextFlagFromSpecialVars
+	loadword 0, Text_189569
+	callstd 4
+	release
+	end
+
+CeruleanCity_PokemonCenter_1F_EventScript_1ACE68:: @ 81ACE68
+	lock
+	faceplayer
+	setvar VAR_0x8004, 3
+	setvar VAR_0x8005, 5
+	special SetFlavorTextFlagFromSpecialVars
+	textcolor 3
+	loadword 0, gUnknown_81B14E8
+	callstd 4
+	release
+	end
+
+VermilionCity_PokemonCenter_1F_EventScript_1ACE83:: @ 81ACE83
+	lockall
+	setvar VAR_0x8004, 4
+	setvar VAR_0x8005, 5
+	special SetFlavorTextFlagFromSpecialVars
+	textcolor 3
+	loadword 0, gUnknown_81B1558
+	callstd 4
+	releaseall
+	end
+
+CeladonCity_Condominiums_2F_EventScript_1ACE9D:: @ 81ACE9D
+	lock
+	faceplayer
+	setvar VAR_0x8004, 5
+	setvar VAR_0x8005, 5
+	special SetFlavorTextFlagFromSpecialVars
+	textcolor 3
+	loadword 0, gUnknown_81B161B
+	callstd 4
+	release
+	end
+
+FuchsiaCity_Building1_EventScript_1ACEB8:: @ 81ACEB8
+	lock
+	faceplayer
+	setvar VAR_0x8004, 6
+	setvar VAR_0x8005, 4
+	special SetFlavorTextFlagFromSpecialVars
+	textcolor 3
+	loadword 0, gUnknown_81B16A8
+	callstd 4
+	release
+	end
+
+SafariZone_Building3_EventScript_1ACED3:: @ 81ACED3
+	lock
+	faceplayer
+	setvar VAR_0x8004, 6
+	setvar VAR_0x8005, 5
+	special SetFlavorTextFlagFromSpecialVars
+	loadword 0, Text_177C47
+	callstd 4
+	release
+	end
+
+SaffronCity_PokemonCenter_1F_EventScript_1ACEEC:: @ 81ACEEC
+	lock
+	faceplayer
+	setvar VAR_0x8004, 7
+	setvar VAR_0x8005, 4
+	special SetFlavorTextFlagFromSpecialVars
+	textcolor 3
+	loadword 0, gUnknown_81B1753
+	callstd 4
+	release
+	end
+
+CinnabarIsland_Gym_EventScript_1ACF07:: @ 81ACF07
+	lockall
+	setvar VAR_0x8004, 8
+	setvar VAR_0x8005, 4
+	special SetFlavorTextFlagFromSpecialVars
+	setvar VAR_0x8004, 14
+	setvar VAR_0x8005, 4
+	special SetFlavorTextFlagFromSpecialVars
+	loadword 0, Text_199E8A
+	callstd 4
+	releaseall
+	end
+
+FiveIsland_ResortGorgeous_House_EventScript_1ACF2C:: @ 81ACF2C
+	lockall
+	setvar VAR_0x8004, 8
+	setvar VAR_0x8005, 5
+	special SetFlavorTextFlagFromSpecialVars
+	textcolor 3
+	loadword 0, gUnknown_81B17E9
+	callstd 4
+	releaseall
+	end
+
+FourIsland_Mart_EventScript_1ACF46:: @ 81ACF46
+	lock
+	faceplayer
+	setvar VAR_0x8004, 9
+	setvar VAR_0x8005, 2
+	special SetFlavorTextFlagFromSpecialVars
+	loadword 0, Text_1A3A60
+	callstd 4
+	release
+	end
+
+FiveIsland_PokemonCenter_1F_EventScript_1ACF5F:: @ 81ACF5F
+	lock
+	faceplayer
+	setvar VAR_0x8004, 9
+	setvar VAR_0x8005, 3
+	special SetFlavorTextFlagFromSpecialVars
+	textcolor 3
+	loadword 0, gUnknown_81B187F
+	callstd 4
+	release
+	end
+
+SaffronCity_PokemonTrainerFanClub_EventScript_1ACF7A:: @ 81ACF7A
+	lock
+	faceplayer
+	setvar VAR_0x8004, 10
+	setvar VAR_0x8005, 2
+	special SetFlavorTextFlagFromSpecialVars
+	textcolor 3
+	loadword 0, gUnknown_81B1913
+	callstd 4
+	release
+	end
+
+SevenIsland_SevaultCanyon_EventScript_1ACF95:: @ 81ACF95
+	lock
+	faceplayer
+	setvar VAR_0x8004, 10
+	setvar VAR_0x8005, 5
+	special SetFlavorTextFlagFromSpecialVars
+	loadword 0, Text_18CF4D
+	callstd 4
+	release
+	end
+
+IndigoPlateau_PokemonCenter_1F_EventScript_1ACFAE:: @ 81ACFAE
+	lock
+	faceplayer
+	setvar VAR_0x8004, 11
+	setvar VAR_0x8005, 1
+	special SetFlavorTextFlagFromSpecialVars
+	setvar VAR_0x8004, 11
+	setvar VAR_0x8005, 2
+	special SetFlavorTextFlagFromSpecialVars
+	loadword 0, Text_19A9E7
+	callstd 4
+	release
+	end
+
+SevenIsland_PokemonCenter_1F_EventScript_1ACFD4:: @ 81ACFD4
+	lock
+	faceplayer
+	setvar VAR_0x8004, 11
+	setvar VAR_0x8005, 3
+	special SetFlavorTextFlagFromSpecialVars
+	textcolor 3
+	loadword 0, gUnknown_81B19A8
+	callstd 4
+	release
+	end
+
+SixIsland_Mart_EventScript_1ACFEF:: @ 81ACFEF
+	lock
+	faceplayer
+	setvar VAR_0x8004, 11
+	setvar VAR_0x8005, 5
+	special SetFlavorTextFlagFromSpecialVars
+	loadword 0, Text_1A41CA
+	callstd 4
+	release
+	end
+
+EventScript_1AD008:: @ 81AD008
+	lock
+	faceplayer
+	setvar VAR_0x8004, 12
+	setvar VAR_0x8005, 0
+	special SetFlavorTextFlagFromSpecialVars
+	loadword 0, gFameCheckerFlavorText_Lance0
+	callstd 4
+	release
+	end
+
+EventScript_1AD021:: @ 81AD021
+	lock
+	faceplayer
+	setvar VAR_0x8004, 12
+	setvar VAR_0x8005, 1
+	special SetFlavorTextFlagFromSpecialVars
+	loadword 0, Text_181569
+	callstd 4
+	release
+	end
+
+SaffronCity_EventScript_1AD03A:: @ 81AD03A
+	lock
+	faceplayer
+	setvar VAR_0x8004, 12
+	setvar VAR_0x8005, 2
+	special SetFlavorTextFlagFromSpecialVars
+	loadword 0, Text_181569
+	callstd 4
+	release
+	end
+
+CeladonCity_DepartmentStore_2F_EventScript_1AD053:: @ 81AD053
+	lock
+	faceplayer
+	setvar VAR_0x8004, 12
+	setvar VAR_0x8005, 3
+	special SetFlavorTextFlagFromSpecialVars
+	loadword 0, Text_19566B
+	callstd 4
+	release
+	end
+
+IndigoPlateau_PokemonCenter_1F_EventScript_1AD06C:: @ 81AD06C
+	lock
+	faceplayer
+	setvar VAR_0x8004, 12
+	setvar VAR_0x8005, 4
+	special SetFlavorTextFlagFromSpecialVars
+	textcolor 3
+	loadword 0, gUnknown_81B1A31
+	callstd 4
+	release
+	end
+
+IndigoPlateau_PokemonCenter_1F_EventScript_1AD087:: @ 81AD087
+	lock
+	faceplayer
+	setvar VAR_0x8004, 12
+	setvar VAR_0x8005, 5
+	special SetFlavorTextFlagFromSpecialVars
+	loadword 0, Text_19AB16
+	callstd 4
+	release
+	end
+
+LavenderTown_PokemonCenter_1F_EventScript_1AD0A0:: @ 81AD0A0
+	lock
+	faceplayer
+	setvar VAR_0x8004, 14
+	setvar VAR_0x8005, 3
+	special SetFlavorTextFlagFromSpecialVars
+	loadword 0, Text_19358E
+	callstd 4
+	release
+	end
+
+CinnabarIsland_PokemonCenter_1F_EventScript_1AD0B9:: @ 81AD0B9
+	lock
+	faceplayer
+	setvar VAR_0x8004, 14
+	setvar VAR_0x8005, 5
+	special SetFlavorTextFlagFromSpecialVars
+	textcolor 3
+	loadword 0, gUnknown_81B1BD1
+	callstd 4
+	release
+	end
+
+SilphCo_5F_EventScript_1AD0D4:: @ 81AD0D4
+	lock
+	faceplayer
+	setvar VAR_0x8004, 15
+	setvar VAR_0x8005, 1
+	special SetFlavorTextFlagFromSpecialVars
+	loadword 0, Text_175E99
+	callstd 4
+	release
+	end
+SilphCo_8F_EventScript_1AD0ED:: @ 81AD0ED
+	lock
+	faceplayer
+	setvar VAR_0x8004, 15
+	setvar VAR_0x8005, 2
+	special SetFlavorTextFlagFromSpecialVars
+	loadword 0, Text_176ACB
+	callstd 4
+	release
+	end
+
+	.include "data/text/fame_checker.inc"
+
+CeladonCity_GameCorner_EventScript_1B2867:: @ 81B2867
+	lockall
+	showmoneybox 0, 0, 0
+	loadword 0, gUnknown_81B1D7D
+	callstd 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1B2926
+	checkmoney 50, 0
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1B292B
+	playse SE_SHOP
+	takemoney 50, 0
+	updatemoneybox 0, 0, 0
+	waitse
+	message gUnknown_81B1E24
+	waitmessage
+	multichoice 21, 0, 2, 1
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1B28DB
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1B28E6
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1B28F1
+	compare_var_to_value VAR_0x8000, 3
+	goto_if 1, EventScript_1B28FC
+	end
+
+EventScript_1B28DB:: @ 81B28DB
+	setvar VAR_0x8004, 0
+	goto EventScript_1B2907
+
+EventScript_1B28E5:: @ 81B28E5
+	end
+
+EventScript_1B28E6:: @ 81B28E6
+	setvar VAR_0x8004, 1
+	goto EventScript_1B2907
+
+EventScript_1B28F0:: @ 81B28F0
+	end
+
+EventScript_1B28F1:: @ 81B28F1
+	setvar VAR_0x8004, 2
+	goto EventScript_1B2907
+
+EventScript_1B28FB:: @ 81B28FB
+	end
+
+EventScript_1B28FC:: @ 81B28FC
+	setvar VAR_0x8004, 3
+	goto EventScript_1B2907
+
+EventScript_1B2906:: @ 81B2906
+	end
+
+EventScript_1B2907:: @ 81B2907
+	message gUnknown_81B1E42
+	waitmessage
+	playse MUS_ME_PHOTO
+	dofieldeffect 69
+	delay 60
+	special sub_80CC2BC
+	loadword 0, gUnknown_81B1E7D
+	callstd 4
+	hidemoneybox
+	nop
+	nop
+	releaseall
+	end
+
+EventScript_1B2926:: @ 81B2926
+	hidemoneybox
+	nop
+	nop
+	releaseall
+	end
+
+EventScript_1B292B:: @ 81B292B
+	loadword 0, gUnknown_81B1E07
+	callstd 4
+	hidemoneybox
+	nop
+	nop
+	releaseall
+	end
+
+FourIsland_House2_EventScript_1B2938:: @ 81B2938
+	lock
+	specialvar VAR_0x8008, sub_80CC3CC
+	checkflag FLAG_0x290
+	goto_if 0, EventScript_1B2951
+	checkflag FLAG_0x290
+	goto_if 1, EventScript_1B2994
+	end
+
+EventScript_1B2951:: @ 81B2951
+	setflag FLAG_0x290
+	loadword 0, gUnknown_81B1EB3
+	callstd 4
+	applymovement 1, Movement_1A75E1
+	waitmovement 0
+	playse SE_PIN
+	applymovement 1, Movement_1A75DB
+	waitmovement 0
+	applymovement 1, Movement_1A75DD
+	waitmovement 0
+	compare_var_to_value VAR_0x8008, 0
+	goto_if 1, EventScript_1B2B8E
+	message gUnknown_81B1EF8
+	waitmessage
+	goto EventScript_1B29D0
+
+EventScript_1B2993:: @ 81B2993
+	end
+
+EventScript_1B2994:: @ 81B2994
+	applymovement 1, Movement_1A75E1
+	waitmovement 0
+	special sub_8110AB4
+	compare_var_to_value VAR_RESULT, 2
+	goto_if 1, EventScript_1A7AE0
+	special sub_8112364
+	compare_var_to_value VAR_0x8008, 0
+	goto_if 1, EventScript_1B29C6
+	message gUnknown_81B2025
+	waitmessage
+	goto EventScript_1B29D0
+
+EventScript_1B29C5:: @ 81B29C5
+	end
+
+EventScript_1B29C6:: @ 81B29C6
+	loadword 0, gUnknown_81B1FEF
+	callstd 4
+	release
+	end
+
+EventScript_1B29D0:: @ 81B29D0
+	copyvar VAR_0x8000, VAR_0x8008
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1B2A23
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1B2A4F
+	compare_var_to_value VAR_0x8000, 4
+	goto_if 1, EventScript_1B2A7B
+	compare_var_to_value VAR_0x8000, 3
+	goto_if 1, EventScript_1B2AA7
+	compare_var_to_value VAR_0x8000, 5
+	goto_if 1, EventScript_1B2ADE
+	compare_var_to_value VAR_0x8000, 6
+	goto_if 1, EventScript_1B2B15
+	compare_var_to_value VAR_0x8000, 7
+	goto_if 1, EventScript_1B2B4C
+	end
+
+EventScript_1B2A23:: @ 81B2A23
+	multichoice 15, 8, 3, 0
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1B2B98
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1B2DF6
+	compare_var_to_value VAR_0x8000, 127
+	goto_if 1, EventScript_1B2DF6
+	end
+
+EventScript_1B2A4F:: @ 81B2A4F
+	multichoice 16, 8, 4, 0
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1B2C62
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1B2DF6
+	compare_var_to_value VAR_0x8000, 127
+	goto_if 1, EventScript_1B2DF6
+	end
+
+EventScript_1B2A7B:: @ 81B2A7B
+	multichoice 15, 8, 5, 0
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1B2D2C
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1B2DF6
+	compare_var_to_value VAR_0x8000, 127
+	goto_if 1, EventScript_1B2DF6
+	end
+
+EventScript_1B2AA7:: @ 81B2AA7
+	multichoice 15, 6, 6, 0
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1B2B98
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1B2C62
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1B2DF6
+	compare_var_to_value VAR_0x8000, 127
+	goto_if 1, EventScript_1B2DF6
+	end
+
+EventScript_1B2ADE:: @ 81B2ADE
+	multichoice 15, 6, 7, 0
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1B2B98
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1B2D2C
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1B2DF6
+	compare_var_to_value VAR_0x8000, 127
+	goto_if 1, EventScript_1B2DF6
+	end
+
+EventScript_1B2B15:: @ 81B2B15
+	multichoice 15, 6, 8, 0
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1B2C62
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1B2D2C
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1B2DF6
+	compare_var_to_value VAR_0x8000, 127
+	goto_if 1, EventScript_1B2DF6
+	end
+
+EventScript_1B2B4C:: @ 81B2B4C
+	multichoice 15, 5, 9, 0
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1B2B98
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1B2C62
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1B2D2C
+	compare_var_to_value VAR_0x8000, 3
+	goto_if 1, EventScript_1B2DF6
+	compare_var_to_value VAR_0x8000, 127
+	goto_if 1, EventScript_1B2DF6
+	end
+
+EventScript_1B2B8E:: @ 81B2B8E
+	loadword 0, gUnknown_81B1EF8
+	callstd 4
+	release
+	end
+
+EventScript_1B2B98:: @ 81B2B98
+	compare_var_to_value VAR_0x8004, 39
+	goto_if 3, EventScript_1B2BC5
+	compare_var_to_value VAR_0x8004, 99
+	goto_if 3, EventScript_1B2BE3
+	compare_var_to_value VAR_0x8004, 199
+	goto_if 3, EventScript_1B2C01
+	compare_var_to_value VAR_0x8004, 200
+	goto_if 4, EventScript_1B2C1F
+	end
+
+EventScript_1B2BC5:: @ 81B2BC5
+	compare_var_to_value VAR_BIRCH_STATE, 1
+	goto_if 1, EventScript_1B2C3D
+	setvar VAR_BIRCH_STATE, 1
+	loadword 0, gUnknown_81B206E
+	callstd 4
+	goto EventScript_1B2C51
+
+EventScript_1B2BE2:: @ 81B2BE2
+	end
+
+EventScript_1B2BE3:: @ 81B2BE3
+	compare_var_to_value VAR_BIRCH_STATE, 2
+	goto_if 1, EventScript_1B2C3D
+	setvar VAR_BIRCH_STATE, 2
+	loadword 0, gUnknown_81B20CF
+	callstd 4
+	goto EventScript_1B2C51
+
+EventScript_1B2C00:: @ 81B2C00
+	end
+
+EventScript_1B2C01:: @ 81B2C01
+	compare_var_to_value VAR_BIRCH_STATE, 3
+	goto_if 1, EventScript_1B2C3D
+	setvar VAR_BIRCH_STATE, 3
+	loadword 0, gUnknown_81B2133
+	callstd 4
+	goto EventScript_1B2C51
+
+EventScript_1B2C1E:: @ 81B2C1E
+	end
+
+EventScript_1B2C1F:: @ 81B2C1F
+	compare_var_to_value VAR_BIRCH_STATE, 4
+	goto_if 1, EventScript_1B2C47
+	setvar VAR_BIRCH_STATE, 4
+	loadword 0, gUnknown_81B21C4
+	callstd 4
+	goto EventScript_1B2C51
+
+EventScript_1B2C3C:: @ 81B2C3C
+	end
+
+EventScript_1B2C3D:: @ 81B2C3D
+	loadword 0, gUnknown_81B227C
+	callstd 4
+	release
+	end
+
+EventScript_1B2C47:: @ 81B2C47
+	loadword 0, gUnknown_81B22B0
+	callstd 4
+	release
+	end
+
+EventScript_1B2C51:: @ 81B2C51
+	textcolor 3
+	playfanfare MUS_FANFA1
+	message gUnknown_81B2242
+	waitmessage
+	waitfanfare
+	delay 90
+	release
+	end
+
+EventScript_1B2C62:: @ 81B2C62
+	compare_var_to_value VAR_0x8005, 99
+	goto_if 3, EventScript_1B2C8F
+	compare_var_to_value VAR_0x8005, 199
+	goto_if 3, EventScript_1B2CAD
+	compare_var_to_value VAR_0x8005, 299
+	goto_if 3, EventScript_1B2CCB
+	compare_var_to_value VAR_0x8005, 300
+	goto_if 4, EventScript_1B2CE9
+	end
+
+EventScript_1B2C8F:: @ 81B2C8F
+	compare_var_to_value VAR_CRUISE_STEP_COUNT, 1
+	goto_if 1, EventScript_1B2D07
+	setvar VAR_CRUISE_STEP_COUNT, 1
+	loadword 0, gUnknown_81B2308
+	callstd 4
+	goto EventScript_1B2D1B
+
+EventScript_1B2CAC:: @ 81B2CAC
+	end
+
+EventScript_1B2CAD:: @ 81B2CAD
+	compare_var_to_value VAR_CRUISE_STEP_COUNT, 2
+	goto_if 1, EventScript_1B2D07
+	setvar VAR_CRUISE_STEP_COUNT, 2
+	loadword 0, gUnknown_81B2372
+	callstd 4
+	goto EventScript_1B2D1B
+
+EventScript_1B2CCA:: @ 81B2CCA
+	end
+
+EventScript_1B2CCB:: @ 81B2CCB
+	compare_var_to_value VAR_CRUISE_STEP_COUNT, 3
+	goto_if 1, EventScript_1B2D07
+	setvar VAR_CRUISE_STEP_COUNT, 3
+	loadword 0, gUnknown_81B23E0
+	callstd 4
+	goto EventScript_1B2D1B
+
+EventScript_1B2CE8:: @ 81B2CE8
+	end
+
+EventScript_1B2CE9:: @ 81B2CE9
+	compare_var_to_value VAR_CRUISE_STEP_COUNT, 4
+	goto_if 1, EventScript_1B2D11
+	setvar VAR_CRUISE_STEP_COUNT, 4
+	loadword 0, gUnknown_81B2448
+	callstd 4
+	goto EventScript_1B2D1B
+
+EventScript_1B2D06:: @ 81B2D06
+	end
+
+EventScript_1B2D07:: @ 81B2D07
+	loadword 0, gUnknown_81B251B
+	callstd 4
+	release
+	end
+
+EventScript_1B2D11:: @ 81B2D11
+	loadword 0, gUnknown_81B254F
+	callstd 4
+	release
+	end
+
+EventScript_1B2D1B:: @ 81B2D1B
+	textcolor 3
+	playfanfare MUS_FANFA1
+	message gUnknown_81B24EA
+	waitmessage
+	waitfanfare
+	delay 90
+	release
+	end
+
+EventScript_1B2D2C:: @ 81B2D2C
+	compare_var_to_value VAR_0x8006, 19
+	goto_if 3, EventScript_1B2D59
+	compare_var_to_value VAR_0x8006, 49
+	goto_if 3, EventScript_1B2D77
+	compare_var_to_value VAR_0x8006, 99
+	goto_if 3, EventScript_1B2D95
+	compare_var_to_value VAR_0x8006, 100
+	goto_if 4, EventScript_1B2DB3
+	end
+
+EventScript_1B2D59:: @ 81B2D59
+	compare_var_to_value VAR_POKELOT_RND1, 1
+	goto_if 1, EventScript_1B2DD1
+	setvar VAR_POKELOT_RND1, 1
+	loadword 0, gUnknown_81B25A7
+	callstd 4
+	goto EventScript_1B2DE5
+
+EventScript_1B2D76:: @ 81B2D76
+	end
+
+EventScript_1B2D77:: @ 81B2D77
+	compare_var_to_value VAR_POKELOT_RND1, 2
+	goto_if 1, EventScript_1B2DD1
+	setvar VAR_POKELOT_RND1, 2
+	loadword 0, gUnknown_81B2609
+	callstd 4
+	goto EventScript_1B2DE5
+
+EventScript_1B2D94:: @ 81B2D94
+	end
+
+EventScript_1B2D95:: @ 81B2D95
+	compare_var_to_value VAR_POKELOT_RND1, 3
+	goto_if 1, EventScript_1B2DD1
+	setvar VAR_POKELOT_RND1, 3
+	loadword 0, gUnknown_81B267B
+	callstd 4
+	goto EventScript_1B2DE5
+
+EventScript_1B2DB2:: @ 81B2DB2
+	end
+
+EventScript_1B2DB3:: @ 81B2DB3
+	compare_var_to_value VAR_POKELOT_RND1, 4
+	goto_if 1, EventScript_1B2DDB
+	setvar VAR_POKELOT_RND1, 4
+	loadword 0, gUnknown_81B26F6
+	callstd 4
+	goto EventScript_1B2DE5
+
+EventScript_1B2DD0:: @ 81B2DD0
+	end
+
+EventScript_1B2DD1:: @ 81B2DD1
+	loadword 0, gUnknown_81B27DB
+	callstd 4
+	release
+	end
+
+EventScript_1B2DDB:: @ 81B2DDB
+	loadword 0, gUnknown_81B280F
+	callstd 4
+	release
+	end
+
+EventScript_1B2DE5:: @ 81B2DE5
+	textcolor 3
+	playfanfare MUS_FANFA1
+	message gUnknown_81B27A6
+	waitmessage
+	waitfanfare
+	delay 90
+	release
+	end
+
+EventScript_1B2DF6:: @ 81B2DF6
+	release
+	end
+
+	.include "data/text/help_system.inc"
+
+CeladonCity_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
+CeruleanCity_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
+CinnabarIsland_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
+FiveIsland_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
+FourIsland_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
+FuchsiaCity_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
+IndigoPlateau_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
+LavenderTown_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
+OneIsland_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
+PewterCity_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
+Route10_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
+Route4_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
+SaffronCity_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
+SevenIsland_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
+SixIsland_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
+ThreeIsland_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
+TwoIsland_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
+VermilionCity_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
+ViridianCity_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
+	call EventScript_1BB1BA
+	end
+
+EventScript_1BB1BA:: @ 81BB1BA
+	specialvar VAR_RESULT, ValidateReceivedWonderCard
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BB1CE
+	clearflag FLAG_0x070
+	return
+
+EventScript_1BB1CE:: @ 81BB1CE
+	setflag FLAG_0x070
+	return
+
+CeruleanCity_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
+CinnabarIsland_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
+FiveIsland_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
+FuchsiaCity_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
+OneIsland_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
+PewterCity_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
+SevenIsland_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
+VermilionCity_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
+FourIsland_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
+SixIsland_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
+ThreeIsland_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
+TwoIsland_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
+Route10_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
+Route10_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
+Route4_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
+SaffronCity_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
+IndigoPlateau_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
+CeladonCity_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
+LavenderTown_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
+ViridianCity_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
+	special sub_8110AB4
+	compare_var_to_value VAR_RESULT, 2
+	goto_if 1, EventScript_1A7AE0
+	special sub_8112364
+	execram
+
+EventScript_1BB1E4:: @ 81BB1E4
+	loadword 0, Text_1A6393
+	callstd 2
+	end
+
+CeladonCity_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
+CeruleanCity_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
+CinnabarIsland_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
+FiveIsland_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
+FourIsland_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
+FuchsiaCity_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
+IndigoPlateau_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
+LavenderTown_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
+OneIsland_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
+PewterCity_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
+Route10_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
+Route4_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
+SaffronCity_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
+SevenIsland_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
+SixIsland_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
+ThreeIsland_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
+TwoIsland_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
+VermilionCity_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
+ViridianCity_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
+	multichoice 64, 1, 0, 39
+	showelevmenu
+	compare_local_to_local 8, 111
+	setdivewarp MAP_NAVEL_ROCK_EXTERIOR, 39, 7090, 28424
+	setdivewarp MAP_VIRIDIAN_CITY_HOUSE1, 39, 7090, 28424
+	setdivewarp MAP_PALLET_TOWN, 39, 7090, 28424
+	setdivewarp MAP_PEWTER_CITY_MUSEUM_1F, 39, 7090, 28424
+	setdivewarp MAP_CERULEAN_CITY_HOUSE1, 39, 7090, 28424
+	setdivewarp MAP_LAVENDER_TOWN_POKEMON_CENTER_1F, 39, 7090, 8
+	nop
+
+EventScript_1BB227:: @ 81BB227
+	compare_var_to_value VAR_0x8007, 0
+	goto_if 1, EventScript_1BB236
+	turnobject VAR_0x8007, 3
+EventScript_1BB236:
+	end
+
+CeladonCity_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
+CeruleanCity_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
+CinnabarIsland_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
+FiveIsland_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
+FourIsland_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
+FuchsiaCity_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
+IndigoPlateau_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
+LavenderTown_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
+OneIsland_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
+PewterCity_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
+Route10_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
+Route4_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
+SaffronCity_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
+SevenIsland_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
+SixIsland_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
+ThreeIsland_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
+TwoIsland_JoyfulGameCorner_MapScript4_1BB237:: @ 81BB237
+TwoIsland_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
+VermilionCity_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
+ViridianCity_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
+	compare_var_to_value VAR_0x406F, 1
+	goto_if 1, EventScript_1BB285
+	compare_var_to_value VAR_0x406F, 2
+	goto_if 1, EventScript_1BB285
+	compare_var_to_value VAR_0x406F, 5
+	goto_if 1, EventScript_1BB285
+	compare_var_to_value VAR_0x406F, 3
+	goto_if 1, EventScript_1BB28B
+	compare_var_to_value VAR_0x406F, 6
+	goto_if 1, EventScript_1BB291
+	compare_var_to_value VAR_0x406F, 7
+	goto_if 1, EventScript_1BB297
+	compare_var_to_value VAR_0x406F, 8
+	goto_if 1, EventScript_1BB29D
+	end
+
+EventScript_1BB285:: @ 81BB285
+	call EventScript_1BC034
+	end
+
+EventScript_1BB28B:: @ 81BB28B
+	call EventScript_1BC034
+	end
+
+EventScript_1BB291:: @ 81BB291
+	call EventScript_1BC020
+	end
+
+EventScript_1BB297:: @ 81BB297
+	call EventScript_1BC034
+	end
+
+EventScript_1BB29D:: @ 81BB29D
+	call EventScript_1BC048
+	end
+
+CeladonCity_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
+CeruleanCity_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
+CinnabarIsland_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
+FiveIsland_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
+FourIsland_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
+FuchsiaCity_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
+IndigoPlateau_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
+LavenderTown_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
+OneIsland_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
+PewterCity_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
+Route10_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
+Route4_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
+SaffronCity_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
+SevenIsland_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
+SixIsland_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
+ThreeIsland_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
+TwoIsland_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
+VermilionCity_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
+ViridianCity_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
+	map_script_2 VAR_0x407C, 1, EventScript_1BB415
+	map_script_2 VAR_0x406F, 1, EventScript_1BB2E5
+	map_script_2 VAR_0x406F, 2, EventScript_1BB2E5
+	map_script_2 VAR_0x406F, 5, EventScript_1BB2E5
+	map_script_2 VAR_0x406F, 3, EventScript_1BB34F
+	map_script_2 VAR_0x406F, 6, EventScript_1BB39C
+	map_script_2 VAR_0x406F, 7, EventScript_1BB2E5
+	map_script_2 VAR_0x406F, 8, EventScript_1BB2FD
+	.2byte 0
+
+EventScript_1BB2E5:: @ 81BB2E5
+	lockall
+	call EventScript_1BB315
+	call EventScript_1BC03E
+	special DrawWholeMapView
+	playse SE_TK_KASYA
+	erasebox 0, 0, 29, 19
+	releaseall
+	end
+
+EventScript_1BB2FD:: @ 81BB2FD
+	lockall
+	call EventScript_1BB315
+	call EventScript_1BC052
+	special DrawWholeMapView
+	playse SE_TK_KASYA
+	erasebox 0, 0, 29, 19
+	releaseall
+	end
+
+EventScript_1BB315:: @ 81BB315
+	special CloseLink
+	special HelpSystem_Enable
+	special sub_811390C
+	setvar VAR_0x406F, 0
+	textcolor 1
+	compare_var_to_value VAR_0x8007, 0
+	goto_if 1, EventScript_1BB40A
+	applymovement VAR_0x8007, Movement_1BB88F
+	waitmovement 0
+	applymovement 255, Movement_1BB891
+	waitmovement 0
+	applymovement VAR_0x8007, Movement_1BB88B
+	waitmovement 0
+	return
+
+EventScript_1BB34F:: @ 81BB34F
+	lockall
+	call EventScript_1BB367
+	call EventScript_1BC03E
+	special DrawWholeMapView
+	playse SE_TK_KASYA
+	erasebox 0, 0, 29, 19
+	releaseall
+	end
+
+EventScript_1BB367:: @ 81BB367
+	special CloseLink
+	special HelpSystem_Enable
+	special sub_811390C
+	setvar VAR_0x406F, 0
+	textcolor 1
+	compare_var_to_value VAR_0x8007, 0
+	goto_if 1, EventScript_1BB40A
+	applymovement 255, Movement_1BB8A0
+	waitmovement 0
+	applymovement VAR_0x8007, Movement_1BB88F
+	waitmovement 0
+	call EventScript_1BB3E6
+	return
+
+EventScript_1BB39C:: @ 81BB39C
+	lockall
+	call EventScript_1BB3B4
+	call EventScript_1BC02A
+	special DrawWholeMapView
+	playse SE_TK_KASYA
+	erasebox 0, 0, 29, 19
+	releaseall
+	end
+
+EventScript_1BB3B4:: @ 81BB3B4
+	special HelpSystem_Enable
+	special sub_811390C
+	setvar VAR_0x406F, 0
+	textcolor 1
+	compare_var_to_value VAR_0x8007, 0
+	goto_if 1, EventScript_1BB40A
+	applymovement 255, Movement_1BB8A0
+	waitmovement 0
+	applymovement VAR_0x8007, Movement_1BB88F
+	waitmovement 0
+	call EventScript_1BB3E6
+	return
+
+EventScript_1BB3E6:: @ 81BB3E6
+	message Text_1BC918
+	waitmessage
+	playse SE_PIN
+	message Text_1BC943
+	waitmessage
+	applymovement 255, Movement_1BB891
+	waitmovement 0
+	applymovement VAR_0x8007, Movement_1BB88B
+	waitmovement 0
+	return
+
+EventScript_1BB40A:: @ 81BB40A
+	applymovement 255, Movement_1BB891
+	waitmovement 0
+	return
+
+EventScript_1BB415:: @ 81BB415
+	lockall
+	textcolor 1
+	applymovement 255, Movement_1A75E9
+	waitmovement 0
+	loadword 0, gUnknown_81BD898
+	callstd 4
+	closemessage
+	applymovement 255, Movement_1BB447
+	waitmovement 0
+	delay 30
+	loadword 0, gUnknown_81BD966
+	callstd 4
+	setvar VAR_0x407C, 2
+	releaseall
+	end
+
+Movement_1BB447:: @ 81BB447
+	step_11
+	step_11
+	step_end
+
+EventScript_1BB44A:: @ 81BB44A
+	message gUnknown_81BC311
+	waitmessage
+	delay 15
+	goto EventScript_1BB467
+	end
+
+EventScript_1BB459:: @ 81BB459
+	loadword 0, gUnknown_81BC35E
+	callstd 4
+	goto EventScript_1BB467
+	end
+
+EventScript_1BB467:: @ 81BB467
+	setvar VAR_0x8004, 0
+	multichoice 0, 0, 39, 0
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1BB6AB
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1BB4A3
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1BB82F
+	compare_var_to_value VAR_0x8000, 127
+	goto_if 1, EventScript_1BB82F
+	end
+
+EventScript_1BB4A3:: @ 81BB4A3
+	copyvar VAR_0x8007, VAR_LAST_TALKED
+	goto EventScript_1BB4AE
+
+EventScript_1BB4AD:: @ 81BB4AD
+	end
+
+EventScript_1BB4AE:: @ 81BB4AE
+	message Text_1BD338
+	waitmessage
+	multichoice 0, 0, 17, 0
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1BB50F
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1BB51A
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1BB541
+	compare_var_to_value VAR_0x8000, 3
+	goto_if 1, EventScript_1BB501
+	compare_var_to_value VAR_0x8000, 4
+	goto_if 1, EventScript_1BB82F
+	compare_var_to_value VAR_0x8000, 127
+	goto_if 1, EventScript_1BB82F
+	end
+
+EventScript_1BB501:: @ 81BB501
+	loadword 0, gUnknown_81BD390
+	callstd 4
+	goto EventScript_1BB4AE
+
+EventScript_1BB50E:: @ 81BB50E
+	end
+
+EventScript_1BB50F:: @ 81BB50F
+	setvar VAR_0x8004, 1
+	goto EventScript_1BB54C
+
+EventScript_1BB519:: @ 81BB519
+	end
+
+EventScript_1BB51A:: @ 81BB51A
+	special CheckForAlivePartyMons
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 5, EventScript_1BB533
+	setvar VAR_0x8004, 2
+	goto EventScript_1BB54C
+
+EventScript_1BB532:: @ 81BB532
+	end
+
+EventScript_1BB533:: @ 81BB533
+	loadword 0, gUnknown_81BC409
+	callstd 4
+	goto EventScript_1BB4AE
+
+EventScript_1BB540:: @ 81BB540
+	end
+
+EventScript_1BB541:: @ 81BB541
+	setvar VAR_0x8004, 5
+	goto EventScript_1BB54C
+
+EventScript_1BB54B:: @ 81BB54B
+	end
+
+EventScript_1BB54C:: @ 81BB54C
+	call EventScript_1A4EAF
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BB82F
+	message gUnknown_81BC4AC
+	waitmessage
+	special HelpSystem_Disable
+	textcolor 3
+	special sub_8081064
+	waitstate
+	call EventScript_1A6675
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1BB5B3
+	compare_var_to_value VAR_RESULT, 2
+	goto_if 1, EventScript_1BB80F
+	compare_var_to_value VAR_RESULT, 3
+	goto_if 1, EventScript_1BB81F
+	compare_var_to_value VAR_RESULT, 4
+	goto_if 1, EventScript_1BB63C
+	compare_var_to_value VAR_RESULT, 5
+	goto_if 1, EventScript_1BB82F
+	compare_var_to_value VAR_RESULT, 6
+	goto_if 1, EventScript_1BB7FF
+	end
+
+EventScript_1BB5B3:: @ 81BB5B3
+	special sp000_heal_pokemon
+	special SavePlayerParty
+	special LoadPlayerBag
+	copyvar VAR_0x406F, VAR_0x8004
+	messageautoscroll Text_1BC590
+	waitmessage
+	call EventScript_1BC034
+	special DrawWholeMapView
+	playse SE_TK_KASYA
+	delay 60
+	applymovement VAR_LAST_TALKED, Movement_1BB88F
+	waitmovement 0
+	closemessage
+	applymovement 255, Movement_1BB898
+	waitmovement 0
+	opendoor 9, 1
+	waitdooranim
+	applymovement 255, Movement_1BB89C
+	waitmovement 0
+	hideobject 255, MAP_UNKNOWN_MAP_00_00
+	closedoor 9, 1
+	waitdooranim
+	release
+	compare_var_to_value VAR_0x8004, 5
+	goto_if 1, EventScript_1BB62C
+	special SetCableClubWarp
+	warp MAP_UNKNOWN_MAP_00_00, 255, 6, 8
+	special sub_807E654
+	waitstate
+	end
+
+EventScript_1BB621:: @ 81BB621
+	applymovement 255, Movement_1BB894
+	waitmovement 0
+	return
+
+EventScript_1BB62C:: @ 81BB62C
+	special SetCableClubWarp
+	warp MAP_UNKNOWN_MAP_00_03, 255, 5, 8
+	special sub_807E654
+	waitstate
+	end
+
+EventScript_1BB63C:: @ 81BB63C
+	copyvar VAR_0x8000, VAR_0x8004
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1BB68A
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1BB679
+	compare_var_to_value VAR_0x8000, 5
+	goto_if 1, EventScript_1BB668
+	goto EventScript_1BB857
+
+EventScript_1BB667:: @ 81BB667
+	end
+
+EventScript_1BB668:: @ 81BB668
+	special CloseLink
+	loadword 0, gUnknown_81BC736
+	callstd 4
+	goto EventScript_1BB69B
+
+EventScript_1BB678:: @ 81BB678
+	end
+
+EventScript_1BB679:: @ 81BB679
+	special CloseLink
+	loadword 0, gUnknown_81BC700
+	callstd 4
+	goto EventScript_1BB69B
+
+EventScript_1BB689:: @ 81BB689
+	end
+
+EventScript_1BB68A:: @ 81BB68A
+	special CloseLink
+	loadword 0, gUnknown_81BC6CA
+	callstd 4
+	goto EventScript_1BB69B
+
+EventScript_1BB69A:: @ 81BB69A
+	end
+
+EventScript_1BB69B:: @ 81BB69B
+	special CloseLink
+	special HelpSystem_Enable
+	loadword 0, gUnknown_81BC76B
+	callstd 4
+	release
+	end
+
+EventScript_1BB6AB:: @ 81BB6AB
+	copyvar VAR_0x8007, VAR_LAST_TALKED
+	call EventScript_1BB79C
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BB82F
+	call EventScript_1A4EAF
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BB82F
+	message gUnknown_81BC4AC
+	waitmessage
+	special HelpSystem_Disable
+	textcolor 3
+	special sub_80810CC
+	waitstate
+	call EventScript_1A6675
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1BB73D
+	compare_var_to_value VAR_RESULT, 2
+	goto_if 1, EventScript_1BB80F
+	compare_var_to_value VAR_RESULT, 3
+	goto_if 1, EventScript_1BB81F
+	compare_var_to_value VAR_RESULT, 4
+	goto_if 1, EventScript_1BB857
+	compare_var_to_value VAR_RESULT, 5
+	goto_if 1, EventScript_1BB82F
+	compare_var_to_value VAR_RESULT, 6
+	goto_if 1, EventScript_1BB7FF
+	compare_var_to_value VAR_RESULT, 7
+	goto_if 1, EventScript_1BB7DF
+	compare_var_to_value VAR_RESULT, 9
+	goto_if 1, EventScript_1BB7EF
+	end
+
+EventScript_1BB73D:: @ 81BB73D
+	setvar VAR_0x8004, 3
+	copyvar VAR_0x406F, VAR_0x8004
+	messageautoscroll Text_1BC590
+	waitmessage
+	call EventScript_1BC034
+	special DrawWholeMapView
+	playse SE_TK_KASYA
+	delay 60
+	applymovement VAR_LAST_TALKED, Movement_1BB88F
+	waitmovement 0
+	closemessage
+	applymovement 255, Movement_1BB898
+	waitmovement 0
+	opendoor 9, 1
+	waitdooranim
+	applymovement 255, Movement_1BB89C
+	waitmovement 0
+	hideobject 255, MAP_UNKNOWN_MAP_00_00
+	closedoor 9, 1
+	waitdooranim
+	release
+	special SetCableClubWarp
+	setwarp MAP_UNKNOWN_MAP_00_01, 255, 5, 8
+	special sub_807E654
+	waitstate
+	end
+
+EventScript_1BB79C:: @ 81BB79C
+	specialvar VAR_RESULT, CalculatePlayerPartyCount
+	compare_var_to_value VAR_RESULT, 2
+	goto_if 0, EventScript_1BB7C2
+	specialvar VAR_RESULT, GetNameOfEnigmaBerryInPlayerParty
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1BB7D0
+	setvar VAR_RESULT, 1
+	return
+
+EventScript_1BB7C2:: @ 81BB7C2
+	loadword 0, gUnknown_81BC442
+	callstd 4
+	setvar VAR_RESULT, 0
+	return
+
+EventScript_1BB7D0:: @ 81BB7D0
+	loadword 0, gUnknown_81BC47C
+	callstd 4
+	setvar VAR_RESULT, 0
+	return
+
+EventScript_1BB7DE:: @ 81BB7DE
+	end
+
+EventScript_1BB7DF:: @ 81BB7DF
+	special CloseLink
+	special HelpSystem_Enable
+	loadword 0, gUnknown_81BC95C
+	callstd 4
+	release
+	end
+
+EventScript_1BB7EF:: @ 81BB7EF
+	special CloseLink
+	special HelpSystem_Enable
+	loadword 0, gUnknown_81BC9C0
+	callstd 4
+	release
+	end
+
+EventScript_1BB7FF:: @ 81BB7FF
+	special CloseLink
+	special HelpSystem_Enable
+	loadword 0, gUnknown_81BC615
+	callstd 4
+	release
+	end
+
+EventScript_1BB80F:: @ 81BB80F
+	special CloseLink
+	special HelpSystem_Enable
+	loadword 0, gUnknown_81BC5C0
+	callstd 4
+	release
+	end
+
+EventScript_1BB81F:: @ 81BB81F
+	special CloseLink
+	special HelpSystem_Enable
+	loadword 0, gUnknown_81BC64E
+	callstd 4
+	release
+	end
+
+EventScript_1BB82F:: @ 81BB82F
+	special CloseLink
+	special HelpSystem_Enable
+	loadword 0, gUnknown_81BC68A
+	callstd 4
+	release
+	end
+
+EventScript_1BB83F:: @ 81BB83F
+	special CloseLink
+	special HelpSystem_Enable
+	loadword 0, gUnknown_81BCFD1
+	callstd 4
+	release
+	end
+
+EventScript_1BB84F:: @ 81BB84F
+	special SetCableClubWarp
+	special sub_807E654
+	waitstate
+	end
+
+EventScript_1BB857:: @ 81BB857
+	special CloseLink
+	special HelpSystem_Enable
+	loadword 0, gUnknown_81BC6A1
+	callstd 4
+	release
+	end
+
+EventScript_1BB867:: @ 81BB867
+	special CloseLink
+	special HelpSystem_Enable
+	loadword 0, gUnknown_81BC9E0
+	callstd 4
+	release
+	end
+
+EventScript_1BB877:: @ 81BB877
+	loadword 0, Text_1A561A
+	callstd 4
+	release
+	end
+
+EventScript_1BB881:: @ 81BB881
+	loadword 0, Text_1A5667
+	callstd 4
+	releaseall
+	end
+
+Movement_1BB88B:: @ 81BB88B
+	step_00
+	step_end
+
+Movement_1BB88D:: @ 81BB88D
+	step_03
+	step_end
+
+Movement_1BB88F:: @ 81BB88F
+	step_02
+	step_end
+
+Movement_1BB891:: @ 81BB891
+	step_10
+	step_10
+	step_end
+
+Movement_1BB894:: @ 81BB894
+	step_13
+	step_11
+	step_11
+	step_end
+
+Movement_1BB898:: @ 81BB898
+	step_12
+	step_11
+	step_11
+	step_end
+
+Movement_1BB89C:: @ 81BB89C
+	step_11
+	step_end
+
+Movement_1BB89E:: @ 81BB89E
+	step_02
+	step_end
+
+Movement_1BB8A0:: @ 81BB8A0
+	step_03
+	step_end
+
+Movement_1BB8A2:: @ 81BB8A2
+	step_12
+	step_11
+	step_11
+	step_11
+	step_end
+
+gUnknown_81BB8A7:: @ 81BB8A7
+	special sub_8110AB4
+	compare_var_to_value VAR_RESULT, 2
+	goto_if 1, EventScript_1A7AE0
+	lockall
+	fadescreen 1
+	setvar VAR_0x8004, 0
+	special Special_BattleRecords
+	waitstate
+	releaseall
+	end
+
+gUnknown_81BB8C3:: @ 81BB8C3
+UnknownMap_00_00_EventScript_1BB8C3:: @ 81BB8C3
+	setvar VAR_0x8005, 0
+	textcolor 3
+	special sub_80819C8
+	waitstate
+	end
+
+gUnknown_81BB8CF:: @ 81BB8CF
+UnknownMap_00_00_EventScript_1BB8CF:: @ 81BB8CF
+	setvar VAR_0x8005, 1
+	textcolor 3
+	special sub_80819C8
+	waitstate
+	end
+
+gUnknown_81BB8DB:: @ 81BB8DB
+UnknownMap_00_03_EventScript_1BB8DB:: @ 81BB8DB
+	fadescreen 1
+	special sub_80A0334
+	waitstate
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BB94F
+	setvar VAR_0x8005, 0
+	textcolor 3
+	special sub_80819C8
+	waitstate
+	end
+
+gUnknown_81BB8F8:: @ 81BB8F8
+UnknownMap_00_03_EventScript_1BB8F8:: @ 81BB8F8
+	fadescreen 1
+	special sub_80A0334
+	waitstate
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BB94F
+	setvar VAR_0x8005, 1
+	textcolor 3
+	special sub_80819C8
+	waitstate
+	end
+
+gUnknown_81BB915:: @ 81BB915
+UnknownMap_00_03_EventScript_1BB915:: @ 81BB915
+	fadescreen 1
+	special sub_80A0334
+	waitstate
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BB94F
+	setvar VAR_0x8005, 2
+	textcolor 3
+	special sub_80819C8
+	waitstate
+	end
+
+gUnknown_81BB932:: @ 81BB932
+UnknownMap_00_03_EventScript_1BB932:: @ 81BB932
+	fadescreen 1
+	special sub_80A0334
+	waitstate
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BB94F
+	setvar VAR_0x8005, 3
+	textcolor 3
+	special sub_80819C8
+	waitstate
+	end
+
+EventScript_1BB94F:: @ 81BB94F
+	end
+
+gUnknown_81BB950:: @ 81BB950
+UnknownMap_00_01_EventScript_1BB950:: @ 81BB950
+	setvar VAR_0x8005, 0
+	textcolor 3
+	special sub_8081978
+	waitstate
+	end
+
+gUnknown_81BB95C:: @ 81BB95C
+UnknownMap_00_01_EventScript_1BB95C:: @ 81BB95C
+	setvar VAR_0x8005, 1
+	textcolor 3
+	special sub_8081978
+	waitstate
+	end
+
+EventScript_1BB968:: @ 81BB968
+	setvar VAR_0x8005, 2
+	textcolor 3
+	special sub_8081978
+	waitstate
+	end
+
+EventScript_1BB974:: @ 81BB974
+	setvar VAR_0x8005, 3
+	textcolor 3
+	special sub_8081978
+	waitstate
+	end
+
+gUnknown_81BB980:: @ 81BB980
+UnknownMap_00_02_EventScript_1BB980:: @ 81BB980
+	end
+
+gUnknown_81BB981:: @ 81BB981
+	textcolor 3
+	loadword 0, gUnknown_81BC84B
+	callstd 4
+	fadescreen 1
+	special sp02A_crash_sound
+	waitstate
+	end
+
+gUnknown_81BB992:: @ 81BB992
+	textcolor 3
+	loadword 0, gUnknown_81BC874
+	callstd 4
+	fadescreen 1
+	special sp02A_crash_sound
+	waitstate
+	end
+
+gUnknown_81BB9A3:: @ 81BB9A3
+	textcolor 3
+	loadword 0, gUnknown_81BC827
+	callstd 4
+	closemessage
+	end
+
+UnknownMap_00_00_EventScript_1BB9AF:: @ 81BB9AF
+	textcolor 3
+	special sub_8069740
+	loadword 0, gUnknown_81BC8AD
+	callstd 4
+	special sub_8069768
+	closemessage
+	end
+
+UnknownMap_00_01_EventScript_1BB9C1:: @ 81BB9C1
+	textcolor 3
+	special sub_8069740
+	loadword 0, gUnknown_81BC8DA
+	callstd 4
+	special sub_8069768
+	closemessage
+	end
+
+UnknownMap_00_02_EventScript_1BB9D3:: @ 81BB9D3
+	end
+
+gUnknown_81BB9D4:: @ 81BB9D4
+	textcolor 3
+	loadword 0, gUnknown_81BC7A1
+	callstd 5
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1BB9F0
+	erasebox 0, 0, 29, 19
+	releaseall
+	end
+
+EventScript_1BB9F0:: @ 81BB9F0
+	textcolor 3
+	messageautoscroll Text_1BC7E2
+	waitmessage
+	special sub_8081770
+	end
+
+gUnknown_81BB9FC:: @ 81BB9FC
+	special sub_8081744
+	special sub_807E704
+	waitstate
+	end
+
+EventScript_1BBA04:: @ 81BBA04
+	special sub_8110AB4
+	compare_var_to_value VAR_RESULT, 2
+	goto_if 1, EventScript_1A7AE0
+	special sub_8112364
+	lock
+	faceplayer
+	checkflag FLAG_0x829
+	goto_if 0, EventScript_1BB877
+	specialvar VAR_RESULT, sub_80CD034
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1BB867
+	copyvar VAR_0x8007, VAR_LAST_TALKED
+	specialvar VAR_RESULT, IsWirelessAdapterConnected
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BBB60
+	message Text_1BD65B
+	waitmessage
+	goto EventScript_1BBA51
+
+EventScript_1BBA50:: @ 81BBA50
+	end
+
+EventScript_1BBA51:: @ 81BBA51
+	multichoice 18, 6, 16, 0
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1BBA94
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1BB82F
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1BBA88
+	compare_var_to_value VAR_0x8000, 127
+	goto_if 1, EventScript_1BB82F
+	end
+
+EventScript_1BBA88:: @ 81BBA88
+	message Text_1BD706
+	waitmessage
+	goto EventScript_1BBA51
+
+EventScript_1BBA93:: @ 81BBA93
+	end
+
+EventScript_1BBA94:: @ 81BBA94
+	call EventScript_1BBB1E
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BB82F
+	call EventScript_1A4EAF
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BB82F
+	loadword 0, gUnknown_81BD86A
+	callstd 4
+	closemessage
+	special sp000_heal_pokemon
+	setvar VAR_0x8004, 6
+	copyvar VAR_0x406F, VAR_0x8004
+	special HelpSystem_Disable
+	call EventScript_1BC020
+	special DrawWholeMapView
+	playse SE_TK_KASYA
+	delay 60
+	applymovement VAR_LAST_TALKED, Movement_1BB88F
+	waitmovement 0
+	applymovement 255, Movement_1BB898
+	waitmovement 0
+	opendoor 5, 1
+	waitdooranim
+	applymovement 255, Movement_1BB89C
+	waitmovement 0
+	hideobject 255, MAP_UNKNOWN_MAP_00_00
+	closedoor 5, 1
+	waitdooranim
+	special sub_811B15C
+	special SetCableClubWarp
+	warpteleport2 MAP_UNKNOWN_MAP_00_04, 255, 7, 11
+	waitstate
+	special UnionRoomSpecial
+	waitstate
+	end
+
+EventScript_1BBB1E:: @ 81BBB1E
+	specialvar VAR_RESULT, CountPartyNonEggMons
+	compare_var_to_value VAR_RESULT, 2
+	goto_if 0, EventScript_1BBB44
+	specialvar VAR_RESULT, GetNameOfEnigmaBerryInPlayerParty
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1BBB52
+	setvar VAR_RESULT, 1
+	return
+
+EventScript_1BBB44:: @ 81BBB44
+	loadword 0, gUnknown_81BCBC3
+	callstd 4
+	goto EventScript_1A77B0
+
+EventScript_1BBB51:: @ 81BBB51
+	end
+
+EventScript_1BBB52:: @ 81BBB52
+	loadword 0, gUnknown_81BCC00
+	callstd 4
+	goto EventScript_1A77B0
+
+EventScript_1BBB5F:: @ 81BBB5F
+	end
+
+EventScript_1BBB60:: @ 81BBB60
+	loadword 0, gUnknown_81BCC3A
+	callstd 4
+	release
+	return
+
+EventScript_1BBB6A:: @ 81BBB6A
+	lock
+	faceplayer
+	checkflag FLAG_0x829
+	goto_if 0, EventScript_1BB877
+	loadword 0, gUnknown_81BDB85
+	callstd 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BBB92
+	loadword 0, gUnknown_81BDBF8
+	callstd 4
+	release
+	return
+
+EventScript_1BBB92:: @ 81BBB92
+	loadword 0, gUnknown_81BDEDF
+	callstd 4
+	release
+	return
+
+EventScript_1BBB9C:: @ 81BBB9C
+	special sub_8110AB4
+	compare_var_to_value VAR_RESULT, 2
+	goto_if 1, EventScript_1A7AE0
+	special sub_8112364
+	lock
+	faceplayer
+	checkflag FLAG_0x829
+	goto_if 0, EventScript_1BB877
+	specialvar VAR_RESULT, sub_80CD034
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1BB867
+	specialvar VAR_RESULT, IsWirelessAdapterConnected
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BB44A
+	message Text_1BD28D
+	waitmessage
+	delay 15
+	goto EventScript_1BBBE7
+
+EventScript_1BBBE6:: @ 81BBBE6
+	end
+
+EventScript_1BBBE7:: @ 81BBBE7
+	checkflag FLAG_0x2BB
+	goto_if 0, EventScript_1BBC32
+	multichoice 0, 0, 47, 0
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1BBC69
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1BBC97
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1BBD35
+	compare_var_to_value VAR_0x8000, 3
+	goto_if 1, EventScript_1BB82F
+	compare_var_to_value VAR_0x8000, 127
+	goto_if 1, EventScript_1BB82F
+	end
+
+EventScript_1BBC32:: @ 81BBC32
+	multichoice 0, 0, 50, 0
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1BBC69
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1BBC97
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1BB82F
+	compare_var_to_value VAR_0x8000, 127
+	goto_if 1, EventScript_1BB82F
+	end
+
+EventScript_1BBC69:: @ 81BBC69
+	loadword 0, gUnknown_81BD317
+	callstd 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BB82F
+	call EventScript_1BB79C
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BB82F
+	setvar VAR_0x8004, 3
+	goto EventScript_1BBD6F
+
+EventScript_1BBC96:: @ 81BBC96
+	end
+
+EventScript_1BBC97:: @ 81BBC97
+	message Text_1BD338
+	waitmessage
+	multichoice 0, 0, 17, 0
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1BBCEA
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1BBCF5
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1BBD1C
+	compare_var_to_value VAR_0x8000, 3
+	goto_if 1, EventScript_1BBD27
+	compare_var_to_value VAR_0x8000, 4
+	goto_if 1, EventScript_1BB82F
+	compare_var_to_value VAR_0x8000, 127
+	goto_if 1, EventScript_1BB82F
+	end
+
+EventScript_1BBCEA:: @ 81BBCEA
+	setvar VAR_0x8004, 0
+	goto EventScript_1BBD6F
+
+EventScript_1BBCF4:: @ 81BBCF4
+	end
+
+EventScript_1BBCF5:: @ 81BBCF5
+	special CheckForAlivePartyMons
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 5, EventScript_1BBD0E
+	setvar VAR_0x8004, 1
+	goto EventScript_1BBD6F
+
+EventScript_1BBD0D:: @ 81BBD0D
+	end
+
+EventScript_1BBD0E:: @ 81BBD0E
+	loadword 0, gUnknown_81BC409
+	callstd 4
+	goto EventScript_1BBC97
+
+EventScript_1BBD1B:: @ 81BBD1B
+	end
+
+EventScript_1BBD1C:: @ 81BBD1C
+	setvar VAR_0x8004, 2
+	goto EventScript_1BBD6F
+
+EventScript_1BBD26:: @ 81BBD26
+	end
+
+EventScript_1BBD27:: @ 81BBD27
+	loadword 0, gUnknown_81BD390
+	callstd 4
+	goto EventScript_1BBC97
+
+EventScript_1BBD34:: @ 81BBD34
+	end
+
+EventScript_1BBD35:: @ 81BBD35
+	loadword 0, gUnknown_81BD362
+	callstd 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BB82F
+	special CheckHasAtLeastOneBerry
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BBD61
+	setvar VAR_0x8004, 5
+	goto EventScript_1BBD6F
+
+EventScript_1BBD60:: @ 81BBD60
+	end
+
+EventScript_1BBD61:: @ 81BBD61
+	loadword 0, gUnknown_81BCB81
+	callstd 4
+	goto EventScript_1BBBE7
+
+EventScript_1BBD6E:: @ 81BBD6E
+	end
+
+EventScript_1BBD6F:: @ 81BBD6F
+	call EventScript_1A4EAF
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BB82F
+	copyvar VAR_0x8000, VAR_0x8004
+	compare_var_to_value VAR_0x8000, 3
+	goto_if 1, EventScript_1BBDBC
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1BBDBC
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1BBDBC
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1BBE50
+	compare_var_to_value VAR_0x8000, 5
+	goto_if 1, EventScript_1BBEE4
+	end
+
+EventScript_1BBDBC:: @ 81BBDBC
+	textcolor 3
+	message Text_1BD51B
+	waitmessage
+	call EventScript_1A6675
+	multichoice 13, 6, 63, 0
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1BBE28
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1BBE00
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1BB82F
+	compare_var_to_value VAR_0x8000, 127
+	goto_if 1, EventScript_1BB82F
+	end
+
+EventScript_1BBE00:: @ 81BBE00
+	call EventScript_1BBF78
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1BBF88
+	compare_var_to_value VAR_RESULT, 5
+	goto_if 1, EventScript_1BBDBC
+	compare_var_to_value VAR_RESULT, 8
+	goto_if 1, EventScript_1BBE00
+	release
+	return
+
+EventScript_1BBE28:: @ 81BBE28
+	call EventScript_1BBF80
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1BBF88
+	compare_var_to_value VAR_RESULT, 5
+	goto_if 1, EventScript_1BBDBC
+	compare_var_to_value VAR_RESULT, 8
+	goto_if 1, EventScript_1BBE28
+	release
+	return
+
+EventScript_1BBE50:: @ 81BBE50
+	textcolor 3
+	message Text_1BD582
+	waitmessage
+	call EventScript_1A6675
+	multichoice 13, 6, 63, 0
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1BBEBC
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1BBE94
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1BB82F
+	compare_var_to_value VAR_0x8000, 127
+	goto_if 1, EventScript_1BB82F
+	end
+
+EventScript_1BBE94:: @ 81BBE94
+	call EventScript_1BBF78
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1BBF88
+	compare_var_to_value VAR_RESULT, 5
+	goto_if 1, EventScript_1BBE50
+	compare_var_to_value VAR_RESULT, 8
+	goto_if 1, EventScript_1BBE94
+	release
+	return
+
+EventScript_1BBEBC:: @ 81BBEBC
+	call EventScript_1BBF80
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1BBF88
+	compare_var_to_value VAR_RESULT, 5
+	goto_if 1, EventScript_1BBE50
+	compare_var_to_value VAR_RESULT, 8
+	goto_if 1, EventScript_1BBEBC
+	release
+	return
+
+EventScript_1BBEE4:: @ 81BBEE4
+	textcolor 3
+	message Text_1BD5F1
+	waitmessage
+	call EventScript_1A6675
+	multichoice 13, 6, 63, 0
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1BBF50
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1BBF28
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1BB82F
+	compare_var_to_value VAR_0x8000, 127
+	goto_if 1, EventScript_1BB82F
+	end
+
+EventScript_1BBF28:: @ 81BBF28
+	call EventScript_1BBF78
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1BBF88
+	compare_var_to_value VAR_RESULT, 5
+	goto_if 1, EventScript_1BBEE4
+	compare_var_to_value VAR_RESULT, 8
+	goto_if 1, EventScript_1BBF28
+	release
+	return
+
+EventScript_1BBF50:: @ 81BBF50
+	call EventScript_1BBF80
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1BBF88
+	compare_var_to_value VAR_RESULT, 5
+	goto_if 1, EventScript_1BBEE4
+	compare_var_to_value VAR_RESULT, 8
+	goto_if 1, EventScript_1BBF50
+	release
+	return
+
+EventScript_1BBF78:: @ 81BBF78
+	special HelpSystem_Disable
+	special sub_8115A24
+	waitstate
+	return
+
+EventScript_1BBF80:: @ 81BBF80
+	special HelpSystem_Disable
+	special BerryBlenderLinkJoinGroup
+	waitstate
+	return
+
+EventScript_1BBF88:: @ 81BBF88
+	messageautoscroll Text_1BC59E
+	waitmessage
+	delay 60
+	closemessage
+	copyvar VAR_0x8007, VAR_LAST_TALKED
+	call EventScript_1BC034
+	special DrawWholeMapView
+	playse SE_TK_KASYA
+	delay 60
+	applymovement VAR_LAST_TALKED, Movement_1BB88F
+	waitmovement 0
+	closemessage
+	applymovement 255, Movement_1BB898
+	waitmovement 0
+	opendoor 9, 1
+	waitdooranim
+	applymovement 255, Movement_1BB89C
+	waitmovement 0
+	hideobject 255, MAP_UNKNOWN_MAP_00_00
+	closedoor 9, 1
+	waitdooranim
+	release
+	waitstate
+	end
+
+gUnknown_81BBFD8:: @ 81BBFD8
+	special sub_8110AB4
+	compare_var_to_value VAR_RESULT, 2
+	goto_if 1, EventScript_1A7AE0
+	lockall
+	checkflag FLAG_0x829
+	goto_if 0, EventScript_1BB881
+	specialvar VAR_RESULT, IsWirelessAdapterConnected
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BC016
+	special HelpSystem_Disable
+	fadescreen 1
+	special sub_814F1D4
+	waitstate
+	loadword 0, gUnknown_81BCA43
+	callstd 4
+	special HelpSystem_Enable
+	releaseall
+	end
+
+EventScript_1BC016:: @ 81BC016
+	loadword 0, gUnknown_81BCA13
+	callstd 4
+	releaseall
+	end
+
+EventScript_1BC020:: @ 81BC020
+	setmetatile 5, 3, 709, 0
+	return
+
+EventScript_1BC02A:: @ 81BC02A
+	setmetatile 5, 3, 761, 1
+	return
+
+EventScript_1BC034:: @ 81BC034
+	setmetatile 9, 3, 709, 0
+	return
+
+EventScript_1BC03E:: @ 81BC03E
+	setmetatile 9, 3, 761, 1
+	return
+
+EventScript_1BC048:: @ 81BC048
+	setmetatile 5, 3, 737, 0
+	return
+
+EventScript_1BC052:: @ 81BC052
+	setmetatile 5, 3, 759, 1
+	return
+
+CeladonCity_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
+CeruleanCity_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
+CinnabarIsland_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
+FiveIsland_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
+FourIsland_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
+FuchsiaCity_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
+IndigoPlateau_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
+LavenderTown_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
+OneIsland_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
+PewterCity_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
+Route10_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
+Route4_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
+SaffronCity_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
+SevenIsland_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
+SixIsland_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
+ThreeIsland_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
+TwoIsland_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
+VermilionCity_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
+ViridianCity_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
+	special sub_811999C
+	end
+
+EventScript_1BC060:: @ 81BC060
+	special sub_8110AB4
+	compare_var_to_value VAR_RESULT, 2
+	goto_if 1, EventScript_1A7AE0
+	special sub_8112364
+	lock
+	faceplayer
+	message Text_1BCCFF
+	waitmessage
+	multichoice 0, 0, 49, 0
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1BC0B0
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1BC0BA
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1BC0C4
+	compare_var_to_value VAR_0x8000, 127
+	goto_if 1, EventScript_1BC0C4
+	end
+
+EventScript_1BC0B0:: @ 81BC0B0
+	loadword 0, gUnknown_81BCD4D
+	callstd 4
+	release
+	end
+
+EventScript_1BC0BA:: @ 81BC0BA
+	loadword 0, gUnknown_81BCE73
+	callstd 4
+	release
+	end
+
+EventScript_1BC0C4:: @ 81BC0C4
+	loadword 0, gUnknown_81BCF2E
+	callstd 4
+	release
+	end
+
+EventScript_1BC0CE:: @ 81BC0CE
+	special sub_8110AB4
+	compare_var_to_value VAR_RESULT, 2
+	goto_if 1, EventScript_1A7AE0
+	special sub_8112364
+	lock
+	faceplayer
+	message Text_1BCF69
+	waitmessage
+	specialvar VAR_RESULT, IsWirelessAdapterConnected
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BC29C
+	delay 60
+	special HelpSystem_Disable
+	message Text_1BD02D
+	waitmessage
+	multichoice 0, 0, 49, 0
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1BC13A
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1BC184
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1BB83F
+	compare_var_to_value VAR_0x8000, 127
+	goto_if 1, EventScript_1BB83F
+	end
+
+EventScript_1BC13A:: @ 81BC13A
+	setvar VAR_0x8005, 0
+	special sub_8149A18
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BC2A6
+	loadword 0, gUnknown_81BD059
+	callstd 4
+	setvar VAR_0x8005, 0
+	special sub_8127888
+	waitstate
+	compare_var_to_value VAR_0x8004, 6
+	goto_if 4, EventScript_1BB83F
+	call EventScript_1A4EAF
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BB83F
+	setvar VAR_0x8004, 4
+	goto EventScript_1BC1CE
+
+EventScript_1BC183:: @ 81BC183
+	end
+
+EventScript_1BC184:: @ 81BC184
+	setvar VAR_0x8005, 1
+	special sub_81537C0
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BC2A6
+	loadword 0, gUnknown_81BD059
+	callstd 4
+	setvar VAR_0x8005, 1
+	special sub_8127888
+	waitstate
+	compare_var_to_value VAR_0x8004, 6
+	goto_if 4, EventScript_1BB83F
+	call EventScript_1A4EAF
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BB83F
+	setvar VAR_0x8004, 6
+	goto EventScript_1BC1CE
+
+EventScript_1BC1CD:: @ 81BC1CD
+	end
+
+EventScript_1BC1CE:: @ 81BC1CE
+	textcolor 3
+	message Text_1BD5F1
+	waitmessage
+	call EventScript_1A6675
+	multichoice 13, 6, 63, 0
+	copyvar VAR_0x8000, VAR_RESULT
+	compare_var_to_value VAR_0x8000, 0
+	goto_if 1, EventScript_1BC23A
+	compare_var_to_value VAR_0x8000, 1
+	goto_if 1, EventScript_1BC212
+	compare_var_to_value VAR_0x8000, 2
+	goto_if 1, EventScript_1BB83F
+	compare_var_to_value VAR_0x8000, 127
+	goto_if 1, EventScript_1BB83F
+	end
+
+EventScript_1BC212:: @ 81BC212
+	call EventScript_1BBF78
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1BC262
+	compare_var_to_value VAR_RESULT, 5
+	goto_if 1, EventScript_1BC1CE
+	compare_var_to_value VAR_RESULT, 8
+	goto_if 1, EventScript_1BC212
+	release
+	return
+
+EventScript_1BC23A:: @ 81BC23A
+	call EventScript_1BBF80
+	compare_var_to_value VAR_RESULT, 1
+	goto_if 1, EventScript_1BC262
+	compare_var_to_value VAR_RESULT, 5
+	goto_if 1, EventScript_1BC1CE
+	compare_var_to_value VAR_RESULT, 8
+	goto_if 1, EventScript_1BC23A
+	release
+	return
+
+EventScript_1BC262:: @ 81BC262
+	messageautoscroll Text_1BD080
+	waitmessage
+	delay 120
+	closemessage
+	copyvar VAR_0x8007, VAR_LAST_TALKED
+	call EventScript_1BC048
+	special DrawWholeMapView
+	playse SE_TK_KASYA
+	delay 60
+	applymovement VAR_LAST_TALKED, Movement_1BB88F
+	waitmovement 0
+	closemessage
+	applymovement 255, Movement_1BB8A2
+	waitmovement 0
+	hideobject 255, MAP_UNKNOWN_MAP_00_00
+	release
+	waitstate
+	end
+
+EventScript_1BC29C:: @ 81BC29C
+	loadword 0, gUnknown_81BCFE8
+	callstd 4
+	release
+	end
+
+EventScript_1BC2A6:: @ 81BC2A6
+	loadword 0, gUnknown_81BD0CF
+	callstd 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BB83F
+	compare_var_to_value VAR_0x8005, 0
+	call_if 1, EventScript_1BC2D5
+	compare_var_to_value VAR_0x8005, 1
+	call_if 1, EventScript_1BC2DE
+	goto EventScript_1BB83F
+
+EventScript_1BC2D4:: @ 81BC2D4
+	end
+
+EventScript_1BC2D5:: @ 81BC2D5
+	loadword 0, gUnknown_81BD14B
+	callstd 4
+	return
+
+EventScript_1BC2DE:: @ 81BC2DE
+	loadword 0, gUnknown_81BD213
+	callstd 4
+	return
+
+TwoIsland_JoyfulGameCorner_EventScript_1BC2E7:: @ 81BC2E7
+	special sub_8110AB4
+	compare_var_to_value VAR_RESULT, 2
+	goto_if 1, EventScript_1A7AE0
+	lockall
+	special sub_814B504
+	waitstate
+	releaseall
+	end
+
+TwoIsland_JoyfulGameCorner_EventScript_1BC2FC:: @ 81BC2FC
+	special sub_8110AB4
+	compare_var_to_value VAR_RESULT, 2
+	goto_if 1, EventScript_1A7AE0
+	lockall
+	special sub_8153810
+	waitstate
+	releaseall
+	end
+
+gUnknown_81BC311:: @ 81BC311
+	.string "Welcome to the POKéMON CABLE\n"
+	.string "CLUB.\p"
+	.string "Which of our services do you wish\n"
+	.string "to use?$"
+
+gUnknown_81BC35E:: @ 81BC35E
+	.string "Which of our services do you wish\n"
+	.string "to use?$"
+
+Text_1BC388:: @ 81BC388
+	.string "Trade POKéMON with another player\n"
+	.string "using a GBA Game Link cable.$"
+
+Text_1BC3C7:: @ 81BC3C7
+	.string "You may battle another TRAINER\n"
+	.string "using a GBA Game Link cable.$"
+
+Text_1BC403:: @ 81BC403
+	.string "おわります$"
+
+gUnknown_81BC409:: @ 81BC409
+	.string "For a DOUBLE BATTLE, you must\n"
+	.string "have at least two POKéMON.$"
+
+gUnknown_81BC442:: @ 81BC442
+	.string "For trading, you must have at\n"
+	.string "least two POKéMON with you.$"
+
+gUnknown_81BC47C:: @ 81BC47C
+	.string "A POKéMON holding the {STR_VAR_1}\n"
+	.string "BERRY can't be traded.$"
+
+gUnknown_81BC4AC:: @ 81BC4AC
+	.string "Please wait.\n"
+	.string "… … B Button: Cancel$"
+
+gUnknown_81BC4CE:: @ 81BC4CE
+	.string "When all players are ready…\n"
+	.string "A Button: Confirm\l"
+	.string "B Button: Cancel$"
+
+gUnknown_81BC50D:: @ 81BC50D
+	.string "Start link with {STR_VAR_1} players.\n"
+	.string "A Button: Confirm\l"
+	.string "B Button: Cancel$"
+
+gUnknown_81BC54C:: @ 81BC54C
+	.string "Awaiting linkup…\n"
+	.string "… … B Button: Cancel$"
+
+Text_1BC572:: @ 81BC572
+	.string "はじめる　まえに　レポートを\n"
+	.string "かきますが　よろしいですか？$"
+
+Text_1BC590:: @ 81BC590
+	.string "Please enter.$"
+
+Text_1BC59E:: @ 81BC59E
+	.string "I'll direct you to your room now.$"
+
+gUnknown_81BC5C0:: @ 81BC5C0
+	.string "Someone is not ready to link.\p"
+	.string "Please come back after everyone\n"
+	.string "has made preparations.$"
+
+gUnknown_81BC615:: @ 81BC615
+	.string "Sorry, we have a link error…\n"
+	.string "Please reset and try again.$"
+
+gUnknown_81BC64E:: @ 81BC64E
+	.string "The link partners appear to have\n"
+	.string "made different selections.$"
+
+gUnknown_81BC68A:: @ 81BC68A
+	.string "Please do visit again.$"
+
+gUnknown_81BC6A1:: @ 81BC6A1
+	.string "The number of participants is\n"
+	.string "incorrect.$"
+
+gUnknown_81BC6CA:: @ 81BC6CA
+	.string "The SINGLE BATTLE Mode can't be\n"
+	.string "played by {STR_VAR_1} players.$"
+
+gUnknown_81BC700:: @ 81BC700
+	.string "The DOUBLE BATTLE Mode can't be\n"
+	.string "played by {STR_VAR_1} players.$"
+
+gUnknown_81BC736:: @ 81BC736
+	.string "There must be four players to play\n"
+	.string "this Battle Mode.$"
+
+gUnknown_81BC76B:: @ 81BC76B
+	.string "Please confirm the number of\n"
+	.string "players and start again.$"
+
+gUnknown_81BC7A1:: @ 81BC7A1
+	.string "The link will be terminated if you\n"
+	.string "leave the room. Is that okay?$"
+
+Text_1BC7E2:: @ 81BC7E2
+	.string "Terminating link…\n"
+	.string "You will be escorted out of\l"
+	.string "the room. Please wait.$"
+
+gUnknown_81BC827:: @ 81BC827
+	.string "This TRAINER is too busy to\n"
+	.string "notice…$"
+
+gUnknown_81BC84B:: @ 81BC84B
+	.string "Score! Got to look at {STR_VAR_1}'s\n"
+	.string "TRAINER CARD!$"
+
+gUnknown_81BC874:: @ 81BC874
+	.string "Score! Got to look at {STR_VAR_1}'s\n"
+	.string "TRAINER CARD!\p"
+	.string "It's a {STR_VAR_2} card!$"
+
+gUnknown_81BC8AD:: @ 81BC8AD
+	.string "Please take your seat and start\n"
+	.string "your battle.$"
+
+gUnknown_81BC8DA:: @ 81BC8DA
+	.string "Please take your seat and start\n"
+	.string "your trade.$"
+
+Text_1BC906:: @ 81BC906
+	.string "ごりよう　ありがとう　ございました$"
+
+Text_1BC918:: @ 81BC918
+	.string "The TRAINER CARD data will\n"
+	.string "be overwritten.$"
+
+Text_1BC943:: @ 81BC943
+	.string "I hope to see you again!$"
+
+gUnknown_81BC95C:: @ 81BC95C
+	.string "I'm awfully sorry.\p"
+	.string "We're not set up to conduct trades\n"
+	.string "with TRAINERS far away in another\l"
+	.string "region yet…$"
+
+gUnknown_81BC9C0:: @ 81BC9C0
+	.string "The other TRAINER is not ready.$"
+
+gUnknown_81BC9E0:: @ 81BC9E0
+	.string "You have at least one POKéMON\n"
+	.string "that can't be taken.$"
+
+gUnknown_81BCA13:: @ 81BCA13
+	.string "The Wireless Adapter is not\n"
+	.string "connected properly.$"
+
+gUnknown_81BCA43:: @ 81BCA43
+	.string "Participants are asked to step up\n"
+	.string "to the reception counter.$"
+
+Text_1BCA7F:: @ 81BCA7F
+	.string "こんにちは！$"
+
+Text_1BCA86:: @ 81BCA86
+	.string "しょうしょう　おまちください$"
+
+Text_1BCA95:: @ 81BCA95
+	.string "You may trade your POKéMON here\n"
+	.string "with another TRAINER.$"
+
+Text_1BCACB:: @ 81BCACB
+	.string "You may battle with your friends\n"
+	.string "here.$"
+
+Text_1BCAF2:: @ 81BCAF2
+	.string "Two to five TRAINERS can make\n"
+	.string "BERRY POWDER together.$"
+
+Text_1BCB27:: @ 81BCB27
+	.string "ワイヤレス　クラブでの\n"
+	.string "あそびかたを　せつめいします$"
+
+Text_1BCB42:: @ 81BCB42
+	.string "Cancels the selected MENU item.$"
+
+Text_1BCB62:: @ 81BCB62
+	.string "どちらの　しょうぶに　しますか？$"
+
+Text_1BCB73:: @ 81BCB73
+	.string "ひとつ　まえに　もどります$"
+
+gUnknown_81BCB81:: @ 81BCB81
+	.string "To use the BERRY CRUSH service,\n"
+	.string "you must have at least one BERRY.$"
+
+gUnknown_81BCBC3:: @ 81BCBC3
+	.string "To enter the UNION ROOM, you must\n"
+	.string "have at least two POKéMON.$"
+
+gUnknown_81BCC00:: @ 81BCC00
+	.string "No POKéMON holding the {STR_VAR_1}\n"
+	.string "BERRY may enter the UNION ROOM.$"
+
+gUnknown_81BCC3A:: @ 81BCC3A
+	.string "This is the POKéMON WIRELESS CLUB\n"
+	.string "UNION ROOM.\p"
+	.string "Unfortunately, your Wireless\n"
+	.string "Adapter is not connected properly.\p"
+	.string "Please do come again.$"
+
+Text_1BCCBE:: @ 81BCCBE
+	.string "あ‥‥\n"
+	.string "おきゃくさま！$"
+
+Text_1BCCCA:: @ 81BCCCA
+	.string "It appears as if {STR_VAR_1} is playing\n"
+	.string "right now.\l"
+	.string "Go for it!$"
+
+Text_1BCCFF:: @ 81BCCFF
+	.string "I can explain game rules to you,\n"
+	.string "if you'd like.\p"
+	.string "Which game should I describe?$"
+
+gUnknown_81BCD4D:: @ 81BCD4D
+	.string "“POKéMON JUMP”\p"
+	.string "Make your POKéMON skip the\n"
+	.string "VINE WHIP rope with the A Button.\p"
+	.string "Only mini POKéMON around 28 inches\n"
+	.string "or less may participate.\p"
+	.string "POKéMON that only swim, burrow, or\n"
+	.string "fly are not good at jumping.\p"
+	.string "As a result, those POKéMON may not\n"
+	.string "participate.\p"
+	.string "Good things happen if everyone\n"
+	.string "jumps in time.$"
+
+gUnknown_81BCE73:: @ 81BCE73
+	.string "“DODRIO BERRY-PICKING”\p"
+	.string "Command DODRIO's three heads to\n"
+	.string "catch falling BERRIES.\p"
+	.string "Press right, up, or left on the\n"
+	.string "{EXTRA_PLUS} Control Pad to move the heads.\p"
+	.string "To play this game, you must have\n"
+	.string "a DODRIO.$"
+
+gUnknown_81BCF2E:: @ 81BCF2E
+	.string "If you want to play a game,\n"
+	.string "please tell the man beside me.$"
+
+Text_1BCF69:: @ 81BCF69
+	.string "Hi, welcome!\n"
+	.string "You can play games over the\l"
+	.string "Wireless Communication System.\p"
+	.string "Can you wait just a little bit?$"
+
+gUnknown_81BCFD1:: @ 81BCFD1
+	.string "All right, come again!$"
+
+gUnknown_81BCFE8:: @ 81BCFE8
+	.string "The Wireless Adapter isn't\n"
+	.string "connected.\p"
+	.string "Come back when it's hooked up!$"
+
+Text_1BD02D:: @ 81BD02D
+	.string "All right, which game did you want\n"
+	.string "to play?$"
+
+gUnknown_81BD059:: @ 81BD059
+	.string "Which POKéMON would you like to\n"
+	.string "enter?$"
+
+Text_1BD080:: @ 81BD080
+	.string "Okay, you're all good to go.\n"
+	.string "Don't let the others beat you!$"
+
+Text_1BD0BC:: @ 81BD0BC
+	.string "きょうは　けえるのか？\n"
+	.string "またこいよ！$"
+
+gUnknown_81BD0CF:: @ 81BD0CF
+	.string "It doesn't look like you have any\n"
+	.string "POKéMON that you can enter…\p"
+	.string "Would you like me to explain what\n"
+	.string "kinds of POKéMON can enter?$"
+
+gUnknown_81BD14B:: @ 81BD14B
+	.string "“POKéMON JUMP” is open to POKéMON\n"
+	.string "around 28 inches or less.\p"
+	.string "What you can't enter are those\n"
+	.string "POKéMON that can't jump.\p"
+	.string "You know, like POKéMON that only\n"
+	.string "swim, burrow, or fly.\p"
+	.string "That's all you need to know.$"
+
+gUnknown_81BD213:: @ 81BD213
+	.string "“DODRIO BERRY-PICKING”…\n"
+	.string "Well, the name says it all.\p"
+	.string "You have to have a DODRIO to play\n"
+	.string "this game.$"
+
+Text_1BD274:: @ 81BD274
+	.string "もういちど　はじめから\n"
+	.string "やりなおして　みて　くれ$"
+
+Text_1BD28D:: @ 81BD28D
+	.string "Welcome to the POKéMON WIRELESS\n"
+	.string "CLUB DIRECT CORNER.\p"
+	.string "You may interact directly with\n"
+	.string "your friends here.\p"
+	.string "Which room would you like to\n"
+	.string "enter?$"
+
+gUnknown_81BD317:: @ 81BD317
+	.string "Would you like to trade POKéMON?$"
+
+Text_1BD338:: @ 81BD338
+	.string "Which Battle Mode would you like\n"
+	.string "to play?$"
+
+gUnknown_81BD362:: @ 81BD362
+	.string "Would you like to use the\n"
+	.string "BERRY CRUSH System?$"
+
+gUnknown_81BD390:: @ 81BD390
+	.string "There are three Battle Modes.\p"
+	.string "SINGLE BATTLE is for two TRAINERS\n"
+	.string "with one or more POKéMON each.\p"
+	.string "Each TRAINER can have one POKéMON\n"
+	.string "in battle at a time.\p"
+	.string "DOUBLE BATTLE is for two TRAINERS\n"
+	.string "with two or more POKéMON each.\p"
+	.string "Each TRAINER will send out two\n"
+	.string "POKéMON in battle at a time.\p"
+	.string "MULTI BATTLE is for four TRAINERS\n"
+	.string "with one or more POKéMON each.\p"
+	.string "Each TRAINER can have one POKéMON\n"
+	.string "in battle at a time.$"
+
+Text_1BD51B:: @ 81BD51B
+	.string "Please decide which of you two\n"
+	.string "will become the LEADER.\p"
+	.string "The other player must then choose\n"
+	.string "“JOIN GROUP.”$"
+
+Text_1BD582:: @ 81BD582
+	.string "Please decide which of you four\n"
+	.string "will become the GROUP LEADER.\p"
+	.string "The other players must then choose\n"
+	.string "“JOIN GROUP.”$"
+
+Text_1BD5F1:: @ 81BD5F1
+	.string "Please decide which of you will\n"
+	.string "become the GROUP LEADER.\p"
+	.string "The other players must then choose\n"
+	.string "“JOIN GROUP.”$"
+
+Text_1BD65B:: @ 81BD65B
+	.string "Welcome to the POKéMON WIRELESS\n"
+	.string "CLUB UNION ROOM.\p"
+	.string "You may interact directly with\n"
+	.string "other TRAINERS here, some of\l"
+	.string "whom you may not even know.\p"
+	.string "Would you like to enter the ROOM?$"
+
+Text_1BD706:: @ 81BD706
+	.string "The TRAINERS in the UNION ROOM\n"
+	.string "will be those players around you\l"
+	.string "who have also entered the ROOM.\p"
+	.string "You may do all sorts of things\n"
+	.string "here, such as exchanging greetings.\p"
+	.string "You may enter two POKéMON up to\n"
+	.string "Lv. 30 for a one-on-one battle.\p"
+	.string "You may take part in a chat with\n"
+	.string "two to five people.\p"
+	.string "Or, you may register a POKéMON for\n"
+	.string "trade.\p"
+	.string "Would you like to enter the ROOM?$"
+
+gUnknown_81BD86A:: @ 81BD86A
+	.string "I hope you enjoy your time in\n"
+	.string "the UNION ROOM.$"
+
+gUnknown_81BD898:: @ 81BD898
+	.string "Hello!\n"
+	.string "My name is TEALA.\p"
+	.string "This must be your first time\n"
+	.string "up here.\p"
+	.string "I'll show you how the Wireless\n"
+	.string "Communication System works.\p"
+	.string "First, I need to show you this\n"
+	.string "floor of our POKéMON CENTER.\p"
+	.string "Right this way, please.$"
+
+gUnknown_81BD966:: @ 81BD966
+	.string "On the top floor, there are two\n"
+	.string "rooms.\p"
+	.string "First, the room on the left.\n"
+	.string "It's the UNION ROOM.\p"
+	.string "You may link up with TRAINERS\n"
+	.string "around you who have also entered\l"
+	.string "the UNION ROOM.\p"
+	.string "With them, you may do things like\n"
+	.string "chat, battle, and trade.\p"
+	.string "Second, the room on the right is\n"
+	.string "the DIRECT CORNER.\p"
+	.string "You may trade or battle POKéMON\n"
+	.string "with your friends in this room.\p"
+	.string "If the Wireless Adapter isn't\n"
+	.string "connected, you may still link up\l"
+	.string "using a GBA Game Link cable.\p"
+	.string "If that is the case, you must go\n"
+	.string "to the DIRECT CORNER.\p"
+	.string "I hope you enjoy the Wireless \n"
+	.string "Communication System.$"
+
+gUnknown_81BDB85:: @ 81BDB85
+	.string "Hello, {PLAYER}!\p"
+	.string "It's me, TEALA, the POKéMON\n"
+	.string "CENTER 2F attendant.\p"
+	.string "Is there something you needed to\n"
+	.string "ask me about linking?$"
+
+gUnknown_81BDBF8:: @ 81BDBF8
+	.string "Let me explain how the POKéMON\n"
+	.string "WIRELESS CLUB works.\p"
+	.string "On this, the top floor, there are\n"
+	.string "two rooms.\p"
+	.string "First, the room on the left.\n"
+	.string "It's the UNION ROOM.\p"
+	.string "You may link up with TRAINERS\n"
+	.string "around you who have also entered\l"
+	.string "the UNION ROOM.\p"
+	.string "With them, you may do things like\n"
+	.string "chat, battle, and trade.\p"
+	.string "Second, the room on the right is\n"
+	.string "the DIRECT CORNER.\p"
+	.string "You may trade or battle POKéMON\n"
+	.string "with your friends in this room.\p"
+	.string "Sometimes, you may not be able to\n"
+	.string "find your friends in the UNION ROOM\l"
+	.string "or the DIRECT CORNER.\p"
+	.string "In that case, please move closer\n"
+	.string "to your friends.\p"
+	.string "If the Wireless Adapter isn't\n"
+	.string "connected, you may still link up\l"
+	.string "using a GBA Game Link cable.\p"
+	.string "If that is the case, you must go\n"
+	.string "to the DIRECT CORNER.\p"
+	.string "I hope you enjoy the Wireless \n"
+	.string "Communication System.$"
+
+gUnknown_81BDEDF:: @ 81BDEDF
+	.string "I hope you enjoy the Wireless\n"
+	.string "Communication System.$"
+
+CeladonCity_EventScript_1BDF13:: @ 81BDF13
+CeladonCity_Gym_EventScript_1BDF13:: @ 81BDF13
+FiveIsland_Meadow_EventScript_1BDF13:: @ 81BDF13
+PewterCity_EventScript_1BDF13:: @ 81BDF13
+Route10_EventScript_1BDF13:: @ 81BDF13
+Route12_EventScript_1BDF13:: @ 81BDF13
+Route14_EventScript_1BDF13:: @ 81BDF13
+Route16_EventScript_1BDF13:: @ 81BDF13
+Route25_EventScript_1BDF13:: @ 81BDF13
+Route2_EventScript_1BDF13:: @ 81BDF13
+Route8_EventScript_1BDF13:: @ 81BDF13
+ThreeIsland_BerryForest_EventScript_1BDF13:: @ 81BDF13
+ThreeIsland_BondBridge_EventScript_1BDF13:: @ 81BDF13
+ThreeIsland_EventScript_1BDF13:: @ 81BDF13
+Route9_EventScript_1BDF13:: @ 81BDF13
+Route13_EventScript_1BDF13:: @ 81BDF13
+TwoIsland_EventScript_1BDF13:: @ 81BDF13
+FuchsiaCity_EventScript_1BDF13:: @ 81BDF13
+VermilionCity_EventScript_1BDF13:: @ 81BDF13
+VermilionCity_EventScript_1BDF13:: @ 81BDF13
+CeruleanCity_EventScript_1BDF13:: @ 81BDF13
+ViridianCity_EventScript_1BDF13:: @ 81BDF13
+	special sub_8110AB4
+	compare_var_to_value VAR_RESULT, 2
+	goto_if 1, EventScript_1A7AE0
+	lockall
+	checkflag FLAG_0x821
+	goto_if 0, EventScript_1BDF87
+	checkpartymove MOVE_CUT
+	compare_var_to_value VAR_RESULT, 6
+	goto_if 1, EventScript_1BDF87
+	setfieldeffectarg 0, VAR_RESULT
+	getpartymonname 0, VAR_RESULT
+	getmovename 1, MOVE_CUT
+	loadword 0, gUnknown_81BDF94
+	callstd 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BDF91
+	loadword 0, gUnknown_81BDFD7
+	callstd 4
+	closemessage
+	dofieldeffect 2
+	waitstate
+	goto EventScript_1BDF76
+	end
+
+gUnknown_81BDF6B:: @ 81BDF6B
+	lockall
+	dofieldeffect 2
+	waitstate
+	goto EventScript_1BDF76
+	end
+
+EventScript_1BDF76:: @ 81BDF76
+	applymovement VAR_LAST_TALKED, Movement_1BDF85
+	waitmovement 0
+	removeobject VAR_LAST_TALKED
+	releaseall
+	end
+
+Movement_1BDF85:: @ 81BDF85
+	step_69
+	step_end
+
+EventScript_1BDF87:: @ 81BDF87
+	loadword 0, gUnknown_81BDFE3
+	callstd 3
+	releaseall
+	end
+
+EventScript_1BDF91:: @ 81BDF91
+	closemessage
+	releaseall
+	end
+
+gUnknown_81BDF94:: @ 81BDF94
+	.string "This tree looks like it can be CUT\n"
+	.string "down!\p"
+	.string "Would you like to CUT it?$"
+
+gUnknown_81BDFD7:: @ 81BDFD7
+	.string "{STR_VAR_1} used {STR_VAR_2}!$"
+
+gUnknown_81BDFE3:: @ 81BDFE3
+	.string "This tree looks like it can be CUT\n"
+	.string "down!$"
+
+CeruleanCave_2F_EventScript_1BE00C:: @ 81BE00C
+MtEmber_Exterior_EventScript_1BE00C:: @ 81BE00C
+MtEmber_RubyPath_B1F_Stairs_EventScript_1BE00C:: @ 81BE00C
+MtEmber_RubyPath_B2F_EventScript_1BE00C:: @ 81BE00C
+MtEmber_SummitPath_2F_EventScript_1BE00C:: @ 81BE00C
+MtEmber_RubyPath_1F_EventScript_1BE00C:: @ 81BE00C
+SevenIsland_SevaultCanyon_EventScript_1BE00C:: @ 81BE00C
+FourIsland_EventScript_1BE00C:: @ 81BE00C
+OneIsland_KindleRoad_EventScript_1BE00C:: @ 81BE00C
+MtEmber_RubyPath_B2F_Stairs_EventScript_1BE00C:: @ 81BE00C
+MtEmber_RubyPath_B3F_EventScript_1BE00C:: @ 81BE00C
+MtEmber_RubyPath_B1F_EventScript_1BE00C:: @ 81BE00C
+MtEmber_RubyPath_B1F_EventScript_1BE00C:: @ 81BE00C
+RockTunnel_B1F_EventScript_1BE00C:: @ 81BE00C
+CeruleanCave_B1F_EventScript_1BE00C:: @ 81BE00C
+CeruleanCave_1F_EventScript_1BE00C:: @ 81BE00C
+	special sub_8110AB4
+	compare_var_to_value VAR_RESULT, 2
+	goto_if 1, EventScript_1A7AE0
+	lockall
+	checkflag FLAG_0x825
+	goto_if 0, EventScript_1BE091
+	checkpartymove MOVE_ROCK_SMASH
+	compare_var_to_value VAR_RESULT, 6
+	goto_if 1, EventScript_1BE091
+	setfieldeffectarg 0, VAR_RESULT
+	getpartymonname 0, VAR_RESULT
+	getmovename 1, MOVE_ROCK_SMASH
+	loadword 0, Text_1BE09D
+	callstd 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BE09A
+	loadword 0, gUnknown_81BDFD7
+	callstd 4
+	closemessage
+	dofieldeffect 37
+	waitstate
+	goto EventScript_1BE06F
+	end
+
+EventScript_FldEffRockSmash:: @ 81BE064
+	lockall
+	dofieldeffect 37
+	waitstate
+	goto EventScript_1BE06F
+	end
+
+EventScript_1BE06F:: @ 81BE06F
+	applymovement VAR_LAST_TALKED, Movement_1BE08F
+	waitmovement 0
+	removeobject VAR_LAST_TALKED
+	special sub_8082E54
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BE08D
+	waitstate
+	releaseall
+	end
+
+EventScript_1BE08D:: @ 81BE08D
+	releaseall
+	end
+
+Movement_1BE08F:: @ 81BE08F
+	step_68
+	step_end
+
+EventScript_1BE091:: @ 81BE091
+	loadword 0, gUnknown_81BE0E2
+	callstd 3
+	end
+
+EventScript_1BE09A:: @ 81BE09A
+	closemessage
+	releaseall
+	end
+
+Text_1BE09D:: @ 81BE09D
+	.string "This rock appears to be breakable.\n"
+	.string "Would you like to use ROCK SMASH?$"
+
+gUnknown_81BE0E2:: @ 81BE0E2
+	.string "It's a rugged rock, but a POKéMON\n"
+	.string "may be able to smash it.$"
+
+MtEmber_Exterior_EventScript_1BE11D:: @ 81BE11D
+MtEmber_RubyPath_B2F_EventScript_1BE11D:: @ 81BE11D
+MtEmber_Summit_EventScript_1BE11D:: @ 81BE11D
+SeafoamIslands_1F_EventScript_1BE11D:: @ 81BE11D
+SeafoamIslands_B2F_EventScript_1BE11D:: @ 81BE11D
+SevenIsland_SevaultCanyon_EventScript_1BE11D:: @ 81BE11D
+VictoryRoad_1F_EventScript_1BE11D:: @ 81BE11D
+VictoryRoad_3F_EventScript_1BE11D:: @ 81BE11D
+SixIsland_RuinValley_EventScript_1BE11D:: @ 81BE11D
+FuchsiaCity_Building1_EventScript_1BE11D:: @ 81BE11D
+SevenIsland_SeavaultCanyon_TanobyKey_EventScript_1BE11D:: @ 81BE11D
+MtEmber_RubyPath_B3F_EventScript_1BE11D:: @ 81BE11D
+SeafoamIslands_B3F_EventScript_1BE11D:: @ 81BE11D
+SeafoamIslands_B3F_EventScript_1BE11D:: @ 81BE11D
+SeafoamIslands_B1F_EventScript_1BE11D:: @ 81BE11D
+VictoryRoad_2F_EventScript_1BE11D:: @ 81BE11D
+	special sub_8110AB4
+	compare_var_to_value VAR_RESULT, 2
+	goto_if 1, EventScript_1A7AE0
+	lockall
+	checkflag FLAG_0x823
+	goto_if 0, EventScript_1BE185
+	checkflag FLAG_0x805
+	goto_if 1, EventScript_1BE18E
+	checkpartymove MOVE_STRENGTH
+	compare_var_to_value VAR_RESULT, 6
+	goto_if 1, EventScript_1BE185
+	setfieldeffectarg 0, VAR_RESULT
+	loadword 0, gUnknown_81BE19A
+	callstd 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BE197
+	closemessage
+	dofieldeffect 40
+	waitstate
+	goto EventScript_1BE179
+	end
+
+EventScript_FldEffStrength:: @ 81BE16E
+	lockall
+	dofieldeffect 40
+	waitstate
+	goto EventScript_1BE179
+	end
+
+EventScript_1BE179:: @ 81BE179
+	setflag FLAG_0x805
+	loadword 0, gUnknown_81BE1FA
+	callstd 3
+	end
+
+EventScript_1BE185:: @ 81BE185
+	loadword 0, gUnknown_81BE244
+	callstd 3
+	end
+
+EventScript_1BE18E:: @ 81BE18E
+	loadword 0, gUnknown_81BE284
+	callstd 3
+	end
+
+EventScript_1BE197:: @ 81BE197
+	closemessage
+	releaseall
+	end
+
+gUnknown_81BE19A:: @ 81BE19A
+	.string "It's a big boulder, but a POKéMON\n"
+	.string "may be able to push it aside.\p"
+	.string "Would you like to use STRENGTH?$"
+
+gUnknown_81BE1FA:: @ 81BE1FA
+	.string "{STR_VAR_1} used STRENGTH!\p"
+	.string "{STR_VAR_1}'s STRENGTH made it\n"
+	.string "possible to move boulders around!$"
+
+gUnknown_81BE244:: @ 81BE244
+	.string "It's a big boulder, but a POKéMON\n"
+	.string "may be able to push it aside.$"
+
+gUnknown_81BE284:: @ 81BE284
+	.string "STRENGTH made it possible to move\n"
+	.string "boulders around.$"
+
+gUnknown_81BE2B7:: @ 81BE2B7
+	special sub_8110AB4
+	compare_var_to_value VAR_RESULT, 2
+	goto_if 1, EventScript_1A7AE0
+	lockall
+	checkpartymove MOVE_WATERFALL
+	compare_var_to_value VAR_RESULT, 6
+	goto_if 1, EventScript_1BE300
+	getpartymonname 0, VAR_RESULT
+	setfieldeffectarg 0, VAR_RESULT
+	loadword 0, gUnknown_81BE33F
+	callstd 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 1, EventScript_1BE308
+	loadword 0, gUnknown_81BE378
+	callstd 4
+	dofieldeffect 43
+	goto EventScript_1BE308
+
+EventScript_81BE2FF:: @ 81BE2FF
+	lockall
+EventScript_1BE300:
+	loadword 0, gUnknown_81BE30A
+	callstd 4
+EventScript_1BE308:
+	releaseall
+	end
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2806,1598 +11507,24 @@ EventScript_1A77B0:: @ 81A77B0
 
 
 	.include "data/script_dump_out.inc"
+@	.include "data/script_dump.inc"
 
 
 
 
 
-Route16_NorthEntrance_1F_EventScript_1A77B6:: @ 81A77B6
-Route18_EastEntrance_1F_EventScript_1A77B6:: @ 81A77B6
-	.incbin "baserom.gba", 0x1A77B6, 0xB
 
-Route16_NorthEntrance_1F_EventScript_1A77C1:: @ 81A77C1
-Route18_EastEntrance_1F_EventScript_1A77C1:: @ 81A77C1
-	.incbin "baserom.gba", 0x1A77C1, 0x42
 
-EventScript_1A7803:: @ 81A7803
-	.incbin "baserom.gba", 0x1A7803, 0x69
 
-EventScript_1A786C:: @ 81A786C
-	.incbin "baserom.gba", 0x1A786C, 0x102
+@ ???
+gUnknown_81BE30A:: @ 81BE30A
+	.incbin "baserom.gba", 0x1BE30A, 0x35
 
-EventScript_1A796E:: @ 81A796E
-	.incbin "baserom.gba", 0x1A796E, 0x14B
+gUnknown_81BE33F:: @ 81BE33F
+	.incbin "baserom.gba", 0x1BE33F, 0x39
 
-EventScript_1A7AB9:: @ 81A7AB9
-	.incbin "baserom.gba", 0x1A7AB9, 0x4
-
-EventScript_1A7ABD:: @ 81A7ABD
-	.incbin "baserom.gba", 0x1A7ABD, 0xA
-
-EventScript_1A7AC7:: @ 81A7AC7
-	.incbin "baserom.gba", 0x1A7AC7, 0xA
-
-EventScript_1A7AD1:: @ 81A7AD1
-	.incbin "baserom.gba", 0x1A7AD1, 0xA
-
-gUnknown_81A7ADB:: @ 81A7ADB
-	.incbin "baserom.gba", 0x1A7ADB, 0x5
-
-EventScript_1A7AE0:: @ 81A7AE0
-	.incbin "baserom.gba", 0x1A7AE0, 0x2
-
-EventScript_1A7AE2:: @ 81A7AE2
-	.incbin "baserom.gba", 0x1A7AE2, 0x98
-
-EventScript_1A7B7A:: @ 81A7B7A
-	.incbin "baserom.gba", 0x1A7B7A, 0x1C4
-
-EventScript_1A7D3E:: @ 81A7D3E
-	.incbin "baserom.gba", 0x1A7D3E, 0x134
-
-EventScript_1A7E72:: @ 81A7E72
-	.incbin "baserom.gba", 0x1A7E72, 0xDA
-
-EventScript_1A7F4C:: @ 81A7F4C
-	.incbin "baserom.gba", 0x1A7F4C, 0x1FD
-
-EventScript_1A8149:: @ 81A8149
-	.incbin "baserom.gba", 0x1A8149, 0x2E
-
-EventScript_1A8177:: @ 81A8177
-	.incbin "baserom.gba", 0x1A8177, 0x2E
-
-EventScript_1A81A5:: @ 81A81A5
-	.incbin "baserom.gba", 0x1A81A5, 0x37
-
-EventScript_1A81DC:: @ 81A81DC
-	.incbin "baserom.gba", 0x1A81DC, 0x37
-
-EventScript_1A8213:: @ 81A8213
-	.incbin "baserom.gba", 0x1A8213, 0x2E
-
-EventScript_1A8241:: @ 81A8241
-	.incbin "baserom.gba", 0x1A8241, 0x2E
-
-EventScript_1A826F:: @ 81A826F
-	.incbin "baserom.gba", 0x1A826F, 0x37
-
-EventScript_1A82A6:: @ 81A82A6
-	.incbin "baserom.gba", 0x1A82A6, 0x37
-
-EventScript_1A82DD:: @ 81A82DD
-	.incbin "baserom.gba", 0x1A82DD, 0x37
-
-EventScript_1A8314:: @ 81A8314
-	.incbin "baserom.gba", 0x1A8314, 0x37
-
-EventScript_1A834B:: @ 81A834B
-	.incbin "baserom.gba", 0x1A834B, 0x2E
-
-EventScript_1A8379:: @ 81A8379
-	.incbin "baserom.gba", 0x1A8379, 0x2E
-
-EventScript_1A83A7:: @ 81A83A7
-	.incbin "baserom.gba", 0x1A83A7, 0x2E
-
-EventScript_1A83D5:: @ 81A83D5
-	.incbin "baserom.gba", 0x1A83D5, 0x37
-
-EventScript_1A840C:: @ 81A840C
-	.incbin "baserom.gba", 0x1A840C, 0x37
-
-EventScript_1A8443:: @ 81A8443
-	.incbin "baserom.gba", 0x1A8443, 0x37
-
-EventScript_1A847A:: @ 81A847A
-	.incbin "baserom.gba", 0x1A847A, 0x2E
-
-EventScript_1A84A8:: @ 81A84A8
-	.incbin "baserom.gba", 0x1A84A8, 0x2E
-
-EventScript_1A84D6:: @ 81A84D6
-	.incbin "baserom.gba", 0x1A84D6, 0x2E
-
-EventScript_1A8504:: @ 81A8504
-	.incbin "baserom.gba", 0x1A8504, 0x417
-
-SilphCo_2F_EventScript_1A891B:: @ 81A891B
-	.incbin "baserom.gba", 0x1A891B, 0x1A
-
-SilphCo_2F_EventScript_1A8935:: @ 81A8935
-	.incbin "baserom.gba", 0x1A8935, 0x1A
-
-SilphCo_3F_EventScript_1A894F:: @ 81A894F
-	.incbin "baserom.gba", 0x1A894F, 0x1A
-
-SilphCo_3F_EventScript_1A8969:: @ 81A8969
-	.incbin "baserom.gba", 0x1A8969, 0x1A
-
-SilphCo_4F_EventScript_1A8983:: @ 81A8983
-	.incbin "baserom.gba", 0x1A8983, 0x1A
-
-SilphCo_4F_EventScript_1A899D:: @ 81A899D
-	.incbin "baserom.gba", 0x1A899D, 0x1A
-
-SilphCo_5F_EventScript_1A89B7:: @ 81A89B7
-	.incbin "baserom.gba", 0x1A89B7, 0x1A
-
-SilphCo_5F_EventScript_1A89D1:: @ 81A89D1
-	.incbin "baserom.gba", 0x1A89D1, 0x1A
-
-SilphCo_5F_EventScript_1A89EB:: @ 81A89EB
-	.incbin "baserom.gba", 0x1A89EB, 0x1A
-
-SilphCo_6F_EventScript_1A8A05:: @ 81A8A05
-	.incbin "baserom.gba", 0x1A8A05, 0x1A
-
-SilphCo_7F_EventScript_1A8A1F:: @ 81A8A1F
-	.incbin "baserom.gba", 0x1A8A1F, 0x1A
-
-SilphCo_7F_EventScript_1A8A39:: @ 81A8A39
-	.incbin "baserom.gba", 0x1A8A39, 0x1A
-
-SilphCo_7F_EventScript_1A8A53:: @ 81A8A53
-	.incbin "baserom.gba", 0x1A8A53, 0x1A
-
-SilphCo_8F_EventScript_1A8A6D:: @ 81A8A6D
-	.incbin "baserom.gba", 0x1A8A6D, 0x1A
-
-SilphCo_9F_EventScript_1A8A87:: @ 81A8A87
-	.incbin "baserom.gba", 0x1A8A87, 0x1A
-
-SilphCo_9F_EventScript_1A8AA1:: @ 81A8AA1
-	.incbin "baserom.gba", 0x1A8AA1, 0x1A
-
-SilphCo_9F_EventScript_1A8ABB:: @ 81A8ABB
-	.incbin "baserom.gba", 0x1A8ABB, 0x1A
-
-SilphCo_9F_EventScript_1A8AD5:: @ 81A8AD5
-	.incbin "baserom.gba", 0x1A8AD5, 0x1A
-
-SilphCo_10F_EventScript_1A8AEF:: @ 81A8AEF
-	.incbin "baserom.gba", 0x1A8AEF, 0x1A
-
-SilphCo_11F_EventScript_1A8B09:: @ 81A8B09
-	.incbin "baserom.gba", 0x1A8B09, 0x11E
-
-EventScript_1A8C27:: @ 81A8C27
-	.incbin "baserom.gba", 0x1A8C27, 0xC
-
-EventScript_1A8C33:: @ 81A8C33
-	.incbin "baserom.gba", 0x1A8C33, 0x9
-
-EventScript_1A8C3C:: @ 81A8C3C
-	.incbin "baserom.gba", 0x1A8C3C, 0x71
-
-EventScript_1A8CAD:: @ 81A8CAD
-	.incbin "baserom.gba", 0x1A8CAD, 0x10
-
-EventScript_1A8CBD:: @ 81A8CBD
-	.incbin "baserom.gba", 0x1A8CBD, 0xC
-
-EventScript_1A8CC9:: @ 81A8CC9
-	.incbin "baserom.gba", 0x1A8CC9, 0x10
-
-EventScript_1A8CD9:: @ 81A8CD9
-	.incbin "baserom.gba", 0x1A8CD9, 0x14
-
-gUnknown_81A8CED:: @ 81A8CED
-	.incbin "baserom.gba", 0x1A8CED, 0x9
-
-CeruleanCity_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-CinnabarIsland_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-FiveIsland_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-FuchsiaCity_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-OneIsland_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-PewterCity_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-SevenIsland_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-VermilionCity_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-FourIsland_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-SixIsland_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-ThreeIsland_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-TwoIsland_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-Route10_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-Route10_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-Route4_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-SaffronCity_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-IndigoPlateau_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-CeladonCity_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-LavenderTown_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-ViridianCity_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-	.incbin "baserom.gba", 0x1A8CF6, 0x6
-
-CeruleanCity_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-CinnabarIsland_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-FiveIsland_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-FuchsiaCity_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-OneIsland_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-PewterCity_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-SevenIsland_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-VermilionCity_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-FourIsland_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-SixIsland_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-ThreeIsland_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-TwoIsland_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-Route10_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-Route10_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-Route4_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-SaffronCity_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-IndigoPlateau_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-CeladonCity_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-LavenderTown_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-ViridianCity_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-	.incbin "baserom.gba", 0x1A8CFC, 0x6
-
-CeruleanCity_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-CinnabarIsland_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-FiveIsland_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-FuchsiaCity_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-OneIsland_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-PewterCity_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-SevenIsland_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-VermilionCity_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-FourIsland_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-SixIsland_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-ThreeIsland_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-TwoIsland_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-Route10_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-Route10_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-Route4_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-SaffronCity_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-IndigoPlateau_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-CeladonCity_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-LavenderTown_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-ViridianCity_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-	.incbin "baserom.gba", 0x1A8D02, 0x6
-
-VermilionCity_PokemonCenter_1F_EventScript_1A8D08:: @ 81A8D08
-	.incbin "baserom.gba", 0x1A8D08, 0x41
-
-EventScript_ItemfinderDigUpUnderfootItem:: @ 81A8D49
-	lockall
-	textcolor 3
-	waitse
-	call EventScript_GiveItem
-	compare_var_to_value VAR_0x8007, 1
-	goto_if_eq EventScript_DigUpItemPutInPocket
-	compare_var_to_value VAR_0x8007, 0
-	goto_if_eq EventScript_DigUpItemBagIsFull
-	end
-
-EventScript_DigUpItemPutInPocket::
-	message Text_1A5700
-	waitfanfare
-	waitmessage
-	delay 60
-	msgbox gUnknown_81A5218
-	special Special_SetHiddenItemFlag
-	releaseall
-	end
-
-EventScript_DigUpItemBagIsFull::
-	msgbox Text_1A5700
-	msgbox gUnknown_81A5242
-	setvar VAR_RESULT, 0
-	releaseall
-	end
-
-gUnknown_81A8D97:: @ 81A8D97
-	.incbin "baserom.gba", 0x1A8D97, 0x41
-
-gUnknown_81A8DD8:: @ 81A8DD8
-	.incbin "baserom.gba", 0x1A8DD8, 0x25
-
-gUnknown_81A8DFD:: @ 81A8DFD
-	.incbin "baserom.gba", 0x1A8DFD, 0x5B
-
-gStdScript_8:: @ 81A8E58
-	.incbin "baserom.gba", 0x1A8E58, 0x6D
-
-EventScript_1A8EC5:: @ 81A8EC5
-	.incbin "baserom.gba", 0x1A8EC5, 0x8F
-
-EventScript_1A8F54:: @ 81A8F54
-	.incbin "baserom.gba", 0x1A8F54, 0x9A
-
-EventScript_1A8FEE:: @ 81A8FEE
-	.incbin "baserom.gba", 0x1A8FEE, 0xB
-
-EventScript_1A8FF9:: @ 81A8FF9
-	.incbin "baserom.gba", 0x1A8FF9, 0xB
-
-EventScript_1A9004:: @ 81A9004
-	.incbin "baserom.gba", 0x1A9004, 0xB
-
-EventScript_1A900F:: @ 81A900F
-	.incbin "baserom.gba", 0x1A900F, 0xCB
-
-EventScript_1A90DA:: @ 81A90DA
-	.incbin "baserom.gba", 0x1A90DA, 0x1C
-
-EventScript_1A90F6:: @ 81A90F6
-	.incbin "baserom.gba", 0x1A90F6, 0x12
-
-EventScript_1A9108:: @ 81A9108
-	.incbin "baserom.gba", 0x1A9108, 0x16
-
-EventScript_1A911E:: @ 81A911E
-	.incbin "baserom.gba", 0x1A911E, 0xB7
-
-EventScript_1A91D5:: @ 81A91D5
-	.incbin "baserom.gba", 0x1A91D5, 0x58
-
-EventScript_1A922D:: @ 81A922D
-	.incbin "baserom.gba", 0x1A922D, 0x9
-
-EventScript_1A9236:: @ 81A9236
-	.incbin "baserom.gba", 0x1A9236, 0x15
-
-EventScript_1A924B:: @ 81A924B
-	.incbin "baserom.gba", 0x1A924B, 0x13
-
-EventScript_1A925E:: @ 81A925E
-	.incbin "baserom.gba", 0x1A925E, 0xE
-
-EventScript_1A926C:: @ 81A926C
-	.incbin "baserom.gba", 0x1A926C, 0x10
-
-EventScript_1A927C:: @ 81A927C
-	.incbin "baserom.gba", 0x1A927C, 0xC
-
-gUnknown_81A9288:: @ 81A9288
-	.incbin "baserom.gba", 0x1A9288, 0x3
-
-gUnknown_81A928B:: @ 81A928B
-	.incbin "baserom.gba", 0x1A928B, 0x5
-
-gUnknown_81A9290:: @ 81A9290
-	.incbin "baserom.gba", 0x1A9290, 0x6
-
-gUnknown_81A9296:: @ 81A9296
-	.incbin "baserom.gba", 0x1A9296, 0x5
-
-gUnknown_81A929B:: @ 81A929B
-	.incbin "baserom.gba", 0x1A929B, 0x4
-
-gUnknown_81A929F:: @ 81A929F
-	.incbin "baserom.gba", 0x1A929F, 0x4
-
-gUnknown_81A92A3:: @ 81A92A3
-	.incbin "baserom.gba", 0x1A92A3, 0x4
-
-gUnknown_81A92A7:: @ 81A92A7
-	.incbin "baserom.gba", 0x1A92A7, 0x4
-
-gUnknown_81A92AB:: @ 81A92AB
-	.incbin "baserom.gba", 0x1A92AB, 0x4
-
-gUnknown_81A92AF:: @ 81A92AF
-	.incbin "baserom.gba", 0x1A92AF, 0x4
-
-gUnknown_81A92B3:: @ 81A92B3
-	.incbin "baserom.gba", 0x1A92B3, 0x4
-
-gUnknown_81A92B7:: @ 81A92B7
-	.incbin "baserom.gba", 0x1A92B7, 0x5
-
-gUnknown_81A92BC:: @ 81A92BC
-	.incbin "baserom.gba", 0x1A92BC, 0x5
-
-gUnknown_81A92C1:: @ 81A92C1
-	.incbin "baserom.gba", 0x1A92C1, 0x2
-
-gUnknown_81A92C3:: @ 81A92C3
-	.incbin "baserom.gba", 0x1A92C3, 0x2
-
-gUnknown_81A92C5:: @ 81A92C5
-	.incbin "baserom.gba", 0x1A92C5, 0xB
-
-gUnknown_81A92D0:: @ 81A92D0
-	.incbin "baserom.gba", 0x1A92D0, 0xC
-
-gUnknown_81A92DC:: @ 81A92DC
-	.incbin "baserom.gba", 0x1A92DC, 0xA
-
-gUnknown_81A92E6:: @ 81A92E6
-	.incbin "baserom.gba", 0x1A92E6, 0xC
-
-gUnknown_81A92F2:: @ 81A92F2
-	.incbin "baserom.gba", 0x1A92F2, 0xC
-
-gUnknown_81A92FE:: @ 81A92FE
-	.incbin "baserom.gba", 0x1A92FE, 0xC
-
-gUnknown_81A930A:: @ 81A930A
-	.incbin "baserom.gba", 0x1A930A, 0xC
-
-gUnknown_81A9316:: @ 81A9316
-	.incbin "baserom.gba", 0x1A9316, 0xB
-
-gUnknown_81A9321:: @ 81A9321
-	.incbin "baserom.gba", 0x1A9321, 0xC
-
-gUnknown_81A932D:: @ 81A932D
-	.incbin "baserom.gba", 0x1A932D, 0xB
-
-gUnknown_81A9338:: @ 81A9338
-	.incbin "baserom.gba", 0x1A9338, 0x7
-
-gUnknown_81A933F:: @ 81A933F
-	.incbin "baserom.gba", 0x1A933F, 0xB
-
-gUnknown_81A934A:: @ 81A934A
-	.incbin "baserom.gba", 0x1A934A, 0xC
-
-gUnknown_81A9356:: @ 81A9356
-	.incbin "baserom.gba", 0x1A9356, 0xC
-
-gUnknown_81A9362:: @ 81A9362
-	.incbin "baserom.gba", 0x1A9362, 0x6
-
-gUnknown_81A9368:: @ 81A9368
-	.incbin "baserom.gba", 0x1A9368, 0xC
-
-gUnknown_81A9374:: @ 81A9374
-	.incbin "baserom.gba", 0x1A9374, 0x8
-
-gUnknown_81A937C:: @ 81A937C
-	.incbin "baserom.gba", 0x1A937C, 0xB
-
-gUnknown_81A9387:: @ 81A9387
-	.incbin "baserom.gba", 0x1A9387, 0xC
-
-gUnknown_81A9393:: @ 81A9393
-	.incbin "baserom.gba", 0x1A9393, 0xC
-
-gUnknown_81A939F:: @ 81A939F
-	.incbin "baserom.gba", 0x1A939F, 0xC
-
-gUnknown_81A93AB:: @ 81A93AB
-	.incbin "baserom.gba", 0x1A93AB, 0x9
-
-gUnknown_81A93B4:: @ 81A93B4
-	.incbin "baserom.gba", 0x1A93B4, 0xC
-
-gUnknown_81A93C0:: @ 81A93C0
-	.incbin "baserom.gba", 0x1A93C0, 0x9
-
-Route3_EventScript_1A93C9:: @ 81A93C9
-	.incbin "baserom.gba", 0x1A93C9, 0x3E
-
-Route3_EventScript_1A9407:: @ 81A9407
-	.incbin "baserom.gba", 0x1A9407, 0x3E
-
-Route3_EventScript_1A9445:: @ 81A9445
-	.incbin "baserom.gba", 0x1A9445, 0x3E
-
-Route3_EventScript_1A9483:: @ 81A9483
-	.incbin "baserom.gba", 0x1A9483, 0x3E
-
-Route3_EventScript_1A94C1:: @ 81A94C1
-	.incbin "baserom.gba", 0x1A94C1, 0x3E
-
-Route3_EventScript_1A94FF:: @ 81A94FF
-	.incbin "baserom.gba", 0x1A94FF, 0x3E
-
-Route3_EventScript_1A953D:: @ 81A953D
-	.incbin "baserom.gba", 0x1A953D, 0x3E
-
-Route3_EventScript_1A957B:: @ 81A957B
-	.incbin "baserom.gba", 0x1A957B, 0x3E
-
-Route4_EventScript_1A95B9:: @ 81A95B9
-	.incbin "baserom.gba", 0x1A95B9, 0x3E
-
-Route24_EventScript_1A95F7:: @ 81A95F7
-	.incbin "baserom.gba", 0x1A95F7, 0x3E
-
-Route24_EventScript_1A9635:: @ 81A9635
-	.incbin "baserom.gba", 0x1A9635, 0x3E
-
-Route24_EventScript_1A9673:: @ 81A9673
-	.incbin "baserom.gba", 0x1A9673, 0x3E
-
-Route24_EventScript_1A96B1:: @ 81A96B1
-	.incbin "baserom.gba", 0x1A96B1, 0x3E
-
-Route24_EventScript_1A96EF:: @ 81A96EF
-	.incbin "baserom.gba", 0x1A96EF, 0x3E
-
-Route24_EventScript_1A972D:: @ 81A972D
-	.incbin "baserom.gba", 0x1A972D, 0x3E
-
-Route25_EventScript_1A976B:: @ 81A976B
-	.incbin "baserom.gba", 0x1A976B, 0x3E
-
-Route25_EventScript_1A97A9:: @ 81A97A9
-	.incbin "baserom.gba", 0x1A97A9, 0x3E
-
-Route25_EventScript_1A97E7:: @ 81A97E7
-	.incbin "baserom.gba", 0x1A97E7, 0x3E
-
-Route25_EventScript_1A9825:: @ 81A9825
-	.incbin "baserom.gba", 0x1A9825, 0x3E
-
-Route25_EventScript_1A9863:: @ 81A9863
-	.incbin "baserom.gba", 0x1A9863, 0x3E
-
-Route25_EventScript_1A98A1:: @ 81A98A1
-	.incbin "baserom.gba", 0x1A98A1, 0x3E
-
-Route25_EventScript_1A98DF:: @ 81A98DF
-	.incbin "baserom.gba", 0x1A98DF, 0x3E
-
-Route25_EventScript_1A991D:: @ 81A991D
-	.incbin "baserom.gba", 0x1A991D, 0x3E
-
-Route25_EventScript_1A995B:: @ 81A995B
-	.incbin "baserom.gba", 0x1A995B, 0x3E
-
-Route6_EventScript_1A9999:: @ 81A9999
-	.incbin "baserom.gba", 0x1A9999, 0x3E
-
-Route6_EventScript_1A99D7:: @ 81A99D7
-	.incbin "baserom.gba", 0x1A99D7, 0x3E
-
-Route6_EventScript_1A9A15:: @ 81A9A15
-	.incbin "baserom.gba", 0x1A9A15, 0x3E
-
-Route6_EventScript_1A9A53:: @ 81A9A53
-	.incbin "baserom.gba", 0x1A9A53, 0x3E
-
-Route6_EventScript_1A9A91:: @ 81A9A91
-	.incbin "baserom.gba", 0x1A9A91, 0x3E
-
-Route6_EventScript_1A9ACF:: @ 81A9ACF
-	.incbin "baserom.gba", 0x1A9ACF, 0x3E
-
-Route11_EventScript_1A9B0D:: @ 81A9B0D
-	.incbin "baserom.gba", 0x1A9B0D, 0x3E
-
-Route11_EventScript_1A9B4B:: @ 81A9B4B
-	.incbin "baserom.gba", 0x1A9B4B, 0x3E
-
-Route11_EventScript_1A9B89:: @ 81A9B89
-	.incbin "baserom.gba", 0x1A9B89, 0x3E
-
-Route11_EventScript_1A9BC7:: @ 81A9BC7
-	.incbin "baserom.gba", 0x1A9BC7, 0x3E
-
-Route11_EventScript_1A9C05:: @ 81A9C05
-	.incbin "baserom.gba", 0x1A9C05, 0x3E
-
-Route11_EventScript_1A9C43:: @ 81A9C43
-	.incbin "baserom.gba", 0x1A9C43, 0x3E
-
-Route11_EventScript_1A9C81:: @ 81A9C81
-	.incbin "baserom.gba", 0x1A9C81, 0x3E
-
-Route11_EventScript_1A9CBF:: @ 81A9CBF
-	.incbin "baserom.gba", 0x1A9CBF, 0x3E
-
-Route11_EventScript_1A9CFD:: @ 81A9CFD
-	.incbin "baserom.gba", 0x1A9CFD, 0x3E
-
-Route11_EventScript_1A9D3B:: @ 81A9D3B
-	.incbin "baserom.gba", 0x1A9D3B, 0x3E
-
-Route9_EventScript_1A9D79:: @ 81A9D79
-	.incbin "baserom.gba", 0x1A9D79, 0x3E
-
-Route9_EventScript_1A9DB7:: @ 81A9DB7
-	.incbin "baserom.gba", 0x1A9DB7, 0x3E
-
-Route9_EventScript_1A9DF5:: @ 81A9DF5
-	.incbin "baserom.gba", 0x1A9DF5, 0x3E
-
-Route9_EventScript_1A9E33:: @ 81A9E33
-	.incbin "baserom.gba", 0x1A9E33, 0x3E
-
-Route9_EventScript_1A9E71:: @ 81A9E71
-	.incbin "baserom.gba", 0x1A9E71, 0x3E
-
-Route9_EventScript_1A9EAF:: @ 81A9EAF
-	.incbin "baserom.gba", 0x1A9EAF, 0x3E
-
-Route9_EventScript_1A9EED:: @ 81A9EED
-	.incbin "baserom.gba", 0x1A9EED, 0x3E
-
-Route9_EventScript_1A9F2B:: @ 81A9F2B
-	.incbin "baserom.gba", 0x1A9F2B, 0x3E
-
-Route9_EventScript_1A9F69:: @ 81A9F69
-	.incbin "baserom.gba", 0x1A9F69, 0x3E
-
-Route10_EventScript_1A9FA7:: @ 81A9FA7
-	.incbin "baserom.gba", 0x1A9FA7, 0x3E
-
-Route10_EventScript_1A9FE5:: @ 81A9FE5
-	.incbin "baserom.gba", 0x1A9FE5, 0x3E
-
-Route10_EventScript_1AA023:: @ 81AA023
-	.incbin "baserom.gba", 0x1AA023, 0x3E
-
-Route10_EventScript_1AA061:: @ 81AA061
-	.incbin "baserom.gba", 0x1AA061, 0x3E
-
-Route10_EventScript_1AA09F:: @ 81AA09F
-	.incbin "baserom.gba", 0x1AA09F, 0x3E
-
-Route10_EventScript_1AA0DD:: @ 81AA0DD
-	.incbin "baserom.gba", 0x1AA0DD, 0x3E
-
-Route8_EventScript_1AA11B:: @ 81AA11B
-	.incbin "baserom.gba", 0x1AA11B, 0x3E
-
-Route8_EventScript_1AA159:: @ 81AA159
-	.incbin "baserom.gba", 0x1AA159, 0x3E
-
-Route8_EventScript_1AA197:: @ 81AA197
-	.incbin "baserom.gba", 0x1AA197, 0x3E
-
-Route8_EventScript_1AA1D5:: @ 81AA1D5
-	.incbin "baserom.gba", 0x1AA1D5, 0x3E
-
-Route8_EventScript_1AA213:: @ 81AA213
-	.incbin "baserom.gba", 0x1AA213, 0x3E
-
-Route8_EventScript_1AA251:: @ 81AA251
-	.incbin "baserom.gba", 0x1AA251, 0x3E
-
-Route8_EventScript_1AA28F:: @ 81AA28F
-	.incbin "baserom.gba", 0x1AA28F, 0x3E
-
-Route8_EventScript_1AA2CD:: @ 81AA2CD
-	.incbin "baserom.gba", 0x1AA2CD, 0x3E
-
-Route8_EventScript_1AA30B:: @ 81AA30B
-	.incbin "baserom.gba", 0x1AA30B, 0x3E
-
-Route8_EventScript_1AA349:: @ 81AA349
-	.incbin "baserom.gba", 0x1AA349, 0x46
-
-Route8_EventScript_1AA38F:: @ 81AA38F
-	.incbin "baserom.gba", 0x1AA38F, 0x46
-
-Route8_EventScript_1AA3D5:: @ 81AA3D5
-	.incbin "baserom.gba", 0x1AA3D5, 0x3E
-
-Route8_EventScript_1AA413:: @ 81AA413
-	.incbin "baserom.gba", 0x1AA413, 0x3E
-
-Route12_EventScript_1AA451:: @ 81AA451
-	.incbin "baserom.gba", 0x1AA451, 0x3E
-
-Route12_EventScript_1AA48F:: @ 81AA48F
-	.incbin "baserom.gba", 0x1AA48F, 0x3E
-
-Route12_EventScript_1AA4CD:: @ 81AA4CD
-	.incbin "baserom.gba", 0x1AA4CD, 0x3E
-
-Route12_EventScript_1AA50B:: @ 81AA50B
-	.incbin "baserom.gba", 0x1AA50B, 0x3E
-
-Route12_EventScript_1AA549:: @ 81AA549
-	.incbin "baserom.gba", 0x1AA549, 0x3E
-
-Route12_EventScript_1AA587:: @ 81AA587
-	.incbin "baserom.gba", 0x1AA587, 0x3E
-
-Route12_EventScript_1AA5C5:: @ 81AA5C5
-	.incbin "baserom.gba", 0x1AA5C5, 0x3E
-
-Route12_EventScript_1AA603:: @ 81AA603
-	.incbin "baserom.gba", 0x1AA603, 0x46
-
-Route12_EventScript_1AA649:: @ 81AA649
-	.incbin "baserom.gba", 0x1AA649, 0x46
-
-Route13_EventScript_1AA68F:: @ 81AA68F
-	.incbin "baserom.gba", 0x1AA68F, 0x3E
-
-Route13_EventScript_1AA6CD:: @ 81AA6CD
-	.incbin "baserom.gba", 0x1AA6CD, 0x3E
-
-Route13_EventScript_1AA70B:: @ 81AA70B
-	.incbin "baserom.gba", 0x1AA70B, 0x3E
-
-Route13_EventScript_1AA749:: @ 81AA749
-	.incbin "baserom.gba", 0x1AA749, 0x3E
-
-Route13_EventScript_1AA787:: @ 81AA787
-	.incbin "baserom.gba", 0x1AA787, 0x3E
-
-Route13_EventScript_1AA7C5:: @ 81AA7C5
-	.incbin "baserom.gba", 0x1AA7C5, 0x3E
-
-Route13_EventScript_1AA803:: @ 81AA803
-	.incbin "baserom.gba", 0x1AA803, 0x3E
-
-Route13_EventScript_1AA841:: @ 81AA841
-	.incbin "baserom.gba", 0x1AA841, 0x3E
-
-Route13_EventScript_1AA87F:: @ 81AA87F
-	.incbin "baserom.gba", 0x1AA87F, 0x3E
-
-Route13_EventScript_1AA8BD:: @ 81AA8BD
-	.incbin "baserom.gba", 0x1AA8BD, 0x3E
-
-Route14_EventScript_1AA8FB:: @ 81AA8FB
-	.incbin "baserom.gba", 0x1AA8FB, 0x3E
-
-Route14_EventScript_1AA939:: @ 81AA939
-	.incbin "baserom.gba", 0x1AA939, 0x3E
-
-Route14_EventScript_1AA977:: @ 81AA977
-	.incbin "baserom.gba", 0x1AA977, 0x3E
-
-Route14_EventScript_1AA9B5:: @ 81AA9B5
-	.incbin "baserom.gba", 0x1AA9B5, 0x3E
-
-Route14_EventScript_1AA9F3:: @ 81AA9F3
-	.incbin "baserom.gba", 0x1AA9F3, 0x3E
-
-Route14_EventScript_1AAA31:: @ 81AAA31
-	.incbin "baserom.gba", 0x1AAA31, 0x3E
-
-Route14_EventScript_1AAA6F:: @ 81AAA6F
-	.incbin "baserom.gba", 0x1AAA6F, 0x3E
-
-Route14_EventScript_1AAAAD:: @ 81AAAAD
-	.incbin "baserom.gba", 0x1AAAAD, 0x3E
-
-Route14_EventScript_1AAAEB:: @ 81AAAEB
-	.incbin "baserom.gba", 0x1AAAEB, 0x3E
-
-Route14_EventScript_1AAB29:: @ 81AAB29
-	.incbin "baserom.gba", 0x1AAB29, 0x3E
-
-Route14_EventScript_1AAB67:: @ 81AAB67
-	.incbin "baserom.gba", 0x1AAB67, 0x46
-
-Route14_EventScript_1AABAD:: @ 81AABAD
-	.incbin "baserom.gba", 0x1AABAD, 0x46
-
-Route15_EventScript_1AABF3:: @ 81AABF3
-	.incbin "baserom.gba", 0x1AABF3, 0x3E
-
-Route15_EventScript_1AAC31:: @ 81AAC31
-	.incbin "baserom.gba", 0x1AAC31, 0x3E
-
-Route15_EventScript_1AAC6F:: @ 81AAC6F
-	.incbin "baserom.gba", 0x1AAC6F, 0x3E
-
-Route15_EventScript_1AACAD:: @ 81AACAD
-	.incbin "baserom.gba", 0x1AACAD, 0x3E
-
-Route15_EventScript_1AACEB:: @ 81AACEB
-	.incbin "baserom.gba", 0x1AACEB, 0x3E
-
-Route15_EventScript_1AAD29:: @ 81AAD29
-	.incbin "baserom.gba", 0x1AAD29, 0x3E
-
-Route15_EventScript_1AAD67:: @ 81AAD67
-	.incbin "baserom.gba", 0x1AAD67, 0x3E
-
-Route15_EventScript_1AADA5:: @ 81AADA5
-	.incbin "baserom.gba", 0x1AADA5, 0x3E
-
-Route15_EventScript_1AADE3:: @ 81AADE3
-	.incbin "baserom.gba", 0x1AADE3, 0x3E
-
-Route15_EventScript_1AAE21:: @ 81AAE21
-	.incbin "baserom.gba", 0x1AAE21, 0x3E
-
-Route15_EventScript_1AAE5F:: @ 81AAE5F
-	.incbin "baserom.gba", 0x1AAE5F, 0x46
-
-Route15_EventScript_1AAEA5:: @ 81AAEA5
-	.incbin "baserom.gba", 0x1AAEA5, 0x46
-
-Route16_EventScript_1AAEEB:: @ 81AAEEB
-	.incbin "baserom.gba", 0x1AAEEB, 0x3E
-
-Route16_EventScript_1AAF29:: @ 81AAF29
-	.incbin "baserom.gba", 0x1AAF29, 0x3E
-
-Route16_EventScript_1AAF67:: @ 81AAF67
-	.incbin "baserom.gba", 0x1AAF67, 0x3E
-
-Route16_EventScript_1AAFA5:: @ 81AAFA5
-	.incbin "baserom.gba", 0x1AAFA5, 0x3E
-
-Route16_EventScript_1AAFE3:: @ 81AAFE3
-	.incbin "baserom.gba", 0x1AAFE3, 0x3E
-
-Route16_EventScript_1AB021:: @ 81AB021
-	.incbin "baserom.gba", 0x1AB021, 0x3E
-
-Route16_EventScript_1AB05F:: @ 81AB05F
-	.incbin "baserom.gba", 0x1AB05F, 0x46
-
-Route16_EventScript_1AB0A5:: @ 81AB0A5
-	.incbin "baserom.gba", 0x1AB0A5, 0x46
-
-Route17_EventScript_1AB0EB:: @ 81AB0EB
-	.incbin "baserom.gba", 0x1AB0EB, 0x3E
-
-Route17_EventScript_1AB129:: @ 81AB129
-	.incbin "baserom.gba", 0x1AB129, 0x3E
-
-Route17_EventScript_1AB167:: @ 81AB167
-	.incbin "baserom.gba", 0x1AB167, 0x3E
-
-Route17_EventScript_1AB1A5:: @ 81AB1A5
-	.incbin "baserom.gba", 0x1AB1A5, 0x3E
-
-Route17_EventScript_1AB1E3:: @ 81AB1E3
-	.incbin "baserom.gba", 0x1AB1E3, 0x3E
-
-Route17_EventScript_1AB221:: @ 81AB221
-	.incbin "baserom.gba", 0x1AB221, 0x3E
-
-Route17_EventScript_1AB25F:: @ 81AB25F
-	.incbin "baserom.gba", 0x1AB25F, 0x3E
-
-Route17_EventScript_1AB29D:: @ 81AB29D
-	.incbin "baserom.gba", 0x1AB29D, 0x3E
-
-Route17_EventScript_1AB2DB:: @ 81AB2DB
-	.incbin "baserom.gba", 0x1AB2DB, 0x3E
-
-Route17_EventScript_1AB319:: @ 81AB319
-	.incbin "baserom.gba", 0x1AB319, 0x3E
-
-Route18_EventScript_1AB357:: @ 81AB357
-	.incbin "baserom.gba", 0x1AB357, 0x3E
-
-Route18_EventScript_1AB395:: @ 81AB395
-	.incbin "baserom.gba", 0x1AB395, 0x3E
-
-Route18_EventScript_1AB3D3:: @ 81AB3D3
-	.incbin "baserom.gba", 0x1AB3D3, 0x3E
-
-Route19_EventScript_1AB411:: @ 81AB411
-	.incbin "baserom.gba", 0x1AB411, 0x3E
-
-Route19_EventScript_1AB44F:: @ 81AB44F
-	.incbin "baserom.gba", 0x1AB44F, 0x3E
-
-Route19_EventScript_1AB48D:: @ 81AB48D
-	.incbin "baserom.gba", 0x1AB48D, 0x3E
-
-Route19_EventScript_1AB4CB:: @ 81AB4CB
-	.incbin "baserom.gba", 0x1AB4CB, 0x3E
-
-Route19_EventScript_1AB509:: @ 81AB509
-	.incbin "baserom.gba", 0x1AB509, 0x3E
-
-Route19_EventScript_1AB547:: @ 81AB547
-	.incbin "baserom.gba", 0x1AB547, 0x3E
-
-Route19_EventScript_1AB585:: @ 81AB585
-	.incbin "baserom.gba", 0x1AB585, 0x3E
-
-Route19_EventScript_1AB5C3:: @ 81AB5C3
-	.incbin "baserom.gba", 0x1AB5C3, 0x3E
-
-Route19_EventScript_1AB601:: @ 81AB601
-	.incbin "baserom.gba", 0x1AB601, 0x3E
-
-Route19_EventScript_1AB63F:: @ 81AB63F
-	.incbin "baserom.gba", 0x1AB63F, 0x3E
-
-Route19_EventScript_1AB67D:: @ 81AB67D
-	.incbin "baserom.gba", 0x1AB67D, 0x46
-
-Route19_EventScript_1AB6C3:: @ 81AB6C3
-	.incbin "baserom.gba", 0x1AB6C3, 0x46
-
-Route20_EventScript_1AB709:: @ 81AB709
-	.incbin "baserom.gba", 0x1AB709, 0x3E
-
-Route20_EventScript_1AB747:: @ 81AB747
-	.incbin "baserom.gba", 0x1AB747, 0x3E
-
-Route20_EventScript_1AB785:: @ 81AB785
-	.incbin "baserom.gba", 0x1AB785, 0x3E
-
-Route20_EventScript_1AB7C3:: @ 81AB7C3
-	.incbin "baserom.gba", 0x1AB7C3, 0x3E
-
-Route20_EventScript_1AB801:: @ 81AB801
-	.incbin "baserom.gba", 0x1AB801, 0x3E
-
-Route20_EventScript_1AB83F:: @ 81AB83F
-	.incbin "baserom.gba", 0x1AB83F, 0x3E
-
-Route20_EventScript_1AB87D:: @ 81AB87D
-	.incbin "baserom.gba", 0x1AB87D, 0x3E
-
-Route20_EventScript_1AB8BB:: @ 81AB8BB
-	.incbin "baserom.gba", 0x1AB8BB, 0x3E
-
-Route20_EventScript_1AB8F9:: @ 81AB8F9
-	.incbin "baserom.gba", 0x1AB8F9, 0x3E
-
-Route20_EventScript_1AB937:: @ 81AB937
-	.incbin "baserom.gba", 0x1AB937, 0x3E
-
-Route21_North_EventScript_1AB975:: @ 81AB975
-	.incbin "baserom.gba", 0x1AB975, 0x3E
-
-Route21_South_EventScript_1AB9B3:: @ 81AB9B3
-	.incbin "baserom.gba", 0x1AB9B3, 0x3E
-
-Route21_North_EventScript_1AB9F1:: @ 81AB9F1
-	.incbin "baserom.gba", 0x1AB9F1, 0x3E
-
-Route21_South_EventScript_1ABA2F:: @ 81ABA2F
-	.incbin "baserom.gba", 0x1ABA2F, 0x3E
-
-Route21_North_EventScript_1ABA6D:: @ 81ABA6D
-	.incbin "baserom.gba", 0x1ABA6D, 0x3E
-
-Route21_South_EventScript_1ABAAB:: @ 81ABAAB
-	.incbin "baserom.gba", 0x1ABAAB, 0x3E
-
-Route21_South_EventScript_1ABAE9:: @ 81ABAE9
-	.incbin "baserom.gba", 0x1ABAE9, 0x3E
-
-Route21_South_EventScript_1ABB27:: @ 81ABB27
-	.incbin "baserom.gba", 0x1ABB27, 0x3E
-
-Route21_North_EventScript_1ABB65:: @ 81ABB65
-	.incbin "baserom.gba", 0x1ABB65, 0x46
-
-Route21_North_EventScript_1ABBAB:: @ 81ABBAB
-	.incbin "baserom.gba", 0x1ABBAB, 0x46
-
-OneIsland_KindleRoad_EventScript_1ABBF1:: @ 81ABBF1
-	.incbin "baserom.gba", 0x1ABBF1, 0x3E
-
-OneIsland_KindleRoad_EventScript_1ABC2F:: @ 81ABC2F
-	.incbin "baserom.gba", 0x1ABC2F, 0x3E
-
-OneIsland_KindleRoad_EventScript_1ABC6D:: @ 81ABC6D
-	.incbin "baserom.gba", 0x1ABC6D, 0x3E
-
-OneIsland_KindleRoad_EventScript_1ABCAB:: @ 81ABCAB
-	.incbin "baserom.gba", 0x1ABCAB, 0x3E
-
-OneIsland_KindleRoad_EventScript_1ABCE9:: @ 81ABCE9
-	.incbin "baserom.gba", 0x1ABCE9, 0x3E
-
-OneIsland_KindleRoad_EventScript_1ABD27:: @ 81ABD27
-	.incbin "baserom.gba", 0x1ABD27, 0x3E
-
-OneIsland_KindleRoad_EventScript_1ABD65:: @ 81ABD65
-	.incbin "baserom.gba", 0x1ABD65, 0x3E
-
-OneIsland_KindleRoad_EventScript_1ABDA3:: @ 81ABDA3
-	.incbin "baserom.gba", 0x1ABDA3, 0x3E
-
-OneIsland_KindleRoad_EventScript_1ABDE1:: @ 81ABDE1
-	.incbin "baserom.gba", 0x1ABDE1, 0x3E
-
-OneIsland_KindleRoad_EventScript_1ABE1F:: @ 81ABE1F
-	.incbin "baserom.gba", 0x1ABE1F, 0x3E
-
-OneIsland_KindleRoad_EventScript_1ABE5D:: @ 81ABE5D
-	.incbin "baserom.gba", 0x1ABE5D, 0x3E
-
-OneIsland_KindleRoad_EventScript_1ABE9B:: @ 81ABE9B
-	.incbin "baserom.gba", 0x1ABE9B, 0x46
-
-OneIsland_KindleRoad_EventScript_1ABEE1:: @ 81ABEE1
-	.incbin "baserom.gba", 0x1ABEE1, 0x46
-
-OneIsland_TreasureBeach_EventScript_1ABF27:: @ 81ABF27
-	.incbin "baserom.gba", 0x1ABF27, 0x3E
-
-ThreeIsland_BondBridge_EventScript_1ABF65:: @ 81ABF65
-	.incbin "baserom.gba", 0x1ABF65, 0x3E
-
-ThreeIsland_BondBridge_EventScript_1ABFA3:: @ 81ABFA3
-	.incbin "baserom.gba", 0x1ABFA3, 0x3E
-
-ThreeIsland_BondBridge_EventScript_1ABFE1:: @ 81ABFE1
-	.incbin "baserom.gba", 0x1ABFE1, 0x3E
-
-ThreeIsland_BondBridge_EventScript_1AC01F:: @ 81AC01F
-	.incbin "baserom.gba", 0x1AC01F, 0x3E
-
-ThreeIsland_BondBridge_EventScript_1AC05D:: @ 81AC05D
-	.incbin "baserom.gba", 0x1AC05D, 0x3E
-
-ThreeIsland_BondBridge_EventScript_1AC09B:: @ 81AC09B
-	.incbin "baserom.gba", 0x1AC09B, 0x46
-
-ThreeIsland_BondBridge_EventScript_1AC0E1:: @ 81AC0E1
-	.incbin "baserom.gba", 0x1AC0E1, 0x46
-
-FiveIsland_ResortGorgeous_EventScript_1AC127:: @ 81AC127
-	.incbin "baserom.gba", 0x1AC127, 0x3E
-
-FiveIsland_ResortGorgeous_EventScript_1AC165:: @ 81AC165
-	.incbin "baserom.gba", 0x1AC165, 0x3E
-
-FiveIsland_ResortGorgeous_EventScript_1AC1A3:: @ 81AC1A3
-	.incbin "baserom.gba", 0x1AC1A3, 0x3E
-
-FiveIsland_ResortGorgeous_EventScript_1AC1E1:: @ 81AC1E1
-	.incbin "baserom.gba", 0x1AC1E1, 0x3E
-
-FiveIsland_ResortGorgeous_EventScript_1AC21F:: @ 81AC21F
-	.incbin "baserom.gba", 0x1AC21F, 0x3E
-
-FiveIsland_ResortGorgeous_EventScript_1AC25D:: @ 81AC25D
-	.incbin "baserom.gba", 0x1AC25D, 0x3E
-
-FiveIsland_ResortGorgeous_EventScript_1AC29B:: @ 81AC29B
-	.incbin "baserom.gba", 0x1AC29B, 0x3E
-
-FiveIsland_WaterLabyrinth_EventScript_1AC2D9:: @ 81AC2D9
-	.incbin "baserom.gba", 0x1AC2D9, 0x3E
-
-FiveIsland_MemorialPillar_EventScript_1AC317:: @ 81AC317
-	.incbin "baserom.gba", 0x1AC317, 0x3E
-
-FiveIsland_MemorialPillar_EventScript_1AC355:: @ 81AC355
-	.incbin "baserom.gba", 0x1AC355, 0x3E
-
-FiveIsland_MemorialPillar_EventScript_1AC393:: @ 81AC393
-	.incbin "baserom.gba", 0x1AC393, 0x3E
-
-SixIsland_OutcastIsland_EventScript_1AC3D1:: @ 81AC3D1
-	.incbin "baserom.gba", 0x1AC3D1, 0x3E
-
-SixIsland_OutcastIsland_EventScript_1AC40F:: @ 81AC40F
-	.incbin "baserom.gba", 0x1AC40F, 0x3E
-
-SixIsland_OutcastIsland_EventScript_1AC44D:: @ 81AC44D
-	.incbin "baserom.gba", 0x1AC44D, 0x3E
-
-SixIsland_OutcastIsland_EventScript_1AC48B:: @ 81AC48B
-	.incbin "baserom.gba", 0x1AC48B, 0x46
-
-SixIsland_OutcastIsland_EventScript_1AC4D1:: @ 81AC4D1
-	.incbin "baserom.gba", 0x1AC4D1, 0x46
-
-SixIsland_GreenPath_EventScript_1AC517:: @ 81AC517
-	.incbin "baserom.gba", 0x1AC517, 0x3E
-
-SixIsland_WaterPath_EventScript_1AC555:: @ 81AC555
-	.incbin "baserom.gba", 0x1AC555, 0x3E
-
-SixIsland_WaterPath_EventScript_1AC593:: @ 81AC593
-	.incbin "baserom.gba", 0x1AC593, 0x3E
-
-SixIsland_WaterPath_EventScript_1AC5D1:: @ 81AC5D1
-	.incbin "baserom.gba", 0x1AC5D1, 0x3E
-
-SixIsland_WaterPath_EventScript_1AC60F:: @ 81AC60F
-	.incbin "baserom.gba", 0x1AC60F, 0x3E
-
-SixIsland_WaterPath_EventScript_1AC64D:: @ 81AC64D
-	.incbin "baserom.gba", 0x1AC64D, 0x46
-
-SixIsland_WaterPath_EventScript_1AC693:: @ 81AC693
-	.incbin "baserom.gba", 0x1AC693, 0x46
-
-SixIsland_WaterPath_EventScript_1AC6D9:: @ 81AC6D9
-	.incbin "baserom.gba", 0x1AC6D9, 0x3E
-
-SixIsland_RuinValley_EventScript_1AC717:: @ 81AC717
-	.incbin "baserom.gba", 0x1AC717, 0x3E
-
-SixIsland_RuinValley_EventScript_1AC755:: @ 81AC755
-	.incbin "baserom.gba", 0x1AC755, 0x3E
-
-SixIsland_RuinValley_EventScript_1AC793:: @ 81AC793
-	.incbin "baserom.gba", 0x1AC793, 0x3E
-
-SixIsland_RuinValley_EventScript_1AC7D1:: @ 81AC7D1
-	.incbin "baserom.gba", 0x1AC7D1, 0x3E
-
-SixIsland_RuinValley_EventScript_1AC80F:: @ 81AC80F
-	.incbin "baserom.gba", 0x1AC80F, 0x3E
-
-SevenIsland_TrainerTower_EventScript_1AC84D:: @ 81AC84D
-	.incbin "baserom.gba", 0x1AC84D, 0x3E
-
-SevenIsland_TrainerTower_EventScript_1AC88B:: @ 81AC88B
-	.incbin "baserom.gba", 0x1AC88B, 0x3E
-
-SevenIsland_SevaultCanyon_Entrance_EventScript_1AC8C9:: @ 81AC8C9
-	.incbin "baserom.gba", 0x1AC8C9, 0x3E
-
-SevenIsland_SevaultCanyon_Entrance_EventScript_1AC907:: @ 81AC907
-	.incbin "baserom.gba", 0x1AC907, 0x46
-
-SevenIsland_SevaultCanyon_Entrance_EventScript_1AC94D:: @ 81AC94D
-	.incbin "baserom.gba", 0x1AC94D, 0x46
-
-SevenIsland_SevaultCanyon_Entrance_EventScript_1AC993:: @ 81AC993
-	.incbin "baserom.gba", 0x1AC993, 0x3E
-
-SevenIsland_SevaultCanyon_Entrance_EventScript_1AC9D1:: @ 81AC9D1
-	.incbin "baserom.gba", 0x1AC9D1, 0x3E
-
-SevenIsland_SevaultCanyon_Entrance_EventScript_1ACA0F:: @ 81ACA0F
-	.incbin "baserom.gba", 0x1ACA0F, 0x3E
-
-SevenIsland_SevaultCanyon_EventScript_1ACA4D:: @ 81ACA4D
-	.incbin "baserom.gba", 0x1ACA4D, 0x3E
-
-SevenIsland_SevaultCanyon_EventScript_1ACA8B:: @ 81ACA8B
-	.incbin "baserom.gba", 0x1ACA8B, 0x3E
-
-SevenIsland_SevaultCanyon_EventScript_1ACAC9:: @ 81ACAC9
-	.incbin "baserom.gba", 0x1ACAC9, 0x3E
-
-SevenIsland_SevaultCanyon_EventScript_1ACB07:: @ 81ACB07
-	.incbin "baserom.gba", 0x1ACB07, 0x3E
-
-SevenIsland_SevaultCanyon_EventScript_1ACB45:: @ 81ACB45
-	.incbin "baserom.gba", 0x1ACB45, 0x3E
-
-SevenIsland_SevaultCanyon_EventScript_1ACB83:: @ 81ACB83
-	.incbin "baserom.gba", 0x1ACB83, 0x3E
-
-SevenIsland_SevaultCanyon_EventScript_1ACBC1:: @ 81ACBC1
-	.incbin "baserom.gba", 0x1ACBC1, 0x46
-
-SevenIsland_SevaultCanyon_EventScript_1ACC07:: @ 81ACC07
-	.incbin "baserom.gba", 0x1ACC07, 0x46
-
-SevenIsland_TanobyRuins_EventScript_1ACC4D:: @ 81ACC4D
-	.incbin "baserom.gba", 0x1ACC4D, 0x3E
-
-SevenIsland_TanobyRuins_EventScript_1ACC8B:: @ 81ACC8B
-	.incbin "baserom.gba", 0x1ACC8B, 0x3E
-
-SevenIsland_TanobyRuins_EventScript_1ACCC9:: @ 81ACCC9
-	.incbin "baserom.gba", 0x1ACCC9, 0x3E
-
-SevenIsland_TanobyRuins_EventScript_1ACD07:: @ 81ACD07
-	.incbin "baserom.gba", 0x1ACD07, 0x5E
-
-ViridianCity_House2_EventScript_1ACD65:: @ 81ACD65
-	.incbin "baserom.gba", 0x1ACD65, 0x6B
-
-FourIsland_PokemonCenter_1F_EventScript_1ACDD0:: @ 81ACDD0
-	.incbin "baserom.gba", 0x1ACDD0, 0x1A
-
-Route4_EventScript_1ACDEA:: @ 81ACDEA
-	.incbin "baserom.gba", 0x1ACDEA, 0x19
-
-MtMoon_1F_EventScript_1ACE03:: @ 81ACE03
-	.incbin "baserom.gba", 0x1ACE03, 0x19
-
-PewterCity_Museum_1F_EventScript_1ACE1C:: @ 81ACE1C
-	.incbin "baserom.gba", 0x1ACE1C, 0x1A
-
-Route20_EventScript_1ACE36:: @ 81ACE36
-	.incbin "baserom.gba", 0x1ACE36, 0x19
-
-Route25_EventScript_1ACE4F:: @ 81ACE4F
-	.incbin "baserom.gba", 0x1ACE4F, 0x19
-
-CeruleanCity_PokemonCenter_1F_EventScript_1ACE68:: @ 81ACE68
-	.incbin "baserom.gba", 0x1ACE68, 0x1B
-
-VermilionCity_PokemonCenter_1F_EventScript_1ACE83:: @ 81ACE83
-	.incbin "baserom.gba", 0x1ACE83, 0x1A
-
-CeladonCity_Condominiums_2F_EventScript_1ACE9D:: @ 81ACE9D
-	.incbin "baserom.gba", 0x1ACE9D, 0x1B
-
-FuchsiaCity_Building1_EventScript_1ACEB8:: @ 81ACEB8
-	.incbin "baserom.gba", 0x1ACEB8, 0x1B
-
-SafariZone_Building3_EventScript_1ACED3:: @ 81ACED3
-	.incbin "baserom.gba", 0x1ACED3, 0x19
-
-SaffronCity_PokemonCenter_1F_EventScript_1ACEEC:: @ 81ACEEC
-	.incbin "baserom.gba", 0x1ACEEC, 0x1B
-
-CinnabarIsland_Gym_EventScript_1ACF07:: @ 81ACF07
-	.incbin "baserom.gba", 0x1ACF07, 0x25
-
-FiveIsland_ResortGorgeous_House_EventScript_1ACF2C:: @ 81ACF2C
-	.incbin "baserom.gba", 0x1ACF2C, 0x1A
-
-FourIsland_Mart_EventScript_1ACF46:: @ 81ACF46
-	.incbin "baserom.gba", 0x1ACF46, 0x19
-
-FiveIsland_PokemonCenter_1F_EventScript_1ACF5F:: @ 81ACF5F
-	.incbin "baserom.gba", 0x1ACF5F, 0x1B
-
-SaffronCity_PokemonTrainerFanClub_EventScript_1ACF7A:: @ 81ACF7A
-	.incbin "baserom.gba", 0x1ACF7A, 0x1B
-
-SevenIsland_SevaultCanyon_EventScript_1ACF95:: @ 81ACF95
-	.incbin "baserom.gba", 0x1ACF95, 0x19
-
-IndigoPlateau_PokemonCenter_1F_EventScript_1ACFAE:: @ 81ACFAE
-	.incbin "baserom.gba", 0x1ACFAE, 0x26
-
-SevenIsland_PokemonCenter_1F_EventScript_1ACFD4:: @ 81ACFD4
-	.incbin "baserom.gba", 0x1ACFD4, 0x1B
-
-SixIsland_Mart_EventScript_1ACFEF:: @ 81ACFEF
-	.incbin "baserom.gba", 0x1ACFEF, 0x4B
-
-SaffronCity_EventScript_1AD03A:: @ 81AD03A
-	.incbin "baserom.gba", 0x1AD03A, 0x19
-
-CeladonCity_DepartmentStore_2F_EventScript_1AD053:: @ 81AD053
-	.incbin "baserom.gba", 0x1AD053, 0x19
-
-IndigoPlateau_PokemonCenter_1F_EventScript_1AD06C:: @ 81AD06C
-	.incbin "baserom.gba", 0x1AD06C, 0x1B
-
-IndigoPlateau_PokemonCenter_1F_EventScript_1AD087:: @ 81AD087
-	.incbin "baserom.gba", 0x1AD087, 0x19
-
-LavenderTown_PokemonCenter_1F_EventScript_1AD0A0:: @ 81AD0A0
-	.incbin "baserom.gba", 0x1AD0A0, 0x19
-
-CinnabarIsland_PokemonCenter_1F_EventScript_1AD0B9:: @ 81AD0B9
-	.incbin "baserom.gba", 0x1AD0B9, 0x1B
-
-SilphCo_5F_EventScript_1AD0D4:: @ 81AD0D4
-	.incbin "baserom.gba", 0x1AD0D4, 0x19
-
-@ 0x19
-SilphCo_8F_EventScript_1AD0ED:: @ 81AD0ED
-	.incbin "baserom.gba", 0x1AD0ED, 0x19
-
-	.include "data/text/fame_checker.inc"
-
-CeladonCity_GameCorner_EventScript_1B2867:: @ 81B2867
-	.incbin "baserom.gba", 0x1B2867, 0xD1
-
-FourIsland_House2_EventScript_1B2938:: @ 81B2938
-	.incbin "baserom.gba", 0x1B2938, 0x4C0
-
-	.include "data/text/help_system.inc"
-
-CeladonCity_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
-CeruleanCity_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
-CinnabarIsland_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
-FiveIsland_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
-FourIsland_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
-FuchsiaCity_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
-IndigoPlateau_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
-LavenderTown_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
-OneIsland_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
-PewterCity_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
-Route10_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
-Route4_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
-SaffronCity_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
-SevenIsland_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
-SixIsland_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
-ThreeIsland_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
-TwoIsland_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
-VermilionCity_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
-ViridianCity_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
-	.incbin "baserom.gba", 0x1BB1B4, 0x1E
-
-CeruleanCity_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
-CinnabarIsland_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
-FiveIsland_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
-FuchsiaCity_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
-OneIsland_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
-PewterCity_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
-SevenIsland_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
-VermilionCity_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
-FourIsland_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
-SixIsland_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
-ThreeIsland_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
-TwoIsland_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
-Route10_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
-Route10_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
-Route4_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
-SaffronCity_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
-IndigoPlateau_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
-CeladonCity_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
-LavenderTown_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
-ViridianCity_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
-	.incbin "baserom.gba", 0x1BB1D2, 0x1B
-
-CeladonCity_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
-CeruleanCity_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
-CinnabarIsland_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
-FiveIsland_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
-FourIsland_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
-FuchsiaCity_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
-IndigoPlateau_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
-LavenderTown_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
-OneIsland_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
-PewterCity_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
-Route10_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
-Route4_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
-SaffronCity_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
-SevenIsland_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
-SixIsland_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
-ThreeIsland_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
-TwoIsland_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
-VermilionCity_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
-ViridianCity_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
-	.incbin "baserom.gba", 0x1BB1ED, 0x3A
-
-EventScript_1BB227:: @ 81BB227
-	.incbin "baserom.gba", 0x1BB227, 0x10
-
-CeladonCity_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
-CeruleanCity_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
-CinnabarIsland_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
-FiveIsland_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
-FourIsland_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
-FuchsiaCity_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
-IndigoPlateau_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
-LavenderTown_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
-OneIsland_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
-PewterCity_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
-Route10_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
-Route4_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
-SaffronCity_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
-SevenIsland_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
-SixIsland_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
-ThreeIsland_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
-TwoIsland_JoyfulGameCorner_MapScript4_1BB237:: @ 81BB237
-TwoIsland_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
-VermilionCity_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
-ViridianCity_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
-	.incbin "baserom.gba", 0x1BB237, 0x6C
-
-CeladonCity_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
-CeruleanCity_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
-CinnabarIsland_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
-FiveIsland_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
-FourIsland_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
-FuchsiaCity_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
-IndigoPlateau_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
-LavenderTown_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
-OneIsland_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
-PewterCity_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
-Route10_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
-Route4_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
-SaffronCity_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
-SevenIsland_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
-SixIsland_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
-ThreeIsland_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
-TwoIsland_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
-VermilionCity_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
-ViridianCity_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
-	.incbin "baserom.gba", 0x1BB2A3, 0x5A
-
-EventScript_1BB2FD:: @ 81BB2FD
-	.incbin "baserom.gba", 0x1BB2FD, 0x1A6
-
-EventScript_1BB4A3:: @ 81BB4A3
-	.incbin "baserom.gba", 0x1BB4A3, 0x208
-
-EventScript_1BB6AB:: @ 81BB6AB
-	.incbin "baserom.gba", 0x1BB6AB, 0x133
-
-EventScript_1BB7DE:: @ 81BB7DE
-	.incbin "baserom.gba", 0x1BB7DE, 0xC9
-
-gUnknown_81BB8A7:: @ 81BB8A7
-	.incbin "baserom.gba", 0x1BB8A7, 0x1C
-
-gUnknown_81BB8C3:: @ 81BB8C3
-UnknownMap_00_00_EventScript_1BB8C3:: @ 81BB8C3
-	.incbin "baserom.gba", 0x1BB8C3, 0xC
-
-gUnknown_81BB8CF:: @ 81BB8CF
-UnknownMap_00_00_EventScript_1BB8CF:: @ 81BB8CF
-	.incbin "baserom.gba", 0x1BB8CF, 0xC
-
-gUnknown_81BB8DB:: @ 81BB8DB
-UnknownMap_00_03_EventScript_1BB8DB:: @ 81BB8DB
-	.incbin "baserom.gba", 0x1BB8DB, 0x1D
-
-gUnknown_81BB8F8:: @ 81BB8F8
-UnknownMap_00_03_EventScript_1BB8F8:: @ 81BB8F8
-	.incbin "baserom.gba", 0x1BB8F8, 0x1D
-
-gUnknown_81BB915:: @ 81BB915
-UnknownMap_00_03_EventScript_1BB915:: @ 81BB915
-	.incbin "baserom.gba", 0x1BB915, 0x1D
-
-gUnknown_81BB932:: @ 81BB932
-UnknownMap_00_03_EventScript_1BB932:: @ 81BB932
-	.incbin "baserom.gba", 0x1BB932, 0x1E
-
-gUnknown_81BB950:: @ 81BB950
-UnknownMap_00_01_EventScript_1BB950:: @ 81BB950
-	.incbin "baserom.gba", 0x1BB950, 0xC
-
-gUnknown_81BB95C:: @ 81BB95C
-UnknownMap_00_01_EventScript_1BB95C:: @ 81BB95C
-	.incbin "baserom.gba", 0x1BB95C, 0x24
-
-gUnknown_81BB980:: @ 81BB980
-UnknownMap_00_02_EventScript_1BB980:: @ 81BB980
-	.incbin "baserom.gba", 0x1BB980, 0x1
-
-gUnknown_81BB981:: @ 81BB981
-	.incbin "baserom.gba", 0x1BB981, 0x11
-
-gUnknown_81BB992:: @ 81BB992
-	.incbin "baserom.gba", 0x1BB992, 0x11
-
-gUnknown_81BB9A3:: @ 81BB9A3
-	.incbin "baserom.gba", 0x1BB9A3, 0xC
-
-UnknownMap_00_00_EventScript_1BB9AF:: @ 81BB9AF
-	.incbin "baserom.gba", 0x1BB9AF, 0x12
-
-UnknownMap_00_01_EventScript_1BB9C1:: @ 81BB9C1
-	.incbin "baserom.gba", 0x1BB9C1, 0x12
-
-UnknownMap_00_02_EventScript_1BB9D3:: @ 81BB9D3
-	.incbin "baserom.gba", 0x1BB9D3, 0x1
-
-gUnknown_81BB9D4:: @ 81BB9D4
-	.incbin "baserom.gba", 0x1BB9D4, 0x1C
-
-gUnknown_81BB9F0:: @ 81BB9F0
-	.incbin "baserom.gba", 0x1BB9F0, 0xC
-
-gUnknown_81BB9FC:: @ 81BB9FC
-	.incbin "baserom.gba", 0x1BB9FC, 0x5DC
-
-gUnknown_81BBFD8:: @ 81BBFD8
-	.incbin "baserom.gba", 0x1BBFD8, 0x84
-
-CeladonCity_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-CeruleanCity_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-CinnabarIsland_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-FiveIsland_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-FourIsland_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-FuchsiaCity_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-IndigoPlateau_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-LavenderTown_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-OneIsland_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-PewterCity_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-Route10_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-Route4_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-SaffronCity_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-SevenIsland_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-SixIsland_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-ThreeIsland_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-TwoIsland_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-VermilionCity_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-ViridianCity_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-	.incbin "baserom.gba", 0x1BC05C, 0x4
-
-EventScript_1BC060:: @ 81BC060
-	.incbin "baserom.gba", 0x1BC060, 0x6E
-
-EventScript_1BC0CE:: @ 81BC0CE
-	.incbin "baserom.gba", 0x1BC0CE, 0x219
-
-TwoIsland_JoyfulGameCorner_EventScript_1BC2E7:: @ 81BC2E7
-	.incbin "baserom.gba", 0x1BC2E7, 0x15
-
-TwoIsland_JoyfulGameCorner_EventScript_1BC2FC:: @ 81BC2FC
-	.incbin "baserom.gba", 0x1BC2FC, 0x1B0
-
-gUnknown_81BC4AC:: @ 81BC4AC
-	.incbin "baserom.gba", 0x1BC4AC, 0x22
-
-gUnknown_81BC4CE:: @ 81BC4CE
-	.incbin "baserom.gba", 0x1BC4CE, 0x3F
-
-gUnknown_81BC50D:: @ 81BC50D
-	.incbin "baserom.gba", 0x1BC50D, 0x3F
-
-gUnknown_81BC54C:: @ 81BC54C
-	.incbin "baserom.gba", 0x1BC54C, 0x77E
-
-Text_1BCCCA:: @ 81BCCCA
-	.incbin "baserom.gba", 0x1BCCCA, 0x1249
-
-CeladonCity_EventScript_1BDF13:: @ 81BDF13
-CeladonCity_Gym_EventScript_1BDF13:: @ 81BDF13
-FiveIsland_Meadow_EventScript_1BDF13:: @ 81BDF13
-PewterCity_EventScript_1BDF13:: @ 81BDF13
-Route10_EventScript_1BDF13:: @ 81BDF13
-Route12_EventScript_1BDF13:: @ 81BDF13
-Route14_EventScript_1BDF13:: @ 81BDF13
-Route16_EventScript_1BDF13:: @ 81BDF13
-Route25_EventScript_1BDF13:: @ 81BDF13
-Route2_EventScript_1BDF13:: @ 81BDF13
-Route8_EventScript_1BDF13:: @ 81BDF13
-ThreeIsland_BerryForest_EventScript_1BDF13:: @ 81BDF13
-ThreeIsland_BondBridge_EventScript_1BDF13:: @ 81BDF13
-ThreeIsland_EventScript_1BDF13:: @ 81BDF13
-Route9_EventScript_1BDF13:: @ 81BDF13
-Route13_EventScript_1BDF13:: @ 81BDF13
-TwoIsland_EventScript_1BDF13:: @ 81BDF13
-FuchsiaCity_EventScript_1BDF13:: @ 81BDF13
-VermilionCity_EventScript_1BDF13:: @ 81BDF13
-VermilionCity_EventScript_1BDF13:: @ 81BDF13
-CeruleanCity_EventScript_1BDF13:: @ 81BDF13
-ViridianCity_EventScript_1BDF13:: @ 81BDF13
-	.incbin "baserom.gba", 0x1BDF13, 0x58
-
-gUnknown_81BDF6B:: @ 81BDF6B
-	.incbin "baserom.gba", 0x1BDF6B, 0xA1
-
-CeruleanCave_2F_EventScript_1BE00C:: @ 81BE00C
-MtEmber_Exterior_EventScript_1BE00C:: @ 81BE00C
-MtEmber_RubyPath_B1F_Stairs_EventScript_1BE00C:: @ 81BE00C
-MtEmber_RubyPath_B2F_EventScript_1BE00C:: @ 81BE00C
-MtEmber_SummitPath_2F_EventScript_1BE00C:: @ 81BE00C
-MtEmber_RubyPath_1F_EventScript_1BE00C:: @ 81BE00C
-SevenIsland_SevaultCanyon_EventScript_1BE00C:: @ 81BE00C
-FourIsland_EventScript_1BE00C:: @ 81BE00C
-OneIsland_KindleRoad_EventScript_1BE00C:: @ 81BE00C
-MtEmber_RubyPath_B2F_Stairs_EventScript_1BE00C:: @ 81BE00C
-MtEmber_RubyPath_B3F_EventScript_1BE00C:: @ 81BE00C
-MtEmber_RubyPath_B1F_EventScript_1BE00C:: @ 81BE00C
-MtEmber_RubyPath_B1F_EventScript_1BE00C:: @ 81BE00C
-RockTunnel_B1F_EventScript_1BE00C:: @ 81BE00C
-CeruleanCave_B1F_EventScript_1BE00C:: @ 81BE00C
-CeruleanCave_1F_EventScript_1BE00C:: @ 81BE00C
-	.incbin "baserom.gba", 0x1BE00C, 0x58
-
-EventScript_FldEffRockSmash:: @ 81BE064
-	.incbin "baserom.gba", 0x1BE064, 0xB9
-
-MtEmber_Exterior_EventScript_1BE11D:: @ 81BE11D
-MtEmber_RubyPath_B2F_EventScript_1BE11D:: @ 81BE11D
-MtEmber_Summit_EventScript_1BE11D:: @ 81BE11D
-SeafoamIslands_1F_EventScript_1BE11D:: @ 81BE11D
-SeafoamIslands_B2F_EventScript_1BE11D:: @ 81BE11D
-SevenIsland_SevaultCanyon_EventScript_1BE11D:: @ 81BE11D
-VictoryRoad_1F_EventScript_1BE11D:: @ 81BE11D
-VictoryRoad_3F_EventScript_1BE11D:: @ 81BE11D
-SixIsland_RuinValley_EventScript_1BE11D:: @ 81BE11D
-FuchsiaCity_Building1_EventScript_1BE11D:: @ 81BE11D
-SevenIsland_SeavaultCanyon_TanobyKey_EventScript_1BE11D:: @ 81BE11D
-MtEmber_RubyPath_B3F_EventScript_1BE11D:: @ 81BE11D
-SeafoamIslands_B3F_EventScript_1BE11D:: @ 81BE11D
-SeafoamIslands_B3F_EventScript_1BE11D:: @ 81BE11D
-SeafoamIslands_B1F_EventScript_1BE11D:: @ 81BE11D
-VictoryRoad_2F_EventScript_1BE11D:: @ 81BE11D
-	.incbin "baserom.gba", 0x1BE11D, 0x51
-
-EventScript_FldEffStrength:: @ 81BE16E
-	.incbin "baserom.gba", 0x1BE16E, 0x149
-
-gUnknown_81BE2B7:: @ 81BE2B7
-	.incbin "baserom.gba", 0x1BE2B7, 0x48
-
-gUnknown_81BE2FF:: @ 81BE2FF
-	.incbin "baserom.gba", 0x1BE2FF, 0x265
+gUnknown_81BE378:: @ 81BE378
+	.incbin "baserom.gba", 0x1BE378, 0x1EC
 
 EventScript_FailSweetScent:: @ 81BE564
 	.incbin "baserom.gba", 0x1BE564, 0x2A
@@ -5120,7 +12247,709 @@ gUnknown_81C13D6:: @ 81C13D6
 	.incbin "baserom.gba", 0x1C13D6, 0x53
 
 gUnknown_81C1429:: @ 81C1429
-	.incbin "baserom.gba", 0x1C1429, 0x3385
+	.incbin "baserom.gba", 0x1C1429, 0x51
+
+Text_1C147A:: @ 81C147A
+	.incbin "baserom.gba", 0x1C147A, 0x23
+
+Text_1C149D:: @ 81C149D
+	.incbin "baserom.gba", 0x1C149D, 0x56
+
+Text_1C14F3:: @ 81C14F3
+	.incbin "baserom.gba", 0x1C14F3, 0x2E
+
+Text_1C1521:: @ 81C1521
+	.incbin "baserom.gba", 0x1C1521, 0x3C
+
+Text_1C155D:: @ 81C155D
+	.incbin "baserom.gba", 0x1C155D, 0x2B
+
+Text_1C1588:: @ 81C1588
+	.incbin "baserom.gba", 0x1C1588, 0x3D
+
+Text_1C15C5:: @ 81C15C5
+	.incbin "baserom.gba", 0x1C15C5, 0x34
+
+Text_1C15F9:: @ 81C15F9
+	.incbin "baserom.gba", 0x1C15F9, 0x16
+
+Text_1C160F:: @ 81C160F
+	.incbin "baserom.gba", 0x1C160F, 0x2D
+
+Text_1C163C:: @ 81C163C
+	.incbin "baserom.gba", 0x1C163C, 0x31
+
+Text_1C166D:: @ 81C166D
+	.incbin "baserom.gba", 0x1C166D, 0x75
+
+Text_1C16E2:: @ 81C16E2
+	.incbin "baserom.gba", 0x1C16E2, 0x41
+
+Text_1C1723:: @ 81C1723
+	.incbin "baserom.gba", 0x1C1723, 0x23
+
+Text_1C1746:: @ 81C1746
+	.incbin "baserom.gba", 0x1C1746, 0x25
+
+Text_1C176B:: @ 81C176B
+	.incbin "baserom.gba", 0x1C176B, 0x28
+
+Text_1C1793:: @ 81C1793
+	.incbin "baserom.gba", 0x1C1793, 0x3A
+
+Text_1C17CD:: @ 81C17CD
+	.incbin "baserom.gba", 0x1C17CD, 0x24
+
+Text_1C17F1:: @ 81C17F1
+	.incbin "baserom.gba", 0x1C17F1, 0x43
+
+Text_1C1834:: @ 81C1834
+	.incbin "baserom.gba", 0x1C1834, 0x3F
+
+Text_1C1873:: @ 81C1873
+	.incbin "baserom.gba", 0x1C1873, 0x37
+
+Text_1C18AA:: @ 81C18AA
+	.incbin "baserom.gba", 0x1C18AA, 0x32
+
+Text_1C18DC:: @ 81C18DC
+	.incbin "baserom.gba", 0x1C18DC, 0x43
+
+Text_1C191F:: @ 81C191F
+	.incbin "baserom.gba", 0x1C191F, 0x36
+
+Text_1C1955:: @ 81C1955
+	.incbin "baserom.gba", 0x1C1955, 0x47
+
+Text_1C199C:: @ 81C199C
+	.incbin "baserom.gba", 0x1C199C, 0x20
+
+Text_1C19BC:: @ 81C19BC
+	.incbin "baserom.gba", 0x1C19BC, 0x29
+
+Text_1C19E5:: @ 81C19E5
+	.incbin "baserom.gba", 0x1C19E5, 0x28
+
+Text_1C1A0D:: @ 81C1A0D
+	.incbin "baserom.gba", 0x1C1A0D, 0x21
+
+Text_1C1A2E:: @ 81C1A2E
+	.incbin "baserom.gba", 0x1C1A2E, 0x2F
+
+Text_1C1A5D:: @ 81C1A5D
+	.incbin "baserom.gba", 0x1C1A5D, 0x3E
+
+Text_1C1A9B:: @ 81C1A9B
+	.incbin "baserom.gba", 0x1C1A9B, 0x60
+
+Text_1C1AFB:: @ 81C1AFB
+	.incbin "baserom.gba", 0x1C1AFB, 0x3C
+
+Text_1C1B37:: @ 81C1B37
+	.incbin "baserom.gba", 0x1C1B37, 0x27
+
+Text_1C1B5E:: @ 81C1B5E
+	.incbin "baserom.gba", 0x1C1B5E, 0x25
+
+Text_1C1B83:: @ 81C1B83
+	.incbin "baserom.gba", 0x1C1B83, 0x3B
+
+Text_1C1BBE:: @ 81C1BBE
+	.incbin "baserom.gba", 0x1C1BBE, 0x1E
+
+Text_1C1BDC:: @ 81C1BDC
+	.incbin "baserom.gba", 0x1C1BDC, 0x1E
+
+Text_1C1BFA:: @ 81C1BFA
+	.incbin "baserom.gba", 0x1C1BFA, 0x55
+
+Text_1C1C4F:: @ 81C1C4F
+	.incbin "baserom.gba", 0x1C1C4F, 0x27
+
+Text_1C1C76:: @ 81C1C76
+	.incbin "baserom.gba", 0x1C1C76, 0x24
+
+Text_1C1C9A:: @ 81C1C9A
+	.incbin "baserom.gba", 0x1C1C9A, 0x39
+
+Text_1C1CD3:: @ 81C1CD3
+	.incbin "baserom.gba", 0x1C1CD3, 0x41
+
+Text_1C1D14:: @ 81C1D14
+	.incbin "baserom.gba", 0x1C1D14, 0x3C
+
+Text_1C1D50:: @ 81C1D50
+	.incbin "baserom.gba", 0x1C1D50, 0x29
+
+Text_1C1D79:: @ 81C1D79
+	.incbin "baserom.gba", 0x1C1D79, 0x3C
+
+Text_1C1DB5:: @ 81C1DB5
+	.incbin "baserom.gba", 0x1C1DB5, 0x2C
+
+Text_1C1DE1:: @ 81C1DE1
+	.incbin "baserom.gba", 0x1C1DE1, 0x3E
+
+Text_1C1E1F:: @ 81C1E1F
+	.incbin "baserom.gba", 0x1C1E1F, 0x38
+
+Text_1C1E57:: @ 81C1E57
+	.incbin "baserom.gba", 0x1C1E57, 0x48
+
+Text_1C1E9F:: @ 81C1E9F
+	.incbin "baserom.gba", 0x1C1E9F, 0x43
+
+Text_1C1EE2:: @ 81C1EE2
+	.incbin "baserom.gba", 0x1C1EE2, 0x3B
+
+Text_1C1F1D:: @ 81C1F1D
+	.incbin "baserom.gba", 0x1C1F1D, 0x23
+
+Text_1C1F40:: @ 81C1F40
+	.incbin "baserom.gba", 0x1C1F40, 0x5D
+
+Text_1C1F9D:: @ 81C1F9D
+	.incbin "baserom.gba", 0x1C1F9D, 0x3B
+
+Text_1C1FD8:: @ 81C1FD8
+	.incbin "baserom.gba", 0x1C1FD8, 0x30
+
+Text_1C2008:: @ 81C2008
+	.incbin "baserom.gba", 0x1C2008, 0x33
+
+Text_1C203B:: @ 81C203B
+	.incbin "baserom.gba", 0x1C203B, 0x61
+
+Text_1C209C:: @ 81C209C
+	.incbin "baserom.gba", 0x1C209C, 0x38
+
+Text_1C20D4:: @ 81C20D4
+	.incbin "baserom.gba", 0x1C20D4, 0x60
+
+Text_1C2134:: @ 81C2134
+	.incbin "baserom.gba", 0x1C2134, 0x37
+
+Text_1C216B:: @ 81C216B
+	.incbin "baserom.gba", 0x1C216B, 0x30
+
+Text_1C219B:: @ 81C219B
+	.incbin "baserom.gba", 0x1C219B, 0x53
+
+Text_1C21EE:: @ 81C21EE
+	.incbin "baserom.gba", 0x1C21EE, 0x1E
+
+Text_1C220C:: @ 81C220C
+	.incbin "baserom.gba", 0x1C220C, 0x30
+
+Text_1C223C:: @ 81C223C
+	.incbin "baserom.gba", 0x1C223C, 0x1F
+
+Text_1C225B:: @ 81C225B
+	.incbin "baserom.gba", 0x1C225B, 0x3E
+
+Text_1C2299:: @ 81C2299
+	.incbin "baserom.gba", 0x1C2299, 0x31
+
+Text_1C22CA:: @ 81C22CA
+	.incbin "baserom.gba", 0x1C22CA, 0x3C
+
+Text_1C2306:: @ 81C2306
+	.incbin "baserom.gba", 0x1C2306, 0x3A
+
+Text_1C2340:: @ 81C2340
+	.incbin "baserom.gba", 0x1C2340, 0x2B
+
+Text_1C236B:: @ 81C236B
+	.incbin "baserom.gba", 0x1C236B, 0x18
+
+Text_1C2383:: @ 81C2383
+	.incbin "baserom.gba", 0x1C2383, 0x3E
+
+Text_1C23C1:: @ 81C23C1
+	.incbin "baserom.gba", 0x1C23C1, 0x2E
+
+Text_1C23EF:: @ 81C23EF
+	.incbin "baserom.gba", 0x1C23EF, 0x36
+
+Text_1C2425:: @ 81C2425
+	.incbin "baserom.gba", 0x1C2425, 0x3C
+
+Text_1C2461:: @ 81C2461
+	.incbin "baserom.gba", 0x1C2461, 0x6A
+
+Text_1C24CB:: @ 81C24CB
+	.incbin "baserom.gba", 0x1C24CB, 0x3A
+
+Text_1C2505:: @ 81C2505
+	.incbin "baserom.gba", 0x1C2505, 0x2C
+
+Text_1C2531:: @ 81C2531
+	.incbin "baserom.gba", 0x1C2531, 0x41
+
+Text_1C2572:: @ 81C2572
+	.incbin "baserom.gba", 0x1C2572, 0x2C
+
+Text_1C259E:: @ 81C259E
+	.incbin "baserom.gba", 0x1C259E, 0x38
+
+Text_1C25D6:: @ 81C25D6
+	.incbin "baserom.gba", 0x1C25D6, 0x25
+
+Text_1C25FB:: @ 81C25FB
+	.incbin "baserom.gba", 0x1C25FB, 0x20
+
+Text_1C261B:: @ 81C261B
+	.incbin "baserom.gba", 0x1C261B, 0x35
+
+Text_1C2650:: @ 81C2650
+	.incbin "baserom.gba", 0x1C2650, 0x3D
+
+Text_1C268D:: @ 81C268D
+	.incbin "baserom.gba", 0x1C268D, 0x46
+
+Text_1C26D3:: @ 81C26D3
+	.incbin "baserom.gba", 0x1C26D3, 0x44
+
+Text_1C2717:: @ 81C2717
+	.incbin "baserom.gba", 0x1C2717, 0x3C
+
+Text_1C2753:: @ 81C2753
+	.incbin "baserom.gba", 0x1C2753, 0x4A
+
+Text_1C279D:: @ 81C279D
+	.incbin "baserom.gba", 0x1C279D, 0x4A
+
+Text_1C27E7:: @ 81C27E7
+	.incbin "baserom.gba", 0x1C27E7, 0x2D
+
+Text_1C2814:: @ 81C2814
+	.incbin "baserom.gba", 0x1C2814, 0x32
+
+Text_1C2846:: @ 81C2846
+	.incbin "baserom.gba", 0x1C2846, 0x37
+
+Text_1C287D:: @ 81C287D
+	.incbin "baserom.gba", 0x1C287D, 0x24
+
+Text_1C28A1:: @ 81C28A1
+	.incbin "baserom.gba", 0x1C28A1, 0x4B
+
+Text_1C28EC:: @ 81C28EC
+	.incbin "baserom.gba", 0x1C28EC, 0x27
+
+Text_1C2913:: @ 81C2913
+	.incbin "baserom.gba", 0x1C2913, 0x12
+
+Text_1C2925:: @ 81C2925
+	.incbin "baserom.gba", 0x1C2925, 0x1F
+
+Text_1C2944:: @ 81C2944
+	.incbin "baserom.gba", 0x1C2944, 0x37
+
+Text_1C297B:: @ 81C297B
+	.incbin "baserom.gba", 0x1C297B, 0x35
+
+Text_1C29B0:: @ 81C29B0
+	.incbin "baserom.gba", 0x1C29B0, 0x3B
+
+Text_1C29EB:: @ 81C29EB
+	.incbin "baserom.gba", 0x1C29EB, 0x2E
+
+Text_1C2A19:: @ 81C2A19
+	.incbin "baserom.gba", 0x1C2A19, 0x3A
+
+Text_1C2A53:: @ 81C2A53
+	.incbin "baserom.gba", 0x1C2A53, 0x35
+
+Text_1C2A88:: @ 81C2A88
+	.incbin "baserom.gba", 0x1C2A88, 0x3C
+
+Text_1C2AC4:: @ 81C2AC4
+	.incbin "baserom.gba", 0x1C2AC4, 0x2C
+
+Text_1C2AF0:: @ 81C2AF0
+	.incbin "baserom.gba", 0x1C2AF0, 0x16
+
+Text_1C2B06:: @ 81C2B06
+	.incbin "baserom.gba", 0x1C2B06, 0x26
+
+Text_1C2B2C:: @ 81C2B2C
+	.incbin "baserom.gba", 0x1C2B2C, 0x32
+
+Text_1C2B5E:: @ 81C2B5E
+	.incbin "baserom.gba", 0x1C2B5E, 0x3E
+
+Text_1C2B9C:: @ 81C2B9C
+	.incbin "baserom.gba", 0x1C2B9C, 0x3E
+
+Text_1C2BDA:: @ 81C2BDA
+	.incbin "baserom.gba", 0x1C2BDA, 0xC
+
+Text_1C2BE6:: @ 81C2BE6
+	.incbin "baserom.gba", 0x1C2BE6, 0x2A
+
+Text_1C2C10:: @ 81C2C10
+	.incbin "baserom.gba", 0x1C2C10, 0x1B
+
+Text_1C2C2B:: @ 81C2C2B
+	.incbin "baserom.gba", 0x1C2C2B, 0x50
+
+Text_1C2C7B:: @ 81C2C7B
+	.incbin "baserom.gba", 0x1C2C7B, 0x2D
+
+Text_1C2CA8:: @ 81C2CA8
+	.incbin "baserom.gba", 0x1C2CA8, 0x46
+
+Text_1C2CEE:: @ 81C2CEE
+	.incbin "baserom.gba", 0x1C2CEE, 0x2B
+
+Text_1C2D19:: @ 81C2D19
+	.incbin "baserom.gba", 0x1C2D19, 0x32
+
+Text_1C2D4B:: @ 81C2D4B
+	.incbin "baserom.gba", 0x1C2D4B, 0x32
+
+Text_1C2D7D:: @ 81C2D7D
+	.incbin "baserom.gba", 0x1C2D7D, 0x2A
+
+Text_1C2DA7:: @ 81C2DA7
+	.incbin "baserom.gba", 0x1C2DA7, 0x42
+
+Text_1C2DE9:: @ 81C2DE9
+	.incbin "baserom.gba", 0x1C2DE9, 0x61
+
+Text_1C2E4A:: @ 81C2E4A
+	.incbin "baserom.gba", 0x1C2E4A, 0x53
+
+Text_1C2E9D:: @ 81C2E9D
+	.incbin "baserom.gba", 0x1C2E9D, 0x23
+
+Text_1C2EC0:: @ 81C2EC0
+	.incbin "baserom.gba", 0x1C2EC0, 0x3C
+
+Text_1C2EFC:: @ 81C2EFC
+	.incbin "baserom.gba", 0x1C2EFC, 0x45
+
+Text_1C2F41:: @ 81C2F41
+	.incbin "baserom.gba", 0x1C2F41, 0x6D
+
+Text_1C2FAE:: @ 81C2FAE
+	.incbin "baserom.gba", 0x1C2FAE, 0x45
+
+Text_1C2FF3:: @ 81C2FF3
+	.incbin "baserom.gba", 0x1C2FF3, 0x3B
+
+Text_1C302E:: @ 81C302E
+	.incbin "baserom.gba", 0x1C302E, 0x31
+
+Text_1C305F:: @ 81C305F
+	.incbin "baserom.gba", 0x1C305F, 0x36
+
+Text_1C3095:: @ 81C3095
+	.incbin "baserom.gba", 0x1C3095, 0x1B
+
+Text_1C30B0:: @ 81C30B0
+	.incbin "baserom.gba", 0x1C30B0, 0x3D
+
+Text_1C30ED:: @ 81C30ED
+	.incbin "baserom.gba", 0x1C30ED, 0x3F
+
+Text_1C312C:: @ 81C312C
+	.incbin "baserom.gba", 0x1C312C, 0x1D
+
+Text_1C3149:: @ 81C3149
+	.incbin "baserom.gba", 0x1C3149, 0x3C
+
+Text_1C3185:: @ 81C3185
+	.incbin "baserom.gba", 0x1C3185, 0x3F
+
+Text_1C31C4:: @ 81C31C4
+	.incbin "baserom.gba", 0x1C31C4, 0x44
+
+Text_1C3208:: @ 81C3208
+	.incbin "baserom.gba", 0x1C3208, 0x29
+
+Text_1C3231:: @ 81C3231
+	.incbin "baserom.gba", 0x1C3231, 0x33
+
+Text_1C3264:: @ 81C3264
+	.incbin "baserom.gba", 0x1C3264, 0x34
+
+Text_1C3298:: @ 81C3298
+	.incbin "baserom.gba", 0x1C3298, 0x3B
+
+Text_1C32D3:: @ 81C32D3
+	.incbin "baserom.gba", 0x1C32D3, 0x2A
+
+Text_1C32FD:: @ 81C32FD
+	.incbin "baserom.gba", 0x1C32FD, 0x20
+
+Text_1C331D:: @ 81C331D
+	.incbin "baserom.gba", 0x1C331D, 0x39
+
+Text_1C3356:: @ 81C3356
+	.incbin "baserom.gba", 0x1C3356, 0x22
+
+Text_1C3378:: @ 81C3378
+	.incbin "baserom.gba", 0x1C3378, 0x36
+
+Text_1C33AE:: @ 81C33AE
+	.incbin "baserom.gba", 0x1C33AE, 0x39
+
+Text_1C33E7:: @ 81C33E7
+	.incbin "baserom.gba", 0x1C33E7, 0x1D
+
+Text_1C3404:: @ 81C3404
+	.incbin "baserom.gba", 0x1C3404, 0x41
+
+Text_1C3445:: @ 81C3445
+	.incbin "baserom.gba", 0x1C3445, 0x57
+
+Text_1C349C:: @ 81C349C
+	.incbin "baserom.gba", 0x1C349C, 0x38
+
+Text_1C34D4:: @ 81C34D4
+	.incbin "baserom.gba", 0x1C34D4, 0x36
+
+Text_1C350A:: @ 81C350A
+	.incbin "baserom.gba", 0x1C350A, 0x31
+
+Text_1C353B:: @ 81C353B
+	.incbin "baserom.gba", 0x1C353B, 0x43
+
+Text_1C357E:: @ 81C357E
+	.incbin "baserom.gba", 0x1C357E, 0x3E
+
+Text_1C35BC:: @ 81C35BC
+	.incbin "baserom.gba", 0x1C35BC, 0x32
+
+Text_1C35EE:: @ 81C35EE
+	.incbin "baserom.gba", 0x1C35EE, 0x20
+
+Text_1C360E:: @ 81C360E
+	.incbin "baserom.gba", 0x1C360E, 0x16
+
+Text_1C3624:: @ 81C3624
+	.incbin "baserom.gba", 0x1C3624, 0x33
+
+Text_1C3657:: @ 81C3657
+	.incbin "baserom.gba", 0x1C3657, 0x2E
+
+Text_1C3685:: @ 81C3685
+	.incbin "baserom.gba", 0x1C3685, 0x55
+
+Text_1C36DA:: @ 81C36DA
+	.incbin "baserom.gba", 0x1C36DA, 0x99
+
+Text_1C3773:: @ 81C3773
+	.incbin "baserom.gba", 0x1C3773, 0x42
+
+Text_1C37B5:: @ 81C37B5
+	.incbin "baserom.gba", 0x1C37B5, 0x32
+
+Text_1C37E7:: @ 81C37E7
+	.incbin "baserom.gba", 0x1C37E7, 0x20
+
+Text_1C3807:: @ 81C3807
+	.incbin "baserom.gba", 0x1C3807, 0x2E
+
+Text_1C3835:: @ 81C3835
+	.incbin "baserom.gba", 0x1C3835, 0x35
+
+Text_1C386A:: @ 81C386A
+	.incbin "baserom.gba", 0x1C386A, 0x35
+
+Text_1C389F:: @ 81C389F
+	.incbin "baserom.gba", 0x1C389F, 0x2B
+
+Text_1C38CA:: @ 81C38CA
+	.incbin "baserom.gba", 0x1C38CA, 0x30
+
+Text_1C38FA:: @ 81C38FA
+	.incbin "baserom.gba", 0x1C38FA, 0x49
+
+Text_1C3943:: @ 81C3943
+	.incbin "baserom.gba", 0x1C3943, 0x44
+
+Text_1C3987:: @ 81C3987
+	.incbin "baserom.gba", 0x1C3987, 0x3F
+
+Text_1C39C6:: @ 81C39C6
+	.incbin "baserom.gba", 0x1C39C6, 0x3F
+
+Text_1C3A05:: @ 81C3A05
+	.incbin "baserom.gba", 0x1C3A05, 0x50
+
+Text_1C3A55:: @ 81C3A55
+	.incbin "baserom.gba", 0x1C3A55, 0x52
+
+Text_1C3AA7:: @ 81C3AA7
+	.incbin "baserom.gba", 0x1C3AA7, 0x18
+
+Text_1C3ABF:: @ 81C3ABF
+	.incbin "baserom.gba", 0x1C3ABF, 0x33
+
+Text_1C3AF2:: @ 81C3AF2
+	.incbin "baserom.gba", 0x1C3AF2, 0x2B
+
+Text_1C3B1D:: @ 81C3B1D
+	.incbin "baserom.gba", 0x1C3B1D, 0x13
+
+Text_1C3B30:: @ 81C3B30
+	.incbin "baserom.gba", 0x1C3B30, 0x3E
+
+Text_1C3B6E:: @ 81C3B6E
+	.incbin "baserom.gba", 0x1C3B6E, 0x2B
+
+Text_1C3B99:: @ 81C3B99
+	.incbin "baserom.gba", 0x1C3B99, 0x1E
+
+Text_1C3BB7:: @ 81C3BB7
+	.incbin "baserom.gba", 0x1C3BB7, 0x3F
+
+Text_1C3BF6:: @ 81C3BF6
+	.incbin "baserom.gba", 0x1C3BF6, 0x32
+
+Text_1C3C28:: @ 81C3C28
+	.incbin "baserom.gba", 0x1C3C28, 0x48
+
+Text_1C3C70:: @ 81C3C70
+	.incbin "baserom.gba", 0x1C3C70, 0x40
+
+Text_1C3CB0:: @ 81C3CB0
+	.incbin "baserom.gba", 0x1C3CB0, 0x41
+
+Text_1C3CF1:: @ 81C3CF1
+	.incbin "baserom.gba", 0x1C3CF1, 0x56
+
+Text_1C3D47:: @ 81C3D47
+	.incbin "baserom.gba", 0x1C3D47, 0x2C
+
+Text_1C3D73:: @ 81C3D73
+	.incbin "baserom.gba", 0x1C3D73, 0x2F
+
+Text_1C3DA2:: @ 81C3DA2
+	.incbin "baserom.gba", 0x1C3DA2, 0x6D
+
+Text_1C3E0F:: @ 81C3E0F
+	.incbin "baserom.gba", 0x1C3E0F, 0x5B
+
+Text_1C3E6A:: @ 81C3E6A
+	.incbin "baserom.gba", 0x1C3E6A, 0x66
+
+Text_1C3ED0:: @ 81C3ED0
+	.incbin "baserom.gba", 0x1C3ED0, 0x41
+
+Text_1C3F11:: @ 81C3F11
+	.incbin "baserom.gba", 0x1C3F11, 0x40
+
+Text_1C3F51:: @ 81C3F51
+	.incbin "baserom.gba", 0x1C3F51, 0x2A
+
+Text_1C3F7B:: @ 81C3F7B
+	.incbin "baserom.gba", 0x1C3F7B, 0x38
+
+Text_1C3FB3:: @ 81C3FB3
+	.incbin "baserom.gba", 0x1C3FB3, 0x36
+
+Text_1C3FE9:: @ 81C3FE9
+	.incbin "baserom.gba", 0x1C3FE9, 0x3F
+
+Text_1C4028:: @ 81C4028
+	.incbin "baserom.gba", 0x1C4028, 0x2F
+
+Text_1C4057:: @ 81C4057
+	.incbin "baserom.gba", 0x1C4057, 0x28
+
+Text_1C407F:: @ 81C407F
+	.incbin "baserom.gba", 0x1C407F, 0x5A
+
+Text_1C40D9:: @ 81C40D9
+	.incbin "baserom.gba", 0x1C40D9, 0x21
+
+Text_1C40FA:: @ 81C40FA
+	.incbin "baserom.gba", 0x1C40FA, 0x3E
+
+Text_1C4138:: @ 81C4138
+	.incbin "baserom.gba", 0x1C4138, 0x2E
+
+Text_1C4166:: @ 81C4166
+	.incbin "baserom.gba", 0x1C4166, 0x30
+
+Text_1C4196:: @ 81C4196
+	.incbin "baserom.gba", 0x1C4196, 0x3E
+
+Text_1C41D4:: @ 81C41D4
+	.incbin "baserom.gba", 0x1C41D4, 0x3C
+
+Text_1C4210:: @ 81C4210
+	.incbin "baserom.gba", 0x1C4210, 0x70
+
+Text_1C4280:: @ 81C4280
+	.incbin "baserom.gba", 0x1C4280, 0x20
+
+Text_1C42A0:: @ 81C42A0
+	.incbin "baserom.gba", 0x1C42A0, 0x36
+
+Text_1C42D6:: @ 81C42D6
+	.incbin "baserom.gba", 0x1C42D6, 0x18
+
+Text_1C42EE:: @ 81C42EE
+	.incbin "baserom.gba", 0x1C42EE, 0x39
+
+Text_1C4327:: @ 81C4327
+	.incbin "baserom.gba", 0x1C4327, 0x4D
+
+Text_1C4374:: @ 81C4374
+	.incbin "baserom.gba", 0x1C4374, 0x39
+
+Text_1C43AD:: @ 81C43AD
+	.incbin "baserom.gba", 0x1C43AD, 0x3F
+
+Text_1C43EC:: @ 81C43EC
+	.incbin "baserom.gba", 0x1C43EC, 0x2A
+
+Text_1C4416:: @ 81C4416
+	.incbin "baserom.gba", 0x1C4416, 0x36
+
+Text_1C444C:: @ 81C444C
+	.incbin "baserom.gba", 0x1C444C, 0x45
+
+Text_1C4491:: @ 81C4491
+	.incbin "baserom.gba", 0x1C4491, 0x3A
+
+Text_1C44CB:: @ 81C44CB
+	.incbin "baserom.gba", 0x1C44CB, 0x83
+
+Text_1C454E:: @ 81C454E
+	.incbin "baserom.gba", 0x1C454E, 0x40
+
+Text_1C458E:: @ 81C458E
+	.incbin "baserom.gba", 0x1C458E, 0x34
+
+Text_1C45C2:: @ 81C45C2
+	.incbin "baserom.gba", 0x1C45C2, 0x39
+
+Text_1C45FB:: @ 81C45FB
+	.incbin "baserom.gba", 0x1C45FB, 0x67
+
+Text_1C4662:: @ 81C4662
+	.incbin "baserom.gba", 0x1C4662, 0x37
+
+Text_1C4699:: @ 81C4699
+	.incbin "baserom.gba", 0x1C4699, 0x3A
+
+Text_1C46D3:: @ 81C46D3
+	.incbin "baserom.gba", 0x1C46D3, 0x37
+
+Text_1C470A:: @ 81C470A
+	.incbin "baserom.gba", 0x1C470A, 0x2F
+
+Text_1C4739:: @ 81C4739
+	.incbin "baserom.gba", 0x1C4739, 0x31
+
+Text_1C476A:: @ 81C476A
+	.incbin "baserom.gba", 0x1C476A, 0x44
 
 VictoryRoad_2F_EventScript_1C47AE:: @ 81C47AE
 	.incbin "baserom.gba", 0x1C47AE, 0x68

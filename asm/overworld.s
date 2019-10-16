@@ -6964,13 +6964,13 @@ sub_8058214: @ 8058214
 	thumb_func_start sub_8058230
 sub_8058230: @ 8058230
 	push {lr}
-	ldr r0, _08058240 @ =gUnknown_81BB9F0
+	ldr r0, _08058240 @ =EventScript_1BB9F0
 	bl ScriptContext1_SetupScript
 	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08058240: .4byte gUnknown_81BB9F0
+_08058240: .4byte EventScript_1BB9F0
 	thumb_func_end sub_8058230
 
 	thumb_func_start sub_8058244

@@ -1670,10 +1670,10 @@ _0806D5A4:
 _0806D5D0: .4byte 0x00000826
 _0806D5D4: .4byte gUnknown_81BE2B7
 _0806D5D8:
-	ldr r0, _0806D5DC @ =gUnknown_81BE2FF
+	ldr r0, _0806D5DC @ =EventScript_81BE2FF
 	b _0806D5E2
 	.align 2, 0
-_0806D5DC: .4byte gUnknown_81BE2FF
+_0806D5DC: .4byte EventScript_81BE2FF
 _0806D5E0:
 	movs r0, 0
 _0806D5E2:

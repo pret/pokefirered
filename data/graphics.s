@@ -12672,7 +12672,7 @@ gTrainerFrontPic_RSMay1:: @ 8E550CC
 	.incbin "graphics/trainers/front_pics/ruby_sapphire_may_front_pic.4bpp.lz"
 
 	.align 2
-gTrainerPalette_RSMay1:: @ 8E553Cc
+gTrainerPalette_RSMay1:: @ 8E553CC
 	.incbin "graphics/trainers/palettes/ruby_sapphire_may.gbapal.lz"
 
 	.align 2
@@ -12696,7 +12696,7 @@ gTrainerFrontPic_RSPokemonRangerM:: @ 8E55AA8
 	.incbin "graphics/trainers/front_pics/rs_pokemon_ranger_m_front_pic.4bpp.lz"
 
 	.align 2
-gTrainerPalette_RSPokemonRangerM:: @ 8E55Df0
+gTrainerPalette_RSPokemonRangerM:: @ 8E55DF0
 	.incbin "graphics/trainers/palettes/rs_pokemon_ranger_m.gbapal.lz"
 
 	.align 2
@@ -12728,7 +12728,7 @@ gTrainerFrontPic_MagmaGruntF:: @ 8E56838
 	.incbin "graphics/trainers/front_pics/magma_grunt_f_front_pic.4bpp.lz"
 
 	.align 2
-gTrainerPalette_MagmaGruntF:: @ 8E56Bc4
+gTrainerPalette_MagmaGruntF:: @ 8E56BC4
 	.incbin "graphics/trainers/palettes/magma_grunt_f.gbapal.lz"
 
 	.align 2
@@ -12736,7 +12736,7 @@ gTrainerFrontPic_RSLass:: @ 8E56BEC
 	.incbin "graphics/trainers/front_pics/rs_lass_front_pic.4bpp.lz"
 
 	.align 2
-gTrainerPalette_RSLass:: @ 8E56Ec4
+gTrainerPalette_RSLass:: @ 8E56EC4
 	.incbin "graphics/trainers/palettes/rs_lass.gbapal.lz"
 
 	.align 2
@@ -12760,7 +12760,7 @@ gTrainerFrontPic_RSYoungCouple:: @ 8E576E8
 	.incbin "graphics/trainers/front_pics/rs_young_couple_front_pic.4bpp.lz"
 
 	.align 2
-gTrainerPalette_RSYoungCouple:: @ 8E57Aa8
+gTrainerPalette_RSYoungCouple:: @ 8E57AA8
 	.incbin "graphics/trainers/palettes/rs_young_couple.gbapal.lz"
 
 	.align 2
@@ -12768,7 +12768,7 @@ gTrainerFrontPic_OldCouple:: @ 8E57AD0
 	.incbin "graphics/trainers/front_pics/old_couple_front_pic.4bpp.lz"
 
 	.align 2
-gTrainerPalette_OldCouple:: @ 8E57Fe0
+gTrainerPalette_OldCouple:: @ 8E57FE0
 	.incbin "graphics/trainers/palettes/old_couple.gbapal.lz"
 
 	.align 2
@@ -12864,7 +12864,7 @@ gTrainerFrontPic_EliteFourDrake:: @ 8E5A98C
 	.incbin "graphics/trainers/front_pics/elite_four_drake_front_pic.4bpp.lz"
 
 	.align 2
-gTrainerPalette_EliteFourDrake:: @ 8E5Ad34
+gTrainerPalette_EliteFourDrake:: @ 8E5AD34
 	.incbin "graphics/trainers/palettes/elite_four_drake.gbapal.lz"
 
 	.align 2
@@ -12872,7 +12872,7 @@ gTrainerFrontPic_Youngster:: @ 8E5AD5C
 	.incbin "graphics/trainers/front_pics/youngster_front_pic.4bpp.lz"
 
 	.align 2
-gTrainerPalette_Youngster:: @ 8E5Affc
+gTrainerPalette_Youngster:: @ 8E5AFFC
 	.incbin "graphics/trainers/palettes/youngster.gbapal.lz"
 
 	.align 2
@@ -12904,7 +12904,7 @@ gTrainerFrontPic_Camper:: @ 8E5B9F0
 	.incbin "graphics/trainers/front_pics/camper_front_pic.4bpp.lz"
 
 	.align 2
-gTrainerPalette_Camper:: @ 8E5Bcd0
+gTrainerPalette_Camper:: @ 8E5BCD0
 	.incbin "graphics/trainers/palettes/camper.gbapal.lz"
 
 	.align 2
@@ -12912,7 +12912,7 @@ gTrainerFrontPic_Picnicker:: @ 8E5BCF8
 	.incbin "graphics/trainers/front_pics/picnicker_front_pic.4bpp.lz"
 
 	.align 2
-gTrainerPalette_Picnicker:: @ 8E5Bfe0
+gTrainerPalette_Picnicker:: @ 8E5BFE0
 	.incbin "graphics/trainers/palettes/picnicker.gbapal.lz"
 
 	.align 2
@@ -12936,7 +12936,7 @@ gTrainerFrontPic_Hiker:: @ 8E5C72C
 	.incbin "graphics/trainers/front_pics/hiker_front_pic.4bpp.lz"
 
 	.align 2
-gTrainerPalette_Hiker:: @ 8E5Cb9C
+gTrainerPalette_Hiker:: @ 8E5CB9C
 	.incbin "graphics/trainers/palettes/hiker.gbapal.lz"
 
 	.align 2
@@ -12968,7 +12968,7 @@ gTrainerFrontPic_Fisherman:: @ 8E5D8FC
 	.incbin "graphics/trainers/front_pics/fisherman_front_pic.4bpp.lz"
 
 	.align 2
-gTrainerPalette_Fisherman:: @ 8E5Dca8
+gTrainerPalette_Fisherman:: @ 8E5DCA8
 	.incbin "graphics/trainers/palettes/fisherman.gbapal.lz"
 
 	.align 2
@@ -12976,7 +12976,7 @@ gTrainerFrontPic_SwimmerM:: @ 8E5DCD0
 	.incbin "graphics/trainers/front_pics/swimmer_m_front_pic.4bpp.lz"
 
 	.align 2
-gTrainerPalette_SwimmerM:: @ 8E5Dfa8
+gTrainerPalette_SwimmerM:: @ 8E5DFA8
 	.incbin "graphics/trainers/palettes/swimmer_m.gbapal.lz"
 
 	.align 2
@@ -13000,7 +13000,7 @@ gTrainerFrontPic_Beauty:: @ 8E5E97C
 	.incbin "graphics/trainers/front_pics/beauty_front_pic.4bpp.lz"
 
 	.align 2
-gTrainerPalette_Beauty:: @ 8E5Ecd8
+gTrainerPalette_Beauty:: @ 8E5ECD8
 	.incbin "graphics/trainers/palettes/beauty.gbapal.lz"
 
 	.align 2
@@ -13008,7 +13008,7 @@ gTrainerFrontPic_SwimmerF:: @ 8E5ED00
 	.incbin "graphics/trainers/front_pics/swimmer_f_front_pic.4bpp.lz"
 
 	.align 2
-gTrainerPalette_SwimmerF:: @ 8E5Efec
+gTrainerPalette_SwimmerF:: @ 8E5EFEC
 	.incbin "graphics/trainers/palettes/swimmer_f.gbapal.lz"
 
 	.align 2
@@ -13032,7 +13032,7 @@ gTrainerFrontPic_Juggler:: @ 8E5F820
 	.incbin "graphics/trainers/front_pics/juggler_front_pic.4bpp.lz"
 
 	.align 2
-gTrainerPalette_Juggler:: @ 8E5Fc5C
+gTrainerPalette_Juggler:: @ 8E5FC5C
 	.incbin "graphics/trainers/palettes/juggler.gbapal.lz"
 
 	.align 2
@@ -13096,7 +13096,7 @@ gTrainerFrontPic_CooltrainerM:: @ 8E6160C
 	.incbin "graphics/trainers/front_pics/cool_trainer_m_front_pic.4bpp.lz"
 
 	.align 2
-gTrainerPalette_CooltrainerM:: @ 8E618Dc
+gTrainerPalette_CooltrainerM:: @ 8E618DC
 	.incbin "graphics/trainers/palettes/cool_trainer_m.gbapal.lz"
 
 	.align 2
@@ -13200,7 +13200,7 @@ gTrainerFrontPic_Gentleman:: @ 8E643A4
 	.incbin "graphics/trainers/front_pics/gentleman_front_pic.4bpp.lz"
 
 	.align 2
-gTrainerPalette_Gentleman:: @ 8E646Dc
+gTrainerPalette_Gentleman:: @ 8E646DC
 	.incbin "graphics/trainers/palettes/gentleman.gbapal.lz"
 
 	.align 2
@@ -13272,7 +13272,7 @@ gTrainerFrontPic_ProfessorOak:: @ 8E66888
 	.incbin "graphics/trainers/front_pics/professor_oak_front_pic.4bpp.lz"
 
 	.align 2
-gTrainerPalette_ProfessorOak:: @ 8E66Bf4
+gTrainerPalette_ProfessorOak:: @ 8E66BF4
 	.incbin "graphics/trainers/palettes/professor_oak.gbapal.lz"
 
 	.align 2
@@ -13320,7 +13320,7 @@ gTrainerFrontPic_PsychicF:: @ 8E67C58
 	.incbin "graphics/trainers/front_pics/psychic_f_front_pic.4bpp.lz"
 
 	.align 2
-gTrainerPalette_PsychicF:: @ 8E67Ff8
+gTrainerPalette_PsychicF:: @ 8E67FF8
 	.incbin "graphics/trainers/palettes/psychic_f.gbapal.lz"
 
 	.align 2
@@ -13384,7 +13384,7 @@ gTrainerFrontPic_Lady:: @ 8E69878
 	.incbin "graphics/trainers/front_pics/lady_front_pic.4bpp.lz"
 
 	.align 2
-gTrainerPalette_Lady:: @ 8E69Ba0
+gTrainerPalette_Lady:: @ 8E69BA0
 	.incbin "graphics/trainers/palettes/lady.gbapal.lz"
 
 	.align 2
@@ -13420,11 +13420,11 @@ gTrainerBackPic_RSMay:: @ 8E74EBC
 	.incbin "graphics/trainers/back_pics/ruby_sapphire_may_back_pic.4bpp"
 
 	.align 2
-gTrainerPalette_LeafBackPic:: @ 8E76Ebc
+gTrainerPalette_LeafBackPic:: @ 8E76EBC
 	.incbin "graphics/trainers/palettes/leaf_back_pic.gbapal.lz"
 
 	.align 2
-gTrainerPalette_RedBackPic:: @ 8E76Ee4
+gTrainerPalette_RedBackPic:: @ 8E76EE4
 	.incbin "graphics/trainers/palettes/red_back_pic.gbapal.lz"
 
 	.align 2

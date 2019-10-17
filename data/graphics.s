@@ -13332,7 +13332,7 @@ gTrainerPalette_CrushGirl:: @ 8E6832C
 	.incbin "graphics/trainers/palettes/crush_girl.gbapal.lz"
 
 	.align 2
-gTrainerFrontPic_TubeFr:: @ 8E68354
+gTrainerFrontPic_TuberF:: @ 8E68354
 	.incbin "graphics/trainers/front_pics/tuber_f_front_pic.4bpp.lz"
 
 	.align 2

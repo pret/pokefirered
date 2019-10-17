@@ -15,6 +15,7 @@ Makefile text eol=lf
 
 *.png binary
 *.bin binary
+*.pcm binary
 
 *.h linguist-language=C
 *.inc linguist-language=Assembly

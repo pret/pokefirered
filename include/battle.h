@@ -532,7 +532,7 @@ struct BattleStruct
     void (*savedCallback)(void);
     u8 synchronizeMoveEffect;
     u8 multiplayerId;
-    u8 field_B6;
+    u8 overworldWeatherDone;
     u8 atkCancellerTracker;
     u16 usedHeldItems[MAX_BATTLERS_COUNT];
     u8 chosenItem[4]; // why is this an u8?
@@ -932,5 +932,6 @@ extern u8 gChosenActionByBattler[MAX_BATTLERS_COUNT];
 extern u8 gBattleTerrain;
 extern struct UnknownPokemonStruct4 gUnknown_2022B58[3];
 extern u16 *gUnknown_2022BC0;
+extern u16 gRandomTurnNumber;
 
 #endif // GUARD_BATTLE_H

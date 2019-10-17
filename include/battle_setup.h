@@ -18,5 +18,7 @@ u8 *BattleSetup_GetScriptAddrAfterBattle(void);
 u8 *BattleSetup_GetTrainerPostBattleScript(void);
 void sub_80803FC(void);
 u8 sub_8080060(void);
+u8 sub_80803CC(void);
+u16 sub_80803D8(void);
 
 #endif // GUARD_BATTLE_SETUP_H

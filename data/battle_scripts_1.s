@@ -42,43 +42,43 @@ BattleScript_GiveExp:: @ 81D8694
 BattleScript_HandleFaintedMon:: @ 81D869D
 	.incbin "baserom.gba", 0x1D869D, 0x152
 
-gUnknown_81D87EF:: @ 81D87EF
+BattleScript_LocalTrainerBattleWon:: @ 81D87EF
 	.incbin "baserom.gba", 0x1D87EF, 0x14
 
-gUnknown_81D8803:: @ 81D8803
+BattleScript_PayDayMoneyAndPickUpItems:: @ 81D8803
 	.incbin "baserom.gba", 0x1D8803, 0x3
 
-gUnknown_81D8806:: @ 81D8806
+BattleScript_LocalBattleLost:: @ 81D8806
 	.incbin "baserom.gba", 0x1D8806, 0xC6
 
-gUnknown_81D88CC:: @ 81D88CC
+BattleScript_LinkBattleWonOrLost:: @ 81D88CC
 	.incbin "baserom.gba", 0x1D88CC, 0xB
 
 gUnknown_81D88D7:: @ 81D88D7
 	.incbin "baserom.gba", 0x1D88D7, 0x2A
 
-gUnknown_81D8901:: @ 81D8901
+BattleScript_SmokeBallEscape:: @ 81D8901
 	.incbin "baserom.gba", 0x1D8901, 0xE
 
-gUnknown_81D890F:: @ 81D890F
+BattleScript_RanAwayUsingMonAbility:: @ 81D890F
 	.incbin "baserom.gba", 0x1D890F, 0x7
 
-gUnknown_81D8916:: @ 81D8916
+BattleScript_GotAwaySafely:: @ 81D8916
 	.incbin "baserom.gba", 0x1D8916, 0x7
 
-gUnknown_81D891D:: @ 81D891D
+BattleScript_WildMonFled:: @ 81D891D
 	.incbin "baserom.gba", 0x1D891D, 0x7
 
-gUnknown_81D8924:: @ 81D8924
+BattleScript_PrintCantRunFromTrainer:: @ 81D8924
 	.incbin "baserom.gba", 0x1D8924, 0x16
 
 gUnknown_81D893A:: @ 81D893A
 	.incbin "baserom.gba", 0x1D893A, 0x9
 
-gUnknown_81D8943:: @ 81D8943
+BattleScript_PrintCantEscapeFromBattle:: @ 81D8943
 	.incbin "baserom.gba", 0x1D8943, 0x6
 
-gUnknown_81D8949:: @ 81D8949
+BattleScript_PrintFullBox:: @ 81D8949
 	.incbin "baserom.gba", 0x1D8949, 0x4
 
 gUnknown_81D894D:: @ 81D894D
@@ -237,7 +237,7 @@ BattleScript_OneHitKOMsg:: @ 81D8FE4
 BattleScript_SAtkDown2:: @ 81D8FEB
 	.incbin "baserom.gba", 0x1D8FEB, 0x2A
 
-gUnknown_81D9015:: @ 81D9015
+BattleScript_FocusPunchSetUp:: @ 81D9015
 	.incbin "baserom.gba", 0x1D9015, 0x14
 
 BattleScript_MoveUsedIsAsleep:: @ 81D9029

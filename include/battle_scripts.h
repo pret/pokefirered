@@ -227,5 +227,7 @@ extern const u8 BattleScript_FlushMessageBox[];
 extern const u8 BattleScript_SpikesOnFaintedBattler[];
 extern const u8 BattleScript_GhostBallDodge[];
 extern const u8 gUnknown_81D9A88[];
+extern const u8 gUnknown_81D91A1[]; // knizz: silph scope unveil
+extern const u8 gUnknown_81D88D7[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

@@ -32,6 +32,13 @@
 // GF's lingo
 #define NELEMS ARRAY_COUNT
 
+#define SWAP(a, b, temp)    \
+{                           \
+    temp = a;               \
+    a = b;                  \
+    b = temp;               \
+}
+
 // useful math macros
 
 // Converts a number to Q8.8 fixed-point format

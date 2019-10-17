@@ -10,10 +10,10 @@ $(MID_SUBDIR)/mus_annai.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G131 -V068
 
 $(MID_SUBDIR)/mus_battle20.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G119 -V080 -P1
+	$(MID) $< $@ -E -R$(STD_REVERB) -G011 -V080 -P1
 
 $(MID_SUBDIR)/mus_battle32.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G120 -V080
+	$(MID) $< $@ -E -R$(STD_REVERB) -G010 -V080
 
 $(MID_SUBDIR)/mus_champ_r.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G154 -V090
@@ -49,13 +49,13 @@ $(MID_SUBDIR)/mus_fan6.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G179 -V094 -P5
 
 $(MID_SUBDIR)/mus_fanfa1.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G012 -V090 -P5
+	$(MID) $< $@ -E -R$(STD_REVERB) -G008 -V090 -P5
 
 $(MID_SUBDIR)/mus_fanfa4.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G012 -V090 -P5
+	$(MID) $< $@ -E -R$(STD_REVERB) -G008 -V090 -P5
 
 $(MID_SUBDIR)/mus_fanfa5.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G012 -V090 -P5
+	$(MID) $< $@ -E -R$(STD_REVERB) -G008 -V090 -P5
 
 $(MID_SUBDIR)/mus_get_yasei.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G170 -V100
@@ -97,34 +97,34 @@ $(MID_SUBDIR)/mus_masara.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G159 -V100
 
 $(MID_SUBDIR)/mus_me_asa.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G012 -V090 -P5
+	$(MID) $< $@ -E -R$(STD_REVERB) -G008 -V090 -P5
 
 $(MID_SUBDIR)/mus_me_b_big.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G012 -V090 -P5
+	$(MID) $< $@ -E -R$(STD_REVERB) -G008 -V090 -P5
 
 $(MID_SUBDIR)/mus_me_b_small.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G012 -V090 -P5
+	$(MID) $< $@ -E -R$(STD_REVERB) -G008 -V090 -P5
 
 $(MID_SUBDIR)/mus_me_bachi.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G012 -V090 -P5
+	$(MID) $< $@ -E -R$(STD_REVERB) -G008 -V090 -P5
 
 $(MID_SUBDIR)/mus_me_kinomi.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G012 -V090 -P5
+	$(MID) $< $@ -E -R$(STD_REVERB) -G008 -V090 -P5
 
 $(MID_SUBDIR)/mus_me_photo.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G180 -V100 -P5
 
 $(MID_SUBDIR)/mus_me_shinka.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G026 -V080 -P1
+	$(MID) $< $@ -E -R$(STD_REVERB) -G009 -V080 -P1
 
 $(MID_SUBDIR)/mus_me_wasure.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G012 -V090 -P5
+	$(MID) $< $@ -E -R$(STD_REVERB) -G008 -V090 -P5
 
 $(MID_SUBDIR)/mus_me_waza.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G012 -V090 -P5
+	$(MID) $< $@ -E -R$(STD_REVERB) -G008 -V090 -P5
 
 $(MID_SUBDIR)/mus_me_zannen.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G012 -V090 -P5
+	$(MID) $< $@ -E -R$(STD_REVERB) -G008 -V090 -P5
 
 $(MID_SUBDIR)/mus_naminori.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G164 -V071
@@ -169,7 +169,7 @@ $(MID_SUBDIR)/mus_otsukimi.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G147 -V090
 
 $(MID_SUBDIR)/mus_p_school.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G081 -V100 -P1
+	$(MID) $< $@ -E -R$(STD_REVERB) -G012 -V100 -P1
 
 $(MID_SUBDIR)/mus_p_tower.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G165 -V090
@@ -205,7 +205,7 @@ $(MID_SUBDIR)/mus_sekaikan.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G182 -V088
 
 $(MID_SUBDIR)/mus_shinka.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G026 -V080 -P1
+	$(MID) $< $@ -E -R$(STD_REVERB) -G009 -V080 -P1
 
 $(MID_SUBDIR)/mus_shion.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G139 -V090

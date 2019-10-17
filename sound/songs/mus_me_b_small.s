@@ -2,7 +2,7 @@
 	.section .rodata
 	.global mus_me_b_small
 	.align 2
-	.equ mus_me_b_small_grp, voicegroup012
+	.equ mus_me_b_small_grp, voicegroup008
 	.equ mus_me_b_small_pri, 5
 	.equ mus_me_b_small_rev, reverb_set+50
 

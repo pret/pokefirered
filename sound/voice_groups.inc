@@ -338,7 +338,7 @@ voicegroup007:: @ 848AB98
 	voice_directsound 60, 0, gDirectSoundWaveData_46, 255, 0, 224, 165 @ 848AB98
 	voice_directsound 60, 0, gDirectSoundWaveData_47, 255, 0, 218, 165 @ 848ABA4
 
-voicegroup012:: @ 848ABB0
+voicegroup008:: @ 848ABB0
 	voice_keysplit_all voicegroup001 @ 848ABB0
 	voice_keysplit voicegroup003, KeySplitTable1 @ 848ABBC
 	voice_directsound 60, 0, gDirectSoundWaveData_63, 255, 178, 180, 165 @ 848ABC8
@@ -442,7 +442,7 @@ voicegroup012:: @ 848ABB0
 	voice_square_1_alt 29, 2, 0, 2, 0, 0 @ 848B060
 	voice_square_1_alt 22, 2, 0, 2, 0, 0 @ 848B06C
 
-voicegroup026:: @ 848B078
+voicegroup009:: @ 848B078
 	voice_keysplit_all voicegroup001 @ 848B078
 	voice_square_1 0, 2, 0, 0, 15, 0 @ 848B084
 	voice_square_1 0, 2, 0, 0, 15, 0 @ 848B090
@@ -529,7 +529,7 @@ voicegroup026:: @ 848B078
 	voice_square_2_alt 3, 0, 1, 7, 0 @ 848B45C
 	voice_square_1_alt 0, 3, 0, 1, 7, 0 @ 848B468
 
-voicegroup120:: @ 848B474
+voicegroup010:: @ 848B474
 	voice_keysplit_all voicegroup001 @ 848B474
 	voice_keysplit voicegroup003, KeySplitTable1 @ 848B480
 	voice_square_1 0, 2, 0, 0, 15, 0 @ 848B48C
@@ -622,7 +622,7 @@ voicegroup120:: @ 848B474
 	voice_square_1 0, 2, 0, 0, 15, 0 @ 848B8A0
 	voice_programmable_wave_alt gProgrammableWaveData_84A324C, 0, 7, 15, 2 @ 848B8AC
 
-voicegroup119:: @ 848B8B8
+voicegroup011:: @ 848B8B8
 	voice_keysplit_all voicegroup001 @ 848B8B8
 	voice_keysplit voicegroup003, KeySplitTable1 @ 848B8C4
 	voice_square_1 0, 2, 0, 0, 15, 0 @ 848B8D0
@@ -715,7 +715,7 @@ voicegroup119:: @ 848B8B8
 	voice_square_1 0, 2, 0, 0, 15, 0 @ 848BCE4
 	voice_programmable_wave_alt gProgrammableWaveData_84A324C, 0, 7, 15, 2 @ 848BCF0
 
-voicegroup081:: @ 848BCFC
+voicegroup012:: @ 848BCFC
 	voice_square_1 0, 2, 0, 0, 15, 0 @ 848BCFC
 	voice_keysplit voicegroup003, KeySplitTable1 @ 848BD08
 

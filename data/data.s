@@ -35,15 +35,10 @@ gTrainerBackPicPaletteTable:: @ 8239FD4
 	.incbin "baserom.gba", 0x239FD4, 0x30
 
 gEnemyMonElevation:: @ 823A004
-	.incbin "baserom.gba", 0x23A004, 0x4554
+	.incbin "baserom.gba", 0x23A004, 0x19C
 
-gTrainerClassNames:: @ 823E558
-	.include "data/text/trainer_class_names.inc"
-
+	.section .rodata.8245EE0
 	.align 2, 0
-gTrainers:: @ 823EAD8
-	.incbin "baserom.gba", 0x23EAC8, 0x7418
-
 gSpeciesNames:: @ 8245EE0
 	.include "data/text/species_names.inc"
 

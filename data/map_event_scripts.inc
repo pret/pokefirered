@@ -780,7 +780,7 @@ EventScript_1A4EAF:: @ 81A4EAF
 
 gUnknown_81A4EB4:: @ 81A4EB4
 	lock
-	special sub_8080628
+	special PlayTrainerEncounterMusic
 	special ScrSpecial_EndTrainerApproach
 	waitstate
 	goto EventScript_1A4FC7
@@ -793,7 +793,7 @@ gUnknown_81A4EC1:: @ 81A4EC1
 	specialvar VAR_RESULT, ScrSpecial_HasTrainerBeenFought
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 5, EventScript_1A4EE8
-	special sub_8080628
+	special PlayTrainerEncounterMusic
 	special sub_8080398
 	goto EventScript_1A4FC7
 
@@ -810,7 +810,7 @@ gUnknown_81A4EE9:: @ 81A4EE9
 	special CheckForAlivePartyMons
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 5, EventScript_1A4F19
-	special sub_8080628
+	special PlayTrainerEncounterMusic
 	special sub_8080398
 	goto EventScript_1A4FC7
 
@@ -827,7 +827,7 @@ EventScript_1A4F20:: @ 81A4F20
 gUnknown_81A4F21:: @ 81A4F21
 	applymovement VAR_LAST_TALKED, Movement_1A4FC5
 	waitmovement 0
-	special sub_8080628
+	special PlayTrainerEncounterMusic
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
 	goto_if_eq EventScript_1A501A
@@ -839,7 +839,7 @@ gUnknown_81A4F3E:: @ 81A4F3E
 	specialvar VAR_RESULT, sub_810CEB4
 	compare_var_to_value VAR_RESULT, 0
 	goto_if_eq EventScript_1A4F72
-	special sub_8080628
+	special PlayTrainerEncounterMusic
 	special sub_8080398
 	special sub_80805D8
 	waitmessage
@@ -862,7 +862,7 @@ gUnknown_81A4F73:: @ 81A4F73
 	special CheckForAlivePartyMons
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 5, EventScript_1A4FB1
-	special sub_8080628
+	special PlayTrainerEncounterMusic
 	special sub_8080398
 	special sub_80805D8
 	waitmessage

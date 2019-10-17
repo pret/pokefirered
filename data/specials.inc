@@ -65,7 +65,7 @@ gSpecials:: @ 815FD60
 	def_special sub_8080618
 	def_special ScrSpecial_HasTrainerBeenFought
 	def_special ScrSpecial_EndTrainerApproach
-	def_special sub_8080628
+	def_special PlayTrainerEncounterMusic
 	def_special sub_810CD4C
 	def_special sub_810CEB4
 	def_special sub_80805B0

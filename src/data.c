@@ -75,20 +75,20 @@ const struct SpriteFrameImage gTrainerBackPicTable_OldMan[] =
     gTrainerBackPic_OldMan + 0x1800, 0x0800,
 };
 
-const struct SpriteFrameImage gTrainerBackPicTable_RubySapphireBrendan[] =
+const struct SpriteFrameImage gTrainerBackPicTable_RSBrendan[] =
 {
-    gTrainerBackPic_RubySapphireBrendan, 0x0800,
-    gTrainerBackPic_RubySapphireBrendan + 0x0800, 0x0800,
-    gTrainerBackPic_RubySapphireBrendan + 0x1000, 0x0800,
-    gTrainerBackPic_RubySapphireBrendan + 0x1800, 0x0800,
+    gTrainerBackPic_RSBrendan, 0x0800,
+    gTrainerBackPic_RSBrendan + 0x0800, 0x0800,
+    gTrainerBackPic_RSBrendan + 0x1000, 0x0800,
+    gTrainerBackPic_RSBrendan + 0x1800, 0x0800,
 };
 
-const struct SpriteFrameImage gTrainerBackPicTable_RubySapphireMay[] =
+const struct SpriteFrameImage gTrainerBackPicTable_RSMay[] =
 {
-    gTrainerBackPic_RubySapphireMay, 0x0800,
-    gTrainerBackPic_RubySapphireMay + 0x0800, 0x0800,
-    gTrainerBackPic_RubySapphireMay + 0x1000, 0x0800,
-    gTrainerBackPic_RubySapphireMay + 0x1800, 0x0800,
+    gTrainerBackPic_RSMay, 0x0800,
+    gTrainerBackPic_RSMay + 0x0800, 0x0800,
+    gTrainerBackPic_RSMay + 0x1000, 0x0800,
+    gTrainerBackPic_RSMay + 0x1800, 0x0800,
 };
 
 static const union AnimCmd sAnim_GeneralFrame0[] =

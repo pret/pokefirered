@@ -3453,8 +3453,8 @@ extern const u8 gTrainerBackPic_Red[];
 extern const u8 gTrainerBackPic_Leaf[];
 extern const u8 gTrainerBackPic_PokeDude[];
 extern const u8 gTrainerBackPic_OldMan[];
-extern const u8 gTrainerBackPic_RubySapphireBrendan[];
-extern const u8 gTrainerBackPic_RubySapphireMay[];
+extern const u8 gTrainerBackPic_RSBrendan[];
+extern const u8 gTrainerBackPic_RSMay[];
 
 // mail
 extern const u16 gFile_graphics_mail_orange_palette_pal[];

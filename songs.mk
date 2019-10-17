@@ -100,10 +100,10 @@ $(MID_SUBDIR)/mus_me_asa.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G008 -V090 -P5
 
 $(MID_SUBDIR)/mus_me_b_big.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G008 -V090 -P5
+	$(MID) $< $@ -E -R$(STD_REVERB) -G008 -V100 -P5
 
 $(MID_SUBDIR)/mus_me_b_small.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G008 -V090 -P5
+	$(MID) $< $@ -E -R$(STD_REVERB) -G008 -V100 -P5
 
 $(MID_SUBDIR)/mus_me_bachi.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G008 -V090 -P5

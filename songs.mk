@@ -270,6 +270,9 @@ $(MID_SUBDIR)/mus_vs_tore.s: %.s: %.mid
 $(MID_SUBDIR)/mus_vs_yasei.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G157 -V090
 
+$(MID_SUBDIR)/mus_w_door.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G129 -V100 -P5
+
 $(MID_SUBDIR)/mus_win_gym.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G171 -V090
 

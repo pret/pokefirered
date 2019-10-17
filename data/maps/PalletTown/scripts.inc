@@ -50,7 +50,7 @@ EventScript_1654D8:: @ 81654D8
 	addobject 3
 	applymovement 3, Movement_1655AF
 	waitmovement 0
-	checkflag FLAG_SYS_RIBBON_GET
+	checkflag FLAG_0x89B
 	goto_if 0, EventScript_1655A1
 	msgbox gUnknown_817D8BF
 	setvar VAR_0x8004, 0

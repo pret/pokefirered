@@ -1258,19 +1258,19 @@ static void TryGetRematchTrainerIdGivenGameState(const u16 * a0, u8 * a1)
                 *a1 = GetRematchTrainerIdGivenGameState(a0, *a1);
             break;
         case 2:
-            if (!FlagGet(FLAG_SYS_NATIONAL_DEX))
+            if (!FlagGet(FLAG_0x896))
                 *a1 = GetRematchTrainerIdGivenGameState(a0, *a1);
             break;
         case 3:
-            if (!FlagGet(FLAG_SYS_CAVE_SHIP))
+            if (!FlagGet(FLAG_0x897))
                 *a1 = GetRematchTrainerIdGivenGameState(a0, *a1);
             break;
         case 4:
-            if (!FlagGet(FLAG_TRAINER_FLAG_START + 0x32c))
+            if (!FlagGet(FLAG_0x82C))
                 *a1 = GetRematchTrainerIdGivenGameState(a0, *a1);
             break;
         case 5:
-            if (!FlagGet(FLAG_TRAINER_FLAG_START + 0x344))
+            if (!FlagGet(FLAG_0x844))
                 *a1 = GetRematchTrainerIdGivenGameState(a0, *a1);
             break;
     }

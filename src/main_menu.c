@@ -671,7 +671,7 @@ static void PrintBadgeCount(void)
     u8 *ptr;
     u32 flagId;
     u8 nbadges = 0;
-    for (flagId = FLAG_UNK820; flagId < FLAG_UNK820 + 8; flagId++)
+    for (flagId = FLAG_0x820; flagId < FLAG_0x820 + 8; flagId++)
     {
         if (FlagGet(flagId))
             nbadges++;

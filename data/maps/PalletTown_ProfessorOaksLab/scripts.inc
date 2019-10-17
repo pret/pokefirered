@@ -974,7 +974,7 @@ EventScript_1699CE:: @ 81699CE
 	closemessage
 	compare_var_to_value VAR_0x8009, 60
 	goto_if 0, EventScript_1699F9
-	checkflag FLAG_SYS_RIBBON_GET
+	checkflag FLAG_0x89B
 	goto_if 0, EventScript_1699F9
 	delay 30
 	msgbox gUnknown_818EDF5

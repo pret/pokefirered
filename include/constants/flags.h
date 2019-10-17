@@ -1,10 +1,41 @@
 #ifndef GUARD_CONSTANTS_FLAGS_H
 #define GUARD_CONSTANTS_FLAGS_H
 
+#include "constants/trainers.h"
+
 // Sys Flags Maybe
 #define FLAG_SYS_SAFARI_MODE                                        0x800
 #define FLAG_WHITE_FLUTE_ACTIVE                                     0x803
 #define FLAG_BLACK_FLUTE_ACTIVE                                     0x804
+
+#define FLAG_0x807 0x807
+// TODO: These three are badge flags
+#define FLAG_0x820 0x820
+#define FLAG_0x821 0x821
+#define FLAG_0x822 0x822
+#define FLAG_0x823 0x823
+#define FLAG_0x824 0x824
+#define FLAG_0x825 0x825
+#define FLAG_0x826 0x826
+#define FLAG_0x827 0x827
+#define FLAG_0x828 0x828
+#define FLAG_0x829 0x829
+#define FLAG_0x82C 0x82C
+#define FLAG_0x82F 0x82F
+#define FLAG_0x830 0x830
+#define FLAG_SYS_NOT_SOMEONES_PC 0x834
+#define FLAG_0x83C 0x83C
+#define FLAG_0x83E 0x83E
+#define FLAG_0x841 0x841
+#define FLAG_0x843 0x843
+#define FLAG_0x844 0x844
+#define FLAG_0x845 0x845
+#define FLAG_0x846 0x846
+#define FLAG_0x847 0x847
+#define FLAG_0x848 0x848
+#define FLAG_0x849 0x849
+#define FLAG_0x84A 0x84A
+#define FLAG_0x84B 0x84B
 
 // World Map Flags
 #define FLAG_WORLD_MAP_PALLET_TOWN                                  0x890
@@ -60,30 +91,6 @@
 #define FLAG_WORLD_MAP_BIRTH_ISLAND_EXTERIOR                        0x8c2
 
 // Unknown
-
-#define FLAG_0x807 0x807
-#define FLAG_0x821 0x821
-#define FLAG_0x822 0x822
-#define FLAG_0x823 0x823
-#define FLAG_0x825 0x825
-#define FLAG_0x827 0x827
-#define FLAG_0x828 0x828
-#define FLAG_0x829 0x829
-#define FLAG_0x82C 0x82C
-#define FLAG_0x82F 0x82F
-#define FLAG_0x830 0x830
-#define FLAG_SYS_NOT_SOMEONES_PC 0x834
-#define FLAG_0x83C 0x83C
-#define FLAG_0x83E 0x83E
-#define FLAG_0x841 0x841
-#define FLAG_0x844 0x844
-#define FLAG_0x845 0x845
-#define FLAG_0x846 0x846
-#define FLAG_0x847 0x847
-#define FLAG_0x848 0x848
-#define FLAG_0x849 0x849
-#define FLAG_0x84A 0x84A
-#define FLAG_0x84B 0x84B
 
 
 // Emerald Flags
@@ -1374,297 +1381,44 @@
 
 #define FLAG_TRAINER_FLAG_START  0x500
 
-#define TRAINERS_FLAG_NO    0x356
-#define CODE_FLAGS          (FLAG_TRAINER_FLAG_START + TRAINERS_FLAG_NO + 0xA) // 0x860
+#define TRAINER_FLAG(name) (FLAG_TRAINER_FLAG_START + TRAINER_##name)
 
-// TODO: These three are badge flags
-#define FLAG_UNK820         0x820
-#define FLAG_UNK824         0x824
-#define FLAG_UNK826         0x826
-
-#define FLAG_UNK843         0x843
+#define TRAINERS_FLAG_NO    ((NUM_TRAINERS) & 15 ? (NUM_TRAINERS) + 16 - ((NUM_TRAINERS) & 15) : NUM_TRAINERS)
+#define CODE_FLAGS          (FLAG_TRAINER_FLAG_START + TRAINERS_FLAG_NO + 0xA) // 0x800
 
 // SYSTEM FLAGS
 
 // 0x860
-#define FLAG_SYS_POKEMON_GET     (CODE_FLAGS + 0)
-#define FLAG_SYS_POKEDEX_GET     (CODE_FLAGS + 1)
-#define FLAG_SYS_POKENAV_GET     (CODE_FLAGS + 2)
-// third one appears unused
-#define FLAG_SYS_GAME_CLEAR      (CODE_FLAGS + 4)
-#define FLAG_SYS_CHAT_USED       (CODE_FLAGS + 5)
-#define FLAG_SYS_HIPSTER_MEET    (CODE_FLAGS + 6)
 
-// badges
-#define FLAG_BADGE01_GET         (CODE_FLAGS + 7)
-#define FLAG_BADGE02_GET         (CODE_FLAGS + 8)
-#define FLAG_BADGE03_GET         (CODE_FLAGS + 9)
-#define FLAG_BADGE04_GET         (CODE_FLAGS + 0xA)
-#define FLAG_BADGE05_GET         (CODE_FLAGS + 0xB)
-#define FLAG_BADGE06_GET         (CODE_FLAGS + 0xC)
-#define FLAG_BADGE07_GET         (CODE_FLAGS + 0xD)
-#define FLAG_BADGE08_GET         (CODE_FLAGS + 0xE)
+#define FLAG_0x87F 0x87F
+#define FLAG_0x880 0x880
+#define FLAG_0x881 0x881
+#define FLAG_0x882 0x882
+#define FLAG_0x883 0x883
+#define FLAG_0x884 0x884
+#define FLAG_0x885 0x885
+#define FLAG_0x886 0x886
+#define FLAG_0x887 0x887
 
-// cities and towns
-#define FLAG_VISITED_LITTLEROOT_TOWN  (CODE_FLAGS + 0xF)
-#define FLAG_VISITED_OLDALE_TOWN      (CODE_FLAGS + 0x10)
-#define FLAG_VISITED_DEWFORD_TOWN     (CODE_FLAGS + 0x11)
-#define FLAG_VISITED_LAVARIDGE_TOWN   (CODE_FLAGS + 0x12)
-#define FLAG_VISITED_FALLARBOR_TOWN   (CODE_FLAGS + 0x13)
-#define FLAG_VISITED_VERDANTURF_TOWN  (CODE_FLAGS + 0x14)
-#define FLAG_VISITED_PACIFIDLOG_TOWN  (CODE_FLAGS + 0x15)
-#define FLAG_VISITED_PETALBURG_CITY   (CODE_FLAGS + 0x16)
-#define FLAG_VISITED_SLATEPORT_CITY   (CODE_FLAGS + 0x17)
-#define FLAG_VISITED_MAUVILLE_CITY    (CODE_FLAGS + 0x18)
-#define FLAG_VISITED_RUSTBORO_CITY    (CODE_FLAGS + 0x19)
-#define FLAG_VISITED_FORTREE_CITY     (CODE_FLAGS + 0x1A)
-#define FLAG_VISITED_LILYCOVE_CITY    (CODE_FLAGS + 0x1B)
-#define FLAG_VISITED_MOSSDEEP_CITY    (CODE_FLAGS + 0x1C)
-#define FLAG_VISITED_SOOTOPOLIS_CITY  (CODE_FLAGS + 0x1D)
-#define FLAG_VISITED_EVER_GRANDE_CITY (CODE_FLAGS + 0x1E)
+#define FLAG_0x88C 0x88C
 
-#define FLAG_0x87F                  (CODE_FLAGS + 0x1F)
-#define FLAG_0x880                  (CODE_FLAGS + 0x20)
-#define FLAG_0x881                  (CODE_FLAGS + 0x21)
-#define FLAG_0x882                  (CODE_FLAGS + 0x22)
-#define FLAG_0x883                  (CODE_FLAGS + 0x23)
-#define FLAG_0x884                  (CODE_FLAGS + 0x24)
-#define FLAG_0x885                  (CODE_FLAGS + 0x25)
-#define FLAG_0x886                  (CODE_FLAGS + 0x26)
-#define FLAG_0x887                  (CODE_FLAGS + 0x27)
+#define FLAG_0x88E 0x88E
+#define FLAG_0x88F 0x88F
 
-#define FLAG_SYS_USE_FLASH        (CODE_FLAGS + 0x28)
-#define FLAG_SYS_USE_STRENGTH     (CODE_FLAGS + 0x29)
-#define FLAG_SYS_WEATHER_CTRL     (CODE_FLAGS + 0x2A)
-#define FLAG_SYS_CYCLING_ROAD     (CODE_FLAGS + 0x2B)
-#define FLAG_0x88C                (CODE_FLAGS + 0x2C)
-#define FLAG_SYS_CRUISE_MODE      (CODE_FLAGS + 0x2D)
+#define FLAG_0x896 0x896
+#define FLAG_0x897 0x897
+#define FLAG_0x89B 0x89B
 
-#define FLAG_0x88E                (CODE_FLAGS + 0x2E)
-#define FLAG_0x88F                (CODE_FLAGS + 0x2F)
+#define FLAG_0x8A4 0x8A4
 
-#define FLAG_SYS_TV_HOME          (CODE_FLAGS + 0x30)
-#define FLAG_SYS_TV_WATCH         (CODE_FLAGS + 0x31)
-#define FLAG_SYS_TV_START         (CODE_FLAGS + 0x32)
-#define FLAG_SYS_POPWORD_INPUT    (CODE_FLAGS + 0x33)
-#define FLAG_SYS_MIX_RECORD       (CODE_FLAGS + 0x34)
-#define FLAG_SYS_CLOCK_SET        (CODE_FLAGS + 0x35)
-#define FLAG_SYS_NATIONAL_DEX     (CODE_FLAGS + 0x36)
-#define FLAG_SYS_CAVE_SHIP        (CODE_FLAGS + 0x37)
-#define FLAG_SYS_CAVE_WONDER      (CODE_FLAGS + 0x38)
-#define FLAG_SYS_CAVE_BATTLE      (CODE_FLAGS + 0x39)
-#define FLAG_SYS_SHOAL_TIDE       (CODE_FLAGS + 0x3A)
-#define FLAG_SYS_RIBBON_GET       (CODE_FLAGS + 0x3B)
+#define FLAG_0x8D5 0x8D5
+#define FLAG_0x8D6 0x8D6
 
-#define FLAG_0x89C                  (CODE_FLAGS + 0x3C)
-#define FLAG_0x89D                  (CODE_FLAGS + 0x3D)
-#define FLAG_0x89E                  (CODE_FLAGS + 0x3E)
-#define FLAG_0x89F                  (CODE_FLAGS + 0x3F)
-#define FLAG_0x8A0                  (CODE_FLAGS + 0x40)
-#define FLAG_0x8A1                  (CODE_FLAGS + 0x41)
-#define FLAG_0x8A2                  (CODE_FLAGS + 0x42)
-#define FLAG_0x8A3                  (CODE_FLAGS + 0x43)
-#define FLAG_0x8A4                  (CODE_FLAGS + 0x44)
-#define FLAG_0x8A5                  (CODE_FLAGS + 0x45)
-#define FLAG_0x8A6                  (CODE_FLAGS + 0x46)
-#define FLAG_0x8A7                  (CODE_FLAGS + 0x47)
-#define FLAG_UNLOCK_BATTLE_FRONTIER (CODE_FLAGS + 0x48)
-#define FLAG_UNLOCK_SOUTHERN_ISLAND (CODE_FLAGS + 0x49)
-#define FLAG_0x8AA                  (CODE_FLAGS + 0x4A)
+#define FLAG_0x8D8 0x8D8
+#define FLAG_0x8D9 0x8D9
+#define FLAG_0x8DA 0x8DA
 
-#define FLAG_SYS_PC_LANETTE              (CODE_FLAGS + 0x4B)
-#define FLAG_SYS_MYSTERY_EVENT_ENABLE    (CODE_FLAGS + 0x4C)
-#define FLAG_SYS_ENC_UP_ITEM             (CODE_FLAGS + 0x4D)
-#define FLAG_SYS_ENC_DOWN_ITEM           (CODE_FLAGS + 0x4E)
-#define FLAG_SYS_BRAILLE_DIG             (CODE_FLAGS + 0x4F)
-#define FLAG_SYS_BRAILLE_STRENGTH        (CODE_FLAGS + 0x50)
-#define FLAG_SYS_BRAILLE_WAIT            (CODE_FLAGS + 0x51)
-#define FLAG_SYS_BRAILLE_FLY             (CODE_FLAGS + 0x52)
-#define FLAG_SYS_HAS_EON_TICKET          (CODE_FLAGS + 0x53)
-
-#define FLAG_SYS_POKEMON_LEAGUE_FLY (CODE_FLAGS + 0x54)
-
-#define FLAG_0x8B5                  (CODE_FLAGS + 0x55)
-#define FLAG_0x8B6                  (CODE_FLAGS + 0x56)
-#define FLAG_0x8B7                  (CODE_FLAGS + 0x57)
-#define FLAG_0x8B8                  (CODE_FLAGS + 0x58)
-#define FLAG_0x8B9                  (CODE_FLAGS + 0x59)
-#define FLAG_0x8BA                  (CODE_FLAGS + 0x5A)
-#define FLAG_0x8BB                  (CODE_FLAGS + 0x5B)
-#define FLAG_0x8BC                  (CODE_FLAGS + 0x5C)
-
-#define FLAG_SYS_TV_LATI          (CODE_FLAGS + 0x5D)
-
-#define FLAG_0x8BE                (CODE_FLAGS + 0x5E)
-
-#define FLAG_SYS_SHOAL_ITEM       (CODE_FLAGS + 0x5F)
-#define FLAG_SYS_B_DASH           (CODE_FLAGS + 0x60) // got Running Shoes
-#define FLAG_SYS_CTRL_OBJ_DELETE  (CODE_FLAGS + 0x61)
-#define FLAG_SYS_RESET_RTC_ENABLE (CODE_FLAGS + 0x62)
-
-#define FLAG_0x8C3               (CODE_FLAGS + 0x63)
-
-#define FLAG_SYS_TOWER_SILVER    (CODE_FLAGS + 0x64)
-#define FLAG_SYS_TOWER_GOLD      (CODE_FLAGS + 0x65)
-#define FLAG_SYS_DOME_SILVER     (CODE_FLAGS + 0x66)
-#define FLAG_SYS_DOME_GOLD       (CODE_FLAGS + 0x67)
-#define FLAG_SYS_PALACE_SILVER   (CODE_FLAGS + 0x68)
-#define FLAG_SYS_PALACE_GOLD     (CODE_FLAGS + 0x69)
-#define FLAG_SYS_ARENA_SILVER    (CODE_FLAGS + 0x6A)
-#define FLAG_SYS_ARENA_GOLD      (CODE_FLAGS + 0x6B)
-#define FLAG_SYS_FACTORY_SILVER  (CODE_FLAGS + 0x6C)
-#define FLAG_SYS_FACTORY_GOLD    (CODE_FLAGS + 0x6D)
-#define FLAG_SYS_PIKE_SILVER     (CODE_FLAGS + 0x6E)
-#define FLAG_SYS_PIKE_GOLD       (CODE_FLAGS + 0x6F)
-#define FLAG_SYS_PYRAMID_SILVER  (CODE_FLAGS + 0x70)
-#define FLAG_SYS_PYRAMID_GOLD    (CODE_FLAGS + 0x71)
-#define FLAG_SYS_FRONTIER_PASS   (CODE_FLAGS + 0x72)
-
-#define FLAG_0x8D3               (CODE_FLAGS + 0x73)
-#define FLAG_0x8D4               (CODE_FLAGS + 0x74)
-#define FLAG_0x8D5               (CODE_FLAGS + 0x75)
-#define FLAG_0x8D6               (CODE_FLAGS + 0x76)
-
-#define FLAG_SYS_STORAGE_UNKNOWN_FLAG    (CODE_FLAGS + 0x77)
-
-#define FLAG_0x8D8                       (CODE_FLAGS + 0x78)
-#define FLAG_0x8D9                       (CODE_FLAGS + 0x79)
-#define FLAG_0x8DA                       (CODE_FLAGS + 0x7A)
-
-#define FLAG_SYS_MYSTERY_GIFT_ENABLE     (CODE_FLAGS + 0x7B)
-
-#define FLAG_0x8DC               (CODE_FLAGS + 0x7C)
-#define FLAG_0x8DD               (CODE_FLAGS + 0x7D)
-#define FLAG_0x8DE               (CODE_FLAGS + 0x7E)
-#define FLAG_0x8DF               (CODE_FLAGS + 0x7F)
-#define FLAG_0x8E0               (CODE_FLAGS + 0x80)
-#define FLAG_0x8E1               (CODE_FLAGS + 0x81)
-#define FLAG_0x8E2               (CODE_FLAGS + 0x82)
-#define FLAG_0x8E3               (CODE_FLAGS + 0x83)
-#define FLAG_0x8E4               (CODE_FLAGS + 0x84)
-#define FLAG_0x8E5               (CODE_FLAGS + 0x85)
-#define FLAG_0x8E6               (CODE_FLAGS + 0x86)
-#define FLAG_0x8E7               (CODE_FLAGS + 0x87)
-#define FLAG_0x8E8               (CODE_FLAGS + 0x88)
-#define FLAG_0x8E9               (CODE_FLAGS + 0x89)
-#define FLAG_0x8EA               (CODE_FLAGS + 0x8A)
-#define FLAG_0x8EB               (CODE_FLAGS + 0x8B)
-#define FLAG_0x8EC               (CODE_FLAGS + 0x8C)
-#define FLAG_0x8ED               (CODE_FLAGS + 0x8D)
-#define FLAG_0x8EE               (CODE_FLAGS + 0x8E)
-#define FLAG_0x8EF               (CODE_FLAGS + 0x8F)
-#define FLAG_0x8F0               (CODE_FLAGS + 0x90)
-#define FLAG_0x8F1               (CODE_FLAGS + 0x91)
-#define FLAG_0x8F2               (CODE_FLAGS + 0x92)
-#define FLAG_0x8F3               (CODE_FLAGS + 0x93)
-#define FLAG_0x8F4               (CODE_FLAGS + 0x94)
-#define FLAG_0x8F5               (CODE_FLAGS + 0x95)
-#define FLAG_0x8F6               (CODE_FLAGS + 0x96)
-#define FLAG_0x8F7               (CODE_FLAGS + 0x97)
-#define FLAG_0x8F8               (CODE_FLAGS + 0x98)
-#define FLAG_0x8F9               (CODE_FLAGS + 0x99)
-#define FLAG_0x8FA               (CODE_FLAGS + 0x9A)
-#define FLAG_0x8FB               (CODE_FLAGS + 0x9B)
-#define FLAG_0x8FC               (CODE_FLAGS + 0x9C)
-#define FLAG_0x8FD               (CODE_FLAGS + 0x9D)
-#define FLAG_0x8FE               (CODE_FLAGS + 0x9E)
-#define FLAG_0x8FF               (CODE_FLAGS + 0x9F)
-#define FLAG_0x900               (CODE_FLAGS + 0xA0)
-#define FLAG_0x901               (CODE_FLAGS + 0xA1)
-#define FLAG_0x902               (CODE_FLAGS + 0xA2)
-#define FLAG_0x903               (CODE_FLAGS + 0xA3)
-#define FLAG_0x904               (CODE_FLAGS + 0xA4)
-#define FLAG_0x905               (CODE_FLAGS + 0xA5)
-#define FLAG_0x906               (CODE_FLAGS + 0xA6)
-#define FLAG_0x907               (CODE_FLAGS + 0xA7)
-#define FLAG_0x908               (CODE_FLAGS + 0xA8)
-#define FLAG_0x909               (CODE_FLAGS + 0xA9)
-#define FLAG_0x90A               (CODE_FLAGS + 0xAA)
-#define FLAG_0x90B               (CODE_FLAGS + 0xAB)
-#define FLAG_0x90C               (CODE_FLAGS + 0xAC)
-#define FLAG_0x90D               (CODE_FLAGS + 0xAD)
-#define FLAG_0x90E               (CODE_FLAGS + 0xAE)
-#define FLAG_0x90F               (CODE_FLAGS + 0xAF)
-#define FLAG_0x910               (CODE_FLAGS + 0xB0)
-#define FLAG_0x911               (CODE_FLAGS + 0xB1)
-#define FLAG_0x912               (CODE_FLAGS + 0xB2)
-#define FLAG_0x913               (CODE_FLAGS + 0xB3)
-#define FLAG_0x914               (CODE_FLAGS + 0xB4)
-#define FLAG_0x915               (CODE_FLAGS + 0xB5)
-#define FLAG_0x916               (CODE_FLAGS + 0xB6)
-#define FLAG_0x917               (CODE_FLAGS + 0xB7)
-#define FLAG_0x918               (CODE_FLAGS + 0xB8)
-#define FLAG_0x919               (CODE_FLAGS + 0xB9)
-#define FLAG_0x91A               (CODE_FLAGS + 0xBA)
-#define FLAG_0x91B               (CODE_FLAGS + 0xBB)
-#define FLAG_0x91C               (CODE_FLAGS + 0xBC)
-#define FLAG_0x91D               (CODE_FLAGS + 0xBD)
-#define FLAG_0x91E               (CODE_FLAGS + 0xBE)
-#define FLAG_0x91F               (CODE_FLAGS + 0xBF)
-#define FLAG_0x920               (CODE_FLAGS + 0xC0)
-#define FLAG_0x921               (CODE_FLAGS + 0xC1)
-#define FLAG_0x922               (CODE_FLAGS + 0xC2)
-#define FLAG_0x923               (CODE_FLAGS + 0xC3)
-#define FLAG_0x924               (CODE_FLAGS + 0xC4)
-#define FLAG_0x925               (CODE_FLAGS + 0xC5)
-#define FLAG_0x926               (CODE_FLAGS + 0xC6)
-#define FLAG_0x927               (CODE_FLAGS + 0xC7)
-#define FLAG_0x928               (CODE_FLAGS + 0xC8)
-#define FLAG_0x929               (CODE_FLAGS + 0xC9)
-#define FLAG_0x92A               (CODE_FLAGS + 0xCA)
-#define FLAG_0x92B               (CODE_FLAGS + 0xCB)
-#define FLAG_0x92C               (CODE_FLAGS + 0xCC)
-#define FLAG_0x92D               (CODE_FLAGS + 0xCD)
-#define FLAG_0x92E               (CODE_FLAGS + 0xCE)
-#define FLAG_0x92F               (CODE_FLAGS + 0xCF)
-#define FLAG_0x930               (CODE_FLAGS + 0xD0)
-#define FLAG_0x931               (CODE_FLAGS + 0xD1)
-#define FLAG_0x932               (CODE_FLAGS + 0xD2)
-#define FLAG_0x933               (CODE_FLAGS + 0xD3)
-#define FLAG_0x934               (CODE_FLAGS + 0xD4)
-#define FLAG_0x935               (CODE_FLAGS + 0xD5)
-#define FLAG_0x936               (CODE_FLAGS + 0xD6)
-#define FLAG_0x937               (CODE_FLAGS + 0xD7)
-#define FLAG_0x938               (CODE_FLAGS + 0xD8)
-#define FLAG_0x939               (CODE_FLAGS + 0xD9)
-#define FLAG_0x93A               (CODE_FLAGS + 0xDA)
-#define FLAG_0x93B               (CODE_FLAGS + 0xDB)
-#define FLAG_0x93C               (CODE_FLAGS + 0xDC)
-#define FLAG_0x93D               (CODE_FLAGS + 0xDD)
-#define FLAG_0x93E               (CODE_FLAGS + 0xDE)
-#define FLAG_0x93F               (CODE_FLAGS + 0xDF)
-#define FLAG_0x940               (CODE_FLAGS + 0xE0)
-#define FLAG_0x941               (CODE_FLAGS + 0xE1)
-#define FLAG_0x942               (CODE_FLAGS + 0xE2)
-#define FLAG_0x943               (CODE_FLAGS + 0xE3)
-#define FLAG_0x944               (CODE_FLAGS + 0xE4)
-#define FLAG_0x945               (CODE_FLAGS + 0xE5)
-#define FLAG_0x946               (CODE_FLAGS + 0xE6)
-#define FLAG_0x947               (CODE_FLAGS + 0xE7)
-#define FLAG_0x948               (CODE_FLAGS + 0xE8)
-#define FLAG_0x949               (CODE_FLAGS + 0xE9)
-#define FLAG_0x94A               (CODE_FLAGS + 0xEA)
-#define FLAG_0x94B               (CODE_FLAGS + 0xEB)
-#define FLAG_0x94C               (CODE_FLAGS + 0xEC)
-#define FLAG_0x94D               (CODE_FLAGS + 0xED)
-#define FLAG_0x94E               (CODE_FLAGS + 0xEE)
-#define FLAG_0x94F               (CODE_FLAGS + 0xEF)
-#define FLAG_0x950               (CODE_FLAGS + 0xF0)
-#define FLAG_0x951               (CODE_FLAGS + 0xF1)
-#define FLAG_0x952               (CODE_FLAGS + 0xF2)
-#define FLAG_0x953               (CODE_FLAGS + 0xF3)
-#define FLAG_0x954               (CODE_FLAGS + 0xF4)
-#define FLAG_0x955               (CODE_FLAGS + 0xF5)
-#define FLAG_0x956               (CODE_FLAGS + 0xF6)
-#define FLAG_0x957               (CODE_FLAGS + 0xF7)
-#define FLAG_0x958               (CODE_FLAGS + 0xF8)
-#define FLAG_0x959               (CODE_FLAGS + 0xF9)
-#define FLAG_0x95A               (CODE_FLAGS + 0xFA)
-#define FLAG_0x95B               (CODE_FLAGS + 0xFB)
-#define FLAG_0x95C               (CODE_FLAGS + 0xFC)
-#define FLAG_0x95D               (CODE_FLAGS + 0xFD)
-#define FLAG_0x95E               (CODE_FLAGS + 0xFE)
-#define FLAG_0x95F               (CODE_FLAGS + 0xFF)
+#define FLAG_0x8E0 0x8E0
 
 // SPECIAL FLAGS (unknown purpose)
 #define FLAG_SPECIAL_FLAG_0x4000    0x4000

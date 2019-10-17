@@ -18,7 +18,7 @@ EventScript_16D580:: @ 816D580
 	special SetFlavorTextFlagFromSpecialVars
 	clearflag FLAG_0x09F
 	setflag FLAG_0x4B4
-	setflag FLAG_UNK824
+	setflag FLAG_0x824
 	setvar VAR_0x8008, 5
 	call EventScript_1A6B18
 	goto EventScript_16D5A6
@@ -90,7 +90,7 @@ EventScript_16D69D:: @ 816D69D
 
 FuchsiaCity_Gym_EventScript_16D6A7:: @ 816D6A7
 	lockall
-	checkflag FLAG_UNK824
+	checkflag FLAG_0x824
 	goto_if_eq EventScript_16D6BB
 	msgbox gUnknown_8198B4B
 	releaseall

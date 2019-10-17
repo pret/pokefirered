@@ -1185,7 +1185,7 @@ static bool8 sub_812B780(u8 id)
         case 30:
         case 32:
         case 33:
-            return FlagGet(FLAG_UNK820);
+            return FlagGet(FLAG_0x820);
         case 28:
         case 40:
             return sub_812BB10();
@@ -1251,7 +1251,7 @@ static bool8 sub_812B780(u8 id)
                 return TRUE;
             return FALSE;
         case 15:
-            return FlagGet(FLAG_UNK820);
+            return FlagGet(FLAG_0x820);
         case 16:
         case 17:
             return sub_812BB10();
@@ -1325,7 +1325,7 @@ static bool8 sub_812B780(u8 id)
         switch (id)
         {
         case 5:
-            return FlagGet(FLAG_UNK820);
+            return FlagGet(FLAG_0x820);
         case 6:
             return FlagGet(FLAG_0x821);
         }

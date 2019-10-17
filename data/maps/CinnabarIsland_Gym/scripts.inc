@@ -68,7 +68,7 @@ EventScript_16DA06:: @ 816DA06
 	setvar VAR_0x8005, 1
 	special SetFlavorTextFlagFromSpecialVars
 	setflag FLAG_0x4B6
-	setflag FLAG_UNK826
+	setflag FLAG_0x826
 	setrespawn SPAWN_CINNABAR_ISLAND
 	setvar VAR_0x4071, 1
 	clearflag FLAG_0x062
@@ -208,7 +208,7 @@ EventScript_16DBC0:: @ 816DBC0
 
 CinnabarIsland_Gym_EventScript_16DBCA:: @ 816DBCA
 	lockall
-	checkflag FLAG_UNK826
+	checkflag FLAG_0x826
 	goto_if_eq EventScript_16DBDE
 	msgbox gUnknown_8199C29
 	releaseall

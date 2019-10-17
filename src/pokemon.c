@@ -2362,25 +2362,25 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     // In FRLG, the Battle Tower and opponent checks are stubbed here.
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | /*BATTLE_TYPE_BATTLE_TOWER |*/ BATTLE_TYPE_EREADER_TRAINER)))
     {
-        if (FlagGet(FLAG_UNK820)
+        if (FlagGet(FLAG_0x820)
             && !GetBattlerSide(battlerIdAtk))
             attack = (110 * attack) / 100;
     }
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | /*BATTLE_TYPE_BATTLE_TOWER |*/ BATTLE_TYPE_EREADER_TRAINER)))
     {
-        if (FlagGet(FLAG_UNK824)
+        if (FlagGet(FLAG_0x824)
             && !GetBattlerSide(battlerIdDef))
             defense = (110 * defense) / 100;
     }
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | /*BATTLE_TYPE_BATTLE_TOWER |*/ BATTLE_TYPE_EREADER_TRAINER)))
     {
-        if (FlagGet(FLAG_UNK826)
+        if (FlagGet(FLAG_0x826)
             && !GetBattlerSide(battlerIdAtk))
             spAttack = (110 * spAttack) / 100;
     }
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | /*BATTLE_TYPE_BATTLE_TOWER |*/ BATTLE_TYPE_EREADER_TRAINER)))
     {
-        if (FlagGet(FLAG_UNK826)
+        if (FlagGet(FLAG_0x826)
             && !GetBattlerSide(battlerIdDef))
             spDefense = (110 * spDefense) / 100;
     }
@@ -3634,7 +3634,7 @@ static u8 SendMonToPC(struct Pokemon* mon)
                 gSpecialVar_MonBoxId = boxNo;
                 gSpecialVar_MonBoxPos = boxPos;
                 if (get_unknown_box_id() != boxNo)
-                    FlagClear(FLAG_UNK843);
+                    FlagClear(FLAG_0x843);
                 VarSet(VAR_0x4037, boxNo);
                 return MON_GIVEN_TO_PC;
             }

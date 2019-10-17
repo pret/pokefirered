@@ -524,7 +524,7 @@ SECTIONS {
         data/sound_data.o(.rodata);
     } =0
 
-    songs :
+    song_data :
     ALIGN(4)
     {
         sound/songs/midi/mus_dummy.o(.rodata);
@@ -787,16 +787,16 @@ SECTIONS {
         sound/songs/mus_fanfa1.o(.rodata);
         sound/songs/mus_fanfa4.o(.rodata);
         sound/songs/mus_fanfa5.o(.rodata);
-        sound/songs/mus_me_bachi.o(.rodata);
-        sound/songs/mus_me_waza.o(.rodata);
-        sound/songs/mus_me_kinomi.o(.rodata);
-        sound/songs/mus_me_shinka.o(.rodata);
-        sound/songs/mus_shinka.o(.rodata);
-        sound/songs/mus_battle32.o(.rodata);
-        sound/songs/mus_battle20.o(.rodata);
-        sound/songs/mus_p_school.o(.rodata);
-        sound/songs/mus_me_b_big.o(.rodata);
-        sound/songs/mus_me_b_small.o(.rodata);
+        sound/songs/midi/mus_me_bachi.o(.rodata);
+        sound/songs/midi/mus_me_waza.o(.rodata);
+        sound/songs/midi/mus_me_kinomi.o(.rodata);
+        sound/songs/midi/mus_me_shinka.o(.rodata);
+        sound/songs/midi/mus_shinka.o(.rodata);
+        sound/songs/midi/mus_battle32.o(.rodata);
+        sound/songs/midi/mus_battle20.o(.rodata);
+        sound/songs/midi/mus_p_school.o(.rodata);
+        sound/songs/midi/mus_me_b_big.o(.rodata);
+        sound/songs/midi/mus_me_b_small.o(.rodata);
         sound/songs/midi/mus_me_wasure.o(.rodata);
         sound/songs/midi/mus_me_zannen.o(.rodata);
         sound/songs/midi/mus_annai.o(.rodata);

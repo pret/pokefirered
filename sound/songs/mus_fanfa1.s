@@ -1,196 +1,180 @@
 	.include "MPlayDef.s"
+
+	.equ	mus_fanfa1_grp, voicegroup008
+	.equ	mus_fanfa1_pri, 5
+	.equ	mus_fanfa1_rev, reverb_set+50
+	.equ	mus_fanfa1_mvl, 90
+	.equ	mus_fanfa1_key, 0
+	.equ	mus_fanfa1_tbs, 1
+	.equ	mus_fanfa1_exg, 0
+	.equ	mus_fanfa1_cmp, 1
+
 	.section .rodata
-	.global mus_fanfa1
-	.align 2
-	.equ mus_fanfa1_grp, voicegroup012
-	.equ mus_fanfa1_pri, 5
-	.equ mus_fanfa1_rev, reverb_set+50
+	.global	mus_fanfa1
+	.align	2
 
-mus_fanfa1_1: @ 86BCCD0
-	.byte KEYSH, 0x00
-	.byte TEMPO, 0x57
-	.byte VOICE, 0x2E
-	.byte XCMD, 0x08
-	.byte GsM2
-	.byte v009
-	.byte GsM2
-	.byte VOL, 0x5A
-	.byte PAN, 0x70
-	.byte W08
-	.byte N04
-	.byte Bn3
-	.byte v100
-	.byte W08
-	.byte N04
-	.byte W08
-	.byte N04
-	.byte W08
-	.byte N24
-	.byte Gs4
-	.byte W10
-	.byte MOD, 0x05
-	.byte W06
-	.byte W24
-	.byte FINE
+@********************** Track  1 **********************@
 
-mus_fanfa1_2: @ 86BCCF0
-	.byte KEYSH, 0x00
-	.byte VOICE, 0x2E
-	.byte XCMD, 0x08
-	.byte GsM2
-	.byte v009
-	.byte GsM2
-	.byte VOL, 0x5A
-	.byte W08
-	.byte PAN, 0x30
-	.byte N04
-	.byte En4
-	.byte v100
-	.byte W08
-	.byte PAN, 0x50
-	.byte N04
-	.byte W08
-	.byte PAN, 0x30
-	.byte N04
-	.byte W08
-	.byte PAN, 0x40
-	.byte N24
-	.byte Bn4
-	.byte W10
-	.byte MOD, 0x05
-	.byte W06
-	.byte W24
-	.byte FINE
+mus_fanfa1_1:
+	.byte	KEYSH , mus_fanfa1_key+0
+	.byte	TEMPO , 174*mus_fanfa1_tbs/2
+	.byte		VOICE , 46
+	.byte		XCMD  , xIECV , 8
+	.byte		        xIECL , 8
+	.byte		VOL   , 127*mus_fanfa1_mvl/mxv
+	.byte		PAN   , c_v+48
+	.byte	W08
+	.byte		N04   , Bn3 , v100
+	.byte	W08
+	.byte		N04   
+	.byte	W08
+	.byte		N04   
+	.byte	W08
+	.byte		N24   , Gs4 
+	.byte	W10
+	.byte		MOD   , 5
+	.byte	W06
+	.byte	W24
+	.byte	FINE
 
-mus_fanfa1_3: @ 86BCD14
-	.byte KEYSH, 0x00
-	.byte VOICE, 0x2E
-	.byte XCMD, 0x08
-	.byte GsM2
-	.byte v009
-	.byte GsM2
-	.byte VOL, 0x5A
-	.byte PAN, 0x10
-	.byte W08
-	.byte N04
-	.byte Gs3
-	.byte v068
-	.byte W08
-	.byte N04
-	.byte W08
-	.byte N04
-	.byte W08
-	.byte N24
-	.byte En4
-	.byte W10
-	.byte MOD, 0x05
-	.byte W06
-	.byte W24
-	.byte FINE
+@********************** Track  2 **********************@
 
-mus_fanfa1_4: @ 86BCD32
-	.byte KEYSH, 0x00
-	.byte VOICE, 0x54
-	.byte XCMD, 0x08
-	.byte GsM2
-	.byte v009
-	.byte GsM2
-	.byte VOL, 0x5A
-	.byte W08
-	.byte N04
-	.byte Bn3
-	.byte v048
-	.byte W04
-	.byte Bn3
-	.byte v020
-	.byte W04
-	.byte Bn3
-	.byte v048
-	.byte W04
-	.byte Bn3
-	.byte v020
-	.byte W04
-	.byte Bn3
-	.byte v048
-	.byte W04
-	.byte Bn3
-	.byte v020
-	.byte W04
-	.byte N24
-	.byte Gs4
-	.byte v048
-	.byte W10
-	.byte MOD, 0x05
-	.byte W03
-	.byte VOL, 0x47
-	.byte W03
-	.byte Cn2
-	.byte W03
-	.byte Cs0
-	.byte W03
-	.byte AsM2
-	.byte W03
-	.byte CnM2
-	.byte W15
-	.byte FINE
+mus_fanfa1_2:
+	.byte	KEYSH , mus_fanfa1_key+0
+	.byte		VOICE , 46
+	.byte		XCMD  , xIECV , 8
+	.byte		        xIECL , 8
+	.byte		VOL   , 127*mus_fanfa1_mvl/mxv
+	.byte	W08
+	.byte		PAN   , c_v-16
+	.byte		N04   , En4 , v100
+	.byte	W08
+	.byte		PAN   , c_v+16
+	.byte		N04   
+	.byte	W08
+	.byte		PAN   , c_v-16
+	.byte		N04   
+	.byte	W08
+	.byte		PAN   , c_v+0
+	.byte		N24   , Bn4 
+	.byte	W10
+	.byte		MOD   , 5
+	.byte	W06
+	.byte	W24
+	.byte	FINE
 
-mus_fanfa1_5: @ 86BCD64
-	.byte KEYSH, 0x00
-	.byte VOICE, 0x55
-	.byte XCMD, 0x08
-	.byte GsM2
-	.byte v009
-	.byte GsM2
-	.byte VOL, 0x5A
-	.byte W08
-	.byte N04
-	.byte En4
-	.byte v048
-	.byte W04
-	.byte En4
-	.byte v020
-	.byte W04
-	.byte En4
-	.byte v048
-	.byte W04
-	.byte En4
-	.byte v020
-	.byte W04
-	.byte En4
-	.byte v048
-	.byte W04
-	.byte En4
-	.byte v020
-	.byte W04
-	.byte N24
-	.byte Bn4
-	.byte v048
-	.byte W10
-	.byte MOD, 0x05
-	.byte W03
-	.byte VOL, 0x47
-	.byte W03
-	.byte Cn2
-	.byte W03
-	.byte Cs0
-	.byte W03
-	.byte AsM2
-	.byte W03
-	.byte CnM2
-	.byte W15
-	.byte FINE
+@********************** Track  3 **********************@
 
-@ ***************************************
-	.align 2
-mus_fanfa1: @ 86BCD98
-	.byte 5
-	.byte 0
-	.byte mus_fanfa1_pri
-	.byte mus_fanfa1_rev
-	.word mus_fanfa1_grp
+mus_fanfa1_3:
+	.byte	KEYSH , mus_fanfa1_key+0
+	.byte		VOICE , 46
+	.byte		XCMD  , xIECV , 8
+	.byte		        xIECL , 8
+	.byte		VOL   , 127*mus_fanfa1_mvl/mxv
+	.byte		PAN   , c_v-48
+	.byte	W08
+	.byte		N04   , Gs3 , v068
+	.byte	W08
+	.byte		N04   
+	.byte	W08
+	.byte		N04   
+	.byte	W08
+	.byte		N24   , En4 
+	.byte	W10
+	.byte		MOD   , 5
+	.byte	W06
+	.byte	W24
+	.byte	FINE
 
-	.word mus_fanfa1_1
-	.word mus_fanfa1_2
-	.word mus_fanfa1_3
-	.word mus_fanfa1_4
-	.word mus_fanfa1_5
+@********************** Track  4 **********************@
+
+mus_fanfa1_4:
+	.byte	KEYSH , mus_fanfa1_key+0
+	.byte		VOICE , 84
+	.byte		XCMD  , xIECV , 8
+	.byte		        xIECL , 8
+	.byte		VOL   , 127*mus_fanfa1_mvl/mxv
+	.byte	W08
+	.byte		N04   , Bn3 , v048
+	.byte	W04
+	.byte		        Bn3 , v020
+	.byte	W04
+	.byte		        Bn3 , v048
+	.byte	W04
+	.byte		        Bn3 , v020
+	.byte	W04
+	.byte		        Bn3 , v048
+	.byte	W04
+	.byte		        Bn3 , v020
+	.byte	W04
+	.byte		N24   , Gs4 , v048
+	.byte	W10
+	.byte		MOD   , 5
+	.byte	W03
+	.byte		VOL   , 101*mus_fanfa1_mvl/mxv
+	.byte	W03
+	.byte		        68*mus_fanfa1_mvl/mxv
+	.byte	W03
+	.byte		        36*mus_fanfa1_mvl/mxv
+	.byte	W03
+	.byte		        15*mus_fanfa1_mvl/mxv
+	.byte	W03
+	.byte		        0*mus_fanfa1_mvl/mxv
+	.byte	W15
+	.byte	FINE
+
+@********************** Track  5 **********************@
+
+mus_fanfa1_5:
+	.byte	KEYSH , mus_fanfa1_key+0
+	.byte		VOICE , 85
+	.byte		XCMD  , xIECV , 8
+	.byte		        xIECL , 8
+	.byte		VOL   , 127*mus_fanfa1_mvl/mxv
+	.byte	W08
+	.byte		N04   , En4 , v048
+	.byte	W04
+	.byte		        En4 , v020
+	.byte	W04
+	.byte		        En4 , v048
+	.byte	W04
+	.byte		        En4 , v020
+	.byte	W04
+	.byte		        En4 , v048
+	.byte	W04
+	.byte		        En4 , v020
+	.byte	W04
+	.byte		N24   , Bn4 , v048
+	.byte	W10
+	.byte		MOD   , 5
+	.byte	W03
+	.byte		VOL   , 101*mus_fanfa1_mvl/mxv
+	.byte	W03
+	.byte		        68*mus_fanfa1_mvl/mxv
+	.byte	W03
+	.byte		        36*mus_fanfa1_mvl/mxv
+	.byte	W03
+	.byte		        15*mus_fanfa1_mvl/mxv
+	.byte	W03
+	.byte		        0*mus_fanfa1_mvl/mxv
+	.byte	W15
+	.byte	FINE
+
+@******************************************************@
+	.align	2
+
+mus_fanfa1:
+	.byte	5	@ NumTrks
+	.byte	0	@ NumBlks
+	.byte	mus_fanfa1_pri	@ Priority
+	.byte	mus_fanfa1_rev	@ Reverb.
+
+	.word	mus_fanfa1_grp
+
+	.word	mus_fanfa1_1
+	.word	mus_fanfa1_2
+	.word	mus_fanfa1_3
+	.word	mus_fanfa1_4
+	.word	mus_fanfa1_5
+
+	.end

@@ -3,7 +3,7 @@
 	.equ	mus_fanfa4_grp, voicegroup008
 	.equ	mus_fanfa4_pri, 5
 	.equ	mus_fanfa4_rev, reverb_set+50
-	.equ	mus_fanfa4_mvl, 127
+.equ	mus_fanfa4_mvl, 90
 	.equ	mus_fanfa4_key, 0
 	.equ	mus_fanfa4_tbs, 1
 	.equ	mus_fanfa4_exg, 0
@@ -20,7 +20,7 @@ mus_fanfa4_1:
 	.byte	W12
 	.byte	TEMPO , 190*mus_fanfa4_tbs/2
 	.byte		VOICE , 46
-	.byte		VOL   , 90*mus_fanfa4_mvl/mxv
+	.byte		VOL   , 127*mus_fanfa4_mvl/mxv
 	.byte		PAN   , c_v-24
 	.byte		N16   , Gs4 , v080
 	.byte	W08
@@ -44,13 +44,13 @@ mus_fanfa4_1:
 	.byte	W16
 	.byte		MOD   , 5
 	.byte	W08
-	.byte		VOL   , 82*mus_fanfa4_mvl/mxv
+	.byte		VOL   , 116*mus_fanfa4_mvl/mxv
 	.byte	W05
-	.byte		        72*mus_fanfa4_mvl/mxv
+	.byte		        102*mus_fanfa4_mvl/mxv
 	.byte	W07
-	.byte		        41*mus_fanfa4_mvl/mxv
+	.byte		        58*mus_fanfa4_mvl/mxv
 	.byte	W05
-	.byte		        14*mus_fanfa4_mvl/mxv
+	.byte		        20*mus_fanfa4_mvl/mxv
 	.byte	W07
 	.byte		MOD   , 0
 	.byte	W24
@@ -62,7 +62,7 @@ mus_fanfa4_2:
 	.byte	KEYSH , mus_fanfa4_key+0
 	.byte	W12
 	.byte		VOICE , 46
-	.byte		VOL   , 90*mus_fanfa4_mvl/mxv
+	.byte		VOL   , 127*mus_fanfa4_mvl/mxv
 	.byte		PAN   , c_v+0
 	.byte		N16   , Cn5 , v104
 	.byte	W08
@@ -86,13 +86,13 @@ mus_fanfa4_2:
 	.byte	W16
 	.byte		MOD   , 5
 	.byte	W08
-	.byte		VOL   , 82*mus_fanfa4_mvl/mxv
+	.byte		VOL   , 116*mus_fanfa4_mvl/mxv
 	.byte	W05
-	.byte		        72*mus_fanfa4_mvl/mxv
+	.byte		        102*mus_fanfa4_mvl/mxv
 	.byte	W07
-	.byte		        41*mus_fanfa4_mvl/mxv
+	.byte		        58*mus_fanfa4_mvl/mxv
 	.byte	W05
-	.byte		        14*mus_fanfa4_mvl/mxv
+	.byte		        20*mus_fanfa4_mvl/mxv
 	.byte	W07
 	.byte		MOD   , 0
 	.byte	W24
@@ -104,7 +104,7 @@ mus_fanfa4_3:
 	.byte	KEYSH , mus_fanfa4_key+0
 	.byte	W12
 	.byte		VOICE , 58
-	.byte		VOL   , 90*mus_fanfa4_mvl/mxv
+	.byte		VOL   , 127*mus_fanfa4_mvl/mxv
 	.byte		N16   , Gs1 , v120
 	.byte	W24
 	.byte		N06   
@@ -121,13 +121,13 @@ mus_fanfa4_3:
 	.byte	W16
 	.byte		N48   , Gs1 
 	.byte	W24
-	.byte		VOL   , 82*mus_fanfa4_mvl/mxv
+	.byte		VOL   , 116*mus_fanfa4_mvl/mxv
 	.byte	W05
-	.byte		        72*mus_fanfa4_mvl/mxv
+	.byte		        102*mus_fanfa4_mvl/mxv
 	.byte	W07
-	.byte		        41*mus_fanfa4_mvl/mxv
+	.byte		        58*mus_fanfa4_mvl/mxv
 	.byte	W05
-	.byte		        14*mus_fanfa4_mvl/mxv
+	.byte		        20*mus_fanfa4_mvl/mxv
 	.byte	W07
 	.byte	W24
 	.byte	FINE
@@ -138,7 +138,7 @@ mus_fanfa4_4:
 	.byte	KEYSH , mus_fanfa4_key+0
 	.byte	W12
 	.byte		VOICE , 82
-	.byte		VOL   , 90*mus_fanfa4_mvl/mxv
+	.byte		VOL   , 127*mus_fanfa4_mvl/mxv
 	.byte		XCMD  , xIECV , 8
 	.byte		        xIECL , 8
 	.byte		PAN   , c_v-48
@@ -164,13 +164,13 @@ mus_fanfa4_4:
 	.byte	W16
 	.byte		MOD   , 5
 	.byte	W08
-	.byte		VOL   , 82*mus_fanfa4_mvl/mxv
+	.byte		VOL   , 116*mus_fanfa4_mvl/mxv
 	.byte	W05
-	.byte		        72*mus_fanfa4_mvl/mxv
+	.byte		        102*mus_fanfa4_mvl/mxv
 	.byte	W07
-	.byte		        41*mus_fanfa4_mvl/mxv
+	.byte		        58*mus_fanfa4_mvl/mxv
 	.byte	W05
-	.byte		        14*mus_fanfa4_mvl/mxv
+	.byte		        20*mus_fanfa4_mvl/mxv
 	.byte	W07
 	.byte		MOD   , 0
 	.byte	W24
@@ -182,7 +182,7 @@ mus_fanfa4_5:
 	.byte	KEYSH , mus_fanfa4_key+0
 	.byte	W12
 	.byte		VOICE , 83
-	.byte		VOL   , 90*mus_fanfa4_mvl/mxv
+	.byte		VOL   , 127*mus_fanfa4_mvl/mxv
 	.byte		XCMD  , xIECV , 8
 	.byte		        xIECL , 8
 	.byte		PAN   , c_v+48
@@ -208,13 +208,13 @@ mus_fanfa4_5:
 	.byte	W16
 	.byte		MOD   , 5
 	.byte	W08
-	.byte		VOL   , 82*mus_fanfa4_mvl/mxv
+	.byte		VOL   , 116*mus_fanfa4_mvl/mxv
 	.byte	W05
-	.byte		        72*mus_fanfa4_mvl/mxv
+	.byte		        102*mus_fanfa4_mvl/mxv
 	.byte	W07
-	.byte		        41*mus_fanfa4_mvl/mxv
+	.byte		        58*mus_fanfa4_mvl/mxv
 	.byte	W05
-	.byte		        14*mus_fanfa4_mvl/mxv
+	.byte		        20*mus_fanfa4_mvl/mxv
 	.byte	W07
 	.byte		MOD   , 0
 	.byte	W24
@@ -227,7 +227,7 @@ mus_fanfa4_6:
 	.byte	W12
 	.byte		VOICE , 46
 	.byte		PAN   , c_v+24
-	.byte		VOL   , 90*mus_fanfa4_mvl/mxv
+	.byte		VOL   , 127*mus_fanfa4_mvl/mxv
 	.byte		N16   , Ds4 , v080
 	.byte	W08
 	.byte		MOD   , 5
@@ -250,13 +250,13 @@ mus_fanfa4_6:
 	.byte	W16
 	.byte		MOD   , 5
 	.byte	W08
-	.byte		VOL   , 82*mus_fanfa4_mvl/mxv
+	.byte		VOL   , 116*mus_fanfa4_mvl/mxv
 	.byte	W05
-	.byte		        72*mus_fanfa4_mvl/mxv
+	.byte		        102*mus_fanfa4_mvl/mxv
 	.byte	W07
-	.byte		        41*mus_fanfa4_mvl/mxv
+	.byte		        58*mus_fanfa4_mvl/mxv
 	.byte	W05
-	.byte		        14*mus_fanfa4_mvl/mxv
+	.byte		        20*mus_fanfa4_mvl/mxv
 	.byte	W07
 	.byte		MOD   , 0
 	.byte	W24

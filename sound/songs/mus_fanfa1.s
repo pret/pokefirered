@@ -3,7 +3,7 @@
 	.equ	mus_fanfa1_grp, voicegroup008
 	.equ	mus_fanfa1_pri, 5
 	.equ	mus_fanfa1_rev, reverb_set+50
-	.equ	mus_fanfa1_mvl, 127
+	.equ	mus_fanfa1_mvl, 90
 	.equ	mus_fanfa1_key, 0
 	.equ	mus_fanfa1_tbs, 1
 	.equ	mus_fanfa1_exg, 0
@@ -21,7 +21,7 @@ mus_fanfa1_1:
 	.byte		VOICE , 46
 	.byte		XCMD  , xIECV , 8
 	.byte		        xIECL , 8
-	.byte		VOL   , 90*mus_fanfa1_mvl/mxv
+	.byte		VOL   , 127*mus_fanfa1_mvl/mxv
 	.byte		PAN   , c_v+48
 	.byte	W08
 	.byte		N04   , Bn3 , v100
@@ -44,7 +44,7 @@ mus_fanfa1_2:
 	.byte		VOICE , 46
 	.byte		XCMD  , xIECV , 8
 	.byte		        xIECL , 8
-	.byte		VOL   , 90*mus_fanfa1_mvl/mxv
+	.byte		VOL   , 127*mus_fanfa1_mvl/mxv
 	.byte	W08
 	.byte		PAN   , c_v-16
 	.byte		N04   , En4 , v100
@@ -70,7 +70,7 @@ mus_fanfa1_3:
 	.byte		VOICE , 46
 	.byte		XCMD  , xIECV , 8
 	.byte		        xIECL , 8
-	.byte		VOL   , 90*mus_fanfa1_mvl/mxv
+	.byte		VOL   , 127*mus_fanfa1_mvl/mxv
 	.byte		PAN   , c_v-48
 	.byte	W08
 	.byte		N04   , Gs3 , v068
@@ -93,7 +93,7 @@ mus_fanfa1_4:
 	.byte		VOICE , 84
 	.byte		XCMD  , xIECV , 8
 	.byte		        xIECL , 8
-	.byte		VOL   , 90*mus_fanfa1_mvl/mxv
+	.byte		VOL   , 127*mus_fanfa1_mvl/mxv
 	.byte	W08
 	.byte		N04   , Bn3 , v048
 	.byte	W04
@@ -111,13 +111,13 @@ mus_fanfa1_4:
 	.byte	W10
 	.byte		MOD   , 5
 	.byte	W03
-	.byte		VOL   , 71*mus_fanfa1_mvl/mxv
+	.byte		VOL   , 101*mus_fanfa1_mvl/mxv
 	.byte	W03
-	.byte		        48*mus_fanfa1_mvl/mxv
+	.byte		        68*mus_fanfa1_mvl/mxv
 	.byte	W03
-	.byte		        25*mus_fanfa1_mvl/mxv
+	.byte		        36*mus_fanfa1_mvl/mxv
 	.byte	W03
-	.byte		        10*mus_fanfa1_mvl/mxv
+	.byte		        15*mus_fanfa1_mvl/mxv
 	.byte	W03
 	.byte		        0*mus_fanfa1_mvl/mxv
 	.byte	W15
@@ -130,7 +130,7 @@ mus_fanfa1_5:
 	.byte		VOICE , 85
 	.byte		XCMD  , xIECV , 8
 	.byte		        xIECL , 8
-	.byte		VOL   , 90*mus_fanfa1_mvl/mxv
+	.byte		VOL   , 127*mus_fanfa1_mvl/mxv
 	.byte	W08
 	.byte		N04   , En4 , v048
 	.byte	W04
@@ -148,13 +148,13 @@ mus_fanfa1_5:
 	.byte	W10
 	.byte		MOD   , 5
 	.byte	W03
-	.byte		VOL   , 71*mus_fanfa1_mvl/mxv
+	.byte		VOL   , 101*mus_fanfa1_mvl/mxv
 	.byte	W03
-	.byte		        48*mus_fanfa1_mvl/mxv
+	.byte		        68*mus_fanfa1_mvl/mxv
 	.byte	W03
-	.byte		        25*mus_fanfa1_mvl/mxv
+	.byte		        36*mus_fanfa1_mvl/mxv
 	.byte	W03
-	.byte		        10*mus_fanfa1_mvl/mxv
+	.byte		        15*mus_fanfa1_mvl/mxv
 	.byte	W03
 	.byte		        0*mus_fanfa1_mvl/mxv
 	.byte	W15

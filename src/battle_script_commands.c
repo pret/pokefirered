@@ -9515,7 +9515,7 @@ static void atkEF_handleballthrow(void)
                 else
                 {
                     if (gBattleResults.catchAttempts[gLastUsedItem - ITEM_ULTRA_BALL] < 0xFF)
-                        gBattleResults.catchAttempts[gLastUsedItem - ITEM_ULTRA_BALL]++;
+                        ++gBattleResults.catchAttempts[gLastUsedItem - ITEM_ULTRA_BALL];
                 }
             }
             if (odds > 254) // mon caught

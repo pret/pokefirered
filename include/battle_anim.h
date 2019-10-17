@@ -2,8 +2,9 @@
 #define GUARD_BATTLE_ANIM_H
 
 #include "battle.h"
-#include "constants/battle_anim.h"
+#include "data.h"
 #include "task.h"
+#include "constants/battle_anim.h"
 
 enum
 {
@@ -168,6 +169,8 @@ u8 LaunchBallStarsTask(u8 x, u8 y, u8 kindOfStars, u8 arg3, u8 ballId);
 u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 battlerId, u32 arg2, u8 ballId);
 
 // battle_anim_mons.c
+extern const struct MonCoords gCastformFrontSpriteCoords[];
+
 u8 GetBattlerSpriteCoord(u8 battlerId, u8 coordType);
 u8 GetBattlerSpriteCoord2(u8 battlerId, u8 coordType);
 u8 GetBattlerSpriteDefault_Y(u8 battlerId);

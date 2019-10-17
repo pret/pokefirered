@@ -13269,11 +13269,11 @@ gTrainerPalette_SisAndBro:: @ 8E66860
 
 	.align 2
 gTrainerFrontPic_ProfessorOak:: @ 8E66888
-	.incbin "graphics/trainers/front_pics/oak_front_pic.4bpp.lz"
+	.incbin "graphics/trainers/front_pics/professor_oak_front_pic.4bpp.lz"
 
 	.align 2
 gTrainerPalette_ProfessorOak:: @ 8E66Bf4
-	.incbin "graphics/trainers/palettes/oak.gbapal.lz"
+	.incbin "graphics/trainers/palettes/professor_oak.gbapal.lz"
 
 	.align 2
 gTrainerFrontPic_RSBrendan2:: @ 8E66C1C

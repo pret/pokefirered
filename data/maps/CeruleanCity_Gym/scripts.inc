@@ -17,7 +17,7 @@ EventScript_16AAD3:: @ 816AAD3
 	setvar VAR_0x8005, 1
 	special SetFlavorTextFlagFromSpecialVars
 	setflag FLAG_0x4B1
-	setflag FLAG_0x821
+	setflag FLAG_BADGE02_GET
 	setrespawn SPAWN_CERULEAN_CITY
 	setvar VAR_0x8008, 2
 	call EventScript_1A6B18
@@ -70,7 +70,7 @@ EventScript_16AB94:: @ 816AB94
 
 CeruleanCity_Gym_EventScript_16AB9E:: @ 816AB9E
 	lockall
-	checkflag FLAG_0x821
+	checkflag FLAG_BADGE02_GET
 	goto_if_eq EventScript_16ABB2
 	msgbox gUnknown_81926E1
 	releaseall

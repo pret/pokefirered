@@ -58,9 +58,9 @@ PokemonLeague_BrunosRoom_EventScript_1626EC:: @ 81626EC
 	setvar VAR_0x8004, 10
 	setvar VAR_0x8005, 1
 	special SetFlavorTextFlagFromSpecialVars
-	checkflag FLAG_0x82C
+	checkflag FLAG_SYS_GAME_CLEAR
 	call_if 0, EventScript_162751
-	checkflag FLAG_0x82C
+	checkflag FLAG_SYS_GAME_CLEAR
 	call_if 1, EventScript_16275A
 	setflag FLAG_0x003
 	setflag FLAG_0x005

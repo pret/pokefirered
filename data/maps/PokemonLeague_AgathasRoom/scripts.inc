@@ -61,9 +61,9 @@ PokemonLeague_AgathasRoom_EventScript_162877:: @ 8162877
 	setvar VAR_0x8004, 0
 	setvar VAR_0x8005, 4
 	special SetFlavorTextFlagFromSpecialVars
-	checkflag FLAG_0x82C
+	checkflag FLAG_SYS_GAME_CLEAR
 	call_if 0, EventScript_1628E9
-	checkflag FLAG_0x82C
+	checkflag FLAG_SYS_GAME_CLEAR
 	call_if 1, EventScript_1628F2
 	setflag FLAG_0x003
 	setflag FLAG_0x005

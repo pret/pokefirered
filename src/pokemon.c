@@ -2362,25 +2362,25 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     // In FRLG, the Battle Tower and opponent checks are stubbed here.
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | /*BATTLE_TYPE_BATTLE_TOWER |*/ BATTLE_TYPE_EREADER_TRAINER)))
     {
-        if (FlagGet(FLAG_0x820)
+        if (FlagGet(FLAG_BADGE01_GET)
             && !GetBattlerSide(battlerIdAtk))
             attack = (110 * attack) / 100;
     }
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | /*BATTLE_TYPE_BATTLE_TOWER |*/ BATTLE_TYPE_EREADER_TRAINER)))
     {
-        if (FlagGet(FLAG_0x824)
+        if (FlagGet(FLAG_BADGE05_GET)
             && !GetBattlerSide(battlerIdDef))
             defense = (110 * defense) / 100;
     }
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | /*BATTLE_TYPE_BATTLE_TOWER |*/ BATTLE_TYPE_EREADER_TRAINER)))
     {
-        if (FlagGet(FLAG_0x826)
+        if (FlagGet(FLAG_BADGE07_GET)
             && !GetBattlerSide(battlerIdAtk))
             spAttack = (110 * spAttack) / 100;
     }
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | /*BATTLE_TYPE_BATTLE_TOWER |*/ BATTLE_TYPE_EREADER_TRAINER)))
     {
-        if (FlagGet(FLAG_0x826)
+        if (FlagGet(FLAG_BADGE07_GET)
             && !GetBattlerSide(battlerIdDef))
             spDefense = (110 * spDefense) / 100;
     }

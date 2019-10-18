@@ -18,7 +18,7 @@ MysteryEventScript_StampCard:: @ 8488E2
 @ 	specialvar VAR_0x8008, sub_813986C
 @ 	setorcopyvar VAR_RESULT, 0
 @ 	specialvar VAR_0x8009, sub_813986C
-@ 	subvar VAR_0x8008, 32777
+@ 	subvar VAR_0x8008, VAR_0x8009
 @ 	getnumberstring 0, VAR_0x8008
 @ 	lock
 @ 	faceplayer

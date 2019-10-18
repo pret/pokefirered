@@ -641,7 +641,7 @@ bool8 sub_810C4EC(void)
             gSaveBlock1Ptr->trainerRematchStepCounter++;
     }
 
-    if (FlagGet(0x801) == TRUE)
+    if (FlagGet(FLAG_0x801) == TRUE)
     {
         u16 x;
         do {
@@ -657,7 +657,7 @@ bool8 sub_810C4EC(void)
         } while (0);
         if (x == 100)
         {
-            FlagClear(0x801);
+            FlagClear(FLAG_0x801);
             sub_810C640();
             sub_810D0D0();
             return TRUE;
@@ -743,7 +743,7 @@ bool8 sub_810C4EC(void)
 
 void sub_810C578(void)
 {
-    FlagClear(0x801);
+    FlagClear(FLAG_0x801);
     sub_810C640();
     sub_810D0D0();
     sub_810C594();
@@ -972,7 +972,7 @@ static u8 GetVsSeekerResponseInArea(const VsSeekerData * a0)
     if (sVsSeeker->trainerWantsRematch)
     {
         PlaySE(SE_PIN);
-        FlagSet(0x801); // TODO: make this an enum
+        FlagSet(FLAG_0x801);
         sub_810C640();
         return 2;
     }
@@ -1258,15 +1258,15 @@ static void TryGetRematchTrainerIdGivenGameState(const u16 * a0, u8 * a1)
                 *a1 = GetRematchTrainerIdGivenGameState(a0, *a1);
             break;
         case 2:
-            if (!FlagGet(FLAG_0x896))
+            if (!FlagGet(FLAG_WORLD_MAP_CELADON_CITY))
                 *a1 = GetRematchTrainerIdGivenGameState(a0, *a1);
             break;
         case 3:
-            if (!FlagGet(FLAG_0x897))
+            if (!FlagGet(FLAG_WORLD_MAP_FUCHSIA_CITY))
                 *a1 = GetRematchTrainerIdGivenGameState(a0, *a1);
             break;
         case 4:
-            if (!FlagGet(FLAG_0x82C))
+            if (!FlagGet(FLAG_SYS_GAME_CLEAR))
                 *a1 = GetRematchTrainerIdGivenGameState(a0, *a1);
             break;
         case 5:

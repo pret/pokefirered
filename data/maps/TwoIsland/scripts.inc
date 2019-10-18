@@ -11,7 +11,7 @@ TwoIsland_MapScript1_16756A:: @ 816756A
 EventScript_167576:: @ 8167576
 	checkflag FLAG_0x844
 	goto_if_eq EventScript_167597
-	checkflag FLAG_0x82C
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if_eq EventScript_1675B8
 	checkflag FLAG_0x2A3
 	goto_if_eq EventScript_1675D9

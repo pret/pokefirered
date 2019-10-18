@@ -112,9 +112,9 @@ PokemonLeague_LancesRoom_EventScript_162A14:: @ 8162A14
 	setvar VAR_0x8004, 12
 	setvar VAR_0x8005, 1
 	special SetFlavorTextFlagFromSpecialVars
-	checkflag FLAG_0x82C
+	checkflag FLAG_SYS_GAME_CLEAR
 	call_if 0, EventScript_162A79
-	checkflag FLAG_0x82C
+	checkflag FLAG_SYS_GAME_CLEAR
 	call_if 1, EventScript_162A82
 	setflag FLAG_0x003
 	setflag FLAG_0x005

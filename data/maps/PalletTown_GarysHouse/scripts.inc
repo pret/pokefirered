@@ -24,7 +24,7 @@ PalletTown_GarysHouse_EventScript_168D56:: @ 8168D56
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
 	special UpdatePickStateFromSpecialVar8005
-	checkflag FLAG_0x82C
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if_eq EventScript_168DB9
 	compare_var_to_value VAR_0x4001, 1
 	goto_if_eq EventScript_168EEC

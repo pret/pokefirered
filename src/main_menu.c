@@ -652,7 +652,7 @@ static void PrintDexCount(void)
     u8 strbuf[30];
     u8 *ptr;
     u16 dexcount;
-    if (FlagGet(FLAG_0x829) == TRUE)
+    if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
     {
         if (IsNationalPokedexEnabled())
             dexcount = GetNationalPokedexCount(FLAG_GET_CAUGHT);
@@ -671,7 +671,7 @@ static void PrintBadgeCount(void)
     u8 *ptr;
     u32 flagId;
     u8 nbadges = 0;
-    for (flagId = FLAG_0x820; flagId < FLAG_0x820 + 8; flagId++)
+    for (flagId = FLAG_BADGE01_GET; flagId < FLAG_BADGE01_GET + 8; flagId++)
     {
         if (FlagGet(flagId))
             nbadges++;

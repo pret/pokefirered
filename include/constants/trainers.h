@@ -1,5 +1,5 @@
-#ifndef GUARD_TRAINERS_H
-#define GUARD_TRAINERS_H
+#ifndef GUARD_CONSTANTS_TRAINERS_H
+#define GUARD_CONSTANTS_TRAINERS_H
 
 #define TRAINER_ENCOUNTER_MUSIC_MALE         0 // standard male encounter music
 #define TRAINER_ENCOUNTER_MUSIC_FEMALE       1 // standard female encounter music
@@ -918,4 +918,4 @@
 #define F_TRAINER_PARTY_CUSTOM_MOVESET (1 << 0)
 #define F_TRAINER_PARTY_HELD_ITEM      (1 << 1)
 
-#endif  // GUARD_TRAINERS_H
+#endif  // GUARD_CONSTANTS_TRAINERS_H

@@ -21,7 +21,7 @@ EventScript_16EE0A:: @ 816EE0A
 	special SetFlavorTextFlagFromSpecialVars
 	clearflag FLAG_0x0AE
 	setflag FLAG_0x4B5
-	setflag FLAG_0x825
+	setflag FLAG_BADGE06_GET
 	setvar VAR_0x8008, 6
 	call EventScript_1A6B18
 	goto EventScript_16EE3D
@@ -98,7 +98,7 @@ EventScript_16EF4B:: @ 816EF4B
 
 SaffronCity_Gym_EventScript_16EF55:: @ 816EF55
 	lockall
-	checkflag FLAG_0x825
+	checkflag FLAG_BADGE06_GET
 	goto_if_eq EventScript_16EF69
 	msgbox gUnknown_819BDFE
 	releaseall

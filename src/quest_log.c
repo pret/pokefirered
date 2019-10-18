@@ -3125,13 +3125,13 @@ static bool8 sub_8113778(u16 a0, u16 * a1)
     if (a0 == 36 || a0 == 11)
         return TRUE;
 
-    if (!FlagGet(0x82C))
+    if (!FlagGet(FLAG_SYS_GAME_CLEAR))
     {
         if (a0 == 3 || a0 == 31 || sub_81137E4(a0, a1) == TRUE)
             return TRUE;
     }
 
-    if (!FlagGet(0x844))
+    if (!FlagGet(FLAG_0x844))
     {
         if (a0 == 4 || a0 == 5 || a0 == 6 || a0 == 7 || a0 == 8 || a0 == 9 || a0 == 10 || a0 == 22 || a0 == 25 || a0 == 26)
             return TRUE;
@@ -3220,7 +3220,7 @@ static bool8 sub_8113954(u16 a0, u16 * a1)
     if (a0 != 34 && a0 != 30 && a0 != 32 && a0 != 33)
         return FALSE;
     sub_81138F8();
-    if (gUnknown_3005E88 || FlagGet(0x82C) || sub_81137E4(a0, a1) != TRUE)
+    if (gUnknown_3005E88 || FlagGet(FLAG_SYS_GAME_CLEAR) || sub_81137E4(a0, a1) != TRUE)
     {
         gUnknown_203B024.unk_00 = a0;
         memcpy(gUnknown_203B024.unk_04, a1, 8);
@@ -4715,7 +4715,7 @@ static const u16 * sub_81152BC(const u16 * a0)
         {
             if (r5_2[0] != gUnknown_8456C17[r4])
                 continue;
-            if (FlagGet(0x820 + r4) == TRUE)
+            if (FlagGet(FLAG_BADGE01_GET + r4) == TRUE)
                 StringExpandPlaceholders(gStringVar4, gUnknown_841AE8F);
             else
                 StringExpandPlaceholders(gStringVar4, gUnknown_841AE48);

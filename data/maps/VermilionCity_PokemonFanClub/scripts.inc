@@ -38,7 +38,7 @@ EventScript_16B4F2:: @ 816B4F2
 VermilionCity_PokemonFanClub_EventScript_16B4FC:: @ 816B4FC
 	lock
 	faceplayer
-	checkflag FLAG_0x82C
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if_eq EventScript_16B511
 	msgbox gUnknown_81948E6
 	release

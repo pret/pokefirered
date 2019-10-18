@@ -84,9 +84,9 @@ EventScript_170CB1:: @ 8170CB1
 	waitmovement 0
 	applymovement 255, Movement_1A75EB
 	waitmovement 0
-	checkflag FLAG_0x82C
+	checkflag FLAG_SYS_GAME_CLEAR
 	call_if 1, EventScript_170E34
-	checkflag FLAG_0x82C
+	checkflag FLAG_SYS_GAME_CLEAR
 	call_if 0, EventScript_170E3D
 	applymovement 3, Movement_1A75ED
 	waitmovement 0

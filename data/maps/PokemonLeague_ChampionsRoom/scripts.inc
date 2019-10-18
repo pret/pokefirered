@@ -59,9 +59,9 @@ EventScript_162B76:: @ 8162B76
 	applymovement 255, Movement_162D07
 	waitmovement 0
 	delay 20
-	checkflag FLAG_0x82C
+	checkflag FLAG_SYS_GAME_CLEAR
 	call_if 0, EventScript_162CB3
-	checkflag FLAG_0x82C
+	checkflag FLAG_SYS_GAME_CLEAR
 	call_if 1, EventScript_162CBC
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2

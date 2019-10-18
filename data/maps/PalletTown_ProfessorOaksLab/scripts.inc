@@ -601,7 +601,7 @@ PalletTown_ProfessorOaksLab_EventScript_169595:: @ 8169595
 	goto_if_eq EventScript_169903
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 8
 	goto_if_eq EventScript_169A6E
-	checkflag FLAG_0x82C
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if_eq EventScript_1699CE
 	compare_var_to_value VAR_0x4052, 1
 	goto_if_eq EventScript_169903
@@ -706,7 +706,7 @@ EventScript_16961E:: @ 816961E
 	waitmessage
 	waitfanfare
 	call EventScript_1A6675
-	setflag FLAG_0x829
+	setflag FLAG_SYS_POKEDEX_GET
 	special sub_810B810
 	setvar VAR_0x407C, 1
 	msgbox gUnknown_818E612
@@ -974,7 +974,7 @@ EventScript_1699CE:: @ 81699CE
 	closemessage
 	compare_var_to_value VAR_0x8009, 60
 	goto_if 0, EventScript_1699F9
-	checkflag FLAG_0x89B
+	checkflag FLAG_WORLD_MAP_ONE_ISLAND
 	goto_if 0, EventScript_1699F9
 	delay 30
 	msgbox gUnknown_818EDF5
@@ -1205,7 +1205,7 @@ EventScript_169C74:: @ 8169C74
 	removeobject VAR_LAST_TALKED
 	msgbox gUnknown_818E2E5
 	call EventScript_1A6675
-	setflag FLAG_0x828
+	setflag FLAG_SYS_POKEMON_GET
 	setflag FLAG_0x291
 	givemon VAR_0x4002, 5, ITEM_NONE, 0, 0, 0
 	copyvar VAR_STARTER_MON, VAR_0x4001
@@ -1341,7 +1341,7 @@ EventScript_169DE4:: @ 8169DE4
 PalletTown_ProfessorOaksLab_EventScript_169DEE:: @ 8169DEE
 	lock
 	faceplayer
-	checkflag FLAG_0x82C
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if_eq EventScript_169E03
 	msgbox gUnknown_818EBE6
 	release
@@ -1358,7 +1358,7 @@ EventScript_169E03:: @ 8169E03
 PalletTown_ProfessorOaksLab_EventScript_169E1A:: @ 8169E1A
 	lock
 	faceplayer
-	checkflag FLAG_0x82C
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if_eq EventScript_169E2F
 	msgbox gUnknown_818EBE6
 	release

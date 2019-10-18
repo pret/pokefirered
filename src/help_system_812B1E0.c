@@ -1163,7 +1163,7 @@ static bool8 sub_812B780(u8 id)
             return FlagGet(FLAG_WORLD_MAP_VERMILION_CITY);
         case 11:
         case 24:
-            return FlagGet(FLAG_0x8A4);
+            return FlagGet(FLAG_WORLD_MAP_VIRIDIAN_FOREST);
         case 9:
         case 13:
         case 14:
@@ -1175,17 +1175,17 @@ static bool8 sub_812B780(u8 id)
         case 29:
         case 31:
         case 37:
-            return FlagGet(FLAG_0x828);
+            return FlagGet(FLAG_SYS_POKEMON_GET);
         case 21:
         case 23:
-            return FlagGet(FLAG_0x829);
+            return FlagGet(FLAG_SYS_POKEDEX_GET);
         case 12:
         case 25:
         case 27:
         case 30:
         case 32:
         case 33:
-            return FlagGet(FLAG_0x820);
+            return FlagGet(FLAG_BADGE01_GET);
         case 28:
         case 40:
             return sub_812BB10();
@@ -1229,7 +1229,7 @@ static bool8 sub_812B780(u8 id)
         case 1:
         case 30:
         case 37:
-            return FlagGet(FLAG_0x829);
+            return FlagGet(FLAG_SYS_POKEDEX_GET);
         case 14:
             return CheckBagHasItem(ITEM_TOWN_MAP, 1);
         case 2:
@@ -1244,21 +1244,21 @@ static bool8 sub_812B780(u8 id)
         case 35:
         case 43:
         case 44:
-            return FlagGet(FLAG_0x828);
+            return FlagGet(FLAG_SYS_POKEMON_GET);
         case 4:
         case 34:
             if (GetKantoPokedexCount(1) > 1)
                 return TRUE;
             return FALSE;
         case 15:
-            return FlagGet(FLAG_0x820);
+            return FlagGet(FLAG_BADGE01_GET);
         case 16:
         case 17:
             return sub_812BB10();
         case 18:
             return FlagGet(FLAG_0x271);
         case 48:
-            return FlagGet(FLAG_0x82C);
+            return FlagGet(FLAG_SYS_GAME_CLEAR);
         }
         return FALSE;
     }
@@ -1308,7 +1308,7 @@ static bool8 sub_812B780(u8 id)
         case 19:
         case 20:
         case 21:
-            return FlagGet(FLAG_0x828);
+            return FlagGet(FLAG_SYS_POKEMON_GET);
         case 36:
         case 37:
             return sub_812BB10();
@@ -1316,7 +1316,7 @@ static bool8 sub_812B780(u8 id)
         case 15:
         case 18:
         case 39:
-            return FlagGet(FLAG_0x8A4);
+            return FlagGet(FLAG_WORLD_MAP_VIRIDIAN_FOREST);
         }
         return TRUE;
     }
@@ -1325,9 +1325,9 @@ static bool8 sub_812B780(u8 id)
         switch (id)
         {
         case 5:
-            return FlagGet(FLAG_0x820);
+            return FlagGet(FLAG_BADGE01_GET);
         case 6:
-            return FlagGet(FLAG_0x821);
+            return FlagGet(FLAG_BADGE02_GET);
         }
         return TRUE;
     }

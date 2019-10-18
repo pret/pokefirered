@@ -31,17 +31,17 @@ EventScript_165920:: @ 8165920
 	return
 
 EventScript_165931:: @ 8165931
-	checkflag FLAG_0x821
+	checkflag FLAG_BADGE02_GET
 	goto_if 0, EventScript_1A77A9
-	checkflag FLAG_0x822
+	checkflag FLAG_BADGE03_GET
 	goto_if 0, EventScript_1A77A9
-	checkflag FLAG_0x823
+	checkflag FLAG_BADGE04_GET
 	goto_if 0, EventScript_1A77A9
-	checkflag FLAG_0x824
+	checkflag FLAG_BADGE05_GET
 	goto_if 0, EventScript_1A77A9
-	checkflag FLAG_0x825
+	checkflag FLAG_BADGE06_GET
 	goto_if 0, EventScript_1A77A9
-	checkflag FLAG_0x826
+	checkflag FLAG_BADGE07_GET
 	goto_if 0, EventScript_1A77A9
 	setvar VAR_0x405A, 1
 	return
@@ -107,7 +107,7 @@ EventScript_1659EC:: @ 81659EC
 ViridianCity_EventScript_1659F6:: @ 81659F6
 	lock
 	faceplayer
-	checkflag FLAG_0x820
+	checkflag FLAG_BADGE01_GET
 	goto_if_eq EventScript_165A23
 	compare_var_to_value VAR_0x4051, 2
 	goto_if 4, EventScript_165A4A

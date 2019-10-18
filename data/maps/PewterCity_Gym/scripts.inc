@@ -17,7 +17,7 @@ EventScript_16A5C5:: @ 816A5C5
 	setvar VAR_0x8005, 1
 	special SetFlavorTextFlagFromSpecialVars
 	setflag FLAG_0x4B0
-	setflag FLAG_0x820
+	setflag FLAG_BADGE01_GET
 	setvar VAR_0x406C, 1
 	setflag FLAG_0x02E
 	clearflag FLAG_0x092
@@ -82,7 +82,7 @@ EventScript_16A6A5:: @ 816A6A5
 
 PewterCity_Gym_EventScript_16A6AF:: @ 816A6AF
 	lockall
-	checkflag FLAG_0x820
+	checkflag FLAG_BADGE01_GET
 	goto_if_eq EventScript_16A6C3
 	msgbox gUnknown_819146E
 	releaseall

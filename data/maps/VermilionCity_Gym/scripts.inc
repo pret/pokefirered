@@ -226,7 +226,7 @@ EventScript_16B97C:: @ 816B97C
 	call_if 0, EventScript_16B9AB
 	clearflag FLAG_0x0A0
 	setflag FLAG_0x4B2
-	setflag FLAG_0x822
+	setflag FLAG_BADGE03_GET
 	setvar VAR_0x8008, 3
 	call EventScript_1A6B18
 	goto EventScript_16B9AF
@@ -297,7 +297,7 @@ EventScript_16BA81:: @ 816BA81
 
 VermilionCity_Gym_EventScript_16BA8B:: @ 816BA8B
 	lockall
-	checkflag FLAG_0x822
+	checkflag FLAG_BADGE03_GET
 	goto_if_eq EventScript_16BA9F
 	msgbox gUnknown_819520B
 	releaseall

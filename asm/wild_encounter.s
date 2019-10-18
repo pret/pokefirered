@@ -932,7 +932,7 @@ _08082DFA:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08082E46
-	bl sub_807F78C
+	bl BattleSetup_StartRoamerBattle
 	movs r0, 0x1
 	b _08082E48
 	.align 2, 0
@@ -950,7 +950,7 @@ _08082E24:
 	cmp r0, 0x1
 	bne _08082E40
 _08082E38:
-	bl sub_807F704
+	bl BattleSetup_StartWildBattle
 	movs r0, 0x1
 	b _08082E48
 _08082E40:
@@ -999,7 +999,7 @@ sub_8082E54: @ 8082E54
 	lsrs r4, r0, 24
 	cmp r4, 0x1
 	bne _08082EB0
-	bl sub_807F704
+	bl BattleSetup_StartWildBattle
 _08082E9C:
 	ldr r0, _08082EAC @ =gSpecialVar_Result
 	strh r4, [r0]
@@ -1079,7 +1079,7 @@ _08082F1C:
 	cmp r0, 0x1
 	bne _08082F44
 _08082F3C:
-	bl sub_807F78C
+	bl BattleSetup_StartRoamerBattle
 	movs r0, 0x1
 	b _08082F6E
 _08082F44:
@@ -1096,7 +1096,7 @@ _08082F44:
 _08082F58:
 	movs r2, 0
 	bl sub_8082AEC
-	bl sub_807F704
+	bl BattleSetup_StartWildBattle
 	movs r0, 0x1
 	b _08082F6E
 	.align 2, 0
@@ -1160,7 +1160,7 @@ sub_8082FB0: @ 8082FB0
 	bl sub_8082B64
 	movs r0, 0xC
 	bl IncrementGameStat
-	bl sub_807F704
+	bl BattleSetup_StartWildBattle
 	pop {r4,r5}
 	pop {r0}
 	bx r0

@@ -306,7 +306,7 @@ sub_807F028: @ 807F028
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0, 0
-	bl sav1_get_flash_used_on_map
+	bl Overworld_GetFlashLevel
 	lsls r0, 24
 	lsrs r0, 24
 	movs r5, 0

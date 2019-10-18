@@ -10,8 +10,8 @@ nullsub_81: @ 80E75AC
 	bx lr
 	thumb_func_end nullsub_81
 
-	thumb_func_start SetControllerToOakOrOldman
-SetControllerToOakOrOldman: @ 80E75B0
+	thumb_func_start SetControllerToOakOrOldMan
+SetControllerToOakOrOldMan: @ 80E75B0
 	ldr r1, _080E75DC @ =gBattlerControllerFuncs
 	ldr r0, _080E75E0 @ =gActiveBattler
 	ldrb r0, [r0]
@@ -39,7 +39,7 @@ _080E75DC: .4byte gBattlerControllerFuncs
 _080E75E0: .4byte gActiveBattler
 _080E75E4: .4byte sub_80E75EC
 _080E75E8: .4byte gBattleStruct
-	thumb_func_end SetControllerToOakOrOldman
+	thumb_func_end SetControllerToOakOrOldMan
 
 	thumb_func_start sub_80E75EC
 sub_80E75EC: @ 80E75EC

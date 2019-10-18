@@ -1917,7 +1917,7 @@ _080D81E8:
 _080D8204: .4byte gBattleTypeFlags
 _080D8208: .4byte gStringVar4
 _080D820C:
-	bl sub_80806EC
+	bl GetTrainerALoseText
 	adds r4, r0, 0
 	b _080D8382
 _080D8214:
@@ -1937,7 +1937,7 @@ _080D8214:
 _080D8230: .4byte gBattleTypeFlags
 _080D8234: .4byte gStringVar4
 _080D8238:
-	bl sub_8080710
+	bl GetTrainerBLoseText
 	adds r4, r0, 0
 	b _080D8382
 _080D8240:

@@ -179,7 +179,7 @@ SeafoamIslands_B4F_EventScript_1631AC:: @ 81631AC
 	playbgm MUS_EXEYE, 0
 	waitbuttonpress
 	setflag FLAG_0x807
-	special sub_807F9D8
+	special BattleSetup_StartLegendaryBattle
 	waitstate
 	clearflag FLAG_0x807
 	specialvar VAR_RESULT, sub_80CA74C

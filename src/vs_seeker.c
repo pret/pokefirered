@@ -625,7 +625,7 @@ void sub_810C444(void)
             mapObject = &gMapObjects[sp0];
             if (sub_810CF04(sp0) == TRUE)
             {
-                npc_set_running_behaviour_etc(mapObject, r6);
+                SetTrainerMovementType(mapObject, r6);
             }
             templates[i].movementType = r6;
         }
@@ -763,7 +763,7 @@ static void sub_810C594(void)
             {
                 gSprites[mapObject->spriteId].pos2.x = 0;
                 gSprites[mapObject->spriteId].pos2.y = 0;
-                npc_set_running_behaviour_etc(mapObject, r3);
+                SetTrainerMovementType(mapObject, r3);
             }
         }
     }
@@ -1324,7 +1324,7 @@ static bool8 HasRematchTrainerAlreadyBeenFought(const VsSeekerData *vsSeekerData
 void sub_810CDE8(void)
 {
     gSaveBlock1Ptr->trainerRematches[gSpecialVar_LastTalked] = 0;
-    sub_80803FC();
+    SetBattledTrainerFlag();
 }
 
 static s32 sub_810CE10(const VsSeekerData * a0, u16 a1)
@@ -1596,7 +1596,7 @@ static void StartAllRespondantIdleMovements(void)
                 struct MapObject *r4 = &gMapObjects[sVsSeeker->trainerInfo[j].fieldObjectId];
 
                 if (sub_810CF04(sVsSeeker->trainerInfo[j].fieldObjectId) == 1)
-                    npc_set_running_behaviour_etc(r4, sVsSeeker->runningBehaviourEtcArray[i]);
+                    SetTrainerMovementType(r4, sVsSeeker->runningBehaviourEtcArray[i]);
                 sub_805FE7C(r4, sVsSeeker->runningBehaviourEtcArray[i]);
                 gSaveBlock1Ptr->trainerRematches[sVsSeeker->trainerInfo[j].localId] = GetNextAvailableRematchTrainer(sVsSeekerData, sVsSeeker->trainerInfo[j].trainerIdx, &dummy);
             }

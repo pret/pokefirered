@@ -41,7 +41,7 @@ CeruleanCave_B1F_EventScript_1624F5:: @ 81624F5
 	waitbuttonpress
 	setwildbattle SPECIES_MEWTWO, 70, ITEM_NONE
 	setflag FLAG_0x807
-	special sub_807F9D8
+	special BattleSetup_StartLegendaryBattle
 	waitstate
 	clearflag FLAG_0x807
 	specialvar VAR_RESULT, sub_80CA74C

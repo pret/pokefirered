@@ -69,7 +69,7 @@ NavelRock_Summit_EventScript_164FFB:: @ 8164FFB
 	setvar VAR_0x8006, 0
 	special CreateObedientEnemyMon
 	setflag FLAG_0x807
-	special sub_807F9D8
+	special BattleSetup_StartLegendaryBattle
 	waitstate
 	clearflag FLAG_0x807
 	setvar VAR_LAST_TALKED, 1

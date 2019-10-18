@@ -1953,13 +1953,13 @@ _0806D7E2:
 	bx r1
 	thumb_func_end DoPoisonFieldEffect_step
 
-	thumb_func_start sub_806D7E8
-sub_806D7E8: @ 806D7E8
+	thumb_func_start RestartWildEncounterImmunitySteps
+RestartWildEncounterImmunitySteps: @ 806D7E8
 	push {lr}
 	bl sub_80832D4
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806D7E8
+	thumb_func_end RestartWildEncounterImmunitySteps
 
 	thumb_func_start is_it_battle_time_3
 is_it_battle_time_3: @ 806D7F4

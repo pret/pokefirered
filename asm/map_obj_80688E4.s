@@ -82,8 +82,8 @@ _0806896E:
 	bx r1
 	thumb_func_end FreezeMapObject
 
-	thumb_func_start player_bitmagic
-player_bitmagic: @ 8068974
+	thumb_func_start FreezeEventObjects
+FreezeEventObjects: @ 8068974
 	push {r4,r5,lr}
 	movs r4, 0
 	ldr r5, _080689A8 @ =gMapObjects
@@ -114,7 +114,7 @@ _08068998:
 	.align 2, 0
 _080689A8: .4byte gMapObjects
 _080689AC: .4byte gPlayerAvatar
-	thumb_func_end player_bitmagic
+	thumb_func_end FreezeEventObjects
 
 	thumb_func_start FreezeMapObjectsExceptOne
 FreezeMapObjectsExceptOne: @ 80689B0

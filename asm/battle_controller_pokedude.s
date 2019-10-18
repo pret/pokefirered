@@ -10,8 +10,8 @@ nullsub_99: @ 81560A0
 	bx lr
 	thumb_func_end nullsub_99
 
-	thumb_func_start SetControllerToPokedude
-SetControllerToPokedude: @ 81560A4
+	thumb_func_start SetControllerToPokeDude
+SetControllerToPokeDude: @ 81560A4
 	ldr r1, _081560C8 @ =gBattlerControllerFuncs
 	ldr r0, _081560CC @ =gActiveBattler
 	ldrb r0, [r0]
@@ -36,7 +36,7 @@ _081560CC: .4byte gActiveBattler
 _081560D0: .4byte sub_81560DC
 _081560D4: .4byte gBattleStruct
 _081560D8: .4byte gSpecialVar_0x8004
-	thumb_func_end SetControllerToPokedude
+	thumb_func_end SetControllerToPokeDude
 
 	thumb_func_start sub_81560DC
 sub_81560DC: @ 81560DC

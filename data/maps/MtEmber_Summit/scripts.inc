@@ -41,7 +41,7 @@ MtEmber_Summit_EventScript_163B33:: @ 8163B33
 	playbgm MUS_EXEYE, 0
 	waitbuttonpress
 	setflag FLAG_0x807
-	special sub_807F9D8
+	special BattleSetup_StartLegendaryBattle
 	waitstate
 	clearflag FLAG_0x807
 	specialvar VAR_RESULT, sub_80CA74C

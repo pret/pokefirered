@@ -151,7 +151,7 @@ EventScript_165A65:: @ 8165A65
 	compare_var_to_value VAR_RESULT, 2
 	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
-	special sub_807F888
+	special BattleSetup_StartOldManTutorialBattle
 	waitstate
 	release
 	end
@@ -246,7 +246,7 @@ EventScript_165B4C:: @ 8165B4C
 	compare_var_to_value VAR_RESULT, 2
 	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
-	special sub_807F888
+	special BattleSetup_StartOldManTutorialBattle
 	waitstate
 	lock
 	faceplayer

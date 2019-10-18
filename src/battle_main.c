@@ -3719,7 +3719,7 @@ static void HandleEndTurn_BattleLost(void)
     }
     else
     {
-        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && sub_80803CC() == 9)
+        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && GetTrainerBattleMode() == 9)
         {
             if (sub_80803D8() & 1)
                 gBattleCommunication[MULTISTRING_CHOOSER] = 1;

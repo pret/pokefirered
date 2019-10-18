@@ -162,7 +162,7 @@ void sub_80A1184(void)
 
 bool8 sub_80A1194(void)
 {
-    player_bitmagic();
+    FreezeEventObjects();
     ScriptContext2_Enable();
     sub_807DC00();
     CreateTask(sub_80A11C0, 10);

@@ -92,7 +92,7 @@ EventScript_1652C0:: @ 81652C0
 	setvar VAR_0x8006, 0
 	special CreateObedientEnemyMon
 	setflag FLAG_0x807
-	special sub_807F9D8
+	special BattleSetup_StartLegendaryBattle
 	waitstate
 	clearflag FLAG_0x807
 	specialvar VAR_RESULT, sub_80CA74C

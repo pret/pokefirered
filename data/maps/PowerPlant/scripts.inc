@@ -54,7 +54,7 @@ PowerPlant_EventScript_1637B8:: @ 81637B8
 	playbgm MUS_EXEYE, 0
 	waitbuttonpress
 	setflag FLAG_0x807
-	special sub_807F9D8
+	special BattleSetup_StartLegendaryBattle
 	waitstate
 	clearflag FLAG_0x807
 	specialvar VAR_RESULT, sub_80CA74C

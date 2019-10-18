@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_807F620
-sub_807F620: @ 807F620
+	thumb_func_start Task_BattleStart
+Task_BattleStart: @ 807F620
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -45,7 +45,7 @@ _0807F65E:
 	bl CleanupOverworldWindowsAndTilemaps
 	ldr r0, _0807F68C @ =CB2_InitBattle
 	bl SetMainCallback2
-	bl sub_806D7E8
+	bl RestartWildEncounterImmunitySteps
 	bl ClearPoisonStepCounter
 	adds r0, r5, 0
 	bl DestroyTask
@@ -55,10 +55,10 @@ _0807F686:
 	bx r0
 	.align 2, 0
 _0807F68C: .4byte CB2_InitBattle
-	thumb_func_end sub_807F620
+	thumb_func_end Task_BattleStart
 
-	thumb_func_start sub_807F690
-sub_807F690: @ 807F690
+	thumb_func_start CreateBattleStartTask
+CreateBattleStartTask: @ 807F690
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -66,7 +66,7 @@ sub_807F690: @ 807F690
 	lsrs r4, 24
 	lsls r5, 16
 	lsrs r5, 16
-	ldr r0, _0807F6C4 @ =sub_807F620
+	ldr r0, _0807F6C4 @ =Task_BattleStart
 	movs r1, 0x1
 	bl CreateTask
 	lsls r0, 24
@@ -83,12 +83,12 @@ sub_807F690: @ 807F690
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807F6C4: .4byte sub_807F620
+_0807F6C4: .4byte Task_BattleStart
 _0807F6C8: .4byte gTasks
-	thumb_func_end sub_807F690
+	thumb_func_end CreateBattleStartTask
 
-	thumb_func_start sub_807F6CC
-sub_807F6CC: @ 807F6CC
+	thumb_func_start CheckSilphScopeInPokemonTower
+CheckSilphScopeInPokemonTower: @ 807F6CC
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -117,15 +117,15 @@ _0807F6FC:
 _0807F6FE:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_807F6CC
+	thumb_func_end CheckSilphScopeInPokemonTower
 
-	thumb_func_start sub_807F704
-sub_807F704: @ 807F704
+	thumb_func_start BattleSetup_StartWildBattle
+BattleSetup_StartWildBattle: @ 807F704
 	push {lr}
 	bl GetSafariZoneFlag
 	cmp r0, 0
 	beq _0807F714
-	bl sub_807F7D8
+	bl BattleSetup_StartSafariBattle
 	b _0807F744
 _0807F714:
 	ldr r0, _0807F73C @ =gSaveBlock1Ptr
@@ -139,29 +139,29 @@ _0807F714:
 	asrs r1, 24
 	lsls r1, 16
 	lsrs r1, 16
-	bl sub_807F6CC
+	bl CheckSilphScopeInPokemonTower
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807F740
-	bl sub_807F810
+	bl BattleSetup_StartGhostBattle
 	b _0807F744
 	.align 2, 0
 _0807F73C: .4byte gSaveBlock1Ptr
 _0807F740:
-	bl sub_807F748
+	bl BattleSetup_StandardWildBattle
 _0807F744:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_807F704
+	thumb_func_end BattleSetup_StartWildBattle
 
-	thumb_func_start sub_807F748
-sub_807F748: @ 807F748
+	thumb_func_start BattleSetup_StandardWildBattle
+BattleSetup_StandardWildBattle: @ 807F748
 	push {lr}
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeEventObjects
 	bl sub_805C780
 	ldr r1, _0807F780 @ =gMain
-	ldr r0, _0807F784 @ =sub_807FB40
+	ldr r0, _0807F784 @ =CB2_EndWildBattle
 	str r0, [r1, 0x8]
 	ldr r1, _0807F788 @ =gBattleTypeFlags
 	movs r0, 0
@@ -170,7 +170,7 @@ sub_807F748: @ 807F748
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl sub_807F690
+	bl CreateBattleStartTask
 	movs r0, 0x7
 	bl IncrementGameStat
 	movs r0, 0x8
@@ -179,18 +179,18 @@ sub_807F748: @ 807F748
 	bx r0
 	.align 2, 0
 _0807F780: .4byte gMain
-_0807F784: .4byte sub_807FB40
+_0807F784: .4byte CB2_EndWildBattle
 _0807F788: .4byte gBattleTypeFlags
-	thumb_func_end sub_807F748
+	thumb_func_end BattleSetup_StandardWildBattle
 
-	thumb_func_start sub_807F78C
-sub_807F78C: @ 807F78C
+	thumb_func_start BattleSetup_StartRoamerBattle
+BattleSetup_StartRoamerBattle: @ 807F78C
 	push {lr}
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeEventObjects
 	bl sub_805C780
 	ldr r1, _0807F7C8 @ =gMain
-	ldr r0, _0807F7CC @ =sub_807FB40
+	ldr r0, _0807F7CC @ =CB2_EndWildBattle
 	str r0, [r1, 0x8]
 	ldr r1, _0807F7D0 @ =gBattleTypeFlags
 	movs r0, 0x80
@@ -200,7 +200,7 @@ sub_807F78C: @ 807F78C
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _0807F7D4 @ =0x00000155
-	bl sub_807F690
+	bl CreateBattleStartTask
 	movs r0, 0x7
 	bl IncrementGameStat
 	movs r0, 0x8
@@ -209,16 +209,16 @@ sub_807F78C: @ 807F78C
 	bx r0
 	.align 2, 0
 _0807F7C8: .4byte gMain
-_0807F7CC: .4byte sub_807FB40
+_0807F7CC: .4byte CB2_EndWildBattle
 _0807F7D0: .4byte gBattleTypeFlags
 _0807F7D4: .4byte 0x00000155
-	thumb_func_end sub_807F78C
+	thumb_func_end BattleSetup_StartRoamerBattle
 
-	thumb_func_start sub_807F7D8
-sub_807F7D8: @ 807F7D8
+	thumb_func_start BattleSetup_StartSafariBattle
+BattleSetup_StartSafariBattle: @ 807F7D8
 	push {lr}
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeEventObjects
 	bl sub_805C780
 	ldr r1, _0807F804 @ =gMain
 	ldr r0, _0807F808 @ =CB2_EndSafariBattle
@@ -230,23 +230,23 @@ sub_807F7D8: @ 807F7D8
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl sub_807F690
+	bl CreateBattleStartTask
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0807F804: .4byte gMain
 _0807F808: .4byte CB2_EndSafariBattle
 _0807F80C: .4byte gBattleTypeFlags
-	thumb_func_end sub_807F7D8
+	thumb_func_end BattleSetup_StartSafariBattle
 
-	thumb_func_start sub_807F810
-sub_807F810: @ 807F810
+	thumb_func_start BattleSetup_StartGhostBattle
+BattleSetup_StartGhostBattle: @ 807F810
 	push {lr}
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeEventObjects
 	bl sub_805C780
 	ldr r1, _0807F854 @ =gMain
-	ldr r0, _0807F858 @ =sub_807FB40
+	ldr r0, _0807F858 @ =CB2_EndWildBattle
 	str r0, [r1, 0x8]
 	ldr r1, _0807F85C @ =gBattleTypeFlags
 	movs r0, 0x80
@@ -256,7 +256,7 @@ sub_807F810: @ 807F810
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl sub_807F690
+	bl CreateBattleStartTask
 	ldr r0, _0807F860 @ =gEnemyParty
 	ldr r2, _0807F864 @ =gUnknown_841D148
 	movs r1, 0x2
@@ -269,20 +269,20 @@ sub_807F810: @ 807F810
 	bx r0
 	.align 2, 0
 _0807F854: .4byte gMain
-_0807F858: .4byte sub_807FB40
+_0807F858: .4byte CB2_EndWildBattle
 _0807F85C: .4byte gBattleTypeFlags
 _0807F860: .4byte gEnemyParty
 _0807F864: .4byte gUnknown_841D148
-	thumb_func_end sub_807F810
+	thumb_func_end BattleSetup_StartGhostBattle
 
 	thumb_func_start sub_807F868
 sub_807F868: @ 807F868
 	push {lr}
-	bl sub_807FF80
+	bl GetTrainerBattleTransition
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl sub_807F690
+	bl CreateBattleStartTask
 	movs r0, 0x7
 	bl IncrementGameStat
 	movs r0, 0x9
@@ -291,8 +291,8 @@ sub_807F868: @ 807F868
 	bx r0
 	thumb_func_end sub_807F868
 
-	thumb_func_start sub_807F888
-sub_807F888: @ 807F888
+	thumb_func_start BattleSetup_StartOldManTutorialBattle
+BattleSetup_StartOldManTutorialBattle: @ 807F888
 	push {lr}
 	ldr r0, _0807F8B4 @ =gEnemyParty
 	movs r1, 0xD
@@ -308,7 +308,7 @@ sub_807F888: @ 807F888
 	str r0, [r1]
 	movs r0, 0x8
 	movs r1, 0
-	bl sub_807F690
+	bl CreateBattleStartTask
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -316,14 +316,14 @@ _0807F8B4: .4byte gEnemyParty
 _0807F8B8: .4byte gMain
 _0807F8BC: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
 _0807F8C0: .4byte gBattleTypeFlags
-	thumb_func_end sub_807F888
+	thumb_func_end BattleSetup_StartOldManTutorialBattle
 
 	thumb_func_start BattleSetup_StartScriptedWildBattle
 BattleSetup_StartScriptedWildBattle: @ 807F8C4
 	push {lr}
 	bl ScriptContext2_Enable
 	ldr r1, _0807F8F8 @ =gMain
-	ldr r0, _0807F8FC @ =sub_807FBA0
+	ldr r0, _0807F8FC @ =CB2_EndScriptedWildBattle
 	str r0, [r1, 0x8]
 	ldr r1, _0807F900 @ =gBattleTypeFlags
 	movs r0, 0x80
@@ -333,7 +333,7 @@ BattleSetup_StartScriptedWildBattle: @ 807F8C4
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl sub_807F690
+	bl CreateBattleStartTask
 	movs r0, 0x7
 	bl IncrementGameStat
 	movs r0, 0x8
@@ -342,17 +342,17 @@ BattleSetup_StartScriptedWildBattle: @ 807F8C4
 	bx r0
 	.align 2, 0
 _0807F8F8: .4byte gMain
-_0807F8FC: .4byte sub_807FBA0
+_0807F8FC: .4byte CB2_EndScriptedWildBattle
 _0807F900: .4byte gBattleTypeFlags
 	thumb_func_end BattleSetup_StartScriptedWildBattle
 
-	thumb_func_start sub_807F904
-sub_807F904: @ 807F904
+	thumb_func_start BattleSetup_StartMarowakBattle
+BattleSetup_StartMarowakBattle: @ 807F904
 	push {lr}
 	sub sp, 0xC
 	bl ScriptContext2_Enable
 	ldr r1, _0807F944 @ =gMain
-	ldr r0, _0807F948 @ =sub_807FBF0
+	ldr r0, _0807F948 @ =CB2_EndMarowakBattle
 	str r0, [r1, 0x8]
 	ldr r0, _0807F94C @ =0x00000167
 	movs r1, 0x1
@@ -378,7 +378,7 @@ sub_807F904: @ 807F904
 	b _0807F960
 	.align 2, 0
 _0807F944: .4byte gMain
-_0807F948: .4byte sub_807FBF0
+_0807F948: .4byte CB2_EndMarowakBattle
 _0807F94C: .4byte 0x00000167
 _0807F950: .4byte gBattleTypeFlags
 _0807F954: .4byte gEnemyParty
@@ -392,7 +392,7 @@ _0807F960:
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl sub_807F690
+	bl CreateBattleStartTask
 	ldr r0, _0807F990 @ =gEnemyParty
 	ldr r2, _0807F994 @ =gUnknown_841D148
 	movs r1, 0x2
@@ -408,14 +408,14 @@ _0807F960:
 _0807F98C: .4byte gBattleTypeFlags
 _0807F990: .4byte gEnemyParty
 _0807F994: .4byte gUnknown_841D148
-	thumb_func_end sub_807F904
+	thumb_func_end BattleSetup_StartMarowakBattle
 
 	thumb_func_start sub_807F998
 sub_807F998: @ 807F998
 	push {lr}
 	bl ScriptContext2_Enable
 	ldr r1, _0807F9CC @ =gMain
-	ldr r0, _0807F9D0 @ =sub_807FBA0
+	ldr r0, _0807F9D0 @ =CB2_EndScriptedWildBattle
 	str r0, [r1, 0x8]
 	ldr r1, _0807F9D4 @ =gBattleTypeFlags
 	movs r0, 0x80
@@ -425,7 +425,7 @@ sub_807F998: @ 807F998
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl sub_807F690
+	bl CreateBattleStartTask
 	movs r0, 0x7
 	bl IncrementGameStat
 	movs r0, 0x8
@@ -434,16 +434,16 @@ sub_807F998: @ 807F998
 	bx r0
 	.align 2, 0
 _0807F9CC: .4byte gMain
-_0807F9D0: .4byte sub_807FBA0
+_0807F9D0: .4byte CB2_EndScriptedWildBattle
 _0807F9D4: .4byte gBattleTypeFlags
 	thumb_func_end sub_807F998
 
-	thumb_func_start sub_807F9D8
-sub_807F9D8: @ 807F9D8
+	thumb_func_start BattleSetup_StartLegendaryBattle
+BattleSetup_StartLegendaryBattle: @ 807F9D8
 	push {lr}
 	bl ScriptContext2_Enable
 	ldr r1, _0807FA0C @ =gMain
-	ldr r0, _0807FA10 @ =sub_807FBA0
+	ldr r0, _0807FA10 @ =CB2_EndScriptedWildBattle
 	str r0, [r1, 0x8]
 	ldr r1, _0807FA14 @ =gBattleTypeFlags
 	movs r0, 0x84
@@ -466,7 +466,7 @@ sub_807F9D8: @ 807F9D8
 	b _0807FA3C
 	.align 2, 0
 _0807FA0C: .4byte gMain
-_0807FA10: .4byte sub_807FBA0
+_0807FA10: .4byte CB2_EndScriptedWildBattle
 _0807FA14: .4byte gBattleTypeFlags
 _0807FA18: .4byte gEnemyParty
 _0807FA1C:
@@ -492,7 +492,7 @@ _0807FA3C:
 	ldr r1, _0807FA48 @ =0x00000155
 _0807FA3E:
 	movs r0, 0
-	bl sub_807F690
+	bl CreateBattleStartTask
 	b _0807FA56
 	.align 2, 0
 _0807FA48: .4byte 0x00000155
@@ -500,7 +500,7 @@ _0807FA4C:
 	movs r1, 0x85
 	lsls r1, 1
 	movs r0, 0
-	bl sub_807F690
+	bl CreateBattleStartTask
 _0807FA56:
 	movs r0, 0x7
 	bl IncrementGameStat
@@ -508,14 +508,14 @@ _0807FA56:
 	bl IncrementGameStat
 	pop {r0}
 	bx r0
-	thumb_func_end sub_807F9D8
+	thumb_func_end BattleSetup_StartLegendaryBattle
 
-	thumb_func_start sub_807FA68
-sub_807FA68: @ 807FA68
+	thumb_func_start BattleSetup_StartIceCaveBattle
+BattleSetup_StartIceCaveBattle: @ 807FA68
 	push {lr}
 	bl ScriptContext2_Enable
 	ldr r1, _0807FA90 @ =gMain
-	ldr r0, _0807FA94 @ =sub_807FBA0
+	ldr r0, _0807FA94 @ =CB2_EndScriptedWildBattle
 	str r0, [r1, 0x8]
 	ldr r1, _0807FA98 @ =gBattleTypeFlags
 	movs r0, 0xC0
@@ -528,18 +528,18 @@ sub_807FA68: @ 807FA68
 	movs r1, 0x85
 	lsls r1, 1
 	movs r0, 0xB
-	bl sub_807F690
+	bl CreateBattleStartTask
 	b _0807FAAA
 	.align 2, 0
 _0807FA90: .4byte gMain
-_0807FA94: .4byte sub_807FBA0
+_0807FA94: .4byte CB2_EndScriptedWildBattle
 _0807FA98: .4byte gBattleTypeFlags
 _0807FA9C: .4byte gGameVersion
 _0807FAA0:
 	movs r1, 0x85
 	lsls r1, 1
 	movs r0, 0xB
-	bl sub_807F690
+	bl CreateBattleStartTask
 _0807FAAA:
 	movs r0, 0x7
 	bl IncrementGameStat
@@ -547,14 +547,14 @@ _0807FAAA:
 	bl IncrementGameStat
 	pop {r0}
 	bx r0
-	thumb_func_end sub_807FA68
+	thumb_func_end BattleSetup_StartIceCaveBattle
 
 	thumb_func_start sub_807FABC
 sub_807FABC: @ 807FABC
 	push {lr}
 	bl ScriptContext2_Enable
 	ldr r1, _0807FAEC @ =gMain
-	ldr r0, _0807FAF0 @ =sub_807FBA0
+	ldr r0, _0807FAF0 @ =CB2_EndScriptedWildBattle
 	str r0, [r1, 0x8]
 	ldr r1, _0807FAF4 @ =gBattleTypeFlags
 	movs r0, 0xC0
@@ -563,7 +563,7 @@ sub_807FABC: @ 807FABC
 	movs r1, 0x85
 	lsls r1, 1
 	movs r0, 0
-	bl sub_807F690
+	bl CreateBattleStartTask
 	movs r0, 0x7
 	bl IncrementGameStat
 	movs r0, 0x8
@@ -572,7 +572,7 @@ sub_807FABC: @ 807FABC
 	bx r0
 	.align 2, 0
 _0807FAEC: .4byte gMain
-_0807FAF0: .4byte sub_807FBA0
+_0807FAF0: .4byte CB2_EndScriptedWildBattle
 _0807FAF4: .4byte gBattleTypeFlags
 	thumb_func_end sub_807FABC
 
@@ -580,7 +580,7 @@ _0807FAF4: .4byte gBattleTypeFlags
 sub_807FAF8: @ 807FAF8
 	push {lr}
 	bl LoadPlayerParty
-	bl sub_807FB40
+	bl CB2_EndWildBattle
 	pop {r0}
 	bx r0
 	thumb_func_end sub_807FAF8
@@ -589,7 +589,7 @@ sub_807FAF8: @ 807FAF8
 sub_807FB08: @ 807FB08
 	push {lr}
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeEventObjects
 	bl sub_805C780
 	ldr r1, _0807FB38 @ =gMain
 	ldr r0, _0807FB3C @ =sub_807FAF8
@@ -600,7 +600,7 @@ sub_807FB08: @ 807FB08
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl sub_807F690
+	bl CreateBattleStartTask
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -608,8 +608,8 @@ _0807FB38: .4byte gMain
 _0807FB3C: .4byte sub_807FAF8
 	thumb_func_end sub_807FB08
 
-	thumb_func_start sub_807FB40
-sub_807FB40: @ 807FB40
+	thumb_func_start CB2_EndWildBattle
+CB2_EndWildBattle: @ 807FB40
 	push {lr}
 	sub sp, 0x4
 	mov r1, sp
@@ -649,10 +649,10 @@ _0807FB8C:
 _0807FB94: .4byte CB2_ReturnToField
 _0807FB98: .4byte gFieldCallback
 _0807FB9C: .4byte sub_807E3EC
-	thumb_func_end sub_807FB40
+	thumb_func_end CB2_EndWildBattle
 
-	thumb_func_start sub_807FBA0
-sub_807FBA0: @ 807FBA0
+	thumb_func_start CB2_EndScriptedWildBattle
+CB2_EndScriptedWildBattle: @ 807FBA0
 	push {lr}
 	sub sp, 0x4
 	mov r1, sp
@@ -687,10 +687,10 @@ _0807FBE6:
 	bx r0
 	.align 2, 0
 _0807FBEC: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
-	thumb_func_end sub_807FBA0
+	thumb_func_end CB2_EndScriptedWildBattle
 
-	thumb_func_start sub_807FBF0
-sub_807FBF0: @ 807FBF0
+	thumb_func_start CB2_EndMarowakBattle
+CB2_EndMarowakBattle: @ 807FBF0
 	push {r4,lr}
 	sub sp, 0x4
 	mov r1, sp
@@ -741,7 +741,7 @@ _0807FC4C:
 	.align 2, 0
 _0807FC54: .4byte gSpecialVar_Result
 _0807FC58: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
-	thumb_func_end sub_807FBF0
+	thumb_func_end CB2_EndMarowakBattle
 
 	thumb_func_start BattleSetup_GetTerrainId
 BattleSetup_GetTerrainId: @ 807FC5C
@@ -910,7 +910,7 @@ GetBattleTransitionTypeByMap: @ 807FD90
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 16
 	lsrs r4, r0, 16
-	bl sav1_get_flash_used_on_map
+	bl Overworld_GetFlashLevel
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807FDC0
@@ -997,8 +997,8 @@ _0807FE48:
 _0807FE50: .4byte gPlayerParty
 	thumb_func_end GetSumOfPlayerPartyLevel
 
-	thumb_func_start reads_trainer_data_byte0
-reads_trainer_data_byte0: @ 807FE54
+	thumb_func_start GetSumOfEnemyPartyLevel
+GetSumOfEnemyPartyLevel: @ 807FE54
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -1121,7 +1121,7 @@ _0807FF2C:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end reads_trainer_data_byte0
+	thumb_func_end GetSumOfEnemyPartyLevel
 
 	thumb_func_start GetWildBattleTransition
 GetWildBattleTransition: @ 807FF34
@@ -1141,15 +1141,15 @@ GetWildBattleTransition: @ 807FF34
 	lsrs r0, 24
 	cmp r4, r0
 	bcc _0807FF6C
-	ldr r0, _0807FF68 @ =gUnknown_83C68F0
+	ldr r0, _0807FF68 @ =sBattleTransitionTable_Wild
 	lsls r1, r5, 1
 	adds r0, 0x1
 	b _0807FF70
 	.align 2, 0
 _0807FF64: .4byte gEnemyParty
-_0807FF68: .4byte gUnknown_83C68F0
+_0807FF68: .4byte sBattleTransitionTable_Wild
 _0807FF6C:
-	ldr r0, _0807FF7C @ =gUnknown_83C68F0
+	ldr r0, _0807FF7C @ =sBattleTransitionTable_Wild
 	lsls r1, r5, 1
 _0807FF70:
 	adds r1, r0
@@ -1158,11 +1158,11 @@ _0807FF70:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0807FF7C: .4byte gUnknown_83C68F0
+_0807FF7C: .4byte sBattleTransitionTable_Wild
 	thumb_func_end GetWildBattleTransition
 
-	thumb_func_start sub_807FF80
-sub_807FF80: @ 807FF80
+	thumb_func_start GetTrainerBattleTransition
+GetTrainerBattleTransition: @ 807FF80
 	push {r4-r6,lr}
 	ldr r4, _0807FFB4 @ =gTrainerBattleOpponent_A
 	ldrh r1, [r4]
@@ -1251,7 +1251,7 @@ _0808001A:
 	lsrs r6, r0, 24
 	ldrh r0, [r4]
 	adds r1, r5, 0
-	bl reads_trainer_data_byte0
+	bl GetSumOfEnemyPartyLevel
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -1261,14 +1261,14 @@ _0808001A:
 	lsrs r0, 24
 	cmp r4, r0
 	bcc _0808004C
-	ldr r0, _08080048 @ =gUnknown_83C68F8
+	ldr r0, _08080048 @ =sBattleTransitionTable_Trainer
 	lsls r1, r6, 1
 	adds r0, 0x1
 	b _08080050
 	.align 2, 0
-_08080048: .4byte gUnknown_83C68F8
+_08080048: .4byte sBattleTransitionTable_Trainer
 _0808004C:
-	ldr r0, _0808005C @ =gUnknown_83C68F8
+	ldr r0, _0808005C @ =sBattleTransitionTable_Trainer
 	lsls r1, r6, 1
 _08080050:
 	adds r1, r0
@@ -1278,8 +1278,8 @@ _08080054:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0808005C: .4byte gUnknown_83C68F8
-	thumb_func_end sub_807FF80
+_0808005C: .4byte sBattleTransitionTable_Trainer
+	thumb_func_end GetTrainerBattleTransition
 
 	thumb_func_start sub_8080060
 sub_8080060: @ 8080060
@@ -1340,8 +1340,8 @@ TrainerBattleLoadArg8: @ 80800B4
 	bx lr
 	thumb_func_end TrainerBattleLoadArg8
 
-	thumb_func_start trainerflag_opponent
-trainerflag_opponent: @ 80800B8
+	thumb_func_start GetTrainerAFlag
+GetTrainerAFlag: @ 80800B8
 	ldr r1, _080800CC @ =gTrainerBattleOpponent_A
 	movs r2, 0xA0
 	lsls r2, 3
@@ -1353,7 +1353,7 @@ trainerflag_opponent: @ 80800B8
 	bx lr
 	.align 2, 0
 _080800CC: .4byte gTrainerBattleOpponent_A
-	thumb_func_end trainerflag_opponent
+	thumb_func_end GetTrainerAFlag
 
 	thumb_func_start IsPlayerDefeated
 IsPlayerDefeated: @ 80800D0
@@ -1387,43 +1387,43 @@ _0808010A:
 	bx r1
 	thumb_func_end IsPlayerDefeated
 
-	thumb_func_start sub_8080110
-sub_8080110: @ 8080110
-	ldr r0, _08080140 @ =gUnknown_20386AC
+	thumb_func_start InitTrainerBattleVariables
+InitTrainerBattleVariables: @ 8080110
+	ldr r0, _08080140 @ =sTrainerBattleMode
 	movs r1, 0
 	strh r1, [r0]
 	ldr r0, _08080144 @ =gTrainerBattleOpponent_A
 	strh r1, [r0]
-	ldr r0, _08080148 @ =gUnknown_20386B0
+	ldr r0, _08080148 @ =sTrainerEventObjectLocalId
 	strh r1, [r0]
-	ldr r0, _0808014C @ =gUnknown_20386B4
+	ldr r0, _0808014C @ =sTrainerAIntroSpeech
 	movs r1, 0
 	str r1, [r0]
-	ldr r0, _08080150 @ =gUnknown_20386B8
+	ldr r0, _08080150 @ =sTrainerADefeatSpeech
 	str r1, [r0]
-	ldr r0, _08080154 @ =gUnknown_20386BC
+	ldr r0, _08080154 @ =sTrainerBDefeatSpeech
 	str r1, [r0]
-	ldr r0, _08080158 @ =gUnknown_20386C0
+	ldr r0, _08080158 @ =sTrainerCannotBattleSpeech
 	str r1, [r0]
-	ldr r0, _0808015C @ =gUnknown_20386C4
+	ldr r0, _0808015C @ =sTrainerBattleEndScript
 	str r1, [r0]
-	ldr r0, _08080160 @ =gUnknown_20386C8
+	ldr r0, _08080160 @ =sTrainerABattleScriptRetAddr
 	str r1, [r0]
 	ldr r0, _08080164 @ =gUnknown_20386CC
 	strh r1, [r0]
 	bx lr
 	.align 2, 0
-_08080140: .4byte gUnknown_20386AC
+_08080140: .4byte sTrainerBattleMode
 _08080144: .4byte gTrainerBattleOpponent_A
-_08080148: .4byte gUnknown_20386B0
-_0808014C: .4byte gUnknown_20386B4
-_08080150: .4byte gUnknown_20386B8
-_08080154: .4byte gUnknown_20386BC
-_08080158: .4byte gUnknown_20386C0
-_0808015C: .4byte gUnknown_20386C4
-_08080160: .4byte gUnknown_20386C8
+_08080148: .4byte sTrainerEventObjectLocalId
+_0808014C: .4byte sTrainerAIntroSpeech
+_08080150: .4byte sTrainerADefeatSpeech
+_08080154: .4byte sTrainerBDefeatSpeech
+_08080158: .4byte sTrainerCannotBattleSpeech
+_0808015C: .4byte sTrainerBattleEndScript
+_08080160: .4byte sTrainerABattleScriptRetAddr
 _08080164: .4byte gUnknown_20386CC
-	thumb_func_end sub_8080110
+	thumb_func_end InitTrainerBattleVariables
 
 	thumb_func_start TrainerBattleLoadArgs
 TrainerBattleLoadArgs: @ 8080168
@@ -1496,10 +1496,10 @@ _080801E4:
 	bx r0
 	thumb_func_end TrainerBattleLoadArgs
 
-	thumb_func_start battle_80801F0
-battle_80801F0: @ 80801F0
+	thumb_func_start SetMapVarsToTrainer
+SetMapVarsToTrainer: @ 80801F0
 	push {lr}
-	ldr r0, _08080218 @ =gUnknown_20386B0
+	ldr r0, _08080218 @ =sTrainerEventObjectLocalId
 	ldrh r1, [r0]
 	cmp r1, 0
 	beq _08080212
@@ -1518,18 +1518,18 @@ _08080212:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08080218: .4byte gUnknown_20386B0
+_08080218: .4byte sTrainerEventObjectLocalId
 _0808021C: .4byte gSpecialVar_LastTalked
 _08080220: .4byte gSaveBlock1Ptr
 _08080224: .4byte gSelectedEventObject
-	thumb_func_end battle_80801F0
+	thumb_func_end SetMapVarsToTrainer
 
 	thumb_func_start BattleSetup_ConfigureTrainerBattle
 BattleSetup_ConfigureTrainerBattle: @ 8080228
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_8080110
-	ldr r4, _08080250 @ =gUnknown_20386AC
+	bl InitTrainerBattleVariables
+	ldr r4, _08080250 @ =sTrainerBattleMode
 	adds r0, r5, 0
 	bl TrainerBattleLoadArg8
 	lsls r0, 24
@@ -1545,7 +1545,7 @@ BattleSetup_ConfigureTrainerBattle: @ 8080228
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08080250: .4byte gUnknown_20386AC
+_08080250: .4byte sTrainerBattleMode
 _08080254: .4byte _08080258
 	.align 2, 0
 _08080258:
@@ -1559,91 +1559,91 @@ _08080258:
 	.4byte _08080294
 	.4byte _08080304
 _0808027C:
-	ldr r0, _08080280 @ =gUnknown_83C69D8
+	ldr r0, _08080280 @ =sOrdinaryNoIntroBattleParams
 	b _08080306
 	.align 2, 0
-_08080280: .4byte gUnknown_83C69D8
+_08080280: .4byte sOrdinaryNoIntroBattleParams
 _08080284:
-	ldr r0, _08080288 @ =gUnknown_83C6990
+	ldr r0, _08080288 @ =sDoubleBattleParams
 	b _08080296
 	.align 2, 0
-_08080288: .4byte gUnknown_83C6990
+_08080288: .4byte sDoubleBattleParams
 _0808028C:
-	ldr r0, _08080290 @ =gUnknown_83C6948
+	ldr r0, _08080290 @ =sContinueScriptBattleParams
 	b _0808031A
 	.align 2, 0
-_08080290: .4byte gUnknown_83C6948
+_08080290: .4byte sContinueScriptBattleParams
 _08080294:
-	ldr r0, _080802A4 @ =gUnknown_83C6A68
+	ldr r0, _080802A4 @ =sContinueScriptDoubleBattleParams
 _08080296:
 	adds r1, r5, 0
 	bl TrainerBattleLoadArgs
-	bl battle_80801F0
-	ldr r0, _080802A8 @ =gUnknown_81A4EE9
+	bl SetMapVarsToTrainer
+	ldr r0, _080802A8 @ =EventScript_TryDoDoubleTrainerBattle
 	b _08080326
 	.align 2, 0
-_080802A4: .4byte gUnknown_83C6A68
-_080802A8: .4byte gUnknown_81A4EE9
+_080802A4: .4byte sContinueScriptDoubleBattleParams
+_080802A8: .4byte EventScript_TryDoDoubleTrainerBattle
 _080802AC:
 	bl sub_811231C
-	ldr r0, _080802CC @ =gUnknown_83C6990
+	ldr r0, _080802CC @ =sDoubleBattleParams
 	adds r1, r5, 0
 	bl TrainerBattleLoadArgs
-	bl battle_80801F0
+	bl SetMapVarsToTrainer
 	ldr r4, _080802D0 @ =gTrainerBattleOpponent_A
 	ldrh r0, [r4]
 	bl sub_810CE64
 	strh r0, [r4]
-	ldr r0, _080802D4 @ =gUnknown_81A4F73
+	ldr r0, _080802D4 @ =EventScript_TryDoDoubleRematchBattle
 	b _08080326
 	.align 2, 0
-_080802CC: .4byte gUnknown_83C6990
+_080802CC: .4byte sDoubleBattleParams
 _080802D0: .4byte gTrainerBattleOpponent_A
-_080802D4: .4byte gUnknown_81A4F73
+_080802D4: .4byte EventScript_TryDoDoubleRematchBattle
 _080802D8:
 	bl sub_811231C
-	ldr r0, _080802F8 @ =gUnknown_83C6900
+	ldr r0, _080802F8 @ =sOrdinaryBattleParams
 	adds r1, r5, 0
 	bl TrainerBattleLoadArgs
-	bl battle_80801F0
+	bl SetMapVarsToTrainer
 	ldr r4, _080802FC @ =gTrainerBattleOpponent_A
 	ldrh r0, [r4]
 	bl sub_810CE64
 	strh r0, [r4]
-	ldr r0, _08080300 @ =gUnknown_81A4F3E
+	ldr r0, _08080300 @ =EventScript_TryDoRematchBattle
 	b _08080326
 	.align 2, 0
-_080802F8: .4byte gUnknown_83C6900
+_080802F8: .4byte sOrdinaryBattleParams
 _080802FC: .4byte gTrainerBattleOpponent_A
-_08080300: .4byte gUnknown_81A4F3E
+_08080300: .4byte EventScript_TryDoRematchBattle
 _08080304:
 	ldr r0, _08080310 @ =gUnknown_83C6A20
 _08080306:
 	adds r1, r5, 0
 	bl TrainerBattleLoadArgs
-	ldr r0, _08080314 @ =gUnknown_81A4F21
+	ldr r0, _08080314 @ =EventScript_DoTrainerBattle
 	b _08080326
 	.align 2, 0
 _08080310: .4byte gUnknown_83C6A20
-_08080314: .4byte gUnknown_81A4F21
+_08080314: .4byte EventScript_DoTrainerBattle
 _08080318:
-	ldr r0, _0808032C @ =gUnknown_83C6900
+	ldr r0, _0808032C @ =sOrdinaryBattleParams
 _0808031A:
 	adds r1, r5, 0
 	bl TrainerBattleLoadArgs
-	bl battle_80801F0
-	ldr r0, _08080330 @ =gUnknown_81A4EC1
+	bl SetMapVarsToTrainer
+	ldr r0, _08080330 @ =EventScript_TryDoNormalTrainerBattle
 _08080326:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0808032C: .4byte gUnknown_83C6900
-_08080330: .4byte gUnknown_81A4EC1
+_0808032C: .4byte sOrdinaryBattleParams
+_08080330: .4byte EventScript_TryDoNormalTrainerBattle
 	thumb_func_end BattleSetup_ConfigureTrainerBattle
 
-	thumb_func_start TrainerWantsBattle
-TrainerWantsBattle: @ 8080334
+	thumb_func_start ConfigureAndSetUpOneTrainerBattle
+ConfigureAndSetUpOneTrainerBattle: @ 8080334
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1671,7 +1671,7 @@ _08080368: .4byte gSelectedEventObject
 _0808036C: .4byte gSpecialVar_LastTalked
 _08080370: .4byte gMapObjects
 _08080374: .4byte gUnknown_81A4EB4
-	thumb_func_end TrainerWantsBattle
+	thumb_func_end ConfigureAndSetUpOneTrainerBattle
 
 	thumb_func_start GetTrainerFlagFromScriptPointer
 GetTrainerFlagFromScriptPointer: @ 8080378
@@ -1690,8 +1690,8 @@ GetTrainerFlagFromScriptPointer: @ 8080378
 	bx r1
 	thumb_func_end GetTrainerFlagFromScriptPointer
 
-	thumb_func_start sub_8080398
-sub_8080398: @ 8080398
+	thumb_func_start SetUpTrainerMovement
+SetUpTrainerMovement: @ 8080398
 	push {r4,lr}
 	ldr r0, _080803C4 @ =gSelectedEventObject
 	ldrb r0, [r0]
@@ -1703,28 +1703,28 @@ sub_8080398: @ 8080398
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl npc_running_behaviour_by_direction
+	bl GetTrainerFacingDirectionMovementType
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl npc_set_running_behaviour_etc
+	bl SetTrainerMovementType
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080803C4: .4byte gSelectedEventObject
 _080803C8: .4byte gMapObjects
-	thumb_func_end sub_8080398
+	thumb_func_end SetUpTrainerMovement
 
-	thumb_func_start sub_80803CC
-sub_80803CC: @ 80803CC
-	ldr r0, _080803D4 @ =gUnknown_20386AC
+	thumb_func_start GetTrainerBattleMode
+GetTrainerBattleMode: @ 80803CC
+	ldr r0, _080803D4 @ =sTrainerBattleMode
 	ldrb r0, [r0]
 	bx lr
 	.align 2, 0
-_080803D4: .4byte gUnknown_20386AC
-	thumb_func_end sub_80803CC
+_080803D4: .4byte sTrainerBattleMode
+	thumb_func_end GetTrainerBattleMode
 
 	thumb_func_start sub_80803D8
 sub_80803D8: @ 80803D8
@@ -1738,7 +1738,7 @@ _080803E0: .4byte gUnknown_20386CC
 	thumb_func_start ScrSpecial_HasTrainerBeenFought
 ScrSpecial_HasTrainerBeenFought: @ 80803E4
 	push {lr}
-	bl trainerflag_opponent
+	bl GetTrainerAFlag
 	lsls r0, 16
 	lsrs r0, 16
 	bl FlagGet
@@ -1748,27 +1748,27 @@ ScrSpecial_HasTrainerBeenFought: @ 80803E4
 	bx r1
 	thumb_func_end ScrSpecial_HasTrainerBeenFought
 
-	thumb_func_start sub_80803FC
-sub_80803FC: @ 80803FC
+	thumb_func_start SetBattledTrainerFlag
+SetBattledTrainerFlag: @ 80803FC
 	push {lr}
-	bl trainerflag_opponent
+	bl GetTrainerAFlag
 	lsls r0, 16
 	lsrs r0, 16
 	bl FlagSet
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80803FC
+	thumb_func_end SetBattledTrainerFlag
 
-	thumb_func_start sub_8080410
-sub_8080410: @ 8080410
+	thumb_func_start SetBattledTrainerFlag2
+SetBattledTrainerFlag2: @ 8080410
 	push {lr}
-	bl trainerflag_opponent
+	bl GetTrainerAFlag
 	lsls r0, 16
 	lsrs r0, 16
 	bl FlagSet
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8080410
+	thumb_func_end SetBattledTrainerFlag2
 
 	thumb_func_start HasTrainerAlreadyBeenFought
 HasTrainerAlreadyBeenFought: @ 8080424
@@ -1817,7 +1817,7 @@ BattleSetup_StartTrainerBattle: @ 8080464
 	ldr r4, _080804A0 @ =gBattleTypeFlags
 	movs r0, 0x8
 	str r0, [r4]
-	bl sub_80803CC
+	bl GetTrainerBattleMode
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x9
@@ -1833,7 +1833,7 @@ BattleSetup_StartTrainerBattle: @ 8080464
 	str r0, [r4]
 _0808048C:
 	ldr r1, _080804A4 @ =gMain
-	ldr r0, _080804A8 @ =sub_80804AC
+	ldr r0, _080804A8 @ =CB2_EndTrainerBattle
 	str r0, [r1, 0x8]
 	bl sub_807F868
 	bl ScriptContext1_Stop
@@ -1843,13 +1843,13 @@ _0808048C:
 	.align 2, 0
 _080804A0: .4byte gBattleTypeFlags
 _080804A4: .4byte gMain
-_080804A8: .4byte sub_80804AC
+_080804A8: .4byte CB2_EndTrainerBattle
 	thumb_func_end BattleSetup_StartTrainerBattle
 
-	thumb_func_start sub_80804AC
-sub_80804AC: @ 80804AC
+	thumb_func_start CB2_EndTrainerBattle
+CB2_EndTrainerBattle: @ 80804AC
 	push {lr}
-	ldr r0, _080804D8 @ =gUnknown_20386AC
+	ldr r0, _080804D8 @ =sTrainerBattleMode
 	ldrh r0, [r0]
 	cmp r0, 0x9
 	bne _08080508
@@ -1869,7 +1869,7 @@ sub_80804AC: @ 80804AC
 	bl sp000_heal_pokemon
 	b _080804EE
 	.align 2, 0
-_080804D8: .4byte gUnknown_20386AC
+_080804D8: .4byte sTrainerBattleMode
 _080804DC: .4byte gBattleOutcome
 _080804E0: .4byte gSpecialVar_Result
 _080804E4: .4byte gUnknown_20386CC
@@ -1880,7 +1880,7 @@ _080804E8:
 _080804EE:
 	ldr r0, _08080504 @ =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	bl SetMainCallback2
-	bl sub_80803FC
+	bl SetBattledTrainerFlag
 	bl sub_81139BC
 	b _0808054E
 	.align 2, 0
@@ -1915,17 +1915,17 @@ _0808053C: .4byte c2_whiteout
 _08080540:
 	ldr r0, _08080554 @ =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	bl SetMainCallback2
-	bl sub_80803FC
+	bl SetBattledTrainerFlag
 	bl sub_81139BC
 _0808054E:
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08080554: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
-	thumb_func_end sub_80804AC
+	thumb_func_end CB2_EndTrainerBattle
 
-	thumb_func_start sub_8080558
-sub_8080558: @ 8080558
+	thumb_func_start CB2_EndRematchBattle
+CB2_EndRematchBattle: @ 8080558
 	push {lr}
 	ldr r0, _08080570 @ =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
@@ -1954,7 +1954,7 @@ _08080590: .4byte c2_whiteout
 _08080594:
 	ldr r0, _080805AC @ =CB2_ReturnToFieldContinueScriptPlayMapMusic
 	bl SetMainCallback2
-	bl sub_80803FC
+	bl SetBattledTrainerFlag
 	bl sub_810CDE8
 	bl sub_81138F8
 _080805A6:
@@ -1962,16 +1962,16 @@ _080805A6:
 	bx r0
 	.align 2, 0
 _080805AC: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
-	thumb_func_end sub_8080558
+	thumb_func_end CB2_EndRematchBattle
 
-	thumb_func_start sub_80805B0
-sub_80805B0: @ 80805B0
+	thumb_func_start BattleSetup_StartRematchBattle
+BattleSetup_StartRematchBattle: @ 80805B0
 	push {lr}
 	ldr r1, _080805CC @ =gBattleTypeFlags
 	movs r0, 0x8
 	str r0, [r1]
 	ldr r1, _080805D0 @ =gMain
-	ldr r0, _080805D4 @ =sub_8080558
+	ldr r0, _080805D4 @ =CB2_EndRematchBattle
 	str r0, [r1, 0x8]
 	bl sub_807F868
 	bl ScriptContext1_Stop
@@ -1980,22 +1980,22 @@ sub_80805B0: @ 80805B0
 	.align 2, 0
 _080805CC: .4byte gBattleTypeFlags
 _080805D0: .4byte gMain
-_080805D4: .4byte sub_8080558
-	thumb_func_end sub_80805B0
+_080805D4: .4byte CB2_EndRematchBattle
+	thumb_func_end BattleSetup_StartRematchBattle
 
-	thumb_func_start sub_80805D8
-sub_80805D8: @ 80805D8
+	thumb_func_start ShowTrainerIntroSpeech
+ShowTrainerIntroSpeech: @ 80805D8
 	push {lr}
-	bl sub_80806D8
+	bl GetIntroSpeechOfApproachingTrainer
 	bl ShowFieldMessage
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80805D8
+	thumb_func_end ShowTrainerIntroSpeech
 
 	thumb_func_start BattleSetup_GetScriptAddrAfterBattle
 BattleSetup_GetScriptAddrAfterBattle: @ 80805E8
 	push {lr}
-	ldr r0, _080805F8 @ =gUnknown_20386C4
+	ldr r0, _080805F8 @ =sTrainerBattleEndScript
 	ldr r0, [r0]
 	cmp r0, 0
 	bne _080805F4
@@ -2004,14 +2004,14 @@ _080805F4:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080805F8: .4byte gUnknown_20386C4
+_080805F8: .4byte sTrainerBattleEndScript
 _080805FC: .4byte gUnknown_81C555B
 	thumb_func_end BattleSetup_GetScriptAddrAfterBattle
 
 	thumb_func_start BattleSetup_GetTrainerPostBattleScript
 BattleSetup_GetTrainerPostBattleScript: @ 8080600
 	push {lr}
-	ldr r0, _08080610 @ =gUnknown_20386C8
+	ldr r0, _08080610 @ =sTrainerABattleScriptRetAddr
 	ldr r0, [r0]
 	cmp r0, 0
 	bne _0808060C
@@ -2020,21 +2020,21 @@ _0808060C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08080610: .4byte gUnknown_20386C8
+_08080610: .4byte sTrainerABattleScriptRetAddr
 _08080614: .4byte gUnknown_81C555B
 	thumb_func_end BattleSetup_GetTrainerPostBattleScript
 
-	thumb_func_start sub_8080618
-sub_8080618: @ 8080618
+	thumb_func_start ShowTrainerCantBattleSpeech
+ShowTrainerCantBattleSpeech: @ 8080618
 	push {lr}
-	bl sub_8080734
+	bl GetTrainerCantBattleSpeech
 	bl ShowFieldMessage
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8080618
+	thumb_func_end ShowTrainerCantBattleSpeech
 
-	thumb_func_start sub_8080628
-sub_8080628: @ 8080628
+	thumb_func_start SetUpTrainerEncounterMusic
+SetUpTrainerEncounterMusic: @ 8080628
 	push {lr}
 	ldr r0, _08080660 @ =gUnknown_203ADFA
 	ldrb r0, [r0]
@@ -2043,7 +2043,7 @@ sub_8080628: @ 8080628
 	lsrs r0, 24
 	cmp r0, 0x1
 	bls _080806BE
-	ldr r0, _08080664 @ =gUnknown_20386AC
+	ldr r0, _08080664 @ =sTrainerBattleMode
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	beq _080806BE
@@ -2063,7 +2063,7 @@ sub_8080628: @ 8080628
 	mov pc, r0
 	.align 2, 0
 _08080660: .4byte gUnknown_203ADFA
-_08080664: .4byte gUnknown_20386AC
+_08080664: .4byte sTrainerBattleMode
 _08080668: .4byte gTrainerBattleOpponent_A
 _0808066C: .4byte _08080670
 	.align 2, 0
@@ -2100,10 +2100,10 @@ _080806BE:
 	bx r0
 	.align 2, 0
 _080806C4: .4byte 0x0000011b
-	thumb_func_end sub_8080628
+	thumb_func_end SetUpTrainerEncounterMusic
 
-	thumb_func_start sub_80806C8
-sub_80806C8: @ 80806C8
+	thumb_func_start ReturnEmptyStringIfNull
+ReturnEmptyStringIfNull: @ 80806C8
 	push {lr}
 	cmp r0, 0
 	bne _080806D0
@@ -2113,27 +2113,27 @@ _080806D0:
 	bx r1
 	.align 2, 0
 _080806D4: .4byte gString_Dummy
-	thumb_func_end sub_80806C8
+	thumb_func_end ReturnEmptyStringIfNull
 
-	thumb_func_start sub_80806D8
-sub_80806D8: @ 80806D8
+	thumb_func_start GetIntroSpeechOfApproachingTrainer
+GetIntroSpeechOfApproachingTrainer: @ 80806D8
 	push {lr}
-	ldr r0, _080806E8 @ =gUnknown_20386B4
+	ldr r0, _080806E8 @ =sTrainerAIntroSpeech
 	ldr r0, [r0]
-	bl sub_80806C8
+	bl ReturnEmptyStringIfNull
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080806E8: .4byte gUnknown_20386B4
-	thumb_func_end sub_80806D8
+_080806E8: .4byte sTrainerAIntroSpeech
+	thumb_func_end GetIntroSpeechOfApproachingTrainer
 
-	thumb_func_start sub_80806EC
-sub_80806EC: @ 80806EC
+	thumb_func_start GetTrainerALoseText
+GetTrainerALoseText: @ 80806EC
 	push {r4,lr}
-	ldr r0, _08080708 @ =gUnknown_20386B8
+	ldr r0, _08080708 @ =sTrainerADefeatSpeech
 	ldr r0, [r0]
 	ldr r4, _0808070C @ =gStringVar4
-	bl sub_80806C8
+	bl ReturnEmptyStringIfNull
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
@@ -2142,17 +2142,17 @@ sub_80806EC: @ 80806EC
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08080708: .4byte gUnknown_20386B8
+_08080708: .4byte sTrainerADefeatSpeech
 _0808070C: .4byte gStringVar4
-	thumb_func_end sub_80806EC
+	thumb_func_end GetTrainerALoseText
 
-	thumb_func_start sub_8080710
-sub_8080710: @ 8080710
+	thumb_func_start GetTrainerBLoseText
+GetTrainerBLoseText: @ 8080710
 	push {r4,lr}
 	ldr r4, _0808072C @ =gStringVar4
-	ldr r0, _08080730 @ =gUnknown_20386BC
+	ldr r0, _08080730 @ =sTrainerBDefeatSpeech
 	ldr r0, [r0]
-	bl sub_80806C8
+	bl ReturnEmptyStringIfNull
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
@@ -2162,19 +2162,19 @@ sub_8080710: @ 8080710
 	bx r1
 	.align 2, 0
 _0808072C: .4byte gStringVar4
-_08080730: .4byte gUnknown_20386BC
-	thumb_func_end sub_8080710
+_08080730: .4byte sTrainerBDefeatSpeech
+	thumb_func_end GetTrainerBLoseText
 
-	thumb_func_start sub_8080734
-sub_8080734: @ 8080734
+	thumb_func_start GetTrainerCantBattleSpeech
+GetTrainerCantBattleSpeech: @ 8080734
 	push {lr}
-	ldr r0, _08080744 @ =gUnknown_20386C0
+	ldr r0, _08080744 @ =sTrainerCannotBattleSpeech
 	ldr r0, [r0]
-	bl sub_80806C8
+	bl ReturnEmptyStringIfNull
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08080744: .4byte gUnknown_20386C0
-	thumb_func_end sub_8080734
+_08080744: .4byte sTrainerCannotBattleSpeech
+	thumb_func_end GetTrainerCantBattleSpeech
 
 	.align 2, 0 @ Don't pad with nop.

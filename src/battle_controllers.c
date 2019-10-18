@@ -85,9 +85,9 @@ static void InitSinglePlayerBtlControllers(void)
         gBattleMainFunc = BeginBattleIntro;
         if (gBattleTypeFlags & BATTLE_TYPE_POKEDUDE)
         {
-            gBattlerControllerFuncs[0] = SetControllerToPokedude;
+            gBattlerControllerFuncs[0] = SetControllerToPokeDude;
             gBattlerPositions[0] = B_POSITION_PLAYER_LEFT;
-            gBattlerControllerFuncs[1] = SetControllerToPokedude;
+            gBattlerControllerFuncs[1] = SetControllerToPokeDude;
             gBattlerPositions[1] = B_POSITION_OPPONENT_LEFT;
             gBattlersCount = 2;
         }
@@ -96,7 +96,7 @@ static void InitSinglePlayerBtlControllers(void)
             if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
                 gBattlerControllerFuncs[0] = SetControllerToSafari;
             else if (gBattleTypeFlags & (BATTLE_TYPE_OLDMAN_TUTORIAL | BATTLE_TYPE_FIRST_BATTLE))
-                gBattlerControllerFuncs[0] = SetControllerToOakOrOldman;
+                gBattlerControllerFuncs[0] = SetControllerToOakOrOldMan;
             else
                 gBattlerControllerFuncs[0] = SetControllerToPlayer;
             gBattlerPositions[0] = B_POSITION_PLAYER_LEFT;
@@ -110,13 +110,13 @@ static void InitSinglePlayerBtlControllers(void)
         gBattleMainFunc = BeginBattleIntro;
         if (gBattleTypeFlags & BATTLE_TYPE_POKEDUDE)
         {
-            gBattlerControllerFuncs[0] = SetControllerToPokedude;
+            gBattlerControllerFuncs[0] = SetControllerToPokeDude;
             gBattlerPositions[0] = B_POSITION_PLAYER_LEFT;
-            gBattlerControllerFuncs[1] = SetControllerToPokedude;
+            gBattlerControllerFuncs[1] = SetControllerToPokeDude;
             gBattlerPositions[1] = B_POSITION_OPPONENT_LEFT;
-            gBattlerControllerFuncs[2] = SetControllerToPokedude;
+            gBattlerControllerFuncs[2] = SetControllerToPokeDude;
             gBattlerPositions[2] = B_POSITION_PLAYER_RIGHT;
-            gBattlerControllerFuncs[3] = SetControllerToPokedude;
+            gBattlerControllerFuncs[3] = SetControllerToPokeDude;
             gBattlerPositions[3] = B_POSITION_OPPONENT_RIGHT;
             gBattlersCount = MAX_BATTLERS_COUNT;
         }

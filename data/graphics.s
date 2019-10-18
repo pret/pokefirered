@@ -12212,1187 +12212,1187 @@ gMonIcon_UnownQuestionMark:: @ 8E48958
 	.incbin "graphics/pokemon/unown/question_mark/icon.4bpp"
 
 	.align 2
-gFile_graphics_trainers_front_pics_aqua_leader_archie_front_pic:: @ 8E48D58
+gTrainerFrontPic_AquaLeaderArchie:: @ 8E48D58
 	.incbin "graphics/trainers/front_pics/aqua_leader_archie_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_aqua_leader_archie:: @ 8E49094
+gTrainerPalette_AquaLeaderArchie:: @ 8E49094
 	.incbin "graphics/trainers/palettes/aqua_leader_archie.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_aqua_grunt_m_front_pic:: @ 8E490BC
+gTrainerFrontPic_AquaGruntM:: @ 8E490BC
 	.incbin "graphics/trainers/front_pics/aqua_grunt_m_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_aqua_grunt_m:: @ 8E4941C
+gTrainerPalette_AquaGruntM:: @ 8E4941C
 	.incbin "graphics/trainers/palettes/aqua_grunt_m.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_aqua_grunt_f_front_pic:: @ 8E49444
+gTrainerFrontPic_AquaGruntF:: @ 8E49444
 	.incbin "graphics/trainers/front_pics/aqua_grunt_f_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_aqua_grunt_f:: @ 8E49780
+gTrainerPalette_AquaGruntF:: @ 8E49780
 	.incbin "graphics/trainers/palettes/aqua_grunt_f.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_emerald_aroma_lady_front_pic:: @ 8E497A8
-	.incbin "graphics/trainers/front_pics/emerald_aroma_lady_front_pic.4bpp.lz"
+gTrainerFrontPic_RSAromaLady:: @ 8E497A8
+	.incbin "graphics/trainers/front_pics/rs_aroma_lady_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_emerald_aroma_lady:: @ 8E49A6C
-	.incbin "graphics/trainers/palettes/emerald_aroma_lady.gbapal.lz"
+gTrainerPalette_RSAromaLady:: @ 8E49A6C
+	.incbin "graphics/trainers/palettes/rs_aroma_lady.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_emerald_ruin_maniac_front_pic:: @ 8E49A94
-	.incbin "graphics/trainers/front_pics/emerald_ruin_maniac_front_pic.4bpp.lz"
+gTrainerFrontPic_RSRuinManiac:: @ 8E49A94
+	.incbin "graphics/trainers/front_pics/rs_ruin_maniac_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_emerald_ruin_maniac:: @ 8E49E30
-	.incbin "graphics/trainers/palettes/emerald_ruin_maniac.gbapal.lz"
+gTrainerPalette_RSRuinManiac:: @ 8E49E30
+	.incbin "graphics/trainers/palettes/rs_ruin_maniac.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_interviewer_front_pic:: @ 8E49E58
+gTrainerFrontPic_Interviewer:: @ 8E49E58
 	.incbin "graphics/trainers/front_pics/interviewer_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_interviewer:: @ 8E4A2FC
+gTrainerPalette_Interviewer:: @ 8E4A2FC
 	.incbin "graphics/trainers/palettes/interviewer.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_emerald_tuber_f_front_pic:: @ 8E4A324
-	.incbin "graphics/trainers/front_pics/emerald_tuber_f_front_pic.4bpp.lz"
+gTrainerFrontPic_RSTuberF:: @ 8E4A324
+	.incbin "graphics/trainers/front_pics/rs_tuber_f_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_emerald_tuber_f:: @ 8E4A5C8
-	.incbin "graphics/trainers/palettes/emerald_tuber_f.gbapal.lz"
+gTrainerPalette_RSTuberF:: @ 8E4A5C8
+	.incbin "graphics/trainers/palettes/rs_tuber_f.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_emerald_tuber_m_front_pic:: @ 8E4A5F0
-	.incbin "graphics/trainers/front_pics/emerald_tuber_m_front_pic.4bpp.lz"
+gTrainerFrontPic_TuberM:: @ 8E4A5F0
+	.incbin "graphics/trainers/front_pics/tuber_m_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_emerald_tuber_m:: @ 8E4A87C
-	.incbin "graphics/trainers/palettes/emerald_tuber_m.gbapal.lz"
+gTrainerPalette_TuberM:: @ 8E4A87C
+	.incbin "graphics/trainers/palettes/tuber_m.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_emerald_cool_trainer_m_front_pic:: @ 8E4A8A4
-	.incbin "graphics/trainers/front_pics/emerald_cool_trainer_m_front_pic.4bpp.lz"
+gTrainerFrontPic_RSCooltrainerM:: @ 8E4A8A4
+	.incbin "graphics/trainers/front_pics/rs_cool_trainer_m_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_emerald_cool_trainer_m:: @ 8E4AB8C
-	.incbin "graphics/trainers/palettes/emerald_cool_trainer_m.gbapal.lz"
+gTrainerPalette_RSCooltrainerM:: @ 8E4AB8C
+	.incbin "graphics/trainers/palettes/rs_cool_trainer_m.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_emerald_cool_trainer_f_front_pic:: @ 8E4ABB4
-	.incbin "graphics/trainers/front_pics/emerald_cool_trainer_f_front_pic.4bpp.lz"
+gTrainerFrontPic_RSCooltrainerF:: @ 8E4ABB4
+	.incbin "graphics/trainers/front_pics/rs_cool_trainer_f_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_emerald_cool_trainer_f:: @ 8E4AEC8
-	.incbin "graphics/trainers/palettes/emerald_cool_trainer_f.gbapal.lz"
+gTrainerPalette_RSCooltrainerF:: @ 8E4AEC8
+	.incbin "graphics/trainers/palettes/rs_cool_trainer_f.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_hex_maniac_front_pic:: @ 8E4AEF0
+gTrainerFrontPic_HexManiac:: @ 8E4AEF0
 	.incbin "graphics/trainers/front_pics/hex_maniac_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_hex_maniac:: @ 8E4B25C
+gTrainerPalette_HexManiac:: @ 8E4B25C
 	.incbin "graphics/trainers/palettes/hex_maniac.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_emerald_lady_front_pic:: @ 8E4B284
-	.incbin "graphics/trainers/front_pics/emerald_lady_front_pic.4bpp.lz"
+gTrainerFrontPic_RSLady:: @ 8E4B284
+	.incbin "graphics/trainers/front_pics/rs_lady_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_emerald_lady:: @ 8E4B638
-	.incbin "graphics/trainers/palettes/emerald_lady.gbapal.lz"
+gTrainerPalette_RSLady:: @ 8E4B638
+	.incbin "graphics/trainers/palettes/rs_lady.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_emerald_beauty_front_pic:: @ 8E4B660
-	.incbin "graphics/trainers/front_pics/emerald_beauty_front_pic.4bpp.lz"
+gTrainerFrontPic_RSBeauty:: @ 8E4B660
+	.incbin "graphics/trainers/front_pics/rs_beauty_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_emerald_beauty:: @ 8E4B948
-	.incbin "graphics/trainers/palettes/emerald_beauty.gbapal.lz"
+gTrainerPalette_RSBeauty:: @ 8E4B948
+	.incbin "graphics/trainers/palettes/rs_beauty.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_rich_boy_front_pic:: @ 8E4B970
+gTrainerFrontPic_RichBoy:: @ 8E4B970
 	.incbin "graphics/trainers/front_pics/rich_boy_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_rich_boy:: @ 8E4BC24
+gTrainerPalette_RichBoy:: @ 8E4BC24
 	.incbin "graphics/trainers/palettes/rich_boy.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_emerald_pokemaniac_front_pic:: @ 8E4BC4C
-	.incbin "graphics/trainers/front_pics/emerald_pokemaniac_front_pic.4bpp.lz"
+gTrainerFrontPic_RSPokeManiac:: @ 8E4BC4C
+	.incbin "graphics/trainers/front_pics/rs_pokemaniac_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_emerald_pokemaniac:: @ 8E4BFBC
-	.incbin "graphics/trainers/palettes/emerald_pokemaniac.gbapal.lz"
+gTrainerPalette_RSPokeManiac:: @ 8E4BFBC
+	.incbin "graphics/trainers/palettes/rs_pokemaniac.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_emerald_swimmer_m_front_pic:: @ 8E4BFE4
-	.incbin "graphics/trainers/front_pics/emerald_swimmer_m_front_pic.4bpp.lz"
+gTrainerFrontPic_RSSwimmerM:: @ 8E4BFE4
+	.incbin "graphics/trainers/front_pics/rs_swimmer_m_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_emerald_swimmer_m:: @ 8E4C2A4
-	.incbin "graphics/trainers/palettes/emerald_swimmer_m.gbapal.lz"
+gTrainerPalette_RSSwimmerM:: @ 8E4C2A4
+	.incbin "graphics/trainers/palettes/rs_swimmer_m.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_emerald_black_belt_front_pic:: @ 8E4C2CC
-	.incbin "graphics/trainers/front_pics/emerald_black_belt_front_pic.4bpp.lz"
+gTrainerFrontPic_RSBlackBelt:: @ 8E4C2CC
+	.incbin "graphics/trainers/front_pics/rs_black_belt_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_emerald_black_belt:: @ 8E4C630
-	.incbin "graphics/trainers/palettes/emerald_black_belt.gbapal.lz"
+gTrainerPalette_RSBlackBelt:: @ 8E4C630
+	.incbin "graphics/trainers/palettes/rs_black_belt.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_guitarist_front_pic:: @ 8E4C658
+gTrainerFrontPic_Guitarist:: @ 8E4C658
 	.incbin "graphics/trainers/front_pics/guitarist_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_guitarist:: @ 8E4C9DC
+gTrainerPalette_Guitarist:: @ 8E4C9DC
 	.incbin "graphics/trainers/palettes/guitarist.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_kindler_front_pic:: @ 8E4CA04
+gTrainerFrontPic_Kindler:: @ 8E4CA04
 	.incbin "graphics/trainers/front_pics/kindler_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_kindler:: @ 8E4CD70
+gTrainerPalette_Kindler:: @ 8E4CD70
 	.incbin "graphics/trainers/palettes/kindler.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_emerald_camper_front_pic:: @ 8E4CD98
-	.incbin "graphics/trainers/front_pics/emerald_camper_front_pic.4bpp.lz"
+gTrainerFrontPic_RSCamper:: @ 8E4CD98
+	.incbin "graphics/trainers/front_pics/rs_camper_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_emerald_camper:: @ 8E4D080
-	.incbin "graphics/trainers/palettes/emerald_camper.gbapal.lz"
+gTrainerPalette_RSCamper:: @ 8E4D080
+	.incbin "graphics/trainers/palettes/rs_camper.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_bug_maniac_front_pic:: @ 8E4D0A8
+gTrainerFrontPic_BugManiac:: @ 8E4D0A8
 	.incbin "graphics/trainers/front_pics/bug_maniac_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_bug_maniac:: @ 8E4D4F8
+gTrainerPalette_BugManiac:: @ 8E4D4F8
 	.incbin "graphics/trainers/palettes/bug_maniac.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_emerald_psychic_m_front_pic:: @ 8E4D520
-	.incbin "graphics/trainers/front_pics/emerald_psychic_m_front_pic.4bpp.lz"
+gTrainerFrontPic_RSPsychicM:: @ 8E4D520
+	.incbin "graphics/trainers/front_pics/rs_psychic_m_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_emerald_psychic_m:: @ 8E4D84C
-	.incbin "graphics/trainers/palettes/emerald_psychic_m.gbapal.lz"
+gTrainerPalette_RSPsychicM:: @ 8E4D84C
+	.incbin "graphics/trainers/palettes/rs_psychic_m.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_emerald_psychic_f_front_pic:: @ 8E4D874
-	.incbin "graphics/trainers/front_pics/emerald_psychic_f_front_pic.4bpp.lz"
+gTrainerFrontPic_RSPsychicF:: @ 8E4D874
+	.incbin "graphics/trainers/front_pics/rs_psychic_f_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_emerald_psychic_f:: @ 8E4DB9C
-	.incbin "graphics/trainers/palettes/emerald_psychic_f.gbapal.lz"
+gTrainerPalette_RSPsychicF:: @ 8E4DB9C
+	.incbin "graphics/trainers/palettes/rs_psychic_f.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_emerald_gentleman_front_pic:: @ 8E4DBC4
-	.incbin "graphics/trainers/front_pics/emerald_gentleman_front_pic.4bpp.lz"
+gTrainerFrontPic_RSGentleman:: @ 8E4DBC4
+	.incbin "graphics/trainers/front_pics/rs_gentleman_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_emerald_gentleman:: @ 8E4DEC4
-	.incbin "graphics/trainers/palettes/emerald_gentleman.gbapal.lz"
+gTrainerPalette_RSGentleman:: @ 8E4DEC4
+	.incbin "graphics/trainers/palettes/rs_gentleman.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_elite_four_sidney_front_pic:: @ 8E4DEEC
+gTrainerFrontPic_EliteFourSidney:: @ 8E4DEEC
 	.incbin "graphics/trainers/front_pics/elite_four_sidney_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_elite_four_sidney:: @ 8E4E220
+gTrainerPalette_EliteFourSidney:: @ 8E4E220
 	.incbin "graphics/trainers/palettes/elite_four_sidney.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_elite_four_phoebe_front_pic:: @ 8E4E248
+gTrainerFrontPic_EliteFourPhoebe:: @ 8E4E248
 	.incbin "graphics/trainers/front_pics/elite_four_phoebe_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_elite_four_phoebe:: @ 8E4E548
+gTrainerPalette_EliteFourPhoebe:: @ 8E4E548
 	.incbin "graphics/trainers/palettes/elite_four_phoebe.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_leader_roxanne_front_pic:: @ 8E4E570
+gTrainerFrontPic_LeaderRoxanne:: @ 8E4E570
 	.incbin "graphics/trainers/front_pics/leader_roxanne_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_leader_roxanne:: @ 8E4E85C
+gTrainerPalette_LeaderRoxanne:: @ 8E4E85C
 	.incbin "graphics/trainers/palettes/leader_roxanne.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_leader_brawly_front_pic:: @ 8E4E884
+gTrainerFrontPic_LeaderBrawly:: @ 8E4E884
 	.incbin "graphics/trainers/front_pics/leader_brawly_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_leader_brawly:: @ 8E4EC18
+gTrainerPalette_LeaderBrawly:: @ 8E4EC18
 	.incbin "graphics/trainers/palettes/leader_brawly.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_leader_tate_and_liza_front_pic:: @ 8E4EC40
+gTrainerFrontPic_LeaderTateAndLiza:: @ 8E4EC40
 	.incbin "graphics/trainers/front_pics/leader_tate_and_liza_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_leader_tate_and_liza:: @ 8E4F084
+gTrainerPalette_LeaderTateAndLiza:: @ 8E4F084
 	.incbin "graphics/trainers/palettes/leader_tate_and_liza.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_school_kid_m_front_pic:: @ 8E4F0AC
+gTrainerFrontPic_SchoolKidM:: @ 8E4F0AC
 	.incbin "graphics/trainers/front_pics/school_kid_m_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_school_kid_m:: @ 8E4F36C
+gTrainerPalette_SchoolKidM:: @ 8E4F36C
 	.incbin "graphics/trainers/palettes/school_kid_m.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_school_kid_f_front_pic:: @ 8E4F394
+gTrainerFrontPic_SchoolKidF:: @ 8E4F394
 	.incbin "graphics/trainers/front_pics/school_kid_f_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_school_kid_f:: @ 8E4F630
+gTrainerPalette_SchoolKidF:: @ 8E4F630
 	.incbin "graphics/trainers/palettes/school_kid_f.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_sr_and_jr_front_pic:: @ 8E4F658
+gTrainerFrontPic_SrAndJr:: @ 8E4F658
 	.incbin "graphics/trainers/front_pics/sr_and_jr_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_sr_and_jr:: @ 8E4FAC8
+gTrainerPalette_SrAndJr:: @ 8E4FAC8
 	.incbin "graphics/trainers/palettes/sr_and_jr.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_winstrate_m_front_pic:: @ 8E4FAF0
-	.incbin "graphics/trainers/front_pics/winstrate_m_front_pic.4bpp.lz"
+gTrainerFrontPic_PokefanM:: @ 8E4FAF0
+	.incbin "graphics/trainers/front_pics/pokefan_m_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_winstrate_m:: @ 8E4FEAC
-	.incbin "graphics/trainers/palettes/winstrate_m.gbapal.lz"
+gTrainerPalette_PokefanM:: @ 8E4FEAC
+	.incbin "graphics/trainers/palettes/pokefan_m.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_winstrate_f_front_pic:: @ 8E4FED4
-	.incbin "graphics/trainers/front_pics/winstrate_f_front_pic.4bpp.lz"
+gTrainerFrontPic_PokefanF:: @ 8E4FED4
+	.incbin "graphics/trainers/front_pics/pokefan_f_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_winstrate_f:: @ 8E502A0
-	.incbin "graphics/trainers/palettes/winstrate_f.gbapal.lz"
+gTrainerPalette_PokefanF:: @ 8E502A0
+	.incbin "graphics/trainers/palettes/pokefan_f.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_expert_m_front_pic:: @ 8E502C8
+gTrainerFrontPic_ExpertM:: @ 8E502C8
 	.incbin "graphics/trainers/front_pics/expert_m_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_expert_m:: @ 8E50608
+gTrainerPalette_ExpertM:: @ 8E50608
 	.incbin "graphics/trainers/palettes/expert_m.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_expert_f_front_pic:: @ 8E50630
+gTrainerFrontPic_ExpertF:: @ 8E50630
 	.incbin "graphics/trainers/front_pics/expert_f_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_expert_f:: @ 8E5094C
+gTrainerPalette_ExpertF:: @ 8E5094C
 	.incbin "graphics/trainers/palettes/expert_f.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_emerald_youngster_front_pic:: @ 8E50974
-	.incbin "graphics/trainers/front_pics/emerald_youngster_front_pic.4bpp.lz"
+gTrainerFrontPic_RSYoungster:: @ 8E50974
+	.incbin "graphics/trainers/front_pics/rs_youngster_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_emerald_youngster:: @ 8E50C1C
-	.incbin "graphics/trainers/palettes/emerald_youngster.gbapal.lz"
+gTrainerPalette_RSYoungster:: @ 8E50C1C
+	.incbin "graphics/trainers/palettes/rs_youngster.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_steven_front_pic:: @ 8E50C44
-	.incbin "graphics/trainers/front_pics/steven_front_pic.4bpp.lz"
+gTrainerFrontPic_ChampionSteven:: @ 8E50C44
+	.incbin "graphics/trainers/front_pics/champion_steven_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_steven:: @ 8E50F7C
-	.incbin "graphics/trainers/palettes/steven.gbapal.lz"
+gTrainerPalette_ChampionSteven:: @ 8E50F7C
+	.incbin "graphics/trainers/palettes/champion_steven.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_emerald_fisherman_front_pic:: @ 8E50FA4
-	.incbin "graphics/trainers/front_pics/emerald_fisherman_front_pic.4bpp.lz"
+gTrainerFrontPic_RSFisherman:: @ 8E50FA4
+	.incbin "graphics/trainers/front_pics/rs_fisherman_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_emerald_fisherman:: @ 8E51388
-	.incbin "graphics/trainers/palettes/emerald_fisherman.gbapal.lz"
+gTrainerPalette_RSFisherman:: @ 8E51388
+	.incbin "graphics/trainers/palettes/rs_fisherman.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_cycling_triathlete_m_front_pic:: @ 8E513B0
+gTrainerFrontPic_CyclingTriathleteM:: @ 8E513B0
 	.incbin "graphics/trainers/front_pics/cycling_triathlete_m_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_cycling_triathlete_m:: @ 8E517C0
+gTrainerPalette_CyclingTriathleteM:: @ 8E517C0
 	.incbin "graphics/trainers/palettes/cycling_triathlete_m.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_cycling_triathlete_f_front_pic:: @ 8E517E8
+gTrainerFrontPic_CyclingTriathleteF:: @ 8E517E8
 	.incbin "graphics/trainers/front_pics/cycling_triathlete_f_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_cycling_triathlete_f:: @ 8E51BF4
+gTrainerPalette_CyclingTriathleteF:: @ 8E51BF4
 	.incbin "graphics/trainers/palettes/cycling_triathlete_f.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_running_triathlete_m_front_pic:: @ 8E51C1C
+gTrainerFrontPic_RunningTriathleteM:: @ 8E51C1C
 	.incbin "graphics/trainers/front_pics/running_triathlete_m_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_running_triathlete_m:: @ 8E51ED4
+gTrainerPalette_RunningTriathleteM:: @ 8E51ED4
 	.incbin "graphics/trainers/palettes/running_triathlete_m.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_running_triathlete_f_front_pic:: @ 8E51EFC
+gTrainerFrontPic_RunningTriathleteF:: @ 8E51EFC
 	.incbin "graphics/trainers/front_pics/running_triathlete_f_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_running_triathlete_f:: @ 8E521A0
+gTrainerPalette_RunningTriathleteF:: @ 8E521A0
 	.incbin "graphics/trainers/palettes/running_triathlete_f.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_swimming_triathlete_m_front_pic:: @ 8E521C8
+gTrainerFrontPic_SwimmingTriathleteM:: @ 8E521C8
 	.incbin "graphics/trainers/front_pics/swimming_triathlete_m_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_swimming_triathlete_m:: @ 8E524F4
+gTrainerPalette_SwimmingTriathleteM:: @ 8E524F4
 	.incbin "graphics/trainers/palettes/swimming_triathlete_m.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_swimming_triathlete_f_front_pic:: @ 8E5251C
+gTrainerFrontPic_SwimmingTriathleteF:: @ 8E5251C
 	.incbin "graphics/trainers/front_pics/swimming_triathlete_f_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_swimming_triathlete_f:: @ 8E527F8
+gTrainerPalette_SwimmingTriathleteF:: @ 8E527F8
 	.incbin "graphics/trainers/palettes/swimming_triathlete_f.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_dragon_tamer_front_pic:: @ 8E52820
+gTrainerFrontPic_DragonTamer:: @ 8E52820
 	.incbin "graphics/trainers/front_pics/dragon_tamer_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_dragon_tamer:: @ 8E52B74
+gTrainerPalette_DragonTamer:: @ 8E52B74
 	.incbin "graphics/trainers/palettes/dragon_tamer.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_emerald_bird_keeper_front_pic:: @ 8E52B9C
-	.incbin "graphics/trainers/front_pics/emerald_bird_keeper_front_pic.4bpp.lz"
+gTrainerFrontPic_RSBirdKeeper:: @ 8E52B9C
+	.incbin "graphics/trainers/front_pics/rs_bird_keeper_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_emerald_bird_keeper:: @ 8E52ED4
-	.incbin "graphics/trainers/palettes/emerald_bird_keeper.gbapal.lz"
+gTrainerPalette_RSBirdKeeper:: @ 8E52ED4
+	.incbin "graphics/trainers/palettes/rs_bird_keeper.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_ninja_boy_front_pic:: @ 8E52EFC
+gTrainerFrontPic_NinjaBoy:: @ 8E52EFC
 	.incbin "graphics/trainers/front_pics/ninja_boy_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_ninja_boy:: @ 8E531D8
+gTrainerPalette_NinjaBoy:: @ 8E531D8
 	.incbin "graphics/trainers/palettes/ninja_boy.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_battle_girl_front_pic:: @ 8E53200
+gTrainerFrontPic_BattleGirl:: @ 8E53200
 	.incbin "graphics/trainers/front_pics/battle_girl_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_battle_girl:: @ 8E53520
+gTrainerPalette_BattleGirl:: @ 8E53520
 	.incbin "graphics/trainers/palettes/battle_girl.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_parasol_lady_front_pic:: @ 8E53548
+gTrainerFrontPic_ParasolLady:: @ 8E53548
 	.incbin "graphics/trainers/front_pics/parasol_lady_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_parasol_lady:: @ 8E53880
+gTrainerPalette_ParasolLady:: @ 8E53880
 	.incbin "graphics/trainers/palettes/parasol_lady.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_emerald_swimmer_f_front_pic:: @ 8E538A8
-	.incbin "graphics/trainers/front_pics/emerald_swimmer_f_front_pic.4bpp.lz"
+gTrainerFrontPic_RSSwimmerF:: @ 8E538A8
+	.incbin "graphics/trainers/front_pics/rs_swimmer_f_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_emerald_swimmer_f:: @ 8E53B78
-	.incbin "graphics/trainers/palettes/emerald_swimmer_f.gbapal.lz"
+gTrainerPalette_RSSwimmerF:: @ 8E53B78
+	.incbin "graphics/trainers/palettes/rs_swimmer_f.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_emerald_picnicker_front_pic:: @ 8E53BA0
-	.incbin "graphics/trainers/front_pics/emerald_picnicker_front_pic.4bpp.lz"
+gTrainerFrontPic_RSPicnicker:: @ 8E53BA0
+	.incbin "graphics/trainers/front_pics/rs_picnicker_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_emerald_picnicker:: @ 8E53E80
-	.incbin "graphics/trainers/palettes/emerald_picnicker.gbapal.lz"
+gTrainerPalette_RSPicnicker:: @ 8E53E80
+	.incbin "graphics/trainers/palettes/rs_picnicker.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_emerald_twins_front_pic:: @ 8E53EA8
-	.incbin "graphics/trainers/front_pics/emerald_twins_front_pic.4bpp.lz"
+gTrainerFrontPic_RSTwins:: @ 8E53EA8
+	.incbin "graphics/trainers/front_pics/rs_twins_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_emerald_twins:: @ 8E5426C
-	.incbin "graphics/trainers/palettes/emerald_twins.gbapal.lz"
+gTrainerPalette_RSTwins:: @ 8E5426C
+	.incbin "graphics/trainers/palettes/rs_twins.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_emerald_sailor_front_pic:: @ 8E54294
-	.incbin "graphics/trainers/front_pics/emerald_sailor_front_pic.4bpp.lz"
+gTrainerFrontPic_RSSailor:: @ 8E54294
+	.incbin "graphics/trainers/front_pics/rs_sailor_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_emerald_sailor:: @ 8E54644
-	.incbin "graphics/trainers/palettes/emerald_sailor.gbapal.lz"
+gTrainerPalette_RSSailor:: @ 8E54644
+	.incbin "graphics/trainers/palettes/rs_sailor.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_collector_front_pic:: @ 8E5466C
+gTrainerFrontPic_Collector:: @ 8E5466C
 	.incbin "graphics/trainers/front_pics/collector_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_collector:: @ 8E54A70
+gTrainerPalette_Collector:: @ 8E54A70
 	.incbin "graphics/trainers/palettes/collector.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_wally_front_pic:: @ 8E54A98
+gTrainerFrontPic_Wally:: @ 8E54A98
 	.incbin "graphics/trainers/front_pics/wally_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_wally:: @ 8E54D68
+gTrainerPalette_Wally:: @ 8E54D68
 	.incbin "graphics/trainers/palettes/wally.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_ruby_sapphire_brendan_front_pic:: @ 8E54D90
+gTrainerFrontPic_RSBrendan1:: @ 8E54D90
 	.incbin "graphics/trainers/front_pics/ruby_sapphire_brendan_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_ruby_sapphire_brendan:: @ 8E550A4
+gTrainerPalette_RSBrendan1:: @ 8E550A4
 	.incbin "graphics/trainers/palettes/ruby_sapphire_brendan.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_ruby_sapphire_may_front_pic:: @ 8E550CC
+gTrainerFrontPic_RSMay1:: @ 8E550CC
 	.incbin "graphics/trainers/front_pics/ruby_sapphire_may_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_ruby_sapphire_may:: @ 8E553CC
+gTrainerPalette_RSMay1:: @ 8E553CC
 	.incbin "graphics/trainers/palettes/ruby_sapphire_may.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_emerald_pokemon_breeder_m_front_pic:: @ 8E553F4
-	.incbin "graphics/trainers/front_pics/emerald_pokemon_breeder_m_front_pic.4bpp.lz"
+gTrainerFrontPic_PokemonBreederM:: @ 8E553F4
+	.incbin "graphics/trainers/front_pics/pokemon_breeder_m_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_emerald_pokemon_breeder_m:: @ 8E55724
-	.incbin "graphics/trainers/palettes/emerald_pokemon_breeder_m.gbapal.lz"
+gTrainerPalette_PokemonBreederM:: @ 8E55724
+	.incbin "graphics/trainers/palettes/pokemon_breeder_m.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_emerald_pokemon_breeder_f_front_pic:: @ 8E5574C
-	.incbin "graphics/trainers/front_pics/emerald_pokemon_breeder_f_front_pic.4bpp.lz"
+gTrainerFrontPic_RSPokemonBreederF:: @ 8E5574C
+	.incbin "graphics/trainers/front_pics/rs_pokemon_breeder_f_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_emerald_pokemon_breeder_f:: @ 8E55A80
-	.incbin "graphics/trainers/palettes/emerald_pokemon_breeder_f.gbapal.lz"
+gTrainerPalette_RSPokemonBreederF:: @ 8E55A80
+	.incbin "graphics/trainers/palettes/rs_pokemon_breeder_f.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_emerald_pokemon_ranger_m_front_pic:: @ 8E55AA8
-	.incbin "graphics/trainers/front_pics/emerald_pokemon_ranger_m_front_pic.4bpp.lz"
+gTrainerFrontPic_RSPokemonRangerM:: @ 8E55AA8
+	.incbin "graphics/trainers/front_pics/rs_pokemon_ranger_m_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_emerald_pokemon_ranger_m:: @ 8E55DF0
-	.incbin "graphics/trainers/palettes/emerald_pokemon_ranger_m.gbapal.lz"
+gTrainerPalette_RSPokemonRangerM:: @ 8E55DF0
+	.incbin "graphics/trainers/palettes/rs_pokemon_ranger_m.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_emerald_pokemon_ranger_f_front_pic:: @ 8E55E18
-	.incbin "graphics/trainers/front_pics/emerald_pokemon_ranger_f_front_pic.4bpp.lz"
+gTrainerFrontPic_RSPokemonRangerF:: @ 8E55E18
+	.incbin "graphics/trainers/front_pics/rs_pokemon_ranger_f_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_emerald_pokemon_ranger_f:: @ 8E5614C
-	.incbin "graphics/trainers/palettes/emerald_pokemon_ranger_f.gbapal.lz"
+gTrainerPalette_RSPokemonRangerF:: @ 8E5614C
+	.incbin "graphics/trainers/palettes/rs_pokemon_ranger_f.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_magma_leader_maxie_front_pic:: @ 8E56174
+gTrainerFrontPic_MagmaLeaderMaxie:: @ 8E56174
 	.incbin "graphics/trainers/front_pics/magma_leader_maxie_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_magma_leader_maxie:: @ 8E56468
+gTrainerPalette_MagmaLeaderMaxie:: @ 8E56468
 	.incbin "graphics/trainers/palettes/magma_leader_maxie.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_magma_grunt_m_front_pic:: @ 8E56490
+gTrainerFrontPic_MagmaGruntM:: @ 8E56490
 	.incbin "graphics/trainers/front_pics/magma_grunt_m_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_magma_grunt_m:: @ 8E56810
+gTrainerPalette_MagmaGruntM:: @ 8E56810
 	.incbin "graphics/trainers/palettes/magma_grunt_m.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_magma_grunt_f_front_pic:: @ 8E56838
+gTrainerFrontPic_MagmaGruntF:: @ 8E56838
 	.incbin "graphics/trainers/front_pics/magma_grunt_f_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_magma_grunt_f:: @ 8E56BC4
+gTrainerPalette_MagmaGruntF:: @ 8E56BC4
 	.incbin "graphics/trainers/palettes/magma_grunt_f.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_emerald_lass_front_pic:: @ 8E56BEC
-	.incbin "graphics/trainers/front_pics/emerald_lass_front_pic.4bpp.lz"
+gTrainerFrontPic_RSLass:: @ 8E56BEC
+	.incbin "graphics/trainers/front_pics/rs_lass_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_emerald_lass:: @ 8E56EC4
-	.incbin "graphics/trainers/palettes/emerald_lass.gbapal.lz"
+gTrainerPalette_RSLass:: @ 8E56EC4
+	.incbin "graphics/trainers/palettes/rs_lass.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_emerald_bug_catcher_front_pic:: @ 8E56EEC
-	.incbin "graphics/trainers/front_pics/emerald_bug_catcher_front_pic.4bpp.lz"
+gTrainerFrontPic_RSBugCatcher:: @ 8E56EEC
+	.incbin "graphics/trainers/front_pics/rs_bug_catcher_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_emerald_bug_catcher:: @ 8E57218
-	.incbin "graphics/trainers/palettes/emerald_bug_catcher.gbapal.lz"
+gTrainerPalette_RSBugCatcher:: @ 8E57218
+	.incbin "graphics/trainers/palettes/rs_bug_catcher.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_emerald_hiker_front_pic:: @ 8E57240
-	.incbin "graphics/trainers/front_pics/emerald_hiker_front_pic.4bpp.lz"
+gTrainerFrontPic_RSHiker:: @ 8E57240
+	.incbin "graphics/trainers/front_pics/rs_hiker_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_emerald_hiker:: @ 8E576C0
-	.incbin "graphics/trainers/palettes/emerald_hiker.gbapal.lz"
+gTrainerPalette_RSHiker:: @ 8E576C0
+	.incbin "graphics/trainers/palettes/rs_hiker.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_emerald_young_couple_front_pic:: @ 8E576E8
-	.incbin "graphics/trainers/front_pics/emerald_young_couple_front_pic.4bpp.lz"
+gTrainerFrontPic_RSYoungCouple:: @ 8E576E8
+	.incbin "graphics/trainers/front_pics/rs_young_couple_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_emerald_young_couple:: @ 8E57AA8
-	.incbin "graphics/trainers/palettes/emerald_young_couple.gbapal.lz"
+gTrainerPalette_RSYoungCouple:: @ 8E57AA8
+	.incbin "graphics/trainers/palettes/rs_young_couple.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_old_couple_front_pic:: @ 8E57AD0
+gTrainerFrontPic_OldCouple:: @ 8E57AD0
 	.incbin "graphics/trainers/front_pics/old_couple_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_old_couple:: @ 8E57FE0
+gTrainerPalette_OldCouple:: @ 8E57FE0
 	.incbin "graphics/trainers/palettes/old_couple.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_emerald_sis_and_bro_front_pic:: @ 8E58008
-	.incbin "graphics/trainers/front_pics/emerald_sis_and_bro_front_pic.4bpp.lz"
+gTrainerFrontPic_RSSisAndBro:: @ 8E58008
+	.incbin "graphics/trainers/front_pics/rs_sis_and_bro_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_emerald_sis_and_bro:: @ 8E58454
-	.incbin "graphics/trainers/palettes/emerald_sis_and_bro.gbapal.lz"
+gTrainerPalette_RSSisAndBro:: @ 8E58454
+	.incbin "graphics/trainers/palettes/rs_sis_and_bro.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_aqua_admin_m_front_pic:: @ 8E5847C
+gTrainerFrontPic_AquaAdminM:: @ 8E5847C
 	.incbin "graphics/trainers/front_pics/aqua_admin_m_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_aqua_admin_m:: @ 8E58830
+gTrainerPalette_AquaAdminM:: @ 8E58830
 	.incbin "graphics/trainers/palettes/aqua_admin_m.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_aqua_admin_f_front_pic:: @ 8E58858
+gTrainerFrontPic_AquaAdminF:: @ 8E58858
 	.incbin "graphics/trainers/front_pics/aqua_admin_f_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_aqua_admin_f:: @ 8E58C1C
+gTrainerPalette_AquaAdminF:: @ 8E58C1C
 	.incbin "graphics/trainers/palettes/aqua_admin_f.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_magma_admin_front_pic:: @ 8E58C44
-	.incbin "graphics/trainers/front_pics/magma_admin_front_pic.4bpp.lz"
+gTrainerFrontPic_MagmaAdminM:: @ 8E58C44
+	.incbin "graphics/trainers/front_pics/magma_admin_m_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_magma_admin:: @ 8E5901C
-	.incbin "graphics/trainers/palettes/magma_admin.gbapal.lz"
+gTrainerPalette_MagmaAdminM:: @ 8E5901C
+	.incbin "graphics/trainers/palettes/magma_admin_m.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_ruby_magma_admin_f_front_pic:: @ 8E59044
-	.incbin "graphics/trainers/front_pics/ruby_magma_admin_f_front_pic.4bpp.lz"
+gTrainerFrontPic_MagmaAdminF:: @ 8E59044
+	.incbin "graphics/trainers/front_pics/magma_admin_f_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_ruby_magma_admin_f:: @ 8E593F4
-	.incbin "graphics/trainers/palettes/ruby_magma_admin_f.gbapal.lz"
+gTrainerPalette_MagmaAdminF:: @ 8E593F4
+	.incbin "graphics/trainers/palettes/magma_admin_f.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_leader_wattson_front_pic:: @ 8E5941C
+gTrainerFrontPic_LeaderWattson:: @ 8E5941C
 	.incbin "graphics/trainers/front_pics/leader_wattson_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_leader_wattson:: @ 8E59764
+gTrainerPalette_LeaderWattson:: @ 8E59764
 	.incbin "graphics/trainers/palettes/leader_wattson.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_leader_flannery_front_pic:: @ 8E5978C
+gTrainerFrontPic_LeaderFlannery:: @ 8E5978C
 	.incbin "graphics/trainers/front_pics/leader_flannery_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_leader_flannery:: @ 8E59B0C
+gTrainerPalette_LeaderFlannery:: @ 8E59B0C
 	.incbin "graphics/trainers/palettes/leader_flannery.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_leader_norman_front_pic:: @ 8E59B34
+gTrainerFrontPic_LeaderNorman:: @ 8E59B34
 	.incbin "graphics/trainers/front_pics/leader_norman_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_leader_norman:: @ 8E59E70
+gTrainerPalette_LeaderNorman:: @ 8E59E70
 	.incbin "graphics/trainers/palettes/leader_norman.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_leader_winona_front_pic:: @ 8E59E98
+gTrainerFrontPic_LeaderWinona:: @ 8E59E98
 	.incbin "graphics/trainers/front_pics/leader_winona_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_leader_winona:: @ 8E5A218
+gTrainerPalette_LeaderWinona:: @ 8E5A218
 	.incbin "graphics/trainers/palettes/leader_winona.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_ruby_sapphire_champion_wallace_front_pic:: @ 8E5A240
-	.incbin "graphics/trainers/front_pics/ruby_sapphire_champion_wallace_front_pic.4bpp.lz"
+gTrainerFrontPic_LeaderWallace:: @ 8E5A240
+	.incbin "graphics/trainers/front_pics/leader_wallace_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_champion_wallace:: @ 8E5A5B8
-	.incbin "graphics/trainers/palettes/champion_wallace.gbapal.lz"
+gTrainerPalette_LeaderWallace:: @ 8E5A5B8
+	.incbin "graphics/trainers/palettes/leader_wallace.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_elite_four_glacia_front_pic:: @ 8E5A5E0
+gTrainerFrontPic_EliteFourGlacia:: @ 8E5A5E0
 	.incbin "graphics/trainers/front_pics/elite_four_glacia_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_elite_four_glacia:: @ 8E5A964
+gTrainerPalette_EliteFourGlacia:: @ 8E5A964
 	.incbin "graphics/trainers/palettes/elite_four_glacia.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_elite_four_drake_front_pic:: @ 8E5A98C
+gTrainerFrontPic_EliteFourDrake:: @ 8E5A98C
 	.incbin "graphics/trainers/front_pics/elite_four_drake_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_elite_four_drake:: @ 8E5AD34
+gTrainerPalette_EliteFourDrake:: @ 8E5AD34
 	.incbin "graphics/trainers/palettes/elite_four_drake.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_youngster_front_pic:: @ 8E5AD5C
+gTrainerFrontPic_Youngster:: @ 8E5AD5C
 	.incbin "graphics/trainers/front_pics/youngster_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_youngster:: @ 8E5AFFC
+gTrainerPalette_Youngster:: @ 8E5AFFC
 	.incbin "graphics/trainers/palettes/youngster.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_bug_catcher_front_pic:: @ 8E5B024
+gTrainerFrontPic_BugCatcher:: @ 8E5B024
 	.incbin "graphics/trainers/front_pics/bug_catcher_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_bug_catcher:: @ 8E5B36C
+gTrainerPalette_BugCatcher:: @ 8E5B36C
 	.incbin "graphics/trainers/palettes/bug_catcher.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_lass_front_pic:: @ 8E5B394
+gTrainerFrontPic_Lass:: @ 8E5B394
 	.incbin "graphics/trainers/front_pics/lass_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_lass:: @ 8E5B680
+gTrainerPalette_Lass:: @ 8E5B680
 	.incbin "graphics/trainers/palettes/lass.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_sailor_front_pic:: @ 8E5B6A8
+gTrainerFrontPic_Sailor:: @ 8E5B6A8
 	.incbin "graphics/trainers/front_pics/sailor_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_sailor:: @ 8E5B9C8
+gTrainerPalette_Sailor:: @ 8E5B9C8
 	.incbin "graphics/trainers/palettes/sailor.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_camper_front_pic:: @ 8E5B9F0
+gTrainerFrontPic_Camper:: @ 8E5B9F0
 	.incbin "graphics/trainers/front_pics/camper_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_camper:: @ 8E5BCD0
+gTrainerPalette_Camper:: @ 8E5BCD0
 	.incbin "graphics/trainers/palettes/camper.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_picnicker_front_pic:: @ 8E5BCF8
+gTrainerFrontPic_Picnicker:: @ 8E5BCF8
 	.incbin "graphics/trainers/front_pics/picnicker_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_picnicker:: @ 8E5BFE0
+gTrainerPalette_Picnicker:: @ 8E5BFE0
 	.incbin "graphics/trainers/palettes/picnicker.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_pokemaniac_front_pic:: @ 8E5C008
+gTrainerFrontPic_PokeManiac:: @ 8E5C008
 	.incbin "graphics/trainers/front_pics/pokemaniac_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_pokemaniac:: @ 8E5C3C4
+gTrainerPalette_PokeManiac:: @ 8E5C3C4
 	.incbin "graphics/trainers/palettes/pokemaniac.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_super_nerd_front_pic:: @ 8E5C3EC
+gTrainerFrontPic_SuperNerd:: @ 8E5C3EC
 	.incbin "graphics/trainers/front_pics/super_nerd_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_super_nerd:: @ 8E5C704
+gTrainerPalette_SuperNerd:: @ 8E5C704
 	.incbin "graphics/trainers/palettes/super_nerd.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_hiker_front_pic:: @ 8E5C72C
+gTrainerFrontPic_Hiker:: @ 8E5C72C
 	.incbin "graphics/trainers/front_pics/hiker_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_hiker:: @ 8E5CB9C
+gTrainerPalette_Hiker:: @ 8E5CB9C
 	.incbin "graphics/trainers/palettes/hiker.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_biker_front_pic:: @ 8E5CBC4
+gTrainerFrontPic_Biker:: @ 8E5CBC4
 	.incbin "graphics/trainers/front_pics/biker_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_biker:: @ 8E5D12C
+gTrainerPalette_Biker:: @ 8E5D12C
 	.incbin "graphics/trainers/palettes/biker.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_burglar_front_pic:: @ 8E5D154
+gTrainerFrontPic_Burglar:: @ 8E5D154
 	.incbin "graphics/trainers/front_pics/burglar_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_burglar:: @ 8E5D4A0
+gTrainerPalette_Burglar:: @ 8E5D4A0
 	.incbin "graphics/trainers/palettes/burglar.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_engineer_front_pic:: @ 8E5D4C8
+gTrainerFrontPic_Engineer:: @ 8E5D4C8
 	.incbin "graphics/trainers/front_pics/engineer_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_engineer:: @ 8E5D8D4
+gTrainerPalette_Engineer:: @ 8E5D8D4
 	.incbin "graphics/trainers/palettes/engineer.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_fisherman_front_pic:: @ 8E5D8FC
+gTrainerFrontPic_Fisherman:: @ 8E5D8FC
 	.incbin "graphics/trainers/front_pics/fisherman_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_fisherman:: @ 8E5DCA8
+gTrainerPalette_Fisherman:: @ 8E5DCA8
 	.incbin "graphics/trainers/palettes/fisherman.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_swimmer_m_front_pic:: @ 8E5DCD0
+gTrainerFrontPic_SwimmerM:: @ 8E5DCD0
 	.incbin "graphics/trainers/front_pics/swimmer_m_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_swimmer_m:: @ 8E5DFA8
+gTrainerPalette_SwimmerM:: @ 8E5DFA8
 	.incbin "graphics/trainers/palettes/swimmer_m.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_roughneck_front_pic:: @ 8E5DFD0
-	.incbin "graphics/trainers/front_pics/roughneck_front_pic.4bpp.lz"
+gTrainerFrontPic_CueBall:: @ 8E5DFD0
+	.incbin "graphics/trainers/front_pics/cue_ball_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_roughneck:: @ 8E5E598
-	.incbin "graphics/trainers/palettes/roughneck.gbapal.lz"
+gTrainerPalette_CueBall:: @ 8E5E598
+	.incbin "graphics/trainers/palettes/cue_ball.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_gamer_front_pic:: @ 8E5E5C0
+gTrainerFrontPic_Gamer:: @ 8E5E5C0
 	.incbin "graphics/trainers/front_pics/gamer_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_gamer:: @ 8E5E954
+gTrainerPalette_Gamer:: @ 8E5E954
 	.incbin "graphics/trainers/palettes/gamer.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_beauty_front_pic:: @ 8E5E97C
+gTrainerFrontPic_Beauty:: @ 8E5E97C
 	.incbin "graphics/trainers/front_pics/beauty_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_beauty:: @ 8E5ECD8
+gTrainerPalette_Beauty:: @ 8E5ECD8
 	.incbin "graphics/trainers/palettes/beauty.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_swimmer_f_front_pic:: @ 8E5ED00
+gTrainerFrontPic_SwimmerF:: @ 8E5ED00
 	.incbin "graphics/trainers/front_pics/swimmer_f_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_swimmer_f:: @ 8E5EFEC
+gTrainerPalette_SwimmerF:: @ 8E5EFEC
 	.incbin "graphics/trainers/palettes/swimmer_f.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_psychic_m_front_pic:: @ 8E5F014
+gTrainerFrontPic_PsychicM:: @ 8E5F014
 	.incbin "graphics/trainers/front_pics/psychic_m_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_psychic_m:: @ 8E5F374
+gTrainerPalette_PsychicM:: @ 8E5F374
 	.incbin "graphics/trainers/palettes/psychic_m.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_rocker_front_pic:: @ 8E5F39C
+gTrainerFrontPic_Rocker:: @ 8E5F39C
 	.incbin "graphics/trainers/front_pics/rocker_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_rocker:: @ 8E5F7F8
+gTrainerPalette_Rocker:: @ 8E5F7F8
 	.incbin "graphics/trainers/palettes/rocker.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_juggler_front_pic:: @ 8E5F820
+gTrainerFrontPic_Juggler:: @ 8E5F820
 	.incbin "graphics/trainers/front_pics/juggler_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_juggler:: @ 8E5FC5C
+gTrainerPalette_Juggler:: @ 8E5FC5C
 	.incbin "graphics/trainers/palettes/juggler.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_tamer_front_pic:: @ 8E5FC84
+gTrainerFrontPic_Tamer:: @ 8E5FC84
 	.incbin "graphics/trainers/front_pics/tamer_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_tamer:: @ 8E60038
+gTrainerPalette_Tamer:: @ 8E60038
 	.incbin "graphics/trainers/palettes/tamer.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_bird_keeper_front_pic:: @ 8E60060
+gTrainerFrontPic_BirdKeeper:: @ 8E60060
 	.incbin "graphics/trainers/front_pics/bird_keeper_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_bird_keeper:: @ 8E60424
+gTrainerPalette_BirdKeeper:: @ 8E60424
 	.incbin "graphics/trainers/palettes/bird_keeper.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_black_belt_front_pic:: @ 8E6044C
+gTrainerFrontPic_BlackBelt:: @ 8E6044C
 	.incbin "graphics/trainers/front_pics/black_belt_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_black_belt:: @ 8E6086C
+gTrainerPalette_BlackBelt:: @ 8E6086C
 	.incbin "graphics/trainers/palettes/black_belt.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_blue_1_front_pic:: @ 8E60894
-	.incbin "graphics/trainers/front_pics/blue_1_front_pic.4bpp.lz"
+gTrainerFrontPic_Rival1:: @ 8E60894
+	.incbin "graphics/trainers/front_pics/rival_1_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_blue_1:: @ 8E60B4C
-	.incbin "graphics/trainers/palettes/blue_1.gbapal.lz"
+gTrainerPalette_Rival1:: @ 8E60B4C
+	.incbin "graphics/trainers/palettes/rival_1.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_scientist_front_pic:: @ 8E60B74
+gTrainerFrontPic_Scientist:: @ 8E60B74
 	.incbin "graphics/trainers/front_pics/scientist_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_scientist:: @ 8E60F50
+gTrainerPalette_Scientist:: @ 8E60F50
 	.incbin "graphics/trainers/palettes/scientist.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_giovanni_front_pic:: @ 8E60F78
-	.incbin "graphics/trainers/front_pics/giovanni_front_pic.4bpp.lz"
+gTrainerFrontPic_LeaderGiovanni:: @ 8E60F78
+	.incbin "graphics/trainers/front_pics/leader_giovanni_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_giovanni:: @ 8E61288
-	.incbin "graphics/trainers/palettes/giovanni.gbapal.lz"
+gTrainerPalette_LeaderGiovanni:: @ 8E61288
+	.incbin "graphics/trainers/palettes/leader_giovanni.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_rocket_grunt_m_front_pic:: @ 8E612B0
+gTrainerFrontPic_RocketGruntM:: @ 8E612B0
 	.incbin "graphics/trainers/front_pics/rocket_grunt_m_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_rocket_grunt_m:: @ 8E615E4
+gTrainerPalette_RocketGruntM:: @ 8E615E4
 	.incbin "graphics/trainers/palettes/rocket_grunt_m.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_cool_trainer_m_front_pic:: @ 8E6160C
+gTrainerFrontPic_CooltrainerM:: @ 8E6160C
 	.incbin "graphics/trainers/front_pics/cool_trainer_m_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_cool_trainer_m:: @ 8E618DC
+gTrainerPalette_CooltrainerM:: @ 8E618DC
 	.incbin "graphics/trainers/palettes/cool_trainer_m.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_cool_trainer_f_front_pic:: @ 8E61904
+gTrainerFrontPic_CooltrainerF:: @ 8E61904
 	.incbin "graphics/trainers/front_pics/cool_trainer_f_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_cool_trainer_f:: @ 8E61C1C
+gTrainerPalette_CooltrainerF:: @ 8E61C1C
 	.incbin "graphics/trainers/palettes/cool_trainer_f.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_elite_four_lorelei_front_pic:: @ 8E61C44
+gTrainerFrontPic_EliteFourLorelei:: @ 8E61C44
 	.incbin "graphics/trainers/front_pics/elite_four_lorelei_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_elite_four_lorelei:: @ 8E61F70
+gTrainerPalette_EliteFourLorelei:: @ 8E61F70
 	.incbin "graphics/trainers/palettes/elite_four_lorelei.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_elite_four_bruno_front_pic:: @ 8E61F98
+gTrainerFrontPic_EliteFourBruno:: @ 8E61F98
 	.incbin "graphics/trainers/front_pics/elite_four_bruno_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_elite_four_bruno:: @ 8E623E4
+gTrainerPalette_EliteFourBruno:: @ 8E623E4
 	.incbin "graphics/trainers/palettes/elite_four_bruno.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_elite_four_agatha_front_pic:: @ 8E6240C
+gTrainerFrontPic_EliteFourAgatha:: @ 8E6240C
 	.incbin "graphics/trainers/front_pics/elite_four_agatha_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_elite_four_agatha:: @ 8E62728
+gTrainerPalette_EliteFourAgatha:: @ 8E62728
 	.incbin "graphics/trainers/palettes/elite_four_agatha.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_elite_four_lance_front_pic:: @ 8E62750
+gTrainerFrontPic_EliteFourLance:: @ 8E62750
 	.incbin "graphics/trainers/front_pics/elite_four_lance_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_elite_four_lance:: @ 8E62B18
+gTrainerPalette_EliteFourLance:: @ 8E62B18
 	.incbin "graphics/trainers/palettes/elite_four_lance.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_leader_brock_front_pic:: @ 8E62B40
+gTrainerFrontPic_LeaderBrock:: @ 8E62B40
 	.incbin "graphics/trainers/front_pics/leader_brock_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_leader_brock:: @ 8E62E8C
+gTrainerPalette_LeaderBrock:: @ 8E62E8C
 	.incbin "graphics/trainers/palettes/leader_brock.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_leader_misty_front_pic:: @ 8E62EB4
+gTrainerFrontPic_LeaderMisty:: @ 8E62EB4
 	.incbin "graphics/trainers/front_pics/leader_misty_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_leader_misty:: @ 8E631B4
+gTrainerPalette_LeaderMisty:: @ 8E631B4
 	.incbin "graphics/trainers/palettes/leader_misty.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_leader_lt_surge_front_pic:: @ 8E631DC
+gTrainerFrontPic_LeaderLtSurge:: @ 8E631DC
 	.incbin "graphics/trainers/front_pics/leader_lt_surge_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_leader_lt_surge:: @ 8E6356C
+gTrainerPalette_LeaderLtSurge:: @ 8E6356C
 	.incbin "graphics/trainers/palettes/leader_lt_surge.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_leader_erika_front_pic:: @ 8E63594
+gTrainerFrontPic_LeaderErika:: @ 8E63594
 	.incbin "graphics/trainers/front_pics/leader_erika_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_leader_erika:: @ 8E63888
+gTrainerPalette_LeaderErika:: @ 8E63888
 	.incbin "graphics/trainers/palettes/leader_erika.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_leader_koga_front_pic:: @ 8E638B0
+gTrainerFrontPic_LeaderKoga:: @ 8E638B0
 	.incbin "graphics/trainers/front_pics/leader_koga_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_leader_koga:: @ 8E63C18
+gTrainerPalette_LeaderKoga:: @ 8E63C18
 	.incbin "graphics/trainers/palettes/leader_koga.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_leader_blaine_front_pic:: @ 8E63C40
+gTrainerFrontPic_LeaderBlaine:: @ 8E63C40
 	.incbin "graphics/trainers/front_pics/leader_blaine_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_leader_blaine:: @ 8E6404C
+gTrainerPalette_LeaderBlaine:: @ 8E6404C
 	.incbin "graphics/trainers/palettes/leader_blaine.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_leader_sabrina_front_pic:: @ 8E64074
+gTrainerFrontPic_LeaderSabrina:: @ 8E64074
 	.incbin "graphics/trainers/front_pics/leader_sabrina_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_leader_sabrina:: @ 8E6437C
+gTrainerPalette_LeaderSabrina:: @ 8E6437C
 	.incbin "graphics/trainers/palettes/leader_sabrina.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_gentleman_front_pic:: @ 8E643A4
+gTrainerFrontPic_Gentleman:: @ 8E643A4
 	.incbin "graphics/trainers/front_pics/gentleman_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_gentleman:: @ 8E646DC
+gTrainerPalette_Gentleman:: @ 8E646DC
 	.incbin "graphics/trainers/palettes/gentleman.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_blue_2_front_pic:: @ 8E64704
-	.incbin "graphics/trainers/front_pics/blue_2_front_pic.4bpp.lz"
+gTrainerFrontPic_Rival2:: @ 8E64704
+	.incbin "graphics/trainers/front_pics/rival_2_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_blue_2:: @ 8E649F8
-	.incbin "graphics/trainers/palettes/blue_2.gbapal.lz"
+gTrainerPalette_Rival2:: @ 8E649F8
+	.incbin "graphics/trainers/palettes/rival_2.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_champion_blue_front_pic:: @ 8E64A20
-	.incbin "graphics/trainers/front_pics/champion_blue_front_pic.4bpp.lz"
+gTrainerFrontPic_ChampionRival:: @ 8E64A20
+	.incbin "graphics/trainers/front_pics/champion_rival_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_champion_blue:: @ 8E64D1C
-	.incbin "graphics/trainers/palettes/champion_blue.gbapal.lz"
+gTrainerPalette_ChampionRival:: @ 8E64D1C
+	.incbin "graphics/trainers/palettes/champion_rival.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_channeler_front_pic:: @ 8E64D44
+gTrainerFrontPic_Channeler:: @ 8E64D44
 	.incbin "graphics/trainers/front_pics/channeler_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_channeler:: @ 8E6511C
+gTrainerPalette_Channeler:: @ 8E6511C
 	.incbin "graphics/trainers/palettes/channeler.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_twins_front_pic:: @ 8E65144
+gTrainerFrontPic_Twins:: @ 8E65144
 	.incbin "graphics/trainers/front_pics/twins_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_twins:: @ 8E65494
+gTrainerPalette_Twins:: @ 8E65494
 	.incbin "graphics/trainers/palettes/twins.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_cool_couple_front_pic:: @ 8E654BC
+gTrainerFrontPic_CoolCouple:: @ 8E654BC
 	.incbin "graphics/trainers/front_pics/cool_couple_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_cool_couple:: @ 8E6599C
+gTrainerPalette_CoolCouple:: @ 8E6599C
 	.incbin "graphics/trainers/palettes/cool_couple.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_young_couple_front_pic:: @ 8E659C4
+gTrainerFrontPic_YoungCouple:: @ 8E659C4
 	.incbin "graphics/trainers/front_pics/young_couple_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_young_couple:: @ 8E65E10
+gTrainerPalette_YoungCouple:: @ 8E65E10
 	.incbin "graphics/trainers/palettes/young_couple.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_crush_kin_front_pic:: @ 8E65E38
+gTrainerFrontPic_CrushKin:: @ 8E65E38
 	.incbin "graphics/trainers/front_pics/crush_kin_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_crush_kin:: @ 8E663D8
+gTrainerPalette_CrushKin:: @ 8E663D8
 	.incbin "graphics/trainers/palettes/crush_kin.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_sis_and_bro_front_pic:: @ 8E66400
+gTrainerFrontPic_SisAndBro:: @ 8E66400
 	.incbin "graphics/trainers/front_pics/sis_and_bro_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_sis_and_bro:: @ 8E66860
+gTrainerPalette_SisAndBro:: @ 8E66860
 	.incbin "graphics/trainers/palettes/sis_and_bro.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_oak_front_pic:: @ 8E66888
-	.incbin "graphics/trainers/front_pics/oak_front_pic.4bpp.lz"
+gTrainerFrontPic_ProfessorOak:: @ 8E66888
+	.incbin "graphics/trainers/front_pics/professor_oak_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_oak:: @ 8E66BF4
-	.incbin "graphics/trainers/palettes/oak.gbapal.lz"
+gTrainerPalette_ProfessorOak:: @ 8E66BF4
+	.incbin "graphics/trainers/palettes/professor_oak.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_ruby_sapphire_brendan_front_pic2:: @ 8E66C1C
+gTrainerFrontPic_RSBrendan2:: @ 8E66C1C
 	.incbin "graphics/trainers/front_pics/ruby_sapphire_brendan_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_ruby_sapphire_brendan2:: @ 8E66F30
+gTrainerPalette_RSBrendan2:: @ 8E66F30
 	.incbin "graphics/trainers/palettes/ruby_sapphire_brendan.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_ruby_sapphire_may_front_pic2:: @ 8E66F58
+gTrainerFrontPic_RSMay2:: @ 8E66F58
 	.incbin "graphics/trainers/front_pics/ruby_sapphire_may_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_ruby_sapphire_may2:: @ 8E67258
+gTrainerPalette_RSMay2:: @ 8E67258
 	.incbin "graphics/trainers/palettes/ruby_sapphire_may.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_red_front_pic:: @ 8E67280
+gTrainerFrontPic_Red:: @ 8E67280
 	.incbin "graphics/trainers/front_pics/red_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_red:: @ 8E6758C
+gTrainerPalette_Red:: @ 8E6758C
 	.incbin "graphics/trainers/palettes/red.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_leaf_front_pic:: @ 8E675B4
+gTrainerFrontPic_Leaf:: @ 8E675B4
 	.incbin "graphics/trainers/front_pics/leaf_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_leaf:: @ 8E678F0
+gTrainerPalette_Leaf:: @ 8E678F0
 	.incbin "graphics/trainers/palettes/leaf.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_rocket_grunt_f_front_pic:: @ 8E67918
+gTrainerFrontPic_RocketGruntF:: @ 8E67918
 	.incbin "graphics/trainers/front_pics/rocket_grunt_f_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_rocket_grunt_f:: @ 8E67C30
+gTrainerPalette_RocketGruntF:: @ 8E67C30
 	.incbin "graphics/trainers/palettes/rocket_grunt_f.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_psychic_f_front_pic:: @ 8E67C58
+gTrainerFrontPic_PsychicF:: @ 8E67C58
 	.incbin "graphics/trainers/front_pics/psychic_f_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_psychic_f:: @ 8E67FF8
+gTrainerPalette_PsychicF:: @ 8E67FF8
 	.incbin "graphics/trainers/palettes/psychic_f.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_crush_girl_front_pic:: @ 8E68020
+gTrainerFrontPic_CrushGirl:: @ 8E68020
 	.incbin "graphics/trainers/front_pics/crush_girl_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_crush_girl:: @ 8E6832C
+gTrainerPalette_CrushGirl:: @ 8E6832C
 	.incbin "graphics/trainers/palettes/crush_girl.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_tuber_front_pic:: @ 8E68354
-	.incbin "graphics/trainers/front_pics/tuber_front_pic.4bpp.lz"
+gTrainerFrontPic_TuberF:: @ 8E68354
+	.incbin "graphics/trainers/front_pics/tuber_f_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_tuber:: @ 8E68658
-	.incbin "graphics/trainers/palettes/tuber.gbapal.lz"
+gTrainerPalette_TuberF:: @ 8E68658
+	.incbin "graphics/trainers/palettes/tuber_f.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_pokemon_breeder_front_pic:: @ 8E68680
-	.incbin "graphics/trainers/front_pics/pokemon_breeder_front_pic.4bpp.lz"
+gTrainerFrontPic_PokemonBreederF:: @ 8E68680
+	.incbin "graphics/trainers/front_pics/pokemon_breeder_f_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_pokemon_breeder:: @ 8E689C0
-	.incbin "graphics/trainers/palettes/pokemon_breeder.gbapal.lz"
+gTrainerPalette_PokemonBreederF:: @ 8E689C0
+	.incbin "graphics/trainers/palettes/pokemon_breeder_f.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_pokemon_ranger_m_front_pic:: @ 8E689E8
+gTrainerFrontPic_PokemonRangerM:: @ 8E689E8
 	.incbin "graphics/trainers/front_pics/pokemon_ranger_m_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_pokemon_ranger_m:: @ 8E68D48
+gTrainerPalette_PokemonRangerM:: @ 8E68D48
 	.incbin "graphics/trainers/palettes/pokemon_ranger_m.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_pokemon_ranger_f_front_pic:: @ 8E68D70
+gTrainerFrontPic_PokemonRangerF:: @ 8E68D70
 	.incbin "graphics/trainers/front_pics/pokemon_ranger_f_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_pokemon_ranger_f:: @ 8E690A4
+gTrainerPalette_PokemonRangerF:: @ 8E690A4
 	.incbin "graphics/trainers/palettes/pokemon_ranger_f.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_aroma_lady_front_pic:: @ 8E690CC
+gTrainerFrontPic_AromaLady:: @ 8E690CC
 	.incbin "graphics/trainers/front_pics/aroma_lady_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_aroma_lady:: @ 8E6941C
+gTrainerPalette_AromaLady:: @ 8E6941C
 	.incbin "graphics/trainers/palettes/aroma_lady.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_ruin_maniac_front_pic:: @ 8E69444
+gTrainerFrontPic_RuinManiac:: @ 8E69444
 	.incbin "graphics/trainers/front_pics/ruin_maniac_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_ruin_maniac:: @ 8E69850
+gTrainerPalette_RuinManiac:: @ 8E69850
 	.incbin "graphics/trainers/palettes/ruin_maniac.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_lady_front_pic:: @ 8E69878
+gTrainerFrontPic_Lady:: @ 8E69878
 	.incbin "graphics/trainers/front_pics/lady_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_lady:: @ 8E69BA0
+gTrainerPalette_Lady:: @ 8E69BA0
 	.incbin "graphics/trainers/palettes/lady.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_front_pics_painter_front_pic:: @ 8E69BC8
+gTrainerFrontPic_Painter:: @ 8E69BC8
 	.incbin "graphics/trainers/front_pics/painter_front_pic.4bpp.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_painter:: @ 8E69E94
+gTrainerPalette_Painter:: @ 8E69E94
 	.incbin "graphics/trainers/palettes/painter.gbapal.lz"
 
 	.align 2
@@ -13412,27 +13412,27 @@ gTrainerBackPic_OldMan:: @ 8E70EBC
 	.incbin "graphics/trainers/back_pics/old_man_back_pic.4bpp"
 
 	.align 2
-gTrainerBackPic_RubySapphireBrendan:: @ 8E72EBC
+gTrainerBackPic_RSBrendan:: @ 8E72EBC
 	.incbin "graphics/trainers/back_pics/ruby_sapphire_brendan_back_pic.4bpp"
 
 	.align 2
-gTrainerBackPic_RubySapphireMay:: @ 8E74EBC
+gTrainerBackPic_RSMay:: @ 8E74EBC
 	.incbin "graphics/trainers/back_pics/ruby_sapphire_may_back_pic.4bpp"
 
 	.align 2
-gFile_graphics_trainers_palettes_leaf_back_pic:: @ 8E76EBC
+gTrainerPalette_LeafBackPic:: @ 8E76EBC
 	.incbin "graphics/trainers/palettes/leaf_back_pic.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_red_back_pic:: @ 8E76EE4
+gTrainerPalette_RedBackPic:: @ 8E76EE4
 	.incbin "graphics/trainers/palettes/red_back_pic.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_pokedude_back_pic:: @ 8E76F0C
+gTrainerPalette_PokeDudeBackPic:: @ 8E76F0C
 	.incbin "graphics/trainers/palettes/pokedude_back_pic.gbapal.lz"
 
 	.align 2
-gFile_graphics_trainers_palettes_old_man_back_pic:: @ 8E76F34
+gTrainerPalette_OldManBackPic:: @ 8E76F34
 	.incbin "graphics/trainers/palettes/old_man_back_pic.gbapal.lz"
 
 	.align 2

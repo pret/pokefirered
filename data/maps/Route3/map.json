@@ -158,7 +158,7 @@
       "y": 9,
       "elevation": 3,
       "item": "ITEM_ORAN_BERRY",
-      "flag": "113",
+      "flag": "HIDDEN_ITEM_ROUTE3_ORAN_BERRY",
       "unknown": 1
     }
   ]

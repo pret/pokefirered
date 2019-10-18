@@ -132,7 +132,7 @@
       "y": 8,
       "elevation": 0,
       "item": "ITEM_WATER_STONE",
-      "flag": "30",
+      "flag": "HIDDEN_ITEM_SEAFOAM_ISLANDS_B4F_WATER_STONE",
       "unknown": 1
     },
     {

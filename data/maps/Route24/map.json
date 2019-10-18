@@ -157,7 +157,7 @@
       "y": 4,
       "elevation": 3,
       "item": "ITEM_PECHA_BERRY",
-      "flag": "115",
+      "flag": "HIDDEN_ITEM_ROUTE24_PECHA_BERRY",
       "unknown": 1
     }
   ]

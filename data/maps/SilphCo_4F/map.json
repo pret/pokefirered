@@ -233,7 +233,7 @@
       "y": 20,
       "elevation": 0,
       "item": "ITEM_IRON",
-      "flag": "137",
+      "flag": "HIDDEN_ITEM_SILPH_CO_4F_IRON",
       "unknown": 1
     },
     {

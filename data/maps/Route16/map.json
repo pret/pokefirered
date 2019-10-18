@@ -214,7 +214,7 @@
       "y": 13,
       "elevation": 3,
       "item": "ITEM_LEFTOVERS",
-      "flag": "132",
+      "flag": "HIDDEN_ITEM_ROUTE16_LEFTOVERS",
       "unknown": 129
     }
   ]

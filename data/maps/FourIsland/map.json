@@ -243,7 +243,7 @@
       "y": 34,
       "elevation": 3,
       "item": "ITEM_PEARL",
-      "flag": "168",
+      "flag": "HIDDEN_ITEM_FOUR_ISLAND_PEARL",
       "unknown": 1
     },
     {
@@ -251,8 +251,8 @@
       "x": 6,
       "y": 21,
       "elevation": 3,
-      "item": "POCKET_KEY_ITEMS",
-      "flag": "169",
+      "item": "ITEM_ULTRA_BALL",
+      "flag": "HIDDEN_ITEM_FOUR_ISLAND_ULTRA_BALL",
       "unknown": 1
     },
     {

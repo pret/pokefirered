@@ -232,7 +232,7 @@
       "y": 5,
       "elevation": 0,
       "item": "ITEM_ESCAPE_ROPE",
-      "flag": "41",
+      "flag": "HIDDEN_ITEM_ROUTE11_ESCAPE_ROPE",
       "unknown": 1
     }
   ]

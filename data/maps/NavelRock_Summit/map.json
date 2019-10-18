@@ -54,7 +54,7 @@
       "y": 11,
       "elevation": 3,
       "item": "ITEM_SACRED_ASH",
-      "flag": "160",
+      "flag": "HIDDEN_ITEM_NAVEL_ROCK_SUMMIT_SACRED_ASH",
       "unknown": 129
     }
   ]

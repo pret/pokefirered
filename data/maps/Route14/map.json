@@ -236,7 +236,7 @@
       "y": 20,
       "elevation": 3,
       "item": "ITEM_ZINC",
-      "flag": "149",
+      "flag": "HIDDEN_ITEM_ROUTE14_ZINC",
       "unknown": 1
     },
     {
@@ -245,7 +245,7 @@
       "y": 53,
       "elevation": 3,
       "item": "ITEM_PINAP_BERRY",
-      "flag": "157",
+      "flag": "HIDDEN_ITEM_ROUTE14_PINAP_BERRY",
       "unknown": 1
     }
   ]

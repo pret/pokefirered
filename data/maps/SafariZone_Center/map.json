@@ -142,7 +142,7 @@
       "y": 15,
       "elevation": 3,
       "item": "ITEM_LEAF_STONE",
-      "flag": "22",
+      "flag": "HIDDEN_ITEM_SAFARI_ZONE_CENTER_LEAF_STONE",
       "unknown": 1
     },
     {

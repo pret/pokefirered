@@ -181,7 +181,7 @@
       "y": 11,
       "elevation": 3,
       "item": "ITEM_REVIVE",
-      "flag": "23",
+      "flag": "HIDDEN_ITEM_SAFARI_ZONE_WEST_REVIVE",
       "unknown": 1
     }
   ]

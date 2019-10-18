@@ -197,7 +197,7 @@
       "y": 7,
       "elevation": 0,
       "item": "ITEM_ETHER",
-      "flag": "6",
+      "flag": "HIDDEN_ITEM_ROUTE9_ETHER",
       "unknown": 1
     },
     {
@@ -206,7 +206,7 @@
       "y": 2,
       "elevation": 3,
       "item": "ITEM_RARE_CANDY",
-      "flag": "123",
+      "flag": "HIDDEN_ITEM_ROUTE9_RARE_CANDY",
       "unknown": 1
     },
     {
@@ -215,7 +215,7 @@
       "y": 2,
       "elevation": 3,
       "item": "ITEM_CHESTO_BERRY",
-      "flag": "150",
+      "flag": "HIDDEN_ITEM_ROUTE9_CHESTO_BERRY",
       "unknown": 1
     }
   ]

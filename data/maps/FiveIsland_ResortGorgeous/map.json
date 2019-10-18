@@ -148,7 +148,7 @@
       "y": 7,
       "elevation": 3,
       "item": "ITEM_NEST_BALL",
-      "flag": "174",
+      "flag": "HIDDEN_ITEM_FIVE_ISLAND_RESORT_GORGEOUS_NEST_BALL",
       "unknown": 1
     },
     {
@@ -157,7 +157,7 @@
       "y": 11,
       "elevation": 3,
       "item": "ITEM_STARDUST",
-      "flag": "175",
+      "flag": "HIDDEN_ITEM_FIVE_ISLAND_RESORT_GORGEOUS_STARDUST",
       "unknown": 1
     },
     {
@@ -166,7 +166,7 @@
       "y": 12,
       "elevation": 3,
       "item": "ITEM_STAR_PIECE",
-      "flag": "176",
+      "flag": "HIDDEN_ITEM_FIVE_ISLAND_RESORT_GORGEOUS_STAR_PIECE",
       "unknown": 1
     },
     {
@@ -175,7 +175,7 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_STARDUST",
-      "flag": "177",
+      "flag": "HIDDEN_ITEM_FIVE_ISLAND_RESORT_GORGEOUS_STARDUST_2",
       "unknown": 1
     },
     {

@@ -131,7 +131,7 @@
       "y": 10,
       "elevation": 3,
       "item": "ITEM_HEART_SCALE",
-      "flag": "65",
+      "flag": "HIDDEN_ITEM_SEVEN_ISLAND_TANOBY_RUINS_HEART_SCALE",
       "unknown": 1
     },
     {
@@ -140,7 +140,7 @@
       "y": 9,
       "elevation": 3,
       "item": "ITEM_HEART_SCALE",
-      "flag": "66",
+      "flag": "HIDDEN_ITEM_SEVEN_ISLAND_TANOBY_RUINS_HEART_SCALE_2",
       "unknown": 1
     },
     {
@@ -149,7 +149,7 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_HEART_SCALE",
-      "flag": "67",
+      "flag": "HIDDEN_ITEM_SEVEN_ISLAND_TANOBY_RUINS_HEART_SCALE_3",
       "unknown": 1
     },
     {
@@ -158,7 +158,7 @@
       "y": 2,
       "elevation": 3,
       "item": "ITEM_HEART_SCALE",
-      "flag": "64",
+      "flag": "HIDDEN_ITEM_SEVEN_ISLAND_TANOBY_RUINS_HEART_SCALE_4",
       "unknown": 1
     }
   ]

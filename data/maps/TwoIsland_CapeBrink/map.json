@@ -36,7 +36,7 @@
       "y": 28,
       "elevation": 3,
       "item": "ITEM_PP_MAX",
-      "flag": "161",
+      "flag": "HIDDEN_ITEM_TWO_ISLAND_CAPE_BRINK_PP_MAX",
       "unknown": 129
     },
     {
@@ -45,7 +45,7 @@
       "y": 13,
       "elevation": 3,
       "item": "ITEM_RARE_CANDY",
-      "flag": "111",
+      "flag": "HIDDEN_ITEM_TWO_ISLAND_CAPE_BRINK_RARE_CANDY",
       "unknown": 1
     }
   ]

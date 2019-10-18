@@ -37,7 +37,7 @@
       "y": 3,
       "elevation": 3,
       "item": "ITEM_POTION",
-      "flag": "77",
+      "flag": "HIDDEN_ITEM_UNDERGROUND_PATH_EAST_WEST_TUNNEL_POTION",
       "unknown": 1
     },
     {
@@ -46,7 +46,7 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_PARALYZE_HEAL",
-      "flag": "79",
+      "flag": "HIDDEN_ITEM_UNDERGROUND_PATH_EAST_WEST_TUNNEL_PARALYZE_HEAL",
       "unknown": 1
     },
     {
@@ -55,7 +55,7 @@
       "y": 4,
       "elevation": 3,
       "item": "ITEM_AWAKENING",
-      "flag": "80",
+      "flag": "HIDDEN_ITEM_UNDERGROUND_PATH_EAST_WEST_TUNNEL_AWAKENING",
       "unknown": 1
     },
     {
@@ -64,7 +64,7 @@
       "y": 3,
       "elevation": 3,
       "item": "ITEM_BURN_HEAL",
-      "flag": "81",
+      "flag": "HIDDEN_ITEM_UNDERGROUND_PATH_EAST_WEST_TUNNEL_BURN_HEAL",
       "unknown": 1
     },
     {
@@ -73,7 +73,7 @@
       "y": 3,
       "elevation": 3,
       "item": "ITEM_ICE_HEAL",
-      "flag": "82",
+      "flag": "HIDDEN_ITEM_UNDERGROUND_PATH_EAST_WEST_TUNNEL_ICE_HEAL",
       "unknown": 1
     },
     {
@@ -82,7 +82,7 @@
       "y": 2,
       "elevation": 3,
       "item": "ITEM_ETHER",
-      "flag": "83",
+      "flag": "HIDDEN_ITEM_UNDERGROUND_PATH_EAST_WEST_TUNNEL_ETHER",
       "unknown": 1
     },
     {
@@ -91,7 +91,7 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_ANTIDOTE",
-      "flag": "78",
+      "flag": "HIDDEN_ITEM_UNDERGROUND_PATH_EAST_WEST_TUNNEL_ANTIDOTE",
       "unknown": 1
     }
   ]

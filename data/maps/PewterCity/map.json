@@ -273,8 +273,8 @@
       "x": 6,
       "y": 3,
       "elevation": 3,
-      "item": "POCKET_TM_CASE",
-      "flag": "112",
+      "item": "ITEM_POKE_BALL",
+      "flag": "HIDDEN_ITEM_PEWTER_CITY_POKE_BALL",
       "unknown": 1
     }
   ]

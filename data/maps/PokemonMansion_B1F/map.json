@@ -130,7 +130,7 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_ELIXIR",
-      "flag": "33",
+      "flag": "HIDDEN_ITEM_POKEMON_MANSION_B1F_ELIXIR",
       "unknown": 1
     }
   ]

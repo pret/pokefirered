@@ -190,7 +190,7 @@
       "y": 16,
       "elevation": 0,
       "item": "ITEM_ELIXIR",
-      "flag": "24",
+      "flag": "HIDDEN_ITEM_SILPH_CO_5F_ELIXIR",
       "unknown": 1
     },
     {
@@ -304,7 +304,7 @@
       "y": 9,
       "elevation": 0,
       "item": "ITEM_PP_UP",
-      "flag": "138",
+      "flag": "HIDDEN_ITEM_SILPH_CO_5F_PP_UP",
       "unknown": 1
     },
     {

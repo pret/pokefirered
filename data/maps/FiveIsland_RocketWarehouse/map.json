@@ -203,7 +203,7 @@
       "y": 2,
       "elevation": 0,
       "item": "ITEM_NEST_BALL",
-      "flag": "68",
+      "flag": "HIDDEN_ITEM_FIVE_ISLAND_ROCKET_WAREHOUSE_NEST_BALL",
       "unknown": 1
     },
     {
@@ -212,7 +212,7 @@
       "y": 16,
       "elevation": 0,
       "item": "ITEM_NET_BALL",
-      "flag": "69",
+      "flag": "HIDDEN_ITEM_FIVE_ISLAND_ROCKET_WAREHOUSE_NET_BALL",
       "unknown": 1
     },
     {

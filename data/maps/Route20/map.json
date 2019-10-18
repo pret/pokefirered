@@ -206,7 +206,7 @@
       "y": 6,
       "elevation": 3,
       "item": "ITEM_STARDUST",
-      "flag": "153",
+      "flag": "HIDDEN_ITEM_ROUTE20_STARDUST",
       "unknown": 1
     }
   ]

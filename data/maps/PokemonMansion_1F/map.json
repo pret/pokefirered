@@ -166,7 +166,7 @@
       "y": 21,
       "elevation": 0,
       "item": "ITEM_MOON_STONE",
-      "flag": "31",
+      "flag": "HIDDEN_ITEM_POKEMON_MANSION_1F_MOON_STONE",
       "unknown": 1
     }
   ]

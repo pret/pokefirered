@@ -128,7 +128,7 @@
       "y": 23,
       "elevation": 3,
       "item": "ITEM_STAR_PIECE",
-      "flag": "178",
+      "flag": "HIDDEN_ITEM_SIX_ISLAND_OUTCAST_ISLAND_STAR_PIECE",
       "unknown": 1
     },
     {
@@ -137,7 +137,7 @@
       "y": 24,
       "elevation": 3,
       "item": "ITEM_NET_BALL",
-      "flag": "179",
+      "flag": "HIDDEN_ITEM_SIX_ISLAND_OUTCAST_ISLAND_NET_BALL",
       "unknown": 1
     }
   ]

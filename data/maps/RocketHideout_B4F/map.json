@@ -162,7 +162,7 @@
       "y": 6,
       "elevation": 3,
       "item": "ITEM_NEST_BALL",
-      "flag": "13",
+      "flag": "HIDDEN_ITEM_ROCKET_HIDEOUT_B4F_NEST_BALL",
       "unknown": 1
     },
     {
@@ -171,7 +171,7 @@
       "y": 6,
       "elevation": 3,
       "item": "ITEM_NET_BALL",
-      "flag": "134",
+      "flag": "HIDDEN_ITEM_ROCKET_HIDEOUT_B4F_NET_BALL",
       "unknown": 1
     }
   ]

@@ -168,7 +168,7 @@
       "y": 5,
       "elevation": 0,
       "item": "ITEM_MAX_REPEL",
-      "flag": "165",
+      "flag": "HIDDEN_ITEM_THREE_ISLAND_BOND_BRIDGE_MAX_REPEL",
       "unknown": 1
     },
     {
@@ -177,7 +177,7 @@
       "y": 12,
       "elevation": 3,
       "item": "ITEM_PEARL",
-      "flag": "166",
+      "flag": "HIDDEN_ITEM_THREE_ISLAND_BOND_BRIDGE_PEARL",
       "unknown": 1
     },
     {
@@ -186,7 +186,7 @@
       "y": 7,
       "elevation": 3,
       "item": "ITEM_STARDUST",
-      "flag": "167",
+      "flag": "HIDDEN_ITEM_THREE_ISLAND_BOND_BRIDGE_STARDUST",
       "unknown": 1
     },
     {

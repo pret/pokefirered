@@ -251,7 +251,7 @@
       "y": 10,
       "elevation": 3,
       "item": "ITEM_RAWST_BERRY",
-      "flag": "127",
+      "flag": "HIDDEN_ITEM_ROUTE8_RAWST_BERRY",
       "unknown": 1
     },
     {
@@ -260,7 +260,7 @@
       "y": 11,
       "elevation": 3,
       "item": "ITEM_LUM_BERRY",
-      "flag": "128",
+      "flag": "HIDDEN_ITEM_ROUTE8_LUM_BERRY",
       "unknown": 1
     },
     {
@@ -269,7 +269,7 @@
       "y": 15,
       "elevation": 3,
       "item": "ITEM_LEPPA_BERRY",
-      "flag": "129",
+      "flag": "HIDDEN_ITEM_ROUTE8_LEPPA_BERRY",
       "unknown": 1
     }
   ]

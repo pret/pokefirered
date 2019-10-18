@@ -178,7 +178,7 @@
       "y": 76,
       "elevation": 3,
       "item": "ITEM_ASPEAR_BERRY",
-      "flag": "181",
+      "flag": "HIDDEN_ITEM_SIX_ISLAND_WATER_PATH_ASPEAR_BERRY",
       "unknown": 1
     },
     {
@@ -187,7 +187,7 @@
       "y": 8,
       "elevation": 3,
       "item": "ITEM_ORAN_BERRY",
-      "flag": "182",
+      "flag": "HIDDEN_ITEM_SIX_ISLAND_WATER_PATH_ORAN_BERRY",
       "unknown": 1
     },
     {
@@ -196,7 +196,7 @@
       "y": 63,
       "elevation": 3,
       "item": "ITEM_PINAP_BERRY",
-      "flag": "183",
+      "flag": "HIDDEN_ITEM_SIX_ISLAND_WATER_PATH_PINAP_BERRY",
       "unknown": 1
     },
     {

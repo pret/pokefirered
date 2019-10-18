@@ -89,8 +89,8 @@
       "x": 12,
       "y": 9,
       "elevation": 3,
-      "item": "POCKET_KEY_ITEMS",
-      "flag": "180",
+      "item": "ITEM_ULTRA_BALL",
+      "flag": "HIDDEN_ITEM_SIX_ISLAND_GREEN_PATH_ULTRA_BALL",
       "unknown": 1
     }
   ]

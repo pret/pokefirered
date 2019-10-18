@@ -533,7 +533,7 @@
       "y": 42,
       "elevation": 0,
       "item": "ITEM_FULL_RESTORE",
-      "flag": "34",
+      "flag": "HIDDEN_ITEM_ROUTE23_FULL_RESTORE",
       "unknown": 1
     },
     {
@@ -541,8 +541,8 @@
       "x": 20,
       "y": 72,
       "elevation": 0,
-      "item": "POCKET_KEY_ITEMS",
-      "flag": "35",
+      "item": "ITEM_ULTRA_BALL",
+      "flag": "HIDDEN_ITEM_ROUTE23_ULTRA_BALL",
       "unknown": 1
     },
     {
@@ -551,7 +551,7 @@
       "y": 101,
       "elevation": 3,
       "item": "ITEM_MAX_ETHER",
-      "flag": "36",
+      "flag": "HIDDEN_ITEM_ROUTE23_MAX_ETHER",
       "unknown": 1
     },
     {
@@ -560,7 +560,7 @@
       "y": 18,
       "elevation": 3,
       "item": "ITEM_LUM_BERRY",
-      "flag": "145",
+      "flag": "HIDDEN_ITEM_ROUTE23_LUM_BERRY",
       "unknown": 1
     },
     {
@@ -569,7 +569,7 @@
       "y": 29,
       "elevation": 3,
       "item": "ITEM_SITRUS_BERRY",
-      "flag": "146",
+      "flag": "HIDDEN_ITEM_ROUTE23_SITRUS_BERRY",
       "unknown": 1
     },
     {
@@ -578,7 +578,7 @@
       "y": 67,
       "elevation": 3,
       "item": "ITEM_ASPEAR_BERRY",
-      "flag": "147",
+      "flag": "HIDDEN_ITEM_ROUTE23_ASPEAR_BERRY",
       "unknown": 1
     },
     {
@@ -587,7 +587,7 @@
       "y": 128,
       "elevation": 3,
       "item": "ITEM_LEPPA_BERRY",
-      "flag": "148",
+      "flag": "HIDDEN_ITEM_ROUTE23_LEPPA_BERRY",
       "unknown": 1
     },
     {
@@ -596,7 +596,7 @@
       "y": 8,
       "elevation": 3,
       "item": "ITEM_MAX_ELIXIR",
-      "flag": "155",
+      "flag": "HIDDEN_ITEM_ROUTE23_MAX_ELIXIR",
       "unknown": 1
     },
     {

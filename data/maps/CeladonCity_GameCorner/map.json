@@ -195,7 +195,7 @@
       "y": 4,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "51",
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_NONE",
       "unknown": 10
     },
     {
@@ -204,7 +204,7 @@
       "y": 8,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "52",
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_NONE_2",
       "unknown": 10
     },
     {
@@ -213,7 +213,7 @@
       "y": 11,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "53",
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_NONE_3",
       "unknown": 20
     },
     {
@@ -222,7 +222,7 @@
       "y": 12,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "54",
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_NONE_4",
       "unknown": 10
     },
     {
@@ -231,7 +231,7 @@
       "y": 9,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "55",
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_NONE_5",
       "unknown": 10
     },
     {
@@ -240,7 +240,7 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "56",
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_NONE_6",
       "unknown": 20
     },
     {
@@ -249,7 +249,7 @@
       "y": 4,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "57",
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_NONE_7",
       "unknown": 10
     },
     {
@@ -258,7 +258,7 @@
       "y": 3,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "58",
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_NONE_8",
       "unknown": 10
     },
     {
@@ -267,7 +267,7 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "59",
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_NONE_9",
       "unknown": 10
     },
     {
@@ -276,7 +276,7 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "60",
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_NONE_10",
       "unknown": 40
     },
     {
@@ -285,7 +285,7 @@
       "y": 13,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "61",
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_NONE_11",
       "unknown": 100
     },
     {
@@ -294,7 +294,7 @@
       "y": 12,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "62",
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_NONE_12",
       "unknown": 10
     },
     {

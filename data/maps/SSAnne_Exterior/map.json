@@ -72,7 +72,7 @@
       "y": 28,
       "elevation": 3,
       "item": "ITEM_LAVA_COOKIE",
-      "flag": "190",
+      "flag": "HIDDEN_ITEM_SSANNE_EXTERIOR_LAVA_COOKIE",
       "unknown": 1
     }
   ]

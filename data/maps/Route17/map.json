@@ -206,7 +206,7 @@
       "y": 83,
       "elevation": 3,
       "item": "ITEM_RARE_CANDY",
-      "flag": "17",
+      "flag": "HIDDEN_ITEM_ROUTE17_RARE_CANDY",
       "unknown": 1
     },
     {
@@ -215,7 +215,7 @@
       "y": 53,
       "elevation": 3,
       "item": "ITEM_FULL_RESTORE",
-      "flag": "18",
+      "flag": "HIDDEN_ITEM_ROUTE17_FULL_RESTORE",
       "unknown": 1
     },
     {
@@ -224,7 +224,7 @@
       "y": 68,
       "elevation": 3,
       "item": "ITEM_PP_UP",
-      "flag": "19",
+      "flag": "HIDDEN_ITEM_ROUTE17_PP_UP",
       "unknown": 1
     },
     {
@@ -233,7 +233,7 @@
       "y": 125,
       "elevation": 3,
       "item": "ITEM_MAX_REVIVE",
-      "flag": "20",
+      "flag": "HIDDEN_ITEM_ROUTE17_MAX_REVIVE",
       "unknown": 1
     },
     {
@@ -242,7 +242,7 @@
       "y": 157,
       "elevation": 3,
       "item": "ITEM_MAX_ELIXIR",
-      "flag": "21",
+      "flag": "HIDDEN_ITEM_ROUTE17_MAX_ELIXIR",
       "unknown": 1
     }
   ]

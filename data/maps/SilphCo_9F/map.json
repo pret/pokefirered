@@ -111,7 +111,7 @@
       "y": 14,
       "elevation": 3,
       "item": "ITEM_MAX_POTION",
-      "flag": "25",
+      "flag": "HIDDEN_ITEM_SILPH_CO_9F_MAX_POTION",
       "unknown": 1
     },
     {
@@ -232,7 +232,7 @@
       "y": 8,
       "elevation": 0,
       "item": "ITEM_CALCIUM",
-      "flag": "142",
+      "flag": "HIDDEN_ITEM_SILPH_CO_9F_CALCIUM",
       "unknown": 1
     },
     {

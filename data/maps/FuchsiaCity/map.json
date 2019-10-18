@@ -402,7 +402,7 @@
       "y": 26,
       "elevation": 3,
       "item": "ITEM_MAX_REVIVE",
-      "flag": "133",
+      "flag": "HIDDEN_ITEM_FUCHSIA_CITY_MAX_REVIVE",
       "unknown": 1
     }
   ]

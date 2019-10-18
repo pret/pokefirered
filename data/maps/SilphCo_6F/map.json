@@ -217,7 +217,7 @@
       "y": 8,
       "elevation": 0,
       "item": "ITEM_CARBOS",
-      "flag": "139",
+      "flag": "HIDDEN_ITEM_SILPH_CO_6F_CARBOS",
       "unknown": 1
     },
     {

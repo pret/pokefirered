@@ -354,7 +354,7 @@
       "y": 17,
       "elevation": 0,
       "item": "ITEM_FIRE_STONE",
-      "flag": "158",
+      "flag": "HIDDEN_ITEM_MT_EMBER_EXTERIOR_FIRE_STONE",
       "unknown": 1
     },
     {
@@ -362,8 +362,8 @@
       "x": 8,
       "y": 30,
       "elevation": 3,
-      "item": "POCKET_KEY_ITEMS",
-      "flag": "162",
+      "item": "ITEM_ULTRA_BALL",
+      "flag": "HIDDEN_ITEM_MT_EMBER_EXTERIOR_ULTRA_BALL",
       "unknown": 1
     }
   ]

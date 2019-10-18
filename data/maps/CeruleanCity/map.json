@@ -373,7 +373,7 @@
       "y": 7,
       "elevation": 3,
       "item": "ITEM_RARE_CANDY",
-      "flag": "49",
+      "flag": "HIDDEN_ITEM_CERULEAN_CITY_RARE_CANDY",
       "unknown": 1
     },
     {

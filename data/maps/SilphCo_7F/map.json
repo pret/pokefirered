@@ -312,7 +312,7 @@
       "y": 11,
       "elevation": 0,
       "item": "ITEM_ZINC",
-      "flag": "140",
+      "flag": "HIDDEN_ITEM_SILPH_CO_7F_ZINC",
       "unknown": 1
     },
     {

@@ -198,7 +198,7 @@
       "y": 14,
       "elevation": 3,
       "item": "ITEM_PP_UP",
-      "flag": "15",
+      "flag": "HIDDEN_ITEM_ROUTE13_PP_UP",
       "unknown": 1
     }
   ]

@@ -202,7 +202,7 @@
       "y": 18,
       "elevation": 0,
       "item": "ITEM_PROTEIN",
-      "flag": "136",
+      "flag": "HIDDEN_ITEM_SILPH_CO_3F_PROTEIN",
       "unknown": 1
     },
     {

@@ -55,7 +55,7 @@
       "y": 20,
       "elevation": 3,
       "item": "ITEM_STARDUST",
-      "flag": "103",
+      "flag": "HIDDEN_ITEM_ONE_ISLAND_TREASURE_BEACH_STARDUST",
       "unknown": 1
     },
     {
@@ -64,7 +64,7 @@
       "y": 27,
       "elevation": 3,
       "item": "ITEM_STARDUST",
-      "flag": "104",
+      "flag": "HIDDEN_ITEM_ONE_ISLAND_TREASURE_BEACH_STARDUST_2",
       "unknown": 1
     },
     {
@@ -73,7 +73,7 @@
       "y": 31,
       "elevation": 3,
       "item": "ITEM_PEARL",
-      "flag": "105",
+      "flag": "HIDDEN_ITEM_ONE_ISLAND_TREASURE_BEACH_PEARL",
       "unknown": 1
     },
     {
@@ -82,7 +82,7 @@
       "y": 34,
       "elevation": 3,
       "item": "ITEM_PEARL",
-      "flag": "106",
+      "flag": "HIDDEN_ITEM_ONE_ISLAND_TREASURE_BEACH_PEARL_2",
       "unknown": 1
     },
     {
@@ -90,8 +90,8 @@
       "x": 15,
       "y": 22,
       "elevation": 3,
-      "item": "POCKET_KEY_ITEMS",
-      "flag": "107",
+      "item": "ITEM_ULTRA_BALL",
+      "flag": "HIDDEN_ITEM_ONE_ISLAND_TREASURE_BEACH_ULTRA_BALL",
       "unknown": 1
     },
     {
@@ -99,8 +99,8 @@
       "x": 16,
       "y": 33,
       "elevation": 3,
-      "item": "POCKET_KEY_ITEMS",
-      "flag": "108",
+      "item": "ITEM_ULTRA_BALL",
+      "flag": "HIDDEN_ITEM_ONE_ISLAND_TREASURE_BEACH_ULTRA_BALL_2",
       "unknown": 1
     },
     {
@@ -109,7 +109,7 @@
       "y": 29,
       "elevation": 3,
       "item": "ITEM_STAR_PIECE",
-      "flag": "109",
+      "flag": "HIDDEN_ITEM_ONE_ISLAND_TREASURE_BEACH_STAR_PIECE",
       "unknown": 1
     },
     {
@@ -118,7 +118,7 @@
       "y": 27,
       "elevation": 3,
       "item": "ITEM_BIG_PEARL",
-      "flag": "110",
+      "flag": "HIDDEN_ITEM_ONE_ISLAND_TREASURE_BEACH_BIG_PEARL",
       "unknown": 1
     }
   ]

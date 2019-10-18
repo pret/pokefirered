@@ -189,7 +189,7 @@
       "y": 2,
       "elevation": 3,
       "item": "ITEM_MACHO_BRACE",
-      "flag": "189",
+      "flag": "HIDDEN_ITEM_VIRIDIAN_CITY_GYM_MACHO_BRACE",
       "unknown": 129
     }
   ]

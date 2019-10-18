@@ -160,8 +160,8 @@
       "x": 43,
       "y": 2,
       "elevation": 3,
-      "item": "POCKET_POKE_BALLS",
-      "flag": "50",
+      "item": "ITEM_GREAT_BALL",
+      "flag": "HIDDEN_ITEM_ROUTE4_GREAT_BALL",
       "unknown": 1
     },
     {
@@ -170,7 +170,7 @@
       "y": 4,
       "elevation": 3,
       "item": "ITEM_PERSIM_BERRY",
-      "flag": "114",
+      "flag": "HIDDEN_ITEM_ROUTE4_PERSIM_BERRY",
       "unknown": 1
     },
     {
@@ -179,7 +179,7 @@
       "y": 17,
       "elevation": 3,
       "item": "ITEM_RAZZ_BERRY",
-      "flag": "156",
+      "flag": "HIDDEN_ITEM_ROUTE4_RAZZ_BERRY",
       "unknown": 1
     }
   ]

@@ -196,8 +196,8 @@
       "x": 12,
       "y": 2,
       "elevation": 3,
-      "item": "POCKET_KEY_ITEMS",
-      "flag": "39",
+      "item": "ITEM_ULTRA_BALL",
+      "flag": "HIDDEN_ITEM_CERULEAN_CAVE_1F_ULTRA_BALL",
       "unknown": 1
     }
   ]

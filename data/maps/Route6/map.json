@@ -141,7 +141,7 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_SITRUS_BERRY",
-      "flag": "118",
+      "flag": "HIDDEN_ITEM_ROUTE6_SITRUS_BERRY",
       "unknown": 1
     },
     {
@@ -150,7 +150,7 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_RARE_CANDY",
-      "flag": "119",
+      "flag": "HIDDEN_ITEM_ROUTE6_RARE_CANDY",
       "unknown": 1
     }
   ]

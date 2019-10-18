@@ -193,8 +193,8 @@
       "x": 11,
       "y": 21,
       "elevation": 0,
-      "item": "POCKET_KEY_ITEMS",
-      "flag": "135",
+      "item": "ITEM_ULTRA_BALL",
+      "flag": "HIDDEN_ITEM_SILPH_CO_2F_ULTRA_BALL",
       "unknown": 1
     },
     {

@@ -1717,7 +1717,7 @@ sub_8055864: @ 8055864
 	bl sub_8055CB8
 	bl sav1_reset_battle_music_maybe
 	bl mapheader_run_script_with_tag_x3
-	bl sub_815D8F8
+	bl TryRegenerateRenewableHiddenItems
 	bl not_trainer_hill_battle_pyramid
 	ldr r4, _0805591C @ =gMapHeader
 	ldr r0, [r4]
@@ -1794,7 +1794,7 @@ _08055974:
 	bl sub_8055CB8
 	bl sav1_reset_battle_music_maybe
 	bl mapheader_run_script_with_tag_x3
-	bl sub_815D8F8
+	bl TryRegenerateRenewableHiddenItems
 	bl UpdateLocationHistoryForRoamer
 	bl RoamerMoveToOtherLocationSet
 	bl sub_8110920

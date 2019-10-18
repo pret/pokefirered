@@ -365,7 +365,7 @@ sub_806CAC8: @ 806CAC8
 	movs r0, 0x5
 	bl IncrementGameStat
 	bl sub_8146CA4
-	bl sub_815D8C8
+	bl IncrementRenewableHiddenItemStepCounter
 	bl sub_80CC918
 	bl sub_80CB054
 	bl sub_80CCFBC

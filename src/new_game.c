@@ -25,6 +25,7 @@
 #include "easy_chat.h"
 #include "union_room_chat.h"
 #include "mevent.h"
+#include "renewable_hidden_items.h"
 #include "trainer_tower.h"
 #include "script.h"
 #include "berry_powder.h"
@@ -145,7 +146,7 @@ void NewGameInitData(void)
     copy_strings_to_sav1();
     ResetMiniGamesResults();
     sub_8143D24();
-    sub_815D838();
+    SetAllRenewableItemFlags();
     WarpToPlayersRoom();
     ScriptContext2_RunNewScript(EventScript_ResetAllMapFlags);
     StringCopy(gSaveBlock1Ptr->rivalName, rivalName);

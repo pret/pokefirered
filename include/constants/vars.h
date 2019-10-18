@@ -38,7 +38,7 @@
 #define VAR_REPEL_STEP_COUNT       0x4020
 #define VAR_0x4021                 0x4021
 #define VAR_ICE_STEP_COUNT         0x4022
-#define VAR_0x4023                 0x4023
+#define VAR_RENEWABLE_ITEM_STEP_COUNTER                 0x4023
 #define VAR_ALTERING_CAVE_WILD_SET 0x4024
 #define VAR_0x4025                 0x4025
 #define VAR_SECRET_BASE_MAP        0x4026

@@ -5,6 +5,7 @@
 #define FLAG_SYS_SAFARI_MODE                                        0x800
 #define FLAG_WHITE_FLUTE_ACTIVE                                     0x803
 #define FLAG_BLACK_FLUTE_ACTIVE                                     0x804
+#define FLAG_0x805                                                  0x805
 
 // World Map Flags
 #define FLAG_WORLD_MAP_PALLET_TOWN                                  0x890

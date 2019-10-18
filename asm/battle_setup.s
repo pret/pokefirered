@@ -1999,13 +1999,13 @@ BattleSetup_GetScriptAddrAfterBattle: @ 80805E8
 	ldr r0, [r0]
 	cmp r0, 0
 	bne _080805F4
-	ldr r0, _080805FC @ =gUnknown_81C555B
+	ldr r0, _080805FC @ =EventScript_1C555B
 _080805F4:
 	pop {r1}
 	bx r1
 	.align 2, 0
 _080805F8: .4byte gUnknown_20386C4
-_080805FC: .4byte gUnknown_81C555B
+_080805FC: .4byte EventScript_1C555B
 	thumb_func_end BattleSetup_GetScriptAddrAfterBattle
 
 	thumb_func_start BattleSetup_GetTrainerPostBattleScript
@@ -2015,13 +2015,13 @@ BattleSetup_GetTrainerPostBattleScript: @ 8080600
 	ldr r0, [r0]
 	cmp r0, 0
 	bne _0808060C
-	ldr r0, _08080614 @ =gUnknown_81C555B
+	ldr r0, _08080614 @ =EventScript_1C555B
 _0808060C:
 	pop {r1}
 	bx r1
 	.align 2, 0
 _08080610: .4byte gUnknown_20386C8
-_08080614: .4byte gUnknown_81C555B
+_08080614: .4byte EventScript_1C555B
 	thumb_func_end BattleSetup_GetTrainerPostBattleScript
 
 	thumb_func_start sub_8080618

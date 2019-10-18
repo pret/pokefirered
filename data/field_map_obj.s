@@ -2589,7 +2589,10 @@ gUnknown_8397E08:: @ 8397E08
 	.incbin "baserom.gba", 0x397E08, 0x100
 
 gUnknown_8397F08:: @ 8397F08
-	.incbin "baserom.gba", 0x397F08, 0x1480
+	.incbin "baserom.gba", 0x397F08, 0x100
+
+gUnknown_8398008:: @ 8398008
+	.incbin "baserom.gba", 0x398008, 0x1380
 
 gUnknown_8399388:: @ 8399388
 	.incbin "baserom.gba", 0x399388, 0x908

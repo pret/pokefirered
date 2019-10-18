@@ -1003,7 +1003,7 @@
 #define FLAG_0x3E6               0x3E6
 #define FLAG_0x3E7               0x3E7
 
-#define FLAG_TRAINER_TOWER_START 1000 // 0x3E8
+#define FLAG_HIDDEN_ITEMS_START 1000 // 0x3E8
 #define FLAG_0x3E8               0x3E8
 #define FLAG_0x3E9               0x3E9
 #define FLAG_0x3EA               0x3EA

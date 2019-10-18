@@ -105,7 +105,7 @@ string generate_map_header_text(Json map_data, Json layouts_data) {
          << "\t.byte "  << map_data["map_type"].string_value() << "\n";
 
     if (version == "firered")
-        text << "\t.byte " << map_data["unknown_18"].int_value() << "\n"
+        text << "\t.byte " << map_data["allow_cycling"].int_value() << "\n"
              << "\t.byte " << map_data["unknown_19"].int_value() << "\n";
     else
         text << "\t.2byte 0\n";

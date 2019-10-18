@@ -2589,7 +2589,7 @@ gFile_graphics_battle_anims_sprites_257_palette:: @ 8D2FB94
 
 	.align 2
 gUnknown_8D2FBB4:: @ 8D2FBB4
-	.incbin "baserom.gba", 0xD2FBB4, 0x20
+	.incbin "graphics/interface/unk_8D2FBB4.gbapal"
 
 	.align 2
 gMonFrontPic_Bulbasaur:: @ 8D2FBD4
@@ -7724,7 +7724,7 @@ gMonIcon_Heracross:: @ 8DC21A0
 	.incbin "graphics/pokemon/heracross/icon.4bpp"
 
 gUnknown_heracross_icon:: @ 8DC25A0
-	.incbin "baserom.gba", 0xDC25A0, 0x400
+	.incbin "graphics/pokemon/heracross/unk_icon.4bpp"
 
 	.align 2
 gMonFootprint_Heracross:: @ 8DC29A0
@@ -13936,13 +13936,13 @@ gUnknown_8E83604:: @ 8E83604
 	.incbin "baserom.gba", 0xE83604, 0x28
 
 gUnknown_8E8362C:: @ 8E8362C
-	.incbin "baserom.gba", 0xE8362C, 0x790
+	.incbin "graphics/interface/unk_8E8362C.4bpp.lz"
 
 gUnknown_8E83DBC:: @ 8E83DBC
-	.incbin "baserom.gba", 0xE83DBC, 0x7A4
+	.incbin "graphics/interface/unk_8E83DBC.4bpp.lz"
 
 gUnknown_8E84560:: @ 8E84560
-	.incbin "baserom.gba", 0xE84560, 0x28
+	.incbin "graphics/interface/unk_8E84560.gbapal.lz"
 	
 	.align 2
 gFile_graphics_interface_bag_swap_sheet:: @ 8E84588

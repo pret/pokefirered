@@ -12,7 +12,7 @@ BirthIsland_Exterior_MapScript1_165217:: @ 8165217
 	setworldmapflag FLAG_WORLD_MAP_BIRTH_ISLAND_EXTERIOR
 	setvar VAR_0x4010, 150
 	setvar VAR_SECRET_BASE_MAP, 0
-	setvar VAR_ALTERING_CAVE_WILD_SET, 0
+	setvar VAR_0x403E, 0
 	checkflag FLAG_0x2E4
 	call_if 1, EventScript_16523C
 	checkflag FLAG_0x2E4

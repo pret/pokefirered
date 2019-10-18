@@ -986,7 +986,7 @@
 #define FLAG_0x3D5               0x3D5
 #define FLAG_0x3D6               0x3D6
 #define FLAG_0x3D7               0x3D7
-#define FLAG_0x3D8               0x3D8
+#define FLAG_MYSTERY_EVENT_DONE               0x3D8
 #define FLAG_0x3D9               0x3D9
 #define FLAG_0x3DA               0x3DA
 #define FLAG_0x3DB               0x3DB

@@ -14,39 +14,40 @@
 MysteryEventScript_StampCard:: @ 8488E28
 	setvaddress MysteryEventScript_StampCard
 	setorcopyvar VAR_RESULT, 1
-	specialvar VAR_0x8008, sub_80CC730
+	specialvar VAR_0x8008, Special_BattleCardAction
 	setorcopyvar VAR_RESULT, 0
-	specialvar VAR_0x8009, sub_80CC730
+	specialvar VAR_0x8009, Special_BattleCardAction
 	subvar VAR_0x8008, VAR_0x8009
 	getnumberstring 0, VAR_0x8008
 	lock
 	faceplayer
-	vmessage gText_8488E55
+	vmessage sText_MysteryGiftStampCard
 	waitmessage
 	waitbuttonpress
 	release
 	end
 
-gText_8488E55:: @ 8488E55
+sText_MysteryGiftStampCard: @ 8488E55
 	.string "Thank you for using the STAMP CARD\n"
 	.string "System.\p"
 	.string "You have {STR_VAR_1} more to collect to\n"
 	.string "fill your STAMP CARD.$"
 
-gEventScript_8488EB5:: @ 8488EB5
-	setvaddress gEventScript_8488EB5
-	checkflag FLAG_0x3D8
-	vgoto_if 0, gEventScript_8488EC4
+MysteryEventScript_SurfPichu:: @ 8488EB5
+	setvaddress MysteryEventScript_SurfPichu
+	checkflag FLAG_MYSTERY_EVENT_DONE
+	vgoto_if 0, SurfPichu_GiveIfPossible
 	gotoram
-gEventScript_8488EC4:: @ 8488EC4
-	specialvar VAR_0x40B5, CalculatePlayerPartyCount
-	compare_var_to_value VAR_0x40B5, 6
-	vgoto_if 1, gEventScript_8488EEB
-	setflag FLAG_0x3D8
-	vcall gEventScript_8488EF6
+
+SurfPichu_GiveIfPossible: @ 8488EC4
+	specialvar VAR_EVENT_PICHU_SLOT, CalculatePlayerPartyCount
+	compare_var_to_value VAR_EVENT_PICHU_SLOT, 6
+	vgoto_if 1, SurfPichu_FullParty
+	setflag FLAG_MYSTERY_EVENT_DONE
+	vcall SurfPichu_GiveEgg
 	lock
 	faceplayer
-	vmessage gText_8488F56
+	vmessage sText_MysteryGiftEgg
 	waitmessage
 	waitbuttonpress
 	playfanfare MUS_FANFA4
@@ -54,52 +55,52 @@ gEventScript_8488EC4:: @ 8488EC4
 	release
 	end
 
-gEventScript_8488EEB:: @ 8488EEB
+SurfPichu_FullParty: @ 8488EEB
 	lock
 	faceplayer
-	vmessage gText_8488FE3
+	vmessage sText_FullParty
 	waitmessage
 	waitbuttonpress
 	release
 	end
 
-gEventScript_8488EF6:: @ 8488EF6
+SurfPichu_GiveEgg: @ 8488EF6
 	giveegg SPECIES_PICHU
-	setmonobedient VAR_0x40B5
-	setmonmetlocation VAR_0x40B5, 0xff
-	compare_var_to_value VAR_0x40B5, 1
-	vgoto_if 1, gEventScript_8488F38
-	compare_var_to_value VAR_0x40B5, 2
-	vgoto_if 1, gEventScript_8488F3E
-	compare_var_to_value VAR_0x40B5, 3
-	vgoto_if 1, gEventScript_8488F44
-	compare_var_to_value VAR_0x40B5, 4
-	vgoto_if 1, gEventScript_8488F4A
-	compare_var_to_value VAR_0x40B5, 5
-	vgoto_if 1, gEventScript_8488F50
+	setmonobedient VAR_EVENT_PICHU_SLOT
+	setmonmetlocation VAR_EVENT_PICHU_SLOT, 0xff
+	compare_var_to_value VAR_EVENT_PICHU_SLOT, 1
+	vgoto_if 1, SurfPichu_Slot1
+	compare_var_to_value VAR_EVENT_PICHU_SLOT, 2
+	vgoto_if 1, SurfPichu_Slot2
+	compare_var_to_value VAR_EVENT_PICHU_SLOT, 3
+	vgoto_if 1, SurfPichu_Slot3
+	compare_var_to_value VAR_EVENT_PICHU_SLOT, 4
+	vgoto_if 1, SurfPichu_Slot4
+	compare_var_to_value VAR_EVENT_PICHU_SLOT, 5
+	vgoto_if 1, SurfPichu_Slot5
 	return
 
-gEventScript_8488F38:: @ 8488F38
+SurfPichu_Slot1: @ 8488F38
 	setmonmove 1, 2, MOVE_SURF
 	return
 
-gEventScript_8488F3E:: @ 8488F3E
+SurfPichu_Slot2: @ 8488F3E
 	setmonmove 2, 2, MOVE_SURF
 	return
 
-gEventScript_8488F44:: @ 8488F44
+SurfPichu_Slot3: @ 8488F44
 	setmonmove 3, 2, MOVE_SURF
 	return
 
-gEventScript_8488F4A:: @ 8488F4A
+SurfPichu_Slot4: @ 8488F4A
 	setmonmove 4, 2, MOVE_SURF
 	return
 
-gEventScript_8488F50:: @ 8488F50
+SurfPichu_Slot5: @ 8488F50
 	setmonmove 5, 2, MOVE_SURF
 	return
 
-gText_8488F56:: @ 8488F56
+sText_MysteryGiftEgg: @ 8488F56
 	.string "Thank you for using the MYSTERY\n"
 	.string "GIFT System.\p"
 	.string "From the POKéMON CENTER we\n"
@@ -107,34 +108,34 @@ gText_8488F56:: @ 8488F56
 	.string "Please raise it with love and\n"
 	.string "kindness.$"
 
-gText_8488FE3:: @ 8488FE3
+sText_FullParty: @ 8488FE3
 	.string "Oh, your party appears to be full.\p"
 	.string "Please come see me after storing\n"
 	.string "a POKéMON on a PC.$"
 
-gEventScript_848903A:: @ 848903A
-	setvaddress gEventScript_848903A
+MysteryEventScript_VisitingTrainer:: @ 848903A
+	setvaddress MysteryEventScript_VisitingTrainer
 	special ValidateEReaderTrainer
 	compare_var_to_value VAR_RESULT, 0
-	vgoto_if 1, gEventScript_8489058
+	vgoto_if 1, MysteryEventScript_VisitingTrainerArrived
 	lock
 	faceplayer
-	vmessage gText_8489063
+	vmessage sText_MysteryGiftVisitingTrainer
 	waitmessage
 	waitbuttonpress
 	release
 	end
 
-gEventScript_8489058:: @ 8489058
+MysteryEventScript_VisitingTrainerArrived: @ 8489058
 	lock
 	faceplayer
-	vmessage gText_84891B0
+	vmessage sText_MysteryGiftVisitingTrainer_2
 	waitmessage
 	waitbuttonpress
 	release
 	end
 
-gText_8489063:: @ 8489063
+sText_MysteryGiftVisitingTrainer: @ 8489063
 	.string "Thank you for using the MYSTERY\n"
 	.string "GIFT System.\p"
 	.string "By holding this WONDER CARD, you\n"
@@ -150,7 +151,7 @@ gText_8489063:: @ 8489063
 	.string "it to the WIRELESS\l"
 	.string "COMMUNICATION SYSTEM.$"
 
-gText_84891B0:: @ 84891B0
+sText_MysteryGiftVisitingTrainer_2: @ 84891B0
 	.string "Thank you for using the MYSTERY\n"
 	.string "GIFT System.\p"
 	.string "A TRAINER has arrived in the SEVII\n"
@@ -162,34 +163,34 @@ gText_84891B0:: @ 84891B0
 	.string "Try looking for other passwords\n"
 	.string "that may work.$"
 
-gEventScript_84892B9:: @ 84892B9
-	setvaddress gEventScript_84892B9
-	checkflag FLAG_0x3D8
-	vgoto_if 1, gEventScript_84892F6
+MysteryEventScript_BattleCard:: @ 84892B9
+	setvaddress MysteryEventScript_BattleCard
+	checkflag FLAG_MYSTERY_EVENT_DONE
+	vgoto_if 1, MysteryEventScript_BattleCardInfo
 	setorcopyvar VAR_RESULT, 2
-	specialvar VAR_0x8008, sub_80CC730
+	specialvar VAR_0x8008, Special_BattleCardAction
 	compare_var_to_value VAR_0x8008, 3
-	vgoto_if 0, gEventScript_84892F6
+	vgoto_if 0, MysteryEventScript_BattleCardInfo
 	lock
 	faceplayer
-	vmessage gText_8489419
+	vmessage sText_MysteryGiftBattleCountCard_2
 	waitmessage
 	waitbuttonpress
 	giveitem ITEM_POTION
 	release
-	setflag FLAG_0x3D8
+	setflag FLAG_MYSTERY_EVENT_DONE
 	end
 
-gEventScript_84892F6:: @ 84892F6
+MysteryEventScript_BattleCardInfo: @ 84892F6
 	lock
 	faceplayer
-	vmessage gText_8489301
+	vmessage sText_MysteryGiftBattleCountCard
 	waitmessage
 	waitbuttonpress
 	release
 	end
 
-gText_8489301:: @ 8489301
+sText_MysteryGiftBattleCountCard: @ 8489301
 	.string "Thank you for using the MYSTERY\n"
 	.string "GIFT System.\p"
 	.string "Your BATTLE COUNT CARD keeps\n"
@@ -201,7 +202,7 @@ gText_8489301:: @ 8489301
 	.string "by reading the NEWS.\p"
 	.string "Please do give it a try!$"
 
-gText_8489419:: @ 8489419
+sText_MysteryGiftBattleCountCard_2: @ 8489419
 	.string "Thank you for using the MYSTERY\n"
 	.string "GIFT System.\p"
 	.string "Congratulations!\p"
@@ -210,148 +211,148 @@ gText_8489419:: @ 8489419
 	.string "We hope you will be inspired to\n"
 	.string "battle some more.$"
 
-gEventScript_84894B9:: @ 84894B9
-	setvaddress gEventScript_84894B9
+MysteryEventScript_AuroraTicket:: @ 84894B9
+	setvaddress MysteryEventScript_AuroraTicket
 	lock
 	faceplayer
 	checkflag FLAG_0x2A7
-	vgoto_if 1, gEventScript_848951D
+	vgoto_if 1, AuroraTicket_Obtained
 	checkflag FLAG_0x2E4
-	vgoto_if 1, gEventScript_848951D
+	vgoto_if 1, AuroraTicket_Obtained
 	checkitem ITEM_AURORA_TICKET, 1
 	compare_var_to_value VAR_RESULT, 1
-	vgoto_if 1, gEventScript_848951D
-	vmessage gText_8489526
+	vgoto_if 1, AuroraTicket_Obtained
+	vmessage sText_AuroraTicket1
 	waitmessage
 	waitbuttonpress
 	checkitemspace ITEM_AURORA_TICKET, 1
 	compare_var_to_value VAR_RESULT, 0
-	vgoto_if 1, gEventScript_8489514
+	vgoto_if 1, AuroraTicket_NoBagSpace
 	giveitem ITEM_AURORA_TICKET
 	setflag FLAG_0x84B
 	setflag FLAG_0x2A7
-	vmessage gText_8489583
+	vmessage sText_AuroraTicket2
 	waitmessage
 	waitbuttonpress
 	release
 	end
 
-gEventScript_8489514:: @ 8489514
-	vmessage gText_8489615
+AuroraTicket_NoBagSpace: @ 8489514
+	vmessage sText_AuroraTicketNoPlace
 	waitmessage
 	waitbuttonpress
 	release
 	end
 
-gEventScript_848951D:: @ 848951D
-	vmessage gText_84895E8
+AuroraTicket_Obtained: @ 848951D
+	vmessage sText_AuroraTicketGot
 	waitmessage
 	waitbuttonpress
 	release
 	end
 
-gText_8489526:: @ 8489526
+sText_AuroraTicket1: @ 8489526
 	.string "Thank you for using the MYSTERY\n"
 	.string "GIFT System.\p"
 	.string "You must be {PLAYER}.\n"
 	.string "There is a ticket here for you.$"
 
-gText_8489583:: @ 8489583
+sText_AuroraTicket2: @ 8489583
 	.string "It appears to be for use at the\n"
 	.string "VERMILION CITY port.\p"
 	.string "Why not give it a try and see what\n"
 	.string "it is about?$"
 
-gText_84895E8:: @ 84895E8
+sText_AuroraTicketGot: @ 84895E8
 	.string "Thank you for using the MYSTERY\n"
 	.string "GIFT System.$"
 
-gText_8489615:: @ 8489615
+sText_AuroraTicketNoPlace: @ 8489615
 	.string "Oh, I'm sorry, {PLAYER}. Your BAG's\n"
 	.string "KEY ITEMS POCKET is full.\p"
 	.string "Please store something on your PC,\n"
 	.string "then come back for this.$"
 
-gEventScript_8489689:: @ 8489689
-	setvaddress gEventScript_8489689
+MysteryEventScript_MysticTicket:: @ 8489689
+	setvaddress MysteryEventScript_MysticTicket
 	lock
 	faceplayer
 	checkflag FLAG_0x2A8
-	vgoto_if 1, gEventScript_84896F6
+	vgoto_if 1, MysticTicket_Obtained
 	checkflag FLAG_0x2F2
-	vgoto_if 1, gEventScript_84896F6
+	vgoto_if 1, MysticTicket_Obtained
 	checkflag FLAG_0x2F3
-	vgoto_if 1, gEventScript_84896F6
+	vgoto_if 1, MysticTicket_Obtained
 	checkitem ITEM_MYSTIC_TICKET, 1
 	compare_var_to_value VAR_RESULT, 1
-	vgoto_if 1, gEventScript_84896F6
-	vmessage gText_84896FF
+	vgoto_if 1, MysticTicket_Obtained
+	vmessage sText_MysticTicket2
 	waitmessage
 	waitbuttonpress
 	checkitemspace ITEM_MYSTIC_TICKET, 1
 	compare_var_to_value VAR_RESULT, 0
-	vgoto_if 1, gEventScript_84896ED
+	vgoto_if 1, MysticTicket_NoBagSpace
 	giveitem ITEM_MYSTIC_TICKET
 	setflag FLAG_0x84A
 	setflag FLAG_0x2A8
-	vmessage gText_848975C
+	vmessage sText_MysticTicket1
 	waitmessage
 	waitbuttonpress
 	release
 	end
 
-gEventScript_84896ED:: @ 84896ED
-	vmessage gText_84897EE
+MysticTicket_NoBagSpace: @ 84896ED
+	vmessage sText_MysticTicketNoPlace
 	waitmessage
 	waitbuttonpress
 	release
 	end
 
-gEventScript_84896F6:: @ 84896F6
-	vmessage gText_84897C1
+MysticTicket_Obtained: @ 84896F6
+	vmessage sText_MysticTicketGot
 	waitmessage
 	waitbuttonpress
 	release
 	end
 
-gText_84896FF:: @ 84896FF
+sText_MysticTicket2: @ 84896FF
 	.string "Thank you for using the MYSTERY\n"
 	.string "GIFT System.\p"
 	.string "You must be {PLAYER}.\n"
 	.string "There is a ticket here for you.$"
 
-gText_848975C:: @ 848975C
+sText_MysticTicket1: @ 848975C
 	.string "It appears to be for use at the\n"
 	.string "VERMILION CITY port.\p"
 	.string "Why not give it a try and see what\n"
 	.string "it is about?$"
 
-gText_84897C1:: @ 84897C1
+sText_MysticTicketGot: @ 84897C1
 	.string "Thank you for using the MYSTERY\n"
 	.string "GIFT System.$"
 
-gText_84897EE:: @ 84897EE
+sText_MysticTicketNoPlace: @ 84897EE
 	.string "Oh, I'm sorry, {PLAYER}. Your BAG's\n"
 	.string "KEY ITEMS POCKET is full.\p"
 	.string "Please store something on your PC,\n"
 	.string "then come back for this.$"
 
-gEventScript_8489862:: @ 8489862
-	setvaddress gEventScript_8489862
-	addvar VAR_0x4024, 1
-	compare_var_to_value VAR_0x4024, 10
-	vgoto_if 0, gEventScript_848987C
-	setvar VAR_0x4024, 0
-gEventScript_848987C:: @ 848987C
+MysteryEventScript_AlteringCave:: @ 8489862
+	setvaddress MysteryEventScript_AlteringCave
+	addvar VAR_ALTERING_CAVE_WILD_SET, 1
+	compare_var_to_value VAR_ALTERING_CAVE_WILD_SET, 10
+	vgoto_if 0, MysteryEventScript_AlteringCave_
+	setvar VAR_ALTERING_CAVE_WILD_SET, 0
+MysteryEventScript_AlteringCave_: @ 848987C
 	lock
 	faceplayer
-	vmessage gText_8489887
+	vmessage sText_MysteryGiftAlteringCave
 	waitmessage
 	waitbuttonpress
 	release
 	end
 
-gText_8489887:: @ 8489887
+sText_MysteryGiftAlteringCave: @ 8489887
 	.string "Thank you for using the MYSTERY\n"
 	.string "GIFT System.\p"
 	.string "Recently, there have been rumors\n"

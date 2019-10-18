@@ -4329,8 +4329,8 @@ _080CC728: .4byte 0x00000808
 _080CC72C: .4byte 0x0000404d
 	thumb_func_end sub_80CC59C
 
-	thumb_func_start sub_80CC730
-sub_80CC730: @ 80CC730
+	thumb_func_start Special_BattleCardAction
+Special_BattleCardAction: @ 80CC730
 	push {lr}
 	ldr r0, _080CC744 @ =gSpecialVar_Result
 	ldrh r0, [r0]
@@ -4371,6 +4371,7 @@ _080CC772:
 	lsrs r0, 16
 	b _080CC78A
 _080CC77C:
+	@ AGB_ASSERT_EX(0, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/scr_tool.c", 3873)
 	ldr r0, _080CC790 @ =gUnknown_83F5EF0	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/scr_tool.c"
 	ldr r1, _080CC794 @ =0x00000f21
 	ldr r2, _080CC798 @ =gUnknown_83F5F24	"0"
@@ -4384,7 +4385,7 @@ _080CC78A:
 _080CC790: .4byte gUnknown_83F5EF0
 _080CC794: .4byte 0x00000f21
 _080CC798: .4byte gUnknown_83F5F24
-	thumb_func_end sub_80CC730
+	thumb_func_end Special_BattleCardAction
 
 	thumb_func_start set_unknown_box_id
 set_unknown_box_id: @ 80CC79C

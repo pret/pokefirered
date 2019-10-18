@@ -399,7 +399,7 @@ gSpecials:: @ 815FD60
 	def_special sp182_move_string
 	def_special sub_811390C
 	def_special sub_80CC4D4
-	def_special sub_80CC730
+	def_special Special_BattleCardAction
 	def_special sub_8110AB4
 	def_special sub_8112364
 	def_special sub_8146CE8

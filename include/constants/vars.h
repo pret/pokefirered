@@ -39,7 +39,7 @@
 #define VAR_0x4021                 0x4021
 #define VAR_ICE_STEP_COUNT         0x4022
 #define VAR_0x4023                 0x4023
-#define VAR_0x4024                 0x4024
+#define VAR_ALTERING_CAVE_WILD_SET 0x4024
 #define VAR_0x4025                 0x4025
 #define VAR_SECRET_BASE_MAP        0x4026
 #define VAR_0x4027                 0x4027
@@ -68,7 +68,7 @@
 #define VAR_0x403B                 0x403B
 #define VAR_0x403C                 0x403C
 #define VAR_0x403D                 0x403D
-#define VAR_ALTERING_CAVE_WILD_SET 0x403E
+#define VAR_0x403E                 0x403E
 #define VAR_0x403F                 0x403F
 #define VAR_DAYS                   0x4040
 #define VAR_0x4041                 0x4041
@@ -187,7 +187,7 @@
 #define VAR_0x40B2                 0x40B2
 #define VAR_0x40B3                 0x40B3
 #define VAR_PORTHOLE               0x40B4
-#define VAR_0x40B5                 0x40B5
+#define VAR_EVENT_PICHU_SLOT                 0x40B5
 #define VAR_0x40B6                 0x40B6
 #define VAR_0x40B7                 0x40B7
 #define VAR_0x40B8                 0x40B8

@@ -998,8 +998,6 @@ gStdScript_Message_WaitButton_AndRelease:: @ 81A501F
 	release
 	return
 
-
-
 gUnknown_81A5028:: @ 81A5028
 	.string "Would you like to mix records with\n"
 	.string "other TRAINERS?$"

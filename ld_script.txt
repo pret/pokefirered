@@ -770,7 +770,7 @@ SECTIONS {
         sound/songs/se_w287b.o(.rodata);
         sound/songs/se_w114.o(.rodata);
         sound/songs/se_w063b.o(.rodata);
-        sound/songs/mus_w_door.o(.rodata);
+        sound/songs/midi/mus_w_door.o(.rodata);
         sound/songs/se_card1.o(.rodata);
         sound/songs/se_card2.o(.rodata);
         sound/songs/se_card3.o(.rodata);
@@ -786,9 +786,9 @@ SECTIONS {
         sound/songs/se_excellent.o(.rodata);
         sound/songs/se_nawamiss.o(.rodata);
         sound/songs/midi/mus_me_asa.o(.rodata);
-        sound/songs/mus_fanfa1.o(.rodata);
-        sound/songs/mus_fanfa4.o(.rodata);
-        sound/songs/mus_fanfa5.o(.rodata);
+        sound/songs/midi/mus_fanfa1.o(.rodata);
+        sound/songs/midi/mus_fanfa4.o(.rodata);
+        sound/songs/midi/mus_fanfa5.o(.rodata);
         sound/songs/midi/mus_me_bachi.o(.rodata);
         sound/songs/midi/mus_me_waza.o(.rodata);
         sound/songs/midi/mus_me_kinomi.o(.rodata);

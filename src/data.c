@@ -75,20 +75,20 @@ const struct SpriteFrameImage gTrainerBackPicTable_OldMan[] =
     gTrainerBackPic_OldMan + 0x1800, 0x0800,
 };
 
-const struct SpriteFrameImage gTrainerBackPicTable_RubySapphireBrendan[] =
+const struct SpriteFrameImage gTrainerBackPicTable_RSBrendan[] =
 {
-    gTrainerBackPic_RubySapphireBrendan, 0x0800,
-    gTrainerBackPic_RubySapphireBrendan + 0x0800, 0x0800,
-    gTrainerBackPic_RubySapphireBrendan + 0x1000, 0x0800,
-    gTrainerBackPic_RubySapphireBrendan + 0x1800, 0x0800,
+    gTrainerBackPic_RSBrendan, 0x0800,
+    gTrainerBackPic_RSBrendan + 0x0800, 0x0800,
+    gTrainerBackPic_RSBrendan + 0x1000, 0x0800,
+    gTrainerBackPic_RSBrendan + 0x1800, 0x0800,
 };
 
-const struct SpriteFrameImage gTrainerBackPicTable_RubySapphireMay[] =
+const struct SpriteFrameImage gTrainerBackPicTable_RSMay[] =
 {
-    gTrainerBackPic_RubySapphireMay, 0x0800,
-    gTrainerBackPic_RubySapphireMay + 0x0800, 0x0800,
-    gTrainerBackPic_RubySapphireMay + 0x1000, 0x0800,
-    gTrainerBackPic_RubySapphireMay + 0x1800, 0x0800,
+    gTrainerBackPic_RSMay, 0x0800,
+    gTrainerBackPic_RSMay + 0x0800, 0x0800,
+    gTrainerBackPic_RSMay + 0x1000, 0x0800,
+    gTrainerBackPic_RSMay + 0x1800, 0x0800,
 };
 
 static const union AnimCmd sAnim_GeneralFrame0[] =
@@ -275,9 +275,15 @@ const union AnimCmd *const gSpriteAnimTable_82349BC[] =
 #define SPECIES_PAL(species, pal) [SPECIES_##species] = {pal, SPECIES_##species}
 #define SPECIES_SHINY_PAL(species, pal) [SPECIES_##species] = {pal, SPECIES_##species + SPECIES_SHINY_TAG}
 
+#define TRAINER_SPRITE(trainerPic, sprite, size) [TRAINER_PIC_##trainerPic] = {sprite, size, TRAINER_PIC_##trainerPic}
+#define TRAINER_PAL(trainerPic, pal) [TRAINER_PIC_##trainerPic] = {pal, TRAINER_PIC_##trainerPic}
+
 #include "data/pokemon_graphics/front_pic_coordinates.h"
 #include "data/pokemon_graphics/front_pic_table.h"
 #include "data/pokemon_graphics/back_pic_coordinates.h"
 #include "data/pokemon_graphics/back_pic_table.h"
 #include "data/pokemon_graphics/palette_table.h"
 #include "data/pokemon_graphics/shiny_palette_table.h"
+
+#include "data/trainer_graphics/front_pic_anims.h"
+#include "data/trainer_graphics/front_pic_tables.h"

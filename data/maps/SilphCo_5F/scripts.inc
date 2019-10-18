@@ -42,21 +42,21 @@ SilphCo_5F_EventScript_16181C:: @ 816181C
 	end
 
 SilphCo_5F_EventScript_161825:: @ 8161825
-	trainerbattle 0, 340, 0, Text_175C40, Text_175C6D
+	trainerbattle 0, TRAINER_SCIENTIST_BEAU, 0, Text_175C40, Text_175C6D
 	msgbox gUnknown_8175C7D, 6
 	end
 
 SilphCo_5F_EventScript_16183C:: @ 816183C
-	trainerbattle 0, 378, 0, Text_175BE5, Text_175C09
+	trainerbattle 0, TRAINER_TEAM_ROCKET_GRUNT_28, 0, Text_175BE5, Text_175C09
 	msgbox gUnknown_8175C0F, 6
 	end
 
 SilphCo_5F_EventScript_161853:: @ 8161853
-	trainerbattle 0, 379, 0, Text_175D28, Text_175D4B
+	trainerbattle 0, TRAINER_TEAM_ROCKET_GRUNT_29, 0, Text_175D28, Text_175D4B
 	msgbox gUnknown_8175D59, 6
 	end
 
 SilphCo_5F_EventScript_16186A:: @ 816186A
-	trainerbattle 0, 286, 0, Text_175CBD, Text_175CEB
+	trainerbattle 0, TRAINER_JUGGLER_DALTON, 0, Text_175CBD, Text_175CEB
 	msgbox gUnknown_8175CF9, 6
 	end

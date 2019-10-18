@@ -83,15 +83,15 @@ EventScript_161A7F:: @ 8161A7F
 	return
 
 EventScript_161A80:: @ 8161A80
-	trainerbattle 3, 432, 0, Text_1767D0
+	trainerbattle 3, TRAINER_RIVAL_TERRY_16, 0, Text_1767D0
 	return
 
 EventScript_161A8B:: @ 8161A8B
-	trainerbattle 3, 433, 0, Text_1767D0
+	trainerbattle 3, TRAINER_RIVAL_TERRY_17, 0, Text_1767D0
 	return
 
 EventScript_161A96:: @ 8161A96
-	trainerbattle 3, 434, 0, Text_1767D0
+	trainerbattle 3, TRAINER_RIVAL_TERRY_18, 0, Text_1767D0
 	return
 
 EventScript_161AA1:: @ 8161AA1
@@ -243,21 +243,21 @@ SilphCo_7F_EventScript_161BFA:: @ 8161BFA
 	end
 
 SilphCo_7F_EventScript_161C03:: @ 8161C03
-	trainerbattle 0, 342, 0, Text_1765E2, Text_17660C
+	trainerbattle 0, TRAINER_SCIENTIST_JOSHUA, 0, Text_1765E2, Text_17660C
 	msgbox gUnknown_8176616, 6
 	end
 
 SilphCo_7F_EventScript_161C1A:: @ 8161C1A
-	trainerbattle 0, 383, 0, Text_176643, Text_176669
+	trainerbattle 0, TRAINER_TEAM_ROCKET_GRUNT_33, 0, Text_176643, Text_176669
 	msgbox gUnknown_8176681, 6
 	end
 
 SilphCo_7F_EventScript_161C31:: @ 8161C31
-	trainerbattle 0, 384, 0, Text_1766B3, Text_1766D7
+	trainerbattle 0, TRAINER_TEAM_ROCKET_GRUNT_34, 0, Text_1766B3, Text_1766D7
 	msgbox gUnknown_81766E5, 6
 	end
 
 SilphCo_7F_EventScript_161C48:: @ 8161C48
-	trainerbattle 0, 385, 0, Text_176586, Text_1765A5
+	trainerbattle 0, TRAINER_TEAM_ROCKET_GRUNT_35, 0, Text_176586, Text_1765A5
 	msgbox gUnknown_81765B1, 6
 	end

@@ -5,7 +5,7 @@ CeladonCity_Gym_EventScript_16D061:: @ 816D061
 	setvar VAR_0x8004, 5
 	setvar VAR_0x8005, 2
 	special UpdatePickStateFromSpecialVar8005
-	trainerbattle 1, 417, 0, Text_197114, Text_197260, EventScript_16D0A0
+	trainerbattle 1, TRAINER_LEADER_ERIKA, 0, Text_197114, Text_197260, EventScript_16D0A0
 	checkflag FLAG_0x293
 	goto_if 0, EventScript_16D0C6
 	setvar VAR_0x8004, 5
@@ -49,12 +49,12 @@ EventScript_16D107:: @ 816D107
 	end
 
 CeladonCity_Gym_EventScript_16D111:: @ 816D111
-	trainerbattle 0, 132, 0, Text_19747C, Text_1974C4
+	trainerbattle 0, TRAINER_LASS_KAY, 0, Text_19747C, Text_1974C4
 	msgbox gUnknown_81974D6, 6
 	end
 
 CeladonCity_Gym_EventScript_16D128:: @ 816D128
-	trainerbattle 0, 133, 0, Text_1976C5, Text_1976FF
+	trainerbattle 0, TRAINER_LASS_LISA, 0, Text_1976C5, Text_1976FF
 	setvar VAR_0x8004, 5
 	setvar VAR_0x8005, 2
 	special SetFlavorTextFlagFromSpecialVars
@@ -62,17 +62,17 @@ CeladonCity_Gym_EventScript_16D128:: @ 816D128
 	end
 
 CeladonCity_Gym_EventScript_16D14C:: @ 816D14C
-	trainerbattle 0, 160, 0, Text_197595, Text_1975BB
+	trainerbattle 0, TRAINER_PICNICKER_TINA, 0, Text_197595, Text_1975BB
 	msgbox gUnknown_81975D1, 6
 	end
 
 CeladonCity_Gym_EventScript_16D163:: @ 816D163
-	trainerbattle 0, 265, 0, Text_1974FA, Text_19751C
+	trainerbattle 0, TRAINER_BEAUTY_BRIDGET, 0, Text_1974FA, Text_19751C
 	msgbox gUnknown_8197527, 6
 	end
 
 CeladonCity_Gym_EventScript_16D17A:: @ 816D17A
-	trainerbattle 0, 266, 0, Text_19760B, Text_197660
+	trainerbattle 0, TRAINER_BEAUTY_TAMIA, 0, Text_19760B, Text_197660
 	setvar VAR_0x8004, 5
 	setvar VAR_0x8005, 3
 	special SetFlavorTextFlagFromSpecialVars
@@ -80,12 +80,12 @@ CeladonCity_Gym_EventScript_16D17A:: @ 816D17A
 	end
 
 CeladonCity_Gym_EventScript_16D19E:: @ 816D19E
-	trainerbattle 0, 267, 0, Text_197747, Text_19777A
+	trainerbattle 0, TRAINER_BEAUTY_LORI, 0, Text_197747, Text_19777A
 	msgbox gUnknown_8197788, 6
 	end
 
 CeladonCity_Gym_EventScript_16D1B5:: @ 816D1B5
-	trainerbattle 0, 402, 0, Text_1977E5, Text_197832
+	trainerbattle 0, TRAINER_COOLTRAINER_MARY, 0, Text_1977E5, Text_197832
 	msgbox gUnknown_819783E, 6
 	end
 

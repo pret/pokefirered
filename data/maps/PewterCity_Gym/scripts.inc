@@ -5,7 +5,7 @@ PewterCity_Gym_EventScript_16A593:: @ 816A593
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 2
 	special UpdatePickStateFromSpecialVar8005
-	trainerbattle 1, 414, 0, Text_190CD4, Text_190E4F, EventScript_16A5C5
+	trainerbattle 1, TRAINER_LEADER_BROCK, 0, Text_190CD4, Text_190E4F, EventScript_16A5C5
 	checkflag FLAG_0x254
 	goto_if 0, EventScript_16A5F3
 	msgbox gUnknown_819110F
@@ -44,7 +44,7 @@ EventScript_16A634:: @ 816A634
 	end
 
 PewterCity_Gym_EventScript_16A63E:: @ 816A63E
-	trainerbattle 0, 142, 0, Text_1911EC, Text_191237
+	trainerbattle 0, TRAINER_CAMPER_LIAM, 0, Text_1911EC, Text_191237
 	msgbox gUnknown_819126B, 6
 	end
 

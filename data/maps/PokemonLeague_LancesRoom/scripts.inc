@@ -137,11 +137,11 @@ EventScript_162A82:: @ 8162A82
 	return
 
 EventScript_162A8B:: @ 8162A8B
-	trainerbattle 3, 413, 0, Text_178A15
+	trainerbattle 3, TRAINER_ELITE_FOUR_LANCE, 0, Text_178A15
 	return
 
 EventScript_162A96:: @ 8162A96
-	trainerbattle 3, 738, 0, Text_178A15
+	trainerbattle 3, TRAINER_ELITE_FOUR_LANCE_2, 0, Text_178A15
 	return
 
 EventScript_162AA1:: @ 8162AA1

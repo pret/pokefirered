@@ -211,7 +211,7 @@ VermilionCity_Gym_EventScript_16B94A:: @ 816B94A
 	setvar VAR_0x8004, 4
 	setvar VAR_0x8005, 2
 	special UpdatePickStateFromSpecialVar8005
-	trainerbattle 1, 416, 0, Text_194BA4, Text_194E03, EventScript_16B97C
+	trainerbattle 1, TRAINER_LEADER_LT_SURGE, 0, Text_194BA4, Text_194E03, EventScript_16B97C
 	checkflag FLAG_0x231
 	goto_if 0, EventScript_16B9AF
 	msgbox gUnknown_8194C8E
@@ -254,7 +254,7 @@ EventScript_16B9F0:: @ 816B9F0
 	end
 
 VermilionCity_Gym_EventScript_16B9FA:: @ 816B9FA
-	trainerbattle 0, 141, 0, Text_194FBD, Text_194FF1
+	trainerbattle 0, TRAINER_SAILOR_DWAYNE, 0, Text_194FBD, Text_194FF1
 	setvar VAR_0x8004, 4
 	setvar VAR_0x8005, 4
 	special SetFlavorTextFlagFromSpecialVars
@@ -262,12 +262,12 @@ VermilionCity_Gym_EventScript_16B9FA:: @ 816B9FA
 	end
 
 VermilionCity_Gym_EventScript_16BA1E:: @ 816BA1E
-	trainerbattle 0, 220, 0, Text_194F1F, Text_194F6F
+	trainerbattle 0, TRAINER_ENGINEER_BAILY, 0, Text_194F1F, Text_194F6F
 	msgbox gUnknown_8194F76, 6
 	end
 
 VermilionCity_Gym_EventScript_16BA35:: @ 816BA35
-	trainerbattle 2, 423, 0, Text_194E57, Text_194EA5, EventScript_16BA5D
+	trainerbattle 2, TRAINER_GENTLEMAN_TUCKER, 0, Text_194E57, Text_194EA5, EventScript_16BA5D
 	setvar VAR_0x8004, 4
 	setvar VAR_0x8005, 3
 	special SetFlavorTextFlagFromSpecialVars

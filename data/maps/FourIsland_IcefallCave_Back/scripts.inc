@@ -46,7 +46,7 @@ FourIsland_IcefallCave_Back_EventScript_163D98:: @ 8163D98
 	textcolor 0
 	msgbox gUnknown_817B20B
 	setvar VAR_LAST_TALKED, 4
-	trainerbattle 3, 539, 0, Text_17B251
+	trainerbattle 3, TRAINER_TEAM_ROCKET_GRUNT_45, 0, Text_17B251
 	applymovement 3, Movement_163F1B
 	waitmovement 0
 	textcolor 1

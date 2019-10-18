@@ -227,7 +227,7 @@ EventScript_167A59:: @ 8167A59
 	goto_if_eq EventScript_167C35
 	msgbox gUnknown_818247D
 	setvar VAR_LAST_TALKED, 5
-	trainerbattle 3, 527, 0, Text_1824B7
+	trainerbattle 3, TRAINER_BIKER_GOON, 0, Text_1824B7
 	applymovement 5, Movement_167C5C
 	waitmovement 0
 	msgbox gUnknown_81824CF
@@ -237,7 +237,7 @@ EventScript_167A59:: @ 8167A59
 	playbgm MUS_SHOUNEN, 0
 	msgbox gUnknown_81824EF
 	setvar VAR_LAST_TALKED, 7
-	trainerbattle 3, 528, 0, Text_182521
+	trainerbattle 3, TRAINER_BIKER_GOON_2, 0, Text_182521
 	applymovement 7, Movement_167C5C
 	waitmovement 0
 	msgbox gUnknown_8182536
@@ -247,7 +247,7 @@ EventScript_167A59:: @ 8167A59
 	playbgm MUS_SHOUNEN, 0
 	msgbox gUnknown_8182582
 	setvar VAR_LAST_TALKED, 4
-	trainerbattle 3, 529, 0, Text_1825D4
+	trainerbattle 3, TRAINER_BIKER_GOON_3, 0, Text_1825D4
 	applymovement 4, Movement_1A75E7
 	waitmovement 0
 	applymovement 6, Movement_1A75ED
@@ -269,7 +269,7 @@ EventScript_167A59:: @ 8167A59
 	playbgm MUS_SHOUNEN, 0
 	msgbox gUnknown_8182623
 	setvar VAR_LAST_TALKED, 3
-	trainerbattle 3, 742, 0, Text_1826B7
+	trainerbattle 3, TRAINER_CUE_BALL_PAXTON, 0, Text_1826B7
 	msgbox gUnknown_818271D
 	closemessage
 	fadescreen 1

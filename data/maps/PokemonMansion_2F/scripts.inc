@@ -26,6 +26,6 @@ PokemonMansion_2F_EventScript_162281:: @ 8162281
 	end
 
 PokemonMansion_2F_EventScript_16228A:: @ 816228A
-	trainerbattle 0, 216, 0, Text_177498, Text_1774CB
+	trainerbattle 0, TRAINER_BURGLAR_ARNIE, 0, Text_177498, Text_1774CB
 	msgbox gUnknown_81774E3, 6
 	end

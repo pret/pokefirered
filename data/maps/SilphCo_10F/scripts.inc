@@ -26,11 +26,11 @@ SilphCo_10F_EventScript_161DB7:: @ 8161DB7
 	end
 
 SilphCo_10F_EventScript_161DC0:: @ 8161DC0
-	trainerbattle 0, 345, 0, Text_176D57, Text_176D73
+	trainerbattle 0, TRAINER_SCIENTIST_TRAVIS, 0, Text_176D57, Text_176D73
 	msgbox gUnknown_8176D86, 6
 	end
 
 SilphCo_10F_EventScript_161DD7:: @ 8161DD7
-	trainerbattle 0, 389, 0, Text_176CED, Text_176D18
+	trainerbattle 0, TRAINER_TEAM_ROCKET_GRUNT_39, 0, Text_176CED, Text_176D18
 	msgbox gUnknown_8176D25, 6
 	end

@@ -28,11 +28,11 @@ SilphCo_3F_EventScript_1616FF:: @ 81616FF
 	end
 
 SilphCo_3F_EventScript_161708:: @ 8161708
-	trainerbattle 0, 338, 0, Text_175948, Text_17597D
+	trainerbattle 0, TRAINER_SCIENTIST_JOSE, 0, Text_175948, Text_17597D
 	msgbox gUnknown_8175990, 6
 	end
 
 SilphCo_3F_EventScript_16171F:: @ 816171F
-	trainerbattle 0, 375, 0, Text_1758F6, Text_175911
+	trainerbattle 0, TRAINER_TEAM_ROCKET_GRUNT_25, 0, Text_1758F6, Text_175911
 	msgbox gUnknown_817591C, 6
 	end

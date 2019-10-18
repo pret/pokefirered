@@ -73,15 +73,15 @@ EventScript_16835B:: @ 816835B
 	return
 
 EventScript_16836D:: @ 816836D
-	trainerbattle 9, 329, 0, Text_188959, Text_18DE1A
+	trainerbattle 9, TRAINER_RIVAL_TERRY_4, 0, Text_188959, Text_18DE1A
 	return
 
 EventScript_16837C:: @ 816837C
-	trainerbattle 9, 330, 0, Text_188959, Text_18DE1A
+	trainerbattle 9, TRAINER_RIVAL_TERRY_5, 0, Text_188959, Text_18DE1A
 	return
 
 EventScript_16838B:: @ 816838B
-	trainerbattle 9, 331, 0, Text_188959, Text_18DE1A
+	trainerbattle 9, TRAINER_RIVAL_TERRY_6, 0, Text_188959, Text_18DE1A
 	return
 
 EventScript_16839A:: @ 816839A
@@ -235,15 +235,15 @@ EventScript_1684A7:: @ 81684A7
 	return
 
 EventScript_1684B9:: @ 81684B9
-	trainerbattle 3, 435, 0, Text_188B08
+	trainerbattle 3, TRAINER_RIVAL_TERRY_19, 0, Text_188B08
 	return
 
 EventScript_1684C4:: @ 81684C4
-	trainerbattle 3, 436, 0, Text_188B08
+	trainerbattle 3, TRAINER_RIVAL_TERRY_20, 0, Text_188B08
 	return
 
 EventScript_1684CF:: @ 81684CF
-	trainerbattle 3, 437, 0, Text_188B08
+	trainerbattle 3, TRAINER_RIVAL_TERRY_21, 0, Text_188B08
 	return
 
 Movement_1684DA:: @ 81684DA

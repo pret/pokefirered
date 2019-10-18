@@ -25,7 +25,7 @@ MtMoon_B2F_EventScript_1606C2:: @ 81606C2
 	faceplayer
 	checkflag FLAG_0x232
 	goto_if_eq EventScript_160707
-	checktrainerflag FLAG_0x0AA
+	checktrainerflag TRAINER_SUPER_NERD_MIGUEL
 	goto_if_eq EventScript_160711
 	call EventScript_1606DD
 	release
@@ -38,7 +38,7 @@ EventScript_1606DD:: @ 81606DD
 	playbgm MUS_EXEYE, 0
 	waitbuttonpress
 	setvar VAR_LAST_TALKED, 3
-	trainerbattle 3, 170, 0, Text_172B99
+	trainerbattle 3, TRAINER_SUPER_NERD_MIGUEL, 0, Text_172B99
 	setvar VAR_0x408B, 1
 	msgbox gUnknown_8172BAB
 	return
@@ -123,21 +123,21 @@ Movement_1607E0:: @ 81607E0
 	step_end
 
 MtMoon_B2F_EventScript_1607E4:: @ 81607E4
-	trainerbattle 0, 351, 0, Text_172C5A, Text_172CB8
+	trainerbattle 0, TRAINER_TEAM_ROCKET_GRUNT, 0, Text_172C5A, Text_172CB8
 	msgbox gUnknown_8172CCB, 6
 	end
 
 MtMoon_B2F_EventScript_1607FB:: @ 81607FB
-	trainerbattle 0, 352, 0, Text_172CFC, Text_172D46
+	trainerbattle 0, TRAINER_TEAM_ROCKET_GRUNT_2, 0, Text_172CFC, Text_172D46
 	msgbox gUnknown_8172D51, 6
 	end
 
 MtMoon_B2F_EventScript_160812:: @ 8160812
-	trainerbattle 0, 353, 0, Text_172D82, Text_172DAF
+	trainerbattle 0, TRAINER_TEAM_ROCKET_GRUNT_3, 0, Text_172D82, Text_172DAF
 	msgbox gUnknown_8172DC1, 6
 	end
 
 MtMoon_B2F_EventScript_160829:: @ 8160829
-	trainerbattle 0, 354, 0, Text_172DF0, Text_172E3E
+	trainerbattle 0, TRAINER_TEAM_ROCKET_GRUNT_4, 0, Text_172DF0, Text_172E3E
 	msgbox gUnknown_8172E4B, 6
 	end

@@ -22,11 +22,11 @@ PokemonMansion_3F_EventScript_1622C5:: @ 81622C5
 	end
 
 PokemonMansion_3F_EventScript_1622CE:: @ 81622CE
-	trainerbattle 0, 218, 0, Text_1775E7, Text_177602
+	trainerbattle 0, TRAINER_BURGLAR_SIMON, 0, Text_1775E7, Text_177602
 	msgbox gUnknown_8177608, 6
 	end
 
 PokemonMansion_3F_EventScript_1622E5:: @ 81622E5
-	trainerbattle 0, 346, 0, Text_177628, Text_177643
+	trainerbattle 0, TRAINER_SCIENTIST_BRAYDON, 0, Text_177628, Text_177643
 	msgbox gUnknown_8177657, 6
 	end

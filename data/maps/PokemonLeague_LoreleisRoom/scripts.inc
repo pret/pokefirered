@@ -88,11 +88,11 @@ EventScript_16264A:: @ 816264A
 	return
 
 EventScript_162653:: @ 8162653
-	trainerbattle 3, 410, 0, Text_178191
+	trainerbattle 3, TRAINER_ELITE_FOUR_LORELEI, 0, Text_178191
 	return
 
 EventScript_16265E:: @ 816265E
-	trainerbattle 3, 735, 0, Text_178191
+	trainerbattle 3, TRAINER_ELITE_FOUR_LORELEI_2, 0, Text_178191
 	return
 
 EventScript_162669:: @ 8162669

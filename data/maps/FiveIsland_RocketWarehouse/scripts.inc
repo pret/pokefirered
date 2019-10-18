@@ -8,7 +8,7 @@ FiveIsland_RocketWarehouse_MapScript2_163F39:: @ 8163F39
 	end
 
 FiveIsland_RocketWarehouse_MapScript1_163F3D:: @ 8163F3D
-	checktrainerflag FLAG_0x21F
+	checktrainerflag TRAINER_TEAM_ROCKET_ADMIN
 	call_if 1, EventScript_163F47
 	end
 
@@ -43,7 +43,7 @@ FiveIsland_RocketWarehouse_EventScript_163F81:: @ 8163F81
 	end
 
 FiveIsland_RocketWarehouse_EventScript_163F93:: @ 8163F93
-	trainerbattle 2, 545, 0, Text_17BBAF, Text_17BC55, EventScript_163FCD
+	trainerbattle 2, TRAINER_SCIENTIST_GIDEON, 0, Text_17BBAF, Text_17BC55, EventScript_163FCD
 	checkflag FLAG_0x844
 	goto_if_eq EventScript_163FB7
 	msgbox gUnknown_817BCA3, 6
@@ -64,17 +64,17 @@ EventScript_163FCD:: @ 8163FCD
 	end
 
 FiveIsland_RocketWarehouse_EventScript_163FE6:: @ 8163FE6
-	trainerbattle 0, 541, 0, Text_17B54D, Text_17B585
+	trainerbattle 0, TRAINER_TEAM_ROCKET_GRUNT_47, 0, Text_17B54D, Text_17B585
 	msgbox gUnknown_817B5A6, 6
 	end
 
 FiveIsland_RocketWarehouse_EventScript_163FFD:: @ 8163FFD
-	trainerbattle 0, 542, 0, Text_17B677, Text_17B6D9
+	trainerbattle 0, TRAINER_TEAM_ROCKET_GRUNT_48, 0, Text_17B677, Text_17B6D9
 	msgbox gUnknown_817B6EF, 6
 	end
 
 FiveIsland_RocketWarehouse_EventScript_164014:: @ 8164014
-	trainerbattle 2, 544, 0, Text_17B8DA, Text_17B9FB, EventScript_16402F
+	trainerbattle 2, TRAINER_TEAM_ROCKET_ADMIN_2, 0, Text_17B8DA, Text_17B9FB, EventScript_16402F
 	msgbox gUnknown_817BA64, 6
 	end
 
@@ -102,12 +102,12 @@ EventScript_164065:: @ 8164065
 	return
 
 FiveIsland_RocketWarehouse_EventScript_164070:: @ 8164070
-	trainerbattle 0, 516, 0, Text_17B5D6, Text_17B62F
+	trainerbattle 0, TRAINER_TEAM_ROCKET_GRUNT_42, 0, Text_17B5D6, Text_17B62F
 	msgbox gUnknown_817B642, 6
 	end
 
 FiveIsland_RocketWarehouse_EventScript_164087:: @ 8164087
-	trainerbattle 2, 543, 0, Text_17B72D, Text_17B79C, EventScript_1640A2
+	trainerbattle 2, TRAINER_TEAM_ROCKET_ADMIN, 0, Text_17B72D, Text_17B79C, EventScript_1640A2
 	msgbox gUnknown_817B7FA, 6
 	end
 

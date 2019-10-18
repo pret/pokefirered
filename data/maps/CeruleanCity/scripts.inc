@@ -75,15 +75,15 @@ EventScript_1664CC:: @ 81664CC
 	end
 
 EventScript_166582:: @ 8166582
-	trainerbattle 3, 332, 0, Text_17EB71
+	trainerbattle 3, TRAINER_RIVAL_TERRY_7, 0, Text_17EB71
 	return
 
 EventScript_16658D:: @ 816658D
-	trainerbattle 3, 333, 0, Text_17EB71
+	trainerbattle 3, TRAINER_RIVAL_TERRY_8, 0, Text_17EB71
 	return
 
 EventScript_166598:: @ 8166598
-	trainerbattle 3, 334, 0, Text_17EB71
+	trainerbattle 3, TRAINER_RIVAL_TERRY_9, 0, Text_17EB71
 	return
 
 EventScript_1665A3:: @ 81665A3
@@ -173,13 +173,13 @@ Movement_1665FB:: @ 81665FB
 CeruleanCity_EventScript_166603:: @ 8166603
 	lock
 	faceplayer
-	checktrainerflag FLAG_0x163
+	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_5
 	goto_if_eq EventScript_16662E
 	message Text_17EE0E
 	waitmessage
 	playbgm MUS_ROCKET, 0
 	waitbuttonpress
-	trainerbattle 3, 355, 0, Text_17EE70
+	trainerbattle 3, TRAINER_TEAM_ROCKET_GRUNT_5, 0, Text_17EE70
 	setvar VAR_0x407D, 1
 	goto EventScript_16662E
 	end
@@ -230,7 +230,7 @@ EventScript_1666C3:: @ 81666C3
 	textcolor 0
 	msgbox Text_17EE0E
 	setvar VAR_LAST_TALKED, 2
-	trainerbattle 3, 355, 0, Text_17EE70
+	trainerbattle 3, TRAINER_TEAM_ROCKET_GRUNT_5, 0, Text_17EE70
 	setvar VAR_0x407D, 1
 	goto EventScript_16662E
 	end

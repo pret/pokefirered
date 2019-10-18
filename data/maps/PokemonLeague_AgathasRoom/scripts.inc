@@ -86,11 +86,11 @@ EventScript_1628F2:: @ 81628F2
 	return
 
 EventScript_1628FB:: @ 81628FB
-	trainerbattle 3, 412, 0, Text_1786D7
+	trainerbattle 3, TRAINER_ELITE_FOUR_AGATHA, 0, Text_1786D7
 	return
 
 EventScript_162906:: @ 8162906
-	trainerbattle 3, 737, 0, Text_1786D7
+	trainerbattle 3, TRAINER_ELITE_FOUR_AGATHA_2, 0, Text_1786D7
 	return
 
 EventScript_162911:: @ 8162911

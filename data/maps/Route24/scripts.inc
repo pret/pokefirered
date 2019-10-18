@@ -60,7 +60,7 @@ EventScript_1686B9:: @ 81686B9
 	playbgm MUS_ROCKET, 0
 	waitbuttonpress
 	setvar VAR_LAST_TALKED, 1
-	trainerbattle 3, 356, 0, Text_188DDC
+	trainerbattle 3, TRAINER_TEAM_ROCKET_GRUNT_6, 0, Text_188DDC
 	msgbox gUnknown_8188DF1
 	setvar VAR_0x406B, 1
 	return

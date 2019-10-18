@@ -83,11 +83,11 @@ EventScript_16275A:: @ 816275A
 	return
 
 EventScript_162763:: @ 8162763
-	trainerbattle 3, 411, 0, Text_178409
+	trainerbattle 3, TRAINER_ELITE_FOUR_BRUNO, 0, Text_178409
 	return
 
 EventScript_16276E:: @ 816276E
-	trainerbattle 3, 736, 0, Text_178409
+	trainerbattle 3, TRAINER_ELITE_FOUR_BRUNO_2, 0, Text_178409
 	return
 
 EventScript_162779:: @ 8162779

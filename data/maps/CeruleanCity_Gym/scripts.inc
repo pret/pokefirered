@@ -5,7 +5,7 @@ CeruleanCity_Gym_EventScript_16AAA1:: @ 816AAA1
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 2
 	special UpdatePickStateFromSpecialVar8005
-	trainerbattle 1, 415, 0, Text_1921EF, Text_19242D, EventScript_16AAD3
+	trainerbattle 1, TRAINER_LEADER_MISTY, 0, Text_1921EF, Text_19242D, EventScript_16AAD3
 	checkflag FLAG_0x297
 	goto_if 0, EventScript_16AAF9
 	msgbox gUnknown_81922BF
@@ -42,12 +42,12 @@ EventScript_16AB3A:: @ 816AB3A
 	end
 
 CeruleanCity_Gym_EventScript_16AB44:: @ 816AB44
-	trainerbattle 0, 150, 0, Text_192481, Text_1924D0
+	trainerbattle 0, TRAINER_PICNICKER_DIANA, 0, Text_192481, Text_1924D0
 	msgbox gUnknown_81924E4, 6
 	end
 
 CeruleanCity_Gym_EventScript_16AB5B:: @ 816AB5B
-	trainerbattle 0, 234, 0, Text_192524, Text_192547
+	trainerbattle 0, TRAINER_SWIMMER_MALE_LUIS, 0, Text_192524, Text_192547
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 2
 	special SetFlavorTextFlagFromSpecialVars

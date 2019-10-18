@@ -64,15 +64,15 @@ EventScript_16334B:: @ 816334B
 	return
 
 EventScript_16335D:: @ 816335D
-	trainerbattle 3, 429, 0, Text_179D73
+	trainerbattle 3, TRAINER_RIVAL_TERRY_13, 0, Text_179D73
 	return
 
 EventScript_163368:: @ 8163368
-	trainerbattle 3, 430, 0, Text_179D73
+	trainerbattle 3, TRAINER_RIVAL_TERRY_14, 0, Text_179D73
 	return
 
 EventScript_163373:: @ 8163373
-	trainerbattle 3, 431, 0, Text_179D73
+	trainerbattle 3, TRAINER_RIVAL_TERRY_15, 0, Text_179D73
 	return
 
 EventScript_16337E:: @ 816337E

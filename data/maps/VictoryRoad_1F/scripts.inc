@@ -36,11 +36,11 @@ EventScript_160F62:: @ 8160F62
 	end
 
 VictoryRoad_1F_EventScript_160F64:: @ 8160F64
-	trainerbattle 0, 406, 0, Text_174710, Text_174738
+	trainerbattle 0, TRAINER_COOLTRAINER_NAOMI, 0, Text_174710, Text_174738
 	msgbox gUnknown_8174744, 6
 	end
 
 VictoryRoad_1F_EventScript_160F7B:: @ 8160F7B
-	trainerbattle 0, 396, 0, Text_174784, Text_1747B8
+	trainerbattle 0, TRAINER_COOLTRAINER_ROLANDO, 0, Text_174784, Text_1747B8
 	msgbox gUnknown_81747C8, 6
 	end

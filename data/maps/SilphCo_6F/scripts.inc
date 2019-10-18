@@ -82,16 +82,16 @@ SilphCo_6F_EventScript_161936:: @ 8161936
 	end
 
 SilphCo_6F_EventScript_16193F:: @ 816193F
-	trainerbattle 0, 341, 0, Text_176136, Text_1761BD
+	trainerbattle 0, TRAINER_SCIENTIST_TAYLOR, 0, Text_176136, Text_1761BD
 	msgbox gUnknown_81761C4, 6
 	end
 
 SilphCo_6F_EventScript_161956:: @ 8161956
-	trainerbattle 0, 380, 0, Text_1760DE, Text_176104
+	trainerbattle 0, TRAINER_TEAM_ROCKET_GRUNT_30, 0, Text_1760DE, Text_176104
 	msgbox gUnknown_817610F, 6
 	end
 
 SilphCo_6F_EventScript_16196D:: @ 816196D
-	trainerbattle 0, 381, 0, Text_1761F1, Text_17620E
+	trainerbattle 0, TRAINER_TEAM_ROCKET_GRUNT_31, 0, Text_1761F1, Text_17620E
 	msgbox gUnknown_817621B, 6
 	end

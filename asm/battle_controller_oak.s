@@ -3742,7 +3742,7 @@ SetWallyMonData: @ 80E93C8
 	ldr r0, _080E9400 @ =gActiveBattler
 	ldrb r0, [r0]
 	lsls r0, 9
-	ldr r2, _080E9404 @ =gUnknown_2022BC7
+	ldr r2, _080E9404 @ =(gBattleBufferA + 3)
 	adds r3, r0, r2
 	adds r6, r3, 0
 	subs r1, r2, 0x2
@@ -3760,7 +3760,7 @@ _080E93F4:
 	mov pc, r0
 	.align 2, 0
 _080E9400: .4byte gActiveBattler
-_080E9404: .4byte gUnknown_2022BC7
+_080E9404: .4byte (gBattleBufferA + 3)
 _080E9408: .4byte _080E940C
 	.align 2, 0
 _080E940C:
@@ -5784,7 +5784,7 @@ sub_80EA52C: @ 80EA52C
 	ldr r0, _080EA564 @ =gActiveBattler
 	ldrb r0, [r0]
 	lsls r0, 9
-	ldr r1, _080EA568 @ =gUnknown_2022BC6
+	ldr r1, _080EA568 @ =(gBattleBufferA + 2)
 	adds r4, r0, r1
 	ldr r0, _080EA56C @ =gBattleTypeFlags
 	ldr r0, [r0]
@@ -5802,7 +5802,7 @@ sub_80EA52C: @ 80EA52C
 _080EA55C: .4byte gBattle_BG0_X
 _080EA560: .4byte gBattle_BG0_Y
 _080EA564: .4byte gActiveBattler
-_080EA568: .4byte gUnknown_2022BC6
+_080EA568: .4byte (gBattleBufferA + 2)
 _080EA56C: .4byte gBattleTypeFlags
 _080EA570:
 	ldrh r0, [r4]
@@ -7287,7 +7287,7 @@ _080EB14C:
 	strb r1, [r0]
 	ldrb r0, [r5]
 	lsls r4, r0, 9
-	ldr r3, _080EB198 @ =gUnknown_2022BC8
+	ldr r3, _080EB198 @ =(gBattleBufferA + 4)
 	adds r1, r4, r3
 	subs r2, r3, 0x3
 	adds r2, r4, r2
@@ -7308,7 +7308,7 @@ _080EB18A:
 	.align 2, 0
 _080EB190: .4byte gBattleSpritesDataPtr
 _080EB194: .4byte gActiveBattler
-_080EB198: .4byte gUnknown_2022BC8
+_080EB198: .4byte (gBattleBufferA + 4)
 _080EB19C: .4byte gBattlerStatusSummaryTaskId
 	thumb_func_end sub_80EB11C
 

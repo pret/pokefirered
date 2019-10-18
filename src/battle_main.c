@@ -60,75 +60,177 @@
 #include "constants/trainers.h"
 #include "constants/trainer_classes.h"
 
-void sub_80111EC(struct Sprite *sprite);
-void HandleAction_UseMove(void);
-void HandleAction_Switch(void);
-void HandleAction_UseItem(void);
-void HandleAction_Run(void);
-void HandleAction_WatchesCarefully(void);
-void HandleAction_SafariZoneBallThrow(void);
-void HandleAction_ThrowPokeblock(void);
-void HandleAction_GoNear(void);
-void HandleAction_SafariZoneRun(void);
-void HandleAction_OldManBallThrow(void);
-void HandleAction_TryFinish(void);
-void HandleAction_NothingIsFainted(void);
-void HandleAction_ActionFinished(void);
-void HandleEndTurn_ContinueBattle(void);
-void HandleEndTurn_BattleWon(void);
-void HandleEndTurn_BattleLost(void);
-void HandleEndTurn_RanFromBattle(void);
-void HandleEndTurn_MonFled(void);
-void HandleEndTurn_FinishBattle(void);
-void CB2_InitBattleInternal(void);
-void CB2_PreInitMultiBattle(void);
-void CB2_HandleStartMultiBattle(void);
-u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum);
-void CB2_HandleStartBattle(void);
-void TryCorrectShedinjaLanguage(struct Pokemon *mon);
-void BattleMainCB1(void);
-void CB2_QuitPokeDudeBattle(void);
-void sub_80111FC(struct Sprite *sprite);
-void sub_8011B94(void);
-void sub_8011BB0(void);
-void SpriteCB_MoveWildMonToRight(struct Sprite *sprite);
-void SpriteCB_WildMonShowHealthbox(struct Sprite *sprite);
-void SpriteCallbackDummy2(struct Sprite *sprite);
-void sub_8011E3C(struct Sprite *sprite);
-void SpriteCB_AnimFaintOpponent(struct Sprite *sprite);
-void sub_8012060(struct Sprite *sprite);
-void oac_poke_ally_(struct Sprite *sprite);
-void SpriteCallbackDummy3(struct Sprite *sprite);
-void SpriteCB_BounceEffect(struct Sprite *sprite);
-void sub_8012398(struct Sprite *sprite);
-void BattleStartClearSetData(void);
-void BattleIntroGetMonsData(void);
-void TurnValuesCleanUp(bool8 var0);
-void SpecialStatusesClear(void);
-void BattleIntroPrepareBackgroundSlide(void);
-void BattleIntroDrawTrainersOrMonsSprites(void);
-void BattleIntroDrawPartySummaryScreens(void);
-void BattleIntroPrintTrainerWantsToBattle(void);
-void BattleIntroPrintWildMonAttacked(void);
-void BattleIntroPrintOpponentSendsOut(void);
-void BattleIntroPrintPlayerSendsOut(void);
-void BattleIntroRecordMonsToDex(void);
-void BattleIntroOpponentSendsOutMonAnimation(void);
-void BattleIntroPlayerSendsOutMonAnimation(void);
-void TryDoEventsBeforeFirstTurn(void);
-void HandleTurnActionSelectionState(void);
-void RunTurnActionsFunctions(void);
-void SetActionsAndBattlersTurnOrder(void);
-void CheckFocusPunch_ClearVarsBeforeTurnStarts(void);
-void HandleEndTurn_FinishBattle(void);
-void FreeResetData_ReturnToOvOrDoEvolutions(void);
-void ReturnFromBattleToOverworld(void);
-void TryEvolvePokemon(void);
-void WaitForEvoSceneToFinish(void);
+static void sub_80111EC(struct Sprite *sprite);
+static void HandleAction_UseMove(void);
+static void HandleAction_Switch(void);
+static void HandleAction_UseItem(void);
+static void HandleAction_Run(void);
+static void HandleAction_WatchesCarefully(void);
+static void HandleAction_SafariZoneBallThrow(void);
+static void HandleAction_ThrowPokeblock(void);
+static void HandleAction_GoNear(void);
+static void HandleAction_SafariZoneRun(void);
+static void HandleAction_OldManBallThrow(void);
+static void HandleAction_TryFinish(void);
+static void HandleAction_NothingIsFainted(void);
+static void HandleAction_ActionFinished(void);
+static void HandleEndTurn_ContinueBattle(void);
+static void HandleEndTurn_BattleWon(void);
+static void HandleEndTurn_BattleLost(void);
+static void HandleEndTurn_RanFromBattle(void);
+static void HandleEndTurn_MonFled(void);
+static void HandleEndTurn_FinishBattle(void);
+static void CB2_InitBattleInternal(void);
+static void CB2_PreInitMultiBattle(void);
+static void CB2_HandleStartMultiBattle(void);
+static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum);
+static void CB2_HandleStartBattle(void);
+static void TryCorrectShedinjaLanguage(struct Pokemon *mon);
+static void BattleMainCB1(void);
+static void CB2_QuitPokeDudeBattle(void);
+static void sub_80111FC(struct Sprite *sprite);
+static void sub_8011B94(void);
+static void sub_8011BB0(void);
+static void SpriteCB_MoveWildMonToRight(struct Sprite *sprite);
+static void SpriteCB_WildMonShowHealthbox(struct Sprite *sprite);
+static void sub_8011E3C(struct Sprite *sprite);
+static void SpriteCB_AnimFaintOpponent(struct Sprite *sprite);
+static void sub_8012060(struct Sprite *sprite);
+static void oac_poke_ally_(struct Sprite *sprite);
+static void SpriteCallbackDummy3(struct Sprite *sprite);
+static void SpriteCB_BounceEffect(struct Sprite *sprite);
+static void sub_8012398(struct Sprite *sprite);
+static void BattleStartClearSetData(void);
+static void BattleIntroGetMonsData(void);
+static void TurnValuesCleanUp(bool8 var0);
+static void SpecialStatusesClear(void);
+static void BattleIntroPrepareBackgroundSlide(void);
+static void BattleIntroDrawTrainersOrMonsSprites(void);
+static void BattleIntroDrawPartySummaryScreens(void);
+static void BattleIntroPrintTrainerWantsToBattle(void);
+static void BattleIntroPrintWildMonAttacked(void);
+static void BattleIntroPrintOpponentSendsOut(void);
+static void BattleIntroPrintPlayerSendsOut(void);
+static void BattleIntroRecordMonsToDex(void);
+static void BattleIntroOpponentSendsOutMonAnimation(void);
+static void BattleIntroPlayerSendsOutMonAnimation(void);
+static void TryDoEventsBeforeFirstTurn(void);
+static void HandleTurnActionSelectionState(void);
+static void RunTurnActionsFunctions(void);
+static void SetActionsAndBattlersTurnOrder(void);
+static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void);
+static void HandleEndTurn_FinishBattle(void);
+static void FreeResetData_ReturnToOvOrDoEvolutions(void);
+static void ReturnFromBattleToOverworld(void);
+static void TryEvolvePokemon(void);
+static void WaitForEvoSceneToFinish(void);
 
-// TODO: put ewram variables here after resolving symbol ref in between
-extern u32 gUnknown_2022AE8[25];
-extern u8 gUnknown_2023DD4[MAX_BATTLERS_COUNT];
+EWRAM_DATA u16 gBattle_BG0_X = 0;
+EWRAM_DATA u16 gBattle_BG0_Y = 0;
+EWRAM_DATA u16 gBattle_BG1_X = 0;
+EWRAM_DATA u16 gBattle_BG1_Y = 0;
+EWRAM_DATA u16 gBattle_BG2_X = 0;
+EWRAM_DATA u16 gBattle_BG2_Y = 0;
+EWRAM_DATA u16 gBattle_BG3_X = 0;
+EWRAM_DATA u16 gBattle_BG3_Y = 0;
+EWRAM_DATA u16 gBattle_WIN0H = 0;
+EWRAM_DATA u16 gBattle_WIN0V = 0;
+EWRAM_DATA u16 gBattle_WIN1H = 0;
+EWRAM_DATA u16 gBattle_WIN1V = 0;
+EWRAM_DATA u8 gDisplayedStringBattle[300] = {0};
+EWRAM_DATA u8 gBattleTextBuff1[TEXT_BUFF_ARRAY_COUNT] = {0};
+EWRAM_DATA u8 gBattleTextBuff2[TEXT_BUFF_ARRAY_COUNT] = {0};
+EWRAM_DATA u8 gBattleTextBuff3[TEXT_BUFF_ARRAY_COUNT] = {0};
+static EWRAM_DATA u32 gUnknown_2022AE8[25] = {0};
+EWRAM_DATA u32 gBattleTypeFlags = 0;
+EWRAM_DATA u8 gBattleTerrain = 0;
+EWRAM_DATA u32 gUnknown_2022B54 = 0;
+EWRAM_DATA struct UnknownPokemonStruct4 gUnknown_2022B58[3] = {0};
+EWRAM_DATA u8 *gUnknown_2022BB8 = NULL;
+EWRAM_DATA u8 *gUnknown_2022BBC = NULL;
+EWRAM_DATA u16 *gUnknown_2022BC0 = NULL;
+EWRAM_DATA u8 gBattleBufferA[MAX_BATTLERS_COUNT][0x200] = {0};
+EWRAM_DATA u8 gBattleBufferB[MAX_BATTLERS_COUNT][0x200] = {0};
+EWRAM_DATA u8 gActiveBattler = 0;
+EWRAM_DATA u32 gBattleControllerExecFlags = 0;
+EWRAM_DATA u8 gBattlersCount = 0;
+EWRAM_DATA u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gBattlerPositions[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gActionsByTurnOrder[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gBattlerByTurnOrder[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gCurrentTurnActionNumber = 0;
+EWRAM_DATA u8 gCurrentActionFuncId = 0;
+EWRAM_DATA struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gBattlerSpriteIds[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gCurrMovePos = 0;
+EWRAM_DATA u8 gChosenMovePos = 0;
+EWRAM_DATA u16 gCurrentMove = 0;
+EWRAM_DATA u16 gChosenMove = 0;
+EWRAM_DATA u16 gCalledMove = 0;
+EWRAM_DATA s32 gBattleMoveDamage = 0;
+EWRAM_DATA s32 gHpDealt = 0;
+EWRAM_DATA s32 gTakenDmg[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u16 gLastUsedItem = 0;
+EWRAM_DATA u8 gLastUsedAbility = 0;
+EWRAM_DATA u8 gBattlerAttacker = 0;
+EWRAM_DATA u8 gBattlerTarget = 0;
+EWRAM_DATA u8 gBattlerFainted = 0;
+EWRAM_DATA u8 gEffectBattler = 0;
+EWRAM_DATA u8 gPotentialItemEffectBattler = 0;
+EWRAM_DATA u8 gAbsentBattlerFlags = 0;
+EWRAM_DATA u8 gCritMultiplier = 0;
+EWRAM_DATA u8 gMultiHitCounter = 0;
+EWRAM_DATA const u8 *gBattlescriptCurrInstr = NULL;
+EWRAM_DATA u32 gUnusedBattleMainVar = 0;
+EWRAM_DATA u8 gChosenActionByBattler[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA const u8 *gSelectionBattleScripts[MAX_BATTLERS_COUNT] = {NULL};
+EWRAM_DATA u16 gLastPrintedMoves[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u16 gLastMoves[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u16 gLastLandedMoves[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u16 gLastHitByType[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u16 gLastResultingMoves[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u16 gLockedMoves[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gLastHitBy[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u16 gChosenMoveByBattler[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gMoveResultFlags = 0;
+EWRAM_DATA u32 gHitMarker = 0;
+static EWRAM_DATA u8 gUnknown_2023DD4[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gTakenDmgByBattler[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gUnknown_2023DDC = 0;
+EWRAM_DATA u16 gSideStatuses[2] = {0};
+EWRAM_DATA struct SideTimer gSideTimers[2] = {0};
+EWRAM_DATA u32 gStatuses3[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA struct DisableStruct gDisableStructs[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u16 gPauseCounterBattle = 0;
+EWRAM_DATA u16 gPaydayMoney = 0;
+EWRAM_DATA u16 gRandomTurnNumber = 0;
+EWRAM_DATA u8 gBattleCommunication[BATTLE_COMMUNICATION_ENTRIES_COUNT] = {0};
+EWRAM_DATA u8 gBattleOutcome = 0;
+EWRAM_DATA struct ProtectStruct gProtectStructs[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA struct SpecialStatus gSpecialStatuses[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u16 gBattleWeather = 0;
+EWRAM_DATA struct WishFutureKnock gWishFutureKnock = {0};
+EWRAM_DATA u16 gIntroSlideFlags = 0;
+EWRAM_DATA u8 gSentPokesToOpponent[2] = {0};
+EWRAM_DATA u16 gDynamicBasePower = 0;
+EWRAM_DATA u16 gExpShareExp = 0;
+EWRAM_DATA struct BattleEnigmaBerry gEnigmaBerries[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA struct BattleScripting gBattleScripting = {0};
+EWRAM_DATA struct BattleStruct *gBattleStruct = NULL;
+EWRAM_DATA u8 *gLinkBattleSendBuffer = NULL;
+EWRAM_DATA u8 *gLinkBattleRecvBuffer = NULL;
+EWRAM_DATA struct BattleResources *gBattleResources = NULL;
+EWRAM_DATA u8 gActionSelectionCursor[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gMoveSelectionCursor[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gBattlerStatusSummaryTaskId[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gBattlerInMenuId = 0;
+EWRAM_DATA bool8 gDoingBattleAnim = FALSE;
+EWRAM_DATA u32 gTransformedPersonalities[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA struct BattleSpriteData *gBattleSpritesDataPtr = NULL;
+EWRAM_DATA struct MonSpritesGfx *gMonSpritesGfxPtr = NULL;
+EWRAM_DATA u16 gBattleMovePower = 0;
+EWRAM_DATA u16 gMoveToLearn = 0;
+EWRAM_DATA u8 gBattleMonForms[MAX_BATTLERS_COUNT] = {0};
 
 void (*gPreBattleCallback1)(void);
 void (*gBattleMainFunc)(void);
@@ -140,7 +242,7 @@ u8 gMultiUsePlayerCursor;
 u8 gNumberOfMovesToChoose;
 u8 gUnknown_3004FFC[MAX_BATTLERS_COUNT];
 
-const struct ScanlineEffectParams sIntroScanlineParams16Bit =
+static const struct ScanlineEffectParams sIntroScanlineParams16Bit =
 {
     (void *)REG_ADDR_BG3HOFS, SCANLINE_EFFECT_DMACNT_16BIT, 1
 };
@@ -156,7 +258,7 @@ const struct SpriteTemplate gUnknown_824EFF0 =
     .callback = sub_80111EC,
 };
 
-const u8 sText_ShedinjaJpnName[] = _("ヌケニン"); // Nukenin
+static const u8 sText_ShedinjaJpnName[] = _("ヌケニン"); // Nukenin
 
 const struct OamData gOamData_824F010 =
 {
@@ -189,20 +291,20 @@ const struct OamData gOamData_824F018 =
 };
 
 // not used
-const union AnimCmd gUnknown_824F020[] =
+static const union AnimCmd gUnknown_824F020[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_JUMP(0),
 };
 
 // not used
-const union AnimCmd *const gUnknown_824F028[] = 
+static const union AnimCmd *const gUnknown_824F028[] = 
 {
     gUnknown_824F020,
 };
 
 // not used
-const union AffineAnimCmd gUnknown_824F02C[] =
+static const union AffineAnimCmd gUnknown_824F02C[] =
 {
     AFFINEANIMCMD_FRAME(-0x10, 0x0, 0, 4),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 0x3C),
@@ -210,12 +312,12 @@ const union AffineAnimCmd gUnknown_824F02C[] =
 };
 
 // not used
-const union AffineAnimCmd *const gUnknown_824F044[] =
+static const union AffineAnimCmd *const gUnknown_824F044[] =
 {
     gUnknown_824F02C,
 };
 
-const s8 gUnknown_824F048[] ={ -32, -16, -16, -32, -32, 0, 0, 0 };
+static const s8 gUnknown_824F048[] = { -32, -16, -16, -32, -32, 0, 0, 0 };
 
 // format: attacking type, defending type, damage multiplier
 // the multiplier is a (decimal) fixed-point number:
@@ -473,7 +575,7 @@ const struct TrainerMoney gTrainerMoneyTable[] =
 
 #include "data/text/abilities.h"
 
-void (*const sTurnActionsFuncsTable[])(void) =
+static void (*const sTurnActionsFuncsTable[])(void) =
 {
     [B_ACTION_USE_MOVE] = HandleAction_UseMove,
     [B_ACTION_USE_ITEM] = HandleAction_UseItem,
@@ -491,7 +593,7 @@ void (*const sTurnActionsFuncsTable[])(void) =
     [B_ACTION_NOTHING_FAINTED] = HandleAction_NothingIsFainted,
 };
 
-void (*const sEndTurnFuncsTable[])(void) =
+static void (*const sEndTurnFuncsTable[])(void) =
 {
     [0] = HandleEndTurn_ContinueBattle, //B_OUTCOME_NONE?
     [B_OUTCOME_WON] = HandleEndTurn_BattleWon,
@@ -559,7 +661,7 @@ void CB2_InitBattle(void)
     }
 }
 
-void CB2_InitBattleInternal(void)
+static void CB2_InitBattleInternal(void)
 {
     s32 i;
 
@@ -619,7 +721,7 @@ void CB2_InitBattleInternal(void)
     gBattleCommunication[MULTIUSE_STATE] = 0;
 }
 
-void sub_800FFEC(void)
+static void sub_800FFEC(void)
 {
     u16 r6 = 0;
     u16 species = SPECIES_NONE;
@@ -649,7 +751,7 @@ void sub_800FFEC(void)
     *(&gBattleStruct->field_187) = r6 >> 8;
 }
 
-void SetPlayerBerryDataInBattleStruct(void)
+static void SetPlayerBerryDataInBattleStruct(void)
 {
     s32 i;
     struct BattleStruct *battleStruct = gBattleStruct;
@@ -679,7 +781,7 @@ void SetPlayerBerryDataInBattleStruct(void)
     }
 }
 
-void SetAllPlayersBerryData(void)
+static void SetAllPlayersBerryData(void)
 {
     s32 i, j;
 
@@ -773,7 +875,7 @@ void SetAllPlayersBerryData(void)
     }
 }
 
-void sub_8010414(u8 arg0, u8 arg1)
+static void sub_8010414(u8 arg0, u8 arg1)
 {
     u8 var = 0;
 
@@ -818,7 +920,7 @@ void sub_8010414(u8 arg0, u8 arg1)
     }
 }
 
-void CB2_HandleStartBattle(void)
+static void CB2_HandleStartBattle(void)
 {
     u8 playerMultiplayerId;
     u8 enemyMultiplayerId;
@@ -970,7 +1072,7 @@ void CB2_HandleStartBattle(void)
     }
 }
 
-void sub_80108C4(void)
+static void sub_80108C4(void)
 {
     s32 i, j;
     u8 *nick, *cur;
@@ -978,7 +1080,7 @@ void sub_80108C4(void)
     for (i = 0; i < 3; ++i)
     {
         gUnknown_2022B58[i].species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
-        gUnknown_2022B58[i].heldItem  = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+        gUnknown_2022B58[i].heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
         nick = gUnknown_2022B58[i].nickname;
         GetMonData(&gPlayerParty[i], MON_DATA_NICKNAME, nick);
         gUnknown_2022B58[i].level = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
@@ -1000,7 +1102,7 @@ void sub_80108C4(void)
     memcpy(&gBattleStruct->field_184, gUnknown_2022B58, sizeof(gUnknown_2022B58));
 }
 
-void CB2_PreInitMultiBattle(void)
+static void CB2_PreInitMultiBattle(void)
 {
     s32 i;
     u8 playerMultiplierId;
@@ -1075,7 +1177,7 @@ void CB2_PreInitMultiBattle(void)
     }
 }
 
-void CB2_HandleStartMultiBattle(void)
+static void CB2_HandleStartMultiBattle(void)
 {
     u8 playerMultiplayerId;
     s32 id;
@@ -1353,7 +1455,7 @@ void FreeRestoreBattleData(void)
     FreeBattleResources();
 }
 
-void CB2_QuitPokeDudeBattle(void)
+static void CB2_QuitPokeDudeBattle(void)
 {
     UpdatePaletteFade();
     if (!gPaletteFade.active)
@@ -1364,13 +1466,13 @@ void CB2_QuitPokeDudeBattle(void)
     }
 }
 
-void sub_80111EC(struct Sprite *sprite)
+static void sub_80111EC(struct Sprite *sprite)
 {
     sprite->data[0] = 0;
     sprite->callback = sub_80111FC;
 }
 
-void sub_80111FC(struct Sprite *sprite)
+static void sub_80111FC(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -1416,7 +1518,7 @@ void sub_80111FC(struct Sprite *sprite)
     }
 }
 
-u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
+static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
 {
     u32 nameHash = 0;
     u32 personalityValue;
@@ -1507,7 +1609,7 @@ u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
 }
 
 // not used
-void sub_80116CC(void)
+static void sub_80116CC(void)
 {
     if (REG_VCOUNT < 0xA0 && REG_VCOUNT >= 0x6F)
         REG_BG0CNT = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(24) | BGCNT_16COLOR | BGCNT_TXT256x512;
@@ -1539,7 +1641,7 @@ void nullsub_9(struct Sprite *sprite)
 {
 }
 
-void sub_80117BC(struct Sprite *sprite)
+static void sub_80117BC(struct Sprite *sprite)
 {
     if (sprite->data[0] != 0)
         sprite->pos1.x = sprite->data[1] + ((sprite->data[2] & 0xFF00) >> 8);
@@ -1562,7 +1664,7 @@ void sub_801182C(struct Sprite *sprite)
     PlaySE(SE_BT_START);
 }
 
-void sub_801184C(u8 taskId)
+static void sub_801184C(u8 taskId)
 {
     struct Pokemon *party1 = NULL;
     struct Pokemon *party2 = NULL;
@@ -1692,7 +1794,7 @@ void sub_8011A1C(void)
     gBattleCommunication[MULTIUSE_STATE] = 0;
 }
 
-void sub_8011B94(void)
+static void sub_8011B94(void)
 {
     sub_8011BB0();
     AnimateSprites();
@@ -1701,7 +1803,7 @@ void sub_8011B94(void)
     RunTasks();
 }
 
-void sub_8011BB0(void)
+static void sub_8011BB0(void)
 {
     s32 i;
 
@@ -1765,7 +1867,7 @@ u32 sub_8011C44(u8 arrayId, u8 caseId)
     return ret;
 }
 
-void TryCorrectShedinjaLanguage(struct Pokemon *mon)
+static void TryCorrectShedinjaLanguage(struct Pokemon *mon)
 {
     u8 nickname[POKEMON_NAME_LENGTH + 1];
     u8 language = LANGUAGE_JAPANESE;
@@ -1789,7 +1891,7 @@ void SpriteCB_WildMon(struct Sprite *sprite)
     BeginNormalPaletteFade(0x20000, 0, 10, 10, RGB(8, 8, 8));
 }
 
-void SpriteCB_MoveWildMonToRight(struct Sprite *sprite)
+static void SpriteCB_MoveWildMonToRight(struct Sprite *sprite)
 {
     if ((gIntroSlideFlags & 1) == 0)
     {
@@ -1802,7 +1904,7 @@ void SpriteCB_MoveWildMonToRight(struct Sprite *sprite)
     }
 }
 
-void SpriteCB_WildMonShowHealthbox(struct Sprite *sprite)
+static void SpriteCB_WildMonShowHealthbox(struct Sprite *sprite)
 {
     if (sprite->animEnded)
     {
@@ -1819,7 +1921,7 @@ void SpriteCallbackDummy2(struct Sprite *sprite)
 }
 
 // not used
-void sub_8011E28(struct Sprite *sprite)
+static void sub_8011E28(struct Sprite *sprite)
 {
     sprite->data[3] = 6;
     sprite->data[4] = 1;
@@ -1827,7 +1929,7 @@ void sub_8011E28(struct Sprite *sprite)
 }
 
 // not used
-void sub_8011E3C(struct Sprite *sprite)
+static void sub_8011E3C(struct Sprite *sprite)
 {
     --sprite->data[4];
     if (sprite->data[4] == 0)
@@ -1884,7 +1986,7 @@ void SpriteCB_FaintOpponentMon(struct Sprite *sprite)
     sprite->callback = SpriteCB_AnimFaintOpponent;
 }
 
-void SpriteCB_AnimFaintOpponent(struct Sprite *sprite)
+static void SpriteCB_AnimFaintOpponent(struct Sprite *sprite)
 {
     s32 i;
 
@@ -1915,7 +2017,7 @@ void sub_8012044(struct Sprite *sprite)
     sprite->callback = sub_8012060;
 }
 
-void sub_8012060(struct Sprite *sprite)
+static void sub_8012060(struct Sprite *sprite)
 {
     --sprite->data[3];
     if (sprite->data[3] == 0)
@@ -1937,7 +2039,7 @@ void sub_80120C4(struct Sprite *sprite)
     sprite->callback = oac_poke_ally_;
 }
 
-void oac_poke_ally_(struct Sprite *sprite)
+static void oac_poke_ally_(struct Sprite *sprite)
 {
     if (!(gIntroSlideFlags & 1))
     {
@@ -1955,7 +2057,7 @@ void sub_8012100(struct Sprite *sprite)
     sprite->callback = SpriteCallbackDummy3;
 }
 
-void SpriteCallbackDummy3(struct Sprite *sprite)
+static void SpriteCallbackDummy3(struct Sprite *sprite)
 {
 }
 
@@ -2040,7 +2142,7 @@ void EndBounceEffect(u8 battler, u8 which)
     gSprites[bouncerSpriteId].pos2.y = 0;
 }
 
-void SpriteCB_BounceEffect(struct Sprite *sprite)
+static void SpriteCB_BounceEffect(struct Sprite *sprite)
 {
     u8 bouncerSpriteId = sprite->sBouncerSpriteId;
     s32 index;
@@ -2065,7 +2167,7 @@ void sub_801236C(struct Sprite *sprite)
         sprite->centerToCornerVecX = gUnknown_824F048[sprite->animCmdIndex];
 }
 
-void sub_8012398(struct Sprite *sprite)
+static void sub_8012398(struct Sprite *sprite)
 {
     sub_801236C(sprite);
     if (sprite->animEnded)
@@ -2083,14 +2185,14 @@ void BeginBattleIntro(void)
     gBattleMainFunc = BattleIntroGetMonsData;
 }
 
-void BattleMainCB1(void)
+static void BattleMainCB1(void)
 {
     gBattleMainFunc();
     for (gActiveBattler = 0; gActiveBattler < gBattlersCount; ++gActiveBattler)
         gBattlerControllerFuncs[gActiveBattler]();
 }
 
-void BattleStartClearSetData(void)
+static void BattleStartClearSetData(void)
 {
     s32 i;
     u32 j;
@@ -2280,8 +2382,8 @@ void SwitchInClearSetData(void)
             *(gBattleStruct->lastTakenMove + i * 2 + 0) = MOVE_NONE;
             *(gBattleStruct->lastTakenMove + i * 2 + 1) = MOVE_NONE;
         }
-        *(i * 8 + gActiveBattler * 2 + (u8*)(gBattleStruct->lastTakenMoveFrom) + 0) = 0;
-        *(i * 8 + gActiveBattler * 2 + (u8*)(gBattleStruct->lastTakenMoveFrom) + 1) = 0;
+        *(i * 8 + gActiveBattler * 2 + (u8 *)(gBattleStruct->lastTakenMoveFrom) + 0) = 0;
+        *(i * 8 + gActiveBattler * 2 + (u8 *)(gBattleStruct->lastTakenMoveFrom) + 1) = 0;
     }
     *((u8 *)(&gBattleStruct->choicedMove[gActiveBattler]) + 0) = MOVE_NONE;
     *((u8 *)(&gBattleStruct->choicedMove[gActiveBattler]) + 1) = MOVE_NONE;
@@ -2365,7 +2467,7 @@ void FaintClearSetData(void)
     gBattleMons[gActiveBattler].type2 = gBaseStats[gBattleMons[gActiveBattler].species].type2;
 }
 
-void BattleIntroGetMonsData(void)
+static void BattleIntroGetMonsData(void)
 {
     switch (gBattleCommunication[MULTIUSE_STATE])
     {
@@ -2388,7 +2490,7 @@ void BattleIntroGetMonsData(void)
     }
 }
 
-void BattleIntroPrepareBackgroundSlide(void)
+static void BattleIntroPrepareBackgroundSlide(void)
 {
     if (gBattleControllerExecFlags == 0)
     {
@@ -2401,7 +2503,7 @@ void BattleIntroPrepareBackgroundSlide(void)
     }
 }
 
-void BattleIntroDrawTrainersOrMonsSprites(void)
+static void BattleIntroDrawTrainersOrMonsSprites(void)
 {
     u8 *ptr;
     s32 i;
@@ -2487,7 +2589,7 @@ void BattleIntroDrawTrainersOrMonsSprites(void)
     }
 }
 
-void BattleIntroDrawPartySummaryScreens(void)
+static void BattleIntroDrawPartySummaryScreens(void)
 {
     s32 i;
     struct HpAndStatus hpStatus[PARTY_SIZE];
@@ -2557,7 +2659,7 @@ void BattleIntroDrawPartySummaryScreens(void)
     }
 }
 
-void BattleIntroPrintTrainerWantsToBattle(void)
+static void BattleIntroPrintTrainerWantsToBattle(void)
 {
     if (!gBattleControllerExecFlags)
     {
@@ -2567,7 +2669,7 @@ void BattleIntroPrintTrainerWantsToBattle(void)
     }
 }
 
-void BattleIntroPrintWildMonAttacked(void)
+static void BattleIntroPrintWildMonAttacked(void)
 {
     if (!gBattleControllerExecFlags)
     {
@@ -2581,7 +2683,7 @@ void BattleIntroPrintWildMonAttacked(void)
     }
 }
 
-void BattleIntroPrintOpponentSendsOut(void)
+static void BattleIntroPrintOpponentSendsOut(void)
 {
     if (!gBattleControllerExecFlags)
     {
@@ -2590,7 +2692,7 @@ void BattleIntroPrintOpponentSendsOut(void)
     }
 }
 
-void BattleIntroOpponentSendsOutMonAnimation(void)
+static void BattleIntroOpponentSendsOutMonAnimation(void)
 {
     if (!gBattleControllerExecFlags)
     {
@@ -2611,7 +2713,7 @@ void BattleIntroOpponentSendsOutMonAnimation(void)
     }
 }
 
-void BattleIntroRecordMonsToDex(void)
+static void BattleIntroRecordMonsToDex(void)
 {
     if (!gBattleControllerExecFlags)
     {
@@ -2629,7 +2731,7 @@ void BattleIntroRecordMonsToDex(void)
 }
 
 // not used
-void sub_80136C4(void)
+static void sub_80136C4(void)
 {
     if (!gBattleControllerExecFlags)
         gBattleMainFunc = BattleIntroPrintPlayerSendsOut;
@@ -2645,7 +2747,7 @@ void BattleIntroPrintPlayerSendsOut(void)
     }
 }
 
-void BattleIntroPlayerSendsOutMonAnimation(void)
+static void BattleIntroPlayerSendsOutMonAnimation(void)
 {
     u32 position;
 
@@ -2672,7 +2774,7 @@ void BattleIntroPlayerSendsOutMonAnimation(void)
 }
 
 // not used
-void sub_80137D0(void)
+static void sub_80137D0(void)
 {
     if (!gBattleControllerExecFlags)
     {
@@ -2691,7 +2793,7 @@ void sub_80137D0(void)
     }
 }
 
-void TryDoEventsBeforeFirstTurn(void)
+static void TryDoEventsBeforeFirstTurn(void)
 {
     s32 i, j;
     u8 effect = 0;
@@ -2765,7 +2867,7 @@ void TryDoEventsBeforeFirstTurn(void)
     }
 }
 
-void HandleEndTurn_ContinueBattle(void)
+static void HandleEndTurn_ContinueBattle(void)
 {
     s32 i;
 
@@ -2935,7 +3037,7 @@ enum
     STATE_WAIT_SET_BEFORE_ACTION,
 };
 
-void HandleTurnActionSelectionState(void)
+static void HandleTurnActionSelectionState(void)
 {
     s32 i;
 
@@ -3368,7 +3470,7 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
     return strikesFirst;
 }
 
-void SetActionsAndBattlersTurnOrder(void)
+static void SetActionsAndBattlersTurnOrder(void)
 {
     s32 turnOrderId = 0;
     s32 i, j;
@@ -3459,7 +3561,7 @@ void SetActionsAndBattlersTurnOrder(void)
     gBattleStruct->focusPunchBattlerId = 0;
 }
 
-void TurnValuesCleanUp(bool8 var0)
+static void TurnValuesCleanUp(bool8 var0)
 {
     s32 i;
     u8 *dataPtr;
@@ -3493,7 +3595,7 @@ void TurnValuesCleanUp(bool8 var0)
     gSideTimers[1].followmeTimer = 0;
 }
 
-void SpecialStatusesClear(void)
+static void SpecialStatusesClear(void)
 {
     for (gActiveBattler = 0; gActiveBattler < gBattlersCount; ++gActiveBattler)
     {
@@ -3505,7 +3607,7 @@ void SpecialStatusesClear(void)
     }
 }
 
-void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
+static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
 {
     if (!(gHitMarker & HITMARKER_RUN))
     {
@@ -3540,7 +3642,7 @@ void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
     gBattleResources->battleScriptsStack->size = 0;
 }
 
-void RunTurnActionsFunctions(void)
+static void RunTurnActionsFunctions(void)
 {
     if (gBattleOutcome != 0)
         gCurrentActionFuncId = B_ACTION_FINISHED;
@@ -3562,7 +3664,7 @@ void RunTurnActionsFunctions(void)
     }
 }
 
-void HandleEndTurn_BattleWon(void)
+static void HandleEndTurn_BattleWon(void)
 {
     gCurrentActionFuncId = 0;
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
@@ -3605,7 +3707,7 @@ void HandleEndTurn_BattleWon(void)
     gBattleMainFunc = HandleEndTurn_FinishBattle;
 }
 
-void HandleEndTurn_BattleLost(void)
+static void HandleEndTurn_BattleLost(void)
 {
     gCurrentActionFuncId = 0;
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
@@ -3634,7 +3736,7 @@ void HandleEndTurn_BattleLost(void)
     gBattleMainFunc = HandleEndTurn_FinishBattle;
 }
 
-void HandleEndTurn_RanFromBattle(void)
+static void HandleEndTurn_RanFromBattle(void)
 {
     gCurrentActionFuncId = 0;
     switch (gProtectStructs[gBattlerAttacker].fleeFlag)
@@ -3652,7 +3754,7 @@ void HandleEndTurn_RanFromBattle(void)
     gBattleMainFunc = HandleEndTurn_FinishBattle;
 }
 
-void HandleEndTurn_MonFled(void)
+static void HandleEndTurn_MonFled(void)
 {
     gCurrentActionFuncId = 0;
     PREPARE_MON_NICK_BUFFER(gBattleTextBuff1, gBattlerAttacker, gBattlerPartyIndexes[gBattlerAttacker]);
@@ -3660,7 +3762,7 @@ void HandleEndTurn_MonFled(void)
     gBattleMainFunc = HandleEndTurn_FinishBattle;
 }
 
-void HandleEndTurn_FinishBattle(void)
+static void HandleEndTurn_FinishBattle(void)
 {
     if (gCurrentActionFuncId == B_ACTION_TRY_FINISH || gCurrentActionFuncId == B_ACTION_FINISHED)
     {
@@ -3697,7 +3799,7 @@ void HandleEndTurn_FinishBattle(void)
     }
 }
 
-void FreeResetData_ReturnToOvOrDoEvolutions(void)
+static void FreeResetData_ReturnToOvOrDoEvolutions(void)
 {
     if (!gPaletteFade.active)
     {
@@ -3716,7 +3818,7 @@ void FreeResetData_ReturnToOvOrDoEvolutions(void)
     }
 }
 
-void TryEvolvePokemon(void)
+static void TryEvolvePokemon(void)
 {
     s32 i;
 
@@ -3744,13 +3846,13 @@ void TryEvolvePokemon(void)
     gBattleMainFunc = ReturnFromBattleToOverworld;
 }
 
-void WaitForEvoSceneToFinish(void)
+static void WaitForEvoSceneToFinish(void)
 {
     if (gMain.callback2 == BattleMainCB2)
         gBattleMainFunc = TryEvolvePokemon;
 }
 
-void ReturnFromBattleToOverworld(void)
+static void ReturnFromBattleToOverworld(void)
 {
     if (!(gBattleTypeFlags & BATTLE_TYPE_LINK))
     {
@@ -3794,7 +3896,7 @@ void RunBattleScriptCommands(void)
         gBattleScriptingCommandsTable[gBattlescriptCurrInstr[0]]();
 }
 
-void HandleAction_UseMove(void)
+static void HandleAction_UseMove(void)
 {
     u8 side;
     u8 var = 4;
@@ -3966,7 +4068,7 @@ void HandleAction_UseMove(void)
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
 
-void HandleAction_Switch(void)
+static void HandleAction_Switch(void)
 {
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     gBattle_BG0_X = 0;
@@ -3981,7 +4083,7 @@ void HandleAction_Switch(void)
         ++gBattleResults.playerSwitchesCounter;
 }
 
-void HandleAction_UseItem(void)
+static void HandleAction_UseItem(void)
 {
     gBattlerAttacker = gBattlerTarget = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     gBattle_BG0_X = 0;
@@ -4115,14 +4217,14 @@ bool8 TryRunFromBattle(u8 battler)
     return effect;
 }
 
-void HandleAction_Run(void)
+static void HandleAction_Run(void)
 {
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
 
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
         gCurrentTurnActionNumber = gBattlersCount;
-        for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
+        for (gActiveBattler = 0; gActiveBattler < gBattlersCount; ++gActiveBattler)
         {
             if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
             {
@@ -4166,7 +4268,7 @@ void HandleAction_Run(void)
     }
 }
 
-void HandleAction_WatchesCarefully(void)
+static void HandleAction_WatchesCarefully(void)
 {
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     gBattle_BG0_X = 0;
@@ -4203,7 +4305,7 @@ void HandleAction_WatchesCarefully(void)
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
 
-void HandleAction_SafariZoneBallThrow(void)
+static void HandleAction_SafariZoneBallThrow(void)
 {
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     gBattle_BG0_X = 0;
@@ -4214,7 +4316,7 @@ void HandleAction_SafariZoneBallThrow(void)
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
 
-void HandleAction_ThrowPokeblock(void)
+static void HandleAction_ThrowPokeblock(void)
 {
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     gBattle_BG0_X = 0;
@@ -4230,7 +4332,7 @@ void HandleAction_ThrowPokeblock(void)
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
 
-void HandleAction_GoNear(void)
+static void HandleAction_GoNear(void)
 {
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     gBattle_BG0_X = 0;
@@ -4246,7 +4348,7 @@ void HandleAction_GoNear(void)
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
 
-void HandleAction_SafariZoneRun(void)
+static void HandleAction_SafariZoneRun(void)
 {
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     PlaySE(SE_NIGERU);
@@ -4254,7 +4356,7 @@ void HandleAction_SafariZoneRun(void)
     gBattleOutcome = B_OUTCOME_RAN;
 }
 
-void HandleAction_OldManBallThrow(void)
+static void HandleAction_OldManBallThrow(void)
 {
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     gBattle_BG0_X = 0;
@@ -4265,7 +4367,7 @@ void HandleAction_OldManBallThrow(void)
     gActionsByTurnOrder[1] = B_ACTION_FINISHED;
 }
 
-void HandleAction_TryFinish(void)
+static void HandleAction_TryFinish(void)
 {
     if (!HandleFaintedMonActions())
     {
@@ -4274,7 +4376,7 @@ void HandleAction_TryFinish(void)
     }
 }
 
-void HandleAction_NothingIsFainted(void)
+static void HandleAction_NothingIsFainted(void)
 {
     ++gCurrentTurnActionNumber;
     gCurrentActionFuncId = gActionsByTurnOrder[gCurrentTurnActionNumber];
@@ -4285,7 +4387,7 @@ void HandleAction_NothingIsFainted(void)
                     | HITMARKER_CHARGING | HITMARKER_x4000000);
 }
 
-void HandleAction_ActionFinished(void)
+static void HandleAction_ActionFinished(void)
 {
     ++gCurrentTurnActionNumber;
     gCurrentActionFuncId = gActionsByTurnOrder[gCurrentTurnActionNumber];

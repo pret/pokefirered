@@ -20,7 +20,7 @@ BufferStringBattle: @ 80D7274
 	mov r8, r0
 	ldrb r1, [r0]
 	lsls r1, 9
-	ldr r0, _080D7338 @ =gUnknown_2022BC8
+	ldr r0, _080D7338 @ =(gBattleBufferA + 4)
 	adds r1, r0
 	str r1, [r4]
 	ldr r2, _080D733C @ =gLastUsedItem
@@ -107,7 +107,7 @@ _080D7326:
 	.align 2, 0
 _080D7330: .4byte gUnknown_2039A34
 _080D7334: .4byte gActiveBattler
-_080D7338: .4byte gUnknown_2022BC8
+_080D7338: .4byte (gBattleBufferA + 4)
 _080D733C: .4byte gLastUsedItem
 _080D7340: .4byte gLastUsedAbility
 _080D7344: .4byte gBattleScripting
@@ -2943,7 +2943,7 @@ SetPpNumbersPaletteInMoveSelection: @ 80D89DC
 	ldr r0, _080D8A38 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r1, r2, 9
-	ldr r0, _080D8A3C @ =gUnknown_2022BC8
+	ldr r0, _080D8A3C @ =(gBattleBufferA + 4)
 	adds r1, r0
 	ldr r4, _080D8A40 @ =gUnknown_8D2FBB4
 	ldr r0, _080D8A44 @ =gMoveSelectionCursor
@@ -2983,7 +2983,7 @@ SetPpNumbersPaletteInMoveSelection: @ 80D89DC
 	bx r0
 	.align 2, 0
 _080D8A38: .4byte gActiveBattler
-_080D8A3C: .4byte gUnknown_2022BC8
+_080D8A3C: .4byte (gBattleBufferA + 4)
 _080D8A40: .4byte gUnknown_8D2FBB4
 _080D8A44: .4byte gMoveSelectionCursor
 _080D8A48: .4byte gPlttBufferUnfaded

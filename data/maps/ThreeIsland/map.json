@@ -264,7 +264,7 @@
       "x": 7,
       "y": 27,
       "elevation": 3,
-      "var": "VAR_0x407B",
+      "var": "VAR_MAP_SCENE_THREE_ISLAND",
       "var_value": 2,
       "script": "ThreeIsland_EventScript_1679B5"
     },
@@ -273,7 +273,7 @@
       "x": 8,
       "y": 27,
       "elevation": 3,
-      "var": "VAR_0x407B",
+      "var": "VAR_MAP_SCENE_THREE_ISLAND",
       "var_value": 2,
       "script": "ThreeIsland_EventScript_1679B5"
     },
@@ -282,7 +282,7 @@
       "x": 9,
       "y": 27,
       "elevation": 3,
-      "var": "VAR_0x407B",
+      "var": "VAR_MAP_SCENE_THREE_ISLAND",
       "var_value": 2,
       "script": "ThreeIsland_EventScript_1679B5"
     },
@@ -291,7 +291,7 @@
       "x": 10,
       "y": 27,
       "elevation": 3,
-      "var": "VAR_0x407B",
+      "var": "VAR_MAP_SCENE_THREE_ISLAND",
       "var_value": 2,
       "script": "ThreeIsland_EventScript_1679B5"
     },
@@ -300,7 +300,7 @@
       "x": 7,
       "y": 26,
       "elevation": 3,
-      "var": "VAR_0x407B",
+      "var": "VAR_MAP_SCENE_THREE_ISLAND",
       "var_value": 3,
       "script": "ThreeIsland_EventScript_167A1D"
     },
@@ -309,7 +309,7 @@
       "x": 8,
       "y": 26,
       "elevation": 3,
-      "var": "VAR_0x407B",
+      "var": "VAR_MAP_SCENE_THREE_ISLAND",
       "var_value": 3,
       "script": "ThreeIsland_EventScript_167A29"
     },
@@ -318,7 +318,7 @@
       "x": 9,
       "y": 26,
       "elevation": 3,
-      "var": "VAR_0x407B",
+      "var": "VAR_MAP_SCENE_THREE_ISLAND",
       "var_value": 3,
       "script": "ThreeIsland_EventScript_167A35"
     },
@@ -327,7 +327,7 @@
       "x": 11,
       "y": 27,
       "elevation": 3,
-      "var": "VAR_0x407B",
+      "var": "VAR_MAP_SCENE_THREE_ISLAND",
       "var_value": 2,
       "script": "ThreeIsland_EventScript_1679B5"
     },
@@ -336,7 +336,7 @@
       "x": 10,
       "y": 26,
       "elevation": 3,
-      "var": "VAR_0x407B",
+      "var": "VAR_MAP_SCENE_THREE_ISLAND",
       "var_value": 3,
       "script": "ThreeIsland_EventScript_167A41"
     },
@@ -345,7 +345,7 @@
       "x": 11,
       "y": 26,
       "elevation": 3,
-      "var": "VAR_0x407B",
+      "var": "VAR_MAP_SCENE_THREE_ISLAND",
       "var_value": 3,
       "script": "ThreeIsland_EventScript_167A4D"
     }

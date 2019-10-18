@@ -152,7 +152,7 @@
       "x": 13,
       "y": 149,
       "elevation": 3,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 1,
       "script": "Route23_EventScript_168583"
     },
@@ -161,7 +161,7 @@
       "x": 7,
       "y": 140,
       "elevation": 3,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 2,
       "script": "Route23_EventScript_168598"
     },
@@ -170,7 +170,7 @@
       "x": 12,
       "y": 123,
       "elevation": 3,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 3,
       "script": "Route23_EventScript_1685AD"
     },
@@ -179,7 +179,7 @@
       "x": 11,
       "y": 111,
       "elevation": 0,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 4,
       "script": "Route23_EventScript_1685C2"
     },
@@ -188,7 +188,7 @@
       "x": 9,
       "y": 94,
       "elevation": 1,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 5,
       "script": "Route23_EventScript_1685D7"
     },
@@ -197,7 +197,7 @@
       "x": 12,
       "y": 61,
       "elevation": 3,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 6,
       "script": "Route23_EventScript_1685EC"
     },
@@ -206,7 +206,7 @@
       "x": 1,
       "y": 35,
       "elevation": 0,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 7,
       "script": "Route23_EventScript_168601"
     },
@@ -215,7 +215,7 @@
       "x": 1,
       "y": 34,
       "elevation": 0,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 7,
       "script": "Route23_EventScript_168601"
     },
@@ -224,7 +224,7 @@
       "x": 1,
       "y": 32,
       "elevation": 3,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 7,
       "script": "Route23_EventScript_168601"
     },
@@ -233,7 +233,7 @@
       "x": 1,
       "y": 33,
       "elevation": 0,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 7,
       "script": "Route23_EventScript_168601"
     },
@@ -242,7 +242,7 @@
       "x": 1,
       "y": 31,
       "elevation": 0,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 7,
       "script": "Route23_EventScript_168601"
     },
@@ -251,7 +251,7 @@
       "x": 1,
       "y": 36,
       "elevation": 0,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 7,
       "script": "Route23_EventScript_168601"
     },
@@ -260,7 +260,7 @@
       "x": 5,
       "y": 35,
       "elevation": 3,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 7,
       "script": "Route23_EventScript_168601"
     },
@@ -269,7 +269,7 @@
       "x": 4,
       "y": 35,
       "elevation": 3,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 7,
       "script": "Route23_EventScript_168601"
     },
@@ -278,7 +278,7 @@
       "x": 10,
       "y": 60,
       "elevation": 0,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 6,
       "script": "Route23_EventScript_1685EC"
     },
@@ -287,7 +287,7 @@
       "x": 13,
       "y": 61,
       "elevation": 3,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 6,
       "script": "Route23_EventScript_1685EC"
     },
@@ -296,7 +296,7 @@
       "x": 11,
       "y": 60,
       "elevation": 0,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 6,
       "script": "Route23_EventScript_1685EC"
     },
@@ -305,7 +305,7 @@
       "x": 8,
       "y": 94,
       "elevation": 1,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 5,
       "script": "Route23_EventScript_1685D7"
     },
@@ -314,7 +314,7 @@
       "x": 5,
       "y": 92,
       "elevation": 1,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 5,
       "script": "Route23_EventScript_1685D7"
     },
@@ -323,7 +323,7 @@
       "x": 7,
       "y": 94,
       "elevation": 1,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 5,
       "script": "Route23_EventScript_1685D7"
     },
@@ -332,7 +332,7 @@
       "x": 4,
       "y": 92,
       "elevation": 1,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 5,
       "script": "Route23_EventScript_1685D7"
     },
@@ -341,7 +341,7 @@
       "x": 3,
       "y": 92,
       "elevation": 1,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 5,
       "script": "Route23_EventScript_1685D7"
     },
@@ -350,7 +350,7 @@
       "x": 2,
       "y": 92,
       "elevation": 1,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 5,
       "script": "Route23_EventScript_1685D7"
     },
@@ -359,7 +359,7 @@
       "x": 4,
       "y": 139,
       "elevation": 0,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 2,
       "script": "Route23_EventScript_168598"
     },
@@ -368,7 +368,7 @@
       "x": 5,
       "y": 139,
       "elevation": 0,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 2,
       "script": "Route23_EventScript_168598"
     },
@@ -377,7 +377,7 @@
       "x": 6,
       "y": 140,
       "elevation": 3,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 2,
       "script": "Route23_EventScript_168598"
     },
@@ -386,7 +386,7 @@
       "x": 10,
       "y": 122,
       "elevation": 0,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 3,
       "script": "Route23_EventScript_1685AD"
     },
@@ -395,7 +395,7 @@
       "x": 11,
       "y": 122,
       "elevation": 0,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 3,
       "script": "Route23_EventScript_1685AD"
     },
@@ -404,7 +404,7 @@
       "x": 13,
       "y": 123,
       "elevation": 3,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 3,
       "script": "Route23_EventScript_1685AD"
     },
@@ -413,7 +413,7 @@
       "x": 8,
       "y": 109,
       "elevation": 1,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 4,
       "script": "Route23_EventScript_1685C2"
     },
@@ -422,7 +422,7 @@
       "x": 9,
       "y": 109,
       "elevation": 1,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 4,
       "script": "Route23_EventScript_1685C2"
     },
@@ -431,7 +431,7 @@
       "x": 10,
       "y": 109,
       "elevation": 1,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 4,
       "script": "Route23_EventScript_1685C2"
     },
@@ -440,7 +440,7 @@
       "x": 11,
       "y": 109,
       "elevation": 1,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 4,
       "script": "Route23_EventScript_1685C2"
     },
@@ -449,7 +449,7 @@
       "x": 12,
       "y": 109,
       "elevation": 1,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 4,
       "script": "Route23_EventScript_1685C2"
     },
@@ -458,7 +458,7 @@
       "x": 12,
       "y": 111,
       "elevation": 0,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 4,
       "script": "Route23_EventScript_1685C2"
     },
@@ -467,7 +467,7 @@
       "x": 14,
       "y": 112,
       "elevation": 1,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 4,
       "script": "Route23_EventScript_1685C2"
     },
@@ -476,7 +476,7 @@
       "x": 13,
       "y": 112,
       "elevation": 1,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 4,
       "script": "Route23_EventScript_1685C2"
     },
@@ -485,7 +485,7 @@
       "x": 15,
       "y": 112,
       "elevation": 1,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 4,
       "script": "Route23_EventScript_1685C2"
     },
@@ -494,7 +494,7 @@
       "x": 12,
       "y": 148,
       "elevation": 0,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 1,
       "script": "Route23_EventScript_168583"
     },
@@ -503,7 +503,7 @@
       "x": 11,
       "y": 148,
       "elevation": 0,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 1,
       "script": "Route23_EventScript_168583"
     },
@@ -512,7 +512,7 @@
       "x": 14,
       "y": 149,
       "elevation": 3,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 1,
       "script": "Route23_EventScript_168583"
     },
@@ -521,7 +521,7 @@
       "x": 10,
       "y": 148,
       "elevation": 0,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 1,
       "script": "Route23_EventScript_168583"
     }

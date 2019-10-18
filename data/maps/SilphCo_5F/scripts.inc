@@ -14,7 +14,7 @@ SilphCo_5F_MapScript1_1617C4:: @ 81617C4
 SilphCo_5F_EventScript_1617E0:: @ 81617E0
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x4060, 1
+	compare_var_to_value VAR_MAP_SCENE_SILPH_CO_11F, 1
 	goto_if 4, EventScript_1617F7
 	msgbox gUnknown_8175B70
 	release

@@ -5,10 +5,10 @@ Route23_MapScripts:: @ 81684EB
 Route23_MapScript1_1684F1:: @ 81684F1
 	clearflag FLAG_0x059
 	setflag FLAG_0x058
-	setvar VAR_0x4064, 0
-	setvar VAR_0x4065, 0
-	setvar VAR_0x4066, 0
-	setvar VAR_0x4067, 0
+	setvar VAR_MAP_SCENE_VICTORY_ROAD_1F, 0
+	setvar VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER1, 0
+	setvar VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER2, 0
+	setvar VAR_MAP_SCENE_VICTORY_ROAD_3F, 0
 	end
 
 Route23_EventScript_16850C:: @ 816850C

@@ -11,7 +11,7 @@ PokemonLeague_LancesRoom_MapScript1_162942:: @ 8162942
 	end
 
 PokemonLeague_LancesRoom_MapScript2_16294D:: @ 816294D
-	compare_var_to_value VAR_0x4068, 4
+	compare_var_to_value VAR_MAP_SCENE_POKEMON_LEAGUE, 4
 	call_if 1, EventScript_162962
 	checkflag FLAG_0x4BB
 	call_if 1, EventScript_162968
@@ -34,7 +34,7 @@ EventScript_162978:: @ 8162978
 	end
 
 PokemonLeague_LancesRoom_MapScript4_16297D:: @ 816297D
-	map_script_2 VAR_0x4068, 3, EventScript_162987
+	map_script_2 VAR_MAP_SCENE_POKEMON_LEAGUE, 3, EventScript_162987
 	.2byte 0
 
 EventScript_162987:: @ 8162987
@@ -46,7 +46,7 @@ EventScript_162987:: @ 8162987
 	playse SE_KI_GASYAN
 	special DrawWholeMapView
 	waitse
-	setvar VAR_0x4068, 4
+	setvar VAR_MAP_SCENE_POKEMON_LEAGUE, 4
 	releaseall
 	end
 

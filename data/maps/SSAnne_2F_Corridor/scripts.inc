@@ -61,7 +61,7 @@ EventScript_160903:: @ 8160903
 	call_if 1, EventScript_160A13
 	fadedefaultbgm
 	removeobject 1
-	setvar VAR_0x405B, 1
+	setvar VAR_MAP_SCENE_S_S_ANNE_2F_CORRIDOR, 1
 	releaseall
 	end
 

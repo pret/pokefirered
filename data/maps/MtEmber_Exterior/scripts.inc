@@ -5,7 +5,7 @@ MtEmber_Exterior_MapScripts:: @ 8163946
 
 MtEmber_Exterior_MapScript1_163951:: @ 8163951
 	setworldmapflag FLAG_WORLD_MAP_MT_EMBER_EXTERIOR
-	compare_var_to_value VAR_0x407F, 2
+	compare_var_to_value VAR_MAP_SCENE_MT_EMBER_EXTERIOR, 2
 	call_if 1, EventScript_163960
 	end
 
@@ -111,7 +111,7 @@ MtEmber_Exterior_EventScript_163A4E:: @ 8163A4E
 	waitmovement 0
 	call EventScript_163960
 	msgbox gUnknown_817A9E1
-	setvar VAR_0x407F, 2
+	setvar VAR_MAP_SCENE_MT_EMBER_EXTERIOR, 2
 	releaseall
 	end
 

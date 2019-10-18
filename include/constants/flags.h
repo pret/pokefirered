@@ -581,7 +581,7 @@
 #define FLAG_0x240               0x240
 #define FLAG_0x241               0x241
 #define FLAG_0x242               0x242
-#define FLAG_GOT_COIN_CASE               0x243
+#define FLAG_GOT_COIN_CASE       0x243
 #define FLAG_0x244               0x244
 #define FLAG_0x245               0x245
 #define FLAG_0x246               0x246
@@ -750,9 +750,9 @@
 #define FLAG_0x2E9               0x2E9
 #define FLAG_0x2EA               0x2EA
 #define FLAG_0x2EB               0x2EB
-#define FLAG_0x2EC               0x2EC
-#define FLAG_0x2ED               0x2ED
-#define FLAG_0x2EE               0x2EE
+#define FLAG_REVIVED_DOME        0x2EC
+#define FLAG_REVIVED_HELIX       0x2ED
+#define FLAG_REVIVED_AMBER       0x2EE
 #define FLAG_0x2EF               0x2EF
 #define FLAG_0x2F0               0x2F0
 #define FLAG_0x2F1               0x2F1
@@ -986,7 +986,7 @@
 #define FLAG_0x3D5               0x3D5
 #define FLAG_0x3D6               0x3D6
 #define FLAG_0x3D7               0x3D7
-#define FLAG_MYSTERY_EVENT_DONE               0x3D8
+#define FLAG_MYSTERY_EVENT_DONE  0x3D8
 #define FLAG_0x3D9               0x3D9
 #define FLAG_0x3DA               0x3DA
 #define FLAG_0x3DB               0x3DB
@@ -1315,12 +1315,13 @@
 #define FLAG_SYS_POKEMON_GET (SYS_FLAGS + 0x28)
 #define FLAG_SYS_POKEDEX_GET (SYS_FLAGS + 0x29)
 #define FLAG_SYS_GAME_CLEAR (SYS_FLAGS + 0x2C)
-#define FLAG_0x82F (SYS_FLAGS + 0x2F)
+#define FLAG_SYS_RUNNING_SHOES (SYS_FLAGS + 0x2F)
 #define FLAG_0x830 (SYS_FLAGS + 0x30)
 #define FLAG_SYS_NOT_SOMEONES_PC (SYS_FLAGS + 0x34)
 #define FLAG_SYS_RIBBON_GET (SYS_FLAGS + 0x3B)
 #define FLAG_0x83C (SYS_FLAGS + 0x3C)
-#define FLAG_0x83E (SYS_FLAGS + 0x3E)
+#define FLAG_PALLET_TOWN_LADY_MOVED_FROM_SIGN (SYS_FLAGS + 0x3E)
+#define FLAG_SYS_NATIONAL_DEX (SYS_FLAGS + 0x40)
 #define FLAG_0x841 (SYS_FLAGS + 0x41)
 #define FLAG_0x842 (SYS_FLAGS + 0x42)
 #define FLAG_0x843 (SYS_FLAGS + 0x43)

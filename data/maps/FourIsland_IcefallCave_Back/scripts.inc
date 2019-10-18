@@ -3,7 +3,7 @@ FourIsland_IcefallCave_Back_MapScripts:: @ 8163D82
 	.byte 0
 
 FourIsland_IcefallCave_Back_MapScript1_163D88:: @ 8163D88
-	compare_var_to_value VAR_0x4080, 1
+	compare_var_to_value VAR_MAP_SCENE_ICEFALL_CAVE_BACK, 1
 	call_if 1, EventScript_163D94
 	end
 
@@ -83,7 +83,7 @@ FourIsland_IcefallCave_Back_EventScript_163D98:: @ 8163D98
 	msgbox gUnknown_817B457
 	setflag FLAG_0x08E
 	clearflag FLAG_0x08C
-	setvar VAR_0x4080, 1
+	setvar VAR_MAP_SCENE_ICEFALL_CAVE_BACK, 1
 	releaseall
 	end
 

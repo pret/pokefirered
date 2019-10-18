@@ -4,7 +4,7 @@ LavenderTown_MapScripts:: @ 816686B
 
 LavenderTown_MapScript1_166871:: @ 8166871
 	setworldmapflag FLAG_WORLD_MAP_LAVENDER_TOWN
-	setvar VAR_0x405B, 1
+	setvar VAR_MAP_SCENE_S_S_ANNE_2F_CORRIDOR, 1
 	setflag FLAG_0x03D
 	end
 

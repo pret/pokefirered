@@ -13,7 +13,7 @@ SilphCo_7F_MapScript1_16198F:: @ 816198F
 	end
 
 SilphCo_7F_MapScript2_1619AB:: @ 81619AB
-	compare_var_to_value VAR_0x4060, 1
+	compare_var_to_value VAR_MAP_SCENE_SILPH_CO_11F, 1
 	call_if 4, EventScript_1619B7
 	end
 
@@ -69,7 +69,7 @@ EventScript_1619D4:: @ 81619D4
 	fadedefaultbgm
 	removeobject 1
 	waitse
-	setvar VAR_0x405C, 1
+	setvar VAR_MAP_SCENE_SILPH_CO_7F, 1
 	releaseall
 	end
 
@@ -199,7 +199,7 @@ EventScript_161B8D:: @ 8161B8D
 SilphCo_7F_EventScript_161B97:: @ 8161B97
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x4060, 1
+	compare_var_to_value VAR_MAP_SCENE_SILPH_CO_11F, 1
 	goto_if 4, EventScript_161BAE
 	msgbox gUnknown_8176444
 	release
@@ -213,7 +213,7 @@ EventScript_161BAE:: @ 8161BAE
 SilphCo_7F_EventScript_161BB8:: @ 8161BB8
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x4060, 1
+	compare_var_to_value VAR_MAP_SCENE_SILPH_CO_11F, 1
 	goto_if 4, EventScript_161BCF
 	msgbox gUnknown_81764C2
 	release
@@ -227,7 +227,7 @@ EventScript_161BCF:: @ 8161BCF
 SilphCo_7F_EventScript_161BD9:: @ 8161BD9
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x4060, 1
+	compare_var_to_value VAR_MAP_SCENE_SILPH_CO_11F, 1
 	goto_if 4, EventScript_161BF0
 	msgbox gUnknown_8176532
 	release

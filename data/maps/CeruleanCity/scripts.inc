@@ -36,7 +36,7 @@ CeruleanCity_EventScript_1664B9:: @ 81664B9
 
 EventScript_1664CC:: @ 81664CC
 	textcolor 0
-	setvar VAR_0x4054, 2
+	setvar VAR_MAP_SCENE_ROUTE22, 2
 	playbgm MUS_RIVAL1, 0
 	addobject 8
 	applymovement 8, Movement_1665D3
@@ -62,7 +62,7 @@ EventScript_1664CC:: @ 81664CC
 	compare_var_to_value VAR_0x4001, 2
 	call_if 1, EventScript_1665B5
 	msgbox gUnknown_817ECD4
-	setvar VAR_0x4052, 1
+	setvar VAR_MAP_SCENE_CERULEAN_CITY_RIVAL, 1
 	setflag FLAG_0x29B
 	giveitem ITEM_FAME_CHECKER
 	msgbox gUnknown_817ED5D
@@ -180,7 +180,7 @@ CeruleanCity_EventScript_166603:: @ 8166603
 	playbgm MUS_ROCKET, 0
 	waitbuttonpress
 	trainerbattle 3, TRAINER_TEAM_ROCKET_GRUNT_5, 0, Text_17EE70
-	setvar VAR_0x407D, 1
+	setvar VAR_MAP_SCENE_CERULEAN_CITY_ROCKET, 1
 	goto EventScript_16662E
 	end
 
@@ -231,7 +231,7 @@ EventScript_1666C3:: @ 81666C3
 	msgbox Text_17EE0E
 	setvar VAR_LAST_TALKED, 2
 	trainerbattle 3, TRAINER_TEAM_ROCKET_GRUNT_5, 0, Text_17EE70
-	setvar VAR_0x407D, 1
+	setvar VAR_MAP_SCENE_CERULEAN_CITY_ROCKET, 1
 	goto EventScript_16662E
 	end
 

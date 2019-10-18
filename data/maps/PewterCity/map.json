@@ -173,7 +173,7 @@
       "x": 42,
       "y": 21,
       "elevation": 3,
-      "var": "VAR_0x406C",
+      "var": "VAR_MAP_SCENE_PEWTER_CITY",
       "var_value": 0,
       "script": "PewterCity_EventScript_165D8E"
     },
@@ -182,7 +182,7 @@
       "x": 42,
       "y": 22,
       "elevation": 3,
-      "var": "VAR_0x406C",
+      "var": "VAR_MAP_SCENE_PEWTER_CITY",
       "var_value": 0,
       "script": "PewterCity_EventScript_165D9A"
     },
@@ -191,7 +191,7 @@
       "x": 42,
       "y": 23,
       "elevation": 3,
-      "var": "VAR_0x406C",
+      "var": "VAR_MAP_SCENE_PEWTER_CITY",
       "var_value": 0,
       "script": "PewterCity_EventScript_165DA6"
     },
@@ -200,7 +200,7 @@
       "x": 43,
       "y": 23,
       "elevation": 3,
-      "var": "VAR_0x406C",
+      "var": "VAR_MAP_SCENE_PEWTER_CITY",
       "var_value": 0,
       "script": "PewterCity_EventScript_165DB2"
     },
@@ -209,7 +209,7 @@
       "x": 46,
       "y": 21,
       "elevation": 3,
-      "var": "VAR_0x406C",
+      "var": "VAR_MAP_SCENE_PEWTER_CITY",
       "var_value": 1,
       "script": "PewterCity_EventScript_1662B7"
     },
@@ -218,7 +218,7 @@
       "x": 46,
       "y": 22,
       "elevation": 3,
-      "var": "VAR_0x406C",
+      "var": "VAR_MAP_SCENE_PEWTER_CITY",
       "var_value": 1,
       "script": "PewterCity_EventScript_1662C4"
     },
@@ -227,7 +227,7 @@
       "x": 46,
       "y": 23,
       "elevation": 3,
-      "var": "VAR_0x406C",
+      "var": "VAR_MAP_SCENE_PEWTER_CITY",
       "var_value": 1,
       "script": "PewterCity_EventScript_1662D1"
     }

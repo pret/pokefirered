@@ -254,7 +254,7 @@
       "x": 2,
       "y": 19,
       "elevation": 3,
-      "var": "VAR_0x4065",
+      "var": "VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER1",
       "var_value": 99,
       "script": "VictoryRoad_2F_EventScript_160FD5"
     },
@@ -263,7 +263,7 @@
       "x": 14,
       "y": 19,
       "elevation": 3,
-      "var": "VAR_0x4066",
+      "var": "VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER2",
       "var_value": 99,
       "script": "VictoryRoad_2F_EventScript_161006"
     }

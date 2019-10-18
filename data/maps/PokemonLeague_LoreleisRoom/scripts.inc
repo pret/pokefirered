@@ -14,7 +14,7 @@ PokemonLeague_LoreleisRoom_MapScript1_162586:: @ 8162586
 PokemonLeague_LoreleisRoom_MapScript2_162591:: @ 8162591
 	checkflag FLAG_0x4B8
 	call_if 1, EventScript_1625AC
-	compare_var_to_value VAR_0x4068, 1
+	compare_var_to_value VAR_MAP_SCENE_POKEMON_LEAGUE, 1
 	call_if 1, EventScript_1625A6
 	end
 
@@ -39,13 +39,13 @@ EventScript_1625C0:: @ 81625C0
 	end
 
 PokemonLeague_LoreleisRoom_MapScript5_1625C5:: @ 81625C5
-	map_script_2 VAR_0x4068, 0, EventScript_1625CF
+	map_script_2 VAR_MAP_SCENE_POKEMON_LEAGUE, 0, EventScript_1625CF
 	.2byte 0
 
 EventScript_1625CF:: @ 81625CF
 	lockall
 	call EventScript_1A751F
-	setvar VAR_0x4068, 1
+	setvar VAR_MAP_SCENE_POKEMON_LEAGUE, 1
 	releaseall
 	end
 

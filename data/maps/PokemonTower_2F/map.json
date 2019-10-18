@@ -62,7 +62,7 @@
       "x": 17,
       "y": 5,
       "elevation": 3,
-      "var": "VAR_0x405D",
+      "var": "VAR_MAP_SCENE_POKEMON_TOWER_2F",
       "var_value": 0,
       "script": "PokemonTower_2F_EventScript_16328F"
     },
@@ -71,7 +71,7 @@
       "x": 16,
       "y": 6,
       "elevation": 3,
-      "var": "VAR_0x405D",
+      "var": "VAR_MAP_SCENE_POKEMON_TOWER_2F",
       "var_value": 0,
       "script": "PokemonTower_2F_EventScript_16329B"
     }

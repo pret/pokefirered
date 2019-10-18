@@ -38,7 +38,7 @@ FiveIsland_RocketWarehouse_EventScript_163F81:: @ 8163F81
 	lockall
 	applymovement 4, Movement_1A75E7
 	waitmovement 0
-	setvar VAR_0x4088, 1
+	setvar VAR_MAP_SCENE_ROCKET_WAREHOUSE, 1
 	releaseall
 	end
 
@@ -91,7 +91,7 @@ EventScript_16402F:: @ 816402F
 	removeobject 3
 	setflag FLAG_0x088
 	fadescreen 0
-	setvar VAR_0x4088, 1
+	setvar VAR_MAP_SCENE_ROCKET_WAREHOUSE, 1
 	setflag FLAG_0x2D5
 	release
 	end

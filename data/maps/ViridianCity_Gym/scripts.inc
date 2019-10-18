@@ -23,7 +23,7 @@ EventScript_169F04:: @ 8169F04
 	setflag FLAG_0x0AD
 	setflag FLAG_0x4B7
 	setflag FLAG_BADGE08_GET
-	setvar VAR_0x4054, 3
+	setvar VAR_MAP_SCENE_ROUTE22, 3
 	setvar VAR_0x8008, 8
 	call EventScript_1A6B18
 	goto EventScript_169F2F

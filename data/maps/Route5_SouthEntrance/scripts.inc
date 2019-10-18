@@ -51,7 +51,7 @@ EventScript_16F963:: @ 816F963
 	compare_var_to_value VAR_0x4001, 2
 	call_if 1, EventScript_16F9B2
 	msgbox gUnknown_819E0C1
-	setvar VAR_0x4062, 1
+	setvar VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES, 1
 	releaseall
 	end
 

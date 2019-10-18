@@ -603,7 +603,7 @@ PalletTown_ProfessorOaksLab_EventScript_169595:: @ 8169595
 	goto_if_eq EventScript_169A6E
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if_eq EventScript_1699CE
-	compare_var_to_value VAR_0x4052, 1
+	compare_var_to_value VAR_MAP_SCENE_CERULEAN_CITY_RIVAL, 1
 	goto_if_eq EventScript_169903
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 6
 	goto_if_eq EventScript_1698D6
@@ -708,7 +708,7 @@ EventScript_16961E:: @ 816961E
 	call EventScript_1A6675
 	setflag FLAG_SYS_POKEDEX_GET
 	special sub_810B810
-	setvar VAR_0x407C, 1
+	setvar VAR_MAP_SCENE_POKEMON_CENTER_TEALA, 1
 	msgbox gUnknown_818E612
 	additem ITEM_POKE_BALL, 5
 	giveitemfanfaremsg gUnknown_818E6B3, ITEM_POKE_BALL, 5
@@ -741,9 +741,9 @@ EventScript_16961E:: @ 816961E
 	fadedefaultbgm
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 6
 	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 2
-	setvar VAR_0x4051, 1
-	setvar VAR_0x4058, 1
-	setvar VAR_0x4054, 1
+	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 1
+	setvar VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 1
+	setvar VAR_MAP_SCENE_ROUTE22, 1
 	release
 	end
 
@@ -1001,7 +1001,7 @@ EventScript_1699FB:: @ 81699FB
 	end
 
 EventScript_169A34:: @ 8169A34
-	compare_var_to_value VAR_0x4054, 2
+	compare_var_to_value VAR_MAP_SCENE_ROUTE22, 2
 	goto_if 4, EventScript_169A45
 	goto EventScript_169A6E
 	end
@@ -1143,13 +1143,18 @@ Movement_169BA4:: @ 8169BA4
 	step_10
 	step_end
 
+	.equ VAR_OAKSLAB_PLAYER_STARTER_NO,       VAR_0x4001
+	.equ VAR_OAKSLAB_PLAYER_STARTER_SPECIES,  VAR_0x4002
+	.equ VAR_OAKSLAB_RIVAL_STARTER_SPECIES,   VAR_0x4003
+	.equ VAR_OAKSLAB_RIVAL_STARTER_OBJID,     VAR_0x4004
+
 PalletTown_ProfessorOaksLab_EventScript_169BAB:: @ 8169BAB
 	lock
 	faceplayer
-	setvar VAR_0x4001, 0
-	setvar VAR_0x4002, 1
-	setvar VAR_0x4003, 4
-	setvar VAR_0x4004, 7
+	setvar VAR_OAKSLAB_PLAYER_STARTER_NO, 0
+	setvar VAR_OAKSLAB_PLAYER_STARTER_SPECIES, SPECIES_BULBASAUR
+	setvar VAR_OAKSLAB_RIVAL_STARTER_SPECIES, SPECIES_CHARMANDER
+	setvar VAR_OAKSLAB_RIVAL_STARTER_OBJID, 7
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3
 	goto_if 4, EventScript_169DE4
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2
@@ -1161,121 +1166,121 @@ PalletTown_ProfessorOaksLab_EventScript_169BAB:: @ 8169BAB
 EventScript_169BE1:: @ 8169BE1
 	applymovement 4, Movement_1A75EF
 	waitmovement 0
-	drawmonpic VAR_0x4002, 10, 3
+	drawmonpic VAR_OAKSLAB_PLAYER_STARTER_SPECIES, 10, 3
 	textcolor 0
-	compare_var_to_value VAR_0x4001, 0
-	goto_if_eq EventScript_169C14
-	compare_var_to_value VAR_0x4001, 1
-	goto_if_eq EventScript_169C33
-	compare_var_to_value VAR_0x4001, 2
-	goto_if_eq EventScript_169C52
+	compare_var_to_value VAR_OAKSLAB_PLAYER_STARTER_NO, 0
+	goto_if_eq EventScript_OakDescribesBulbasaur
+	compare_var_to_value VAR_OAKSLAB_PLAYER_STARTER_NO, 1
+	goto_if_eq EventScript_OakDescribesCharmander
+	compare_var_to_value VAR_OAKSLAB_PLAYER_STARTER_NO, 2
+	goto_if_eq EventScript_OakDescribesSquirtle
 	end
 
-EventScript_169C14:: @ 8169C14
+EventScript_OakDescribesBulbasaur:: @ 8169C14
 	msgbox gUnknown_818E272, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_169C74
+	goto_if_eq EventScript_ThisPokeIsRealyEnergetic
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_169C71
+	goto_if_eq EventScript_DeclinedStarter
 	end
 
-EventScript_169C33:: @ 8169C33
+EventScript_OakDescribesCharmander:: @ 8169C33
 	msgbox gUnknown_818E207, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_169C74
+	goto_if_eq EventScript_ThisPokeIsRealyEnergetic
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_169C71
+	goto_if_eq EventScript_DeclinedStarter
 	end
 
-EventScript_169C52:: @ 8169C52
+EventScript_OakDescribesSquirtle:: @ 8169C52
 	msgbox gUnknown_818E194, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_169C74
+	goto_if_eq EventScript_ThisPokeIsRealyEnergetic
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_169C71
+	goto_if_eq EventScript_DeclinedStarter
 	end
 
-EventScript_169C71:: @ 8169C71
+EventScript_DeclinedStarter:: @ 8169C71
 	erasemonpic
 	release
 	end
 
-EventScript_169C74:: @ 8169C74
+EventScript_ThisPokeIsRealyEnergetic:: @ 8169C74
 	erasemonpic
 	removeobject VAR_LAST_TALKED
 	msgbox gUnknown_818E2E5
 	call EventScript_1A6675
 	setflag FLAG_SYS_POKEMON_GET
 	setflag FLAG_0x291
-	givemon VAR_0x4002, 5, ITEM_NONE, 0, 0, 0
-	copyvar VAR_STARTER_MON, VAR_0x4001
-	getspeciesname 0, VAR_0x4002
+	givemon VAR_OAKSLAB_PLAYER_STARTER_SPECIES, 5, ITEM_NONE, 0, 0, 0
+	copyvar VAR_STARTER_MON, VAR_OAKSLAB_PLAYER_STARTER_NO
+	getspeciesname 0, VAR_OAKSLAB_PLAYER_STARTER_SPECIES
 	message Text_18E30D
 	waitmessage
 	playfanfare MUS_FAN5
 	waitfanfare
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_169CCC
+	goto_if_eq EventScript_GiveNicknameToStarter
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_169CDC
+	goto_if_eq EventScript_SkipGiveNicknameToStarter
 	end
 
-EventScript_169CCC:: @ 8169CCC
+EventScript_GiveNicknameToStarter:: @ 8169CCC
 	setvar VAR_0x8004, 0
 	call EventScript_1A74EB
-	goto EventScript_169CDC
+	goto EventScript_SkipGiveNicknameToStarter
 	end
 
-EventScript_169CDC:: @ 8169CDC
+EventScript_SkipGiveNicknameToStarter:: @ 8169CDC
 	closemessage
-	compare_var_to_value VAR_0x4001, 0
-	goto_if_eq EventScript_169CFF
-	compare_var_to_value VAR_0x4001, 1
-	goto_if_eq EventScript_169D1F
-	compare_var_to_value VAR_0x4001, 2
-	goto_if_eq EventScript_169D0F
+	compare_var_to_value VAR_OAKSLAB_PLAYER_STARTER_NO, 0
+	goto_if_eq EventScript_RivalWalksToCharmander
+	compare_var_to_value VAR_OAKSLAB_PLAYER_STARTER_NO, 1
+	goto_if_eq EventScript_RivalWalksToSquirtle
+	compare_var_to_value VAR_OAKSLAB_PLAYER_STARTER_NO, 2
+	goto_if_eq EventScript_RivalWalksToBulbasaur
 	end
 
-EventScript_169CFF:: @ 8169CFF
-	applymovement 8, Movement_169D62
+EventScript_RivalWalksToCharmander:: @ 8169CFF
+	applymovement 8, Movement_RivalWalksToCharmander
 	waitmovement 0
-	goto EventScript_169D2F
+	goto Movement_RivalTakesHisStarter
 	end
 
-EventScript_169D0F:: @ 8169D0F
-	applymovement 8, Movement_169D6B
+EventScript_RivalWalksToBulbasaur:: @ 8169D0F
+	applymovement 8, Movement_RivalWalksToBulbasaur
 	waitmovement 0
-	goto EventScript_169D2F
+	goto Movement_RivalTakesHisStarter
 	end
 
-EventScript_169D1F:: @ 8169D1F
-	applymovement 8, Movement_169D72
+EventScript_RivalWalksToSquirtle:: @ 8169D1F
+	applymovement 8, Movement_RivalWalksToSquirtle
 	waitmovement 0
-	goto EventScript_169D2F
+	goto Movement_RivalTakesHisStarter
 	end
 
-EventScript_169D2F:: @ 8169D2F
+Movement_RivalTakesHisStarter:: @ 8169D2F
 	textcolor 0
 	msgbox gUnknown_818DD34
-	removeobject VAR_0x4004
+	removeobject VAR_OAKSLAB_RIVAL_STARTER_OBJID
 	textcolor 3
-	getspeciesname 0, VAR_0x4003
+	getspeciesname 0, VAR_OAKSLAB_RIVAL_STARTER_SPECIES
 	message Text_18DD52
 	waitmessage
 	playfanfare MUS_FAN5
 	waitfanfare
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3
-	checkflag FLAG_0x83E
+	checkflag FLAG_PALLET_TOWN_LADY_MOVED_FROM_SIGN
 	call_if 1, EventScript_169D5C
 	release
 	end
 
 EventScript_169D5C:: @ 8169D5C
-	setvar VAR_0x4070, 1
+	setvar VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
 	return
 
-Movement_169D62:: @ 8169D62
+Movement_RivalWalksToCharmander:: @ 8169D62
 	step_10
 	step_10
 	step_13
@@ -1286,7 +1291,7 @@ Movement_169D62:: @ 8169D62
 	step_11
 	step_end
 
-Movement_169D6B:: @ 8169D6B
+Movement_RivalWalksToBulbasaur:: @ 8169D6B
 	step_10
 	step_13
 	step_13
@@ -1295,7 +1300,7 @@ Movement_169D6B:: @ 8169D6B
 	step_2e
 	step_end
 
-Movement_169D72:: @ 8169D72
+Movement_RivalWalksToSquirtle:: @ 8169D72
 	step_10
 	step_13
 	step_13
@@ -1306,10 +1311,10 @@ Movement_169D72:: @ 8169D72
 PalletTown_ProfessorOaksLab_EventScript_169D78:: @ 8169D78
 	lock
 	faceplayer
-	setvar VAR_0x4001, 1
-	setvar VAR_0x4002, 7
-	setvar VAR_0x4003, 1
-	setvar VAR_0x4004, 5
+	setvar VAR_OAKSLAB_PLAYER_STARTER_NO, 1
+	setvar VAR_OAKSLAB_PLAYER_STARTER_SPECIES, SPECIES_SQUIRTLE
+	setvar VAR_OAKSLAB_RIVAL_STARTER_SPECIES, SPECIES_BULBASAUR
+	setvar VAR_OAKSLAB_RIVAL_STARTER_OBJID, 5
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3
 	goto_if 4, EventScript_169DE4
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2
@@ -1321,10 +1326,10 @@ PalletTown_ProfessorOaksLab_EventScript_169D78:: @ 8169D78
 PalletTown_ProfessorOaksLab_EventScript_169DAE:: @ 8169DAE
 	lock
 	faceplayer
-	setvar VAR_0x4001, 2
-	setvar VAR_0x4002, 4
-	setvar VAR_0x4003, 7
-	setvar VAR_0x4004, 6
+	setvar VAR_OAKSLAB_PLAYER_STARTER_NO, 2
+	setvar VAR_OAKSLAB_PLAYER_STARTER_SPECIES, SPECIES_CHARMANDER
+	setvar VAR_OAKSLAB_RIVAL_STARTER_SPECIES, SPECIES_SQUIRTLE
+	setvar VAR_OAKSLAB_RIVAL_STARTER_OBJID, 6
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3
 	goto_if 4, EventScript_169DE4
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2

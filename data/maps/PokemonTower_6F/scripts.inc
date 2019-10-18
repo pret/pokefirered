@@ -27,7 +27,7 @@ EventScript_1634F5:: @ 81634F5
 	waitbuttonpress
 	waitmoncry
 	msgbox gUnknown_817A342
-	setvar VAR_0x4059, 1
+	setvar VAR_MAP_SCENE_POKEMON_TOWER_6F, 1
 	releaseall
 	end
 

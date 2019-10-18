@@ -85,7 +85,7 @@ EventScript_161EA0:: @ 8161EA0
 	removeobject 4
 	removeobject 6
 	fadescreen 0
-	setvar VAR_0x4060, 1
+	setvar VAR_MAP_SCENE_SILPH_CO_11F, 1
 	setflag FLAG_0x03E
 	clearflag FLAG_0x03F
 	releaseall

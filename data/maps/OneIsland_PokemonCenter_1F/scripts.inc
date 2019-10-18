@@ -112,9 +112,9 @@ EventScript_170CB1:: @ 8170CB1
 	additem ITEM_TRI_PASS, 1
 	giveitemfanfaremsg gUnknown_81A231B, ITEM_TRI_PASS, 1, MUS_FAN5
 	msgbox gUnknown_81A1150
-	compare_var_to_value VAR_0x4058, 2
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
 	call_if 4, EventScript_170E46
-	compare_var_to_value VAR_0x4058, 2
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
 	call_if 0, EventScript_170E58
 	setflag FLAG_0x845
 	msgbox gUnknown_81A1230
@@ -147,7 +147,7 @@ EventScript_170E46:: @ 8170E46
 
 EventScript_170E58:: @ 8170E58
 	setflag FLAG_0x039
-	setvar VAR_0x4058, 2
+	setvar VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
 	additem ITEM_TOWN_MAP, 1
 	giveitemfanfaremsg gUnknown_81A1218, ITEM_TOWN_MAP, 1, MUS_FAN5
 	return
@@ -375,7 +375,7 @@ EventScript_1710FC:: @ 81710FC
 	applymovement 3, Movement_1A75E1
 	waitmovement 0
 	msgbox gUnknown_81A17DF
-	setvar VAR_0x407F, 1
+	setvar VAR_MAP_SCENE_MT_EMBER_EXTERIOR, 1
 	setvar VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4
 	release
 	end
@@ -517,7 +517,7 @@ EventScript_1711DA:: @ 81711DA
 	setflag FLAG_0x072
 	setvar VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 3
 	clearflag FLAG_0x062
-	setvar VAR_0x4071, 3
+	setvar VAR_MAP_SCENE_CINNABAR_ISLAND, 3
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8006, 8
 	goto EventScript_1A90DA

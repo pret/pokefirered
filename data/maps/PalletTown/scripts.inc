@@ -7,22 +7,22 @@ PalletTown_MapScript1_165465:: @ 8165465
 	setworldmapflag FLAG_WORLD_MAP_PALLET_TOWN
 	checkflag FLAG_0x291
 	call_if 1, EventScript_165488
-	compare_var_to_value VAR_0x4070, 0
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 0
 	call_if 1, EventScript_1654A8
-	compare_var_to_value VAR_0x4070, 1
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
 	call_if 1, EventScript_1654A2
 	end
 
 EventScript_165488:: @ 8165488
-	checkflag FLAG_0x83E
+	checkflag FLAG_PALLET_TOWN_LADY_MOVED_FROM_SIGN
 	goto_if 0, EventScript_1A77A9
-	compare_var_to_value VAR_0x4070, 1
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
 	goto_if 4, EventScript_1A77A9
-	setvar VAR_0x4070, 1
+	setvar VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
 	return
 
 EventScript_1654A2:: @ 81654A2
-	setvar VAR_0x4070, 2
+	setvar VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 2
 	return
 
 EventScript_1654A8:: @ 81654A8
@@ -39,7 +39,7 @@ EventScript_1654BD:: @ 81654BD
 	return
 
 PalletTown_MapScript2_1654CE:: @ 81654CE
-	map_script_2 VAR_MAP_SCENE_PALLET_TOWN, 2, EventScript_1654D8
+	map_script_2 VAR_MAP_SCENE_PALLET_TOWN_OAK, 2, EventScript_1654D8
 	.2byte 0
 
 EventScript_1654D8:: @ 81654D8
@@ -75,7 +75,7 @@ EventScript_1654D8:: @ 81654D8
 	closedoor 16, 13
 	waitdooranim
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 7
-	setvar VAR_MAP_SCENE_PALLET_TOWN, 3
+	setvar VAR_MAP_SCENE_PALLET_TOWN_OAK, 3
 	setflag FLAG_0x02C
 	warp MAP_PALLET_TOWN_PROFESSOR_OAKS_LAB, 255, 6, 12
 	waitstate
@@ -87,7 +87,7 @@ EventScript_16557E:: @ 816557E
 	applymovement 3, Movement_1655BE
 	waitmovement 0
 	removeobject 3
-	setvar VAR_MAP_SCENE_PALLET_TOWN, 3
+	setvar VAR_MAP_SCENE_PALLET_TOWN_OAK, 3
 	releaseall
 	end
 
@@ -222,7 +222,7 @@ EventScript_165605:: @ 8165605
 	waitdooranim
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1
 	clearflag FLAG_0x02B
-	setvar VAR_MAP_SCENE_PALLET_TOWN, 1
+	setvar VAR_MAP_SCENE_PALLET_TOWN_OAK, 1
 	setflag FLAG_0x02C
 	setflag FLAG_SPECIAL_FLAG_0x4001
 	warp MAP_PALLET_TOWN_PROFESSOR_OAKS_LAB, 255, 6, 12
@@ -376,9 +376,9 @@ Movement_165758:: @ 8165758
 
 PalletTown_EventScript_16575C:: @ 816575C
 	lock
-	compare_var_to_value VAR_0x4070, 2
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 2
 	goto_if_eq EventScript_1657ED
-	compare_var_to_value VAR_0x4070, 1
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
 	goto_if_eq EventScript_165815
 	compare_var_to_value VAR_0x4002, 1
 	goto_if_eq EventScript_1658C2
@@ -472,7 +472,7 @@ PalletTown_EventScript_165862:: @ 8165862
 PalletTown_EventScript_16586B:: @ 816586B
 	lockall
 	msgbox gUnknown_81B1CC1
-	setvar VAR_0x4070, 1
+	setvar VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
 	releaseall
 	end
 
@@ -491,8 +491,8 @@ EventScript_165894:: @ 8165894
 	closemessage
 	delay 20
 	textcolor 3
-	setflag FLAG_0x83E
-	setvar VAR_0x4070, 1
+	setflag FLAG_PALLET_TOWN_LADY_MOVED_FROM_SIGN
+	setvar VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
 	setvar VAR_0x4002, 0
 	special sub_80699E0
 	special sub_80699BC

@@ -13,7 +13,7 @@ PokemonLeague_BrunosRoom_MapScript1_16269A:: @ 816269A
 PokemonLeague_BrunosRoom_MapScript2_1626A5:: @ 81626A5
 	checkflag FLAG_0x4B9
 	call_if 1, EventScript_1626C0
-	compare_var_to_value VAR_0x4068, 2
+	compare_var_to_value VAR_MAP_SCENE_POKEMON_LEAGUE, 2
 	call_if 1, EventScript_1626BA
 	end
 
@@ -34,13 +34,13 @@ EventScript_1626D0:: @ 81626D0
 	end
 
 PokemonLeague_BrunosRoom_MapScript4_1626D5:: @ 81626D5
-	map_script_2 VAR_0x4068, 1, EventScript_1626DF
+	map_script_2 VAR_MAP_SCENE_POKEMON_LEAGUE, 1, EventScript_1626DF
 	.2byte 0
 
 EventScript_1626DF:: @ 81626DF
 	lockall
 	call EventScript_1A751F
-	setvar VAR_0x4068, 2
+	setvar VAR_MAP_SCENE_POKEMON_LEAGUE, 2
 	releaseall
 	end
 

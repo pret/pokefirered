@@ -3,9 +3,9 @@ PalletTown_GarysHouse_MapScripts:: @ 8168D27
 	.byte 0
 
 PalletTown_GarysHouse_MapScript1_168D2D:: @ 8168D2D
-	compare_var_to_value VAR_0x4058, 2
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
 	call_if 0, EventScript_168D44
-	compare_var_to_value VAR_0x4058, 2
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
 	call_if 4, EventScript_168D50
 	end
 
@@ -28,9 +28,9 @@ PalletTown_GarysHouse_EventScript_168D56:: @ 8168D56
 	goto_if_eq EventScript_168DB9
 	compare_var_to_value VAR_0x4001, 1
 	goto_if_eq EventScript_168EEC
-	compare_var_to_value VAR_0x4058, 2
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
 	goto_if_eq EventScript_168F59
-	compare_var_to_value VAR_0x4058, 1
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 1
 	goto_if_eq EventScript_168EF6
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1
 	goto_if 4, EventScript_168DAF
@@ -150,7 +150,7 @@ EventScript_168EF6:: @ 8168EF6
 	applymovement 1, Movement_1A75EB
 	waitmovement 0
 	removeobject 2
-	setvar VAR_0x4058, 2
+	setvar VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
 	delay 15
 	applymovement 1, Movement_1A75E1
 	waitmovement 0

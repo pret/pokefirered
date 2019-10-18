@@ -6,11 +6,11 @@ CinnabarIsland_MapScripts:: @ 8166ED6
 CinnabarIsland_MapScript1_166EE1:: @ 8166EE1
 	setworldmapflag FLAG_WORLD_MAP_CINNABAR_ISLAND
 	call EventScript_166F5E
-	compare_var_to_value VAR_0x4071, 1
-	call_if 1, EventScript_166F24
-	compare_var_to_value VAR_0x4071, 3
-	call_if 1, EventScript_166F52
 	compare_var_to_value VAR_MAP_SCENE_CINNABAR_ISLAND, 1
+	call_if 1, EventScript_166F24
+	compare_var_to_value VAR_MAP_SCENE_CINNABAR_ISLAND, 3
+	call_if 1, EventScript_166F52
+	compare_var_to_value VAR_MAP_SCENE_CINNABAR_ISLAND_2, 1
 	call_if 1, EventScript_166F0B
 	end
 
@@ -51,9 +51,9 @@ EventScript_166F68:: @ 8166F68
 	return
 
 CinnabarIsland_MapScript2_166F6E:: @ 8166F6E
-	map_script_2 VAR_MAP_SCENE_CINNABAR_ISLAND, 1, EventScript_166F88
-	map_script_2 VAR_0x4071, 1, EventScript_166FCD
-	map_script_2 VAR_0x4071, 3, EventScript_166FA0
+	map_script_2 VAR_MAP_SCENE_CINNABAR_ISLAND_2, 1, EventScript_166F88
+	map_script_2 VAR_MAP_SCENE_CINNABAR_ISLAND, 1, EventScript_166FCD
+	map_script_2 VAR_MAP_SCENE_CINNABAR_ISLAND, 3, EventScript_166FA0
 	.2byte 0
 
 EventScript_166F88:: @ 8166F88
@@ -61,7 +61,7 @@ EventScript_166F88:: @ 8166F88
 	clearflag FLAG_SPECIAL_FLAG_0x4001
 	savebgm MUS_DUMMY
 	textcolor 0
-	setvar VAR_MAP_SCENE_CINNABAR_ISLAND, 2
+	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_2, 2
 	delay 20
 	call EventScript_1670E6
 	releaseall
@@ -75,7 +75,7 @@ EventScript_166FA0:: @ 8166FA0
 	applymovement 3, Movement_166FC6
 	waitmovement 0
 	removeobject 3
-	setvar VAR_0x4071, 4
+	setvar VAR_MAP_SCENE_CINNABAR_ISLAND, 4
 	setflag FLAG_0x075
 	clearflag FLAG_0x076
 	releaseall
@@ -151,7 +151,7 @@ EventScript_167078:: @ 8167078
 	checkflag FLAG_0x002
 	call_if 1, EventScript_1670B3
 	removeobject 3
-	setvar VAR_0x4071, 2
+	setvar VAR_MAP_SCENE_CINNABAR_ISLAND, 2
 	clearflag FLAG_0x0A2
 	releaseall
 	end
@@ -214,7 +214,7 @@ EventScript_1670E6:: @ 81670E6
 	call_if 0, EventScript_167171
 	checkflag FLAG_0x002
 	call_if 1, EventScript_167183
-	setvar VAR_0x4071, 2
+	setvar VAR_MAP_SCENE_CINNABAR_ISLAND, 2
 	removeobject 3
 	delay 40
 	setflag FLAG_0x06B

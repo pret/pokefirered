@@ -43,13 +43,13 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E47D:: @ 816E47D
 	lock
 	faceplayer
 	setvar VAR_RESULT, 0
-	checkflag FLAG_0x2EE
+	checkflag FLAG_REVIVED_AMBER
 	call_if 1, EventScript_16E8A1
 	compare_var_to_value VAR_RESULT, 1
 	goto_if_eq EventScript_16E897
-	compare_var_to_value VAR_0x406A, 2
+	compare_var_to_value VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 2
 	goto_if_eq EventScript_16E736
-	compare_var_to_value VAR_0x406A, 1
+	compare_var_to_value VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 1
 	goto_if_eq EventScript_16E72C
 	call EventScript_16E4EC
 	compare_var_to_value VAR_RESULT, 1
@@ -67,7 +67,7 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E47D:: @ 816E47D
 EventScript_16E4EC:: @ 816E4EC
 	checkflag FLAG_0x273
 	goto_if 0, EventScript_16E534
-	checkflag FLAG_0x2ED
+	checkflag FLAG_REVIVED_HELIX
 	goto_if_eq EventScript_16E534
 	setvar VAR_RESULT, 1
 	return
@@ -75,7 +75,7 @@ EventScript_16E4EC:: @ 816E4EC
 EventScript_16E504:: @ 816E504
 	checkflag FLAG_0x272
 	goto_if 0, EventScript_16E534
-	checkflag FLAG_0x2EC
+	checkflag FLAG_REVIVED_DOME
 	goto_if_eq EventScript_16E534
 	setvar VAR_RESULT, 1
 	return
@@ -83,7 +83,7 @@ EventScript_16E504:: @ 816E504
 EventScript_16E51C:: @ 816E51C
 	checkflag FLAG_0x25E
 	goto_if 0, EventScript_16E534
-	checkflag FLAG_0x2EE
+	checkflag FLAG_REVIVED_AMBER
 	goto_if_eq EventScript_16E534
 	setvar VAR_RESULT, 1
 	return
@@ -161,8 +161,8 @@ EventScript_16E668:: @ 816E668
 	textcolor 0
 	removeitem ITEM_HELIX_FOSSIL, 1
 	msgbox gUnknown_819A4AB
-	setvar VAR_0x406A, 1
-	setvar VAR_0x4069, 1
+	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 1
+	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_WHICH_FOSSIL, 1
 	release
 	end
 
@@ -176,8 +176,8 @@ EventScript_16E6A6:: @ 816E6A6
 	textcolor 0
 	removeitem ITEM_DOME_FOSSIL, 1
 	msgbox gUnknown_819A4AB
-	setvar VAR_0x406A, 1
-	setvar VAR_0x4069, 2
+	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 1
+	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_WHICH_FOSSIL, 2
 	release
 	end
 
@@ -191,8 +191,8 @@ EventScript_16E6E4:: @ 816E6E4
 	textcolor 0
 	removeitem ITEM_OLD_AMBER, 1
 	msgbox gUnknown_819A4AB
-	setvar VAR_0x406A, 1
-	setvar VAR_0x4069, 3
+	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 1
+	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_WHICH_FOSSIL, 3
 	release
 	end
 
@@ -207,22 +207,22 @@ EventScript_16E72C:: @ 816E72C
 	end
 
 EventScript_16E736:: @ 816E736
-	compare_var_to_value VAR_0x4069, 1
+	compare_var_to_value VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_WHICH_FOSSIL, 1
 	goto_if_eq EventScript_16E758
-	compare_var_to_value VAR_0x4069, 2
+	compare_var_to_value VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_WHICH_FOSSIL, 2
 	goto_if_eq EventScript_16E79D
-	compare_var_to_value VAR_0x4069, 3
+	compare_var_to_value VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_WHICH_FOSSIL, 3
 	goto_if_eq EventScript_16E7E2
 	end
 
 EventScript_16E758:: @ 816E758
-	setvar VAR_0x4001, 138
+	setvar VAR_0x4001, SPECIES_OMANYTE
 	getspeciesname 0, SPECIES_OMANYTE
 	msgbox gUnknown_819A34F
 	givemon SPECIES_OMANYTE, 5, ITEM_NONE, 0, 0, 0
 	compare_var_to_value VAR_RESULT, 2
 	goto_if_eq EventScript_1A927C
-	setflag FLAG_0x2ED
+	setflag FLAG_REVIVED_HELIX
 	compare_var_to_value VAR_RESULT, 0
 	goto_if_eq EventScript_16E827
 	compare_var_to_value VAR_RESULT, 1
@@ -230,13 +230,13 @@ EventScript_16E758:: @ 816E758
 	end
 
 EventScript_16E79D:: @ 816E79D
-	setvar VAR_0x4001, 140
+	setvar VAR_0x4001, SPECIES_KABUTO
 	getspeciesname 0, SPECIES_KABUTO
 	msgbox gUnknown_819A34F
 	givemon SPECIES_KABUTO, 5, ITEM_NONE, 0, 0, 0
 	compare_var_to_value VAR_RESULT, 2
 	goto_if_eq EventScript_1A927C
-	setflag FLAG_0x2EC
+	setflag FLAG_REVIVED_DOME
 	compare_var_to_value VAR_RESULT, 0
 	goto_if_eq EventScript_16E827
 	compare_var_to_value VAR_RESULT, 1
@@ -244,13 +244,13 @@ EventScript_16E79D:: @ 816E79D
 	end
 
 EventScript_16E7E2:: @ 816E7E2
-	setvar VAR_0x4001, 142
+	setvar VAR_0x4001, SPECIES_AERODACTYL
 	getspeciesname 0, SPECIES_AERODACTYL
 	msgbox gUnknown_819A34F
 	givemon SPECIES_AERODACTYL, 5, ITEM_NONE, 0, 0, 0
 	compare_var_to_value VAR_RESULT, 2
 	goto_if_eq EventScript_1A927C
-	setflag FLAG_0x2EE
+	setflag FLAG_REVIVED_AMBER
 	compare_var_to_value VAR_RESULT, 0
 	goto_if_eq EventScript_16E827
 	compare_var_to_value VAR_RESULT, 1
@@ -263,7 +263,7 @@ EventScript_16E827:: @ 816E827
 	message Text_19A39E
 	waitmessage
 	waitfanfare
-	setvar VAR_0x406A, 0
+	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 0
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if_eq EventScript_16E895
@@ -278,7 +278,7 @@ EventScript_16E85B:: @ 816E85B
 	message Text_19A39E
 	waitmessage
 	waitfanfare
-	setvar VAR_0x406A, 0
+	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 0
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if_eq EventScript_16E88A
@@ -309,13 +309,13 @@ EventScript_16E8A1:: @ 816E8A1
 	end
 
 EventScript_16E8B9:: @ 816E8B9
-	checkflag FLAG_0x2ED
+	checkflag FLAG_REVIVED_HELIX
 	goto_if 0, EventScript_16E534
 	setvar VAR_RESULT, 1
 	return
 
 EventScript_16E8C8:: @ 816E8C8
-	checkflag FLAG_0x2EC
+	checkflag FLAG_REVIVED_DOME
 	goto_if 0, EventScript_16E534
 	setvar VAR_RESULT, 1
 	return

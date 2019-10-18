@@ -57,7 +57,7 @@ EventScript_1682BE:: @ 81682BE
 	call_if 1, EventScript_1683A5
 	fadedefaultbgm
 	removeobject 1
-	setvar VAR_0x4054, 2
+	setvar VAR_MAP_SCENE_ROUTE22, 2
 	releaseall
 	end
 
@@ -219,7 +219,7 @@ EventScript_16841F:: @ 816841F
 	waitmovement 0
 	fadedefaultbgm
 	removeobject 1
-	setvar VAR_0x4054, 4
+	setvar VAR_MAP_SCENE_ROUTE22, 4
 	releaseall
 	end
 

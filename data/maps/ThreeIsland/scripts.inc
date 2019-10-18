@@ -6,7 +6,7 @@ ThreeIsland_MapScript1_1677B3:: @ 81677B3
 	setworldmapflag FLAG_WORLD_MAP_THREE_ISLAND
 	checkflag FLAG_0x2A3
 	call_if 1, EventScript_1677CB
-	compare_var_to_value VAR_0x407B, 4
+	compare_var_to_value VAR_MAP_SCENE_THREE_ISLAND, 4
 	call_if 1, EventScript_1677CF
 	end
 
@@ -30,7 +30,7 @@ ThreeIsland_EventScript_1677E5:: @ 81677E5
 	lock
 	checkflag FLAG_0x2FC
 	goto_if_eq EventScript_167806
-	compare_var_to_value VAR_0x407B, 4
+	compare_var_to_value VAR_MAP_SCENE_THREE_ISLAND, 4
 	goto_if_eq EventScript_16781A
 	setvar VAR_0x4001, 0
 	call EventScript_16786F
@@ -136,7 +136,7 @@ EventScript_167973:: @ 8167973
 
 ThreeIsland_EventScript_167989:: @ 8167989
 	lock
-	compare_var_to_value VAR_0x407B, 4
+	compare_var_to_value VAR_MAP_SCENE_THREE_ISLAND, 4
 	goto_if_eq EventScript_1679A1
 	setvar VAR_0x4001, 1
 	call EventScript_16786F
@@ -168,7 +168,7 @@ ThreeIsland_EventScript_1679B5:: @ 81679B5
 	applymovement 1, Movement_167A1B
 	waitmovement 0
 	msgbox gUnknown_81823C7
-	setvar VAR_0x407B, 3
+	setvar VAR_MAP_SCENE_THREE_ISLAND, 3
 	releaseall
 	end
 
@@ -281,7 +281,7 @@ EventScript_167A59:: @ 8167A59
 	removeobject 8
 	removeobject 14
 	fadescreen 0
-	setvar VAR_0x407B, 4
+	setvar VAR_MAP_SCENE_THREE_ISLAND, 4
 	releaseall
 	end
 

@@ -101,7 +101,7 @@
       "x": 11,
       "y": 15,
       "elevation": 3,
-      "var": "VAR_0x4059",
+      "var": "VAR_MAP_SCENE_POKEMON_TOWER_6F",
       "var_value": 0,
       "script": "PokemonTower_6F_EventScript_1634B8"
     },
@@ -110,7 +110,7 @@
       "x": 12,
       "y": 16,
       "elevation": 3,
-      "var": "VAR_0x4059",
+      "var": "VAR_MAP_SCENE_POKEMON_TOWER_6F",
       "var_value": 0,
       "script": "PokemonTower_6F_EventScript_1634B8"
     }

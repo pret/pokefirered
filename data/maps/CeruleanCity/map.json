@@ -297,7 +297,7 @@
       "x": 22,
       "y": 6,
       "elevation": 3,
-      "var": "VAR_0x4052",
+      "var": "VAR_MAP_SCENE_CERULEAN_CITY_RIVAL",
       "var_value": 0,
       "script": "CeruleanCity_EventScript_16649A"
     },
@@ -306,7 +306,7 @@
       "x": 23,
       "y": 6,
       "elevation": 3,
-      "var": "VAR_0x4052",
+      "var": "VAR_MAP_SCENE_CERULEAN_CITY_RIVAL",
       "var_value": 0,
       "script": "CeruleanCity_EventScript_1664A6"
     },
@@ -315,7 +315,7 @@
       "x": 24,
       "y": 6,
       "elevation": 3,
-      "var": "VAR_0x4052",
+      "var": "VAR_MAP_SCENE_CERULEAN_CITY_RIVAL",
       "var_value": 0,
       "script": "CeruleanCity_EventScript_1664B9"
     },
@@ -324,7 +324,7 @@
       "x": 33,
       "y": 5,
       "elevation": 3,
-      "var": "VAR_0x407D",
+      "var": "VAR_MAP_SCENE_CERULEAN_CITY_ROCKET",
       "var_value": 0,
       "script": "CeruleanCity_EventScript_166683"
     },
@@ -333,7 +333,7 @@
       "x": 33,
       "y": 7,
       "elevation": 3,
-      "var": "VAR_0x407D",
+      "var": "VAR_MAP_SCENE_CERULEAN_CITY_ROCKET",
       "var_value": 0,
       "script": "CeruleanCity_EventScript_1666A3"
     }

@@ -4,7 +4,7 @@ Route24_MapScripts:: @ 816861F
 Route24_EventScript_168620:: @ 8168620
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x406B, 1
+	compare_var_to_value VAR_MAP_SCENE_ROUTE24, 1
 	goto_if_eq EventScript_168656
 	msgbox gUnknown_8188C3C
 	checkitemspace ITEM_NUGGET, 1
@@ -62,7 +62,7 @@ EventScript_1686B9:: @ 81686B9
 	setvar VAR_LAST_TALKED, 1
 	trainerbattle 3, TRAINER_TEAM_ROCKET_GRUNT_6, 0, Text_188DDC
 	msgbox gUnknown_8188DF1
-	setvar VAR_0x406B, 1
+	setvar VAR_MAP_SCENE_ROUTE24, 1
 	return
 
 EventScript_1686FD:: @ 81686FD

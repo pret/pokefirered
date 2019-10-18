@@ -159,7 +159,7 @@
       "x": 22,
       "y": 11,
       "elevation": 3,
-      "var": "VAR_0x4088",
+      "var": "VAR_MAP_SCENE_ROCKET_WAREHOUSE",
       "var_value": 0,
       "script": "FiveIsland_RocketWarehouse_EventScript_163F81"
     },
@@ -168,7 +168,7 @@
       "x": 23,
       "y": 11,
       "elevation": 3,
-      "var": "VAR_0x4088",
+      "var": "VAR_MAP_SCENE_ROCKET_WAREHOUSE",
       "var_value": 0,
       "script": "FiveIsland_RocketWarehouse_EventScript_163F81"
     },
@@ -177,7 +177,7 @@
       "x": 24,
       "y": 11,
       "elevation": 3,
-      "var": "VAR_0x4088",
+      "var": "VAR_MAP_SCENE_ROCKET_WAREHOUSE",
       "var_value": 0,
       "script": "FiveIsland_RocketWarehouse_EventScript_163F81"
     }

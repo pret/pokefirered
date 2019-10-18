@@ -13,7 +13,7 @@ PokemonLeague_AgathasRoom_MapScript1_162825:: @ 8162825
 PokemonLeague_AgathasRoom_MapScript2_162830:: @ 8162830
 	checkflag FLAG_0x4BA
 	call_if 1, EventScript_16284B
-	compare_var_to_value VAR_0x4068, 3
+	compare_var_to_value VAR_MAP_SCENE_POKEMON_LEAGUE, 3
 	call_if 1, EventScript_162845
 	end
 
@@ -34,13 +34,13 @@ EventScript_16285B:: @ 816285B
 	end
 
 PokemonLeague_AgathasRoom_MapScript4_162860:: @ 8162860
-	map_script_2 VAR_0x4068, 2, EventScript_16286A
+	map_script_2 VAR_MAP_SCENE_POKEMON_LEAGUE, 2, EventScript_16286A
 	.2byte 0
 
 EventScript_16286A:: @ 816286A
 	lockall
 	call EventScript_1A751F
-	setvar VAR_0x4068, 3
+	setvar VAR_MAP_SCENE_POKEMON_LEAGUE, 3
 	releaseall
 	end
 

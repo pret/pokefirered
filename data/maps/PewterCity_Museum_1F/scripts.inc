@@ -92,7 +92,7 @@ EventScript_16A402:: @ 816A402
 	updatemoneybox 0, 0, 0
 	waitse
 	msgbox gUnknown_8190505
-	setvar VAR_0x4061, 1
+	setvar VAR_MAP_SCENE_PEWTER_CITY_MUSEUM_1F, 1
 	hidemoneybox
 	.byte 0
 	.byte 0

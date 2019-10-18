@@ -47,7 +47,7 @@ EventScript_1632A7:: @ 81632A7
 	delay 25
 	fadedefaultbgm
 	removeobject 1
-	setvar VAR_0x405D, 1
+	setvar VAR_MAP_SCENE_POKEMON_TOWER_2F, 1
 	releaseall
 	end
 

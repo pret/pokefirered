@@ -93,7 +93,7 @@ EventScript_16494B:: @ 816494B
 	closemessage
 	applymovement 255, Movement_164AD6
 	waitmovement 0
-	setvar VAR_0x4082, 0
+	setvar VAR_MAP_SCENE_TRAINER_TOWER, 0
 	release
 
 EventScript_16495C:: @ 816495C
@@ -195,7 +195,7 @@ EventScript_164A53:: @ 8164A53
 
 EventScript_164AA0:: @ 8164AA0
 	copyvar VAR_0x8005, VAR_RESULT
-	setvar VAR_0x4082, 1
+	setvar VAR_MAP_SCENE_TRAINER_TOWER, 1
 	special sp000_heal_pokemon
 	msgbox gUnknown_817C8BF
 	setvar VAR_0x8004, 6

@@ -39,7 +39,7 @@ EventScript_1606DD:: @ 81606DD
 	waitbuttonpress
 	setvar VAR_LAST_TALKED, 3
 	trainerbattle 3, TRAINER_SUPER_NERD_MIGUEL, 0, Text_172B99
-	setvar VAR_0x408B, 1
+	setvar VAR_MAP_SCENE_MT_MOON_B2F, 1
 	msgbox gUnknown_8172BAB
 	return
 

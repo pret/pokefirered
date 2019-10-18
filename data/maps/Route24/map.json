@@ -136,7 +136,7 @@
       "x": 10,
       "y": 15,
       "elevation": 3,
-      "var": "VAR_0x406B",
+      "var": "VAR_MAP_SCENE_ROUTE24",
       "var_value": 0,
       "script": "Route24_EventScript_168660"
     },
@@ -145,7 +145,7 @@
       "x": 11,
       "y": 15,
       "elevation": 3,
-      "var": "VAR_0x406B",
+      "var": "VAR_MAP_SCENE_ROUTE24",
       "var_value": 0,
       "script": "Route24_EventScript_16866C"
     }

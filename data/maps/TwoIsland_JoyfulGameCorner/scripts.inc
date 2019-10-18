@@ -88,7 +88,7 @@ EventScript_17145F:: @ 817145F
 	delay 60
 	msgbox gUnknown_81A270C
 	clearflag FLAG_0x091
-	setvar VAR_0x407B, 2
+	setvar VAR_MAP_SCENE_THREE_ISLAND, 2
 	setvar VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 1
 	releaseall
 	end

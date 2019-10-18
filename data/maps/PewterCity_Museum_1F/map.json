@@ -142,7 +142,7 @@
       "x": 12,
       "y": 5,
       "elevation": 3,
-      "var": "VAR_0x4061",
+      "var": "VAR_MAP_SCENE_PEWTER_CITY_MUSEUM_1F",
       "var_value": 0,
       "script": "PewterCity_Museum_1F_EventScript_16A38F"
     },
@@ -151,7 +151,7 @@
       "x": 13,
       "y": 5,
       "elevation": 3,
-      "var": "VAR_0x4061",
+      "var": "VAR_MAP_SCENE_PEWTER_CITY_MUSEUM_1F",
       "var_value": 0,
       "script": "PewterCity_Museum_1F_EventScript_16A3A5"
     },
@@ -160,7 +160,7 @@
       "x": 14,
       "y": 5,
       "elevation": 3,
-      "var": "VAR_0x4061",
+      "var": "VAR_MAP_SCENE_PEWTER_CITY_MUSEUM_1F",
       "var_value": 0,
       "script": "PewterCity_Museum_1F_EventScript_16A3BB"
     }

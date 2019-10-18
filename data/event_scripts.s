@@ -1559,7 +1559,7 @@ EventScript_1A651A:: @ 81A651A
 	return
 
 EventScript_1A653B:: @ 81A653B
-	setvar VAR_MAP_SCENE_PALLET_TOWN, 2
+	setvar VAR_MAP_SCENE_PALLET_TOWN_OAK, 2
 	return
 
 EventScript_1A6541:: @ 81A6541
@@ -1584,7 +1584,7 @@ EventScript_1A6551:: @ 81A6551
 	cleartrainerflag TRAINER_CHAMPION_TERRY_4
 	cleartrainerflag TRAINER_CHAMPION_TERRY_5
 	cleartrainerflag TRAINER_CHAMPION_TERRY_6
-	setvar VAR_0x4068, 0
+	setvar VAR_MAP_SCENE_POKEMON_LEAGUE, 0
 	return
 
 EventScript_1A6578:: @ 81A6578
@@ -2821,7 +2821,7 @@ EventScript_1A77F9:: @ 81A77F9
 	end
 
 EventScript_1A7803:: @ 81A7803
-	compare_var_to_var VAR_0x405F, VAR_0x4001
+	compare_var_to_var VAR_MAP_SCENE_ROUTE23, VAR_0x4001
 	goto_if 4, EventScript_1A77EC
 	copyvar VAR_0x8000, VAR_0x4001
 	compare_var_to_value VAR_0x8000, 1
@@ -2843,7 +2843,7 @@ EventScript_1A7803:: @ 81A7803
 	end
 
 EventScript_1A786C:: @ 81A786C
-	compare_var_to_var VAR_0x405F, VAR_0x4001
+	compare_var_to_var VAR_MAP_SCENE_ROUTE23, VAR_0x4001
 	goto_if 4, EventScript_1A77F9
 	copyvar VAR_0x8000, VAR_0x4001
 	compare_var_to_value VAR_0x8000, 1
@@ -2918,13 +2918,13 @@ EventScript_1A794D:: @ 81A794D
 	playfanfare MUS_FANFA1
 	waitfanfare
 	waitbuttonpress
-	copyvar VAR_0x405F, VAR_0x4001
+	copyvar VAR_MAP_SCENE_ROUTE23, VAR_0x4001
 	release
 	end
 
 EventScript_1A795F:: @ 81A795F
 	msgbox Text_1A5839
-	copyvar VAR_0x405F, VAR_0x4001
+	copyvar VAR_MAP_SCENE_ROUTE23, VAR_0x4001
 	release
 	end
 
@@ -3029,13 +3029,13 @@ EventScript_1A7A96:: @ 81A7A96
 	playfanfare MUS_FANFA1
 	waitfanfare
 	waitbuttonpress
-	copyvar VAR_0x405F, VAR_0x4001
+	copyvar VAR_MAP_SCENE_ROUTE23, VAR_0x4001
 	releaseall
 	end
 
 EventScript_1A7AA8:: @ 81A7AA8
 	msgbox Text_1A5839
-	copyvar VAR_0x405F, VAR_0x4001
+	copyvar VAR_MAP_SCENE_ROUTE23, VAR_0x4001
 	releaseall
 	end
 
@@ -4211,7 +4211,7 @@ EventScript_1A8EC0:: @ 81A8EC0
 EventScript_1A8EC5:: @ 81A8EC5
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
 	goto_if 4, EventScript_1A911E
-	compare_var_to_value VAR_0x4071, 4
+	compare_var_to_value VAR_MAP_SCENE_CINNABAR_ISLAND, 4
 	goto_if 4, EventScript_1A8F12
 	multichoice 19, 6, 44, 0
 	copyvar VAR_0x8000, VAR_RESULT
@@ -4243,7 +4243,7 @@ EventScript_1A8F12:: @ 81A8F12
 EventScript_1A8F54:: @ 81A8F54
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
 	goto_if 4, EventScript_1A911E
-	compare_var_to_value VAR_0x4071, 4
+	compare_var_to_value VAR_MAP_SCENE_CINNABAR_ISLAND, 4
 	goto_if 4, EventScript_1A8FA1
 	multichoice 19, 6, 45, 0
 	copyvar VAR_0x8000, VAR_RESULT
@@ -4295,7 +4295,7 @@ EventScript_1A9004:: @ 81A9004
 EventScript_1A900F:: @ 81A900F
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
 	goto_if 4, EventScript_1A911E
-	compare_var_to_value VAR_0x4071, 4
+	compare_var_to_value VAR_MAP_SCENE_CINNABAR_ISLAND, 4
 	goto_if 4, EventScript_1A905C
 	multichoice 19, 6, 46, 0
 	copyvar VAR_0x8000, VAR_RESULT
@@ -8667,7 +8667,7 @@ ThreeIsland_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
 TwoIsland_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
 VermilionCity_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
 ViridianCity_PokemonCenter_2F_MapScript1_1BB2A3:: @ 81BB2A3
-	map_script_2 VAR_0x407C, 1, EventScript_1BB415
+	map_script_2 VAR_MAP_SCENE_POKEMON_CENTER_TEALA, 1, EventScript_1BB415
 	map_script_2 VAR_0x406F, 1, EventScript_1BB2E5
 	map_script_2 VAR_0x406F, 2, EventScript_1BB2E5
 	map_script_2 VAR_0x406F, 5, EventScript_1BB2E5
@@ -8790,7 +8790,7 @@ EventScript_1BB415:: @ 81BB415
 	waitmovement 0
 	delay 30
 	msgbox gUnknown_81BD966
-	setvar VAR_0x407C, 2
+	setvar VAR_MAP_SCENE_POKEMON_CENTER_TEALA, 2
 	releaseall
 	end
 

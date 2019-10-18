@@ -3,7 +3,7 @@ VictoryRoad_3F_MapScripts:: @ 81610AA
 	.byte 0
 
 VictoryRoad_3F_MapScript1_1610B0:: @ 81610B0
-	compare_var_to_value VAR_0x4067, 100
+	compare_var_to_value VAR_MAP_SCENE_VICTORY_ROAD_3F, 100
 	call_if 5, EventScript_1610BC
 	end
 
@@ -14,7 +14,7 @@ EventScript_1610BC:: @ 81610BC
 
 VictoryRoad_3F_EventScript_1610CF:: @ 81610CF
 	lockall
-	compare_var_to_value VAR_0x4067, 100
+	compare_var_to_value VAR_MAP_SCENE_VICTORY_ROAD_3F, 100
 	goto_if_eq EventScript_161101
 	setmetatile 12, 12, 721, 0
 	setmetatile 12, 13, 737, 0
@@ -23,7 +23,7 @@ VictoryRoad_3F_EventScript_1610CF:: @ 81610CF
 	waitse
 	moveobjectoffscreen 7
 	moveobjectoffscreen 10
-	setvar VAR_0x4067, 100
+	setvar VAR_MAP_SCENE_VICTORY_ROAD_3F, 100
 	releaseall
 	end
 

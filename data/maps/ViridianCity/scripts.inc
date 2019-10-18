@@ -4,13 +4,13 @@ ViridianCity_MapScripts:: @ 81658D3
 
 ViridianCity_MapScript1_1658D9:: @ 81658D9
 	setworldmapflag FLAG_WORLD_MAP_VIRIDIAN_CITY
-	compare_var_to_value VAR_0x4051, 0
+	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 0
 	call_if 1, EventScript_165920
-	compare_var_to_value VAR_0x4051, 1
+	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 1
 	call_if 1, EventScript_16590F
-	compare_var_to_value VAR_0x4051, 2
+	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2
 	call_if 4, EventScript_165909
-	compare_var_to_value VAR_0x405A, 0
+	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_GYM_DOOR, 0
 	call_if 1, EventScript_165931
 	end
 
@@ -43,7 +43,7 @@ EventScript_165931:: @ 8165931
 	goto_if 0, EventScript_1A77A9
 	checkflag FLAG_BADGE07_GET
 	goto_if 0, EventScript_1A77A9
-	setvar VAR_0x405A, 1
+	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_GYM_DOOR, 1
 	return
 
 ViridianCity_EventScript_16596D:: @ 816596D
@@ -90,7 +90,7 @@ ViridianCity_EventScript_1659C1:: @ 81659C1
 ViridianCity_EventScript_1659CA:: @ 81659CA
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x405A, 1
+	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_GYM_DOOR, 1
 	goto_if_eq EventScript_1659EC
 	msgbox gUnknown_817DB39
 	closemessage
@@ -109,11 +109,11 @@ ViridianCity_EventScript_1659F6:: @ 81659F6
 	faceplayer
 	checkflag FLAG_BADGE01_GET
 	goto_if_eq EventScript_165A23
-	compare_var_to_value VAR_0x4051, 2
+	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2
 	goto_if 4, EventScript_165A4A
-	compare_var_to_value VAR_0x4051, 1
+	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 1
 	goto_if_eq EventScript_165A54
-	compare_var_to_value VAR_0x4051, 0
+	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 0
 	goto_if_eq EventScript_165A84
 	end
 
@@ -185,7 +185,7 @@ EventScript_165ABA:: @ 8165ABA
 ViridianCity_EventScript_165AC4:: @ 8165AC4
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x4051, 0
+	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 0
 	goto_if_eq EventScript_165ADB
 	msgbox gUnknown_817DC99
 	release
@@ -251,7 +251,7 @@ EventScript_165B4C:: @ 8165B4C
 	lock
 	faceplayer
 	msgbox gUnknown_817DE9B
-	setvar VAR_0x4051, 2
+	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2
 	giveitem ITEM_TEACHY_TV
 	msgbox gUnknown_817DEEB
 	return

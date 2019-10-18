@@ -4,7 +4,7 @@ PewterCity_MapScripts:: @ 8165B8E
 
 PewterCity_MapScript1_165B94:: @ 8165B94
 	setworldmapflag FLAG_WORLD_MAP_PEWTER_CITY
-	setvar VAR_0x4061, 0
+	setvar VAR_MAP_SCENE_PEWTER_CITY_MUSEUM_1F, 0
 	end
 
 PewterCity_EventScript_165B9D:: @ 8165B9D
@@ -1468,8 +1468,8 @@ EventScript_1662DE:: @ 81662DE
 	msgbox gUnknown_817EA36
 	closemessage
 	removeobject 7
-	setflag FLAG_0x82F
-	setvar VAR_0x406C, 2
+	setflag FLAG_SYS_RUNNING_SHOES
+	setvar VAR_MAP_SCENE_PEWTER_CITY, 2
 	return
 
 EventScript_1663CA:: @ 81663CA

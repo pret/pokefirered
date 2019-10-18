@@ -213,7 +213,7 @@
       "x": 7,
       "y": 7,
       "elevation": 3,
-      "var": "VAR_0x4067",
+      "var": "VAR_MAP_SCENE_VICTORY_ROAD_3F",
       "var_value": 99,
       "script": "VictoryRoad_3F_EventScript_1610CF"
     }

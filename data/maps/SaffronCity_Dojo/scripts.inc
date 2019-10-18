@@ -3,7 +3,7 @@ SaffronCity_Dojo_MapScripts:: @ 816EBDB
 
 SaffronCity_Dojo_EventScript_16EBDC:: @ 816EBDC
 	lockall
-	setvar VAR_0x4081, 1
+	setvar VAR_MAP_SCENE_SAFFRON_CITY_DOJO, 1
 	applymovement 5, Movement_1A75E7
 	waitmovement 0
 	releaseall
@@ -11,7 +11,7 @@ SaffronCity_Dojo_EventScript_16EBDC:: @ 816EBDC
 
 SaffronCity_Dojo_EventScript_16EBEE:: @ 816EBEE
 	lockall
-	setvar VAR_0x4081, 1
+	setvar VAR_MAP_SCENE_SAFFRON_CITY_DOJO, 1
 	applymovement 5, Movement_1A75EB
 	waitmovement 0
 	releaseall
@@ -155,6 +155,6 @@ EventScript_16EDC6:: @ 816EDC6
 	end
 
 EventScript_16EDD0:: @ 816EDD0
-	setvar VAR_0x4081, 1
+	setvar VAR_MAP_SCENE_SAFFRON_CITY_DOJO, 1
 	release
 	end

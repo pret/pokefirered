@@ -134,7 +134,7 @@
       "x": 5,
       "y": 5,
       "elevation": 3,
-      "var": "VAR_0x4081",
+      "var": "VAR_MAP_SCENE_SAFFRON_CITY_DOJO",
       "var_value": 0,
       "script": "SaffronCity_Dojo_EventScript_16EBDC"
     },
@@ -143,7 +143,7 @@
       "x": 7,
       "y": 5,
       "elevation": 3,
-      "var": "VAR_0x4081",
+      "var": "VAR_MAP_SCENE_SAFFRON_CITY_DOJO",
       "var_value": 0,
       "script": "SaffronCity_Dojo_EventScript_16EBEE"
     }

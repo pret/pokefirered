@@ -190,7 +190,7 @@
       "x": 22,
       "y": 11,
       "elevation": 3,
-      "var": "VAR_0x4051",
+      "var": "VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN",
       "var_value": 0,
       "script": "ViridianCity_EventScript_165AF6"
     },
@@ -199,7 +199,7 @@
       "x": 36,
       "y": 11,
       "elevation": 3,
-      "var": "VAR_0x405A",
+      "var": "VAR_MAP_SCENE_VIRIDIAN_CITY_GYM_DOOR",
       "var_value": 0,
       "script": "ViridianCity_EventScript_16596D"
     },
@@ -208,7 +208,7 @@
       "x": 20,
       "y": 8,
       "elevation": 3,
-      "var": "VAR_0x4051",
+      "var": "VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN",
       "var_value": 1,
       "script": "ViridianCity_EventScript_165B10"
     },
@@ -217,7 +217,7 @@
       "x": 22,
       "y": 8,
       "elevation": 3,
-      "var": "VAR_0x4051",
+      "var": "VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN",
       "var_value": 1,
       "script": "ViridianCity_EventScript_165B2E"
     }

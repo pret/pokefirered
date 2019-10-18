@@ -81,7 +81,7 @@
       "x": 11,
       "y": 18,
       "elevation": 3,
-      "var": "VAR_0x4080",
+      "var": "VAR_MAP_SCENE_ICEFALL_CAVE_BACK",
       "var_value": 0,
       "script": "FourIsland_IcefallCave_Back_EventScript_163D98"
     },
@@ -90,7 +90,7 @@
       "x": 12,
       "y": 18,
       "elevation": 3,
-      "var": "VAR_0x4080",
+      "var": "VAR_MAP_SCENE_ICEFALL_CAVE_BACK",
       "var_value": 0,
       "script": "FourIsland_IcefallCave_Back_EventScript_163D98"
     },
@@ -99,7 +99,7 @@
       "x": 13,
       "y": 18,
       "elevation": 3,
-      "var": "VAR_0x4080",
+      "var": "VAR_MAP_SCENE_ICEFALL_CAVE_BACK",
       "var_value": 0,
       "script": "FourIsland_IcefallCave_Back_EventScript_163D98"
     }

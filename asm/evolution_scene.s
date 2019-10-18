@@ -1962,14 +1962,14 @@ _080CEEA0:
 	bl Free
 	str r6, [r4]
 	bl FreeAllWindowBuffers
-	ldr r0, _080CEECC @ =gUnknown_300537C
+	ldr r0, _080CEECC @ =gCB2_AfterEvolution
 	ldr r0, [r0]
 	bl SetMainCallback2
 	b _080CF528
 	.align 2, 0
 _080CEEC4: .4byte gPaletteFade
 _080CEEC8: .4byte gUnknown_2039A20
-_080CEECC: .4byte gUnknown_300537C
+_080CEECC: .4byte gCB2_AfterEvolution
 _080CEED0:
 	ldr r0, _080CEF04 @ =gBattleCommunication
 	ldrb r1, [r0, 0x2]
@@ -3252,14 +3252,14 @@ _080CF9E0:
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r2]
-	ldr r0, _080CFA10 @ =gUnknown_300537C
+	ldr r0, _080CFA10 @ =gCB2_AfterEvolution
 	ldr r0, [r0]
 	bl SetMainCallback2
 	b _080D003A
 	.align 2, 0
 _080CFA08: .4byte gUnknown_2039A20
 _080CFA0C: .4byte gTextFlags
-_080CFA10: .4byte gUnknown_300537C
+_080CFA10: .4byte gCB2_AfterEvolution
 _080CFA14:
 	ldr r0, _080CFA60 @ =gBattleCommunication
 	ldrb r1, [r0, 0x2]

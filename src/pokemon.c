@@ -5405,7 +5405,7 @@ u16 GetMonEVCount(struct Pokemon *mon)
     return count;
 }
 
-void sub_8043A68(void)
+void RandomlyGivePartyPokerus(struct Pokemon *party)
 {
     u8 foo[4]; // huh?
 }
@@ -5471,7 +5471,7 @@ static void sub_8043B38(void)
     u8 foo[4]; // huh?
 }
 
-void sub_8043B40(void)
+void PartySpreadPokerus(struct Pokemon *party)
 {
     u8 foo[4]; // huh?
 }

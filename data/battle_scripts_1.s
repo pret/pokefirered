@@ -72,7 +72,7 @@ BattleScript_WildMonFled:: @ 81D891D
 BattleScript_PrintCantRunFromTrainer:: @ 81D8924
 	.incbin "baserom.gba", 0x1D8924, 0x16
 
-gUnknown_81D893A:: @ 81D893A
+BattleScript_PrintFailedToRunString:: @ 81D893A
 	.incbin "baserom.gba", 0x1D893A, 0x9
 
 BattleScript_PrintCantEscapeFromBattle:: @ 81D8943
@@ -81,7 +81,7 @@ BattleScript_PrintCantEscapeFromBattle:: @ 81D8943
 BattleScript_PrintFullBox:: @ 81D8949
 	.incbin "baserom.gba", 0x1D8949, 0x4
 
-gUnknown_81D894D:: @ 81D894D
+BattleScript_ActionSwitch:: @ 81D894D
 	.incbin "baserom.gba", 0x1D894D, 0xA4
 
 BattleScript_Pausex20:: @ 81D89F1

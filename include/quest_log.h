@@ -14,6 +14,7 @@ struct UnkStruct_3005E90
     u8 unk_2;
 };
 
+extern u8 gUnknown_203ADFA;
 extern u8 gUnknown_3005E88;
 extern u16 gUnknown_3005E8C;
 extern struct UnkStruct_3005E90 gUnknown_3005E90;
@@ -41,7 +42,6 @@ void sub_8112364(void);
 u8 sub_8112CAC(void);
 void sub_81138F8(void);
 void sub_812C224(void);
-
-extern u8 gUnknown_203ADFA;
+void sub_812BFDC(void);
 
 #endif //GUARD_QUEST_LOG_H

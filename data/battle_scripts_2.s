@@ -3,10 +3,10 @@
 gBattlescriptsForBallThrow:: @ 81D99B0
 	.incbin "baserom.gba", 0x1D99B0, 0x34
 
-gUnknown_81D99E4:: @ 81D99E4
+gBattlescriptsForUsingItem:: @ 81D99E4
 	.incbin "baserom.gba", 0x1D99E4, 0x18
 
-gUnknown_81D99FC:: @ 81D99FC
+gBattlescriptsForRunningByItem:: @ 81D99FC
 	.incbin "baserom.gba", 0x1D99FC, 0x8
 
 gBattlescriptsForSafariActions:: @ 81D9A04

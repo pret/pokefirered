@@ -101,7 +101,7 @@ gUnknown_3005360: @ 3005360
 gUnknown_3005378: @ 3005378
 	.space 0x4
 
-gUnknown_300537C: @ 300537C
+gCB2_AfterEvolution: @ 300537C
 	.space 0x4
 
 	.include "save.o"

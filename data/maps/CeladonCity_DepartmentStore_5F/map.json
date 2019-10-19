@@ -9,7 +9,7 @@
   "map_type": "MAP_TYPE_8",
   "allow_cycling": false,
   "unknown_19": 4,
-  "elevator_flag": 5,
+  "floor_number": 5,
   "battle_scene": "BATTLE_SCENE_0",
   "connections": null,
   "object_events": [

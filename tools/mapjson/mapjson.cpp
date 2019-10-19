@@ -121,7 +121,7 @@ string generate_map_header_text(Json map_data, Json layouts_data) {
              << "show_map_name=" << map_data["show_map_name"].bool_value() << "\n";
     }
     else if (version == "firered") {
-        text << "\t.byte " << map_data["elevator_flag"].int_value() << "\n";
+        text << "\t.byte " << map_data["floor_number"].int_value() << "\n";
     }
 
      text << "\t.byte " << map_data["battle_scene"].string_value() << "\n\n";

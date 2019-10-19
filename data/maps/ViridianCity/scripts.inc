@@ -15,17 +15,17 @@ ViridianCity_MapScript1_1658D9:: @ 81658D9
 	end
 
 EventScript_165909:: @ 8165909
-	setvar VAR_OBJ_GFX_ID_0, 32
+	setvar VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_OLD_MAN_1
 	return
 
 EventScript_16590F:: @ 816590F
-	setvar VAR_OBJ_GFX_ID_0, 32
+	setvar VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_OLD_MAN_1
 	setobjectxyperm 4, 21, 8
 	setobjectmovementtype 4, 1
 	return
 
 EventScript_165920:: @ 8165920
-	setvar VAR_OBJ_GFX_ID_0, 34
+	setvar VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_VIRIDIAN_DRUNK
 	setobjectxyperm 4, 21, 11
 	setobjectmovementtype 4, 8
 	return

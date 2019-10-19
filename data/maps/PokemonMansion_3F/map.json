@@ -50,7 +50,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PokemonMansion_3F_EventScript_1BE984",
-      "flag": "418"
+      "flag": "FLAG_0x1A2"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -63,7 +63,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PokemonMansion_3F_EventScript_1BE991",
-      "flag": "419"
+      "flag": "FLAG_0x1A3"
     }
   ],
   "warp_events": [

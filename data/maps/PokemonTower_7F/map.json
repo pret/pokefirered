@@ -24,7 +24,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PokemonTower_7F_EventScript_16355A",
-      "flag": "52"
+      "flag": "FLAG_0x034"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
@@ -37,7 +37,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
       "script": "PokemonTower_7F_EventScript_163586",
-      "flag": "94"
+      "flag": "FLAG_0x05E"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
@@ -50,7 +50,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
       "script": "PokemonTower_7F_EventScript_16363D",
-      "flag": "131"
+      "flag": "FLAG_0x083"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
@@ -63,7 +63,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
       "script": "PokemonTower_7F_EventScript_1636D6",
-      "flag": "132"
+      "flag": "FLAG_0x084"
     }
   ],
   "warp_events": [

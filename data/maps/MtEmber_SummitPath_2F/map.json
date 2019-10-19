@@ -24,7 +24,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtEmber_SummitPath_2F_EventScript_1BE00C",
-      "flag": "18"
+      "flag": "FLAG_0x012"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
@@ -37,7 +37,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtEmber_SummitPath_2F_EventScript_1BE00C",
-      "flag": "19"
+      "flag": "FLAG_0x013"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
@@ -50,7 +50,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtEmber_SummitPath_2F_EventScript_1BE00C",
-      "flag": "20"
+      "flag": "FLAG_0x014"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
@@ -63,7 +63,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtEmber_SummitPath_2F_EventScript_1BE00C",
-      "flag": "21"
+      "flag": "FLAG_0x015"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
@@ -76,7 +76,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtEmber_SummitPath_2F_EventScript_1BE00C",
-      "flag": "22"
+      "flag": "FLAG_0x016"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
@@ -89,7 +89,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtEmber_SummitPath_2F_EventScript_1BE00C",
-      "flag": "23"
+      "flag": "FLAG_0x017"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
@@ -102,7 +102,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtEmber_SummitPath_2F_EventScript_1BE00C",
-      "flag": "24"
+      "flag": "FLAG_0x018"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
@@ -115,7 +115,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtEmber_SummitPath_2F_EventScript_1BE00C",
-      "flag": "25"
+      "flag": "FLAG_0x019"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
@@ -128,7 +128,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtEmber_SummitPath_2F_EventScript_1BE00C",
-      "flag": "26"
+      "flag": "FLAG_0x01A"
     }
   ],
   "warp_events": [

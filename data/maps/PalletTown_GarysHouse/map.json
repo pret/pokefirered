@@ -37,7 +37,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PalletTown_GarysHouse_EventScript_168F63",
-      "flag": "57"
+      "flag": "FLAG_0x039"
     }
   ],
   "warp_events": [

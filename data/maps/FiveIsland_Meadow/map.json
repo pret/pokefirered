@@ -35,7 +35,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
       "script": "FiveIsland_Meadow_EventScript_1689BB",
-      "flag": "136"
+      "flag": "FLAG_0x088"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
@@ -48,7 +48,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 5,
       "script": "FiveIsland_Meadow_EventScript_16898D",
-      "flag": "136"
+      "flag": "FLAG_0x088"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
@@ -61,7 +61,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
       "script": "FiveIsland_Meadow_EventScript_1689A4",
-      "flag": "136"
+      "flag": "FLAG_0x088"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
@@ -74,7 +74,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "FiveIsland_Meadow_EventScript_1BDF13",
-      "flag": "18"
+      "flag": "FLAG_0x012"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
@@ -87,7 +87,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "FiveIsland_Meadow_EventScript_1BDF13",
-      "flag": "19"
+      "flag": "FLAG_0x013"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -100,7 +100,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "FiveIsland_Meadow_EventScript_1BEC69",
-      "flag": "478"
+      "flag": "FLAG_0x1DE"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -113,7 +113,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "FiveIsland_Meadow_EventScript_1BEC76",
-      "flag": "479"
+      "flag": "FLAG_0x1DF"
     }
   ],
   "warp_events": [

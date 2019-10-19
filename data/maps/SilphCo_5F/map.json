@@ -24,7 +24,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
       "script": "SilphCo_5F_EventScript_161853",
-      "flag": "83"
+      "flag": "FLAG_0x053"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKER",
@@ -37,7 +37,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
       "script": "SilphCo_5F_EventScript_16186A",
-      "flag": "83"
+      "flag": "FLAG_0x053"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_WORKER_M",
@@ -63,7 +63,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
       "script": "SilphCo_5F_EventScript_161825",
-      "flag": "83"
+      "flag": "FLAG_0x053"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
@@ -76,7 +76,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
       "script": "SilphCo_5F_EventScript_16183C",
-      "flag": "83"
+      "flag": "FLAG_0x053"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -89,7 +89,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SilphCo_5F_EventScript_1BE89A",
-      "flag": "400"
+      "flag": "FLAG_0x190"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -102,7 +102,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SilphCo_5F_EventScript_1BE8A7",
-      "flag": "401"
+      "flag": "FLAG_0x191"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -115,7 +115,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SilphCo_5F_EventScript_1BE8B4",
-      "flag": "402"
+      "flag": "FLAG_0x192"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_SCIENTIST",

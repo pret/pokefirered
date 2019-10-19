@@ -131,7 +131,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SixIsland_WaterPath_EventScript_1BEC9D",
-      "flag": "482"
+      "flag": "FLAG_0x1E2"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -144,7 +144,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SixIsland_WaterPath_EventScript_1BECAA",
-      "flag": "483"
+      "flag": "FLAG_0x1E3"
     }
   ],
   "warp_events": [

@@ -85,7 +85,7 @@
 #define FLAG_0x050               0x50
 #define FLAG_0x051               0x51
 #define FLAG_0x052               0x52
-#define FLAG_LEGENDARIES_IN_SOOTOPOLIS 0x53
+#define FLAG_0x053               0x53
 #define FLAG_0x054               0x54
 #define FLAG_0x055               0x55
 #define FLAG_0x056               0x56

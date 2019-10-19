@@ -115,7 +115,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtMoon_1F_EventScript_1BE5CF",
-      "flag": "345"
+      "flag": "FLAG_0x159"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -128,7 +128,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtMoon_1F_EventScript_1BE5DC",
-      "flag": "346"
+      "flag": "FLAG_0x15A"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -141,7 +141,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtMoon_1F_EventScript_1BE5E9",
-      "flag": "347"
+      "flag": "FLAG_0x15B"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -154,7 +154,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtMoon_1F_EventScript_1BE5F6",
-      "flag": "348"
+      "flag": "FLAG_0x15C"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -167,7 +167,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtMoon_1F_EventScript_1BE603",
-      "flag": "349"
+      "flag": "FLAG_0x15D"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -180,7 +180,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtMoon_1F_EventScript_1BE610",
-      "flag": "350"
+      "flag": "FLAG_0x15E"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_BALDING_MAN",

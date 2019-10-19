@@ -24,7 +24,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PowerPlant_EventScript_1BE91C",
-      "flag": "410"
+      "flag": "FLAG_0x19A"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -37,7 +37,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PowerPlant_EventScript_1BE929",
-      "flag": "411"
+      "flag": "FLAG_0x19B"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -50,7 +50,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PowerPlant_EventScript_1BE936",
-      "flag": "412"
+      "flag": "FLAG_0x19C"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -63,7 +63,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PowerPlant_EventScript_1BE943",
-      "flag": "413"
+      "flag": "FLAG_0x19D"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -76,7 +76,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PowerPlant_EventScript_1BE950",
-      "flag": "414"
+      "flag": "FLAG_0x19E"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ZAPDOS",
@@ -89,7 +89,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PowerPlant_EventScript_1637B8",
-      "flag": "93"
+      "flag": "FLAG_0x05D"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -102,7 +102,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PowerPlant_EventScript_16388D",
-      "flag": "134"
+      "flag": "FLAG_0x086"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -115,7 +115,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PowerPlant_EventScript_16382F",
-      "flag": "133"
+      "flag": "FLAG_0x085"
     }
   ],
   "warp_events": [

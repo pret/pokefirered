@@ -24,7 +24,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
       "script": "RocketHideout_B3F_EventScript_1612D1",
-      "flag": "173"
+      "flag": "FLAG_0x0AD"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
@@ -37,7 +37,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
       "script": "RocketHideout_B3F_EventScript_1612BA",
-      "flag": "173"
+      "flag": "FLAG_0x0AD"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -50,7 +50,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "RocketHideout_B3F_EventScript_1BE714",
-      "flag": "370"
+      "flag": "FLAG_0x172"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -63,7 +63,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "RocketHideout_B3F_EventScript_1BE721",
-      "flag": "371"
+      "flag": "FLAG_0x173"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -76,7 +76,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "RocketHideout_B3F_EventScript_1BEBCD",
-      "flag": "466"
+      "flag": "FLAG_0x1D2"
     }
   ],
   "warp_events": [

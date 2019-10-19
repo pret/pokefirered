@@ -63,7 +63,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PalletTown_ProfessorOaksLab_EventScript_169595",
-      "flag": "43"
+      "flag": "FLAG_0x02B"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -76,7 +76,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PalletTown_ProfessorOaksLab_EventScript_169BAB",
-      "flag": "40"
+      "flag": "FLAG_0x028"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -89,7 +89,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PalletTown_ProfessorOaksLab_EventScript_169D78",
-      "flag": "41"
+      "flag": "FLAG_0x029"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -102,7 +102,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PalletTown_ProfessorOaksLab_EventScript_169DAE",
-      "flag": "42"
+      "flag": "FLAG_0x02A"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_BLUE",
@@ -115,7 +115,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PalletTown_ProfessorOaksLab_EventScript_16955F",
-      "flag": "45"
+      "flag": "FLAG_0x02D"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_POKEDEX",
@@ -128,7 +128,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PalletTown_ProfessorOaksLab_EventScript_169E5F",
-      "flag": "58"
+      "flag": "FLAG_0x03A"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_POKEDEX",
@@ -141,7 +141,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PalletTown_ProfessorOaksLab_EventScript_169E5F",
-      "flag": "58"
+      "flag": "FLAG_0x03A"
     }
   ],
   "warp_events": [

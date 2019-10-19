@@ -24,7 +24,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SafariZone_East_EventScript_1BE7E4",
-      "flag": "386"
+      "flag": "FLAG_0x182"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -37,7 +37,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SafariZone_East_EventScript_1BE7F1",
-      "flag": "387"
+      "flag": "FLAG_0x183"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -50,7 +50,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SafariZone_East_EventScript_1BE7FE",
-      "flag": "388"
+      "flag": "FLAG_0x184"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -63,7 +63,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SafariZone_East_EventScript_1BE80B",
-      "flag": "389"
+      "flag": "FLAG_0x185"
     }
   ],
   "warp_events": [

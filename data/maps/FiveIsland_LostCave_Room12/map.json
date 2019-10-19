@@ -24,7 +24,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "FiveIsland_LostCave_Room12_EventScript_1BEDD5",
-      "flag": "506"
+      "flag": "FLAG_0x1FA"
     }
   ],
   "warp_events": [

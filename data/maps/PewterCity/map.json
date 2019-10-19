@@ -48,7 +48,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PewterCity_EventScript_16607E",
-      "flag": "80"
+      "flag": "FLAG_0x050"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_FAT_MAN",
@@ -87,7 +87,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PewterCity_EventScript_165B9D",
-      "flag": "46"
+      "flag": "FLAG_0x02E"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
@@ -100,7 +100,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PewterCity_EventScript_1BDF13",
-      "flag": "18"
+      "flag": "FLAG_0x012"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_SCIENTIST",
@@ -113,7 +113,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PewterCity_EventScript_1662A9",
-      "flag": "146"
+      "flag": "FLAG_0x092"
     }
   ],
   "warp_events": [

@@ -24,7 +24,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "0x0",
-      "flag": "78"
+      "flag": "FLAG_0x04E"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_WORKER_M",
@@ -50,7 +50,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
       "script": "SilphCo_7F_EventScript_161C1A",
-      "flag": "83"
+      "flag": "FLAG_0x053"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
@@ -63,7 +63,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
       "script": "SilphCo_7F_EventScript_161C31",
-      "flag": "83"
+      "flag": "FLAG_0x053"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
@@ -76,7 +76,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
       "script": "SilphCo_7F_EventScript_161C48",
-      "flag": "83"
+      "flag": "FLAG_0x053"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_WORKER_F",
@@ -128,7 +128,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
       "script": "SilphCo_7F_EventScript_161C03",
-      "flag": "83"
+      "flag": "FLAG_0x053"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -141,7 +141,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SilphCo_7F_EventScript_1BE8DB",
-      "flag": "405"
+      "flag": "FLAG_0x195"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -154,7 +154,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SilphCo_7F_EventScript_1BE8E8",
-      "flag": "406"
+      "flag": "FLAG_0x196"
     }
   ],
   "warp_events": [

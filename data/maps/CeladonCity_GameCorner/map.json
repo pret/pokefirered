@@ -154,7 +154,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "CeladonCity_GameCorner_EventScript_16CAF5",
-      "flag": "91"
+      "flag": "FLAG_0x05B"
     }
   ],
   "warp_events": [

@@ -152,7 +152,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "Route8_EventScript_1BDF13",
-      "flag": "18"
+      "flag": "FLAG_0x012"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
@@ -165,7 +165,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "Route8_EventScript_1BDF13",
-      "flag": "19"
+      "flag": "FLAG_0x013"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_LITTLE_GIRL",

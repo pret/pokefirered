@@ -35,7 +35,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "Route24_EventScript_168620",
-      "flag": "49"
+      "flag": "FLAG_0x031"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_CAMPER",
@@ -126,7 +126,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "Route24_EventScript_1BE644",
-      "flag": "354"
+      "flag": "FLAG_0x162"
     }
   ],
   "warp_events": [],

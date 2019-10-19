@@ -76,7 +76,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "CinnabarIsland_PokemonCenter_1F_EventScript_1AD0B9",
-      "flag": "157"
+      "flag": "FLAG_0x09D"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_RED_NORMAL",
@@ -89,7 +89,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "CinnabarIsland_PokemonCenter_1F_EventScript_1AD0B9",
-      "flag": "157"
+      "flag": "FLAG_0x09D"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_BILL",
@@ -102,7 +102,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "CinnabarIsland_PokemonCenter_1F_EventScript_16E90A",
-      "flag": "162"
+      "flag": "FLAG_0x0A2"
     }
   ],
   "warp_events": [

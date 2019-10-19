@@ -24,7 +24,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtEmber_RubyPath_B2F_Stairs_EventScript_1BE00C",
-      "flag": "18"
+      "flag": "FLAG_0x012"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
@@ -37,7 +37,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtEmber_RubyPath_B2F_Stairs_EventScript_1BE00C",
-      "flag": "19"
+      "flag": "FLAG_0x013"
     }
   ],
   "warp_events": [

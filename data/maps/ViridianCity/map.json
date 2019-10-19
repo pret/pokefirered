@@ -53,7 +53,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ViridianCity_EventScript_1BDF13",
-      "flag": "17"
+      "flag": "FLAG_0x011"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_OLD_MAN_1",
@@ -131,7 +131,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ViridianCity_EventScript_1BDF13",
-      "flag": "18"
+      "flag": "FLAG_0x012"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -144,7 +144,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ViridianCity_EventScript_1BEB8C",
-      "flag": "461"
+      "flag": "FLAG_0x1CD"
     }
   ],
   "warp_events": [

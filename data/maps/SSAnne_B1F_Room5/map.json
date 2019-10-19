@@ -50,7 +50,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SSAnne_B1F_Room5_EventScript_1BE69F",
-      "flag": "361"
+      "flag": "FLAG_0x169"
     }
   ],
   "warp_events": [

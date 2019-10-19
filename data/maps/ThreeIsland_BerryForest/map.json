@@ -24,7 +24,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_BerryForest_EventScript_163C83",
-      "flag": "122"
+      "flag": "FLAG_0x07A"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
@@ -37,7 +37,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_BerryForest_EventScript_1BDF13",
-      "flag": "18"
+      "flag": "FLAG_0x012"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
@@ -50,7 +50,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_BerryForest_EventScript_1BDF13",
-      "flag": "19"
+      "flag": "FLAG_0x013"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
@@ -63,7 +63,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_BerryForest_EventScript_1BDF13",
-      "flag": "20"
+      "flag": "FLAG_0x014"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
@@ -76,7 +76,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_BerryForest_EventScript_1BDF13",
-      "flag": "21"
+      "flag": "FLAG_0x015"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
@@ -89,7 +89,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_BerryForest_EventScript_1BDF13",
-      "flag": "22"
+      "flag": "FLAG_0x016"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
@@ -102,7 +102,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_BerryForest_EventScript_1BDF13",
-      "flag": "23"
+      "flag": "FLAG_0x017"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
@@ -115,7 +115,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_BerryForest_EventScript_1BDF13",
-      "flag": "24"
+      "flag": "FLAG_0x018"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
@@ -128,7 +128,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_BerryForest_EventScript_1BDF13",
-      "flag": "25"
+      "flag": "FLAG_0x019"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
@@ -141,7 +141,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_BerryForest_EventScript_1BDF13",
-      "flag": "26"
+      "flag": "FLAG_0x01A"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
@@ -154,7 +154,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_BerryForest_EventScript_1BDF13",
-      "flag": "27"
+      "flag": "FLAG_0x01B"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -167,7 +167,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_BerryForest_EventScript_1BED05",
-      "flag": "490"
+      "flag": "FLAG_0x1EA"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -180,7 +180,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_BerryForest_EventScript_1BED12",
-      "flag": "491"
+      "flag": "FLAG_0x1EB"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -193,7 +193,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_BerryForest_EventScript_1BED1F",
-      "flag": "492"
+      "flag": "FLAG_0x1EC"
     }
   ],
   "warp_events": [

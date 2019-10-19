@@ -24,7 +24,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "0x0",
-      "flag": "76"
+      "flag": "FLAG_0x04C"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
@@ -37,7 +37,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "0x0",
-      "flag": "77"
+      "flag": "FLAG_0x04D"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ARTICUNO",
@@ -50,7 +50,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SeafoamIslands_B4F_EventScript_1631AC",
-      "flag": "130"
+      "flag": "FLAG_0x082"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -63,7 +63,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SeafoamIslands_B4F_EventScript_1BEC1B",
-      "flag": "472"
+      "flag": "FLAG_0x1D8"
     }
   ],
   "warp_events": [

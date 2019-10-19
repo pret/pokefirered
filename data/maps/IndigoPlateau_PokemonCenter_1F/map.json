@@ -76,7 +76,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "IndigoPlateau_PokemonCenter_1F_EventScript_1ACFAE",
-      "flag": "157"
+      "flag": "FLAG_0x09D"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_RED_NORMAL",
@@ -89,7 +89,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "IndigoPlateau_PokemonCenter_1F_EventScript_1AD06C",
-      "flag": "157"
+      "flag": "FLAG_0x09D"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_COOLTRAINER_M",
@@ -102,7 +102,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "IndigoPlateau_PokemonCenter_1F_EventScript_1AD087",
-      "flag": "157"
+      "flag": "FLAG_0x09D"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_RED_NORMAL",
@@ -115,7 +115,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "IndigoPlateau_PokemonCenter_1F_EventScript_1AD06C",
-      "flag": "157"
+      "flag": "FLAG_0x09D"
     }
   ],
   "warp_events": [

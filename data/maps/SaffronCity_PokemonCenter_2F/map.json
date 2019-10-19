@@ -63,7 +63,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SaffronCity_PokemonCenter_2F_EventScript_1BB1D2",
-      "flag": "112"
+      "flag": "FLAG_0x070"
     }
   ],
   "warp_events": [

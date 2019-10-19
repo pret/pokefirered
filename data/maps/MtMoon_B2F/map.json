@@ -24,7 +24,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtMoon_B2F_EventScript_16071B",
-      "flag": "47"
+      "flag": "FLAG_0x02F"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_FOSSIL",
@@ -37,7 +37,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtMoon_B2F_EventScript_16077F",
-      "flag": "48"
+      "flag": "FLAG_0x030"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_SCIENTIST",
@@ -63,7 +63,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
       "script": "MtMoon_B2F_EventScript_160829",
-      "flag": "173"
+      "flag": "FLAG_0x0AD"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
@@ -76,7 +76,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
       "script": "MtMoon_B2F_EventScript_1607E4",
-      "flag": "173"
+      "flag": "FLAG_0x0AD"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
@@ -89,7 +89,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
       "script": "MtMoon_B2F_EventScript_160812",
-      "flag": "173"
+      "flag": "FLAG_0x0AD"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
@@ -102,7 +102,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
       "script": "MtMoon_B2F_EventScript_1607FB",
-      "flag": "173"
+      "flag": "FLAG_0x0AD"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -115,7 +115,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtMoon_B2F_EventScript_1BE61D",
-      "flag": "351"
+      "flag": "FLAG_0x15F"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -128,7 +128,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtMoon_B2F_EventScript_1BE62A",
-      "flag": "352"
+      "flag": "FLAG_0x160"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -141,7 +141,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtMoon_B2F_EventScript_1BEAD6",
-      "flag": "447"
+      "flag": "FLAG_0x1BF"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -154,7 +154,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtMoon_B2F_EventScript_1BEAE3",
-      "flag": "448"
+      "flag": "FLAG_0x1C0"
     }
   ],
   "warp_events": [

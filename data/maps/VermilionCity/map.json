@@ -113,7 +113,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "VermilionCity_EventScript_1BDF13",
-      "flag": "18"
+      "flag": "FLAG_0x012"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_SCIENTIST",
@@ -126,7 +126,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "VermilionCity_EventScript_166C20",
-      "flag": "161"
+      "flag": "FLAG_0x0A1"
     }
   ],
   "warp_events": [

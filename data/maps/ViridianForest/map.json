@@ -89,7 +89,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ViridianForest_EventScript_1BE5A8",
-      "flag": "342"
+      "flag": "FLAG_0x156"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -102,7 +102,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ViridianForest_EventScript_1BE5B5",
-      "flag": "343"
+      "flag": "FLAG_0x157"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -115,7 +115,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ViridianForest_EventScript_1BE5C2",
-      "flag": "344"
+      "flag": "FLAG_0x158"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_BUG_CATCHER",
@@ -154,7 +154,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ViridianForest_EventScript_1BEAC9",
-      "flag": "446"
+      "flag": "FLAG_0x1BE"
     }
   ],
   "warp_events": [

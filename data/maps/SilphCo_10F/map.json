@@ -24,7 +24,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
       "script": "SilphCo_10F_EventScript_161DC0",
-      "flag": "83"
+      "flag": "FLAG_0x053"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_WORKER_F",
@@ -50,7 +50,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
       "script": "SilphCo_10F_EventScript_161DD7",
-      "flag": "83"
+      "flag": "FLAG_0x053"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -63,7 +63,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SilphCo_10F_EventScript_1BE8F5",
-      "flag": "407"
+      "flag": "FLAG_0x197"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -76,7 +76,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SilphCo_10F_EventScript_1BE902",
-      "flag": "408"
+      "flag": "FLAG_0x198"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -89,7 +89,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SilphCo_10F_EventScript_1BE90F",
-      "flag": "409"
+      "flag": "FLAG_0x199"
     }
   ],
   "warp_events": [

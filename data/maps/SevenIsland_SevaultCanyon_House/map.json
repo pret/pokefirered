@@ -50,7 +50,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SevenIsland_SevaultCanyon_House_EventScript_1BEDFC",
-      "flag": "509"
+      "flag": "FLAG_0x1FD"
     }
   ],
   "warp_events": [

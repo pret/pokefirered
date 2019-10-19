@@ -102,7 +102,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "FourIsland_EventScript_1BE00C",
-      "flag": "18"
+      "flag": "FLAG_0x012"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -115,7 +115,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "FourIsland_EventScript_1BEC28",
-      "flag": "473"
+      "flag": "FLAG_0x1D9"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -128,7 +128,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "FourIsland_EventScript_1BEC35",
-      "flag": "474"
+      "flag": "FLAG_0x1DA"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_BLUE",
@@ -141,7 +141,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "0x0",
-      "flag": "151"
+      "flag": "FLAG_0x097"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_FAT_MAN",

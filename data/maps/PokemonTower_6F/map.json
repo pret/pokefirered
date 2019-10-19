@@ -63,7 +63,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PokemonTower_6F_EventScript_1BE796",
-      "flag": "380"
+      "flag": "FLAG_0x17C"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -76,7 +76,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PokemonTower_6F_EventScript_1BE7A3",
-      "flag": "381"
+      "flag": "FLAG_0x17D"
     }
   ],
   "warp_events": [

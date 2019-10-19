@@ -165,7 +165,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "Route11_EventScript_1BEAF0",
-      "flag": "449"
+      "flag": "FLAG_0x1C1"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -178,7 +178,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "Route11_EventScript_1BEB99",
-      "flag": "462"
+      "flag": "FLAG_0x1CE"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -191,7 +191,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "Route11_EventScript_1BEBA6",
-      "flag": "463"
+      "flag": "FLAG_0x1CF"
     }
   ],
   "warp_events": [

@@ -76,7 +76,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "VictoryRoad_3F_EventScript_1BEA20",
-      "flag": "431"
+      "flag": "FLAG_0x1AF"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -89,7 +89,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "VictoryRoad_3F_EventScript_1BEA2D",
-      "flag": "432"
+      "flag": "FLAG_0x1B0"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
@@ -115,7 +115,7 @@
       "trainer_type": 88,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "VictoryRoad_3F_EventScript_1BE11D",
-      "flag": "89"
+      "flag": "FLAG_0x059"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",

@@ -37,7 +37,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "CeladonCity_Condominiums_RoofRoom_EventScript_16C46D",
-      "flag": "87"
+      "flag": "FLAG_0x057"
     }
   ],
   "warp_events": [

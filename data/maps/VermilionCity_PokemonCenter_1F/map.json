@@ -89,7 +89,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "VermilionCity_PokemonCenter_1F_EventScript_1ACE83",
-      "flag": "160"
+      "flag": "FLAG_0x0A0"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_RED_NORMAL",
@@ -102,7 +102,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "VermilionCity_PokemonCenter_1F_EventScript_1ACE83",
-      "flag": "160"
+      "flag": "FLAG_0x0A0"
     }
   ],
   "warp_events": [

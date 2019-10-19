@@ -24,7 +24,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SevenIsland_TrainerTower_3F_EventScript_1646E0",
-      "flag": "6"
+      "flag": "FLAG_0x006"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_VAR_0",
@@ -37,7 +37,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SevenIsland_TrainerTower_3F_EventScript_1646C8",
-      "flag": "2"
+      "flag": "FLAG_0x002"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_VAR_1",
@@ -50,7 +50,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SevenIsland_TrainerTower_3F_EventScript_1646CE",
-      "flag": "3"
+      "flag": "FLAG_0x003"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_VAR_2",
@@ -63,7 +63,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SevenIsland_TrainerTower_3F_EventScript_1646D4",
-      "flag": "4"
+      "flag": "FLAG_0x004"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_VAR_3",
@@ -76,7 +76,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SevenIsland_TrainerTower_3F_EventScript_1646DA",
-      "flag": "5"
+      "flag": "FLAG_0x005"
     }
   ],
   "warp_events": [

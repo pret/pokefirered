@@ -3161,6 +3161,7 @@ gAnimCmd_83A3298:: @ 83A3298
 
 gAnimTable_83A3314:: @ 83A3314
 	.4byte gAnimCmd_83A2950
+gAnimTable_83A3318:: @ 83A3318
 	.4byte gAnimCmd_83A2964
 	.4byte gAnimCmd_83A296C
 	.4byte gAnimCmd_83A2974
@@ -3227,6 +3228,8 @@ gAnimTable_83A33BC:: @ 83A33BC
 	.4byte gAnimCmd_83A2BFC
 	.4byte gAnimCmd_83A2C10
 	.4byte gAnimCmd_83A2C24
+
+gAnimTable_83A3410::
 	.4byte gAnimCmd_83A2C68
 	.4byte gAnimCmd_83A2C70
 	.4byte gAnimCmd_83A2C78
@@ -3282,6 +3285,8 @@ gAnimTable_83A3470:: @ 83A3470
 	.4byte gAnimCmd_83A2EF8
 	.4byte gAnimCmd_83A2F10
 	.4byte gAnimCmd_83A2F28
+
+gAnimTable_83A34E4::
 	.4byte gAnimCmd_83A2AC4
 	.4byte gAnimCmd_83A2ACC
 	.4byte gAnimCmd_83A2AD4
@@ -3409,25 +3414,44 @@ gAnimTable_83A3668:: @ 83A3668
 	.4byte gAnimCmd_83A3298
 
 gUnknown_83A3698:: @ 83A3698
-	.incbin "baserom.gba", 0x3A3698, 0x48
+	.4byte gAnimTable_83A3318
+	.byte 1, 3, 0, 2
+	.4byte gAnimTable_83A3368
+	.byte 1, 3, 0, 2
+	.4byte gAnimTable_83A3470
+	.byte 1, 3, 0, 2
+	.4byte gAnimTable_83A34E4
+	.byte 1, 3, 0, 2
+	.4byte gAnimTable_83A3584
+	.byte 1, 3, 0, 2
+	.4byte gAnimTable_83A35E4
+	.byte 1, 3, 0, 2
+	.4byte gAnimTable_83A3668
+	.byte 1, 3, 0, 2
+	.4byte gAnimTable_83A3410
+	.byte 3, 7, 0, 4
+	.4byte 0x00000000, 0x00000000
 
 gEventObjectBaseOam_128x64::
-	.incbin "baserom.gba", 0x3A36E0, 0x10
+	.4byte 0x00000000, 0x00000800
+	.4byte 0x00004000, 0x00000800
 
 gEventObjectBaseOam_16x16::
-	.incbin "baserom.gba", 0x3A36F0, 0x8
+	.4byte 0x40000000, 0x00000800
 
 gEventObjectBaseOam_32x16::
-	.incbin "baserom.gba", 0x3A36F8, 0x18
+	.4byte 0x80004000, 0x00000800
+	.4byte 0x40004000, 0x00000800
+	.4byte 0xc0004000, 0x00000800
 
 gEventObjectBaseOam_16x32::
-	.incbin "baserom.gba", 0x3A3710, 0x8
+	.4byte 0x80008000, 0x00000800
 
 gEventObjectBaseOam_32x32:: @ 83A3718
-	.incbin "baserom.gba", 0x3A3718, 0x8
+	.4byte 0x80000000, 0x00000800
 
 gEventObjectBaseOam_64x64:: @ 83A3720
-	.incbin "baserom.gba", 0x3A3720, 0x8
+	.4byte 0xc0000000, 0x00000800
 
 gSubsprites_83A3728:: @ 83A3728
 	subsprite 248, 248, 2, 0x0000, 16x16

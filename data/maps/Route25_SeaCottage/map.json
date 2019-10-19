@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "73",
+      "graphics_id": "MAP_OBJ_GFX_BILL",
       "x": 7,
       "y": 5,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "51"
     },
     {
-      "graphics_id": "113",
+      "graphics_id": "MAP_OBJ_GFX_CLEFAIRY",
       "x": 10,
       "y": 6,
       "elevation": 3,

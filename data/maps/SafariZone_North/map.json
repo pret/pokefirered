@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 33,
       "y": 5,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "390"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 28,
       "y": 9,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "391"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 29,
       "y": 17,
       "elevation": 3,

@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "68",
+      "graphics_id": "MAP_OBJ_GFX_CLERK",
       "x": 2,
       "y": 3,
       "elevation": 0,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "35",
+      "graphics_id": "MAP_OBJ_GFX_OLD_WOMAN",
       "x": 8,
       "y": 3,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "40",
+      "graphics_id": "MAP_OBJ_GFX_PICNICKER",
       "x": 7,
       "y": 7,
       "elevation": 3,

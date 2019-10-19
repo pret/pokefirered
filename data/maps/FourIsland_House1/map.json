@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "27",
+      "graphics_id": "MAP_OBJ_GFX_FAT_MAN",
       "x": 8,
       "y": 3,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "27",
+      "graphics_id": "MAP_OBJ_GFX_FAT_MAN",
       "x": 9,
       "y": 3,
       "elevation": 3,

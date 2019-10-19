@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "68",
+      "graphics_id": "MAP_OBJ_GFX_CLERK",
       "x": 2,
       "y": 3,
       "elevation": 0,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "22",
+      "graphics_id": "MAP_OBJ_GFX_LASS",
       "x": 6,
       "y": 2,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "57",
+      "graphics_id": "MAP_OBJ_GFX_FISHER",
       "x": 9,
       "y": 5,
       "elevation": 3,
@@ -53,7 +53,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "56",
+      "graphics_id": "MAP_OBJ_GFX_HIKER",
       "x": 5,
       "y": 4,
       "elevation": 3,

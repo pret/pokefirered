@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "100",
+      "graphics_id": "MAP_OBJ_GFX_SAPPHIRE",
       "x": 7,
       "y": 7,
       "elevation": 0,
@@ -27,7 +27,7 @@
       "flag": "143"
     },
     {
-      "graphics_id": "55",
+      "graphics_id": "MAP_OBJ_GFX_SCIENTIST",
       "x": 5,
       "y": 9,
       "elevation": 3,

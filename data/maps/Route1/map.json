@@ -25,7 +25,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "68",
+      "graphics_id": "MAP_OBJ_GFX_CLERK",
       "x": 6,
       "y": 28,
       "elevation": 3,
@@ -38,7 +38,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "19",
+      "graphics_id": "MAP_OBJ_GFX_BOY",
       "x": 19,
       "y": 16,
       "elevation": 3,

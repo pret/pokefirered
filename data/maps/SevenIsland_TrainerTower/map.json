@@ -20,7 +20,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "19",
+      "graphics_id": "MAP_OBJ_GFX_BOY",
       "x": 56,
       "y": 26,
       "elevation": 3,
@@ -33,7 +33,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "23",
+      "graphics_id": "MAP_OBJ_GFX_WOMAN_1",
       "x": 56,
       "y": 29,
       "elevation": 3,

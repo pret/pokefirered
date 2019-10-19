@@ -20,7 +20,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "22",
+      "graphics_id": "MAP_OBJ_GFX_LASS",
       "x": 44,
       "y": 10,
       "elevation": 3,
@@ -33,7 +33,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "22",
+      "graphics_id": "MAP_OBJ_GFX_LASS",
       "x": 33,
       "y": 12,
       "elevation": 3,
@@ -46,7 +46,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "22",
+      "graphics_id": "MAP_OBJ_GFX_LASS",
       "x": 12,
       "y": 10,
       "elevation": 3,
@@ -59,7 +59,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "28",
+      "graphics_id": "MAP_OBJ_GFX_WOMAN_2",
       "x": 23,
       "y": 9,
       "elevation": 3,
@@ -72,7 +72,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "28",
+      "graphics_id": "MAP_OBJ_GFX_WOMAN_2",
       "x": 33,
       "y": 8,
       "elevation": 3,
@@ -85,7 +85,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "18",
+      "graphics_id": "MAP_OBJ_GFX_YOUNGSTER",
       "x": 33,
       "y": 3,
       "elevation": 3,
@@ -98,7 +98,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "43",
+      "graphics_id": "MAP_OBJ_GFX_SWIMMER_M_WATER",
       "x": 56,
       "y": 7,
       "elevation": 1,
@@ -111,7 +111,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "28",
+      "graphics_id": "MAP_OBJ_GFX_WOMAN_2",
       "x": 39,
       "y": 9,
       "elevation": 3,

@@ -25,7 +25,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "25",
+      "graphics_id": "MAP_OBJ_GFX_MAN",
       "x": 7,
       "y": 24,
       "elevation": 3,
@@ -38,7 +38,7 @@
       "flag": "126"
     },
     {
-      "graphics_id": "25",
+      "graphics_id": "MAP_OBJ_GFX_MAN",
       "x": 8,
       "y": 23,
       "elevation": 3,
@@ -51,7 +51,7 @@
       "flag": "126"
     },
     {
-      "graphics_id": "53",
+      "graphics_id": "MAP_OBJ_GFX_BIKER",
       "x": 8,
       "y": 24,
       "elevation": 3,
@@ -64,7 +64,7 @@
       "flag": "145"
     },
     {
-      "graphics_id": "53",
+      "graphics_id": "MAP_OBJ_GFX_BIKER",
       "x": 9,
       "y": 23,
       "elevation": 3,
@@ -77,7 +77,7 @@
       "flag": "121"
     },
     {
-      "graphics_id": "53",
+      "graphics_id": "MAP_OBJ_GFX_BIKER",
       "x": 9,
       "y": 24,
       "elevation": 3,
@@ -90,7 +90,7 @@
       "flag": "121"
     },
     {
-      "graphics_id": "53",
+      "graphics_id": "MAP_OBJ_GFX_BIKER",
       "x": 10,
       "y": 22,
       "elevation": 3,
@@ -103,7 +103,7 @@
       "flag": "121"
     },
     {
-      "graphics_id": "53",
+      "graphics_id": "MAP_OBJ_GFX_BIKER",
       "x": 10,
       "y": 24,
       "elevation": 3,
@@ -116,7 +116,7 @@
       "flag": "121"
     },
     {
-      "graphics_id": "53",
+      "graphics_id": "MAP_OBJ_GFX_BIKER",
       "x": 11,
       "y": 23,
       "elevation": 3,
@@ -129,7 +129,7 @@
       "flag": "121"
     },
     {
-      "graphics_id": "95",
+      "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
       "x": 20,
       "y": 7,
       "elevation": 3,
@@ -142,7 +142,7 @@
       "flag": "18"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 18,
       "y": 17,
       "elevation": 3,
@@ -155,7 +155,7 @@
       "flag": "443"
     },
     {
-      "graphics_id": "23",
+      "graphics_id": "MAP_OBJ_GFX_WOMAN_1",
       "x": 15,
       "y": 7,
       "elevation": 3,
@@ -168,7 +168,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "16",
+      "graphics_id": "MAP_OBJ_GFX_LITTLE_BOY",
       "x": 14,
       "y": 14,
       "elevation": 3,
@@ -181,7 +181,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "132",
+      "graphics_id": "MAP_OBJ_GFX_DODUO",
       "x": 15,
       "y": 14,
       "elevation": 3,
@@ -194,7 +194,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "53",
+      "graphics_id": "MAP_OBJ_GFX_BIKER",
       "x": 15,
       "y": 31,
       "elevation": 3,

@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "49",
+      "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
       "x": 20,
       "y": 6,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "173"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 15,
       "y": 3,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "366"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 2,
       "y": 5,
       "elevation": 3,
@@ -53,7 +53,7 @@
       "flag": "367"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 5,
       "y": 7,
       "elevation": 3,
@@ -66,7 +66,7 @@
       "flag": "368"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 0,
       "y": 14,
       "elevation": 3,

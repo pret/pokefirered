@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 4,
       "y": 3,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "18"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 6,
       "y": 2,
       "elevation": 3,

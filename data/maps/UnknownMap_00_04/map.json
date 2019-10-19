@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "66",
+      "graphics_id": "MAP_OBJ_GFX_UNION_ROOM_RECEPTIONIST",
       "x": 3,
       "y": 2,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "243",
+      "graphics_id": "MAP_OBJ_GFX_VAR_3",
       "x": 1,
       "y": 8,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "102"
     },
     {
-      "graphics_id": "247",
+      "graphics_id": "MAP_OBJ_GFX_VAR_7",
       "x": 7,
       "y": 8,
       "elevation": 3,
@@ -53,7 +53,7 @@
       "flag": "106"
     },
     {
-      "graphics_id": "246",
+      "graphics_id": "MAP_OBJ_GFX_VAR_6",
       "x": 1,
       "y": 4,
       "elevation": 3,
@@ -66,7 +66,7 @@
       "flag": "105"
     },
     {
-      "graphics_id": "245",
+      "graphics_id": "MAP_OBJ_GFX_VAR_5",
       "x": 7,
       "y": 4,
       "elevation": 3,
@@ -79,7 +79,7 @@
       "flag": "104"
     },
     {
-      "graphics_id": "244",
+      "graphics_id": "MAP_OBJ_GFX_VAR_4",
       "x": 13,
       "y": 4,
       "elevation": 3,
@@ -92,7 +92,7 @@
       "flag": "103"
     },
     {
-      "graphics_id": "242",
+      "graphics_id": "MAP_OBJ_GFX_VAR_2",
       "x": 10,
       "y": 6,
       "elevation": 3,
@@ -105,7 +105,7 @@
       "flag": "101"
     },
     {
-      "graphics_id": "241",
+      "graphics_id": "MAP_OBJ_GFX_VAR_1",
       "x": 13,
       "y": 8,
       "elevation": 3,
@@ -118,7 +118,7 @@
       "flag": "100"
     },
     {
-      "graphics_id": "240",
+      "graphics_id": "MAP_OBJ_GFX_VAR_0",
       "x": 4,
       "y": 6,
       "elevation": 3,

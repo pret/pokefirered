@@ -653,7 +653,7 @@ void sub_815DDB0(void)
                 r1 = gUnknown_8479ED8[r3].unk0;
             else
                 r1 = 18;
-            VarSet(VAR_0x4011, r1);
+            VarSet(VAR_OBJ_GFX_ID_1, r1);
             break;
         case 1:
             r2 = gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[0].unk_00B;
@@ -672,8 +672,8 @@ void sub_815DDB0(void)
                 r1  = 18;
                 r4_ = 18;
             }
-            VarSet(VAR_0x4010, r1);
-            VarSet(VAR_0x4013, r4_);
+            VarSet(VAR_OBJ_GFX_ID_0, r1);
+            VarSet(VAR_OBJ_GFX_ID_3, r4_);
             break;
         case 2:
             for (r4 = 0; r4 < 3; r4++)
@@ -691,13 +691,13 @@ void sub_815DDB0(void)
                 switch (r4)
                 {
                     case 0:
-                        VarSet(VAR_0x4012, r1);
+                        VarSet(VAR_OBJ_GFX_ID_2, r1);
                         break;
                     case 1:
-                        VarSet(VAR_0x4010, r1);
+                        VarSet(VAR_OBJ_GFX_ID_0, r1);
                         break;
                     case 2:
-                        VarSet(VAR_0x4011, r1);
+                        VarSet(VAR_OBJ_GFX_ID_1, r1);
                         break;
                 }
             }

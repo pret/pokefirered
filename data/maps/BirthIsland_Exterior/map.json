@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "106",
+      "graphics_id": "MAP_OBJ_GFX_METEORITE",
       "x": 15,
       "y": 12,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "154"
     },
     {
-      "graphics_id": "240",
+      "graphics_id": "MAP_OBJ_GFX_VAR_0",
       "x": 15,
       "y": 3,
       "elevation": 3,

@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "48",
+      "graphics_id": "MAP_OBJ_GFX_WORKER_F",
       "x": 3,
       "y": 7,
       "elevation": 3,

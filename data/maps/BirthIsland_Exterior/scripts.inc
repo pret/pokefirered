@@ -10,8 +10,8 @@ BirthIsland_Exterior_MapScript3_165213:: @ 8165213
 
 BirthIsland_Exterior_MapScript1_165217:: @ 8165217
 	setworldmapflag FLAG_WORLD_MAP_BIRTH_ISLAND_EXTERIOR
-	setvar VAR_0x4010, 150
-	setvar VAR_SECRET_BASE_MAP, 0
+	setvar VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_DEOXYS_N
+	setvar VAR_0x4026, 0
 	setvar VAR_0x403E, 0
 	checkflag FLAG_0x2E4
 	call_if 1, EventScript_16523C

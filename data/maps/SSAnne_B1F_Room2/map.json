@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "62",
+      "graphics_id": "MAP_OBJ_GFX_SAILOR",
       "x": 3,
       "y": 5,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 3,
       "y": 2,
       "elevation": 3,

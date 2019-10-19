@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "55",
+      "graphics_id": "MAP_OBJ_GFX_SCIENTIST",
       "x": 3,
       "y": 11,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "48",
+      "graphics_id": "MAP_OBJ_GFX_WORKER_F",
       "x": 2,
       "y": 10,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "55",
+      "graphics_id": "MAP_OBJ_GFX_SCIENTIST",
       "x": 11,
       "y": 10,
       "elevation": 3,
@@ -53,7 +53,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "71",
+      "graphics_id": "MAP_OBJ_GFX_PROF_OAK",
       "x": 6,
       "y": 3,
       "elevation": 3,
@@ -66,7 +66,7 @@
       "flag": "43"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 8,
       "y": 4,
       "elevation": 0,
@@ -79,7 +79,7 @@
       "flag": "40"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 9,
       "y": 4,
       "elevation": 0,
@@ -92,7 +92,7 @@
       "flag": "41"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 10,
       "y": 4,
       "elevation": 0,
@@ -105,7 +105,7 @@
       "flag": "42"
     },
     {
-      "graphics_id": "72",
+      "graphics_id": "MAP_OBJ_GFX_BLUE",
       "x": 5,
       "y": 4,
       "elevation": 3,
@@ -118,7 +118,7 @@
       "flag": "45"
     },
     {
-      "graphics_id": "94",
+      "graphics_id": "MAP_OBJ_GFX_POKEDEX",
       "x": 4,
       "y": 1,
       "elevation": 0,
@@ -131,7 +131,7 @@
       "flag": "58"
     },
     {
-      "graphics_id": "94",
+      "graphics_id": "MAP_OBJ_GFX_POKEDEX",
       "x": 5,
       "y": 1,
       "elevation": 0,

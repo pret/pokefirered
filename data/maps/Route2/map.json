@@ -25,7 +25,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "95",
+      "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
       "x": 16,
       "y": 62,
       "elevation": 3,
@@ -38,7 +38,7 @@
       "flag": "20"
     },
     {
-      "graphics_id": "95",
+      "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
       "x": 15,
       "y": 69,
       "elevation": 3,
@@ -51,7 +51,7 @@
       "flag": "19"
     },
     {
-      "graphics_id": "95",
+      "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
       "x": 11,
       "y": 13,
       "elevation": 3,
@@ -64,7 +64,7 @@
       "flag": "21"
     },
     {
-      "graphics_id": "95",
+      "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
       "x": 18,
       "y": 26,
       "elevation": 3,
@@ -77,7 +77,7 @@
       "flag": "22"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 17,
       "y": 54,
       "elevation": 3,
@@ -90,7 +90,7 @@
       "flag": "340"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 17,
       "y": 64,
       "elevation": 3,

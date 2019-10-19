@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "68",
+      "graphics_id": "MAP_OBJ_GFX_CLERK",
       "x": 0,
       "y": 7,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "64",
+      "graphics_id": "MAP_OBJ_GFX_NURSE",
       "x": 13,
       "y": 10,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "91",
+      "graphics_id": "MAP_OBJ_GFX_GYM_GUY",
       "x": 7,
       "y": 14,
       "elevation": 3,
@@ -53,7 +53,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "42",
+      "graphics_id": "MAP_OBJ_GFX_COOLTRAINER_F",
       "x": 5,
       "y": 3,
       "elevation": 3,
@@ -66,7 +66,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "54",
+      "graphics_id": "MAP_OBJ_GFX_BLACKBELT",
       "x": 23,
       "y": 13,
       "elevation": 3,
@@ -79,7 +79,7 @@
       "flag": "157"
     },
     {
-      "graphics_id": "0",
+      "graphics_id": "MAP_OBJ_GFX_RED_NORMAL",
       "x": 22,
       "y": 9,
       "elevation": 0,
@@ -92,7 +92,7 @@
       "flag": "157"
     },
     {
-      "graphics_id": "41",
+      "graphics_id": "MAP_OBJ_GFX_COOLTRAINER_M",
       "x": 16,
       "y": 15,
       "elevation": 3,
@@ -105,7 +105,7 @@
       "flag": "157"
     },
     {
-      "graphics_id": "0",
+      "graphics_id": "MAP_OBJ_GFX_RED_NORMAL",
       "x": 23,
       "y": 9,
       "elevation": 0,

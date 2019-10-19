@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 7,
       "y": 3,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "434"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 11,
       "y": 16,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "435"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 25,
       "y": 5,
       "elevation": 4,
@@ -53,7 +53,7 @@
       "flag": "433"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 7,
       "y": 21,
       "elevation": 3,
@@ -66,7 +66,7 @@
       "flag": "18"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 13,
       "y": 21,
       "elevation": 3,
@@ -79,7 +79,7 @@
       "flag": "19"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 5,
       "y": 20,
       "elevation": 3,
@@ -92,7 +92,7 @@
       "flag": "20"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 14,
       "y": 20,
       "elevation": 3,
@@ -105,7 +105,7 @@
       "flag": "21"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 11,
       "y": 21,
       "elevation": 3,
@@ -118,7 +118,7 @@
       "flag": "22"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 9,
       "y": 18,
       "elevation": 3,

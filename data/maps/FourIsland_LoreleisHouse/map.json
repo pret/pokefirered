@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "77",
+      "graphics_id": "MAP_OBJ_GFX_LORELEI",
       "x": 7,
       "y": 4,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "140"
     },
     {
-      "graphics_id": "131",
+      "graphics_id": "MAP_OBJ_GFX_WIGGLYTUFF",
       "x": 0,
       "y": 2,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "126",
+      "graphics_id": "MAP_OBJ_GFX_SEEL",
       "x": 10,
       "y": 3,
       "elevation": 0,
@@ -53,7 +53,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "120",
+      "graphics_id": "MAP_OBJ_GFX_PIKACHU",
       "x": 9,
       "y": 3,
       "elevation": 0,
@@ -66,7 +66,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "128",
+      "graphics_id": "MAP_OBJ_GFX_SLOWPOKE",
       "x": 7,
       "y": 2,
       "elevation": 3,
@@ -79,7 +79,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "129",
+      "graphics_id": "MAP_OBJ_GFX_SLOWBRO",
       "x": 6,
       "y": 2,
       "elevation": 3,
@@ -92,7 +92,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "121",
+      "graphics_id": "MAP_OBJ_GFX_PSYDUCK",
       "x": 6,
       "y": 4,
       "elevation": 0,
@@ -105,7 +105,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "125",
+      "graphics_id": "MAP_OBJ_GFX_MEOWTH",
       "x": 9,
       "y": 4,
       "elevation": 0,
@@ -118,7 +118,7 @@
       "flag": "165"
     },
     {
-      "graphics_id": "117",
+      "graphics_id": "MAP_OBJ_GFX_CHANSEY",
       "x": 10,
       "y": 4,
       "elevation": 0,
@@ -131,7 +131,7 @@
       "flag": "166"
     },
     {
-      "graphics_id": "115",
+      "graphics_id": "MAP_OBJ_GFX_JIGGLYPUFF",
       "x": 0,
       "y": 3,
       "elevation": 3,
@@ -144,7 +144,7 @@
       "flag": "168"
     },
     {
-      "graphics_id": "122",
+      "graphics_id": "MAP_OBJ_GFX_NIDORAN_F",
       "x": 0,
       "y": 5,
       "elevation": 3,
@@ -157,7 +157,7 @@
       "flag": "167"
     },
     {
-      "graphics_id": "123",
+      "graphics_id": "MAP_OBJ_GFX_NIDORAN_M",
       "x": 1,
       "y": 5,
       "elevation": 3,
@@ -170,7 +170,7 @@
       "flag": "169"
     },
     {
-      "graphics_id": "114",
+      "graphics_id": "MAP_OBJ_GFX_PIDGEOT",
       "x": 9,
       "y": 0,
       "elevation": 3,
@@ -183,7 +183,7 @@
       "flag": "171"
     },
     {
-      "graphics_id": "133",
+      "graphics_id": "MAP_OBJ_GFX_FEAROW",
       "x": 10,
       "y": 0,
       "elevation": 3,
@@ -196,7 +196,7 @@
       "flag": "170"
     },
     {
-      "graphics_id": "107",
+      "graphics_id": "MAP_OBJ_GFX_LAPRAS_DOLL",
       "x": 9,
       "y": 6,
       "elevation": 3,

@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "60",
+      "graphics_id": "MAP_OBJ_GFX_POLICEMAN",
       "x": 8,
       "y": 2,
       "elevation": 3,

@@ -25,7 +25,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "49",
+      "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
       "x": 48,
       "y": 15,
       "elevation": 3,
@@ -38,7 +38,7 @@
       "flag": "95"
     },
     {
-      "graphics_id": "27",
+      "graphics_id": "MAP_OBJ_GFX_FAT_MAN",
       "x": 38,
       "y": 14,
       "elevation": 3,
@@ -51,7 +51,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "112",
+      "graphics_id": "MAP_OBJ_GFX_POLIWRATH",
       "x": 36,
       "y": 14,
       "elevation": 3,
@@ -64,7 +64,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "17",
+      "graphics_id": "MAP_OBJ_GFX_LITTLE_GIRL",
       "x": 11,
       "y": 18,
       "elevation": 3,
@@ -77,7 +77,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "28",
+      "graphics_id": "MAP_OBJ_GFX_WOMAN_2",
       "x": 18,
       "y": 22,
       "elevation": 3,
@@ -90,7 +90,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "32",
+      "graphics_id": "MAP_OBJ_GFX_OLD_MAN_1",
       "x": 30,
       "y": 24,
       "elevation": 3,
@@ -103,7 +103,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "33",
+      "graphics_id": "MAP_OBJ_GFX_OLD_MAN_2",
       "x": 26,
       "y": 19,
       "elevation": 3,
@@ -116,7 +116,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "49",
+      "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
       "x": 38,
       "y": 31,
       "elevation": 3,
@@ -129,7 +129,7 @@
       "flag": "95"
     },
     {
-      "graphics_id": "32",
+      "graphics_id": "MAP_OBJ_GFX_OLD_MAN_1",
       "x": 9,
       "y": 30,
       "elevation": 3,
@@ -142,7 +142,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "95",
+      "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
       "x": 52,
       "y": 22,
       "elevation": 3,
@@ -155,7 +155,7 @@
       "flag": "20"
     },
     {
-      "graphics_id": "95",
+      "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
       "x": 40,
       "y": 35,
       "elevation": 0,
@@ -168,7 +168,7 @@
       "flag": "19"
     },
     {
-      "graphics_id": "19",
+      "graphics_id": "MAP_OBJ_GFX_BOY",
       "x": 25,
       "y": 10,
       "elevation": 3,
@@ -194,7 +194,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 5,
       "y": 3,
       "elevation": 3,
@@ -207,7 +207,7 @@
       "flag": "465"
     },
     {
-      "graphics_id": "55",
+      "graphics_id": "MAP_OBJ_GFX_SCIENTIST",
       "x": 47,
       "y": 24,
       "elevation": 3,

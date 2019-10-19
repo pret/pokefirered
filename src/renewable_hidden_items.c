@@ -559,7 +559,8 @@ void SetAllRenewableItemFlags(void)
 void IncrementRenewableHiddenItemStepCounter(void)
 {
     u16 var = VarGet(VAR_RENEWABLE_ITEM_STEP_COUNTER);
-    if (var < 1500) {
+    if (var < 1500)
+    {
         VarSet(VAR_RENEWABLE_ITEM_STEP_COUNTER, var + 1);
     }
 }
@@ -606,4 +607,3 @@ static void SampleRenewableItemFlags(void)
         }
     }
 }
-

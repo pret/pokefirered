@@ -12,6 +12,7 @@
 #include "constants/spawn_points.h"
 #include "constants/field_effects.h"
 #include "constants/trainers.h"
+#include "constants/map_objects.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 
@@ -58,8 +59,6 @@ gStdScripts:: @ 8160450
 	.4byte gStdScript_8
 	.4byte gStdScript_ItemMessageAndFanfare
 gStdScriptsEnd::
-
-
 
 	.include "data/maps/UnknownMap_00_00/scripts.inc"
 	.include "data/maps/UnknownMap_00_01/scripts.inc"
@@ -485,8 +484,6 @@ gStdScriptsEnd::
 	.include "data/maps/SixIsland_WaterPath_House2/scripts.inc"
 	.include "data/maps/SevenIsland_SevaultCanyon_House/scripts.inc"
 
-
-
 	.include "data/maps/ViridianForest/text.inc"
 	.include "data/maps/MtMoon_1F/text.inc"
 	.include "data/maps/MtMoon_B2F/text.inc"
@@ -771,8 +768,6 @@ gStdScriptsEnd::
 	.include "data/maps/SixIsland_WaterPath_House1/text.inc"
 	.include "data/maps/SixIsland_WaterPath_House2/text.inc"
 	.include "data/maps/SevenIsland_SevaultCanyon_House/text.inc"
-
-
 
 gStdScript_2:: @ 81A4E3F
 	lock
@@ -1493,7 +1488,6 @@ Text_1A6448:: @ 81A6448
 Text_1A644F:: @ 81A644F
 	.string "This move can be learned only\n"
 	.string "once. Is that okay?$"
-
 
 EventScript_ResetAllMapFlags:: @ 81A6481
 	setflag FLAG_0x02B

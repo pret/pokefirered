@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "64",
+      "graphics_id": "MAP_OBJ_GFX_NURSE",
       "x": 7,
       "y": 2,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "42",
+      "graphics_id": "MAP_OBJ_GFX_COOLTRAINER_F",
       "x": 9,
       "y": 4,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "59",
+      "graphics_id": "MAP_OBJ_GFX_CHEF",
       "x": 4,
       "y": 8,
       "elevation": 3,
@@ -53,7 +53,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "0",
+      "graphics_id": "MAP_OBJ_GFX_RED_NORMAL",
       "x": 2,
       "y": 1,
       "elevation": 0,
@@ -66,7 +66,7 @@
       "flag": "157"
     },
     {
-      "graphics_id": "0",
+      "graphics_id": "MAP_OBJ_GFX_RED_NORMAL",
       "x": 3,
       "y": 1,
       "elevation": 0,

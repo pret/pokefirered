@@ -25,7 +25,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "41",
+      "graphics_id": "MAP_OBJ_GFX_COOLTRAINER_M",
       "x": 7,
       "y": 18,
       "elevation": 3,
@@ -38,7 +38,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "35",
+      "graphics_id": "MAP_OBJ_GFX_OLD_WOMAN",
       "x": 9,
       "y": 7,
       "elevation": 3,
@@ -51,7 +51,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "55",
+      "graphics_id": "MAP_OBJ_GFX_SCIENTIST",
       "x": 15,
       "y": 5,
       "elevation": 3,

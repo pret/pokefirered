@@ -20,7 +20,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "68",
+      "graphics_id": "MAP_OBJ_GFX_CLERK",
       "x": 28,
       "y": 4,
       "elevation": 3,
@@ -33,7 +33,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "23",
+      "graphics_id": "MAP_OBJ_GFX_WOMAN_1",
       "x": 31,
       "y": 6,
       "elevation": 3,
@@ -46,7 +46,7 @@
       "flag": "123"
     },
     {
-      "graphics_id": "29",
+      "graphics_id": "MAP_OBJ_GFX_BEAUTY",
       "x": 30,
       "y": 11,
       "elevation": 3,
@@ -59,7 +59,7 @@
       "flag": "124"
     },
     {
-      "graphics_id": "62",
+      "graphics_id": "MAP_OBJ_GFX_SAILOR",
       "x": 26,
       "y": 5,
       "elevation": 3,
@@ -72,7 +72,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "52",
+      "graphics_id": "MAP_OBJ_GFX_SUPER_NERD",
       "x": 27,
       "y": 6,
       "elevation": 3,
@@ -85,7 +85,7 @@
       "flag": "125"
     },
     {
-      "graphics_id": "95",
+      "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
       "x": 30,
       "y": 16,
       "elevation": 3,
@@ -98,7 +98,7 @@
       "flag": "18"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 39,
       "y": 16,
       "elevation": 3,
@@ -111,7 +111,7 @@
       "flag": "442"
     },
     {
-      "graphics_id": "16",
+      "graphics_id": "MAP_OBJ_GFX_LITTLE_BOY",
       "x": 37,
       "y": 12,
       "elevation": 3,
@@ -124,7 +124,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "19",
+      "graphics_id": "MAP_OBJ_GFX_BOY",
       "x": 24,
       "y": 12,
       "elevation": 3,

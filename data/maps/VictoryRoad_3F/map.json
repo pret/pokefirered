@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "41",
+      "graphics_id": "MAP_OBJ_GFX_COOLTRAINER_M",
       "x": 40,
       "y": 7,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "42",
+      "graphics_id": "MAP_OBJ_GFX_COOLTRAINER_F",
       "x": 21,
       "y": 5,
       "elevation": 4,
@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "41",
+      "graphics_id": "MAP_OBJ_GFX_COOLTRAINER_M",
       "x": 10,
       "y": 17,
       "elevation": 3,
@@ -53,7 +53,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "42",
+      "graphics_id": "MAP_OBJ_GFX_COOLTRAINER_F",
       "x": 11,
       "y": 16,
       "elevation": 3,
@@ -66,7 +66,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 38,
       "y": 7,
       "elevation": 3,
@@ -79,7 +79,7 @@
       "flag": "431"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 12,
       "y": 9,
       "elevation": 3,
@@ -92,7 +92,7 @@
       "flag": "432"
     },
     {
-      "graphics_id": "97",
+      "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
       "x": 19,
       "y": 15,
       "elevation": 3,
@@ -105,7 +105,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "97",
+      "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
       "x": 33,
       "y": 18,
       "elevation": 0,
@@ -118,7 +118,7 @@
       "flag": "89"
     },
     {
-      "graphics_id": "97",
+      "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
       "x": 35,
       "y": 13,
       "elevation": 3,
@@ -131,7 +131,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "97",
+      "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
       "x": 32,
       "y": 5,
       "elevation": 3,
@@ -144,7 +144,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "41",
+      "graphics_id": "MAP_OBJ_GFX_COOLTRAINER_M",
       "x": 38,
       "y": 13,
       "elevation": 3,
@@ -157,7 +157,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "42",
+      "graphics_id": "MAP_OBJ_GFX_COOLTRAINER_F",
       "x": 39,
       "y": 13,
       "elevation": 3,

@@ -11,11 +11,11 @@ FuchsiaCity_MapScript1_166D7B:: @ 8166D7B
 	end
 
 EventScript_166D91:: @ 8166D91
-	setvar VAR_0x4010, 118
+	setvar VAR_OBJ_GFX_ID_0, 118
 	return
 
 EventScript_166D97:: @ 8166D97
-	setvar VAR_0x4010, 147
+	setvar VAR_OBJ_GFX_ID_0, 147
 	return
 
 FuchsiaCity_EventScript_166D9D:: @ 8166D9D

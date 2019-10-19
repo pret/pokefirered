@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "52",
+      "graphics_id": "MAP_OBJ_GFX_SUPER_NERD",
       "x": 5,
       "y": 23,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 36,
       "y": 8,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "417"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 18,
       "y": 23,
       "elevation": 3,
@@ -53,7 +53,7 @@
       "flag": "459"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 35,
       "y": 17,
       "elevation": 3,

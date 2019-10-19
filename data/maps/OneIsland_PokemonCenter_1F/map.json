@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "64",
+      "graphics_id": "MAP_OBJ_GFX_NURSE",
       "x": 5,
       "y": 2,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "73",
+      "graphics_id": "MAP_OBJ_GFX_BILL",
       "x": 14,
       "y": 6,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "114"
     },
     {
-      "graphics_id": "89",
+      "graphics_id": "MAP_OBJ_GFX_CELIO",
       "x": 15,
       "y": 6,
       "elevation": 3,
@@ -53,7 +53,7 @@
       "flag": "115"
     },
     {
-      "graphics_id": "16",
+      "graphics_id": "MAP_OBJ_GFX_LITTLE_BOY",
       "x": 6,
       "y": 8,
       "elevation": 3,
@@ -66,7 +66,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "56",
+      "graphics_id": "MAP_OBJ_GFX_HIKER",
       "x": 3,
       "y": 7,
       "elevation": 3,
@@ -79,7 +79,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "24",
+      "graphics_id": "MAP_OBJ_GFX_BATTLE_GIRL",
       "x": 7,
       "y": 4,
       "elevation": 3,

@@ -25,7 +25,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "22",
+      "graphics_id": "MAP_OBJ_GFX_LASS",
       "x": 6,
       "y": 15,
       "elevation": 3,
@@ -38,7 +38,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "25",
+      "graphics_id": "MAP_OBJ_GFX_MAN",
       "x": 33,
       "y": 17,
       "elevation": 3,
@@ -51,7 +51,7 @@
       "flag": "80"
     },
     {
-      "graphics_id": "27",
+      "graphics_id": "MAP_OBJ_GFX_FAT_MAN",
       "x": 21,
       "y": 28,
       "elevation": 3,
@@ -64,7 +64,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "20",
+      "graphics_id": "MAP_OBJ_GFX_BUG_CATCHER",
       "x": 33,
       "y": 27,
       "elevation": 3,
@@ -77,7 +77,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "19",
+      "graphics_id": "MAP_OBJ_GFX_BOY",
       "x": 42,
       "y": 20,
       "elevation": 3,
@@ -90,7 +90,7 @@
       "flag": "46"
     },
     {
-      "graphics_id": "95",
+      "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
       "x": 30,
       "y": 5,
       "elevation": 3,
@@ -103,7 +103,7 @@
       "flag": "18"
     },
     {
-      "graphics_id": "55",
+      "graphics_id": "MAP_OBJ_GFX_SCIENTIST",
       "x": 46,
       "y": 20,
       "elevation": 3,

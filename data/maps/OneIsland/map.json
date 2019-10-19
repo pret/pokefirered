@@ -25,7 +25,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "73",
+      "graphics_id": "MAP_OBJ_GFX_BILL",
       "x": 12,
       "y": 16,
       "elevation": 3,
@@ -38,7 +38,7 @@
       "flag": "113"
     },
     {
-      "graphics_id": "32",
+      "graphics_id": "MAP_OBJ_GFX_OLD_MAN_1",
       "x": 16,
       "y": 12,
       "elevation": 3,
@@ -51,7 +51,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "30",
+      "graphics_id": "MAP_OBJ_GFX_BALDING_MAN",
       "x": 13,
       "y": 9,
       "elevation": 3,

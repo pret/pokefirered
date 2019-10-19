@@ -25,7 +25,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "24",
+      "graphics_id": "MAP_OBJ_GFX_BATTLE_GIRL",
       "x": 13,
       "y": 43,
       "elevation": 3,
@@ -38,7 +38,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "25",
+      "graphics_id": "MAP_OBJ_GFX_MAN",
       "x": 13,
       "y": 36,
       "elevation": 3,
@@ -51,7 +51,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "39",
+      "graphics_id": "MAP_OBJ_GFX_CAMPER",
       "x": 3,
       "y": 35,
       "elevation": 3,
@@ -64,7 +64,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "40",
+      "graphics_id": "MAP_OBJ_GFX_PICNICKER",
       "x": 3,
       "y": 36,
       "elevation": 3,
@@ -77,7 +77,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "41",
+      "graphics_id": "MAP_OBJ_GFX_COOLTRAINER_M",
       "x": 7,
       "y": 56,
       "elevation": 3,
@@ -90,7 +90,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "42",
+      "graphics_id": "MAP_OBJ_GFX_COOLTRAINER_F",
       "x": 11,
       "y": 63,
       "elevation": 3,
@@ -103,7 +103,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "41",
+      "graphics_id": "MAP_OBJ_GFX_COOLTRAINER_M",
       "x": 14,
       "y": 13,
       "elevation": 3,
@@ -116,7 +116,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "42",
+      "graphics_id": "MAP_OBJ_GFX_COOLTRAINER_F",
       "x": 14,
       "y": 14,
       "elevation": 3,
@@ -129,7 +129,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 3,
       "y": 41,
       "elevation": 3,
@@ -142,7 +142,7 @@
       "flag": "18"
     },
     {
-      "graphics_id": "97",
+      "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
       "x": 13,
       "y": 47,
       "elevation": 3,
@@ -155,7 +155,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 7,
       "y": 44,
       "elevation": 3,
@@ -168,7 +168,7 @@
       "flag": "19"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 12,
       "y": 47,
       "elevation": 3,
@@ -181,7 +181,7 @@
       "flag": "21"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 15,
       "y": 46,
       "elevation": 3,
@@ -194,7 +194,7 @@
       "flag": "22"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 16,
       "y": 47,
       "elevation": 3,
@@ -207,7 +207,7 @@
       "flag": "23"
     },
     {
-      "graphics_id": "97",
+      "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
       "x": 17,
       "y": 47,
       "elevation": 3,
@@ -220,7 +220,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 11,
       "y": 31,
       "elevation": 3,
@@ -233,7 +233,7 @@
       "flag": "27"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 18,
       "y": 45,
       "elevation": 3,
@@ -246,7 +246,7 @@
       "flag": "487"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 7,
       "y": 38,
       "elevation": 3,
@@ -259,7 +259,7 @@
       "flag": "488"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 17,
       "y": 23,
       "elevation": 3,
@@ -272,7 +272,7 @@
       "flag": "489"
     },
     {
-      "graphics_id": "54",
+      "graphics_id": "MAP_OBJ_GFX_BLACKBELT",
       "x": 8,
       "y": 26,
       "elevation": 3,

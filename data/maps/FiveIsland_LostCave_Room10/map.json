@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "28",
+      "graphics_id": "MAP_OBJ_GFX_WOMAN_2",
       "x": 5,
       "y": 5,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "147"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 5,
       "y": 2,
       "elevation": 3,

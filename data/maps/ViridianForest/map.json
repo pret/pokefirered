@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "18",
+      "graphics_id": "MAP_OBJ_GFX_YOUNGSTER",
       "x": 29,
       "y": 58,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "19",
+      "graphics_id": "MAP_OBJ_GFX_BOY",
       "x": 45,
       "y": 58,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "20",
+      "graphics_id": "MAP_OBJ_GFX_BUG_CATCHER",
       "x": 47,
       "y": 45,
       "elevation": 3,
@@ -53,7 +53,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "20",
+      "graphics_id": "MAP_OBJ_GFX_BUG_CATCHER",
       "x": 47,
       "y": 29,
       "elevation": 3,
@@ -66,7 +66,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "20",
+      "graphics_id": "MAP_OBJ_GFX_BUG_CATCHER",
       "x": 7,
       "y": 22,
       "elevation": 3,
@@ -79,7 +79,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 5,
       "y": 41,
       "elevation": 3,
@@ -92,7 +92,7 @@
       "flag": "342"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 40,
       "y": 21,
       "elevation": 3,
@@ -105,7 +105,7 @@
       "flag": "343"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 21,
       "y": 34,
       "elevation": 3,
@@ -118,7 +118,7 @@
       "flag": "344"
     },
     {
-      "graphics_id": "20",
+      "graphics_id": "MAP_OBJ_GFX_BUG_CATCHER",
       "x": 43,
       "y": 6,
       "elevation": 3,
@@ -131,7 +131,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "20",
+      "graphics_id": "MAP_OBJ_GFX_BUG_CATCHER",
       "x": 16,
       "y": 5,
       "elevation": 3,
@@ -144,7 +144,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 49,
       "y": 60,
       "elevation": 3,

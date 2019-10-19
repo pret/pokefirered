@@ -20,7 +20,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "56",
+      "graphics_id": "MAP_OBJ_GFX_HIKER",
       "x": 11,
       "y": 4,
       "elevation": 3,
@@ -33,7 +33,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "18",
+      "graphics_id": "MAP_OBJ_GFX_YOUNGSTER",
       "x": 18,
       "y": 2,
       "elevation": 3,
@@ -46,7 +46,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "56",
+      "graphics_id": "MAP_OBJ_GFX_HIKER",
       "x": 17,
       "y": 7,
       "elevation": 3,
@@ -59,7 +59,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "18",
+      "graphics_id": "MAP_OBJ_GFX_YOUNGSTER",
       "x": 22,
       "y": 4,
       "elevation": 3,
@@ -72,7 +72,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "40",
+      "graphics_id": "MAP_OBJ_GFX_PICNICKER",
       "x": 22,
       "y": 8,
       "elevation": 3,
@@ -85,7 +85,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "56",
+      "graphics_id": "MAP_OBJ_GFX_HIKER",
       "x": 27,
       "y": 9,
       "elevation": 3,
@@ -98,7 +98,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "39",
+      "graphics_id": "MAP_OBJ_GFX_CAMPER",
       "x": 28,
       "y": 4,
       "elevation": 3,
@@ -111,7 +111,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "18",
+      "graphics_id": "MAP_OBJ_GFX_YOUNGSTER",
       "x": 36,
       "y": 4,
       "elevation": 3,
@@ -124,7 +124,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "22",
+      "graphics_id": "MAP_OBJ_GFX_LASS",
       "x": 42,
       "y": 5,
       "elevation": 3,
@@ -137,7 +137,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 26,
       "y": 2,
       "elevation": 3,
@@ -150,7 +150,7 @@
       "flag": "355"
     },
     {
-      "graphics_id": "95",
+      "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
       "x": 30,
       "y": 3,
       "elevation": 3,
@@ -163,7 +163,7 @@
       "flag": "18"
     },
     {
-      "graphics_id": "29",
+      "graphics_id": "MAP_OBJ_GFX_BEAUTY",
       "x": 49,
       "y": 10,
       "elevation": 3,
@@ -176,7 +176,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "25",
+      "graphics_id": "MAP_OBJ_GFX_MAN",
       "x": 49,
       "y": 11,
       "elevation": 3,

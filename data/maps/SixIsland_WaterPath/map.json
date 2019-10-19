@@ -30,7 +30,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "28",
+      "graphics_id": "MAP_OBJ_GFX_WOMAN_2",
       "x": 12,
       "y": 13,
       "elevation": 3,
@@ -43,7 +43,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "26",
+      "graphics_id": "MAP_OBJ_GFX_ROCKER",
       "x": 11,
       "y": 52,
       "elevation": 3,
@@ -56,7 +56,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "43",
+      "graphics_id": "MAP_OBJ_GFX_SWIMMER_M_WATER",
       "x": 13,
       "y": 35,
       "elevation": 1,
@@ -69,7 +69,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "44",
+      "graphics_id": "MAP_OBJ_GFX_SWIMMER_F_WATER",
       "x": 15,
       "y": 45,
       "elevation": 1,
@@ -82,7 +82,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "17",
+      "graphics_id": "MAP_OBJ_GFX_LITTLE_GIRL",
       "x": 6,
       "y": 21,
       "elevation": 3,
@@ -95,7 +95,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "17",
+      "graphics_id": "MAP_OBJ_GFX_LITTLE_GIRL",
       "x": 7,
       "y": 21,
       "elevation": 3,
@@ -108,7 +108,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "56",
+      "graphics_id": "MAP_OBJ_GFX_HIKER",
       "x": 11,
       "y": 76,
       "elevation": 3,
@@ -121,7 +121,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 17,
       "y": 19,
       "elevation": 0,
@@ -134,7 +134,7 @@
       "flag": "482"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 17,
       "y": 87,
       "elevation": 3,

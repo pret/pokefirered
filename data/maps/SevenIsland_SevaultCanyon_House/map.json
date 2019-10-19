@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "30",
+      "graphics_id": "MAP_OBJ_GFX_BALDING_MAN",
       "x": 2,
       "y": 4,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "117",
+      "graphics_id": "MAP_OBJ_GFX_CHANSEY",
       "x": 4,
       "y": 2,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 6,
       "y": 4,
       "elevation": 0,

@@ -327,35 +327,8 @@ gUnknown_20386A4: @ 20386A4
 gUnknown_20386A8: @ 20386A8
 	.space 0x4
 
-sTrainerBattleMode: @ 20386AC
-	.space 0x2
-
-gTrainerBattleOpponent_A: @ 20386AE
-	.space 0x2
-
-sTrainerEventObjectLocalId: @ 20386B0
-	.space 0x4
-
-sTrainerAIntroSpeech: @ 20386B4
-	.space 0x4
-
-sTrainerADefeatSpeech: @ 20386B8
-	.space 0x4
-
-sTrainerBDefeatSpeech: @ 20386BC
-	.space 0x4
-
-sTrainerCannotBattleSpeech: @ 20386C0
-	.space 0x4
-
-sTrainerBattleEndScript: @ 20386C4
-	.space 0x4
-
-sTrainerABattleScriptRetAddr: @ 20386C8
-	.space 0x4
-
-gUnknown_20386CC: @ 20386CC
-	.space 0x4
+	.include "src/battle_setup.o"
+	.align 2
 
 gUnknown_20386D0: @ 20386D0
 	.space 0xC

@@ -790,7 +790,7 @@ EventScript_TryDoNormalTrainerBattle:: @ 81A4EC1
 	faceplayer
 	applymovement VAR_LAST_TALKED, Movement_1A4FC5
 	waitmovement 0
-	specialvar VAR_RESULT, ScrSpecial_HasTrainerBeenFought
+	specialvar VAR_RESULT, GetTrainerFlag
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 5, EventScript_1A4EE8
 	special SetUpTrainerEncounterMusic
@@ -804,7 +804,7 @@ EventScript_TryDoDoubleTrainerBattle:: @ 81A4EE9
 	lock
 	faceplayer
 	call EventScript_1A4FBA
-	specialvar VAR_RESULT, ScrSpecial_HasTrainerBeenFought
+	specialvar VAR_RESULT, GetTrainerFlag
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 5, EventScript_1A4F20
 	special CheckForAlivePartyMons

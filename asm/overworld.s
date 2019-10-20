@@ -3522,8 +3522,8 @@ _0805669C: .4byte sub_8056534
 _080566A0: .4byte sub_80565B4
 	thumb_func_end CB2_NewGame
 
-	thumb_func_start c2_whiteout
-c2_whiteout: @ 80566A4
+	thumb_func_start CB2_WhiteOut
+CB2_WhiteOut: @ 80566A4
 	push {lr}
 	sub sp, 0x4
 	ldr r1, _08056708 @ =gMain
@@ -3569,7 +3569,7 @@ _0805670C: .4byte gFieldCallback
 _08056710: .4byte sub_807F5F0
 _08056714: .4byte sub_8056534
 _08056718: .4byte sub_80565B4
-	thumb_func_end c2_whiteout
+	thumb_func_end CB2_WhiteOut
 
 	thumb_func_start CB2_LoadMap
 CB2_LoadMap: @ 805671C

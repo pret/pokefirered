@@ -78,7 +78,7 @@ void sub_815A008(struct QuestLog * questLog)
         questLog->unk_008[i].mapobj_bit_24 = gMapObjects[i].mapobj_bit_24;
         questLog->unk_008[i].mapobj_bit_25 = gMapObjects[i].mapobj_bit_25;
         questLog->unk_008[i].mapobj_bit_26 = gMapObjects[i].mapobj_bit_26;
-        questLog->unk_008[i].mapobj_unk_18 = gMapObjects[i].mapobj_unk_18;
+        questLog->unk_008[i].mapobj_unk_18 = gMapObjects[i].facingDirection;
         questLog->unk_008[i].mapobj_unk_0B_0 = gMapObjects[i].mapobj_unk_0B_0;
         questLog->unk_008[i].elevation = gMapObjects[i].elevation;
         questLog->unk_008[i].graphicsId = gMapObjects[i].graphicsId;

@@ -48,6 +48,7 @@
 #include "constants/abilities.h"
 #include "constants/pokemon.h"
 #include "constants/trainers.h"
+#include "constants/map_types.h"
 
 #define DEFENDER_IS_PROTECTED ((gProtectStructs[gBattlerTarget].protected) && (gBattleMoves[gCurrentMove].flags & FLAG_PROTECT_AFFECTED))
 
@@ -9451,7 +9452,6 @@ static void atkEF_handleballthrow(void)
                 catchRate = gBattleStruct->safariCatchFactor * 1275 / 100;
             else
                 catchRate = gBaseStats[gBattleMons[gBattlerTarget].species].catchRate;
-
             if (gLastUsedItem > ITEM_SAFARI_BALL)
             {
                 switch (gLastUsedItem)

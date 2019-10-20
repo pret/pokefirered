@@ -61,7 +61,7 @@ void sub_8084EBC(s16, s16);
 void player_avatar_init_params_reset(void);
 
 void Overworld_SetFlashLevel(s32 a1);
-//u8 Overworld_GetFlashLevel(void);
+u8 Overworld_GetFlashLevel(void);
 void sub_8085524(u16);
 
 void Overworld_SetSavedMusic(u16);
@@ -140,5 +140,6 @@ bool32 Overworld_DoScrollSceneForCredits(u8 *, const struct CreditsOverworldCmd 
 bool32 sub_8058318(void);
 
 void CB2_ReturnToStartMenu(void);
+void CB2_WhiteOut(void);
 
 #endif //GUARD_OVERWORLD_H

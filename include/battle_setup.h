@@ -5,17 +5,17 @@
 
 void BattleSetup_StartScriptedWildBattle(void);
 u8 BattleSetup_GetTerrainId(void);
-u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data);
+const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data);
 void BattleSetup_StartBattlePikeWildBattle(void);
 void BattleSetup_StartWildBattle(void);
 void BattleSetup_StartRoamerBattle(void);
 
-u8 HasTrainerAlreadyBeenFought(u16);
+u8 HasTrainerBeenFought(u16);
 void SetTrainerFlag(u16);
 void ClearTrainerFlag(u16);
 void BattleSetup_StartTrainerBattle(void);
-u8 *BattleSetup_GetScriptAddrAfterBattle(void);
-u8 *BattleSetup_GetTrainerPostBattleScript(void);
+const u8 *BattleSetup_GetScriptAddrAfterBattle(void);
+const u8 *BattleSetup_GetTrainerPostBattleScript(void);
 void SetBattledTrainerFlag(void);
 u8 sub_8080060(void);
 u8 GetTrainerBattleMode(void);

@@ -88,7 +88,7 @@ void sub_8150530(void)
     else
     {
         sub_81507BC(mapObject, sub_805C808(4));
-        StartSpriteAnim(sprite, sub_80634F0(mapObject->mapobj_unk_18));
+        StartSpriteAnim(sprite, sub_80634F0(mapObject->facingDirection));
     }
 }
 
@@ -103,7 +103,7 @@ void sub_81505C4(u8 taskId)
             FieldObjectClearAnimIfSpecialAnimActive(mapObject);
             mapObject->mapobj_bit_11 = TRUE;
             sub_81507BC(mapObject, sub_805C808(4));
-            StartSpriteAnim(sprite, sub_80634F0(mapObject->mapobj_unk_18));
+            StartSpriteAnim(sprite, sub_80634F0(mapObject->facingDirection));
             gTasks[taskId].data[0]++;
             gTasks[taskId].data[1] = 0;
             break;

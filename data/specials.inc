@@ -63,7 +63,7 @@ gSpecials:: @ 815FD60
 	def_special GetTrainerBattleMode
 	def_special ShowTrainerIntroSpeech
 	def_special ShowTrainerCantBattleSpeech
-	def_special ScrSpecial_HasTrainerBeenFought
+	def_special GetTrainerFlag
 	def_special ScrSpecial_EndTrainerApproach
 	def_special SetUpTrainerEncounterMusic
 	def_special sub_810CD4C

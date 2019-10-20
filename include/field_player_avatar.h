@@ -13,8 +13,8 @@ u8 player_get_direction_upper_nybble(void);
 u8 player_get_x22(void);
 
 void sub_808D074(u8);
-void sub_805C270();
-void sub_805C780();
+void sub_805C270(void);
+void sub_805C780(void);
 void GetXYCoordsOneStepInFrontOfPlayer(s16 *xPtr, s16 *yPtr);
 u8 sub_805C808(u8);
 void SetPlayerAvatarStateMask(u8 mask);

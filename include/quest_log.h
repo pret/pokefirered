@@ -43,5 +43,7 @@ u8 sub_8112CAC(void);
 void sub_81138F8(void);
 void sub_812C224(void);
 void sub_812BFDC(void);
+void sub_811231C(void);
+void sub_81139BC(void);
 
 #endif //GUARD_QUEST_LOG_H

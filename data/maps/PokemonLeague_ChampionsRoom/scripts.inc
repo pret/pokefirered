@@ -75,7 +75,7 @@ EventScript_162B76:: @ 8162B76
 	call_if 1, EventScript_162C91
 	setflag FLAG_TEMP_4
 	clearflag FLAG_TEMP_5
-	setflag FLAG_DEFEATED_RIVAL
+	setflag FLAG_DEFEATED_CHAMP
 	setflag FLAG_TEMP_4
 	msgbox gUnknown_8178F2F
 	playbgm MUS_SLOWMASARA, 0

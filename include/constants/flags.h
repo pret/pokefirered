@@ -1235,7 +1235,7 @@
 #define FLAG_DEFEATED_BRUNO           0x4B9
 #define FLAG_DEFEATED_AGATHA          0x4BA
 #define FLAG_DEFEATED_LANCE           0x4BB
-#define FLAG_DEFEATED_RIVAL           0x4BC
+#define FLAG_DEFEATED_CHAMP           0x4BC
 
 // Unused?
 #define FLAG_0x4BD               0x4BD

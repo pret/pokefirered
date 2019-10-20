@@ -92,7 +92,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "Route12_EventScript_168014",
-      "flag": "FLAG_0x054"
+      "flag": "FLAG_HIDE_ROUTE_12_SNORLAX"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKER",
@@ -144,7 +144,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "Route12_EventScript_1BDF13",
-      "flag": "FLAG_0x012"
+      "flag": "FLAG_TEMP_12"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -209,7 +209,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "Route12_EventScript_1BDF13",
-      "flag": "FLAG_0x013"
+      "flag": "FLAG_TEMP_13"
     }
   ],
   "warp_events": [

@@ -35,7 +35,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "CeladonCity_EventScript_166CFA",
-      "flag": "FLAG_0x05F"
+      "flag": "FLAG_HIDE_CELADON_ROCKETS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_FAT_MAN",
@@ -126,7 +126,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "CeladonCity_EventScript_166D03",
-      "flag": "FLAG_0x05F"
+      "flag": "FLAG_HIDE_CELADON_ROCKETS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_OLD_MAN_1",
@@ -152,7 +152,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "CeladonCity_EventScript_1BDF13",
-      "flag": "FLAG_0x014"
+      "flag": "FLAG_TEMP_14"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
@@ -165,7 +165,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "CeladonCity_EventScript_1BDF13",
-      "flag": "FLAG_0x013"
+      "flag": "FLAG_TEMP_13"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_BOY",
@@ -217,7 +217,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "CeladonCity_EventScript_166D15",
-      "flag": "FLAG_0x05F"
+      "flag": "FLAG_HIDE_CELADON_ROCKETS"
     }
   ],
   "warp_events": [

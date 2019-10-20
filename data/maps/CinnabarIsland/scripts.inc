@@ -16,7 +16,7 @@ CinnabarIsland_MapScript1_166EE1:: @ 8166EE1
 
 EventScript_166F0B:: @ 8166F0B
 	savebgm MUS_ANNAI
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	setobjectxyperm 3, 15, 12
 	setobjectmovementtype 3, 9
 	setobjectxyperm 4, 30, 12
@@ -26,7 +26,7 @@ EventScript_166F24:: @ 8166F24
 	getplayerxy VAR_0x8004, VAR_0x8005
 	compare_var_to_value VAR_0x8004, 18
 	goto_if 4, EventScript_166F4A
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	setobjectxyperm 3, 18, 12
 	setobjectmovementtype 3, 7
 	setobjectxyperm 4, 30, 12
@@ -76,8 +76,8 @@ EventScript_166FA0:: @ 8166FA0
 	waitmovement 0
 	removeobject 3
 	setvar VAR_MAP_SCENE_CINNABAR_ISLAND, 4
-	setflag FLAG_0x075
-	clearflag FLAG_0x076
+	setflag FLAG_HIDE_TWO_ISLAND_GAME_CORNER_LOSTELLE
+	clearflag FLAG_HIDE_LOSTELLE_IN_HER_HOME
 	releaseall
 	end
 
@@ -93,18 +93,18 @@ Movement_166FC6:: @ 8166FC6
 EventScript_166FCD:: @ 8166FCD
 	lockall
 	textcolor 0
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	call_if 0, EventScript_167032
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	call_if 1, EventScript_16703D
 	playse SE_PIN
 	applymovement 3, Movement_1A75DB
 	waitmovement 0
 	applymovement 3, Movement_1A75DD
 	waitmovement 0
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	call_if 0, EventScript_167048
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	call_if 1, EventScript_167053
 	msgbox gUnknown_8180C90
 	msgbox gUnknown_8180CAA, MSGBOX_YESNO
@@ -146,9 +146,9 @@ EventScript_167068:: @ 8167068
 EventScript_167078:: @ 8167078
 	msgbox gUnknown_8180DF8
 	closemessage
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	call_if 0, EventScript_1670A0
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	call_if 1, EventScript_1670B3
 	removeobject 3
 	setvar VAR_MAP_SCENE_CINNABAR_ISLAND, 2
@@ -201,23 +201,23 @@ Movement_1670E2:: @ 81670E2
 	step_end
 
 EventScript_1670E6:: @ 81670E6
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	call_if 1, EventScript_167142
 	addobject 4
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	call_if 0, EventScript_167154
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	call_if 1, EventScript_167166
 	msgbox gUnknown_8180EAD
 	closemessage
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	call_if 0, EventScript_167171
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	call_if 1, EventScript_167183
 	setvar VAR_MAP_SCENE_CINNABAR_ISLAND, 2
 	removeobject 3
 	delay 40
-	setflag FLAG_0x06B
+	setflag FLAG_HIDE_CINNABAR_SEAGALLOP
 	setvar VAR_MAP_SCENE_ONE_ISLAND_HARBOR, 1
 	setvar VAR_0x8004, 8
 	setvar VAR_0x8006, 1

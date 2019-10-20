@@ -24,7 +24,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "0x0",
-      "flag": "FLAG_0x04E"
+      "flag": "FLAG_HIDE_SILPH_RIVAL"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_WORKER_M",
@@ -50,7 +50,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
       "script": "SilphCo_7F_EventScript_161C1A",
-      "flag": "FLAG_0x053"
+      "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
@@ -63,7 +63,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
       "script": "SilphCo_7F_EventScript_161C31",
-      "flag": "FLAG_0x053"
+      "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
@@ -76,7 +76,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
       "script": "SilphCo_7F_EventScript_161C48",
-      "flag": "FLAG_0x053"
+      "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_WORKER_F",
@@ -128,7 +128,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
       "script": "SilphCo_7F_EventScript_161C03",
-      "flag": "FLAG_0x053"
+      "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",

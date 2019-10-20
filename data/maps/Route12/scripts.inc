@@ -29,7 +29,7 @@ Route12_EventScript_168014:: @ 8168014
 	playmoncry SPECIES_SNORLAX, 2
 	delay 40
 	waitmoncry
-	setflag FLAG_0x054
+	setflag FLAG_HIDE_ROUTE_12_SNORLAX
 	setflag FLAG_0x807
 	setflag FLAG_0x253
 	dowildbattle

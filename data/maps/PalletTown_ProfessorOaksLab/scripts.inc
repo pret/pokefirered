@@ -57,7 +57,7 @@ EventScript_169002:: @ 8169002
 	removeobject 4
 	setobjectxyperm 4, 6, 3
 	setobjectmovementtype 4, 8
-	clearflag FLAG_0x02B
+	clearflag FLAG_HIDE_OAK_IN_HIS_LAB
 	applymovement 255, Movement_1692B7
 	waitmovement 0
 	goto EventScript_169035
@@ -219,7 +219,7 @@ EventScript_16923E:: @ 816923E
 	removeobject 4
 	setobjectxyperm 4, 6, 3
 	setobjectmovementtype 4, 8
-	clearflag FLAG_0x02B
+	clearflag FLAG_HIDE_OAK_IN_HIS_LAB
 	applymovement 255, Movement_1692B7
 	waitmovement 0
 	applymovement 8, Movement_1A75E9
@@ -595,7 +595,7 @@ EventScript_16958B:: @ 816958B
 PalletTown_ProfessorOaksLab_EventScript_169595:: @ 8169595
 	lock
 	faceplayer
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	goto_if_eq EventScript_169600
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 9
 	goto_if_eq EventScript_169903
@@ -871,7 +871,7 @@ EventScript_169913:: @ 8169913
 	closemessage
 	delay 70
 	msgbox gUnknown_81A72AD
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	release
 	end
 

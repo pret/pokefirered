@@ -41,7 +41,7 @@ EventScript_162987:: @ 8162987
 	lockall
 	applymovement 255, Movement_1629F1
 	waitmovement 0
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	call EventScript_1629A8
 	playse SE_KI_GASYAN
 	special DrawWholeMapView
@@ -116,13 +116,13 @@ PokemonLeague_LancesRoom_EventScript_162A14:: @ 8162A14
 	call_if 0, EventScript_162A79
 	checkflag FLAG_SYS_GAME_CLEAR
 	call_if 1, EventScript_162A82
-	setflag FLAG_0x003
-	setflag FLAG_0x005
+	setflag FLAG_TEMP_3
+	setflag FLAG_TEMP_5
 	checkflag FLAG_0x844
 	call_if 0, EventScript_162A8B
 	checkflag FLAG_0x844
 	call_if 1, EventScript_162A96
-	clearflag FLAG_0x005
+	clearflag FLAG_TEMP_5
 	goto EventScript_162AAB
 
 EventScript_162A78:: @ 8162A78

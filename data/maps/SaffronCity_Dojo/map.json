@@ -89,7 +89,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SaffronCity_Dojo_EventScript_16EC00",
-      "flag": "FLAG_0x060"
+      "flag": "FLAG_HIDE_DOJO_HITMONLEE_BALL"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -102,7 +102,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SaffronCity_Dojo_EventScript_16EC46",
-      "flag": "FLAG_0x061"
+      "flag": "FLAG_HIDE_DOJO_HITMONCHAN_BALL"
     }
   ],
   "warp_events": [

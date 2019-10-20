@@ -21,7 +21,7 @@ MtEmber_Summit_MapScript1_163B25:: @ 8163B25
 	end
 
 EventScript_163B2F:: @ 8163B2F
-	clearflag FLAG_0x052
+	clearflag FLAG_HIDE_MOLTRES
 	return
 
 MtEmber_Summit_EventScript_163B33:: @ 8163B33

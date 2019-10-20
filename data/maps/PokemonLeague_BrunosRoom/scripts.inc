@@ -62,13 +62,13 @@ PokemonLeague_BrunosRoom_EventScript_1626EC:: @ 81626EC
 	call_if 0, EventScript_162751
 	checkflag FLAG_SYS_GAME_CLEAR
 	call_if 1, EventScript_16275A
-	setflag FLAG_0x003
-	setflag FLAG_0x005
+	setflag FLAG_TEMP_3
+	setflag FLAG_TEMP_5
 	checkflag FLAG_0x844
 	call_if 0, EventScript_162763
 	checkflag FLAG_0x844
 	call_if 1, EventScript_16276E
-	clearflag FLAG_0x005
+	clearflag FLAG_TEMP_5
 	goto EventScript_1627B0
 
 EventScript_162750:: @ 8162750

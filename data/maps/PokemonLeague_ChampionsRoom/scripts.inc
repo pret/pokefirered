@@ -55,7 +55,7 @@ PokemonLeague_ChampionsRoom_MapScript3_162B6C:: @ 8162B6C
 EventScript_162B76:: @ 8162B76
 	lockall
 	textcolor 0
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	applymovement 255, Movement_162D07
 	waitmovement 0
 	delay 20
@@ -66,17 +66,17 @@ EventScript_162B76:: @ 8162B76
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
 	goto_if_eq EventScript_162C68
-	setflag FLAG_0x003
-	setflag FLAG_0x005
+	setflag FLAG_TEMP_3
+	setflag FLAG_TEMP_5
 	savebgm MUS_WIN_GYM
 	checkflag FLAG_0x844
 	call_if 0, EventScript_162C6F
 	checkflag FLAG_0x844
 	call_if 1, EventScript_162C91
-	setflag FLAG_0x004
-	clearflag FLAG_0x005
+	setflag FLAG_TEMP_4
+	clearflag FLAG_TEMP_5
 	setflag FLAG_0x4BC
-	setflag FLAG_0x004
+	setflag FLAG_TEMP_4
 	msgbox gUnknown_8178F2F
 	playbgm MUS_SLOWMASARA, 0
 	addobject 2

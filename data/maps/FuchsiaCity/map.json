@@ -170,7 +170,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "FuchsiaCity_EventScript_1BDF13",
-      "flag": "FLAG_0x012"
+      "flag": "FLAG_TEMP_12"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
@@ -183,7 +183,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "FuchsiaCity_EventScript_1BDF13",
-      "flag": "FLAG_0x013"
+      "flag": "FLAG_TEMP_13"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
@@ -196,7 +196,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "FuchsiaCity_EventScript_1BDF13",
-      "flag": "FLAG_0x014"
+      "flag": "FLAG_TEMP_14"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
@@ -209,7 +209,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "FuchsiaCity_EventScript_1BDF13",
-      "flag": "FLAG_0x015"
+      "flag": "FLAG_TEMP_15"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_BUG_CATCHER",

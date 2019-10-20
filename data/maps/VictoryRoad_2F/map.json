@@ -167,7 +167,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "VictoryRoad_2F_EventScript_1BE11D",
-      "flag": "FLAG_0x058"
+      "flag": "FLAG_HIDE_VICTORY_ROAD_2F_BOULDER"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_COOLTRAINER_M",

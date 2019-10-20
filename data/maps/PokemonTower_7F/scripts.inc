@@ -7,8 +7,8 @@ PokemonTower_7F_EventScript_16355A:: @ 816355A
 	setvar VAR_0x8004, 14
 	setvar VAR_0x8005, 2
 	special UpdatePickStateFromSpecialVar8005
-	setflag FLAG_0x034
-	clearflag FLAG_0x035
+	setflag FLAG_HIDE_TOWER_FUJI
+	clearflag FLAG_HIDE_POKEHOUSE_FUJI
 	setflag FLAG_0x23C
 	msgbox gUnknown_817A529
 	closemessage

@@ -8,8 +8,8 @@ MtMoon_B2F_MapScript1_16069F:: @ 816069F
 	end
 
 EventScript_1606A9:: @ 81606A9
-	clearflag FLAG_0x02F
-	clearflag FLAG_0x030
+	clearflag FLAG_HIDE_DOME_FOSSIL
+	clearflag FLAG_HIDE_HELIX_FOSSIL
 	return
 
 MtMoon_B2F_EventScript_1606B0:: @ 81606B0

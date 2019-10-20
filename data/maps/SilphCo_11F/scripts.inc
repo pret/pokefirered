@@ -86,8 +86,8 @@ EventScript_161EA0:: @ 8161EA0
 	removeobject 6
 	fadescreen 0
 	setvar VAR_MAP_SCENE_SILPH_CO_11F, 1
-	setflag FLAG_0x03E
-	clearflag FLAG_0x03F
+	setflag FLAG_HIDE_SAFFRON_ROCKETS
+	clearflag FLAG_HIDE_SAFFRON_CIVILIANS
 	releaseall
 	end
 

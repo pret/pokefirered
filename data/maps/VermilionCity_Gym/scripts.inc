@@ -4,7 +4,7 @@ VermilionCity_Gym_MapScripts:: @ 816B69E
 	.byte 0
 
 VermilionCity_Gym_MapScript1_16B6A9:: @ 816B6A9
-	checkflag FLAG_0x001
+	checkflag FLAG_TEMP_1
 	call_if 1, EventScript_16B6BC
 	checkflag FLAG_0x264
 	call_if 1, EventScript_16B717
@@ -147,7 +147,7 @@ EventScript_16B843:: @ 816B843
 	copyvar VAR_0x8005, VAR_0x4001
 	checkflag FLAG_0x264
 	goto_if_eq EventScript_16B8E5
-	checkflag FLAG_0x001
+	checkflag FLAG_TEMP_1
 	goto_if_eq EventScript_16B89E
 	compare_var_to_var VAR_0x8004, VAR_0x8008
 	goto_if_eq EventScript_16B885
@@ -161,7 +161,7 @@ EventScript_16B885:: @ 816B885
 	waitse
 	call EventScript_16B6BC
 	special DrawWholeMapView
-	setflag FLAG_0x001
+	setflag FLAG_TEMP_1
 	releaseall
 	end
 
@@ -169,7 +169,7 @@ EventScript_16B89E:: @ 816B89E
 	compare_var_to_var VAR_0x8005, VAR_0x8008
 	goto_if_eq EventScript_16B8CB
 	msgbox gUnknown_819536C
-	clearflag FLAG_0x001
+	clearflag FLAG_TEMP_1
 	special sub_80CADEC
 	copyvar VAR_0x4000, VAR_0x8004
 	copyvar VAR_0x4001, VAR_0x8005

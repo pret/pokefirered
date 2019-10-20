@@ -67,13 +67,13 @@ PokemonLeague_LoreleisRoom_EventScript_1625DC:: @ 81625DC
 	call_if 0, EventScript_162641
 	checkflag FLAG_0x844
 	call_if 1, EventScript_16264A
-	setflag FLAG_0x003
-	setflag FLAG_0x005
+	setflag FLAG_TEMP_3
+	setflag FLAG_TEMP_5
 	checkflag FLAG_0x844
 	call_if 0, EventScript_162653
 	checkflag FLAG_0x844
 	call_if 1, EventScript_16265E
-	clearflag FLAG_0x005
+	clearflag FLAG_TEMP_5
 	goto EventScript_162673
 
 EventScript_162640:: @ 8162640

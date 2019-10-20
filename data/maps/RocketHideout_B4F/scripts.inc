@@ -32,8 +32,8 @@ RocketHideout_B4F_EventScript_161317:: @ 8161317
 	closemessage
 	removeobject 1
 	addobject 2
-	clearflag FLAG_0x037
-	setflag FLAG_0x05F
+	clearflag FLAG_HIDE_SILPH_SCOPE
+	setflag FLAG_HIDE_CELADON_ROCKETS
 	setvar VAR_0x8004, 15
 	setvar VAR_0x8005, 2
 	special UpdatePickStateFromSpecialVar8005
@@ -60,7 +60,7 @@ RocketHideout_B4F_EventScript_161381:: @ 8161381
 EventScript_16139D:: @ 816139D
 	msgbox gUnknown_81754BD
 	addobject 4
-	clearflag FLAG_0x036
+	clearflag FLAG_HIDE_LIFT_KEY
 	release
 	end
 

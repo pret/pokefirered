@@ -24,7 +24,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
       "script": "SilphCo_5F_EventScript_161853",
-      "flag": "FLAG_0x053"
+      "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKER",
@@ -37,7 +37,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
       "script": "SilphCo_5F_EventScript_16186A",
-      "flag": "FLAG_0x053"
+      "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_WORKER_M",
@@ -63,7 +63,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
       "script": "SilphCo_5F_EventScript_161825",
-      "flag": "FLAG_0x053"
+      "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
@@ -76,7 +76,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
       "script": "SilphCo_5F_EventScript_16183C",
-      "flag": "FLAG_0x053"
+      "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",

@@ -11,7 +11,7 @@ ThreeIsland_MapScript1_1677B3:: @ 81677B3
 	end
 
 EventScript_1677CB:: @ 81677CB
-	setflag FLAG_0x07E
+	setflag FLAG_HIDE_THREE_ISLAND_ANTIBIKERS
 	return
 
 EventScript_1677CF:: @ 81677CF

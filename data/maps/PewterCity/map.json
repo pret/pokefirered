@@ -48,7 +48,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PewterCity_EventScript_16607E",
-      "flag": "FLAG_0x050"
+      "flag": "FLAG_HIDE_PEWTER_MUSEUM_ESCORT"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_FAT_MAN",
@@ -87,7 +87,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PewterCity_EventScript_165B9D",
-      "flag": "FLAG_0x02E"
+      "flag": "FLAG_HIDE_PEWTER_CITY_GYM_ESCORT"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
@@ -100,7 +100,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PewterCity_EventScript_1BDF13",
-      "flag": "FLAG_0x012"
+      "flag": "FLAG_TEMP_12"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_SCIENTIST",

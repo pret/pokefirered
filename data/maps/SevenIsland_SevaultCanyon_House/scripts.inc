@@ -3,7 +3,7 @@ SevenIsland_SevaultCanyon_House_MapScripts:: @ 8172182
 
 SevenIsland_SevaultCanyon_House_EventScript_172183:: @ 8172183
 	lock
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	goto_if_eq EventScript_172211
 	playbgm MUS_P_SCHOOL, 0
 	applymovement 1, Movement_172231
@@ -30,7 +30,7 @@ SevenIsland_SevaultCanyon_House_EventScript_172183:: @ 8172183
 	delay 30
 	call EventScript_1A6C26
 	msgbox gUnknown_81A4DF5
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	release
 	end
 

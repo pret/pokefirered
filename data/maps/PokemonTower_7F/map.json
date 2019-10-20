@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "MAP_OBJ_GFX_OLD_MAN_3",
+      "graphics_id": "MAP_OBJ_GFX_MR_FUJI",
       "x": 11,
       "y": 4,
       "elevation": 3,
@@ -24,7 +24,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PokemonTower_7F_EventScript_16355A",
-      "flag": "FLAG_0x034"
+      "flag": "FLAG_HIDE_TOWER_FUJI"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
@@ -37,7 +37,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
       "script": "PokemonTower_7F_EventScript_163586",
-      "flag": "FLAG_0x05E"
+      "flag": "FLAG_HIDE_TOWER_ROCKET_1"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
@@ -50,7 +50,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
       "script": "PokemonTower_7F_EventScript_16363D",
-      "flag": "FLAG_0x083"
+      "flag": "FLAG_HIDE_TOWER_ROCKET_2"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
@@ -63,7 +63,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
       "script": "PokemonTower_7F_EventScript_1636D6",
-      "flag": "FLAG_0x084"
+      "flag": "FLAG_HIDE_TOWER_ROCKET_3"
     }
   ],
   "warp_events": [

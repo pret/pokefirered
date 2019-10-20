@@ -2509,10 +2509,10 @@ static void sub_81130BC(struct Var4038Struct * varPtr)
         sub_8113524(varPtr);
         sub_8113390(varPtr);
         VarSet(VAR_0x4039, gSaveBlock2Ptr->playTimeHours);
-        FlagClear(FLAG_0x06C);
-        FlagClear(FLAG_0x06D);
-        FlagClear(FLAG_0x06E);
-        FlagClear(FLAG_0x06F);
+        FlagClear(FLAG_HIDE_SAFFRON_FAN_CLUB_BLACKBELT);
+        FlagClear(FLAG_HIDE_SAFFRON_FAN_CLUB_ROCKER);
+        FlagClear(FLAG_HIDE_SAFFRON_FAN_CLUB_WOMAN);
+        FlagClear(FLAG_HIDE_SAFFRON_FAN_CLUB_BEAUTY);
         VarSet(VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 1);
     }
 }

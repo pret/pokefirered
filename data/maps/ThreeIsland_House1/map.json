@@ -24,7 +24,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_House1_EventScript_17181A",
-      "flag": "FLAG_0x076"
+      "flag": "FLAG_HIDE_LOSTELLE_IN_HER_HOME"
     }
   ],
   "warp_events": [

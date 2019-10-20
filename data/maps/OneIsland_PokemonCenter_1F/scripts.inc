@@ -146,7 +146,7 @@ EventScript_170E46:: @ 8170E46
 	return
 
 EventScript_170E58:: @ 8170E58
-	setflag FLAG_0x039
+	setflag FLAG_HIDE_TOWN_MAP
 	setvar VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
 	additem ITEM_TOWN_MAP, 1
 	giveitemfanfaremsg gUnknown_81A1218, ITEM_TOWN_MAP, 1, MUS_FAN5
@@ -300,7 +300,7 @@ EventScript_170FA5:: @ 8170FA5
 	msgbox gUnknown_81A1D7D
 	special sub_810B82C
 	setflag FLAG_0x844
-	setflag FLAG_0x05C
+	setflag FLAG_HIDE_CERULEAN_CAVE_GUARD
 	setflag FLAG_0x08C
 	setvar VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 6
 	special InitRoamer
@@ -514,9 +514,9 @@ EventScript_1711DA:: @ 81711DA
 	applymovement 2, Movement_17132D
 	waitmovement 0
 	playse SE_KAIDAN
-	setflag FLAG_0x072
+	setflag FLAG_HIDE_ONE_ISLAND_POKECENTER_BILL
 	setvar VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 3
-	clearflag FLAG_0x062
+	clearflag FLAG_HIDE_CINNABAR_BILL
 	setvar VAR_MAP_SCENE_CINNABAR_ISLAND, 3
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8006, 8

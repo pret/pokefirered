@@ -24,7 +24,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "Route25_SeaCottage_EventScript_17054B",
-      "flag": "FLAG_0x033"
+      "flag": "FLAG_HIDE_BILL_HUMAN_SEA_COTTAGE"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_CLEFAIRY",
@@ -37,7 +37,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "Route25_SeaCottage_EventScript_17054B",
-      "flag": "FLAG_0x032"
+      "flag": "FLAG_HIDE_BILL_CLEFAIRY"
     }
   ],
   "warp_events": [

@@ -26,7 +26,7 @@ PowerPlant_MapScript2_16378D:: @ 816378D
 	end
 
 EventScript_1637AC:: @ 81637AC
-	clearflag FLAG_0x05D
+	clearflag FLAG_HIDE_ZAPDOS
 	return
 
 EventScript_1637B0:: @ 81637B0

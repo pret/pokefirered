@@ -102,7 +102,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtEmber_Exterior_EventScript_1BE00C",
-      "flag": "FLAG_0x012"
+      "flag": "FLAG_TEMP_12"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
@@ -115,7 +115,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtEmber_Exterior_EventScript_1BE00C",
-      "flag": "FLAG_0x013"
+      "flag": "FLAG_TEMP_13"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
@@ -167,7 +167,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtEmber_Exterior_EventScript_1BE00C",
-      "flag": "FLAG_0x014"
+      "flag": "FLAG_TEMP_14"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
@@ -180,7 +180,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtEmber_Exterior_EventScript_1BE00C",
-      "flag": "FLAG_0x015"
+      "flag": "FLAG_TEMP_15"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
@@ -219,7 +219,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtEmber_Exterior_EventScript_1BE00C",
-      "flag": "FLAG_0x016"
+      "flag": "FLAG_TEMP_16"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
@@ -232,7 +232,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtEmber_Exterior_EventScript_1BE00C",
-      "flag": "FLAG_0x017"
+      "flag": "FLAG_TEMP_17"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",

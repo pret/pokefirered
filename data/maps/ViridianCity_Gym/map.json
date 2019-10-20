@@ -115,7 +115,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ViridianCity_Gym_EventScript_169ECA",
-      "flag": "FLAG_0x055"
+      "flag": "FLAG_HIDE_VIRIDIAN_GIOVANNI"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_COOLTRAINER_M",

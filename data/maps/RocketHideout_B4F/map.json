@@ -24,7 +24,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "RocketHideout_B4F_EventScript_161317",
-      "flag": "FLAG_0x038"
+      "flag": "FLAG_HIDE_HIDEOUT_GIOVANNI"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -37,7 +37,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "RocketHideout_B4F_EventScript_161363",
-      "flag": "FLAG_0x037"
+      "flag": "FLAG_HIDE_SILPH_SCOPE"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
@@ -63,7 +63,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "RocketHideout_B4F_EventScript_1613AD",
-      "flag": "FLAG_0x036"
+      "flag": "FLAG_HIDE_LIFT_KEY"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",

@@ -55,13 +55,13 @@ EventScript_16B511:: @ 816B511
 VermilionCity_PokemonFanClub_EventScript_16B528:: @ 816B528
 	lock
 	faceplayer
-	checkflag FLAG_0x003
+	checkflag FLAG_TEMP_3
 	goto_if_eq EventScript_16B54B
 	msgbox gUnknown_81944CC
 	closemessage
 	applymovement 5, Movement_1A75E5
 	waitmovement 0
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	release
 	end
 
@@ -70,20 +70,20 @@ EventScript_16B54B:: @ 816B54B
 	closemessage
 	applymovement 5, Movement_1A75E5
 	waitmovement 0
-	clearflag FLAG_0x003
+	clearflag FLAG_TEMP_3
 	release
 	end
 
 VermilionCity_PokemonFanClub_EventScript_16B563:: @ 816B563
 	lock
 	faceplayer
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	goto_if_eq EventScript_16B586
 	msgbox gUnknown_819446F
 	closemessage
 	applymovement 6, Movement_1A75E5
 	waitmovement 0
-	setflag FLAG_0x003
+	setflag FLAG_TEMP_3
 	release
 	end
 
@@ -92,7 +92,7 @@ EventScript_16B586:: @ 816B586
 	closemessage
 	applymovement 6, Movement_1A75E5
 	waitmovement 0
-	clearflag FLAG_0x002
+	clearflag FLAG_TEMP_2
 	release
 	end
 

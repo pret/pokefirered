@@ -76,7 +76,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SaffronCity_PokemonTrainerFanClub_EventScript_16F45D",
-      "flag": "FLAG_0x06E"
+      "flag": "FLAG_HIDE_SAFFRON_FAN_CLUB_WOMAN"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKER",
@@ -89,7 +89,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SaffronCity_PokemonTrainerFanClub_EventScript_16F4BF",
-      "flag": "FLAG_0x06D"
+      "flag": "FLAG_HIDE_SAFFRON_FAN_CLUB_ROCKER"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_BEAUTY",
@@ -102,7 +102,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SaffronCity_PokemonTrainerFanClub_EventScript_16F521",
-      "flag": "FLAG_0x06F"
+      "flag": "FLAG_HIDE_SAFFRON_FAN_CLUB_BEAUTY"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_BLACKBELT",
@@ -115,7 +115,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SaffronCity_PokemonTrainerFanClub_EventScript_16F583",
-      "flag": "FLAG_0x06C"
+      "flag": "FLAG_HIDE_SAFFRON_FAN_CLUB_BLACKBELT"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_RED_NORMAL",

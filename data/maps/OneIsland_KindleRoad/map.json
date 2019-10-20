@@ -199,7 +199,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "OneIsland_KindleRoad_EventScript_1BE00C",
-      "flag": "FLAG_0x013"
+      "flag": "FLAG_TEMP_13"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
@@ -212,7 +212,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "OneIsland_KindleRoad_EventScript_1BE00C",
-      "flag": "FLAG_0x015"
+      "flag": "FLAG_TEMP_15"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
@@ -225,7 +225,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "OneIsland_KindleRoad_EventScript_1BE00C",
-      "flag": "FLAG_0x016"
+      "flag": "FLAG_TEMP_16"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
@@ -238,7 +238,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "OneIsland_KindleRoad_EventScript_1BE00C",
-      "flag": "FLAG_0x017"
+      "flag": "FLAG_TEMP_17"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
@@ -251,7 +251,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "OneIsland_KindleRoad_EventScript_1BE00C",
-      "flag": "FLAG_0x018"
+      "flag": "FLAG_TEMP_18"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
@@ -264,7 +264,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "OneIsland_KindleRoad_EventScript_1BE00C",
-      "flag": "FLAG_0x019"
+      "flag": "FLAG_TEMP_19"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
@@ -277,7 +277,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "OneIsland_KindleRoad_EventScript_1BE00C",
-      "flag": "FLAG_0x01A"
+      "flag": "FLAG_TEMP_1A"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
@@ -290,7 +290,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "OneIsland_KindleRoad_EventScript_1BE00C",
-      "flag": "FLAG_0x01B"
+      "flag": "FLAG_TEMP_1B"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
@@ -303,7 +303,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "OneIsland_KindleRoad_EventScript_1BE00C",
-      "flag": "FLAG_0x01C"
+      "flag": "FLAG_TEMP_1C"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
@@ -316,7 +316,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "OneIsland_KindleRoad_EventScript_1BE00C",
-      "flag": "FLAG_0x01D"
+      "flag": "FLAG_TEMP_1D"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
@@ -329,7 +329,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "OneIsland_KindleRoad_EventScript_1BE00C",
-      "flag": "FLAG_0x01E"
+      "flag": "FLAG_TEMP_1E"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
@@ -342,7 +342,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "OneIsland_KindleRoad_EventScript_1BE00C",
-      "flag": "FLAG_0x01F"
+      "flag": "FLAG_TEMP_1F"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
@@ -355,7 +355,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "OneIsland_KindleRoad_EventScript_1BE00C",
-      "flag": "FLAG_0x011"
+      "flag": "FLAG_TEMP_11"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",

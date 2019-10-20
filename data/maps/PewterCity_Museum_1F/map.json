@@ -63,7 +63,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PewterCity_Museum_1F_EventScript_16A509",
-      "flag": "FLAG_0x056"
+      "flag": "FLAG_HIDE_OLD_AMBER"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_SCIENTIST",

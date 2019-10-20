@@ -58,7 +58,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "CeruleanCity_EventScript_166603",
-      "flag": "FLAG_0x03B"
+      "flag": "FLAG_HIDE_CERULEAN_ROCKET"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_LITTLE_BOY",
@@ -136,7 +136,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "0x0",
-      "flag": "FLAG_0x03C"
+      "flag": "FLAG_HIDE_CERULEAN_RIVAL"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
@@ -149,7 +149,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "CeruleanCity_EventScript_1BDF13",
-      "flag": "FLAG_0x013"
+      "flag": "FLAG_TEMP_13"
     },
     {
       "graphics_id": "65375",
@@ -188,7 +188,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "CeruleanCity_EventScript_16672F",
-      "flag": "FLAG_0x05C"
+      "flag": "FLAG_HIDE_CERULEAN_CAVE_GUARD"
     }
   ],
   "warp_events": [

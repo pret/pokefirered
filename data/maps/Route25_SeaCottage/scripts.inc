@@ -10,18 +10,18 @@ Route25_SeaCottage_MapScript1_170529:: @ 8170529
 	end
 
 EventScript_17053C:: @ 817053C
-	clearflag FLAG_0x032
+	clearflag FLAG_HIDE_BILL_CLEFAIRY
 	setobjectxyperm 1, 3, 3
 	return
 
 EventScript_170547:: @ 8170547
-	setflag FLAG_0x003
+	setflag FLAG_TEMP_3
 	return
 
 Route25_SeaCottage_EventScript_17054B:: @ 817054B
 	lock
 	faceplayer
-	checkflag FLAG_0x003
+	checkflag FLAG_TEMP_3
 	goto_if_eq EventScript_1706C8
 	checkflag FLAG_0x234
 	goto_if_eq EventScript_170640
@@ -66,7 +66,7 @@ EventScript_17059C:: @ 817059C
 	playse SE_C_MAKU_D
 	closedoor 10, 3
 	waitdooranim
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	release
 	end
 
@@ -116,7 +116,7 @@ EventScript_17064A:: @ 817064A
 	additem ITEM_SS_TICKET, 1
 	giveitemfanfaremsg gUnknown_81A028E, ITEM_SS_TICKET, 1, MUS_FAN5
 	setflag FLAG_0x235
-	setflag FLAG_0x031
+	setflag FLAG_HIDE_NUGGET_BRIDGE_ROCKET
 	setflag FLAG_0x234
 	setflag FLAG_SYS_NOT_SOMEONES_PC
 	goto EventScript_170640
@@ -159,9 +159,9 @@ Movement_1706DB:: @ 81706DB
 
 Route25_SeaCottage_EventScript_1706DD:: @ 81706DD
 	lockall
-	checkflag FLAG_0x003
+	checkflag FLAG_TEMP_3
 	goto_if_eq EventScript_1707CA
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	goto_if_eq EventScript_1706FA
 	msgbox gUnknown_81A0402
 	releaseall
@@ -171,7 +171,7 @@ EventScript_1706FA:: @ 81706FA
 	fadeoutbgm 0
 	msgbox gUnknown_81A042D
 	closemessage
-	clearflag FLAG_0x002
+	clearflag FLAG_TEMP_2
 	setflag FLAG_0x233
 	special SpawnScriptFieldObject
 	applymovement 127, Movement_1707BE
@@ -203,7 +203,7 @@ EventScript_1706FA:: @ 81706FA
 	waitdooranim
 	fadeinbgm 0
 	addobject 1
-	clearflag FLAG_0x033
+	clearflag FLAG_HIDE_BILL_HUMAN_SEA_COTTAGE
 	delay 50
 	playfanfare MUS_FANFA1
 	applymovement 1, Movement_170888

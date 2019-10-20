@@ -76,7 +76,7 @@ EventScript_1654D8:: @ 81654D8
 	waitdooranim
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 7
 	setvar VAR_MAP_SCENE_PALLET_TOWN_OAK, 3
-	setflag FLAG_0x02C
+	setflag FLAG_HIDE_OAK_IN_PALLET_TOWN
 	warp MAP_PALLET_TOWN_PROFESSOR_OAKS_LAB, 255, 6, 12
 	waitstate
 	releaseall
@@ -221,9 +221,9 @@ EventScript_165605:: @ 8165605
 	closedoor 16, 13
 	waitdooranim
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1
-	clearflag FLAG_0x02B
+	clearflag FLAG_HIDE_OAK_IN_HIS_LAB
 	setvar VAR_MAP_SCENE_PALLET_TOWN_OAK, 1
-	setflag FLAG_0x02C
+	setflag FLAG_HIDE_OAK_IN_PALLET_TOWN
 	setflag FLAG_SPECIAL_FLAG_0x4001
 	warp MAP_PALLET_TOWN_PROFESSOR_OAKS_LAB, 255, 6, 12
 	waitstate
@@ -382,7 +382,7 @@ PalletTown_EventScript_16575C:: @ 816575C
 	goto_if_eq EventScript_165815
 	compare_var_to_value VAR_0x4002, 1
 	goto_if_eq EventScript_1658C2
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	goto_if_eq EventScript_165801
 	msgbox gUnknown_81B1C8B
 	applymovement 1, Movement_1A75E1
@@ -399,7 +399,7 @@ PalletTown_EventScript_16575C:: @ 816575C
 	compare_var_to_value VAR_FACING, 4
 	call_if 5, EventScript_1657E2
 	moveobjectoffscreen 1
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	release
 	end
 

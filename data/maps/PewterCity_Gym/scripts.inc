@@ -19,7 +19,7 @@ EventScript_16A5C5:: @ 816A5C5
 	setflag FLAG_0x4B0
 	setflag FLAG_BADGE01_GET
 	setvar VAR_MAP_SCENE_PEWTER_CITY, 1
-	setflag FLAG_0x02E
+	setflag FLAG_HIDE_PEWTER_CITY_GYM_ESCORT
 	clearflag FLAG_0x092
 	setvar VAR_0x8008, 1
 	call EventScript_1A6B18

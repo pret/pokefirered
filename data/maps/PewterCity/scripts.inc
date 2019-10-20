@@ -21,7 +21,7 @@ PewterCity_EventScript_165B9D:: @ 8165B9D
 	waitmovement 0
 	fadedefaultbgm
 	removeobject 5
-	clearflag FLAG_0x02E
+	clearflag FLAG_HIDE_PEWTER_CITY_GYM_ESCORT
 	release
 	end
 
@@ -457,7 +457,7 @@ EventScript_165DBE:: @ 8165DBE
 	waitmovement 0
 	fadedefaultbgm
 	removeobject 5
-	clearflag FLAG_0x02E
+	clearflag FLAG_HIDE_PEWTER_CITY_GYM_ESCORT
 	releaseall
 	end
 
@@ -1053,7 +1053,7 @@ PewterCity_EventScript_16607E:: @ 816607E
 	waitmovement 0
 	fadedefaultbgm
 	removeobject 2
-	clearflag FLAG_0x050
+	clearflag FLAG_HIDE_PEWTER_MUSEUM_ESCORT
 	release
 	end
 

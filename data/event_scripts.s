@@ -1490,35 +1490,35 @@ Text_1A644F:: @ 81A644F
 	.string "once. Is that okay?$"
 
 EventScript_ResetAllMapFlags:: @ 81A6481
-	setflag FLAG_0x02B
-	setflag FLAG_0x02C
-	setflag FLAG_0x033
+	setflag FLAG_HIDE_OAK_IN_HIS_LAB
+	setflag FLAG_HIDE_OAK_IN_PALLET_TOWN
+	setflag FLAG_HIDE_BILL_HUMAN_SEA_COTTAGE
 	setflag FLAG_0x092
-	setflag FLAG_0x035
-	setflag FLAG_0x036
-	setflag FLAG_0x037
-	setflag FLAG_0x03C
-	setflag FLAG_0x03D
+	setflag FLAG_HIDE_POKEHOUSE_FUJI
+	setflag FLAG_HIDE_LIFT_KEY
+	setflag FLAG_HIDE_SILPH_SCOPE
+	setflag FLAG_HIDE_CERULEAN_RIVAL
+	setflag FLAG_HIDE_SS_ANNE_RIVAL
 	setflag FLAG_0x0A1
-	setflag FLAG_0x03F
-	setflag FLAG_0x04F
-	setflag FLAG_0x05A
+	setflag FLAG_HIDE_SAFFRON_CIVILIANS
+	setflag FLAG_HIDE_ROUTE_22_RIVAL
+	setflag FLAG_HIDE_OAK_IN_CHAMP_ROOM
 	setflag FLAG_0x0A3
 	setflag FLAG_0x0A4
-	setflag FLAG_0x062
-	setflag FLAG_0x06B
+	setflag FLAG_HIDE_CINNABAR_BILL
+	setflag FLAG_HIDE_CINNABAR_SEAGALLOP
 	setflag FLAG_0x0A2
 	setflag FLAG_0x08C
-	setflag FLAG_0x06C
-	setflag FLAG_0x06D
-	setflag FLAG_0x06E
-	setflag FLAG_0x06F
-	setflag FLAG_0x075
-	setflag FLAG_0x074
-	setflag FLAG_0x07B
-	setflag FLAG_0x07C
-	setflag FLAG_0x07D
-	setflag FLAG_0x076
+	setflag FLAG_HIDE_SAFFRON_FAN_CLUB_BLACKBELT
+	setflag FLAG_HIDE_SAFFRON_FAN_CLUB_ROCKER
+	setflag FLAG_HIDE_SAFFRON_FAN_CLUB_WOMAN
+	setflag FLAG_HIDE_SAFFRON_FAN_CLUB_BEAUTY
+	setflag FLAG_HIDE_TWO_ISLAND_GAME_CORNER_LOSTELLE
+	setflag FLAG_HIDE_TWO_ISLAND_GAME_CORNER_BIKER
+	setflag FLAG_HIDE_TWO_ISLAND_WOMAN
+	setflag FLAG_HIDE_TWO_ISLAND_BEAUTY
+	setflag FLAG_HIDE_TWO_ISLAND_SUPER_NERD
+	setflag FLAG_HIDE_LOSTELLE_IN_HER_HOME
 	setflag FLAG_0x091
 	setflag FLAG_0x097
 	setflag FLAG_0x090
@@ -2454,13 +2454,13 @@ EventScript_1A7506:: @ 81A7506
 	playse SE_DOOR
 	call EventScript_1A7538
 	special DrawWholeMapView
-	setflag FLAG_0x004
+	setflag FLAG_TEMP_4
 	return
 
 EventScript_1A751F:: @ 81A751F
 	applymovement 255, Movement_1A75F3
 	waitmovement 0
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	playse SE_KI_GASYAN
 	call EventScript_1A759C
 	special DrawWholeMapView
@@ -2488,7 +2488,7 @@ EventScript_1A7563:: @ 81A7563
 	setmetatile 6, 4, 654, 1
 	setmetatile 6, 5, 662, 0
 	special DrawWholeMapView
-	setflag FLAG_0x004
+	setflag FLAG_TEMP_4
 	return
 
 EventScript_1A7589:: @ 81A7589
@@ -8512,11 +8512,11 @@ EventScript_1BB1BA:: @ 81BB1BA
 	specialvar VAR_RESULT, ValidateReceivedWonderCard
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 1, EventScript_1BB1CE
-	clearflag FLAG_0x070
+	clearflag FLAG_HIDE_MG_DELIVERYMEN
 	return
 
 EventScript_1BB1CE:: @ 81BB1CE
-	setflag FLAG_0x070
+	setflag FLAG_HIDE_MG_DELIVERYMEN
 	return
 
 CeruleanCity_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
@@ -14537,7 +14537,7 @@ TwoIsland_CapeBrink_House_EventScript_1C4DEC:: @ 81C4DEC
 	faceplayer
 	checkflag FLAG_0x2E1
 	goto_if 1, EventScript_1C4EA1
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	goto_if 1, EventScript_1C4E97
 	getfirstpartymonname 0
 	msgbox Text_1A46C6
@@ -14585,7 +14585,7 @@ EventScript_1C4EAB:: @ 81C4EAB
 	compare_var_to_value VAR_RESULT, 1
 	goto_if 1, EventScript_1C4ECD
 	msgbox Text_1A4865
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	release
 	end
 
@@ -14696,26 +14696,26 @@ SevenIsland_TrainerTower_8F_MapScript2_1C4F62:: @ 81C4F62
 	goto_if 1, EventScript_1C4FC5
 	compare_var_to_value VAR_0x8000, 2
 	goto_if 1, EventScript_1C5019
-	setflag FLAG_0x002
-	setflag FLAG_0x003
-	setflag FLAG_0x004
-	setflag FLAG_0x005
+	setflag FLAG_TEMP_2
+	setflag FLAG_TEMP_3
+	setflag FLAG_TEMP_4
+	setflag FLAG_TEMP_5
 	setvar VAR_0x400E, 1
 	setvar VAR_0x400F, 1
 	end
 
 EventScript_1C4FA7:: @ 81C4FA7
-	setflag FLAG_0x002
-	setflag FLAG_0x004
-	setflag FLAG_0x005
+	setflag FLAG_TEMP_2
+	setflag FLAG_TEMP_4
+	setflag FLAG_TEMP_5
 	setvar VAR_0x400F, 1
 	setobjectxyperm 3, 15, 13
 	setobjectmovementtype 3, 9
 	goto EventScript_1C5042
 
 EventScript_1C4FC5:: @ 81C4FC5
-	setflag FLAG_0x003
-	setflag FLAG_0x004
+	setflag FLAG_TEMP_3
+	setflag FLAG_TEMP_4
 	setvar VAR_0x400E, 1
 	setvar VAR_0x8004, 5
 	special sub_815D9E8
@@ -14735,7 +14735,7 @@ EventScript_1C4FFE:: @ 81C4FFE
 	goto EventScript_1C5042
 
 EventScript_1C5019:: @ 81C5019
-	setflag FLAG_0x005
+	setflag FLAG_TEMP_5
 	setvar VAR_0x400F, 1
 	setobjectxyperm 2, 10, 10
 	setobjectmovementtype 2, 8
@@ -14744,7 +14744,7 @@ EventScript_1C5019:: @ 81C5019
 	setobjectxyperm 4, 10, 16
 	setobjectmovementtype 4, 7
 EventScript_1C5042:
-	setflag FLAG_0x006
+	setflag FLAG_TEMP_6
 	end
 
 SevenIsland_TrainerTower_1F_MapScript3_1C5046:: @ 81C5046

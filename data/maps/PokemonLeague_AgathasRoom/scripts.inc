@@ -65,13 +65,13 @@ PokemonLeague_AgathasRoom_EventScript_162877:: @ 8162877
 	call_if 0, EventScript_1628E9
 	checkflag FLAG_SYS_GAME_CLEAR
 	call_if 1, EventScript_1628F2
-	setflag FLAG_0x003
-	setflag FLAG_0x005
+	setflag FLAG_TEMP_3
+	setflag FLAG_TEMP_5
 	checkflag FLAG_0x844
 	call_if 0, EventScript_1628FB
 	checkflag FLAG_0x844
 	call_if 1, EventScript_162906
-	clearflag FLAG_0x005
+	clearflag FLAG_TEMP_5
 	goto EventScript_16291B
 
 EventScript_1628E8:: @ 81628E8

@@ -46,7 +46,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SaffronCity_EventScript_16737A",
-      "flag": "FLAG_0x03E"
+      "flag": "FLAG_HIDE_SAFFRON_ROCKETS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
@@ -59,7 +59,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SaffronCity_EventScript_167383",
-      "flag": "FLAG_0x03E"
+      "flag": "FLAG_HIDE_SAFFRON_ROCKETS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
@@ -72,7 +72,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SaffronCity_EventScript_16738C",
-      "flag": "FLAG_0x03E"
+      "flag": "FLAG_HIDE_SAFFRON_ROCKETS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
@@ -85,7 +85,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SaffronCity_EventScript_167395",
-      "flag": "FLAG_0x03E"
+      "flag": "FLAG_HIDE_SAFFRON_ROCKETS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
@@ -98,7 +98,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SaffronCity_EventScript_16739E",
-      "flag": "FLAG_0x03E"
+      "flag": "FLAG_HIDE_SAFFRON_ROCKETS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
@@ -111,7 +111,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SaffronCity_EventScript_1673B9",
-      "flag": "FLAG_0x03E"
+      "flag": "FLAG_HIDE_SAFFRON_ROCKETS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
@@ -124,7 +124,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SaffronCity_EventScript_1673B0",
-      "flag": "FLAG_0x03E"
+      "flag": "FLAG_HIDE_SAFFRON_ROCKETS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
@@ -137,7 +137,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SaffronCity_EventScript_1673A7",
-      "flag": "FLAG_0x03E"
+      "flag": "FLAG_HIDE_SAFFRON_ROCKETS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_YOUNGSTER",
@@ -150,7 +150,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SaffronCity_EventScript_1673EC",
-      "flag": "FLAG_0x03F"
+      "flag": "FLAG_HIDE_SAFFRON_CIVILIANS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_WORKER_M",
@@ -163,7 +163,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SaffronCity_EventScript_1673E3",
-      "flag": "FLAG_0x03F"
+      "flag": "FLAG_HIDE_SAFFRON_CIVILIANS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_MAN",
@@ -176,7 +176,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SaffronCity_EventScript_16741A",
-      "flag": "FLAG_0x03F"
+      "flag": "FLAG_HIDE_SAFFRON_CIVILIANS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_BOY",
@@ -189,7 +189,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SaffronCity_EventScript_1673FE",
-      "flag": "FLAG_0x03F"
+      "flag": "FLAG_HIDE_SAFFRON_CIVILIANS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_PIDGEOT",
@@ -202,7 +202,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SaffronCity_EventScript_167407",
-      "flag": "FLAG_0x03F"
+      "flag": "FLAG_HIDE_SAFFRON_CIVILIANS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_LASS",
@@ -215,7 +215,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SaffronCity_EventScript_1673F5",
-      "flag": "FLAG_0x03F"
+      "flag": "FLAG_HIDE_SAFFRON_CIVILIANS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_BATTLE_GIRL",

@@ -4,14 +4,14 @@ UnknownMap_00_04_MapScripts:: @ 816047C
 	.byte 0
 
 UnknownMap_00_04_MapScript1_160487:: @ 8160487
-	setflag FLAG_0x063
-	setflag FLAG_0x064
-	setflag FLAG_0x065
-	setflag FLAG_0x066
-	setflag FLAG_0x067
-	setflag FLAG_0x068
-	setflag FLAG_0x069
-	setflag FLAG_0x06A
+	setflag FLAG_HIDE_UNION_ROOM_1
+	setflag FLAG_HIDE_UNION_ROOM_2
+	setflag FLAG_HIDE_UNION_ROOM_3
+	setflag FLAG_HIDE_UNION_ROOM_4
+	setflag FLAG_HIDE_UNION_ROOM_5
+	setflag FLAG_HIDE_UNION_ROOM_6
+	setflag FLAG_HIDE_UNION_ROOM_7
+	setflag FLAG_HIDE_UNION_ROOM_8
 	removeobject 9
 	removeobject 8
 	removeobject 7

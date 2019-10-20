@@ -54,17 +54,17 @@ EventScript_1675EE:: @ 81675EE
 
 EventScript_1675F4:: @ 81675F4
 	setvar VAR_MAP_SCENE_TWO_ISLAND, 2
-	clearflag FLAG_0x07B
+	clearflag FLAG_HIDE_TWO_ISLAND_WOMAN
 	return
 
 EventScript_1675FD:: @ 81675FD
 	setvar VAR_MAP_SCENE_TWO_ISLAND, 3
-	clearflag FLAG_0x07C
+	clearflag FLAG_HIDE_TWO_ISLAND_BEAUTY
 	return
 
 EventScript_167606:: @ 8167606
 	setvar VAR_MAP_SCENE_TWO_ISLAND, 4
-	clearflag FLAG_0x07D
+	clearflag FLAG_HIDE_TWO_ISLAND_SUPER_NERD
 	return
 
 TwoIsland_EventScript_16760F:: @ 816760F

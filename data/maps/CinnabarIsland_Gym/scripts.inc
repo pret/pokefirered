@@ -71,7 +71,7 @@ EventScript_16DA06:: @ 816DA06
 	setflag FLAG_BADGE07_GET
 	setrespawn SPAWN_CINNABAR_ISLAND
 	setvar VAR_MAP_SCENE_CINNABAR_ISLAND, 1
-	clearflag FLAG_0x062
+	clearflag FLAG_HIDE_CINNABAR_BILL
 	setvar VAR_0x8008, 7
 	call EventScript_1A6B18
 	goto EventScript_16DA34

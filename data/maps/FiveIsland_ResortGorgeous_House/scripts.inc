@@ -8,7 +8,7 @@ FiveIsland_ResortGorgeous_House_EventScript_171EBE:: @ 8171EBE
 	special sub_8112364
 	lock
 	faceplayer
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	goto_if_eq EventScript_172043
 	compare_var_to_value VAR_STORAGE_UNKNOWN, 65535
 	goto_if_eq EventScript_171F0B
@@ -65,7 +65,7 @@ EventScript_171F34:: @ 8171F34
 	giveitem VAR_0x403B
 	compare_var_to_value VAR_RESULT, 0
 	goto_if_eq EventScript_172025
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	setvar VAR_STORAGE_UNKNOWN, 0
 	release
 	end
@@ -103,7 +103,7 @@ EventScript_172025:: @ 8172025
 	msgbox gUnknown_81A45E8
 	textcolor 1
 	msgbox gUnknown_81A461B
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	setvar VAR_STORAGE_UNKNOWN, 0
 	release
 	end

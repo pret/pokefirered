@@ -35,7 +35,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_EventScript_1677E5",
-      "flag": "FLAG_0x07E"
+      "flag": "FLAG_HIDE_THREE_ISLAND_ANTIBIKERS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_MAN",
@@ -48,7 +48,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_EventScript_167989",
-      "flag": "FLAG_0x07E"
+      "flag": "FLAG_HIDE_THREE_ISLAND_ANTIBIKERS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_BIKER",
@@ -74,7 +74,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_EventScript_1677D8",
-      "flag": "FLAG_0x079"
+      "flag": "FLAG_HIDE_THREE_ISLAND_BIKERS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_BIKER",
@@ -87,7 +87,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_EventScript_1677D8",
-      "flag": "FLAG_0x079"
+      "flag": "FLAG_HIDE_THREE_ISLAND_BIKERS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_BIKER",
@@ -100,7 +100,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_EventScript_1677D8",
-      "flag": "FLAG_0x079"
+      "flag": "FLAG_HIDE_THREE_ISLAND_BIKERS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_BIKER",
@@ -113,7 +113,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_EventScript_1677D8",
-      "flag": "FLAG_0x079"
+      "flag": "FLAG_HIDE_THREE_ISLAND_BIKERS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_BIKER",
@@ -126,7 +126,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_EventScript_1677D8",
-      "flag": "FLAG_0x079"
+      "flag": "FLAG_HIDE_THREE_ISLAND_BIKERS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
@@ -139,7 +139,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_EventScript_1BDF13",
-      "flag": "FLAG_0x012"
+      "flag": "FLAG_TEMP_12"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -204,7 +204,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_EventScript_167CA5",
-      "flag": "FLAG_0x079"
+      "flag": "FLAG_HIDE_THREE_ISLAND_BIKERS"
     }
   ],
   "warp_events": [

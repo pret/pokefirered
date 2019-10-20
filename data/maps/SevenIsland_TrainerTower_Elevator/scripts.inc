@@ -6,7 +6,7 @@ SevenIsland_TrainerTower_Elevator_MapScripts:: @ 8164AF8
 SevenIsland_TrainerTower_Elevator_EventScript_164B03:: @ 8164B03
 	lockall
 	setvar VAR_0x8004, 6
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	call_if 0, EventScript_1A7AB9
 	copyvar VAR_0x8005, VAR_0x403A
 	special sub_80CB580
@@ -68,7 +68,7 @@ EventScript_164BD8:: @ 8164BD8
 	waitse
 	special sub_80CB498
 	waitstate
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	return
 
 Movement_164BE5:: @ 8164BE5

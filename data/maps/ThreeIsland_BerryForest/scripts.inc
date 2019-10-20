@@ -36,9 +36,9 @@ ThreeIsland_BerryForest_EventScript_163C83:: @ 8163C83
 	msgbox gUnknown_817AF3B
 	closemessage
 	setflag FLAG_0x2A3
-	setflag FLAG_0x07A
+	setflag FLAG_HIDE_LOSTELLE_IN_BERRY_FOREST
 	setvar VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 2
-	clearflag FLAG_0x075
+	clearflag FLAG_HIDE_TWO_ISLAND_GAME_CORNER_LOSTELLE
 	warp MAP_TWO_ISLAND_JOYFUL_GAME_CORNER, 255, 6, 6
 	waitstate
 	release

@@ -24,7 +24,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "0x0",
-      "flag": "FLAG_0x046"
+      "flag": "FLAG_HIDE_SEAFOAM_B3F_BOULDER_1"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
@@ -37,7 +37,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "0x0",
-      "flag": "FLAG_0x047"
+      "flag": "FLAG_HIDE_SEAFOAM_B3F_BOULDER_2"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
@@ -50,7 +50,7 @@
       "trainer_type": 77,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SeafoamIslands_B3F_EventScript_1BE11D",
-      "flag": "FLAG_0x04A"
+      "flag": "FLAG_HIDE_SEAFOAM_B3F_BOULDER_5"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
@@ -63,7 +63,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SeafoamIslands_B3F_EventScript_1BE11D",
-      "flag": "FLAG_0x04B"
+      "flag": "FLAG_HIDE_SEAFOAM_B3F_BOULDER_6"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
@@ -76,7 +76,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SeafoamIslands_B3F_EventScript_1BE11D",
-      "flag": "FLAG_0x049"
+      "flag": "FLAG_HIDE_SEAFOAM_B3F_BOULDER_4"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
@@ -89,7 +89,7 @@
       "trainer_type": 76,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SeafoamIslands_B3F_EventScript_1BE11D",
-      "flag": "FLAG_0x048"
+      "flag": "FLAG_HIDE_SEAFOAM_B3F_BOULDER_3"
     }
   ],
   "warp_events": [

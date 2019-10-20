@@ -6,7 +6,7 @@ RocketHideout_Elevator_EventScript_1614D9:: @ 81614D9
 	checkflag FLAG_0x2A5
 	goto_if 0, EventScript_16161B
 	setvar VAR_0x8004, 2
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	call_if 0, EventScript_1A7AB9
 	copyvar VAR_0x8005, VAR_0x403A
 	special sub_80CB580
@@ -97,7 +97,7 @@ EventScript_16160E:: @ 816160E
 	waitse
 	special sub_80CB498
 	waitstate
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	return
 
 EventScript_16161B:: @ 816161B

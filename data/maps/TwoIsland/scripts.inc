@@ -209,9 +209,7 @@ TwoIsland_EventScript_167755:: @ 8167755
 TwoIsland_EventScript_16775E:: @ 816775E
 	lock
 	faceplayer
-	setvar VAR_0x8004, 10
-	setvar VAR_0x8005, 4
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_BRUNO, 4
 	msgbox gUnknown_8181E47
 	release
 	end

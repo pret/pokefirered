@@ -8,22 +8,17 @@ CeladonCity_Gym_EventScript_16D061:: @ 816D061
 	trainerbattle 1, TRAINER_LEADER_ERIKA, 0, Text_197114, Text_197260, EventScript_16D0A0
 	checkflag FLAG_0x293
 	goto_if 0, EventScript_16D0C6
-	setvar VAR_0x8004, 5
-	setvar VAR_0x8005, 4
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_ERIKA, 4
 	msgbox gUnknown_81972B8
 	release
 	end
 
 EventScript_16D0A0:: @ 816D0A0
-	setvar VAR_0x8004, 5
-	setvar VAR_0x8005, 1
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_ERIKA, 1
 	clearflag FLAG_HIDE_FAME_CHECKER_ERIKA_JOURNALS
-	setflag FLAG_0x4B3
+	setflag FLAG_DEFEATED_ERIKA
 	setflag FLAG_BADGE04_GET
-	setvar VAR_0x8008, 4
-	call EventScript_1A6B18
+	set_gym_trainers 4
 	goto EventScript_16D0C6
 	end
 
@@ -51,9 +46,7 @@ CeladonCity_Gym_EventScript_16D111:: @ 816D111
 
 CeladonCity_Gym_EventScript_16D128:: @ 816D128
 	trainerbattle 0, TRAINER_LASS_LISA, 0, Text_1976C5, Text_1976FF
-	setvar VAR_0x8004, 5
-	setvar VAR_0x8005, 2
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_ERIKA, 2
 	msgbox gUnknown_8197708, 6
 	end
 
@@ -69,9 +62,7 @@ CeladonCity_Gym_EventScript_16D163:: @ 816D163
 
 CeladonCity_Gym_EventScript_16D17A:: @ 816D17A
 	trainerbattle 0, TRAINER_BEAUTY_TAMIA, 0, Text_19760B, Text_197660
-	setvar VAR_0x8004, 5
-	setvar VAR_0x8005, 3
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_ERIKA, 3
 	msgbox gUnknown_8197664, 6
 	end
 

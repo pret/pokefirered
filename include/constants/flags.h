@@ -1223,19 +1223,19 @@
 #define FLAG_0x4AF               0x4AF
 
 // Boss clear flags
-#define FLAG_0x4B0               0x4B0
-#define FLAG_0x4B1               0x4B1
-#define FLAG_0x4B2               0x4B2
-#define FLAG_0x4B3               0x4B3
-#define FLAG_0x4B4               0x4B4
-#define FLAG_0x4B5               0x4B5
-#define FLAG_0x4B6               0x4B6
-#define FLAG_0x4B7               0x4B7
-#define FLAG_0x4B8               0x4B8
-#define FLAG_0x4B9               0x4B9
-#define FLAG_0x4BA               0x4BA
-#define FLAG_0x4BB               0x4BB
-#define FLAG_0x4BC               0x4BC
+#define FLAG_DEFEATED_BROCK           0x4B0
+#define FLAG_DEFEATED_MISTY           0x4B1
+#define FLAG_DEFEATED_LT_SURGE        0x4B2
+#define FLAG_DEFEATED_ERIKA           0x4B3
+#define FLAG_DEFEATED_KOGA            0x4B4
+#define FLAG_DEFEATED_SABRINA         0x4B5
+#define FLAG_DEFEATED_BLAINE          0x4B6
+#define FLAG_DEFEATED_LEADER_GIOVANNI 0x4B7
+#define FLAG_DEFEATED_LORELEI         0x4B8
+#define FLAG_DEFEATED_BRUNO           0x4B9
+#define FLAG_DEFEATED_AGATHA          0x4BA
+#define FLAG_DEFEATED_LANCE           0x4BB
+#define FLAG_DEFEATED_RIVAL           0x4BC
 
 // Unused?
 #define FLAG_0x4BD               0x4BD

@@ -149,9 +149,7 @@ FourIsland_EventScript_167E2E:: @ 8167E2E
 	end
 
 EventScript_167E43:: @ 8167E43
-	setvar VAR_0x8004, 9
-	setvar VAR_0x8005, 5
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_LORELEI, 5
 	msgbox gUnknown_8182A75
 	release
 	end
@@ -159,9 +157,7 @@ EventScript_167E43:: @ 8167E43
 FourIsland_EventScript_167E5A:: @ 8167E5A
 	lock
 	faceplayer
-	setvar VAR_0x8004, 9
-	setvar VAR_0x8005, 4
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_LORELEI, 4
 	msgbox gUnknown_8182CE3
 	release
 	end

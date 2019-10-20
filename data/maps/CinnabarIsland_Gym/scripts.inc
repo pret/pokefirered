@@ -3,7 +3,7 @@ CinnabarIsland_Gym_MapScripts:: @ 816D94B
 	.byte 0
 
 CinnabarIsland_Gym_MapScript1_16D951:: @ 816D951
-	checkflag FLAG_0x4B6
+	checkflag FLAG_DEFEATED_BLAINE
 	goto_if_eq EventScript_16D991
 	checkflag FLAG_0x265
 	call_if 1, EventScript_16D9B0
@@ -64,16 +64,13 @@ CinnabarIsland_Gym_EventScript_16D9D4:: @ 816D9D4
 	end
 
 EventScript_16DA06:: @ 816DA06
-	setvar VAR_0x8004, 8
-	setvar VAR_0x8005, 1
-	special SetFlavorTextFlagFromSpecialVars
-	setflag FLAG_0x4B6
+	famechecker FAMECHECKER_BLAINE, 1
+	setflag FLAG_DEFEATED_BLAINE
 	setflag FLAG_BADGE07_GET
 	setrespawn SPAWN_CINNABAR_ISLAND
 	setvar VAR_MAP_SCENE_CINNABAR_ISLAND, 1
 	clearflag FLAG_HIDE_CINNABAR_BILL
-	setvar VAR_0x8008, 7
-	call EventScript_1A6B18
+	set_gym_trainers 7
 	goto EventScript_16DA34
 	end
 
@@ -116,9 +113,7 @@ EventScript_16DABC:: @ 816DABC
 
 CinnabarIsland_Gym_EventScript_16DAC2:: @ 816DAC2
 	trainerbattle 2, TRAINER_SUPER_NERD_DEREK, 0, Text_1999B7, Text_1999DB, EventScript_16DAEA
-	setvar VAR_0x8004, 8
-	setvar VAR_0x8005, 2
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_BLAINE, 2
 	msgbox gUnknown_81999DF, 6
 	end
 
@@ -195,7 +190,7 @@ EventScript_16DBA5:: @ 816DBA5
 CinnabarIsland_Gym_EventScript_16DBAB:: @ 816DBAB
 	lock
 	faceplayer
-	checkflag FLAG_0x4B6
+	checkflag FLAG_DEFEATED_BLAINE
 	goto_if_eq EventScript_16DBC0
 	msgbox gUnknown_8199B81
 	release

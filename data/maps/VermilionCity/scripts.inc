@@ -277,9 +277,7 @@ VermilionCity_EventScript_166C65:: @ 8166C65
 
 VermilionCity_EventScript_166C6E:: @ 8166C6E
 	lockall
-	setvar VAR_0x8004, 4
-	setvar VAR_0x8005, 0
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_LTSURGE, 0
 	msgbox gUnknown_817F9CC
 	releaseall
 	end

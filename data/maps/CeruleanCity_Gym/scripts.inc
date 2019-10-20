@@ -13,14 +13,11 @@ CeruleanCity_Gym_EventScript_16AAA1:: @ 816AAA1
 	end
 
 EventScript_16AAD3:: @ 816AAD3
-	setvar VAR_0x8004, 3
-	setvar VAR_0x8005, 1
-	special SetFlavorTextFlagFromSpecialVars
-	setflag FLAG_0x4B1
+	famechecker FAMECHECKER_MISTY, 1
+	setflag FLAG_DEFEATED_MISTY
 	setflag FLAG_BADGE02_GET
 	setrespawn SPAWN_CERULEAN_CITY
-	setvar VAR_0x8008, 2
-	call EventScript_1A6B18
+	set_gym_trainers 2
 	goto EventScript_16AAF9
 	end
 
@@ -48,16 +45,14 @@ CeruleanCity_Gym_EventScript_16AB44:: @ 816AB44
 
 CeruleanCity_Gym_EventScript_16AB5B:: @ 816AB5B
 	trainerbattle 0, TRAINER_SWIMMER_MALE_LUIS, 0, Text_192524, Text_192547
-	setvar VAR_0x8004, 3
-	setvar VAR_0x8005, 2
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_MISTY, 2
 	msgbox gUnknown_8192556, 6
 	end
 
 CeruleanCity_Gym_EventScript_16AB7F:: @ 816AB7F
 	lock
 	faceplayer
-	checkflag FLAG_0x4B1
+	checkflag FLAG_DEFEATED_MISTY
 	goto_if_eq EventScript_16AB94
 	msgbox gUnknown_81925AC
 	release

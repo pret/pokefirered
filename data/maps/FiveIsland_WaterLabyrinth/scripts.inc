@@ -21,9 +21,7 @@ FiveIsland_WaterLabyrinth_EventScript_16884E:: @ 816884E
 	end
 
 EventScript_168895:: @ 8168895
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 2
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_DAISY, 2
 	msgbox gUnknown_818AA0C
 	release
 	end

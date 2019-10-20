@@ -239,25 +239,19 @@ EventScript_170F35:: @ 8170F35
 	goto_if_eq EventScript_170F6D
 	compare_var_to_value VAR_RESULT, 1
 	goto_if_eq EventScript_170F84
-	setvar VAR_0x8004, 13
-	setvar VAR_0x8005, 5
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_BILL, 5
 	msgbox gUnknown_81A2076
 	release
 	end
 
 EventScript_170F6D:: @ 8170F6D
-	setvar VAR_0x8004, 13
-	setvar VAR_0x8005, 3
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_BILL, 3
 	msgbox gUnknown_81A1EF3
 	release
 	end
 
 EventScript_170F84:: @ 8170F84
-	setvar VAR_0x8004, 13
-	setvar VAR_0x8005, 4
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_BILL, 4
 	msgbox gUnknown_81A1F7C
 	release
 	end

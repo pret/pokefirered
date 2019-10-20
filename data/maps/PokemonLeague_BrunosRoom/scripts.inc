@@ -11,7 +11,7 @@ PokemonLeague_BrunosRoom_MapScript1_16269A:: @ 816269A
 	end
 
 PokemonLeague_BrunosRoom_MapScript2_1626A5:: @ 81626A5
-	checkflag FLAG_0x4B9
+	checkflag FLAG_DEFEATED_BRUNO
 	call_if 1, EventScript_1626C0
 	compare_var_to_value VAR_MAP_SCENE_POKEMON_LEAGUE, 2
 	call_if 1, EventScript_1626BA
@@ -50,14 +50,10 @@ PokemonLeague_BrunosRoom_EventScript_1626EC:: @ 81626EC
 	setvar VAR_0x8004, 10
 	setvar VAR_0x8005, 2
 	special UpdatePickStateFromSpecialVar8005
-	checkflag FLAG_0x4B9
+	checkflag FLAG_DEFEATED_BRUNO
 	goto_if_eq EventScript_162779
-	setvar VAR_0x8004, 10
-	setvar VAR_0x8005, 0
-	special SetFlavorTextFlagFromSpecialVars
-	setvar VAR_0x8004, 10
-	setvar VAR_0x8005, 1
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_BRUNO, 0
+	famechecker FAMECHECKER_BRUNO, 1
 	checkflag FLAG_SYS_GAME_CLEAR
 	call_if 0, EventScript_162751
 	checkflag FLAG_SYS_GAME_CLEAR
@@ -105,7 +101,7 @@ EventScript_162779:: @ 8162779
 	end
 
 EventScript_1627B0:: @ 81627B0
-	setflag FLAG_0x4B9
+	setflag FLAG_DEFEATED_BRUNO
 	call EventScript_1A7506
 	msgbox gUnknown_8178420
 	closemessage

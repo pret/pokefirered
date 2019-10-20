@@ -713,9 +713,7 @@ EventScript_16961E:: @ 816961E
 	additem ITEM_POKE_BALL, 5
 	giveitemfanfaremsg gUnknown_818E6B3, ITEM_POKE_BALL, 5
 	msgbox gUnknown_818E6D0
-	setvar VAR_0x8004, 0
-	setvar VAR_0x8005, 1
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_OAK, 1
 	msgbox gUnknown_818E784
 	msgbox gUnknown_818DEC8
 	compare_var_to_value VAR_FACING, 2
@@ -1353,9 +1351,7 @@ PalletTown_ProfessorOaksLab_EventScript_169DEE:: @ 8169DEE
 	end
 
 EventScript_169E03:: @ 8169E03
-	setvar VAR_0x8004, 0
-	setvar VAR_0x8005, 5
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_OAK, 5
 	msgbox gUnknown_818ED15
 	release
 	end
@@ -1370,9 +1366,7 @@ PalletTown_ProfessorOaksLab_EventScript_169E1A:: @ 8169E1A
 	end
 
 EventScript_169E2F:: @ 8169E2F
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 0
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_DAISY, 0
 	msgbox gUnknown_818EC0B
 	release
 	end
@@ -1380,9 +1374,7 @@ EventScript_169E2F:: @ 8169E2F
 PalletTown_ProfessorOaksLab_EventScript_169E46:: @ 8169E46
 	lock
 	faceplayer
-	setvar VAR_0x8004, 0
-	setvar VAR_0x8005, 2
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_OAK, 2
 	msgbox gUnknown_818ED81
 	release
 	end

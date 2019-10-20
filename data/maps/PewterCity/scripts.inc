@@ -1342,9 +1342,7 @@ Movement_16621C:: @ 816621C
 PewterCity_EventScript_16622B:: @ 816622B
 	lock
 	faceplayer
-	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, 2
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_BROCK, 2
 	msgbox gUnknown_817E49F
 	release
 	end
@@ -1378,9 +1376,7 @@ PewterCity_EventScript_16627F:: @ 816627F
 
 PewterCity_EventScript_166288:: @ 8166288
 	lockall
-	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, 0
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_BROCK, 0
 	msgbox gUnknown_817E7DE
 	releaseall
 	end

@@ -96,9 +96,7 @@ SaffronCity_EventScript_16742C:: @ 816742C
 
 SaffronCity_EventScript_167435:: @ 8167435
 	lockall
-	setvar VAR_0x8004, 7
-	setvar VAR_0x8005, 0
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_SABRINA, 0
 	msgbox gUnknown_8181362
 	releaseall
 	end

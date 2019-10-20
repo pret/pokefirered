@@ -13,17 +13,12 @@ SaffronCity_Gym_EventScript_16EDD8:: @ 816EDD8
 	end
 
 EventScript_16EE0A:: @ 816EE0A
-	setvar VAR_0x8004, 7
-	setvar VAR_0x8005, 2
-	special SetFlavorTextFlagFromSpecialVars
-	setvar VAR_0x8004, 7
-	setvar VAR_0x8005, 3
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_SABRINA, 2
+	famechecker FAMECHECKER_SABRINA, 3
 	clearflag FLAG_HIDE_SAFFRON_CITY_POKECENTER_SABRINA_JOURNALS
-	setflag FLAG_0x4B5
+	setflag FLAG_DEFEATED_SABRINA
 	setflag FLAG_BADGE06_GET
-	setvar VAR_0x8008, 6
-	call EventScript_1A6B18
+	set_gym_trainers 6
 	goto EventScript_16EE3D
 	end
 
@@ -51,9 +46,7 @@ SaffronCity_Gym_EventScript_16EE88:: @ 816EE88
 
 SaffronCity_Gym_EventScript_16EE9F:: @ 816EE9F
 	trainerbattle 0, TRAINER_PSYCHIC_TYRON, 0, Text_19BA45, Text_19BA9E
-	setvar VAR_0x8004, 7
-	setvar VAR_0x8005, 5
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_SABRINA, 5
 	msgbox gUnknown_819BAB4, 6
 	end
 
@@ -85,7 +78,7 @@ SaffronCity_Gym_EventScript_16EF1F:: @ 816EF1F
 SaffronCity_Gym_EventScript_16EF36:: @ 816EF36
 	lock
 	faceplayer
-	checkflag FLAG_0x4B5
+	checkflag FLAG_DEFEATED_SABRINA
 	goto_if_eq EventScript_16EF4B
 	msgbox gUnknown_819BCF6
 	release

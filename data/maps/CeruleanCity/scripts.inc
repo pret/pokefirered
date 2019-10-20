@@ -49,9 +49,7 @@ EventScript_1664CC:: @ 81664CC
 	call_if 1, EventScript_16658D
 	compare_var_to_value VAR_STARTER_MON, 0
 	call_if 1, EventScript_166598
-	setvar VAR_0x8004, 13
-	setvar VAR_0x8005, 0
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_BILL, 0
 	msgbox gUnknown_817EB95
 	closemessage
 	playbgm MUS_RIVAL2, 0
@@ -375,9 +373,7 @@ CeruleanCity_EventScript_16684A:: @ 816684A
 
 CeruleanCity_EventScript_166853:: @ 8166853
 	lockall
-	setvar VAR_0x8004, 3
-	setvar VAR_0x8005, 0
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_MISTY, 0
 	msgbox gUnknown_817F4EF
 	releaseall
 	end

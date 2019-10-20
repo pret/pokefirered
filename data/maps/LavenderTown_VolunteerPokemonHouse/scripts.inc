@@ -30,9 +30,7 @@ EventScript_16B1A0:: @ 816B1A0
 LavenderTown_VolunteerPokemonHouse_EventScript_16B1AA:: @ 816B1AA
 	lock
 	faceplayer
-	setvar VAR_0x8004, 14
-	setvar VAR_0x8005, 0
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_MRFUJI, 0
 	msgbox gUnknown_8193652
 	release
 	end
@@ -77,9 +75,7 @@ LavenderTown_VolunteerPokemonHouse_EventScript_16B1FE:: @ 816B1FE
 
 LavenderTown_VolunteerPokemonHouse_EventScript_16B211:: @ 816B211
 	lockall
-	setvar VAR_0x8004, 14
-	setvar VAR_0x8005, 2
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_MRFUJI, 2
 	msgbox gUnknown_81938A0
 	releaseall
 	end

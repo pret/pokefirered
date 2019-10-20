@@ -12,7 +12,7 @@ PokemonLeague_LoreleisRoom_MapScript1_162586:: @ 8162586
 	end
 
 PokemonLeague_LoreleisRoom_MapScript2_162591:: @ 8162591
-	checkflag FLAG_0x4B8
+	checkflag FLAG_DEFEATED_LORELEI
 	call_if 1, EventScript_1625AC
 	compare_var_to_value VAR_MAP_SCENE_POKEMON_LEAGUE, 1
 	call_if 1, EventScript_1625A6
@@ -55,14 +55,10 @@ PokemonLeague_LoreleisRoom_EventScript_1625DC:: @ 81625DC
 	setvar VAR_0x8004, 9
 	setvar VAR_0x8005, 2
 	special UpdatePickStateFromSpecialVar8005
-	checkflag FLAG_0x4B8
+	checkflag FLAG_DEFEATED_LORELEI
 	goto_if_eq EventScript_162669
-	setvar VAR_0x8004, 9
-	setvar VAR_0x8005, 0
-	special SetFlavorTextFlagFromSpecialVars
-	setvar VAR_0x8004, 9
-	setvar VAR_0x8005, 1
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_LORELEI, 0
+	famechecker FAMECHECKER_LORELEI, 1
 	checkflag FLAG_0x844
 	call_if 0, EventScript_162641
 	checkflag FLAG_0x844
@@ -101,7 +97,7 @@ EventScript_162669:: @ 8162669
 	end
 
 EventScript_162673:: @ 8162673
-	setflag FLAG_0x4B8
+	setflag FLAG_DEFEATED_LORELEI
 	call EventScript_1A7506
 	msgbox gUnknown_81781B0
 	release

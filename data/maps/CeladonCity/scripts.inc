@@ -77,9 +77,7 @@ CeladonCity_EventScript_166D27:: @ 8166D27
 
 CeladonCity_EventScript_166D30:: @ 8166D30
 	lockall
-	setvar VAR_0x8004, 5
-	setvar VAR_0x8005, 0
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_ERIKA, 0
 	msgbox gUnknown_81801A2
 	releaseall
 	end

@@ -37,9 +37,7 @@ FuchsiaCity_EventScript_166DB8:: @ 8166DB8
 FuchsiaCity_EventScript_166DC1:: @ 8166DC1
 	lock
 	faceplayer
-	setvar VAR_0x8004, 6
-	setvar VAR_0x8005, 3
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_KOGA, 3
 	msgbox gUnknown_8180ABD
 	release
 	end
@@ -66,9 +64,7 @@ EventScript_166DFE:: @ 8166DFE
 
 FuchsiaCity_EventScript_166E07:: @ 8166E07
 	lockall
-	setvar VAR_0x8004, 6
-	setvar VAR_0x8005, 0
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_KOGA, 0
 	msgbox gUnknown_8180768
 	releaseall
 	end

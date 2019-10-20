@@ -13,14 +13,11 @@ FuchsiaCity_Gym_EventScript_16D54E:: @ 816D54E
 	end
 
 EventScript_16D580:: @ 816D580
-	setvar VAR_0x8004, 6
-	setvar VAR_0x8005, 1
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_KOGA, 1
 	clearflag FLAG_HIDE_FAME_CHECKER_KOGA_JOURNAL
-	setflag FLAG_0x4B4
+	setflag FLAG_DEFEATED_KOGA
 	setflag FLAG_BADGE05_GET
-	setvar VAR_0x8008, 5
-	call EventScript_1A6B18
+	set_gym_trainers 5
 	goto EventScript_16D5A6
 	end
 
@@ -53,9 +50,7 @@ FuchsiaCity_Gym_EventScript_16D608:: @ 816D608
 
 FuchsiaCity_Gym_EventScript_16D61F:: @ 816D61F
 	trainerbattle 0, TRAINER_JUGGLER_KIRK, 0, Text_19871E, Text_198779
-	setvar VAR_0x8004, 6
-	setvar VAR_0x8005, 2
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_KOGA, 2
 	msgbox gUnknown_8198787, 6
 	end
 
@@ -77,7 +72,7 @@ FuchsiaCity_Gym_EventScript_16D671:: @ 816D671
 FuchsiaCity_Gym_EventScript_16D688:: @ 816D688
 	lock
 	faceplayer
-	checkflag FLAG_0x4B4
+	checkflag FLAG_DEFEATED_KOGA
 	goto_if_eq EventScript_16D69D
 	msgbox gUnknown_8198A5E
 	release

@@ -343,9 +343,7 @@ Movement_1671ED:: @ 81671ED
 CinnabarIsland_EventScript_1671EF:: @ 81671EF
 	lock
 	faceplayer
-	setvar VAR_0x8004, 8
-	setvar VAR_0x8005, 3
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_BLAINE, 3
 	msgbox gUnknown_8180B34
 	release
 	end
@@ -364,9 +362,7 @@ CinnabarIsland_EventScript_16721A:: @ 816721A
 
 CinnabarIsland_EventScript_167223:: @ 8167223
 	lockall
-	setvar VAR_0x8004, 8
-	setvar VAR_0x8005, 0
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_BLAINE, 0
 	msgbox gUnknown_8180C4A
 	releaseall
 	end

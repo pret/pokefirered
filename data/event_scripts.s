@@ -13,6 +13,7 @@
 #include "constants/field_effects.h"
 #include "constants/trainers.h"
 #include "constants/map_objects.h"
+#include "constants/fame_checker.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 
@@ -1565,11 +1566,11 @@ gUnknown_81A654B:: @ 81A654B
 	end
 
 EventScript_1A6551:: @ 81A6551
-	clearflag FLAG_0x4B8
-	clearflag FLAG_0x4B9
-	clearflag FLAG_0x4BA
-	clearflag FLAG_0x4BB
-	clearflag FLAG_0x4BC
+	clearflag FLAG_DEFEATED_LORELEI
+	clearflag FLAG_DEFEATED_BRUNO
+	clearflag FLAG_DEFEATED_AGATHA
+	clearflag FLAG_DEFEATED_LANCE
+	clearflag FLAG_DEFEATED_RIVAL
 	cleartrainerflag TRAINER_CHAMPION_TERRY
 	cleartrainerflag TRAINER_CHAMPION_TERRY_2
 	cleartrainerflag TRAINER_CHAMPION_TERRY_3
@@ -4090,9 +4091,9 @@ gUnknown_81A8D97:: @ 81A8D97
 	textcolor 1
 	msgbox Text_1A5E89
 	call EventScript_1A65CE
-	checkflag FLAG_0x4B0
+	checkflag FLAG_DEFEATED_BROCK
 	call_if 0, EventScript_1A8DC6
-	checkflag FLAG_0x4B0
+	checkflag FLAG_DEFEATED_BROCK
 	call_if 1, EventScript_1A8DCF
 	applymovement VAR_LAST_TALKED, Movement_1A666C
 	waitmovement 0
@@ -7659,12 +7660,8 @@ Text_1ACD45:: @ 81ACD45
 ViridianCity_House2_EventScript_1ACD65:: @ 81ACD65
 	lock
 	faceplayer
-	setvar VAR_0x8004, 0
-	setvar VAR_0x8005, 3
-	special SetFlavorTextFlagFromSpecialVars
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 3
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_OAK, 3
+	famechecker FAMECHECKER_DAISY, 3
 	textcolor 3
 	msgbox gUnknown_81B1AB9
 	release
@@ -7673,12 +7670,8 @@ ViridianCity_House2_EventScript_1ACD65:: @ 81ACD65
 EventScript_1ACD8D:: @ 81ACD8D
 	lock
 	faceplayer
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 1
-	special SetFlavorTextFlagFromSpecialVars
-	setvar VAR_0x8004, 0
-	setvar VAR_0x8005, 4
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_DAISY, 1
+	famechecker FAMECHECKER_OAK, 4
 	textcolor 3
 	msgbox gUnknown_81B1AB9
 	release
@@ -7687,9 +7680,7 @@ EventScript_1ACD8D:: @ 81ACD8D
 EventScript_1ACDB5:: @ 81ACDB5
 	lock
 	faceplayer
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 4
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_DAISY, 4
 	textcolor 3
 	msgbox gUnknown_81B1AB9
 	release
@@ -7697,9 +7688,7 @@ EventScript_1ACDB5:: @ 81ACDB5
 
 FourIsland_PokemonCenter_1F_EventScript_1ACDD0:: @ 81ACDD0
 	lockall
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 5
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_DAISY, 5
 	textcolor 3
 	msgbox gUnknown_81B1B3D
 	releaseall
@@ -7708,9 +7697,7 @@ FourIsland_PokemonCenter_1F_EventScript_1ACDD0:: @ 81ACDD0
 Route4_EventScript_1ACDEA:: @ 81ACDEA
 	lock
 	faceplayer
-	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, 3
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_BROCK, 3
 	msgbox Text_183D26
 	release
 	end
@@ -7718,18 +7705,14 @@ Route4_EventScript_1ACDEA:: @ 81ACDEA
 MtMoon_1F_EventScript_1ACE03:: @ 81ACE03
 	lock
 	faceplayer
-	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, 4
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_BROCK, 4
 	msgbox Text_172B00
 	release
 	end
 
 PewterCity_Museum_1F_EventScript_1ACE1C:: @ 81ACE1C
 	lockall
-	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, 5
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_BROCK, 5
 	textcolor 3
 	msgbox gUnknown_81B146A
 	releaseall
@@ -7738,9 +7721,7 @@ PewterCity_Museum_1F_EventScript_1ACE1C:: @ 81ACE1C
 Route20_EventScript_1ACE36:: @ 81ACE36
 	lock
 	faceplayer
-	setvar VAR_0x8004, 3
-	setvar VAR_0x8005, 3
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_MISTY, 3
 	msgbox Text_1882E1
 	release
 	end
@@ -7748,9 +7729,7 @@ Route20_EventScript_1ACE36:: @ 81ACE36
 Route25_EventScript_1ACE4F:: @ 81ACE4F
 	lock
 	faceplayer
-	setvar VAR_0x8004, 3
-	setvar VAR_0x8005, 4
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_MISTY, 4
 	msgbox Text_189569
 	release
 	end
@@ -7758,9 +7737,7 @@ Route25_EventScript_1ACE4F:: @ 81ACE4F
 CeruleanCity_PokemonCenter_1F_EventScript_1ACE68:: @ 81ACE68
 	lock
 	faceplayer
-	setvar VAR_0x8004, 3
-	setvar VAR_0x8005, 5
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_MISTY, 5
 	textcolor 3
 	msgbox gUnknown_81B14E8
 	release
@@ -7768,9 +7745,7 @@ CeruleanCity_PokemonCenter_1F_EventScript_1ACE68:: @ 81ACE68
 
 VermilionCity_PokemonCenter_1F_EventScript_1ACE83:: @ 81ACE83
 	lockall
-	setvar VAR_0x8004, 4
-	setvar VAR_0x8005, 5
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_LTSURGE, 5
 	textcolor 3
 	msgbox gUnknown_81B1558
 	releaseall
@@ -7779,9 +7754,7 @@ VermilionCity_PokemonCenter_1F_EventScript_1ACE83:: @ 81ACE83
 CeladonCity_Condominiums_2F_EventScript_1ACE9D:: @ 81ACE9D
 	lock
 	faceplayer
-	setvar VAR_0x8004, 5
-	setvar VAR_0x8005, 5
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_ERIKA, 5
 	textcolor 3
 	msgbox gUnknown_81B161B
 	release
@@ -7790,9 +7763,7 @@ CeladonCity_Condominiums_2F_EventScript_1ACE9D:: @ 81ACE9D
 FuchsiaCity_Building1_EventScript_1ACEB8:: @ 81ACEB8
 	lock
 	faceplayer
-	setvar VAR_0x8004, 6
-	setvar VAR_0x8005, 4
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_KOGA, 4
 	textcolor 3
 	msgbox gUnknown_81B16A8
 	release
@@ -7801,9 +7772,7 @@ FuchsiaCity_Building1_EventScript_1ACEB8:: @ 81ACEB8
 SafariZone_Building3_EventScript_1ACED3:: @ 81ACED3
 	lock
 	faceplayer
-	setvar VAR_0x8004, 6
-	setvar VAR_0x8005, 5
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_KOGA, 5
 	msgbox Text_177C47
 	release
 	end
@@ -7811,9 +7780,7 @@ SafariZone_Building3_EventScript_1ACED3:: @ 81ACED3
 SaffronCity_PokemonCenter_1F_EventScript_1ACEEC:: @ 81ACEEC
 	lock
 	faceplayer
-	setvar VAR_0x8004, 7
-	setvar VAR_0x8005, 4
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_SABRINA, 4
 	textcolor 3
 	msgbox gUnknown_81B1753
 	release
@@ -7821,21 +7788,15 @@ SaffronCity_PokemonCenter_1F_EventScript_1ACEEC:: @ 81ACEEC
 
 CinnabarIsland_Gym_EventScript_1ACF07:: @ 81ACF07
 	lockall
-	setvar VAR_0x8004, 8
-	setvar VAR_0x8005, 4
-	special SetFlavorTextFlagFromSpecialVars
-	setvar VAR_0x8004, 14
-	setvar VAR_0x8005, 4
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_BLAINE, 4
+	famechecker FAMECHECKER_MRFUJI, 4
 	msgbox Text_199E8A
 	releaseall
 	end
 
 FiveIsland_ResortGorgeous_House_EventScript_1ACF2C:: @ 81ACF2C
 	lockall
-	setvar VAR_0x8004, 8
-	setvar VAR_0x8005, 5
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_BLAINE, 5
 	textcolor 3
 	msgbox gUnknown_81B17E9
 	releaseall
@@ -7844,9 +7805,7 @@ FiveIsland_ResortGorgeous_House_EventScript_1ACF2C:: @ 81ACF2C
 FourIsland_Mart_EventScript_1ACF46:: @ 81ACF46
 	lock
 	faceplayer
-	setvar VAR_0x8004, 9
-	setvar VAR_0x8005, 2
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_LORELEI, 2
 	msgbox Text_1A3A60
 	release
 	end
@@ -7854,9 +7813,7 @@ FourIsland_Mart_EventScript_1ACF46:: @ 81ACF46
 FiveIsland_PokemonCenter_1F_EventScript_1ACF5F:: @ 81ACF5F
 	lock
 	faceplayer
-	setvar VAR_0x8004, 9
-	setvar VAR_0x8005, 3
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_LORELEI, 3
 	textcolor 3
 	msgbox gUnknown_81B187F
 	release
@@ -7865,9 +7822,7 @@ FiveIsland_PokemonCenter_1F_EventScript_1ACF5F:: @ 81ACF5F
 SaffronCity_PokemonTrainerFanClub_EventScript_1ACF7A:: @ 81ACF7A
 	lock
 	faceplayer
-	setvar VAR_0x8004, 10
-	setvar VAR_0x8005, 2
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_BRUNO, 2
 	textcolor 3
 	msgbox gUnknown_81B1913
 	release
@@ -7876,9 +7831,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_1ACF7A:: @ 81ACF7A
 SevenIsland_SevaultCanyon_EventScript_1ACF95:: @ 81ACF95
 	lock
 	faceplayer
-	setvar VAR_0x8004, 10
-	setvar VAR_0x8005, 5
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_BRUNO, 5
 	msgbox Text_18CF4D
 	release
 	end
@@ -7886,12 +7839,8 @@ SevenIsland_SevaultCanyon_EventScript_1ACF95:: @ 81ACF95
 IndigoPlateau_PokemonCenter_1F_EventScript_1ACFAE:: @ 81ACFAE
 	lock
 	faceplayer
-	setvar VAR_0x8004, 11
-	setvar VAR_0x8005, 1
-	special SetFlavorTextFlagFromSpecialVars
-	setvar VAR_0x8004, 11
-	setvar VAR_0x8005, 2
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_AGATHA, 1
+	famechecker FAMECHECKER_AGATHA, 2
 	msgbox Text_19A9E7
 	release
 	end
@@ -7899,9 +7848,7 @@ IndigoPlateau_PokemonCenter_1F_EventScript_1ACFAE:: @ 81ACFAE
 SevenIsland_PokemonCenter_1F_EventScript_1ACFD4:: @ 81ACFD4
 	lock
 	faceplayer
-	setvar VAR_0x8004, 11
-	setvar VAR_0x8005, 3
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_AGATHA, 3
 	textcolor 3
 	msgbox gUnknown_81B19A8
 	release
@@ -7910,9 +7857,7 @@ SevenIsland_PokemonCenter_1F_EventScript_1ACFD4:: @ 81ACFD4
 SixIsland_Mart_EventScript_1ACFEF:: @ 81ACFEF
 	lock
 	faceplayer
-	setvar VAR_0x8004, 11
-	setvar VAR_0x8005, 5
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_AGATHA, 5
 	msgbox Text_1A41CA
 	release
 	end
@@ -7920,9 +7865,7 @@ SixIsland_Mart_EventScript_1ACFEF:: @ 81ACFEF
 EventScript_1AD008:: @ 81AD008
 	lock
 	faceplayer
-	setvar VAR_0x8004, 12
-	setvar VAR_0x8005, 0
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_LANCE, 0
 	msgbox gFameCheckerFlavorText_Lance0
 	release
 	end
@@ -7930,9 +7873,7 @@ EventScript_1AD008:: @ 81AD008
 EventScript_1AD021:: @ 81AD021
 	lock
 	faceplayer
-	setvar VAR_0x8004, 12
-	setvar VAR_0x8005, 1
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_LANCE, 1
 	msgbox Text_181569
 	release
 	end
@@ -7940,9 +7881,7 @@ EventScript_1AD021:: @ 81AD021
 SaffronCity_EventScript_1AD03A:: @ 81AD03A
 	lock
 	faceplayer
-	setvar VAR_0x8004, 12
-	setvar VAR_0x8005, 2
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_LANCE, 2
 	msgbox Text_181569
 	release
 	end
@@ -7950,9 +7889,7 @@ SaffronCity_EventScript_1AD03A:: @ 81AD03A
 CeladonCity_DepartmentStore_2F_EventScript_1AD053:: @ 81AD053
 	lock
 	faceplayer
-	setvar VAR_0x8004, 12
-	setvar VAR_0x8005, 3
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_LANCE, 3
 	msgbox Text_19566B
 	release
 	end
@@ -7960,9 +7897,7 @@ CeladonCity_DepartmentStore_2F_EventScript_1AD053:: @ 81AD053
 IndigoPlateau_PokemonCenter_1F_EventScript_1AD06C:: @ 81AD06C
 	lock
 	faceplayer
-	setvar VAR_0x8004, 12
-	setvar VAR_0x8005, 4
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_LANCE, 4
 	textcolor 3
 	msgbox gUnknown_81B1A31
 	release
@@ -7971,9 +7906,7 @@ IndigoPlateau_PokemonCenter_1F_EventScript_1AD06C:: @ 81AD06C
 IndigoPlateau_PokemonCenter_1F_EventScript_1AD087:: @ 81AD087
 	lock
 	faceplayer
-	setvar VAR_0x8004, 12
-	setvar VAR_0x8005, 5
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_LANCE, 5
 	msgbox Text_19AB16
 	release
 	end
@@ -7981,9 +7914,7 @@ IndigoPlateau_PokemonCenter_1F_EventScript_1AD087:: @ 81AD087
 LavenderTown_PokemonCenter_1F_EventScript_1AD0A0:: @ 81AD0A0
 	lock
 	faceplayer
-	setvar VAR_0x8004, 14
-	setvar VAR_0x8005, 3
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_MRFUJI, 3
 	msgbox Text_19358E
 	release
 	end
@@ -7991,9 +7922,7 @@ LavenderTown_PokemonCenter_1F_EventScript_1AD0A0:: @ 81AD0A0
 CinnabarIsland_PokemonCenter_1F_EventScript_1AD0B9:: @ 81AD0B9
 	lock
 	faceplayer
-	setvar VAR_0x8004, 14
-	setvar VAR_0x8005, 5
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_MRFUJI, 5
 	textcolor 3
 	msgbox gUnknown_81B1BD1
 	release
@@ -8002,18 +7931,15 @@ CinnabarIsland_PokemonCenter_1F_EventScript_1AD0B9:: @ 81AD0B9
 SilphCo_5F_EventScript_1AD0D4:: @ 81AD0D4
 	lock
 	faceplayer
-	setvar VAR_0x8004, 15
-	setvar VAR_0x8005, 1
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_GIOVANNI, 1
 	msgbox Text_175E99
 	release
 	end
+
 SilphCo_8F_EventScript_1AD0ED:: @ 81AD0ED
 	lock
 	faceplayer
-	setvar VAR_0x8004, 15
-	setvar VAR_0x8005, 2
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_GIOVANNI, 2
 	msgbox Text_176ACB
 	release
 	end

@@ -25,9 +25,7 @@ EventScript_16C36A:: @ 816C36A
 	end
 
 EventScript_16C374:: @ 816C374
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 4
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_DAISY, 4
 	setflag FLAG_0x2F8
 	msgbox gUnknown_8196188
 	release

@@ -110,9 +110,7 @@ PokemonTower_7F_EventScript_16363D:: @ 816363D
 	end
 
 EventScript_163658:: @ 8163658
-	setvar VAR_0x8004, 14
-	setvar VAR_0x8005, 1
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_MRFUJI, 1
 	msgbox gUnknown_817A477
 	closemessage
 	getplayerxy VAR_0x8004, VAR_0x8005

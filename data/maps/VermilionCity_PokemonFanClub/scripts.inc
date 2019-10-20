@@ -45,9 +45,7 @@ VermilionCity_PokemonFanClub_EventScript_16B4FC:: @ 816B4FC
 	end
 
 EventScript_16B511:: @ 816B511
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 1
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_DAISY, 1
 	msgbox gUnknown_8194960
 	release
 	end

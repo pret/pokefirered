@@ -19,9 +19,7 @@ EventScript_161311:: @ 8161311
 RocketHideout_B4F_EventScript_161317:: @ 8161317
 	lock
 	faceplayer
-	setvar VAR_0x8004, 15
-	setvar VAR_0x8005, 0
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_GIOVANNI, 0
 	message Text_175226
 	waitmessage
 	playbgm MUS_ROCKET, 0

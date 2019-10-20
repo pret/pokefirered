@@ -20,9 +20,7 @@ OneIsland_KindleRoad_EmberSpa_EventScript_165377:: @ 8165377
 OneIsland_KindleRoad_EmberSpa_EventScript_165380:: @ 8165380
 	lock
 	faceplayer
-	setvar VAR_0x8004, 10
-	setvar VAR_0x8005, 3
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_BRUNO, 3
 	msgbox gUnknown_817D550
 	release
 	end

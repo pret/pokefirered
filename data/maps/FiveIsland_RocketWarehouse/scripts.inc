@@ -50,9 +50,7 @@ FiveIsland_RocketWarehouse_EventScript_163F93:: @ 8163F93
 	end
 
 EventScript_163FB7:: @ 8163FB7
-	setvar VAR_0x8004, 15
-	setvar VAR_0x8005, 5
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_GIOVANNI, 5
 	msgbox gUnknown_817BCD7, 6
 	end
 

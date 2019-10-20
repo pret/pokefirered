@@ -1441,3 +1441,14 @@
 	setorcopyvar 0x8002, \fanfare
 	callstd 9
 	.endm
+
+	.macro famechecker person, index
+	setvar VAR_0x8004, \person
+	setvar VAR_0x8005, \index
+	special SetFlavorTextFlagFromSpecialVars
+	.endm
+
+	.macro set_gym_trainers gym
+	setvar VAR_0x8008, \gym
+	call EventScript_1A6B18
+	.endm

@@ -17,15 +17,12 @@ ViridianCity_Gym_EventScript_169ECA:: @ 8169ECA
 	end
 
 EventScript_169F04:: @ 8169F04
-	setvar VAR_0x8004, 15
-	setvar VAR_0x8005, 3
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_GIOVANNI, 3
 	setflag FLAG_HIDE_MISC_KANTO_ROCKETS
-	setflag FLAG_0x4B7
+	setflag FLAG_DEFEATED_LEADER_GIOVANNI
 	setflag FLAG_BADGE08_GET
 	setvar VAR_MAP_SCENE_ROUTE22, 3
-	setvar VAR_0x8008, 8
-	call EventScript_1A6B18
+	set_gym_trainers 8
 	goto EventScript_169F2F
 	end
 
@@ -89,16 +86,14 @@ ViridianCity_Gym_EventScript_16A01B:: @ 816A01B
 ViridianCity_Gym_EventScript_16A032:: @ 816A032
 	lock
 	faceplayer
-	checkflag FLAG_0x4B7
+	checkflag FLAG_DEFEATED_LEADER_GIOVANNI
 	goto_if_eq EventScript_16A047
 	msgbox gUnknown_818FA81
 	release
 	end
 
 EventScript_16A047:: @ 816A047
-	setvar VAR_0x8004, 15
-	setvar VAR_0x8005, 4
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_GIOVANNI, 4
 	msgbox gUnknown_818FB56
 	release
 	end

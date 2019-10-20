@@ -13,16 +13,13 @@ PewterCity_Gym_EventScript_16A593:: @ 816A593
 	end
 
 EventScript_16A5C5:: @ 816A5C5
-	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, 1
-	special SetFlavorTextFlagFromSpecialVars
-	setflag FLAG_0x4B0
+	famechecker FAMECHECKER_BROCK, 1
+	setflag FLAG_DEFEATED_BROCK
 	setflag FLAG_BADGE01_GET
 	setvar VAR_MAP_SCENE_PEWTER_CITY, 1
 	setflag FLAG_HIDE_PEWTER_CITY_GYM_ESCORT
 	clearflag FLAG_HIDE_PEWTER_CITY_RUNNING_SHOES_GUY
-	setvar VAR_0x8008, 1
-	call EventScript_1A6B18
+	set_gym_trainers 1
 	goto EventScript_16A5F3
 	end
 
@@ -51,7 +48,7 @@ PewterCity_Gym_EventScript_16A63E:: @ 816A63E
 PewterCity_Gym_EventScript_16A655:: @ 816A655
 	lock
 	faceplayer
-	checkflag FLAG_0x4B0
+	checkflag FLAG_DEFEATED_BROCK
 	goto_if_eq EventScript_16A67F
 	msgbox gUnknown_8191298, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1

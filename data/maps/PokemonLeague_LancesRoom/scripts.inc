@@ -13,7 +13,7 @@ PokemonLeague_LancesRoom_MapScript1_162942:: @ 8162942
 PokemonLeague_LancesRoom_MapScript2_16294D:: @ 816294D
 	compare_var_to_value VAR_MAP_SCENE_POKEMON_LEAGUE, 4
 	call_if 1, EventScript_162962
-	checkflag FLAG_0x4BB
+	checkflag FLAG_DEFEATED_LANCE
 	call_if 1, EventScript_162968
 	end
 
@@ -104,14 +104,10 @@ PokemonLeague_LancesRoom_EventScript_162A14:: @ 8162A14
 	setvar VAR_0x8004, 12
 	setvar VAR_0x8005, 2
 	special UpdatePickStateFromSpecialVar8005
-	checkflag FLAG_0x4BB
+	checkflag FLAG_DEFEATED_LANCE
 	goto_if_eq EventScript_162AA1
-	setvar VAR_0x8004, 12
-	setvar VAR_0x8005, 0
-	special SetFlavorTextFlagFromSpecialVars
-	setvar VAR_0x8004, 12
-	setvar VAR_0x8005, 1
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_LANCE, 0
+	famechecker FAMECHECKER_LANCE, 1
 	checkflag FLAG_SYS_GAME_CLEAR
 	call_if 0, EventScript_162A79
 	checkflag FLAG_SYS_GAME_CLEAR
@@ -152,7 +148,7 @@ EventScript_162AA1:: @ 8162AA1
 EventScript_162AAB:: @ 8162AAB
 	setvar VAR_0x8004, 0
 	special sub_8113530
-	setflag FLAG_0x4BB
+	setflag FLAG_DEFEATED_LANCE
 	call EventScript_1A7563
 	msgbox gUnknown_8178A52
 	closemessage

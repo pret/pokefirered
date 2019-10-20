@@ -167,7 +167,7 @@ EventScript_16C849:: @ 816C849
 CeladonCity_GameCorner_EventScript_16C857:: @ 816C857
 	lock
 	faceplayer
-	checkflag FLAG_0x4B3
+	checkflag FLAG_DEFEATED_ERIKA
 	goto_if_eq EventScript_16C870
 	msgbox gUnknown_8196BAD
 	goto EventScript_16C7CA

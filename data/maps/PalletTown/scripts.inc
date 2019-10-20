@@ -450,9 +450,7 @@ PalletTown_EventScript_16582F:: @ 816582F
 
 PalletTown_EventScript_165838:: @ 8165838
 	lockall
-	setvar VAR_0x8004, 0
-	setvar VAR_0x8005, 0
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_OAK, 0
 	msgbox gUnknown_817D866
 	releaseall
 	end

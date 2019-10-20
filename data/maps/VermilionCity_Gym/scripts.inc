@@ -219,16 +219,13 @@ VermilionCity_Gym_EventScript_16B94A:: @ 816B94A
 	end
 
 EventScript_16B97C:: @ 816B97C
-	setvar VAR_0x8004, 4
-	setvar VAR_0x8005, 1
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_LTSURGE, 1
 	checkflag FLAG_0x23B
 	call_if 0, EventScript_16B9AB
 	clearflag FLAG_HIDE_FAME_CHECKER_LT_SURGE_JOURNAL
-	setflag FLAG_0x4B2
+	setflag FLAG_DEFEATED_LT_SURGE
 	setflag FLAG_BADGE03_GET
-	setvar VAR_0x8008, 3
-	call EventScript_1A6B18
+	set_gym_trainers 3
 	goto EventScript_16B9AF
 	end
 
@@ -255,9 +252,7 @@ EventScript_16B9F0:: @ 816B9F0
 
 VermilionCity_Gym_EventScript_16B9FA:: @ 816B9FA
 	trainerbattle 0, TRAINER_SAILOR_DWAYNE, 0, Text_194FBD, Text_194FF1
-	setvar VAR_0x8004, 4
-	setvar VAR_0x8005, 4
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_LTSURGE, 4
 	msgbox gUnknown_8195004, 6
 	end
 
@@ -268,23 +263,19 @@ VermilionCity_Gym_EventScript_16BA1E:: @ 816BA1E
 
 VermilionCity_Gym_EventScript_16BA35:: @ 816BA35
 	trainerbattle 2, TRAINER_GENTLEMAN_TUCKER, 0, Text_194E57, Text_194EA5, EventScript_16BA5D
-	setvar VAR_0x8004, 4
-	setvar VAR_0x8005, 3
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_LTSURGE, 3
 	msgbox gUnknown_8194EBD, 6
 	end
 
 EventScript_16BA5D:: @ 816BA5D
-	setvar VAR_0x8004, 4
-	setvar VAR_0x8005, 2
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_LTSURGE, 2
 	release
 	end
 
 VermilionCity_Gym_EventScript_16BA6C:: @ 816BA6C
 	lock
 	faceplayer
-	checkflag FLAG_0x4B2
+	checkflag FLAG_DEFEATED_LT_SURGE
 	goto_if_eq EventScript_16BA81
 	msgbox gUnknown_81950B4
 	release

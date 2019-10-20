@@ -1125,7 +1125,7 @@ static void sub_812B614(struct HelpSystemListMenu * a0, struct ListMenuItem * a1
 
 static bool8 sub_812B754(void)
 {
-    if (FlagGet(FLAG_0x4B0) == TRUE && gUnknown_3005E9C[1] == 2)
+    if (FlagGet(FLAG_DEFEATED_BROCK) == TRUE && gUnknown_3005E9C[1] == 2)
         return TRUE;
     return FALSE;
 }

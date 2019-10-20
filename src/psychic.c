@@ -47,7 +47,7 @@ const struct SpriteTemplate gUnknown_83E6DF8 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_83E6DF4,
-    .callback = AnimSparklingParticle,
+    .callback = AnimSpriteOnMonPos,
 };
 
 const struct SpriteTemplate gUnknown_83E6E10 =
@@ -376,7 +376,7 @@ const struct SpriteTemplate gUnknown_83E7148 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_83E7144,
-    .callback = AnimSparklingParticle,
+    .callback = AnimSpriteOnMonPos,
 };
 
 static const union AffineAnimCmd gUnknown_83E7160[] =

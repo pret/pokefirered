@@ -28,7 +28,7 @@ static u8 GetBattlerSpriteFinal_Y(u8 battlerId, u16 species, bool8 a3);
 static void sub_8075658(struct Sprite *sprite);
 static void sub_80757E8(struct Sprite *sprite);
 static bool8 sub_80758DC(void);
-static void sub_8075EF0(struct Sprite *sprite);
+static void AnimThrowProjectile_Step(struct Sprite *sprite);
 static void sub_80760D0(u8 taskId);
 static void AnimTask_BlendMonInAndOutSetup(struct Task *task);
 static void AnimTask_BlendMonInAndOutStep(u8 taskId);
@@ -1336,7 +1336,7 @@ static u8 GetBattlerAtPosition_(u8 position)
     return GetBattlerAtPosition(position);
 }
 
-void AnimSparklingParticle(struct Sprite *sprite)
+void AnimSpriteOnMonPos(struct Sprite *sprite)
 {
     bool8 var;
 
@@ -1390,7 +1390,7 @@ void TranslateAnimSpriteToTargetMonLocation(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
-void sub_8075E80(struct Sprite *sprite)
+void AnimThrowProjectile(struct Sprite *sprite)
 {
     InitSpritePosToAnimAttacker(sprite, 1);
     if (GetBattlerSide(gBattleAnimAttacker))
@@ -1400,10 +1400,10 @@ void sub_8075E80(struct Sprite *sprite)
     sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET) + gBattleAnimArgs[3];
     sprite->data[5] = gBattleAnimArgs[5];
     InitAnimArcTranslation(sprite);
-    sprite->callback = sub_8075EF0;
+    sprite->callback = AnimThrowProjectile_Step;
 }
 
-static void sub_8075EF0(struct Sprite *sprite)
+static void AnimThrowProjectile_Step(struct Sprite *sprite)
 {
     if (TranslateAnimHorizontalArc(sprite))
         DestroyAnimSprite(sprite);

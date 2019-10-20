@@ -16,4 +16,6 @@ void ExitSafariMode(void);
 bool8 SafariZoneTakeStep(void);
 void SafariZoneRetirePrompt(void);
 
+void CB2_EndSafariBattle(void);
+
 #endif // GUARD_SAFARI_ZONE_H

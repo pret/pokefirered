@@ -1937,7 +1937,7 @@ _080D8214:
 _080D8230: .4byte gBattleTypeFlags
 _080D8234: .4byte gStringVar4
 _080D8238:
-	bl GetTrainerBLoseText
+	bl GetTrainerWonSpeech
 	adds r4, r0, 0
 	b _080D8382
 _080D8240:

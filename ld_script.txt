@@ -423,6 +423,8 @@ SECTIONS {
         src/title_screen.o(.rodata);
         data/field_weather.o(.rodata);
         data/data_835B488.o(.rodata);
+        src/battle_setup.o(.rodata);
+        data/data_835B488.o(.rodata.83C6AB0);
         src/item_menu_icons.o(.rodata);
         src/battle_anim_mon_movement.o(.rodata);
         src/item.o(.rodata);

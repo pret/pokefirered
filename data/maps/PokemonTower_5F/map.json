@@ -89,7 +89,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PokemonTower_5F_EventScript_1BE789",
-      "flag": "FLAG_0x17B"
+      "flag": "FLAG_HIDE_POKEMON_TOWER_5F_NUGGET"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -102,7 +102,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PokemonTower_5F_EventScript_1BEBB3",
-      "flag": "FLAG_0x1D0"
+      "flag": "FLAG_HIDE_POKEMON_TOWER_5F_CLEANSE_TAG"
     }
   ],
   "warp_events": [

@@ -141,7 +141,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "RockTunnel_B1F_EventScript_1BEB31",
-      "flag": "FLAG_0x1C6"
+      "flag": "FLAG_HIDE_ROCK_TUNNEL_B1F_REVIVE"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -154,7 +154,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "RockTunnel_B1F_EventScript_1BEB3E",
-      "flag": "FLAG_0x1C7"
+      "flag": "FLAG_HIDE_ROCK_TUNNEL_B1F_MAX_ETHER"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",

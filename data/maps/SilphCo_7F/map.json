@@ -141,7 +141,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SilphCo_7F_EventScript_1BE8DB",
-      "flag": "FLAG_0x195"
+      "flag": "FLAG_HIDE_SILPH_CO_7F_CALCIUM"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -154,7 +154,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SilphCo_7F_EventScript_1BE8E8",
-      "flag": "FLAG_0x196"
+      "flag": "FLAG_HIDE_SILPH_CO_7F_TM08"
     }
   ],
   "warp_events": [

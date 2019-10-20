@@ -37,7 +37,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "RocketHideout_B2F_EventScript_1BE6E0",
-      "flag": "FLAG_0x16E"
+      "flag": "FLAG_HIDE_ROCKET_HIDEOUT_B2F_X_SPEED"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -50,7 +50,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "RocketHideout_B2F_EventScript_1BE6ED",
-      "flag": "FLAG_0x16F"
+      "flag": "FLAG_HIDE_ROCKET_HIDEOUT_B2F_MOON_STONE"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -63,7 +63,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "RocketHideout_B2F_EventScript_1BE6FA",
-      "flag": "FLAG_0x170"
+      "flag": "FLAG_HIDE_ROCKET_HIDEOUT_B2F_TM12"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -76,7 +76,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "RocketHideout_B2F_EventScript_1BE707",
-      "flag": "FLAG_0x171"
+      "flag": "FLAG_HIDE_ROCKET_HIDEOUT_B2F_SUPER_POTION"
     }
   ],
   "warp_events": [

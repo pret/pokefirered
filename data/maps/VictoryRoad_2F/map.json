@@ -89,7 +89,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "VictoryRoad_2F_EventScript_1BE9EC",
-      "flag": "FLAG_0x1AB"
+      "flag": "FLAG_HIDE_VICTORY_ROAD_2F_GUARD_SPEC"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -102,7 +102,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "VictoryRoad_2F_EventScript_1BE9F9",
-      "flag": "FLAG_0x1AC"
+      "flag": "FLAG_HIDE_VICTORY_ROAD_2F_TM07"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -115,7 +115,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "VictoryRoad_2F_EventScript_1BEA06",
-      "flag": "FLAG_0x1AD"
+      "flag": "FLAG_HIDE_VICTORY_ROAD_2F_FULL_HEAL"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -128,7 +128,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "VictoryRoad_2F_EventScript_1BEA13",
-      "flag": "FLAG_0x1AE"
+      "flag": "FLAG_HIDE_VICTORY_ROAD_2F_TM37"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",

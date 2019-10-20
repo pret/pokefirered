@@ -50,7 +50,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SeafoamIslands_B1F_EventScript_1BEBF4",
-      "flag": "FLAG_0x1D5"
+      "flag": "FLAG_HIDE_SEAFOAM_ISLANDS_B1F_WATER_STONE"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -63,7 +63,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SeafoamIslands_B1F_EventScript_1BEC01",
-      "flag": "FLAG_0x1D6"
+      "flag": "FLAG_HIDE_SEAFOAM_ISLANDS_B1F_REVIVE"
     }
   ],
   "warp_events": [

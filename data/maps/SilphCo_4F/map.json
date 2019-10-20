@@ -76,7 +76,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SilphCo_4F_EventScript_1BE873",
-      "flag": "FLAG_0x18D"
+      "flag": "FLAG_HIDE_SILPH_CO_4F_MAX_REVIVE"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -89,7 +89,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SilphCo_4F_EventScript_1BE880",
-      "flag": "FLAG_0x18E"
+      "flag": "FLAG_HIDE_SILPH_CO_4F_ESCAPE_ROPE"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -102,7 +102,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SilphCo_4F_EventScript_1BE88D",
-      "flag": "FLAG_0x18F"
+      "flag": "FLAG_HIDE_SILPH_CO_4F_FULL_HEAL"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -115,7 +115,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SilphCo_4F_EventScript_1BEE09",
-      "flag": "FLAG_0x1FE"
+      "flag": "FLAG_HIDE_SILPH_CO_4F_TM41"
     }
   ],
   "warp_events": [

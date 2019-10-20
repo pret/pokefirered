@@ -37,7 +37,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SSAnne_B1F_Room3_EventScript_1BE692",
-      "flag": "FLAG_0x168"
+      "flag": "FLAG_HIDE_SSANNE_B1F_ROOM3_ETHER"
     }
   ],
   "warp_events": [

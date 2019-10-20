@@ -33,11 +33,7 @@ EventScript_16D0C6:: @ 816D0C6
 	compare_var_to_value VAR_RESULT, 0
 	goto_if_eq EventScript_16D107
 	additem ITEM_TM19, 1
-	loadword 0, gUnknown_81973BA
-	setorcopyvar VAR_0x8000, ITEM_TM19
-	setorcopyvar VAR_0x8001, 1
-	setorcopyvar VAR_0x8002, MUS_FANFA1
-	callstd 9 @ gStdScript_ItemMessageAndFanfare
+	giveitemfanfaremsg gUnknown_81973BA, ITEM_TM19
 	setflag FLAG_0x293
 	msgbox gUnknown_81973D7
 	release

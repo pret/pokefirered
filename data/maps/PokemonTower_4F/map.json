@@ -63,7 +63,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PokemonTower_4F_EventScript_1BE762",
-      "flag": "FLAG_0x178"
+      "flag": "FLAG_HIDE_POKEMON_TOWER_4F_ELIXIR"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -76,7 +76,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PokemonTower_4F_EventScript_1BE76F",
-      "flag": "FLAG_0x179"
+      "flag": "FLAG_HIDE_POKEMON_TOWER_4F_AWAKENING"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -89,7 +89,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PokemonTower_4F_EventScript_1BE77C",
-      "flag": "FLAG_0x17A"
+      "flag": "FLAG_HIDE_POKEMON_TOWER_4F_GREAT_BALL"
     }
   ],
   "warp_events": [

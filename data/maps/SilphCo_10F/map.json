@@ -63,7 +63,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SilphCo_10F_EventScript_1BE8F5",
-      "flag": "FLAG_0x197"
+      "flag": "FLAG_HIDE_SILPH_CO_10F_CARBOS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -76,7 +76,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SilphCo_10F_EventScript_1BE902",
-      "flag": "FLAG_0x198"
+      "flag": "FLAG_HIDE_SILPH_CO_10F_ULTRA_BALL"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -89,7 +89,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SilphCo_10F_EventScript_1BE90F",
-      "flag": "FLAG_0x199"
+      "flag": "FLAG_HIDE_SILPH_CO_10F_RARE_CANDY"
     }
   ],
   "warp_events": [

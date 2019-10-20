@@ -204,7 +204,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "CeladonCity_EventScript_1BEBC0",
-      "flag": "FLAG_0x1D1"
+      "flag": "FLAG_HIDE_CELADON_CITY_ETHER"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_SCIENTIST",

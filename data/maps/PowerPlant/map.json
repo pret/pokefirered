@@ -24,7 +24,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PowerPlant_EventScript_1BE91C",
-      "flag": "FLAG_0x19A"
+      "flag": "FLAG_HIDE_POWER_PLANT_MAX_POTION"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -37,7 +37,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PowerPlant_EventScript_1BE929",
-      "flag": "FLAG_0x19B"
+      "flag": "FLAG_HIDE_POWER_PLANT_TM17"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -50,7 +50,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PowerPlant_EventScript_1BE936",
-      "flag": "FLAG_0x19C"
+      "flag": "FLAG_HIDE_POWER_PLANT_TM25"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -63,7 +63,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PowerPlant_EventScript_1BE943",
-      "flag": "FLAG_0x19D"
+      "flag": "FLAG_HIDE_POWER_PLANT_THUNDER_STONE"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -76,7 +76,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PowerPlant_EventScript_1BE950",
-      "flag": "FLAG_0x19E"
+      "flag": "FLAG_HIDE_POWER_PLANT_ELIXIR"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ZAPDOS",

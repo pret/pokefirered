@@ -16,8 +16,7 @@ EventScript_170A97:: @ 8170A97
 	applymovement 255, Movement_170B22
 	waitmovement 0
 	special sub_80E7538
-	loadword 0, gStringVar4 @ 2021D18
-	callstd 4
+	msgbox gStringVar4
 	closemessage
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0

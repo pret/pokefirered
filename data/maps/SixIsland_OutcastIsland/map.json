@@ -108,7 +108,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SixIsland_OutcastIsland_EventScript_1BEC90",
-      "flag": "FLAG_0x1E1"
+      "flag": "FLAG_HIDE_SIX_ISLAND_OUTCAST_ISLAND_PP_UP"
     }
   ],
   "warp_events": [

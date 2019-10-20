@@ -37,7 +37,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PokemonMansion_1F_EventScript_1BE95D",
-      "flag": "FLAG_0x19F"
+      "flag": "FLAG_HIDE_POKEMON_MANSION_1F_CARBOS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -50,7 +50,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PokemonMansion_1F_EventScript_1BE96A",
-      "flag": "FLAG_0x1A0"
+      "flag": "FLAG_HIDE_POKEMON_MANSION_1F_ESCAPE_ROPE"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -63,7 +63,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PokemonMansion_1F_EventScript_1BEB65",
-      "flag": "FLAG_0x1CA"
+      "flag": "FLAG_HIDE_POKEMON_MANSION_1F_PROTEIN"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_YOUNGSTER",

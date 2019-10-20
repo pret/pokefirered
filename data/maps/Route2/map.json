@@ -87,7 +87,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "Route2_EventScript_1BE58E",
-      "flag": "FLAG_0x154"
+      "flag": "FLAG_HIDE_ROUTE2_ETHER"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -100,7 +100,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "Route2_EventScript_1BE59B",
-      "flag": "FLAG_0x155"
+      "flag": "FLAG_HIDE_ROUTE2_PARALYZE_HEAL"
     },
     {
       "graphics_id": "65375",

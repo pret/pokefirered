@@ -24,7 +24,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "CeruleanCave_2F_EventScript_1BEA6E",
-      "flag": "FLAG_0x1B5"
+      "flag": "FLAG_HIDE_CERULEAN_CAVE_2F_PP_UP"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -37,7 +37,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "CeruleanCave_2F_EventScript_1BEA7B",
-      "flag": "FLAG_0x1B6"
+      "flag": "FLAG_HIDE_CERULEAN_CAVE_2F_ULTRA_BALL"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -50,7 +50,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "CeruleanCave_2F_EventScript_1BEA61",
-      "flag": "FLAG_0x1B4"
+      "flag": "FLAG_HIDE_CERULEAN_CAVE_2F_FULL_RESTORE"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",

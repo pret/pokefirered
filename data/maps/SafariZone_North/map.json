@@ -24,7 +24,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SafariZone_North_EventScript_1BE818",
-      "flag": "FLAG_0x186"
+      "flag": "FLAG_HIDE_SAFARI_ZONE_NORTH_PROTEIN"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -37,7 +37,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SafariZone_North_EventScript_1BE825",
-      "flag": "FLAG_0x187"
+      "flag": "FLAG_HIDE_SAFARI_ZONE_NORTH_TM47"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -50,7 +50,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SafariZone_North_EventScript_1BEBDA",
-      "flag": "FLAG_0x1D3"
+      "flag": "FLAG_HIDE_SAFARI_ZONE_NORTH_QUICK_CLAW"
     }
   ],
   "warp_events": [

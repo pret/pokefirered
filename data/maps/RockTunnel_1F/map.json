@@ -115,7 +115,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "RockTunnel_1F_EventScript_1BEB0A",
-      "flag": "FLAG_0x1C3"
+      "flag": "FLAG_HIDE_ROCK_TUNNEL_1F_REPEL"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -128,7 +128,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "RockTunnel_1F_EventScript_1BEB17",
-      "flag": "FLAG_0x1C4"
+      "flag": "FLAG_HIDE_ROCK_TUNNEL_1F_PEARL"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -141,7 +141,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "RockTunnel_1F_EventScript_1BEB24",
-      "flag": "FLAG_0x1C5"
+      "flag": "FLAG_HIDE_ROCK_TUNNEL_1F_ESCAPE_ROPE"
     }
   ],
   "warp_events": [

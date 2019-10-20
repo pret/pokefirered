@@ -108,7 +108,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "TwoIsland_EventScript_1BEAAF",
-      "flag": "FLAG_0x1BA"
+      "flag": "FLAG_HIDE_TWO_ISLAND_REVIVE"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_LITTLE_BOY",

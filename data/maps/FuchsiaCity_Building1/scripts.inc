@@ -6,7 +6,7 @@ FuchsiaCity_Building1_EventScript_16D74C:: @ 816D74C
 	faceplayer
 	checkflag FLAG_0x23A
 	goto_if_eq EventScript_16D7FA
-	checkflag FLAG_0x189
+	checkflag FLAG_HIDE_SAFARI_ZONE_WEST_GOLD_TEETH
 	goto_if_eq EventScript_16D780
 	msgbox gUnknown_8198DF9, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1

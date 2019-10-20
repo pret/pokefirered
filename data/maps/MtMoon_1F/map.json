@@ -115,7 +115,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtMoon_1F_EventScript_1BE5CF",
-      "flag": "FLAG_0x159"
+      "flag": "FLAG_HIDE_MT_MOON_1F_PARALYZE_HEAL"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -128,7 +128,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtMoon_1F_EventScript_1BE5DC",
-      "flag": "FLAG_0x15A"
+      "flag": "FLAG_HIDE_MT_MOON_1F_TM09"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -141,7 +141,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtMoon_1F_EventScript_1BE5E9",
-      "flag": "FLAG_0x15B"
+      "flag": "FLAG_HIDE_MT_MOON_1F_POTION"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -154,7 +154,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtMoon_1F_EventScript_1BE5F6",
-      "flag": "FLAG_0x15C"
+      "flag": "FLAG_HIDE_MT_MOON_1F_RARE_CANDY"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -167,7 +167,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtMoon_1F_EventScript_1BE603",
-      "flag": "FLAG_0x15D"
+      "flag": "FLAG_HIDE_MT_MOON_1F_ESCAPE_ROPE"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -180,7 +180,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtMoon_1F_EventScript_1BE610",
-      "flag": "FLAG_0x15E"
+      "flag": "FLAG_HIDE_MT_MOON_1F_MOON_STONE"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_BALDING_MAN",

@@ -50,7 +50,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SeafoamIslands_B2F_EventScript_1BEC0E",
-      "flag": "FLAG_0x1D7"
+      "flag": "FLAG_HIDE_SEAFOAM_ISLANDS_B2F_BIG_PEARL"
     }
   ],
   "warp_events": [

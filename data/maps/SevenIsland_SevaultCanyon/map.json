@@ -243,7 +243,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SevenIsland_SevaultCanyon_EventScript_1BECDE",
-      "flag": "FLAG_0x1E7"
+      "flag": "FLAG_HIDE_SEVEN_ISLAND_SEVAULT_CANYON_KINGS_ROCK"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -256,7 +256,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SevenIsland_SevaultCanyon_EventScript_1BECEB",
-      "flag": "FLAG_0x1E8"
+      "flag": "FLAG_HIDE_SEVEN_ISLAND_SEVAULT_CANYON_MAX_ELIXIR"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -269,7 +269,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SevenIsland_SevaultCanyon_EventScript_1BECF8",
-      "flag": "FLAG_0x1E9"
+      "flag": "FLAG_HIDE_SEVEN_ISLAND_SEVAULT_CANYON_NUGGET"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_BLACKBELT",

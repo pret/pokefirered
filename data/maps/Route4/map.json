@@ -61,7 +61,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "Route4_EventScript_1BE637",
-      "flag": "FLAG_0x161"
+      "flag": "FLAG_HIDE_ROUTE4_TM05"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_BOY",

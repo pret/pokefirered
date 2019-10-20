@@ -89,7 +89,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "RocketHideout_B1F_EventScript_1BE6C6",
-      "flag": "FLAG_0x16C"
+      "flag": "FLAG_HIDE_ROCKET_HIDEOUT_B1F_ESCAPE_ROPE"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -102,7 +102,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "RocketHideout_B1F_EventScript_1BE6D3",
-      "flag": "FLAG_0x16D"
+      "flag": "FLAG_HIDE_ROCKET_HIDEOUT_B1F_HYPER_POTION"
     }
   ],
   "warp_events": [

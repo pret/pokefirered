@@ -50,7 +50,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "FuchsiaCity_Building1_EventScript_1BEAA2",
-      "flag": "FLAG_0x1B9"
+      "flag": "FLAG_HIDE_FUCHSIA_CITY_BUILDING1_RARE_CANDY"
     },
     {
       "graphics_id": "0",

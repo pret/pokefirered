@@ -102,7 +102,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "RocketHideout_B4F_EventScript_1BE72E",
-      "flag": "FLAG_0x174"
+      "flag": "FLAG_HIDE_ROCKET_HIDEOUT_B4F_TM49"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -115,7 +115,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "RocketHideout_B4F_EventScript_1BE73B",
-      "flag": "FLAG_0x175"
+      "flag": "FLAG_HIDE_ROCKET_HIDEOUT_B4F_MAX_ETHER"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -128,7 +128,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "RocketHideout_B4F_EventScript_1BE748",
-      "flag": "FLAG_0x176"
+      "flag": "FLAG_HIDE_ROCKET_HIDEOUT_B4F_CALCIUM"
     }
   ],
   "warp_events": [

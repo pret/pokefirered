@@ -42,7 +42,7 @@ EventScript_166F52:: @ 8166F52
 	return
 
 EventScript_166F5E:: @ 8166F5E
-	checkflag FLAG_0x1A8
+	checkflag FLAG_HIDE_POKEMON_MANSION_B1F_SECRET_KEY
 	goto_if_eq EventScript_166F68
 	return
 

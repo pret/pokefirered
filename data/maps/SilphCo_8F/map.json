@@ -76,7 +76,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SilphCo_8F_EventScript_1BEB4B",
-      "flag": "FLAG_0x1C8"
+      "flag": "FLAG_HIDE_SILPH_CO_8F_IRON"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_SCIENTIST",

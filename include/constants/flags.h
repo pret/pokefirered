@@ -1211,6 +1211,7 @@
 #define HIDDEN_ITEM_VIRIDIAN_CITY_GYM_MACHO_BRACE                     189
 #define HIDDEN_ITEM_SSANNE_EXTERIOR_LAVA_COOKIE                       190
 
+// Unused?
 #define FLAG_0x4A7               0x4A7
 #define FLAG_0x4A8               0x4A8
 #define FLAG_0x4A9               0x4A9
@@ -1220,6 +1221,8 @@
 #define FLAG_0x4AD               0x4AD
 #define FLAG_0x4AE               0x4AE
 #define FLAG_0x4AF               0x4AF
+
+// Boss clear flags
 #define FLAG_0x4B0               0x4B0
 #define FLAG_0x4B1               0x4B1
 #define FLAG_0x4B2               0x4B2
@@ -1233,6 +1236,8 @@
 #define FLAG_0x4BA               0x4BA
 #define FLAG_0x4BB               0x4BB
 #define FLAG_0x4BC               0x4BC
+
+// Unused?
 #define FLAG_0x4BD               0x4BD
 #define FLAG_0x4BE               0x4BE
 #define FLAG_0x4BF               0x4BF
@@ -1306,7 +1311,7 @@
 #define TRAINERS_FLAG_NO    0x2E7
 #define TRAINER_FLAGS_WORDS 0x300
 
-#define SYS_FLAGS           (FLAG_TRAINER_FLAG_START + TRAINER_FLAGS_WORDS)
+#define SYS_FLAGS           (FLAG_TRAINER_FLAG_START + TRAINER_FLAGS_WORDS) // 0x800
 
 // SYSTEM FLAGS
 

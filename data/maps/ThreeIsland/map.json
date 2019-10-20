@@ -61,7 +61,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_EventScript_1677D8",
-      "flag": "FLAG_0x091"
+      "flag": "FLAG_HIDE_THREE_ISLAND_LONE_BIKER"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_BIKER",

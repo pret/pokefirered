@@ -50,7 +50,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SeafoamIslands_B4F_EventScript_1631AC",
-      "flag": "FLAG_0x082"
+      "flag": "FLAG_HIDE_ARTICUNO"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",

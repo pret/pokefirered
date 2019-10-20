@@ -21,7 +21,7 @@ CeruleanCave_B1F_MapScript2_1624E7:: @ 81624E7
 	end
 
 EventScript_1624F1:: @ 81624F1
-	clearflag FLAG_0x081
+	clearflag FLAG_HIDE_MEWTWO
 	return
 
 CeruleanCave_B1F_EventScript_1624F5:: @ 81624F5

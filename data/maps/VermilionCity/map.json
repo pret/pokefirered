@@ -126,7 +126,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "VermilionCity_EventScript_166C20",
-      "flag": "FLAG_0x0A1"
+      "flag": "FLAG_HIDE_VERMILION_CITY_OAKS_AIDE"
     }
   ],
   "warp_events": [

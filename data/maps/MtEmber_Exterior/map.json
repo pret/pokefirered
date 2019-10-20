@@ -37,7 +37,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtEmber_Exterior_EventScript_16397F",
-      "flag": "FLAG_0x089"
+      "flag": "FLAG_HIDE_MT_EMBER_EXTERIOR_ROCKETS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
@@ -50,7 +50,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "MtEmber_Exterior_EventScript_1639F0",
-      "flag": "FLAG_0x089"
+      "flag": "FLAG_HIDE_MT_EMBER_EXTERIOR_ROCKETS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_BATTLE_GIRL",

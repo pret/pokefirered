@@ -152,7 +152,7 @@ EventScript_167078:: @ 8167078
 	call_if 1, EventScript_1670B3
 	removeobject 3
 	setvar VAR_MAP_SCENE_CINNABAR_ISLAND, 2
-	clearflag FLAG_0x0A2
+	clearflag FLAG_HIDE_CINNABAR_POKECENTER_BILL
 	releaseall
 	end
 

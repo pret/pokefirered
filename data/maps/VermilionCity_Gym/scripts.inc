@@ -224,7 +224,7 @@ EventScript_16B97C:: @ 816B97C
 	special SetFlavorTextFlagFromSpecialVars
 	checkflag FLAG_0x23B
 	call_if 0, EventScript_16B9AB
-	clearflag FLAG_0x0A0
+	clearflag FLAG_HIDE_FAME_CHECKER_LT_SURGE_JOURNAL
 	setflag FLAG_0x4B2
 	setflag FLAG_BADGE03_GET
 	setvar VAR_0x8008, 3
@@ -233,7 +233,7 @@ EventScript_16B97C:: @ 816B97C
 	end
 
 EventScript_16B9AB:: @ 816B9AB
-	clearflag FLAG_0x0A1
+	clearflag FLAG_HIDE_VERMILION_CITY_OAKS_AIDE
 	return
 
 EventScript_16B9AF:: @ 816B9AF

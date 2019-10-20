@@ -37,7 +37,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "0x0",
-      "flag": "FLAG_0x098"
+      "flag": "FLAG_HIDE_SIX_ISLAND_POKECENTER_RIVAL"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_HIKER",

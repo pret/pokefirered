@@ -8,7 +8,7 @@ FourIsland_IcefallCave_Back_MapScript1_163D88:: @ 8163D88
 	end
 
 EventScript_163D94:: @ 8163D94
-	setflag FLAG_0x08B
+	setflag FLAG_HIDE_ICEFALL_CAVE_LORELEI
 	return
 
 FourIsland_IcefallCave_Back_EventScript_163D98:: @ 8163D98
@@ -81,8 +81,8 @@ FourIsland_IcefallCave_Back_EventScript_163D98:: @ 8163D98
 	waitmovement 0
 	textcolor 1
 	msgbox gUnknown_817B457
-	setflag FLAG_0x08E
-	clearflag FLAG_0x08C
+	setflag FLAG_HIDE_RUIN_VALLEY_SCIENTIST
+	clearflag FLAG_HIDE_LORELEI_IN_HER_HOUSE
 	setvar VAR_MAP_SCENE_ICEFALL_CAVE_BACK, 1
 	releaseall
 	end

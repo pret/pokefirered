@@ -11,7 +11,7 @@ SixIsland_PokemonCenter_1F_MapScript1_171D7A:: @ 8171D7A
 	end
 
 EventScript_171D89:: @ 8171D89
-	clearflag FLAG_0x098
+	clearflag FLAG_HIDE_SIX_ISLAND_POKECENTER_RIVAL
 	return
 
 SixIsland_PokemonCenter_1F_MapScript3_171D8D:: @ 8171D8D

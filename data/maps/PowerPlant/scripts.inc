@@ -30,11 +30,11 @@ EventScript_1637AC:: @ 81637AC
 	return
 
 EventScript_1637B0:: @ 81637B0
-	clearflag FLAG_0x085
+	clearflag FLAG_HIDE_POWER_PLANT_VOLTORB_1
 	return
 
 EventScript_1637B4:: @ 81637B4
-	clearflag FLAG_0x086
+	clearflag FLAG_HIDE_POWER_PLANT_VOLTORB_2
 	return
 
 PowerPlant_EventScript_1637B8:: @ 81637B8

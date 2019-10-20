@@ -24,7 +24,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "FiveIsland_ResortGorgeous_House_EventScript_171EBE",
-      "flag": "FLAG_0x095"
+      "flag": "FLAG_HIDE_RESORT_GORGEOUS_INSIDE_SELPHY"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_GENTLEMAN",
@@ -37,7 +37,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "FiveIsland_ResortGorgeous_House_EventScript_172062",
-      "flag": "FLAG_0x096"
+      "flag": "FLAG_HIDE_SELPHYS_BUTLER"
     }
   ],
   "warp_events": [

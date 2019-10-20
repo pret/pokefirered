@@ -16,7 +16,7 @@ EventScript_16D580:: @ 816D580
 	setvar VAR_0x8004, 6
 	setvar VAR_0x8005, 1
 	special SetFlavorTextFlagFromSpecialVars
-	clearflag FLAG_0x09F
+	clearflag FLAG_HIDE_FAME_CHECKER_KOGA_JOURNAL
 	setflag FLAG_0x4B4
 	setflag FLAG_BADGE05_GET
 	setvar VAR_0x8008, 5

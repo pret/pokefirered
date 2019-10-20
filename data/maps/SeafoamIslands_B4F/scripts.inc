@@ -46,7 +46,7 @@ EventScript_1630A9:: @ 81630A9
 	return
 
 EventScript_1630AD:: @ 81630AD
-	clearflag FLAG_0x082
+	clearflag FLAG_HIDE_ARTICUNO
 	return
 
 SeafoamIslands_B4F_MapScript3_1630B1:: @ 81630B1

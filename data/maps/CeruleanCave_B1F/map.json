@@ -50,7 +50,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "CeruleanCave_B1F_EventScript_1624F5",
-      "flag": "FLAG_0x081"
+      "flag": "FLAG_HIDE_MEWTWO"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",

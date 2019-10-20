@@ -20,7 +20,7 @@ EventScript_169F04:: @ 8169F04
 	setvar VAR_0x8004, 15
 	setvar VAR_0x8005, 3
 	special SetFlavorTextFlagFromSpecialVars
-	setflag FLAG_0x0AD
+	setflag FLAG_HIDE_MISC_KANTO_ROCKETS
 	setflag FLAG_0x4B7
 	setflag FLAG_BADGE08_GET
 	setvar VAR_MAP_SCENE_ROUTE22, 3

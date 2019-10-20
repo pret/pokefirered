@@ -121,7 +121,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "0x0",
-      "flag": "FLAG_0x094"
+      "flag": "FLAG_HIDE_RESORT_GORGEOUS_SELPHY"
     }
   ],
   "warp_events": [

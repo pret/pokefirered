@@ -24,7 +24,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "FourIsland_LoreleisHouse_EventScript_171C58",
-      "flag": "FLAG_0x08C"
+      "flag": "FLAG_HIDE_LORELEI_IN_HER_HOUSE"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_WIGGLYTUFF",
@@ -115,7 +115,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "FourIsland_LoreleisHouse_EventScript_171C8D",
-      "flag": "FLAG_0x0A5"
+      "flag": "FLAG_HIDE_LORELEI_HOUSE_MEOWTH_DOLL"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_CHANSEY",
@@ -128,7 +128,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "FourIsland_LoreleisHouse_EventScript_171C8D",
-      "flag": "FLAG_0x0A6"
+      "flag": "FLAG_HIDE_LORELEI_HOUSE_CHANSEY_DOLL"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_JIGGLYPUFF",
@@ -141,7 +141,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "FourIsland_LoreleisHouse_EventScript_171C8D",
-      "flag": "FLAG_0x0A8"
+      "flag": "FLAG_HIDE_LORELEI_HOUSE_JIGGLYPUFF_DOLL"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_NIDORAN_F",
@@ -154,7 +154,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "FourIsland_LoreleisHouse_EventScript_171C8D",
-      "flag": "FLAG_0x0A7"
+      "flag": "FLAG_HIDE_LORELEIS_HOUSE_NIDORAN_F_DOLL"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_NIDORAN_M",
@@ -167,7 +167,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "FourIsland_LoreleisHouse_EventScript_171C8D",
-      "flag": "FLAG_0x0A9"
+      "flag": "FLAG_HIDE_LORELEIS_HOUSE_NIDORAN_M_DOLL"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_PIDGEOT",
@@ -180,7 +180,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "FourIsland_LoreleisHouse_EventScript_171C8D",
-      "flag": "FLAG_0x0AB"
+      "flag": "FLAG_HIDE_LORELEIS_HOUSE_PIDGEOT_DOLL"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_FEAROW",
@@ -193,7 +193,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "FourIsland_LoreleisHouse_EventScript_171C8D",
-      "flag": "FLAG_0x0AA"
+      "flag": "FLAG_HIDE_LORELEIS_HOUSE_FEAROW_DOLL"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_LAPRAS_DOLL",
@@ -206,7 +206,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "FourIsland_LoreleisHouse_EventScript_171C8D",
-      "flag": "FLAG_0x0AC"
+      "flag": "FLAG_HIDE_LORELEIS_HOUSE_LAPRAS_DOLL"
     }
   ],
   "warp_events": [

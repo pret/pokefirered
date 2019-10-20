@@ -76,10 +76,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "IndigoPlateau_PokemonCenter_1F_EventScript_1ACFAE",
-      "flag": "FLAG_0x09D"
+      "flag": "FLAG_HIDE_POSTGAME_GOSSIPERS"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_RED_NORMAL",
+      "graphics_id": "0",
       "x": 22,
       "y": 9,
       "elevation": 0,
@@ -89,7 +89,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "IndigoPlateau_PokemonCenter_1F_EventScript_1AD06C",
-      "flag": "FLAG_0x09D"
+      "flag": "FLAG_HIDE_POSTGAME_GOSSIPERS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_COOLTRAINER_M",
@@ -102,10 +102,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "IndigoPlateau_PokemonCenter_1F_EventScript_1AD087",
-      "flag": "FLAG_0x09D"
+      "flag": "FLAG_HIDE_POSTGAME_GOSSIPERS"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_RED_NORMAL",
+      "graphics_id": "0",
       "x": 23,
       "y": 9,
       "elevation": 0,
@@ -115,7 +115,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "IndigoPlateau_PokemonCenter_1F_EventScript_1AD06C",
-      "flag": "FLAG_0x09D"
+      "flag": "FLAG_HIDE_POSTGAME_GOSSIPERS"
     }
   ],
   "warp_events": [

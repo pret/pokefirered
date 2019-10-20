@@ -50,7 +50,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
       "script": "RocketHideout_B4F_EventScript_161381",
-      "flag": "FLAG_0x0AD"
+      "flag": "FLAG_HIDE_MISC_KANTO_ROCKETS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -76,7 +76,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "RocketHideout_B4F_EventScript_161418",
-      "flag": "FLAG_0x0AD"
+      "flag": "FLAG_HIDE_MISC_KANTO_ROCKETS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
@@ -89,7 +89,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "RocketHideout_B4F_EventScript_1613CE",
-      "flag": "FLAG_0x0AD"
+      "flag": "FLAG_HIDE_MISC_KANTO_ROCKETS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",

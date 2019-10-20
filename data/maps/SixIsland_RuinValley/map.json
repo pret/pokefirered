@@ -30,7 +30,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SixIsland_RuinValley_EventScript_168B6D",
-      "flag": "FLAG_0x08E"
+      "flag": "FLAG_HIDE_RUIN_VALLEY_SCIENTIST"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_HIKER",

@@ -12,7 +12,7 @@ NavelRock_Summit_MapScript1_164FAA:: @ 8164FAA
 
 EventScript_164FBD:: @ 8164FBD
 	setvar VAR_0x4001, 1
-	setflag FLAG_0x09C
+	setflag FLAG_HIDE_HO_OH
 	return
 
 EventScript_164FC6:: @ 8164FC6
@@ -20,7 +20,7 @@ EventScript_164FC6:: @ 8164FC6
 	checkflag FLAG_0x2F6
 	goto_if_eq EventScript_1A77A9
 	setvar VAR_0x4001, 0
-	clearflag FLAG_0x09C
+	clearflag FLAG_HIDE_HO_OH
 	return
 
 NavelRock_Summit_MapScript2_164FDD:: @ 8164FDD

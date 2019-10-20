@@ -24,7 +24,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
       "script": "RocketHideout_B2F_EventScript_1612A2",
-      "flag": "FLAG_0x0AD"
+      "flag": "FLAG_HIDE_MISC_KANTO_ROCKETS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",

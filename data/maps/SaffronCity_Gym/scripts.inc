@@ -19,7 +19,7 @@ EventScript_16EE0A:: @ 816EE0A
 	setvar VAR_0x8004, 7
 	setvar VAR_0x8005, 3
 	special SetFlavorTextFlagFromSpecialVars
-	clearflag FLAG_0x0AE
+	clearflag FLAG_HIDE_SAFFRON_CITY_POKECENTER_SABRINA_JOURNALS
 	setflag FLAG_0x4B5
 	setflag FLAG_BADGE06_GET
 	setvar VAR_0x8008, 6

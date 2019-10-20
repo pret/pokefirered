@@ -228,7 +228,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SaffronCity_EventScript_1AD03A",
-      "flag": "FLAG_0x09D"
+      "flag": "FLAG_HIDE_POSTGAME_GOSSIPERS"
     }
   ],
   "warp_events": [

@@ -63,7 +63,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
       "script": "MtMoon_B2F_EventScript_160829",
-      "flag": "FLAG_0x0AD"
+      "flag": "FLAG_HIDE_MISC_KANTO_ROCKETS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
@@ -76,7 +76,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
       "script": "MtMoon_B2F_EventScript_1607E4",
-      "flag": "FLAG_0x0AD"
+      "flag": "FLAG_HIDE_MISC_KANTO_ROCKETS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
@@ -89,7 +89,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
       "script": "MtMoon_B2F_EventScript_160812",
-      "flag": "FLAG_0x0AD"
+      "flag": "FLAG_HIDE_MISC_KANTO_ROCKETS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
@@ -102,7 +102,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
       "script": "MtMoon_B2F_EventScript_1607FB",
-      "flag": "FLAG_0x0AD"
+      "flag": "FLAG_HIDE_MISC_KANTO_ROCKETS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",

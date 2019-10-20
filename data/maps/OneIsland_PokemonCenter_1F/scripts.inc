@@ -301,7 +301,7 @@ EventScript_170FA5:: @ 8170FA5
 	special sub_810B82C
 	setflag FLAG_0x844
 	setflag FLAG_HIDE_CERULEAN_CAVE_GUARD
-	setflag FLAG_0x08C
+	setflag FLAG_HIDE_LORELEI_IN_HER_HOUSE
 	setvar VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 6
 	special InitRoamer
 	release

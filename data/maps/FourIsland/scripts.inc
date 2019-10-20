@@ -11,7 +11,7 @@ FourIsland_MapScript1_167CB9:: @ 8167CB9
 	end
 
 EventScript_167CCD:: @ 8167CCD
-	clearflag FLAG_0x097
+	clearflag FLAG_HIDE_FOUR_ISLAND_RIVAL
 	return
 
 EventScript_167CD1:: @ 8167CD1

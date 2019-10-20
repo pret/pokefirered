@@ -27,7 +27,7 @@ VermilionCity_MapScript1_166906:: @ 8166906
 	end
 
 EventScript_166913:: @ 8166913
-	setflag FLAG_0x0A1
+	setflag FLAG_HIDE_VERMILION_CITY_OAKS_AIDE
 	return
 
 VermilionCity_EventScript_166917:: @ 8166917

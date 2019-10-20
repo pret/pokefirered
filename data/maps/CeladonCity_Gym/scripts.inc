@@ -19,7 +19,7 @@ EventScript_16D0A0:: @ 816D0A0
 	setvar VAR_0x8004, 5
 	setvar VAR_0x8005, 1
 	special SetFlavorTextFlagFromSpecialVars
-	clearflag FLAG_0x09E
+	clearflag FLAG_HIDE_FAME_CHECKER_ERIKA_JOURNALS
 	setflag FLAG_0x4B3
 	setflag FLAG_BADGE04_GET
 	setvar VAR_0x8008, 4

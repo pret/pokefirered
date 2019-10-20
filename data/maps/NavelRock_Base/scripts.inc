@@ -11,13 +11,13 @@ NavelRock_Base_MapScript1_1650F2:: @ 81650F2
 	end
 
 EventScript_165105:: @ 8165105
-	setflag FLAG_0x09B
+	setflag FLAG_HIDE_LUGIA
 	return
 
 EventScript_165109:: @ 8165109
 	checkflag FLAG_0x2F5
 	goto_if_eq EventScript_1A77A9
-	clearflag FLAG_0x09B
+	clearflag FLAG_HIDE_LUGIA
 	return
 
 NavelRock_Base_MapScript2_165116:: @ 8165116

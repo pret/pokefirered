@@ -20,14 +20,14 @@ BirthIsland_Exterior_MapScript1_165217:: @ 8165217
 	end
 
 EventScript_16523C:: @ 816523C
-	setflag FLAG_0x099
-	setflag FLAG_0x09A
+	setflag FLAG_HIDE_DEOXYS
+	setflag FLAG_HIDE_BIRTH_ISLAND_METEORITE
 	return
 
 EventScript_165243:: @ 8165243
 	checkflag FLAG_0x2F7
 	goto_if_eq EventScript_1A77A9
-	clearflag FLAG_0x09A
+	clearflag FLAG_HIDE_BIRTH_ISLAND_METEORITE
 	clearflag FLAG_0x848
 	return
 

@@ -235,7 +235,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "FuchsiaCity_EventScript_166DC1",
-      "flag": "FLAG_0x09D"
+      "flag": "FLAG_HIDE_POSTGAME_GOSSIPERS"
     }
   ],
   "warp_events": [

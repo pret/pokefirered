@@ -89,7 +89,7 @@ EventScript_16402F:: @ 816402F
 	removeobject 2
 	removeobject 4
 	removeobject 3
-	setflag FLAG_0x088
+	setflag FLAG_HIDE_FIVE_ISLAND_ROCKETS
 	fadescreen 0
 	setvar VAR_MAP_SCENE_ROCKET_WAREHOUSE, 1
 	setflag FLAG_0x2D5

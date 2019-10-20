@@ -24,7 +24,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
       "script": "FiveIsland_RocketWarehouse_EventScript_163FE6",
-      "flag": "FLAG_0x088"
+      "flag": "FLAG_HIDE_FIVE_ISLAND_ROCKETS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
@@ -37,7 +37,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
       "script": "FiveIsland_RocketWarehouse_EventScript_163FFD",
-      "flag": "FLAG_0x088"
+      "flag": "FLAG_HIDE_FIVE_ISLAND_ROCKETS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_F",
@@ -50,7 +50,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
       "script": "FiveIsland_RocketWarehouse_EventScript_164087",
-      "flag": "FLAG_0x088"
+      "flag": "FLAG_HIDE_FIVE_ISLAND_ROCKETS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
@@ -63,7 +63,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
       "script": "FiveIsland_RocketWarehouse_EventScript_164014",
-      "flag": "FLAG_0x088"
+      "flag": "FLAG_HIDE_FIVE_ISLAND_ROCKETS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ROCKET_F",
@@ -76,7 +76,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
       "script": "FiveIsland_RocketWarehouse_EventScript_164070",
-      "flag": "FLAG_0x088"
+      "flag": "FLAG_HIDE_FIVE_ISLAND_ROCKETS"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_SCIENTIST",

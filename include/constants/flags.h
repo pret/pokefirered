@@ -518,6 +518,8 @@
 #define FLAG_0x1FC               0x1FC
 #define FLAG_0x1FD               0x1FD
 #define FLAG_0x1FE               0x1FE
+
+// Unused?
 #define FLAG_0x1FF               0x1FF
 #define FLAG_0x200               0x200
 #define FLAG_0x201               0x201
@@ -567,6 +569,8 @@
 #define FLAG_0x22D               0x22D
 #define FLAG_0x22E               0x22E
 #define FLAG_0x22F               0x22F
+
+// Story flags
 #define FLAG_0x230               0x230
 #define FLAG_0x231               0x231
 #define FLAG_0x232               0x232
@@ -775,6 +779,8 @@
 #define FLAG_0x2FD               0x2FD
 #define FLAG_0x2FE               0x2FE
 #define FLAG_0x2FF               0x2FF
+
+// Unused?
 #define FLAG_0x300               0x300
 #define FLAG_0x301               0x301
 #define FLAG_0x302               0x302

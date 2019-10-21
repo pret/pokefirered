@@ -3856,8 +3856,8 @@ EventScript_1A8C33:: @ 81A8C33
 	return
 
 EventScript_1A8C3C:: @ 81A8C3C
-	bufferboxname 0, 16439
-	getspeciesname 1, 16385
+	bufferboxname 0, VAR_0x4037
+	getspeciesname 1, VAR_0x4001
 	checkflag FLAG_SYS_NOT_SOMEONES_PC
 	call_if FALSE, EventScript_1A8C57
 	checkflag FLAG_SYS_NOT_SOMEONES_PC
@@ -3873,7 +3873,7 @@ EventScript_1A8C57:: @ 81A8C57
 
 EventScript_1A8C70:: @ 81A8C70
 	specialvar VAR_RESULT, get_unknown_box_id
-	bufferboxname 2, 32781
+	bufferboxname 2, VAR_RESULT
 	msgbox Text_1A5D6E
 	return
 
@@ -3886,7 +3886,7 @@ EventScript_1A8C82:: @ 81A8C82
 
 EventScript_1A8C9B:: @ 81A8C9B
 	specialvar VAR_RESULT, get_unknown_box_id
-	bufferboxname 2, 32781
+	bufferboxname 2, VAR_RESULT
 	msgbox Text_1A5DB1
 	return
 

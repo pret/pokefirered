@@ -22,8 +22,9 @@
 #include "map_obj_80688E4.h"
 #include "map_obj_8097404.h"
 #include "unk_810c3a4.h"
-#include "constants/movement_commands.h"
 #include "vs_seeker.h"
+#include "constants/movement_commands.h"
+#include "constants/map_objects.h"
 #include "constants/trainers.h"
 #include "constants/maps.h"
 
@@ -1304,7 +1305,7 @@ static bool8 sub_810CD80(const VsSeekerData *vsSeekerData, u16 trainerBattleOppo
 
     if (rematchIdx == -1)
         return FALSE;
-    if (rematchIdx >= 0 && rematchIdx < ARRAY_COUNT(sVsSeekerData))
+    if (rematchIdx >= 0 && rematchIdx < NELEMS(sVsSeekerData))
     {
         if (IsThisTrainerRematchable(gSpecialVar_LastTalked))
             return TRUE;
@@ -1334,7 +1335,7 @@ static s32 sub_810CE10(const VsSeekerData * a0, u16 a1)
     u32 r1;
     s32 r3;
 
-    for (r1 = 0; r1 < ARRAY_COUNT(sVsSeekerData); r1++)
+    for (r1 = 0; r1 < NELEMS(sVsSeekerData); r1++)
     {
         for (r3 = 0; r3 < 6; r3++)
         {
@@ -1374,7 +1375,7 @@ static bool8 sub_810CED0(const VsSeekerData * a0, u16 a1)
 
     if (r1 == -1)
         return FALSE;
-    if ((u32)r1 >= ARRAY_COUNT(sVsSeekerData))
+    if ((u32)r1 >= NELEMS(sVsSeekerData))
         return FALSE;
     if (!IsThisTrainerRematchable(gSpecialVar_LastTalked))
         return FALSE;
@@ -1413,32 +1414,32 @@ static u8 GetRunningBehaviorFromGraphicsId(u8 graphicsId)
 {
     switch (graphicsId)
     {
-        case 0x11:
-        case 0x12:
-        case 0x13:
-        case 0x14:
-        case 0x16:
-        case 0x17:
-        case 0x18:
-        case 0x19:
-        case 0x1a:
-        case 0x1c:
-        case 0x1d:
-        case 0x1e:
-        case 0x25:
-        case 0x27:
-        case 0x28:
-        case 0x29:
-        case 0x2a:
-        case 0x2d:
-        case 0x2e:
-        case 0x36:
-        case 0x38:
-        case 0x3e:
+        case MAP_OBJ_GFX_LITTLE_GIRL:
+        case MAP_OBJ_GFX_YOUNGSTER:
+        case MAP_OBJ_GFX_BOY:
+        case MAP_OBJ_GFX_BUG_CATCHER:
+        case MAP_OBJ_GFX_LASS:
+        case MAP_OBJ_GFX_WOMAN_1:
+        case MAP_OBJ_GFX_BATTLE_GIRL:
+        case MAP_OBJ_GFX_MAN:
+        case MAP_OBJ_GFX_ROCKER:
+        case MAP_OBJ_GFX_WOMAN_2:
+        case MAP_OBJ_GFX_BEAUTY:
+        case MAP_OBJ_GFX_BALDING_MAN:
+        case MAP_OBJ_GFX_TUBER_F:
+        case MAP_OBJ_GFX_CAMPER:
+        case MAP_OBJ_GFX_PICNICKER:
+        case MAP_OBJ_GFX_COOLTRAINER_M:
+        case MAP_OBJ_GFX_COOLTRAINER_F:
+        case MAP_OBJ_GFX_SWIMMER_M_LAND:
+        case MAP_OBJ_GFX_SWIMMER_F_LAND:
+        case MAP_OBJ_GFX_BLACKBELT:
+        case MAP_OBJ_GFX_HIKER:
+        case MAP_OBJ_GFX_SAILOR:
             return 0x4e;
-        case 0x24:
-        case 0x2b:
-        case 0x2c:
+        case MAP_OBJ_GFX_TUBER_M_1:
+        case MAP_OBJ_GFX_SWIMMER_M_WATER:
+        case MAP_OBJ_GFX_SWIMMER_F_WATER:
             return 0x4f;
         default:
             return 0x4d;
@@ -1470,7 +1471,7 @@ static s32 GetRematchIdx(const VsSeekerData * vsSeekerData, u16 trainerFlagIdx)
 {
     u32 i;
 
-    for (i = 0; i < ARRAY_COUNT(sVsSeekerData); i++)
+    for (i = 0; i < NELEMS(sVsSeekerData); i++)
     {
         if (vsSeekerData[i].trainerIdxs[0] == trainerFlagIdx)
             return i;
@@ -1490,7 +1491,7 @@ void sub_810D0D0(void)
 {
     u8 i;
 
-    for (i = 0; i < 100; i++)
+    for (i = 0; i < NELEMS(gSaveBlock1Ptr->trainerRematches); i++)
         gSaveBlock1Ptr->trainerRematches[i] = 0;
 }
 
@@ -1517,7 +1518,7 @@ static u8 GetNextAvailableRematchTrainer(const VsSeekerData * vsSeekerData, u16 
     u32 i;
     s32 j;
 
-    for (i = 0; i < ARRAY_COUNT(sVsSeekerData); i++)
+    for (i = 0; i < NELEMS(sVsSeekerData); i++)
     {
         if (vsSeekerData[i].trainerIdxs[0] == trainerFlagNo)
         {

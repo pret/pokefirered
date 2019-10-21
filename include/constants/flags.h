@@ -51,7 +51,7 @@
 #define FLAG_HIDE_OAK_IN_HIS_LAB                           0x02B
 #define FLAG_HIDE_OAK_IN_PALLET_TOWN                       0x02C
 #define FLAG_HIDE_RIVAL_IN_LAB                             0x02D
-#define FLAG_HIDE_PEWTER_CITY_GYM_ESCORT                   0x02E
+#define FLAG_HIDE_PEWTER_CITY_GYM_GUIDE                    0x02E
 #define FLAG_HIDE_DOME_FOSSIL                              0x02F
 #define FLAG_HIDE_HELIX_FOSSIL                             0x030
 #define FLAG_HIDE_NUGGET_BRIDGE_ROCKET                     0x031
@@ -85,7 +85,7 @@
 #define FLAG_HIDE_SEAFOAM_B4F_BOULDER_2                    0x04D
 #define FLAG_HIDE_SILPH_RIVAL                              0x04E
 #define FLAG_HIDE_ROUTE_22_RIVAL                           0x04F
-#define FLAG_HIDE_PEWTER_MUSEUM_ESCORT                     0x050
+#define FLAG_HIDE_PEWTER_MUSEUM_GUIDE                      0x050
 #define FLAG_HIDE_TOWER_RIVAL                              0x051
 #define FLAG_HIDE_MOLTRES                                  0x052
 #define FLAG_HIDE_SILPH_ROCKETS                            0x053

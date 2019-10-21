@@ -11675,7 +11675,7 @@ const u8 gTrainerClassNames[][13] = {
 };
 
 const struct Trainer gTrainers[] = {
-    [TRAINER_PKMN_TRAINER_1] = {
+    [TRAINER_NONE] = {
         .partyFlags = 0,
         .trainerClass = CLASS_PKMN_TRAINER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,

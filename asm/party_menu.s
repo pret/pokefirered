@@ -4284,7 +4284,7 @@ _08120B64:
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r6, 0
-	bl sub_8120BE8
+	bl IsMonCompatibleWithMoveTutorMove
 	lsls r0, 24
 	cmp r0, 0
 	bne _08120B80
@@ -4293,7 +4293,7 @@ _08120B7C:
 	b _08120B9E
 _08120B80:
 	mov r0, r8
-	bl sub_8120BA8
+	bl GetMoveTutorMove
 _08120B86:
 	lsls r0, 16
 	lsrs r1, r0, 16
@@ -4315,8 +4315,8 @@ _08120B9E:
 	bx r1
 	thumb_func_end sub_8120B20
 
-	thumb_func_start sub_8120BA8
-sub_8120BA8: @ 8120BA8
+	thumb_func_start GetMoveTutorMove
+GetMoveTutorMove: @ 8120BA8
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -4333,16 +4333,16 @@ _08120BBC:
 	b _08120BD6
 _08120BC2:
 	movs r0, 0xA9
-	lsls r0, 1
+	lsls r0, 1 @ MOVE_FRENZY_PLANT
 	b _08120BDE
 _08120BC8:
-	ldr r0, _08120BCC @ =0x00000133
+	ldr r0, _08120BCC @ =0x00000133 @ MOVE_BLAST_BURN
 	b _08120BDE
 	.align 2, 0
 _08120BCC: .4byte 0x00000133
 _08120BD0:
 	movs r0, 0x9A
-	lsls r0, 1
+	lsls r0, 1 @ MOVE_HYDRO_CANNON
 	b _08120BDE
 _08120BD6:
 	ldr r0, _08120BE4 @ =gMoveTutorMoves
@@ -4354,10 +4354,10 @@ _08120BDE:
 	bx r1
 	.align 2, 0
 _08120BE4: .4byte gMoveTutorMoves
-	thumb_func_end sub_8120BA8
+	thumb_func_end GetMoveTutorMove
 
-	thumb_func_start sub_8120BE8
-sub_8120BE8: @ 8120BE8
+	thumb_func_start IsMonCompatibleWithMoveTutorMove
+IsMonCompatibleWithMoveTutorMove: @ 8120BE8
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -4375,19 +4375,19 @@ _08120C00:
 	beq _08120C12
 	b _08120C18
 _08120C06:
-	cmp r0, 0x3
+	cmp r0, 3 @ SPECIES_VENUSAUR
 	beq _08120C34
 	b _08120C2A
 _08120C0C:
-	cmp r0, 0x6
+	cmp r0, 6 @ SPECIES_CHARIZARD
 	beq _08120C34
 	b _08120C2A
 _08120C12:
-	cmp r0, 0x9
+	cmp r0, 9 @ SPECIES_BLASTOISE
 	beq _08120C34
 	b _08120C2A
 _08120C18:
-	ldr r1, _08120C30 @ =gUnknown_8459B7E
+	ldr r1, _08120C30 @ =gMoveTutorMoveCompatibilityTable
 	lsls r0, 1
 	adds r0, r1
 	ldrh r0, [r0]
@@ -4400,13 +4400,13 @@ _08120C2A:
 	movs r0, 0
 	b _08120C36
 	.align 2, 0
-_08120C30: .4byte gUnknown_8459B7E
+_08120C30: .4byte gMoveTutorMoveCompatibilityTable
 _08120C34:
 	movs r0, 0x1
 _08120C36:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8120BE8
+	thumb_func_end IsMonCompatibleWithMoveTutorMove
 
 	thumb_func_start sub_8120C3C
 sub_8120C3C: @ 8120C3C
@@ -16549,7 +16549,7 @@ sub_8126DC8: @ 8126DC8
 	bl GetMonNickname
 	ldr r4, _08126E5C @ =gSpecialVar_0x8005
 	ldrb r0, [r4]
-	bl sub_8120BA8
+	bl GetMoveTutorMove
 	strh r0, [r7, 0xE]
 	ldr r0, _08126E60 @ =gStringVar2
 	movs r1, 0xE

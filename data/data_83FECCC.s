@@ -1107,7 +1107,7 @@ gMoveTutorMoves:: @ 8459B60
 	.2byte MOVE_ROCK_SLIDE
 	.2byte MOVE_SUBSTITUTE
 
-gUnknown_8459B7E:: @ 8459B7E
+gMoveTutorMoveCompatibilityTable:: @ 8459B7E
 	.incbin "baserom.gba", 0x459B7E, 0x33A
 
 gUnknown_8459EB8:: @ 8459EB8

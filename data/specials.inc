@@ -189,7 +189,7 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
-	def_special sub_80CA74C
+	def_special Special_GetBattleOutcome
 	def_special GetDaycareMonNicknames
 	def_special GetDaycareState
 	def_special RejectEggFromDayCare

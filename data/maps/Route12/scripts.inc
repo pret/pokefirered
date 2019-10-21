@@ -34,12 +34,12 @@ Route12_EventScript_168014:: @ 8168014
 	setflag FLAG_WOKE_UP_ROUTE_12_SNORLAX
 	dowildbattle
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	specialvar VAR_RESULT, sub_80CA74C
-	compare_var_to_value VAR_RESULT, 1
+	specialvar VAR_RESULT, Special_GetBattleOutcome
+	compare_var_to_value VAR_RESULT, B_OUTCOME_WON
 	goto_if eq, EventScript_16808F
-	compare_var_to_value VAR_RESULT, 4
+	compare_var_to_value VAR_RESULT, B_OUTCOME_RAN
 	goto_if eq, EventScript_16808F
-	compare_var_to_value VAR_RESULT, 5
+	compare_var_to_value VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if eq, EventScript_16808F
 	release
 	end

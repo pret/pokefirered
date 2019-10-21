@@ -9,8 +9,8 @@ PowerPlant_MapScript1_16376F:: @ 816376F
 	end
 
 EventScript_163779:: @ 8163779
-	specialvar VAR_RESULT, sub_80CA74C
-	compare_var_to_value VAR_RESULT, 7
+	specialvar VAR_RESULT, Special_GetBattleOutcome
+	compare_var_to_value VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if ne, EventScript_1A77A9
 	removeobject VAR_LAST_TALKED
 	return
@@ -57,12 +57,12 @@ PowerPlant_EventScript_1637B8:: @ 81637B8
 	special sub_807F9D8
 	waitstate
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	specialvar VAR_RESULT, sub_80CA74C
-	compare_var_to_value VAR_RESULT, 1
+	specialvar VAR_RESULT, Special_GetBattleOutcome
+	compare_var_to_value VAR_RESULT, B_OUTCOME_WON
 	goto_if eq, EventScript_16381B
-	compare_var_to_value VAR_RESULT, 4
+	compare_var_to_value VAR_RESULT, B_OUTCOME_RAN
 	goto_if eq, EventScript_163824
-	compare_var_to_value VAR_RESULT, 5
+	compare_var_to_value VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if eq, EventScript_163824
 	setflag FLAG_FOUGHT_ZAPDOS
 	release
@@ -93,12 +93,12 @@ PowerPlant_EventScript_16382F:: @ 816382F
 	dowildbattle
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	special sub_8112364
-	specialvar VAR_RESULT, sub_80CA74C
-	compare_var_to_value VAR_RESULT, 1
+	specialvar VAR_RESULT, Special_GetBattleOutcome
+	compare_var_to_value VAR_RESULT, B_OUTCOME_WON
 	goto_if eq, EventScript_163884
-	compare_var_to_value VAR_RESULT, 4
+	compare_var_to_value VAR_RESULT, B_OUTCOME_RAN
 	goto_if eq, EventScript_163884
-	compare_var_to_value VAR_RESULT, 5
+	compare_var_to_value VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if eq, EventScript_163884
 	setflag FLAG_FOUGHT_POWER_PLANT_ELECTRODE_1
 	release
@@ -124,12 +124,12 @@ PowerPlant_EventScript_16388D:: @ 816388D
 	dowildbattle
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	special sub_8112364
-	specialvar VAR_RESULT, sub_80CA74C
-	compare_var_to_value VAR_RESULT, 1
+	specialvar VAR_RESULT, Special_GetBattleOutcome
+	compare_var_to_value VAR_RESULT, B_OUTCOME_WON
 	goto_if eq, EventScript_1638E2
-	compare_var_to_value VAR_RESULT, 4
+	compare_var_to_value VAR_RESULT, B_OUTCOME_RAN
 	goto_if eq, EventScript_1638E2
-	compare_var_to_value VAR_RESULT, 5
+	compare_var_to_value VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if eq, EventScript_1638E2
 	setflag FLAG_FOUGHT_POWER_PLANT_ELECTRODE_2
 	release

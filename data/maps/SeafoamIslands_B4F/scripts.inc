@@ -12,8 +12,8 @@ SeafoamIslands_B4F_MapScript2_163048:: @ 8163048
 	end
 
 EventScript_163052:: @ 8163052
-	specialvar VAR_RESULT, sub_80CA74C
-	compare_var_to_value VAR_RESULT, 7
+	specialvar VAR_RESULT, Special_GetBattleOutcome
+	compare_var_to_value VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if ne, EventScript_1A77A9
 	removeobject VAR_LAST_TALKED
 	return
@@ -182,12 +182,12 @@ SeafoamIslands_B4F_EventScript_1631AC:: @ 81631AC
 	special sub_807F9D8
 	waitstate
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	specialvar VAR_RESULT, sub_80CA74C
-	compare_var_to_value VAR_RESULT, 1
+	specialvar VAR_RESULT, Special_GetBattleOutcome
+	compare_var_to_value VAR_RESULT, B_OUTCOME_WON
 	goto_if eq, EventScript_16320F
-	compare_var_to_value VAR_RESULT, 4
+	compare_var_to_value VAR_RESULT, B_OUTCOME_RAN
 	goto_if eq, EventScript_163218
-	compare_var_to_value VAR_RESULT, 5
+	compare_var_to_value VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if eq, EventScript_163218
 	setflag FLAG_FOUGHT_ARTICUNO
 	release

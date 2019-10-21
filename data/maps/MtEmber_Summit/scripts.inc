@@ -9,8 +9,8 @@ MtEmber_Summit_MapScript2_163B07:: @ 8163B07
 	end
 
 EventScript_163B11:: @ 8163B11
-	specialvar VAR_RESULT, sub_80CA74C
-	compare_var_to_value VAR_RESULT, 7
+	specialvar VAR_RESULT, Special_GetBattleOutcome
+	compare_var_to_value VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if ne, EventScript_1A77A9
 	removeobject VAR_LAST_TALKED
 	return
@@ -44,12 +44,12 @@ MtEmber_Summit_EventScript_163B33:: @ 8163B33
 	special sub_807F9D8
 	waitstate
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	specialvar VAR_RESULT, sub_80CA74C
-	compare_var_to_value VAR_RESULT, 1
+	specialvar VAR_RESULT, Special_GetBattleOutcome
+	compare_var_to_value VAR_RESULT, B_OUTCOME_WON
 	goto_if eq, EventScript_163B96
-	compare_var_to_value VAR_RESULT, 4
+	compare_var_to_value VAR_RESULT, B_OUTCOME_RAN
 	goto_if eq, EventScript_163B9F
-	compare_var_to_value VAR_RESULT, 5
+	compare_var_to_value VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if eq, EventScript_163B9F
 	setflag FLAG_FOUGHT_MOLTRES
 	release

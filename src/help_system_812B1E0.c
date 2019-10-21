@@ -950,7 +950,7 @@ static bool8 IsInDungeonMap(void)
             if (
                    sDungeonMaps[i][0] == gSaveBlock1Ptr->location.mapGroup
                 && sDungeonMaps[i][1] + j == gSaveBlock1Ptr->location.mapNum
-                && (i != 15 /* TANOBY */ || FlagGet(FLAG_0x849) == TRUE)
+                && (i != 15 /* TANOBY */ || FlagGet(FLAG_SYS_UNLOCKED_TANOBY_RUINS) == TRUE)
             )
                 return TRUE;
         }
@@ -990,10 +990,10 @@ bool8 sub_812B40C(void)
     if (gUnknown_203B0EE == 1)
         return FALSE;
 
-    if (gSaveFileStatus != SAVE_STATUS_EMPTY && gSaveFileStatus != SAVE_STATUS_INVALID && FlagGet(FLAG_0x83C))
+    if (gSaveFileStatus != SAVE_STATUS_EMPTY && gSaveFileStatus != SAVE_STATUS_INVALID && FlagGet(FLAG_SYS_SAW_HELP_SYSTEM_INTRO))
         return FALSE;
 
-    FlagSet(FLAG_0x83C);
+    FlagSet(FLAG_SYS_SAW_HELP_SYSTEM_INTRO);
     gUnknown_203B0EE = 1;
     return TRUE;
 }

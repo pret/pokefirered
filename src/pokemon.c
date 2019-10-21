@@ -3634,7 +3634,7 @@ static u8 SendMonToPC(struct Pokemon* mon)
                 gSpecialVar_MonBoxId = boxNo;
                 gSpecialVar_MonBoxPos = boxPos;
                 if (get_unknown_box_id() != boxNo)
-                    FlagClear(FLAG_0x843);
+                    FlagClear(FLAG_SYS_CHANGED_BOX_TO_STORE_MON);
                 VarSet(VAR_0x4037, boxNo);
                 return MON_GIVEN_TO_PC;
             }

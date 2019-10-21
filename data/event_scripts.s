@@ -1636,10 +1636,10 @@ EventScript_1A661D:: @ 81A661D
 	return
 
 EventScript_1A6636:: @ 81A6636
-	checkflag 2114
+	checkflag FLAG_SYS_INFORMED_OF_LOCAL_WIRELESS_PLAYER
 	goto_if TRUE, EventScript_1A661D
 	msgbox Text_1A552B
-	setflag 2114
+	setflag FLAG_SYS_INFORMED_OF_LOCAL_WIRELESS_PLAYER
 	message Text_1BCCCA
 	waitmessage
 	applymovement VAR_LAST_TALKED, Movement_1A666C
@@ -2721,7 +2721,7 @@ EventScript_1A774D:: @ 81A774D
 	applymovement VAR_0x8008, Movement_1A75DD
 	waitmovement 0
 	msgbox Text_1A62D3
-	setflag 2105
+	setflag FLAG_SYS_MYSTERY_GIFT_ENABLED
 	textcolor 3
 	special sub_80699BC
 	signmsg
@@ -2759,7 +2759,7 @@ EventScript_1A77B0:: @ 81A77B0
 Route16_NorthEntrance_1F_EventScript_1A77B6:: @ 81A77B6
 Route18_EastEntrance_1F_EventScript_1A77B6:: @ 81A77B6
 	lockall
-	clearflag FLAG_0x830
+	clearflag FLAG_SYS_ON_CYCLING_ROAD
 	setvar VAR_MAP_SCENE_ROUTE16, 0
 	releaseall
 	end
@@ -4384,7 +4384,7 @@ EventScript_1A924B:: @ 81A924B
 	return
 
 EventScript_1A925E:: @ 81A925E
-	checkflag FLAG_0x849
+	checkflag FLAG_SYS_UNLOCKED_TANOBY_RUINS
 	goto_if TRUE, EventScript_1A77A9
 	setweather 11
 	doweather
@@ -10484,7 +10484,7 @@ VictoryRoad_2F_EventScript_1BE11D:: @ 81BE11D
 	lockall
 	checkflag FLAG_BADGE04_GET
 	goto_if FALSE, EventScript_1BE185
-	checkflag FLAG_0x805
+	checkflag FLAG_SYS_STRENGTH_ACTIVE
 	goto_if TRUE, EventScript_1BE18E
 	checkpartymove MOVE_STRENGTH
 	compare_var_to_value VAR_RESULT, 6
@@ -10507,7 +10507,7 @@ EventScript_FldEffStrength:: @ 81BE16E
 	end
 
 EventScript_1BE179:: @ 81BE179
-	setflag FLAG_0x805
+	setflag FLAG_SYS_STRENGTH_ACTIVE
 	msgbox gUnknown_81BE1FA, 3
 	end
 
@@ -11335,7 +11335,7 @@ PewterCity_PokemonCenter_1F_EventScript_1BEE16:: @ 81BEE16
 	faceplayer
 	compare_var_to_value VAR_0x4001, 1
 	goto_if eq, EventScript_1BEE3A
-	checkflag 2093
+	checkflag FLAG_SYS_SET_TRAINER_CARD_PROFILE
 	goto_if TRUE, EventScript_1BEECD
 	msgbox Text_1BEF88
 	goto EventScript_1BEE44

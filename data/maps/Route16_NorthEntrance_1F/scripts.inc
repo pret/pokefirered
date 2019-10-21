@@ -3,7 +3,7 @@ Route16_NorthEntrance_1F_MapScripts:: @ 81701C2
 	.byte 0
 
 Route16_NorthEntrance_1F_MapScript1_1701C8:: @ 81701C8
-	clearflag FLAG_0x830
+	clearflag FLAG_SYS_ON_CYCLING_ROAD
 	checkflag FLAG_GOT_BICYCLE
 	call_if TRUE, EventScript_1701D5
 	end

@@ -28,7 +28,7 @@ EventScript_165243:: @ 8165243
 	checkflag FLAG_DEOXYS_FLEW_AWAY
 	goto_if TRUE, EventScript_1A77A9
 	clearflag FLAG_HIDE_BIRTH_ISLAND_METEORITE
-	clearflag FLAG_0x848
+	clearflag FLAG_SYS_DEOXYS_AWAKENED
 	return
 
 BirthIsland_Exterior_MapScript2_165253:: @ 8165253
@@ -38,7 +38,7 @@ BirthIsland_Exterior_MapScript2_165253:: @ 8165253
 
 EventScript_16525D:: @ 816525D
 	specialvar VAR_RESULT, sub_80CA74C
-	compare_var_to_value VAR_RESULT, 7
+	compare_var_to_value VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if ne, EventScript_1A77A9
 	removeobject 2
 	return

@@ -57,15 +57,15 @@ PokemonLeague_LoreleisRoom_EventScript_1625DC:: @ 81625DC
 	goto_if TRUE, EventScript_162669
 	famechecker FAMECHECKER_LORELEI, 0
 	famechecker FAMECHECKER_LORELEI, 1
-	checkflag FLAG_0x844
+	checkflag FLAG_SYS_CAN_LINK_WITH_RS
 	call_if FALSE, EventScript_162641
-	checkflag FLAG_0x844
+	checkflag FLAG_SYS_CAN_LINK_WITH_RS
 	call_if TRUE, EventScript_16264A
 	setflag FLAG_TEMP_3
 	setflag FLAG_TEMP_5
-	checkflag FLAG_0x844
+	checkflag FLAG_SYS_CAN_LINK_WITH_RS
 	call_if FALSE, EventScript_162653
-	checkflag FLAG_0x844
+	checkflag FLAG_SYS_CAN_LINK_WITH_RS
 	call_if TRUE, EventScript_16265E
 	clearflag FLAG_TEMP_5
 	goto EventScript_162673

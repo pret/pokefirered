@@ -3131,7 +3131,7 @@ static bool8 sub_8113778(u16 a0, u16 * a1)
             return TRUE;
     }
 
-    if (!FlagGet(FLAG_0x844))
+    if (!FlagGet(FLAG_SYS_CAN_LINK_WITH_RS))
     {
         if (a0 == 4 || a0 == 5 || a0 == 6 || a0 == 7 || a0 == 8 || a0 == 9 || a0 == 10 || a0 == 22 || a0 == 25 || a0 == 26)
             return TRUE;

@@ -59,9 +59,9 @@ PokemonLeague_AgathasRoom_EventScript_162877:: @ 8162877
 	call_if TRUE, EventScript_1628F2
 	setflag FLAG_TEMP_3
 	setflag FLAG_TEMP_5
-	checkflag FLAG_0x844
+	checkflag FLAG_SYS_CAN_LINK_WITH_RS
 	call_if FALSE, EventScript_1628FB
-	checkflag FLAG_0x844
+	checkflag FLAG_SYS_CAN_LINK_WITH_RS
 	call_if TRUE, EventScript_162906
 	clearflag FLAG_TEMP_5
 	goto EventScript_16291B

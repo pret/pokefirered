@@ -58,9 +58,9 @@ PokemonLeague_BrunosRoom_EventScript_1626EC:: @ 81626EC
 	call_if TRUE, EventScript_16275A
 	setflag FLAG_TEMP_3
 	setflag FLAG_TEMP_5
-	checkflag FLAG_0x844
+	checkflag FLAG_SYS_CAN_LINK_WITH_RS
 	call_if FALSE, EventScript_162763
-	checkflag FLAG_0x844
+	checkflag FLAG_SYS_CAN_LINK_WITH_RS
 	call_if TRUE, EventScript_16276E
 	clearflag FLAG_TEMP_5
 	goto EventScript_1627B0

@@ -69,9 +69,9 @@ EventScript_162B76:: @ 8162B76
 	setflag FLAG_TEMP_3
 	setflag FLAG_TEMP_5
 	savebgm MUS_WIN_GYM
-	checkflag FLAG_0x844
+	checkflag FLAG_SYS_CAN_LINK_WITH_RS
 	call_if FALSE, EventScript_162C6F
-	checkflag FLAG_0x844
+	checkflag FLAG_SYS_CAN_LINK_WITH_RS
 	call_if TRUE, EventScript_162C91
 	setflag FLAG_TEMP_4
 	clearflag FLAG_TEMP_5

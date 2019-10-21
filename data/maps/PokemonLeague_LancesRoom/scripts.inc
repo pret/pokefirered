@@ -112,9 +112,9 @@ PokemonLeague_LancesRoom_EventScript_162A14:: @ 8162A14
 	call_if TRUE, EventScript_162A82
 	setflag FLAG_TEMP_3
 	setflag FLAG_TEMP_5
-	checkflag FLAG_0x844
+	checkflag FLAG_SYS_CAN_LINK_WITH_RS
 	call_if FALSE, EventScript_162A8B
-	checkflag FLAG_0x844
+	checkflag FLAG_SYS_CAN_LINK_WITH_RS
 	call_if TRUE, EventScript_162A96
 	clearflag FLAG_TEMP_5
 	goto EventScript_162AAB

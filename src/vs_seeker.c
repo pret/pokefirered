@@ -641,7 +641,7 @@ bool8 sub_810C4EC(void)
             gSaveBlock1Ptr->trainerRematchStepCounter++;
     }
 
-    if (FlagGet(FLAG_0x801) == TRUE)
+    if (FlagGet(FLAG_SYS_VS_SEEKER_CHARGING) == TRUE)
     {
         u16 x;
         do {
@@ -657,7 +657,7 @@ bool8 sub_810C4EC(void)
         } while (0);
         if (x == 100)
         {
-            FlagClear(FLAG_0x801);
+            FlagClear(FLAG_SYS_VS_SEEKER_CHARGING);
             sub_810C640();
             sub_810D0D0();
             return TRUE;
@@ -743,7 +743,7 @@ bool8 sub_810C4EC(void)
 
 void sub_810C578(void)
 {
-    FlagClear(FLAG_0x801);
+    FlagClear(FLAG_SYS_VS_SEEKER_CHARGING);
     sub_810C640();
     sub_810D0D0();
     sub_810C594();
@@ -972,7 +972,7 @@ static u8 GetVsSeekerResponseInArea(const VsSeekerData * a0)
     if (sVsSeeker->trainerWantsRematch)
     {
         PlaySE(SE_PIN);
-        FlagSet(FLAG_0x801);
+        FlagSet(FLAG_SYS_VS_SEEKER_CHARGING);
         sub_810C640();
         return 2;
     }
@@ -1270,7 +1270,7 @@ static void TryGetRematchTrainerIdGivenGameState(const u16 * a0, u8 * a1)
                 *a1 = GetRematchTrainerIdGivenGameState(a0, *a1);
             break;
         case 5:
-            if (!FlagGet(FLAG_0x844))
+            if (!FlagGet(FLAG_SYS_CAN_LINK_WITH_RS))
                 *a1 = GetRematchTrainerIdGivenGameState(a0, *a1);
             break;
     }

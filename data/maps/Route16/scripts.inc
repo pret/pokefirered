@@ -19,7 +19,7 @@ Route16_MapScript2_168103:: @ 8168103
 	end
 
 EventScript_16810F:: @ 816810F
-	setflag FLAG_0x830
+	setflag FLAG_SYS_ON_CYCLING_ROAD
 	return
 
 Route16_MapScript3_168113:: @ 8168113

@@ -229,7 +229,7 @@ MysteryEventScript_AuroraTicket:: @ 84894B9
 	compare_var_to_value VAR_RESULT, 0
 	vgoto_if TRUE, AuroraTicket_NoBagSpace
 	giveitem ITEM_AURORA_TICKET
-	setflag FLAG_0x84B
+	setflag FLAG_SYS_GOT_AURORA_TICKET
 	setflag FLAG_GOT_AURORA_TICKET
 	vmessage sText_AuroraTicket2
 	waitmessage
@@ -293,7 +293,7 @@ MysteryEventScript_MysticTicket:: @ 8489689
 	compare_var_to_value VAR_RESULT, 0
 	vgoto_if TRUE, MysticTicket_NoBagSpace
 	giveitem ITEM_MYSTIC_TICKET
-	setflag FLAG_0x84A
+	setflag FLAG_SYS_GOT_MYSTIC_TICKET
 	setflag FLAG_GOT_MYSTIC_TICKET
 	vmessage sText_MysticTicket1
 	waitmessage

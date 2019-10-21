@@ -11,7 +11,7 @@ IndigoPlateau_PokemonCenter_1F_MapScript1_16EA65:: @ 816EA65
 	end
 
 EventScript_16EA79:: @ 816EA79
-	checkflag FLAG_0x844
+	checkflag FLAG_SYS_CAN_LINK_WITH_RS
 	goto_if TRUE, EventScript_1A77A9
 	setobjectxyperm 4, 4, 2
 	return
@@ -27,7 +27,7 @@ IndigoPlateau_PokemonCenter_1F_EventScript_16EA8A:: @ 816EA8A
 	end
 
 EventScript_16EAA6:: @ 816EAA6
-	checkflag FLAG_0x844
+	checkflag FLAG_SYS_CAN_LINK_WITH_RS
 	goto_if TRUE, EventScript_16EAB9
 	msgbox gUnknown_819A943
 	release

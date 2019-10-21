@@ -8,7 +8,7 @@ OneIsland_PokemonCenter_1F_MapScripts:: @ 8170BF8
 OneIsland_PokemonCenter_1F_MapScript3_170C0D:: @ 8170C0D
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
 	call_if ge, EventScript_170C22
-	checkflag FLAG_0x844
+	checkflag FLAG_SYS_CAN_LINK_WITH_RS
 	call_if TRUE, EventScript_170C36
 	end
 
@@ -293,7 +293,7 @@ EventScript_170FA5:: @ 8170FA5
 	waitmovement 0
 	msgbox gUnknown_81A1D7D
 	special sub_810B82C
-	setflag FLAG_0x844
+	setflag FLAG_SYS_CAN_LINK_WITH_RS
 	setflag FLAG_HIDE_CERULEAN_CAVE_GUARD
 	setflag FLAG_HIDE_LORELEI_IN_HER_HOUSE
 	setvar VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 6
@@ -342,7 +342,7 @@ EventScript_1710B2:: @ 81710B2
 	removeitem ITEM_TRI_PASS, 1
 	setvar VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
 	additem ITEM_RAINBOW_PASS, 1
-	setflag FLAG_0x846
+	setflag FLAG_SYS_SEVII_MAP_4567
 	textcolor 3
 	playfanfare MUS_FAN5
 	message Text_1A1B56
@@ -404,7 +404,7 @@ OneIsland_PokemonCenter_1F_EventScript_171151:: @ 8171151
 OneIsland_PokemonCenter_1F_EventScript_17115A:: @ 817115A
 	lock
 	faceplayer
-	checkflag FLAG_0x844
+	checkflag FLAG_SYS_CAN_LINK_WITH_RS
 	goto_if TRUE, EventScript_17116F
 	msgbox gUnknown_81A218D
 	release
@@ -417,7 +417,7 @@ EventScript_17116F:: @ 817116F
 
 OneIsland_PokemonCenter_1F_EventScript_171179:: @ 8171179
 	lockall
-	checkflag FLAG_0x844
+	checkflag FLAG_SYS_CAN_LINK_WITH_RS
 	goto_if TRUE, EventScript_1711A0
 	checkflag FLAG_SEVII_DETOUR_FINISHED
 	goto_if TRUE, EventScript_171196

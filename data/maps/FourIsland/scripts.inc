@@ -142,7 +142,7 @@ EventScript_167E19:: @ 8167E19
 FourIsland_EventScript_167E2E:: @ 8167E2E
 	lock
 	faceplayer
-	checkflag FLAG_0x844
+	checkflag FLAG_SYS_CAN_LINK_WITH_RS
 	goto_if TRUE, EventScript_167E43
 	msgbox gUnknown_8182A2B
 	release

@@ -44,7 +44,7 @@ FiveIsland_RocketWarehouse_EventScript_163F81:: @ 8163F81
 
 FiveIsland_RocketWarehouse_EventScript_163F93:: @ 8163F93
 	trainerbattle 2, TRAINER_SCIENTIST_GIDEON, 0, Text_17BBAF, Text_17BC55, EventScript_163FCD
-	checkflag FLAG_0x844
+	checkflag FLAG_SYS_CAN_LINK_WITH_RS
 	goto_if TRUE, EventScript_163FB7
 	msgbox gUnknown_817BCA3, 6
 	end

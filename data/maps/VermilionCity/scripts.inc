@@ -58,7 +58,7 @@ VermilionCity_EventScript_166941:: @ 8166941
 	end
 
 EventScript_166958:: @ 8166958
-	checkflag FLAG_0x84A
+	checkflag FLAG_SYS_GOT_MYSTIC_TICKET
 	goto_if FALSE, EventScript_1A77B0
 	checkitem ITEM_MYSTIC_TICKET, 1
 	compare_var_to_value VAR_RESULT, 0
@@ -67,7 +67,7 @@ EventScript_166958:: @ 8166958
 	end
 
 EventScript_166977:: @ 8166977
-	checkflag FLAG_0x84B
+	checkflag FLAG_SYS_GOT_AURORA_TICKET
 	goto_if FALSE, EventScript_1A77B0
 	checkitem ITEM_AURORA_TICKET, 1
 	compare_var_to_value VAR_RESULT, 0

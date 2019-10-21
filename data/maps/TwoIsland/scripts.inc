@@ -9,7 +9,7 @@ TwoIsland_MapScript1_16756A:: @ 816756A
 	end
 
 EventScript_167576:: @ 8167576
-	checkflag FLAG_0x844
+	checkflag FLAG_SYS_CAN_LINK_WITH_RS
 	goto_if TRUE, EventScript_167597
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if TRUE, EventScript_1675B8

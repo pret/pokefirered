@@ -6,7 +6,7 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E401:: @ 816E401
 	faceplayer
 	setvar VAR_0x8008, 8
 	call EventScript_1A8CAD
-	checkflag FLAG_0x276
+	checkflag FLAG_DID_SEELOR_TRADE
 	goto_if TRUE, EventScript_16E473
 	msgbox gUnknown_81A597B, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
@@ -19,7 +19,7 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E401:: @ 816E401
 	goto_if ne, EventScript_16E465
 	call EventScript_1A8CD9
 	msgbox gUnknown_81A59DA
-	setflag FLAG_0x276
+	setflag FLAG_DID_SEELOR_TRADE
 	release
 	end
 
@@ -65,7 +65,7 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E47D:: @ 816E47D
 	end
 
 EventScript_16E4EC:: @ 816E4EC
-	checkflag FLAG_0x273
+	checkflag FLAG_GOT_HELIX_FOSSIL
 	goto_if FALSE, EventScript_16E534
 	checkflag FLAG_REVIVED_HELIX
 	goto_if TRUE, EventScript_16E534
@@ -73,7 +73,7 @@ EventScript_16E4EC:: @ 816E4EC
 	return
 
 EventScript_16E504:: @ 816E504
-	checkflag FLAG_0x272
+	checkflag FLAG_GOT_DOME_FOSSIL
 	goto_if FALSE, EventScript_16E534
 	checkflag FLAG_REVIVED_DOME
 	goto_if TRUE, EventScript_16E534
@@ -301,9 +301,9 @@ EventScript_16E897:: @ 816E897
 	end
 
 EventScript_16E8A1:: @ 816E8A1
-	checkflag FLAG_0x273
+	checkflag FLAG_GOT_HELIX_FOSSIL
 	goto_if TRUE, EventScript_16E8B9
-	checkflag FLAG_0x272
+	checkflag FLAG_GOT_DOME_FOSSIL
 	goto_if TRUE, EventScript_16E8C8
 	goto EventScript_16E534
 	end

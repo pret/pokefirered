@@ -4,7 +4,7 @@ Route18_EastEntrance_1F_MapScripts:: @ 8170378
 
 Route18_EastEntrance_1F_MapScript1_17037E:: @ 817037E
 	clearflag FLAG_0x830
-	checkflag FLAG_0x271
+	checkflag FLAG_GOT_BICYCLE
 	call_if TRUE, EventScript_17038B
 	end
 

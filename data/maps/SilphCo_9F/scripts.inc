@@ -3,13 +3,13 @@ SilphCo_9F_MapScripts:: @ 8161CDE
 	.byte 0
 
 SilphCo_9F_MapScript1_161CE4:: @ 8161CE4
-	checkflag FLAG_0x288
+	checkflag FLAG_SILPH_9F_DOOR_1
 	call_if FALSE, EventScript_1A840C
-	checkflag FLAG_0x289
+	checkflag FLAG_SILPH_9F_DOOR_2
 	call_if FALSE, EventScript_1A8443
-	checkflag FLAG_0x28A
+	checkflag FLAG_SILPH_9F_DOOR_3
 	call_if FALSE, EventScript_1A847A
-	checkflag FLAG_0x28B
+	checkflag FLAG_SILPH_9F_DOOR_4
 	call_if FALSE, EventScript_1A84A8
 	end
 

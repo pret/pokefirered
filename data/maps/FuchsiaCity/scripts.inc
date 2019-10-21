@@ -4,9 +4,9 @@ FuchsiaCity_MapScripts:: @ 8166D75
 
 FuchsiaCity_MapScript1_166D7B:: @ 8166D7B
 	setworldmapflag FLAG_WORLD_MAP_FUCHSIA_CITY
-	checkflag FLAG_0x272
+	checkflag FLAG_GOT_DOME_FOSSIL
 	call_if TRUE, EventScript_166D91
-	checkflag FLAG_0x272
+	checkflag FLAG_GOT_DOME_FOSSIL
 	call_if FALSE, EventScript_166D97
 	end
 
@@ -121,7 +121,7 @@ FuchsiaCity_EventScript_166E83:: @ 8166E83
 
 FuchsiaCity_EventScript_166E9C:: @ 8166E9C
 	lockall
-	checkflag FLAG_0x272
+	checkflag FLAG_GOT_DOME_FOSSIL
 	goto_if TRUE, EventScript_166EBE
 	setvar VAR_0x8004, SPECIES_KABUTO
 	special sub_80CBDCC

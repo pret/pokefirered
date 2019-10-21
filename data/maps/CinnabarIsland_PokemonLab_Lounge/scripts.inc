@@ -10,7 +10,7 @@ CinnabarIsland_PokemonLab_Lounge_EventScript_16E2C2:: @ 816E2C2
 	faceplayer
 	setvar VAR_0x8008, 6
 	call EventScript_1A8CAD
-	checkflag FLAG_0x274
+	checkflag FLAG_DID_ESPHERE_TRADE
 	goto_if TRUE, EventScript_16E334
 	msgbox gUnknown_81A59FE, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
@@ -23,7 +23,7 @@ CinnabarIsland_PokemonLab_Lounge_EventScript_16E2C2:: @ 816E2C2
 	goto_if ne, EventScript_16E326
 	call EventScript_1A8CD9
 	msgbox gUnknown_81A5A9D
-	setflag FLAG_0x274
+	setflag FLAG_DID_ESPHERE_TRADE
 	release
 	end
 
@@ -50,7 +50,7 @@ CinnabarIsland_PokemonLab_Lounge_EventScript_16E33E:: @ 816E33E
 	copyvar VAR_0x8004, VAR_0x8008
 	specialvar VAR_RESULT, sub_8053A9C
 	copyvar VAR_0x8009, VAR_RESULT
-	checkflag FLAG_0x275
+	checkflag FLAG_DID_TANGENY_TRADE
 	goto_if TRUE, EventScript_16E3D4
 	msgbox gUnknown_81A5AD6, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
@@ -71,7 +71,7 @@ CinnabarIsland_PokemonLab_Lounge_EventScript_16E33E:: @ 816E33E
 	special sub_8054440
 	waitstate
 	msgbox gUnknown_81A5B4A
-	setflag FLAG_0x275
+	setflag FLAG_DID_TANGENY_TRADE
 	release
 	end
 

@@ -3,7 +3,7 @@ SilphCo_11F_MapScripts:: @ 8161DEE
 	.byte 0
 
 SilphCo_11F_MapScript1_161DF4:: @ 8161DF4
-	checkflag FLAG_0x28D
+	checkflag FLAG_SILPH_11F_DOOR
 	call_if FALSE, EventScript_1A8504
 	end
 

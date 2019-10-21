@@ -3,9 +3,9 @@ SilphCo_3F_MapScripts:: @ 81616C5
 	.byte 0
 
 SilphCo_3F_MapScript1_1616CB:: @ 81616CB
-	checkflag FLAG_0x27C
+	checkflag FLAG_SILPH_3F_DOOR_1
 	call_if FALSE, EventScript_1A81A5
-	checkflag FLAG_0x27D
+	checkflag FLAG_SILPH_3F_DOOR_2
 	call_if FALSE, EventScript_1A81DC
 	end
 

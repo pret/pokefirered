@@ -3607,7 +3607,7 @@ SilphCo_2F_EventScript_1A891B:: @ 81A891B
 	lockall
 	setvar VAR_0x4001, 1
 	setvar VAR_0x8004, 634
-	checkflag FLAG_0x27A
+	checkflag FLAG_SILPH_2F_DOOR_1
 	goto_if TRUE, EventScript_1A813F
 	goto EventScript_1A8B23
 	end
@@ -3616,7 +3616,7 @@ SilphCo_2F_EventScript_1A8935:: @ 81A8935
 	lockall
 	setvar VAR_0x4001, 2
 	setvar VAR_0x8004, 635
-	checkflag FLAG_0x27B
+	checkflag FLAG_SILPH_2F_DOOR_2
 	goto_if TRUE, EventScript_1A813F
 	goto EventScript_1A8B23
 	end
@@ -3625,7 +3625,7 @@ SilphCo_3F_EventScript_1A894F:: @ 81A894F
 	lockall
 	setvar VAR_0x4001, 3
 	setvar VAR_0x8004, 636
-	checkflag FLAG_0x27C
+	checkflag FLAG_SILPH_3F_DOOR_1
 	goto_if TRUE, EventScript_1A813F
 	goto EventScript_1A8B23
 	end
@@ -3634,7 +3634,7 @@ SilphCo_3F_EventScript_1A8969:: @ 81A8969
 	lockall
 	setvar VAR_0x4001, 4
 	setvar VAR_0x8004, 637
-	checkflag FLAG_0x27D
+	checkflag FLAG_SILPH_3F_DOOR_2
 	goto_if TRUE, EventScript_1A813F
 	goto EventScript_1A8B23
 	end
@@ -3643,7 +3643,7 @@ SilphCo_4F_EventScript_1A8983:: @ 81A8983
 	lockall
 	setvar VAR_0x4001, 5
 	setvar VAR_0x8004, 638
-	checkflag FLAG_0x27E
+	checkflag FLAG_SILPH_4F_DOOR_1
 	goto_if TRUE, EventScript_1A813F
 	goto EventScript_1A8B23
 	end
@@ -3652,7 +3652,7 @@ SilphCo_4F_EventScript_1A899D:: @ 81A899D
 	lockall
 	setvar VAR_0x4001, 6
 	setvar VAR_0x8004, 639
-	checkflag FLAG_0x27F
+	checkflag FLAG_SILPH_4F_DOOR_2
 	goto_if TRUE, EventScript_1A813F
 	goto EventScript_1A8B23
 	end
@@ -3661,7 +3661,7 @@ SilphCo_5F_EventScript_1A89B7:: @ 81A89B7
 	lockall
 	setvar VAR_0x4001, 7
 	setvar VAR_0x8004, 640
-	checkflag FLAG_0x280
+	checkflag FLAG_SILPH_5F_DOOR_1
 	goto_if TRUE, EventScript_1A813F
 	goto EventScript_1A8B23
 	end
@@ -3670,7 +3670,7 @@ SilphCo_5F_EventScript_1A89D1:: @ 81A89D1
 	lockall
 	setvar VAR_0x4001, 8
 	setvar VAR_0x8004, 641
-	checkflag FLAG_0x281
+	checkflag FLAG_SILPH_5F_DOOR_2
 	goto_if TRUE, EventScript_1A813F
 	goto EventScript_1A8B23
 	end
@@ -3679,7 +3679,7 @@ SilphCo_5F_EventScript_1A89EB:: @ 81A89EB
 	lockall
 	setvar VAR_0x4001, 9
 	setvar VAR_0x8004, 642
-	checkflag FLAG_0x282
+	checkflag FLAG_SILPH_5F_DOOR_3
 	goto_if TRUE, EventScript_1A813F
 	goto EventScript_1A8B23
 	end
@@ -3688,7 +3688,7 @@ SilphCo_6F_EventScript_1A8A05:: @ 81A8A05
 	lockall
 	setvar VAR_0x4001, 10
 	setvar VAR_0x8004, 643
-	checkflag FLAG_0x283
+	checkflag FLAG_SILPH_6F_DOOR
 	goto_if TRUE, EventScript_1A813F
 	goto EventScript_1A8B23
 	end
@@ -3697,7 +3697,7 @@ SilphCo_7F_EventScript_1A8A1F:: @ 81A8A1F
 	lockall
 	setvar VAR_0x4001, 11
 	setvar VAR_0x8004, 644
-	checkflag FLAG_0x284
+	checkflag FLAG_SILPH_7F_DOOR_1
 	goto_if TRUE, EventScript_1A813F
 	goto EventScript_1A8B23
 	end
@@ -3706,7 +3706,7 @@ SilphCo_7F_EventScript_1A8A39:: @ 81A8A39
 	lockall
 	setvar VAR_0x4001, 12
 	setvar VAR_0x8004, 645
-	checkflag FLAG_0x285
+	checkflag FLAG_SILPH_7F_DOOR_2
 	goto_if TRUE, EventScript_1A813F
 	goto EventScript_1A8B23
 	end
@@ -3715,7 +3715,7 @@ SilphCo_7F_EventScript_1A8A53:: @ 81A8A53
 	lockall
 	setvar VAR_0x4001, 13
 	setvar VAR_0x8004, 646
-	checkflag FLAG_0x286
+	checkflag FLAG_SILPH_7F_DOOR_3
 	goto_if TRUE, EventScript_1A813F
 	goto EventScript_1A8B23
 	end
@@ -3724,7 +3724,7 @@ SilphCo_8F_EventScript_1A8A6D:: @ 81A8A6D
 	lockall
 	setvar VAR_0x4001, 14
 	setvar VAR_0x8004, 647
-	checkflag FLAG_0x287
+	checkflag FLAG_SILPH_8F_DOOR
 	goto_if TRUE, EventScript_1A813F
 	goto EventScript_1A8B23
 	end
@@ -3733,7 +3733,7 @@ SilphCo_9F_EventScript_1A8A87:: @ 81A8A87
 	lockall
 	setvar VAR_0x4001, 15
 	setvar VAR_0x8004, 648
-	checkflag FLAG_0x288
+	checkflag FLAG_SILPH_9F_DOOR_1
 	goto_if TRUE, EventScript_1A813F
 	goto EventScript_1A8B23
 	end
@@ -3742,7 +3742,7 @@ SilphCo_9F_EventScript_1A8AA1:: @ 81A8AA1
 	lockall
 	setvar VAR_0x4001, 16
 	setvar VAR_0x8004, 649
-	checkflag FLAG_0x289
+	checkflag FLAG_SILPH_9F_DOOR_2
 	goto_if TRUE, EventScript_1A813F
 	goto EventScript_1A8B23
 	end
@@ -3751,7 +3751,7 @@ SilphCo_9F_EventScript_1A8ABB:: @ 81A8ABB
 	lockall
 	setvar VAR_0x4001, 17
 	setvar VAR_0x8004, 650
-	checkflag FLAG_0x28A
+	checkflag FLAG_SILPH_9F_DOOR_3
 	goto_if TRUE, EventScript_1A813F
 	goto EventScript_1A8B23
 	end
@@ -3760,7 +3760,7 @@ SilphCo_9F_EventScript_1A8AD5:: @ 81A8AD5
 	lockall
 	setvar VAR_0x4001, 18
 	setvar VAR_0x8004, 651
-	checkflag FLAG_0x28B
+	checkflag FLAG_SILPH_9F_DOOR_4
 	goto_if TRUE, EventScript_1A813F
 	goto EventScript_1A8B23
 	end
@@ -3769,7 +3769,7 @@ SilphCo_10F_EventScript_1A8AEF:: @ 81A8AEF
 	lockall
 	setvar VAR_0x4001, 19
 	setvar VAR_0x8004, 652
-	checkflag FLAG_0x28C
+	checkflag FLAG_SILPH_10F_DOOR
 	goto_if TRUE, EventScript_1A813F
 	goto EventScript_1A8B23
 	end
@@ -3778,7 +3778,7 @@ SilphCo_11F_EventScript_1A8B09:: @ 81A8B09
 	lockall
 	setvar VAR_0x4001, 20
 	setvar VAR_0x8004, 653
-	checkflag FLAG_0x28D
+	checkflag FLAG_SILPH_11F_DOOR
 	goto_if TRUE, EventScript_1A813F
 	goto EventScript_1A8B23
 	end

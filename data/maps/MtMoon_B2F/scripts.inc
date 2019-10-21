@@ -74,7 +74,7 @@ MtMoon_B2F_EventScript_16071B:: @ 816071B
 	waitmessage
 	waitfanfare
 	removeobject 2
-	setflag FLAG_0x272
+	setflag FLAG_GOT_DOME_FOSSIL
 	setflag FLAG_GOT_FOSSIL_FROM_MT_MOON
 	release
 	end
@@ -107,7 +107,7 @@ MtMoon_B2F_EventScript_16077F:: @ 816077F
 	waitmessage
 	waitfanfare
 	removeobject 1
-	setflag FLAG_0x273
+	setflag FLAG_GOT_HELIX_FOSSIL
 	setflag FLAG_GOT_FOSSIL_FROM_MT_MOON
 	release
 	end

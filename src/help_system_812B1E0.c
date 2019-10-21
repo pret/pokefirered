@@ -1256,7 +1256,7 @@ static bool8 sub_812B780(u8 id)
         case 17:
             return sub_812BB10();
         case 18:
-            return FlagGet(FLAG_0x271);
+            return FlagGet(FLAG_GOT_BICYCLE);
         case 48:
             return FlagGet(FLAG_SYS_GAME_CLEAR);
         }

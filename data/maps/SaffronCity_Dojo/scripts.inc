@@ -20,7 +20,7 @@ SaffronCity_Dojo_EventScript_16EBEE:: @ 816EBEE
 SaffronCity_Dojo_EventScript_16EC00:: @ 816EC00
 	lock
 	faceplayer
-	checkflag FLAG_0x278
+	checkflag FLAG_GOT_HITMON_FROM_DOJO
 	goto_if TRUE, EventScript_16EC3C
 	drawmonpic SPECIES_HITMONLEE, 10, 3
 	setvar VAR_0x4001, SPECIES_HITMONLEE
@@ -43,7 +43,7 @@ EventScript_16EC3C:: @ 816EC3C
 SaffronCity_Dojo_EventScript_16EC46:: @ 816EC46
 	lock
 	faceplayer
-	checkflag FLAG_0x278
+	checkflag FLAG_GOT_HITMON_FROM_DOJO
 	goto_if TRUE, EventScript_16EC3C
 	drawmonpic SPECIES_HITMONCHAN, 10, 3
 	setvar VAR_0x4001, SPECIES_HITMONCHAN
@@ -77,7 +77,7 @@ EventScript_16ECB5:: @ 816ECB5
 	message Text_19B473
 	waitmessage
 	waitfanfare
-	setflag FLAG_0x278
+	setflag FLAG_GOT_HITMON_FROM_DOJO
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_16ED29
@@ -93,7 +93,7 @@ EventScript_16ECEC:: @ 816ECEC
 	message Text_19B473
 	waitmessage
 	waitfanfare
-	setflag FLAG_0x278
+	setflag FLAG_GOT_HITMON_FROM_DOJO
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_16ED1E
@@ -144,7 +144,7 @@ SaffronCity_Dojo_EventScript_16ED8B:: @ 816ED8B
 
 SaffronCity_Dojo_EventScript_16EDA2:: @ 816EDA2
 	trainerbattle 2, TRAINER_BLACK_BELT_KOICHI, 0, Text_19B12C, Text_19B193, EventScript_16EDD0
-	checkflag FLAG_0x278
+	checkflag FLAG_GOT_HITMON_FROM_DOJO
 	goto_if TRUE, EventScript_16EDC6
 	msgbox gUnknown_819B1A7, 6
 	end

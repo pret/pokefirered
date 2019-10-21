@@ -3,7 +3,7 @@ SSAnne_CaptainsOffice_MapScripts:: @ 8160B39
 
 SSAnne_CaptainsOffice_EventScript_160B3A:: @ 8160B3A
 	lock
-	checkflag FLAG_0x237
+	checkflag FLAG_GOT_HM01
 	goto_if_eq EventScript_160BB5
 	msgbox gUnknown_8173646
 	textcolor 3
@@ -19,7 +19,7 @@ SSAnne_CaptainsOffice_EventScript_160B3A:: @ 8160B3A
 	additem ITEM_HM01, 1
 	giveitemfanfaremsg gUnknown_81737AF, ITEM_HM01, 1, MUS_FAN5
 	msgbox gUnknown_81737D2
-	setflag FLAG_0x237
+	setflag FLAG_GOT_HM01
 	setvar VAR_MAP_SCENE_VERMILION_CITY, 1
 	release
 	end

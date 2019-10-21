@@ -2,9 +2,7 @@ ViridianCity_Gym_MapScripts:: @ 8169EC9
 	.byte 0
 
 ViridianCity_Gym_EventScript_169ECA:: @ 8169ECA
-	setvar VAR_0x8004, 15
-	setvar VAR_0x8005, 2
-	special UpdatePickStateFromSpecialVar8005
+	famechecker FAMECHECKER_GIOVANNI, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	trainerbattle 1, TRAINER_LEADER_GIOVANNI, 0, Text_18F352, Text_18F43F, EventScript_169F04
 	checkflag FLAG_0x298
 	goto_if 0, EventScript_169F2F

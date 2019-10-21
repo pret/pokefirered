@@ -4,7 +4,7 @@ FuchsiaCity_Building1_MapScripts:: @ 816D74B
 FuchsiaCity_Building1_EventScript_16D74C:: @ 816D74C
 	lock
 	faceplayer
-	checkflag FLAG_0x23A
+	checkflag FLAG_GOT_HM04
 	goto_if_eq EventScript_16D7FA
 	checkflag FLAG_HIDE_SAFARI_ZONE_WEST_GOLD_TEETH
 	goto_if_eq EventScript_16D780
@@ -31,7 +31,7 @@ EventScript_16D780:: @ 816D780
 	call_if 1, EventScript_16D7DF
 	additem ITEM_HM04, 1
 	giveitemfanfaremsg gUnknown_8199068, ITEM_HM04
-	setflag FLAG_0x23A
+	setflag FLAG_GOT_HM04
 	removeitem ITEM_GOLD_TEETH, 1
 	release
 	end

@@ -4,7 +4,7 @@ SafariZone_SecretHouse_MapScripts:: @ 8162452
 SafariZone_SecretHouse_EventScript_162453:: @ 8162453
 	lock
 	faceplayer
-	checkflag FLAG_0x239
+	checkflag FLAG_GOT_HM03
 	goto_if_eq EventScript_1624A9
 	msgbox gUnknown_8177DC1
 	checkitemspace ITEM_HM03, 1
@@ -13,7 +13,7 @@ SafariZone_SecretHouse_EventScript_162453:: @ 8162453
 	additem ITEM_HM03, 1
 	giveitemfanfaremsg gUnknown_8177E92, ITEM_HM03
 	msgbox gUnknown_8177EB7
-	setflag FLAG_0x239
+	setflag FLAG_GOT_HM03
 	release
 	end
 

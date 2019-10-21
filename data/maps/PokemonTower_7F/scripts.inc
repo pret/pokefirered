@@ -4,12 +4,10 @@ PokemonTower_7F_MapScripts:: @ 8163559
 PokemonTower_7F_EventScript_16355A:: @ 816355A
 	lock
 	faceplayer
-	setvar VAR_0x8004, 14
-	setvar VAR_0x8005, 2
-	special UpdatePickStateFromSpecialVar8005
+	famechecker FAMECHECKER_MRFUJI, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	setflag FLAG_HIDE_TOWER_FUJI
 	clearflag FLAG_HIDE_POKEHOUSE_FUJI
-	setflag FLAG_0x23C
+	setflag FLAG_RESCUED_MR_FUJI
 	msgbox gUnknown_817A529
 	closemessage
 	warp MAP_LAVENDER_TOWN_VOLUNTEER_POKEMON_HOUSE, 255, 4, 7

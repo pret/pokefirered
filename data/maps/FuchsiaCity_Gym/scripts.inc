@@ -2,9 +2,7 @@ FuchsiaCity_Gym_MapScripts:: @ 816D54D
 	.byte 0
 
 FuchsiaCity_Gym_EventScript_16D54E:: @ 816D54E
-	setvar VAR_0x8004, 6
-	setvar VAR_0x8005, 2
-	special UpdatePickStateFromSpecialVar8005
+	famechecker FAMECHECKER_KOGA, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	trainerbattle 1, TRAINER_LEADER_KOGA, 0, Text_19832E, Text_198444, EventScript_16D580
 	checkflag FLAG_0x259
 	goto_if 0, EventScript_16D5A6

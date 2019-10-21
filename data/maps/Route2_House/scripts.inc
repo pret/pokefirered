@@ -10,7 +10,7 @@ Route2_House_EventScript_16F602:: @ 816F602
 	faceplayer
 	setvar VAR_0x8008, 0
 	call EventScript_1A8CAD
-	checkflag FLAG_0x248
+	checkflag FLAG_DID_MIMIEN_TRADE
 	goto_if_eq EventScript_16F674
 	msgbox gUnknown_81A597B, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
@@ -23,7 +23,7 @@ Route2_House_EventScript_16F602:: @ 816F602
 	goto_if 5, EventScript_16F666
 	call EventScript_1A8CD9
 	msgbox gUnknown_81A59DA
-	setflag FLAG_0x248
+	setflag FLAG_DID_MIMIEN_TRADE
 	release
 	end
 

@@ -130,7 +130,7 @@ Movement_161ABF:: @ 8161ABF
 SilphCo_7F_EventScript_161AC8:: @ 8161AC8
 	lock
 	faceplayer
-	checkflag FLAG_0x246
+	checkflag FLAG_GOT_LAPRAS_FROM_SILPH
 	goto_if_eq EventScript_161B8D
 	msgbox gUnknown_8176266
 	setvar VAR_0x4001, SPECIES_LAPRAS
@@ -187,7 +187,7 @@ EventScript_161B7D:: @ 8161B7D
 EventScript_161B7E:: @ 8161B7E
 	textcolor 0
 	msgbox gUnknown_8176305
-	setflag FLAG_0x246
+	setflag FLAG_GOT_LAPRAS_FROM_SILPH
 	release
 	end
 

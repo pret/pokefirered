@@ -3,7 +3,7 @@ MtMoon_B2F_MapScripts:: @ 8160699
 	.byte 0
 
 MtMoon_B2F_MapScript1_16069F:: @ 816069F
-	checkflag FLAG_0x232
+	checkflag FLAG_GOT_FOSSIL_FROM_MT_MOON
 	call_if 0, EventScript_1606A9
 	end
 
@@ -23,7 +23,7 @@ MtMoon_B2F_EventScript_1606B0:: @ 81606B0
 MtMoon_B2F_EventScript_1606C2:: @ 81606C2
 	lock
 	faceplayer
-	checkflag FLAG_0x232
+	checkflag FLAG_GOT_FOSSIL_FROM_MT_MOON
 	goto_if_eq EventScript_160707
 	checktrainerflag TRAINER_SUPER_NERD_MIGUEL
 	goto_if_eq EventScript_160711
@@ -75,7 +75,7 @@ MtMoon_B2F_EventScript_16071B:: @ 816071B
 	waitfanfare
 	removeobject 2
 	setflag FLAG_0x272
-	setflag FLAG_0x232
+	setflag FLAG_GOT_FOSSIL_FROM_MT_MOON
 	release
 	end
 
@@ -108,7 +108,7 @@ MtMoon_B2F_EventScript_16077F:: @ 816077F
 	waitfanfare
 	removeobject 1
 	setflag FLAG_0x273
-	setflag FLAG_0x232
+	setflag FLAG_GOT_FOSSIL_FROM_MT_MOON
 	release
 	end
 

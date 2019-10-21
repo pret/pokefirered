@@ -3,9 +3,9 @@ Route25_SeaCottage_MapScripts:: @ 8170523
 	.byte 0
 
 Route25_SeaCottage_MapScript1_170529:: @ 8170529
-	checkflag FLAG_0x233
+	checkflag FLAG_HELPED_BILL_IN_SEA_COTTAGE
 	call_if 0, EventScript_17053C
-	checkflag FLAG_0x234
+	checkflag FLAG_GOT_SS_TICKET
 	call_if 1, EventScript_170547
 	end
 
@@ -23,9 +23,9 @@ Route25_SeaCottage_EventScript_17054B:: @ 817054B
 	faceplayer
 	checkflag FLAG_TEMP_3
 	goto_if_eq EventScript_1706C8
-	checkflag FLAG_0x234
+	checkflag FLAG_GOT_SS_TICKET
 	goto_if_eq EventScript_170640
-	checkflag FLAG_0x233
+	checkflag FLAG_HELPED_BILL_IN_SEA_COTTAGE
 	goto_if_eq EventScript_17064A
 	checkplayergender
 	compare_var_to_value VAR_RESULT, 0
@@ -102,9 +102,7 @@ EventScript_170640:: @ 8170640
 	end
 
 EventScript_17064A:: @ 817064A
-	setvar VAR_0x8004, 13
-	setvar VAR_0x8005, 2
-	special UpdatePickStateFromSpecialVar8005
+	famechecker FAMECHECKER_BILL, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	checkplayergender
 	compare_var_to_value VAR_RESULT, 0
 	call_if 1, EventScript_1706AC
@@ -115,9 +113,9 @@ EventScript_17064A:: @ 817064A
 	goto_if_eq EventScript_1706BE
 	additem ITEM_SS_TICKET, 1
 	giveitemfanfaremsg gUnknown_81A028E, ITEM_SS_TICKET, 1, MUS_FAN5
-	setflag FLAG_0x235
+	setflag FLAG_GOT_SS_TICKET_DUP
 	setflag FLAG_HIDE_NUGGET_BRIDGE_ROCKET
-	setflag FLAG_0x234
+	setflag FLAG_GOT_SS_TICKET
 	setflag FLAG_SYS_NOT_SOMEONES_PC
 	goto EventScript_170640
 	end
@@ -172,7 +170,7 @@ EventScript_1706FA:: @ 81706FA
 	msgbox gUnknown_81A042D
 	closemessage
 	clearflag FLAG_TEMP_2
-	setflag FLAG_0x233
+	setflag FLAG_HELPED_BILL_IN_SEA_COTTAGE
 	special SpawnScriptFieldObject
 	applymovement 127, Movement_1707BE
 	waitmovement 0

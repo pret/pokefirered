@@ -4,7 +4,7 @@ VermilionCity_House1_MapScripts:: @ 816B3A6
 VermilionCity_House1_EventScript_16B3A7:: @ 816B3A7
 	lock
 	faceplayer
-	checkflag FLAG_0x240
+	checkflag FLAG_GOT_OLD_ROD
 	goto_if_eq EventScript_16B3CF
 	msgbox gUnknown_8193EC1, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
@@ -25,7 +25,7 @@ EventScript_16B3D9:: @ 816B3D9
 	additem ITEM_OLD_ROD, 1
 	msgbox gUnknown_8193F2A
 	giveitemfanfaremsg gUnknown_8193F81, ITEM_OLD_ROD
-	setflag FLAG_0x240
+	setflag FLAG_GOT_OLD_ROD
 	msgbox gUnknown_8193FAF
 	release
 	end

@@ -208,11 +208,9 @@ EventScript_16B8EF:: @ 816B8EF
 	return
 
 VermilionCity_Gym_EventScript_16B94A:: @ 816B94A
-	setvar VAR_0x8004, 4
-	setvar VAR_0x8005, 2
-	special UpdatePickStateFromSpecialVar8005
+	famechecker FAMECHECKER_LTSURGE, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	trainerbattle 1, TRAINER_LEADER_LT_SURGE, 0, Text_194BA4, Text_194E03, EventScript_16B97C
-	checkflag FLAG_0x231
+	checkflag FLAG_GOT_TM34_FROM_SURGE
 	goto_if 0, EventScript_16B9AF
 	msgbox gUnknown_8194C8E
 	release
@@ -220,7 +218,7 @@ VermilionCity_Gym_EventScript_16B94A:: @ 816B94A
 
 EventScript_16B97C:: @ 816B97C
 	famechecker FAMECHECKER_LTSURGE, 1
-	checkflag FLAG_0x23B
+	checkflag FLAG_GOT_HM05
 	call_if 0, EventScript_16B9AB
 	clearflag FLAG_HIDE_FAME_CHECKER_LT_SURGE_JOURNAL
 	setflag FLAG_DEFEATED_LT_SURGE
@@ -240,7 +238,7 @@ EventScript_16B9AF:: @ 816B9AF
 	goto_if_eq EventScript_16B9F0
 	additem ITEM_TM34, 1
 	giveitemfanfaremsg gUnknown_8194D87, ITEM_TM34
-	setflag FLAG_0x231
+	setflag FLAG_GOT_TM34_FROM_SURGE
 	msgbox gUnknown_8194DA8
 	release
 	end

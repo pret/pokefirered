@@ -32,9 +32,7 @@ RocketHideout_B4F_EventScript_161317:: @ 8161317
 	addobject 2
 	clearflag FLAG_HIDE_SILPH_SCOPE
 	setflag FLAG_HIDE_CELADON_ROCKETS
-	setvar VAR_0x8004, 15
-	setvar VAR_0x8005, 2
-	special UpdatePickStateFromSpecialVar8005
+	famechecker FAMECHECKER_GIOVANNI, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	fadescreen 0
 	release
 	end

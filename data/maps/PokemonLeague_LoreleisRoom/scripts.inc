@@ -52,9 +52,7 @@ EventScript_1625CF:: @ 81625CF
 PokemonLeague_LoreleisRoom_EventScript_1625DC:: @ 81625DC
 	lock
 	faceplayer
-	setvar VAR_0x8004, 9
-	setvar VAR_0x8005, 2
-	special UpdatePickStateFromSpecialVar8005
+	famechecker FAMECHECKER_LORELEI, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	checkflag FLAG_DEFEATED_LORELEI
 	goto_if_eq EventScript_162669
 	famechecker FAMECHECKER_LORELEI, 0

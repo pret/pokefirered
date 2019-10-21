@@ -4,7 +4,7 @@ CeruleanCity_MapScripts:: @ 8166471
 
 CeruleanCity_MapScript1_166477:: @ 8166477
 	setworldmapflag FLAG_WORLD_MAP_CERULEAN_CITY
-	checkflag FLAG_0x234
+	checkflag FLAG_GOT_SS_TICKET
 	call_if 0, EventScript_166484
 	end
 
@@ -194,7 +194,7 @@ EventScript_16662E:: @ 816662E
 	fadescreen 1
 	removeobject 2
 	fadescreen 0
-	setflag FLAG_0x23F
+	setflag FLAG_GOT_TM28_FROM_ROCKET
 	release
 	end
 
@@ -246,7 +246,7 @@ CeruleanCity_EventScript_1666E7:: @ 81666E7
 CeruleanCity_EventScript_1666FE:: @ 81666FE
 	lock
 	faceplayer
-	checkflag FLAG_0x234
+	checkflag FLAG_GOT_SS_TICKET
 	goto_if_eq EventScript_166713
 	msgbox gUnknown_817F01D
 	release

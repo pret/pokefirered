@@ -4,7 +4,7 @@ VermilionCity_PokemonFanClub_MapScripts:: @ 816B47E
 VermilionCity_PokemonFanClub_EventScript_16B47F:: @ 816B47F
 	lock
 	faceplayer
-	checkflag FLAG_0x241
+	checkflag FLAG_GOT_BIKE_VOUCHER
 	goto_if_eq EventScript_16B4A7
 	msgbox gUnknown_819457E, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
@@ -23,7 +23,7 @@ EventScript_16B4B1:: @ 816B4B1
 	checkitemspace ITEM_BIKE_VOUCHER, 1
 	compare_var_to_value VAR_RESULT, 0
 	goto_if_eq EventScript_16B4F2
-	setflag FLAG_0x241
+	setflag FLAG_GOT_BIKE_VOUCHER
 	additem ITEM_BIKE_VOUCHER, 1
 	giveitemfanfaremsg gUnknown_819474E, ITEM_BIKE_VOUCHER, 1, MUS_FAN5
 	msgbox gUnknown_819477C
@@ -120,45 +120,4 @@ VermilionCity_PokemonFanClub_EventScript_16B5C4:: @ 816B5C4
 
 VermilionCity_PokemonFanClub_EventScript_16B5CD:: @ 816B5CD
 	msgbox gUnknown_819493D, 3
-	end
-
-VermilionCity_House2_MapScripts:: @ 816B5D6
-	.byte 0
-
-VermilionCity_House2_EventScript_16B5D7:: @ 816B5D7
-	lock
-	faceplayer
-	setvar VAR_0x8008, 3
-	call EventScript_1A8CAD
-	checkflag FLAG_0x24D
-	goto_if_eq EventScript_16B649
-	msgbox gUnknown_81949CB, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16B631
-	call EventScript_1A8CBD
-	compare_var_to_value VAR_0x8004, 6
-	goto_if 4, EventScript_16B631
-	call EventScript_1A8CC9
-	compare_var_to_var VAR_RESULT, VAR_0x8009
-	goto_if 5, EventScript_16B63B
-	call EventScript_1A8CD9
-	msgbox gUnknown_8194A44
-	setflag FLAG_0x24D
-	release
-	end
-
-EventScript_16B631:: @ 816B631
-	msgbox gUnknown_81949FD
-	release
-	end
-
-EventScript_16B63B:: @ 816B63B
-	getspeciesname 0, VAR_0x8009
-	msgbox gUnknown_8194A0D
-	release
-	end
-
-EventScript_16B649:: @ 816B649
-	msgbox gUnknown_8194A4F
-	release
 	end

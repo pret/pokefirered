@@ -21,7 +21,7 @@ Route4_PokemonCenter_1F_EventScript_16F754:: @ 816F754
 Route4_PokemonCenter_1F_EventScript_16F75F:: @ 816F75F
 	lock
 	faceplayer
-	checkflag FLAG_0x249
+	checkflag FLAG_BOUGHT_MAGIKARP
 	goto_if_eq EventScript_16F8A2
 	showmoneybox 0, 0, 0
 	checkplayergender
@@ -107,7 +107,7 @@ EventScript_16F861:: @ 816F861
 	end
 
 EventScript_16F86A:: @ 816F86A
-	setflag FLAG_0x249
+	setflag FLAG_BOUGHT_MAGIKARP
 	release
 	end
 

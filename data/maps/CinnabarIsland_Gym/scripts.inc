@@ -53,11 +53,9 @@ EventScript_16D9CE:: @ 816D9CE
 	return
 
 CinnabarIsland_Gym_EventScript_16D9D4:: @ 816D9D4
-	setvar VAR_0x8004, 8
-	setvar VAR_0x8005, 2
-	special UpdatePickStateFromSpecialVar8005
+	famechecker FAMECHECKER_BLAINE, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	trainerbattle 1, TRAINER_LEADER_BLAINE, 0, Text_199543, Text_1995FA, EventScript_16DA06
-	checkflag FLAG_0x24E
+	checkflag FLAG_GOT_TM38_FROM_BLAINE
 	goto_if 0, EventScript_16DA34
 	msgbox gUnknown_819971D
 	release
@@ -81,7 +79,7 @@ EventScript_16DA34:: @ 816DA34
 	goto_if_eq EventScript_16DA75
 	additem ITEM_TM38, 1
 	giveitemfanfaremsg gUnknown_81996FF, ITEM_TM38
-	setflag FLAG_0x24E
+	setflag FLAG_GOT_TM38_FROM_BLAINE
 	msgbox gUnknown_8199652
 	release
 	end

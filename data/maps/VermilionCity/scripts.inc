@@ -212,7 +212,7 @@ EventScript_166BA0:: @ 8166BA0
 	compare_var_to_value VAR_MAP_SCENE_VERMILION_CITY, 3
 	goto_if_eq EventScript_166BED
 	msgbox gUnknown_817FA3C
-	checkflag FLAG_0x234
+	checkflag FLAG_GOT_SS_TICKET
 	goto_if 0, EventScript_166BDE
 	msgbox gUnknown_817FA77
 	setvar VAR_VERMILION_CITY_TICKET_CHECK_TRIGGER, 1

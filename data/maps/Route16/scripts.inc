@@ -33,7 +33,7 @@ EventScript_16811D:: @ 816811D
 Route16_EventScript_168121:: @ 8168121
 	lock
 	faceplayer
-	checkflag FLAG_0x23D
+	checkflag FLAG_GOT_POKE_FLUTE
 	goto_if 0, EventScript_1681A3
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2

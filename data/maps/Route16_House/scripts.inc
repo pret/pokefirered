@@ -4,7 +4,7 @@ Route16_House_MapScripts:: @ 817014E
 Route16_House_EventScript_17014F:: @ 817014F
 	lock
 	faceplayer
-	checkflag FLAG_0x238
+	checkflag FLAG_GOT_HM02
 	goto_if_eq EventScript_1701A5
 	msgbox gUnknown_819F851
 	checkitemspace ITEM_HM02, 1
@@ -13,7 +13,7 @@ Route16_House_EventScript_17014F:: @ 817014F
 	additem ITEM_HM02, 1
 	giveitemfanfaremsg gUnknown_819F8C0, ITEM_HM02
 	msgbox gUnknown_819F8E0
-	setflag FLAG_0x238
+	setflag FLAG_GOT_HM02
 	release
 	end
 

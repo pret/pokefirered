@@ -21,9 +21,7 @@ EventScript_168D50:: @ 8168D50
 PalletTown_GarysHouse_EventScript_168D56:: @ 8168D56
 	lock
 	faceplayer
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 2
-	special UpdatePickStateFromSpecialVar8005
+	famechecker FAMECHECKER_DAISY, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if_eq EventScript_168DB9
 	compare_var_to_value VAR_0x4001, 1

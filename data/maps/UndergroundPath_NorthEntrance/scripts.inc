@@ -6,7 +6,7 @@ UndergroundPath_NorthEntrance_EventScript_160E39:: @ 8160E39
 	faceplayer
 	setvar VAR_0x8008, 2
 	call EventScript_1A8CAD
-	checkflag FLAG_0x24B
+	checkflag FLAG_DID_MS_NIDO_TRADE
 	goto_if_eq EventScript_160EAB
 	msgbox gUnknown_81A5AD6, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
@@ -19,7 +19,7 @@ UndergroundPath_NorthEntrance_EventScript_160E39:: @ 8160E39
 	goto_if 5, EventScript_160E9D
 	call EventScript_1A8CD9
 	msgbox gUnknown_81A5B4A
-	setflag FLAG_0x24B
+	setflag FLAG_DID_MS_NIDO_TRADE
 	release
 	end
 

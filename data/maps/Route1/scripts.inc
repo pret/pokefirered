@@ -4,7 +4,7 @@ Route1_MapScripts:: @ 8167EFD
 Route1_EventScript_167EFE:: @ 8167EFE
 	lock
 	faceplayer
-	checkflag FLAG_0x230
+	checkflag FLAG_GOT_POTION_ON_ROUTE_1
 	goto_if_eq EventScript_167F48
 	msgbox gUnknown_818329D
 	textcolor 3
@@ -19,7 +19,7 @@ Route1_EventScript_167EFE:: @ 8167EFE
 	additem ITEM_POTION, 1
 	msgbox gUnknown_8183387
 	call EventScript_1A6675
-	setflag FLAG_0x230
+	setflag FLAG_GOT_POTION_ON_ROUTE_1
 	release
 	end
 

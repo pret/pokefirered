@@ -47,9 +47,7 @@ EventScript_16286A:: @ 816286A
 PokemonLeague_AgathasRoom_EventScript_162877:: @ 8162877
 	lock
 	faceplayer
-	setvar VAR_0x8004, 11
-	setvar VAR_0x8005, 2
-	special UpdatePickStateFromSpecialVar8005
+	famechecker FAMECHECKER_AGATHA, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	checkflag FLAG_DEFEATED_AGATHA
 	goto_if_eq EventScript_162911
 	famechecker FAMECHECKER_AGATHA, 0

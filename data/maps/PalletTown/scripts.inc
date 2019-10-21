@@ -184,9 +184,7 @@ PalletTown_EventScript_1655F9:: @ 81655F9
 	end
 
 EventScript_165605:: @ 8165605
-	setvar VAR_0x8004, 0
-	setvar VAR_0x8005, 2
-	special UpdatePickStateFromSpecialVar8005
+	famechecker FAMECHECKER_OAK, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	textcolor 0
 	delay 30
 	playbgm MUS_OHKIDO, 0

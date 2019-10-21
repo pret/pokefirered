@@ -2,9 +2,7 @@ PewterCity_Gym_MapScripts:: @ 816A592
 	.byte 0
 
 PewterCity_Gym_EventScript_16A593:: @ 816A593
-	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, 2
-	special UpdatePickStateFromSpecialVar8005
+	famechecker FAMECHECKER_BROCK, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	trainerbattle 1, TRAINER_LEADER_BROCK, 0, Text_190CD4, Text_190E4F, EventScript_16A5C5
 	checkflag FLAG_0x254
 	goto_if 0, EventScript_16A5F3

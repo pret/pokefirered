@@ -2,9 +2,7 @@ CeladonCity_Gym_MapScripts:: @ 816D060
 	.byte 0
 
 CeladonCity_Gym_EventScript_16D061:: @ 816D061
-	setvar VAR_0x8004, 5
-	setvar VAR_0x8005, 2
-	special UpdatePickStateFromSpecialVar8005
+	famechecker FAMECHECKER_ERIKA, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	trainerbattle 1, TRAINER_LEADER_ERIKA, 0, Text_197114, Text_197260, EventScript_16D0A0
 	checkflag FLAG_0x293
 	goto_if 0, EventScript_16D0C6

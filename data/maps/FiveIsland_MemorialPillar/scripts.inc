@@ -3,7 +3,7 @@ FiveIsland_MemorialPillar_MapScripts:: @ 81689D2
 
 FiveIsland_MemorialPillar_EventScript_1689D3:: @ 81689D3
 	lock
-	checkflag FLAG_0x236
+	checkflag FLAG_GOT_TM42_AT_MEMORIAL_PILLAR
 	goto_if_eq EventScript_168A18
 	checkflag FLAG_0x2D7
 	goto_if_eq EventScript_168A22
@@ -39,7 +39,7 @@ FiveIsland_MemorialPillar_EventScript_168A48:: @ 8168A48
 	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	lockall
-	checkflag FLAG_0x236
+	checkflag FLAG_GOT_TM42_AT_MEMORIAL_PILLAR
 	goto_if_eq EventScript_168B0B
 	checkflag FLAG_0x2D7
 	goto_if_eq EventScript_168B0B
@@ -79,7 +79,7 @@ EventScript_168AE8:: @ 8168AE8
 	msgbox gUnknown_818B219
 	applymovement 1, Movement_1A75E9
 	waitmovement 0
-	setflag FLAG_0x236
+	setflag FLAG_GOT_TM42_AT_MEMORIAL_PILLAR
 	return
 
 EventScript_168AFE:: @ 8168AFE

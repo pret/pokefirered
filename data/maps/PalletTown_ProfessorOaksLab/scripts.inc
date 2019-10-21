@@ -12,12 +12,12 @@ PalletTown_ProfessorOaksLab_MapScript1_168F8E:: @ 8168F8E
 	call_if 1, EventScript_168FD5
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 8
 	call_if 1, EventScript_168FC0
-	checkflag FLAG_0x247
+	checkflag FLAG_GOT_POKEBALLS_FROM_OAK_AFTER_22_RIVAL
 	call_if 1, EventScript_168FBC
 	end
 
 EventScript_168FBC:: @ 8168FBC
-	setflag FLAG_0x24F
+	setflag FLAG_OAK_SKIP_22_RIVAL_CHECK
 	return
 
 EventScript_168FC0:: @ 8168FC0
@@ -988,9 +988,9 @@ EventScript_1699FB:: @ 81699FB
 	compare_var_to_value VAR_RESULT, 2
 	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
-	checkflag FLAG_0x24F
+	checkflag FLAG_OAK_SKIP_22_RIVAL_CHECK
 	goto_if_eq EventScript_169A6E
-	checkflag FLAG_0x247
+	checkflag FLAG_GOT_POKEBALLS_FROM_OAK_AFTER_22_RIVAL
 	goto_if_eq EventScript_169A78
 	checkitem ITEM_POKE_BALL, 1
 	compare_var_to_value VAR_RESULT, 0
@@ -1008,7 +1008,7 @@ EventScript_169A45:: @ 8169A45
 	msgbox gUnknown_818E89C
 	additem ITEM_POKE_BALL, 5
 	giveitemfanfaremsg gUnknown_818E6B3, ITEM_POKE_BALL, 5
-	setflag FLAG_0x247
+	setflag FLAG_GOT_POKEBALLS_FROM_OAK_AFTER_22_RIVAL
 	release
 	end
 

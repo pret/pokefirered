@@ -5,7 +5,7 @@ Route2_EastBuilding_EventScript_16F67F:: @ 816F67F
 	lock
 	faceplayer
 	call EventScript_16F70B
-	checkflag FLAG_0x23B
+	checkflag FLAG_GOT_HM05
 	goto_if_eq EventScript_16F701
 	msgbox gUnknown_819D64F, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
@@ -22,7 +22,7 @@ Route2_EastBuilding_EventScript_16F67F:: @ 816F67F
 	goto_if_eq EventScript_1A7AC7
 	additem ITEM_HM05, 1
 	giveitemfanfaremsg gUnknown_819D7A1, ITEM_HM05
-	setflag FLAG_0x23B
+	setflag FLAG_GOT_HM05
 	msgbox gUnknown_819D7C1
 	release
 	end

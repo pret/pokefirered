@@ -1341,15 +1341,15 @@ static bool8 sub_812B780(u8 id)
 
 static bool8 sub_812BB10(void)
 {
-    if (FlagGet(FLAG_0x237) == TRUE)
+    if (FlagGet(FLAG_GOT_HM01) == TRUE)
         return TRUE;
-    if (FlagGet(FLAG_0x238) == TRUE)
+    if (FlagGet(FLAG_GOT_HM02) == TRUE)
         return TRUE;
-    if (FlagGet(FLAG_0x239) == TRUE)
+    if (FlagGet(FLAG_GOT_HM03) == TRUE)
         return TRUE;
-    if (FlagGet(FLAG_0x23A) == TRUE)
+    if (FlagGet(FLAG_GOT_HM04) == TRUE)
         return TRUE;
-    if (FlagGet(FLAG_0x23B) == TRUE)
+    if (FlagGet(FLAG_GOT_HM05) == TRUE)
         return TRUE;
     if (FlagGet(FLAG_0x2EF) == TRUE)
         return TRUE;

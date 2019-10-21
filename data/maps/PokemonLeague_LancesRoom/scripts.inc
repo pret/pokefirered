@@ -101,9 +101,7 @@ Movement_1629F1:: @ 81629F1
 PokemonLeague_LancesRoom_EventScript_162A14:: @ 8162A14
 	lock
 	faceplayer
-	setvar VAR_0x8004, 12
-	setvar VAR_0x8005, 2
-	special UpdatePickStateFromSpecialVar8005
+	famechecker FAMECHECKER_LANCE, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	checkflag FLAG_DEFEATED_LANCE
 	goto_if_eq EventScript_162AA1
 	famechecker FAMECHECKER_LANCE, 0

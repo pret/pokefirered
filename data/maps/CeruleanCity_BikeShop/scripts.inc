@@ -6,7 +6,7 @@ CeruleanCity_BikeShop_EventScript_16ABBD:: @ 816ABBD
 	faceplayer
 	checkflag FLAG_0x271
 	goto_if_eq EventScript_16AC58
-	checkflag FLAG_0x241
+	checkflag FLAG_GOT_BIKE_VOUCHER
 	goto_if_eq EventScript_16AC22
 	showmoneybox 0, 0, 0
 	message Text_192755

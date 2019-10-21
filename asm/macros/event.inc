@@ -37,6 +37,13 @@
 	.4byte \destination
 	.endm
 
+	lt = 0
+	eq = 1
+	gt = 2
+	le = 3
+	ge = 4
+	ne = 5
+
 	@ If the result of the last comparison matches condition (see Comparison operators), calls destination.
 	.macro call_if condition, destination
 	.byte 0x07
@@ -1442,13 +1449,13 @@
 	callstd 9
 	.endm
 
-	.macro famechecker person, index
+	.macro famechecker person:req, index:req, function=SetFlavorTextFlagFromSpecialVars
 	setvar VAR_0x8004, \person
 	setvar VAR_0x8005, \index
-	special SetFlavorTextFlagFromSpecialVars
+	special \function
 	.endm
 
-	.macro set_gym_trainers gym
+	.macro set_gym_trainers gym:req
 	setvar VAR_0x8008, \gym
 	call EventScript_1A6B18
 	.endm

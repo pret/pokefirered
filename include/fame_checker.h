@@ -5,12 +5,6 @@
 #include "constants/fame_checker.h"
 
 enum {
-    FCPICKSTATE_NO_DRAW,
-    FCPICKSTATE_SILHOUETTE,
-    FCPICKSTATE_COLORED
-};
-
-enum {
     FCWINDOWID_LIST,
     FCWINDOWID_UIHELP,
     FCWINDOWID_MSGBOX,

@@ -2,9 +2,7 @@ SaffronCity_Gym_MapScripts:: @ 816EDD7
 	.byte 0
 
 SaffronCity_Gym_EventScript_16EDD8:: @ 816EDD8
-	setvar VAR_0x8004, 7
-	setvar VAR_0x8005, 2
-	special UpdatePickStateFromSpecialVar8005
+	famechecker FAMECHECKER_SABRINA, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	trainerbattle 1, TRAINER_LEADER_SABRINA, 0, Text_19B53C, Text_19B602, EventScript_16EE0A
 	checkflag FLAG_0x29A
 	goto_if 0, EventScript_16EE3D

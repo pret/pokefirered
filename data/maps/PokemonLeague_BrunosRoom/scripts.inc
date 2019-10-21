@@ -47,9 +47,7 @@ EventScript_1626DF:: @ 81626DF
 PokemonLeague_BrunosRoom_EventScript_1626EC:: @ 81626EC
 	lock
 	faceplayer
-	setvar VAR_0x8004, 10
-	setvar VAR_0x8005, 2
-	special UpdatePickStateFromSpecialVar8005
+	famechecker FAMECHECKER_BRUNO, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	checkflag FLAG_DEFEATED_BRUNO
 	goto_if_eq EventScript_162779
 	famechecker FAMECHECKER_BRUNO, 0

@@ -450,7 +450,7 @@ gSpecials:: @ 815FD60
 	def_special sub_81537C0
 	def_special sub_809C5FC
 	def_special sub_80CB328
-	def_special sub_80CD154
+	def_special Special_ComputeLoreleiDollCollection
 	def_special sub_80CD1B4
 	def_special CreateObedientEnemyMon
 gSpecialsEnd::

@@ -5,7 +5,7 @@ FiveIsland_MemorialPillar_EventScript_1689D3:: @ 81689D3
 	lock
 	checkflag FLAG_GOT_TM42_AT_MEMORIAL_PILLAR
 	goto_if TRUE, EventScript_168A18
-	checkflag FLAG_0x2D7
+	checkflag FLAG_NO_ROOM_FOR_TM42_AT_MEMORIAL_PILLAR
 	goto_if TRUE, EventScript_168A22
 	msgbox gUnknown_818B02E
 	closemessage
@@ -41,7 +41,7 @@ FiveIsland_MemorialPillar_EventScript_168A48:: @ 8168A48
 	lockall
 	checkflag FLAG_GOT_TM42_AT_MEMORIAL_PILLAR
 	goto_if TRUE, EventScript_168B0B
-	checkflag FLAG_0x2D7
+	checkflag FLAG_NO_ROOM_FOR_TM42_AT_MEMORIAL_PILLAR
 	goto_if TRUE, EventScript_168B0B
 	msgbox gUnknown_818B095
 	checkitem ITEM_LEMONADE, 1
@@ -83,7 +83,7 @@ EventScript_168AE8:: @ 8168AE8
 	return
 
 EventScript_168AFE:: @ 8168AFE
-	setflag FLAG_0x2D7
+	setflag FLAG_NO_ROOM_FOR_TM42_AT_MEMORIAL_PILLAR
 	msgbox gUnknown_818B23E
 	releaseall
 	end

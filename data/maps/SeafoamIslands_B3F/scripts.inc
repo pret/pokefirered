@@ -4,9 +4,9 @@ SeafoamIslands_B3F_MapScripts:: @ 8162F4F
 	.byte 0
 
 SeafoamIslands_B3F_MapScript1_162F5A:: @ 8162F5A
-	checkflag FLAG_0x2D2
+	checkflag FLAG_STOPPED_SEAFOAM_B3F_CURRENT
 	call_if FALSE, EventScript_162F6D
-	checkflag FLAG_0x2D2
+	checkflag FLAG_STOPPED_SEAFOAM_B3F_CURRENT
 	call_if TRUE, EventScript_162F94
 	end
 
@@ -21,7 +21,7 @@ EventScript_162F6D:: @ 8162F6D
 	return
 
 EventScript_162F90:: @ 8162F90
-	setflag FLAG_0x2D2
+	setflag FLAG_STOPPED_SEAFOAM_B3F_CURRENT
 	return
 
 EventScript_162F94:: @ 8162F94

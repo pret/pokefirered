@@ -1150,7 +1150,7 @@ static bool8 sub_812B780(u8 id)
         case 43:
             return TRUE;
         case 4:
-            return FlagGet(FLAG_0x2CF);
+            return FlagGet(FLAG_VISITED_OAKS_LAB);
         case 6:
         case 10:
         case 16:
@@ -1351,7 +1351,7 @@ static bool8 sub_812BB10(void)
         return TRUE;
     if (FlagGet(FLAG_GOT_HM05) == TRUE)
         return TRUE;
-    if (FlagGet(FLAG_0x2EF) == TRUE)
+    if (FlagGet(FLAG_GOT_HM06) == TRUE)
         return TRUE;
     if (FlagGet(FLAG_HIDE_FOUR_ISLAND_ICEFALL_CAVE_1F_HM07) == TRUE)
         return TRUE;

@@ -5616,8 +5616,10 @@ _080CD14C:
 	bx r1
 	thumb_func_end sub_80CD0F4
 
-	thumb_func_start sub_80CD154
-sub_80CD154: @ 80CD154
+	@ Determines which of Lorelei's doll collection to show
+	@ based on how many times you've entered the Hall of Fame.
+	thumb_func_start Special_ComputeLoreleiDollCollection
+Special_ComputeLoreleiDollCollection: @ 80CD154
 	push {r4,lr}
 	movs r0, 0xA
 	bl GetGameStat
@@ -5664,7 +5666,7 @@ _080CD1AE:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80CD154
+	thumb_func_end Special_ComputeLoreleiDollCollection
 
 	thumb_func_start sub_80CD1B4
 sub_80CD1B4: @ 80CD1B4

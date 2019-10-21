@@ -4,7 +4,7 @@ CeladonCity_Condominiums_1F_MapScripts:: @ 816C320
 CeladonCity_Condominiums_1F_EventScript_16C321:: @ 816C321
 	lock
 	faceplayer
-	checkflag FLAG_0x2F8
+	checkflag FLAG_TALKED_TO_TEA_LADY_AFTER_HOF
 	goto_if TRUE, EventScript_16C36A
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if TRUE, EventScript_16C374
@@ -26,7 +26,7 @@ EventScript_16C36A:: @ 816C36A
 
 EventScript_16C374:: @ 816C374
 	famechecker FAMECHECKER_DAISY, 4
-	setflag FLAG_0x2F8
+	setflag FLAG_TALKED_TO_TEA_LADY_AFTER_HOF
 	msgbox gUnknown_8196188
 	release
 	end

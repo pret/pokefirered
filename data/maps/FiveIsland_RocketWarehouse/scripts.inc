@@ -19,7 +19,7 @@ EventScript_163F47:: @ 8163F47
 
 FiveIsland_RocketWarehouse_EventScript_163F5A:: @ 8163F5A
 	lockall
-	checkflag FLAG_0x2D5
+	checkflag FLAG_DEFEATED_ROCKETS_IN_WAREHOUSE
 	goto_if TRUE, EventScript_163F6E
 	msgbox gUnknown_817B4E3
 	releaseall
@@ -56,7 +56,7 @@ EventScript_163FB7:: @ 8163FB7
 
 EventScript_163FCD:: @ 8163FCD
 	msgbox gUnknown_817BC6C
-	setflag FLAG_0x2DC
+	setflag FLAG_RECOVERED_SAPPHIRE
 	giveitem ITEM_SAPPHIRE
 	release
 	end
@@ -90,7 +90,7 @@ EventScript_16402F:: @ 816402F
 	setflag FLAG_HIDE_FIVE_ISLAND_ROCKETS
 	fadescreen 0
 	setvar VAR_MAP_SCENE_ROCKET_WAREHOUSE, 1
-	setflag FLAG_0x2D5
+	setflag FLAG_DEFEATED_ROCKETS_IN_WAREHOUSE
 	release
 	end
 

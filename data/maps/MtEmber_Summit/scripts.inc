@@ -16,7 +16,7 @@ EventScript_163B11:: @ 8163B11
 	return
 
 MtEmber_Summit_MapScript1_163B25:: @ 8163B25
-	checkflag FLAG_0x2BD
+	checkflag FLAG_FOUGHT_MOLTRES
 	call_if FALSE, EventScript_163B2F
 	end
 
@@ -51,12 +51,12 @@ MtEmber_Summit_EventScript_163B33:: @ 8163B33
 	goto_if eq, EventScript_163B9F
 	compare_var_to_value VAR_RESULT, 5
 	goto_if eq, EventScript_163B9F
-	setflag FLAG_0x2BD
+	setflag FLAG_FOUGHT_MOLTRES
 	release
 	end
 
 EventScript_163B96:: @ 8163B96
-	setflag FLAG_0x2BD
+	setflag FLAG_FOUGHT_MOLTRES
 	goto EventScript_1A922D
 	end
 

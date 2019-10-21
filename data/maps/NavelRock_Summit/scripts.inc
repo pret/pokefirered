@@ -17,7 +17,7 @@ EventScript_164FBD:: @ 8164FBD
 
 EventScript_164FC6:: @ 8164FC6
 	setvar VAR_0x4001, 1
-	checkflag FLAG_0x2F6
+	checkflag FLAG_HO_OH_FLEW_AWAY
 	goto_if TRUE, EventScript_1A77A9
 	setvar VAR_0x4001, 0
 	clearflag FLAG_HIDE_HO_OH
@@ -85,7 +85,7 @@ NavelRock_Summit_EventScript_164FFB:: @ 8164FFB
 	end
 
 EventScript_1650B4:: @ 81650B4
-	setflag FLAG_0x2F6
+	setflag FLAG_HO_OH_FLEW_AWAY
 	setvar VAR_0x8004, SPECIES_HO_OH
 	goto EventScript_1A9236
 	end

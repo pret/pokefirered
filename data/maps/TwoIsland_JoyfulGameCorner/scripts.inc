@@ -6,7 +6,7 @@ TwoIsland_JoyfulGameCorner_MapScripts:: @ 81713D0
 	.byte 0
 
 TwoIsland_JoyfulGameCorner_MapScript1_1713E5:: @ 81713E5
-	checkflag FLAG_0x2FB
+	checkflag FLAG_GOT_MOON_STONE_FROM_JOYFUL_GAME_CORNER
 	call_if TRUE, EventScript_1713EF
 	end
 
@@ -143,7 +143,7 @@ TwoIsland_JoyfulGameCorner_EventScript_17155F:: @ 817155F
 	faceplayer
 	compare_var_to_value VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 4
 	goto_if eq, EventScript_1BC0CE
-	checkflag FLAG_0x2FB
+	checkflag FLAG_GOT_MOON_STONE_FROM_JOYFUL_GAME_CORNER
 	goto_if TRUE, EventScript_1715F5
 	compare_var_to_value VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 3
 	goto_if eq, EventScript_17158A
@@ -152,7 +152,7 @@ TwoIsland_JoyfulGameCorner_EventScript_17155F:: @ 817155F
 	end
 
 EventScript_17158A:: @ 817158A
-	checkflag FLAG_0x2FE
+	checkflag FLAG_NO_ROOM_FOR_JOYFUL_GAME_CORNER_MOON_STONE
 	goto_if TRUE, EventScript_1715C4
 	msgbox gUnknown_81A296A
 	setvar VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 2
@@ -172,7 +172,7 @@ EventScript_1715C4:: @ 81715C4
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1715FF
 	additem ITEM_MOON_STONE, 1
-	setflag FLAG_0x2FB
+	setflag FLAG_GOT_MOON_STONE_FROM_JOYFUL_GAME_CORNER
 	giveitemfanfaremsg gUnknown_81A2A9A, ITEM_MOON_STONE
 	release
 	end
@@ -183,7 +183,7 @@ EventScript_1715F5:: @ 81715F5
 	end
 
 EventScript_1715FF:: @ 81715FF
-	setflag FLAG_0x2FE
+	setflag FLAG_NO_ROOM_FOR_JOYFUL_GAME_CORNER_MOON_STONE
 	msgbox gUnknown_81A2ACA
 	release
 	end

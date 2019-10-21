@@ -46,21 +46,21 @@ EventScript_1720F1:: @ 81720F1
 	end
 
 EventScript_1720FB:: @ 81720FB
-	checkflag FLAG_0x2D9
+	checkflag FLAG_GOT_NEST_BALL_FROM_WATER_PATH_HOUSE_1
 	goto_if FALSE, EventScript_172121
 	msgbox gUnknown_81A4B7A
 	release
 	end
 
 EventScript_17210E:: @ 817210E
-	checkflag FLAG_0x2D9
+	checkflag FLAG_GOT_NEST_BALL_FROM_WATER_PATH_HOUSE_1
 	goto_if FALSE, EventScript_172121
 	msgbox gUnknown_81A4B39
 	release
 	end
 
 EventScript_172121:: @ 8172121
-	setflag FLAG_0x2D9
+	setflag FLAG_GOT_NEST_BALL_FROM_WATER_PATH_HOUSE_1
 	msgbox gUnknown_81A4A88
 	giveitem ITEM_NEST_BALL
 	compare_var_to_value VAR_RESULT, 0
@@ -76,7 +76,7 @@ EventScript_17214D:: @ 817214D
 
 SixIsland_WaterPath_House1_EventScript_172157:: @ 8172157
 	lockall
-	checkflag FLAG_0x2D9
+	checkflag FLAG_GOT_NEST_BALL_FROM_WATER_PATH_HOUSE_1
 	goto_if TRUE, EventScript_17216B
 	msgbox gUnknown_81A4CB9
 	releaseall

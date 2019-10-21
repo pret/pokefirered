@@ -25,7 +25,7 @@ EventScript_16523C:: @ 816523C
 	return
 
 EventScript_165243:: @ 8165243
-	checkflag FLAG_0x2F7
+	checkflag FLAG_DEOXYS_FLEW_AWAY
 	goto_if TRUE, EventScript_1A77A9
 	clearflag FLAG_HIDE_BIRTH_ISLAND_METEORITE
 	clearflag FLAG_0x848
@@ -107,7 +107,7 @@ EventScript_1652C0:: @ 81652C0
 	end
 
 EventScript_16533A:: @ 816533A
-	setflag FLAG_0x2F7
+	setflag FLAG_DEOXYS_FLEW_AWAY
 	setvar VAR_0x8004, SPECIES_DEOXYS
 	goto EventScript_1A9236
 	end

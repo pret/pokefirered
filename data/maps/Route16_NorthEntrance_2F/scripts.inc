@@ -21,7 +21,7 @@ Route16_NorthEntrance_2F_EventScript_1702E3:: @ 81702E3
 	lock
 	faceplayer
 	call EventScript_17036F
-	checkflag FLAG_0x2FD
+	checkflag FLAG_GOT_AMULET_COIN_FROM_OAKS_AIDE
 	goto_if TRUE, EventScript_170365
 	msgbox gUnknown_819FB0E, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
@@ -38,7 +38,7 @@ Route16_NorthEntrance_2F_EventScript_1702E3:: @ 81702E3
 	goto_if eq, EventScript_1A7AC7
 	additem ITEM_AMULET_COIN, 1
 	giveitemfanfaremsg gUnknown_819FC68, ITEM_AMULET_COIN
-	setflag FLAG_0x2FD
+	setflag FLAG_GOT_AMULET_COIN_FROM_OAKS_AIDE
 	msgbox gUnknown_819FC93
 	release
 	end

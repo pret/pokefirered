@@ -3,9 +3,9 @@ Route20_MapScripts:: @ 816823B
 	.byte 0
 
 Route20_MapScript1_168241:: @ 8168241
-	checkflag FLAG_0x2D2
+	checkflag FLAG_STOPPED_SEAFOAM_B3F_CURRENT
 	call_if FALSE, EventScript_168254
-	checkflag FLAG_0x2D3
+	checkflag FLAG_STOPPED_SEAFOAM_B4F_CURRENT
 	call_if FALSE, EventScript_16826D
 	end
 

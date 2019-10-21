@@ -13,7 +13,7 @@ ThreeIsland_DunsparceTunnel_MapScript1_164D2C:: @ 8164D2C
 	end
 
 EventScript_164D50:: @ 8164D50
-	setmaplayoutindex LAYOUT_UNUSED_LAYOUT_83453C0
+	setmaplayoutindex LAYOUT_THREE_ISLAND_DUNSPARCE_TUNNEL_2
 	return
 
 EventScript_164D54:: @ 8164D54
@@ -24,7 +24,7 @@ EventScript_164D54:: @ 8164D54
 ThreeIsland_DunsparceTunnel_EventScript_164D60:: @ 8164D60
 	lock
 	faceplayer
-	checkflag FLAG_0x2E2
+	checkflag FLAG_GOT_NUGGET_FROM_DUNSPARCE_TUNNEL
 	goto_if TRUE, EventScript_164DC2
 	specialvar VAR_RESULT, IsNationalPokedexEnabled
 	compare_var_to_value VAR_RESULT, 1
@@ -41,7 +41,7 @@ EventScript_164D90:: @ 8164D90
 	giveitem ITEM_NUGGET
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_164DB8
-	setflag FLAG_0x2E2
+	setflag FLAG_GOT_NUGGET_FROM_DUNSPARCE_TUNNEL
 	goto EventScript_164DC2
 	end
 

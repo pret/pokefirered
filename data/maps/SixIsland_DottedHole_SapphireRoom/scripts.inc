@@ -71,7 +71,7 @@ SixIsland_DottedHole_SapphireRoom_EventScript_1641B5:: @ 81641B5
 	playse SE_KAIDAN
 	delay 35
 	removeobject 2
-	setflag FLAG_0x2D8
+	setflag FLAG_LEARNED_YES_NAH_CHANSEY
 	release
 	end
 

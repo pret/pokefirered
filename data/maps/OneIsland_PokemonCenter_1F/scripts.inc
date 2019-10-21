@@ -212,11 +212,11 @@ OneIsland_PokemonCenter_1F_EventScript_170EC5:: @ 8170EC5
 	goto_if eq, EventScript_170F35
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 6
 	goto_if eq, EventScript_170F9B
-	checkflag FLAG_0x2DC
+	checkflag FLAG_RECOVERED_SAPPHIRE
 	goto_if TRUE, EventScript_170FA5
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
 	goto_if eq, EventScript_17103A
-	checkflag FLAG_0x2DD
+	checkflag FLAG_GOT_RUBY
 	goto_if TRUE, EventScript_171044
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4
 	goto_if eq, EventScript_1710F2

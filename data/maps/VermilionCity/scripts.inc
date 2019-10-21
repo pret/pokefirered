@@ -22,7 +22,7 @@ Movement_166903:: @ 8166903
 
 VermilionCity_MapScript1_166906:: @ 8166906
 	setworldmapflag FLAG_WORLD_MAP_VERMILION_CITY
-	checkflag FLAG_0x2F9
+	checkflag FLAG_TALKED_TO_OAKS_AIDE_IN_VERMILION
 	call_if TRUE, EventScript_166913
 	end
 
@@ -106,7 +106,7 @@ EventScript_1669FD:: @ 81669FD
 	call EventScript_166977
 	compare_var_to_value VAR_RESULT, 1
 	goto_if eq, EventScript_166AB1
-	checkflag FLAG_0x2F0
+	checkflag FLAG_SHOWED_MYSTICTICKET_TO_CAPTAIN
 	call_if FALSE, EventScript_166A53
 	message Text_17FCC1
 	waitmessage
@@ -119,12 +119,12 @@ EventScript_1669FD:: @ 81669FD
 	end
 
 EventScript_166A53:: @ 8166A53
-	setflag FLAG_0x2F0
+	setflag FLAG_SHOWED_MYSTICTICKET_TO_CAPTAIN
 	msgbox gUnknown_817FC00
 	return
 
 EventScript_166A5F:: @ 8166A5F
-	checkflag FLAG_0x2F1
+	checkflag FLAG_SHOWED_AURORATICKET_TO_CAPTAIN
 	call_if FALSE, EventScript_166AA5
 	message Text_17FCC1
 	waitmessage
@@ -137,14 +137,14 @@ EventScript_166A5F:: @ 8166A5F
 	end
 
 EventScript_166AA5:: @ 8166AA5
-	setflag FLAG_0x2F1
+	setflag FLAG_SHOWED_AURORATICKET_TO_CAPTAIN
 	msgbox gUnknown_817FC5F
 	return
 
 EventScript_166AB1:: @ 8166AB1
-	checkflag FLAG_0x2F0
+	checkflag FLAG_SHOWED_MYSTICTICKET_TO_CAPTAIN
 	call_if FALSE, EventScript_166A53
-	checkflag FLAG_0x2F1
+	checkflag FLAG_SHOWED_AURORATICKET_TO_CAPTAIN
 	call_if FALSE, EventScript_166AA5
 	message Text_17FCC1
 	waitmessage
@@ -243,7 +243,7 @@ VermilionCity_EventScript_166C17:: @ 8166C17
 VermilionCity_EventScript_166C20:: @ 8166C20
 	lock
 	faceplayer
-	setflag FLAG_0x2F9
+	setflag FLAG_TALKED_TO_OAKS_AIDE_IN_VERMILION
 	msgbox gUnknown_817FDD2
 	release
 	end

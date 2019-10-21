@@ -19,11 +19,11 @@ EventScript_163052:: @ 8163052
 	return
 
 SeafoamIslands_B4F_MapScript1_163066:: @ 8163066
-	checkflag FLAG_0x2BE
+	checkflag FLAG_FOUGHT_ARTICUNO
 	call_if FALSE, EventScript_1630AD
-	checkflag FLAG_0x2D3
+	checkflag FLAG_STOPPED_SEAFOAM_B4F_CURRENT
 	call_if FALSE, EventScript_163082
-	checkflag FLAG_0x2D3
+	checkflag FLAG_STOPPED_SEAFOAM_B4F_CURRENT
 	call_if TRUE, EventScript_1630A9
 	end
 
@@ -38,7 +38,7 @@ EventScript_163082:: @ 8163082
 	return
 
 EventScript_1630A5:: @ 81630A5
-	setflag FLAG_0x2D3
+	setflag FLAG_STOPPED_SEAFOAM_B4F_CURRENT
 	return
 
 EventScript_1630A9:: @ 81630A9
@@ -189,12 +189,12 @@ SeafoamIslands_B4F_EventScript_1631AC:: @ 81631AC
 	goto_if eq, EventScript_163218
 	compare_var_to_value VAR_RESULT, 5
 	goto_if eq, EventScript_163218
-	setflag FLAG_0x2BE
+	setflag FLAG_FOUGHT_ARTICUNO
 	release
 	end
 
 EventScript_16320F:: @ 816320F
-	setflag FLAG_0x2BE
+	setflag FLAG_FOUGHT_ARTICUNO
 	goto EventScript_1A922D
 
 EventScript_163217:: @ 8163217

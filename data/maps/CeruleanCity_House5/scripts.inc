@@ -4,7 +4,7 @@ CeruleanCity_House5_MapScripts:: @ 816AE4F
 CeruleanCity_House5_EventScript_16AE50:: @ 816AE50
 	lock
 	faceplayer
-	checkflag FLAG_0x2BB
+	checkflag FLAG_GOT_POWDER_JAR
 	goto_if TRUE, EventScript_16AEB7
 	msgbox gUnknown_8192F67, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
@@ -12,7 +12,7 @@ CeruleanCity_House5_EventScript_16AE50:: @ 816AE50
 	checkflag FLAG_0x847
 	goto_if FALSE, EventScript_16AEA3
 	msgbox gUnknown_8193003
-	setflag FLAG_0x2BB
+	setflag FLAG_GOT_POWDER_JAR
 	giveitem ITEM_POWDER_JAR
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1A6BF9

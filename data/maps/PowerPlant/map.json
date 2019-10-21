@@ -102,7 +102,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PowerPlant_EventScript_16388D",
-      "flag": "FLAG_HIDE_POWER_PLANT_VOLTORB_2"
+      "flag": "FLAG_HIDE_POWER_PLANT_ELECTRODE_2"
     },
     {
       "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
@@ -115,7 +115,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PowerPlant_EventScript_16382F",
-      "flag": "FLAG_HIDE_POWER_PLANT_VOLTORB_1"
+      "flag": "FLAG_HIDE_POWER_PLANT_ELECTRODE_1"
     }
   ],
   "warp_events": [

@@ -17,11 +17,11 @@ EventScript_163779:: @ 8163779
 
 PowerPlant_MapScript2_16378D:: @ 816378D
 	setworldmapflag FLAG_WORLD_MAP_POWER_PLANT
-	checkflag FLAG_0x2BF
+	checkflag FLAG_FOUGHT_ZAPDOS
 	call_if FALSE, EventScript_1637AC
-	checkflag FLAG_0x2D0
+	checkflag FLAG_FOUGHT_POWER_PLANT_ELECTRODE_1
 	call_if FALSE, EventScript_1637B0
-	checkflag FLAG_0x2D1
+	checkflag FLAG_FOUGHT_POWER_PLANT_ELECTRODE_2
 	call_if FALSE, EventScript_1637B4
 	end
 
@@ -30,11 +30,11 @@ EventScript_1637AC:: @ 81637AC
 	return
 
 EventScript_1637B0:: @ 81637B0
-	clearflag FLAG_HIDE_POWER_PLANT_VOLTORB_1
+	clearflag FLAG_HIDE_POWER_PLANT_ELECTRODE_1
 	return
 
 EventScript_1637B4:: @ 81637B4
-	clearflag FLAG_HIDE_POWER_PLANT_VOLTORB_2
+	clearflag FLAG_HIDE_POWER_PLANT_ELECTRODE_2
 	return
 
 PowerPlant_EventScript_1637B8:: @ 81637B8
@@ -64,12 +64,12 @@ PowerPlant_EventScript_1637B8:: @ 81637B8
 	goto_if eq, EventScript_163824
 	compare_var_to_value VAR_RESULT, 5
 	goto_if eq, EventScript_163824
-	setflag FLAG_0x2BF
+	setflag FLAG_FOUGHT_ZAPDOS
 	release
 	end
 
 EventScript_16381B:: @ 816381B
-	setflag FLAG_0x2BF
+	setflag FLAG_FOUGHT_ZAPDOS
 	goto EventScript_1A922D
 	end
 
@@ -100,12 +100,12 @@ PowerPlant_EventScript_16382F:: @ 816382F
 	goto_if eq, EventScript_163884
 	compare_var_to_value VAR_RESULT, 5
 	goto_if eq, EventScript_163884
-	setflag FLAG_0x2D0
+	setflag FLAG_FOUGHT_POWER_PLANT_ELECTRODE_1
 	release
 	end
 
 EventScript_163884:: @ 8163884
-	setflag FLAG_0x2D0
+	setflag FLAG_FOUGHT_POWER_PLANT_ELECTRODE_1
 	goto EventScript_1A922D
 	end
 
@@ -131,11 +131,11 @@ PowerPlant_EventScript_16388D:: @ 816388D
 	goto_if eq, EventScript_1638E2
 	compare_var_to_value VAR_RESULT, 5
 	goto_if eq, EventScript_1638E2
-	setflag FLAG_0x2D1
+	setflag FLAG_FOUGHT_POWER_PLANT_ELECTRODE_2
 	release
 	end
 
 EventScript_1638E2:: @ 81638E2
-	setflag FLAG_0x2D1
+	setflag FLAG_FOUGHT_POWER_PLANT_ELECTRODE_2
 	goto EventScript_1A922D
 	end

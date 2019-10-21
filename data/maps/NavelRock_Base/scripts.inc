@@ -15,7 +15,7 @@ EventScript_165105:: @ 8165105
 	return
 
 EventScript_165109:: @ 8165109
-	checkflag FLAG_0x2F5
+	checkflag FLAG_LUGIA_FLEW_AWAY
 	goto_if TRUE, EventScript_1A77A9
 	clearflag FLAG_HIDE_LUGIA
 	return
@@ -80,7 +80,7 @@ NavelRock_Base_EventScript_165134:: @ 8165134
 	end
 
 EventScript_1651D9:: @ 81651D9
-	setflag FLAG_0x2F5
+	setflag FLAG_LUGIA_FLEW_AWAY
 	setvar VAR_0x8004, SPECIES_LUGIA
 	goto EventScript_1A9236
 	end

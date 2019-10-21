@@ -1,5 +1,6 @@
 #include "constants/region_map.h"
 #include "constants/flags.h"
+#include "constants/moves.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 	.section .rodata
@@ -1089,8 +1090,22 @@ gUnknown_8459B30:: @ 8459B30
 gUnknown_8459B48:: @ 8459B48
 	.incbin "baserom.gba", 0x459B48, 0x18
 
-gUnknown_8459B60:: @ 8459B60
-	.incbin "baserom.gba", 0x459B60, 0x1E
+gMoveTutorMoves:: @ 8459B60
+	.2byte MOVE_MEGA_PUNCH
+	.2byte MOVE_SWORDS_DANCE
+	.2byte MOVE_MEGA_KICK
+	.2byte MOVE_BODY_SLAM
+	.2byte MOVE_DOUBLE_EDGE
+	.2byte MOVE_COUNTER
+	.2byte MOVE_SEISMIC_TOSS
+	.2byte MOVE_MIMIC
+	.2byte MOVE_METRONOME
+	.2byte MOVE_SOFT_BOILED
+	.2byte MOVE_DREAM_EATER
+	.2byte MOVE_THUNDER_WAVE
+	.2byte MOVE_EXPLOSION
+	.2byte MOVE_ROCK_SLIDE
+	.2byte MOVE_SUBSTITUTE
 
 gUnknown_8459B7E:: @ 8459B7E
 	.incbin "baserom.gba", 0x459B7E, 0x33A

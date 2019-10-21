@@ -3,22 +3,22 @@ FiveIsland_Meadow_MapScripts:: @ 8168932
 	.byte 0
 
 FiveIsland_Meadow_MapScript1_168938:: @ 8168938
-	checkflag FLAG_0x2D6
+	checkflag FLAG_UNLOCKED_ROCKET_WAREHOUSE
 	call_if TRUE, EventScript_168983
 	end
 
 FiveIsland_Meadow_EventScript_168942:: @ 8168942
 	lockall
-	checkflag FLAG_0x2D6
+	checkflag FLAG_UNLOCKED_ROCKET_WAREHOUSE
 	goto_if TRUE, EventScript_168979
-	checkflag FLAG_0x2D8
+	checkflag FLAG_LEARNED_YES_NAH_CHANSEY
 	goto_if TRUE, EventScript_16895F
 	msgbox gUnknown_818AB8E
 	releaseall
 	end
 
 EventScript_16895F:: @ 816895F
-	setflag FLAG_0x2D6
+	setflag FLAG_UNLOCKED_ROCKET_WAREHOUSE
 	message Text_18ABF4
 	waitmessage
 	delay 60

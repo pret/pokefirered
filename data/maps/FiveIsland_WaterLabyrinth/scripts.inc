@@ -8,9 +8,9 @@ FiveIsland_WaterLabyrinth_EventScript_16884E:: @ 816884E
 	special sub_8112364
 	lock
 	faceplayer
-	checkflag FLAG_0x2DA
+	checkflag FLAG_GOT_TOGEPI_EGG
 	goto_if TRUE, EventScript_1688E3
-	checkflag FLAG_0x2DB
+	checkflag FLAG_NO_ROOM_FOR_TOGEPI_EGG
 	goto_if TRUE, EventScript_16892C
 	msgbox gUnknown_818A80D
 	specialvar VAR_RESULT, sub_80CA76C
@@ -35,7 +35,7 @@ EventScript_1688BA:: @ 81688BA
 	countpokemon
 	compare_var_to_value VAR_RESULT, 6
 	goto_if eq, EventScript_16891F
-	setflag FLAG_0x2DA
+	setflag FLAG_GOT_TOGEPI_EGG
 	giveegg SPECIES_TOGEPI
 	textcolor 3
 	playfanfare MUS_FANFA1
@@ -48,12 +48,12 @@ EventScript_1688BA:: @ 81688BA
 
 EventScript_1688E3:: @ 81688E3
 	getspeciesname 1, SPECIES_TOGEPI
-	setvar VAR_0x8004, 175
+	setvar VAR_0x8004, SPECIES_TOGEPI
 	specialvar VAR_RESULT, sub_80CD0F4
 	compare_var_to_value VAR_RESULT, 1
 	goto_if eq, EventScript_168895
 	getspeciesname 1, SPECIES_TOGETIC
-	setvar VAR_0x8004, 176
+	setvar VAR_0x8004, SPECIES_TOGETIC
 	specialvar VAR_RESULT, sub_80CD0F4
 	compare_var_to_value VAR_RESULT, 1
 	goto_if eq, EventScript_168895
@@ -62,7 +62,7 @@ EventScript_1688E3:: @ 81688E3
 	end
 
 EventScript_16891F:: @ 816891F
-	setflag FLAG_0x2DB
+	setflag FLAG_NO_ROOM_FOR_TOGEPI_EGG
 	msgbox gUnknown_818A940
 	release
 	end

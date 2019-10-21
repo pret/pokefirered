@@ -4345,7 +4345,7 @@ _08120BD0:
 	lsls r0, 1
 	b _08120BDE
 _08120BD6:
-	ldr r0, _08120BE4 @ =gUnknown_8459B60
+	ldr r0, _08120BE4 @ =gMoveTutorMoves
 	lsls r1, 1
 	adds r1, r0
 	ldrh r0, [r1]
@@ -4353,7 +4353,7 @@ _08120BDE:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08120BE4: .4byte gUnknown_8459B60
+_08120BE4: .4byte gMoveTutorMoves
 	thumb_func_end sub_8120BA8
 
 	thumb_func_start sub_8120BE8

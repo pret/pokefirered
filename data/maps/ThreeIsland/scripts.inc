@@ -28,7 +28,7 @@ ThreeIsland_EventScript_1677D8:: @ 81677D8
 
 ThreeIsland_EventScript_1677E5:: @ 81677E5
 	lock
-	checkflag FLAG_0x2FC
+	checkflag FLAG_GOT_FULL_RESTORE_FROM_THREE_ISLAND_DEFENDER
 	goto_if TRUE, EventScript_167806
 	compare_var_to_value VAR_MAP_SCENE_THREE_ISLAND, 4
 	goto_if eq, EventScript_16781A
@@ -53,7 +53,7 @@ EventScript_16781A:: @ 816781A
 	goto_if eq, EventScript_167865
 	giveitemfanfaremsg gUnknown_81827BE, ITEM_FULL_RESTORE
 	additem ITEM_FULL_RESTORE, 1
-	setflag FLAG_0x2FC
+	setflag FLAG_GOT_FULL_RESTORE_FROM_THREE_ISLAND_DEFENDER
 	msgbox gUnknown_81827F1
 	release
 	end

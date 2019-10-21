@@ -16,7 +16,7 @@ EventScript_1624D3:: @ 81624D3
 	return
 
 CeruleanCave_B1F_MapScript2_1624E7:: @ 81624E7
-	checkflag FLAG_0x2BC
+	checkflag FLAG_FOUGHT_MEWTWO
 	call_if FALSE, EventScript_1624F1
 	end
 
@@ -51,12 +51,12 @@ CeruleanCave_B1F_EventScript_1624F5:: @ 81624F5
 	goto_if eq, EventScript_162561
 	compare_var_to_value VAR_RESULT, 5
 	goto_if eq, EventScript_162561
-	setflag FLAG_0x2BC
+	setflag FLAG_FOUGHT_MEWTWO
 	release
 	end
 
 EventScript_162558:: @ 8162558
-	setflag FLAG_0x2BC
+	setflag FLAG_FOUGHT_MEWTWO
 	goto EventScript_1A922D
 
 EventScript_162560:: @ 8162560

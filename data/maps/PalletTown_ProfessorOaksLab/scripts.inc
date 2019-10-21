@@ -5,7 +5,7 @@ PalletTown_ProfessorOaksLab_MapScripts:: @ 8168F7E
 	.byte 0
 
 PalletTown_ProfessorOaksLab_MapScript1_168F8E:: @ 8168F8E
-	setflag FLAG_0x2CF
+	setflag FLAG_VISITED_OAKS_LAB
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1
 	call_if eq, EventScript_168FC6
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 7
@@ -846,7 +846,7 @@ EventScript_1698D6:: @ 81698D6
 
 EventScript_169903:: @ 8169903
 	call EventScript_1A737B
-	checkflag FLAG_0x2F4
+	checkflag FLAG_OAK_SAW_DEX_COMPLETION
 	goto_if TRUE, EventScript_169913
 	release
 	end

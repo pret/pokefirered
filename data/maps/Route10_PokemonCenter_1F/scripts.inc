@@ -31,7 +31,7 @@ Route10_PokemonCenter_1F_EventScript_16FC65:: @ 816FC65
 	lock
 	faceplayer
 	call EventScript_16FCF1
-	checkflag FLAG_0x2FA
+	checkflag FLAG_GOT_EVERSTONE_FROM_OAKS_AIDE
 	goto_if TRUE, EventScript_16FCE7
 	msgbox gUnknown_819E5FB, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
@@ -48,7 +48,7 @@ Route10_PokemonCenter_1F_EventScript_16FC65:: @ 816FC65
 	goto_if eq, EventScript_1A7AC7
 	additem ITEM_EVERSTONE, 1
 	giveitemfanfaremsg gUnknown_819E786, ITEM_EVERSTONE
-	setflag FLAG_0x2FA
+	setflag FLAG_GOT_EVERSTONE_FROM_OAKS_AIDE
 	msgbox gUnknown_819E7AF
 	release
 	end

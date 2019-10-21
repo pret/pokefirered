@@ -1559,9 +1559,9 @@ EventScript_1A653B:: @ 81A653B
 	return
 
 EventScript_1A6541:: @ 81A6541
-	clearflag FLAG_0x2F5
-	clearflag FLAG_0x2F6
-	clearflag FLAG_0x2F7
+	clearflag FLAG_LUGIA_FLEW_AWAY
+	clearflag FLAG_HO_OH_FLEW_AWAY
+	clearflag FLAG_DEOXYS_FLEW_AWAY
 	return
 
 gUnknown_81A654B:: @ 81A654B
@@ -2008,9 +2008,9 @@ EventScript_1A6A7A:: @ 81A6A7A
 	msgbox Text_1A5C03, 5
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1A6AB2
-	setflag FLAG_0x2FF
+	setflag FLAG_OAKS_RATING_IS_VIA_PC
 	call EventScript_1A73E0
-	clearflag FLAG_0x2FF
+	clearflag FLAG_OAKS_RATING_IS_VIA_PC
 	goto EventScript_1A6AB2
 	end
 
@@ -2300,9 +2300,9 @@ EventScript_1A737B:: @ 81A737B
 	compare_var_to_value VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
-	checkflag FLAG_0x2F4
+	checkflag FLAG_OAK_SAW_DEX_COMPLETION
 	call_if TRUE, EventScript_1A73A4
-	checkflag FLAG_0x2F4
+	checkflag FLAG_OAK_SAW_DEX_COMPLETION
 	call_if FALSE, EventScript_1A73AD
 	call EventScript_1A73E0
 	return
@@ -2347,7 +2347,7 @@ EventScript_1A73E0:: @ 81A73E0
 	getnumberstring 0, VAR_0x8008
 	getnumberstring 1, VAR_0x8009
 	msgbox Text_1A6CA3
-	checkflag FLAG_0x2FF
+	checkflag FLAG_OAKS_RATING_IS_VIA_PC
 	call_if FALSE, EventScript_1A746D
 	call EventScript_1A73B6
 	compare_var_to_value VAR_0x800A, 0
@@ -2376,7 +2376,7 @@ EventScript_1A7470:: @ 81A7470
 	end
 
 EventScript_1A747E:: @ 81A747E
-	setflag FLAG_0x2F4
+	setflag FLAG_OAK_SAW_DEX_COMPLETION
 	msgbox Text_1A722F
 	goto EventScript_1A748F
 	end
@@ -9317,7 +9317,7 @@ EventScript_1BBBE6:: @ 81BBBE6
 	end
 
 EventScript_1BBBE7:: @ 81BBBE7
-	checkflag FLAG_0x2BB
+	checkflag FLAG_GOT_POWDER_JAR
 	goto_if FALSE, EventScript_1BBC32
 	multichoice 0, 0, 47, 0
 	switch VAR_RESULT
@@ -13460,7 +13460,7 @@ Text_1C476A:: @ 81C476A
 VictoryRoad_2F_EventScript_1C47AE:: @ 81C47AE
 	lock
 	faceplayer
-	checkflag FLAG_0x2C0
+	checkflag FLAG_TUTOR_DOUBLE_EDGE
 	goto_if TRUE, EventScript_1C480C
 	msgbox Text_1749F9, 5
 	compare_var_to_value VAR_RESULT, 0
@@ -13469,11 +13469,11 @@ VictoryRoad_2F_EventScript_1C47AE:: @ 81C47AE
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1C4802
 	msgbox Text_174AE2
-	setvar VAR_0x8005, 4
+	setvar VAR_0x8005, MOVETUTOR_DOUBLE_EDGE
 	call EventScript_1C4F30
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1C4802
-	setflag FLAG_0x2C0
+	setflag FLAG_TUTOR_DOUBLE_EDGE
 	goto EventScript_1C480C
     end
 
@@ -13490,7 +13490,7 @@ EventScript_1C480C:: @ 81C480C
 EventScript_1C4816:: @ 81C4816
 	lock
 	faceplayer
-	checkflag FLAG_0x2C1
+	checkflag FLAG_TUTOR_THUNDER_WAVE
 	goto_if TRUE, EventScript_1C4874
 	msgbox Text_175711, 5
 	compare_var_to_value VAR_RESULT, 0
@@ -13499,11 +13499,11 @@ EventScript_1C4816:: @ 81C4816
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1C486A
 	msgbox Text_1757C1
-	setvar VAR_0x8005, 11
+	setvar VAR_0x8005, MOVETUTOR_THUNDER_WAVE
 	call EventScript_1C4F30
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1C486A
-	setflag FLAG_0x2C1
+	setflag FLAG_TUTOR_THUNDER_WAVE
 	goto EventScript_1C4874
     end
 
@@ -13520,7 +13520,7 @@ EventScript_1C4874:: @ 81C4874
 RockTunnel_B1F_EventScript_1C487E:: @ 81C487E
 	lock
 	faceplayer
-	checkflag FLAG_0x2C2
+	checkflag FLAG_TUTOR_ROCK_SLIDE
 	goto_if TRUE, EventScript_1C48DC
 	msgbox Text_1799E0, 5
 	compare_var_to_value VAR_RESULT, 0
@@ -13529,11 +13529,11 @@ RockTunnel_B1F_EventScript_1C487E:: @ 81C487E
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1C48D2
 	msgbox Text_179AE1
-	setvar VAR_0x8005, 13
+	setvar VAR_0x8005, MOVETUTOR_ROCK_SLIDE
 	call EventScript_1C4F30
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1C48D2
-	setflag FLAG_0x2C2
+	setflag FLAG_TUTOR_ROCK_SLIDE
 	goto EventScript_1C48DC
     end
 
@@ -13550,7 +13550,7 @@ EventScript_1C48DC:: @ 81C48DC
 MtEmber_Exterior_EventScript_1C48E6:: @ 81C48E6
 	lock
 	faceplayer
-	checkflag FLAG_0x2C3
+	checkflag FLAG_TUTOR_EXPLOSION
 	goto_if TRUE, EventScript_1C4944
 	msgbox Text_17A642, 5
 	compare_var_to_value VAR_RESULT, 0
@@ -13559,11 +13559,11 @@ MtEmber_Exterior_EventScript_1C48E6:: @ 81C48E6
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1C493A
 	msgbox Text_17A717
-	setvar VAR_0x8005, 12
+	setvar VAR_0x8005, MOVETUTOR_EXPLOSION
 	call EventScript_1C4F30
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1C493A
-	setflag FLAG_0x2C3
+	setflag FLAG_TUTOR_EXPLOSION
 	goto EventScript_1C4944
     end
 
@@ -13580,7 +13580,7 @@ EventScript_1C4944:: @ 81C4944
 Route4_EventScript_1C494E:: @ 81C494E
 	lock
 	faceplayer
-	checkflag FLAG_0x2C4
+	checkflag FLAG_TUTOR_META_PUNCH
 	goto_if TRUE, EventScript_1C49AC
 	msgbox Text_1839D5, 5
 	compare_var_to_value VAR_RESULT, 0
@@ -13589,11 +13589,11 @@ Route4_EventScript_1C494E:: @ 81C494E
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1C49A2
 	msgbox Text_183ABF
-	setvar VAR_0x8005, 0
+	setvar VAR_0x8005, MOVETUTOR_MEGA_PUNCH
 	call EventScript_1C4F30
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1C49A2
-	setflag FLAG_0x2C4
+	setflag FLAG_TUTOR_META_PUNCH
 	goto EventScript_1C49AC
     end
 
@@ -13610,7 +13610,7 @@ EventScript_1C49AC:: @ 81C49AC
 Route4_EventScript_1C49B6:: @ 81C49B6
 	lock
 	faceplayer
-	checkflag FLAG_0x2C5
+	checkflag FLAG_TUTOR_MEGA_KICK
 	goto_if TRUE, EventScript_1C4A14
 	msgbox Text_183B74, 5
 	compare_var_to_value VAR_RESULT, 0
@@ -13619,11 +13619,11 @@ Route4_EventScript_1C49B6:: @ 81C49B6
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1C4A0A
 	msgbox Text_183C68
-	setvar VAR_0x8005, 2
+	setvar VAR_0x8005, MOVETUTOR_MEGA_KICK
 	call EventScript_1C4F30
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1C4A0A
-	setflag FLAG_0x2C5
+	setflag FLAG_TUTOR_MEGA_KICK
 	goto EventScript_1C4A14
     end
 
@@ -13640,7 +13640,7 @@ EventScript_1C4A14:: @ 81C4A14
 EventScript_1C4A1E:: @ 81C4A1E
 	lock
 	faceplayer
-	checkflag FLAG_0x2C6
+	checkflag FLAG_TUTOR_DREAM_EATER
 	goto_if TRUE, EventScript_1C4A7C
 	msgbox Text_17E316, 5
 	compare_var_to_value VAR_RESULT, 0
@@ -13649,11 +13649,11 @@ EventScript_1C4A1E:: @ 81C4A1E
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1C4A72
 	msgbox Text_17E3F1
-	setvar VAR_0x8005, 10
+	setvar VAR_0x8005, MOVETUTOR_DREAM_EATER
 	call EventScript_1C4F30
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1C4A72
-	setflag FLAG_0x2C6
+	setflag FLAG_TUTOR_DREAM_EATER
 	goto EventScript_1C4A7C
     end
 
@@ -13670,7 +13670,7 @@ EventScript_1C4A7C:: @ 81C4A7C
 EventScript_1C4A86:: @ 81C4A86
 	lock
 	faceplayer
-	checkflag FLAG_0x2C7
+	checkflag FLAG_TUTOR_SOFT_BOILED
 	goto_if TRUE, EventScript_1C4AE4
 	msgbox Text_180388, 5
 	compare_var_to_value VAR_RESULT, 0
@@ -13679,11 +13679,11 @@ EventScript_1C4A86:: @ 81C4A86
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1C4ADA
 	msgbox Text_180484
-	setvar VAR_0x8005, 9
+	setvar VAR_0x8005, MOVETUTOR_SOFT_BOILED
 	call EventScript_1C4F30
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1C4ADA
-	setflag FLAG_0x2C7
+	setflag FLAG_TUTOR_SOFT_BOILED
 	goto EventScript_1C4AE4
     end
 
@@ -13700,7 +13700,7 @@ EventScript_1C4AE4:: @ 81C4AE4
 FuchsiaCity_EventScript_1C4AEE:: @ 81C4AEE
 	lock
 	faceplayer
-	checkflag FLAG_0x2C8
+	checkflag FLAG_TUTOR_SUBSTITUTE
 	goto_if TRUE, EventScript_1C4B4C
 	msgbox Text_180948, 5
 	compare_var_to_value VAR_RESULT, 0
@@ -13709,11 +13709,11 @@ FuchsiaCity_EventScript_1C4AEE:: @ 81C4AEE
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1C4B42
 	msgbox Text_180A57
-	setvar VAR_0x8005, 14
+	setvar VAR_0x8005, MOVETUTOR_SUBSTITUTE
 	call EventScript_1C4F30
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1C4B42
-	setflag FLAG_0x2C8
+	setflag FLAG_TUTOR_SUBSTITUTE
 	goto EventScript_1C4B4C
     end
 
@@ -13730,7 +13730,7 @@ EventScript_1C4B4C:: @ 81C4B4C
 SevenIsland_EventScript_1C4B56:: @ 81C4B56
 	lock
 	faceplayer
-	checkflag FLAG_0x2C9
+	checkflag FLAG_TUTOR_SWORDS_DANCE
 	goto_if TRUE, EventScript_1C4BB4
 	msgbox Text_182F01, 5
 	compare_var_to_value VAR_RESULT, 0
@@ -13739,11 +13739,11 @@ SevenIsland_EventScript_1C4B56:: @ 81C4B56
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1C4BAA
 	msgbox Text_182FD9
-	setvar VAR_0x8005, 1
+	setvar VAR_0x8005, MOVETUTOR_SWORDS_DANCE
 	call EventScript_1C4F30
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1C4BAA
-	setflag FLAG_0x2C9
+	setflag FLAG_TUTOR_SWORDS_DANCE
 	goto EventScript_1C4BB4
     end
 
@@ -13760,7 +13760,7 @@ EventScript_1C4BB4:: @ 81C4BB4
 PewterCity_Museum_1F_EventScript_1C4BBE:: @ 81C4BBE
 	lock
 	faceplayer
-	checkflag FLAG_0x2CA
+	checkflag FLAG_TUTOR_SEISMIC_TOSS
 	goto_if TRUE, EventScript_1C4C1C
 	msgbox Text_1909A3, 5
 	compare_var_to_value VAR_RESULT, 0
@@ -13769,11 +13769,11 @@ PewterCity_Museum_1F_EventScript_1C4BBE:: @ 81C4BBE
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1C4C12
 	msgbox Text_190AD5
-	setvar VAR_0x8005, 6
+	setvar VAR_0x8005, MOVETUTOR_SEISMIC_TOSS
 	call EventScript_1C4F30
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1C4C12
-	setflag FLAG_0x2CA
+	setflag FLAG_TUTOR_SEISMIC_TOSS
 	goto EventScript_1C4C1C
     end
 
@@ -13790,7 +13790,7 @@ EventScript_1C4C1C:: @ 81C4C1C
 EventScript_1C4C26:: @ 81C4C26
 	lock
 	faceplayer
-	checkflag FLAG_0x2CB
+	checkflag FLAG_TUTOR_COUNTER
 	goto_if TRUE, EventScript_1C4C84
 	msgbox Text_195928, 5
 	compare_var_to_value VAR_RESULT, 0
@@ -13799,11 +13799,11 @@ EventScript_1C4C26:: @ 81C4C26
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1C4C7A
 	msgbox Text_195A08
-	setvar VAR_0x8005, 5
+	setvar VAR_0x8005, MOVETUTOR_COUNTER
 	call EventScript_1C4F30
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1C4C7A
-	setflag FLAG_0x2CB
+	setflag FLAG_TUTOR_COUNTER
 	goto EventScript_1C4C84
     end
 
@@ -13820,7 +13820,7 @@ EventScript_1C4C84:: @ 81C4C84
 EventScript_1C4C8E:: @ 81C4C8E
 	lock
 	faceplayer
-	checkflag FLAG_0x2CC
+	checkflag FLAG_TUTOR_METRONOME
 	goto_if TRUE, EventScript_1C4CEC
 	msgbox Text_19A137, 5
 	compare_var_to_value VAR_RESULT, 0
@@ -13829,11 +13829,11 @@ EventScript_1C4C8E:: @ 81C4C8E
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1C4CE2
 	msgbox Text_19A1EA
-	setvar VAR_0x8005, 8
+	setvar VAR_0x8005, MOVETUTOR_METRONOME
 	call EventScript_1C4F30
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1C4CE2
-	setflag FLAG_0x2CC
+	setflag FLAG_TUTOR_METRONOME
 	goto EventScript_1C4CEC
     end
 
@@ -13848,7 +13848,7 @@ EventScript_1C4CEC:: @ 81C4CEC
 	end
 
 EventScript_1C4CF6:: @ 81C4CF6
-	checkflag FLAG_0x2CD
+	checkflag FLAG_TUTOR_MIMIC
 	goto_if TRUE, EventScript_1C4D59
 	msgbox Text_19AD85, 5
 	compare_var_to_value VAR_RESULT, 0
@@ -13857,14 +13857,14 @@ EventScript_1C4CF6:: @ 81C4CF6
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1C4D4F
 	msgbox Text_19ADEE
-	setvar VAR_0x8005, 7
+	setvar VAR_0x8005, MOVETUTOR_MIMIC
 	call EventScript_1C4F30
 	lock
 	faceplayer
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1C4D4F
 	removeitem ITEM_POKE_DOLL, 1
-	setflag FLAG_0x2CD
+	setflag FLAG_TUTOR_MIMIC
 	goto EventScript_1C4D59
     end
 
@@ -13893,7 +13893,7 @@ EventScript_1C4D7B:: @ 81C4D7B
 FourIsland_House1_EventScript_1C4D84:: @ 81C4D84
 	lock
 	faceplayer
-	checkflag FLAG_0x2CE
+	checkflag FLAG_TUTOR_BODY_SLAM
 	goto_if TRUE, EventScript_1C4DE2
 	msgbox Text_1A3505, 5
 	compare_var_to_value VAR_RESULT, 0
@@ -13902,11 +13902,11 @@ FourIsland_House1_EventScript_1C4D84:: @ 81C4D84
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1C4DD8
 	msgbox Text_1A35DA
-	setvar VAR_0x8005, 3
+	setvar VAR_0x8005, MOVETUTOR_BODY_SLAM
 	call EventScript_1C4F30
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1C4DD8
-	setflag FLAG_0x2CE
+	setflag FLAG_TUTOR_BODY_SLAM
 	goto EventScript_1C4DE2
     end
 
@@ -13927,7 +13927,7 @@ TwoIsland_CapeBrink_House_EventScript_1C4DEC:: @ 81C4DEC
 	special sub_8112364
 	lock
 	faceplayer
-	checkflag FLAG_0x2E1
+	checkflag FLAG_LEARNED_MOVE_AT_CAPE_BRINK
 	goto_if TRUE, EventScript_1C4EA1
 	checkflag FLAG_TEMP_2
 	goto_if TRUE, EventScript_1C4E97
@@ -13983,7 +13983,7 @@ EventScript_1C4EAB:: @ 81C4EAB
 
 EventScript_1C4ECD:: @ 81C4ECD
 	msgbox Text_1A48F3
-	setflag FLAG_0x2E1
+	setflag FLAG_LEARNED_MOVE_AT_CAPE_BRINK
 	release
 	end
 

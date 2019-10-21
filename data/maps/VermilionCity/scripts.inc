@@ -76,7 +76,7 @@ EventScript_166977:: @ 8166977
 	end
 
 EventScript_166996:: @ 8166996
-	setvar VAR_0x8004, 0
+	setvar VAR_0x8004, SEAGALLOP_VERMILION_CITY
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
 	goto_if ge, EventScript_1669BB
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 1
@@ -96,7 +96,7 @@ EventScript_1669BB:: @ 81669BB
 	call EventScript_166977
 	compare_var_to_value VAR_RESULT, 1
 	goto_if eq, EventScript_166A5F
-	setvar VAR_0x8004, 0
+	setvar VAR_0x8004, SEAGALLOP_VERMILION_CITY
 	message Text_17FBB8
 	waitmessage
 	goto EventScript_1A911E
@@ -159,22 +159,22 @@ EventScript_166AB1:: @ 8166AB1
 
 EventScript_166B0B:: @ 8166B0B
 	msgbox gUnknown_817FCEC
-	setvar VAR_0x8004, 0
-	setvar VAR_0x8006, 9
+	setvar VAR_0x8004, SEAGALLOP_VERMILION_CITY
+	setvar VAR_0x8006, SEAGALLOP_NAVEL_ROCK
 	goto EventScript_1A90DA
 	end
 
 EventScript_166B23:: @ 8166B23
 	msgbox gUnknown_817FD5F
-	setvar VAR_0x8004, 0
-	setvar VAR_0x8006, 10
+	setvar VAR_0x8004, SEAGALLOP_VERMILION_CITY
+	setvar VAR_0x8006, SEAGALLOP_BIRTH_ISLAND
 	goto EventScript_1A90DA
 	end
 
 EventScript_166B3B:: @ 8166B3B
 	message Text_17FB23
 	waitmessage
-	setvar VAR_0x8004, 0
+	setvar VAR_0x8004, SEAGALLOP_VERMILION_CITY
 	multichoice 19, 5, 57, 0
 	switch VAR_RESULT
 	case 0, EventScript_1A8FEE
@@ -226,7 +226,7 @@ EventScript_166BDE:: @ 8166BDE
 	end
 
 EventScript_166BED:: @ 8166BED
-	setvar VAR_0x8004, 0
+	setvar VAR_0x8004, SEAGALLOP_VERMILION_CITY
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
 	goto_if ge, EventScript_1669BB
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 1

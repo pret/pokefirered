@@ -37,6 +37,6 @@ OneIsland_Harbor_EventScript_1713BD:: @ 81713BD
 	faceplayer
 	message Text_181726
 	waitmessage
-	setvar VAR_0x8004, 1
+	setvar VAR_0x8004, SEAGALLOP_ONE_ISLAND
 	goto EventScript_1A8EC5
 	end

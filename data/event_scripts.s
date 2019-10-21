@@ -14,6 +14,7 @@
 #include "constants/trainers.h"
 #include "constants/map_objects.h"
 #include "constants/fame_checker.h"
+#include "constants/seagallop.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.set FALSE, 0
@@ -250,6 +251,7 @@ gStdScriptsEnd::
 	.include "data/maps/BirthIsland_Exterior/scripts.inc"
 	.include "data/maps/OneIsland_KindleRoad_EmberSpa/scripts.inc"
 	.include "data/maps/BirthIsland_Harbor/scripts.inc"
+	.include "data/maps/NavelRock_Harbor/scripts.inc"
 	.include "data/maps/PalletTown/scripts.inc"
 	.include "data/maps/ViridianCity/scripts.inc"
 	.include "data/maps/PewterCity/scripts.inc"
@@ -4198,22 +4200,22 @@ EventScript_1A8FA1:: @ 81A8FA1
 	end
 
 EventScript_1A8FE3:: @ 81A8FE3
-	setvar VAR_0x8006, 0
+	setvar VAR_0x8006, SEAGALLOP_VERMILION_CITY
 	goto EventScript_1A909E
 	end
 
 EventScript_1A8FEE:: @ 81A8FEE
-	setvar VAR_0x8006, 1
+	setvar VAR_0x8006, SEAGALLOP_ONE_ISLAND
 	goto EventScript_1A909E
 	end
 
 EventScript_1A8FF9:: @ 81A8FF9
-	setvar VAR_0x8006, 2
+	setvar VAR_0x8006, SEAGALLOP_TWO_ISLAND
 	goto EventScript_1A909E
 	end
 
 EventScript_1A9004:: @ 81A9004
-	setvar VAR_0x8006, 3
+	setvar VAR_0x8006, SEAGALLOP_THREE_ISLAND
 	goto EventScript_1A909E
 	end
 
@@ -4243,9 +4245,9 @@ EventScript_1A905C:: @ 81A905C
 EventScript_1A909E:: @ 81A909E
 	specialvar VAR_RESULT, sub_8147500
 	getnumberstring 0, VAR_RESULT
-	compare_var_to_value VAR_0x8004, 0
+	compare_var_to_value VAR_0x8004, SEAGALLOP_VERMILION_CITY
 	goto_if eq, EventScript_1A90BE
-	compare_var_to_value VAR_0x8004, 0
+	compare_var_to_value VAR_0x8004, SEAGALLOP_VERMILION_CITY
 	goto_if ne, EventScript_1A90CC
 	end
 
@@ -4320,42 +4322,42 @@ EventScript_1A917F:: @ 81A917F
 	end
 
 EventScript_1A91D5:: @ 81A91D5
-	setvar VAR_0x8006, 0
+	setvar VAR_0x8006, SEAGALLOP_VERMILION_CITY
 	goto EventScript_1A909E
 	end
 
 EventScript_1A91E0:: @ 81A91E0
-	setvar VAR_0x8006, 1
+	setvar VAR_0x8006, SEAGALLOP_ONE_ISLAND
 	goto EventScript_1A909E
 	end
 
 EventScript_1A91EB:: @ 81A91EB
-	setvar VAR_0x8006, 2
+	setvar VAR_0x8006, SEAGALLOP_TWO_ISLAND
 	goto EventScript_1A909E
 	end
 
 EventScript_1A91F6:: @ 81A91F6
-	setvar VAR_0x8006, 3
+	setvar VAR_0x8006, SEAGALLOP_THREE_ISLAND
 	goto EventScript_1A909E
 	end
 
 EventScript_1A9201:: @ 81A9201
-	setvar VAR_0x8006, 4
+	setvar VAR_0x8006, SEAGALLOP_FOUR_ISLAND
 	goto EventScript_1A909E
 	end
 
 EventScript_1A920C:: @ 81A920C
-	setvar VAR_0x8006, 5
+	setvar VAR_0x8006, SEAGALLOP_FIVE_ISLAND
 	goto EventScript_1A909E
 	end
 
 EventScript_1A9217:: @ 81A9217
-	setvar VAR_0x8006, 6
+	setvar VAR_0x8006, SEAGALLOP_SIX_ISLAND
 	goto EventScript_1A909E
 	end
 
 EventScript_1A9222:: @ 81A9222
-	setvar VAR_0x8006, 7
+	setvar VAR_0x8006, SEAGALLOP_SEVEN_ISLAND
 	goto EventScript_1A909E
 	end
 

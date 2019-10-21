@@ -49,7 +49,7 @@ EventScript_168DB9:: @ 8168DB9
 	compare_var_to_value VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
-	compare_var_to_value VAR_0x4025, 500
+	compare_var_to_value VAR_MASSAGE_COOLDOWN_STEP_COUNTER, 500
 	goto_if lt, EventScript_168E46
 	msgbox gUnknown_818D7D3, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
@@ -69,7 +69,7 @@ EventScript_168DB9:: @ 8168DB9
 	fadescreen 1
 	playfanfare MUS_ME_ASA
 	waitfanfare
-	special sub_80CC948
+	special Special_DaisyMassageServices
 	fadescreen 0
 	special TV_CopyNicknameToStringVar1AndEnsureTerminated
 	msgbox gUnknown_818D8FE

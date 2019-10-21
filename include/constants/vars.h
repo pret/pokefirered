@@ -40,7 +40,7 @@
 #define VAR_ICE_STEP_COUNT         0x4022
 #define VAR_RENEWABLE_ITEM_STEP_COUNTER                 0x4023
 #define VAR_ALTERING_CAVE_WILD_SET 0x4024
-#define VAR_0x4025                 0x4025
+#define VAR_MASSAGE_COOLDOWN_STEP_COUNTER                 0x4025
 #define VAR_0x4026                 0x4026
 #define VAR_0x4027                 0x4027
 #define VAR_0x4028                 0x4028

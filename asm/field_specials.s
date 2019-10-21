@@ -4611,8 +4611,8 @@ _080CC940: .4byte 0x00004025
 _080CC944: .4byte 0x000001f3
 	thumb_func_end sub_80CC918
 
-	thumb_func_start sub_80CC948
-sub_80CC948: @ 80CC948
+	thumb_func_start Special_DaisyMassageServices
+Special_DaisyMassageServices: @ 80CC948
 	push {lr}
 	ldr r0, _080CC968 @ =gSpecialVar_0x8004
 	ldrh r1, [r0]
@@ -4631,7 +4631,7 @@ sub_80CC948: @ 80CC948
 _080CC968: .4byte gSpecialVar_0x8004
 _080CC96C: .4byte gPlayerParty
 _080CC970: .4byte 0x00004025
-	thumb_func_end sub_80CC948
+	thumb_func_end Special_DaisyMassageServices
 
 	thumb_func_start sub_80CC974
 sub_80CC974: @ 80CC974

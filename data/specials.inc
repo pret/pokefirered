@@ -416,7 +416,7 @@ gSpecials:: @ 815FD60
 	def_special sub_815D9E8
 	def_special sub_814B504
 	def_special sub_80CC8CC
-	def_special sub_80CC948
+	def_special Special_DaisyMassageServices
 	def_special HelpSystem_Disable
 	def_special HelpSystem_Enable
 	def_special sub_810B82C

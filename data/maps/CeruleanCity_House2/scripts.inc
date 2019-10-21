@@ -5,7 +5,7 @@ CeruleanCity_House2_EventScript_16A976:: @ 816A976
 	lock
 	faceplayer
 	checkflag FLAG_GOT_TM28_FROM_ROCKET
-	goto_if_eq EventScript_16A98B
+	goto_if TRUE, EventScript_16A98B
 	msgbox gUnknown_8191E13
 	release
 	end

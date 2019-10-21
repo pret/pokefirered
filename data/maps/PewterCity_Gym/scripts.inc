@@ -4,8 +4,8 @@ PewterCity_Gym_MapScripts:: @ 816A592
 PewterCity_Gym_EventScript_16A593:: @ 816A593
 	famechecker FAMECHECKER_BROCK, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	trainerbattle 1, TRAINER_LEADER_BROCK, 0, Text_190CD4, Text_190E4F, EventScript_16A5C5
-	checkflag FLAG_0x254
-	goto_if lt, EventScript_16A5F3
+	checkflag FLAG_GOT_TM39_FROM_BROCK
+	goto_if FALSE, EventScript_16A5F3
 	msgbox gUnknown_819110F
 	release
 	end
@@ -25,10 +25,10 @@ EventScript_16A5F3:: @ 816A5F3
 	msgbox gUnknown_8190FC1
 	checkitemspace ITEM_TM39, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16A634
+	goto_if eq, EventScript_16A634
 	additem ITEM_TM39, 1
 	giveitemfanfaremsg gUnknown_8190FDB, ITEM_TM39
-	setflag FLAG_0x254
+	setflag FLAG_GOT_TM39_FROM_BROCK
 	msgbox gUnknown_8190FF8
 	release
 	end
@@ -47,12 +47,12 @@ PewterCity_Gym_EventScript_16A655:: @ 816A655
 	lock
 	faceplayer
 	checkflag FLAG_DEFEATED_BROCK
-	goto_if_eq EventScript_16A67F
+	goto_if TRUE, EventScript_16A67F
 	msgbox gUnknown_8191298, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16A689
+	goto_if eq, EventScript_16A689
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16A697
+	goto_if eq, EventScript_16A697
 	end
 
 EventScript_16A67F:: @ 816A67F
@@ -78,7 +78,7 @@ EventScript_16A6A5:: @ 816A6A5
 PewterCity_Gym_EventScript_16A6AF:: @ 816A6AF
 	lockall
 	checkflag FLAG_BADGE01_GET
-	goto_if_eq EventScript_16A6C3
+	goto_if TRUE, EventScript_16A6C3
 	msgbox gUnknown_819146E
 	releaseall
 	end

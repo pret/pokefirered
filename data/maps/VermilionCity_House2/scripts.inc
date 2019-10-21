@@ -7,10 +7,10 @@ VermilionCity_House2_EventScript_16B5D7:: @ 816B5D7
 	setvar VAR_0x8008, 3
 	call EventScript_1A8CAD
 	checkflag FLAG_DID_CH_DING_TRADE
-	goto_if_eq EventScript_16B649
+	goto_if TRUE, EventScript_16B649
 	msgbox gUnknown_81949CB, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16B631
+	goto_if eq, EventScript_16B631
 	call EventScript_1A8CBD
 	compare_var_to_value VAR_0x8004, 6
 	goto_if ge, EventScript_16B631

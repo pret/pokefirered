@@ -5,11 +5,11 @@ Route24_EventScript_168620:: @ 8168620
 	lock
 	faceplayer
 	compare_var_to_value VAR_MAP_SCENE_ROUTE24, 1
-	goto_if_eq EventScript_168656
+	goto_if eq, EventScript_168656
 	msgbox gUnknown_8188C3C
 	checkitemspace ITEM_NUGGET, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16864C
+	goto_if eq, EventScript_16864C
 	call EventScript_1686B9
 	release
 	end
@@ -47,7 +47,7 @@ EventScript_168678:: @ 8168678
 	msgbox gUnknown_8188C3C
 	checkitemspace ITEM_NUGGET, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_168713
+	goto_if eq, EventScript_168713
 	call EventScript_1686B9
 	releaseall
 	end

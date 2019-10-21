@@ -3,8 +3,8 @@ Route12_MapScripts:: @ 8168000
 	.byte 0
 
 Route12_MapScript1_168006:: @ 8168006
-	checkflag FLAG_0x807
-	call_if eq, EventScript_168010
+	checkflag FLAG_SYS_SPECIAL_WILD_BATTLE
+	call_if TRUE, EventScript_168010
 	end
 
 EventScript_168010:: @ 8168010
@@ -15,14 +15,14 @@ Route12_EventScript_168014:: @ 8168014
 	lock
 	faceplayer
 	checkflag FLAG_GOT_POKE_FLUTE
-	goto_if lt, EventScript_168099
+	goto_if FALSE, EventScript_168099
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	msgbox gUnknown_81853CC, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16808D
+	goto_if eq, EventScript_16808D
 	call EventScript_1A924B
 	setwildbattle SPECIES_SNORLAX, 30, ITEM_NONE
 	waitse
@@ -30,17 +30,17 @@ Route12_EventScript_168014:: @ 8168014
 	delay 40
 	waitmoncry
 	setflag FLAG_HIDE_ROUTE_12_SNORLAX
-	setflag FLAG_0x807
-	setflag FLAG_0x253
+	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
+	setflag FLAG_WOKE_UP_ROUTE_12_SNORLAX
 	dowildbattle
-	clearflag FLAG_0x807
+	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	specialvar VAR_RESULT, sub_80CA74C
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16808F
+	goto_if eq, EventScript_16808F
 	compare_var_to_value VAR_RESULT, 4
-	goto_if_eq EventScript_16808F
+	goto_if eq, EventScript_16808F
 	compare_var_to_value VAR_RESULT, 5
-	goto_if_eq EventScript_16808F
+	goto_if eq, EventScript_16808F
 	release
 	end
 

@@ -5,9 +5,9 @@ NavelRock_Base_MapScripts:: @ 81650E7
 
 NavelRock_Base_MapScript1_1650F2:: @ 81650F2
 	checkflag FLAG_0x2F2
-	call_if eq, EventScript_165105
+	call_if TRUE, EventScript_165105
 	checkflag FLAG_0x2F2
-	call_if lt, EventScript_165109
+	call_if FALSE, EventScript_165109
 	end
 
 EventScript_165105:: @ 8165105
@@ -16,13 +16,13 @@ EventScript_165105:: @ 8165105
 
 EventScript_165109:: @ 8165109
 	checkflag FLAG_0x2F5
-	goto_if_eq EventScript_1A77A9
+	goto_if TRUE, EventScript_1A77A9
 	clearflag FLAG_HIDE_LUGIA
 	return
 
 NavelRock_Base_MapScript2_165116:: @ 8165116
-	checkflag FLAG_0x807
-	call_if eq, EventScript_165120
+	checkflag FLAG_SYS_SPECIAL_WILD_BATTLE
+	call_if TRUE, EventScript_165120
 	end
 
 EventScript_165120:: @ 8165120
@@ -35,7 +35,7 @@ EventScript_165120:: @ 8165120
 NavelRock_Base_EventScript_165134:: @ 8165134
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	lock
 	faceplayer
@@ -64,17 +64,17 @@ NavelRock_Base_EventScript_165134:: @ 8165134
 	setvar VAR_0x8005, 70
 	setvar VAR_0x8006, 0
 	special CreateObedientEnemyMon
-	setflag FLAG_0x807
+	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	special sub_807F9D8
 	waitstate
-	clearflag FLAG_0x807
+	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	specialvar VAR_RESULT, sub_80CA74C
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_1651D9
+	goto_if eq, EventScript_1651D9
 	compare_var_to_value VAR_RESULT, 4
-	goto_if_eq EventScript_1651E7
+	goto_if eq, EventScript_1651E7
 	compare_var_to_value VAR_RESULT, 5
-	goto_if_eq EventScript_1651E7
+	goto_if eq, EventScript_1651E7
 	setflag FLAG_0x2F2
 	release
 	end

@@ -4,7 +4,7 @@ SilphCo_10F_MapScripts:: @ 8161D86
 
 SilphCo_10F_MapScript1_161D8C:: @ 8161D8C
 	checkflag FLAG_0x28C
-	call_if lt, EventScript_1A84D6
+	call_if FALSE, EventScript_1A84D6
 	end
 
 SilphCo_10F_EventScript_161D96:: @ 8161D96

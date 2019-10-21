@@ -4,8 +4,8 @@ FuchsiaCity_Gym_MapScripts:: @ 816D54D
 FuchsiaCity_Gym_EventScript_16D54E:: @ 816D54E
 	famechecker FAMECHECKER_KOGA, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	trainerbattle 1, TRAINER_LEADER_KOGA, 0, Text_19832E, Text_198444, EventScript_16D580
-	checkflag FLAG_0x259
-	goto_if lt, EventScript_16D5A6
+	checkflag FLAG_GOT_TM06_FROM_KOGA
+	goto_if FALSE, EventScript_16D5A6
 	msgbox gUnknown_8198481
 	release
 	end
@@ -23,10 +23,10 @@ EventScript_16D5A6:: @ 816D5A6
 	msgbox gUnknown_819850E
 	checkitemspace ITEM_TM06, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16D5E7
+	goto_if eq, EventScript_16D5E7
 	additem ITEM_TM06, 1
 	giveitemfanfaremsg gUnknown_819858F, ITEM_TM06
-	setflag FLAG_0x259
+	setflag FLAG_GOT_TM06_FROM_KOGA
 	msgbox gUnknown_81985AB
 	release
 	end
@@ -71,7 +71,7 @@ FuchsiaCity_Gym_EventScript_16D688:: @ 816D688
 	lock
 	faceplayer
 	checkflag FLAG_DEFEATED_KOGA
-	goto_if_eq EventScript_16D69D
+	goto_if TRUE, EventScript_16D69D
 	msgbox gUnknown_8198A5E
 	release
 	end
@@ -84,7 +84,7 @@ EventScript_16D69D:: @ 816D69D
 FuchsiaCity_Gym_EventScript_16D6A7:: @ 816D6A7
 	lockall
 	checkflag FLAG_BADGE05_GET
-	goto_if_eq EventScript_16D6BB
+	goto_if TRUE, EventScript_16D6BB
 	msgbox gUnknown_8198B4B
 	releaseall
 	end

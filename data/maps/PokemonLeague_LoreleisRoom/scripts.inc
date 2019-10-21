@@ -13,7 +13,7 @@ PokemonLeague_LoreleisRoom_MapScript1_162586:: @ 8162586
 
 PokemonLeague_LoreleisRoom_MapScript2_162591:: @ 8162591
 	checkflag FLAG_DEFEATED_LORELEI
-	call_if eq, EventScript_1625AC
+	call_if TRUE, EventScript_1625AC
 	compare_var_to_value VAR_MAP_SCENE_POKEMON_LEAGUE, 1
 	call_if eq, EventScript_1625A6
 	end
@@ -54,19 +54,19 @@ PokemonLeague_LoreleisRoom_EventScript_1625DC:: @ 81625DC
 	faceplayer
 	famechecker FAMECHECKER_LORELEI, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	checkflag FLAG_DEFEATED_LORELEI
-	goto_if_eq EventScript_162669
+	goto_if TRUE, EventScript_162669
 	famechecker FAMECHECKER_LORELEI, 0
 	famechecker FAMECHECKER_LORELEI, 1
 	checkflag FLAG_0x844
-	call_if lt, EventScript_162641
+	call_if FALSE, EventScript_162641
 	checkflag FLAG_0x844
-	call_if eq, EventScript_16264A
+	call_if TRUE, EventScript_16264A
 	setflag FLAG_TEMP_3
 	setflag FLAG_TEMP_5
 	checkflag FLAG_0x844
-	call_if lt, EventScript_162653
+	call_if FALSE, EventScript_162653
 	checkflag FLAG_0x844
-	call_if eq, EventScript_16265E
+	call_if TRUE, EventScript_16265E
 	clearflag FLAG_TEMP_5
 	goto EventScript_162673
 

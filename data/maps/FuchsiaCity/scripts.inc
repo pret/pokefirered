@@ -5,9 +5,9 @@ FuchsiaCity_MapScripts:: @ 8166D75
 FuchsiaCity_MapScript1_166D7B:: @ 8166D7B
 	setworldmapflag FLAG_WORLD_MAP_FUCHSIA_CITY
 	checkflag FLAG_0x272
-	call_if eq, EventScript_166D91
+	call_if TRUE, EventScript_166D91
 	checkflag FLAG_0x272
-	call_if lt, EventScript_166D97
+	call_if FALSE, EventScript_166D97
 	end
 
 EventScript_166D91:: @ 8166D91
@@ -122,7 +122,7 @@ FuchsiaCity_EventScript_166E83:: @ 8166E83
 FuchsiaCity_EventScript_166E9C:: @ 8166E9C
 	lockall
 	checkflag FLAG_0x272
-	goto_if_eq EventScript_166EBE
+	goto_if TRUE, EventScript_166EBE
 	setvar VAR_0x8004, SPECIES_KABUTO
 	special sub_80CBDCC
 	drawmonpic SPECIES_KABUTO, 10, 3

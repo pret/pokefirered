@@ -7,10 +7,10 @@ UndergroundPath_NorthEntrance_EventScript_160E39:: @ 8160E39
 	setvar VAR_0x8008, 2
 	call EventScript_1A8CAD
 	checkflag FLAG_DID_MS_NIDO_TRADE
-	goto_if_eq EventScript_160EAB
+	goto_if TRUE, EventScript_160EAB
 	msgbox gUnknown_81A5AD6, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_160E93
+	goto_if eq, EventScript_160E93
 	call EventScript_1A8CBD
 	compare_var_to_value VAR_0x8004, 6
 	goto_if ge, EventScript_160E93

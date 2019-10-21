@@ -20,13 +20,13 @@ SaffronCity_House1_2F_EventScript_16EB70:: @ 816EB70
 SaffronCity_House1_2F_EventScript_16EB7B:: @ 816EB7B
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	lock
 	faceplayer
 	checkitem ITEM_POKE_DOLL, 1
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_1C4CF6
+	goto_if eq, EventScript_1C4CF6
 	checkplayergender
 	compare_var_to_value VAR_RESULT, 0
 	call_if eq, EventScript_16EBB7

@@ -4,14 +4,14 @@ SilphCo_11F_MapScripts:: @ 8161DEE
 
 SilphCo_11F_MapScript1_161DF4:: @ 8161DF4
 	checkflag FLAG_0x28D
-	call_if lt, EventScript_1A8504
+	call_if FALSE, EventScript_1A8504
 	end
 
 SilphCo_11F_EventScript_161DFE:: @ 8161DFE
 	lock
 	faceplayer
-	checkflag FLAG_0x250
-	goto_if_eq EventScript_161E75
+	checkflag FLAG_GOT_MASTER_BALL_FROM_SILPH
+	goto_if TRUE, EventScript_161E75
 	checkplayergender
 	compare_var_to_value VAR_RESULT, 0
 	call_if eq, EventScript_161E59
@@ -19,11 +19,11 @@ SilphCo_11F_EventScript_161DFE:: @ 8161DFE
 	call_if eq, EventScript_161E62
 	checkitemspace ITEM_MASTER_BALL, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_161E6B
+	goto_if eq, EventScript_161E6B
 	additem ITEM_MASTER_BALL, 1
 	giveitemfanfaremsg gUnknown_8176FBD, ITEM_MASTER_BALL, 1, MUS_FAN5
 	msgbox gUnknown_8176FEB
-	setflag FLAG_0x250
+	setflag FLAG_GOT_MASTER_BALL_FROM_SILPH
 	release
 	end
 

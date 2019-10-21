@@ -4,9 +4,9 @@ SilphCo_2F_MapScripts:: @ 8161641
 
 SilphCo_2F_MapScript1_161647:: @ 8161647
 	checkflag FLAG_0x27A
-	call_if lt, EventScript_1A8149
+	call_if FALSE, EventScript_1A8149
 	checkflag FLAG_0x27B
-	call_if lt, EventScript_1A8177
+	call_if FALSE, EventScript_1A8177
 	end
 
 SilphCo_2F_EventScript_16165A:: @ 816165A

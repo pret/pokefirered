@@ -10,9 +10,9 @@ FourIsland_LoreleisHouse_EventScript_171C58:: @ 8171C58
 	lock
 	faceplayer
 	checkflag FLAG_0x2D4
-	goto_if_eq EventScript_171C83
+	goto_if TRUE, EventScript_171C83
 	checkflag FLAG_0x2D5
-	goto_if_eq EventScript_171C76
+	goto_if TRUE, EventScript_171C76
 	msgbox gUnknown_81A3826
 	release
 	end

@@ -5,16 +5,16 @@ CeladonCity_Condominiums_1F_EventScript_16C321:: @ 816C321
 	lock
 	faceplayer
 	checkflag FLAG_0x2F8
-	goto_if_eq EventScript_16C36A
+	goto_if TRUE, EventScript_16C36A
 	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if_eq EventScript_16C374
+	goto_if TRUE, EventScript_16C374
 	checkflag FLAG_0x2A6
-	goto_if_eq EventScript_16C36A
+	goto_if TRUE, EventScript_16C36A
 	msgbox gUnknown_81960C9
 	setflag FLAG_0x2A6
 	giveitem ITEM_TEA
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_1A6BF9
+	goto_if eq, EventScript_1A6BF9
 	msgbox gUnknown_8196109
 	release
 	end

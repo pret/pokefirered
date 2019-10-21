@@ -6,7 +6,7 @@ PalletTown_MapScripts:: @ 816545A
 PalletTown_MapScript1_165465:: @ 8165465
 	setworldmapflag FLAG_WORLD_MAP_PALLET_TOWN
 	checkflag FLAG_0x291
-	call_if eq, EventScript_165488
+	call_if TRUE, EventScript_165488
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 0
 	call_if eq, EventScript_1654A8
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
@@ -15,7 +15,7 @@ PalletTown_MapScript1_165465:: @ 8165465
 
 EventScript_165488:: @ 8165488
 	checkflag FLAG_PALLET_TOWN_LADY_MOVED_FROM_SIGN
-	goto_if lt, EventScript_1A77A9
+	goto_if FALSE, EventScript_1A77A9
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
 	goto_if ge, EventScript_1A77A9
 	setvar VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
@@ -27,7 +27,7 @@ EventScript_1654A2:: @ 81654A2
 
 EventScript_1654A8:: @ 81654A8
 	checkflag FLAG_0x291
-	goto_if_eq EventScript_1654BD
+	goto_if TRUE, EventScript_1654BD
 	setobjectxyperm 1, 5, 15
 	setobjectmovementtype 1, 7
 	return
@@ -51,7 +51,7 @@ EventScript_1654D8:: @ 81654D8
 	applymovement 3, Movement_1655AF
 	waitmovement 0
 	checkflag FLAG_WORLD_MAP_ONE_ISLAND
-	goto_if lt, EventScript_1655A1
+	goto_if FALSE, EventScript_1655A1
 	msgbox gUnknown_817D8BF
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, Special_GetPokedexCount
@@ -375,13 +375,13 @@ Movement_165758:: @ 8165758
 PalletTown_EventScript_16575C:: @ 816575C
 	lock
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 2
-	goto_if_eq EventScript_1657ED
+	goto_if eq, EventScript_1657ED
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
-	goto_if_eq EventScript_165815
+	goto_if eq, EventScript_165815
 	compare_var_to_value VAR_0x4002, 1
-	goto_if_eq EventScript_1658C2
+	goto_if eq, EventScript_1658C2
 	checkflag FLAG_TEMP_2
-	goto_if_eq EventScript_165801
+	goto_if TRUE, EventScript_165801
 	msgbox gUnknown_81B1C8B
 	applymovement 1, Movement_1A75E1
 	waitmovement 0

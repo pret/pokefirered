@@ -4,9 +4,9 @@ Route25_SeaCottage_MapScripts:: @ 8170523
 
 Route25_SeaCottage_MapScript1_170529:: @ 8170529
 	checkflag FLAG_HELPED_BILL_IN_SEA_COTTAGE
-	call_if lt, EventScript_17053C
+	call_if FALSE, EventScript_17053C
 	checkflag FLAG_GOT_SS_TICKET
-	call_if eq, EventScript_170547
+	call_if TRUE, EventScript_170547
 	end
 
 EventScript_17053C:: @ 817053C
@@ -22,16 +22,16 @@ Route25_SeaCottage_EventScript_17054B:: @ 817054B
 	lock
 	faceplayer
 	checkflag FLAG_TEMP_3
-	goto_if_eq EventScript_1706C8
+	goto_if TRUE, EventScript_1706C8
 	checkflag FLAG_GOT_SS_TICKET
-	goto_if_eq EventScript_170640
+	goto_if TRUE, EventScript_170640
 	checkflag FLAG_HELPED_BILL_IN_SEA_COTTAGE
-	goto_if_eq EventScript_17064A
+	goto_if TRUE, EventScript_17064A
 	checkplayergender
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_170580
+	goto_if eq, EventScript_170580
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_17058E
+	goto_if eq, EventScript_17058E
 	end
 
 EventScript_170580:: @ 8170580
@@ -110,7 +110,7 @@ EventScript_17064A:: @ 817064A
 	call_if eq, EventScript_1706B5
 	checkitemspace ITEM_SS_TICKET, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_1706BE
+	goto_if eq, EventScript_1706BE
 	additem ITEM_SS_TICKET, 1
 	giveitemfanfaremsg gUnknown_81A028E, ITEM_SS_TICKET, 1, MUS_FAN5
 	setflag FLAG_GOT_SS_TICKET_DUP
@@ -158,9 +158,9 @@ Movement_1706DB:: @ 81706DB
 Route25_SeaCottage_EventScript_1706DD:: @ 81706DD
 	lockall
 	checkflag FLAG_TEMP_3
-	goto_if_eq EventScript_1707CA
+	goto_if TRUE, EventScript_1707CA
 	checkflag FLAG_TEMP_2
-	goto_if_eq EventScript_1706FA
+	goto_if TRUE, EventScript_1706FA
 	msgbox gUnknown_81A0402
 	releaseall
 	end

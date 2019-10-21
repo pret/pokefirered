@@ -4,8 +4,8 @@ CeruleanCave_B1F_MapScripts:: @ 81624BE
 	.byte 0
 
 CeruleanCave_B1F_MapScript1_1624C9:: @ 81624C9
-	checkflag FLAG_0x807
-	call_if eq, EventScript_1624D3
+	checkflag FLAG_SYS_SPECIAL_WILD_BATTLE
+	call_if TRUE, EventScript_1624D3
 	end
 
 EventScript_1624D3:: @ 81624D3
@@ -17,7 +17,7 @@ EventScript_1624D3:: @ 81624D3
 
 CeruleanCave_B1F_MapScript2_1624E7:: @ 81624E7
 	checkflag FLAG_0x2BC
-	call_if lt, EventScript_1624F1
+	call_if FALSE, EventScript_1624F1
 	end
 
 EventScript_1624F1:: @ 81624F1
@@ -27,7 +27,7 @@ EventScript_1624F1:: @ 81624F1
 CeruleanCave_B1F_EventScript_1624F5:: @ 81624F5
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	lock
 	faceplayer
@@ -40,17 +40,17 @@ CeruleanCave_B1F_EventScript_1624F5:: @ 81624F5
 	playbgm MUS_EXEYE, 0
 	waitbuttonpress
 	setwildbattle SPECIES_MEWTWO, 70, ITEM_NONE
-	setflag FLAG_0x807
+	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	special sub_807F9D8
 	waitstate
-	clearflag FLAG_0x807
+	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	specialvar VAR_RESULT, sub_80CA74C
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_162558
+	goto_if eq, EventScript_162558
 	compare_var_to_value VAR_RESULT, 4
-	goto_if_eq EventScript_162561
+	goto_if eq, EventScript_162561
 	compare_var_to_value VAR_RESULT, 5
-	goto_if_eq EventScript_162561
+	goto_if eq, EventScript_162561
 	setflag FLAG_0x2BC
 	release
 	end

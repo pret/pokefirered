@@ -5,7 +5,7 @@ SaffronCity_Gym_EventScript_16EDD8:: @ 816EDD8
 	famechecker FAMECHECKER_SABRINA, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	trainerbattle 1, TRAINER_LEADER_SABRINA, 0, Text_19B53C, Text_19B602, EventScript_16EE0A
 	checkflag FLAG_0x29A
-	goto_if lt, EventScript_16EE3D
+	goto_if FALSE, EventScript_16EE3D
 	msgbox gUnknown_819B7F2
 	release
 	end
@@ -24,7 +24,7 @@ EventScript_16EE3D:: @ 816EE3D
 	msgbox gUnknown_819B6FA
 	checkitemspace ITEM_TM04, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16EE7E
+	goto_if eq, EventScript_16EE7E
 	additem ITEM_TM04, 1
 	giveitemfanfaremsg gUnknown_819B7D3, ITEM_TM04
 	setflag FLAG_0x29A
@@ -77,7 +77,7 @@ SaffronCity_Gym_EventScript_16EF36:: @ 816EF36
 	lock
 	faceplayer
 	checkflag FLAG_DEFEATED_SABRINA
-	goto_if_eq EventScript_16EF4B
+	goto_if TRUE, EventScript_16EF4B
 	msgbox gUnknown_819BCF6
 	release
 	end
@@ -90,7 +90,7 @@ EventScript_16EF4B:: @ 816EF4B
 SaffronCity_Gym_EventScript_16EF55:: @ 816EF55
 	lockall
 	checkflag FLAG_BADGE06_GET
-	goto_if_eq EventScript_16EF69
+	goto_if TRUE, EventScript_16EF69
 	msgbox gUnknown_819BDFE
 	releaseall
 	end

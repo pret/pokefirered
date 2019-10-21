@@ -21,7 +21,7 @@ SaffronCity_Dojo_EventScript_16EC00:: @ 816EC00
 	lock
 	faceplayer
 	checkflag FLAG_0x278
-	goto_if_eq EventScript_16EC3C
+	goto_if TRUE, EventScript_16EC3C
 	drawmonpic SPECIES_HITMONLEE, 10, 3
 	setvar VAR_0x4001, SPECIES_HITMONLEE
 	applymovement 5, Movement_1A75E9
@@ -30,7 +30,7 @@ SaffronCity_Dojo_EventScript_16EC00:: @ 816EC00
 	msgbox gUnknown_819B44E, MSGBOX_YESNO
 	call EventScript_1A6675
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16EC82
+	goto_if eq, EventScript_16EC82
 	erasemonpic
 	release
 	end
@@ -44,7 +44,7 @@ SaffronCity_Dojo_EventScript_16EC46:: @ 816EC46
 	lock
 	faceplayer
 	checkflag FLAG_0x278
-	goto_if_eq EventScript_16EC3C
+	goto_if TRUE, EventScript_16EC3C
 	drawmonpic SPECIES_HITMONCHAN, 10, 3
 	setvar VAR_0x4001, SPECIES_HITMONCHAN
 	applymovement 5, Movement_1A75E9
@@ -53,7 +53,7 @@ SaffronCity_Dojo_EventScript_16EC46:: @ 816EC46
 	msgbox gUnknown_819B49E, MSGBOX_YESNO
 	call EventScript_1A6675
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16EC82
+	goto_if eq, EventScript_16EC82
 	erasemonpic
 	release
 	end
@@ -62,11 +62,11 @@ EventScript_16EC82:: @ 816EC82
 	erasemonpic
 	givemon VAR_0x4001, 25, ITEM_NONE, 0, 0, 0
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16ECB5
+	goto_if eq, EventScript_16ECB5
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16ECEC
+	goto_if eq, EventScript_16ECEC
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A927C
+	goto_if eq, EventScript_1A927C
 	release
 	end
 
@@ -80,7 +80,7 @@ EventScript_16ECB5:: @ 816ECB5
 	setflag FLAG_0x278
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16ED29
+	goto_if eq, EventScript_16ED29
 	call EventScript_1A8C27
 	call EventScript_1A74EB
 	goto EventScript_16ED29
@@ -96,7 +96,7 @@ EventScript_16ECEC:: @ 816ECEC
 	setflag FLAG_0x278
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16ED1E
+	goto_if eq, EventScript_16ED1E
 	call EventScript_1A8C33
 	goto EventScript_16ED1E
 	end
@@ -145,7 +145,7 @@ SaffronCity_Dojo_EventScript_16ED8B:: @ 816ED8B
 SaffronCity_Dojo_EventScript_16EDA2:: @ 816EDA2
 	trainerbattle 2, TRAINER_BLACK_BELT_KOICHI, 0, Text_19B12C, Text_19B193, EventScript_16EDD0
 	checkflag FLAG_0x278
-	goto_if_eq EventScript_16EDC6
+	goto_if TRUE, EventScript_16EDC6
 	msgbox gUnknown_819B1A7, 6
 	end
 

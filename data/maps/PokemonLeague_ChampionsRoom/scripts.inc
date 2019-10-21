@@ -17,23 +17,23 @@ PokemonLeague_ChampionsRoom_MapScript2_162AF2:: @ 8162AF2
 
 EventScript_162B1E:: @ 8162B1E
 	checktrainerflag TRAINER_CHAMPION_TERRY
-	goto_if_eq EventScript_162B57
+	goto_if eq, EventScript_162B57
 	checktrainerflag TRAINER_CHAMPION_TERRY_4
-	goto_if_eq EventScript_162B57
+	goto_if eq, EventScript_162B57
 	return
 
 EventScript_162B31:: @ 8162B31
 	checktrainerflag TRAINER_CHAMPION_TERRY_2
-	goto_if_eq EventScript_162B57
+	goto_if eq, EventScript_162B57
 	checktrainerflag TRAINER_CHAMPION_TERRY_5
-	goto_if_eq EventScript_162B57
+	goto_if eq, EventScript_162B57
 	return
 
 EventScript_162B44:: @ 8162B44
 	checktrainerflag TRAINER_CHAMPION_TERRY_3
-	goto_if_eq EventScript_162B57
+	goto_if eq, EventScript_162B57
 	checktrainerflag TRAINER_CHAMPION_TERRY_6
-	goto_if_eq EventScript_162B57
+	goto_if eq, EventScript_162B57
 	return
 
 EventScript_162B57:: @ 8162B57
@@ -60,19 +60,19 @@ EventScript_162B76:: @ 8162B76
 	waitmovement 0
 	delay 20
 	checkflag FLAG_SYS_GAME_CLEAR
-	call_if lt, EventScript_162CB3
+	call_if FALSE, EventScript_162CB3
 	checkflag FLAG_SYS_GAME_CLEAR
-	call_if eq, EventScript_162CBC
+	call_if TRUE, EventScript_162CBC
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_162C68
+	goto_if eq, EventScript_162C68
 	setflag FLAG_TEMP_3
 	setflag FLAG_TEMP_5
 	savebgm MUS_WIN_GYM
 	checkflag FLAG_0x844
-	call_if lt, EventScript_162C6F
+	call_if FALSE, EventScript_162C6F
 	checkflag FLAG_0x844
-	call_if eq, EventScript_162C91
+	call_if TRUE, EventScript_162C91
 	setflag FLAG_TEMP_4
 	clearflag FLAG_TEMP_5
 	setflag FLAG_DEFEATED_CHAMP

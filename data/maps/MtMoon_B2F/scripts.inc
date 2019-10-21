@@ -4,7 +4,7 @@ MtMoon_B2F_MapScripts:: @ 8160699
 
 MtMoon_B2F_MapScript1_16069F:: @ 816069F
 	checkflag FLAG_GOT_FOSSIL_FROM_MT_MOON
-	call_if lt, EventScript_1606A9
+	call_if FALSE, EventScript_1606A9
 	end
 
 EventScript_1606A9:: @ 81606A9
@@ -24,9 +24,9 @@ MtMoon_B2F_EventScript_1606C2:: @ 81606C2
 	lock
 	faceplayer
 	checkflag FLAG_GOT_FOSSIL_FROM_MT_MOON
-	goto_if_eq EventScript_160707
+	goto_if TRUE, EventScript_160707
 	checktrainerflag TRAINER_SUPER_NERD_MIGUEL
-	goto_if_eq EventScript_160711
+	goto_if eq, EventScript_160711
 	call EventScript_1606DD
 	release
 	end
@@ -58,7 +58,7 @@ MtMoon_B2F_EventScript_16071B:: @ 816071B
 	faceplayer
 	msgbox gUnknown_8172E77, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_1607DE
+	goto_if eq, EventScript_1607DE
 	removeobject 1
 	additem ITEM_DOME_FOSSIL, 1
 	giveitemfanfaremsg gUnknown_8172ECD, ITEM_DOME_FOSSIL, 1, MUS_FAN5
@@ -91,7 +91,7 @@ MtMoon_B2F_EventScript_16077F:: @ 816077F
 	faceplayer
 	msgbox gUnknown_8172E94, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_1607DE
+	goto_if eq, EventScript_1607DE
 	removeobject 2
 	additem ITEM_HELIX_FOSSIL, 1
 	giveitemfanfaremsg gUnknown_8172EB2, ITEM_HELIX_FOSSIL, 1, MUS_FAN5

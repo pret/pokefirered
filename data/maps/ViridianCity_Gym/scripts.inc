@@ -5,7 +5,7 @@ ViridianCity_Gym_EventScript_169ECA:: @ 8169ECA
 	famechecker FAMECHECKER_GIOVANNI, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	trainerbattle 1, TRAINER_LEADER_GIOVANNI, 0, Text_18F352, Text_18F43F, EventScript_169F04
 	checkflag FLAG_0x298
-	goto_if lt, EventScript_169F2F
+	goto_if FALSE, EventScript_169F2F
 	msgbox gUnknown_818F4A2
 	closemessage
 	fadescreen 1
@@ -28,7 +28,7 @@ EventScript_169F2F:: @ 8169F2F
 	msgbox gUnknown_818F586
 	checkitemspace ITEM_TM26, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_169F70
+	goto_if eq, EventScript_169F70
 	additem ITEM_TM26, 1
 	giveitemfanfaremsg gUnknown_818F675, ITEM_TM26
 	setflag FLAG_0x298
@@ -85,7 +85,7 @@ ViridianCity_Gym_EventScript_16A032:: @ 816A032
 	lock
 	faceplayer
 	checkflag FLAG_DEFEATED_LEADER_GIOVANNI
-	goto_if_eq EventScript_16A047
+	goto_if TRUE, EventScript_16A047
 	msgbox gUnknown_818FA81
 	release
 	end
@@ -99,7 +99,7 @@ EventScript_16A047:: @ 816A047
 ViridianCity_Gym_EventScript_16A05E:: @ 816A05E
 	lockall
 	checkflag FLAG_BADGE08_GET
-	goto_if_eq EventScript_16A072
+	goto_if TRUE, EventScript_16A072
 	msgbox gUnknown_818FB8D
 	releaseall
 	end

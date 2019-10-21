@@ -4,9 +4,9 @@ SilphCo_3F_MapScripts:: @ 81616C5
 
 SilphCo_3F_MapScript1_1616CB:: @ 81616CB
 	checkflag FLAG_0x27C
-	call_if lt, EventScript_1A81A5
+	call_if FALSE, EventScript_1A81A5
 	checkflag FLAG_0x27D
-	call_if lt, EventScript_1A81DC
+	call_if FALSE, EventScript_1A81DC
 	end
 
 SilphCo_3F_EventScript_1616DE:: @ 81616DE

@@ -4,11 +4,11 @@ SilphCo_5F_MapScripts:: @ 81617BE
 
 SilphCo_5F_MapScript1_1617C4:: @ 81617C4
 	checkflag FLAG_0x280
-	call_if lt, EventScript_1A826F
+	call_if FALSE, EventScript_1A826F
 	checkflag FLAG_0x281
-	call_if lt, EventScript_1A82A6
+	call_if FALSE, EventScript_1A82A6
 	checkflag FLAG_0x282
-	call_if lt, EventScript_1A82DD
+	call_if FALSE, EventScript_1A82DD
 	end
 
 SilphCo_5F_EventScript_1617E0:: @ 81617E0

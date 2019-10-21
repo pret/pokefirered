@@ -5,9 +5,9 @@ FuchsiaCity_Building1_EventScript_16D74C:: @ 816D74C
 	lock
 	faceplayer
 	checkflag FLAG_GOT_HM04
-	goto_if_eq EventScript_16D7FA
+	goto_if TRUE, EventScript_16D7FA
 	checkflag FLAG_HIDE_SAFARI_ZONE_WEST_GOLD_TEETH
-	goto_if_eq EventScript_16D780
+	goto_if TRUE, EventScript_16D780
 	msgbox gUnknown_8198DF9, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	call_if eq, EventScript_16D7E8

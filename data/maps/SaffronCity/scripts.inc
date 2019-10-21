@@ -5,7 +5,7 @@ SaffronCity_MapScripts:: @ 816735F
 SaffronCity_MapScript1_167365:: @ 8167365
 	setworldmapflag FLAG_WORLD_MAP_SAFFRON_CITY
 	checkflag FLAG_RESCUED_MR_FUJI
-	call_if lt, EventScript_167372
+	call_if FALSE, EventScript_167372
 	end
 
 EventScript_167372:: @ 8167372
@@ -43,7 +43,7 @@ SaffronCity_EventScript_1673B0:: @ 81673B0
 SaffronCity_EventScript_1673B9:: @ 81673B9
 	lock
 	checkflag FLAG_RESCUED_MR_FUJI
-	goto_if_eq EventScript_1673D7
+	goto_if TRUE, EventScript_1673D7
 	applymovement 6, Movement_1A75E1
 	waitmovement 0
 	msgbox gUnknown_81812CA

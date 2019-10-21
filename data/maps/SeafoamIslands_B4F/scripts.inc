@@ -7,8 +7,8 @@ SeafoamIslands_B4F_MapScripts:: @ 816302E
 	.byte 0
 
 SeafoamIslands_B4F_MapScript2_163048:: @ 8163048
-	checkflag FLAG_0x807
-	call_if eq, EventScript_163052
+	checkflag FLAG_SYS_SPECIAL_WILD_BATTLE
+	call_if TRUE, EventScript_163052
 	end
 
 EventScript_163052:: @ 8163052
@@ -20,19 +20,19 @@ EventScript_163052:: @ 8163052
 
 SeafoamIslands_B4F_MapScript1_163066:: @ 8163066
 	checkflag FLAG_0x2BE
-	call_if lt, EventScript_1630AD
+	call_if FALSE, EventScript_1630AD
 	checkflag FLAG_0x2D3
-	call_if lt, EventScript_163082
+	call_if FALSE, EventScript_163082
 	checkflag FLAG_0x2D3
-	call_if eq, EventScript_1630A9
+	call_if TRUE, EventScript_1630A9
 	end
 
 EventScript_163082:: @ 8163082
 	setvar VAR_0x4002, 0
 	checkflag FLAG_HIDE_SEAFOAM_B4F_BOULDER_1
-	call_if lt, EventScript_163169
+	call_if FALSE, EventScript_163169
 	checkflag FLAG_HIDE_SEAFOAM_B4F_BOULDER_2
-	call_if lt, EventScript_163169
+	call_if FALSE, EventScript_163169
 	compare_var_to_value VAR_0x4002, 2
 	call_if eq, EventScript_1630A5
 	return
@@ -52,11 +52,11 @@ EventScript_1630AD:: @ 81630AD
 SeafoamIslands_B4F_MapScript3_1630B1:: @ 81630B1
 	setvar VAR_0x4002, 0
 	checkflag FLAG_HIDE_SEAFOAM_B4F_BOULDER_1
-	call_if lt, EventScript_163169
+	call_if FALSE, EventScript_163169
 	checkflag FLAG_HIDE_SEAFOAM_B4F_BOULDER_2
-	call_if lt, EventScript_163169
+	call_if FALSE, EventScript_163169
 	compare_var_to_value VAR_0x4002, 2
-	goto_if_eq EventScript_1630D4
+	goto_if eq, EventScript_1630D4
 	end
 
 EventScript_1630D4:: @ 81630D4
@@ -96,11 +96,11 @@ EventScript_163121:: @ 8163121
 	lockall
 	setvar VAR_0x4002, 0
 	checkflag FLAG_HIDE_SEAFOAM_B4F_BOULDER_1
-	call_if lt, EventScript_163169
+	call_if FALSE, EventScript_163169
 	checkflag FLAG_HIDE_SEAFOAM_B4F_BOULDER_2
-	call_if lt, EventScript_163169
+	call_if FALSE, EventScript_163169
 	compare_var_to_value VAR_0x4002, 2
-	goto_if_eq EventScript_163185
+	goto_if eq, EventScript_163185
 	getplayerxy VAR_0x8008, VAR_0x8009
 	compare_var_to_value VAR_0x8008, 9
 	call_if lt, EventScript_16316F
@@ -165,7 +165,7 @@ Movement_1631AA:: @ 81631AA
 SeafoamIslands_B4F_EventScript_1631AC:: @ 81631AC
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	lock
 	faceplayer
@@ -178,17 +178,17 @@ SeafoamIslands_B4F_EventScript_1631AC:: @ 81631AC
 	delay 10
 	playbgm MUS_EXEYE, 0
 	waitbuttonpress
-	setflag FLAG_0x807
+	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	special sub_807F9D8
 	waitstate
-	clearflag FLAG_0x807
+	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	specialvar VAR_RESULT, sub_80CA74C
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16320F
+	goto_if eq, EventScript_16320F
 	compare_var_to_value VAR_RESULT, 4
-	goto_if_eq EventScript_163218
+	goto_if eq, EventScript_163218
 	compare_var_to_value VAR_RESULT, 5
-	goto_if_eq EventScript_163218
+	goto_if eq, EventScript_163218
 	setflag FLAG_0x2BE
 	release
 	end

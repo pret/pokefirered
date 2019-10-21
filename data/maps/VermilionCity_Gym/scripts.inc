@@ -5,9 +5,9 @@ VermilionCity_Gym_MapScripts:: @ 816B69E
 
 VermilionCity_Gym_MapScript1_16B6A9:: @ 816B6A9
 	checkflag FLAG_TEMP_1
-	call_if eq, EventScript_16B6BC
-	checkflag FLAG_0x264
-	call_if eq, EventScript_16B717
+	call_if TRUE, EventScript_16B6BC
+	checkflag FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES
+	call_if TRUE, EventScript_16B717
 	end
 
 EventScript_16B6BC:: @ 816B6BC
@@ -41,9 +41,9 @@ VermilionCity_Gym_MapScript2_16B772:: @ 816B772
 	end
 
 EventScript_16B778:: @ 816B778
-	checkflag FLAG_0x264
-	goto_if_eq EventScript_1A77A9
-	special sub_80CADEC
+	checkflag FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES
+	goto_if TRUE, EventScript_1A77A9
+	special Special_SetVermilionTrashCans
 	copyvar VAR_0x4000, VAR_0x8004
 	copyvar VAR_0x4001, VAR_0x8005
 	return
@@ -141,16 +141,16 @@ VermilionCity_Gym_EventScript_16B837:: @ 816B837
 EventScript_16B843:: @ 816B843
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	copyvar VAR_0x8004, VAR_0x4000
 	copyvar VAR_0x8005, VAR_0x4001
-	checkflag FLAG_0x264
-	goto_if_eq EventScript_16B8E5
+	checkflag FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES
+	goto_if TRUE, EventScript_16B8E5
 	checkflag FLAG_TEMP_1
-	goto_if_eq EventScript_16B89E
+	goto_if TRUE, EventScript_16B89E
 	compare_var_to_var VAR_0x8004, VAR_0x8008
-	goto_if_eq EventScript_16B885
+	goto_if eq, EventScript_16B885
 	msgbox gUnknown_8195289
 	releaseall
 	end
@@ -167,10 +167,10 @@ EventScript_16B885:: @ 816B885
 
 EventScript_16B89E:: @ 816B89E
 	compare_var_to_var VAR_0x8005, VAR_0x8008
-	goto_if_eq EventScript_16B8CB
+	goto_if eq, EventScript_16B8CB
 	msgbox gUnknown_819536C
 	clearflag FLAG_TEMP_1
-	special sub_80CADEC
+	special Special_SetVermilionTrashCans
 	copyvar VAR_0x4000, VAR_0x8004
 	copyvar VAR_0x4001, VAR_0x8005
 	call EventScript_16B8EF
@@ -185,7 +185,7 @@ EventScript_16B8CB:: @ 816B8CB
 	special DrawWholeMapView
 	playse SE_KI_GASYAN
 	waitse
-	setflag FLAG_0x264
+	setflag FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES
 	releaseall
 	end
 
@@ -211,7 +211,7 @@ VermilionCity_Gym_EventScript_16B94A:: @ 816B94A
 	famechecker FAMECHECKER_LTSURGE, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	trainerbattle 1, TRAINER_LEADER_LT_SURGE, 0, Text_194BA4, Text_194E03, EventScript_16B97C
 	checkflag FLAG_GOT_TM34_FROM_SURGE
-	goto_if lt, EventScript_16B9AF
+	goto_if FALSE, EventScript_16B9AF
 	msgbox gUnknown_8194C8E
 	release
 	end
@@ -219,7 +219,7 @@ VermilionCity_Gym_EventScript_16B94A:: @ 816B94A
 EventScript_16B97C:: @ 816B97C
 	famechecker FAMECHECKER_LTSURGE, 1
 	checkflag FLAG_GOT_HM05
-	call_if lt, EventScript_16B9AB
+	call_if FALSE, EventScript_16B9AB
 	clearflag FLAG_HIDE_FAME_CHECKER_LT_SURGE_JOURNAL
 	setflag FLAG_DEFEATED_LT_SURGE
 	setflag FLAG_BADGE03_GET
@@ -235,7 +235,7 @@ EventScript_16B9AF:: @ 816B9AF
 	msgbox gUnknown_8194CFA
 	checkitemspace ITEM_TM34, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16B9F0
+	goto_if eq, EventScript_16B9F0
 	additem ITEM_TM34, 1
 	giveitemfanfaremsg gUnknown_8194D87, ITEM_TM34
 	setflag FLAG_GOT_TM34_FROM_SURGE
@@ -274,7 +274,7 @@ VermilionCity_Gym_EventScript_16BA6C:: @ 816BA6C
 	lock
 	faceplayer
 	checkflag FLAG_DEFEATED_LT_SURGE
-	goto_if_eq EventScript_16BA81
+	goto_if TRUE, EventScript_16BA81
 	msgbox gUnknown_81950B4
 	release
 	end
@@ -287,7 +287,7 @@ EventScript_16BA81:: @ 816BA81
 VermilionCity_Gym_EventScript_16BA8B:: @ 816BA8B
 	lockall
 	checkflag FLAG_BADGE03_GET
-	goto_if_eq EventScript_16BA9F
+	goto_if TRUE, EventScript_16BA9F
 	msgbox gUnknown_819520B
 	releaseall
 	end

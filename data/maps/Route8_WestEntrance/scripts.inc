@@ -28,7 +28,7 @@ EventScript_16FB81:: @ 816FB81
 	applymovement 255, Movement_1A75E9
 	waitmovement 0
 	checkflag FLAG_0x2A6
-	goto_if_eq EventScript_16FBAB
+	goto_if TRUE, EventScript_16FBAB
 	msgbox gUnknown_819E3ED
 	closemessage
 	applymovement 255, Movement_16FC2D

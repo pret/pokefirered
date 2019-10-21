@@ -16,7 +16,7 @@ EventScript_167CCD:: @ 8167CCD
 
 EventScript_167CD1:: @ 8167CD1
 	checkflag FLAG_PENDING_DAYCARE_EGG
-	goto_if lt, EventScript_167CE1
+	goto_if FALSE, EventScript_167CE1
 	setobjectxyperm 1, 16, 14
 
 EventScript_167CE1:: @ 8167CE1
@@ -73,18 +73,18 @@ Movement_167D52:: @ 8167D52
 FourIsland_EventScript_167D55:: @ 8167D55
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	lock
 	faceplayer
 	special GetDaycareMonNicknames
 	specialvar VAR_RESULT, GetDaycareState
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_167D9B
+	goto_if eq, EventScript_167D9B
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_167E0C
+	goto_if eq, EventScript_167E0C
 	compare_var_to_value VAR_RESULT, 3
-	goto_if_eq EventScript_167E19
+	goto_if eq, EventScript_167E19
 	msgbox gUnknown_81BF555
 	release
 	end
@@ -92,10 +92,10 @@ FourIsland_EventScript_167D55:: @ 8167D55
 EventScript_167D9B:: @ 8167D9B
 	msgbox gUnknown_81BF5E3, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_167DD1
+	goto_if eq, EventScript_167DD1
 	msgbox gUnknown_81BF7B6, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_167DD1
+	goto_if eq, EventScript_167DD1
 	msgbox gUnknown_81BF6CF
 	clearflag FLAG_PENDING_DAYCARE_EGG
 	special RejectEggFromDayCare
@@ -143,7 +143,7 @@ FourIsland_EventScript_167E2E:: @ 8167E2E
 	lock
 	faceplayer
 	checkflag FLAG_0x844
-	goto_if_eq EventScript_167E43
+	goto_if TRUE, EventScript_167E43
 	msgbox gUnknown_8182A2B
 	release
 	end

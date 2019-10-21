@@ -43,7 +43,7 @@ RocketHideout_B4F_EventScript_161363:: @ 8161363
 	removeobject 2
 	giveitem ITEM_SILPH_SCOPE
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_1A6BF9
+	goto_if eq, EventScript_1A6BF9
 	release
 	end
 
@@ -67,7 +67,7 @@ RocketHideout_B4F_EventScript_1613AD:: @ 81613AD
 	removeobject 4
 	giveitem ITEM_LIFT_KEY
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_1A6BF9
+	goto_if eq, EventScript_1A6BF9
 	release
 	end
 

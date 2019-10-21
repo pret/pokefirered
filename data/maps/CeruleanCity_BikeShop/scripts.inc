@@ -5,9 +5,9 @@ CeruleanCity_BikeShop_EventScript_16ABBD:: @ 816ABBD
 	lock
 	faceplayer
 	checkflag FLAG_0x271
-	goto_if_eq EventScript_16AC58
+	goto_if TRUE, EventScript_16AC58
 	checkflag FLAG_GOT_BIKE_VOUCHER
-	goto_if_eq EventScript_16AC22
+	goto_if TRUE, EventScript_16AC22
 	showmoneybox 0, 0, 0
 	message Text_192755
 	waitmessage
@@ -59,7 +59,7 @@ CeruleanCity_BikeShop_EventScript_16AC75:: @ 816AC75
 	lock
 	faceplayer
 	checkflag FLAG_0x271
-	goto_if_eq EventScript_16AC8A
+	goto_if TRUE, EventScript_16AC8A
 	msgbox gUnknown_8192937
 	release
 	end

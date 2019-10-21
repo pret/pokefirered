@@ -4,8 +4,8 @@ PokemonMansion_1F_MapScripts:: @ 81621F9
 	.byte 0
 
 PokemonMansion_1F_MapScript1_162204:: @ 8162204
-	checkflag FLAG_0x26C
-	call_if eq, EventScript_1A7B7A
+	checkflag FLAG_POKEMON_MANSION_SWITCH_STATE
+	call_if TRUE, EventScript_1A7B7A
 	end
 
 PokemonMansion_1F_MapScript2_16220E:: @ 816220E

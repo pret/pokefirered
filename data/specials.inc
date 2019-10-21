@@ -356,7 +356,7 @@ gSpecials:: @ 815FD60
 	def_special sub_80CB7C4
 	def_special sub_80CBC5C
 	def_special sub_80CADC4
-	def_special sub_80CADEC
+	def_special Special_SetVermilionTrashCans
 	def_special sub_805D1A8
 	def_special sub_80CB0A8
 	def_special Special_CheckAddCoins

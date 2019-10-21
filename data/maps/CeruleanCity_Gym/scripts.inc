@@ -5,7 +5,7 @@ CeruleanCity_Gym_EventScript_16AAA1:: @ 816AAA1
 	famechecker FAMECHECKER_MISTY, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	trainerbattle 1, TRAINER_LEADER_MISTY, 0, Text_1921EF, Text_19242D, EventScript_16AAD3
 	checkflag FLAG_0x297
-	goto_if lt, EventScript_16AAF9
+	goto_if FALSE, EventScript_16AAF9
 	msgbox gUnknown_81922BF
 	release
 	end
@@ -23,7 +23,7 @@ EventScript_16AAF9:: @ 816AAF9
 	msgbox gUnknown_81922F7
 	checkitemspace ITEM_TM03, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16AB3A
+	goto_if eq, EventScript_16AB3A
 	additem ITEM_TM03, 1
 	giveitemfanfaremsg gUnknown_81923F1, ITEM_TM03
 	setflag FLAG_0x297
@@ -51,7 +51,7 @@ CeruleanCity_Gym_EventScript_16AB7F:: @ 816AB7F
 	lock
 	faceplayer
 	checkflag FLAG_DEFEATED_MISTY
-	goto_if_eq EventScript_16AB94
+	goto_if TRUE, EventScript_16AB94
 	msgbox gUnknown_81925AC
 	release
 	end
@@ -64,7 +64,7 @@ EventScript_16AB94:: @ 816AB94
 CeruleanCity_Gym_EventScript_16AB9E:: @ 816AB9E
 	lockall
 	checkflag FLAG_BADGE02_GET
-	goto_if_eq EventScript_16ABB2
+	goto_if TRUE, EventScript_16ABB2
 	msgbox gUnknown_81926E1
 	releaseall
 	end

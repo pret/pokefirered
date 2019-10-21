@@ -15,7 +15,7 @@ EventScript_1610BC:: @ 81610BC
 VictoryRoad_3F_EventScript_1610CF:: @ 81610CF
 	lockall
 	compare_var_to_value VAR_MAP_SCENE_VICTORY_ROAD_3F, 100
-	goto_if_eq EventScript_161101
+	goto_if eq, EventScript_161101
 	setmetatile 12, 12, 721, 0
 	setmetatile 12, 13, 737, 0
 	playse SE_RU_GASYAN

@@ -5,7 +5,7 @@ Route18_EastEntrance_1F_MapScripts:: @ 8170378
 Route18_EastEntrance_1F_MapScript1_17037E:: @ 817037E
 	clearflag FLAG_0x830
 	checkflag FLAG_0x271
-	call_if eq, EventScript_17038B
+	call_if TRUE, EventScript_17038B
 	end
 
 EventScript_17038B:: @ 817038B

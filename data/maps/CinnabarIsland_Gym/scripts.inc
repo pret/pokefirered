@@ -4,19 +4,19 @@ CinnabarIsland_Gym_MapScripts:: @ 816D94B
 
 CinnabarIsland_Gym_MapScript1_16D951:: @ 816D951
 	checkflag FLAG_DEFEATED_BLAINE
-	goto_if_eq EventScript_16D991
-	checkflag FLAG_0x265
-	call_if eq, EventScript_16D9B0
-	checkflag FLAG_0x267
-	call_if eq, EventScript_16D9B6
-	checkflag FLAG_0x268
-	call_if eq, EventScript_16D9BC
-	checkflag FLAG_0x269
-	call_if eq, EventScript_16D9C2
-	checkflag FLAG_0x26A
-	call_if eq, EventScript_16D9C8
-	checkflag FLAG_0x26B
-	call_if eq, EventScript_16D9CE
+	goto_if TRUE, EventScript_16D991
+	checkflag FLAG_CINNABAR_GYM_QUIZ_1
+	call_if TRUE, EventScript_16D9B0
+	checkflag FLAG_CINNABAR_GYM_QUIZ_2
+	call_if TRUE, EventScript_16D9B6
+	checkflag FLAG_CINNABAR_GYM_QUIZ_3
+	call_if TRUE, EventScript_16D9BC
+	checkflag FLAG_CINNABAR_GYM_QUIZ_4
+	call_if TRUE, EventScript_16D9C2
+	checkflag FLAG_CINNABAR_GYM_QUIZ_5
+	call_if TRUE, EventScript_16D9C8
+	checkflag FLAG_CINNABAR_GYM_QUIZ_6
+	call_if TRUE, EventScript_16D9CE
 	end
 
 EventScript_16D991:: @ 816D991
@@ -56,7 +56,7 @@ CinnabarIsland_Gym_EventScript_16D9D4:: @ 816D9D4
 	famechecker FAMECHECKER_BLAINE, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	trainerbattle 1, TRAINER_LEADER_BLAINE, 0, Text_199543, Text_1995FA, EventScript_16DA06
 	checkflag FLAG_GOT_TM38_FROM_BLAINE
-	goto_if lt, EventScript_16DA34
+	goto_if FALSE, EventScript_16DA34
 	msgbox gUnknown_819971D
 	release
 	end
@@ -76,7 +76,7 @@ EventScript_16DA34:: @ 816DA34
 	msgbox gUnknown_819969E
 	checkitemspace ITEM_TM38, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16DA75
+	goto_if eq, EventScript_16DA75
 	additem ITEM_TM38, 1
 	giveitemfanfaremsg gUnknown_81996FF, ITEM_TM38
 	setflag FLAG_GOT_TM38_FROM_BLAINE
@@ -100,8 +100,8 @@ CinnabarIsland_Gym_EventScript_16DA96:: @ 816DA96
 	end
 
 EventScript_16DAB1:: @ 816DAB1
-	checkflag FLAG_0x267
-	call_if lt, EventScript_16DABC
+	checkflag FLAG_CINNABAR_GYM_QUIZ_2
+	call_if FALSE, EventScript_16DABC
 	release
 	end
 
@@ -116,8 +116,8 @@ CinnabarIsland_Gym_EventScript_16DAC2:: @ 816DAC2
 	end
 
 EventScript_16DAEA:: @ 816DAEA
-	checkflag FLAG_0x269
-	call_if lt, EventScript_16DAF5
+	checkflag FLAG_CINNABAR_GYM_QUIZ_4
+	call_if FALSE, EventScript_16DAF5
 	release
 	end
 
@@ -131,8 +131,8 @@ CinnabarIsland_Gym_EventScript_16DAFB:: @ 816DAFB
 	end
 
 EventScript_16DB16:: @ 816DB16
-	checkflag FLAG_0x26B
-	call_if lt, EventScript_16DB21
+	checkflag FLAG_CINNABAR_GYM_QUIZ_6
+	call_if FALSE, EventScript_16DB21
 	release
 	end
 
@@ -146,8 +146,8 @@ CinnabarIsland_Gym_EventScript_16DB27:: @ 816DB27
 	end
 
 EventScript_16DB42:: @ 816DB42
-	checkflag FLAG_0x265
-	call_if lt, EventScript_16DB4D
+	checkflag FLAG_CINNABAR_GYM_QUIZ_1
+	call_if FALSE, EventScript_16DB4D
 	release
 	end
 
@@ -161,8 +161,8 @@ CinnabarIsland_Gym_EventScript_16DB53:: @ 816DB53
 	end
 
 EventScript_16DB6E:: @ 816DB6E
-	checkflag FLAG_0x268
-	call_if lt, EventScript_16DB79
+	checkflag FLAG_CINNABAR_GYM_QUIZ_3
+	call_if FALSE, EventScript_16DB79
 	release
 	end
 
@@ -176,8 +176,8 @@ CinnabarIsland_Gym_EventScript_16DB7F:: @ 816DB7F
 	end
 
 EventScript_16DB9A:: @ 816DB9A
-	checkflag FLAG_0x26A
-	call_if lt, EventScript_16DBA5
+	checkflag FLAG_CINNABAR_GYM_QUIZ_5
+	call_if FALSE, EventScript_16DBA5
 	release
 	end
 
@@ -189,7 +189,7 @@ CinnabarIsland_Gym_EventScript_16DBAB:: @ 816DBAB
 	lock
 	faceplayer
 	checkflag FLAG_DEFEATED_BLAINE
-	goto_if_eq EventScript_16DBC0
+	goto_if TRUE, EventScript_16DBC0
 	msgbox gUnknown_8199B81
 	release
 	end
@@ -202,7 +202,7 @@ EventScript_16DBC0:: @ 816DBC0
 CinnabarIsland_Gym_EventScript_16DBCA:: @ 816DBCA
 	lockall
 	checkflag FLAG_BADGE07_GET
-	goto_if_eq EventScript_16DBDE
+	goto_if TRUE, EventScript_16DBDE
 	msgbox gUnknown_8199C29
 	releaseall
 	end
@@ -228,9 +228,9 @@ EventScript_16DC00:: @ 816DC00
 	msgbox gUnknown_8199C9F
 	msgbox gUnknown_8199D5A, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16DC43
+	goto_if eq, EventScript_16DC43
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16DC6A
+	goto_if eq, EventScript_16DC6A
 	end
 
 EventScript_16DC27:: @ 816DC27
@@ -249,8 +249,8 @@ EventScript_16DC34:: @ 816DC34
 
 EventScript_16DC43:: @ 816DC43
 	call EventScript_16DC27
-	checkflag FLAG_0x265
-	goto_if_eq EventScript_16DC68
+	checkflag FLAG_CINNABAR_GYM_QUIZ_1
+	goto_if TRUE, EventScript_16DC68
 	call EventScript_16DC58
 	releaseall
 	end
@@ -260,7 +260,7 @@ EventScript_16DC58:: @ 816DC58
 	waitse
 	call EventScript_16E117
 	special DrawWholeMapView
-	setflag FLAG_0x265
+	setflag FLAG_CINNABAR_GYM_QUIZ_1
 	return
 
 EventScript_16DC68:: @ 816DC68
@@ -282,8 +282,8 @@ EventScript_16DC7A:: @ 816DC7A
 	textcolor 0
 	msgbox gUnknown_819983F
 	trainerbattle 3, TRAINER_BURGLAR_QUINN, 0, Text_199870
-	checkflag FLAG_0x265
-	goto_if_eq EventScript_16DC68
+	checkflag FLAG_CINNABAR_GYM_QUIZ_1
+	goto_if TRUE, EventScript_16DC68
 	call EventScript_16DC58
 	releaseall
 	end
@@ -325,15 +325,15 @@ EventScript_16DCF5:: @ 816DCF5
 	msgbox gUnknown_8199C9F
 	msgbox gUnknown_8199D79, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16DD41
+	goto_if eq, EventScript_16DD41
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16DD1C
+	goto_if eq, EventScript_16DD1C
 	end
 
 EventScript_16DD1C:: @ 816DD1C
 	call EventScript_16DC27
-	checkflag FLAG_0x267
-	goto_if_eq EventScript_16DC68
+	checkflag FLAG_CINNABAR_GYM_QUIZ_2
+	goto_if TRUE, EventScript_16DC68
 	call EventScript_16DD31
 	releaseall
 	end
@@ -343,7 +343,7 @@ EventScript_16DD31:: @ 816DD31
 	waitse
 	call EventScript_16E157
 	special DrawWholeMapView
-	setflag FLAG_0x267
+	setflag FLAG_CINNABAR_GYM_QUIZ_2
 	return
 
 EventScript_16DD41:: @ 816DD41
@@ -361,8 +361,8 @@ EventScript_16DD51:: @ 816DD51
 	textcolor 0
 	msgbox gUnknown_81998BD
 	trainerbattle 3, TRAINER_SUPER_NERD_AVERY, 0, Text_1998ED
-	checkflag FLAG_0x267
-	goto_if_eq EventScript_16DC68
+	checkflag FLAG_CINNABAR_GYM_QUIZ_2
+	goto_if TRUE, EventScript_16DC68
 	call EventScript_16DD31
 	releaseall
 	end
@@ -413,15 +413,15 @@ EventScript_16DDD3:: @ 816DDD3
 	msgbox gUnknown_8199C9F
 	msgbox gUnknown_8199DA9, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16DE1F
+	goto_if eq, EventScript_16DE1F
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16DDFA
+	goto_if eq, EventScript_16DDFA
 	end
 
 EventScript_16DDFA:: @ 816DDFA
 	call EventScript_16DC27
-	checkflag FLAG_0x268
-	goto_if_eq EventScript_16DC68
+	checkflag FLAG_CINNABAR_GYM_QUIZ_3
+	goto_if TRUE, EventScript_16DC68
 	call EventScript_16DE0F
 	releaseall
 	end
@@ -431,7 +431,7 @@ EventScript_16DE0F:: @ 816DE0F
 	waitse
 	call EventScript_16E197
 	special DrawWholeMapView
-	setflag FLAG_0x268
+	setflag FLAG_CINNABAR_GYM_QUIZ_3
 	return
 
 EventScript_16DE1F:: @ 816DE1F
@@ -449,8 +449,8 @@ EventScript_16DE2F:: @ 816DE2F
 	textcolor 0
 	msgbox gUnknown_8199948
 	trainerbattle 3, TRAINER_BURGLAR_RAMON, 0, Text_199973
-	checkflag FLAG_0x268
-	goto_if_eq EventScript_16DC68
+	checkflag FLAG_CINNABAR_GYM_QUIZ_3
+	goto_if TRUE, EventScript_16DC68
 	call EventScript_16DE0F
 	releaseall
 	end
@@ -492,15 +492,15 @@ EventScript_16DEAA:: @ 816DEAA
 	msgbox gUnknown_8199C9F
 	msgbox gUnknown_8199DC6, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16DEF6
+	goto_if eq, EventScript_16DEF6
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16DED1
+	goto_if eq, EventScript_16DED1
 	end
 
 EventScript_16DED1:: @ 816DED1
 	call EventScript_16DC27
-	checkflag FLAG_0x269
-	goto_if_eq EventScript_16DC68
+	checkflag FLAG_CINNABAR_GYM_QUIZ_4
+	goto_if TRUE, EventScript_16DC68
 	call EventScript_16DEE6
 	releaseall
 	end
@@ -510,7 +510,7 @@ EventScript_16DEE6:: @ 816DEE6
 	waitse
 	call EventScript_16E1D7
 	special DrawWholeMapView
-	setflag FLAG_0x269
+	setflag FLAG_CINNABAR_GYM_QUIZ_4
 	return
 
 EventScript_16DEF6:: @ 816DEF6
@@ -528,8 +528,8 @@ EventScript_16DF06:: @ 816DF06
 	textcolor 0
 	msgbox gUnknown_81999B7
 	trainerbattle 3, TRAINER_SUPER_NERD_DEREK, 0, Text_1999DB
-	checkflag FLAG_0x269
-	goto_if_eq EventScript_16DC68
+	checkflag FLAG_CINNABAR_GYM_QUIZ_4
+	goto_if TRUE, EventScript_16DC68
 	call EventScript_16DEE6
 	releaseall
 	end
@@ -571,15 +571,15 @@ EventScript_16DF81:: @ 816DF81
 	msgbox gUnknown_8199C9F
 	msgbox gUnknown_8199E00, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16DFA8
+	goto_if eq, EventScript_16DFA8
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16DFCD
+	goto_if eq, EventScript_16DFCD
 	end
 
 EventScript_16DFA8:: @ 816DFA8
 	call EventScript_16DC27
-	checkflag FLAG_0x26A
-	goto_if_eq EventScript_16DC68
+	checkflag FLAG_CINNABAR_GYM_QUIZ_5
+	goto_if TRUE, EventScript_16DC68
 	call EventScript_16DFBD
 	releaseall
 	end
@@ -589,7 +589,7 @@ EventScript_16DFBD:: @ 816DFBD
 	waitse
 	call EventScript_16E1F3
 	special DrawWholeMapView
-	setflag FLAG_0x26A
+	setflag FLAG_CINNABAR_GYM_QUIZ_5
 	return
 
 EventScript_16DFCD:: @ 816DFCD
@@ -607,8 +607,8 @@ EventScript_16DFDD:: @ 816DFDD
 	textcolor 0
 	msgbox gUnknown_8199A7F
 	trainerbattle 3, TRAINER_BURGLAR_DUSTY, 0, Text_199AB9
-	checkflag FLAG_0x26A
-	goto_if_eq EventScript_16DC68
+	checkflag FLAG_CINNABAR_GYM_QUIZ_5
+	goto_if TRUE, EventScript_16DC68
 	call EventScript_16DFBD
 	releaseall
 	end
@@ -650,15 +650,15 @@ EventScript_16E058:: @ 816E058
 	msgbox gUnknown_8199C9F
 	msgbox gUnknown_8199E36, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16E0A4
+	goto_if eq, EventScript_16E0A4
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16E07F
+	goto_if eq, EventScript_16E07F
 	end
 
 EventScript_16E07F:: @ 816E07F
 	call EventScript_16DC27
-	checkflag FLAG_0x26B
-	goto_if_eq EventScript_16DC68
+	checkflag FLAG_CINNABAR_GYM_QUIZ_6
+	goto_if TRUE, EventScript_16DC68
 	call EventScript_16E094
 	releaseall
 	end
@@ -668,7 +668,7 @@ EventScript_16E094:: @ 816E094
 	waitse
 	call EventScript_16E233
 	special DrawWholeMapView
-	setflag FLAG_0x26B
+	setflag FLAG_CINNABAR_GYM_QUIZ_6
 	return
 
 EventScript_16E0A4:: @ 816E0A4
@@ -686,8 +686,8 @@ EventScript_16E0B4:: @ 816E0B4
 	textcolor 0
 	msgbox gUnknown_8199AFC
 	trainerbattle 3, TRAINER_SUPER_NERD_ZAC, 0, Text_199B16
-	checkflag FLAG_0x26B
-	goto_if_eq EventScript_16DC68
+	checkflag FLAG_CINNABAR_GYM_QUIZ_6
+	goto_if TRUE, EventScript_16DC68
 	call EventScript_16E094
 	releaseall
 	end

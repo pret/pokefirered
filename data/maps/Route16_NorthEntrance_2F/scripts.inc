@@ -22,10 +22,10 @@ Route16_NorthEntrance_2F_EventScript_1702E3:: @ 81702E3
 	faceplayer
 	call EventScript_17036F
 	checkflag FLAG_0x2FD
-	goto_if_eq EventScript_170365
+	goto_if TRUE, EventScript_170365
 	msgbox gUnknown_819FB0E, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_1A7AD1
+	goto_if eq, EventScript_1A7AD1
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, Special_GetPokedexCount
 	getnumberstring 2, VAR_0x8006
@@ -35,7 +35,7 @@ Route16_NorthEntrance_2F_EventScript_1702E3:: @ 81702E3
 	msgbox gUnknown_819FC15
 	checkitemspace ITEM_AMULET_COIN, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_1A7AC7
+	goto_if eq, EventScript_1A7AC7
 	additem ITEM_AMULET_COIN, 1
 	giveitemfanfaremsg gUnknown_819FC68, ITEM_AMULET_COIN
 	setflag FLAG_0x2FD

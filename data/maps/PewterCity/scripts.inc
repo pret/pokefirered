@@ -1033,7 +1033,7 @@ PewterCity_EventScript_16607E:: @ 816607E
 	faceplayer
 	msgbox gUnknown_817E53E, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_166136
+	goto_if eq, EventScript_166136
 	msgbox gUnknown_817E589
 	closemessage
 	delay 10
@@ -1352,7 +1352,7 @@ PewterCity_EventScript_166244:: @ 8166244
 	faceplayer
 	msgbox gUnknown_817E602, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_166263
+	goto_if eq, EventScript_166263
 	msgbox gUnknown_817E644
 	release
 	end

@@ -20,7 +20,7 @@ EventScript_163F47:: @ 8163F47
 FiveIsland_RocketWarehouse_EventScript_163F5A:: @ 8163F5A
 	lockall
 	checkflag FLAG_0x2D5
-	goto_if_eq EventScript_163F6E
+	goto_if TRUE, EventScript_163F6E
 	msgbox gUnknown_817B4E3
 	releaseall
 	end
@@ -45,7 +45,7 @@ FiveIsland_RocketWarehouse_EventScript_163F81:: @ 8163F81
 FiveIsland_RocketWarehouse_EventScript_163F93:: @ 8163F93
 	trainerbattle 2, TRAINER_SCIENTIST_GIDEON, 0, Text_17BBAF, Text_17BC55, EventScript_163FCD
 	checkflag FLAG_0x844
-	goto_if_eq EventScript_163FB7
+	goto_if TRUE, EventScript_163FB7
 	msgbox gUnknown_817BCA3, 6
 	end
 
@@ -142,7 +142,7 @@ EventScript_1640A2:: @ 81640A2
 
 EventScript_16412E:: @ 816412E
 	compare_var_to_value VAR_0x8004, 27
-	goto_if_eq EventScript_1A77A9
+	goto_if eq, EventScript_1A77A9
 	applymovement 255, Movement_1A75EB
 	waitmovement 0
 	return

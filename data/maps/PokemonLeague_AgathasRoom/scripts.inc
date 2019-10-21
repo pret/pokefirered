@@ -12,7 +12,7 @@ PokemonLeague_AgathasRoom_MapScript1_162825:: @ 8162825
 
 PokemonLeague_AgathasRoom_MapScript2_162830:: @ 8162830
 	checkflag FLAG_DEFEATED_AGATHA
-	call_if eq, EventScript_16284B
+	call_if TRUE, EventScript_16284B
 	compare_var_to_value VAR_MAP_SCENE_POKEMON_LEAGUE, 3
 	call_if eq, EventScript_162845
 	end
@@ -49,20 +49,20 @@ PokemonLeague_AgathasRoom_EventScript_162877:: @ 8162877
 	faceplayer
 	famechecker FAMECHECKER_AGATHA, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	checkflag FLAG_DEFEATED_AGATHA
-	goto_if_eq EventScript_162911
+	goto_if TRUE, EventScript_162911
 	famechecker FAMECHECKER_AGATHA, 0
 	famechecker FAMECHECKER_AGATHA, 4
 	famechecker FAMECHECKER_OAK, 4
 	checkflag FLAG_SYS_GAME_CLEAR
-	call_if lt, EventScript_1628E9
+	call_if FALSE, EventScript_1628E9
 	checkflag FLAG_SYS_GAME_CLEAR
-	call_if eq, EventScript_1628F2
+	call_if TRUE, EventScript_1628F2
 	setflag FLAG_TEMP_3
 	setflag FLAG_TEMP_5
 	checkflag FLAG_0x844
-	call_if lt, EventScript_1628FB
+	call_if FALSE, EventScript_1628FB
 	checkflag FLAG_0x844
-	call_if eq, EventScript_162906
+	call_if TRUE, EventScript_162906
 	clearflag FLAG_TEMP_5
 	goto EventScript_16291B
 

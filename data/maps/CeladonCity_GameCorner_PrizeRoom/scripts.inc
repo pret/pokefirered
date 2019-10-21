@@ -13,10 +13,10 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_16CB88:: @ 816CB88
 	lock
 	faceplayer
 	checkflag FLAG_GOT_COIN_CASE
-	goto_if lt, EventScript_16CD99
+	goto_if FALSE, EventScript_16CD99
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if eq, EventScript_1A7AE0
 	showcoinsbox 0, 0
 	msgbox gUnknown_8197057
 	goto EventScript_16CBB2
@@ -75,7 +75,7 @@ EventScript_16CC65:: @ 816CC65
 	getspeciesname 0, VAR_0x4001
 	msgbox gUnknown_819709D, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16CC10
+	goto_if eq, EventScript_16CC10
 	checkcoins VAR_RESULT
 	compare_var_to_var VAR_RESULT, VAR_0x4002
 	goto_if lt, EventScript_16CDA5
@@ -121,11 +121,11 @@ EventScript_16CD3D:: @ 816CD3D
 
 EventScript_16CD52:: @ 816CD52
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16CDB3
+	goto_if eq, EventScript_16CDB3
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16CDE0
+	goto_if eq, EventScript_16CDE0
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_16CD74
+	goto_if eq, EventScript_16CD74
 	end
 
 EventScript_16CD74:: @ 816CD74
@@ -164,7 +164,7 @@ EventScript_16CDB3:: @ 816CDB3
 	waitfanfare
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16CD83
+	goto_if eq, EventScript_16CD83
 	goto EventScript_16CC10
 	end
 
@@ -178,7 +178,7 @@ EventScript_16CDE0:: @ 816CDE0
 	waitfanfare
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16CE12
+	goto_if eq, EventScript_16CE12
 	call EventScript_1A8C33
 	goto EventScript_16CE12
 	end
@@ -192,10 +192,10 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_16CE1D:: @ 816CE1D
 	lock
 	faceplayer
 	checkflag FLAG_GOT_COIN_CASE
-	goto_if lt, EventScript_16CD99
+	goto_if FALSE, EventScript_16CD99
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if eq, EventScript_1A7AE0
 	showcoinsbox 0, 0
 	msgbox gUnknown_8197057
 	goto EventScript_16CE47
@@ -253,7 +253,7 @@ EventScript_16CEF5:: @ 816CEF5
 EventScript_16CF09:: @ 816CF09
 	msgbox gUnknown_81970B2, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16CC10
+	goto_if eq, EventScript_16CC10
 	goto EventScript_16CF3F
 	end
 
@@ -261,7 +261,7 @@ EventScript_16CF22:: @ 816CF22
 	getitemname 0, VAR_0x4001
 	msgbox gUnknown_819709D, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16CC10
+	goto_if eq, EventScript_16CC10
 	goto EventScript_16CF3F
 	end
 
@@ -272,7 +272,7 @@ EventScript_16CF3F:: @ 816CF3F
 	goto_if lt, EventScript_16CDA5
 	checkitemspace VAR_0x4001, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16CF79
+	goto_if eq, EventScript_16CF79
 	takecoins VAR_0x4002
 	updatecoinsbox 0, 5
 	giveitem VAR_0x4001
@@ -290,10 +290,10 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_16CF88:: @ 816CF88
 	lock
 	faceplayer
 	checkflag FLAG_GOT_COIN_CASE
-	goto_if lt, EventScript_16CD99
+	goto_if FALSE, EventScript_16CD99
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if eq, EventScript_1A7AE0
 	showcoinsbox 0, 0
 	msgbox gUnknown_8197057
 	goto EventScript_16CFB2

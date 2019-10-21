@@ -5,7 +5,7 @@ CeladonCity_Gym_EventScript_16D061:: @ 816D061
 	famechecker FAMECHECKER_ERIKA, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	trainerbattle 1, TRAINER_LEADER_ERIKA, 0, Text_197114, Text_197260, EventScript_16D0A0
 	checkflag FLAG_0x293
-	goto_if lt, EventScript_16D0C6
+	goto_if FALSE, EventScript_16D0C6
 	famechecker FAMECHECKER_ERIKA, 4
 	msgbox gUnknown_81972B8
 	release
@@ -24,7 +24,7 @@ EventScript_16D0C6:: @ 816D0C6
 	msgbox gUnknown_8197327
 	checkitemspace ITEM_TM19, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16D107
+	goto_if eq, EventScript_16D107
 	additem ITEM_TM19, 1
 	giveitemfanfaremsg gUnknown_81973BA, ITEM_TM19
 	setflag FLAG_0x293
@@ -77,7 +77,7 @@ CeladonCity_Gym_EventScript_16D1B5:: @ 816D1B5
 CeladonCity_Gym_EventScript_16D1CC:: @ 816D1CC
 	lockall
 	checkflag FLAG_BADGE04_GET
-	goto_if_eq EventScript_16D1E0
+	goto_if TRUE, EventScript_16D1E0
 	msgbox gUnknown_8197874
 	releaseall
 	end

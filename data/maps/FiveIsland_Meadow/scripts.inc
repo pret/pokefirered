@@ -4,15 +4,15 @@ FiveIsland_Meadow_MapScripts:: @ 8168932
 
 FiveIsland_Meadow_MapScript1_168938:: @ 8168938
 	checkflag FLAG_0x2D6
-	call_if eq, EventScript_168983
+	call_if TRUE, EventScript_168983
 	end
 
 FiveIsland_Meadow_EventScript_168942:: @ 8168942
 	lockall
 	checkflag FLAG_0x2D6
-	goto_if_eq EventScript_168979
+	goto_if TRUE, EventScript_168979
 	checkflag FLAG_0x2D8
-	goto_if_eq EventScript_16895F
+	goto_if TRUE, EventScript_16895F
 	msgbox gUnknown_818AB8E
 	releaseall
 	end

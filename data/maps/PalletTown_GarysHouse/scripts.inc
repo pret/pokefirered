@@ -23,13 +23,13 @@ PalletTown_GarysHouse_EventScript_168D56:: @ 8168D56
 	faceplayer
 	famechecker FAMECHECKER_DAISY, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if_eq EventScript_168DB9
+	goto_if TRUE, EventScript_168DB9
 	compare_var_to_value VAR_0x4001, 1
-	goto_if_eq EventScript_168EEC
+	goto_if eq, EventScript_168EEC
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
-	goto_if_eq EventScript_168F59
+	goto_if eq, EventScript_168F59
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 1
-	goto_if_eq EventScript_168EF6
+	goto_if eq, EventScript_168EF6
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1
 	goto_if ge, EventScript_168DAF
 	msgbox gUnknown_818D58C
@@ -47,13 +47,13 @@ EventScript_168DAF:: @ 8168DAF
 EventScript_168DB9:: @ 8168DB9
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	compare_var_to_value VAR_0x4025, 500
 	goto_if lt, EventScript_168E46
 	msgbox gUnknown_818D7D3, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_168E3C
+	goto_if eq, EventScript_168E3C
 	msgbox gUnknown_818D8B2
 	special sub_80BF8FC
 	waitstate
@@ -63,7 +63,7 @@ EventScript_168DB9:: @ 8168DB9
 	goto_if ge, EventScript_168E3C
 	specialvar VAR_RESULT, sub_80CAD54
 	compare_var_to_value VAR_RESULT, SPECIES_EGG
-	goto_if_eq EventScript_168E32
+	goto_if eq, EventScript_168E32
 	msgbox gUnknown_818D8CC
 	closemessage
 	fadescreen 1
@@ -144,7 +144,7 @@ EventScript_168EF6:: @ 8168EF6
 	closemessage
 	checkitemspace ITEM_TOWN_MAP, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_168F4F
+	goto_if eq, EventScript_168F4F
 	applymovement 1, Movement_1A75EB
 	waitmovement 0
 	removeobject 2

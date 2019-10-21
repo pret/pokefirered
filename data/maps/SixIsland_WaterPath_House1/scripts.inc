@@ -6,12 +6,12 @@ SixIsland_WaterPath_House1_EventScript_17206D:: @ 817206D
 	faceplayer
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	setvar VAR_0x8004, SPECIES_HERACROSS
 	specialvar VAR_RESULT, sub_80CC48C
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_1720E5
+	goto_if eq, EventScript_1720E5
 	special sub_80A0918
 	msgbox gUnknown_81A4A3F
 	special sub_80BF8FC
@@ -21,13 +21,13 @@ SixIsland_WaterPath_House1_EventScript_17206D:: @ 817206D
 	goto_if ge, EventScript_1720EF
 	special sub_80A0930
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_1720F1
+	goto_if eq, EventScript_1720F1
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1720FB
+	goto_if eq, EventScript_1720FB
 	compare_var_to_value VAR_RESULT, 3
-	goto_if_eq EventScript_172121
+	goto_if eq, EventScript_172121
 	compare_var_to_value VAR_RESULT, 4
-	goto_if_eq EventScript_17210E
+	goto_if eq, EventScript_17210E
 	release
 	end
 
@@ -47,14 +47,14 @@ EventScript_1720F1:: @ 81720F1
 
 EventScript_1720FB:: @ 81720FB
 	checkflag FLAG_0x2D9
-	goto_if lt, EventScript_172121
+	goto_if FALSE, EventScript_172121
 	msgbox gUnknown_81A4B7A
 	release
 	end
 
 EventScript_17210E:: @ 817210E
 	checkflag FLAG_0x2D9
-	goto_if lt, EventScript_172121
+	goto_if FALSE, EventScript_172121
 	msgbox gUnknown_81A4B39
 	release
 	end
@@ -64,7 +64,7 @@ EventScript_172121:: @ 8172121
 	msgbox gUnknown_81A4A88
 	giveitem ITEM_NEST_BALL
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_17214D
+	goto_if eq, EventScript_17214D
 	msgbox gUnknown_81A4AD9
 	release
 	end
@@ -77,7 +77,7 @@ EventScript_17214D:: @ 817214D
 SixIsland_WaterPath_House1_EventScript_172157:: @ 8172157
 	lockall
 	checkflag FLAG_0x2D9
-	goto_if_eq EventScript_17216B
+	goto_if TRUE, EventScript_17216B
 	msgbox gUnknown_81A4CB9
 	releaseall
 	end

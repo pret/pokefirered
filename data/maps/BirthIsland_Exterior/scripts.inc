@@ -14,9 +14,9 @@ BirthIsland_Exterior_MapScript1_165217:: @ 8165217
 	setvar VAR_0x4026, 0
 	setvar VAR_0x403E, 0
 	checkflag FLAG_0x2E4
-	call_if eq, EventScript_16523C
+	call_if TRUE, EventScript_16523C
 	checkflag FLAG_0x2E4
-	call_if lt, EventScript_165243
+	call_if FALSE, EventScript_165243
 	end
 
 EventScript_16523C:: @ 816523C
@@ -26,14 +26,14 @@ EventScript_16523C:: @ 816523C
 
 EventScript_165243:: @ 8165243
 	checkflag FLAG_0x2F7
-	goto_if_eq EventScript_1A77A9
+	goto_if TRUE, EventScript_1A77A9
 	clearflag FLAG_HIDE_BIRTH_ISLAND_METEORITE
 	clearflag FLAG_0x848
 	return
 
 BirthIsland_Exterior_MapScript2_165253:: @ 8165253
-	checkflag FLAG_0x807
-	call_if eq, EventScript_16525D
+	checkflag FLAG_SYS_SPECIAL_WILD_BATTLE
+	call_if TRUE, EventScript_16525D
 	end
 
 EventScript_16525D:: @ 816525D
@@ -48,7 +48,7 @@ BirthIsland_Exterior_EventScript_165271:: @ 8165271
 	faceplayer
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	special sub_80CCDFC
 	waitstate
@@ -91,17 +91,17 @@ EventScript_1652C0:: @ 81652C0
 	setvar VAR_0x8005, 30
 	setvar VAR_0x8006, 0
 	special CreateObedientEnemyMon
-	setflag FLAG_0x807
+	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	special sub_807F9D8
 	waitstate
-	clearflag FLAG_0x807
+	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	specialvar VAR_RESULT, sub_80CA74C
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16533A
+	goto_if eq, EventScript_16533A
 	compare_var_to_value VAR_RESULT, 4
-	goto_if_eq EventScript_165348
+	goto_if eq, EventScript_165348
 	compare_var_to_value VAR_RESULT, 5
-	goto_if_eq EventScript_165348
+	goto_if eq, EventScript_165348
 	setflag FLAG_0x2E4
 	release
 	end

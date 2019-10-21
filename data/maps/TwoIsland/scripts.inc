@@ -10,37 +10,37 @@ TwoIsland_MapScript1_16756A:: @ 816756A
 
 EventScript_167576:: @ 8167576
 	checkflag FLAG_0x844
-	goto_if_eq EventScript_167597
+	goto_if TRUE, EventScript_167597
 	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if_eq EventScript_1675B8
+	goto_if TRUE, EventScript_1675B8
 	checkflag FLAG_0x2A3
-	goto_if_eq EventScript_1675D9
+	goto_if TRUE, EventScript_1675D9
 	goto EventScript_1675E8
 	end
 
 EventScript_167597:: @ 8167597
 	checkflag FLAG_0x29D
-	goto_if lt, EventScript_1675EE
+	goto_if FALSE, EventScript_1675EE
 	checkflag FLAG_0x29E
-	goto_if lt, EventScript_1675F4
+	goto_if FALSE, EventScript_1675F4
 	checkflag FLAG_0x29F
-	goto_if lt, EventScript_1675FD
+	goto_if FALSE, EventScript_1675FD
 	goto EventScript_167606
 	end
 
 EventScript_1675B8:: @ 81675B8
 	checkflag FLAG_0x29D
-	goto_if lt, EventScript_1675EE
+	goto_if FALSE, EventScript_1675EE
 	checkflag FLAG_0x2A3
-	goto_if lt, EventScript_1675EE
+	goto_if FALSE, EventScript_1675EE
 	checkflag FLAG_0x29E
-	goto_if lt, EventScript_1675F4
+	goto_if FALSE, EventScript_1675F4
 	goto EventScript_1675FD
 	end
 
 EventScript_1675D9:: @ 81675D9
 	checkflag FLAG_0x29D
-	goto_if lt, EventScript_1675EE
+	goto_if FALSE, EventScript_1675EE
 	goto EventScript_1675F4
 	end
 
@@ -70,21 +70,21 @@ EventScript_167606:: @ 8167606
 TwoIsland_EventScript_16760F:: @ 816760F
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if eq, EventScript_1A7AE0
 	lock
 	faceplayer
 	compare_var_to_value VAR_MAP_SCENE_TWO_ISLAND, 4
-	goto_if_eq EventScript_167646
+	goto_if eq, EventScript_167646
 	compare_var_to_value VAR_MAP_SCENE_TWO_ISLAND, 3
-	goto_if_eq EventScript_16765E
+	goto_if eq, EventScript_16765E
 	compare_var_to_value VAR_MAP_SCENE_TWO_ISLAND, 2
-	goto_if_eq EventScript_167676
+	goto_if eq, EventScript_167676
 	goto EventScript_16768E
 	end
 
 EventScript_167646:: @ 8167646
 	checkflag FLAG_0x2A0
-	goto_if_eq EventScript_1676A6
+	goto_if TRUE, EventScript_1676A6
 	setflag FLAG_0x2A0
 	message Text_181CAE
 	waitmessage
@@ -93,7 +93,7 @@ EventScript_167646:: @ 8167646
 
 EventScript_16765E:: @ 816765E
 	checkflag FLAG_0x29F
-	goto_if_eq EventScript_1676A6
+	goto_if TRUE, EventScript_1676A6
 	setflag FLAG_0x29F
 	message Text_181C77
 	waitmessage
@@ -102,7 +102,7 @@ EventScript_16765E:: @ 816765E
 
 EventScript_167676:: @ 8167676
 	checkflag FLAG_0x29E
-	goto_if_eq EventScript_1676A6
+	goto_if TRUE, EventScript_1676A6
 	setflag FLAG_0x29E
 	message Text_181B7C
 	waitmessage
@@ -111,7 +111,7 @@ EventScript_167676:: @ 8167676
 
 EventScript_16768E:: @ 816768E
 	checkflag FLAG_0x29D
-	goto_if_eq EventScript_1676A6
+	goto_if TRUE, EventScript_1676A6
 	setflag FLAG_0x29D
 	message Text_181AFE
 	waitmessage
@@ -122,11 +122,11 @@ EventScript_1676A6:: @ 81676A6
 	message Text_1A6211
 	waitmessage
 	compare_var_to_value VAR_MAP_SCENE_TWO_ISLAND, 4
-	goto_if_eq EventScript_167728
+	goto_if eq, EventScript_167728
 	compare_var_to_value VAR_MAP_SCENE_TWO_ISLAND, 3
-	goto_if_eq EventScript_167708
+	goto_if eq, EventScript_167708
 	compare_var_to_value VAR_MAP_SCENE_TWO_ISLAND, 2
-	goto_if_eq EventScript_1676EC
+	goto_if eq, EventScript_1676EC
 	goto EventScript_1676D3
 	end
 

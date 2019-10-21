@@ -5,17 +5,17 @@ SeafoamIslands_B3F_MapScripts:: @ 8162F4F
 
 SeafoamIslands_B3F_MapScript1_162F5A:: @ 8162F5A
 	checkflag FLAG_0x2D2
-	call_if lt, EventScript_162F6D
+	call_if FALSE, EventScript_162F6D
 	checkflag FLAG_0x2D2
-	call_if eq, EventScript_162F94
+	call_if TRUE, EventScript_162F94
 	end
 
 EventScript_162F6D:: @ 8162F6D
 	setvar VAR_0x4002, 0
 	checkflag FLAG_HIDE_SEAFOAM_B3F_BOULDER_1
-	call_if lt, EventScript_162FF0
+	call_if FALSE, EventScript_162FF0
 	checkflag FLAG_HIDE_SEAFOAM_B3F_BOULDER_2
-	call_if lt, EventScript_162FF0
+	call_if FALSE, EventScript_162FF0
 	compare_var_to_value VAR_0x4002, 2
 	call_if eq, EventScript_162F90
 	return
@@ -36,11 +36,11 @@ EventScript_162FA2:: @ 8162FA2
 	lockall
 	setvar VAR_0x4002, 0
 	checkflag FLAG_HIDE_SEAFOAM_B3F_BOULDER_1
-	call_if lt, EventScript_162FF0
+	call_if FALSE, EventScript_162FF0
 	checkflag FLAG_HIDE_SEAFOAM_B3F_BOULDER_2
-	call_if lt, EventScript_162FF0
+	call_if FALSE, EventScript_162FF0
 	compare_var_to_value VAR_0x4002, 2
-	goto_if_eq EventScript_16300C
+	goto_if eq, EventScript_16300C
 	getplayerxy VAR_0x8008, VAR_0x8009
 	compare_var_to_value VAR_0x8008, 24
 	call_if lt, EventScript_162FF6

@@ -605,39 +605,39 @@
 #define FLAG_DID_CH_DING_TRADE                     0x24D
 #define FLAG_GOT_TM38_FROM_BLAINE                  0x24E
 #define FLAG_OAK_SKIP_22_RIVAL_CHECK               0x24F
-#define FLAG_0x250               0x250
-#define FLAG_0x251               0x251
-#define FLAG_0x252               0x252
-#define FLAG_0x253               0x253
-#define FLAG_0x254               0x254
-#define FLAG_0x255               0x255
-#define FLAG_0x256               0x256
-#define FLAG_0x257               0x257
-#define FLAG_0x258               0x258
-#define FLAG_0x259               0x259
-#define FLAG_0x25A               0x25A
-#define FLAG_0x25B               0x25B
-#define FLAG_0x25C               0x25C
-#define FLAG_0x25D               0x25D
-#define FLAG_0x25E               0x25E
-#define FLAG_0x25F               0x25F
-#define FLAG_0x260               0x260
-#define FLAG_0x261               0x261
-#define FLAG_0x262               0x262
-#define FLAG_0x263               0x263
-#define FLAG_0x264               0x264
-#define FLAG_0x265               0x265
-#define FLAG_PENDING_DAYCARE_EGG 0x266
-#define FLAG_0x267               0x267
-#define FLAG_0x268               0x268
-#define FLAG_0x269               0x269
-#define FLAG_0x26A               0x26A
-#define FLAG_0x26B               0x26B
-#define FLAG_0x26C               0x26C
-#define FLAG_0x26D               0x26D
-#define FLAG_0x26E               0x26E
-#define FLAG_0x26F               0x26F
-#define FLAG_0x270               0x270
+#define FLAG_GOT_MASTER_BALL_FROM_SILPH            0x250
+#define FLAG_DID_NINA_TRADE                        0x251
+#define FLAG_GOT_ITEMFINDER                        0x252
+#define FLAG_WOKE_UP_ROUTE_12_SNORLAX              0x253
+#define FLAG_GOT_TM39_FROM_BROCK                   0x254
+#define FLAG_GOT_SUPER_ROD                         0x255
+#define FLAG_GOT_EXP_SHARE_FROM_OAKS_AIDE          0x256
+#define FLAG_DID_MARC_TRADE                        0x257
+#define FLAG_BEAT_RIVAL_IN_OAKS_LAB                0x258
+#define FLAG_GOT_TM06_FROM_KOGA                    0x259
+#define FLAG_0x25A                                 0x25A
+#define FLAG_GOT_TM27                              0x25B
+#define FLAG_0x25C                                 0x25C
+#define FLAG_0x25D                                 0x25D
+#define FLAG_GOT_OLD_AMBER                         0x25E
+#define FLAG_0x25F                                 0x25F
+#define FLAG_0x260                                 0x260
+#define FLAG_0x261                                 0x261
+#define FLAG_0x262                                 0x262
+#define FLAG_GOT_EEVEE                             0x263
+#define FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES     0x264
+#define FLAG_CINNABAR_GYM_QUIZ_1                   0x265
+#define FLAG_PENDING_DAYCARE_EGG                   0x266
+#define FLAG_CINNABAR_GYM_QUIZ_2                   0x267
+#define FLAG_CINNABAR_GYM_QUIZ_3                   0x268
+#define FLAG_CINNABAR_GYM_QUIZ_4                   0x269
+#define FLAG_CINNABAR_GYM_QUIZ_5                   0x26A
+#define FLAG_CINNABAR_GYM_QUIZ_6                   0x26B
+#define FLAG_POKEMON_MANSION_SWITCH_STATE          0x26C
+#define FLAG_OPENED_ROCKET_HIDEOUT                 0x26D
+#define FLAG_GOT_10_COINS_FROM_GAMBLER             0x26E
+#define FLAG_GOT_20_COINS_FROM_GAMBLER             0x26F
+#define FLAG_GOT_20_COINS_FROM_GAMBLER_2           0x270
 #define FLAG_0x271               0x271
 #define FLAG_0x272               0x272
 #define FLAG_0x273               0x273
@@ -1323,7 +1323,7 @@
 #define FLAG_BLACK_FLUTE_ACTIVE                                     (SYS_FLAGS + 0x4)
 #define FLAG_0x805 (SYS_FLAGS + 0x5)
 #define FLAG_0x806 (SYS_FLAGS + 0x6)
-#define FLAG_0x807 (SYS_FLAGS + 0x7)
+#define FLAG_SYS_SPECIAL_WILD_BATTLE (SYS_FLAGS + 0x7)
 
 #define FLAG_BADGE01_GET (SYS_FLAGS + 0x20)
 #define FLAG_BADGE02_GET (SYS_FLAGS + 0x21)

@@ -4,7 +4,7 @@ SixIsland_RuinValley_MapScripts:: @ 8168B53
 
 SixIsland_RuinValley_MapScript1_168B59:: @ 8168B59
 	checkflag FLAG_0x2E3
-	call_if eq, EventScript_168B63
+	call_if TRUE, EventScript_168B63
 	end
 
 EventScript_168B63:: @ 8168B63
@@ -25,10 +25,10 @@ SixIsland_RuinValley_EventScript_168B6D:: @ 8168B6D
 SixIsland_RuinValley_EventScript_168B94:: @ 8168B94
 	lockall
 	checkflag FLAG_0x2E3
-	goto_if_eq EventScript_168BC1
+	goto_if TRUE, EventScript_168BC1
 	msgbox gUnknown_818BDC0, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_168BCB
+	goto_if eq, EventScript_168BCB
 	msgbox gUnknown_818BE11
 	braillemessage gUnknown_81A929B
 	waitbuttonpress

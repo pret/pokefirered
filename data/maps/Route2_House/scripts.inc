@@ -11,10 +11,10 @@ Route2_House_EventScript_16F602:: @ 816F602
 	setvar VAR_0x8008, 0
 	call EventScript_1A8CAD
 	checkflag FLAG_DID_MIMIEN_TRADE
-	goto_if_eq EventScript_16F674
+	goto_if TRUE, EventScript_16F674
 	msgbox gUnknown_81A597B, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16F65C
+	goto_if eq, EventScript_16F65C
 	call EventScript_1A8CBD
 	compare_var_to_value VAR_0x8004, 6
 	goto_if ge, EventScript_16F65C

@@ -1081,8 +1081,8 @@ sub_80CADC4: @ 80CADC4
 	bx r0
 	thumb_func_end sub_80CADC4
 
-	thumb_func_start sub_80CADEC
-sub_80CADEC: @ 80CADEC
+	thumb_func_start Special_SetVermilionTrashCans
+Special_SetVermilionTrashCans: @ 80CADEC
 	push {r4,r5,lr}
 	bl Random
 	lsls r0, 16
@@ -1377,7 +1377,7 @@ _080CB04C:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80CADEC
+	thumb_func_end Special_SetVermilionTrashCans
 
 	thumb_func_start sub_80CB054
 sub_80CB054: @ 80CB054

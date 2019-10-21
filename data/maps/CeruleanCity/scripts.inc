@@ -5,7 +5,7 @@ CeruleanCity_MapScripts:: @ 8166471
 CeruleanCity_MapScript1_166477:: @ 8166477
 	setworldmapflag FLAG_WORLD_MAP_CERULEAN_CITY
 	checkflag FLAG_GOT_SS_TICKET
-	call_if lt, EventScript_166484
+	call_if FALSE, EventScript_166484
 	end
 
 EventScript_166484:: @ 8166484
@@ -172,7 +172,7 @@ CeruleanCity_EventScript_166603:: @ 8166603
 	lock
 	faceplayer
 	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_5
-	goto_if_eq EventScript_16662E
+	goto_if eq, EventScript_16662E
 	message Text_17EE0E
 	waitmessage
 	playbgm MUS_ROCKET, 0
@@ -186,7 +186,7 @@ EventScript_16662E:: @ 816662E
 	msgbox gUnknown_817EE9C
 	checkitemspace ITEM_TM28, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_166677
+	goto_if eq, EventScript_166677
 	additem ITEM_TM28, 1
 	giveitemfanfaremsg gUnknown_817EEBF, ITEM_TM28
 	msgbox gUnknown_817EEED
@@ -247,7 +247,7 @@ CeruleanCity_EventScript_1666FE:: @ 81666FE
 	lock
 	faceplayer
 	checkflag FLAG_GOT_SS_TICKET
-	goto_if_eq EventScript_166713
+	goto_if TRUE, EventScript_166713
 	msgbox gUnknown_817F01D
 	release
 	end

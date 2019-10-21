@@ -12,7 +12,7 @@ PokemonLeague_BrunosRoom_MapScript1_16269A:: @ 816269A
 
 PokemonLeague_BrunosRoom_MapScript2_1626A5:: @ 81626A5
 	checkflag FLAG_DEFEATED_BRUNO
-	call_if eq, EventScript_1626C0
+	call_if TRUE, EventScript_1626C0
 	compare_var_to_value VAR_MAP_SCENE_POKEMON_LEAGUE, 2
 	call_if eq, EventScript_1626BA
 	end
@@ -49,19 +49,19 @@ PokemonLeague_BrunosRoom_EventScript_1626EC:: @ 81626EC
 	faceplayer
 	famechecker FAMECHECKER_BRUNO, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	checkflag FLAG_DEFEATED_BRUNO
-	goto_if_eq EventScript_162779
+	goto_if TRUE, EventScript_162779
 	famechecker FAMECHECKER_BRUNO, 0
 	famechecker FAMECHECKER_BRUNO, 1
 	checkflag FLAG_SYS_GAME_CLEAR
-	call_if lt, EventScript_162751
+	call_if FALSE, EventScript_162751
 	checkflag FLAG_SYS_GAME_CLEAR
-	call_if eq, EventScript_16275A
+	call_if TRUE, EventScript_16275A
 	setflag FLAG_TEMP_3
 	setflag FLAG_TEMP_5
 	checkflag FLAG_0x844
-	call_if lt, EventScript_162763
+	call_if FALSE, EventScript_162763
 	checkflag FLAG_0x844
-	call_if eq, EventScript_16276E
+	call_if TRUE, EventScript_16276E
 	clearflag FLAG_TEMP_5
 	goto EventScript_1627B0
 

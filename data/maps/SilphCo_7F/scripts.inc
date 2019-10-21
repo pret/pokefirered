@@ -5,11 +5,11 @@ SilphCo_7F_MapScripts:: @ 8161984
 
 SilphCo_7F_MapScript1_16198F:: @ 816198F
 	checkflag FLAG_0x284
-	call_if lt, EventScript_1A834B
+	call_if FALSE, EventScript_1A834B
 	checkflag FLAG_0x285
-	call_if lt, EventScript_1A8379
+	call_if FALSE, EventScript_1A8379
 	checkflag FLAG_0x286
-	call_if lt, EventScript_1A83A7
+	call_if FALSE, EventScript_1A83A7
 	end
 
 SilphCo_7F_MapScript2_1619AB:: @ 81619AB
@@ -131,16 +131,16 @@ SilphCo_7F_EventScript_161AC8:: @ 8161AC8
 	lock
 	faceplayer
 	checkflag FLAG_GOT_LAPRAS_FROM_SILPH
-	goto_if_eq EventScript_161B8D
+	goto_if TRUE, EventScript_161B8D
 	msgbox gUnknown_8176266
 	setvar VAR_0x4001, SPECIES_LAPRAS
 	givemon SPECIES_LAPRAS, 25, ITEM_NONE, 0, 0, 0
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_161B12
+	goto_if eq, EventScript_161B12
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_161B45
+	goto_if eq, EventScript_161B45
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A927C
+	goto_if eq, EventScript_1A927C
 	release
 	end
 
@@ -153,7 +153,7 @@ EventScript_161B12:: @ 8161B12
 	getspeciesname 0, SPECIES_LAPRAS
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_161B7E
+	goto_if eq, EventScript_161B7E
 	call EventScript_1A8C27
 	call EventScript_1A74EB
 	goto EventScript_161B7E
@@ -170,7 +170,7 @@ EventScript_161B45:: @ 8161B45
 	getspeciesname 0, SPECIES_LAPRAS
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_161B73
+	goto_if eq, EventScript_161B73
 	call EventScript_1A8C33
 	goto EventScript_161B73
 

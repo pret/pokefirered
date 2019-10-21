@@ -16,23 +16,23 @@ PokemonLeague_ChampionsRoom_MapScript2_162AF2:: @ 8162AF2
 	end
 
 EventScript_162B1E:: @ 8162B1E
-	checktrainerflag TRAINER_CHAMPION_TERRY
+	checktrainerflag TRAINER_CHAMPION_FIRST_SQUIRTLE
 	goto_if eq, EventScript_162B57
-	checktrainerflag TRAINER_CHAMPION_TERRY_4
+	checktrainerflag TRAINER_CHAMPION_REMATCH_SQUIRTLE
 	goto_if eq, EventScript_162B57
 	return
 
 EventScript_162B31:: @ 8162B31
-	checktrainerflag TRAINER_CHAMPION_TERRY_2
+	checktrainerflag TRAINER_CHAMPION_FIRST_BULBASAUR
 	goto_if eq, EventScript_162B57
-	checktrainerflag TRAINER_CHAMPION_TERRY_5
+	checktrainerflag TRAINER_CHAMPION_REMATCH_BULBASAUR
 	goto_if eq, EventScript_162B57
 	return
 
 EventScript_162B44:: @ 8162B44
-	checktrainerflag TRAINER_CHAMPION_TERRY_3
+	checktrainerflag TRAINER_CHAMPION_FIRST_CHARMANDER
 	goto_if eq, EventScript_162B57
-	checktrainerflag TRAINER_CHAMPION_TERRY_6
+	checktrainerflag TRAINER_CHAMPION_REMATCH_CHARMANDER
 	goto_if eq, EventScript_162B57
 	return
 
@@ -142,27 +142,27 @@ EventScript_162CBC:: @ 8162CBC
 	return
 
 EventScript_162CC5:: @ 8162CC5
-	trainerbattle 3, TRAINER_CHAMPION_TERRY, 0, Text_178E3F
+	trainerbattle 3, TRAINER_CHAMPION_FIRST_SQUIRTLE, 0, Text_178E3F
 	return
 
 EventScript_162CD0:: @ 8162CD0
-	trainerbattle 3, TRAINER_CHAMPION_TERRY_2, 0, Text_178E3F
+	trainerbattle 3, TRAINER_CHAMPION_FIRST_BULBASAUR, 0, Text_178E3F
 	return
 
 EventScript_162CDB:: @ 8162CDB
-	trainerbattle 3, TRAINER_CHAMPION_TERRY_3, 0, Text_178E3F
+	trainerbattle 3, TRAINER_CHAMPION_FIRST_CHARMANDER, 0, Text_178E3F
 	return
 
 EventScript_162CE6:: @ 8162CE6
-	trainerbattle 3, TRAINER_CHAMPION_TERRY_4, 0, Text_178E3F
+	trainerbattle 3, TRAINER_CHAMPION_REMATCH_SQUIRTLE, 0, Text_178E3F
 	return
 
 EventScript_162CF1:: @ 8162CF1
-	trainerbattle 3, TRAINER_CHAMPION_TERRY_5, 0, Text_178E3F
+	trainerbattle 3, TRAINER_CHAMPION_REMATCH_BULBASAUR, 0, Text_178E3F
 	return
 
 EventScript_162CFC:: @ 8162CFC
-	trainerbattle 3, TRAINER_CHAMPION_TERRY_6, 0, Text_178E3F
+	trainerbattle 3, TRAINER_CHAMPION_REMATCH_CHARMANDER, 0, Text_178E3F
 	return
 
 Movement_162D07:: @ 8162D07

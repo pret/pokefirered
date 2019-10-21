@@ -83,15 +83,15 @@ EventScript_161A7F:: @ 8161A7F
 	return
 
 EventScript_161A80:: @ 8161A80
-	trainerbattle 3, TRAINER_RIVAL_TERRY_16, 0, Text_1767D0
+	trainerbattle 3, TRAINER_RIVAL_SILPH_SQUIRTLE, 0, Text_1767D0
 	return
 
 EventScript_161A8B:: @ 8161A8B
-	trainerbattle 3, TRAINER_RIVAL_TERRY_17, 0, Text_1767D0
+	trainerbattle 3, TRAINER_RIVAL_SILPH_BULBASAUR, 0, Text_1767D0
 	return
 
 EventScript_161A96:: @ 8161A96
-	trainerbattle 3, TRAINER_RIVAL_TERRY_18, 0, Text_1767D0
+	trainerbattle 3, TRAINER_RIVAL_SILPH_CHARMANDER, 0, Text_1767D0
 	return
 
 EventScript_161AA1:: @ 8161AA1

@@ -83,15 +83,15 @@ EventScript_1609CA:: @ 81609CA
 	return
 
 EventScript_1609DC:: @ 81609DC
-	trainerbattle 3, TRAINER_RIVAL_TERRY_10, 0, Text_173110
+	trainerbattle 3, TRAINER_RIVAL_SS_ANNE_SQUIRTLE, 0, Text_173110
 	return
 
 EventScript_1609E7:: @ 81609E7
-	trainerbattle 3, TRAINER_RIVAL_TERRY_11, 0, Text_173110
+	trainerbattle 3, TRAINER_RIVAL_SS_ANNE_BULBASAUR, 0, Text_173110
 	return
 
 EventScript_1609F2:: @ 81609F2
-	trainerbattle 3, TRAINER_RIVAL_TERRY_12, 0, Text_173110
+	trainerbattle 3, TRAINER_RIVAL_SS_ANNE_CHARMANDER, 0, Text_173110
 	return
 
 EventScript_1609FD:: @ 81609FD

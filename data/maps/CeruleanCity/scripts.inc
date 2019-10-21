@@ -73,15 +73,15 @@ EventScript_1664CC:: @ 81664CC
 	end
 
 EventScript_166582:: @ 8166582
-	trainerbattle 3, TRAINER_RIVAL_TERRY_7, 0, Text_17EB71
+	trainerbattle 3, TRAINER_RIVAL_CERULEAN_SQUIRTLE, 0, Text_17EB71
 	return
 
 EventScript_16658D:: @ 816658D
-	trainerbattle 3, TRAINER_RIVAL_TERRY_8, 0, Text_17EB71
+	trainerbattle 3, TRAINER_RIVAL_CERULEAN_BULBASAUR, 0, Text_17EB71
 	return
 
 EventScript_166598:: @ 8166598
-	trainerbattle 3, TRAINER_RIVAL_TERRY_9, 0, Text_17EB71
+	trainerbattle 3, TRAINER_RIVAL_CERULEAN_CHARMANDER, 0, Text_17EB71
 	return
 
 EventScript_1665A3:: @ 81665A3

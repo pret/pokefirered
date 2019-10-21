@@ -1254,7 +1254,7 @@ static void TryGetRematchTrainerIdGivenGameState(const u16 * a0, u8 * a1)
         case 0:
             break;
         case 1:
-            if (!FlagGet(FLAG_0x292))
+            if (!FlagGet(FLAG_GOT_VS_SEEKER))
                 *a1 = GetRematchTrainerIdGivenGameState(a0, *a1);
             break;
         case 2:

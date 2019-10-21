@@ -4,7 +4,7 @@ SaffronCity_Gym_MapScripts:: @ 816EDD7
 SaffronCity_Gym_EventScript_16EDD8:: @ 816EDD8
 	famechecker FAMECHECKER_SABRINA, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	trainerbattle 1, TRAINER_LEADER_SABRINA, 0, Text_19B53C, Text_19B602, EventScript_16EE0A
-	checkflag FLAG_0x29A
+	checkflag FLAG_GOT_TM04_FROM_SABRINA
 	goto_if FALSE, EventScript_16EE3D
 	msgbox gUnknown_819B7F2
 	release
@@ -27,7 +27,7 @@ EventScript_16EE3D:: @ 816EE3D
 	goto_if eq, EventScript_16EE7E
 	additem ITEM_TM04, 1
 	giveitemfanfaremsg gUnknown_819B7D3, ITEM_TM04
-	setflag FLAG_0x29A
+	setflag FLAG_GOT_TM04_FROM_SABRINA
 	msgbox gUnknown_819B685
 	release
 	end

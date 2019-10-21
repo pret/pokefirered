@@ -27,7 +27,7 @@ EventScript_16F9F4:: @ 816F9F4
 	textcolor 0
 	applymovement 255, Movement_1A75EB
 	waitmovement 0
-	checkflag FLAG_0x2A6
+	checkflag FLAG_GOT_TEA
 	goto_if TRUE, EventScript_16FA1E
 	msgbox gUnknown_819E181
 	closemessage

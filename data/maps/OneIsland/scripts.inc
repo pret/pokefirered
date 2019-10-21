@@ -85,7 +85,7 @@ OneIsland_EventScript_167517:: @ 8167517
 	faceplayer
 	checkflag FLAG_0x844
 	goto_if TRUE, EventScript_16753F
-	checkflag FLAG_0x2A1
+	checkflag FLAG_SEVII_DETOUR_FINISHED
 	goto_if TRUE, EventScript_167535
 	msgbox gUnknown_818174E
 	release

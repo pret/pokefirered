@@ -63,7 +63,7 @@ EventScript_16139D:: @ 816139D
 RocketHideout_B4F_EventScript_1613AD:: @ 81613AD
 	lock
 	faceplayer
-	setflag FLAG_0x2A5
+	setflag FLAG_CAN_USE_ROCKET_HIDEOUT_LIFT
 	removeobject 4
 	giveitem ITEM_LIFT_KEY
 	compare_var_to_value VAR_RESULT, 0

@@ -4,7 +4,7 @@ ThreeIsland_House5_MapScripts:: @ 817191F
 ThreeIsland_House5_EventScript_171920:: @ 8171920
 	lock
 	faceplayer
-	checkflag FLAG_0x2A3
+	checkflag FLAG_RESCUED_LOSTELLE
 	goto_if TRUE, EventScript_171935
 	msgbox gUnknown_81A3469
 	release

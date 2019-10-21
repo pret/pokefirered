@@ -4,9 +4,9 @@ NavelRock_Base_MapScripts:: @ 81650E7
 	.byte 0
 
 NavelRock_Base_MapScript1_1650F2:: @ 81650F2
-	checkflag FLAG_0x2F2
+	checkflag FLAG_FOUGHT_LUGIA
 	call_if TRUE, EventScript_165105
-	checkflag FLAG_0x2F2
+	checkflag FLAG_FOUGHT_LUGIA
 	call_if FALSE, EventScript_165109
 	end
 
@@ -75,7 +75,7 @@ NavelRock_Base_EventScript_165134:: @ 8165134
 	goto_if eq, EventScript_1651E7
 	compare_var_to_value VAR_RESULT, 5
 	goto_if eq, EventScript_1651E7
-	setflag FLAG_0x2F2
+	setflag FLAG_FOUGHT_LUGIA
 	release
 	end
 

@@ -79,9 +79,9 @@
 #define VAR_NATIONAL_DEX           0x4046
 #define VAR_SEEDOT_SIZE_RECORD     0x4047
 #define VAR_ASH_GATHER_COUNT       0x4048
-#define VAR_BIRCH_STATE            0x4049
-#define VAR_CRUISE_STEP_COUNT      0x404A
-#define VAR_POKELOT_RND1           0x404B
+#define VAR_HOF_BRAG_STATE            0x4049
+#define VAR_EGG_BRAG_STATE      0x404A
+#define VAR_LINK_WIN_BRAG_STATE           0x404B
 #define VAR_POKELOT_RND2           0x404C
 #define VAR_0x404D                 0x404D
 #define VAR_0x404E                 0x404E

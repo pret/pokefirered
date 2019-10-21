@@ -3,8 +3,8 @@ ThreeIsland_Port_MapScripts:: @ 8168789
 	.byte 0
 
 ThreeIsland_Port_MapScript1_16878F:: @ 816878F
-	clearflag FLAG_0x841
-	setflag FLAG_0x2A1
+	clearflag FLAG_SYS_PC_STORAGE_DISABLED
+	setflag FLAG_SEVII_DETOUR_FINISHED
 	end
 
 ThreeIsland_Port_EventScript_168796:: @ 8168796

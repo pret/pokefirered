@@ -4,9 +4,9 @@ NavelRock_Summit_MapScripts:: @ 8164F9F
 	.byte 0
 
 NavelRock_Summit_MapScript1_164FAA:: @ 8164FAA
-	checkflag FLAG_0x2F3
+	checkflag FLAG_FOUGHT_HO_OH
 	call_if TRUE, EventScript_164FBD
-	checkflag FLAG_0x2F3
+	checkflag FLAG_FOUGHT_HO_OH
 	call_if FALSE, EventScript_164FC6
 	end
 
@@ -80,7 +80,7 @@ NavelRock_Summit_EventScript_164FFB:: @ 8164FFB
 	goto_if eq, EventScript_1650C2
 	compare_var_to_value VAR_RESULT, 5
 	goto_if eq, EventScript_1650C2
-	setflag FLAG_0x2F3
+	setflag FLAG_FOUGHT_HO_OH
 	releaseall
 	end
 

@@ -4,7 +4,7 @@ CeladonCity_Gym_MapScripts:: @ 816D060
 CeladonCity_Gym_EventScript_16D061:: @ 816D061
 	famechecker FAMECHECKER_ERIKA, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	trainerbattle 1, TRAINER_LEADER_ERIKA, 0, Text_197114, Text_197260, EventScript_16D0A0
-	checkflag FLAG_0x293
+	checkflag FLAG_GOT_TM19_FROM_ERIKA
 	goto_if FALSE, EventScript_16D0C6
 	famechecker FAMECHECKER_ERIKA, 4
 	msgbox gUnknown_81972B8
@@ -27,7 +27,7 @@ EventScript_16D0C6:: @ 816D0C6
 	goto_if eq, EventScript_16D107
 	additem ITEM_TM19, 1
 	giveitemfanfaremsg gUnknown_81973BA, ITEM_TM19
-	setflag FLAG_0x293
+	setflag FLAG_GOT_TM19_FROM_ERIKA
 	msgbox gUnknown_81973D7
 	release
 	end

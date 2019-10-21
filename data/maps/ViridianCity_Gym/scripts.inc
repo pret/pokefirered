@@ -4,7 +4,7 @@ ViridianCity_Gym_MapScripts:: @ 8169EC9
 ViridianCity_Gym_EventScript_169ECA:: @ 8169ECA
 	famechecker FAMECHECKER_GIOVANNI, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	trainerbattle 1, TRAINER_LEADER_GIOVANNI, 0, Text_18F352, Text_18F43F, EventScript_169F04
-	checkflag FLAG_0x298
+	checkflag FLAG_GOT_TM26_FROM_GIOVANNI
 	goto_if FALSE, EventScript_169F2F
 	msgbox gUnknown_818F4A2
 	closemessage
@@ -31,7 +31,7 @@ EventScript_169F2F:: @ 8169F2F
 	goto_if eq, EventScript_169F70
 	additem ITEM_TM26, 1
 	giveitemfanfaremsg gUnknown_818F675, ITEM_TM26
-	setflag FLAG_0x298
+	setflag FLAG_GOT_TM26_FROM_GIOVANNI
 	msgbox gUnknown_818F695
 	release
 	end

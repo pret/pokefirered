@@ -669,31 +669,31 @@
 #define FLAG_SILPH_11F_DOOR                        0x28D
 #define FLAG_0x28E                                 0x28E
 #define FLAG_0x28F                                 0x28F
-#define FLAG_0x290               0x290
-#define FLAG_0x291               0x291
-#define FLAG_0x292               0x292
-#define FLAG_0x293               0x293
-#define FLAG_0x294               0x294
-#define FLAG_0x295               0x295
-#define FLAG_0x296               0x296
-#define FLAG_0x297               0x297
-#define FLAG_0x298               0x298
-#define FLAG_0x299               0x299
-#define FLAG_0x29A               0x29A
-#define FLAG_0x29B               0x29B
-#define FLAG_0x29C               0x29C
-#define FLAG_0x29D               0x29D
-#define FLAG_0x29E               0x29E
-#define FLAG_0x29F               0x29F
-#define FLAG_0x2A0               0x2A0
-#define FLAG_0x2A1               0x2A1
-#define FLAG_0x2A2               0x2A2
-#define FLAG_0x2A3               0x2A3
-#define FLAG_0x2A4               0x2A4
-#define FLAG_0x2A5               0x2A5
-#define FLAG_0x2A6               0x2A6
-#define FLAG_0x2A7               0x2A7
-#define FLAG_0x2A8               0x2A8
+#define FLAG_MET_STICKER_LADY                      0x290
+#define FLAG_PALLET_LADY_NOT_BLOCKING_SIGN         0x291
+#define FLAG_GOT_VS_SEEKER                         0x292
+#define FLAG_GOT_TM19_FROM_ERIKA                   0x293
+#define FLAG_GOT_TM33_FROM_THIRSTY_GIRL            0x294
+#define FLAG_GOT_TM20_FROM_THIRSTY_GIRL            0x295
+#define FLAG_GOT_TM16_FROM_THIRSTY_GIRL            0x296
+#define FLAG_GOT_TM03_FROM_MISTY                   0x297
+#define FLAG_GOT_TM26_FROM_GIOVANNI                0x298
+#define FLAG_0x299                                 0x299
+#define FLAG_GOT_TM04_FROM_SABRINA                 0x29A
+#define FLAG_GOT_FAME_CHECKER                      0x29B
+#define FLAG_GOT_RECORD_SETTING_MAGIKARP           0x29C
+#define FLAG_TWO_ISLAND_SHOP_INTRODUCED            0x29D
+#define FLAG_TWO_ISLAND_SHOP_EXPANDED_1            0x29E
+#define FLAG_TWO_ISLAND_SHOP_EXPANDED_2            0x29F
+#define FLAG_TWO_ISLAND_SHOP_EXPANDED_3            0x2A0
+#define FLAG_SEVII_DETOUR_FINISHED                 0x2A1
+#define FLAG_VISITED_TWO_ISLAND                    0x2A2
+#define FLAG_RESCUED_LOSTELLE                      0x2A3
+#define FLAG_0x2A4                                 0x2A4
+#define FLAG_CAN_USE_ROCKET_HIDEOUT_LIFT           0x2A5
+#define FLAG_GOT_TEA                               0x2A6
+#define FLAG_GOT_AURORA_TICKET                     0x2A7
+#define FLAG_GOT_MYSTIC_TICKET                     0x2A8
 #define FLAG_0x2A9               0x2A9
 #define FLAG_0x2AA               0x2AA
 #define FLAG_0x2AB               0x2AB
@@ -753,7 +753,7 @@
 #define FLAG_0x2E1               0x2E1
 #define FLAG_0x2E2               0x2E2
 #define FLAG_0x2E3               0x2E3
-#define FLAG_0x2E4               0x2E4
+#define FLAG_FOUGHT_DEOXYS               0x2E4
 #define FLAG_0x2E5               0x2E5
 #define FLAG_0x2E6               0x2E6
 #define FLAG_0x2E7               0x2E7
@@ -767,8 +767,8 @@
 #define FLAG_0x2EF               0x2EF
 #define FLAG_0x2F0               0x2F0
 #define FLAG_0x2F1               0x2F1
-#define FLAG_0x2F2               0x2F2
-#define FLAG_0x2F3               0x2F3
+#define FLAG_FOUGHT_LUGIA               0x2F2
+#define FLAG_FOUGHT_HO_OH               0x2F3
 #define FLAG_0x2F4               0x2F4
 #define FLAG_0x2F5               0x2F5
 #define FLAG_0x2F6               0x2F6
@@ -1343,11 +1343,11 @@
 #define FLAG_0x83C (SYS_FLAGS + 0x3C)
 #define FLAG_PALLET_TOWN_LADY_MOVED_FROM_SIGN (SYS_FLAGS + 0x3E)
 #define FLAG_SYS_NATIONAL_DEX (SYS_FLAGS + 0x40)
-#define FLAG_0x841 (SYS_FLAGS + 0x41)
+#define FLAG_SYS_PC_STORAGE_DISABLED (SYS_FLAGS + 0x41)
 #define FLAG_0x842 (SYS_FLAGS + 0x42)
 #define FLAG_0x843 (SYS_FLAGS + 0x43)
 #define FLAG_0x844 (SYS_FLAGS + 0x44)
-#define FLAG_0x845 (SYS_FLAGS + 0x45)
+#define FLAG_SYS_SEVII_MAP_123 (SYS_FLAGS + 0x45)
 #define FLAG_0x846 (SYS_FLAGS + 0x46)
 #define FLAG_0x847 (SYS_FLAGS + 0x47)
 #define FLAG_0x848 (SYS_FLAGS + 0x48)

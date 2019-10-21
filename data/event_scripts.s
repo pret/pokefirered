@@ -1915,7 +1915,7 @@ gUnknown_81A6955:: @ 81A6955
 	compare_var_to_value VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	lockall
-	checkflag FLAG_0x841
+	checkflag FLAG_SYS_PC_STORAGE_DISABLED
 	goto_if TRUE, EventScript_1A698E
 	setvar VAR_0x8004, 27
 	special Special_SetSomeVariable
@@ -3999,11 +3999,11 @@ ViridianCity_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
 VermilionCity_PokemonCenter_1F_EventScript_1A8D08:: @ 81A8D08
 	lock
 	faceplayer
-	checkflag FLAG_0x292
+	checkflag FLAG_GOT_VS_SEEKER
 	goto_if TRUE, EventScript_1A8D3F
 	msgbox Text_194234
-	setflag FLAG_0x292
-	giveitem 362
+	setflag FLAG_GOT_VS_SEEKER
+	giveitem ITEM_VS_SEEKER
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1A6BF9
 	msgbox Text_19430F
@@ -7941,14 +7941,14 @@ EventScript_1B292B:: @ 81B292B
 FourIsland_House2_EventScript_1B2938:: @ 81B2938
 	lock
 	specialvar VAR_0x8008, sub_80CC3CC
-	checkflag FLAG_0x290
+	checkflag FLAG_MET_STICKER_LADY
 	goto_if FALSE, EventScript_1B2951
-	checkflag FLAG_0x290
+	checkflag FLAG_MET_STICKER_LADY
 	goto_if TRUE, EventScript_1B2994
 	end
 
 EventScript_1B2951:: @ 81B2951
-	setflag FLAG_0x290
+	setflag FLAG_MET_STICKER_LADY
 	msgbox gUnknown_81B1EB3
 	applymovement 1, Movement_1A75E1
 	waitmovement 0
@@ -8076,9 +8076,9 @@ EventScript_1B2B98:: @ 81B2B98
 	end
 
 EventScript_1B2BC5:: @ 81B2BC5
-	compare_var_to_value VAR_BIRCH_STATE, 1
+	compare_var_to_value VAR_HOF_BRAG_STATE, 1
 	goto_if eq, EventScript_1B2C3D
-	setvar VAR_BIRCH_STATE, 1
+	setvar VAR_HOF_BRAG_STATE, 1
 	msgbox gUnknown_81B206E
 	goto EventScript_1B2C51
 
@@ -8086,9 +8086,9 @@ EventScript_1B2BE2:: @ 81B2BE2
 	end
 
 EventScript_1B2BE3:: @ 81B2BE3
-	compare_var_to_value VAR_BIRCH_STATE, 2
+	compare_var_to_value VAR_HOF_BRAG_STATE, 2
 	goto_if eq, EventScript_1B2C3D
-	setvar VAR_BIRCH_STATE, 2
+	setvar VAR_HOF_BRAG_STATE, 2
 	msgbox gUnknown_81B20CF
 	goto EventScript_1B2C51
 
@@ -8096,9 +8096,9 @@ EventScript_1B2C00:: @ 81B2C00
 	end
 
 EventScript_1B2C01:: @ 81B2C01
-	compare_var_to_value VAR_BIRCH_STATE, 3
+	compare_var_to_value VAR_HOF_BRAG_STATE, 3
 	goto_if eq, EventScript_1B2C3D
-	setvar VAR_BIRCH_STATE, 3
+	setvar VAR_HOF_BRAG_STATE, 3
 	msgbox gUnknown_81B2133
 	goto EventScript_1B2C51
 
@@ -8106,9 +8106,9 @@ EventScript_1B2C1E:: @ 81B2C1E
 	end
 
 EventScript_1B2C1F:: @ 81B2C1F
-	compare_var_to_value VAR_BIRCH_STATE, 4
+	compare_var_to_value VAR_HOF_BRAG_STATE, 4
 	goto_if eq, EventScript_1B2C47
-	setvar VAR_BIRCH_STATE, 4
+	setvar VAR_HOF_BRAG_STATE, 4
 	msgbox gUnknown_81B21C4
 	goto EventScript_1B2C51
 
@@ -8147,9 +8147,9 @@ EventScript_1B2C62:: @ 81B2C62
 	end
 
 EventScript_1B2C8F:: @ 81B2C8F
-	compare_var_to_value VAR_CRUISE_STEP_COUNT, 1
+	compare_var_to_value VAR_EGG_BRAG_STATE, 1
 	goto_if eq, EventScript_1B2D07
-	setvar VAR_CRUISE_STEP_COUNT, 1
+	setvar VAR_EGG_BRAG_STATE, 1
 	msgbox gUnknown_81B2308
 	goto EventScript_1B2D1B
 
@@ -8157,9 +8157,9 @@ EventScript_1B2CAC:: @ 81B2CAC
 	end
 
 EventScript_1B2CAD:: @ 81B2CAD
-	compare_var_to_value VAR_CRUISE_STEP_COUNT, 2
+	compare_var_to_value VAR_EGG_BRAG_STATE, 2
 	goto_if eq, EventScript_1B2D07
-	setvar VAR_CRUISE_STEP_COUNT, 2
+	setvar VAR_EGG_BRAG_STATE, 2
 	msgbox gUnknown_81B2372
 	goto EventScript_1B2D1B
 
@@ -8167,9 +8167,9 @@ EventScript_1B2CCA:: @ 81B2CCA
 	end
 
 EventScript_1B2CCB:: @ 81B2CCB
-	compare_var_to_value VAR_CRUISE_STEP_COUNT, 3
+	compare_var_to_value VAR_EGG_BRAG_STATE, 3
 	goto_if eq, EventScript_1B2D07
-	setvar VAR_CRUISE_STEP_COUNT, 3
+	setvar VAR_EGG_BRAG_STATE, 3
 	msgbox gUnknown_81B23E0
 	goto EventScript_1B2D1B
 
@@ -8177,9 +8177,9 @@ EventScript_1B2CE8:: @ 81B2CE8
 	end
 
 EventScript_1B2CE9:: @ 81B2CE9
-	compare_var_to_value VAR_CRUISE_STEP_COUNT, 4
+	compare_var_to_value VAR_EGG_BRAG_STATE, 4
 	goto_if eq, EventScript_1B2D11
-	setvar VAR_CRUISE_STEP_COUNT, 4
+	setvar VAR_EGG_BRAG_STATE, 4
 	msgbox gUnknown_81B2448
 	goto EventScript_1B2D1B
 
@@ -8218,9 +8218,9 @@ EventScript_1B2D2C:: @ 81B2D2C
 	end
 
 EventScript_1B2D59:: @ 81B2D59
-	compare_var_to_value VAR_POKELOT_RND1, 1
+	compare_var_to_value VAR_LINK_WIN_BRAG_STATE, 1
 	goto_if eq, EventScript_1B2DD1
-	setvar VAR_POKELOT_RND1, 1
+	setvar VAR_LINK_WIN_BRAG_STATE, 1
 	msgbox gUnknown_81B25A7
 	goto EventScript_1B2DE5
 
@@ -8228,9 +8228,9 @@ EventScript_1B2D76:: @ 81B2D76
 	end
 
 EventScript_1B2D77:: @ 81B2D77
-	compare_var_to_value VAR_POKELOT_RND1, 2
+	compare_var_to_value VAR_LINK_WIN_BRAG_STATE, 2
 	goto_if eq, EventScript_1B2DD1
-	setvar VAR_POKELOT_RND1, 2
+	setvar VAR_LINK_WIN_BRAG_STATE, 2
 	msgbox gUnknown_81B2609
 	goto EventScript_1B2DE5
 
@@ -8238,9 +8238,9 @@ EventScript_1B2D94:: @ 81B2D94
 	end
 
 EventScript_1B2D95:: @ 81B2D95
-	compare_var_to_value VAR_POKELOT_RND1, 3
+	compare_var_to_value VAR_LINK_WIN_BRAG_STATE, 3
 	goto_if eq, EventScript_1B2DD1
-	setvar VAR_POKELOT_RND1, 3
+	setvar VAR_LINK_WIN_BRAG_STATE, 3
 	msgbox gUnknown_81B267B
 	goto EventScript_1B2DE5
 
@@ -8248,9 +8248,9 @@ EventScript_1B2DB2:: @ 81B2DB2
 	end
 
 EventScript_1B2DB3:: @ 81B2DB3
-	compare_var_to_value VAR_POKELOT_RND1, 4
+	compare_var_to_value VAR_LINK_WIN_BRAG_STATE, 4
 	goto_if eq, EventScript_1B2DDB
-	setvar VAR_POKELOT_RND1, 4
+	setvar VAR_LINK_WIN_BRAG_STATE, 4
 	msgbox gUnknown_81B26F6
 	goto EventScript_1B2DE5
 

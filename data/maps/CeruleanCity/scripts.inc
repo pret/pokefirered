@@ -61,7 +61,7 @@ EventScript_1664CC:: @ 81664CC
 	call_if eq, EventScript_1665B5
 	msgbox gUnknown_817ECD4
 	setvar VAR_MAP_SCENE_CERULEAN_CITY_RIVAL, 1
-	setflag FLAG_0x29B
+	setflag FLAG_GOT_FAME_CHECKER
 	giveitem ITEM_FAME_CHECKER
 	msgbox gUnknown_817ED5D
 	closemessage

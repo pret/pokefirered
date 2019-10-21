@@ -8,10 +8,10 @@ CeladonCity_Condominiums_1F_EventScript_16C321:: @ 816C321
 	goto_if TRUE, EventScript_16C36A
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if TRUE, EventScript_16C374
-	checkflag FLAG_0x2A6
+	checkflag FLAG_GOT_TEA
 	goto_if TRUE, EventScript_16C36A
 	msgbox gUnknown_81960C9
-	setflag FLAG_0x2A6
+	setflag FLAG_GOT_TEA
 	giveitem ITEM_TEA
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1A6BF9

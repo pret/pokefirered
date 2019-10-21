@@ -116,14 +116,14 @@ EventScript_170CB1:: @ 8170CB1
 	call_if ge, EventScript_170E46
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
 	call_if lt, EventScript_170E58
-	setflag FLAG_0x845
+	setflag FLAG_SYS_SEVII_MAP_123
 	msgbox gUnknown_81A1230
 	closemessage
 	applymovement 2, Movement_1A75E9
 	waitmovement 0
 	applymovement 3, Movement_1A75E9
 	waitmovement 0
-	setflag FLAG_0x841
+	setflag FLAG_SYS_PC_STORAGE_DISABLED
 	setvar VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 1
 	releaseall
 	end
@@ -192,7 +192,7 @@ OneIsland_PokemonCenter_1F_EventScript_170E94:: @ 8170E94
 
 OneIsland_PokemonCenter_1F_EventScript_170E9D:: @ 8170E9D
 	lock
-	checkflag FLAG_0x2A1
+	checkflag FLAG_SEVII_DETOUR_FINISHED
 	goto_if TRUE, EventScript_170EB1
 	msgbox gUnknown_81A1266
 	release
@@ -419,7 +419,7 @@ OneIsland_PokemonCenter_1F_EventScript_171179:: @ 8171179
 	lockall
 	checkflag FLAG_0x844
 	goto_if TRUE, EventScript_1711A0
-	checkflag FLAG_0x2A1
+	checkflag FLAG_SEVII_DETOUR_FINISHED
 	goto_if TRUE, EventScript_171196
 	msgbox gUnknown_81A223F
 	releaseall

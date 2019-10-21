@@ -1190,7 +1190,7 @@ static bool8 sub_812B780(u8 id)
         case 40:
             return sub_812BB10();
         case 39:
-            return FlagGet(FLAG_0x29B);
+            return FlagGet(FLAG_GOT_FAME_CHECKER);
         case 44:
             return FlagGet(FLAG_WORLD_MAP_PEWTER_CITY);
         }

@@ -13,9 +13,9 @@ BirthIsland_Exterior_MapScript1_165217:: @ 8165217
 	setvar VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_DEOXYS_N
 	setvar VAR_0x4026, 0
 	setvar VAR_0x403E, 0
-	checkflag FLAG_0x2E4
+	checkflag FLAG_FOUGHT_DEOXYS
 	call_if TRUE, EventScript_16523C
-	checkflag FLAG_0x2E4
+	checkflag FLAG_FOUGHT_DEOXYS
 	call_if FALSE, EventScript_165243
 	end
 
@@ -102,7 +102,7 @@ EventScript_1652C0:: @ 81652C0
 	goto_if eq, EventScript_165348
 	compare_var_to_value VAR_RESULT, 5
 	goto_if eq, EventScript_165348
-	setflag FLAG_0x2E4
+	setflag FLAG_FOUGHT_DEOXYS
 	release
 	end
 

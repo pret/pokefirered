@@ -5,7 +5,7 @@ PalletTown_MapScripts:: @ 816545A
 
 PalletTown_MapScript1_165465:: @ 8165465
 	setworldmapflag FLAG_WORLD_MAP_PALLET_TOWN
-	checkflag FLAG_0x291
+	checkflag FLAG_PALLET_LADY_NOT_BLOCKING_SIGN
 	call_if TRUE, EventScript_165488
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 0
 	call_if eq, EventScript_1654A8
@@ -26,7 +26,7 @@ EventScript_1654A2:: @ 81654A2
 	return
 
 EventScript_1654A8:: @ 81654A8
-	checkflag FLAG_0x291
+	checkflag FLAG_PALLET_LADY_NOT_BLOCKING_SIGN
 	goto_if TRUE, EventScript_1654BD
 	setobjectxyperm 1, 5, 15
 	setobjectmovementtype 1, 7

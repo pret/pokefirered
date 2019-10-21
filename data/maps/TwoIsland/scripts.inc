@@ -4,7 +4,7 @@ TwoIsland_MapScripts:: @ 8167564
 
 TwoIsland_MapScript1_16756A:: @ 816756A
 	setworldmapflag FLAG_WORLD_MAP_TWO_ISLAND
-	setflag FLAG_0x2A2
+	setflag FLAG_VISITED_TWO_ISLAND
 	call EventScript_167576
 	end
 
@@ -13,33 +13,33 @@ EventScript_167576:: @ 8167576
 	goto_if TRUE, EventScript_167597
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if TRUE, EventScript_1675B8
-	checkflag FLAG_0x2A3
+	checkflag FLAG_RESCUED_LOSTELLE
 	goto_if TRUE, EventScript_1675D9
 	goto EventScript_1675E8
 	end
 
 EventScript_167597:: @ 8167597
-	checkflag FLAG_0x29D
+	checkflag FLAG_TWO_ISLAND_SHOP_INTRODUCED
 	goto_if FALSE, EventScript_1675EE
-	checkflag FLAG_0x29E
+	checkflag FLAG_TWO_ISLAND_SHOP_EXPANDED_1
 	goto_if FALSE, EventScript_1675F4
-	checkflag FLAG_0x29F
+	checkflag FLAG_TWO_ISLAND_SHOP_EXPANDED_2
 	goto_if FALSE, EventScript_1675FD
 	goto EventScript_167606
 	end
 
 EventScript_1675B8:: @ 81675B8
-	checkflag FLAG_0x29D
+	checkflag FLAG_TWO_ISLAND_SHOP_INTRODUCED
 	goto_if FALSE, EventScript_1675EE
-	checkflag FLAG_0x2A3
+	checkflag FLAG_RESCUED_LOSTELLE
 	goto_if FALSE, EventScript_1675EE
-	checkflag FLAG_0x29E
+	checkflag FLAG_TWO_ISLAND_SHOP_EXPANDED_1
 	goto_if FALSE, EventScript_1675F4
 	goto EventScript_1675FD
 	end
 
 EventScript_1675D9:: @ 81675D9
-	checkflag FLAG_0x29D
+	checkflag FLAG_TWO_ISLAND_SHOP_INTRODUCED
 	goto_if FALSE, EventScript_1675EE
 	goto EventScript_1675F4
 	end
@@ -83,36 +83,36 @@ TwoIsland_EventScript_16760F:: @ 816760F
 	end
 
 EventScript_167646:: @ 8167646
-	checkflag FLAG_0x2A0
+	checkflag FLAG_TWO_ISLAND_SHOP_EXPANDED_3
 	goto_if TRUE, EventScript_1676A6
-	setflag FLAG_0x2A0
+	setflag FLAG_TWO_ISLAND_SHOP_EXPANDED_3
 	message Text_181CAE
 	waitmessage
 	goto EventScript_167728
 	end
 
 EventScript_16765E:: @ 816765E
-	checkflag FLAG_0x29F
+	checkflag FLAG_TWO_ISLAND_SHOP_EXPANDED_2
 	goto_if TRUE, EventScript_1676A6
-	setflag FLAG_0x29F
+	setflag FLAG_TWO_ISLAND_SHOP_EXPANDED_2
 	message Text_181C77
 	waitmessage
 	goto EventScript_167708
 	end
 
 EventScript_167676:: @ 8167676
-	checkflag FLAG_0x29E
+	checkflag FLAG_TWO_ISLAND_SHOP_EXPANDED_1
 	goto_if TRUE, EventScript_1676A6
-	setflag FLAG_0x29E
+	setflag FLAG_TWO_ISLAND_SHOP_EXPANDED_1
 	message Text_181B7C
 	waitmessage
 	goto EventScript_1676EC
 	end
 
 EventScript_16768E:: @ 816768E
-	checkflag FLAG_0x29D
+	checkflag FLAG_TWO_ISLAND_SHOP_INTRODUCED
 	goto_if TRUE, EventScript_1676A6
-	setflag FLAG_0x29D
+	setflag FLAG_TWO_ISLAND_SHOP_INTRODUCED
 	message Text_181AFE
 	waitmessage
 	goto EventScript_1676D3

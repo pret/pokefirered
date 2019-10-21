@@ -3,7 +3,7 @@ RocketHideout_Elevator_MapScripts:: @ 81614D8
 
 RocketHideout_Elevator_EventScript_1614D9:: @ 81614D9
 	lockall
-	checkflag FLAG_0x2A5
+	checkflag FLAG_CAN_USE_ROCKET_HIDEOUT_LIFT
 	goto_if FALSE, EventScript_16161B
 	setvar VAR_0x8004, 2
 	checkflag FLAG_TEMP_2

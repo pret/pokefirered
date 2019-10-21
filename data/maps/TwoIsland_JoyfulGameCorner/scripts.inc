@@ -127,7 +127,7 @@ TwoIsland_JoyfulGameCorner_EventScript_171535:: @ 8171535
 	faceplayer
 	compare_var_to_value VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 4
 	goto_if eq, EventScript_1BC060
-	checkflag FLAG_0x2A3
+	checkflag FLAG_RESCUED_LOSTELLE
 	goto_if TRUE, EventScript_171555
 	msgbox gUnknown_81A285C
 	release

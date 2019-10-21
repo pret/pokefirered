@@ -73,21 +73,21 @@ EventScript_170001:: @ 8170001
 	end
 
 EventScript_17000B:: @ 817000B
-	checkflag FLAG_0x29C
+	checkflag FLAG_GOT_RECORD_SETTING_MAGIKARP
 	goto_if FALSE, EventScript_170031
 	msgbox gUnknown_819F40A
 	release
 	end
 
 EventScript_17001E:: @ 817001E
-	checkflag FLAG_0x29C
+	checkflag FLAG_GOT_RECORD_SETTING_MAGIKARP
 	goto_if FALSE, EventScript_170031
 	msgbox gUnknown_819F3CB
 	release
 	end
 
 EventScript_170031:: @ 8170031
-	setflag FLAG_0x29C
+	setflag FLAG_GOT_RECORD_SETTING_MAGIKARP
 	msgbox gUnknown_819F31B
 	giveitem ITEM_NET_BALL
 	compare_var_to_value VAR_RESULT, 0
@@ -103,7 +103,7 @@ EventScript_17005D:: @ 817005D
 
 Route12_FishingHouse_EventScript_170067:: @ 8170067
 	lockall
-	checkflag FLAG_0x29C
+	checkflag FLAG_GOT_RECORD_SETTING_MAGIKARP
 	goto_if TRUE, EventScript_17007B
 	msgbox gUnknown_819F50C
 	releaseall

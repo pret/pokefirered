@@ -4,7 +4,7 @@ ThreeIsland_MapScripts:: @ 81677AD
 
 ThreeIsland_MapScript1_1677B3:: @ 81677B3
 	setworldmapflag FLAG_WORLD_MAP_THREE_ISLAND
-	checkflag FLAG_0x2A3
+	checkflag FLAG_RESCUED_LOSTELLE
 	call_if TRUE, EventScript_1677CB
 	compare_var_to_value VAR_MAP_SCENE_THREE_ISLAND, 4
 	call_if eq, EventScript_1677CF

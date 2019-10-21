@@ -206,7 +206,8 @@
       "elevation": 3,
       "item": "ITEM_MOON_STONE",
       "flag": "HIDDEN_ITEM_MT_MOON_B2F_MOON_STONE",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -215,7 +216,8 @@
       "elevation": 3,
       "item": "ITEM_ETHER",
       "flag": "HIDDEN_ITEM_MT_MOON_B2F_ETHER",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

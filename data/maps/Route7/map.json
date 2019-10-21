@@ -70,7 +70,8 @@
       "elevation": 3,
       "item": "ITEM_WEPEAR_BERRY",
       "flag": "HIDDEN_ITEM_ROUTE7_WEPEAR_BERRY",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

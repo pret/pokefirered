@@ -171,7 +171,8 @@
       "elevation": 0,
       "item": "ITEM_REVIVE",
       "flag": "HIDDEN_ITEM_SILPH_CO_11F_REVIVE",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "bg_event_type_0",

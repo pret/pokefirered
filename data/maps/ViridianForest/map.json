@@ -252,7 +252,8 @@
       "elevation": 3,
       "item": "ITEM_POTION",
       "flag": "HIDDEN_ITEM_VIRIDIAN_FOREST_POTION",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -261,7 +262,8 @@
       "elevation": 0,
       "item": "ITEM_ANTIDOTE",
       "flag": "HIDDEN_ITEM_VIRIDIAN_FOREST_ANTIDOTE",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

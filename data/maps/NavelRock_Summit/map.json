@@ -55,7 +55,8 @@
       "elevation": 3,
       "item": "ITEM_SACRED_ASH",
       "flag": "HIDDEN_ITEM_NAVEL_ROCK_SUMMIT_SACRED_ASH",
-      "unknown": 129
+      "quantity": 1,
+      "underfoot": true
     }
   ]
 }

@@ -195,8 +195,9 @@
       "y": 4,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_NONE",
-      "unknown": 10
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_COINS",
+      "quantity": 10,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -204,8 +205,9 @@
       "y": 8,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_NONE_2",
-      "unknown": 10
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_COINS_2",
+      "quantity": 10,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -213,8 +215,9 @@
       "y": 11,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_NONE_3",
-      "unknown": 20
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_COINS_3",
+      "quantity": 20,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -222,8 +225,9 @@
       "y": 12,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_NONE_4",
-      "unknown": 10
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_COINS_4",
+      "quantity": 10,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -231,8 +235,9 @@
       "y": 9,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_NONE_5",
-      "unknown": 10
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_COINS_5",
+      "quantity": 10,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -240,8 +245,9 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_NONE_6",
-      "unknown": 20
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_COINS_6",
+      "quantity": 20,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -249,8 +255,9 @@
       "y": 4,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_NONE_7",
-      "unknown": 10
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_COINS_7",
+      "quantity": 10,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -258,8 +265,9 @@
       "y": 3,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_NONE_8",
-      "unknown": 10
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_COINS_8",
+      "quantity": 10,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -267,8 +275,9 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_NONE_9",
-      "unknown": 10
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_COINS_9",
+      "quantity": 10,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -276,8 +285,9 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_NONE_10",
-      "unknown": 40
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_COINS_10",
+      "quantity": 40,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -285,8 +295,9 @@
       "y": 13,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_NONE_11",
-      "unknown": 100
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_COINS_11",
+      "quantity": 100,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -294,8 +305,9 @@
       "y": 12,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_NONE_12",
-      "unknown": 10
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_COINS_12",
+      "quantity": 10,
+      "underfoot": false
     },
     {
       "type": "bg_event_type_4",

@@ -92,7 +92,8 @@
       "elevation": 3,
       "item": "ITEM_LEPPA_BERRY",
       "flag": "HIDDEN_ITEM_SIX_ISLAND_LEPPA_BERRY",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

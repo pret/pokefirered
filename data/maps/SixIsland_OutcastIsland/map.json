@@ -129,7 +129,8 @@
       "elevation": 3,
       "item": "ITEM_STAR_PIECE",
       "flag": "HIDDEN_ITEM_SIX_ISLAND_OUTCAST_ISLAND_STAR_PIECE",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -138,7 +139,8 @@
       "elevation": 3,
       "item": "ITEM_NET_BALL",
       "flag": "HIDDEN_ITEM_SIX_ISLAND_OUTCAST_ISLAND_NET_BALL",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

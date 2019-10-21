@@ -142,7 +142,8 @@
       "elevation": 3,
       "item": "ITEM_SITRUS_BERRY",
       "flag": "HIDDEN_ITEM_ROUTE6_SITRUS_BERRY",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -151,7 +152,8 @@
       "elevation": 3,
       "item": "ITEM_RARE_CANDY",
       "flag": "HIDDEN_ITEM_ROUTE6_RARE_CANDY",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

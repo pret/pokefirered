@@ -112,7 +112,8 @@
       "elevation": 3,
       "item": "ITEM_MAX_POTION",
       "flag": "HIDDEN_ITEM_SILPH_CO_9F_MAX_POTION",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "bg_event_type_0",
@@ -233,7 +234,8 @@
       "elevation": 0,
       "item": "ITEM_CALCIUM",
       "flag": "HIDDEN_ITEM_SILPH_CO_9F_CALCIUM",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "bg_event_type_0",

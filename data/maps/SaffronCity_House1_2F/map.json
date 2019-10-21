@@ -98,7 +98,8 @@
       "elevation": 0,
       "item": "ITEM_NUGGET",
       "flag": "HIDDEN_ITEM_SAFFRON_CITY_HOUSE1_2F_NUGGET",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

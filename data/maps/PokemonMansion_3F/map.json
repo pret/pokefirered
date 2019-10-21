@@ -147,7 +147,8 @@
       "elevation": 3,
       "item": "ITEM_RARE_CANDY",
       "flag": "HIDDEN_ITEM_POKEMON_MANSION_3F_RARE_CANDY",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

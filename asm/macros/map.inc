@@ -55,8 +55,8 @@
 	inc _num_signs
 	.endm
 
-	.macro bg_hidden_item_event x, y, height, item, flag, unknown
-	bg_event \x, \y, \height, 7, 0, \item, \flag, \unknown
+	.macro bg_hidden_item_event x, y, height, item, flag, quantity, underfoot
+	bg_event \x, \y, \height, 7, 0, \item, \flag, \quantity | (\underfoot << 7)
 	.endm
 
 	.macro map_events npcs, warps, traps, signs

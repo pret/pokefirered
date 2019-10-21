@@ -203,7 +203,8 @@
       "elevation": 0,
       "item": "ITEM_PROTEIN",
       "flag": "HIDDEN_ITEM_SILPH_CO_3F_PROTEIN",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "bg_event_type_0",

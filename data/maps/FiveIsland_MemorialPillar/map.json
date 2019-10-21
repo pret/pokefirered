@@ -102,7 +102,8 @@
       "elevation": 3,
       "item": "ITEM_BIG_PEARL",
       "flag": "HIDDEN_ITEM_FIVE_ISLAND_MEMORIAL_PILLAR_BIG_PEARL",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -111,7 +112,8 @@
       "elevation": 3,
       "item": "ITEM_RAZZ_BERRY",
       "flag": "HIDDEN_ITEM_FIVE_ISLAND_MEMORIAL_PILLAR_RAZZ_BERRY",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -120,7 +122,8 @@
       "elevation": 3,
       "item": "ITEM_SITRUS_BERRY",
       "flag": "HIDDEN_ITEM_FIVE_ISLAND_MEMORIAL_PILLAR_SITRUS_BERRY",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -129,7 +132,8 @@
       "elevation": 3,
       "item": "ITEM_BLUK_BERRY",
       "flag": "HIDDEN_ITEM_FIVE_ISLAND_MEMORIAL_PILLAR_BLUK_BERRY",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

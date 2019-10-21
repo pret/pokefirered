@@ -73,7 +73,8 @@
       "elevation": 3,
       "item": "ITEM_LAVA_COOKIE",
       "flag": "HIDDEN_ITEM_SSANNE_EXTERIOR_LAVA_COOKIE",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

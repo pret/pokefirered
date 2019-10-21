@@ -365,7 +365,8 @@
       "elevation": 3,
       "item": "ITEM_PP_UP",
       "flag": "HIDDEN_ITEM_THREE_ISLAND_PP_UP",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

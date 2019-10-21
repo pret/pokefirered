@@ -113,7 +113,8 @@
       "elevation": 3,
       "item": "ITEM_PEARL",
       "flag": "HIDDEN_ITEM_ROUTE21_NORTH_PEARL",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

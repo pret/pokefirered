@@ -159,7 +159,8 @@
       "elevation": 3,
       "item": "ITEM_ORAN_BERRY",
       "flag": "HIDDEN_ITEM_ROUTE3_ORAN_BERRY",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

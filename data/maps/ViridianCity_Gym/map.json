@@ -190,7 +190,8 @@
       "elevation": 3,
       "item": "ITEM_MACHO_BRACE",
       "flag": "HIDDEN_ITEM_VIRIDIAN_CITY_GYM_MACHO_BRACE",
-      "unknown": 129
+      "quantity": 1,
+      "underfoot": true
     }
   ]
 }

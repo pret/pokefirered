@@ -215,7 +215,8 @@
       "elevation": 3,
       "item": "ITEM_LEFTOVERS",
       "flag": "HIDDEN_ITEM_ROUTE16_LEFTOVERS",
-      "unknown": 129
+      "quantity": 1,
+      "underfoot": true
     }
   ]
 }

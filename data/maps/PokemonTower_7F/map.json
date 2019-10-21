@@ -84,7 +84,8 @@
       "elevation": 3,
       "item": "ITEM_SOOTHE_BELL",
       "flag": "HIDDEN_ITEM_POKEMON_TOWER_7F_SOOTHE_BELL",
-      "unknown": 129
+      "quantity": 1,
+      "underfoot": true
     }
   ]
 }

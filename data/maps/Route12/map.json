@@ -265,7 +265,8 @@
       "elevation": 3,
       "item": "ITEM_HYPER_POTION",
       "flag": "HIDDEN_ITEM_ROUTE12_HYPER_POTION",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -274,7 +275,8 @@
       "elevation": 3,
       "item": "ITEM_LEFTOVERS",
       "flag": "HIDDEN_ITEM_ROUTE12_LEFTOVERS",
-      "unknown": 129
+      "quantity": 1,
+      "underfoot": true
     },
     {
       "type": "hidden_item",
@@ -283,7 +285,8 @@
       "elevation": 3,
       "item": "ITEM_RARE_CANDY",
       "flag": "HIDDEN_ITEM_ROUTE12_RARE_CANDY",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

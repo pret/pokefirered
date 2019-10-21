@@ -167,7 +167,8 @@
       "elevation": 0,
       "item": "ITEM_MOON_STONE",
       "flag": "HIDDEN_ITEM_POKEMON_MANSION_1F_MOON_STONE",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

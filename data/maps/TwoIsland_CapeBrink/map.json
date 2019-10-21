@@ -37,7 +37,8 @@
       "elevation": 3,
       "item": "ITEM_PP_MAX",
       "flag": "HIDDEN_ITEM_TWO_ISLAND_CAPE_BRINK_PP_MAX",
-      "unknown": 129
+      "quantity": 1,
+      "underfoot": true
     },
     {
       "type": "hidden_item",
@@ -46,7 +47,8 @@
       "elevation": 3,
       "item": "ITEM_RARE_CANDY",
       "flag": "HIDDEN_ITEM_TWO_ISLAND_CAPE_BRINK_RARE_CANDY",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

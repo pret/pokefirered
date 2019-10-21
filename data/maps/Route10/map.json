@@ -222,7 +222,8 @@
       "elevation": 0,
       "item": "ITEM_SUPER_POTION",
       "flag": "HIDDEN_ITEM_ROUTE10_SUPER_POTION",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -231,7 +232,8 @@
       "elevation": 3,
       "item": "ITEM_MAX_ETHER",
       "flag": "HIDDEN_ITEM_ROUTE10_MAX_ETHER",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -240,7 +242,8 @@
       "elevation": 3,
       "item": "ITEM_CHERI_BERRY",
       "flag": "HIDDEN_ITEM_ROUTE10_CHERI_BERRY",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -249,7 +252,8 @@
       "elevation": 3,
       "item": "ITEM_PERSIM_BERRY",
       "flag": "HIDDEN_ITEM_ROUTE10_PERSIM_BERRY",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -258,7 +262,8 @@
       "elevation": 3,
       "item": "ITEM_NANAB_BERRY",
       "flag": "HIDDEN_ITEM_ROUTE10_NANAB_BERRY",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

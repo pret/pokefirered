@@ -182,7 +182,8 @@
       "elevation": 3,
       "item": "ITEM_REVIVE",
       "flag": "HIDDEN_ITEM_SAFARI_ZONE_WEST_REVIVE",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

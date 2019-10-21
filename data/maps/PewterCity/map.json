@@ -275,7 +275,8 @@
       "elevation": 3,
       "item": "ITEM_POKE_BALL",
       "flag": "HIDDEN_ITEM_PEWTER_CITY_POKE_BALL",
-      "unknown": 1
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

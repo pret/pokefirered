@@ -55,7 +55,7 @@ CinnabarIsland_PokemonLab_Lounge_EventScript_16E33E:: @ 816E33E
 	msgbox gUnknown_81A5AD6, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_16E3BC
-	special Special_ChooseMonToDeleteMove
+	special Special_ChooseMonFromParty
 	waitstate
 	copyvar VAR_0x800A, VAR_0x8004
 	compare_var_to_value VAR_0x8004, 6

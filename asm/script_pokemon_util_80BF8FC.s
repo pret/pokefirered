@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start Special_ChooseMonToDeleteMove
-Special_ChooseMonToDeleteMove: @ 80BF8FC
+	thumb_func_start Special_ChooseMonFromParty
+Special_ChooseMonFromParty: @ 80BF8FC
 	push {lr}
 	sub sp, 0x4
 	bl ScriptContext2_Enable
@@ -34,7 +34,7 @@ Special_ChooseMonToDeleteMove: @ 80BF8FC
 	.align 2, 0
 _080BF934: .4byte sub_80BF97C
 _080BF938: .4byte gTasks
-	thumb_func_end Special_ChooseMonToDeleteMove
+	thumb_func_end Special_ChooseMonFromParty
 
 	thumb_func_start sub_80BF93C
 sub_80BF93C: @ 80BF93C

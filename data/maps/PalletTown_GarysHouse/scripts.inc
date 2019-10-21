@@ -55,7 +55,7 @@ EventScript_168DB9:: @ 8168DB9
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_168E3C
 	msgbox gUnknown_818D8B2
-	special Special_ChooseMonToDeleteMove
+	special Special_ChooseMonFromParty
 	waitstate
 	lock
 	faceplayer

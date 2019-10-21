@@ -168,7 +168,7 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special sub_807F888
 	def_special ChangePokemonNickname
-	def_special Special_ChooseMonToDeleteMove
+	def_special Special_ChooseMonFromParty
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75

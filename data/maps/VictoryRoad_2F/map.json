@@ -140,7 +140,7 @@
       "movement_range_y": 0,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "VictoryRoad_2F_EventScript_1BE11D",
+      "script": "EventScript_InteractWithStrengthBoulderObject",
       "flag": "0"
     },
     {
@@ -153,7 +153,7 @@
       "movement_range_y": 0,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "VictoryRoad_2F_EventScript_1BE11D",
+      "script": "EventScript_InteractWithStrengthBoulderObject",
       "flag": "0"
     },
     {
@@ -166,7 +166,7 @@
       "movement_range_y": 0,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "VictoryRoad_2F_EventScript_1BE11D",
+      "script": "EventScript_InteractWithStrengthBoulderObject",
       "flag": "FLAG_HIDE_VICTORY_ROAD_2F_BOULDER"
     },
     {

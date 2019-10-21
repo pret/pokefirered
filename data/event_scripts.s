@@ -10297,28 +10297,7 @@ gUnknown_81BDEDF:: @ 81BDEDF
 	.string "I hope you enjoy the Wireless\n"
 	.string "Communication System.$"
 
-CeladonCity_EventScript_1BDF13:: @ 81BDF13
-CeladonCity_Gym_EventScript_1BDF13:: @ 81BDF13
-FiveIsland_Meadow_EventScript_1BDF13:: @ 81BDF13
-PewterCity_EventScript_1BDF13:: @ 81BDF13
-Route10_EventScript_1BDF13:: @ 81BDF13
-Route12_EventScript_1BDF13:: @ 81BDF13
-Route14_EventScript_1BDF13:: @ 81BDF13
-Route16_EventScript_1BDF13:: @ 81BDF13
-Route25_EventScript_1BDF13:: @ 81BDF13
-Route2_EventScript_1BDF13:: @ 81BDF13
-Route8_EventScript_1BDF13:: @ 81BDF13
-ThreeIsland_BerryForest_EventScript_1BDF13:: @ 81BDF13
-ThreeIsland_BondBridge_EventScript_1BDF13:: @ 81BDF13
-ThreeIsland_EventScript_1BDF13:: @ 81BDF13
-Route9_EventScript_1BDF13:: @ 81BDF13
-Route13_EventScript_1BDF13:: @ 81BDF13
-TwoIsland_EventScript_1BDF13:: @ 81BDF13
-FuchsiaCity_EventScript_1BDF13:: @ 81BDF13
-VermilionCity_EventScript_1BDF13:: @ 81BDF13
-VermilionCity_EventScript_1BDF13:: @ 81BDF13
-CeruleanCity_EventScript_1BDF13:: @ 81BDF13
-ViridianCity_EventScript_1BDF13:: @ 81BDF13
+EventScript_InteractWithCutTreeObject:: @ 81BDF13
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
@@ -10381,22 +10360,7 @@ gUnknown_81BDFE3:: @ 81BDFE3
 	.string "This tree looks like it can be CUT\n"
 	.string "down!$"
 
-CeruleanCave_2F_EventScript_1BE00C:: @ 81BE00C
-MtEmber_Exterior_EventScript_1BE00C:: @ 81BE00C
-MtEmber_RubyPath_B1F_Stairs_EventScript_1BE00C:: @ 81BE00C
-MtEmber_RubyPath_B2F_EventScript_1BE00C:: @ 81BE00C
-MtEmber_SummitPath_2F_EventScript_1BE00C:: @ 81BE00C
-MtEmber_RubyPath_1F_EventScript_1BE00C:: @ 81BE00C
-SevenIsland_SevaultCanyon_EventScript_1BE00C:: @ 81BE00C
-FourIsland_EventScript_1BE00C:: @ 81BE00C
-OneIsland_KindleRoad_EventScript_1BE00C:: @ 81BE00C
-MtEmber_RubyPath_B2F_Stairs_EventScript_1BE00C:: @ 81BE00C
-MtEmber_RubyPath_B3F_EventScript_1BE00C:: @ 81BE00C
-MtEmber_RubyPath_B1F_EventScript_1BE00C:: @ 81BE00C
-MtEmber_RubyPath_B1F_EventScript_1BE00C:: @ 81BE00C
-RockTunnel_B1F_EventScript_1BE00C:: @ 81BE00C
-CeruleanCave_B1F_EventScript_1BE00C:: @ 81BE00C
-CeruleanCave_1F_EventScript_1BE00C:: @ 81BE00C
+EventScript_InteractWithRockSmashRockObject:: @ 81BE00C
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
@@ -10462,22 +10426,7 @@ gUnknown_81BE0E2:: @ 81BE0E2
 	.string "It's a rugged rock, but a POKéMON\n"
 	.string "may be able to smash it.$"
 
-MtEmber_Exterior_EventScript_1BE11D:: @ 81BE11D
-MtEmber_RubyPath_B2F_EventScript_1BE11D:: @ 81BE11D
-MtEmber_Summit_EventScript_1BE11D:: @ 81BE11D
-SeafoamIslands_1F_EventScript_1BE11D:: @ 81BE11D
-SeafoamIslands_B2F_EventScript_1BE11D:: @ 81BE11D
-SevenIsland_SevaultCanyon_EventScript_1BE11D:: @ 81BE11D
-VictoryRoad_1F_EventScript_1BE11D:: @ 81BE11D
-VictoryRoad_3F_EventScript_1BE11D:: @ 81BE11D
-SixIsland_RuinValley_EventScript_1BE11D:: @ 81BE11D
-FuchsiaCity_Building1_EventScript_1BE11D:: @ 81BE11D
-SevenIsland_SeavaultCanyon_TanobyKey_EventScript_1BE11D:: @ 81BE11D
-MtEmber_RubyPath_B3F_EventScript_1BE11D:: @ 81BE11D
-SeafoamIslands_B3F_EventScript_1BE11D:: @ 81BE11D
-SeafoamIslands_B3F_EventScript_1BE11D:: @ 81BE11D
-SeafoamIslands_B1F_EventScript_1BE11D:: @ 81BE11D
-VictoryRoad_2F_EventScript_1BE11D:: @ 81BE11D
+EventScript_InteractWithStrengthBoulderObject:: @ 81BE11D
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
@@ -10578,6 +10527,7 @@ gUnknown_81BE33F:: @ 81BE33F
 gUnknown_81BE378:: @ 81BE378
 	.string "{STR_VAR_1} used WATERFALL.$"
 
+@ Unused leftover from R/S
 EventScript_1BE38B:: @ 81BE38B
 	lockall
 	checkpartymove MOVE_DIVE

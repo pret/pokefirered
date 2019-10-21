@@ -5,7 +5,7 @@ PalletTown_PlayersHouse_2F_MapScripts:: @ 8168CA3
 
 PalletTown_PlayersHouse_2F_MapScript1_168CAE:: @ 8168CAE
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PLAYERS_HOUSE_2F, 0
-	call_if 1, EventScript_168CBA
+	call_if eq, EventScript_168CBA
 	end
 
 EventScript_168CBA:: @ 8168CBA

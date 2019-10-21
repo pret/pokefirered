@@ -4,7 +4,7 @@ Route12_MapScripts:: @ 8168000
 
 Route12_MapScript1_168006:: @ 8168006
 	checkflag FLAG_0x807
-	call_if 1, EventScript_168010
+	call_if eq, EventScript_168010
 	end
 
 EventScript_168010:: @ 8168010
@@ -15,7 +15,7 @@ Route12_EventScript_168014:: @ 8168014
 	lock
 	faceplayer
 	checkflag FLAG_GOT_POKE_FLUTE
-	goto_if 0, EventScript_168099
+	goto_if lt, EventScript_168099
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
 	goto_if_eq EventScript_1A7AE0

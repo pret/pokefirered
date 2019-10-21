@@ -5,9 +5,9 @@ NavelRock_Base_MapScripts:: @ 81650E7
 
 NavelRock_Base_MapScript1_1650F2:: @ 81650F2
 	checkflag FLAG_0x2F2
-	call_if 1, EventScript_165105
+	call_if eq, EventScript_165105
 	checkflag FLAG_0x2F2
-	call_if 0, EventScript_165109
+	call_if lt, EventScript_165109
 	end
 
 EventScript_165105:: @ 8165105
@@ -22,13 +22,13 @@ EventScript_165109:: @ 8165109
 
 NavelRock_Base_MapScript2_165116:: @ 8165116
 	checkflag FLAG_0x807
-	call_if 1, EventScript_165120
+	call_if eq, EventScript_165120
 	end
 
 EventScript_165120:: @ 8165120
 	specialvar VAR_RESULT, sub_80CA74C
 	compare_var_to_value VAR_RESULT, 7
-	goto_if 5, EventScript_1A77A9
+	goto_if ne, EventScript_1A77A9
 	removeobject 1
 	return
 

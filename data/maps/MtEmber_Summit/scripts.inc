@@ -5,19 +5,19 @@ MtEmber_Summit_MapScripts:: @ 8163AFC
 
 MtEmber_Summit_MapScript2_163B07:: @ 8163B07
 	checkflag FLAG_0x807
-	call_if 1, EventScript_163B11
+	call_if eq, EventScript_163B11
 	end
 
 EventScript_163B11:: @ 8163B11
 	specialvar VAR_RESULT, sub_80CA74C
 	compare_var_to_value VAR_RESULT, 7
-	goto_if 5, EventScript_1A77A9
+	goto_if ne, EventScript_1A77A9
 	removeobject VAR_LAST_TALKED
 	return
 
 MtEmber_Summit_MapScript1_163B25:: @ 8163B25
 	checkflag FLAG_0x2BD
-	call_if 0, EventScript_163B2F
+	call_if lt, EventScript_163B2F
 	end
 
 EventScript_163B2F:: @ 8163B2F

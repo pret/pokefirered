@@ -7,9 +7,9 @@ ThreeIsland_DunsparceTunnel_MapScript1_164D2C:: @ 8164D2C
 	specialvar VAR_RESULT, IsNationalPokedexEnabled
 	copyvar VAR_0x8008, VAR_RESULT
 	compare_var_to_value VAR_0x8008, 1
-	call_if 1, EventScript_164D50
+	call_if eq, EventScript_164D50
 	compare_var_to_value VAR_0x8008, 0
-	call_if 1, EventScript_164D54
+	call_if eq, EventScript_164D54
 	end
 
 EventScript_164D50:: @ 8164D50

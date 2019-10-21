@@ -13,7 +13,7 @@ FiveIsland_ResortGorgeous_House_EventScript_171EBE:: @ 8171EBE
 	compare_var_to_value VAR_STORAGE_UNKNOWN, 65535
 	goto_if_eq EventScript_171F0B
 	compare_var_to_value VAR_STORAGE_UNKNOWN, 0
-	goto_if 5, EventScript_171F19
+	goto_if ne, EventScript_171F19
 	msgbox gUnknown_81A42A0
 	goto EventScript_171EFE
 	end
@@ -53,13 +53,13 @@ EventScript_171F34:: @ 8171F34
 	msgbox gUnknown_81A4566
 	closemessage
 	compare_var_to_value VAR_FACING, 2
-	call_if 1, EventScript_171FCD
+	call_if eq, EventScript_171FCD
 	compare_var_to_value VAR_FACING, 1
-	call_if 1, EventScript_171FE9
+	call_if eq, EventScript_171FE9
 	compare_var_to_value VAR_FACING, 4
-	call_if 1, EventScript_171FFE
+	call_if eq, EventScript_171FFE
 	compare_var_to_value VAR_FACING, 3
-	call_if 1, EventScript_17201A
+	call_if eq, EventScript_17201A
 	moveobjectoffscreen 2
 	msgbox gUnknown_81A458E
 	giveitem VAR_0x403B

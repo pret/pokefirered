@@ -12,9 +12,9 @@ PokemonLeague_BrunosRoom_MapScript1_16269A:: @ 816269A
 
 PokemonLeague_BrunosRoom_MapScript2_1626A5:: @ 81626A5
 	checkflag FLAG_DEFEATED_BRUNO
-	call_if 1, EventScript_1626C0
+	call_if eq, EventScript_1626C0
 	compare_var_to_value VAR_MAP_SCENE_POKEMON_LEAGUE, 2
-	call_if 1, EventScript_1626BA
+	call_if eq, EventScript_1626BA
 	end
 
 EventScript_1626BA:: @ 81626BA
@@ -53,15 +53,15 @@ PokemonLeague_BrunosRoom_EventScript_1626EC:: @ 81626EC
 	famechecker FAMECHECKER_BRUNO, 0
 	famechecker FAMECHECKER_BRUNO, 1
 	checkflag FLAG_SYS_GAME_CLEAR
-	call_if 0, EventScript_162751
+	call_if lt, EventScript_162751
 	checkflag FLAG_SYS_GAME_CLEAR
-	call_if 1, EventScript_16275A
+	call_if eq, EventScript_16275A
 	setflag FLAG_TEMP_3
 	setflag FLAG_TEMP_5
 	checkflag FLAG_0x844
-	call_if 0, EventScript_162763
+	call_if lt, EventScript_162763
 	checkflag FLAG_0x844
-	call_if 1, EventScript_16276E
+	call_if eq, EventScript_16276E
 	clearflag FLAG_TEMP_5
 	goto EventScript_1627B0
 
@@ -88,13 +88,13 @@ EventScript_162779:: @ 8162779
 	msgbox gUnknown_8178420
 	closemessage
 	compare_var_to_value VAR_FACING, 2
-	call_if 1, EventScript_1627FA
+	call_if eq, EventScript_1627FA
 	compare_var_to_value VAR_FACING, 1
-	call_if 1, EventScript_1627EF
+	call_if eq, EventScript_1627EF
 	compare_var_to_value VAR_FACING, 3
-	call_if 1, EventScript_162805
+	call_if eq, EventScript_162805
 	compare_var_to_value VAR_FACING, 4
-	call_if 1, EventScript_162805
+	call_if eq, EventScript_162805
 	release
 	end
 
@@ -104,13 +104,13 @@ EventScript_1627B0:: @ 81627B0
 	msgbox gUnknown_8178420
 	closemessage
 	compare_var_to_value VAR_FACING, 2
-	call_if 1, EventScript_1627FA
+	call_if eq, EventScript_1627FA
 	compare_var_to_value VAR_FACING, 1
-	call_if 1, EventScript_1627EF
+	call_if eq, EventScript_1627EF
 	compare_var_to_value VAR_FACING, 3
-	call_if 1, EventScript_162805
+	call_if eq, EventScript_162805
 	compare_var_to_value VAR_FACING, 4
-	call_if 1, EventScript_162805
+	call_if eq, EventScript_162805
 	release
 	end
 

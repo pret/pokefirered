@@ -82,35 +82,35 @@ EventScript_16F15B:: @ 816F15B
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, sub_8113364
 	compare_var_to_value VAR_RESULT, 0
-	call_if 1, EventScript_16F207
+	call_if eq, EventScript_16F207
 	setvar VAR_0x8004, 1
 	specialvar VAR_RESULT, sub_8113364
 	compare_var_to_value VAR_RESULT, 0
-	call_if 1, EventScript_16F213
+	call_if eq, EventScript_16F213
 	setvar VAR_0x8004, 2
 	specialvar VAR_RESULT, sub_8113364
 	compare_var_to_value VAR_RESULT, 0
-	call_if 1, EventScript_16F21F
+	call_if eq, EventScript_16F21F
 	setvar VAR_0x8004, 3
 	specialvar VAR_RESULT, sub_8113364
 	compare_var_to_value VAR_RESULT, 0
-	call_if 1, EventScript_16F22B
+	call_if eq, EventScript_16F22B
 	setvar VAR_0x8004, 4
 	specialvar VAR_RESULT, sub_8113364
 	compare_var_to_value VAR_RESULT, 0
-	call_if 1, EventScript_16F237
+	call_if eq, EventScript_16F237
 	setvar VAR_0x8004, 5
 	specialvar VAR_RESULT, sub_8113364
 	compare_var_to_value VAR_RESULT, 0
-	call_if 1, EventScript_16F243
+	call_if eq, EventScript_16F243
 	setvar VAR_0x8004, 6
 	specialvar VAR_RESULT, sub_8113364
 	compare_var_to_value VAR_RESULT, 0
-	call_if 1, EventScript_16F24F
+	call_if eq, EventScript_16F24F
 	setvar VAR_0x8004, 7
 	specialvar VAR_RESULT, sub_8113364
 	compare_var_to_value VAR_RESULT, 0
-	call_if 1, EventScript_16F25B
+	call_if eq, EventScript_16F25B
 	end
 
 EventScript_16F207:: @ 816F207

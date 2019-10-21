@@ -20,27 +20,27 @@ EventScript_167576:: @ 8167576
 
 EventScript_167597:: @ 8167597
 	checkflag FLAG_0x29D
-	goto_if 0, EventScript_1675EE
+	goto_if lt, EventScript_1675EE
 	checkflag FLAG_0x29E
-	goto_if 0, EventScript_1675F4
+	goto_if lt, EventScript_1675F4
 	checkflag FLAG_0x29F
-	goto_if 0, EventScript_1675FD
+	goto_if lt, EventScript_1675FD
 	goto EventScript_167606
 	end
 
 EventScript_1675B8:: @ 81675B8
 	checkflag FLAG_0x29D
-	goto_if 0, EventScript_1675EE
+	goto_if lt, EventScript_1675EE
 	checkflag FLAG_0x2A3
-	goto_if 0, EventScript_1675EE
+	goto_if lt, EventScript_1675EE
 	checkflag FLAG_0x29E
-	goto_if 0, EventScript_1675F4
+	goto_if lt, EventScript_1675F4
 	goto EventScript_1675FD
 	end
 
 EventScript_1675D9:: @ 81675D9
 	checkflag FLAG_0x29D
-	goto_if 0, EventScript_1675EE
+	goto_if lt, EventScript_1675EE
 	goto EventScript_1675F4
 	end
 

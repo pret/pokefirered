@@ -39,9 +39,9 @@ Route24_EventScript_16866C:: @ 816866C
 EventScript_168678:: @ 8168678
 	textcolor 0
 	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_1686FD
+	call_if eq, EventScript_1686FD
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_168708
+	call_if eq, EventScript_168708
 	applymovement 255, Movement_1A75EB
 	waitmovement 0
 	msgbox gUnknown_8188C3C
@@ -81,7 +81,7 @@ EventScript_168713:: @ 8168713
 	applymovement 255, Movement_168743
 	waitmovement 0
 	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_168733
+	call_if eq, EventScript_168733
 	release
 	end
 

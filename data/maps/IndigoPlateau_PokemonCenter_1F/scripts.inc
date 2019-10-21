@@ -7,7 +7,7 @@ IndigoPlateau_PokemonCenter_1F_MapScript1_16EA65:: @ 816EA65
 	setrespawn SPAWN_INDIGO_PLATEAU
 	specialvar VAR_RESULT, IsNationalPokedexEnabled
 	compare_var_to_value VAR_RESULT, 1
-	call_if 1, EventScript_16EA79
+	call_if eq, EventScript_16EA79
 	end
 
 EventScript_16EA79:: @ 816EA79

@@ -5,9 +5,9 @@ ThreeIsland_MapScripts:: @ 81677AD
 ThreeIsland_MapScript1_1677B3:: @ 81677B3
 	setworldmapflag FLAG_WORLD_MAP_THREE_ISLAND
 	checkflag FLAG_0x2A3
-	call_if 1, EventScript_1677CB
+	call_if eq, EventScript_1677CB
 	compare_var_to_value VAR_MAP_SCENE_THREE_ISLAND, 4
-	call_if 1, EventScript_1677CF
+	call_if eq, EventScript_1677CF
 	end
 
 EventScript_1677CB:: @ 81677CB
@@ -65,36 +65,36 @@ EventScript_167865:: @ 8167865
 
 EventScript_16786F:: @ 816786F
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_167947
+	call_if eq, EventScript_167947
 	compare_var_to_value VAR_0x4001, 2
-	call_if 1, EventScript_167947
+	call_if eq, EventScript_167947
 	applymovement 1, Movement_167A1B
 	waitmovement 0
 	msgbox gUnknown_81820C0
 	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_167952
+	call_if eq, EventScript_167952
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_167952
+	call_if eq, EventScript_167952
 	compare_var_to_value VAR_0x4001, 2
-	call_if 1, EventScript_16795D
+	call_if eq, EventScript_16795D
 	applymovement 5, Movement_167A19
 	waitmovement 0
 	msgbox gUnknown_8182125
 	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_167931
+	call_if eq, EventScript_167931
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_167931
+	call_if eq, EventScript_167931
 	compare_var_to_value VAR_0x4001, 2
-	call_if 1, EventScript_167973
+	call_if eq, EventScript_167973
 	applymovement 2, Movement_167A1B
 	waitmovement 0
 	msgbox gUnknown_81821A9
 	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_167952
+	call_if eq, EventScript_167952
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_167952
+	call_if eq, EventScript_167952
 	compare_var_to_value VAR_0x4001, 2
-	call_if 1, EventScript_16795D
+	call_if eq, EventScript_16795D
 	applymovement 4, Movement_167A19
 	waitmovement 0
 	msgbox gUnknown_81821DC
@@ -123,14 +123,14 @@ EventScript_167952:: @ 8167952
 EventScript_16795D:: @ 816795D
 	getplayerxy VAR_0x8004, VAR_0x8005
 	compare_var_to_value VAR_0x8004, 9
-	goto_if 4, EventScript_167931
+	goto_if ge, EventScript_167931
 	goto EventScript_167952
 	end
 
 EventScript_167973:: @ 8167973
 	getplayerxy VAR_0x8004, VAR_0x8005
 	compare_var_to_value VAR_0x8004, 9
-	goto_if 4, EventScript_167947
+	goto_if ge, EventScript_167947
 	goto EventScript_167931
 	end
 
@@ -257,15 +257,15 @@ EventScript_167A59:: @ 8167A59
 	closemessage
 	delay 45
 	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_167BC6
+	call_if eq, EventScript_167BC6
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_167BD8
+	call_if eq, EventScript_167BD8
 	compare_var_to_value VAR_0x4001, 2
-	call_if 1, EventScript_167BEA
+	call_if eq, EventScript_167BEA
 	compare_var_to_value VAR_0x4001, 3
-	call_if 1, EventScript_167C03
+	call_if eq, EventScript_167C03
 	compare_var_to_value VAR_0x4001, 4
-	call_if 1, EventScript_167C1C
+	call_if eq, EventScript_167C1C
 	playbgm MUS_SHOUNEN, 0
 	msgbox gUnknown_8182623
 	setvar VAR_LAST_TALKED, 3

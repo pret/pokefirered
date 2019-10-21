@@ -30,7 +30,7 @@ EventScript_171993:: @ 8171993
 	special ChooseSendDaycareMon
 	waitstate
 	compare_var_to_value VAR_0x8004, 6
-	goto_if 4, EventScript_1719F7
+	goto_if ge, EventScript_1719F7
 	specialvar VAR_RESULT, CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
 	compare_var_to_value VAR_RESULT, 0
 	goto_if_eq EventScript_171A24
@@ -81,7 +81,7 @@ EventScript_171A38:: @ 8171A38
 EventScript_171A41:: @ 8171A41
 	specialvar VAR_RESULT, GetNumLevelsGainedFromDaycare
 	compare_var_to_value VAR_RESULT, 0
-	call_if 5, EventScript_171A38
+	call_if ne, EventScript_171A38
 	return
 
 EventScript_171A52:: @ 8171A52

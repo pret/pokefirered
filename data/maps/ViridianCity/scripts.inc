@@ -5,13 +5,13 @@ ViridianCity_MapScripts:: @ 81658D3
 ViridianCity_MapScript1_1658D9:: @ 81658D9
 	setworldmapflag FLAG_WORLD_MAP_VIRIDIAN_CITY
 	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 0
-	call_if 1, EventScript_165920
+	call_if eq, EventScript_165920
 	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 1
-	call_if 1, EventScript_16590F
+	call_if eq, EventScript_16590F
 	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2
-	call_if 4, EventScript_165909
+	call_if ge, EventScript_165909
 	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_GYM_DOOR, 0
-	call_if 1, EventScript_165931
+	call_if eq, EventScript_165931
 	end
 
 EventScript_165909:: @ 8165909
@@ -32,17 +32,17 @@ EventScript_165920:: @ 8165920
 
 EventScript_165931:: @ 8165931
 	checkflag FLAG_BADGE02_GET
-	goto_if 0, EventScript_1A77A9
+	goto_if lt, EventScript_1A77A9
 	checkflag FLAG_BADGE03_GET
-	goto_if 0, EventScript_1A77A9
+	goto_if lt, EventScript_1A77A9
 	checkflag FLAG_BADGE04_GET
-	goto_if 0, EventScript_1A77A9
+	goto_if lt, EventScript_1A77A9
 	checkflag FLAG_BADGE05_GET
-	goto_if 0, EventScript_1A77A9
+	goto_if lt, EventScript_1A77A9
 	checkflag FLAG_BADGE06_GET
-	goto_if 0, EventScript_1A77A9
+	goto_if lt, EventScript_1A77A9
 	checkflag FLAG_BADGE07_GET
-	goto_if 0, EventScript_1A77A9
+	goto_if lt, EventScript_1A77A9
 	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_GYM_DOOR, 1
 	return
 
@@ -110,7 +110,7 @@ ViridianCity_EventScript_1659F6:: @ 81659F6
 	checkflag FLAG_BADGE01_GET
 	goto_if_eq EventScript_165A23
 	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2
-	goto_if 4, EventScript_165A4A
+	goto_if ge, EventScript_165A4A
 	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 1
 	goto_if_eq EventScript_165A54
 	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 0

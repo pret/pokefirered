@@ -4,9 +4,9 @@ VictoryRoad_2F_MapScripts:: @ 8160F92
 
 VictoryRoad_2F_MapScript1_160F98:: @ 8160F98
 	compare_var_to_value VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER1, 100
-	call_if 5, EventScript_160FAF
+	call_if ne, EventScript_160FAF
 	compare_var_to_value VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER2, 100
-	call_if 5, EventScript_160FC2
+	call_if ne, EventScript_160FC2
 	end
 
 EventScript_160FAF:: @ 8160FAF

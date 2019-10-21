@@ -4,7 +4,7 @@ CinnabarIsland_PokemonLab_Entrance_MapScripts:: @ 816E273
 
 CinnabarIsland_PokemonLab_Entrance_MapScript1_16E279:: @ 816E279
 	compare_var_to_value VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 1
-	call_if 1, EventScript_16E285
+	call_if eq, EventScript_16E285
 	end
 
 EventScript_16E285:: @ 816E285

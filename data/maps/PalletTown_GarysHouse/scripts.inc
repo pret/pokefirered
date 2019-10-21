@@ -4,9 +4,9 @@ PalletTown_GarysHouse_MapScripts:: @ 8168D27
 
 PalletTown_GarysHouse_MapScript1_168D2D:: @ 8168D2D
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
-	call_if 0, EventScript_168D44
+	call_if lt, EventScript_168D44
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
-	call_if 4, EventScript_168D50
+	call_if ge, EventScript_168D50
 	end
 
 EventScript_168D44:: @ 8168D44
@@ -31,7 +31,7 @@ PalletTown_GarysHouse_EventScript_168D56:: @ 8168D56
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 1
 	goto_if_eq EventScript_168EF6
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1
-	goto_if 4, EventScript_168DAF
+	goto_if ge, EventScript_168DAF
 	msgbox gUnknown_818D58C
 	closemessage
 	applymovement 1, Movement_1A75E5
@@ -50,7 +50,7 @@ EventScript_168DB9:: @ 8168DB9
 	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	compare_var_to_value VAR_0x4025, 500
-	goto_if 0, EventScript_168E46
+	goto_if lt, EventScript_168E46
 	msgbox gUnknown_818D7D3, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if_eq EventScript_168E3C
@@ -60,7 +60,7 @@ EventScript_168DB9:: @ 8168DB9
 	lock
 	faceplayer
 	compare_var_to_value VAR_0x8004, 6
-	goto_if 4, EventScript_168E3C
+	goto_if ge, EventScript_168E3C
 	specialvar VAR_RESULT, sub_80CAD54
 	compare_var_to_value VAR_RESULT, SPECIES_EGG
 	goto_if_eq EventScript_168E32

@@ -16,9 +16,9 @@ EventScript_16B287:: @ 816B287
 	special sub_80BF8FC
 	waitstate
 	compare_var_to_value VAR_0x8004, 6
-	goto_if 0, EventScript_16B2B4
+	goto_if lt, EventScript_16B2B4
 	compare_var_to_value VAR_0x8004, 6
-	goto_if 4, EventScript_16B2AA
+	goto_if ge, EventScript_16B2AA
 	end
 
 EventScript_16B2AA:: @ 816B2AA

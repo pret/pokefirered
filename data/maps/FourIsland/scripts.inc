@@ -6,7 +6,7 @@ FourIsland_MapScripts:: @ 8167CAE
 FourIsland_MapScript1_167CB9:: @ 8167CB9
 	setworldmapflag FLAG_WORLD_MAP_FOUR_ISLAND
 	compare_var_to_value VAR_MAP_SCENE_FOUR_ISLAND, 0
-	call_if 1, EventScript_167CCD
+	call_if eq, EventScript_167CCD
 	call EventScript_167CD1
 	end
 
@@ -16,7 +16,7 @@ EventScript_167CCD:: @ 8167CCD
 
 EventScript_167CD1:: @ 8167CD1
 	checkflag FLAG_PENDING_DAYCARE_EGG
-	goto_if 0, EventScript_167CE1
+	goto_if lt, EventScript_167CE1
 	setobjectxyperm 1, 16, 14
 
 EventScript_167CE1:: @ 8167CE1
@@ -105,7 +105,7 @@ EventScript_167D9B:: @ 8167D9B
 EventScript_167DD1:: @ 8167DD1
 	specialvar VAR_RESULT, CalculatePlayerPartyCount
 	compare_var_to_value VAR_RESULT, 6
-	goto_if 5, EventScript_167DEB
+	goto_if ne, EventScript_167DEB
 	msgbox gUnknown_81BF6F0
 	release
 	end

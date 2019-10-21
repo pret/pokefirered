@@ -18,13 +18,13 @@ EventScript_16BCF6:: @ 816BCF6
 	setvar VAR_0x4001, 0
 	checkitem ITEM_FRESH_WATER, 1
 	compare_var_to_value VAR_RESULT, 1
-	call_if 1, EventScript_16BD2C
+	call_if eq, EventScript_16BD2C
 	checkitem ITEM_SODA_POP, 1
 	compare_var_to_value VAR_RESULT, 1
-	call_if 1, EventScript_16BD32
+	call_if eq, EventScript_16BD32
 	checkitem ITEM_LEMONADE, 1
 	compare_var_to_value VAR_RESULT, 1
-	call_if 1, EventScript_16BD38
+	call_if eq, EventScript_16BD38
 	return
 
 EventScript_16BD2C:: @ 816BD2C
@@ -161,11 +161,11 @@ EventScript_16BF7C:: @ 816BF7C
 	giveitem VAR_0x8009, 1, 8
 	call EventScript_1A6675
 	compare_var_to_value VAR_0x8008, ITEM_FRESH_WATER
-	call_if 1, EventScript_16BFDE
+	call_if eq, EventScript_16BFDE
 	compare_var_to_value VAR_0x8008, ITEM_SODA_POP
-	call_if 1, EventScript_16BFEA
+	call_if eq, EventScript_16BFEA
 	compare_var_to_value VAR_0x8008, ITEM_LEMONADE
-	call_if 1, EventScript_16BFF6
+	call_if eq, EventScript_16BFF6
 	release
 	end
 
@@ -267,11 +267,11 @@ EventScript_16C0CB:: @ 816C0CB
 	compare_var_to_value VAR_RESULT, 0
 	goto_if_eq EventScript_16C13F
 	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_16C0B6
+	call_if eq, EventScript_16C0B6
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_16C0BD
+	call_if eq, EventScript_16C0BD
 	compare_var_to_value VAR_0x4001, 2
-	call_if 1, EventScript_16C0C4
+	call_if eq, EventScript_16C0C4
 	updatemoneybox 0, 0, 0
 	getitemname 0, VAR_0x4000
 	playse SE_JIHANKI

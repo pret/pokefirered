@@ -14,7 +14,7 @@ PewterCity_EventScript_165B9D:: @ 8165B9D
 	closemessage
 	playbgm MUS_ANNAI, 0
 	compare_var_to_value VAR_FACING, 4
-	call_if 1, EventScript_165BD3
+	call_if eq, EventScript_165BD3
 	msgbox gUnknown_817E6C7
 	closemessage
 	applymovement 5, Movement_165D83
@@ -446,11 +446,11 @@ EventScript_165DBE:: @ 8165DBE
 	closemessage
 	playbgm MUS_ANNAI, 0
 	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_165E0A
+	call_if eq, EventScript_165E0A
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_165E26
+	call_if eq, EventScript_165E26
 	compare_var_to_value VAR_0x4001, 2
-	call_if 1, EventScript_165E42
+	call_if eq, EventScript_165E42
 	msgbox gUnknown_817E6C7
 	closemessage
 	applymovement 5, Movement_165D83
@@ -1039,13 +1039,13 @@ PewterCity_EventScript_16607E:: @ 816607E
 	delay 10
 	playbgm MUS_ANNAI, 0
 	compare_var_to_value VAR_FACING, 2
-	call_if 1, EventScript_1660EE
+	call_if eq, EventScript_1660EE
 	compare_var_to_value VAR_FACING, 1
-	call_if 1, EventScript_166100
+	call_if eq, EventScript_166100
 	compare_var_to_value VAR_FACING, 3
-	call_if 1, EventScript_166112
+	call_if eq, EventScript_166112
 	compare_var_to_value VAR_FACING, 4
-	call_if 1, EventScript_166124
+	call_if eq, EventScript_166124
 	msgbox gUnknown_817E5AC
 	closemessage
 	delay 10
@@ -1417,11 +1417,11 @@ PewterCity_EventScript_1662D1:: @ 81662D1
 EventScript_1662DE:: @ 81662DE
 	textcolor 0
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_1663CA
+	call_if eq, EventScript_1663CA
 	compare_var_to_value VAR_0x4001, 2
-	call_if 1, EventScript_1663CA
+	call_if eq, EventScript_1663CA
 	compare_var_to_value VAR_0x4001, 3
-	call_if 1, EventScript_1663CA
+	call_if eq, EventScript_1663CA
 	waitse
 	playse SE_PIN
 	applymovement 7, Movement_1A75DB
@@ -1430,13 +1430,13 @@ EventScript_1662DE:: @ 81662DE
 	waitmovement 0
 	msgbox gUnknown_817E902
 	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_1663D5
+	call_if eq, EventScript_1663D5
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_1663DA
+	call_if eq, EventScript_1663DA
 	compare_var_to_value VAR_0x4001, 2
-	call_if 1, EventScript_1663E6
+	call_if eq, EventScript_1663E6
 	compare_var_to_value VAR_0x4001, 3
-	call_if 1, EventScript_1663FC
+	call_if eq, EventScript_1663FC
 	msgbox gUnknown_817E90C
 	textcolor 3
 	playfanfare MUS_FAN5
@@ -1452,13 +1452,13 @@ EventScript_1662DE:: @ 81662DE
 	msgbox gUnknown_817EA06
 	closemessage
 	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_166412
+	call_if eq, EventScript_166412
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_16641D
+	call_if eq, EventScript_16641D
 	compare_var_to_value VAR_0x4001, 2
-	call_if 1, EventScript_166428
+	call_if eq, EventScript_166428
 	compare_var_to_value VAR_0x4001, 3
-	call_if 1, EventScript_166433
+	call_if eq, EventScript_166433
 	delay 30
 	textcolor 3
 	msgbox gUnknown_817EA36

@@ -14,9 +14,9 @@ BirthIsland_Exterior_MapScript1_165217:: @ 8165217
 	setvar VAR_0x4026, 0
 	setvar VAR_0x403E, 0
 	checkflag FLAG_0x2E4
-	call_if 1, EventScript_16523C
+	call_if eq, EventScript_16523C
 	checkflag FLAG_0x2E4
-	call_if 0, EventScript_165243
+	call_if lt, EventScript_165243
 	end
 
 EventScript_16523C:: @ 816523C
@@ -33,13 +33,13 @@ EventScript_165243:: @ 8165243
 
 BirthIsland_Exterior_MapScript2_165253:: @ 8165253
 	checkflag FLAG_0x807
-	call_if 1, EventScript_16525D
+	call_if eq, EventScript_16525D
 	end
 
 EventScript_16525D:: @ 816525D
 	specialvar VAR_RESULT, sub_80CA74C
 	compare_var_to_value VAR_RESULT, 7
-	goto_if 5, EventScript_1A77A9
+	goto_if ne, EventScript_1A77A9
 	removeobject 2
 	return
 

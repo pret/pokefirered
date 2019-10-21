@@ -4,20 +4,20 @@ SilphCo_9F_MapScripts:: @ 8161CDE
 
 SilphCo_9F_MapScript1_161CE4:: @ 8161CE4
 	checkflag FLAG_0x288
-	call_if 0, EventScript_1A840C
+	call_if lt, EventScript_1A840C
 	checkflag FLAG_0x289
-	call_if 0, EventScript_1A8443
+	call_if lt, EventScript_1A8443
 	checkflag FLAG_0x28A
-	call_if 0, EventScript_1A847A
+	call_if lt, EventScript_1A847A
 	checkflag FLAG_0x28B
-	call_if 0, EventScript_1A84A8
+	call_if lt, EventScript_1A84A8
 	end
 
 SilphCo_9F_EventScript_161D09:: @ 8161D09
 	lock
 	faceplayer
 	compare_var_to_value VAR_MAP_SCENE_SILPH_CO_11F, 1
-	goto_if 4, EventScript_161D2E
+	goto_if ge, EventScript_161D2E
 	msgbox gUnknown_8176B54
 	closemessage
 	call EventScript_1A6C26

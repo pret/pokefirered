@@ -12,9 +12,9 @@ PokemonLeague_LancesRoom_MapScript1_162942:: @ 8162942
 
 PokemonLeague_LancesRoom_MapScript2_16294D:: @ 816294D
 	compare_var_to_value VAR_MAP_SCENE_POKEMON_LEAGUE, 4
-	call_if 1, EventScript_162962
+	call_if eq, EventScript_162962
 	checkflag FLAG_DEFEATED_LANCE
-	call_if 1, EventScript_162968
+	call_if eq, EventScript_162968
 	end
 
 EventScript_162962:: @ 8162962
@@ -107,15 +107,15 @@ PokemonLeague_LancesRoom_EventScript_162A14:: @ 8162A14
 	famechecker FAMECHECKER_LANCE, 0
 	famechecker FAMECHECKER_LANCE, 1
 	checkflag FLAG_SYS_GAME_CLEAR
-	call_if 0, EventScript_162A79
+	call_if lt, EventScript_162A79
 	checkflag FLAG_SYS_GAME_CLEAR
-	call_if 1, EventScript_162A82
+	call_if eq, EventScript_162A82
 	setflag FLAG_TEMP_3
 	setflag FLAG_TEMP_5
 	checkflag FLAG_0x844
-	call_if 0, EventScript_162A8B
+	call_if lt, EventScript_162A8B
 	checkflag FLAG_0x844
-	call_if 1, EventScript_162A96
+	call_if eq, EventScript_162A96
 	clearflag FLAG_TEMP_5
 	goto EventScript_162AAB
 

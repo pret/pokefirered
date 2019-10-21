@@ -29,9 +29,9 @@ SaffronCity_House1_2F_EventScript_16EB7B:: @ 816EB7B
 	goto_if_eq EventScript_1C4CF6
 	checkplayergender
 	compare_var_to_value VAR_RESULT, 0
-	call_if 1, EventScript_16EBB7
+	call_if eq, EventScript_16EBB7
 	compare_var_to_value VAR_RESULT, 1
-	call_if 1, EventScript_16EBC0
+	call_if eq, EventScript_16EBC0
 	release
 	end
 

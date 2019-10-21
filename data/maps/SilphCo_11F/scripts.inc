@@ -4,7 +4,7 @@ SilphCo_11F_MapScripts:: @ 8161DEE
 
 SilphCo_11F_MapScript1_161DF4:: @ 8161DF4
 	checkflag FLAG_0x28D
-	call_if 0, EventScript_1A8504
+	call_if lt, EventScript_1A8504
 	end
 
 SilphCo_11F_EventScript_161DFE:: @ 8161DFE
@@ -14,9 +14,9 @@ SilphCo_11F_EventScript_161DFE:: @ 8161DFE
 	goto_if_eq EventScript_161E75
 	checkplayergender
 	compare_var_to_value VAR_RESULT, 0
-	call_if 1, EventScript_161E59
+	call_if eq, EventScript_161E59
 	compare_var_to_value VAR_RESULT, 1
-	call_if 1, EventScript_161E62
+	call_if eq, EventScript_161E62
 	checkitemspace ITEM_MASTER_BALL, 1
 	compare_var_to_value VAR_RESULT, 0
 	goto_if_eq EventScript_161E6B
@@ -73,9 +73,9 @@ EventScript_161EA0:: @ 8161EA0
 	msgbox gUnknown_8177108
 	closemessage
 	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_161F00
+	call_if eq, EventScript_161F00
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_161F12
+	call_if eq, EventScript_161F12
 	setvar VAR_LAST_TALKED, 3
 	trainerbattle 3, TRAINER_BOSS_GIOVANNI_2, 0, Text_1771AB
 	msgbox gUnknown_81771C2

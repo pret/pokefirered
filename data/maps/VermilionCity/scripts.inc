@@ -23,7 +23,7 @@ Movement_166903:: @ 8166903
 VermilionCity_MapScript1_166906:: @ 8166906
 	setworldmapflag FLAG_WORLD_MAP_VERMILION_CITY
 	checkflag FLAG_0x2F9
-	call_if 1, EventScript_166913
+	call_if eq, EventScript_166913
 	end
 
 EventScript_166913:: @ 8166913
@@ -59,7 +59,7 @@ VermilionCity_EventScript_166941:: @ 8166941
 
 EventScript_166958:: @ 8166958
 	checkflag FLAG_0x84A
-	goto_if 0, EventScript_1A77B0
+	goto_if lt, EventScript_1A77B0
 	checkitem ITEM_MYSTIC_TICKET, 1
 	compare_var_to_value VAR_RESULT, 0
 	goto_if_eq EventScript_1A77B0
@@ -68,7 +68,7 @@ EventScript_166958:: @ 8166958
 
 EventScript_166977:: @ 8166977
 	checkflag FLAG_0x84B
-	goto_if 0, EventScript_1A77B0
+	goto_if lt, EventScript_1A77B0
 	checkitem ITEM_AURORA_TICKET, 1
 	compare_var_to_value VAR_RESULT, 0
 	goto_if_eq EventScript_1A77B0
@@ -78,9 +78,9 @@ EventScript_166977:: @ 8166977
 EventScript_166996:: @ 8166996
 	setvar VAR_0x8004, 0
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
-	goto_if 4, EventScript_1669BB
+	goto_if ge, EventScript_1669BB
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 1
-	goto_if 4, EventScript_166B3B
+	goto_if ge, EventScript_166B3B
 	msgbox gUnknown_817FB10
 	release
 	end
@@ -107,7 +107,7 @@ EventScript_1669FD:: @ 81669FD
 	compare_var_to_value VAR_RESULT, 1
 	goto_if_eq EventScript_166AB1
 	checkflag FLAG_0x2F0
-	call_if 0, EventScript_166A53
+	call_if lt, EventScript_166A53
 	message Text_17FCC1
 	waitmessage
 	multichoice 17, 6, 54, 0
@@ -125,7 +125,7 @@ EventScript_166A53:: @ 8166A53
 
 EventScript_166A5F:: @ 8166A5F
 	checkflag FLAG_0x2F1
-	call_if 0, EventScript_166AA5
+	call_if lt, EventScript_166AA5
 	message Text_17FCC1
 	waitmessage
 	multichoice 13, 6, 55, 0
@@ -143,9 +143,9 @@ EventScript_166AA5:: @ 8166AA5
 
 EventScript_166AB1:: @ 8166AB1
 	checkflag FLAG_0x2F0
-	call_if 0, EventScript_166A53
+	call_if lt, EventScript_166A53
 	checkflag FLAG_0x2F1
-	call_if 0, EventScript_166AA5
+	call_if lt, EventScript_166AA5
 	message Text_17FCC1
 	waitmessage
 	multichoice 13, 5, 56, 0
@@ -213,7 +213,7 @@ EventScript_166BA0:: @ 8166BA0
 	goto_if_eq EventScript_166BED
 	msgbox gUnknown_817FA3C
 	checkflag FLAG_GOT_SS_TICKET
-	goto_if 0, EventScript_166BDE
+	goto_if lt, EventScript_166BDE
 	msgbox gUnknown_817FA77
 	setvar VAR_VERMILION_CITY_TICKET_CHECK_TRIGGER, 1
 	releaseall
@@ -228,9 +228,9 @@ EventScript_166BDE:: @ 8166BDE
 EventScript_166BED:: @ 8166BED
 	setvar VAR_0x8004, 0
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
-	goto_if 4, EventScript_1669BB
+	goto_if ge, EventScript_1669BB
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 1
-	goto_if 4, EventScript_166B3B
+	goto_if ge, EventScript_166B3B
 	msgbox gUnknown_817FB10
 	closemessage
 	goto EventScript_1A9108

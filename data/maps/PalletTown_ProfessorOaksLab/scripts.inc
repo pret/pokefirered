@@ -7,13 +7,13 @@ PalletTown_ProfessorOaksLab_MapScripts:: @ 8168F7E
 PalletTown_ProfessorOaksLab_MapScript1_168F8E:: @ 8168F8E
 	setflag FLAG_0x2CF
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1
-	call_if 1, EventScript_168FC6
+	call_if eq, EventScript_168FC6
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 7
-	call_if 1, EventScript_168FD5
+	call_if eq, EventScript_168FD5
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 8
-	call_if 1, EventScript_168FC0
+	call_if eq, EventScript_168FC0
 	checkflag FLAG_GOT_POKEBALLS_FROM_OAK_AFTER_22_RIVAL
-	call_if 1, EventScript_168FBC
+	call_if eq, EventScript_168FBC
 	end
 
 EventScript_168FBC:: @ 8168FBC
@@ -67,32 +67,32 @@ EventScript_169035:: @ 8169035
 	msgbox gUnknown_818EE60
 	closemessage
 	compare_var_to_value VAR_FACING, 2
-	call_if 1, EventScript_169174
+	call_if eq, EventScript_169174
 	compare_var_to_value VAR_FACING, 1
-	call_if 1, EventScript_1691BB
+	call_if eq, EventScript_1691BB
 	compare_var_to_value VAR_FACING, 4
-	call_if 1, EventScript_169194
+	call_if eq, EventScript_169194
 	compare_var_to_value VAR_FACING, 3
-	call_if 1, EventScript_169194
+	call_if eq, EventScript_169194
 	msgbox gUnknown_818EF59
 	fadedefaultbgm
 	msgbox gUnknown_818F004
 	compare_var_to_value VAR_FACING, 2
-	call_if 1, EventScript_1691DB
+	call_if eq, EventScript_1691DB
 	compare_var_to_value VAR_FACING, 3
-	call_if 1, EventScript_1691E6
+	call_if eq, EventScript_1691E6
 	textcolor 3
 	msgbox gUnknown_818F062
 	closemessage
 	call EventScript_1A6675
 	compare_var_to_value VAR_FACING, 2
-	call_if 1, EventScript_1691F1
+	call_if eq, EventScript_1691F1
 	compare_var_to_value VAR_FACING, 1
-	call_if 1, EventScript_1691FC
+	call_if eq, EventScript_1691FC
 	compare_var_to_value VAR_FACING, 4
-	call_if 1, EventScript_169215
+	call_if eq, EventScript_169215
 	compare_var_to_value VAR_FACING, 3
-	call_if 1, EventScript_169227
+	call_if eq, EventScript_169227
 	addobject 9
 	addobject 10
 	delay 30
@@ -102,13 +102,13 @@ EventScript_169035:: @ 8169035
 	removeobject 10
 	delay 30
 	compare_var_to_value VAR_FACING, 2
-	call_if 1, EventScript_169845
+	call_if eq, EventScript_169845
 	compare_var_to_value VAR_FACING, 1
-	call_if 1, EventScript_169850
+	call_if eq, EventScript_169850
 	compare_var_to_value VAR_FACING, 4
-	call_if 1, EventScript_16985B
+	call_if eq, EventScript_16985B
 	compare_var_to_value VAR_FACING, 3
-	call_if 1, EventScript_16986D
+	call_if eq, EventScript_16986D
 	textcolor 3
 	playfanfare MUS_FAN5
 	message Text_18F0E8
@@ -121,13 +121,13 @@ EventScript_169035:: @ 8169035
 	closemessage
 	playbgm MUS_RIVAL2, 0
 	compare_var_to_value VAR_FACING, 2
-	call_if 1, EventScript_169B69
+	call_if eq, EventScript_169B69
 	compare_var_to_value VAR_FACING, 1
-	call_if 1, EventScript_169B7B
+	call_if eq, EventScript_169B7B
 	compare_var_to_value VAR_FACING, 4
-	call_if 1, EventScript_169B7B
+	call_if eq, EventScript_169B7B
 	compare_var_to_value VAR_FACING, 3
-	call_if 1, EventScript_169B7B
+	call_if eq, EventScript_169B7B
 	removeobject 8
 	fadedefaultbgm
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 8
@@ -493,11 +493,11 @@ EventScript_1694C2:: @ 81694C2
 	closemessage
 	playbgm MUS_RIVAL2, 0
 	compare_var_to_value VAR_0x4002, 1
-	call_if 1, EventScript_169504
+	call_if eq, EventScript_169504
 	compare_var_to_value VAR_0x4002, 2
-	call_if 1, EventScript_169516
+	call_if eq, EventScript_169516
 	compare_var_to_value VAR_0x4002, 3
-	call_if 1, EventScript_169528
+	call_if eq, EventScript_169528
 	removeobject 8
 	playse SE_KAIDAN
 	fadedefaultbgm
@@ -608,7 +608,7 @@ PalletTown_ProfessorOaksLab_EventScript_169595:: @ 8169595
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 6
 	goto_if_eq EventScript_1698D6
 	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 1
-	goto_if 4, EventScript_16961E
+	goto_if ge, EventScript_16961E
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 4
 	goto_if_eq EventScript_169614
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3
@@ -646,13 +646,13 @@ EventScript_16961E:: @ 816961E
 	msgbox gUnknown_818DE8D
 	closemessage
 	compare_var_to_value VAR_FACING, 2
-	call_if 1, EventScript_169A82
+	call_if eq, EventScript_169A82
 	compare_var_to_value VAR_FACING, 1
-	call_if 1, EventScript_169AC1
+	call_if eq, EventScript_169AC1
 	compare_var_to_value VAR_FACING, 4
-	call_if 1, EventScript_169A9E
+	call_if eq, EventScript_169A9E
 	compare_var_to_value VAR_FACING, 3
-	call_if 1, EventScript_169A9E
+	call_if eq, EventScript_169A9E
 	fadedefaultbgm
 	msgbox gUnknown_818DE99
 	closemessage
@@ -663,23 +663,23 @@ EventScript_16961E:: @ 816961E
 	applymovement 4, Movement_1A75DD
 	waitmovement 0
 	compare_var_to_value VAR_FACING, 1
-	call_if 1, EventScript_169ADD
+	call_if eq, EventScript_169ADD
 	compare_var_to_value VAR_FACING, 4
-	call_if 1, EventScript_169B14
+	call_if eq, EventScript_169B14
 	compare_var_to_value VAR_FACING, 3
-	call_if 1, EventScript_169AF5
+	call_if eq, EventScript_169AF5
 	compare_var_to_value VAR_FACING, 2
-	call_if 1, EventScript_169B86
+	call_if eq, EventScript_169B86
 	msgbox gUnknown_818E508
 	closemessage
 	compare_var_to_value VAR_FACING, 2
-	call_if 1, EventScript_169882
+	call_if eq, EventScript_169882
 	compare_var_to_value VAR_FACING, 1
-	call_if 1, EventScript_16988D
+	call_if eq, EventScript_16988D
 	compare_var_to_value VAR_FACING, 4
-	call_if 1, EventScript_1698A6
+	call_if eq, EventScript_1698A6
 	compare_var_to_value VAR_FACING, 3
-	call_if 1, EventScript_1698B8
+	call_if eq, EventScript_1698B8
 	msgbox gUnknown_818E536
 	closemessage
 	delay 40
@@ -692,13 +692,13 @@ EventScript_16961E:: @ 816961E
 	removeobject 10
 	delay 25
 	compare_var_to_value VAR_FACING, 2
-	call_if 1, EventScript_169845
+	call_if eq, EventScript_169845
 	compare_var_to_value VAR_FACING, 1
-	call_if 1, EventScript_169850
+	call_if eq, EventScript_169850
 	compare_var_to_value VAR_FACING, 4
-	call_if 1, EventScript_16985B
+	call_if eq, EventScript_16985B
 	compare_var_to_value VAR_FACING, 3
-	call_if 1, EventScript_16986D
+	call_if eq, EventScript_16986D
 	delay 10
 	textcolor 3
 	playfanfare MUS_FAN5
@@ -717,24 +717,24 @@ EventScript_16961E:: @ 816961E
 	msgbox gUnknown_818E784
 	msgbox gUnknown_818DEC8
 	compare_var_to_value VAR_FACING, 2
-	call_if 1, EventScript_169B33
+	call_if eq, EventScript_169B33
 	compare_var_to_value VAR_FACING, 1
-	call_if 1, EventScript_169B45
+	call_if eq, EventScript_169B45
 	compare_var_to_value VAR_FACING, 4
-	call_if 1, EventScript_169B57
+	call_if eq, EventScript_169B57
 	compare_var_to_value VAR_FACING, 3
-	call_if 1, EventScript_169B57
+	call_if eq, EventScript_169B57
 	msgbox gUnknown_818DEF3
 	closemessage
 	playbgm MUS_RIVAL2, 0
 	compare_var_to_value VAR_FACING, 2
-	call_if 1, EventScript_169B69
+	call_if eq, EventScript_169B69
 	compare_var_to_value VAR_FACING, 1
-	call_if 1, EventScript_169B7B
+	call_if eq, EventScript_169B7B
 	compare_var_to_value VAR_FACING, 4
-	call_if 1, EventScript_169B7B
+	call_if eq, EventScript_169B7B
 	compare_var_to_value VAR_FACING, 3
-	call_if 1, EventScript_169B7B
+	call_if eq, EventScript_169B7B
 	removeobject 8
 	fadedefaultbgm
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 6
@@ -857,13 +857,13 @@ EventScript_169913:: @ 8169913
 	message Text_1A7291
 	waitmessage
 	compare_var_to_value VAR_FACING, 2
-	call_if 1, EventScript_169964
+	call_if eq, EventScript_169964
 	compare_var_to_value VAR_FACING, 1
-	call_if 1, EventScript_16996F
+	call_if eq, EventScript_16996F
 	compare_var_to_value VAR_FACING, 4
-	call_if 1, EventScript_16997A
+	call_if eq, EventScript_16997A
 	compare_var_to_value VAR_FACING, 3
-	call_if 1, EventScript_169985
+	call_if eq, EventScript_169985
 	applymovement 4, Movement_1A75E1
 	waitmovement 0
 	closemessage
@@ -971,9 +971,9 @@ EventScript_1699CE:: @ 81699CE
 	call EventScript_1A737B
 	closemessage
 	compare_var_to_value VAR_0x8009, 60
-	goto_if 0, EventScript_1699F9
+	goto_if lt, EventScript_1699F9
 	checkflag FLAG_WORLD_MAP_ONE_ISLAND
-	goto_if 0, EventScript_1699F9
+	goto_if lt, EventScript_1699F9
 	delay 30
 	msgbox gUnknown_818EDF5
 	goto EventScript_169035
@@ -1000,7 +1000,7 @@ EventScript_1699FB:: @ 81699FB
 
 EventScript_169A34:: @ 8169A34
 	compare_var_to_value VAR_MAP_SCENE_ROUTE22, 2
-	goto_if 4, EventScript_169A45
+	goto_if ge, EventScript_169A45
 	goto EventScript_169A6E
 	end
 
@@ -1154,7 +1154,7 @@ PalletTown_ProfessorOaksLab_EventScript_169BAB:: @ 8169BAB
 	setvar VAR_OAKSLAB_RIVAL_STARTER_SPECIES, SPECIES_CHARMANDER
 	setvar VAR_OAKSLAB_RIVAL_STARTER_OBJID, 7
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3
-	goto_if 4, EventScript_169DE4
+	goto_if ge, EventScript_169DE4
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2
 	goto_if_eq EventScript_169BE1
 	msgbox gUnknown_818EA19
@@ -1270,7 +1270,7 @@ Movement_RivalTakesHisStarter:: @ 8169D2F
 	waitfanfare
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3
 	checkflag FLAG_PALLET_TOWN_LADY_MOVED_FROM_SIGN
-	call_if 1, EventScript_169D5C
+	call_if eq, EventScript_169D5C
 	release
 	end
 
@@ -1314,7 +1314,7 @@ PalletTown_ProfessorOaksLab_EventScript_169D78:: @ 8169D78
 	setvar VAR_OAKSLAB_RIVAL_STARTER_SPECIES, SPECIES_BULBASAUR
 	setvar VAR_OAKSLAB_RIVAL_STARTER_OBJID, 5
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3
-	goto_if 4, EventScript_169DE4
+	goto_if ge, EventScript_169DE4
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2
 	goto_if_eq EventScript_169BE1
 	msgbox gUnknown_818EA19
@@ -1329,7 +1329,7 @@ PalletTown_ProfessorOaksLab_EventScript_169DAE:: @ 8169DAE
 	setvar VAR_OAKSLAB_RIVAL_STARTER_SPECIES, SPECIES_SQUIRTLE
 	setvar VAR_OAKSLAB_RIVAL_STARTER_OBJID, 6
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3
-	goto_if 4, EventScript_169DE4
+	goto_if ge, EventScript_169DE4
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2
 	goto_if_eq EventScript_169BE1
 	msgbox gUnknown_818EA19
@@ -1394,7 +1394,7 @@ PalletTown_ProfessorOaksLab_EventScript_169E71:: @ 8169E71
 PalletTown_ProfessorOaksLab_EventScript_169E7A:: @ 8169E7A
 	lockall
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 6
-	goto_if 4, EventScript_169E90
+	goto_if ge, EventScript_169E90
 	msgbox gUnknown_818EA84
 	releaseall
 	end

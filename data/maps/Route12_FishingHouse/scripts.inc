@@ -45,7 +45,7 @@ EventScript_16FF7F:: @ 816FF7F
 	waitstate
 	copyvar VAR_RESULT, VAR_0x8004
 	compare_var_to_value VAR_RESULT, 6
-	goto_if 4, EventScript_16FFFF
+	goto_if ge, EventScript_16FFFF
 	special sub_80A0984
 	compare_var_to_value VAR_RESULT, 1
 	goto_if_eq EventScript_170001
@@ -74,14 +74,14 @@ EventScript_170001:: @ 8170001
 
 EventScript_17000B:: @ 817000B
 	checkflag FLAG_0x29C
-	goto_if 0, EventScript_170031
+	goto_if lt, EventScript_170031
 	msgbox gUnknown_819F40A
 	release
 	end
 
 EventScript_17001E:: @ 817001E
 	checkflag FLAG_0x29C
-	goto_if 0, EventScript_170031
+	goto_if lt, EventScript_170031
 	msgbox gUnknown_819F3CB
 	release
 	end

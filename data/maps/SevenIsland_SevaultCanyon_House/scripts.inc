@@ -21,7 +21,7 @@ SevenIsland_SevaultCanyon_House_EventScript_172183:: @ 8172183
 	closemessage
 	call EventScript_1A6675
 	compare_var_to_value VAR_FACING, 1
-	call_if 5, EventScript_172206
+	call_if ne, EventScript_172206
 	delay 30
 	playbgm MUS_P_SCHOOL, 0
 	applymovement 255, Movement_172231

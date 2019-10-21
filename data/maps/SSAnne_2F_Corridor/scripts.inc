@@ -36,29 +36,29 @@ EventScript_160903:: @ 8160903
 	waitmovement 0
 	delay 20
 	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_1609AD
+	call_if eq, EventScript_1609AD
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_1609B8
+	call_if eq, EventScript_1609B8
 	compare_var_to_value VAR_0x4001, 2
-	call_if 1, EventScript_1609CA
+	call_if eq, EventScript_1609CA
 	msgbox gUnknown_8173035
 	setvar VAR_LAST_TALKED, 1
 	compare_var_to_value VAR_STARTER_MON, 2
-	call_if 1, EventScript_1609DC
+	call_if eq, EventScript_1609DC
 	compare_var_to_value VAR_STARTER_MON, 1
-	call_if 1, EventScript_1609E7
+	call_if eq, EventScript_1609E7
 	compare_var_to_value VAR_STARTER_MON, 0
-	call_if 1, EventScript_1609F2
+	call_if eq, EventScript_1609F2
 	msgbox gUnknown_8173164
 	closemessage
 	delay 10
 	playbgm MUS_RIVAL2, 0
 	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_1609FD
+	call_if eq, EventScript_1609FD
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_160A08
+	call_if eq, EventScript_160A08
 	compare_var_to_value VAR_0x4001, 2
-	call_if 1, EventScript_160A13
+	call_if eq, EventScript_160A13
 	fadedefaultbgm
 	removeobject 1
 	setvar VAR_MAP_SCENE_S_S_ANNE_2F_CORRIDOR, 1

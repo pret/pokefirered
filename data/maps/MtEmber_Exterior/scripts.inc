@@ -6,7 +6,7 @@ MtEmber_Exterior_MapScripts:: @ 8163946
 MtEmber_Exterior_MapScript1_163951:: @ 8163951
 	setworldmapflag FLAG_WORLD_MAP_MT_EMBER_EXTERIOR
 	compare_var_to_value VAR_MAP_SCENE_MT_EMBER_EXTERIOR, 2
-	call_if 1, EventScript_163960
+	call_if eq, EventScript_163960
 	end
 
 EventScript_163960:: @ 8163960
@@ -16,7 +16,7 @@ EventScript_163960:: @ 8163960
 
 MtEmber_Exterior_MapScript2_163969:: @ 8163969
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4
-	call_if 4, EventScript_163975
+	call_if ge, EventScript_163975
 	end
 
 EventScript_163975:: @ 8163975

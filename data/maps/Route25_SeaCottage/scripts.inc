@@ -4,9 +4,9 @@ Route25_SeaCottage_MapScripts:: @ 8170523
 
 Route25_SeaCottage_MapScript1_170529:: @ 8170529
 	checkflag FLAG_HELPED_BILL_IN_SEA_COTTAGE
-	call_if 0, EventScript_17053C
+	call_if lt, EventScript_17053C
 	checkflag FLAG_GOT_SS_TICKET
-	call_if 1, EventScript_170547
+	call_if eq, EventScript_170547
 	end
 
 EventScript_17053C:: @ 817053C
@@ -46,18 +46,18 @@ EventScript_17058E:: @ 817058E
 
 EventScript_17059C:: @ 817059C
 	compare_var_to_value VAR_RESULT, 0
-	call_if 1, EventScript_170600
+	call_if eq, EventScript_170600
 	msgbox gUnknown_819FFD3
 	closemessage
 	delay 10
 	compare_var_to_value VAR_FACING, 1
-	call_if 1, EventScript_17062A
+	call_if eq, EventScript_17062A
 	compare_var_to_value VAR_FACING, 2
-	call_if 1, EventScript_170635
+	call_if eq, EventScript_170635
 	compare_var_to_value VAR_FACING, 3
-	call_if 1, EventScript_170635
+	call_if eq, EventScript_170635
 	compare_var_to_value VAR_FACING, 4
-	call_if 1, EventScript_170635
+	call_if eq, EventScript_170635
 	opendoor 10, 3
 	waitdooranim
 	applymovement 2, Movement_1706DB
@@ -73,9 +73,9 @@ EventScript_17059C:: @ 817059C
 EventScript_170600:: @ 8170600
 	checkplayergender
 	compare_var_to_value VAR_RESULT, 0
-	call_if 1, EventScript_170618
+	call_if eq, EventScript_170618
 	compare_var_to_value VAR_RESULT, 1
-	call_if 1, EventScript_170621
+	call_if eq, EventScript_170621
 	return
 
 EventScript_170618:: @ 8170618
@@ -105,9 +105,9 @@ EventScript_17064A:: @ 817064A
 	famechecker FAMECHECKER_BILL, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	checkplayergender
 	compare_var_to_value VAR_RESULT, 0
-	call_if 1, EventScript_1706AC
+	call_if eq, EventScript_1706AC
 	compare_var_to_value VAR_RESULT, 1
-	call_if 1, EventScript_1706B5
+	call_if eq, EventScript_1706B5
 	checkitemspace ITEM_SS_TICKET, 1
 	compare_var_to_value VAR_RESULT, 0
 	goto_if_eq EventScript_1706BE

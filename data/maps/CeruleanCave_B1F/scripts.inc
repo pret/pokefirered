@@ -5,19 +5,19 @@ CeruleanCave_B1F_MapScripts:: @ 81624BE
 
 CeruleanCave_B1F_MapScript1_1624C9:: @ 81624C9
 	checkflag FLAG_0x807
-	call_if 1, EventScript_1624D3
+	call_if eq, EventScript_1624D3
 	end
 
 EventScript_1624D3:: @ 81624D3
 	specialvar VAR_RESULT, sub_80CA74C
 	compare_var_to_value VAR_RESULT, 7
-	goto_if 5, EventScript_1A77A9
+	goto_if ne, EventScript_1A77A9
 	removeobject VAR_LAST_TALKED
 	return
 
 CeruleanCave_B1F_MapScript2_1624E7:: @ 81624E7
 	checkflag FLAG_0x2BC
-	call_if 0, EventScript_1624F1
+	call_if lt, EventScript_1624F1
 	end
 
 EventScript_1624F1:: @ 81624F1

@@ -13,7 +13,7 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_16CB88:: @ 816CB88
 	lock
 	faceplayer
 	checkflag FLAG_GOT_COIN_CASE
-	goto_if 0, EventScript_16CD99
+	goto_if lt, EventScript_16CD99
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
 	goto_if_eq EventScript_1A7AE0
@@ -78,7 +78,7 @@ EventScript_16CC65:: @ 816CC65
 	goto_if_eq EventScript_16CC10
 	checkcoins VAR_RESULT
 	compare_var_to_var VAR_RESULT, VAR_0x4002
-	goto_if 0, EventScript_16CDA5
+	goto_if lt, EventScript_16CDA5
 	textcolor 3
 	switch VAR_0x4001
 	case SPECIES_ABRA, EventScript_16CCD4
@@ -192,7 +192,7 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_16CE1D:: @ 816CE1D
 	lock
 	faceplayer
 	checkflag FLAG_GOT_COIN_CASE
-	goto_if 0, EventScript_16CD99
+	goto_if lt, EventScript_16CD99
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
 	goto_if_eq EventScript_1A7AE0
@@ -269,7 +269,7 @@ EventScript_16CF3F:: @ 816CF3F
 	getitemname 0, VAR_0x4001
 	checkcoins VAR_RESULT
 	compare_var_to_var VAR_RESULT, VAR_0x4002
-	goto_if 0, EventScript_16CDA5
+	goto_if lt, EventScript_16CDA5
 	checkitemspace VAR_0x4001, 1
 	compare_var_to_value VAR_RESULT, 0
 	goto_if_eq EventScript_16CF79
@@ -290,7 +290,7 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_16CF88:: @ 816CF88
 	lock
 	faceplayer
 	checkflag FLAG_GOT_COIN_CASE
-	goto_if 0, EventScript_16CD99
+	goto_if lt, EventScript_16CD99
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
 	goto_if_eq EventScript_1A7AE0

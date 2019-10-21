@@ -127,11 +127,11 @@ EventScript_16D3CA:: @ 816D3CA
 	.byte 0
 	.byte 0
 	compare_var_to_value VAR_0x4002, 0
-	call_if 1, EventScript_16D44C
+	call_if eq, EventScript_16D44C
 	compare_var_to_value VAR_0x4002, 1
-	call_if 1, EventScript_16D441
+	call_if eq, EventScript_16D441
 	compare_var_to_value VAR_0x4002, 2
-	call_if 1, EventScript_16D457
+	call_if eq, EventScript_16D457
 	special EnterSafariMode
 	setvar VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 2
 	warp MAP_SAFARI_ZONE_CENTER, 255, 26, 30
@@ -156,7 +156,7 @@ EventScript_16D457:: @ 816D457
 EventScript_16D462:: @ 816D462
 	countpokemon
 	compare_var_to_value VAR_RESULT, 6
-	goto_if 5, EventScript_1A77A9
+	goto_if ne, EventScript_1A77A9
 	specialvar VAR_RESULT, sub_80CABD0
 	compare_var_to_value VAR_RESULT, 1
 	goto_if_eq EventScript_1A77A9

@@ -7,7 +7,7 @@ TwoIsland_JoyfulGameCorner_MapScripts:: @ 81713D0
 
 TwoIsland_JoyfulGameCorner_MapScript1_1713E5:: @ 81713E5
 	checkflag FLAG_0x2FB
-	call_if 1, EventScript_1713EF
+	call_if eq, EventScript_1713EF
 	end
 
 EventScript_1713EF:: @ 81713EF

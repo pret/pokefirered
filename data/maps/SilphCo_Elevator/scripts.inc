@@ -5,7 +5,7 @@ SilphCo_Elevator_EventScript_161F6F:: @ 8161F6F
 	lockall
 	setvar VAR_0x8004, 1
 	checkflag FLAG_TEMP_2
-	call_if 0, EventScript_1A7AB9
+	call_if lt, EventScript_1A7AB9
 	copyvar VAR_0x8005, VAR_0x403A
 	special sub_80CB580
 	message Text_1A535C

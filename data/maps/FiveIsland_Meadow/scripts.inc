@@ -4,7 +4,7 @@ FiveIsland_Meadow_MapScripts:: @ 8168932
 
 FiveIsland_Meadow_MapScript1_168938:: @ 8168938
 	checkflag FLAG_0x2D6
-	call_if 1, EventScript_168983
+	call_if eq, EventScript_168983
 	end
 
 FiveIsland_Meadow_EventScript_168942:: @ 8168942

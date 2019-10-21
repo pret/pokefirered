@@ -4,14 +4,14 @@ SilphCo_6F_MapScripts:: @ 8161881
 
 SilphCo_6F_MapScript1_161887:: @ 8161887
 	checkflag FLAG_0x283
-	call_if 0, EventScript_1A8314
+	call_if lt, EventScript_1A8314
 	end
 
 SilphCo_6F_EventScript_161891:: @ 8161891
 	lock
 	faceplayer
 	compare_var_to_value VAR_MAP_SCENE_SILPH_CO_11F, 1
-	goto_if 4, EventScript_1618A8
+	goto_if ge, EventScript_1618A8
 	msgbox gUnknown_817607E
 	release
 	end
@@ -25,7 +25,7 @@ SilphCo_6F_EventScript_1618B2:: @ 81618B2
 	lock
 	faceplayer
 	compare_var_to_value VAR_MAP_SCENE_SILPH_CO_11F, 1
-	goto_if 4, EventScript_1618C9
+	goto_if ge, EventScript_1618C9
 	msgbox gUnknown_8175F24
 	release
 	end
@@ -39,7 +39,7 @@ SilphCo_6F_EventScript_1618D3:: @ 81618D3
 	lock
 	faceplayer
 	compare_var_to_value VAR_MAP_SCENE_SILPH_CO_11F, 1
-	goto_if 4, EventScript_1618EA
+	goto_if ge, EventScript_1618EA
 	msgbox gUnknown_8175F70
 	release
 	end
@@ -53,7 +53,7 @@ SilphCo_6F_EventScript_1618F4:: @ 81618F4
 	lock
 	faceplayer
 	compare_var_to_value VAR_MAP_SCENE_SILPH_CO_11F, 1
-	goto_if 4, EventScript_16190B
+	goto_if ge, EventScript_16190B
 	msgbox gUnknown_8175FAA
 	release
 	end
@@ -67,7 +67,7 @@ SilphCo_6F_EventScript_161915:: @ 8161915
 	lock
 	faceplayer
 	compare_var_to_value VAR_MAP_SCENE_SILPH_CO_11F, 1
-	goto_if 4, EventScript_16192C
+	goto_if ge, EventScript_16192C
 	msgbox gUnknown_8176012
 	release
 	end

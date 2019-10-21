@@ -7,7 +7,7 @@ SevenIsland_TrainerTower_Elevator_EventScript_164B03:: @ 8164B03
 	lockall
 	setvar VAR_0x8004, 6
 	checkflag FLAG_TEMP_2
-	call_if 0, EventScript_1A7AB9
+	call_if lt, EventScript_1A7AB9
 	copyvar VAR_0x8005, VAR_0x403A
 	special sub_80CB580
 	message Text_1A535C

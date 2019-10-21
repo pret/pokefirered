@@ -4,7 +4,7 @@ CeladonCity_GameCorner_MapScripts:: @ 816C646
 
 CeladonCity_GameCorner_MapScript1_16C64C:: @ 816C64C
 	checkflag FLAG_0x26D
-	call_if 0, EventScript_16C656
+	call_if lt, EventScript_16C656
 	end
 
 EventScript_16C656:: @ 816C656
@@ -40,7 +40,7 @@ CeladonCity_GameCorner_EventScript_16C68D:: @ 816C68D
 
 EventScript_16C6E6:: @ 816C6E6
 	checkflag FLAG_GOT_COIN_CASE
-	goto_if 0, EventScript_16C790
+	goto_if lt, EventScript_16C790
 	compare_var_to_value VAR_0x8009, 0
 	goto_if_eq EventScript_16C734
 	compare_var_to_value VAR_0x8009, 1
@@ -50,7 +50,7 @@ EventScript_16C6E6:: @ 816C6E6
 EventScript_16C706:: @ 816C706
 	checkcoins VAR_0x4001
 	compare_var_to_value VAR_0x4001, 9500
-	goto_if 4, EventScript_16C79E
+	goto_if ge, EventScript_16C79E
 	checkmoney 10000, 0
 	compare_var_to_value VAR_RESULT, 0
 	goto_if_eq EventScript_16C7AC
@@ -62,7 +62,7 @@ EventScript_16C706:: @ 816C706
 EventScript_16C734:: @ 816C734
 	checkcoins VAR_0x4001
 	compare_var_to_value VAR_0x4001, 9950
-	goto_if 4, EventScript_16C79E
+	goto_if ge, EventScript_16C79E
 	checkmoney 1000, 0
 	compare_var_to_value VAR_RESULT, 0
 	goto_if_eq EventScript_16C7AC
@@ -135,10 +135,10 @@ CeladonCity_GameCorner_EventScript_16C7E7:: @ 816C7E7
 	goto_if_eq EventScript_16C849
 	msgbox gUnknown_8196AF3
 	checkflag FLAG_GOT_COIN_CASE
-	goto_if 0, EventScript_16C839
+	goto_if lt, EventScript_16C839
 	checkcoins VAR_0x4001
 	compare_var_to_value VAR_0x4001, 9990
-	goto_if 4, EventScript_16C82B
+	goto_if ge, EventScript_16C82B
 	givecoins 10
 	textcolor 3
 	msgbox gUnknown_8196B0D
@@ -199,10 +199,10 @@ CeladonCity_GameCorner_EventScript_16C89E:: @ 816C89E
 	goto_if_eq EventScript_16C8F0
 	msgbox gUnknown_8196D2B
 	checkflag FLAG_GOT_COIN_CASE
-	goto_if 0, EventScript_16C839
+	goto_if lt, EventScript_16C839
 	checkcoins VAR_0x4001
 	compare_var_to_value VAR_0x4001, 9980
-	goto_if 4, EventScript_16C8E2
+	goto_if ge, EventScript_16C8E2
 	givecoins 20
 	textcolor 3
 	msgbox gUnknown_8196D47
@@ -229,10 +229,10 @@ CeladonCity_GameCorner_EventScript_16C8FE:: @ 816C8FE
 	goto_if_eq EventScript_16C950
 	msgbox gUnknown_8196DB7
 	checkflag FLAG_GOT_COIN_CASE
-	goto_if 0, EventScript_16C839
+	goto_if lt, EventScript_16C839
 	checkcoins VAR_0x4001
 	compare_var_to_value VAR_0x4001, 9980
-	goto_if 4, EventScript_16C942
+	goto_if ge, EventScript_16C942
 	givecoins 20
 	textcolor 3
 	msgbox gUnknown_8196DF8
@@ -264,7 +264,7 @@ EventScript_16C96A:: @ 816C96A
 
 EventScript_16C96C:: @ 816C96C
 	checkflag FLAG_GOT_COIN_CASE
-	goto_if 0, EventScript_16CAA0
+	goto_if lt, EventScript_16CAA0
 	msgbox gUnknown_8196F46, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if_eq EventScript_16C96A
@@ -413,7 +413,7 @@ CeladonCity_GameCorner_EventScript_16CAAA:: @ 816CAAA
 	lockall
 	msgbox gUnknown_8196EDC
 	checkflag FLAG_0x26D
-	call_if 0, EventScript_16CABE
+	call_if lt, EventScript_16CABE
 	releaseall
 	end
 
@@ -437,9 +437,9 @@ EventScript_16CB10:: @ 816CB10
 	msgbox gUnknown_8196E9B
 	closemessage
 	compare_var_to_value VAR_FACING, 3
-	call_if 1, EventScript_16CB34
+	call_if eq, EventScript_16CB34
 	compare_var_to_value VAR_FACING, 3
-	call_if 5, EventScript_16CB3F
+	call_if ne, EventScript_16CB3F
 	removeobject 11
 	release
 	end

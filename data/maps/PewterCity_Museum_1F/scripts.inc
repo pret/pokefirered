@@ -82,11 +82,11 @@ EventScript_16A402:: @ 816A402
 	goto_if_eq EventScript_16A476
 	closemessage
 	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_16A455
+	call_if eq, EventScript_16A455
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_16A460
+	call_if eq, EventScript_16A460
 	compare_var_to_value VAR_0x4001, 2
-	call_if 1, EventScript_16A46B
+	call_if eq, EventScript_16A46B
 	playse SE_SHOP
 	takemoney 50, 0
 	updatemoneybox 0, 0, 0

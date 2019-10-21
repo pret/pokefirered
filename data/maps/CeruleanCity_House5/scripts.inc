@@ -10,7 +10,7 @@ CeruleanCity_House5_EventScript_16AE50:: @ 816AE50
 	compare_var_to_value VAR_RESULT, 0
 	goto_if_eq EventScript_16AEAD
 	checkflag FLAG_0x847
-	goto_if 0, EventScript_16AEA3
+	goto_if lt, EventScript_16AEA3
 	msgbox gUnknown_8193003
 	setflag FLAG_0x2BB
 	giveitem ITEM_POWDER_JAR

@@ -5,7 +5,7 @@ RocketHideout_B1F_MapScripts:: @ 8161195
 
 RocketHideout_B1F_MapScript1_1611A0:: @ 81611A0
 	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_12
-	call_if 0, EventScript_161233
+	call_if lt, EventScript_161233
 	end
 
 RocketHideout_B1F_MapScript2_1611AA:: @ 81611AA

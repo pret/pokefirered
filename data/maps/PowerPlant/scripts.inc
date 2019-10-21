@@ -5,24 +5,24 @@ PowerPlant_MapScripts:: @ 8163764
 
 PowerPlant_MapScript1_16376F:: @ 816376F
 	checkflag FLAG_0x807
-	call_if 1, EventScript_163779
+	call_if eq, EventScript_163779
 	end
 
 EventScript_163779:: @ 8163779
 	specialvar VAR_RESULT, sub_80CA74C
 	compare_var_to_value VAR_RESULT, 7
-	goto_if 5, EventScript_1A77A9
+	goto_if ne, EventScript_1A77A9
 	removeobject VAR_LAST_TALKED
 	return
 
 PowerPlant_MapScript2_16378D:: @ 816378D
 	setworldmapflag FLAG_WORLD_MAP_POWER_PLANT
 	checkflag FLAG_0x2BF
-	call_if 0, EventScript_1637AC
+	call_if lt, EventScript_1637AC
 	checkflag FLAG_0x2D0
-	call_if 0, EventScript_1637B0
+	call_if lt, EventScript_1637B0
 	checkflag FLAG_0x2D1
-	call_if 0, EventScript_1637B4
+	call_if lt, EventScript_1637B4
 	end
 
 EventScript_1637AC:: @ 81637AC

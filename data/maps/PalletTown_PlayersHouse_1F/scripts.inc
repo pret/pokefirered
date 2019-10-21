@@ -8,9 +8,9 @@ PalletTown_PlayersHouse_1F_EventScript_168C09:: @ 8168C09
 	goto_if_eq EventScript_168C4A
 	checkplayergender
 	compare_var_to_value VAR_RESULT, 0
-	call_if 1, EventScript_168C38
+	call_if eq, EventScript_168C38
 	compare_var_to_value VAR_RESULT, 1
-	call_if 1, EventScript_168C41
+	call_if eq, EventScript_168C41
 	closemessage
 	applymovement 1, Movement_1A75E5
 	waitmovement 0
@@ -44,9 +44,9 @@ PalletTown_PlayersHouse_1F_EventScript_168C62:: @ 8168C62
 EventScript_168C78:: @ 8168C78
 	checkplayergender
 	compare_var_to_value VAR_RESULT, 0
-	call_if 1, EventScript_168C91
+	call_if eq, EventScript_168C91
 	compare_var_to_value VAR_RESULT, 1
-	call_if 1, EventScript_168C9A
+	call_if eq, EventScript_168C9A
 	releaseall
 	end
 

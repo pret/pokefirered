@@ -23,11 +23,11 @@ EventScript_170A97:: @ 8170A97
 	special sub_80E6900
 	waitstate
 	compare_var_to_value VAR_RESULT, 3
-	call_if 1, EventScript_170AFE
+	call_if eq, EventScript_170AFE
 	compare_var_to_value VAR_RESULT, 1
-	call_if 1, EventScript_170B0C
+	call_if eq, EventScript_170B0C
 	compare_var_to_value VAR_RESULT, 2
-	call_if 1, EventScript_170B17
+	call_if eq, EventScript_170B17
 	closemessage
 	special sp000_heal_pokemon
 	applymovement 255, Movement_170B28

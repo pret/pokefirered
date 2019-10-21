@@ -5,7 +5,7 @@ SaffronCity_Gym_EventScript_16EDD8:: @ 816EDD8
 	famechecker FAMECHECKER_SABRINA, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	trainerbattle 1, TRAINER_LEADER_SABRINA, 0, Text_19B53C, Text_19B602, EventScript_16EE0A
 	checkflag FLAG_0x29A
-	goto_if 0, EventScript_16EE3D
+	goto_if lt, EventScript_16EE3D
 	msgbox gUnknown_819B7F2
 	release
 	end

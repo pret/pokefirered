@@ -4,16 +4,16 @@ SilphCo_3F_MapScripts:: @ 81616C5
 
 SilphCo_3F_MapScript1_1616CB:: @ 81616CB
 	checkflag FLAG_0x27C
-	call_if 0, EventScript_1A81A5
+	call_if lt, EventScript_1A81A5
 	checkflag FLAG_0x27D
-	call_if 0, EventScript_1A81DC
+	call_if lt, EventScript_1A81DC
 	end
 
 SilphCo_3F_EventScript_1616DE:: @ 81616DE
 	lock
 	faceplayer
 	compare_var_to_value VAR_MAP_SCENE_SILPH_CO_11F, 1
-	goto_if 4, EventScript_1616F5
+	goto_if ge, EventScript_1616F5
 	msgbox gUnknown_81758AD
 	release
 	end

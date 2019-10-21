@@ -5,7 +5,7 @@ CeladonCity_Gym_EventScript_16D061:: @ 816D061
 	famechecker FAMECHECKER_ERIKA, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	trainerbattle 1, TRAINER_LEADER_ERIKA, 0, Text_197114, Text_197260, EventScript_16D0A0
 	checkflag FLAG_0x293
-	goto_if 0, EventScript_16D0C6
+	goto_if lt, EventScript_16D0C6
 	famechecker FAMECHECKER_ERIKA, 4
 	msgbox gUnknown_81972B8
 	release

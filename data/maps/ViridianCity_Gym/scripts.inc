@@ -5,7 +5,7 @@ ViridianCity_Gym_EventScript_169ECA:: @ 8169ECA
 	famechecker FAMECHECKER_GIOVANNI, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	trainerbattle 1, TRAINER_LEADER_GIOVANNI, 0, Text_18F352, Text_18F43F, EventScript_169F04
 	checkflag FLAG_0x298
-	goto_if 0, EventScript_169F2F
+	goto_if lt, EventScript_169F2F
 	msgbox gUnknown_818F4A2
 	closemessage
 	fadescreen 1

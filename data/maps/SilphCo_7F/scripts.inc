@@ -5,16 +5,16 @@ SilphCo_7F_MapScripts:: @ 8161984
 
 SilphCo_7F_MapScript1_16198F:: @ 816198F
 	checkflag FLAG_0x284
-	call_if 0, EventScript_1A834B
+	call_if lt, EventScript_1A834B
 	checkflag FLAG_0x285
-	call_if 0, EventScript_1A8379
+	call_if lt, EventScript_1A8379
 	checkflag FLAG_0x286
-	call_if 0, EventScript_1A83A7
+	call_if lt, EventScript_1A83A7
 	end
 
 SilphCo_7F_MapScript2_1619AB:: @ 81619AB
 	compare_var_to_value VAR_MAP_SCENE_SILPH_CO_11F, 1
-	call_if 4, EventScript_1619B7
+	call_if ge, EventScript_1619B7
 	end
 
 EventScript_1619B7:: @ 81619B7
@@ -47,24 +47,24 @@ EventScript_1619D4:: @ 81619D4
 	waitmovement 0
 	msgbox gUnknown_8176710
 	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_161A73
+	call_if eq, EventScript_161A73
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_161A7F
+	call_if eq, EventScript_161A7F
 	msgbox gUnknown_8176727
 	setvar VAR_LAST_TALKED, 1
 	compare_var_to_value VAR_STARTER_MON, 2
-	call_if 1, EventScript_161A80
+	call_if eq, EventScript_161A80
 	compare_var_to_value VAR_STARTER_MON, 1
-	call_if 1, EventScript_161A8B
+	call_if eq, EventScript_161A8B
 	compare_var_to_value VAR_STARTER_MON, 0
-	call_if 1, EventScript_161A96
+	call_if eq, EventScript_161A96
 	msgbox gUnknown_8176827
 	closemessage
 	playbgm MUS_RIVAL2, 0
 	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_161AA1
+	call_if eq, EventScript_161AA1
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_161AAC
+	call_if eq, EventScript_161AAC
 	playse SE_TK_WARPIN
 	fadedefaultbgm
 	removeobject 1
@@ -200,7 +200,7 @@ SilphCo_7F_EventScript_161B97:: @ 8161B97
 	lock
 	faceplayer
 	compare_var_to_value VAR_MAP_SCENE_SILPH_CO_11F, 1
-	goto_if 4, EventScript_161BAE
+	goto_if ge, EventScript_161BAE
 	msgbox gUnknown_8176444
 	release
 	end
@@ -214,7 +214,7 @@ SilphCo_7F_EventScript_161BB8:: @ 8161BB8
 	lock
 	faceplayer
 	compare_var_to_value VAR_MAP_SCENE_SILPH_CO_11F, 1
-	goto_if 4, EventScript_161BCF
+	goto_if ge, EventScript_161BCF
 	msgbox gUnknown_81764C2
 	release
 	end
@@ -228,7 +228,7 @@ SilphCo_7F_EventScript_161BD9:: @ 8161BD9
 	lock
 	faceplayer
 	compare_var_to_value VAR_MAP_SCENE_SILPH_CO_11F, 1
-	goto_if 4, EventScript_161BF0
+	goto_if ge, EventScript_161BF0
 	msgbox gUnknown_8176532
 	release
 	end

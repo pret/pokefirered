@@ -4,9 +4,9 @@ Route20_MapScripts:: @ 816823B
 
 Route20_MapScript1_168241:: @ 8168241
 	checkflag FLAG_0x2D2
-	call_if 0, EventScript_168254
+	call_if lt, EventScript_168254
 	checkflag FLAG_0x2D3
-	call_if 0, EventScript_16826D
+	call_if lt, EventScript_16826D
 	end
 
 EventScript_168254:: @ 8168254

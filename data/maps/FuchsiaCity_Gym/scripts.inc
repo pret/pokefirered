@@ -5,7 +5,7 @@ FuchsiaCity_Gym_EventScript_16D54E:: @ 816D54E
 	famechecker FAMECHECKER_KOGA, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	trainerbattle 1, TRAINER_LEADER_KOGA, 0, Text_19832E, Text_198444, EventScript_16D580
 	checkflag FLAG_0x259
-	goto_if 0, EventScript_16D5A6
+	goto_if lt, EventScript_16D5A6
 	msgbox gUnknown_8198481
 	release
 	end

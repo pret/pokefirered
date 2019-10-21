@@ -1412,7 +1412,7 @@
 @ Supplementary
 
 	.macro goto_if_eq dest
-	goto_if 1, \dest
+	goto_if eq, \dest
 	.endm
 
 	.macro switch var

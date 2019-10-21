@@ -21,10 +21,10 @@ TwoIsland_House_EventScript_171619:: @ 8171619
 EventScript_17164F:: @ 817164F
 	checkitem ITEM_BIG_MUSHROOM, 1
 	compare_var_to_value VAR_RESULT, 1
-	call_if 1, EventScript_1717A8
+	call_if eq, EventScript_1717A8
 	checkitem ITEM_TINY_MUSHROOM, 2
 	compare_var_to_value VAR_RESULT, 1
-	call_if 1, EventScript_1717AC
+	call_if eq, EventScript_1717AC
 	checkflag FLAG_TEMP_2
 	goto_if_eq EventScript_171687
 	checkflag FLAG_TEMP_3
@@ -34,13 +34,13 @@ EventScript_17164F:: @ 817164F
 
 EventScript_171687:: @ 8171687
 	checkflag FLAG_TEMP_3
-	call_if 1, EventScript_1717B0
+	call_if eq, EventScript_1717B0
 	goto EventScript_1716A5
 	end
 
 EventScript_171696:: @ 8171696
 	checkflag FLAG_TEMP_2
-	call_if 1, EventScript_1717B0
+	call_if eq, EventScript_1717B0
 	goto EventScript_1716A5
 	end
 
@@ -56,7 +56,7 @@ EventScript_1716BE:: @ 81716BE
 	special sub_80BF93C
 	waitstate
 	compare_var_to_value VAR_0x8004, 6
-	goto_if 4, EventScript_17179E
+	goto_if ge, EventScript_17179E
 	special sub_80BFC14
 	compare_var_to_value VAR_RESULT, 1
 	goto_if_eq EventScript_171790

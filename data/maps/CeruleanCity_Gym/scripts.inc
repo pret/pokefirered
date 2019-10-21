@@ -5,7 +5,7 @@ CeruleanCity_Gym_EventScript_16AAA1:: @ 816AAA1
 	famechecker FAMECHECKER_MISTY, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	trainerbattle 1, TRAINER_LEADER_MISTY, 0, Text_1921EF, Text_19242D, EventScript_16AAD3
 	checkflag FLAG_0x297
-	goto_if 0, EventScript_16AAF9
+	goto_if lt, EventScript_16AAF9
 	msgbox gUnknown_81922BF
 	release
 	end

@@ -8,33 +8,33 @@ SeafoamIslands_B4F_MapScripts:: @ 816302E
 
 SeafoamIslands_B4F_MapScript2_163048:: @ 8163048
 	checkflag FLAG_0x807
-	call_if 1, EventScript_163052
+	call_if eq, EventScript_163052
 	end
 
 EventScript_163052:: @ 8163052
 	specialvar VAR_RESULT, sub_80CA74C
 	compare_var_to_value VAR_RESULT, 7
-	goto_if 5, EventScript_1A77A9
+	goto_if ne, EventScript_1A77A9
 	removeobject VAR_LAST_TALKED
 	return
 
 SeafoamIslands_B4F_MapScript1_163066:: @ 8163066
 	checkflag FLAG_0x2BE
-	call_if 0, EventScript_1630AD
+	call_if lt, EventScript_1630AD
 	checkflag FLAG_0x2D3
-	call_if 0, EventScript_163082
+	call_if lt, EventScript_163082
 	checkflag FLAG_0x2D3
-	call_if 1, EventScript_1630A9
+	call_if eq, EventScript_1630A9
 	end
 
 EventScript_163082:: @ 8163082
 	setvar VAR_0x4002, 0
 	checkflag FLAG_HIDE_SEAFOAM_B4F_BOULDER_1
-	call_if 0, EventScript_163169
+	call_if lt, EventScript_163169
 	checkflag FLAG_HIDE_SEAFOAM_B4F_BOULDER_2
-	call_if 0, EventScript_163169
+	call_if lt, EventScript_163169
 	compare_var_to_value VAR_0x4002, 2
-	call_if 1, EventScript_1630A5
+	call_if eq, EventScript_1630A5
 	return
 
 EventScript_1630A5:: @ 81630A5
@@ -52,9 +52,9 @@ EventScript_1630AD:: @ 81630AD
 SeafoamIslands_B4F_MapScript3_1630B1:: @ 81630B1
 	setvar VAR_0x4002, 0
 	checkflag FLAG_HIDE_SEAFOAM_B4F_BOULDER_1
-	call_if 0, EventScript_163169
+	call_if lt, EventScript_163169
 	checkflag FLAG_HIDE_SEAFOAM_B4F_BOULDER_2
-	call_if 0, EventScript_163169
+	call_if lt, EventScript_163169
 	compare_var_to_value VAR_0x4002, 2
 	goto_if_eq EventScript_1630D4
 	end
@@ -96,16 +96,16 @@ EventScript_163121:: @ 8163121
 	lockall
 	setvar VAR_0x4002, 0
 	checkflag FLAG_HIDE_SEAFOAM_B4F_BOULDER_1
-	call_if 0, EventScript_163169
+	call_if lt, EventScript_163169
 	checkflag FLAG_HIDE_SEAFOAM_B4F_BOULDER_2
-	call_if 0, EventScript_163169
+	call_if lt, EventScript_163169
 	compare_var_to_value VAR_0x4002, 2
 	goto_if_eq EventScript_163185
 	getplayerxy VAR_0x8008, VAR_0x8009
 	compare_var_to_value VAR_0x8008, 9
-	call_if 0, EventScript_16316F
+	call_if lt, EventScript_16316F
 	compare_var_to_value VAR_0x8008, 9
-	call_if 4, EventScript_16317A
+	call_if ge, EventScript_16317A
 	special sub_805D1A8
 	setvar VAR_0x4001, 0
 	releaseall

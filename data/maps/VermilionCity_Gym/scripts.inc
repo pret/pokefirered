@@ -5,9 +5,9 @@ VermilionCity_Gym_MapScripts:: @ 816B69E
 
 VermilionCity_Gym_MapScript1_16B6A9:: @ 816B6A9
 	checkflag FLAG_TEMP_1
-	call_if 1, EventScript_16B6BC
+	call_if eq, EventScript_16B6BC
 	checkflag FLAG_0x264
-	call_if 1, EventScript_16B717
+	call_if eq, EventScript_16B717
 	end
 
 EventScript_16B6BC:: @ 816B6BC
@@ -211,7 +211,7 @@ VermilionCity_Gym_EventScript_16B94A:: @ 816B94A
 	famechecker FAMECHECKER_LTSURGE, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	trainerbattle 1, TRAINER_LEADER_LT_SURGE, 0, Text_194BA4, Text_194E03, EventScript_16B97C
 	checkflag FLAG_GOT_TM34_FROM_SURGE
-	goto_if 0, EventScript_16B9AF
+	goto_if lt, EventScript_16B9AF
 	msgbox gUnknown_8194C8E
 	release
 	end
@@ -219,7 +219,7 @@ VermilionCity_Gym_EventScript_16B94A:: @ 816B94A
 EventScript_16B97C:: @ 816B97C
 	famechecker FAMECHECKER_LTSURGE, 1
 	checkflag FLAG_GOT_HM05
-	call_if 0, EventScript_16B9AB
+	call_if lt, EventScript_16B9AB
 	clearflag FLAG_HIDE_FAME_CHECKER_LT_SURGE_JOURNAL
 	setflag FLAG_DEFEATED_LT_SURGE
 	setflag FLAG_BADGE03_GET

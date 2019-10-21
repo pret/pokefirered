@@ -6,7 +6,7 @@ IndigoPlateau_Exterior_MapScripts:: @ 816723B
 IndigoPlateau_Exterior_MapScript1_167246:: @ 8167246
 	setworldmapflag FLAG_WORLD_MAP_INDIGO_PLATEAU_EXTERIOR
 	compare_var_to_value VAR_MAP_SCENE_INDIGO_PLATEAU_EXTERIOR, 1
-	call_if 1, EventScript_167255
+	call_if eq, EventScript_167255
 	end
 
 EventScript_167255:: @ 8167255

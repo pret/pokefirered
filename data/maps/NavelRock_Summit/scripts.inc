@@ -5,9 +5,9 @@ NavelRock_Summit_MapScripts:: @ 8164F9F
 
 NavelRock_Summit_MapScript1_164FAA:: @ 8164FAA
 	checkflag FLAG_0x2F3
-	call_if 1, EventScript_164FBD
+	call_if eq, EventScript_164FBD
 	checkflag FLAG_0x2F3
-	call_if 0, EventScript_164FC6
+	call_if lt, EventScript_164FC6
 	end
 
 EventScript_164FBD:: @ 8164FBD
@@ -25,13 +25,13 @@ EventScript_164FC6:: @ 8164FC6
 
 NavelRock_Summit_MapScript2_164FDD:: @ 8164FDD
 	checkflag FLAG_0x807
-	call_if 1, EventScript_164FE7
+	call_if eq, EventScript_164FE7
 	end
 
 EventScript_164FE7:: @ 8164FE7
 	specialvar VAR_RESULT, sub_80CA74C
 	compare_var_to_value VAR_RESULT, 7
-	goto_if 5, EventScript_1A77A9
+	goto_if ne, EventScript_1A77A9
 	removeobject 1
 	return
 

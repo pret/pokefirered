@@ -4,7 +4,7 @@ MtMoon_B2F_MapScripts:: @ 8160699
 
 MtMoon_B2F_MapScript1_16069F:: @ 816069F
 	checkflag FLAG_GOT_FOSSIL_FROM_MT_MOON
-	call_if 0, EventScript_1606A9
+	call_if lt, EventScript_1606A9
 	end
 
 EventScript_1606A9:: @ 81606A9

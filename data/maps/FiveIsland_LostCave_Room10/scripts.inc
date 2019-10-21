@@ -5,7 +5,7 @@ FiveIsland_LostCave_Room10_MapScripts:: @ 8164C2D
 
 FiveIsland_LostCave_Room10_MapScript1_164C38:: @ 8164C38
 	checktrainerflag TRAINER_LADY_SELPHY
-	call_if 1, EventScript_164C42
+	call_if eq, EventScript_164C42
 	end
 
 EventScript_164C42:: @ 8164C42

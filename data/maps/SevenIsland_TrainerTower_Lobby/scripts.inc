@@ -31,7 +31,7 @@ SevenIsland_TrainerTower_Lobby_MapScript2_164887:: @ 8164887
 
 SevenIsland_TrainerTower_Lobby_MapScript4_164897:: @ 8164897
 	compare_var_to_value VAR_0x400D, 17
-	call_if 1, EventScript_1648A3
+	call_if eq, EventScript_1648A3
 	end
 
 EventScript_1648A3:: @ 81648A3

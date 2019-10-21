@@ -6,7 +6,7 @@ Route16_MapScripts:: @ 81680E5
 
 Route16_MapScript1_1680F5:: @ 81680F5
 	checkflag FLAG_0x807
-	call_if 1, EventScript_1680FF
+	call_if eq, EventScript_1680FF
 	end
 
 EventScript_1680FF:: @ 81680FF
@@ -15,7 +15,7 @@ EventScript_1680FF:: @ 81680FF
 
 Route16_MapScript2_168103:: @ 8168103
 	compare_var_to_value VAR_MAP_SCENE_ROUTE16, 1
-	call_if 1, EventScript_16810F
+	call_if eq, EventScript_16810F
 	end
 
 EventScript_16810F:: @ 816810F
@@ -34,7 +34,7 @@ Route16_EventScript_168121:: @ 8168121
 	lock
 	faceplayer
 	checkflag FLAG_GOT_POKE_FLUTE
-	goto_if 0, EventScript_1681A3
+	goto_if lt, EventScript_1681A3
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
 	goto_if_eq EventScript_1A7AE0

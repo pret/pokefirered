@@ -4,7 +4,7 @@ SixIsland_RuinValley_MapScripts:: @ 8168B53
 
 SixIsland_RuinValley_MapScript1_168B59:: @ 8168B59
 	checkflag FLAG_0x2E3
-	call_if 1, EventScript_168B63
+	call_if eq, EventScript_168B63
 	end
 
 EventScript_168B63:: @ 8168B63

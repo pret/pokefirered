@@ -17,10 +17,10 @@ CinnabarIsland_PokemonLab_Lounge_EventScript_16E2C2:: @ 816E2C2
 	goto_if_eq EventScript_16E31C
 	call EventScript_1A8CBD
 	compare_var_to_value VAR_0x8004, 6
-	goto_if 4, EventScript_16E31C
+	goto_if ge, EventScript_16E31C
 	call EventScript_1A8CC9
 	compare_var_to_var VAR_RESULT, VAR_0x8009
-	goto_if 5, EventScript_16E326
+	goto_if ne, EventScript_16E326
 	call EventScript_1A8CD9
 	msgbox gUnknown_81A5A9D
 	setflag FLAG_0x274
@@ -59,12 +59,12 @@ CinnabarIsland_PokemonLab_Lounge_EventScript_16E33E:: @ 816E33E
 	waitstate
 	copyvar VAR_0x800A, VAR_0x8004
 	compare_var_to_value VAR_0x8004, 6
-	goto_if 4, EventScript_16E3BC
+	goto_if ge, EventScript_16E3BC
 	copyvar VAR_0x8005, VAR_0x800A
 	specialvar VAR_RESULT, sub_8053D2C
 	copyvar VAR_0x800B, VAR_RESULT
 	compare_var_to_var VAR_RESULT, VAR_0x8009
-	goto_if 5, EventScript_16E3C6
+	goto_if ne, EventScript_16E3C6
 	copyvar VAR_0x8004, VAR_0x8008
 	copyvar VAR_0x8005, VAR_0x800A
 	special sub_8053D68

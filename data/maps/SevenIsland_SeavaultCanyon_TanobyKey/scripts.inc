@@ -5,7 +5,7 @@ SevenIsland_SeavaultCanyon_TanobyKey_MapScripts:: @ 8164DCC
 SevenIsland_SeavaultCanyon_TanobyKey_MapScript1_164DD2:: @ 8164DD2
 	setworldmapflag FLAG_WORLD_MAP_SEVEN_ISLAND_SEAVAULT_CANYON_TANOBY_KEY
 	checkflag FLAG_0x849
-	call_if 1, EventScript_164E07
+	call_if eq, EventScript_164E07
 	setvar VAR_0x4001, 0
 	setvar VAR_0x4002, 0
 	setvar VAR_0x4003, 0

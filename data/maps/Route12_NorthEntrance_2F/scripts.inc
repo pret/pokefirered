@@ -16,9 +16,9 @@ Route12_NorthEntrance_2F_EventScript_16FE8A:: @ 816FE8A
 	goto_if_eq EventScript_16FF01
 	checkplayergender
 	compare_var_to_value VAR_RESULT, 0
-	call_if 1, EventScript_16FEE5
+	call_if eq, EventScript_16FEE5
 	compare_var_to_value VAR_RESULT, 1
-	call_if 1, EventScript_16FEEE
+	call_if eq, EventScript_16FEEE
 	checkitemspace ITEM_TM27, 1
 	compare_var_to_value VAR_RESULT, 0
 	goto_if_eq EventScript_16FEF7

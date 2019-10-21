@@ -4,7 +4,7 @@ PokemonMansion_2F_MapScripts:: @ 8162254
 
 PokemonMansion_2F_MapScript1_16225A:: @ 816225A
 	checkflag FLAG_0x26C
-	call_if 1, EventScript_1A7D3E
+	call_if eq, EventScript_1A7D3E
 	end
 
 PokemonMansion_2F_EventScript_162264:: @ 8162264

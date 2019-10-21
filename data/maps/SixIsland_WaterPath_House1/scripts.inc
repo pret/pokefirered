@@ -18,7 +18,7 @@ SixIsland_WaterPath_House1_EventScript_17206D:: @ 817206D
 	waitstate
 	copyvar VAR_RESULT, VAR_0x8004
 	compare_var_to_value VAR_RESULT, 6
-	goto_if 4, EventScript_1720EF
+	goto_if ge, EventScript_1720EF
 	special sub_80A0930
 	compare_var_to_value VAR_RESULT, 1
 	goto_if_eq EventScript_1720F1
@@ -47,14 +47,14 @@ EventScript_1720F1:: @ 81720F1
 
 EventScript_1720FB:: @ 81720FB
 	checkflag FLAG_0x2D9
-	goto_if 0, EventScript_172121
+	goto_if lt, EventScript_172121
 	msgbox gUnknown_81A4B7A
 	release
 	end
 
 EventScript_17210E:: @ 817210E
 	checkflag FLAG_0x2D9
-	goto_if 0, EventScript_172121
+	goto_if lt, EventScript_172121
 	msgbox gUnknown_81A4B39
 	release
 	end

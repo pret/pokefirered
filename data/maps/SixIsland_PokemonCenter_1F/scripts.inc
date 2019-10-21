@@ -7,7 +7,7 @@ SixIsland_PokemonCenter_1F_MapScripts:: @ 8171D6A
 SixIsland_PokemonCenter_1F_MapScript1_171D7A:: @ 8171D7A
 	setrespawn SPAWN_SIX_ISLAND
 	compare_var_to_value VAR_MAP_SCENE_SIX_ISLAND_POKEMON_CENTER_1F, 0
-	call_if 1, EventScript_171D89
+	call_if eq, EventScript_171D89
 	end
 
 EventScript_171D89:: @ 8171D89

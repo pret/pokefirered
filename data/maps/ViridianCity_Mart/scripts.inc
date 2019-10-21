@@ -5,7 +5,7 @@ ViridianCity_Mart_MapScripts:: @ 816A1D3
 
 ViridianCity_Mart_MapScript1_16A1DE:: @ 816A1DE
 	checkflag FLAG_SYS_POKEDEX_GET
-	goto_if 0, EventScript_16A1E8
+	goto_if lt, EventScript_16A1E8
 	end
 
 EventScript_16A1E8:: @ 816A1E8

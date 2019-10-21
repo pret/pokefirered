@@ -4,7 +4,7 @@ VictoryRoad_3F_MapScripts:: @ 81610AA
 
 VictoryRoad_3F_MapScript1_1610B0:: @ 81610B0
 	compare_var_to_value VAR_MAP_SCENE_VICTORY_ROAD_3F, 100
-	call_if 5, EventScript_1610BC
+	call_if ne, EventScript_1610BC
 	end
 
 EventScript_1610BC:: @ 81610BC

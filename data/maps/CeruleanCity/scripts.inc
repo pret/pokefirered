@@ -5,7 +5,7 @@ CeruleanCity_MapScripts:: @ 8166471
 CeruleanCity_MapScript1_166477:: @ 8166477
 	setworldmapflag FLAG_WORLD_MAP_CERULEAN_CITY
 	checkflag FLAG_GOT_SS_TICKET
-	call_if 0, EventScript_166484
+	call_if lt, EventScript_166484
 	end
 
 EventScript_166484:: @ 8166484
@@ -44,21 +44,21 @@ EventScript_1664CC:: @ 81664CC
 	msgbox gUnknown_817EAD7
 	setvar VAR_LAST_TALKED, 8
 	compare_var_to_value VAR_STARTER_MON, 2
-	call_if 1, EventScript_166582
+	call_if eq, EventScript_166582
 	compare_var_to_value VAR_STARTER_MON, 1
-	call_if 1, EventScript_16658D
+	call_if eq, EventScript_16658D
 	compare_var_to_value VAR_STARTER_MON, 0
-	call_if 1, EventScript_166598
+	call_if eq, EventScript_166598
 	famechecker FAMECHECKER_BILL, 0
 	msgbox gUnknown_817EB95
 	closemessage
 	playbgm MUS_RIVAL2, 0
 	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_1665A3
+	call_if eq, EventScript_1665A3
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_1665A3
+	call_if eq, EventScript_1665A3
 	compare_var_to_value VAR_0x4001, 2
-	call_if 1, EventScript_1665B5
+	call_if eq, EventScript_1665B5
 	msgbox gUnknown_817ECD4
 	setvar VAR_MAP_SCENE_CERULEAN_CITY_RIVAL, 1
 	setflag FLAG_0x29B
@@ -284,11 +284,11 @@ CeruleanCity_EventScript_16674F:: @ 816674F
 	random 3
 	copyvar VAR_0x8008, VAR_RESULT
 	compare_var_to_value VAR_0x8008, 0
-	call_if 1, EventScript_1667B0
+	call_if eq, EventScript_1667B0
 	compare_var_to_value VAR_0x8008, 1
-	call_if 1, EventScript_1667B6
+	call_if eq, EventScript_1667B6
 	compare_var_to_value VAR_0x8008, 2
-	call_if 1, EventScript_1667BC
+	call_if eq, EventScript_1667BC
 	waitmessage
 	delay 40
 	playse SE_PIN
@@ -296,11 +296,11 @@ CeruleanCity_EventScript_16674F:: @ 816674F
 	waitmovement 0
 	delay 30
 	compare_var_to_value VAR_0x8008, 0
-	call_if 1, EventScript_1667C2
+	call_if eq, EventScript_1667C2
 	compare_var_to_value VAR_0x8008, 1
-	call_if 1, EventScript_1667CB
+	call_if eq, EventScript_1667CB
 	compare_var_to_value VAR_0x8008, 2
-	call_if 1, EventScript_1667D4
+	call_if eq, EventScript_1667D4
 	release
 	end
 
@@ -333,13 +333,13 @@ CeruleanCity_EventScript_1667DD:: @ 81667DD
 	random 4
 	copyvar VAR_0x8008, VAR_RESULT
 	compare_var_to_value VAR_0x8008, 0
-	call_if 1, EventScript_166814
+	call_if eq, EventScript_166814
 	compare_var_to_value VAR_0x8008, 1
-	call_if 1, EventScript_16681D
+	call_if eq, EventScript_16681D
 	compare_var_to_value VAR_0x8008, 2
-	call_if 1, EventScript_166826
+	call_if eq, EventScript_166826
 	compare_var_to_value VAR_0x8008, 3
-	call_if 1, EventScript_16682F
+	call_if eq, EventScript_16682F
 	release
 	end
 

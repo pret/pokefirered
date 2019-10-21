@@ -5,7 +5,7 @@ SaffronCity_MapScripts:: @ 816735F
 SaffronCity_MapScript1_167365:: @ 8167365
 	setworldmapflag FLAG_WORLD_MAP_SAFFRON_CITY
 	checkflag FLAG_RESCUED_MR_FUJI
-	call_if 0, EventScript_167372
+	call_if lt, EventScript_167372
 	end
 
 EventScript_167372:: @ 8167372

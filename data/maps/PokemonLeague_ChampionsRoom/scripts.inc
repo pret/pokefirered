@@ -8,11 +8,11 @@ PokemonLeague_ChampionsRoom_MapScript2_162AF2:: @ 8162AF2
 	setvar VAR_0x8004, 4
 	call EventScript_1A75D5
 	compare_var_to_value VAR_STARTER_MON, 2
-	call_if 1, EventScript_162B1E
+	call_if eq, EventScript_162B1E
 	compare_var_to_value VAR_STARTER_MON, 1
-	call_if 1, EventScript_162B31
+	call_if eq, EventScript_162B31
 	compare_var_to_value VAR_STARTER_MON, 0
-	call_if 1, EventScript_162B44
+	call_if eq, EventScript_162B44
 	end
 
 EventScript_162B1E:: @ 8162B1E
@@ -60,9 +60,9 @@ EventScript_162B76:: @ 8162B76
 	waitmovement 0
 	delay 20
 	checkflag FLAG_SYS_GAME_CLEAR
-	call_if 0, EventScript_162CB3
+	call_if lt, EventScript_162CB3
 	checkflag FLAG_SYS_GAME_CLEAR
-	call_if 1, EventScript_162CBC
+	call_if eq, EventScript_162CBC
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
 	goto_if_eq EventScript_162C68
@@ -70,9 +70,9 @@ EventScript_162B76:: @ 8162B76
 	setflag FLAG_TEMP_5
 	savebgm MUS_WIN_GYM
 	checkflag FLAG_0x844
-	call_if 0, EventScript_162C6F
+	call_if lt, EventScript_162C6F
 	checkflag FLAG_0x844
-	call_if 1, EventScript_162C91
+	call_if eq, EventScript_162C91
 	setflag FLAG_TEMP_4
 	clearflag FLAG_TEMP_5
 	setflag FLAG_DEFEATED_CHAMP
@@ -117,20 +117,20 @@ EventScript_162C68:: @ 8162C68
 
 EventScript_162C6F:: @ 8162C6F
 	compare_var_to_value VAR_STARTER_MON, 2
-	call_if 1, EventScript_162CC5
+	call_if eq, EventScript_162CC5
 	compare_var_to_value VAR_STARTER_MON, 1
-	call_if 1, EventScript_162CD0
+	call_if eq, EventScript_162CD0
 	compare_var_to_value VAR_STARTER_MON, 0
-	call_if 1, EventScript_162CDB
+	call_if eq, EventScript_162CDB
 	return
 
 EventScript_162C91:: @ 8162C91
 	compare_var_to_value VAR_STARTER_MON, 2
-	call_if 1, EventScript_162CE6
+	call_if eq, EventScript_162CE6
 	compare_var_to_value VAR_STARTER_MON, 1
-	call_if 1, EventScript_162CF1
+	call_if eq, EventScript_162CF1
 	compare_var_to_value VAR_STARTER_MON, 0
-	call_if 1, EventScript_162CFC
+	call_if eq, EventScript_162CFC
 	return
 
 EventScript_162CB3:: @ 8162CB3

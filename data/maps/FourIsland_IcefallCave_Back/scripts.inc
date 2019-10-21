@@ -4,7 +4,7 @@ FourIsland_IcefallCave_Back_MapScripts:: @ 8163D82
 
 FourIsland_IcefallCave_Back_MapScript1_163D88:: @ 8163D88
 	compare_var_to_value VAR_MAP_SCENE_ICEFALL_CAVE_BACK, 1
-	call_if 1, EventScript_163D94
+	call_if eq, EventScript_163D94
 	end
 
 EventScript_163D94:: @ 8163D94

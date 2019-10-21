@@ -7,9 +7,9 @@ OneIsland_PokemonCenter_1F_MapScripts:: @ 8170BF8
 
 OneIsland_PokemonCenter_1F_MapScript3_170C0D:: @ 8170C0D
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
-	call_if 4, EventScript_170C22
+	call_if ge, EventScript_170C22
 	checkflag FLAG_0x844
-	call_if 1, EventScript_170C36
+	call_if eq, EventScript_170C36
 	end
 
 EventScript_170C22:: @ 8170C22
@@ -29,11 +29,11 @@ EventScript_170C36:: @ 8170C36
 OneIsland_PokemonCenter_1F_MapScript1_170C4E:: @ 8170C4E
 	setrespawn SPAWN_ONE_ISLAND
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 6
-	call_if 1, EventScript_170C73
+	call_if eq, EventScript_170C73
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 0
-	call_if 1, EventScript_170C79
+	call_if eq, EventScript_170C79
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 2
-	call_if 1, EventScript_170C90
+	call_if eq, EventScript_170C90
 	end
 
 EventScript_170C73:: @ 8170C73
@@ -85,9 +85,9 @@ EventScript_170CB1:: @ 8170CB1
 	applymovement 255, Movement_1A75EB
 	waitmovement 0
 	checkflag FLAG_SYS_GAME_CLEAR
-	call_if 1, EventScript_170E34
+	call_if eq, EventScript_170E34
 	checkflag FLAG_SYS_GAME_CLEAR
-	call_if 0, EventScript_170E3D
+	call_if lt, EventScript_170E3D
 	applymovement 3, Movement_1A75ED
 	waitmovement 0
 	msgbox gUnknown_81A0E17
@@ -113,9 +113,9 @@ EventScript_170CB1:: @ 8170CB1
 	giveitemfanfaremsg gUnknown_81A231B, ITEM_TRI_PASS, 1, MUS_FAN5
 	msgbox gUnknown_81A1150
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
-	call_if 4, EventScript_170E46
+	call_if ge, EventScript_170E46
 	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
-	call_if 0, EventScript_170E58
+	call_if lt, EventScript_170E58
 	setflag FLAG_0x845
 	msgbox gUnknown_81A1230
 	closemessage
@@ -467,13 +467,13 @@ EventScript_1711DA:: @ 81711DA
 	msgbox gUnknown_81A13B8
 	closemessage
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_1712E4
+	call_if eq, EventScript_1712E4
 	compare_var_to_value VAR_0x4001, 2
-	call_if 1, EventScript_1712EF
+	call_if eq, EventScript_1712EF
 	compare_var_to_value VAR_0x4001, 3
-	call_if 1, EventScript_1712FA
+	call_if eq, EventScript_1712FA
 	compare_var_to_value VAR_0x4001, 4
-	call_if 1, EventScript_171305
+	call_if eq, EventScript_171305
 	delay 10
 	msgbox gUnknown_81A13CB
 	applymovement 255, Movement_1A75ED

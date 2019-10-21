@@ -5,7 +5,7 @@ PewterCity_Gym_EventScript_16A593:: @ 816A593
 	famechecker FAMECHECKER_BROCK, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	trainerbattle 1, TRAINER_LEADER_BROCK, 0, Text_190CD4, Text_190E4F, EventScript_16A5C5
 	checkflag FLAG_0x254
-	goto_if 0, EventScript_16A5F3
+	goto_if lt, EventScript_16A5F3
 	msgbox gUnknown_819110F
 	release
 	end

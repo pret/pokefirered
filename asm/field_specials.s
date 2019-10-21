@@ -581,8 +581,8 @@ _080CAA2C: .4byte 0x0000028f
 _080CAA30: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_80CA9A8
 
-	thumb_func_start SpawnScriptFieldObject
-SpawnScriptFieldObject: @ 80CAA34
+	thumb_func_start SpawnCameraObject
+SpawnCameraObject: @ 80CAA34
 	push {lr}
 	sub sp, 0x8
 	ldr r0, _080CAA80 @ =gSaveBlock1Ptr
@@ -621,10 +621,10 @@ SpawnScriptFieldObject: @ 80CAA34
 	.align 2, 0
 _080CAA80: .4byte gSaveBlock1Ptr
 _080CAA84: .4byte gMapObjects
-	thumb_func_end SpawnScriptFieldObject
+	thumb_func_end SpawnCameraObject
 
-	thumb_func_start RemoveScriptFieldObject
-RemoveScriptFieldObject: @ 80CAA88
+	thumb_func_start RemoveCameraObject
+RemoveCameraObject: @ 80CAA88
 	push {lr}
 	bl GetPlayerAvatarObjectId
 	lsls r0, 24
@@ -640,7 +640,7 @@ RemoveScriptFieldObject: @ 80CAA88
 	bx r0
 	.align 2, 0
 _080CAAA8: .4byte gSaveBlock1Ptr
-	thumb_func_end RemoveScriptFieldObject
+	thumb_func_end RemoveCameraObject
 
 	thumb_func_start sub_80CAAAC
 sub_80CAAAC: @ 80CAAAC

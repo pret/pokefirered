@@ -171,7 +171,7 @@ EventScript_1706FA:: @ 81706FA
 	closemessage
 	clearflag FLAG_TEMP_2
 	setflag FLAG_HELPED_BILL_IN_SEA_COTTAGE
-	special SpawnScriptFieldObject
+	special SpawnCameraObject
 	applymovement 127, Movement_1707BE
 	waitmovement 0
 	delay 35
@@ -214,7 +214,7 @@ EventScript_1706FA:: @ 81706FA
 	waitdooranim
 	applymovement 1, Movement_170881
 	waitmovement 0
-	special RemoveScriptFieldObject
+	special RemoveCameraObject
 	releaseall
 	end
 

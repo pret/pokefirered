@@ -41,7 +41,7 @@ EventScript_16FF7F:: @ 816FF7F
 	goto_if eq, EventScript_16FFF5
 	special sub_80A096C
 	msgbox gUnknown_819F2DB
-	special sub_80BF8FC
+	special Special_ChooseMonToDeleteMove
 	waitstate
 	copyvar VAR_RESULT, VAR_0x8004
 	compare_var_to_value VAR_RESULT, 6

@@ -6,33 +6,43 @@ IndigoPlateau_Exterior_MapScripts:: @ 816723B
 IndigoPlateau_Exterior_MapScript1_167246:: @ 8167246
 	setworldmapflag FLAG_WORLD_MAP_INDIGO_PLATEAU_EXTERIOR
 	compare_var_to_value VAR_MAP_SCENE_INDIGO_PLATEAU_EXTERIOR, 1
-	call_if eq, EventScript_167255
+	call_if eq, EventScript_IndigoPlateau_Exterior_PlayCreditsMusic
 	end
 
-EventScript_167255:: @ 8167255
+EventScript_IndigoPlateau_Exterior_PlayCreditsMusic:: @ 8167255
 	playbgm MUS_ENDING, 0
 	return
 
 IndigoPlateau_Exterior_MapScript2_16725A:: @ 816725A
-	map_script_2 VAR_MAP_SCENE_INDIGO_PLATEAU_EXTERIOR, 1, EventScript_167264
+	map_script_2 VAR_MAP_SCENE_INDIGO_PLATEAU_EXTERIOR, 1, EventScript_IndigoPlateau_Exterior_Credits
 	.2byte 0
 
-EventScript_167264:: @ 8167264
+EventScript_IndigoPlateau_Exterior_Credits:: @ 8167264
+	@ After beating the champion, you are warped to the main
+	@ entrance of Indigo Plateau. This script starts running
+	@ immediately after your walking animation.
+	@ The script is timed to the music.
 	lockall
 	delay 105
+
+	@ Rival exits building. Spawn a dummy object to lock the camera.
 	opendoor 11, 6
 	waitdooranim
-	special SpawnScriptFieldObject
+	special SpawnCameraObject
 	addobject 1
 	applymovement 1, Movement_167346
 	applymovement 255, Movement_167337
 	waitmovement 0
 	closedoor 11, 6
 	waitdooranim
+
+	@ Rival runs off
 	applymovement 255, Movement_16731B
 	applymovement 1, Movement_16733E
 	waitmovement 0
 	delay 100
+
+	@ Oak exits building
 	opendoor 11, 6
 	waitdooranim
 	addobject 2
@@ -41,6 +51,8 @@ EventScript_167264:: @ 8167264
 	closedoor 11, 6
 	waitdooranim
 	delay 160
+
+	@ Oak looks at player, then walks off
 	applymovement 255, Movement_16731F
 	applymovement 2, Movement_167348
 	waitmovement 0
@@ -48,18 +60,24 @@ EventScript_167264:: @ 8167264
 	applymovement 255, Movement_16732E
 	waitmovement 0
 	delay 155
+
+	@ Player turns to face the League
 	applymovement 255, Movement_16733C
 	waitmovement 0
 	delay 90
+
+	@ Player runs off
 	applymovement 255, Movement_167335
 	waitmovement 0
 	applymovement 255, Movement_167311
 	waitmovement 0
-	special RemoveScriptFieldObject
+
+	@ Reset the map state and roll the credits
+	special RemoveCameraObject
 	setvar VAR_MAP_SCENE_INDIGO_PLATEAU_EXTERIOR, 0
 	removeobject 1
 	removeobject 2
-	special Special_Credits
+	special Special_Credits @ noreturn
 	waitstate
 	releaseall
 	end

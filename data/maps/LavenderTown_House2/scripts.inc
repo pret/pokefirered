@@ -13,7 +13,7 @@ LavenderTown_House2_EventScript_16B266:: @ 816B266
 
 EventScript_16B287:: @ 816B287
 	msgbox gUnknown_8193AA6
-	special sub_80BF8FC
+	special Special_ChooseMonToDeleteMove
 	waitstate
 	compare_var_to_value VAR_0x8004, 6
 	goto_if lt, EventScript_16B2B4

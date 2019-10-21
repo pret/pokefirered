@@ -12,7 +12,7 @@ FuchsiaCity_House3_EventScript_16D895:: @ 816D895
 
 EventScript_16D8B0:: @ 816D8B0
 	msgbox gUnknown_8199421
-	special sub_80BF8FC
+	special Special_ChooseMonToDeleteMove
 	waitstate
 	compare_var_to_value VAR_0x8004, 6
 	goto_if ge, EventScript_16D941
@@ -24,7 +24,7 @@ EventScript_16D8B0:: @ 816D8B0
 	goto_if eq, EventScript_16D92A
 	msgbox gUnknown_8199445
 	fadescreen 1
-	special sub_80BF9BC
+	special Special_ChooseMoveToDelete
 	fadescreen 0
 	compare_var_to_value VAR_0x8005, 4
 	goto_if eq, EventScript_16D8B0
@@ -36,7 +36,7 @@ EventScript_16D8B0:: @ 816D8B0
 	end
 
 EventScript_16D919:: @ 816D919
-	special sub_80BFBA8
+	special Special_DeleteSelectedMove
 	playfanfare MUS_ME_WASURE
 	waitfanfare
 	msgbox gUnknown_81994B1

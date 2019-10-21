@@ -168,7 +168,7 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special sub_807F888
 	def_special ChangePokemonNickname
-	def_special sub_80BF8FC
+	def_special Special_ChooseMonToDeleteMove
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
@@ -229,8 +229,8 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special sub_80BF93C
-	def_special sub_80BF9BC
-	def_special sub_80BFBA8
+	def_special Special_ChooseMoveToDelete
+	def_special Special_DeleteSelectedMove
 	def_special ScrSpecial_GetPokemonNicknameAndMoveName
 	def_special ScrSpecial_CountPokemonMoves
 	def_special sub_80E4634
@@ -284,8 +284,8 @@ gSpecials:: @ 815FD60
 	def_special Special_HallOfFame
 	def_special sub_80CB498
 	def_special nullsub_75
-	def_special SpawnScriptFieldObject
-	def_special RemoveScriptFieldObject
+	def_special SpawnCameraObject
+	def_special RemoveCameraObject
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75

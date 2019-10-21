@@ -3897,7 +3897,7 @@ EventScript_1A8CAD:: @ 81A8CAD
 	return
 
 EventScript_1A8CBD:: @ 81A8CBD
-	special sub_80BF8FC
+	special Special_ChooseMonToDeleteMove
 	waitstate
 	lock
 	faceplayer

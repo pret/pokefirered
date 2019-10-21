@@ -14,7 +14,7 @@ SixIsland_WaterPath_House1_EventScript_17206D:: @ 817206D
 	goto_if eq, EventScript_1720E5
 	special sub_80A0918
 	msgbox gUnknown_81A4A3F
-	special sub_80BF8FC
+	special Special_ChooseMonToDeleteMove
 	waitstate
 	copyvar VAR_RESULT, VAR_0x8004
 	compare_var_to_value VAR_RESULT, 6

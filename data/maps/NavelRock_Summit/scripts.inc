@@ -42,7 +42,7 @@ NavelRock_Summit_EventScript_164FFB:: @ 8164FFB
 	special sub_8112364
 	lockall
 	setvar VAR_0x4001, 1
-	special SpawnScriptFieldObject
+	special SpawnCameraObject
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 35
 	special sub_80CD1B4
@@ -63,7 +63,7 @@ NavelRock_Summit_EventScript_164FFB:: @ 8164FFB
 	applymovement 127, Movement_1650D1
 	applymovement 1, Movement_1650D7
 	waitmovement 0
-	special RemoveScriptFieldObject
+	special RemoveCameraObject
 	setvar VAR_0x8004, SPECIES_HO_OH
 	setvar VAR_0x8005, 70
 	setvar VAR_0x8006, 0

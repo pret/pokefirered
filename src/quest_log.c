@@ -129,9 +129,9 @@ static u8 sub_8110E68(struct UnkStruct_203AE98 *);
 static void sub_8110F90(u8);
 static void sub_8111150(u8);
 static void sub_8111368(void);
-static void sub_81115E8(void);
-static u16 sub_8111618(void);
-static u16 sub_811164C(void);
+static void QuestLog_GetSaneMonCounts(void);
+static u16 QuestLog_GetSanePartyCount(void);
+static u16 QuestLog_GetSaneBoxCount(void);
 static void sub_8111688(void);
 static void sub_811175C(u8, struct UnkStruct_203AE98 *);
 static void sub_81118F4(s8);
@@ -541,7 +541,7 @@ void sub_8110AEC(u16 a0)
         gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_000 = 2;
     else
         gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_000 = 1;
-    sub_81115E8();
+    QuestLog_GetSaneMonCounts();
     sub_8110BB0(gUnknown_203ADF8);
     sub_8110BE8(gUnknown_203ADF8);
     sub_8110D94();
@@ -1012,8 +1012,8 @@ void sub_81113E4(void)
 struct PokemonAndSomethingElse
 {
     struct Pokemon mon;
-    u16 unk_64;
-    u16 unk_66;
+    u16 sanePartyCount;
+    u16 saneBoxesCount;
 };
 
 void sub_8111438(void)
@@ -1022,32 +1022,32 @@ void sub_8111438(void)
     u16 r0, r3, r5, r6;
 
     CreateMon(&r9->mon, SPECIES_RATTATA, 1, 0x20, FALSE, 0, 0, 0);
-    r0 = VarGet(VAR_0x4027);
-    r9->unk_64 = r0 >> 12;
-    r9->unk_66 = r0 % 0x1000;
+    r0 = VarGet(VAR_QUEST_LOG_MON_COUNTS);
+    r9->sanePartyCount = r0 >> 12;
+    r9->saneBoxesCount = r0 % 0x1000;
 
-    r5 = sub_8111618();
-    if (r5 > r9->unk_64)
+    r5 = QuestLog_GetSanePartyCount();
+    if (r5 > r9->sanePartyCount)
     {
-        for (r3 = 0; r3 < r5 - r9->unk_64; r3++)
+        for (r3 = 0; r3 < r5 - r9->sanePartyCount; r3++)
         {
             ZeroMonData(&gPlayerParty[5 - r3]);
         }
     }
-    else if (r5 < r9->unk_64)
+    else if (r5 < r9->sanePartyCount)
     {
         for (r3 = 0; r3 < 5; r3++)
         {
             sub_808BCB4(0, r3);
         }
-        for (r3 = r5; r3 < r9->unk_64; r3++)
+        for (r3 = r5; r3 < r9->sanePartyCount; r3++)
         {
             CopyMon(&gPlayerParty[r3], &r9->mon, sizeof(struct Pokemon));
         }
     }
 
-    r5 = sub_811164C();
-    if (r5 > r9->unk_66)
+    r5 = QuestLog_GetSaneBoxCount();
+    if (r5 > r9->saneBoxesCount)
     {
         for (r3 = 0; r3 < 14; r3++)
         {
@@ -1057,15 +1057,15 @@ void sub_8111438(void)
                 {
                     sub_808BCB4(r3, r6);
                     r5--;
-                    if (r5 == r9->unk_66)
+                    if (r5 == r9->saneBoxesCount)
                         break;
                 }
             }
-            if (r5 == r9->unk_66)
+            if (r5 == r9->saneBoxesCount)
                 break;
         }
     }
-    else if (r5 < r9->unk_66)
+    else if (r5 < r9->saneBoxesCount)
     {
         for (r3 = 0; r3 < TOTAL_BOXES_COUNT; r3++)
         {
@@ -1076,11 +1076,11 @@ void sub_8111438(void)
                 {
                     CopyMon(boxMon, &r9->mon.box, sizeof(struct BoxPokemon));
                     r5++;
-                    if (r5 == r9->unk_66)
+                    if (r5 == r9->saneBoxesCount)
                         break;
                 }
             }
-            if (r5 == r9->unk_66)
+            if (r5 == r9->saneBoxesCount)
                 break;
         }
     }
@@ -1088,14 +1088,14 @@ void sub_8111438(void)
     Free(r9);
 }
 
-static void sub_81115E8(void)
+static void QuestLog_GetSaneMonCounts(void)
 {
-    u16 r4 = sub_8111618();
-    u16 r1 = sub_811164C();
-    VarSet(VAR_0x4027, (r4 << 12) + r1);
+    u16 partyCount = QuestLog_GetSanePartyCount();
+    u16 boxesCount = QuestLog_GetSaneBoxCount();
+    VarSet(VAR_QUEST_LOG_MON_COUNTS, (partyCount << 12) + boxesCount);
 }
 
-static u16 sub_8111618(void)
+static u16 QuestLog_GetSanePartyCount(void)
 {
     u16 count = 0;
     u16 i;
@@ -1109,7 +1109,7 @@ static u16 sub_8111618(void)
     return count;
 }
 
-static u16 sub_811164C(void)
+static u16 QuestLog_GetSaneBoxCount(void)
 {
     u16 count = 0;
     u16 i, j;

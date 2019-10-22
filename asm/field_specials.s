@@ -5417,7 +5417,7 @@ sub_80CCFBC: @ 80CCFBC
 	ldr r0, _080CCFF0 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrh r1, [r0, 0x4]
-	ldr r0, _080CCFF4 @ =0x00003802
+	ldr r0, _080CCFF4 @ =0x00003802 MAP_BIRTH_ISLAND_EXTERIOR
 	cmp r1, r0
 	bne _080CD000
 	adds r0, r2, 0x1

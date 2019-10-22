@@ -11,8 +11,8 @@ BirthIsland_Exterior_MapScript3_165213:: @ 8165213
 BirthIsland_Exterior_MapScript1_165217:: @ 8165217
 	setworldmapflag FLAG_WORLD_MAP_BIRTH_ISLAND_EXTERIOR
 	setvar VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_DEOXYS_N
-	setvar VAR_0x4026, 0
-	setvar VAR_0x403E, 0
+	setvar VAR_DEOXYS_INTERACTION_STEP_COUNTER, 0
+	setvar VAR_DEOXYS_INTERACTION_NUM, 0
 	checkflag FLAG_FOUGHT_DEOXYS
 	call_if TRUE, EventScript_16523C
 	checkflag FLAG_FOUGHT_DEOXYS

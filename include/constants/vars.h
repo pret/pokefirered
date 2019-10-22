@@ -5,46 +5,80 @@
 
 #define VARS_START 0x4000
 
-#define VAR_0x4000                 0x4000
-#define VAR_0x4001                 0x4001
-#define VAR_0x4002                 0x4002
-#define VAR_0x4003                 0x4003
-#define VAR_0x4004                 0x4004
-#define VAR_0x4005                 0x4005
-#define VAR_0x4006                 0x4006
-#define VAR_0x4007                 0x4007
-#define VAR_0x4008                 0x4008
-#define VAR_0x4009                 0x4009
-#define VAR_0x400A                 0x400A
-#define VAR_0x400B                 0x400B
-#define VAR_0x400C                 0x400C
-#define VAR_0x400D                 0x400D
-#define VAR_0x400E                 0x400E
-#define VAR_0x400F                 0x400F
-#define VAR_OBJ_GFX_ID_0           0x4010
-#define VAR_OBJ_GFX_ID_1           0x4011
-#define VAR_OBJ_GFX_ID_2           0x4012
-#define VAR_OBJ_GFX_ID_3           0x4013
-#define VAR_OBJ_GFX_ID_4           0x4014
-#define VAR_OBJ_GFX_ID_5           0x4015
-#define VAR_OBJ_GFX_ID_6           0x4016
-#define VAR_OBJ_GFX_ID_7           0x4017
-#define VAR_OBJ_GFX_ID_8           0x4018
-#define VAR_OBJ_GFX_ID_9           0x4019
-#define VAR_OBJ_GFX_ID_A           0x401A
-#define VAR_OBJ_GFX_ID_B           0x401B
-#define VAR_OBJ_GFX_ID_C           0x401C
-#define VAR_OBJ_GFX_ID_D           0x401D
-#define VAR_OBJ_GFX_ID_E           0x401E
-#define VAR_OBJ_GFX_ID_F           0x401F
-#define VAR_REPEL_STEP_COUNT       0x4020
-#define VAR_0x4021                 0x4021
-#define VAR_ICE_STEP_COUNT         0x4022
-#define VAR_RENEWABLE_ITEM_STEP_COUNTER                 0x4023
-#define VAR_ALTERING_CAVE_WILD_SET 0x4024
-#define VAR_MASSAGE_COOLDOWN_STEP_COUNTER                 0x4025
-#define VAR_0x4026                 0x4026
-#define VAR_0x4027                 0x4027
+// Temporary variables. Reset on map load.
+#define VAR_0x4000                          0x4000
+#define VAR_0x4001                          0x4001
+#define VAR_0x4002                          0x4002
+#define VAR_0x4003                          0x4003
+#define VAR_0x4004                          0x4004
+#define VAR_0x4005                          0x4005
+#define VAR_0x4006                          0x4006
+#define VAR_0x4007                          0x4007
+#define VAR_0x4008                          0x4008
+#define VAR_0x4009                          0x4009
+#define VAR_0x400A                          0x400A
+#define VAR_0x400B                          0x400B
+#define VAR_0x400C                          0x400C
+#define VAR_0x400D                          0x400D
+#define VAR_0x400E                          0x400E
+#define VAR_0x400F                          0x400F
+
+// Object event graphics IDs which can be changed by
+// script commands.
+#define VAR_OBJ_GFX_ID_0                    0x4010
+#define VAR_OBJ_GFX_ID_1                    0x4011
+#define VAR_OBJ_GFX_ID_2                    0x4012
+#define VAR_OBJ_GFX_ID_3                    0x4013
+#define VAR_OBJ_GFX_ID_4                    0x4014
+#define VAR_OBJ_GFX_ID_5                    0x4015
+#define VAR_OBJ_GFX_ID_6                    0x4016
+#define VAR_OBJ_GFX_ID_7                    0x4017
+#define VAR_OBJ_GFX_ID_8                    0x4018
+#define VAR_OBJ_GFX_ID_9                    0x4019
+#define VAR_OBJ_GFX_ID_A                    0x401A
+#define VAR_OBJ_GFX_ID_B                    0x401B
+#define VAR_OBJ_GFX_ID_C                    0x401C
+#define VAR_OBJ_GFX_ID_D                    0x401D
+#define VAR_OBJ_GFX_ID_E                    0x401E
+#define VAR_OBJ_GFX_ID_F                    0x401F
+
+// If nonzero, counts down by one every step.
+// When it hits zero, repel's effect wears off.
+#define VAR_REPEL_STEP_COUNT                0x4020
+
+// Counts up every step. Wraps around at 128.
+// When wraparound occurs, the friendship of
+// every party poke gets a slight boost.
+#define VAR_FRIENDSHIP_STEP_COUNT           0x4021
+
+// Maybe unused?
+#define VAR_ICE_STEP_COUNT                  0x4022
+
+// Step counter. Caps at 1500. If you enter a map with
+// renewable hidden items and this counter is capped,
+// the counter resets to 0 and all renewable hidden
+// item flags are resampled.
+#define VAR_RENEWABLE_ITEM_STEP_COUNTER     0x4023
+
+// Determines which wild encounter set to use in the
+// Altering Cave. Incremented by Mystery Event.
+// Wraps around at 10.
+#define VAR_ALTERING_CAVE_WILD_SET          0x4024
+
+// Step counter set to 500 at game start. When you get
+// a massage from Daisy, it resets to 0. Caps at 500.
+#define VAR_MASSAGE_COOLDOWN_STEP_COUNTER   0x4025
+
+// Step counter. Wraps around at 100. Used to
+// determine whether the player has reached the
+// triangle in time.
+#define VAR_DEOXYS_INTERACTION_STEP_COUNTER 0x4026
+
+// Bits 0-11 are the number of mons in all boxes
+// with the species sanity bit set.
+// Bits 12-15 are the same for the player's party.
+// Used by Quest Log.
+#define VAR_QUEST_LOG_MON_COUNTS            0x4027
 #define VAR_0x4028                 0x4028
 #define VAR_0x4029                 0x4029
 #define VAR_HAPPINESS_STEP_COUNTER 0x402A
@@ -70,7 +104,7 @@
 #define VAR_0x403B                 0x403B
 #define VAR_0x403C                 0x403C
 #define VAR_0x403D                 0x403D
-#define VAR_0x403E                 0x403E
+#define VAR_DEOXYS_INTERACTION_NUM                 0x403E
 #define VAR_0x403F                 0x403F
 #define VAR_DAYS                   0x4040
 #define VAR_0x4041                 0x4041

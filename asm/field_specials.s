@@ -1591,8 +1591,8 @@ _080CB1FE:
 	bx r1
 	thumb_func_end Special_CheckAddCoins
 
-	thumb_func_start sub_80CB204
-sub_80CB204: @ 80CB204
+	thumb_func_start Special_GetElevatorFloor
+Special_GetElevatorFloor: @ 80CB204
 	push {r4,lr}
 	movs r3, 0x4
 	ldr r0, _080CB22C @ =gSaveBlock1Ptr
@@ -1742,7 +1742,7 @@ _080CB314:
 	bx r0
 	.align 2, 0
 _080CB324: .4byte 0x0000403a
-	thumb_func_end sub_80CB204
+	thumb_func_end Special_GetElevatorFloor
 
 	thumb_func_start sub_80CB328
 sub_80CB328: @ 80CB328

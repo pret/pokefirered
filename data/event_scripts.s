@@ -3004,7 +3004,7 @@ Movement_1A7AB7:: @ 81A7AB7
 	step_end
 
 EventScript_1A7AB9:: @ 81A7AB9
-	special sub_80CB204
+	special Special_GetElevatorFloor
 	return
 
 EventScript_1A7ABD:: @ 81A7ABD

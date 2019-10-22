@@ -225,7 +225,7 @@ gSpecials:: @ 815FD60
 	def_special sub_80CA524
 	def_special sub_80CA86C
 	def_special sub_80CA9A8
-	def_special sub_80CB204
+	def_special Special_GetElevatorFloor
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special sub_80BF93C

@@ -8,7 +8,7 @@ SevenIsland_TrainerTower_Elevator_EventScript_164B03:: @ 8164B03
 	setvar VAR_0x8004, 6
 	checkflag FLAG_TEMP_2
 	call_if FALSE, EventScript_1A7AB9
-	copyvar VAR_0x8005, VAR_0x403A
+	copyvar VAR_0x8005, VAR_ELEVATOR_FLOOR
 	special sub_80CB580
 	message Text_1A535C
 	waitmessage
@@ -40,10 +40,10 @@ EventScript_164B5E:: @ 8164B5E
 EventScript_164B90:: @ 8164B90
 	setvar VAR_0x8006, 3
 	setdynamicwarp MAP_SEVEN_ISLAND_TRAINER_TOWER_LOBBY, 255, 17, 8
-	compare_var_to_value VAR_0x403A, 3
+	compare_var_to_value VAR_ELEVATOR_FLOOR, 3
 	goto_if eq, EventScript_164BD3
 	call EventScript_164BD8
-	setvar VAR_0x403A, 3
+	setvar VAR_ELEVATOR_FLOOR, 3
 	special sub_80CB63C
 	delay 25
 	applymovement 255, Movement_164BE5

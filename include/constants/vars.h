@@ -100,11 +100,11 @@
 #define VAR_0x4037                 0x4037
 #define VAR_0x4038                 0x4038
 #define VAR_0x4039                 0x4039
-#define VAR_0x403A                 0x403A
+#define VAR_ELEVATOR_FLOOR         0x403A
 #define VAR_0x403B                 0x403B
 #define VAR_0x403C                 0x403C
 #define VAR_0x403D                 0x403D
-#define VAR_DEOXYS_INTERACTION_NUM                 0x403E
+#define VAR_DEOXYS_INTERACTION_NUM 0x403E
 #define VAR_0x403F                 0x403F
 #define VAR_DAYS                   0x4040
 #define VAR_0x4041                 0x4041
@@ -115,9 +115,9 @@
 #define VAR_NATIONAL_DEX           0x4046
 #define VAR_SEEDOT_SIZE_RECORD     0x4047
 #define VAR_ASH_GATHER_COUNT       0x4048
-#define VAR_HOF_BRAG_STATE            0x4049
-#define VAR_EGG_BRAG_STATE      0x404A
-#define VAR_LINK_WIN_BRAG_STATE           0x404B
+#define VAR_HOF_BRAG_STATE         0x4049
+#define VAR_EGG_BRAG_STATE         0x404A
+#define VAR_LINK_WIN_BRAG_STATE    0x404B
 #define VAR_POKELOT_RND2           0x404C
 #define VAR_0x404D                 0x404D
 #define VAR_0x404E                 0x404E

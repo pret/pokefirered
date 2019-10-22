@@ -364,40 +364,40 @@ extern const u8 gUnknown_841B005[];
 extern const u8 gUnknown_841B03F[];
 extern const u8 gUnknown_841B064[];
 extern const u8 gUnknown_841B073[];
-extern const u8 gUnknown_841B09F[];
-extern const u8 gUnknown_841B0A4[];
-extern const u8 gUnknown_841B0B5[];
-extern const u8 gUnknown_841B0B9[];
-extern const u8 gUnknown_841B0CD[];
-extern const u8 gUnknown_841B0DD[];
-extern const u8 gUnknown_841B0F6[];
-extern const u8 gUnknown_841B0FF[];
-extern const u8 gUnknown_841B109[];
-extern const u8 gUnknown_841B116[];
-extern const u8 gUnknown_841B11F[];
-extern const u8 gUnknown_841B130[];
-extern const u8 gUnknown_841B141[];
-extern const u8 gUnknown_841B14B[];
-extern const u8 gUnknown_841B15A[];
-extern const u8 gUnknown_841B166[];
-extern const u8 gUnknown_841B172[];
-extern const u8 gUnknown_841B180[];
-extern const u8 gUnknown_841B190[];
-extern const u8 gUnknown_841B1A3[];
-extern const u8 gUnknown_841B1B7[];
-extern const u8 gUnknown_841B1C7[];
-extern const u8 gUnknown_841B1DA[];
-extern const u8 gUnknown_841B1E5[];
-extern const u8 gUnknown_841B1F4[];
-extern const u8 gUnknown_841B200[];
-extern const u8 gUnknown_841B20E[];
-extern const u8 gUnknown_841B21C[];
-extern const u8 gUnknown_841B226[];
-extern const u8 gUnknown_841B236[];
-extern const u8 gUnknown_841B246[];
-extern const u8 gUnknown_841B25B[];
-extern const u8 gUnknown_841B268[];
-extern const u8 gUnknown_841B277[];
+extern const u8 gQuestLogString_Home[];
+extern const u8 gQuestLogString_OakResearchLab[];
+extern const u8 gQuestLogString_Gym[];
+extern const u8 gQuestLogString_PokemonLeagueGate[];
+extern const u8 gQuestLogString_ViridianForest[];
+extern const u8 gQuestLogString_PewterMuseumOfScience[];
+extern const u8 gQuestLogString_MtMoon[];
+extern const u8 gQuestLogString_BikeShop[];
+extern const u8 gQuestLogString_BillSHouse[];
+extern const u8 gQuestLogString_DayCare[];
+extern const u8 gQuestLogString_UndergroundPath[];
+extern const u8 gQuestLogString_PokemonFanClub[];
+extern const u8 gQuestLogString_SSAnne[];
+extern const u8 gQuestLogString_DiglettSCave[];
+extern const u8 gQuestLogString_RockTunnel[];
+extern const u8 gQuestLogString_PowerPlant[];
+extern const u8 gQuestLogString_PokemonTower[];
+extern const u8 gQuestLogString_VolunteerHouse[];
+extern const u8 gQuestLogString_NameRaterSHouse[];
+extern const u8 gQuestLogString_CeladonDeptStore[];
+extern const u8 gQuestLogString_CeladonMansion[];
+extern const u8 gQuestLogString_RocketGameCorner[];
+extern const u8 gQuestLogString_Restaurant[];
+extern const u8 gQuestLogString_RocketHideout[];
+extern const u8 gQuestLogString_SafariZone[];
+extern const u8 gQuestLogString_WardenSHome[];
+extern const u8 gQuestLogString_FightingDojo[];
+extern const u8 gQuestLogString_SilphCo[];
+extern const u8 gQuestLogString_SeafoamIslands[];
+extern const u8 gQuestLogString_PokemonMansion[];
+extern const u8 gQuestLogString_PokemonResearchLab[];
+extern const u8 gQuestLogString_VictoryRoad[];
+extern const u8 gQuestLogString_PokemonLeague[];
+extern const u8 gQuestLogString_CeruleanCave[];
 extern const u8 gUnknown_8418C1B[];
 
 
@@ -4544,150 +4544,150 @@ static const u16 * sub_81151DC(const u16 * a0)
 }
 
 static const u8 *const gUnknown_8456AF0[] = {
-        gUnknown_841B09F,
-        gUnknown_841B0A4,
-        gUnknown_841B0B5,
-        gUnknown_841B0B9,
-        gUnknown_841B0B9,
-        gUnknown_841B0CD,
-        gUnknown_841B0CD,
-        gUnknown_841B0DD,
-        gUnknown_841B0B5,
-        gUnknown_841B0F6,
-        gUnknown_841B0F6,
-        gUnknown_841B0B5,
-        gUnknown_841B0FF,
-        gUnknown_841B109,
-        gUnknown_841B116,
-        gUnknown_841B11F,
-        gUnknown_841B11F,
-        gUnknown_841B130,
-        gUnknown_841B0B5,
-        gUnknown_841B141,
-        gUnknown_841B14B,
-        gUnknown_841B14B,
-        gUnknown_841B15A,
-        gUnknown_841B15A,
-        gUnknown_841B166,
-        gUnknown_841B172,
-        gUnknown_841B180,
-        gUnknown_841B190,
-        gUnknown_841B11F,
-        gUnknown_841B11F,
-        gUnknown_841B1A3,
-        gUnknown_841B1B7,
-        gUnknown_841B1C7,
-        gUnknown_841B0B5,
-        gUnknown_841B1DA,
-        gUnknown_841B1E5,
-        gUnknown_841B1F4,
-        gUnknown_841B0B5,
-        gUnknown_841B200,
-        gUnknown_841B20E,
-        gUnknown_841B0B5,
-        gUnknown_841B21C,
-        gUnknown_841B226,
-        gUnknown_841B226,
-        gUnknown_841B236,
-        gUnknown_841B0B5,
-        gUnknown_841B246,
-        gUnknown_841B25B,
-        gUnknown_841B25B,
-        gUnknown_841B268,
-        gUnknown_841B277
+    gQuestLogString_Home,
+    gQuestLogString_OakResearchLab,
+    gQuestLogString_Gym,
+    gQuestLogString_PokemonLeagueGate,
+    gQuestLogString_PokemonLeagueGate,
+    gQuestLogString_ViridianForest,
+    gQuestLogString_ViridianForest,
+    gQuestLogString_PewterMuseumOfScience,
+    gQuestLogString_Gym,
+    gQuestLogString_MtMoon,
+    gQuestLogString_MtMoon,
+    gQuestLogString_Gym,
+    gQuestLogString_BikeShop,
+    gQuestLogString_BillSHouse,
+    gQuestLogString_DayCare,
+    gQuestLogString_UndergroundPath,
+    gQuestLogString_UndergroundPath,
+    gQuestLogString_PokemonFanClub,
+    gQuestLogString_Gym,
+    gQuestLogString_SSAnne,
+    gQuestLogString_DiglettSCave,
+    gQuestLogString_DiglettSCave,
+    gQuestLogString_RockTunnel,
+    gQuestLogString_RockTunnel,
+    gQuestLogString_PowerPlant,
+    gQuestLogString_PokemonTower,
+    gQuestLogString_VolunteerHouse,
+    gQuestLogString_NameRaterSHouse,
+    gQuestLogString_UndergroundPath,
+    gQuestLogString_UndergroundPath,
+    gQuestLogString_CeladonDeptStore,
+    gQuestLogString_CeladonMansion,
+    gQuestLogString_RocketGameCorner,
+    gQuestLogString_Gym,
+    gQuestLogString_Restaurant,
+    gQuestLogString_RocketHideout,
+    gQuestLogString_SafariZone,
+    gQuestLogString_Gym,
+    gQuestLogString_WardenSHome,
+    gQuestLogString_FightingDojo,
+    gQuestLogString_Gym,
+    gQuestLogString_SilphCo,
+    gQuestLogString_SeafoamIslands,
+    gQuestLogString_SeafoamIslands,
+    gQuestLogString_PokemonMansion,
+    gQuestLogString_Gym,
+    gQuestLogString_PokemonResearchLab,
+    gQuestLogString_VictoryRoad,
+    gQuestLogString_VictoryRoad,
+    gQuestLogString_PokemonLeague,
+    gQuestLogString_CeruleanCave
 };
 
 static const u8 *const gUnknown_8456BBC[] = {
-        gUnknown_841A53A,
-        gUnknown_841AD9E,
-        gUnknown_841ADC8,
-        gUnknown_841ADFF,
-        gUnknown_841AE1E,
-        gUnknown_841AE48,
-        gUnknown_841AEA7,
-        gUnknown_841AEDC,
-        gUnknown_841AFD6,
-        gUnknown_841B005
+    gUnknown_841A53A,
+    gUnknown_841AD9E,
+    gUnknown_841ADC8,
+    gUnknown_841ADFF,
+    gUnknown_841AE1E,
+    gUnknown_841AE48,
+    gUnknown_841AEA7,
+    gUnknown_841AEDC,
+    gUnknown_841AFD6,
+    gUnknown_841B005
 };
 
 static const u8 gUnknown_8456BE4[] = {
-        0x03,
-        0x04,
-        0x05,
-        0x08,
-        0x08,
-        0x07,
-        0x07,
-        0x01,
-        0x05,
-        0x07,
-        0x07,
-        0x05,
-        0x00,
-        0x00,
-        0x00,
-        0x08,
-        0x08,
-        0x00,
-        0x05,
-        0x08,
-        0x07,
-        0x07,
-        0x07,
-        0x07,
-        0x08,
-        0x08,
-        0x00,
-        0x00,
-        0x08,
-        0x08,
-        0x00,
-        0x00,
-        0x02,
-        0x05,
-        0x00,
-        0x08,
-        0x06,
-        0x05,
-        0x00,
-        0x00,
-        0x05,
-        0x09,
-        0x07,
-        0x07,
-        0x09,
-        0x05,
-        0x00,
-        0x07,
-        0x07,
-        0x08,
-        0x07
+    0x03,
+    0x04,
+    0x05,
+    0x08,
+    0x08,
+    0x07,
+    0x07,
+    0x01,
+    0x05,
+    0x07,
+    0x07,
+    0x05,
+    0x00,
+    0x00,
+    0x00,
+    0x08,
+    0x08,
+    0x00,
+    0x05,
+    0x08,
+    0x07,
+    0x07,
+    0x07,
+    0x07,
+    0x08,
+    0x08,
+    0x00,
+    0x00,
+    0x08,
+    0x08,
+    0x00,
+    0x00,
+    0x02,
+    0x05,
+    0x00,
+    0x08,
+    0x06,
+    0x05,
+    0x00,
+    0x00,
+    0x05,
+    0x09,
+    0x07,
+    0x07,
+    0x09,
+    0x05,
+    0x00,
+    0x07,
+    0x07,
+    0x08,
+    0x07
 };
 
 static const u8 gUnknown_8456C17[] = {
-        0x5a,
-        0x5b,
-        0x5d,
-        0x5e,
-        0x5f,
-        0x62,
-        0x60,
-        0x59
+    0x5a,
+    0x5b,
+    0x5d,
+    0x5e,
+    0x5f,
+    0x62,
+    0x60,
+    0x59
 };
 
 static const u8 *const gUnknown_8456C20[] = {
-        gUnknown_841AC51,
-        gUnknown_841ABAB,
-        gUnknown_841ABCD,
-        gUnknown_841AC2A,
-        gUnknown_841ABF9,
-        gUnknown_841AC93,
-        gUnknown_841ACBC,
-        gUnknown_841AD69,
-        gUnknown_841AD1D,
-        gUnknown_841A90C,
-        gUnknown_841A8E0,
-        gUnknown_841AD3C
+    gUnknown_841AC51,
+    gUnknown_841ABAB,
+    gUnknown_841ABCD,
+    gUnknown_841AC2A,
+    gUnknown_841ABF9,
+    gUnknown_841AC93,
+    gUnknown_841ACBC,
+    gUnknown_841AD69,
+    gUnknown_841AD1D,
+    gUnknown_841A90C,
+    gUnknown_841A8E0,
+    gUnknown_841AD3C
 };
 
 static u16 * sub_8115280(u16 * a0, const u16 * a1)
@@ -4785,7 +4785,7 @@ static const u16 * sub_8115460(const u16 * a0)
     if (r5[0] == 7)
     {
         if (r5[1] == 0x58)
-            StringCopy(gStringVar3, gUnknown_841B09F);
+            StringCopy(gStringVar3, gQuestLogString_Home);
         else
             StringCopy(gStringVar3, gUnknown_8418C1B);
     }

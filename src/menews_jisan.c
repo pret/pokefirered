@@ -59,7 +59,7 @@ u16 sub_8146CE8(void)
     struct MysteryEventStruct *r4 = sub_8143D94();
     u16 r5;
 
-    if (!Flag_0x839_IsSet() || !ValidateReceivedWonderNews())
+    if (!IsMysteryGiftEnabled() || !ValidateReceivedWonderNews())
         return 0;
 
     r5 = sub_8146E0C(r4);

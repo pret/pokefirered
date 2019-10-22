@@ -40,6 +40,8 @@ void sub_8112450(void);
 void sub_8112364(void);
 u8 sub_8112CAC(void);
 void sub_81138F8(void);
+void *sub_8112D40(u8 a0, u16 a1);
+void sub_8112DB0(u8 a0, u16 a1, u16 a2);
 
 extern u8 gUnknown_203ADFA;
 

@@ -44,8 +44,8 @@ gSpecialVars:: @ 815FD0C
 	.4byte gSpecialVar_LastTalked
 	.4byte gSpecialVar_MonBoxId
 	.4byte gSpecialVar_MonBoxPos
-	.4byte gUnknown_20370DA
-	.4byte gUnknown_20370DC
+	.4byte gSpecialVar_TextColor
+	.4byte gSpecialVar_PrevTextColor
 	.4byte gUnknown_20370DE
 
     .include "data/specials.inc"

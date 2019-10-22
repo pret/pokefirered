@@ -3,6 +3,8 @@
 
 #define VAR_0x3F20                 0x3F20
 
+#define VARS_START 0x4000
+
 #define VAR_0x4000                 0x4000
 #define VAR_0x4001                 0x4001
 #define VAR_0x4002                 0x4002
@@ -267,6 +269,7 @@
 #define VAR_0x40FE                 0x40FE
 #define VAR_0x40FF                 0x40FF
 
+#define SPECIAL_VARS_START 0x8000
 #define VAR_0x8000                 0x8000
 #define VAR_0x8001                 0x8001
 #define VAR_0x8002                 0x8002
@@ -287,6 +290,6 @@
 #define VAR_CONTEST_CATEGORY       0x8011
 #define VAR_MON_BOX_ID             0x8012
 #define VAR_MON_BOX_POS            0x8013
-#define VAR_0x8014                 0x8014
+#define VAR_TEXT_COLOR             0x8014
 
 #endif // GUARD_CONSTANTS_VARS_H

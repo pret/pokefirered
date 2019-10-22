@@ -982,7 +982,7 @@ void sub_8111274(u8 a0, u8 a1)
 static void sub_8111368(void)
 {
     gUnknown_203ADFA = 2;
-    sub_806E6FC();
+    ResetSpecialVars();
     ClearBag();
     ClearPCItemSlots();
     if (sub_8110AC8() == 1)
@@ -1231,7 +1231,7 @@ static void sub_8111914(void)
 
 static void sub_8111984(void)
 {
-    sub_806E6FC();
+    ResetSpecialVars();
     Save_ResetSaveCounters();
     Save_LoadGameData(0);
     SetMainCallback2(sub_8057430);

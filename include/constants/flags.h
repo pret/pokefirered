@@ -573,6 +573,7 @@
 #define FLAG_0x22F               0x22F
 
 // Story flags
+#define STORY_FLAGS_START 0x230
 #define FLAG_GOT_POTION_ON_ROUTE_1                       0x230
 #define FLAG_GOT_TM34_FROM_SURGE                         0x231
 #define FLAG_GOT_FOSSIL_FROM_MT_MOON                     0x232
@@ -1325,6 +1326,7 @@
 #define FLAG_SYS_FLASH_ACTIVE (SYS_FLAGS + 0x6)
 #define FLAG_SYS_SPECIAL_WILD_BATTLE (SYS_FLAGS + 0x7)
 
+#define PERMA_SYS_FLAGS_START 0x820
 #define FLAG_BADGE01_GET (SYS_FLAGS + 0x20)
 #define FLAG_BADGE02_GET (SYS_FLAGS + 0x21)
 #define FLAG_BADGE03_GET (SYS_FLAGS + 0x22)
@@ -1429,6 +1431,8 @@
 #define FLAG_0x8E0 (SYS_FLAGS + 0xE0)
 
 // SPECIAL FLAGS (unknown purpose)
+#define SPECIAL_FLAGS_START 0x4000
+#define SPECIAL_FLAGS_COUNT 16
 #define FLAG_SPECIAL_FLAG_0x4000    0x4000
 #define FLAG_SPECIAL_FLAG_0x4001    0x4001
 #define FLAG_SPECIAL_FLAG_0x4002    0x4002

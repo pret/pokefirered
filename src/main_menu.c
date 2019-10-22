@@ -240,7 +240,7 @@ static void Task_SetWin0BldRegsAndCheckSaveFile(u8 taskId)
         {
         case SAVE_STATUS_OK:
             LoadUserFrameToBg(0);
-            if (Flag_0x839_IsSet() == TRUE)
+            if (IsMysteryGiftEnabled() == TRUE)
             {
                 gTasks[taskId].tMenuType = MAIN_MENU_MYSTERYGIFT;
             }
@@ -259,7 +259,7 @@ static void Task_SetWin0BldRegsAndCheckSaveFile(u8 taskId)
             SetStdFrame0OnBg(0);
             gTasks[taskId].tMenuType = MAIN_MENU_CONTINUE;
             PrintSaveErrorStatus(taskId, gText_SaveFileCorruptedPrevWillBeLoaded);
-            if (Flag_0x839_IsSet() == TRUE)
+            if (IsMysteryGiftEnabled() == TRUE)
             {
                 gTasks[taskId].tMenuType = MAIN_MENU_MYSTERYGIFT;
             }

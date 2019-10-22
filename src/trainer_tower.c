@@ -920,8 +920,8 @@ void sub_815E068(u8 battleType, u8 facilityClass)
             }
             break;
     }
-    gUnknown_20370DC = gUnknown_20370DA;
-    gUnknown_20370DA = r5;
+    gSpecialVar_PrevTextColor = gSpecialVar_TextColor;
+    gSpecialVar_TextColor = r5;
 }
 
 void sub_815E114(void)

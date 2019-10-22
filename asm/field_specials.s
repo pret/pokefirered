@@ -3142,19 +3142,19 @@ sub_80CBDE8: @ 80CBDE8
 	ldr r1, _080CBDF8 @ =gSelectedEventObject
 	movs r0, 0
 	strb r0, [r1]
-	ldr r1, _080CBDFC @ =gUnknown_20370DA
+	ldr r1, _080CBDFC @ =gSpecialVar_TextColor
 	movs r0, 0xFF
 	strh r0, [r1]
 	bx lr
 	.align 2, 0
 _080CBDF8: .4byte gSelectedEventObject
-_080CBDFC: .4byte gUnknown_20370DA
+_080CBDFC: .4byte gSpecialVar_TextColor
 	thumb_func_end sub_80CBDE8
 
 	thumb_func_start ContextNpcGetTextColor
 ContextNpcGetTextColor: @ 80CBE00
 	push {lr}
-	ldr r0, _080CBE18 @ =gUnknown_20370DA
+	ldr r0, _080CBE18 @ =gSpecialVar_TextColor
 	ldrh r0, [r0]
 	cmp r0, 0xFF
 	bne _080CBE44
@@ -3165,7 +3165,7 @@ ContextNpcGetTextColor: @ 80CBE00
 	movs r0, 0x3
 	b _080CBE48
 	.align 2, 0
-_080CBE18: .4byte gUnknown_20370DA
+_080CBE18: .4byte gSpecialVar_TextColor
 _080CBE1C: .4byte gSelectedEventObject
 _080CBE20:
 	ldr r2, _080CBE4C @ =gMapObjects

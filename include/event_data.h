@@ -32,8 +32,8 @@ u8 FlagSet(u16 id);
 u8 FlagClear(u16 id);
 bool8 FlagGet(u16 id);
 u16 * GetVarPointer(u16 id);
-bool32 Flag_0x839_IsSet(void);
-void sub_806E6FC(void);
+bool32 IsMysteryGiftEnabled(void);
+void ResetSpecialVars(void);
 void sub_806E2D0(void);
 void sub_806E370(void);
 bool32 IsNationalPokedexEnabled(void);
@@ -60,7 +60,7 @@ extern u16 gSpecialVar_0x8014;
 extern u16 gSpecialVar_Result;
 extern u16 gSpecialVar_0x8004;
 
-extern u16 gUnknown_20370DA;
-extern u16 gUnknown_20370DC;
+extern u16 gSpecialVar_TextColor;
+extern u16 gSpecialVar_PrevTextColor;
 
 #endif // GUARD_EVENT_DATA_H

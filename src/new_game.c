@@ -103,7 +103,7 @@ void ResetMenuAndMonGlobals(void)
     BerryPouch_CursorResetToTop();
     sub_811089C();
     sub_8083214(Random());
-    sub_806E6FC();
+    ResetSpecialVars();
 }
 
 void NewGameInitData(void)

@@ -17,7 +17,7 @@ SetControllerToOakOrOldMan: @ 80E75B0
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _080E75E4 @ =sub_80E75EC
+	ldr r1, _080E75E4 @ =OakOldManBufferRunCommand
 	str r1, [r0]
 	ldr r2, _080E75E8 @ =gBattleStruct
 	ldr r0, [r2]
@@ -37,12 +37,12 @@ SetControllerToOakOrOldMan: @ 80E75B0
 	.align 2, 0
 _080E75DC: .4byte gBattlerControllerFuncs
 _080E75E0: .4byte gActiveBattler
-_080E75E4: .4byte sub_80E75EC
+_080E75E4: .4byte OakOldManBufferRunCommand
 _080E75E8: .4byte gBattleStruct
 	thumb_func_end SetControllerToOakOrOldMan
 
-	thumb_func_start sub_80E75EC
-sub_80E75EC: @ 80E75EC
+	thumb_func_start OakOldManBufferRunCommand
+OakOldManBufferRunCommand: @ 80E75EC
 	push {lr}
 	ldr r2, _080E7620 @ =gBattleControllerExecFlags
 	ldr r1, _080E7624 @ =gBitTable
@@ -61,7 +61,7 @@ sub_80E75EC: @ 80E75EC
 	ldrb r0, [r1]
 	cmp r0, 0x38
 	bhi _080E7634
-	ldr r0, _080E7630 @ =gUnknown_84020F8
+	ldr r0, _080E7630 @ =sOakOldManBufferCommands
 	ldrb r1, [r1]
 	lsls r1, 2
 	adds r1, r0
@@ -73,16 +73,16 @@ _080E7620: .4byte gBattleControllerExecFlags
 _080E7624: .4byte gBitTable
 _080E7628: .4byte gActiveBattler
 _080E762C: .4byte gBattleBufferA
-_080E7630: .4byte gUnknown_84020F8
+_080E7630: .4byte sOakOldManBufferCommands
 _080E7634:
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 _080E7638:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80E75EC
+	thumb_func_end OakOldManBufferRunCommand
 
-	thumb_func_start sub_80E763C
-sub_80E763C: @ 80E763C
+	thumb_func_start HandleInputChooseAction_tmp
+HandleInputChooseAction_tmp: @ 80E763C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -318,7 +318,7 @@ _080E7814:
 	movs r2, 0
 	bl BtlController_EmitTwoReturnValues
 _080E781A:
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	b _080E7838
 	.align 2, 0
 _080E7820: .4byte gBattleTypeFlags
@@ -336,7 +336,7 @@ _080E7838:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80E763C
+	thumb_func_end HandleInputChooseAction_tmp
 
 	thumb_func_start sub_80E7844
 sub_80E7844: @ 80E7844
@@ -411,15 +411,15 @@ _080E78B4:
 	movs r1, 0x1
 	movs r2, 0
 	bl BtlController_EmitTwoReturnValues
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 _080E78D8:
 	pop {r4}
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80E7844
 
-	thumb_func_start sub_80E78E0
-sub_80E78E0: @ 80E78E0
+	thumb_func_start CompleteOnBattlerSpriteCallbackDummy_tmp
+CompleteOnBattlerSpriteCallbackDummy_tmp: @ 80E78E0
 	push {lr}
 	ldr r2, _080E7908 @ =gSprites
 	ldr r1, _080E790C @ =gBattlerSpriteIds
@@ -436,7 +436,7 @@ sub_80E78E0: @ 80E78E0
 	ldr r0, _080E7914 @ =SpriteCallbackDummy
 	cmp r1, r0
 	bne _080E7904
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 _080E7904:
 	pop {r0}
 	bx r0
@@ -445,7 +445,7 @@ _080E7908: .4byte gSprites
 _080E790C: .4byte gBattlerSpriteIds
 _080E7910: .4byte gActiveBattler
 _080E7914: .4byte SpriteCallbackDummy
-	thumb_func_end sub_80E78E0
+	thumb_func_end CompleteOnBattlerSpriteCallbackDummy_tmp
 
 	thumb_func_start sub_80E7918
 sub_80E7918: @ 80E7918
@@ -455,7 +455,7 @@ sub_80E7918: @ 80E7918
 	lsls r0, 16
 	cmp r0, 0
 	bne _080E792A
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 _080E792A:
 	pop {r0}
 	bx r0
@@ -493,20 +493,20 @@ _080E7968: .4byte 0x00000439
 _080E796C: .4byte gPreBattleCallback1
 	thumb_func_end sub_80E7930
 
-	thumb_func_start sub_80E7970
-sub_80E7970: @ 80E7970
+	thumb_func_start CompleteOnSpecialAnimDone_tmp
+CompleteOnSpecialAnimDone_tmp: @ 80E7970
 	push {lr}
 	ldr r0, _080E7984 @ =gDoingBattleAnim
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080E797E
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 _080E797E:
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080E7984: .4byte gDoingBattleAnim
-	thumb_func_end sub_80E7970
+	thumb_func_end CompleteOnSpecialAnimDone_tmp
 
 	thumb_func_start sub_80E7988
 sub_80E7988: @ 80E7988
@@ -523,7 +523,7 @@ sub_80E7988: @ 80E7988
 	ands r1, r0
 	cmp r1, 0
 	bne _080E79A8
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 _080E79A8:
 	pop {r0}
 	bx r0
@@ -533,8 +533,8 @@ _080E79B0: .4byte gBitTable
 _080E79B4: .4byte gActiveBattler
 	thumb_func_end sub_80E7988
 
-	thumb_func_start sub_80E79B8
-sub_80E79B8: @ 80E79B8
+	thumb_func_start OpenPartyMenuToChooseMon_tmp
+OpenPartyMenuToChooseMon_tmp: @ 80E79B8
 	push {r4,lr}
 	ldr r0, _080E79FC @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
@@ -547,7 +547,7 @@ sub_80E79B8: @ 80E79B8
 	ldrb r0, [r2]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _080E7A08 @ =sub_80E7A14
+	ldr r1, _080E7A08 @ =WaitForMonSelection_tmp
 	str r1, [r0]
 	ldr r3, _080E7A0C @ =gTasks
 	ldr r1, _080E7A10 @ =gUnknown_3004FFC
@@ -571,13 +571,13 @@ _080E79F6:
 _080E79FC: .4byte gPaletteFade
 _080E7A00: .4byte gBattlerControllerFuncs
 _080E7A04: .4byte gActiveBattler
-_080E7A08: .4byte sub_80E7A14
+_080E7A08: .4byte WaitForMonSelection_tmp
 _080E7A0C: .4byte gTasks
 _080E7A10: .4byte gUnknown_3004FFC
-	thumb_func_end sub_80E79B8
+	thumb_func_end OpenPartyMenuToChooseMon_tmp
 
-	thumb_func_start sub_80E7A14
-sub_80E7A14: @ 80E7A14
+	thumb_func_start WaitForMonSelection_tmp
+WaitForMonSelection_tmp: @ 80E7A14
 	push {lr}
 	ldr r0, _080E7A44 @ =gMain
 	ldr r1, [r0, 0x4]
@@ -613,14 +613,14 @@ _080E7A5C:
 	movs r2, 0
 	bl BtlController_EmitChosenMonReturnValue
 _080E7A66:
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 _080E7A6A:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80E7A14
+	thumb_func_end WaitForMonSelection_tmp
 
-	thumb_func_start sub_80E7A70
-sub_80E7A70: @ 80E7A70
+	thumb_func_start OpenBagAndChooseItem_tmp
+OpenBagAndChooseItem_tmp: @ 80E7A70
 	push {lr}
 	ldr r0, _080E7AA8 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
@@ -633,7 +633,7 @@ sub_80E7A70: @ 80E7A70
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _080E7AB4 @ =sub_80E7AC4
+	ldr r1, _080E7AB4 @ =CompleteWhenChoseItem_tmp
 	str r1, [r0]
 	bl nullsub_44
 	bl FreeAllWindowBuffers
@@ -649,17 +649,17 @@ sub_80E7A70: @ 80E7A70
 _080E7AA8: .4byte gPaletteFade
 _080E7AAC: .4byte gBattlerControllerFuncs
 _080E7AB0: .4byte gActiveBattler
-_080E7AB4: .4byte sub_80E7AC4
+_080E7AB4: .4byte CompleteWhenChoseItem_tmp
 _080E7AB8: .4byte gBattleTypeFlags
 _080E7ABC:
 	bl sub_810AF74
 _080E7AC0:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80E7A70
+	thumb_func_end OpenBagAndChooseItem_tmp
 
-	thumb_func_start sub_80E7AC4
-sub_80E7AC4: @ 80E7AC4
+	thumb_func_start CompleteWhenChoseItem_tmp
+CompleteWhenChoseItem_tmp: @ 80E7AC4
 	push {lr}
 	ldr r0, _080E7B14 @ =gMain
 	ldr r1, [r0, 0x4]
@@ -711,13 +711,13 @@ _080E7B34:
 	ldrh r1, [r0]
 	movs r0, 0x1
 	bl BtlController_EmitOneReturnValue
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 _080E7B42:
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080E7B48: .4byte gSpecialVar_ItemId
-	thumb_func_end sub_80E7AC4
+	thumb_func_end CompleteWhenChoseItem_tmp
 
 	thumb_func_start sub_80E7B4C
 sub_80E7B4C: @ 80E7B4C
@@ -1046,8 +1046,8 @@ _080E7DFC: .4byte gBattlerControllerFuncs
 _080E7E00: .4byte sub_80E835C
 	thumb_func_end sub_80E7CD8
 
-	thumb_func_start sub_80E7E04
-sub_80E7E04: @ 80E7E04
+	thumb_func_start Task_GiveExpToMon_tmp
+Task_GiveExpToMon_tmp: @ 80E7E04
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1167,7 +1167,7 @@ _080E7E4A:
 	cmp r1, r0
 	bne _080E7F20
 _080E7EFE:
-	ldr r0, _080E7F1C @ =sub_80E8190
+	ldr r0, _080E7F1C @ =Task_LaunchLvlUpAnim_tmp
 	b _080E7F62
 	.align 2, 0
 _080E7F04: .4byte gTasks
@@ -1176,7 +1176,7 @@ _080E7F0C: .4byte gPlayerParty
 _080E7F10: .4byte gExperienceTables
 _080E7F14: .4byte gBaseStats
 _080E7F18: .4byte gActiveBattler
-_080E7F1C: .4byte sub_80E8190
+_080E7F1C: .4byte Task_LaunchLvlUpAnim_tmp
 _080E7F20:
 	ldr r0, _080E7F30 @ =gTasks
 	mov r2, r9
@@ -1184,11 +1184,11 @@ _080E7F20:
 	add r1, r9
 	lsls r1, 3
 	adds r1, r0
-	ldr r0, _080E7F34 @ =sub_80E82A8
+	ldr r0, _080E7F34 @ =DestroyExpTaskAndCompleteOnInactiveTextPrinter_tmp
 	b _080E7F64
 	.align 2, 0
 _080E7F30: .4byte gTasks
-_080E7F34: .4byte sub_80E82A8
+_080E7F34: .4byte DestroyExpTaskAndCompleteOnInactiveTextPrinter_tmp
 _080E7F38:
 	str r0, [sp, 0x4]
 	add r2, sp, 0x4
@@ -1199,16 +1199,16 @@ _080E7F38:
 	ldr r3, [sp, 0x8]
 	lsls r0, r3, 2
 	adds r0, r1
-	ldr r1, _080E7F5C @ =sub_80E8930
+	ldr r1, _080E7F5C @ =CompleteOnInactiveTextPrinter_tmp
 	str r1, [r0]
 	mov r0, r9
 	bl DestroyTask
 	b _080E7F66
 	.align 2, 0
 _080E7F58: .4byte gBattlerControllerFuncs
-_080E7F5C: .4byte sub_80E8930
+_080E7F5C: .4byte CompleteOnInactiveTextPrinter_tmp
 _080E7F60:
-	ldr r0, _080E7F78 @ =sub_80E7F7C
+	ldr r0, _080E7F78 @ =Task_PrepareToGiveExpWithExpBar_tmp
 _080E7F62:
 	mov r1, r8
 _080E7F64:
@@ -1223,11 +1223,11 @@ _080E7F66:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E7F78: .4byte sub_80E7F7C
-	thumb_func_end sub_80E7E04
+_080E7F78: .4byte Task_PrepareToGiveExpWithExpBar_tmp
+	thumb_func_end Task_GiveExpToMon_tmp
 
-	thumb_func_start sub_80E7F7C
-sub_80E7F7C: @ 80E7F7C
+	thumb_func_start Task_PrepareToGiveExpWithExpBar_tmp
+Task_PrepareToGiveExpWithExpBar_tmp: @ 80E7F7C
 	push {r4-r6,lr}
 	mov r6, r10
 	mov r5, r9
@@ -1322,7 +1322,7 @@ _080E803C: .4byte gExperienceTables
 _080E8040: .4byte gBaseStats
 _080E8044: .4byte gHealthboxSpriteIds
 _080E8048: .4byte sub_80E804C
-	thumb_func_end sub_80E7F7C
+	thumb_func_end Task_PrepareToGiveExpWithExpBar_tmp
 
 	thumb_func_start sub_80E804C
 sub_80E804C: @ 80E804C
@@ -1439,7 +1439,7 @@ _080E807C:
 	movs r1, 0xB
 	bl BtlController_EmitTwoReturnValues
 	strb r5, [r4]
-	ldr r0, _080E8158 @ =sub_80E8190
+	ldr r0, _080E8158 @ =Task_LaunchLvlUpAnim_tmp
 	str r0, [r6]
 	b _080E8178
 	.align 2, 0
@@ -1448,7 +1448,7 @@ _080E8148: .4byte gPlayerParty
 _080E814C: .4byte gExperienceTables
 _080E8150: .4byte gBaseStats
 _080E8154: .4byte gActiveBattler
-_080E8158: .4byte sub_80E8190
+_080E8158: .4byte Task_LaunchLvlUpAnim_tmp
 _080E815C:
 	str r0, [sp, 0x4]
 	add r2, sp, 0x4
@@ -1458,7 +1458,7 @@ _080E815C:
 	ldr r1, _080E8188 @ =gBattlerControllerFuncs
 	lsls r0, r7, 2
 	adds r0, r1
-	ldr r1, _080E818C @ =sub_80E8930
+	ldr r1, _080E818C @ =CompleteOnInactiveTextPrinter_tmp
 	str r1, [r0]
 	mov r0, r8
 	bl DestroyTask
@@ -1473,11 +1473,11 @@ _080E8178:
 	bx r0
 	.align 2, 0
 _080E8188: .4byte gBattlerControllerFuncs
-_080E818C: .4byte sub_80E8930
+_080E818C: .4byte CompleteOnInactiveTextPrinter_tmp
 	thumb_func_end sub_80E804C
 
-	thumb_func_start sub_80E8190
-sub_80E8190: @ 80E8190
+	thumb_func_start Task_LaunchLvlUpAnim_tmp
+Task_LaunchLvlUpAnim_tmp: @ 80E8190
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -1514,7 +1514,7 @@ _080E81C4:
 	adds r1, r5
 	lsls r1, 3
 	adds r1, r0
-	ldr r0, _080E81EC @ =sub_80E81F0
+	ldr r0, _080E81EC @ =Task_UpdateLvlInHealthbox_tmp
 	str r0, [r1]
 	pop {r4-r6}
 	pop {r0}
@@ -1522,11 +1522,11 @@ _080E81C4:
 	.align 2, 0
 _080E81E4: .4byte gTasks
 _080E81E8: .4byte gBattlerPartyIndexes
-_080E81EC: .4byte sub_80E81F0
-	thumb_func_end sub_80E8190
+_080E81EC: .4byte Task_UpdateLvlInHealthbox_tmp
+	thumb_func_end Task_LaunchLvlUpAnim_tmp
 
-	thumb_func_start sub_80E81F0
-sub_80E81F0: @ 80E81F0
+	thumb_func_start Task_UpdateLvlInHealthbox_tmp
+Task_UpdateLvlInHealthbox_tmp: @ 80E81F0
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -1600,7 +1600,7 @@ _080E8284:
 	adds r1, r6
 	lsls r1, 3
 	adds r1, r0
-	ldr r0, _080E82A4 @ =sub_80E82A8
+	ldr r0, _080E82A4 @ =DestroyExpTaskAndCompleteOnInactiveTextPrinter_tmp
 	str r0, [r1]
 _080E8292:
 	pop {r4-r7}
@@ -1610,11 +1610,11 @@ _080E8292:
 _080E8298: .4byte gHealthboxSpriteIds
 _080E829C: .4byte gPlayerParty
 _080E82A0: .4byte gTasks
-_080E82A4: .4byte sub_80E82A8
-	thumb_func_end sub_80E81F0
+_080E82A4: .4byte DestroyExpTaskAndCompleteOnInactiveTextPrinter_tmp
+	thumb_func_end Task_UpdateLvlInHealthbox_tmp
 
-	thumb_func_start sub_80E82A8
-sub_80E82A8: @ 80E82A8
+	thumb_func_start DestroyExpTaskAndCompleteOnInactiveTextPrinter_tmp
+DestroyExpTaskAndCompleteOnInactiveTextPrinter_tmp: @ 80E82A8
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	lsls r5, 24
@@ -1635,7 +1635,7 @@ sub_80E82A8: @ 80E82A8
 	ldr r1, _080E82EC @ =gBattlerControllerFuncs
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _080E82F0 @ =sub_80E8930
+	ldr r1, _080E82F0 @ =CompleteOnInactiveTextPrinter_tmp
 	str r1, [r0]
 	adds r0, r5, 0
 	bl DestroyTask
@@ -1646,8 +1646,8 @@ sub_80E82A8: @ 80E82A8
 _080E82E4: .4byte gTasks
 _080E82E8: .4byte gPlayerParty
 _080E82EC: .4byte gBattlerControllerFuncs
-_080E82F0: .4byte sub_80E8930
-	thumb_func_end sub_80E82A8
+_080E82F0: .4byte CompleteOnInactiveTextPrinter_tmp
+	thumb_func_end DestroyExpTaskAndCompleteOnInactiveTextPrinter_tmp
 
 	thumb_func_start sub_80E82F4
 sub_80E82F4: @ 80E82F4
@@ -1686,7 +1686,7 @@ sub_80E82F4: @ 80E82F4
 	adds r0, r1
 	ldrb r0, [r0]
 	bl SetHealthboxSpriteInvisible
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 _080E8344:
 	pop {r4-r6}
 	pop {r0}
@@ -1933,7 +1933,7 @@ _080E8530:
 	ldr r0, [r0]
 	adds r0, 0x94
 	strb r4, [r0]
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 _080E855E:
 	add sp, 0x4
 	pop {r4-r7}
@@ -2128,7 +2128,7 @@ _080E86B4:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E86E0
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	b _080E86E4
 	.align 2, 0
 _080E86D8: .4byte gPaletteFade
@@ -2345,7 +2345,7 @@ _080E8880:
 	ldrh r1, [r0]
 	movs r0, 0x1
 	bl BtlController_EmitOneReturnValue
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	ldr r0, _080E88BC @ =gBattleStruct
 	ldr r0, [r0]
 	adds r0, 0x94
@@ -2405,7 +2405,7 @@ _080E8908:
 	ldr r2, _080E892C @ =gPlayerParty
 	adds r0, r2
 	bl HandleLowHpMusicChange
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 _080E8922:
 	pop {r4-r6}
 	pop {r0}
@@ -2415,22 +2415,22 @@ _080E8928: .4byte gBattlerPartyIndexes
 _080E892C: .4byte gPlayerParty
 	thumb_func_end sub_80E88C0
 
-	thumb_func_start sub_80E8930
-sub_80E8930: @ 80E8930
+	thumb_func_start CompleteOnInactiveTextPrinter_tmp
+CompleteOnInactiveTextPrinter_tmp: @ 80E8930
 	push {lr}
 	movs r0, 0
 	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	bne _080E8942
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 _080E8942:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80E8930
+	thumb_func_end CompleteOnInactiveTextPrinter_tmp
 
-	thumb_func_start DoHitAnimBlinkSpriteEffect_3
-DoHitAnimBlinkSpriteEffect_3: @ 80E8948
+	thumb_func_start DoHitAnimBlinkSpriteEffect_tmp
+DoHitAnimBlinkSpriteEffect_tmp: @ 80E8948
 	push {r4,lr}
 	ldr r1, _080E8984 @ =gBattlerSpriteIds
 	ldr r0, _080E8988 @ =gActiveBattler
@@ -2457,7 +2457,7 @@ DoHitAnimBlinkSpriteEffect_3: @ 80E8948
 	strb r0, [r2]
 	ldr r0, _080E8990 @ =gDoingBattleAnim
 	strb r3, [r0]
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	b _080E89BE
 	.align 2, 0
 _080E8984: .4byte gBattlerSpriteIds
@@ -2491,7 +2491,7 @@ _080E89BE:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end DoHitAnimBlinkSpriteEffect_3
+	thumb_func_end DoHitAnimBlinkSpriteEffect_tmp
 
 	thumb_func_start sub_80E89C4
 sub_80E89C4: @ 80E89C4
@@ -2532,7 +2532,7 @@ sub_80E89C4: @ 80E89C4
 	adds r0, r1
 	ldrb r0, [r0]
 	bl SetHealthboxSpriteInvisible
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 _080E8A18:
 	pop {r4-r6}
 	pop {r0}
@@ -2563,7 +2563,7 @@ sub_80E8A34: @ 80E8A34
 	ldr r0, _080E8A68 @ =SpriteCallbackDummy
 	cmp r1, r0
 	bne _080E8A58
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 _080E8A58:
 	pop {r0}
 	bx r0
@@ -2574,8 +2574,8 @@ _080E8A64: .4byte gActiveBattler
 _080E8A68: .4byte SpriteCallbackDummy
 	thumb_func_end sub_80E8A34
 
-	thumb_func_start CompleteOnFinishedBattleAnimation_4
-CompleteOnFinishedBattleAnimation_4: @ 80E8A6C
+	thumb_func_start CompleteOnFinishedBattleAnimation_tmp
+CompleteOnFinishedBattleAnimation_tmp: @ 80E8A6C
 	push {lr}
 	ldr r0, _080E8A94 @ =gBattleSpritesDataPtr
 	ldr r2, [r0]
@@ -2591,17 +2591,17 @@ CompleteOnFinishedBattleAnimation_4: @ 80E8A6C
 	ands r0, r1
 	cmp r0, 0
 	bne _080E8A8E
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 _080E8A8E:
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080E8A94: .4byte gBattleSpritesDataPtr
 _080E8A98: .4byte gActiveBattler
-	thumb_func_end CompleteOnFinishedBattleAnimation_4
+	thumb_func_end CompleteOnFinishedBattleAnimation_tmp
 
-	thumb_func_start WallyBufferExecCompleted
-WallyBufferExecCompleted: @ 80E8A9C
+	thumb_func_start OakOldManBufferExecCompleted
+OakOldManBufferExecCompleted: @ 80E8A9C
 	push {r4,lr}
 	sub sp, 0x4
 	ldr r1, _080E8ADC @ =gBattlerControllerFuncs
@@ -2609,7 +2609,7 @@ WallyBufferExecCompleted: @ 80E8A9C
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _080E8AE4 @ =sub_80E75EC
+	ldr r1, _080E8AE4 @ =OakOldManBufferRunCommand
 	str r1, [r0]
 	ldr r0, _080E8AE8 @ =gBattleTypeFlags
 	ldr r0, [r0]
@@ -2634,7 +2634,7 @@ WallyBufferExecCompleted: @ 80E8A9C
 	.align 2, 0
 _080E8ADC: .4byte gBattlerControllerFuncs
 _080E8AE0: .4byte gActiveBattler
-_080E8AE4: .4byte sub_80E75EC
+_080E8AE4: .4byte OakOldManBufferRunCommand
 _080E8AE8: .4byte gBattleTypeFlags
 _080E8AEC: .4byte gBattleBufferA
 _080E8AF0:
@@ -2655,10 +2655,10 @@ _080E8B02:
 	.align 2, 0
 _080E8B0C: .4byte gBattleControllerExecFlags
 _080E8B10: .4byte gBitTable
-	thumb_func_end WallyBufferExecCompleted
+	thumb_func_end OakOldManBufferExecCompleted
 
-	thumb_func_start CompleteOnFinishedStatusAnimation_4
-CompleteOnFinishedStatusAnimation_4: @ 80E8B14
+	thumb_func_start CompleteOnFinishedStatusAnimation_tmp
+CompleteOnFinishedStatusAnimation_tmp: @ 80E8B14
 	push {lr}
 	ldr r0, _080E8B3C @ =gBattleSpritesDataPtr
 	ldr r2, [r0]
@@ -2674,17 +2674,17 @@ CompleteOnFinishedStatusAnimation_4: @ 80E8B14
 	ands r0, r1
 	cmp r0, 0
 	bne _080E8B36
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 _080E8B36:
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080E8B3C: .4byte gBattleSpritesDataPtr
 _080E8B40: .4byte gActiveBattler
-	thumb_func_end CompleteOnFinishedStatusAnimation_4
+	thumb_func_end CompleteOnFinishedStatusAnimation_tmp
 
-	thumb_func_start WallyHandleGetMonData
-WallyHandleGetMonData: @ 80E8B44
+	thumb_func_start OakOldManHandleGetMonData
+OakOldManHandleGetMonData: @ 80E8B44
 	push {r4-r6,lr}
 	sub sp, 0x100
 	movs r6, 0
@@ -2702,7 +2702,7 @@ WallyHandleGetMonData: @ 80E8B44
 	adds r1, r0
 	ldrb r0, [r1]
 	mov r1, sp
-	bl CopyWallyMonData
+	bl CopyOakOldManMonData
 	adds r6, r0, 0
 	b _080E8B9E
 	.align 2, 0
@@ -2721,7 +2721,7 @@ _080E8B80:
 	lsrs r0, 24
 	mov r2, sp
 	adds r1, r2, r6
-	bl CopyWallyMonData
+	bl CopyOakOldManMonData
 	adds r6, r0
 _080E8B96:
 	lsrs r4, 1
@@ -2734,15 +2734,15 @@ _080E8B9E:
 	movs r0, 0x1
 	mov r2, sp
 	bl BtlController_EmitDataTransfer
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	add sp, 0x100
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end WallyHandleGetMonData
+	thumb_func_end OakOldManHandleGetMonData
 
-	thumb_func_start CopyWallyMonData
-CopyWallyMonData: @ 80E8BB8
+	thumb_func_start CopyOakOldManMonData
+CopyOakOldManMonData: @ 80E8BB8
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -3673,18 +3673,18 @@ _080E934E:
 	bx r1
 	.align 2, 0
 _080E9360: .4byte gPlayerParty
-	thumb_func_end CopyWallyMonData
+	thumb_func_end CopyOakOldManMonData
 
-	thumb_func_start WallyHandleGetRawMonData
-WallyHandleGetRawMonData: @ 80E9364
+	thumb_func_start OakOldManHandleGetRawMonData
+OakOldManHandleGetRawMonData: @ 80E9364
 	push {lr}
 	bl PlayerHandleGetRawMonData
 	pop {r0}
 	bx r0
-	thumb_func_end WallyHandleGetRawMonData
+	thumb_func_end OakOldManHandleGetRawMonData
 
-	thumb_func_start WallyHandleSetMonData
-WallyHandleSetMonData: @ 80E9370
+	thumb_func_start OakOldManHandleSetMonData
+OakOldManHandleSetMonData: @ 80E9370
 	push {r4,r5,lr}
 	ldr r1, _080E9394 @ =gBattleBufferA
 	ldr r0, _080E9398 @ =gActiveBattler
@@ -3699,7 +3699,7 @@ WallyHandleSetMonData: @ 80E9370
 	lsls r1, r2, 1
 	adds r1, r0
 	ldrb r0, [r1]
-	bl SetWallyMonData
+	bl SetOakOldManMonData
 	b _080E93BE
 	.align 2, 0
 _080E9394: .4byte gBattleBufferA
@@ -3714,7 +3714,7 @@ _080E93A4:
 	cmp r0, 0
 	beq _080E93B2
 	adds r0, r5, 0
-	bl SetWallyMonData
+	bl SetOakOldManMonData
 _080E93B2:
 	lsrs r4, 1
 	adds r0, r5, 0x1
@@ -3723,14 +3723,14 @@ _080E93B2:
 	cmp r5, 0x5
 	bls _080E93A4
 _080E93BE:
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end WallyHandleSetMonData
+	thumb_func_end OakOldManHandleSetMonData
 
-	thumb_func_start SetWallyMonData
-SetWallyMonData: @ 80E93C8
+	thumb_func_start SetOakOldManMonData
+SetOakOldManMonData: @ 80E93C8
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -4864,34 +4864,34 @@ _080E9D8E:
 _080E9DB8: .4byte gPlayerParty
 _080E9DBC: .4byte gActiveBattler
 _080E9DC0: .4byte gBattlerPartyIndexes
-	thumb_func_end SetWallyMonData
+	thumb_func_end SetOakOldManMonData
 
-	thumb_func_start sub_80E9DC4
-sub_80E9DC4: @ 80E9DC4
+	thumb_func_start OakOldManHandleSetRawMonData
+OakOldManHandleSetRawMonData: @ 80E9DC4
 	push {lr}
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80E9DC4
+	thumb_func_end OakOldManHandleSetRawMonData
 
-	thumb_func_start sub_80E9DD0
-sub_80E9DD0: @ 80E9DD0
+	thumb_func_start OakOldManHandleLoadMonSprite
+OakOldManHandleLoadMonSprite: @ 80E9DD0
 	push {lr}
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80E9DD0
+	thumb_func_end OakOldManHandleLoadMonSprite
 
-	thumb_func_start sub_80E9DDC
-sub_80E9DDC: @ 80E9DDC
+	thumb_func_start OakOldManHandleSwitchInAnim
+OakOldManHandleSwitchInAnim: @ 80E9DDC
 	push {lr}
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80E9DDC
+	thumb_func_end OakOldManHandleSwitchInAnim
 
-	thumb_func_start WallyHandleReturnMonToBall
-WallyHandleReturnMonToBall: @ 80E9DE8
+	thumb_func_start OakOldManHandleReturnMonToBall
+OakOldManHandleReturnMonToBall: @ 80E9DE8
 	push {r4-r6,lr}
 	ldr r0, _080E9E14 @ =gBattleBufferA
 	ldr r6, _080E9E18 @ =gActiveBattler
@@ -4941,7 +4941,7 @@ _080E9E24:
 	adds r0, r1
 	ldrb r0, [r0]
 	bl SetHealthboxSpriteInvisible
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 _080E9E5A:
 	pop {r4-r6}
 	pop {r0}
@@ -4950,10 +4950,10 @@ _080E9E5A:
 _080E9E60: .4byte gBattlerSpriteIds
 _080E9E64: .4byte gSprites
 _080E9E68: .4byte gHealthboxSpriteIds
-	thumb_func_end WallyHandleReturnMonToBall
+	thumb_func_end OakOldManHandleReturnMonToBall
 
-	thumb_func_start sub_80E9E6C
-sub_80E9E6C: @ 80E9E6C
+	thumb_func_start OakOldManHandleDrawTrainerPic
+OakOldManHandleDrawTrainerPic: @ 80E9E6C
 	push {r4-r6,lr}
 	ldr r0, _080E9EC8 @ =gBattleTypeFlags
 	ldr r0, [r0]
@@ -5081,7 +5081,7 @@ _080E9F1C:
 	ldrb r0, [r6]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _080E9FAC @ =sub_80E78E0
+	ldr r1, _080E9FAC @ =CompleteOnBattlerSpriteCallbackDummy_tmp
 	str r1, [r0]
 	pop {r4-r6}
 	pop {r0}
@@ -5095,11 +5095,11 @@ _080E9F9C: .4byte gSprites
 _080E9FA0: .4byte 0x0000fffe
 _080E9FA4: .4byte sub_8033EEC
 _080E9FA8: .4byte gBattlerControllerFuncs
-_080E9FAC: .4byte sub_80E78E0
-	thumb_func_end sub_80E9E6C
+_080E9FAC: .4byte CompleteOnBattlerSpriteCallbackDummy_tmp
+	thumb_func_end OakOldManHandleDrawTrainerPic
 
-	thumb_func_start sub_80E9FB0
-sub_80E9FB0: @ 80E9FB0
+	thumb_func_start OakOldManHandleTrainerSlide
+OakOldManHandleTrainerSlide: @ 80E9FB0
 	push {r4-r6,lr}
 	ldr r0, _080EA00C @ =gBattleTypeFlags
 	ldr r0, [r0]
@@ -5242,18 +5242,18 @@ _080EA0E4: .4byte 0x0000ffa0
 _080EA0E8: .4byte sub_8033EEC
 _080EA0EC: .4byte gBattlerControllerFuncs
 _080EA0F0: .4byte sub_80E8A34
-	thumb_func_end sub_80E9FB0
+	thumb_func_end OakOldManHandleTrainerSlide
 
-	thumb_func_start sub_80EA0F4
-sub_80EA0F4: @ 80EA0F4
+	thumb_func_start OakOldManHandleTrainerSlideBack
+OakOldManHandleTrainerSlideBack: @ 80EA0F4
 	push {lr}
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80EA0F4
+	thumb_func_end OakOldManHandleTrainerSlideBack
 
-	thumb_func_start sub_80EA100
-sub_80EA100: @ 80EA100
+	thumb_func_start OakOldManHandleFaintAnimation
+OakOldManHandleFaintAnimation: @ 80EA100
 	push {r4-r6,lr}
 	ldr r6, _080EA14C @ =gBattleSpritesDataPtr
 	ldr r4, [r6]
@@ -5364,18 +5364,18 @@ _080EA1DC: .4byte gBattlerSpriteIds
 _080EA1E0: .4byte sub_8012110
 _080EA1E4: .4byte gBattlerControllerFuncs
 _080EA1E8: .4byte sub_80E82F4
-	thumb_func_end sub_80EA100
+	thumb_func_end OakOldManHandleFaintAnimation
 
-	thumb_func_start sub_80EA1EC
-sub_80EA1EC: @ 80EA1EC
+	thumb_func_start OakOldManHandlePaletteFade
+OakOldManHandlePaletteFade: @ 80EA1EC
 	push {lr}
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80EA1EC
+	thumb_func_end OakOldManHandlePaletteFade
 
-	thumb_func_start sub_80EA1F8
-sub_80EA1F8: @ 80EA1F8
+	thumb_func_start OakOldManHandleSuccessBallThrowAnim
+OakOldManHandleSuccessBallThrowAnim: @ 80EA1F8
 	push {r4,r5,lr}
 	ldr r0, _080EA238 @ =gBattleSpritesDataPtr
 	ldr r0, [r0]
@@ -5400,7 +5400,7 @@ sub_80EA1F8: @ 80EA1F8
 	ldrb r0, [r5]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _080EA248 @ =sub_80E7970
+	ldr r1, _080EA248 @ =CompleteOnSpecialAnimDone_tmp
 	str r1, [r0]
 	pop {r4,r5}
 	pop {r0}
@@ -5410,11 +5410,11 @@ _080EA238: .4byte gBattleSpritesDataPtr
 _080EA23C: .4byte gDoingBattleAnim
 _080EA240: .4byte gActiveBattler
 _080EA244: .4byte gBattlerControllerFuncs
-_080EA248: .4byte sub_80E7970
-	thumb_func_end sub_80EA1F8
+_080EA248: .4byte CompleteOnSpecialAnimDone_tmp
+	thumb_func_end OakOldManHandleSuccessBallThrowAnim
 
-	thumb_func_start sub_80EA24C
-sub_80EA24C: @ 80EA24C
+	thumb_func_start OakOldManHandleBallThrow
+OakOldManHandleBallThrow: @ 80EA24C
 	push {r4,r5,lr}
 	ldr r1, _080EA294 @ =gBattleBufferA
 	ldr r5, _080EA298 @ =gActiveBattler
@@ -5444,7 +5444,7 @@ sub_80EA24C: @ 80EA24C
 	ldrb r0, [r5]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _080EA2A8 @ =sub_80E7970
+	ldr r1, _080EA2A8 @ =CompleteOnSpecialAnimDone_tmp
 	str r1, [r0]
 	pop {r4,r5}
 	pop {r0}
@@ -5455,19 +5455,19 @@ _080EA298: .4byte gActiveBattler
 _080EA29C: .4byte gBattleSpritesDataPtr
 _080EA2A0: .4byte gDoingBattleAnim
 _080EA2A4: .4byte gBattlerControllerFuncs
-_080EA2A8: .4byte sub_80E7970
-	thumb_func_end sub_80EA24C
+_080EA2A8: .4byte CompleteOnSpecialAnimDone_tmp
+	thumb_func_end OakOldManHandleBallThrow
 
-	thumb_func_start sub_80EA2AC
-sub_80EA2AC: @ 80EA2AC
+	thumb_func_start OakOldManHandlePause
+OakOldManHandlePause: @ 80EA2AC
 	push {lr}
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80EA2AC
+	thumb_func_end OakOldManHandlePause
 
-	thumb_func_start sub_80EA2B8
-sub_80EA2B8: @ 80EA2B8
+	thumb_func_start OakOldManHandleMoveAnimation
+OakOldManHandleMoveAnimation: @ 80EA2B8
 	push {r4-r6,lr}
 	ldr r0, _080EA38C @ =gBattleBufferA
 	mov r12, r0
@@ -5570,7 +5570,7 @@ sub_80EA2B8: @ 80EA2B8
 	lsrs r3, r0, 24
 	cmp r3, 0
 	beq _080EA3B0
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	b _080EA3CE
 	.align 2, 0
 _080EA38C: .4byte gBattleBufferA
@@ -5596,7 +5596,7 @@ _080EA3B0:
 	ldrb r0, [r6]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _080EA3DC @ =sub_80EA3E0
+	ldr r1, _080EA3DC @ =OakOldManDoMoveAnimation
 	str r1, [r0]
 _080EA3CE:
 	pop {r4-r6}
@@ -5605,11 +5605,11 @@ _080EA3CE:
 	.align 2, 0
 _080EA3D4: .4byte gBattleSpritesDataPtr
 _080EA3D8: .4byte gBattlerControllerFuncs
-_080EA3DC: .4byte sub_80EA3E0
-	thumb_func_end sub_80EA2B8
+_080EA3DC: .4byte OakOldManDoMoveAnimation
+	thumb_func_end OakOldManHandleMoveAnimation
 
-	thumb_func_start sub_80EA3E0
-sub_80EA3E0: @ 80EA3E0
+	thumb_func_start OakOldManDoMoveAnimation
+OakOldManDoMoveAnimation: @ 80EA3E0
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -5763,7 +5763,7 @@ _080EA4E4:
 	lsls r0, 2
 	adds r0, r2
 	strb r4, [r0, 0x4]
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 _080EA520:
 	pop {r3,r4}
 	mov r8, r3
@@ -5771,10 +5771,10 @@ _080EA520:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80EA3E0
+	thumb_func_end OakOldManDoMoveAnimation
 
-	thumb_func_start sub_80EA52C
-sub_80EA52C: @ 80EA52C
+	thumb_func_start OakOldManHandlePrintString
+OakOldManHandlePrintString: @ 80EA52C
 	push {r4,lr}
 	ldr r0, _080EA55C @ =gBattle_BG0_X
 	movs r1, 0
@@ -5796,7 +5796,7 @@ sub_80EA52C: @ 80EA52C
 	ldrh r0, [r4]
 	cmp r0, 0x1
 	bne _080EA570
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	b _080EA65A
 	.align 2, 0
 _080EA55C: .4byte gBattle_BG0_X
@@ -5921,10 +5921,10 @@ _080EA65A:
 _080EA660: .4byte gBattlerControllerFuncs
 _080EA664: .4byte gActiveBattler
 _080EA668: .4byte sub_80E7918
-	thumb_func_end sub_80EA52C
+	thumb_func_end OakOldManHandlePrintString
 
-	thumb_func_start sub_80EA66C
-sub_80EA66C: @ 80EA66C
+	thumb_func_start OakOldManHandlePrintSelectionString
+OakOldManHandlePrintSelectionString: @ 80EA66C
 	push {lr}
 	ldr r0, _080EA684 @ =gActiveBattler
 	ldrb r0, [r0]
@@ -5932,16 +5932,16 @@ sub_80EA66C: @ 80EA66C
 	lsls r0, 24
 	cmp r0, 0
 	bne _080EA688
-	bl sub_80EA52C
+	bl OakOldManHandlePrintString
 	b _080EA68C
 	.align 2, 0
 _080EA684: .4byte gActiveBattler
 _080EA688:
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 _080EA68C:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80EA66C
+	thumb_func_end OakOldManHandlePrintSelectionString
 
 	thumb_func_start sub_80EA690
 sub_80EA690: @ 80EA690
@@ -5967,7 +5967,7 @@ sub_80EA690: @ 80EA690
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _080EA6D8 @ =sub_80E763C
+	ldr r1, _080EA6D8 @ =HandleInputChooseAction_tmp
 	b _080EA6E8
 	.align 2, 0
 _080EA6C4: .4byte gBattle_BG0_X
@@ -5975,7 +5975,7 @@ _080EA6C8: .4byte gBattle_BG0_Y
 _080EA6CC: .4byte gBattleTypeFlags
 _080EA6D0: .4byte gBattlerControllerFuncs
 _080EA6D4: .4byte gActiveBattler
-_080EA6D8: .4byte sub_80E763C
+_080EA6D8: .4byte HandleInputChooseAction_tmp
 _080EA6DC:
 	ldr r1, _080EA6F0 @ =gBattlerControllerFuncs
 	ldr r0, _080EA6F4 @ =gActiveBattler
@@ -5994,8 +5994,8 @@ _080EA6F4: .4byte gActiveBattler
 _080EA6F8: .4byte sub_80E7844
 	thumb_func_end sub_80EA690
 
-	thumb_func_start sub_80EA6FC
-sub_80EA6FC: @ 80EA6FC
+	thumb_func_start OakOldManHandleChooseAction
+OakOldManHandleChooseAction: @ 80EA6FC
 	push {r4,lr}
 	ldr r1, _080EA750 @ =gBattlerControllerFuncs
 	ldr r0, _080EA754 @ =gActiveBattler
@@ -6056,15 +6056,15 @@ _080EA776:
 	.align 2, 0
 _080EA784: .4byte gUnknown_83FE6FA
 _080EA788: .4byte gDisplayedStringBattle
-	thumb_func_end sub_80EA6FC
+	thumb_func_end OakOldManHandleChooseAction
 
-	thumb_func_start sub_80EA78C
-sub_80EA78C: @ 80EA78C
+	thumb_func_start OakOldManHandleUnknownYesNoBox
+OakOldManHandleUnknownYesNoBox: @ 80EA78C
 	push {lr}
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80EA78C
+	thumb_func_end OakOldManHandleUnknownYesNoBox
 
 	thumb_func_start sub_80EA798
 sub_80EA798: @ 80EA798
@@ -6099,8 +6099,8 @@ _080EA7D4: .4byte gActiveBattler
 _080EA7D8: .4byte sub_80E7988
 	thumb_func_end sub_80EA798
 
-	thumb_func_start sub_80EA7DC
-sub_80EA7DC: @ 80EA7DC
+	thumb_func_start OakOldManHandleChooseMove
+OakOldManHandleChooseMove: @ 80EA7DC
 	push {r4,lr}
 	ldr r0, _080EA800 @ =gBattleTypeFlags
 	ldr r0, [r0]
@@ -6162,17 +6162,17 @@ _080EA83E:
 	movs r0, 0x1
 	movs r1, 0xA
 	bl BtlController_EmitTwoReturnValues
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 _080EA866:
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080EA86C: .4byte gBattleStruct
-	thumb_func_end sub_80EA7DC
+	thumb_func_end OakOldManHandleChooseMove
 
-	thumb_func_start sub_80EA870
-sub_80EA870: @ 80EA870
+	thumb_func_start OakOldManHandleChooseItem
+OakOldManHandleChooseItem: @ 80EA870
 	push {r4,r5,lr}
 	sub sp, 0x4
 	movs r0, 0x1
@@ -6187,7 +6187,7 @@ sub_80EA870: @ 80EA870
 	ldrb r0, [r2]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _080EA8C4 @ =sub_80E7A70
+	ldr r1, _080EA8C4 @ =OpenBagAndChooseItem_tmp
 	str r1, [r0]
 	ldr r1, _080EA8C8 @ =gBattlerInMenuId
 	ldrb r0, [r2]
@@ -6214,14 +6214,14 @@ _080EA89E:
 	.align 2, 0
 _080EA8BC: .4byte gBattlerControllerFuncs
 _080EA8C0: .4byte gActiveBattler
-_080EA8C4: .4byte sub_80E7A70
+_080EA8C4: .4byte OpenBagAndChooseItem_tmp
 _080EA8C8: .4byte gBattlerInMenuId
 _080EA8CC: .4byte gUnknown_203B0DC
 _080EA8D0: .4byte gBattleBufferA
-	thumb_func_end sub_80EA870
+	thumb_func_end OakOldManHandleChooseItem
 
-	thumb_func_start sub_80EA8D4
-sub_80EA8D4: @ 80EA8D4
+	thumb_func_start OakOldManHandleChoosePokemon
+OakOldManHandleChoosePokemon: @ 80EA8D4
 	push {r4-r6,lr}
 	sub sp, 0x4
 	ldr r0, _080EA984 @ =TaskDummy
@@ -6299,7 +6299,7 @@ _080EA940:
 	ldrb r0, [r2]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _080EA9A4 @ =sub_80E79B8
+	ldr r1, _080EA9A4 @ =OpenPartyMenuToChooseMon_tmp
 	str r1, [r0]
 	ldr r1, _080EA9A8 @ =gBattlerInMenuId
 	ldrb r0, [r2]
@@ -6317,20 +6317,20 @@ _080EA994: .4byte gBattleBufferA
 _080EA998: .4byte gBattleStruct
 _080EA99C: .4byte gUnknown_203B0DC
 _080EA9A0: .4byte gBattlerControllerFuncs
-_080EA9A4: .4byte sub_80E79B8
+_080EA9A4: .4byte OpenPartyMenuToChooseMon_tmp
 _080EA9A8: .4byte gBattlerInMenuId
-	thumb_func_end sub_80EA8D4
+	thumb_func_end OakOldManHandleChoosePokemon
 
-	thumb_func_start sub_80EA9AC
-sub_80EA9AC: @ 80EA9AC
+	thumb_func_start OakOldManHandleCmd23
+OakOldManHandleCmd23: @ 80EA9AC
 	push {lr}
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80EA9AC
+	thumb_func_end OakOldManHandleCmd23
 
-	thumb_func_start sub_80EA9B8
-sub_80EA9B8: @ 80EA9B8
+	thumb_func_start OakOldManHandleHealthBarUpdate
+OakOldManHandleHealthBarUpdate: @ 80EA9B8
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -6442,10 +6442,10 @@ _080EAAA8: .4byte gHealthboxSpriteIds
 _080EAAAC: .4byte gBattlerControllerFuncs
 _080EAAB0: .4byte gActiveBattler
 _080EAAB4: .4byte sub_80E88C0
-	thumb_func_end sub_80EA9B8
+	thumb_func_end OakOldManHandleHealthBarUpdate
 
-	thumb_func_start sub_80EAAB8
-sub_80EAAB8: @ 80EAAB8
+	thumb_func_start OakOldManHandleExpUpdate
+OakOldManHandleExpUpdate: @ 80EAAB8
 	push {r4-r7,lr}
 	ldr r5, _080EAAE4 @ =gBattleBufferA
 	ldr r6, _080EAAE8 @ =gActiveBattler
@@ -6464,7 +6464,7 @@ sub_80EAAB8: @ 80EAAB8
 	bl GetMonData
 	cmp r0, 0x63
 	bls _080EAAF0
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	b _080EAB3C
 	.align 2, 0
 _080EAAE4: .4byte gBattleBufferA
@@ -6486,7 +6486,7 @@ _080EAAF0:
 	ldrb r0, [r1]
 	lsls r0, 8
 	orrs r4, r0
-	ldr r0, _080EAB44 @ =sub_80E7E04
+	ldr r0, _080EAB44 @ =Task_GiveExpToMon_tmp
 	movs r1, 0xA
 	bl CreateTask
 	lsls r0, 24
@@ -6511,134 +6511,134 @@ _080EAB3C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080EAB44: .4byte sub_80E7E04
+_080EAB44: .4byte Task_GiveExpToMon_tmp
 _080EAB48: .4byte gTasks
 _080EAB4C: .4byte gBattlerControllerFuncs
 _080EAB50: .4byte nullsub_81
-	thumb_func_end sub_80EAAB8
+	thumb_func_end OakOldManHandleExpUpdate
 
-	thumb_func_start sub_80EAB54
-sub_80EAB54: @ 80EAB54
+	thumb_func_start OakOldManHandleStatusIconUpdate
+OakOldManHandleStatusIconUpdate: @ 80EAB54
 	push {lr}
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80EAB54
+	thumb_func_end OakOldManHandleStatusIconUpdate
 
-	thumb_func_start sub_80EAB60
-sub_80EAB60: @ 80EAB60
+	thumb_func_start OakOldManHandleStatusAnimation
+OakOldManHandleStatusAnimation: @ 80EAB60
 	push {lr}
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80EAB60
+	thumb_func_end OakOldManHandleStatusAnimation
 
-	thumb_func_start sub_80EAB6C
-sub_80EAB6C: @ 80EAB6C
+	thumb_func_start OakOldManHandleStatusXor
+OakOldManHandleStatusXor: @ 80EAB6C
 	push {lr}
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80EAB6C
+	thumb_func_end OakOldManHandleStatusXor
 
-	thumb_func_start sub_80EAB78
-sub_80EAB78: @ 80EAB78
+	thumb_func_start OakOldManHandleDataTransfer
+OakOldManHandleDataTransfer: @ 80EAB78
 	push {lr}
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80EAB78
+	thumb_func_end OakOldManHandleDataTransfer
 
-	thumb_func_start sub_80EAB84
-sub_80EAB84: @ 80EAB84
+	thumb_func_start OakOldManHandleDMA3Transfer
+OakOldManHandleDMA3Transfer: @ 80EAB84
 	push {lr}
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80EAB84
+	thumb_func_end OakOldManHandleDMA3Transfer
 
-	thumb_func_start sub_80EAB90
-sub_80EAB90: @ 80EAB90
+	thumb_func_start OakOldManHandlePlayBGM
+OakOldManHandlePlayBGM: @ 80EAB90
 	push {lr}
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80EAB90
+	thumb_func_end OakOldManHandlePlayBGM
 
-	thumb_func_start sub_80EAB9C
-sub_80EAB9C: @ 80EAB9C
+	thumb_func_start OakOldManHandleCmd32
+OakOldManHandleCmd32: @ 80EAB9C
 	push {lr}
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80EAB9C
+	thumb_func_end OakOldManHandleCmd32
 
-	thumb_func_start sub_80EABA8
-sub_80EABA8: @ 80EABA8
+	thumb_func_start OakOldManHandleTwoReturnValues
+OakOldManHandleTwoReturnValues: @ 80EABA8
 	push {lr}
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80EABA8
+	thumb_func_end OakOldManHandleTwoReturnValues
 
-	thumb_func_start sub_80EABB4
-sub_80EABB4: @ 80EABB4
+	thumb_func_start OakOldManHandleChosenMonReturnValue
+OakOldManHandleChosenMonReturnValue: @ 80EABB4
 	push {lr}
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80EABB4
+	thumb_func_end OakOldManHandleChosenMonReturnValue
 
-	thumb_func_start sub_80EABC0
-sub_80EABC0: @ 80EABC0
+	thumb_func_start OakOldManHandleOneReturnValue
+OakOldManHandleOneReturnValue: @ 80EABC0
 	push {lr}
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80EABC0
+	thumb_func_end OakOldManHandleOneReturnValue
 
-	thumb_func_start sub_80EABCC
-sub_80EABCC: @ 80EABCC
+	thumb_func_start OakOldManHandleOneReturnValue_Duplicate
+OakOldManHandleOneReturnValue_Duplicate: @ 80EABCC
 	push {lr}
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80EABCC
+	thumb_func_end OakOldManHandleOneReturnValue_Duplicate
 
-	thumb_func_start sub_80EABD8
-sub_80EABD8: @ 80EABD8
+	thumb_func_start OakOldManHandleCmd37
+OakOldManHandleCmd37: @ 80EABD8
 	push {lr}
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80EABD8
+	thumb_func_end OakOldManHandleCmd37
 
-	thumb_func_start sub_80EABE4
-sub_80EABE4: @ 80EABE4
+	thumb_func_start OakOldManHandleCmd38
+OakOldManHandleCmd38: @ 80EABE4
 	push {lr}
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80EABE4
+	thumb_func_end OakOldManHandleCmd38
 
-	thumb_func_start sub_80EABF0
-sub_80EABF0: @ 80EABF0
+	thumb_func_start OakOldManHandleCmd39
+OakOldManHandleCmd39: @ 80EABF0
 	push {lr}
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80EABF0
+	thumb_func_end OakOldManHandleCmd39
 
-	thumb_func_start sub_80EABFC
-sub_80EABFC: @ 80EABFC
+	thumb_func_start OakOldManHandleCmd40
+OakOldManHandleCmd40: @ 80EABFC
 	push {lr}
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80EABFC
+	thumb_func_end OakOldManHandleCmd40
 
-	thumb_func_start sub_80EAC08
-sub_80EAC08: @ 80EAC08
+	thumb_func_start OakOldManHandleHitAnimation
+OakOldManHandleHitAnimation: @ 80EAC08
 	push {r4,lr}
 	ldr r3, _080EAC30 @ =gSprites
 	ldr r2, _080EAC34 @ =gBattlerSpriteIds
@@ -6655,7 +6655,7 @@ sub_80EAC08: @ 80EAC08
 	lsls r0, 29
 	cmp r0, 0
 	bge _080EAC3C
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	b _080EAC66
 	.align 2, 0
 _080EAC30: .4byte gSprites
@@ -6680,7 +6680,7 @@ _080EAC3C:
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _080EAC74 @ =DoHitAnimBlinkSpriteEffect_3
+	ldr r1, _080EAC74 @ =DoHitAnimBlinkSpriteEffect_tmp
 	str r1, [r0]
 _080EAC66:
 	pop {r4}
@@ -6689,19 +6689,19 @@ _080EAC66:
 	.align 2, 0
 _080EAC6C: .4byte gDoingBattleAnim
 _080EAC70: .4byte gBattlerControllerFuncs
-_080EAC74: .4byte DoHitAnimBlinkSpriteEffect_3
-	thumb_func_end sub_80EAC08
+_080EAC74: .4byte DoHitAnimBlinkSpriteEffect_tmp
+	thumb_func_end OakOldManHandleHitAnimation
 
-	thumb_func_start sub_80EAC78
-sub_80EAC78: @ 80EAC78
+	thumb_func_start OakOldManHandleCmd42
+OakOldManHandleCmd42: @ 80EAC78
 	push {lr}
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80EAC78
+	thumb_func_end OakOldManHandleCmd42
 
-	thumb_func_start sub_80EAC84
-sub_80EAC84: @ 80EAC84
+	thumb_func_start OakOldManHandlePlaySE
+OakOldManHandlePlaySE: @ 80EAC84
 	push {lr}
 	ldr r2, _080EACAC @ =gBattleBufferA
 	ldr r0, _080EACB0 @ =gActiveBattler
@@ -6716,16 +6716,16 @@ sub_80EAC84: @ 80EAC84
 	lsls r1, 8
 	orrs r0, r1
 	bl PlaySE
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080EACAC: .4byte gBattleBufferA
 _080EACB0: .4byte gActiveBattler
-	thumb_func_end sub_80EAC84
+	thumb_func_end OakOldManHandlePlaySE
 
-	thumb_func_start sub_80EACB4
-sub_80EACB4: @ 80EACB4
+	thumb_func_start OakOldManHandlePlayFanfare
+OakOldManHandlePlayFanfare: @ 80EACB4
 	push {lr}
 	ldr r2, _080EACDC @ =gBattleBufferA
 	ldr r0, _080EACE0 @ =gActiveBattler
@@ -6740,16 +6740,16 @@ sub_80EACB4: @ 80EACB4
 	lsls r1, 8
 	orrs r0, r1
 	bl PlayFanfare
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080EACDC: .4byte gBattleBufferA
 _080EACE0: .4byte gActiveBattler
-	thumb_func_end sub_80EACB4
+	thumb_func_end OakOldManHandlePlayFanfare
 
-	thumb_func_start sub_80EACE4
-sub_80EACE4: @ 80EACE4
+	thumb_func_start OakOldManHandleFaintingCry
+OakOldManHandleFaintingCry: @ 80EACE4
 	push {lr}
 	ldr r1, _080EAD14 @ =gBattlerPartyIndexes
 	ldr r0, _080EAD18 @ =gActiveBattler
@@ -6767,17 +6767,17 @@ sub_80EACE4: @ 80EACE4
 	lsrs r0, 16
 	movs r1, 0x19
 	bl PlayCry1
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080EAD14: .4byte gBattlerPartyIndexes
 _080EAD18: .4byte gActiveBattler
 _080EAD1C: .4byte gPlayerParty
-	thumb_func_end sub_80EACE4
+	thumb_func_end OakOldManHandleFaintingCry
 
-	thumb_func_start sub_80EAD20
-sub_80EAD20: @ 80EAD20
+	thumb_func_start OakOldManHandleIntroSlide
+OakOldManHandleIntroSlide: @ 80EAD20
 	push {lr}
 	ldr r1, _080EAD48 @ =gBattleBufferA
 	ldr r0, _080EAD4C @ =gActiveBattler
@@ -6792,17 +6792,17 @@ sub_80EAD20: @ 80EAD20
 	movs r1, 0x1
 	orrs r0, r1
 	strh r0, [r2]
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080EAD48: .4byte gBattleBufferA
 _080EAD4C: .4byte gActiveBattler
 _080EAD50: .4byte gIntroSlideFlags
-	thumb_func_end sub_80EAD20
+	thumb_func_end OakOldManHandleIntroSlide
 
-	thumb_func_start sub_80EAD54
-sub_80EAD54: @ 80EAD54
+	thumb_func_start OakOldManHandleIntroTrainerBallThrow
+OakOldManHandleIntroTrainerBallThrow: @ 80EAD54
 	push {r4-r7,lr}
 	ldr r0, _080EAEA0 @ =gBattleTypeFlags
 	ldr r0, [r0]
@@ -7008,7 +7008,7 @@ _080EAEE4:
 	ldr r1, _080EAF30 @ =Task_HidePartyStatusSummary
 	str r1, [r0]
 _080EAF14:
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 _080EAF18:
 	pop {r4-r7}
 	pop {r0}
@@ -7019,7 +7019,7 @@ _080EAF24: .4byte gActiveBattler
 _080EAF28: .4byte gTasks
 _080EAF2C: .4byte gBattlerStatusSummaryTaskId
 _080EAF30: .4byte Task_HidePartyStatusSummary
-	thumb_func_end sub_80EAD54
+	thumb_func_end OakOldManHandleIntroTrainerBallThrow
 
 	thumb_func_start sub_80EAF34
 sub_80EAF34: @ 80EAF34
@@ -7249,8 +7249,8 @@ _080EB114: .4byte gBattlerControllerFuncs
 _080EB118: .4byte sub_80E7B4C
 	thumb_func_end sub_80EB0A8
 
-	thumb_func_start sub_80EB11C
-sub_80EB11C: @ 80EB11C
+	thumb_func_start OakOldManHandleDrawPartyStatusSummary
+OakOldManHandleDrawPartyStatusSummary: @ 80EB11C
 	push {r4,r5,lr}
 	ldr r1, _080EB144 @ =gBattleBufferA
 	ldr r0, _080EB148 @ =gActiveBattler
@@ -7266,7 +7266,7 @@ sub_80EB11C: @ 80EB11C
 	lsls r0, 24
 	cmp r0, 0
 	bne _080EB14C
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	b _080EB18A
 	.align 2, 0
 _080EB144: .4byte gBattleBufferA
@@ -7300,7 +7300,7 @@ _080EB14C:
 	ldrb r1, [r5]
 	adds r1, r2
 	strb r0, [r1]
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 _080EB18A:
 	pop {r4,r5}
 	pop {r0}
@@ -7310,18 +7310,18 @@ _080EB190: .4byte gBattleSpritesDataPtr
 _080EB194: .4byte gActiveBattler
 _080EB198: .4byte (gBattleBufferA + 4)
 _080EB19C: .4byte gBattlerStatusSummaryTaskId
-	thumb_func_end sub_80EB11C
+	thumb_func_end OakOldManHandleDrawPartyStatusSummary
 
-	thumb_func_start sub_80EB1A0
-sub_80EB1A0: @ 80EB1A0
+	thumb_func_start OakOldManHandleHidePartyStatusSummary
+OakOldManHandleHidePartyStatusSummary: @ 80EB1A0
 	push {lr}
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80EB1A0
+	thumb_func_end OakOldManHandleHidePartyStatusSummary
 
-	thumb_func_start sub_80EB1AC
-sub_80EB1AC: @ 80EB1AC
+	thumb_func_start OakOldManHandleEndBounceEffect
+OakOldManHandleEndBounceEffect: @ 80EB1AC
 	push {r4,lr}
 	ldr r4, _080EB1CC @ =gActiveBattler
 	ldrb r0, [r4]
@@ -7330,24 +7330,24 @@ sub_80EB1AC: @ 80EB1AC
 	ldrb r0, [r4]
 	movs r1, 0
 	bl EndBounceEffect
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080EB1CC: .4byte gActiveBattler
-	thumb_func_end sub_80EB1AC
+	thumb_func_end OakOldManHandleEndBounceEffect
 
-	thumb_func_start sub_80EB1D0
-sub_80EB1D0: @ 80EB1D0
+	thumb_func_start OakOldManHandleSpriteInvisibility
+OakOldManHandleSpriteInvisibility: @ 80EB1D0
 	push {lr}
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80EB1D0
+	thumb_func_end OakOldManHandleSpriteInvisibility
 
-	thumb_func_start sub_80EB1DC
-sub_80EB1DC: @ 80EB1DC
+	thumb_func_start OakOldManHandleBattleAnimation
+OakOldManHandleBattleAnimation: @ 80EB1DC
 	push {r4-r6,lr}
 	sub sp, 0x4
 	ldr r5, _080EB214 @ =gBattleBufferA
@@ -7372,7 +7372,7 @@ sub_80EB1DC: @ 80EB1DC
 	lsls r0, 24
 	cmp r0, 0
 	beq _080EB21C
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	b _080EB228
 	.align 2, 0
 _080EB214: .4byte gBattleBufferA
@@ -7382,7 +7382,7 @@ _080EB21C:
 	ldrb r1, [r6]
 	lsls r1, 2
 	adds r1, r0
-	ldr r0, _080EB234 @ =CompleteOnFinishedBattleAnimation_4
+	ldr r0, _080EB234 @ =CompleteOnFinishedBattleAnimation_tmp
 	str r0, [r1]
 _080EB228:
 	add sp, 0x4
@@ -7391,11 +7391,11 @@ _080EB228:
 	bx r0
 	.align 2, 0
 _080EB230: .4byte gBattlerControllerFuncs
-_080EB234: .4byte CompleteOnFinishedBattleAnimation_4
-	thumb_func_end sub_80EB1DC
+_080EB234: .4byte CompleteOnFinishedBattleAnimation_tmp
+	thumb_func_end OakOldManHandleBattleAnimation
 
-	thumb_func_start sub_80EB238
-sub_80EB238: @ 80EB238
+	thumb_func_start OakOldManHandleLinkStandbyMsg
+OakOldManHandleLinkStandbyMsg: @ 80EB238
 	push {r4,lr}
 	ldr r1, _080EB26C @ =gBattleBufferA
 	ldr r4, _080EB270 @ =gActiveBattler
@@ -7415,25 +7415,25 @@ sub_80EB238: @ 80EB238
 	movs r1, 0
 	bl EndBounceEffect
 _080EB260:
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080EB26C: .4byte gBattleBufferA
 _080EB270: .4byte gActiveBattler
-	thumb_func_end sub_80EB238
+	thumb_func_end OakOldManHandleLinkStandbyMsg
 
-	thumb_func_start sub_80EB274
-sub_80EB274: @ 80EB274
+	thumb_func_start OakOldManHandleResetActionMoveSelection
+OakOldManHandleResetActionMoveSelection: @ 80EB274
 	push {lr}
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80EB274
+	thumb_func_end OakOldManHandleResetActionMoveSelection
 
-	thumb_func_start sub_80EB280
-sub_80EB280: @ 80EB280
+	thumb_func_start OakOldManHandleCmd55
+OakOldManHandleCmd55: @ 80EB280
 	push {r4,lr}
 	ldr r2, _080EB2C4 @ =gBattleOutcome
 	ldr r1, _080EB2C8 @ =gBattleBufferA
@@ -7448,7 +7448,7 @@ sub_80EB280: @ 80EB280
 	bl FadeOutMapMusic
 	movs r0, 0x3
 	bl BeginFastPaletteFade
-	bl WallyBufferExecCompleted
+	bl OakOldManBufferExecCompleted
 	ldr r0, _080EB2D0 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x6
@@ -7472,12 +7472,12 @@ _080EB2CC: .4byte gActiveBattler
 _080EB2D0: .4byte gBattleTypeFlags
 _080EB2D4: .4byte gBattlerControllerFuncs
 _080EB2D8: .4byte sub_80E7930
-	thumb_func_end sub_80EB280
+	thumb_func_end OakOldManHandleCmd55
 
-	thumb_func_start nullsub_82
-nullsub_82: @ 80EB2DC
+	thumb_func_start OakOldManCmdEnd
+OakOldManCmdEnd: @ 80EB2DC
 	bx lr
-	thumb_func_end nullsub_82
+	thumb_func_end OakOldManCmdEnd
 
 	thumb_func_start sub_80EB2E0
 sub_80EB2E0: @ 80EB2E0

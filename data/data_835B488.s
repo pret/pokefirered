@@ -994,7 +994,35 @@ gUnknown_83E04B0:: @ 83E04B0
 	.4byte gUnknown_83E0480, 5
 
 gStdStringPtrs:: @ 83E06B8
-	.incbin "baserom.gba", 0x3E06B8, 0x74
+	.4byte gUnknown_8417ABF
+	.4byte gUnknown_8417AC4
+	.4byte gUnknown_8417ACB
+	.4byte gUnknown_8417AD0
+	.4byte gUnknown_8417AD6
+	.4byte gUnknown_8417AF4
+	.4byte gUnknown_8417AF9
+	.4byte gUnknown_8417B00
+	.4byte gUnknown_8417B05
+	.4byte gUnknown_8417B0B
+	.4byte gUnknown_8417B11
+	.4byte gUnknown_8417B17
+	.4byte gUnknown_8417B21
+	.4byte gUnknown_8417B2C
+	.4byte gUnknown_8417B36
+	.4byte gUnknown_8417B3E
+	.4byte gUnknown_8417B4B
+	.4byte gUnknown_8417B58
+	.4byte gUnknown_8417B65
+	.4byte gUnknown_8417B72
+	.4byte gUnknown_8417B7C
+	.4byte gUnknown_8417B87
+	.4byte gUnknown_8417B94
+	.4byte gUnknown_8417C2D
+	.4byte gUnknown_8417DA9
+	.4byte gUnknown_8417DB6
+	.4byte gUnknown_8417DC7
+	.4byte gUnknown_8417DD9
+	.4byte gUnknown_8417DE1
 
 gUnknown_83E072C:: @ 83E072C
 	.incbin "baserom.gba", 0x3E072C, 0xC

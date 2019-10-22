@@ -2235,7 +2235,7 @@ static const struct UnkStruct_300201C gUnknown_84566A4 = {
     0x7FFF
 };
 
-u16 * sub_8112D40(u8 a0, u16 a1)
+void * sub_8112D40(u8 a0, u16 a1)
 {
     u16 * response;
     if (gUnknown_203AF98 == 0)

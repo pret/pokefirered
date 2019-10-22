@@ -72,9 +72,9 @@ struct UnkStruct_203AE98
 
 struct UnkStruct_300201C
 {
-    u16 unk_0_0:15;
-    u16 unk_0_f:1;
-    u16 unk_2;
+    u16 idx:15;
+    u16 isFlag:1;
+    u16 value;
 };
 
 struct UnkStruct_203B044
@@ -85,12 +85,12 @@ struct UnkStruct_203B044
 };
 
 u8 gUnknown_3005E88;
-u16 gUnknown_3005E8C;
+u16 sNumQuestLogs;
 struct UnkStruct_3005E90 gUnknown_3005E90;
 struct UnkStruct_203AE98 * gUnknown_3005E94;
 
-static struct UnkStruct_300201C * gUnknown_300201C;
-static u16 gUnknown_3002020;
+static struct UnkStruct_300201C * sFlagOrVarRecords;
+static u16 sNumFlagsOrVars;
 
 static EWRAM_DATA u8 gUnknown_203ADF8 = 0;
 static EWRAM_DATA u8 sNumScenes = 0;
@@ -104,11 +104,11 @@ static EWRAM_DATA void (* gUnknown_203AE8C)(void) = NULL;
 static EWRAM_DATA u16 *gUnknown_203AE90 = NULL;
 static EWRAM_DATA struct UnkStruct_203AE94 gUnknown_203AE94 = {0};
 static EWRAM_DATA struct UnkStruct_203AE98 gUnknown_203AE98[32] = {0};
-static EWRAM_DATA u16 gUnknown_203AF98 = 0;
+static EWRAM_DATA u16 sQuestLogIdx = 0;
 static EWRAM_DATA u8 gUnknown_203AF9A[64][2] = {{0}};
 static EWRAM_DATA u16 gUnknown_203B01A = 0;
 static EWRAM_DATA u16 gUnknown_203B01C = 0;
-static EWRAM_DATA u16 gUnknown_203B01E = 0;
+static EWRAM_DATA u16 sFlagOrVarPlayhead = 0;
 static EWRAM_DATA u8 sHelpMessageWindowId = 0;
 static EWRAM_DATA struct UnkStruct_203B024 gUnknown_203B024 = {0};
 static EWRAM_DATA struct UnkStruct_203B044 gUnknown_203B044 = {0};
@@ -807,7 +807,7 @@ static bool8 sub_8110E68(struct UnkStruct_203AE98 * a0)
 {
     u16 i;
 
-    for (i = gUnknown_203ADFC; i < gUnknown_203AF98; i++)
+    for (i = gUnknown_203ADFC; i < sQuestLogIdx; i++)
     {
         if (gUnknown_203AE08 == NULL)
             return FALSE;
@@ -833,7 +833,7 @@ static bool8 sub_8110E68(struct UnkStruct_203AE98 * a0)
         gUnknown_203AE08 = sub_8113BF4(gUnknown_203AE08);
         return FALSE;
     }
-    gUnknown_203ADFC = gUnknown_203AF98;
+    gUnknown_203ADFC = sQuestLogIdx;
     return TRUE;
 }
 
@@ -1728,13 +1728,13 @@ void sub_81124EC(u8 a0, u8 a1, u8 a2, u8 a3)
 {
     if (!sub_8112CEC())
     {
-        gUnknown_3005E94[gUnknown_203AF98].unk_4 = gUnknown_203B01A;
-        gUnknown_3005E94[gUnknown_203AF98].unk_6 = 0;
-        gUnknown_3005E94[gUnknown_203AF98].unk_0 = a0;
-        gUnknown_3005E94[gUnknown_203AF98].unk_1 = a1;
-        gUnknown_3005E94[gUnknown_203AF98].unk_2 = a2;
-        gUnknown_3005E94[gUnknown_203AF98].unk_3 = a3;
-        gUnknown_203AF98++;
+        gUnknown_3005E94[sQuestLogIdx].unk_4 = gUnknown_203B01A;
+        gUnknown_3005E94[sQuestLogIdx].unk_6 = 0;
+        gUnknown_3005E94[sQuestLogIdx].unk_0 = a0;
+        gUnknown_3005E94[sQuestLogIdx].unk_1 = a1;
+        gUnknown_3005E94[sQuestLogIdx].unk_2 = a2;
+        gUnknown_3005E94[sQuestLogIdx].unk_3 = a3;
+        sQuestLogIdx++;
         gUnknown_203B01A = 0;
     }
 }
@@ -1743,13 +1743,13 @@ void sub_8112588(u8 a0, u8 a1, u8 a2, u8 a3, u8 a4)
 {
     if (!sub_8112D1C())
     {
-        gUnknown_3005E94[gUnknown_203AF98].unk_4 = gUnknown_203B01A;
-        gUnknown_3005E94[gUnknown_203AF98].unk_6 = 0;
-        gUnknown_3005E94[gUnknown_203AF98].unk_0 = a0;
-        gUnknown_3005E94[gUnknown_203AF98].unk_1 = a1;
-        gUnknown_3005E94[gUnknown_203AF98].unk_2 = a2;
-        gUnknown_3005E94[gUnknown_203AF98].unk_3 = a3;
-        gUnknown_203AF98++;
+        gUnknown_3005E94[sQuestLogIdx].unk_4 = gUnknown_203B01A;
+        gUnknown_3005E94[sQuestLogIdx].unk_6 = 0;
+        gUnknown_3005E94[sQuestLogIdx].unk_0 = a0;
+        gUnknown_3005E94[sQuestLogIdx].unk_1 = a1;
+        gUnknown_3005E94[sQuestLogIdx].unk_2 = a2;
+        gUnknown_3005E94[sQuestLogIdx].unk_3 = a3;
+        sQuestLogIdx++;
         gUnknown_203B01A = a4;
     }
 }
@@ -1760,12 +1760,12 @@ void sub_8112628(u8 a0)
     {
         if (a0 != gUnknown_3005E94[gUnknown_203B01C].unk_3 || a0 > 3)
         {
-            gUnknown_3005E94[gUnknown_203AF98].unk_4 = gUnknown_203B01A;
-            gUnknown_3005E94[gUnknown_203AF98].unk_6 = 0;
-            gUnknown_3005E94[gUnknown_203AF98].unk_0 = 0;
-            gUnknown_3005E94[gUnknown_203AF98].unk_3 = a0;
-            gUnknown_203B01C = gUnknown_203AF98;
-            gUnknown_203AF98++;
+            gUnknown_3005E94[sQuestLogIdx].unk_4 = gUnknown_203B01A;
+            gUnknown_3005E94[sQuestLogIdx].unk_6 = 0;
+            gUnknown_3005E94[sQuestLogIdx].unk_0 = 0;
+            gUnknown_3005E94[sQuestLogIdx].unk_3 = a0;
+            gUnknown_203B01C = sQuestLogIdx;
+            sQuestLogIdx++;
             gUnknown_203B01A = 0;
         }
     }
@@ -1775,12 +1775,12 @@ void sub_81126AC(u8 a0, u8 a1)
 {
     if (!sub_8112D1C())
     {
-        gUnknown_3005E94[gUnknown_203AF98].unk_4 = gUnknown_203B01A;
-        gUnknown_3005E94[gUnknown_203AF98].unk_6 = 0;
-        gUnknown_3005E94[gUnknown_203AF98].unk_0 = 0;
-        gUnknown_3005E94[gUnknown_203AF98].unk_3 = a0;
-        gUnknown_203B01C = gUnknown_203AF98;
-        gUnknown_203AF98++;
+        gUnknown_3005E94[sQuestLogIdx].unk_4 = gUnknown_203B01A;
+        gUnknown_3005E94[sQuestLogIdx].unk_6 = 0;
+        gUnknown_3005E94[sQuestLogIdx].unk_0 = 0;
+        gUnknown_3005E94[sQuestLogIdx].unk_3 = a0;
+        gUnknown_203B01C = sQuestLogIdx;
+        sQuestLogIdx++;
         gUnknown_203B01A = a1;
     }
 }
@@ -1789,11 +1789,11 @@ void sub_8112720(u8 a0)
 {
     if (!sub_8112D1C())
     {
-        gUnknown_3005E94[gUnknown_203AF98].unk_4 = gUnknown_203B01A;
-        gUnknown_3005E94[gUnknown_203AF98].unk_6 = 1;
-        gUnknown_3005E94[gUnknown_203AF98].unk_0 = 0;
-        gUnknown_3005E94[gUnknown_203AF98].unk_3 = a0;
-        gUnknown_203AF98++;
+        gUnknown_3005E94[sQuestLogIdx].unk_4 = gUnknown_203B01A;
+        gUnknown_3005E94[sQuestLogIdx].unk_6 = 1;
+        gUnknown_3005E94[sQuestLogIdx].unk_0 = 0;
+        gUnknown_3005E94[sQuestLogIdx].unk_3 = a0;
+        sQuestLogIdx++;
         gUnknown_203B01A = 0;
     }
 }
@@ -1802,27 +1802,27 @@ void sub_811278C(u8 a0, u8 a1)
 {
     if (!sub_8112D1C())
     {
-        gUnknown_3005E94[gUnknown_203AF98].unk_4 = gUnknown_203B01A;
-        gUnknown_3005E94[gUnknown_203AF98].unk_6 = 1;
-        gUnknown_3005E94[gUnknown_203AF98].unk_0 = 0;
-        gUnknown_3005E94[gUnknown_203AF98].unk_3 = a0;
-        gUnknown_203AF98++;
+        gUnknown_3005E94[sQuestLogIdx].unk_4 = gUnknown_203B01A;
+        gUnknown_3005E94[sQuestLogIdx].unk_6 = 1;
+        gUnknown_3005E94[sQuestLogIdx].unk_0 = 0;
+        gUnknown_3005E94[sQuestLogIdx].unk_3 = a0;
+        sQuestLogIdx++;
         gUnknown_203B01A = a1;
     }
 }
 
 void sub_81127F8(struct UnkStruct_3005E90 * a0)
 {
-    if (gUnknown_203AF98 < gUnknown_3005E8C)
+    if (sQuestLogIdx < sNumQuestLogs)
     {
         u32 r2 = *(u32 *)a0 & 0x00FF00F3;
-        gUnknown_3005E94[gUnknown_203AF98].unk_4 = gUnknown_203B01A;
-        gUnknown_3005E94[gUnknown_203AF98].unk_6 = 2;
-        gUnknown_3005E94[gUnknown_203AF98].unk_0 = r2;
-        gUnknown_3005E94[gUnknown_203AF98].unk_1 = r2 >> 8;
-        gUnknown_3005E94[gUnknown_203AF98].unk_2 = r2 >> 16;
-        gUnknown_3005E94[gUnknown_203AF98].unk_3 = r2 >> 24;
-        gUnknown_203AF98++;
+        gUnknown_3005E94[sQuestLogIdx].unk_4 = gUnknown_203B01A;
+        gUnknown_3005E94[sQuestLogIdx].unk_6 = 2;
+        gUnknown_3005E94[sQuestLogIdx].unk_0 = r2;
+        gUnknown_3005E94[sQuestLogIdx].unk_1 = r2 >> 8;
+        gUnknown_3005E94[sQuestLogIdx].unk_2 = r2 >> 16;
+        gUnknown_3005E94[sQuestLogIdx].unk_3 = r2 >> 24;
+        sQuestLogIdx++;
         if (ScriptContext2_IsEnabled())
             gUnknown_203B01A = TRUE;
         else
@@ -1856,9 +1856,9 @@ void sub_81128BC(u8 a0)
                 gUnknown_3005E88 = 3;
             else if (r1 == 2)
             {
-                gUnknown_3005E94[gUnknown_203AF98].unk_4 = gUnknown_203B01A;
-                gUnknown_3005E94[gUnknown_203AF98].unk_6 = 3;
-                gUnknown_203AF98++;
+                gUnknown_3005E94[sQuestLogIdx].unk_4 = gUnknown_203B01A;
+                gUnknown_3005E94[sQuestLogIdx].unk_6 = 3;
+                sQuestLogIdx++;
                 gUnknown_203B01A = 0;
                 gUnknown_3005E88 = 4;
             }
@@ -1883,57 +1883,57 @@ static void sub_8112940(u8 a0, struct UnkStruct_203AE98 *a1, u16 a2)
             break;
         case 1:
             gUnknown_3005E94 = a1;
-            gUnknown_3005E8C = a2 / 8;
+            sNumQuestLogs = a2 / 8;
             for (i = 0; i < 0x40; i++)
             {
                 gUnknown_203AF9A[i][0] |= 0xFF;
                 gUnknown_203AF9A[i][1] |= 0xFF;
             }
-            gUnknown_203AF98 = 0;
+            sQuestLogIdx = 0;
             gUnknown_203B01C = 0;
             gUnknown_3005E90 = (struct UnkStruct_3005E90){};
-            gUnknown_203B01A = gUnknown_3005E94[gUnknown_203AF98].unk_4;
-            gUnknown_203AF9A[0][0] = gUnknown_3005E94[gUnknown_203AF98].unk_3;
+            gUnknown_203B01A = gUnknown_3005E94[sQuestLogIdx].unk_4;
+            gUnknown_203AF9A[0][0] = gUnknown_3005E94[sQuestLogIdx].unk_3;
             gUnknown_203AF9A[0][1] = 0xFF;
             gUnknown_3005E88 = 1;
             break;
         case 2:
             gUnknown_3005E94 = a1;
-            gUnknown_3005E8C = a2 / 8;
-            for (i = 0; i < gUnknown_3005E8C; i++)
+            sNumQuestLogs = a2 / 8;
+            for (i = 0; i < sNumQuestLogs; i++)
             {
                 gUnknown_3005E94[i] = (struct UnkStruct_203AE98){ 0, 0, 0, 0, 0xFFFF, 0xFF };
             }
-            gUnknown_203AF98 = 0;
+            sQuestLogIdx = 0;
             gUnknown_203B01A = 0;
-            gUnknown_3005E94[gUnknown_203AF98].unk_4 = 0;
-            gUnknown_3005E94[gUnknown_203AF98].unk_6 = 0;
-            gUnknown_3005E94[gUnknown_203AF98].unk_0 = 0;
+            gUnknown_3005E94[sQuestLogIdx].unk_4 = 0;
+            gUnknown_3005E94[sQuestLogIdx].unk_6 = 0;
+            gUnknown_3005E94[sQuestLogIdx].unk_0 = 0;
             switch (GetPlayerFacingDirection())
             {
                 case 0:
                 case 1:
-                    gUnknown_3005E94[gUnknown_203AF98].unk_3 = 0;
+                    gUnknown_3005E94[sQuestLogIdx].unk_3 = 0;
                     break;
                 case 4:
-                    gUnknown_3005E94[gUnknown_203AF98].unk_3 = 3;
+                    gUnknown_3005E94[sQuestLogIdx].unk_3 = 3;
                     break;
                 case 2:
-                    gUnknown_3005E94[gUnknown_203AF98].unk_3 = 1;
+                    gUnknown_3005E94[sQuestLogIdx].unk_3 = 1;
                     break;
                 case 3:
-                    gUnknown_3005E94[gUnknown_203AF98].unk_3 = 2;
+                    gUnknown_3005E94[sQuestLogIdx].unk_3 = 2;
                     break;
             }
             gUnknown_203B01C = 0;
-            gUnknown_203AF98++;
-            gUnknown_3005E94[gUnknown_203AF98].unk_4 = 0;
-            gUnknown_3005E94[gUnknown_203AF98].unk_6 = 2;
-            gUnknown_3005E94[gUnknown_203AF98].unk_0 = 0;
-            gUnknown_3005E94[gUnknown_203AF98].unk_1 = 0;
-            gUnknown_3005E94[gUnknown_203AF98].unk_2 = 0;
-            gUnknown_3005E94[gUnknown_203AF98].unk_3 = 0;
-            gUnknown_203AF98++;
+            sQuestLogIdx++;
+            gUnknown_3005E94[sQuestLogIdx].unk_4 = 0;
+            gUnknown_3005E94[sQuestLogIdx].unk_6 = 2;
+            gUnknown_3005E94[sQuestLogIdx].unk_0 = 0;
+            gUnknown_3005E94[sQuestLogIdx].unk_1 = 0;
+            gUnknown_3005E94[sQuestLogIdx].unk_2 = 0;
+            gUnknown_3005E94[sQuestLogIdx].unk_3 = 0;
+            sQuestLogIdx++;
             gUnknown_3005E88 = 2;
             break;
     }
@@ -1955,16 +1955,16 @@ void sub_8112B3C(void)
                 {
                     while (1)
                     {
-                        switch (gUnknown_3005E94[gUnknown_203AF98].unk_6)
+                        switch (gUnknown_3005E94[sQuestLogIdx].unk_6)
                         {
                             case 0:
-                                gUnknown_203AF9A[gUnknown_3005E94[gUnknown_203AF98].unk_0][0] = gUnknown_3005E94[gUnknown_203AF98].unk_3;
+                                gUnknown_203AF9A[gUnknown_3005E94[sQuestLogIdx].unk_0][0] = gUnknown_3005E94[sQuestLogIdx].unk_3;
                                 break;
                             case 1:
-                                gUnknown_203AF9A[gUnknown_3005E94[gUnknown_203AF98].unk_0][1] = gUnknown_3005E94[gUnknown_203AF98].unk_3;
+                                gUnknown_203AF9A[gUnknown_3005E94[sQuestLogIdx].unk_0][1] = gUnknown_3005E94[sQuestLogIdx].unk_3;
                                 break;
                             case 2:
-                                *(u32 *)&gUnknown_3005E90 = ((gUnknown_3005E94[gUnknown_203AF98].unk_3 << 24) | (gUnknown_3005E94[gUnknown_203AF98].unk_2 << 16) | (gUnknown_3005E94[gUnknown_203AF98].unk_1 << 8) | (gUnknown_3005E94[gUnknown_203AF98].unk_0 << 0));
+                                *(u32 *)&gUnknown_3005E90 = ((gUnknown_3005E94[sQuestLogIdx].unk_3 << 24) | (gUnknown_3005E94[sQuestLogIdx].unk_2 << 16) | (gUnknown_3005E94[sQuestLogIdx].unk_1 << 8) | (gUnknown_3005E94[sQuestLogIdx].unk_0 << 0));
                                 break;
                             case 3:
                                 gUnknown_3005E88 = 3;
@@ -1977,12 +1977,12 @@ void sub_8112B3C(void)
                         }
                         if (gUnknown_3005E88 == 0)
                             break;
-                        if (++gUnknown_203AF98 >= gUnknown_3005E8C)
+                        if (++sQuestLogIdx >= sNumQuestLogs)
                         {
                             gUnknown_3005E88 = 0;
                             break;
                         }
-                        gUnknown_203B01A = gUnknown_3005E94[gUnknown_203AF98].unk_4;
+                        gUnknown_203B01A = gUnknown_3005E94[sQuestLogIdx].unk_4;
                         if (gUnknown_3005E88 == 3)
                             break;
                         if (gUnknown_203B01A == 0)
@@ -1992,13 +1992,13 @@ void sub_8112B3C(void)
                     }
                 }
             }
-            else if (gUnknown_203AF98 >= gUnknown_3005E8C)
+            else if (sQuestLogIdx >= sNumQuestLogs)
                 gUnknown_3005E88 = 0;
             break;
         case 2:
             if (ScriptContext2_IsEnabled() != 1)
                 gUnknown_203B01A++;
-            if (gUnknown_203AF98 >= gUnknown_3005E8C)
+            if (sQuestLogIdx >= sNumQuestLogs)
                 gUnknown_3005E88 = 0;
             break;
         case 3:
@@ -2052,18 +2052,18 @@ void sub_8112B3C(void)
                 "_08112B8C: .4byte gUnknown_203B01A\n"
                 "_08112B90:\n"
                 "\tldr r5, _08112B98 @ =gUnknown_3005E88\n"
-                "\tldr r4, _08112B9C @ =gUnknown_203AF98\n"
+                "\tldr r4, _08112B9C @ =sQuestLogIdx\n"
                 "\tldr r6, _08112BA0 @ =gUnknown_3005E94\n"
                 "\tb _08112BD4\n"
                 "\t.align 2, 0\n"
                 "_08112B98: .4byte gUnknown_3005E88\n"
-                "_08112B9C: .4byte gUnknown_203AF98\n"
+                "_08112B9C: .4byte sQuestLogIdx\n"
                 "_08112BA0: .4byte gUnknown_3005E94\n"
                 "_08112BA4:\n"
                 "\tldrh r0, [r4]\n"
                 "\tadds r0, 0x1\n"
                 "\tstrh r0, [r4]\n"
-                "\tldr r1, _08112BF0 @ =gUnknown_3005E8C\n"
+                "\tldr r1, _08112BF0 @ =sNumQuestLogs\n"
                 "\tlsls r0, 16\n"
                 "\tlsrs r0, 16\n"
                 "\tldrh r1, [r1]\n"
@@ -2100,7 +2100,7 @@ void sub_8112B3C(void)
                 "\tbeq _08112C18\n"
                 "\tb _08112C50\n"
                 "\t.align 2, 0\n"
-                "_08112BF0: .4byte gUnknown_3005E8C\n"
+                "_08112BF0: .4byte sNumQuestLogs\n"
                 "_08112BF4: .4byte 0x0000ffff\n"
                 "_08112BF8:\n"
                 "\tcmp r0, 0xFE\n"
@@ -2173,8 +2173,8 @@ void sub_8112B3C(void)
                 "\tadds r0, 0x1\n"
                 "\tstrh r0, [r1]\n"
                 "_08112C72:\n"
-                "\tldr r0, _08112C90 @ =gUnknown_203AF98\n"
-                "\tldr r1, _08112C94 @ =gUnknown_3005E8C\n"
+                "\tldr r0, _08112C90 @ =sQuestLogIdx\n"
+                "\tldr r1, _08112C94 @ =sNumQuestLogs\n"
                 "\tldrh r0, [r0]\n"
                 "\tldrh r1, [r1]\n"
                 "\tcmp r0, r1\n"
@@ -2188,8 +2188,8 @@ void sub_8112B3C(void)
                 "\tbx r0\n"
                 "\t.align 2, 0\n"
                 "_08112C8C: .4byte gUnknown_203B01A\n"
-                "_08112C90: .4byte gUnknown_203AF98\n"
-                "_08112C94: .4byte gUnknown_3005E8C\n"
+                "_08112C90: .4byte sQuestLogIdx\n"
+                "_08112C94: .4byte sNumQuestLogs\n"
                 "_08112C98: .4byte gUnknown_3005E88");
 }
 #endif
@@ -2217,14 +2217,14 @@ u8 sub_8112CAC(void)
 
 static bool8 sub_8112CEC(void)
 {
-    if (gUnknown_203AF98 >= gUnknown_3005E8C || ScriptContext2_IsEnabled() == TRUE)
+    if (sQuestLogIdx >= sNumQuestLogs || ScriptContext2_IsEnabled() == TRUE)
         return TRUE;
     return FALSE;
 }
 
 static bool8 sub_8112D1C(void)
 {
-    if (gUnknown_203AF98 >= gUnknown_3005E8C)
+    if (sQuestLogIdx >= sNumQuestLogs)
         return TRUE;
     return FALSE;
 }
@@ -2235,37 +2235,37 @@ static const struct UnkStruct_300201C gUnknown_84566A4 = {
     0x7FFF
 };
 
-void * sub_8112D40(u8 a0, u16 a1)
+void * QuestLogGetFlagOrVarPtr(u8 isFlag, u16 idx)
 {
-    u16 * response;
-    if (gUnknown_203AF98 == 0)
+    void * response;
+    if (sQuestLogIdx == 0)
         return NULL;
-    if (gUnknown_203AF98 >= gUnknown_3005E8C)
+    if (sQuestLogIdx >= sNumQuestLogs)
         return NULL;
-    if (gUnknown_203B01E >= gUnknown_3002020)
+    if (sFlagOrVarPlayhead >= sNumFlagsOrVars)
         return NULL;
-    if (gUnknown_300201C[gUnknown_203B01E].unk_0_0 == a1 && gUnknown_300201C[gUnknown_203B01E].unk_0_f == a0)
+    if (sFlagOrVarRecords[sFlagOrVarPlayhead].idx == idx && sFlagOrVarRecords[sFlagOrVarPlayhead].isFlag == isFlag)
     {
-        response = &gUnknown_300201C[gUnknown_203B01E].unk_2;
-        gUnknown_203B01E++;
+        response = &sFlagOrVarRecords[sFlagOrVarPlayhead].value;
+        sFlagOrVarPlayhead++;
     }
     else
         response = NULL;
     return response;
 }
 
-void sub_8112DB0(u8 a0, u16 a1, u16 a2)
+void QuestLogSetFlagOrVar(u8 isFlag, u16 idx, u16 value)
 {
-    if (gUnknown_203AF98 == 0)
+    if (sQuestLogIdx == 0)
         return;
-    if (gUnknown_203AF98 >= gUnknown_3005E8C)
+    if (sQuestLogIdx >= sNumQuestLogs)
         return;
-    if (gUnknown_203B01E >= gUnknown_3002020)
+    if (sFlagOrVarPlayhead >= sNumFlagsOrVars)
         return;
-    gUnknown_300201C[gUnknown_203B01E].unk_0_0 = a1;
-    gUnknown_300201C[gUnknown_203B01E].unk_0_f = a0;
-    gUnknown_300201C[gUnknown_203B01E].unk_2 = a2;
-    gUnknown_203B01E++;
+    sFlagOrVarRecords[sFlagOrVarPlayhead].idx = idx;
+    sFlagOrVarRecords[sFlagOrVarPlayhead].isFlag = isFlag;
+    sFlagOrVarRecords[sFlagOrVarPlayhead].value = value;
+    sFlagOrVarPlayhead++;
 }
 
 void sub_8112E3C(u8 a0, struct UnkStruct_300201C * a1, u16 a2)
@@ -2276,14 +2276,14 @@ void sub_8112E3C(u8 a0, struct UnkStruct_300201C * a1, u16 a2)
         gUnknown_3005E88 = 0;
     else
     {
-        gUnknown_300201C = a1;
-        gUnknown_3002020 = a2 >> 2;
-        gUnknown_203B01E = 0;
+        sFlagOrVarRecords = a1;
+        sNumFlagsOrVars = a2 >> 2;
+        sFlagOrVarPlayhead = 0;
         if (a0 == 2)
         {
-            for (i = 0; i < gUnknown_3005E8C; i++)
+            for (i = 0; i < sNumQuestLogs; i++)
             {
-                gUnknown_300201C[i] = gUnknown_84566A4;
+                sFlagOrVarRecords[i] = gUnknown_84566A4;
             }
         }
     }
@@ -3250,7 +3250,7 @@ void sub_81139BC(void)
 static void sub_8113A1C(u16 a0)
 {
     gUnknown_203AE08 = sub_8113C5C(gUnknown_203AE08, a0);
-    gUnknown_203AF98++;
+    sQuestLogIdx++;
 }
 
 static bool8 sub_8113A44(u16 a0, u16 *a1)
@@ -3383,7 +3383,7 @@ static void sub_8113ABC(u16 * a0)
 #ifdef NONMATCHING
 static bool8 sub_8113AE8(u16 * a0)
 {
-    if (a0 == NULL || a0[1] > gUnknown_203AF98)
+    if (a0 == NULL || a0[1] > sQuestLogIdx)
         return FALSE;
 
     sQuestLogScriptParsingCBs[a0[0] & 0xFFF](a0);
@@ -3401,7 +3401,7 @@ static bool8 sub_8113AE8(u16 * a0)
                 "\tadds r4, r0, 0\n"
                 "\tcmp r0, 0\n"
                 "\tbeq _08113AFA\n"
-                "\tldr r1, _08113B00 @ =gUnknown_203AF98\n"
+                "\tldr r1, _08113B00 @ =sQuestLogIdx\n"
                 "\tldrh r0, [r0, 0x2]\n"
                 "\tldrh r1, [r1]\n"
                 "\tcmp r0, r1\n"
@@ -3410,7 +3410,7 @@ static bool8 sub_8113AE8(u16 * a0)
                 "\tmovs r0, 0\n"
                 "\tb _08113B32\n"
                 "\t.align 2, 0\n"
-                "_08113B00: .4byte gUnknown_203AF98\n"
+                "_08113B00: .4byte sQuestLogIdx\n"
                 "_08113B04:\n"
                 "\tldr r2, _08113B38 @ =sQuestLogScriptParsingCBs\n"
                 "\tldrh r1, [r4]\n"
@@ -3465,11 +3465,11 @@ static void sub_8113B88(void)
 
 static void sub_8113B94(u16 a0)
 {
-    if (gUnknown_203B044.unk_0 != (u8)a0 || gUnknown_203B044.unk_2 != gUnknown_203AF98)
+    if (gUnknown_203B044.unk_0 != (u8)a0 || gUnknown_203B044.unk_2 != sQuestLogIdx)
     {
         gUnknown_203B044.unk_0 = a0;
         gUnknown_203B044.unk_1 = 0;
-        gUnknown_203B044.unk_2 = gUnknown_203AF98;
+        gUnknown_203B044.unk_2 = sQuestLogIdx;
     }
     else if (gUnknown_203B044.unk_1 < 5)
         gUnknown_203B044.unk_1++;
@@ -3628,7 +3628,7 @@ u16 * sub_8113DE0(u16 a0, u16 * a1)
         r1 = gUnknown_203B044.unk_1;
 
     r5[0] = a0 + (r1 << 12);
-    r5[1] = gUnknown_203AF98;
+    r5[1] = sQuestLogIdx;
     r5 = (void *)r5 + (r1 * r6 + 4);
     return r5;
 }
@@ -3877,7 +3877,7 @@ static u16 * sub_81143F0(u16 * a0, const u16 * a1)
         return NULL;
 
     r4[0] = 11;
-    r4[1] = gUnknown_203AF98;
+    r4[1] = sQuestLogIdx;
     return r4 + 2;
 }
 
@@ -3893,7 +3893,7 @@ static u16 * sub_811445C(u16 * a0, const u16 * a1)
     u16 * r4 = a0 + 4;
 
     a0[0] = 12;
-    a0[1] = gUnknown_203AF98;
+    a0[1] = sQuestLogIdx;
     a0[2] = a1[0];
     a0[3] = a1[1];
     a1 += 2;
@@ -3938,7 +3938,7 @@ static const u8 *const gUnknown_8456AE4[] = {
 static u16 * sub_81144EC(u16 * a0, const u16 * a1)
 {
     a0[0] = 13;
-    a0[1] = gUnknown_203AF98;
+    a0[1] = sQuestLogIdx;
     *((u8 *)a0 + 4) = *((const u8 *)a1 + 0);
     memcpy((u8 *)a0 + 5, (const u8 *)a1 + 1, 7);
     a0 += 6;
@@ -3962,7 +3962,7 @@ static const u16 * sub_8114518(const u16 * a0)
 static u16 * sub_8114578(u16 * a0, const u16 * a1)
 {
     a0[0] = 14;
-    a0[1] = gUnknown_203AF98;
+    a0[1] = sQuestLogIdx;
     *((u8 *)a0 + 4) = *((const u8 *)a1 + 0);
     memcpy((u8 *)a0 + 5, (const u8 *)a1 + 1, 7);
     a0 += 6;
@@ -3986,7 +3986,7 @@ static const u16 * sub_81145A4(const u16 * a0)
 static u16 * sub_8114604(u16 * a0, const u16 * a1)
 {
     a0[0] = 15;
-    a0[1] = gUnknown_203AF98;
+    a0[1] = sQuestLogIdx;
     *((u8 *)a0 + 4) = *((const u8 *)a1 + 0);
     memcpy((u8 *)a0 +  5, (const u8 *)a1 +  1, 7);
     memcpy((u8 *)a0 + 12, (const u8 *)a1 +  8, 7);
@@ -4021,7 +4021,7 @@ static const u16 * sub_811464C(const u16 * a0)
 static u16 * sub_8114710(u16 * a0, const u16 * a1)
 {
     a0[0] = 16;
-    a0[1] = gUnknown_203AF98;
+    a0[1] = sQuestLogIdx;
     return a0 + 2;
 }
 
@@ -4035,7 +4035,7 @@ static const u16 * sub_8114724(const u16 * a0)
 static u16 * sub_8114744(u16 * a0, const u16 * a1)
 {
     a0[0] = 17;
-    a0[1] = gUnknown_203AF98;
+    a0[1] = sQuestLogIdx;
     return a0 + 2;
 }
 
@@ -4050,7 +4050,7 @@ static u16 * sub_8114778(u16 * a0, const u16 * a1)
 {
     u8 * r4 = (u8 *)(a0 + 4);
     a0[0] = 18;
-    a0[1] = gUnknown_203AF98;
+    a0[1] = sQuestLogIdx;
     a0[2] = a1[0];
     a0[3] = a1[1];
     memcpy(r4, a1 + 2, 7);
@@ -4074,7 +4074,7 @@ static const u16 * sub_81147A8(const u16 * a0)
 static u16 * sub_8114808(u16 * a0, const u16 * a1)
 {
     a0[0] = 19;
-    a0[1] = gUnknown_203AF98;
+    a0[1] = sQuestLogIdx;
     *(u8 *)&a0[2] = *(const u8 *)&a1[0];
     memcpy((u8 *)a0 + 5, (const u8 *)a1 + 1, 7);
     a0 += 6;
@@ -4376,7 +4376,7 @@ static u16 * sub_8114DE8(u16 * a0, const u16 * a1)
     if (r5[0] == 0 && r5[1] == 0)
     {
         r4[0] = 31;
-        r4[1] = gUnknown_203AF98;
+        r4[1] = sQuestLogIdx;
     }
     if (a1[0])
         r4[2] = a1[0];
@@ -4476,7 +4476,7 @@ static u16 * sub_8115078(u16 * a0, const u16 * a1)
     if (!sub_8110944(a0, gUnknown_8456AA0[33]))
         return NULL;
     a0[0] = 0x2021;
-    a0[1] = gUnknown_203AF98;
+    a0[1] = sQuestLogIdx;
     a0[2] = a1[1];
     a0[3] = a1[2];
     *((u8 *)a0 + 8) = *((const u8 *)a1 + 6);

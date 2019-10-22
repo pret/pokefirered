@@ -25,9 +25,9 @@ EWRAM_DATA u16 gSpecialVar_MonBoxPos = 0;
 EWRAM_DATA u16 gSpecialVar_TextColor = 0;
 EWRAM_DATA u16 gSpecialVar_PrevTextColor = 0;
 EWRAM_DATA u16 gUnknown_20370DE = 0;
-EWRAM_DATA u8 gUnknown_20370E0[SPECIAL_FLAGS_COUNT] = {};
+EWRAM_DATA u8 sSpecialFlags[SPECIAL_FLAGS_COUNT] = {};
 
-u16 gUnknown_300507C;
+u16 gLastQuestLogStoredFlagOrVarIdx;
 
 extern u16 *const gSpecialVars[];
 
@@ -35,7 +35,7 @@ void InitEventData(void)
 {
     memset(gSaveBlock1Ptr->flags, 0, FLAGS_COUNT);
     memset(gSaveBlock1Ptr->vars, 0, VARS_COUNT * 2);
-    memset(gUnknown_20370E0, 0, SPECIAL_FLAGS_COUNT);
+    memset(sSpecialFlags, 0, SPECIAL_FLAGS_COUNT);
 }
 
 void sub_806E110(void)
@@ -185,15 +185,15 @@ u16 *GetVarPointer(u16 idx)
         default:
             break;
         case 1:
-            ptr = sub_8112D40(0, idx);
+            ptr = QuestLogGetFlagOrVarPtr(0, idx);
             if (ptr != NULL)
                 gSaveBlock1Ptr->vars[idx - VARS_START] = *ptr;
             break;
         case 2:
             if (IsFlagOrVarStoredInQuestLog(idx - VARS_START, 1) == TRUE)
             {
-                gUnknown_300507C = idx - VARS_START;
-                sub_8112DB0(0, idx, gSaveBlock1Ptr->vars[idx - VARS_START]);
+                gLastQuestLogStoredFlagOrVarIdx = idx - VARS_START;
+                QuestLogSetFlagOrVar(0, idx, gSaveBlock1Ptr->vars[idx - VARS_START]);
             }
             break;
         }
@@ -240,7 +240,7 @@ bool8 VarSet(u16 idx, u16 val)
 
 u8 VarGetFieldObjectGraphicsId(u8 idx)
 {
-    return VarGet(0x4010 + idx);
+    return VarGet(VAR_OBJ_GFX_ID_0 + idx);
 }
 
 u8 *GetFlagAddr(u16 idx)
@@ -256,21 +256,21 @@ u8 *GetFlagAddr(u16 idx)
         default:
             break;
         case 1:
-            ptr = sub_8112D40(1, idx);
+            ptr = QuestLogGetFlagOrVarPtr(1, idx);
             if (ptr != NULL)
                 gSaveBlock1Ptr->flags[idx >> 3] = *ptr;
             break;
         case 2:
             if (IsFlagOrVarStoredInQuestLog(idx, 0) == TRUE)
             {
-                gUnknown_300507C = idx;
-                sub_8112DB0(1, idx, gSaveBlock1Ptr->flags[idx / 8]);
+                gLastQuestLogStoredFlagOrVarIdx = idx;
+                QuestLogSetFlagOrVar(1, idx, gSaveBlock1Ptr->flags[idx / 8]);
             }
             break;
         }
         return &gSaveBlock1Ptr->flags[idx / 8];
     }
-    return &gUnknown_20370E0[(idx - SPECIAL_FLAGS_START) / 8];
+    return &sSpecialFlags[(idx - SPECIAL_FLAGS_START) / 8];
 }
 
 bool8 FlagSet(u16 idx)

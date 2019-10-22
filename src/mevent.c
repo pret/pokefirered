@@ -505,7 +505,7 @@ struct MEventBuffer_3430_Sub * sav1_get_mevent_buffer_2(void)
     return &gSaveBlock1Ptr->unk_3120.buffer_310.data;
 }
 
-struct MysteryEventStruct * sub_8143D94(void)
+struct MENewsJisanStruct * GetMENewsJisanStructPtr(void)
 {
     return &gSaveBlock1Ptr->unk_3120.unk_340;
 }
@@ -562,8 +562,8 @@ void sub_8143E9C(void)
 
 void sub_8143ED0(void)
 {
-    CpuFill32(0, sub_8143D94(), sizeof(struct MysteryEventStruct));
-    sub_8146C88();
+    CpuFill32(0, GetMENewsJisanStructPtr(), sizeof(struct MENewsJisanStruct));
+    MENewsJisanReset();
 }
 
 bool32 sub_8143EF4(const u8 * src)

@@ -7,31 +7,31 @@ CeruleanCity_House4_EventScript_16ACEF:: @ 816ACEF
 	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	lock
-	specialvar VAR_0x8004, sub_8146CE8
+	specialvar VAR_0x8004, Special_GetMENewsJisanItemAndState
 	copyvar VAR_0x8008, VAR_RESULT
 	compare_var_to_value VAR_0x8004, 0
-	goto_if eq, EventScript_16AD59
+	goto_if eq, EventScript_CeruleanCity_House4_NoNews
 	compare_var_to_value VAR_0x8004, 1
-	goto_if eq, EventScript_16AD63
+	goto_if eq, EventScript_CeruleanCity_House4_News1
 	compare_var_to_value VAR_0x8004, 2
-	goto_if eq, EventScript_16AD89
+	goto_if eq, EventScript_CeruleanCity_House4_News2
 	compare_var_to_value VAR_0x8004, 3
-	goto_if eq, EventScript_16ADAF
+	goto_if eq, EventScript_CeruleanCity_House4_NewsNotSpread
 	compare_var_to_value VAR_0x8004, 4
-	goto_if eq, EventScript_16ADC3
+	goto_if eq, EventScript_CeruleanCity_House4_NewsSpread1
 	compare_var_to_value VAR_0x8004, 5
-	goto_if eq, EventScript_16ADE9
+	goto_if eq, EventScript_CeruleanCity_House4_NewsSpread2
 	compare_var_to_value VAR_0x8004, 6
-	goto_if eq, EventScript_16AE0F
+	goto_if eq, EventScript_CeruleanCity_House4_NewsDone
 	end
 
-EventScript_16AD59:: @ 816AD59
+EventScript_CeruleanCity_House4_NoNews:: @ 816AD59
 	msgbox gUnknown_8192AF0
 	release
 	end
 
-EventScript_16AD63:: @ 816AD63
-	call EventScript_16AE23
+EventScript_CeruleanCity_House4_News1:: @ 816AD63
+	call EventScript_CeruleanCity_House4_MovementReactionToNews
 	msgbox gUnknown_8192B43
 	giveitem VAR_0x8008
 	compare_var_to_value VAR_RESULT, 0
@@ -39,8 +39,8 @@ EventScript_16AD63:: @ 816AD63
 	release
 	end
 
-EventScript_16AD89:: @ 816AD89
-	call EventScript_16AE23
+EventScript_CeruleanCity_House4_News2:: @ 816AD89
+	call EventScript_CeruleanCity_House4_MovementReactionToNews
 	msgbox gUnknown_8192C07
 	giveitem VAR_0x8008, 4
 	compare_var_to_value VAR_RESULT, 0
@@ -48,15 +48,15 @@ EventScript_16AD89:: @ 816AD89
 	release
 	end
 
-EventScript_16ADAF:: @ 816ADAF
+EventScript_CeruleanCity_House4_NewsNotSpread:: @ 816ADAF
 	applymovement 1, Movement_1A75E1
 	waitmovement 0
 	msgbox gUnknown_8192CD5
 	release
 	end
 
-EventScript_16ADC3:: @ 816ADC3
-	call EventScript_16AE23
+EventScript_CeruleanCity_House4_NewsSpread1:: @ 816ADC3
+	call EventScript_CeruleanCity_House4_MovementReactionToNews
 	msgbox gUnknown_8192D4B
 	giveitem VAR_0x8008
 	compare_var_to_value VAR_RESULT, 0
@@ -64,8 +64,8 @@ EventScript_16ADC3:: @ 816ADC3
 	release
 	end
 
-EventScript_16ADE9:: @ 816ADE9
-	call EventScript_16AE23
+EventScript_CeruleanCity_House4_NewsSpread2:: @ 816ADE9
+	call EventScript_CeruleanCity_House4_MovementReactionToNews
 	msgbox gUnknown_8192DE3
 	giveitem VAR_0x8008, 4
 	compare_var_to_value VAR_RESULT, 0
@@ -73,14 +73,14 @@ EventScript_16ADE9:: @ 816ADE9
 	release
 	end
 
-EventScript_16AE0F:: @ 816AE0F
+EventScript_CeruleanCity_House4_NewsDone:: @ 816AE0F
 	applymovement 1, Movement_1A75E1
 	waitmovement 0
 	msgbox gUnknown_8192EC5
 	release
 	end
 
-EventScript_16AE23:: @ 816AE23
+EventScript_CeruleanCity_House4_MovementReactionToNews:: @ 816AE23
 	playse SE_PIN
 	applymovement 1, Movement_1A75DB
 	waitmovement 0

@@ -364,7 +364,7 @@ sub_806CAC8: @ 806CAC8
 	beq _0806CB74
 	movs r0, 0x5
 	bl IncrementGameStat
-	bl sub_8146CA4
+	bl MENewsJisanStepCounter
 	bl IncrementRenewableHiddenItemStepCounter
 	bl sub_80CC918
 	bl sub_80CB054

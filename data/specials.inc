@@ -402,7 +402,7 @@ gSpecials:: @ 815FD60
 	def_special Special_BattleCardAction
 	def_special sub_8110AB4
 	def_special sub_8112364
-	def_special sub_8146CE8
+	def_special Special_GetMENewsJisanItemAndState
 	def_special get_unknown_box_id
 	def_special sub_809D504
 	def_special sub_809D620

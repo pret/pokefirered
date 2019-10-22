@@ -399,6 +399,7 @@ SECTIONS {
         src/daycare.o(.rodata);
         src/battle_gfx_sfx_util.o(.rodata);
         data/data.o(.rodata.8260270);
+        data/overworld.o(.rodata);
         data/tilesets.o(.rodata);
         data/maps.o(.rodata);
         src/fieldmap.o(.rodata);

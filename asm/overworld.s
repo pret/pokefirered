@@ -749,7 +749,7 @@ warp_shift: @ 8055198
 	str r0, [r2, 0x4]
 	str r1, [r2, 0x8]
 	ldr r2, _080551D0 @ =gUnknown_2031DC4
-	ldr r0, _080551D4 @ =gUnknown_826D2B0
+	ldr r0, _080551D4 @ =sDummyWarpData
 	ldr r1, [r0, 0x4]
 	ldr r0, [r0]
 	str r0, [r2]
@@ -763,7 +763,7 @@ _080551C4: .4byte gUnknown_2031DB4
 _080551C8: .4byte gSaveBlock1Ptr
 _080551CC: .4byte gUnknown_2031DBC
 _080551D0: .4byte gUnknown_2031DC4
-_080551D4: .4byte gUnknown_826D2B0
+_080551D4: .4byte sDummyWarpData
 _080551D8: .4byte gUnknown_2031DCC
 	thumb_func_end warp_shift
 

@@ -1793,16 +1793,16 @@ gUnknown_8417F69:: @ 0x8417F69
 gUnknown_8417F77:: @ 0x8417F77
 	.string "JOIN GROUP$"
 
-gUnknown_8417F82:: @ 0x8417F82
+gOtherText_Single:: @ 0x8417F82
 	.string "SINGLE$"
 
-gUnknown_8417F89:: @ 0x8417F89
+gOtherText_Double:: @ 0x8417F89
 	.string "DOUBLE$"
 
-gUnknown_8417F90:: @ 0x8417F90
+gOtherText_Knockout:: @ 0x8417F90
 	.string "KNOCKOUT$"
 
-gUnknown_8417F99:: @ 0x8417F99
+gOtherText_Mixed:: @ 0x8417F99
 	.string "MIXED$"
 
 gUnknown_8417F9F:: @ 0x8417F9F

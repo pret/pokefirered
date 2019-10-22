@@ -917,10 +917,10 @@ gUnknown_83E0468:: @ 83E0468
 	.4byte gOtherText_Exit, NULL
 
 gUnknown_83E0480:: @ 83E0480
-	.4byte gUnknown_8417F82, NULL
-	.4byte gUnknown_8417F89, NULL
-	.4byte gUnknown_8417F90, NULL
-	.4byte gUnknown_8417F99, NULL
+	.4byte gOtherText_Single, NULL
+	.4byte gOtherText_Double, NULL
+	.4byte gOtherText_Knockout, NULL
+	.4byte gOtherText_Mixed, NULL
 	.4byte gOtherText_Exit, NULL
 
 gUnknown_83E04A8:: @ 83E04A8

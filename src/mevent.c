@@ -423,7 +423,7 @@ void sub_8143910(u8 taskId)
             }
             break;
         case 15:
-            data->t0E = ValidateTrainerTowerData((struct TrainerTowerData *)gDecompressionBuffer);
+            data->t0E = ValidateTrainerTowerData((struct EReaderTrainerHillSet *)gDecompressionBuffer);
             sub_800AA80(data->t0E);
             data->state = 16;
             break;
@@ -437,7 +437,7 @@ void sub_8143910(u8 taskId)
             }
             break;
         case 17:
-            if (CEReaderTool_SaveTrainerTower((struct TrainerTowerData *)gDecompressionBuffer))
+            if (CEReaderTool_SaveTrainerTower((struct EReaderTrainerHillSet *)gDecompressionBuffer))
             {
                 AddTextPrinterToWindow1(gUnknown_841DE99);
                 ResetDelayTimer(&data->t00);

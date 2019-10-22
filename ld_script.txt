@@ -512,6 +512,7 @@ SECTIONS {
         src/text_window_graphics.o(.rodata);
         src/quest_log_8150454.o(.rodata);
         data/data_8471F00.o(.rodata);
+        src/unk_8159F40.o(.rodata);
         src/teachy_tv.o(.rodata);
         src/unk_815C980.o(.rodata);
         data/data_8471F00.o(.rodata.8479668);
@@ -522,6 +523,8 @@ SECTIONS {
         src/unk_815F138.o(.rodata);
         src/berry_fix_program.o(.rodata);
         data/data_8471F00.o(.rodata.after_trainer_tower);
+
+        /* These should not be moved to C files */
         src/mystery_event_msg.o(.rodata);
         data/mystery_event_msg.o(.rodata);
         src/m4a_tables.o(.rodata);

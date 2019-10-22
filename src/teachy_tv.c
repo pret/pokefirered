@@ -1192,7 +1192,7 @@ static void TeachyTvPrepBattle(u8 taskId)
     gSpecialVar_0x8004 = sStaticResources.whichScript;
     gMain.savedCallback = TeachyTvRestorePlayerPartyCallback;
     SavePlayerParty();
-    sub_8159F40();
+    InitPokedudePartyAndOpponent();
     PlayMapChosenOrBattleBGM(MUS_DUMMY);
     if (sStaticResources.whichScript == TTVSCR_BATTLE)
         data[6] = 9;

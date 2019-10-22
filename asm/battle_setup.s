@@ -595,7 +595,7 @@ sub_807FB08: @ 807FB08
 	ldr r0, _0807FB3C @ =sub_807FAF8
 	str r0, [r1, 0x8]
 	bl SavePlayerParty
-	bl sub_8159F40
+	bl InitPokedudePartyAndOpponent
 	bl GetWildBattleTransition
 	lsls r0, 24
 	lsrs r0, 24

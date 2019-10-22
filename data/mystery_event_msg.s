@@ -1,3 +1,5 @@
+@ These are event scripts. They should not be moved to C.
+
 #include "constants/flags.h"
 #include "constants/moves.h"
 #include "constants/songs.h"

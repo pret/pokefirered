@@ -2154,7 +2154,7 @@ EventScript_1A6C21:: @ 81A6C21
 	waitfanfare
 	return
 
-EventScript_1A6C26:: @ 81A6C26
+EventScript_FadeOut_Heal_FadeIn:: @ 81A6C26
 	fadescreen 1
 	playfanfare MUS_ME_ASA
 	waitfanfare
@@ -4045,7 +4045,7 @@ EventScript_DigUpItemBagIsFull::
 	releaseall
 	end
 
-gUnknown_81A8D97:: @ 81A8D97
+EventScript_AfterWhiteOutHeal:: @ 81A8D97
 	lockall
 	textcolor 1
 	msgbox Text_1A5E89
@@ -4068,19 +4068,19 @@ EventScript_1A8DCF:: @ 81A8DCF
 	msgbox Text_1A5F9B
 	return
 
-gUnknown_81A8DD8:: @ 81A8DD8
+EventScript_MomHeal:: @ 81A8DD8
 	lockall
 	textcolor 1
 	applymovement 1, Movement_1A75ED
 	waitmovement 0
 	msgbox Text_1A5FDF
-	call EventScript_1A6C26
+	call EventScript_FadeOut_Heal_FadeIn
 	msgbox Text_1A6046
 	fadedefaultbgm
 	releaseall
 	end
 
-gUnknown_81A8DFD:: @ 81A8DFD
+EventScript_PoisonWhiteOut:: @ 81A8DFD
 	lockall
 	textcolor 3
 	special ExecuteWhiteOut
@@ -4104,7 +4104,7 @@ EventScript_1A8E2E:: @ 81A8E2E
 	end
 
 EventScript_1A8E3C:: @ 81A8E3C
-	special sub_8054C48
+	special Special_OverworldWhiteOutGetMoneyLoss
 	msgbox Text_1A6197
 	goto EventScript_1A8E4D
 	end
@@ -10396,7 +10396,7 @@ EventScript_1BE06F:: @ 81BE06F
 	applymovement VAR_LAST_TALKED, Movement_1BE08F
 	waitmovement 0
 	removeobject VAR_LAST_TALKED
-	special sub_8082E54
+	special Special_RockSmashEncounter
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1BE08D
 	waitstate

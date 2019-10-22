@@ -1,6 +1,7 @@
 #include "constants/region_map.h"
 #include "constants/trainer_classes.h"
 #include "constants/songs.h"
+#include "constants/flags.h"
 #include "constants/region_map.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
@@ -396,12 +397,29 @@ gUnknown_826D1E4:: @ 826D1E4
 gUnknown_826D250:: @ 826D250
 	.incbin "baserom.gba", 0x26D250, 0x44
 
-gUnknown_826D294:: @ 826D294
-	.incbin "baserom.gba", 0x26D294, 0xA
+sWhiteOutMoneyLossMultipliers:: @ 826D294
+	.byte  2
+	.byte  4
+	.byte  6
+	.byte  9
+	.byte 12
+	.byte 16
+	.byte 20
+	.byte 25
+	.byte 30
 
-gUnknown_826D29E:: @ 826D29E
-	.incbin "baserom.gba", 0x26D29E, 0x12
+	.align 1
+sWhiteOutMoneyLossBadgeFlagIDs:: @ 826D29E
+	.2byte FLAG_BADGE01_GET
+    .2byte FLAG_BADGE02_GET
+    .2byte FLAG_BADGE03_GET
+    .2byte FLAG_BADGE04_GET
+    .2byte FLAG_BADGE05_GET
+    .2byte FLAG_BADGE06_GET
+    .2byte FLAG_BADGE07_GET
+    .2byte FLAG_BADGE08_GET
 
+	.align 2
 gUnknown_826D2B0:: @ 826D2B0
 	.incbin "baserom.gba", 0x26D2B0, 0x28
 

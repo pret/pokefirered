@@ -2706,10 +2706,10 @@ static void sub_8113414(struct LinkBattleRecords * a0, u8 a1, u8 a2)
                 StringCopy(gStringVar1, gSaveBlock1Ptr->rivalName);
                 break;
             case 1:
-                StringCopy(gStringVar1, gUnknown_84178D0);
+                StringCopy(gStringVar1, gUnknown_84178D0); // LT. SURGE
                 break;
             case 2:
-                StringCopy(gStringVar1, gUnknown_84178DA);
+                StringCopy(gStringVar1, gUnknown_84178DA); // KOGA
                 break;
             default:
                 StringCopy(gStringVar1, gSaveBlock1Ptr->rivalName);

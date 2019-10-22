@@ -180,7 +180,7 @@ gSpecials:: @ 815FD60
 	def_special sub_8113510
 	def_special sub_81130A8
 	def_special sub_8113530
-	def_special sub_8082E54
+	def_special Special_RockSmashEncounter
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
@@ -382,7 +382,7 @@ gSpecials:: @ 815FD60
 	def_special sub_810C3A4
 	def_special SetFlavorTextFlagFromSpecialVars
 	def_special UpdatePickStateFromSpecialVar8005
-	def_special sub_8054C48
+	def_special Special_OverworldWhiteOutGetMoneyLoss
 	def_special PutMonInRoute5Daycare
 	def_special GetCostToWithdrawRoute5DaycareMon
 	def_special IsThereMonInRoute5Daycare

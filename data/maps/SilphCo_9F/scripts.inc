@@ -20,7 +20,7 @@ SilphCo_9F_EventScript_161D09:: @ 8161D09
 	goto_if ge, EventScript_161D2E
 	msgbox gUnknown_8176B54
 	closemessage
-	call EventScript_1A6C26
+	call EventScript_FadeOut_Heal_FadeIn
 	msgbox gUnknown_8176B81
 	release
 	end

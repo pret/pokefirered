@@ -15,7 +15,7 @@ sub_8054BC8: @ 8054BC8
 	movs r0, 0xA4
 	lsls r0, 2
 	adds r4, r0
-	bl sub_8054C04
+	bl ComputeWhiteOutMoneyLoss
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl RemoveMoney
@@ -31,17 +31,17 @@ _08054BFC: .4byte gUnknown_81A654B
 _08054C00: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_8054BC8
 
-	thumb_func_start sub_8054C04
-sub_8054C04: @ 8054C04
+	thumb_func_start ComputeWhiteOutMoneyLoss
+ComputeWhiteOutMoneyLoss: @ 8054C04
 	push {r4,lr}
-	bl sub_8054C70
+	bl CountBadgesForOverworldWhiteOutLossCalculation
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	bl GetPlayerPartyHighestLevel
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _08054C40 @ =gUnknown_826D294
+	ldr r1, _08054C40 @ =sWhiteOutMoneyLossMultipliers
 	adds r4, r1
 	ldrb r1, [r4]
 	lsls r1, 2
@@ -62,14 +62,14 @@ _08054C38:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08054C40: .4byte gUnknown_826D294
+_08054C40: .4byte sWhiteOutMoneyLossMultipliers
 _08054C44: .4byte gSaveBlock1Ptr
-	thumb_func_end sub_8054C04
+	thumb_func_end ComputeWhiteOutMoneyLoss
 
-	thumb_func_start sub_8054C48
-sub_8054C48: @ 8054C48
+	thumb_func_start Special_OverworldWhiteOutGetMoneyLoss
+Special_OverworldWhiteOutGetMoneyLoss: @ 8054C48
 	push {r4,r5,lr}
-	bl sub_8054C04
+	bl ComputeWhiteOutMoneyLoss
 	adds r4, r0, 0
 	ldr r5, _08054C6C @ =gStringVar1
 	bl CountDigits
@@ -85,14 +85,14 @@ sub_8054C48: @ 8054C48
 	bx r0
 	.align 2, 0
 _08054C6C: .4byte gStringVar1
-	thumb_func_end sub_8054C48
+	thumb_func_end Special_OverworldWhiteOutGetMoneyLoss
 
-	thumb_func_start sub_8054C70
-sub_8054C70: @ 8054C70
+	thumb_func_start CountBadgesForOverworldWhiteOutLossCalculation
+CountBadgesForOverworldWhiteOutLossCalculation: @ 8054C70
 	push {r4-r6,lr}
 	movs r6, 0
 	movs r5, 0
-	ldr r4, _08054C9C @ =gUnknown_826D29E
+	ldr r4, _08054C9C @ =sWhiteOutMoneyLossBadgeFlagIDs
 _08054C78:
 	ldrh r0, [r4]
 	bl FlagGet
@@ -112,8 +112,8 @@ _08054C8A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08054C9C: .4byte gUnknown_826D29E
-	thumb_func_end sub_8054C70
+_08054C9C: .4byte sWhiteOutMoneyLossBadgeFlagIDs
+	thumb_func_end CountBadgesForOverworldWhiteOutLossCalculation
 
 	thumb_func_start sub_8054CA0
 sub_8054CA0: @ 8054CA0

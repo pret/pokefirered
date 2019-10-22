@@ -985,25 +985,25 @@ _0807F5B6:
 	bne _0807F5E4
 	adds r0, r6, 0
 	bl DestroyTask
-	ldr r0, _0807F5CC @ =gUnknown_81A8D97
+	ldr r0, _0807F5CC @ =EventScript_AfterWhiteOutHeal
 	bl ScriptContext1_SetupScript
 	b _0807F5E4
 	.align 2, 0
-_0807F5CC: .4byte gUnknown_81A8D97
+_0807F5CC: .4byte EventScript_AfterWhiteOutHeal
 _0807F5D0:
 	bl sub_807E418
 	cmp r0, 0x1
 	bne _0807F5E4
 	adds r0, r6, 0
 	bl DestroyTask
-	ldr r0, _0807F5EC @ =gUnknown_81A8DD8
+	ldr r0, _0807F5EC @ =EventScript_MomHeal
 	bl ScriptContext1_SetupScript
 _0807F5E4:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807F5EC: .4byte gUnknown_81A8DD8
+_0807F5EC: .4byte EventScript_MomHeal
 	thumb_func_end sub_807F45C
 
 	thumb_func_start sub_807F5F0

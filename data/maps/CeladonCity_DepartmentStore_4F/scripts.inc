@@ -16,7 +16,7 @@ CeladonCity_DepartmentStore_4F_EventScript_16BC01:: @ 816BC01
 CeladonCity_DepartmentStore_4F_EventScript_16BC0A:: @ 816BC0A
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if eq, EventScript_1A7AE0
 	lock
 	faceplayer
 	message Text_1A6211

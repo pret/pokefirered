@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 40,
       "y": 7,
       "elevation": 3,
@@ -23,11 +23,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "MtEmber_SummitPath_2F_EventScript_1BE00C",
-      "flag": "18"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_12"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 33,
       "y": 5,
       "elevation": 3,
@@ -36,11 +36,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "MtEmber_SummitPath_2F_EventScript_1BE00C",
-      "flag": "19"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_13"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 15,
       "y": 19,
       "elevation": 3,
@@ -49,11 +49,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "MtEmber_SummitPath_2F_EventScript_1BE00C",
-      "flag": "20"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_14"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 13,
       "y": 23,
       "elevation": 3,
@@ -62,11 +62,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "MtEmber_SummitPath_2F_EventScript_1BE00C",
-      "flag": "21"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_15"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 13,
       "y": 21,
       "elevation": 3,
@@ -75,11 +75,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "MtEmber_SummitPath_2F_EventScript_1BE00C",
-      "flag": "22"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_16"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 7,
       "y": 38,
       "elevation": 3,
@@ -88,11 +88,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "MtEmber_SummitPath_2F_EventScript_1BE00C",
-      "flag": "23"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_17"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 9,
       "y": 35,
       "elevation": 3,
@@ -101,11 +101,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "MtEmber_SummitPath_2F_EventScript_1BE00C",
-      "flag": "24"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_18"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 7,
       "y": 34,
       "elevation": 3,
@@ -114,11 +114,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "MtEmber_SummitPath_2F_EventScript_1BE00C",
-      "flag": "25"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_19"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 15,
       "y": 26,
       "elevation": 3,
@@ -127,8 +127,8 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "MtEmber_SummitPath_2F_EventScript_1BE00C",
-      "flag": "26"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_1A"
     }
   ],
   "warp_events": [

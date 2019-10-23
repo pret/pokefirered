@@ -122,10 +122,10 @@ void SetBlackoutRespawnWarpAndHealerNpc(struct WarpData * warp)
 {
     u32 healLocationIdx;
 
-    if (VarGet(VAR_0x4082) == 1)
+    if (VarGet(VAR_MAP_SCENE_TRAINER_TOWER) == 1)
     {
         if (!gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_2)
-            VarSet(VAR_0x4082, 0);
+            VarSet(VAR_MAP_SCENE_TRAINER_TOWER, 0);
         gSpecialVar_LastTalked = 1;
         warp->x = 4;
         warp->y = 11;
@@ -159,7 +159,7 @@ void SetBlackoutRespawnWarpAndHealerNpc(struct WarpData * warp)
         {
             warp->x = 4;
             warp->y = 11;
-            VarSet(VAR_0x4082, 0);
+            VarSet(VAR_MAP_SCENE_TRAINER_TOWER, 0);
         }
         else
         {

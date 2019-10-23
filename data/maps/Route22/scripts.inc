@@ -32,32 +32,32 @@ EventScript_1682BE:: @ 81682BE
 	playbgm MUS_RIVAL1, 0
 	addobject 1
 	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_168350
+	call_if eq, EventScript_168350
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_168350
+	call_if eq, EventScript_168350
 	compare_var_to_value VAR_0x4001, 2
-	call_if 1, EventScript_16835B
+	call_if eq, EventScript_16835B
 	delay 6
 	msgbox gUnknown_8188890
 	compare_var_to_value VAR_STARTER_MON, 2
-	call_if 1, EventScript_16836D
+	call_if eq, EventScript_16836D
 	compare_var_to_value VAR_STARTER_MON, 1
-	call_if 1, EventScript_16837C
+	call_if eq, EventScript_16837C
 	compare_var_to_value VAR_STARTER_MON, 0
-	call_if 1, EventScript_16838B
+	call_if eq, EventScript_16838B
 	msgbox gUnknown_8188974
 	closemessage
 	delay 10
 	playbgm MUS_RIVAL2, 0
 	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_16839A
+	call_if eq, EventScript_16839A
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_16839A
+	call_if eq, EventScript_16839A
 	compare_var_to_value VAR_0x4001, 2
-	call_if 1, EventScript_1683A5
+	call_if eq, EventScript_1683A5
 	fadedefaultbgm
 	removeobject 1
-	setvar VAR_0x4054, 2
+	setvar VAR_MAP_SCENE_ROUTE22, 2
 	releaseall
 	end
 
@@ -73,15 +73,15 @@ EventScript_16835B:: @ 816835B
 	return
 
 EventScript_16836D:: @ 816836D
-	trainerbattle 9, 329, 0, Text_188959, Text_18DE1A
+	trainerbattle 9, TRAINER_RIVAL_ROUTE22_EARLY_SQUIRTLE, 0, Text_188959, Text_18DE1A
 	return
 
 EventScript_16837C:: @ 816837C
-	trainerbattle 9, 330, 0, Text_188959, Text_18DE1A
+	trainerbattle 9, TRAINER_RIVAL_ROUTE22_EARLY_BULBASAUR, 0, Text_188959, Text_18DE1A
 	return
 
 EventScript_16838B:: @ 816838B
-	trainerbattle 9, 331, 0, Text_188959, Text_18DE1A
+	trainerbattle 9, TRAINER_RIVAL_ROUTE22_EARLY_CHARMANDER, 0, Text_188959, Text_18DE1A
 	return
 
 EventScript_16839A:: @ 816839A
@@ -198,19 +198,19 @@ EventScript_16841F:: @ 816841F
 	playbgm MUS_RIVAL1, 0
 	addobject 1
 	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_16849C
+	call_if eq, EventScript_16849C
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_16849C
+	call_if eq, EventScript_16849C
 	compare_var_to_value VAR_0x4001, 2
-	call_if 1, EventScript_1684A7
+	call_if eq, EventScript_1684A7
 	msgbox gUnknown_8188A3C
 	setvar VAR_LAST_TALKED, 1
 	compare_var_to_value VAR_STARTER_MON, 2
-	call_if 1, EventScript_1684B9
+	call_if eq, EventScript_1684B9
 	compare_var_to_value VAR_STARTER_MON, 1
-	call_if 1, EventScript_1684C4
+	call_if eq, EventScript_1684C4
 	compare_var_to_value VAR_STARTER_MON, 0
-	call_if 1, EventScript_1684CF
+	call_if eq, EventScript_1684CF
 	msgbox gUnknown_8188B29
 	closemessage
 	delay 10
@@ -219,7 +219,7 @@ EventScript_16841F:: @ 816841F
 	waitmovement 0
 	fadedefaultbgm
 	removeobject 1
-	setvar VAR_0x4054, 4
+	setvar VAR_MAP_SCENE_ROUTE22, 4
 	releaseall
 	end
 
@@ -235,15 +235,15 @@ EventScript_1684A7:: @ 81684A7
 	return
 
 EventScript_1684B9:: @ 81684B9
-	trainerbattle 3, 435, 0, Text_188B08
+	trainerbattle 3, TRAINER_RIVAL_ROUTE22_LATE_SQUIRTLE, 0, Text_188B08
 	return
 
 EventScript_1684C4:: @ 81684C4
-	trainerbattle 3, 436, 0, Text_188B08
+	trainerbattle 3, TRAINER_RIVAL_ROUTE22_LATE_BULBASAUR, 0, Text_188B08
 	return
 
 EventScript_1684CF:: @ 81684CF
-	trainerbattle 3, 437, 0, Text_188B08
+	trainerbattle 3, TRAINER_RIVAL_ROUTE22_LATE_CHARMANDER, 0, Text_188B08
 	return
 
 Movement_1684DA:: @ 81684DA

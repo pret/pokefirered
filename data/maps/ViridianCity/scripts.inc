@@ -4,46 +4,46 @@ ViridianCity_MapScripts:: @ 81658D3
 
 ViridianCity_MapScript1_1658D9:: @ 81658D9
 	setworldmapflag FLAG_WORLD_MAP_VIRIDIAN_CITY
-	compare_var_to_value VAR_0x4051, 0
-	call_if 1, EventScript_165920
-	compare_var_to_value VAR_0x4051, 1
-	call_if 1, EventScript_16590F
-	compare_var_to_value VAR_0x4051, 2
-	call_if 4, EventScript_165909
-	compare_var_to_value VAR_0x405A, 0
-	call_if 1, EventScript_165931
+	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 0
+	call_if eq, EventScript_165920
+	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 1
+	call_if eq, EventScript_16590F
+	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2
+	call_if ge, EventScript_165909
+	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_GYM_DOOR, 0
+	call_if eq, EventScript_165931
 	end
 
 EventScript_165909:: @ 8165909
-	setvar VAR_0x4010, 32
+	setvar VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_OLD_MAN_1
 	return
 
 EventScript_16590F:: @ 816590F
-	setvar VAR_0x4010, 32
+	setvar VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_OLD_MAN_1
 	setobjectxyperm 4, 21, 8
 	setobjectmovementtype 4, 1
 	return
 
 EventScript_165920:: @ 8165920
-	setvar VAR_0x4010, 34
+	setvar VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_VIRIDIAN_DRUNK
 	setobjectxyperm 4, 21, 11
 	setobjectmovementtype 4, 8
 	return
 
 EventScript_165931:: @ 8165931
-	checkflag FLAG_0x821
-	goto_if 0, EventScript_1A77A9
-	checkflag FLAG_0x822
-	goto_if 0, EventScript_1A77A9
-	checkflag FLAG_0x823
-	goto_if 0, EventScript_1A77A9
-	checkflag FLAG_UNK824
-	goto_if 0, EventScript_1A77A9
-	checkflag FLAG_0x825
-	goto_if 0, EventScript_1A77A9
-	checkflag FLAG_UNK826
-	goto_if 0, EventScript_1A77A9
-	setvar VAR_0x405A, 1
+	checkflag FLAG_BADGE02_GET
+	goto_if FALSE, EventScript_1A77A9
+	checkflag FLAG_BADGE03_GET
+	goto_if FALSE, EventScript_1A77A9
+	checkflag FLAG_BADGE04_GET
+	goto_if FALSE, EventScript_1A77A9
+	checkflag FLAG_BADGE05_GET
+	goto_if FALSE, EventScript_1A77A9
+	checkflag FLAG_BADGE06_GET
+	goto_if FALSE, EventScript_1A77A9
+	checkflag FLAG_BADGE07_GET
+	goto_if FALSE, EventScript_1A77A9
+	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_GYM_DOOR, 1
 	return
 
 ViridianCity_EventScript_16596D:: @ 816596D
@@ -90,8 +90,8 @@ ViridianCity_EventScript_1659C1:: @ 81659C1
 ViridianCity_EventScript_1659CA:: @ 81659CA
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x405A, 1
-	goto_if_eq EventScript_1659EC
+	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_GYM_DOOR, 1
+	goto_if eq, EventScript_1659EC
 	msgbox gUnknown_817DB39
 	closemessage
 	applymovement 3, Movement_1A75E5
@@ -107,20 +107,20 @@ EventScript_1659EC:: @ 81659EC
 ViridianCity_EventScript_1659F6:: @ 81659F6
 	lock
 	faceplayer
-	checkflag FLAG_UNK820
-	goto_if_eq EventScript_165A23
-	compare_var_to_value VAR_0x4051, 2
-	goto_if 4, EventScript_165A4A
-	compare_var_to_value VAR_0x4051, 1
-	goto_if_eq EventScript_165A54
-	compare_var_to_value VAR_0x4051, 0
-	goto_if_eq EventScript_165A84
+	checkflag FLAG_BADGE01_GET
+	goto_if TRUE, EventScript_165A23
+	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2
+	goto_if ge, EventScript_165A4A
+	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 1
+	goto_if eq, EventScript_165A54
+	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 0
+	goto_if eq, EventScript_165A84
 	end
 
 EventScript_165A23:: @ 8165A23
 	msgbox gUnknown_817E046, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_165A40
+	goto_if eq, EventScript_165A40
 	msgbox gUnknown_817E0EA
 	release
 	end
@@ -149,7 +149,7 @@ EventScript_165A65:: @ 8165A65
 	msgbox gUnknown_817DE9B
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	special sub_807F888
 	waitstate
@@ -167,9 +167,9 @@ ViridianCity_EventScript_165A8F:: @ 8165A8F
 	faceplayer
 	msgbox gUnknown_817DB98, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_165AB0
+	goto_if eq, EventScript_165AB0
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_165ABA
+	goto_if eq, EventScript_165ABA
 	end
 
 EventScript_165AB0:: @ 8165AB0
@@ -185,8 +185,8 @@ EventScript_165ABA:: @ 8165ABA
 ViridianCity_EventScript_165AC4:: @ 8165AC4
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x4051, 0
-	goto_if_eq EventScript_165ADB
+	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 0
+	goto_if eq, EventScript_165ADB
 	msgbox gUnknown_817DC99
 	release
 	end
@@ -244,14 +244,14 @@ EventScript_165B4C:: @ 8165B4C
 	closemessage
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	special sub_807F888
 	waitstate
 	lock
 	faceplayer
 	msgbox gUnknown_817DE9B
-	setvar VAR_0x4051, 2
+	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2
 	giveitem ITEM_TEACHY_TV
 	msgbox gUnknown_817DEEB
 	return

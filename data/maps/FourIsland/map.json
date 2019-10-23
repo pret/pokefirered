@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "32",
+      "graphics_id": "MAP_OBJ_GFX_OLD_MAN_1",
       "x": 16,
       "y": 13,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "132",
+      "graphics_id": "MAP_OBJ_GFX_DODUO",
       "x": 12,
       "y": 9,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "122",
+      "graphics_id": "MAP_OBJ_GFX_NIDORAN_F",
       "x": 13,
       "y": 7,
       "elevation": 3,
@@ -53,7 +53,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "123",
+      "graphics_id": "MAP_OBJ_GFX_NIDORAN_M",
       "x": 14,
       "y": 7,
       "elevation": 3,
@@ -66,7 +66,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "121",
+      "graphics_id": "MAP_OBJ_GFX_PSYDUCK",
       "x": 17,
       "y": 9,
       "elevation": 3,
@@ -79,7 +79,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "35",
+      "graphics_id": "MAP_OBJ_GFX_OLD_WOMAN",
       "x": 26,
       "y": 19,
       "elevation": 3,
@@ -92,7 +92,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 5,
       "y": 11,
       "elevation": 3,
@@ -101,11 +101,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FourIsland_EventScript_1BE00C",
-      "flag": "18"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_12"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 5,
       "y": 6,
       "elevation": 3,
@@ -115,10 +115,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "FourIsland_EventScript_1BEC28",
-      "flag": "473"
+      "flag": "FLAG_HIDE_FOUR_ISLAND_STAR_PIECE"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 32,
       "y": 19,
       "elevation": 3,
@@ -128,10 +128,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "FourIsland_EventScript_1BEC35",
-      "flag": "474"
+      "flag": "FLAG_HIDE_FOUR_ISLAND_STARDUST"
     },
     {
-      "graphics_id": "72",
+      "graphics_id": "MAP_OBJ_GFX_BLUE",
       "x": 8,
       "y": 25,
       "elevation": 3,
@@ -141,10 +141,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "0x0",
-      "flag": "151"
+      "flag": "FLAG_HIDE_FOUR_ISLAND_RIVAL"
     },
     {
-      "graphics_id": "27",
+      "graphics_id": "MAP_OBJ_GFX_FAT_MAN",
       "x": 36,
       "y": 13,
       "elevation": 3,
@@ -157,7 +157,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "17",
+      "graphics_id": "MAP_OBJ_GFX_LITTLE_GIRL",
       "x": 31,
       "y": 21,
       "elevation": 3,
@@ -243,17 +243,19 @@
       "y": 34,
       "elevation": 3,
       "item": "ITEM_PEARL",
-      "flag": "168",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_FOUR_ISLAND_PEARL",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
       "x": 6,
       "y": 21,
       "elevation": 3,
-      "item": "POCKET_KEY_ITEMS",
-      "flag": "169",
-      "unknown": 1
+      "item": "ITEM_ULTRA_BALL",
+      "flag": "HIDDEN_ITEM_FOUR_ISLAND_ULTRA_BALL",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "bg_event_type_0",

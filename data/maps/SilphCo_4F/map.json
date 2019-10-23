@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "49",
+      "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
       "x": 33,
       "y": 16,
       "elevation": 3,
@@ -24,10 +24,10 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
       "script": "SilphCo_4F_EventScript_1617A7",
-      "flag": "83"
+      "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
-      "graphics_id": "49",
+      "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
       "x": 10,
       "y": 19,
       "elevation": 3,
@@ -37,10 +37,10 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 5,
       "script": "SilphCo_4F_EventScript_161790",
-      "flag": "83"
+      "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
-      "graphics_id": "55",
+      "graphics_id": "MAP_OBJ_GFX_SCIENTIST",
       "x": 14,
       "y": 8,
       "elevation": 3,
@@ -50,10 +50,10 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
       "script": "SilphCo_4F_EventScript_161779",
-      "flag": "83"
+      "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
-      "graphics_id": "47",
+      "graphics_id": "MAP_OBJ_GFX_WORKER_M",
       "x": 5,
       "y": 5,
       "elevation": 3,
@@ -66,7 +66,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 3,
       "y": 11,
       "elevation": 3,
@@ -76,10 +76,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SilphCo_4F_EventScript_1BE873",
-      "flag": "397"
+      "flag": "FLAG_HIDE_SILPH_CO_4F_MAX_REVIVE"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 4,
       "y": 12,
       "elevation": 3,
@@ -89,10 +89,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SilphCo_4F_EventScript_1BE880",
-      "flag": "398"
+      "flag": "FLAG_HIDE_SILPH_CO_4F_ESCAPE_ROPE"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 2,
       "y": 13,
       "elevation": 3,
@@ -102,10 +102,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SilphCo_4F_EventScript_1BE88D",
-      "flag": "399"
+      "flag": "FLAG_HIDE_SILPH_CO_4F_FULL_HEAL"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 30,
       "y": 18,
       "elevation": 0,
@@ -115,7 +115,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SilphCo_4F_EventScript_1BEE09",
-      "flag": "510"
+      "flag": "FLAG_HIDE_SILPH_CO_4F_TM41"
     }
   ],
   "warp_events": [
@@ -233,8 +233,9 @@
       "y": 20,
       "elevation": 0,
       "item": "ITEM_IRON",
-      "flag": "137",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_SILPH_CO_4F_IRON",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "bg_event_type_0",

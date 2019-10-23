@@ -20,7 +20,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "19",
+      "graphics_id": "MAP_OBJ_GFX_BOY",
       "x": 56,
       "y": 26,
       "elevation": 3,
@@ -33,7 +33,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "23",
+      "graphics_id": "MAP_OBJ_GFX_WOMAN_1",
       "x": 56,
       "y": 29,
       "elevation": 3,
@@ -63,8 +63,9 @@
       "y": 27,
       "elevation": 3,
       "item": "ITEM_BIG_PEARL",
-      "flag": "185",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_SEVEN_ISLAND_TRAINER_TOWER_BIG_PEARL",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -72,8 +73,9 @@
       "y": 30,
       "elevation": 3,
       "item": "ITEM_PEARL",
-      "flag": "186",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_SEVEN_ISLAND_TRAINER_TOWER_PEARL",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -81,8 +83,9 @@
       "y": 32,
       "elevation": 3,
       "item": "ITEM_NANAB_BERRY",
-      "flag": "187",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_SEVEN_ISLAND_TRAINER_TOWER_NANAB_BERRY",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "bg_event_type_0",

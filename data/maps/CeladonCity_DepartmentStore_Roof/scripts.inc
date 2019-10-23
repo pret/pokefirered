@@ -4,13 +4,13 @@ CeladonCity_DepartmentStore_Roof_MapScripts:: @ 816BCCC
 CeladonCity_DepartmentStore_Roof_EventScript_16BCCD:: @ 816BCCD
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	lock
 	faceplayer
 	call EventScript_16BCF6
 	compare_var_to_value VAR_0x4001, 0
-	goto_if_eq EventScript_16C00E
+	goto_if eq, EventScript_16C00E
 	goto EventScript_16BD3E
 	end
 
@@ -18,13 +18,13 @@ EventScript_16BCF6:: @ 816BCF6
 	setvar VAR_0x4001, 0
 	checkitem ITEM_FRESH_WATER, 1
 	compare_var_to_value VAR_RESULT, 1
-	call_if 1, EventScript_16BD2C
+	call_if eq, EventScript_16BD2C
 	checkitem ITEM_SODA_POP, 1
 	compare_var_to_value VAR_RESULT, 1
-	call_if 1, EventScript_16BD32
+	call_if eq, EventScript_16BD32
 	checkitem ITEM_LEMONADE, 1
 	compare_var_to_value VAR_RESULT, 1
-	call_if 1, EventScript_16BD38
+	call_if eq, EventScript_16BD38
 	return
 
 EventScript_16BD2C:: @ 816BD2C
@@ -42,7 +42,7 @@ EventScript_16BD38:: @ 816BD38
 EventScript_16BD3E:: @ 816BD3E
 	msgbox gUnknown_8195D22, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16C00C
+	goto_if eq, EventScript_16C00C
 	textcolor 3
 	message Text_195D5F
 	waitmessage
@@ -121,8 +121,8 @@ EventScript_16BED7:: @ 816BED7
 EventScript_16BF19:: @ 816BF19
 	setvar VAR_0x8008, ITEM_FRESH_WATER
 	setvar VAR_0x8009, ITEM_TM16
-	checkflag FLAG_0x296
-	goto_if_eq EventScript_16C018
+	checkflag FLAG_GOT_TM16_FROM_THIRSTY_GIRL
+	goto_if TRUE, EventScript_16C018
 	msgbox gUnknown_8195D75
 	goto EventScript_16BF7C
 	end
@@ -130,8 +130,8 @@ EventScript_16BF19:: @ 816BF19
 EventScript_16BF3A:: @ 816BF3A
 	setvar VAR_0x8008, ITEM_SODA_POP
 	setvar VAR_0x8009, ITEM_TM20
-	checkflag FLAG_0x295
-	goto_if_eq EventScript_16C018
+	checkflag FLAG_GOT_TM20_FROM_THIRSTY_GIRL
+	goto_if TRUE, EventScript_16C018
 	msgbox gUnknown_8195E33
 	goto EventScript_16BF7C
 	end
@@ -139,8 +139,8 @@ EventScript_16BF3A:: @ 816BF3A
 EventScript_16BF5B:: @ 816BF5B
 	setvar VAR_0x8008, ITEM_LEMONADE
 	setvar VAR_0x8009, ITEM_TM33
-	checkflag FLAG_0x294
-	goto_if_eq EventScript_16C018
+	checkflag FLAG_GOT_TM33_FROM_THIRSTY_GIRL
+	goto_if TRUE, EventScript_16C018
 	msgbox gUnknown_8195EBF
 	goto EventScript_16BF7C
 	end
@@ -151,7 +151,7 @@ EventScript_16BF7C:: @ 816BF7C
 	removeitem VAR_0x8008, 1
 	checkitemspace VAR_0x8009, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16C002
+	goto_if eq, EventScript_16C002
 	additem VAR_0x8009, 1
 	textcolor 3
 	playfanfare MUS_FANFA1
@@ -161,26 +161,26 @@ EventScript_16BF7C:: @ 816BF7C
 	giveitem VAR_0x8009, 1, 8
 	call EventScript_1A6675
 	compare_var_to_value VAR_0x8008, ITEM_FRESH_WATER
-	call_if 1, EventScript_16BFDE
+	call_if eq, EventScript_16BFDE
 	compare_var_to_value VAR_0x8008, ITEM_SODA_POP
-	call_if 1, EventScript_16BFEA
+	call_if eq, EventScript_16BFEA
 	compare_var_to_value VAR_0x8008, ITEM_LEMONADE
-	call_if 1, EventScript_16BFF6
+	call_if eq, EventScript_16BFF6
 	release
 	end
 
 EventScript_16BFDE:: @ 816BFDE
-	setflag FLAG_0x296
+	setflag FLAG_GOT_TM16_FROM_THIRSTY_GIRL
 	msgbox gUnknown_8195DD4
 	return
 
 EventScript_16BFEA:: @ 816BFEA
-	setflag FLAG_0x295
+	setflag FLAG_GOT_TM20_FROM_THIRSTY_GIRL
 	msgbox gUnknown_8195E68
 	return
 
 EventScript_16BFF6:: @ 816BFF6
-	setflag FLAG_0x294
+	setflag FLAG_GOT_TM33_FROM_THIRSTY_GIRL
 	msgbox gUnknown_8195EF4
 	return
 
@@ -262,16 +262,16 @@ EventScript_16C0C4:: @ 816C0C4
 
 EventScript_16C0CB:: @ 816C0CB
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16C131
+	goto_if eq, EventScript_16C131
 	checkitemspace VAR_0x4000, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16C13F
+	goto_if eq, EventScript_16C13F
 	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_16C0B6
+	call_if eq, EventScript_16C0B6
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_16C0BD
+	call_if eq, EventScript_16C0BD
 	compare_var_to_value VAR_0x4001, 2
-	call_if 1, EventScript_16C0C4
+	call_if eq, EventScript_16C0C4
 	updatemoneybox 0, 0, 0
 	getitemname 0, VAR_0x4000
 	playse SE_JIHANKI

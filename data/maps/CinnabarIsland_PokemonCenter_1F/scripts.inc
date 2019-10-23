@@ -31,23 +31,23 @@ CinnabarIsland_PokemonCenter_1F_EventScript_16E90A:: @ 816E90A
 	faceplayer
 	msgbox gUnknown_819A725, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16E9A5
+	goto_if eq, EventScript_16E9A5
 	msgbox gUnknown_819A785
 	closemessage
 	playbgm MUS_ANNAI, 1
 	savebgm MUS_ANNAI
 	setflag FLAG_SPECIAL_FLAG_0x4001
-	setflag FLAG_0x0A2
+	setflag FLAG_HIDE_CINNABAR_POKECENTER_BILL
 	delay 20
 	compare_var_to_value VAR_FACING, 1
-	call_if 1, EventScript_16E96F
+	call_if eq, EventScript_16E96F
 	compare_var_to_value VAR_FACING, 4
-	call_if 1, EventScript_16E981
+	call_if eq, EventScript_16E981
 	compare_var_to_value VAR_FACING, 3
-	call_if 1, EventScript_16E993
+	call_if eq, EventScript_16E993
 	removeobject 7
-	setvar VAR_MAP_SCENE_CINNABAR_ISLAND, 1
-	clearflag FLAG_0x062
+	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_2, 1
+	clearflag FLAG_HIDE_CINNABAR_BILL
 	warp MAP_CINNABAR_ISLAND, 255, 14, 11
 	waitstate
 	release

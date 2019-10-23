@@ -83,9 +83,7 @@ gSelectedEventObject: @ 3005074
 gUnknown_3005078: @ 3005078
 	.space 0x4
 
-gUnknown_300507C: @ 300507C
-	.space 0x4
-
+	.include "event_data.o"
 	.include "sound.o"
 	.include "task.o"
 	
@@ -205,7 +203,7 @@ gUnknown_3005E20: @ 3005E20
 	.align 2
 	.include "quest_log.o"
 
-gUnknown_3005E8C: @ 3005E8C
+sNumQuestLogs: @ 3005E8C
 	.space 0x4
 
 gUnknown_3005E90: @ 3005E90

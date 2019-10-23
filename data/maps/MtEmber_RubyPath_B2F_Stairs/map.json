@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 4,
       "y": 3,
       "elevation": 3,
@@ -23,11 +23,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "MtEmber_RubyPath_B2F_Stairs_EventScript_1BE00C",
-      "flag": "18"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_12"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 6,
       "y": 2,
       "elevation": 3,
@@ -36,8 +36,8 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "MtEmber_RubyPath_B2F_Stairs_EventScript_1BE00C",
-      "flag": "19"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_13"
     }
   ],
   "warp_events": [

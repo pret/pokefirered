@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "17",
+      "graphics_id": "MAP_OBJ_GFX_LITTLE_GIRL",
       "x": 4,
       "y": 8,
       "elevation": 3,
@@ -24,10 +24,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_BerryForest_EventScript_163C83",
-      "flag": "122"
+      "flag": "FLAG_HIDE_LOSTELLE_IN_BERRY_FOREST"
     },
     {
-      "graphics_id": "95",
+      "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
       "x": 12,
       "y": 11,
       "elevation": 3,
@@ -36,11 +36,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ThreeIsland_BerryForest_EventScript_1BDF13",
-      "flag": "18"
+      "script": "EventScript_InteractWithCutTreeObject",
+      "flag": "FLAG_TEMP_12"
     },
     {
-      "graphics_id": "95",
+      "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
       "x": 19,
       "y": 7,
       "elevation": 3,
@@ -49,11 +49,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ThreeIsland_BerryForest_EventScript_1BDF13",
-      "flag": "19"
+      "script": "EventScript_InteractWithCutTreeObject",
+      "flag": "FLAG_TEMP_13"
     },
     {
-      "graphics_id": "95",
+      "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
       "x": 23,
       "y": 17,
       "elevation": 3,
@@ -62,11 +62,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ThreeIsland_BerryForest_EventScript_1BDF13",
-      "flag": "20"
+      "script": "EventScript_InteractWithCutTreeObject",
+      "flag": "FLAG_TEMP_14"
     },
     {
-      "graphics_id": "95",
+      "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
       "x": 38,
       "y": 23,
       "elevation": 3,
@@ -75,11 +75,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ThreeIsland_BerryForest_EventScript_1BDF13",
-      "flag": "21"
+      "script": "EventScript_InteractWithCutTreeObject",
+      "flag": "FLAG_TEMP_15"
     },
     {
-      "graphics_id": "95",
+      "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
       "x": 44,
       "y": 23,
       "elevation": 3,
@@ -88,11 +88,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ThreeIsland_BerryForest_EventScript_1BDF13",
-      "flag": "22"
+      "script": "EventScript_InteractWithCutTreeObject",
+      "flag": "FLAG_TEMP_16"
     },
     {
-      "graphics_id": "95",
+      "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
       "x": 44,
       "y": 29,
       "elevation": 3,
@@ -101,11 +101,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ThreeIsland_BerryForest_EventScript_1BDF13",
-      "flag": "23"
+      "script": "EventScript_InteractWithCutTreeObject",
+      "flag": "FLAG_TEMP_17"
     },
     {
-      "graphics_id": "95",
+      "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
       "x": 16,
       "y": 43,
       "elevation": 3,
@@ -114,11 +114,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ThreeIsland_BerryForest_EventScript_1BDF13",
-      "flag": "24"
+      "script": "EventScript_InteractWithCutTreeObject",
+      "flag": "FLAG_TEMP_18"
     },
     {
-      "graphics_id": "95",
+      "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
       "x": 17,
       "y": 39,
       "elevation": 3,
@@ -127,11 +127,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ThreeIsland_BerryForest_EventScript_1BDF13",
-      "flag": "25"
+      "script": "EventScript_InteractWithCutTreeObject",
+      "flag": "FLAG_TEMP_19"
     },
     {
-      "graphics_id": "95",
+      "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
       "x": 14,
       "y": 39,
       "elevation": 3,
@@ -140,11 +140,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ThreeIsland_BerryForest_EventScript_1BDF13",
-      "flag": "26"
+      "script": "EventScript_InteractWithCutTreeObject",
+      "flag": "FLAG_TEMP_1A"
     },
     {
-      "graphics_id": "95",
+      "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
       "x": 11,
       "y": 39,
       "elevation": 3,
@@ -153,11 +153,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ThreeIsland_BerryForest_EventScript_1BDF13",
-      "flag": "27"
+      "script": "EventScript_InteractWithCutTreeObject",
+      "flag": "FLAG_TEMP_1B"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 12,
       "y": 5,
       "elevation": 3,
@@ -167,10 +167,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_BerryForest_EventScript_1BED05",
-      "flag": "490"
+      "flag": "FLAG_HIDE_THREE_ISLAND_BERRY_FOREST_MAX_ETHER"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 27,
       "y": 11,
       "elevation": 3,
@@ -180,10 +180,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_BerryForest_EventScript_1BED12",
-      "flag": "491"
+      "flag": "FLAG_HIDE_THREE_ISLAND_BERRY_FOREST_FULL_HEAL"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 12,
       "y": 43,
       "elevation": 3,
@@ -193,7 +193,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_BerryForest_EventScript_1BED1F",
-      "flag": "492"
+      "flag": "FLAG_HIDE_THREE_ISLAND_BERRY_FOREST_MAX_ELIXIR"
     }
   ],
   "warp_events": [
@@ -241,8 +241,9 @@
       "y": 25,
       "elevation": 3,
       "item": "ITEM_RAZZ_BERRY",
-      "flag": "90",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_RAZZ_BERRY",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -250,8 +251,9 @@
       "y": 15,
       "elevation": 3,
       "item": "ITEM_BLUK_BERRY",
-      "flag": "91",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_BLUK_BERRY",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -259,8 +261,9 @@
       "y": 24,
       "elevation": 3,
       "item": "ITEM_NANAB_BERRY",
-      "flag": "92",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_NANAB_BERRY",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -268,8 +271,9 @@
       "y": 24,
       "elevation": 3,
       "item": "ITEM_WEPEAR_BERRY",
-      "flag": "93",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_WEPEAR_BERRY",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -277,8 +281,9 @@
       "y": 18,
       "elevation": 3,
       "item": "ITEM_ORAN_BERRY",
-      "flag": "94",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_ORAN_BERRY",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -286,8 +291,9 @@
       "y": 23,
       "elevation": 3,
       "item": "ITEM_CHERI_BERRY",
-      "flag": "95",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_CHERI_BERRY",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -295,8 +301,9 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_CHESTO_BERRY",
-      "flag": "96",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_CHESTO_BERRY",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -304,8 +311,9 @@
       "y": 30,
       "elevation": 3,
       "item": "ITEM_PECHA_BERRY",
-      "flag": "97",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_PECHA_BERRY",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -313,8 +321,9 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_RAWST_BERRY",
-      "flag": "98",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_RAWST_BERRY",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -322,8 +331,9 @@
       "y": 6,
       "elevation": 3,
       "item": "ITEM_ASPEAR_BERRY",
-      "flag": "99",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_ASPEAR_BERRY",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -331,8 +341,9 @@
       "y": 32,
       "elevation": 3,
       "item": "ITEM_PERSIM_BERRY",
-      "flag": "100",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_PERSIM_BERRY",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -340,8 +351,9 @@
       "y": 16,
       "elevation": 3,
       "item": "ITEM_PINAP_BERRY",
-      "flag": "101",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_PINAP_BERRY",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -349,8 +361,9 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_LUM_BERRY",
-      "flag": "102",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_LUM_BERRY",
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

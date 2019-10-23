@@ -364,8 +364,8 @@ sub_806CAC8: @ 806CAC8
 	beq _0806CB74
 	movs r0, 0x5
 	bl IncrementGameStat
-	bl sub_8146CA4
-	bl sub_815D8C8
+	bl MENewsJisanStepCounter
+	bl IncrementRenewableHiddenItemStepCounter
 	bl sub_80CC918
 	bl sub_80CB054
 	bl sub_80CCFBC
@@ -1822,11 +1822,11 @@ _0806D6EC:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806D704
-	ldr r0, _0806D700 @ =gUnknown_81A8DFD
+	ldr r0, _0806D700 @ =EventScript_PoisonWhiteOut
 	bl ScriptContext1_SetupScript
 	b _0806D730
 	.align 2, 0
-_0806D700: .4byte gUnknown_81A8DFD
+_0806D700: .4byte EventScript_PoisonWhiteOut
 _0806D704:
 	bl ShouldEggHatch
 	lsls r0, 24

@@ -4,8 +4,8 @@ ViridianCity_Mart_MapScripts:: @ 816A1D3
 	.byte 0
 
 ViridianCity_Mart_MapScript1_16A1DE:: @ 816A1DE
-	checkflag FLAG_0x829
-	goto_if 0, EventScript_16A1E8
+	checkflag FLAG_SYS_POKEDEX_GET
+	goto_if FALSE, EventScript_16A1E8
 	end
 
 EventScript_16A1E8:: @ 816A1E8
@@ -55,10 +55,10 @@ ViridianCity_Mart_EventScript_16A268:: @ 816A268
 	lock
 	faceplayer
 	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 1
-	goto_if_eq EventScript_16A2A4
+	goto_if eq, EventScript_16A2A4
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if eq, EventScript_1A7AE0
 	message Text_1A6211
 	waitmessage
 	pokemart Items_16A298

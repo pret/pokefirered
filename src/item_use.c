@@ -202,7 +202,7 @@ void FieldUseFunc_MachBike(u8 taskId)
     PlayerGetDestCoords(&x, &y);
     behavior = MapGridGetMetatileBehaviorAt(x, y);
 
-    if (FlagGet(FLAG_0x830) == TRUE
+    if (FlagGet(FLAG_SYS_ON_CYCLING_ROAD) == TRUE
      || MetatileBehavior_ReturnFalse_17(behavior) == TRUE
      || MetatileBehavior_ReturnFalse_18(behavior) == TRUE
      || MetatileBehavior_ReturnFalse_15(behavior) == TRUE
@@ -529,8 +529,8 @@ void FieldUseFunc_BlackFlute(u8 taskId)
     ItemUse_SetQuestLogEvent(4, NULL, gSpecialVar_ItemId, 0xFFFF);
     if (gSpecialVar_ItemId == ITEM_WHITE_FLUTE)
     {
-        FlagSet(FLAG_WHITE_FLUTE_ACTIVE);
-        FlagClear(FLAG_BLACK_FLUTE_ACTIVE);
+        FlagSet(FLAG_SYS_WHITE_FLUTE_ACTIVE);
+        FlagClear(FLAG_SYS_BLACK_FLUTE_ACTIVE);
         CopyItemName(gSpecialVar_ItemId, gStringVar2);
         StringExpandPlaceholders(gStringVar4, gUnknown_84165D2);
         gTasks[taskId].func = sub_80A1B48;
@@ -538,8 +538,8 @@ void FieldUseFunc_BlackFlute(u8 taskId)
     }
     else if (gSpecialVar_ItemId == ITEM_BLACK_FLUTE)
     {
-        FlagSet(FLAG_BLACK_FLUTE_ACTIVE);
-        FlagClear(FLAG_WHITE_FLUTE_ACTIVE);
+        FlagSet(FLAG_SYS_BLACK_FLUTE_ACTIVE);
+        FlagClear(FLAG_SYS_WHITE_FLUTE_ACTIVE);
         CopyItemName(gSpecialVar_ItemId, gStringVar2);
         StringExpandPlaceholders(gStringVar4, gUnknown_8416600);
         gTasks[taskId].func = sub_80A1B48;

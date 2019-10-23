@@ -5,8 +5,8 @@ MtEmber_Exterior_MapScripts:: @ 8163946
 
 MtEmber_Exterior_MapScript1_163951:: @ 8163951
 	setworldmapflag FLAG_WORLD_MAP_MT_EMBER_EXTERIOR
-	compare_var_to_value VAR_0x407F, 2
-	call_if 1, EventScript_163960
+	compare_var_to_value VAR_MAP_SCENE_MT_EMBER_EXTERIOR, 2
+	call_if eq, EventScript_163960
 	end
 
 EventScript_163960:: @ 8163960
@@ -16,7 +16,7 @@ EventScript_163960:: @ 8163960
 
 MtEmber_Exterior_MapScript2_163969:: @ 8163969
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4
-	call_if 4, EventScript_163975
+	call_if ge, EventScript_163975
 	end
 
 EventScript_163975:: @ 8163975
@@ -25,10 +25,10 @@ EventScript_163975:: @ 8163975
 
 MtEmber_Exterior_EventScript_16397F:: @ 816397F
 	lock
-	checktrainerflag FLAG_0x219
-	goto_if_eq EventScript_16399E
+	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_43
+	goto_if eq, EventScript_16399E
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4
-	goto_if_eq EventScript_1639A8
+	goto_if eq, EventScript_1639A8
 	msgbox gUnknown_817A82A
 	release
 	end
@@ -43,10 +43,10 @@ EventScript_1639A8:: @ 81639A8
 	waitmovement 0
 	playbgm MUS_ROCKET, 0
 	msgbox gUnknown_817AA06
-	trainerbattle 3, 537, 0, Text_17AA34
+	trainerbattle 3, TRAINER_TEAM_ROCKET_GRUNT_43, 0, Text_17AA34
 	msgbox gUnknown_817AA3F
-	checktrainerflag FLAG_0x21A
-	goto_if_eq EventScript_1639DB
+	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_44
+	goto_if eq, EventScript_1639DB
 	release
 	end
 
@@ -63,10 +63,10 @@ EventScript_1639DB:: @ 81639DB
 MtEmber_Exterior_EventScript_1639F0:: @ 81639F0
 	lock
 	faceplayer
-	checktrainerflag FLAG_0x21A
-	goto_if_eq EventScript_163A1B
+	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_44
+	goto_if eq, EventScript_163A1B
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4
-	goto_if_eq EventScript_163A25
+	goto_if eq, EventScript_163A25
 	msgbox gUnknown_817A88C
 	closemessage
 	applymovement 3, Movement_1A75E5
@@ -82,10 +82,10 @@ EventScript_163A1B:: @ 8163A1B
 EventScript_163A25:: @ 8163A25
 	playbgm MUS_ROCKET, 0
 	msgbox gUnknown_817AA56
-	trainerbattle 3, 538, 0, Text_17AA8A
+	trainerbattle 3, TRAINER_TEAM_ROCKET_GRUNT_44, 0, Text_17AA8A
 	msgbox gUnknown_817AA99
-	checktrainerflag FLAG_0x219
-	goto_if_eq EventScript_1639DB
+	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_43
+	goto_if eq, EventScript_1639DB
 	release
 	end
 
@@ -111,21 +111,21 @@ MtEmber_Exterior_EventScript_163A4E:: @ 8163A4E
 	waitmovement 0
 	call EventScript_163960
 	msgbox gUnknown_817A9E1
-	setvar VAR_0x407F, 2
+	setvar VAR_MAP_SCENE_MT_EMBER_EXTERIOR, 2
 	releaseall
 	end
 
 MtEmber_Exterior_EventScript_163AB4:: @ 8163AB4
-	trainerbattle 0, 595, 0, Text_17AB73, Text_17ABAA
+	trainerbattle 0, TRAINER_PKMN_RANGER_LOGAN, 0, Text_17AB73, Text_17ABAA
 	msgbox gUnknown_817ABD8, 6
 	end
 
 MtEmber_Exterior_EventScript_163ACB:: @ 8163ACB
-	trainerbattle 0, 597, 0, Text_17AC55, Text_17AC82
+	trainerbattle 0, TRAINER_PKMN_RANGER_BETH, 0, Text_17AC55, Text_17AC82
 	msgbox gUnknown_817ACA2, 6
 	end
 
 MtEmber_Exterior_EventScript_163AE2:: @ 8163AE2
-	trainerbattle 0, 592, 0, Text_17AD06, Text_17AD6B
+	trainerbattle 0, TRAINER_CRUSH_GIRL_JOCELYN, 0, Text_17AD06, Text_17AD6B
 	msgbox gUnknown_817AD89, 6
 	end

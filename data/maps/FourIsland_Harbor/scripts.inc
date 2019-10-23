@@ -6,6 +6,6 @@ FourIsland_Harbor_EventScript_171C99:: @ 8171C99
 	faceplayer
 	message Text_181726
 	waitmessage
-	setvar VAR_0x8004, 4
+	setvar VAR_0x8004, SEAGALLOP_FOUR_ISLAND
 	goto EventScript_1A900F
 	end

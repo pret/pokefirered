@@ -3,7 +3,7 @@ SevenIsland_TrainerTower_MapScripts:: @ 8168BD5
 	.byte 0
 
 SevenIsland_TrainerTower_MapScript1_168BDB:: @ 8168BDB
-	setvar VAR_0x4082, 0
+	setvar VAR_MAP_SCENE_TRAINER_TOWER, 0
 	end
 
 SevenIsland_TrainerTower_EventScript_168BE1:: @ 8168BE1

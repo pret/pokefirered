@@ -595,7 +595,7 @@ sub_807FB08: @ 807FB08
 	ldr r0, _0807FB3C @ =sub_807FAF8
 	str r0, [r1, 0x8]
 	bl SavePlayerParty
-	bl sub_8159F40
+	bl InitPokedudePartyAndOpponent
 	bl GetWildBattleTransition
 	lsls r0, 24
 	lsrs r0, 24
@@ -2033,8 +2033,8 @@ sub_8080618: @ 8080618
 	bx r0
 	thumb_func_end sub_8080618
 
-	thumb_func_start sub_8080628
-sub_8080628: @ 8080628
+	thumb_func_start PlayTrainerEncounterMusic
+PlayTrainerEncounterMusic: @ 8080628
 	push {lr}
 	ldr r0, _08080660 @ =gUnknown_203ADFA
 	ldrb r0, [r0]
@@ -2083,15 +2083,18 @@ _08080670:
 	.4byte _080806AE
 	.4byte _080806AE
 _080806A8:
+	@ MUS_SHOUJO
 	movs r0, 0x8E
 	lsls r0, 1
 	b _080806BA
 _080806AE:
+	@ MUS_SHOUNEN
 	ldr r0, _080806B4 @ =0x0000011d
 	b _080806BA
 	.align 2, 0
 _080806B4: .4byte 0x0000011d
 _080806B8:
+	@ MUS_ROCKET
 	ldr r0, _080806C4 @ =0x0000011b
 _080806BA:
 	bl PlayNewMapMusic
@@ -2100,7 +2103,7 @@ _080806BE:
 	bx r0
 	.align 2, 0
 _080806C4: .4byte 0x0000011b
-	thumb_func_end sub_8080628
+	thumb_func_end PlayTrainerEncounterMusic
 
 	thumb_func_start sub_80806C8
 sub_80806C8: @ 80806C8

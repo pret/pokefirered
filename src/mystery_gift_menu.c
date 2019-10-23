@@ -1412,11 +1412,11 @@ void task00_mystery_gift(u8 taskId)
             {
                 if (data->source == 1)
                 {
-                    GenerateRandomNews(1);
+                    MENewsJisan_SetRandomReward(1);
                 }
                 else
                 {
-                    GenerateRandomNews(2);
+                    MENewsJisan_SetRandomReward(2);
                 }
             }
             if (sp0 == 0)
@@ -1661,7 +1661,7 @@ void task00_mystery_gift(u8 taskId)
         {
             if (data->source == 1 && data->prevPromptWindowId == 3)
             {
-                GenerateRandomNews(3);
+                MENewsJisan_SetRandomReward(3);
                 data->state = 17;
             }
             else

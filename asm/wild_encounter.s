@@ -966,8 +966,8 @@ _08082E48:
 	bx r1
 	thumb_func_end sub_8082CBC
 
-	thumb_func_start sub_8082E54
-sub_8082E54: @ 8082E54
+	thumb_func_start Special_RockSmashEncounter
+Special_RockSmashEncounter: @ 8082E54
 	push {r4,lr}
 	bl sub_8082934
 	lsls r0, 16
@@ -1018,7 +1018,7 @@ _08082EB6:
 	bx r0
 	.align 2, 0
 _08082EBC: .4byte gSpecialVar_Result
-	thumb_func_end sub_8082E54
+	thumb_func_end Special_RockSmashEncounter
 
 	thumb_func_start SweetScentWildEncounter
 SweetScentWildEncounter: @ 8082EC0

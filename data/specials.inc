@@ -65,7 +65,7 @@ gSpecials:: @ 815FD60
 	def_special sub_8080618
 	def_special ScrSpecial_HasTrainerBeenFought
 	def_special ScrSpecial_EndTrainerApproach
-	def_special sub_8080628
+	def_special PlayTrainerEncounterMusic
 	def_special sub_810CD4C
 	def_special sub_810CEB4
 	def_special sub_80805B0
@@ -168,7 +168,7 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special sub_807F888
 	def_special ChangePokemonNickname
-	def_special sub_80BF8FC
+	def_special Special_ChooseMonFromParty
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
@@ -180,7 +180,7 @@ gSpecials:: @ 815FD60
 	def_special sub_8113510
 	def_special sub_81130A8
 	def_special sub_8113530
-	def_special sub_8082E54
+	def_special Special_RockSmashEncounter
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
@@ -189,7 +189,7 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
-	def_special sub_80CA74C
+	def_special Special_GetBattleOutcome
 	def_special GetDaycareMonNicknames
 	def_special GetDaycareState
 	def_special RejectEggFromDayCare
@@ -225,12 +225,12 @@ gSpecials:: @ 815FD60
 	def_special sub_80CA524
 	def_special sub_80CA86C
 	def_special sub_80CA9A8
-	def_special sub_80CB204
+	def_special Special_GetElevatorFloor
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special sub_80BF93C
-	def_special sub_80BF9BC
-	def_special sub_80BFBA8
+	def_special Special_ChooseMoveToDelete
+	def_special Special_DeleteSelectedMove
 	def_special ScrSpecial_GetPokemonNicknameAndMoveName
 	def_special ScrSpecial_CountPokemonMoves
 	def_special sub_80E4634
@@ -284,8 +284,8 @@ gSpecials:: @ 815FD60
 	def_special Special_HallOfFame
 	def_special sub_80CB498
 	def_special nullsub_75
-	def_special SpawnScriptFieldObject
-	def_special RemoveScriptFieldObject
+	def_special SpawnCameraObject
+	def_special RemoveCameraObject
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
@@ -356,7 +356,7 @@ gSpecials:: @ 815FD60
 	def_special sub_80CB7C4
 	def_special sub_80CBC5C
 	def_special sub_80CADC4
-	def_special sub_80CADEC
+	def_special Special_SetVermilionTrashCans
 	def_special sub_805D1A8
 	def_special sub_80CB0A8
 	def_special Special_CheckAddCoins
@@ -382,7 +382,7 @@ gSpecials:: @ 815FD60
 	def_special sub_810C3A4
 	def_special SetFlavorTextFlagFromSpecialVars
 	def_special UpdatePickStateFromSpecialVar8005
-	def_special sub_8054C48
+	def_special Special_OverworldWhiteOutGetMoneyLoss
 	def_special PutMonInRoute5Daycare
 	def_special GetCostToWithdrawRoute5DaycareMon
 	def_special IsThereMonInRoute5Daycare
@@ -399,10 +399,10 @@ gSpecials:: @ 815FD60
 	def_special sp182_move_string
 	def_special sub_811390C
 	def_special sub_80CC4D4
-	def_special sub_80CC730
+	def_special Special_BattleCardAction
 	def_special sub_8110AB4
 	def_special sub_8112364
-	def_special sub_8146CE8
+	def_special Special_GetMENewsJisanItemAndState
 	def_special get_unknown_box_id
 	def_special sub_809D504
 	def_special sub_809D620
@@ -416,7 +416,7 @@ gSpecials:: @ 815FD60
 	def_special sub_815D9E8
 	def_special sub_814B504
 	def_special sub_80CC8CC
-	def_special sub_80CC948
+	def_special Special_DaisyMassageServices
 	def_special HelpSystem_Disable
 	def_special HelpSystem_Enable
 	def_special sub_810B82C
@@ -450,7 +450,7 @@ gSpecials:: @ 815FD60
 	def_special sub_81537C0
 	def_special sub_809C5FC
 	def_special sub_80CB328
-	def_special sub_80CD154
+	def_special Special_ComputeLoreleiDollCollection
 	def_special sub_80CD1B4
 	def_special CreateObedientEnemyMon
 gSpecialsEnd::

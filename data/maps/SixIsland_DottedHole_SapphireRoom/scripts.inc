@@ -17,13 +17,13 @@ SixIsland_DottedHole_SapphireRoom_EventScript_1641B5:: @ 81641B5
 	waitmovement 0
 	playse SE_W070
 	compare_var_to_value VAR_FACING, 2
-	call_if 1, EventScript_16430F
+	call_if eq, EventScript_16430F
 	compare_var_to_value VAR_FACING, 1
-	call_if 1, EventScript_16430F
+	call_if eq, EventScript_16430F
 	compare_var_to_value VAR_FACING, 4
-	call_if 1, EventScript_16431A
+	call_if eq, EventScript_16431A
 	compare_var_to_value VAR_FACING, 3
-	call_if 1, EventScript_16431A
+	call_if eq, EventScript_16431A
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 12
@@ -31,47 +31,47 @@ SixIsland_DottedHole_SapphireRoom_EventScript_1641B5:: @ 81641B5
 	special sub_80CAC28
 	delay 60
 	compare_var_to_value VAR_FACING, 2
-	call_if 1, EventScript_164325
+	call_if eq, EventScript_164325
 	compare_var_to_value VAR_FACING, 1
-	call_if 1, EventScript_164330
+	call_if eq, EventScript_164330
 	compare_var_to_value VAR_FACING, 4
-	call_if 1, EventScript_16433B
+	call_if eq, EventScript_16433B
 	compare_var_to_value VAR_FACING, 3
-	call_if 1, EventScript_164346
+	call_if eq, EventScript_164346
 	textcolor 0
 	msgbox gUnknown_817BD97
 	closemessage
 	compare_var_to_value VAR_FACING, 2
-	call_if 1, EventScript_164351
+	call_if eq, EventScript_164351
 	compare_var_to_value VAR_FACING, 1
-	call_if 1, EventScript_164366
+	call_if eq, EventScript_164366
 	compare_var_to_value VAR_FACING, 4
-	call_if 1, EventScript_16437B
+	call_if eq, EventScript_16437B
 	compare_var_to_value VAR_FACING, 3
-	call_if 1, EventScript_164390
+	call_if eq, EventScript_164390
 	removeobject 1
 	compare_var_to_value VAR_FACING, 2
-	call_if 1, EventScript_1642F9
+	call_if eq, EventScript_1642F9
 	compare_var_to_value VAR_FACING, 1
-	call_if 1, EventScript_1642F9
+	call_if eq, EventScript_1642F9
 	compare_var_to_value VAR_FACING, 4
-	call_if 1, EventScript_164304
+	call_if eq, EventScript_164304
 	compare_var_to_value VAR_FACING, 3
-	call_if 1, EventScript_164304
+	call_if eq, EventScript_164304
 	msgbox gUnknown_817BDD4
 	closemessage
 	compare_var_to_value VAR_FACING, 2
-	call_if 1, EventScript_1643A5
+	call_if eq, EventScript_1643A5
 	compare_var_to_value VAR_FACING, 1
-	call_if 1, EventScript_1643B7
+	call_if eq, EventScript_1643B7
 	compare_var_to_value VAR_FACING, 4
-	call_if 1, EventScript_1643C9
+	call_if eq, EventScript_1643C9
 	compare_var_to_value VAR_FACING, 3
-	call_if 1, EventScript_1643DB
+	call_if eq, EventScript_1643DB
 	playse SE_KAIDAN
 	delay 35
 	removeobject 2
-	setflag FLAG_0x2D8
+	setflag FLAG_LEARNED_YES_NAH_CHANSEY
 	release
 	end
 

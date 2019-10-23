@@ -6,9 +6,9 @@ SevenIsland_House_Room1_MapScripts:: @ 817088A
 SevenIsland_House_Room1_MapScript1_170895:: @ 8170895
 	special ValidateEReaderTrainer
 	compare_var_to_value VAR_RESULT, 0
-	call_if 1, EventScript_1708AF
+	call_if eq, EventScript_1708AF
 	compare_var_to_value VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 0
-	call_if 5, EventScript_1708C3
+	call_if ne, EventScript_1708C3
 	end
 
 EventScript_1708AF:: @ 81708AF
@@ -40,11 +40,11 @@ EventScript_1708E9:: @ 1708E9
 	applymovement 255, Movement_1A75E9
 	waitmovement 0
 	compare_var_to_value VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 1
-	call_if 1, EventScript_170938
+	call_if eq, EventScript_170938
 	compare_var_to_value VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 2
-	call_if 1, EventScript_170941
+	call_if eq, EventScript_170941
 	compare_var_to_value VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 3
-	call_if 1, EventScript_17094A
+	call_if eq, EventScript_17094A
 	special LoadPlayerParty
 	setvar VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 0
 	releaseall
@@ -76,9 +76,9 @@ SevenIsland_House_Room1_EventScript_170958:: @ 8170958
 	faceplayer
 	special ValidateEReaderTrainer
 	compare_var_to_value VAR_RESULT, 1
-	call_if 1, EventScript_17097D
+	call_if eq, EventScript_17097D
 	compare_var_to_value VAR_0x4001, 1
-	goto_if_eq EventScript_170987
+	goto_if eq, EventScript_170987
 	msgbox gUnknown_81A049B
 	release
 	end
@@ -93,27 +93,27 @@ EventScript_170987:: @ 8170987
 	special sub_80CAAAC
 	msgbox gUnknown_81A0598, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_170A11
+	goto_if eq, EventScript_170A11
 	call EventScript_170A1E
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_170A11
+	goto_if eq, EventScript_170A11
 	msgbox gUnknown_81A0788, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_170A11
+	goto_if eq, EventScript_170A11
 	special LoadPlayerParty
 	call EventScript_1A4EAF
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_170A11
+	goto_if eq, EventScript_170A11
 	special SavePlayerParty
 	special sub_80A03D8
 	msgbox gUnknown_81A07C4
 	closemessage
 	compare_var_to_value VAR_FACING, 2
-	call_if 1, EventScript_170A2D
+	call_if eq, EventScript_170A2D
 	compare_var_to_value VAR_FACING, 4
-	call_if 1, EventScript_170A3F
+	call_if eq, EventScript_170A3F
 	compare_var_to_value VAR_FACING, 3
-	call_if 1, EventScript_170A51
+	call_if eq, EventScript_170A51
 	warp MAP_SEVEN_ISLAND_HOUSE_ROOM2, 255, 3, 1
 	waitstate
 	release

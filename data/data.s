@@ -1,51 +1,17 @@
 #include "constants/region_map.h"
 #include "constants/trainer_classes.h"
 #include "constants/songs.h"
+#include "constants/flags.h"
 #include "constants/region_map.h"
+#include "constants/maps.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 
 	.section .rodata
-
-gAnimCmd_8239EBC:: @ 8239EBC
-	.incbin "baserom.gba", 0x239EBC, 0xB8
-
-gTrainerBackAnimsPtrTable:: @ 8239F74
-	.incbin "baserom.gba", 0x239F74, 0x18
-
-gTrainerBackPicCoords:: @ 8239F8C
-	.incbin "baserom.gba", 0x239F8C, 0x18
-
-gTrainerBackPicTable:: @ 8239FA4
-	.incbin "baserom.gba", 0x239FA4, 0x30
-
-gTrainerBackPicPaletteTable:: @ 8239FD4
-	.incbin "baserom.gba", 0x239FD4, 0x30
-
-gEnemyMonElevation:: @ 823A004
-	.incbin "baserom.gba", 0x23A004, 0x4554
-
-gTrainerClassNames:: @ 823E558
-	.include "data/text/trainer_class_names.inc"
-
 	.align 2, 0
-gTrainers:: @ 823EAD8
-	.incbin "baserom.gba", 0x23EAC8, 0x7418
 
-gSpeciesNames:: @ 8245EE0
-	.include "data/text/species_names.inc"
-
-gMoveNames:: @ 8247094
-	.incbin "baserom.gba", 0x247094, 0xF97
-
-gUnknown_824802B:: @ 824802B
-	.incbin "baserom.gba", 0x24802B, 0xD
-
-gUnknown_8248038:: @ 8248038
-	.incbin "baserom.gba", 0x248038, 0x186
-
-gUnknown_82481BE:: @ 82481BE
-	.incbin "baserom.gba", 0x2481BE, 0x12A
+gUnknown_824829C:: @ 824829C
+	.incbin "baserom.gba", 0x24829C, 0x4c
 
 gUnknown_82482E8:: @ 82482E8
 	.incbin "baserom.gba", 0x2482E8, 0x18
@@ -400,52 +366,3 @@ gUnknown_826D1E4:: @ 826D1E4
 
 gUnknown_826D250:: @ 826D250
 	.incbin "baserom.gba", 0x26D250, 0x44
-
-gUnknown_826D294:: @ 826D294
-	.incbin "baserom.gba", 0x26D294, 0xA
-
-gUnknown_826D29E:: @ 826D29E
-	.incbin "baserom.gba", 0x26D29E, 0x12
-
-gUnknown_826D2B0:: @ 826D2B0
-	.incbin "baserom.gba", 0x26D2B0, 0x28
-
-gDirectionToVectors:: @ 826D2D8
-	.4byte  0,  0
-	.4byte  0,  1
-	.4byte  0, -1
-	.4byte -1,  0
-	.4byte  1,  0
-	.4byte -1,  1
-	.4byte  1,  1
-	.4byte -1, -1
-	.4byte  1, -1
-
-gUnknown_826D320:: @ 826D320
-	.incbin "baserom.gba", 0x26D320, 0x10
-
-gUnknown_826D330:: @ 826D330
-	.incbin "baserom.gba", 0x26D330, 0xC
-
-gUnknown_826D33C:: @ 826D33C
-	.4byte sub_8058684
-	.4byte sub_80586A4
-	.4byte sub_80586A8
-
-gUnknown_826D348:: @ 826D348
-	.4byte sub_80586C8
-	.4byte sub_80586CC
-	.4byte sub_80586CC
-	.4byte sub_80586CC
-	.4byte sub_80586CC
-	.4byte sub_80586C8
-	.4byte sub_80586C8
-	.4byte sub_8058734
-	.4byte sub_8058734
-	.4byte sub_8058734
-	.4byte sub_8058734
-
-gUnknown_826D374:: @ 826D374
-	.4byte sub_805874C
-	.4byte sub_8058754
-

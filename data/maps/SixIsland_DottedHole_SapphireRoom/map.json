@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "100",
+      "graphics_id": "MAP_OBJ_GFX_SAPPHIRE",
       "x": 7,
       "y": 7,
       "elevation": 0,
@@ -24,10 +24,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SixIsland_DottedHole_SapphireRoom_EventScript_1641B5",
-      "flag": "143"
+      "flag": "FLAG_HIDE_SAPPHIRE"
     },
     {
-      "graphics_id": "55",
+      "graphics_id": "MAP_OBJ_GFX_SCIENTIST",
       "x": 5,
       "y": 9,
       "elevation": 3,
@@ -37,7 +37,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "0x0",
-      "flag": "144"
+      "flag": "FLAG_HIDE_DOTTED_HOLE_SCIENTIST"
     }
   ],
   "warp_events": [

@@ -5,29 +5,29 @@ PalletTown_MapScripts:: @ 816545A
 
 PalletTown_MapScript1_165465:: @ 8165465
 	setworldmapflag FLAG_WORLD_MAP_PALLET_TOWN
-	checkflag FLAG_0x291
-	call_if 1, EventScript_165488
-	compare_var_to_value VAR_0x4070, 0
-	call_if 1, EventScript_1654A8
-	compare_var_to_value VAR_0x4070, 1
-	call_if 1, EventScript_1654A2
+	checkflag FLAG_PALLET_LADY_NOT_BLOCKING_SIGN
+	call_if TRUE, EventScript_165488
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 0
+	call_if eq, EventScript_1654A8
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
+	call_if eq, EventScript_1654A2
 	end
 
 EventScript_165488:: @ 8165488
-	checkflag FLAG_0x83E
-	goto_if 0, EventScript_1A77A9
-	compare_var_to_value VAR_0x4070, 1
-	goto_if 4, EventScript_1A77A9
-	setvar VAR_0x4070, 1
+	checkflag FLAG_PALLET_TOWN_LADY_MOVED_FROM_SIGN
+	goto_if FALSE, EventScript_1A77A9
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
+	goto_if ge, EventScript_1A77A9
+	setvar VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
 	return
 
 EventScript_1654A2:: @ 81654A2
-	setvar VAR_0x4070, 2
+	setvar VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 2
 	return
 
 EventScript_1654A8:: @ 81654A8
-	checkflag FLAG_0x291
-	goto_if_eq EventScript_1654BD
+	checkflag FLAG_PALLET_LADY_NOT_BLOCKING_SIGN
+	goto_if TRUE, EventScript_1654BD
 	setobjectxyperm 1, 5, 15
 	setobjectmovementtype 1, 7
 	return
@@ -39,7 +39,7 @@ EventScript_1654BD:: @ 81654BD
 	return
 
 PalletTown_MapScript2_1654CE:: @ 81654CE
-	map_script_2 VAR_MAP_SCENE_PALLET_TOWN, 2, EventScript_1654D8
+	map_script_2 VAR_MAP_SCENE_PALLET_TOWN_OAK, 2, EventScript_1654D8
 	.2byte 0
 
 EventScript_1654D8:: @ 81654D8
@@ -50,8 +50,8 @@ EventScript_1654D8:: @ 81654D8
 	addobject 3
 	applymovement 3, Movement_1655AF
 	waitmovement 0
-	checkflag FLAG_SYS_RIBBON_GET
-	goto_if 0, EventScript_1655A1
+	checkflag FLAG_WORLD_MAP_ONE_ISLAND
+	goto_if FALSE, EventScript_1655A1
 	msgbox gUnknown_817D8BF
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, Special_GetPokedexCount
@@ -60,7 +60,7 @@ EventScript_1654D8:: @ 81654D8
 	getnumberstring 0, VAR_0x8008
 	getnumberstring 1, VAR_0x8009
 	compare_var_to_value VAR_0x8009, 60
-	goto_if 0, EventScript_165593
+	goto_if lt, EventScript_165593
 	msgbox gUnknown_817D9AA
 	closemessage
 	playbgm MUS_ANNAI, 0
@@ -75,8 +75,8 @@ EventScript_1654D8:: @ 81654D8
 	closedoor 16, 13
 	waitdooranim
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 7
-	setvar VAR_MAP_SCENE_PALLET_TOWN, 3
-	setflag FLAG_0x02C
+	setvar VAR_MAP_SCENE_PALLET_TOWN_OAK, 3
+	setflag FLAG_HIDE_OAK_IN_PALLET_TOWN
 	warp MAP_PALLET_TOWN_PROFESSOR_OAKS_LAB, 255, 6, 12
 	waitstate
 	releaseall
@@ -87,7 +87,7 @@ EventScript_16557E:: @ 816557E
 	applymovement 3, Movement_1655BE
 	waitmovement 0
 	removeobject 3
-	setvar VAR_MAP_SCENE_PALLET_TOWN, 3
+	setvar VAR_MAP_SCENE_PALLET_TOWN_OAK, 3
 	releaseall
 	end
 
@@ -184,9 +184,7 @@ PalletTown_EventScript_1655F9:: @ 81655F9
 	end
 
 EventScript_165605:: @ 8165605
-	setvar VAR_0x8004, 0
-	setvar VAR_0x8005, 2
-	special UpdatePickStateFromSpecialVar8005
+	famechecker FAMECHECKER_OAK, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	textcolor 0
 	delay 30
 	playbgm MUS_OHKIDO, 0
@@ -202,17 +200,17 @@ EventScript_165605:: @ 8165605
 	delay 30
 	addobject 3
 	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_1656B8
+	call_if eq, EventScript_1656B8
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_1656C3
+	call_if eq, EventScript_1656C3
 	delay 30
 	msgbox gUnknown_817D74A
 	closemessage
 	delay 30
 	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_1656CE
+	call_if eq, EventScript_1656CE
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_1656E0
+	call_if eq, EventScript_1656E0
 	opendoor 16, 13
 	waitdooranim
 	applymovement 3, Movement_16572E
@@ -221,9 +219,9 @@ EventScript_165605:: @ 8165605
 	closedoor 16, 13
 	waitdooranim
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1
-	clearflag FLAG_0x02B
-	setvar VAR_MAP_SCENE_PALLET_TOWN, 1
-	setflag FLAG_0x02C
+	clearflag FLAG_HIDE_OAK_IN_HIS_LAB
+	setvar VAR_MAP_SCENE_PALLET_TOWN_OAK, 1
+	setflag FLAG_HIDE_OAK_IN_PALLET_TOWN
 	setflag FLAG_SPECIAL_FLAG_0x4001
 	warp MAP_PALLET_TOWN_PROFESSOR_OAKS_LAB, 255, 6, 12
 	waitstate
@@ -376,14 +374,14 @@ Movement_165758:: @ 8165758
 
 PalletTown_EventScript_16575C:: @ 816575C
 	lock
-	compare_var_to_value VAR_0x4070, 2
-	goto_if_eq EventScript_1657ED
-	compare_var_to_value VAR_0x4070, 1
-	goto_if_eq EventScript_165815
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 2
+	goto_if eq, EventScript_1657ED
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
+	goto_if eq, EventScript_165815
 	compare_var_to_value VAR_0x4002, 1
-	goto_if_eq EventScript_1658C2
-	checkflag FLAG_0x002
-	goto_if_eq EventScript_165801
+	goto_if eq, EventScript_1658C2
+	checkflag FLAG_TEMP_2
+	goto_if TRUE, EventScript_165801
 	msgbox gUnknown_81B1C8B
 	applymovement 1, Movement_1A75E1
 	waitmovement 0
@@ -395,11 +393,11 @@ PalletTown_EventScript_16575C:: @ 816575C
 	msgbox gUnknown_81B1C9F
 	closemessage
 	compare_var_to_value VAR_FACING, 4
-	call_if 1, EventScript_1657D7
+	call_if eq, EventScript_1657D7
 	compare_var_to_value VAR_FACING, 4
-	call_if 5, EventScript_1657E2
+	call_if ne, EventScript_1657E2
 	moveobjectoffscreen 1
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	release
 	end
 
@@ -450,9 +448,7 @@ PalletTown_EventScript_16582F:: @ 816582F
 
 PalletTown_EventScript_165838:: @ 8165838
 	lockall
-	setvar VAR_0x8004, 0
-	setvar VAR_0x8005, 0
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_OAK, 0
 	msgbox gUnknown_817D866
 	releaseall
 	end
@@ -472,7 +468,7 @@ PalletTown_EventScript_165862:: @ 8165862
 PalletTown_EventScript_16586B:: @ 816586B
 	lockall
 	msgbox gUnknown_81B1CC1
-	setvar VAR_0x4070, 1
+	setvar VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
 	releaseall
 	end
 
@@ -491,8 +487,8 @@ EventScript_165894:: @ 8165894
 	closemessage
 	delay 20
 	textcolor 3
-	setflag FLAG_0x83E
-	setvar VAR_0x4070, 1
+	setflag FLAG_PALLET_TOWN_LADY_MOVED_FROM_SIGN
+	setvar VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
 	setvar VAR_0x4002, 0
 	special sub_80699E0
 	special sub_80699BC

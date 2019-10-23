@@ -240,7 +240,7 @@ static void Task_SetWin0BldRegsAndCheckSaveFile(u8 taskId)
         {
         case SAVE_STATUS_OK:
             LoadUserFrameToBg(0);
-            if (Flag_0x839_IsSet() == TRUE)
+            if (IsMysteryGiftEnabled() == TRUE)
             {
                 gTasks[taskId].tMenuType = MAIN_MENU_MYSTERYGIFT;
             }
@@ -259,7 +259,7 @@ static void Task_SetWin0BldRegsAndCheckSaveFile(u8 taskId)
             SetStdFrame0OnBg(0);
             gTasks[taskId].tMenuType = MAIN_MENU_CONTINUE;
             PrintSaveErrorStatus(taskId, gText_SaveFileCorruptedPrevWillBeLoaded);
-            if (Flag_0x839_IsSet() == TRUE)
+            if (IsMysteryGiftEnabled() == TRUE)
             {
                 gTasks[taskId].tMenuType = MAIN_MENU_MYSTERYGIFT;
             }
@@ -652,7 +652,7 @@ static void PrintDexCount(void)
     u8 strbuf[30];
     u8 *ptr;
     u16 dexcount;
-    if (FlagGet(FLAG_0x829) == TRUE)
+    if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
     {
         if (IsNationalPokedexEnabled())
             dexcount = GetNationalPokedexCount(FLAG_GET_CAUGHT);
@@ -671,7 +671,7 @@ static void PrintBadgeCount(void)
     u8 *ptr;
     u32 flagId;
     u8 nbadges = 0;
-    for (flagId = FLAG_UNK820; flagId < FLAG_UNK820 + 8; flagId++)
+    for (flagId = FLAG_BADGE01_GET; flagId < FLAG_BADGE01_GET + 8; flagId++)
     {
         if (FlagGet(flagId))
             nbadges++;

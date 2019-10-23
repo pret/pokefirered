@@ -950,7 +950,7 @@ static bool8 IsInDungeonMap(void)
             if (
                    sDungeonMaps[i][0] == gSaveBlock1Ptr->location.mapGroup
                 && sDungeonMaps[i][1] + j == gSaveBlock1Ptr->location.mapNum
-                && (i != 15 /* TANOBY */ || FlagGet(FLAG_0x849) == TRUE)
+                && (i != 15 /* TANOBY */ || FlagGet(FLAG_SYS_UNLOCKED_TANOBY_RUINS) == TRUE)
             )
                 return TRUE;
         }
@@ -990,10 +990,10 @@ bool8 sub_812B40C(void)
     if (gUnknown_203B0EE == 1)
         return FALSE;
 
-    if (gSaveFileStatus != SAVE_STATUS_EMPTY && gSaveFileStatus != SAVE_STATUS_INVALID && FlagGet(FLAG_0x83C))
+    if (gSaveFileStatus != SAVE_STATUS_EMPTY && gSaveFileStatus != SAVE_STATUS_INVALID && FlagGet(FLAG_SYS_SAW_HELP_SYSTEM_INTRO))
         return FALSE;
 
-    FlagSet(FLAG_0x83C);
+    FlagSet(FLAG_SYS_SAW_HELP_SYSTEM_INTRO);
     gUnknown_203B0EE = 1;
     return TRUE;
 }
@@ -1125,7 +1125,7 @@ static void sub_812B614(struct HelpSystemListMenu * a0, struct ListMenuItem * a1
 
 static bool8 sub_812B754(void)
 {
-    if (FlagGet(FLAG_0x4B0) == TRUE && gUnknown_3005E9C[1] == 2)
+    if (FlagGet(FLAG_DEFEATED_BROCK) == TRUE && gUnknown_3005E9C[1] == 2)
         return TRUE;
     return FALSE;
 }
@@ -1150,7 +1150,7 @@ static bool8 sub_812B780(u8 id)
         case 43:
             return TRUE;
         case 4:
-            return FlagGet(FLAG_0x2CF);
+            return FlagGet(FLAG_VISITED_OAKS_LAB);
         case 6:
         case 10:
         case 16:
@@ -1163,7 +1163,7 @@ static bool8 sub_812B780(u8 id)
             return FlagGet(FLAG_WORLD_MAP_VERMILION_CITY);
         case 11:
         case 24:
-            return FlagGet(FLAG_0x8A4);
+            return FlagGet(FLAG_WORLD_MAP_VIRIDIAN_FOREST);
         case 9:
         case 13:
         case 14:
@@ -1175,22 +1175,22 @@ static bool8 sub_812B780(u8 id)
         case 29:
         case 31:
         case 37:
-            return FlagGet(FLAG_0x828);
+            return FlagGet(FLAG_SYS_POKEMON_GET);
         case 21:
         case 23:
-            return FlagGet(FLAG_0x829);
+            return FlagGet(FLAG_SYS_POKEDEX_GET);
         case 12:
         case 25:
         case 27:
         case 30:
         case 32:
         case 33:
-            return FlagGet(FLAG_UNK820);
+            return FlagGet(FLAG_BADGE01_GET);
         case 28:
         case 40:
             return sub_812BB10();
         case 39:
-            return FlagGet(FLAG_0x29B);
+            return FlagGet(FLAG_GOT_FAME_CHECKER);
         case 44:
             return FlagGet(FLAG_WORLD_MAP_PEWTER_CITY);
         }
@@ -1229,7 +1229,7 @@ static bool8 sub_812B780(u8 id)
         case 1:
         case 30:
         case 37:
-            return FlagGet(FLAG_0x829);
+            return FlagGet(FLAG_SYS_POKEDEX_GET);
         case 14:
             return CheckBagHasItem(ITEM_TOWN_MAP, 1);
         case 2:
@@ -1244,21 +1244,21 @@ static bool8 sub_812B780(u8 id)
         case 35:
         case 43:
         case 44:
-            return FlagGet(FLAG_0x828);
+            return FlagGet(FLAG_SYS_POKEMON_GET);
         case 4:
         case 34:
             if (GetKantoPokedexCount(1) > 1)
                 return TRUE;
             return FALSE;
         case 15:
-            return FlagGet(FLAG_UNK820);
+            return FlagGet(FLAG_BADGE01_GET);
         case 16:
         case 17:
             return sub_812BB10();
         case 18:
-            return FlagGet(FLAG_0x271);
+            return FlagGet(FLAG_GOT_BICYCLE);
         case 48:
-            return FlagGet(FLAG_0x82C);
+            return FlagGet(FLAG_SYS_GAME_CLEAR);
         }
         return FALSE;
     }
@@ -1308,7 +1308,7 @@ static bool8 sub_812B780(u8 id)
         case 19:
         case 20:
         case 21:
-            return FlagGet(FLAG_0x828);
+            return FlagGet(FLAG_SYS_POKEMON_GET);
         case 36:
         case 37:
             return sub_812BB10();
@@ -1316,7 +1316,7 @@ static bool8 sub_812B780(u8 id)
         case 15:
         case 18:
         case 39:
-            return FlagGet(FLAG_0x8A4);
+            return FlagGet(FLAG_WORLD_MAP_VIRIDIAN_FOREST);
         }
         return TRUE;
     }
@@ -1325,9 +1325,9 @@ static bool8 sub_812B780(u8 id)
         switch (id)
         {
         case 5:
-            return FlagGet(FLAG_UNK820);
+            return FlagGet(FLAG_BADGE01_GET);
         case 6:
-            return FlagGet(FLAG_0x821);
+            return FlagGet(FLAG_BADGE02_GET);
         }
         return TRUE;
     }
@@ -1341,19 +1341,19 @@ static bool8 sub_812B780(u8 id)
 
 static bool8 sub_812BB10(void)
 {
-    if (FlagGet(FLAG_0x237) == TRUE)
+    if (FlagGet(FLAG_GOT_HM01) == TRUE)
         return TRUE;
-    if (FlagGet(FLAG_0x238) == TRUE)
+    if (FlagGet(FLAG_GOT_HM02) == TRUE)
         return TRUE;
-    if (FlagGet(FLAG_0x239) == TRUE)
+    if (FlagGet(FLAG_GOT_HM03) == TRUE)
         return TRUE;
-    if (FlagGet(FLAG_0x23A) == TRUE)
+    if (FlagGet(FLAG_GOT_HM04) == TRUE)
         return TRUE;
-    if (FlagGet(FLAG_0x23B) == TRUE)
+    if (FlagGet(FLAG_GOT_HM05) == TRUE)
         return TRUE;
-    if (FlagGet(FLAG_0x2EF) == TRUE)
+    if (FlagGet(FLAG_GOT_HM06) == TRUE)
         return TRUE;
-    if (FlagGet(FLAG_0x1F1) == TRUE)
+    if (FlagGet(FLAG_HIDE_FOUR_ISLAND_ICEFALL_CAVE_1F_HM07) == TRUE)
         return TRUE;
     return FALSE;
 }

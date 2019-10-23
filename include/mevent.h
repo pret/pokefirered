@@ -36,7 +36,7 @@ struct MEvent_Str_2
 struct MEventBuffer_3120_Sub * GetSavedWonderNews(void);
 struct MEventBuffer_32E0_Sub * GetSavedWonderCard(void);
 struct MEventBuffer_3430_Sub * sav1_get_mevent_buffer_2(void);
-struct MysteryEventStruct * sub_8143D94(void);
+struct MENewsJisanStruct * GetMENewsJisanStructPtr(void);
 bool32 sub_8143DC8(const struct MEventBuffer_3120_Sub * src);
 bool32 ValidateReceivedWonderNews(void);
 bool32 ValidateReceivedWonderCard(void);

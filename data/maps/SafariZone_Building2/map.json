@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "55",
+      "graphics_id": "MAP_OBJ_GFX_SCIENTIST",
       "x": 3,
       "y": 5,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "26",
+      "graphics_id": "MAP_OBJ_GFX_ROCKER",
       "x": 6,
       "y": 3,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "30",
+      "graphics_id": "MAP_OBJ_GFX_BALDING_MAN",
       "x": 7,
       "y": 3,
       "elevation": 3,

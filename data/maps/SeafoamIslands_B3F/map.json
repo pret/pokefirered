@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "97",
+      "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
       "x": 23,
       "y": 8,
       "elevation": 1,
@@ -24,10 +24,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "0x0",
-      "flag": "70"
+      "flag": "FLAG_HIDE_SEAFOAM_B3F_BOULDER_1"
     },
     {
-      "graphics_id": "97",
+      "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
       "x": 24,
       "y": 8,
       "elevation": 1,
@@ -37,10 +37,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "0x0",
-      "flag": "71"
+      "flag": "FLAG_HIDE_SEAFOAM_B3F_BOULDER_2"
     },
     {
-      "graphics_id": "97",
+      "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
       "x": 12,
       "y": 16,
       "elevation": 3,
@@ -49,11 +49,11 @@
       "movement_range_y": 0,
       "trainer_type": 77,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SeafoamIslands_B3F_EventScript_1BE11D",
-      "flag": "74"
+      "script": "EventScript_InteractWithStrengthBoulderObject",
+      "flag": "FLAG_HIDE_SEAFOAM_B3F_BOULDER_5"
     },
     {
-      "graphics_id": "97",
+      "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
       "x": 13,
       "y": 16,
       "elevation": 3,
@@ -62,11 +62,11 @@
       "movement_range_y": 0,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SeafoamIslands_B3F_EventScript_1BE11D",
-      "flag": "75"
+      "script": "EventScript_InteractWithStrengthBoulderObject",
+      "flag": "FLAG_HIDE_SEAFOAM_B3F_BOULDER_6"
     },
     {
-      "graphics_id": "97",
+      "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
       "x": 9,
       "y": 16,
       "elevation": 3,
@@ -75,11 +75,11 @@
       "movement_range_y": 0,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SeafoamIslands_B3F_EventScript_1BE11D",
-      "flag": "73"
+      "script": "EventScript_InteractWithStrengthBoulderObject",
+      "flag": "FLAG_HIDE_SEAFOAM_B3F_BOULDER_4"
     },
     {
-      "graphics_id": "97",
+      "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
       "x": 6,
       "y": 17,
       "elevation": 3,
@@ -88,8 +88,8 @@
       "movement_range_y": 0,
       "trainer_type": 76,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SeafoamIslands_B3F_EventScript_1BE11D",
-      "flag": "72"
+      "script": "EventScript_InteractWithStrengthBoulderObject",
+      "flag": "FLAG_HIDE_SEAFOAM_B3F_BOULDER_3"
     }
   ],
   "warp_events": [
@@ -165,8 +165,9 @@
       "y": 12,
       "elevation": 0,
       "item": "ITEM_NUGGET",
-      "flag": "29",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_SEAFOAM_ISLANDS_B3F_NUGGET",
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

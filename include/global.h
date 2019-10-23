@@ -127,7 +127,7 @@ struct Pokedex
     /*0x00*/ u8 order;
     /*0x01*/ u8 unknown1;
     /*0x02*/ u8 nationalMagic; // must equal 0xDA in order to have National mode
-    /*0x03*/ u8 unknown2;
+    /*0x03*/ u8 unknown2; // set to 0xB9 when national dex is first enabled
     /*0x04*/ u32 unownPersonality; // set when you first see Unown
     /*0x08*/ u32 spindaPersonality; // set when you first see Spinda
     /*0x0C*/ u32 unknown3;
@@ -493,12 +493,12 @@ struct RecordMixingDayCareMail
     bool16 holdsItem[DAYCARE_MON_COUNT];
 };
 
-struct MysteryEventStruct
+struct MENewsJisanStruct
 {
     u8 unk_0_0:2;
     u8 unk_0_2:3;
     u8 unk_0_5:3;
-    u8 unk_1;
+    u8 berry;
 };
 
 struct QuestLogNPCData
@@ -674,7 +674,7 @@ struct MEventBuffers
     /*0x1c0 0x32e0*/ struct MEventBuffer_32E0 buffer_1c0;
     /*0x310 0x3430*/ struct MEventBuffer_3430 buffer_310;
     /*0x338 0x3458*/ u16 unk_338[4];
-    /*0x340 0x3460*/ struct MysteryEventStruct unk_340;
+    /*0x340 0x3460*/ struct MENewsJisanStruct unk_340;
     /*0x344 0x3464*/ u32 unk_344[2][5];
 }; // 0x36C 0x348C
 

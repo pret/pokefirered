@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 5,
       "y": 5,
       "elevation": 3,
@@ -24,7 +24,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "FiveIsland_LostCave_Room14_EventScript_1BEDEF",
-      "flag": "508"
+      "flag": "FLAG_HIDE_FIVE_ISLAND_LOST_CAVE_ROOM14_RARE_CANDY"
     }
   ],
   "warp_events": [

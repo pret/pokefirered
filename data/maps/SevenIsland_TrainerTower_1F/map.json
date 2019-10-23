@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "70",
+      "graphics_id": "MAP_OBJ_GFX_TRAINER_TOWER_DUDE",
       "x": 9,
       "y": 7,
       "elevation": 3,
@@ -24,10 +24,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "0x0",
-      "flag": "6"
+      "flag": "FLAG_TEMP_6"
     },
     {
-      "graphics_id": "240",
+      "graphics_id": "MAP_OBJ_GFX_VAR_0",
       "x": 11,
       "y": 10,
       "elevation": 3,
@@ -37,10 +37,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SevenIsland_TrainerTower_1F_EventScript_1646C8",
-      "flag": "2"
+      "flag": "FLAG_TEMP_2"
     },
     {
-      "graphics_id": "241",
+      "graphics_id": "MAP_OBJ_GFX_VAR_1",
       "x": 15,
       "y": 13,
       "elevation": 3,
@@ -50,10 +50,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SevenIsland_TrainerTower_1F_EventScript_1646CE",
-      "flag": "3"
+      "flag": "FLAG_TEMP_3"
     },
     {
-      "graphics_id": "242",
+      "graphics_id": "MAP_OBJ_GFX_VAR_2",
       "x": 10,
       "y": 16,
       "elevation": 3,
@@ -63,10 +63,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SevenIsland_TrainerTower_1F_EventScript_1646D4",
-      "flag": "4"
+      "flag": "FLAG_TEMP_4"
     },
     {
-      "graphics_id": "243",
+      "graphics_id": "MAP_OBJ_GFX_VAR_3",
       "x": 10,
       "y": 10,
       "elevation": 3,
@@ -76,7 +76,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SevenIsland_TrainerTower_1F_EventScript_1646DA",
-      "flag": "5"
+      "flag": "FLAG_TEMP_5"
     }
   ],
   "warp_events": [

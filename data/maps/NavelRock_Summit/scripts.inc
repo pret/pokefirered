@@ -4,45 +4,45 @@ NavelRock_Summit_MapScripts:: @ 8164F9F
 	.byte 0
 
 NavelRock_Summit_MapScript1_164FAA:: @ 8164FAA
-	checkflag FLAG_0x2F3
-	call_if 1, EventScript_164FBD
-	checkflag FLAG_0x2F3
-	call_if 0, EventScript_164FC6
+	checkflag FLAG_FOUGHT_HO_OH
+	call_if TRUE, EventScript_164FBD
+	checkflag FLAG_FOUGHT_HO_OH
+	call_if FALSE, EventScript_164FC6
 	end
 
 EventScript_164FBD:: @ 8164FBD
 	setvar VAR_0x4001, 1
-	setflag FLAG_0x09C
+	setflag FLAG_HIDE_HO_OH
 	return
 
 EventScript_164FC6:: @ 8164FC6
 	setvar VAR_0x4001, 1
-	checkflag FLAG_0x2F6
-	goto_if_eq EventScript_1A77A9
+	checkflag FLAG_HO_OH_FLEW_AWAY
+	goto_if TRUE, EventScript_1A77A9
 	setvar VAR_0x4001, 0
-	clearflag FLAG_0x09C
+	clearflag FLAG_HIDE_HO_OH
 	return
 
 NavelRock_Summit_MapScript2_164FDD:: @ 8164FDD
-	checkflag FLAG_0x807
-	call_if 1, EventScript_164FE7
+	checkflag FLAG_SYS_SPECIAL_WILD_BATTLE
+	call_if TRUE, EventScript_164FE7
 	end
 
 EventScript_164FE7:: @ 8164FE7
-	specialvar VAR_RESULT, sub_80CA74C
-	compare_var_to_value VAR_RESULT, 7
-	goto_if 5, EventScript_1A77A9
+	specialvar VAR_RESULT, Special_GetBattleOutcome
+	compare_var_to_value VAR_RESULT, B_OUTCOME_CAUGHT
+	goto_if ne, EventScript_1A77A9
 	removeobject 1
 	return
 
 NavelRock_Summit_EventScript_164FFB:: @ 8164FFB
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	lockall
 	setvar VAR_0x4001, 1
-	special SpawnScriptFieldObject
+	special SpawnCameraObject
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 35
 	special sub_80CD1B4
@@ -63,29 +63,29 @@ NavelRock_Summit_EventScript_164FFB:: @ 8164FFB
 	applymovement 127, Movement_1650D1
 	applymovement 1, Movement_1650D7
 	waitmovement 0
-	special RemoveScriptFieldObject
+	special RemoveCameraObject
 	setvar VAR_0x8004, SPECIES_HO_OH
 	setvar VAR_0x8005, 70
 	setvar VAR_0x8006, 0
 	special CreateObedientEnemyMon
-	setflag FLAG_0x807
+	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	special sub_807F9D8
 	waitstate
-	clearflag FLAG_0x807
+	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	setvar VAR_LAST_TALKED, 1
-	specialvar VAR_RESULT, sub_80CA74C
-	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_1650B4
-	compare_var_to_value VAR_RESULT, 4
-	goto_if_eq EventScript_1650C2
-	compare_var_to_value VAR_RESULT, 5
-	goto_if_eq EventScript_1650C2
-	setflag FLAG_0x2F3
+	specialvar VAR_RESULT, Special_GetBattleOutcome
+	compare_var_to_value VAR_RESULT, B_OUTCOME_WON
+	goto_if eq, EventScript_1650B4
+	compare_var_to_value VAR_RESULT, B_OUTCOME_RAN
+	goto_if eq, EventScript_1650C2
+	compare_var_to_value VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
+	goto_if eq, EventScript_1650C2
+	setflag FLAG_FOUGHT_HO_OH
 	releaseall
 	end
 
 EventScript_1650B4:: @ 81650B4
-	setflag FLAG_0x2F6
+	setflag FLAG_HO_OH_FLEW_AWAY
 	setvar VAR_0x8004, SPECIES_HO_OH
 	goto EventScript_1A9236
 	end

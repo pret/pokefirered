@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "17",
+      "graphics_id": "MAP_OBJ_GFX_LITTLE_GIRL",
       "x": 3,
       "y": 4,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "131",
+      "graphics_id": "MAP_OBJ_GFX_WIGGLYTUFF",
       "x": 4,
       "y": 2,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "30",
+      "graphics_id": "MAP_OBJ_GFX_BALDING_MAN",
       "x": 0,
       "y": 4,
       "elevation": 3,

@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "78",
+      "graphics_id": "MAP_OBJ_GFX_MR_FUJI",
       "x": 11,
       "y": 4,
       "elevation": 3,
@@ -24,10 +24,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PokemonTower_7F_EventScript_16355A",
-      "flag": "52"
+      "flag": "FLAG_HIDE_TOWER_FUJI"
     },
     {
-      "graphics_id": "49",
+      "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
       "x": 9,
       "y": 10,
       "elevation": 3,
@@ -37,10 +37,10 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
       "script": "PokemonTower_7F_EventScript_163586",
-      "flag": "94"
+      "flag": "FLAG_HIDE_TOWER_ROCKET_1"
     },
     {
-      "graphics_id": "49",
+      "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
       "x": 13,
       "y": 8,
       "elevation": 3,
@@ -50,10 +50,10 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
       "script": "PokemonTower_7F_EventScript_16363D",
-      "flag": "131"
+      "flag": "FLAG_HIDE_TOWER_ROCKET_2"
     },
     {
-      "graphics_id": "49",
+      "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
       "x": 9,
       "y": 6,
       "elevation": 3,
@@ -63,7 +63,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
       "script": "PokemonTower_7F_EventScript_1636D6",
-      "flag": "132"
+      "flag": "FLAG_HIDE_TOWER_ROCKET_3"
     }
   ],
   "warp_events": [
@@ -83,8 +83,9 @@
       "y": 4,
       "elevation": 3,
       "item": "ITEM_SOOTHE_BELL",
-      "flag": "159",
-      "unknown": 129
+      "flag": "HIDDEN_ITEM_POKEMON_TOWER_7F_SOOTHE_BELL",
+      "quantity": 1,
+      "underfoot": true
     }
   ]
 }

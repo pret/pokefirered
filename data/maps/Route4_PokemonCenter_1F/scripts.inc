@@ -21,14 +21,14 @@ Route4_PokemonCenter_1F_EventScript_16F754:: @ 816F754
 Route4_PokemonCenter_1F_EventScript_16F75F:: @ 816F75F
 	lock
 	faceplayer
-	checkflag FLAG_0x249
-	goto_if_eq EventScript_16F8A2
+	checkflag FLAG_BOUGHT_MAGIKARP
+	goto_if TRUE, EventScript_16F8A2
 	showmoneybox 0, 0, 0
 	checkplayergender
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16F786
+	goto_if eq, EventScript_16F786
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16F794
+	goto_if eq, EventScript_16F794
 	end
 
 EventScript_16F786:: @ 816F786
@@ -43,26 +43,26 @@ EventScript_16F794:: @ 816F794
 
 EventScript_16F7A2:: @ 816F7A2
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16F888
+	goto_if eq, EventScript_16F888
 	checkmoney 500, 0
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16F895
+	goto_if eq, EventScript_16F895
 	textcolor 3
 	setvar VAR_0x4001, 129
 	givemon SPECIES_MAGIKARP, 5, ITEM_NONE, 0, 0, 0
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16F7F6
+	goto_if eq, EventScript_16F7F6
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16F822
+	goto_if eq, EventScript_16F822
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_16F8AC
+	goto_if eq, EventScript_16F8AC
 	end
 
 EventScript_16F7F6:: @ 816F7F6
 	call EventScript_16F86F
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16F861
+	goto_if eq, EventScript_16F861
 	call EventScript_1A8C27
 	fadescreen 1
 	hidemoneybox
@@ -77,7 +77,7 @@ EventScript_16F822:: @ 816F822
 	call EventScript_16F86F
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16F84B
+	goto_if eq, EventScript_16F84B
 	fadescreen 1
 	hidemoneybox
 	.byte 0
@@ -107,7 +107,7 @@ EventScript_16F861:: @ 816F861
 	end
 
 EventScript_16F86A:: @ 816F86A
-	setflag FLAG_0x249
+	setflag FLAG_BOUGHT_MAGIKARP
 	release
 	end
 

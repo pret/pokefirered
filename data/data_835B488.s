@@ -562,13 +562,467 @@ sBerries:: @ 83DF7E8
 	.incbin "baserom.gba", 0x3DF7E8, 0x4B4
 
 gUnknown_83DFC9C:: @ 83DFC9C
-	.incbin "baserom.gba", 0x3DFC9C, 0x814
+	.incbin "baserom.gba", 0x3DFC9C, 0xB4
+
+gUnknown_83DFD50:: @ 83DFD50
+	.4byte gUnknown_8417938, NULL
+	.4byte gUnknown_841793C, NULL
+
+gUnknown_83DFD60:: @ 83DFD60
+	.4byte gUnknown_8417ADC, NULL
+	.4byte gUnknown_8417AE3, NULL
+	.4byte gUnknown_8417AE9, NULL
+	.4byte gUnknown_8417AEE, NULL
+
+gUnknown_83DFD80:: @ 83DFD80
+	.4byte gUnknown_84178F0, NULL
+	.4byte gUnknown_8417907, NULL
+
+gUnknown_83DFD90:: @ 83DFD90
+	.4byte gUnknown_84178EB, NULL
+	.4byte gUnknown_8417907, NULL
+
+gUnknown_83DFDA0:: @ 83DFDA0
+	.4byte gUnknown_84178FD, NULL
+	.4byte gUnknown_8417907, NULL
+
+gUnknown_83DFDB0:: @ 83DFDB0
+	.4byte gUnknown_84178F0, NULL
+	.4byte gUnknown_84178EB, NULL
+	.4byte gUnknown_8417907, NULL
+
+gUnknown_83DFDC8:: @ 83DFDC8
+	.4byte gUnknown_84178F0, NULL
+	.4byte gUnknown_84178FD, NULL
+	.4byte gUnknown_8417907, NULL
+
+gUnknown_83DFDE0:: @ 83DFDE0
+	.4byte gUnknown_84178EB, NULL
+	.4byte gUnknown_84178FD, NULL
+	.4byte gUnknown_8417907, NULL
+
+gUnknown_83DFDF8:: @ 83DFDF8
+	.4byte gUnknown_84178F0, NULL
+	.4byte gUnknown_84178EB, NULL
+	.4byte gUnknown_84178FD, NULL
+	.4byte gUnknown_8417907, NULL
+
+gUnknown_83DFE18:: @ 83DFE18
+	.4byte gUnknown_8417914, NULL
+	.4byte gUnknown_841790C, NULL
+	.4byte gUnknown_8417910, NULL
+	.4byte gUnknown_8417918, NULL
+	.4byte gUnknown_841791C, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83DFE48:: @ 83DFE48
+	.4byte gUnknown_8417938, NULL
+	.4byte gUnknown_841793C, NULL
+	.4byte gUnknown_84178E6, NULL
+
+gUnknown_83DFE60:: @ 83DFE60
+	.4byte gUnknown_8417944, NULL
+	.4byte gUnknown_8417952, NULL
+	.4byte gUnknown_8417960, NULL
+	.4byte gUnknown_84178E6, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83DFE88:: @ 83DFE88
+	.4byte gUnknown_8417938, NULL
+	.4byte gUnknown_841793C, NULL
+	.4byte gUnknown_84178E6, NULL
+
+gUnknown_83DFEA0:: @ 83DFEA0
+	.4byte gUnknown_841796D, NULL
+	.4byte gUnknown_841797F, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83DFEB8:: @ 83DFEB8
+	.4byte gUnknown_841806D, NULL
+	.4byte gUnknown_841805D, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83DFED0:: @ 83DFED0
+	.4byte gUnknown_8417D56, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83DFEE0:: @ 83DFEE0
+	.4byte gUnknown_8417D63, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83DFEF0:: @ 83DFEF0
+	.4byte gUnknown_8417D6F, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83DFF00:: @ 83DFF00
+	.4byte gUnknown_8417D56, NULL
+	.4byte gUnknown_8417D6F, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83DFF18:: @ 83DFF18
+	.4byte gUnknown_8417D63, NULL
+	.4byte gUnknown_8417D6F, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83DFF30:: @ 83DFF30
+	.4byte gUnknown_8417984, NULL
+	.4byte gUnknown_841799A, NULL
+	.4byte gUnknown_84179AD, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83DFF50:: @ 83DFF50
+	.4byte gUnknown_8417A42, NULL
+	.4byte gUnknown_8417A58, NULL
+	.4byte gUnknown_8417A6E, NULL
+	.4byte gUnknown_8417A84, NULL
+	.4byte gUnknown_8417A9A, NULL
+	.4byte gUnknown_8417D4C, NULL
+
+gUnknown_83DFF80:: @ 83DFF80
+	.4byte gUnknown_8417F4D, NULL
+	.4byte gUnknown_8417ED9, NULL
+	.4byte gUnknown_8417EF7, NULL
+	.4byte gUnknown_8417F11, NULL
+	.4byte gUnknown_8417F2F, NULL
+	.4byte gUnknown_8417D4C, NULL
+
+gUnknown_83DFFB0:: @ 83DFFB0
+	.4byte gUnknown_84179C0, NULL
+	.4byte gUnknown_84179D6, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83DFFC8:: @ 83DFFC8
+	.4byte gUnknown_84179ED, NULL
+	.4byte gUnknown_84179F7, NULL
+
+gUnknown_83DFFD8:: @ 83DFFD8
+	.4byte gUnknown_8417A37, NULL
+	.4byte gUnknown_8417A3D, NULL
+
+gUnknown_83DFFE8:: @ 83DFFE8
+	.4byte gUnknown_8417ABC, NULL
+	.4byte gUnknown_8417AB9, NULL
+	.4byte gUnknown_8417AB6, NULL
+	.4byte gUnknown_8417AB3, NULL
+	.4byte gUnknown_8417AB0, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83E0018:: @ 83E0018
+	.4byte gUnknown_8417C0F, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83E0028:: @ 83E0028
+	.4byte gUnknown_8417C1B, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83E0038:: @ 83E0038
+	.4byte gUnknown_8417C0F, NULL
+	.4byte gUnknown_8417C1B, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83E0050:: @ 83E0050
+	.4byte gUnknown_8417C24, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83E0060:: @ 83E0060
+	.4byte gUnknown_8417C0F, NULL
+	.4byte gUnknown_8417C24, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83E0078:: @ 83E0078
+	.4byte gUnknown_8417C1B, NULL
+	.4byte gUnknown_8417C24, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83E0090:: @ 83E0090
+	.4byte gUnknown_8417C0F, NULL
+	.4byte gUnknown_8417C1B, NULL
+	.4byte gUnknown_8417C24, NULL
+	.4byte gOtherText_Exit, NULL
+	.4byte gUnknown_8417A24, NULL
+	.4byte gOtherText_Exit, NULL
+	.4byte gUnknown_8417A02, NULL
+	.4byte gUnknown_8417A24, NULL
+	.4byte gOtherText_Exit, NULL
+	.4byte gUnknown_8417A0C, NULL
+	.4byte gUnknown_8417A24, NULL
+	.4byte gOtherText_Exit, NULL
+	.4byte gUnknown_8417A02, NULL
+	.4byte gUnknown_8417A0C, NULL
+	.4byte gUnknown_8417A24, NULL
+	.4byte gOtherText_Exit, NULL
+	.4byte gUnknown_8417A19, NULL
+	.4byte gUnknown_8417A24, NULL
+	.4byte gOtherText_Exit, NULL
+	.4byte gUnknown_8417A02, NULL
+	.4byte gUnknown_8417A19, NULL
+	.4byte gUnknown_8417A24, NULL
+	.4byte gOtherText_Exit, NULL
+	.4byte gUnknown_8417A0C, NULL
+	.4byte gUnknown_8417A19, NULL
+	.4byte gUnknown_8417A24, NULL
+	.4byte gOtherText_Exit, NULL
+	.4byte gUnknown_8417A02, NULL
+	.4byte gUnknown_8417A0C, NULL
+	.4byte gUnknown_8417A19, NULL
+	.4byte gUnknown_8417A24, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83E0190:: @ 83E0190
+	.4byte gUnknown_8417BE2, NULL
+	.4byte gUnknown_8417BE8, NULL
+	.4byte gUnknown_8417BF0, NULL
+	.4byte gUnknown_8417BF8, NULL
+	.4byte gUnknown_8417C01, NULL
+
+gUnknown_83E01B8:: @ 83E01B8
+	.4byte gUnknown_8417C33, NULL
+	.4byte gUnknown_8417C4B, NULL
+
+gUnknown_83E01C8:: @ 83E01C8
+	.4byte gUnknown_8417C55, NULL
+	.4byte gUnknown_8417C6A, NULL
+	.4byte gUnknown_8417C83, NULL
+	.4byte gUnknown_8417C9D, NULL
+	.4byte gUnknown_8417CB7, NULL
+	.4byte gUnknown_8417D4C, NULL
+
+gUnknown_83E01F8:: @ 83E01F8
+	.4byte gUnknown_8417D79, NULL
+	.4byte gUnknown_8417D86, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83E0210:: @ 83E0210
+	.4byte gUnknown_8417D90, NULL
+	.4byte gUnknown_8417DA0, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83E0228:: @ 83E0228
+	.4byte gUnknown_841805D, NULL
+	.4byte gUnknown_8418061, NULL
+	.4byte gUnknown_8418069, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83E0248:: @ 83E0248
+	.4byte gUnknown_841807D, NULL
+	.4byte gUnknown_841808E, NULL
+	.4byte gUnknown_841809C, NULL
+	.4byte gUnknown_8417929, NULL
+
+gUnknown_83E0268:: @ 83E0268
+	.4byte gUnknown_8417DFE, NULL
+	.4byte gUnknown_8417E09, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83E0280:: @ 83E0280
+	.4byte gUnknown_8417DF3, NULL
+	.4byte gUnknown_8417E09, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83E0298:: @ 83E0298
+	.4byte gUnknown_8417DF3, NULL
+	.4byte gUnknown_8417DFE, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83E02B0:: @ 83E02B0
+	.4byte gUnknown_8417D79, NULL
+	.4byte gUnknown_8417E50, NULL
+	.4byte gUnknown_8417E5A, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83E02D0:: @ 83E02D0
+	.4byte gUnknown_8417E66, NULL
+	.4byte gUnknown_8417E67, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83E02E8:: @ 83E02E8
+	.4byte gUnknown_8417D79, NULL
+	.4byte gUnknown_8417E50, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83E0300:: @ 83E0300
+	.4byte gUnknown_8417E72, NULL
+	.4byte gUnknown_8417E7F, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83E0318:: @ 83E0318
+	.4byte gUnknown_8417E94, NULL
+	.4byte gUnknown_8417EA4, NULL
+
+gUnknown_83E0328:: @ 83E0328
+	.4byte gUnknown_8417D79, NULL
+	.4byte gUnknown_8417E50, NULL
+	.4byte gUnknown_8417E71, NULL
+	.4byte gUnknown_8417E5A, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83E0350:: @ 83E0350
+	.4byte gUnknown_8417D79, NULL
+	.4byte gUnknown_8417E50, NULL
+	.4byte gUnknown_8417E71, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83E0370:: @ 83E0370
+	.4byte gUnknown_8417EB3, NULL
+	.4byte gUnknown_8417EC1, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83E0388:: @ 83E0388
+	.4byte gUnknown_8417EB3, NULL
+	.4byte gUnknown_8417ECC, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83E03A0:: @ 83E03A0
+	.4byte gUnknown_8417EB3, NULL
+	.4byte gUnknown_8417EC1, NULL
+	.4byte gUnknown_8417ECC, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83E03C0:: @ 83E03C0
+	.4byte gUnknown_8417DF3, NULL
+	.4byte gUnknown_8417DFE, NULL
+	.4byte gUnknown_8417E09, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83E03E0:: @ 83E03E0
+	.4byte gUnknown_8417E46, NULL
+	.4byte gUnknown_8417DFE, NULL
+	.4byte gUnknown_8417E09, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83E0400:: @ 83E0400
+	.4byte gUnknown_8417E46, NULL
+	.4byte gUnknown_8417DF3, NULL
+	.4byte gUnknown_8417E09, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83E0420:: @ 83E0420
+	.4byte gUnknown_8417E46, NULL
+	.4byte gUnknown_8417DF3, NULL
+	.4byte gUnknown_8417DFE, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83E0440:: @ 83E0440
+	.4byte gUnknown_8417E46, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83E0450:: @ 83E0450
+	.4byte gUnknown_8417F68, NULL
+	.4byte gUnknown_8417F67, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83E0468:: @ 83E0468
+	.4byte gUnknown_8417F77, NULL
+	.4byte gUnknown_8417F69, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83E0480:: @ 83E0480
+	.4byte gOtherText_Single, NULL
+	.4byte gOtherText_Double, NULL
+	.4byte gOtherText_Knockout, NULL
+	.4byte gOtherText_Mixed, NULL
+	.4byte gOtherText_Exit, NULL
+
+gUnknown_83E04A8:: @ 83E04A8
+	.4byte gOtherText_Exit, NULL
 
 gUnknown_83E04B0:: @ 83E04B0
-	.incbin "baserom.gba", 0x3E04B0, 0x208
+	.4byte gUnknown_83DFD50, 2
+	.4byte gUnknown_83E0190, 5
+	.4byte gUnknown_83DFD60, 4
+	.4byte gUnknown_83DFD80, 2
+	.4byte gUnknown_83DFD90, 2
+	.4byte gUnknown_83DFDA0, 2
+	.4byte gUnknown_83DFDB0, 3
+	.4byte gUnknown_83DFDC8, 3
+	.4byte gUnknown_83DFDE0, 3
+	.4byte gUnknown_83DFDF8, 4
+	.4byte gUnknown_83E04A8, 1
+	.4byte gUnknown_83E04A8, 1
+	.4byte gUnknown_83E04A8, 1
+	.4byte gUnknown_83E01B8, 2
+	.4byte gUnknown_83E01C8, 6
+	.4byte gUnknown_83DFE18, 6
+	.4byte gUnknown_83DFE48, 3
+	.4byte gUnknown_83DFE60, 5
+	.4byte gUnknown_83DFE88, 3
+	.4byte gUnknown_83DFEA0, 3
+	.4byte gUnknown_83DFEB8, 3
+	.4byte gUnknown_83DFED0, 2
+	.4byte gUnknown_83DFEE0, 2
+	.4byte gUnknown_83DFEF0, 2
+	.4byte gUnknown_83DFF00, 3
+	.4byte gUnknown_83DFF18, 3
+	.4byte gUnknown_83DFF30, 4
+	.4byte gUnknown_83DFFB0, 3
+	.4byte gUnknown_83DFFC8, 2
+	.4byte gUnknown_83DFFD8, 2
+	.4byte gUnknown_83DFF50, 6
+	.4byte gUnknown_83DFFE8, 6
+	.4byte gUnknown_83E0018, 2
+	.4byte gUnknown_83E0028, 2
+	.4byte gUnknown_83E0038, 3
+	.4byte gUnknown_83E0050, 2
+	.4byte gUnknown_83E0060, 3
+	.4byte gUnknown_83E0078, 3
+	.4byte gUnknown_83E0090, 4
+	.4byte gUnknown_83E01F8, 3
+	.4byte gUnknown_83E0210, 3
+	.4byte gUnknown_83DFF80, 6
+	.4byte gUnknown_83E0228, 4
+	.4byte gUnknown_83E0248, 4
+	.4byte gUnknown_83E0268, 3
+	.4byte gUnknown_83E0280, 3
+	.4byte gUnknown_83E0298, 3
+	.4byte gUnknown_83E02B0, 4
+	.4byte gUnknown_83E02D0, 3
+	.4byte gUnknown_83E0300, 3
+	.4byte gUnknown_83E02E8, 3
+	.4byte gUnknown_83E0318, 2
+	.4byte gUnknown_83E0328, 5
+	.4byte gUnknown_83E0350, 4
+	.4byte gUnknown_83E0370, 3
+	.4byte gUnknown_83E0388, 3
+	.4byte gUnknown_83E03A0, 4
+	.4byte gUnknown_83E03C0, 4
+	.4byte gUnknown_83E03E0, 4
+	.4byte gUnknown_83E0400, 4
+	.4byte gUnknown_83E0420, 4
+	.4byte gUnknown_83E0440, 2
+	.4byte gUnknown_83E0450, 3
+	.4byte gUnknown_83E0468, 3
+	.4byte gUnknown_83E0480, 5
 
 gStdStringPtrs:: @ 83E06B8
-	.incbin "baserom.gba", 0x3E06B8, 0x74
+	.4byte gUnknown_8417ABF
+	.4byte gUnknown_8417AC4
+	.4byte gUnknown_8417ACB
+	.4byte gUnknown_8417AD0
+	.4byte gUnknown_8417AD6
+	.4byte gUnknown_8417AF4
+	.4byte gUnknown_8417AF9
+	.4byte gUnknown_8417B00
+	.4byte gUnknown_8417B05
+	.4byte gUnknown_8417B0B
+	.4byte gUnknown_8417B11
+	.4byte gUnknown_8417B17
+	.4byte gUnknown_8417B21
+	.4byte gUnknown_8417B2C
+	.4byte gUnknown_8417B36
+	.4byte gUnknown_8417B3E
+	.4byte gUnknown_8417B4B
+	.4byte gUnknown_8417B58
+	.4byte gUnknown_8417B65
+	.4byte gUnknown_8417B72
+	.4byte gUnknown_8417B7C
+	.4byte gUnknown_8417B87
+	.4byte gUnknown_8417B94
+	.4byte gUnknown_8417C2D
+	.4byte gUnknown_8417DA9
+	.4byte gUnknown_8417DB6
+	.4byte gUnknown_8417DC7
+	.4byte gUnknown_8417DD9
+	.4byte gUnknown_8417DE1
 
 gUnknown_83E072C:: @ 83E072C
 	.incbin "baserom.gba", 0x3E072C, 0xC

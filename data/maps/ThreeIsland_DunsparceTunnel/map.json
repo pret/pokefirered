@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "27",
+      "graphics_id": "MAP_OBJ_GFX_FAT_MAN",
       "x": 23,
       "y": 2,
       "elevation": 3,
@@ -51,8 +51,9 @@
       "y": 3,
       "elevation": 0,
       "item": "ITEM_NUGGET",
-      "flag": "163",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_THREE_ISLAND_DUNSPARCE_TUNNEL_NUGGET",
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

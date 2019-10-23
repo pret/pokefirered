@@ -3,16 +3,17 @@
 #include "random.h"
 #include "event_data.h"
 #include "menews_jisan.h"
+#include "constants/items.h"
 
-static u32 sub_8146D74(struct MysteryEventStruct *);
-static void sub_8146DD8(struct MysteryEventStruct *);
-static u32 sub_8146E0C(struct MysteryEventStruct *);
-static void sub_8146DA0(struct MysteryEventStruct *);
-static void sub_8146D94(struct MysteryEventStruct *);
+static u32 GetMENewsJisanRewardItem(struct MENewsJisanStruct *);
+static void MENewsJisanIncrementCounterUnk0_5(struct MENewsJisanStruct *);
+static u32 GetMENewsJisanState(struct MENewsJisanStruct *);
+static void MENewsJisanIncrementCounterUnk0_2(struct MENewsJisanStruct *);
+static void MENewsJisanResetCounterUnk0_2(struct MENewsJisanStruct *);
 
-void GenerateRandomNews(u32 a0)
+void MENewsJisan_SetRandomReward(u32 a0)
 {
-    struct MysteryEventStruct *r5 = sub_8143D94();
+    struct MENewsJisanStruct *r5 = GetMENewsJisanStructPtr();
 
     r5->unk_0_0 = a0;
     switch (a0)
@@ -21,68 +22,68 @@ void GenerateRandomNews(u32 a0)
         break;
     case 1:
     case 2:
-        r5->unk_1 = (Random() % 15) + 16;
+        r5->berry = (Random() % 15) + ITEM_TO_BERRY(ITEM_RAZZ_BERRY);
         break;
     case 3:
-        r5->unk_1 = (Random() % 15) + 1;
+        r5->berry = (Random() % 15) + ITEM_TO_BERRY(ITEM_CHERI_BERRY);
         break;
     }
 }
 
-void sub_8146C88(void)
+void MENewsJisanReset(void)
 {
-    struct MysteryEventStruct *r5 = sub_8143D94();
+    struct MENewsJisanStruct *r5 = GetMENewsJisanStructPtr();
 
     r5->unk_0_0 = 0;
     r5->unk_0_2 = 0;
     r5->unk_0_5 = 0;
-    r5->unk_1 = 0;
-    VarSet(VAR_0x4028, 0);
+    r5->berry = 0;
+    VarSet(VAR_MENEWS_JISAN_STEP_COUNTER, 0);
 }
 
-void sub_8146CA4(void)
+void MENewsJisanStepCounter(void)
 {
-    u16 *r4 = GetVarPointer(VAR_0x4028);
-    struct MysteryEventStruct *r2 = sub_8143D94();
-    struct MysteryEventStruct r0 = *r2;
+    u16 *r4 = GetVarPointer(VAR_MENEWS_JISAN_STEP_COUNTER);
+    struct MENewsJisanStruct *r2 = GetMENewsJisanStructPtr();
+    struct MENewsJisanStruct r0 = *r2;
 
-    if ((u8)r0.unk_0_5 > 4 && ++(*r4) > 0x1f3)
+    if ((u8)r0.unk_0_5 > 4 && ++(*r4) >= 500)
     {
         r2->unk_0_5 = 0;
         *r4 = 0;
     }
 }
 
-u16 sub_8146CE8(void)
+u16 Special_GetMENewsJisanItemAndState(void)
 {
     u16 *r6 = &gSpecialVar_Result;
-    struct MysteryEventStruct *r4 = sub_8143D94();
+    struct MENewsJisanStruct *r4 = GetMENewsJisanStructPtr();
     u16 r5;
 
-    if (!Flag_0x839_IsSet() || !ValidateReceivedWonderNews())
+    if (!IsMysteryGiftEnabled() || !ValidateReceivedWonderNews())
         return 0;
 
-    r5 = sub_8146E0C(r4);
+    r5 = GetMENewsJisanState(r4);
 
     switch (r5)
     {
     case 0:
         break;
     case 1:
-        *r6 = sub_8146D74(r4);
+        *r6 = GetMENewsJisanRewardItem(r4);
         break;
     case 2:
-        *r6 = sub_8146D74(r4);
+        *r6 = GetMENewsJisanRewardItem(r4);
         break;
     case 3:
         break;
     case 4:
-        *r6 = sub_8146D74(r4);
-        sub_8146DA0(r4);
+        *r6 = GetMENewsJisanRewardItem(r4);
+        MENewsJisanIncrementCounterUnk0_2(r4);
         break;
     case 5:
-        *r6 = sub_8146D74(r4);
-        sub_8146D94(r4);
+        *r6 = GetMENewsJisanRewardItem(r4);
+        MENewsJisanResetCounterUnk0_2(r4);
         break;
     case 6:
         break;
@@ -91,39 +92,39 @@ u16 sub_8146CE8(void)
     return r5;
 }
 
-static u32 sub_8146D74(struct MysteryEventStruct *a0)
+static u32 GetMENewsJisanRewardItem(struct MENewsJisanStruct *a0)
 {
     u32 r4;
 
     a0->unk_0_0 = 0;
-    r4 = a0->unk_1 + 0x84;
-    a0->unk_1 = 0;
-    sub_8146DD8(a0);
+    r4 = a0->berry + FIRST_BERRY_INDEX - 1;
+    a0->berry = 0;
+    MENewsJisanIncrementCounterUnk0_5(a0);
     return r4;
 }
 
-static void sub_8146D94(struct MysteryEventStruct *a0)
+static void MENewsJisanResetCounterUnk0_2(struct MENewsJisanStruct *a0)
 {
     a0->unk_0_2 = 0;
 }
 
-static void sub_8146DA0(struct MysteryEventStruct *a0)
+static void MENewsJisanIncrementCounterUnk0_2(struct MENewsJisanStruct *a0)
 {
     a0->unk_0_2++;
     if ((u8)a0->unk_0_2 > 4)
         a0->unk_0_2 = 4;
 }
 
-static void sub_8146DD8(struct MysteryEventStruct *a0)
+static void MENewsJisanIncrementCounterUnk0_5(struct MENewsJisanStruct *a0)
 {
     a0->unk_0_5++;
     if ((u8)a0->unk_0_5 > 5)
         a0->unk_0_5 = 5;
 }
 
-static u32 sub_8146E0C(struct MysteryEventStruct *a0)
+static u32 GetMENewsJisanState(struct MENewsJisanStruct *a0)
 {
-    struct MysteryEventStruct r0;
+    struct MENewsJisanStruct r0;
     if ((u8)a0->unk_0_5 == 5)
         return 6;
 

@@ -3,8 +3,8 @@ Route11_EastEntrance_2F_MapScripts:: @ 816FD34
 
 Route11_EastEntrance_2F_EventScript_16FD35:: @ 816FD35
 	lockall
-	checkflag FLAG_0x253
-	goto_if_eq EventScript_16FD49
+	checkflag FLAG_WOKE_UP_ROUTE_12_SNORLAX
+	goto_if TRUE, EventScript_16FD49
 	msgbox gUnknown_819EC8A
 	releaseall
 	end
@@ -23,20 +23,20 @@ Route11_EastEntrance_2F_EventScript_16FD5C:: @ 816FD5C
 	faceplayer
 	setvar VAR_0x8008, 4
 	call EventScript_1A8CAD
-	checkflag FLAG_0x251
-	goto_if_eq EventScript_16FDCE
+	checkflag FLAG_DID_NINA_TRADE
+	goto_if TRUE, EventScript_16FDCE
 	msgbox gUnknown_81A597B, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16FDB6
+	goto_if eq, EventScript_16FDB6
 	call EventScript_1A8CBD
 	compare_var_to_value VAR_0x8004, 6
-	goto_if 4, EventScript_16FDB6
+	goto_if ge, EventScript_16FDB6
 	call EventScript_1A8CC9
 	compare_var_to_var VAR_RESULT, VAR_0x8009
-	goto_if 5, EventScript_16FDC0
+	goto_if ne, EventScript_16FDC0
 	call EventScript_1A8CD9
 	msgbox gUnknown_81A59DA
-	setflag FLAG_0x251
+	setflag FLAG_DID_NINA_TRADE
 	release
 	end
 
@@ -60,24 +60,24 @@ Route11_EastEntrance_2F_EventScript_16FDD8:: @ 816FDD8
 	lock
 	faceplayer
 	call EventScript_16FE64
-	checkflag FLAG_0x252
-	goto_if_eq EventScript_16FE5A
+	checkflag FLAG_GOT_ITEMFINDER
+	goto_if TRUE, EventScript_16FE5A
 	msgbox gUnknown_819E9E5, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_1A7AD1
+	goto_if eq, EventScript_1A7AD1
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, Special_GetPokedexCount
 	getnumberstring 2, VAR_0x8006
 	call EventScript_16FE64
 	compare_var_to_value VAR_0x8006, 30
-	goto_if 0, EventScript_1A7ABD
+	goto_if lt, EventScript_1A7ABD
 	msgbox gUnknown_819EAE4
 	checkitemspace ITEM_ITEMFINDER, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_1A7AC7
+	goto_if eq, EventScript_1A7AC7
 	additem ITEM_ITEMFINDER, 1
 	giveitemfanfaremsg gUnknown_819EB37, ITEM_ITEMFINDER
-	setflag FLAG_0x252
+	setflag FLAG_GOT_ITEMFINDER
 	msgbox gUnknown_819EB59
 	release
 	end

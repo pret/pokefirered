@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "97",
+      "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
       "x": 7,
       "y": 6,
       "elevation": 3,
@@ -23,11 +23,11 @@
       "movement_range_y": 0,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SevenIsland_SeavaultCanyon_TanobyKey_EventScript_1BE11D",
+      "script": "EventScript_InteractWithStrengthBoulderObject",
       "flag": "0"
     },
     {
-      "graphics_id": "97",
+      "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
       "x": 8,
       "y": 6,
       "elevation": 3,
@@ -36,11 +36,11 @@
       "movement_range_y": 0,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SevenIsland_SeavaultCanyon_TanobyKey_EventScript_1BE11D",
+      "script": "EventScript_InteractWithStrengthBoulderObject",
       "flag": "0"
     },
     {
-      "graphics_id": "97",
+      "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
       "x": 8,
       "y": 9,
       "elevation": 3,
@@ -49,11 +49,11 @@
       "movement_range_y": 0,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SevenIsland_SeavaultCanyon_TanobyKey_EventScript_1BE11D",
+      "script": "EventScript_InteractWithStrengthBoulderObject",
       "flag": "0"
     },
     {
-      "graphics_id": "97",
+      "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
       "x": 6,
       "y": 10,
       "elevation": 3,
@@ -62,11 +62,11 @@
       "movement_range_y": 0,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SevenIsland_SeavaultCanyon_TanobyKey_EventScript_1BE11D",
+      "script": "EventScript_InteractWithStrengthBoulderObject",
       "flag": "0"
     },
     {
-      "graphics_id": "97",
+      "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
       "x": 8,
       "y": 10,
       "elevation": 3,
@@ -75,11 +75,11 @@
       "movement_range_y": 0,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SevenIsland_SeavaultCanyon_TanobyKey_EventScript_1BE11D",
+      "script": "EventScript_InteractWithStrengthBoulderObject",
       "flag": "0"
     },
     {
-      "graphics_id": "97",
+      "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
       "x": 6,
       "y": 9,
       "elevation": 3,
@@ -88,11 +88,11 @@
       "movement_range_y": 0,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SevenIsland_SeavaultCanyon_TanobyKey_EventScript_1BE11D",
+      "script": "EventScript_InteractWithStrengthBoulderObject",
       "flag": "0"
     },
     {
-      "graphics_id": "97",
+      "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
       "x": 6,
       "y": 6,
       "elevation": 3,
@@ -101,7 +101,7 @@
       "movement_range_y": 0,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SevenIsland_SeavaultCanyon_TanobyKey_EventScript_1BE11D",
+      "script": "EventScript_InteractWithStrengthBoulderObject",
       "flag": "0"
     }
   ],

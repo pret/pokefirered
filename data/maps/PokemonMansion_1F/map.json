@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "55",
+      "graphics_id": "MAP_OBJ_GFX_SCIENTIST",
       "x": 22,
       "y": 24,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 29,
       "y": 32,
       "elevation": 3,
@@ -37,10 +37,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PokemonMansion_1F_EventScript_1BE95D",
-      "flag": "415"
+      "flag": "FLAG_HIDE_POKEMON_MANSION_1F_CARBOS"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 22,
       "y": 6,
       "elevation": 3,
@@ -50,10 +50,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PokemonMansion_1F_EventScript_1BE96A",
-      "flag": "416"
+      "flag": "FLAG_HIDE_POKEMON_MANSION_1F_ESCAPE_ROPE"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 27,
       "y": 15,
       "elevation": 3,
@@ -63,10 +63,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PokemonMansion_1F_EventScript_1BEB65",
-      "flag": "458"
+      "flag": "FLAG_HIDE_POKEMON_MANSION_1F_PROTEIN"
     },
     {
-      "graphics_id": "18",
+      "graphics_id": "MAP_OBJ_GFX_YOUNGSTER",
       "x": 8,
       "y": 8,
       "elevation": 3,
@@ -166,8 +166,9 @@
       "y": 21,
       "elevation": 0,
       "item": "ITEM_MOON_STONE",
-      "flag": "31",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_POKEMON_MANSION_1F_MOON_STONE",
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

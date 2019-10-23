@@ -4953,7 +4953,7 @@ _080CCBEA:
 	cmp r7, 0
 	bne _080CCC34
 	ldr r0, _080CCC24 @ =gStringVar2
-	ldr r1, _080CCC28 @ =gUnknown_82481BE
+	ldr r1, _080CCC28 @ =gMoveNames + 0x112A FRENZY PLANT
 	bl StringCopy
 	ldr r1, _080CCC2C @ =gSpecialVar_0x8005
 	movs r0, 0xF
@@ -4964,14 +4964,14 @@ _080CCBEA:
 _080CCC1C: .4byte gUnknown_83F6203
 _080CCC20: .4byte gPlayerParty
 _080CCC24: .4byte gStringVar2
-_080CCC28: .4byte gUnknown_82481BE
+_080CCC28: .4byte gMoveNames + 0x112A
 _080CCC2C: .4byte gSpecialVar_0x8005
 _080CCC30: .4byte 0x000002de
 _080CCC34:
 	cmp r7, 0x1
 	bne _080CCC5C
 	ldr r0, _080CCC4C @ =gStringVar2
-	ldr r1, _080CCC50 @ =gUnknown_824802B
+	ldr r1, _080CCC50 @ =gMoveNames + 0xF97 BLAST BURN
 	bl StringCopy
 	ldr r1, _080CCC54 @ =gSpecialVar_0x8005
 	movs r0, 0x10
@@ -4980,12 +4980,12 @@ _080CCC34:
 	b _080CCC6E
 	.align 2, 0
 _080CCC4C: .4byte gStringVar2
-_080CCC50: .4byte gUnknown_824802B
+_080CCC50: .4byte gMoveNames + 0xF97
 _080CCC54: .4byte gSpecialVar_0x8005
 _080CCC58: .4byte 0x000002df
 _080CCC5C:
 	ldr r0, _080CCC80 @ =gStringVar2
-	ldr r1, _080CCC84 @ =gUnknown_8248038
+	ldr r1, _080CCC84 @ =gMoveNames + 0xFA4 HYDRO CANNON
 	bl StringCopy
 	ldr r1, _080CCC88 @ =gSpecialVar_0x8005
 	movs r0, 0x11
@@ -5003,7 +5003,7 @@ _080CCC7A:
 	b _080CCCE4
 	.align 2, 0
 _080CCC80: .4byte gStringVar2
-_080CCC84: .4byte gUnknown_8248038
+_080CCC84: .4byte gMoveNames + 0xFA4
 _080CCC88: .4byte gSpecialVar_0x8005
 _080CCC8C:
 	movs r0, 0x64

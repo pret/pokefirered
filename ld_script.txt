@@ -385,8 +385,6 @@ SECTIONS {
         src/main_menu.o(.rodata);
         src/data.o(.rodata);
         data/data.o(.rodata);
-        src/trainers.o(.rodata);
-        data/data.o(.rodata.8245EE0);
         src/battle_util.o(.rodata);
         src/battle_script_commands.o(.rodata);
         src/battle_controller_player.o(.rodata);

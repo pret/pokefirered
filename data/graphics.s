@@ -13420,11 +13420,11 @@ gTrainerBackPic_RSMay:: @ 8E74EBC
 	.incbin "graphics/trainers/back_pics/ruby_sapphire_may_back_pic.4bpp"
 
 	.align 2
-gTrainerPalette_LeafBackPic:: @ 8E76EBC
+gTrainerPalette_RedBackPic:: @ 8E76EBC
 	.incbin "graphics/trainers/palettes/leaf_back_pic.gbapal.lz"
 
 	.align 2
-gTrainerPalette_RedBackPic:: @ 8E76EE4
+gTrainerPalette_LeafBackPic:: @ 8E76EE4
 	.incbin "graphics/trainers/palettes/red_back_pic.gbapal.lz"
 
 	.align 2

@@ -8,6 +8,7 @@
 #include "constants/species.h"
 #include "constants/trainers.h"
 #include "constants/battle_ai.h"
+#include "constants/trainer_classes.h"
 
 const struct SpriteFrameImage gUnknown_8234698[] =
 {
@@ -287,3 +288,13 @@ const union AnimCmd *const gSpriteAnimTable_82349BC[] =
 
 #include "data/trainer_graphics/front_pic_anims.h"
 #include "data/trainer_graphics/front_pic_tables.h"
+#include "data/trainer_graphics/back_pic_anims.h"
+#include "data/trainer_graphics/back_pic_tables.h"
+
+#include "data/pokemon_graphics/enemy_mon_elevation.h"
+
+#include "data/trainer_parties.h"
+#include "data/text/trainer_class_names.h"
+#include "data/trainers.h"
+#include "data/text/species_names.h"
+#include "data/text/move_names.h"

@@ -8,41 +8,10 @@
 	.include "constants/constants.inc"
 
 	.section .rodata
-
-gAnimCmd_8239EBC:: @ 8239EBC
-	.incbin "baserom.gba", 0x239EBC, 0xB8
-
-gTrainerBackAnimsPtrTable:: @ 8239F74
-	.incbin "baserom.gba", 0x239F74, 0x18
-
-gTrainerBackPicCoords:: @ 8239F8C
-	.incbin "baserom.gba", 0x239F8C, 0x18
-
-gTrainerBackPicTable:: @ 8239FA4
-	.incbin "baserom.gba", 0x239FA4, 0x30
-
-gTrainerBackPicPaletteTable:: @ 8239FD4
-	.incbin "baserom.gba", 0x239FD4, 0x30
-
-gEnemyMonElevation:: @ 823A004
-	.incbin "baserom.gba", 0x23A004, 0x19C
-
-	.section .rodata.8245EE0
 	.align 2, 0
-gSpeciesNames:: @ 8245EE0
-	.include "data/text/species_names.inc"
 
-gMoveNames:: @ 8247094
-	.incbin "baserom.gba", 0x247094, 0xF97
-
-gUnknown_824802B:: @ 824802B
-	.incbin "baserom.gba", 0x24802B, 0xD
-
-gUnknown_8248038:: @ 8248038
-	.incbin "baserom.gba", 0x248038, 0x186
-
-gUnknown_82481BE:: @ 82481BE
-	.incbin "baserom.gba", 0x2481BE, 0x12A
+gUnknown_824829C:: @ 824829C
+	.incbin "baserom.gba", 0x24829C, 0x4c
 
 gUnknown_82482E8:: @ 82482E8
 	.incbin "baserom.gba", 0x2482E8, 0x18

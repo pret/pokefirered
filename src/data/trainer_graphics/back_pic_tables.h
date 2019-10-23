@@ -24,4 +24,3 @@ const struct CompressedSpritePalette gTrainerBackPicPaletteTable[] = {
     { gTrainerPalette_PokeDudeBackPic, 4 },
     { gTrainerPalette_OldManBackPic, 5 }
 };
-

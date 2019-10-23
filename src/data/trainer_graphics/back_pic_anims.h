@@ -1,4 +1,3 @@
-
 static const union AnimCmd sAnimCmd_Red_1[] = {
     ANIMCMD_FRAME(1, 20),
     ANIMCMD_FRAME(2, 6),

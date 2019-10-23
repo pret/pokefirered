@@ -9,18 +9,18 @@ u8 sub_815D654(void)
     return (gSaveBlock1Ptr->unkArray[0].unk9 + 1) % 256;
 }
 
-static bool32 ValidateTrainerTowerTrainer(struct TrainerTowerTrainer * trainer)
+static bool32 ValidateTrainerTowerTrainer(struct TrainerTowerFloor * floor)
 {
-    if (trainer->unk_001 < 1 || trainer->unk_001 > 8)
+    if (floor->floorIdx < 1 || floor->floorIdx > 8)
         return FALSE;
-    if (trainer->unk_002 > 2)
+    if (floor->challengeType > 2)
         return FALSE;
-    if (CalcByteArraySum((const u8 *)trainer, offsetof(typeof(*trainer), checksum)) != trainer->checksum)
+    if (CalcByteArraySum((const u8 *)floor, offsetof(typeof(*floor), checksum)) != floor->checksum)
         return FALSE;
     return TRUE;
 }
 
-bool32 ValidateTrainerTowerData(struct TrainerTowerData * ttdata)
+bool32 ValidateTrainerTowerData(struct EReaderTrainerHillSet * ttdata)
 {
     u32 count = ttdata->count;
     s32 i;
@@ -28,18 +28,18 @@ bool32 ValidateTrainerTowerData(struct TrainerTowerData * ttdata)
         return FALSE;
     for (i = 0; i < count; i++)
     {
-        if (!ValidateTrainerTowerTrainer(&ttdata->trainers[i]))
+        if (!ValidateTrainerTowerTrainer(&ttdata->floors[i]))
             return FALSE;
     }
-    if (CalcByteArraySum((const u8 *)ttdata->trainers, count * sizeof(ttdata->trainers[0])) != ttdata->checksum)
+    if (CalcByteArraySum((const u8 *)ttdata->floors, count * sizeof(ttdata->floors[0])) != ttdata->checksum)
         return FALSE;
     return TRUE;
 }
 
-#define SEC30_SIZE  (offsetof(struct TrainerTowerData, trainers[4]))
-#define SEC31_SIZE  (sizeof(struct TrainerTowerData) - SEC30_SIZE)
+#define SEC30_SIZE  (offsetof(struct EReaderTrainerHillSet, floors[4]))
+#define SEC31_SIZE  (sizeof(struct EReaderTrainerHillSet) - SEC30_SIZE)
 
-static bool32 CEReaderTool_SaveTrainerTower_r(struct TrainerTowerData * ttdata, u8 * buffer)
+static bool32 CEReaderTool_SaveTrainerTower_r(struct EReaderTrainerHillSet * ttdata, u8 * buffer)
 {
     AGB_ASSERT_EX(ttdata->dummy == 0, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/cereader_tool.c", 198);
     AGB_ASSERT_EX(ttdata->id == 0, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/cereader_tool.c", 199)
@@ -56,7 +56,7 @@ static bool32 CEReaderTool_SaveTrainerTower_r(struct TrainerTowerData * ttdata, 
     return TRUE;
 }
 
-bool32 CEReaderTool_SaveTrainerTower(struct TrainerTowerData * ttdata)
+bool32 CEReaderTool_SaveTrainerTower(struct EReaderTrainerHillSet * ttdata)
 {
     u8 * buffer = AllocZeroed(0x1000);
     bool32 result = CEReaderTool_SaveTrainerTower_r(ttdata, buffer);
@@ -64,7 +64,7 @@ bool32 CEReaderTool_SaveTrainerTower(struct TrainerTowerData * ttdata)
     return result;
 }
 
-static bool32 CEReaderTool_LoadTrainerTower_r(struct TrainerTowerData * ttdata, void * buffer)
+static bool32 CEReaderTool_LoadTrainerTower_r(struct EReaderTrainerHillSet * ttdata, void * buffer)
 {
     if (TryCopySpecialSaveSection(30, buffer) != 1)
         return FALSE;
@@ -79,7 +79,7 @@ static bool32 CEReaderTool_LoadTrainerTower_r(struct TrainerTowerData * ttdata, 
     return TRUE;
 }
 
-bool32 CEReaderTool_LoadTrainerTower(struct TrainerTowerData * ttdata)
+bool32 CEReaderTool_LoadTrainerTower(struct EReaderTrainerHillSet * ttdata)
 {
     void * buffer = AllocZeroed(0x1000);
     bool32 success = CEReaderTool_LoadTrainerTower_r(ttdata, buffer);

@@ -3,27 +3,27 @@ SilphCo_11F_MapScripts:: @ 8161DEE
 	.byte 0
 
 SilphCo_11F_MapScript1_161DF4:: @ 8161DF4
-	checkflag FLAG_0x28D
-	call_if 0, EventScript_1A8504
+	checkflag FLAG_SILPH_11F_DOOR
+	call_if FALSE, EventScript_1A8504
 	end
 
 SilphCo_11F_EventScript_161DFE:: @ 8161DFE
 	lock
 	faceplayer
-	checkflag FLAG_0x250
-	goto_if_eq EventScript_161E75
+	checkflag FLAG_GOT_MASTER_BALL_FROM_SILPH
+	goto_if TRUE, EventScript_161E75
 	checkplayergender
 	compare_var_to_value VAR_RESULT, 0
-	call_if 1, EventScript_161E59
+	call_if eq, EventScript_161E59
 	compare_var_to_value VAR_RESULT, 1
-	call_if 1, EventScript_161E62
+	call_if eq, EventScript_161E62
 	checkitemspace ITEM_MASTER_BALL, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_161E6B
+	goto_if eq, EventScript_161E6B
 	additem ITEM_MASTER_BALL, 1
 	giveitemfanfaremsg gUnknown_8176FBD, ITEM_MASTER_BALL, 1, MUS_FAN5
 	msgbox gUnknown_8176FEB
-	setflag FLAG_0x250
+	setflag FLAG_GOT_MASTER_BALL_FROM_SILPH
 	release
 	end
 
@@ -73,11 +73,11 @@ EventScript_161EA0:: @ 8161EA0
 	msgbox gUnknown_8177108
 	closemessage
 	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_161F00
+	call_if eq, EventScript_161F00
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_161F12
+	call_if eq, EventScript_161F12
 	setvar VAR_LAST_TALKED, 3
-	trainerbattle 3, 349, 0, Text_1771AB
+	trainerbattle 3, TRAINER_BOSS_GIOVANNI_2, 0, Text_1771AB
 	msgbox gUnknown_81771C2
 	closemessage
 	fadescreen 1
@@ -85,9 +85,9 @@ EventScript_161EA0:: @ 8161EA0
 	removeobject 4
 	removeobject 6
 	fadescreen 0
-	setvar VAR_0x4060, 1
-	setflag FLAG_0x03E
-	clearflag FLAG_0x03F
+	setvar VAR_MAP_SCENE_SILPH_CO_11F, 1
+	setflag FLAG_HIDE_SAFFRON_ROCKETS
+	clearflag FLAG_HIDE_SAFFRON_CIVILIANS
 	releaseall
 	end
 
@@ -134,11 +134,11 @@ SilphCo_11F_EventScript_161F37:: @ 8161F37
 	end
 
 SilphCo_11F_EventScript_161F40:: @ 8161F40
-	trainerbattle 0, 390, 0, Text_1772B8, Text_1772E7
+	trainerbattle 0, TRAINER_TEAM_ROCKET_GRUNT_40, 0, Text_1772B8, Text_1772E7
 	msgbox gUnknown_81772F9, 6
 	end
 
 SilphCo_11F_EventScript_161F57:: @ 8161F57
-	trainerbattle 0, 391, 0, Text_17726A, Text_17728C
+	trainerbattle 0, TRAINER_TEAM_ROCKET_GRUNT_41, 0, Text_17726A, Text_17728C
 	msgbox gUnknown_817729B, 6
 	end

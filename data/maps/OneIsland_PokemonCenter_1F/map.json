@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "64",
+      "graphics_id": "MAP_OBJ_GFX_NURSE",
       "x": 5,
       "y": 2,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "73",
+      "graphics_id": "MAP_OBJ_GFX_BILL",
       "x": 14,
       "y": 6,
       "elevation": 3,
@@ -37,10 +37,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "OneIsland_PokemonCenter_1F_EventScript_170E9D",
-      "flag": "114"
+      "flag": "FLAG_HIDE_ONE_ISLAND_POKECENTER_BILL"
     },
     {
-      "graphics_id": "89",
+      "graphics_id": "MAP_OBJ_GFX_CELIO",
       "x": 15,
       "y": 6,
       "elevation": 3,
@@ -50,10 +50,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "OneIsland_PokemonCenter_1F_EventScript_170EC5",
-      "flag": "115"
+      "flag": "FLAG_HIDE_ONE_ISLAND_POKECENTER_CELIO"
     },
     {
-      "graphics_id": "16",
+      "graphics_id": "MAP_OBJ_GFX_LITTLE_BOY",
       "x": 6,
       "y": 8,
       "elevation": 3,
@@ -66,7 +66,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "56",
+      "graphics_id": "MAP_OBJ_GFX_HIKER",
       "x": 3,
       "y": 7,
       "elevation": 3,
@@ -79,7 +79,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "24",
+      "graphics_id": "MAP_OBJ_GFX_BATTLE_GIRL",
       "x": 7,
       "y": 4,
       "elevation": 3,

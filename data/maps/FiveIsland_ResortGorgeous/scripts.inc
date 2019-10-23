@@ -29,7 +29,7 @@ EventScript_168808:: @ 8168808
 	closedoor 39, 8
 	waitdooranim
 	removeobject 8
-	clearflag FLAG_0x095
+	clearflag FLAG_HIDE_RESORT_GORGEOUS_INSIDE_SELPHY
 	setvar VAR_MAP_SCENE_FIVE_ISLAND_RESORT_GORGEOUS, 2
 	releaseall
 	end

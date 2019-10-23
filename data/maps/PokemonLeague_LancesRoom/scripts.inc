@@ -11,10 +11,10 @@ PokemonLeague_LancesRoom_MapScript1_162942:: @ 8162942
 	end
 
 PokemonLeague_LancesRoom_MapScript2_16294D:: @ 816294D
-	compare_var_to_value VAR_0x4068, 4
-	call_if 1, EventScript_162962
-	checkflag FLAG_0x4BB
-	call_if 1, EventScript_162968
+	compare_var_to_value VAR_MAP_SCENE_POKEMON_LEAGUE, 4
+	call_if eq, EventScript_162962
+	checkflag FLAG_DEFEATED_LANCE
+	call_if TRUE, EventScript_162968
 	end
 
 EventScript_162962:: @ 8162962
@@ -34,19 +34,19 @@ EventScript_162978:: @ 8162978
 	end
 
 PokemonLeague_LancesRoom_MapScript4_16297D:: @ 816297D
-	map_script_2 VAR_0x4068, 3, EventScript_162987
+	map_script_2 VAR_MAP_SCENE_POKEMON_LEAGUE, 3, EventScript_162987
 	.2byte 0
 
 EventScript_162987:: @ 8162987
 	lockall
 	applymovement 255, Movement_1629F1
 	waitmovement 0
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	call EventScript_1629A8
 	playse SE_KI_GASYAN
 	special DrawWholeMapView
 	waitse
-	setvar VAR_0x4068, 4
+	setvar VAR_MAP_SCENE_POKEMON_LEAGUE, 4
 	releaseall
 	end
 
@@ -101,28 +101,22 @@ Movement_1629F1:: @ 81629F1
 PokemonLeague_LancesRoom_EventScript_162A14:: @ 8162A14
 	lock
 	faceplayer
-	setvar VAR_0x8004, 12
-	setvar VAR_0x8005, 2
-	special UpdatePickStateFromSpecialVar8005
-	checkflag FLAG_0x4BB
-	goto_if_eq EventScript_162AA1
-	setvar VAR_0x8004, 12
-	setvar VAR_0x8005, 0
-	special SetFlavorTextFlagFromSpecialVars
-	setvar VAR_0x8004, 12
-	setvar VAR_0x8005, 1
-	special SetFlavorTextFlagFromSpecialVars
-	checkflag FLAG_0x82C
-	call_if 0, EventScript_162A79
-	checkflag FLAG_0x82C
-	call_if 1, EventScript_162A82
-	setflag FLAG_0x003
-	setflag FLAG_0x005
-	checkflag FLAG_0x844
-	call_if 0, EventScript_162A8B
-	checkflag FLAG_0x844
-	call_if 1, EventScript_162A96
-	clearflag FLAG_0x005
+	famechecker FAMECHECKER_LANCE, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
+	checkflag FLAG_DEFEATED_LANCE
+	goto_if TRUE, EventScript_162AA1
+	famechecker FAMECHECKER_LANCE, 0
+	famechecker FAMECHECKER_LANCE, 1
+	checkflag FLAG_SYS_GAME_CLEAR
+	call_if FALSE, EventScript_162A79
+	checkflag FLAG_SYS_GAME_CLEAR
+	call_if TRUE, EventScript_162A82
+	setflag FLAG_TEMP_3
+	setflag FLAG_TEMP_5
+	checkflag FLAG_SYS_CAN_LINK_WITH_RS
+	call_if FALSE, EventScript_162A8B
+	checkflag FLAG_SYS_CAN_LINK_WITH_RS
+	call_if TRUE, EventScript_162A96
+	clearflag FLAG_TEMP_5
 	goto EventScript_162AAB
 
 EventScript_162A78:: @ 8162A78
@@ -137,11 +131,11 @@ EventScript_162A82:: @ 8162A82
 	return
 
 EventScript_162A8B:: @ 8162A8B
-	trainerbattle 3, 413, 0, Text_178A15
+	trainerbattle 3, TRAINER_ELITE_FOUR_LANCE, 0, Text_178A15
 	return
 
 EventScript_162A96:: @ 8162A96
-	trainerbattle 3, 738, 0, Text_178A15
+	trainerbattle 3, TRAINER_ELITE_FOUR_LANCE_2, 0, Text_178A15
 	return
 
 EventScript_162AA1:: @ 8162AA1
@@ -152,7 +146,7 @@ EventScript_162AA1:: @ 8162AA1
 EventScript_162AAB:: @ 8162AAB
 	setvar VAR_0x8004, 0
 	special sub_8113530
-	setflag FLAG_0x4BB
+	setflag FLAG_DEFEATED_LANCE
 	call EventScript_1A7563
 	msgbox gUnknown_8178A52
 	closemessage

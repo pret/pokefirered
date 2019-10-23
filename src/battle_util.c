@@ -3116,14 +3116,14 @@ u8 IsMonDisobedient(void)
         return 0;
     if (HasObedientBitSet(gBattlerAttacker)) // only if species is Mew or Deoxys
     {
-        if (!IsOtherTrainer(gBattleMons[gBattlerAttacker].otId, gBattleMons[gBattlerAttacker].otName) || FlagGet(FLAG_0x827))
+        if (!IsOtherTrainer(gBattleMons[gBattlerAttacker].otId, gBattleMons[gBattlerAttacker].otName) || FlagGet(FLAG_BADGE08_GET))
             return 0;
         obedienceLevel = 10;
-        if (FlagGet(FLAG_0x821))
+        if (FlagGet(FLAG_BADGE02_GET))
             obedienceLevel = 30;
-        if (FlagGet(FLAG_0x823))
+        if (FlagGet(FLAG_BADGE04_GET))
             obedienceLevel = 50;
-        if (FlagGet(FLAG_0x825))
+        if (FlagGet(FLAG_BADGE06_GET))
             obedienceLevel = 70;
     }
     if (gBattleMons[gBattlerAttacker].level <= obedienceLevel)

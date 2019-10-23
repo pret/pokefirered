@@ -25,7 +25,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "22",
+      "graphics_id": "MAP_OBJ_GFX_LASS",
       "x": 6,
       "y": 15,
       "elevation": 3,
@@ -38,7 +38,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "25",
+      "graphics_id": "MAP_OBJ_GFX_MAN",
       "x": 33,
       "y": 17,
       "elevation": 3,
@@ -48,10 +48,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PewterCity_EventScript_16607E",
-      "flag": "80"
+      "flag": "FLAG_HIDE_PEWTER_MUSEUM_GUIDE"
     },
     {
-      "graphics_id": "27",
+      "graphics_id": "MAP_OBJ_GFX_FAT_MAN",
       "x": 21,
       "y": 28,
       "elevation": 3,
@@ -64,7 +64,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "20",
+      "graphics_id": "MAP_OBJ_GFX_BUG_CATCHER",
       "x": 33,
       "y": 27,
       "elevation": 3,
@@ -77,7 +77,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "19",
+      "graphics_id": "MAP_OBJ_GFX_BOY",
       "x": 42,
       "y": 20,
       "elevation": 3,
@@ -87,10 +87,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PewterCity_EventScript_165B9D",
-      "flag": "46"
+      "flag": "FLAG_HIDE_PEWTER_CITY_GYM_GUIDE"
     },
     {
-      "graphics_id": "95",
+      "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
       "x": 30,
       "y": 5,
       "elevation": 3,
@@ -99,11 +99,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PewterCity_EventScript_1BDF13",
-      "flag": "18"
+      "script": "EventScript_InteractWithCutTreeObject",
+      "flag": "FLAG_TEMP_12"
     },
     {
-      "graphics_id": "55",
+      "graphics_id": "MAP_OBJ_GFX_SCIENTIST",
       "x": 46,
       "y": 20,
       "elevation": 3,
@@ -113,7 +113,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PewterCity_EventScript_1662A9",
-      "flag": "146"
+      "flag": "FLAG_HIDE_PEWTER_CITY_RUNNING_SHOES_GUY"
     }
   ],
   "warp_events": [
@@ -173,7 +173,7 @@
       "x": 42,
       "y": 21,
       "elevation": 3,
-      "var": "VAR_0x406C",
+      "var": "VAR_MAP_SCENE_PEWTER_CITY",
       "var_value": 0,
       "script": "PewterCity_EventScript_165D8E"
     },
@@ -182,7 +182,7 @@
       "x": 42,
       "y": 22,
       "elevation": 3,
-      "var": "VAR_0x406C",
+      "var": "VAR_MAP_SCENE_PEWTER_CITY",
       "var_value": 0,
       "script": "PewterCity_EventScript_165D9A"
     },
@@ -191,7 +191,7 @@
       "x": 42,
       "y": 23,
       "elevation": 3,
-      "var": "VAR_0x406C",
+      "var": "VAR_MAP_SCENE_PEWTER_CITY",
       "var_value": 0,
       "script": "PewterCity_EventScript_165DA6"
     },
@@ -200,7 +200,7 @@
       "x": 43,
       "y": 23,
       "elevation": 3,
-      "var": "VAR_0x406C",
+      "var": "VAR_MAP_SCENE_PEWTER_CITY",
       "var_value": 0,
       "script": "PewterCity_EventScript_165DB2"
     },
@@ -209,7 +209,7 @@
       "x": 46,
       "y": 21,
       "elevation": 3,
-      "var": "VAR_0x406C",
+      "var": "VAR_MAP_SCENE_PEWTER_CITY",
       "var_value": 1,
       "script": "PewterCity_EventScript_1662B7"
     },
@@ -218,7 +218,7 @@
       "x": 46,
       "y": 22,
       "elevation": 3,
-      "var": "VAR_0x406C",
+      "var": "VAR_MAP_SCENE_PEWTER_CITY",
       "var_value": 1,
       "script": "PewterCity_EventScript_1662C4"
     },
@@ -227,7 +227,7 @@
       "x": 46,
       "y": 23,
       "elevation": 3,
-      "var": "VAR_0x406C",
+      "var": "VAR_MAP_SCENE_PEWTER_CITY",
       "var_value": 1,
       "script": "PewterCity_EventScript_1662D1"
     }
@@ -273,9 +273,10 @@
       "x": 6,
       "y": 3,
       "elevation": 3,
-      "item": "POCKET_TM_CASE",
-      "flag": "112",
-      "unknown": 1
+      "item": "ITEM_POKE_BALL",
+      "flag": "HIDDEN_ITEM_PEWTER_CITY_POKE_BALL",
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

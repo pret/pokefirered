@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "72",
+      "graphics_id": "MAP_OBJ_GFX_BLUE",
       "x": 16,
       "y": 5,
       "elevation": 3,
@@ -24,10 +24,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "0x0",
-      "flag": "81"
+      "flag": "FLAG_HIDE_TOWER_RIVAL"
     },
     {
-      "graphics_id": "58",
+      "graphics_id": "MAP_OBJ_GFX_CHANNELER",
       "x": 3,
       "y": 7,
       "elevation": 0,
@@ -62,7 +62,7 @@
       "x": 17,
       "y": 5,
       "elevation": 3,
-      "var": "VAR_0x405D",
+      "var": "VAR_MAP_SCENE_POKEMON_TOWER_2F",
       "var_value": 0,
       "script": "PokemonTower_2F_EventScript_16328F"
     },
@@ -71,7 +71,7 @@
       "x": 16,
       "y": 6,
       "elevation": 3,
-      "var": "VAR_0x405D",
+      "var": "VAR_MAP_SCENE_POKEMON_TOWER_2F",
       "var_value": 0,
       "script": "PokemonTower_2F_EventScript_16329B"
     }

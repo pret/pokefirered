@@ -329,7 +329,7 @@ static void InitLocalLinkPlayer(void)
     gLocalLinkPlayer.version = gGameVersion + 0x4000;
     gLocalLinkPlayer.lp_field_2 = 0x8000;
     gLocalLinkPlayer.name[8] = IsNationalPokedexEnabled();
-    if (FlagGet(FLAG_0x844))
+    if (FlagGet(FLAG_SYS_CAN_LINK_WITH_RS))
     {
         gLocalLinkPlayer.name[8] |= 0x10;
     }

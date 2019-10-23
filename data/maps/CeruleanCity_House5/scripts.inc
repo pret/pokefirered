@@ -4,18 +4,18 @@ CeruleanCity_House5_MapScripts:: @ 816AE4F
 CeruleanCity_House5_EventScript_16AE50:: @ 816AE50
 	lock
 	faceplayer
-	checkflag FLAG_0x2BB
-	goto_if_eq EventScript_16AEB7
+	checkflag FLAG_GOT_POWDER_JAR
+	goto_if TRUE, EventScript_16AEB7
 	msgbox gUnknown_8192F67, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16AEAD
-	checkflag FLAG_0x847
-	goto_if 0, EventScript_16AEA3
+	goto_if eq, EventScript_16AEAD
+	checkflag FLAG_SYS_GOT_BERRY_POUCH
+	goto_if FALSE, EventScript_16AEA3
 	msgbox gUnknown_8193003
-	setflag FLAG_0x2BB
+	setflag FLAG_GOT_POWDER_JAR
 	giveitem ITEM_POWDER_JAR
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_1A6BF9
+	goto_if eq, EventScript_1A6BF9
 	msgbox gUnknown_8193033
 	release
 	end
@@ -144,20 +144,20 @@ EventScript_16B048:: @ 816B048
 EventScript_16B055:: @ 816B055
 	msgbox gUnknown_819331E, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16AEC8
+	goto_if eq, EventScript_16AEC8
 	copyvar VAR_0x8004, VAR_0x8009
 	specialvar VAR_RESULT, sub_815EEB0
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16B0CC
+	goto_if eq, EventScript_16B0CC
 	giveitem VAR_0x8008
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16B0BF
+	goto_if eq, EventScript_16B0BF
 	copyvar VAR_0x8004, VAR_0x8009
 	special sub_815EF5C
 	special sub_815F070
 	msgbox gUnknown_819337A, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16AEC8
+	goto_if eq, EventScript_16AEC8
 	msgbox gUnknown_81933FB
 	special sub_815F114
 	release
@@ -178,7 +178,7 @@ CeruleanCity_House5_EventScript_16B0DA:: @ 816B0DA
 	lockall
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if eq, EventScript_1A7AE0
 	special sub_814EA7C
 	waitstate
 	releaseall

@@ -1263,8 +1263,8 @@ bool8 ScrCmd_release(struct ScriptContext *ctx)
 
 bool8 ScrCmd_textcolor(struct ScriptContext *ctx)
 {
-    gUnknown_20370DC = gUnknown_20370DA;
-    gUnknown_20370DA = ScriptReadByte(ctx);
+    gSpecialVar_PrevTextColor = gSpecialVar_TextColor;
+    gSpecialVar_TextColor = ScriptReadByte(ctx);
     return FALSE;
 }
 

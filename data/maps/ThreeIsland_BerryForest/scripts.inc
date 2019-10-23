@@ -19,7 +19,7 @@ ThreeIsland_BerryForest_EventScript_163C83:: @ 8163C83
 	msgbox gUnknown_817AE8E
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if eq, EventScript_1A7AE0
 	waitse
 	playmoncry SPECIES_HYPNO, 2
 	waitmoncry
@@ -31,14 +31,14 @@ ThreeIsland_BerryForest_EventScript_163C83:: @ 8163C83
 	msgbox gUnknown_817AEE1
 	giveitem ITEM_IAPAPA_BERRY
 	compare_var_to_value VAR_RESULT, 0
-	call_if 1, EventScript_163D19
+	call_if eq, EventScript_163D19
 	special sub_80CA6DC
 	msgbox gUnknown_817AF3B
 	closemessage
-	setflag FLAG_0x2A3
-	setflag FLAG_0x07A
+	setflag FLAG_RESCUED_LOSTELLE
+	setflag FLAG_HIDE_LOSTELLE_IN_BERRY_FOREST
 	setvar VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 2
-	clearflag FLAG_0x075
+	clearflag FLAG_HIDE_TWO_ISLAND_GAME_CORNER_LOSTELLE
 	warp MAP_TWO_ISLAND_JOYFUL_GAME_CORNER, 255, 6, 6
 	waitstate
 	release

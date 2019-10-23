@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "145",
+      "graphics_id": "MAP_OBJ_GFX_HO_OH",
       "x": 9,
       "y": 6,
       "elevation": 0,
@@ -24,7 +24,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "0x0",
-      "flag": "156"
+      "flag": "FLAG_HIDE_HO_OH"
     }
   ],
   "warp_events": [
@@ -54,8 +54,9 @@
       "y": 11,
       "elevation": 3,
       "item": "ITEM_SACRED_ASH",
-      "flag": "160",
-      "unknown": 129
+      "flag": "HIDDEN_ITEM_NAVEL_ROCK_SUMMIT_SACRED_ASH",
+      "quantity": 1,
+      "underfoot": true
     }
   ]
 }

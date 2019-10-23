@@ -25,7 +25,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "57",
+      "graphics_id": "MAP_OBJ_GFX_FISHER",
       "x": 8,
       "y": 5,
       "elevation": 3,
@@ -38,7 +38,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "20",
+      "graphics_id": "MAP_OBJ_GFX_BUG_CATCHER",
       "x": 16,
       "y": 10,
       "elevation": 3,

@@ -83,10 +83,10 @@ Movement_167514:: @ 8167514
 OneIsland_EventScript_167517:: @ 8167517
 	lock
 	faceplayer
-	checkflag FLAG_0x844
-	goto_if_eq EventScript_16753F
-	checkflag FLAG_0x2A1
-	goto_if_eq EventScript_167535
+	checkflag FLAG_SYS_CAN_LINK_WITH_RS
+	goto_if TRUE, EventScript_16753F
+	checkflag FLAG_SEVII_DETOUR_FINISHED
+	goto_if TRUE, EventScript_167535
 	msgbox gUnknown_818174E
 	release
 	end

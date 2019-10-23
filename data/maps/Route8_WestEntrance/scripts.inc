@@ -27,8 +27,8 @@ EventScript_16FB81:: @ 816FB81
 	textcolor 0
 	applymovement 255, Movement_1A75E9
 	waitmovement 0
-	checkflag FLAG_0x2A6
-	goto_if_eq EventScript_16FBAB
+	checkflag FLAG_GOT_TEA
+	goto_if TRUE, EventScript_16FBAB
 	msgbox gUnknown_819E3ED
 	closemessage
 	applymovement 255, Movement_16FC2D
@@ -55,13 +55,13 @@ EventScript_16FBCC:: @ 816FBCC
 	msgbox gUnknown_819E43D
 	closemessage
 	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_16FC05
+	call_if eq, EventScript_16FC05
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_16FC10
+	call_if eq, EventScript_16FC10
 	compare_var_to_value VAR_0x4001, 2
-	call_if 1, EventScript_16FC1B
+	call_if eq, EventScript_16FC1B
 	msgbox gUnknown_819E463
-	setvar VAR_0x4062, 1
+	setvar VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES, 1
 	releaseall
 	end
 

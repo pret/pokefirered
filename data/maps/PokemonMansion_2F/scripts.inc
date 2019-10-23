@@ -3,8 +3,8 @@ PokemonMansion_2F_MapScripts:: @ 8162254
 	.byte 0
 
 PokemonMansion_2F_MapScript1_16225A:: @ 816225A
-	checkflag FLAG_0x26C
-	call_if 1, EventScript_1A7D3E
+	checkflag FLAG_POKEMON_MANSION_SWITCH_STATE
+	call_if TRUE, EventScript_1A7D3E
 	end
 
 PokemonMansion_2F_EventScript_162264:: @ 8162264
@@ -26,6 +26,6 @@ PokemonMansion_2F_EventScript_162281:: @ 8162281
 	end
 
 PokemonMansion_2F_EventScript_16228A:: @ 816228A
-	trainerbattle 0, 216, 0, Text_177498, Text_1774CB
+	trainerbattle 0, TRAINER_BURGLAR_ARNIE, 0, Text_177498, Text_1774CB
 	msgbox gUnknown_81774E3, 6
 	end

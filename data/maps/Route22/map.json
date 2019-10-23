@@ -25,7 +25,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "72",
+      "graphics_id": "MAP_OBJ_GFX_BLUE",
       "x": 25,
       "y": 4,
       "elevation": 3,
@@ -35,7 +35,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "0x0",
-      "flag": "79"
+      "flag": "FLAG_HIDE_ROUTE_22_RIVAL"
     }
   ],
   "warp_events": [
@@ -60,7 +60,7 @@
       "x": 33,
       "y": 4,
       "elevation": 3,
-      "var": "VAR_0x4054",
+      "var": "VAR_MAP_SCENE_ROUTE22",
       "var_value": 1,
       "script": "Route22_EventScript_16828C"
     },
@@ -69,7 +69,7 @@
       "x": 33,
       "y": 5,
       "elevation": 3,
-      "var": "VAR_0x4054",
+      "var": "VAR_MAP_SCENE_ROUTE22",
       "var_value": 1,
       "script": "Route22_EventScript_168298"
     },
@@ -78,7 +78,7 @@
       "x": 33,
       "y": 6,
       "elevation": 0,
-      "var": "VAR_0x4054",
+      "var": "VAR_MAP_SCENE_ROUTE22",
       "var_value": 1,
       "script": "Route22_EventScript_1682AB"
     },
@@ -87,7 +87,7 @@
       "x": 33,
       "y": 4,
       "elevation": 3,
-      "var": "VAR_0x4054",
+      "var": "VAR_MAP_SCENE_ROUTE22",
       "var_value": 3,
       "script": "Route22_EventScript_1683ED"
     },
@@ -96,7 +96,7 @@
       "x": 33,
       "y": 5,
       "elevation": 3,
-      "var": "VAR_0x4054",
+      "var": "VAR_MAP_SCENE_ROUTE22",
       "var_value": 3,
       "script": "Route22_EventScript_1683F9"
     },
@@ -105,7 +105,7 @@
       "x": 33,
       "y": 6,
       "elevation": 0,
-      "var": "VAR_0x4054",
+      "var": "VAR_MAP_SCENE_ROUTE22",
       "var_value": 3,
       "script": "Route22_EventScript_16840C"
     }

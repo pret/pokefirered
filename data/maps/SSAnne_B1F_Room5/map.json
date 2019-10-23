@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "19",
+      "graphics_id": "MAP_OBJ_GFX_BOY",
       "x": 3,
       "y": 5,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "134",
+      "graphics_id": "MAP_OBJ_GFX_MACHOKE",
       "x": 2,
       "y": 5,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 2,
       "y": 2,
       "elevation": 0,
@@ -50,7 +50,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SSAnne_B1F_Room5_EventScript_1BE69F",
-      "flag": "361"
+      "flag": "FLAG_HIDE_SSANNE_B1F_ROOM5_SUPER_POTION"
     }
   ],
   "warp_events": [

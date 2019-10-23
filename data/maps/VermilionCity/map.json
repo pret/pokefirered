@@ -25,7 +25,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "23",
+      "graphics_id": "MAP_OBJ_GFX_WOMAN_1",
       "x": 22,
       "y": 11,
       "elevation": 3,
@@ -38,7 +38,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "32",
+      "graphics_id": "MAP_OBJ_GFX_OLD_MAN_1",
       "x": 17,
       "y": 9,
       "elevation": 3,
@@ -51,7 +51,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "33",
+      "graphics_id": "MAP_OBJ_GFX_OLD_MAN_2",
       "x": 36,
       "y": 10,
       "elevation": 0,
@@ -64,7 +64,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "130",
+      "graphics_id": "MAP_OBJ_GFX_MACHOP",
       "x": 35,
       "y": 11,
       "elevation": 3,
@@ -77,7 +77,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "62",
+      "graphics_id": "MAP_OBJ_GFX_SAILOR",
       "x": 31,
       "y": 30,
       "elevation": 3,
@@ -90,7 +90,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "62",
+      "graphics_id": "MAP_OBJ_GFX_SAILOR",
       "x": 24,
       "y": 33,
       "elevation": 3,
@@ -103,7 +103,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "95",
+      "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
       "x": 19,
       "y": 24,
       "elevation": 3,
@@ -112,11 +112,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "VermilionCity_EventScript_1BDF13",
-      "flag": "18"
+      "script": "EventScript_InteractWithCutTreeObject",
+      "flag": "FLAG_TEMP_12"
     },
     {
-      "graphics_id": "55",
+      "graphics_id": "MAP_OBJ_GFX_SCIENTIST",
       "x": 25,
       "y": 7,
       "elevation": 3,
@@ -126,7 +126,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "VermilionCity_EventScript_166C20",
-      "flag": "161"
+      "flag": "FLAG_HIDE_VERMILION_CITY_OAKS_AIDE"
     }
   ],
   "warp_events": [
@@ -281,8 +281,9 @@
       "y": 11,
       "elevation": 3,
       "item": "ITEM_MAX_ETHER",
-      "flag": "48",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_VERMILION_CITY_MAX_ETHER",
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

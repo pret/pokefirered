@@ -2774,14 +2774,14 @@ _0805F2E0:
 	bls _0805F2E6
 	movs r1, 0x10
 _0805F2E6:
-	ldr r0, _0805F2F4 @ =gUnknown_839FDB0
+	ldr r0, _0805F2F4 @ =gMapObjectGraphicsInfoPointers
 	lsls r1, 2
 	adds r1, r0
 	ldr r0, [r1]
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805F2F4: .4byte gUnknown_839FDB0
+_0805F2F4: .4byte gMapObjectGraphicsInfoPointers
 	thumb_func_end GetFieldObjectGraphicsInfo
 
 	thumb_func_start FieldObjectHandleDynamicGraphicsId

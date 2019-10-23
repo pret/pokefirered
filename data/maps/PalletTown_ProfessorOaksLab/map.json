@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "55",
+      "graphics_id": "MAP_OBJ_GFX_SCIENTIST",
       "x": 3,
       "y": 11,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "48",
+      "graphics_id": "MAP_OBJ_GFX_WORKER_F",
       "x": 2,
       "y": 10,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "55",
+      "graphics_id": "MAP_OBJ_GFX_SCIENTIST",
       "x": 11,
       "y": 10,
       "elevation": 3,
@@ -53,7 +53,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "71",
+      "graphics_id": "MAP_OBJ_GFX_PROF_OAK",
       "x": 6,
       "y": 3,
       "elevation": 3,
@@ -63,10 +63,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PalletTown_ProfessorOaksLab_EventScript_169595",
-      "flag": "43"
+      "flag": "FLAG_HIDE_OAK_IN_HIS_LAB"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 8,
       "y": 4,
       "elevation": 0,
@@ -76,10 +76,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PalletTown_ProfessorOaksLab_EventScript_169BAB",
-      "flag": "40"
+      "flag": "FLAG_HIDE_BULBASAUR_BALL"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 9,
       "y": 4,
       "elevation": 0,
@@ -89,10 +89,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PalletTown_ProfessorOaksLab_EventScript_169D78",
-      "flag": "41"
+      "flag": "FLAG_HIDE_SQUIRTLE_BALL"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 10,
       "y": 4,
       "elevation": 0,
@@ -102,10 +102,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PalletTown_ProfessorOaksLab_EventScript_169DAE",
-      "flag": "42"
+      "flag": "FLAG_HIDE_CHARMANDER_BALL"
     },
     {
-      "graphics_id": "72",
+      "graphics_id": "MAP_OBJ_GFX_BLUE",
       "x": 5,
       "y": 4,
       "elevation": 3,
@@ -115,10 +115,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PalletTown_ProfessorOaksLab_EventScript_16955F",
-      "flag": "45"
+      "flag": "FLAG_HIDE_RIVAL_IN_LAB"
     },
     {
-      "graphics_id": "94",
+      "graphics_id": "MAP_OBJ_GFX_POKEDEX",
       "x": 4,
       "y": 1,
       "elevation": 0,
@@ -128,10 +128,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PalletTown_ProfessorOaksLab_EventScript_169E5F",
-      "flag": "58"
+      "flag": "FLAG_HIDE_POKEDEX"
     },
     {
-      "graphics_id": "94",
+      "graphics_id": "MAP_OBJ_GFX_POKEDEX",
       "x": 5,
       "y": 1,
       "elevation": 0,
@@ -141,7 +141,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PalletTown_ProfessorOaksLab_EventScript_169E5F",
-      "flag": "58"
+      "flag": "FLAG_HIDE_POKEDEX"
     }
   ],
   "warp_events": [

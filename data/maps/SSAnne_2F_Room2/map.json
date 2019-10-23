@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "57",
+      "graphics_id": "MAP_OBJ_GFX_FISHER",
       "x": 5,
       "y": 5,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "61",
+      "graphics_id": "MAP_OBJ_GFX_GENTLEMAN",
       "x": 1,
       "y": 4,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 3,
       "y": 3,
       "elevation": 0,
@@ -50,7 +50,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SSAnne_2F_Room2_EventScript_1BE66B",
-      "flag": "357"
+      "flag": "FLAG_HIDE_SSANNE_2F_ROOM2_STARDUST"
     }
   ],
   "warp_events": [

@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "73",
+      "graphics_id": "MAP_OBJ_GFX_BILL",
       "x": 7,
       "y": 5,
       "elevation": 3,
@@ -24,10 +24,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "Route25_SeaCottage_EventScript_17054B",
-      "flag": "51"
+      "flag": "FLAG_HIDE_BILL_HUMAN_SEA_COTTAGE"
     },
     {
-      "graphics_id": "113",
+      "graphics_id": "MAP_OBJ_GFX_CLEFAIRY",
       "x": 10,
       "y": 6,
       "elevation": 3,
@@ -37,7 +37,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "Route25_SeaCottage_EventScript_17054B",
-      "flag": "50"
+      "flag": "FLAG_HIDE_BILL_CLEFAIRY"
     }
   ],
   "warp_events": [

@@ -20,7 +20,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "55",
+      "graphics_id": "MAP_OBJ_GFX_SCIENTIST",
       "x": 24,
       "y": 25,
       "elevation": 3,
@@ -30,10 +30,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SixIsland_RuinValley_EventScript_168B6D",
-      "flag": "142"
+      "flag": "FLAG_HIDE_RUIN_VALLEY_SCIENTIST"
     },
     {
-      "graphics_id": "56",
+      "graphics_id": "MAP_OBJ_GFX_HIKER",
       "x": 32,
       "y": 11,
       "elevation": 5,
@@ -46,7 +46,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "56",
+      "graphics_id": "MAP_OBJ_GFX_HIKER",
       "x": 33,
       "y": 16,
       "elevation": 5,
@@ -59,7 +59,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "56",
+      "graphics_id": "MAP_OBJ_GFX_HIKER",
       "x": 31,
       "y": 24,
       "elevation": 5,
@@ -72,7 +72,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "56",
+      "graphics_id": "MAP_OBJ_GFX_HIKER",
       "x": 14,
       "y": 10,
       "elevation": 5,
@@ -85,7 +85,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "52",
+      "graphics_id": "MAP_OBJ_GFX_SUPER_NERD",
       "x": 21,
       "y": 29,
       "elevation": 5,
@@ -98,7 +98,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "97",
+      "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
       "x": 17,
       "y": 10,
       "elevation": 5,
@@ -107,11 +107,11 @@
       "movement_range_y": 0,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SixIsland_RuinValley_EventScript_1BE11D",
+      "script": "EventScript_InteractWithStrengthBoulderObject",
       "flag": "0"
     },
     {
-      "graphics_id": "97",
+      "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
       "x": 17,
       "y": 12,
       "elevation": 5,
@@ -120,11 +120,11 @@
       "movement_range_y": 0,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SixIsland_RuinValley_EventScript_1BE11D",
+      "script": "EventScript_InteractWithStrengthBoulderObject",
       "flag": "0"
     },
     {
-      "graphics_id": "97",
+      "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
       "x": 18,
       "y": 11,
       "elevation": 5,
@@ -133,11 +133,11 @@
       "movement_range_y": 0,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SixIsland_RuinValley_EventScript_1BE11D",
+      "script": "EventScript_InteractWithStrengthBoulderObject",
       "flag": "0"
     },
     {
-      "graphics_id": "97",
+      "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
       "x": 6,
       "y": 33,
       "elevation": 3,
@@ -146,11 +146,11 @@
       "movement_range_y": 0,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SixIsland_RuinValley_EventScript_1BE11D",
+      "script": "EventScript_InteractWithStrengthBoulderObject",
       "flag": "0"
     },
     {
-      "graphics_id": "97",
+      "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
       "x": 6,
       "y": 34,
       "elevation": 3,
@@ -159,11 +159,11 @@
       "movement_range_y": 0,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SixIsland_RuinValley_EventScript_1BE11D",
+      "script": "EventScript_InteractWithStrengthBoulderObject",
       "flag": "0"
     },
     {
-      "graphics_id": "97",
+      "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
       "x": 41,
       "y": 32,
       "elevation": 3,
@@ -172,11 +172,11 @@
       "movement_range_y": 0,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SixIsland_RuinValley_EventScript_1BE11D",
+      "script": "EventScript_InteractWithStrengthBoulderObject",
       "flag": "0"
     },
     {
-      "graphics_id": "97",
+      "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
       "x": 41,
       "y": 33,
       "elevation": 3,
@@ -185,11 +185,11 @@
       "movement_range_y": 0,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SixIsland_RuinValley_EventScript_1BE11D",
+      "script": "EventScript_InteractWithStrengthBoulderObject",
       "flag": "0"
     },
     {
-      "graphics_id": "97",
+      "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
       "x": 42,
       "y": 33,
       "elevation": 3,
@@ -198,11 +198,11 @@
       "movement_range_y": 0,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SixIsland_RuinValley_EventScript_1BE11D",
+      "script": "EventScript_InteractWithStrengthBoulderObject",
       "flag": "0"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 5,
       "y": 33,
       "elevation": 3,
@@ -212,10 +212,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SixIsland_RuinValley_EventScript_1BECC4",
-      "flag": "485"
+      "flag": "FLAG_HIDE_SIX_ISLAND_RUIN_VALLEY_HP_UP"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 19,
       "y": 11,
       "elevation": 5,
@@ -225,10 +225,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SixIsland_RuinValley_EventScript_1BECB7",
-      "flag": "484"
+      "flag": "FLAG_HIDE_SIX_ISLAND_RUIN_VALLEY_FULL_RESTORE"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 43,
       "y": 32,
       "elevation": 3,
@@ -238,7 +238,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SixIsland_RuinValley_EventScript_1BECD1",
-      "flag": "486"
+      "flag": "FLAG_HIDE_SIX_ISLAND_RUIN_VALLEY_SUN_STONE"
     }
   ],
   "warp_events": [

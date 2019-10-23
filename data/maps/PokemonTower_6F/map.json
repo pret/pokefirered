@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "58",
+      "graphics_id": "MAP_OBJ_GFX_CHANNELER",
       "x": 13,
       "y": 10,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "58",
+      "graphics_id": "MAP_OBJ_GFX_CHANNELER",
       "x": 18,
       "y": 6,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "58",
+      "graphics_id": "MAP_OBJ_GFX_CHANNELER",
       "x": 9,
       "y": 6,
       "elevation": 3,
@@ -53,7 +53,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 5,
       "y": 15,
       "elevation": 3,
@@ -63,10 +63,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PokemonTower_6F_EventScript_1BE796",
-      "flag": "380"
+      "flag": "FLAG_HIDE_POKEMON_TOWER_6F_RARE_CANDY"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 15,
       "y": 15,
       "elevation": 3,
@@ -76,7 +76,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PokemonTower_6F_EventScript_1BE7A3",
-      "flag": "381"
+      "flag": "FLAG_HIDE_POKEMON_TOWER_6F_X_ACCURACY"
     }
   ],
   "warp_events": [
@@ -101,7 +101,7 @@
       "x": 11,
       "y": 15,
       "elevation": 3,
-      "var": "VAR_0x4059",
+      "var": "VAR_MAP_SCENE_POKEMON_TOWER_6F",
       "var_value": 0,
       "script": "PokemonTower_6F_EventScript_1634B8"
     },
@@ -110,7 +110,7 @@
       "x": 12,
       "y": 16,
       "elevation": 3,
-      "var": "VAR_0x4059",
+      "var": "VAR_MAP_SCENE_POKEMON_TOWER_6F",
       "var_value": 0,
       "script": "PokemonTower_6F_EventScript_1634B8"
     }

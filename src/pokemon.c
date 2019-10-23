@@ -1509,7 +1509,7 @@ const struct SpriteTemplate gUnknown_825DF50[] =
         .paletteTag = 0,
         .oam = &gOamData_824F018,
         .anims = NULL, 
-        .images = gUnknown_8234718,
+        .images = gTrainerBackPicTable_Red,
         .affineAnims = gSpriteAffineAnimTable_82348C8,
         .callback = sub_80120C4,
     },
@@ -1518,7 +1518,7 @@ const struct SpriteTemplate gUnknown_825DF50[] =
         .paletteTag = 0,
         .oam = &gOamData_824F018,
         .anims = NULL, 
-        .images = gUnknown_8234740,
+        .images = gTrainerBackPicTable_Leaf,
         .affineAnims = gSpriteAffineAnimTable_82348C8,
         .callback = sub_80120C4,
     },
@@ -1527,7 +1527,7 @@ const struct SpriteTemplate gUnknown_825DF50[] =
         .paletteTag = 0,
         .oam = &gOamData_824F018,
         .anims = NULL, 
-        .images = gUnknown_82347A8,
+        .images = gTrainerBackPicTable_RSBrendan,
         .affineAnims = gSpriteAffineAnimTable_82348C8,
         .callback = sub_80120C4,
     },
@@ -1536,7 +1536,7 @@ const struct SpriteTemplate gUnknown_825DF50[] =
         .paletteTag = 0,
         .oam = &gOamData_824F018,
         .anims = NULL, 
-        .images = gUnknown_82347C8,
+        .images = gTrainerBackPicTable_RSMay,
         .affineAnims = gSpriteAffineAnimTable_82348C8,
         .callback = sub_80120C4,
     },
@@ -1545,7 +1545,7 @@ const struct SpriteTemplate gUnknown_825DF50[] =
         .paletteTag = 0,
         .oam = &gOamData_824F018,
         .anims = NULL, 
-        .images = gUnknown_8234768,
+        .images = gTrainerBackPicTable_PokeDude,
         .affineAnims = gSpriteAffineAnimTable_82348C8,
         .callback = sub_80120C4,
     },
@@ -1554,7 +1554,7 @@ const struct SpriteTemplate gUnknown_825DF50[] =
         .paletteTag = 0,
         .oam = &gOamData_824F018,
         .anims = NULL, 
-        .images = gUnknown_8234788,
+        .images = gTrainerBackPicTable_OldMan,
         .affineAnims = gSpriteAffineAnimTable_82348C8,
         .callback = sub_80120C4,
     },
@@ -2362,25 +2362,25 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     // In FRLG, the Battle Tower and opponent checks are stubbed here.
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | /*BATTLE_TYPE_BATTLE_TOWER |*/ BATTLE_TYPE_EREADER_TRAINER)))
     {
-        if (FlagGet(FLAG_UNK820)
+        if (FlagGet(FLAG_BADGE01_GET)
             && !GetBattlerSide(battlerIdAtk))
             attack = (110 * attack) / 100;
     }
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | /*BATTLE_TYPE_BATTLE_TOWER |*/ BATTLE_TYPE_EREADER_TRAINER)))
     {
-        if (FlagGet(FLAG_UNK824)
+        if (FlagGet(FLAG_BADGE05_GET)
             && !GetBattlerSide(battlerIdDef))
             defense = (110 * defense) / 100;
     }
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | /*BATTLE_TYPE_BATTLE_TOWER |*/ BATTLE_TYPE_EREADER_TRAINER)))
     {
-        if (FlagGet(FLAG_UNK826)
+        if (FlagGet(FLAG_BADGE07_GET)
             && !GetBattlerSide(battlerIdAtk))
             spAttack = (110 * spAttack) / 100;
     }
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | /*BATTLE_TYPE_BATTLE_TOWER |*/ BATTLE_TYPE_EREADER_TRAINER)))
     {
-        if (FlagGet(FLAG_UNK826)
+        if (FlagGet(FLAG_BADGE07_GET)
             && !GetBattlerSide(battlerIdDef))
             spDefense = (110 * spDefense) / 100;
     }
@@ -3634,7 +3634,7 @@ static u8 SendMonToPC(struct Pokemon* mon)
                 gSpecialVar_MonBoxId = boxNo;
                 gSpecialVar_MonBoxPos = boxPos;
                 if (get_unknown_box_id() != boxNo)
-                    FlagClear(FLAG_UNK843);
+                    FlagClear(FLAG_SYS_CHANGED_BOX_TO_STORE_MON);
                 VarSet(VAR_0x4037, boxNo);
                 return MON_GIVEN_TO_PC;
             }

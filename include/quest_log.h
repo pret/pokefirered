@@ -16,7 +16,7 @@ struct UnkStruct_3005E90
 
 extern u8 gUnknown_203ADFA;
 extern u8 gUnknown_3005E88;
-extern u16 gUnknown_3005E8C;
+extern u16 sNumQuestLogs;
 extern struct UnkStruct_3005E90 gUnknown_3005E90;
 extern struct UnkStruct_203AE98 * gUnknown_3005E94;
 extern const u16 gUnknown_84566A8[];
@@ -45,5 +45,9 @@ void sub_812C224(void);
 void sub_812BFDC(void);
 void sub_811231C(void);
 void sub_81139BC(void);
+void *QuestLogGetFlagOrVarPtr(bool8 isFlag, u16 idx);
+void QuestLogSetFlagOrVar(bool8 isFlag, u16 idx, u16 value);
+
+extern u8 gUnknown_203ADFA;
 
 #endif //GUARD_QUEST_LOG_H

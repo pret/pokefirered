@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "62",
+      "graphics_id": "MAP_OBJ_GFX_SAILOR",
       "x": 4,
       "y": 4,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 1,
       "y": 5,
       "elevation": 3,
@@ -37,7 +37,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SSAnne_B1F_Room3_EventScript_1BE692",
-      "flag": "360"
+      "flag": "FLAG_HIDE_SSANNE_B1F_ROOM3_ETHER"
     }
   ],
   "warp_events": [

@@ -5230,7 +5230,7 @@ static void atk5D_getmoneyreward(void)
     }
     else
     {
-        moneyReward = sub_8054C04();
+        moneyReward = ComputeWhiteOutMoneyLoss();
     }
     PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff1, 5, moneyReward);
     if (moneyReward)
@@ -5412,7 +5412,7 @@ static void atk5D_getmoneyreward(void)
         bl AddMoney\n\
         b _08025A00\n\
     _080259FA:\n\
-        bl sub_8054C04\n\
+        bl ComputeWhiteOutMoneyLoss\n\
         adds r4, r0, 0\n\
     _08025A00:\n\
         ldr r1, _08025A40 @ =gBattleTextBuff1\n\

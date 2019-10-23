@@ -4,8 +4,8 @@ LavenderTown_House1_MapScripts:: @ 816B232
 LavenderTown_House1_EventScript_16B233:: @ 816B233
 	lock
 	faceplayer
-	checkflag FLAG_0x23C
-	goto_if_eq EventScript_16B248
+	checkflag FLAG_RESCUED_MR_FUJI
+	goto_if TRUE, EventScript_16B248
 	msgbox gUnknown_819397D
 	release
 	end

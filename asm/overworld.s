@@ -15,7 +15,7 @@ sub_8054BC8: @ 8054BC8
 	movs r0, 0xA4
 	lsls r0, 2
 	adds r4, r0
-	bl sub_8054C04
+	bl ComputeWhiteOutMoneyLoss
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl RemoveMoney
@@ -31,17 +31,17 @@ _08054BFC: .4byte gUnknown_81A654B
 _08054C00: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_8054BC8
 
-	thumb_func_start sub_8054C04
-sub_8054C04: @ 8054C04
+	thumb_func_start ComputeWhiteOutMoneyLoss
+ComputeWhiteOutMoneyLoss: @ 8054C04
 	push {r4,lr}
-	bl sub_8054C70
+	bl CountBadgesForOverworldWhiteOutLossCalculation
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	bl GetPlayerPartyHighestLevel
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _08054C40 @ =gUnknown_826D294
+	ldr r1, _08054C40 @ =sWhiteOutMoneyLossMultipliers
 	adds r4, r1
 	ldrb r1, [r4]
 	lsls r1, 2
@@ -62,14 +62,14 @@ _08054C38:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08054C40: .4byte gUnknown_826D294
+_08054C40: .4byte sWhiteOutMoneyLossMultipliers
 _08054C44: .4byte gSaveBlock1Ptr
-	thumb_func_end sub_8054C04
+	thumb_func_end ComputeWhiteOutMoneyLoss
 
-	thumb_func_start sub_8054C48
-sub_8054C48: @ 8054C48
+	thumb_func_start Special_OverworldWhiteOutGetMoneyLoss
+Special_OverworldWhiteOutGetMoneyLoss: @ 8054C48
 	push {r4,r5,lr}
-	bl sub_8054C04
+	bl ComputeWhiteOutMoneyLoss
 	adds r4, r0, 0
 	ldr r5, _08054C6C @ =gStringVar1
 	bl CountDigits
@@ -85,14 +85,14 @@ sub_8054C48: @ 8054C48
 	bx r0
 	.align 2, 0
 _08054C6C: .4byte gStringVar1
-	thumb_func_end sub_8054C48
+	thumb_func_end Special_OverworldWhiteOutGetMoneyLoss
 
-	thumb_func_start sub_8054C70
-sub_8054C70: @ 8054C70
+	thumb_func_start CountBadgesForOverworldWhiteOutLossCalculation
+CountBadgesForOverworldWhiteOutLossCalculation: @ 8054C70
 	push {r4-r6,lr}
 	movs r6, 0
 	movs r5, 0
-	ldr r4, _08054C9C @ =gUnknown_826D29E
+	ldr r4, _08054C9C @ =sWhiteOutMoneyLossBadgeFlagIDs
 _08054C78:
 	ldrh r0, [r4]
 	bl FlagGet
@@ -112,8 +112,8 @@ _08054C8A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08054C9C: .4byte gUnknown_826D29E
-	thumb_func_end sub_8054C70
+_08054C9C: .4byte sWhiteOutMoneyLossBadgeFlagIDs
+	thumb_func_end CountBadgesForOverworldWhiteOutLossCalculation
 
 	thumb_func_start sub_8054CA0
 sub_8054CA0: @ 8054CA0
@@ -749,7 +749,7 @@ warp_shift: @ 8055198
 	str r0, [r2, 0x4]
 	str r1, [r2, 0x8]
 	ldr r2, _080551D0 @ =gUnknown_2031DC4
-	ldr r0, _080551D4 @ =gUnknown_826D2B0
+	ldr r0, _080551D4 @ =sDummyWarpData
 	ldr r1, [r0, 0x4]
 	ldr r0, [r0]
 	str r0, [r2]
@@ -763,7 +763,7 @@ _080551C4: .4byte gUnknown_2031DB4
 _080551C8: .4byte gSaveBlock1Ptr
 _080551CC: .4byte gUnknown_2031DBC
 _080551D0: .4byte gUnknown_2031DC4
-_080551D4: .4byte gUnknown_826D2B0
+_080551D4: .4byte sDummyWarpData
 _080551D8: .4byte gUnknown_2031DCC
 	thumb_func_end warp_shift
 
@@ -1717,7 +1717,7 @@ sub_8055864: @ 8055864
 	bl sub_8055CB8
 	bl sav1_reset_battle_music_maybe
 	bl mapheader_run_script_with_tag_x3
-	bl sub_815D8F8
+	bl TryRegenerateRenewableHiddenItems
 	bl not_trainer_hill_battle_pyramid
 	ldr r4, _0805591C @ =gMapHeader
 	ldr r0, [r4]
@@ -1794,7 +1794,7 @@ _08055974:
 	bl sub_8055CB8
 	bl sav1_reset_battle_music_maybe
 	bl mapheader_run_script_with_tag_x3
-	bl sub_815D8F8
+	bl TryRegenerateRenewableHiddenItems
 	bl UpdateLocationHistoryForRoamer
 	bl RoamerMoveToOtherLocationSet
 	bl sub_8110920
@@ -6964,13 +6964,13 @@ sub_8058214: @ 8058214
 	thumb_func_start sub_8058230
 sub_8058230: @ 8058230
 	push {lr}
-	ldr r0, _08058240 @ =gUnknown_81BB9F0
+	ldr r0, _08058240 @ =EventScript_1BB9F0
 	bl ScriptContext1_SetupScript
 	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08058240: .4byte gUnknown_81BB9F0
+_08058240: .4byte EventScript_1BB9F0
 	thumb_func_end sub_8058230
 
 	thumb_func_start sub_8058244

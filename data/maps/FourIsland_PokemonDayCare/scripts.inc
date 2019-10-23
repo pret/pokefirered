@@ -4,19 +4,19 @@ FourIsland_PokemonDayCare_MapScripts:: @ 817193F
 FourIsland_PokemonDayCare_EventScript_171940:: @ 8171940
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if eq, EventScript_1A7AE0
 	lock
 	faceplayer
 	specialvar VAR_RESULT, GetDaycareState
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_171A2E
+	goto_if eq, EventScript_171A2E
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_171A52
+	goto_if eq, EventScript_171A52
 	compare_var_to_value VAR_RESULT, 3
-	goto_if_eq EventScript_171B86
+	goto_if eq, EventScript_171B86
 	msgbox gUnknown_81BF7E4, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_171993
+	goto_if eq, EventScript_171993
 	msgbox gUnknown_81BF916
 	release
 	end
@@ -24,16 +24,16 @@ FourIsland_PokemonDayCare_EventScript_171940:: @ 8171940
 EventScript_171993:: @ 8171993
 	specialvar VAR_RESULT, CountPartyNonEggMons
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_171A1A
+	goto_if eq, EventScript_171A1A
 	msgbox gUnknown_81BF839
 	fadescreen 1
 	special ChooseSendDaycareMon
 	waitstate
 	compare_var_to_value VAR_0x8004, 6
-	goto_if 4, EventScript_1719F7
+	goto_if ge, EventScript_1719F7
 	specialvar VAR_RESULT, CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_171A24
+	goto_if eq, EventScript_171A24
 	specialvar VAR_0x8005, GetSelectedMonNickAndSpecies
 	waitse
 	playmoncry VAR_0x8005, 0
@@ -43,7 +43,7 @@ EventScript_171993:: @ 8171993
 	incrementgamestat 47
 	specialvar VAR_RESULT, GetDaycareState
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_171A01
+	goto_if eq, EventScript_171A01
 	release
 	end
 
@@ -55,7 +55,7 @@ EventScript_1719F7:: @ 81719F7
 EventScript_171A01:: @ 8171A01
 	msgbox gUnknown_81BF89F, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_171993
+	goto_if eq, EventScript_171993
 	goto EventScript_1719F7
 	end
 
@@ -81,7 +81,7 @@ EventScript_171A38:: @ 8171A38
 EventScript_171A41:: @ 8171A41
 	specialvar VAR_RESULT, GetNumLevelsGainedFromDaycare
 	compare_var_to_value VAR_RESULT, 0
-	call_if 5, EventScript_171A38
+	call_if ne, EventScript_171A38
 	return
 
 EventScript_171A52:: @ 8171A52
@@ -90,26 +90,26 @@ EventScript_171A52:: @ 8171A52
 	call EventScript_171A41
 	msgbox gUnknown_81BF89F, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_171993
+	goto_if eq, EventScript_171993
 	msgbox gUnknown_81BFAE8, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_171A90
+	goto_if eq, EventScript_171A90
 	goto EventScript_1719F7
 	end
 
 EventScript_171A90:: @ 8171A90
 	specialvar VAR_RESULT, CalculatePlayerPartyCount
 	compare_var_to_value VAR_RESULT, 6
-	goto_if_eq EventScript_171B67
+	goto_if eq, EventScript_171B67
 	specialvar VAR_RESULT, GetDaycareState
 	setvar VAR_0x8004, 0
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_171ACF
+	goto_if eq, EventScript_171ACF
 	special ShowDaycareLevelMenu
 	waitstate
 	copyvar VAR_0x8004, VAR_RESULT
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1719F7
+	goto_if eq, EventScript_1719F7
 	goto EventScript_171ACF
 	end
 
@@ -117,14 +117,14 @@ EventScript_171ACF:: @ 8171ACF
 	special GetDaycareCost
 	msgbox gUnknown_81BFA3B, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_171AEB
+	goto_if eq, EventScript_171AEB
 	goto EventScript_1719F7
 	end
 
 EventScript_171AEB:: @ 8171AEB
 	specialvar VAR_RESULT, IsEnoughForCostInVar0x8005
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_171B05
+	goto_if eq, EventScript_171B05
 	msgbox gUnknown_81BF932
 	release
 	end
@@ -144,14 +144,14 @@ EventScript_171B05:: @ 8171B05
 	waitmoncry
 	specialvar VAR_RESULT, GetDaycareState
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_171B4E
+	goto_if eq, EventScript_171B4E
 	goto EventScript_1719F7
 	end
 
 EventScript_171B4E:: @ 8171B4E
 	msgbox gUnknown_81BF94F, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_171A90
+	goto_if eq, EventScript_171A90
 	goto EventScript_1719F7
 	end
 
@@ -193,7 +193,7 @@ EventScript_171B86:: @ 8171B86
 	call EventScript_171A41
 	msgbox gUnknown_81BFAE8, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_171A90
+	goto_if eq, EventScript_171A90
 	msgbox gUnknown_81BF976
 	release
 	end
@@ -202,7 +202,7 @@ EventScript_171BBF:: @ 8171BBF
 	special ShowDaycareLevelMenu
 	waitstate
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1719F7
+	goto_if eq, EventScript_1719F7
 	copyvar VAR_0x8004, VAR_RESULT
 	specialvar VAR_RESULT, TakePokemonFromDaycare
 	msgbox gUnknown_81BFA67

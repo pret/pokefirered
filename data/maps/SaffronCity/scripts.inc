@@ -4,8 +4,8 @@ SaffronCity_MapScripts:: @ 816735F
 
 SaffronCity_MapScript1_167365:: @ 8167365
 	setworldmapflag FLAG_WORLD_MAP_SAFFRON_CITY
-	checkflag FLAG_0x23C
-	call_if 0, EventScript_167372
+	checkflag FLAG_RESCUED_MR_FUJI
+	call_if FALSE, EventScript_167372
 	end
 
 EventScript_167372:: @ 8167372
@@ -42,8 +42,8 @@ SaffronCity_EventScript_1673B0:: @ 81673B0
 
 SaffronCity_EventScript_1673B9:: @ 81673B9
 	lock
-	checkflag FLAG_0x23C
-	goto_if_eq EventScript_1673D7
+	checkflag FLAG_RESCUED_MR_FUJI
+	goto_if TRUE, EventScript_1673D7
 	applymovement 6, Movement_1A75E1
 	waitmovement 0
 	msgbox gUnknown_81812CA
@@ -96,9 +96,7 @@ SaffronCity_EventScript_16742C:: @ 816742C
 
 SaffronCity_EventScript_167435:: @ 8167435
 	lockall
-	setvar VAR_0x8004, 7
-	setvar VAR_0x8005, 0
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_SABRINA, 0
 	msgbox gUnknown_8181362
 	releaseall
 	end

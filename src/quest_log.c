@@ -72,9 +72,9 @@ struct UnkStruct_203AE98
 
 struct UnkStruct_300201C
 {
-    u16 unk_0_0:15;
-    u16 unk_0_f:1;
-    u16 unk_2;
+    u16 idx:15;
+    u16 isFlag:1;
+    u16 value;
 };
 
 struct UnkStruct_203B044
@@ -85,30 +85,30 @@ struct UnkStruct_203B044
 };
 
 u8 gUnknown_3005E88;
-u16 gUnknown_3005E8C;
+u16 sNumQuestLogs;
 struct UnkStruct_3005E90 gUnknown_3005E90;
 struct UnkStruct_203AE98 * gUnknown_3005E94;
 
-static struct UnkStruct_300201C * gUnknown_300201C;
-static u16 gUnknown_3002020;
+static struct UnkStruct_300201C * sFlagOrVarRecords;
+static u16 sNumFlagsOrVars;
 
 static EWRAM_DATA u8 gUnknown_203ADF8 = 0;
 static EWRAM_DATA u8 sNumScenes = 0;
 EWRAM_DATA u8 gUnknown_203ADFA = 0;
 static EWRAM_DATA u16 gUnknown_203ADFC = 0;
 static EWRAM_DATA u8 gUnknown_203ADFE[3] = {0};
-static EWRAM_DATA u16 * gUnknown_203AE04 = NULL;
-static EWRAM_DATA u16 * gUnknown_203AE08 = NULL;
-static EWRAM_DATA u16 * gUnknown_203AE0C[32] = {NULL};
+static EWRAM_DATA u16 *gUnknown_203AE04 = NULL;
+static EWRAM_DATA u16 *gUnknown_203AE08 = NULL;
+static EWRAM_DATA u16 *gUnknown_203AE0C[32] = {NULL};
 static EWRAM_DATA void (* gUnknown_203AE8C)(void) = NULL;
 static EWRAM_DATA u16 *gUnknown_203AE90 = NULL;
 static EWRAM_DATA struct UnkStruct_203AE94 gUnknown_203AE94 = {0};
 static EWRAM_DATA struct UnkStruct_203AE98 gUnknown_203AE98[32] = {0};
-static EWRAM_DATA u16 gUnknown_203AF98 = 0;
+static EWRAM_DATA u16 sQuestLogIdx = 0;
 static EWRAM_DATA u8 gUnknown_203AF9A[64][2] = {{0}};
 static EWRAM_DATA u16 gUnknown_203B01A = 0;
 static EWRAM_DATA u16 gUnknown_203B01C = 0;
-static EWRAM_DATA u16 gUnknown_203B01E = 0;
+static EWRAM_DATA u16 sFlagOrVarPlayhead = 0;
 static EWRAM_DATA u8 sHelpMessageWindowId = 0;
 static EWRAM_DATA struct UnkStruct_203B024 gUnknown_203B024 = {0};
 static EWRAM_DATA struct UnkStruct_203B044 gUnknown_203B044 = {0};
@@ -129,9 +129,9 @@ static u8 sub_8110E68(struct UnkStruct_203AE98 *);
 static void sub_8110F90(u8);
 static void sub_8111150(u8);
 static void sub_8111368(void);
-static void sub_81115E8(void);
-static u16 sub_8111618(void);
-static u16 sub_811164C(void);
+static void QuestLog_GetSaneMonCounts(void);
+static u16 QuestLog_GetSanePartyCount(void);
+static u16 QuestLog_GetSaneBoxCount(void);
 static void sub_8111688(void);
 static void sub_811175C(u8, struct UnkStruct_203AE98 *);
 static void sub_81118F4(s8);
@@ -171,106 +171,106 @@ static void sub_8113524(struct Var4038Struct *);
 static bool8 sub_81136D4(void);
 static bool8 sub_8113778(u16, u16 *);
 static bool8 sub_81137E4(u16, u16 *);
-static u16 * sub_8113828(u16, u16 *);
+static u16 *sub_8113828(u16, u16 *);
 static bool8 sub_81138A0(u16, u16 *);
 static bool8 sub_8113954(u16, u16 *);
 static void sub_8113A1C(u16);
 static void sub_811381C(void);
 static bool8 sub_8113A44(u16, u16 *);
-static u16 * sub_8113A78(u16 *, u16 **);
+static u16 *sub_8113A78(u16 *, u16 **);
 static void sub_8113ABC(u16 *);
 static bool8 sub_8113AE8(u16 *);
 static bool8 sub_8113B44(u16 *);
 static void sub_8113B88(void);
 static void sub_8113B94(u16);
 static void sub_8113BD8(void);
-static u16 * sub_8113BF4(u16 *);
-static u16 * sub_8113C20(u16 *, struct UnkStruct_203AE98 *);
-static u16 * sub_8113C5C(u16 *, u16);
-static u16 * sub_8113C8C(u16 *, struct UnkStruct_203AE98 *);
-static u16 * sub_8113CC8(u16 *, struct UnkStruct_203AE98 *);
-static u16 * sub_8113D08(u16 *, struct UnkStruct_203AE98 *);
-static u16 * sub_8113D48(u16 *, struct UnkStruct_203AE98 *);
-static u16 * sub_8113D94(u16 *, struct UnkStruct_203AE98 *);
-static u16 * sub_8113F14(u16 *, const u16 *);
-static const u16 * sub_8113F3C(const u16 *);
-static u16 * sub_8113F80(u16 *, const u16 *);
-static const u16 * sub_8113FBC(const u16 *);
-static u16 * sub_8114174(u16 *, const u16 *);
-static const u16 * sub_8114188(const u16 *);
-static u16 * sub_81141D0(u16 *, const u16 *);
-static const u16 * sub_81141E4(const u16 *);
-static u16 * sub_811422C(u16 *, const u16 *);
-static const u16 * sub_8114240(const u16 *);
-static u16 * sub_8114288(u16 *, const u16 *);
-static const u16 * sub_811429C(const u16 *);
-static u16 * sub_8114310(u16 *, const u16 *);
-static const u16 * sub_8114324(const u16 *);
-static u16 * sub_8114380(u16 *, const u16 *);
-static const u16 * sub_8114394(const u16 *);
-static u16 * sub_81143F0(u16 *, const u16 *);
-static const u16 * sub_811443C(const u16 *);
-static u16 * sub_811445C(u16 *, const u16 *);
-static const u16 * sub_811448C(const u16 *);
-static u16 * sub_81144EC(u16 *, const u16 *);
-static const u16 * sub_8114518(const u16 *);
-static u16 * sub_8114578(u16 *, const u16 *);
-static const u16 * sub_81145A4(const u16 *);
-static u16 * sub_8114604(u16 *, const u16 *);
-static const u16 * sub_811464C(const u16 *);
-static u16 * sub_8114710(u16 *, const u16 *);
-static const u16 * sub_8114724(const u16 *);
-static u16 * sub_8114744(u16 *, const u16 *);
-static const u16 * sub_8114758(const u16 *);
-static u16 * sub_8114778(u16 *, const u16 *);
-static const u16 * sub_81147A8(const u16 *);
-static u16 * sub_8114808(u16 *, const u16 *);
-static const u16 * sub_8114834(const u16 *);
-static u16 * sub_811488C(u16 *, const u16 *);
-static const u16 * sub_81148BC(const u16 *);
-static u16 * sub_8114918(u16 *, const u16 *);
-static const u16 * sub_8114944(const u16 *);
-static u16 * sub_8114990(u16 *, const u16 *);
-static const u16 * sub_81149D0(const u16 *);
-static u16 * sub_8114A1C(u16 *, const u16 *);
-static const u16 * sub_8114A4C(const u16 *);
-static u16 * sub_8114AA0(u16 *, const u16 *);
-static const u16 * sub_8114AC8(const u16 *);
-static u16 * sub_8114B0C(u16 *, const u16 *);
-static const u16 * sub_8114B34(const u16 *);
-static u16 * sub_8114B78(u16 *, const u16 *);
-static const u16 * sub_8114BA0(const u16 *);
-static u16 * sub_8114BE4(u16 *, const u16 *);
-static const u16 * sub_8114C0C(const u16 *);
-static u16 * sub_8114C68(u16 *, const u16 *);
-static const u16 * sub_8114C8C(const u16 *);
-static u16 * sub_8114CC0(u16 *, const u16 *);
-static const u16 * sub_8114CE4(const u16 *);
-static u16 * sub_8114D4C(u16 *, const u16 *);
-static const u16 * sub_8114D68(const u16 *);
-static u16 * sub_8114DE8(u16 *, const u16 *);
-static const u16 * sub_8114E68(const u16 *);
+static u16 *sub_8113BF4(u16 *);
+static u16 *sub_8113C20(u16 *, struct UnkStruct_203AE98 *);
+static u16 *sub_8113C5C(u16 *, u16);
+static u16 *sub_8113C8C(u16 *, struct UnkStruct_203AE98 *);
+static u16 *sub_8113CC8(u16 *, struct UnkStruct_203AE98 *);
+static u16 *sub_8113D08(u16 *, struct UnkStruct_203AE98 *);
+static u16 *sub_8113D48(u16 *, struct UnkStruct_203AE98 *);
+static u16 *sub_8113D94(u16 *, struct UnkStruct_203AE98 *);
+static u16 *sub_8113F14(u16 *, const u16 *);
+static const u16 *sub_8113F3C(const u16 *);
+static u16 *sub_8113F80(u16 *, const u16 *);
+static const u16 *sub_8113FBC(const u16 *);
+static u16 *sub_8114174(u16 *, const u16 *);
+static const u16 *sub_8114188(const u16 *);
+static u16 *sub_81141D0(u16 *, const u16 *);
+static const u16 *sub_81141E4(const u16 *);
+static u16 *sub_811422C(u16 *, const u16 *);
+static const u16 *sub_8114240(const u16 *);
+static u16 *sub_8114288(u16 *, const u16 *);
+static const u16 *sub_811429C(const u16 *);
+static u16 *sub_8114310(u16 *, const u16 *);
+static const u16 *sub_8114324(const u16 *);
+static u16 *sub_8114380(u16 *, const u16 *);
+static const u16 *sub_8114394(const u16 *);
+static u16 *sub_81143F0(u16 *, const u16 *);
+static const u16 *sub_811443C(const u16 *);
+static u16 *sub_811445C(u16 *, const u16 *);
+static const u16 *sub_811448C(const u16 *);
+static u16 *sub_81144EC(u16 *, const u16 *);
+static const u16 *sub_8114518(const u16 *);
+static u16 *sub_8114578(u16 *, const u16 *);
+static const u16 *sub_81145A4(const u16 *);
+static u16 *sub_8114604(u16 *, const u16 *);
+static const u16 *sub_811464C(const u16 *);
+static u16 *sub_8114710(u16 *, const u16 *);
+static const u16 *sub_8114724(const u16 *);
+static u16 *sub_8114744(u16 *, const u16 *);
+static const u16 *sub_8114758(const u16 *);
+static u16 *sub_8114778(u16 *, const u16 *);
+static const u16 *sub_81147A8(const u16 *);
+static u16 *sub_8114808(u16 *, const u16 *);
+static const u16 *sub_8114834(const u16 *);
+static u16 *sub_811488C(u16 *, const u16 *);
+static const u16 *sub_81148BC(const u16 *);
+static u16 *sub_8114918(u16 *, const u16 *);
+static const u16 *sub_8114944(const u16 *);
+static u16 *sub_8114990(u16 *, const u16 *);
+static const u16 *sub_81149D0(const u16 *);
+static u16 *sub_8114A1C(u16 *, const u16 *);
+static const u16 *sub_8114A4C(const u16 *);
+static u16 *sub_8114AA0(u16 *, const u16 *);
+static const u16 *sub_8114AC8(const u16 *);
+static u16 *sub_8114B0C(u16 *, const u16 *);
+static const u16 *sub_8114B34(const u16 *);
+static u16 *sub_8114B78(u16 *, const u16 *);
+static const u16 *sub_8114BA0(const u16 *);
+static u16 *sub_8114BE4(u16 *, const u16 *);
+static const u16 *sub_8114C0C(const u16 *);
+static u16 *sub_8114C68(u16 *, const u16 *);
+static const u16 *sub_8114C8C(const u16 *);
+static u16 *sub_8114CC0(u16 *, const u16 *);
+static const u16 *sub_8114CE4(const u16 *);
+static u16 *sub_8114D4C(u16 *, const u16 *);
+static const u16 *sub_8114D68(const u16 *);
+static u16 *sub_8114DE8(u16 *, const u16 *);
+static const u16 *sub_8114E68(const u16 *);
 static bool8 sub_8114FBC(u16);
-static u16 * sub_8114FF0(u16 *, const u16 *);
-static const u16 * sub_811500C(const u16 *);
-static u16 * sub_8115078(u16 *, const u16 *);
-static const u16 * sub_81150CC(const u16 *);
-static u16 * sub_81151C0(u16 *, const u16 *);
-static const u16 * sub_81151DC(const u16 *);
-static u16 * sub_8115280(u16 *, const u16 *);
-static const u16 * sub_81152BC(const u16 *);
+static u16 *sub_8114FF0(u16 *, const u16 *);
+static const u16 *sub_811500C(const u16 *);
+static u16 *sub_8115078(u16 *, const u16 *);
+static const u16 *sub_81150CC(const u16 *);
+static u16 *sub_81151C0(u16 *, const u16 *);
+static const u16 *sub_81151DC(const u16 *);
+static u16 *sub_8115280(u16 *, const u16 *);
+static const u16 *sub_81152BC(const u16 *);
 static bool8 sub_81153A8(u16, u16 *);
 static bool8 sub_81153E4(u16, u16 *);
-static u16 * sub_8115410(u16 *, const u16 *);
-static const u16 * sub_8115460(const u16 *);
-static u16 * sub_81154DC(u16 *, const u16 *);
-static const u16 * sub_8115518(const u16 *);
-static u16 * sub_81155A4(u16 *, const u16 *);
-static const u16 * sub_81155E0(const u16 *);
-static u16 * sub_81156D8(u16 *, const u16 *);
-static const u16 * sub_8115700(const u16 *);
-static u16 * sub_81157DC(u16 *, const u16 *);
-static const u16 * sub_8115800(const u16 *);
+static u16 *sub_8115410(u16 *, const u16 *);
+static const u16 *sub_8115460(const u16 *);
+static u16 *sub_81154DC(u16 *, const u16 *);
+static const u16 *sub_8115518(const u16 *);
+static u16 *sub_81155A4(u16 *, const u16 *);
+static const u16 *sub_81155E0(const u16 *);
+static u16 *sub_81156D8(u16 *, const u16 *);
+static const u16 *sub_8115700(const u16 *);
+static u16 *sub_81157DC(u16 *, const u16 *);
+static const u16 *sub_8115800(const u16 *);
 void sub_8115834(u8 *);
 
 extern const u8 gUnknown_841A155[];
@@ -364,40 +364,40 @@ extern const u8 gUnknown_841B005[];
 extern const u8 gUnknown_841B03F[];
 extern const u8 gUnknown_841B064[];
 extern const u8 gUnknown_841B073[];
-extern const u8 gUnknown_841B09F[];
-extern const u8 gUnknown_841B0A4[];
-extern const u8 gUnknown_841B0B5[];
-extern const u8 gUnknown_841B0B9[];
-extern const u8 gUnknown_841B0CD[];
-extern const u8 gUnknown_841B0DD[];
-extern const u8 gUnknown_841B0F6[];
-extern const u8 gUnknown_841B0FF[];
-extern const u8 gUnknown_841B109[];
-extern const u8 gUnknown_841B116[];
-extern const u8 gUnknown_841B11F[];
-extern const u8 gUnknown_841B130[];
-extern const u8 gUnknown_841B141[];
-extern const u8 gUnknown_841B14B[];
-extern const u8 gUnknown_841B15A[];
-extern const u8 gUnknown_841B166[];
-extern const u8 gUnknown_841B172[];
-extern const u8 gUnknown_841B180[];
-extern const u8 gUnknown_841B190[];
-extern const u8 gUnknown_841B1A3[];
-extern const u8 gUnknown_841B1B7[];
-extern const u8 gUnknown_841B1C7[];
-extern const u8 gUnknown_841B1DA[];
-extern const u8 gUnknown_841B1E5[];
-extern const u8 gUnknown_841B1F4[];
-extern const u8 gUnknown_841B200[];
-extern const u8 gUnknown_841B20E[];
-extern const u8 gUnknown_841B21C[];
-extern const u8 gUnknown_841B226[];
-extern const u8 gUnknown_841B236[];
-extern const u8 gUnknown_841B246[];
-extern const u8 gUnknown_841B25B[];
-extern const u8 gUnknown_841B268[];
-extern const u8 gUnknown_841B277[];
+extern const u8 gQuestLogString_Home[];
+extern const u8 gQuestLogString_OakResearchLab[];
+extern const u8 gQuestLogString_Gym[];
+extern const u8 gQuestLogString_PokemonLeagueGate[];
+extern const u8 gQuestLogString_ViridianForest[];
+extern const u8 gQuestLogString_PewterMuseumOfScience[];
+extern const u8 gQuestLogString_MtMoon[];
+extern const u8 gQuestLogString_BikeShop[];
+extern const u8 gQuestLogString_BillSHouse[];
+extern const u8 gQuestLogString_DayCare[];
+extern const u8 gQuestLogString_UndergroundPath[];
+extern const u8 gQuestLogString_PokemonFanClub[];
+extern const u8 gQuestLogString_SSAnne[];
+extern const u8 gQuestLogString_DiglettSCave[];
+extern const u8 gQuestLogString_RockTunnel[];
+extern const u8 gQuestLogString_PowerPlant[];
+extern const u8 gQuestLogString_PokemonTower[];
+extern const u8 gQuestLogString_VolunteerHouse[];
+extern const u8 gQuestLogString_NameRaterSHouse[];
+extern const u8 gQuestLogString_CeladonDeptStore[];
+extern const u8 gQuestLogString_CeladonMansion[];
+extern const u8 gQuestLogString_RocketGameCorner[];
+extern const u8 gQuestLogString_Restaurant[];
+extern const u8 gQuestLogString_RocketHideout[];
+extern const u8 gQuestLogString_SafariZone[];
+extern const u8 gQuestLogString_WardenSHome[];
+extern const u8 gQuestLogString_FightingDojo[];
+extern const u8 gQuestLogString_SilphCo[];
+extern const u8 gQuestLogString_SeafoamIslands[];
+extern const u8 gQuestLogString_PokemonMansion[];
+extern const u8 gQuestLogString_PokemonResearchLab[];
+extern const u8 gQuestLogString_VictoryRoad[];
+extern const u8 gQuestLogString_PokemonLeague[];
+extern const u8 gQuestLogString_CeruleanCave[];
 extern const u8 gUnknown_8418C1B[];
 
 
@@ -471,7 +471,7 @@ bool8 sub_8110944(const void * a0, size_t a1)
     return TRUE;
 }
 
-bool8 sub_8110988(u16 * a0, size_t a1)
+bool8 sub_8110988(u16 *a0, size_t a1)
 {
     void * r2 = gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_568;
     void * r0 = gSaveBlock1Ptr->questLog[gUnknown_203ADF8].end;
@@ -541,7 +541,7 @@ void sub_8110AEC(u16 a0)
         gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_000 = 2;
     else
         gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_000 = 1;
-    sub_81115E8();
+    QuestLog_GetSaneMonCounts();
     sub_8110BB0(gUnknown_203ADF8);
     sub_8110BE8(gUnknown_203ADF8);
     sub_8110D94();
@@ -807,7 +807,7 @@ static bool8 sub_8110E68(struct UnkStruct_203AE98 * a0)
 {
     u16 i;
 
-    for (i = gUnknown_203ADFC; i < gUnknown_203AF98; i++)
+    for (i = gUnknown_203ADFC; i < sQuestLogIdx; i++)
     {
         if (gUnknown_203AE08 == NULL)
             return FALSE;
@@ -833,7 +833,7 @@ static bool8 sub_8110E68(struct UnkStruct_203AE98 * a0)
         gUnknown_203AE08 = sub_8113BF4(gUnknown_203AE08);
         return FALSE;
     }
-    gUnknown_203ADFC = gUnknown_203AF98;
+    gUnknown_203ADFC = sQuestLogIdx;
     return TRUE;
 }
 
@@ -982,7 +982,7 @@ void sub_8111274(u8 a0, u8 a1)
 static void sub_8111368(void)
 {
     gUnknown_203ADFA = 2;
-    sub_806E6FC();
+    ResetSpecialVars();
     ClearBag();
     ClearPCItemSlots();
     if (sub_8110AC8() == 1)
@@ -1012,8 +1012,8 @@ void sub_81113E4(void)
 struct PokemonAndSomethingElse
 {
     struct Pokemon mon;
-    u16 unk_64;
-    u16 unk_66;
+    u16 sanePartyCount;
+    u16 saneBoxesCount;
 };
 
 void sub_8111438(void)
@@ -1022,32 +1022,32 @@ void sub_8111438(void)
     u16 r0, r3, r5, r6;
 
     CreateMon(&r9->mon, SPECIES_RATTATA, 1, 0x20, FALSE, 0, 0, 0);
-    r0 = VarGet(VAR_0x4027);
-    r9->unk_64 = r0 >> 12;
-    r9->unk_66 = r0 % 0x1000;
+    r0 = VarGet(VAR_QUEST_LOG_MON_COUNTS);
+    r9->sanePartyCount = r0 >> 12;
+    r9->saneBoxesCount = r0 % 0x1000;
 
-    r5 = sub_8111618();
-    if (r5 > r9->unk_64)
+    r5 = QuestLog_GetSanePartyCount();
+    if (r5 > r9->sanePartyCount)
     {
-        for (r3 = 0; r3 < r5 - r9->unk_64; r3++)
+        for (r3 = 0; r3 < r5 - r9->sanePartyCount; r3++)
         {
             ZeroMonData(&gPlayerParty[5 - r3]);
         }
     }
-    else if (r5 < r9->unk_64)
+    else if (r5 < r9->sanePartyCount)
     {
         for (r3 = 0; r3 < 5; r3++)
         {
             sub_808BCB4(0, r3);
         }
-        for (r3 = r5; r3 < r9->unk_64; r3++)
+        for (r3 = r5; r3 < r9->sanePartyCount; r3++)
         {
             CopyMon(&gPlayerParty[r3], &r9->mon, sizeof(struct Pokemon));
         }
     }
 
-    r5 = sub_811164C();
-    if (r5 > r9->unk_66)
+    r5 = QuestLog_GetSaneBoxCount();
+    if (r5 > r9->saneBoxesCount)
     {
         for (r3 = 0; r3 < 14; r3++)
         {
@@ -1057,15 +1057,15 @@ void sub_8111438(void)
                 {
                     sub_808BCB4(r3, r6);
                     r5--;
-                    if (r5 == r9->unk_66)
+                    if (r5 == r9->saneBoxesCount)
                         break;
                 }
             }
-            if (r5 == r9->unk_66)
+            if (r5 == r9->saneBoxesCount)
                 break;
         }
     }
-    else if (r5 < r9->unk_66)
+    else if (r5 < r9->saneBoxesCount)
     {
         for (r3 = 0; r3 < TOTAL_BOXES_COUNT; r3++)
         {
@@ -1076,11 +1076,11 @@ void sub_8111438(void)
                 {
                     CopyMon(boxMon, &r9->mon.box, sizeof(struct BoxPokemon));
                     r5++;
-                    if (r5 == r9->unk_66)
+                    if (r5 == r9->saneBoxesCount)
                         break;
                 }
             }
-            if (r5 == r9->unk_66)
+            if (r5 == r9->saneBoxesCount)
                 break;
         }
     }
@@ -1088,14 +1088,14 @@ void sub_8111438(void)
     Free(r9);
 }
 
-static void sub_81115E8(void)
+static void QuestLog_GetSaneMonCounts(void)
 {
-    u16 r4 = sub_8111618();
-    u16 r1 = sub_811164C();
-    VarSet(VAR_0x4027, (r4 << 12) + r1);
+    u16 partyCount = QuestLog_GetSanePartyCount();
+    u16 boxesCount = QuestLog_GetSaneBoxCount();
+    VarSet(VAR_QUEST_LOG_MON_COUNTS, (partyCount << 12) + boxesCount);
 }
 
-static u16 sub_8111618(void)
+static u16 QuestLog_GetSanePartyCount(void)
 {
     u16 count = 0;
     u16 i;
@@ -1109,7 +1109,7 @@ static u16 sub_8111618(void)
     return count;
 }
 
-static u16 sub_811164C(void)
+static u16 QuestLog_GetSaneBoxCount(void)
 {
     u16 count = 0;
     u16 i, j;
@@ -1231,7 +1231,7 @@ static void sub_8111914(void)
 
 static void sub_8111984(void)
 {
-    sub_806E6FC();
+    ResetSpecialVars();
     Save_ResetSaveCounters();
     Save_LoadGameData(0);
     SetMainCallback2(sub_8057430);
@@ -1269,7 +1269,7 @@ bool8 sub_81119D4(void (*a0)(void))
 static void sub_8111A34(u8 taskId)
 {
     void (*routine)(void);
-    s16 * data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
 
     switch (data[1])
     {
@@ -1421,8 +1421,8 @@ static void sub_8111D10(void)
 
 static void sub_8111D90(u8 a0)
 {
-    const u16 * src = gUnknown_8456638;
-    u16 * buffer = Alloc(0x1680);
+    const u16 *src = gUnknown_8456638;
+    u16 *buffer = Alloc(0x1680);
     u8 i, j, y;
 
     if (buffer)
@@ -1558,7 +1558,7 @@ static void sub_8112044(u8 taskId)
 
 static void sub_81120AC(u8 taskId)
 {
-    s16 * data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
     u8 i;
 
     switch (data[0])
@@ -1608,7 +1608,7 @@ static void sub_81120AC(u8 taskId)
 
 static bool8 sub_81121D8(u8 taskId)
 {
-    s16 * data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
 
     if (data[1] > 15)
         return TRUE;
@@ -1625,7 +1625,7 @@ static bool8 sub_81121D8(u8 taskId)
 
 static void sub_811229C(void)
 {
-    u16 * buffer = Alloc(0x400);
+    u16 *buffer = Alloc(0x400);
     CpuCopy16(gUnknown_203AE90, buffer, 0x400);
     sub_807B0C4(gUnknown_203AE90, gUnknown_203AE90, 0xd0);
     sub_807B0C4(gUnknown_203AE90 + 0x110, gUnknown_203AE90 + 0x110, 0x10);
@@ -1728,13 +1728,13 @@ void sub_81124EC(u8 a0, u8 a1, u8 a2, u8 a3)
 {
     if (!sub_8112CEC())
     {
-        gUnknown_3005E94[gUnknown_203AF98].unk_4 = gUnknown_203B01A;
-        gUnknown_3005E94[gUnknown_203AF98].unk_6 = 0;
-        gUnknown_3005E94[gUnknown_203AF98].unk_0 = a0;
-        gUnknown_3005E94[gUnknown_203AF98].unk_1 = a1;
-        gUnknown_3005E94[gUnknown_203AF98].unk_2 = a2;
-        gUnknown_3005E94[gUnknown_203AF98].unk_3 = a3;
-        gUnknown_203AF98++;
+        gUnknown_3005E94[sQuestLogIdx].unk_4 = gUnknown_203B01A;
+        gUnknown_3005E94[sQuestLogIdx].unk_6 = 0;
+        gUnknown_3005E94[sQuestLogIdx].unk_0 = a0;
+        gUnknown_3005E94[sQuestLogIdx].unk_1 = a1;
+        gUnknown_3005E94[sQuestLogIdx].unk_2 = a2;
+        gUnknown_3005E94[sQuestLogIdx].unk_3 = a3;
+        sQuestLogIdx++;
         gUnknown_203B01A = 0;
     }
 }
@@ -1743,13 +1743,13 @@ void sub_8112588(u8 a0, u8 a1, u8 a2, u8 a3, u8 a4)
 {
     if (!sub_8112D1C())
     {
-        gUnknown_3005E94[gUnknown_203AF98].unk_4 = gUnknown_203B01A;
-        gUnknown_3005E94[gUnknown_203AF98].unk_6 = 0;
-        gUnknown_3005E94[gUnknown_203AF98].unk_0 = a0;
-        gUnknown_3005E94[gUnknown_203AF98].unk_1 = a1;
-        gUnknown_3005E94[gUnknown_203AF98].unk_2 = a2;
-        gUnknown_3005E94[gUnknown_203AF98].unk_3 = a3;
-        gUnknown_203AF98++;
+        gUnknown_3005E94[sQuestLogIdx].unk_4 = gUnknown_203B01A;
+        gUnknown_3005E94[sQuestLogIdx].unk_6 = 0;
+        gUnknown_3005E94[sQuestLogIdx].unk_0 = a0;
+        gUnknown_3005E94[sQuestLogIdx].unk_1 = a1;
+        gUnknown_3005E94[sQuestLogIdx].unk_2 = a2;
+        gUnknown_3005E94[sQuestLogIdx].unk_3 = a3;
+        sQuestLogIdx++;
         gUnknown_203B01A = a4;
     }
 }
@@ -1760,12 +1760,12 @@ void sub_8112628(u8 a0)
     {
         if (a0 != gUnknown_3005E94[gUnknown_203B01C].unk_3 || a0 > 3)
         {
-            gUnknown_3005E94[gUnknown_203AF98].unk_4 = gUnknown_203B01A;
-            gUnknown_3005E94[gUnknown_203AF98].unk_6 = 0;
-            gUnknown_3005E94[gUnknown_203AF98].unk_0 = 0;
-            gUnknown_3005E94[gUnknown_203AF98].unk_3 = a0;
-            gUnknown_203B01C = gUnknown_203AF98;
-            gUnknown_203AF98++;
+            gUnknown_3005E94[sQuestLogIdx].unk_4 = gUnknown_203B01A;
+            gUnknown_3005E94[sQuestLogIdx].unk_6 = 0;
+            gUnknown_3005E94[sQuestLogIdx].unk_0 = 0;
+            gUnknown_3005E94[sQuestLogIdx].unk_3 = a0;
+            gUnknown_203B01C = sQuestLogIdx;
+            sQuestLogIdx++;
             gUnknown_203B01A = 0;
         }
     }
@@ -1775,12 +1775,12 @@ void sub_81126AC(u8 a0, u8 a1)
 {
     if (!sub_8112D1C())
     {
-        gUnknown_3005E94[gUnknown_203AF98].unk_4 = gUnknown_203B01A;
-        gUnknown_3005E94[gUnknown_203AF98].unk_6 = 0;
-        gUnknown_3005E94[gUnknown_203AF98].unk_0 = 0;
-        gUnknown_3005E94[gUnknown_203AF98].unk_3 = a0;
-        gUnknown_203B01C = gUnknown_203AF98;
-        gUnknown_203AF98++;
+        gUnknown_3005E94[sQuestLogIdx].unk_4 = gUnknown_203B01A;
+        gUnknown_3005E94[sQuestLogIdx].unk_6 = 0;
+        gUnknown_3005E94[sQuestLogIdx].unk_0 = 0;
+        gUnknown_3005E94[sQuestLogIdx].unk_3 = a0;
+        gUnknown_203B01C = sQuestLogIdx;
+        sQuestLogIdx++;
         gUnknown_203B01A = a1;
     }
 }
@@ -1789,11 +1789,11 @@ void sub_8112720(u8 a0)
 {
     if (!sub_8112D1C())
     {
-        gUnknown_3005E94[gUnknown_203AF98].unk_4 = gUnknown_203B01A;
-        gUnknown_3005E94[gUnknown_203AF98].unk_6 = 1;
-        gUnknown_3005E94[gUnknown_203AF98].unk_0 = 0;
-        gUnknown_3005E94[gUnknown_203AF98].unk_3 = a0;
-        gUnknown_203AF98++;
+        gUnknown_3005E94[sQuestLogIdx].unk_4 = gUnknown_203B01A;
+        gUnknown_3005E94[sQuestLogIdx].unk_6 = 1;
+        gUnknown_3005E94[sQuestLogIdx].unk_0 = 0;
+        gUnknown_3005E94[sQuestLogIdx].unk_3 = a0;
+        sQuestLogIdx++;
         gUnknown_203B01A = 0;
     }
 }
@@ -1802,27 +1802,27 @@ void sub_811278C(u8 a0, u8 a1)
 {
     if (!sub_8112D1C())
     {
-        gUnknown_3005E94[gUnknown_203AF98].unk_4 = gUnknown_203B01A;
-        gUnknown_3005E94[gUnknown_203AF98].unk_6 = 1;
-        gUnknown_3005E94[gUnknown_203AF98].unk_0 = 0;
-        gUnknown_3005E94[gUnknown_203AF98].unk_3 = a0;
-        gUnknown_203AF98++;
+        gUnknown_3005E94[sQuestLogIdx].unk_4 = gUnknown_203B01A;
+        gUnknown_3005E94[sQuestLogIdx].unk_6 = 1;
+        gUnknown_3005E94[sQuestLogIdx].unk_0 = 0;
+        gUnknown_3005E94[sQuestLogIdx].unk_3 = a0;
+        sQuestLogIdx++;
         gUnknown_203B01A = a1;
     }
 }
 
 void sub_81127F8(struct UnkStruct_3005E90 * a0)
 {
-    if (gUnknown_203AF98 < gUnknown_3005E8C)
+    if (sQuestLogIdx < sNumQuestLogs)
     {
         u32 r2 = *(u32 *)a0 & 0x00FF00F3;
-        gUnknown_3005E94[gUnknown_203AF98].unk_4 = gUnknown_203B01A;
-        gUnknown_3005E94[gUnknown_203AF98].unk_6 = 2;
-        gUnknown_3005E94[gUnknown_203AF98].unk_0 = r2;
-        gUnknown_3005E94[gUnknown_203AF98].unk_1 = r2 >> 8;
-        gUnknown_3005E94[gUnknown_203AF98].unk_2 = r2 >> 16;
-        gUnknown_3005E94[gUnknown_203AF98].unk_3 = r2 >> 24;
-        gUnknown_203AF98++;
+        gUnknown_3005E94[sQuestLogIdx].unk_4 = gUnknown_203B01A;
+        gUnknown_3005E94[sQuestLogIdx].unk_6 = 2;
+        gUnknown_3005E94[sQuestLogIdx].unk_0 = r2;
+        gUnknown_3005E94[sQuestLogIdx].unk_1 = r2 >> 8;
+        gUnknown_3005E94[sQuestLogIdx].unk_2 = r2 >> 16;
+        gUnknown_3005E94[sQuestLogIdx].unk_3 = r2 >> 24;
+        sQuestLogIdx++;
         if (ScriptContext2_IsEnabled())
             gUnknown_203B01A = TRUE;
         else
@@ -1856,9 +1856,9 @@ void sub_81128BC(u8 a0)
                 gUnknown_3005E88 = 3;
             else if (r1 == 2)
             {
-                gUnknown_3005E94[gUnknown_203AF98].unk_4 = gUnknown_203B01A;
-                gUnknown_3005E94[gUnknown_203AF98].unk_6 = 3;
-                gUnknown_203AF98++;
+                gUnknown_3005E94[sQuestLogIdx].unk_4 = gUnknown_203B01A;
+                gUnknown_3005E94[sQuestLogIdx].unk_6 = 3;
+                sQuestLogIdx++;
                 gUnknown_203B01A = 0;
                 gUnknown_3005E88 = 4;
             }
@@ -1883,57 +1883,57 @@ static void sub_8112940(u8 a0, struct UnkStruct_203AE98 *a1, u16 a2)
             break;
         case 1:
             gUnknown_3005E94 = a1;
-            gUnknown_3005E8C = a2 / 8;
+            sNumQuestLogs = a2 / 8;
             for (i = 0; i < 0x40; i++)
             {
                 gUnknown_203AF9A[i][0] |= 0xFF;
                 gUnknown_203AF9A[i][1] |= 0xFF;
             }
-            gUnknown_203AF98 = 0;
+            sQuestLogIdx = 0;
             gUnknown_203B01C = 0;
             gUnknown_3005E90 = (struct UnkStruct_3005E90){};
-            gUnknown_203B01A = gUnknown_3005E94[gUnknown_203AF98].unk_4;
-            gUnknown_203AF9A[0][0] = gUnknown_3005E94[gUnknown_203AF98].unk_3;
+            gUnknown_203B01A = gUnknown_3005E94[sQuestLogIdx].unk_4;
+            gUnknown_203AF9A[0][0] = gUnknown_3005E94[sQuestLogIdx].unk_3;
             gUnknown_203AF9A[0][1] = 0xFF;
             gUnknown_3005E88 = 1;
             break;
         case 2:
             gUnknown_3005E94 = a1;
-            gUnknown_3005E8C = a2 / 8;
-            for (i = 0; i < gUnknown_3005E8C; i++)
+            sNumQuestLogs = a2 / 8;
+            for (i = 0; i < sNumQuestLogs; i++)
             {
                 gUnknown_3005E94[i] = (struct UnkStruct_203AE98){ 0, 0, 0, 0, 0xFFFF, 0xFF };
             }
-            gUnknown_203AF98 = 0;
+            sQuestLogIdx = 0;
             gUnknown_203B01A = 0;
-            gUnknown_3005E94[gUnknown_203AF98].unk_4 = 0;
-            gUnknown_3005E94[gUnknown_203AF98].unk_6 = 0;
-            gUnknown_3005E94[gUnknown_203AF98].unk_0 = 0;
+            gUnknown_3005E94[sQuestLogIdx].unk_4 = 0;
+            gUnknown_3005E94[sQuestLogIdx].unk_6 = 0;
+            gUnknown_3005E94[sQuestLogIdx].unk_0 = 0;
             switch (GetPlayerFacingDirection())
             {
                 case 0:
                 case 1:
-                    gUnknown_3005E94[gUnknown_203AF98].unk_3 = 0;
+                    gUnknown_3005E94[sQuestLogIdx].unk_3 = 0;
                     break;
                 case 4:
-                    gUnknown_3005E94[gUnknown_203AF98].unk_3 = 3;
+                    gUnknown_3005E94[sQuestLogIdx].unk_3 = 3;
                     break;
                 case 2:
-                    gUnknown_3005E94[gUnknown_203AF98].unk_3 = 1;
+                    gUnknown_3005E94[sQuestLogIdx].unk_3 = 1;
                     break;
                 case 3:
-                    gUnknown_3005E94[gUnknown_203AF98].unk_3 = 2;
+                    gUnknown_3005E94[sQuestLogIdx].unk_3 = 2;
                     break;
             }
             gUnknown_203B01C = 0;
-            gUnknown_203AF98++;
-            gUnknown_3005E94[gUnknown_203AF98].unk_4 = 0;
-            gUnknown_3005E94[gUnknown_203AF98].unk_6 = 2;
-            gUnknown_3005E94[gUnknown_203AF98].unk_0 = 0;
-            gUnknown_3005E94[gUnknown_203AF98].unk_1 = 0;
-            gUnknown_3005E94[gUnknown_203AF98].unk_2 = 0;
-            gUnknown_3005E94[gUnknown_203AF98].unk_3 = 0;
-            gUnknown_203AF98++;
+            sQuestLogIdx++;
+            gUnknown_3005E94[sQuestLogIdx].unk_4 = 0;
+            gUnknown_3005E94[sQuestLogIdx].unk_6 = 2;
+            gUnknown_3005E94[sQuestLogIdx].unk_0 = 0;
+            gUnknown_3005E94[sQuestLogIdx].unk_1 = 0;
+            gUnknown_3005E94[sQuestLogIdx].unk_2 = 0;
+            gUnknown_3005E94[sQuestLogIdx].unk_3 = 0;
+            sQuestLogIdx++;
             gUnknown_3005E88 = 2;
             break;
     }
@@ -1955,16 +1955,16 @@ void sub_8112B3C(void)
                 {
                     while (1)
                     {
-                        switch (gUnknown_3005E94[gUnknown_203AF98].unk_6)
+                        switch (gUnknown_3005E94[sQuestLogIdx].unk_6)
                         {
                             case 0:
-                                gUnknown_203AF9A[gUnknown_3005E94[gUnknown_203AF98].unk_0][0] = gUnknown_3005E94[gUnknown_203AF98].unk_3;
+                                gUnknown_203AF9A[gUnknown_3005E94[sQuestLogIdx].unk_0][0] = gUnknown_3005E94[sQuestLogIdx].unk_3;
                                 break;
                             case 1:
-                                gUnknown_203AF9A[gUnknown_3005E94[gUnknown_203AF98].unk_0][1] = gUnknown_3005E94[gUnknown_203AF98].unk_3;
+                                gUnknown_203AF9A[gUnknown_3005E94[sQuestLogIdx].unk_0][1] = gUnknown_3005E94[sQuestLogIdx].unk_3;
                                 break;
                             case 2:
-                                *(u32 *)&gUnknown_3005E90 = ((gUnknown_3005E94[gUnknown_203AF98].unk_3 << 24) | (gUnknown_3005E94[gUnknown_203AF98].unk_2 << 16) | (gUnknown_3005E94[gUnknown_203AF98].unk_1 << 8) | (gUnknown_3005E94[gUnknown_203AF98].unk_0 << 0));
+                                *(u32 *)&gUnknown_3005E90 = ((gUnknown_3005E94[sQuestLogIdx].unk_3 << 24) | (gUnknown_3005E94[sQuestLogIdx].unk_2 << 16) | (gUnknown_3005E94[sQuestLogIdx].unk_1 << 8) | (gUnknown_3005E94[sQuestLogIdx].unk_0 << 0));
                                 break;
                             case 3:
                                 gUnknown_3005E88 = 3;
@@ -1977,12 +1977,12 @@ void sub_8112B3C(void)
                         }
                         if (gUnknown_3005E88 == 0)
                             break;
-                        if (++gUnknown_203AF98 >= gUnknown_3005E8C)
+                        if (++sQuestLogIdx >= sNumQuestLogs)
                         {
                             gUnknown_3005E88 = 0;
                             break;
                         }
-                        gUnknown_203B01A = gUnknown_3005E94[gUnknown_203AF98].unk_4;
+                        gUnknown_203B01A = gUnknown_3005E94[sQuestLogIdx].unk_4;
                         if (gUnknown_3005E88 == 3)
                             break;
                         if (gUnknown_203B01A == 0)
@@ -1992,13 +1992,13 @@ void sub_8112B3C(void)
                     }
                 }
             }
-            else if (gUnknown_203AF98 >= gUnknown_3005E8C)
+            else if (sQuestLogIdx >= sNumQuestLogs)
                 gUnknown_3005E88 = 0;
             break;
         case 2:
             if (ScriptContext2_IsEnabled() != 1)
                 gUnknown_203B01A++;
-            if (gUnknown_203AF98 >= gUnknown_3005E8C)
+            if (sQuestLogIdx >= sNumQuestLogs)
                 gUnknown_3005E88 = 0;
             break;
         case 3:
@@ -2052,18 +2052,18 @@ void sub_8112B3C(void)
                 "_08112B8C: .4byte gUnknown_203B01A\n"
                 "_08112B90:\n"
                 "\tldr r5, _08112B98 @ =gUnknown_3005E88\n"
-                "\tldr r4, _08112B9C @ =gUnknown_203AF98\n"
+                "\tldr r4, _08112B9C @ =sQuestLogIdx\n"
                 "\tldr r6, _08112BA0 @ =gUnknown_3005E94\n"
                 "\tb _08112BD4\n"
                 "\t.align 2, 0\n"
                 "_08112B98: .4byte gUnknown_3005E88\n"
-                "_08112B9C: .4byte gUnknown_203AF98\n"
+                "_08112B9C: .4byte sQuestLogIdx\n"
                 "_08112BA0: .4byte gUnknown_3005E94\n"
                 "_08112BA4:\n"
                 "\tldrh r0, [r4]\n"
                 "\tadds r0, 0x1\n"
                 "\tstrh r0, [r4]\n"
-                "\tldr r1, _08112BF0 @ =gUnknown_3005E8C\n"
+                "\tldr r1, _08112BF0 @ =sNumQuestLogs\n"
                 "\tlsls r0, 16\n"
                 "\tlsrs r0, 16\n"
                 "\tldrh r1, [r1]\n"
@@ -2100,7 +2100,7 @@ void sub_8112B3C(void)
                 "\tbeq _08112C18\n"
                 "\tb _08112C50\n"
                 "\t.align 2, 0\n"
-                "_08112BF0: .4byte gUnknown_3005E8C\n"
+                "_08112BF0: .4byte sNumQuestLogs\n"
                 "_08112BF4: .4byte 0x0000ffff\n"
                 "_08112BF8:\n"
                 "\tcmp r0, 0xFE\n"
@@ -2173,8 +2173,8 @@ void sub_8112B3C(void)
                 "\tadds r0, 0x1\n"
                 "\tstrh r0, [r1]\n"
                 "_08112C72:\n"
-                "\tldr r0, _08112C90 @ =gUnknown_203AF98\n"
-                "\tldr r1, _08112C94 @ =gUnknown_3005E8C\n"
+                "\tldr r0, _08112C90 @ =sQuestLogIdx\n"
+                "\tldr r1, _08112C94 @ =sNumQuestLogs\n"
                 "\tldrh r0, [r0]\n"
                 "\tldrh r1, [r1]\n"
                 "\tcmp r0, r1\n"
@@ -2188,8 +2188,8 @@ void sub_8112B3C(void)
                 "\tbx r0\n"
                 "\t.align 2, 0\n"
                 "_08112C8C: .4byte gUnknown_203B01A\n"
-                "_08112C90: .4byte gUnknown_203AF98\n"
-                "_08112C94: .4byte gUnknown_3005E8C\n"
+                "_08112C90: .4byte sQuestLogIdx\n"
+                "_08112C94: .4byte sNumQuestLogs\n"
                 "_08112C98: .4byte gUnknown_3005E88");
 }
 #endif
@@ -2217,14 +2217,14 @@ u8 sub_8112CAC(void)
 
 static bool8 sub_8112CEC(void)
 {
-    if (gUnknown_203AF98 >= gUnknown_3005E8C || ScriptContext2_IsEnabled() == TRUE)
+    if (sQuestLogIdx >= sNumQuestLogs || ScriptContext2_IsEnabled() == TRUE)
         return TRUE;
     return FALSE;
 }
 
 static bool8 sub_8112D1C(void)
 {
-    if (gUnknown_203AF98 >= gUnknown_3005E8C)
+    if (sQuestLogIdx >= sNumQuestLogs)
         return TRUE;
     return FALSE;
 }
@@ -2235,37 +2235,37 @@ static const struct UnkStruct_300201C gUnknown_84566A4 = {
     0x7FFF
 };
 
-u16 * sub_8112D40(u8 a0, u16 a1)
+void * QuestLogGetFlagOrVarPtr(bool8 isFlag, u16 idx)
 {
-    u16 * response;
-    if (gUnknown_203AF98 == 0)
+    void * response;
+    if (sQuestLogIdx == 0)
         return NULL;
-    if (gUnknown_203AF98 >= gUnknown_3005E8C)
+    if (sQuestLogIdx >= sNumQuestLogs)
         return NULL;
-    if (gUnknown_203B01E >= gUnknown_3002020)
+    if (sFlagOrVarPlayhead >= sNumFlagsOrVars)
         return NULL;
-    if (gUnknown_300201C[gUnknown_203B01E].unk_0_0 == a1 && gUnknown_300201C[gUnknown_203B01E].unk_0_f == a0)
+    if (sFlagOrVarRecords[sFlagOrVarPlayhead].idx == idx && sFlagOrVarRecords[sFlagOrVarPlayhead].isFlag == isFlag)
     {
-        response = &gUnknown_300201C[gUnknown_203B01E].unk_2;
-        gUnknown_203B01E++;
+        response = &sFlagOrVarRecords[sFlagOrVarPlayhead].value;
+        sFlagOrVarPlayhead++;
     }
     else
         response = NULL;
     return response;
 }
 
-void sub_8112DB0(u8 a0, u16 a1, u16 a2)
+void QuestLogSetFlagOrVar(bool8 isFlag, u16 idx, u16 value)
 {
-    if (gUnknown_203AF98 == 0)
+    if (sQuestLogIdx == 0)
         return;
-    if (gUnknown_203AF98 >= gUnknown_3005E8C)
+    if (sQuestLogIdx >= sNumQuestLogs)
         return;
-    if (gUnknown_203B01E >= gUnknown_3002020)
+    if (sFlagOrVarPlayhead >= sNumFlagsOrVars)
         return;
-    gUnknown_300201C[gUnknown_203B01E].unk_0_0 = a1;
-    gUnknown_300201C[gUnknown_203B01E].unk_0_f = a0;
-    gUnknown_300201C[gUnknown_203B01E].unk_2 = a2;
-    gUnknown_203B01E++;
+    sFlagOrVarRecords[sFlagOrVarPlayhead].idx = idx;
+    sFlagOrVarRecords[sFlagOrVarPlayhead].isFlag = isFlag;
+    sFlagOrVarRecords[sFlagOrVarPlayhead].value = value;
+    sFlagOrVarPlayhead++;
 }
 
 void sub_8112E3C(u8 a0, struct UnkStruct_300201C * a1, u16 a2)
@@ -2276,14 +2276,14 @@ void sub_8112E3C(u8 a0, struct UnkStruct_300201C * a1, u16 a2)
         gUnknown_3005E88 = 0;
     else
     {
-        gUnknown_300201C = a1;
-        gUnknown_3002020 = a2 >> 2;
-        gUnknown_203B01E = 0;
+        sFlagOrVarRecords = a1;
+        sNumFlagsOrVars = a2 >> 2;
+        sFlagOrVarPlayhead = 0;
         if (a0 == 2)
         {
-            for (i = 0; i < gUnknown_3005E8C; i++)
+            for (i = 0; i < sNumQuestLogs; i++)
             {
-                gUnknown_300201C[i] = gUnknown_84566A4;
+                sFlagOrVarRecords[i] = gUnknown_84566A4;
             }
         }
     }
@@ -2330,7 +2330,7 @@ void sub_8112F18(u8 a0)
 {
     u8 width = GetWindowAttribute(a0, WINDOW_WIDTH);
     u8 height = GetWindowAttribute(a0, WINDOW_HEIGHT);
-    u8 * buffer = Alloc(32 * width * height);
+    u8 *buffer = Alloc(32 * width * height);
     u8 i, j;
     u8 k;
 
@@ -2464,12 +2464,12 @@ static const u8 gUnknown_8456930[3] = {
     0, 10, 2
 };
 
-void sub_8112FE4(const u8 * a0)
+void sub_8112FE4(const u8 *a0)
 {
     AddTextPrinterParameterized4(sHelpMessageWindowId, 0x02, 2, 5, 1, 1, gUnknown_8456930, -1, a0);
 }
 
-void PrintTextOnHelpMessageWindow(const u8 * text, u8 mode)
+void PrintTextOnHelpMessageWindow(const u8 *text, u8 mode)
 {
     sub_8112FD0();
     sub_8112FE4(text);
@@ -2509,10 +2509,10 @@ static void sub_81130BC(struct Var4038Struct * varPtr)
         sub_8113524(varPtr);
         sub_8113390(varPtr);
         VarSet(VAR_0x4039, gSaveBlock2Ptr->playTimeHours);
-        FlagClear(FLAG_0x06C);
-        FlagClear(FLAG_0x06D);
-        FlagClear(FLAG_0x06E);
-        FlagClear(FLAG_0x06F);
+        FlagClear(FLAG_HIDE_SAFFRON_FAN_CLUB_BLACKBELT);
+        FlagClear(FLAG_HIDE_SAFFRON_FAN_CLUB_ROCKER);
+        FlagClear(FLAG_HIDE_SAFFRON_FAN_CLUB_WOMAN);
+        FlagClear(FLAG_HIDE_SAFFRON_FAN_CLUB_BEAUTY);
         VarSet(VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 1);
     }
 }
@@ -2696,8 +2696,8 @@ void sub_81133A4(void)
 
 static void sub_8113414(struct LinkBattleRecords * a0, u8 a1, u8 a2)
 {
-    u8 * str;
-    const u8 * src = a0->entries[a1].name;
+    u8 *str;
+    const u8 *src = a0->entries[a1].name;
     if (src[0] == EOS)
     {
         switch (a2)
@@ -2706,10 +2706,10 @@ static void sub_8113414(struct LinkBattleRecords * a0, u8 a1, u8 a2)
                 StringCopy(gStringVar1, gSaveBlock1Ptr->rivalName);
                 break;
             case 1:
-                StringCopy(gStringVar1, gUnknown_84178D0);
+                StringCopy(gStringVar1, gUnknown_84178D0); // LT. SURGE
                 break;
             case 2:
-                StringCopy(gStringVar1, gUnknown_84178DA);
+                StringCopy(gStringVar1, gUnknown_84178DA); // KOGA
                 break;
             default:
                 StringCopy(gStringVar1, gSaveBlock1Ptr->rivalName);
@@ -2771,7 +2771,7 @@ u8 sub_8113530(void)
     return sub_8113114(VAR_0x4038_STRUCT, gSpecialVar_0x8004);
 }
 
-static u16 * (*const sQuestLogStorageCBs[])(u16 *, const u16 *) = {
+static u16 *(*const sQuestLogStorageCBs[])(u16 *, const u16 *) = {
     NULL,
     NULL,
     NULL,
@@ -2818,9 +2818,9 @@ static u16 * (*const sQuestLogStorageCBs[])(u16 *, const u16 *) = {
 };
 
 #ifdef NONMATCHING
-void sub_8113550(u16 a0, const u16 * a1)
+void sub_8113550(u16 a0, const u16 *a1)
 {
-    u16 * r1;
+    u16 *r1;
 
     if (a0 == 35 && gUnknown_203B048 == 2)
     {
@@ -2905,7 +2905,7 @@ void sub_8113550(u16 a0, const u16 * a1)
 }
 #else
 NAKED
-void sub_8113550(u16 a0, const u16 * a1)
+void sub_8113550(u16 a0, const u16 *a1)
 {
     asm_unified("\tpush {r4,r5,lr}\n"
                 "\tadds r5, r1, 0\n"
@@ -3120,18 +3120,18 @@ bool8 sub_8113748(void)
     return FALSE;
 }
 
-static bool8 sub_8113778(u16 a0, u16 * a1)
+static bool8 sub_8113778(u16 a0, u16 *a1)
 {
     if (a0 == 36 || a0 == 11)
         return TRUE;
 
-    if (!FlagGet(0x82C))
+    if (!FlagGet(FLAG_SYS_GAME_CLEAR))
     {
         if (a0 == 3 || a0 == 31 || sub_81137E4(a0, a1) == TRUE)
             return TRUE;
     }
 
-    if (!FlagGet(0x844))
+    if (!FlagGet(FLAG_SYS_CAN_LINK_WITH_RS))
     {
         if (a0 == 4 || a0 == 5 || a0 == 6 || a0 == 7 || a0 == 8 || a0 == 9 || a0 == 10 || a0 == 22 || a0 == 25 || a0 == 26)
             return TRUE;
@@ -3140,7 +3140,7 @@ static bool8 sub_8113778(u16 a0, u16 * a1)
     return FALSE;
 }
 
-static bool8 sub_81137E4(u16 a0, u16 * a1)
+static bool8 sub_81137E4(u16 a0, u16 *a1)
 {
     if (a0 == 34)
     {
@@ -3160,7 +3160,7 @@ static void sub_811381C(void)
     gUnknown_203B048 = 0;
 }
 
-static u16 * sub_8113828(u16 a0, u16 * a1)
+static u16 *sub_8113828(u16 a0, u16 *a1)
 {
     if (sub_8113778(a0, a1) == TRUE)
         return NULL;
@@ -3179,7 +3179,7 @@ static u16 * sub_8113828(u16 a0, u16 * a1)
     return sQuestLogStorageCBs[a0](gUnknown_203AE08, a1);
 }
 
-static bool8 sub_81138A0(u16 a0, u16 * a1)
+static bool8 sub_81138A0(u16 a0, u16 *a1)
 {
     if (a0 < 12 || a0 > 19)
         return FALSE;
@@ -3206,7 +3206,7 @@ void sub_811390C(void)
 {
     if (gUnknown_203B024.unk_00 != 0)
     {
-        u16 * resp;
+        u16 *resp;
         gUnknown_203B04A = 0;
         sub_8110AEC(gUnknown_203B024.unk_00);
         resp = sQuestLogStorageCBs[gUnknown_203B024.unk_00](gUnknown_203AE08, gUnknown_203B024.unk_04);
@@ -3215,12 +3215,12 @@ void sub_811390C(void)
     }
 }
 
-static bool8 sub_8113954(u16 a0, u16 * a1)
+static bool8 sub_8113954(u16 a0, u16 *a1)
 {
     if (a0 != 34 && a0 != 30 && a0 != 32 && a0 != 33)
         return FALSE;
     sub_81138F8();
-    if (gUnknown_3005E88 || FlagGet(0x82C) || sub_81137E4(a0, a1) != TRUE)
+    if (gUnknown_3005E88 || FlagGet(FLAG_SYS_GAME_CLEAR) || sub_81137E4(a0, a1) != TRUE)
     {
         gUnknown_203B024.unk_00 = a0;
         memcpy(gUnknown_203B024.unk_04, a1, 8);
@@ -3232,7 +3232,7 @@ void sub_81139BC(void)
 {
     if (gUnknown_203B024.unk_00 != 0)
     {
-        u16 * resp;
+        u16 *resp;
         if (gUnknown_3005E88 == 0)
         {
             gUnknown_203B04A = 0;
@@ -3250,7 +3250,7 @@ void sub_81139BC(void)
 static void sub_8113A1C(u16 a0)
 {
     gUnknown_203AE08 = sub_8113C5C(gUnknown_203AE08, a0);
-    gUnknown_203AF98++;
+    sQuestLogIdx++;
 }
 
 static bool8 sub_8113A44(u16 a0, u16 *a1)
@@ -3267,7 +3267,7 @@ static bool8 sub_8113A44(u16 a0, u16 *a1)
     return FALSE;
 }
 
-static const u16 * (*const sQuestLogScriptParsingCBs[])(const u16 *) = {
+static const u16 *(*const sQuestLogScriptParsingCBs[])(const u16 *) = {
     NULL,
     NULL,
     NULL,
@@ -3359,7 +3359,7 @@ static const u8 gUnknown_8456AA0[] = {
     0x06
 };
 
-static u16 * sub_8113A78(u16 * a0, u16 **a1)
+static u16 *sub_8113A78(u16 *a0, u16 **a1)
 {
     u16 r2 = a0[0] & 0xfff;
     u16 r4 = a0[0] >> 12;
@@ -3371,9 +3371,9 @@ static u16 * sub_8113A78(u16 * a0, u16 **a1)
     return gUnknown_8456AA0[r2] + (gUnknown_8456AA0[r2] - 4) * r4 + (void *)a0;
 }
 
-static void sub_8113ABC(u16 * a0)
+static void sub_8113ABC(u16 *a0)
 {
-    u8 * r2 = (u8 *)(a0 + 2);
+    u8 *r2 = (u8 *)(a0 + 2);
     if ((a0[0] & 0xFFF) != 35)
         gUnknown_203B04A = 0;
     else
@@ -3381,9 +3381,9 @@ static void sub_8113ABC(u16 * a0)
 }
 
 #ifdef NONMATCHING
-static bool8 sub_8113AE8(u16 * a0)
+static bool8 sub_8113AE8(u16 *a0)
 {
-    if (a0 == NULL || a0[1] > gUnknown_203AF98)
+    if (a0 == NULL || a0[1] > sQuestLogIdx)
         return FALSE;
 
     sQuestLogScriptParsingCBs[a0[0] & 0xFFF](a0);
@@ -3395,13 +3395,13 @@ static bool8 sub_8113AE8(u16 * a0)
 }
 #else
 NAKED
-static bool8 sub_8113AE8(u16 * a0)
+static bool8 sub_8113AE8(u16 *a0)
 {
     asm_unified("\tpush {r4,lr}\n"
                 "\tadds r4, r0, 0\n"
                 "\tcmp r0, 0\n"
                 "\tbeq _08113AFA\n"
-                "\tldr r1, _08113B00 @ =gUnknown_203AF98\n"
+                "\tldr r1, _08113B00 @ =sQuestLogIdx\n"
                 "\tldrh r0, [r0, 0x2]\n"
                 "\tldrh r1, [r1]\n"
                 "\tcmp r0, r1\n"
@@ -3410,7 +3410,7 @@ static bool8 sub_8113AE8(u16 * a0)
                 "\tmovs r0, 0\n"
                 "\tb _08113B32\n"
                 "\t.align 2, 0\n"
-                "_08113B00: .4byte gUnknown_203AF98\n"
+                "_08113B00: .4byte sQuestLogIdx\n"
                 "_08113B04:\n"
                 "\tldr r2, _08113B38 @ =sQuestLogScriptParsingCBs\n"
                 "\tldrh r1, [r4]\n"
@@ -3446,7 +3446,7 @@ static bool8 sub_8113AE8(u16 * a0)
 }
 #endif
 
-static bool8 sub_8113B44(u16 * a0)
+static bool8 sub_8113B44(u16 *a0)
 {
     if (gUnknown_203B044.unk_2 == 0)
         return FALSE;
@@ -3465,11 +3465,11 @@ static void sub_8113B88(void)
 
 static void sub_8113B94(u16 a0)
 {
-    if (gUnknown_203B044.unk_0 != (u8)a0 || gUnknown_203B044.unk_2 != gUnknown_203AF98)
+    if (gUnknown_203B044.unk_0 != (u8)a0 || gUnknown_203B044.unk_2 != sQuestLogIdx)
     {
         gUnknown_203B044.unk_0 = a0;
         gUnknown_203B044.unk_1 = 0;
-        gUnknown_203B044.unk_2 = gUnknown_203AF98;
+        gUnknown_203B044.unk_2 = sQuestLogIdx;
     }
     else if (gUnknown_203B044.unk_1 < 5)
         gUnknown_203B044.unk_1++;
@@ -3482,7 +3482,7 @@ static void sub_8113BD8(void)
     gUnknown_203B04B = 0;
 }
 
-static u16 * sub_8113BF4(u16 * a0)
+static u16 *sub_8113BF4(u16 *a0)
 {
     if (!sub_8110988(a0, gUnknown_8456AA0[39]))
         return NULL;
@@ -3490,7 +3490,7 @@ static u16 * sub_8113BF4(u16 * a0)
     return a0 + 1;
 }
 
-static u16 * sub_8113C20(u16 * a0, struct UnkStruct_203AE98 * a1)
+static u16 *sub_8113C20(u16 *a0, struct UnkStruct_203AE98 * a1)
 {
     if (!sub_8110988(a0, gUnknown_8456AA0[39]))
         return NULL;
@@ -3503,7 +3503,7 @@ static u16 * sub_8113C20(u16 * a0, struct UnkStruct_203AE98 * a1)
     return a0 + 1;
 }
 
-static u16 * sub_8113C5C(u16 * a0, u16 a1)
+static u16 *sub_8113C5C(u16 *a0, u16 a1)
 {
     if (!sub_8110988(a0, gUnknown_8456AA0[41]))
         return NULL;
@@ -3512,7 +3512,7 @@ static u16 * sub_8113C5C(u16 * a0, u16 a1)
     return a0 + 2;
 }
 
-static u16 * sub_8113C8C(u16 * a0, struct UnkStruct_203AE98 * a1)
+static u16 *sub_8113C8C(u16 *a0, struct UnkStruct_203AE98 * a1)
 {
     if (!sub_8110988(a0, gUnknown_8456AA0[41]))
         return NULL;
@@ -3525,9 +3525,9 @@ static u16 * sub_8113C8C(u16 * a0, struct UnkStruct_203AE98 * a1)
     return a0 + 2;
 }
 
-static u16 * sub_8113CC8(u16 * a0, struct UnkStruct_203AE98 * a1)
+static u16 *sub_8113CC8(u16 *a0, struct UnkStruct_203AE98 * a1)
 {
-    u8 * r6 = (u8 *)a0 + 4;
+    u8 *r6 = (u8 *)a0 + 4;
 
     if (!sub_8110988(a0, gUnknown_8456AA0[0]))
         return NULL;
@@ -3540,9 +3540,9 @@ static u16 * sub_8113CC8(u16 * a0, struct UnkStruct_203AE98 * a1)
     return (u16 *)(r6 + 4);
 }
 
-static u16 * sub_8113D08(u16 * a0, struct UnkStruct_203AE98 * a1)
+static u16 *sub_8113D08(u16 *a0, struct UnkStruct_203AE98 * a1)
 {
-    u8 * r6 = (u8 *)a0 + 4;
+    u8 *r6 = (u8 *)a0 + 4;
 
     if (!sub_8110988(a0, gUnknown_8456AA0[0]))
         return NULL;
@@ -3555,10 +3555,10 @@ static u16 * sub_8113D08(u16 * a0, struct UnkStruct_203AE98 * a1)
     return (u16 *)(r6 + 4);
 }
 
-static u16 * sub_8113D48(u16 * a0, struct UnkStruct_203AE98 * a1)
+static u16 *sub_8113D48(u16 *a0, struct UnkStruct_203AE98 * a1)
 {
-    u16 * r4 = a0;
-    u8 * r6 = (u8 *)a0 + 4;
+    u16 *r4 = a0;
+    u8 *r6 = (u8 *)a0 + 4;
 
     if (!sub_8110988(r4, gUnknown_8456AA0[2]))
         return NULL;
@@ -3574,10 +3574,10 @@ static u16 * sub_8113D48(u16 * a0, struct UnkStruct_203AE98 * a1)
     return (u16 *)(r6 + 4);
 }
 
-static u16 * sub_8113D94(u16 * a0, struct UnkStruct_203AE98 * a1)
+static u16 *sub_8113D94(u16 *a0, struct UnkStruct_203AE98 * a1)
 {
-    u16 * r5 = a0;
-    u8 * r6 = (u8 *)a0 + 4;
+    u16 *r5 = a0;
+    u8 *r6 = (u8 *)a0 + 4;
 
     if (!sub_8110988(r5, gUnknown_8456AA0[2]))
         return NULL;
@@ -3593,10 +3593,10 @@ static u16 * sub_8113D94(u16 * a0, struct UnkStruct_203AE98 * a1)
     return (u16 *)(r6 + 4);
 }
 
-u16 * sub_8113DE0(u16 a0, u16 * a1)
+u16 *sub_8113DE0(u16 a0, u16 *a1)
 {
     u8 r6;
-    u16 * r5;
+    u16 *r5;
     u8 r4;
     u8 r1;
 
@@ -3628,12 +3628,12 @@ u16 * sub_8113DE0(u16 a0, u16 * a1)
         r1 = gUnknown_203B044.unk_1;
 
     r5[0] = a0 + (r1 << 12);
-    r5[1] = gUnknown_203AF98;
+    r5[1] = sQuestLogIdx;
     r5 = (void *)r5 + (r1 * r6 + 4);
     return r5;
 }
 
-static const u16 * sub_8113E88(u16 a0, const u16 * a1)
+static const u16 *sub_8113E88(u16 a0, const u16 *a1)
 {
     a1 = (const void *)a1 + (gUnknown_203B044.unk_2 * (gUnknown_8456AA0[a0] - 4) + 4);
     return a1;
@@ -3642,7 +3642,7 @@ static const u16 * sub_8113E88(u16 a0, const u16 * a1)
 // TODO: delete this declaration once data_83FECCC.s is decompiled
 extern const u8 gText_EggNickname[];
 
-void QuestLog_AutoGetSpeciesName(u16 a0, u8 * a1, u8 a2)
+void QuestLog_AutoGetSpeciesName(u16 a0, u8 *a1, u8 a2)
 {
     if (a1 != NULL)
     {
@@ -3660,9 +3660,9 @@ void QuestLog_AutoGetSpeciesName(u16 a0, u8 * a1, u8 a2)
     }
 }
 
-static u16 * sub_8113F14(u16 * a0, const u16 * a1)
+static u16 *sub_8113F14(u16 *a0, const u16 *a1)
 {
-    u16 * r2 = sub_8113DE0(3, a0);
+    u16 *r2 = sub_8113DE0(3, a0);
     if (r2 == NULL)
         return NULL;
     
@@ -3671,9 +3671,9 @@ static u16 * sub_8113F14(u16 * a0, const u16 * a1)
     return r2 + 2;
 }
 
-static const u16 * sub_8113F3C(const u16 * a0)
+static const u16 *sub_8113F3C(const u16 *a0)
 {
-    const u16 * r4 = sub_8113E88(3, a0);
+    const u16 *r4 = sub_8113E88(3, a0);
     QuestLog_AutoGetSpeciesName(r4[0], gStringVar1, 0);
     QuestLog_AutoGetSpeciesName(r4[1], gStringVar2, 0);
     StringExpandPlaceholders(gStringVar4, gUnknown_841A16F);
@@ -3681,9 +3681,9 @@ static const u16 * sub_8113F3C(const u16 * a0)
     return r4;
 }
 
-static u16 * sub_8113F80(u16 * a0, const u16 * a1)
+static u16 *sub_8113F80(u16 *a0, const u16 *a1)
 {
-    u16 * r2 = sub_8113DE0(4, a0);
+    u16 *r2 = sub_8113DE0(4, a0);
     if (r2 == NULL)
         return NULL;
 
@@ -3697,9 +3697,9 @@ static u16 * sub_8113F80(u16 * a0, const u16 * a1)
     return r2 + 3;
 }
 
-static const u16 * sub_8113FBC(const u16 * a0)
+static const u16 *sub_8113FBC(const u16 *a0)
 {
-    const u16 * r5 = sub_8113E88(4, a0);
+    const u16 *r5 = sub_8113E88(4, a0);
 
     switch (ItemId_GetPocket(r5[0]))
     {
@@ -3749,9 +3749,9 @@ static const u16 * sub_8113FBC(const u16 * a0)
     return r5 + 3;
 }
 
-u16 * sub_811414C(u16 a0, u16 * a1, const u16 * a2)
+u16 *sub_811414C(u16 a0, u16 *a1, const u16 *a2)
 {
-    u16 * r1 = sub_8113DE0(a0, a1);
+    u16 *r1 = sub_8113DE0(a0, a1);
     if (r1 == NULL)
         return NULL;
 
@@ -3760,14 +3760,14 @@ u16 * sub_811414C(u16 a0, u16 * a1, const u16 * a2)
     return r1 + 2;
 }
 
-static u16 * sub_8114174(u16 * a0, const u16 * a1)
+static u16 *sub_8114174(u16 *a0, const u16 *a1)
 {
     return sub_811414C(5, a0, a1);
 }
 
-static const u16 * sub_8114188(const u16 * a0)
+static const u16 *sub_8114188(const u16 *a0)
 {
-    const u16 * r4 = sub_8113E88(5, a0);
+    const u16 *r4 = sub_8113E88(5, a0);
     QuestLog_AutoGetSpeciesName(r4[1], gStringVar1, 0);
     StringCopy(gStringVar2, ItemId_GetName(r4[0]));
     StringExpandPlaceholders(gStringVar4, gUnknown_841AB74);
@@ -3775,14 +3775,14 @@ static const u16 * sub_8114188(const u16 * a0)
     return r4;
 }
 
-static u16 * sub_81141D0(u16 * a0, const u16 * a1)
+static u16 *sub_81141D0(u16 *a0, const u16 *a1)
 {
     return sub_811414C(6, a0, a1);
 }
 
-static const u16 * sub_81141E4(const u16 * a0)
+static const u16 *sub_81141E4(const u16 *a0)
 {
-    const u16 * r4 = sub_8113E88(6, a0);
+    const u16 *r4 = sub_8113E88(6, a0);
 
     QuestLog_AutoGetSpeciesName(r4[1], gStringVar1, 0);
     StringCopy(gStringVar2, ItemId_GetName(r4[0]));
@@ -3791,14 +3791,14 @@ static const u16 * sub_81141E4(const u16 * a0)
     return r4;
 }
 
-static u16 * sub_811422C(u16 * a0, const u16 * a1)
+static u16 *sub_811422C(u16 *a0, const u16 *a1)
 {
     return sub_811414C(7, a0, a1);
 }
 
-static const u16 * sub_8114240(const u16 * a0)
+static const u16 *sub_8114240(const u16 *a0)
 {
-    const u16 * r4 = sub_8113E88(7, a0);
+    const u16 *r4 = sub_8113E88(7, a0);
 
     QuestLog_AutoGetSpeciesName(r4[1], gStringVar2, 0);
     StringCopy(gStringVar1, ItemId_GetName(r4[0]));
@@ -3807,14 +3807,14 @@ static const u16 * sub_8114240(const u16 * a0)
     return r4;
 }
 
-static u16 * sub_8114288(u16 * a0, const u16 * a1)
+static u16 *sub_8114288(u16 *a0, const u16 *a1)
 {
     return sub_811414C(8, a0, a1);
 }
 
-static const u16 * sub_811429C(const u16 * a0)
+static const u16 *sub_811429C(const u16 *a0)
 {
-    const u16 * r4 = sub_8113E88(8, a0);
+    const u16 *r4 = sub_8113E88(8, a0);
 
     QuestLog_AutoGetSpeciesName(r4[1], gStringVar1, 0);
     StringCopy(gStringVar2, ItemId_GetName(r4[0]));
@@ -3823,9 +3823,9 @@ static const u16 * sub_811429C(const u16 * a0)
     return r4;
 }
 
-u16 * sub_81142E4(u16 a0, u16 * a1, const u16 * a2)
+u16 *sub_81142E4(u16 a0, u16 *a1, const u16 *a2)
 {
-    u16 * r1 = sub_8113DE0(a0, a1);
+    u16 *r1 = sub_8113DE0(a0, a1);
     if (r1 == NULL)
         return NULL;
 
@@ -3835,14 +3835,14 @@ u16 * sub_81142E4(u16 a0, u16 * a1, const u16 * a2)
     return r1 + 3;
 }
 
-static u16 * sub_8114310(u16 * a0, const u16 * a1)
+static u16 *sub_8114310(u16 *a0, const u16 *a1)
 {
     return sub_81142E4(9, a0, a1);
 }
 
-static const u16 * sub_8114324(const u16 * a0)
+static const u16 *sub_8114324(const u16 *a0)
 {
-    const u16 * r4 = sub_8113E88(9, a0);
+    const u16 *r4 = sub_8113E88(9, a0);
     QuestLog_AutoGetSpeciesName(r4[2], gStringVar1, 0);
     StringCopy(gStringVar2, ItemId_GetName(r4[0]));
     StringCopy(gStringVar3, ItemId_GetName(r4[1]));
@@ -3851,14 +3851,14 @@ static const u16 * sub_8114324(const u16 * a0)
     return r4;
 }
 
-static u16 * sub_8114380(u16 * a0, const u16 * a1)
+static u16 *sub_8114380(u16 *a0, const u16 *a1)
 {
     return sub_81142E4(10, a0, a1);
 }
 
-static const u16 * sub_8114394(const u16 * a0)
+static const u16 *sub_8114394(const u16 *a0)
 {
-    const u16 * r4 = sub_8113E88(10, a0);
+    const u16 *r4 = sub_8113E88(10, a0);
     QuestLog_AutoGetSpeciesName(r4[2], gStringVar2, 0);
     StringCopy(gStringVar3, ItemId_GetName(r4[0]));
     StringCopy(gStringVar1, ItemId_GetName(r4[1]));
@@ -3867,9 +3867,9 @@ static const u16 * sub_8114394(const u16 * a0)
     return r4;
 }
 
-static u16 * sub_81143F0(u16 * a0, const u16 * a1)
+static u16 *sub_81143F0(u16 *a0, const u16 *a1)
 {
-    u16 * r4 = a0;
+    u16 *r4 = a0;
     if (gUnknown_203B044.unk_0 == 11 && gUnknown_203B044.unk_1 != 0)
         return r4;
 
@@ -3877,23 +3877,23 @@ static u16 * sub_81143F0(u16 * a0, const u16 * a1)
         return NULL;
 
     r4[0] = 11;
-    r4[1] = gUnknown_203AF98;
+    r4[1] = sQuestLogIdx;
     return r4 + 2;
 }
 
-static const u16 * sub_811443C(const u16 * a0)
+static const u16 *sub_811443C(const u16 *a0)
 {
     StringExpandPlaceholders(gStringVar4, gUnknown_841A2B0);
     a0 += 2;
     return a0;
 }
 
-static u16 * sub_811445C(u16 * a0, const u16 * a1)
+static u16 *sub_811445C(u16 *a0, const u16 *a1)
 {
-    u16 * r4 = a0 + 4;
+    u16 *r4 = a0 + 4;
 
     a0[0] = 12;
-    a0[1] = gUnknown_203AF98;
+    a0[1] = sQuestLogIdx;
     a0[2] = a1[0];
     a0[3] = a1[1];
     a1 += 2;
@@ -3902,9 +3902,9 @@ static u16 * sub_811445C(u16 * a0, const u16 * a1)
     return r4;
 }
 
-static const u16 * sub_811448C(const u16 * a0)
+static const u16 *sub_811448C(const u16 *a0)
 {
-    const u16 * r6 = a0 + 4;
+    const u16 *r6 = a0 + 4;
 
     memset(gStringVar1, EOS, 8);
     memcpy(gStringVar1, r6, 7);
@@ -3935,17 +3935,17 @@ static const u8 *const gUnknown_8456AE4[] = {
     gUnknown_841AFD1
 };
 
-static u16 * sub_81144EC(u16 * a0, const u16 * a1)
+static u16 *sub_81144EC(u16 *a0, const u16 *a1)
 {
     a0[0] = 13;
-    a0[1] = gUnknown_203AF98;
+    a0[1] = sQuestLogIdx;
     *((u8 *)a0 + 4) = *((const u8 *)a1 + 0);
     memcpy((u8 *)a0 + 5, (const u8 *)a1 + 1, 7);
     a0 += 6;
     return a0;
 }
 
-static const u16 * sub_8114518(const u16 * a0)
+static const u16 *sub_8114518(const u16 *a0)
 {
     DynamicPlaceholderTextUtil_Reset();
 
@@ -3959,17 +3959,17 @@ static const u16 * sub_8114518(const u16 * a0)
     return a0;
 }
 
-static u16 * sub_8114578(u16 * a0, const u16 * a1)
+static u16 *sub_8114578(u16 *a0, const u16 *a1)
 {
     a0[0] = 14;
-    a0[1] = gUnknown_203AF98;
+    a0[1] = sQuestLogIdx;
     *((u8 *)a0 + 4) = *((const u8 *)a1 + 0);
     memcpy((u8 *)a0 + 5, (const u8 *)a1 + 1, 7);
     a0 += 6;
     return a0;
 }
 
-static const u16 * sub_81145A4(const u16 * a0)
+static const u16 *sub_81145A4(const u16 *a0)
 {
     DynamicPlaceholderTextUtil_Reset();
 
@@ -3983,10 +3983,10 @@ static const u16 * sub_81145A4(const u16 * a0)
     return a0;
 }
 
-static u16 * sub_8114604(u16 * a0, const u16 * a1)
+static u16 *sub_8114604(u16 *a0, const u16 *a1)
 {
     a0[0] = 15;
-    a0[1] = gUnknown_203AF98;
+    a0[1] = sQuestLogIdx;
     *((u8 *)a0 + 4) = *((const u8 *)a1 + 0);
     memcpy((u8 *)a0 +  5, (const u8 *)a1 +  1, 7);
     memcpy((u8 *)a0 + 12, (const u8 *)a1 +  8, 7);
@@ -3995,7 +3995,7 @@ static u16 * sub_8114604(u16 * a0, const u16 * a1)
     return a0;
 }
 
-static const u16 * sub_811464C(const u16 * a0)
+static const u16 *sub_811464C(const u16 *a0)
 {
     DynamicPlaceholderTextUtil_Reset();
 
@@ -4018,39 +4018,39 @@ static const u16 * sub_811464C(const u16 * a0)
     return a0;
 }
 
-static u16 * sub_8114710(u16 * a0, const u16 * a1)
+static u16 *sub_8114710(u16 *a0, const u16 *a1)
 {
     a0[0] = 16;
-    a0[1] = gUnknown_203AF98;
+    a0[1] = sQuestLogIdx;
     return a0 + 2;
 }
 
-static const u16 * sub_8114724(const u16 * a0)
+static const u16 *sub_8114724(const u16 *a0)
 {
     StringExpandPlaceholders(gStringVar4, gUnknown_841A50B);
     a0 += 2;
     return a0;
 }
 
-static u16 * sub_8114744(u16 * a0, const u16 * a1)
+static u16 *sub_8114744(u16 *a0, const u16 *a1)
 {
     a0[0] = 17;
-    a0[1] = gUnknown_203AF98;
+    a0[1] = sQuestLogIdx;
     return a0 + 2;
 }
 
-static const u16 * sub_8114758(const u16 * a0)
+static const u16 *sub_8114758(const u16 *a0)
 {
     StringExpandPlaceholders(gStringVar4, gUnknown_841A732);
     a0 += 2;
     return a0;
 }
 
-static u16 * sub_8114778(u16 * a0, const u16 * a1)
+static u16 *sub_8114778(u16 *a0, const u16 *a1)
 {
-    u8 * r4 = (u8 *)(a0 + 4);
+    u8 *r4 = (u8 *)(a0 + 4);
     a0[0] = 18;
-    a0[1] = gUnknown_203AF98;
+    a0[1] = sQuestLogIdx;
     a0[2] = a1[0];
     a0[3] = a1[1];
     memcpy(r4, a1 + 2, 7);
@@ -4058,9 +4058,9 @@ static u16 * sub_8114778(u16 * a0, const u16 * a1)
     return (u16 *)r4;
 }
 
-static const u16 * sub_81147A8(const u16 * a0)
+static const u16 *sub_81147A8(const u16 *a0)
 {
-    const u8 * r6 = (const u8 *)(a0 + 4);
+    const u8 *r6 = (const u8 *)(a0 + 4);
     memset(gStringVar1, EOS, 8);
     memcpy(gStringVar1, r6, 7);
     sub_8115834(gStringVar1);
@@ -4071,17 +4071,17 @@ static const u16 * sub_81147A8(const u16 * a0)
     return (const u16 *)r6;
 }
 
-static u16 * sub_8114808(u16 * a0, const u16 * a1)
+static u16 *sub_8114808(u16 *a0, const u16 *a1)
 {
     a0[0] = 19;
-    a0[1] = gUnknown_203AF98;
+    a0[1] = sQuestLogIdx;
     *(u8 *)&a0[2] = *(const u8 *)&a1[0];
     memcpy((u8 *)a0 + 5, (const u8 *)a1 + 1, 7);
     a0 += 6;
     return a0;
 }
 
-static const u16 * sub_8114834(const u16 * a0)
+static const u16 *sub_8114834(const u16 *a0)
 {
     memset(gStringVar1, EOS, 8);
     memcpy(gStringVar1, (const u8 *)a0 + 5, 7);
@@ -4092,7 +4092,7 @@ static const u16 * sub_8114834(const u16 * a0)
     return a0;
 }
 
-static u16 * sub_811488C(u16 * a0, const u16 * a1)
+static u16 *sub_811488C(u16 *a0, const u16 *a1)
 {
     a0 = sub_8113DE0(20, a0);
     if (a0 == NULL)
@@ -4104,9 +4104,9 @@ static u16 * sub_811488C(u16 * a0, const u16 * a1)
     return a0 + 3;
 }
 
-static const u16 * sub_81148BC(const u16 * a0)
+static const u16 *sub_81148BC(const u16 *a0)
 {
-    const u8 * boxIdxs;
+    const u8 *boxIdxs;
     a0 = sub_8113E88(20, a0);
     boxIdxs = (const u8 *)a0 + 4;
     DynamicPlaceholderTextUtil_Reset();
@@ -4118,7 +4118,7 @@ static const u16 * sub_81148BC(const u16 * a0)
     return a0 + 3;
 }
 
-static u16 * sub_8114918(u16 * a0, const u16 * a1)
+static u16 *sub_8114918(u16 *a0, const u16 *a1)
 {
     a0 = sub_8113DE0(21, a0);
     if (a0 == NULL)
@@ -4129,9 +4129,9 @@ static u16 * sub_8114918(u16 * a0, const u16 * a1)
     return a0 + 3;
 }
 
-static const u16 * sub_8114944(const u16 * a0)
+static const u16 *sub_8114944(const u16 *a0)
 {
-    const u8 * boxIdxs;
+    const u8 *boxIdxs;
     a0 = sub_8113E88(21, a0);
     boxIdxs = (const u8 *)a0 + 4;
     DynamicPlaceholderTextUtil_Reset();
@@ -4142,10 +4142,10 @@ static const u16 * sub_8114944(const u16 * a0)
     return a0 + 3;
 }
 
-static u16 * sub_8114990(u16 * a0, const u16 * a1)
+static u16 *sub_8114990(u16 *a0, const u16 *a1)
 {
-    u16 * r2;
-    u16 * ret;
+    u16 *r2;
+    u16 *ret;
     r2 = sub_8113DE0(22, a0);
     if (r2 == NULL)
         return NULL;
@@ -4165,9 +4165,9 @@ static u16 * sub_8114990(u16 * a0, const u16 * a1)
     return ret + 1;
 }
 
-static const u16 * sub_81149D0(const u16 * a0)
+static const u16 *sub_81149D0(const u16 *a0)
 {
-    const u8 * boxIdxs;
+    const u8 *boxIdxs;
     a0 = sub_8113E88(22, a0);
     boxIdxs = (const u8 *)a0 + 4;
     DynamicPlaceholderTextUtil_Reset();
@@ -4178,10 +4178,10 @@ static const u16 * sub_81149D0(const u16 * a0)
     return a0 + 3;
 }
 
-static u16 * sub_8114A1C(u16 * a0, const u16 * a1)
+static u16 *sub_8114A1C(u16 *a0, const u16 *a1)
 {
-    u16 * r2;
-    u16 * ret;
+    u16 *r2;
+    u16 *ret;
     r2 = sub_8113DE0(23, a0);
     if (r2 == NULL)
         return NULL;
@@ -4192,9 +4192,9 @@ static u16 * sub_8114A1C(u16 * a0, const u16 * a1)
     return ret + 1;
 }
 
-static const u16 * sub_8114A4C(const u16 * a0)
+static const u16 *sub_8114A4C(const u16 *a0)
 {
-    const u8 * boxIdxs;
+    const u8 *boxIdxs;
     a0 = sub_8113E88(23, a0);
     boxIdxs = (const u8 *)a0 + 2;
     DynamicPlaceholderTextUtil_Reset();
@@ -4205,9 +4205,9 @@ static const u16 * sub_8114A4C(const u16 * a0)
     return (const u16 *)boxIdxs + 1;
 }
 
-static u16 * sub_8114AA0(u16 * a0, const u16 * a1)
+static u16 *sub_8114AA0(u16 *a0, const u16 *a1)
 {
-    u16 * r2;
+    u16 *r2;
     r2 = sub_8113DE0(24, a0);
     if (r2 == NULL)
         return NULL;
@@ -4216,9 +4216,9 @@ static u16 * sub_8114AA0(u16 * a0, const u16 * a1)
     return r2 + 2;
 }
 
-static const u16 * sub_8114AC8(const u16 * a0)
+static const u16 *sub_8114AC8(const u16 *a0)
 {
-    const u8 * boxIdxs;
+    const u8 *boxIdxs;
     a0 = sub_8113E88(24, a0);
     boxIdxs = (const u8 *)a0 + 2;
     DynamicPlaceholderTextUtil_Reset();
@@ -4228,9 +4228,9 @@ static const u16 * sub_8114AC8(const u16 * a0)
     return (const u16 *)boxIdxs + 1;
 }
 
-static u16 * sub_8114B0C(u16 * a0, const u16 * a1)
+static u16 *sub_8114B0C(u16 *a0, const u16 *a1)
 {
-    u16 * r2;
+    u16 *r2;
     r2 = sub_8113DE0(25, a0);
     if (r2 == NULL)
         return NULL;
@@ -4239,9 +4239,9 @@ static u16 * sub_8114B0C(u16 * a0, const u16 * a1)
     return r2 + 2;
 }
 
-static const u16 * sub_8114B34(const u16 * a0)
+static const u16 *sub_8114B34(const u16 *a0)
 {
-    const u8 * boxIdxs;
+    const u8 *boxIdxs;
     a0 = sub_8113E88(25, a0);
     boxIdxs = (const u8 *)a0 + 2;
     DynamicPlaceholderTextUtil_Reset();
@@ -4251,9 +4251,9 @@ static const u16 * sub_8114B34(const u16 * a0)
     return (const u16 *)boxIdxs + 1;
 }
 
-static u16 * sub_8114B78(u16 * a0, const u16 * a1)
+static u16 *sub_8114B78(u16 *a0, const u16 *a1)
 {
-    u16 * r2;
+    u16 *r2;
     r2 = sub_8113DE0(26, a0);
     if (r2 == NULL)
         return NULL;
@@ -4262,9 +4262,9 @@ static u16 * sub_8114B78(u16 * a0, const u16 * a1)
     return r2 + 2;
 }
 
-static const u16 * sub_8114BA0(const u16 * a0)
+static const u16 *sub_8114BA0(const u16 *a0)
 {
-    const u8 * boxIdxs;
+    const u8 *boxIdxs;
     a0 = sub_8113E88(26, a0);
     boxIdxs = (const u8 *)a0 + 2;
     DynamicPlaceholderTextUtil_Reset();
@@ -4274,9 +4274,9 @@ static const u16 * sub_8114BA0(const u16 * a0)
     return (const u16 *)boxIdxs + 1;
 }
 
-static u16 * sub_8114BE4(u16 * a0, const u16 * a1)
+static u16 *sub_8114BE4(u16 *a0, const u16 *a1)
 {
-    u16 * r2;
+    u16 *r2;
     r2 = sub_8113DE0(27, a0);
     if (r2 == NULL)
         return NULL;
@@ -4285,7 +4285,7 @@ static u16 * sub_8114BE4(u16 * a0, const u16 * a1)
     return r2 + 1;
 }
 
-static const u16 * sub_8114C0C(const u16 * a0)
+static const u16 *sub_8114C0C(const u16 *a0)
 {
     const u16 *r4 = sub_8113E88(27, a0);
     DynamicPlaceholderTextUtil_Reset();
@@ -4298,7 +4298,7 @@ static const u16 * sub_8114C0C(const u16 * a0)
     return r4 + 1;
 }
 
-static u16 * sub_8114C68(u16 * a0, const u16 * a1)
+static u16 *sub_8114C68(u16 *a0, const u16 *a1)
 {
     a0 = sub_8113DE0(28, a0);
     if (a0 == NULL)
@@ -4307,7 +4307,7 @@ static u16 * sub_8114C68(u16 * a0, const u16 * a1)
     return a0 + 1;
 }
 
-static const u16 * sub_8114C8C(const u16 * a0)
+static const u16 *sub_8114C8C(const u16 *a0)
 {
     const u16 *r4 = sub_8113E88(28, a0);
     CopyItemName(r4[0], gStringVar1);
@@ -4315,7 +4315,7 @@ static const u16 * sub_8114C8C(const u16 * a0)
     return r4 + 1;
 }
 
-static u16 * sub_8114CC0(u16 * a0, const u16 * a1)
+static u16 *sub_8114CC0(u16 *a0, const u16 *a1)
 {
     a0 = sub_8113DE0(29, a0);
     if (a0 == NULL)
@@ -4324,7 +4324,7 @@ static u16 * sub_8114CC0(u16 * a0, const u16 * a1)
     return a0 + 1;
 }
 
-static const u16 * sub_8114CE4(const u16 * a0)
+static const u16 *sub_8114CE4(const u16 *a0)
 {
     const u16 *r4 = sub_8113E88(29, a0);
     CopyItemName(r4[0], gStringVar1);
@@ -4332,7 +4332,7 @@ static const u16 * sub_8114CE4(const u16 * a0)
     return r4 + 1;
 }
 
-u16 * sub_8114D18(u16 a0, u16 * a1, const u16 * a2)
+u16 *sub_8114D18(u16 a0, u16 *a1, const u16 *a2)
 {
     a1 = sub_8113DE0(a0, a1);
     if (a1 == NULL)
@@ -4345,15 +4345,15 @@ u16 * sub_8114D18(u16 a0, u16 * a1, const u16 * a2)
     return a1 + 4;
 }
 
-static u16 * sub_8114D4C(u16 * a0, const u16 * a1)
+static u16 *sub_8114D4C(u16 *a0, const u16 *a1)
 {
     gUnknown_203B048 = TRUE;
     return sub_8114D18(30, a0, a1);
 }
 
-static const u16 * sub_8114D68(const u16 * a0)
+static const u16 *sub_8114D68(const u16 *a0)
 {
-    const u8 * r6;
+    const u8 *r6;
     a0 = sub_8113E88(30, a0);
     r6 = (const u8 *)a0 + 6;
     DynamicPlaceholderTextUtil_Reset();
@@ -4367,16 +4367,16 @@ static const u16 * sub_8114D68(const u16 * a0)
     return a0 + 4;
 }
 
-static u16 * sub_8114DE8(u16 * a0, const u16 * a1)
+static u16 *sub_8114DE8(u16 *a0, const u16 *a1)
 {
-    u16 * r4 = a0;
-    u8 * r5 = (u8 *)a0 + 8;
+    u16 *r4 = a0;
+    u8 *r5 = (u8 *)a0 + 8;
     if (!sub_8110944(r4, gUnknown_8456AA0[31]))
         return NULL;
     if (r5[0] == 0 && r5[1] == 0)
     {
         r4[0] = 31;
-        r4[1] = gUnknown_203AF98;
+        r4[1] = sQuestLogIdx;
     }
     if (a1[0])
         r4[2] = a1[0];
@@ -4390,9 +4390,9 @@ static u16 * sub_8114DE8(u16 * a0, const u16 * a1)
     return (u16 *)(r5 + 4);
 }
 
-static const u16 * sub_8114E68(const u16 * a0)
+static const u16 *sub_8114E68(const u16 *a0)
 {
-    const u8 * r6;
+    const u8 *r6;
     if (!sub_8110944(a0, gUnknown_8456AA0[31]))
         return NULL;
 
@@ -4451,15 +4451,15 @@ static bool8 sub_8114FBC(u16 a0)
     return FALSE;
 }
 
-static u16 * sub_8114FF0(u16 * a0, const u16 * a1)
+static u16 *sub_8114FF0(u16 *a0, const u16 *a1)
 {
     gUnknown_203B048 = TRUE;
     return sub_8114D18(32, a0, a1);
 }
 
-static const u16 * sub_811500C(const u16 * a0)
+static const u16 *sub_811500C(const u16 *a0)
 {
-    const u8 * r5;
+    const u8 *r5;
     a0 = sub_8113E88(32, a0);
     r5 = (const u8 *)a0 + 6;
     DynamicPlaceholderTextUtil_Reset();
@@ -4471,12 +4471,12 @@ static const u16 * sub_811500C(const u16 * a0)
     return a0 + 4;
 }
 
-static u16 * sub_8115078(u16 * a0, const u16 * a1)
+static u16 *sub_8115078(u16 *a0, const u16 *a1)
 {
     if (!sub_8110944(a0, gUnknown_8456AA0[33]))
         return NULL;
     a0[0] = 0x2021;
-    a0[1] = gUnknown_203AF98;
+    a0[1] = sQuestLogIdx;
     a0[2] = a1[1];
     a0[3] = a1[2];
     *((u8 *)a0 + 8) = *((const u8 *)a1 + 6);
@@ -4484,9 +4484,9 @@ static u16 * sub_8115078(u16 * a0, const u16 * a1)
     return a0 + 5;
 }
 
-static const u16 * sub_81150CC(const u16 * a0)
+static const u16 *sub_81150CC(const u16 *a0)
 {
-    const u8 * r5;
+    const u8 *r5;
     if (!sub_8110944(a0, gUnknown_8456AA0[33]))
         return NULL;
 
@@ -4515,16 +4515,16 @@ static const u16 * sub_81150CC(const u16 * a0)
     return (const u16 *)(r5 + 2);
 }
 
-static u16 * sub_81151C0(u16 * a0, const u16 * a1)
+static u16 *sub_81151C0(u16 *a0, const u16 *a1)
 {
     gUnknown_203B048 = TRUE;
     return sub_8114D18(34, a0, a1);
 }
 
-static const u16 * sub_81151DC(const u16 * a0)
+static const u16 *sub_81151DC(const u16 *a0)
 {
-    const u16 * r5 = sub_8113E88(34, a0);
-    const u8 * r6 = (const u8 *)r5 + 6;
+    const u16 *r5 = sub_8113E88(34, a0);
+    const u8 *r6 = (const u8 *)r5 + 6;
     DynamicPlaceholderTextUtil_Reset();
     sub_80C4DF8(gStringVar1, r6[0]);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
@@ -4544,155 +4544,155 @@ static const u16 * sub_81151DC(const u16 * a0)
 }
 
 static const u8 *const gUnknown_8456AF0[] = {
-        gUnknown_841B09F,
-        gUnknown_841B0A4,
-        gUnknown_841B0B5,
-        gUnknown_841B0B9,
-        gUnknown_841B0B9,
-        gUnknown_841B0CD,
-        gUnknown_841B0CD,
-        gUnknown_841B0DD,
-        gUnknown_841B0B5,
-        gUnknown_841B0F6,
-        gUnknown_841B0F6,
-        gUnknown_841B0B5,
-        gUnknown_841B0FF,
-        gUnknown_841B109,
-        gUnknown_841B116,
-        gUnknown_841B11F,
-        gUnknown_841B11F,
-        gUnknown_841B130,
-        gUnknown_841B0B5,
-        gUnknown_841B141,
-        gUnknown_841B14B,
-        gUnknown_841B14B,
-        gUnknown_841B15A,
-        gUnknown_841B15A,
-        gUnknown_841B166,
-        gUnknown_841B172,
-        gUnknown_841B180,
-        gUnknown_841B190,
-        gUnknown_841B11F,
-        gUnknown_841B11F,
-        gUnknown_841B1A3,
-        gUnknown_841B1B7,
-        gUnknown_841B1C7,
-        gUnknown_841B0B5,
-        gUnknown_841B1DA,
-        gUnknown_841B1E5,
-        gUnknown_841B1F4,
-        gUnknown_841B0B5,
-        gUnknown_841B200,
-        gUnknown_841B20E,
-        gUnknown_841B0B5,
-        gUnknown_841B21C,
-        gUnknown_841B226,
-        gUnknown_841B226,
-        gUnknown_841B236,
-        gUnknown_841B0B5,
-        gUnknown_841B246,
-        gUnknown_841B25B,
-        gUnknown_841B25B,
-        gUnknown_841B268,
-        gUnknown_841B277
+    gQuestLogString_Home,
+    gQuestLogString_OakResearchLab,
+    gQuestLogString_Gym,
+    gQuestLogString_PokemonLeagueGate,
+    gQuestLogString_PokemonLeagueGate,
+    gQuestLogString_ViridianForest,
+    gQuestLogString_ViridianForest,
+    gQuestLogString_PewterMuseumOfScience,
+    gQuestLogString_Gym,
+    gQuestLogString_MtMoon,
+    gQuestLogString_MtMoon,
+    gQuestLogString_Gym,
+    gQuestLogString_BikeShop,
+    gQuestLogString_BillSHouse,
+    gQuestLogString_DayCare,
+    gQuestLogString_UndergroundPath,
+    gQuestLogString_UndergroundPath,
+    gQuestLogString_PokemonFanClub,
+    gQuestLogString_Gym,
+    gQuestLogString_SSAnne,
+    gQuestLogString_DiglettSCave,
+    gQuestLogString_DiglettSCave,
+    gQuestLogString_RockTunnel,
+    gQuestLogString_RockTunnel,
+    gQuestLogString_PowerPlant,
+    gQuestLogString_PokemonTower,
+    gQuestLogString_VolunteerHouse,
+    gQuestLogString_NameRaterSHouse,
+    gQuestLogString_UndergroundPath,
+    gQuestLogString_UndergroundPath,
+    gQuestLogString_CeladonDeptStore,
+    gQuestLogString_CeladonMansion,
+    gQuestLogString_RocketGameCorner,
+    gQuestLogString_Gym,
+    gQuestLogString_Restaurant,
+    gQuestLogString_RocketHideout,
+    gQuestLogString_SafariZone,
+    gQuestLogString_Gym,
+    gQuestLogString_WardenSHome,
+    gQuestLogString_FightingDojo,
+    gQuestLogString_Gym,
+    gQuestLogString_SilphCo,
+    gQuestLogString_SeafoamIslands,
+    gQuestLogString_SeafoamIslands,
+    gQuestLogString_PokemonMansion,
+    gQuestLogString_Gym,
+    gQuestLogString_PokemonResearchLab,
+    gQuestLogString_VictoryRoad,
+    gQuestLogString_VictoryRoad,
+    gQuestLogString_PokemonLeague,
+    gQuestLogString_CeruleanCave
 };
 
 static const u8 *const gUnknown_8456BBC[] = {
-        gUnknown_841A53A,
-        gUnknown_841AD9E,
-        gUnknown_841ADC8,
-        gUnknown_841ADFF,
-        gUnknown_841AE1E,
-        gUnknown_841AE48,
-        gUnknown_841AEA7,
-        gUnknown_841AEDC,
-        gUnknown_841AFD6,
-        gUnknown_841B005
+    gUnknown_841A53A,
+    gUnknown_841AD9E,
+    gUnknown_841ADC8,
+    gUnknown_841ADFF,
+    gUnknown_841AE1E,
+    gUnknown_841AE48,
+    gUnknown_841AEA7,
+    gUnknown_841AEDC,
+    gUnknown_841AFD6,
+    gUnknown_841B005
 };
 
 static const u8 gUnknown_8456BE4[] = {
-        0x03,
-        0x04,
-        0x05,
-        0x08,
-        0x08,
-        0x07,
-        0x07,
-        0x01,
-        0x05,
-        0x07,
-        0x07,
-        0x05,
-        0x00,
-        0x00,
-        0x00,
-        0x08,
-        0x08,
-        0x00,
-        0x05,
-        0x08,
-        0x07,
-        0x07,
-        0x07,
-        0x07,
-        0x08,
-        0x08,
-        0x00,
-        0x00,
-        0x08,
-        0x08,
-        0x00,
-        0x00,
-        0x02,
-        0x05,
-        0x00,
-        0x08,
-        0x06,
-        0x05,
-        0x00,
-        0x00,
-        0x05,
-        0x09,
-        0x07,
-        0x07,
-        0x09,
-        0x05,
-        0x00,
-        0x07,
-        0x07,
-        0x08,
-        0x07
+    0x03,
+    0x04,
+    0x05,
+    0x08,
+    0x08,
+    0x07,
+    0x07,
+    0x01,
+    0x05,
+    0x07,
+    0x07,
+    0x05,
+    0x00,
+    0x00,
+    0x00,
+    0x08,
+    0x08,
+    0x00,
+    0x05,
+    0x08,
+    0x07,
+    0x07,
+    0x07,
+    0x07,
+    0x08,
+    0x08,
+    0x00,
+    0x00,
+    0x08,
+    0x08,
+    0x00,
+    0x00,
+    0x02,
+    0x05,
+    0x00,
+    0x08,
+    0x06,
+    0x05,
+    0x00,
+    0x00,
+    0x05,
+    0x09,
+    0x07,
+    0x07,
+    0x09,
+    0x05,
+    0x00,
+    0x07,
+    0x07,
+    0x08,
+    0x07
 };
 
 static const u8 gUnknown_8456C17[] = {
-        0x5a,
-        0x5b,
-        0x5d,
-        0x5e,
-        0x5f,
-        0x62,
-        0x60,
-        0x59
+    0x5a,
+    0x5b,
+    0x5d,
+    0x5e,
+    0x5f,
+    0x62,
+    0x60,
+    0x59
 };
 
 static const u8 *const gUnknown_8456C20[] = {
-        gUnknown_841AC51,
-        gUnknown_841ABAB,
-        gUnknown_841ABCD,
-        gUnknown_841AC2A,
-        gUnknown_841ABF9,
-        gUnknown_841AC93,
-        gUnknown_841ACBC,
-        gUnknown_841AD69,
-        gUnknown_841AD1D,
-        gUnknown_841A90C,
-        gUnknown_841A8E0,
-        gUnknown_841AD3C
+    gUnknown_841AC51,
+    gUnknown_841ABAB,
+    gUnknown_841ABCD,
+    gUnknown_841AC2A,
+    gUnknown_841ABF9,
+    gUnknown_841AC93,
+    gUnknown_841ACBC,
+    gUnknown_841AD69,
+    gUnknown_841AD1D,
+    gUnknown_841A90C,
+    gUnknown_841A8E0,
+    gUnknown_841AD3C
 };
 
-static u16 * sub_8115280(u16 * a0, const u16 * a1)
+static u16 *sub_8115280(u16 *a0, const u16 *a1)
 {
-    u16 * r2 = sub_8113DE0(35, a0);
+    u16 *r2 = sub_8113DE0(35, a0);
     if (r2 == NULL)
         return NULL;
     *((u8 *)r2 + 0) = *((const u8 *)a1 + 0);
@@ -4701,11 +4701,11 @@ static u16 * sub_8115280(u16 * a0, const u16 * a1)
     return r2 + 1;
 }
 
-static const u16 * sub_81152BC(const u16 * a0)
+static const u16 *sub_81152BC(const u16 *a0)
 {
     u8 r4, r6;
-    const u16 * r5 = sub_8113E88(35, a0);
-    const u8 * r5_2 = (const u8 *)r5 + 0;
+    const u16 *r5 = sub_8113E88(35, a0);
+    const u8 *r5_2 = (const u8 *)r5 + 0;
     r6 = r5_2[1];
     sub_80C4DF8(gStringVar1, r5_2[0]);
     StringCopy(gStringVar2, gUnknown_8456AF0[r6]);
@@ -4715,7 +4715,7 @@ static const u16 * sub_81152BC(const u16 * a0)
         {
             if (r5_2[0] != gUnknown_8456C17[r4])
                 continue;
-            if (FlagGet(0x820 + r4) == TRUE)
+            if (FlagGet(FLAG_BADGE01_GET + r4) == TRUE)
                 StringExpandPlaceholders(gStringVar4, gUnknown_841AE8F);
             else
                 StringExpandPlaceholders(gStringVar4, gUnknown_841AE48);
@@ -4735,7 +4735,7 @@ void sub_811539C(void)
     gUnknown_203B04B = TRUE;
 }
 
-static bool8 sub_81153A8(u16 a0, u16 * a1)
+static bool8 sub_81153A8(u16 a0, u16 *a1)
 {
     if (a0 != 35)
     {
@@ -4748,7 +4748,7 @@ static bool8 sub_81153A8(u16 a0, u16 * a1)
     return TRUE;
 }
 
-static bool8 sub_81153E4(u16 a0, u16 * a1)
+static bool8 sub_81153E4(u16 a0, u16 *a1)
 {
     if (a0 != 35)
         return TRUE;
@@ -4758,9 +4758,9 @@ static bool8 sub_81153E4(u16 a0, u16 * a1)
     return TRUE;
 }
 
-static u16 * sub_8115410(u16 * a0, const u16 * a1)
+static u16 *sub_8115410(u16 *a0, const u16 *a1)
 {
-    u8 * r3;
+    u8 *r3;
     a0 = sub_8113DE0(36, a0);
     if (a0 == NULL)
         return NULL;
@@ -4775,17 +4775,17 @@ static u16 * sub_8115410(u16 * a0, const u16 * a1)
     return (u16 *)(r3 + 2);
 }
 
-static const u16 * sub_8115460(const u16 * a0)
+static const u16 *sub_8115460(const u16 *a0)
 {
-    const u16 * r4 = sub_8113E88(36, a0);
-    const u8 * r5 = (const u8 *)r4 + 2;
+    const u16 *r4 = sub_8113E88(36, a0);
+    const u8 *r5 = (const u8 *)r4 + 2;
     QuestLog_AutoGetSpeciesName(r4[0], gStringVar1, 0);
     if (r5[1] != 0xFF)
         sub_80C4DF8(gStringVar2, r5[1]);
     if (r5[0] == 7)
     {
         if (r5[1] == 0x58)
-            StringCopy(gStringVar3, gUnknown_841B09F);
+            StringCopy(gStringVar3, gQuestLogString_Home);
         else
             StringCopy(gStringVar3, gUnknown_8418C1B);
     }
@@ -4793,7 +4793,7 @@ static const u16 * sub_8115460(const u16 * a0)
     return (const u16 *)(r5 + 2);
 }
 
-static u16 * sub_81154DC(u16 * a0, const u16 * a1)
+static u16 *sub_81154DC(u16 *a0, const u16 *a1)
 {
     a0 = sub_8113DE0(37, a0);
     if (a0 == NULL)
@@ -4807,10 +4807,10 @@ static u16 * sub_81154DC(u16 * a0, const u16 * a1)
     return a0 + 5;
 }
 
-static const u16 * sub_8115518(const u16 * a0)
+static const u16 *sub_8115518(const u16 *a0)
 {
-    const u16 * r4 = sub_8113E88(37, a0);
-    const u8 * r7 = (const u8 *)r4 + 8;
+    const u16 *r4 = sub_8113E88(37, a0);
+    const u8 *r7 = (const u8 *)r4 + 8;
     u32 r6 = (r4[2] << 16) + r4[3];
     DynamicPlaceholderTextUtil_Reset();
     sub_80C4DF8(gStringVar1, r7[0]);
@@ -4827,7 +4827,7 @@ static const u16 * sub_8115518(const u16 * a0)
     return (const u16 *)(r7 + 2);
 }
 
-static u16 * sub_81155A4(u16 * a0, const u16 * a1)
+static u16 *sub_81155A4(u16 *a0, const u16 *a1)
 {
     a0 = sub_8113DE0(38, a0);
     if (a0 == NULL)
@@ -4841,7 +4841,7 @@ static u16 * sub_81155A4(u16 * a0, const u16 * a1)
     return a0 + 5;
 }
 
-static const u16 * sub_81155E0(const u16 * a0) {
+static const u16 *sub_81155E0(const u16 *a0) {
     const u16 *r5 = sub_8113E88(38, a0);
     const u8 *r7 = (const u8 *) r5 + 8;
     u32 r6 = (r5[2] << 16) + r5[3];
@@ -4873,7 +4873,7 @@ static const u16 * sub_81155E0(const u16 * a0) {
     return (const u16 *)(r7 + 2);
 }
 
-static u16 * sub_81156D8(u16 * a0, const u16 * a1)
+static u16 *sub_81156D8(u16 *a0, const u16 *a1)
 {
     a0 = sub_8113DE0(40, a0);
     if (a0 == NULL)
@@ -4883,10 +4883,10 @@ static u16 * sub_81156D8(u16 * a0, const u16 * a1)
     return a0 + 2;
 }
 
-static const u16 * sub_8115700(const u16 * a0)
+static const u16 *sub_8115700(const u16 *a0)
 {
-    const u16 * r4 = sub_8113E88(40, a0);
-    const u8 * r5 = (const u8 *)r4 + 2;
+    const u16 *r4 = sub_8113E88(40, a0);
+    const u8 *r5 = (const u8 *)r4 + 2;
     sub_80C4DF8(gStringVar1, r5[0]);
     StringCopy(gStringVar2, ItemId_GetName(r4[0]));
     StringExpandPlaceholders(gStringVar4, gUnknown_841B03F);
@@ -4990,7 +4990,7 @@ void sub_8115798(void)
     }
 }
 
-static u16 * sub_81157DC(u16 * a0, const u16 * a1)
+static u16 *sub_81157DC(u16 *a0, const u16 *a1)
 {
     a0 = sub_8113DE0(42, a0);
     if (a0 == NULL)
@@ -4999,15 +4999,15 @@ static u16 * sub_81157DC(u16 * a0, const u16 * a1)
     return a0 + 1;
 }
 
-static const u16 * sub_8115800(const u16 * a0)
+static const u16 *sub_8115800(const u16 *a0)
 {
-    const u16 * r4 = sub_8113E88(42, a0);
+    const u16 *r4 = sub_8113E88(42, a0);
     sub_80C4DF8(gStringVar1, r4[0]);
     StringExpandPlaceholders(gStringVar4, gUnknown_841B064);
     return r4 + 1;
 }
 
-void sub_8115834(u8 * a0)
+void sub_8115834(u8 *a0)
 {
     s32 i;
     if (*a0++ == EXT_CTRL_CODE_BEGIN && *a0++ == EXT_CTRL_CODE_JPN)

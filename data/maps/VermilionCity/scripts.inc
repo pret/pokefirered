@@ -22,12 +22,12 @@ Movement_166903:: @ 8166903
 
 VermilionCity_MapScript1_166906:: @ 8166906
 	setworldmapflag FLAG_WORLD_MAP_VERMILION_CITY
-	checkflag FLAG_0x2F9
-	call_if 1, EventScript_166913
+	checkflag FLAG_TALKED_TO_OAKS_AIDE_IN_VERMILION
+	call_if TRUE, EventScript_166913
 	end
 
 EventScript_166913:: @ 8166913
-	setflag FLAG_0x0A1
+	setflag FLAG_HIDE_VERMILION_CITY_OAKS_AIDE
 	return
 
 VermilionCity_EventScript_166917:: @ 8166917
@@ -38,7 +38,7 @@ VermilionCity_EventScript_166920:: @ 8166920
 	lock
 	faceplayer
 	compare_var_to_value VAR_MAP_SCENE_VERMILION_CITY, 3
-	goto_if_eq EventScript_166937
+	goto_if eq, EventScript_166937
 	msgbox gUnknown_817F776
 	release
 	end
@@ -52,35 +52,35 @@ VermilionCity_EventScript_166941:: @ 8166941
 	lock
 	faceplayer
 	compare_var_to_value VAR_MAP_SCENE_VERMILION_CITY, 3
-	goto_if_eq EventScript_166996
+	goto_if eq, EventScript_166996
 	msgbox gUnknown_817FA22
 	release
 	end
 
 EventScript_166958:: @ 8166958
-	checkflag FLAG_0x84A
-	goto_if 0, EventScript_1A77B0
+	checkflag FLAG_SYS_GOT_MYSTIC_TICKET
+	goto_if FALSE, EventScript_1A77B0
 	checkitem ITEM_MYSTIC_TICKET, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_1A77B0
+	goto_if eq, EventScript_1A77B0
 	goto EventScript_1A77AA
 	end
 
 EventScript_166977:: @ 8166977
-	checkflag FLAG_0x84B
-	goto_if 0, EventScript_1A77B0
+	checkflag FLAG_SYS_GOT_AURORA_TICKET
+	goto_if FALSE, EventScript_1A77B0
 	checkitem ITEM_AURORA_TICKET, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_1A77B0
+	goto_if eq, EventScript_1A77B0
 	goto EventScript_1A77AA
 	end
 
 EventScript_166996:: @ 8166996
-	setvar VAR_0x8004, 0
+	setvar VAR_0x8004, SEAGALLOP_VERMILION_CITY
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
-	goto_if 4, EventScript_1669BB
+	goto_if ge, EventScript_1669BB
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 1
-	goto_if 4, EventScript_166B3B
+	goto_if ge, EventScript_166B3B
 	msgbox gUnknown_817FB10
 	release
 	end
@@ -88,15 +88,15 @@ EventScript_166996:: @ 8166996
 EventScript_1669BB:: @ 81669BB
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	call EventScript_166958
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_1669FD
+	goto_if eq, EventScript_1669FD
 	call EventScript_166977
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_166A5F
-	setvar VAR_0x8004, 0
+	goto_if eq, EventScript_166A5F
+	setvar VAR_0x8004, SEAGALLOP_VERMILION_CITY
 	message Text_17FBB8
 	waitmessage
 	goto EventScript_1A911E
@@ -105,9 +105,9 @@ EventScript_1669BB:: @ 81669BB
 EventScript_1669FD:: @ 81669FD
 	call EventScript_166977
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_166AB1
-	checkflag FLAG_0x2F0
-	call_if 0, EventScript_166A53
+	goto_if eq, EventScript_166AB1
+	checkflag FLAG_SHOWED_MYSTICTICKET_TO_CAPTAIN
+	call_if FALSE, EventScript_166A53
 	message Text_17FCC1
 	waitmessage
 	multichoice 17, 6, 54, 0
@@ -119,13 +119,13 @@ EventScript_1669FD:: @ 81669FD
 	end
 
 EventScript_166A53:: @ 8166A53
-	setflag FLAG_0x2F0
+	setflag FLAG_SHOWED_MYSTICTICKET_TO_CAPTAIN
 	msgbox gUnknown_817FC00
 	return
 
 EventScript_166A5F:: @ 8166A5F
-	checkflag FLAG_0x2F1
-	call_if 0, EventScript_166AA5
+	checkflag FLAG_SHOWED_AURORATICKET_TO_CAPTAIN
+	call_if FALSE, EventScript_166AA5
 	message Text_17FCC1
 	waitmessage
 	multichoice 13, 6, 55, 0
@@ -137,15 +137,15 @@ EventScript_166A5F:: @ 8166A5F
 	end
 
 EventScript_166AA5:: @ 8166AA5
-	setflag FLAG_0x2F1
+	setflag FLAG_SHOWED_AURORATICKET_TO_CAPTAIN
 	msgbox gUnknown_817FC5F
 	return
 
 EventScript_166AB1:: @ 8166AB1
-	checkflag FLAG_0x2F0
-	call_if 0, EventScript_166A53
-	checkflag FLAG_0x2F1
-	call_if 0, EventScript_166AA5
+	checkflag FLAG_SHOWED_MYSTICTICKET_TO_CAPTAIN
+	call_if FALSE, EventScript_166A53
+	checkflag FLAG_SHOWED_AURORATICKET_TO_CAPTAIN
+	call_if FALSE, EventScript_166AA5
 	message Text_17FCC1
 	waitmessage
 	multichoice 13, 5, 56, 0
@@ -159,22 +159,22 @@ EventScript_166AB1:: @ 8166AB1
 
 EventScript_166B0B:: @ 8166B0B
 	msgbox gUnknown_817FCEC
-	setvar VAR_0x8004, 0
-	setvar VAR_0x8006, 9
+	setvar VAR_0x8004, SEAGALLOP_VERMILION_CITY
+	setvar VAR_0x8006, SEAGALLOP_NAVEL_ROCK
 	goto EventScript_1A90DA
 	end
 
 EventScript_166B23:: @ 8166B23
 	msgbox gUnknown_817FD5F
-	setvar VAR_0x8004, 0
-	setvar VAR_0x8006, 10
+	setvar VAR_0x8004, SEAGALLOP_VERMILION_CITY
+	setvar VAR_0x8006, SEAGALLOP_BIRTH_ISLAND
 	goto EventScript_1A90DA
 	end
 
 EventScript_166B3B:: @ 8166B3B
 	message Text_17FB23
 	waitmessage
-	setvar VAR_0x8004, 0
+	setvar VAR_0x8004, SEAGALLOP_VERMILION_CITY
 	multichoice 19, 5, 57, 0
 	switch VAR_RESULT
 	case 0, EventScript_1A8FEE
@@ -210,10 +210,10 @@ EventScript_166BA0:: @ 8166BA0
 	applymovement 255, Movement_1A75EB
 	waitmovement 0
 	compare_var_to_value VAR_MAP_SCENE_VERMILION_CITY, 3
-	goto_if_eq EventScript_166BED
+	goto_if eq, EventScript_166BED
 	msgbox gUnknown_817FA3C
-	checkflag FLAG_0x234
-	goto_if 0, EventScript_166BDE
+	checkflag FLAG_GOT_SS_TICKET
+	goto_if FALSE, EventScript_166BDE
 	msgbox gUnknown_817FA77
 	setvar VAR_VERMILION_CITY_TICKET_CHECK_TRIGGER, 1
 	releaseall
@@ -226,11 +226,11 @@ EventScript_166BDE:: @ 8166BDE
 	end
 
 EventScript_166BED:: @ 8166BED
-	setvar VAR_0x8004, 0
+	setvar VAR_0x8004, SEAGALLOP_VERMILION_CITY
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
-	goto_if 4, EventScript_1669BB
+	goto_if ge, EventScript_1669BB
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 1
-	goto_if 4, EventScript_166B3B
+	goto_if ge, EventScript_166B3B
 	msgbox gUnknown_817FB10
 	closemessage
 	goto EventScript_1A9108
@@ -243,7 +243,7 @@ VermilionCity_EventScript_166C17:: @ 8166C17
 VermilionCity_EventScript_166C20:: @ 8166C20
 	lock
 	faceplayer
-	setflag FLAG_0x2F9
+	setflag FLAG_TALKED_TO_OAKS_AIDE_IN_VERMILION
 	msgbox gUnknown_817FDD2
 	release
 	end
@@ -277,9 +277,7 @@ VermilionCity_EventScript_166C65:: @ 8166C65
 
 VermilionCity_EventScript_166C6E:: @ 8166C6E
 	lockall
-	setvar VAR_0x8004, 4
-	setvar VAR_0x8005, 0
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_LTSURGE, 0
 	msgbox gUnknown_817F9CC
 	releaseall
 	end

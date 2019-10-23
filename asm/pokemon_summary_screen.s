@@ -10814,7 +10814,7 @@ _08139E58:
 	adds r0, r5, 0
 	movs r2, 0x18
 	movs r3, 0x20
-	bl sub_8096E18
+	bl CreateMonIcon
 	ldr r1, [r6]
 	ldr r2, _08139E9C @ =0x00003014
 	adds r1, r2
@@ -10916,7 +10916,7 @@ sub_8139F20: @ 8139F20
 	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8097138
+	bl SafeFreeMonIconPalette
 	ldr r0, [r4]
 	ldr r1, _08139F5C @ =0x00003014
 	adds r0, r1
@@ -10926,7 +10926,7 @@ sub_8139F20: @ 8139F20
 	lsls r0, 2
 	ldr r1, _08139F60 @ =gSprites
 	adds r0, r1
-	bl sub_8097070
+	bl DestroyMonIcon
 	pop {r4}
 	pop {r0}
 	bx r0

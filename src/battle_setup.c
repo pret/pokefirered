@@ -405,7 +405,7 @@ static void sub_807FB08(void)
     sub_805C780();
     gMain.savedCallback = sub_807FAF8;
     SavePlayerParty();
-    sub_8159F40();
+    InitPokedudePartyAndOpponent();
     CreateBattleStartTask(GetWildBattleTransition(), 0);
 }
 
@@ -977,7 +977,7 @@ const u8 *BattleSetup_GetScriptAddrAfterBattle(void)
     if (sTrainerBattleEndScript != NULL)
         return sTrainerBattleEndScript;
     else
-        return gUnknown_81C555B;
+        return EventScript_1C555B;
 }
 
 const u8 *BattleSetup_GetTrainerPostBattleScript(void)
@@ -985,7 +985,7 @@ const u8 *BattleSetup_GetTrainerPostBattleScript(void)
     if (sTrainerABattleScriptRetAddr != NULL)
         return sTrainerABattleScriptRetAddr;
     else
-        return gUnknown_81C555B;
+        return EventScript_1C555B;
 }
 
 void ShowTrainerCantBattleSpeech(void)

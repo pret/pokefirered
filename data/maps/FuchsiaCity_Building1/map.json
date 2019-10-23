@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "33",
+      "graphics_id": "MAP_OBJ_GFX_OLD_MAN_2",
       "x": 3,
       "y": 5,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "97",
+      "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
       "x": 11,
       "y": 6,
       "elevation": 3,
@@ -36,11 +36,11 @@
       "movement_range_y": 0,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FuchsiaCity_Building1_EventScript_1BE11D",
+      "script": "EventScript_InteractWithStrengthBoulderObject",
       "flag": "0"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 11,
       "y": 5,
       "elevation": 3,
@@ -50,7 +50,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "FuchsiaCity_Building1_EventScript_1BEAA2",
-      "flag": "441"
+      "flag": "FLAG_HIDE_FUCHSIA_CITY_BUILDING1_RARE_CANDY"
     },
     {
       "graphics_id": "0",
@@ -63,7 +63,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "FuchsiaCity_Building1_EventScript_1ACEB8",
-      "flag": "159"
+      "flag": "FLAG_HIDE_FAME_CHECKER_KOGA_JOURNAL"
     }
   ],
   "warp_events": [

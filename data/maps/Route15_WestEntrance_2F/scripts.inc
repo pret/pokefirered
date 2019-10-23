@@ -21,24 +21,24 @@ Route15_WestEntrance_2F_EventScript_1700B9:: @ 81700B9
 	lock
 	faceplayer
 	call EventScript_170145
-	checkflag FLAG_0x256
-	goto_if_eq EventScript_17013B
+	checkflag FLAG_GOT_EXP_SHARE_FROM_OAKS_AIDE
+	goto_if TRUE, EventScript_17013B
 	msgbox gUnknown_819F5AB, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_1A7AD1
+	goto_if eq, EventScript_1A7AD1
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, Special_GetPokedexCount
 	getnumberstring 2, VAR_0x8006
 	call EventScript_170145
 	compare_var_to_value VAR_0x8006, 50
-	goto_if 0, EventScript_1A7ABD
+	goto_if lt, EventScript_1A7ABD
 	msgbox gUnknown_819F6AA
 	checkitemspace ITEM_EXP_SHARE, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_1A7AC7
+	goto_if eq, EventScript_1A7AC7
 	additem ITEM_EXP_SHARE, 1
 	giveitemfanfaremsg gUnknown_819F6FD, ITEM_EXP_SHARE
-	setflag FLAG_0x256
+	setflag FLAG_GOT_EXP_SHARE_FROM_OAKS_AIDE
 	msgbox gUnknown_819F71F
 	release
 	end

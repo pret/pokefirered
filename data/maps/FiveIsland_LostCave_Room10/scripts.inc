@@ -4,8 +4,8 @@ FiveIsland_LostCave_Room10_MapScripts:: @ 8164C2D
 	.byte 0
 
 FiveIsland_LostCave_Room10_MapScript1_164C38:: @ 8164C38
-	checktrainerflag FLAG_0x25E
-	call_if 1, EventScript_164C42
+	checktrainerflag TRAINER_LADY_SELPHY
+	call_if eq, EventScript_164C42
 	end
 
 EventScript_164C42:: @ 8164C42
@@ -27,8 +27,8 @@ EventScript_164C52:: @ 8164C52
 	msgbox gUnknown_817D062
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_164CB6
-	trainerbattle 3, 606, 0, Text_17D086
+	goto_if eq, EventScript_164CB6
+	trainerbattle 3, TRAINER_LADY_SELPHY, 0, Text_17D086
 	msgbox gUnknown_817D0B2
 	closemessage
 	call EventScript_164CA5
@@ -38,14 +38,14 @@ EventScript_164C52:: @ 8164C52
 	end
 
 EventScript_164CA5:: @ 8164CA5
-	setflag FLAG_0x093
-	clearflag FLAG_0x094
+	setflag FLAG_HIDE_LOST_CAVE_SELPHY
+	clearflag FLAG_HIDE_RESORT_GORGEOUS_SELPHY
 	setvar VAR_MAP_SCENE_FIVE_ISLAND_LOST_CAVE_ROOM10, 1
 	setvar VAR_MAP_SCENE_FIVE_ISLAND_RESORT_GORGEOUS, 1
 	return
 
 EventScript_164CB6:: @ 8164CB6
-	settrainerflag FLAG_0x25E
+	settrainerflag TRAINER_LADY_SELPHY
 	call EventScript_164CA5
 	releaseall
 	end

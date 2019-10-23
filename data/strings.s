@@ -1551,7 +1551,7 @@ gUnknown_8417B21:: @ 0x8417B21
 	.string "POKé BALLS$"
 
 gUnknown_8417B2C:: @ 0x8417B2C
-	.string "TMs を HMs$"
+	.string "TMs & HMs$"
 
 gUnknown_8417B36:: @ 0x8417B36
 	.string "BERRIES$"
@@ -1793,16 +1793,16 @@ gUnknown_8417F69:: @ 0x8417F69
 gUnknown_8417F77:: @ 0x8417F77
 	.string "JOIN GROUP$"
 
-gUnknown_8417F82:: @ 0x8417F82
+gOtherText_Single:: @ 0x8417F82
 	.string "SINGLE$"
 
-gUnknown_8417F89:: @ 0x8417F89
+gOtherText_Double:: @ 0x8417F89
 	.string "DOUBLE$"
 
-gUnknown_8417F90:: @ 0x8417F90
+gOtherText_Knockout:: @ 0x8417F90
 	.string "KNOCKOUT$"
 
-gUnknown_8417F99:: @ 0x8417F99
+gOtherText_Mixed:: @ 0x8417F99
 	.string "MIXED$"
 
 gUnknown_8417F9F:: @ 0x8417F9F
@@ -2890,7 +2890,7 @@ gUnknown_8419D57:: @ 8419D57
 	.string "POKéMON TRADES$"
 
 gUnknown_8419D66:: @ 8419D66
-	.string "UNION TRADES を BATTLES$"
+	.string "UNION TRADES & BATTLES$"
 
 gUnknown_8419D7D:: @ 8419D7D
 	.string "BERRY CRUSH$"
@@ -4072,7 +4072,7 @@ gCreditsString_Teruki_Murakawa_Souichi_Yamamoto_Yuichiro_Ito_Akira_Kinashi:: @ 0
 	.align 2
 gCreditsString_Environment_Tool_Programmers:: @ 0x841DB7C
 	.string "\n"
-	.string "Environment を Tool Programmers\n"
+	.string "Environment & Tool Programmers\n"
 	.string "\n\n"
 	.string "\n\n"
 	.string "$"

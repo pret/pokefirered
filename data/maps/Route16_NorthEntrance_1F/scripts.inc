@@ -3,9 +3,9 @@ Route16_NorthEntrance_1F_MapScripts:: @ 81701C2
 	.byte 0
 
 Route16_NorthEntrance_1F_MapScript1_1701C8:: @ 81701C8
-	clearflag FLAG_0x830
-	checkflag FLAG_0x271
-	call_if 1, EventScript_1701D5
+	clearflag FLAG_SYS_ON_CYCLING_ROAD
+	checkflag FLAG_GOT_BICYCLE
+	call_if TRUE, EventScript_1701D5
 	end
 
 EventScript_1701D5:: @ 81701D5
@@ -54,13 +54,13 @@ EventScript_170220:: @ 8170220
 	waitmovement 0
 	delay 20
 	compare_var_to_value VAR_0x8008, 1
-	call_if 1, EventScript_170279
+	call_if eq, EventScript_170279
 	compare_var_to_value VAR_0x8008, 2
-	call_if 1, EventScript_170284
+	call_if eq, EventScript_170284
 	compare_var_to_value VAR_0x8008, 3
-	call_if 1, EventScript_17028F
+	call_if eq, EventScript_17028F
 	compare_var_to_value VAR_0x8008, 4
-	call_if 1, EventScript_17029A
+	call_if eq, EventScript_17029A
 	msgbox gUnknown_819F95F
 	closemessage
 	applymovement 255, Movement_1702B3

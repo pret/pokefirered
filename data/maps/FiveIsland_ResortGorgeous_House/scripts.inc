@@ -4,16 +4,16 @@ FiveIsland_ResortGorgeous_House_MapScripts:: @ 8171EBD
 FiveIsland_ResortGorgeous_House_EventScript_171EBE:: @ 8171EBE
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	lock
 	faceplayer
-	checkflag FLAG_0x002
-	goto_if_eq EventScript_172043
+	checkflag FLAG_TEMP_2
+	goto_if TRUE, EventScript_172043
 	compare_var_to_value VAR_STORAGE_UNKNOWN, 65535
-	goto_if_eq EventScript_171F0B
+	goto_if eq, EventScript_171F0B
 	compare_var_to_value VAR_STORAGE_UNKNOWN, 0
-	goto_if 5, EventScript_171F19
+	goto_if ne, EventScript_171F19
 	msgbox gUnknown_81A42A0
 	goto EventScript_171EFE
 	end
@@ -33,7 +33,7 @@ EventScript_171F19:: @ 8171F19
 	copyvar VAR_0x8004, VAR_STORAGE_UNKNOWN
 	specialvar VAR_RESULT, sub_80CC48C
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_171F34
+	goto_if eq, EventScript_171F34
 	goto EventScript_171EFE
 	end
 
@@ -53,19 +53,19 @@ EventScript_171F34:: @ 8171F34
 	msgbox gUnknown_81A4566
 	closemessage
 	compare_var_to_value VAR_FACING, 2
-	call_if 1, EventScript_171FCD
+	call_if eq, EventScript_171FCD
 	compare_var_to_value VAR_FACING, 1
-	call_if 1, EventScript_171FE9
+	call_if eq, EventScript_171FE9
 	compare_var_to_value VAR_FACING, 4
-	call_if 1, EventScript_171FFE
+	call_if eq, EventScript_171FFE
 	compare_var_to_value VAR_FACING, 3
-	call_if 1, EventScript_17201A
+	call_if eq, EventScript_17201A
 	moveobjectoffscreen 2
 	msgbox gUnknown_81A458E
 	giveitem VAR_0x403B
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_172025
-	setflag FLAG_0x002
+	goto_if eq, EventScript_172025
+	setflag FLAG_TEMP_2
 	setvar VAR_STORAGE_UNKNOWN, 0
 	release
 	end
@@ -103,7 +103,7 @@ EventScript_172025:: @ 8172025
 	msgbox gUnknown_81A45E8
 	textcolor 1
 	msgbox gUnknown_81A461B
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	setvar VAR_STORAGE_UNKNOWN, 0
 	release
 	end

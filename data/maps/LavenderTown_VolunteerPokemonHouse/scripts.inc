@@ -4,13 +4,13 @@ LavenderTown_VolunteerPokemonHouse_MapScripts:: @ 816B149
 LavenderTown_VolunteerPokemonHouse_EventScript_16B14A:: @ 816B14A
 	lock
 	faceplayer
-	checkflag FLAG_0x23D
-	goto_if_eq EventScript_16B196
+	checkflag FLAG_GOT_POKE_FLUTE
+	goto_if TRUE, EventScript_16B196
 	msgbox gUnknown_81936FF
 	checkitemspace ITEM_POKE_FLUTE, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16B1A0
-	setflag FLAG_0x23D
+	goto_if eq, EventScript_16B1A0
+	setflag FLAG_GOT_POKE_FLUTE
 	additem ITEM_POKE_FLUTE, 1
 	giveitemfanfaremsg gUnknown_81937BD, ITEM_POKE_FLUTE, 1, MUS_FAN5
 	msgbox gUnknown_81937E5
@@ -30,9 +30,7 @@ EventScript_16B1A0:: @ 816B1A0
 LavenderTown_VolunteerPokemonHouse_EventScript_16B1AA:: @ 816B1AA
 	lock
 	faceplayer
-	setvar VAR_0x8004, 14
-	setvar VAR_0x8005, 0
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_MRFUJI, 0
 	msgbox gUnknown_8193652
 	release
 	end
@@ -44,8 +42,8 @@ LavenderTown_VolunteerPokemonHouse_EventScript_16B1C3:: @ 816B1C3
 LavenderTown_VolunteerPokemonHouse_EventScript_16B1CC:: @ 816B1CC
 	lock
 	faceplayer
-	checkflag FLAG_0x23C
-	goto_if_eq EventScript_16B1E1
+	checkflag FLAG_RESCUED_MR_FUJI
+	goto_if TRUE, EventScript_16B1E1
 	msgbox gUnknown_81935ED
 	release
 	end
@@ -77,9 +75,7 @@ LavenderTown_VolunteerPokemonHouse_EventScript_16B1FE:: @ 816B1FE
 
 LavenderTown_VolunteerPokemonHouse_EventScript_16B211:: @ 816B211
 	lockall
-	setvar VAR_0x8004, 14
-	setvar VAR_0x8005, 2
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_MRFUJI, 2
 	msgbox gUnknown_81938A0
 	releaseall
 	end

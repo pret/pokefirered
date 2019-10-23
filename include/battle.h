@@ -179,10 +179,10 @@ struct TrainerMonItemCustomMoves
 
 union TrainerMonPtr
 {
-    struct TrainerMonNoItemDefaultMoves *NoItemDefaultMoves;
-    struct TrainerMonNoItemCustomMoves *NoItemCustomMoves;
-    struct TrainerMonItemDefaultMoves *ItemDefaultMoves;
-    struct TrainerMonItemCustomMoves *ItemCustomMoves;
+    const struct TrainerMonNoItemDefaultMoves *NoItemDefaultMoves;
+    const struct TrainerMonNoItemCustomMoves *NoItemCustomMoves;
+    const struct TrainerMonItemDefaultMoves *ItemDefaultMoves;
+    const struct TrainerMonItemCustomMoves *ItemCustomMoves;
 };
 
 struct Trainer
@@ -196,7 +196,7 @@ struct Trainer
     /*0x18*/ bool8 doubleBattle;
     /*0x1C*/ u32 aiFlags;
     /*0x20*/ u8 partySize;
-    /*0x24*/ union TrainerMonPtr party;
+    /*0x24*/ const union TrainerMonPtr party;
 };
 
 #define PARTY_FLAG_CUSTOM_MOVES     0x1

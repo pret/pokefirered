@@ -3,35 +3,35 @@ Route25_SeaCottage_MapScripts:: @ 8170523
 	.byte 0
 
 Route25_SeaCottage_MapScript1_170529:: @ 8170529
-	checkflag FLAG_0x233
-	call_if 0, EventScript_17053C
-	checkflag FLAG_0x234
-	call_if 1, EventScript_170547
+	checkflag FLAG_HELPED_BILL_IN_SEA_COTTAGE
+	call_if FALSE, EventScript_17053C
+	checkflag FLAG_GOT_SS_TICKET
+	call_if TRUE, EventScript_170547
 	end
 
 EventScript_17053C:: @ 817053C
-	clearflag FLAG_0x032
+	clearflag FLAG_HIDE_BILL_CLEFAIRY
 	setobjectxyperm 1, 3, 3
 	return
 
 EventScript_170547:: @ 8170547
-	setflag FLAG_0x003
+	setflag FLAG_TEMP_3
 	return
 
 Route25_SeaCottage_EventScript_17054B:: @ 817054B
 	lock
 	faceplayer
-	checkflag FLAG_0x003
-	goto_if_eq EventScript_1706C8
-	checkflag FLAG_0x234
-	goto_if_eq EventScript_170640
-	checkflag FLAG_0x233
-	goto_if_eq EventScript_17064A
+	checkflag FLAG_TEMP_3
+	goto_if TRUE, EventScript_1706C8
+	checkflag FLAG_GOT_SS_TICKET
+	goto_if TRUE, EventScript_170640
+	checkflag FLAG_HELPED_BILL_IN_SEA_COTTAGE
+	goto_if TRUE, EventScript_17064A
 	checkplayergender
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_170580
+	goto_if eq, EventScript_170580
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_17058E
+	goto_if eq, EventScript_17058E
 	end
 
 EventScript_170580:: @ 8170580
@@ -46,18 +46,18 @@ EventScript_17058E:: @ 817058E
 
 EventScript_17059C:: @ 817059C
 	compare_var_to_value VAR_RESULT, 0
-	call_if 1, EventScript_170600
+	call_if eq, EventScript_170600
 	msgbox gUnknown_819FFD3
 	closemessage
 	delay 10
 	compare_var_to_value VAR_FACING, 1
-	call_if 1, EventScript_17062A
+	call_if eq, EventScript_17062A
 	compare_var_to_value VAR_FACING, 2
-	call_if 1, EventScript_170635
+	call_if eq, EventScript_170635
 	compare_var_to_value VAR_FACING, 3
-	call_if 1, EventScript_170635
+	call_if eq, EventScript_170635
 	compare_var_to_value VAR_FACING, 4
-	call_if 1, EventScript_170635
+	call_if eq, EventScript_170635
 	opendoor 10, 3
 	waitdooranim
 	applymovement 2, Movement_1706DB
@@ -66,16 +66,16 @@ EventScript_17059C:: @ 817059C
 	playse SE_C_MAKU_D
 	closedoor 10, 3
 	waitdooranim
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	release
 	end
 
 EventScript_170600:: @ 8170600
 	checkplayergender
 	compare_var_to_value VAR_RESULT, 0
-	call_if 1, EventScript_170618
+	call_if eq, EventScript_170618
 	compare_var_to_value VAR_RESULT, 1
-	call_if 1, EventScript_170621
+	call_if eq, EventScript_170621
 	return
 
 EventScript_170618:: @ 8170618
@@ -102,22 +102,20 @@ EventScript_170640:: @ 8170640
 	end
 
 EventScript_17064A:: @ 817064A
-	setvar VAR_0x8004, 13
-	setvar VAR_0x8005, 2
-	special UpdatePickStateFromSpecialVar8005
+	famechecker FAMECHECKER_BILL, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	checkplayergender
 	compare_var_to_value VAR_RESULT, 0
-	call_if 1, EventScript_1706AC
+	call_if eq, EventScript_1706AC
 	compare_var_to_value VAR_RESULT, 1
-	call_if 1, EventScript_1706B5
+	call_if eq, EventScript_1706B5
 	checkitemspace ITEM_SS_TICKET, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_1706BE
+	goto_if eq, EventScript_1706BE
 	additem ITEM_SS_TICKET, 1
 	giveitemfanfaremsg gUnknown_81A028E, ITEM_SS_TICKET, 1, MUS_FAN5
-	setflag FLAG_0x235
-	setflag FLAG_0x031
-	setflag FLAG_0x234
+	setflag FLAG_GOT_SS_TICKET_DUP
+	setflag FLAG_HIDE_NUGGET_BRIDGE_ROCKET
+	setflag FLAG_GOT_SS_TICKET
 	setflag FLAG_SYS_NOT_SOMEONES_PC
 	goto EventScript_170640
 	end
@@ -159,10 +157,10 @@ Movement_1706DB:: @ 81706DB
 
 Route25_SeaCottage_EventScript_1706DD:: @ 81706DD
 	lockall
-	checkflag FLAG_0x003
-	goto_if_eq EventScript_1707CA
-	checkflag FLAG_0x002
-	goto_if_eq EventScript_1706FA
+	checkflag FLAG_TEMP_3
+	goto_if TRUE, EventScript_1707CA
+	checkflag FLAG_TEMP_2
+	goto_if TRUE, EventScript_1706FA
 	msgbox gUnknown_81A0402
 	releaseall
 	end
@@ -171,9 +169,9 @@ EventScript_1706FA:: @ 81706FA
 	fadeoutbgm 0
 	msgbox gUnknown_81A042D
 	closemessage
-	clearflag FLAG_0x002
-	setflag FLAG_0x233
-	special SpawnScriptFieldObject
+	clearflag FLAG_TEMP_2
+	setflag FLAG_HELPED_BILL_IN_SEA_COTTAGE
+	special SpawnCameraObject
 	applymovement 127, Movement_1707BE
 	waitmovement 0
 	delay 35
@@ -203,7 +201,7 @@ EventScript_1706FA:: @ 81706FA
 	waitdooranim
 	fadeinbgm 0
 	addobject 1
-	clearflag FLAG_0x033
+	clearflag FLAG_HIDE_BILL_HUMAN_SEA_COTTAGE
 	delay 50
 	playfanfare MUS_FANFA1
 	applymovement 1, Movement_170888
@@ -216,7 +214,7 @@ EventScript_1706FA:: @ 81706FA
 	waitdooranim
 	applymovement 1, Movement_170881
 	waitmovement 0
-	special RemoveScriptFieldObject
+	special RemoveCameraObject
 	releaseall
 	end
 

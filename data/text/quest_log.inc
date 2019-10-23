@@ -378,104 +378,104 @@ gUnknown_841B073:: @ 841B073
 	.string "And {PLAYER} saved the game at this\n"
 	.string "location: {STR_VAR_1}.$"
 
-gUnknown_841B09F:: @ 841B09F
+gQuestLogString_Home:: @ 841B09F
 	.string "HOME$"
 
-gUnknown_841B0A4:: @ 841B0A4
+gQuestLogString_OakResearchLab:: @ 841B0A4
 	.string "OAK RESEARCH LAB$"
 
-gUnknown_841B0B5:: @ 841B0B5
+gQuestLogString_Gym:: @ 841B0B5
 	.string "GYM$"
 
-gUnknown_841B0B9:: @ 841B0B9
+gQuestLogString_PokemonLeagueGate:: @ 841B0B9
 	.string "POKéMON LEAGUE GATE$"
 
-gUnknown_841B0CD:: @ 841B0CD
+gQuestLogString_ViridianForest:: @ 841B0CD
 	.string "VIRIDIAN FOREST$"
 
-gUnknown_841B0DD:: @ 841B0DD
+gQuestLogString_PewterMuseumOfScience:: @ 841B0DD
 	.string "PEWTER MUSEUM OF SCIENCE$"
 
-gUnknown_841B0F6:: @ 841B0F6
+gQuestLogString_MtMoon:: @ 841B0F6
 	.string "MT. MOON$"
 
-gUnknown_841B0FF:: @ 841B0FF
+gQuestLogString_BikeShop:: @ 841B0FF
 	.string "BIKE SHOP$"
 
-gUnknown_841B109:: @ 841B109
+gQuestLogString_BillSHouse:: @ 841B109
 	.string "BILL'S HOUSE$"
 
-gUnknown_841B116:: @ 841B116
+gQuestLogString_DayCare:: @ 841B116
 	.string "DAY CARE$"
 
-gUnknown_841B11F:: @ 841B11F
+gQuestLogString_UndergroundPath:: @ 841B11F
 	.string "UNDERGROUND PATH$"
 
-gUnknown_841B130:: @ 841B130
+gQuestLogString_PokemonFanClub:: @ 841B130
 	.string "POKéMON FAN CLUB$"
 
-gUnknown_841B141:: @ 841B141
+gQuestLogString_SSAnne:: @ 841B141
 	.string "S.S. ANNE$"
 
-gUnknown_841B14B:: @ 841B14B
+gQuestLogString_DiglettSCave:: @ 841B14B
 	.string "DIGLETT'S CAVE$"
 
-gUnknown_841B15A:: @ 841B15A
+gQuestLogString_RockTunnel:: @ 841B15A
 	.string "ROCK TUNNEL$"
 
-gUnknown_841B166:: @ 841B166
+gQuestLogString_PowerPlant:: @ 841B166
 	.string "POWER PLANT$"
 
-gUnknown_841B172:: @ 841B172
+gQuestLogString_PokemonTower:: @ 841B172
 	.string "POKéMON TOWER$"
 
-gUnknown_841B180:: @ 841B180
+gQuestLogString_VolunteerHouse:: @ 841B180
 	.string "VOLUNTEER HOUSE$"
 
-gUnknown_841B190:: @ 841B190
+gQuestLogString_NameRaterSHouse:: @ 841B190
 	.string "NAME RATER'S HOUSE$"
 
-gUnknown_841B1A3:: @ 841B1A3
+gQuestLogString_CeladonDeptStore:: @ 841B1A3
 	.string "CELADON DEPT. STORE$"
 
-gUnknown_841B1B7:: @ 841B1B7
+gQuestLogString_CeladonMansion:: @ 841B1B7
 	.string "CELADON MANSION$"
 
-gUnknown_841B1C7:: @ 841B1C7
+gQuestLogString_RocketGameCorner:: @ 841B1C7
 	.string "ROCKET GAME CORNER$"
 
-gUnknown_841B1DA:: @ 841B1DA
+gQuestLogString_Restaurant:: @ 841B1DA
 	.string "RESTAURANT$"
 
-gUnknown_841B1E5:: @ 841B1E5
+gQuestLogString_RocketHideout:: @ 841B1E5
 	.string "ROCKET HIDEOUT$"
 
-gUnknown_841B1F4:: @ 841B1F4
+gQuestLogString_SafariZone:: @ 841B1F4
 	.string "SAFARI ZONE$"
 
-gUnknown_841B200:: @ 841B200
+gQuestLogString_WardenSHome:: @ 841B200
 	.string "WARDEN'S HOME$"
 
-gUnknown_841B20E:: @ 841B20E
+gQuestLogString_FightingDojo:: @ 841B20E
 	.string "FIGHTING DOJO$"
 
-gUnknown_841B21C:: @ 841B21C
+gQuestLogString_SilphCo:: @ 841B21C
 	.string "SILPH CO.$"
 
-gUnknown_841B226:: @ 841B226
+gQuestLogString_SeafoamIslands:: @ 841B226
 	.string "SEAFOAM ISLANDS$"
 
-gUnknown_841B236:: @ 841B236
+gQuestLogString_PokemonMansion:: @ 841B236
 	.string "POKéMON MANSION$"
 
-gUnknown_841B246:: @ 841B246
+gQuestLogString_PokemonResearchLab:: @ 841B246
 	.string "POKéMON RESEARCH LAB$"
 
-gUnknown_841B25B:: @ 841B25B
+gQuestLogString_VictoryRoad:: @ 841B25B
 	.string "VICTORY ROAD$"
 
-gUnknown_841B268:: @ 841B268
+gQuestLogString_PokemonLeague:: @ 841B268
 	.string "POKéMON LEAGUE$"
 
-gUnknown_841B277:: @ 841B277
+gQuestLogString_CeruleanCave:: @ 841B277
 	.string "CERULEAN CAVE$"

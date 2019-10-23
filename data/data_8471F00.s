@@ -1,9 +1,12 @@
 #include "constants/species.h"
 #include "constants/items.h"
 #include "constants/moves.h"
+#include "constants/pokemon.h"
 #include "constants/easy_chat.h"
 #include "constants/facility_trainer_classes.h"
 
+#define MALE 0
+#define FEMALE 1
 #define NULL 0
 
 	.include "asm/macros.inc"
@@ -210,10 +213,7 @@ gUnknown_84791CC:: @ 84791CC
 	.incbin "baserom.gba", 0x4791CC, 0x1C
 
 gUnknown_84791E8:: @ 84791E8
-	.incbin "baserom.gba", 0x4791E8, 0xE8
-
-gUnknown_84792D0:: @ 84792D0
-	.incbin "baserom.gba", 0x4792D0, 0x10
+	.incbin "baserom.gba", 0x4791E8, 0x18
 
 	.section .rodata.8479668
 

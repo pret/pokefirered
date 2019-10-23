@@ -13,7 +13,7 @@ SevenIsland_TrainerTower_Lobby_MapScript1_164853:: @ 8164853
 	setvar VAR_0x8004, 18
 	special sub_815D9E8
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_164886
+	goto_if eq, EventScript_164886
 	setvar VAR_0x4000, 0
 	setobjectxy 255, 9, 7
 	applymovement 255, Movement_164AD4
@@ -31,7 +31,7 @@ SevenIsland_TrainerTower_Lobby_MapScript2_164887:: @ 8164887
 
 SevenIsland_TrainerTower_Lobby_MapScript4_164897:: @ 8164897
 	compare_var_to_value VAR_0x400D, 17
-	call_if 1, EventScript_1648A3
+	call_if eq, EventScript_1648A3
 	end
 
 EventScript_1648A3:: @ 81648A3
@@ -93,7 +93,7 @@ EventScript_16494B:: @ 816494B
 	closemessage
 	applymovement 255, Movement_164AD6
 	waitmovement 0
-	setvar VAR_0x4082, 0
+	setvar VAR_MAP_SCENE_TRAINER_TOWER, 0
 	release
 
 EventScript_16495C:: @ 816495C
@@ -112,7 +112,7 @@ SevenIsland_TrainerTower_Lobby_EventScript_164966:: @ 8164966
 	setvar VAR_0x8004, 20
 	special sub_815D9E8
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_164988
+	goto_if eq, EventScript_164988
 	msgbox gUnknown_817C9A2
 	goto EventScript_164990
 
@@ -126,7 +126,7 @@ EventScript_164990:: @ 8164990
 SevenIsland_TrainerTower_Lobby_EventScript_164992:: @ 8164992
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if eq, EventScript_1A7AE0
 	lock
 	faceplayer
 	message Text_1A6211
@@ -159,7 +159,7 @@ SevenIsland_TrainerTower_Lobby_EventScript_1649CE:: @ 81649CE
 	setvar VAR_0x8004, 17
 	special sub_815D9E8
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_164A00
+	goto_if eq, EventScript_164A00
 	msgbox gUnknown_817C7D9
 	goto EventScript_164A08
 
@@ -195,7 +195,7 @@ EventScript_164A53:: @ 8164A53
 
 EventScript_164AA0:: @ 8164AA0
 	copyvar VAR_0x8005, VAR_RESULT
-	setvar VAR_0x4082, 1
+	setvar VAR_MAP_SCENE_TRAINER_TOWER, 1
 	special sp000_heal_pokemon
 	msgbox gUnknown_817C8BF
 	setvar VAR_0x8004, 6

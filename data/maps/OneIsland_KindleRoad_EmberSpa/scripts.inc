@@ -20,9 +20,7 @@ OneIsland_KindleRoad_EmberSpa_EventScript_165377:: @ 8165377
 OneIsland_KindleRoad_EmberSpa_EventScript_165380:: @ 8165380
 	lock
 	faceplayer
-	setvar VAR_0x8004, 10
-	setvar VAR_0x8005, 3
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_BRUNO, 3
 	msgbox gUnknown_817D550
 	release
 	end
@@ -30,11 +28,11 @@ OneIsland_KindleRoad_EmberSpa_EventScript_165380:: @ 8165380
 OneIsland_KindleRoad_EmberSpa_EventScript_165399:: @ 8165399
 	lock
 	faceplayer
-	checkflag FLAG_0x2EF
-	goto_if_eq EventScript_1653C5
+	checkflag FLAG_GOT_HM06
+	goto_if TRUE, EventScript_1653C5
 	msgbox gUnknown_817D622
 	giveitem ITEM_HM06
-	setflag FLAG_0x2EF
+	setflag FLAG_GOT_HM06
 	msgbox gUnknown_817D6F3
 	release
 	end

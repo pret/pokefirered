@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "151",
+      "graphics_id": "MAP_OBJ_GFX_SS_ANNE",
       "x": 30,
       "y": 16,
       "elevation": 1,
@@ -24,7 +24,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "0x0",
-      "flag": "135"
+      "flag": "FLAG_HIDE_SS_ANNE"
     }
   ],
   "warp_events": [
@@ -72,8 +72,9 @@
       "y": 28,
       "elevation": 3,
       "item": "ITEM_LAVA_COOKIE",
-      "flag": "190",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_SSANNE_EXTERIOR_LAVA_COOKIE",
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

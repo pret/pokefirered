@@ -4,13 +4,13 @@ Route1_MapScripts:: @ 8167EFD
 Route1_EventScript_167EFE:: @ 8167EFE
 	lock
 	faceplayer
-	checkflag FLAG_0x230
-	goto_if_eq EventScript_167F48
+	checkflag FLAG_GOT_POTION_ON_ROUTE_1
+	goto_if TRUE, EventScript_167F48
 	msgbox gUnknown_818329D
 	textcolor 3
 	checkitemspace ITEM_POTION, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_1A6BF9
+	goto_if eq, EventScript_1A6BF9
 	getitemname 1, ITEM_POTION
 	playfanfare MUS_FANFA1
 	message Text_1A51F6
@@ -19,7 +19,7 @@ Route1_EventScript_167EFE:: @ 8167EFE
 	additem ITEM_POTION, 1
 	msgbox gUnknown_8183387
 	call EventScript_1A6675
-	setflag FLAG_0x230
+	setflag FLAG_GOT_POTION_ON_ROUTE_1
 	release
 	end
 

@@ -176,14 +176,14 @@ _080CA744: .4byte gStringVar1
 _080CA748: .4byte gUnknown_8417FCC
 	thumb_func_end sub_80CA714
 
-	thumb_func_start sub_80CA74C
-sub_80CA74C: @ 80CA74C
+	thumb_func_start Special_GetBattleOutcome
+Special_GetBattleOutcome: @ 80CA74C
 	ldr r0, _080CA754 @ =gBattleOutcome
 	ldrb r0, [r0]
 	bx lr
 	.align 2, 0
 _080CA754: .4byte gBattleOutcome
-	thumb_func_end sub_80CA74C
+	thumb_func_end Special_GetBattleOutcome
 
 	thumb_func_start Special_SetHiddenItemFlag
 Special_SetHiddenItemFlag: @ 80CA758
@@ -581,8 +581,8 @@ _080CAA2C: .4byte 0x0000028f
 _080CAA30: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_80CA9A8
 
-	thumb_func_start SpawnScriptFieldObject
-SpawnScriptFieldObject: @ 80CAA34
+	thumb_func_start SpawnCameraObject
+SpawnCameraObject: @ 80CAA34
 	push {lr}
 	sub sp, 0x8
 	ldr r0, _080CAA80 @ =gSaveBlock1Ptr
@@ -621,10 +621,10 @@ SpawnScriptFieldObject: @ 80CAA34
 	.align 2, 0
 _080CAA80: .4byte gSaveBlock1Ptr
 _080CAA84: .4byte gMapObjects
-	thumb_func_end SpawnScriptFieldObject
+	thumb_func_end SpawnCameraObject
 
-	thumb_func_start RemoveScriptFieldObject
-RemoveScriptFieldObject: @ 80CAA88
+	thumb_func_start RemoveCameraObject
+RemoveCameraObject: @ 80CAA88
 	push {lr}
 	bl GetPlayerAvatarObjectId
 	lsls r0, 24
@@ -640,7 +640,7 @@ RemoveScriptFieldObject: @ 80CAA88
 	bx r0
 	.align 2, 0
 _080CAAA8: .4byte gSaveBlock1Ptr
-	thumb_func_end RemoveScriptFieldObject
+	thumb_func_end RemoveCameraObject
 
 	thumb_func_start sub_80CAAAC
 sub_80CAAAC: @ 80CAAAC
@@ -1081,8 +1081,8 @@ sub_80CADC4: @ 80CADC4
 	bx r0
 	thumb_func_end sub_80CADC4
 
-	thumb_func_start sub_80CADEC
-sub_80CADEC: @ 80CADEC
+	thumb_func_start Special_SetVermilionTrashCans
+Special_SetVermilionTrashCans: @ 80CADEC
 	push {r4,r5,lr}
 	bl Random
 	lsls r0, 16
@@ -1377,7 +1377,7 @@ _080CB04C:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80CADEC
+	thumb_func_end Special_SetVermilionTrashCans
 
 	thumb_func_start sub_80CB054
 sub_80CB054: @ 80CB054
@@ -1591,8 +1591,8 @@ _080CB1FE:
 	bx r1
 	thumb_func_end Special_CheckAddCoins
 
-	thumb_func_start sub_80CB204
-sub_80CB204: @ 80CB204
+	thumb_func_start Special_GetElevatorFloor
+Special_GetElevatorFloor: @ 80CB204
 	push {r4,lr}
 	movs r3, 0x4
 	ldr r0, _080CB22C @ =gSaveBlock1Ptr
@@ -1742,7 +1742,7 @@ _080CB314:
 	bx r0
 	.align 2, 0
 _080CB324: .4byte 0x0000403a
-	thumb_func_end sub_80CB204
+	thumb_func_end Special_GetElevatorFloor
 
 	thumb_func_start sub_80CB328
 sub_80CB328: @ 80CB328
@@ -3142,19 +3142,19 @@ sub_80CBDE8: @ 80CBDE8
 	ldr r1, _080CBDF8 @ =gSelectedEventObject
 	movs r0, 0
 	strb r0, [r1]
-	ldr r1, _080CBDFC @ =gUnknown_20370DA
+	ldr r1, _080CBDFC @ =gSpecialVar_TextColor
 	movs r0, 0xFF
 	strh r0, [r1]
 	bx lr
 	.align 2, 0
 _080CBDF8: .4byte gSelectedEventObject
-_080CBDFC: .4byte gUnknown_20370DA
+_080CBDFC: .4byte gSpecialVar_TextColor
 	thumb_func_end sub_80CBDE8
 
 	thumb_func_start ContextNpcGetTextColor
 ContextNpcGetTextColor: @ 80CBE00
 	push {lr}
-	ldr r0, _080CBE18 @ =gUnknown_20370DA
+	ldr r0, _080CBE18 @ =gSpecialVar_TextColor
 	ldrh r0, [r0]
 	cmp r0, 0xFF
 	bne _080CBE44
@@ -3165,7 +3165,7 @@ ContextNpcGetTextColor: @ 80CBE00
 	movs r0, 0x3
 	b _080CBE48
 	.align 2, 0
-_080CBE18: .4byte gUnknown_20370DA
+_080CBE18: .4byte gSpecialVar_TextColor
 _080CBE1C: .4byte gSelectedEventObject
 _080CBE20:
 	ldr r2, _080CBE4C @ =gMapObjects
@@ -4329,8 +4329,8 @@ _080CC728: .4byte 0x00000808
 _080CC72C: .4byte 0x0000404d
 	thumb_func_end sub_80CC59C
 
-	thumb_func_start sub_80CC730
-sub_80CC730: @ 80CC730
+	thumb_func_start Special_BattleCardAction
+Special_BattleCardAction: @ 80CC730
 	push {lr}
 	ldr r0, _080CC744 @ =gSpecialVar_Result
 	ldrh r0, [r0]
@@ -4371,6 +4371,7 @@ _080CC772:
 	lsrs r0, 16
 	b _080CC78A
 _080CC77C:
+	@ AGB_ASSERT_EX(0, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/scr_tool.c", 3873)
 	ldr r0, _080CC790 @ =gUnknown_83F5EF0	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/scr_tool.c"
 	ldr r1, _080CC794 @ =0x00000f21
 	ldr r2, _080CC798 @ =gUnknown_83F5F24	"0"
@@ -4384,7 +4385,7 @@ _080CC78A:
 _080CC790: .4byte gUnknown_83F5EF0
 _080CC794: .4byte 0x00000f21
 _080CC798: .4byte gUnknown_83F5F24
-	thumb_func_end sub_80CC730
+	thumb_func_end Special_BattleCardAction
 
 	thumb_func_start set_unknown_box_id
 set_unknown_box_id: @ 80CC79C
@@ -4610,8 +4611,8 @@ _080CC940: .4byte 0x00004025
 _080CC944: .4byte 0x000001f3
 	thumb_func_end sub_80CC918
 
-	thumb_func_start sub_80CC948
-sub_80CC948: @ 80CC948
+	thumb_func_start Special_DaisyMassageServices
+Special_DaisyMassageServices: @ 80CC948
 	push {lr}
 	ldr r0, _080CC968 @ =gSpecialVar_0x8004
 	ldrh r1, [r0]
@@ -4630,7 +4631,7 @@ sub_80CC948: @ 80CC948
 _080CC968: .4byte gSpecialVar_0x8004
 _080CC96C: .4byte gPlayerParty
 _080CC970: .4byte 0x00004025
-	thumb_func_end sub_80CC948
+	thumb_func_end Special_DaisyMassageServices
 
 	thumb_func_start sub_80CC974
 sub_80CC974: @ 80CC974
@@ -4952,7 +4953,7 @@ _080CCBEA:
 	cmp r7, 0
 	bne _080CCC34
 	ldr r0, _080CCC24 @ =gStringVar2
-	ldr r1, _080CCC28 @ =gUnknown_82481BE
+	ldr r1, _080CCC28 @ =gMoveNames + 0x112A FRENZY PLANT
 	bl StringCopy
 	ldr r1, _080CCC2C @ =gSpecialVar_0x8005
 	movs r0, 0xF
@@ -4963,14 +4964,14 @@ _080CCBEA:
 _080CCC1C: .4byte gUnknown_83F6203
 _080CCC20: .4byte gPlayerParty
 _080CCC24: .4byte gStringVar2
-_080CCC28: .4byte gUnknown_82481BE
+_080CCC28: .4byte gMoveNames + 0x112A
 _080CCC2C: .4byte gSpecialVar_0x8005
 _080CCC30: .4byte 0x000002de
 _080CCC34:
 	cmp r7, 0x1
 	bne _080CCC5C
 	ldr r0, _080CCC4C @ =gStringVar2
-	ldr r1, _080CCC50 @ =gUnknown_824802B
+	ldr r1, _080CCC50 @ =gMoveNames + 0xF97 BLAST BURN
 	bl StringCopy
 	ldr r1, _080CCC54 @ =gSpecialVar_0x8005
 	movs r0, 0x10
@@ -4979,12 +4980,12 @@ _080CCC34:
 	b _080CCC6E
 	.align 2, 0
 _080CCC4C: .4byte gStringVar2
-_080CCC50: .4byte gUnknown_824802B
+_080CCC50: .4byte gMoveNames + 0xF97
 _080CCC54: .4byte gSpecialVar_0x8005
 _080CCC58: .4byte 0x000002df
 _080CCC5C:
 	ldr r0, _080CCC80 @ =gStringVar2
-	ldr r1, _080CCC84 @ =gUnknown_8248038
+	ldr r1, _080CCC84 @ =gMoveNames + 0xFA4 HYDRO CANNON
 	bl StringCopy
 	ldr r1, _080CCC88 @ =gSpecialVar_0x8005
 	movs r0, 0x11
@@ -5002,7 +5003,7 @@ _080CCC7A:
 	b _080CCCE4
 	.align 2, 0
 _080CCC80: .4byte gStringVar2
-_080CCC84: .4byte gUnknown_8248038
+_080CCC84: .4byte gMoveNames + 0xFA4
 _080CCC88: .4byte gSpecialVar_0x8005
 _080CCC8C:
 	movs r0, 0x64
@@ -5416,7 +5417,7 @@ sub_80CCFBC: @ 80CCFBC
 	ldr r0, _080CCFF0 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrh r1, [r0, 0x4]
-	ldr r0, _080CCFF4 @ =0x00003802
+	ldr r0, _080CCFF4 @ =0x00003802 MAP_BIRTH_ISLAND_EXTERIOR
 	cmp r1, r0
 	bne _080CD000
 	adds r0, r2, 0x1
@@ -5615,8 +5616,10 @@ _080CD14C:
 	bx r1
 	thumb_func_end sub_80CD0F4
 
-	thumb_func_start sub_80CD154
-sub_80CD154: @ 80CD154
+	@ Determines which of Lorelei's doll collection to show
+	@ based on how many times you've entered the Hall of Fame.
+	thumb_func_start Special_ComputeLoreleiDollCollection
+Special_ComputeLoreleiDollCollection: @ 80CD154
 	push {r4,lr}
 	movs r0, 0xA
 	bl GetGameStat
@@ -5663,7 +5666,7 @@ _080CD1AE:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80CD154
+	thumb_func_end Special_ComputeLoreleiDollCollection
 
 	thumb_func_start sub_80CD1B4
 sub_80CD1B4: @ 80CD1B4

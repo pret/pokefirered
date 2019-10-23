@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "60",
+      "graphics_id": "MAP_OBJ_GFX_POLICEMAN",
       "x": 1,
       "y": 5,
       "elevation": 3,
@@ -63,7 +63,7 @@
       "x": 3,
       "y": 5,
       "elevation": 3,
-      "var": "VAR_0x4062",
+      "var": "VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES",
       "var_value": 0,
       "script": "Route5_SouthEntrance_EventScript_16F90A"
     },
@@ -72,7 +72,7 @@
       "x": 4,
       "y": 5,
       "elevation": 3,
-      "var": "VAR_0x4062",
+      "var": "VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES",
       "var_value": 0,
       "script": "Route5_SouthEntrance_EventScript_16F916"
     },
@@ -81,7 +81,7 @@
       "x": 5,
       "y": 5,
       "elevation": 3,
-      "var": "VAR_0x4062",
+      "var": "VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES",
       "var_value": 0,
       "script": "Route5_SouthEntrance_EventScript_16F922"
     }

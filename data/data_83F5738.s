@@ -481,13 +481,26 @@ gUnknown_83FE88F:: @ 83FE88F
 	.incbin "baserom.gba", 0x3FE88F, 0xF3
 
 gUnknown_83FE982:: @ 83FE982
-	.incbin "baserom.gba", 0x3FE982, 0x16
+	.string "TIME BOARD$"
+	.string "CLEAR TIME$"
 
 gUnknown_83FE998:: @ 83FE998
-	.incbin "baserom.gba", 0x3FE998, 0x2C
+	.string "{STR_VAR_1}MIN. {STR_VAR_2}.{STR_VAR_3}SEC.$"
+	.string "1F$"
+	.string "2F$"
+	.string "3F$"
+	.string "4F$"
+	.string "5F$"
+	.string "6F$"
+	.string "7F$"
+	.string "8F$"
 
+	.align 2
 gUnknown_83FE9C4:: @ 83FE9C4
-	.incbin "baserom.gba", 0x3FE9C4, 0x10
+	.4byte gOtherText_Single
+	.4byte gOtherText_Double
+	.4byte gOtherText_Knockout
+	.4byte gOtherText_Mixed
 
 gUnknown_83FE9D4:: @ 83FE9D4
 	.incbin "baserom.gba", 0x3FE9D4, 0x10

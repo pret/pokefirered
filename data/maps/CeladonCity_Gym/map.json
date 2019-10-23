@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "22",
+      "graphics_id": "MAP_OBJ_GFX_LASS",
       "x": 3,
       "y": 11,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "29",
+      "graphics_id": "MAP_OBJ_GFX_BEAUTY",
       "x": 9,
       "y": 10,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "40",
+      "graphics_id": "MAP_OBJ_GFX_PICNICKER",
       "x": 10,
       "y": 7,
       "elevation": 3,
@@ -53,7 +53,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "29",
+      "graphics_id": "MAP_OBJ_GFX_BEAUTY",
       "x": 2,
       "y": 6,
       "elevation": 3,
@@ -66,7 +66,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "29",
+      "graphics_id": "MAP_OBJ_GFX_BEAUTY",
       "x": 5,
       "y": 4,
       "elevation": 3,
@@ -79,7 +79,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "22",
+      "graphics_id": "MAP_OBJ_GFX_LASS",
       "x": 7,
       "y": 4,
       "elevation": 3,
@@ -92,7 +92,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "83",
+      "graphics_id": "MAP_OBJ_GFX_ERIKA",
       "x": 6,
       "y": 4,
       "elevation": 3,
@@ -105,7 +105,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "42",
+      "graphics_id": "MAP_OBJ_GFX_COOLTRAINER_F",
       "x": 8,
       "y": 7,
       "elevation": 3,
@@ -118,7 +118,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "95",
+      "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
       "x": 6,
       "y": 8,
       "elevation": 3,
@@ -127,11 +127,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_Gym_EventScript_1BDF13",
-      "flag": "18"
+      "script": "EventScript_InteractWithCutTreeObject",
+      "flag": "FLAG_TEMP_12"
     },
     {
-      "graphics_id": "95",
+      "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
       "x": 3,
       "y": 5,
       "elevation": 3,
@@ -140,11 +140,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_Gym_EventScript_1BDF13",
-      "flag": "19"
+      "script": "EventScript_InteractWithCutTreeObject",
+      "flag": "FLAG_TEMP_13"
     },
     {
-      "graphics_id": "95",
+      "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
       "x": 9,
       "y": 6,
       "elevation": 3,
@@ -153,8 +153,8 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_Gym_EventScript_1BDF13",
-      "flag": "20"
+      "script": "EventScript_InteractWithCutTreeObject",
+      "flag": "FLAG_TEMP_14"
     }
   ],
   "warp_events": [

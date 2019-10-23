@@ -25,7 +25,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "25",
+      "graphics_id": "MAP_OBJ_GFX_MAN",
       "x": 7,
       "y": 24,
       "elevation": 3,
@@ -35,10 +35,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_EventScript_1677E5",
-      "flag": "126"
+      "flag": "FLAG_HIDE_THREE_ISLAND_ANTIBIKERS"
     },
     {
-      "graphics_id": "25",
+      "graphics_id": "MAP_OBJ_GFX_MAN",
       "x": 8,
       "y": 23,
       "elevation": 3,
@@ -48,10 +48,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_EventScript_167989",
-      "flag": "126"
+      "flag": "FLAG_HIDE_THREE_ISLAND_ANTIBIKERS"
     },
     {
-      "graphics_id": "53",
+      "graphics_id": "MAP_OBJ_GFX_BIKER",
       "x": 8,
       "y": 24,
       "elevation": 3,
@@ -61,10 +61,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_EventScript_1677D8",
-      "flag": "145"
+      "flag": "FLAG_HIDE_THREE_ISLAND_LONE_BIKER"
     },
     {
-      "graphics_id": "53",
+      "graphics_id": "MAP_OBJ_GFX_BIKER",
       "x": 9,
       "y": 23,
       "elevation": 3,
@@ -74,10 +74,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_EventScript_1677D8",
-      "flag": "121"
+      "flag": "FLAG_HIDE_THREE_ISLAND_BIKERS"
     },
     {
-      "graphics_id": "53",
+      "graphics_id": "MAP_OBJ_GFX_BIKER",
       "x": 9,
       "y": 24,
       "elevation": 3,
@@ -87,10 +87,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_EventScript_1677D8",
-      "flag": "121"
+      "flag": "FLAG_HIDE_THREE_ISLAND_BIKERS"
     },
     {
-      "graphics_id": "53",
+      "graphics_id": "MAP_OBJ_GFX_BIKER",
       "x": 10,
       "y": 22,
       "elevation": 3,
@@ -100,10 +100,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_EventScript_1677D8",
-      "flag": "121"
+      "flag": "FLAG_HIDE_THREE_ISLAND_BIKERS"
     },
     {
-      "graphics_id": "53",
+      "graphics_id": "MAP_OBJ_GFX_BIKER",
       "x": 10,
       "y": 24,
       "elevation": 3,
@@ -113,10 +113,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_EventScript_1677D8",
-      "flag": "121"
+      "flag": "FLAG_HIDE_THREE_ISLAND_BIKERS"
     },
     {
-      "graphics_id": "53",
+      "graphics_id": "MAP_OBJ_GFX_BIKER",
       "x": 11,
       "y": 23,
       "elevation": 3,
@@ -126,10 +126,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_EventScript_1677D8",
-      "flag": "121"
+      "flag": "FLAG_HIDE_THREE_ISLAND_BIKERS"
     },
     {
-      "graphics_id": "95",
+      "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
       "x": 20,
       "y": 7,
       "elevation": 3,
@@ -138,11 +138,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ThreeIsland_EventScript_1BDF13",
-      "flag": "18"
+      "script": "EventScript_InteractWithCutTreeObject",
+      "flag": "FLAG_TEMP_12"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 18,
       "y": 17,
       "elevation": 3,
@@ -152,10 +152,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_EventScript_1BEABC",
-      "flag": "443"
+      "flag": "FLAG_HIDE_THREE_ISLAND_ZINC"
     },
     {
-      "graphics_id": "23",
+      "graphics_id": "MAP_OBJ_GFX_WOMAN_1",
       "x": 15,
       "y": 7,
       "elevation": 3,
@@ -168,7 +168,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "16",
+      "graphics_id": "MAP_OBJ_GFX_LITTLE_BOY",
       "x": 14,
       "y": 14,
       "elevation": 3,
@@ -181,7 +181,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "132",
+      "graphics_id": "MAP_OBJ_GFX_DODUO",
       "x": 15,
       "y": 14,
       "elevation": 3,
@@ -194,7 +194,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "53",
+      "graphics_id": "MAP_OBJ_GFX_BIKER",
       "x": 15,
       "y": 31,
       "elevation": 3,
@@ -204,7 +204,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_EventScript_167CA5",
-      "flag": "121"
+      "flag": "FLAG_HIDE_THREE_ISLAND_BIKERS"
     }
   ],
   "warp_events": [
@@ -264,7 +264,7 @@
       "x": 7,
       "y": 27,
       "elevation": 3,
-      "var": "VAR_0x407B",
+      "var": "VAR_MAP_SCENE_THREE_ISLAND",
       "var_value": 2,
       "script": "ThreeIsland_EventScript_1679B5"
     },
@@ -273,7 +273,7 @@
       "x": 8,
       "y": 27,
       "elevation": 3,
-      "var": "VAR_0x407B",
+      "var": "VAR_MAP_SCENE_THREE_ISLAND",
       "var_value": 2,
       "script": "ThreeIsland_EventScript_1679B5"
     },
@@ -282,7 +282,7 @@
       "x": 9,
       "y": 27,
       "elevation": 3,
-      "var": "VAR_0x407B",
+      "var": "VAR_MAP_SCENE_THREE_ISLAND",
       "var_value": 2,
       "script": "ThreeIsland_EventScript_1679B5"
     },
@@ -291,7 +291,7 @@
       "x": 10,
       "y": 27,
       "elevation": 3,
-      "var": "VAR_0x407B",
+      "var": "VAR_MAP_SCENE_THREE_ISLAND",
       "var_value": 2,
       "script": "ThreeIsland_EventScript_1679B5"
     },
@@ -300,7 +300,7 @@
       "x": 7,
       "y": 26,
       "elevation": 3,
-      "var": "VAR_0x407B",
+      "var": "VAR_MAP_SCENE_THREE_ISLAND",
       "var_value": 3,
       "script": "ThreeIsland_EventScript_167A1D"
     },
@@ -309,7 +309,7 @@
       "x": 8,
       "y": 26,
       "elevation": 3,
-      "var": "VAR_0x407B",
+      "var": "VAR_MAP_SCENE_THREE_ISLAND",
       "var_value": 3,
       "script": "ThreeIsland_EventScript_167A29"
     },
@@ -318,7 +318,7 @@
       "x": 9,
       "y": 26,
       "elevation": 3,
-      "var": "VAR_0x407B",
+      "var": "VAR_MAP_SCENE_THREE_ISLAND",
       "var_value": 3,
       "script": "ThreeIsland_EventScript_167A35"
     },
@@ -327,7 +327,7 @@
       "x": 11,
       "y": 27,
       "elevation": 3,
-      "var": "VAR_0x407B",
+      "var": "VAR_MAP_SCENE_THREE_ISLAND",
       "var_value": 2,
       "script": "ThreeIsland_EventScript_1679B5"
     },
@@ -336,7 +336,7 @@
       "x": 10,
       "y": 26,
       "elevation": 3,
-      "var": "VAR_0x407B",
+      "var": "VAR_MAP_SCENE_THREE_ISLAND",
       "var_value": 3,
       "script": "ThreeIsland_EventScript_167A41"
     },
@@ -345,7 +345,7 @@
       "x": 11,
       "y": 26,
       "elevation": 3,
-      "var": "VAR_0x407B",
+      "var": "VAR_MAP_SCENE_THREE_ISLAND",
       "var_value": 3,
       "script": "ThreeIsland_EventScript_167A4D"
     }
@@ -364,8 +364,9 @@
       "y": 13,
       "elevation": 3,
       "item": "ITEM_PP_UP",
-      "flag": "164",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_THREE_ISLAND_PP_UP",
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

@@ -1802,7 +1802,7 @@ _080D8120:
 	cmp r1, 0
 	beq _080D8134
 	mov r0, sp
-	bl sub_80E7460
+	bl CopyEReaderTrainerName5
 	mov r4, sp
 	b _080D8382
 _080D8134:

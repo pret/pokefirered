@@ -6470,7 +6470,7 @@ _08137B1C:
 	str r1, [sp, 0x4]
 	str r6, [sp, 0x8]
 	str r5, [sp, 0xC]
-	ldr r3, _08137BC8 @ =gUnknown_84886E8
+	ldr r3, _08137BC8 @ =gMoveDescriptionPointers
 	mov r4, r8
 	ldrb r1, [r4]
 	lsls r1, 1
@@ -6502,7 +6502,7 @@ _08137BB8: .4byte 0x00003004
 _08137BBC: .4byte gUnknown_8463FA4
 _08137BC0: .4byte 0x0000316c
 _08137BC4: .4byte 0x00003188
-_08137BC8: .4byte gUnknown_84886E8
+_08137BC8: .4byte gMoveDescriptionPointers
 _08137BCC: .4byte 0x00003258
 	thumb_func_end sub_8137AF8
 

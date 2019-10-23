@@ -27,14 +27,14 @@ EventScript_16B2AA:: @ 816B2AA
 	end
 
 EventScript_16B2B4:: @ 816B2B4
-	specialvar VAR_RESULT, sub_80CAD54
+	specialvar VAR_RESULT, Special_GetSpeciesOfPartySlot_x8004
 	compare_var_to_value VAR_RESULT, SPECIES_EGG
 	goto_if eq, EventScript_16B307
 	special TV_CopyNicknameToStringVar1AndEnsureTerminated
 	special TV_CheckMonOTIDEqualsPlayerID
 	compare_var_to_value VAR_RESULT, 1
 	goto_if eq, EventScript_16B311
-	specialvar VAR_RESULT, sub_80CAD7C
+	specialvar VAR_RESULT, Special_BufferMonOTNameAndCompareToPlayerName
 	special TV_CopyNicknameToStringVar1AndEnsureTerminated
 	compare_var_to_value VAR_RESULT, 1
 	goto_if eq, EventScript_16B311

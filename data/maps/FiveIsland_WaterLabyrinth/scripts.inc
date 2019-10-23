@@ -13,7 +13,7 @@ FiveIsland_WaterLabyrinth_EventScript_16884E:: @ 816884E
 	checkflag FLAG_NO_ROOM_FOR_TOGEPI_EGG
 	goto_if TRUE, EventScript_16892C
 	msgbox gUnknown_818A80D
-	specialvar VAR_RESULT, sub_80CA76C
+	specialvar VAR_RESULT, Special_GetLeadMonFriendship
 	compare_var_to_value VAR_RESULT, 6
 	goto_if eq, EventScript_1688AC
 	msgbox gUnknown_818A88F

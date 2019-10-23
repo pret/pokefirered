@@ -46,14 +46,14 @@ EventScript_170AFE:: @ 8170AFE
 
 EventScript_170B0C:: @ 8170B0C
 	setvar VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 1
-	special sub_80CA68C
+	special Special_ShowStringVar4AsFieldMessage
 	waitmessage
 	waitbuttonpress
 	return
 
 EventScript_170B17:: @ 8170B17
 	setvar VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 2
-	special sub_80CA68C
+	special Special_ShowStringVar4AsFieldMessage
 	waitmessage
 	waitbuttonpress
 	return

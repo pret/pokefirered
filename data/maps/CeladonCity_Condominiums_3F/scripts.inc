@@ -34,7 +34,7 @@ EventScript_16C418:: @ 816C418
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
-	special sub_80CA618
+	special Special_ShowDiploma
 	waitstate
 	release
 	end

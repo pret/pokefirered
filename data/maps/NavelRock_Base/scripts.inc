@@ -46,14 +46,14 @@ NavelRock_Base_EventScript_165134:: @ 8165134
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 4
 	setvar VAR_0x8007, 2
-	special sub_80CAC28
+	special Special_ShakeScreen
 	delay 30
 	playse SE_T_AME_E
 	setvar VAR_0x8004, 0
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 4
 	setvar VAR_0x8007, 2
-	special sub_80CAC28
+	special Special_ShakeScreen
 	delay 30
 	delay 50
 	waitse

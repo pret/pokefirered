@@ -342,7 +342,7 @@ gUnknown_84827B4:: @ 84827B4
 	.include "data/text/move_descriptions.inc"
 
 	.align 2, 0
-gUnknown_84886E8:: @ 84886E8
+gMoveDescriptionPointers:: @ 84886E8
 	.4byte gMoveDescription_Pound
 	.4byte gMoveDescription_KarateChop
 	.4byte gMoveDescription_DoubleSlap

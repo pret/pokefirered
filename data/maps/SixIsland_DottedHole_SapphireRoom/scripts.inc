@@ -28,7 +28,7 @@ SixIsland_DottedHole_SapphireRoom_EventScript_1641B5:: @ 81641B5
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 12
 	setvar VAR_0x8007, 3
-	special sub_80CAC28
+	special Special_ShakeScreen
 	delay 60
 	compare_var_to_value VAR_FACING, 2
 	call_if eq, EventScript_164325

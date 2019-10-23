@@ -27,7 +27,7 @@ Route16_MapScript3_168113:: @ 8168113
 	.2byte 0
 
 EventScript_16811D:: @ 816811D
-	special sub_80CA630
+	special Special_ForcePlayerOntoBike
 	end
 
 Route16_EventScript_168121:: @ 8168121

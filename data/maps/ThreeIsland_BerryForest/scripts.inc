@@ -32,7 +32,7 @@ ThreeIsland_BerryForest_EventScript_163C83:: @ 8163C83
 	giveitem ITEM_IAPAPA_BERRY
 	compare_var_to_value VAR_RESULT, 0
 	call_if eq, EventScript_163D19
-	special sub_80CA6DC
+	special Special_BufferBigGuyOrBigGirlString
 	msgbox gUnknown_817AF3B
 	closemessage
 	setflag FLAG_RESCUED_LOSTELLE

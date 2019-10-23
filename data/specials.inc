@@ -150,15 +150,15 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
-	def_special sub_80CA68C
+	def_special Special_ShowStringVar4AsFieldMessage
 	def_special DrawWholeMapView
-	def_special sub_80CA69C
+	def_special Special_GetPlayerXY
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
-	def_special sub_80CA6BC
-	def_special sub_80CA6DC
-	def_special sub_80CA714
+	def_special Special_GetPlayerTrainerIdOnesDigit
+	def_special Special_BufferBigGuyOrBigGirlString
+	def_special Special_BufferSonOrDaughterString
 	def_special Special_SetHiddenItemFlag
 	def_special nullsub_75
 	def_special nullsub_75
@@ -223,8 +223,8 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special Special_GetPokedexCount
 	def_special sub_80CA524
-	def_special sub_80CA86C
-	def_special sub_80CA9A8
+	def_special Special_AnimatePcTurnOn
+	def_special Special_AnimatePcTurnOff
 	def_special Special_GetElevatorFloor
 	def_special nullsub_75
 	def_special nullsub_75
@@ -236,10 +236,10 @@ gSpecials:: @ 815FD60
 	def_special sub_80E4634
 	def_special nullsub_75
 	def_special nullsub_75
-	def_special sub_80CA664
+	def_special Special_GetPlayerAvatarBike
 	def_special nullsub_75
 	def_special nullsub_75
-	def_special sub_80CA76C
+	def_special Special_GetLeadMonFriendship
 	def_special sub_80E5970
 	def_special sub_80E5C28
 	def_special sub_80E6648
@@ -260,7 +260,7 @@ gSpecials:: @ 815FD60
 	def_special sub_80A03D8
 	def_special sub_80EB6AC
 	def_special sub_80EB6FC
-	def_special sub_80CA7EC
+	def_special Special_TownMap
 	def_special sub_8053A9C
 	def_special sub_8053D68
 	def_special sub_8054440
@@ -273,7 +273,7 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special ScrSpecial_CreatePCMenu
 	def_special HallOfFamePCBeginFade
-	def_special sub_80CA618
+	def_special Special_ShowDiploma
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
@@ -282,7 +282,7 @@ gSpecials:: @ 815FD60
 	def_special nullsub_61
 	def_special DoSoftReset
 	def_special Special_HallOfFame
-	def_special sub_80CB498
+	def_special Special_AnimateElevator
 	def_special nullsub_75
 	def_special SpawnCameraObject
 	def_special RemoveCameraObject
@@ -294,32 +294,32 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
-	def_special sub_80CAAAC
-	def_special sub_80CAABC
+	def_special Special_BufferEReaderTrainerName5
+	def_special Special_GetRandomSlotMachine
 	def_special GetPlayerFacingDirection
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special LeadMonHasEffortRibbon
-	def_special GivLeadMonEffortRibbon
+	def_special GiveLeadMonEffortRibbon
 	def_special ScrSpecial_AreLeadMonEVsMaxedOut
 	def_special sub_8069740
 	def_special sub_8069768
 	def_special InitRoamer
 	def_special nullsub_75
-	def_special sub_80CA804
+	def_special Special_PlayerHasGrassPokemonInParty
 	def_special nullsub_75
 	def_special nullsub_75
-	def_special sub_80CAB78
+	def_special Special_IsStarterFirstStageInParty
 	def_special nullsub_75
-	def_special sub_80CABD0
+	def_special Special_IsThereRoomInAnyBoxForMorePokemon
 	def_special nullsub_75
-	def_special sub_80CB580
+	def_special Special_DrawElevatorCurrentFloorWindow
 	def_special nullsub_75
-	def_special sub_80CAC08
+	def_special Special_CheckPartyPokerus
 	def_special sub_806E99C
-	def_special sub_80CAC28
+	def_special Special_ShakeScreen
 	def_special sub_807FA68
 	def_special sub_807F9D8
 	def_special sub_807FABC
@@ -336,7 +336,7 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
-	def_special sub_80CAD54
+	def_special Special_GetSpeciesOfPartySlot_x8004
 	def_special sub_80BFC14
 	def_special nullsub_75
 	def_special nullsub_75
@@ -345,23 +345,23 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special HasAllKantoMons
-	def_special sub_80CAD7C
+	def_special Special_BufferMonOTNameAndCompareToPlayerName
 	def_special nullsub_75
 	def_special sub_80E759C
 	def_special GetNameOfEnigmaBerryInPlayerParty
 	def_special nullsub_75
 	def_special sub_810B82C
 	def_special sub_807F904
-	def_special sub_80CA630
+	def_special Special_ForcePlayerOntoBike
 	def_special sub_80CB7C4
 	def_special sub_80CBC5C
 	def_special sub_80CADC4
 	def_special Special_SetVermilionTrashCans
 	def_special sub_805D1A8
-	def_special sub_80CB0A8
+	def_special Special_SampleResortGorgeousMonAndReward
 	def_special Special_CheckAddCoins
 	def_special GetDaycarePokemonCount
-	def_special sub_80CB63C
+	def_special Special_CloseElevatorCurrentFloorWindow
 	def_special sub_80CBD80
 	def_special ScrSpecial_GetStarter
 	def_special sub_80CBDCC
@@ -389,7 +389,7 @@ gSpecials:: @ 815FD60
 	def_special GetNumLevelsGainedForRoute5DaycareMon
 	def_special TakePokemonFromRoute5Daycare
 	def_special ScrSpecial_SeaGallopFerry
-	def_special sub_80CC48C
+	def_special Special_PlayerPartyContainsSpecies
 	def_special Special_SetSomeVariable
 	def_special HelpSystem_BackupSomeVariable
 	def_special HelpSystem_RestoreSomeVariable
@@ -449,7 +449,7 @@ gSpecials:: @ 815FD60
 	def_special sub_809C4A8
 	def_special sub_81537C0
 	def_special sub_809C5FC
-	def_special sub_80CB328
+	def_special Special_InitElevatorFloorSelectMenuPos
 	def_special Special_ComputeLoreleiDollCollection
 	def_special sub_80CD1B4
 	def_special CreateObedientEnemyMon

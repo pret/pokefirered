@@ -1653,7 +1653,7 @@ _080E53F4:
 	movs r2, 0x2
 	movs r3, 0x2
 	bl sub_80E559C
-	ldr r1, _080E5440 @ =gUnknown_84886E8
+	ldr r1, _080E5440 @ =gMoveDescriptionPointers
 	subs r0, r5, 0x1
 	lsls r0, 2
 	adds r0, r1
@@ -1670,7 +1670,7 @@ _080E53F4:
 	bx r0
 	.align 2, 0
 _080E543C: .4byte gBattleMoves
-_080E5440: .4byte gUnknown_84886E8
+_080E5440: .4byte gMoveDescriptionPointers
 	thumb_func_end sub_80E5340
 
 	thumb_func_start sub_80E5444

@@ -227,7 +227,7 @@ gStdScriptsEnd::
 	.include "data/maps/SevenIsland_TanobyRuins_RixyChamber/scripts.inc"
 	.include "data/maps/SevenIsland_TanobyRuins_ViapoisChamber/scripts.inc"
 	.include "data/maps/ThreeIsland_DunsparceTunnel/scripts.inc"
-	.include "data/maps/SevenIsland_SeavaultCanyon_TanobyKey/scripts.inc"
+	.include "data/maps/SevenIsland_SevaultCanyon_TanobyKey/scripts.inc"
 	.include "data/maps/NavelRock_1F/scripts.inc"
 	.include "data/maps/NavelRock_Summit/scripts.inc"
 	.include "data/maps/NavelRock_Base/scripts.inc"
@@ -583,7 +583,7 @@ gStdScriptsEnd::
 	.include "data/maps/FiveIsland_LostCave_Room4/text.inc"
 	.include "data/maps/FiveIsland_LostCave_Room10/text.inc"
 	.include "data/maps/ThreeIsland_DunsparceTunnel/text.inc"
-	.include "data/maps/SevenIsland_SeavaultCanyon_TanobyKey/text.inc"
+	.include "data/maps/SevenIsland_SevaultCanyon_TanobyKey/text.inc"
 	.include "data/maps/OneIsland_KindleRoad_EmberSpa/text.inc"
 	.include "data/maps/PalletTown/text.inc"
 	.include "data/maps/ViridianCity/text.inc"
@@ -1922,7 +1922,7 @@ gUnknown_81A6955:: @ 81A6955
 	setvar VAR_0x8004, 27
 	special Special_SetSomeVariable
 	setvar VAR_0x8004, 0
-	special sub_80CA86C
+	special Special_AnimatePcTurnOn
 	playse SE_PC_ON
 	msgbox Text_1A5075
 	goto EventScript_1A6998
@@ -1984,7 +1984,7 @@ EventScript_1A6A3D:: @ 81A6A3D
 EventScript_1A6A46:: @ 81A6A46
 	setvar VAR_0x8004, 0
 	playse SE_PC_OFF
-	special sub_80CA9A8
+	special Special_AnimatePcTurnOff
 	special sub_812B35C
 	releaseall
 	end
@@ -2169,7 +2169,7 @@ gUnknown_81A6C32:: @ 81A6C32
 	compare_var_to_value VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	fadescreen 1
-	special sub_80CA7EC
+	special Special_TownMap
 	waitstate
 	releaseall
 	end
@@ -2410,7 +2410,7 @@ EventScript_1A74B7:: @ 81A74B7
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 8
 	setvar VAR_0x8007, 5
-	special sub_80CAC28
+	special Special_ShakeScreen
 	waitstate
 	releaseall
 	end

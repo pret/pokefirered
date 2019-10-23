@@ -475,4 +475,11 @@ extern const u8 gSaveStatName_Time[];
 // mail
 extern const u8 gText_From[];
 
+// field_specials
+extern const u8 gUnknown_8417FBB[];
+extern const u8 gUnknown_8417FC3[];
+extern const u8 gUnknown_8417FD0[];
+extern const u8 gUnknown_8417FCC[];
+extern const u8 gUnknown_8418075[];
+
 #endif //GUARD_STRINGS_H

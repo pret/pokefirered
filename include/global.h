@@ -194,6 +194,11 @@ struct LinkBattleRecords
     u8 languages[LINK_B_RECORDS_COUNT];
 };
 
+#include "constants/game_stat.h"
+#include "global.fieldmap.h"
+#include "global.berry.h"
+#include "pokemon.h"
+
 struct UnknownSaveBlock2Struct
 {
     u8 field_0;
@@ -214,6 +219,20 @@ struct UnknownSaveBlock2Struct
     u8 field_EB;
 }; // sizeof = 0xEC
 
+struct BattleTowerEReaderTrainer
+{
+    /*0x4A0 0x3F0 0x00*/ u8 unk0;
+    /*0x4A1 0x3F1 0x01*/ u8 facilityClass;
+    /*0x4A2 0x3F2 0x02*/ u16 winStreak;
+    /*0x4A4 0x3F4 0x04*/ u8 name[8];
+    /*0x4AC 0x3FC 0x0C*/ u8 trainerId[4];
+    /*0x4B0 0x400 0x10*/ u16 greeting[6];
+    /*0x4BC 0x40C 0x1C*/ u16 farewellPlayerLost[6];
+    /*0x4C8 0x418 0x28*/ u16 farewellPlayerWon[6];
+    /*0x4D4 0x424 0x34*/ struct BattleTowerPokemon party[3];
+    /*0x558 0x4A8 0xB8*/ u32 checksum;
+};
+
 struct UnkSaveBlock2Substruct_55C
 {
     /* 0x000:0x55C */ u8 unk_00_0:1;
@@ -232,7 +251,7 @@ struct UnkSaveBlock2Substruct_55C
 struct UnkSaveBlock2Substruct_B0
 {
     /* 0x000:0x0B0 */ u8 field_0[0x3F0];
-    /* 0x3F0:0x4A0 */ u32 field_3F0[0x2F];
+    /* 0x3F0:0x4A0 */ struct BattleTowerEReaderTrainer field_3F0;
     /* 0x4AC:0x55C */ struct UnkSaveBlock2Substruct_55C field_4AC;
     /* 0x4C4:0x574 */ u8 field_4C4[0x324];
 }; // size: 0x7E8
@@ -261,7 +280,6 @@ struct SaveBlock2
     /*0x0A8*/ u32 field_A8;
     /*0x0AC*/ u8 field_AC;
     /*0x0AD*/ u8 field_AD;
-    /*0x0AE*/ u8 filler_AE[0x2];
     /*0x0B0*/ struct UnkSaveBlock2Substruct_B0 unk_B0;
     /*0x898*/ u16 mapView[0x100];
     /*0xA98*/ struct LinkBattleRecords linkBattleRecords;
@@ -303,11 +321,6 @@ struct SecretBaseRecord
     /*0x1ABE*/ u8 decorationPos[16];
     /*0x1AD0*/ struct SecretBaseParty party;
 };
-
-#include "constants/game_stat.h"
-#include "global.fieldmap.h"
-#include "global.berry.h"
-#include "pokemon.h"
 
 struct WarpData
 {

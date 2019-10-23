@@ -3469,8 +3469,8 @@ _080E7458: .4byte gSaveBlock2Ptr
 _080E745C: .4byte 0x000004a1
 	thumb_func_end GetEreaderTrainerClassId
 
-	thumb_func_start sub_80E7460
-sub_80E7460: @ 80E7460
+	thumb_func_start CopyEReaderTrainerName5
+CopyEReaderTrainerName5: @ 80E7460
 	push {r4,lr}
 	adds r3, r0, 0
 	movs r2, 0
@@ -3495,7 +3495,7 @@ _080E746E:
 	.align 2, 0
 _080E7488: .4byte gSaveBlock2Ptr
 _080E748C: .4byte 0x000004a4
-	thumb_func_end sub_80E7460
+	thumb_func_end CopyEReaderTrainerName5
 
 	thumb_func_start ValidateEReaderTrainer
 ValidateEReaderTrainer: @ 80E7490

@@ -38,7 +38,7 @@ PalletTown_PlayersHouse_2F_EventScript_168CE4:: @ 8168CE4
 	setvar VAR_0x8004, 32
 	special Special_SetSomeVariable
 	setvar VAR_0x8004, 1
-	special sub_80CA86C
+	special Special_AnimatePcTurnOn
 	playse SE_PC_ON
 	msgbox gUnknown_81A5420
 	special sub_80EB6AC
@@ -50,7 +50,7 @@ PalletTown_PlayersHouse_2F_EventScript_168CE4:: @ 8168CE4
 EventScript_PalletTown_PlayersHouse_2F_ShutDownPC:: @ 8168D17
 	setvar VAR_0x8004, 1
 	playse SE_PC_OFF
-	special sub_80CA9A8
+	special Special_AnimatePcTurnOff
 	special sub_812B35C
 	releaseall
 	end

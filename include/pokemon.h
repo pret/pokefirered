@@ -346,7 +346,7 @@ struct BattleTowerPokemon
              u32 gap:1;
              u32 abilityNum:1;
     /*0x1C*/ u32 personality;
-    /*0x20*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
+    /*0x20*/ u8 nickname[11];
     /*0x2B*/ u8 friendship;
 };
 

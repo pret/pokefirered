@@ -90,7 +90,7 @@ EventScript_17097D:: @ 817097D
 
 EventScript_170987:: @ 8170987
 	special SavePlayerParty
-	special sub_80CAAAC
+	special Special_BufferEReaderTrainerName5
 	msgbox gUnknown_81A0598, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_170A11

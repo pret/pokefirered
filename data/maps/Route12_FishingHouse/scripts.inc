@@ -36,7 +36,7 @@ EventScript_16FF7F:: @ 816FF7F
 	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	setvar VAR_0x8004, SPECIES_MAGIKARP
-	specialvar VAR_RESULT, sub_80CC48C
+	specialvar VAR_RESULT, Special_PlayerPartyContainsSpecies
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_16FFF5
 	special sub_80A096C

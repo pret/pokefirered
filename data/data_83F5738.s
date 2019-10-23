@@ -1,3 +1,7 @@
+#include "constants/species.h"
+#include "constants/items.h"
+	.include "asm/macros.inc"
+	.include "constants/constants.inc"
 	.section .rodata
 
 	.align 2
@@ -21,89 +25,6 @@ gUnknown_83F5864:: @ 83F5864
 
 gUnknown_83F5A44:: @ 83F5A44
 	.incbin "baserom.gba", 0x3F5A44, 0xB4
-
-gUnknown_83F5AF8:: @ 83F5AF8
-	.incbin "baserom.gba", 0x3F5AF8, 0x22
-
-gUnknown_83F5B1A:: @ 83F5B1A
-	.incbin "baserom.gba", 0x3F5B1A, 0x16
-
-gUnknown_83F5B30:: @ 83F5B30
-	.incbin "baserom.gba", 0x3F5B30, 0xC
-
-gUnknown_83F5B3C:: @ 83F5B3C
-	.incbin "baserom.gba", 0x3F5B3C, 0x8
-
-gUnknown_83F5B44:: @ 83F5B44
-	.incbin "baserom.gba", 0x3F5B44, 0x50
-
-gUnknown_83F5B94:: @ 83F5B94
-	.incbin "baserom.gba", 0x3F5B94, 0x12
-
-gUnknown_83F5BA6:: @ 83F5BA6
-	.incbin "baserom.gba", 0x3F5BA6, 0x12
-
-gUnknown_83F5BB8:: @ 83F5BB8
-	.incbin "baserom.gba", 0x3F5BB8, 0x9
-
-gUnknown_83F5BC1:: @ 83F5BC1
-	.incbin "baserom.gba", 0x3F5BC1, 0xB
-
-gUnknown_83F5BCC:: @ 83F5BCC
-	.incbin "baserom.gba", 0x3F5BCC, 0x150
-
-gUnknown_83F5D1C:: @ 83F5D1C
-	.incbin "baserom.gba", 0x3F5D1C, 0x10
-
-sStarterMon:: @ 83F5D2C
-	.incbin "baserom.gba", 0x3F5D2C, 0x6
-
-gUnknown_83F5D32:: @ 83F5D32
-	.incbin "baserom.gba", 0x3F5D32, 0x26
-
-gUnknown_83F5D58:: @ 83F5D58
-	.incbin "baserom.gba", 0x3F5D58, 0x198
-
-	.align 2
-gUnknown_83F5EF0:: @ 83F5EF0
-	.asciz "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/scr_tool.c"
-
-	.align 2
-gUnknown_83F5F24:: @ 83F5F24
-	.asciz "0"
-
-gUnknown_83F5F26:: @ 83F5F26
-	.incbin "baserom.gba", 0x3F5F26, 0x2A
-
-gUnknown_83F5F50:: @ 83F5F50
-	.incbin "baserom.gba", 0x3F5F50, 0x160
-
-gUnknown_83F60B0:: @ 83F60B0
-	.incbin "baserom.gba", 0x3F60B0, 0x20
-
-gUnknown_83F60D0:: @ 83F60D0
-	.incbin "baserom.gba", 0x3F60D0, 0x100
-
-gUnknown_83F61D0:: @ 83F61D0
-	.incbin "baserom.gba", 0x3F61D0, 0x20
-
-gUnknown_83F61F0:: @ 83F61F0
-	.incbin "baserom.gba", 0x3F61F0, 0xB
-
-gUnknown_83F61FB:: @ 83F61FB
-	.incbin "baserom.gba", 0x3F61FB, 0x8
-
-gUnknown_83F6203:: @ 83F6203
-	.incbin "baserom.gba", 0x3F6203, 0x3
-
-gUnknown_83F6206:: @ 83F6206
-	.incbin "baserom.gba", 0x3F6206, 0x160
-
-gUnknown_83F6366:: @ 83F6366
-	.incbin "baserom.gba", 0x3F6366, 0x16
-
-gUnknown_83F637C:: @ 83F637C
-	.incbin "baserom.gba", 0x3F637C, 0xC
 
 	.section .rodata.83F6C90
 gUnknown_83F6C90:: @ 83F6C90

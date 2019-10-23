@@ -367,7 +367,7 @@ sub_806CAC8: @ 806CAC8
 	bl MENewsJisanStepCounter
 	bl IncrementRenewableHiddenItemStepCounter
 	bl sub_80CC918
-	bl sub_80CB054
+	bl IncrementResortGorgeousStepCounter
 	bl sub_80CCFBC
 	mov r0, sp
 	adds r1, r4, 0

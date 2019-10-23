@@ -9,11 +9,11 @@ SevenIsland_TrainerTower_Elevator_EventScript_164B03:: @ 8164B03
 	checkflag FLAG_TEMP_2
 	call_if FALSE, EventScript_1A7AB9
 	copyvar VAR_0x8005, VAR_ELEVATOR_FLOOR
-	special sub_80CB580
+	special Special_DrawElevatorCurrentFloorWindow
 	message Text_1A535C
 	waitmessage
 	setvar VAR_0x8004, 6
-	specialvar VAR_RESULT, sub_80CB328
+	specialvar VAR_RESULT, Special_InitElevatorFloorSelectMenuPos
 	switch VAR_RESULT
 	case 0, EventScript_164B46
 	case 1, EventScript_164B52
@@ -44,7 +44,7 @@ EventScript_164B90:: @ 8164B90
 	goto_if eq, EventScript_164BD3
 	call EventScript_164BD8
 	setvar VAR_ELEVATOR_FLOOR, 3
-	special sub_80CB63C
+	special Special_CloseElevatorCurrentFloorWindow
 	delay 25
 	applymovement 255, Movement_164BE5
 	waitmovement 0
@@ -58,15 +58,15 @@ EventScript_164BCD:: @ 8164BCD
 	end
 
 EventScript_164BD3:: @ 8164BD3
-	special sub_80CB63C
+	special Special_CloseElevatorCurrentFloorWindow
 	releaseall
 	end
 
 EventScript_164BD8:: @ 8164BD8
-	special sub_80CB63C
+	special Special_CloseElevatorCurrentFloorWindow
 	closemessage
 	waitse
-	special sub_80CB498
+	special Special_AnimateElevator
 	waitstate
 	setflag FLAG_TEMP_2
 	return

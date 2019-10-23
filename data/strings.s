@@ -1394,7 +1394,7 @@ gUnknown_8417920:: @ 0x8417920
 gUnknown_8417926:: @ 0x8417926
 	.string "OK$"
 
-gUnknown_8417929:: @ 0x8417929
+gOtherText_Quit:: @ 0x8417929
 	.string "QUIT$"
 
 gUnknown_841792E:: @ 0x841792E

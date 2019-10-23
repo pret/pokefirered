@@ -95,13 +95,13 @@
 #define VAR_ENIGMA_BERRY_AVAILABLE 0x4033
 
 #define VAR_0x4034                 0x4034
-#define VAR_0x4035                 0x4035
-#define VAR_STORAGE_UNKNOWN        0x4036
+#define VAR_RESORT_GOREGEOUS_STEP_COUNTER 0x4035
+#define VAR_RESORT_GOREGOUS_REQUESTED_MON 0x4036
 #define VAR_0x4037                 0x4037
 #define VAR_0x4038                 0x4038
 #define VAR_0x4039                 0x4039
 #define VAR_ELEVATOR_FLOOR         0x403A
-#define VAR_0x403B                 0x403B
+#define VAR_RESORT_GOREGOUS_REWARD                 0x403B
 #define VAR_0x403C                 0x403C
 #define VAR_0x403D                 0x403D
 #define VAR_DEOXYS_INTERACTION_NUM 0x403E

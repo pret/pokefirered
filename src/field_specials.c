@@ -1,5 +1,7 @@
 #include "global.h"
+#include "malloc.h"
 #include "quest_log.h"
+#include "list_menu.h"
 #include "diploma.h"
 #include "script.h"
 #include "field_player_avatar.h"
@@ -26,6 +28,7 @@
 #include "window.h"
 #include "text_window.h"
 #include "menu.h"
+#include "new_menu_helpers.h"
 #include "constants/songs.h"
 #include "constants/species.h"
 #include "constants/items.h"
@@ -35,6 +38,13 @@
 EWRAM_DATA u8 sElevatorCurrentFloorWindowId = 0;
 EWRAM_DATA u16 sElevatorScroll = 0;
 EWRAM_DATA u16 sElevatorCursorPos = 0;
+EWRAM_DATA struct ListMenuItem * gUnknown_2039A14 = NULL;
+EWRAM_DATA u16 gUnknown_2039A18 = 0;
+EWRAM_DATA u8 gUnknown_2039A1A = 0;
+EWRAM_DATA u8 gUnknown_2039A1B = 0;
+
+struct ListMenuTemplate gUnknown_3005360;
+u16 gUnknown_3005378;
 
 static void Task_AnimatePcTurnOn(u8 taskId);
 static void PcTurnOnUpdateMetatileId(bool16 flag);
@@ -45,8 +55,17 @@ static u16 SampleResortGoregeousReward(void);
 static void Task_ElevatorShake(u8 taskId);
 static void AnimateElevatorWindowView(u16 nfloors, bool8 direction);
 static void Task_AnimateElevatorWindowView(u8 taskId);
+static void Task_CreateScriptListMenu(u8 taskId);
+void sub_80CBA7C(void);
+void sub_80CBADC(s32 nothing, bool8 is, struct ListMenu * used);
+void sub_80CBB28(u8 taskId);
+void sub_80CBBAC(u8 taskId);
+void sub_80CBC2C(u8 taskId);
+void sub_80CBCC0(u8 taskId);
+void sub_80CBD50(u8 taskId);
 u16 GetStarterPokemon(u16 starterIdx);
 
+extern const u8 *const gUnknown_83F5BCC[][12];
 extern const u8 sSlotMachineIndices[22];
 extern const u16 sResortGorgeousDeluxeRewards[6];
 extern const struct WindowTemplate sElevatorCurrentFloorWindowTemplate;
@@ -953,3 +972,273 @@ static void Task_AnimateElevatorWindowView(u8 taskId)
     }
     data[1]++;
 }
+
+void Special_ListMenu(void)
+{
+    u8 taskId;
+    struct Task * task;
+    if (sub_81119D4(sub_809D6D4) != TRUE)
+    {
+        taskId = CreateTask(Task_CreateScriptListMenu, 8);
+        task = &gTasks[taskId];
+        switch (gSpecialVar_0x8004)
+        {
+        case 0:
+            task->data[0] = 4;
+            task->data[1] = 9;
+            task->data[2] = 1;
+            task->data[3] = 1;
+            task->data[4] = 12;
+            task->data[5] = 7;
+            task->data[6] = 1;
+            task->data[15] = taskId;
+            break;
+        case 1:
+            task->data[0] = 7;
+            task->data[1] = 12;
+            task->data[2] = 1;
+            task->data[3] = 1;
+            task->data[4] = 8;
+            task->data[5] = 12;
+            task->data[6] = 0;
+            task->data[15] = taskId;
+            task->data[7] = sElevatorScroll;
+            task->data[8] = sElevatorCursorPos;
+            break;
+        case 2:
+            task->data[0] = 4;
+            task->data[1] = 4;
+            task->data[2] = 1;
+            task->data[3] = 1;
+            task->data[4] = 8;
+            task->data[5] = 8;
+            task->data[6] = 0;
+            task->data[15] = taskId;
+            break;
+        case 3:
+            task->data[0] = 4;
+            task->data[1] = 6;
+            task->data[2] = 1;
+            task->data[3] = 1;
+            task->data[4] = 8;
+            task->data[5] = 8;
+            task->data[6] = 0;
+            task->data[15] = taskId;
+            break;
+        case 4:
+            task->data[0] = 4;
+            task->data[1] = 4;
+            task->data[2] = 1;
+            task->data[3] = 1;
+            task->data[4] = 17;
+            task->data[5] = 8;
+            task->data[6] = 1;
+            task->data[15] = taskId;
+            break;
+        case 5:
+            task->data[0] = 7;
+            task->data[1] = 12;
+            task->data[2] = 16;
+            task->data[3] = 1;
+            task->data[4] = 17;
+            task->data[5] = 12;
+            task->data[6] = 0;
+            task->data[15] = taskId;
+            break;
+        case 6:
+            task->data[0] = 3;
+            task->data[1] = 3;
+            task->data[2] = 1;
+            task->data[3] = 1;
+            task->data[4] = 8;
+            task->data[5] = 6;
+            task->data[6] = 0;
+            task->data[15] = taskId;
+            break;
+        case 99:
+            break;
+        default:
+            gSpecialVar_Result = 0x7F;
+            DestroyTask(taskId);
+            break;
+        }
+    }
+}
+
+static void Task_CreateScriptListMenu(u8 taskId)
+{
+    struct WindowTemplate template;
+    u8 i;
+    s32 width;
+    s32 mwidth;
+    struct Task * task = &gTasks[taskId];
+    u8 windowId;
+    ScriptContext2_Enable();
+    if (gSpecialVar_0x8004 == 1)
+        gUnknown_2039A18 = sElevatorScroll;
+    else
+        gUnknown_2039A18 = 0;
+    gUnknown_2039A14 = AllocZeroed(task->data[1] * sizeof(struct ListMenuItem));
+    sub_80CBA7C();
+    mwidth = 0;
+    for (i = 0; i < task->data[1]; i++)
+    {
+        gUnknown_2039A14[i].label = gUnknown_83F5BCC[gSpecialVar_0x8004][i];
+        gUnknown_2039A14[i].index = i;
+        width = GetStringWidth(2, gUnknown_2039A14[i].label, 0);
+        if (width > mwidth)
+            mwidth = width;
+    }
+    task->data[4] = (mwidth + 9) / 8 + 1;
+    if (task->data[2] + task->data[4] > 29)
+        task->data[2] = 29 - task->data[4];
+    template = SetWindowTemplateFields(0, task->data[2], task->data[3], task->data[4], task->data[5], 15, 0x038);
+    task->data[13] = windowId = AddWindow(&template);
+    SetStdWindowBorderStyle(task->data[13], 0);
+    gUnknown_3005360.totalItems = task->data[1];
+    gUnknown_3005360.maxShowed = task->data[0];
+    gUnknown_3005360.windowId = task->data[13];
+    sub_80CBCC0(taskId);
+    task->data[14] = ListMenuInit(&gUnknown_3005360, task->data[7], task->data[8]);
+    PutWindowTilemap(task->data[13]);
+    CopyWindowToVram(task->data[13], 3);
+    gTasks[taskId].func = sub_80CBB28;
+}
+
+void sub_80CBA7C(void)
+{
+    gUnknown_3005360.items = gUnknown_2039A14;
+    gUnknown_3005360.moveCursorFunc = sub_80CBADC;
+    gUnknown_3005360.itemPrintFunc = NULL;
+    gUnknown_3005360.totalItems = 1;
+    gUnknown_3005360.maxShowed = 1;
+    gUnknown_3005360.windowId = 0;
+    gUnknown_3005360.header_X = 0;
+    gUnknown_3005360.item_X = 8;
+    gUnknown_3005360.cursor_X = 0;
+    gUnknown_3005360.upText_Y = 0;
+    gUnknown_3005360.cursorPal = 2;
+    gUnknown_3005360.fillValue = 1;
+    gUnknown_3005360.cursorShadowPal = 3;
+    gUnknown_3005360.lettersSpacing = 1;
+    gUnknown_3005360.itemVerticalPadding = 0;
+    gUnknown_3005360.scrollMultiple = 0;
+    gUnknown_3005360.fontId = 2;
+    gUnknown_3005360.cursorKind = 0;
+}
+
+void sub_80CBADC(s32 nothing, bool8 is, struct ListMenu * used)
+{
+    u8 taskId;
+    struct Task * task;
+    PlaySE(SE_SELECT);
+    taskId = FindTaskIdByFunc(sub_80CBB28);
+    if (taskId != 0xFF)
+    {
+        task = &gTasks[taskId];
+        ListMenuGetScrollAndRow(task->data[14], &gUnknown_3005378, NULL);
+        gUnknown_2039A18 = gUnknown_3005378;
+    }
+}
+
+#ifdef NONMATCHING
+// task should be in r6, taskId in r5
+void sub_80CBB28(u8 taskId)
+{
+    struct Task * task = &gTasks[taskId];
+    s32 input = ListMenu_ProcessInput(task->data[14]);
+    switch (input)
+    {
+    case -1:
+        break;
+    case -2:
+        gSpecialVar_Result = 0x7F;
+        PlaySE(SE_SELECT);
+        sub_80CBBAC(taskId);
+        break;
+    default:
+        gSpecialVar_Result = input;
+        PlaySE(SE_SELECT);
+        if (task->data[6] == 0 || input == task->data[1] - 1)
+        {
+            sub_80CBBAC(taskId);
+        }
+        else
+        {
+            sub_80CBD50(taskId);
+            task->func = sub_80CBC2C;
+            EnableBothScriptContexts();
+        }
+        break;
+    }
+}
+#else
+NAKED
+void sub_80CBB28(u8 taskId)
+{
+    asm_unified("\tpush {r4-r6,lr}\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r5, r0, 24\n"
+                "\tlsls r0, r5, 2\n"
+                "\tadds r0, r5\n"
+                "\tlsls r0, 3\n"
+                "\tldr r1, _080CBB54 @ =gTasks\n"
+                "\tadds r6, r0, r1\n"
+                "\tldrh r0, [r6, 0x24]\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r0, 24\n"
+                "\tbl ListMenu_ProcessInput\n"
+                "\tadds r4, r0, 0\n"
+                "\tmovs r0, 0x2\n"
+                "\tnegs r0, r0\n"
+                "\tcmp r4, r0\n"
+                "\tbeq _080CBB58\n"
+                "\tadds r0, 0x1\n"
+                "\tcmp r4, r0\n"
+                "\tbne _080CBB6C\n"
+                "\tb _080CBBA2\n"
+                "\t.align 2, 0\n"
+                "_080CBB54: .4byte gTasks\n"
+                "_080CBB58:\n"
+                "\tldr r1, _080CBB68 @ =gSpecialVar_Result\n"
+                "\tmovs r0, 0x7F\n"
+                "\tstrh r0, [r1]\n"
+                "\tmovs r0, 0x5\n"
+                "\tbl PlaySE\n"
+                "\tb _080CBB88\n"
+                "\t.align 2, 0\n"
+                "_080CBB68: .4byte gSpecialVar_Result\n"
+                "_080CBB6C:\n"
+                "\tldr r0, _080CBB90 @ =gSpecialVar_Result\n"
+                "\tstrh r4, [r0]\n"
+                "\tmovs r0, 0x5\n"
+                "\tbl PlaySE\n"
+                "\tmovs r1, 0x14\n"
+                "\tldrsh r0, [r6, r1]\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _080CBB88\n"
+                "\tmovs r1, 0xA\n"
+                "\tldrsh r0, [r6, r1]\n"
+                "\tsubs r0, 0x1\n"
+                "\tcmp r4, r0\n"
+                "\tbne _080CBB94\n"
+                "_080CBB88:\n"
+                "\tadds r0, r5, 0\n"
+                "\tbl sub_80CBBAC\n"
+                "\tb _080CBBA2\n"
+                "\t.align 2, 0\n"
+                "_080CBB90: .4byte gSpecialVar_Result\n"
+                "_080CBB94:\n"
+                "\tadds r0, r5, 0\n"
+                "\tbl sub_80CBD50\n"
+                "\tldr r0, _080CBBA8 @ =sub_80CBC2C\n"
+                "\tstr r0, [r6]\n"
+                "\tbl EnableBothScriptContexts\n"
+                "_080CBBA2:\n"
+                "\tpop {r4-r6}\n"
+                "\tpop {r0}\n"
+                "\tbx r0\n"
+                "\t.align 2, 0\n"
+                "_080CBBA8: .4byte sub_80CBC2C");
+}
+#endif //NONMATCHING

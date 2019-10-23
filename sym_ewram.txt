@@ -851,18 +851,6 @@ gPlayerFacingPosition: @ 2039A04
 	.include "src/field_specials.o"
 
 	.align 2
-gUnknown_2039A14: @ 2039A14
-	.space 0x4
-
-gUnknown_2039A18: @ 2039A18
-	.space 0x2
-
-gUnknown_2039A1A: @ 2039A1A
-	.space 0x1
-
-gUnknown_2039A1B: @ 2039A1B
-	.space 0x1
-
 	.include "src/battle_records.o"
 
 gUnknown_2039A20: @ 2039A20

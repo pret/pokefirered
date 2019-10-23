@@ -120,7 +120,7 @@ static const struct PokedudeBattlePartyInfo *const sPokedudeBattlePartyPointers[
 void InitPokedudePartyAndOpponent(void)
 {
     s32 i, j;
-    struct Pokemon *mon;
+    struct Pokemon * mon;
     s32 myIdx = 0;
     s32 opIdx = 0;
     const struct PokedudeBattlePartyInfo * data;
@@ -713,7 +713,7 @@ void sub_815A540(void)
         PlayerGetDestCoords(&x, &y);
         if (!MetatileBehavior_IsSurfable(MapGridGetMetatileBehaviorAt(x, y)) && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
         {
-            struct MapObject *mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+            struct MapObject * mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
             SetPlayerAvatarTransitionFlags(0x01);
             DestroySprite(&gSprites[mapObject->mapobj_unk_1A]);
         }

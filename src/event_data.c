@@ -185,15 +185,15 @@ u16 *GetVarPointer(u16 idx)
         default:
             break;
         case 1:
-            ptr = QuestLogGetFlagOrVarPtr(0, idx);
+            ptr = QuestLogGetFlagOrVarPtr(FALSE, idx);
             if (ptr != NULL)
                 gSaveBlock1Ptr->vars[idx - VARS_START] = *ptr;
             break;
         case 2:
-            if (IsFlagOrVarStoredInQuestLog(idx - VARS_START, 1) == TRUE)
+            if (IsFlagOrVarStoredInQuestLog(idx - VARS_START, TRUE) == TRUE)
             {
                 gLastQuestLogStoredFlagOrVarIdx = idx - VARS_START;
-                QuestLogSetFlagOrVar(0, idx, gSaveBlock1Ptr->vars[idx - VARS_START]);
+                QuestLogSetFlagOrVar(FALSE, idx, gSaveBlock1Ptr->vars[idx - VARS_START]);
             }
             break;
         }
@@ -202,9 +202,9 @@ u16 *GetVarPointer(u16 idx)
     return gSpecialVars[idx - SPECIAL_VARS_START];
 }
 
-static bool8 IsFlagOrVarStoredInQuestLog(u16 idx, u8 a1)
+static bool8 IsFlagOrVarStoredInQuestLog(u16 idx, bool8 isVar)
 {
-    if (a1 == 0)
+    if (!isVar)
     {
         if (idx < STORY_FLAGS_START)
             return FALSE;
@@ -256,15 +256,15 @@ u8 *GetFlagAddr(u16 idx)
         default:
             break;
         case 1:
-            ptr = QuestLogGetFlagOrVarPtr(1, idx);
+            ptr = QuestLogGetFlagOrVarPtr(TRUE, idx);
             if (ptr != NULL)
                 gSaveBlock1Ptr->flags[idx >> 3] = *ptr;
             break;
         case 2:
-            if (IsFlagOrVarStoredInQuestLog(idx, 0) == TRUE)
+            if (IsFlagOrVarStoredInQuestLog(idx, FALSE) == TRUE)
             {
                 gLastQuestLogStoredFlagOrVarIdx = idx;
-                QuestLogSetFlagOrVar(1, idx, gSaveBlock1Ptr->flags[idx / 8]);
+                QuestLogSetFlagOrVar(TRUE, idx, gSaveBlock1Ptr->flags[idx / 8]);
             }
             break;
         }

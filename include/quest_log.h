@@ -40,8 +40,8 @@ void sub_8112450(void);
 void sub_8112364(void);
 u8 sub_8112CAC(void);
 void sub_81138F8(void);
-void *QuestLogGetFlagOrVarPtr(u8 isFlag, u16 idx);
-void QuestLogSetFlagOrVar(u8 isFlag, u16 idx, u16 value);
+void *QuestLogGetFlagOrVarPtr(bool8 isFlag, u16 idx);
+void QuestLogSetFlagOrVar(bool8 isFlag, u16 idx, u16 value);
 
 extern u8 gUnknown_203ADFA;
 

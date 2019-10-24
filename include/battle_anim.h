@@ -167,6 +167,8 @@ void LaunchStatusAnimation(u8 bank, u8 statusAnimId);
 u8 ItemIdToBallId(u16 itemId);
 u8 LaunchBallStarsTask(u8 x, u8 y, u8 kindOfStars, u8 arg3, u8 ballId);
 u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 battlerId, u32 arg2, u8 ballId);
+void sub_80EEFC8(u8 *, u8 *, u8 battlerId);
+void sub_80EF0E0(u8 batterId);
 
 // battle_anim_mons.c
 extern const struct MonCoords gCastformFrontSpriteCoords[];

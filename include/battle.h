@@ -510,7 +510,9 @@ struct BattleStruct
     u8 expGetterBattlerId;
     u8 field_90;
     u8 field_91;
-    u8 AI_monToSwitchIntoId[MAX_BATTLERS_COUNT];
+    u8 AI_monToSwitchIntoId[2];
+    u8 field_94;
+    u8 field_95;
     u8 field_96;
     u8 field_97;
     u8 lastTakenMove[MAX_BATTLERS_COUNT * 2 * 2]; // ask gamefreak why they declared it that way

@@ -291,8 +291,8 @@ sub_807F868: @ 807F868
 	bx r0
 	thumb_func_end sub_807F868
 
-	thumb_func_start sub_807F888
-sub_807F888: @ 807F888
+	thumb_func_start ScrSpecial_StartOldManTutorialBattle
+ScrSpecial_StartOldManTutorialBattle: @ 807F888
 	push {lr}
 	ldr r0, _0807F8B4 @ =gEnemyParty
 	movs r1, 0xD
@@ -316,7 +316,7 @@ _0807F8B4: .4byte gEnemyParty
 _0807F8B8: .4byte gMain
 _0807F8BC: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
 _0807F8C0: .4byte gBattleTypeFlags
-	thumb_func_end sub_807F888
+	thumb_func_end ScrSpecial_StartOldManTutorialBattle
 
 	thumb_func_start BattleSetup_StartScriptedWildBattle
 BattleSetup_StartScriptedWildBattle: @ 807F8C4
@@ -346,8 +346,8 @@ _0807F8FC: .4byte sub_807FBA0
 _0807F900: .4byte gBattleTypeFlags
 	thumb_func_end BattleSetup_StartScriptedWildBattle
 
-	thumb_func_start sub_807F904
-sub_807F904: @ 807F904
+	thumb_func_start ScrSpecial_StartMarowakBattle
+ScrSpecial_StartMarowakBattle: @ 807F904
 	push {lr}
 	sub sp, 0xC
 	bl ScriptContext2_Enable
@@ -408,10 +408,10 @@ _0807F960:
 _0807F98C: .4byte gBattleTypeFlags
 _0807F990: .4byte gEnemyParty
 _0807F994: .4byte gUnknown_841D148
-	thumb_func_end sub_807F904
+	thumb_func_end ScrSpecial_StartMarowakBattle
 
-	thumb_func_start sub_807F998
-sub_807F998: @ 807F998
+	thumb_func_start ScrSpecial_StartSouthernIslandBattle
+ScrSpecial_StartSouthernIslandBattle: @ 807F998
 	push {lr}
 	bl ScriptContext2_Enable
 	ldr r1, _0807F9CC @ =gMain
@@ -436,10 +436,10 @@ sub_807F998: @ 807F998
 _0807F9CC: .4byte gMain
 _0807F9D0: .4byte sub_807FBA0
 _0807F9D4: .4byte gBattleTypeFlags
-	thumb_func_end sub_807F998
+	thumb_func_end ScrSpecial_StartSouthernIslandBattle
 
-	thumb_func_start sub_807F9D8
-sub_807F9D8: @ 807F9D8
+	thumb_func_start Special_StartLegendaryBattle
+Special_StartLegendaryBattle: @ 807F9D8
 	push {lr}
 	bl ScriptContext2_Enable
 	ldr r1, _0807FA0C @ =gMain
@@ -508,10 +508,10 @@ _0807FA56:
 	bl IncrementGameStat
 	pop {r0}
 	bx r0
-	thumb_func_end sub_807F9D8
+	thumb_func_end Special_StartLegendaryBattle
 
-	thumb_func_start sub_807FA68
-sub_807FA68: @ 807FA68
+	thumb_func_start Special_StartGroudonKyogreBattle
+Special_StartGroudonKyogreBattle: @ 807FA68
 	push {lr}
 	bl ScriptContext2_Enable
 	ldr r1, _0807FA90 @ =gMain
@@ -547,10 +547,10 @@ _0807FAAA:
 	bl IncrementGameStat
 	pop {r0}
 	bx r0
-	thumb_func_end sub_807FA68
+	thumb_func_end Special_StartGroudonKyogreBattle
 
-	thumb_func_start sub_807FABC
-sub_807FABC: @ 807FABC
+	thumb_func_start Special_StartRegiBattle
+Special_StartRegiBattle: @ 807FABC
 	push {lr}
 	bl ScriptContext2_Enable
 	ldr r1, _0807FAEC @ =gMain
@@ -574,7 +574,7 @@ sub_807FABC: @ 807FABC
 _0807FAEC: .4byte gMain
 _0807FAF0: .4byte sub_807FBA0
 _0807FAF4: .4byte gBattleTypeFlags
-	thumb_func_end sub_807FABC
+	thumb_func_end Special_StartRegiBattle
 
 	thumb_func_start sub_807FAF8
 sub_807FAF8: @ 807FAF8
@@ -1717,14 +1717,14 @@ _080803C4: .4byte gSelectedEventObject
 _080803C8: .4byte gMapObjects
 	thumb_func_end sub_8080398
 
-	thumb_func_start sub_80803CC
-sub_80803CC: @ 80803CC
+	thumb_func_start ScrSpecial_GetTrainerBattleMode
+ScrSpecial_GetTrainerBattleMode: @ 80803CC
 	ldr r0, _080803D4 @ =gUnknown_20386AC
 	ldrb r0, [r0]
 	bx lr
 	.align 2, 0
 _080803D4: .4byte gUnknown_20386AC
-	thumb_func_end sub_80803CC
+	thumb_func_end ScrSpecial_GetTrainerBattleMode
 
 	thumb_func_start sub_80803D8
 sub_80803D8: @ 80803D8
@@ -1817,7 +1817,7 @@ BattleSetup_StartTrainerBattle: @ 8080464
 	ldr r4, _080804A0 @ =gBattleTypeFlags
 	movs r0, 0x8
 	str r0, [r4]
-	bl sub_80803CC
+	bl ScrSpecial_GetTrainerBattleMode
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x9
@@ -1964,8 +1964,8 @@ _080805A6:
 _080805AC: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
 	thumb_func_end sub_8080558
 
-	thumb_func_start sub_80805B0
-sub_80805B0: @ 80805B0
+	thumb_func_start ScrSpecial_StartTrainerEyeRematch
+ScrSpecial_StartTrainerEyeRematch: @ 80805B0
 	push {lr}
 	ldr r1, _080805CC @ =gBattleTypeFlags
 	movs r0, 0x8
@@ -1981,16 +1981,16 @@ sub_80805B0: @ 80805B0
 _080805CC: .4byte gBattleTypeFlags
 _080805D0: .4byte gMain
 _080805D4: .4byte sub_8080558
-	thumb_func_end sub_80805B0
+	thumb_func_end ScrSpecial_StartTrainerEyeRematch
 
-	thumb_func_start sub_80805D8
-sub_80805D8: @ 80805D8
+	thumb_func_start ScrSpecial_ShowTrainerIntroSpeech
+ScrSpecial_ShowTrainerIntroSpeech: @ 80805D8
 	push {lr}
 	bl sub_80806D8
 	bl ShowFieldMessage
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80805D8
+	thumb_func_end ScrSpecial_ShowTrainerIntroSpeech
 
 	thumb_func_start BattleSetup_GetScriptAddrAfterBattle
 BattleSetup_GetScriptAddrAfterBattle: @ 80805E8
@@ -2024,14 +2024,14 @@ _08080610: .4byte gUnknown_20386C8
 _08080614: .4byte EventScript_1C555B
 	thumb_func_end BattleSetup_GetTrainerPostBattleScript
 
-	thumb_func_start sub_8080618
-sub_8080618: @ 8080618
+	thumb_func_start ScrSpecial_ShowTrainerNonBattlingSpeech
+ScrSpecial_ShowTrainerNonBattlingSpeech: @ 8080618
 	push {lr}
 	bl sub_8080734
 	bl ShowFieldMessage
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8080618
+	thumb_func_end ScrSpecial_ShowTrainerNonBattlingSpeech
 
 	thumb_func_start PlayTrainerEncounterMusic
 PlayTrainerEncounterMusic: @ 8080628

@@ -15,5 +15,6 @@ void ScriptMenu_DisplayPCStartupPrompt(void);
 
 bool8 (*ScriptMenu_GetPicboxWaitFunc(void))(void);
 void sub_809D6D4(void);
+void sub_809D424(void);
 
 #endif //GUARD_SCRIPT_MENU_H

@@ -45,7 +45,7 @@ NavelRock_Summit_EventScript_164FFB:: @ 8164FFB
 	special SpawnCameraObject
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 35
-	special sub_80CD1B4
+	special Special_LoopWingFlapSound
 	applymovement 1, Movement_1650E0
 	applymovement 127, Movement_1650CD
 	waitmovement 0
@@ -59,7 +59,7 @@ NavelRock_Summit_EventScript_164FFB:: @ 8164FFB
 	delay 60
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 35
-	special sub_80CD1B4
+	special Special_LoopWingFlapSound
 	applymovement 127, Movement_1650D1
 	applymovement 1, Movement_1650D7
 	waitmovement 0
@@ -69,7 +69,7 @@ NavelRock_Summit_EventScript_164FFB:: @ 8164FFB
 	setvar VAR_0x8006, 0
 	special CreateObedientEnemyMon
 	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	special sub_807F9D8
+	special Special_StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	setvar VAR_LAST_TALKED, 1

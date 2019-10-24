@@ -36,8 +36,8 @@ _080BF934: .4byte sub_80BF97C
 _080BF938: .4byte gTasks
 	thumb_func_end Special_ChooseMonFromParty
 
-	thumb_func_start sub_80BF93C
-sub_80BF93C: @ 80BF93C
+	thumb_func_start SelectMoveTutorMon
+SelectMoveTutorMon: @ 80BF93C
 	push {lr}
 	sub sp, 0x4
 	bl ScriptContext2_Enable
@@ -65,7 +65,7 @@ sub_80BF93C: @ 80BF93C
 	.align 2, 0
 _080BF974: .4byte sub_80BF97C
 _080BF978: .4byte gTasks
-	thumb_func_end sub_80BF93C
+	thumb_func_end SelectMoveTutorMon
 
 	thumb_func_start sub_80BF97C
 sub_80BF97C: @ 80BF97C
@@ -100,8 +100,8 @@ _080BF9B4: .4byte gPaletteFade
 _080BF9B8: .4byte gTasks
 	thumb_func_end sub_80BF97C
 
-	thumb_func_start Special_ChooseMoveToDelete
-Special_ChooseMoveToDelete: @ 80BF9BC
+	thumb_func_start SelectMove
+SelectMove: @ 80BF9BC
 	push {r4,lr}
 	sub sp, 0x4
 	ldr r0, _080BF9F0 @ =gPlayerParty
@@ -132,7 +132,7 @@ _080BF9F8: .4byte gPlayerPartyCount
 _080BF9FC: .4byte CB2_ReturnToField
 _080BFA00: .4byte gFieldCallback
 _080BFA04: .4byte FieldCallback_ReturnToEventScript2
-	thumb_func_end Special_ChooseMoveToDelete
+	thumb_func_end SelectMove
 
 	thumb_func_start ScrSpecial_CountPokemonMoves
 ScrSpecial_CountPokemonMoves: @ 80BFA08
@@ -333,8 +333,8 @@ sub_80BFAA8: @ 80BFAA8
 _080BFBA4: .4byte gPPUpGetMask
 	thumb_func_end sub_80BFAA8
 
-	thumb_func_start Special_DeleteSelectedMove
-Special_DeleteSelectedMove: @ 80BFBA8
+	thumb_func_start DeleteMonMove
+DeleteMonMove: @ 80BFBA8
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -385,10 +385,10 @@ _080BFBFC:
 _080BFC08: .4byte gSpecialVar_0x8004
 _080BFC0C: .4byte gPlayerParty
 _080BFC10: .4byte gSpecialVar_0x8005
-	thumb_func_end Special_DeleteSelectedMove
+	thumb_func_end DeleteMonMove
 
-	thumb_func_start sub_80BFC14
-sub_80BFC14: @ 80BFC14
+	thumb_func_start IsSelectedMonEgg
+IsSelectedMonEgg: @ 80BFC14
 	push {lr}
 	ldr r0, _080BFC38 @ =gSpecialVar_0x8004
 	ldrh r1, [r0]
@@ -417,6 +417,6 @@ _080BFC48:
 	bx r0
 	.align 2, 0
 _080BFC4C: .4byte gSpecialVar_Result
-	thumb_func_end sub_80BFC14
+	thumb_func_end IsSelectedMonEgg
 
 	.align 2, 0 @ Don't pad with nop.

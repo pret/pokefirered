@@ -748,10 +748,10 @@
 #define FLAG_NO_ROOM_FOR_TOGEPI_EGG                      0x2DB
 #define FLAG_RECOVERED_SAPPHIRE                          0x2DC
 #define FLAG_GOT_RUBY                                    0x2DD
-#define FLAG_0x2DE                                       0x2DE
-#define FLAG_0x2DF                                       0x2DF
-#define FLAG_0x2E0                                       0x2E0
-#define FLAG_LEARNED_MOVE_AT_CAPE_BRINK                  0x2E1
+#define FLAG_TUTOR_FRENZY_PLANT                          0x2DE
+#define FLAG_TUTOR_BLAST_BURN                            0x2DF
+#define FLAG_TUTOR_HYDRO_CANNON                          0x2E0
+#define FLAG_LEARNED_ALL_MOVES_AT_CAPE_BRINK             0x2E1
 #define FLAG_GOT_NUGGET_FROM_DUNSPARCE_TUNNEL            0x2E2
 #define FLAG_USED_CUT_ON_RUIN_VALLEY_BRAILLE             0x2E3
 #define FLAG_FOUGHT_DEOXYS                               0x2E4
@@ -1325,6 +1325,7 @@
 #define FLAG_SYS_STRENGTH_ACTIVE (SYS_FLAGS + 0x5)
 #define FLAG_SYS_FLASH_ACTIVE (SYS_FLAGS + 0x6)
 #define FLAG_SYS_SPECIAL_WILD_BATTLE (SYS_FLAGS + 0x7)
+#define FLAG_0x808 (SYS_FLAGS + 0x8)
 
 #define PERMA_SYS_FLAGS_START 0x820
 #define FLAG_BADGE01_GET (SYS_FLAGS + 0x20)
@@ -1422,7 +1423,7 @@
 #define FLAG_WORLD_MAP_SIX_ISLAND_ALTERING_CAVE                     (SYS_FLAGS + 0xBE)
 #define FLAG_WORLD_MAP_SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER     (SYS_FLAGS + 0xBF)
 #define FLAG_WORLD_MAP_THREE_ISLAND_DUNSPARCE_TUNNEL                (SYS_FLAGS + 0xC0)
-#define FLAG_WORLD_MAP_SEVEN_ISLAND_SEAVAULT_CANYON_TANOBY_KEY      (SYS_FLAGS + 0xC1)
+#define FLAG_WORLD_MAP_SEVEN_ISLAND_SEVAULT_CANYON_TANOBY_KEY       (SYS_FLAGS + 0xC1)
 #define FLAG_WORLD_MAP_BIRTH_ISLAND_EXTERIOR                        (SYS_FLAGS + 0xC2)
 
 #define FLAG_0x8D5 (SYS_FLAGS + 0xD5)

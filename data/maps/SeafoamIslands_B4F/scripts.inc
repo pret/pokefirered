@@ -70,7 +70,7 @@ SeafoamIslands_B4F_MapScript4_1630E7:: @ 81630E7
 
 EventScript_1630F1:: @ 81630F1
 	turnobject 255, 2
-	special sub_80CBD80
+	special Special_ForcePlayerToStartSurfing
 	end
 
 SeafoamIslands_B4F_MapScript5_1630F9:: @ 81630F9
@@ -179,7 +179,7 @@ SeafoamIslands_B4F_EventScript_1631AC:: @ 81631AC
 	playbgm MUS_EXEYE, 0
 	waitbuttonpress
 	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	special sub_807F9D8
+	special Special_StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	specialvar VAR_RESULT, Special_GetBattleOutcome

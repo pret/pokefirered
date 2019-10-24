@@ -358,8 +358,8 @@ _080E5C20: .4byte gSaveBlock2Ptr
 _080E5C24: .4byte 0x0000056c
 	thumb_func_end sub_80E5B14
 
-	thumb_func_start sub_80E5C28
-sub_80E5C28: @ 80E5C28
+	thumb_func_start ChooseNextBattleTowerTrainer
+ChooseNextBattleTowerTrainer: @ 80E5C28
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -637,7 +637,7 @@ _080E5E4C: .4byte 0x00000572
 _080E5E50: .4byte gSaveBlock2Ptr
 _080E5E54: .4byte 0x0000056c
 _080E5E58: .4byte 0x00000571
-	thumb_func_end sub_80E5C28
+	thumb_func_end ChooseNextBattleTowerTrainer
 
 	thumb_func_start sub_80E5E5C
 sub_80E5E5C: @ 80E5E5C
@@ -651,14 +651,14 @@ sub_80E5E5C: @ 80E5E5C
 _080E5E6C: .4byte 0x00004010
 	thumb_func_end sub_80E5E5C
 
-	thumb_func_start sub_80E5E70
-sub_80E5E70: @ 80E5E70
+	thumb_func_start SetEReaderTrainerGfxId
+SetEReaderTrainerGfxId: @ 80E5E70
 	push {lr}
 	movs r0, 0xC8
 	bl sub_80E5E5C
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80E5E70
+	thumb_func_end SetEReaderTrainerGfxId
 
 	thumb_func_start sub_80E5E7C
 sub_80E5E7C: @ 80E5E7C
@@ -1700,8 +1700,8 @@ _080E6640: .4byte gUnknown_84020C4
 _080E6644: .4byte 0x0000ffff
 	thumb_func_end sub_80E6564
 
-	thumb_func_start sub_80E6648
-sub_80E6648: @ 80E6648
+	thumb_func_start CheckPartyBattleTowerBanlist
+CheckPartyBattleTowerBanlist: @ 80E6648
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1854,7 +1854,7 @@ _080E6770:
 _080E6780: .4byte gSpecialVar_0x8004
 _080E6784: .4byte gSaveBlock2Ptr
 _080E6788: .4byte 0x0000055c
-	thumb_func_end sub_80E6648
+	thumb_func_end CheckPartyBattleTowerBanlist
 
 	thumb_func_start sub_80E678C
 sub_80E678C: @ 80E678C
@@ -1918,8 +1918,8 @@ _080E67F0:
 _080E67F8: .4byte gStringVar4
 	thumb_func_end sub_80E678C
 
-	thumb_func_start sub_80E67FC
-sub_80E67FC: @ 80E67FC
+	thumb_func_start PrintBattleTowerTrainerGreeting
+PrintBattleTowerTrainerGreeting: @ 80E67FC
 	push {lr}
 	ldr r0, _080E6818 @ =gSaveBlock2Ptr
 	ldr r2, [r0]
@@ -1962,7 +1962,7 @@ _080E684C:
 	bx r0
 	.align 2, 0
 _080E6850: .4byte 0xffffc154
-	thumb_func_end sub_80E67FC
+	thumb_func_end PrintBattleTowerTrainerGreeting
 
 	thumb_func_start sub_80E6854
 sub_80E6854: @ 80E6854
@@ -2048,8 +2048,8 @@ _080E68F8: .4byte sub_80E6854
 _080E68FC: .4byte sub_800FD9C
 	thumb_func_end sub_80E68C4
 
-	thumb_func_start sub_80E6900
-sub_80E6900: @ 80E6900
+	thumb_func_start StartSpecialBattle
+StartSpecialBattle: @ 80E6900
 	push {r4-r6,lr}
 	sub sp, 0x4
 	ldr r0, _080E691C @ =gUnknown_203AAB8
@@ -2168,10 +2168,10 @@ _080E69FC: .4byte gBattleTypeFlags
 _080E6A00: .4byte 0x00000808
 _080E6A04: .4byte gTrainerBattleOpponent_A
 _080E6A08: .4byte sub_80E68C4
-	thumb_func_end sub_80E6900
+	thumb_func_end StartSpecialBattle
 
-	thumb_func_start sub_80E6A0C
-sub_80E6A0C: @ 80E6A0C
+	thumb_func_start SetBattleTowerProperty
+SetBattleTowerProperty: @ 80E6A0C
 	push {r4-r6,lr}
 	ldr r1, _080E6A34 @ =gSaveBlock2Ptr
 	ldr r0, [r1]
@@ -2469,10 +2469,10 @@ _080E6C80:
 	bx r0
 	.align 2, 0
 _080E6C88: .4byte 0x0000055c
-	thumb_func_end sub_80E6A0C
+	thumb_func_end SetBattleTowerProperty
 
-	thumb_func_start sub_80E6C8C
-sub_80E6C8C: @ 80E6C8C
+	thumb_func_start BattleTowerUtil
+BattleTowerUtil: @ 80E6C8C
 	push {r4,lr}
 	ldr r1, _080E6CB4 @ =gSaveBlock2Ptr
 	ldr r0, [r1]
@@ -2652,10 +2652,10 @@ _080E6E08:
 	bx r0
 	.align 2, 0
 _080E6E10: .4byte 0x0000055c
-	thumb_func_end sub_80E6C8C
+	thumb_func_end BattleTowerUtil
 
-	thumb_func_start sub_80E6E14
-sub_80E6E14: @ 80E6E14
+	thumb_func_start SetBattleTowerParty
+SetBattleTowerParty: @ 80E6E14
 	push {r4,r5,lr}
 	movs r2, 0
 	ldr r5, _080E6E3C @ =gUnknown_203B0D4
@@ -2671,7 +2671,7 @@ _080E6E1E:
 	adds r2, 0x1
 	cmp r2, 0x2
 	ble _080E6E1E
-	bl sub_80A03D8
+	bl ReducePlayerPartyToThree
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -2679,7 +2679,7 @@ _080E6E1E:
 _080E6E3C: .4byte gUnknown_203B0D4
 _080E6E40: .4byte gSaveBlock2Ptr
 _080E6E44: .4byte 0x0000056d
-	thumb_func_end sub_80E6E14
+	thumb_func_end SetBattleTowerParty
 
 	thumb_func_start sub_80E6E48
 sub_80E6E48: @ 80E6E48
@@ -2858,8 +2858,8 @@ _080E6FB0: .4byte 0x0000056d
 _080E6FB4: .4byte gUnknown_2024220
 	thumb_func_end sub_80E6EE0
 
-	thumb_func_start sub_80E6FB8
-sub_80E6FB8: @ 80E6FB8
+	thumb_func_start SaveBattleTowerProgress
+SaveBattleTowerProgress: @ 80E6FB8
 	push {r4,r5,lr}
 	ldr r0, _080E703C @ =gSaveBlock2Ptr
 	ldr r1, [r0]
@@ -2933,15 +2933,15 @@ _080E7048: .4byte 0x00000564
 _080E704C: .4byte gBattleOutcome
 _080E7050: .4byte 0x0000055d
 _080E7054: .4byte 0x0000055e
-	thumb_func_end sub_80E6FB8
+	thumb_func_end SaveBattleTowerProgress
 
-	thumb_func_start sub_80E7058
-sub_80E7058: @ 80E7058
+	thumb_func_start BattleTower_SoftReset
+BattleTower_SoftReset: @ 80E7058
 	push {lr}
 	bl DoSoftReset
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80E7058
+	thumb_func_end BattleTower_SoftReset
 
 	thumb_func_start sub_80E7064
 sub_80E7064: @ 80E7064
@@ -3142,8 +3142,8 @@ _080E71C8: .4byte 0x0000ffff
 _080E71CC: .4byte 0x0000270f
 	thumb_func_end sub_80E7188
 
-	thumb_func_start sub_80E71D0
-sub_80E71D0: @ 80E71D0
+	thumb_func_start DetermineBattleTowerPrize
+DetermineBattleTowerPrize: @ 80E71D0
 	push {r4,r5,lr}
 	ldr r4, _080E7214 @ =gSaveBlock2Ptr
 	ldr r1, [r4]
@@ -3201,10 +3201,10 @@ _080E7240:
 	bx r0
 	.align 2, 0
 _080E7248: .4byte gUnknown_84020DA
-	thumb_func_end sub_80E71D0
+	thumb_func_end DetermineBattleTowerPrize
 
-	thumb_func_start sub_80E724C
-sub_80E724C: @ 80E724C
+	thumb_func_start GiveBattleTowerPrize
+GiveBattleTowerPrize: @ 80E724C
 	push {r4-r6,lr}
 	ldr r5, _080E7288 @ =gSaveBlock2Ptr
 	ldr r1, [r5]
@@ -3255,10 +3255,10 @@ _080E72AA:
 	.align 2, 0
 _080E72B0: .4byte gSpecialVar_Result
 _080E72B4: .4byte 0x0000055e
-	thumb_func_end sub_80E724C
+	thumb_func_end GiveBattleTowerPrize
 
-	thumb_func_start sub_80E72B8
-sub_80E72B8: @ 80E72B8
+	thumb_func_start AwardBattleTowerRibbons
+AwardBattleTowerRibbons: @ 80E72B8
 	push {r4-r7,lr}
 	ldr r0, _080E7334 @ =gSaveBlock2Ptr
 	ldr r0, [r0]
@@ -3328,7 +3328,7 @@ _080E7338: .4byte 0x0000055c
 _080E733C: .4byte gSpecialVar_Result
 _080E7340: .4byte 0x0000056d
 _080E7344: .4byte gPlayerParty
-	thumb_func_end sub_80E72B8
+	thumb_func_end AwardBattleTowerRibbons
 
 	thumb_func_start sub_80E7348
 sub_80E7348: @ 80E7348
@@ -3469,8 +3469,8 @@ _080E7458: .4byte gSaveBlock2Ptr
 _080E745C: .4byte 0x000004a1
 	thumb_func_end GetEreaderTrainerClassId
 
-	thumb_func_start sub_80E7460
-sub_80E7460: @ 80E7460
+	thumb_func_start CopyEReaderTrainerName5
+CopyEReaderTrainerName5: @ 80E7460
 	push {r4,lr}
 	adds r3, r0, 0
 	movs r2, 0
@@ -3495,7 +3495,7 @@ _080E746E:
 	.align 2, 0
 _080E7488: .4byte gSaveBlock2Ptr
 _080E748C: .4byte 0x000004a4
-	thumb_func_end sub_80E7460
+	thumb_func_end CopyEReaderTrainerName5
 
 	thumb_func_start ValidateEReaderTrainer
 ValidateEReaderTrainer: @ 80E7490
@@ -3594,8 +3594,8 @@ _080E752A:
 	bx r0
 	thumb_func_end sub_80E7524
 
-	thumb_func_start sub_80E7538
-sub_80E7538: @ 80E7538
+	thumb_func_start PrintEReaderTrainerGreeting
+PrintEReaderTrainerGreeting: @ 80E7538
 	push {lr}
 	ldr r0, _080E754C @ =gSaveBlock2Ptr
 	ldr r0, [r0]
@@ -3607,7 +3607,7 @@ sub_80E7538: @ 80E7538
 	bx r0
 	.align 2, 0
 _080E754C: .4byte gSaveBlock2Ptr
-	thumb_func_end sub_80E7538
+	thumb_func_end PrintEReaderTrainerGreeting
 
 	thumb_func_start sub_80E7550
 sub_80E7550: @ 80E7550
@@ -3649,8 +3649,8 @@ _080E7594: .4byte gSaveBlock2Ptr
 _080E7598: .4byte 0x000004bc
 	thumb_func_end sub_80E7550
 
-	thumb_func_start sub_80E759C
-sub_80E759C: @ 80E759C
+	thumb_func_start Dummy_TryEnableBravoTrainerBattleTower
+Dummy_TryEnableBravoTrainerBattleTower: @ 80E759C
 	push {lr}
 	movs r0, 0x1
 _080E75A0:
@@ -3659,6 +3659,6 @@ _080E75A0:
 	bge _080E75A0
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80E759C
+	thumb_func_end Dummy_TryEnableBravoTrainerBattleTower
 
 	.align 2, 0 @ Don't pad with nop.

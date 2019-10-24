@@ -9,11 +9,11 @@ RocketHideout_Elevator_EventScript_1614D9:: @ 81614D9
 	checkflag FLAG_TEMP_2
 	call_if FALSE, EventScript_1A7AB9
 	copyvar VAR_0x8005, VAR_ELEVATOR_FLOOR
-	special sub_80CB580
+	special Special_DrawElevatorCurrentFloorWindow
 	message Text_1A535C
 	waitmessage
 	setvar VAR_0x8004, 2
-	specialvar VAR_RESULT, sub_80CB328
+	specialvar VAR_RESULT, Special_InitElevatorFloorSelectMenuPos
 	switch VAR_RESULT
 	case 0, EventScript_161530
 	case 1, EventScript_16153C
@@ -87,15 +87,15 @@ EventScript_161608:: @ 8161608
 	end
 
 EventScript_161609:: @ 8161609
-	special sub_80CB63C
+	special Special_CloseElevatorCurrentFloorWindow
 	releaseall
 	end
 
 EventScript_16160E:: @ 816160E
-	special sub_80CB63C
+	special Special_CloseElevatorCurrentFloorWindow
 	closemessage
 	waitse
-	special sub_80CB498
+	special Special_AnimateElevator
 	waitstate
 	setflag FLAG_TEMP_2
 	return

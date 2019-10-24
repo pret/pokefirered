@@ -226,7 +226,7 @@ static u32 ish_mainseq_4(struct mevent_client * svr)
             sub_8069EA4(svr->recvBuffer, 1000);
             break;
         case 18:
-            memcpy(gSaveBlock2Ptr->unk_B0.field_3F0, svr->recvBuffer, 0xbc);
+            memcpy(&gSaveBlock2Ptr->unk_B0.field_3F0, svr->recvBuffer, sizeof(struct BattleTowerEReaderTrainer));
             ValidateEReaderTrainer();
             break;
         case 21:

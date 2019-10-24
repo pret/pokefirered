@@ -10,16 +10,16 @@ FiveIsland_ResortGorgeous_House_EventScript_171EBE:: @ 8171EBE
 	faceplayer
 	checkflag FLAG_TEMP_2
 	goto_if TRUE, EventScript_172043
-	compare_var_to_value VAR_STORAGE_UNKNOWN, 65535
+	compare_var_to_value VAR_RESORT_GORGEOUS_REQUESTED_MON, 0xFFFF
 	goto_if eq, EventScript_171F0B
-	compare_var_to_value VAR_STORAGE_UNKNOWN, 0
+	compare_var_to_value VAR_RESORT_GORGEOUS_REQUESTED_MON, SPECIES_NONE
 	goto_if ne, EventScript_171F19
 	msgbox gUnknown_81A42A0
 	goto EventScript_171EFE
 	end
 
 EventScript_171EFE:: @ 8171EFE
-	special sub_80CB0A8
+	special Special_SampleResortGorgeousMonAndReward
 	msgbox gUnknown_81A4315
 	release
 	end
@@ -30,15 +30,15 @@ EventScript_171F0B:: @ 8171F0B
 	end
 
 EventScript_171F19:: @ 8171F19
-	copyvar VAR_0x8004, VAR_STORAGE_UNKNOWN
-	specialvar VAR_RESULT, sub_80CC48C
+	copyvar VAR_0x8004, VAR_RESORT_GORGEOUS_REQUESTED_MON
+	specialvar VAR_RESULT, Special_PlayerPartyContainsSpecies
 	compare_var_to_value VAR_RESULT, 1
 	goto_if eq, EventScript_171F34
 	goto EventScript_171EFE
 	end
 
 EventScript_171F34:: @ 8171F34
-	special sub_80CB0A8
+	special Special_SampleResortGorgeousMonAndReward
 	msgbox gUnknown_81A43F7
 	addobject 2
 	applymovement 2, Movement_172060
@@ -62,11 +62,11 @@ EventScript_171F34:: @ 8171F34
 	call_if eq, EventScript_17201A
 	moveobjectoffscreen 2
 	msgbox gUnknown_81A458E
-	giveitem VAR_0x403B
+	giveitem VAR_RESORT_GORGEOUS_REWARD
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_172025
 	setflag FLAG_TEMP_2
-	setvar VAR_STORAGE_UNKNOWN, 0
+	setvar VAR_RESORT_GORGEOUS_REQUESTED_MON, 0
 	release
 	end
 
@@ -104,7 +104,7 @@ EventScript_172025:: @ 8172025
 	textcolor 1
 	msgbox gUnknown_81A461B
 	setflag FLAG_TEMP_2
-	setvar VAR_STORAGE_UNKNOWN, 0
+	setvar VAR_RESORT_GORGEOUS_REQUESTED_MON, 0
 	release
 	end
 

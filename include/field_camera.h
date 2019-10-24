@@ -27,5 +27,8 @@ extern u16 gUnknown_03005DE8;
 void DrawWholeMapView(void);
 void CurrentMapDrawMetatileAt(int x, int y);
 void sub_805A658(s16 *x, s16 *y);
+void SetCameraPanningCallback(void (*cb)(void));
+void SetCameraPanning(s16 x, s16 y);
+void InstallCameraPanAheadCallback(void);
 
 #endif //GUARD_FIELD_CAMERA_H

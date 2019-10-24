@@ -1,9 +1,9 @@
-SevenIsland_SeavaultCanyon_TanobyKey_MapScripts:: @ 8164DCC
-	map_script 3, SevenIsland_SeavaultCanyon_TanobyKey_MapScript1_164DD2
+SevenIsland_SevaultCanyon_TanobyKey_MapScripts:: @ 8164DCC
+	map_script 3, SevenIsland_SevaultCanyon_TanobyKey_MapScript1_164DD2
 	.byte 0
 
-SevenIsland_SeavaultCanyon_TanobyKey_MapScript1_164DD2:: @ 8164DD2
-	setworldmapflag FLAG_WORLD_MAP_SEVEN_ISLAND_SEAVAULT_CANYON_TANOBY_KEY
+SevenIsland_SevaultCanyon_TanobyKey_MapScript1_164DD2:: @ 8164DD2
+	setworldmapflag FLAG_WORLD_MAP_SEVEN_ISLAND_SEVAULT_CANYON_TANOBY_KEY
 	checkflag FLAG_SYS_UNLOCKED_TANOBY_RUINS
 	call_if TRUE, EventScript_164E07
 	setvar VAR_0x4001, 0
@@ -26,7 +26,7 @@ EventScript_164E07:: @ 8164E07
 	setobjectxyperm 7, 9, 8
 	return
 
-SevenIsland_SeavaultCanyon_TanobyKey_EventScript_164E39:: @ 8164E39
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_164E39:: @ 8164E39
 	lockall
 	compare_var_to_value VAR_0x4001, 100
 	goto_if eq, EventScript_164F8A
@@ -37,7 +37,7 @@ SevenIsland_SeavaultCanyon_TanobyKey_EventScript_164E39:: @ 8164E39
 	releaseall
 	end
 
-SevenIsland_SeavaultCanyon_TanobyKey_EventScript_164E5C:: @ 8164E5C
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_164E5C:: @ 8164E5C
 	lockall
 	compare_var_to_value VAR_0x4002, 100
 	goto_if eq, EventScript_164F8A
@@ -48,7 +48,7 @@ SevenIsland_SeavaultCanyon_TanobyKey_EventScript_164E5C:: @ 8164E5C
 	releaseall
 	end
 
-SevenIsland_SeavaultCanyon_TanobyKey_EventScript_164E7F:: @ 8164E7F
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_164E7F:: @ 8164E7F
 	lockall
 	compare_var_to_value VAR_0x4003, 100
 	goto_if eq, EventScript_164F8A
@@ -59,7 +59,7 @@ SevenIsland_SeavaultCanyon_TanobyKey_EventScript_164E7F:: @ 8164E7F
 	releaseall
 	end
 
-SevenIsland_SeavaultCanyon_TanobyKey_EventScript_164EA2:: @ 8164EA2
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_164EA2:: @ 8164EA2
 	lockall
 	compare_var_to_value VAR_0x4004, 100
 	goto_if eq, EventScript_164F8A
@@ -70,7 +70,7 @@ SevenIsland_SeavaultCanyon_TanobyKey_EventScript_164EA2:: @ 8164EA2
 	releaseall
 	end
 
-SevenIsland_SeavaultCanyon_TanobyKey_EventScript_164EC5:: @ 8164EC5
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_164EC5:: @ 8164EC5
 	lockall
 	compare_var_to_value VAR_0x4005, 100
 	goto_if eq, EventScript_164F8A
@@ -81,7 +81,7 @@ SevenIsland_SeavaultCanyon_TanobyKey_EventScript_164EC5:: @ 8164EC5
 	releaseall
 	end
 
-SevenIsland_SeavaultCanyon_TanobyKey_EventScript_164EE8:: @ 8164EE8
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_164EE8:: @ 8164EE8
 	lockall
 	compare_var_to_value VAR_0x4006, 100
 	goto_if eq, EventScript_164F8A
@@ -92,7 +92,7 @@ SevenIsland_SeavaultCanyon_TanobyKey_EventScript_164EE8:: @ 8164EE8
 	releaseall
 	end
 
-SevenIsland_SeavaultCanyon_TanobyKey_EventScript_164F0B:: @ 8164F0B
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_164F0B:: @ 8164F0B
 	lockall
 	compare_var_to_value VAR_0x4007, 100
 	goto_if eq, EventScript_164F8A
@@ -110,7 +110,7 @@ EventScript_164F2E:: @ 8164F2E
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 8
 	setvar VAR_0x8007, 3
-	special sub_80CAC28
+	special Special_ShakeScreen
 	delay 60
 	return
 
@@ -119,13 +119,13 @@ EventScript_164F51:: @ 8164F51
 	setvar VAR_0x8005, 2
 	setvar VAR_0x8006, 10
 	setvar VAR_0x8007, 3
-	special sub_80CAC28
+	special Special_ShakeScreen
 	delay 60
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 12
 	setvar VAR_0x8007, 2
-	special sub_80CAC28
+	special Special_ShakeScreen
 	delay 60
 	playse SE_FU_ZUZUZU
 	waitse

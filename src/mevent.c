@@ -588,7 +588,7 @@ void DestroyWonderCard(void)
     ClearRamScript();
     sub_806E2D0();
     sub_806E370();
-    sub_80E7524(gSaveBlock2Ptr->unk_B0.field_3F0);
+    sub_80E7524(&gSaveBlock2Ptr->unk_B0.field_3F0);
 }
 
 bool32 sub_8143F68(const struct MEventBuffer_32E0_Sub * data)

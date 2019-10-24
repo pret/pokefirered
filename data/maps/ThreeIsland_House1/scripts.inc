@@ -4,7 +4,7 @@ ThreeIsland_House1_MapScripts:: @ 8171819
 ThreeIsland_House1_EventScript_17181A:: @ 817181A
 	lock
 	faceplayer
-	special sub_80CA6DC
+	special Special_BufferBigGuyOrBigGirlString
 	msgbox gUnknown_81A2F3E
 	release
 	end

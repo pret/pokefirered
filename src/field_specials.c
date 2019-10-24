@@ -198,8 +198,9 @@ bool8 Special_PlayerHasGrassPokemonInParty(void)
     for (i = 0; i < PARTY_SIZE; i++)
     {
         pokemon = &gPlayerParty[i];
-        if (   GetMonData(pokemon, MON_DATA_SANITY_HAS_SPECIES)
-            && !GetMonData(pokemon, MON_DATA_IS_EGG))
+        if (GetMonData(pokemon, MON_DATA_SANITY_HAS_SPECIES)
+         && !GetMonData(pokemon, MON_DATA_IS_EGG)
+        )
         {
             species = GetMonData(pokemon, MON_DATA_SPECIES);
             if (gBaseStats[species].type1 == TYPE_GRASS || gBaseStats[species].type2 == TYPE_GRASS)
@@ -1582,6 +1583,7 @@ void ChangeBoxPokemonNickname(void)
     u8 gender;
     u32 personality;
 
+
     GetBoxMonData(pokemon, MON_DATA_NICKNAME, gStringVar3);
     GetBoxMonData(pokemon, MON_DATA_NICKNAME, gStringVar2);
     species = GetBoxMonData(pokemon, MON_DATA_SPECIES, NULL);
@@ -2250,7 +2252,8 @@ bool8 CutMoveRuinValleyCheck(void)
      && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SIX_ISLAND_RUIN_VALLEY)
      && gSaveBlock1Ptr->pos.x == 24
      && gSaveBlock1Ptr->pos.y == 25
-     && GetPlayerFacingDirection() == DIR_NORTH)
+     && GetPlayerFacingDirection() == DIR_NORTH
+    )
         return TRUE;
     else
         return FALSE;

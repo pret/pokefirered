@@ -366,9 +366,9 @@ sub_806CAC8: @ 806CAC8
 	bl IncrementGameStat
 	bl MENewsJisanStepCounter
 	bl IncrementRenewableHiddenItemStepCounter
-	bl sub_80CC918
+	bl RunMassageCooldownStepCounter
 	bl IncrementResortGorgeousStepCounter
-	bl sub_80CCFBC
+	bl BirthIslandDeoxysStepCounter
 	mov r0, sp
 	adds r1, r4, 0
 	adds r2, r6, 0

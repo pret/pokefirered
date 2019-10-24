@@ -241,63 +241,63 @@ SixIsland_DottedHole_SapphireRoom_EventScript_16441F:: @ 816441F
 	setvar VAR_0x8006, 0
 	braillemessage gUnknown_81A9321
 	getbraillestringwidth gUnknown_81A9321
-	call EventScript_1A926C
+	call EventScript_BrailleCursorWaitButton
 	setvar VAR_0x8006, 0
 	braillemessage gUnknown_81A932D
 	getbraillestringwidth gUnknown_81A932D
-	call EventScript_1A926C
+	call EventScript_BrailleCursorWaitButton
 	setvar VAR_0x8006, 0
 	braillemessage gUnknown_81A9338
 	getbraillestringwidth gUnknown_81A9338
-	call EventScript_1A926C
+	call EventScript_BrailleCursorWaitButton
 	setvar VAR_0x8006, 0
 	braillemessage gUnknown_81A933F
 	getbraillestringwidth gUnknown_81A933F
-	call EventScript_1A926C
+	call EventScript_BrailleCursorWaitButton
 	setvar VAR_0x8006, 0
 	braillemessage gUnknown_81A934A
 	getbraillestringwidth gUnknown_81A934A
-	call EventScript_1A926C
+	call EventScript_BrailleCursorWaitButton
 	setvar VAR_0x8006, 0
 	braillemessage gUnknown_81A9356
 	getbraillestringwidth gUnknown_81A9356
-	call EventScript_1A926C
+	call EventScript_BrailleCursorWaitButton
 	setvar VAR_0x8006, 0
 	braillemessage gUnknown_81A9362
 	getbraillestringwidth gUnknown_81A9362
-	call EventScript_1A926C
+	call EventScript_BrailleCursorWaitButton
 	setvar VAR_0x8006, 0
 	braillemessage gUnknown_81A9368
 	getbraillestringwidth gUnknown_81A9368
-	call EventScript_1A926C
+	call EventScript_BrailleCursorWaitButton
 	setvar VAR_0x8006, 0
 	braillemessage gUnknown_81A9374
 	getbraillestringwidth gUnknown_81A9374
-	call EventScript_1A926C
+	call EventScript_BrailleCursorWaitButton
 	setvar VAR_0x8006, 0
 	braillemessage gUnknown_81A937C
 	getbraillestringwidth gUnknown_81A937C
-	call EventScript_1A926C
+	call EventScript_BrailleCursorWaitButton
 	setvar VAR_0x8006, 0
 	braillemessage gUnknown_81A9387
 	getbraillestringwidth gUnknown_81A9387
-	call EventScript_1A926C
+	call EventScript_BrailleCursorWaitButton
 	setvar VAR_0x8006, 0
 	braillemessage gUnknown_81A9393
 	getbraillestringwidth gUnknown_81A9393
-	call EventScript_1A926C
+	call EventScript_BrailleCursorWaitButton
 	setvar VAR_0x8006, 0
 	braillemessage gUnknown_81A939F
 	getbraillestringwidth gUnknown_81A939F
-	call EventScript_1A926C
+	call EventScript_BrailleCursorWaitButton
 	setvar VAR_0x8006, 0
 	braillemessage gUnknown_81A93AB
 	getbraillestringwidth gUnknown_81A93AB
-	call EventScript_1A926C
+	call EventScript_BrailleCursorWaitButton
 	setvar VAR_0x8006, 0
 	braillemessage gUnknown_81A93B4
 	getbraillestringwidth gUnknown_81A93B4
-	call EventScript_1A926C
+	call EventScript_BrailleCursorWaitButton
 	braillemessage gUnknown_81A93C0
 	waitbuttonpress
 	releaseall

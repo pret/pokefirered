@@ -1,5 +1,6 @@
 #include "global.h"
 #include "malloc.h"
+#include "palette.h"
 #include "quest_log.h"
 #include "list_menu.h"
 #include "diploma.h"
@@ -17,6 +18,7 @@
 #include "task.h"
 #include "battle_tower.h"
 #include "field_camera.h"
+#include "field_effect.h"
 #include "field_map_obj.h"
 #include "menu_indicators.h"
 #include "random.h"
@@ -33,6 +35,7 @@
 #include "menu.h"
 #include "mevent.h"
 #include "naming_screen.h"
+#include "party_menu.h"
 #include "dynamic_placeholder_text_util.h"
 #include "new_menu_helpers.h"
 #include "constants/songs.h"
@@ -41,13 +44,14 @@
 #include "constants/map_objects.h"
 #include "constants/maps.h"
 #include "constants/region_map.h"
+#include "constants/moves.h"
 
 EWRAM_DATA u8 sElevatorCurrentFloorWindowId = 0;
 EWRAM_DATA u16 sElevatorScroll = 0;
 EWRAM_DATA u16 sElevatorCursorPos = 0;
 EWRAM_DATA struct ListMenuItem * gUnknown_2039A14 = NULL;
 EWRAM_DATA u16 gUnknown_2039A18 = 0;
-EWRAM_DATA u8 gUnknown_2039A1A = 0;
+EWRAM_DATA u8 sUnknownBoxId = 0;
 EWRAM_DATA u8 gUnknown_2039A1B = 0;
 
 struct ListMenuTemplate gUnknown_3005360;
@@ -74,8 +78,14 @@ static void Task_ListMenuRemoveScrollIndicatorArrowPair(u8 taskId);
 static u16 GetStarterPokemon(u16 starterIdx);
 static void ChangeBoxPokemonNickname_CB(void);
 static void ChangePokemonNickname_CB(void);
+static void Task_RunPokemonLeagueLightingEffect(u8 taskId);
+static void Task_CancelPokemonLeagueLightingEffect(u8 taskId);
+static void task_deoxys_sound(u8 taskId);
+static void MoveDeoxysObject(u8 num);
+static void Task_WaitDeoxysFieldEffect(u8 taskId);
+static void Task_WingFlapSound(u8 taskId);
 
-static u8 *const gUnknown_83F5AF8[] = {
+static u8 *const sStringVarPtrs[] = {
     gStringVar1,
     gStringVar2,
     gStringVar3
@@ -319,7 +329,7 @@ void Special_BufferEReaderTrainerName5(void)
     CopyEReaderTrainerName5(gStringVar1);
 }
 
-static const u8 gUnknown_83F5B04[] = {
+static const u8 sUnused_83F5B04[] = {
     13,
     14,
     15,
@@ -736,7 +746,7 @@ static const u8 *const sFloorNamePointers[] = {
     gUnknown_841806D
 };
 
-static const u8 gUnknown_83F5B84[] = {
+static const u8 sUnused_83F5B84[] = {
     26,
     26,
     26,
@@ -1214,7 +1224,7 @@ void Special_ListMenu(void)
     }
 }
 
-static const u8 *const gUnknown_83F5BCC[][12] = {
+static const u8 *const sListMenuLabels[][12] = {
     {
         gUnknown_8417FD9,
         gUnknown_8417FE6,
@@ -1293,7 +1303,7 @@ static void Task_CreateScriptListMenu(u8 taskId)
     mwidth = 0;
     for (i = 0; i < task->data[1]; i++)
     {
-        gUnknown_2039A14[i].label = gUnknown_83F5BCC[gSpecialVar_0x8004][i];
+        gUnknown_2039A14[i].label = sListMenuLabels[gSpecialVar_0x8004][i];
         gUnknown_2039A14[i].index = i;
         width = GetStringWidth(2, gUnknown_2039A14[i].label, 0);
         if (width > mwidth)
@@ -1530,7 +1540,7 @@ bool8 Special_HasLeadMonBeenRenamed(void)
 void TV_PrintIntToStringVar(u8 varidx, s32 number)
 {
     s32 n = CountDigits(number);
-    ConvertIntToDecimalStringN(gUnknown_83F5AF8[varidx], number, STR_CONV_MODE_LEFT_ALIGN, n);
+    ConvertIntToDecimalStringN(sStringVarPtrs[varidx], number, STR_CONV_MODE_LEFT_ALIGN, n);
 }
 
 s32 CountDigits(s32 number)
@@ -1714,7 +1724,7 @@ bool8 Special_PlayerPartyContainsSpecies(void)
     return FALSE;
 }
 
-static const u8 gUnknown_83F5D32[][3] = {
+static const u8 sMartMaps[][3] = {
     {MAP_GROUP(VIRIDIAN_CITY_MART),   MAP_NUM(VIRIDIAN_CITY_MART),   1},
     {MAP_GROUP(PEWTER_CITY_MART),     MAP_NUM(PEWTER_CITY_MART),     3},
     {MAP_GROUP(CERULEAN_CITY_MART),   MAP_NUM(CERULEAN_CITY_MART),   1},
@@ -1729,13 +1739,13 @@ static const u8 gUnknown_83F5D32[][3] = {
     {MAP_GROUP(SIX_ISLAND_MART),      MAP_NUM(SIX_ISLAND_MART),      1}
 };
 
-u8 sub_80CC4D4(void)
+u8 Special_GetMartClerkObjectId(void)
 {
     u8 i;
-    for (i = 0; i < NELEMS(gUnknown_83F5D32); i++)
+    for (i = 0; i < NELEMS(sMartMaps); i++)
     {
-        if (gSaveBlock1Ptr->location.mapGroup == gUnknown_83F5D32[i][0] && gSaveBlock1Ptr->location.mapNum == gUnknown_83F5D32[i][1])
-            return gUnknown_83F5D32[i][2];
+        if (gSaveBlock1Ptr->location.mapGroup == sMartMaps[i][0] && gSaveBlock1Ptr->location.mapNum == sMartMaps[i][1])
+            return sMartMaps[i][2];
     }
     return 1;
 }
@@ -1750,7 +1760,7 @@ static const struct {
     u16 num;
     u16 grp2;
     u16 num2;
-} gUnknown_83F5D58[51] = {
+} sInsideOutsidePairs[51] = {
     {MAP_GROUP(PALLET_TOWN_PLAYERS_HOUSE_1F),          MAP_NUM(PALLET_TOWN_PLAYERS_HOUSE_1F),          MAP_GROUP(PALLET_TOWN),                           MAP_NUM(PALLET_TOWN)},
     {MAP_GROUP(PALLET_TOWN_PROFESSOR_OAKS_LAB),        MAP_NUM(PALLET_TOWN_PROFESSOR_OAKS_LAB),        MAP_GROUP(PALLET_TOWN),                           MAP_NUM(PALLET_TOWN)},
     {MAP_GROUP(VIRIDIAN_CITY_GYM),                     MAP_NUM(VIRIDIAN_CITY_GYM),                     MAP_GROUP(VIRIDIAN_CITY),                         MAP_NUM(VIRIDIAN_CITY)},
@@ -1807,9 +1817,9 @@ static const struct {
 void sub_80CC534(void)
 {
     u8 i;
-    for (i = 0; i < NELEMS(gUnknown_83F5D58); i++)
+    for (i = 0; i < NELEMS(sInsideOutsidePairs); i++)
     {
-        if (gSaveBlock1Ptr->location.mapGroup == gUnknown_83F5D58[i].grp && gSaveBlock1Ptr->location.mapNum == gUnknown_83F5D58[i].num)
+        if (gSaveBlock1Ptr->location.mapGroup == sInsideOutsidePairs[i].grp && gSaveBlock1Ptr->location.mapNum == sInsideOutsidePairs[i].num)
         {
             if (VarGet(VAR_0x404D) != 35 || i != 32)
             {
@@ -1851,7 +1861,7 @@ void sub_80CC59C(void)
         {
             if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE22) && (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE22) || gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE23)))
             {
-                sp0.unk0 = get_mapheader_by_bank_and_number(gUnknown_83F5D58[r5].grp, gUnknown_83F5D58[r5].num)->regionMapSectionId;
+                sp0.unk0 = get_mapheader_by_bank_and_number(sInsideOutsidePairs[r5].grp, sInsideOutsidePairs[r5].num)->regionMapSectionId;
                 if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE22))
                     sp0.unk1 = r5;
                 else
@@ -1861,9 +1871,9 @@ void sub_80CC59C(void)
                 return;
             }
         }
-        if (gSaveBlock1Ptr->location.mapGroup == gUnknown_83F5D58[r5].grp2 && gSaveBlock1Ptr->location.mapNum == gUnknown_83F5D58[r5].num2)
+        if (gSaveBlock1Ptr->location.mapGroup == sInsideOutsidePairs[r5].grp2 && gSaveBlock1Ptr->location.mapNum == sInsideOutsidePairs[r5].num2)
         {
-            sp0.unk0 = get_mapheader_by_bank_and_number(gUnknown_83F5D58[r5].grp, gUnknown_83F5D58[r5].num)->regionMapSectionId;
+            sp0.unk0 = get_mapheader_by_bank_and_number(sInsideOutsidePairs[r5].grp, sInsideOutsidePairs[r5].num)->regionMapSectionId;
             sp0.unk1 = r5;
             if (r5 == 22)
             {
@@ -1888,9 +1898,6 @@ void sub_80CC59C(void)
     }
 }
 
-extern const char gUnknown_83F5EF0[];
-extern const char gUnknown_83F5F24[];
-
 u16 Special_BattleCardAction(void)
 {
     switch (gSpecialVar_Result)
@@ -1911,7 +1918,52 @@ u16 Special_BattleCardAction(void)
     }
 }
 
-const u16 gUnknown_83F5F26[] = {
+void set_unknown_box_id(u8 boxId)
+{
+    sUnknownBoxId = boxId;
+}
+
+u16 get_unknown_box_id(void)
+{
+    return sUnknownBoxId;
+}
+
+bool8 sub_80CC7B4(void)
+{
+    if (FlagGet(FLAG_SYS_CHANGED_BOX_TO_STORE_MON))
+        return FALSE;
+    if (StorageGetCurrentBox() == VarGet(VAR_0x4037))
+        return FALSE;
+    FlagSet(FLAG_SYS_CHANGED_BOX_TO_STORE_MON);
+    return TRUE;
+}
+
+bool8 sub_80CC7F8(void)
+{
+    s32 i;
+    s32 j;
+    set_unknown_box_id(VarGet(VAR_0x4037));
+    i = StorageGetCurrentBox();
+    do
+    {
+        for (j = 0; j < IN_BOX_COUNT; j++)
+        {
+            if (GetBoxMonData(GetBoxedMonPtr(i, j), MON_DATA_SPECIES, NULL) == SPECIES_NONE)
+            {
+                if (get_unknown_box_id() != i)
+                    FlagClear(FLAG_SYS_CHANGED_BOX_TO_STORE_MON);
+                VarSet(VAR_0x4037, i);
+                return sub_80CC7B4();
+            }
+        }
+        i++;
+        if (i == TOTAL_BOXES_COUNT)
+            i = 0;
+    } while (i != StorageGetCurrentBox());
+    return FALSE;
+}
+
+const u16 sPokeCenter1FMaps[] = {
     MAP_VIRIDIAN_CITY_POKEMON_CENTER_1F,
     MAP_PEWTER_CITY_POKEMON_CENTER_1F,
     MAP_CERULEAN_CITY_POKEMON_CENTER_1F,
@@ -1934,3 +1986,518 @@ const u16 gUnknown_83F5F26[] = {
     MAP_UNKNOWN_MAP_00_04,
     MAP_UNDEFINED
 };
+
+bool8 sub_80CC87C(void)
+{
+    s32 i;
+    u16 mapno = (gUnknown_2031DB4.mapGroup << 8) + gUnknown_2031DB4.mapNum;
+    for (i = 0; sPokeCenter1FMaps[i] != MAP_UNDEFINED; i++)
+    {
+        if (sPokeCenter1FMaps[i] == mapno)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 Special_ItemIsTM_GetMoveName(void)
+{
+    // 8004 = item ID
+    if (gSpecialVar_0x8004 >= ITEM_TM01 && gSpecialVar_0x8004 <= ITEM_HM08)
+    {
+        StringCopy(gStringVar1, gMoveNames[ItemIdToBattleMoveId(gSpecialVar_0x8004)]);
+        return TRUE;
+    }
+    else
+        return FALSE;
+}
+
+void RunMassageCooldownStepCounter(void)
+{
+    u16 count = VarGet(VAR_MASSAGE_COOLDOWN_STEP_COUNTER);
+    if (count < 500)
+        VarSet(VAR_MASSAGE_COOLDOWN_STEP_COUNTER, count + 1);
+}
+
+void Special_DaisyMassageServices(void)
+{
+    AdjustFriendship(&gPlayerParty[gSpecialVar_0x8004], 6);
+    VarSet(VAR_MASSAGE_COOLDOWN_STEP_COUNTER, 0);
+}
+
+static const u16 sEliteFourLightingPalettes[][16] = {
+    INCBIN_U16("data/field_specials/unk_83F5F50.gbapal"),
+    INCBIN_U16("data/field_specials/unk_83F5F70.gbapal"),
+    INCBIN_U16("data/field_specials/unk_83F5F90.gbapal"),
+    INCBIN_U16("data/field_specials/unk_83F5FB0.gbapal"),
+    INCBIN_U16("data/field_specials/unk_83F5FD0.gbapal"),
+    INCBIN_U16("data/field_specials/unk_83F5FF0.gbapal"),
+    INCBIN_U16("data/field_specials/unk_83F6010.gbapal"),
+    INCBIN_U16("data/field_specials/unk_83F6030.gbapal"),
+    INCBIN_U16("data/field_specials/unk_83F6050.gbapal"),
+    INCBIN_U16("data/field_specials/unk_83F6070.gbapal"),
+    INCBIN_U16("data/field_specials/unk_83F6090.gbapal"),
+    INCBIN_U16("data/field_specials/unk_83F60B0.gbapal")
+};
+
+static const u16 sChampionRoomLightingPalettes[][16] = {
+    INCBIN_U16("data/field_specials/unk_83F60D0.gbapal"),
+    INCBIN_U16("data/field_specials/unk_83F60F0.gbapal"),
+    INCBIN_U16("data/field_specials/unk_83F6110.gbapal"),
+    INCBIN_U16("data/field_specials/unk_83F6130.gbapal"),
+    INCBIN_U16("data/field_specials/unk_83F6150.gbapal"),
+    INCBIN_U16("data/field_specials/unk_83F6170.gbapal"),
+    INCBIN_U16("data/field_specials/unk_83F6190.gbapal"),
+    INCBIN_U16("data/field_specials/unk_83F61B0.gbapal"),
+    INCBIN_U16("data/field_specials/unk_83F61D0.gbapal")
+};
+
+static const u8 sEliteFourLightingTimers[] = {
+    40,
+    12,
+    12,
+    12,
+    12,
+    12,
+    12,
+    12,
+    12,
+    12,
+    12
+};
+
+static const u8 sChampionRoomLightingTimers[] = {
+    20,
+     8,
+     8,
+     8,
+     8,
+     8,
+     8,
+     8
+};
+
+void Special_PokemonLeagueLightingEffect(void)
+{
+    u8 taskId = CreateTask(Task_RunPokemonLeagueLightingEffect, 8);
+    s16 *data = gTasks[taskId].data;
+    if (FlagGet(FLAG_TEMP_3) == TRUE)
+    {
+        gTasks[taskId].func = Task_CancelPokemonLeagueLightingEffect;
+    }
+    else
+    {
+        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(POKEMON_LEAGUE_CHAMPIONS_ROOM) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(POKEMON_LEAGUE_CHAMPIONS_ROOM))
+        {
+            data[0] = sChampionRoomLightingTimers[0];
+            data[2] = 8;
+            LoadPalette(sChampionRoomLightingPalettes[0], 0x70, 0x20);
+        }
+        else
+        {
+            data[0] = sEliteFourLightingTimers[0];
+            data[2] = 11;
+            LoadPalette(sEliteFourLightingPalettes[0], 0x70, 0x20);
+        }
+        data[1] = 0;
+        sub_8059948(7, 1);
+    }
+}
+
+static void Task_RunPokemonLeagueLightingEffect(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    if (!gPaletteFade.active
+     && FlagGet(FLAG_TEMP_2) != FALSE
+     && FlagGet(FLAG_TEMP_5) != TRUE
+     && gUnknown_2036E28 != 3
+     && --data[0] == 0
+    )
+    {
+        if (++data[1] == data[2])
+            data[1] = 0;
+
+        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(POKEMON_LEAGUE_CHAMPIONS_ROOM) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(POKEMON_LEAGUE_CHAMPIONS_ROOM))
+        {
+            data[0] = sChampionRoomLightingTimers[data[1]];
+            LoadPalette(sChampionRoomLightingPalettes[data[1]], 0x70, 0x20);
+        }
+        else
+        {
+            data[0] = sEliteFourLightingTimers[data[1]];
+            LoadPalette(sEliteFourLightingPalettes[data[1]], 0x70, 0x20);
+        }
+        sub_8059948(7, 1);
+    }
+}
+
+static void Task_CancelPokemonLeagueLightingEffect(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    if (FlagGet(FLAG_TEMP_4) != FALSE)
+    {
+        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(POKEMON_LEAGUE_CHAMPIONS_ROOM) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(POKEMON_LEAGUE_CHAMPIONS_ROOM))
+        {
+            LoadPalette(sChampionRoomLightingPalettes[8], 0x70, 0x20);
+        }
+        else
+        {
+            LoadPalette(sEliteFourLightingPalettes[11], 0x70, 0x20);
+        }
+        sub_8059948(7, 1);
+        if (gPaletteFade.active)
+        {
+            BlendPalettes(0x00000080, 16, RGB_BLACK);
+        }
+        DestroyTask(taskId);
+    }
+}
+
+void StopPokemonLeagueLightingEffectTask(void)
+{
+    if (FuncIsActiveTask(Task_RunPokemonLeagueLightingEffect) == TRUE)
+    {
+        DestroyTask(FindTaskIdByFunc(Task_RunPokemonLeagueLightingEffect));
+    }
+}
+
+static const u8 sCapeBrinkCompatibleSpecies[] = {
+    SPECIES_VENUSAUR,
+    SPECIES_CHARIZARD,
+    SPECIES_BLASTOISE
+};
+
+bool8 Special_CapeBrinkGetMoveToTeachLeadPokemon(void)
+{
+    // Returns:
+    //   8005 = Move tutor index
+    //   8006 = Num moves known by lead mon
+    //   8007 = Index of lead mon
+    //   to specialvar = whether a move can be taught in the first place
+    u8 r7 = 0;
+    u8 r6 = 0;
+    u8 r8 = GetLeadMonIndex();
+    u8 r4;
+    gSpecialVar_0x8007 = r8;
+    for (r4 = 0; r4 < NELEMS(sCapeBrinkCompatibleSpecies); r4++)
+    {
+        if (GetMonData(&gPlayerParty[r8], MON_DATA_SPECIES2, NULL) == sCapeBrinkCompatibleSpecies[r4])
+        {
+            r7 = r4;
+            break;
+        }
+    }
+    if (r4 == NELEMS(sCapeBrinkCompatibleSpecies) || GetMonData(&gPlayerParty[r8], MON_DATA_FRIENDSHIP) != 255)
+        return FALSE;
+    if (r7 == 0)
+    {
+        StringCopy(gStringVar2, gMoveNames[MOVE_FRENZY_PLANT]);
+        gSpecialVar_0x8005 = MOVETUTOR_FRENZY_PLANT;
+        if (FlagGet(FLAG_TUTOR_FRENZY_PLANT) == TRUE)
+            return FALSE;
+    }
+    else if (r7 == 1)
+    {
+        StringCopy(gStringVar2, gMoveNames[MOVE_BLAST_BURN]);
+        gSpecialVar_0x8005 = MOVETUTOR_BLAST_BURN;
+        if (FlagGet(FLAG_TUTOR_BLAST_BURN) == TRUE)
+            return FALSE;
+    }
+    else
+    {
+        StringCopy(gStringVar2, gMoveNames[MOVE_HYDRO_CANNON]);
+        gSpecialVar_0x8005 = MOVETUTOR_HYDRO_CANNON;
+        if (FlagGet(FLAG_TUTOR_HYDRO_CANNON) == TRUE)
+            return FALSE;
+    }
+    if (GetMonData(&gPlayerParty[r8], MON_DATA_MOVE1) != MOVE_NONE)
+        r6++;
+    if (GetMonData(&gPlayerParty[r8], MON_DATA_MOVE2) != MOVE_NONE)
+        r6++;
+    if (GetMonData(&gPlayerParty[r8], MON_DATA_MOVE3) != MOVE_NONE)
+        r6++;
+    if (GetMonData(&gPlayerParty[r8], MON_DATA_MOVE4) != MOVE_NONE)
+        r6++;
+    gSpecialVar_0x8006 = r6;
+    return TRUE;
+}
+
+bool8 Special_HasLearnedAllMovesFromCapeBrinkTutor(void)
+{
+    // 8005 is set by Special_CapeBrinkGetMoveToTeachLeadPokemon
+    u8 r4 = 0;
+    if (gSpecialVar_0x8005 == MOVETUTOR_FRENZY_PLANT)
+        FlagSet(FLAG_TUTOR_FRENZY_PLANT);
+    else if (gSpecialVar_0x8005 == MOVETUTOR_BLAST_BURN)
+        FlagSet(FLAG_TUTOR_BLAST_BURN);
+    else
+        FlagSet(FLAG_TUTOR_HYDRO_CANNON);
+    if (FlagGet(FLAG_TUTOR_FRENZY_PLANT) == TRUE)
+        r4++;
+    if (FlagGet(FLAG_TUTOR_BLAST_BURN) == TRUE)
+        r4++;
+    if (FlagGet(FLAG_TUTOR_HYDRO_CANNON) == TRUE)
+        r4++;
+    if (r4 == 3)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 CutMoveRuinValleyCheck(void)
+{
+    if (FlagGet(FLAG_USED_CUT_ON_RUIN_VALLEY_BRAILLE) != TRUE
+     && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SIX_ISLAND_RUIN_VALLEY)
+     && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SIX_ISLAND_RUIN_VALLEY)
+     && gSaveBlock1Ptr->pos.x == 24
+     && gSaveBlock1Ptr->pos.y == 25
+     && GetPlayerFacingDirection() == DIR_NORTH)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+void CutMoveOpenDottedHoleDoor(void)
+{
+    MapGridSetMetatileIdAt(31, 31, 0x358);
+    DrawWholeMapView();
+    PlaySE(SE_BAN);
+    FlagSet(FLAG_USED_CUT_ON_RUIN_VALLEY_BRAILLE);
+    ScriptContext2_Disable();
+}
+
+static const u16 sDeoxysObjectPals[][16] = {
+    INCBIN_U16("data/field_specials/unk_83F6206.gbapal"),
+    INCBIN_U16("data/field_specials/unk_83F6226.gbapal"),
+    INCBIN_U16("data/field_specials/unk_83F6246.gbapal"),
+    INCBIN_U16("data/field_specials/unk_83F6266.gbapal"),
+    INCBIN_U16("data/field_specials/unk_83F6286.gbapal"),
+    INCBIN_U16("data/field_specials/unk_83F62A6.gbapal"),
+    INCBIN_U16("data/field_specials/unk_83F62C6.gbapal"),
+    INCBIN_U16("data/field_specials/unk_83F62E6.gbapal"),
+    INCBIN_U16("data/field_specials/unk_83F6306.gbapal"),
+    INCBIN_U16("data/field_specials/unk_83F6326.gbapal"),
+    INCBIN_U16("data/field_specials/unk_83F6346.gbapal")
+};
+
+static const u8 sDeoxysCoords[][2] = {
+    {15, 12},
+    {11, 14},
+    {15,  8},
+    {19, 14},
+    {12, 11},
+    {18, 11},
+    {15, 14},
+    {11, 14},
+    {19, 14},
+    {15, 15},
+    {15, 10}
+};
+
+static const u8 sDeoxysStepCaps[] = {
+    4,
+    8,
+    8,
+    8,
+    4,
+    4,
+    4,
+    6,
+    3,
+    3
+};
+
+void Special_DeoxysSound(void)
+{
+    CreateTask(task_deoxys_sound, 8);
+}
+
+static void task_deoxys_sound(u8 taskId)
+{
+    u16 r5;
+    u16 r6;
+    if (FlagGet(FLAG_SYS_DEOXYS_AWAKENED) == TRUE)
+    {
+        gSpecialVar_Result = 3;
+        EnableBothScriptContexts();
+        DestroyTask(taskId);
+    }
+    else
+    {
+        r5 = VarGet(VAR_DEOXYS_INTERACTION_NUM);
+        r6 = VarGet(VAR_DEOXYS_INTERACTION_STEP_COUNTER);
+        VarSet(VAR_DEOXYS_INTERACTION_STEP_COUNTER, 0);
+        if (r5 != 0 && sDeoxysStepCaps[r5 - 1] < r6)
+        {
+            MoveDeoxysObject(0);
+            VarSet(VAR_DEOXYS_INTERACTION_NUM, 0);
+            gSpecialVar_Result = 0;
+            DestroyTask(taskId);
+        }
+        else if (r5 == 10)
+        {
+            FlagSet(FLAG_SYS_DEOXYS_AWAKENED);
+            gSpecialVar_Result = 2;
+            EnableBothScriptContexts();
+            DestroyTask(taskId);
+        }
+        else
+        {
+            r5++;
+            MoveDeoxysObject(r5);
+            VarSet(VAR_DEOXYS_INTERACTION_NUM, r5);
+            gSpecialVar_Result = 1;
+            DestroyTask(taskId);
+        }
+    }
+}
+
+static void MoveDeoxysObject(u8 num)
+{
+    u8 mapObjId;
+    LoadPalette(sDeoxysObjectPals[num], 0x1A0, 0x08);
+    sub_8083598(10);
+    TryGetFieldObjectIdByLocalIdAndMap(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &mapObjId);
+    if (num == 0)
+        PlaySE(SE_W109);
+    else
+        PlaySE(SE_DEOMOV);
+    CreateTask(Task_WaitDeoxysFieldEffect, 8);
+    gFieldEffectArguments[0] = 1;
+    gFieldEffectArguments[1] = 56;
+    gFieldEffectArguments[2] = 2;
+    gFieldEffectArguments[3] = sDeoxysCoords[num][0];
+    gFieldEffectArguments[4] = sDeoxysCoords[num][1];
+    if (num == 0)
+        gFieldEffectArguments[5] = 60;
+    else
+        gFieldEffectArguments[5] = 5;
+    FieldEffectStart(FLDEFF_UNK_43);
+    Overworld_SetMapObjTemplateCoords(1, sDeoxysCoords[num][0], sDeoxysCoords[num][1]);
+}
+
+static void Task_WaitDeoxysFieldEffect(u8 taskId)
+{
+    if (!FieldEffectActiveListContains(FLDEFF_UNK_43))
+    {
+        EnableBothScriptContexts();
+        DestroyTask(taskId);
+    }
+}
+
+void BirthIslandDeoxysStepCounter(void)
+{
+    u16 count = VarGet(VAR_DEOXYS_INTERACTION_STEP_COUNTER);
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(BIRTH_ISLAND_EXTERIOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(BIRTH_ISLAND_EXTERIOR))
+    {
+        count++;
+        if (count > 99)
+            VarSet(VAR_DEOXYS_INTERACTION_STEP_COUNTER, 0);
+        else
+            VarSet(VAR_DEOXYS_INTERACTION_STEP_COUNTER, count);
+    }
+}
+
+void Special_SetDeoxysTriangleObjectPal(void)
+{
+    u8 num = VarGet(VAR_DEOXYS_INTERACTION_NUM);
+    LoadPalette(sDeoxysObjectPals[num], 0x1A0, 0x08);
+    sub_8083598(10);
+}
+
+bool8 Special_BadEggInParty(void)
+{
+    u8 partyCount = CalculatePlayerPartyCount();
+    u8 i;
+    for (i = 0; i < partyCount; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_IS_BAD_EGG) == TRUE)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 Special_PlayerIsNotInTrainerTowerLobby(void)
+{
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SEVEN_ISLAND_TRAINER_TOWER_LOBBY) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_LOBBY))
+        return FALSE;
+    else
+        return TRUE;
+}
+
+void Special_BrailleCursorToggle(void)
+{
+    // 8004 = x - 27
+    // 8005 = y
+    // 8006 = action (0 = create, 1 = delete)
+    u16 x;
+    if (gUnknown_203ADFA != 2)
+    {
+        x = gSpecialVar_0x8004 + 27;
+        if (gSpecialVar_0x8006 == 0)
+            gUnknown_2039A1B = CreateTextCursorSpriteForOakSpeech(0, x, gSpecialVar_0x8005, 0, 0);
+        else
+            sub_8006398(gUnknown_2039A1B);
+    }
+}
+
+bool8 Special_PlayerPartyContainsSpeciesWithPlayerID(void)
+{
+    // 8004 = species
+    u8 playerCount = CalculatePlayerPartyCount();
+    u8 i;
+    for (i = 0; i < playerCount; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) == gSpecialVar_0x8004 && GetPlayerTrainerId() == GetMonData(&gPlayerParty[i], MON_DATA_OT_ID, NULL))
+            return TRUE;
+    }
+    return FALSE;
+}
+
+/*
+ * Determines which of Lorelei's doll collection to show
+ * based on how many times you've entered the Hall of Fame.
+ */
+void Special_ComputeLoreleiDollCollection(void)
+{
+    u32 numHofClears = GetGameStat(GAME_STAT_ENTERED_HOF);
+    if (numHofClears >= 25)
+    {
+        FlagClear(FLAG_HIDE_LORELEI_HOUSE_MEOWTH_DOLL);
+        if (numHofClears >= 50)
+            FlagClear(FLAG_HIDE_LORELEI_HOUSE_CHANSEY_DOLL);
+        if (numHofClears >= 75)
+            FlagClear(FLAG_HIDE_LORELEIS_HOUSE_NIDORAN_F_DOLL);
+        if (numHofClears >= 100)
+            FlagClear(FLAG_HIDE_LORELEI_HOUSE_JIGGLYPUFF_DOLL);
+        if (numHofClears >= 125)
+            FlagClear(FLAG_HIDE_LORELEIS_HOUSE_NIDORAN_M_DOLL);
+        if (numHofClears >= 150)
+            FlagClear(FLAG_HIDE_LORELEIS_HOUSE_FEAROW_DOLL);
+        if (numHofClears >= 175)
+            FlagClear(FLAG_HIDE_LORELEIS_HOUSE_PIDGEOT_DOLL);
+        if (numHofClears >= 200)
+            FlagClear(FLAG_HIDE_LORELEIS_HOUSE_LAPRAS_DOLL);
+    }
+}
+
+void Special_LoopWingFlapSound(void)
+{
+    // 8004 = Num flaps
+    // 8005 = Frame delay between flaps
+    CreateTask(Task_WingFlapSound, 8);
+    PlaySE(SE_W017);
+}
+
+static void Task_WingFlapSound(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    data[1]++;
+    if (data[1] == gSpecialVar_0x8005)
+    {
+        data[0]++;
+        data[1] = 0;
+        PlaySE(SE_W017);
+    }
+    if (data[0] == gSpecialVar_0x8004 - 1)
+        DestroyTask(taskId);
+}

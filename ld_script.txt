@@ -188,7 +188,6 @@ SECTIONS {
         src/prof_pc.o(.text);
         src/hof_pc.o(.text);
         src/field_specials.o(.text);
-        asm/field_specials.o(.text);
         src/battle_records.o(.text);
         asm/evolution_scene.o(.text);
         src/coins.o(.text);
@@ -447,7 +446,6 @@ SECTIONS {
         src/battle_ai_script_commands.o(.rodata);
         data/data_83F5738.o(.rodata);
         src/field_specials.o(.rodata);
-        data/field_specials.o(.rodata);
         src/battle_records.o(.rodata);
         data/data_83F5738.o(.rodata.83F6C90);
         src/battle_transition.o(.rodata);

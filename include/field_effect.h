@@ -20,5 +20,6 @@ void sub_8084454(void);
 void sub_8084784(u8 a0, u8 a1);
 void sub_8084F2C(u8 a0);
 void sub_80853CC(u8 a0);
+void sub_8083598(u8 a0);
 
 #endif //GUARD_FIELD_EFFECTS_H

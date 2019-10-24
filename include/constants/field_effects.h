@@ -67,6 +67,7 @@
 #define FLDEFF_USE_TELEPORT              63
 #define FLDEFF_UNK_40                    64
 #define FLDEFF_UNK_41                    65 // TODO: related to vs_seeker
+#define FLDEFF_UNK_43                    67 // TODO: related to deoxys
 #define FLDEFF_UNK_45                    69 // TODO: related to fame checker photos
 
 #endif // GUARD_CONSTANTS_FIELD_EFFECTS_H

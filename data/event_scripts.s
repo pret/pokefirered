@@ -15,6 +15,7 @@
 #include "constants/map_objects.h"
 #include "constants/fame_checker.h"
 #include "constants/seagallop.h"
+#include "constants/game_stat.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.set FALSE, 0
@@ -1599,7 +1600,7 @@ EventScript_1A6578:: @ 81A6578
 	end
 
 EventScript_1A65B8:: @ 81A65B8
-	incrementgamestat 15
+	incrementgamestat GAME_STAT_USED_POKECENTER
 	message Text_1A54E1
 	waitmessage
 	call EventScript_1A65CE
@@ -1618,7 +1619,7 @@ EventScript_1A65CE:: @ 81A65CE
 	return
 
 EventScript_1A65EC:: @ 81A65EC
-	specialvar VAR_RESULT, sub_80CD074
+	specialvar VAR_RESULT, Special_PlayerIsNotInTrainerTowerLobby
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1A661D
 	specialvar VAR_RESULT, sp182_move_string
@@ -1797,7 +1798,7 @@ gStdScript_1:: @ 81A67B3
 EventScript_1A67EE:: @ 81A67EE
 	removeobject VAR_LAST_TALKED
 	additem VAR_0x8004, VAR_0x8005
-	specialvar VAR_RESULT, sub_80CC8CC
+	specialvar VAR_RESULT, Special_ItemIsTM_GetMoveName
 	copyvar VAR_0x8008, VAR_RESULT
 	compare_var_to_value VAR_0x8008, 1
 	call_if eq, EventScript_1A6821
@@ -2500,7 +2501,7 @@ Movement_1A75D3:: @ 81A75D3
 	step_end
 
 EventScript_1A75D5:: @ 81A75D5
-	special sub_80CC974
+	special Special_PokemonLeagueLightingEffect
 	return
 
 Movement_1A75D9:: @ 81A75D9
@@ -2704,7 +2705,7 @@ gUnknown_81A7702:: @ 81A7702
 	call EventScript_1A6AC0
 	lock
 	faceplayer
-	specialvar VAR_0x8008, sub_80CC4D4
+	specialvar VAR_0x8008, Special_GetMartClerkObjectId
 	textcolor 0
 	compare_var_to_value VAR_0x8004, 0
 	goto_if eq, EventScript_1A774D
@@ -4392,12 +4393,12 @@ EventScript_1A925E:: @ 81A925E
 	doweather
 	return
 
-EventScript_1A926C:: @ 81A926C
-	special sub_80CD098
+EventScript_BrailleCursorWaitButton:: @ 81A926C
+	special Special_BrailleCursorToggle
 	waitbuttonpress
 	playse SE_SELECT
 	setvar VAR_0x8006, 1
-	special sub_80CD098
+	special Special_BrailleCursorToggle
 	return
 
 EventScript_1A927C:: @ 81A927C
@@ -9182,7 +9183,7 @@ EventScript_1BBA04:: @ 81BBA04
 	faceplayer
 	checkflag FLAG_SYS_POKEDEX_GET
 	goto_if FALSE, EventScript_1BB877
-	specialvar VAR_RESULT, sub_80CD034
+	specialvar VAR_RESULT, Special_BadEggInParty
 	compare_var_to_value VAR_RESULT, 1
 	goto_if eq, EventScript_1BB867
 	copyvar VAR_0x8007, VAR_LAST_TALKED
@@ -9304,7 +9305,7 @@ EventScript_1BBB9C:: @ 81BBB9C
 	faceplayer
 	checkflag FLAG_SYS_POKEDEX_GET
 	goto_if FALSE, EventScript_1BB877
-	specialvar VAR_RESULT, sub_80CD034
+	specialvar VAR_RESULT, Special_BadEggInParty
 	compare_var_to_value VAR_RESULT, 1
 	goto_if eq, EventScript_1BB867
 	specialvar VAR_RESULT, IsWirelessAdapterConnected
@@ -11504,7 +11505,7 @@ EventScript_1BF3DD:: @ 81BF3DD
 	msgbox Text_19DE24
 	waitmoncry
 	special PutMonInRoute5Daycare
-	incrementgamestat 47
+	incrementgamestat GAME_STAT_USED_DAYCARE
 	goto EventScript_1BF541
 	end
 
@@ -13879,13 +13880,13 @@ TwoIsland_CapeBrink_House_EventScript_1C4DEC:: @ 81C4DEC
 	special sub_8112364
 	lock
 	faceplayer
-	checkflag FLAG_LEARNED_MOVE_AT_CAPE_BRINK
+	checkflag FLAG_LEARNED_ALL_MOVES_AT_CAPE_BRINK
 	goto_if TRUE, EventScript_1C4EA1
 	checkflag FLAG_TEMP_2
 	goto_if TRUE, EventScript_1C4E97
 	getfirstpartymonname 0
 	msgbox Text_1A46C6
-	specialvar VAR_RESULT, sub_80CCB94
+	specialvar VAR_RESULT, Special_CapeBrinkGetMoveToTeachLeadPokemon
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1C4F26
 	copyvar VAR_0x8009, VAR_0x8005
@@ -13925,7 +13926,7 @@ EventScript_1C4EA1:: @ 81C4EA1
 
 EventScript_1C4EAB:: @ 81C4EAB
 	copyvar VAR_0x8005, VAR_0x8009
-	specialvar VAR_RESULT, sub_80CCCF8
+	specialvar VAR_RESULT, Special_HasLearnedAllMovesFromCapeBrinkTutor
 	compare_var_to_value VAR_RESULT, 1
 	goto_if eq, EventScript_1C4ECD
 	msgbox Text_1A4865
@@ -13935,7 +13936,7 @@ EventScript_1C4EAB:: @ 81C4EAB
 
 EventScript_1C4ECD:: @ 81C4ECD
 	msgbox Text_1A48F3
-	setflag FLAG_LEARNED_MOVE_AT_CAPE_BRINK
+	setflag FLAG_LEARNED_ALL_MOVES_AT_CAPE_BRINK
 	release
 	end
 

@@ -49,12 +49,12 @@ EventScript_1688BA:: @ 81688BA
 EventScript_1688E3:: @ 81688E3
 	getspeciesname 1, SPECIES_TOGEPI
 	setvar VAR_0x8004, SPECIES_TOGEPI
-	specialvar VAR_RESULT, sub_80CD0F4
+	specialvar VAR_RESULT, Special_PlayerPartyContainsSpeciesWithPlayerID
 	compare_var_to_value VAR_RESULT, 1
 	goto_if eq, EventScript_168895
 	getspeciesname 1, SPECIES_TOGETIC
 	setvar VAR_0x8004, SPECIES_TOGETIC
-	specialvar VAR_RESULT, sub_80CD0F4
+	specialvar VAR_RESULT, Special_PlayerPartyContainsSpeciesWithPlayerID
 	compare_var_to_value VAR_RESULT, 1
 	goto_if eq, EventScript_168895
 	msgbox gUnknown_818A9C0

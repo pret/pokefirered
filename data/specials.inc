@@ -398,7 +398,7 @@ gSpecials:: @ 815FD60
 	def_special sub_811999C
 	def_special sp182_move_string
 	def_special sub_811390C
-	def_special sub_80CC4D4
+	def_special Special_GetMartClerkObjectId
 	def_special Special_BattleCardAction
 	def_special sub_8110AB4
 	def_special sub_8112364
@@ -415,7 +415,7 @@ gSpecials:: @ 815FD60
 	def_special IsNationalPokedexEnabled
 	def_special sub_815D9E8
 	def_special sub_814B504
-	def_special sub_80CC8CC
+	def_special Special_ItemIsTM_GetMoveName
 	def_special Special_DaisyMassageServices
 	def_special HelpSystem_Disable
 	def_special HelpSystem_Enable
@@ -426,31 +426,31 @@ gSpecials:: @ 815FD60
 	def_special sub_815EEB0
 	def_special sub_815EF5C
 	def_special sub_815F070
-	def_special sub_80CC974
+	def_special Special_PokemonLeagueLightingEffect
 	def_special sub_814EA7C
-	def_special sub_80CCB94
-	def_special sub_80CCCF8
+	def_special Special_CapeBrinkGetMoveToTeachLeadPokemon
+	def_special Special_HasLearnedAllMovesFromCapeBrinkTutor
 	def_special Special_Credits
 	def_special sub_8153810
 	def_special sub_809D764
 	def_special sub_809D8C0
 	def_special sub_8147500
 	def_special GetPlayerFacingDirection
-	def_special sub_80CCDFC
-	def_special sub_80CD008
+	def_special Special_DeoxysSound
+	def_special Special_SetDeoxysTriangleObjectPal
 	def_special sub_8147594
-	def_special sub_80CD034
+	def_special Special_BadEggInParty
 	def_special sub_815D834
 	def_special HasAllMons
-	def_special sub_80CD074
-	def_special sub_80CD098
+	def_special Special_PlayerIsNotInTrainerTowerLobby
+	def_special Special_BrailleCursorToggle
 	def_special sub_811B15C
-	def_special sub_80CD0F4
+	def_special Special_PlayerPartyContainsSpeciesWithPlayerID
 	def_special sub_809C4A8
 	def_special sub_81537C0
 	def_special sub_809C5FC
 	def_special Special_InitElevatorFloorSelectMenuPos
 	def_special Special_ComputeLoreleiDollCollection
-	def_special sub_80CD1B4
+	def_special Special_LoopWingFlapSound
 	def_special CreateObedientEnemyMon
 gSpecialsEnd::

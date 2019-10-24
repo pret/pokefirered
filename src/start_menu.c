@@ -445,7 +445,7 @@ static void StartMenu_FadeScreenIfLeavingOverworld(void)
      && sStartMenuCallback != StartMenuExitCallback
      && sStartMenuCallback != StartMenuSafariZoneRetireCallback)
     {
-        sub_80CCB68();
+        StopPokemonLeagueLightingEffectTask();
         fade_screen(1, 0);
     }
 }

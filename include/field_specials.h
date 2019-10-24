@@ -15,7 +15,7 @@ u8 GetLeadMonIndex(void);
 s32 CountDigits(s32 number);
 void TV_PrintIntToStringVar(u8, int);
 u16 ScrSpecial_GetStarter(void);
-void sub_80CCB68(void);
+void StopPokemonLeagueLightingEffectTask(void);
 void nullsub_60(void);
 void nullsub_61(void);
 u8 ContextNpcGetTextColor(void);

@@ -8079,9 +8079,9 @@ EventScript_1B2B98:: @ 81B2B98
 	end
 
 EventScript_1B2BC5:: @ 81B2BC5
-	compare_var_to_value VAR_0x4049, 1
+	compare_var_to_value VAR_HOF_BRAG_STATE, 1
 	goto_if eq, EventScript_1B2C3D
-	setvar VAR_0x4049, 1
+	setvar VAR_HOF_BRAG_STATE, 1
 	msgbox gUnknown_81B206E
 	goto EventScript_1B2C51
 
@@ -8089,9 +8089,9 @@ EventScript_1B2BE2:: @ 81B2BE2
 	end
 
 EventScript_1B2BE3:: @ 81B2BE3
-	compare_var_to_value VAR_0x4049, 2
+	compare_var_to_value VAR_HOF_BRAG_STATE, 2
 	goto_if eq, EventScript_1B2C3D
-	setvar VAR_0x4049, 2
+	setvar VAR_HOF_BRAG_STATE, 2
 	msgbox gUnknown_81B20CF
 	goto EventScript_1B2C51
 
@@ -8099,9 +8099,9 @@ EventScript_1B2C00:: @ 81B2C00
 	end
 
 EventScript_1B2C01:: @ 81B2C01
-	compare_var_to_value VAR_0x4049, 3
+	compare_var_to_value VAR_HOF_BRAG_STATE, 3
 	goto_if eq, EventScript_1B2C3D
-	setvar VAR_0x4049, 3
+	setvar VAR_HOF_BRAG_STATE, 3
 	msgbox gUnknown_81B2133
 	goto EventScript_1B2C51
 
@@ -8109,9 +8109,9 @@ EventScript_1B2C1E:: @ 81B2C1E
 	end
 
 EventScript_1B2C1F:: @ 81B2C1F
-	compare_var_to_value VAR_0x4049, 4
+	compare_var_to_value VAR_HOF_BRAG_STATE, 4
 	goto_if eq, EventScript_1B2C47
-	setvar VAR_0x4049, 4
+	setvar VAR_HOF_BRAG_STATE, 4
 	msgbox gUnknown_81B21C4
 	goto EventScript_1B2C51
 

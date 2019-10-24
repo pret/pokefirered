@@ -115,7 +115,7 @@
 #define VAR_TRAINER_CARD_MON_ICON_4        0x4046
 #define VAR_TRAINER_CARD_MON_ICON_5        0x4047
 #define VAR_TRAINER_CARD_MON_ICON_6        0x4048
-#define VAR_0x4049                         0x4049
+#define VAR_HOF_BRAG_STATE                 0x4049
 #define VAR_EGG_BRAG_STATE                 0x404A
 #define VAR_LINK_WIN_BRAG_STATE            0x404B
 #define VAR_POKELOT_RND2                   0x404C

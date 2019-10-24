@@ -18,7 +18,9 @@
 #include "battle_tower.h"
 #include "field_camera.h"
 #include "field_map_obj.h"
+#include "menu_indicators.h"
 #include "random.h"
+#include "help_system.h"
 #include "sound.h"
 #include "text.h"
 #include "pokemon_storage_system.h"
@@ -56,15 +58,18 @@ static void Task_ElevatorShake(u8 taskId);
 static void AnimateElevatorWindowView(u16 nfloors, bool8 direction);
 static void Task_AnimateElevatorWindowView(u8 taskId);
 static void Task_CreateScriptListMenu(u8 taskId);
-void sub_80CBA7C(void);
-void sub_80CBADC(s32 nothing, bool8 is, struct ListMenu * used);
-void sub_80CBB28(u8 taskId);
-void sub_80CBBAC(u8 taskId);
-void sub_80CBC2C(u8 taskId);
-void sub_80CBCC0(u8 taskId);
-void sub_80CBD50(u8 taskId);
-u16 GetStarterPokemon(u16 starterIdx);
+static void CreateScriptListMenu(void);
+static void ScriptListMenuMoveCursorFunction(s32 nothing, bool8 is, struct ListMenu * used);
+static void Task_ListMenuHandleInput(u8 taskId);
+static void Task_DestroyListMenu(u8 taskId);
+static void Task_SuspendListMenu(u8 taskId);
+static void Task_RedrawScrollArrowsAndWaitInput(u8 taskId);
+static void Task_CreateMenuRemoveScrollIndicatorArrowPair(u8 taskId);
+static void Task_ListMenuRemoveScrollIndicatorArrowPair(u8 taskId);
+static u16 GetStarterPokemon(u16 starterIdx);
 
+extern const struct ScrollArrowsTemplate gUnknown_83F5D1C;
+extern const u16 sStarterMon[3];
 extern const u8 *const gUnknown_83F5BCC[][12];
 extern const u8 sSlotMachineIndices[22];
 extern const u16 sResortGorgeousDeluxeRewards[6];
@@ -613,10 +618,10 @@ static u16 SampleResortGoregeousMon(void)
     for (i = 0; i < 100; i++)
     {
         species = (Random() % (NUM_SPECIES - 1)) + 1;
-        if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FALSE) == TRUE)
+        if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), 0) == TRUE)
             return species;
     }
-    while (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FALSE) != TRUE)
+    while (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), 0) != TRUE)
     {
         if (species == SPECIES_BULBASAUR)
             species = NUM_SPECIES - 1;
@@ -1079,7 +1084,7 @@ static void Task_CreateScriptListMenu(u8 taskId)
     else
         gUnknown_2039A18 = 0;
     gUnknown_2039A14 = AllocZeroed(task->data[1] * sizeof(struct ListMenuItem));
-    sub_80CBA7C();
+    CreateScriptListMenu();
     mwidth = 0;
     for (i = 0; i < task->data[1]; i++)
     {
@@ -1098,17 +1103,17 @@ static void Task_CreateScriptListMenu(u8 taskId)
     gUnknown_3005360.totalItems = task->data[1];
     gUnknown_3005360.maxShowed = task->data[0];
     gUnknown_3005360.windowId = task->data[13];
-    sub_80CBCC0(taskId);
+    Task_CreateMenuRemoveScrollIndicatorArrowPair(taskId);
     task->data[14] = ListMenuInit(&gUnknown_3005360, task->data[7], task->data[8]);
     PutWindowTilemap(task->data[13]);
     CopyWindowToVram(task->data[13], 3);
-    gTasks[taskId].func = sub_80CBB28;
+    gTasks[taskId].func = Task_ListMenuHandleInput;
 }
 
-void sub_80CBA7C(void)
+static void CreateScriptListMenu(void)
 {
     gUnknown_3005360.items = gUnknown_2039A14;
-    gUnknown_3005360.moveCursorFunc = sub_80CBADC;
+    gUnknown_3005360.moveCursorFunc = ScriptListMenuMoveCursorFunction;
     gUnknown_3005360.itemPrintFunc = NULL;
     gUnknown_3005360.totalItems = 1;
     gUnknown_3005360.maxShowed = 1;
@@ -1127,12 +1132,12 @@ void sub_80CBA7C(void)
     gUnknown_3005360.cursorKind = 0;
 }
 
-void sub_80CBADC(s32 nothing, bool8 is, struct ListMenu * used)
+static void ScriptListMenuMoveCursorFunction(s32 nothing, bool8 is, struct ListMenu * used)
 {
     u8 taskId;
     struct Task * task;
     PlaySE(SE_SELECT);
-    taskId = FindTaskIdByFunc(sub_80CBB28);
+    taskId = FindTaskIdByFunc(Task_ListMenuHandleInput);
     if (taskId != 0xFF)
     {
         task = &gTasks[taskId];
@@ -1141,12 +1146,14 @@ void sub_80CBADC(s32 nothing, bool8 is, struct ListMenu * used)
     }
 }
 
-#ifdef NONMATCHING
-// task should be in r6, taskId in r5
-void sub_80CBB28(u8 taskId)
+static void Task_ListMenuHandleInput(u8 taskId)
 {
-    struct Task * task = &gTasks[taskId];
-    s32 input = ListMenu_ProcessInput(task->data[14]);
+    s32 input;
+    struct Task * task;
+    asm("":::"r6", "r4"); // fakematch register allocation
+
+    task = &gTasks[taskId];
+    input = ListMenu_ProcessInput(task->data[14]);
     switch (input)
     {
     case -1:
@@ -1154,91 +1161,117 @@ void sub_80CBB28(u8 taskId)
     case -2:
         gSpecialVar_Result = 0x7F;
         PlaySE(SE_SELECT);
-        sub_80CBBAC(taskId);
+        Task_DestroyListMenu(taskId);
         break;
     default:
         gSpecialVar_Result = input;
         PlaySE(SE_SELECT);
         if (task->data[6] == 0 || input == task->data[1] - 1)
         {
-            sub_80CBBAC(taskId);
+            Task_DestroyListMenu(taskId);
         }
         else
         {
-            sub_80CBD50(taskId);
-            task->func = sub_80CBC2C;
+            Task_ListMenuRemoveScrollIndicatorArrowPair(taskId);
+            task->func = Task_SuspendListMenu;
             EnableBothScriptContexts();
         }
         break;
     }
 }
-#else
-NAKED
-void sub_80CBB28(u8 taskId)
+
+static void Task_DestroyListMenu(u8 taskId)
 {
-    asm_unified("\tpush {r4-r6,lr}\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r5, r0, 24\n"
-                "\tlsls r0, r5, 2\n"
-                "\tadds r0, r5\n"
-                "\tlsls r0, 3\n"
-                "\tldr r1, _080CBB54 @ =gTasks\n"
-                "\tadds r6, r0, r1\n"
-                "\tldrh r0, [r6, 0x24]\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tbl ListMenu_ProcessInput\n"
-                "\tadds r4, r0, 0\n"
-                "\tmovs r0, 0x2\n"
-                "\tnegs r0, r0\n"
-                "\tcmp r4, r0\n"
-                "\tbeq _080CBB58\n"
-                "\tadds r0, 0x1\n"
-                "\tcmp r4, r0\n"
-                "\tbne _080CBB6C\n"
-                "\tb _080CBBA2\n"
-                "\t.align 2, 0\n"
-                "_080CBB54: .4byte gTasks\n"
-                "_080CBB58:\n"
-                "\tldr r1, _080CBB68 @ =gSpecialVar_Result\n"
-                "\tmovs r0, 0x7F\n"
-                "\tstrh r0, [r1]\n"
-                "\tmovs r0, 0x5\n"
-                "\tbl PlaySE\n"
-                "\tb _080CBB88\n"
-                "\t.align 2, 0\n"
-                "_080CBB68: .4byte gSpecialVar_Result\n"
-                "_080CBB6C:\n"
-                "\tldr r0, _080CBB90 @ =gSpecialVar_Result\n"
-                "\tstrh r4, [r0]\n"
-                "\tmovs r0, 0x5\n"
-                "\tbl PlaySE\n"
-                "\tmovs r1, 0x14\n"
-                "\tldrsh r0, [r6, r1]\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _080CBB88\n"
-                "\tmovs r1, 0xA\n"
-                "\tldrsh r0, [r6, r1]\n"
-                "\tsubs r0, 0x1\n"
-                "\tcmp r4, r0\n"
-                "\tbne _080CBB94\n"
-                "_080CBB88:\n"
-                "\tadds r0, r5, 0\n"
-                "\tbl sub_80CBBAC\n"
-                "\tb _080CBBA2\n"
-                "\t.align 2, 0\n"
-                "_080CBB90: .4byte gSpecialVar_Result\n"
-                "_080CBB94:\n"
-                "\tadds r0, r5, 0\n"
-                "\tbl sub_80CBD50\n"
-                "\tldr r0, _080CBBA8 @ =sub_80CBC2C\n"
-                "\tstr r0, [r6]\n"
-                "\tbl EnableBothScriptContexts\n"
-                "_080CBBA2:\n"
-                "\tpop {r4-r6}\n"
-                "\tpop {r0}\n"
-                "\tbx r0\n"
-                "\t.align 2, 0\n"
-                "_080CBBA8: .4byte sub_80CBC2C");
+    struct Task * task = &gTasks[taskId];
+    Task_ListMenuRemoveScrollIndicatorArrowPair(taskId);
+    DestroyListMenuTask(task->data[14], NULL, NULL);
+    Free(gUnknown_2039A14);
+    ClearStdWindowAndFrameToTransparent(task->data[13], TRUE);
+    FillWindowPixelBuffer(task->data[13], PIXEL_FILL(0));
+    ClearWindowTilemap(task->data[13]);
+    CopyWindowToVram(task->data[13], 2);
+    RemoveWindow(task->data[13]);
+    DestroyTask(taskId);
+    EnableBothScriptContexts();
 }
-#endif //NONMATCHING
+
+static void Task_SuspendListMenu(u8 taskId)
+{
+    switch (gTasks[taskId].data[6])
+    {
+    case 1:
+        break;
+    case 2:
+        gTasks[taskId].data[6] = 1;
+        gTasks[taskId].func = Task_RedrawScrollArrowsAndWaitInput;
+        break;
+    }
+}
+
+void Special_ReturnToListMenu(void)
+{
+    u8 taskId = FindTaskIdByFunc(Task_SuspendListMenu);
+    if (taskId == 0xFF)
+        EnableBothScriptContexts();
+    else
+        gTasks[taskId].data[6]++;
+}
+
+static void Task_RedrawScrollArrowsAndWaitInput(u8 taskId)
+{
+    ScriptContext2_Enable();
+    Task_CreateMenuRemoveScrollIndicatorArrowPair(taskId);
+    gTasks[taskId].func = Task_ListMenuHandleInput;
+}
+
+static void Task_CreateMenuRemoveScrollIndicatorArrowPair(u8 taskId)
+{
+    struct Task * task = &gTasks[taskId];
+    struct ScrollArrowsTemplate template = gUnknown_83F5D1C;
+    if (task->data[0] != task->data[1])
+    {
+        template.firstX = 4 * task->data[4] + 8 * task->data[2];
+        template.firstY = 8;
+        template.secondX = 4 * task->data[4] + 8 * task->data[2];
+        template.secondY = 8 * task->data[5] + 10;
+        template.fullyUpThreshold = 0;
+        template.fullyDownThreshold = task->data[1] - task->data[0];
+        task->data[12] = AddScrollIndicatorArrowPair(&template, &gUnknown_2039A18);
+    }
+}
+
+static void Task_ListMenuRemoveScrollIndicatorArrowPair(u8 taskId)
+{
+    struct Task * task = &gTasks[taskId];
+    if (task->data[0] != task->data[1])
+        RemoveScrollIndicatorArrowPair(task->data[12]);
+}
+
+void Special_ForcePlayerToStartSurfing(void)
+{
+    HelpSystem_SetSomeVariable2(22);
+    SetPlayerAvatarTransitionFlags(8);
+}
+
+static u16 GetStarterPokemon(u16 idx)
+{
+    if (idx >= NELEMS(sStarterMon))
+        idx = 0;
+    return sStarterMon[idx];
+}
+
+u16 ScrSpecial_GetStarter(void)
+{
+    return GetStarterPokemon(VarGet(VAR_STARTER_MON));
+}
+
+void Special_SetSeenMon(void)
+{
+    GetSetPokedexFlag(SpeciesToNationalPokedexNum(gSpecialVar_0x8004), 2);
+}
+
+void sub_80CBDE8(void)
+{
+    gSelectedEventObject = 0;
+    gSpecialVar_TextColor = 0xFF;
+}

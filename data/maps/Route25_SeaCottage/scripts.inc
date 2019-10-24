@@ -263,7 +263,7 @@ EventScript_17082B:: @ 817082B
 	waitbuttonpress
 	erasemonpic
 	setvar VAR_0x8004, SPECIES_EEVEE
-	special sub_80CBDCC
+	special Special_SetSeenMon
 	goto EventScript_1707D8
 	end
 
@@ -272,7 +272,7 @@ EventScript_170840:: @ 8170840
 	waitbuttonpress
 	erasemonpic
 	setvar VAR_0x8004, SPECIES_FLAREON
-	special sub_80CBDCC
+	special Special_SetSeenMon
 	goto EventScript_1707D8
 	end
 
@@ -281,7 +281,7 @@ EventScript_170855:: @ 8170855
 	waitbuttonpress
 	erasemonpic
 	setvar VAR_0x8004, SPECIES_JOLTEON
-	special sub_80CBDCC
+	special Special_SetSeenMon
 	goto EventScript_1707D8
 	end
 
@@ -290,7 +290,7 @@ EventScript_17086A:: @ 817086A
 	waitbuttonpress
 	erasemonpic
 	setvar VAR_0x8004, SPECIES_VAPOREON
-	special sub_80CBDCC
+	special Special_SetSeenMon
 	goto EventScript_1707D8
 	end
 

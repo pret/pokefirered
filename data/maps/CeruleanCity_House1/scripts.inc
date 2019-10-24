@@ -26,7 +26,7 @@ CeruleanCity_House1_EventScript_16A7F0:: @ 816A7F0
 EventScript_16A87D:: @ 816A87D
 	message Text_191967
 	waitmessage
-	special sub_80CBC5C
+	special Special_ReturnToListMenu
 	waitstate
 	switch VAR_RESULT
 	case 0, EventScript_16A8FB

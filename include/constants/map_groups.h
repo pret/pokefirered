@@ -169,7 +169,7 @@
 #define MAP_SEVEN_ISLAND_TANOBY_RUINS_RIXY_CHAMBER    (32 | (2 << 8))
 #define MAP_SEVEN_ISLAND_TANOBY_RUINS_VIAPOIS_CHAMBER (33 | (2 << 8))
 #define MAP_THREE_ISLAND_DUNSPARCE_TUNNEL             (34 | (2 << 8))
-#define MAP_SEVEN_ISLAND_SEVAULT_CANYON_TANOBY_KEY   (35 | (2 << 8))
+#define MAP_SEVEN_ISLAND_SEVAULT_CANYON_TANOBY_KEY    (35 | (2 << 8))
 #define MAP_NAVEL_ROCK_1F                             (36 | (2 << 8))
 #define MAP_NAVEL_ROCK_SUMMIT                         (37 | (2 << 8))
 #define MAP_NAVEL_ROCK_BASE                           (38 | (2 << 8))

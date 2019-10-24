@@ -354,7 +354,7 @@ gSpecials:: @ 815FD60
 	def_special sub_807F904
 	def_special Special_ForcePlayerOntoBike
 	def_special Special_ListMenu
-	def_special sub_80CBC5C
+	def_special Special_ReturnToListMenu
 	def_special sub_80CADC4
 	def_special Special_SetVermilionTrashCans
 	def_special sub_805D1A8
@@ -362,9 +362,9 @@ gSpecials:: @ 815FD60
 	def_special Special_CheckAddCoins
 	def_special GetDaycarePokemonCount
 	def_special Special_CloseElevatorCurrentFloorWindow
-	def_special sub_80CBD80
+	def_special Special_ForcePlayerToStartSurfing
 	def_special ScrSpecial_GetStarter
-	def_special sub_80CBDCC
+	def_special Special_SetSeenMon
 	def_special sub_810C444
 	def_special sub_80CC7B4
 	def_special ChangeBoxPokemonNickname

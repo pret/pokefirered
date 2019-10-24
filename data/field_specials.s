@@ -335,33 +335,33 @@ gUnknown_83F5F26:: @ 83F5F26
 	.2byte 0xffff
 
 gUnknown_83F5F50:: @ 83F5F50
-	.incbin "baserom.gba", 0x3F5F50, 0x20
-	.incbin "baserom.gba", 0x3F5F70, 0x20
-	.incbin "baserom.gba", 0x3F5F90, 0x20
-	.incbin "baserom.gba", 0x3F5FB0, 0x20
-	.incbin "baserom.gba", 0x3F5FD0, 0x20
-	.incbin "baserom.gba", 0x3F5FF0, 0x20
-	.incbin "baserom.gba", 0x3F6010, 0x20
-	.incbin "baserom.gba", 0x3F6030, 0x20
-	.incbin "baserom.gba", 0x3F6050, 0x20
-	.incbin "baserom.gba", 0x3F6070, 0x20
-	.incbin "baserom.gba", 0x3F6090, 0x20
+	.incbin "data/field_specials/unk_83F5F50.gbapal"
+	.incbin "data/field_specials/unk_83F5F70.gbapal"
+	.incbin "data/field_specials/unk_83F5F90.gbapal"
+	.incbin "data/field_specials/unk_83F5FB0.gbapal"
+	.incbin "data/field_specials/unk_83F5FD0.gbapal"
+	.incbin "data/field_specials/unk_83F5FF0.gbapal"
+	.incbin "data/field_specials/unk_83F6010.gbapal"
+	.incbin "data/field_specials/unk_83F6030.gbapal"
+	.incbin "data/field_specials/unk_83F6050.gbapal"
+	.incbin "data/field_specials/unk_83F6070.gbapal"
+	.incbin "data/field_specials/unk_83F6090.gbapal"
 
 gUnknown_83F60B0:: @ 83F60B0
-	.incbin "baserom.gba", 0x3F60B0, 0x20
+	.incbin "data/field_specials/unk_83F60B0.gbapal"
 
 gUnknown_83F60D0:: @ 83F60D0
-	.incbin "baserom.gba", 0x3F60D0, 0x20
-	.incbin "baserom.gba", 0x3F60F0, 0x20
-	.incbin "baserom.gba", 0x3F6110, 0x20
-	.incbin "baserom.gba", 0x3F6130, 0x20
-	.incbin "baserom.gba", 0x3F6150, 0x20
-	.incbin "baserom.gba", 0x3F6170, 0x20
-	.incbin "baserom.gba", 0x3F6190, 0x20
-	.incbin "baserom.gba", 0x3F61B0, 0x20
+	.incbin "data/field_specials/unk_83F60D0.gbapal"
+	.incbin "data/field_specials/unk_83F60F0.gbapal"
+	.incbin "data/field_specials/unk_83F6110.gbapal"
+	.incbin "data/field_specials/unk_83F6130.gbapal"
+	.incbin "data/field_specials/unk_83F6150.gbapal"
+	.incbin "data/field_specials/unk_83F6170.gbapal"
+	.incbin "data/field_specials/unk_83F6190.gbapal"
+	.incbin "data/field_specials/unk_83F61B0.gbapal"
 
 gUnknown_83F61D0:: @ 83F61D0
-	.incbin "baserom.gba", 0x3F61D0, 0x20
+	.incbin "data/field_specials/unk_83F61D0.gbapal"
 
 gUnknown_83F61F0:: @ 83F61F0
 	.incbin "baserom.gba", 0x3F61F0, 0xB

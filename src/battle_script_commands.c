@@ -1223,7 +1223,7 @@ static void atk04_critcalc(void)
         critChance = NELEMS(sCriticalHitChance) - 1;
     if ((gBattleMons[gBattlerTarget].ability != ABILITY_BATTLE_ARMOR && gBattleMons[gBattlerTarget].ability != ABILITY_SHELL_ARMOR)
      && !(gStatuses3[gBattlerAttacker] & STATUS3_CANT_SCORE_A_CRIT)
-     && !(gBattleTypeFlags & BATTLE_TYPE_OLDMAN_TUTORIAL)
+     && !(gBattleTypeFlags & BATTLE_TYPE_OLD_MAN_TUTORIAL)
      && !(Random() % sCriticalHitChance[critChance])
      && (!(gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE) || sub_80EB2E0(1))
      && !(gBattleTypeFlags & BATTLE_TYPE_POKEDUDE))
@@ -4415,7 +4415,7 @@ static void atk4E_switchinanim(void)
          && !(gBattleTypeFlags & 
               (BATTLE_TYPE_LINK
             | BATTLE_TYPE_LEGENDARY
-            | BATTLE_TYPE_OLDMAN_TUTORIAL
+            | BATTLE_TYPE_OLD_MAN_TUTORIAL
             | BATTLE_TYPE_POKEDUDE
             | BATTLE_TYPE_EREADER_TRAINER
             | BATTLE_TYPE_GHOST)))
@@ -9437,7 +9437,7 @@ static void atkEF_handleballthrow(void)
             MarkBattlerForControllerExec(gActiveBattler);
             gBattlescriptCurrInstr = BattleScript_TrainerBallBlock;
         }
-        else if (gBattleTypeFlags & (BATTLE_TYPE_POKEDUDE | BATTLE_TYPE_OLDMAN_TUTORIAL))
+        else if (gBattleTypeFlags & (BATTLE_TYPE_POKEDUDE | BATTLE_TYPE_OLD_MAN_TUTORIAL))
         {
             BtlController_EmitBallThrowAnim(0, BALL_3_SHAKES_SUCCESS);
             MarkBattlerForControllerExec(gActiveBattler);

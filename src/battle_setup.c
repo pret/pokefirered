@@ -293,7 +293,7 @@ void BattleSetup_StartOldManTutorialBattle(void)
     CreateMaleMon(&gEnemyParty[0], SPECIES_WEEDLE, 5);
     ScriptContext2_Enable();
     gMain.savedCallback = CB2_ReturnToFieldContinueScriptPlayMapMusic;
-    gBattleTypeFlags = BATTLE_TYPE_OLDMAN_TUTORIAL;
+    gBattleTypeFlags = BATTLE_TYPE_OLD_MAN_TUTORIAL;
     CreateBattleStartTask(B_TRANSITION_SLICED_SCREEN, 0);
 }
 

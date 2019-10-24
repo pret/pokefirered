@@ -7,11 +7,10 @@
 
 .set __special__, 0
 	.align 2
-
 gSpecials:: @ 815FD60
 	def_special sp000_heal_pokemon
 	def_special SetCableClubWarp
-	def_special sub_807E654
+	def_special DoCableClubWarp
 	def_special sub_807E704
 	def_special sub_8081744
 	def_special sub_8081770
@@ -60,16 +59,16 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special IsEnigmaBerryValid
-	def_special sub_80803CC
-	def_special sub_80805D8
-	def_special sub_8080618
+	def_special ScrSpecial_GetTrainerBattleMode
+	def_special ScrSpecial_ShowTrainerIntroSpeech
+	def_special ScrSpecial_ShowTrainerNonBattlingSpeech
 	def_special ScrSpecial_HasTrainerBeenFought
 	def_special ScrSpecial_EndTrainerApproach
 	def_special PlayTrainerEncounterMusic
-	def_special sub_810CD4C
-	def_special sub_810CEB4
-	def_special sub_80805B0
-	def_special sub_808C6A8
+	def_special ShouldTryRematchBattle
+	def_special ScrSpecial_GetTrainerEyeRematchFlag
+	def_special ScrSpecial_StartTrainerEyeRematch
+	def_special ShowPokemonStorageSystem
 	def_special CheckForAlivePartyMons
 	def_special nullsub_75
 	def_special nullsub_75
@@ -128,16 +127,16 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
-	def_special sub_80A0918
-	def_special sub_80A0930
-	def_special sub_80A096C
-	def_special sub_80A0984
-	def_special sub_80CBFA0
+	def_special GetHeracrossSizeRecordInfo
+	def_special CompareHeracrossSize
+	def_special GetMagikarpSizeRecordInfo
+	def_special CompareMagikarpSize
+	def_special NameRaterWasNicknameChanged
 	def_special TV_CopyNicknameToStringVar1AndEnsureTerminated
 	def_special TV_CheckMonOTIDEqualsPlayerID
 	def_special nullsub_75
 	def_special nullsub_75
-	def_special sub_80BDB1C
+	def_special BufferRandomHobbyOrLifestyleString
 	def_special nullsub_75
 	def_special RegisteredItemHandleBikeSwap
 	def_special CalculatePlayerPartyCount
@@ -166,17 +165,17 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
-	def_special sub_807F888
+	def_special ScrSpecial_StartOldManTutorialBattle
 	def_special ChangePokemonNickname
 	def_special Special_ChooseMonFromParty
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
-	def_special sub_8113364
-	def_special sub_8113288
-	def_special sub_81133A4
+	def_special ShouldMoveSaffronFanClubMember
+	def_special GetNumMovedSaffronFanClubMembers
+	def_special BufferStreakTrainerText
 	def_special sub_8113064
-	def_special sub_81132CC
+	def_special UpdateMovedSaffronFanClubMembers
 	def_special sub_8113510
 	def_special sub_81130A8
 	def_special sub_8113530
@@ -204,12 +203,12 @@ gSpecials:: @ 815FD60
 	def_special TakePokemonFromDaycare
 	def_special ScriptHatchMon
 	def_special EggHatch
-	def_special sub_8046EAC
+	def_special DaycareMonReceivedMail
 	def_special Special_BattleRecords
 	def_special IsEnoughForCostInVar0x8005
 	def_special SubtractMoneyFromVar0x8005
 	def_special ExecuteWhiteOut
-	def_special sub_80CA3C4
+	def_special sp0C8_whiteout_maybe
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
@@ -222,18 +221,18 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special Special_GetPokedexCount
-	def_special sub_80CA524
+	def_special Special_GetProfOaksRatingMessage
 	def_special Special_AnimatePcTurnOn
 	def_special Special_AnimatePcTurnOff
 	def_special Special_GetElevatorFloor
 	def_special nullsub_75
 	def_special nullsub_75
-	def_special sub_80BF93C
-	def_special Special_ChooseMoveToDelete
-	def_special Special_DeleteSelectedMove
+	def_special SelectMoveTutorMon
+	def_special SelectMove
+	def_special DeleteMonMove
 	def_special ScrSpecial_GetPokemonNicknameAndMoveName
 	def_special ScrSpecial_CountPokemonMoves
-	def_special sub_80E4634
+	def_special DisplayMoveTutorMenu
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special Special_GetPlayerAvatarBike
@@ -241,30 +240,30 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special Special_GetLeadMonFriendship
 	def_special sub_80E5970
-	def_special sub_80E5C28
-	def_special sub_80E6648
-	def_special sub_80E67FC
-	def_special sub_80E7538
-	def_special sub_80E6900
-	def_special sub_80E6A0C
-	def_special sub_80E6C8C
-	def_special sub_80E6E14
-	def_special sub_80E6FB8
-	def_special sub_80E7058
-	def_special sub_80E71D0
-	def_special sub_80E724C
-	def_special sub_80E72B8
-	def_special sub_80A0380
+	def_special ChooseNextBattleTowerTrainer
+	def_special CheckPartyBattleTowerBanlist
+	def_special PrintBattleTowerTrainerGreeting
+	def_special PrintEReaderTrainerGreeting
+	def_special StartSpecialBattle
+	def_special SetBattleTowerProperty
+	def_special BattleTowerUtil
+	def_special SetBattleTowerParty
+	def_special SaveBattleTowerProgress
+	def_special BattleTower_SoftReset
+	def_special DetermineBattleTowerPrize
+	def_special GiveBattleTowerPrize
+	def_special AwardBattleTowerRibbons
+	def_special ChooseBattleTowerPlayerParty
 	def_special ValidateEReaderTrainer
 	def_special nullsub_75
-	def_special sub_80A03D8
-	def_special sub_80EB6AC
-	def_special sub_80EB6FC
+	def_special ReducePlayerPartyToThree
+	def_special BedroomPC
+	def_special PlayerPC
 	def_special Special_TownMap
-	def_special sub_8053A9C
-	def_special sub_8053D68
-	def_special sub_8054440
-	def_special sub_8053D2C
+	def_special GetInGameTradeSpeciesInfo
+	def_special CreateInGameTradePokemon
+	def_special DoInGameTradeScene
+	def_special GetTradeSpecies
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
@@ -320,9 +319,9 @@ gSpecials:: @ 815FD60
 	def_special Special_CheckPartyPokerus
 	def_special sub_806E99C
 	def_special Special_ShakeScreen
-	def_special sub_807FA68
-	def_special sub_807F9D8
-	def_special sub_807FABC
+	def_special Special_StartGroudonKyogreBattle
+	def_special Special_StartLegendaryBattle
+	def_special Special_StartRegiBattle
 	def_special sub_8080398
 	def_special nullsub_75
 	def_special nullsub_75
@@ -331,13 +330,13 @@ gSpecials:: @ 815FD60
 	def_special DoFallWarp
 	def_special nullsub_75
 	def_special nullsub_75
-	def_special sub_80E5E70
-	def_special sub_807F998
+	def_special SetEReaderTrainerGfxId
+	def_special ScrSpecial_StartSouthernIslandBattle
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special Special_GetSpeciesOfPartySlot_x8004
-	def_special sub_80BFC14
+	def_special IsSelectedMonEgg
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special LoadPlayerBag
@@ -347,11 +346,11 @@ gSpecials:: @ 815FD60
 	def_special HasAllKantoMons
 	def_special Special_BufferMonOTNameAndCompareToPlayerName
 	def_special nullsub_75
-	def_special sub_80E759C
+	def_special Dummy_TryEnableBravoTrainerBattleTower
 	def_special GetNameOfEnigmaBerryInPlayerParty
 	def_special nullsub_75
 	def_special sub_810B82C
-	def_special sub_807F904
+	def_special ScrSpecial_StartMarowakBattle
 	def_special Special_ForcePlayerOntoBike
 	def_special Special_ListMenu
 	def_special Special_ReturnToListMenu

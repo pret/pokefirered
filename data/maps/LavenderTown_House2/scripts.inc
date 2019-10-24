@@ -58,7 +58,7 @@ EventScript_16B311:: @ 816B311
 EventScript_16B31B:: @ 816B31B
 	msgbox gUnknown_8193B36
 	call EventScript_1A74EB
-	specialvar VAR_RESULT, sub_80CBFA0
+	specialvar VAR_RESULT, NameRaterWasNicknameChanged
 	special TV_CopyNicknameToStringVar1AndEnsureTerminated
 	compare_var_to_value VAR_RESULT, 1
 	goto_if eq, EventScript_16B345

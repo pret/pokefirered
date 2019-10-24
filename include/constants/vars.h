@@ -96,17 +96,17 @@
 
 #define VAR_0x4034                         0x4034
 #define VAR_RESORT_GOREGEOUS_STEP_COUNTER  0x4035
-#define VAR_RESORT_GOREGOUS_REQUESTED_MON  0x4036
+#define VAR_RESORT_GORGEOUS_REQUESTED_MON  0x4036
 #define VAR_0x4037                         0x4037
 #define VAR_0x4038                         0x4038
 #define VAR_0x4039                         0x4039
 #define VAR_ELEVATOR_FLOOR                 0x403A
-#define VAR_RESORT_GOREGOUS_REWARD         0x403B
+#define VAR_RESORT_GORGEOUS_REWARD         0x403B
 #define VAR_0x403C                         0x403C
-#define VAR_0x403D                         0x403D
+#define VAR_HERACROSS_SIZE_RECORD          0x403D
 #define VAR_DEOXYS_INTERACTION_NUM         0x403E
 #define VAR_0x403F                         0x403F
-#define VAR_DAYS                           0x4040
+#define VAR_MAGIKARP_SIZE_RECORD           0x4040
 #define VAR_0x4041                         0x4041
 #define VAR_TRAINER_CARD_MON_ICON_TINT_IDX 0x4042
 #define VAR_TRAINER_CARD_MON_ICON_1        0x4043

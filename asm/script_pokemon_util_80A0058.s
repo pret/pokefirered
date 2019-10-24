@@ -420,8 +420,8 @@ _080A0378: .4byte gSpecialVar_Result
 _080A037C: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
 	thumb_func_end sub_80A0350
 
-	thumb_func_start sub_80A0380
-sub_80A0380: @ 80A0380
+	thumb_func_start ChooseBattleTowerPlayerParty
+ChooseBattleTowerPlayerParty: @ 80A0380
 	push {lr}
 	ldr r1, _080A0394 @ =gMain
 	ldr r0, _080A0398 @ =sub_80A039C
@@ -433,7 +433,7 @@ sub_80A0380: @ 80A0380
 	.align 2, 0
 _080A0394: .4byte gMain
 _080A0398: .4byte sub_80A039C
-	thumb_func_end sub_80A0380
+	thumb_func_end ChooseBattleTowerPlayerParty
 
 	thumb_func_start sub_80A039C
 sub_80A039C: @ 80A039C
@@ -450,7 +450,7 @@ sub_80A039C: @ 80A039C
 _080A03B0: .4byte gUnknown_203B0D4
 _080A03B4: .4byte gSpecialVar_Result
 _080A03B8:
-	bl sub_80A03D8
+	bl ReducePlayerPartyToThree
 	ldr r1, _080A03D0 @ =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
@@ -465,8 +465,8 @@ _080A03D0: .4byte gSpecialVar_Result
 _080A03D4: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
 	thumb_func_end sub_80A039C
 
-	thumb_func_start sub_80A03D8
-sub_80A03D8: @ 80A03D8
+	thumb_func_start ReducePlayerPartyToThree
+ReducePlayerPartyToThree: @ 80A03D8
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -530,6 +530,6 @@ _080A042C:
 _080A0454: .4byte gPlayerParty
 _080A0458: .4byte gUnknown_203B0D4
 _080A045C: .4byte 0x05000096
-	thumb_func_end sub_80A03D8
+	thumb_func_end ReducePlayerPartyToThree
 
 	.align 2, 0 @ Don't pad with nop.

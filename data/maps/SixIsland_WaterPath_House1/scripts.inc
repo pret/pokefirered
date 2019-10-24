@@ -12,14 +12,14 @@ SixIsland_WaterPath_House1_EventScript_17206D:: @ 817206D
 	specialvar VAR_RESULT, Special_PlayerPartyContainsSpecies
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1720E5
-	special sub_80A0918
+	special GetHeracrossSizeRecordInfo
 	msgbox gUnknown_81A4A3F
 	special Special_ChooseMonFromParty
 	waitstate
 	copyvar VAR_RESULT, VAR_0x8004
 	compare_var_to_value VAR_RESULT, 6
 	goto_if ge, EventScript_1720EF
-	special sub_80A0930
+	special CompareHeracrossSize
 	compare_var_to_value VAR_RESULT, 1
 	goto_if eq, EventScript_1720F1
 	compare_var_to_value VAR_RESULT, 2
@@ -83,7 +83,7 @@ SixIsland_WaterPath_House1_EventScript_172157:: @ 8172157
 	end
 
 EventScript_17216B:: @ 817216B
-	special sub_80A0918
+	special GetHeracrossSizeRecordInfo
 	msgbox gUnknown_81A4C6E
 	releaseall
 	end

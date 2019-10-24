@@ -1751,8 +1751,8 @@ _0808C69C:
 _0808C6A4: .4byte gPaletteFade
 	thumb_func_end c3_0808C39C
 
-	thumb_func_start sub_808C6A8
-sub_808C6A8: @ 808C6A8
+	thumb_func_start ShowPokemonStorageSystem
+ShowPokemonStorageSystem: @ 808C6A8
 	push {lr}
 	ldr r0, _0808C6D0 @ =c3_0808C39C
 	movs r1, 0x50
@@ -1773,7 +1773,7 @@ sub_808C6A8: @ 808C6A8
 	.align 2, 0
 _0808C6D0: .4byte c3_0808C39C
 _0808C6D4: .4byte gTasks
-	thumb_func_end sub_808C6A8
+	thumb_func_end ShowPokemonStorageSystem
 
 	thumb_func_start mapldr_0808C6D8
 mapldr_0808C6D8: @ 808C6D8

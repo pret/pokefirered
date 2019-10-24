@@ -106,8 +106,8 @@ _080CA3BC: .4byte 0x0000083b
 _080CA3C0: .4byte CB2_DoHallOfFameScreen
 	thumb_func_end Special_HallOfFame
 
-	thumb_func_start sub_80CA3C4
-sub_80CA3C4: @ 80CA3C4
+	thumb_func_start sp0C8_whiteout_maybe
+sp0C8_whiteout_maybe: @ 80CA3C4
 	push {lr}
 	ldr r0, _080CA3D4 @ =c2_whiteout
 	bl SetMainCallback2
@@ -116,6 +116,6 @@ sub_80CA3C4: @ 80CA3C4
 	bx r1
 	.align 2, 0
 _080CA3D4: .4byte c2_whiteout
-	thumb_func_end sub_80CA3C4
+	thumb_func_end sp0C8_whiteout_maybe
 
 	.align 2, 0 @ Don't pad with nop.

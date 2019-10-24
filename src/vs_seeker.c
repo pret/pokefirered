@@ -1290,7 +1290,7 @@ static u8 GetRematchTrainerIdGivenGameState(const u16 * a0, u8 a1)
     return 0;
 }
 
-u8 sub_810CD4C(void)
+u8 ShouldTryRematchBattle(void)
 {
     if (sub_810CD80(sVsSeekerData, gTrainerBattleOpponent_A))
     {
@@ -1364,7 +1364,7 @@ s32 sub_810CE64(u16 a0)
     return sVsSeekerData[i].trainerIdxs[j];
 }
 
-u8 sub_810CEB4(void) // unreferenced, or reference not disassembled
+u8 ScrSpecial_GetTrainerEyeRematchFlag(void) // unreferenced, or reference not disassembled
 {
     return sub_810CED0(sVsSeekerData, gTrainerBattleOpponent_A);
 }

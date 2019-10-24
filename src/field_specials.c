@@ -61,8 +61,8 @@ static void Task_AnimatePcTurnOn(u8 taskId);
 static void PcTurnOnUpdateMetatileId(bool16 flag);
 static void Task_ShakeScreen(u8 taskId);
 static void Task_EndScreenShake(u8 taskId);
-static u16 SampleResortGoregeousMon(void);
-static u16 SampleResortGoregeousReward(void);
+static u16 SampleResortGorgeousMon(void);
+static u16 SampleResortGorgeousReward(void);
 static void Task_ElevatorShake(u8 taskId);
 static void AnimateElevatorWindowView(u16 nfloors, bool8 direction);
 static void Task_AnimateElevatorWindowView(u8 taskId);
@@ -654,12 +654,12 @@ static const u16 sResortGorgeousDeluxeRewards[] = {
 void IncrementResortGorgeousStepCounter(void)
 {
     u16 var4035 = VarGet(VAR_RESORT_GOREGEOUS_STEP_COUNTER);
-    if (VarGet(VAR_RESORT_GOREGOUS_REQUESTED_MON) != SPECIES_NONE)
+    if (VarGet(VAR_RESORT_GORGEOUS_REQUESTED_MON) != SPECIES_NONE)
     {
         var4035++;
         if (var4035 >= 250)
         {
-            VarSet(VAR_RESORT_GOREGOUS_REQUESTED_MON, 0xFFFF);
+            VarSet(VAR_RESORT_GORGEOUS_REQUESTED_MON, 0xFFFF);
             VarSet(VAR_RESORT_GOREGEOUS_STEP_COUNTER, 0);
         }
         else
@@ -671,17 +671,17 @@ void IncrementResortGorgeousStepCounter(void)
 
 void Special_SampleResortGorgeousMonAndReward(void)
 {
-    u16 var4036 = VarGet(VAR_RESORT_GOREGOUS_REQUESTED_MON);
+    u16 var4036 = VarGet(VAR_RESORT_GORGEOUS_REQUESTED_MON);
     if (var4036 == SPECIES_NONE || var4036 == 0xFFFF)
     {
-        VarSet(VAR_RESORT_GOREGOUS_REQUESTED_MON, SampleResortGoregeousMon());
-        VarSet(VAR_RESORT_GOREGOUS_REWARD, SampleResortGoregeousReward());
+        VarSet(VAR_RESORT_GORGEOUS_REQUESTED_MON, SampleResortGorgeousMon());
+        VarSet(VAR_RESORT_GORGEOUS_REWARD, SampleResortGorgeousReward());
         VarSet(VAR_RESORT_GOREGEOUS_STEP_COUNTER, 0);
     }
-    StringCopy(gStringVar1, gSpeciesNames[VarGet(VAR_RESORT_GOREGOUS_REQUESTED_MON)]);
+    StringCopy(gStringVar1, gSpeciesNames[VarGet(VAR_RESORT_GORGEOUS_REQUESTED_MON)]);
 }
 
-static u16 SampleResortGoregeousMon(void)
+static u16 SampleResortGorgeousMon(void)
 {
     u16 i;
     u16 species;
@@ -701,7 +701,7 @@ static u16 SampleResortGoregeousMon(void)
     return species;
 }
 
-static u16 SampleResortGoregeousReward(void)
+static u16 SampleResortGorgeousReward(void)
 {
     if ((Random() % 100) >= 30)
         return ITEM_LUXURY_BALL;
@@ -1565,7 +1565,7 @@ s32 CountDigits(s32 number)
         return 1;
 }
 
-bool8 sub_80CBFA0(void)
+bool8 NameRaterWasNicknameChanged(void)
 {
     struct Pokemon * pokemon = &gPlayerParty[gSpecialVar_0x8004];
     GetMonData(pokemon, MON_DATA_NICKNAME, gStringVar1);

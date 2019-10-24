@@ -9,7 +9,7 @@ PokemonTower_6F_EventScript_1634B8:: @ 81634B8
 	compare_var_to_value VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	setwildbattle SPECIES_MAROWAK, 30, ITEM_NONE
-	special sub_807F904
+	special ScrSpecial_StartMarowakBattle
 	waitstate
 	special sub_8112364
 	compare_var_to_value VAR_RESULT, 0

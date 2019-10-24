@@ -15,8 +15,8 @@ sub_80E4620: @ 80E4620
 	bx r0
 	thumb_func_end sub_80E4620
 
-	thumb_func_start sub_80E4634
-sub_80E4634: @ 80E4634
+	thumb_func_start DisplayMoveTutorMenu
+DisplayMoveTutorMenu: @ 80E4634
 	push {lr}
 	sub sp, 0x4
 	bl ScriptContext2_Enable
@@ -35,7 +35,7 @@ sub_80E4634: @ 80E4634
 	bx r0
 	.align 2, 0
 _080E465C: .4byte sub_80E4660
-	thumb_func_end sub_80E4634
+	thumb_func_end DisplayMoveTutorMenu
 
 	thumb_func_start sub_80E4660
 sub_80E4660: @ 80E4660

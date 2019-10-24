@@ -39,14 +39,14 @@ EventScript_16FF7F:: @ 816FF7F
 	specialvar VAR_RESULT, Special_PlayerPartyContainsSpecies
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_16FFF5
-	special sub_80A096C
+	special GetMagikarpSizeRecordInfo
 	msgbox gUnknown_819F2DB
 	special Special_ChooseMonFromParty
 	waitstate
 	copyvar VAR_RESULT, VAR_0x8004
 	compare_var_to_value VAR_RESULT, 6
 	goto_if ge, EventScript_16FFFF
-	special sub_80A0984
+	special CompareMagikarpSize
 	compare_var_to_value VAR_RESULT, 1
 	goto_if eq, EventScript_170001
 	compare_var_to_value VAR_RESULT, 2
@@ -110,7 +110,7 @@ Route12_FishingHouse_EventScript_170067:: @ 8170067
 	end
 
 EventScript_17007B:: @ 817007B
-	special sub_80A096C
+	special GetMagikarpSizeRecordInfo
 	msgbox gUnknown_819F4CF
 	releaseall
 	end

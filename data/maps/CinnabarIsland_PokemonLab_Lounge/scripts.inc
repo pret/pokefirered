@@ -48,7 +48,7 @@ CinnabarIsland_PokemonLab_Lounge_EventScript_16E33E:: @ 816E33E
 	faceplayer
 	setvar VAR_0x8008, 7
 	copyvar VAR_0x8004, VAR_0x8008
-	specialvar VAR_RESULT, sub_8053A9C
+	specialvar VAR_RESULT, GetInGameTradeSpeciesInfo
 	copyvar VAR_0x8009, VAR_RESULT
 	checkflag FLAG_DID_TANGENY_TRADE
 	goto_if TRUE, EventScript_16E3D4
@@ -61,14 +61,14 @@ CinnabarIsland_PokemonLab_Lounge_EventScript_16E33E:: @ 816E33E
 	compare_var_to_value VAR_0x8004, 6
 	goto_if ge, EventScript_16E3BC
 	copyvar VAR_0x8005, VAR_0x800A
-	specialvar VAR_RESULT, sub_8053D2C
+	specialvar VAR_RESULT, GetTradeSpecies
 	copyvar VAR_0x800B, VAR_RESULT
 	compare_var_to_var VAR_RESULT, VAR_0x8009
 	goto_if ne, EventScript_16E3C6
 	copyvar VAR_0x8004, VAR_0x8008
 	copyvar VAR_0x8005, VAR_0x800A
-	special sub_8053D68
-	special sub_8054440
+	special CreateInGameTradePokemon
+	special DoInGameTradeScene
 	waitstate
 	msgbox gUnknown_81A5B4A
 	setflag FLAG_DID_TANGENY_TRADE

@@ -11209,7 +11209,7 @@ _080157E0:
 	ands r1, r0
 	cmp r1, 0
 	beq _08015824
-	bl sub_80803CC
+	bl ScrSpecial_GetTrainerBattleMode
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x9

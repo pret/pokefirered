@@ -105,7 +105,7 @@ EventScript_170987:: @ 8170987
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_170A11
 	special SavePlayerParty
-	special sub_80A03D8
+	special ReducePlayerPartyToThree
 	msgbox gUnknown_81A07C4
 	closemessage
 	compare_var_to_value VAR_FACING, 2

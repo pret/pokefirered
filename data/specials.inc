@@ -78,7 +78,7 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
-	def_special sub_80CBEBC
+	def_special Special_HasLeadMonBeenRenamed
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75

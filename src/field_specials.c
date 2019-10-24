@@ -30,6 +30,7 @@
 #include "window.h"
 #include "text_window.h"
 #include "menu.h"
+#include "dynamic_placeholder_text_util.h"
 #include "new_menu_helpers.h"
 #include "constants/songs.h"
 #include "constants/species.h"
@@ -79,6 +80,7 @@ extern const u16 sElevatorWindowMetatilesGoingUp[3][3];
 extern const u16 sElevatorWindowMetatilesGoingDown[3][3];
 extern const u8 sElevatorAnimationDuration[9];
 extern const u8 sElevatorWindowAnimDuration[9];
+extern u8 *const gUnknown_83F5AF8[3];
 
 void Special_ShowDiploma(void)
 {
@@ -1274,4 +1276,77 @@ void sub_80CBDE8(void)
 {
     gSelectedEventObject = 0;
     gSpecialVar_TextColor = 0xFF;
+}
+
+u8 ContextNpcGetTextColor(void)
+{
+    u8 gfxId;
+    if (gSpecialVar_TextColor != 0xFF)
+        return gSpecialVar_TextColor;
+    else if (gSelectedEventObject == 0)
+        return 3;
+    else
+    {
+        gfxId = gMapObjects[gSelectedEventObject].graphicsId;
+        if (gfxId >= MAP_OBJ_GFX_VAR_0)
+            gfxId = VarGetFieldObjectGraphicsId(gfxId - MAP_OBJ_GFX_VAR_0);
+        return GetColorFromTextColorTable(gfxId);
+    }
+}
+
+static bool8 HasMonBeenRenamed(u8 idx)
+{
+    struct Pokemon * pokemon = &gPlayerParty[idx];
+    u8 language;
+    GetMonData(pokemon, MON_DATA_NICKNAME, gStringVar1);
+    language = GetMonData(pokemon, MON_DATA_LANGUAGE, &language);
+    if (language != LANGUAGE_ENGLISH)
+        return TRUE;
+    else if (StringCompare(gSpeciesNames[GetMonData(pokemon, MON_DATA_SPECIES, NULL)], gStringVar1) != 0)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 Special_HasLeadMonBeenRenamed(void)
+{
+    return HasMonBeenRenamed(GetLeadMonIndex());
+}
+
+void TV_PrintIntToStringVar(u8 varidx, s32 number)
+{
+    s32 n = CountDigits(number);
+    ConvertIntToDecimalStringN(gUnknown_83F5AF8[varidx], number, STR_CONV_MODE_LEFT_ALIGN, n);
+}
+
+s32 CountDigits(s32 number)
+{
+    if (number / 10 == 0)
+        return 1;
+    else if (number / 100 == 0)
+        return 2;
+    else if (number / 1000 == 0)
+        return 3;
+    else if (number / 10000 == 0)
+        return 4;
+    else if (number / 100000 == 0)
+        return 5;
+    else if (number / 1000000 == 0)
+        return 6;
+    else if (number / 10000000 == 0)
+        return 7;
+    else if (number / 100000000 == 0)
+        return 8;
+    else
+        return 1;
+}
+
+bool8 sub_80CBFA0(void)
+{
+    struct Pokemon * pokemon = &gPlayerParty[gSpecialVar_0x8004];
+    GetMonData(pokemon, MON_DATA_NICKNAME, gStringVar1);
+    if (StringCompare(gStringVar3, gStringVar1) == 0)
+        return FALSE;
+    else
+        return TRUE;
 }

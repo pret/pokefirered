@@ -35,6 +35,7 @@ extern struct UCoords32 gDirectionToVectors[];
 extern struct LinkPlayerMapObject gLinkPlayerMapObjects[4];
 extern MainCallback gFieldCallback;
 
+extern struct WarpData gUnknown_2031DB4;
 extern struct WarpData gUnknown_2031DBC;
 
 extern u8 gUnknown_2031DE0;

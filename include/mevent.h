@@ -67,5 +67,6 @@ bool32 WonderNews_Test_Unk_02(void);
 bool32 WonderCard_Test_Unk_08_6(void);
 u32 MENews_GetInput(u16 input);
 void sub_8143D24(void);
+u16 sub_81445C0(u32 command);
 
 #endif //GUARD_MEVENT_H

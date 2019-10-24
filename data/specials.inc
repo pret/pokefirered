@@ -368,8 +368,8 @@ gSpecials:: @ 815FD60
 	def_special sub_810C444
 	def_special sub_80CC7B4
 	def_special ChangeBoxPokemonNickname
-	def_special sub_80CC2BC
-	def_special sub_80CC3CC
+	def_special Special_UpdateTrainerCardPhotoIcons
+	def_special Special_StickerLadyGetBragFlags
 	def_special sub_80CC524
 	def_special IsWirelessAdapterConnected
 	def_special sub_8115A24

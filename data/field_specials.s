@@ -1,5 +1,6 @@
 #include "constants/species.h"
 #include "constants/items.h"
+#include "constants/maps.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 	.section .rodata
@@ -235,72 +236,72 @@ sStarterMon:: @ 83F5D2C
 	.2byte SPECIES_CHARMANDER
 
 gUnknown_83F5D32:: @ 83F5D32
-	.byte 0x05, 0x03, 0x01
-	.byte 0x06, 0x03, 0x03
-	.byte 0x07, 0x07, 0x01
-	.byte 0x08, 0x05, 0x01
-	.byte 0x09, 0x05, 0x01
-	.byte 0x0b, 0x01, 0x01
-	.byte 0x0c, 0x07, 0x01
-	.byte 0x0e, 0x05, 0x01
-	.byte 0x22, 0x03, 0x01
-	.byte 0x23, 0x07, 0x01
-	.byte 0x1f, 0x02, 0x01
-	.byte 0x25, 0x04, 0x01
+	.byte MAP_GROUP(VIRIDIAN_CITY_MART),   MAP_NUM(VIRIDIAN_CITY_MART),   1
+	.byte MAP_GROUP(PEWTER_CITY_MART),     MAP_NUM(PEWTER_CITY_MART),     3
+	.byte MAP_GROUP(CERULEAN_CITY_MART),   MAP_NUM(CERULEAN_CITY_MART),   1
+	.byte MAP_GROUP(LAVENDER_TOWN_MART),   MAP_NUM(LAVENDER_TOWN_MART),   1
+	.byte MAP_GROUP(VERMILION_CITY_MART),  MAP_NUM(VERMILION_CITY_MART),  1
+	.byte MAP_GROUP(FUCHSIA_CITY_MART),    MAP_NUM(FUCHSIA_CITY_MART),    1
+	.byte MAP_GROUP(CINNABAR_ISLAND_MART), MAP_NUM(CINNABAR_ISLAND_MART), 1
+	.byte MAP_GROUP(SAFFRON_CITY_MART),    MAP_NUM(SAFFRON_CITY_MART),    1
+	.byte MAP_GROUP(THREE_ISLAND_MART),    MAP_NUM(THREE_ISLAND_MART),    1
+	.byte MAP_GROUP(FOUR_ISLAND_MART),     MAP_NUM(FOUR_ISLAND_MART),     1
+	.byte MAP_GROUP(SEVEN_ISLAND_MART),    MAP_NUM(SEVEN_ISLAND_MART),    1
+	.byte MAP_GROUP(SIX_ISLAND_MART),      MAP_NUM(SIX_ISLAND_MART),      1
 
 	.align 2
 gUnknown_83F5D58:: @ 83F5D58
-	.2byte 0x0004, 0x0000, 0x0003, 0x0000
-	.2byte 0x0004, 0x0003, 0x0003, 0x0000
-	.2byte 0x0005, 0x0001, 0x0003, 0x0001
-	.2byte 0x001c, 0x0000, 0x0003, 0x0029
-	.2byte 0x001c, 0x0000, 0x0003, 0x002a
-	.2byte 0x0001, 0x0000, 0x000f, 0x0000
-	.2byte 0x0001, 0x0000, 0x000f, 0x0003
-	.2byte 0x0006, 0x0000, 0x0003, 0x0002
-	.2byte 0x0006, 0x0002, 0x0003, 0x0002
-	.2byte 0x0001, 0x0001, 0x0003, 0x0016
-	.2byte 0x0001, 0x0002, 0x0003, 0x0016
-	.2byte 0x0007, 0x0005, 0x0003, 0x0003
-	.2byte 0x0007, 0x0006, 0x0003, 0x0003
-	.2byte 0x001e, 0x0000, 0x0003, 0x002c
-	.2byte 0x0011, 0x0000, 0x0003, 0x0017
-	.2byte 0x0001, 0x001e, 0x0003, 0x0017
-	.2byte 0x0001, 0x0020, 0x0003, 0x0018
-	.2byte 0x0009, 0x0003, 0x0003, 0x0005
-	.2byte 0x0009, 0x0006, 0x0003, 0x0005
-	.2byte 0x0001, 0x0005, 0x0003, 0x0005
-	.2byte 0x0001, 0x0024, 0x0003, 0x0014
-	.2byte 0x0001, 0x0026, 0x0003, 0x001d
-	.2byte 0x0001, 0x0051, 0x0003, 0x001c
-	.2byte 0x0001, 0x0051, 0x0003, 0x001c
-	.2byte 0x0001, 0x005f, 0x0003, 0x001c
-	.2byte 0x0001, 0x0058, 0x0003, 0x0004
-	.2byte 0x0008, 0x0002, 0x0003, 0x0004
-	.2byte 0x0008, 0x0004, 0x0003, 0x0004
-	.2byte 0x0001, 0x0023, 0x0003, 0x001a
-	.2byte 0x0001, 0x0021, 0x0003, 0x0019
-	.2byte 0x000a, 0x0000, 0x0003, 0x0006
-	.2byte 0x000a, 0x0007, 0x0003, 0x0006
-	.2byte 0x000a, 0x000e, 0x0003, 0x0006
-	.2byte 0x000a, 0x0010, 0x0003, 0x0006
-	.2byte 0x000a, 0x0011, 0x0003, 0x0006
-	.2byte 0x0001, 0x002a, 0x000a, 0x000e
-	.2byte 0x0001, 0x003f, 0x000b, 0x0000
-	.2byte 0x000b, 0x0003, 0x0003, 0x0007
-	.2byte 0x000b, 0x0007, 0x0003, 0x0007
-	.2byte 0x000e, 0x0002, 0x0003, 0x000a
-	.2byte 0x000e, 0x0003, 0x0003, 0x000a
-	.2byte 0x0001, 0x002f, 0x0003, 0x000a
-	.2byte 0x0001, 0x0053, 0x0003, 0x0026
-	.2byte 0x0001, 0x0053, 0x0003, 0x0026
-	.2byte 0x0001, 0x003b, 0x0003, 0x0008
-	.2byte 0x000c, 0x0000, 0x0003, 0x0008
-	.2byte 0x000c, 0x0001, 0x0003, 0x0008
-	.2byte 0x0001, 0x0027, 0x0003, 0x002a
-	.2byte 0x0001, 0x0028, 0x0003, 0x002a
-	.2byte 0x000d, 0x0000, 0x0003, 0x0009
-	.2byte 0x0001, 0x0048, 0x0003, 0x0003
+	.2byte MAP_GROUP(PALLET_TOWN_PLAYERS_HOUSE_1F),          MAP_NUM(PALLET_TOWN_PLAYERS_HOUSE_1F),          0x03, 0x00
+	.2byte MAP_GROUP(PALLET_TOWN_PROFESSOR_OAKS_LAB),        MAP_NUM(PALLET_TOWN_PROFESSOR_OAKS_LAB),        0x03, 0x00
+	.2byte MAP_GROUP(VIRIDIAN_CITY_GYM),                     MAP_NUM(VIRIDIAN_CITY_GYM),                     0x03, 0x01
+	.2byte MAP_GROUP(ROUTE22_NORTH_ENTRANCE),                MAP_NUM(ROUTE22_NORTH_ENTRANCE),                0x03, 0x29
+	.2byte MAP_GROUP(ROUTE22_NORTH_ENTRANCE),                MAP_NUM(ROUTE22_NORTH_ENTRANCE),                0x03, 0x2a
+	.2byte MAP_GROUP(VIRIDIAN_FOREST),                       MAP_NUM(VIRIDIAN_FOREST),                       0x0f, 0x00
+	.2byte MAP_GROUP(VIRIDIAN_FOREST),                       MAP_NUM(VIRIDIAN_FOREST),                       0x0f, 0x03
+	.2byte MAP_GROUP(PEWTER_CITY_MUSEUM_1F),                 MAP_NUM(PEWTER_CITY_MUSEUM_1F),                 0x03, 0x02
+	.2byte MAP_GROUP(PEWTER_CITY_GYM),                       MAP_NUM(PEWTER_CITY_GYM),                       0x03, 0x02
+	.2byte MAP_GROUP(MT_MOON_1F),                            MAP_NUM(MT_MOON_1F),                            0x03, 0x16
+	.2byte MAP_GROUP(MT_MOON_B1F),                           MAP_NUM(MT_MOON_B1F),                           0x03, 0x16
+	.2byte MAP_GROUP(CERULEAN_CITY_GYM),                     MAP_NUM(CERULEAN_CITY_GYM),                     0x03, 0x03
+	.2byte MAP_GROUP(CERULEAN_CITY_BIKE_SHOP),               MAP_NUM(CERULEAN_CITY_BIKE_SHOP),               0x03, 0x03
+	.2byte MAP_GROUP(ROUTE25_SEA_COTTAGE),                   MAP_NUM(ROUTE25_SEA_COTTAGE),                   0x03, 0x2c
+	.2byte MAP_GROUP(ROUTE5_POKEMON_DAY_CARE),               MAP_NUM(ROUTE5_POKEMON_DAY_CARE),               0x03, 0x17
+	.2byte MAP_GROUP(UNDERGROUND_PATH_NORTH_ENTRANCE),       MAP_NUM(UNDERGROUND_PATH_NORTH_ENTRANCE),       0x03, 0x17
+	.2byte MAP_GROUP(UNDERGROUND_PATH_SOUTH_ENTRANCE),       MAP_NUM(UNDERGROUND_PATH_SOUTH_ENTRANCE),       0x03, 0x18
+	.2byte MAP_GROUP(VERMILION_CITY_POKEMON_FAN_CLUB),       MAP_NUM(VERMILION_CITY_POKEMON_FAN_CLUB),       0x03, 0x05
+	.2byte MAP_GROUP(VERMILION_CITY_GYM),                    MAP_NUM(VERMILION_CITY_GYM),                    0x03, 0x05
+	.2byte MAP_GROUP(SSANNE_1F_CORRIDOR),                    MAP_NUM(SSANNE_1F_CORRIDOR),                    0x03, 0x05
+	.2byte MAP_GROUP(DIGLETTS_CAVE_NORTH_ENTRANCE),          MAP_NUM(DIGLETTS_CAVE_NORTH_ENTRANCE),          0x03, 0x14
+	.2byte MAP_GROUP(DIGLETTS_CAVE_SOUTH_ENTRANCE),          MAP_NUM(DIGLETTS_CAVE_SOUTH_ENTRANCE),          0x03, 0x1d
+	.2byte MAP_GROUP(ROCK_TUNNEL_1F),                        MAP_NUM(ROCK_TUNNEL_1F),                        0x03, 0x1c
+	.2byte MAP_GROUP(ROCK_TUNNEL_1F),                        MAP_NUM(ROCK_TUNNEL_1F),                        0x03, 0x1c
+	.2byte MAP_GROUP(POWER_PLANT),                           MAP_NUM(POWER_PLANT),                           0x03, 0x1c
+	.2byte MAP_GROUP(POKEMON_TOWER_1F),                      MAP_NUM(POKEMON_TOWER_1F),                      0x03, 0x04
+	.2byte MAP_GROUP(LAVENDER_TOWN_VOLUNTEER_POKEMON_HOUSE), MAP_NUM(LAVENDER_TOWN_VOLUNTEER_POKEMON_HOUSE), 0x03, 0x04
+	.2byte MAP_GROUP(LAVENDER_TOWN_HOUSE2),                  MAP_NUM(LAVENDER_TOWN_HOUSE2),                  0x03, 0x04
+	.2byte MAP_GROUP(UNDERGROUND_PATH_EAST_ENTRANCE),        MAP_NUM(UNDERGROUND_PATH_EAST_ENTRANCE),        0x03, 0x1a
+	.2byte MAP_GROUP(UNDERGROUND_PATH_WEST_ENTRANCE),        MAP_NUM(UNDERGROUND_PATH_WEST_ENTRANCE),        0x03, 0x19
+	.2byte MAP_GROUP(CELADON_CITY_DEPARTMENT_STORE_1F),      MAP_NUM(CELADON_CITY_DEPARTMENT_STORE_1F),      0x03, 0x06
+	.2byte MAP_GROUP(CELADON_CITY_CONDOMINIUMS_1F),          MAP_NUM(CELADON_CITY_CONDOMINIUMS_1F),          0x03, 0x06
+	.2byte MAP_GROUP(CELADON_CITY_GAME_CORNER),              MAP_NUM(CELADON_CITY_GAME_CORNER),              0x03, 0x06
+	.2byte MAP_GROUP(CELADON_CITY_GYM),                      MAP_NUM(CELADON_CITY_GYM),                      0x03, 0x06
+	.2byte MAP_GROUP(CELADON_CITY_RESTAURANT),               MAP_NUM(CELADON_CITY_RESTAURANT),               0x03, 0x06
+	.2byte MAP_GROUP(ROCKET_HIDEOUT_B1F),                    MAP_NUM(ROCKET_HIDEOUT_B1F),                    0x0a, 0x0e
+	.2byte MAP_GROUP(SAFARI_ZONE_CENTER),                    MAP_NUM(SAFARI_ZONE_CENTER),                    0x0b, 0x00
+	.2byte MAP_GROUP(FUCHSIA_CITY_GYM),                      MAP_NUM(FUCHSIA_CITY_GYM),                      0x03, 0x07
+	.2byte MAP_GROUP(FUCHSIA_CITY_BUILDING1),                MAP_NUM(FUCHSIA_CITY_BUILDING1),                0x03, 0x07
+	.2byte MAP_GROUP(SAFFRON_CITY_DOJO),                     MAP_NUM(SAFFRON_CITY_DOJO),                     0x03, 0x0a
+	.2byte MAP_GROUP(SAFFRON_CITY_GYM),                      MAP_NUM(SAFFRON_CITY_GYM),                      0x03, 0x0a
+	.2byte MAP_GROUP(SILPH_CO_1F),                           MAP_NUM(SILPH_CO_1F),                           0x03, 0x0a
+	.2byte MAP_GROUP(SEAFOAM_ISLANDS_1F),                    MAP_NUM(SEAFOAM_ISLANDS_1F),                    0x03, 0x26
+	.2byte MAP_GROUP(SEAFOAM_ISLANDS_1F),                    MAP_NUM(SEAFOAM_ISLANDS_1F),                    0x03, 0x26
+	.2byte MAP_GROUP(POKEMON_MANSION_1F),                    MAP_NUM(POKEMON_MANSION_1F),                    0x03, 0x08
+	.2byte MAP_GROUP(CINNABAR_ISLAND_GYM),                   MAP_NUM(CINNABAR_ISLAND_GYM),                   0x03, 0x08
+	.2byte MAP_GROUP(CINNABAR_ISLAND_POKEMON_LAB_ENTRANCE),  MAP_NUM(CINNABAR_ISLAND_POKEMON_LAB_ENTRANCE),  0x03, 0x08
+	.2byte MAP_GROUP(VICTORY_ROAD_1F),                       MAP_NUM(VICTORY_ROAD_1F),                       0x03, 0x2a
+	.2byte MAP_GROUP(VICTORY_ROAD_2F),                       MAP_NUM(VICTORY_ROAD_2F),                       0x03, 0x2a
+	.2byte MAP_GROUP(INDIGO_PLATEAU_POKEMON_CENTER_1F),      MAP_NUM(INDIGO_PLATEAU_POKEMON_CENTER_1F),      0x03, 0x09
+	.2byte MAP_GROUP(CERULEAN_CAVE_1F),                      MAP_NUM(CERULEAN_CAVE_1F),                      0x03, 0x03
 
 	.align 2
 gUnknown_83F5EF0:: @ 83F5EF0

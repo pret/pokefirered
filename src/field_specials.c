@@ -20,6 +20,7 @@
 #include "field_map_obj.h"
 #include "menu_indicators.h"
 #include "random.h"
+#include "mail_data.h"
 #include "help_system.h"
 #include "sound.h"
 #include "text.h"
@@ -30,6 +31,7 @@
 #include "window.h"
 #include "text_window.h"
 #include "menu.h"
+#include "naming_screen.h"
 #include "dynamic_placeholder_text_util.h"
 #include "new_menu_helpers.h"
 #include "constants/songs.h"
@@ -68,6 +70,8 @@ static void Task_RedrawScrollArrowsAndWaitInput(u8 taskId);
 static void Task_CreateMenuRemoveScrollIndicatorArrowPair(u8 taskId);
 static void Task_ListMenuRemoveScrollIndicatorArrowPair(u8 taskId);
 static u16 GetStarterPokemon(u16 starterIdx);
+static void ChangeBoxPokemonNickname_CB(void);
+static void ChangePokemonNickname_CB(void);
 
 extern const struct ScrollArrowsTemplate gUnknown_83F5D1C;
 extern const u16 sStarterMon[3];
@@ -81,6 +85,13 @@ extern const u16 sElevatorWindowMetatilesGoingDown[3][3];
 extern const u8 sElevatorAnimationDuration[9];
 extern const u8 sElevatorWindowAnimDuration[9];
 extern u8 *const gUnknown_83F5AF8[3];
+extern const u8 gUnknown_83F5D32[12][3];
+extern const struct {
+    u16 grp;
+    u16 num;
+    u16 unk4;
+    u16 unk6;
+} gUnknown_83F5D58[51];
 
 void Special_ShowDiploma(void)
 {
@@ -1152,9 +1163,9 @@ static void Task_ListMenuHandleInput(u8 taskId)
 {
     s32 input;
     struct Task * task;
-    asm("":::"r6", "r4"); // fakematch register allocation
 
     task = &gTasks[taskId];
+    task++;task--;
     input = ListMenu_ProcessInput(task->data[14]);
     switch (input)
     {
@@ -1349,4 +1360,186 @@ bool8 sub_80CBFA0(void)
         return FALSE;
     else
         return TRUE;
+}
+
+void ChangeBoxPokemonNickname(void)
+{
+    struct BoxPokemon * pokemon = GetBoxedMonPtr(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos);
+    u16 species;
+    u8 gender;
+    u32 personality;
+
+    GetBoxMonData(pokemon, MON_DATA_NICKNAME, gStringVar3);
+    GetBoxMonData(pokemon, MON_DATA_NICKNAME, gStringVar2);
+    species = GetBoxMonData(pokemon, MON_DATA_SPECIES, NULL);
+    gender = GetBoxMonGender(pokemon);
+    personality = GetBoxMonData(pokemon, MON_DATA_PERSONALITY, NULL);
+    DoNamingScreen(3, gStringVar2, species, gender, personality, ChangeBoxPokemonNickname_CB);
+}
+
+static void ChangeBoxPokemonNickname_CB(void)
+{
+    SetBoxMonNickFromAnyBox(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos, gStringVar2);
+    CB2_ReturnToFieldContinueScriptPlayMapMusic();
+}
+
+void ChangePokemonNickname(void)
+{
+    u16 species;
+    u8 gender;
+    u32 personality;
+
+    GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar3);
+    GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar2);
+    species = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES, NULL);
+    gender = GetMonGender(&gPlayerParty[gSpecialVar_0x8004]);
+    personality = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_PERSONALITY, NULL);
+    DoNamingScreen(3, gStringVar2, species, gender, personality, ChangePokemonNickname_CB);
+}
+
+static void ChangePokemonNickname_CB(void)
+{
+    SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar2);
+    CB2_ReturnToFieldContinueScriptPlayMapMusic();
+}
+
+void TV_CopyNicknameToStringVar1AndEnsureTerminated(void)
+{
+    GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar1);
+    StringGetEnd10(gStringVar1);
+}
+
+void TV_CheckMonOTIDEqualsPlayerID(void)
+{
+    if (GetPlayerTrainerId() == GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_OT_ID, NULL))
+        gSpecialVar_Result = FALSE;
+    else
+        gSpecialVar_Result = TRUE;
+}
+
+u32 GetPlayerTrainerId(void)
+{
+    return (gSaveBlock2Ptr->playerTrainerId[3] << 24) | (gSaveBlock2Ptr->playerTrainerId[2] << 16) | (gSaveBlock2Ptr->playerTrainerId[1] << 8) | gSaveBlock2Ptr->playerTrainerId[0];
+}
+
+u8 GetUnlockedSeviiAreas(void)
+{
+    u8 result = 0;
+    if (FlagGet(FLAG_WORLD_MAP_ONE_ISLAND) == TRUE)
+        result |= 1 << 0;
+    if (FlagGet(FLAG_WORLD_MAP_TWO_ISLAND) == TRUE)
+        result |= 1 << 1;
+    if (FlagGet(FLAG_WORLD_MAP_THREE_ISLAND) == TRUE)
+        result |= 1 << 2;
+    if (FlagGet(FLAG_WORLD_MAP_FOUR_ISLAND) == TRUE)
+        result |= 1 << 3;
+    if (FlagGet(FLAG_WORLD_MAP_FIVE_ISLAND) == TRUE)
+        result |= 1 << 4;
+    if (FlagGet(FLAG_WORLD_MAP_SIX_ISLAND) == TRUE)
+        result |= 1 << 5;
+    if (FlagGet(FLAG_WORLD_MAP_SEVEN_ISLAND) == TRUE)
+        result |= 1 << 6;
+    return result;
+}
+
+void Special_UpdateTrainerCardPhotoIcons(void)
+{
+    u16 species[PARTY_SIZE];
+    u32 personality[PARTY_SIZE];
+    u8 i;
+    u8 partyCount;
+    for (i = 0; i < PARTY_SIZE; i++)
+        species[i] = SPECIES_NONE;
+    partyCount = CalculatePlayerPartyCount();
+    for (i = 0; i < partyCount; i++)
+    {
+        species[i] = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL);
+        personality[i] = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY, NULL);
+    }
+    VarSet(VAR_TRAINER_CARD_MON_ICON_1, SpeciesToMailSpecies(species[0], personality[0]));
+    VarSet(VAR_TRAINER_CARD_MON_ICON_2, SpeciesToMailSpecies(species[1], personality[1]));
+    VarSet(VAR_TRAINER_CARD_MON_ICON_3, SpeciesToMailSpecies(species[2], personality[2]));
+    VarSet(VAR_TRAINER_CARD_MON_ICON_4, SpeciesToMailSpecies(species[3], personality[3]));
+    VarSet(VAR_TRAINER_CARD_MON_ICON_5, SpeciesToMailSpecies(species[4], personality[4]));
+    VarSet(VAR_TRAINER_CARD_MON_ICON_6, SpeciesToMailSpecies(species[5], personality[5]));
+    VarSet(VAR_TRAINER_CARD_MON_ICON_TINT_IDX, gSpecialVar_0x8004);
+}
+
+u16 Special_StickerLadyGetBragFlags(void)
+{
+    u16 result = 0;
+    u32 numEggs;
+    gSpecialVar_0x8004 = GetGameStat(GAME_STAT_ENTERED_HOF);
+    numEggs = GetGameStat(GAME_STAT_HATCHED_EGGS);
+    gSpecialVar_0x8006 = GetGameStat(GAME_STAT_LINK_BATTLE_WINS);
+    if (numEggs > 0xFFFF)
+        gSpecialVar_0x8005 = 0xFFFF;
+    else
+        gSpecialVar_0x8005 = numEggs;
+    if (gSpecialVar_0x8004 != 0)
+        result |= 1 << 0;
+    if (gSpecialVar_0x8005 != 0)
+        result |= 1 << 1;
+    if (gSpecialVar_0x8006 != 0)
+        result |= 1 << 2;
+    return result;
+}
+
+u16 GetHiddenItemAttr(u32 hiddenItem, u8 attr)
+{
+    if (attr == 0)
+        return hiddenItem & 0xFFFF;
+    else if (attr == 1)
+        return ((hiddenItem >> 16) & 0xFF) + 1000;
+    else if (attr == 2)
+        return (hiddenItem >> 24) & 0x7F;
+    else if (attr == 3)
+        return (hiddenItem >> 31) & 0x01;
+    else
+        return 1;
+}
+
+bool8 Special_PlayerPartyContainsSpecies(void)
+{
+    u8 partyCount = CalculatePlayerPartyCount();
+    u8 i;
+    for (i = 0; i < partyCount; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) == gSpecialVar_0x8004)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+u8 sub_80CC4D4(void)
+{
+    u8 i;
+    for (i = 0; i < NELEMS(gUnknown_83F5D32); i++)
+    {
+        if (gSaveBlock1Ptr->location.mapGroup == gUnknown_83F5D32[i][0] && gSaveBlock1Ptr->location.mapNum == gUnknown_83F5D32[i][1])
+            return gUnknown_83F5D32[i][2];
+    }
+    return 1;
+}
+
+void sub_80CC524(void)
+{
+    sub_8113550(11, NULL);
+}
+
+void sub_80CC534(void)
+{
+    u8 i;
+    for (i = 0; i < NELEMS(gUnknown_83F5D58); i++)
+    {
+        if (gSaveBlock1Ptr->location.mapGroup == gUnknown_83F5D58[i].grp && gSaveBlock1Ptr->location.mapNum == gUnknown_83F5D58[i].num)
+        {
+            if (VarGet(VAR_0x404D) != 35 || i != 32)
+            {
+                VarSet(VAR_0x404D, i);
+                FlagSet(FLAG_0x808);
+            }
+            break;
+        }
+    }
 }

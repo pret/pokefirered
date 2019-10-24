@@ -7652,7 +7652,7 @@ _081384C4: .4byte gEnemyParty
 _081384C8: .4byte gLinkPlayers
 _081384CC: .4byte 0x0000304c
 _081384D0:
-	bl sub_80CC1E4
+	bl GetPlayerTrainerId
 	adds r4, r0, 0
 	ldr r0, _0813851C @ =0x0000ffff
 	ands r4, r0

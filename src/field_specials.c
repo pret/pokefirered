@@ -46,16 +46,16 @@
 #include "constants/region_map.h"
 #include "constants/moves.h"
 
-EWRAM_DATA u8 sElevatorCurrentFloorWindowId = 0;
-EWRAM_DATA u16 sElevatorScroll = 0;
-EWRAM_DATA u16 sElevatorCursorPos = 0;
-EWRAM_DATA struct ListMenuItem * gUnknown_2039A14 = NULL;
-EWRAM_DATA u16 gUnknown_2039A18 = 0;
-EWRAM_DATA u8 sUnknownBoxId = 0;
-EWRAM_DATA u8 gUnknown_2039A1B = 0;
+static EWRAM_DATA u8 sElevatorCurrentFloorWindowId = 0;
+static EWRAM_DATA u16 sElevatorScroll = 0;
+static EWRAM_DATA u16 sElevatorCursorPos = 0;
+static EWRAM_DATA struct ListMenuItem * sListMenuItems = NULL;
+static EWRAM_DATA u16 sListMenuLastScrollPosition = 0;
+static EWRAM_DATA u8 sUnknownBoxId = 0;
+static EWRAM_DATA u8 sBrailleTextCursorSpriteID = 0;
 
-struct ListMenuTemplate gUnknown_3005360;
-u16 gUnknown_3005378;
+struct ListMenuTemplate sFieldSpecialsListMenuTemplate;
+u16 sFieldSpecialsListMenuScrollBuffer;
 
 static void Task_AnimatePcTurnOn(u8 taskId);
 static void PcTurnOnUpdateMetatileId(bool16 flag);
@@ -1295,17 +1295,17 @@ static void Task_CreateScriptListMenu(u8 taskId)
     u8 windowId;
     ScriptContext2_Enable();
     if (gSpecialVar_0x8004 == 1)
-        gUnknown_2039A18 = sElevatorScroll;
+        sListMenuLastScrollPosition = sElevatorScroll;
     else
-        gUnknown_2039A18 = 0;
-    gUnknown_2039A14 = AllocZeroed(task->data[1] * sizeof(struct ListMenuItem));
+        sListMenuLastScrollPosition = 0;
+    sListMenuItems = AllocZeroed(task->data[1] * sizeof(struct ListMenuItem));
     CreateScriptListMenu();
     mwidth = 0;
     for (i = 0; i < task->data[1]; i++)
     {
-        gUnknown_2039A14[i].label = sListMenuLabels[gSpecialVar_0x8004][i];
-        gUnknown_2039A14[i].index = i;
-        width = GetStringWidth(2, gUnknown_2039A14[i].label, 0);
+        sListMenuItems[i].label = sListMenuLabels[gSpecialVar_0x8004][i];
+        sListMenuItems[i].index = i;
+        width = GetStringWidth(2, sListMenuItems[i].label, 0);
         if (width > mwidth)
             mwidth = width;
     }
@@ -1315,11 +1315,11 @@ static void Task_CreateScriptListMenu(u8 taskId)
     template = SetWindowTemplateFields(0, task->data[2], task->data[3], task->data[4], task->data[5], 15, 0x038);
     task->data[13] = windowId = AddWindow(&template);
     SetStdWindowBorderStyle(task->data[13], 0);
-    gUnknown_3005360.totalItems = task->data[1];
-    gUnknown_3005360.maxShowed = task->data[0];
-    gUnknown_3005360.windowId = task->data[13];
+    sFieldSpecialsListMenuTemplate.totalItems = task->data[1];
+    sFieldSpecialsListMenuTemplate.maxShowed = task->data[0];
+    sFieldSpecialsListMenuTemplate.windowId = task->data[13];
     Task_CreateMenuRemoveScrollIndicatorArrowPair(taskId);
-    task->data[14] = ListMenuInit(&gUnknown_3005360, task->data[7], task->data[8]);
+    task->data[14] = ListMenuInit(&sFieldSpecialsListMenuTemplate, task->data[7], task->data[8]);
     PutWindowTilemap(task->data[13]);
     CopyWindowToVram(task->data[13], 3);
     gTasks[taskId].func = Task_ListMenuHandleInput;
@@ -1327,24 +1327,24 @@ static void Task_CreateScriptListMenu(u8 taskId)
 
 static void CreateScriptListMenu(void)
 {
-    gUnknown_3005360.items = gUnknown_2039A14;
-    gUnknown_3005360.moveCursorFunc = ScriptListMenuMoveCursorFunction;
-    gUnknown_3005360.itemPrintFunc = NULL;
-    gUnknown_3005360.totalItems = 1;
-    gUnknown_3005360.maxShowed = 1;
-    gUnknown_3005360.windowId = 0;
-    gUnknown_3005360.header_X = 0;
-    gUnknown_3005360.item_X = 8;
-    gUnknown_3005360.cursor_X = 0;
-    gUnknown_3005360.upText_Y = 0;
-    gUnknown_3005360.cursorPal = 2;
-    gUnknown_3005360.fillValue = 1;
-    gUnknown_3005360.cursorShadowPal = 3;
-    gUnknown_3005360.lettersSpacing = 1;
-    gUnknown_3005360.itemVerticalPadding = 0;
-    gUnknown_3005360.scrollMultiple = 0;
-    gUnknown_3005360.fontId = 2;
-    gUnknown_3005360.cursorKind = 0;
+    sFieldSpecialsListMenuTemplate.items = sListMenuItems;
+    sFieldSpecialsListMenuTemplate.moveCursorFunc = ScriptListMenuMoveCursorFunction;
+    sFieldSpecialsListMenuTemplate.itemPrintFunc = NULL;
+    sFieldSpecialsListMenuTemplate.totalItems = 1;
+    sFieldSpecialsListMenuTemplate.maxShowed = 1;
+    sFieldSpecialsListMenuTemplate.windowId = 0;
+    sFieldSpecialsListMenuTemplate.header_X = 0;
+    sFieldSpecialsListMenuTemplate.item_X = 8;
+    sFieldSpecialsListMenuTemplate.cursor_X = 0;
+    sFieldSpecialsListMenuTemplate.upText_Y = 0;
+    sFieldSpecialsListMenuTemplate.cursorPal = 2;
+    sFieldSpecialsListMenuTemplate.fillValue = 1;
+    sFieldSpecialsListMenuTemplate.cursorShadowPal = 3;
+    sFieldSpecialsListMenuTemplate.lettersSpacing = 1;
+    sFieldSpecialsListMenuTemplate.itemVerticalPadding = 0;
+    sFieldSpecialsListMenuTemplate.scrollMultiple = 0;
+    sFieldSpecialsListMenuTemplate.fontId = 2;
+    sFieldSpecialsListMenuTemplate.cursorKind = 0;
 }
 
 static void ScriptListMenuMoveCursorFunction(s32 nothing, bool8 is, struct ListMenu * used)
@@ -1356,8 +1356,8 @@ static void ScriptListMenuMoveCursorFunction(s32 nothing, bool8 is, struct ListM
     if (taskId != 0xFF)
     {
         task = &gTasks[taskId];
-        ListMenuGetScrollAndRow(task->data[14], &gUnknown_3005378, NULL);
-        gUnknown_2039A18 = gUnknown_3005378;
+        ListMenuGetScrollAndRow(task->data[14], &sFieldSpecialsListMenuScrollBuffer, NULL);
+        sListMenuLastScrollPosition = sFieldSpecialsListMenuScrollBuffer;
     }
 }
 
@@ -1400,7 +1400,7 @@ static void Task_DestroyListMenu(u8 taskId)
     struct Task * task = &gTasks[taskId];
     Task_ListMenuRemoveScrollIndicatorArrowPair(taskId);
     DestroyListMenuTask(task->data[14], NULL, NULL);
-    Free(gUnknown_2039A14);
+    Free(sListMenuItems);
     ClearStdWindowAndFrameToTransparent(task->data[13], TRUE);
     FillWindowPixelBuffer(task->data[13], PIXEL_FILL(0));
     ClearWindowTilemap(task->data[13]);
@@ -1456,7 +1456,7 @@ static void Task_CreateMenuRemoveScrollIndicatorArrowPair(u8 taskId)
         template.secondY = 8 * task->data[5] + 10;
         template.fullyUpThreshold = 0;
         template.fullyDownThreshold = task->data[1] - task->data[0];
-        task->data[12] = AddScrollIndicatorArrowPair(&template, &gUnknown_2039A18);
+        task->data[12] = AddScrollIndicatorArrowPair(&template, &sListMenuLastScrollPosition);
     }
 }
 
@@ -2434,9 +2434,9 @@ void Special_BrailleCursorToggle(void)
     {
         x = gSpecialVar_0x8004 + 27;
         if (gSpecialVar_0x8006 == 0)
-            gUnknown_2039A1B = CreateTextCursorSpriteForOakSpeech(0, x, gSpecialVar_0x8005, 0, 0);
+            sBrailleTextCursorSpriteID = CreateTextCursorSpriteForOakSpeech(0, x, gSpecialVar_0x8005, 0, 0);
         else
-            sub_8006398(gUnknown_2039A1B);
+            sub_8006398(sBrailleTextCursorSpriteID);
     }
 }
 

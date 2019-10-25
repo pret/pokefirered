@@ -1033,19 +1033,25 @@ gUnknown_83E0738:: @ 83E0738
 gUnknown_83E0748:: @ 83E0748
 	.incbin "baserom.gba", 0x3E0748, 0x20
 
-gUnknown_83E0768:: @ 83E0768
-	.incbin "baserom.gba", 0x3E0768, 0x818
+sMuseumFossilSprTemplate:: @ 83E0768
+	.incbin "baserom.gba", 0x3E0768, 0x18
 
-gUnknown_83E0F80:: @ 83E0F80
-	.incbin "baserom.gba", 0x3E0F80, 0x820
+gUnknown_83E7080::
+	.incbin "baserom.gba", 0x3E0780, 0x800
 
-gUnknown_83E17A0:: @ 83E17A0
+sMuseumAerodactylSprPalette:: @ 83E0F80
+	.incbin "baserom.gba", 0x3E0F80, 0x20
+
+gUnknown_83E0FA0::
+	.incbin "baserom.gba", 0x3E0FA0, 0x800
+
+sMuseumKabutopsSprPalette:: @ 83E17A0
 	.incbin "baserom.gba", 0x3E17A0, 0x20
 
-gUnknown_83E17C0:: @ 83E17C0
+sMuseumKabutopsSprSheets:: @ 83E17C0
 	.incbin "baserom.gba", 0x3E17C0, 0x10
 
-gUnknown_83E17D0:: @ 83E17D0
+sMuseumAerodactylSprSheets:: @ 83E17D0
 	.incbin "baserom.gba", 0x3E17D0, 0x10
 
 gUnknown_83E17E0:: @ 83E17E0

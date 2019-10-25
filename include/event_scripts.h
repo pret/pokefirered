@@ -1168,4 +1168,7 @@ extern const u8 gText_SavingDontTurnOffThePower[];
 extern const u8 gText_PlayerSavedTheGame[];
 extern const u8 gText_DifferentGameFile[];
 
+// script_menu
+extern const u8 EventScript_1A7AE0[];
+
 #endif //GUARD_EVENT_SCRIPTS_H

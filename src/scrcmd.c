@@ -1835,7 +1835,7 @@ bool8 ScrCmd_showmoneybox(struct ScriptContext *ctx)
     u8 y = ScriptReadByte(ctx);
     u8 ignore = ScriptReadByte(ctx);
 
-    if (!ignore && sub_81119D4(sub_809D6D4) != TRUE)
+    if (!ignore && QuestLog_ScheduleRoutineIfNotInPlaybackMode(sub_809D6D4) != TRUE)
         DrawMoneyBox(GetMoney(&gSaveBlock1Ptr->money), x, y);
     return FALSE;
 }
@@ -1865,7 +1865,7 @@ bool8 ScrCmd_showcoinsbox(struct ScriptContext *ctx)
     u8 x = ScriptReadByte(ctx);
     u8 y = ScriptReadByte(ctx);
 
-    if (sub_81119D4(sub_809D6D4) != TRUE)
+    if (QuestLog_ScheduleRoutineIfNotInPlaybackMode(sub_809D6D4) != TRUE)
         ShowCoinsWindow(GetCoins(), x, y);
     return FALSE;
 }

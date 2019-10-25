@@ -403,8 +403,8 @@ gSpecials:: @ 815FD60
 	def_special sub_8112364
 	def_special Special_GetMENewsJisanItemAndState
 	def_special get_unknown_box_id
-	def_special sub_809D504
-	def_special sub_809D620
+	def_special Special_OpenMuseumFossilPic
+	def_special Special_CloseMuseumFossilPic
 	def_special sub_812781C
 	def_special sub_8127888
 	def_special sub_80803FC

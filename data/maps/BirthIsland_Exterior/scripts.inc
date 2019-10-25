@@ -92,7 +92,7 @@ EventScript_1652C0:: @ 81652C0
 	setvar VAR_0x8006, 0
 	special CreateObedientEnemyMon
 	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	special BattleSetup_StartLegendaryBattle
+	special Special_StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	specialvar VAR_RESULT, Special_GetBattleOutcome

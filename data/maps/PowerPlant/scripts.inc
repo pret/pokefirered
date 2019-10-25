@@ -54,7 +54,7 @@ PowerPlant_EventScript_1637B8:: @ 81637B8
 	playbgm MUS_EXEYE, 0
 	waitbuttonpress
 	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	special BattleSetup_StartLegendaryBattle
+	special Special_StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	specialvar VAR_RESULT, Special_GetBattleOutcome

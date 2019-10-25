@@ -288,7 +288,7 @@ static void DoTrainerBattle(void)
     IncrementGameStat(GAME_STAT_TRAINER_BATTLES);
 }
 
-void BattleSetup_StartOldManTutorialBattle(void)
+void ScrSpecial_StartOldManTutorialBattle(void)
 {
     CreateMaleMon(&gEnemyParty[0], SPECIES_WEEDLE, 5);
     ScriptContext2_Enable();
@@ -307,7 +307,7 @@ void BattleSetup_StartScriptedWildBattle(void)
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
-void BattleSetup_StartMarowakBattle(void)
+void ScrSpecial_StartMarowakBattle(void)
 {
     ScriptContext2_Enable();
     gMain.savedCallback = CB2_EndMarowakBattle;
@@ -326,7 +326,7 @@ void BattleSetup_StartMarowakBattle(void)
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
-void sub_807F998(void)
+void ScrSpecial_StartSouthernIslandBattle(void)
 {
     ScriptContext2_Enable();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
@@ -336,7 +336,7 @@ void sub_807F998(void)
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
-void BattleSetup_StartLegendaryBattle(void)
+void Special_StartLegendaryBattle(void)
 {
     u16 species;
     
@@ -367,7 +367,7 @@ void BattleSetup_StartLegendaryBattle(void)
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
-void BattleSetup_StartIceCaveBattle(void)
+void Special_StartGroudonKyogreBattle(void)
 {
     ScriptContext2_Enable();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
@@ -380,7 +380,7 @@ void BattleSetup_StartIceCaveBattle(void)
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
-void sub_807FABC(void)
+void Special_StartRegiBattle(void)
 {
     ScriptContext2_Enable();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
@@ -840,7 +840,7 @@ void SetUpTrainerMovement(void)
     SetTrainerMovementType(eventObject, GetTrainerFacingDirectionMovementType(eventObject->facingDirection));
 }
 
-u8 GetTrainerBattleMode(void)
+u8 ScrSpecial_GetTrainerBattleMode(void)
 {
     return sTrainerBattleMode;
 }
@@ -884,7 +884,7 @@ void ClearTrainerFlag(u16 trainerId)
 void BattleSetup_StartTrainerBattle(void)
 {
     gBattleTypeFlags = BATTLE_TYPE_TRAINER;
-    if (GetTrainerBattleMode() == TRAINER_BATTLE_TUTORIAL
+    if (ScrSpecial_GetTrainerBattleMode() == TRAINER_BATTLE_TUTORIAL
      && sub_80803D8() & 3)
         gBattleTypeFlags |= BATTLE_TYPE_FIRST_BATTLE;
     gMain.savedCallback = CB2_EndTrainerBattle;
@@ -959,7 +959,7 @@ static void CB2_EndRematchBattle(void)
     }
 }
 
-void BattleSetup_StartRematchBattle(void)
+void ScrSpecial_StartTrainerEyeRematch(void)
 {
     gBattleTypeFlags = BATTLE_TYPE_TRAINER;
     gMain.savedCallback = CB2_EndRematchBattle;
@@ -967,7 +967,7 @@ void BattleSetup_StartRematchBattle(void)
     ScriptContext1_Stop();
 }
 
-void ShowTrainerIntroSpeech(void)
+void ScrSpecial_ShowTrainerIntroSpeech(void)
 {
     ShowFieldMessage(GetIntroSpeechOfApproachingTrainer());
 }
@@ -988,7 +988,7 @@ const u8 *BattleSetup_GetTrainerPostBattleScript(void)
         return EventScript_1C555B;
 }
 
-void ShowTrainerCantBattleSpeech(void)
+void ScrSpecial_ShowTrainerNonBattlingSpeech(void)
 {
     ShowFieldMessage(GetTrainerCantBattleSpeech());
 }

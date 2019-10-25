@@ -60,15 +60,15 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special IsEnigmaBerryValid
-	def_special GetTrainerBattleMode
-	def_special ShowTrainerIntroSpeech
-	def_special ShowTrainerCantBattleSpeech
+	def_special ScrSpecial_GetTrainerBattleMode
+	def_special ScrSpecial_ShowTrainerIntroSpeech
+	def_special ScrSpecial_ShowTrainerNonBattlingSpeech
 	def_special GetTrainerFlag
 	def_special ScrSpecial_EndTrainerApproach
 	def_special SetUpTrainerEncounterMusic
 	def_special sub_810CD4C
 	def_special sub_810CEB4
-	def_special BattleSetup_StartRematchBattle
+	def_special ScrSpecial_StartTrainerEyeRematch
 	def_special sub_808C6A8
 	def_special CheckForAlivePartyMons
 	def_special nullsub_75
@@ -166,7 +166,7 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
-	def_special BattleSetup_StartOldManTutorialBattle
+	def_special ScrSpecial_StartOldManTutorialBattle
 	def_special ChangePokemonNickname
 	def_special Special_ChooseMonFromParty
 	def_special nullsub_75
@@ -320,9 +320,9 @@ gSpecials:: @ 815FD60
 	def_special sub_80CAC08
 	def_special sub_806E99C
 	def_special sub_80CAC28
-	def_special BattleSetup_StartIceCaveBattle
-	def_special BattleSetup_StartLegendaryBattle
-	def_special sub_807FABC
+	def_special Special_StartGroudonKyogreBattle
+	def_special Special_StartLegendaryBattle
+	def_special Special_StartRegiBattle
 	def_special SetUpTrainerMovement
 	def_special nullsub_75
 	def_special nullsub_75
@@ -332,7 +332,7 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special sub_80E5E70
-	def_special sub_807F998
+	def_special ScrSpecial_StartSouthernIslandBattle
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
@@ -351,7 +351,7 @@ gSpecials:: @ 815FD60
 	def_special GetNameOfEnigmaBerryInPlayerParty
 	def_special nullsub_75
 	def_special sub_810B82C
-	def_special BattleSetup_StartMarowakBattle
+	def_special ScrSpecial_StartMarowakBattle
 	def_special sub_80CA630
 	def_special sub_80CB7C4
 	def_special sub_80CBC5C

@@ -28,12 +28,12 @@ struct MultichoiceListStruct
 static EWRAM_DATA u8 sDelay = 0;
 
 static void DrawVerticalMultichoiceMenu(u8 left, u8 top, u8 mcId, u8 ignoreBpress, u8 initPos);
-static u8 sub_809CBB4(u8 count);
-static void sub_809CC18(u8 ignoreBpress, u8 count, u8 windowId, u8 mcId);
+static u8 GetMCWindowHeight(u8 count);
+static void CreateMCMenuInputHandlerTask(u8 ignoreBpress, u8 count, u8 windowId, u8 mcId);
 static void Task_MultichoiceMenu_HandleInput(u8 taskId);
 static void MultiChoicePrintHelpDescription(u8 mcId);
-static void task_yes_no_maybe(u8 taskId);
-static void sub_809CFDC(u8 taskId);
+static void Task_YesNoMenu_HandleInput(u8 taskId);
+static void Hask_MultichoiceGridMenu_HandleInput(u8 taskId);
 static void CreatePCMenuWindow(void);
 static bool8 PicboxWait(void);
 static void DestroyScriptMenuWindow(u8 windowId);
@@ -722,7 +722,7 @@ static void DrawVerticalMultichoiceMenu(u8 left, u8 top, u8 mcId, u8 ignoreBpres
         width = (strWidth + 9) / 8 + 1;
         if (left + width > 28)
             left = 28 - width;
-        height = sub_809CBB4(count);
+        height = GetMCWindowHeight(count);
         windowId = CreateWindowFromRect(left, top, width, height);
         SetStdWindowBorderStyle(windowId, FALSE);
         if (mcId == 30 || mcId == 13 || mcId == 41)
@@ -730,12 +730,12 @@ static void DrawVerticalMultichoiceMenu(u8 left, u8 top, u8 mcId, u8 ignoreBpres
         else
             MultichoiceList_PrintItems(windowId, 2, 8, 2, 14, count, list, 0, 2);
         Menu_InitCursor(windowId, 2, 0, 2, 14, count, initPos);
-        sub_809CC18(ignoreBpress, count, windowId, mcId);
+        CreateMCMenuInputHandlerTask(ignoreBpress, count, windowId, mcId);
         ScheduleBgCopyTilemapToVram(0);
     }
 }
 
-static u8 sub_809CBB4(u8 count)
+static u8 GetMCWindowHeight(u8 count)
 {
     switch (count)
     {
@@ -762,7 +762,7 @@ static u8 sub_809CBB4(u8 count)
     }
 }
 
-static void sub_809CC18(u8 ignoreBpress, u8 count, u8 windowId, u8 mcId)
+static void CreateMCMenuInputHandlerTask(u8 ignoreBpress, u8 count, u8 windowId, u8 mcId)
 {
     u8 taskId;
     if (mcId == 39 || mcId == 47 || mcId == 50)
@@ -838,13 +838,13 @@ static void MultiChoicePrintHelpDescription(u8 mcId)
 
 bool8 ScriptMenu_YesNo(u8 unused, u8 stuff)
 {
-    if (FuncIsActiveTask(task_yes_no_maybe) == TRUE)
+    if (FuncIsActiveTask(Task_YesNoMenu_HandleInput) == TRUE)
         return FALSE;
     gSpecialVar_Result = SCR_MENU_UNSET;
     if (!QuestLog_SchedulePlaybackCB(QLPlaybackCB_DestroyScriptMenuMonPicSprites))
     {
         DisplayYesNoMenuDefaultYes();
-        CreateTask(task_yes_no_maybe, 80);
+        CreateTask(Task_YesNoMenu_HandleInput, 80);
     }
     return TRUE;
 }
@@ -857,7 +857,7 @@ bool8 sub_809CE38(void)
         return TRUE;
 }
 
-static void task_yes_no_maybe(u8 taskId)
+static void Task_YesNoMenu_HandleInput(u8 taskId)
 {
     s8 input;
     if (gTasks[taskId].data[2] < 5)
@@ -892,7 +892,7 @@ bool8 ScriptMenu_MultichoiceGrid(u8 left, u8 top, u8 multichoiceId, u8 a4, u8 co
     u8 width;
     u8 rowCount;
     u8 taskId;
-    if (FuncIsActiveTask(sub_809CFDC) == TRUE)
+    if (FuncIsActiveTask(Hask_MultichoiceGridMenu_HandleInput) == TRUE)
         return FALSE;
     gSpecialVar_Result = SCR_MENU_UNSET;
     if (QuestLog_SchedulePlaybackCB(QLPlaybackCB_DestroyScriptMenuMonPicSprites) != TRUE)
@@ -901,7 +901,7 @@ bool8 ScriptMenu_MultichoiceGrid(u8 left, u8 top, u8 multichoiceId, u8 a4, u8 co
         count = gScriptMultiChoiceMenus[multichoiceId].count;
         width = GetMenuWidthFromList(list, count) + 1;
         rowCount = count / columnCount;
-        taskId = CreateTask(sub_809CFDC, 80);
+        taskId = CreateTask(Hask_MultichoiceGridMenu_HandleInput, 80);
         gTasks[taskId].data[4] = a4;
         gTasks[taskId].data[6] = CreateWindowFromRect(left, top, width * columnCount, rowCount * 2);
         SetStdWindowBorderStyle(gTasks[taskId].data[6], FALSE);
@@ -912,7 +912,7 @@ bool8 ScriptMenu_MultichoiceGrid(u8 left, u8 top, u8 multichoiceId, u8 a4, u8 co
     return TRUE;
 }
 
-static void sub_809CFDC(u8 taskId)
+static void Hask_MultichoiceGridMenu_HandleInput(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     s8 input = Menu_ProcessInputGridLayout();
@@ -992,7 +992,7 @@ static void CreatePCMenuWindow(void)
     StringExpandPlaceholders(gStringVar4, gText_SPc);
     Menu_PrintFormatIntlPlayerName(windowId, gStringVar4, cursorWidth, 18);
     Menu_InitCursor(windowId, 2, 0, 2, 16, nitems, 0);
-    sub_809CC18(FALSE, nitems, windowId, 0xFF);
+    CreateMCMenuInputHandlerTask(FALSE, nitems, windowId, 0xFF);
     ScheduleBgCopyTilemapToVram(0);
 }
 
@@ -1235,7 +1235,7 @@ void Special_DrawSeagallopDestinationMenu(void)
         i++;
         AddTextPrinterParameterized(windowId, 2, gOtherText_Exit, cursorWidth, i * 16 + 2, 0xFF, NULL);
         Menu_InitCursor(windowId, 2, 0, 2, 16, nitems, 0);
-        sub_809CC18(FALSE, nitems, windowId, 0xFF);
+        CreateMCMenuInputHandlerTask(FALSE, nitems, windowId, 0xFF);
         ScheduleBgCopyTilemapToVram(0);
     }
 }

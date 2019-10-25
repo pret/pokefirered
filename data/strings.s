@@ -1427,19 +1427,19 @@ gText_MakeAChallenge:: @ 0x841796D
 gText_Info_2:: @ 0x841797F
 	.string "INFO$"
 
-gText_FreshWater200:: @ 0x8417984
+gText_FreshWater_200:: @ 0x8417984
 	.string "FRESH WATER{CLEAR_TO 0x57}{SMALL}¥200$"
 
-gText_SodaPop300:: @ 0x841799A
+gText_SodaPop_300:: @ 0x841799A
 	.string "SODA POP{CLEAR_TO 0x57}{SMALL}¥300$"
 
-gText_Lemonade350:: @ 0x84179AD
+gText_Lemonade_350:: @ 0x84179AD
 	.string "LEMONADE{CLEAR_TO 0x57}{SMALL}¥350$"
 
-gText_50Coins1000:: @ 0x84179C0
+gText_50Coins_1000:: @ 0x84179C0
 	.string "{SMALL} 50 COINS{CLEAR_TO 0x45}¥1,000$"
 
-gText_500Coins10000:: @ 0x84179D6
+gText_500Coins_10000:: @ 0x84179D6
 	.string "{SMALL}500 COINS{CLEAR_TO 0x40}¥10,000$"
 
 gText_Excellent:: @ 0x84179ED
@@ -1469,19 +1469,19 @@ gText_Right:: @ 0x8417A37
 gText_Left:: @ 0x8417A3D
 	.string "Left$"
 
-gText_Tm134000Coins:: @ 0x8417A42
+gText_Tm13_4000Coins:: @ 0x8417A42
 	.string "TM13{CLEAR_TO 0x48}{SMALL}4,000 COINS$"
 
-gText_Tm233500Coins:: @ 0x8417A58
+gText_Tm23_3500Coins:: @ 0x8417A58
 	.string "TM23{CLEAR_TO 0x48}{SMALL}3,500 COINS$"
 
-gText_Tm244000Coins:: @ 0x8417A6E
+gText_Tm24_4000Coins:: @ 0x8417A6E
 	.string "TM24{CLEAR_TO 0x48}{SMALL}4,000 COINS$"
 
-gText_Tm304500Coins:: @ 0x8417A84
+gText_Tm30_4500Coins:: @ 0x8417A84
 	.string "TM30{CLEAR_TO 0x48}{SMALL}4,500 COINS$"
 
-gText_Tm354000Coins:: @ 0x8417A9A
+gText_Tm35_4000Coins:: @ 0x8417A9A
 	.string "TM35{CLEAR_TO 0x48}{SMALL}4,000 COINS$"
 
 gText_1F:: @ 0x8417AB0
@@ -1625,25 +1625,25 @@ gText_Lemonade:: @ 0x8417C24
 gText_Coins_2:: @ 8417C2D
 	.string "COINS$"
 
-gText_Bicycle1000000:: @ 0x8417C33
+gText_Bicycle_1000000:: @ 0x8417C33
 	.string "BICYCLE{CLEAR_TO 0x49}{SMALL}¥1,000,000$"
 
 gText_NoThanks:: @ 0x8417C4B
 	.string "NO THANKS$"
 
-gText_Abra180Coins:: @ 0x8417C55
+gText_Abra_180Coins:: @ 0x8417C55
 	.string "ABRA{CLEAR_TO 0x55}{SMALL} 180 COINS$"
 
-gText_Clefairy500Coins:: @ 0x8417C6A
+gText_Clefairy_500Coins:: @ 0x8417C6A
 	.string "CLEFAIRY{CLEAR_TO 0x55}{SMALL} 500 COINS$"
 
-gText_Dratini2800Coins:: @ 0x8417C83
+gText_Dratini_2800Coins:: @ 0x8417C83
 	.string "DRATINI{CLEAR_TO 0x4B}{SMALL} 2,800 COINS$"
 
-gText_Scyther5500Coins:: @ 0x8417C9D
+gText_Scyther_5500Coins:: @ 0x8417C9D
 	.string "SCYTHER{CLEAR_TO 0x4B}{SMALL} 5,500 COINS$"
 
-gText_Porygon9999Coins:: @ 0x8417CB7
+gText_Porygon_9999Coins:: @ 0x8417CB7
 	.string "PORYGON{CLEAR_TO 0x4B}{SMALL} 9,999 COINS$"
 
 gUnknown_8417CD1:: @ 0x8417CD1
@@ -1766,19 +1766,19 @@ gText_NavelRock:: @ 0x8417EC1
 gText_BirthIsland:: @ 0x8417ECC
 	.string "BIRTH ISLAND$"
 
-gText_MiracleSeed1000Coins:: @ 0x8417ED9
+gText_MiracleSeed_1000Coins:: @ 0x8417ED9
 	.string "MIRACLE SEED{CLEAR_TO 0x50}{SMALL}1,000 COINS$"
 
-gText_Charcoal1000Coins:: @ 0x8417EF7
+gText_Charcoal_1000Coins:: @ 0x8417EF7
 	.string "CHARCOAL{CLEAR_TO 0x50}{SMALL}1,000 COINS$"
 
-gText_MysticWater1000Coins:: @ 0x8417F11
+gText_MysticWater_1000Coins:: @ 0x8417F11
 	.string "MYSTIC WATER{CLEAR_TO 0x50}{SMALL}1,000 COINS$"
 
-gText_YellowFlute1600Coins:: @ 0x8417F2F
+gText_YellowFlute_1600Coins:: @ 0x8417F2F
 	.string "YELLOW FLUTE{CLEAR_TO 0x50}{SMALL}1,600 COINS$"
 
-gText_SmokeBall800Coins:: @ 0x8417F4D
+gText_SmokeBall_800Coins:: @ 0x8417F4D
 	.string "SMOKE BALL{CLEAR_TO 0x5A}{SMALL}800 COINS$"
 
 gText_Dummy_8417F67:: @ 0x8417F67

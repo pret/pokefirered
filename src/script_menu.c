@@ -161,33 +161,33 @@ static const struct MenuAction sScriptMultiChoiceMenu_25[] = {
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_26[] = {
-    { gText_FreshWater200 },
-    { gText_SodaPop300 },
-    { gText_Lemonade350 },
+    { gText_FreshWater_200 },
+    { gText_SodaPop_300 },
+    { gText_Lemonade_350 },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_30[] = {
-    { gText_Tm134000Coins },
-    { gText_Tm233500Coins },
-    { gText_Tm244000Coins },
-    { gText_Tm304500Coins },
-    { gText_Tm354000Coins },
+    { gText_Tm13_4000Coins },
+    { gText_Tm23_3500Coins },
+    { gText_Tm24_4000Coins },
+    { gText_Tm30_4500Coins },
+    { gText_Tm35_4000Coins },
     { gText_NoThanks_2 }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_41[] = {
-    { gText_SmokeBall800Coins },
-    { gText_MiracleSeed1000Coins },
-    { gText_Charcoal1000Coins },
-    { gText_MysticWater1000Coins },
-    { gText_YellowFlute1600Coins },
+    { gText_SmokeBall_800Coins },
+    { gText_MiracleSeed_1000Coins },
+    { gText_Charcoal_1000Coins },
+    { gText_MysticWater_1000Coins },
+    { gText_YellowFlute_1600Coins },
     { gText_NoThanks_2 }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_27[] = {
-    { gText_50Coins1000 },
-    { gText_500Coins10000 },
+    { gText_50Coins_1000 },
+    { gText_500Coins_10000 },
     { gOtherText_Exit }
 };
 
@@ -311,16 +311,16 @@ static const struct MenuAction sScriptMultiChoiceMenu_1[] = {
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_13[] = {
-    { gText_Bicycle1000000 },
+    { gText_Bicycle_1000000 },
     { gText_NoThanks }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_14[] = {
-    { gText_Abra180Coins },
-    { gText_Clefairy500Coins },
-    { gText_Dratini2800Coins },
-    { gText_Scyther5500Coins },
-    { gText_Porygon9999Coins },
+    { gText_Abra_180Coins },
+    { gText_Clefairy_500Coins },
+    { gText_Dratini_2800Coins },
+    { gText_Scyther_5500Coins },
+    { gText_Porygon_9999Coins },
     { gText_NoThanks_2 }
 };
 

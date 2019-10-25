@@ -21,21 +21,21 @@ RocketHideout_Elevator_EventScript_1614D9:: @ 81614D9
 	end
 
 EventScript_161530:: @ 8161530
-	multichoicedefault 0, 0, 42, 0, 0
+	multichoicedefault 0, 0, MULTICHOICE_ROCKET_HIDEOUT_ELEVATOR, 0, FALSE
 	goto EventScript_161554
 
 EventScript_16153B:: @ 816153B
 	end
 
 EventScript_16153C:: @ 816153C
-	multichoicedefault 0, 0, 42, 1, 0
+	multichoicedefault 0, 0, MULTICHOICE_ROCKET_HIDEOUT_ELEVATOR, 1, FALSE
 	goto EventScript_161554
 
 EventScript_161547:: @ 8161547
 	end
 
 EventScript_161548:: @ 8161548
-	multichoicedefault 0, 0, 42, 2, 0
+	multichoicedefault 0, 0, MULTICHOICE_ROCKET_HIDEOUT_ELEVATOR, 2, FALSE
 	goto EventScript_161554
 
 EventScript_161553:: @ 8161553

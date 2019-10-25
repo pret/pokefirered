@@ -68,7 +68,7 @@ CeladonCity_Condominiums_RoofRoom_EventScript_16C522:: @ 816C522
 	message Text_1965F4
 	waitmessage
 	setvar VAR_0x8004, 4
-	multichoice 0, 0, 43, 0
+	multichoice 0, 0, MULTICHOICE_LINKED_DIRECT_UNION, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_16C5C0
 	case 1, EventScript_16C5CE
@@ -80,7 +80,7 @@ CeladonCity_Condominiums_RoofRoom_EventScript_16C522:: @ 816C522
 EventScript_16C578:: @ 816C578
 	message Text_1965F4
 	waitmessage
-	multichoice 0, 0, 43, 0
+	multichoice 0, 0, MULTICHOICE_LINKED_DIRECT_UNION, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_16C5C0
 	case 1, EventScript_16C5CE

@@ -103,7 +103,7 @@ EventScript_16E544:: @ 816E544
 	call EventScript_16E51C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if eq, EventScript_16E5FA
-	multichoice 0, 0, 21, 0
+	multichoice 0, 0, MULTICHOICE_HELIX, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_16E668
 	case 1, EventScript_16E53A
@@ -116,7 +116,7 @@ EventScript_16E586:: @ 816E586
 	call EventScript_16E51C
 	compare_var_to_value VAR_RESULT, 1
 	goto_if eq, EventScript_16E631
-	multichoice 0, 0, 22, 0
+	multichoice 0, 0, MULTICHOICE_DOME, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_16E6A6
 	case 1, EventScript_16E53A
@@ -126,7 +126,7 @@ EventScript_16E586:: @ 816E586
 EventScript_16E5C8:: @ 816E5C8
 	message Text_19A282
 	waitmessage
-	multichoice 0, 0, 23, 0
+	multichoice 0, 0, MULTICHOICE_AMBER, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_16E6E4
 	case 1, EventScript_16E53A
@@ -134,7 +134,7 @@ EventScript_16E5C8:: @ 816E5C8
 	end
 
 EventScript_16E5FA:: @ 816E5FA
-	multichoice 0, 0, 24, 0
+	multichoice 0, 0, MULTICHOICE_HELIX_AMBER, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_16E668
 	case 1, EventScript_16E6E4
@@ -143,7 +143,7 @@ EventScript_16E5FA:: @ 816E5FA
 	end
 
 EventScript_16E631:: @ 816E631
-	multichoice 0, 0, 25, 0
+	multichoice 0, 0, MULTICHOICE_DOME_AMBER, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_16E6A6
 	case 1, EventScript_16E6E4

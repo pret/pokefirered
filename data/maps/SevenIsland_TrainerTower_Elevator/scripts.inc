@@ -20,12 +20,12 @@ SevenIsland_TrainerTower_Elevator_EventScript_164B03:: @ 8164B03
 	end
 
 EventScript_164B46:: @ 8164B46
-	multichoicedefault 0, 0, 20, 0, 0
+	multichoicedefault 0, 0, MULTICHOICE_ROOFTOP_B1F, 0, FALSE
 	goto EventScript_164B5E
 	end
 
 EventScript_164B52:: @ 8164B52
-	multichoicedefault 0, 0, 20, 1, 0
+	multichoicedefault 0, 0, MULTICHOICE_ROOFTOP_B1F, 1, FALSE
 	goto EventScript_164B5E
 	end
 

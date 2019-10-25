@@ -29,7 +29,7 @@ CeladonCity_GameCorner_EventScript_16C68D:: @ 816C68D
 	showcoinsbox 0, 5
 	message Text_196984
 	waitmessage
-	multichoice 13, 0, 27, 0
+	multichoice 13, 0, MULTICHOICE_GAME_CORNER_COIN_PURCHASE_COUNTER, FALSE
 	copyvar VAR_0x8009, VAR_RESULT
 	switch VAR_RESULT
 	case 0, EventScript_16C6E6

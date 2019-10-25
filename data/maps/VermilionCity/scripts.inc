@@ -110,7 +110,7 @@ EventScript_1669FD:: @ 81669FD
 	call_if FALSE, EventScript_166A53
 	message Text_17FCC1
 	waitmessage
-	multichoice 17, 6, 54, 0
+	multichoice 17, 6, MULTICHOICE_SEVII_NAVEL, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1A911E
 	case 1, EventScript_166B0B
@@ -128,7 +128,7 @@ EventScript_166A5F:: @ 8166A5F
 	call_if FALSE, EventScript_166AA5
 	message Text_17FCC1
 	waitmessage
-	multichoice 13, 6, 55, 0
+	multichoice 13, 6, MULTICHOICE_SEVII_BIRTH, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1A911E
 	case 1, EventScript_166B23
@@ -148,7 +148,7 @@ EventScript_166AB1:: @ 8166AB1
 	call_if FALSE, EventScript_166AA5
 	message Text_17FCC1
 	waitmessage
-	multichoice 13, 5, 56, 0
+	multichoice 13, 5, MULTICHOICE_SEVII_NAVEL_BIRTH, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1A911E
 	case 1, EventScript_166B0B
@@ -175,7 +175,7 @@ EventScript_166B3B:: @ 8166B3B
 	message Text_17FB23
 	waitmessage
 	setvar VAR_0x8004, SEAGALLOP_VERMILION_CITY
-	multichoice 19, 5, 57, 0
+	multichoice 19, 5, MULTICHOICE_SEA_GALLOP_123, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1A8FEE
 	case 1, EventScript_1A8FF9

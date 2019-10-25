@@ -1484,19 +1484,19 @@ gText_Tm30_4500Coins:: @ 0x8417A84
 gText_Tm35_4000Coins:: @ 0x8417A9A
 	.string "TM35{CLEAR_TO 0x48}{SMALL}4,000 COINS$"
 
-gText_1F:: @ 0x8417AB0
+gText_1F_2:: @ 0x8417AB0
 	.string "1F$"
 
-gText_2F:: @ 0x8417AB3
+gText_2F_2:: @ 0x8417AB3
 	.string "2F$"
 
-gText_3F:: @ 0x8417AB6
+gText_3F_2:: @ 0x8417AB6
 	.string "3F$"
 
-gText_4F:: @ 0x8417AB9
+gText_4F_2:: @ 0x8417AB9
 	.string "4F$"
 
-gText_5F:: @ 0x8417ABC
+gText_5F_2:: @ 0x8417ABC
 	.string "5F$"
 
 gText_Cool:: @ 0x8417ABF
@@ -1856,37 +1856,37 @@ gUnknown_8418022:: @ 0x8418022
 gUnknown_841802F:: @ 0x841802F
 	.string "EARTHBADGE$"
 
-gUnknown_841803A:: @ 0x841803A
+gText_1F:: @ 0x841803A
 	.string "1F$"
 
-gUnknown_841803D:: @ 0x841803D
+gText_2F:: @ 0x841803D
 	.string "2F$"
 
-gUnknown_8418040:: @ 0x8418040
+gText_3F:: @ 0x8418040
 	.string "3F$"
 
-gUnknown_8418043:: @ 0x8418043
+gText_4F:: @ 0x8418043
 	.string "4F$"
 
-gUnknown_8418046:: @ 0x8418046
+gText_5F:: @ 0x8418046
 	.string "5F$"
 
-gUnknown_8418049:: @ 0x8418049
+gText_6F:: @ 0x8418049
 	.string "6F$"
 
-gUnknown_841804C:: @ 0x841804C
+gText_7F:: @ 0x841804C
 	.string "7F$"
 
-gUnknown_841804F:: @ 0x841804F
+gText_8F:: @ 0x841804F
 	.string "8F$"
 
-gUnknown_8418052:: @ 0x8418052
+gText_9F:: @ 0x8418052
 	.string "9F$"
 
-gUnknown_8418055:: @ 0x8418055
+gText_10F:: @ 0x8418055
 	.string "10F$"
 
-gUnknown_8418059:: @ 0x8418059
+gText_11F:: @ 0x8418059
 	.string "11F$"
 
 gText_B1F:: @ 0x841805D
@@ -1895,7 +1895,7 @@ gText_B1F:: @ 0x841805D
 gText_B2F:: @ 0x8418061
 	.string "B2F$"
 
-gUnknown_8418065:: @ 0x8418065
+gText_B3F:: @ 0x8418065
 	.string "B3F$"
 
 gText_B4F:: @ 0x8418069

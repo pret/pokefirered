@@ -40,59 +40,59 @@ static void DestroyScriptMenuWindow(u8 windowId);
 static u8 CreateWindowFromRect(u8 left, u8 top, u8 width, u8 height);
 
 
-static const struct MenuAction sScriptMultiChoiceMenu_0[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_YesNo[] = {
     { gText_Yes },
     { gText_No }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_2[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_TrainerCardIconTint[] = {
     { gText_Normal },
     { gText_Black },
     { gText_Pink },
     { gText_Sepia }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_3[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_HOF_Quit[] = {
     { gText_HallOfFame },
     { gText_Quit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_4[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_Eggs_Quit[] = {
     { gText_Eggs },
     { gText_Quit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_5[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_Victories_Quit[] = {
     { gText_Victories },
     { gText_Quit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_6[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_HOF_Eggs_Quit[] = {
     { gText_HallOfFame },
     { gText_Eggs },
     { gText_Quit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_7[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_HOF_Victories_Quit[] = {
     { gText_HallOfFame },
     { gText_Victories },
     { gText_Quit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_8[] = {
-    { gText_Eggs },
-    { gText_Victories },
-    { gText_Quit }
-};
-
-static const struct MenuAction sScriptMultiChoiceMenu_9[] = {
-    { gText_HallOfFame },
+static const struct MenuAction sScriptMultiChoiceMenu_Eggs_Victories_Quit[] = {
     { gText_Eggs },
     { gText_Victories },
     { gText_Quit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_15[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_HOF_Eggs_Victories_Quit[] = {
+    { gText_HallOfFame },
+    { gText_Eggs },
+    { gText_Victories },
+    { gText_Quit }
+};
+
+static const struct MenuAction sScriptMultiChoiceMenu_TrainerSchoolWhiteboard[] = {
     { gText_Slp },
     { gText_Psn },
     { gText_Par },
@@ -101,13 +101,13 @@ static const struct MenuAction sScriptMultiChoiceMenu_15[] = {
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_16[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_YesNoInfo[] = {
     { gText_Yes },
     { gText_No },
     { gText_Info }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_17[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_SingleDoubleMultiInfoExit[] = {
     { gText_SingleBattle },
     { gText_DoubleBattle },
     { gText_MultiBattle },
@@ -115,59 +115,59 @@ static const struct MenuAction sScriptMultiChoiceMenu_17[] = {
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_18[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_YesNoInfo2[] = {
     { gText_Yes },
     { gText_No },
     { gText_Info }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_19[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_ChallengeInfoExit[] = {
     { gText_MakeAChallenge },
     { gText_Info_2 },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_20[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_RooftopB1F[] = {
     { gText_Rooftop },
     { gText_B1F },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_21[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_Helix[] = {
     { gText_HelixFossil },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_22[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_Dome[] = {
     { gText_DomeFossil },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_23[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_Amber[] = {
     { gText_OldAmber },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_24[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_HelixAmber[] = {
     { gText_HelixFossil },
     { gText_OldAmber },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_25[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_DomeAmber[] = {
     { gText_DomeFossil },
     { gText_OldAmber },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_26[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_CeladonVendingMachine[] = {
     { gText_FreshWater_200 },
     { gText_SodaPop_300 },
     { gText_Lemonade_350 },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_30[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_GameCornerTMPrizes[] = {
     { gText_Tm13_4000Coins },
     { gText_Tm23_3500Coins },
     { gText_Tm24_4000Coins },
@@ -176,7 +176,7 @@ static const struct MenuAction sScriptMultiChoiceMenu_30[] = {
     { gText_NoThanks_2 }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_41[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_GameCornerBattleItemPrizes[] = {
     { gText_SmokeBall_800Coins },
     { gText_MiracleSeed_1000Coins },
     { gText_Charcoal_1000Coins },
@@ -185,65 +185,65 @@ static const struct MenuAction sScriptMultiChoiceMenu_41[] = {
     { gText_NoThanks_2 }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_27[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_GameCornerCoinPurchaseCounter[] = {
     { gText_50Coins_1000 },
     { gText_500Coins_10000 },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_28[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_Excellent_NotSoBad[] = {
     { gText_Excellent },
     { gText_NotSoBad }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_29[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_RightLeft[] = {
     { gText_Right },
     { gText_Left }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_31[] = {
-    { gText_5F },
-    { gText_4F },
-    { gText_3F },
-    { gText_2F },
-    { gText_1F },
+static const struct MenuAction sScriptMultiChoiceMenu_DeptStoreElevator[] = {
+    { gText_5F_2 },
+    { gText_4F_2 },
+    { gText_3F_2 },
+    { gText_2F_2 },
+    { gText_1F_2 },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_32[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_ThirstyGirlFreshWater[] = {
     { gText_FreshWater },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_33[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_ThirstyGirlSodaPop[] = {
     { gText_SodaPop },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_34[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_ThirstyGirlFreshWaterSodaPop[] = {
     { gText_FreshWater },
     { gText_SodaPop },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_35[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_ThirstyGirlLemonade[] = {
     { gText_Lemonade },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_36[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_ThirstyGirlFreshWaterLemonade[] = {
     { gText_FreshWater },
     { gText_Lemonade },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_37[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_ThirstyGirlSodaPopLemonade[] = {
     { gText_SodaPop },
     { gText_Lemonade },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_38[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_ThirstyGirlFreshWaterSodaPopLemonade[] = {
     { gText_FreshWater },
     { gText_SodaPop },
     { gText_Lemonade },
@@ -302,7 +302,7 @@ static const struct MenuAction sScriptMultiChoiceMenu_Unref_Shards_7[] = {
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_1[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_Eeveelutions[] = {
     { gText_Eevee },
     { gText_Flareon },
     { gText_Jolteon },
@@ -310,12 +310,12 @@ static const struct MenuAction sScriptMultiChoiceMenu_1[] = {
     { gText_QuitLooking }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_13[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_BikeShop[] = {
     { gText_Bicycle_1000000 },
     { gText_NoThanks }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_14[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_GameCornerPokemonPrizes[] = {
     { gText_Abra_180Coins },
     { gText_Clefairy_500Coins },
     { gText_Dratini_2800Coins },
@@ -324,51 +324,51 @@ static const struct MenuAction sScriptMultiChoiceMenu_14[] = {
     { gText_NoThanks_2 }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_39[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_TradeCenter_Colosseum[] = {
     { gText_TradeCenter },
     { gText_Colosseum },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_40[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_Link_Wireless[] = {
     { gText_GameLinkCable },
     { gText_Wireless },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_42[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_RocketHideoutElevator[] = {
     { gText_B1F },
     { gText_B2F },
     { gText_B4F },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_43[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_LinkedDirectUnion[] = {
     { gText_LinkedGamePlay },
     { gText_DirectCorner },
     { gText_UnionRoom },
     { gOtherText_Quit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_44[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_Island23[] = {
     { gText_TwoIsland },
     { gText_ThreeIsland },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_45[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_Island13[] = {
     { gText_OneIsland },
     { gText_ThreeIsland },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_46[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_Island12[] = {
     { gText_OneIsland },
     { gText_TwoIsland },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_47[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_TradeColosseumCrush[] = {
     { gText_TradeCenter },
     { gText_Colosseum_2 },
     { gText_BerryCrush },
@@ -381,24 +381,24 @@ static const struct MenuAction sScriptMultiChoiceMenu_48[] = {
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_50[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_TradeColosseum_2[] = {
     { gText_TradeCenter },
     { gText_Colosseum_2 },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_49[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_PokejumpDodrio[] = {
     { gText_PokemonJump },
     { gText_DodrioBerryPicking },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_51[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_Mushrooms[] = {
     { gText_2Tinymushrooms },
     { gText_1BigMushroom }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_52[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_TradeColosseumBlankCrush[] = {
     { gText_TradeCenter },
     { gText_Colosseum_2 },
     { gText_Dummy_8417E71 },
@@ -406,61 +406,61 @@ static const struct MenuAction sScriptMultiChoiceMenu_52[] = {
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_53[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_TradeColosseumBlank[] = {
     { gText_TradeCenter },
     { gText_Colosseum_2 },
     { gText_Dummy_8417E71 },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_54[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_SeviiNavel[] = {
     { gText_SeviiIslands },
     { gText_NavelRock },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_55[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_SeviiBirth[] = {
     { gText_SeviiIslands },
     { gText_BirthIsland },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_56[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_SeviiNavelBirth[] = {
     { gText_SeviiIslands },
     { gText_NavelRock },
     { gText_BirthIsland },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_57[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_SeaGallop123[] = {
     { gText_OneIsland },
     { gText_TwoIsland },
     { gText_ThreeIsland },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_58[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_SeaGallopV23[] = {
     { gText_Vermilion },
     { gText_TwoIsland },
     { gText_ThreeIsland },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_59[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_SeaGallopV13[] = {
     { gText_Vermilion },
     { gText_OneIsland },
     { gText_ThreeIsland },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_60[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_SeaGallopV12[] = {
     { gText_Vermilion },
     { gText_OneIsland },
     { gText_TwoIsland },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_61[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_SeaGallopVermilion[] = {
     { gText_Vermilion },
     { gOtherText_Exit }
 };
@@ -471,13 +471,13 @@ static const struct MenuAction sScriptMultiChoiceMenu_62[] = {
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_63[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_JoinOrLead[] = {
     { gText_JoinGroup },
     { gText_BecomeLeader },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_64[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_TrainerTowerMode[] = {
     { gOtherText_Single },
     { gOtherText_Double },
     { gOtherText_Knockout },
@@ -485,76 +485,76 @@ static const struct MenuAction sScriptMultiChoiceMenu_64[] = {
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_10[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_Exit[] = {
     { gOtherText_Exit }
 };
 
 const struct MultichoiceListStruct gScriptMultiChoiceMenus[] = {
-    { sScriptMultiChoiceMenu_0,  NELEMS(sScriptMultiChoiceMenu_0)  },
-    { sScriptMultiChoiceMenu_1,  NELEMS(sScriptMultiChoiceMenu_1)  },
-    { sScriptMultiChoiceMenu_2,  NELEMS(sScriptMultiChoiceMenu_2)  },
-    { sScriptMultiChoiceMenu_3,  NELEMS(sScriptMultiChoiceMenu_3)  },
-    { sScriptMultiChoiceMenu_4,  NELEMS(sScriptMultiChoiceMenu_4)  },
-    { sScriptMultiChoiceMenu_5,  NELEMS(sScriptMultiChoiceMenu_5)  },
-    { sScriptMultiChoiceMenu_6,  NELEMS(sScriptMultiChoiceMenu_6)  },
-    { sScriptMultiChoiceMenu_7,  NELEMS(sScriptMultiChoiceMenu_7)  },
-    { sScriptMultiChoiceMenu_8,  NELEMS(sScriptMultiChoiceMenu_8)  },
-    { sScriptMultiChoiceMenu_9,  NELEMS(sScriptMultiChoiceMenu_9)  },
-    { sScriptMultiChoiceMenu_10, NELEMS(sScriptMultiChoiceMenu_10) },
-    { sScriptMultiChoiceMenu_10, NELEMS(sScriptMultiChoiceMenu_10) },
-    { sScriptMultiChoiceMenu_10, NELEMS(sScriptMultiChoiceMenu_10) },
-    { sScriptMultiChoiceMenu_13, NELEMS(sScriptMultiChoiceMenu_13) },
-    { sScriptMultiChoiceMenu_14, NELEMS(sScriptMultiChoiceMenu_14) },
-    { sScriptMultiChoiceMenu_15, NELEMS(sScriptMultiChoiceMenu_15) },
-    { sScriptMultiChoiceMenu_16, NELEMS(sScriptMultiChoiceMenu_16) },
-    { sScriptMultiChoiceMenu_17, NELEMS(sScriptMultiChoiceMenu_17) },
-    { sScriptMultiChoiceMenu_18, NELEMS(sScriptMultiChoiceMenu_18) },
-    { sScriptMultiChoiceMenu_19, NELEMS(sScriptMultiChoiceMenu_19) },
-    { sScriptMultiChoiceMenu_20, NELEMS(sScriptMultiChoiceMenu_20) },
-    { sScriptMultiChoiceMenu_21, NELEMS(sScriptMultiChoiceMenu_21) },
-    { sScriptMultiChoiceMenu_22, NELEMS(sScriptMultiChoiceMenu_22) },
-    { sScriptMultiChoiceMenu_23, NELEMS(sScriptMultiChoiceMenu_23) },
-    { sScriptMultiChoiceMenu_24, NELEMS(sScriptMultiChoiceMenu_24) },
-    { sScriptMultiChoiceMenu_25, NELEMS(sScriptMultiChoiceMenu_25) },
-    { sScriptMultiChoiceMenu_26, NELEMS(sScriptMultiChoiceMenu_26) },
-    { sScriptMultiChoiceMenu_27, NELEMS(sScriptMultiChoiceMenu_27) },
-    { sScriptMultiChoiceMenu_28, NELEMS(sScriptMultiChoiceMenu_28) },
-    { sScriptMultiChoiceMenu_29, NELEMS(sScriptMultiChoiceMenu_29) },
-    { sScriptMultiChoiceMenu_30, NELEMS(sScriptMultiChoiceMenu_30) },
-    { sScriptMultiChoiceMenu_31, NELEMS(sScriptMultiChoiceMenu_31) },
-    { sScriptMultiChoiceMenu_32, NELEMS(sScriptMultiChoiceMenu_32) },
-    { sScriptMultiChoiceMenu_33, NELEMS(sScriptMultiChoiceMenu_33) },
-    { sScriptMultiChoiceMenu_34, NELEMS(sScriptMultiChoiceMenu_34) },
-    { sScriptMultiChoiceMenu_35, NELEMS(sScriptMultiChoiceMenu_35) },
-    { sScriptMultiChoiceMenu_36, NELEMS(sScriptMultiChoiceMenu_36) },
-    { sScriptMultiChoiceMenu_37, NELEMS(sScriptMultiChoiceMenu_37) },
-    { sScriptMultiChoiceMenu_38, NELEMS(sScriptMultiChoiceMenu_38) },
-    { sScriptMultiChoiceMenu_39, NELEMS(sScriptMultiChoiceMenu_39) },
-    { sScriptMultiChoiceMenu_40, NELEMS(sScriptMultiChoiceMenu_40) },
-    { sScriptMultiChoiceMenu_41, NELEMS(sScriptMultiChoiceMenu_41) },
-    { sScriptMultiChoiceMenu_42, NELEMS(sScriptMultiChoiceMenu_42) },
-    { sScriptMultiChoiceMenu_43, NELEMS(sScriptMultiChoiceMenu_43) },
-    { sScriptMultiChoiceMenu_44, NELEMS(sScriptMultiChoiceMenu_44) },
-    { sScriptMultiChoiceMenu_45, NELEMS(sScriptMultiChoiceMenu_45) },
-    { sScriptMultiChoiceMenu_46, NELEMS(sScriptMultiChoiceMenu_46) },
-    { sScriptMultiChoiceMenu_47, NELEMS(sScriptMultiChoiceMenu_47) },
+    { sScriptMultiChoiceMenu_YesNo,  NELEMS(sScriptMultiChoiceMenu_YesNo)  },
+    { sScriptMultiChoiceMenu_Eeveelutions,  NELEMS(sScriptMultiChoiceMenu_Eeveelutions)  },
+    { sScriptMultiChoiceMenu_TrainerCardIconTint,  NELEMS(sScriptMultiChoiceMenu_TrainerCardIconTint)  },
+    { sScriptMultiChoiceMenu_HOF_Quit,  NELEMS(sScriptMultiChoiceMenu_HOF_Quit)  },
+    { sScriptMultiChoiceMenu_Eggs_Quit,  NELEMS(sScriptMultiChoiceMenu_Eggs_Quit)  },
+    { sScriptMultiChoiceMenu_Victories_Quit,  NELEMS(sScriptMultiChoiceMenu_Victories_Quit)  },
+    { sScriptMultiChoiceMenu_HOF_Eggs_Quit,  NELEMS(sScriptMultiChoiceMenu_HOF_Eggs_Quit)  },
+    { sScriptMultiChoiceMenu_HOF_Victories_Quit,  NELEMS(sScriptMultiChoiceMenu_HOF_Victories_Quit)  },
+    { sScriptMultiChoiceMenu_Eggs_Victories_Quit,  NELEMS(sScriptMultiChoiceMenu_Eggs_Victories_Quit)  },
+    { sScriptMultiChoiceMenu_HOF_Eggs_Victories_Quit,  NELEMS(sScriptMultiChoiceMenu_HOF_Eggs_Victories_Quit)  },
+    { sScriptMultiChoiceMenu_Exit, NELEMS(sScriptMultiChoiceMenu_Exit) },
+    { sScriptMultiChoiceMenu_Exit, NELEMS(sScriptMultiChoiceMenu_Exit) },
+    { sScriptMultiChoiceMenu_Exit, NELEMS(sScriptMultiChoiceMenu_Exit) },
+    { sScriptMultiChoiceMenu_BikeShop, NELEMS(sScriptMultiChoiceMenu_BikeShop) },
+    { sScriptMultiChoiceMenu_GameCornerPokemonPrizes, NELEMS(sScriptMultiChoiceMenu_GameCornerPokemonPrizes) },
+    { sScriptMultiChoiceMenu_TrainerSchoolWhiteboard, NELEMS(sScriptMultiChoiceMenu_TrainerSchoolWhiteboard) },
+    { sScriptMultiChoiceMenu_YesNoInfo, NELEMS(sScriptMultiChoiceMenu_YesNoInfo) },
+    { sScriptMultiChoiceMenu_SingleDoubleMultiInfoExit, NELEMS(sScriptMultiChoiceMenu_SingleDoubleMultiInfoExit) },
+    { sScriptMultiChoiceMenu_YesNoInfo2, NELEMS(sScriptMultiChoiceMenu_YesNoInfo2) },
+    { sScriptMultiChoiceMenu_ChallengeInfoExit, NELEMS(sScriptMultiChoiceMenu_ChallengeInfoExit) },
+    { sScriptMultiChoiceMenu_RooftopB1F, NELEMS(sScriptMultiChoiceMenu_RooftopB1F) },
+    { sScriptMultiChoiceMenu_Helix, NELEMS(sScriptMultiChoiceMenu_Helix) },
+    { sScriptMultiChoiceMenu_Dome, NELEMS(sScriptMultiChoiceMenu_Dome) },
+    { sScriptMultiChoiceMenu_Amber, NELEMS(sScriptMultiChoiceMenu_Amber) },
+    { sScriptMultiChoiceMenu_HelixAmber, NELEMS(sScriptMultiChoiceMenu_HelixAmber) },
+    { sScriptMultiChoiceMenu_DomeAmber, NELEMS(sScriptMultiChoiceMenu_DomeAmber) },
+    { sScriptMultiChoiceMenu_CeladonVendingMachine, NELEMS(sScriptMultiChoiceMenu_CeladonVendingMachine) },
+    { sScriptMultiChoiceMenu_GameCornerCoinPurchaseCounter, NELEMS(sScriptMultiChoiceMenu_GameCornerCoinPurchaseCounter) },
+    { sScriptMultiChoiceMenu_Excellent_NotSoBad, NELEMS(sScriptMultiChoiceMenu_Excellent_NotSoBad) },
+    { sScriptMultiChoiceMenu_RightLeft, NELEMS(sScriptMultiChoiceMenu_RightLeft) },
+    { sScriptMultiChoiceMenu_GameCornerTMPrizes, NELEMS(sScriptMultiChoiceMenu_GameCornerTMPrizes) },
+    { sScriptMultiChoiceMenu_DeptStoreElevator, NELEMS(sScriptMultiChoiceMenu_DeptStoreElevator) },
+    { sScriptMultiChoiceMenu_ThirstyGirlFreshWater, NELEMS(sScriptMultiChoiceMenu_ThirstyGirlFreshWater) },
+    { sScriptMultiChoiceMenu_ThirstyGirlSodaPop, NELEMS(sScriptMultiChoiceMenu_ThirstyGirlSodaPop) },
+    { sScriptMultiChoiceMenu_ThirstyGirlFreshWaterSodaPop, NELEMS(sScriptMultiChoiceMenu_ThirstyGirlFreshWaterSodaPop) },
+    { sScriptMultiChoiceMenu_ThirstyGirlLemonade, NELEMS(sScriptMultiChoiceMenu_ThirstyGirlLemonade) },
+    { sScriptMultiChoiceMenu_ThirstyGirlFreshWaterLemonade, NELEMS(sScriptMultiChoiceMenu_ThirstyGirlFreshWaterLemonade) },
+    { sScriptMultiChoiceMenu_ThirstyGirlSodaPopLemonade, NELEMS(sScriptMultiChoiceMenu_ThirstyGirlSodaPopLemonade) },
+    { sScriptMultiChoiceMenu_ThirstyGirlFreshWaterSodaPopLemonade, NELEMS(sScriptMultiChoiceMenu_ThirstyGirlFreshWaterSodaPopLemonade) },
+    { sScriptMultiChoiceMenu_TradeCenter_Colosseum, NELEMS(sScriptMultiChoiceMenu_TradeCenter_Colosseum) },
+    { sScriptMultiChoiceMenu_Link_Wireless, NELEMS(sScriptMultiChoiceMenu_Link_Wireless) },
+    { sScriptMultiChoiceMenu_GameCornerBattleItemPrizes, NELEMS(sScriptMultiChoiceMenu_GameCornerBattleItemPrizes) },
+    { sScriptMultiChoiceMenu_RocketHideoutElevator, NELEMS(sScriptMultiChoiceMenu_RocketHideoutElevator) },
+    { sScriptMultiChoiceMenu_LinkedDirectUnion, NELEMS(sScriptMultiChoiceMenu_LinkedDirectUnion) },
+    { sScriptMultiChoiceMenu_Island23, NELEMS(sScriptMultiChoiceMenu_Island23) },
+    { sScriptMultiChoiceMenu_Island13, NELEMS(sScriptMultiChoiceMenu_Island13) },
+    { sScriptMultiChoiceMenu_Island12, NELEMS(sScriptMultiChoiceMenu_Island12) },
+    { sScriptMultiChoiceMenu_TradeColosseumCrush, NELEMS(sScriptMultiChoiceMenu_TradeColosseumCrush) },
     { sScriptMultiChoiceMenu_48, NELEMS(sScriptMultiChoiceMenu_48) },
-    { sScriptMultiChoiceMenu_49, NELEMS(sScriptMultiChoiceMenu_49) },
-    { sScriptMultiChoiceMenu_50, NELEMS(sScriptMultiChoiceMenu_50) },
-    { sScriptMultiChoiceMenu_51, NELEMS(sScriptMultiChoiceMenu_51) },
-    { sScriptMultiChoiceMenu_52, NELEMS(sScriptMultiChoiceMenu_52) },
-    { sScriptMultiChoiceMenu_53, NELEMS(sScriptMultiChoiceMenu_53) },
-    { sScriptMultiChoiceMenu_54, NELEMS(sScriptMultiChoiceMenu_54) },
-    { sScriptMultiChoiceMenu_55, NELEMS(sScriptMultiChoiceMenu_55) },
-    { sScriptMultiChoiceMenu_56, NELEMS(sScriptMultiChoiceMenu_56) },
-    { sScriptMultiChoiceMenu_57, NELEMS(sScriptMultiChoiceMenu_57) },
-    { sScriptMultiChoiceMenu_58, NELEMS(sScriptMultiChoiceMenu_58) },
-    { sScriptMultiChoiceMenu_59, NELEMS(sScriptMultiChoiceMenu_59) },
-    { sScriptMultiChoiceMenu_60, NELEMS(sScriptMultiChoiceMenu_60) },
-    { sScriptMultiChoiceMenu_61, NELEMS(sScriptMultiChoiceMenu_61) },
+    { sScriptMultiChoiceMenu_PokejumpDodrio, NELEMS(sScriptMultiChoiceMenu_PokejumpDodrio) },
+    { sScriptMultiChoiceMenu_TradeColosseum_2, NELEMS(sScriptMultiChoiceMenu_TradeColosseum_2) },
+    { sScriptMultiChoiceMenu_Mushrooms, NELEMS(sScriptMultiChoiceMenu_Mushrooms) },
+    { sScriptMultiChoiceMenu_TradeColosseumBlankCrush, NELEMS(sScriptMultiChoiceMenu_TradeColosseumBlankCrush) },
+    { sScriptMultiChoiceMenu_TradeColosseumBlank, NELEMS(sScriptMultiChoiceMenu_TradeColosseumBlank) },
+    { sScriptMultiChoiceMenu_SeviiNavel, NELEMS(sScriptMultiChoiceMenu_SeviiNavel) },
+    { sScriptMultiChoiceMenu_SeviiBirth, NELEMS(sScriptMultiChoiceMenu_SeviiBirth) },
+    { sScriptMultiChoiceMenu_SeviiNavelBirth, NELEMS(sScriptMultiChoiceMenu_SeviiNavelBirth) },
+    { sScriptMultiChoiceMenu_SeaGallop123, NELEMS(sScriptMultiChoiceMenu_SeaGallop123) },
+    { sScriptMultiChoiceMenu_SeaGallopV23, NELEMS(sScriptMultiChoiceMenu_SeaGallopV23) },
+    { sScriptMultiChoiceMenu_SeaGallopV13, NELEMS(sScriptMultiChoiceMenu_SeaGallopV13) },
+    { sScriptMultiChoiceMenu_SeaGallopV12, NELEMS(sScriptMultiChoiceMenu_SeaGallopV12) },
+    { sScriptMultiChoiceMenu_SeaGallopVermilion, NELEMS(sScriptMultiChoiceMenu_SeaGallopVermilion) },
     { sScriptMultiChoiceMenu_62, NELEMS(sScriptMultiChoiceMenu_62) },
-    { sScriptMultiChoiceMenu_63, NELEMS(sScriptMultiChoiceMenu_63) },
-    { sScriptMultiChoiceMenu_64, NELEMS(sScriptMultiChoiceMenu_64) }
+    { sScriptMultiChoiceMenu_JoinOrLead, NELEMS(sScriptMultiChoiceMenu_JoinOrLead) },
+    { sScriptMultiChoiceMenu_TrainerTowerMode, NELEMS(sScriptMultiChoiceMenu_TrainerTowerMode) }
 };
 
 const u8 *const gStdStringPtrs[] = {

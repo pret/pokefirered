@@ -58,7 +58,7 @@ EventScript_16BD3E:: @ 816BD3E
 	end
 
 EventScript_16BDAE:: @ 816BDAE
-	multichoice 0, 0, 32, 0
+	multichoice 0, 0, MULTICHOICE_THIRSTY_GIRL_FRESH_WATER, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_16BF19
 	case 1, EventScript_16C00C
@@ -66,7 +66,7 @@ EventScript_16BDAE:: @ 816BDAE
 	end
 
 EventScript_16BDDA:: @ 816BDDA
-	multichoice 0, 0, 33, 0
+	multichoice 0, 0, MULTICHOICE_THIRSTY_GIRL_SODA_POP, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_16BF3A
 	case 1, EventScript_16C00C
@@ -74,7 +74,7 @@ EventScript_16BDDA:: @ 816BDDA
 	end
 
 EventScript_16BE06:: @ 816BE06
-	multichoice 0, 0, 34, 0
+	multichoice 0, 0, MULTICHOICE_THIRSTY_GIRL_FRESH_WATER_SODA_POP, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_16BF19
 	case 1, EventScript_16BF3A
@@ -83,7 +83,7 @@ EventScript_16BE06:: @ 816BE06
 	end
 
 EventScript_16BE3D:: @ 816BE3D
-	multichoice 0, 0, 35, 0
+	multichoice 0, 0, MULTICHOICE_THIRSTY_GIRL_LEMONADE, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_16BF5B
 	case 1, EventScript_16C00C
@@ -91,7 +91,7 @@ EventScript_16BE3D:: @ 816BE3D
 	end
 
 EventScript_16BE69:: @ 816BE69
-	multichoice 0, 0, 36, 0
+	multichoice 0, 0, MULTICHOICE_THIRSTY_GIRL_FRESH_WATER_LEMONADE, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_16BF19
 	case 1, EventScript_16BF5B
@@ -100,7 +100,7 @@ EventScript_16BE69:: @ 816BE69
 	end
 
 EventScript_16BEA0:: @ 816BEA0
-	multichoice 0, 0, 37, 0
+	multichoice 0, 0, MULTICHOICE_THIRSTY_GIRL_SODA_POP_LEMONADE, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_16BF3A
 	case 1, EventScript_16BF5B
@@ -109,7 +109,7 @@ EventScript_16BEA0:: @ 816BEA0
 	end
 
 EventScript_16BED7:: @ 816BED7
-	multichoice 0, 0, 38, 0
+	multichoice 0, 0, MULTICHOICE_THIRSTY_GIRL_FRESH_WATER_SODA_POP_LEMONADE, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_16BF19
 	case 1, EventScript_16BF3A
@@ -220,7 +220,7 @@ CeladonCity_DepartmentStore_Roof_EventScript_16C034:: @ 816C034
 	end
 
 EventScript_16C045:: @ 816C045
-	multichoice 12, 0, 26, 0
+	multichoice 12, 0, MULTICHOICE_CELADON_VENDING_MACHINE, FALSE
 	copyvar VAR_0x4001, VAR_RESULT
 	switch VAR_0x4001
 	case 0, EventScript_16C083

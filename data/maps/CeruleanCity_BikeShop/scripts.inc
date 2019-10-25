@@ -11,7 +11,7 @@ CeruleanCity_BikeShop_EventScript_16ABBD:: @ 816ABBD
 	showmoneybox 0, 0, 0
 	message Text_192755
 	waitmessage
-	multichoice 11, 0, 13, 0
+	multichoice 11, 0, MULTICHOICE_BIKE_SHOP, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_16AC07
 	case 1, EventScript_16AC15

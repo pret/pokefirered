@@ -21,29 +21,29 @@ CeladonCity_DepartmentStore_Elevator_EventScript_16C153:: @ 816C153
 	end
 
 EventScript_16C1B7:: @ 816C1B7
-	multichoicedefault 0, 0, 31, 0, 0
+	multichoicedefault 0, 0, MULTICHOICE_DEPT_STORE_ELEVATOR, 0, FALSE
 	goto EventScript_16C1F3
 
 EventScript_16C1C2:: @ 816C1C2
 	end
 
 EventScript_16C1C3:: @ 816C1C3
-	multichoicedefault 0, 0, 31, 1, 0
+	multichoicedefault 0, 0, MULTICHOICE_DEPT_STORE_ELEVATOR, 1, FALSE
 	goto EventScript_16C1F3
 	end
 
 EventScript_16C1CF:: @ 816C1CF
-	multichoicedefault 0, 0, 31, 2, 0
+	multichoicedefault 0, 0, MULTICHOICE_DEPT_STORE_ELEVATOR, 2, FALSE
 	goto EventScript_16C1F3
 	end
 
 EventScript_16C1DB:: @ 816C1DB
-	multichoicedefault 0, 0, 31, 3, 0
+	multichoicedefault 0, 0, MULTICHOICE_DEPT_STORE_ELEVATOR, 3, FALSE
 	goto EventScript_16C1F3
 	end
 
 EventScript_16C1E7:: @ 816C1E7
-	multichoicedefault 0, 0, 31, 4, 0
+	multichoicedefault 0, 0, MULTICHOICE_DEPT_STORE_ELEVATOR, 4, FALSE
 	goto EventScript_16C1F3
 	end
 

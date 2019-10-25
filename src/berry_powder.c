@@ -111,7 +111,7 @@ void sub_815F094(void)
 {
     struct WindowTemplate template;
 
-    if (QuestLog_ScheduleRoutineIfNotInPlaybackMode(sub_809D6D4) != TRUE)
+    if (QuestLog_SchedulePlaybackCB(QLPlaybackCB_DestroyScriptMenuMonPicSprites) != TRUE)
     {
         template = SetWindowTemplateFields(0, 1, 1, 8, 3, 15, 32);
         gUnknown_203F464 = AddWindow(&template);

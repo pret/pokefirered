@@ -1170,5 +1170,11 @@ extern const u8 gText_DifferentGameFile[];
 
 // script_menu
 extern const u8 EventScript_1A7AE0[];
+extern const u8 Text_1BC388[];
+extern const u8 Text_1BC3C7[];
+extern const u8 Text_1BCB42[];
+extern const u8 Text_1BCA95[];
+extern const u8 Text_1BCACB[];
+extern const u8 Text_1BCAF2[];
 
 #endif //GUARD_EVENT_SCRIPTS_H

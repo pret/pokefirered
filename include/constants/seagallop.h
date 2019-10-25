@@ -13,4 +13,6 @@
 #define SEAGALLOP_NAVEL_ROCK       9
 #define SEAGALLOP_BIRTH_ISLAND    10
 
+#define SEAGALLOP_MORE           254
+
 #endif //GUARD_CONSTANTS_SEAGALLOP_H

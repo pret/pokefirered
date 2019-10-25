@@ -1064,7 +1064,7 @@ void Special_DrawElevatorCurrentFloorWindow(void)
 {
     const u8 *floorname;
     u32 strwidth;
-    if (QuestLog_ScheduleRoutineIfNotInPlaybackMode(sub_809D6D4) != TRUE)
+    if (QuestLog_SchedulePlaybackCB(QLPlaybackCB_DestroyScriptMenuMonPicSprites) != TRUE)
     {
         sElevatorCurrentFloorWindowId = AddWindow(&sElevatorCurrentFloorWindowTemplate);
         TextWindow_SetStdFrame0_WithPal(sElevatorCurrentFloorWindowId, 0x21D, 0xD0);
@@ -1137,7 +1137,7 @@ void Special_ListMenu(void)
 {
     u8 taskId;
     struct Task * task;
-    if (QuestLog_ScheduleRoutineIfNotInPlaybackMode(sub_809D6D4) != TRUE)
+    if (QuestLog_SchedulePlaybackCB(QLPlaybackCB_DestroyScriptMenuMonPicSprites) != TRUE)
     {
         taskId = CreateTask(Task_CreateScriptListMenu, 8);
         task = &gTasks[taskId];

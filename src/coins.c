@@ -5,8 +5,6 @@
 #include "text_window.h"
 #include "strings.h"
 
-extern const u8 gUnknown_8417C2D[];
-
 EWRAM_DATA static u8 sCoinsWindowId = 0;
 
 #define MAX_COINS 9999

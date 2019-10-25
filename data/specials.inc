@@ -431,8 +431,8 @@ gSpecials:: @ 815FD60
 	def_special Special_HasLearnedAllMovesFromCapeBrinkTutor
 	def_special Special_Credits
 	def_special sub_8153810
-	def_special sub_809D764
-	def_special sub_809D8C0
+	def_special Special_DrawSeaGallopDestinationMenu
+	def_special Special_GetSelectedSeaGallopDestination
 	def_special sub_8147500
 	def_special GetPlayerFacingDirection
 	def_special Special_DeoxysSound

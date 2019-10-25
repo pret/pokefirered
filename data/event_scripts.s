@@ -16,6 +16,7 @@
 #include "constants/fame_checker.h"
 #include "constants/seagallop.h"
 #include "constants/game_stat.h"
+#include "constants/menu.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.set FALSE, 0
@@ -1596,7 +1597,7 @@ EventScript_1A6578:: @ 81A6578
 	switch VAR_RESULT
 	case 0, EventScript_1A65B8
 	case 1 EventScript_1A6663
-	case 127, EventScript_1A6663
+	case SCR_MENU_CANCEL, EventScript_1A6663
 	end
 
 EventScript_1A65B8:: @ 81A65B8
@@ -1949,7 +1950,7 @@ EventScript_1A69A8:: @ 81A69A8
 	case 2, EventScript_1A6A7A
 	case 3, EventScript_1A6A56
 	case 4, EventScript_1A6A46
-	case 127, EventScript_1A6A46
+	case SCR_MENU_CANCEL, EventScript_1A6A46
 	end
 
 EventScript_1A69F0:: @ 81A69F0
@@ -4164,7 +4165,7 @@ EventScript_1A8EC5:: @ 81A8EC5
 	case 0, EventScript_1A8FF9
 	case 1, EventScript_1A9004
 	case 2, EventScript_1A90F6
-	case 127, EventScript_1A90F6
+	case SCR_MENU_CANCEL, EventScript_1A90F6
 	end
 
 EventScript_1A8F12:: @ 81A8F12
@@ -4174,7 +4175,7 @@ EventScript_1A8F12:: @ 81A8F12
 	case 1, EventScript_1A8FF9
 	case 2, EventScript_1A9004
 	case 3, EventScript_1A90F6
-	case 127, EventScript_1A90F6
+	case SCR_MENU_CANCEL, EventScript_1A90F6
 	end
 
 EventScript_1A8F54:: @ 81A8F54
@@ -4187,7 +4188,7 @@ EventScript_1A8F54:: @ 81A8F54
 	case 0, EventScript_1A8FEE
 	case 1, EventScript_1A9004
 	case 2, EventScript_1A90F6
-	case 127, EventScript_1A90F6
+	case SCR_MENU_CANCEL, EventScript_1A90F6
 	end
 
 EventScript_1A8FA1:: @ 81A8FA1
@@ -4197,7 +4198,7 @@ EventScript_1A8FA1:: @ 81A8FA1
 	case 1, EventScript_1A8FEE
 	case 2, EventScript_1A9004
 	case 3, EventScript_1A90F6
-	case 127, EventScript_1A90F6
+	case SCR_MENU_CANCEL, EventScript_1A90F6
 	end
 
 EventScript_1A8FE3:: @ 81A8FE3
@@ -4230,7 +4231,7 @@ EventScript_1A900F:: @ 81A900F
 	case 0, EventScript_1A8FEE
 	case 1, EventScript_1A8FF9
 	case 2, EventScript_1A90F6
-	case 127, EventScript_1A90F6
+	case SCR_MENU_CANCEL, EventScript_1A90F6
 	end
 
 EventScript_1A905C:: @ 81A905C
@@ -4240,7 +4241,7 @@ EventScript_1A905C:: @ 81A905C
 	case 1, EventScript_1A8FEE
 	case 2, EventScript_1A8FF9
 	case 3, EventScript_1A90F6
-	case 127, EventScript_1A90F6
+	case SCR_MENU_CANCEL, EventScript_1A90F6
 	end
 
 EventScript_1A909E:: @ 81A909E
@@ -4295,31 +4296,31 @@ Movement_1A911C:: @ 81A911C
 
 EventScript_1A911E:: @ 81A911E
 	setvar VAR_0x8005, 0
-	special sub_809D764
+	special Special_DrawSeaGallopDestinationMenu
 	waitstate
-	specialvar VAR_0x8006, sub_809D8C0
+	specialvar VAR_0x8006, Special_GetSelectedSeaGallopDestination
 	switch VAR_0x8006
-	case 0, EventScript_1A91D5
-	case 1, EventScript_1A91E0
-	case 2, EventScript_1A91EB
-	case 3, EventScript_1A91F6
-	case 4, EventScript_1A9201
-	case 254, EventScript_1A917F
-	case 127, EventScript_1A90F6
+	case SEAGALLOP_VERMILION_CITY, EventScript_1A91D5
+	case SEAGALLOP_ONE_ISLAND,     EventScript_1A91E0
+	case SEAGALLOP_TWO_ISLAND,     EventScript_1A91EB
+	case SEAGALLOP_THREE_ISLAND,   EventScript_1A91F6
+	case SEAGALLOP_FOUR_ISLAND,    EventScript_1A9201
+	case SEAGALLOP_MORE,           EventScript_1A917F
+	case SCR_MENU_CANCEL, EventScript_1A90F6
 	end
 
 EventScript_1A917F:: @ 81A917F
 	setvar VAR_0x8005, 1
-	special sub_809D764
+	special Special_DrawSeaGallopDestinationMenu
 	waitstate
-	specialvar VAR_0x8006, sub_809D8C0
+	specialvar VAR_0x8006, Special_GetSelectedSeaGallopDestination
 	switch VAR_0x8006
-	case 4, EventScript_1A9201
-	case 5, EventScript_1A920C
-	case 6, EventScript_1A9217
-	case 7, EventScript_1A9222
-	case 254, EventScript_1A911E
-	case 127, EventScript_1A90F6
+	case SEAGALLOP_FOUR_ISLAND,  EventScript_1A9201
+	case SEAGALLOP_FIVE_ISLAND,  EventScript_1A920C
+	case SEAGALLOP_SIX_ISLAND,   EventScript_1A9217
+	case SEAGALLOP_SEVEN_ISLAND, EventScript_1A9222
+	case SEAGALLOP_MORE,           EventScript_1A911E
+	case SCR_MENU_CANCEL, EventScript_1A90F6
 	end
 
 EventScript_1A91D5:: @ 81A91D5
@@ -8006,7 +8007,7 @@ EventScript_1B2A23:: @ 81B2A23
 	switch VAR_RESULT
 	case 0, EventScript_1B2B98
 	case 1, EventScript_1B2DF6
-	case 127, EventScript_1B2DF6
+	case SCR_MENU_CANCEL, EventScript_1B2DF6
 	end
 
 EventScript_1B2A4F:: @ 81B2A4F
@@ -8014,7 +8015,7 @@ EventScript_1B2A4F:: @ 81B2A4F
 	switch VAR_RESULT
 	case 0, EventScript_1B2C62
 	case 1, EventScript_1B2DF6
-	case 127, EventScript_1B2DF6
+	case SCR_MENU_CANCEL, EventScript_1B2DF6
 	end
 
 EventScript_1B2A7B:: @ 81B2A7B
@@ -8022,7 +8023,7 @@ EventScript_1B2A7B:: @ 81B2A7B
 	switch VAR_RESULT
 	case 0, EventScript_1B2D2C
 	case 1, EventScript_1B2DF6
-	case 127, EventScript_1B2DF6
+	case SCR_MENU_CANCEL, EventScript_1B2DF6
 	end
 
 EventScript_1B2AA7:: @ 81B2AA7
@@ -8031,7 +8032,7 @@ EventScript_1B2AA7:: @ 81B2AA7
 	case 0, EventScript_1B2B98
 	case 1, EventScript_1B2C62
 	case 2, EventScript_1B2DF6
-	case 127, EventScript_1B2DF6
+	case SCR_MENU_CANCEL, EventScript_1B2DF6
 	end
 
 EventScript_1B2ADE:: @ 81B2ADE
@@ -8040,7 +8041,7 @@ EventScript_1B2ADE:: @ 81B2ADE
 	case 0, EventScript_1B2B98
 	case 1, EventScript_1B2D2C
 	case 2, EventScript_1B2DF6
-	case 127, EventScript_1B2DF6
+	case SCR_MENU_CANCEL, EventScript_1B2DF6
 	end
 
 EventScript_1B2B15:: @ 81B2B15
@@ -8049,7 +8050,7 @@ EventScript_1B2B15:: @ 81B2B15
 	case 0, EventScript_1B2C62
 	case 1, EventScript_1B2D2C
 	case 2, EventScript_1B2DF6
-	case 127, EventScript_1B2DF6
+	case SCR_MENU_CANCEL, EventScript_1B2DF6
 	end
 
 EventScript_1B2B4C:: @ 81B2B4C
@@ -8059,7 +8060,7 @@ EventScript_1B2B4C:: @ 81B2B4C
 	case 1, EventScript_1B2C62
 	case 2, EventScript_1B2D2C
 	case 3, EventScript_1B2DF6
-	case 127, EventScript_1B2DF6
+	case SCR_MENU_CANCEL, EventScript_1B2DF6
 	end
 
 EventScript_1B2B8E:: @ 81B2B8E
@@ -8612,7 +8613,7 @@ EventScript_1BB467:: @ 81BB467
 	case 0, EventScript_1BB6AB
 	case 1, EventScript_1BB4A3
 	case 2, EventScript_1BB82F
-	case 127, EventScript_1BB82F
+	case SCR_MENU_CANCEL, EventScript_1BB82F
 	end
 
 EventScript_1BB4A3:: @ 81BB4A3
@@ -8632,7 +8633,7 @@ EventScript_1BB4AE:: @ 81BB4AE
 	case 2, EventScript_1BB541
 	case 3, EventScript_1BB501
 	case 4, EventScript_1BB82F
-	case 127, EventScript_1BB82F
+	case SCR_MENU_CANCEL, EventScript_1BB82F
 	end
 
 EventScript_1BB501:: @ 81BB501
@@ -9203,7 +9204,7 @@ EventScript_1BBA51:: @ 81BBA51
 	case 0, EventScript_1BBA94
 	case 1, EventScript_1BB82F
 	case 2, EventScript_1BBA88
-	case 127, EventScript_1BB82F
+	case SCR_MENU_CANCEL, EventScript_1BB82F
 	end
 
 EventScript_1BBA88:: @ 81BBA88
@@ -9328,7 +9329,7 @@ EventScript_1BBBE7:: @ 81BBBE7
 	case 1, EventScript_1BBC97
 	case 2, EventScript_1BBD35
 	case 3, EventScript_1BB82F
-	case 127, EventScript_1BB82F
+	case SCR_MENU_CANCEL, EventScript_1BB82F
 	end
 
 EventScript_1BBC32:: @ 81BBC32
@@ -9337,7 +9338,7 @@ EventScript_1BBC32:: @ 81BBC32
 	case 0, EventScript_1BBC69
 	case 1, EventScript_1BBC97
 	case 2, EventScript_1BB82F
-	case 127, EventScript_1BB82F
+	case SCR_MENU_CANCEL, EventScript_1BB82F
 	end
 
 EventScript_1BBC69:: @ 81BBC69
@@ -9363,7 +9364,7 @@ EventScript_1BBC97:: @ 81BBC97
 	case 2, EventScript_1BBD1C
 	case 3, EventScript_1BBD27
 	case 4, EventScript_1BB82F
-	case 127, EventScript_1BB82F
+	case SCR_MENU_CANCEL, EventScript_1BB82F
 	end
 
 EventScript_1BBCEA:: @ 81BBCEA
@@ -9446,7 +9447,7 @@ EventScript_1BBDBC:: @ 81BBDBC
 	case 0, EventScript_1BBE28
 	case 1, EventScript_1BBE00
 	case 2, EventScript_1BB82F
-	case 127, EventScript_1BB82F
+	case SCR_MENU_CANCEL, EventScript_1BB82F
 	end
 
 EventScript_1BBE00:: @ 81BBE00
@@ -9481,7 +9482,7 @@ EventScript_1BBE50:: @ 81BBE50
 	case 0, EventScript_1BBEBC
 	case 1, EventScript_1BBE94
 	case 2, EventScript_1BB82F
-	case 127, EventScript_1BB82F
+	case SCR_MENU_CANCEL, EventScript_1BB82F
 	end
 
 EventScript_1BBE94:: @ 81BBE94
@@ -9516,7 +9517,7 @@ EventScript_1BBEE4:: @ 81BBEE4
 	case 0, EventScript_1BBF50
 	case 1, EventScript_1BBF28
 	case 2, EventScript_1BB82F
-	case 127, EventScript_1BB82F
+	case SCR_MENU_CANCEL, EventScript_1BB82F
 	end
 
 EventScript_1BBF28:: @ 81BBF28
@@ -9663,7 +9664,7 @@ EventScript_1BC060:: @ 81BC060
 	case 0, EventScript_1BC0B0
 	case 1, EventScript_1BC0BA
 	case 2, EventScript_1BC0C4
-	case 127, EventScript_1BC0C4
+	case SCR_MENU_CANCEL, EventScript_1BC0C4
 	end
 
 EventScript_1BC0B0:: @ 81BC0B0
@@ -9702,7 +9703,7 @@ EventScript_1BC0CE:: @ 81BC0CE
 	case 0, EventScript_1BC13A
 	case 1, EventScript_1BC184
 	case 2, EventScript_1BB83F
-	case 127, EventScript_1BB83F
+	case SCR_MENU_CANCEL, EventScript_1BB83F
 	end
 
 EventScript_1BC13A:: @ 81BC13A
@@ -9755,7 +9756,7 @@ EventScript_1BC1CE:: @ 81BC1CE
 	case 0, EventScript_1BC23A
 	case 1, EventScript_1BC212
 	case 2, EventScript_1BB83F
-	case 127, EventScript_1BB83F
+	case SCR_MENU_CANCEL, EventScript_1BB83F
 	end
 
 EventScript_1BC212:: @ 81BC212
@@ -11307,7 +11308,7 @@ EventScript_1BEE44:: @ 81BEE44
 	case 0, EventScript_1BEE8F
 	case 1, EventScript_1BEEC3
 	case 2, EventScript_1BEE81
-	case 127, EventScript_1BEEC3
+	case SCR_MENU_CANCEL, EventScript_1BEEC3
 	end
 
 EventScript_1BEE81:: @ 81BEE81
@@ -11354,7 +11355,7 @@ EventScript_1BEEDB:: @ 81BEEDB
 	case 0, EventScript_1BEF26
 	case 1, EventScript_1BEF35
 	case 2, EventScript_1BEF18
-	case 127, EventScript_1BEF35
+	case SCR_MENU_CANCEL, EventScript_1BEF35
 	end
 
 EventScript_1BEF18:: @ 81BEF18

@@ -428,6 +428,8 @@ SECTIONS {
         src/battle_anim_mon_movement.o(.rodata);
         src/item.o(.rodata);
         data/data_835B488.o(.rodata.83DF09C);
+        src/script_menu.o(.rodata);
+        data/data_835B488.o(.rodata.83E2280);
         src/flying.o(.rodata);
         src/psychic.o(.rodata);
         src/bug.o(.rodata);

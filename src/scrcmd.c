@@ -50,15 +50,15 @@ extern const u8 *const gStdScriptsEnd[];
 static bool8 sub_806B93C(struct ScriptContext * ctx);
 static u8 sub_806B96C(struct ScriptContext * ctx);
 
-EWRAM_DATA ptrdiff_t gVScriptOffset = 0;
-EWRAM_DATA u8 gUnknown_20370AC = 0;
-EWRAM_DATA u16 sPauseCounter = 0;
-EWRAM_DATA u16 sMovingNpcId = 0;
-EWRAM_DATA u16 sMovingNpcMapBank = 0;
-EWRAM_DATA u16 sMovingNpcMapId = 0;
-EWRAM_DATA u16 sFieldEffectScriptId = 0;
+static EWRAM_DATA ptrdiff_t gVScriptOffset = 0;
+static EWRAM_DATA u8 gUnknown_20370AC = 0;
+static EWRAM_DATA u16 sPauseCounter = 0;
+static EWRAM_DATA u16 sMovingNpcId = 0;
+static EWRAM_DATA u16 sMovingNpcMapBank = 0;
+static EWRAM_DATA u16 sMovingNpcMapId = 0;
+static EWRAM_DATA u16 sFieldEffectScriptId = 0;
 
-IWRAM_DATA struct ScriptContext * gUnknown_3005070;
+struct ScriptContext * gUnknown_3005070;
 
 extern u8 gSelectedEventObject;
 

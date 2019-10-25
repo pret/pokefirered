@@ -781,9 +781,10 @@ gUnknown_203996C: @ 203996C
 gUnknown_2039984: @ 2039984
 	.space 0x4
 
-gUnknown_2039988: @ 2039988
-	.space 0x4
+	.align 2
+	.include "src/script_menu.o"
 
+	.align 2
 gUnknown_203998C: @ 203998C
 	.space 0x4
 

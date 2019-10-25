@@ -25,19 +25,19 @@ struct MultichoiceListStruct
     u8 count;
 };
 
-EWRAM_DATA u8 gUnknown_2039988 = 0;
+EWRAM_DATA u8 sDelay = 0;
 
-void sub_809CA64(u8 left, u8 top, u8 mcId, u8 ignoreBpress, u8 initPos);
-u8 sub_809CBB4(u8 count);
-void sub_809CC18(u8 ignoreBpress, u8 count, u8 windowId, u8 mcId);
-void sub_809CC98(u8 taskId);
-void sub_809CD48(u8 mcId);
-void task_yes_no_maybe(u8 taskId);
-void sub_809CFDC(u8 taskId);
-void sub_809D070(void);
-bool8 PicboxWait(void);
-void sub_809D6B0(u8 windowId);
-u8 CreateWindowFromRect(u8 left, u8 top, u8 width, u8 height);
+static void DrawVerticalMultichoiceMenu(u8 left, u8 top, u8 mcId, u8 ignoreBpress, u8 initPos);
+static u8 sub_809CBB4(u8 count);
+static void sub_809CC18(u8 ignoreBpress, u8 count, u8 windowId, u8 mcId);
+static void Task_MultichoiceMenu_HandleInput(u8 taskId);
+static void MultiChoicePrintHelpDescription(u8 mcId);
+static void task_yes_no_maybe(u8 taskId);
+static void sub_809CFDC(u8 taskId);
+static void CreatePCMenuWindow(void);
+static bool8 PicboxWait(void);
+static void DestroyScriptMenuWindow(u8 windowId);
+static u8 CreateWindowFromRect(u8 left, u8 top, u8 width, u8 height);
 
 
 static const struct MenuAction sScriptMultiChoiceMenu_0[] = {
@@ -589,20 +589,20 @@ const u8 *const gStdStringPtrs[] = {
     gUnknown_8417DE1
 };
 
-static const u8 *const gUnknown_83E072C[] = {
+static const u8 *const sDescriptionPtrs_CableClub_TradeBattleCancel[] = {
     Text_1BC388,
     Text_1BC3C7,
     Text_1BCB42
 };
 
-static const u8 *const gUnknown_83E0738[] = {
+static const u8 *const sDescriptionPtrs_WirelessCenter_TradeBattleCrushCancel[] = {
     Text_1BCA95,
     Text_1BCACB,
     Text_1BCAF2,
     Text_1BCB42
 };
 
-static const u8 *const gUnknown_83E0748[] = {
+static const u8 *const sDescriptionPtrs_WirelessCenter_TradeBattleCancel[] = {
     Text_1BCA95,
     Text_1BCACB,
     Text_1BCB42
@@ -658,20 +658,20 @@ static const u8 *const sSeaGallopDestStrings[] = {
     gUnknown_8417E39
 };
 
-u16 sub_809C954(const u8 *str)
+static u16 GetStringTilesWide(const u8 *str)
 {
     return (GetStringWidth(1, str, 0) + 7) / 8;
 }
 
-u8 sub_809C974(const struct MenuAction * items, u8 count)
+static u8 GetMenuWidthFromList(const struct MenuAction * items, u8 count)
 {
     u16 i;
-    u8 width = sub_809C954(items[0].text);
+    u8 width = GetStringTilesWide(items[0].text);
     u8 tmp;
 
     for (i = 1; i < count; i++)
     {
-        tmp = sub_809C954(items[i].text);
+        tmp = GetStringTilesWide(items[i].text);
         if (width < tmp)
             width = tmp;
     }
@@ -680,23 +680,23 @@ u8 sub_809C974(const struct MenuAction * items, u8 count)
 
 bool8 ScriptMenu_Multichoice(u8 left, u8 top, u8 mcId, u8 ignoreBpress)
 {
-    if (FuncIsActiveTask(sub_809CC98) == TRUE)
+    if (FuncIsActiveTask(Task_MultichoiceMenu_HandleInput) == TRUE)
         return FALSE;
     gSpecialVar_Result = SCR_MENU_UNSET;
-    sub_809CA64(left, top, mcId, ignoreBpress, 0);
+    DrawVerticalMultichoiceMenu(left, top, mcId, ignoreBpress, 0);
     return TRUE;
 }
 
 bool8 ScriptMenu_MultichoiceWithDefault(u8 left, u8 top, u8 mcId, u8 ignoreBpress, u8 cursorPos)
 {
-    if (FuncIsActiveTask(sub_809CC98) == TRUE)
+    if (FuncIsActiveTask(Task_MultichoiceMenu_HandleInput) == TRUE)
         return FALSE;
     gSpecialVar_Result = SCR_MENU_UNSET;
-    sub_809CA64(left, top, mcId, ignoreBpress, cursorPos);
+    DrawVerticalMultichoiceMenu(left, top, mcId, ignoreBpress, cursorPos);
     return TRUE;
 }
 
-void sub_809CA64(u8 left, u8 top, u8 mcId, u8 ignoreBpress, u8 initPos)
+static void DrawVerticalMultichoiceMenu(u8 left, u8 top, u8 mcId, u8 ignoreBpress, u8 initPos)
 {
     s32 i;
     s32 strWidth;
@@ -735,7 +735,7 @@ void sub_809CA64(u8 left, u8 top, u8 mcId, u8 ignoreBpress, u8 initPos)
     }
 }
 
-u8 sub_809CBB4(u8 count)
+static u8 sub_809CBB4(u8 count)
 {
     switch (count)
     {
@@ -762,14 +762,14 @@ u8 sub_809CBB4(u8 count)
     }
 }
 
-void sub_809CC18(u8 ignoreBpress, u8 count, u8 windowId, u8 mcId)
+static void sub_809CC18(u8 ignoreBpress, u8 count, u8 windowId, u8 mcId)
 {
     u8 taskId;
     if (mcId == 39 || mcId == 47 || mcId == 50)
-        gUnknown_2039988 = 12;
+        sDelay = 12;
     else
-        gUnknown_2039988 = 0;
-    taskId = CreateTask(sub_809CC98, 80);
+        sDelay = 0;
+    taskId = CreateTask(Task_MultichoiceMenu_HandleInput, 80);
     gTasks[taskId].data[4] = ignoreBpress;
     if (count > 3)
         gTasks[taskId].data[5] = TRUE;
@@ -777,17 +777,17 @@ void sub_809CC18(u8 ignoreBpress, u8 count, u8 windowId, u8 mcId)
         gTasks[taskId].data[5] = FALSE;
     gTasks[taskId].data[6] = windowId;
     gTasks[taskId].data[7] = mcId;
-    sub_809CD48(mcId);
+    MultiChoicePrintHelpDescription(mcId);
 }
 
-void sub_809CC98(u8 taskId)
+static void Task_MultichoiceMenu_HandleInput(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     s8 input;
     if (!gPaletteFade.active)
     {
-        if (gUnknown_2039988 != 0)
-            gUnknown_2039988--;
+        if (sDelay != 0)
+            sDelay--;
         else
         {
             if (data[5] == FALSE)
@@ -795,7 +795,7 @@ void sub_809CC98(u8 taskId)
             else
                 input = Menu_ProcessInput();
             if (JOY_NEW(DPAD_UP | DPAD_DOWN))
-                sub_809CD48(data[7]);
+                MultiChoicePrintHelpDescription(data[7]);
             switch (input)
             {
             case -2:
@@ -810,28 +810,28 @@ void sub_809CC98(u8 taskId)
                 gSpecialVar_Result = input;
                 break;
             }
-            sub_809D6B0(data[6]);
+            DestroyScriptMenuWindow(data[6]);
             DestroyTask(taskId);
             EnableBothScriptContexts();
         }
     }
 }
 
-void sub_809CD48(u8 mcId)
+static void MultiChoicePrintHelpDescription(u8 mcId)
 {
     switch (mcId)
     {
     case 39:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, 2, gUnknown_83E072C[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
+        AddTextPrinterParameterized2(0, 2, sDescriptionPtrs_CableClub_TradeBattleCancel[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
         break;
     case 47:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, 2, gUnknown_83E0738[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
+        AddTextPrinterParameterized2(0, 2, sDescriptionPtrs_WirelessCenter_TradeBattleCrushCancel[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
         break;
     case 50:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, 2, gUnknown_83E0748[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
+        AddTextPrinterParameterized2(0, 2, sDescriptionPtrs_WirelessCenter_TradeBattleCancel[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
         break;
     }
 }
@@ -857,7 +857,7 @@ bool8 sub_809CE38(void)
         return TRUE;
 }
 
-void task_yes_no_maybe(u8 taskId)
+static void task_yes_no_maybe(u8 taskId)
 {
     s8 input;
     if (gTasks[taskId].data[2] < 5)
@@ -899,7 +899,7 @@ bool8 ScriptMenu_MultichoiceGrid(u8 left, u8 top, u8 multichoiceId, u8 a4, u8 co
     {
         list = gScriptMultiChoiceMenus[multichoiceId].list;
         count = gScriptMultiChoiceMenus[multichoiceId].count;
-        width = sub_809C974(list, count) + 1;
+        width = GetMenuWidthFromList(list, count) + 1;
         rowCount = count / columnCount;
         taskId = CreateTask(sub_809CFDC, 80);
         gTasks[taskId].data[4] = a4;
@@ -912,7 +912,7 @@ bool8 ScriptMenu_MultichoiceGrid(u8 left, u8 top, u8 multichoiceId, u8 a4, u8 co
     return TRUE;
 }
 
-void sub_809CFDC(u8 taskId)
+static void sub_809CFDC(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     s8 input = Menu_ProcessInputGridLayout();
@@ -930,28 +930,28 @@ void sub_809CFDC(u8 taskId)
         gSpecialVar_Result = input;
         break;
     }
-    sub_809D6B0(data[6]);
+    DestroyScriptMenuWindow(data[6]);
     DestroyTask(taskId);
     EnableBothScriptContexts();
 }
 
 bool8 ScrSpecial_CreatePCMenu(void)
 {
-    if (FuncIsActiveTask(sub_809CC98) == TRUE)
+    if (FuncIsActiveTask(Task_MultichoiceMenu_HandleInput) == TRUE)
         return FALSE;
     gSpecialVar_Result = SCR_MENU_UNSET;
-    sub_809D070();
+    CreatePCMenuWindow();
     return TRUE;
 }
 
-void sub_809D070(void)
+static void CreatePCMenuWindow(void)
 {
     u8 cursorWidth = GetMenuCursorDimensionByFont(2, 0);
     u8 height = GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT);
     u8 windowWidth;
     u8 nitems;
     u8 windowId;
-    switch (sub_809C954(gUnknown_8417BB6))
+    switch (GetStringTilesWide(gUnknown_8417BB6))
     {
     default:
         if (FlagGet(FLAG_SYS_POKEDEX_GET))
@@ -1017,7 +1017,7 @@ static void Task_ScriptShowMonPic(u8 taskId)
         task->data[0]++;
         break;
     case 3:
-        sub_809D6B0(task->data[5]);
+        DestroyScriptMenuWindow(task->data[5]);
         DestroyTask(taskId);
         break;
     }
@@ -1053,7 +1053,7 @@ bool8 (*ScriptMenu_GetPicboxWaitFunc(void))(void)
     return PicboxWait;
 }
 
-bool8 PicboxWait(void)
+static bool8 PicboxWait(void)
 {
     if (FindTaskIdByFunc(Task_ScriptShowMonPic) == 0xFF)
         return TRUE;
@@ -1074,18 +1074,18 @@ void sub_809D424(void)
         case 1:
         case 2:
             sub_8083A5C(&gSprites[task->data[2]], task->data[2]);
-            sub_809D6B0(task->data[5]);
+            DestroyScriptMenuWindow(task->data[5]);
             DestroyTask(taskId);
             break;
         case 3:
-            sub_809D6B0(task->data[5]);
+            DestroyScriptMenuWindow(task->data[5]);
             DestroyTask(taskId);
             break;
         }
     }
 }
 
-void sub_809D494(u8 taskId)
+void Task_WaitMuseumFossilPic(u8 taskId)
 {
     struct Task * task = &gTasks[taskId];
     switch (task->data[0])
@@ -1101,7 +1101,7 @@ void sub_809D494(u8 taskId)
         task->data[0]++;
         break;
     case 3:
-        sub_809D6B0(task->data[5]);
+        DestroyScriptMenuWindow(task->data[5]);
         DestroyTask(taskId);
         break;
     }
@@ -1113,7 +1113,7 @@ bool8 Special_OpenMuseumFossilPic(void)
     u8 taskId;
     if (QuestLog_SchedulePlaybackCB(QLPlaybackCB_DestroyScriptMenuMonPicSprites) == TRUE)
         return TRUE;
-    if (FindTaskIdByFunc(sub_809D494) != 0xFF)
+    if (FindTaskIdByFunc(Task_WaitMuseumFossilPic) != 0xFF)
         return FALSE;
     if (gSpecialVar_0x8004 == SPECIES_KABUTOPS)
     {
@@ -1131,7 +1131,7 @@ bool8 Special_OpenMuseumFossilPic(void)
     }
     spriteId = CreateSprite(&sMuseumFossilSprTemplate, gSpecialVar_0x8005 * 8 + 40, gSpecialVar_0x8006 * 8 + 40, 0);
     gSprites[spriteId].oam.paletteNum = 13;
-    taskId = CreateTask(sub_809D494, 80);
+    taskId = CreateTask(Task_WaitMuseumFossilPic, 80);
     gTasks[taskId].data[5] = CreateWindowFromRect(gSpecialVar_0x8005, gSpecialVar_0x8006, 8, 8);
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].data[2] = spriteId;
@@ -1142,14 +1142,14 @@ bool8 Special_OpenMuseumFossilPic(void)
 
 bool8 Special_CloseMuseumFossilPic(void)
 {
-    u8 taskId = FindTaskIdByFunc(sub_809D494);
+    u8 taskId = FindTaskIdByFunc(Task_WaitMuseumFossilPic);
     if (taskId == 0xFF)
         return FALSE;
     gTasks[taskId].data[0]++;
     return TRUE;
 }
 
-u8 CreateWindowFromRect(u8 left, u8 top, u8 width, u8 height)
+static u8 CreateWindowFromRect(u8 left, u8 top, u8 width, u8 height)
 {
     struct WindowTemplate template = SetWindowTemplateFields(0, left + 1, top + 1, width, height, 15, 0x038);
     u8 windowId = AddWindow(&template);
@@ -1157,7 +1157,7 @@ u8 CreateWindowFromRect(u8 left, u8 top, u8 width, u8 height)
     return windowId;
 }
 
-void sub_809D6B0(u8 windowId)
+static void DestroyScriptMenuWindow(u8 windowId)
 {
     ClearWindowTilemap(windowId);
     ClearStdWindowAndFrameToTransparent(windowId, TRUE);
@@ -1176,7 +1176,7 @@ void QLPlaybackCB_DestroyScriptMenuMonPicSprites(void)
         if (data[0] < 2)
             sub_8083A5C(&gSprites[data[2]], data[2]);
     }
-    taskId = FindTaskIdByFunc(sub_809D494);
+    taskId = FindTaskIdByFunc(Task_WaitMuseumFossilPic);
     if (taskId != 0xFF)
     {
         data = gTasks[taskId].data;

@@ -39,16 +39,16 @@ EventScript_168983:: @ 8168983
 	return
 
 FiveIsland_Meadow_EventScript_16898D:: @ 816898D
-	trainerbattle 0, TRAINER_TEAM_ROCKET_GRUNT_49, 0, Text_18AC88, Text_18ACB3
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_TEAM_ROCKET_GRUNT_49, 0, Text_18AC88, Text_18ACB3
 	msgbox gUnknown_818ACC5, 6
 	end
 
 FiveIsland_Meadow_EventScript_1689A4:: @ 81689A4
-	trainerbattle 0, TRAINER_TEAM_ROCKET_GRUNT_50, 0, Text_18ACF0, Text_18AD39
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_TEAM_ROCKET_GRUNT_50, 0, Text_18ACF0, Text_18AD39
 	msgbox gUnknown_818AD59, 6
 	end
 
 FiveIsland_Meadow_EventScript_1689BB:: @ 81689BB
-	trainerbattle 0, TRAINER_TEAM_ROCKET_GRUNT_51, 0, Text_18ADC6, Text_18ADFB
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_TEAM_ROCKET_GRUNT_51, 0, Text_18ADC6, Text_18ADFB
 	msgbox gUnknown_818AE16, 6
 	end

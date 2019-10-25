@@ -347,7 +347,7 @@ EventScript_16939C:: @ 816939C
 	end
 
 EventScript_1693AC:: @ 81693AC
-	trainerbattle 9, TRAINER_RIVAL_OAKS_LAB_SQUIRTLE, 3, Text_18DDEA, Text_18DE1A
+	trainerbattle TRAINER_BATTLE_TUTORIAL, TRAINER_RIVAL_OAKS_LAB_SQUIRTLE, 3, Text_18DDEA, Text_18DE1A
 	goto EventScript_1694C2
 	end
 
@@ -403,7 +403,7 @@ EventScript_169414:: @ 8169414
 	end
 
 EventScript_169424:: @ 8169424
-	trainerbattle 9, TRAINER_RIVAL_OAKS_LAB_CHARMANDER, 3, Text_18DDEA, Text_18DE1A
+	trainerbattle TRAINER_BATTLE_TUTORIAL, TRAINER_RIVAL_OAKS_LAB_CHARMANDER, 3, Text_18DDEA, Text_18DE1A
 	goto EventScript_1694C2
 	end
 
@@ -462,7 +462,7 @@ EventScript_16948F:: @ 816948F
 	end
 
 EventScript_16949F:: @ 816949F
-	trainerbattle 9, TRAINER_RIVAL_OAKS_LAB_BULBASAUR, 3, Text_18DDEA, Text_18DE1A
+	trainerbattle TRAINER_BATTLE_TUTORIAL, TRAINER_RIVAL_OAKS_LAB_BULBASAUR, 3, Text_18DDEA, Text_18DE1A
 	goto EventScript_1694C2
 	end
 

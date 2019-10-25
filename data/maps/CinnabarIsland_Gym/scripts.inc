@@ -54,7 +54,7 @@ EventScript_16D9CE:: @ 816D9CE
 
 CinnabarIsland_Gym_EventScript_16D9D4:: @ 816D9D4
 	famechecker FAMECHECKER_BLAINE, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
-	trainerbattle 1, TRAINER_LEADER_BLAINE, 0, Text_199543, Text_1995FA, EventScript_16DA06
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT_NO_MUSIC, TRAINER_LEADER_BLAINE, 0, Text_199543, Text_1995FA, EventScript_16DA06
 	checkflag FLAG_GOT_TM38_FROM_BLAINE
 	goto_if FALSE, EventScript_16DA34
 	msgbox gUnknown_819971D
@@ -90,12 +90,12 @@ EventScript_16DA75:: @ 816DA75
 	end
 
 CinnabarIsland_Gym_EventScript_16DA7F:: @ 816DA7F
-	trainerbattle 0, TRAINER_SUPER_NERD_ERIK, 0, Text_1997A5, Text_1997D6
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SUPER_NERD_ERIK, 0, Text_1997A5, Text_1997D6
 	msgbox gUnknown_81997EA, 6
 	end
 
 CinnabarIsland_Gym_EventScript_16DA96:: @ 816DA96
-	trainerbattle 2, TRAINER_SUPER_NERD_AVERY, 0, Text_1998BD, Text_1998ED, EventScript_16DAB1
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_SUPER_NERD_AVERY, 0, Text_1998BD, Text_1998ED, EventScript_16DAB1
 	msgbox gUnknown_8199911, 6
 	end
 
@@ -110,7 +110,7 @@ EventScript_16DABC:: @ 816DABC
 	return
 
 CinnabarIsland_Gym_EventScript_16DAC2:: @ 816DAC2
-	trainerbattle 2, TRAINER_SUPER_NERD_DEREK, 0, Text_1999B7, Text_1999DB, EventScript_16DAEA
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_SUPER_NERD_DEREK, 0, Text_1999B7, Text_1999DB, EventScript_16DAEA
 	famechecker FAMECHECKER_BLAINE, 2
 	msgbox gUnknown_81999DF, 6
 	end
@@ -126,7 +126,7 @@ EventScript_16DAF5:: @ 816DAF5
 	return
 
 CinnabarIsland_Gym_EventScript_16DAFB:: @ 816DAFB
-	trainerbattle 2, TRAINER_SUPER_NERD_ZAC, 0, Text_199AFC, Text_199B16, EventScript_16DB16
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_SUPER_NERD_ZAC, 0, Text_199AFC, Text_199B16, EventScript_16DB16
 	msgbox gUnknown_8199B27, 6
 	end
 
@@ -141,7 +141,7 @@ EventScript_16DB21:: @ 816DB21
 	return
 
 CinnabarIsland_Gym_EventScript_16DB27:: @ 816DB27
-	trainerbattle 2, TRAINER_BURGLAR_QUINN, 0, Text_19983F, Text_199870, EventScript_16DB42
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_BURGLAR_QUINN, 0, Text_19983F, Text_199870, EventScript_16DB42
 	msgbox gUnknown_819987D, 6
 	end
 
@@ -156,7 +156,7 @@ EventScript_16DB4D:: @ 816DB4D
 	return
 
 CinnabarIsland_Gym_EventScript_16DB53:: @ 816DB53
-	trainerbattle 2, TRAINER_BURGLAR_RAMON, 0, Text_199948, Text_199973, EventScript_16DB6E
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_BURGLAR_RAMON, 0, Text_199948, Text_199973, EventScript_16DB6E
 	msgbox gUnknown_8199986, 6
 	end
 
@@ -171,7 +171,7 @@ EventScript_16DB79:: @ 816DB79
 	return
 
 CinnabarIsland_Gym_EventScript_16DB7F:: @ 816DB7F
-	trainerbattle 2, TRAINER_BURGLAR_DUSTY, 0, Text_199A7F, Text_199AB9, EventScript_16DB9A
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_BURGLAR_DUSTY, 0, Text_199A7F, Text_199AB9, EventScript_16DB9A
 	msgbox gUnknown_8199AC9, 6
 	end
 
@@ -281,7 +281,7 @@ EventScript_16DC7A:: @ 816DC7A
 	call_if eq, EventScript_16DCC6
 	textcolor 0
 	msgbox gUnknown_819983F
-	trainerbattle 3, TRAINER_BURGLAR_QUINN, 0, Text_199870
+	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_BURGLAR_QUINN, 0, Text_199870
 	checkflag FLAG_CINNABAR_GYM_QUIZ_1
 	goto_if TRUE, EventScript_16DC68
 	call EventScript_16DC58
@@ -360,7 +360,7 @@ EventScript_16DD51:: @ 816DD51
 	call_if eq, EventScript_16DD9D
 	textcolor 0
 	msgbox gUnknown_81998BD
-	trainerbattle 3, TRAINER_SUPER_NERD_AVERY, 0, Text_1998ED
+	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_SUPER_NERD_AVERY, 0, Text_1998ED
 	checkflag FLAG_CINNABAR_GYM_QUIZ_2
 	goto_if TRUE, EventScript_16DC68
 	call EventScript_16DD31
@@ -448,7 +448,7 @@ EventScript_16DE2F:: @ 816DE2F
 	call_if eq, EventScript_16DE7B
 	textcolor 0
 	msgbox gUnknown_8199948
-	trainerbattle 3, TRAINER_BURGLAR_RAMON, 0, Text_199973
+	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_BURGLAR_RAMON, 0, Text_199973
 	checkflag FLAG_CINNABAR_GYM_QUIZ_3
 	goto_if TRUE, EventScript_16DC68
 	call EventScript_16DE0F
@@ -527,7 +527,7 @@ EventScript_16DF06:: @ 816DF06
 	call_if eq, EventScript_16DF52
 	textcolor 0
 	msgbox gUnknown_81999B7
-	trainerbattle 3, TRAINER_SUPER_NERD_DEREK, 0, Text_1999DB
+	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_SUPER_NERD_DEREK, 0, Text_1999DB
 	checkflag FLAG_CINNABAR_GYM_QUIZ_4
 	goto_if TRUE, EventScript_16DC68
 	call EventScript_16DEE6
@@ -606,7 +606,7 @@ EventScript_16DFDD:: @ 816DFDD
 	call_if eq, EventScript_16E029
 	textcolor 0
 	msgbox gUnknown_8199A7F
-	trainerbattle 3, TRAINER_BURGLAR_DUSTY, 0, Text_199AB9
+	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_BURGLAR_DUSTY, 0, Text_199AB9
 	checkflag FLAG_CINNABAR_GYM_QUIZ_5
 	goto_if TRUE, EventScript_16DC68
 	call EventScript_16DFBD
@@ -685,7 +685,7 @@ EventScript_16E0B4:: @ 816E0B4
 	call_if eq, EventScript_16E100
 	textcolor 0
 	msgbox gUnknown_8199AFC
-	trainerbattle 3, TRAINER_SUPER_NERD_ZAC, 0, Text_199B16
+	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_SUPER_NERD_ZAC, 0, Text_199B16
 	checkflag FLAG_CINNABAR_GYM_QUIZ_6
 	goto_if TRUE, EventScript_16DC68
 	call EventScript_16E094

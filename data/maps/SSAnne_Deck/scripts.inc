@@ -14,11 +14,11 @@ SSAnne_Deck_EventScript_160A7B:: @ 8160A7B
 	end
 
 SSAnne_Deck_EventScript_160A84:: @ 8160A84
-	trainerbattle 0, TRAINER_SAILOR_EDMOND, 0, Text_173308, Text_17332B
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SAILOR_EDMOND, 0, Text_173308, Text_17332B
 	msgbox gUnknown_817333E, 6
 	end
 
 SSAnne_Deck_EventScript_160A9B:: @ 8160A9B
-	trainerbattle 0, TRAINER_SAILOR_TREVOR, 0, Text_173382, Text_1733A0
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SAILOR_TREVOR, 0, Text_173382, Text_1733A0
 	msgbox gUnknown_81733B5, 6
 	end

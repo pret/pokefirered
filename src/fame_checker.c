@@ -26,6 +26,7 @@
 #include "menu_indicators.h"
 #include "text_window.h"
 #include "fame_checker.h"
+#include "constants/trainers.h"
 
 #define SPRITETAG_SELECTOR_CURSOR 1000
 #define SPRITETAG_QUESTION_MARK 1001
@@ -878,7 +879,7 @@ static void FC_DestroyWindow(u8 windowId)
 
 static u8 AdjustGiovanniIndexIfBeatenInGym(u8 a0)
 {
-    if (HasTrainerBeenFought(0x15e) == TRUE)
+    if (HasTrainerBeenFought(TRAINER_LEADER_GIOVANNI) == TRUE)
     {
         if (a0 == 9)
             return FAMECHECKER_GIOVANNI;

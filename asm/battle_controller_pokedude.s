@@ -2862,7 +2862,7 @@ sub_81577B4: @ 81577B4
 	ldr r0, _081577E4 @ =gActiveBattler
 	ldrb r0, [r0]
 	lsls r2, r0, 9
-	ldr r1, _081577E8 @ =(gBattleBufferA + 3)
+	ldr r1, _081577E8 @ =gBattleBufferA + 3
 	adds r5, r2, r1
 	mov r8, r5
 	bl GetBattlerSide
@@ -2876,7 +2876,7 @@ sub_81577B4: @ 81577B4
 	b _081577F8
 	.align 2, 0
 _081577E4: .4byte gActiveBattler
-_081577E8: .4byte (gBattleBufferA + 3)
+_081577E8: .4byte gBattleBufferA + 3
 _081577EC: .4byte gPlayerParty
 _081577F0:
 	movs r0, 0x64
@@ -3148,7 +3148,7 @@ _08157AA4:
 	ldr r0, _08157AB8 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157ABC @ =(gBattleBufferA + 3)
+	ldr r0, _08157ABC @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0xB
@@ -3156,12 +3156,12 @@ _08157AA4:
 	b _0815809A
 	.align 2, 0
 _08157AB8: .4byte gActiveBattler
-_08157ABC: .4byte (gBattleBufferA + 3)
+_08157ABC: .4byte gBattleBufferA + 3
 _08157AC0:
 	ldr r0, _08157AD4 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157AD8 @ =(gBattleBufferA + 3)
+	ldr r0, _08157AD8 @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0xC
@@ -3169,7 +3169,7 @@ _08157AC0:
 	b _0815809A
 	.align 2, 0
 _08157AD4: .4byte gActiveBattler
-_08157AD8: .4byte (gBattleBufferA + 3)
+_08157AD8: .4byte gBattleBufferA + 3
 _08157ADC:
 	movs r4, 0
 	movs r0, 0xC
@@ -3213,7 +3213,7 @@ _08157B2C:
 	ldr r5, _08157B80 @ =gActiveBattler
 	ldrb r2, [r5]
 	lsls r2, 9
-	ldr r4, _08157B84 @ =(gBattleBufferA + 3)
+	ldr r4, _08157B84 @ =gBattleBufferA + 3
 	adds r2, r4
 	adds r0, r6, 0
 	movs r1, 0x11
@@ -3249,7 +3249,7 @@ _08157B2C:
 	b _0815809A
 	.align 2, 0
 _08157B80: .4byte gActiveBattler
-_08157B84: .4byte (gBattleBufferA + 3)
+_08157B84: .4byte gBattleBufferA + 3
 _08157B88:
 	ldr r0, _08157BA4 @ =gActiveBattler
 	ldrb r2, [r0]
@@ -3270,7 +3270,7 @@ _08157BA8:
 	ldr r0, _08157BBC @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157BC0 @ =(gBattleBufferA + 3)
+	ldr r0, _08157BC0 @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x1
@@ -3278,12 +3278,12 @@ _08157BA8:
 	b _0815809A
 	.align 2, 0
 _08157BBC: .4byte gActiveBattler
-_08157BC0: .4byte (gBattleBufferA + 3)
+_08157BC0: .4byte gBattleBufferA + 3
 _08157BC4:
 	ldr r0, _08157BD8 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157BDC @ =(gBattleBufferA + 3)
+	ldr r0, _08157BDC @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x19
@@ -3291,12 +3291,12 @@ _08157BC4:
 	b _0815809A
 	.align 2, 0
 _08157BD8: .4byte gActiveBattler
-_08157BDC: .4byte (gBattleBufferA + 3)
+_08157BDC: .4byte gBattleBufferA + 3
 _08157BE0:
 	ldr r0, _08157BF4 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157BF8 @ =(gBattleBufferA + 3)
+	ldr r0, _08157BF8 @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x1A
@@ -3304,12 +3304,12 @@ _08157BE0:
 	b _0815809A
 	.align 2, 0
 _08157BF4: .4byte gActiveBattler
-_08157BF8: .4byte (gBattleBufferA + 3)
+_08157BF8: .4byte gBattleBufferA + 3
 _08157BFC:
 	ldr r0, _08157C10 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157C14 @ =(gBattleBufferA + 3)
+	ldr r0, _08157C14 @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x1B
@@ -3317,12 +3317,12 @@ _08157BFC:
 	b _0815809A
 	.align 2, 0
 _08157C10: .4byte gActiveBattler
-_08157C14: .4byte (gBattleBufferA + 3)
+_08157C14: .4byte gBattleBufferA + 3
 _08157C18:
 	ldr r0, _08157C2C @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157C30 @ =(gBattleBufferA + 3)
+	ldr r0, _08157C30 @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x1C
@@ -3330,12 +3330,12 @@ _08157C18:
 	b _0815809A
 	.align 2, 0
 _08157C2C: .4byte gActiveBattler
-_08157C30: .4byte (gBattleBufferA + 3)
+_08157C30: .4byte gBattleBufferA + 3
 _08157C34:
 	ldr r0, _08157C48 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157C4C @ =(gBattleBufferA + 3)
+	ldr r0, _08157C4C @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x1D
@@ -3343,12 +3343,12 @@ _08157C34:
 	b _0815809A
 	.align 2, 0
 _08157C48: .4byte gActiveBattler
-_08157C4C: .4byte (gBattleBufferA + 3)
+_08157C4C: .4byte gBattleBufferA + 3
 _08157C50:
 	ldr r0, _08157C64 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157C68 @ =(gBattleBufferA + 3)
+	ldr r0, _08157C68 @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x1E
@@ -3356,12 +3356,12 @@ _08157C50:
 	b _0815809A
 	.align 2, 0
 _08157C64: .4byte gActiveBattler
-_08157C68: .4byte (gBattleBufferA + 3)
+_08157C68: .4byte gBattleBufferA + 3
 _08157C6C:
 	ldr r0, _08157C80 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157C84 @ =(gBattleBufferA + 3)
+	ldr r0, _08157C84 @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x1F
@@ -3369,12 +3369,12 @@ _08157C6C:
 	b _0815809A
 	.align 2, 0
 _08157C80: .4byte gActiveBattler
-_08157C84: .4byte (gBattleBufferA + 3)
+_08157C84: .4byte gBattleBufferA + 3
 _08157C88:
 	ldr r0, _08157C9C @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157CA0 @ =(gBattleBufferA + 3)
+	ldr r0, _08157CA0 @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x20
@@ -3382,12 +3382,12 @@ _08157C88:
 	b _0815809A
 	.align 2, 0
 _08157C9C: .4byte gActiveBattler
-_08157CA0: .4byte (gBattleBufferA + 3)
+_08157CA0: .4byte gBattleBufferA + 3
 _08157CA4:
 	ldr r0, _08157CB8 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157CBC @ =(gBattleBufferA + 3)
+	ldr r0, _08157CBC @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x22
@@ -3395,12 +3395,12 @@ _08157CA4:
 	b _0815809A
 	.align 2, 0
 _08157CB8: .4byte gActiveBattler
-_08157CBC: .4byte (gBattleBufferA + 3)
+_08157CBC: .4byte gBattleBufferA + 3
 _08157CC0:
 	ldr r0, _08157CD4 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157CD8 @ =(gBattleBufferA + 3)
+	ldr r0, _08157CD8 @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x23
@@ -3408,12 +3408,12 @@ _08157CC0:
 	b _0815809A
 	.align 2, 0
 _08157CD4: .4byte gActiveBattler
-_08157CD8: .4byte (gBattleBufferA + 3)
+_08157CD8: .4byte gBattleBufferA + 3
 _08157CDC:
 	ldr r0, _08157CF0 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157CF4 @ =(gBattleBufferA + 3)
+	ldr r0, _08157CF4 @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x24
@@ -3421,12 +3421,12 @@ _08157CDC:
 	b _0815809A
 	.align 2, 0
 _08157CF0: .4byte gActiveBattler
-_08157CF4: .4byte (gBattleBufferA + 3)
+_08157CF4: .4byte gBattleBufferA + 3
 _08157CF8:
 	ldr r0, _08157D0C @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157D10 @ =(gBattleBufferA + 3)
+	ldr r0, _08157D10 @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x25
@@ -3434,12 +3434,12 @@ _08157CF8:
 	b _0815809A
 	.align 2, 0
 _08157D0C: .4byte gActiveBattler
-_08157D10: .4byte (gBattleBufferA + 3)
+_08157D10: .4byte gBattleBufferA + 3
 _08157D14:
 	ldr r0, _08157D28 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157D2C @ =(gBattleBufferA + 3)
+	ldr r0, _08157D2C @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x26
@@ -3447,12 +3447,12 @@ _08157D14:
 	b _0815809A
 	.align 2, 0
 _08157D28: .4byte gActiveBattler
-_08157D2C: .4byte (gBattleBufferA + 3)
+_08157D2C: .4byte gBattleBufferA + 3
 _08157D30:
 	ldr r5, _08157D8C @ =gActiveBattler
 	ldrb r2, [r5]
 	lsls r2, 9
-	ldr r4, _08157D90 @ =(gBattleBufferA + 3)
+	ldr r4, _08157D90 @ =gBattleBufferA + 3
 	adds r2, r4
 	adds r0, r6, 0
 	movs r1, 0x27
@@ -3492,12 +3492,12 @@ _08157D30:
 	b _08157E2A
 	.align 2, 0
 _08157D8C: .4byte gActiveBattler
-_08157D90: .4byte (gBattleBufferA + 3)
+_08157D90: .4byte gBattleBufferA + 3
 _08157D94:
 	ldr r0, _08157DA8 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157DAC @ =(gBattleBufferA + 3)
+	ldr r0, _08157DAC @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x27
@@ -3505,12 +3505,12 @@ _08157D94:
 	b _0815809A
 	.align 2, 0
 _08157DA8: .4byte gActiveBattler
-_08157DAC: .4byte (gBattleBufferA + 3)
+_08157DAC: .4byte gBattleBufferA + 3
 _08157DB0:
 	ldr r0, _08157DC4 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157DC8 @ =(gBattleBufferA + 3)
+	ldr r0, _08157DC8 @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x28
@@ -3518,12 +3518,12 @@ _08157DB0:
 	b _0815809A
 	.align 2, 0
 _08157DC4: .4byte gActiveBattler
-_08157DC8: .4byte (gBattleBufferA + 3)
+_08157DC8: .4byte gBattleBufferA + 3
 _08157DCC:
 	ldr r0, _08157DE0 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157DE4 @ =(gBattleBufferA + 3)
+	ldr r0, _08157DE4 @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x29
@@ -3531,12 +3531,12 @@ _08157DCC:
 	b _0815809A
 	.align 2, 0
 _08157DE0: .4byte gActiveBattler
-_08157DE4: .4byte (gBattleBufferA + 3)
+_08157DE4: .4byte gBattleBufferA + 3
 _08157DE8:
 	ldr r0, _08157DFC @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157E00 @ =(gBattleBufferA + 3)
+	ldr r0, _08157E00 @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x2A
@@ -3544,12 +3544,12 @@ _08157DE8:
 	b _0815809A
 	.align 2, 0
 _08157DFC: .4byte gActiveBattler
-_08157E00: .4byte (gBattleBufferA + 3)
+_08157E00: .4byte gBattleBufferA + 3
 _08157E04:
 	ldr r0, _08157E18 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157E1C @ =(gBattleBufferA + 3)
+	ldr r0, _08157E1C @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x2B
@@ -3557,12 +3557,12 @@ _08157E04:
 	b _0815809A
 	.align 2, 0
 _08157E18: .4byte gActiveBattler
-_08157E1C: .4byte (gBattleBufferA + 3)
+_08157E1C: .4byte gBattleBufferA + 3
 _08157E20:
 	ldr r0, _08157E34 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157E38 @ =(gBattleBufferA + 3)
+	ldr r0, _08157E38 @ =gBattleBufferA + 3
 	adds r2, r0
 _08157E2A:
 	adds r0, r6, 0
@@ -3571,12 +3571,12 @@ _08157E2A:
 	b _0815809A
 	.align 2, 0
 _08157E34: .4byte gActiveBattler
-_08157E38: .4byte (gBattleBufferA + 3)
+_08157E38: .4byte gBattleBufferA + 3
 _08157E3C:
 	ldr r0, _08157E50 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157E54 @ =(gBattleBufferA + 3)
+	ldr r0, _08157E54 @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0
@@ -3584,12 +3584,12 @@ _08157E3C:
 	b _0815809A
 	.align 2, 0
 _08157E50: .4byte gActiveBattler
-_08157E54: .4byte (gBattleBufferA + 3)
+_08157E54: .4byte gBattleBufferA + 3
 _08157E58:
 	ldr r0, _08157E6C @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157E70 @ =(gBattleBufferA + 3)
+	ldr r0, _08157E70 @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x9
@@ -3597,12 +3597,12 @@ _08157E58:
 	b _0815809A
 	.align 2, 0
 _08157E6C: .4byte gActiveBattler
-_08157E70: .4byte (gBattleBufferA + 3)
+_08157E70: .4byte gBattleBufferA + 3
 _08157E74:
 	ldr r0, _08157E88 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157E8C @ =(gBattleBufferA + 3)
+	ldr r0, _08157E8C @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x37
@@ -3610,12 +3610,12 @@ _08157E74:
 	b _0815809A
 	.align 2, 0
 _08157E88: .4byte gActiveBattler
-_08157E8C: .4byte (gBattleBufferA + 3)
+_08157E8C: .4byte gBattleBufferA + 3
 _08157E90:
 	ldr r0, _08157EA4 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157EA8 @ =(gBattleBufferA + 3)
+	ldr r0, _08157EA8 @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x38
@@ -3623,12 +3623,12 @@ _08157E90:
 	b _0815809A
 	.align 2, 0
 _08157EA4: .4byte gActiveBattler
-_08157EA8: .4byte (gBattleBufferA + 3)
+_08157EA8: .4byte gBattleBufferA + 3
 _08157EAC:
 	ldr r0, _08157EC0 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157EC4 @ =(gBattleBufferA + 3)
+	ldr r0, _08157EC4 @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x39
@@ -3636,12 +3636,12 @@ _08157EAC:
 	b _0815809A
 	.align 2, 0
 _08157EC0: .4byte gActiveBattler
-_08157EC4: .4byte (gBattleBufferA + 3)
+_08157EC4: .4byte gBattleBufferA + 3
 _08157EC8:
 	ldr r0, _08157EDC @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157EE0 @ =(gBattleBufferA + 3)
+	ldr r0, _08157EE0 @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x3A
@@ -3649,12 +3649,12 @@ _08157EC8:
 	b _0815809A
 	.align 2, 0
 _08157EDC: .4byte gActiveBattler
-_08157EE0: .4byte (gBattleBufferA + 3)
+_08157EE0: .4byte gBattleBufferA + 3
 _08157EE4:
 	ldr r0, _08157EF8 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157EFC @ =(gBattleBufferA + 3)
+	ldr r0, _08157EFC @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x3B
@@ -3662,12 +3662,12 @@ _08157EE4:
 	b _0815809A
 	.align 2, 0
 _08157EF8: .4byte gActiveBattler
-_08157EFC: .4byte (gBattleBufferA + 3)
+_08157EFC: .4byte gBattleBufferA + 3
 _08157F00:
 	ldr r0, _08157F14 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157F18 @ =(gBattleBufferA + 3)
+	ldr r0, _08157F18 @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x3C
@@ -3675,12 +3675,12 @@ _08157F00:
 	b _0815809A
 	.align 2, 0
 _08157F14: .4byte gActiveBattler
-_08157F18: .4byte (gBattleBufferA + 3)
+_08157F18: .4byte gBattleBufferA + 3
 _08157F1C:
 	ldr r0, _08157F30 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157F34 @ =(gBattleBufferA + 3)
+	ldr r0, _08157F34 @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x3D
@@ -3688,12 +3688,12 @@ _08157F1C:
 	b _0815809A
 	.align 2, 0
 _08157F30: .4byte gActiveBattler
-_08157F34: .4byte (gBattleBufferA + 3)
+_08157F34: .4byte gBattleBufferA + 3
 _08157F38:
 	ldr r0, _08157F4C @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157F50 @ =(gBattleBufferA + 3)
+	ldr r0, _08157F50 @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x3E
@@ -3701,12 +3701,12 @@ _08157F38:
 	b _0815809A
 	.align 2, 0
 _08157F4C: .4byte gActiveBattler
-_08157F50: .4byte (gBattleBufferA + 3)
+_08157F50: .4byte gBattleBufferA + 3
 _08157F54:
 	ldr r0, _08157F68 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157F6C @ =(gBattleBufferA + 3)
+	ldr r0, _08157F6C @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x3F
@@ -3714,12 +3714,12 @@ _08157F54:
 	b _0815809A
 	.align 2, 0
 _08157F68: .4byte gActiveBattler
-_08157F6C: .4byte (gBattleBufferA + 3)
+_08157F6C: .4byte gBattleBufferA + 3
 _08157F70:
 	ldr r0, _08157F84 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157F88 @ =(gBattleBufferA + 3)
+	ldr r0, _08157F88 @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x16
@@ -3727,12 +3727,12 @@ _08157F70:
 	b _0815809A
 	.align 2, 0
 _08157F84: .4byte gActiveBattler
-_08157F88: .4byte (gBattleBufferA + 3)
+_08157F88: .4byte gBattleBufferA + 3
 _08157F8C:
 	ldr r0, _08157FA0 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157FA4 @ =(gBattleBufferA + 3)
+	ldr r0, _08157FA4 @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x17
@@ -3740,12 +3740,12 @@ _08157F8C:
 	b _0815809A
 	.align 2, 0
 _08157FA0: .4byte gActiveBattler
-_08157FA4: .4byte (gBattleBufferA + 3)
+_08157FA4: .4byte gBattleBufferA + 3
 _08157FA8:
 	ldr r0, _08157FBC @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157FC0 @ =(gBattleBufferA + 3)
+	ldr r0, _08157FC0 @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x18
@@ -3753,12 +3753,12 @@ _08157FA8:
 	b _0815809A
 	.align 2, 0
 _08157FBC: .4byte gActiveBattler
-_08157FC0: .4byte (gBattleBufferA + 3)
+_08157FC0: .4byte gBattleBufferA + 3
 _08157FC4:
 	ldr r0, _08157FD8 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157FDC @ =(gBattleBufferA + 3)
+	ldr r0, _08157FDC @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x21
@@ -3766,12 +3766,12 @@ _08157FC4:
 	b _0815809A
 	.align 2, 0
 _08157FD8: .4byte gActiveBattler
-_08157FDC: .4byte (gBattleBufferA + 3)
+_08157FDC: .4byte gBattleBufferA + 3
 _08157FE0:
 	ldr r0, _08157FF4 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08157FF8 @ =(gBattleBufferA + 3)
+	ldr r0, _08157FF8 @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x2F
@@ -3779,12 +3779,12 @@ _08157FE0:
 	b _0815809A
 	.align 2, 0
 _08157FF4: .4byte gActiveBattler
-_08157FF8: .4byte (gBattleBufferA + 3)
+_08157FF8: .4byte gBattleBufferA + 3
 _08157FFC:
 	ldr r0, _08158010 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08158014 @ =(gBattleBufferA + 3)
+	ldr r0, _08158014 @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x30
@@ -3792,12 +3792,12 @@ _08157FFC:
 	b _0815809A
 	.align 2, 0
 _08158010: .4byte gActiveBattler
-_08158014: .4byte (gBattleBufferA + 3)
+_08158014: .4byte gBattleBufferA + 3
 _08158018:
 	ldr r0, _0815802C @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08158030 @ =(gBattleBufferA + 3)
+	ldr r0, _08158030 @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x32
@@ -3805,12 +3805,12 @@ _08158018:
 	b _0815809A
 	.align 2, 0
 _0815802C: .4byte gActiveBattler
-_08158030: .4byte (gBattleBufferA + 3)
+_08158030: .4byte gBattleBufferA + 3
 _08158034:
 	ldr r0, _08158048 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _0815804C @ =(gBattleBufferA + 3)
+	ldr r0, _0815804C @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x33
@@ -3818,12 +3818,12 @@ _08158034:
 	b _0815809A
 	.align 2, 0
 _08158048: .4byte gActiveBattler
-_0815804C: .4byte (gBattleBufferA + 3)
+_0815804C: .4byte gBattleBufferA + 3
 _08158050:
 	ldr r0, _08158064 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08158068 @ =(gBattleBufferA + 3)
+	ldr r0, _08158068 @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x34
@@ -3831,12 +3831,12 @@ _08158050:
 	b _0815809A
 	.align 2, 0
 _08158064: .4byte gActiveBattler
-_08158068: .4byte (gBattleBufferA + 3)
+_08158068: .4byte gBattleBufferA + 3
 _0815806C:
 	ldr r0, _08158080 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _08158084 @ =(gBattleBufferA + 3)
+	ldr r0, _08158084 @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x35
@@ -3844,12 +3844,12 @@ _0815806C:
 	b _0815809A
 	.align 2, 0
 _08158080: .4byte gActiveBattler
-_08158084: .4byte (gBattleBufferA + 3)
+_08158084: .4byte gBattleBufferA + 3
 _08158088:
 	ldr r0, _081580C4 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r2, 9
-	ldr r0, _081580C8 @ =(gBattleBufferA + 3)
+	ldr r0, _081580C8 @ =gBattleBufferA + 3
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x36
@@ -3876,7 +3876,7 @@ _0815809A:
 	bx r0
 	.align 2, 0
 _081580C4: .4byte gActiveBattler
-_081580C8: .4byte (gBattleBufferA + 3)
+_081580C8: .4byte gBattleBufferA + 3
 _081580CC: .4byte gBattlerPartyIndexes
 _081580D0: .4byte gPlayerParty
 	thumb_func_end sub_81577B4
@@ -5063,7 +5063,7 @@ sub_8158A88: @ 8158A88
 	ldr r0, _08158AC4 @ =gActiveBattler
 	ldrb r4, [r0]
 	lsls r4, 9
-	ldr r0, _08158AC8 @ =(gBattleBufferA + 2)
+	ldr r0, _08158AC8 @ =gBattleBufferA + 2
 	adds r4, r0
 	ldrh r0, [r4]
 	bl BufferStringBattle
@@ -5080,7 +5080,7 @@ sub_8158A88: @ 8158A88
 _08158ABC: .4byte gBattle_BG0_X
 _08158AC0: .4byte gBattle_BG0_Y
 _08158AC4: .4byte gActiveBattler
-_08158AC8: .4byte (gBattleBufferA + 2)
+_08158AC8: .4byte gBattleBufferA + 2
 _08158ACC: .4byte gDisplayedStringBattle
 _08158AD0:
 	ldr r0, _08158AEC @ =gDisplayedStringBattle
@@ -6552,7 +6552,7 @@ _08159690:
 	strb r1, [r0]
 	ldrb r0, [r5]
 	lsls r4, r0, 9
-	ldr r3, _081596DC @ =(gBattleBufferA + 4)
+	ldr r3, _081596DC @ =gBattleBufferA + 4
 	adds r1, r4, r3
 	subs r2, r3, 0x3
 	adds r2, r4, r2
@@ -6573,7 +6573,7 @@ _081596CE:
 	.align 2, 0
 _081596D4: .4byte gBattleSpritesDataPtr
 _081596D8: .4byte gActiveBattler
-_081596DC: .4byte (gBattleBufferA + 4)
+_081596DC: .4byte gBattleBufferA + 4
 _081596E0: .4byte gBattlerStatusSummaryTaskId
 	thumb_func_end sub_8159660
 
@@ -7081,7 +7081,7 @@ sub_8159AB8: @ 8159AB8
 	ldr r3, _08159B5C @ =gActiveBattler
 	ldrb r5, [r3]
 	lsls r1, r5, 9
-	ldr r0, _08159B60 @ =(gBattleBufferA + 2)
+	ldr r0, _08159B60 @ =gBattleBufferA + 2
 	adds r7, r1, r0
 	mov r12, r7
 	subs r0, 0x2
@@ -7150,7 +7150,7 @@ _08159B04:
 _08159B54: .4byte gUnknown_8479198
 _08159B58: .4byte gBattleStruct
 _08159B5C: .4byte gActiveBattler
-_08159B60: .4byte (gBattleBufferA + 2)
+_08159B60: .4byte gBattleBufferA + 2
 _08159B64: .4byte gBattlerControllerFuncs
 _08159B68: .4byte gUnknown_3005EE0
 _08159B6C:

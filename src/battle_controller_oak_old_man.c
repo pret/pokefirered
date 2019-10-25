@@ -25,84 +25,85 @@
 #include "constants/songs.h"
 #include "constants/items.h"
 
-void OakOldManHandleGetMonData(void);
-void OakOldManHandleGetRawMonData(void);
-void OakOldManHandleSetMonData(void);
-void OakOldManHandleSetRawMonData(void);
-void OakOldManHandleLoadMonSprite(void);
-void OakOldManHandleSwitchInAnim(void);
-void OakOldManHandleReturnMonToBall(void);
-void OakOldManHandleDrawTrainerPic(void);
-void OakOldManHandleTrainerSlide(void);
-void OakOldManHandleTrainerSlideBack(void);
-void OakOldManHandleFaintAnimation(void);
-void OakOldManHandlePaletteFade(void);
-void OakOldManHandleSuccessBallThrowAnim(void);
-void OakOldManHandleBallThrowAnim(void);
-void OakOldManHandlePause(void);
-void OakOldManHandleMoveAnimation(void);
-void OakOldManHandlePrintString(void);
-void OakOldManHandlePrintSelectionString(void);
-void OakOldManHandleChooseAction(void);
-void OakOldManHandleUnknownYesNoBox(void);
-void OakOldManHandleChooseMove(void);
-void OakOldManHandleChooseItem(void);
-void OakOldManHandleChoosePokemon(void);
-void OakOldManHandleCmd23(void);
-void OakOldManHandleHealthBarUpdate(void);
-void OakOldManHandleExpUpdate(void);
-void OakOldManHandleStatusIconUpdate(void);
-void OakOldManHandleStatusAnimation(void);
-void OakOldManHandleStatusXor(void);
-void OakOldManHandleDataTransfer(void);
-void OakOldManHandleDMA3Transfer(void);
-void OakOldManHandlePlayBGM(void);
-void OakOldManHandleCmd32(void);
-void OakOldManHandleTwoReturnValues(void);
-void OakOldManHandleChosenMonReturnValue(void);
-void OakOldManHandleOneReturnValue(void);
-void OakOldManHandleOneReturnValue_Duplicate(void);
-void OakOldManHandleCmd37(void);
-void OakOldManHandleCmd38(void);
-void OakOldManHandleCmd39(void);
-void OakOldManHandleCmd40(void);
-void OakOldManHandleHitAnimation(void);
-void OakOldManHandleCmd42(void);
-void OakOldManHandlePlaySE(void);
-void OakOldManHandlePlayFanfare(void);
-void OakOldManHandleFaintingCry(void);
-void OakOldManHandleIntroSlide(void);
-void OakOldManHandleIntroTrainerBallThrow(void);
-void OakOldManHandleDrawPartyStatusSummary(void);
-void OakOldManHandleHidePartyStatusSummary(void);
-void OakOldManHandleEndBounceEffect(void);
-void OakOldManHandleSpriteInvisibility(void);
-void OakOldManHandleBattleAnimation(void);
-void OakOldManHandleLinkStandbyMsg(void);
-void OakOldManHandleResetActionMoveSelection(void);
-void OakOldManHandleCmd55(void);
-void OakOldManCmdEnd(void);
+static void OakOldManHandleGetMonData(void);
+static void OakOldManHandleGetRawMonData(void);
+static void OakOldManHandleSetMonData(void);
+static void OakOldManHandleSetRawMonData(void);
+static void OakOldManHandleLoadMonSprite(void);
+static void OakOldManHandleSwitchInAnim(void);
+static void OakOldManHandleReturnMonToBall(void);
+static void OakOldManHandleDrawTrainerPic(void);
+static void OakOldManHandleTrainerSlide(void);
+static void OakOldManHandleTrainerSlideBack(void);
+static void OakOldManHandleFaintAnimation(void);
+static void OakOldManHandlePaletteFade(void);
+static void OakOldManHandleSuccessBallThrowAnim(void);
+static void OakOldManHandleBallThrowAnim(void);
+static void OakOldManHandlePause(void);
+static void OakOldManHandleMoveAnimation(void);
+static void OakOldManHandlePrintString(void);
+static void OakOldManHandlePrintSelectionString(void);
+static void OakOldManHandleChooseAction(void);
+static void OakOldManHandleUnknownYesNoBox(void);
+static void OakOldManHandleChooseMove(void);
+static void OakOldManHandleChooseItem(void);
+static void OakOldManHandleChoosePokemon(void);
+static void OakOldManHandleCmd23(void);
+static void OakOldManHandleHealthBarUpdate(void);
+static void OakOldManHandleExpUpdate(void);
+static void OakOldManHandleStatusIconUpdate(void);
+static void OakOldManHandleStatusAnimation(void);
+static void OakOldManHandleStatusXor(void);
+static void OakOldManHandleDataTransfer(void);
+static void OakOldManHandleDMA3Transfer(void);
+static void OakOldManHandlePlayBGM(void);
+static void OakOldManHandleCmd32(void);
+static void OakOldManHandleTwoReturnValues(void);
+static void OakOldManHandleChosenMonReturnValue(void);
+static void OakOldManHandleOneReturnValue(void);
+static void OakOldManHandleOneReturnValue_Duplicate(void);
+static void OakOldManHandleCmd37(void);
+static void OakOldManHandleCmd38(void);
+static void OakOldManHandleCmd39(void);
+static void OakOldManHandleCmd40(void);
+static void OakOldManHandleHitAnimation(void);
+static void OakOldManHandleCmd42(void);
+static void OakOldManHandlePlaySE(void);
+static void OakOldManHandlePlayFanfare(void);
+static void OakOldManHandleFaintingCry(void);
+static void OakOldManHandleIntroSlide(void);
+static void OakOldManHandleIntroTrainerBallThrow(void);
+static void OakOldManHandleDrawPartyStatusSummary(void);
+static void OakOldManHandleHidePartyStatusSummary(void);
+static void OakOldManHandleEndBounceEffect(void);
+static void OakOldManHandleSpriteInvisibility(void);
+static void OakOldManHandleBattleAnimation(void);
+static void OakOldManHandleLinkStandbyMsg(void);
+static void OakOldManHandleResetActionMoveSelection(void);
+static void OakOldManHandleCmd55(void);
+static void OakOldManCmdEnd(void);
 
-void OakOldManBufferRunCommand(void);
-void OakOldManBufferExecCompleted(void);
-void WaitForMonSelection_tmp(void);
-void CompleteWhenChoseItem_tmp(void);
-void sub_80E8704(void);
-void sub_80E7CD8(void);
-void sub_80E835C(void);
-void Task_LaunchLvlUpAnim_tmp(u8 taskId);
-void DestroyExpTaskAndCompleteOnInactiveTextPrinter_tmp(u8 taskId);
-void CompleteOnInactiveTextPrinter2_tmp(void);
-void Task_PrepareToGiveExpWithExpBar_tmp(u8 taskId);
-void sub_80E804C(u8 taskId);
-void Task_UpdateLvlInHealthbox_tmp(u8 taskId);
-void sub_80EB524(void);
-void sub_80EB30C(void);
-void sub_80E85D4(const u8 *text, u8 a1);
-u32 CopyOakOldManMonData(u8 monId, u8 *dst);
-void SetOakOldManMonData(u8 monId);
+static void OakOldManBufferRunCommand(void);
+static void OakOldManBufferExecCompleted(void);
+static void WaitForMonSelection(void);
+static void CompleteWhenChoseItem(void);
+static void sub_80E8704(void);
+static void sub_80E7CD8(void);
+static void sub_80E835C(void);
+static void Task_LaunchLvlUpAnim(u8 taskId);
+static void DestroyExpTaskAndCompleteOnInactiveTextPrinter(u8 taskId);
+static void CompleteOnInactiveTextPrinter2(void);
+static void Task_PrepareToGiveExpWithExpBar(u8 taskId);
+static void sub_80E804C(u8 taskId);
+static void Task_UpdateLvlInHealthbox(u8 taskId);
+static void sub_80E85D4(const u8 *text, u8 a1);
+static u32 CopyOakOldManMonData(u8 monId, u8 *dst);
+static void SetOakOldManMonData(u8 monId);
+static void OakOldManDoMoveAnimation(void);
+static void HandleInputChooseAction(void);
+static void sub_80EB0A8(u8 taskId);
 
-void (*const sOakOldManBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
+static void (*const sOakOldManBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 {
     OakOldManHandleGetMonData,
     OakOldManHandleGetRawMonData,
@@ -163,7 +164,7 @@ void (*const sOakOldManBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     OakOldManCmdEnd,
 };
 
-void nullsub_81(void)
+static void nullsub_81(void)
 {
 }
 
@@ -176,7 +177,7 @@ void SetControllerToOakOrOldMan(void)
     gBattleStruct->field_97 = 0;
 }
 
-void OakOldManBufferRunCommand(void)
+static void OakOldManBufferRunCommand(void)
 {
     if (gBattleControllerExecFlags & gBitTable[gActiveBattler])
     {
@@ -187,7 +188,7 @@ void OakOldManBufferRunCommand(void)
     }
 }
 
-void HandleInputChooseAction_tmp(void)
+static void HandleInputChooseAction(void)
 {
     u16 itemId = gBattleBufferA[gActiveBattler][2] | (gBattleBufferA[gActiveBattler][3] << 8);
 
@@ -280,7 +281,7 @@ void HandleInputChooseAction_tmp(void)
     }
 }
 
-void sub_80E7844(void)
+static void sub_80E7844(void)
 {
     switch (gBattleStruct->field_94)
     {
@@ -309,19 +310,19 @@ void sub_80E7844(void)
     }
 }
 
-void CompleteOnBattlerSpriteCallbackDummy_tmp(void)
+static void CompleteOnBattlerSpriteCallbackDummy(void)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
         OakOldManBufferExecCompleted();
 }
 
-void CompleteOnInactiveTextPrinter_tmp(void)
+static void CompleteOnInactiveTextPrinter(void)
 {
     if (!IsTextPrinterActive(0))
         OakOldManBufferExecCompleted();
 }
 
-void sub_80E7930(void)
+static void sub_80E7930(void)
 {
     if (!gPaletteFade.active)
     {
@@ -331,7 +332,7 @@ void sub_80E7930(void)
     }
 }
 
-void CompleteOnSpecialAnimDone_tmp(void)
+static void CompleteOnSpecialAnimDone(void)
 {
     if (!gDoingBattleAnim)
         OakOldManBufferExecCompleted();
@@ -344,13 +345,13 @@ void sub_80E7988(void)
         OakOldManBufferExecCompleted();
 }
 
-void OpenPartyMenuToChooseMon_tmp(void)
+static void OpenPartyMenuToChooseMon(void)
 {
     if (!gPaletteFade.active)
     {
         u8 caseId;
 
-        gBattlerControllerFuncs[gActiveBattler] = WaitForMonSelection_tmp;
+        gBattlerControllerFuncs[gActiveBattler] = WaitForMonSelection;
         caseId = gTasks[gUnknown_3004FFC[gActiveBattler]].data[0];
         DestroyTask(gUnknown_3004FFC[gActiveBattler]);
         FreeAllWindowBuffers();
@@ -358,7 +359,7 @@ void OpenPartyMenuToChooseMon_tmp(void)
     }
 }
 
-void WaitForMonSelection_tmp(void)
+static void WaitForMonSelection(void)
 {
     if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
     {
@@ -370,11 +371,11 @@ void WaitForMonSelection_tmp(void)
     }
 }
 
-void OpenBagAndChooseItem_tmp(void)
+static void OpenBagAndChooseItem(void)
 {
     if (!gPaletteFade.active)
     {
-        gBattlerControllerFuncs[gActiveBattler] = CompleteWhenChoseItem_tmp;
+        gBattlerControllerFuncs[gActiveBattler] = CompleteWhenChoseItem;
         nullsub_44();
         FreeAllWindowBuffers();
         if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
@@ -384,7 +385,7 @@ void OpenBagAndChooseItem_tmp(void)
     }
 }
 
-void CompleteWhenChoseItem_tmp(void)
+static void CompleteWhenChoseItem(void)
 {
     if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
     {
@@ -403,7 +404,7 @@ void CompleteWhenChoseItem_tmp(void)
     }
 }
 
-void sub_80E7B4C(void)
+static void sub_80E7B4C(void)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x80
      && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive)
@@ -433,7 +434,7 @@ void sub_80E7B4C(void)
     }
 }
 
-void sub_80E7CD8(void)
+static void sub_80E7CD8(void)
 {
     bool32 r4 = FALSE;
 
@@ -460,7 +461,7 @@ void sub_80E7CD8(void)
 #define tExpTask_battler    data[2]
 #define tExpTask_frames     data[10]
 
-void Task_GiveExpToMon_tmp(u8 taskId)
+static void Task_GiveExpToMon(u8 taskId)
 {
     u32 monId = (u8)(gTasks[taskId].tExpTask_monId);
     u8 battlerId = gTasks[taskId].tExpTask_battler;
@@ -487,25 +488,25 @@ void Task_GiveExpToMon_tmp(u8 taskId)
             gActiveBattler = savedActiveBattler;
             if (IsDoubleBattle() == TRUE
              && ((u16)(monId) == gBattlerPartyIndexes[battlerId] || (u16)(monId) == gBattlerPartyIndexes[battlerId ^ BIT_FLANK]))
-                gTasks[taskId].func = Task_LaunchLvlUpAnim_tmp;
+                gTasks[taskId].func = Task_LaunchLvlUpAnim;
             else
-                gTasks[taskId].func = DestroyExpTaskAndCompleteOnInactiveTextPrinter_tmp;
+                gTasks[taskId].func = DestroyExpTaskAndCompleteOnInactiveTextPrinter;
         }
         else
         {
             currExp += gainedExp;
             SetMonData(mon, MON_DATA_EXP, &currExp);
-            gBattlerControllerFuncs[battlerId] = CompleteOnInactiveTextPrinter2_tmp;
+            gBattlerControllerFuncs[battlerId] = CompleteOnInactiveTextPrinter2;
             DestroyTask(taskId);
         }
     }
     else
     {
-        gTasks[taskId].func = Task_PrepareToGiveExpWithExpBar_tmp;
+        gTasks[taskId].func = Task_PrepareToGiveExpWithExpBar;
     }
 }
 
-void Task_PrepareToGiveExpWithExpBar_tmp(u8 taskId)
+static void Task_PrepareToGiveExpWithExpBar(u8 taskId)
 {
     u8 monIndex = gTasks[taskId].tExpTask_monId;
     s32 gainedExp = gTasks[taskId].tExpTask_gainedExp;
@@ -524,7 +525,7 @@ void Task_PrepareToGiveExpWithExpBar_tmp(u8 taskId)
     gTasks[taskId].func = sub_80E804C;
 }
 
-void sub_80E804C(u8 taskId)
+static void sub_80E804C(u8 taskId)
 {
     if (gTasks[taskId].tExpTask_frames < 13)
     {
@@ -562,20 +563,20 @@ void sub_80E804C(u8 taskId)
                 gActiveBattler = battlerId;
                 BtlController_EmitTwoReturnValues(1, RET_VALUE_LEVELED_UP, gainedExp);
                 gActiveBattler = savedActiveBattler;
-                gTasks[taskId].func = Task_LaunchLvlUpAnim_tmp;
+                gTasks[taskId].func = Task_LaunchLvlUpAnim;
             }
             else
             {
                 currExp += gainedExp;
                 SetMonData(&gPlayerParty[monId], MON_DATA_EXP, &currExp);
-                gBattlerControllerFuncs[battlerId] = CompleteOnInactiveTextPrinter2_tmp;
+                gBattlerControllerFuncs[battlerId] = CompleteOnInactiveTextPrinter2;
                 DestroyTask(taskId);
             }
         }
     }
 }
 
-void Task_LaunchLvlUpAnim_tmp(u8 taskId)
+static void Task_LaunchLvlUpAnim(u8 taskId)
 {
     u8 battlerId = gTasks[taskId].tExpTask_battler;
     u8 monIndex = gTasks[taskId].tExpTask_monId;
@@ -583,10 +584,10 @@ void Task_LaunchLvlUpAnim_tmp(u8 taskId)
     if (IsDoubleBattle() == TRUE && monIndex == gBattlerPartyIndexes[battlerId ^ BIT_FLANK])
         battlerId ^= BIT_FLANK;
     InitAndLaunchSpecialAnimation(battlerId, battlerId, battlerId, B_ANIM_LVL_UP);
-    gTasks[taskId].func = Task_UpdateLvlInHealthbox_tmp;
+    gTasks[taskId].func = Task_UpdateLvlInHealthbox;
 }
 
-void Task_UpdateLvlInHealthbox_tmp(u8 taskId)
+static void Task_UpdateLvlInHealthbox(u8 taskId)
 {
     u8 battlerId = gTasks[taskId].tExpTask_battler;
 
@@ -599,22 +600,22 @@ void Task_UpdateLvlInHealthbox_tmp(u8 taskId)
             UpdateHealthboxAttribute(gHealthboxSpriteIds[battlerId ^ BIT_FLANK], &gPlayerParty[monIndex], HEALTHBOX_ALL);
         else
             UpdateHealthboxAttribute(gHealthboxSpriteIds[battlerId], &gPlayerParty[monIndex], HEALTHBOX_ALL);
-        gTasks[taskId].func = DestroyExpTaskAndCompleteOnInactiveTextPrinter_tmp;
+        gTasks[taskId].func = DestroyExpTaskAndCompleteOnInactiveTextPrinter;
     }
 }
 
-void DestroyExpTaskAndCompleteOnInactiveTextPrinter_tmp(u8 taskId)
+static void DestroyExpTaskAndCompleteOnInactiveTextPrinter(u8 taskId)
 {
     u8 monIndex = gTasks[taskId].tExpTask_monId;
     u8 battlerId;
 
     GetMonData(&gPlayerParty[monIndex], MON_DATA_LEVEL); // Unused return value
     battlerId = gTasks[taskId].tExpTask_battler;
-    gBattlerControllerFuncs[battlerId] = CompleteOnInactiveTextPrinter2_tmp;
+    gBattlerControllerFuncs[battlerId] = CompleteOnInactiveTextPrinter2;
     DestroyTask(taskId);
 }
 
-void sub_80E82F4(void)
+static void sub_80E82F4(void)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].pos1.y + gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.y > DISPLAY_HEIGHT)
     {
@@ -625,7 +626,7 @@ void sub_80E82F4(void)
     }
 }
 
-void sub_80E835C(void)
+static void sub_80E835C(void)
 {
     u32 mask;
     
@@ -723,7 +724,7 @@ void sub_80E8570(void)
     sub_80E85D4(gUnknown_83FDC58, 1);
 }
 
-void sub_80E8584(void)
+static void sub_80E8584(void)
 {
     sub_80E85D4(gUnknown_83FDC95, 64);
 }
@@ -733,7 +734,7 @@ void sub_80E8598(void)
     sub_80E85D4(gUnknown_83FDD23, 1);
 }
 
-void sub_80E85AC(void)
+static void sub_80E85AC(void)
 {
     sub_80E85D4(gUnknown_83FDD64, 64);
 }
@@ -743,7 +744,7 @@ void sub_80E85C0(void)
     sub_80E85D4(gUnknown_83FDDEB, 64);
 }
 
-void sub_80E85D4(const u8 *text, u8 a2)
+static void sub_80E85D4(const u8 *text, u8 a2)
 {
     switch (gBattleStruct->field_94)
     {
@@ -803,7 +804,7 @@ void sub_80E85D4(const u8 *text, u8 a2)
     }
 }
 
-void sub_80E8704(void)
+static void sub_80E8704(void)
 {
     u32 mask;
 
@@ -880,7 +881,7 @@ void sub_80E8704(void)
     }
 }
 
-void CompleteOnHealthbarDone_tmp(void)
+static void CompleteOnHealthbarDone(void)
 {
     s16 hpValue = MoveBattleBar(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], HEALTH_BAR, 0);
 
@@ -896,13 +897,13 @@ void CompleteOnHealthbarDone_tmp(void)
     }
 }
 
-void CompleteOnInactiveTextPrinter2_tmp(void)
+static void CompleteOnInactiveTextPrinter2(void)
 {
     if (!IsTextPrinterActive(0))
         OakOldManBufferExecCompleted();
 }
 
-void DoHitAnimBlinkSpriteEffect_tmp(void)
+static void DoHitAnimBlinkSpriteEffect(void)
 {
     u8 spriteId = gBattlerSpriteIds[gActiveBattler];
 
@@ -921,7 +922,7 @@ void DoHitAnimBlinkSpriteEffect_tmp(void)
     }
 }
 
-void sub_80E89C4(void)
+static void sub_80E89C4(void)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive)
     {
@@ -932,19 +933,19 @@ void sub_80E89C4(void)
     }
 }
 
-void CompleteOnBattlerSpriteCallbackDummy2_tmp(void)
+static void CompleteOnBattlerSpriteCallbackDummy2(void)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
         OakOldManBufferExecCompleted();
 }
 
-void CompleteOnFinishedBattleAnimation_tmp(void)
+static void CompleteOnFinishedBattleAnimation(void)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animFromTableActive)
         OakOldManBufferExecCompleted();
 }
 
-void OakOldManBufferExecCompleted(void)
+static void OakOldManBufferExecCompleted(void)
 {
     gBattlerControllerFuncs[gActiveBattler] = OakOldManBufferRunCommand;
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
@@ -960,13 +961,13 @@ void OakOldManBufferExecCompleted(void)
     }
 }
 
-void CompleteOnFinishedStatusAnimation_tmp(void)
+static void CompleteOnFinishedStatusAnimation(void)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].statusAnimActive)
         OakOldManBufferExecCompleted();
 }
 
-void OakOldManHandleGetMonData(void)
+static void OakOldManHandleGetMonData(void)
 {
     u8 monData[sizeof(struct Pokemon) * 2 + 56]; // this allows to get full data of two pokemon, trying to get more will result in overwriting data
     u32 size = 0;
@@ -991,7 +992,7 @@ void OakOldManHandleGetMonData(void)
     OakOldManBufferExecCompleted();
 }
 
-u32 CopyOakOldManMonData(u8 monId, u8 *dst)
+static u32 CopyOakOldManMonData(u8 monId, u8 *dst)
 {
     struct BattlePokemon battleMon;
     struct MovePpInfo moveData;
@@ -1296,12 +1297,12 @@ u32 CopyOakOldManMonData(u8 monId, u8 *dst)
     return size;
 }
 
-void OakOldManHandleGetRawMonData(void)
+static void OakOldManHandleGetRawMonData(void)
 {
     PlayerHandleGetRawMonData();
 }
 
-void OakOldManHandleSetMonData(void)
+static void OakOldManHandleSetMonData(void)
 {
     u8 monToCheck;
     u8 i;
@@ -1323,7 +1324,7 @@ void OakOldManHandleSetMonData(void)
     OakOldManBufferExecCompleted();
 }
 
-void SetOakOldManMonData(u8 monId)
+static void SetOakOldManMonData(u8 monId)
 {
     struct BattlePokemon *battlePokemon = (struct BattlePokemon *)&gBattleBufferA[gActiveBattler][3];
     struct MovePpInfo *moveData = (struct MovePpInfo *)&gBattleBufferA[gActiveBattler][3];
@@ -1540,17 +1541,755 @@ void SetOakOldManMonData(u8 monId)
     HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
 }
 
-void OakOldManHandleSetRawMonData(void)
+static void OakOldManHandleSetRawMonData(void)
 {
     OakOldManBufferExecCompleted();
 }
 
-void OakOldManHandleLoadMonSprite(void)
+static void OakOldManHandleLoadMonSprite(void)
 {
     OakOldManBufferExecCompleted();
 }
 
-void OakOldManHandleSwitchInAnim(void)
+static void OakOldManHandleSwitchInAnim(void)
 {
     OakOldManBufferExecCompleted();
+}
+
+static void OakOldManHandleReturnMonToBall(void)
+{
+    if (gBattleBufferA[gActiveBattler][1] == 0)
+    {
+        InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, B_ANIM_SWITCH_OUT_PLAYER_MON);
+        gBattlerControllerFuncs[gActiveBattler] = sub_80E89C4;
+    }
+    else
+    {
+        FreeSpriteOamMatrix(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
+        DestroySprite(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
+        SetHealthboxSpriteInvisible(gHealthboxSpriteIds[gActiveBattler]);
+        OakOldManBufferExecCompleted();
+    }
+}
+
+static void OakOldManHandleDrawTrainerPic(void)
+{
+    if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
+    {
+        DecompressTrainerBackPalette(gSaveBlock2Ptr->playerGender, gActiveBattler);
+        SetMultiuseSpriteTemplateToTrainerBack(gSaveBlock2Ptr->playerGender, GetBattlerPosition(gActiveBattler));
+        gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate,
+                                                         80,
+                                                         (8 - gTrainerBackPicCoords[gSaveBlock2Ptr->playerGender].size) * 4 + 80,
+                                                         30);
+    }
+    else
+    {
+        DecompressTrainerBackPalette(5, gActiveBattler);
+        SetMultiuseSpriteTemplateToTrainerBack(5, GetBattlerPosition(gActiveBattler));
+        gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate, 
+                                                         80, 
+                                                         (8 - gTrainerBackPicCoords[5].size) * 4 + 80,
+                                                         30);
+    }
+    gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = 240;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = -2;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_8033EEC;
+    gBattlerControllerFuncs[gActiveBattler] = CompleteOnBattlerSpriteCallbackDummy;
+}
+
+static void OakOldManHandleTrainerSlide(void)
+{
+    if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
+    {
+        DecompressTrainerBackPalette(gSaveBlock2Ptr->playerGender, gActiveBattler);
+        SetMultiuseSpriteTemplateToTrainerBack(gSaveBlock2Ptr->playerGender, GetBattlerPosition(gActiveBattler));
+        gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate,
+                                                         80,
+                                                         (8 - gTrainerBackPicCoords[gSaveBlock2Ptr->playerGender].size) * 4 + 80,
+                                                         30);
+    }
+    else
+    {
+        DecompressTrainerBackPalette(5, gActiveBattler);
+        SetMultiuseSpriteTemplateToTrainerBack(5, GetBattlerPosition(gActiveBattler));
+        gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate, 
+                                                         80, 
+                                                         (8 - gTrainerBackPicCoords[5].size) * 4 + 80,
+                                                         30);
+    }
+    gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = -96;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 2;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_8033EEC;
+    gBattlerControllerFuncs[gActiveBattler] = CompleteOnBattlerSpriteCallbackDummy2;
+}
+
+static void OakOldManHandleTrainerSlideBack(void)
+{
+    OakOldManBufferExecCompleted();
+}
+
+static void OakOldManHandleFaintAnimation(void)
+{
+    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState == 0)
+    {
+        if (gBattleSpritesDataPtr->battlerData[gActiveBattler].behindSubstitute)
+            InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, B_ANIM_SUBSTITUTE_TO_MON);
+        ++gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState;
+    }
+    else
+    {
+        if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive)
+        {
+            gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
+            HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
+            PlaySE12WithPanning(SE_POKE_DEAD, SOUND_PAN_ATTACKER);
+            gSprites[gBattlerSpriteIds[gActiveBattler]].data[1] = 0;
+            gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = 5;
+            gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_8012110;
+            gBattlerControllerFuncs[gActiveBattler] = sub_80E82F4;
+        }
+    }
+}
+
+static void OakOldManHandlePaletteFade(void)
+{
+    OakOldManBufferExecCompleted();
+}
+
+static void OakOldManHandleSuccessBallThrowAnim(void)
+{
+    gBattleSpritesDataPtr->animationData->ballThrowCaseId = BALL_3_SHAKES_SUCCESS;
+    gDoingBattleAnim = TRUE;
+    InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), B_ANIM_SP_4);
+    gBattlerControllerFuncs[gActiveBattler] = CompleteOnSpecialAnimDone;
+}
+
+static void OakOldManHandleBallThrowAnim(void)
+{
+    u8 ballThrowCaseId = gBattleBufferA[gActiveBattler][1];
+
+    gBattleSpritesDataPtr->animationData->ballThrowCaseId = ballThrowCaseId;
+    gDoingBattleAnim = TRUE;
+    InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), B_ANIM_SP_4);
+    gBattlerControllerFuncs[gActiveBattler] = CompleteOnSpecialAnimDone;
+}
+
+static void OakOldManHandlePause(void)
+{
+    OakOldManBufferExecCompleted();
+}
+
+static void OakOldManHandleMoveAnimation(void)
+{
+    u16 move = gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8);
+
+    gAnimMoveTurn = gBattleBufferA[gActiveBattler][3];
+    gAnimMovePower = gBattleBufferA[gActiveBattler][4] | (gBattleBufferA[gActiveBattler][5] << 8);
+    gAnimMoveDmg = gBattleBufferA[gActiveBattler][6] | (gBattleBufferA[gActiveBattler][7] << 8) | (gBattleBufferA[gActiveBattler][8] << 16) | (gBattleBufferA[gActiveBattler][9] << 24);
+    gAnimFriendship = gBattleBufferA[gActiveBattler][10];
+    gWeatherMoveAnim = gBattleBufferA[gActiveBattler][12] | (gBattleBufferA[gActiveBattler][13] << 8);
+    gAnimDisableStructPtr = (struct DisableStruct *)&gBattleBufferA[gActiveBattler][16];
+    gTransformedPersonalities[gActiveBattler] = gAnimDisableStructPtr->transformedMonPersonality;
+    if (IsMoveWithoutAnimation(move, gAnimMoveTurn)) // always returns FALSE
+    {
+        OakOldManBufferExecCompleted();
+    }
+    else
+    {
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
+        gBattlerControllerFuncs[gActiveBattler] = OakOldManDoMoveAnimation;
+    }
+}
+
+static void OakOldManDoMoveAnimation(void)
+{
+    u16 move = gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8);
+
+    switch (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState)
+    {
+    case 0:
+        if (gBattleSpritesDataPtr->battlerData[gActiveBattler].behindSubstitute)
+            InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, B_ANIM_SUBSTITUTE_TO_MON);
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 1;
+        break;
+    case 1:
+        if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive)
+        {
+            sub_8035450(0);
+            DoMoveAnim(move);
+            gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 2;
+        }
+        break;
+    case 2:
+        gAnimScriptCallback();
+        if (!gAnimScriptActive)
+        {
+            sub_8035450(1);
+            if (gBattleSpritesDataPtr->battlerData[gActiveBattler].behindSubstitute)
+                InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, B_ANIM_MON_TO_SUBSTITUTE);
+            gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 3;
+        }
+        break;
+    case 3:
+        if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive)
+        {
+            CopyAllBattleSpritesInvisibilities();
+            TrySetBehindSubstituteSpriteBit(gActiveBattler, gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8));
+            gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
+            OakOldManBufferExecCompleted();
+        }
+        break;
+    }
+}
+
+static void OakOldManHandlePrintString(void)
+{
+    u16 *stringId;
+
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 0;
+    stringId = (u16 *)(&gBattleBufferA[gActiveBattler][2]);
+    if (gBattleTypeFlags & BATTLE_TYPE_OLD_MAN_TUTORIAL && *stringId == 1)
+    {
+        OakOldManBufferExecCompleted();
+    }
+    else
+    {
+        BufferStringBattle(*stringId);
+        if (sub_80D89B0(*stringId))
+            BattlePutTextOnWindow(gDisplayedStringBattle, 64);
+        else
+            BattlePutTextOnWindow(gDisplayedStringBattle, 0);
+        if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
+        {
+            switch (*stringId)
+            {
+            case 216:
+                if (!sub_80EB2E0(2))
+                {
+                    sub_80EB2F4(2);
+                    gBattlerControllerFuncs[gActiveBattler] = sub_80E8584;
+                    return;
+                }
+                break;
+            case 30:
+                gBattlerControllerFuncs[gActiveBattler] = sub_80E85AC;
+                return;
+            case 383:
+                gBattlerControllerFuncs[gActiveBattler] = sub_80E85C0;
+                return;
+            case 227:
+                gBattlerControllerFuncs[gActiveBattler] = sub_80E8598;
+                return;
+            }
+        }
+        gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
+    }
+}
+
+static void OakOldManHandlePrintSelectionString(void)
+{
+    if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
+        OakOldManHandlePrintString();
+    else
+        OakOldManBufferExecCompleted();
+}
+
+static void sub_80EA690(void)
+{
+    if (!IsDma3ManagerBusyWithBgCopy())
+    {
+        gBattle_BG0_X = 0;
+        gBattle_BG0_Y = 160;
+        if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
+            gBattlerControllerFuncs[gActiveBattler] = HandleInputChooseAction;
+        else
+            gBattlerControllerFuncs[gActiveBattler] = sub_80E7844;
+    }
+}
+
+static void OakOldManHandleChooseAction(void)
+{
+    s32 i;
+
+    gBattlerControllerFuncs[gActiveBattler] = sub_80EA690;
+    BattlePutTextOnWindow(gUnknown_83FDA4C, 0);
+    BattlePutTextOnWindow(gUnknown_83FE725, 2);
+    for (i = 0; i < MAX_MON_MOVES; ++i)
+        ActionSelectionDestroyCursorAt((u8)i);
+    ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
+    if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
+        BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPkmnDo);
+    else
+        BattleStringExpandPlaceholdersToDisplayedString(gUnknown_83FE6FA);
+    BattlePutTextOnWindow(gDisplayedStringBattle, 1);
+}
+
+static void OakOldManHandleUnknownYesNoBox(void)
+{
+    OakOldManBufferExecCompleted();
+}
+
+static void sub_80EA798(void)
+{
+    if (!IsDma3ManagerBusyWithBgCopy())
+    {
+        gBattle_BG0_X = 0;
+        gBattle_BG0_Y = 320;
+        gBattlerControllerFuncs[gActiveBattler] = sub_80E7988;
+    }
+}
+
+static void OakOldManHandleChooseMove(void)
+{
+    if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
+    {
+        InitMoveSelectionsVarsAndStrings();
+        gBattlerControllerFuncs[gActiveBattler] = sub_80EA798;
+    }
+    else
+    {
+        switch (gBattleStruct->field_95)
+        {
+        case 0:
+            InitMoveSelectionsVarsAndStrings();
+            ++gBattleStruct->field_95;
+            gBattleStruct->field_97 = 80;
+            // fall through
+        case 1:
+            if (--gBattleStruct->field_97 == 0)
+            {
+                PlaySE(SE_SELECT);
+                BtlController_EmitTwoReturnValues(1, 10, 0x100);
+                OakOldManBufferExecCompleted();
+            }
+            break;
+        }
+    }
+}
+
+static void OakOldManHandleChooseItem(void)
+{
+    s32 i;
+
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
+    gBattlerControllerFuncs[gActiveBattler] = OpenBagAndChooseItem;
+    gBattlerInMenuId = gActiveBattler;
+    for (i = 0; i < 3; ++i)
+        gUnknown_203B0DC[i] = gBattleBufferA[gActiveBattler][i + 1];
+}
+
+static void OakOldManHandleChoosePokemon(void)
+{
+    s32 i;
+
+    gUnknown_3004FFC[gActiveBattler] = CreateTask(TaskDummy, 0xFF);
+    gTasks[gUnknown_3004FFC[gActiveBattler]].data[0] = gBattleBufferA[gActiveBattler][1] & 0xF;
+    *(&gBattleStruct->battlerPreventingSwitchout) = gBattleBufferA[gActiveBattler][1] >> 4;
+    *(&gBattleStruct->field_8B) = gBattleBufferA[gActiveBattler][2];
+    *(&gBattleStruct->abilityPreventingSwitchout) = gBattleBufferA[gActiveBattler][3];
+    for (i = 0; i < 3; ++i)
+        gUnknown_203B0DC[i] = gBattleBufferA[gActiveBattler][4 + i];
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
+    gBattlerControllerFuncs[gActiveBattler] = OpenPartyMenuToChooseMon;
+    gBattlerInMenuId = gActiveBattler;
+}
+
+static void OakOldManHandleCmd23(void)
+{
+    OakOldManBufferExecCompleted();
+}
+
+static void OakOldManHandleHealthBarUpdate(void)
+{
+    s16 hpVal;
+
+    LoadBattleBarGfx(0);
+    hpVal = gBattleBufferA[gActiveBattler][2] | (gBattleBufferA[gActiveBattler][3] << 8);
+    if (hpVal != INSTANT_HP_BAR_DROP)
+    {
+        u32 maxHP = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MAX_HP);
+        u32 curHP = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_HP);
+        
+        SetBattleBarStruct(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], maxHP, curHP, hpVal);
+    }
+    else
+    {
+        u32 maxHP = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MAX_HP);
+        
+        SetBattleBarStruct(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], maxHP, 0, hpVal);
+        UpdateHpTextInHealthbox(gHealthboxSpriteIds[gActiveBattler], 0, HP_CURRENT);
+    }
+    gBattlerControllerFuncs[gActiveBattler] = CompleteOnHealthbarDone;
+}
+
+static void OakOldManHandleExpUpdate(void)
+{
+    u8 monId = gBattleBufferA[gActiveBattler][1];
+
+    if (GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL) >= MAX_LEVEL)
+    {
+        OakOldManBufferExecCompleted();
+    }
+    else
+    {
+        s16 expPointsToGive;
+        u8 taskId;
+
+        LoadBattleBarGfx(1);
+        GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES);  // Unused return value.
+        expPointsToGive = T1_READ_16(&gBattleBufferA[gActiveBattler][2]);
+        taskId = CreateTask(Task_GiveExpToMon, 10);
+        gTasks[taskId].tExpTask_monId = monId;
+        gTasks[taskId].tExpTask_gainedExp = expPointsToGive;
+        gTasks[taskId].tExpTask_battler = gActiveBattler;
+        gBattlerControllerFuncs[gActiveBattler] = nullsub_81;
+    }
+}
+
+static void OakOldManHandleStatusIconUpdate(void)
+{
+    OakOldManBufferExecCompleted();
+}
+
+static void OakOldManHandleStatusAnimation(void)
+{
+    OakOldManBufferExecCompleted();
+}
+
+static void OakOldManHandleStatusXor(void)
+{
+    OakOldManBufferExecCompleted();
+}
+
+static void OakOldManHandleDataTransfer(void)
+{
+    OakOldManBufferExecCompleted();
+}
+
+static void OakOldManHandleDMA3Transfer(void)
+{
+    OakOldManBufferExecCompleted();
+}
+
+static void OakOldManHandlePlayBGM(void)
+{
+    OakOldManBufferExecCompleted();
+}
+
+static void OakOldManHandleCmd32(void)
+{
+    OakOldManBufferExecCompleted();
+}
+
+static void OakOldManHandleTwoReturnValues(void)
+{
+    OakOldManBufferExecCompleted();
+}
+
+static void OakOldManHandleChosenMonReturnValue(void)
+{
+    OakOldManBufferExecCompleted();
+}
+
+static void OakOldManHandleOneReturnValue(void)
+{
+    OakOldManBufferExecCompleted();
+}
+
+static void OakOldManHandleOneReturnValue_Duplicate(void)
+{
+    OakOldManBufferExecCompleted();
+}
+
+static void OakOldManHandleCmd37(void)
+{
+    OakOldManBufferExecCompleted();
+}
+
+static void OakOldManHandleCmd38(void)
+{
+    OakOldManBufferExecCompleted();
+}
+
+static void OakOldManHandleCmd39(void)
+{
+    OakOldManBufferExecCompleted();
+}
+
+static void OakOldManHandleCmd40(void)
+{
+    OakOldManBufferExecCompleted();
+}
+
+static void OakOldManHandleHitAnimation(void)
+{
+    if (gSprites[gBattlerSpriteIds[gActiveBattler]].invisible == TRUE)
+    {
+        OakOldManBufferExecCompleted();
+    }
+    else
+    {
+        gDoingBattleAnim = TRUE;
+        gSprites[gBattlerSpriteIds[gActiveBattler]].data[1] = 0;
+        DoHitAnimHealthboxEffect(gActiveBattler);
+        gBattlerControllerFuncs[gActiveBattler] = DoHitAnimBlinkSpriteEffect;
+    }
+}
+
+static void OakOldManHandleCmd42(void)
+{
+    OakOldManBufferExecCompleted();
+}
+
+static void OakOldManHandlePlaySE(void)
+{
+    PlaySE(gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8));
+    OakOldManBufferExecCompleted();
+}
+
+static void OakOldManHandlePlayFanfare(void)
+{
+    PlayFanfare(gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8));
+    OakOldManBufferExecCompleted();
+}
+
+static void OakOldManHandleFaintingCry(void)
+{
+    u16 species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES);
+
+    PlayCry1(species, 25);
+    OakOldManBufferExecCompleted();
+}
+
+static void OakOldManHandleIntroSlide(void)
+{
+    HandleIntroSlide(gBattleBufferA[gActiveBattler][1]);
+    gIntroSlideFlags |= 1;
+    OakOldManBufferExecCompleted();
+}
+
+static void OakOldManHandleIntroTrainerBallThrow(void)
+{
+    u8 paletteNum;
+    u8 taskId;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
+    {
+        SetSpritePrimaryCoordsFromSecondaryCoords(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
+        gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 50;
+        gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = -40;
+        gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].pos1.y;
+        gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
+        gSprites[gBattlerSpriteIds[gActiveBattler]].data[5] = gActiveBattler;
+        StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[gActiveBattler]], sub_80335F8);
+        StartSpriteAnim(&gSprites[gBattlerSpriteIds[gActiveBattler]], 1);
+        paletteNum = AllocSpritePalette(0xD6F8);
+        LoadCompressedPalette(gTrainerBackPicPaletteTable[gSaveBlock2Ptr->playerGender].data, 0x100 + paletteNum * 16, 32);
+        gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = paletteNum;
+        taskId = CreateTask(sub_80EB0A8, 5);
+        gTasks[taskId].data[0] = gActiveBattler;
+        if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
+            gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
+        gBattleSpritesDataPtr->animationData->field_9_x1 = 1;
+        gBattlerControllerFuncs[gActiveBattler] = nullsub_13;
+    }
+    else
+    {
+        if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
+            gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
+        OakOldManBufferExecCompleted();
+    }
+}
+
+static void sub_80EAF34(u8 battlerId)
+{
+    u16 species;
+
+    gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies = SPECIES_NONE;
+    gBattlerPartyIndexes[battlerId] = gBattleBufferA[battlerId][1];
+    species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
+    gUnknown_3004FFC[battlerId] = CreateInvisibleSpriteWithCallback(sub_8033E3C);
+    SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(battlerId));
+    gBattlerSpriteIds[battlerId] = CreateSprite(&gMultiuseSpriteTemplate,
+                                                GetBattlerSpriteCoord(battlerId, 2),
+                                                GetBattlerSpriteDefault_Y(battlerId),
+                                                GetBattlerSpriteSubpriority(battlerId));
+    gSprites[gUnknown_3004FFC[battlerId]].data[1] = gBattlerSpriteIds[battlerId];
+    gSprites[gBattlerSpriteIds[battlerId]].data[0] = battlerId;
+    gSprites[gBattlerSpriteIds[battlerId]].data[2] = species;
+    gSprites[gBattlerSpriteIds[battlerId]].oam.paletteNum = battlerId;
+    StartSpriteAnim(&gSprites[gBattlerSpriteIds[battlerId]], gBattleMonForms[battlerId]);
+    gSprites[gBattlerSpriteIds[battlerId]].invisible = TRUE;
+    gSprites[gBattlerSpriteIds[battlerId]].callback = SpriteCallbackDummy;
+    gSprites[gUnknown_3004FFC[battlerId]].data[0] = DoPokeballSendOutAnimation(0, POKEBALL_PLAYER_SENDOUT);
+}
+
+static void sub_80EB0A8(u8 taskId)
+{
+    if (gTasks[taskId].data[1] < 31)
+    {
+        ++gTasks[taskId].data[1];
+    }
+    else
+    {
+        u8 savedActiveBattler = gActiveBattler;
+
+        gActiveBattler = gTasks[taskId].data[0];
+        gBattleBufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
+        sub_80EAF34(gActiveBattler);
+        gBattlerControllerFuncs[gActiveBattler] = sub_80E7B4C;
+        gActiveBattler = savedActiveBattler;
+        DestroyTask(taskId);
+    }
+}
+
+static void OakOldManHandleDrawPartyStatusSummary(void)
+{
+    if (gBattleBufferA[gActiveBattler][1] != 0
+     && GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
+    {
+        OakOldManBufferExecCompleted();
+    }
+    else
+    {
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown = TRUE;
+        gBattlerStatusSummaryTaskId[gActiveBattler] = CreatePartyStatusSummarySprites(gActiveBattler,
+                                                                                      (struct HpAndStatus *)&gBattleBufferA[gActiveBattler][4],
+                                                                                      gBattleBufferA[gActiveBattler][1],
+                                                                                      gBattleBufferA[gActiveBattler][2]);
+        OakOldManBufferExecCompleted();
+    }
+}
+
+static void OakOldManHandleHidePartyStatusSummary(void)
+{
+    OakOldManBufferExecCompleted();
+}
+
+static void OakOldManHandleEndBounceEffect(void)
+{
+    EndBounceEffect(gActiveBattler, BOUNCE_HEALTHBOX);
+    EndBounceEffect(gActiveBattler, BOUNCE_MON);
+    OakOldManBufferExecCompleted();
+}
+
+static void OakOldManHandleSpriteInvisibility(void)
+{
+    OakOldManBufferExecCompleted();
+}
+
+static void OakOldManHandleBattleAnimation(void)
+{
+    u8 animationId = gBattleBufferA[gActiveBattler][1];
+    u16 argument = gBattleBufferA[gActiveBattler][2] | (gBattleBufferA[gActiveBattler][3] << 8);
+
+    if (TryHandleLaunchBattleTableAnimation(gActiveBattler, gActiveBattler, gActiveBattler, animationId, argument))
+        OakOldManBufferExecCompleted();
+    else
+        gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedBattleAnimation;
+}
+
+static void OakOldManHandleLinkStandbyMsg(void)
+{
+    switch (gBattleBufferA[gActiveBattler][1])
+    {
+    case 0:
+    case 1:
+        EndBounceEffect(gActiveBattler, BOUNCE_HEALTHBOX);
+        EndBounceEffect(gActiveBattler, BOUNCE_MON);
+        break;
+    case 2:
+        break;
+    }
+    OakOldManBufferExecCompleted();
+}
+
+static void OakOldManHandleResetActionMoveSelection(void)
+{
+    OakOldManBufferExecCompleted();
+}
+
+static void OakOldManHandleCmd55(void)
+{
+    gBattleOutcome = gBattleBufferA[gActiveBattler][1];
+    FadeOutMapMusic(5);
+    BeginFastPaletteFade(3);
+    OakOldManBufferExecCompleted();
+    if (!(gBattleTypeFlags & BATTLE_TYPE_IS_MASTER) && gBattleTypeFlags & BATTLE_TYPE_LINK)
+        gBattlerControllerFuncs[gActiveBattler] = sub_80E7930;
+}
+
+static void OakOldManCmdEnd(void)
+{
+}
+
+bool8 sub_80EB2E0(u8 a1)
+{
+    return gBattleStruct->field_96 & a1;
+}
+
+void sub_80EB2F4(u8 a1)
+{
+    gBattleStruct->field_96 |= a1;
+}
+
+void sub_80EB30C(void)
+{
+    u32 width = 0x1A;
+    u32 pal = 7;
+
+    FillBgTilemapBufferRect(0, 0x30,                 0,    0xE,  1,     1, pal);
+    FillBgTilemapBufferRect(0, 0x31,                 1,    0xE,  1,     1, pal);
+    FillBgTilemapBufferRect(0, 0x32,                 2,    0xE,  width, 1, pal);
+    FillBgTilemapBufferRect(0, 0x33,                 0x1C, 0xE,  1,     1, pal);
+    FillBgTilemapBufferRect(0, 0x34,                 0x1D, 0xE,  1,     1, pal);
+    FillBgTilemapBufferRect(0, 0x35,                 0,    0xF,  1,     1, pal);
+    FillBgTilemapBufferRect(0, 0x36,                 1,    0xF,  1,     1, pal);
+    FillBgTilemapBufferRect(0, 0x38,                 0x1C, 0xF,  1,     1, pal);
+    FillBgTilemapBufferRect(0, 0x39,                 0x1D, 0xF,  1,     1, pal);
+    FillBgTilemapBufferRect(0, 0x3A,                 0,    0x10, 1,     1, pal);
+    FillBgTilemapBufferRect(0, 0x3B,                 1,    0x10, 1,     1, pal);
+    FillBgTilemapBufferRect(0, 0x3C,                 0x1C, 0x10, 1,     1, pal);
+    FillBgTilemapBufferRect(0, 0x3D,                 0x1D, 0x10, 1,     1, pal);
+    FillBgTilemapBufferRect(0, BG_TILE_V_FLIP(0x3A), 0,    0x11, 1,     1, pal);
+    FillBgTilemapBufferRect(0, BG_TILE_V_FLIP(0x3B), 1,    0x11, 1,     1, pal);
+    FillBgTilemapBufferRect(0, BG_TILE_V_FLIP(0x3C), 0x1C, 0x11, 1,     1, pal);
+    FillBgTilemapBufferRect(0, BG_TILE_V_FLIP(0x3D), 0x1D, 0x11, 1,     1, pal);
+    FillBgTilemapBufferRect(0, BG_TILE_V_FLIP(0x35), 0,    0x12, 1,     1, pal);
+    FillBgTilemapBufferRect(0, BG_TILE_V_FLIP(0x36), 1,    0x12, 1,     1, pal);
+    FillBgTilemapBufferRect(0, BG_TILE_V_FLIP(0x38), 0x1C, 0x12, 1,     1, pal);
+    FillBgTilemapBufferRect(0, BG_TILE_V_FLIP(0x39), 0x1D, 0x12, 1,     1, pal);
+    FillBgTilemapBufferRect(0, BG_TILE_V_FLIP(0x30), 0,    0x13, 1,     1, pal);
+    FillBgTilemapBufferRect(0, BG_TILE_V_FLIP(0x31), 1,    0x13, 1,     1, pal);
+    FillBgTilemapBufferRect(0, BG_TILE_V_FLIP(0x32), 2,    0x13, width, 1, pal);
+    FillBgTilemapBufferRect(0, BG_TILE_V_FLIP(0x33), 0x1C, 0x13, 1,     1, pal);
+    FillBgTilemapBufferRect(0, BG_TILE_V_FLIP(0x34), 0x1D, 0x13, 1,     1, pal);
+}
+
+void sub_80EB524(void)
+{
+    u32 pal = 0;
+    u32 width = 0x1A;
+    u32 height;
+
+    FillBgTilemapBufferRect(0, 3,    0,    0xE,  1,     1,      pal);
+    height = 4;
+    FillBgTilemapBufferRect(0, 4,    1,    0xE,  1,     1,      pal);
+    FillBgTilemapBufferRect(0, 5,    2,    0xE,  width, 1,      pal);
+    FillBgTilemapBufferRect(0, 6,    0x1C, 0xE,  1,     1,      pal);
+    FillBgTilemapBufferRect(0, 7,    0x1D, 0xE,  1,     1,      pal);
+    FillBgTilemapBufferRect(0, 8,    0,    0xF,  1,     height, pal);
+    FillBgTilemapBufferRect(0, 9,    1,    0xF,  1,     height, pal);
+    FillBgTilemapBufferRect(0, 0xA,  2,    0xF,  width, height, pal);
+    FillBgTilemapBufferRect(0, 0xB,  0x1C, 0xF,  1,     height, pal);
+    FillBgTilemapBufferRect(0, 0xC,  0x1D, 0xF,  1,     height, pal);
+    FillBgTilemapBufferRect(0, 0xD,  0,    0x13, 1,     1,      pal);
+    FillBgTilemapBufferRect(0, 0xE,  1,    0x13, 1,     1,      pal);
+    FillBgTilemapBufferRect(0, 0xF,  2,    0x13, width, 1,      pal);
+    FillBgTilemapBufferRect(0, 0x10, 0x1C, 0x13, 1,     1,      pal);
+    FillBgTilemapBufferRect(0, 0x11, 0x1D, 0x13, 1,     1,      pal);
 }

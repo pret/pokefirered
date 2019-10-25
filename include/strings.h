@@ -237,6 +237,7 @@ extern const u8 gUnknown_83FDD23[];
 extern const u8 gUnknown_83FDD64[];
 extern const u8 gUnknown_83FDDEB[];
 extern const u8 gUnknown_83FDCD2[];
+extern const u8 gUnknown_83FE6FA[];
 
 // credits
 extern const u8 gString_Dummy[];

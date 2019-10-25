@@ -209,7 +209,6 @@ SECTIONS {
         src/fldeff_softboiled.o(.text);
         asm/battle_tower.o(.text);
         src/battle_controller_oak_old_man.o(.text);
-        asm/battle_controller_oak.o(.text);
         src/player_pc.o(.text);
         src/intro.o(.text);
         asm/battle_anim_special.o(.text);

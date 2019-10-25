@@ -1646,19 +1646,19 @@ gText_Scyther_5500Coins:: @ 0x8417C9D
 gText_Porygon_9999Coins:: @ 0x8417CB7
 	.string "PORYGON{CLEAR_TO 0x4B}{SMALL} 9,999 COINS$"
 
-gUnknown_8417CD1:: @ 0x8417CD1
+gText_Abra_120Coins:: @ 0x8417CD1
 	.string "ABRA{CLEAR_TO 0x55}{SMALL} 120 COINS$"
 
-gUnknown_8417CE6:: @ 0x8417CE6
+gText_Clefairy_750Coins:: @ 0x8417CE6
 	.string "CLEFAIRY{CLEAR_TO 0x55}{SMALL} 750 COINS$"
 
-gUnknown_8417CFF:: @ 0x8417CFF
+gText_Pinsir_2500Coins:: @ 0x8417CFF
 	.string "PINSIR{CLEAR_TO 0x4B}{SMALL} 2,500 COINS$"
 
-gUnknown_8417D18:: @ 0x8417D18
+gText_Dratini_4600Coins:: @ 0x8417D18
 	.string "DRATINI{CLEAR_TO 0x4B}{SMALL} 4,600 COINS$"
 
-gUnknown_8417D32:: @ 0x8417D32
+gText_Porygon_6500Coins:: @ 0x8417D32
 	.string "PORYGON{CLEAR_TO 0x4B}{SMALL} 6,500 COINS$"
 
 gText_NoThanks_2:: @ 0x8417D4C

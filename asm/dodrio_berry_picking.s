@@ -10324,7 +10324,7 @@ _0815579C:
 	ldr r0, [r3]
 	adds r0, r7
 	ldrb r0, [r0]
-	ldr r2, _08155858 @ =gUnknown_8417938
+	ldr r2, _08155858 @ =gText_Yes
 	movs r1, 0x2
 	mov r9, r1
 	str r1, [sp]
@@ -10336,7 +10336,7 @@ _0815579C:
 	ldr r0, [r2]
 	adds r0, r7
 	ldrb r0, [r0]
-	ldr r2, _0815585C @ =gUnknown_841793C
+	ldr r2, _0815585C @ =gText_No
 	movs r1, 0x10
 	str r1, [sp]
 	str r5, [sp, 0x4]
@@ -10377,8 +10377,8 @@ _0815579C:
 _0815584C: .4byte 0x00003008
 _08155850: .4byte 0x00003009
 _08155854: .4byte gUnknown_841CDD7
-_08155858: .4byte gUnknown_8417938
-_0815585C: .4byte gUnknown_841793C
+_08155858: .4byte gText_Yes
+_0815585C: .4byte gText_No
 _08155860: .4byte gFameCheckerText_ListMenuCursor
 _08155864: .4byte 0x00003014
 _08155868:
@@ -10425,7 +10425,7 @@ _081558B0:
 	ldr r0, [r2]
 	adds r0, r4
 	ldrb r0, [r0]
-	ldr r2, _08155914 @ =gUnknown_8417938
+	ldr r2, _08155914 @ =gText_Yes
 	movs r3, 0x2
 	mov r8, r3
 	str r3, [sp]
@@ -10440,7 +10440,7 @@ _081558B0:
 	ldr r0, [r2]
 	adds r0, r4
 	ldrb r0, [r0]
-	ldr r2, _08155918 @ =gUnknown_841793C
+	ldr r2, _08155918 @ =gText_No
 	movs r6, 0x10
 	str r6, [sp]
 	movs r3, 0xFF
@@ -10462,8 +10462,8 @@ _081558B0:
 	.align 2, 0
 _0815590C: .4byte 0x00003020
 _08155910: .4byte 0x00003009
-_08155914: .4byte gUnknown_8417938
-_08155918: .4byte gUnknown_841793C
+_08155914: .4byte gText_Yes
+_08155918: .4byte gText_No
 _0815591C: .4byte gFameCheckerText_ListMenuCursor
 _08155920:
 	str r6, [sp]

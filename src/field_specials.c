@@ -729,10 +729,10 @@ static const struct WindowTemplate sElevatorCurrentFloorWindowTemplate = {
 };
 
 static const u8 *const sFloorNamePointers[] = {
-    gUnknown_8418069,
+    gText_B4F,
     gUnknown_8418065,
-    gUnknown_8418061,
-    gUnknown_841805D,
+    gText_B2F,
+    gText_B1F,
     gUnknown_841803A,
     gUnknown_841803D,
     gUnknown_8418040,
@@ -744,7 +744,7 @@ static const u8 *const sFloorNamePointers[] = {
     gUnknown_8418052,
     gUnknown_8418055,
     gUnknown_8418059,
-    gUnknown_841806D
+    gText_Rooftop
 };
 
 static const u8 sUnused_83F5B84[] = {
@@ -1250,9 +1250,9 @@ static const u8 *const sListMenuLabels[][12] = {
         gUnknown_841803A,
         gOtherText_Exit,
     }, {
-        gUnknown_841805D,
-        gUnknown_8418061,
-        gUnknown_8418069,
+        gText_B1F,
+        gText_B2F,
+        gText_B4F,
         gOtherText_Exit,
     }, {
         gUnknown_8418046,
@@ -1262,9 +1262,9 @@ static const u8 *const sListMenuLabels[][12] = {
         gUnknown_841803A,
         gOtherText_Exit,
     }, {
-        gUnknown_841807D,
-        gUnknown_841808E,
-        gUnknown_841809C,
+        gText_LinkedGamePlay,
+        gText_DirectCorner,
+        gText_UnionRoom,
         gOtherText_Quit,
     }, {
         gUnknown_84180A7,
@@ -1280,8 +1280,8 @@ static const u8 *const sListMenuLabels[][12] = {
         gUnknown_8418163,
         gOtherText_Exit,
     }, {
-        gUnknown_841806D,
-        gUnknown_841805D,
+        gText_Rooftop,
+        gText_B1F,
         gOtherText_Exit,
     }
 };

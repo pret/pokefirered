@@ -41,439 +41,439 @@ static u8 CreateWindowFromRect(u8 left, u8 top, u8 width, u8 height);
 
 
 static const struct MenuAction sScriptMultiChoiceMenu_0[] = {
-    { gUnknown_8417938 },
-    { gUnknown_841793C }
+    { gText_Yes },
+    { gText_No }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_2[] = {
-    { gUnknown_8417ADC },
-    { gUnknown_8417AE3 },
-    { gUnknown_8417AE9 },
-    { gUnknown_8417AEE }
+    { gText_Normal },
+    { gText_Black },
+    { gText_Pink },
+    { gText_Sepia }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_3[] = {
-    { gUnknown_84178F0 },
-    { gUnknown_8417907 }
+    { gText_HallOfFame },
+    { gText_Quit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_4[] = {
-    { gUnknown_84178EB },
-    { gUnknown_8417907 }
+    { gText_Eggs },
+    { gText_Quit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_5[] = {
-    { gUnknown_84178FD },
-    { gUnknown_8417907 }
+    { gText_Victories },
+    { gText_Quit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_6[] = {
-    { gUnknown_84178F0 },
-    { gUnknown_84178EB },
-    { gUnknown_8417907 }
+    { gText_HallOfFame },
+    { gText_Eggs },
+    { gText_Quit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_7[] = {
-    { gUnknown_84178F0 },
-    { gUnknown_84178FD },
-    { gUnknown_8417907 }
+    { gText_HallOfFame },
+    { gText_Victories },
+    { gText_Quit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_8[] = {
-    { gUnknown_84178EB },
-    { gUnknown_84178FD },
-    { gUnknown_8417907 }
+    { gText_Eggs },
+    { gText_Victories },
+    { gText_Quit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_9[] = {
-    { gUnknown_84178F0 },
-    { gUnknown_84178EB },
-    { gUnknown_84178FD },
-    { gUnknown_8417907 }
+    { gText_HallOfFame },
+    { gText_Eggs },
+    { gText_Victories },
+    { gText_Quit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_15[] = {
-    { gUnknown_8417914 },
-    { gUnknown_841790C },
-    { gUnknown_8417910 },
-    { gUnknown_8417918 },
-    { gUnknown_841791C },
+    { gText_Slp },
+    { gText_Psn },
+    { gText_Par },
+    { gText_Brn },
+    { gText_Frz },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_16[] = {
-    { gUnknown_8417938 },
-    { gUnknown_841793C },
-    { gUnknown_84178E6 }
+    { gText_Yes },
+    { gText_No },
+    { gText_Info }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_17[] = {
-    { gUnknown_8417944 },
-    { gUnknown_8417952 },
-    { gUnknown_8417960 },
-    { gUnknown_84178E6 },
+    { gText_SingleBattle },
+    { gText_DoubleBattle },
+    { gText_MultiBattle },
+    { gText_Info },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_18[] = {
-    { gUnknown_8417938 },
-    { gUnknown_841793C },
-    { gUnknown_84178E6 }
+    { gText_Yes },
+    { gText_No },
+    { gText_Info }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_19[] = {
-    { gUnknown_841796D },
-    { gUnknown_841797F },
+    { gText_MakeAChallenge },
+    { gText_Info_2 },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_20[] = {
-    { gUnknown_841806D },
-    { gUnknown_841805D },
+    { gText_Rooftop },
+    { gText_B1F },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_21[] = {
-    { gUnknown_8417D56 },
+    { gText_HelixFossil },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_22[] = {
-    { gUnknown_8417D63 },
+    { gText_DomeFossil },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_23[] = {
-    { gUnknown_8417D6F },
+    { gText_OldAmber },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_24[] = {
-    { gUnknown_8417D56 },
-    { gUnknown_8417D6F },
+    { gText_HelixFossil },
+    { gText_OldAmber },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_25[] = {
-    { gUnknown_8417D63 },
-    { gUnknown_8417D6F },
+    { gText_DomeFossil },
+    { gText_OldAmber },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_26[] = {
-    { gUnknown_8417984 },
-    { gUnknown_841799A },
-    { gUnknown_84179AD },
+    { gText_FreshWater200 },
+    { gText_SodaPop300 },
+    { gText_Lemonade350 },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_30[] = {
-    { gUnknown_8417A42 },
-    { gUnknown_8417A58 },
-    { gUnknown_8417A6E },
-    { gUnknown_8417A84 },
-    { gUnknown_8417A9A },
-    { gUnknown_8417D4C }
+    { gText_Tm134000Coins },
+    { gText_Tm233500Coins },
+    { gText_Tm244000Coins },
+    { gText_Tm304500Coins },
+    { gText_Tm354000Coins },
+    { gText_NoThanks_2 }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_41[] = {
-    { gUnknown_8417F4D },
-    { gUnknown_8417ED9 },
-    { gUnknown_8417EF7 },
-    { gUnknown_8417F11 },
-    { gUnknown_8417F2F },
-    { gUnknown_8417D4C }
+    { gText_SmokeBall800Coins },
+    { gText_MiracleSeed1000Coins },
+    { gText_Charcoal1000Coins },
+    { gText_MysticWater1000Coins },
+    { gText_YellowFlute1600Coins },
+    { gText_NoThanks_2 }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_27[] = {
-    { gUnknown_84179C0 },
-    { gUnknown_84179D6 },
+    { gText_50Coins1000 },
+    { gText_500Coins10000 },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_28[] = {
-    { gUnknown_84179ED },
-    { gUnknown_84179F7 }
+    { gText_Excellent },
+    { gText_NotSoBad }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_29[] = {
-    { gUnknown_8417A37 },
-    { gUnknown_8417A3D }
+    { gText_Right },
+    { gText_Left }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_31[] = {
-    { gUnknown_8417ABC },
-    { gUnknown_8417AB9 },
-    { gUnknown_8417AB6 },
-    { gUnknown_8417AB3 },
-    { gUnknown_8417AB0 },
+    { gText_5F },
+    { gText_4F },
+    { gText_3F },
+    { gText_2F },
+    { gText_1F },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_32[] = {
-    { gUnknown_8417C0F },
+    { gText_FreshWater },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_33[] = {
-    { gUnknown_8417C1B },
+    { gText_SodaPop },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_34[] = {
-    { gUnknown_8417C0F },
-    { gUnknown_8417C1B },
+    { gText_FreshWater },
+    { gText_SodaPop },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_35[] = {
-    { gUnknown_8417C24 },
+    { gText_Lemonade },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_36[] = {
-    { gUnknown_8417C0F },
-    { gUnknown_8417C24 },
+    { gText_FreshWater },
+    { gText_Lemonade },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_37[] = {
-    { gUnknown_8417C1B },
-    { gUnknown_8417C24 },
+    { gText_SodaPop },
+    { gText_Lemonade },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_38[] = {
-    { gUnknown_8417C0F },
-    { gUnknown_8417C1B },
-    { gUnknown_8417C24 },
+    { gText_FreshWater },
+    { gText_SodaPop },
+    { gText_Lemonade },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_Unref_Shards_0[] = {
-    { gUnknown_8417A24 },
+    { gText_GreenShard },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_Unref_Shards_1[] = {
-    { gUnknown_8417A02 },
-    { gUnknown_8417A24 },
+    { gText_RedShard },
+    { gText_GreenShard },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_Unref_Shards_2[] = {
-    { gUnknown_8417A0C },
-    { gUnknown_8417A24 },
+    { gText_YellowShard },
+    { gText_GreenShard },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_Unref_Shards_3[] = {
-    { gUnknown_8417A02 },
-    { gUnknown_8417A0C },
-    { gUnknown_8417A24 },
+    { gText_RedShard },
+    { gText_YellowShard },
+    { gText_GreenShard },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_Unref_Shards_4[] = {
-    { gUnknown_8417A19 },
-    { gUnknown_8417A24 },
+    { gText_BlueShard },
+    { gText_GreenShard },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_Unref_Shards_5[] = {
-    { gUnknown_8417A02 },
-    { gUnknown_8417A19 },
-    { gUnknown_8417A24 },
+    { gText_RedShard },
+    { gText_BlueShard },
+    { gText_GreenShard },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_Unref_Shards_6[] = {
-    { gUnknown_8417A0C },
-    { gUnknown_8417A19 },
-    { gUnknown_8417A24 },
+    { gText_YellowShard },
+    { gText_BlueShard },
+    { gText_GreenShard },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_Unref_Shards_7[] = {
-    { gUnknown_8417A02 },
-    { gUnknown_8417A0C },
-    { gUnknown_8417A19 },
-    { gUnknown_8417A24 },
+    { gText_RedShard },
+    { gText_YellowShard },
+    { gText_BlueShard },
+    { gText_GreenShard },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_1[] = {
-    { gUnknown_8417BE2 },
-    { gUnknown_8417BE8 },
-    { gUnknown_8417BF0 },
-    { gUnknown_8417BF8 },
-    { gUnknown_8417C01 }
+    { gText_Eevee },
+    { gText_Flareon },
+    { gText_Jolteon },
+    { gText_Vaporeon },
+    { gText_QuitLooking }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_13[] = {
-    { gUnknown_8417C33 },
-    { gUnknown_8417C4B }
+    { gText_Bicycle1000000 },
+    { gText_NoThanks }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_14[] = {
-    { gUnknown_8417C55 },
-    { gUnknown_8417C6A },
-    { gUnknown_8417C83 },
-    { gUnknown_8417C9D },
-    { gUnknown_8417CB7 },
-    { gUnknown_8417D4C }
+    { gText_Abra180Coins },
+    { gText_Clefairy500Coins },
+    { gText_Dratini2800Coins },
+    { gText_Scyther5500Coins },
+    { gText_Porygon9999Coins },
+    { gText_NoThanks_2 }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_39[] = {
-    { gUnknown_8417D79 },
-    { gUnknown_8417D86 },
+    { gText_TradeCenter },
+    { gText_Colosseum },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_40[] = {
-    { gUnknown_8417D90 },
-    { gUnknown_8417DA0 },
+    { gText_GameLinkCable },
+    { gText_Wireless },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_42[] = {
-    { gUnknown_841805D },
-    { gUnknown_8418061 },
-    { gUnknown_8418069 },
+    { gText_B1F },
+    { gText_B2F },
+    { gText_B4F },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_43[] = {
-    { gUnknown_841807D },
-    { gUnknown_841808E },
-    { gUnknown_841809C },
+    { gText_LinkedGamePlay },
+    { gText_DirectCorner },
+    { gText_UnionRoom },
     { gOtherText_Quit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_44[] = {
-    { gUnknown_8417DFE },
-    { gUnknown_8417E09 },
+    { gText_TwoIsland },
+    { gText_ThreeIsland },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_45[] = {
-    { gUnknown_8417DF3 },
-    { gUnknown_8417E09 },
+    { gText_OneIsland },
+    { gText_ThreeIsland },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_46[] = {
-    { gUnknown_8417DF3 },
-    { gUnknown_8417DFE },
+    { gText_OneIsland },
+    { gText_TwoIsland },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_47[] = {
-    { gUnknown_8417D79 },
-    { gUnknown_8417E50 },
-    { gUnknown_8417E5A },
+    { gText_TradeCenter },
+    { gText_Colosseum_2 },
+    { gText_BerryCrush },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_48[] = {
-    { gUnknown_8417E66 },
-    { gUnknown_8417E67 },
+    { gText_Dummy_8417E66 },
+    { gText_Dummy_8417E67 },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_50[] = {
-    { gUnknown_8417D79 },
-    { gUnknown_8417E50 },
+    { gText_TradeCenter },
+    { gText_Colosseum_2 },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_49[] = {
-    { gUnknown_8417E72 },
-    { gUnknown_8417E7F },
+    { gText_PokemonJump },
+    { gText_DodrioBerryPicking },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_51[] = {
-    { gUnknown_8417E94 },
-    { gUnknown_8417EA4 }
+    { gText_2Tinymushrooms },
+    { gText_1BigMushroom }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_52[] = {
-    { gUnknown_8417D79 },
-    { gUnknown_8417E50 },
-    { gUnknown_8417E71 },
-    { gUnknown_8417E5A },
+    { gText_TradeCenter },
+    { gText_Colosseum_2 },
+    { gText_Dummy_8417E71 },
+    { gText_BerryCrush },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_53[] = {
-    { gUnknown_8417D79 },
-    { gUnknown_8417E50 },
-    { gUnknown_8417E71 },
+    { gText_TradeCenter },
+    { gText_Colosseum_2 },
+    { gText_Dummy_8417E71 },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_54[] = {
-    { gUnknown_8417EB3 },
-    { gUnknown_8417EC1 },
+    { gText_SeviiIslands },
+    { gText_NavelRock },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_55[] = {
-    { gUnknown_8417EB3 },
-    { gUnknown_8417ECC },
+    { gText_SeviiIslands },
+    { gText_BirthIsland },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_56[] = {
-    { gUnknown_8417EB3 },
-    { gUnknown_8417EC1 },
-    { gUnknown_8417ECC },
+    { gText_SeviiIslands },
+    { gText_NavelRock },
+    { gText_BirthIsland },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_57[] = {
-    { gUnknown_8417DF3 },
-    { gUnknown_8417DFE },
-    { gUnknown_8417E09 },
+    { gText_OneIsland },
+    { gText_TwoIsland },
+    { gText_ThreeIsland },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_58[] = {
-    { gUnknown_8417E46 },
-    { gUnknown_8417DFE },
-    { gUnknown_8417E09 },
+    { gText_Vermilion },
+    { gText_TwoIsland },
+    { gText_ThreeIsland },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_59[] = {
-    { gUnknown_8417E46 },
-    { gUnknown_8417DF3 },
-    { gUnknown_8417E09 },
+    { gText_Vermilion },
+    { gText_OneIsland },
+    { gText_ThreeIsland },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_60[] = {
-    { gUnknown_8417E46 },
-    { gUnknown_8417DF3 },
-    { gUnknown_8417DFE },
+    { gText_Vermilion },
+    { gText_OneIsland },
+    { gText_TwoIsland },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_61[] = {
-    { gUnknown_8417E46 },
+    { gText_Vermilion },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_62[] = {
-    { gUnknown_8417F68 },
-    { gUnknown_8417F67 },
+    { gText_Dummy_8417F68 },
+    { gText_Dummy_8417F67 },
     { gOtherText_Exit }
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_63[] = {
-    { gUnknown_8417F77 },
-    { gUnknown_8417F69 },
+    { gText_JoinGroup },
+    { gText_BecomeLeader },
     { gOtherText_Exit }
 };
 
@@ -558,35 +558,35 @@ const struct MultichoiceListStruct gScriptMultiChoiceMenus[] = {
 };
 
 const u8 *const gStdStringPtrs[] = {
-    gUnknown_8417ABF,
-    gUnknown_8417AC4,
-    gUnknown_8417ACB,
-    gUnknown_8417AD0,
-    gUnknown_8417AD6,
-    gUnknown_8417AF4,
-    gUnknown_8417AF9,
-    gUnknown_8417B00,
-    gUnknown_8417B05,
-    gUnknown_8417B0B,
-    gUnknown_8417B11,
-    gUnknown_8417B17,
-    gUnknown_8417B21,
-    gUnknown_8417B2C,
-    gUnknown_8417B36,
-    gUnknown_8417B3E,
-    gUnknown_8417B4B,
-    gUnknown_8417B58,
-    gUnknown_8417B65,
-    gUnknown_8417B72,
-    gUnknown_8417B7C,
-    gUnknown_8417B87,
-    gUnknown_8417B94,
-    gUnknown_8417C2D,
-    gUnknown_8417DA9,
-    gUnknown_8417DB6,
-    gUnknown_8417DC7,
-    gUnknown_8417DD9,
-    gUnknown_8417DE1
+    gText_Cool,
+    gText_Beauty,
+    gText_Cute,
+    gText_Smart,
+    gText_Tough,
+    gText_Cool_2,
+    gText_Beauty_2,
+    gText_Cute_2,
+    gText_Smart_2,
+    gText_Tough_2,
+    gText_Items,
+    gText_KeyItems,
+    gText_PokeBalls,
+    gText_TmsgUnknown_8417B2CHms,
+    gText_Berries,
+    gText_Boulderbadge,
+    gText_Cascadebadge,
+    gText_Thunderbadge,
+    gText_Rainbowbadge,
+    gText_Soulbadge,
+    gText_Marshbadge,
+    gText_Volcanobadge,
+    gText_Earthbadge,
+    gText_Coins_2,
+    gText_ItemsPocket,
+    gText_KeyItemsPocket,
+    gText_PokeBallsPocket,
+    gText_TmCase,
+    gText_BerryPouch_2
 };
 
 static const u8 *const sDescriptionPtrs_CableClub_TradeBattleCancel[] = {
@@ -648,14 +648,14 @@ static const struct SpriteSheet sMuseumAerodactylSprSheets[] = {
 
 
 static const u8 *const sSeaGallopDestStrings[] = {
-    gUnknown_8417E46,
-    gUnknown_8417DF3,
-    gUnknown_8417DFE,
-    gUnknown_8417E09,
-    gUnknown_8417E16,
-    gUnknown_8417E22,
-    gUnknown_8417E2E,
-    gUnknown_8417E39
+    gText_Vermilion,
+    gText_OneIsland,
+    gText_TwoIsland,
+    gText_ThreeIsland,
+    gText_FourIsland,
+    gText_FiveIsland,
+    gText_SixIsland,
+    gText_SevenIsland
 };
 
 static u16 GetStringTilesWide(const u8 *str)
@@ -951,7 +951,7 @@ static void CreatePCMenuWindow(void)
     u8 windowWidth;
     u8 nitems;
     u8 windowId;
-    switch (GetStringTilesWide(gUnknown_8417BB6))
+    switch (GetStringTilesWide(gText_SPc))
     {
     default:
         if (FlagGet(FLAG_SYS_POKEDEX_GET))
@@ -969,9 +969,9 @@ static void CreatePCMenuWindow(void)
         nitems = 5;
         windowId = CreateWindowFromRect(0, 0, windowWidth, 10);
         SetStdWindowBorderStyle(windowId, FALSE);
-        AddTextPrinterParameterized(windowId, 2, gUnknown_8417BD3, cursorWidth, 34, 0xFF, NULL);
-        AddTextPrinterParameterized(windowId, 2, gUnknown_8417BBE, cursorWidth, 50, 0xFF, NULL);
-        AddTextPrinterParameterized(windowId, 2, gUnknown_8417BCB, cursorWidth, 66, 0xFF, NULL);
+        AddTextPrinterParameterized(windowId, 2, gText_ProfOakSPc, cursorWidth, 34, 0xFF, NULL);
+        AddTextPrinterParameterized(windowId, 2, gText_HallOfFame_2, cursorWidth, 50, 0xFF, NULL);
+        AddTextPrinterParameterized(windowId, 2, gText_LogOff, cursorWidth, 66, 0xFF, NULL);
     }
     else
     {
@@ -982,14 +982,14 @@ static void CreatePCMenuWindow(void)
         windowId = CreateWindowFromRect(0, 0, windowWidth, nitems * 2);
         SetStdWindowBorderStyle(windowId, FALSE);
         if (FlagGet(FLAG_SYS_POKEDEX_GET))
-            AddTextPrinterParameterized(windowId, 2, gUnknown_8417BD3, cursorWidth, 34, 0xFF, NULL);
-        AddTextPrinterParameterized(windowId, 2, gUnknown_8417BCB, cursorWidth, 2 + 16 * (nitems - 1), 0xFF, NULL);
+            AddTextPrinterParameterized(windowId, 2, gText_ProfOakSPc, cursorWidth, 34, 0xFF, NULL);
+        AddTextPrinterParameterized(windowId, 2, gText_LogOff, cursorWidth, 2 + 16 * (nitems - 1), 0xFF, NULL);
     }
     if (FlagGet(FLAG_SYS_NOT_SOMEONES_PC))
-        AddTextPrinterParameterized(windowId, 2, gUnknown_8417BAC, cursorWidth, 2 , 0xFF, NULL);
+        AddTextPrinterParameterized(windowId, 2, gText_BillSPc, cursorWidth, 2 , 0xFF, NULL);
     else
-        AddTextPrinterParameterized(windowId, 2, gUnknown_8417B9F, cursorWidth, 2 , 0xFF, NULL);
-    StringExpandPlaceholders(gStringVar4, gUnknown_8417BB6);
+        AddTextPrinterParameterized(windowId, 2, gText_SomeoneSPc, cursorWidth, 2 , 0xFF, NULL);
+    StringExpandPlaceholders(gStringVar4, gText_SPc);
     Menu_PrintFormatIntlPlayerName(windowId, gStringVar4, cursorWidth, 18);
     Menu_InitCursor(windowId, 2, 0, 2, 16, nitems, 0);
     sub_809CC18(FALSE, nitems, windowId, 0xFF);
@@ -1231,7 +1231,7 @@ void Special_DrawSeaGallopDestinationMenu(void)
             if (r4 == SEAGALLOP_CINNABAR_ISLAND)
                 r4 = SEAGALLOP_VERMILION_CITY;
         }
-        AddTextPrinterParameterized(windowId, 2, gUnknown_8417DED, cursorWidth, i * 16 + 2, 0xFF, NULL);
+        AddTextPrinterParameterized(windowId, 2, gText_Other, cursorWidth, i * 16 + 2, 0xFF, NULL);
         i++;
         AddTextPrinterParameterized(windowId, 2, gOtherText_Exit, cursorWidth, i * 16 + 2, 0xFF, NULL);
         Menu_InitCursor(windowId, 2, 0, 2, 16, nitems, 0);

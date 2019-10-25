@@ -60,7 +60,7 @@ void PrintCoinsString_Parameterized(u8 windowId, u32 coinAmount, u8 x, u8 y, u8 
 void sub_80D0674(u8 windowId, u16 tileStart, u8 palette, u32 coinAmount)
 {
     DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, tileStart, palette);
-    AddTextPrinterParameterized(windowId, 2, gUnknown_8417C2D, 0, 0, 0xFF, 0);
+    AddTextPrinterParameterized(windowId, 2, gText_Coins_2, 0, 0, 0xFF, 0);
     PrintCoinsString_Parameterized(windowId, coinAmount, 0x10, 0xC, 0);
 }
 
@@ -86,7 +86,7 @@ void ShowCoinsWindow(u32 coinAmount, u8 x, u8 y)
     PutWindowTilemap(sCoinsWindowId);
     TextWindow_SetStdFrame0_WithPal(sCoinsWindowId, 0x21D, 0xD0);
     DrawStdFrameWithCustomTileAndPalette(sCoinsWindowId, FALSE, 0x21D, 0xD);
-    AddTextPrinterParameterized(sCoinsWindowId, 2, gUnknown_8417C2D, 0, 0, 0xFF, 0);
+    AddTextPrinterParameterized(sCoinsWindowId, 2, gText_Coins_2, 0, 0, 0xFF, 0);
     PrintCoinsString(coinAmount);
 }
 

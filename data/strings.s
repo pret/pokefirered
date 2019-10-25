@@ -1358,34 +1358,34 @@ gUnknown_84178DA:: @ 84178DA
 gUnknown_84178DF:: @ 0x84178DF
 	.string "さんか する$"
 
-gUnknown_84178E6:: @ 0x84178E6
+gText_Info:: @ 0x84178E6
 	.string "INFO$"
 
-gUnknown_84178EB:: @ 0x84178EB
+gText_Eggs:: @ 0x84178EB
 	.string "EGGS$"
 
-gUnknown_84178F0:: @ 0x84178F0
+gText_HallOfFame:: @ 0x84178F0
 	.string "HALL OF FAME$"
 
-gUnknown_84178FD:: @ 0x84178FD
+gText_Victories:: @ 0x84178FD
 	.string "VICTORIES$"
 
-gUnknown_8417907:: @ 0x8417907
+gText_Quit:: @ 0x8417907
 	.string "QUIT$"
 
-gUnknown_841790C:: @ 0x841790C
+gText_Psn:: @ 0x841790C
 	.string "PSN$"
 
-gUnknown_8417910:: @ 0x8417910
+gText_Par:: @ 0x8417910
 	.string "PAR$"
 
-gUnknown_8417914:: @ 0x8417914
+gText_Slp:: @ 0x8417914
 	.string "SLP$"
 
-gUnknown_8417918:: @ 0x8417918
+gText_Brn:: @ 0x8417918
 	.string "BRN$"
 
-gUnknown_841791C:: @ 0x841791C
+gText_Frz:: @ 0x841791C
 	.string "FRZ$"
 
 gUnknown_8417920:: @ 0x8417920
@@ -1403,247 +1403,247 @@ gUnknown_841792E:: @ 0x841792E
 gUnknown_8417933:: @ 0x8417933
 	.string "これから$"
 
-gUnknown_8417938:: @ 8417938
+gText_Yes:: @ 8417938
 	.string "YES$"
 
-gUnknown_841793C:: @ 841793C
+gText_No:: @ 841793C
 	.string "NO$"
 
 gUnknown_841793F:: @ 0x841793F
 	.string "せつめい$"
 
-gUnknown_8417944:: @ 0x8417944
+gText_SingleBattle:: @ 0x8417944
 	.string "SINGLE BATTLE$"
 
-gUnknown_8417952:: @ 0x8417952
+gText_DoubleBattle:: @ 0x8417952
 	.string "DOUBLE BATTLE$"
 
-gUnknown_8417960:: @ 0x8417960
+gText_MultiBattle:: @ 0x8417960
 	.string "MULTI BATTLE$"
 
-gUnknown_841796D:: @ 0x841796D
+gText_MakeAChallenge:: @ 0x841796D
 	.string "Make a challenge.$"
 
-gUnknown_841797F:: @ 0x841797F
+gText_Info_2:: @ 0x841797F
 	.string "INFO$"
 
-gUnknown_8417984:: @ 0x8417984
+gText_FreshWater200:: @ 0x8417984
 	.string "FRESH WATER{CLEAR_TO 0x57}{SMALL}¥200$"
 
-gUnknown_841799A:: @ 0x841799A
+gText_SodaPop300:: @ 0x841799A
 	.string "SODA POP{CLEAR_TO 0x57}{SMALL}¥300$"
 
-gUnknown_84179AD:: @ 0x84179AD
+gText_Lemonade350:: @ 0x84179AD
 	.string "LEMONADE{CLEAR_TO 0x57}{SMALL}¥350$"
 
-gUnknown_84179C0:: @ 0x84179C0
+gText_50Coins1000:: @ 0x84179C0
 	.string "{SMALL} 50 COINS{CLEAR_TO 0x45}¥1,000$"
 
-gUnknown_84179D6:: @ 0x84179D6
+gText_500Coins10000:: @ 0x84179D6
 	.string "{SMALL}500 COINS{CLEAR_TO 0x40}¥10,000$"
 
-gUnknown_84179ED:: @ 0x84179ED
+gText_Excellent:: @ 0x84179ED
 	.string "Excellent$"
 
-gUnknown_84179F7:: @ 0x84179F7
+gText_NotSoBad:: @ 0x84179F7
 	.string "Not so bad$"
 
-gUnknown_8417A02:: @ 0x8417A02
+gText_RedShard:: @ 0x8417A02
 	.string "RED SHARD$"
 
-gUnknown_8417A0C:: @ 0x8417A0C
+gText_YellowShard:: @ 0x8417A0C
 	.string "YELLOW SHARD$"
 
-gUnknown_8417A19:: @ 0x8417A19
+gText_BlueShard:: @ 0x8417A19
 	.string "BLUE SHARD$"
 
-gUnknown_8417A24:: @ 0x8417A24
+gText_GreenShard:: @ 0x8417A24
 	.string "GREEN SHARD$"
 
 gUnknown_8417A30:: @ 0x8417A30
 	.string "バトルタワ-$"
 
-gUnknown_8417A37:: @ 0x8417A37
+gText_Right:: @ 0x8417A37
 	.string "Right$"
 
-gUnknown_8417A3D:: @ 0x8417A3D
+gText_Left:: @ 0x8417A3D
 	.string "Left$"
 
-gUnknown_8417A42:: @ 0x8417A42
+gText_Tm134000Coins:: @ 0x8417A42
 	.string "TM13{CLEAR_TO 0x48}{SMALL}4,000 COINS$"
 
-gUnknown_8417A58:: @ 0x8417A58
+gText_Tm233500Coins:: @ 0x8417A58
 	.string "TM23{CLEAR_TO 0x48}{SMALL}3,500 COINS$"
 
-gUnknown_8417A6E:: @ 0x8417A6E
+gText_Tm244000Coins:: @ 0x8417A6E
 	.string "TM24{CLEAR_TO 0x48}{SMALL}4,000 COINS$"
 
-gUnknown_8417A84:: @ 0x8417A84
+gText_Tm304500Coins:: @ 0x8417A84
 	.string "TM30{CLEAR_TO 0x48}{SMALL}4,500 COINS$"
 
-gUnknown_8417A9A:: @ 0x8417A9A
+gText_Tm354000Coins:: @ 0x8417A9A
 	.string "TM35{CLEAR_TO 0x48}{SMALL}4,000 COINS$"
 
-gUnknown_8417AB0:: @ 0x8417AB0
+gText_1F:: @ 0x8417AB0
 	.string "1F$"
 
-gUnknown_8417AB3:: @ 0x8417AB3
+gText_2F:: @ 0x8417AB3
 	.string "2F$"
 
-gUnknown_8417AB6:: @ 0x8417AB6
+gText_3F:: @ 0x8417AB6
 	.string "3F$"
 
-gUnknown_8417AB9:: @ 0x8417AB9
+gText_4F:: @ 0x8417AB9
 	.string "4F$"
 
-gUnknown_8417ABC:: @ 0x8417ABC
+gText_5F:: @ 0x8417ABC
 	.string "5F$"
 
-gUnknown_8417ABF:: @ 0x8417ABF
+gText_Cool:: @ 0x8417ABF
 	.string "COOL$"
 
-gUnknown_8417AC4:: @ 0x8417AC4
+gText_Beauty:: @ 0x8417AC4
 	.string "BEAUTY$"
 
-gUnknown_8417ACB:: @ 0x8417ACB
+gText_Cute:: @ 0x8417ACB
 	.string "CUTE$"
 
-gUnknown_8417AD0:: @ 0x8417AD0
+gText_Smart:: @ 0x8417AD0
 	.string "SMART$"
 
-gUnknown_8417AD6:: @ 0x8417AD6
+gText_Tough:: @ 0x8417AD6
 	.string "TOUGH$"
 
-gUnknown_8417ADC:: @ 0x8417ADC
+gText_Normal:: @ 0x8417ADC
 	.string "NORMAL$"
 
-gUnknown_8417AE3:: @ 0x8417AE3
+gText_Black:: @ 0x8417AE3
 	.string "BLACK$"
 
-gUnknown_8417AE9:: @ 0x8417AE9
+gText_Pink:: @ 0x8417AE9
 	.string "PINK$"
 
-gUnknown_8417AEE:: @ 0x8417AEE
+gText_Sepia:: @ 0x8417AEE
 	.string "SEPIA$"
 
-gUnknown_8417AF4:: @ 0x8417AF4
+gText_Cool_2:: @ 0x8417AF4
 	.string "COOL$"
 
-gUnknown_8417AF9:: @ 0x8417AF9
+gText_Beauty_2:: @ 0x8417AF9
 	.string "BEAUTY$"
 
-gUnknown_8417B00:: @ 0x8417B00
+gText_Cute_2:: @ 0x8417B00
 	.string "CUTE$"
 
-gUnknown_8417B05:: @ 0x8417B05
+gText_Smart_2:: @ 0x8417B05
 	.string "SMART$"
 
-gUnknown_8417B0B:: @ 0x8417B0B
+gText_Tough_2:: @ 0x8417B0B
 	.string "TOUGH$"
 
-gUnknown_8417B11:: @ 0x8417B11
+gText_Items:: @ 0x8417B11
 	.string "ITEMS$"
 
-gUnknown_8417B17:: @ 0x8417B17
+gText_KeyItems:: @ 0x8417B17
 	.string "KEY ITEMS$"
 
-gUnknown_8417B21:: @ 0x8417B21
+gText_PokeBalls:: @ 0x8417B21
 	.string "POKé BALLS$"
 
-gUnknown_8417B2C:: @ 0x8417B2C
+gText_TmsgUnknown_8417B2CHms:: @ 0x8417B2C
 	.string "TMs & HMs$"
 
-gUnknown_8417B36:: @ 0x8417B36
+gText_Berries:: @ 0x8417B36
 	.string "BERRIES$"
 
-gUnknown_8417B3E:: @ 0x8417B3E
+gText_Boulderbadge:: @ 0x8417B3E
 	.string "BOULDERBADGE$"
 
-gUnknown_8417B4B:: @ 0x8417B4B
+gText_Cascadebadge:: @ 0x8417B4B
 	.string "CASCADEBADGE$"
 
-gUnknown_8417B58:: @ 0x8417B58
+gText_Thunderbadge:: @ 0x8417B58
 	.string "THUNDERBADGE$"
 
-gUnknown_8417B65:: @ 0x8417B65
+gText_Rainbowbadge:: @ 0x8417B65
 	.string "RAINBOWBADGE$"
 
-gUnknown_8417B72:: @ 0x8417B72
+gText_Soulbadge:: @ 0x8417B72
 	.string "SOULBADGE$"
 
-gUnknown_8417B7C:: @ 0x8417B7C
+gText_Marshbadge:: @ 0x8417B7C
 	.string "MARSHBADGE$"
 
-gUnknown_8417B87:: @ 0x8417B87
+gText_Volcanobadge:: @ 0x8417B87
 	.string "VOLCANOBADGE$"
 
-gUnknown_8417B94:: @ 0x8417B94
+gText_Earthbadge:: @ 0x8417B94
 	.string "EARTHBADGE$"
 
-gUnknown_8417B9F:: @ 8417B9F
+gText_SomeoneSPc:: @ 8417B9F
 	.string "SOMEONE'S PC$"
 
-gUnknown_8417BAC:: @ 8417BAC
+gText_BillSPc:: @ 8417BAC
 	.string "BILL'S PC$"
 
-gUnknown_8417BB6:: @ 8417BB6
+gText_SPc:: @ 8417BB6
 	.string "{PLAYER}'s PC$"
 
-gUnknown_8417BBE:: @ 8417BBE
+gText_HallOfFame_2:: @ 8417BBE
 	.string "HALL OF FAME$"
 
-gUnknown_8417BCB:: @ 8417BCB
+gText_LogOff:: @ 8417BCB
 	.string "LOG OFF$"
 
-gUnknown_8417BD3:: @ 8417BD3
+gText_ProfOakSPc:: @ 8417BD3
 	.string "PROF. OAK's PC$"
 
-gUnknown_8417BE2:: @ 0x8417BE2
+gText_Eevee:: @ 0x8417BE2
 	.string "EEVEE$"
 
-gUnknown_8417BE8:: @ 0x8417BE8
+gText_Flareon:: @ 0x8417BE8
 	.string "FLAREON$"
 
-gUnknown_8417BF0:: @ 0x8417BF0
+gText_Jolteon:: @ 0x8417BF0
 	.string "JOLTEON$"
 
-gUnknown_8417BF8:: @ 0x8417BF8
+gText_Vaporeon:: @ 0x8417BF8
 	.string "VAPOREON$"
 
-gUnknown_8417C01:: @ 0x8417C01
+gText_QuitLooking:: @ 0x8417C01
 	.string "Quit looking.$"
 
-gUnknown_8417C0F:: @ 0x8417C0F
+gText_FreshWater:: @ 0x8417C0F
 	.string "FRESH WATER$"
 
-gUnknown_8417C1B:: @ 0x8417C1B
+gText_SodaPop:: @ 0x8417C1B
 	.string "SODA POP$"
 
-gUnknown_8417C24:: @ 0x8417C24
+gText_Lemonade:: @ 0x8417C24
 	.string "LEMONADE$"
 
-gUnknown_8417C2D:: @ 8417C2D
+gText_Coins_2:: @ 8417C2D
 	.string "COINS$"
 
-gUnknown_8417C33:: @ 0x8417C33
+gText_Bicycle1000000:: @ 0x8417C33
 	.string "BICYCLE{CLEAR_TO 0x49}{SMALL}¥1,000,000$"
 
-gUnknown_8417C4B:: @ 0x8417C4B
+gText_NoThanks:: @ 0x8417C4B
 	.string "NO THANKS$"
 
-gUnknown_8417C55:: @ 0x8417C55
+gText_Abra180Coins:: @ 0x8417C55
 	.string "ABRA{CLEAR_TO 0x55}{SMALL} 180 COINS$"
 
-gUnknown_8417C6A:: @ 0x8417C6A
+gText_Clefairy500Coins:: @ 0x8417C6A
 	.string "CLEFAIRY{CLEAR_TO 0x55}{SMALL} 500 COINS$"
 
-gUnknown_8417C83:: @ 0x8417C83
+gText_Dratini2800Coins:: @ 0x8417C83
 	.string "DRATINI{CLEAR_TO 0x4B}{SMALL} 2,800 COINS$"
 
-gUnknown_8417C9D:: @ 0x8417C9D
+gText_Scyther5500Coins:: @ 0x8417C9D
 	.string "SCYTHER{CLEAR_TO 0x4B}{SMALL} 5,500 COINS$"
 
-gUnknown_8417CB7:: @ 0x8417CB7
+gText_Porygon9999Coins:: @ 0x8417CB7
 	.string "PORYGON{CLEAR_TO 0x4B}{SMALL} 9,999 COINS$"
 
 gUnknown_8417CD1:: @ 0x8417CD1
@@ -1661,136 +1661,136 @@ gUnknown_8417D18:: @ 0x8417D18
 gUnknown_8417D32:: @ 0x8417D32
 	.string "PORYGON{CLEAR_TO 0x4B}{SMALL} 6,500 COINS$"
 
-gUnknown_8417D4C:: @ 0x8417D4C
+gText_NoThanks_2:: @ 0x8417D4C
 	.string "NO THANKS$"
 
-gUnknown_8417D56:: @ 0x8417D56
+gText_HelixFossil:: @ 0x8417D56
 	.string "HELIX FOSSIL$"
 
-gUnknown_8417D63:: @ 0x8417D63
+gText_DomeFossil:: @ 0x8417D63
 	.string "DOME FOSSIL$"
 
-gUnknown_8417D6F:: @ 0x8417D6F
+gText_OldAmber:: @ 0x8417D6F
 	.string "OLD AMBER$"
 
-gUnknown_8417D79:: @ 0x8417D79
+gText_TradeCenter:: @ 0x8417D79
 	.string "TRADE CENTER$"
 
-gUnknown_8417D86:: @ 0x8417D86
+gText_Colosseum:: @ 0x8417D86
 	.string "COLOSSEUM$"
 
-gUnknown_8417D90:: @ 0x8417D90
+gText_GameLinkCable:: @ 0x8417D90
 	.string "Game Link cable$"
 
-gUnknown_8417DA0:: @ 0x8417DA0
+gText_Wireless:: @ 0x8417DA0
 	.string "Wireless$"
 
-gUnknown_8417DA9:: @ 0x8417DA9
+gText_ItemsPocket:: @ 0x8417DA9
 	.string "ITEMS POCKET$"
 
-gUnknown_8417DB6:: @ 0x8417DB6
+gText_KeyItemsPocket:: @ 0x8417DB6
 	.string "KEY ITEMS POCKET$"
 
-gUnknown_8417DC7:: @ 0x8417DC7
+gText_PokeBallsPocket:: @ 0x8417DC7
 	.string "POKé BALLS POCKET$"
 
-gUnknown_8417DD9:: @ 0x8417DD9
+gText_TmCase:: @ 0x8417DD9
 	.string "TM CASE$"
 
-gUnknown_8417DE1:: @ 0x8417DE1
+gText_BerryPouch_2:: @ 0x8417DE1
 	.string "BERRY POUCH$"
 
-gUnknown_8417DED:: @ 8417DED
+gText_Other:: @ 8417DED
 	.string "OTHER$"
 
-gUnknown_8417DF3:: @ 0x8417DF3
+gText_OneIsland:: @ 0x8417DF3
 	.string "ONE ISLAND$"
 
-gUnknown_8417DFE:: @ 0x8417DFE
+gText_TwoIsland:: @ 0x8417DFE
 	.string "TWO ISLAND$"
 
-gUnknown_8417E09:: @ 0x8417E09
+gText_ThreeIsland:: @ 0x8417E09
 	.string "THREE ISLAND$"
 
-gUnknown_8417E16:: @ 0x8417E16
+gText_FourIsland:: @ 0x8417E16
 	.string "FOUR ISLAND$"
 
-gUnknown_8417E22:: @ 0x8417E22
+gText_FiveIsland:: @ 0x8417E22
 	.string "FIVE ISLAND$"
 
-gUnknown_8417E2E:: @ 0x8417E2E
+gText_SixIsland:: @ 0x8417E2E
 	.string "SIX ISLAND$"
 
-gUnknown_8417E39:: @ 0x8417E39
+gText_SevenIsland:: @ 0x8417E39
 	.string "SEVEN ISLAND$"
 
-gUnknown_8417E46:: @ 0x8417E46
+gText_Vermilion:: @ 0x8417E46
 	.string "VERMILION$"
 
-gUnknown_8417E50:: @ 0x8417E50
+gText_Colosseum_2:: @ 0x8417E50
 	.string "COLOSSEUM$"
 
-gUnknown_8417E5A:: @ 0x8417E5A
+gText_BerryCrush:: @ 0x8417E5A
 	.string "BERRY CRUSH$"
 
-gUnknown_8417E66:: @ 0x8417E66
+gText_Dummy_8417E66:: @ 0x8417E66
 	.string "$"
 
-gUnknown_8417E67:: @ 0x8417E67
+gText_Dummy_8417E67:: @ 0x8417E67
 	.string "$"
 
 gUnknown_8417E68:: @ 0x8417E68
 	.string "せつめいを きく$"
 
-gUnknown_8417E71:: @ 0x8417E71
+gText_Dummy_8417E71:: @ 0x8417E71
 	.string "$"
 
-gUnknown_8417E72:: @ 0x8417E72
+gText_PokemonJump:: @ 0x8417E72
 	.string "POKéMON JUMP$"
 
-gUnknown_8417E7F:: @ 0x8417E7F
+gText_DodrioBerryPicking:: @ 0x8417E7F
 	.string "DODRIO BERRY-PICKING$"
 
-gUnknown_8417E94:: @ 0x8417E94
+gText_2Tinymushrooms:: @ 0x8417E94
 	.string "2 TINYMUSHROOMS$"
 
-gUnknown_8417EA4:: @ 0x8417EA4
+gText_1BigMushroom:: @ 0x8417EA4
 	.string "1 BIG MUSHROOM$"
 
-gUnknown_8417EB3:: @ 0x8417EB3
+gText_SeviiIslands:: @ 0x8417EB3
 	.string "SEVII ISLANDS$"
 
-gUnknown_8417EC1:: @ 0x8417EC1
+gText_NavelRock:: @ 0x8417EC1
 	.string "NAVEL ROCK$"
 
-gUnknown_8417ECC:: @ 0x8417ECC
+gText_BirthIsland:: @ 0x8417ECC
 	.string "BIRTH ISLAND$"
 
-gUnknown_8417ED9:: @ 0x8417ED9
+gText_MiracleSeed1000Coins:: @ 0x8417ED9
 	.string "MIRACLE SEED{CLEAR_TO 0x50}{SMALL}1,000 COINS$"
 
-gUnknown_8417EF7:: @ 0x8417EF7
+gText_Charcoal1000Coins:: @ 0x8417EF7
 	.string "CHARCOAL{CLEAR_TO 0x50}{SMALL}1,000 COINS$"
 
-gUnknown_8417F11:: @ 0x8417F11
+gText_MysticWater1000Coins:: @ 0x8417F11
 	.string "MYSTIC WATER{CLEAR_TO 0x50}{SMALL}1,000 COINS$"
 
-gUnknown_8417F2F:: @ 0x8417F2F
+gText_YellowFlute1600Coins:: @ 0x8417F2F
 	.string "YELLOW FLUTE{CLEAR_TO 0x50}{SMALL}1,600 COINS$"
 
-gUnknown_8417F4D:: @ 0x8417F4D
+gText_SmokeBall800Coins:: @ 0x8417F4D
 	.string "SMOKE BALL{CLEAR_TO 0x5A}{SMALL}800 COINS$"
 
-gUnknown_8417F67:: @ 0x8417F67
+gText_Dummy_8417F67:: @ 0x8417F67
 	.string "$"
 
-gUnknown_8417F68:: @ 0x8417F68
+gText_Dummy_8417F68:: @ 0x8417F68
 	.string "$"
 
-gUnknown_8417F69:: @ 0x8417F69
+gText_BecomeLeader:: @ 0x8417F69
 	.string "BECOME LEADER$"
 
-gUnknown_8417F77:: @ 0x8417F77
+gText_JoinGroup:: @ 0x8417F77
 	.string "JOIN GROUP$"
 
 gOtherText_Single:: @ 0x8417F82
@@ -1889,31 +1889,31 @@ gUnknown_8418055:: @ 0x8418055
 gUnknown_8418059:: @ 0x8418059
 	.string "11F$"
 
-gUnknown_841805D:: @ 0x841805D
+gText_B1F:: @ 0x841805D
 	.string "B1F$"
 
-gUnknown_8418061:: @ 0x8418061
+gText_B2F:: @ 0x8418061
 	.string "B2F$"
 
 gUnknown_8418065:: @ 0x8418065
 	.string "B3F$"
 
-gUnknown_8418069:: @ 0x8418069
+gText_B4F:: @ 0x8418069
 	.string "B4F$"
 
-gUnknown_841806D:: @ 0x841806D
+gText_Rooftop:: @ 0x841806D
 	.string "ROOFTOP$"
 
 gUnknown_8418075:: @ 8418075
 	.string "Now on:$"
 
-gUnknown_841807D:: @ 0x841807D
+gText_LinkedGamePlay:: @ 0x841807D
 	.string "LINKED GAME PLAY$"
 
-gUnknown_841808E:: @ 0x841808E
+gText_DirectCorner:: @ 0x841808E
 	.string "DIRECT CORNER$"
 
-gUnknown_841809C:: @ 0x841809C
+gText_UnionRoom:: @ 0x841809C
 	.string "UNION ROOM$"
 
 gUnknown_84180A7:: @ 0x84180A7

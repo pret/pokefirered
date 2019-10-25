@@ -850,7 +850,7 @@ u16 sub_80803D8(void)
     return gUnknown_20386CC;
 }
 
-u16 GetTrainerFlag(void)
+u16 ScrSpecial_HasTrainerBeenFought(void)
 {
     return FlagGet(GetTrainerAFlag());
 }
@@ -993,7 +993,7 @@ void ScrSpecial_ShowTrainerNonBattlingSpeech(void)
     ShowFieldMessage(GetTrainerCantBattleSpeech());
 }
 
-void SetUpTrainerEncounterMusic(void)
+void PlayTrainerEncounterMusic(void)
 {
     u16 music;
 
@@ -1003,19 +1003,19 @@ void SetUpTrainerEncounterMusic(void)
     {
         switch (GetTrainerEncounterMusicId(gTrainerBattleOpponent_A))
         {
-        case 1: // TODO: replace these with enums
-        case 2:
-        case 9:
+        case TRAINER_ENCOUNTER_MUSIC_FEMALE:
+        case TRAINER_ENCOUNTER_MUSIC_GIRL:
+        case TRAINER_ENCOUNTER_MUSIC_TWINS:
             music = MUS_SHOUJO;
             break;
-        case 0:
-        case 4:
-        case 5:
-        case 8:
-        case 10:
-        case 11:
-        case 12:
-        case 13:
+        case TRAINER_ENCOUNTER_MUSIC_MALE:
+        case TRAINER_ENCOUNTER_MUSIC_INTENSE:
+        case TRAINER_ENCOUNTER_MUSIC_COOL:
+        case TRAINER_ENCOUNTER_MUSIC_SWIMMER:
+        case TRAINER_ENCOUNTER_MUSIC_ELITE_FOUR:
+        case TRAINER_ENCOUNTER_MUSIC_HIKER:
+        case TRAINER_ENCOUNTER_MUSIC_INTERVIEWER:
+        case TRAINER_ENCOUNTER_MUSIC_RICH:
             music = MUS_SHOUNEN;
             break;
         default:

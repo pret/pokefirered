@@ -1107,7 +1107,7 @@ static void CB2_PreInitMultiBattle(void)
     s32 i;
     u8 playerMultiplierId;
     u8 r4 = 0xF;
-    u16 *savedBattleTypeFlags; // ???
+    u16 *savedBattleTypeFlags;
     void (**savedCallback)(void);
 
     playerMultiplierId = GetMultiplayerId();

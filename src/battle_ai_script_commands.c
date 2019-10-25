@@ -1,6 +1,6 @@
 #include "global.h"
 #include "battle.h"
-#include "battle_main.h"
+#include "battle_anim.h"
 #include "util.h"
 #include "item.h"
 #include "random.h"

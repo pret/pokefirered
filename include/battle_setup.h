@@ -20,7 +20,7 @@ bool32 GetTrainerFlagFromScriptPointer(const u8 *data);
 void SetUpTrainerMovement(void);
 u8 ScrSpecial_GetTrainerBattleMode(void);
 u16 sub_80803D8(void);
-u16 GetTrainerFlag(void);
+u16 ScrSpecial_HasTrainerBeenFought(void);
 void SetBattledTrainerFlag(void);
 bool8 HasTrainerBeenFought(u16 trainerId);
 void SetTrainerFlag(u16 trainerId);
@@ -31,7 +31,7 @@ void ScrSpecial_ShowTrainerIntroSpeech(void);
 const u8 *BattleSetup_GetScriptAddrAfterBattle(void);
 const u8 *BattleSetup_GetTrainerPostBattleScript(void);
 void ScrSpecial_ShowTrainerNonBattlingSpeech(void);
-void SetUpTrainerEncounterMusic(void);
+void PlayTrainerEncounterMusic(void);
 const u8 *GetTrainerALoseText(void);
 const u8 *GetTrainerWonSpeech(void);
 

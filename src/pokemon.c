@@ -8,7 +8,7 @@
 #include "data.h"
 #include "string_util.h"
 #include "battle.h"
-#include "battle_main.h"
+#include "battle_anim.h"
 #include "item.h"
 #include "event_data.h"
 #include "util.h"

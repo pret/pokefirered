@@ -62,9 +62,9 @@ gSpecials:: @ 815FD60
 	def_special ScrSpecial_GetTrainerBattleMode
 	def_special ScrSpecial_ShowTrainerIntroSpeech
 	def_special ScrSpecial_ShowTrainerNonBattlingSpeech
-	def_special GetTrainerFlag
+	def_special ScrSpecial_HasTrainerBeenFought
 	def_special ScrSpecial_EndTrainerApproach
-	def_special SetUpTrainerEncounterMusic
+	def_special PlayTrainerEncounterMusic
 	def_special ShouldTryRematchBattle
 	def_special ScrSpecial_GetTrainerEyeRematchFlag
 	def_special ScrSpecial_StartTrainerEyeRematch

@@ -3175,7 +3175,7 @@ static bool8 BT_Phase2WhiteFadeInStripes_Stop(struct Task *task)
     DmaStop(0);
     SetVBlankCallback(NULL);
     SetHBlankCallback(NULL);
-    sTransitionStructPtr->win0H = 240;
+    sTransitionStructPtr->win0H = WIN_RANGE(0, 240);
     sTransitionStructPtr->bldY = 0;
     sTransitionStructPtr->bldCnt = BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BD | BLDCNT_EFFECT_DARKEN;
     sTransitionStructPtr->winIn = WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WININ_WIN0_CLR;

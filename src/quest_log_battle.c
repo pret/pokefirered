@@ -2,6 +2,7 @@
 #include "constants/species.h"
 #include "malloc.h"
 #include "battle.h"
+#include "battle_anim.h"
 #include "link.h"
 #include "overworld.h"
 #include "quest_log.h"
@@ -22,7 +23,7 @@ struct QuestLogStruct_WildBattleRecord
     u8 v4;
 };
 
-void sub_812C334(s32 *, s32 *);
+static void sub_812C334(s32 *, s32 *);
 
 void sub_812BFDC(void)
 {
@@ -38,18 +39,18 @@ void sub_812BFDC(void)
         {
             switch (gTrainers[gTrainerBattleOpponent_A].trainerClass)
             {
-                case 0x54:
-                    questLogMessageType = 30;
-                    break;
-                case 0x5a:
-                    questLogMessageType = 33;
-                    break;
-                case 0x57:
-                    questLogMessageType = 32;
-                    break;
-                default:
-                    questLogMessageType = 34;
-                    break;
+            case 0x54:
+                questLogMessageType = 30;
+                break;
+            case 0x5a:
+                questLogMessageType = 33;
+                break;
+            case 0x57:
+                questLogMessageType = 32;
+                break;
+            default:
+                questLogMessageType = 34;
+                break;
             }
             questLogTrainerBattleRecord->v0 = gTrainerBattleOpponent_A;
             if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
@@ -149,7 +150,7 @@ void sub_812C224(void)
     }
 }
 
-void sub_812C334(s32 * a0, s32 * a1)
+static void sub_812C334(s32 * a0, s32 * a1)
 {
     s32 r5;
     s32 _optimized_out = 0;

@@ -18,14 +18,6 @@
     0x2 bit is responsible for the id of sent out pokemon. 0 means it's the first sent out pokemon, 1 it's the second one. (Triple battle didn't exist at the time yet.)
 */
 
-#define IDENTITY_PLAYER_MON1        0
-#define IDENTITY_OPPONENT_MON1      1
-#define IDENTITY_PLAYER_MON2        2
-#define IDENTITY_OPPONENT_MON2      3
-
-#define SIDE_PLAYER     0x0
-#define SIDE_OPPONENT   0x1
-
 #define GET_BATTLER_POSITION(battler)((gBattlerPositions[battler]))
 #define GET_BATTLER_SIDE(battler)((GetBattlerPosition(battler) & BIT_SIDE))
 #define GET_BATTLER_SIDE2(battler)((GET_BATTLER_POSITION(battler) & BIT_SIDE))
@@ -35,40 +27,6 @@
 #define TRAINER_OPPONENT_800        0x800
 #define STEVEN_PARTNER_ID           0xC03
 #define SECRET_BASE_OPPONENT        0x400
-
-#define BATTLE_WON                  0x1
-#define BATTLE_LOST                 0x2
-#define BATTLE_DREW                 0x3
-#define BATTLE_RAN                  0x4
-#define BATTLE_PLAYER_TELEPORTED    0x5
-#define BATTLE_POKE_FLED            0x6
-#define BATTLE_CAUGHT               0x7
-#define BATTLE_SAFARI_OUT_OF_BALLS  0x8
-#define BATTLE_FORFEITED            0x9
-#define BATTLE_OPPONENT_TELEPORTED  0xA
-
-#define OUTCOME_LINK_BATTLE_RUN      0x80
-
-#define STATUS_NONE             0x0
-#define STATUS_SLEEP            0x7
-#define STATUS_POISON           0x8
-#define STATUS_BURN             0x10
-#define STATUS_FREEZE           0x20
-#define STATUS_PARALYSIS        0x40
-#define STATUS_TOXIC_POISON     0x80
-#define STATUS_TOXIC_COUNTER    0xF00
-
-#define STATUS_PSN_ANY          ((STATUS_POISON | STATUS_TOXIC_POISON))
-#define STATUS_ANY              ((STATUS_SLEEP | STATUS_POISON | STATUS_BURN | STATUS_FREEZE | STATUS_PARALYSIS | STATUS_TOXIC_POISON))
-
-#define SIDE_STATUS_REFLECT          (1 << 0)
-#define SIDE_STATUS_LIGHTSCREEN      (1 << 1)
-#define SIDE_STATUS_X4               (1 << 2)
-#define SIDE_STATUS_SPIKES           (1 << 4)
-#define SIDE_STATUS_SAFEGUARD        (1 << 5)
-#define SIDE_STATUS_FUTUREATTACK     (1 << 6)
-#define SIDE_STATUS_MIST             (1 << 8)
-#define SIDE_STATUS_SPIKES_DAMAGED   (1 << 9)
 
 #define B_ACTION_USE_MOVE                  0
 #define B_ACTION_USE_ITEM                  1
@@ -86,17 +44,6 @@
 #define B_ACTION_CANCEL_PARTNER            12 // when choosing an action
 #define B_ACTION_NOTHING_FAINTED           13 // when choosing an action
 #define B_ACTION_NONE                      0xFF
-
-#define MOVESTATUS_MISSED             (1 << 0)
-#define MOVESTATUS_SUPEREFFECTIVE     (1 << 1)
-#define MOVESTATUS_NOTVERYEFFECTIVE   (1 << 2)
-#define MOVESTATUS_NOTAFFECTED        (1 << 3)
-#define MOVESTATUS_ONEHITKO           (1 << 4)
-#define MOVESTATUS_FAILED             (1 << 5)
-#define MOVESTATUS_ENDURED            (1 << 6)
-#define MOVESTATUS_HUNGON             (1 << 7)
-
-#define MOVESTATUS_NOEFFECT ((MOVESTATUS_MISSED | MOVESTATUS_NOTAFFECTED | MOVESTATUS_FAILED))
 
 #define MAX_TRAINER_ITEMS 4
 #define MAX_MON_MOVES 4
@@ -121,29 +68,6 @@
 #define MOVE_TARGET_USER              0x10
 #define MOVE_TARGET_FOES_AND_ALLY     0x20
 #define MOVE_TARGET_OPPONENTS_FIELD   0x40
-
-// defines for the u8 array gTypeEffectiveness
-#define TYPE_EFFECT_ATK_TYPE(i)((gTypeEffectiveness[i + 0]))
-#define TYPE_EFFECT_DEF_TYPE(i)((gTypeEffectiveness[i + 1]))
-#define TYPE_EFFECT_MULTIPLIER(i)((gTypeEffectiveness[i + 2]))
-
-// defines for the gTypeEffectiveness multipliers
-#define TYPE_MUL_NO_EFFECT          0
-#define TYPE_MUL_NOT_EFFECTIVE      5
-#define TYPE_MUL_NORMAL             10
-#define TYPE_MUL_SUPER_EFFECTIVE    20
-
-// special type table Ids
-#define TYPE_FORESIGHT  0xFE
-#define TYPE_ENDTABLE   0xFF
-
-// for battle script commands
-#define CMP_EQUAL               0x0
-#define CMP_NOT_EQUAL           0x1
-#define CMP_GREATER_THAN        0x2
-#define CMP_LESS_THAN           0x3
-#define CMP_COMMON_BITS         0x4
-#define CMP_NO_COMMON_BITS      0x5
 
 struct TrainerMonNoItemDefaultMoves
 {
@@ -199,12 +123,7 @@ struct Trainer
     /*0x24*/ const union TrainerMonPtr party;
 };
 
-#define PARTY_FLAG_CUSTOM_MOVES     0x1
-#define PARTY_FLAG_HAS_ITEM         0x2
-
 extern const struct Trainer gTrainers[];
-
-#define TRAINER_ENCOUNTER_MUSIC(trainer)((gTrainers[trainer].encounterMusic_gender & 0x7F))
 
 struct ResourceFlags
 {
@@ -362,22 +281,6 @@ extern u8 gActiveBattler;
 extern u8 gBattlerTarget;
 extern u8 gAbsentBattlerFlags;
 
-// script's table id to bit
-#define AI_SCRIPT_CHECK_BAD_MOVE (1 << 0)
-#define AI_SCRIPT_TRY_TO_FAINT (1 << 1)
-#define AI_SCRIPT_CHECK_VIABILITY (1 << 2)
-#define AI_SCRIPT_SETUP_FIRST_TURN (1 << 3)
-#define AI_SCRIPT_RISKY (1 << 4)
-#define AI_SCRIPT_PREFER_STRONGEST_MOVE (1 << 5)
-#define AI_SCRIPT_PREFER_BATON_PASS (1 << 6)
-#define AI_SCRIPT_DOUBLE_BATTLE (1 << 7)
-#define AI_SCRIPT_HP_AWARE (1 << 8)
-#define AI_SCRIPT_UNKNOWN (1 << 9)
-// 10 - 28 are not used
-#define AI_SCRIPT_ROAMING (1 << 29)
-#define AI_SCRIPT_SAFARI (1 << 30)
-#define AI_SCRIPT_FIRST_BATTLE (1 << 31)
-
 extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
 
 struct UsedMoves
@@ -425,10 +328,6 @@ struct BattleResources
 };
 
 extern struct BattleResources *gBattleResources;
-
-#define BATTLESCRIPTS_STACK     (gBattleResources->battleScriptsStack)
-#define BATTLE_CALLBACKS_STACK  (gBattleResources->battleCallbackStack)
-#define BATTLE_LVLUP_STATS      (gBattleResources->statsBeforeLvlUp)
 
 struct BattleResults
 {
@@ -519,7 +418,7 @@ struct BattleStruct
     u16 hpOnSwitchout[2];
     u8 abilityPreventingSwitchout;
     u8 hpScale;
-    u16 savedBattleTypeFlags; // ???
+    u16 savedBattleTypeFlags;
     void (*savedCallback)(void);
     u8 synchronizeMoveEffect;
     u8 multiplayerId;
@@ -571,72 +470,6 @@ extern struct BattleStruct *gBattleStruct;
     gBattleMons[battlerId].type2 = type;    \
 }
 
-#define MOVE_EFFECT_SLEEP               0x1
-#define MOVE_EFFECT_POISON              0x2
-#define MOVE_EFFECT_BURN                0x3
-#define MOVE_EFFECT_FREEZE              0x4
-#define MOVE_EFFECT_PARALYSIS           0x5
-#define MOVE_EFFECT_TOXIC               0x6
-#define MOVE_EFFECT_CONFUSION           0x7
-#define MOVE_EFFECT_FLINCH              0x8
-#define MOVE_EFFECT_TRI_ATTACK          0x9
-#define MOVE_EFFECT_UPROAR              0xA
-#define MOVE_EFFECT_PAYDAY              0xB
-#define MOVE_EFFECT_CHARGING            0xC
-#define MOVE_EFFECT_WRAP                0xD
-#define MOVE_EFFECT_RECOIL_25           0xE
-#define MOVE_EFFECT_ATK_PLUS_1          0xF
-#define MOVE_EFFECT_DEF_PLUS_1          0x10
-#define MOVE_EFFECT_SPD_PLUS_1          0x11
-#define MOVE_EFFECT_SP_ATK_PLUS_1       0x12
-#define MOVE_EFFECT_SP_DEF_PLUS_1       0x13
-#define MOVE_EFFECT_ACC_PLUS_1          0x14
-#define MOVE_EFFECT_EVS_PLUS_1          0x15
-#define MOVE_EFFECT_ATK_MINUS_1         0x16
-#define MOVE_EFFECT_DEF_MINUS_1         0x17
-#define MOVE_EFFECT_SPD_MINUS_1         0x18
-#define MOVE_EFFECT_SP_ATK_MINUS_1      0x19
-#define MOVE_EFFECT_SP_DEF_MINUS_1      0x1A
-#define MOVE_EFFECT_ACC_MINUS_1         0x1B
-#define MOVE_EFFECT_EVS_MINUS_1         0x1C
-#define MOVE_EFFECT_RECHARGE            0x1D
-#define MOVE_EFFECT_RAGE                0x1E
-#define MOVE_EFFECT_STEAL_ITEM          0x1F
-#define MOVE_EFFECT_PREVENT_ESCAPE      0x20
-#define MOVE_EFFECT_NIGHTMARE           0x21
-#define MOVE_EFFECT_ALL_STATS_UP        0x22
-#define MOVE_EFFECT_RAPIDSPIN           0x23
-#define MOVE_EFFECT_REMOVE_PARALYSIS    0x24
-#define MOVE_EFFECT_ATK_DEF_DOWN        0x25
-#define MOVE_EFFECT_RECOIL_33_PARALYSIS 0x26
-#define MOVE_EFFECT_ATK_PLUS_2          0x27
-#define MOVE_EFFECT_DEF_PLUS_2          0x28
-#define MOVE_EFFECT_SPD_PLUS_2          0x29
-#define MOVE_EFFECT_SP_ATK_PLUS_2       0x2A
-#define MOVE_EFFECT_SP_DEF_PLUS_2       0x2B
-#define MOVE_EFFECT_ACC_PLUS_2          0x2C
-#define MOVE_EFFECT_EVS_PLUS_2          0x2D
-#define MOVE_EFFECT_ATK_MINUS_2         0x2E
-#define MOVE_EFFECT_DEF_MINUS_2         0x2F
-#define MOVE_EFFECT_SPD_MINUS_2         0x30
-#define MOVE_EFFECT_SP_ATK_MINUS_2      0x31
-#define MOVE_EFFECT_SP_DEF_MINUS_2      0x32
-#define MOVE_EFFECT_ACC_MINUS_2         0x33
-#define MOVE_EFFECT_EVS_MINUS_2         0x34
-#define MOVE_EFFECT_THRASH              0x35
-#define MOVE_EFFECT_KNOCK_OFF           0x36
-#define MOVE_EFFECT_NOTHING_37          0x37
-#define MOVE_EFFECT_NOTHING_38          0x38
-#define MOVE_EFFECT_NOTHING_39          0x39
-#define MOVE_EFFECT_NOTHING_3A          0x3A
-#define MOVE_EFFECT_SP_ATK_TWO_DOWN     0x3B
-#define MOVE_EFFECT_NOTHING_3C          0x3C
-#define MOVE_EFFECT_NOTHING_3D          0x3D
-#define MOVE_EFFECT_NOTHING_3E          0x3E
-#define MOVE_EFFECT_NOTHING_3F          0x3F
-#define MOVE_EFFECT_AFFECTS_USER        0x40
-#define MOVE_EFFECT_CERTAIN             0x80
-
 #define GET_STAT_BUFF_ID(n)((n & 0xF))              // first four bits 0x1, 0x2, 0x4, 0x8
 #define GET_STAT_BUFF_VALUE2(n)((n & 0xF0))
 #define GET_STAT_BUFF_VALUE(n)(((n >> 4) & 7))      // 0x10, 0x20, 0x40
@@ -645,32 +478,6 @@ extern struct BattleStruct *gBattleStruct;
 #define SET_STAT_BUFF_VALUE(n)(((s8)(((s8)(n) << 4)) & 0xF0))
 
 #define SET_STATCHANGER(statId, stage, goesDown)(gBattleScripting.statChanger = (statId) + (stage << 4) + (goesDown << 7))
-
-// used in many battle files, it seems as though Hisashi Sogabe wrote
-// some sort of macro to replace the use of actually calling memset.
-// Perhaps it was thought calling memset was much slower?
-
-// The compiler wont allow us to locally declare ptr in this macro; some
-// functions that invoke this macro will not match without this egregeous
-// assumption about the variable names, so in order to avoid this assumption,
-// we opt to pass the variables themselves, even though it is likely that
-// Sogabe assumed the variables were named src and dest. Trust me: I tried to
-// avoid assuming variable names, but the ROM just will not match without the
-// assumptions. Therefore, these macros are bad practice, but I'm putting them
-// here anyway.
-#define MEMSET_ALT(data, c, size, var, dest)    \
-{    \
-    dest = (u8 *)data;    \
-    for(var = 0; var < (u32)size; var++)    \
-        dest[var] = c;    \
-}    \
-
-#define MEMCPY_ALT(data, dest, size, var, src)    \
-{    \
-    src = (u8 *)data;    \
-    for(var = 0; var < (u32)size; var++)    \
-        dest[var] = src[var];    \
-}    \
 
 struct BattleScripting
 {
@@ -700,17 +507,6 @@ struct BattleScripting
     u8 field_23;
 };
 
-// functions
-
-// battle_1
-void LoadBattleTextboxAndBackground(void);
-void LoadBattleEntryBackground(void);
-void ApplyPlayerChosenFrameToBattleMenu(void);
-bool8 LoadChosenBattleElement(u8 caseId);
-void DrawMainBattleBackground(void);
-void task00_0800F6FC(u8 taskId);
-void sub_800F324(void);
-
 enum
 {
     BACK_PIC_BRENDAN,
@@ -722,11 +518,6 @@ enum
     BACK_PIC_WALLY,
     BACK_PIC_STEVEN
 };
-
-// rom_80A5C6C
-u8 GetBattlerSide(u8 bank);
-u8 GetBattlerPosition(u8 bank);
-u8 GetBattlerAtPosition(u8 bank);
 
 struct BattleSpriteInfo
 {

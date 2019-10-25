@@ -842,7 +842,7 @@ EventScript_1A4EAF:: @ 81A4EAF
 
 gUnknown_81A4EB4:: @ 81A4EB4
 	lock
-	special SetUpTrainerEncounterMusic
+	special PlayTrainerEncounterMusic
 	special ScrSpecial_EndTrainerApproach
 	waitstate
 	goto EventScript_1A4FC7
@@ -852,10 +852,10 @@ EventScript_TryDoNormalTrainerBattle:: @ 81A4EC1
 	faceplayer
 	applymovement VAR_LAST_TALKED, Movement_1A4FC5
 	waitmovement 0
-	specialvar VAR_RESULT, GetTrainerFlag
+	specialvar VAR_RESULT, ScrSpecial_HasTrainerBeenFought
 	compare_var_to_value VAR_RESULT, 0
 	goto_if ne, EventScript_1A4EE8
-	special SetUpTrainerEncounterMusic
+	special PlayTrainerEncounterMusic
 	special SetUpTrainerMovement
 	goto EventScript_1A4FC7
 
@@ -866,13 +866,13 @@ EventScript_TryDoDoubleTrainerBattle:: @ 81A4EE9
 	lock
 	faceplayer
 	call EventScript_1A4FBA
-	specialvar VAR_RESULT, GetTrainerFlag
+	specialvar VAR_RESULT, ScrSpecial_HasTrainerBeenFought
 	compare_var_to_value VAR_RESULT, 0
 	goto_if ne, EventScript_1A4F20
 	special CheckForAlivePartyMons
 	compare_var_to_value VAR_RESULT, 0
 	goto_if ne, EventScript_1A4F19
-	special SetUpTrainerEncounterMusic
+	special PlayTrainerEncounterMusic
 	special SetUpTrainerMovement
 	goto EventScript_1A4FC7
 
@@ -889,7 +889,7 @@ EventScript_1A4F20:: @ 81A4F20
 EventScript_DoTrainerBattle:: @ 81A4F21
 	applymovement VAR_LAST_TALKED, Movement_1A4FC5
 	waitmovement 0
-	special SetUpTrainerEncounterMusic
+	special PlayTrainerEncounterMusic
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
 	goto_if eq, EventScript_1A501A
@@ -901,7 +901,7 @@ EventScript_TryDoRematchBattle:: @ 81A4F3E
 	specialvar VAR_RESULT, ScrSpecial_GetTrainerEyeRematchFlag
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1A4F72
-	special SetUpTrainerEncounterMusic
+	special PlayTrainerEncounterMusic
 	special SetUpTrainerMovement
 	special ScrSpecial_ShowTrainerIntroSpeech
 	waitmessage
@@ -924,7 +924,7 @@ EventScript_TryDoDoubleRematchBattle:: @ 81A4F73
 	special CheckForAlivePartyMons
 	compare_var_to_value VAR_RESULT, 0
 	goto_if ne, EventScript_1A4FB1
-	special SetUpTrainerEncounterMusic
+	special PlayTrainerEncounterMusic
 	special SetUpTrainerMovement
 	special ScrSpecial_ShowTrainerIntroSpeech
 	waitmessage

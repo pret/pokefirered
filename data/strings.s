@@ -1820,40 +1820,40 @@ gUnknown_8417FB6:: @ 0x8417FB6
 gUnknown_8417FB9:: @ 8417FB9
 	.string ".$"
 
-gUnknown_8417FBB:: @ 8417FBB
+gText_BigGuy:: @ 8417FBB
 	.string "Big guy$"
 
-gUnknown_8417FC3:: @ 8417FC3
+gText_BigGirl:: @ 8417FC3
 	.string "Big girl$"
 
-gUnknown_8417FCC:: @ 8417FCC
+gText_Daughter:: @ 8417FCC
 	.string "son$"
 
-gUnknown_8417FD0:: @ 8417FD0
+gText_Son:: @ 8417FD0
 	.string "daughter$"
 
-gUnknown_8417FD9:: @ 0x8417FD9
+gText_BoulderBadge:: @ 0x8417FD9
 	.string "BOULDERBADGE$"
 
-gUnknown_8417FE6:: @ 0x8417FE6
+gText_CascadeBadge:: @ 0x8417FE6
 	.string "CASCADEBADGE$"
 
-gUnknown_8417FF3:: @ 0x8417FF3
+gText_ThunderBadge:: @ 0x8417FF3
 	.string "THUNDERBADGE$"
 
-gUnknown_8418000:: @ 0x8418000
+gText_RainbowBadge:: @ 0x8418000
 	.string "RAINBOWBADGE$"
 
-gUnknown_841800D:: @ 0x841800D
+gText_SoulBadge:: @ 0x841800D
 	.string "SOULBADGE$"
 
-gUnknown_8418017:: @ 0x8418017
+gText_MarshBadge:: @ 0x8418017
 	.string "MARSHBADGE$"
 
-gUnknown_8418022:: @ 0x8418022
+gText_VolcanoBadge:: @ 0x8418022
 	.string "VOLCANOBADGE$"
 
-gUnknown_841802F:: @ 0x841802F
+gText_EarthBadge:: @ 0x841802F
 	.string "EARTHBADGE$"
 
 gText_1F:: @ 0x841803A
@@ -1904,7 +1904,7 @@ gText_B4F:: @ 0x8418069
 gText_Rooftop:: @ 0x841806D
 	.string "ROOFTOP$"
 
-gUnknown_8418075:: @ 8418075
+gText_NowOn:: @ 8418075
 	.string "Now on:$"
 
 gText_LinkedGamePlay:: @ 0x841807D
@@ -1916,37 +1916,37 @@ gText_DirectCorner:: @ 0x841808E
 gText_UnionRoom:: @ 0x841809C
 	.string "UNION ROOM$"
 
-gUnknown_84180A7:: @ 0x84180A7
+gText_Energypowder_50:: @ 0x84180A7
 	.string "ENERGYPOWDER{CLEAR_TO 0x74}{SMALL}50$"
 
-gUnknown_84180BC:: @ 0x84180BC
+gText_EnergyRoot_80:: @ 0x84180BC
 	.string "ENERGY ROOT{CLEAR_TO 0x74}{SMALL}80$"
 
-gUnknown_84180D0:: @ 0x84180D0
+gText_HealPowder_50:: @ 0x84180D0
 	.string "HEAL POWDER{CLEAR_TO 0x74}{SMALL}50$"
 
-gUnknown_84180E4:: @ 0x84180E4
+gText_RevivalHerb_300:: @ 0x84180E4
 	.string "REVIVAL HERB{CLEAR_TO 0x6F}{SMALL}300$"
 
-gUnknown_84180FA:: @ 0x84180FA
+gText_Protein_1000:: @ 0x84180FA
 	.string "PROTEIN{CLEAR_TO 0x65}{SMALL}1,000$"
 
-gUnknown_841810D:: @ 0x841810D
+gText_Iron_1000:: @ 0x841810D
 	.string "IRON{CLEAR_TO 0x65}{SMALL}1,000$"
 
-gUnknown_841811D:: @ 0x841811D
+gText_Carbos_1000:: @ 0x841811D
 	.string "CARBOS{CLEAR_TO 0x65}{SMALL}1,000$"
 
-gUnknown_841812F:: @ 0x841812F
+gText_Calcium_1000:: @ 0x841812F
 	.string "CALCIUM{CLEAR_TO 0x65}{SMALL}1,000$"
 
-gUnknown_8418142:: @ 0x8418142
+gText_Zinc_1000:: @ 0x8418142
 	.string "ZINC{CLEAR_TO 0x65}{SMALL}1,000$"
 
-gUnknown_8418152:: @ 0x8418152
+gText_HpUp_1000:: @ 0x8418152
 	.string "HP UP{CLEAR_TO 0x65}{SMALL}1,000$"
 
-gUnknown_8418163:: @ 0x8418163
+gText_PpUp_3000:: @ 0x8418163
 	.string "PP UP{CLEAR_TO 0x65}{SMALL}3,000$"
 
 gString_BattleRecords_PlayersBattleResults:: @ 8418174

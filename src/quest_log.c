@@ -2594,7 +2594,7 @@ u8 sub_81131FC(struct Var4038Struct * a0)
     return gUnknown_8456940[retval];
 }
 
-u16 sub_8113288(void)
+u16 GetNumMovedSaffronFanClubMembers(void)
 {
     return sub_81132A0(VAR_0x4038_STRUCT);
 }
@@ -2613,7 +2613,7 @@ static u16 sub_81132A0(struct Var4038Struct * a0)
     return count;
 }
 
-void sub_81132CC(void)
+void UpdateMovedSaffronFanClubMembers(void)
 {
     sub_81132E0(VAR_0x4038_STRUCT);
 }
@@ -2645,7 +2645,7 @@ static void sub_81132E0(struct Var4038Struct * a0)
     }
 }
 
-bool16 sub_8113364(void)
+bool16 ShouldMoveSaffronFanClubMember(void)
 {
     return sub_811337C(VAR_0x4038_STRUCT);
 }
@@ -2662,7 +2662,7 @@ static void sub_8113390(struct Var4038Struct * a0)
     a0->unk_1 |= 4;
 }
 
-void sub_81133A4(void)
+void BufferStreakTrainerText(void)
 {
     u8 r3 = 0;
     u8 r2 = 0;

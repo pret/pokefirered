@@ -4,7 +4,7 @@ SevenIsland_House_Room2_MapScripts:: @ 8170A7E
 	.byte 0
 
 SevenIsland_House_Room2_MapScript1_170A89:: @ 8170A89
-	special sub_80E5E70
+	special SetEReaderTrainerGfxId
 	end
 
 SevenIsland_House_Room2_MapScript2_170A8D:: @ 8170A8D
@@ -15,12 +15,12 @@ EventScript_170A97:: @ 8170A97
 	lockall
 	applymovement 255, Movement_170B22
 	waitmovement 0
-	special sub_80E7538
+	special PrintEReaderTrainerGreeting
 	msgbox gStringVar4
 	closemessage
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
-	special sub_80E6900
+	special StartSpecialBattle
 	waitstate
 	compare_var_to_value VAR_RESULT, 3
 	call_if eq, EventScript_170AFE
@@ -46,14 +46,14 @@ EventScript_170AFE:: @ 8170AFE
 
 EventScript_170B0C:: @ 8170B0C
 	setvar VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 1
-	special sub_80CA68C
+	special Special_ShowStringVar4AsFieldMessage
 	waitmessage
 	waitbuttonpress
 	return
 
 EventScript_170B17:: @ 8170B17
 	setvar VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 2
-	special sub_80CA68C
+	special Special_ShowStringVar4AsFieldMessage
 	waitmessage
 	waitbuttonpress
 	return

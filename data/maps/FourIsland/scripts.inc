@@ -133,7 +133,7 @@ EventScript_167E19:: @ 8167E19
 	special GetDaycareMonNicknames
 	msgbox gUnknown_81BF789
 	special SetDaycareCompatibilityString
-	special sub_80CA68C
+	special Special_ShowStringVar4AsFieldMessage
 	waitmessage
 	waitbuttonpress
 	release

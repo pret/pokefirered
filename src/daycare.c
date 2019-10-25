@@ -1739,7 +1739,7 @@ static bool8 sub_8046E34(struct DayCare *daycare, u8 daycareId)
     return FALSE;
 }
 
-bool8 sub_8046EAC(void)
+bool8 DaycareMonReceivedMail(void)
 {
     return sub_8046E34(&gSaveBlock1Ptr->daycare, gSpecialVar_0x8004);
 }

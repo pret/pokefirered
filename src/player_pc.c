@@ -149,7 +149,7 @@ void NewGameInitPCItems(void)
         ;
 }
 
-void sub_80EB6AC(void)
+void BedroomPC(void)
 {
     u8 taskId;
 
@@ -161,7 +161,7 @@ void sub_80EB6AC(void)
     DisplayItemMessageOnField(taskId, 2, gText_WhatWouldYouLikeToDo, Task_DrawPlayerPcTopMenu);
 }
 
-void sub_80EB6FC(void)
+void PlayerPC(void)
 {
     u8 taskId;
 

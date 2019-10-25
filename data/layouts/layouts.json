@@ -3884,16 +3884,16 @@
       "blockdata_filepath": "data/layouts/SixIsland_AlteringCave/map.bin"
     },
     {
-      "id": "LAYOUT_SEVEN_ISLAND_SEAVAULT_CANYON_TANOBY_KEY",
-      "name": "SevenIsland_SeavaultCanyon_TanobyKey_Layout",
+      "id": "LAYOUT_SEVEN_ISLAND_SEVAULT_CANYON_TANOBY_KEY",
+      "name": "SevenIsland_SevaultCanyon_TanobyKey_Layout",
       "width": 15,
       "height": 16,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4A94",
       "secondary_tileset": "gTileset_82D4E0C",
-      "border_filepath": "data/layouts/SevenIsland_SeavaultCanyon_TanobyKey/border.bin",
-      "blockdata_filepath": "data/layouts/SevenIsland_SeavaultCanyon_TanobyKey/map.bin"
+      "border_filepath": "data/layouts/SevenIsland_SevaultCanyon_TanobyKey/border.bin",
+      "blockdata_filepath": "data/layouts/SevenIsland_SevaultCanyon_TanobyKey/map.bin"
     },
     {
       "id": "LAYOUT_BIRTH_ISLAND_EXTERIOR",

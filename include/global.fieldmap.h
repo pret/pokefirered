@@ -105,7 +105,8 @@ union BgUnion
     u8 *script;
 
     // hidden item type probably
-    struct HiddenItemStruct hiddenItem;
+    struct HiddenItemStruct hiddenItemStr;
+    u32 hiddenItem;
 
     // secret base type
     u32 secretBaseId;

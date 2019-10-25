@@ -157,7 +157,7 @@ EventScript_16D462:: @ 816D462
 	countpokemon
 	compare_var_to_value VAR_RESULT, 6
 	goto_if ne, EventScript_1A77A9
-	specialvar VAR_RESULT, sub_80CABD0
+	specialvar VAR_RESULT, Special_IsThereRoomInAnyBoxForMorePokemon
 	compare_var_to_value VAR_RESULT, 1
 	goto_if eq, EventScript_1A77A9
 	msgbox gUnknown_81BFEAC

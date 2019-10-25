@@ -40,7 +40,7 @@ EventScript_171993:: @ 8171993
 	msgbox gUnknown_81BF860
 	waitmoncry
 	special StoreSelectedPokemonInDaycare
-	incrementgamestat 47
+	incrementgamestat GAME_STAT_USED_DAYCARE
 	specialvar VAR_RESULT, GetDaycareState
 	compare_var_to_value VAR_RESULT, 2
 	goto_if eq, EventScript_171A01

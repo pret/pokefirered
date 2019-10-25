@@ -470,27 +470,10 @@ gAIScriptPtr: @ 2039A00
 gPlayerFacingPosition: @ 2039A04
 	.space 0x8
 
-gUnknown_2039A0C: @ 2039A0C
-	.space 0x2
+	.align 2
+	.include "src/field_specials.o"
 
-gUnknown_2039A0E: @ 2039A0E
-	.space 0x2
-
-gUnknown_2039A10: @ 2039A10
-	.space 0x4
-
-gUnknown_2039A14: @ 2039A14
-	.space 0x4
-
-gUnknown_2039A18: @ 2039A18
-	.space 0x2
-
-gUnknown_2039A1A: @ 2039A1A
-	.space 0x1
-
-gUnknown_2039A1B: @ 2039A1B
-	.space 0x1
-
+	.align 2
 	.include "src/battle_records.o"
 
 gUnknown_2039A20: @ 2039A20

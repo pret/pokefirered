@@ -1625,7 +1625,7 @@ _08081404:
 	.align 2, 0
 _0808140C: .4byte gBattleTypeFlags
 _08081410:
-	bl sub_80A03D8
+	bl ReducePlayerPartyToThree
 	ldr r1, _08081440 @ =gBattleTypeFlags
 	movs r0, 0x4B
 _08081418:
@@ -1848,7 +1848,7 @@ _080815D4:
 	.align 2, 0
 _080815DC: .4byte gBattleTypeFlags
 _080815E0:
-	bl sub_80A03D8
+	bl ReducePlayerPartyToThree
 	ldr r1, _08081610 @ =gBattleTypeFlags
 	movs r0, 0x4B
 _080815E8:

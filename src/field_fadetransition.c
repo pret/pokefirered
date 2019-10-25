@@ -639,7 +639,7 @@ static void sub_807E5EC(u8 taskId)
     }
 }
 
-void sub_807E654(void)
+void DoCableClubWarp(void)
 {
     ScriptContext2_Enable();
     sub_8055F88();

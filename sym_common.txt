@@ -93,11 +93,8 @@ gUnknown_3005350: @ 3005350
 gUnknown_3005354: @ 3005354
 	.space 0xC
 
-gUnknown_3005360: @ 3005360
-	.space 0x18
-
-gUnknown_3005378: @ 3005378
-	.space 0x4
+	.align 2
+	.include "field_specials.o"
 
 gCB2_AfterEvolution: @ 300537C
 	.space 0x4

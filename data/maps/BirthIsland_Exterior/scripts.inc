@@ -5,7 +5,7 @@ BirthIsland_Exterior_MapScripts:: @ 8165203
 	.byte 0
 
 BirthIsland_Exterior_MapScript3_165213:: @ 8165213
-	special sub_80CD008
+	special Special_SetDeoxysTriangleObjectPal
 	end
 
 BirthIsland_Exterior_MapScript1_165217:: @ 8165217
@@ -50,7 +50,7 @@ BirthIsland_Exterior_EventScript_165271:: @ 8165271
 	compare_var_to_value VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
-	special sub_80CCDFC
+	special Special_DeoxysSound
 	waitstate
 	switch VAR_RESULT
 	case 0, EventScript_1652BA

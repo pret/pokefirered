@@ -273,7 +273,7 @@ EventScript_16C96C:: @ 816C96C
 	setfieldeffectarg 2, 14
 	dofieldeffect 64
 	waitfieldeffect 64
-	specialvar VAR_RESULT, sub_80CAABC
+	specialvar VAR_RESULT, Special_GetRandomSlotMachine
 	playslotmachine VAR_RESULT
 	releaseall
 	end

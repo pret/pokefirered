@@ -70,7 +70,7 @@ SeafoamIslands_B4F_MapScript4_1630E7:: @ 81630E7
 
 EventScript_1630F1:: @ 81630F1
 	turnobject 255, 2
-	special sub_80CBD80
+	special Special_ForcePlayerToStartSurfing
 	end
 
 SeafoamIslands_B4F_MapScript5_1630F9:: @ 81630F9

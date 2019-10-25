@@ -37,7 +37,7 @@ EventScript_171435:: @ 8171435
 	textcolor 0
 	msgbox gUnknown_81A28B2
 	textcolor 1
-	special sub_80CA6DC
+	special Special_BufferBigGuyOrBigGirlString
 	msgbox gUnknown_81A2931
 	closemessage
 	applymovement 3, Movement_1A75ED

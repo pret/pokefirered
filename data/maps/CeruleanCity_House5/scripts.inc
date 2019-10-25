@@ -40,7 +40,7 @@ EventScript_16AEC8:: @ 816AEC8
 	message Text_1932F4
 	waitmessage
 	setvar VAR_0x8004, 5
-	special sub_80CB7C4
+	special Special_ListMenu
 	waitstate
 	switch VAR_RESULT
 	case 0, EventScript_16AF6C

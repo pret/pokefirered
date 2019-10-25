@@ -61,7 +61,7 @@ EventScript_168DB9:: @ 8168DB9
 	faceplayer
 	compare_var_to_value VAR_0x8004, 6
 	goto_if ge, EventScript_168E3C
-	specialvar VAR_RESULT, sub_80CAD54
+	specialvar VAR_RESULT, Special_GetSpeciesOfPartySlot_x8004
 	compare_var_to_value VAR_RESULT, SPECIES_EGG
 	goto_if eq, EventScript_168E32
 	msgbox gUnknown_818D8CC
@@ -88,7 +88,7 @@ EventScript_168E3C:: @ 8168E3C
 
 EventScript_168E46:: @ 8168E46
 	msgbox gUnknown_818D9A5
-	specialvar VAR_RESULT, sub_80CA76C
+	specialvar VAR_RESULT, Special_GetLeadMonFriendship
 	switch VAR_RESULT
 	case 0, EventScript_168EA6
 	case 1, EventScript_168EB0

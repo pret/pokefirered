@@ -53,11 +53,11 @@ EventScript_1716A5:: @ 81716A5
 
 EventScript_1716BE:: @ 81716BE
 	msgbox gUnknown_81A2CC3
-	special sub_80BF93C
+	special SelectMoveTutorMon
 	waitstate
 	compare_var_to_value VAR_0x8004, 6
 	goto_if ge, EventScript_17179E
-	special sub_80BFC14
+	special IsSelectedMonEgg
 	compare_var_to_value VAR_RESULT, 1
 	goto_if eq, EventScript_171790
 	compare_var_to_value VAR_0x8005, 0
@@ -67,7 +67,7 @@ EventScript_1716BE:: @ 81716BE
 
 EventScript_1716F4:: @ 81716F4
 	msgbox gUnknown_81A2CE1
-	special sub_80E4634
+	special DisplayMoveTutorMenu
 	waitstate
 	compare_var_to_value VAR_0x8004, 0
 	goto_if eq, EventScript_1716BE

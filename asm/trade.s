@@ -13779,8 +13779,8 @@ _08053A94: .4byte gUnknown_826D1E4
 _08053A98: .4byte SpriteCallbackDummy
 	thumb_func_end sub_8053A0C
 
-	thumb_func_start sub_8053A9C
-sub_8053A9C: @ 8053A9C
+	thumb_func_start GetInGameTradeSpeciesInfo
+GetInGameTradeSpeciesInfo: @ 8053A9C
 	push {r4-r6,lr}
 	ldr r0, _08053AD0 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
@@ -13811,7 +13811,7 @@ _08053AD4: .4byte gUnknown_826CF8C
 _08053AD8: .4byte gStringVar1
 _08053ADC: .4byte gSpeciesNames
 _08053AE0: .4byte gStringVar2
-	thumb_func_end sub_8053A9C
+	thumb_func_end GetInGameTradeSpeciesInfo
 
 	thumb_func_start sub_8053AE4
 sub_8053AE4: @ 8053AE4
@@ -14078,8 +14078,8 @@ _08053CEE:
 _08053D28: .4byte gUnknown_826D1A8
 	thumb_func_end sub_8053CD4
 
-	thumb_func_start sub_8053D2C
-sub_8053D2C: @ 8053D2C
+	thumb_func_start GetTradeSpecies
+GetTradeSpecies: @ 8053D2C
 	push {r4-r6,lr}
 	ldr r6, _08053D58 @ =gSpecialVar_0x8005
 	ldrh r0, [r6]
@@ -14108,10 +14108,10 @@ _08053D62:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8053D2C
+	thumb_func_end GetTradeSpecies
 
-	thumb_func_start sub_8053D68
-sub_8053D68: @ 8053D68
+	thumb_func_start CreateInGameTradePokemon
+CreateInGameTradePokemon: @ 8053D68
 	push {lr}
 	ldr r0, _08053D7C @ =gSpecialVar_0x8005
 	ldrb r0, [r0]
@@ -14123,7 +14123,7 @@ sub_8053D68: @ 8053D68
 	.align 2, 0
 _08053D7C: .4byte gSpecialVar_0x8005
 _08053D80: .4byte gSpecialVar_0x8004
-	thumb_func_end sub_8053D68
+	thumb_func_end CreateInGameTradePokemon
 
 	thumb_func_start sub_8053D84
 sub_8053D84: @ 8053D84
@@ -14839,8 +14839,8 @@ _08054438: .4byte gWirelessCommType
 _0805443C: .4byte gMain
 	thumb_func_end sub_80543C4
 
-	thumb_func_start sub_8054440
-sub_8054440: @ 8054440
+	thumb_func_start DoInGameTradeScene
+DoInGameTradeScene: @ 8054440
 	push {lr}
 	sub sp, 0x4
 	bl ScriptContext2_Enable
@@ -14860,7 +14860,7 @@ sub_8054440: @ 8054440
 	bx r0
 	.align 2, 0
 _0805446C: .4byte sub_8054470
-	thumb_func_end sub_8054440
+	thumb_func_end DoInGameTradeScene
 
 	thumb_func_start sub_8054470
 sub_8054470: @ 8054470

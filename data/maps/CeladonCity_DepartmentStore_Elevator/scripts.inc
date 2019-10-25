@@ -7,11 +7,11 @@ CeladonCity_DepartmentStore_Elevator_EventScript_16C153:: @ 816C153
 	checkflag FLAG_TEMP_2
 	call_if FALSE, EventScript_1A7AB9
 	copyvar VAR_0x8005, VAR_ELEVATOR_FLOOR
-	special sub_80CB580
+	special Special_DrawElevatorCurrentFloorWindow
 	message Text_1A535C
 	waitmessage
 	setvar VAR_0x8004, 3
-	specialvar VAR_RESULT, sub_80CB328
+	specialvar VAR_RESULT, Special_InitElevatorFloorSelectMenuPos
 	switch VAR_RESULT
 	case 0, EventScript_16C1B7
 	case 1, EventScript_16C1C3
@@ -109,15 +109,15 @@ EventScript_16C2E6:: @ 816C2E6
 	end
 
 EventScript_16C30E:: @ 816C30E
-	special sub_80CB63C
+	special Special_CloseElevatorCurrentFloorWindow
 	releaseall
 	end
 
 EventScript_16C313:: @ 816C313
-	special sub_80CB63C
+	special Special_CloseElevatorCurrentFloorWindow
 	closemessage
 	waitse
-	special sub_80CB498
+	special Special_AnimateElevator
 	waitstate
 	setflag FLAG_TEMP_2
 	return

@@ -785,7 +785,7 @@ gUnknown_83E0248:: @ 83E0248
 	.4byte gUnknown_841807D, NULL
 	.4byte gUnknown_841808E, NULL
 	.4byte gUnknown_841809C, NULL
-	.4byte gUnknown_8417929, NULL
+	.4byte gOtherText_Quit, NULL
 
 gUnknown_83E0268:: @ 83E0268
 	.4byte gUnknown_8417DFE, NULL

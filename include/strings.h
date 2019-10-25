@@ -487,4 +487,50 @@ extern const u8 gSaveStatName_Time[];
 // mail
 extern const u8 gText_From[];
 
+// field_specials
+extern const u8 gUnknown_8417FBB[];
+extern const u8 gUnknown_8417FC3[];
+extern const u8 gUnknown_8417FD0[];
+extern const u8 gUnknown_8417FCC[];
+extern const u8 gUnknown_8418075[];
+extern const u8 gUnknown_8418069[];
+extern const u8 gUnknown_8418065[];
+extern const u8 gUnknown_8418061[];
+extern const u8 gUnknown_841805D[];
+extern const u8 gUnknown_841803A[];
+extern const u8 gUnknown_841803D[];
+extern const u8 gUnknown_8418040[];
+extern const u8 gUnknown_8418043[];
+extern const u8 gUnknown_8418046[];
+extern const u8 gUnknown_8418049[];
+extern const u8 gUnknown_841804C[];
+extern const u8 gUnknown_841804F[];
+extern const u8 gUnknown_8418052[];
+extern const u8 gUnknown_8418055[];
+extern const u8 gUnknown_8418059[];
+extern const u8 gUnknown_841806D[];
+extern const u8 gUnknown_8417FD9[];
+extern const u8 gUnknown_8417FE6[];
+extern const u8 gUnknown_8417FF3[];
+extern const u8 gUnknown_8418000[];
+extern const u8 gUnknown_841800D[];
+extern const u8 gUnknown_8418017[];
+extern const u8 gUnknown_8418022[];
+extern const u8 gUnknown_841802F[];
+extern const u8 gUnknown_841807D[];
+extern const u8 gUnknown_841808E[];
+extern const u8 gUnknown_841809C[];
+extern const u8 gOtherText_Quit[];
+extern const u8 gUnknown_84180A7[];
+extern const u8 gUnknown_84180BC[];
+extern const u8 gUnknown_84180D0[];
+extern const u8 gUnknown_84180E4[];
+extern const u8 gUnknown_84180FA[];
+extern const u8 gUnknown_841810D[];
+extern const u8 gUnknown_841811D[];
+extern const u8 gUnknown_841812F[];
+extern const u8 gUnknown_8418142[];
+extern const u8 gUnknown_8418152[];
+extern const u8 gUnknown_8418163[];
+
 #endif //GUARD_STRINGS_H

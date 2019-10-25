@@ -3,6 +3,6 @@
 
 #include "constants/seagallop.h"
 
-void ScrSpecial_SeaGallopFerry(void);
+void ScrSpecial_SeagallopFerry(void);
 
 #endif //GUARD_SEAGALLOP_H

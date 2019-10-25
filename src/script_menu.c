@@ -21,11 +21,11 @@
 
 struct MultichoiceListStruct
 {
-    const struct MenuAction *list;
+    const struct MenuAction * list;
     u8 count;
 };
 
-EWRAM_DATA u8 sDelay = 0;
+static EWRAM_DATA u8 sDelay = 0;
 
 static void DrawVerticalMultichoiceMenu(u8 left, u8 top, u8 mcId, u8 ignoreBpress, u8 initPos);
 static u8 sub_809CBB4(u8 count);
@@ -432,35 +432,35 @@ static const struct MenuAction sScriptMultiChoiceMenu_SeviiNavelBirth[] = {
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_SeaGallop123[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_Seagallop123[] = {
     { gText_OneIsland },
     { gText_TwoIsland },
     { gText_ThreeIsland },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_SeaGallopV23[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_SeagallopV23[] = {
     { gText_Vermilion },
     { gText_TwoIsland },
     { gText_ThreeIsland },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_SeaGallopV13[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_SeagallopV13[] = {
     { gText_Vermilion },
     { gText_OneIsland },
     { gText_ThreeIsland },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_SeaGallopV12[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_SeagallopV12[] = {
     { gText_Vermilion },
     { gText_OneIsland },
     { gText_TwoIsland },
     { gOtherText_Exit }
 };
 
-static const struct MenuAction sScriptMultiChoiceMenu_SeaGallopVermilion[] = {
+static const struct MenuAction sScriptMultiChoiceMenu_SeagallopVermilion[] = {
     { gText_Vermilion },
     { gOtherText_Exit }
 };
@@ -547,11 +547,11 @@ const struct MultichoiceListStruct gScriptMultiChoiceMenus[] = {
     { sScriptMultiChoiceMenu_SeviiNavel, NELEMS(sScriptMultiChoiceMenu_SeviiNavel) },
     { sScriptMultiChoiceMenu_SeviiBirth, NELEMS(sScriptMultiChoiceMenu_SeviiBirth) },
     { sScriptMultiChoiceMenu_SeviiNavelBirth, NELEMS(sScriptMultiChoiceMenu_SeviiNavelBirth) },
-    { sScriptMultiChoiceMenu_SeaGallop123, NELEMS(sScriptMultiChoiceMenu_SeaGallop123) },
-    { sScriptMultiChoiceMenu_SeaGallopV23, NELEMS(sScriptMultiChoiceMenu_SeaGallopV23) },
-    { sScriptMultiChoiceMenu_SeaGallopV13, NELEMS(sScriptMultiChoiceMenu_SeaGallopV13) },
-    { sScriptMultiChoiceMenu_SeaGallopV12, NELEMS(sScriptMultiChoiceMenu_SeaGallopV12) },
-    { sScriptMultiChoiceMenu_SeaGallopVermilion, NELEMS(sScriptMultiChoiceMenu_SeaGallopVermilion) },
+    { sScriptMultiChoiceMenu_Seagallop123, NELEMS(sScriptMultiChoiceMenu_Seagallop123) },
+    { sScriptMultiChoiceMenu_SeagallopV23, NELEMS(sScriptMultiChoiceMenu_SeagallopV23) },
+    { sScriptMultiChoiceMenu_SeagallopV13, NELEMS(sScriptMultiChoiceMenu_SeagallopV13) },
+    { sScriptMultiChoiceMenu_SeagallopV12, NELEMS(sScriptMultiChoiceMenu_SeagallopV12) },
+    { sScriptMultiChoiceMenu_SeagallopVermilion, NELEMS(sScriptMultiChoiceMenu_SeagallopVermilion) },
     { sScriptMultiChoiceMenu_62, NELEMS(sScriptMultiChoiceMenu_62) },
     { sScriptMultiChoiceMenu_JoinOrLead, NELEMS(sScriptMultiChoiceMenu_JoinOrLead) },
     { sScriptMultiChoiceMenu_TrainerTowerMode, NELEMS(sScriptMultiChoiceMenu_TrainerTowerMode) }
@@ -647,7 +647,7 @@ static const struct SpriteSheet sMuseumAerodactylSprSheets[] = {
 };
 
 
-static const u8 *const sSeaGallopDestStrings[] = {
+static const u8 *const sSeagallopDestStrings[] = {
     gText_Vermilion,
     gText_OneIsland,
     gText_TwoIsland,
@@ -1188,7 +1188,7 @@ void QLPlaybackCB_DestroyScriptMenuMonPicSprites(void)
     }
 }
 
-void Special_DrawSeaGallopDestinationMenu(void)
+void Special_DrawSeagallopDestinationMenu(void)
 {
     // 8004 = Starting location
     // 8005 = Page (0: Verm, One, Two, Three, Four, Other, Exit; 1: Four, Five, Six, Seven, Other, Exit)
@@ -1224,7 +1224,7 @@ void Special_DrawSeaGallopDestinationMenu(void)
         for (i = 0; i < nitems - 2; i++)
         {
             if (r4 != gSpecialVar_0x8004)
-                AddTextPrinterParameterized(windowId, 2, sSeaGallopDestStrings[r4], cursorWidth, i * 16 + 2, 0xFF, NULL);
+                AddTextPrinterParameterized(windowId, 2, sSeagallopDestStrings[r4], cursorWidth, i * 16 + 2, 0xFF, NULL);
             else
                 i--;
             r4++;
@@ -1240,7 +1240,7 @@ void Special_DrawSeaGallopDestinationMenu(void)
     }
 }
 
-u16 Special_GetSelectedSeaGallopDestination(void)
+u16 Special_GetSelectedSeagallopDestination(void)
 {
     // 8004 = Starting location
     // 8005 = Page (0: Verm, One, Two, Three, Four, Other, Exit; 1: Four, Five, Six, Seven, Other, Exit)

@@ -4169,7 +4169,7 @@ EventScript_1A8EC5:: @ 81A8EC5
 	end
 
 EventScript_1A8F12:: @ 81A8F12
-	multichoice 19, 5, MULTICHOICE_SEA_GALLOP_V23, FALSE
+	multichoice 19, 5, MULTICHOICE_SEAGALLOP_V23, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1A8FE3
 	case 1, EventScript_1A8FF9
@@ -4192,7 +4192,7 @@ EventScript_1A8F54:: @ 81A8F54
 	end
 
 EventScript_1A8FA1:: @ 81A8FA1
-	multichoice 19, 5, MULTICHOICE_SEA_GALLOP_V13, FALSE
+	multichoice 19, 5, MULTICHOICE_SEAGALLOP_V13, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1A8FE3
 	case 1, EventScript_1A8FEE
@@ -4235,7 +4235,7 @@ EventScript_1A900F:: @ 81A900F
 	end
 
 EventScript_1A905C:: @ 81A905C
-	multichoice 19, 5, MULTICHOICE_SEA_GALLOP_V12, FALSE
+	multichoice 19, 5, MULTICHOICE_SEAGALLOP_V12, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1A8FE3
 	case 1, EventScript_1A8FEE
@@ -4271,7 +4271,7 @@ EventScript_1A90DA:: @ 81A90DA
 	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	fadescreen 1
-	special ScrSpecial_SeaGallopFerry
+	special ScrSpecial_SeagallopFerry
 	waitstate
 	end
 
@@ -4296,9 +4296,9 @@ Movement_1A911C:: @ 81A911C
 
 EventScript_1A911E:: @ 81A911E
 	setvar VAR_0x8005, 0
-	special Special_DrawSeaGallopDestinationMenu
+	special Special_DrawSeagallopDestinationMenu
 	waitstate
-	specialvar VAR_0x8006, Special_GetSelectedSeaGallopDestination
+	specialvar VAR_0x8006, Special_GetSelectedSeagallopDestination
 	switch VAR_0x8006
 	case SEAGALLOP_VERMILION_CITY, EventScript_1A91D5
 	case SEAGALLOP_ONE_ISLAND,     EventScript_1A91E0
@@ -4311,9 +4311,9 @@ EventScript_1A911E:: @ 81A911E
 
 EventScript_1A917F:: @ 81A917F
 	setvar VAR_0x8005, 1
-	special Special_DrawSeaGallopDestinationMenu
+	special Special_DrawSeagallopDestinationMenu
 	waitstate
-	specialvar VAR_0x8006, Special_GetSelectedSeaGallopDestination
+	specialvar VAR_0x8006, Special_GetSelectedSeagallopDestination
 	switch VAR_0x8006
 	case SEAGALLOP_FOUR_ISLAND,  EventScript_1A9201
 	case SEAGALLOP_FIVE_ISLAND,  EventScript_1A920C

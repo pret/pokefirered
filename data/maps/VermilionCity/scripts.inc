@@ -175,7 +175,7 @@ EventScript_166B3B:: @ 8166B3B
 	message Text_17FB23
 	waitmessage
 	setvar VAR_0x8004, SEAGALLOP_VERMILION_CITY
-	multichoice 19, 5, MULTICHOICE_SEA_GALLOP_123, FALSE
+	multichoice 19, 5, MULTICHOICE_SEAGALLOP_123, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1A8FEE
 	case 1, EventScript_1A8FF9

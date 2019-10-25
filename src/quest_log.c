@@ -438,7 +438,7 @@ void sub_811089C(void)
     memset(gSaveBlock1Ptr->questLog, 0, sizeof(gSaveBlock1Ptr->questLog));
     gUnknown_203ADF8 = 0;
     gUnknown_203ADFA = 0;
-    sQuestLogCB = 0;
+    sQuestLogCB = NULL;
     gUnknown_203AE08 = NULL;
     gUnknown_203AE04 = NULL;
     sub_8113BD8();
@@ -458,7 +458,7 @@ void sub_8110920(void)
 
 void RunQuestLogCB(void)
 {
-    if (sQuestLogCB)
+    if (sQuestLogCB != NULL)
         sQuestLogCB();
 }
 

@@ -387,7 +387,7 @@ gSpecials:: @ 815FD60
 	def_special IsThereMonInRoute5Daycare
 	def_special GetNumLevelsGainedForRoute5DaycareMon
 	def_special TakePokemonFromRoute5Daycare
-	def_special ScrSpecial_SeaGallopFerry
+	def_special ScrSpecial_SeagallopFerry
 	def_special Special_PlayerPartyContainsSpecies
 	def_special Special_SetSomeVariable
 	def_special HelpSystem_BackupSomeVariable
@@ -431,8 +431,8 @@ gSpecials:: @ 815FD60
 	def_special Special_HasLearnedAllMovesFromCapeBrinkTutor
 	def_special Special_Credits
 	def_special sub_8153810
-	def_special Special_DrawSeaGallopDestinationMenu
-	def_special Special_GetSelectedSeaGallopDestination
+	def_special Special_DrawSeagallopDestinationMenu
+	def_special Special_GetSelectedSeagallopDestination
 	def_special sub_8147500
 	def_special GetPlayerFacingDirection
 	def_special Special_DeoxysSound

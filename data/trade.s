@@ -1,24 +1,11 @@
-#include "constants/region_map.h"
-#include "constants/trainer_classes.h"
-#include "constants/songs.h"
-#include "constants/flags.h"
-#include "constants/region_map.h"
-#include "constants/maps.h"
-#define RGB(r, g, b) ((r) | ((g) << 5) | ((b) << 10))
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 
 	.section .rodata
 	.align 2, 0
 
-gUnknown_826056C:: @ 826056C
-	.incbin "baserom.gba", 0x26056C, 0x60
-
-gUnknown_82605CC:: @ 82605CC
-	.incbin "baserom.gba", 0x2605CC, 0x128
-
-gUnknown_82606F4:: @ 82606F4
-	.incbin "baserom.gba", 0x2606F4, 0x140
+gUnknown_8260814:: @ 8260814
+	.incbin "baserom.gba", 0x260814, 0x20
 
 gUnknown_8260834:: @ 8260834
 	.incbin "baserom.gba", 0x260834, 0x1FE

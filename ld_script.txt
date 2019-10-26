@@ -398,7 +398,8 @@ SECTIONS {
         src/daycare.o(.rodata);
         src/battle_gfx_sfx_util.o(.rodata);
         data/battle_interface.o(.rodata);
-        data/data.o(.rodata);
+        data/pokeball.o(.rodata);
+        data/trade.o(.rodata);
         data/overworld.o(.rodata);
         data/tilesets.o(.rodata);
         data/maps.o(.rodata);

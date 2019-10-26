@@ -1063,7 +1063,7 @@ gFile_graphics_unused_basic_frame_tilemap:: @ 8D11A78
 
 	.align 2
 gBattleInterface_BallStatusBarPal:: @ 8D11B84
-	.incbin "baserom.gba", 0xD11B84, 0x20
+	.incbin "graphics/battle_interface/ball_status_bar.gbapal"
 
 gBattleInterface_BallDisplayPal:: @ 8D11BA4
 	.incbin "graphics/battle_interface/ball_display.gbapal"

@@ -10,32 +10,6 @@
 	.section .rodata
 	.align 2, 0
 
-gUnknown_824829C:: @ 824829C
-	.incbin "baserom.gba", 0x24829C, 0x4c
-
-gUnknown_82482E8:: @ 82482E8
-	.incbin "baserom.gba", 0x2482E8, 0x18
-
-gUnknown_8248300:: @ 8248300
-	.incbin "baserom.gba", 0x248300, 0x18
-
-gUnknown_8248318:: @ 8248318
-	.incbin "baserom.gba", 0x248318, 0x8
-
-gBattleBgTemplates:: @ 8248320
-	.incbin "baserom.gba", 0x248320, 0x10
-
-gUnknown_8248330:: @ 8248330
-	.incbin "baserom.gba", 0x248330, 0x6B04
-
-gUnknown_824EE34:: @ 824EE34
-	.incbin "baserom.gba", 0x24EE34, 0x190
-
-gUnknown_824EFC4:: @ 824EFC4
-	.incbin "baserom.gba", 0x24EFC4, 0x20
-	
-	.section .rodata.8260270
-
 gUnknown_8260270:: @ 8260270
 	.incbin "baserom.gba", 0x260270, 0x8
 

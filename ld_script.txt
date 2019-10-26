@@ -384,7 +384,7 @@ SECTIONS {
         src/link.o(.rodata);
         src/main_menu.o(.rodata);
         src/data.o(.rodata);
-        data/data.o(.rodata);
+        data/battle_bg.o(.rodata);
         src/battle_main.o(.rodata);
         src/battle_util.o(.rodata);
         src/battle_script_commands.o(.rodata);
@@ -397,7 +397,7 @@ SECTIONS {
         src/util.o(.rodata);
         src/daycare.o(.rodata);
         src/battle_gfx_sfx_util.o(.rodata);
-        data/data.o(.rodata.8260270);
+        data/data.o(.rodata);
         data/overworld.o(.rodata);
         data/tilesets.o(.rodata);
         data/maps.o(.rodata);

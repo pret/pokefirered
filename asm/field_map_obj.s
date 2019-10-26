@@ -12214,8 +12214,8 @@ _0806360C:
 	bx r1
 	thumb_func_end sub_80635DC
 
-	thumb_func_start npc_set_running_behaviour_etc
-npc_set_running_behaviour_etc: @ 8063610
+	thumb_func_start SetTrainerMovementType
+SetTrainerMovementType: @ 8063610
 	push {r4,lr}
 	mov r12, r0
 	lsls r1, 24
@@ -12253,10 +12253,10 @@ npc_set_running_behaviour_etc: @ 8063610
 	.align 2, 0
 _08063654: .4byte gSprites
 _08063658: .4byte gUnknown_839FBC8
-	thumb_func_end npc_set_running_behaviour_etc
+	thumb_func_end SetTrainerMovementType
 
-	thumb_func_start npc_running_behaviour_by_direction
-npc_running_behaviour_by_direction: @ 806365C
+	thumb_func_start GetTrainerFacingDirectionMovementType
+GetTrainerFacingDirectionMovementType: @ 806365C
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _08063668 @ =gUnknown_83A649C
@@ -12265,7 +12265,7 @@ npc_running_behaviour_by_direction: @ 806365C
 	bx lr
 	.align 2, 0
 _08063668: .4byte gUnknown_83A649C
-	thumb_func_end npc_running_behaviour_by_direction
+	thumb_func_end GetTrainerFacingDirectionMovementType
 
 	thumb_func_start npc_block_way__next_tile
 npc_block_way__next_tile: @ 806366C

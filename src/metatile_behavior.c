@@ -69,7 +69,7 @@ bool8 MetatileBehavior_IsMB21OrSand(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsMB21OrWaterfallBottom(u8 metatileBehavior)
+bool8 MetatileBehavior_IsSandOrDeepSand(u8 metatileBehavior)
 {
     if(metatileBehavior == MB_21 || metatileBehavior == MB_WATERFALL_BOTTOM)
         return TRUE;
@@ -428,11 +428,11 @@ bool8 MetatileBehavior_IsTallGrass_2(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_ReturnFalse_3(u8 metatileBehavior) { return FALSE; }
+bool8 MetatileBehavior_IsLongGrass(u8 metatileBehavior) { return FALSE; }
 bool8 MetatileBehavior_ReturnFalse_4(u8 metatileBehavior) { return FALSE; }
 bool8 MetatileBehavior_ReturnFalse_5(u8 metatileBehavior) { return FALSE; }
-bool8 MetatileBehavior_ReturnFalse_6(u8 metatileBehavior) { return FALSE; }
-bool8 MetatileBehavior_ReturnFalse_7(u8 metatileBehavior) { return FALSE; }
+bool8 MetatileBehavior_IsBridge(u8 metatileBehavior) { return FALSE; }
+bool8 MetatileBehavior_GetBridgeType(u8 metatileBehavior) { return FALSE; }
 
 bool8 MetatileBehavior_UnusedIsMB_01(u8 metatileBehavior)
 {
@@ -450,7 +450,7 @@ bool8 MetatileBehavior_UnusedIsTallGrass(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsMB0B(u8 metatileBehavior)
+bool8 MetatileBehavior_IsIndoorEncounter(u8 metatileBehavior)
 {
     if(metatileBehavior == MB_0B)
         return TRUE;
@@ -458,7 +458,7 @@ bool8 MetatileBehavior_IsMB0B(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsMB0C(u8 metatileBehavior)
+bool8 MetatileBehavior_IsMountain(u8 metatileBehavior)
 {
     if(metatileBehavior == MB_0C)
         return TRUE;

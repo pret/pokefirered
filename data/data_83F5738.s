@@ -344,8 +344,32 @@ gText_BattleSwitchWhich:: @ 83FE7A0
 gUnknown_83FE80C:: @ 83FE80C
 	.incbin "baserom.gba", 0x3FE80C, 0x10
 
-gUnknown_83FE81C:: @ 83FE81C
-	.incbin "baserom.gba", 0x3FE81C, 0x3D
+gText_HighlightRed_Left:: @ 83FE81C
+	.string "{HIGHLIGHT RED}Left: $"
+
+gText_HighlightRed::
+	.string "{HIGHLIGHT RED}$"
+
+gText_Sleep::
+	.string "sleep$"
+
+gText_Poison::
+	.string "poison$"
+
+gText_Burn::
+	.string "burn$"
+
+gText_Paralysis::
+	.string "paralysis$"
+
+gText_Ice::
+	.string "ice$"
+
+gText_Confusion::
+	.string "confusion$"
+
+gText_Love::
+	.string "love$"
 
 gUnknown_83FE859:: @ 83FE859
 	.incbin "baserom.gba", 0x3FE859, 0x3

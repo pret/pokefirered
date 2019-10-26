@@ -16,7 +16,7 @@ PokemonTower_7F_EventScript_16355A:: @ 816355A
 	end
 
 PokemonTower_7F_EventScript_163586:: @ 8163586
-	trainerbattle 2, TRAINER_TEAM_ROCKET_GRUNT_19, 0, Text_17A380, Text_17A3A4, EventScript_1635A1
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_TEAM_ROCKET_GRUNT_19, 0, Text_17A380, Text_17A3A4, EventScript_1635A1
 	msgbox gUnknown_817A3AF, 6
 	end
 
@@ -103,7 +103,7 @@ Movement_163633:: @ 8163633
 	step_end
 
 PokemonTower_7F_EventScript_16363D:: @ 816363D
-	trainerbattle 2, TRAINER_TEAM_ROCKET_GRUNT_20, 0, Text_17A3CD, Text_17A466, EventScript_163658
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_TEAM_ROCKET_GRUNT_20, 0, Text_17A3CD, Text_17A466, EventScript_163658
 	msgbox gUnknown_817A477, 6
 	end
 
@@ -169,7 +169,7 @@ Movement_1636CD:: @ 81636CD
 	step_end
 
 PokemonTower_7F_EventScript_1636D6:: @ 81636D6
-	trainerbattle 2, TRAINER_TEAM_ROCKET_GRUNT_21, 0, Text_17A4CF, Text_17A4EE, EventScript_1636F1
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_TEAM_ROCKET_GRUNT_21, 0, Text_17A4CF, Text_17A4EE, EventScript_1636F1
 	msgbox gUnknown_817A506, 6
 	end
 

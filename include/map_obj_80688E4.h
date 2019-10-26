@@ -3,7 +3,7 @@
 
 #include "global.h"
 
-void player_bitmagic(void);
+void FreezeEventObjects(void);
 void FreezeMapObject(struct MapObject *);
 void FreezeMapObjectsExceptOne(u8 mapObjectId);
 

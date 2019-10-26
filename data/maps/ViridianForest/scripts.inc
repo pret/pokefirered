@@ -39,26 +39,26 @@ ViridianForest_EventScript_160568:: @ 8160568
 	end
 
 ViridianForest_EventScript_160571:: @ 8160571
-	trainerbattle 0, TRAINER_BUG_CATCHER_RICK, 0, Text_1722C7, Text_1722F9
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BUG_CATCHER_RICK, 0, Text_1722C7, Text_1722F9
 	msgbox gUnknown_8172315, 6
 	end
 
 ViridianForest_EventScript_160588:: @ 8160588
-	trainerbattle 0, TRAINER_BUG_CATCHER_DOUG, 0, Text_17234A, Text_17237D
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BUG_CATCHER_DOUG, 0, Text_17234A, Text_17237D
 	msgbox gUnknown_8172398, 6
 	end
 
 ViridianForest_EventScript_16059F:: @ 816059F
-	trainerbattle 0, TRAINER_BUG_CATCHER_SAMMY, 0, Text_1723D4, Text_172402
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BUG_CATCHER_SAMMY, 0, Text_1723D4, Text_172402
 	msgbox gUnknown_817241F, 6
 	end
 
 ViridianForest_EventScript_1605B6:: @ 81605B6
-	trainerbattle 0, TRAINER_BUG_CATCHER_ANTHONY, 0, Text_172482, Text_1724BF
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BUG_CATCHER_ANTHONY, 0, Text_172482, Text_1724BF
 	msgbox gUnknown_81724DC, 6
 	end
 
 ViridianForest_EventScript_1605CD:: @ 81605CD
-	trainerbattle 0, TRAINER_BUG_CATCHER_CHARLIE, 0, Text_1724F9, Text_17251B
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BUG_CATCHER_CHARLIE, 0, Text_1724F9, Text_17251B
 	msgbox gUnknown_8172527, 6
 	end

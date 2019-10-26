@@ -839,7 +839,7 @@ void sub_802F6A8(void)
         else
         {
             m4aSongNumStop(SE_HINSI);
-            gMain.inBattle = 0;
+            gMain.inBattle = FALSE;
             gMain.callback1 = gPreBattleCallback1;
             SetMainCallback2(gMain.savedCallback);
         }
@@ -1318,7 +1318,6 @@ static void WaitForMonSelection(void)
             BtlController_EmitChosenMonReturnValue(1, gUnknown_203B0C1, gUnknown_203B0DC);
         else
             BtlController_EmitChosenMonReturnValue(1, 6, NULL);
-
         if ((gBattleBufferA[gActiveBattler][1] & 0xF) == 1)
             PrintLinkStandbyMsg();
         PlayerBufferExecCompleted();

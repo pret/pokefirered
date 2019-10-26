@@ -1155,6 +1155,15 @@ extern const u8 EventScript_SafariOutOfBalls[];
 
 extern const u8 EventScript_ItemfinderDigUpUnderfootItem[];
 
+// battle_setup
+extern const u8 EventScript_DoTrainerBattle[];
+extern const u8 EventScript_TryDoDoubleTrainerBattle[];
+extern const u8 EventScript_TryDoNormalTrainerBattle[];
+extern const u8 EventScript_TryDoDoubleRematchBattle[];
+extern const u8 EventScript_TryDoRematchBattle[];
+extern const u8 gUnknown_81A4EB4[];
+extern const u8 EventScript_1C555B[];
+
 // new_game
 extern const u8 EventScript_ResetAllMapFlags[];
 

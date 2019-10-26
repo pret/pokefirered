@@ -38,7 +38,7 @@ EventScript_1606DD:: @ 81606DD
 	playbgm MUS_EXEYE, 0
 	waitbuttonpress
 	setvar VAR_LAST_TALKED, 3
-	trainerbattle 3, TRAINER_SUPER_NERD_MIGUEL, 0, Text_172B99
+	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_SUPER_NERD_MIGUEL, 0, Text_172B99
 	setvar VAR_MAP_SCENE_MT_MOON_B2F, 1
 	msgbox gUnknown_8172BAB
 	return
@@ -123,21 +123,21 @@ Movement_1607E0:: @ 81607E0
 	step_end
 
 MtMoon_B2F_EventScript_1607E4:: @ 81607E4
-	trainerbattle 0, TRAINER_TEAM_ROCKET_GRUNT, 0, Text_172C5A, Text_172CB8
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_TEAM_ROCKET_GRUNT, 0, Text_172C5A, Text_172CB8
 	msgbox gUnknown_8172CCB, 6
 	end
 
 MtMoon_B2F_EventScript_1607FB:: @ 81607FB
-	trainerbattle 0, TRAINER_TEAM_ROCKET_GRUNT_2, 0, Text_172CFC, Text_172D46
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_TEAM_ROCKET_GRUNT_2, 0, Text_172CFC, Text_172D46
 	msgbox gUnknown_8172D51, 6
 	end
 
 MtMoon_B2F_EventScript_160812:: @ 8160812
-	trainerbattle 0, TRAINER_TEAM_ROCKET_GRUNT_3, 0, Text_172D82, Text_172DAF
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_TEAM_ROCKET_GRUNT_3, 0, Text_172D82, Text_172DAF
 	msgbox gUnknown_8172DC1, 6
 	end
 
 MtMoon_B2F_EventScript_160829:: @ 8160829
-	trainerbattle 0, TRAINER_TEAM_ROCKET_GRUNT_4, 0, Text_172DF0, Text_172E3E
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_TEAM_ROCKET_GRUNT_4, 0, Text_172DF0, Text_172E3E
 	msgbox gUnknown_8172E4B, 6
 	end

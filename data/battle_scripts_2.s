@@ -1,15 +1,15 @@
 	.section script_data, "aw", %progbits
 
-gUnknown_81D99B0:: @ 81D99B0
+gBattlescriptsForBallThrow:: @ 81D99B0
 	.incbin "baserom.gba", 0x1D99B0, 0x34
 
-gUnknown_81D99E4:: @ 81D99E4
+gBattlescriptsForUsingItem:: @ 81D99E4
 	.incbin "baserom.gba", 0x1D99E4, 0x18
 
-gUnknown_81D99FC:: @ 81D99FC
+gBattlescriptsForRunningByItem:: @ 81D99FC
 	.incbin "baserom.gba", 0x1D99FC, 0x8
 
-gUnknown_81D9A04:: @ 81D9A04
+gBattlescriptsForSafariActions:: @ 81D9A04
 	.incbin "baserom.gba", 0x1D9A04, 0x3E
 
 BattleScript_SuccessBallThrow:: @ 81D9A42

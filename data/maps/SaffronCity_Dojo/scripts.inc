@@ -123,27 +123,27 @@ SaffronCity_Dojo_EventScript_16ED3D:: @ 816ED3D
 	end
 
 SaffronCity_Dojo_EventScript_16ED46:: @ 816ED46
-	trainerbattle 0, TRAINER_BLACK_BELT_HITOSHI, 0, Text_19B3DF, Text_19B40F
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BLACK_BELT_HITOSHI, 0, Text_19B3DF, Text_19B40F
 	msgbox gUnknown_819B41F, 6
 	end
 
 SaffronCity_Dojo_EventScript_16ED5D:: @ 816ED5D
-	trainerbattle 0, TRAINER_BLACK_BELT_HIDEKI, 0, Text_19B2E0, Text_19B2FD
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BLACK_BELT_HIDEKI, 0, Text_19B2E0, Text_19B2FD
 	msgbox gUnknown_819B30F, 6
 	end
 
 SaffronCity_Dojo_EventScript_16ED74:: @ 816ED74
-	trainerbattle 0, TRAINER_BLACK_BELT_AARON, 0, Text_19B341, Text_19B396
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BLACK_BELT_AARON, 0, Text_19B341, Text_19B396
 	msgbox gUnknown_819B3AC, 6
 	end
 
 SaffronCity_Dojo_EventScript_16ED8B:: @ 816ED8B
-	trainerbattle 0, TRAINER_BLACK_BELT_MIKE, 0, Text_19B275, Text_19B292
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BLACK_BELT_MIKE, 0, Text_19B275, Text_19B292
 	msgbox gUnknown_819B29D, 6
 	end
 
 SaffronCity_Dojo_EventScript_16EDA2:: @ 816EDA2
-	trainerbattle 2, TRAINER_BLACK_BELT_KOICHI, 0, Text_19B12C, Text_19B193, EventScript_16EDD0
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_BLACK_BELT_KOICHI, 0, Text_19B12C, Text_19B193, EventScript_16EDD0
 	checkflag FLAG_GOT_HITMON_FROM_DOJO
 	goto_if TRUE, EventScript_16EDC6
 	msgbox gUnknown_819B1A7, 6

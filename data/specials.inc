@@ -322,7 +322,7 @@ gSpecials:: @ 815FD60
 	def_special Special_StartGroudonKyogreBattle
 	def_special Special_StartLegendaryBattle
 	def_special Special_StartRegiBattle
-	def_special sub_8080398
+	def_special SetUpTrainerMovement
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special sub_807B6C0
@@ -407,7 +407,7 @@ gSpecials:: @ 815FD60
 	def_special sub_809D620
 	def_special sub_812781C
 	def_special sub_8127888
-	def_special sub_80803FC
+	def_special SetBattledTrainerFlag
 	def_special sub_812B35C
 	def_special Special_SSAnneDepartureCutscene
 	def_special sub_8149A18

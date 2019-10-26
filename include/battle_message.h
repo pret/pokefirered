@@ -238,4 +238,12 @@ extern const u8* const gStatNamesTable2[];
 extern const u16 gMissStringIds[];
 extern const u16 gTrappingMoves[];
 
+extern const u8 gText_Sleep[];
+extern const u8 gText_Poison[];
+extern const u8 gText_Burn[];
+extern const u8 gText_Paralysis[];
+extern const u8 gText_Ice[];
+extern const u8 gText_Confusion[];
+extern const u8 gText_Love[];
+
 #endif // GUARD_BATTLE_MESSAGE_H

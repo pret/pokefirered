@@ -5,35 +5,8 @@
 	.include "text.o"
 	.include "sprite.o"
 	.include "link.o"
-
 	.align 4
-gPreBattleCallback1: @ 3004F80
-	.space 0x4
-
-gBattleMainFunc: @ 3004F84
-	.space 0xC
-
-gBattleResults: @ 3004F90
-	.space 0x44
-
-gLeveledUpInBattle: @ 3004FD4
-	.space 0xC
-
-gBattlerControllerFuncs: @ 3004FE0
-	.space 0x10
-
-gHealthboxSpriteIds: @ 3004FF0
-	.space 0x4
-
-gMultiUsePlayerCursor: @ 3004FF4
-	.space 0x4
-
-gNumberOfMovesToChoose: @ 3004FF8
-	.space 0x4
-
-gUnknown_3004FFC: @ 3004FFC
-	.space 0x4
-
+	.include "battle_main.o"
 	.include "random.o"
 	.include "load_save.o"
 
@@ -123,7 +96,7 @@ gUnknown_3005354: @ 3005354
 	.align 2
 	.include "field_specials.o"
 
-gUnknown_300537C: @ 300537C
+gCB2_AfterEvolution: @ 300537C
 	.space 0x4
 
 	.include "save.o"

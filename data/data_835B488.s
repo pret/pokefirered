@@ -13,29 +13,7 @@ gUnknown_83C68E4:: @ 83C68E4
 gUnknown_83C68EC:: @ 83C68EC
 	.incbin "baserom.gba", 0x3C68EC, 0x4
 
-gUnknown_83C68F0:: @ 83C68F0
-	.incbin "baserom.gba", 0x3C68F0, 0x8
-
-gUnknown_83C68F8:: @ 83C68F8
-	.incbin "baserom.gba", 0x3C68F8, 0x8
-
-gUnknown_83C6900:: @ 83C6900
-	.incbin "baserom.gba", 0x3C6900, 0x48
-
-gUnknown_83C6948:: @ 83C6948
-	.incbin "baserom.gba", 0x3C6948, 0x48
-
-gUnknown_83C6990:: @ 83C6990
-	.incbin "baserom.gba", 0x3C6990, 0x48
-
-gUnknown_83C69D8:: @ 83C69D8
-	.incbin "baserom.gba", 0x3C69D8, 0x48
-
-gUnknown_83C6A20:: @ 83C6A20
-	.incbin "baserom.gba", 0x3C6A20, 0x48
-
-gUnknown_83C6A68:: @ 83C6A68
-	.incbin "baserom.gba", 0x3C6A68, 0x48
+	.section .rodata.83C6AB0
 
 gUnknown_83C6AB0:: @ 83C6AB0
 	.incbin "baserom.gba", 0x3C6AB0, 0x8

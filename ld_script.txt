@@ -65,8 +65,8 @@ SECTIONS {
         src/main_menu.o(.text);
         src/battle_controllers.o(.text);
         src/decompress.o(.text);
-        asm/battle_1.o(.text);
-        asm/battle_2.o(.text);
+        asm/battle_bg.o(.text);
+        src/battle_main.o(.text);
         src/battle_util.o(.text);
         src/battle_script_commands.o(.text);
         src/battle_util2.o(.text);
@@ -119,9 +119,9 @@ SECTIONS {
         src/reset_save_heap.o(.text);
         asm/field_weather.o(.text);
         asm/field_weather_effects.o(.text);
-        src/field_fadetransition.o(.text);;
+        src/field_fadetransition.o(.text);
         asm/field_screen_effect.o(.text);
-        asm/battle_setup.o(.text);
+        src/battle_setup.o(.text);
         asm/cable_club.o(.text);
         asm/trainer_see.o(.text);
         asm/wild_encounter.o(.text);
@@ -208,7 +208,7 @@ SECTIONS {
         asm/learn_move.o(.text);
         src/fldeff_softboiled.o(.text);
         asm/battle_tower.o(.text);
-        asm/battle_controller_oak.o(.text);
+        src/battle_controller_oak_old_man.o(.text);
         src/player_pc.o(.text);
         src/intro.o(.text);
         asm/battle_anim_special.o(.text);
@@ -385,6 +385,7 @@ SECTIONS {
         src/main_menu.o(.rodata);
         src/data.o(.rodata);
         data/data.o(.rodata);
+        src/battle_main.o(.rodata);
         src/battle_util.o(.rodata);
         src/battle_script_commands.o(.rodata);
         src/battle_controller_player.o(.rodata);
@@ -422,6 +423,8 @@ SECTIONS {
         src/title_screen.o(.rodata);
         data/field_weather.o(.rodata);
         data/data_835B488.o(.rodata);
+        src/battle_setup.o(.rodata);
+        data/data_835B488.o(.rodata.83C6AB0);
         src/pokemon_icon.o(.rodata);
         data/data_835B488.o(.rodata.83D4100);
         src/item_menu_icons.o(.rodata);
@@ -455,6 +458,7 @@ SECTIONS {
         data/data_83FECCC.o(.rodata);
         src/battle_controller_safari.o(.rodata);
         data/data_83FECCC.o(.rodata.83FEDE4);
+        src/battle_controller_oak_old_man.o(.rodata);
         src/player_pc.o(.rodata);
         src/intro.o(.rodata);
         data/data_83FECCC.o(.rodata.battle_anim_special);

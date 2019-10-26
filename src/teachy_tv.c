@@ -1214,7 +1214,7 @@ static void TeachyTvPreBattleAnimAndSetBattleCallback(u8 taskId)
     case 1:
         if (BT_IsDone())
         {
-            SetMainCallback2(sub_800FD9C);
+            SetMainCallback2(CB2_InitBattle);
             DestroyTask(taskId);
         }
         break;

@@ -1513,7 +1513,7 @@ static void sub_8111F8C(u8 taskId)
 
     if (ScriptContext2_IsEnabled() != TRUE)
     {
-        player_bitmagic();
+        FreezeEventObjects();
         sub_805C270();
         sub_805C780();
         ScriptContext2_Enable();
@@ -1536,7 +1536,7 @@ static void sub_8111FCC(u8 taskId)
         task->data[0] = 0;
         task->data[1] = 0;
         task->func = sub_8112044;
-        player_bitmagic();
+        FreezeEventObjects();
         ScriptContext2_Enable();
     }
 }

@@ -5,6 +5,7 @@
 #include "constants/species.h"
 
 #define SPECIES_SHINY_TAG 500
+#define TRAINER_ENCOUNTER_MUSIC(trainer)((gTrainers[trainer].encounterMusic_gender & 0x7F))
 
 struct MonCoords
 {
@@ -16,8 +17,6 @@ struct MonCoords
 
 extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
 extern const u8 gMoveNames[][13];
-extern const u8 gAbilityNames[][13];
-extern const u8 gTypeNames[][7];
 extern const u16 gUnknown_8251CB8[];
 extern const u16 gUnknown_8251FEE[];
 extern const u16 gUnknown_8252324[];

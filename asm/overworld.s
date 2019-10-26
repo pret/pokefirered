@@ -1708,7 +1708,7 @@ sub_8055864: @ 8055864
 	bl TrySetMapSaveWarpStatus
 	bl sub_806E110
 	bl nullsub_74
-	bl sub_806D7E8
+	bl RestartWildEncounterImmunitySteps
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl sub_810C578
@@ -1771,7 +1771,7 @@ sub_8055920: @ 8055920
 	bl TrySetMapSaveWarpStatus
 	bl sub_806E110
 	bl nullsub_74
-	bl sub_806D7E8
+	bl RestartWildEncounterImmunitySteps
 	ldr r0, _080559A0 @ =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r0, 0x4
@@ -2284,8 +2284,8 @@ _08055D28: .4byte gUnknown_83C68E0
 _08055D2C: .4byte gSaveBlock1Ptr
 	thumb_func_end Overworld_SetFlashLevel
 
-	thumb_func_start sav1_get_flash_used_on_map
-sav1_get_flash_used_on_map: @ 8055D30
+	thumb_func_start Overworld_GetFlashLevel
+Overworld_GetFlashLevel: @ 8055D30
 	ldr r0, _08055D3C @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	adds r0, 0x30
@@ -2293,7 +2293,7 @@ sav1_get_flash_used_on_map: @ 8055D30
 	bx lr
 	.align 2, 0
 _08055D3C: .4byte gSaveBlock1Ptr
-	thumb_func_end sav1_get_flash_used_on_map
+	thumb_func_end Overworld_GetFlashLevel
 
 	thumb_func_start SetCurrentMapLayout
 SetCurrentMapLayout: @ 8055D40
@@ -3522,8 +3522,8 @@ _0805669C: .4byte sub_8056534
 _080566A0: .4byte sub_80565B4
 	thumb_func_end CB2_NewGame
 
-	thumb_func_start c2_whiteout
-c2_whiteout: @ 80566A4
+	thumb_func_start CB2_WhiteOut
+CB2_WhiteOut: @ 80566A4
 	push {lr}
 	sub sp, 0x4
 	ldr r1, _08056708 @ =gMain
@@ -3569,7 +3569,7 @@ _0805670C: .4byte gFieldCallback
 _08056710: .4byte sub_807F5F0
 _08056714: .4byte sub_8056534
 _08056718: .4byte sub_80565B4
-	thumb_func_end c2_whiteout
+	thumb_func_end CB2_WhiteOut
 
 	thumb_func_start CB2_LoadMap
 CB2_LoadMap: @ 805671C
@@ -3944,7 +3944,7 @@ VBlankCB_Field: @ 8056A14
 	thumb_func_start sub_8056A34
 sub_8056A34: @ 8056A34
 	push {lr}
-	bl sav1_get_flash_used_on_map
+	bl Overworld_GetFlashLevel
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0

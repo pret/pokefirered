@@ -2,8 +2,9 @@
 #define GUARD_BATTLE_ANIM_H
 
 #include "battle.h"
-#include "constants/battle_anim.h"
+#include "data.h"
 #include "task.h"
+#include "constants/battle_anim.h"
 
 enum
 {
@@ -166,8 +167,12 @@ void LaunchStatusAnimation(u8 bank, u8 statusAnimId);
 u8 ItemIdToBallId(u16 itemId);
 u8 LaunchBallStarsTask(u8 x, u8 y, u8 kindOfStars, u8 arg3, u8 ballId);
 u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 battlerId, u32 arg2, u8 ballId);
+void sub_80EEFC8(u8 *, u8 *, u8 battlerId);
+void sub_80EF0E0(u8 batterId);
 
 // battle_anim_mons.c
+extern const struct MonCoords gCastformFrontSpriteCoords[];
+
 u8 GetBattlerSpriteCoord(u8 battlerId, u8 coordType);
 u8 GetBattlerSpriteCoord2(u8 battlerId, u8 coordType);
 u8 GetBattlerSpriteDefault_Y(u8 battlerId);
@@ -237,9 +242,9 @@ void SetGreyscaleOrOriginalPalette(u16 paletteNum, bool8 restoreOriginalColor);
 u32 sub_8075BE8(u8 battleBackground, u8 attacker, u8 target, u8 attackerPartner, u8 targetPartner, u8 a6, u8 a7);
 u32 sub_8075CB8(u8 a1, u8 a2, u8 a3, u8 a4);
 u8 sub_8075D80(u8 a1);
-void sub_8075D9C(struct Sprite *sprite);
+void AnimSpriteOnMonPos(struct Sprite *sprite);
 void TranslateAnimSpriteToTargetMonLocation(struct Sprite *sprite);
-void sub_8075E80(struct Sprite *sprite);
+void AnimThrowProjectile(struct Sprite *sprite);
 void sub_8075F0C(struct Sprite *sprite);
 s16 CloneBattlerSpriteWithBlend(u8 animBattler);
 void obj_delete_but_dont_free_vram(struct Sprite *sprite);

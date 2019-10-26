@@ -12709,7 +12709,7 @@ _0811C096:
 	lsls r2, 4
 	adds r1, r2, 0
 	strh r1, [r0]
-	ldr r0, _0811C0DC @ =sub_800FD9C
+	ldr r0, _0811C0DC @ =CB2_InitBattle
 	bl SetMainCallback2
 	pop {r4-r7}
 	pop {r0}
@@ -12719,7 +12719,7 @@ _0811C0CC: .4byte gPlayerParty
 _0811C0D0: .4byte gEnemyParty
 _0811C0D4: .4byte gUnknown_203B0D4
 _0811C0D8: .4byte gTrainerBattleOpponent_A
-_0811C0DC: .4byte sub_800FD9C
+_0811C0DC: .4byte CB2_InitBattle
 	thumb_func_end sub_811C04C
 
 	thumb_func_start sub_811C0E0

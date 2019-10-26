@@ -628,7 +628,7 @@ void sub_810C444(void)
             mapObject = &gMapObjects[sp0];
             if (sub_810CF04(sp0) == TRUE)
             {
-                npc_set_running_behaviour_etc(mapObject, r6);
+                SetTrainerMovementType(mapObject, r6);
             }
             templates[i].movementType = r6;
         }
@@ -766,7 +766,7 @@ static void sub_810C594(void)
             {
                 gSprites[mapObject->spriteId].pos2.x = 0;
                 gSprites[mapObject->spriteId].pos2.y = 0;
-                npc_set_running_behaviour_etc(mapObject, r3);
+                SetTrainerMovementType(mapObject, r3);
             }
         }
     }
@@ -931,7 +931,7 @@ static u8 GetVsSeekerResponseInArea(const VsSeekerData * a0)
         if (IsTrainerVisibleOnScreen(&sVsSeeker->trainerInfo[vsSeekerIdx]) == 1)
         {
             r8 = sVsSeeker->trainerInfo[vsSeekerIdx].trainerIdx;
-            if (!HasTrainerAlreadyBeenFought(r8))
+            if (!HasTrainerBeenFought(r8))
             {
                 StartTrainerObjectMovementScript(&sVsSeeker->trainerInfo[vsSeekerIdx], gUnknown_8453F60);
                 sVsSeeker->trainerHasNotYetBeenFought = 1;
@@ -1027,7 +1027,7 @@ static u8 GetVsSeekerResponseInArea(const VsSeekerData * a0)
                 "\tadds r0, r5\n"
                 "\tldrh r0, [r0, 0x4]\n"
                 "\tmov r8, r0\n"
-                "\tbl HasTrainerAlreadyBeenFought\n"
+                "\tbl HasTrainerBeenFought\n"
                 "\tlsls r0, 24\n"
                 "\tcmp r0, 0\n"
                 "\tbne _0810CA20\n"
@@ -1239,10 +1239,10 @@ void sub_810CB90(void)
                 TryGetFieldObjectIdByLocalIdAndMap(r4[r8].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &sp0);
                 r4_2 = &gMapObjects[sp0];
                 sub_810CF54(&r4[r8]); // You are using this function incorrectly.  Please consult the manual.
-                sub_805FE7C(r4_2, gUnknown_8453F67[r4_2->mapobj_unk_18]);
+                sub_805FE7C(r4_2, gUnknown_8453F67[r4_2->facingDirection]);
                 gSaveBlock1Ptr->trainerRematches[r4[r8].localId] = 0;
                 if (gSelectedEventObject == sp0)
-                    r4_2->animPattern = gUnknown_8453F67[r4_2->mapobj_unk_18];
+                    r4_2->animPattern = gUnknown_8453F67[r4_2->facingDirection];
                 else
                     r4_2->animPattern = 0x08;
             }
@@ -1319,7 +1319,7 @@ static bool8 HasRematchTrainerAlreadyBeenFought(const VsSeekerData *vsSeekerData
 
     if (rematchIdx == -1)
         return FALSE;
-    if (!HasTrainerAlreadyBeenFought(vsSeekerData[rematchIdx].trainerIdxs[0]))
+    if (!HasTrainerBeenFought(vsSeekerData[rematchIdx].trainerIdxs[0]))
         return FALSE;
     return TRUE;
 }
@@ -1327,7 +1327,7 @@ static bool8 HasRematchTrainerAlreadyBeenFought(const VsSeekerData *vsSeekerData
 void sub_810CDE8(void)
 {
     gSaveBlock1Ptr->trainerRematches[gSpecialVar_LastTalked] = 0;
-    sub_80803FC();
+    SetBattledTrainerFlag();
 }
 
 static s32 sub_810CE10(const VsSeekerData * a0, u16 a1)
@@ -1353,7 +1353,7 @@ static s32 sub_810CE10(const VsSeekerData * a0, u16 a1)
     return -1;
 }
 
-s32 sub_810CE64(u16 a0)
+s32 GetRematchTrainerId(u16 a0)
 {
     u8 i;
     u8 j;
@@ -1529,7 +1529,7 @@ static u8 GetNextAvailableRematchTrainer(const VsSeekerData * vsSeekerData, u16 
                     return j - 1;
                 if (vsSeekerData[i].trainerIdxs[j] == 0xffff)
                     continue;
-                if (HasTrainerAlreadyBeenFought(vsSeekerData[i].trainerIdxs[j]))
+                if (HasTrainerBeenFought(vsSeekerData[i].trainerIdxs[j]))
                     continue;
                 return j;
             }
@@ -1550,7 +1550,7 @@ static u8 GetRematchableTrainerLocalId(void)
     {
         if (IsTrainerVisibleOnScreen(&sVsSeeker->trainerInfo[i]) == 1)
         {
-            if (HasTrainerAlreadyBeenFought(sVsSeeker->trainerInfo[i].trainerIdx) != 1 || GetNextAvailableRematchTrainer(sVsSeekerData, sVsSeeker->trainerInfo[i].trainerIdx, &idx))
+            if (HasTrainerBeenFought(sVsSeeker->trainerInfo[i].trainerIdx) != 1 || GetNextAvailableRematchTrainer(sVsSeekerData, sVsSeeker->trainerInfo[i].trainerIdx, &idx))
                 return sVsSeeker->trainerInfo[i].localId;
         }
     }
@@ -1599,7 +1599,7 @@ static void StartAllRespondantIdleMovements(void)
                 struct MapObject *r4 = &gMapObjects[sVsSeeker->trainerInfo[j].fieldObjectId];
 
                 if (sub_810CF04(sVsSeeker->trainerInfo[j].fieldObjectId) == 1)
-                    npc_set_running_behaviour_etc(r4, sVsSeeker->runningBehaviourEtcArray[i]);
+                    SetTrainerMovementType(r4, sVsSeeker->runningBehaviourEtcArray[i]);
                 sub_805FE7C(r4, sVsSeeker->runningBehaviourEtcArray[i]);
                 gSaveBlock1Ptr->trainerRematches[sVsSeeker->trainerInfo[j].localId] = GetNextAvailableRematchTrainer(sVsSeekerData, sVsSeeker->trainerInfo[j].trainerIdx, &dummy);
             }

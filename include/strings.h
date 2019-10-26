@@ -227,6 +227,18 @@ extern const u8 gText_WhatWillPkmnDo[];
 // battle_script_commands
 extern const u8 gText_BattleYesNoChoice[];
 
+// battle_controller_oak_old_man
+extern const u8 gUnknown_83FDAE2[];
+extern const u8 gUnknown_83FDB92[];
+extern const u8 gUnknown_83FDBEF[];
+extern const u8 gUnknown_83FDC58[];
+extern const u8 gUnknown_83FDC95[];
+extern const u8 gUnknown_83FDD23[];
+extern const u8 gUnknown_83FDD64[];
+extern const u8 gUnknown_83FDDEB[];
+extern const u8 gUnknown_83FDCD2[];
+extern const u8 gUnknown_83FE6FA[];
+
 // credits
 extern const u8 gString_Dummy[];
 extern const u8 gString_PokemonFireRed_Staff[]; // FR

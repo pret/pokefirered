@@ -3,7 +3,7 @@ SaffronCity_Gym_MapScripts:: @ 816EDD7
 
 SaffronCity_Gym_EventScript_16EDD8:: @ 816EDD8
 	famechecker FAMECHECKER_SABRINA, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
-	trainerbattle 1, TRAINER_LEADER_SABRINA, 0, Text_19B53C, Text_19B602, EventScript_16EE0A
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT_NO_MUSIC, TRAINER_LEADER_SABRINA, 0, Text_19B53C, Text_19B602, EventScript_16EE0A
 	checkflag FLAG_GOT_TM04_FROM_SABRINA
 	goto_if FALSE, EventScript_16EE3D
 	msgbox gUnknown_819B7F2
@@ -38,38 +38,38 @@ EventScript_16EE7E:: @ 816EE7E
 	end
 
 SaffronCity_Gym_EventScript_16EE88:: @ 816EE88
-	trainerbattle 0, TRAINER_PSYCHIC_JOHAN, 0, Text_19B936, Text_19B957
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PSYCHIC_JOHAN, 0, Text_19B936, Text_19B957
 	msgbox gUnknown_819B96D, 6
 	end
 
 SaffronCity_Gym_EventScript_16EE9F:: @ 816EE9F
-	trainerbattle 0, TRAINER_PSYCHIC_TYRON, 0, Text_19BA45, Text_19BA9E
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PSYCHIC_TYRON, 0, Text_19BA45, Text_19BA9E
 	famechecker FAMECHECKER_SABRINA, 5
 	msgbox gUnknown_819BAB4, 6
 	end
 
 SaffronCity_Gym_EventScript_16EEC3:: @ 816EEC3
-	trainerbattle 0, TRAINER_PSYCHIC_CAMERON, 0, Text_19BB49, Text_19BBA1
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PSYCHIC_CAMERON, 0, Text_19BB49, Text_19BBA1
 	msgbox gUnknown_819BBB3, 6
 	end
 
 SaffronCity_Gym_EventScript_16EEDA:: @ 816EEDA
-	trainerbattle 0, TRAINER_PSYCHIC_PRESTON, 0, Text_19BC57, Text_19BCBC
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PSYCHIC_PRESTON, 0, Text_19BC57, Text_19BCBC
 	msgbox gUnknown_819BCC4, 6
 	end
 
 SaffronCity_Gym_EventScript_16EEF1:: @ 816EEF1
-	trainerbattle 0, TRAINER_CHANNELER_AMANDA, 0, Text_19B86A, Text_19B8A8
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_CHANNELER_AMANDA, 0, Text_19B86A, Text_19B8A8
 	msgbox gUnknown_819B8B9, 6
 	end
 
 SaffronCity_Gym_EventScript_16EF08:: @ 816EF08
-	trainerbattle 0, TRAINER_CHANNELER_STACY, 0, Text_19B998, Text_19B9EC
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_CHANNELER_STACY, 0, Text_19B998, Text_19B9EC
 	msgbox gUnknown_819B9F7, 6
 	end
 
 SaffronCity_Gym_EventScript_16EF1F:: @ 816EF1F
-	trainerbattle 0, TRAINER_CHANNELER_TASHA, 0, Text_19BAE8, Text_19BB0D
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_CHANNELER_TASHA, 0, Text_19BAE8, Text_19BB0D
 	msgbox gUnknown_819BB1F, 6
 	end
 

@@ -134,7 +134,7 @@ bool32 IsEnigmaBerryValid(void)
     return TRUE;
 }
 
-const struct Berry * sub_809C8A0(u8 berryIdx)
+const struct Berry * GetBerryInfo(u8 berryIdx)
 {
     if (berryIdx == ITEM_TO_BERRY(ITEM_ENIGMA_BERRY) && IsEnigmaBerryValid())
         return (struct Berry *)&gSaveBlock1Ptr->enigmaBerry.berry;
@@ -163,7 +163,7 @@ u16 BerryTypeToItemId(u16 berryType)
 
 void GetBerryNameByBerryType(u8 berryType, u8 * dest)
 {
-    const struct Berry * berry = sub_809C8A0(berryType);
+    const struct Berry * berry = GetBerryInfo(berryType);
     memcpy(dest, berry->name, 6);
     dest[6] = EOS;
 }

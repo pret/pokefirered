@@ -1066,13 +1066,14 @@ gBattleInterface_BallStatusBarPal:: @ 8D11B84
 	.incbin "baserom.gba", 0xD11B84, 0x20
 
 gBattleInterface_BallDisplayPal:: @ 8D11BA4
-	.incbin "baserom.gba", 0xD11BA4, 0x20
+	.incbin "graphics/battle_interface/ball_display.gbapal"
 
 gUnknown_8D11BC4:: @ 8D11BC4
 	.incbin "baserom.gba", 0xD11BC4, 0x840
 
 gUnknown_8D12404::
-	.incbin "baserom.gba", 0xD12404, 0x6C0
+	.incbin "graphics/battle_interface/ball_display.4bpp"
+	.incbin "baserom.gba", 0xD12484, 0x640
 
 	.align 2
 gFile_graphics_battle_interface_unused_window3_sheet:: @ 8D12AC4

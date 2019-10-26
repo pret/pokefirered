@@ -1069,8 +1069,11 @@ gBattleInterface_BallDisplayPal:: @ 8D11BA4
 	.incbin "baserom.gba", 0xD11BA4, 0x20
 
 gUnknown_8D11BC4:: @ 8D11BC4
-	.incbin "baserom.gba", 0xD11BC4, 0xF00
-	
+	.incbin "baserom.gba", 0xD11BC4, 0x840
+
+gUnknown_8D12404::
+	.incbin "baserom.gba", 0xD12404, 0x6C0
+
 	.align 2
 gFile_graphics_battle_interface_unused_window3_sheet:: @ 8D12AC4
 	.incbin "graphics/battle_interface/unused_window3.4bpp.lz"

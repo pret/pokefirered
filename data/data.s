@@ -4,74 +4,12 @@
 #include "constants/flags.h"
 #include "constants/region_map.h"
 #include "constants/maps.h"
+#define RGB(r, g, b) ((r) | ((g) << 5) | ((b) << 10))
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 
 	.section .rodata
 	.align 2, 0
-
-gUnknown_8260270:: @ 8260270
-	.incbin "baserom.gba", 0x260270, 0x8
-
-gUnknown_8260278:: @ 8260278
-	.incbin "baserom.gba", 0x260278, 0x30
-
-gUnknown_82602A8:: @ 82602A8
-	.incbin "baserom.gba", 0x2602A8, 0x30
-
-gUnknown_82602D8:: @ 82602D8
-	.incbin "baserom.gba", 0x2602D8, 0x20
-
-gUnknown_82602F8:: @ 82602F8
-	.incbin "baserom.gba", 0x2602F8, 0xCC
-
-gUnknown_82603C4:: @ 82603C4
-	.incbin "baserom.gba", 0x2603C4, 0x38
-
-gUnknown_82603FC:: @ 82603FC
-	.incbin "baserom.gba", 0x2603FC, 0x8
-
-gUnknown_8260404:: @ 8260404
-	.incbin "baserom.gba", 0x260404, 0x68
-
-gUnknown_826046C:: @ 826046C
-	.incbin "baserom.gba", 0x26046C, 0x10
-
-gUnknown_826047C:: @ 826047C
-	.incbin "baserom.gba", 0x26047C, 0x10
-
-gUnknown_826048C:: @ 826048C
-	.incbin "baserom.gba", 0x26048C, 0x10
-
-gUnknown_826049C:: @ 826049C
-	.incbin "baserom.gba", 0x26049C, 0x20
-
-gUnknown_82604BC:: @ 82604BC
-	.incbin "baserom.gba", 0x2604BC, 0x30
-
-gUnknown_82604EC:: @ 82604EC
-	.incbin "baserom.gba", 0x2604EC, 0x30
-
-gUnknown_826051C:: @ 826051C
-	.incbin "baserom.gba", 0x26051C, 0x10
-
-gUnknown_826052C:: @ 826052C
-	.incbin "baserom.gba", 0x26052C, 0x14
-
-gUnknown_8260540:: @ 8260540
-	.incbin "baserom.gba", 0x260540, 0x2
-
-gUnknown_8260542:: @ 8260542
-	.incbin "baserom.gba", 0x260542, 0x14
-
-gUnknown_8260556:: @ 8260556
-	.incbin "baserom.gba", 0x260556, 0x4
-
-gUnknown_826055A:: @ 826055A
-	.incbin "baserom.gba", 0x26055A, 0xA
-
-gUnknown_8260564:: @ 8260564
-	.incbin "baserom.gba", 0x260564, 0x8
 
 gUnknown_826056C:: @ 826056C
 	.incbin "baserom.gba", 0x26056C, 0x60

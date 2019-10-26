@@ -392,7 +392,7 @@ void ShowStartMenu(void)
 {
     if (!IsUpdateLinkStateCBActive())
     {
-        player_bitmagic();
+        FreezeEventObjects();
         sub_805C270();
         sub_805C780();
     }

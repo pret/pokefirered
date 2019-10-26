@@ -87,7 +87,7 @@ sub_8081B84: @ 8081B84
 _08081BC0:
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl TrainerWantsBattle
+	bl ConfigureAndSetUpOneTrainerBattle
 	adds r0, r4, r5
 	lsls r0, 2
 	ldr r1, _08081BE0 @ =gMapObjects
@@ -718,16 +718,16 @@ _0808204A:
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl npc_running_behaviour_by_direction
+	bl GetTrainerFacingDirectionMovementType
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl npc_set_running_behaviour_etc
+	bl SetTrainerMovementType
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl npc_running_behaviour_by_direction
+	bl GetTrainerFacingDirectionMovementType
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -1277,17 +1277,17 @@ _0808246E:
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl npc_running_behaviour_by_direction
+	bl GetTrainerFacingDirectionMovementType
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl npc_set_running_behaviour_etc
+	bl SetTrainerMovementType
 	ldr r4, [sp]
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl npc_running_behaviour_by_direction
+	bl GetTrainerFacingDirectionMovementType
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24

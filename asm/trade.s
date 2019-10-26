@@ -422,7 +422,7 @@ _0804C9B0:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804C9E8
-	bl IsRfuTaskFinished
+	bl IsLinkRfuTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _0804C9C4
@@ -1832,7 +1832,7 @@ sub_804D5A4: @ 804D5A4
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804D5FC
-	bl IsRfuTaskFinished
+	bl IsLinkRfuTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804D620
@@ -11052,7 +11052,7 @@ _0805223C:
 	ldrb r0, [r0]
 	movs r1, 0
 	bl sub_805080C
-	ldr r1, _08052284 @ =gUnknown_300537C
+	ldr r1, _08052284 @ =gCB2_AfterEvolution
 	ldr r0, _08052288 @ =sub_8050948
 	str r0, [r1]
 	ldr r7, _0805228C @ =gUnknown_2031DA4
@@ -11081,7 +11081,7 @@ _0805223C:
 	b _080522A8
 	.align 2, 0
 _08052280: .4byte gSpecialVar_0x8005
-_08052284: .4byte gUnknown_300537C
+_08052284: .4byte gCB2_AfterEvolution
 _08052288: .4byte sub_8050948
 _0805228C: .4byte gUnknown_2031DA4
 _08052290: .4byte gPlayerParty
@@ -13277,7 +13277,7 @@ _08053698:
 	ldrb r0, [r0]
 	movs r1, 0
 	bl sub_805080C
-	ldr r1, _080536E0 @ =gUnknown_300537C
+	ldr r1, _080536E0 @ =gCB2_AfterEvolution
 	ldr r0, _080536E4 @ =sub_8050948
 	str r0, [r1]
 	ldr r7, _080536E8 @ =gUnknown_2031DA4
@@ -13306,7 +13306,7 @@ _08053698:
 	b _08053704
 	.align 2, 0
 _080536DC: .4byte gSpecialVar_0x8005
-_080536E0: .4byte gUnknown_300537C
+_080536E0: .4byte gCB2_AfterEvolution
 _080536E4: .4byte sub_8050948
 _080536E8: .4byte gUnknown_2031DA4
 _080536EC: .4byte gPlayerParty
@@ -13404,7 +13404,7 @@ _080537A8:
 	.align 2, 0
 _080537B4: .4byte gSoftResetDisabled
 _080537B8:
-	ldr r0, _080537F4 @ =gUnknown_300537C
+	ldr r0, _080537F4 @ =gCB2_AfterEvolution
 	ldr r1, _080537F8 @ =sub_8053E8C
 	mov r8, r1
 	str r1, [r0]
@@ -13433,7 +13433,7 @@ _080537B8:
 	bl TradeEvolutionScene
 	b _0805380E
 	.align 2, 0
-_080537F4: .4byte gUnknown_300537C
+_080537F4: .4byte gCB2_AfterEvolution
 _080537F8: .4byte sub_8053E8C
 _080537FC: .4byte gUnknown_2031DA4
 _08053800: .4byte gPlayerParty
@@ -14745,7 +14745,7 @@ _0805434C:
 	ldr r0, _08054378 @ =sub_804C718
 	cmp r1, r0
 	bne _08054384
-	bl IsRfuTaskFinished
+	bl IsLinkRfuTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08054396

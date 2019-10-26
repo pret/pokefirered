@@ -8,7 +8,7 @@
 #include "data.h"
 #include "string_util.h"
 #include "battle.h"
-#include "battle_main.h"
+#include "battle_anim.h"
 #include "item.h"
 #include "event_data.h"
 #include "util.h"
@@ -1467,7 +1467,7 @@ const struct SpriteTemplate gUnknown_825DEF0[] =
     {
         .tileTag = SPRITE_INVALID_TAG,
         .paletteTag = 0,
-        .oam = &gUnknown_824F018,
+        .oam = &gOamData_824F018,
         .anims = NULL, 
         .images = gUnknown_8234698,
         .affineAnims = gSpriteAffineAnimTable_82348C8,
@@ -1476,16 +1476,16 @@ const struct SpriteTemplate gUnknown_825DEF0[] =
     {
         .tileTag = SPRITE_INVALID_TAG,
         .paletteTag = 0,
-        .oam = &gUnknown_824F010,
+        .oam = &gOamData_824F010,
         .anims = NULL, 
         .images = gUnknown_82346B8,
         .affineAnims = gSpriteAffineAnimTable_8234944,
-        .callback = oac_poke_opponent,
+        .callback = SpriteCB_WildMon,
     },
     {
         .tileTag = SPRITE_INVALID_TAG,
         .paletteTag = 0,
-        .oam = &gUnknown_824F018,
+        .oam = &gOamData_824F018,
         .anims = NULL, 
         .images = gUnknown_82346D8,
         .affineAnims = gSpriteAffineAnimTable_82348C8,
@@ -1494,11 +1494,11 @@ const struct SpriteTemplate gUnknown_825DEF0[] =
     {
         .tileTag = SPRITE_INVALID_TAG,
         .paletteTag = 0,
-        .oam = &gUnknown_824F010,
+        .oam = &gOamData_824F010,
         .anims = NULL, 
         .images = gUnknown_82346F8,
         .affineAnims = gSpriteAffineAnimTable_8234944,
-        .callback = oac_poke_opponent,
+        .callback = SpriteCB_WildMon,
     },
 };
 
@@ -1507,7 +1507,7 @@ const struct SpriteTemplate gUnknown_825DF50[] =
     {
         .tileTag = SPRITE_INVALID_TAG,
         .paletteTag = 0,
-        .oam = &gUnknown_824F018,
+        .oam = &gOamData_824F018,
         .anims = NULL, 
         .images = gTrainerBackPicTable_Red,
         .affineAnims = gSpriteAffineAnimTable_82348C8,
@@ -1516,7 +1516,7 @@ const struct SpriteTemplate gUnknown_825DF50[] =
     {
         .tileTag = SPRITE_INVALID_TAG,
         .paletteTag = 0,
-        .oam = &gUnknown_824F018,
+        .oam = &gOamData_824F018,
         .anims = NULL, 
         .images = gTrainerBackPicTable_Leaf,
         .affineAnims = gSpriteAffineAnimTable_82348C8,
@@ -1525,7 +1525,7 @@ const struct SpriteTemplate gUnknown_825DF50[] =
     {
         .tileTag = SPRITE_INVALID_TAG,
         .paletteTag = 0,
-        .oam = &gUnknown_824F018,
+        .oam = &gOamData_824F018,
         .anims = NULL, 
         .images = gTrainerBackPicTable_RSBrendan,
         .affineAnims = gSpriteAffineAnimTable_82348C8,
@@ -1534,7 +1534,7 @@ const struct SpriteTemplate gUnknown_825DF50[] =
     {
         .tileTag = SPRITE_INVALID_TAG,
         .paletteTag = 0,
-        .oam = &gUnknown_824F018,
+        .oam = &gOamData_824F018,
         .anims = NULL, 
         .images = gTrainerBackPicTable_RSMay,
         .affineAnims = gSpriteAffineAnimTable_82348C8,
@@ -1543,7 +1543,7 @@ const struct SpriteTemplate gUnknown_825DF50[] =
     {
         .tileTag = SPRITE_INVALID_TAG,
         .paletteTag = 0,
-        .oam = &gUnknown_824F018,
+        .oam = &gOamData_824F018,
         .anims = NULL, 
         .images = gTrainerBackPicTable_PokeDude,
         .affineAnims = gSpriteAffineAnimTable_82348C8,
@@ -1552,7 +1552,7 @@ const struct SpriteTemplate gUnknown_825DF50[] =
     {
         .tileTag = SPRITE_INVALID_TAG,
         .paletteTag = 0,
-        .oam = &gUnknown_824F018,
+        .oam = &gOamData_824F018,
         .anims = NULL, 
         .images = gTrainerBackPicTable_OldMan,
         .affineAnims = gSpriteAffineAnimTable_82348C8,
@@ -4652,8 +4652,7 @@ bool8 PokemonUseItemEffects2(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mo
                             sp18 = itemEffect[r10];
                         r10++;
                         break;
-                    case 7:\
-
+                    case 7:
                         if (GetMonData(mon, MON_DATA_FRIENDSHIP, NULL) >= 200
                          && retVal == FALSE
                          && sp18 == 0)
@@ -5406,7 +5405,7 @@ u16 GetMonEVCount(struct Pokemon *mon)
     return count;
 }
 
-void sub_8043A68(void)
+void RandomlyGivePartyPokerus(struct Pokemon *party)
 {
     u8 foo[4]; // huh?
 }
@@ -5472,7 +5471,7 @@ static void sub_8043B38(void)
     u8 foo[4]; // huh?
 }
 
-void sub_8043B40(void)
+void PartySpreadPokerus(struct Pokemon *party)
 {
     u8 foo[4]; // huh?
 }

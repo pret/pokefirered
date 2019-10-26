@@ -36,6 +36,7 @@ void ItemMenu_SetExitCallback(void (*)(void));
 void DisplayItemMessageInBag(u8 taskId, u8 bgId, const u8 * string, TaskFunc followUpFunc);
 void sub_810A1F8(u8 taskId);
 void sub_8107ECC(void);
+void sub_810AF74(void);
 void sub_8108DC8(u8 pocketId);
 void sub_81089F4(u8 pocketId);
 void sub_8107DB4(u8 menuType, u8 pocket, MainCallback callback);

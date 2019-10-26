@@ -1025,7 +1025,7 @@ bool8 IsLinkTaskFinished(void)
 {
     if (gWirelessCommType == 1)
     {
-        return IsRfuTaskFinished();
+        return IsLinkRfuTaskFinished();
     }
     return gLinkCallback == NULL;
 }

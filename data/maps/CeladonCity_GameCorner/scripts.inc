@@ -429,7 +429,7 @@ EventScript_16CABE:: @ 816CABE
 	return
 
 CeladonCity_GameCorner_EventScript_16CAF5:: @ 816CAF5
-	trainerbattle 2, TRAINER_TEAM_ROCKET_GRUNT_7, 0, Text_196E69, Text_196E95, EventScript_16CB10
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_TEAM_ROCKET_GRUNT_7, 0, Text_196E69, Text_196E95, EventScript_16CB10
 	msgbox gUnknown_8196E9B, 6
 	end
 

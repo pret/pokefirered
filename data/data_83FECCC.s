@@ -137,9 +137,6 @@ gUnknown_84020DA:: @ 84020DA
 gUnknown_84020E6:: @ 84020E6
 	.incbin "baserom.gba", 0x4020E6, 0x12
 
-gUnknown_84020F8:: @ 84020F8
-	.incbin "baserom.gba", 0x4020F8, 0xE4
-
 	.section .rodata.battle_anim_special
 
 gUnknown_840BF3C:: @ 840BF3C

@@ -1637,7 +1637,7 @@ _0808141A:
 	lsls r2, 4
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r0, _08081448 @ =sub_800FD9C
+	ldr r0, _08081448 @ =CB2_InitBattle
 	bl SetMainCallback2
 	ldr r1, _0808144C @ =gMain
 	ldr r0, _08081450 @ =sub_8081668
@@ -1651,7 +1651,7 @@ _0808143A:
 	.align 2, 0
 _08081440: .4byte gBattleTypeFlags
 _08081444: .4byte gTrainerBattleOpponent_A
-_08081448: .4byte sub_800FD9C
+_08081448: .4byte CB2_InitBattle
 _0808144C: .4byte gMain
 _08081450: .4byte sub_8081668
 	thumb_func_end sub_8081318
@@ -1860,7 +1860,7 @@ _080815EA:
 	lsls r3, 4
 	adds r0, r3, 0
 	strh r0, [r1]
-	ldr r0, _08081618 @ =sub_800FD9C
+	ldr r0, _08081618 @ =CB2_InitBattle
 	bl SetMainCallback2
 	ldr r1, _0808161C @ =gMain
 	ldr r0, _08081620 @ =sub_8081668
@@ -1874,7 +1874,7 @@ _0808160A:
 	.align 2, 0
 _08081610: .4byte gBattleTypeFlags
 _08081614: .4byte gTrainerBattleOpponent_A
-_08081618: .4byte sub_800FD9C
+_08081618: .4byte CB2_InitBattle
 _0808161C: .4byte gMain
 _08081620: .4byte sub_8081668
 	thumb_func_end sub_8081454

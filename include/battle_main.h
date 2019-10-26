@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLE_MAIN_H
 #define GUARD_BATTLE_MAIN_H
 
+#include "constants/abilities.h"
+
 struct TrainerMoney
 {
     u8 classId;
@@ -43,50 +45,10 @@ struct UnknownPokemonStruct4
 #define BOUNCE_MON          0x0
 #define BOUNCE_HEALTHBOX    0x1
 
-void CB2_InitBattle(void);
-void BattleMainCB2(void);
-void CB2_QuitRecordedBattle(void);
-void sub_8038528(struct Sprite* sprite);
-void sub_8038A04(void); // unused
-void VBlankCB_Battle(void);
-void sub_801182C(struct Sprite *sprite);
-void sub_8011A1C(void);
-u32 sub_80391E0(u8 arrayId, u8 caseId);
-u32 sub_80397C4(u32 setId, u32 tableId);
-void oac_poke_opponent(struct Sprite *sprite);
-void SpriteCallbackDummy_2(struct Sprite *sprite);
-void sub_8039934(struct Sprite *sprite);
-void sub_8012098(struct Sprite *sprite);
-void sub_8012044(struct Sprite *sprite);
-void sub_8039B58(struct Sprite *sprite);
-void sub_8039BB4(struct Sprite *sprite);
-void sub_80105DC(struct Sprite *sprite);
-void sub_8012110(struct Sprite *sprite);
-void DoBounceEffect(u8 bank, u8 b, s8 c, s8 d);
-void EndBounceEffect(u8 bank, bool8 b);
-void sub_8039E44(struct Sprite *sprite);
-void sub_8039E60(struct Sprite *sprite);
-void sub_8039E84(struct Sprite *sprite);
-void sub_801236C(struct Sprite *sprite);
-void BeginBattleIntro(void);
-void SwitchInClearSetData(void);
-void FaintClearSetData(void);
-void sub_803B3AC(void); // unused
-void sub_803B598(void); // unused
-void BattleTurnPassed(void);
-u8 IsRunningFromBattleImpossible(void);
-void sub_8013F6C(u8 battlerId);
-void SwapTurnOrder(u8 id1, u8 id2);
-u8 GetWhoStrikesFirst(u8 bank1, u8 bank2, bool8 ignoreChosenMoves);
-void RunBattleScriptCommands_PopCallbacksStack(void);
-void RunBattleScriptCommands(void);
-bool8 TryRunFromBattle(u8 bank);
-void sub_800FD9C(void);
-void sub_80120C4(struct Sprite *);
-void sub_8012100(struct Sprite *);
-void nullsub_12(void);
-void SpriteCB_FaintOpponentMon(struct Sprite *sprite);
-
+extern const struct SpriteTemplate gUnknown_824EFF0;
+extern const struct OamData gOamData_824F010;
+extern const struct OamData gOamData_824F018;
+extern const u8 gTypeNames[][TYPE_NAME_LENGTH + 1];
 extern const u8 gStatusConditionString_PoisonJpn[8];
 extern const u8 gStatusConditionString_SleepJpn[8];
 extern const u8 gStatusConditionString_ParalysisJpn[8];
@@ -94,10 +56,43 @@ extern const u8 gStatusConditionString_BurnJpn[8];
 extern const u8 gStatusConditionString_IceJpn[8];
 extern const u8 gStatusConditionString_ConfusionJpn[8];
 extern const u8 gStatusConditionString_LoveJpn[8];
-
-extern const u8 * const gStatusConditionStringsTable[7][2];
-
+extern const u8 *const gStatusConditionStringsTable[7][2];
 extern const u8 gTypeEffectiveness[336];
 extern const struct TrainerMoney gTrainerMoneyTable[];
+extern const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT];
+extern const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1];
+
+void CB2_InitBattle(void);
+void BattleMainCB2(void);
+void FreeRestoreBattleData(void);
+void VBlankCB_Battle(void);
+void nullsub_9(struct Sprite *sprite);
+void sub_801182C(struct Sprite *sprite);
+void sub_8011A1C(void);
+u32 sub_8011C44(u8 arrayId, u8 caseId);
+void SpriteCB_WildMon(struct Sprite *sprite);
+void SpriteCallbackDummy2(struct Sprite *sprite);
+void SpriteCB_FaintOpponentMon(struct Sprite *sprite);
+void sub_8012044(struct Sprite *sprite);
+void sub_8012098(struct Sprite *sprite);
+void sub_80120C4(struct Sprite *sprite);
+void sub_8012100(struct Sprite *sprite);
+void sub_8012110(struct Sprite *sprite);
+void DoBounceEffect(u8 battler, u8 which, s8 delta, s8 amplitude);
+void EndBounceEffect(u8 battler, u8 which);
+void sub_8012354(struct Sprite *sprite);
+void sub_801236C(struct Sprite *sprite);
+void nullsub_12(void);
+void BeginBattleIntro(void);
+void SwitchInClearSetData(void);
+void FaintClearSetData(void);
+void BattleTurnPassed(void);
+u8 IsRunningFromBattleImpossible(void);
+void sub_8013F6C(u8 battler);
+void SwapTurnOrder(u8 id1, u8 id2);
+u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves);
+void RunBattleScriptCommands_PopCallbacksStack(void);
+void RunBattleScriptCommands(void);
+bool8 TryRunFromBattle(u8 battler);
 
 #endif // GUARD_BATTLE_MAIN_H

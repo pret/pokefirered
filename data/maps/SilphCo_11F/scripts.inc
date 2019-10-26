@@ -77,7 +77,7 @@ EventScript_161EA0:: @ 8161EA0
 	compare_var_to_value VAR_0x4001, 1
 	call_if eq, EventScript_161F12
 	setvar VAR_LAST_TALKED, 3
-	trainerbattle 3, TRAINER_BOSS_GIOVANNI_2, 0, Text_1771AB
+	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_BOSS_GIOVANNI_2, 0, Text_1771AB
 	msgbox gUnknown_81771C2
 	closemessage
 	fadescreen 1
@@ -134,11 +134,11 @@ SilphCo_11F_EventScript_161F37:: @ 8161F37
 	end
 
 SilphCo_11F_EventScript_161F40:: @ 8161F40
-	trainerbattle 0, TRAINER_TEAM_ROCKET_GRUNT_40, 0, Text_1772B8, Text_1772E7
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_TEAM_ROCKET_GRUNT_40, 0, Text_1772B8, Text_1772E7
 	msgbox gUnknown_81772F9, 6
 	end
 
 SilphCo_11F_EventScript_161F57:: @ 8161F57
-	trainerbattle 0, TRAINER_TEAM_ROCKET_GRUNT_41, 0, Text_17726A, Text_17728C
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_TEAM_ROCKET_GRUNT_41, 0, Text_17726A, Text_17728C
 	msgbox gUnknown_817729B, 6
 	end

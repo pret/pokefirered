@@ -22,11 +22,11 @@ PokemonMansion_B1F_EventScript_162320:: @ 8162320
 	end
 
 PokemonMansion_B1F_EventScript_162329:: @ 8162329
-	trainerbattle 0, TRAINER_BURGLAR_LEWIS, 0, Text_1776C0, Text_1776D7
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BURGLAR_LEWIS, 0, Text_1776C0, Text_1776D7
 	msgbox gUnknown_81776DE, 6
 	end
 
 PokemonMansion_B1F_EventScript_162340:: @ 8162340
-	trainerbattle 0, TRAINER_SCIENTIST_IVAN, 0, Text_177720, Text_177757
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SCIENTIST_IVAN, 0, Text_177720, Text_177757
 	msgbox gUnknown_817776A, 6
 	end

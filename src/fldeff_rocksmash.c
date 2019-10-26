@@ -16,6 +16,7 @@
 #include "field_map_obj.h"
 #include "constants/songs.h"
 #include "constants/map_objects.h"
+#include "constants/map_types.h"
 
 static void task08_080C9820(u8 taskId);
 static void sub_80C98FC(u8 taskId);

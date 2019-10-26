@@ -1514,7 +1514,7 @@ static void sub_8111F8C(u8 taskId)
 
     if (ScriptContext2_IsEnabled() != TRUE)
     {
-        player_bitmagic();
+        FreezeEventObjects();
         sub_805C270();
         sub_805C780();
         ScriptContext2_Enable();
@@ -1537,7 +1537,7 @@ static void sub_8111FCC(u8 taskId)
         task->data[0] = 0;
         task->data[1] = 0;
         task->func = sub_8112044;
-        player_bitmagic();
+        FreezeEventObjects();
         ScriptContext2_Enable();
     }
 }
@@ -4911,7 +4911,6 @@ static const u16 gUnknown_8456C50[] = {
         0x08a1
 };
 
-#ifdef NONMATCHING
 void sub_8115748(u16 a0)
 {
     s32 i;
@@ -4919,60 +4918,22 @@ void sub_8115748(u16 a0)
         return;
     for (i = 0; i < 17; i++)
     {
-        if (a0 != gUnknown_8456C50[i])
-            continue;
-        if (!FlagGet(a0))
-            gUnknown_203B049 = TRUE;
-        else
-            gUnknown_203B049 = FALSE;
-        break;
+        if (a0 == gUnknown_8456C50[i])
+        {
+            if (!FlagGet(a0))
+            {
+                gUnknown_203B049 = TRUE;
+                break;
+            }
+            else
+            {
+                gUnknown_203B049 += 0;
+                gUnknown_203B049 = FALSE;
+                break;
+            }
+        }
     }
 }
-#else
-NAKED
-void sub_8115748(u16 a0)
-{
-    asm_unified("\tpush {r4,lr}\n"
-                "\tlsls r0, 16\n"
-                "\tlsrs r2, r0, 16\n"
-                "\tldr r0, =gUnknown_203ADFA\n"
-                "\tldrb r0, [r0]\n"
-                "\tsubs r0, 0x2\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tcmp r0, 0x1\n"
-                "\tbls _08115792\n"
-                "\tmovs r1, 0\n"
-                "\tldr r4, =gUnknown_203B049\n"
-                "\tldr r0, =gUnknown_8456C50\n"
-                "\tb _08115778\n"
-                "\t.pool\n"
-                "_08115770:\n"
-                "\tmovs r0, 0\n"
-                "\tb _08115790\n"
-                "_08115774:\n"
-                "\tadds r0, 0x2\n"
-                "\tadds r1, 0x1\n"
-                "_08115778:\n"
-                "\tcmp r1, 0x10\n"
-                "\tbgt _08115792\n"
-                "\tldrh r3, [r0]\n"
-                "\tcmp r2, r3\n"
-                "\tbne _08115774\n"
-                "\tadds r0, r2, 0\n"
-                "\tbl FlagGet\n"
-                "\tlsls r0, 24\n"
-                "\tcmp r0, 0\n"
-                "\tbne _08115770\n"
-                "\tmovs r0, 0x1\n"
-                "_08115790:\n"
-                "\tstrb r0, [r4]\n"
-                "_08115792:\n"
-                "\tpop {r4}\n"
-                "\tpop {r0}\n"
-                "\tbx r0");
-}
-#endif // NONMATCHING
 
 void sub_8115798(void)
 {

@@ -3,7 +3,7 @@ PewterCity_Gym_MapScripts:: @ 816A592
 
 PewterCity_Gym_EventScript_16A593:: @ 816A593
 	famechecker FAMECHECKER_BROCK, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
-	trainerbattle 1, TRAINER_LEADER_BROCK, 0, Text_190CD4, Text_190E4F, EventScript_16A5C5
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT_NO_MUSIC, TRAINER_LEADER_BROCK, 0, Text_190CD4, Text_190E4F, EventScript_16A5C5
 	checkflag FLAG_GOT_TM39_FROM_BROCK
 	goto_if FALSE, EventScript_16A5F3
 	msgbox gUnknown_819110F
@@ -39,7 +39,7 @@ EventScript_16A634:: @ 816A634
 	end
 
 PewterCity_Gym_EventScript_16A63E:: @ 816A63E
-	trainerbattle 0, TRAINER_CAMPER_LIAM, 0, Text_1911EC, Text_191237
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_CAMPER_LIAM, 0, Text_1911EC, Text_191237
 	msgbox gUnknown_819126B, 6
 	end
 

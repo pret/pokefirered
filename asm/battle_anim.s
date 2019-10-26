@@ -281,9 +281,9 @@ _08072706:
 	strh r1, [r0]
 	ldr r0, _08072734 @ =gBattle_WIN0V
 	strh r1, [r0]
-	ldr r0, _08072738 @ =gUnknown_2022988
+	ldr r0, _08072738 @ =gBattle_WIN1H
 	strh r1, [r0]
-	ldr r0, _0807273C @ =gUnknown_202298A
+	ldr r0, _0807273C @ =gBattle_WIN1V
 	strh r1, [r0]
 	add sp, 0x4
 	pop {r3-r5}
@@ -298,8 +298,8 @@ _08072728: .4byte 0x0000ffff
 _0807272C: .4byte gMPlayInfo_BGM
 _08072730: .4byte gBattle_WIN0H
 _08072734: .4byte gBattle_WIN0V
-_08072738: .4byte gUnknown_2022988
-_0807273C: .4byte gUnknown_202298A
+_08072738: .4byte gBattle_WIN1H
+_0807273C: .4byte gBattle_WIN1V
 	thumb_func_end LaunchBattleAnimation
 
 	thumb_func_start DestroyAnimSprite

@@ -84,5 +84,7 @@ bool8 IsMultiBattle(void);
 void sub_8126EDC(void);
 void PartyMenuInit_FromPlayerPc(void);
 void CB2_PartyMenuFromStartMenu(void);
+void sub_8128198(void);
+void sub_8127FF4(u8 slot, u8 slot2);
 
 #endif // GUARD_PARTY_MENU_H

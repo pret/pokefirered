@@ -179,7 +179,7 @@ sub_800F324: @ 800F324
 	push {lr}
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
-	ldr r1, _0800F344 @ =gUnknown_8248320
+	ldr r1, _0800F344 @ =gBattleBgTemplates
 	movs r0, 0
 	movs r2, 0x4
 	bl InitBgsFromTemplates
@@ -189,7 +189,7 @@ sub_800F324: @ 800F324
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800F344: .4byte gUnknown_8248320
+_0800F344: .4byte gBattleBgTemplates
 _0800F348: .4byte gUnknown_8248330
 	thumb_func_end sub_800F324
 
@@ -217,8 +217,8 @@ sub_800F34C: @ 800F34C
 _0800F37C: .4byte 0x0000b040
 	thumb_func_end sub_800F34C
 
-	thumb_func_start sub_800F380
-sub_800F380: @ 800F380
+	thumb_func_start LoadBattleMenuWindowGfx
+LoadBattleMenuWindowGfx: @ 800F380
 	push {r4,r5,lr}
 	movs r0, 0x2
 	movs r1, 0x12
@@ -278,7 +278,7 @@ _0800F3FC: .4byte 0x0000675a
 _0800F400: .4byte gPlttBufferFaded + 0xB8
 _0800F404: .4byte gBattleTypeFlags
 _0800F408: .4byte 0x00010010
-	thumb_func_end sub_800F380
+	thumb_func_end LoadBattleMenuWindowGfx
 
 	thumb_func_start sub_800F40C
 sub_800F40C: @ 800F40C
@@ -309,7 +309,7 @@ LoadBattleTextboxAndBackground: @ 800F420
 	movs r1, 0
 	movs r2, 0x40
 	bl LoadCompressedPalette
-	bl sub_800F380
+	bl LoadBattleMenuWindowGfx
 	bl sub_800F40C
 	pop {r0}
 	bx r0
@@ -1143,8 +1143,8 @@ _0800FAD8: .4byte 0x000003ff
 _0800FADC: .4byte 0xfffffc00
 	thumb_func_end sub_800F6FC
 
-	thumb_func_start sub_800FAE0
-sub_800FAE0: @ 800FAE0
+	thumb_func_start DrawBattleEntryBackground
+DrawBattleEntryBackground: @ 800FAE0
 	push {r4,lr}
 	ldr r0, _0800FB64 @ =gBattleTypeFlags
 	ldr r1, [r0]
@@ -1287,7 +1287,7 @@ _0800FC26:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_800FAE0
+	thumb_func_end DrawBattleEntryBackground
 
 	thumb_func_start sub_800FC2C
 sub_800FC2C: @ 800FC2C
@@ -1459,7 +1459,7 @@ _0800FD68:
 	.align 2, 0
 _0800FD88: .4byte gUnknown_824EE34
 _0800FD8C:
-	bl sub_800F380
+	bl LoadBattleMenuWindowGfx
 	b _0800FD94
 _0800FD92:
 	movs r4, 0x1

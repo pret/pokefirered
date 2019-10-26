@@ -42,6 +42,7 @@
 #include "constants/maps.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
+#include "constants/map_types.h"
 
 EWRAM_DATA void (*sItemUseOnFieldCB)(u8 taskId) = NULL;
 
@@ -162,7 +163,7 @@ void sub_80A1184(void)
 
 bool8 sub_80A1194(void)
 {
-    player_bitmagic();
+    FreezeEventObjects();
     ScriptContext2_Enable();
     sub_807DC00();
     CreateTask(sub_80A11C0, 10);
@@ -259,7 +260,7 @@ bool8 ItemUseCheckFunc_Rod(void)
     {
         if (MetatileBehavior_IsSurfable(behavior) && !MapGridIsImpassableAt(x, y))
             return TRUE;
-        if (MetatileBehavior_ReturnFalse_6(behavior) == TRUE)
+        if (MetatileBehavior_IsBridge(behavior) == TRUE)
             return TRUE;
     }
     return FALSE;

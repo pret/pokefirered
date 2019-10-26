@@ -3,7 +3,7 @@ CeladonCity_Gym_MapScripts:: @ 816D060
 
 CeladonCity_Gym_EventScript_16D061:: @ 816D061
 	famechecker FAMECHECKER_ERIKA, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
-	trainerbattle 1, TRAINER_LEADER_ERIKA, 0, Text_197114, Text_197260, EventScript_16D0A0
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT_NO_MUSIC, TRAINER_LEADER_ERIKA, 0, Text_197114, Text_197260, EventScript_16D0A0
 	checkflag FLAG_GOT_TM19_FROM_ERIKA
 	goto_if FALSE, EventScript_16D0C6
 	famechecker FAMECHECKER_ERIKA, 4
@@ -38,39 +38,39 @@ EventScript_16D107:: @ 816D107
 	end
 
 CeladonCity_Gym_EventScript_16D111:: @ 816D111
-	trainerbattle 0, TRAINER_LASS_KAY, 0, Text_19747C, Text_1974C4
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_LASS_KAY, 0, Text_19747C, Text_1974C4
 	msgbox gUnknown_81974D6, 6
 	end
 
 CeladonCity_Gym_EventScript_16D128:: @ 816D128
-	trainerbattle 0, TRAINER_LASS_LISA, 0, Text_1976C5, Text_1976FF
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_LASS_LISA, 0, Text_1976C5, Text_1976FF
 	famechecker FAMECHECKER_ERIKA, 2
 	msgbox gUnknown_8197708, 6
 	end
 
 CeladonCity_Gym_EventScript_16D14C:: @ 816D14C
-	trainerbattle 0, TRAINER_PICNICKER_TINA, 0, Text_197595, Text_1975BB
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PICNICKER_TINA, 0, Text_197595, Text_1975BB
 	msgbox gUnknown_81975D1, 6
 	end
 
 CeladonCity_Gym_EventScript_16D163:: @ 816D163
-	trainerbattle 0, TRAINER_BEAUTY_BRIDGET, 0, Text_1974FA, Text_19751C
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BEAUTY_BRIDGET, 0, Text_1974FA, Text_19751C
 	msgbox gUnknown_8197527, 6
 	end
 
 CeladonCity_Gym_EventScript_16D17A:: @ 816D17A
-	trainerbattle 0, TRAINER_BEAUTY_TAMIA, 0, Text_19760B, Text_197660
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BEAUTY_TAMIA, 0, Text_19760B, Text_197660
 	famechecker FAMECHECKER_ERIKA, 3
 	msgbox gUnknown_8197664, 6
 	end
 
 CeladonCity_Gym_EventScript_16D19E:: @ 816D19E
-	trainerbattle 0, TRAINER_BEAUTY_LORI, 0, Text_197747, Text_19777A
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BEAUTY_LORI, 0, Text_197747, Text_19777A
 	msgbox gUnknown_8197788, 6
 	end
 
 CeladonCity_Gym_EventScript_16D1B5:: @ 816D1B5
-	trainerbattle 0, TRAINER_COOLTRAINER_MARY, 0, Text_1977E5, Text_197832
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_COOLTRAINER_MARY, 0, Text_1977E5, Text_197832
 	msgbox gUnknown_819783E, 6
 	end
 

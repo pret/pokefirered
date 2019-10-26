@@ -4012,8 +4012,8 @@ GetRfuPlayerCount: @ 80FA4EC
 _080FA4F4: .4byte gUnknown_3005450
 	thumb_func_end GetRfuPlayerCount
 
-	thumb_func_start IsRfuTaskFinished
-IsRfuTaskFinished: @ 80FA4F8
+	thumb_func_start IsLinkRfuTaskFinished
+IsLinkRfuTaskFinished: @ 80FA4F8
 	push {lr}
 	movs r1, 0
 	ldr r0, _080FA50C @ =gUnknown_3005450
@@ -4027,7 +4027,7 @@ _080FA506:
 	bx r1
 	.align 2, 0
 _080FA50C: .4byte gUnknown_3005450
-	thumb_func_end IsRfuTaskFinished
+	thumb_func_end IsLinkRfuTaskFinished
 
 	thumb_func_start sub_80FA510
 sub_80FA510: @ 80FA510

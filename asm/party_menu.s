@@ -15699,7 +15699,7 @@ sub_8126704: @ 8126704
 	cmp r4, 0
 	beq _08126754
 	bl sub_811F070
-	ldr r0, _08126750 @ =gUnknown_300537C
+	ldr r0, _08126750 @ =gCB2_AfterEvolution
 	ldr r1, [r6]
 	str r1, [r0]
 	ldrb r3, [r6, 0x9]
@@ -15713,7 +15713,7 @@ sub_8126704: @ 8126704
 	.align 2, 0
 _08126748: .4byte gUnknown_203B0A0
 _0812674C: .4byte gPlayerParty
-_08126750: .4byte gUnknown_300537C
+_08126750: .4byte gCB2_AfterEvolution
 _08126754:
 	ldr r0, _08126768 @ =gTasks
 	lsls r1, r5, 2
@@ -16248,7 +16248,7 @@ _08126BCE:
 	thumb_func_start sub_8126BD4
 sub_8126BD4: @ 8126BD4
 	push {r4,r5,lr}
-	ldr r1, _08126C10 @ =gUnknown_300537C
+	ldr r1, _08126C10 @ =gCB2_AfterEvolution
 	ldr r4, _08126C14 @ =gUnknown_203B0A0
 	ldr r0, [r4]
 	str r0, [r1]
@@ -16274,7 +16274,7 @@ sub_8126BD4: @ 8126BD4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08126C10: .4byte gUnknown_300537C
+_08126C10: .4byte gCB2_AfterEvolution
 _08126C14: .4byte gUnknown_203B0A0
 _08126C18: .4byte gSpecialVar_ItemId
 _08126C1C: .4byte gPlayerParty

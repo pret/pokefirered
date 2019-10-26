@@ -224,7 +224,7 @@ GetGroundEffectFlags_LongGrassOnSpawn: @ 8067CE8
 	push {r4,lr}
 	adds r4, r1, 0
 	ldrb r0, [r0, 0x1E]
-	bl MetatileBehavior_ReturnFalse_3
+	bl MetatileBehavior_IsLongGrass
 	lsls r0, 24
 	cmp r0, 0
 	beq _08067D00
@@ -243,7 +243,7 @@ GetGroundEffectFlags_LongGrassOnBeginStep: @ 8067D08
 	push {r4,lr}
 	adds r4, r1, 0
 	ldrb r0, [r0, 0x1E]
-	bl MetatileBehavior_ReturnFalse_3
+	bl MetatileBehavior_IsLongGrass
 	lsls r0, 24
 	cmp r0, 0
 	beq _08067D20
@@ -838,12 +838,12 @@ FieldObjectSetSpriteOamTableForLongGrass: @ 8068154
 	cmp r0, 0
 	blt _080681A8
 	ldrb r0, [r5, 0x1E]
-	bl MetatileBehavior_ReturnFalse_3
+	bl MetatileBehavior_IsLongGrass
 	lsls r0, 24
 	cmp r0, 0
 	beq _080681A8
 	ldrb r0, [r5, 0x1F]
-	bl MetatileBehavior_ReturnFalse_3
+	bl MetatileBehavior_IsLongGrass
 	lsls r0, 24
 	cmp r0, 0
 	beq _080681A8

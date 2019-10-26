@@ -613,7 +613,7 @@ static void sub_80B82C0(u8 taskId)
     {
     case 0:
         task->data[5] += 8;
-        if (task->data[5] >=  task->data[7])
+        if (task->data[5] >= task->data[7])
             task->data[5] = task->data[7];
         sub_80B843C(task);
         if (task->data[5] == task->data[7])

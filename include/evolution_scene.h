@@ -3,8 +3,8 @@
 
 #include "global.h"
 
-void BeginEvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, u8 partyID);
-void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, u8 partyID);
+void BeginEvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, u8, u8 partyID);
+void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, u8, u8 partyID);
 void TradeEvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, u8 preEvoSpriteID, u8 partyID);
 
 extern void (*gCB2_AfterEvolution)(void);

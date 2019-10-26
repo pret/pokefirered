@@ -416,8 +416,7 @@ static void sub_80B91B0(u8 taskId)
             task->data[12] = gBattle_BG1_X;
         else
             task->data[12] = gBattle_BG2_X;
-
-        var0 =  GetBattlerYCoordWithElevation(gBattleAnimAttacker);
+        var0 = GetBattlerYCoordWithElevation(gBattleAnimAttacker);
         task->data[14] = var0 - 32;
         task->data[15] = var0 + 32;
         ++task->data[0];

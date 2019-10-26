@@ -3,7 +3,7 @@ CeruleanCity_Gym_MapScripts:: @ 816AAA0
 
 CeruleanCity_Gym_EventScript_16AAA1:: @ 816AAA1
 	famechecker FAMECHECKER_MISTY, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
-	trainerbattle 1, TRAINER_LEADER_MISTY, 0, Text_1921EF, Text_19242D, EventScript_16AAD3
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT_NO_MUSIC, TRAINER_LEADER_MISTY, 0, Text_1921EF, Text_19242D, EventScript_16AAD3
 	checkflag FLAG_GOT_TM03_FROM_MISTY
 	goto_if FALSE, EventScript_16AAF9
 	msgbox gUnknown_81922BF
@@ -37,12 +37,12 @@ EventScript_16AB3A:: @ 816AB3A
 	end
 
 CeruleanCity_Gym_EventScript_16AB44:: @ 816AB44
-	trainerbattle 0, TRAINER_PICNICKER_DIANA, 0, Text_192481, Text_1924D0
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PICNICKER_DIANA, 0, Text_192481, Text_1924D0
 	msgbox gUnknown_81924E4, 6
 	end
 
 CeruleanCity_Gym_EventScript_16AB5B:: @ 816AB5B
-	trainerbattle 0, TRAINER_SWIMMER_MALE_LUIS, 0, Text_192524, Text_192547
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SWIMMER_MALE_LUIS, 0, Text_192524, Text_192547
 	famechecker FAMECHECKER_MISTY, 2
 	msgbox gUnknown_8192556, 6
 	end

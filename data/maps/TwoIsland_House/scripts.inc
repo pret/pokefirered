@@ -98,7 +98,7 @@ EventScript_171741:: @ 8171741
 EventScript_17175B:: @ 817175B
 	message Text_1A2D43
 	waitmessage
-	multichoice 0, 0, 51, 1
+	multichoice 0, 0, MULTICHOICE_MUSHROOMS, TRUE
 	switch VAR_RESULT
 	case 0, EventScript_171741
 	case 1, EventScript_171727

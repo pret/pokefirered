@@ -141,7 +141,7 @@ SECTIONS {
         src/item.o(.text);
         asm/shop.o(.text);
         src/berry.o(.text);
-        asm/script_menu.o(.text);
+        src/script_menu.o(.text);
         asm/naming_screen.o(.text);
         src/money.o(.text);
         asm/script_pokemon_util_80A0058.o(.text);
@@ -431,6 +431,8 @@ SECTIONS {
         src/battle_anim_mon_movement.o(.rodata);
         src/item.o(.rodata);
         data/data_835B488.o(.rodata.83DF09C);
+        src/script_menu.o(.rodata);
+        data/data_835B488.o(.rodata.83E2280);
         src/flying.o(.rodata);
         src/psychic.o(.rodata);
         src/bug.o(.rodata);

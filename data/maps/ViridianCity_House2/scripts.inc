@@ -56,7 +56,7 @@ ViridianCity_House2_EventScript_16A11D:: @ 816A11D
 EventScript_16A12C:: @ 816A12C
 	message Text_18FF88
 	waitmessage
-	multichoicegrid 7, 1, 15, 3, 0
+	multichoicegrid 7, 1, MULTICHOICE_TRAINER_SCHOOL_WHITEBOARD, 3, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_16A18B
 	case 1, EventScript_16A1A7

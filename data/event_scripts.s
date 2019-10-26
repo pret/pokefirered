@@ -16,6 +16,7 @@
 #include "constants/fame_checker.h"
 #include "constants/seagallop.h"
 #include "constants/game_stat.h"
+#include "constants/menu.h"
 #include "constants/battle_setup.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
@@ -24,9 +25,9 @@
 
 	.section script_data, "aw", %progbits
 
-    .include "data/script_cmd_table.inc"
+	.include "data/script_cmd_table.inc"
 
-    .align 2
+	.align 2
 gSpecialVars:: @ 815FD0C
 	.4byte gSpecialVar_0x8000
 	.4byte gSpecialVar_0x8001
@@ -50,9 +51,9 @@ gSpecialVars:: @ 815FD0C
 	.4byte gSpecialVar_PrevTextColor
 	.4byte gUnknown_20370DE
 
-    .include "data/specials.inc"
+	.include "data/specials.inc"
 
-    .align 2
+	.align 2
 gStdScripts:: @ 8160450
 	.4byte gStdScript_0
 	.4byte gStdScript_1
@@ -1593,11 +1594,11 @@ EventScript_1A6578:: @ 81A6578
 	goto_if eq, EventScript_1A7AE0
 	message Text_1A5483
 	waitmessage
-	multichoice 19, 8, 0, 2
+	multichoice 19, 8, MULTICHOICE_YES_NO, FALSE | (TRUE << 1)
 	switch VAR_RESULT
 	case 0, EventScript_1A65B8
 	case 1 EventScript_1A6663
-	case 127, EventScript_1A6663
+	case SCR_MENU_CANCEL, EventScript_1A6663
 	end
 
 EventScript_1A65B8:: @ 81A65B8
@@ -1950,7 +1951,7 @@ EventScript_1A69A8:: @ 81A69A8
 	case 2, EventScript_1A6A7A
 	case 3, EventScript_1A6A56
 	case 4, EventScript_1A6A46
-	case 127, EventScript_1A6A46
+	case SCR_MENU_CANCEL, EventScript_1A6A46
 	end
 
 EventScript_1A69F0:: @ 81A69F0
@@ -4160,22 +4161,22 @@ EventScript_1A8EC5:: @ 81A8EC5
 	goto_if ge, EventScript_1A911E
 	compare_var_to_value VAR_MAP_SCENE_CINNABAR_ISLAND, 4
 	goto_if ge, EventScript_1A8F12
-	multichoice 19, 6, 44, 0
+	multichoice 19, 6, MULTICHOICE_ISLAND_23, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1A8FF9
 	case 1, EventScript_1A9004
 	case 2, EventScript_1A90F6
-	case 127, EventScript_1A90F6
+	case SCR_MENU_CANCEL, EventScript_1A90F6
 	end
 
 EventScript_1A8F12:: @ 81A8F12
-	multichoice 19, 5, 58, 0
+	multichoice 19, 5, MULTICHOICE_SEAGALLOP_V23, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1A8FE3
 	case 1, EventScript_1A8FF9
 	case 2, EventScript_1A9004
 	case 3, EventScript_1A90F6
-	case 127, EventScript_1A90F6
+	case SCR_MENU_CANCEL, EventScript_1A90F6
 	end
 
 EventScript_1A8F54:: @ 81A8F54
@@ -4183,22 +4184,22 @@ EventScript_1A8F54:: @ 81A8F54
 	goto_if ge, EventScript_1A911E
 	compare_var_to_value VAR_MAP_SCENE_CINNABAR_ISLAND, 4
 	goto_if ge, EventScript_1A8FA1
-	multichoice 19, 6, 45, 0
+	multichoice 19, 6, MULTICHOICE_ISLAND_13, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1A8FEE
 	case 1, EventScript_1A9004
 	case 2, EventScript_1A90F6
-	case 127, EventScript_1A90F6
+	case SCR_MENU_CANCEL, EventScript_1A90F6
 	end
 
 EventScript_1A8FA1:: @ 81A8FA1
-	multichoice 19, 5, 59, 0
+	multichoice 19, 5, MULTICHOICE_SEAGALLOP_V13, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1A8FE3
 	case 1, EventScript_1A8FEE
 	case 2, EventScript_1A9004
 	case 3, EventScript_1A90F6
-	case 127, EventScript_1A90F6
+	case SCR_MENU_CANCEL, EventScript_1A90F6
 	end
 
 EventScript_1A8FE3:: @ 81A8FE3
@@ -4226,22 +4227,22 @@ EventScript_1A900F:: @ 81A900F
 	goto_if ge, EventScript_1A911E
 	compare_var_to_value VAR_MAP_SCENE_CINNABAR_ISLAND, 4
 	goto_if ge, EventScript_1A905C
-	multichoice 19, 6, 46, 0
+	multichoice 19, 6, MULTICHOICE_ISLAND_12, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1A8FEE
 	case 1, EventScript_1A8FF9
 	case 2, EventScript_1A90F6
-	case 127, EventScript_1A90F6
+	case SCR_MENU_CANCEL, EventScript_1A90F6
 	end
 
 EventScript_1A905C:: @ 81A905C
-	multichoice 19, 5, 60, 0
+	multichoice 19, 5, MULTICHOICE_SEAGALLOP_V12, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1A8FE3
 	case 1, EventScript_1A8FEE
 	case 2, EventScript_1A8FF9
 	case 3, EventScript_1A90F6
-	case 127, EventScript_1A90F6
+	case SCR_MENU_CANCEL, EventScript_1A90F6
 	end
 
 EventScript_1A909E:: @ 81A909E
@@ -4271,7 +4272,7 @@ EventScript_1A90DA:: @ 81A90DA
 	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	fadescreen 1
-	special ScrSpecial_SeaGallopFerry
+	special ScrSpecial_SeagallopFerry
 	waitstate
 	end
 
@@ -4296,31 +4297,31 @@ Movement_1A911C:: @ 81A911C
 
 EventScript_1A911E:: @ 81A911E
 	setvar VAR_0x8005, 0
-	special sub_809D764
+	special Special_DrawSeagallopDestinationMenu
 	waitstate
-	specialvar VAR_0x8006, sub_809D8C0
+	specialvar VAR_0x8006, Special_GetSelectedSeagallopDestination
 	switch VAR_0x8006
-	case 0, EventScript_1A91D5
-	case 1, EventScript_1A91E0
-	case 2, EventScript_1A91EB
-	case 3, EventScript_1A91F6
-	case 4, EventScript_1A9201
-	case 254, EventScript_1A917F
-	case 127, EventScript_1A90F6
+	case SEAGALLOP_VERMILION_CITY, EventScript_1A91D5
+	case SEAGALLOP_ONE_ISLAND,     EventScript_1A91E0
+	case SEAGALLOP_TWO_ISLAND,     EventScript_1A91EB
+	case SEAGALLOP_THREE_ISLAND,   EventScript_1A91F6
+	case SEAGALLOP_FOUR_ISLAND,    EventScript_1A9201
+	case SEAGALLOP_MORE,           EventScript_1A917F
+	case SCR_MENU_CANCEL, EventScript_1A90F6
 	end
 
 EventScript_1A917F:: @ 81A917F
 	setvar VAR_0x8005, 1
-	special sub_809D764
+	special Special_DrawSeagallopDestinationMenu
 	waitstate
-	specialvar VAR_0x8006, sub_809D8C0
+	specialvar VAR_0x8006, Special_GetSelectedSeagallopDestination
 	switch VAR_0x8006
-	case 4, EventScript_1A9201
-	case 5, EventScript_1A920C
-	case 6, EventScript_1A9217
-	case 7, EventScript_1A9222
-	case 254, EventScript_1A911E
-	case 127, EventScript_1A90F6
+	case SEAGALLOP_FOUR_ISLAND,  EventScript_1A9201
+	case SEAGALLOP_FIVE_ISLAND,  EventScript_1A920C
+	case SEAGALLOP_SIX_ISLAND,   EventScript_1A9217
+	case SEAGALLOP_SEVEN_ISLAND, EventScript_1A9222
+	case SEAGALLOP_MORE,           EventScript_1A911E
+	case SCR_MENU_CANCEL, EventScript_1A90F6
 	end
 
 EventScript_1A91D5:: @ 81A91D5
@@ -7877,7 +7878,7 @@ CeladonCity_GameCorner_EventScript_1B2867:: @ 81B2867
 	waitse
 	message gUnknown_81B1E24
 	waitmessage
-	multichoice 21, 0, 2, 1
+	multichoice 21, 0, MULTICHOICE_TRAINER_CARD_ICON_TINT, TRUE
 	switch VAR_RESULT
 	case 0, EventScript_1B28DB
 	case 1, EventScript_1B28E6
@@ -8003,64 +8004,64 @@ EventScript_1B29D0:: @ 81B29D0
 	end
 
 EventScript_1B2A23:: @ 81B2A23
-	multichoice 15, 8, 3, 0
+	multichoice 15, 8, MULTICHOICE_HOF_QUIT, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1B2B98
 	case 1, EventScript_1B2DF6
-	case 127, EventScript_1B2DF6
+	case SCR_MENU_CANCEL, EventScript_1B2DF6
 	end
 
 EventScript_1B2A4F:: @ 81B2A4F
-	multichoice 16, 8, 4, 0
+	multichoice 16, 8, MULTICHOICE_EGGS_QUIT, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1B2C62
 	case 1, EventScript_1B2DF6
-	case 127, EventScript_1B2DF6
+	case SCR_MENU_CANCEL, EventScript_1B2DF6
 	end
 
 EventScript_1B2A7B:: @ 81B2A7B
-	multichoice 15, 8, 5, 0
+	multichoice 15, 8, MULTICHOICE_VICTORIES_QUIT, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1B2D2C
 	case 1, EventScript_1B2DF6
-	case 127, EventScript_1B2DF6
+	case SCR_MENU_CANCEL, EventScript_1B2DF6
 	end
 
 EventScript_1B2AA7:: @ 81B2AA7
-	multichoice 15, 6, 6, 0
+	multichoice 15, 6, MULTICHOICE_HOF_EGGS_QUIT, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1B2B98
 	case 1, EventScript_1B2C62
 	case 2, EventScript_1B2DF6
-	case 127, EventScript_1B2DF6
+	case SCR_MENU_CANCEL, EventScript_1B2DF6
 	end
 
 EventScript_1B2ADE:: @ 81B2ADE
-	multichoice 15, 6, 7, 0
+	multichoice 15, 6, MULTICHOICE_HOF_VICTORIES_QUIT, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1B2B98
 	case 1, EventScript_1B2D2C
 	case 2, EventScript_1B2DF6
-	case 127, EventScript_1B2DF6
+	case SCR_MENU_CANCEL, EventScript_1B2DF6
 	end
 
 EventScript_1B2B15:: @ 81B2B15
-	multichoice 15, 6, 8, 0
+	multichoice 15, 6, MULTICHOICE_EGGS_VICTORIES_QUIT, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1B2C62
 	case 1, EventScript_1B2D2C
 	case 2, EventScript_1B2DF6
-	case 127, EventScript_1B2DF6
+	case SCR_MENU_CANCEL, EventScript_1B2DF6
 	end
 
 EventScript_1B2B4C:: @ 81B2B4C
-	multichoice 15, 5, 9, 0
+	multichoice 15, 5, MULTICHOICE_HOF_EGGS_VICTORIES_QUIT, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1B2B98
 	case 1, EventScript_1B2C62
 	case 2, EventScript_1B2D2C
 	case 3, EventScript_1B2DF6
-	case 127, EventScript_1B2DF6
+	case SCR_MENU_CANCEL, EventScript_1B2DF6
 	end
 
 EventScript_1B2B8E:: @ 81B2B8E
@@ -8369,16 +8370,14 @@ ThreeIsland_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
 TwoIsland_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
 VermilionCity_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
 ViridianCity_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
-	multichoice 64, 1, 0, 39
-	showelevmenu
-	compare_local_to_local 8, 111
-	setdivewarp MAP_NAVEL_ROCK_EXTERIOR, 39, 7090, 28424
-	setdivewarp MAP_VIRIDIAN_CITY_HOUSE1, 39, 7090, 28424
-	setdivewarp MAP_PALLET_TOWN, 39, 7090, 28424
-	setdivewarp MAP_PEWTER_CITY_MUSEUM_1F, 39, 7090, 28424
-	setdivewarp MAP_CERULEAN_CITY_HOUSE1, 39, 7090, 28424
-	setdivewarp MAP_LAVENDER_TOWN_POKEMON_CENTER_1F, 39, 7090, 8
-	nop
+	map_script_2 VAR_0x406F, 1, EventScript_1BB227
+	map_script_2 VAR_0x406F, 2, EventScript_1BB227
+	map_script_2 VAR_0x406F, 5, EventScript_1BB227
+	map_script_2 VAR_0x406F, 3, EventScript_1BB227
+	map_script_2 VAR_0x406F, 6, EventScript_1BB227
+	map_script_2 VAR_0x406F, 7, EventScript_1BB227
+	map_script_2 VAR_0x406F, 8, EventScript_1BB227
+	.2byte 0
 
 EventScript_1BB227:: @ 81BB227
 	compare_var_to_value VAR_0x8007, 0
@@ -8608,12 +8607,12 @@ EventScript_1BB459:: @ 81BB459
 
 EventScript_1BB467:: @ 81BB467
 	setvar VAR_0x8004, 0
-	multichoice 0, 0, 39, 0
+	multichoice 0, 0, MULTICHOICE_TRADE_CENTER_COLOSSEUM, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1BB6AB
 	case 1, EventScript_1BB4A3
 	case 2, EventScript_1BB82F
-	case 127, EventScript_1BB82F
+	case SCR_MENU_CANCEL, EventScript_1BB82F
 	end
 
 EventScript_1BB4A3:: @ 81BB4A3
@@ -8626,14 +8625,14 @@ EventScript_1BB4AD:: @ 81BB4AD
 EventScript_1BB4AE:: @ 81BB4AE
 	message Text_1BD338
 	waitmessage
-	multichoice 0, 0, 17, 0
+	multichoice 0, 0, MULTICHOICE_SINGLE_DOUBLE_MULTI_INFO_EXIT, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1BB50F
 	case 1, EventScript_1BB51A
 	case 2, EventScript_1BB541
 	case 3, EventScript_1BB501
 	case 4, EventScript_1BB82F
-	case 127, EventScript_1BB82F
+	case SCR_MENU_CANCEL, EventScript_1BB82F
 	end
 
 EventScript_1BB501:: @ 81BB501
@@ -9199,12 +9198,12 @@ EventScript_1BBA50:: @ 81BBA50
 	end
 
 EventScript_1BBA51:: @ 81BBA51
-	multichoice 18, 6, 16, 0
+	multichoice 18, 6, MULTICHOICE_YES_NO_INFO, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1BBA94
 	case 1, EventScript_1BB82F
 	case 2, EventScript_1BBA88
-	case 127, EventScript_1BB82F
+	case SCR_MENU_CANCEL, EventScript_1BB82F
 	end
 
 EventScript_1BBA88:: @ 81BBA88
@@ -9323,22 +9322,22 @@ EventScript_1BBBE6:: @ 81BBBE6
 EventScript_1BBBE7:: @ 81BBBE7
 	checkflag FLAG_GOT_POWDER_JAR
 	goto_if FALSE, EventScript_1BBC32
-	multichoice 0, 0, 47, 0
+	multichoice 0, 0, MULTICHOICE_TRADE_COLOSSEUM_CRUSH, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1BBC69
 	case 1, EventScript_1BBC97
 	case 2, EventScript_1BBD35
 	case 3, EventScript_1BB82F
-	case 127, EventScript_1BB82F
+	case SCR_MENU_CANCEL, EventScript_1BB82F
 	end
 
 EventScript_1BBC32:: @ 81BBC32
-	multichoice 0, 0, 50, 0
+	multichoice 0, 0, MULTICHOICE_TRADE_COLOSSEUM_2, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1BBC69
 	case 1, EventScript_1BBC97
 	case 2, EventScript_1BB82F
-	case 127, EventScript_1BB82F
+	case SCR_MENU_CANCEL, EventScript_1BB82F
 	end
 
 EventScript_1BBC69:: @ 81BBC69
@@ -9357,14 +9356,14 @@ EventScript_1BBC96:: @ 81BBC96
 EventScript_1BBC97:: @ 81BBC97
 	message Text_1BD338
 	waitmessage
-	multichoice 0, 0, 17, 0
+	multichoice 0, 0, MULTICHOICE_SINGLE_DOUBLE_MULTI_INFO_EXIT, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1BBCEA
 	case 1, EventScript_1BBCF5
 	case 2, EventScript_1BBD1C
 	case 3, EventScript_1BBD27
 	case 4, EventScript_1BB82F
-	case 127, EventScript_1BB82F
+	case SCR_MENU_CANCEL, EventScript_1BB82F
 	end
 
 EventScript_1BBCEA:: @ 81BBCEA
@@ -9442,12 +9441,12 @@ EventScript_1BBDBC:: @ 81BBDBC
 	message Text_1BD51B
 	waitmessage
 	call EventScript_1A6675
-	multichoice 13, 6, 63, 0
+	multichoice 13, 6, MULTICHOICE_JOIN_OR_LEAD, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1BBE28
 	case 1, EventScript_1BBE00
 	case 2, EventScript_1BB82F
-	case 127, EventScript_1BB82F
+	case SCR_MENU_CANCEL, EventScript_1BB82F
 	end
 
 EventScript_1BBE00:: @ 81BBE00
@@ -9477,12 +9476,12 @@ EventScript_1BBE50:: @ 81BBE50
 	message Text_1BD582
 	waitmessage
 	call EventScript_1A6675
-	multichoice 13, 6, 63, 0
+	multichoice 13, 6, MULTICHOICE_JOIN_OR_LEAD, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1BBEBC
 	case 1, EventScript_1BBE94
 	case 2, EventScript_1BB82F
-	case 127, EventScript_1BB82F
+	case SCR_MENU_CANCEL, EventScript_1BB82F
 	end
 
 EventScript_1BBE94:: @ 81BBE94
@@ -9512,12 +9511,12 @@ EventScript_1BBEE4:: @ 81BBEE4
 	message Text_1BD5F1
 	waitmessage
 	call EventScript_1A6675
-	multichoice 13, 6, 63, 0
+	multichoice 13, 6, MULTICHOICE_JOIN_OR_LEAD, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1BBF50
 	case 1, EventScript_1BBF28
 	case 2, EventScript_1BB82F
-	case 127, EventScript_1BB82F
+	case SCR_MENU_CANCEL, EventScript_1BB82F
 	end
 
 EventScript_1BBF28:: @ 81BBF28
@@ -9659,12 +9658,12 @@ EventScript_1BC060:: @ 81BC060
 	faceplayer
 	message Text_1BCCFF
 	waitmessage
-	multichoice 0, 0, 49, 0
+	multichoice 0, 0, MULTICHOICE_POKEJUMP_DODRIO, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1BC0B0
 	case 1, EventScript_1BC0BA
 	case 2, EventScript_1BC0C4
-	case 127, EventScript_1BC0C4
+	case SCR_MENU_CANCEL, EventScript_1BC0C4
 	end
 
 EventScript_1BC0B0:: @ 81BC0B0
@@ -9698,12 +9697,12 @@ EventScript_1BC0CE:: @ 81BC0CE
 	special HelpSystem_Disable
 	message Text_1BD02D
 	waitmessage
-	multichoice 0, 0, 49, 0
+	multichoice 0, 0, MULTICHOICE_POKEJUMP_DODRIO, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1BC13A
 	case 1, EventScript_1BC184
 	case 2, EventScript_1BB83F
-	case 127, EventScript_1BB83F
+	case SCR_MENU_CANCEL, EventScript_1BB83F
 	end
 
 EventScript_1BC13A:: @ 81BC13A
@@ -9751,12 +9750,12 @@ EventScript_1BC1CE:: @ 81BC1CE
 	message Text_1BD5F1
 	waitmessage
 	call EventScript_1A6675
-	multichoice 13, 6, 63, 0
+	multichoice 13, 6, MULTICHOICE_JOIN_OR_LEAD, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1BC23A
 	case 1, EventScript_1BC212
 	case 2, EventScript_1BB83F
-	case 127, EventScript_1BB83F
+	case SCR_MENU_CANCEL, EventScript_1BB83F
 	end
 
 EventScript_1BC212:: @ 81BC212
@@ -11303,12 +11302,12 @@ EventScript_1BEE3A:: @ 81BEE3A
 EventScript_1BEE44:: @ 81BEE44
 	message Text_1BF017
 	waitmessage
-	multichoice 18, 6, 18, 0
+	multichoice 18, 6, MULTICHOICE_YES_NO_INFO_2, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1BEE8F
 	case 1, EventScript_1BEEC3
 	case 2, EventScript_1BEE81
-	case 127, EventScript_1BEEC3
+	case SCR_MENU_CANCEL, EventScript_1BEEC3
 	end
 
 EventScript_1BEE81:: @ 81BEE81
@@ -11350,12 +11349,12 @@ EventScript_1BEECD:: @ 81BEECD
 EventScript_1BEEDB:: @ 81BEEDB
 	message Text_1BF1FB
 	waitmessage
-	multichoice 18, 6, 18, 0
+	multichoice 18, 6, MULTICHOICE_YES_NO_INFO_2, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1BEF26
 	case 1, EventScript_1BEF35
 	case 2, EventScript_1BEF18
-	case 127, EventScript_1BEF35
+	case SCR_MENU_CANCEL, EventScript_1BEF35
 	end
 
 EventScript_1BEF18:: @ 81BEF18
@@ -13429,7 +13428,7 @@ VictoryRoad_2F_EventScript_1C47AE:: @ 81C47AE
 	goto_if eq, EventScript_1C4802
 	setflag FLAG_TUTOR_DOUBLE_EDGE
 	goto EventScript_1C480C
-    end
+	end
 
 EventScript_1C4802:: @ 81C4802
 	msgbox Text_174ABC
@@ -13459,7 +13458,7 @@ EventScript_1C4816:: @ 81C4816
 	goto_if eq, EventScript_1C486A
 	setflag FLAG_TUTOR_THUNDER_WAVE
 	goto EventScript_1C4874
-    end
+	end
 
 EventScript_1C486A:: @ 81C486A
 	msgbox Text_17579D
@@ -13489,7 +13488,7 @@ RockTunnel_B1F_EventScript_1C487E:: @ 81C487E
 	goto_if eq, EventScript_1C48D2
 	setflag FLAG_TUTOR_ROCK_SLIDE
 	goto EventScript_1C48DC
-    end
+	end
 
 EventScript_1C48D2:: @ 81C48D2
 	msgbox Text_179AC0
@@ -13519,7 +13518,7 @@ MtEmber_Exterior_EventScript_1C48E6:: @ 81C48E6
 	goto_if eq, EventScript_1C493A
 	setflag FLAG_TUTOR_EXPLOSION
 	goto EventScript_1C4944
-    end
+	end
 
 EventScript_1C493A:: @ 81C493A
 	msgbox Text_17A6ED
@@ -13549,7 +13548,7 @@ Route4_EventScript_1C494E:: @ 81C494E
 	goto_if eq, EventScript_1C49A2
 	setflag FLAG_TUTOR_META_PUNCH
 	goto EventScript_1C49AC
-    end
+	end
 
 EventScript_1C49A2:: @ 81C49A2
 	msgbox Text_183A83
@@ -13579,7 +13578,7 @@ Route4_EventScript_1C49B6:: @ 81C49B6
 	goto_if eq, EventScript_1C4A0A
 	setflag FLAG_TUTOR_MEGA_KICK
 	goto EventScript_1C4A14
-    end
+	end
 
 EventScript_1C4A0A:: @ 81C4A0A
 	msgbox Text_183C25
@@ -13609,7 +13608,7 @@ EventScript_1C4A1E:: @ 81C4A1E
 	goto_if eq, EventScript_1C4A72
 	setflag FLAG_TUTOR_DREAM_EATER
 	goto EventScript_1C4A7C
-    end
+	end
 
 EventScript_1C4A72:: @ 81C4A72
 	msgbox Text_17E3E9
@@ -13639,7 +13638,7 @@ EventScript_1C4A86:: @ 81C4A86
 	goto_if eq, EventScript_1C4ADA
 	setflag FLAG_TUTOR_SOFT_BOILED
 	goto EventScript_1C4AE4
-    end
+	end
 
 EventScript_1C4ADA:: @ 81C4ADA
 	msgbox Text_18043F
@@ -13669,7 +13668,7 @@ FuchsiaCity_EventScript_1C4AEE:: @ 81C4AEE
 	goto_if eq, EventScript_1C4B42
 	setflag FLAG_TUTOR_SUBSTITUTE
 	goto EventScript_1C4B4C
-    end
+	end
 
 EventScript_1C4B42:: @ 81C4B42
 	msgbox Text_180A32
@@ -13699,7 +13698,7 @@ SevenIsland_EventScript_1C4B56:: @ 81C4B56
 	goto_if eq, EventScript_1C4BAA
 	setflag FLAG_TUTOR_SWORDS_DANCE
 	goto EventScript_1C4BB4
-    end
+	end
 
 EventScript_1C4BAA:: @ 81C4BAA
 	msgbox Text_182FC1
@@ -13729,7 +13728,7 @@ PewterCity_Museum_1F_EventScript_1C4BBE:: @ 81C4BBE
 	goto_if eq, EventScript_1C4C12
 	setflag FLAG_TUTOR_SEISMIC_TOSS
 	goto EventScript_1C4C1C
-    end
+	end
 
 EventScript_1C4C12:: @ 81C4C12
 	msgbox Text_190AA9
@@ -13759,7 +13758,7 @@ EventScript_1C4C26:: @ 81C4C26
 	goto_if eq, EventScript_1C4C7A
 	setflag FLAG_TUTOR_COUNTER
 	goto EventScript_1C4C84
-    end
+	end
 
 EventScript_1C4C7A:: @ 81C4C7A
 	msgbox Text_1959CC
@@ -13789,7 +13788,7 @@ EventScript_1C4C8E:: @ 81C4C8E
 	goto_if eq, EventScript_1C4CE2
 	setflag FLAG_TUTOR_METRONOME
 	goto EventScript_1C4CEC
-    end
+	end
 
 EventScript_1C4CE2:: @ 81C4CE2
 	msgbox Text_19A1CB
@@ -13820,7 +13819,7 @@ EventScript_1C4CF6:: @ 81C4CF6
 	removeitem ITEM_POKE_DOLL, 1
 	setflag FLAG_TUTOR_MIMIC
 	goto EventScript_1C4D59
-    end
+	end
 
 EventScript_1C4D4F:: @ 81C4D4F
 	msgbox Text_19ADD8
@@ -13862,7 +13861,7 @@ FourIsland_House1_EventScript_1C4D84:: @ 81C4D84
 	goto_if eq, EventScript_1C4DD8
 	setflag FLAG_TUTOR_BODY_SLAM
 	goto EventScript_1C4DE2
-    end
+	end
 
 EventScript_1C4DD8:: @ 81C4DD8
 	msgbox Text_1A35C7
@@ -14503,7 +14502,7 @@ gText_PlayerSavedTheGame:: @ 81C5647
 	.string "{PLAYER} saved the game.$"
 
 gUnknown_81C565A::
-    .string "セーブに　しっぱい　しました‥$"
+	.string "セーブに　しっぱい　しました‥$"
 
 gText_DifferentGameFile:: @ 81C566A
 	.string "WARNING!\p"

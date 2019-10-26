@@ -248,7 +248,7 @@ EventScript_1707CA:: @ 81707CA
 EventScript_1707D8:: @ 81707D8
 	message Text_1A0479
 	waitmessage
-	multichoice 0, 0, 1, 0
+	multichoice 0, 0, MULTICHOICE_EEVEELUTIONS, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_17082B
 	case 1, EventScript_170840

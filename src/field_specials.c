@@ -141,17 +141,17 @@ u8 Special_GetPlayerTrainerIdOnesDigit(void)
 void Special_BufferBigGuyOrBigGirlString(void)
 {
     if (gSaveBlock2Ptr->playerGender == MALE)
-        StringCopy(gStringVar1, gUnknown_8417FBB);
+        StringCopy(gStringVar1, gText_BigGuy);
     else
-        StringCopy(gStringVar1, gUnknown_8417FC3);
+        StringCopy(gStringVar1, gText_BigGirl);
 }
 
 void Special_BufferSonOrDaughterString(void)
 {
     if (gSaveBlock2Ptr->playerGender == MALE)
-        StringCopy(gStringVar1, gUnknown_8417FD0);
+        StringCopy(gStringVar1, gText_Son);
     else
-        StringCopy(gStringVar1, gUnknown_8417FCC);
+        StringCopy(gStringVar1, gText_Daughter);
 }
 
 u8 Special_GetBattleOutcome(void)
@@ -729,22 +729,22 @@ static const struct WindowTemplate sElevatorCurrentFloorWindowTemplate = {
 };
 
 static const u8 *const sFloorNamePointers[] = {
-    gUnknown_8418069,
-    gUnknown_8418065,
-    gUnknown_8418061,
-    gUnknown_841805D,
-    gUnknown_841803A,
-    gUnknown_841803D,
-    gUnknown_8418040,
-    gUnknown_8418043,
-    gUnknown_8418046,
-    gUnknown_8418049,
-    gUnknown_841804C,
-    gUnknown_841804F,
-    gUnknown_8418052,
-    gUnknown_8418055,
-    gUnknown_8418059,
-    gUnknown_841806D
+    gText_B4F,
+    gText_B3F,
+    gText_B2F,
+    gText_B1F,
+    gText_1F,
+    gText_2F,
+    gText_3F,
+    gText_4F,
+    gText_5F,
+    gText_6F,
+    gText_7F,
+    gText_8F,
+    gText_9F,
+    gText_10F,
+    gText_11F,
+    gText_Rooftop
 };
 
 static const u8 sUnused_83F5B84[] = {
@@ -1064,12 +1064,12 @@ void Special_DrawElevatorCurrentFloorWindow(void)
 {
     const u8 *floorname;
     u32 strwidth;
-    if (sub_81119D4(sub_809D6D4) != TRUE)
+    if (QuestLog_SchedulePlaybackCB(QLPlaybackCB_DestroyScriptMenuMonPicSprites) != TRUE)
     {
         sElevatorCurrentFloorWindowId = AddWindow(&sElevatorCurrentFloorWindowTemplate);
         TextWindow_SetStdFrame0_WithPal(sElevatorCurrentFloorWindowId, 0x21D, 0xD0);
         DrawStdFrameWithCustomTileAndPalette(sElevatorCurrentFloorWindowId, FALSE, 0x21D, 0xD);
-        AddTextPrinterParameterized(sElevatorCurrentFloorWindowId, 2, gUnknown_8418075, 0, 2, 0xFF, NULL);
+        AddTextPrinterParameterized(sElevatorCurrentFloorWindowId, 2, gText_NowOn, 0, 2, 0xFF, NULL);
         floorname = sFloorNamePointers[gSpecialVar_0x8005];
         strwidth = GetStringWidth(2, floorname, 0);
         AddTextPrinterParameterized(sElevatorCurrentFloorWindowId, 2, floorname, 56 - strwidth, 16, 0xFF, NULL);
@@ -1137,7 +1137,7 @@ void Special_ListMenu(void)
 {
     u8 taskId;
     struct Task * task;
-    if (sub_81119D4(sub_809D6D4) != TRUE)
+    if (QuestLog_SchedulePlaybackCB(QLPlaybackCB_DestroyScriptMenuMonPicSprites) != TRUE)
     {
         taskId = CreateTask(Task_CreateScriptListMenu, 8);
         task = &gTasks[taskId];
@@ -1227,61 +1227,61 @@ void Special_ListMenu(void)
 
 static const u8 *const sListMenuLabels[][12] = {
     {
-        gUnknown_8417FD9,
-        gUnknown_8417FE6,
-        gUnknown_8417FF3,
-        gUnknown_8418000,
-        gUnknown_841800D,
-        gUnknown_8418017,
-        gUnknown_8418022,
-        gUnknown_841802F,
+        gText_BoulderBadge,
+        gText_CascadeBadge,
+        gText_ThunderBadge,
+        gText_RainbowBadge,
+        gText_SoulBadge,
+        gText_MarshBadge,
+        gText_VolcanoBadge,
+        gText_EarthBadge,
         gOtherText_Exit,
     }, {
-        gUnknown_8418059,
-        gUnknown_8418055,
-        gUnknown_8418052,
-        gUnknown_841804F,
-        gUnknown_841804C,
-        gUnknown_8418049,
-        gUnknown_8418046,
-        gUnknown_8418043,
-        gUnknown_8418040,
-        gUnknown_841803D,
-        gUnknown_841803A,
+        gText_11F,
+        gText_10F,
+        gText_9F,
+        gText_8F,
+        gText_7F,
+        gText_6F,
+        gText_5F,
+        gText_4F,
+        gText_3F,
+        gText_2F,
+        gText_1F,
         gOtherText_Exit,
     }, {
-        gUnknown_841805D,
-        gUnknown_8418061,
-        gUnknown_8418069,
+        gText_B1F,
+        gText_B2F,
+        gText_B4F,
         gOtherText_Exit,
     }, {
-        gUnknown_8418046,
-        gUnknown_8418043,
-        gUnknown_8418040,
-        gUnknown_841803D,
-        gUnknown_841803A,
+        gText_5F,
+        gText_4F,
+        gText_3F,
+        gText_2F,
+        gText_1F,
         gOtherText_Exit,
     }, {
-        gUnknown_841807D,
-        gUnknown_841808E,
-        gUnknown_841809C,
+        gText_LinkedGamePlay,
+        gText_DirectCorner,
+        gText_UnionRoom,
         gOtherText_Quit,
     }, {
-        gUnknown_84180A7,
-        gUnknown_84180BC,
-        gUnknown_84180D0,
-        gUnknown_84180E4,
-        gUnknown_84180FA,
-        gUnknown_841810D,
-        gUnknown_841811D,
-        gUnknown_841812F,
-        gUnknown_8418142,
-        gUnknown_8418152,
-        gUnknown_8418163,
+        gText_Energypowder_50,
+        gText_EnergyRoot_80,
+        gText_HealPowder_50,
+        gText_RevivalHerb_300,
+        gText_Protein_1000,
+        gText_Iron_1000,
+        gText_Carbos_1000,
+        gText_Calcium_1000,
+        gText_Zinc_1000,
+        gText_HpUp_1000,
+        gText_PpUp_3000,
         gOtherText_Exit,
     }, {
-        gUnknown_841806D,
-        gUnknown_841805D,
+        gText_Rooftop,
+        gText_B1F,
         gOtherText_Exit,
     }
 };

@@ -3293,7 +3293,7 @@ _080564B0:
 	adds r2, r4, 0
 	bl sub_805B3E0
 _080564BA:
-	bl sub_811092C
+	bl RunQuestLogCB
 	add sp, 0x4
 	pop {r4-r6}
 	pop {r0}
@@ -3328,7 +3328,7 @@ sub_80564C8: @ 80564C8
 	.align 2, 0
 _08056508: .4byte gUnknown_3005E90
 _0805650C:
-	bl sub_811092C
+	bl RunQuestLogCB
 	b _08056522
 _08056512:
 	bl sub_8111CD0
@@ -3336,7 +3336,7 @@ _08056512:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08056522
-	bl sub_811092C
+	bl RunQuestLogCB
 _08056522:
 	ldr r0, _08056530 @ =gUnknown_3005E90
 	bl sub_806C888

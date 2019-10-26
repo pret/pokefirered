@@ -190,9 +190,9 @@ PewterCity_Museum_1F_EventScript_16A512:: @ 816A512
 	setvar VAR_0x8004, SPECIES_AERODACTYL
 	setvar VAR_0x8005, 10
 	setvar VAR_0x8006, 3
-	special sub_809D504
+	special Special_OpenMuseumFossilPic
 	msgbox gUnknown_8190945
-	special sub_809D620
+	special Special_CloseMuseumFossilPic
 	releaseall
 	end
 
@@ -201,8 +201,8 @@ PewterCity_Museum_1F_EventScript_16A532:: @ 816A532
 	setvar VAR_0x8004, SPECIES_KABUTOPS
 	setvar VAR_0x8005, 10
 	setvar VAR_0x8006, 3
-	special sub_809D504
+	special Special_OpenMuseumFossilPic
 	msgbox gUnknown_8190975
-	special sub_809D620
+	special Special_CloseMuseumFossilPic
 	releaseall
 	end

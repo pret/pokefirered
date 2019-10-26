@@ -25,7 +25,7 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_16CB88:: @ 816CB88
 EventScript_16CBB2:: @ 816CBB2
 	message Text_19707A
 	waitmessage
-	multichoice 11, 0, 14, 0
+	multichoice 11, 0, MULTICHOICE_GAME_CORNER_POKEMON_PRIZES, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_16CC15
 	case 1, EventScript_16CC25
@@ -204,7 +204,7 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_16CE1D:: @ 816CE1D
 EventScript_16CE47:: @ 816CE47
 	message Text_19707A
 	waitmessage
-	multichoice 11, 0, 30, 0
+	multichoice 11, 0, MULTICHOICE_GAME_CORNER_TMPRIZES, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_16CEA5
 	case 1, EventScript_16CEB9
@@ -302,7 +302,7 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_16CF88:: @ 816CF88
 EventScript_16CFB2:: @ 816CFB2
 	message Text_19707A
 	waitmessage
-	multichoice 10, 0, 41, 0
+	multichoice 10, 0, MULTICHOICE_GAME_CORNER_BATTLE_ITEM_PRIZES, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_16D010
 	case 1, EventScript_16D020

@@ -169,7 +169,7 @@ EventScript_164A00:: @ 8164A00
 EventScript_164A08:: @ 8164A08
 	message Text_17C88D
 	waitmessage
-	multichoice 18, 6, 16, 0
+	multichoice 18, 6, MULTICHOICE_YES_NO_INFO, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_164A53
 	case 1, EventScript_164ABF
@@ -183,7 +183,7 @@ EventScript_164A45:: @ 8164A45
 	end
 
 EventScript_164A53:: @ 8164A53
-	multichoice 13, 3, 64, 0
+	multichoice 13, 3, MULTICHOICE_TRAINER_TOWER_MODE, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_164AA0
 	case 1, EventScript_164AA0

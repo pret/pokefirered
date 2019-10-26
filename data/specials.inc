@@ -387,7 +387,7 @@ gSpecials:: @ 815FD60
 	def_special IsThereMonInRoute5Daycare
 	def_special GetNumLevelsGainedForRoute5DaycareMon
 	def_special TakePokemonFromRoute5Daycare
-	def_special ScrSpecial_SeaGallopFerry
+	def_special ScrSpecial_SeagallopFerry
 	def_special Special_PlayerPartyContainsSpecies
 	def_special Special_SetSomeVariable
 	def_special HelpSystem_BackupSomeVariable
@@ -403,8 +403,8 @@ gSpecials:: @ 815FD60
 	def_special sub_8112364
 	def_special Special_GetMENewsJisanItemAndState
 	def_special get_unknown_box_id
-	def_special sub_809D504
-	def_special sub_809D620
+	def_special Special_OpenMuseumFossilPic
+	def_special Special_CloseMuseumFossilPic
 	def_special sub_812781C
 	def_special sub_8127888
 	def_special SetBattledTrainerFlag
@@ -431,8 +431,8 @@ gSpecials:: @ 815FD60
 	def_special Special_HasLearnedAllMovesFromCapeBrinkTutor
 	def_special Special_Credits
 	def_special sub_8153810
-	def_special sub_809D764
-	def_special sub_809D8C0
+	def_special Special_DrawSeagallopDestinationMenu
+	def_special Special_GetSelectedSeagallopDestination
 	def_special sub_8147500
 	def_special GetPlayerFacingDirection
 	def_special Special_DeoxysSound

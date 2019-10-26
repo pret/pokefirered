@@ -50,15 +50,15 @@ extern const u8 *const gStdScriptsEnd[];
 static bool8 sub_806B93C(struct ScriptContext * ctx);
 static u8 sub_806B96C(struct ScriptContext * ctx);
 
-EWRAM_DATA ptrdiff_t gVScriptOffset = 0;
-EWRAM_DATA u8 gUnknown_20370AC = 0;
-EWRAM_DATA u16 sPauseCounter = 0;
-EWRAM_DATA u16 sMovingNpcId = 0;
-EWRAM_DATA u16 sMovingNpcMapBank = 0;
-EWRAM_DATA u16 sMovingNpcMapId = 0;
-EWRAM_DATA u16 sFieldEffectScriptId = 0;
+static EWRAM_DATA ptrdiff_t gVScriptOffset = 0;
+static EWRAM_DATA u8 gUnknown_20370AC = 0;
+static EWRAM_DATA u16 sPauseCounter = 0;
+static EWRAM_DATA u16 sMovingNpcId = 0;
+static EWRAM_DATA u16 sMovingNpcMapBank = 0;
+static EWRAM_DATA u16 sMovingNpcMapId = 0;
+static EWRAM_DATA u16 sFieldEffectScriptId = 0;
 
-IWRAM_DATA struct ScriptContext * gUnknown_3005070;
+struct ScriptContext * gUnknown_3005070;
 
 extern u8 gSelectedEventObject;
 
@@ -1835,7 +1835,7 @@ bool8 ScrCmd_showmoneybox(struct ScriptContext *ctx)
     u8 y = ScriptReadByte(ctx);
     u8 ignore = ScriptReadByte(ctx);
 
-    if (!ignore && sub_81119D4(sub_809D6D4) != TRUE)
+    if (!ignore && QuestLog_SchedulePlaybackCB(QLPlaybackCB_DestroyScriptMenuMonPicSprites) != TRUE)
         DrawMoneyBox(GetMoney(&gSaveBlock1Ptr->money), x, y);
     return FALSE;
 }
@@ -1865,7 +1865,7 @@ bool8 ScrCmd_showcoinsbox(struct ScriptContext *ctx)
     u8 x = ScriptReadByte(ctx);
     u8 y = ScriptReadByte(ctx);
 
-    if (sub_81119D4(sub_809D6D4) != TRUE)
+    if (QuestLog_SchedulePlaybackCB(QLPlaybackCB_DestroyScriptMenuMonPicSprites) != TRUE)
         ShowCoinsWindow(GetCoins(), x, y);
     return FALSE;
 }

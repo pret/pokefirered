@@ -27,7 +27,7 @@ void sub_8113550(u16, const u16 *);
 void sub_811539C(void);
 void sub_8115748(u16);
 u8 sub_8112CAC(void);
-bool8 sub_81119D4(void (*func)(void));
+bool8 QuestLog_SchedulePlaybackCB(void (*func)(void));
 void sub_8111F38(u16, u16);
 void sub_8111134(void);
 void DestroyHelpMessageWindow(u8 a0);

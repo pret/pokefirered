@@ -255,25 +255,30 @@ static void writePatch(const char * filename, const hunk_t * hunks, size_t num, 
     // Maximum hunk size is 65535 bytes. For convenience, we allocate a
     // round 65536 (0x10000). This has no effect on memory consumption,
     // as malloc will round this up anyway.
-    char * readbuf = malloc(0x10000);
-    if (readbuf == NULL) FATAL_ERROR("failed to allocate write buffer\n");
-    fwrite("PATCH", 1, 5, file); // magic
-    for (int i = 0; i < num; i++) {
-        // Encode the offset
-        uint32_t offset = hunks[i].offset;
-        putc(offset >> 16, file);
-        putc(offset >>  8, file);
-        putc(offset >>  0, file);
-        // Encode the size
-        size_t size = hunks[i].size;
-        putc(size >> 8, file);
-        putc(size >> 0, file);
-        // Yank the data straight from the ROM
-        if (fseek(rom, offset, SEEK_SET)) FATAL_ERROR("seek\n");
-        if (fread(readbuf, 1, size, rom) != size) FATAL_ERROR("read\n");
-        if (fwrite(readbuf, 1, size, file) != size) FATAL_ERROR("write\n");
+    char * readbuf = NULL;
+    if (rom != NULL) {
+        readbuf = malloc(0x10000);
+        if (readbuf == NULL) FATAL_ERROR("failed to allocate write buffer\n");
     }
-    free(readbuf);
+    fwrite("PATCH", 1, 5, file); // magic
+    if (readbuf != NULL) {
+        for (int i = 0; i < num; i++) {
+            // Encode the offset
+            uint32_t offset = hunks[i].offset;
+            putc(offset >> 16, file);
+            putc(offset >>  8, file);
+            putc(offset >>  0, file);
+            // Encode the size
+            size_t size = hunks[i].size;
+            putc(size >> 8, file);
+            putc(size >> 0, file);
+            // Yank the data straight from the ROM
+            if (fseek(rom, offset, SEEK_SET)) FATAL_ERROR("seek\n");
+            if (fread(readbuf, 1, size, rom) != size) FATAL_ERROR("read\n");
+            if (fwrite(readbuf, 1, size, file) != size) FATAL_ERROR("write\n");
+        }
+        free(readbuf);
+    }
     // Write the EOF magic
     fwrite("EOF", 1, 3, file);
     fclose(file);
@@ -307,14 +312,15 @@ int main(int argc, char ** argv) {
              "If there are baserom.gba hunks in this project,\n"
              "please ping PikalaxALT on the pret discord,\n"
              "channel #gen-3-help.\n");
+        writePatch("baserom.ips", NULL, 0, NULL);
     } else {
         // Merge neighboring hunks to reduce the number of hunks.
         collapseIncbins(hunks, &num);
         // Encode the hunks in the IPS patch.
         writePatch("baserom.ips", hunks, num, rom);
-        // Communicate status to the user.
-        puts("IPS file created at baserom.ips\n");
     }
+    // Communicate status to the user.
+    puts("IPS file created at baserom.ips\n");
     // Clean up and return.
     fclose(rom);
     free(hunks);

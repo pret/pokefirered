@@ -244,7 +244,7 @@ u8 gUnknown_3004FFC[MAX_BATTLERS_COUNT];
 
 static const struct ScanlineEffectParams sIntroScanlineParams16Bit =
 {
-    (void *)REG_ADDR_BG3HOFS, SCANLINE_EFFECT_DMACNT_16BIT, 1
+    &REG_BG3HOFS, SCANLINE_EFFECT_DMACNT_16BIT, 1
 };
 
 const struct SpriteTemplate gUnknown_824EFF0 =
@@ -2951,12 +2951,10 @@ u8 IsRunningFromBattleImpossible(void)
     else
         holdEffect = ItemId_GetHoldEffect(gBattleMons[gActiveBattler].item);
     gPotentialItemEffectBattler = gActiveBattler;
-    if (holdEffect == HOLD_EFFECT_CAN_ALWAYS_RUN)
-        return 0;
-    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
-        return 0;
-    if (gBattleMons[gActiveBattler].ability == ABILITY_RUN_AWAY)
-        return 0;
+    if (holdEffect == HOLD_EFFECT_CAN_ALWAYS_RUN
+     || (gBattleTypeFlags & BATTLE_TYPE_LINK)
+     || gBattleMons[gActiveBattler].ability == ABILITY_RUN_AWAY)
+        return BATTLE_RUN_SUCCESS;
     side = GetBattlerSide(gActiveBattler);
     for (i = 0; i < gBattlersCount; ++i)
     {
@@ -2966,7 +2964,7 @@ u8 IsRunningFromBattleImpossible(void)
             gBattleScripting.battler = i;
             gLastUsedAbility = gBattleMons[i].ability;
             gBattleCommunication[MULTISTRING_CHOOSER] = 2;
-            return 2;
+            return BATTLE_RUN_FAILURE;
         }
         if (side != GetBattlerSide(i)
          && gBattleMons[gActiveBattler].ability != ABILITY_LEVITATE
@@ -2976,7 +2974,7 @@ u8 IsRunningFromBattleImpossible(void)
             gBattleScripting.battler = i;
             gLastUsedAbility = gBattleMons[i].ability;
             gBattleCommunication[MULTISTRING_CHOOSER] = 2;
-            return 2;
+            return BATTLE_RUN_FAILURE;
         }
     }
     i = AbilityBattleEffects(ABILITYEFFECT_CHECK_FIELD_EXCEPT_BATTLER, gActiveBattler, ABILITY_MAGNET_PULL, 0, 0);
@@ -2985,20 +2983,20 @@ u8 IsRunningFromBattleImpossible(void)
         gBattleScripting.battler = i - 1;
         gLastUsedAbility = gBattleMons[i - 1].ability;
         gBattleCommunication[MULTISTRING_CHOOSER] = 2;
-        return 2;
+        return BATTLE_RUN_FAILURE;
     }
     if ((gBattleMons[gActiveBattler].status2 & (STATUS2_ESCAPE_PREVENTION | STATUS2_WRAPPED))
      || (gStatuses3[gActiveBattler] & STATUS3_ROOTED))
     {
         gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-        return 1;
+        return BATTLE_RUN_FORBIDDEN;
     }
     if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
     {
         gBattleCommunication[MULTISTRING_CHOOSER] = 1;
-        return 1;
+        return BATTLE_RUN_FORBIDDEN;
     }
-    return 0;
+    return BATTLE_RUN_SUCCESS;
 }
 
 void sub_8013F6C(u8 battler)
@@ -3186,7 +3184,7 @@ static void HandleTurnActionSelectionState(void)
                     BattleScriptExecute(BattleScript_PrintCantRunFromTrainer);
                     gBattleCommunication[gActiveBattler] = STATE_BEFORE_ACTION_CHOSEN;
                 }
-                else if (IsRunningFromBattleImpossible()
+                else if (IsRunningFromBattleImpossible() != BATTLE_RUN_SUCCESS
                       && gBattleBufferB[gActiveBattler][1] == B_ACTION_RUN)
                 {
                     gSelectionBattleScripts[gActiveBattler] = BattleScript_PrintCantEscapeFromBattle;

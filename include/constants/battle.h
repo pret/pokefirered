@@ -293,4 +293,9 @@
 #define BATTLE_TERRAIN_BUILDING     8
 #define BATTLE_TERRAIN_PLAIN        9
 
+// Return value for IsRunningFromBattleImpossible. 
+#define BATTLE_RUN_SUCCESS        0
+#define BATTLE_RUN_FORBIDDEN      1
+#define BATTLE_RUN_FAILURE        2
+
 #endif // GUARD_CONSTANTS_BATTLE_H

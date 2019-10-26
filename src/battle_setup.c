@@ -620,13 +620,13 @@ static u8 GetTrainerBattleTransition(void)
         return B_TRANSITION_BLUE;
     if (gTrainers[gTrainerBattleOpponent_A].trainerClass == CLASS_ELITE_FOUR_2)
     {
-        if (gTrainerBattleOpponent_A == 410 || gTrainerBattleOpponent_A == 735) // TODO: replace these with enums
+        if (gTrainerBattleOpponent_A == TRAINER_ELITE_FOUR_LORELEI || gTrainerBattleOpponent_A == TRAINER_ELITE_FOUR_LORELEI_2)
             return B_TRANSITION_LORELEI;
-        if (gTrainerBattleOpponent_A == 411 || gTrainerBattleOpponent_A == 736)
+        if (gTrainerBattleOpponent_A == TRAINER_ELITE_FOUR_BRUNO || gTrainerBattleOpponent_A == TRAINER_ELITE_FOUR_BRUNO_2)
             return B_TRANSITION_BRUNO;
-        if (gTrainerBattleOpponent_A == 412 || gTrainerBattleOpponent_A == 737)
+        if (gTrainerBattleOpponent_A == TRAINER_ELITE_FOUR_AGATHA || gTrainerBattleOpponent_A == TRAINER_ELITE_FOUR_AGATHA_2)
             return B_TRANSITION_AGATHA;
-        if (gTrainerBattleOpponent_A == 413 || gTrainerBattleOpponent_A == 738)
+        if (gTrainerBattleOpponent_A == TRAINER_ELITE_FOUR_LANCE || gTrainerBattleOpponent_A == TRAINER_ELITE_FOUR_LANCE_2)
             return B_TRANSITION_LANCE;
         return B_TRANSITION_BLUE;
     }
@@ -997,7 +997,8 @@ void PlayTrainerEncounterMusic(void)
 {
     u16 music;
 
-    if ((u8)(gUnknown_203ADFA - 2) > 1
+    if (gUnknown_203ADFA != 2
+     && gUnknown_203ADFA != 3
      && sTrainerBattleMode != TRAINER_BATTLE_CONTINUE_SCRIPT_NO_MUSIC
      && sTrainerBattleMode != TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE_NO_MUSIC)
     {

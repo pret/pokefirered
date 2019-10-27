@@ -621,12 +621,8 @@ gUnknown_3379A0Bin:: @ 826BA5C
 gUnknown_826BB5C:: @ 826BB5C
 	.incbin "data/trade/unk_826BB5C.gbapal"
 
-	.incbin "baserom.gba", 0x26BB7C, 0x1E0
-
 gUnknown_826BD5C:: @ 826BD5C
 	.incbin "data/trade/unk_826BD5C.gbapal"
-
-	.incbin "baserom.gba", 0x26BD7C, 0x1E0
 
 gUnknown_826BF5C:: @ 826BF5C
 	.incbin "data/trade/unk_826BF5C.gbapal"

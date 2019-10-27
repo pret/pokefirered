@@ -489,7 +489,7 @@ _0804CA10:
 	cmp r6, r0
 	bge _0804CAA8
 	mov r8, r2
-	ldr r7, _0804CB38 @ =gUnknown_8261E40
+	ldr r7, _0804CB38 @ =gTradeMonSpriteCoords
 _0804CA4A:
 	movs r0, 0x64
 	adds r4, r6, 0
@@ -543,7 +543,7 @@ _0804CAA8:
 	ldrb r0, [r0]
 	cmp r6, r0
 	bge _0804CB20
-	ldr r0, _0804CB38 @ =gUnknown_8261E40
+	ldr r0, _0804CB38 @ =gTradeMonSpriteCoords
 	mov r8, r1
 	adds r7, r0, 0
 	adds r7, 0xC
@@ -604,7 +604,7 @@ _0804CB20:
 _0804CB2C: .4byte gUnknown_2031DA8
 _0804CB30: .4byte gPlayerPartyCount
 _0804CB34: .4byte gEnemyPartyCount
-_0804CB38: .4byte gUnknown_8261E40
+_0804CB38: .4byte gTradeMonSpriteCoords
 _0804CB3C: .4byte gPlayerParty
 _0804CB40: .4byte 0xfff40000
 _0804CB44: .4byte SpriteCB_MonIcon
@@ -727,7 +727,7 @@ _0804CC3E:
 	adds r0, r1
 	movs r6, 0
 	add r5, sp, 0x10
-	ldr r3, _0804CD00 @ =gUnknown_8261E8A
+	ldr r3, _0804CD00 @ =gTradeUnknownSpriteCoords
 	mov r8, r3
 	asrs r0, 1
 	ldrb r7, [r3, 0x4]
@@ -774,7 +774,7 @@ _0804CC62:
 	adds r0, r1
 	movs r6, 0
 	add r5, sp, 0x10
-	ldr r7, _0804CD00 @ =gUnknown_8261E8A
+	ldr r7, _0804CD00 @ =gTradeUnknownSpriteCoords
 	mov r8, r7
 	asrs r0, 1
 	mov r1, r8
@@ -809,7 +809,7 @@ _0804CCC6:
 	b _0804CEC2
 	.align 2, 0
 _0804CCFC: .4byte gSaveBlock2Ptr
-_0804CD00: .4byte gUnknown_8261E8A
+_0804CD00: .4byte gTradeUnknownSpriteCoords
 _0804CD04: .4byte gUnknown_8261CC8
 _0804CD08: .4byte gLinkPlayers + 8
 _0804CD0C: .4byte gMain
@@ -874,7 +874,7 @@ _0804CD5C:
 	cmp r6, 0x5
 	ble _0804CD5C
 	ldr r0, _0804CDD0 @ =gUnknown_8261CB0
-	ldr r2, _0804CDD4 @ =gUnknown_8261E40
+	ldr r2, _0804CDD4 @ =gTradeMonSpriteCoords
 	ldrb r1, [r2]
 	lsls r1, 19
 	movs r3, 0x80
@@ -906,7 +906,7 @@ _0804CD5C:
 	.align 2, 0
 _0804CDCC: .4byte gUnknown_8261CC8
 _0804CDD0: .4byte gUnknown_8261CB0
-_0804CDD4: .4byte gUnknown_8261E40
+_0804CDD4: .4byte gTradeMonSpriteCoords
 _0804CDD8: .4byte gUnknown_2031DA8
 _0804CDDC: .4byte gMain
 _0804CDE0:
@@ -1178,7 +1178,7 @@ _0804D00C:
 	cmp r6, r0
 	bge _0804D0A8
 	mov r8, r4
-	ldr r7, _0804D138 @ =gUnknown_8261E40
+	ldr r7, _0804D138 @ =gTradeMonSpriteCoords
 _0804D048:
 	movs r0, 0x64
 	adds r4, r6, 0
@@ -1233,7 +1233,7 @@ _0804D0A8:
 	ldrb r0, [r0]
 	cmp r6, r0
 	bge _0804D120
-	ldr r0, _0804D138 @ =gUnknown_8261E40
+	ldr r0, _0804D138 @ =gTradeMonSpriteCoords
 	mov r8, r1
 	adds r7, r0, 0
 	adds r7, 0xC
@@ -1294,7 +1294,7 @@ _0804D120:
 _0804D12C: .4byte gUnknown_2031DA8
 _0804D130: .4byte gPlayerPartyCount
 _0804D134: .4byte gEnemyPartyCount
-_0804D138: .4byte gUnknown_8261E40
+_0804D138: .4byte gTradeMonSpriteCoords
 _0804D13C: .4byte gPlayerParty
 _0804D140: .4byte 0xfff40000
 _0804D144: .4byte SpriteCB_MonIcon
@@ -1424,7 +1424,7 @@ _0804D24C:
 	adds r0, r1
 	movs r6, 0
 	add r5, sp, 0xC
-	ldr r3, _0804D310 @ =gUnknown_8261E8A
+	ldr r3, _0804D310 @ =gTradeUnknownSpriteCoords
 	mov r8, r3
 	asrs r0, 1
 	ldrb r7, [r3, 0x4]
@@ -1471,7 +1471,7 @@ _0804D270:
 	adds r0, r1
 	movs r6, 0
 	add r5, sp, 0xC
-	ldr r7, _0804D310 @ =gUnknown_8261E8A
+	ldr r7, _0804D310 @ =gTradeUnknownSpriteCoords
 	mov r8, r7
 	asrs r0, 1
 	mov r1, r8
@@ -1506,7 +1506,7 @@ _0804D2D4:
 	b _0804D4B4
 	.align 2, 0
 _0804D30C: .4byte gSaveBlock2Ptr
-_0804D310: .4byte gUnknown_8261E8A
+_0804D310: .4byte gTradeUnknownSpriteCoords
 _0804D314: .4byte gUnknown_8261CC8
 _0804D318: .4byte gLinkPlayers + 8
 _0804D31C: .4byte gMain
@@ -1590,7 +1590,7 @@ _0804D3C0:
 	adds r1, 0x35
 	strb r0, [r1]
 	ldr r0, _0804D404 @ =gUnknown_8261CB0
-	ldr r3, _0804D408 @ =gUnknown_8261E40
+	ldr r3, _0804D408 @ =gTradeMonSpriteCoords
 	ldr r4, _0804D40C @ =gUnknown_2031DA8
 	ldr r1, [r4]
 	adds r1, 0x35
@@ -1621,7 +1621,7 @@ _0804D3C0:
 	b _0804D4D2
 	.align 2, 0
 _0804D404: .4byte gUnknown_8261CB0
-_0804D408: .4byte gUnknown_8261E40
+_0804D408: .4byte gTradeMonSpriteCoords
 _0804D40C: .4byte gUnknown_2031DA8
 _0804D410: .4byte gMain
 _0804D414:
@@ -3214,7 +3214,7 @@ _0804E0CC:
 	adds r1, r0
 	lsls r1, 2
 	adds r1, r5
-	ldr r2, _0804E130 @ =gUnknown_8261E40
+	ldr r2, _0804E130 @ =gTradeMonSpriteCoords
 	lsls r3, r6, 1
 	adds r0, r3, r2
 	ldrb r0, [r0]
@@ -3245,7 +3245,7 @@ _0804E120:
 	.align 2, 0
 _0804E128: .4byte gUnknown_2031DA8
 _0804E12C: .4byte gSprites
-_0804E130: .4byte gUnknown_8261E40
+_0804E130: .4byte gTradeMonSpriteCoords
 	thumb_func_end TradeMenuMoveCursor
 
 	thumb_func_start sub_804E134
@@ -4622,7 +4622,7 @@ _0804EBA2:
 	adds r2, r0
 	lsls r2, 2
 	add r2, r8
-	ldr r5, _0804ECA8 @ =gUnknown_8261E40
+	ldr r5, _0804ECA8 @ =gTradeMonSpriteCoords
 	lsls r6, 2
 	adds r0, r6, r5
 	ldrb r0, [r0]
@@ -4697,7 +4697,7 @@ _0804EC98:
 	.align 2, 0
 _0804ECA0: .4byte gSprites
 _0804ECA4: .4byte gUnknown_2031DA8
-_0804ECA8: .4byte gUnknown_8261E40
+_0804ECA8: .4byte gTradeMonSpriteCoords
 _0804ECAC: .4byte SpriteCB_MonIcon
 _0804ECB0: .4byte gUnknown_8260A32
 _0804ECB4:
@@ -4762,7 +4762,7 @@ _0804ECEC:
 	adds r2, r0
 	lsls r2, 2
 	adds r2, r6
-	ldr r5, _0804EE14 @ =gUnknown_8261E40
+	ldr r5, _0804EE14 @ =gTradeMonSpriteCoords
 	lsls r3, 2
 	adds r0, r3, r5
 	ldrb r0, [r0]
@@ -4865,7 +4865,7 @@ _0804ECEC:
 _0804EE08: .4byte gUnknown_8260834
 _0804EE0C: .4byte gSprites
 _0804EE10: .4byte gUnknown_2031DA8
-_0804EE14: .4byte gUnknown_8261E40
+_0804EE14: .4byte gTradeMonSpriteCoords
 _0804EE18: .4byte gUnknown_8261F18
 _0804EE1C:
 	ldr r0, _0804EE64 @ =gUnknown_8262055
@@ -5507,7 +5507,7 @@ sub_804F2E8: @ 804F2E8
 	add r0, r12
 	lsls r2, r0, 1
 	mov r10, r2
-	ldr r1, _0804F3B0 @ =gUnknown_8261E40
+	ldr r1, _0804F3B0 @ =gTradeMonSpriteCoords
 	movs r2, 0
 	mov r8, r2
 	lsls r0, 2
@@ -5585,7 +5585,7 @@ _0804F39A:
 	.align 2, 0
 _0804F3A8: .4byte gUnknown_2031DA8
 _0804F3AC: .4byte gSprites
-_0804F3B0: .4byte gUnknown_8261E40
+_0804F3B0: .4byte gTradeMonSpriteCoords
 	thumb_func_end sub_804F2E8
 
 	thumb_func_start sub_804F3B4
@@ -8917,7 +8917,7 @@ _08050EB4:
 	lsls r4, r0, 4
 	subs r4, r0
 	lsls r4, 2
-	ldr r0, _08050EFC @ =gUnknown_826CF8C
+	ldr r0, _08050EFC @ =gIngameTrades
 	adds r4, r0
 	ldr r0, _08050F00 @ =gStringVar1
 	adds r1, r4, 0
@@ -8945,7 +8945,7 @@ _08050EF0:
 	bx r0
 	.align 2, 0
 _08050EF8: .4byte gSpecialVar_0x8004
-_08050EFC: .4byte gUnknown_826CF8C
+_08050EFC: .4byte gIngameTrades
 _08050F00: .4byte gStringVar1
 _08050F04: .4byte gStringVar3
 _08050F08: .4byte gSpecialVar_0x8005
@@ -13787,7 +13787,7 @@ GetInGameTradeSpeciesInfo: @ 8053A9C
 	lsls r4, r0, 4
 	subs r4, r0
 	lsls r4, 2
-	ldr r0, _08053AD4 @ =gUnknown_826CF8C
+	ldr r0, _08053AD4 @ =gIngameTrades
 	adds r4, r0
 	ldr r0, _08053AD8 @ =gStringVar1
 	ldrh r1, [r4, 0x38]
@@ -13807,7 +13807,7 @@ GetInGameTradeSpeciesInfo: @ 8053A9C
 	bx r1
 	.align 2, 0
 _08053AD0: .4byte gSpecialVar_0x8004
-_08053AD4: .4byte gUnknown_826CF8C
+_08053AD4: .4byte gIngameTrades
 _08053AD8: .4byte gStringVar1
 _08053ADC: .4byte gSpeciesNames
 _08053AE0: .4byte gStringVar2
@@ -13822,7 +13822,7 @@ sub_8053AE4: @ 8053AE4
 	lsls r4, r0, 4
 	subs r4, r0
 	lsls r4, 2
-	ldr r0, _08053B30 @ =gUnknown_826CF8C
+	ldr r0, _08053B30 @ =gIngameTrades
 	adds r4, r0
 	ldr r0, _08053B34 @ =gSpecialVar_0x8005
 	ldrh r1, [r0]
@@ -13849,7 +13849,7 @@ sub_8053AE4: @ 8053AE4
 	bx r0
 	.align 2, 0
 _08053B2C: .4byte gSpecialVar_0x8004
-_08053B30: .4byte gUnknown_826CF8C
+_08053B30: .4byte gIngameTrades
 _08053B34: .4byte gSpecialVar_0x8005
 _08053B38: .4byte gPlayerParty
 _08053B3C: .4byte gStringVar1
@@ -13868,7 +13868,7 @@ sub_8053B48: @ 8053B48
 	lsls r2, r1, 4
 	subs r2, r1
 	lsls r2, 2
-	ldr r1, _08053CA4 @ =gUnknown_826CF8C
+	ldr r1, _08053CA4 @ =gIngameTrades
 	adds r5, r2, r1
 	movs r1, 0x64
 	muls r0, r1
@@ -14010,7 +14010,7 @@ sub_8053B48: @ 8053B48
 	bl SetMonData
 	b _08053CC0
 	.align 2, 0
-_08053CA4: .4byte gUnknown_826CF8C
+_08053CA4: .4byte gIngameTrades
 _08053CA8: .4byte gPlayerParty
 _08053CAC: .4byte gEnemyParty
 _08053CB0: .4byte gUnknown_2031CCC

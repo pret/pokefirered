@@ -16215,10 +16215,19 @@ gUnknown_8E9CBBC:: @ 8E9CBBC
 	.incbin "baserom.gba", 0xE9CBBC, 0x320 @UNKNOWN
 
 gUnknown_8E9CEDC:: @ 8E9CEDC
-	.incbin "baserom.gba", 0xE9CEDC, 0x80 @UNKNOWN
+	.incbin "baserom.gba", 0xE9CEDC, 0x60 @UNKNOWN
+
+gUnknown_8E9CF3C::
+	.incbin "baserom.gba", 0xE9CF3C, 0x20 @UNKNOWN
 
 gUnknown_8E9CF5C:: @ 8E9CF5C
-	.incbin "baserom.gba", 0xE9CF5C, 0x1AA0 @UNKNOWN
+	.incbin "baserom.gba", 0xE9CF5C, 0x1280 @UNKNOWN
+
+gUnknown_8E9E1DC::
+	.incbin "baserom.gba", 0xE9E1DC, 0x800 @UNKNOWN
+
+gUnknown_8E9E9DC::
+	.incbin "baserom.gba", 0xE9E9DC, 0x20 @UNKNOWN
 
 gUnknown_8E9E9FC:: @ 8E9E9FC
 	.incbin "baserom.gba", 0xE9E9FC, 0x800 @UNKNOWN

@@ -8800,7 +8800,7 @@ _08050D98:
 	orrs r0, r7
 	str r0, [r1, 0x8]
 	ldr r0, [r1, 0x8]
-	ldr r1, _08050DD8 @ =gUnknown_08331F60
+	ldr r1, _08050DD8 @ =gUnknown_826601C
 	ldr r2, _08050DDC @ =0x06009000
 	ldr r0, _08050DD0 @ =0x040000d4
 	str r1, [r0]
@@ -8821,7 +8821,7 @@ _08050DC8: .4byte gTradeGba_Gfx
 _08050DCC: .4byte 0x06004000
 _08050DD0: .4byte 0x040000d4
 _08050DD4: .4byte 0x80000800
-_08050DD8: .4byte gUnknown_08331F60
+_08050DD8: .4byte gUnknown_826601C
 _08050DDC: .4byte 0x06009000
 	thumb_func_end sub_8050968
 

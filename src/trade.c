@@ -19,6 +19,7 @@
 #include "strings.h"
 #include "menu.h"
 #include "overworld.h"
+#include "battle_anim.h"
 #include "party_menu.h"
 #include "pokemon_summary_screen.h"
 #include "pokemon_storage_system.h"
@@ -27,6 +28,7 @@
 #include "constants/items.h"
 #include "constants/easy_chat.h"
 #include "constants/songs.h"
+#include "constants/moves.h"
 
 struct TradeResources
 {
@@ -87,7 +89,10 @@ void sub_804DFF0(void);
 void sub_804E9E4(void);
 void sub_804EAAC(u8 a0);
 void sub_804EAE4(u8 side);
+u8 sub_804EE6C(u8 *str, u8 whichParty, u8 partyIdx);
+void sub_804EED4(u8 *str, u8 whichParty, u8 partyIdx);
 void sub_804F020(u8 side);
+void sub_804F08C(u8 a0, u8 partyIdx, u8 a2, u8 a3, u8 a4, u8 a5);
 void sub_804F284(u8 side);
 void sub_804F3B4(void);
 void sub_804F3C8(u8 a0);
@@ -115,6 +120,13 @@ extern const struct SpriteTemplate gUnknown_8261CB0;
 extern const struct SpriteTemplate gUnknown_8261CC8;
 extern const u8 gJPText_Shedinja[];
 extern const u8 gUnknown_8261D08[][4][6];
+extern const u16 gTradePartyBoxTilemap[];
+extern const u16 gTradeMovesBoxTilemap[];
+extern const u8 gUnknown_8262055[][2];
+extern const u8 gUnknown_8261F18[];
+extern const u8 gUnknown_8261EB6[];
+extern const u8 gUnknown_8261EC7[];
+extern const u8 gUnknown_841E09F[];
 
 void sub_804C600(void)
 {
@@ -3082,3 +3094,197 @@ void sub_804E944(void)
     }
 }
 
+void sub_804E9C0(void)
+{
+    if (!sub_80FA484(FALSE))
+    {
+        sub_800AB9C();
+        gUnknown_2031DA8->unk_6F = 13;
+    }
+}
+
+void sub_804E9E4(void)
+{
+    switch (gUnknown_2031DA8->unk_6F)
+    {
+    case 0:
+        sub_804E194();
+        break;
+    case 1:
+        sub_804E388();
+        break;
+    case 2:
+        sub_804E494();
+        break;
+    case 3:
+        sub_804E674();
+        break;
+    case 4:
+        sub_804E744();
+        break;
+    case 6:
+        sub_804E7C8();
+        break;
+    case 7:
+        sub_804E804();
+        break;
+    case 8:
+        sub_804E880();
+        break;
+    case 9:
+        sub_804D50C();
+        break;
+    case 10:
+        sub_804D548();
+        break;
+    case 11:
+        sub_804E908();
+        break;
+    case 12:
+        sub_804E944();
+        break;
+    case 13:
+        sub_804D5A4();
+        break;
+    case 14:
+        sub_804E830();
+        break;
+    case 15:
+        sub_804E46C();
+        break;
+    case 16:
+        sub_804E9C0();
+        break;
+    }
+}
+
+void sub_804EAAC(u8 a0)
+{
+    u8 whichParty = a0 / PARTY_SIZE;
+
+    if (gUnknown_2031DA8->unk_74[whichParty] == 0)
+    {
+        gUnknown_2031DA8->unk_74[whichParty] = 1;
+        gUnknown_2031DA8->unk_76[whichParty] = a0;
+    }
+}
+
+void sub_804EAE4(u8 a0)
+{
+    s8 nameStringWidth;
+    u8 nickname[20];
+    u8 movesString[56];
+    u8 i;
+    u8 partyIdx;
+    u8 whichParty;
+    u8 monIdx = gUnknown_2031DA8->unk_76[a0];
+
+    whichParty = 1;
+    if (gUnknown_2031DA8->unk_76[a0] < PARTY_SIZE)
+        whichParty = 0;
+    partyIdx = monIdx % PARTY_SIZE;
+    nameStringWidth = 0;
+
+    switch (gUnknown_2031DA8->unk_74[a0])
+    {
+    case 1:
+        for (i = 0; i < gUnknown_2031DA8->partyCounts[a0]; i++)
+        {
+            gSprites[gUnknown_2031DA8->partyIcons[0][i + (whichParty * PARTY_SIZE)]].invisible = TRUE;
+        }
+
+        for (i = 0; i < 6; i++)
+        {
+            ClearWindowTilemap(i + (a0 * 6 + 2));
+        }
+
+        gSprites[gUnknown_2031DA8->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].invisible = FALSE;
+        gSprites[gUnknown_2031DA8->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].data[0] = 20;
+        gSprites[gUnknown_2031DA8->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].data[2] = (gTradeMonSpriteCoords[whichParty * PARTY_SIZE][0] + gTradeMonSpriteCoords[whichParty * PARTY_SIZE + 1][0]) / 2 * 8 + 14;
+        gSprites[gUnknown_2031DA8->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].data[4] = (gTradeMonSpriteCoords[whichParty * PARTY_SIZE][1] * 8) - 12;
+        StoreSpriteCallbackInData6(&gSprites[gUnknown_2031DA8->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]], SpriteCB_MonIcon);
+        gUnknown_2031DA8->unk_74[a0]++;
+        sub_8075490(&gSprites[gUnknown_2031DA8->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]]);
+        CopyToBgTilemapBufferRect_ChangePalette(1, gTradePartyBoxTilemap, a0 * 15, 0, 15, 17, 0);
+        CopyBgTilemapBufferToVram(1);
+        CopyBgTilemapBufferToVram(0);
+
+        if (whichParty == 0)
+            sub_804F3B4();
+        break;
+    case 2:
+        if (gSprites[gUnknown_2031DA8->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].callback == SpriteCB_MonIcon)
+            gUnknown_2031DA8->unk_74[a0] = 3;
+        break;
+    case 3:
+        CopyToBgTilemapBufferRect_ChangePalette(1, gTradeMovesBoxTilemap, whichParty * 15, 0, 15, 17, 0);
+        CopyBgTilemapBufferToVram(1);
+        gSprites[gUnknown_2031DA8->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].pos1.x = (gTradeMonSpriteCoords[whichParty * PARTY_SIZE][0] + gTradeMonSpriteCoords[whichParty * PARTY_SIZE + 1][0]) / 2 * 8 + 14;
+        gSprites[gUnknown_2031DA8->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].pos1.y = (gTradeMonSpriteCoords[whichParty * PARTY_SIZE][1] * 8) - 12;
+        gSprites[gUnknown_2031DA8->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].pos2.x = 0;
+        gSprites[gUnknown_2031DA8->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].pos2.y = 0;
+        nameStringWidth = sub_804EE6C(nickname, whichParty, partyIdx);
+        AddTextPrinterParameterized3((a0 * 2) + 14, 0, (80 - nameStringWidth) / 2, 4, gUnknown_8261F18, 0, nickname);
+        sub_804EED4(movesString, whichParty, partyIdx);
+        AddTextPrinterParameterized4((a0 * 2) + 15, 1, 0, 0, 0, 0, gUnknown_8261F18, 0, movesString);
+        PutWindowTilemap((a0 * 2) + 14);
+        CopyWindowToVram((a0 * 2) + 14, 3);
+        PutWindowTilemap((a0 * 2) + 15);
+        CopyWindowToVram((a0 * 2) + 15, 3);
+        gUnknown_2031DA8->unk_74[a0]++;
+        break;
+    case 4:
+        sub_804F08C(a0, partyIdx, gUnknown_8262055[a0][0] + 4, gUnknown_8262055[a0][1] + 1, gUnknown_8262055[a0][0], gUnknown_8262055[a0][1]);
+        gUnknown_2031DA8->unk_74[a0]++;
+        break;
+    }
+}
+
+u8 sub_804EE6C(u8 *dest, u8 whichParty, u8 partyIdx)
+{
+    u8 nickname[11];
+    if (whichParty == 0)
+        GetMonData(&gPlayerParty[partyIdx], MON_DATA_NICKNAME, nickname);
+    else
+        GetMonData(&gEnemyParty[partyIdx], MON_DATA_NICKNAME, nickname);
+    StringCopy10(dest, nickname);
+    return GetStringWidth(0, dest, GetFontAttribute(0, FONTATTR_LETTER_SPACING));
+}
+
+void sub_804EED4(u8 *a0, u8 a1, u8 a2)
+{
+    u16 moves[MAX_MON_MOVES];
+    u16 i;
+
+    if (!gUnknown_2031DA8->unk_51[a1][a2])
+    {
+        for (i = 0; i < MAX_MON_MOVES; i++)
+        {
+            if (!a1)
+            {
+                moves[i] = GetMonData(&gPlayerParty[a2], i + MON_DATA_MOVE1, NULL);
+            }
+            else
+            {
+                moves[i] = GetMonData(&gEnemyParty[a2], i + MON_DATA_MOVE1, NULL);
+            }
+        }
+
+        StringCopy(a0, gUnknown_8261EB6);
+
+        for (i = 0; i < MAX_MON_MOVES; i++)
+        {
+            if (moves[i] != MOVE_NONE)
+            {
+                StringAppend(a0, gMoveNames[moves[i]]);
+            }
+
+            StringAppend(a0, gUnknown_8261EC7);
+        }
+    }
+    else
+    {
+        StringCopy(a0, gUnknown_8261EB6);
+        StringAppend(a0, gUnknown_841E09F);
+    }
+}

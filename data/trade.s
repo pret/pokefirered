@@ -19,10 +19,10 @@ gUnknown_8260814:: @ 8260814
 	.4byte 0x00000064 @ sizeof(struct Pokemon)
 	.4byte 0x00000528
 
-gUnknown_8260834:: @ 8260834
+gTradeMovesBoxTilemap:: @ 8260834
 	.incbin "data/trade/unk_8260834.bin"
 
-gUnknown_8260A32:: @ 8260A32
+gTradePartyBoxTilemap:: @ 8260A32
 	.incbin "data/trade/unk_8260A32.bin"
 
 gUnknown_8260C30:: @ 8260C30

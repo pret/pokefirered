@@ -3033,7 +3033,7 @@ _081201C0:
 	lsrs r6, r0, 29
 	cmp r6, 0x3
 	bne _081201F0
-	ldr r0, _081201EC @ =gUnknown_20243B0
+	ldr r0, _081201EC @ =gPlayerParty + 0x12C
 	movs r1, 0xB
 	bl GetMonData
 	cmp r0, 0
@@ -3042,12 +3042,12 @@ _081201C0:
 	b _08120290
 	.align 2, 0
 _081201E8: .4byte gUnknown_203B09C
-_081201EC: .4byte gUnknown_20243B0
+_081201EC: .4byte gPlayerParty + 0x12C
 _081201F0:
-	ldr r0, _081201F4 @ =gUnknown_202434C
+	ldr r0, _081201F4 @ =gPlayerParty + 0xC8
 	b _0812020C
 	.align 2, 0
-_081201F4: .4byte gUnknown_202434C
+_081201F4: .4byte gPlayerParty + 0xC8
 _081201F8:
 	cmp r0, 0x1
 	bne _08120290
@@ -3058,7 +3058,7 @@ _081201F8:
 	lsrs r5, r0, 29
 	cmp r5, 0x5
 	bne _08120224
-	ldr r0, _08120220 @ =gUnknown_2024478
+	ldr r0, _08120220 @ =gPlayerParty + 0x1F4
 _0812020C:
 	movs r1, 0xB
 	bl GetMonData
@@ -3068,9 +3068,9 @@ _0812020C:
 	b _08120290
 	.align 2, 0
 _0812021C: .4byte gUnknown_203B09C
-_08120220: .4byte gUnknown_2024478
+_08120220: .4byte gPlayerParty + 0x1F4
 _08120224:
-	ldr r0, _08120234 @ =gUnknown_2024414
+	ldr r0, _08120234 @ =gPlayerParty + 0x190
 	movs r1, 0xB
 	bl GetMonData
 	cmp r0, 0
@@ -3078,7 +3078,7 @@ _08120224:
 	movs r0, 0x4
 	b _0812028E
 	.align 2, 0
-_08120234: .4byte gUnknown_2024414
+_08120234: .4byte gPlayerParty + 0x190
 _08120238:
 	ldrb r1, [r4]
 	subs r0, r1, 0x2
@@ -18129,7 +18129,7 @@ _08127A80: .4byte sub_811FB28
 sub_8127A84: @ 8127A84
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, _08127AA4 @ =gUnknown_20242E8
+	ldr r0, _08127AA4 @ =gPlayerParty + 0x64
 	movs r1, 0xB
 	bl GetMonData
 	cmp r0, 0
@@ -18143,7 +18143,7 @@ _08127AA0:
 	movs r0, 0x7
 	b _08127ABA
 	.align 2, 0
-_08127AA4: .4byte gUnknown_20242E8
+_08127AA4: .4byte gPlayerParty + 0x64
 _08127AA8:
 	ldr r0, _08127AB4 @ =gUnknown_203B0A0
 	ldrb r0, [r0, 0xB]

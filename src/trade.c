@@ -13,7 +13,9 @@
 #include "link.h"
 #include "link_rfu.h"
 #include "cable_club.h"
+#include "data.h"
 #include "sound.h"
+#include "string_util.h"
 #include "party_menu.h"
 #include "pokemon_summary_screen.h"
 #include "pokemon_storage_system.h"
@@ -67,8 +69,10 @@ IWRAM_DATA vu16 gUnknown_3000E78;
 
 EWRAM_DATA u8 *gUnknown_2031C90 = NULL;
 EWRAM_DATA u8 *gUnknown_2031C94[14] = {};
+EWRAM_DATA u8 gUnknown_2031CCC[216] = {};
 EWRAM_DATA u8 gUnknown_2031DA4[2] = {0};
 EWRAM_DATA struct TradeResources * gUnknown_2031DA8 = NULL;
+EWRAM_DATA void * gUnknown_2031DAC = NULL;
 
 void sub_804C728(void);
 void sub_804D4F8(void);
@@ -101,6 +105,7 @@ extern const u8 *gUnknown_8261ECC[];
 extern const u8 gTradeUnknownSpriteCoords[][4];
 extern const struct SpriteTemplate gUnknown_8261CB0;
 extern const struct SpriteTemplate gUnknown_8261CC8;
+extern const u8 gJPText_Shedinja[];
 
 void sub_804C600(void)
 {
@@ -2346,9 +2351,165 @@ void sub_804D764(void)
     gUnknown_2031DA8->tradeMenuOptionsActive[12] = TRUE;
 }
 
-void sub_804D814(char *dest, const char *src, size_t size)
+static void Trade_Memcpy(void *dest, const void *src, size_t size)
 {
     int i;
+    char *_dest = dest;
+    const char *_src = src;
     for (i = 0; i < size; i++)
-        dest[i] = src[i];
+        _dest[i] = _src[i];
+}
+
+bool8 shedinja_maker_maybe(void)
+{
+    u8 id = GetMultiplayerId();
+    int i;
+    struct Pokemon *mon;
+
+    switch (gUnknown_2031DA8->unk_69)
+    {
+    case 0:
+        Trade_Memcpy(gBlockSendBuffer, &gPlayerParty[0], 2 * sizeof(struct Pokemon));
+        gUnknown_2031DA8->unk_69++;
+        gUnknown_2031DA8->unk_A8 = 0;
+        break;
+    case 1:
+        if (IsLinkTaskFinished())
+        {
+            if (GetBlockReceivedStatus() == 0)
+            {
+                gUnknown_2031DA8->unk_69++;
+            }
+            else
+            {
+                ResetBlockReceivedFlags();
+                gUnknown_2031DA8->unk_69++;
+            }
+        }
+        break;
+    case 3:
+        if (id == 0)
+        {
+            sub_800A474(1);
+        }
+        gUnknown_2031DA8->unk_69++;
+        break;
+    case 4:
+        if (GetBlockReceivedStatus() == 3)
+        {
+            Trade_Memcpy(&gEnemyParty[0], gBlockRecvBuffer[id ^ 1], 2 * sizeof(struct Pokemon));
+            ResetBlockReceivedFlags();
+            gUnknown_2031DA8->unk_69++;
+        }
+        break;
+    case 5:
+        Trade_Memcpy(gBlockSendBuffer, &gPlayerParty[2], 2 * sizeof(struct Pokemon));
+        gUnknown_2031DA8->unk_69++;
+        break;
+    case 7:
+        if (id == 0)
+        {
+            sub_800A474(1);
+        }
+        gUnknown_2031DA8->unk_69++;
+        break;
+    case 8:
+        if (GetBlockReceivedStatus() == 3)
+        {
+            Trade_Memcpy(&gEnemyParty[2], gBlockRecvBuffer[id ^ 1], 200);
+            ResetBlockReceivedFlags();
+            gUnknown_2031DA8->unk_69++;
+        }
+        break;
+    case 9:
+        Trade_Memcpy(gBlockSendBuffer, &gPlayerParty[4], 200);
+        gUnknown_2031DA8->unk_69++;
+        break;
+    case 11:
+        if (id == 0)
+        {
+            sub_800A474(1);
+        }
+        gUnknown_2031DA8->unk_69++;
+        break;
+    case 12:
+        if (GetBlockReceivedStatus() == 3)
+        {
+            Trade_Memcpy(&gEnemyParty[4], gBlockRecvBuffer[id ^ 1], 200);
+            ResetBlockReceivedFlags();
+            gUnknown_2031DA8->unk_69++;
+        }
+        break;
+    case 13:
+        Trade_Memcpy(gBlockSendBuffer, gSaveBlock1Ptr->mail, 220);
+        gUnknown_2031DA8->unk_69++;
+        break;
+    case 15:
+        if (id == 0)
+        {
+            sub_800A474(3);
+        }
+        gUnknown_2031DA8->unk_69++;
+        break;
+    case 16:
+        if (GetBlockReceivedStatus() == 3)
+        {
+            Trade_Memcpy(gUnknown_2031CCC, gBlockRecvBuffer[id ^ 1], 216);
+            ResetBlockReceivedFlags();
+            gUnknown_2031DA8->unk_69++;
+        }
+        break;
+    case 17:
+        Trade_Memcpy(gBlockSendBuffer, gSaveBlock1Ptr->giftRibbons, 11);
+        gUnknown_2031DA8->unk_69++;
+        break;
+    case 19:
+        if (id == 0)
+        {
+            sub_800A474(4);
+        }
+        gUnknown_2031DA8->unk_69++;
+        break;
+    case 20:
+        if (GetBlockReceivedStatus() == 3)
+        {
+            Trade_Memcpy(gUnknown_2031DA8->unk_A9, gBlockRecvBuffer[id ^ 1], 11);
+            ResetBlockReceivedFlags();
+            gUnknown_2031DA8->unk_69++;
+        }
+        break;
+    case 21:
+        for (i = 0, mon = gEnemyParty; i < PARTY_SIZE; mon++, i++)
+        {
+            u8 name[POKEMON_NAME_LENGTH + 1];
+            u16 species = GetMonData(mon, MON_DATA_SPECIES);
+
+            if (species != SPECIES_NONE)
+            {
+                if (species == SPECIES_SHEDINJA && GetMonData(mon, MON_DATA_LANGUAGE) != LANGUAGE_JAPANESE)
+                {
+                    GetMonData(mon, MON_DATA_NICKNAME, name);
+
+                    if (!StringCompareWithoutExtCtrlCodes(name, gJPText_Shedinja))
+                    {
+                        SetMonData(mon, MON_DATA_NICKNAME, gSpeciesNames[SPECIES_SHEDINJA]);
+                    }
+                }
+            }
+        }
+        return TRUE;
+    case 2:
+    case 6:
+    case 10:
+    case 14:
+    case 18:
+        gUnknown_2031DA8->unk_A8++;
+        if (gUnknown_2031DA8->unk_A8 > 10)
+        {
+            gUnknown_2031DA8->unk_A8 = 0;
+            gUnknown_2031DA8->unk_69++;
+        }
+        break;
+    }
+    return FALSE;
 }

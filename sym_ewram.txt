@@ -18,75 +18,18 @@
 	.space 8
 
 	@ .include "src/link_rfu.o"
+	.align 2
 	.include "src/battle_controllers.o"
+	.align 2
 	.include "src/battle_main.o"
-
-sLearningMoveTableID: @ 2024028
-	.space 0x1
-
-gPlayerPartyCount: @ 2024029
-	.space 0x1
-
-gEnemyPartyCount: @ 202402A
-	.space 0x2
-
-gEnemyParty: @ 202402C
-	.space 0xC8
-
-gUnknown_20240F4: @ 20240F4
-	.space 0x64
-
-gUnknown_2024158: @ 2024158
-	.space 0x64
-
-gUnknown_20241BC: @ 20241BC
-	.space 0x64
-
-gUnknown_2024220: @ 2024220
-	.space 0x64
-
-gPlayerParty: @ 2024284
-	.space 0x64
-
-gUnknown_20242E8: @ 20242E8
-	.space 0x64
-
-gUnknown_202434C: @ 202434C
-	.space 0x64
-
-gUnknown_20243B0: @ 20243B0
-	.space 0x64
-
-gUnknown_2024414: @ 2024414
-	.space 0x64
-
-gUnknown_2024478: @ 2024478
-	.space 0x64
-
+	.align 2
 	.include "src/pokemon.o"
+	.align 2
 	.include "src/daycare.o"
 	.align 2
 	.include "src/load_save.o"
-
 	.align 2
-gUnknown_2031C90: @ 2031C90
-	.space 0x4
-
-gUnknown_2031C94: @ 2031C94
-	.space 0x38
-
-gUnknown_2031CCC: @ 2031CCC
-	.space 0xD8
-
-gUnknown_2031DA4: @ 2031DA4
-	.space 0x4
-
-gUnknown_2031DA8: @ 2031DA8
-	.space 0x4
-
-gUnknown_2031DAC: @ 2031DAC
-	.space 0x4
-
+	.include "src/trade.o"
 	.align 2
 	.include "src/new_game.o"
 

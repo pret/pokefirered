@@ -551,7 +551,7 @@ gUnknown_8261FC4:: @ 8261FC4
 	.string "システムメッセージADD$", 13
 	.string "はいけいセット$", 13
 
-gUnknown_8262034:: @ 8262034
+gJPText_Shedinja:: @ 8262034
 	.string "ヌケニン$"
 	.string "こうかんせいりつ     $"
 	.string "だめだたらしいよ     $"

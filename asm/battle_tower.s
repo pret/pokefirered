@@ -2832,7 +2832,7 @@ _080E6F68:
 	ldrb r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _080E6FB4 @ =gUnknown_2024220
+	ldr r1, _080E6FB4 @ =gEnemyParty + 0x1f4
 	adds r0, r1
 	movs r1, 0x2C
 	muls r1, r4
@@ -2855,7 +2855,7 @@ _080E6FA4: .4byte gSaveBlock2Ptr
 _080E6FA8: .4byte gSaveBlock1Ptr
 _080E6FAC: .4byte 0x00002cac
 _080E6FB0: .4byte 0x0000056d
-_080E6FB4: .4byte gUnknown_2024220
+_080E6FB4: .4byte gEnemyParty + 0x1f4
 	thumb_func_end sub_80E6EE0
 
 	thumb_func_start SaveBattleTowerProgress

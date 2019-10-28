@@ -6561,7 +6561,7 @@ _0808EE78:
 	mov r0, r8
 	adds r1, r6, 0
 	adds r2, r5, 0
-	bl sub_81344F8
+	bl ShowPokemonSummaryScreen
 	b _0808EEF6
 	.align 2, 0
 _0808EEAC: .4byte gUnknown_20397B0

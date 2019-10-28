@@ -8681,7 +8681,7 @@ _08122D8C:
 	ldr r3, _08122DB8 @ =sub_8122DBC
 	movs r4, 0
 	str r4, [sp]
-	bl sub_81344F8
+	bl ShowPokemonSummaryScreen
 	add sp, 0x4
 	pop {r4}
 	pop {r0}

@@ -660,4 +660,7 @@ extern const u8 gText_FiveIsland[];
 extern const u8 gText_SixIsland[];
 extern const u8 gText_SevenIsland[];
 
+// trade
+extern const u8 gUnknown_841E0A5[];
+
 #endif //GUARD_STRINGS_H

@@ -8,7 +8,6 @@ extern u8 gLastViewedMonIndex;
 extern const u8 *const gMoveDescriptionPointers[];
 extern const u8 *const gNatureNamePointers[];
 
-void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, void (*callback)(void));
 void ShowSelectMovePokemonSummaryScreen(struct Pokemon *, u8, u8, MainCallback, u16);
 void ShowPokemonSummaryScreenSet40EF(u8 mode, struct BoxPokemon *mons, u8 monIndex, u8 maxMonIndex, void (*callback)(void));
 u8 sub_8138B2C(void);
@@ -34,5 +33,6 @@ enum PokemonSummaryScreenPage
 };
 
 s32 sub_8138B20(void);
+void ShowPokemonSummaryScreen(struct Pokemon * party, u8 cursorPos, u8 lastIdx, void (*callback)(void), u8 a4);
 
 #endif // GUARD_POKEMON_SUMMARY_SCREEN_H

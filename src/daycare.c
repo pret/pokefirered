@@ -76,7 +76,7 @@ extern const u8 gDaycareText_DontLikeOther[];
 extern const u8 gDaycareText_PlayOther[];
 extern const u8 gExpandedPlaceholder_Empty[];
 
-extern const u32 gUnknown_08331F60[]; // tilemap gameboy circle
+extern const u32 gUnknown_826601C[]; // tilemap gameboy circle
 extern const u8 gText_HatchedFromEgg[];
 extern const u8 gText_NickHatchPrompt[];
 
@@ -1880,7 +1880,7 @@ static void CB2_EggHatch_0(void)
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
         LoadPalette(gTradeGba2_Pal, 0x10, 0xA0);
         LoadBgTiles(1, gTradeGba_Gfx, 0x1420, 0);
-        CopyToBgTilemapBuffer(1, gUnknown_08331F60, 0x1000, 0);
+        CopyToBgTilemapBuffer(1, gUnknown_826601C, 0x1000, 0);
         CopyBgTilemapBufferToVram(1);
         gMain.state++;
         break;

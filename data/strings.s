@@ -4359,33 +4359,46 @@ gUnknown_841E09F:: @ 841E09F
 gUnknown_841E0A5:: @ 841E0A5
 	.string "Is this trade okay?$"
 
+gUnknown_841E0B9::
 	.string "CANCEL$"
 
+gUnknown_841E0C0::
 	.string "Choose a POKéMON.$"
 
+gUnknown_841E0D2::
 	.string "SUMMARY$"
 
+gUnknown_841E0DA::
 	.string "TRADE$"
 
+gUnknown_841E0E0::
 	.string "Cancel trade?$"
 
+gUnknown_841E0EE::
 	.string "Press the B Button to exit.$"
 
+gUnknown_841E10A::
 	.string "SUMMARY$"
 
+gUnknown_841E112::
 	.string "TRADE$"
 
+gUnknown_841E118::
 	.string "{COLOR RED}{HIGHLIGHT DARK_GREY}{SHADOW GREEN}Communication standby…\n"
 	.string "Please wait.$"
 
+gUnknown_841E145::
 	.string "{COLOR RED}{HIGHLIGHT DARK_GREY}{SHADOW GREEN}The trade has been canceled.$"
 
+gUnknown_841E16B::
 	.string "{COLOR RED}{HIGHLIGHT DARK_GREY}{SHADOW GREEN}That's your only POKéMON\n"
 	.string "for battle.$"
 
+gUnknown_841E199::
 	.string "{COLOR RED}{HIGHLIGHT DARK_GREY}{SHADOW GREEN}Waiting for your friend\n"
 	.string "to finish…$"
 
+gUnknown_841E1C5::
 	.string "Your friend wants\n"
 	.string "to trade POKéMON.$"
 

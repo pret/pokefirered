@@ -17,6 +17,7 @@
 #include "party_menu.h"
 #include "pokemon_summary_screen.h"
 #include "pokemon_storage_system.h"
+#include "new_menu_helpers.h"
 #include "constants/species.h"
 #include "constants/items.h"
 #include "constants/easy_chat.h"
@@ -67,25 +68,33 @@ IWRAM_DATA vu16 gUnknown_3000E78;
 
 EWRAM_DATA u8 *gUnknown_2031C90 = NULL;
 EWRAM_DATA u8 *gUnknown_2031C94[14] = {};
+EWRAM_DATA u8 gUnknown_2031DA4[2] = {0};
 EWRAM_DATA struct TradeResources * gUnknown_2031DA8 = NULL;
 
 void sub_804C728(void);
 void sub_804D4F8(void);
-u8 shedinja_maker_maybe(void);
-void sub_804F5BC(u8 str_idx);
-void sub_804F9D8(void);
-bool8 sub_804F610(void);
-void sub_804F748(u8 side);
-void sub_804F020(u8 side);
+void sub_804D638(void);
+void sub_804D694(u8 state);
 void sub_804D764(void);
-void sub_804D694(u8 imgIdx);
+void sub_804DFF0(void);
+void sub_804E9E4(void);
+void sub_804EAE4(u8 side);
+u8 shedinja_maker_maybe(void);
+void sub_804F020(u8 side);
+void sub_804F284(u8 side);
+void sub_804F4DC(void);
+void sub_804F5BC(u8 str_idx);
+bool8 sub_804F610(void);
+void sub_804F728(const u8 *name, u8 *a1, u8 unused);
+void sub_804F748(u8 side);
 void sub_804F890(u8 side);
 void sub_804F964(void);
-void sub_804DFF0(void);
-void sub_804D638(void);
+void sub_804F9D8(void);
 void LoadHeldItemIcons(void);
-void sub_804F728(const u8 *name, u8 *a1, u8 unused);
+void sub_8050138(void);
 
+extern const u16 gUnknown_8260C30[];
+extern const u16 gUnknown_8261430[];
 extern const struct BgTemplate gUnknown_8261F1C[4];
 extern const struct WindowTemplate gUnknown_8261F2C[18];
 extern const u8 gTradeMonSpriteCoords[][2];
@@ -2201,3 +2210,112 @@ void sub_804CF14(void)
                 "_0804D4F4: .4byte sub_804D638");
 }
 #endif //NONMATCHING
+
+void sub_804D4F8(void)
+{
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+}
+
+void sub_804D50C(void)
+{
+    if (++gUnknown_2031DA8->unk_A8 >= 16)
+    {
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        gUnknown_2031DA8->unk_6F = 10;
+    }
+}
+
+void sub_804D548(void)
+{
+    if (!gPaletteFade.active)
+    {
+        gUnknown_2031DA4[0] = gUnknown_2031DA8->tradeMenuCursorPosition;
+        gUnknown_2031DA4[1] = gUnknown_2031DA8->unk_7E;
+        if (gWirelessCommType != 0)
+        {
+            gUnknown_2031DA8->unk_6F = 16;
+        }
+        else
+        {
+            sub_800AA80(32);
+            gUnknown_2031DA8->unk_6F = 13;
+        }
+    }
+}
+
+void sub_804D5A4(void)
+{
+    gMain.savedCallback = sub_804C718;
+    if (gWirelessCommType != 0)
+    {
+        if (IsLinkRfuTaskFinished())
+        {
+            Free(gUnknown_2031C90);
+            FreeAllWindowBuffers();
+            Free(gUnknown_2031DA8);
+            gMain.callback1 = NULL;
+            DestroyWirelessStatusIndicatorSprite();
+            SetMainCallback2(sub_8050138);
+        }
+    }
+    else
+    {
+        if (gReceivedRemoteLinkPlayers == 0)
+        {
+            Free(gUnknown_2031C90);
+            FreeAllWindowBuffers();
+            Free(gUnknown_2031DA8);
+            gMain.callback1 = NULL;
+            SetMainCallback2(sub_8050138);
+        }
+    }
+}
+
+void sub_804D638(void)
+{
+    sub_804E9E4();
+    sub_804F4DC();
+    sub_804EAE4(0);
+    sub_804EAE4(1);
+    SetGpuReg(REG_OFFSET_BG2HOFS, gUnknown_2031DA8->unk_0++);
+    SetGpuReg(REG_OFFSET_BG3HOFS, gUnknown_2031DA8->unk_1--);
+    RunTextPrinters_CheckPrinter0Active();
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
+
+void sub_804D694(u8 state)
+{
+    int i;
+
+    switch (state)
+    {
+    case 0:
+        LoadPalette(gUnknown_8E9CEDC, 0x00, 0x60);
+        LoadBgTiles(1, gUnknown_8E9CF5C, 0x1280, 0);
+        CopyToBgTilemapBufferRect_ChangePalette(1, gUnknown_8E9E9FC, 0, 0, 32, 20, 0);
+        LoadBgTilemap(2, gUnknown_8260C30, 0x800, 0);
+        break;
+    case 1:
+        LoadBgTilemap(3, gUnknown_8261430, 0x800, 0);
+        sub_804F284(0);
+        sub_804F284(1);
+        CopyBgTilemapBufferToVram(1);
+        break;
+    case 2:
+        for (i = 0; i < 4; i++)
+        {
+            // BG0 and BG1 coords only
+            SetGpuReg(REG_OFFSET_BG0HOFS + 2 * i, 0);
+        }
+        ShowBg(0);
+        ShowBg(1);
+        ShowBg(2);
+        ShowBg(3);
+        break;
+    }
+}

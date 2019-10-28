@@ -4214,4 +4214,9 @@ extern const u8 gMonIcon_Unown_ExclamationMark[];
 extern const u8 gMonIcon_Unown_QuestionMark[];
 extern const u8 gMonIcon_QuestionMark[];
 
+// trade
+extern const u16 gUnknown_8E9CEDC[];
+extern const u16 gUnknown_8E9CF5C[];
+extern const u16 gUnknown_8E9E9FC[];
+
 #endif //GUARD_GRAPHICS_H

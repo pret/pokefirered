@@ -32,8 +32,7 @@ struct TradeResources
     /*0x0034*/ u8 tradeMenuCursorSpriteIdx;
     /*0x0035*/ u8 tradeMenuCursorPosition;
     /*0x0036*/ u8 partyCounts[2];
-    /*0x0038*/ bool8 tradeMenuOptionsActive[12];
-    /*0x0044*/ u8 unk_44;
+    /*0x0038*/ bool8 tradeMenuOptionsActive[13];
     /*0x0045*/ u8 unk_45[2][PARTY_SIZE];
     /*0x0051*/ u8 unk_51[2][PARTY_SIZE];
     /*0x005D*/ u8 unk_5D[2][PARTY_SIZE];
@@ -2318,4 +2317,38 @@ void sub_804D694(u8 state)
         ShowBg(3);
         break;
     }
+}
+
+void sub_804D764(void)
+{
+    int i;
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (i < gUnknown_2031DA8->partyCounts[0])
+        {
+            gSprites[gUnknown_2031DA8->partyIcons[0][i]].invisible = FALSE;
+            gUnknown_2031DA8->tradeMenuOptionsActive[i] = TRUE;
+        }
+        else
+        {
+            gUnknown_2031DA8->tradeMenuOptionsActive[i] = FALSE;
+        }
+        if (i < gUnknown_2031DA8->partyCounts[1])
+        {
+            gSprites[gUnknown_2031DA8->partyIcons[1][i]].invisible = FALSE;
+            gUnknown_2031DA8->tradeMenuOptionsActive[i + 6] = TRUE;
+        }
+        else
+        {
+            gUnknown_2031DA8->tradeMenuOptionsActive[i + 6] = FALSE;
+        }
+    }
+    gUnknown_2031DA8->tradeMenuOptionsActive[12] = TRUE;
+}
+
+void sub_804D814(char *dest, const char *src, size_t size)
+{
+    int i;
+    for (i = 0; i < size; i++)
+        dest[i] = src[i];
 }

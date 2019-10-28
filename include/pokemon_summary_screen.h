@@ -33,4 +33,6 @@ enum PokemonSummaryScreenPage
     PSS_PAGE_CONTEST_MOVES,
 };
 
+s32 sub_8138B20(void);
+
 #endif // GUARD_POKEMON_SUMMARY_SCREEN_H

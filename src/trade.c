@@ -15,6 +15,7 @@
 #include "cable_club.h"
 #include "sound.h"
 #include "party_menu.h"
+#include "pokemon_summary_screen.h"
 #include "pokemon_storage_system.h"
 #include "constants/species.h"
 #include "constants/items.h"
@@ -138,6 +139,7 @@ void sub_804C718(void)
 }
 
 #ifdef NONMATCHING
+// See note on case 12 below
 void sub_804C728(void)
 {
     int i;
@@ -290,11 +292,11 @@ void sub_804C728(void)
         break;
     case 8:
         LoadHeldItemIcons();
-        sub_812256C(&gUnknown_2031DA8->partyCounts[0], gUnknown_2031DA8->partyIcons[0], 0);
+        sub_812256C(gUnknown_2031DA8->partyCounts, gUnknown_2031DA8->partyIcons, 0);
         gMain.state++;
         break;
     case 9:
-        sub_812256C(&gUnknown_2031DA8->partyCounts[0], gUnknown_2031DA8->partyIcons[0], 1);
+        sub_812256C(gUnknown_2031DA8->partyCounts, gUnknown_2031DA8->partyIcons, 1);
         gMain.state++;
         break;
     case 10:
@@ -1321,5 +1323,881 @@ void sub_804C728(void)
                 "_0804CF08: .4byte gPaletteFade\n"
                 "_0804CF0C: .4byte sub_804DFF0\n"
                 "_0804CF10: .4byte sub_804D638");
+}
+#endif //NONMATCHING
+
+#ifdef NONMATCHING
+// Nonmatching behaviour is the same as the function above
+void sub_804CF14(void)
+{
+    int i;
+    struct SpriteTemplate temp;
+    u8 id;
+    s32 width;
+    u32 xPos;
+
+    switch (gMain.state)
+    {
+    case 0:
+        sub_804C600();
+        gMain.state++;
+        break;
+    case 1:
+        gMain.state++;
+        gUnknown_2031DA8->unk_A8 = 0;
+        break;
+    case 2:
+        gMain.state++;
+        break;
+    case 3:
+        gMain.state++;
+        break;
+    case 4:
+        CalculatePlayerPartyCount();
+        gMain.state++;
+        break;
+    case 5:
+        if (gWirelessCommType != 0)
+        {
+            LoadWirelessStatusIndicatorSpriteGfx();
+            CreateWirelessStatusIndicatorSprite(0, 0);
+        }
+        gMain.state++;
+        break;
+    case 6:
+        gMain.state++;
+        break;
+    case 7:
+        CalculateEnemyPartyCount();
+        gUnknown_2031DA8->partyCounts[0] = gPlayerPartyCount;
+        gUnknown_2031DA8->partyCounts[1] = gEnemyPartyCount;
+        ClearWindowTilemap(0);
+        sub_804F020(0);
+        sub_804F020(1);
+        for (i = 0; i < gUnknown_2031DA8->partyCounts[0]; i++)
+        {
+            gUnknown_2031DA8->partyIcons[0][i] = CreateMonIcon(
+                GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL),
+                SpriteCB_MonIcon,
+                gTradeMonSpriteCoords[i][0] * 8 + 14,
+                gTradeMonSpriteCoords[i][1] * 8 - 12,
+                1,
+                GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY),
+                TRUE
+            );
+        }
+        for (i = 0; i < gUnknown_2031DA8->partyCounts[1]; i++)
+        {
+            gUnknown_2031DA8->partyIcons[1][i] = CreateMonIcon(
+                GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2, NULL),
+                SpriteCB_MonIcon,
+                gTradeMonSpriteCoords[i + 6][0] * 8 + 14,
+                gTradeMonSpriteCoords[i + 6][1] * 8 - 12,
+                1,
+                GetMonData(&gEnemyParty[i], MON_DATA_PERSONALITY),
+                FALSE
+            );
+        }
+        gMain.state++;
+        break;
+    case 8:
+        LoadHeldItemIcons();
+        sub_812256C(gUnknown_2031DA8->partyCounts, gUnknown_2031DA8->partyIcons, 0);
+        gMain.state++;
+        break;
+    case 9:
+        sub_812256C(gUnknown_2031DA8->partyCounts, gUnknown_2031DA8->partyIcons, 1);
+        gMain.state++;
+        break;
+    case 10:
+        sub_808BEB4(gSaveBlock2Ptr->playerName, gUnknown_2031C94[0], 0, 0, gDecompressionBuffer, 3);
+        id = GetMultiplayerId();
+        sub_808BEB4(gLinkPlayers[id ^ 1].name, gUnknown_2031C94[3], 0, 0, gDecompressionBuffer, 3);
+        sub_808BEB4(gUnknown_8261ECC[0], gUnknown_2031C94[6], 0, 0, gDecompressionBuffer, 2);
+        sub_804F728(gUnknown_8261ECC[1], gUnknown_2031C94[8], 24);
+        gMain.state++;
+        gUnknown_2031DA8->unk_A8 = 0;
+        break;
+    case 11:
+        if (sub_804F610())
+        {
+            gMain.state++;
+        }
+        break;
+    case 12:
+        width = GetStringWidth(1, gSaveBlock2Ptr->playerName, 0);
+        xPos = (56 - width) / 2;
+        for (i = 0; i < 3; i++)
+        {
+            temp = gUnknown_8261CC8;
+            temp.tileTag += i;
+            CreateSprite(&temp, xPos + gTradeUnknownSpriteCoords[LANGUAGE_ENGLISH - 1][0] + (i * 32), gTradeUnknownSpriteCoords[LANGUAGE_ENGLISH - 1][1], 1);
+        }
+
+        /*
+         * These three lines are a pain to match due to register alloc and
+         * pointer arithmetic misbehavior.
+         */
+        id = GetMultiplayerId();
+        id ^= 1;
+        width = GetStringWidth(1, gLinkPlayers[id].name, 0);
+        xPos = (56 - width) / 2;
+        for (i = 0; i < 3; i++)
+        {
+            temp = gUnknown_8261CC8;
+            temp.tileTag += i + 3;
+            CreateSprite(&temp, xPos + gTradeUnknownSpriteCoords[LANGUAGE_ENGLISH - 1][2] + (i * 32), gTradeUnknownSpriteCoords[LANGUAGE_ENGLISH - 1][3], 1);
+        }
+        gMain.state++;
+        break;
+    case 13:
+        temp = gUnknown_8261CC8;
+        temp.tileTag += 6;
+        CreateSprite(&temp, 215, 151, 1);
+        temp = gUnknown_8261CC8;
+        temp.tileTag += 7;
+        CreateSprite(&temp, 247, 151, 1);
+
+        for (i = 0; i < PARTY_SIZE; i++)
+        {
+            temp = gUnknown_8261CC8;
+            temp.tileTag += i + 8;
+            CreateSprite(&temp, (i * 32) + 24, 150, 1);
+        }
+
+        if (gUnknown_2031DA8->tradeMenuCursorPosition < 6)
+            gUnknown_2031DA8->tradeMenuCursorPosition = sub_8138B20();
+        else
+            gUnknown_2031DA8->tradeMenuCursorPosition = sub_8138B20() + 6;
+
+        gUnknown_2031DA8->tradeMenuCursorSpriteIdx = CreateSprite(&gUnknown_8261CB0, gTradeMonSpriteCoords[gUnknown_2031DA8->tradeMenuCursorPosition][0] * 8 + 32, gTradeMonSpriteCoords[gUnknown_2031DA8->tradeMenuCursorPosition][1] * 8, 2);
+        gMain.state = 16;
+        break;
+    case 16:
+        sub_804D694(0);
+        gMain.state++;
+        break;
+    case 17:
+        sub_804D694(1);
+        gUnknown_2031DA8->unk_0 = 0;
+        gUnknown_2031DA8->unk_1 = 0;
+        sub_804D764();
+        gMain.state++;
+        break;
+    case 18:
+        gPaletteFade.bufferTransferDisabled = FALSE;
+        BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        gMain.state++;
+        break;
+    case 19:
+        SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
+        sub_804D694(2);
+        gMain.state++;
+        break;
+    case 20:
+        gMain.state++;
+        break;
+    case 21:
+        sub_804F964();
+        gMain.state++;
+        break;
+    case 22:
+        if (!gPaletteFade.active)
+        {
+            SetMainCallback2(sub_804D638);
+        }
+        break;
+    }
+
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
+#else
+NAKED
+void sub_804CF14(void)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                "\tmov r7, r8\n"
+                "\tpush {r7}\n"
+                "\tsub sp, 0x24\n"
+                "\tldr r1, _0804CF38 @ =gMain\n"
+                "\tmovs r2, 0x87\n"
+                "\tlsls r2, 3\n"
+                "\tadds r0, r1, r2\n"
+                "\tldrb r0, [r0]\n"
+                "\tadds r2, r1, 0\n"
+                "\tcmp r0, 0x16\n"
+                "\tbls _0804CF2E\n"
+                "\tb _0804D4D2\n"
+                "_0804CF2E:\n"
+                "\tlsls r0, 2\n"
+                "\tldr r1, _0804CF3C @ =_0804CF40\n"
+                "\tadds r0, r1\n"
+                "\tldr r0, [r0]\n"
+                "\tmov pc, r0\n"
+                "\t.align 2, 0\n"
+                "_0804CF38: .4byte gMain\n"
+                "_0804CF3C: .4byte _0804CF40\n"
+                "\t.align 2, 0\n"
+                "_0804CF40:\n"
+                "\t.4byte _0804CF9C\n"
+                "\t.4byte _0804CFB0\n"
+                "\t.4byte _0804CFB8\n"
+                "\t.4byte _0804CFC0\n"
+                "\t.4byte _0804CFC8\n"
+                "\t.4byte _0804CFDC\n"
+                "\t.4byte _0804D004\n"
+                "\t.4byte _0804D00C\n"
+                "\t.4byte _0804D150\n"
+                "\t.4byte _0804D178\n"
+                "\t.4byte _0804D19C\n"
+                "\t.4byte _0804D230\n"
+                "\t.4byte _0804D24C\n"
+                "\t.4byte _0804D320\n"
+                "\t.4byte _0804D4D2\n"
+                "\t.4byte _0804D4D2\n"
+                "\t.4byte _0804D414\n"
+                "\t.4byte _0804D41C\n"
+                "\t.4byte _0804D444\n"
+                "\t.4byte _0804D480\n"
+                "\t.4byte _0804D4A0\n"
+                "\t.4byte _0804D4A8\n"
+                "\t.4byte _0804D4C0\n"
+                "_0804CF9C:\n"
+                "\tbl sub_804C600\n"
+                "\tldr r1, _0804CFAC @ =gMain\n"
+                "\tmovs r3, 0x87\n"
+                "\tlsls r3, 3\n"
+                "\tadds r1, r3\n"
+                "\tb _0804D4B4\n"
+                "\t.align 2, 0\n"
+                "_0804CFAC: .4byte gMain\n"
+                "_0804CFB0:\n"
+                "\tmovs r5, 0x87\n"
+                "\tlsls r5, 3\n"
+                "\tadds r1, r2, r5\n"
+                "\tb _0804D200\n"
+                "_0804CFB8:\n"
+                "\tmovs r7, 0x87\n"
+                "\tlsls r7, 3\n"
+                "\tadds r1, r2, r7\n"
+                "\tb _0804D4B4\n"
+                "_0804CFC0:\n"
+                "\tmovs r0, 0x87\n"
+                "\tlsls r0, 3\n"
+                "\tadds r1, r2, r0\n"
+                "\tb _0804D4B4\n"
+                "_0804CFC8:\n"
+                "\tbl CalculatePlayerPartyCount\n"
+                "\tldr r1, _0804CFD8 @ =gMain\n"
+                "\tmovs r2, 0x87\n"
+                "\tlsls r2, 3\n"
+                "\tadds r1, r2\n"
+                "\tb _0804D4B4\n"
+                "\t.align 2, 0\n"
+                "_0804CFD8: .4byte gMain\n"
+                "_0804CFDC:\n"
+                "\tldr r0, _0804CFFC @ =gWirelessCommType\n"
+                "\tldrb r0, [r0]\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _0804CFF0\n"
+                "\tbl LoadWirelessStatusIndicatorSpriteGfx\n"
+                "\tmovs r0, 0\n"
+                "\tmovs r1, 0\n"
+                "\tbl CreateWirelessStatusIndicatorSprite\n"
+                "_0804CFF0:\n"
+                "\tldr r1, _0804D000 @ =gMain\n"
+                "\tmovs r3, 0x87\n"
+                "\tlsls r3, 3\n"
+                "\tadds r1, r3\n"
+                "\tb _0804D4B4\n"
+                "\t.align 2, 0\n"
+                "_0804CFFC: .4byte gWirelessCommType\n"
+                "_0804D000: .4byte gMain\n"
+                "_0804D004:\n"
+                "\tmovs r5, 0x87\n"
+                "\tlsls r5, 3\n"
+                "\tadds r1, r2, r5\n"
+                "\tb _0804D4B4\n"
+                "_0804D00C:\n"
+                "\tbl CalculateEnemyPartyCount\n"
+                "\tldr r4, _0804D12C @ =gUnknown_2031DA8\n"
+                "\tldr r0, [r4]\n"
+                "\tldr r1, _0804D130 @ =gPlayerPartyCount\n"
+                "\tldrb r1, [r1]\n"
+                "\tadds r0, 0x36\n"
+                "\tstrb r1, [r0]\n"
+                "\tldr r0, [r4]\n"
+                "\tldr r1, _0804D134 @ =gEnemyPartyCount\n"
+                "\tldrb r1, [r1]\n"
+                "\tadds r0, 0x37\n"
+                "\tstrb r1, [r0]\n"
+                "\tmovs r0, 0\n"
+                "\tbl ClearWindowTilemap\n"
+                "\tmovs r0, 0\n"
+                "\tbl sub_804F020\n"
+                "\tmovs r0, 0x1\n"
+                "\tbl sub_804F020\n"
+                "\tmovs r6, 0\n"
+                "\tldr r0, [r4]\n"
+                "\tadds r0, 0x36\n"
+                "\tldrb r0, [r0]\n"
+                "\tcmp r6, r0\n"
+                "\tbge _0804D0A8\n"
+                "\tmov r8, r4\n"
+                "\tldr r7, _0804D138 @ =gTradeMonSpriteCoords\n"
+                "_0804D048:\n"
+                "\tmovs r0, 0x64\n"
+                "\tadds r4, r6, 0\n"
+                "\tmuls r4, r0\n"
+                "\tldr r0, _0804D13C @ =gPlayerParty\n"
+                "\tadds r4, r0\n"
+                "\tadds r0, r4, 0\n"
+                "\tmovs r1, 0x41\n"
+                "\tmovs r2, 0\n"
+                "\tbl GetMonData\n"
+                "\tadds r5, r0, 0\n"
+                "\tlsls r5, 16\n"
+                "\tlsrs r5, 16\n"
+                "\tadds r0, r4, 0\n"
+                "\tmovs r1, 0\n"
+                "\tbl GetMonData\n"
+                "\tldrb r2, [r7]\n"
+                "\tlsls r2, 19\n"
+                "\tmovs r1, 0xE0\n"
+                "\tlsls r1, 12\n"
+                "\tadds r2, r1\n"
+                "\tasrs r2, 16\n"
+                "\tldrb r3, [r7, 0x1]\n"
+                "\tlsls r3, 19\n"
+                "\tldr r1, _0804D140 @ =0xfff40000\n"
+                "\tadds r3, r1\n"
+                "\tasrs r3, 16\n"
+                "\tmovs r1, 0x1\n"
+                "\tstr r1, [sp]\n"
+                "\tstr r0, [sp, 0x4]\n"
+                "\tstr r1, [sp, 0x8]\n"
+                "\tadds r0, r5, 0\n"
+                "\tldr r1, _0804D144 @ =SpriteCB_MonIcon\n"
+                "\tbl CreateMonIcon\n"
+                "\tmov r2, r8\n"
+                "\tldr r1, [r2]\n"
+                "\tadds r1, 0x28\n"
+                "\tadds r1, r6\n"
+                "\tstrb r0, [r1]\n"
+                "\tadds r7, 0x2\n"
+                "\tadds r6, 0x1\n"
+                "\tldr r0, [r2]\n"
+                "\tadds r0, 0x36\n"
+                "\tldrb r0, [r0]\n"
+                "\tcmp r6, r0\n"
+                "\tblt _0804D048\n"
+                "_0804D0A8:\n"
+                "\tmovs r6, 0\n"
+                "\tldr r1, _0804D12C @ =gUnknown_2031DA8\n"
+                "\tldr r0, [r1]\n"
+                "\tadds r0, 0x37\n"
+                "\tldrb r0, [r0]\n"
+                "\tcmp r6, r0\n"
+                "\tbge _0804D120\n"
+                "\tldr r0, _0804D138 @ =gTradeMonSpriteCoords\n"
+                "\tmov r8, r1\n"
+                "\tadds r7, r0, 0\n"
+                "\tadds r7, 0xC\n"
+                "_0804D0BE:\n"
+                "\tmovs r0, 0x64\n"
+                "\tadds r4, r6, 0\n"
+                "\tmuls r4, r0\n"
+                "\tldr r0, _0804D148 @ =gEnemyParty\n"
+                "\tadds r4, r0\n"
+                "\tadds r0, r4, 0\n"
+                "\tmovs r1, 0x41\n"
+                "\tmovs r2, 0\n"
+                "\tbl GetMonData\n"
+                "\tadds r5, r0, 0\n"
+                "\tlsls r5, 16\n"
+                "\tlsrs r5, 16\n"
+                "\tadds r0, r4, 0\n"
+                "\tmovs r1, 0\n"
+                "\tbl GetMonData\n"
+                "\tldrb r2, [r7]\n"
+                "\tlsls r2, 19\n"
+                "\tmovs r3, 0xE0\n"
+                "\tlsls r3, 12\n"
+                "\tadds r2, r3\n"
+                "\tasrs r2, 16\n"
+                "\tldrb r3, [r7, 0x1]\n"
+                "\tlsls r3, 19\n"
+                "\tldr r1, _0804D140 @ =0xfff40000\n"
+                "\tadds r3, r1\n"
+                "\tasrs r3, 16\n"
+                "\tmovs r1, 0x1\n"
+                "\tstr r1, [sp]\n"
+                "\tstr r0, [sp, 0x4]\n"
+                "\tmovs r0, 0\n"
+                "\tstr r0, [sp, 0x8]\n"
+                "\tadds r0, r5, 0\n"
+                "\tldr r1, _0804D144 @ =SpriteCB_MonIcon\n"
+                "\tbl CreateMonIcon\n"
+                "\tmov r2, r8\n"
+                "\tldr r1, [r2]\n"
+                "\tadds r1, 0x2E\n"
+                "\tadds r1, r6\n"
+                "\tstrb r0, [r1]\n"
+                "\tadds r7, 0x2\n"
+                "\tadds r6, 0x1\n"
+                "\tldr r0, [r2]\n"
+                "\tadds r0, 0x37\n"
+                "\tldrb r0, [r0]\n"
+                "\tcmp r6, r0\n"
+                "\tblt _0804D0BE\n"
+                "_0804D120:\n"
+                "\tldr r1, _0804D14C @ =gMain\n"
+                "\tmovs r3, 0x87\n"
+                "\tlsls r3, 3\n"
+                "\tadds r1, r3\n"
+                "\tb _0804D4B4\n"
+                "\t.align 2, 0\n"
+                "_0804D12C: .4byte gUnknown_2031DA8\n"
+                "_0804D130: .4byte gPlayerPartyCount\n"
+                "_0804D134: .4byte gEnemyPartyCount\n"
+                "_0804D138: .4byte gTradeMonSpriteCoords\n"
+                "_0804D13C: .4byte gPlayerParty\n"
+                "_0804D140: .4byte 0xfff40000\n"
+                "_0804D144: .4byte SpriteCB_MonIcon\n"
+                "_0804D148: .4byte gEnemyParty\n"
+                "_0804D14C: .4byte gMain\n"
+                "_0804D150:\n"
+                "\tbl LoadHeldItemIcons\n"
+                "\tldr r0, _0804D170 @ =gUnknown_2031DA8\n"
+                "\tldr r1, [r0]\n"
+                "\tadds r0, r1, 0\n"
+                "\tadds r0, 0x36\n"
+                "\tadds r1, 0x28\n"
+                "\tmovs r2, 0\n"
+                "\tbl sub_812256C\n"
+                "\tldr r1, _0804D174 @ =gMain\n"
+                "\tmovs r5, 0x87\n"
+                "\tlsls r5, 3\n"
+                "\tadds r1, r5\n"
+                "\tb _0804D4B4\n"
+                "\t.align 2, 0\n"
+                "_0804D170: .4byte gUnknown_2031DA8\n"
+                "_0804D174: .4byte gMain\n"
+                "_0804D178:\n"
+                "\tldr r0, _0804D194 @ =gUnknown_2031DA8\n"
+                "\tldr r1, [r0]\n"
+                "\tadds r0, r1, 0\n"
+                "\tadds r0, 0x36\n"
+                "\tadds r1, 0x28\n"
+                "\tmovs r2, 0x1\n"
+                "\tbl sub_812256C\n"
+                "\tldr r1, _0804D198 @ =gMain\n"
+                "\tmovs r7, 0x87\n"
+                "\tlsls r7, 3\n"
+                "\tadds r1, r7\n"
+                "\tb _0804D4B4\n"
+                "\t.align 2, 0\n"
+                "_0804D194: .4byte gUnknown_2031DA8\n"
+                "_0804D198: .4byte gMain\n"
+                "_0804D19C:\n"
+                "\tldr r0, _0804D214 @ =gSaveBlock2Ptr\n"
+                "\tldr r0, [r0]\n"
+                "\tldr r6, _0804D218 @ =gUnknown_2031C94\n"
+                "\tldr r1, [r6]\n"
+                "\tldr r5, _0804D21C @ =gDecompressionBuffer\n"
+                "\tstr r5, [sp]\n"
+                "\tmovs r4, 0x3\n"
+                "\tstr r4, [sp, 0x4]\n"
+                "\tmovs r2, 0\n"
+                "\tmovs r3, 0\n"
+                "\tbl sub_808BEB4\n"
+                "\tbl GetMultiplayerId\n"
+                "\tlsls r0, 24\n"
+                "\tmovs r1, 0x80\n"
+                "\tlsls r1, 17\n"
+                "\teors r1, r0\n"
+                "\tlsrs r1, 24\n"
+                "\tlsls r0, r1, 3\n"
+                "\tsubs r0, r1\n"
+                "\tlsls r0, 2\n"
+                "\tldr r1, _0804D220 @ =gLinkPlayers + 8\n"
+                "\tadds r0, r1\n"
+                "\tldr r1, [r6, 0xC]\n"
+                "\tstr r5, [sp]\n"
+                "\tstr r4, [sp, 0x4]\n"
+                "\tmovs r2, 0\n"
+                "\tmovs r3, 0\n"
+                "\tbl sub_808BEB4\n"
+                "\tldr r4, _0804D224 @ =gUnknown_8261ECC\n"
+                "\tldr r0, [r4]\n"
+                "\tldr r1, [r6, 0x18]\n"
+                "\tstr r5, [sp]\n"
+                "\tmovs r2, 0x2\n"
+                "\tstr r2, [sp, 0x4]\n"
+                "\tmovs r2, 0\n"
+                "\tmovs r3, 0\n"
+                "\tbl sub_808BEB4\n"
+                "\tldr r0, [r4, 0x4]\n"
+                "\tldr r1, [r6, 0x20]\n"
+                "\tmovs r2, 0x18\n"
+                "\tbl sub_804F728\n"
+                "\tldr r1, _0804D228 @ =gMain\n"
+                "\tmovs r0, 0x87\n"
+                "\tlsls r0, 3\n"
+                "\tadds r1, r0\n"
+                "_0804D200:\n"
+                "\tldrb r0, [r1]\n"
+                "\tadds r0, 0x1\n"
+                "\tmovs r2, 0\n"
+                "\tstrb r0, [r1]\n"
+                "\tldr r0, _0804D22C @ =gUnknown_2031DA8\n"
+                "\tldr r0, [r0]\n"
+                "\tadds r0, 0xA8\n"
+                "\tstrb r2, [r0]\n"
+                "\tb _0804D4D2\n"
+                "\t.align 2, 0\n"
+                "_0804D214: .4byte gSaveBlock2Ptr\n"
+                "_0804D218: .4byte gUnknown_2031C94\n"
+                "_0804D21C: .4byte gDecompressionBuffer\n"
+                "_0804D220: .4byte gLinkPlayers + 8\n"
+                "_0804D224: .4byte gUnknown_8261ECC\n"
+                "_0804D228: .4byte gMain\n"
+                "_0804D22C: .4byte gUnknown_2031DA8\n"
+                "_0804D230:\n"
+                "\tbl sub_804F610\n"
+                "\tlsls r0, 24\n"
+                "\tcmp r0, 0\n"
+                "\tbne _0804D23C\n"
+                "\tb _0804D4D2\n"
+                "_0804D23C:\n"
+                "\tldr r1, _0804D248 @ =gMain\n"
+                "\tmovs r2, 0x87\n"
+                "\tlsls r2, 3\n"
+                "\tadds r1, r2\n"
+                "\tb _0804D4B4\n"
+                "\t.align 2, 0\n"
+                "_0804D248: .4byte gMain\n"
+                "_0804D24C:\n"
+                "\tldr r0, _0804D30C @ =gSaveBlock2Ptr\n"
+                "\tldr r1, [r0]\n"
+                "\tmovs r0, 0x1\n"
+                "\tmovs r2, 0\n"
+                "\tbl GetStringWidth\n"
+                "\tadds r1, r0, 0\n"
+                "\tmovs r0, 0x38\n"
+                "\tsubs r0, r1\n"
+                "\tlsrs r1, r0, 31\n"
+                "\tadds r0, r1\n"
+                "\tmovs r6, 0\n"
+                "\tadd r5, sp, 0xC\n"
+                "\tldr r3, _0804D310 @ =gTradeUnknownSpriteCoords\n"
+                "\tmov r8, r3\n"
+                "\tasrs r0, 1\n"
+                "\tldrb r7, [r3, 0x4]\n"
+                "\tadds r4, r0, r7\n"
+                "_0804D270:\n"
+                "\tadd r1, sp, 0xC\n"
+                "\tldr r0, _0804D314 @ =gUnknown_8261CC8\n"
+                "\tldm r0!, {r2,r3,r7}\n"
+                "\tstm r1!, {r2,r3,r7}\n"
+                "\tldm r0!, {r2,r3,r7}\n"
+                "\tstm r1!, {r2,r3,r7}\n"
+                "\tldrh r0, [r5]\n"
+                "\tadds r0, r6\n"
+                "\tstrh r0, [r5]\n"
+                "\tlsls r1, r4, 16\n"
+                "\tasrs r1, 16\n"
+                "\tadd r0, sp, 0xC\n"
+                "\tmov r3, r8\n"
+                "\tldrb r2, [r3, 0x5]\n"
+                "\tmovs r3, 0x1\n"
+                "\tbl CreateSprite\n"
+                "\tadds r4, 0x20\n"
+                "\tadds r6, 0x1\n"
+                "\tcmp r6, 0x2\n"
+                "\tble _0804D270\n"
+                "\tbl GetMultiplayerId\n"
+                "\tlsls r0, 24\n"
+                "\tmovs r1, 0x80\n"
+                "\tlsls r1, 17\n"
+                "\teors r1, r0\n"
+                "\tlsrs r1, 24\n"
+                "\tlsls r0, r1, 3\n"
+                "\tsubs r0, r1\n"
+                "\tlsls r0, 2\n"
+                "\tldr r1, _0804D318 @ =gLinkPlayers + 8\n"
+                "\tadds r1, r0, r1\n"
+                "\tmovs r0, 0x1\n"
+                "\tmovs r2, 0\n"
+                "\tbl GetStringWidth\n"
+                "\tadds r1, r0, 0\n"
+                "\tmovs r0, 0x38\n"
+                "\tsubs r0, r1\n"
+                "\tlsrs r1, r0, 31\n"
+                "\tadds r0, r1\n"
+                "\tmovs r6, 0\n"
+                "\tadd r5, sp, 0xC\n"
+                "\tldr r7, _0804D310 @ =gTradeUnknownSpriteCoords\n"
+                "\tmov r8, r7\n"
+                "\tasrs r0, 1\n"
+                "\tmov r1, r8\n"
+                "\tldrb r1, [r1, 0x6]\n"
+                "\tadds r4, r0, r1\n"
+                "_0804D2D4:\n"
+                "\tadd r1, sp, 0xC\n"
+                "\tldr r0, _0804D314 @ =gUnknown_8261CC8\n"
+                "\tldm r0!, {r2,r3,r7}\n"
+                "\tstm r1!, {r2,r3,r7}\n"
+                "\tldm r0!, {r2,r3,r7}\n"
+                "\tstm r1!, {r2,r3,r7}\n"
+                "\tadds r0, r6, 0x3\n"
+                "\tldrh r1, [r5]\n"
+                "\tadds r0, r1\n"
+                "\tstrh r0, [r5]\n"
+                "\tlsls r1, r4, 16\n"
+                "\tasrs r1, 16\n"
+                "\tadd r0, sp, 0xC\n"
+                "\tmov r3, r8\n"
+                "\tldrb r2, [r3, 0x7]\n"
+                "\tmovs r3, 0x1\n"
+                "\tbl CreateSprite\n"
+                "\tadds r4, 0x20\n"
+                "\tadds r6, 0x1\n"
+                "\tcmp r6, 0x2\n"
+                "\tble _0804D2D4\n"
+                "\tldr r1, _0804D31C @ =gMain\n"
+                "\tmovs r5, 0x87\n"
+                "\tlsls r5, 3\n"
+                "\tadds r1, r5\n"
+                "\tb _0804D4B4\n"
+                "\t.align 2, 0\n"
+                "_0804D30C: .4byte gSaveBlock2Ptr\n"
+                "_0804D310: .4byte gTradeUnknownSpriteCoords\n"
+                "_0804D314: .4byte gUnknown_8261CC8\n"
+                "_0804D318: .4byte gLinkPlayers + 8\n"
+                "_0804D31C: .4byte gMain\n"
+                "_0804D320:\n"
+                "\tldr r4, _0804D3B0 @ =gUnknown_8261CC8\n"
+                "\tadd r1, sp, 0xC\n"
+                "\tadds r0, r4, 0\n"
+                "\tldm r0!, {r2,r3,r7}\n"
+                "\tstm r1!, {r2,r3,r7}\n"
+                "\tldm r0!, {r2,r5,r7}\n"
+                "\tstm r1!, {r2,r5,r7}\n"
+                "\tadd r1, sp, 0xC\n"
+                "\tadds r0, r1, 0\n"
+                "\tldrh r0, [r0]\n"
+                "\tadds r0, 0x6\n"
+                "\tstrh r0, [r1]\n"
+                "\tadds r0, r1, 0\n"
+                "\tmovs r1, 0xD7\n"
+                "\tmovs r2, 0x97\n"
+                "\tmovs r3, 0x1\n"
+                "\tbl CreateSprite\n"
+                "\tadd r0, sp, 0xC\n"
+                "\tldm r4!, {r3,r5,r7}\n"
+                "\tstm r0!, {r3,r5,r7}\n"
+                "\tldm r4!, {r1-r3}\n"
+                "\tstm r0!, {r1-r3}\n"
+                "\tadd r1, sp, 0xC\n"
+                "\tadds r0, r1, 0\n"
+                "\tldrh r0, [r0]\n"
+                "\tadds r0, 0x7\n"
+                "\tstrh r0, [r1]\n"
+                "\tadds r0, r1, 0\n"
+                "\tmovs r1, 0xF7\n"
+                "\tmovs r2, 0x97\n"
+                "\tmovs r3, 0x1\n"
+                "\tbl CreateSprite\n"
+                "\tmovs r6, 0\n"
+                "\tadd r4, sp, 0xC\n"
+                "\tmovs r5, 0xC0\n"
+                "\tlsls r5, 13\n"
+                "_0804D36C:\n"
+                "\tadd r1, sp, 0xC\n"
+                "\tldr r0, _0804D3B0 @ =gUnknown_8261CC8\n"
+                "\tldm r0!, {r2,r3,r7}\n"
+                "\tstm r1!, {r2,r3,r7}\n"
+                "\tldm r0!, {r2,r3,r7}\n"
+                "\tstm r1!, {r2,r3,r7}\n"
+                "\tadds r0, r6, 0\n"
+                "\tadds r0, 0x8\n"
+                "\tldrh r7, [r4]\n"
+                "\tadds r0, r7\n"
+                "\tstrh r0, [r4]\n"
+                "\tasrs r1, r5, 16\n"
+                "\tadd r0, sp, 0xC\n"
+                "\tmovs r2, 0x96\n"
+                "\tmovs r3, 0x1\n"
+                "\tbl CreateSprite\n"
+                "\tmovs r0, 0x80\n"
+                "\tlsls r0, 14\n"
+                "\tadds r5, r0\n"
+                "\tadds r6, 0x1\n"
+                "\tcmp r6, 0x5\n"
+                "\tble _0804D36C\n"
+                "\tldr r4, _0804D3B4 @ =gUnknown_2031DA8\n"
+                "\tldr r0, [r4]\n"
+                "\tadds r0, 0x35\n"
+                "\tldrb r0, [r0]\n"
+                "\tcmp r0, 0x5\n"
+                "\tbhi _0804D3B8\n"
+                "\tbl sub_8138B20\n"
+                "\tldr r1, [r4]\n"
+                "\tb _0804D3C0\n"
+                "\t.align 2, 0\n"
+                "_0804D3B0: .4byte gUnknown_8261CC8\n"
+                "_0804D3B4: .4byte gUnknown_2031DA8\n"
+                "_0804D3B8:\n"
+                "\tbl sub_8138B20\n"
+                "\tldr r1, [r4]\n"
+                "\tadds r0, 0x6\n"
+                "_0804D3C0:\n"
+                "\tadds r1, 0x35\n"
+                "\tstrb r0, [r1]\n"
+                "\tldr r0, _0804D404 @ =gUnknown_8261CB0\n"
+                "\tldr r3, _0804D408 @ =gTradeMonSpriteCoords\n"
+                "\tldr r4, _0804D40C @ =gUnknown_2031DA8\n"
+                "\tldr r1, [r4]\n"
+                "\tadds r1, 0x35\n"
+                "\tldrb r2, [r1]\n"
+                "\tlsls r2, 1\n"
+                "\tadds r1, r2, r3\n"
+                "\tldrb r1, [r1]\n"
+                "\tlsls r1, 19\n"
+                "\tmovs r5, 0x80\n"
+                "\tlsls r5, 14\n"
+                "\tadds r1, r5\n"
+                "\tasrs r1, 16\n"
+                "\tadds r3, 0x1\n"
+                "\tadds r2, r3\n"
+                "\tldrb r2, [r2]\n"
+                "\tlsls r2, 3\n"
+                "\tmovs r3, 0x2\n"
+                "\tbl CreateSprite\n"
+                "\tldr r1, [r4]\n"
+                "\tadds r1, 0x34\n"
+                "\tstrb r0, [r1]\n"
+                "\tldr r0, _0804D410 @ =gMain\n"
+                "\tmovs r7, 0x87\n"
+                "\tlsls r7, 3\n"
+                "\tadds r0, r7\n"
+                "\tmovs r1, 0x10\n"
+                "\tstrb r1, [r0]\n"
+                "\tb _0804D4D2\n"
+                "\t.align 2, 0\n"
+                "_0804D404: .4byte gUnknown_8261CB0\n"
+                "_0804D408: .4byte gTradeMonSpriteCoords\n"
+                "_0804D40C: .4byte gUnknown_2031DA8\n"
+                "_0804D410: .4byte gMain\n"
+                "_0804D414:\n"
+                "\tmovs r0, 0\n"
+                "\tbl sub_804D694\n"
+                "\tb _0804D4AC\n"
+                "_0804D41C:\n"
+                "\tmovs r0, 0x1\n"
+                "\tbl sub_804D694\n"
+                "\tldr r2, _0804D43C @ =gUnknown_2031DA8\n"
+                "\tldr r0, [r2]\n"
+                "\tmovs r1, 0\n"
+                "\tstrb r1, [r0]\n"
+                "\tldr r0, [r2]\n"
+                "\tstrb r1, [r0, 0x1]\n"
+                "\tbl sub_804D764\n"
+                "\tldr r1, _0804D440 @ =gMain\n"
+                "\tmovs r2, 0x87\n"
+                "\tlsls r2, 3\n"
+                "\tadds r1, r2\n"
+                "\tb _0804D4B4\n"
+                "\t.align 2, 0\n"
+                "_0804D43C: .4byte gUnknown_2031DA8\n"
+                "_0804D440: .4byte gMain\n"
+                "_0804D444:\n"
+                "\tldr r2, _0804D478 @ =gPaletteFade\n"
+                "\tldrb r1, [r2, 0x8]\n"
+                "\tmovs r0, 0x7F\n"
+                "\tands r0, r1\n"
+                "\tstrb r0, [r2, 0x8]\n"
+                "\tmovs r4, 0x1\n"
+                "\tnegs r4, r4\n"
+                "\tadds r0, r4, 0\n"
+                "\tmovs r1, 0x10\n"
+                "\tmovs r2, 0\n"
+                "\tbl BlendPalettes\n"
+                "\tmovs r0, 0\n"
+                "\tstr r0, [sp]\n"
+                "\tadds r0, r4, 0\n"
+                "\tmovs r1, 0\n"
+                "\tmovs r2, 0x10\n"
+                "\tmovs r3, 0\n"
+                "\tbl BeginNormalPaletteFade\n"
+                "\tldr r1, _0804D47C @ =gMain\n"
+                "\tmovs r3, 0x87\n"
+                "\tlsls r3, 3\n"
+                "\tadds r1, r3\n"
+                "\tb _0804D4B4\n"
+                "\t.align 2, 0\n"
+                "_0804D478: .4byte gPaletteFade\n"
+                "_0804D47C: .4byte gMain\n"
+                "_0804D480:\n"
+                "\tmovs r1, 0x82\n"
+                "\tlsls r1, 5\n"
+                "\tmovs r0, 0\n"
+                "\tbl SetGpuReg\n"
+                "\tmovs r0, 0x2\n"
+                "\tbl sub_804D694\n"
+                "\tldr r1, _0804D49C @ =gMain\n"
+                "\tmovs r5, 0x87\n"
+                "\tlsls r5, 3\n"
+                "\tadds r1, r5\n"
+                "\tb _0804D4B4\n"
+                "\t.align 2, 0\n"
+                "_0804D49C: .4byte gMain\n"
+                "_0804D4A0:\n"
+                "\tmovs r7, 0x87\n"
+                "\tlsls r7, 3\n"
+                "\tadds r1, r2, r7\n"
+                "\tb _0804D4B4\n"
+                "_0804D4A8:\n"
+                "\tbl sub_804F964\n"
+                "_0804D4AC:\n"
+                "\tldr r1, _0804D4BC @ =gMain\n"
+                "\tmovs r0, 0x87\n"
+                "\tlsls r0, 3\n"
+                "\tadds r1, r0\n"
+                "_0804D4B4:\n"
+                "\tldrb r0, [r1]\n"
+                "\tadds r0, 0x1\n"
+                "\tstrb r0, [r1]\n"
+                "\tb _0804D4D2\n"
+                "\t.align 2, 0\n"
+                "_0804D4BC: .4byte gMain\n"
+                "_0804D4C0:\n"
+                "\tldr r0, _0804D4F0 @ =gPaletteFade\n"
+                "\tldrb r1, [r0, 0x7]\n"
+                "\tmovs r0, 0x80\n"
+                "\tands r0, r1\n"
+                "\tcmp r0, 0\n"
+                "\tbne _0804D4D2\n"
+                "\tldr r0, _0804D4F4 @ =sub_804D638\n"
+                "\tbl SetMainCallback2\n"
+                "_0804D4D2:\n"
+                "\tbl RunTasks\n"
+                "\tbl AnimateSprites\n"
+                "\tbl BuildOamBuffer\n"
+                "\tbl UpdatePaletteFade\n"
+                "\tadd sp, 0x24\n"
+                "\tpop {r3}\n"
+                "\tmov r8, r3\n"
+                "\tpop {r4-r7}\n"
+                "\tpop {r0}\n"
+                "\tbx r0\n"
+                "\t.align 2, 0\n"
+                "_0804D4F0: .4byte gPaletteFade\n"
+                "_0804D4F4: .4byte sub_804D638");
 }
 #endif //NONMATCHING

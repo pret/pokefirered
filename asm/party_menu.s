@@ -4284,7 +4284,7 @@ _08120B64:
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r6, 0
-	bl sub_8120BE8
+	bl IsMonCompatibleWithMoveTutorMove
 	lsls r0, 24
 	cmp r0, 0
 	bne _08120B80
@@ -4293,7 +4293,7 @@ _08120B7C:
 	b _08120B9E
 _08120B80:
 	mov r0, r8
-	bl sub_8120BA8
+	bl GetMoveTutorMove
 _08120B86:
 	lsls r0, 16
 	lsrs r1, r0, 16
@@ -4315,8 +4315,8 @@ _08120B9E:
 	bx r1
 	thumb_func_end sub_8120B20
 
-	thumb_func_start sub_8120BA8
-sub_8120BA8: @ 8120BA8
+	thumb_func_start GetMoveTutorMove
+GetMoveTutorMove: @ 8120BA8
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -4333,19 +4333,19 @@ _08120BBC:
 	b _08120BD6
 _08120BC2:
 	movs r0, 0xA9
-	lsls r0, 1
+	lsls r0, 1 @ MOVE_FRENZY_PLANT
 	b _08120BDE
 _08120BC8:
-	ldr r0, _08120BCC @ =0x00000133
+	ldr r0, _08120BCC @ =0x00000133 @ MOVE_BLAST_BURN
 	b _08120BDE
 	.align 2, 0
 _08120BCC: .4byte 0x00000133
 _08120BD0:
 	movs r0, 0x9A
-	lsls r0, 1
+	lsls r0, 1 @ MOVE_HYDRO_CANNON
 	b _08120BDE
 _08120BD6:
-	ldr r0, _08120BE4 @ =gUnknown_8459B60
+	ldr r0, _08120BE4 @ =gMoveTutorMoves
 	lsls r1, 1
 	adds r1, r0
 	ldrh r0, [r1]
@@ -4353,11 +4353,11 @@ _08120BDE:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08120BE4: .4byte gUnknown_8459B60
-	thumb_func_end sub_8120BA8
+_08120BE4: .4byte gMoveTutorMoves
+	thumb_func_end GetMoveTutorMove
 
-	thumb_func_start sub_8120BE8
-sub_8120BE8: @ 8120BE8
+	thumb_func_start IsMonCompatibleWithMoveTutorMove
+IsMonCompatibleWithMoveTutorMove: @ 8120BE8
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -4375,19 +4375,19 @@ _08120C00:
 	beq _08120C12
 	b _08120C18
 _08120C06:
-	cmp r0, 0x3
+	cmp r0, 3 @ SPECIES_VENUSAUR
 	beq _08120C34
 	b _08120C2A
 _08120C0C:
-	cmp r0, 0x6
+	cmp r0, 6 @ SPECIES_CHARIZARD
 	beq _08120C34
 	b _08120C2A
 _08120C12:
-	cmp r0, 0x9
+	cmp r0, 9 @ SPECIES_BLASTOISE
 	beq _08120C34
 	b _08120C2A
 _08120C18:
-	ldr r1, _08120C30 @ =gUnknown_8459B7E
+	ldr r1, _08120C30 @ =gMoveTutorMoveCompatibilityTable
 	lsls r0, 1
 	adds r0, r1
 	ldrh r0, [r0]
@@ -4400,13 +4400,13 @@ _08120C2A:
 	movs r0, 0
 	b _08120C36
 	.align 2, 0
-_08120C30: .4byte gUnknown_8459B7E
+_08120C30: .4byte gMoveTutorMoveCompatibilityTable
 _08120C34:
 	movs r0, 0x1
 _08120C36:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8120BE8
+	thumb_func_end IsMonCompatibleWithMoveTutorMove
 
 	thumb_func_start sub_8120C3C
 sub_8120C3C: @ 8120C3C
@@ -7206,7 +7206,7 @@ party_menu_link_mon_icon_anim: @ 812224C
 	lsrs r7, r3, 24
 	cmp r5, 0
 	beq _0812229A
-	ldr r1, _081222A4 @ =sub_809718C
+	ldr r1, _081222A4 @ =SpriteCB_MonIcon
 	ldr r0, [r4, 0x4]
 	ldrb r2, [r0]
 	ldrb r3, [r0, 0x1]
@@ -7240,7 +7240,7 @@ _0812229A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081222A4: .4byte sub_809718C
+_081222A4: .4byte SpriteCB_MonIcon
 _081222A8: .4byte gSprites
 	thumb_func_end party_menu_link_mon_icon_anim
 
@@ -7276,7 +7276,7 @@ _081222D4:
 	ldr r1, _081222F0 @ =gSprites
 	adds r0, r1
 	movs r1, 0
-	bl sub_8097414
+	bl MonIcon_SetAnim
 	b _0812234C
 	.align 2, 0
 _081222F0: .4byte gSprites
@@ -7287,7 +7287,7 @@ _081222F4:
 	ldr r1, _08122308 @ =gSprites
 	adds r0, r1
 	movs r1, 0x1
-	bl sub_8097414
+	bl MonIcon_SetAnim
 	b _0812234C
 	.align 2, 0
 _08122308: .4byte gSprites
@@ -7298,7 +7298,7 @@ _0812230C:
 	ldr r1, _08122320 @ =gSprites
 	adds r0, r1
 	movs r1, 0x2
-	bl sub_8097414
+	bl MonIcon_SetAnim
 	b _0812234C
 	.align 2, 0
 _08122320: .4byte gSprites
@@ -7309,7 +7309,7 @@ _08122324:
 	ldr r1, _08122338 @ =gSprites
 	adds r0, r1
 	movs r1, 0x3
-	bl sub_8097414
+	bl MonIcon_SetAnim
 	b _0812234C
 	.align 2, 0
 _08122338: .4byte gSprites
@@ -7320,7 +7320,7 @@ _0812233C:
 	ldr r1, _08122354 @ =gSprites
 	adds r0, r1
 	movs r1, 0x4
-	bl sub_8097414
+	bl MonIcon_SetAnim
 _0812234C:
 	pop {r4}
 	pop {r0}
@@ -10642,7 +10642,7 @@ sub_8123D84: @ 8123D84
 	adds r0, r1
 	ldr r1, _08123DC8 @ =sub_8123DCC
 	movs r2, 0x1
-	bl sub_80BEBEC
+	bl ReadMail
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -15699,7 +15699,7 @@ sub_8126704: @ 8126704
 	cmp r4, 0
 	beq _08126754
 	bl sub_811F070
-	ldr r0, _08126750 @ =gUnknown_300537C
+	ldr r0, _08126750 @ =gCB2_AfterEvolution
 	ldr r1, [r6]
 	str r1, [r0]
 	ldrb r3, [r6, 0x9]
@@ -15713,7 +15713,7 @@ sub_8126704: @ 8126704
 	.align 2, 0
 _08126748: .4byte gUnknown_203B0A0
 _0812674C: .4byte gPlayerParty
-_08126750: .4byte gUnknown_300537C
+_08126750: .4byte gCB2_AfterEvolution
 _08126754:
 	ldr r0, _08126768 @ =gTasks
 	lsls r1, r5, 2
@@ -16248,7 +16248,7 @@ _08126BCE:
 	thumb_func_start sub_8126BD4
 sub_8126BD4: @ 8126BD4
 	push {r4,r5,lr}
-	ldr r1, _08126C10 @ =gUnknown_300537C
+	ldr r1, _08126C10 @ =gCB2_AfterEvolution
 	ldr r4, _08126C14 @ =gUnknown_203B0A0
 	ldr r0, [r4]
 	str r0, [r1]
@@ -16274,7 +16274,7 @@ sub_8126BD4: @ 8126BD4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08126C10: .4byte gUnknown_300537C
+_08126C10: .4byte gCB2_AfterEvolution
 _08126C14: .4byte gUnknown_203B0A0
 _08126C18: .4byte gSpecialVar_ItemId
 _08126C1C: .4byte gPlayerParty
@@ -16549,7 +16549,7 @@ sub_8126DC8: @ 8126DC8
 	bl GetMonNickname
 	ldr r4, _08126E5C @ =gSpecialVar_0x8005
 	ldrb r0, [r4]
-	bl sub_8120BA8
+	bl GetMoveTutorMove
 	strh r0, [r7, 0xE]
 	ldr r0, _08126E60 @ =gStringVar2
 	movs r1, 0xE

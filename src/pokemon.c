@@ -8,7 +8,7 @@
 #include "data.h"
 #include "string_util.h"
 #include "battle.h"
-#include "battle_main.h"
+#include "battle_anim.h"
 #include "item.h"
 #include "event_data.h"
 #include "util.h"
@@ -1467,38 +1467,38 @@ const struct SpriteTemplate gUnknown_825DEF0[] =
     {
         .tileTag = SPRITE_INVALID_TAG,
         .paletteTag = 0,
-        .oam = &gUnknown_824F018,
+        .oam = &gOamData_824F018,
         .anims = NULL, 
         .images = gUnknown_8234698,
-        .affineAnims = gUnknown_82348C8,
+        .affineAnims = gSpriteAffineAnimTable_82348C8,
         .callback = sub_80120C4,
     },
     {
         .tileTag = SPRITE_INVALID_TAG,
         .paletteTag = 0,
-        .oam = &gUnknown_824F010,
+        .oam = &gOamData_824F010,
         .anims = NULL, 
         .images = gUnknown_82346B8,
-        .affineAnims = gUnknown_8234944,
-        .callback = oac_poke_opponent,
+        .affineAnims = gSpriteAffineAnimTable_8234944,
+        .callback = SpriteCB_WildMon,
     },
     {
         .tileTag = SPRITE_INVALID_TAG,
         .paletteTag = 0,
-        .oam = &gUnknown_824F018,
+        .oam = &gOamData_824F018,
         .anims = NULL, 
         .images = gUnknown_82346D8,
-        .affineAnims = gUnknown_82348C8,
+        .affineAnims = gSpriteAffineAnimTable_82348C8,
         .callback = sub_80120C4,
     },
     {
         .tileTag = SPRITE_INVALID_TAG,
         .paletteTag = 0,
-        .oam = &gUnknown_824F010,
+        .oam = &gOamData_824F010,
         .anims = NULL, 
         .images = gUnknown_82346F8,
-        .affineAnims = gUnknown_8234944,
-        .callback = oac_poke_opponent,
+        .affineAnims = gSpriteAffineAnimTable_8234944,
+        .callback = SpriteCB_WildMon,
     },
 };
 
@@ -1507,55 +1507,55 @@ const struct SpriteTemplate gUnknown_825DF50[] =
     {
         .tileTag = SPRITE_INVALID_TAG,
         .paletteTag = 0,
-        .oam = &gUnknown_824F018,
+        .oam = &gOamData_824F018,
         .anims = NULL, 
-        .images = gUnknown_8234718,
-        .affineAnims = gUnknown_82348C8,
+        .images = gTrainerBackPicTable_Red,
+        .affineAnims = gSpriteAffineAnimTable_82348C8,
         .callback = sub_80120C4,
     },
     {
         .tileTag = SPRITE_INVALID_TAG,
         .paletteTag = 0,
-        .oam = &gUnknown_824F018,
+        .oam = &gOamData_824F018,
         .anims = NULL, 
-        .images = gUnknown_8234740,
-        .affineAnims = gUnknown_82348C8,
+        .images = gTrainerBackPicTable_Leaf,
+        .affineAnims = gSpriteAffineAnimTable_82348C8,
         .callback = sub_80120C4,
     },
     {
         .tileTag = SPRITE_INVALID_TAG,
         .paletteTag = 0,
-        .oam = &gUnknown_824F018,
+        .oam = &gOamData_824F018,
         .anims = NULL, 
-        .images = gUnknown_82347A8,
-        .affineAnims = gUnknown_82348C8,
+        .images = gTrainerBackPicTable_RSBrendan,
+        .affineAnims = gSpriteAffineAnimTable_82348C8,
         .callback = sub_80120C4,
     },
     {
         .tileTag = SPRITE_INVALID_TAG,
         .paletteTag = 0,
-        .oam = &gUnknown_824F018,
+        .oam = &gOamData_824F018,
         .anims = NULL, 
-        .images = gUnknown_82347C8,
-        .affineAnims = gUnknown_82348C8,
+        .images = gTrainerBackPicTable_RSMay,
+        .affineAnims = gSpriteAffineAnimTable_82348C8,
         .callback = sub_80120C4,
     },
     {
         .tileTag = SPRITE_INVALID_TAG,
         .paletteTag = 0,
-        .oam = &gUnknown_824F018,
+        .oam = &gOamData_824F018,
         .anims = NULL, 
-        .images = gUnknown_8234768,
-        .affineAnims = gUnknown_82348C8,
+        .images = gTrainerBackPicTable_PokeDude,
+        .affineAnims = gSpriteAffineAnimTable_82348C8,
         .callback = sub_80120C4,
     },
     {
         .tileTag = SPRITE_INVALID_TAG,
         .paletteTag = 0,
-        .oam = &gUnknown_824F018,
+        .oam = &gOamData_824F018,
         .anims = NULL, 
-        .images = gUnknown_8234788,
-        .affineAnims = gUnknown_82348C8,
+        .images = gTrainerBackPicTable_OldMan,
+        .affineAnims = gSpriteAffineAnimTable_82348C8,
         .callback = sub_80120C4,
     },
 };
@@ -2362,25 +2362,25 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     // In FRLG, the Battle Tower and opponent checks are stubbed here.
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | /*BATTLE_TYPE_BATTLE_TOWER |*/ BATTLE_TYPE_EREADER_TRAINER)))
     {
-        if (FlagGet(FLAG_UNK820)
+        if (FlagGet(FLAG_BADGE01_GET)
             && !GetBattlerSide(battlerIdAtk))
             attack = (110 * attack) / 100;
     }
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | /*BATTLE_TYPE_BATTLE_TOWER |*/ BATTLE_TYPE_EREADER_TRAINER)))
     {
-        if (FlagGet(FLAG_UNK824)
+        if (FlagGet(FLAG_BADGE05_GET)
             && !GetBattlerSide(battlerIdDef))
             defense = (110 * defense) / 100;
     }
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | /*BATTLE_TYPE_BATTLE_TOWER |*/ BATTLE_TYPE_EREADER_TRAINER)))
     {
-        if (FlagGet(FLAG_UNK826)
+        if (FlagGet(FLAG_BADGE07_GET)
             && !GetBattlerSide(battlerIdAtk))
             spAttack = (110 * spAttack) / 100;
     }
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | /*BATTLE_TYPE_BATTLE_TOWER |*/ BATTLE_TYPE_EREADER_TRAINER)))
     {
-        if (FlagGet(FLAG_UNK826)
+        if (FlagGet(FLAG_BADGE07_GET)
             && !GetBattlerSide(battlerIdDef))
             spDefense = (110 * spDefense) / 100;
     }
@@ -2698,7 +2698,7 @@ void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition)
         }
     }
     gMultiuseSpriteTemplate.paletteTag = speciesTag;
-    gMultiuseSpriteTemplate.anims = gUnknown_82349BC;
+    gMultiuseSpriteTemplate.anims = gSpriteAnimTable_82349BC;
 }
 
 void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerSpriteId, u8 battlerPosition)
@@ -3634,7 +3634,7 @@ static u8 SendMonToPC(struct Pokemon* mon)
                 gSpecialVar_MonBoxId = boxNo;
                 gSpecialVar_MonBoxPos = boxPos;
                 if (get_unknown_box_id() != boxNo)
-                    FlagClear(FLAG_UNK843);
+                    FlagClear(FLAG_SYS_CHANGED_BOX_TO_STORE_MON);
                 VarSet(VAR_0x4037, boxNo);
                 return MON_GIVEN_TO_PC;
             }
@@ -4652,8 +4652,7 @@ bool8 PokemonUseItemEffects2(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mo
                             sp18 = itemEffect[r10];
                         r10++;
                         break;
-                    case 7:\
-
+                    case 7:
                         if (GetMonData(mon, MON_DATA_FRIENDSHIP, NULL) >= 200
                          && retVal == FALSE
                          && sp18 == 0)
@@ -5406,7 +5405,7 @@ u16 GetMonEVCount(struct Pokemon *mon)
     return count;
 }
 
-void sub_8043A68(void)
+void RandomlyGivePartyPokerus(struct Pokemon *party)
 {
     u8 foo[4]; // huh?
 }
@@ -5472,7 +5471,7 @@ static void sub_8043B38(void)
     u8 foo[4]; // huh?
 }
 
-void sub_8043B40(void)
+void PartySpreadPokerus(struct Pokemon *party)
 {
     u8 foo[4]; // huh?
 }
@@ -6089,7 +6088,7 @@ static void OakSpeechNidoranFSetupTemplateDummy(struct OakSpeechNidoranFStruct *
         for (j = 0; j < structPtr->frameCount; ++j)
             structPtr->frameImages[i * structPtr->spriteCount + j].data = &structPtr->bufferPtrs[i][j * 0x800];
         structPtr->templates[i].images = &structPtr->frameImages[i * structPtr->spriteCount]; // should be frameCount logically
-        structPtr->templates[i].anims = gUnknown_82349BC;
+        structPtr->templates[i].anims = gSpriteAnimTable_82349BC;
         structPtr->templates[i].paletteTag = i;
     }
 }

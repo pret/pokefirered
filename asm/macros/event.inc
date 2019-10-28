@@ -37,6 +37,13 @@
 	.4byte \destination
 	.endm
 
+	lt = 0
+	eq = 1
+	gt = 2
+	le = 3
+	ge = 4
+	ne = 5
+
 	@ If the result of the last comparison matches condition (see Comparison operators), calls destination.
 	.macro call_if condition, destination
 	.byte 0x07
@@ -1225,10 +1232,9 @@
 	.byte 0xb7
 	.endm
 
-	.macro setvaddress long, word
+	.macro setvaddress long
 	.byte 0xb8
 	.4byte \long
-	.2byte \word
 	.endm
 
 	.macro vgoto pointer
@@ -1406,7 +1412,7 @@
 @ Supplementary
 
 	.macro goto_if_eq dest
-	goto_if 1, \dest
+	goto_if eq, \dest
 	.endm
 
 	.macro switch var
@@ -1441,4 +1447,15 @@
 	setorcopyvar 0x8001, \amount
 	setorcopyvar 0x8002, \fanfare
 	callstd 9
+	.endm
+
+	.macro famechecker person:req, index:req, function=SetFlavorTextFlagFromSpecialVars
+	setvar VAR_0x8004, \person
+	setvar VAR_0x8005, \index
+	special \function
+	.endm
+
+	.macro set_gym_trainers gym:req
+	setvar VAR_0x8008, \gym
+	call EventScript_1A6B18
 	.endm

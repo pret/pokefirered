@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "49",
+      "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
       "x": 25,
       "y": 9,
       "elevation": 3,
@@ -24,10 +24,10 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
       "script": "SilphCo_3F_EventScript_16171F",
-      "flag": "83"
+      "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
-      "graphics_id": "47",
+      "graphics_id": "MAP_OBJ_GFX_WORKER_M",
       "x": 31,
       "y": 13,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "55",
+      "graphics_id": "MAP_OBJ_GFX_SCIENTIST",
       "x": 4,
       "y": 12,
       "elevation": 3,
@@ -50,10 +50,10 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SilphCo_3F_EventScript_161708",
-      "flag": "83"
+      "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 8,
       "y": 10,
       "elevation": 3,
@@ -63,7 +63,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SilphCo_3F_EventScript_1BE866",
-      "flag": "396"
+      "flag": "FLAG_HIDE_SILPH_CO_3F_HYPER_POTION"
     }
   ],
   "warp_events": [
@@ -202,8 +202,9 @@
       "y": 18,
       "elevation": 0,
       "item": "ITEM_PROTEIN",
-      "flag": "136",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_SILPH_CO_3F_PROTEIN",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "bg_event_type_0",

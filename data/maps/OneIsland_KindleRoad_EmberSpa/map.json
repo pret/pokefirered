@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "32",
+      "graphics_id": "MAP_OBJ_GFX_OLD_MAN_1",
       "x": 11,
       "y": 13,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "30",
+      "graphics_id": "MAP_OBJ_GFX_BALDING_MAN",
       "x": 15,
       "y": 11,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "54",
+      "graphics_id": "MAP_OBJ_GFX_BLACKBELT",
       "x": 6,
       "y": 8,
       "elevation": 3,
@@ -50,10 +50,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "OneIsland_KindleRoad_EmberSpa_EventScript_165380",
-      "flag": "157"
+      "flag": "FLAG_HIDE_POSTGAME_GOSSIPERS"
     },
     {
-      "graphics_id": "35",
+      "graphics_id": "MAP_OBJ_GFX_OLD_WOMAN",
       "x": 20,
       "y": 7,
       "elevation": 3,
@@ -66,7 +66,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "32",
+      "graphics_id": "MAP_OBJ_GFX_OLD_MAN_1",
       "x": 10,
       "y": 5,
       "elevation": 3,
@@ -79,7 +79,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "30",
+      "graphics_id": "MAP_OBJ_GFX_BALDING_MAN",
       "x": 11,
       "y": 20,
       "elevation": 3,

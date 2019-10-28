@@ -45,7 +45,7 @@ static void OpponentHandleTrainerSlideBack(void);
 static void OpponentHandleFaintAnimation(void);
 static void OpponentHandlePaletteFade(void);
 static void OpponentHandleSuccessBallThrowAnim(void);
-static void OpponentHandleBallThrow(void);
+static void OpponentHandleBallThrowAnim(void);
 static void OpponentHandlePause(void);
 static void OpponentHandleMoveAnimation(void);
 static void OpponentHandlePrintString(void);
@@ -116,7 +116,7 @@ static void (*const sOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     OpponentHandleFaintAnimation,
     OpponentHandlePaletteFade,
     OpponentHandleSuccessBallThrowAnim,
-    OpponentHandleBallThrow,
+    OpponentHandleBallThrowAnim,
     OpponentHandlePause,
     OpponentHandleMoveAnimation,
     OpponentHandlePrintString,
@@ -1231,7 +1231,7 @@ static void OpponentHandleSuccessBallThrowAnim(void)
     OpponentBufferExecCompleted();
 }
 
-static void OpponentHandleBallThrow(void)
+static void OpponentHandleBallThrowAnim(void)
 {
     OpponentBufferExecCompleted();
 }

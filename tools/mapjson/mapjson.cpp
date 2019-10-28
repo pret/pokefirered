@@ -345,7 +345,8 @@ string generate_firered_map_events_text(Json map_data) {
                      << bg_event["elevation"].int_value() << ", "
                      << bg_event["item"].string_value() << ", "
                      << bg_event["flag"].string_value() << ", "
-                     << bg_event["unknown"].int_value() << "\n";
+                     << bg_event["quantity"].int_value() << ", "
+                     << bg_event["underfoot"].bool_value() << "\n";
             }
             else {
                 string type_string = bg_event["type"].string_value();

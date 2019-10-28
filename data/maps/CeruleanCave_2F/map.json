@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 9,
       "y": 18,
       "elevation": 3,
@@ -24,10 +24,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "CeruleanCave_2F_EventScript_1BEA6E",
-      "flag": "437"
+      "flag": "FLAG_HIDE_CERULEAN_CAVE_2F_PP_UP"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 29,
       "y": 16,
       "elevation": 3,
@@ -37,10 +37,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "CeruleanCave_2F_EventScript_1BEA7B",
-      "flag": "438"
+      "flag": "FLAG_HIDE_CERULEAN_CAVE_2F_ULTRA_BALL"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 33,
       "y": 12,
       "elevation": 3,
@@ -50,10 +50,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "CeruleanCave_2F_EventScript_1BEA61",
-      "flag": "436"
+      "flag": "FLAG_HIDE_CERULEAN_CAVE_2F_FULL_RESTORE"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 33,
       "y": 10,
       "elevation": 3,
@@ -62,11 +62,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCave_2F_EventScript_1BE00C",
-      "flag": "18"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_12"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 33,
       "y": 9,
       "elevation": 3,
@@ -75,11 +75,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCave_2F_EventScript_1BE00C",
-      "flag": "19"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_13"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 25,
       "y": 11,
       "elevation": 3,
@@ -88,11 +88,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCave_2F_EventScript_1BE00C",
-      "flag": "20"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_14"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 28,
       "y": 20,
       "elevation": 3,
@@ -101,11 +101,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCave_2F_EventScript_1BE00C",
-      "flag": "21"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_15"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 30,
       "y": 20,
       "elevation": 3,
@@ -114,11 +114,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCave_2F_EventScript_1BE00C",
-      "flag": "22"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_16"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 9,
       "y": 13,
       "elevation": 3,
@@ -127,11 +127,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCave_2F_EventScript_1BE00C",
-      "flag": "23"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_17"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 23,
       "y": 16,
       "elevation": 3,
@@ -140,11 +140,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCave_2F_EventScript_1BE00C",
-      "flag": "24"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_18"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 13,
       "y": 6,
       "elevation": 3,
@@ -153,11 +153,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCave_2F_EventScript_1BE00C",
-      "flag": "25"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_19"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 4,
       "y": 12,
       "elevation": 3,
@@ -166,11 +166,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCave_2F_EventScript_1BE00C",
-      "flag": "26"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_1A"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
       "x": 10,
       "y": 20,
       "elevation": 3,
@@ -179,8 +179,8 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCave_2F_EventScript_1BE00C",
-      "flag": "27"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_1B"
     }
   ],
   "warp_events": [

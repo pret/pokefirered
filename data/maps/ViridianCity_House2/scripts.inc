@@ -26,15 +26,15 @@ ViridianCity_House2_EventScript_16A0AB:: @ 816A0AB
 	msgbox gUnknown_818FC65
 	msgbox gUnknown_818FF19, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16A11B
+	goto_if eq, EventScript_16A11B
 	msgbox gUnknown_818FD23
 	msgbox gUnknown_818FF19, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16A11B
+	goto_if eq, EventScript_16A11B
 	msgbox gUnknown_818FDA8
 	msgbox gUnknown_818FF19, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16A11B
+	goto_if eq, EventScript_16A11B
 	msgbox gUnknown_818FE5C
 	applymovement 2, Movement_1A75E9
 	waitmovement 0
@@ -56,7 +56,7 @@ ViridianCity_House2_EventScript_16A11D:: @ 816A11D
 EventScript_16A12C:: @ 816A12C
 	message Text_18FF88
 	waitmessage
-	multichoicegrid 7, 1, 15, 3, 0
+	multichoicegrid 7, 1, MULTICHOICE_TRAINER_SCHOOL_WHITEBOARD, 3, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_16A18B
 	case 1, EventScript_16A1A7

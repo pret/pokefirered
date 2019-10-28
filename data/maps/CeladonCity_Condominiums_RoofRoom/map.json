@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "54",
+      "graphics_id": "MAP_OBJ_GFX_BLACKBELT",
       "x": 3,
       "y": 5,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 7,
       "y": 3,
       "elevation": 0,
@@ -37,7 +37,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "CeladonCity_Condominiums_RoofRoom_EventScript_16C46D",
-      "flag": "87"
+      "flag": "FLAG_HIDE_EEVEE_BALL"
     }
   ],
   "warp_events": [

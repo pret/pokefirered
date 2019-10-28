@@ -6,26 +6,26 @@ SevenIsland_TrainerTower_Elevator_MapScripts:: @ 8164AF8
 SevenIsland_TrainerTower_Elevator_EventScript_164B03:: @ 8164B03
 	lockall
 	setvar VAR_0x8004, 6
-	checkflag FLAG_0x002
-	call_if 0, EventScript_1A7AB9
-	copyvar VAR_0x8005, VAR_0x403A
-	special sub_80CB580
+	checkflag FLAG_TEMP_2
+	call_if FALSE, EventScript_1A7AB9
+	copyvar VAR_0x8005, VAR_ELEVATOR_FLOOR
+	special Special_DrawElevatorCurrentFloorWindow
 	message Text_1A535C
 	waitmessage
 	setvar VAR_0x8004, 6
-	specialvar VAR_RESULT, sub_80CB328
+	specialvar VAR_RESULT, Special_InitElevatorFloorSelectMenuPos
 	switch VAR_RESULT
 	case 0, EventScript_164B46
 	case 1, EventScript_164B52
 	end
 
 EventScript_164B46:: @ 8164B46
-	multichoicedefault 0, 0, 20, 0, 0
+	multichoicedefault 0, 0, MULTICHOICE_ROOFTOP_B1F, 0, FALSE
 	goto EventScript_164B5E
 	end
 
 EventScript_164B52:: @ 8164B52
-	multichoicedefault 0, 0, 20, 1, 0
+	multichoicedefault 0, 0, MULTICHOICE_ROOFTOP_B1F, 1, FALSE
 	goto EventScript_164B5E
 	end
 
@@ -40,11 +40,11 @@ EventScript_164B5E:: @ 8164B5E
 EventScript_164B90:: @ 8164B90
 	setvar VAR_0x8006, 3
 	setdynamicwarp MAP_SEVEN_ISLAND_TRAINER_TOWER_LOBBY, 255, 17, 8
-	compare_var_to_value VAR_0x403A, 3
-	goto_if_eq EventScript_164BD3
+	compare_var_to_value VAR_ELEVATOR_FLOOR, 3
+	goto_if eq, EventScript_164BD3
 	call EventScript_164BD8
-	setvar VAR_0x403A, 3
-	special sub_80CB63C
+	setvar VAR_ELEVATOR_FLOOR, 3
+	special Special_CloseElevatorCurrentFloorWindow
 	delay 25
 	applymovement 255, Movement_164BE5
 	waitmovement 0
@@ -58,17 +58,17 @@ EventScript_164BCD:: @ 8164BCD
 	end
 
 EventScript_164BD3:: @ 8164BD3
-	special sub_80CB63C
+	special Special_CloseElevatorCurrentFloorWindow
 	releaseall
 	end
 
 EventScript_164BD8:: @ 8164BD8
-	special sub_80CB63C
+	special Special_CloseElevatorCurrentFloorWindow
 	closemessage
 	waitse
-	special sub_80CB498
+	special Special_AnimateElevator
 	waitstate
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	return
 
 Movement_164BE5:: @ 8164BE5

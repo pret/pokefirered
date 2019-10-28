@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "49",
+      "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
       "x": 4,
       "y": 9,
       "elevation": 3,
@@ -24,10 +24,10 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 5,
       "script": "RocketHideout_B1F_EventScript_1611C5",
-      "flag": "173"
+      "flag": "FLAG_HIDE_MISC_KANTO_ROCKETS"
     },
     {
-      "graphics_id": "49",
+      "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
       "x": 24,
       "y": 12,
       "elevation": 3,
@@ -37,10 +37,10 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
       "script": "RocketHideout_B1F_EventScript_1611AE",
-      "flag": "173"
+      "flag": "FLAG_HIDE_MISC_KANTO_ROCKETS"
     },
     {
-      "graphics_id": "49",
+      "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
       "x": 6,
       "y": 32,
       "elevation": 3,
@@ -50,10 +50,10 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
       "script": "RocketHideout_B1F_EventScript_1611F3",
-      "flag": "173"
+      "flag": "FLAG_HIDE_MISC_KANTO_ROCKETS"
     },
     {
-      "graphics_id": "49",
+      "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
       "x": 10,
       "y": 22,
       "elevation": 3,
@@ -63,10 +63,10 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
       "script": "RocketHideout_B1F_EventScript_1611DC",
-      "flag": "173"
+      "flag": "FLAG_HIDE_MISC_KANTO_ROCKETS"
     },
     {
-      "graphics_id": "49",
+      "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
       "x": 21,
       "y": 27,
       "elevation": 3,
@@ -76,10 +76,10 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
       "script": "RocketHideout_B1F_EventScript_16120A",
-      "flag": "173"
+      "flag": "FLAG_HIDE_MISC_KANTO_ROCKETS"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 5,
       "y": 16,
       "elevation": 0,
@@ -89,10 +89,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "RocketHideout_B1F_EventScript_1BE6C6",
-      "flag": "364"
+      "flag": "FLAG_HIDE_ROCKET_HIDEOUT_B1F_ESCAPE_ROPE"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 1,
       "y": 22,
       "elevation": 3,
@@ -102,7 +102,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "RocketHideout_B1F_EventScript_1BE6D3",
-      "flag": "365"
+      "flag": "FLAG_HIDE_ROCKET_HIDEOUT_B1F_HYPER_POTION"
     }
   ],
   "warp_events": [
@@ -157,8 +157,9 @@
       "y": 17,
       "elevation": 0,
       "item": "ITEM_PP_UP",
-      "flag": "11",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_ROCKET_HIDEOUT_B1F_PP_UP",
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

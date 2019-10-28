@@ -398,7 +398,7 @@ void sub_8146060(void)
     gUnknown_203F3C8->unk_017C = 0xFF;
     if (gUnknown_203F3C8->unk_014C.unk_06 != SPECIES_NONE)
     {
-        gUnknown_203F3C8->unk_017C = sub_8096ECC(sub_8096FD4(gUnknown_203F3C8->unk_014C.unk_06), SpriteCallbackDummy, 0xDC, 0x14, 0, FALSE);
+        gUnknown_203F3C8->unk_017C = CreateMonIcon_HandleDeoxys(MailSpeciesToIconSpecies(gUnknown_203F3C8->unk_014C.unk_06), SpriteCallbackDummy, 0xDC, 0x14, 0, FALSE);
         gSprites[gUnknown_203F3C8->unk_017C].oam.priority = 2;
     }
     if (gUnknown_203F3C8->unk_0000.unk_09 != 0 && gUnknown_203F3C8->unk_0000.unk_08_0 == 1)
@@ -412,7 +412,7 @@ void sub_8146060(void)
             gUnknown_203F3C8->unk_017D[r7][0] = CreateSprite(&gUnknown_8467FA0, 0xd8 - 32 * r7, 0x90, 8);
             if (gUnknown_203F3C8->unk_014C.unk_08[0][r7] != 0)
             {
-                gUnknown_203F3C8->unk_017D[r7][1] = sub_8096ECC(sub_8096FD4(gUnknown_203F3C8->unk_014C.unk_08[0][r7]), SpriteCallbackDummy, 0xd8 - 32 * r7, 0x88, 0, 0);
+                gUnknown_203F3C8->unk_017D[r7][1] = CreateMonIcon_HandleDeoxys(MailSpeciesToIconSpecies(gUnknown_203F3C8->unk_014C.unk_08[0][r7]), SpriteCallbackDummy, 0xd8 - 32 * r7, 0x88, 0, 0);
                 gSprites[gUnknown_203F3C8->unk_017D[r7][1]].oam.priority = 2;
             }
         }
@@ -423,7 +423,7 @@ void sub_81461D8(void)
 {
     u8 r6 = 0;
     if (gUnknown_203F3C8->unk_017C != 0xFF)
-        sub_8097070(&gSprites[gUnknown_203F3C8->unk_017C]);
+        DestroyMonIcon(&gSprites[gUnknown_203F3C8->unk_017C]);
     if (gUnknown_203F3C8->unk_0000.unk_09 != 0 && gUnknown_203F3C8->unk_0000.unk_08_0 == 1)
     {
         for (; r6 < gUnknown_203F3C8->unk_0000.unk_09; r6++)
@@ -435,7 +435,7 @@ void sub_81461D8(void)
                 // if (gUnknown_203F3C8->unk_017D[r6][1] != 0xFF)
                 if (gUnknown_203F3C8->unk_017D[r6][0] != 0xFF)
                 {
-                    sub_8097070(&gSprites[gUnknown_203F3C8->unk_017D[r6][1]]);
+                    DestroyMonIcon(&gSprites[gUnknown_203F3C8->unk_017D[r6][1]]);
                 }
             }
         }

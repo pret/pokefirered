@@ -25,7 +25,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "40",
+      "graphics_id": "MAP_OBJ_GFX_PICNICKER",
       "x": 14,
       "y": 10,
       "elevation": 3,
@@ -38,7 +38,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "56",
+      "graphics_id": "MAP_OBJ_GFX_HIKER",
       "x": 20,
       "y": 17,
       "elevation": 3,
@@ -51,7 +51,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "56",
+      "graphics_id": "MAP_OBJ_GFX_HIKER",
       "x": 61,
       "y": 16,
       "elevation": 3,
@@ -64,7 +64,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "39",
+      "graphics_id": "MAP_OBJ_GFX_CAMPER",
       "x": 26,
       "y": 7,
       "elevation": 3,
@@ -77,7 +77,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "20",
+      "graphics_id": "MAP_OBJ_GFX_BUG_CATCHER",
       "x": 26,
       "y": 1,
       "elevation": 3,
@@ -90,7 +90,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "20",
+      "graphics_id": "MAP_OBJ_GFX_BUG_CATCHER",
       "x": 49,
       "y": 7,
       "elevation": 3,
@@ -103,7 +103,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "56",
+      "graphics_id": "MAP_OBJ_GFX_HIKER",
       "x": 53,
       "y": 2,
       "elevation": 3,
@@ -116,7 +116,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "40",
+      "graphics_id": "MAP_OBJ_GFX_PICNICKER",
       "x": 60,
       "y": 9,
       "elevation": 3,
@@ -129,7 +129,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "39",
+      "graphics_id": "MAP_OBJ_GFX_CAMPER",
       "x": 36,
       "y": 6,
       "elevation": 3,
@@ -142,7 +142,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "95",
+      "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
       "x": 2,
       "y": 8,
       "elevation": 3,
@@ -151,11 +151,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route9_EventScript_1BDF13",
-      "flag": "18"
+      "script": "EventScript_InteractWithCutTreeObject",
+      "flag": "FLAG_TEMP_12"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 12,
       "y": 17,
       "elevation": 3,
@@ -165,10 +165,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "Route9_EventScript_1BE6B9",
-      "flag": "363"
+      "flag": "FLAG_HIDE_ROUTE9_TM40"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 65,
       "y": 17,
       "elevation": 3,
@@ -178,7 +178,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "Route9_EventScript_1BEAFD",
-      "flag": "450"
+      "flag": "FLAG_HIDE_ROUTE9_BURN_HEAL"
     }
   ],
   "warp_events": [],
@@ -197,8 +197,9 @@
       "y": 7,
       "elevation": 0,
       "item": "ITEM_ETHER",
-      "flag": "6",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_ROUTE9_ETHER",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -206,8 +207,9 @@
       "y": 2,
       "elevation": 3,
       "item": "ITEM_RARE_CANDY",
-      "flag": "123",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_ROUTE9_RARE_CANDY",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -215,8 +217,9 @@
       "y": 2,
       "elevation": 3,
       "item": "ITEM_CHESTO_BERRY",
-      "flag": "150",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_ROUTE9_CHESTO_BERRY",
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

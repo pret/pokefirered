@@ -3,149 +3,189 @@
 
 #define VAR_0x3F20                 0x3F20
 
-#define VAR_0x4000                 0x4000
-#define VAR_0x4001                 0x4001
-#define VAR_0x4002                 0x4002
-#define VAR_0x4003                 0x4003
-#define VAR_0x4004                 0x4004
-#define VAR_0x4005                 0x4005
-#define VAR_0x4006                 0x4006
-#define VAR_0x4007                 0x4007
-#define VAR_0x4008                 0x4008
-#define VAR_0x4009                 0x4009
-#define VAR_0x400A                 0x400A
-#define VAR_0x400B                 0x400B
-#define VAR_0x400C                 0x400C
-#define VAR_0x400D                 0x400D
-#define VAR_0x400E                 0x400E
-#define VAR_0x400F                 0x400F
-#define VAR_0x4010                 0x4010
-#define VAR_0x4011                 0x4011
-#define VAR_0x4012                 0x4012
-#define VAR_0x4013                 0x4013
-#define VAR_0x4014                 0x4014
-#define VAR_0x4015                 0x4015
-#define VAR_0x4016                 0x4016
-#define VAR_0x4017                 0x4017
-#define VAR_0x4018                 0x4018
-#define VAR_0x4019                 0x4019
-#define VAR_0x401A                 0x401A
-#define VAR_0x401B                 0x401B
-#define VAR_0x401C                 0x401C
-#define VAR_0x401D                 0x401D
-#define VAR_0x401E                 0x401E
-#define VAR_0x401F                 0x401F
-#define VAR_REPEL_STEP_COUNT       0x4020
-#define VAR_0x4021                 0x4021
-#define VAR_ICE_STEP_COUNT         0x4022
-#define VAR_0x4023                 0x4023
-#define VAR_0x4024                 0x4024
-#define VAR_0x4025                 0x4025
-#define VAR_SECRET_BASE_MAP        0x4026
-#define VAR_0x4027                 0x4027
-#define VAR_0x4028                 0x4028
-#define VAR_0x4029                 0x4029
-#define VAR_HAPPINESS_STEP_COUNTER 0x402A
-#define VAR_POISON_STEP_COUNTER    0x402B
-#define VAR_RESET_RTC_ENABLE       0x402C
-#define VAR_0x402D                 0x402D
-#define VAR_0x402E                 0x402E
+#define VARS_START 0x4000
 
-#define VAR_0x402F                 0x402F
+// Temporary variables. Reset on map load.
+#define VAR_0x4000                          0x4000
+#define VAR_0x4001                          0x4001
+#define VAR_0x4002                          0x4002
+#define VAR_0x4003                          0x4003
+#define VAR_0x4004                          0x4004
+#define VAR_0x4005                          0x4005
+#define VAR_0x4006                          0x4006
+#define VAR_0x4007                          0x4007
+#define VAR_0x4008                          0x4008
+#define VAR_0x4009                          0x4009
+#define VAR_0x400A                          0x400A
+#define VAR_0x400B                          0x400B
+#define VAR_0x400C                          0x400C
+#define VAR_0x400D                          0x400D
+#define VAR_0x400E                          0x400E
+#define VAR_0x400F                          0x400F
 
-#define VAR_0x4030                 0x4030
-#define VAR_STARTER_MON            0x4031
-#define VAR_0x4032                 0x4032
-#define VAR_ENIGMA_BERRY_AVAILABLE 0x4033
+// Object event graphics IDs which can be changed by
+// script commands.
+#define VAR_OBJ_GFX_ID_0                    0x4010
+#define VAR_OBJ_GFX_ID_1                    0x4011
+#define VAR_OBJ_GFX_ID_2                    0x4012
+#define VAR_OBJ_GFX_ID_3                    0x4013
+#define VAR_OBJ_GFX_ID_4                    0x4014
+#define VAR_OBJ_GFX_ID_5                    0x4015
+#define VAR_OBJ_GFX_ID_6                    0x4016
+#define VAR_OBJ_GFX_ID_7                    0x4017
+#define VAR_OBJ_GFX_ID_8                    0x4018
+#define VAR_OBJ_GFX_ID_9                    0x4019
+#define VAR_OBJ_GFX_ID_A                    0x401A
+#define VAR_OBJ_GFX_ID_B                    0x401B
+#define VAR_OBJ_GFX_ID_C                    0x401C
+#define VAR_OBJ_GFX_ID_D                    0x401D
+#define VAR_OBJ_GFX_ID_E                    0x401E
+#define VAR_OBJ_GFX_ID_F                    0x401F
 
-#define VAR_0x4034                 0x4034
-#define VAR_0x4035                 0x4035
-#define VAR_STORAGE_UNKNOWN        0x4036
-#define VAR_0x4037                 0x4037
-#define VAR_0x4038                 0x4038
-#define VAR_0x4039                 0x4039
-#define VAR_0x403A                 0x403A
-#define VAR_0x403B                 0x403B
-#define VAR_0x403C                 0x403C
-#define VAR_0x403D                 0x403D
-#define VAR_ALTERING_CAVE_WILD_SET 0x403E
-#define VAR_0x403F                 0x403F
-#define VAR_DAYS                   0x4040
-#define VAR_0x4041                 0x4041
-#define VAR_0x4042                 0x4042
-#define VAR_DEPT_STORE_FLOOR       0x4043
-#define VAR_0x4044                 0x4044
-#define VAR_POKELOT_PRIZE          0x4045
-#define VAR_NATIONAL_DEX           0x4046
-#define VAR_SEEDOT_SIZE_RECORD     0x4047
-#define VAR_ASH_GATHER_COUNT       0x4048
-#define VAR_BIRCH_STATE            0x4049
-#define VAR_CRUISE_STEP_COUNT      0x404A
-#define VAR_POKELOT_RND1           0x404B
-#define VAR_POKELOT_RND2           0x404C
-#define VAR_0x404D                 0x404D
-#define VAR_0x404E                 0x404E
-#define VAR_LOTAD_SIZE_RECORD      0x404F
-#define VAR_MAP_SCENE_PALLET_TOWN                 0x4050
-#define VAR_0x4051                 0x4051
-#define VAR_0x4052                 0x4052
-#define VAR_VERMILION_CITY_TICKET_CHECK_TRIGGER                 0x4053
-#define VAR_0x4054                 0x4054
-#define VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB                 0x4055
-#define VAR_MAP_SCENE_PALLET_TOWN_PLAYERS_HOUSE_2F                 0x4056
-#define VAR_MAP_SCENE_VIRIDIAN_CITY_MART                 0x4057
-#define VAR_0x4058                 0x4058
-#define VAR_0x4059                 0x4059
-#define VAR_0x405A                 0x405A
-#define VAR_0x405B                 0x405B
-#define VAR_0x405C                 0x405C
-#define VAR_0x405D                 0x405D
-#define VAR_MAP_SCENE_ROUTE16                 0x405E
-#define VAR_0x405F                 0x405F
-#define VAR_0x4060                 0x4060
-#define VAR_0x4061                 0x4061
-#define VAR_0x4062                 0x4062
-#define VAR_MAP_SCENE_SEAFOAM_ISLANDS_B4F                 0x4063
-#define VAR_0x4064                 0x4064
-#define VAR_0x4065                 0x4065
-#define VAR_0x4066                 0x4066
-#define VAR_0x4067                 0x4067
-#define VAR_0x4068                 0x4068
-#define VAR_0x4069                 0x4069
-#define VAR_0x406A                 0x406A
-#define VAR_0x406B                 0x406B
-#define VAR_0x406C                 0x406C
-#define VAR_0x406D                 0x406D
-#define VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE                 0x406E
-#define VAR_0x406F                 0x406F
-#define VAR_0x4070                 0x4070
-#define VAR_0x4071                 0x4071
-#define VAR_0x4072                 0x4072
-#define VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB                 0x4073
-#define VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1                 0x4074
-#define VAR_MAP_SCENE_ONE_ISLAND_HARBOR                 0x4075
-#define VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F                 0x4076
-#define VAR_0x4077                 0x4077
-#define VAR_0x4078                 0x4078
-#define VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER                 0x4079
-#define VAR_0x407A                 0x407A
-#define VAR_0x407B                 0x407B
-#define VAR_0x407C                 0x407C
-#define VAR_0x407D                 0x407D
-#define VAR_MAP_SCENE_VERMILION_CITY                 0x407E
-#define VAR_0x407F                 0x407F
-#define VAR_0x4080                 0x4080
-#define VAR_0x4081                 0x4081
-#define VAR_0x4082                 0x4082
-#define VAR_MAP_SCENE_FIVE_ISLAND_LOST_CAVE_ROOM10                 0x4083
-#define VAR_MAP_SCENE_FIVE_ISLAND_RESORT_GORGEOUS                 0x4084
-#define VAR_MAP_SCENE_INDIGO_PLATEAU_EXTERIOR                 0x4085
-#define VAR_MAP_SCENE_FOUR_ISLAND                 0x4086
-#define VAR_0x4087                 0x4087
-#define VAR_0x4088                 0x4088
-#define VAR_MAP_SCENE_SIX_ISLAND_POKEMON_CENTER_1F                 0x4089
-#define VAR_MAP_SCENE_CINNABAR_ISLAND                 0x408A
-#define VAR_0x408B                 0x408B
+// If nonzero, counts down by one every step.
+// When it hits zero, repel's effect wears off.
+#define VAR_REPEL_STEP_COUNT                0x4020
+
+// Counts up every step. Wraps around at 128.
+// When wraparound occurs, the friendship of
+// every party poke gets a slight boost.
+#define VAR_FRIENDSHIP_STEP_COUNT           0x4021
+
+// Maybe unused?
+#define VAR_ICE_STEP_COUNT                  0x4022
+
+// Step counter. Caps at 1500. If you enter a map with
+// renewable hidden items and this counter is capped,
+// the counter resets to 0 and all renewable hidden
+// item flags are resampled.
+#define VAR_RENEWABLE_ITEM_STEP_COUNTER     0x4023
+
+// Determines which wild encounter set to use in the
+// Altering Cave. Incremented by Mystery Event.
+// Wraps around at 10.
+#define VAR_ALTERING_CAVE_WILD_SET          0x4024
+
+// Step counter set to 500 at game start. When you get
+// a massage from Daisy, it resets to 0. Caps at 500.
+#define VAR_MASSAGE_COOLDOWN_STEP_COUNTER   0x4025
+
+// Step counter. Wraps around at 100. Used to
+// determine whether the player has reached the
+// triangle in time.
+#define VAR_DEOXYS_INTERACTION_STEP_COUNTER 0x4026
+
+// Bits 0-11 are the number of mons in all boxes
+// with the species sanity bit set.
+// Bits 12-15 are the same for the player's party.
+// Used by Quest Log.
+#define VAR_QUEST_LOG_MON_COUNTS           0x4027
+#define VAR_MENEWS_JISAN_STEP_COUNTER      0x4028
+#define VAR_0x4029                         0x4029
+#define VAR_HAPPINESS_STEP_COUNTER         0x402A
+#define VAR_POISON_STEP_COUNTER            0x402B
+#define VAR_RESET_RTC_ENABLE               0x402C
+#define VAR_0x402D                         0x402D
+#define VAR_0x402E                         0x402E
+
+#define VAR_0x402F                         0x402F
+
+#define VAR_0x4030                         0x4030
+#define VAR_STARTER_MON                    0x4031
+#define VAR_0x4032                         0x4032
+#define VAR_ENIGMA_BERRY_AVAILABLE         0x4033
+
+#define VAR_0x4034                         0x4034
+#define VAR_RESORT_GOREGEOUS_STEP_COUNTER  0x4035
+#define VAR_RESORT_GORGEOUS_REQUESTED_MON  0x4036
+#define VAR_0x4037                         0x4037
+#define VAR_0x4038                         0x4038
+#define VAR_0x4039                         0x4039
+#define VAR_ELEVATOR_FLOOR                 0x403A
+#define VAR_RESORT_GORGEOUS_REWARD         0x403B
+#define VAR_0x403C                         0x403C
+#define VAR_HERACROSS_SIZE_RECORD          0x403D
+#define VAR_DEOXYS_INTERACTION_NUM         0x403E
+#define VAR_0x403F                         0x403F
+#define VAR_MAGIKARP_SIZE_RECORD           0x4040
+#define VAR_0x4041                         0x4041
+#define VAR_TRAINER_CARD_MON_ICON_TINT_IDX 0x4042
+#define VAR_TRAINER_CARD_MON_ICON_1        0x4043
+#define VAR_TRAINER_CARD_MON_ICON_2        0x4044
+#define VAR_TRAINER_CARD_MON_ICON_3        0x4045
+#define VAR_TRAINER_CARD_MON_ICON_4        0x4046
+#define VAR_TRAINER_CARD_MON_ICON_5        0x4047
+#define VAR_TRAINER_CARD_MON_ICON_6        0x4048
+#define VAR_HOF_BRAG_STATE                 0x4049
+#define VAR_EGG_BRAG_STATE                 0x404A
+#define VAR_LINK_WIN_BRAG_STATE            0x404B
+#define VAR_POKELOT_RND2                   0x404C
+#define VAR_0x404D                         0x404D
+#define VAR_0x404E                         0x404E
+#define VAR_LOTAD_SIZE_RECORD              0x404F
+
+// Map Scene
+#define VAR_MAP_SCENE_PALLET_TOWN_OAK                                          0x4050
+#define VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN                                    0x4051
+#define VAR_MAP_SCENE_CERULEAN_CITY_RIVAL                                      0x4052
+#define VAR_VERMILION_CITY_TICKET_CHECK_TRIGGER                                           0x4053
+#define VAR_MAP_SCENE_ROUTE22                                                  0x4054
+#define VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB                           0x4055
+#define VAR_MAP_SCENE_PALLET_TOWN_PLAYERS_HOUSE_2F                             0x4056
+#define VAR_MAP_SCENE_VIRIDIAN_CITY_MART                                       0x4057
+#define VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE                                  0x4058
+#define VAR_MAP_SCENE_POKEMON_TOWER_6F                                         0x4059
+#define VAR_MAP_SCENE_VIRIDIAN_CITY_GYM_DOOR                                   0x405A
+#define VAR_MAP_SCENE_S_S_ANNE_2F_CORRIDOR                                     0x405B
+#define VAR_MAP_SCENE_SILPH_CO_7F                                              0x405C
+#define VAR_MAP_SCENE_POKEMON_TOWER_2F                                         0x405D
+#define VAR_MAP_SCENE_ROUTE16                                                  0x405E
+#define VAR_MAP_SCENE_ROUTE23                                                  0x405F
+#define VAR_MAP_SCENE_SILPH_CO_11F                                             0x4060
+#define VAR_MAP_SCENE_PEWTER_CITY_MUSEUM_1F                                    0x4061
+#define VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES                        0x4062
+#define VAR_MAP_SCENE_SEAFOAM_ISLANDS_B4F                                      0x4063
+#define VAR_MAP_SCENE_VICTORY_ROAD_1F                                          0x4064
+#define VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER1                                 0x4065
+#define VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER2                                 0x4066
+#define VAR_MAP_SCENE_VICTORY_ROAD_3F                                          0x4067
+#define VAR_MAP_SCENE_POKEMON_LEAGUE                                           0x4068
+#define VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_WHICH_FOSSIL 0x4069
+#define VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE 0x406A
+#define VAR_MAP_SCENE_ROUTE24                                                  0x406B
+#define VAR_MAP_SCENE_PEWTER_CITY                                              0x406C
+#define VAR_0x406D                                                             0x406D
+#define VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE                        0x406E
+#define VAR_0x406F                                                             0x406F
+#define VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY                                    0x4070
+#define VAR_MAP_SCENE_CINNABAR_ISLAND                                          0x4071
+#define VAR_0x4072                                                             0x4072
+#define VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB                    0x4073
+#define VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1                                 0x4074
+#define VAR_MAP_SCENE_ONE_ISLAND_HARBOR                                        0x4075
+#define VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F                             0x4076
+#define VAR_0x4077                                                             0x4077
+#define VAR_MAP_SCENE_TWO_ISLAND                                               0x4078
+#define VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER                            0x4079
+#define VAR_0x407A                                                             0x407A
+#define VAR_MAP_SCENE_THREE_ISLAND                                             0x407B
+#define VAR_MAP_SCENE_POKEMON_CENTER_TEALA                                     0x407C
+#define VAR_MAP_SCENE_CERULEAN_CITY_ROCKET                                     0x407D
+#define VAR_MAP_SCENE_VERMILION_CITY                                           0x407E
+#define VAR_MAP_SCENE_MT_EMBER_EXTERIOR                                        0x407F
+#define VAR_MAP_SCENE_ICEFALL_CAVE_BACK                                        0x4080
+#define VAR_MAP_SCENE_SAFFRON_CITY_DOJO                                        0x4081
+#define VAR_MAP_SCENE_TRAINER_TOWER                                            0x4082
+#define VAR_MAP_SCENE_FIVE_ISLAND_LOST_CAVE_ROOM10                             0x4083
+#define VAR_MAP_SCENE_FIVE_ISLAND_RESORT_GORGEOUS                              0x4084
+#define VAR_MAP_SCENE_INDIGO_PLATEAU_EXTERIOR                                  0x4085
+#define VAR_MAP_SCENE_FOUR_ISLAND                                              0x4086
+#define VAR_0x4087                                                             0x4087
+#define VAR_MAP_SCENE_ROCKET_WAREHOUSE                                         0x4088
+#define VAR_MAP_SCENE_SIX_ISLAND_POKEMON_CENTER_1F                             0x4089
+#define VAR_MAP_SCENE_CINNABAR_ISLAND_2                                        0x408A
+#define VAR_MAP_SCENE_MT_MOON_B2F                                              0x408B
+
+
 #define VAR_0x408C                 0x408C
 #define VAR_0x408D                 0x408D
 #define VAR_0x408E                 0x408E
@@ -187,7 +227,7 @@
 #define VAR_0x40B2                 0x40B2
 #define VAR_0x40B3                 0x40B3
 #define VAR_PORTHOLE               0x40B4
-#define VAR_0x40B5                 0x40B5
+#define VAR_EVENT_PICHU_SLOT       0x40B5
 #define VAR_0x40B6                 0x40B6
 #define VAR_0x40B7                 0x40B7
 #define VAR_0x40B8                 0x40B8
@@ -263,6 +303,7 @@
 #define VAR_0x40FE                 0x40FE
 #define VAR_0x40FF                 0x40FF
 
+#define SPECIAL_VARS_START 0x8000
 #define VAR_0x8000                 0x8000
 #define VAR_0x8001                 0x8001
 #define VAR_0x8002                 0x8002
@@ -283,6 +324,6 @@
 #define VAR_CONTEST_CATEGORY       0x8011
 #define VAR_MON_BOX_ID             0x8012
 #define VAR_MON_BOX_POS            0x8013
-#define VAR_0x8014                 0x8014
+#define VAR_TEXT_COLOR             0x8014
 
 #endif // GUARD_CONSTANTS_VARS_H

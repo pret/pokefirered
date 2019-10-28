@@ -7,13 +7,6 @@
 #define NO_ACC_CALC_CHECK_LOCK_ON 0xFFFF
 #define ACC_CURR_MOVE 0
 
-#define CMP_EQUAL               0x0
-#define CMP_NOT_EQUAL           0x1
-#define CMP_GREATER_THAN        0x2
-#define CMP_LESS_THAN           0x3
-#define CMP_COMMON_BITS         0x4
-#define CMP_NO_COMMON_BITS      0x5
-
 #define ATK48_STAT_NEGATIVE         0x1
 #define ATK48_STAT_BY_TWO           0x2
 #define ATK48_BIT_x4                0x4

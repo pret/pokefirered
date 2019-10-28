@@ -11,10 +11,10 @@ PokemonLeague_AgathasRoom_MapScript1_162825:: @ 8162825
 	end
 
 PokemonLeague_AgathasRoom_MapScript2_162830:: @ 8162830
-	checkflag FLAG_0x4BA
-	call_if 1, EventScript_16284B
-	compare_var_to_value VAR_0x4068, 3
-	call_if 1, EventScript_162845
+	checkflag FLAG_DEFEATED_AGATHA
+	call_if TRUE, EventScript_16284B
+	compare_var_to_value VAR_MAP_SCENE_POKEMON_LEAGUE, 3
+	call_if eq, EventScript_162845
 	end
 
 EventScript_162845:: @ 8162845
@@ -34,44 +34,36 @@ EventScript_16285B:: @ 816285B
 	end
 
 PokemonLeague_AgathasRoom_MapScript4_162860:: @ 8162860
-	map_script_2 VAR_0x4068, 2, EventScript_16286A
+	map_script_2 VAR_MAP_SCENE_POKEMON_LEAGUE, 2, EventScript_16286A
 	.2byte 0
 
 EventScript_16286A:: @ 816286A
 	lockall
 	call EventScript_1A751F
-	setvar VAR_0x4068, 3
+	setvar VAR_MAP_SCENE_POKEMON_LEAGUE, 3
 	releaseall
 	end
 
 PokemonLeague_AgathasRoom_EventScript_162877:: @ 8162877
 	lock
 	faceplayer
-	setvar VAR_0x8004, 11
-	setvar VAR_0x8005, 2
-	special UpdatePickStateFromSpecialVar8005
-	checkflag FLAG_0x4BA
-	goto_if_eq EventScript_162911
-	setvar VAR_0x8004, 11
-	setvar VAR_0x8005, 0
-	special SetFlavorTextFlagFromSpecialVars
-	setvar VAR_0x8004, 11
-	setvar VAR_0x8005, 4
-	special SetFlavorTextFlagFromSpecialVars
-	setvar VAR_0x8004, 0
-	setvar VAR_0x8005, 4
-	special SetFlavorTextFlagFromSpecialVars
-	checkflag FLAG_0x82C
-	call_if 0, EventScript_1628E9
-	checkflag FLAG_0x82C
-	call_if 1, EventScript_1628F2
-	setflag FLAG_0x003
-	setflag FLAG_0x005
-	checkflag FLAG_0x844
-	call_if 0, EventScript_1628FB
-	checkflag FLAG_0x844
-	call_if 1, EventScript_162906
-	clearflag FLAG_0x005
+	famechecker FAMECHECKER_AGATHA, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
+	checkflag FLAG_DEFEATED_AGATHA
+	goto_if TRUE, EventScript_162911
+	famechecker FAMECHECKER_AGATHA, 0
+	famechecker FAMECHECKER_AGATHA, 4
+	famechecker FAMECHECKER_OAK, 4
+	checkflag FLAG_SYS_GAME_CLEAR
+	call_if FALSE, EventScript_1628E9
+	checkflag FLAG_SYS_GAME_CLEAR
+	call_if TRUE, EventScript_1628F2
+	setflag FLAG_TEMP_3
+	setflag FLAG_TEMP_5
+	checkflag FLAG_SYS_CAN_LINK_WITH_RS
+	call_if FALSE, EventScript_1628FB
+	checkflag FLAG_SYS_CAN_LINK_WITH_RS
+	call_if TRUE, EventScript_162906
+	clearflag FLAG_TEMP_5
 	goto EventScript_16291B
 
 EventScript_1628E8:: @ 81628E8
@@ -86,11 +78,11 @@ EventScript_1628F2:: @ 81628F2
 	return
 
 EventScript_1628FB:: @ 81628FB
-	trainerbattle 3, 412, 0, Text_1786D7
+	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_ELITE_FOUR_AGATHA, 0, Text_1786D7
 	return
 
 EventScript_162906:: @ 8162906
-	trainerbattle 3, 737, 0, Text_1786D7
+	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_ELITE_FOUR_AGATHA_2, 0, Text_1786D7
 	return
 
 EventScript_162911:: @ 8162911
@@ -99,7 +91,7 @@ EventScript_162911:: @ 8162911
 	end
 
 EventScript_16291B:: @ 816291B
-	setflag FLAG_0x4BA
+	setflag FLAG_DEFEATED_AGATHA
 	call EventScript_1A7506
 	msgbox gUnknown_8178700
 	release

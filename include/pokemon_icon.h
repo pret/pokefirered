@@ -4,6 +4,7 @@
 #include "global.h"
 
 const u8 *GetMonIconPtr(u16 speciesId, u32 personality, u32 frameNo);
+const u8 *GetMonIconTiles(u16 iconSpecies, bool32 extra);
 const u16 *GetValidMonIconPalettePtr(u16 speciesId);
 u16 sub_80D2E84(u16 speciesId);
 void sub_80D2F68(u16 iconId);
@@ -12,12 +13,14 @@ void sub_80D2FF0(u16 iconId);
 void sub_80D2EF8(struct Sprite *sprite);
 void LoadMonIconPalettes(void);
 void FreeMonIconPalettes(void);
-u16 sub_8096FD4(u16);
-u8 sub_8096ECC(u16, void (*)(struct Sprite *), s16, s16, u8, bool32);
-void sub_8097070(struct Sprite *);
+u16 MailSpeciesToIconSpecies(u16);
+u8 CreateMonIcon_HandleDeoxys(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u8 subpriority, bool32 extra);
+void DestroyMonIcon(struct Sprite *);
 u16 GetUnownLetterByPersonality(u32 personality);
-void sub_809718C(void);
-u8 CreateMonIcon(u16 species, void (*callback)(void), s16 x, s16 y, u8 subpriority, u32 personality, bool32 extra);
+void SpriteCB_MonIcon(struct Sprite *);
+u8 CreateMonIcon(u16 species, SpriteCallback callback, s16 x, s16 y, u8 subpriority, u32 personality, bool32 extra);
 u8 UpdateMonIconFrame(struct Sprite *sprite);
+void LoadMonIconPalette(u16 iconId);
+void FreeMonIconPalette(u16 iconId);
 
 #endif // GUARD_POKEMON_ICON_H

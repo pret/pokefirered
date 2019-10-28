@@ -4,14 +4,14 @@ ThreeIsland_MapScripts:: @ 81677AD
 
 ThreeIsland_MapScript1_1677B3:: @ 81677B3
 	setworldmapflag FLAG_WORLD_MAP_THREE_ISLAND
-	checkflag FLAG_0x2A3
-	call_if 1, EventScript_1677CB
-	compare_var_to_value VAR_0x407B, 4
-	call_if 1, EventScript_1677CF
+	checkflag FLAG_RESCUED_LOSTELLE
+	call_if TRUE, EventScript_1677CB
+	compare_var_to_value VAR_MAP_SCENE_THREE_ISLAND, 4
+	call_if eq, EventScript_1677CF
 	end
 
 EventScript_1677CB:: @ 81677CB
-	setflag FLAG_0x07E
+	setflag FLAG_HIDE_THREE_ISLAND_ANTIBIKERS
 	return
 
 EventScript_1677CF:: @ 81677CF
@@ -28,10 +28,10 @@ ThreeIsland_EventScript_1677D8:: @ 81677D8
 
 ThreeIsland_EventScript_1677E5:: @ 81677E5
 	lock
-	checkflag FLAG_0x2FC
-	goto_if_eq EventScript_167806
-	compare_var_to_value VAR_0x407B, 4
-	goto_if_eq EventScript_16781A
+	checkflag FLAG_GOT_FULL_RESTORE_FROM_THREE_ISLAND_DEFENDER
+	goto_if TRUE, EventScript_167806
+	compare_var_to_value VAR_MAP_SCENE_THREE_ISLAND, 4
+	goto_if eq, EventScript_16781A
 	setvar VAR_0x4001, 0
 	call EventScript_16786F
 	release
@@ -50,10 +50,10 @@ EventScript_16781A:: @ 816781A
 	msgbox gUnknown_818275A
 	checkitemspace ITEM_FULL_RESTORE, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_167865
+	goto_if eq, EventScript_167865
 	giveitemfanfaremsg gUnknown_81827BE, ITEM_FULL_RESTORE
 	additem ITEM_FULL_RESTORE, 1
-	setflag FLAG_0x2FC
+	setflag FLAG_GOT_FULL_RESTORE_FROM_THREE_ISLAND_DEFENDER
 	msgbox gUnknown_81827F1
 	release
 	end
@@ -65,36 +65,36 @@ EventScript_167865:: @ 8167865
 
 EventScript_16786F:: @ 816786F
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_167947
+	call_if eq, EventScript_167947
 	compare_var_to_value VAR_0x4001, 2
-	call_if 1, EventScript_167947
+	call_if eq, EventScript_167947
 	applymovement 1, Movement_167A1B
 	waitmovement 0
 	msgbox gUnknown_81820C0
 	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_167952
+	call_if eq, EventScript_167952
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_167952
+	call_if eq, EventScript_167952
 	compare_var_to_value VAR_0x4001, 2
-	call_if 1, EventScript_16795D
+	call_if eq, EventScript_16795D
 	applymovement 5, Movement_167A19
 	waitmovement 0
 	msgbox gUnknown_8182125
 	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_167931
+	call_if eq, EventScript_167931
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_167931
+	call_if eq, EventScript_167931
 	compare_var_to_value VAR_0x4001, 2
-	call_if 1, EventScript_167973
+	call_if eq, EventScript_167973
 	applymovement 2, Movement_167A1B
 	waitmovement 0
 	msgbox gUnknown_81821A9
 	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_167952
+	call_if eq, EventScript_167952
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_167952
+	call_if eq, EventScript_167952
 	compare_var_to_value VAR_0x4001, 2
-	call_if 1, EventScript_16795D
+	call_if eq, EventScript_16795D
 	applymovement 4, Movement_167A19
 	waitmovement 0
 	msgbox gUnknown_81821DC
@@ -123,21 +123,21 @@ EventScript_167952:: @ 8167952
 EventScript_16795D:: @ 816795D
 	getplayerxy VAR_0x8004, VAR_0x8005
 	compare_var_to_value VAR_0x8004, 9
-	goto_if 4, EventScript_167931
+	goto_if ge, EventScript_167931
 	goto EventScript_167952
 	end
 
 EventScript_167973:: @ 8167973
 	getplayerxy VAR_0x8004, VAR_0x8005
 	compare_var_to_value VAR_0x8004, 9
-	goto_if 4, EventScript_167947
+	goto_if ge, EventScript_167947
 	goto EventScript_167931
 	end
 
 ThreeIsland_EventScript_167989:: @ 8167989
 	lock
-	compare_var_to_value VAR_0x407B, 4
-	goto_if_eq EventScript_1679A1
+	compare_var_to_value VAR_MAP_SCENE_THREE_ISLAND, 4
+	goto_if eq, EventScript_1679A1
 	setvar VAR_0x4001, 1
 	call EventScript_16786F
 	release
@@ -168,7 +168,7 @@ ThreeIsland_EventScript_1679B5:: @ 81679B5
 	applymovement 1, Movement_167A1B
 	waitmovement 0
 	msgbox gUnknown_81823C7
-	setvar VAR_0x407B, 3
+	setvar VAR_MAP_SCENE_THREE_ISLAND, 3
 	releaseall
 	end
 
@@ -224,10 +224,10 @@ EventScript_167A59:: @ 8167A59
 	playbgm MUS_SHOUNEN, 0
 	msgbox gUnknown_81823ED, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_167C35
+	goto_if eq, EventScript_167C35
 	msgbox gUnknown_818247D
 	setvar VAR_LAST_TALKED, 5
-	trainerbattle 3, 527, 0, Text_1824B7
+	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_BIKER_GOON, 0, Text_1824B7
 	applymovement 5, Movement_167C5C
 	waitmovement 0
 	msgbox gUnknown_81824CF
@@ -237,7 +237,7 @@ EventScript_167A59:: @ 8167A59
 	playbgm MUS_SHOUNEN, 0
 	msgbox gUnknown_81824EF
 	setvar VAR_LAST_TALKED, 7
-	trainerbattle 3, 528, 0, Text_182521
+	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_BIKER_GOON_2, 0, Text_182521
 	applymovement 7, Movement_167C5C
 	waitmovement 0
 	msgbox gUnknown_8182536
@@ -247,7 +247,7 @@ EventScript_167A59:: @ 8167A59
 	playbgm MUS_SHOUNEN, 0
 	msgbox gUnknown_8182582
 	setvar VAR_LAST_TALKED, 4
-	trainerbattle 3, 529, 0, Text_1825D4
+	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_BIKER_GOON_3, 0, Text_1825D4
 	applymovement 4, Movement_1A75E7
 	waitmovement 0
 	applymovement 6, Movement_1A75ED
@@ -257,19 +257,19 @@ EventScript_167A59:: @ 8167A59
 	closemessage
 	delay 45
 	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_167BC6
+	call_if eq, EventScript_167BC6
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_167BD8
+	call_if eq, EventScript_167BD8
 	compare_var_to_value VAR_0x4001, 2
-	call_if 1, EventScript_167BEA
+	call_if eq, EventScript_167BEA
 	compare_var_to_value VAR_0x4001, 3
-	call_if 1, EventScript_167C03
+	call_if eq, EventScript_167C03
 	compare_var_to_value VAR_0x4001, 4
-	call_if 1, EventScript_167C1C
+	call_if eq, EventScript_167C1C
 	playbgm MUS_SHOUNEN, 0
 	msgbox gUnknown_8182623
 	setvar VAR_LAST_TALKED, 3
-	trainerbattle 3, 742, 0, Text_1826B7
+	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_CUE_BALL_PAXTON, 0, Text_1826B7
 	msgbox gUnknown_818271D
 	closemessage
 	fadescreen 1
@@ -281,7 +281,7 @@ EventScript_167A59:: @ 8167A59
 	removeobject 8
 	removeobject 14
 	fadescreen 0
-	setvar VAR_0x407B, 4
+	setvar VAR_MAP_SCENE_THREE_ISLAND, 4
 	releaseall
 	end
 

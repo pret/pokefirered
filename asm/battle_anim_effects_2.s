@@ -3902,7 +3902,7 @@ _080A8C60:
 	subs r0, r4
 	strh r0, [r1]
 _080A8C6A:
-	ldr r1, _080A8C80 @ =sub_8075D9C
+	ldr r1, _080A8C80 @ =AnimSpriteOnMonPos
 	str r1, [r6, 0x1C]
 	adds r0, r6, 0
 	bl _call_via_r1
@@ -3912,7 +3912,7 @@ _080A8C6A:
 	bx r0
 	.align 2, 0
 _080A8C7C: .4byte gBattleAnimArgs
-_080A8C80: .4byte sub_8075D9C
+_080A8C80: .4byte AnimSpriteOnMonPos
 	thumb_func_end sub_80A8BC4
 
 	thumb_func_start sub_80A8C84
@@ -4233,7 +4233,7 @@ _080A8F0E:
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl StartSpriteAffineAnim
-	ldr r1, _080A8F34 @ =sub_8075D9C
+	ldr r1, _080A8F34 @ =AnimSpriteOnMonPos
 	str r1, [r4, 0x1C]
 	adds r0, r4, 0
 	bl _call_via_r1
@@ -4244,7 +4244,7 @@ _080A8F0E:
 _080A8F28: .4byte 0x000027db
 _080A8F2C: .4byte 0x01010000
 _080A8F30: .4byte gBattleAnimArgs
-_080A8F34: .4byte sub_8075D9C
+_080A8F34: .4byte AnimSpriteOnMonPos
 	thumb_func_end sub_80A8EE8
 
 	thumb_func_start sub_80A8F38

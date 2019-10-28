@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "59",
+      "graphics_id": "MAP_OBJ_GFX_CHEF",
       "x": 1,
       "y": 5,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "59",
+      "graphics_id": "MAP_OBJ_GFX_CHEF",
       "x": 6,
       "y": 6,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "59",
+      "graphics_id": "MAP_OBJ_GFX_CHEF",
       "x": 10,
       "y": 4,
       "elevation": 3,
@@ -53,7 +53,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "59",
+      "graphics_id": "MAP_OBJ_GFX_CHEF",
       "x": 8,
       "y": 9,
       "elevation": 3,
@@ -66,7 +66,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "59",
+      "graphics_id": "MAP_OBJ_GFX_CHEF",
       "x": 14,
       "y": 5,
       "elevation": 3,
@@ -79,7 +79,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "59",
+      "graphics_id": "MAP_OBJ_GFX_CHEF",
       "x": 14,
       "y": 7,
       "elevation": 3,
@@ -92,7 +92,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "59",
+      "graphics_id": "MAP_OBJ_GFX_CHEF",
       "x": 14,
       "y": 9,
       "elevation": 3,
@@ -105,7 +105,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 1,
       "y": 10,
       "elevation": 3,
@@ -115,7 +115,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "SSAnne_Kitchen_EventScript_1BE6AC",
-      "flag": "362"
+      "flag": "FLAG_HIDE_SSANNE_KITCHEN_GREAT_BALL"
     }
   ],
   "warp_events": [
@@ -135,8 +135,9 @@
       "y": 8,
       "elevation": 0,
       "item": "ITEM_CHESTO_BERRY",
-      "flag": "122",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_SSANNE_KITCHEN_CHESTO_BERRY",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -144,8 +145,9 @@
       "y": 4,
       "elevation": 0,
       "item": "ITEM_PECHA_BERRY",
-      "flag": "120",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_SSANNE_KITCHEN_PECHA_BERRY",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -153,8 +155,9 @@
       "y": 6,
       "elevation": 0,
       "item": "ITEM_CHERI_BERRY",
-      "flag": "121",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_SSANNE_KITCHEN_CHERI_BERRY",
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

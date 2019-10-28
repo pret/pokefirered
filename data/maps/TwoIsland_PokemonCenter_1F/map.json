@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "64",
+      "graphics_id": "MAP_OBJ_GFX_NURSE",
       "x": 7,
       "y": 2,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "51",
+      "graphics_id": "MAP_OBJ_GFX_GBA_KID",
       "x": 11,
       "y": 5,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "20",
+      "graphics_id": "MAP_OBJ_GFX_BUG_CATCHER",
       "x": 4,
       "y": 4,
       "elevation": 3,

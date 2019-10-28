@@ -4,8 +4,8 @@ RocketHideout_B1F_MapScripts:: @ 8161195
 	.byte 0
 
 RocketHideout_B1F_MapScript1_1611A0:: @ 81611A0
-	checktrainerflag FLAG_0x16A
-	call_if 0, EventScript_161233
+	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_12
+	call_if lt, EventScript_161233
 	end
 
 RocketHideout_B1F_MapScript2_1611AA:: @ 81611AA
@@ -13,27 +13,27 @@ RocketHideout_B1F_MapScript2_1611AA:: @ 81611AA
 	end
 
 RocketHideout_B1F_EventScript_1611AE:: @ 81611AE
-	trainerbattle 0, 358, 0, Text_174ECA, Text_174EED
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_TEAM_ROCKET_GRUNT_8, 0, Text_174ECA, Text_174EED
 	msgbox gUnknown_8174EFA, 6
 	end
 
 RocketHideout_B1F_EventScript_1611C5:: @ 81611C5
-	trainerbattle 0, 359, 0, Text_174F2C, Text_174F60
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_TEAM_ROCKET_GRUNT_9, 0, Text_174F2C, Text_174F60
 	msgbox gUnknown_8174F66, 6
 	end
 
 RocketHideout_B1F_EventScript_1611DC:: @ 81611DC
-	trainerbattle 0, 360, 0, Text_174F94, Text_174FA4
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_TEAM_ROCKET_GRUNT_10, 0, Text_174F94, Text_174FA4
 	msgbox gUnknown_8174FB3, 6
 	end
 
 RocketHideout_B1F_EventScript_1611F3:: @ 81611F3
-	trainerbattle 0, 361, 0, Text_174FE1, Text_174FF8
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_TEAM_ROCKET_GRUNT_11, 0, Text_174FE1, Text_174FF8
 	msgbox gUnknown_8175007, 6
 	end
 
 RocketHideout_B1F_EventScript_16120A:: @ 816120A
-	trainerbattle 2, 362, 0, Text_17503A, Text_17505A, EventScript_161225
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_TEAM_ROCKET_GRUNT_12, 0, Text_17503A, Text_17505A, EventScript_161225
 	msgbox gUnknown_8175060, 6
 	end
 

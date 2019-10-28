@@ -19,357 +19,7 @@
 
 	@ .include "src/link_rfu.o"
 	.include "src/battle_controllers.o"
-
-gBattle_BG0_X: @ 2022974
-	.space 0x2
-
-gBattle_BG0_Y: @ 2022976
-	.space 0x2
-
-gBattle_BG1_X: @ 2022978
-	.space 0x2
-
-gBattle_BG1_Y: @ 202297A
-	.space 0x2
-
-gBattle_BG2_X: @ 202297C
-	.space 0x2
-
-gBattle_BG2_Y: @ 202297E
-	.space 0x2
-
-gBattle_BG3_X: @ 2022980
-	.space 0x2
-
-gBattle_BG3_Y: @ 2022982
-	.space 0x2
-
-gBattle_WIN0H: @ 2022984
-	.space 0x2
-
-gBattle_WIN0V: @ 2022986
-	.space 0x2
-
-gUnknown_2022988: @ 2022988
-	.space 0x2
-
-gUnknown_202298A: @ 202298A
-	.space 0x2
-
-gDisplayedStringBattle: @ 202298C
-	.space 0x12C
-
-gBattleTextBuff1: @ 2022AB8
-	.space 0x10
-
-gBattleTextBuff2: @ 2022AC8
-	.space 0x10
-
-gBattleTextBuff3: @ 2022AD8
-	.space 0x10
-
-gUnknown_2022AE8: @ 2022AE8
-	.space 0x64
-
-gBattleTypeFlags: @ 2022B4C
-	.space 0x4
-
-gBattleTerrain: @ 2022B50
-	.space 0x4
-
-gUnknown_2022B54: @ 2022B54
-	.space 0x4
-
-gUnknown_2022B58: @ 2022B58
-	.space 0x60
-
-gUnknown_2022BB8: @ 2022BB8
-	.space 0x4
-
-gUnknown_2022BBC: @ 2022BBC
-	.space 0x4
-
-gUnknown_2022BC0: @ 2022BC0
-	.space 0x4
-
-gBattleBufferA: @ 2022BC4
-	.space 0x2
-
-gUnknown_2022BC6: @ 2022BC6
-	.space 0x1
-
-gUnknown_2022BC7: @ 2022BC7
-	.space 0x1
-
-gUnknown_2022BC8: @ 2022BC8
-	.space 0x7FC
-
-gBattleBufferB: @ 20233C4
-	.space 0x4
-
-gUnknown_20233C8: @ 20233C8
-	.space 0x7FC
-
-gActiveBattler: @ 2023BC4
-	.space 0x4
-
-gBattleControllerExecFlags: @ 2023BC8
-	.space 0x4
-
-gBattlersCount: @ 2023BCC
-	.space 0x2
-
-gBattlerPartyIndexes: @ 2023BCE
-	.space 0x8
-
-gBattlerPositions: @ 2023BD6
-	.space 0x4
-
-gActionsByTurnOrder: @ 2023BDA
-	.space 0x4
-
-gBattlerByTurnOrder: @ 2023BDE
-	.space 0x4
-
-gCurrentTurnActionNumber: @ 2023BE2
-	.space 0x1
-
-gCurrentActionFuncId: @ 2023BE3
-	.space 0x1
-
-gBattleMons: @ 2023BE4
-	.space 0xC
-
-gUnknown_2023BF0: @ 2023BF0
-	.space 0xC
-
-gUnknown_2023BFC: @ 2023BFC
-	.space 0xC
-
-gUnknown_2023C08: @ 2023C08
-	.space 0x4
-
-gUnknown_2023C0C: @ 2023C0C
-	.space 0x24
-
-gUnknown_2023C30: @ 2023C30
-	.space 0x4
-
-gUnknown_2023C34: @ 2023C34
-	.space 0x110
-
-gBattlerSpriteIds: @ 2023D44
-	.space 0x4
-
-gCurrMovePos: @ 2023D48
-	.space 0x1
-
-gChosenMovePos: @ 2023D49
-	.space 0x1
-
-gCurrentMove: @ 2023D4A
-	.space 0x2
-
-gChosenMove: @ 2023D4C
-	.space 0x2
-
-gCalledMove: @ 2023D4E
-	.space 0x2
-
-gBattleMoveDamage: @ 2023D50
-	.space 0x4
-
-gHpDealt: @ 2023D54
-	.space 0x4
-
-gTakenDmg: @ 2023D58
-	.space 0x10
-
-gLastUsedItem: @ 2023D68
-	.space 0x2
-
-gLastUsedAbility: @ 2023D6A
-	.space 0x1
-
-gBattlerAttacker: @ 2023D6B
-	.space 0x1
-
-gBattlerTarget: @ 2023D6C
-	.space 0x1
-
-gBattlerFainted: @ 2023D6D
-	.space 0x1
-
-gEffectBattler: @ 2023D6E
-	.space 0x1
-
-gPotentialItemEffectBattler: @ 2023D6F
-	.space 0x1
-
-gAbsentBattlerFlags: @ 2023D70
-	.space 0x1
-
-gCritMultiplier: @ 2023D71
-	.space 0x1
-
-gMultiHitCounter: @ 2023D72
-	.space 0x2
-
-gBattlescriptCurrInstr: @ 2023D74
-	.space 0x8
-
-gChosenActionByBattler: @ 2023D7C
-	.space 0x4
-
-gSelectionBattleScripts: @ 2023D80
-	.space 0x10
-
-gLastPrintedMoves: @ 2023D90
-	.space 0x8
-
-gLastMoves: @ 2023D98
-	.space 0x8
-
-gLastLandedMoves: @ 2023DA0
-	.space 0x8
-
-gLastHitByType: @ 2023DA8
-	.space 0x8
-
-gLastResultingMoves: @ 2023DB0
-	.space 0x8
-
-gLockedMoves: @ 2023DB8
-	.space 0x8
-
-gLastHitBy: @ 2023DC0
-	.space 0x4
-
-gChosenMoveByBattler: @ 2023DC4
-	.space 0x8
-
-gMoveResultFlags: @ 2023DCC
-	.space 0x4
-
-gHitMarker: @ 2023DD0
-	.space 0x4
-
-gUnknown_2023DD4: @ 2023DD4
-	.space 0x4
-
-gTakenDmgByBattler: @ 2023DD8
-	.space 0x4
-
-gUnknown_2023DDC: @ 2023DDC
-	.space 0x2
-
-gSideStatuses: @ 2023DDE
-	.space 0x6
-
-gSideTimers: @ 2023DE4
-	.space 0x18
-
-gStatuses3: @ 2023DFC
-	.space 0x10
-
-gDisableStructs: @ 2023E0C
-	.space 0x70
-
-gPauseCounterBattle: @ 2023E7C
-	.space 0x2
-
-gPaydayMoney: @ 2023E7E
-	.space 0x2
-
-gUnknown_2023E80: @ 2023E80
-	.space 0x2
-
-gBattleCommunication: @ 2023E82
-	.space 0x1
-
-gUnknown_2023E83: @ 2023E83
-	.space 0x7
-
-gBattleOutcome: @ 2023E8A
-	.space 0x2
-
-gProtectStructs: @ 2023E8C
-	.space 0x40
-
-gSpecialStatuses: @ 2023ECC
-	.space 0x50
-
-gBattleWeather: @ 2023F1C
-	.space 0x4
-
-gWishFutureKnock: @ 2023F20
-	.space 0x2C
-
-gIntroSlideFlags: @ 2023F4C
-	.space 0x2
-
-gSentPokesToOpponent: @ 2023F4E
-	.space 0x2
-
-gDynamicBasePower: @ 2023F50
-	.space 0x2
-
-gExpShareExp: @ 2023F52
-	.space 0x2
-
-gEnigmaBerries: @ 2023F54
-	.space 0x70
-
-gBattleScripting: @ 2023FC4
-	.space 0x4
-
-gUnknown_2023FC8: @ 2023FC8
-	.space 0x20
-
-gBattleStruct: @ 2023FE8
-	.space 0x4
-
-gLinkBattleSendBuffer: @ 2023FEC
-	.space 0x4
-
-gLinkBattleRecvBuffer: @ 2023FF0
-	.space 0x4
-
-gBattleResources: @ 2023FF4
-	.space 0x4
-
-gActionSelectionCursor: @ 2023FF8
-	.space 0x4
-
-gMoveSelectionCursor: @ 2023FFC
-	.space 0x4
-
-gBattlerStatusSummaryTaskId: @ 2024000
-	.space 0x4
-
-gBattlerInMenuId: @ 2024004
-	.space 0x1
-
-gDoingBattleAnim: @ 2024005
-	.space 0x3
-
-gTransformedPersonalities: @ 2024008
-	.space 0x10
-
-gBattleSpritesDataPtr: @ 2024018
-	.space 0x4
-
-gMonSpritesGfxPtr: @ 202401C
-	.space 0x4
-
-gBattleMovePower: @ 2024020
-	.space 0x2
-
-gMoveToLearn: @ 2024022
-	.space 0x2
-
-gBattleMonForms: @ 2024024
-	.space 0x4
+	.include "src/battle_main.o"
 
 sLearningMoveTableID: @ 2024028
 	.space 0x1
@@ -509,73 +159,12 @@ gUnknown_203709A: @ 203709A
 gUnknown_203709C: @ 203709C
 	.space 0x4
 
-	.include "src/script.o"
-	.include "src/scrcmd.o"
-
 	.align 2
-gSpecialVar_0x8000: @ 20370B8
-	.space 0x2
-
-gSpecialVar_0x8001: @ 20370BA
-	.space 0x2
-
-gSpecialVar_0x8002: @ 20370BC
-	.space 0x2
-
-gSpecialVar_0x8003: @ 20370BE
-	.space 0x2
-
-gSpecialVar_0x8004: @ 20370C0
-	.space 0x2
-
-gSpecialVar_0x8005: @ 20370C2
-	.space 0x2
-
-gSpecialVar_0x8006: @ 20370C4
-	.space 0x2
-
-gSpecialVar_0x8007: @ 20370C6
-	.space 0x2
-
-gSpecialVar_0x8008: @ 20370C8
-	.space 0x2
-
-gSpecialVar_0x8009: @ 20370CA
-	.space 0x2
-
-gSpecialVar_0x800A: @ 20370CC
-	.space 0x2
-
-gSpecialVar_0x800B: @ 20370CE
-	.space 0x2
-
-gSpecialVar_Result: @ 20370D0
-	.space 0x2
-
-gSpecialVar_LastTalked: @ 20370D2
-	.space 0x2
-
-gSpecialVar_Facing: @ 20370D4
-	.space 0x2
-
-gSpecialVar_MonBoxId: @ 20370D6
-	.space 0x2
-
-gSpecialVar_MonBoxPos: @ 20370D8
-	.space 0x2
-
-gUnknown_20370DA: @ 20370DA
-	.space 0x2
-
-gUnknown_20370DC: @ 20370DC
-	.space 0x2
-
-gUnknown_20370DE: @ 20370DE
-	.space 0x2
-
-gUnknown_20370E0: @ 20370E0
-	.space 0x10
-
+	.include "src/script.o"
+	.align 2
+	.include "src/scrcmd.o"
+	.align 2
+	.include "src/event_data.o"
 	.align 2
 	.include "src/start_menu.o"
 	.align 2
@@ -677,35 +266,8 @@ gUnknown_20386A4: @ 20386A4
 gUnknown_20386A8: @ 20386A8
 	.space 0x4
 
-gUnknown_20386AC: @ 20386AC
-	.space 0x2
-
-gTrainerBattleOpponent_A: @ 20386AE
-	.space 0x2
-
-gUnknown_20386B0: @ 20386B0
-	.space 0x4
-
-gUnknown_20386B4: @ 20386B4
-	.space 0x4
-
-gUnknown_20386B8: @ 20386B8
-	.space 0x4
-
-gUnknown_20386BC: @ 20386BC
-	.space 0x4
-
-gUnknown_20386C0: @ 20386C0
-	.space 0x4
-
-gUnknown_20386C4: @ 20386C4
-	.space 0x4
-
-gUnknown_20386C8: @ 20386C8
-	.space 0x4
-
-gUnknown_20386CC: @ 20386CC
-	.space 0x4
+	.include "src/battle_setup.o"
+	.align 2
 
 gUnknown_20386D0: @ 20386D0
 	.space 0xC
@@ -842,9 +404,10 @@ gUnknown_203996C: @ 203996C
 gUnknown_2039984: @ 2039984
 	.space 0x4
 
-gUnknown_2039988: @ 2039988
-	.space 0x4
+	.align 2
+	.include "src/script_menu.o"
 
+	.align 2
 gUnknown_203998C: @ 203998C
 	.space 0x4
 
@@ -869,9 +432,9 @@ gUnknown_20399BC: @ 20399BC
 gUnknown_20399C0: @ 20399C0
 	.space 0x4
 
-gUnknown_20399C4: @ 20399C4
-	.space 0x4
-
+	.align 2
+	.include "src/mail.o"
+	.align 2
 	.include "src/menu_helpers.o"
 
 	.align 2
@@ -908,27 +471,10 @@ gAIScriptPtr: @ 2039A00
 gPlayerFacingPosition: @ 2039A04
 	.space 0x8
 
-gUnknown_2039A0C: @ 2039A0C
-	.space 0x2
+	.align 2
+	.include "src/field_specials.o"
 
-gUnknown_2039A0E: @ 2039A0E
-	.space 0x2
-
-gUnknown_2039A10: @ 2039A10
-	.space 0x4
-
-gUnknown_2039A14: @ 2039A14
-	.space 0x4
-
-gUnknown_2039A18: @ 2039A18
-	.space 0x2
-
-gUnknown_2039A1A: @ 2039A1A
-	.space 0x1
-
-gUnknown_2039A1B: @ 2039A1B
-	.space 0x1
-
+	.align 2
 	.include "src/battle_records.o"
 
 gUnknown_2039A20: @ 2039A20

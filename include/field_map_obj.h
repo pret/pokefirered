@@ -85,7 +85,7 @@ void sub_8063E28(struct MapObject *, struct Sprite *);
 void FieldObjectSetHeldMovement(struct MapObject *, u8);
 void npc_coords_shift_still(struct MapObject *);
 void sub_805FE7C(struct MapObject *, u8);
-void npc_set_running_behaviour_etc(struct MapObject *, u8);
+void SetTrainerMovementType(struct MapObject *, u8);
 u8 sub_80634F0(u8 direction);
 u8 sub_8063500(u8 a0);
 void EventObjectSetGraphicsId(struct MapObject *mapObject, u8 a1);
@@ -94,6 +94,8 @@ void npc_paltag_set_load(u8 mode);
 bool8 FieldObjectIsMovementOverridden(struct MapObject *mapObject);
 u8 FieldObjectCheckHeldMovementStatus(struct MapObject *mapObject);
 u8 sub_8063F84(u8 direction);
+u8 GetTrainerFacingDirectionMovementType(u8 direction);
+void CameraObjectSetFollowedObjectId(u8 spriteId);
 
 // Exported data declarations
 

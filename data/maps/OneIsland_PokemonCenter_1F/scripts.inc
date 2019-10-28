@@ -7,9 +7,9 @@ OneIsland_PokemonCenter_1F_MapScripts:: @ 8170BF8
 
 OneIsland_PokemonCenter_1F_MapScript3_170C0D:: @ 8170C0D
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
-	call_if 4, EventScript_170C22
-	checkflag FLAG_0x844
-	call_if 1, EventScript_170C36
+	call_if ge, EventScript_170C22
+	checkflag FLAG_SYS_CAN_LINK_WITH_RS
+	call_if TRUE, EventScript_170C36
 	end
 
 EventScript_170C22:: @ 8170C22
@@ -29,11 +29,11 @@ EventScript_170C36:: @ 8170C36
 OneIsland_PokemonCenter_1F_MapScript1_170C4E:: @ 8170C4E
 	setrespawn SPAWN_ONE_ISLAND
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 6
-	call_if 1, EventScript_170C73
+	call_if eq, EventScript_170C73
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 0
-	call_if 1, EventScript_170C79
+	call_if eq, EventScript_170C79
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 2
-	call_if 1, EventScript_170C90
+	call_if eq, EventScript_170C90
 	end
 
 EventScript_170C73:: @ 8170C73
@@ -84,10 +84,10 @@ EventScript_170CB1:: @ 8170CB1
 	waitmovement 0
 	applymovement 255, Movement_1A75EB
 	waitmovement 0
-	checkflag FLAG_0x82C
-	call_if 1, EventScript_170E34
-	checkflag FLAG_0x82C
-	call_if 0, EventScript_170E3D
+	checkflag FLAG_SYS_GAME_CLEAR
+	call_if TRUE, EventScript_170E34
+	checkflag FLAG_SYS_GAME_CLEAR
+	call_if FALSE, EventScript_170E3D
 	applymovement 3, Movement_1A75ED
 	waitmovement 0
 	msgbox gUnknown_81A0E17
@@ -112,18 +112,18 @@ EventScript_170CB1:: @ 8170CB1
 	additem ITEM_TRI_PASS, 1
 	giveitemfanfaremsg gUnknown_81A231B, ITEM_TRI_PASS, 1, MUS_FAN5
 	msgbox gUnknown_81A1150
-	compare_var_to_value VAR_0x4058, 2
-	call_if 4, EventScript_170E46
-	compare_var_to_value VAR_0x4058, 2
-	call_if 0, EventScript_170E58
-	setflag FLAG_0x845
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
+	call_if ge, EventScript_170E46
+	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
+	call_if lt, EventScript_170E58
+	setflag FLAG_SYS_SEVII_MAP_123
 	msgbox gUnknown_81A1230
 	closemessage
 	applymovement 2, Movement_1A75E9
 	waitmovement 0
 	applymovement 3, Movement_1A75E9
 	waitmovement 0
-	setflag FLAG_0x841
+	setflag FLAG_SYS_PC_STORAGE_DISABLED
 	setvar VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 1
 	releaseall
 	end
@@ -146,8 +146,8 @@ EventScript_170E46:: @ 8170E46
 	return
 
 EventScript_170E58:: @ 8170E58
-	setflag FLAG_0x039
-	setvar VAR_0x4058, 2
+	setflag FLAG_HIDE_TOWN_MAP
+	setvar VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
 	additem ITEM_TOWN_MAP, 1
 	giveitemfanfaremsg gUnknown_81A1218, ITEM_TOWN_MAP, 1, MUS_FAN5
 	return
@@ -192,8 +192,8 @@ OneIsland_PokemonCenter_1F_EventScript_170E94:: @ 8170E94
 
 OneIsland_PokemonCenter_1F_EventScript_170E9D:: @ 8170E9D
 	lock
-	checkflag FLAG_0x2A1
-	goto_if_eq EventScript_170EB1
+	checkflag FLAG_SEVII_DETOUR_FINISHED
+	goto_if TRUE, EventScript_170EB1
 	msgbox gUnknown_81A1266
 	release
 	end
@@ -209,22 +209,22 @@ OneIsland_PokemonCenter_1F_EventScript_170EC5:: @ 8170EC5
 	lock
 	faceplayer
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 7
-	goto_if_eq EventScript_170F35
+	goto_if eq, EventScript_170F35
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 6
-	goto_if_eq EventScript_170F9B
-	checkflag FLAG_0x2DC
-	goto_if_eq EventScript_170FA5
+	goto_if eq, EventScript_170F9B
+	checkflag FLAG_RECOVERED_SAPPHIRE
+	goto_if TRUE, EventScript_170FA5
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
-	goto_if_eq EventScript_17103A
-	checkflag FLAG_0x2DD
-	goto_if_eq EventScript_171044
+	goto_if eq, EventScript_17103A
+	checkflag FLAG_GOT_RUBY
+	goto_if TRUE, EventScript_171044
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4
-	goto_if_eq EventScript_1710F2
+	goto_if eq, EventScript_1710F2
 	specialvar VAR_RESULT, IsNationalPokedexEnabled
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_1710FC
+	goto_if eq, EventScript_1710FC
 	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 3
-	goto_if_eq EventScript_171134
+	goto_if eq, EventScript_171134
 	msgbox gUnknown_81A1321
 	closemessage
 	applymovement 3, Movement_1A75E5
@@ -236,28 +236,22 @@ EventScript_170F35:: @ 8170F35
 	msgbox gUnknown_81A1EBD
 	random 3
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_170F6D
+	goto_if eq, EventScript_170F6D
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_170F84
-	setvar VAR_0x8004, 13
-	setvar VAR_0x8005, 5
-	special SetFlavorTextFlagFromSpecialVars
+	goto_if eq, EventScript_170F84
+	famechecker FAMECHECKER_BILL, 5
 	msgbox gUnknown_81A2076
 	release
 	end
 
 EventScript_170F6D:: @ 8170F6D
-	setvar VAR_0x8004, 13
-	setvar VAR_0x8005, 3
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_BILL, 3
 	msgbox gUnknown_81A1EF3
 	release
 	end
 
 EventScript_170F84:: @ 8170F84
-	setvar VAR_0x8004, 13
-	setvar VAR_0x8005, 4
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_BILL, 4
 	msgbox gUnknown_81A1F7C
 	release
 	end
@@ -299,9 +293,9 @@ EventScript_170FA5:: @ 8170FA5
 	waitmovement 0
 	msgbox gUnknown_81A1D7D
 	special sub_810B82C
-	setflag FLAG_0x844
-	setflag FLAG_0x05C
-	setflag FLAG_0x08C
+	setflag FLAG_SYS_CAN_LINK_WITH_RS
+	setflag FLAG_HIDE_CERULEAN_CAVE_GUARD
+	setflag FLAG_HIDE_LORELEI_IN_HER_HOUSE
 	setvar VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 6
 	special InitRoamer
 	release
@@ -331,14 +325,14 @@ EventScript_171044:: @ 8171044
 	waitmovement 0
 	msgbox gUnknown_81A19AA, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_171099
+	goto_if eq, EventScript_171099
 	goto EventScript_1710B2
 	end
 
 EventScript_171099:: @ 8171099
 	msgbox gUnknown_81A1A08, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_171099
+	goto_if eq, EventScript_171099
 	goto EventScript_1710B2
 	end
 
@@ -348,7 +342,7 @@ EventScript_1710B2:: @ 81710B2
 	removeitem ITEM_TRI_PASS, 1
 	setvar VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
 	additem ITEM_RAINBOW_PASS, 1
-	setflag FLAG_0x846
+	setflag FLAG_SYS_SEVII_MAP_4567
 	textcolor 3
 	playfanfare MUS_FAN5
 	message Text_1A1B56
@@ -375,7 +369,7 @@ EventScript_1710FC:: @ 81710FC
 	applymovement 3, Movement_1A75E1
 	waitmovement 0
 	msgbox gUnknown_81A17DF
-	setvar VAR_0x407F, 1
+	setvar VAR_MAP_SCENE_MT_EMBER_EXTERIOR, 1
 	setvar VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4
 	release
 	end
@@ -410,8 +404,8 @@ OneIsland_PokemonCenter_1F_EventScript_171151:: @ 8171151
 OneIsland_PokemonCenter_1F_EventScript_17115A:: @ 817115A
 	lock
 	faceplayer
-	checkflag FLAG_0x844
-	goto_if_eq EventScript_17116F
+	checkflag FLAG_SYS_CAN_LINK_WITH_RS
+	goto_if TRUE, EventScript_17116F
 	msgbox gUnknown_81A218D
 	release
 	end
@@ -423,10 +417,10 @@ EventScript_17116F:: @ 817116F
 
 OneIsland_PokemonCenter_1F_EventScript_171179:: @ 8171179
 	lockall
-	checkflag FLAG_0x844
-	goto_if_eq EventScript_1711A0
-	checkflag FLAG_0x2A1
-	goto_if_eq EventScript_171196
+	checkflag FLAG_SYS_CAN_LINK_WITH_RS
+	goto_if TRUE, EventScript_1711A0
+	checkflag FLAG_SEVII_DETOUR_FINISHED
+	goto_if TRUE, EventScript_171196
 	msgbox gUnknown_81A223F
 	releaseall
 	end
@@ -473,13 +467,13 @@ EventScript_1711DA:: @ 81711DA
 	msgbox gUnknown_81A13B8
 	closemessage
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_1712E4
+	call_if eq, EventScript_1712E4
 	compare_var_to_value VAR_0x4001, 2
-	call_if 1, EventScript_1712EF
+	call_if eq, EventScript_1712EF
 	compare_var_to_value VAR_0x4001, 3
-	call_if 1, EventScript_1712FA
+	call_if eq, EventScript_1712FA
 	compare_var_to_value VAR_0x4001, 4
-	call_if 1, EventScript_171305
+	call_if eq, EventScript_171305
 	delay 10
 	msgbox gUnknown_81A13CB
 	applymovement 255, Movement_1A75ED
@@ -514,12 +508,12 @@ EventScript_1711DA:: @ 81711DA
 	applymovement 2, Movement_17132D
 	waitmovement 0
 	playse SE_KAIDAN
-	setflag FLAG_0x072
+	setflag FLAG_HIDE_ONE_ISLAND_POKECENTER_BILL
 	setvar VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 3
-	clearflag FLAG_0x062
-	setvar VAR_0x4071, 3
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8006, 8
+	clearflag FLAG_HIDE_CINNABAR_BILL
+	setvar VAR_MAP_SCENE_CINNABAR_ISLAND, 3
+	setvar VAR_0x8004, SEAGALLOP_ONE_ISLAND
+	setvar VAR_0x8006, SEAGALLOP_CINNABAR_ISLAND
 	goto EventScript_1A90DA
 	end
 

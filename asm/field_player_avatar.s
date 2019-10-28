@@ -3964,7 +3964,7 @@ sub_805D0F8: @ 805D0F8
 	lsls r4, 24
 	lsrs r4, 24
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeEventObjects
 	bl sav1_reset_battle_music_maybe
 	bl Overworld_ChangeMusicToDefault
 	ldr r2, _0805D148 @ =gPlayerAvatar
@@ -4005,7 +4005,7 @@ sub_805D154: @ 805D154
 	lsls r4, 24
 	lsrs r4, 24
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeEventObjects
 	ldr r2, _0805D19C @ =gPlayerAvatar
 	ldrb r1, [r2]
 	movs r0, 0xF7

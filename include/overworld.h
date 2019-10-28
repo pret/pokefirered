@@ -35,6 +35,7 @@ extern struct UCoords32 gDirectionToVectors[];
 extern struct LinkPlayerMapObject gLinkPlayerMapObjects[4];
 extern MainCallback gFieldCallback;
 
+extern struct WarpData gUnknown_2031DB4;
 extern struct WarpData gUnknown_2031DBC;
 
 extern u8 gUnknown_2031DE0;
@@ -61,7 +62,7 @@ void sub_8084EBC(s16, s16);
 void player_avatar_init_params_reset(void);
 
 void Overworld_SetFlashLevel(s32 a1);
-//u8 Overworld_GetFlashLevel(void);
+u8 Overworld_GetFlashLevel(void);
 void sub_8085524(u16);
 
 void Overworld_SetSavedMusic(u16);
@@ -104,7 +105,7 @@ void SetWarpDestinationToFixedHoleWarp(s16 x, s16 y);
 void ResetInitialPlayerAvatarState(void);
 void sub_8055D40(u16 mapDataId);
 void CleanupOverworldWindowsAndTilemaps(void);
-u32 sub_8054C04(void);
+u32 ComputeWhiteOutMoneyLoss(void);
 
 extern u8 gDisableMapMusicChangeOnMapLoad;
 extern u8 gUnknown_2036E28;
@@ -140,5 +141,6 @@ bool32 Overworld_DoScrollSceneForCredits(u8 *, const struct CreditsOverworldCmd 
 bool32 sub_8058318(void);
 
 void CB2_ReturnToStartMenu(void);
+void CB2_WhiteOut(void);
 
 #endif //GUARD_OVERWORLD_H

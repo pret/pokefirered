@@ -5,41 +5,41 @@ BirthIsland_Exterior_MapScripts:: @ 8165203
 	.byte 0
 
 BirthIsland_Exterior_MapScript3_165213:: @ 8165213
-	special sub_80CD008
+	special Special_SetDeoxysTriangleObjectPal
 	end
 
 BirthIsland_Exterior_MapScript1_165217:: @ 8165217
 	setworldmapflag FLAG_WORLD_MAP_BIRTH_ISLAND_EXTERIOR
-	setvar VAR_0x4010, 150
-	setvar VAR_SECRET_BASE_MAP, 0
-	setvar VAR_ALTERING_CAVE_WILD_SET, 0
-	checkflag FLAG_0x2E4
-	call_if 1, EventScript_16523C
-	checkflag FLAG_0x2E4
-	call_if 0, EventScript_165243
+	setvar VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_DEOXYS_N
+	setvar VAR_DEOXYS_INTERACTION_STEP_COUNTER, 0
+	setvar VAR_DEOXYS_INTERACTION_NUM, 0
+	checkflag FLAG_FOUGHT_DEOXYS
+	call_if TRUE, EventScript_16523C
+	checkflag FLAG_FOUGHT_DEOXYS
+	call_if FALSE, EventScript_165243
 	end
 
 EventScript_16523C:: @ 816523C
-	setflag FLAG_0x099
-	setflag FLAG_0x09A
+	setflag FLAG_HIDE_DEOXYS
+	setflag FLAG_HIDE_BIRTH_ISLAND_METEORITE
 	return
 
 EventScript_165243:: @ 8165243
-	checkflag FLAG_0x2F7
-	goto_if_eq EventScript_1A77A9
-	clearflag FLAG_0x09A
-	clearflag FLAG_0x848
+	checkflag FLAG_DEOXYS_FLEW_AWAY
+	goto_if TRUE, EventScript_1A77A9
+	clearflag FLAG_HIDE_BIRTH_ISLAND_METEORITE
+	clearflag FLAG_SYS_DEOXYS_AWAKENED
 	return
 
 BirthIsland_Exterior_MapScript2_165253:: @ 8165253
-	checkflag FLAG_0x807
-	call_if 1, EventScript_16525D
+	checkflag FLAG_SYS_SPECIAL_WILD_BATTLE
+	call_if TRUE, EventScript_16525D
 	end
 
 EventScript_16525D:: @ 816525D
-	specialvar VAR_RESULT, sub_80CA74C
-	compare_var_to_value VAR_RESULT, 7
-	goto_if 5, EventScript_1A77A9
+	specialvar VAR_RESULT, Special_GetBattleOutcome
+	compare_var_to_value VAR_RESULT, B_OUTCOME_CAUGHT
+	goto_if ne, EventScript_1A77A9
 	removeobject 2
 	return
 
@@ -48,9 +48,9 @@ BirthIsland_Exterior_EventScript_165271:: @ 8165271
 	faceplayer
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
-	special sub_80CCDFC
+	special Special_DeoxysSound
 	waitstate
 	switch VAR_RESULT
 	case 0, EventScript_1652BA
@@ -91,23 +91,23 @@ EventScript_1652C0:: @ 81652C0
 	setvar VAR_0x8005, 30
 	setvar VAR_0x8006, 0
 	special CreateObedientEnemyMon
-	setflag FLAG_0x807
-	special sub_807F9D8
+	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
+	special Special_StartLegendaryBattle
 	waitstate
-	clearflag FLAG_0x807
-	specialvar VAR_RESULT, sub_80CA74C
-	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16533A
-	compare_var_to_value VAR_RESULT, 4
-	goto_if_eq EventScript_165348
-	compare_var_to_value VAR_RESULT, 5
-	goto_if_eq EventScript_165348
-	setflag FLAG_0x2E4
+	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
+	specialvar VAR_RESULT, Special_GetBattleOutcome
+	compare_var_to_value VAR_RESULT, B_OUTCOME_WON
+	goto_if eq, EventScript_16533A
+	compare_var_to_value VAR_RESULT, B_OUTCOME_RAN
+	goto_if eq, EventScript_165348
+	compare_var_to_value VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
+	goto_if eq, EventScript_165348
+	setflag FLAG_FOUGHT_DEOXYS
 	release
 	end
 
 EventScript_16533A:: @ 816533A
-	setflag FLAG_0x2F7
+	setflag FLAG_DEOXYS_FLEW_AWAY
 	setvar VAR_0x8004, SPECIES_DEOXYS
 	goto EventScript_1A9236
 	end

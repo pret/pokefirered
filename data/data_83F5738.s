@@ -1,3 +1,7 @@
+#include "constants/species.h"
+#include "constants/items.h"
+	.include "asm/macros.inc"
+	.include "constants/constants.inc"
 	.section .rodata
 
 	.align 2
@@ -21,89 +25,6 @@ gUnknown_83F5864:: @ 83F5864
 
 gUnknown_83F5A44:: @ 83F5A44
 	.incbin "baserom.gba", 0x3F5A44, 0xB4
-
-gUnknown_83F5AF8:: @ 83F5AF8
-	.incbin "baserom.gba", 0x3F5AF8, 0x22
-
-gUnknown_83F5B1A:: @ 83F5B1A
-	.incbin "baserom.gba", 0x3F5B1A, 0x16
-
-gUnknown_83F5B30:: @ 83F5B30
-	.incbin "baserom.gba", 0x3F5B30, 0xC
-
-gUnknown_83F5B3C:: @ 83F5B3C
-	.incbin "baserom.gba", 0x3F5B3C, 0x8
-
-gUnknown_83F5B44:: @ 83F5B44
-	.incbin "baserom.gba", 0x3F5B44, 0x50
-
-gUnknown_83F5B94:: @ 83F5B94
-	.incbin "baserom.gba", 0x3F5B94, 0x12
-
-gUnknown_83F5BA6:: @ 83F5BA6
-	.incbin "baserom.gba", 0x3F5BA6, 0x12
-
-gUnknown_83F5BB8:: @ 83F5BB8
-	.incbin "baserom.gba", 0x3F5BB8, 0x9
-
-gUnknown_83F5BC1:: @ 83F5BC1
-	.incbin "baserom.gba", 0x3F5BC1, 0xB
-
-gUnknown_83F5BCC:: @ 83F5BCC
-	.incbin "baserom.gba", 0x3F5BCC, 0x150
-
-gUnknown_83F5D1C:: @ 83F5D1C
-	.incbin "baserom.gba", 0x3F5D1C, 0x10
-
-sStarterMon:: @ 83F5D2C
-	.incbin "baserom.gba", 0x3F5D2C, 0x6
-
-gUnknown_83F5D32:: @ 83F5D32
-	.incbin "baserom.gba", 0x3F5D32, 0x26
-
-gUnknown_83F5D58:: @ 83F5D58
-	.incbin "baserom.gba", 0x3F5D58, 0x198
-
-	.align 2
-gUnknown_83F5EF0:: @ 83F5EF0
-	.asciz "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/scr_tool.c"
-
-	.align 2
-gUnknown_83F5F24:: @ 83F5F24
-	.asciz "0"
-
-gUnknown_83F5F26:: @ 83F5F26
-	.incbin "baserom.gba", 0x3F5F26, 0x2A
-
-gUnknown_83F5F50:: @ 83F5F50
-	.incbin "baserom.gba", 0x3F5F50, 0x160
-
-gUnknown_83F60B0:: @ 83F60B0
-	.incbin "baserom.gba", 0x3F60B0, 0x20
-
-gUnknown_83F60D0:: @ 83F60D0
-	.incbin "baserom.gba", 0x3F60D0, 0x100
-
-gUnknown_83F61D0:: @ 83F61D0
-	.incbin "baserom.gba", 0x3F61D0, 0x20
-
-gUnknown_83F61F0:: @ 83F61F0
-	.incbin "baserom.gba", 0x3F61F0, 0xB
-
-gUnknown_83F61FB:: @ 83F61FB
-	.incbin "baserom.gba", 0x3F61FB, 0x8
-
-gUnknown_83F6203:: @ 83F6203
-	.incbin "baserom.gba", 0x3F6203, 0x3
-
-gUnknown_83F6206:: @ 83F6206
-	.incbin "baserom.gba", 0x3F6206, 0x160
-
-gUnknown_83F6366:: @ 83F6366
-	.incbin "baserom.gba", 0x3F6366, 0x16
-
-gUnknown_83F637C:: @ 83F637C
-	.incbin "baserom.gba", 0x3F637C, 0xC
 
 	.section .rodata.83F6C90
 gUnknown_83F6C90:: @ 83F6C90
@@ -423,8 +344,32 @@ gText_BattleSwitchWhich:: @ 83FE7A0
 gUnknown_83FE80C:: @ 83FE80C
 	.incbin "baserom.gba", 0x3FE80C, 0x10
 
-gUnknown_83FE81C:: @ 83FE81C
-	.incbin "baserom.gba", 0x3FE81C, 0x3D
+gText_HighlightRed_Left:: @ 83FE81C
+	.string "{HIGHLIGHT RED}Left: $"
+
+gText_HighlightRed::
+	.string "{HIGHLIGHT RED}$"
+
+gText_Sleep::
+	.string "sleep$"
+
+gText_Poison::
+	.string "poison$"
+
+gText_Burn::
+	.string "burn$"
+
+gText_Paralysis::
+	.string "paralysis$"
+
+gText_Ice::
+	.string "ice$"
+
+gText_Confusion::
+	.string "confusion$"
+
+gText_Love::
+	.string "love$"
 
 gUnknown_83FE859:: @ 83FE859
 	.incbin "baserom.gba", 0x3FE859, 0x3
@@ -460,13 +405,26 @@ gUnknown_83FE88F:: @ 83FE88F
 	.incbin "baserom.gba", 0x3FE88F, 0xF3
 
 gUnknown_83FE982:: @ 83FE982
-	.incbin "baserom.gba", 0x3FE982, 0x16
+	.string "TIME BOARD$"
+	.string "CLEAR TIME$"
 
 gUnknown_83FE998:: @ 83FE998
-	.incbin "baserom.gba", 0x3FE998, 0x2C
+	.string "{STR_VAR_1}MIN. {STR_VAR_2}.{STR_VAR_3}SEC.$"
+	.string "1F$"
+	.string "2F$"
+	.string "3F$"
+	.string "4F$"
+	.string "5F$"
+	.string "6F$"
+	.string "7F$"
+	.string "8F$"
 
+	.align 2
 gUnknown_83FE9C4:: @ 83FE9C4
-	.incbin "baserom.gba", 0x3FE9C4, 0x10
+	.4byte gOtherText_Single
+	.4byte gOtherText_Double
+	.4byte gOtherText_Knockout
+	.4byte gOtherText_Mixed
 
 gUnknown_83FE9D4:: @ 83FE9D4
 	.incbin "baserom.gba", 0x3FE9D4, 0x10

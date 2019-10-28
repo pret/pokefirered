@@ -37,8 +37,9 @@
       "y": 30,
       "elevation": 3,
       "item": "ITEM_POTION",
-      "flag": "70",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_UNDERGROUND_PATH_NORTH_SOUTH_TUNNEL_POTION",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -46,8 +47,9 @@
       "y": 6,
       "elevation": 3,
       "item": "ITEM_ANTIDOTE",
-      "flag": "71",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_UNDERGROUND_PATH_NORTH_SOUTH_TUNNEL_ANTIDOTE",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -55,8 +57,9 @@
       "y": 57,
       "elevation": 3,
       "item": "ITEM_BURN_HEAL",
-      "flag": "74",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_UNDERGROUND_PATH_NORTH_SOUTH_TUNNEL_BURN_HEAL",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -64,8 +67,9 @@
       "y": 24,
       "elevation": 3,
       "item": "ITEM_AWAKENING",
-      "flag": "73",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_UNDERGROUND_PATH_NORTH_SOUTH_TUNNEL_AWAKENING",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -73,8 +77,9 @@
       "y": 53,
       "elevation": 3,
       "item": "ITEM_ICE_HEAL",
-      "flag": "75",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_UNDERGROUND_PATH_NORTH_SOUTH_TUNNEL_ICE_HEAL",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -82,8 +87,9 @@
       "y": 15,
       "elevation": 3,
       "item": "ITEM_PARALYZE_HEAL",
-      "flag": "72",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_UNDERGROUND_PATH_NORTH_SOUTH_TUNNEL_PARALYZE_HEAL",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -91,8 +97,9 @@
       "y": 39,
       "elevation": 3,
       "item": "ITEM_ETHER",
-      "flag": "76",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_UNDERGROUND_PATH_NORTH_SOUTH_TUNNEL_ETHER",
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

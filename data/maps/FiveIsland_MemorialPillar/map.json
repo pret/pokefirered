@@ -20,7 +20,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "25",
+      "graphics_id": "MAP_OBJ_GFX_MAN",
       "x": 8,
       "y": 44,
       "elevation": 4,
@@ -33,7 +33,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "26",
+      "graphics_id": "MAP_OBJ_GFX_ROCKER",
       "x": 12,
       "y": 6,
       "elevation": 3,
@@ -46,7 +46,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "26",
+      "graphics_id": "MAP_OBJ_GFX_ROCKER",
       "x": 14,
       "y": 17,
       "elevation": 3,
@@ -59,7 +59,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "26",
+      "graphics_id": "MAP_OBJ_GFX_ROCKER",
       "x": 17,
       "y": 31,
       "elevation": 3,
@@ -72,7 +72,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 4,
       "y": 47,
       "elevation": 3,
@@ -82,7 +82,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "FiveIsland_MemorialPillar_EventScript_1BEC83",
-      "flag": "480"
+      "flag": "FLAG_HIDE_FIVE_ISLAND_MEMORIAL_PILLAR_METAL_COAT"
     }
   ],
   "warp_events": [],
@@ -101,8 +101,9 @@
       "y": 52,
       "elevation": 3,
       "item": "ITEM_BIG_PEARL",
-      "flag": "170",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_FIVE_ISLAND_MEMORIAL_PILLAR_BIG_PEARL",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -110,8 +111,9 @@
       "y": 7,
       "elevation": 3,
       "item": "ITEM_RAZZ_BERRY",
-      "flag": "171",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_FIVE_ISLAND_MEMORIAL_PILLAR_RAZZ_BERRY",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -119,8 +121,9 @@
       "y": 22,
       "elevation": 3,
       "item": "ITEM_SITRUS_BERRY",
-      "flag": "172",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_FIVE_ISLAND_MEMORIAL_PILLAR_SITRUS_BERRY",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -128,8 +131,9 @@
       "y": 25,
       "elevation": 3,
       "item": "ITEM_BLUK_BERRY",
-      "flag": "173",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_FIVE_ISLAND_MEMORIAL_PILLAR_BLUK_BERRY",
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

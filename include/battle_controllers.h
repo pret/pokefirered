@@ -260,16 +260,18 @@ void SetControllerToPlayerPartner(void);
 void SetControllerToSafari(void);
 
 // pokedude controller
-void SetControllerToPokedude(void);
+void SetControllerToPokeDude(void);
 
-// oak controller
-void SetControllerToOakOrOldman(void);
+// oak and old man controller
+void SetControllerToOakOrOldMan(void);
 bool8 sub_80EB2E0(u8);
 void sub_80EB2F4(u8);
 void sub_80E8570(void);
 void sub_80E85C0(void);
 void sub_80E8598(void);
 void sub_80E7988(void);
+void sub_80EB30C(void);
+void sub_80EB524(void);
 
 // link opponent
 void SetControllerToLinkOpponent(void);

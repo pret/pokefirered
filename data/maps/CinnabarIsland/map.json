@@ -25,7 +25,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "28",
+      "graphics_id": "MAP_OBJ_GFX_WOMAN_2",
       "x": 14,
       "y": 6,
       "elevation": 3,
@@ -38,7 +38,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "32",
+      "graphics_id": "MAP_OBJ_GFX_OLD_MAN_1",
       "x": 11,
       "y": 11,
       "elevation": 3,
@@ -51,7 +51,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "73",
+      "graphics_id": "MAP_OBJ_GFX_BILL",
       "x": 20,
       "y": 7,
       "elevation": 3,
@@ -61,10 +61,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "0x0",
-      "flag": "98"
+      "flag": "FLAG_HIDE_CINNABAR_BILL"
     },
     {
-      "graphics_id": "108",
+      "graphics_id": "MAP_OBJ_GFX_SEAGALLOP",
       "x": 23,
       "y": 7,
       "elevation": 1,
@@ -74,7 +74,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "0x0",
-      "flag": "107"
+      "flag": "FLAG_HIDE_CINNABAR_SEAGALLOP"
     }
   ],
   "warp_events": [

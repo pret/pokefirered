@@ -20,7 +20,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "31",
+      "graphics_id": "MAP_OBJ_GFX_WOMAN_3",
       "x": 14,
       "y": 9,
       "elevation": 3,
@@ -33,7 +33,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "53",
+      "graphics_id": "MAP_OBJ_GFX_BIKER",
       "x": 8,
       "y": 8,
       "elevation": 3,
@@ -43,10 +43,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_Port_EventScript_1687CC",
-      "flag": "121"
+      "flag": "FLAG_HIDE_THREE_ISLAND_BIKERS"
     },
     {
-      "graphics_id": "53",
+      "graphics_id": "MAP_OBJ_GFX_BIKER",
       "x": 13,
       "y": 10,
       "elevation": 3,
@@ -56,7 +56,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_Port_EventScript_1687D5",
-      "flag": "121"
+      "flag": "FLAG_HIDE_THREE_ISLAND_BIKERS"
     }
   ],
   "warp_events": [

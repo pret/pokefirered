@@ -6,6 +6,6 @@ ThreeIsland_Harbor_EventScript_171EAA:: @ 8171EAA
 	faceplayer
 	message Text_181726
 	waitmessage
-	setvar VAR_0x8004, 3
+	setvar VAR_0x8004, SEAGALLOP_THREE_ISLAND
 	goto EventScript_1A900F
 	end

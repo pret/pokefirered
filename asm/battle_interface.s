@@ -4304,7 +4304,7 @@ UpdateLeftNoOfBallsTextOnHealthbox: @ 8049D10
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r1, _08049D84 @ =gUnknown_83FE81C
+	ldr r1, _08049D84 @ =gText_HighlightRed_Left
 	mov r0, sp
 	bl StringCopy
 	ldr r1, _08049D88 @ =gNumSafariBalls
@@ -4350,7 +4350,7 @@ UpdateLeftNoOfBallsTextOnHealthbox: @ 8049D10
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08049D84: .4byte gUnknown_83FE81C
+_08049D84: .4byte gText_HighlightRed_Left
 _08049D88: .4byte gNumSafariBalls
 _08049D8C: .4byte gSprites
 _08049D90: .4byte 0x060102c0

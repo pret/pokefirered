@@ -12,10 +12,10 @@ PokemonLeague_LoreleisRoom_MapScript1_162586:: @ 8162586
 	end
 
 PokemonLeague_LoreleisRoom_MapScript2_162591:: @ 8162591
-	checkflag FLAG_0x4B8
-	call_if 1, EventScript_1625AC
-	compare_var_to_value VAR_0x4068, 1
-	call_if 1, EventScript_1625A6
+	checkflag FLAG_DEFEATED_LORELEI
+	call_if TRUE, EventScript_1625AC
+	compare_var_to_value VAR_MAP_SCENE_POKEMON_LEAGUE, 1
+	call_if eq, EventScript_1625A6
 	end
 
 EventScript_1625A6:: @ 81625A6
@@ -39,41 +39,35 @@ EventScript_1625C0:: @ 81625C0
 	end
 
 PokemonLeague_LoreleisRoom_MapScript5_1625C5:: @ 81625C5
-	map_script_2 VAR_0x4068, 0, EventScript_1625CF
+	map_script_2 VAR_MAP_SCENE_POKEMON_LEAGUE, 0, EventScript_1625CF
 	.2byte 0
 
 EventScript_1625CF:: @ 81625CF
 	lockall
 	call EventScript_1A751F
-	setvar VAR_0x4068, 1
+	setvar VAR_MAP_SCENE_POKEMON_LEAGUE, 1
 	releaseall
 	end
 
 PokemonLeague_LoreleisRoom_EventScript_1625DC:: @ 81625DC
 	lock
 	faceplayer
-	setvar VAR_0x8004, 9
-	setvar VAR_0x8005, 2
-	special UpdatePickStateFromSpecialVar8005
-	checkflag FLAG_0x4B8
-	goto_if_eq EventScript_162669
-	setvar VAR_0x8004, 9
-	setvar VAR_0x8005, 0
-	special SetFlavorTextFlagFromSpecialVars
-	setvar VAR_0x8004, 9
-	setvar VAR_0x8005, 1
-	special SetFlavorTextFlagFromSpecialVars
-	checkflag FLAG_0x844
-	call_if 0, EventScript_162641
-	checkflag FLAG_0x844
-	call_if 1, EventScript_16264A
-	setflag FLAG_0x003
-	setflag FLAG_0x005
-	checkflag FLAG_0x844
-	call_if 0, EventScript_162653
-	checkflag FLAG_0x844
-	call_if 1, EventScript_16265E
-	clearflag FLAG_0x005
+	famechecker FAMECHECKER_LORELEI, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
+	checkflag FLAG_DEFEATED_LORELEI
+	goto_if TRUE, EventScript_162669
+	famechecker FAMECHECKER_LORELEI, 0
+	famechecker FAMECHECKER_LORELEI, 1
+	checkflag FLAG_SYS_CAN_LINK_WITH_RS
+	call_if FALSE, EventScript_162641
+	checkflag FLAG_SYS_CAN_LINK_WITH_RS
+	call_if TRUE, EventScript_16264A
+	setflag FLAG_TEMP_3
+	setflag FLAG_TEMP_5
+	checkflag FLAG_SYS_CAN_LINK_WITH_RS
+	call_if FALSE, EventScript_162653
+	checkflag FLAG_SYS_CAN_LINK_WITH_RS
+	call_if TRUE, EventScript_16265E
+	clearflag FLAG_TEMP_5
 	goto EventScript_162673
 
 EventScript_162640:: @ 8162640
@@ -88,11 +82,11 @@ EventScript_16264A:: @ 816264A
 	return
 
 EventScript_162653:: @ 8162653
-	trainerbattle 3, 410, 0, Text_178191
+	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_ELITE_FOUR_LORELEI, 0, Text_178191
 	return
 
 EventScript_16265E:: @ 816265E
-	trainerbattle 3, 735, 0, Text_178191
+	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_ELITE_FOUR_LORELEI_2, 0, Text_178191
 	return
 
 EventScript_162669:: @ 8162669
@@ -101,7 +95,7 @@ EventScript_162669:: @ 8162669
 	end
 
 EventScript_162673:: @ 8162673
-	setflag FLAG_0x4B8
+	setflag FLAG_DEFEATED_LORELEI
 	call EventScript_1A7506
 	msgbox gUnknown_81781B0
 	release

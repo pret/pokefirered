@@ -878,7 +878,7 @@ _08082D78:
 	bl sub_8058F1C
 	lsls r0, 24
 	lsrs r0, 24
-	bl MetatileBehavior_ReturnFalse_6
+	bl MetatileBehavior_IsBridge
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -932,7 +932,7 @@ _08082DFA:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08082E46
-	bl sub_807F78C
+	bl BattleSetup_StartRoamerBattle
 	movs r0, 0x1
 	b _08082E48
 	.align 2, 0
@@ -950,7 +950,7 @@ _08082E24:
 	cmp r0, 0x1
 	bne _08082E40
 _08082E38:
-	bl sub_807F704
+	bl BattleSetup_StartWildBattle
 	movs r0, 0x1
 	b _08082E48
 _08082E40:
@@ -966,8 +966,8 @@ _08082E48:
 	bx r1
 	thumb_func_end sub_8082CBC
 
-	thumb_func_start sub_8082E54
-sub_8082E54: @ 8082E54
+	thumb_func_start Special_RockSmashEncounter
+Special_RockSmashEncounter: @ 8082E54
 	push {r4,lr}
 	bl sub_8082934
 	lsls r0, 16
@@ -999,7 +999,7 @@ sub_8082E54: @ 8082E54
 	lsrs r4, r0, 24
 	cmp r4, 0x1
 	bne _08082EB0
-	bl sub_807F704
+	bl BattleSetup_StartWildBattle
 _08082E9C:
 	ldr r0, _08082EAC @ =gSpecialVar_Result
 	strh r4, [r0]
@@ -1018,7 +1018,7 @@ _08082EB6:
 	bx r0
 	.align 2, 0
 _08082EBC: .4byte gSpecialVar_Result
-	thumb_func_end sub_8082E54
+	thumb_func_end Special_RockSmashEncounter
 
 	thumb_func_start SweetScentWildEncounter
 SweetScentWildEncounter: @ 8082EC0
@@ -1079,7 +1079,7 @@ _08082F1C:
 	cmp r0, 0x1
 	bne _08082F44
 _08082F3C:
-	bl sub_807F78C
+	bl BattleSetup_StartRoamerBattle
 	movs r0, 0x1
 	b _08082F6E
 _08082F44:
@@ -1096,7 +1096,7 @@ _08082F44:
 _08082F58:
 	movs r2, 0
 	bl sub_8082AEC
-	bl sub_807F704
+	bl BattleSetup_StartWildBattle
 	movs r0, 0x1
 	b _08082F6E
 	.align 2, 0
@@ -1160,7 +1160,7 @@ sub_8082FB0: @ 8082FB0
 	bl sub_8082B64
 	movs r0, 0xC
 	bl IncrementGameStat
-	bl sub_807F704
+	bl BattleSetup_StartWildBattle
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -1302,14 +1302,14 @@ sub_80830B8: @ 80830B8
 	bl VarSet
 	cmp r4, 0
 	bne _08083104
-	ldr r0, _08083100 @ =gUnknown_81BFB65
+	ldr r0, _08083100 @ =EventScript_1BFB65
 	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 	b _08083106
 	.align 2, 0
 _080830F8: .4byte gUnknown_203ADFA
 _080830FC: .4byte 0x00004020
-_08083100: .4byte gUnknown_81BFB65
+_08083100: .4byte EventScript_1BFB65
 _08083104:
 	movs r0, 0
 _08083106:

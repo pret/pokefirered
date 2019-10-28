@@ -12,7 +12,7 @@ FuchsiaCity_Mart_EventScript_16D4EA:: @ 816D4EA
 FuchsiaCity_Mart_EventScript_16D4F3:: @ 816D4F3
 	special sub_8110AB4
 	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if eq, EventScript_1A7AE0
 	lock
 	faceplayer
 	message Text_1A6211

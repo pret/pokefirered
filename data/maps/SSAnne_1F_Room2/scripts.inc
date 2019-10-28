@@ -6,11 +6,11 @@ SSAnne_1F_Room2_EventScript_160BE6:: @ 8160BE6
 	end
 
 SSAnne_1F_Room2_EventScript_160BEF:: @ 8160BEF
-	trainerbattle 0, 126, 0, Text_173A1A, Text_173A4F
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_LASS_ANN, 0, Text_173A1A, Text_173A4F
 	msgbox gUnknown_8173A7A, 6
 	end
 
 SSAnne_1F_Room2_EventScript_160C06:: @ 8160C06
-	trainerbattle 0, 96, 0, Text_173999, Text_1739B1
+	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_YOUNGSTER_TYLER, 0, Text_173999, Text_1739B1
 	msgbox gUnknown_81739C5, 6
 	end

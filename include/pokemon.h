@@ -169,35 +169,6 @@ enum
     EGG_GROUP_UNDISCOVERED
 };
 
-enum
-{
-    NATURE_HARDY,
-    NATURE_LONELY,
-    NATURE_BRAVE,
-    NATURE_ADAMANT,
-    NATURE_NAUGHTY,
-    NATURE_BOLD,
-    NATURE_DOCILE,
-    NATURE_RELAXED,
-    NATURE_IMPISH,
-    NATURE_LAX,
-    NATURE_TIMID,
-    NATURE_HASTY,
-    NATURE_SERIOUS,
-    NATURE_JOLLY,
-    NATURE_NAIVE,
-    NATURE_MODEST,
-    NATURE_MILD,
-    NATURE_QUIET,
-    NATURE_BASHFUL,
-    NATURE_RASH,
-    NATURE_CALM,
-    NATURE_GENTLE,
-    NATURE_SASSY,
-    NATURE_CAREFUL,
-    NATURE_QUIRKY,
-};
-
 struct PokemonSubstruct0
 {
     u16 species;
@@ -346,7 +317,7 @@ struct BattleTowerPokemon
              u32 gap:1;
              u32 abilityNum:1;
     /*0x1C*/ u32 personality;
-    /*0x20*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
+    /*0x20*/ u8 nickname[11];
     /*0x2B*/ u8 friendship;
 };
 
@@ -629,10 +600,10 @@ u8 GetTrainerEncounterMusicId(u16 trainer);
 void AdjustFriendship(struct Pokemon *mon, u8 event);
 void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies);
 u16 GetMonEVCount(struct Pokemon *mon);
-void sub_8043A68(void);
+void RandomlyGivePartyPokerus(struct Pokemon *party);
 u8 CheckPartyPokerus(struct Pokemon *party, u8 selection);
 u8 CheckPartyHasHadPokerus(struct Pokemon *party, u8 selection);
-void sub_8043B40(void);
+void PartySpreadPokerus(struct Pokemon *party);
 bool8 TryIncrementMonLevel(struct Pokemon *mon);
 u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm);
 u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves);

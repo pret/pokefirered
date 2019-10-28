@@ -4,18 +4,18 @@ FuchsiaCity_MapScripts:: @ 8166D75
 
 FuchsiaCity_MapScript1_166D7B:: @ 8166D7B
 	setworldmapflag FLAG_WORLD_MAP_FUCHSIA_CITY
-	checkflag FLAG_0x272
-	call_if 1, EventScript_166D91
-	checkflag FLAG_0x272
-	call_if 0, EventScript_166D97
+	checkflag FLAG_GOT_DOME_FOSSIL
+	call_if TRUE, EventScript_166D91
+	checkflag FLAG_GOT_DOME_FOSSIL
+	call_if FALSE, EventScript_166D97
 	end
 
 EventScript_166D91:: @ 8166D91
-	setvar VAR_0x4010, 118
+	setvar VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_OMANYTE
 	return
 
 EventScript_166D97:: @ 8166D97
-	setvar VAR_0x4010, 147
+	setvar VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_KABUTO
 	return
 
 FuchsiaCity_EventScript_166D9D:: @ 8166D9D
@@ -37,9 +37,7 @@ FuchsiaCity_EventScript_166DB8:: @ 8166DB8
 FuchsiaCity_EventScript_166DC1:: @ 8166DC1
 	lock
 	faceplayer
-	setvar VAR_0x8004, 6
-	setvar VAR_0x8005, 3
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_KOGA, 3
 	msgbox gUnknown_8180ABD
 	release
 	end
@@ -66,9 +64,7 @@ EventScript_166DFE:: @ 8166DFE
 
 FuchsiaCity_EventScript_166E07:: @ 8166E07
 	lockall
-	setvar VAR_0x8004, 6
-	setvar VAR_0x8005, 0
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_KOGA, 0
 	msgbox gUnknown_8180768
 	releaseall
 	end
@@ -76,7 +72,7 @@ FuchsiaCity_EventScript_166E07:: @ 8166E07
 FuchsiaCity_EventScript_166E1F:: @ 8166E1F
 	lockall
 	setvar VAR_0x8004, SPECIES_CHANSEY
-	special sub_80CBDCC
+	special Special_SetSeenMon
 	drawmonpic SPECIES_CHANSEY, 10, 3
 	msgbox gUnknown_81807A9
 	erasemonpic
@@ -86,7 +82,7 @@ FuchsiaCity_EventScript_166E1F:: @ 8166E1F
 FuchsiaCity_EventScript_166E38:: @ 8166E38
 	lockall
 	setvar VAR_0x8004, SPECIES_VOLTORB
-	special sub_80CBDCC
+	special Special_SetSeenMon
 	drawmonpic SPECIES_VOLTORB, 10, 3
 	msgbox gUnknown_81807D9
 	erasemonpic
@@ -96,7 +92,7 @@ FuchsiaCity_EventScript_166E38:: @ 8166E38
 FuchsiaCity_EventScript_166E51:: @ 8166E51
 	lockall
 	setvar VAR_0x8004, SPECIES_KANGASKHAN
-	special sub_80CBDCC
+	special Special_SetSeenMon
 	drawmonpic SPECIES_KANGASKHAN, 10, 3
 	msgbox gUnknown_8180806
 	erasemonpic
@@ -106,7 +102,7 @@ FuchsiaCity_EventScript_166E51:: @ 8166E51
 FuchsiaCity_EventScript_166E6A:: @ 8166E6A
 	lockall
 	setvar VAR_0x8004, SPECIES_SLOWPOKE
-	special sub_80CBDCC
+	special Special_SetSeenMon
 	drawmonpic SPECIES_SLOWPOKE, 10, 3
 	msgbox gUnknown_8180859
 	erasemonpic
@@ -116,7 +112,7 @@ FuchsiaCity_EventScript_166E6A:: @ 8166E6A
 FuchsiaCity_EventScript_166E83:: @ 8166E83
 	lockall
 	setvar VAR_0x8004, SPECIES_LAPRAS
-	special sub_80CBDCC
+	special Special_SetSeenMon
 	drawmonpic SPECIES_LAPRAS, 10, 3
 	msgbox gUnknown_8180887
 	erasemonpic
@@ -125,10 +121,10 @@ FuchsiaCity_EventScript_166E83:: @ 8166E83
 
 FuchsiaCity_EventScript_166E9C:: @ 8166E9C
 	lockall
-	checkflag FLAG_0x272
-	goto_if_eq EventScript_166EBE
+	checkflag FLAG_GOT_DOME_FOSSIL
+	goto_if TRUE, EventScript_166EBE
 	setvar VAR_0x8004, SPECIES_KABUTO
-	special sub_80CBDCC
+	special Special_SetSeenMon
 	drawmonpic SPECIES_KABUTO, 10, 3
 	msgbox gUnknown_81808FA
 	erasemonpic
@@ -137,7 +133,7 @@ FuchsiaCity_EventScript_166E9C:: @ 8166E9C
 
 EventScript_166EBE:: @ 8166EBE
 	setvar VAR_0x8004, SPECIES_OMANYTE
-	special sub_80CBDCC
+	special Special_SetSeenMon
 	drawmonpic SPECIES_OMANYTE, 10, 3
 	msgbox gUnknown_81808AE
 	erasemonpic

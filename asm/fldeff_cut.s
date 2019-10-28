@@ -33,7 +33,7 @@ sub_8097898: @ 8097898
 	ldr r4, _080978CC @ =gUnknown_2039874
 	movs r0, 0
 	strb r0, [r4]
-	bl sub_80CCD84
+	bl CutMoveRuinValleyCheck
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -232,7 +232,7 @@ sub_8097A20: @ 8097A20
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _08097A3C
-	bl sub_80CCDD0
+	bl CutMoveOpenDottedHoleDoor
 	b _08097A42
 	.align 2, 0
 _08097A38: .4byte gUnknown_2039874

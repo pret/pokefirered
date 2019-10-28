@@ -15,7 +15,7 @@ sub_8054BC8: @ 8054BC8
 	movs r0, 0xA4
 	lsls r0, 2
 	adds r4, r0
-	bl sub_8054C04
+	bl ComputeWhiteOutMoneyLoss
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl RemoveMoney
@@ -31,17 +31,17 @@ _08054BFC: .4byte gUnknown_81A654B
 _08054C00: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_8054BC8
 
-	thumb_func_start sub_8054C04
-sub_8054C04: @ 8054C04
+	thumb_func_start ComputeWhiteOutMoneyLoss
+ComputeWhiteOutMoneyLoss: @ 8054C04
 	push {r4,lr}
-	bl sub_8054C70
+	bl CountBadgesForOverworldWhiteOutLossCalculation
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	bl GetPlayerPartyHighestLevel
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _08054C40 @ =gUnknown_826D294
+	ldr r1, _08054C40 @ =sWhiteOutMoneyLossMultipliers
 	adds r4, r1
 	ldrb r1, [r4]
 	lsls r1, 2
@@ -62,14 +62,14 @@ _08054C38:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08054C40: .4byte gUnknown_826D294
+_08054C40: .4byte sWhiteOutMoneyLossMultipliers
 _08054C44: .4byte gSaveBlock1Ptr
-	thumb_func_end sub_8054C04
+	thumb_func_end ComputeWhiteOutMoneyLoss
 
-	thumb_func_start sub_8054C48
-sub_8054C48: @ 8054C48
+	thumb_func_start Special_OverworldWhiteOutGetMoneyLoss
+Special_OverworldWhiteOutGetMoneyLoss: @ 8054C48
 	push {r4,r5,lr}
-	bl sub_8054C04
+	bl ComputeWhiteOutMoneyLoss
 	adds r4, r0, 0
 	ldr r5, _08054C6C @ =gStringVar1
 	bl CountDigits
@@ -85,14 +85,14 @@ sub_8054C48: @ 8054C48
 	bx r0
 	.align 2, 0
 _08054C6C: .4byte gStringVar1
-	thumb_func_end sub_8054C48
+	thumb_func_end Special_OverworldWhiteOutGetMoneyLoss
 
-	thumb_func_start sub_8054C70
-sub_8054C70: @ 8054C70
+	thumb_func_start CountBadgesForOverworldWhiteOutLossCalculation
+CountBadgesForOverworldWhiteOutLossCalculation: @ 8054C70
 	push {r4-r6,lr}
 	movs r6, 0
 	movs r5, 0
-	ldr r4, _08054C9C @ =gUnknown_826D29E
+	ldr r4, _08054C9C @ =sWhiteOutMoneyLossBadgeFlagIDs
 _08054C78:
 	ldrh r0, [r4]
 	bl FlagGet
@@ -112,8 +112,8 @@ _08054C8A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08054C9C: .4byte gUnknown_826D29E
-	thumb_func_end sub_8054C70
+_08054C9C: .4byte sWhiteOutMoneyLossBadgeFlagIDs
+	thumb_func_end CountBadgesForOverworldWhiteOutLossCalculation
 
 	thumb_func_start sub_8054CA0
 sub_8054CA0: @ 8054CA0
@@ -749,7 +749,7 @@ warp_shift: @ 8055198
 	str r0, [r2, 0x4]
 	str r1, [r2, 0x8]
 	ldr r2, _080551D0 @ =gUnknown_2031DC4
-	ldr r0, _080551D4 @ =gUnknown_826D2B0
+	ldr r0, _080551D4 @ =sDummyWarpData
 	ldr r1, [r0, 0x4]
 	ldr r0, [r0]
 	str r0, [r2]
@@ -763,7 +763,7 @@ _080551C4: .4byte gUnknown_2031DB4
 _080551C8: .4byte gSaveBlock1Ptr
 _080551CC: .4byte gUnknown_2031DBC
 _080551D0: .4byte gUnknown_2031DC4
-_080551D4: .4byte gUnknown_826D2B0
+_080551D4: .4byte sDummyWarpData
 _080551D8: .4byte gUnknown_2031DCC
 	thumb_func_end warp_shift
 
@@ -1708,7 +1708,7 @@ sub_8055864: @ 8055864
 	bl TrySetMapSaveWarpStatus
 	bl sub_806E110
 	bl nullsub_74
-	bl sub_806D7E8
+	bl RestartWildEncounterImmunitySteps
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl sub_810C578
@@ -1717,7 +1717,7 @@ sub_8055864: @ 8055864
 	bl sub_8055CB8
 	bl sav1_reset_battle_music_maybe
 	bl mapheader_run_script_with_tag_x3
-	bl sub_815D8F8
+	bl TryRegenerateRenewableHiddenItems
 	bl not_trainer_hill_battle_pyramid
 	ldr r4, _0805591C @ =gMapHeader
 	ldr r0, [r4]
@@ -1771,7 +1771,7 @@ sub_8055920: @ 8055920
 	bl TrySetMapSaveWarpStatus
 	bl sub_806E110
 	bl nullsub_74
-	bl sub_806D7E8
+	bl RestartWildEncounterImmunitySteps
 	ldr r0, _080559A0 @ =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r0, 0x4
@@ -1794,7 +1794,7 @@ _08055974:
 	bl sub_8055CB8
 	bl sav1_reset_battle_music_maybe
 	bl mapheader_run_script_with_tag_x3
-	bl sub_815D8F8
+	bl TryRegenerateRenewableHiddenItems
 	bl UpdateLocationHistoryForRoamer
 	bl RoamerMoveToOtherLocationSet
 	bl sub_8110920
@@ -2284,8 +2284,8 @@ _08055D28: .4byte gUnknown_83C68E0
 _08055D2C: .4byte gSaveBlock1Ptr
 	thumb_func_end Overworld_SetFlashLevel
 
-	thumb_func_start sav1_get_flash_used_on_map
-sav1_get_flash_used_on_map: @ 8055D30
+	thumb_func_start Overworld_GetFlashLevel
+Overworld_GetFlashLevel: @ 8055D30
 	ldr r0, _08055D3C @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	adds r0, 0x30
@@ -2293,7 +2293,7 @@ sav1_get_flash_used_on_map: @ 8055D30
 	bx lr
 	.align 2, 0
 _08055D3C: .4byte gSaveBlock1Ptr
-	thumb_func_end sav1_get_flash_used_on_map
+	thumb_func_end Overworld_GetFlashLevel
 
 	thumb_func_start SetCurrentMapLayout
 SetCurrentMapLayout: @ 8055D40
@@ -3293,7 +3293,7 @@ _080564B0:
 	adds r2, r4, 0
 	bl sub_805B3E0
 _080564BA:
-	bl sub_811092C
+	bl RunQuestLogCB
 	add sp, 0x4
 	pop {r4-r6}
 	pop {r0}
@@ -3328,7 +3328,7 @@ sub_80564C8: @ 80564C8
 	.align 2, 0
 _08056508: .4byte gUnknown_3005E90
 _0805650C:
-	bl sub_811092C
+	bl RunQuestLogCB
 	b _08056522
 _08056512:
 	bl sub_8111CD0
@@ -3336,7 +3336,7 @@ _08056512:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08056522
-	bl sub_811092C
+	bl RunQuestLogCB
 _08056522:
 	ldr r0, _08056530 @ =gUnknown_3005E90
 	bl sub_806C888
@@ -3522,8 +3522,8 @@ _0805669C: .4byte sub_8056534
 _080566A0: .4byte sub_80565B4
 	thumb_func_end CB2_NewGame
 
-	thumb_func_start c2_whiteout
-c2_whiteout: @ 80566A4
+	thumb_func_start CB2_WhiteOut
+CB2_WhiteOut: @ 80566A4
 	push {lr}
 	sub sp, 0x4
 	ldr r1, _08056708 @ =gMain
@@ -3569,7 +3569,7 @@ _0805670C: .4byte gFieldCallback
 _08056710: .4byte sub_807F5F0
 _08056714: .4byte sub_8056534
 _08056718: .4byte sub_80565B4
-	thumb_func_end c2_whiteout
+	thumb_func_end CB2_WhiteOut
 
 	thumb_func_start CB2_LoadMap
 CB2_LoadMap: @ 805671C
@@ -3944,7 +3944,7 @@ VBlankCB_Field: @ 8056A14
 	thumb_func_start sub_8056A34
 sub_8056A34: @ 8056A34
 	push {lr}
-	bl sav1_get_flash_used_on_map
+	bl Overworld_GetFlashLevel
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -6964,13 +6964,13 @@ sub_8058214: @ 8058214
 	thumb_func_start sub_8058230
 sub_8058230: @ 8058230
 	push {lr}
-	ldr r0, _08058240 @ =gUnknown_81BB9F0
+	ldr r0, _08058240 @ =EventScript_1BB9F0
 	bl ScriptContext1_SetupScript
 	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08058240: .4byte gUnknown_81BB9F0
+_08058240: .4byte EventScript_1BB9F0
 	thumb_func_end sub_8058230
 
 	thumb_func_start sub_8058244

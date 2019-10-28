@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "52",
+      "graphics_id": "MAP_OBJ_GFX_SUPER_NERD",
       "x": 5,
       "y": 23,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 36,
       "y": 8,
       "elevation": 3,
@@ -37,10 +37,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PokemonMansion_2F_EventScript_1BE977",
-      "flag": "417"
+      "flag": "FLAG_HIDE_POKEMON_MANSION_2F_CALCIUM"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 18,
       "y": 23,
       "elevation": 3,
@@ -50,10 +50,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PokemonMansion_2F_EventScript_1BEB72",
-      "flag": "459"
+      "flag": "FLAG_HIDE_POKEMON_MANSION_2F_ZINC"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 35,
       "y": 17,
       "elevation": 3,
@@ -63,7 +63,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PokemonMansion_2F_EventScript_1BEB7F",
-      "flag": "460"
+      "flag": "FLAG_HIDE_POKEMON_MANSION_2F_HP_UP"
     }
   ],
   "warp_events": [

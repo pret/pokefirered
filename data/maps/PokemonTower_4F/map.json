@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "58",
+      "graphics_id": "MAP_OBJ_GFX_CHANNELER",
       "x": 17,
       "y": 7,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "58",
+      "graphics_id": "MAP_OBJ_GFX_CHANNELER",
       "x": 15,
       "y": 13,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "58",
+      "graphics_id": "MAP_OBJ_GFX_CHANNELER",
       "x": 4,
       "y": 12,
       "elevation": 3,
@@ -53,7 +53,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 12,
       "y": 11,
       "elevation": 3,
@@ -63,10 +63,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PokemonTower_4F_EventScript_1BE762",
-      "flag": "376"
+      "flag": "FLAG_HIDE_POKEMON_TOWER_4F_ELIXIR"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 8,
       "y": 11,
       "elevation": 3,
@@ -76,10 +76,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PokemonTower_4F_EventScript_1BE76F",
-      "flag": "377"
+      "flag": "FLAG_HIDE_POKEMON_TOWER_4F_AWAKENING"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 11,
       "y": 16,
       "elevation": 3,
@@ -89,7 +89,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PokemonTower_4F_EventScript_1BE77C",
-      "flag": "378"
+      "flag": "FLAG_HIDE_POKEMON_TOWER_4F_GREAT_BALL"
     }
   ],
   "warp_events": [

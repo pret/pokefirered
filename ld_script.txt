@@ -65,8 +65,8 @@ SECTIONS {
         src/main_menu.o(.text);
         src/battle_controllers.o(.text);
         src/decompress.o(.text);
-        asm/battle_1.o(.text);
-        asm/battle_2.o(.text);
+        asm/battle_bg.o(.text);
+        src/battle_main.o(.text);
         src/battle_util.o(.text);
         src/battle_script_commands.o(.text);
         src/battle_util2.o(.text);
@@ -104,7 +104,7 @@ SECTIONS {
         src/script.o(.text);
         src/scrcmd.o(.text);
         asm/field_control_avatar.o(.text);
-        asm/event_data.o(.text);
+        src/event_data.o(.text);
         src/coord_event_weather.o(.text);
         asm/field_tasks.o(.text);
         src/start_menu.o(.text);
@@ -120,9 +120,9 @@ SECTIONS {
         src/reset_save_heap.o(.text);
         asm/field_weather.o(.text);
         asm/field_weather_effects.o(.text);
-        src/field_fadetransition.o(.text);;
+        src/field_fadetransition.o(.text);
         asm/field_screen_effect.o(.text);
-        asm/battle_setup.o(.text);
+        src/battle_setup.o(.text);
         asm/cable_club.o(.text);
         asm/trainer_see.o(.text);
         asm/wild_encounter.o(.text);
@@ -132,7 +132,7 @@ SECTIONS {
         src/pokedex.o(.text);
         asm/trainer_card.o(.text);
         asm/pokemon_storage_system.o(.text);
-        asm/pokemon_icon.o(.text);
+        src/pokemon_icon.o(.text);
         asm/script_movement.o(.text);
         asm/fldeff_cut.o(.text);
         src/mail_data.o(.text);
@@ -142,7 +142,7 @@ SECTIONS {
         src/item.o(.text);
         asm/shop.o(.text);
         src/berry.o(.text);
-        asm/script_menu.o(.text);
+        src/script_menu.o(.text);
         asm/naming_screen.o(.text);
         src/money.o(.text);
         asm/script_pokemon_util_80A0058.o(.text);
@@ -176,7 +176,7 @@ SECTIONS {
         asm/bike.o(.text);
         asm/easy_chat.o(.text);
         asm/mon_markings.o(.text);
-        asm/mail.o(.text);
+        src/mail.o(.text);
         src/menu_helpers.o(.text);
         asm/script_pokemon_util_80BF8FC.o(.text);
         src/heal_location.o(.text);
@@ -188,7 +188,7 @@ SECTIONS {
         asm/post_battle_event_funcs.o(.text);
         src/prof_pc.o(.text);
         src/hof_pc.o(.text);
-        asm/field_specials.o(.text);
+        src/field_specials.o(.text);
         src/battle_records.o(.text);
         asm/evolution_scene.o(.text);
         src/coins.o(.text);
@@ -209,7 +209,7 @@ SECTIONS {
         asm/learn_move.o(.text);
         src/fldeff_softboiled.o(.text);
         asm/battle_tower.o(.text);
-        asm/battle_controller_oak.o(.text);
+        src/battle_controller_oak_old_man.o(.text);
         src/player_pc.o(.text);
         src/intro.o(.text);
         asm/battle_anim_special.o(.text);
@@ -284,6 +284,7 @@ SECTIONS {
         src/unk_815C980.o(.text);
         src/ss_anne.o(.text);
         src/cereader_tool.o(.text);
+        src/renewable_hidden_items.o(.text);
         src/trainer_tower.o(.text);
         src/berry_powder.o(.text);
         src/unk_815F138.o(.text);
@@ -383,7 +384,9 @@ SECTIONS {
         src/string_util.o(.rodata);
         src/link.o(.rodata);
         src/main_menu.o(.rodata);
-        data/data.o(.rodata);
+        src/data.o(.rodata);
+        data/battle_bg.o(.rodata);
+        src/battle_main.o(.rodata);
         src/battle_util.o(.rodata);
         src/battle_script_commands.o(.rodata);
         src/battle_controller_player.o(.rodata);
@@ -395,7 +398,10 @@ SECTIONS {
         src/util.o(.rodata);
         src/daycare.o(.rodata);
         src/battle_gfx_sfx_util.o(.rodata);
-        data/data.o(.rodata.8260270);
+        data/battle_interface.o(.rodata);
+        data/pokeball.o(.rodata);
+        data/trade.o(.rodata);
+        data/overworld.o(.rodata);
         data/tilesets.o(.rodata);
         data/maps.o(.rodata);
         src/fieldmap.o(.rodata);
@@ -420,10 +426,16 @@ SECTIONS {
         src/title_screen.o(.rodata);
         data/field_weather.o(.rodata);
         data/data_835B488.o(.rodata);
+        src/battle_setup.o(.rodata);
+        data/data_835B488.o(.rodata.83C6AB0);
+        src/pokemon_icon.o(.rodata);
+        data/data_835B488.o(.rodata.83D4100);
         src/item_menu_icons.o(.rodata);
         src/battle_anim_mon_movement.o(.rodata);
         src/item.o(.rodata);
         data/data_835B488.o(.rodata.83DF09C);
+        src/script_menu.o(.rodata);
+        data/data_835B488.o(.rodata.83E2280);
         src/flying.o(.rodata);
         src/psychic.o(.rodata);
         src/bug.o(.rodata);
@@ -436,10 +448,12 @@ SECTIONS {
         src/battle_anim_utility_funcs.o(.rodata);
         src/battle_intro.o(.rodata);
         data/data_835B488.o(.rodata.83E7CFC);
+        src/mail.o(.rodata);
         src/heal_location.o(.rodata);
         data/data_835B488.o(.rodata.83EEC98);
         src/battle_ai_script_commands.o(.rodata);
         data/data_83F5738.o(.rodata);
+        src/field_specials.o(.rodata);
         src/battle_records.o(.rodata);
         data/data_83F5738.o(.rodata.83F6C90);
         src/battle_transition.o(.rodata);
@@ -449,6 +463,7 @@ SECTIONS {
         data/data_83FECCC.o(.rodata);
         src/battle_controller_safari.o(.rodata);
         data/data_83FECCC.o(.rodata.83FEDE4);
+        src/battle_controller_oak_old_man.o(.rodata);
         src/player_pc.o(.rodata);
         src/intro.o(.rodata);
         data/data_83FECCC.o(.rodata.battle_anim_special);
@@ -506,22 +521,26 @@ SECTIONS {
         src/text_window_graphics.o(.rodata);
         src/quest_log_8150454.o(.rodata);
         data/data_8471F00.o(.rodata);
+        src/unk_8159F40.o(.rodata);
         src/teachy_tv.o(.rodata);
         src/unk_815C980.o(.rodata);
         data/data_8471F00.o(.rodata.8479668);
         src/ss_anne.o(.rodata);
         src/cereader_tool.o(.rodata);
+        src/renewable_hidden_items.o(.rodata);
         src/trainer_tower.o(.rodata);
         src/unk_815F138.o(.rodata);
         src/berry_fix_program.o(.rodata);
         data/data_8471F00.o(.rodata.after_trainer_tower);
+
+        /* These should not be moved to C files */
         src/mystery_event_msg.o(.rodata);
         data/mystery_event_msg.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
     } =0
 
-    songs :
+    song_data :
     ALIGN(4)
     {
         sound/songs/midi/mus_dummy.o(.rodata);
@@ -765,7 +784,7 @@ SECTIONS {
         sound/songs/se_w287b.o(.rodata);
         sound/songs/se_w114.o(.rodata);
         sound/songs/se_w063b.o(.rodata);
-        sound/songs/mus_w_door.o(.rodata);
+        sound/songs/midi/mus_w_door.o(.rodata);
         sound/songs/se_card1.o(.rodata);
         sound/songs/se_card2.o(.rodata);
         sound/songs/se_card3.o(.rodata);
@@ -781,19 +800,19 @@ SECTIONS {
         sound/songs/se_excellent.o(.rodata);
         sound/songs/se_nawamiss.o(.rodata);
         sound/songs/midi/mus_me_asa.o(.rodata);
-        sound/songs/mus_fanfa1.o(.rodata);
-        sound/songs/mus_fanfa4.o(.rodata);
-        sound/songs/mus_fanfa5.o(.rodata);
-        sound/songs/mus_me_bachi.o(.rodata);
-        sound/songs/mus_me_waza.o(.rodata);
-        sound/songs/mus_me_kinomi.o(.rodata);
-        sound/songs/mus_me_shinka.o(.rodata);
-        sound/songs/mus_shinka.o(.rodata);
-        sound/songs/mus_battle32.o(.rodata);
-        sound/songs/mus_battle20.o(.rodata);
-        sound/songs/mus_p_school.o(.rodata);
-        sound/songs/mus_me_b_big.o(.rodata);
-        sound/songs/mus_me_b_small.o(.rodata);
+        sound/songs/midi/mus_fanfa1.o(.rodata);
+        sound/songs/midi/mus_fanfa4.o(.rodata);
+        sound/songs/midi/mus_fanfa5.o(.rodata);
+        sound/songs/midi/mus_me_bachi.o(.rodata);
+        sound/songs/midi/mus_me_waza.o(.rodata);
+        sound/songs/midi/mus_me_kinomi.o(.rodata);
+        sound/songs/midi/mus_me_shinka.o(.rodata);
+        sound/songs/midi/mus_shinka.o(.rodata);
+        sound/songs/midi/mus_battle32.o(.rodata);
+        sound/songs/midi/mus_battle20.o(.rodata);
+        sound/songs/midi/mus_p_school.o(.rodata);
+        sound/songs/midi/mus_me_b_big.o(.rodata);
+        sound/songs/midi/mus_me_b_small.o(.rodata);
         sound/songs/midi/mus_me_wasure.o(.rodata);
         sound/songs/midi/mus_me_zannen.o(.rodata);
         sound/songs/midi/mus_annai.o(.rodata);

@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "58",
+      "graphics_id": "MAP_OBJ_GFX_CHANNELER",
       "x": 11,
       "y": 4,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "58",
+      "graphics_id": "MAP_OBJ_GFX_CHANNELER",
       "x": 19,
       "y": 7,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "58",
+      "graphics_id": "MAP_OBJ_GFX_CHANNELER",
       "x": 7,
       "y": 12,
       "elevation": 3,
@@ -53,7 +53,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "58",
+      "graphics_id": "MAP_OBJ_GFX_CHANNELER",
       "x": 11,
       "y": 16,
       "elevation": 3,
@@ -66,7 +66,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "58",
+      "graphics_id": "MAP_OBJ_GFX_CHANNELER",
       "x": 12,
       "y": 8,
       "elevation": 3,
@@ -79,7 +79,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 6,
       "y": 16,
       "elevation": 3,
@@ -89,10 +89,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PokemonTower_5F_EventScript_1BE789",
-      "flag": "379"
+      "flag": "FLAG_HIDE_POKEMON_TOWER_5F_NUGGET"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 11,
       "y": 9,
       "elevation": 3,
@@ -102,7 +102,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PokemonTower_5F_EventScript_1BEBB3",
-      "flag": "464"
+      "flag": "FLAG_HIDE_POKEMON_TOWER_5F_CLEANSE_TAG"
     }
   ],
   "warp_events": [
@@ -283,8 +283,9 @@
       "y": 3,
       "elevation": 3,
       "item": "ITEM_BIG_MUSHROOM",
-      "flag": "14",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_POKEMON_TOWER_5F_BIG_MUSHROOM",
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

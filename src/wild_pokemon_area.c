@@ -180,7 +180,7 @@ s32 BuildPokedexAreaSubspriteBuffer(u16 species, struct Subsprite * subsprites)
 
     seviiAreas = GetUnlockedSeviiAreas();
     alteringCaveCount = 0;
-    alteringCaveNum = VarGet(VAR_0x4024);
+    alteringCaveNum = VarGet(VAR_ALTERING_CAVE_WILD_SET);
     if (alteringCaveNum > 8)
         alteringCaveNum = 0;
     for (i = 0, areaCount = 0; gWildMonHeaders[i].mapGroup != 0xFF; i++)

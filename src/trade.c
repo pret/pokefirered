@@ -237,7 +237,7 @@ void sub_804C728(void)
     case 5:
         if (gWirelessCommType)
         {
-            if (IsRfuTaskFinished())
+            if (IsLinkRfuTaskFinished())
             {
                 gMain.state++;
                 LoadWirelessStatusIndicatorSpriteGfx();
@@ -267,7 +267,7 @@ void sub_804C728(void)
         {
             struct Pokemon *mon = &gPlayerParty[i];
             gUnknown_2031DA8->partyIcons[0][i] = CreateMonIcon(GetMonData(mon, MON_DATA_SPECIES2),
-                                                                sub_809718C,
+                                                                SpriteCB_MonIcon,
                                                                 (gTradeMonSpriteCoords[i][0] * 8) + 14,
                                                                 (gTradeMonSpriteCoords[i][1] * 8) - 12,
                                                                 1,
@@ -279,7 +279,7 @@ void sub_804C728(void)
         {
             struct Pokemon *mon = &gEnemyParty[i];
             gUnknown_2031DA8->partyIcons[1][i] = CreateMonIcon(GetMonData(mon, MON_DATA_SPECIES2, NULL),
-                                                                sub_809718C,
+                                                                SpriteCB_MonIcon,
                                                                 (gTradeMonSpriteCoords[i + PARTY_SIZE][0] * 8) + 14,
                                                                 (gTradeMonSpriteCoords[i + PARTY_SIZE][1] * 8) - 12,
                                                                 1,
@@ -698,7 +698,7 @@ void sub_804C728(void)
                 "\tldrb r0, [r0]\n"
                 "\tcmp r0, 0\n"
                 "\tbeq _0804C9E8\n"
-                "\tbl IsRfuTaskFinished\n"
+                "\tbl IsLinkRfuTaskFinished\n"
                 "\tlsls r0, 24\n"
                 "\tcmp r0, 0\n"
                 "\tbne _0804C9C4\n"
@@ -797,7 +797,7 @@ void sub_804C728(void)
                 "\tstr r0, [sp, 0x4]\n"
                 "\tstr r1, [sp, 0x8]\n"
                 "\tadds r0, r5, 0\n"
-                "\tldr r1, _0804CB44 @ =sub_809718C\n"
+                "\tldr r1, _0804CB44 @ =SpriteCB_MonIcon\n"
                 "\tbl CreateMonIcon\n"
                 "\tmov r2, r8\n"
                 "\tldr r1, [r2]\n"
@@ -856,7 +856,7 @@ void sub_804C728(void)
                 "\tmovs r0, 0\n"
                 "\tstr r0, [sp, 0x8]\n"
                 "\tadds r0, r5, 0\n"
-                "\tldr r1, _0804CB44 @ =sub_809718C\n"
+                "\tldr r1, _0804CB44 @ =SpriteCB_MonIcon\n"
                 "\tbl CreateMonIcon\n"
                 "\tmov r2, r8\n"
                 "\tldr r1, [r2]\n"
@@ -883,7 +883,7 @@ void sub_804C728(void)
                 "_0804CB38: .4byte gTradeMonSpriteCoords\n"
                 "_0804CB3C: .4byte gPlayerParty\n"
                 "_0804CB40: .4byte 0xfff40000\n"
-                "_0804CB44: .4byte sub_809718C\n"
+                "_0804CB44: .4byte SpriteCB_MonIcon\n"
                 "_0804CB48: .4byte gEnemyParty\n"
                 "_0804CB4C: .4byte gMain\n"
                 "_0804CB50:\n"

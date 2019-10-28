@@ -576,8 +576,8 @@ _080BDB14: .4byte 0x00002cc4
 _080BDB18: .4byte gStringVar4
 	thumb_func_end sub_80BDA7C
 
-	thumb_func_start sub_80BDB1C
-sub_80BDB1C: @ 80BDB1C
+	thumb_func_start BufferRandomHobbyOrLifestyleString
+BufferRandomHobbyOrLifestyleString: @ 80BDB1C
 	push {lr}
 	bl Random
 	movs r1, 0x1
@@ -597,7 +597,7 @@ _080BDB2E:
 	bx r0
 	.align 2, 0
 _080BDB44: .4byte gStringVar2
-	thumb_func_end sub_80BDB1C
+	thumb_func_end BufferRandomHobbyOrLifestyleString
 
 	thumb_func_start sub_80BDB48
 sub_80BDB48: @ 80BDB48

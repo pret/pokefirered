@@ -25,7 +25,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "23",
+      "graphics_id": "MAP_OBJ_GFX_WOMAN_1",
       "x": 3,
       "y": 10,
       "elevation": 3,
@@ -38,7 +38,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "27",
+      "graphics_id": "MAP_OBJ_GFX_FAT_MAN",
       "x": 13,
       "y": 17,
       "elevation": 3,
@@ -51,7 +51,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "71",
+      "graphics_id": "MAP_OBJ_GFX_PROF_OAK",
       "x": 10,
       "y": 8,
       "elevation": 3,
@@ -61,7 +61,7 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "0x0",
-      "flag": "44"
+      "flag": "FLAG_HIDE_OAK_IN_PALLET_TOWN"
     }
   ],
   "warp_events": [
@@ -93,7 +93,7 @@
       "x": 12,
       "y": 1,
       "elevation": 3,
-      "var": "VAR_MAP_SCENE_PALLET_TOWN",
+      "var": "VAR_MAP_SCENE_PALLET_TOWN_OAK",
       "var_value": 0,
       "script": "PalletTown_EventScript_1655ED"
     },
@@ -102,7 +102,7 @@
       "x": 13,
       "y": 1,
       "elevation": 3,
-      "var": "VAR_MAP_SCENE_PALLET_TOWN",
+      "var": "VAR_MAP_SCENE_PALLET_TOWN_OAK",
       "var_value": 0,
       "script": "PalletTown_EventScript_1655F9"
     },

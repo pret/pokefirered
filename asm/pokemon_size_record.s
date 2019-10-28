@@ -323,8 +323,8 @@ sub_80A0904: @ 80A0904
 _080A0914: .4byte 0x0000403d
 	thumb_func_end sub_80A0904
 
-	thumb_func_start sub_80A0918
-sub_80A0918: @ 80A0918
+	thumb_func_start GetHeracrossSizeRecordInfo
+GetHeracrossSizeRecordInfo: @ 80A0918
 	push {lr}
 	ldr r0, _080A092C @ =0x0000403d
 	bl GetVarPointer
@@ -335,10 +335,10 @@ sub_80A0918: @ 80A0918
 	bx r0
 	.align 2, 0
 _080A092C: .4byte 0x0000403d
-	thumb_func_end sub_80A0918
+	thumb_func_end GetHeracrossSizeRecordInfo
 
-	thumb_func_start sub_80A0930
-sub_80A0930: @ 80A0930
+	thumb_func_start CompareHeracrossSize
+CompareHeracrossSize: @ 80A0930
 	push {r4,lr}
 	ldr r0, _080A0950 @ =0x0000403d
 	bl GetVarPointer
@@ -355,7 +355,7 @@ sub_80A0930: @ 80A0930
 	.align 2, 0
 _080A0950: .4byte 0x0000403d
 _080A0954: .4byte gSpecialVar_Result
-	thumb_func_end sub_80A0930
+	thumb_func_end CompareHeracrossSize
 
 	thumb_func_start sub_80A0958
 sub_80A0958: @ 80A0958
@@ -369,8 +369,8 @@ sub_80A0958: @ 80A0958
 _080A0968: .4byte 0x00004040
 	thumb_func_end sub_80A0958
 
-	thumb_func_start sub_80A096C
-sub_80A096C: @ 80A096C
+	thumb_func_start GetMagikarpSizeRecordInfo
+GetMagikarpSizeRecordInfo: @ 80A096C
 	push {lr}
 	ldr r0, _080A0980 @ =0x00004040
 	bl GetVarPointer
@@ -381,10 +381,10 @@ sub_80A096C: @ 80A096C
 	bx r0
 	.align 2, 0
 _080A0980: .4byte 0x00004040
-	thumb_func_end sub_80A096C
+	thumb_func_end GetMagikarpSizeRecordInfo
 
-	thumb_func_start sub_80A0984
-sub_80A0984: @ 80A0984
+	thumb_func_start CompareMagikarpSize
+CompareMagikarpSize: @ 80A0984
 	push {r4,lr}
 	ldr r0, _080A09A4 @ =0x00004040
 	bl GetVarPointer
@@ -401,7 +401,7 @@ sub_80A0984: @ 80A0984
 	.align 2, 0
 _080A09A4: .4byte 0x00004040
 _080A09A8: .4byte gSpecialVar_Result
-	thumb_func_end sub_80A0984
+	thumb_func_end CompareMagikarpSize
 
 	thumb_func_start GiveGiftRibbonToParty
 GiveGiftRibbonToParty: @ 80A09AC

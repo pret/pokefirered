@@ -4,14 +4,14 @@ CeladonCity_DepartmentStore_Elevator_MapScripts:: @ 816C152
 CeladonCity_DepartmentStore_Elevator_EventScript_16C153:: @ 816C153
 	lockall
 	setvar VAR_0x8004, 3
-	checkflag FLAG_0x002
-	call_if 0, EventScript_1A7AB9
-	copyvar VAR_0x8005, VAR_0x403A
-	special sub_80CB580
+	checkflag FLAG_TEMP_2
+	call_if FALSE, EventScript_1A7AB9
+	copyvar VAR_0x8005, VAR_ELEVATOR_FLOOR
+	special Special_DrawElevatorCurrentFloorWindow
 	message Text_1A535C
 	waitmessage
 	setvar VAR_0x8004, 3
-	specialvar VAR_RESULT, sub_80CB328
+	specialvar VAR_RESULT, Special_InitElevatorFloorSelectMenuPos
 	switch VAR_RESULT
 	case 0, EventScript_16C1B7
 	case 1, EventScript_16C1C3
@@ -21,29 +21,29 @@ CeladonCity_DepartmentStore_Elevator_EventScript_16C153:: @ 816C153
 	end
 
 EventScript_16C1B7:: @ 816C1B7
-	multichoicedefault 0, 0, 31, 0, 0
+	multichoicedefault 0, 0, MULTICHOICE_DEPT_STORE_ELEVATOR, 0, FALSE
 	goto EventScript_16C1F3
 
 EventScript_16C1C2:: @ 816C1C2
 	end
 
 EventScript_16C1C3:: @ 816C1C3
-	multichoicedefault 0, 0, 31, 1, 0
+	multichoicedefault 0, 0, MULTICHOICE_DEPT_STORE_ELEVATOR, 1, FALSE
 	goto EventScript_16C1F3
 	end
 
 EventScript_16C1CF:: @ 816C1CF
-	multichoicedefault 0, 0, 31, 2, 0
+	multichoicedefault 0, 0, MULTICHOICE_DEPT_STORE_ELEVATOR, 2, FALSE
 	goto EventScript_16C1F3
 	end
 
 EventScript_16C1DB:: @ 816C1DB
-	multichoicedefault 0, 0, 31, 3, 0
+	multichoicedefault 0, 0, MULTICHOICE_DEPT_STORE_ELEVATOR, 3, FALSE
 	goto EventScript_16C1F3
 	end
 
 EventScript_16C1E7:: @ 816C1E7
-	multichoicedefault 0, 0, 31, 4, 0
+	multichoicedefault 0, 0, MULTICHOICE_DEPT_STORE_ELEVATOR, 4, FALSE
 	goto EventScript_16C1F3
 	end
 
@@ -61,63 +61,63 @@ EventScript_16C1F3:: @ 816C1F3
 EventScript_16C246:: @ 816C246
 	setvar VAR_0x8006, 4
 	setdynamicwarp MAP_CELADON_CITY_DEPARTMENT_STORE_1F, 255, 6, 1
-	compare_var_to_value VAR_0x403A, 4
-	goto_if_eq EventScript_16C30E
+	compare_var_to_value VAR_ELEVATOR_FLOOR, 4
+	goto_if eq, EventScript_16C30E
 	call EventScript_16C313
-	setvar VAR_0x403A, 4
+	setvar VAR_ELEVATOR_FLOOR, 4
 	goto EventScript_16C30E
 	end
 
 EventScript_16C26E:: @ 816C26E
 	setvar VAR_0x8006, 5
 	setdynamicwarp MAP_CELADON_CITY_DEPARTMENT_STORE_2F, 255, 6, 1
-	compare_var_to_value VAR_0x403A, 5
-	goto_if_eq EventScript_16C30E
+	compare_var_to_value VAR_ELEVATOR_FLOOR, 5
+	goto_if eq, EventScript_16C30E
 	call EventScript_16C313
-	setvar VAR_0x403A, 5
+	setvar VAR_ELEVATOR_FLOOR, 5
 	goto EventScript_16C30E
 	end
 
 EventScript_16C296:: @ 816C296
 	setvar VAR_0x8006, 6
 	setdynamicwarp MAP_CELADON_CITY_DEPARTMENT_STORE_3F, 255, 6, 1
-	compare_var_to_value VAR_0x403A, 6
-	goto_if_eq EventScript_16C30E
+	compare_var_to_value VAR_ELEVATOR_FLOOR, 6
+	goto_if eq, EventScript_16C30E
 	call EventScript_16C313
-	setvar VAR_0x403A, 6
+	setvar VAR_ELEVATOR_FLOOR, 6
 	goto EventScript_16C30E
 	end
 
 EventScript_16C2BE:: @ 816C2BE
 	setvar VAR_0x8006, 7
 	setdynamicwarp MAP_CELADON_CITY_DEPARTMENT_STORE_4F, 255, 6, 1
-	compare_var_to_value VAR_0x403A, 7
-	goto_if_eq EventScript_16C30E
+	compare_var_to_value VAR_ELEVATOR_FLOOR, 7
+	goto_if eq, EventScript_16C30E
 	call EventScript_16C313
-	setvar VAR_0x403A, 7
+	setvar VAR_ELEVATOR_FLOOR, 7
 	goto EventScript_16C30E
 	end
 
 EventScript_16C2E6:: @ 816C2E6
 	setvar VAR_0x8006, 8
 	setdynamicwarp MAP_CELADON_CITY_DEPARTMENT_STORE_5F, 255, 6, 1
-	compare_var_to_value VAR_0x403A, 8
-	goto_if_eq EventScript_16C30E
+	compare_var_to_value VAR_ELEVATOR_FLOOR, 8
+	goto_if eq, EventScript_16C30E
 	call EventScript_16C313
-	setvar VAR_0x403A, 8
+	setvar VAR_ELEVATOR_FLOOR, 8
 	goto EventScript_16C30E
 	end
 
 EventScript_16C30E:: @ 816C30E
-	special sub_80CB63C
+	special Special_CloseElevatorCurrentFloorWindow
 	releaseall
 	end
 
 EventScript_16C313:: @ 816C313
-	special sub_80CB63C
+	special Special_CloseElevatorCurrentFloorWindow
 	closemessage
 	waitse
-	special sub_80CB498
+	special Special_AnimateElevator
 	waitstate
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	return

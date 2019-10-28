@@ -169,7 +169,7 @@ _0804D048:
 	str r0, [sp, 0x4]
 	str r1, [sp, 0x8]
 	adds r0, r5, 0
-	ldr r1, _0804D144 @ =sub_809718C
+	ldr r1, _0804D144 @ =SpriteCB_MonIcon
 	bl CreateMonIcon
 	mov r2, r8
 	ldr r1, [r2]
@@ -228,7 +228,7 @@ _0804D0BE:
 	movs r0, 0
 	str r0, [sp, 0x8]
 	adds r0, r5, 0
-	ldr r1, _0804D144 @ =sub_809718C
+	ldr r1, _0804D144 @ =SpriteCB_MonIcon
 	bl CreateMonIcon
 	mov r2, r8
 	ldr r1, [r2]
@@ -255,7 +255,7 @@ _0804D134: .4byte gEnemyPartyCount
 _0804D138: .4byte gTradeMonSpriteCoords
 _0804D13C: .4byte gPlayerParty
 _0804D140: .4byte 0xfff40000
-_0804D144: .4byte sub_809718C
+_0804D144: .4byte SpriteCB_MonIcon
 _0804D148: .4byte gEnemyParty
 _0804D14C: .4byte gMain
 _0804D150:
@@ -790,7 +790,7 @@ sub_804D5A4: @ 804D5A4
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804D5FC
-	bl IsRfuTaskFinished
+	bl IsLinkRfuTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804D620
@@ -3609,7 +3609,7 @@ _0804EBA2:
 	adds r0, r1
 	lsls r0, 2
 	add r0, r8
-	ldr r1, _0804ECAC @ =sub_809718C
+	ldr r1, _0804ECAC @ =SpriteCB_MonIcon
 	bl StoreSpriteCallbackInData6
 	ldr r2, _0804ECA4 @ =gUnknown_2031DA8
 	ldr r1, [r2]
@@ -3656,7 +3656,7 @@ _0804EC98:
 _0804ECA0: .4byte gSprites
 _0804ECA4: .4byte gUnknown_2031DA8
 _0804ECA8: .4byte gTradeMonSpriteCoords
-_0804ECAC: .4byte sub_809718C
+_0804ECAC: .4byte SpriteCB_MonIcon
 _0804ECB0: .4byte gUnknown_8260A32
 _0804ECB4:
 	ldr r2, _0804ECE4 @ =gSprites
@@ -3675,7 +3675,7 @@ _0804ECB4:
 	adds r2, 0x1C
 	adds r0, r2
 	ldr r1, [r0]
-	ldr r0, _0804ECE8 @ =sub_809718C
+	ldr r0, _0804ECE8 @ =SpriteCB_MonIcon
 	cmp r1, r0
 	beq _0804ECDC
 	b _0804EE54
@@ -3685,7 +3685,7 @@ _0804ECDC:
 	b _0804EE54
 	.align 2, 0
 _0804ECE4: .4byte gSprites
-_0804ECE8: .4byte sub_809718C
+_0804ECE8: .4byte SpriteCB_MonIcon
 _0804ECEC:
 	ldr r1, _0804EE08 @ =gUnknown_8260834
 	ldr r0, [sp, 0x60]
@@ -5314,7 +5314,7 @@ _0804F988:
 	subs r1, r2
 	lsls r1, 24
 	lsrs r1, 24
-	bl sub_8097414
+	bl MonIcon_SetAnim
 	adds r4, 0x1
 	ldr r0, [r6]
 	adds r0, 0x36
@@ -7758,7 +7758,7 @@ _08050D98:
 	orrs r0, r7
 	str r0, [r1, 0x8]
 	ldr r0, [r1, 0x8]
-	ldr r1, _08050DD8 @ =gUnknown_08331F60
+	ldr r1, _08050DD8 @ =gUnknown_826601C
 	ldr r2, _08050DDC @ =0x06009000
 	ldr r0, _08050DD0 @ =0x040000d4
 	str r1, [r0]
@@ -7779,7 +7779,7 @@ _08050DC8: .4byte gTradeGba_Gfx
 _08050DCC: .4byte 0x06004000
 _08050DD0: .4byte 0x040000d4
 _08050DD4: .4byte 0x80000800
-_08050DD8: .4byte gUnknown_08331F60
+_08050DD8: .4byte gUnknown_826601C
 _08050DDC: .4byte 0x06009000
 	thumb_func_end sub_8050968
 
@@ -10010,7 +10010,7 @@ _0805223C:
 	ldrb r0, [r0]
 	movs r1, 0
 	bl sub_805080C
-	ldr r1, _08052284 @ =gUnknown_300537C
+	ldr r1, _08052284 @ =gCB2_AfterEvolution
 	ldr r0, _08052288 @ =sub_8050948
 	str r0, [r1]
 	ldr r7, _0805228C @ =gUnknown_2031DA4
@@ -10039,7 +10039,7 @@ _0805223C:
 	b _080522A8
 	.align 2, 0
 _08052280: .4byte gSpecialVar_0x8005
-_08052284: .4byte gUnknown_300537C
+_08052284: .4byte gCB2_AfterEvolution
 _08052288: .4byte sub_8050948
 _0805228C: .4byte gUnknown_2031DA4
 _08052290: .4byte gPlayerParty
@@ -12235,7 +12235,7 @@ _08053698:
 	ldrb r0, [r0]
 	movs r1, 0
 	bl sub_805080C
-	ldr r1, _080536E0 @ =gUnknown_300537C
+	ldr r1, _080536E0 @ =gCB2_AfterEvolution
 	ldr r0, _080536E4 @ =sub_8050948
 	str r0, [r1]
 	ldr r7, _080536E8 @ =gUnknown_2031DA4
@@ -12264,7 +12264,7 @@ _08053698:
 	b _08053704
 	.align 2, 0
 _080536DC: .4byte gSpecialVar_0x8005
-_080536E0: .4byte gUnknown_300537C
+_080536E0: .4byte gCB2_AfterEvolution
 _080536E4: .4byte sub_8050948
 _080536E8: .4byte gUnknown_2031DA4
 _080536EC: .4byte gPlayerParty
@@ -12362,7 +12362,7 @@ _080537A8:
 	.align 2, 0
 _080537B4: .4byte gSoftResetDisabled
 _080537B8:
-	ldr r0, _080537F4 @ =gUnknown_300537C
+	ldr r0, _080537F4 @ =gCB2_AfterEvolution
 	ldr r1, _080537F8 @ =sub_8053E8C
 	mov r8, r1
 	str r1, [r0]
@@ -12391,7 +12391,7 @@ _080537B8:
 	bl TradeEvolutionScene
 	b _0805380E
 	.align 2, 0
-_080537F4: .4byte gUnknown_300537C
+_080537F4: .4byte gCB2_AfterEvolution
 _080537F8: .4byte sub_8053E8C
 _080537FC: .4byte gUnknown_2031DA4
 _08053800: .4byte gPlayerParty
@@ -12737,8 +12737,8 @@ _08053A94: .4byte gUnknown_826D1E4
 _08053A98: .4byte SpriteCallbackDummy
 	thumb_func_end sub_8053A0C
 
-	thumb_func_start sub_8053A9C
-sub_8053A9C: @ 8053A9C
+	thumb_func_start GetInGameTradeSpeciesInfo
+GetInGameTradeSpeciesInfo: @ 8053A9C
 	push {r4-r6,lr}
 	ldr r0, _08053AD0 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
@@ -12769,7 +12769,7 @@ _08053AD4: .4byte gIngameTrades
 _08053AD8: .4byte gStringVar1
 _08053ADC: .4byte gSpeciesNames
 _08053AE0: .4byte gStringVar2
-	thumb_func_end sub_8053A9C
+	thumb_func_end GetInGameTradeSpeciesInfo
 
 	thumb_func_start sub_8053AE4
 sub_8053AE4: @ 8053AE4
@@ -13036,8 +13036,8 @@ _08053CEE:
 _08053D28: .4byte gUnknown_826D1A8
 	thumb_func_end sub_8053CD4
 
-	thumb_func_start sub_8053D2C
-sub_8053D2C: @ 8053D2C
+	thumb_func_start GetTradeSpecies
+GetTradeSpecies: @ 8053D2C
 	push {r4-r6,lr}
 	ldr r6, _08053D58 @ =gSpecialVar_0x8005
 	ldrh r0, [r6]
@@ -13066,10 +13066,10 @@ _08053D62:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8053D2C
+	thumb_func_end GetTradeSpecies
 
-	thumb_func_start sub_8053D68
-sub_8053D68: @ 8053D68
+	thumb_func_start CreateInGameTradePokemon
+CreateInGameTradePokemon: @ 8053D68
 	push {lr}
 	ldr r0, _08053D7C @ =gSpecialVar_0x8005
 	ldrb r0, [r0]
@@ -13081,7 +13081,7 @@ sub_8053D68: @ 8053D68
 	.align 2, 0
 _08053D7C: .4byte gSpecialVar_0x8005
 _08053D80: .4byte gSpecialVar_0x8004
-	thumb_func_end sub_8053D68
+	thumb_func_end CreateInGameTradePokemon
 
 	thumb_func_start sub_8053D84
 sub_8053D84: @ 8053D84
@@ -13703,7 +13703,7 @@ _0805434C:
 	ldr r0, _08054378 @ =sub_804C718
 	cmp r1, r0
 	bne _08054384
-	bl IsRfuTaskFinished
+	bl IsLinkRfuTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08054396
@@ -13797,8 +13797,8 @@ _08054438: .4byte gWirelessCommType
 _0805443C: .4byte gMain
 	thumb_func_end sub_80543C4
 
-	thumb_func_start sub_8054440
-sub_8054440: @ 8054440
+	thumb_func_start DoInGameTradeScene
+DoInGameTradeScene: @ 8054440
 	push {lr}
 	sub sp, 0x4
 	bl ScriptContext2_Enable
@@ -13818,7 +13818,7 @@ sub_8054440: @ 8054440
 	bx r0
 	.align 2, 0
 _0805446C: .4byte sub_8054470
-	thumb_func_end sub_8054440
+	thumb_func_end DoInGameTradeScene
 
 	thumb_func_start sub_8054470
 sub_8054470: @ 8054470

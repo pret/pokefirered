@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "68",
+      "graphics_id": "MAP_OBJ_GFX_CLERK",
       "x": 2,
       "y": 3,
       "elevation": 0,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "42",
+      "graphics_id": "MAP_OBJ_GFX_COOLTRAINER_F",
       "x": 4,
       "y": 2,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "30",
+      "graphics_id": "MAP_OBJ_GFX_BALDING_MAN",
       "x": 9,
       "y": 4,
       "elevation": 3,

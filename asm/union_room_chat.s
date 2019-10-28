@@ -4265,7 +4265,7 @@ sub_812A424: @ 812A424
 	bl PutWindowTilemap
 	ldr r0, [r6]
 	ldrb r0, [r0, 0x18]
-	ldr r2, _0812A514 @ =gUnknown_8417938
+	ldr r2, _0812A514 @ =gText_Yes
 	movs r5, 0x2
 	str r5, [sp]
 	movs r4, 0xFF
@@ -4276,7 +4276,7 @@ sub_812A424: @ 812A424
 	bl AddTextPrinterParameterized
 	ldr r0, [r6]
 	ldrb r0, [r0, 0x18]
-	ldr r2, _0812A518 @ =gUnknown_841793C
+	ldr r2, _0812A518 @ =gText_No
 	movs r1, 0x10
 	str r1, [sp]
 	str r4, [sp, 0x4]
@@ -4314,8 +4314,8 @@ _0812A504: .4byte 0xff00ffff
 _0812A508: .4byte 0x00ffffff
 _0812A50C: .4byte 0x0000ffff
 _0812A510: .4byte gUnknown_203B0E4
-_0812A514: .4byte gUnknown_8417938
-_0812A518: .4byte gUnknown_841793C
+_0812A514: .4byte gText_Yes
+_0812A518: .4byte gText_No
 	thumb_func_end sub_812A424
 
 	thumb_func_start sub_812A51C

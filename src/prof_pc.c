@@ -36,7 +36,7 @@ u16 Special_GetPokedexCount(void)
     return IsNationalPokedexEnabled();
 }
 
-const u8 * sub_80CA424(u16 count)
+static const u8 *GetProfOaksRatingMessageByCount(u16 count)
 {
     gSpecialVar_Result = FALSE;
 
@@ -102,7 +102,7 @@ const u8 * sub_80CA424(u16 count)
     return gUnknown_81A6D17;
 }
 
-void sub_80CA524(void)
+void Special_GetProfOaksRatingMessage(void)
 {
-    ShowFieldMessage(sub_80CA424(gSpecialVar_0x8004));
+    ShowFieldMessage(GetProfOaksRatingMessageByCount(gSpecialVar_0x8004));
 }

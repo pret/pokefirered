@@ -17,7 +17,7 @@ static void Task_NoResponse_CleanUp(u8 taskId);
 static void Task_ItemfinderResponseSoundsAndAnims(u8 taskId);
 static void Task_ItemfinderUnderfootSoundsAndAnims(u8 taskId);
 static bool8 HiddenItemIsWithinRangeOfPlayer(struct MapEvents * events, u8 taskId);
-static void SetUnderfootHiddenItem(u8 taskId, struct HiddenItemStruct hiddenItem);
+static void SetUnderfootHiddenItem(u8 taskId, u32 hiddenItem);
 static void SetNormalHiddenItem(u8 taskId);
 static void FindHiddenItemsInConnectedMaps(u8 taskId);
 static void RegisterHiddenItemRelativeCoordsIfCloser(u8 taskId, s16 dx, s16 dy);
@@ -239,7 +239,7 @@ static bool8 HiddenItemIsWithinRangeOfPlayer(struct MapEvents * events, u8 taskI
     return FALSE;
 }
 
-static void SetUnderfootHiddenItem(u8 taskId, struct HiddenItemStruct hiddenItem)
+static void SetUnderfootHiddenItem(u8 taskId, u32 hiddenItem)
 {
     s16 *data = gTasks[taskId].data;
     gSpecialVar_0x8004 = GetHiddenItemAttr(hiddenItem, HIDDEN_ITEM_FLAG);

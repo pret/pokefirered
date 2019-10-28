@@ -85,9 +85,9 @@ static void InitSinglePlayerBtlControllers(void)
         gBattleMainFunc = BeginBattleIntro;
         if (gBattleTypeFlags & BATTLE_TYPE_POKEDUDE)
         {
-            gBattlerControllerFuncs[0] = SetControllerToPokedude;
+            gBattlerControllerFuncs[0] = SetControllerToPokeDude;
             gBattlerPositions[0] = B_POSITION_PLAYER_LEFT;
-            gBattlerControllerFuncs[1] = SetControllerToPokedude;
+            gBattlerControllerFuncs[1] = SetControllerToPokeDude;
             gBattlerPositions[1] = B_POSITION_OPPONENT_LEFT;
             gBattlersCount = 2;
         }
@@ -95,8 +95,8 @@ static void InitSinglePlayerBtlControllers(void)
         {
             if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
                 gBattlerControllerFuncs[0] = SetControllerToSafari;
-            else if (gBattleTypeFlags & (BATTLE_TYPE_OLDMAN_TUTORIAL | BATTLE_TYPE_FIRST_BATTLE))
-                gBattlerControllerFuncs[0] = SetControllerToOakOrOldman;
+            else if (gBattleTypeFlags & (BATTLE_TYPE_OLD_MAN_TUTORIAL | BATTLE_TYPE_FIRST_BATTLE))
+                gBattlerControllerFuncs[0] = SetControllerToOakOrOldMan;
             else
                 gBattlerControllerFuncs[0] = SetControllerToPlayer;
             gBattlerPositions[0] = B_POSITION_PLAYER_LEFT;
@@ -110,13 +110,13 @@ static void InitSinglePlayerBtlControllers(void)
         gBattleMainFunc = BeginBattleIntro;
         if (gBattleTypeFlags & BATTLE_TYPE_POKEDUDE)
         {
-            gBattlerControllerFuncs[0] = SetControllerToPokedude;
+            gBattlerControllerFuncs[0] = SetControllerToPokeDude;
             gBattlerPositions[0] = B_POSITION_PLAYER_LEFT;
-            gBattlerControllerFuncs[1] = SetControllerToPokedude;
+            gBattlerControllerFuncs[1] = SetControllerToPokeDude;
             gBattlerPositions[1] = B_POSITION_OPPONENT_LEFT;
-            gBattlerControllerFuncs[2] = SetControllerToPokedude;
+            gBattlerControllerFuncs[2] = SetControllerToPokeDude;
             gBattlerPositions[2] = B_POSITION_PLAYER_RIGHT;
-            gBattlerControllerFuncs[3] = SetControllerToPokedude;
+            gBattlerControllerFuncs[3] = SetControllerToPokeDude;
             gBattlerPositions[3] = B_POSITION_OPPONENT_RIGHT;
             gBattlersCount = MAX_BATTLERS_COUNT;
         }
@@ -774,7 +774,7 @@ void BtlController_EmitPrintSelectionString(u8 bufferId, u16 stringID)
     sBattleBuffersTransferData[1] = CONTROLLER_PRINTSTRINGPLAYERONLY;
     sBattleBuffersTransferData[2] = stringID;
     sBattleBuffersTransferData[3] = (stringID & 0xFF00) >> 8;
-    stringInfo = (struct BattleMsgData*)(&sBattleBuffersTransferData[4]);
+    stringInfo = (struct BattleMsgData *)(&sBattleBuffersTransferData[4]);
     stringInfo->currentMove = gCurrentMove;
     stringInfo->originallyUsedMove = gChosenMove;
     stringInfo->lastItem = gLastUsedItem;

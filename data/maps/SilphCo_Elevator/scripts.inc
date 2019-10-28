@@ -4,15 +4,15 @@ SilphCo_Elevator_MapScripts:: @ 8161F6E
 SilphCo_Elevator_EventScript_161F6F:: @ 8161F6F
 	lockall
 	setvar VAR_0x8004, 1
-	checkflag FLAG_0x002
-	call_if 0, EventScript_1A7AB9
-	copyvar VAR_0x8005, VAR_0x403A
-	special sub_80CB580
+	checkflag FLAG_TEMP_2
+	call_if FALSE, EventScript_1A7AB9
+	copyvar VAR_0x8005, VAR_ELEVATOR_FLOOR
+	special Special_DrawElevatorCurrentFloorWindow
 	message Text_1A535C
 	waitmessage
 	setvar VAR_0x8004, 1
-	specialvar VAR_RESULT, sub_80CB328
-	special sub_80CB7C4
+	specialvar VAR_RESULT, Special_InitElevatorFloorSelectMenuPos
+	special Special_ListMenu
 	waitstate
 	switch VAR_RESULT
 	case 0, EventScript_1621BF
@@ -33,10 +33,10 @@ SilphCo_Elevator_EventScript_161F6F:: @ 8161F6F
 EventScript_16202F:: @ 816202F
 	setvar VAR_0x8006, 4
 	setdynamicwarp MAP_SILPH_CO_1F, 255, 22, 3
-	compare_var_to_value VAR_0x403A, 4
-	goto_if_eq EventScript_1621E7
+	compare_var_to_value VAR_ELEVATOR_FLOOR, 4
+	goto_if eq, EventScript_1621E7
 	call EventScript_1621EC
-	setvar VAR_0x403A, 4
+	setvar VAR_ELEVATOR_FLOOR, 4
 	goto EventScript_1621E7
 
 EventScript_162056:: @ 8162056
@@ -45,10 +45,10 @@ EventScript_162056:: @ 8162056
 EventScript_162057:: @ 8162057
 	setvar VAR_0x8006, 5
 	setdynamicwarp MAP_SILPH_CO_2F, 255, 22, 3
-	compare_var_to_value VAR_0x403A, 5
-	goto_if_eq EventScript_1621E7
+	compare_var_to_value VAR_ELEVATOR_FLOOR, 5
+	goto_if eq, EventScript_1621E7
 	call EventScript_1621EC
-	setvar VAR_0x403A, 5
+	setvar VAR_ELEVATOR_FLOOR, 5
 	goto EventScript_1621E7
 
 EventScript_16207E:: @ 816207E
@@ -57,10 +57,10 @@ EventScript_16207E:: @ 816207E
 EventScript_16207F:: @ 816207F
 	setvar VAR_0x8006, 6
 	setdynamicwarp MAP_SILPH_CO_3F, 255, 22, 3
-	compare_var_to_value VAR_0x403A, 6
-	goto_if_eq EventScript_1621E7
+	compare_var_to_value VAR_ELEVATOR_FLOOR, 6
+	goto_if eq, EventScript_1621E7
 	call EventScript_1621EC
-	setvar VAR_0x403A, 6
+	setvar VAR_ELEVATOR_FLOOR, 6
 	goto EventScript_1621E7
 
 EventScript_1620A6:: @ 81620A6
@@ -69,10 +69,10 @@ EventScript_1620A6:: @ 81620A6
 EventScript_1620A7:: @ 81620A7
 	setvar VAR_0x8006, 7
 	setdynamicwarp MAP_SILPH_CO_4F, 255, 22, 3
-	compare_var_to_value VAR_0x403A, 7
-	goto_if_eq EventScript_1621E7
+	compare_var_to_value VAR_ELEVATOR_FLOOR, 7
+	goto_if eq, EventScript_1621E7
 	call EventScript_1621EC
-	setvar VAR_0x403A, 7
+	setvar VAR_ELEVATOR_FLOOR, 7
 	goto EventScript_1621E7
 
 EventScript_1620CE:: @ 81620CE
@@ -81,10 +81,10 @@ EventScript_1620CE:: @ 81620CE
 EventScript_1620CF:: @ 81620CF
 	setvar VAR_0x8006, 8
 	setdynamicwarp MAP_SILPH_CO_5F, 255, 22, 3
-	compare_var_to_value VAR_0x403A, 8
-	goto_if_eq EventScript_1621E7
+	compare_var_to_value VAR_ELEVATOR_FLOOR, 8
+	goto_if eq, EventScript_1621E7
 	call EventScript_1621EC
-	setvar VAR_0x403A, 8
+	setvar VAR_ELEVATOR_FLOOR, 8
 	goto EventScript_1621E7
 
 EventScript_1620F6:: @ 81620F6
@@ -93,10 +93,10 @@ EventScript_1620F6:: @ 81620F6
 EventScript_1620F7:: @ 81620F7
 	setvar VAR_0x8006, 9
 	setdynamicwarp MAP_SILPH_CO_6F, 255, 20, 3
-	compare_var_to_value VAR_0x403A, 9
-	goto_if_eq EventScript_1621E7
+	compare_var_to_value VAR_ELEVATOR_FLOOR, 9
+	goto_if eq, EventScript_1621E7
 	call EventScript_1621EC
-	setvar VAR_0x403A, 9
+	setvar VAR_ELEVATOR_FLOOR, 9
 	goto EventScript_1621E7
 
 EventScript_16211E:: @ 816211E
@@ -105,10 +105,10 @@ EventScript_16211E:: @ 816211E
 EventScript_16211F:: @ 816211F
 	setvar VAR_0x8006, 10
 	setdynamicwarp MAP_SILPH_CO_7F, 255, 23, 3
-	compare_var_to_value VAR_0x403A, 10
-	goto_if_eq EventScript_1621E7
+	compare_var_to_value VAR_ELEVATOR_FLOOR, 10
+	goto_if eq, EventScript_1621E7
 	call EventScript_1621EC
-	setvar VAR_0x403A, 10
+	setvar VAR_ELEVATOR_FLOOR, 10
 	goto EventScript_1621E7
 
 EventScript_162146:: @ 8162146
@@ -117,10 +117,10 @@ EventScript_162146:: @ 8162146
 EventScript_162147:: @ 8162147
 	setvar VAR_0x8006, 11
 	setdynamicwarp MAP_SILPH_CO_8F, 255, 22, 3
-	compare_var_to_value VAR_0x403A, 11
-	goto_if_eq EventScript_1621E7
+	compare_var_to_value VAR_ELEVATOR_FLOOR, 11
+	goto_if eq, EventScript_1621E7
 	call EventScript_1621EC
-	setvar VAR_0x403A, 11
+	setvar VAR_ELEVATOR_FLOOR, 11
 	goto EventScript_1621E7
 
 EventScript_16216E:: @ 816216E
@@ -129,10 +129,10 @@ EventScript_16216E:: @ 816216E
 EventScript_16216F:: @ 816216F
 	setvar VAR_0x8006, 12
 	setdynamicwarp MAP_SILPH_CO_9F, 255, 24, 3
-	compare_var_to_value VAR_0x403A, 12
-	goto_if_eq EventScript_1621E7
+	compare_var_to_value VAR_ELEVATOR_FLOOR, 12
+	goto_if eq, EventScript_1621E7
 	call EventScript_1621EC
-	setvar VAR_0x403A, 12
+	setvar VAR_ELEVATOR_FLOOR, 12
 	goto EventScript_1621E7
 
 EventScript_162196:: @ 8162196
@@ -141,10 +141,10 @@ EventScript_162196:: @ 8162196
 EventScript_162197:: @ 8162197
 	setvar VAR_0x8006, 13
 	setdynamicwarp MAP_SILPH_CO_10F, 255, 13, 3
-	compare_var_to_value VAR_0x403A, 13
-	goto_if_eq EventScript_1621E7
+	compare_var_to_value VAR_ELEVATOR_FLOOR, 13
+	goto_if eq, EventScript_1621E7
 	call EventScript_1621EC
-	setvar VAR_0x403A, 13
+	setvar VAR_ELEVATOR_FLOOR, 13
 	goto EventScript_1621E7
 
 EventScript_1621BE:: @ 81621BE
@@ -153,25 +153,25 @@ EventScript_1621BE:: @ 81621BE
 EventScript_1621BF:: @ 81621BF
 	setvar VAR_0x8006, 14
 	setdynamicwarp MAP_SILPH_CO_11F, 255, 13, 3
-	compare_var_to_value VAR_0x403A, 14
-	goto_if_eq EventScript_1621E7
+	compare_var_to_value VAR_ELEVATOR_FLOOR, 14
+	goto_if eq, EventScript_1621E7
 	call EventScript_1621EC
-	setvar VAR_0x403A, 14
+	setvar VAR_ELEVATOR_FLOOR, 14
 	goto EventScript_1621E7
 
 EventScript_1621E6:: @ 81621E6
 	end
 
 EventScript_1621E7:: @ 81621E7
-	special sub_80CB63C
+	special Special_CloseElevatorCurrentFloorWindow
 	releaseall
 	end
 
 EventScript_1621EC:: @ 81621EC
-	special sub_80CB63C
+	special Special_CloseElevatorCurrentFloorWindow
 	closemessage
 	waitse
-	special sub_80CB498
+	special Special_AnimateElevator
 	waitstate
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	return

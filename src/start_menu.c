@@ -207,9 +207,9 @@ static void AppendToStartMenuItems(u8 newEntry)
 
 static void SetUpStartMenu_NormalField(void)
 {
-    if (FlagGet(FLAG_0x829) == TRUE)
+    if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
         AppendToStartMenuItems(STARTMENU_POKEDEX);
-    if (FlagGet(FLAG_0x828) == TRUE)
+    if (FlagGet(FLAG_SYS_POKEMON_GET) == TRUE)
         AppendToStartMenuItems(STARTMENU_POKEMON);
     AppendToStartMenuItems(STARTMENU_BAG);
     AppendToStartMenuItems(STARTMENU_PLAYER);
@@ -392,7 +392,7 @@ void ShowStartMenu(void)
 {
     if (!IsUpdateLinkStateCBActive())
     {
-        player_bitmagic();
+        FreezeEventObjects();
         sub_805C270();
         sub_805C780();
     }
@@ -445,7 +445,7 @@ static void StartMenu_FadeScreenIfLeavingOverworld(void)
      && sStartMenuCallback != StartMenuExitCallback
      && sStartMenuCallback != StartMenuSafariZoneRetireCallback)
     {
-        sub_80CCB68();
+        StopPokemonLeagueLightingEffectTask();
         fade_screen(1, 0);
     }
 }
@@ -973,7 +973,7 @@ static void PrintSaveStats(void)
     SaveStatToString(SAVE_STAT_BADGES, gStringVar4, 2);
     AddTextPrinterParameterized3(sSaveStatsWindowId, 0, 60, 28, sTextColor_StatValue, -1, gStringVar4);
     y = 42;
-    if (FlagGet(FLAG_0x829) == TRUE)
+    if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
     {
         AddTextPrinterParameterized3(sSaveStatsWindowId, 0, 2, 42, sTextColor_StatName, -1, gSaveStatName_Pokedex);
         SaveStatToString(SAVE_STAT_POKEDEX, gStringVar4, 2);

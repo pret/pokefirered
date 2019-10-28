@@ -4,8 +4,8 @@ LavenderTown_MapScripts:: @ 816686B
 
 LavenderTown_MapScript1_166871:: @ 8166871
 	setworldmapflag FLAG_WORLD_MAP_LAVENDER_TOWN
-	setvar VAR_0x405B, 1
-	setflag FLAG_0x03D
+	setvar VAR_MAP_SCENE_S_S_ANNE_2F_CORRIDOR, 1
+	setflag FLAG_HIDE_SS_ANNE_RIVAL
 	end
 
 LavenderTown_EventScript_16687D:: @ 816687D
@@ -13,7 +13,7 @@ LavenderTown_EventScript_16687D:: @ 816687D
 	faceplayer
 	msgbox gUnknown_817F52E, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16689C
+	goto_if eq, EventScript_16689C
 	msgbox gUnknown_817F568
 	release
 	end

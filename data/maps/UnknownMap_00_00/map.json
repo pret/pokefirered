@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "66",
+      "graphics_id": "MAP_OBJ_GFX_UNION_ROOM_RECEPTIONIST",
       "x": 9,
       "y": 3,
       "elevation": 3,

@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "41",
+      "graphics_id": "MAP_OBJ_GFX_COOLTRAINER_M",
       "x": 24,
       "y": 18,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "41",
+      "graphics_id": "MAP_OBJ_GFX_COOLTRAINER_M",
       "x": 24,
       "y": 2,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "41",
+      "graphics_id": "MAP_OBJ_GFX_COOLTRAINER_M",
       "x": 4,
       "y": 2,
       "elevation": 3,
@@ -53,7 +53,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "58",
+      "graphics_id": "MAP_OBJ_GFX_CHANNELER",
       "x": 14,
       "y": 2,
       "elevation": 3,
@@ -66,7 +66,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "58",
+      "graphics_id": "MAP_OBJ_GFX_CHANNELER",
       "x": 4,
       "y": 10,
       "elevation": 3,
@@ -79,7 +79,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "58",
+      "graphics_id": "MAP_OBJ_GFX_CHANNELER",
       "x": 4,
       "y": 18,
       "elevation": 3,
@@ -92,7 +92,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "85",
+      "graphics_id": "MAP_OBJ_GFX_SABRINA",
       "x": 14,
       "y": 11,
       "elevation": 3,
@@ -105,7 +105,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "41",
+      "graphics_id": "MAP_OBJ_GFX_COOLTRAINER_M",
       "x": 24,
       "y": 10,
       "elevation": 3,
@@ -118,7 +118,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "91",
+      "graphics_id": "MAP_OBJ_GFX_GYM_GUY",
       "x": 15,
       "y": 20,
       "elevation": 3,

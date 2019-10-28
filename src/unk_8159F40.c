@@ -7,36 +7,133 @@
 #include "metatile_behavior.h"
 #include "link.h"
 #include "link_rfu.h"
+#include "constants/species.h"
+#include "constants/moves.h"
+#include "constants/pokemon.h"
 
-struct UnkStruct_84792D0
+struct PokedudeBattlePartyInfo
 {
-    u8 field_0;
-    u8 field_1;
-    u16 field_2;
-    u16 field_4[4];
-    u8 field_C;
-    u8 field_D;
+    u8 side;
+    u8 level;
+    u16 species;
+    u16 moves[4];
+    u8 nature;
+    u8 gender;
 };
 
-extern const struct UnkStruct_84792D0 *const gUnknown_84792D0[];
+static const struct PokedudeBattlePartyInfo sParties_Battle[] = {
+    {
+        .side = 0,
+        .level = 15,
+        .species = SPECIES_RATTATA,
+        .moves = {MOVE_TACKLE, MOVE_TAIL_WHIP, MOVE_HYPER_FANG, MOVE_QUICK_ATTACK},
+        .nature = NATURE_LONELY,
+        .gender = MALE
+    },
+    {
+        .side = 1,
+        .level = 18,
+        .species = SPECIES_PIDGEY,
+        .moves = {MOVE_TACKLE, MOVE_SAND_ATTACK, MOVE_GUST, MOVE_QUICK_ATTACK},
+        .nature = NATURE_NAUGHTY,
+        .gender = MALE
+    },
+    {0xFF}
+};
 
-void sub_8159F40(void)
+static const struct PokedudeBattlePartyInfo sParties_Status[] = {
+    {
+        .side = 0,
+        .level = 15,
+        .species = SPECIES_RATTATA,
+        .moves = {MOVE_TACKLE, MOVE_TAIL_WHIP, MOVE_HYPER_FANG, MOVE_QUICK_ATTACK},
+        .nature = NATURE_LONELY,
+        .gender = MALE
+    },
+    {
+        .side = 1,
+        .level = 14,
+        .species = SPECIES_ODDISH,
+        .moves = {MOVE_ABSORB, MOVE_SWEET_SCENT, MOVE_POISON_POWDER},
+        .nature = NATURE_RASH,
+        .gender = MALE
+    },
+    {0xFF}
+};
+
+static const struct PokedudeBattlePartyInfo sParties_Matchups[] = {
+    {
+        .side = 0,
+        .level = 15,
+        .species = SPECIES_POLIWAG,
+        .moves = {MOVE_WATER_GUN, MOVE_HYPNOSIS, MOVE_BUBBLE},
+        .nature = NATURE_RASH,
+        .gender = MALE
+    },
+    {
+        .side = 0,
+        .level = 15,
+        .species = SPECIES_BUTTERFREE,
+        .moves = {MOVE_CONFUSION, MOVE_POISON_POWDER, MOVE_STUN_SPORE, MOVE_SLEEP_POWDER},
+        .nature = NATURE_RASH,
+        .gender = MALE
+    },
+    {
+        .side = 1,
+        .level = 14,
+        .species = SPECIES_ODDISH,
+        .moves = {MOVE_ABSORB, MOVE_SWEET_SCENT, MOVE_POISON_POWDER},
+        .nature = NATURE_RASH,
+        .gender = MALE
+    },
+    {0xFF}
+};
+
+static const struct PokedudeBattlePartyInfo sParties_Catching[] = {
+    {
+        .side = 0,
+        .level = 15,
+        .species = SPECIES_BUTTERFREE,
+        .moves = {MOVE_CONFUSION, MOVE_POISON_POWDER, MOVE_SLEEP_POWDER, MOVE_STUN_SPORE},
+        .nature = NATURE_RASH,
+        .gender = MALE
+    },
+    {
+        .side = 1,
+        .level = 11,
+        .species = SPECIES_JIGGLYPUFF,
+        .moves = {MOVE_SING, MOVE_DEFENSE_CURL, MOVE_POUND},
+        .nature = NATURE_CAREFUL,
+        .gender = MALE
+    },
+    {0xFF}
+};
+
+
+static const struct PokedudeBattlePartyInfo *const sPokedudeBattlePartyPointers[] = {
+    sParties_Battle,
+    sParties_Status,
+    sParties_Matchups,
+    sParties_Catching
+};
+
+void InitPokedudePartyAndOpponent(void)
 {
     s32 i, j;
-    struct Pokemon *mon;
+    struct Pokemon * mon;
     s32 myIdx = 0;
     s32 opIdx = 0;
-    const struct UnkStruct_84792D0 * data;
+    const struct PokedudeBattlePartyInfo * data;
 
     gBattleTypeFlags = BATTLE_TYPE_POKEDUDE;
     ZeroPlayerPartyMons();
     ZeroEnemyPartyMons();
-    data = gUnknown_84792D0[gSpecialVar_0x8004];
+    data = sPokedudeBattlePartyPointers[gSpecialVar_0x8004];
 
     i = 0;
     do
     {
-        if (data[i].field_0 == 0)
+        if (data[i].side == 0)
         {
             mon = &gPlayerParty[myIdx];
             myIdx++;
@@ -46,14 +143,16 @@ void sub_8159F40(void)
             mon = &gEnemyParty[opIdx];
             opIdx++;
         }
-        CreateMonWithGenderNatureLetter(mon, data[i].field_2, data[i].field_1, 0, data[i].field_D, data[i].field_C, 0);
+        CreateMonWithGenderNatureLetter(mon, data[i].species, data[i].level, 0, data[i].gender, data[i].nature, 0);
         for (j = 0; j < 4; j++)
         {
-            SetMonMoveSlot(mon, data[i].field_4[j], j);
+            SetMonMoveSlot(mon, data[i].moves[j], j);
         }
         i++;
-    } while (data[i].field_0 != 0xFF);
+    } while (data[i].side != 0xFF);
 }
+
+// file boundary?
 
 void sub_815A008(struct QuestLog * questLog)
 {
@@ -78,7 +177,7 @@ void sub_815A008(struct QuestLog * questLog)
         questLog->unk_008[i].mapobj_bit_24 = gMapObjects[i].mapobj_bit_24;
         questLog->unk_008[i].mapobj_bit_25 = gMapObjects[i].mapobj_bit_25;
         questLog->unk_008[i].mapobj_bit_26 = gMapObjects[i].mapobj_bit_26;
-        questLog->unk_008[i].mapobj_unk_18 = gMapObjects[i].mapobj_unk_18;
+        questLog->unk_008[i].mapobj_unk_18 = gMapObjects[i].facingDirection;
         questLog->unk_008[i].mapobj_unk_0B_0 = gMapObjects[i].mapobj_unk_0B_0;
         questLog->unk_008[i].elevation = gMapObjects[i].elevation;
         questLog->unk_008[i].graphicsId = gMapObjects[i].graphicsId;
@@ -123,7 +222,7 @@ void sub_815A1F8(const struct QuestLog * questLog, const struct MapObjectTemplat
         gMapObjects[i].mapobj_bit_24 = questLogMapObjects[i].mapobj_bit_24;
         gMapObjects[i].mapobj_bit_25 = questLogMapObjects[i].mapobj_bit_25;
         gMapObjects[i].mapobj_bit_26 = questLogMapObjects[i].mapobj_bit_26;
-        gMapObjects[i].mapobj_unk_18 = questLogMapObjects[i].mapobj_unk_18;
+        gMapObjects[i].facingDirection = questLogMapObjects[i].mapobj_unk_18;
         gMapObjects[i].mapobj_unk_0B_0 = questLogMapObjects[i].mapobj_unk_0B_0;
         gMapObjects[i].elevation = questLogMapObjects[i].elevation;
         gMapObjects[i].graphicsId = questLogMapObjects[i].graphicsId;
@@ -614,7 +713,7 @@ void sub_815A540(void)
         PlayerGetDestCoords(&x, &y);
         if (!MetatileBehavior_IsSurfable(MapGridGetMetatileBehaviorAt(x, y)) && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
         {
-            struct MapObject *mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+            struct MapObject * mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
             SetPlayerAvatarTransitionFlags(0x01);
             DestroySprite(&gSprites[mapObject->mapobj_unk_1A]);
         }

@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "48",
+      "graphics_id": "MAP_OBJ_GFX_WORKER_F",
       "x": 4,
       "y": 2,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "47",
+      "graphics_id": "MAP_OBJ_GFX_WORKER_M",
       "x": 6,
       "y": 2,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "30",
+      "graphics_id": "MAP_OBJ_GFX_BALDING_MAN",
       "x": 1,
       "y": 6,
       "elevation": 3,
@@ -53,7 +53,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "28",
+      "graphics_id": "MAP_OBJ_GFX_WOMAN_2",
       "x": 1,
       "y": 8,
       "elevation": 3,
@@ -66,7 +66,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "57",
+      "graphics_id": "MAP_OBJ_GFX_FISHER",
       "x": 4,
       "y": 7,
       "elevation": 3,
@@ -79,7 +79,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "91",
+      "graphics_id": "MAP_OBJ_GFX_GYM_GUY",
       "x": 7,
       "y": 10,
       "elevation": 3,
@@ -92,7 +92,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "23",
+      "graphics_id": "MAP_OBJ_GFX_WOMAN_1",
       "x": 7,
       "y": 8,
       "elevation": 3,
@@ -105,7 +105,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "33",
+      "graphics_id": "MAP_OBJ_GFX_OLD_MAN_2",
       "x": 10,
       "y": 9,
       "elevation": 3,
@@ -118,7 +118,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "55",
+      "graphics_id": "MAP_OBJ_GFX_SCIENTIST",
       "x": 13,
       "y": 7,
       "elevation": 3,
@@ -131,7 +131,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "61",
+      "graphics_id": "MAP_OBJ_GFX_GENTLEMAN",
       "x": 16,
       "y": 10,
       "elevation": 3,
@@ -144,7 +144,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "49",
+      "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
       "x": 11,
       "y": 2,
       "elevation": 3,
@@ -154,7 +154,7 @@
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "CeladonCity_GameCorner_EventScript_16CAF5",
-      "flag": "91"
+      "flag": "FLAG_HIDE_GAME_CORNER_ROCKET"
     }
   ],
   "warp_events": [
@@ -195,8 +195,9 @@
       "y": 4,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "51",
-      "unknown": 10
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_COINS",
+      "quantity": 10,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -204,8 +205,9 @@
       "y": 8,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "52",
-      "unknown": 10
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_COINS_2",
+      "quantity": 10,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -213,8 +215,9 @@
       "y": 11,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "53",
-      "unknown": 20
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_COINS_3",
+      "quantity": 20,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -222,8 +225,9 @@
       "y": 12,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "54",
-      "unknown": 10
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_COINS_4",
+      "quantity": 10,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -231,8 +235,9 @@
       "y": 9,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "55",
-      "unknown": 10
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_COINS_5",
+      "quantity": 10,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -240,8 +245,9 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "56",
-      "unknown": 20
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_COINS_6",
+      "quantity": 20,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -249,8 +255,9 @@
       "y": 4,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "57",
-      "unknown": 10
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_COINS_7",
+      "quantity": 10,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -258,8 +265,9 @@
       "y": 3,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "58",
-      "unknown": 10
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_COINS_8",
+      "quantity": 10,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -267,8 +275,9 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "59",
-      "unknown": 10
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_COINS_9",
+      "quantity": 10,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -276,8 +285,9 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "60",
-      "unknown": 40
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_COINS_10",
+      "quantity": 40,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -285,8 +295,9 @@
       "y": 13,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "61",
-      "unknown": 100
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_COINS_11",
+      "quantity": 100,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -294,8 +305,9 @@
       "y": 12,
       "elevation": 3,
       "item": "ITEM_NONE",
-      "flag": "62",
-      "unknown": 10
+      "flag": "HIDDEN_ITEM_CELADON_CITY_GAME_CORNER_COINS_12",
+      "quantity": 10,
+      "underfoot": false
     },
     {
       "type": "bg_event_type_4",

@@ -42,6 +42,7 @@
 #include "constants/maps.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
+#include "constants/map_types.h"
 
 EWRAM_DATA void (*sItemUseOnFieldCB)(u8 taskId) = NULL;
 
@@ -162,7 +163,7 @@ void sub_80A1184(void)
 
 bool8 sub_80A1194(void)
 {
-    player_bitmagic();
+    FreezeEventObjects();
     ScriptContext2_Enable();
     sub_807DC00();
     CreateTask(sub_80A11C0, 10);
@@ -191,7 +192,7 @@ void sub_80A1208(void)
     struct MailStruct mail;
 
     mail.itemId = gSpecialVar_ItemId;
-    sub_80BEBEC(&mail, CB2_BagMenuFromStartMenu, 0);
+    ReadMail(&mail, CB2_BagMenuFromStartMenu, 0);
 }
 
 void FieldUseFunc_MachBike(u8 taskId)
@@ -202,7 +203,7 @@ void FieldUseFunc_MachBike(u8 taskId)
     PlayerGetDestCoords(&x, &y);
     behavior = MapGridGetMetatileBehaviorAt(x, y);
 
-    if (FlagGet(FLAG_0x830) == TRUE
+    if (FlagGet(FLAG_SYS_ON_CYCLING_ROAD) == TRUE
      || MetatileBehavior_ReturnFalse_17(behavior) == TRUE
      || MetatileBehavior_ReturnFalse_18(behavior) == TRUE
      || MetatileBehavior_ReturnFalse_15(behavior) == TRUE
@@ -259,7 +260,7 @@ bool8 ItemUseCheckFunc_Rod(void)
     {
         if (MetatileBehavior_IsSurfable(behavior) && !MapGridIsImpassableAt(x, y))
             return TRUE;
-        if (MetatileBehavior_ReturnFalse_6(behavior) == TRUE)
+        if (MetatileBehavior_IsBridge(behavior) == TRUE)
             return TRUE;
     }
     return FALSE;
@@ -396,7 +397,7 @@ void FieldUseFunc_TmCase(u8 taskId)
     }
     else
     {
-        sub_80CCB68();
+        StopPokemonLeagueLightingEffectTask();
         fade_screen(1, 0);
         gTasks[taskId].func = Task_InitTMCaseFromField;
     }
@@ -427,7 +428,7 @@ void FieldUseFunc_BerryPouch(u8 taskId)
     }
     else
     {
-        sub_80CCB68();
+        StopPokemonLeagueLightingEffectTask();
         fade_screen(1, 0);
         gTasks[taskId].func = Task_InitBerryPouchFromField;
     }
@@ -470,7 +471,7 @@ void FieldUseFunc_TeachyTv(u8 taskId)
     }
     else
     {
-        sub_80CCB68();
+        StopPokemonLeagueLightingEffectTask();
         fade_screen(1, 0);
         gTasks[taskId].func = Task_InitTeachyTvFromField;
     }
@@ -529,8 +530,8 @@ void FieldUseFunc_BlackFlute(u8 taskId)
     ItemUse_SetQuestLogEvent(4, NULL, gSpecialVar_ItemId, 0xFFFF);
     if (gSpecialVar_ItemId == ITEM_WHITE_FLUTE)
     {
-        FlagSet(FLAG_WHITE_FLUTE_ACTIVE);
-        FlagClear(FLAG_BLACK_FLUTE_ACTIVE);
+        FlagSet(FLAG_SYS_WHITE_FLUTE_ACTIVE);
+        FlagClear(FLAG_SYS_BLACK_FLUTE_ACTIVE);
         CopyItemName(gSpecialVar_ItemId, gStringVar2);
         StringExpandPlaceholders(gStringVar4, gUnknown_84165D2);
         gTasks[taskId].func = sub_80A1B48;
@@ -538,8 +539,8 @@ void FieldUseFunc_BlackFlute(u8 taskId)
     }
     else if (gSpecialVar_ItemId == ITEM_BLACK_FLUTE)
     {
-        FlagSet(FLAG_BLACK_FLUTE_ACTIVE);
-        FlagClear(FLAG_WHITE_FLUTE_ACTIVE);
+        FlagSet(FLAG_SYS_BLACK_FLUTE_ACTIVE);
+        FlagClear(FLAG_SYS_WHITE_FLUTE_ACTIVE);
         CopyItemName(gSpecialVar_ItemId, gStringVar2);
         StringExpandPlaceholders(gStringVar4, gUnknown_8416600);
         gTasks[taskId].func = sub_80A1B48;
@@ -600,7 +601,7 @@ void FieldUseFunc_TownMap(u8 taskId)
     }
     else
     {
-        sub_80CCB68();
+        StopPokemonLeagueLightingEffectTask();
         fade_screen(1, 0);
         gTasks[taskId].func = sub_80A1CC0;
     }
@@ -632,7 +633,7 @@ void FieldUseFunc_FameChecker(u8 taskId)
     }
     else
     {
-        sub_80CCB68();
+        StopPokemonLeagueLightingEffectTask();
         fade_screen(1, 0);
         gTasks[taskId].func = sub_80A1D68;
     }

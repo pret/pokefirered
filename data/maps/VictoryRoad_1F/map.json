@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "41",
+      "graphics_id": "MAP_OBJ_GFX_COOLTRAINER_M",
       "x": 5,
       "y": 2,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "42",
+      "graphics_id": "MAP_OBJ_GFX_COOLTRAINER_F",
       "x": 14,
       "y": 6,
       "elevation": 4,
@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 12,
       "y": 3,
       "elevation": 3,
@@ -50,10 +50,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "VictoryRoad_1F_EventScript_1BE9D2",
-      "flag": "425"
+      "flag": "FLAG_HIDE_VICTORY_ROAD_1F_RARE_CANDY"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
       "x": 14,
       "y": 1,
       "elevation": 3,
@@ -63,10 +63,10 @@
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "VictoryRoad_1F_EventScript_1BE9DF",
-      "flag": "426"
+      "flag": "FLAG_HIDE_VICTORY_ROAD_1F_TM02"
     },
     {
-      "graphics_id": "97",
+      "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
       "x": 7,
       "y": 18,
       "elevation": 3,
@@ -75,11 +75,11 @@
       "movement_range_y": 0,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "VictoryRoad_1F_EventScript_1BE11D",
+      "script": "EventScript_InteractWithStrengthBoulderObject",
       "flag": "0"
     },
     {
-      "graphics_id": "97",
+      "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
       "x": 4,
       "y": 12,
       "elevation": 3,
@@ -88,11 +88,11 @@
       "movement_range_y": 0,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "VictoryRoad_1F_EventScript_1BE11D",
+      "script": "EventScript_InteractWithStrengthBoulderObject",
       "flag": "0"
     },
     {
-      "graphics_id": "97",
+      "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
       "x": 16,
       "y": 3,
       "elevation": 3,
@@ -101,7 +101,7 @@
       "movement_range_y": 0,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "VictoryRoad_1F_EventScript_1BE11D",
+      "script": "EventScript_InteractWithStrengthBoulderObject",
       "flag": "0"
     }
   ],
@@ -127,7 +127,7 @@
       "x": 20,
       "y": 16,
       "elevation": 3,
-      "var": "VAR_0x4064",
+      "var": "VAR_MAP_SCENE_VICTORY_ROAD_1F",
       "var_value": 99,
       "script": "VictoryRoad_1F_EventScript_160F33"
     }
@@ -138,9 +138,10 @@
       "x": 12,
       "y": 12,
       "elevation": 0,
-      "item": "POCKET_KEY_ITEMS",
-      "flag": "37",
-      "unknown": 1
+      "item": "ITEM_ULTRA_BALL",
+      "flag": "HIDDEN_ITEM_VICTORY_ROAD_1F_ULTRA_BALL",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -148,8 +149,9 @@
       "y": 1,
       "elevation": 0,
       "item": "ITEM_FULL_RESTORE",
-      "flag": "38",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_VICTORY_ROAD_1F_FULL_RESTORE",
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

@@ -73,7 +73,7 @@ void CopyItemName(u16 itemId, u8 * dest)
 {
     if (itemId == ITEM_ENIGMA_BERRY)
     {
-        StringCopy(dest, sub_809C8A0(43)->name);
+        StringCopy(dest, GetBerryInfo(ITEM_TO_BERRY(ITEM_ENIGMA_BERRY))->name);
         StringAppend(dest, gUnknown_84162BD);
     }
     else
@@ -245,11 +245,11 @@ bool8 AddBagItem(u16 itemId, u16 count)
             return FALSE;
         gBagPockets[POCKET_KEY_ITEMS - 1].itemSlots[idx].itemId = ITEM_BERRY_POUCH;
         SetBagItemQuantity(&gBagPockets[POCKET_KEY_ITEMS - 1].itemSlots[idx].quantity, 1);
-        FlagSet(FLAG_0x847);
+        FlagSet(FLAG_SYS_GOT_BERRY_POUCH);
     }
 
     if (itemId == ITEM_BERRY_POUCH)
-        FlagSet(FLAG_0x847);
+        FlagSet(FLAG_SYS_GOT_BERRY_POUCH);
 
     idx = BagPocketGetFirstEmptySlot(pocket);
     if (idx == -1)

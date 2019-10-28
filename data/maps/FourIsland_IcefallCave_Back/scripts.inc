@@ -3,12 +3,12 @@ FourIsland_IcefallCave_Back_MapScripts:: @ 8163D82
 	.byte 0
 
 FourIsland_IcefallCave_Back_MapScript1_163D88:: @ 8163D88
-	compare_var_to_value VAR_0x4080, 1
-	call_if 1, EventScript_163D94
+	compare_var_to_value VAR_MAP_SCENE_ICEFALL_CAVE_BACK, 1
+	call_if eq, EventScript_163D94
 	end
 
 EventScript_163D94:: @ 8163D94
-	setflag FLAG_0x08B
+	setflag FLAG_HIDE_ICEFALL_CAVE_LORELEI
 	return
 
 FourIsland_IcefallCave_Back_EventScript_163D98:: @ 8163D98
@@ -46,7 +46,7 @@ FourIsland_IcefallCave_Back_EventScript_163D98:: @ 8163D98
 	textcolor 0
 	msgbox gUnknown_817B20B
 	setvar VAR_LAST_TALKED, 4
-	trainerbattle 3, 539, 0, Text_17B251
+	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_TEAM_ROCKET_GRUNT_45, 0, Text_17B251
 	applymovement 3, Movement_163F1B
 	waitmovement 0
 	textcolor 1
@@ -81,9 +81,9 @@ FourIsland_IcefallCave_Back_EventScript_163D98:: @ 8163D98
 	waitmovement 0
 	textcolor 1
 	msgbox gUnknown_817B457
-	setflag FLAG_0x08E
-	clearflag FLAG_0x08C
-	setvar VAR_0x4080, 1
+	setflag FLAG_HIDE_RUIN_VALLEY_SCIENTIST
+	clearflag FLAG_HIDE_LORELEI_IN_HER_HOUSE
+	setvar VAR_MAP_SCENE_ICEFALL_CAVE_BACK, 1
 	releaseall
 	end
 

@@ -4,8 +4,8 @@ CeruleanCity_MapScripts:: @ 8166471
 
 CeruleanCity_MapScript1_166477:: @ 8166477
 	setworldmapflag FLAG_WORLD_MAP_CERULEAN_CITY
-	checkflag FLAG_0x234
-	call_if 0, EventScript_166484
+	checkflag FLAG_GOT_SS_TICKET
+	call_if FALSE, EventScript_166484
 	end
 
 EventScript_166484:: @ 8166484
@@ -36,7 +36,7 @@ CeruleanCity_EventScript_1664B9:: @ 81664B9
 
 EventScript_1664CC:: @ 81664CC
 	textcolor 0
-	setvar VAR_0x4054, 2
+	setvar VAR_MAP_SCENE_ROUTE22, 2
 	playbgm MUS_RIVAL1, 0
 	addobject 8
 	applymovement 8, Movement_1665D3
@@ -44,26 +44,24 @@ EventScript_1664CC:: @ 81664CC
 	msgbox gUnknown_817EAD7
 	setvar VAR_LAST_TALKED, 8
 	compare_var_to_value VAR_STARTER_MON, 2
-	call_if 1, EventScript_166582
+	call_if eq, EventScript_166582
 	compare_var_to_value VAR_STARTER_MON, 1
-	call_if 1, EventScript_16658D
+	call_if eq, EventScript_16658D
 	compare_var_to_value VAR_STARTER_MON, 0
-	call_if 1, EventScript_166598
-	setvar VAR_0x8004, 13
-	setvar VAR_0x8005, 0
-	special SetFlavorTextFlagFromSpecialVars
+	call_if eq, EventScript_166598
+	famechecker FAMECHECKER_BILL, 0
 	msgbox gUnknown_817EB95
 	closemessage
 	playbgm MUS_RIVAL2, 0
 	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_1665A3
+	call_if eq, EventScript_1665A3
 	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_1665A3
+	call_if eq, EventScript_1665A3
 	compare_var_to_value VAR_0x4001, 2
-	call_if 1, EventScript_1665B5
+	call_if eq, EventScript_1665B5
 	msgbox gUnknown_817ECD4
-	setvar VAR_0x4052, 1
-	setflag FLAG_0x29B
+	setvar VAR_MAP_SCENE_CERULEAN_CITY_RIVAL, 1
+	setflag FLAG_GOT_FAME_CHECKER
 	giveitem ITEM_FAME_CHECKER
 	msgbox gUnknown_817ED5D
 	closemessage
@@ -75,15 +73,15 @@ EventScript_1664CC:: @ 81664CC
 	end
 
 EventScript_166582:: @ 8166582
-	trainerbattle 3, 332, 0, Text_17EB71
+	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_RIVAL_CERULEAN_SQUIRTLE, 0, Text_17EB71
 	return
 
 EventScript_16658D:: @ 816658D
-	trainerbattle 3, 333, 0, Text_17EB71
+	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_RIVAL_CERULEAN_BULBASAUR, 0, Text_17EB71
 	return
 
 EventScript_166598:: @ 8166598
-	trainerbattle 3, 334, 0, Text_17EB71
+	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_RIVAL_CERULEAN_CHARMANDER, 0, Text_17EB71
 	return
 
 EventScript_1665A3:: @ 81665A3
@@ -173,14 +171,14 @@ Movement_1665FB:: @ 81665FB
 CeruleanCity_EventScript_166603:: @ 8166603
 	lock
 	faceplayer
-	checktrainerflag FLAG_0x163
-	goto_if_eq EventScript_16662E
+	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_5
+	goto_if eq, EventScript_16662E
 	message Text_17EE0E
 	waitmessage
 	playbgm MUS_ROCKET, 0
 	waitbuttonpress
-	trainerbattle 3, 355, 0, Text_17EE70
-	setvar VAR_0x407D, 1
+	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_TEAM_ROCKET_GRUNT_5, 0, Text_17EE70
+	setvar VAR_MAP_SCENE_CERULEAN_CITY_ROCKET, 1
 	goto EventScript_16662E
 	end
 
@@ -188,7 +186,7 @@ EventScript_16662E:: @ 816662E
 	msgbox gUnknown_817EE9C
 	checkitemspace ITEM_TM28, 1
 	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_166677
+	goto_if eq, EventScript_166677
 	additem ITEM_TM28, 1
 	giveitemfanfaremsg gUnknown_817EEBF, ITEM_TM28
 	msgbox gUnknown_817EEED
@@ -196,7 +194,7 @@ EventScript_16662E:: @ 816662E
 	fadescreen 1
 	removeobject 2
 	fadescreen 0
-	setflag FLAG_0x23F
+	setflag FLAG_GOT_TM28_FROM_ROCKET
 	release
 	end
 
@@ -230,8 +228,8 @@ EventScript_1666C3:: @ 81666C3
 	textcolor 0
 	msgbox Text_17EE0E
 	setvar VAR_LAST_TALKED, 2
-	trainerbattle 3, 355, 0, Text_17EE70
-	setvar VAR_0x407D, 1
+	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_TEAM_ROCKET_GRUNT_5, 0, Text_17EE70
+	setvar VAR_MAP_SCENE_CERULEAN_CITY_ROCKET, 1
 	goto EventScript_16662E
 	end
 
@@ -248,8 +246,8 @@ CeruleanCity_EventScript_1666E7:: @ 81666E7
 CeruleanCity_EventScript_1666FE:: @ 81666FE
 	lock
 	faceplayer
-	checkflag FLAG_0x234
-	goto_if_eq EventScript_166713
+	checkflag FLAG_GOT_SS_TICKET
+	goto_if TRUE, EventScript_166713
 	msgbox gUnknown_817F01D
 	release
 	end
@@ -286,11 +284,11 @@ CeruleanCity_EventScript_16674F:: @ 816674F
 	random 3
 	copyvar VAR_0x8008, VAR_RESULT
 	compare_var_to_value VAR_0x8008, 0
-	call_if 1, EventScript_1667B0
+	call_if eq, EventScript_1667B0
 	compare_var_to_value VAR_0x8008, 1
-	call_if 1, EventScript_1667B6
+	call_if eq, EventScript_1667B6
 	compare_var_to_value VAR_0x8008, 2
-	call_if 1, EventScript_1667BC
+	call_if eq, EventScript_1667BC
 	waitmessage
 	delay 40
 	playse SE_PIN
@@ -298,11 +296,11 @@ CeruleanCity_EventScript_16674F:: @ 816674F
 	waitmovement 0
 	delay 30
 	compare_var_to_value VAR_0x8008, 0
-	call_if 1, EventScript_1667C2
+	call_if eq, EventScript_1667C2
 	compare_var_to_value VAR_0x8008, 1
-	call_if 1, EventScript_1667CB
+	call_if eq, EventScript_1667CB
 	compare_var_to_value VAR_0x8008, 2
-	call_if 1, EventScript_1667D4
+	call_if eq, EventScript_1667D4
 	release
 	end
 
@@ -335,13 +333,13 @@ CeruleanCity_EventScript_1667DD:: @ 81667DD
 	random 4
 	copyvar VAR_0x8008, VAR_RESULT
 	compare_var_to_value VAR_0x8008, 0
-	call_if 1, EventScript_166814
+	call_if eq, EventScript_166814
 	compare_var_to_value VAR_0x8008, 1
-	call_if 1, EventScript_16681D
+	call_if eq, EventScript_16681D
 	compare_var_to_value VAR_0x8008, 2
-	call_if 1, EventScript_166826
+	call_if eq, EventScript_166826
 	compare_var_to_value VAR_0x8008, 3
-	call_if 1, EventScript_16682F
+	call_if eq, EventScript_16682F
 	release
 	end
 
@@ -375,9 +373,7 @@ CeruleanCity_EventScript_16684A:: @ 816684A
 
 CeruleanCity_EventScript_166853:: @ 8166853
 	lockall
-	setvar VAR_0x8004, 3
-	setvar VAR_0x8005, 0
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_MISTY, 0
 	msgbox gUnknown_817F4EF
 	releaseall
 	end

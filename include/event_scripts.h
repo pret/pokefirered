@@ -1155,6 +1155,15 @@ extern const u8 EventScript_SafariOutOfBalls[];
 
 extern const u8 EventScript_ItemfinderDigUpUnderfootItem[];
 
+// battle_setup
+extern const u8 EventScript_DoTrainerBattle[];
+extern const u8 EventScript_TryDoDoubleTrainerBattle[];
+extern const u8 EventScript_TryDoNormalTrainerBattle[];
+extern const u8 EventScript_TryDoDoubleRematchBattle[];
+extern const u8 EventScript_TryDoRematchBattle[];
+extern const u8 gUnknown_81A4EB4[];
+extern const u8 EventScript_1C555B[];
+
 // new_game
 extern const u8 EventScript_ResetAllMapFlags[];
 
@@ -1167,5 +1176,14 @@ extern const u8 gText_AlreadySaveFile_WouldLikeToOverwrite[];
 extern const u8 gText_SavingDontTurnOffThePower[];
 extern const u8 gText_PlayerSavedTheGame[];
 extern const u8 gText_DifferentGameFile[];
+
+// script_menu
+extern const u8 EventScript_1A7AE0[];
+extern const u8 Text_1BC388[];
+extern const u8 Text_1BC3C7[];
+extern const u8 Text_1BCB42[];
+extern const u8 Text_1BCA95[];
+extern const u8 Text_1BCACB[];
+extern const u8 Text_1BCAF2[];
 
 #endif //GUARD_EVENT_SCRIPTS_H

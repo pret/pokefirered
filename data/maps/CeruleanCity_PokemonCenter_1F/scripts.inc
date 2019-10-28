@@ -25,9 +25,7 @@ CeruleanCity_PokemonCenter_1F_EventScript_16AA4E:: @ 816AA4E
 CeruleanCity_PokemonCenter_1F_EventScript_16AA57:: @ 816AA57
 	lock
 	faceplayer
-	setvar VAR_0x8004, 13
-	setvar VAR_0x8005, 1
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_BILL, 1
 	msgbox gUnknown_8192116
 	release
 	end

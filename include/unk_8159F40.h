@@ -3,7 +3,7 @@
 
 #include "global.h"
 
-void sub_8159F40(void);
+void InitPokedudePartyAndOpponent(void);
 void sub_815A008(struct QuestLog *);
 void sub_815A1F8(struct QuestLog *, struct MapObjectTemplate *);
 

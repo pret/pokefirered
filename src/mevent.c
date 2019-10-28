@@ -423,7 +423,7 @@ void sub_8143910(u8 taskId)
             }
             break;
         case 15:
-            data->t0E = ValidateTrainerTowerData((struct TrainerTowerData *)gDecompressionBuffer);
+            data->t0E = ValidateTrainerTowerData((struct EReaderTrainerHillSet *)gDecompressionBuffer);
             sub_800AA80(data->t0E);
             data->state = 16;
             break;
@@ -437,7 +437,7 @@ void sub_8143910(u8 taskId)
             }
             break;
         case 17:
-            if (CEReaderTool_SaveTrainerTower((struct TrainerTowerData *)gDecompressionBuffer))
+            if (CEReaderTool_SaveTrainerTower((struct EReaderTrainerHillSet *)gDecompressionBuffer))
             {
                 AddTextPrinterToWindow1(gUnknown_841DE99);
                 ResetDelayTimer(&data->t00);
@@ -505,7 +505,7 @@ struct MEventBuffer_3430_Sub * sav1_get_mevent_buffer_2(void)
     return &gSaveBlock1Ptr->unk_3120.buffer_310.data;
 }
 
-struct MysteryEventStruct * sub_8143D94(void)
+struct MENewsJisanStruct * GetMENewsJisanStructPtr(void)
 {
     return &gSaveBlock1Ptr->unk_3120.unk_340;
 }
@@ -562,8 +562,8 @@ void sub_8143E9C(void)
 
 void sub_8143ED0(void)
 {
-    CpuFill32(0, sub_8143D94(), sizeof(struct MysteryEventStruct));
-    sub_8146C88();
+    CpuFill32(0, GetMENewsJisanStructPtr(), sizeof(struct MENewsJisanStruct));
+    MENewsJisanReset();
 }
 
 bool32 sub_8143EF4(const u8 * src)
@@ -588,7 +588,7 @@ void DestroyWonderCard(void)
     ClearRamScript();
     sub_806E2D0();
     sub_806E370();
-    sub_80E7524(gSaveBlock2Ptr->unk_B0.field_3F0);
+    sub_80E7524(&gSaveBlock2Ptr->unk_B0.field_3F0);
 }
 
 bool32 sub_8143F68(const struct MEventBuffer_32E0_Sub * data)

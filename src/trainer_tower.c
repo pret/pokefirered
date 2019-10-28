@@ -1,10 +1,6 @@
 #include "global.h"
 #include "main.h"
 #include "task.h"
-#include "constants/flags.h"
-#include "constants/vars.h"
-#include "constants/items.h"
-#include "constants/species.h"
 #include "malloc.h"
 #include "save.h"
 #include "util.h"
@@ -24,419 +20,326 @@
 #include "menu.h"
 #include "new_menu_helpers.h"
 #include "sound.h"
-
-struct UnkStruct_8479D34
-{
-    s8 mapGroup;
-    s8 mapNum;
-    u8 filler[2];
-    u8 flags1[8];
-    u8 flags2[8];
-    u8 flags3[8];
-};
+#include "renewable_hidden_items.h"
+#include "constants/flags.h"
+#include "constants/vars.h"
+#include "constants/items.h"
+#include "constants/species.h"
+#include "constants/maps.h"
+#include "constants/songs.h"
+#include "constants/layouts.h"
+#include "constants/trainers.h"
+#include "constants/facility_trainer_classes.h"
+#include "constants/map_objects.h"
 
 struct UnkStruct_203F458
 {
-    /* 0x0000 */ u8 unk_0000;
-    /* 0x0004 */ struct TrainerTowerData unk_0004;
+    /* 0x0000 */ u8 floorIdx;
+    /* 0x0004 */ struct EReaderTrainerHillSet unk_0004;
 };
 
 struct UnkStruct_203F45C
 {
-    /* 0x00 */ u8 unk_00[11];
-    /* 0x0C */ u16 unk_0C[6];
-    /* 0x18 */ u16 unk_18[6];
-    /* 0x24 */ u16 unk_24[6];
-    /* 0x30 */ u16 unk_30[6];
-    /* 0x3C */ u8 unk_3C;
-    /* 0x3D */ u8 unk_3D;
-    /* 0x3E */ u8 unk_3E;
+    /* 0x00 */ u8 name[11];
+    /* 0x0C */ u16 speechWin[6];
+    /* 0x18 */ u16 speechLose[6];
+    /* 0x24 */ u16 speechWin2[6];
+    /* 0x30 */ u16 speechLose2[6];
+    /* 0x3C */ u8 battleType;
+    /* 0x3D */ u8 facilityClass;
+    /* 0x3E */ u8 gender;
 };
 
-struct UnkStruct_8479ED8
+struct SinglesTrainerInfo
+{
+    u8 mapObjGfx;
+    u8 facilityClass;
+    bool8 gender;
+};
+
+struct DoublesTrainerInfo
+{
+    u8 mapObjGfx1;
+    u8 mapObjGfx2;
+    u8 facilityClass;
+    bool8 gender1;
+    bool8 gender2;
+};
+
+struct TrainerEncounterMusicPairs
 {
     u8 unk0;
     u8 unk1;
-    bool8 unk2;
 };
 
-struct UnkStruct_847A024
-{
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-    bool8 unk3;
-    bool8 unk4;
-};
+static EWRAM_DATA struct UnkStruct_203F458 * sTrainerTowerState = NULL;
+static EWRAM_DATA struct UnkStruct_203F45C * sTrainerTowerOpponent = NULL;
+static EWRAM_DATA u8 sUnused_203F460 = 0;
 
-struct UnkStruct_847A074
-{
-    u8 unk0;
-    u8 unk1;
-};
-
-EWRAM_DATA struct UnkStruct_203F458 * gUnknown_203F458 = NULL;
-EWRAM_DATA struct UnkStruct_203F45C * gUnknown_203F45C = NULL;
-EWRAM_DATA u8 unused_variable = 0;
-
-void sub_815D96C(void);
-void sub_815DC8C(void);  // setup
-void sub_815DD2C(void);  // teardown
-void sub_815DD44(void);
-void sub_815DDB0(void);
-void sub_815DEFC(u16 * ecWords, u8 * dest);
-void sub_815DF54(void);
-void sub_815E068(u8 battleType, u8 facilityClass);
-void sub_815E160(void);
-void sub_815E1C0(void);
-void sub_815E1F0(void);
-void sub_815E218(void);
-void sub_815E28C(void);
-void sub_815E394(void);
-void sub_815E408(void);
-void sub_815E4B0(void);
-void sub_815E56C(void);
-void sub_815E5C4(void);
-void sub_815E5F0(void);
-void sub_815E658(void);
-void sub_815E720(void);
-void sub_815E88C(void);
-void sub_815E8B4(void);
-void sub_815E8CC(void);
-void sub_815E908(void);
-void sub_815E948(void);
-void sub_815E9C8(void);
-void sub_815E9FC(void);
+static void sub_815DC8C(void);  // setup
+static void sub_815DD2C(void);  // teardown
+static void sub_815DD44(void);
+static void SetTrainerTowerNPCGraphics(void);
+static void TT_ConvertEasyChatMessageToString(u16 *ecWords, u8 *dest);
+static void sub_815DF54(void);
+static void TrainerTowerGetOpponentTextColor(u8 battleType, u8 facilityClass);
+static void sub_815E160(void);
+static void sub_815E1C0(void);
+static void sub_815E1F0(void);
+static void TTSpecial_HasReachedTheRoof(void);
+static void sub_815E28C(void);
+static void sub_815E394(void);
+static void sub_815E408(void);
+static void sub_815E4B0(void);
+static void TTSpecial_StartTimer(void);
+static void sub_815E5C4(void);
+static void sub_815E5F0(void);
+static void sub_815E658(void);
+static void sub_815E720(void);
+static void sub_815E88C(void);
+static void sub_815E8B4(void);
+static void sub_815E8CC(void);
+static void sub_815E908(void);
+static void sub_815E948(void);
+static void sub_815E9C8(void);
+static void BuildEnemyParty(void);
 static s32 GetPartyMaxLevel(void);
-void sub_815EC0C(void);
-u32 sub_815EDDC(u32 *);
-void sub_815EDF4(u32 *, u32);
+static void ValidateOrResetCurTrainerTowerRecord(void);
+static u32 GetTrainerTowerRecordTime(u32 *);
+static void SetTrainerTowerRecordTime(u32 *, u32);
 
 extern const u8 gUnknown_83FE982[];
 extern const u8 gUnknown_83FE998[];
 extern const u8 *const gUnknown_83FE9C4[];
 
-const struct UnkStruct_8479D34 gUnknown_8479D34[] = {
-    {
-        0x03, 0x26,
-        .flags1 = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff},
-        .flags2 = {0x99, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff},
-        .flags3 = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}
-    },
-    {
-        0x03, 0x27,
-        .flags1 = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff},
-        .flags2 = {0x9a, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff},
-        .flags3 = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}
-    },
-    {
-        0x01, 0x1f,
-        .flags1 = {0x4c, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff},
-        .flags2 = {0x46, 0x47, 0x48, 0x49, 0x4a, 0x4b, 0xff, 0xff},
-        .flags3 = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}
-    },
-    {
-        0x01, 0x22,
-        .flags1 = {0x53, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff},
-        .flags2 = {0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x52, 0xff, 0xff},
-        .flags3 = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}
-    },
-    {
-        0x03, 0x41,
-        .flags1 = {0x40, 0x41, 0x42, 0x43, 0xff, 0xff, 0xff, 0xff},
-        .flags2 = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff},
-        .flags3 = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}
-    },
-    {
-        0x01, 0x02,
-        .flags1 = {0x54, 0x55, 0x56, 0x57, 0x58, 0x59, 0xff, 0xff},
-        .flags2 = {0x54, 0x55, 0x56, 0xff, 0xff, 0xff, 0xff, 0xff},
-        .flags3 = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}
-    },
-    {
-        0x01, 0x6d,
-        .flags1 = {0x5b, 0x5d, 0x5e, 0x5f, 0x63, 0x64, 0x65, 0x66},
-        .flags2 = {0x5b, 0x5d, 0x5e, 0x5f, 0x63, 0x64, 0x65, 0xff},
-        .flags3 = {0x5a, 0x5c, 0x60, 0x61, 0x62, 0xff, 0xff, 0xff}
-    },
-    {
-        0x03, 0x2e,
-        .flags1 = {0x6b, 0x6c, 0x6d, 0x6e, 0xff, 0xff, 0xff, 0xff},
-        .flags2 = {0x67, 0x68, 0x69, 0x6a, 0x6b, 0x6c, 0xff, 0xff},
-        .flags3 = {0x6b, 0x6c, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}
-    },
-    {
-        0x03, 0x30,
-        .flags1 = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff},
-        .flags2 = {0xa6, 0xa7, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff},
-        .flags3 = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}
-    },
-    {
-        0x03, 0x0f,
-        .flags1 = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff},
-        .flags2 = {0xa8, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff},
-        .flags3 = {0xa9, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}
-    },
-    {
-        0x03, 0x39,
-        .flags1 = {0xaa, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff},
-        .flags2 = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff},
-        .flags3 = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}
-    },
-    {
-        0x03, 0x36,
-        .flags1 = {0xae, 0xb0, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff},
-        .flags2 = {0xaf, 0xb1, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff},
-        .flags3 = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}
-    },
-    {
-        0x03, 0x3a,
-        .flags1 = {0xb2, 0xb3, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff},
-        .flags2 = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff},
-        .flags3 = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}
-    },
-    {
-        0x03, 0x3b,
-        .flags1 = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff},
-        .flags2 = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff},
-        .flags3 = {0xb4, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}
-    },
-    {
-        0x03, 0x3e,
-        .flags1 = {0xb9, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff},
-        .flags2 = {0xba, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff},
-        .flags3 = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}
-    },
+static const struct SinglesTrainerInfo sSingleBattleTrainerInfo[] = {
+    {MAP_OBJ_GFX_WOMAN_2,        FACILITY_CLASS_AROMA_LADY,       FEMALE},
+    {MAP_OBJ_GFX_HIKER,          FACILITY_CLASS_RUIN_MANIAC,      MALE},
+    {MAP_OBJ_GFX_TUBER_F,        FACILITY_CLASS_TUBER,            FEMALE},
+    {MAP_OBJ_GFX_TUBER_M_2,      FACILITY_CLASS_TUBER_2,          MALE},
+    {MAP_OBJ_GFX_COOLTRAINER_M,  FACILITY_CLASS_COOLTRAINER,      MALE},
+    {MAP_OBJ_GFX_COOLTRAINER_F,  FACILITY_CLASS_COOLTRAINER_2,    FEMALE},
+    {MAP_OBJ_GFX_SUPER_NERD,     FACILITY_CLASS_HEX_MANIAC,       MALE},
+    {MAP_OBJ_GFX_WOMAN_2,        FACILITY_CLASS_LADY,             FEMALE},
+    {MAP_OBJ_GFX_BEAUTY,         FACILITY_CLASS_BEAUTY,           FEMALE},
+    {MAP_OBJ_GFX_BOY,            FACILITY_CLASS_RICH_BOY,         MALE},
+    {MAP_OBJ_GFX_SUPER_NERD,     FACILITY_CLASS_POKEMANIAC,       MALE},
+    {MAP_OBJ_GFX_SWIMMER_M_LAND, FACILITY_CLASS_SWIMMER_MALE,     MALE},
+    {MAP_OBJ_GFX_BLACKBELT,      FACILITY_CLASS_BLACK_BELT,       MALE},
+    {MAP_OBJ_GFX_ROCKER,         FACILITY_CLASS_GUITARIST,        MALE},
+    {MAP_OBJ_GFX_ROCKER,         FACILITY_CLASS_KINDLER,          MALE},
+    {MAP_OBJ_GFX_CAMPER,         FACILITY_CLASS_CAMPER,           MALE},
+    {MAP_OBJ_GFX_SUPER_NERD,     FACILITY_CLASS_BUG_MANIAC,       MALE},
+    {MAP_OBJ_GFX_BOY,            FACILITY_CLASS_PSYCHIC,          MALE},
+    {MAP_OBJ_GFX_WOMAN_1,        FACILITY_CLASS_PSYCHIC_2,        FEMALE},
+    {MAP_OBJ_GFX_GENTLEMAN,      FACILITY_CLASS_GENTLEMAN,        MALE},
+    {MAP_OBJ_GFX_BOY,            FACILITY_CLASS_SCHOOL_KID,       MALE},
+    {MAP_OBJ_GFX_WOMAN_1,        FACILITY_CLASS_SCHOOL_KID_2,     FEMALE},
+    {MAP_OBJ_GFX_BALDING_MAN,    FACILITY_CLASS_POKEFAN,          MALE},
+    {MAP_OBJ_GFX_WOMAN_3,        FACILITY_CLASS_POKEFAN_2,        FEMALE},
+    {MAP_OBJ_GFX_OLD_MAN_1,      FACILITY_CLASS_EXPERT,           MALE},
+    {MAP_OBJ_GFX_OLD_WOMAN,      FACILITY_CLASS_EXPERT_2,         FEMALE},
+    {MAP_OBJ_GFX_YOUNGSTER,      FACILITY_CLASS_YOUNGSTER,        MALE},
+    {MAP_OBJ_GFX_FISHER,         FACILITY_CLASS_FISHERMAN,        MALE},
+    {MAP_OBJ_GFX_COOLTRAINER_M,  FACILITY_CLASS_DRAGON_TAMER,     MALE},
+    {MAP_OBJ_GFX_ROCKER,         FACILITY_CLASS_BIRD_KEEPER,      MALE},
+    {MAP_OBJ_GFX_LITTLE_BOY,     FACILITY_CLASS_NINJA_BOY,        MALE},
+    {MAP_OBJ_GFX_BATTLE_GIRL,    FACILITY_CLASS_BATTLE_GIRL,      FEMALE},
+    {MAP_OBJ_GFX_BEAUTY,         FACILITY_CLASS_PARASOL_LADY,     FEMALE},
+    {MAP_OBJ_GFX_SWIMMER_F_LAND, FACILITY_CLASS_SWIMMER_FEMALE,   FEMALE},
+    {MAP_OBJ_GFX_PICNICKER,      FACILITY_CLASS_PICNICKER,        FEMALE},
+    {MAP_OBJ_GFX_SAILOR,         FACILITY_CLASS_SAILOR,           MALE},
+    {MAP_OBJ_GFX_FAT_MAN,        FACILITY_CLASS_COLLECTOR,        MALE},
+    {MAP_OBJ_GFX_MAN,            FACILITY_CLASS_PKMN_BREEDER,     MALE},
+    {MAP_OBJ_GFX_WOMAN_2,        FACILITY_CLASS_PKMN_BREEDER_2,   FEMALE},
+    {MAP_OBJ_GFX_CAMPER,         FACILITY_CLASS_PKMN_RANGER,      MALE},
+    {MAP_OBJ_GFX_PICNICKER,      FACILITY_CLASS_PKMN_RANGER_2,    FEMALE},
+    {MAP_OBJ_GFX_LASS,           FACILITY_CLASS_LASS,             FEMALE},
+    {MAP_OBJ_GFX_BUG_CATCHER,    FACILITY_CLASS_BUG_CATCHER,      MALE},
+    {MAP_OBJ_GFX_HIKER,          FACILITY_CLASS_HIKER,            MALE},
+    {MAP_OBJ_GFX_YOUNGSTER,      FACILITY_CLASS_YOUNGSTER_2,      MALE},
+    {MAP_OBJ_GFX_BUG_CATCHER,    FACILITY_CLASS_BUG_CATCHER_2,    MALE},
+    {MAP_OBJ_GFX_LASS,           FACILITY_CLASS_LASS_2,           FEMALE},
+    {MAP_OBJ_GFX_SAILOR,         FACILITY_CLASS_SAILOR_2,         MALE},
+    {MAP_OBJ_GFX_CAMPER,         FACILITY_CLASS_CAMPER_2,         MALE},
+    {MAP_OBJ_GFX_PICNICKER,      FACILITY_CLASS_PICNICKER_2,      FEMALE},
+    {MAP_OBJ_GFX_SUPER_NERD,     FACILITY_CLASS_POKEMANIAC_2,     MALE},
+    {MAP_OBJ_GFX_SUPER_NERD,     FACILITY_CLASS_SUPER_NERD,       MALE},
+    {MAP_OBJ_GFX_HIKER,          FACILITY_CLASS_HIKER_2,          MALE},
+    {MAP_OBJ_GFX_BIKER,          FACILITY_CLASS_BIKER,            MALE},
+    {MAP_OBJ_GFX_SUPER_NERD,     FACILITY_CLASS_BURGLAR,          MALE},
+    {MAP_OBJ_GFX_BALDING_MAN,    FACILITY_CLASS_ENGINEER,         MALE},
+    {MAP_OBJ_GFX_FISHER,         FACILITY_CLASS_FISHERMAN_2,      MALE},
+    {MAP_OBJ_GFX_SWIMMER_M_LAND, FACILITY_CLASS_SWIMMER_MALE_2,   MALE},
+    {MAP_OBJ_GFX_BIKER,          FACILITY_CLASS_CUE_BALL,         MALE},
+    {MAP_OBJ_GFX_OLD_MAN_1,      FACILITY_CLASS_GAMER,            MALE},
+    {MAP_OBJ_GFX_BEAUTY,         FACILITY_CLASS_BEAUTY_2,         FEMALE},
+    {MAP_OBJ_GFX_SWIMMER_F_LAND, FACILITY_CLASS_SWIMMER_FEMALE_2, FEMALE},
+    {MAP_OBJ_GFX_BOY,            FACILITY_CLASS_PSYCHIC_3,        MALE},
+    {MAP_OBJ_GFX_ROCKER,         FACILITY_CLASS_ROCKER,           MALE},
+    {MAP_OBJ_GFX_ROCKER,         FACILITY_CLASS_JUGGLER,          MALE},
+    {MAP_OBJ_GFX_MAN,            FACILITY_CLASS_TAMER,            MALE},
+    {MAP_OBJ_GFX_ROCKER,         FACILITY_CLASS_BIRD_KEEPER_2,    MALE},
+    {MAP_OBJ_GFX_BLACKBELT,      FACILITY_CLASS_BLACK_BELT_2,     MALE},
+    {MAP_OBJ_GFX_SCIENTIST,      FACILITY_CLASS_SCIENTIST,        MALE},
+    {MAP_OBJ_GFX_COOLTRAINER_M,  FACILITY_CLASS_COOLTRAINER_3,    MALE},
+    {MAP_OBJ_GFX_COOLTRAINER_F,  FACILITY_CLASS_COOLTRAINER_4,    FEMALE},
+    {MAP_OBJ_GFX_GENTLEMAN,      FACILITY_CLASS_GENTLEMAN_2,      MALE},
+    {MAP_OBJ_GFX_CHANNELER,      FACILITY_CLASS_CHANNELER,        FEMALE},
+    {MAP_OBJ_GFX_WOMAN_1,        FACILITY_CLASS_PSYCHIC_4,        FEMALE},
+    {MAP_OBJ_GFX_BATTLE_GIRL,    FACILITY_CLASS_CRUSH_GIRL,       FEMALE},
+    {MAP_OBJ_GFX_TUBER_F,        FACILITY_CLASS_TUBER_3,          FEMALE},
+    {MAP_OBJ_GFX_WOMAN_2,        FACILITY_CLASS_PKMN_BREEDER_3,   FEMALE},
+    {MAP_OBJ_GFX_CAMPER,         FACILITY_CLASS_PKMN_RANGER_3,    MALE},
+    {MAP_OBJ_GFX_PICNICKER,      FACILITY_CLASS_PKMN_RANGER_4,    FEMALE},
+    {MAP_OBJ_GFX_WOMAN_2,        FACILITY_CLASS_AROMA_LADY_2,     FEMALE},
+    {MAP_OBJ_GFX_HIKER,          FACILITY_CLASS_RUIN_MANIAC_2,    MALE},
+    {MAP_OBJ_GFX_WOMAN_2,        FACILITY_CLASS_LADY_2,           FEMALE},
+    {MAP_OBJ_GFX_LASS,           FACILITY_CLASS_PAINTER,          FEMALE}
 };
 
-const struct UnkStruct_8479ED8 gUnknown_8479ED8[] = {
-    {0x1c, 0x03, 0x01},
-    {0x38, 0x04, 0x00},
-    {0x25, 0x06, 0x01},
-    {0x26, 0x07, 0x00},
-    {0x29, 0x08, 0x00},
-    {0x2a, 0x09, 0x01},
-    {0x34, 0x0a, 0x00},
-    {0x1c, 0x0b, 0x01},
-    {0x1d, 0x0c, 0x01},
-    {0x13, 0x0d, 0x00},
-    {0x34, 0x0e, 0x00},
-    {0x2d, 0x0f, 0x00},
-    {0x36, 0x10, 0x00},
-    {0x1a, 0x11, 0x00},
-    {0x1a, 0x12, 0x00},
-    {0x27, 0x13, 0x00},
-    {0x34, 0x14, 0x00},
-    {0x13, 0x15, 0x00},
-    {0x17, 0x16, 0x01},
-    {0x3d, 0x17, 0x00},
-    {0x13, 0x1d, 0x00},
-    {0x17, 0x1e, 0x01},
-    {0x1e, 0x20, 0x00},
-    {0x1f, 0x21, 0x01},
-    {0x20, 0x22, 0x00},
-    {0x23, 0x23, 0x01},
-    {0x12, 0x24, 0x00},
-    {0x39, 0x26, 0x00},
-    {0x29, 0x2d, 0x00},
-    {0x1a, 0x2e, 0x00},
-    {0x10, 0x2f, 0x00},
-    {0x18, 0x30, 0x01},
-    {0x1d, 0x31, 0x01},
-    {0x2e, 0x32, 0x01},
-    {0x28, 0x33, 0x01},
-    {0x3e, 0x35, 0x00},
-    {0x1b, 0x38, 0x00},
-    {0x19, 0x40, 0x00},
-    {0x1c, 0x41, 0x01},
-    {0x27, 0x42, 0x00},
-    {0x28, 0x43, 0x01},
-    {0x16, 0x47, 0x01},
-    {0x14, 0x48, 0x00},
-    {0x38, 0x49, 0x00},
-    {0x12, 0x58, 0x00},
-    {0x14, 0x59, 0x00},
-    {0x16, 0x5a, 0x01},
-    {0x3e, 0x5b, 0x00},
-    {0x27, 0x5c, 0x00},
-    {0x28, 0x5d, 0x01},
-    {0x34, 0x5e, 0x00},
-    {0x34, 0x5f, 0x00},
-    {0x38, 0x60, 0x00},
-    {0x35, 0x61, 0x00},
-    {0x34, 0x62, 0x00},
-    {0x1e, 0x63, 0x00},
-    {0x39, 0x64, 0x00},
-    {0x2d, 0x65, 0x00},
-    {0x35, 0x66, 0x00},
-    {0x20, 0x67, 0x00},
-    {0x1d, 0x68, 0x01},
-    {0x2e, 0x69, 0x01},
-    {0x13, 0x6a, 0x00},
-    {0x1a, 0x6b, 0x00},
-    {0x1a, 0x6c, 0x00},
-    {0x19, 0x6d, 0x00},
-    {0x1a, 0x6e, 0x00},
-    {0x36, 0x6f, 0x00},
-    {0x37, 0x71, 0x00},
-    {0x29, 0x74, 0x00},
-    {0x2a, 0x75, 0x01},
-    {0x3d, 0x7a, 0x00},
-    {0x3a, 0x7d, 0x01},
-    {0x17, 0x89, 0x01},
-    {0x18, 0x8a, 0x01},
-    {0x25, 0x8b, 0x01},
-    {0x1c, 0x8c, 0x01},
-    {0x27, 0x8d, 0x00},
-    {0x28, 0x8e, 0x01},
-    {0x1c, 0x8f, 0x01},
-    {0x38, 0x90, 0x00},
-    {0x1c, 0x91, 0x01},
-    {0x16, 0x92, 0x01}
+static const struct DoublesTrainerInfo sDoubleBattleTrainerInfo[] = {
+    {MAP_OBJ_GFX_BEAUTY,         MAP_OBJ_GFX_WOMAN_1,        FACILITY_CLASS_SR_AND_JR,      FEMALE, FEMALE},
+    {MAP_OBJ_GFX_LITTLE_GIRL,    MAP_OBJ_GFX_LITTLE_GIRL,    FACILITY_CLASS_TWINS,          FEMALE, FEMALE},
+    {MAP_OBJ_GFX_BEAUTY,         MAP_OBJ_GFX_MAN,            FACILITY_CLASS_YOUNG_COUPLE,   FEMALE, MALE},
+    {MAP_OBJ_GFX_OLD_MAN_1,      MAP_OBJ_GFX_OLD_WOMAN,      FACILITY_CLASS_OLD_COUPLE,     MALE, FEMALE},
+    {MAP_OBJ_GFX_TUBER_M_2,      MAP_OBJ_GFX_SWIMMER_F_LAND, FACILITY_CLASS_SIS_AND_BRO,    MALE, FEMALE},
+    {MAP_OBJ_GFX_LITTLE_GIRL,    MAP_OBJ_GFX_LITTLE_GIRL,    FACILITY_CLASS_TWINS_2,        FEMALE, FEMALE},
+    {MAP_OBJ_GFX_COOLTRAINER_M,  MAP_OBJ_GFX_COOLTRAINER_F,  FACILITY_CLASS_COOL_COUPLE,    MALE, FEMALE},
+    {MAP_OBJ_GFX_BEAUTY,         MAP_OBJ_GFX_MAN,            FACILITY_CLASS_YOUNG_COUPLE_2, FEMALE, MALE},
+    {MAP_OBJ_GFX_BATTLE_GIRL,    MAP_OBJ_GFX_BLACKBELT,      FACILITY_CLASS_CRUSH_KIN,      FEMALE, MALE},
+    {MAP_OBJ_GFX_SWIMMER_F_LAND, MAP_OBJ_GFX_TUBER_M_2,      FACILITY_CLASS_SIS_AND_BRO_2,  FEMALE, MALE}
 };
 
-const struct UnkStruct_847A024 gUnknown_847A024[] = {
-    {0x1d, 0x17, 0x1f, 0x01, 0x01},
-    {0x11, 0x11, 0x34, 0x01, 0x01},
-    {0x1d, 0x19, 0x4a, 0x01, 0x00},
-    {0x20, 0x23, 0x4b, 0x00, 0x01},
-    {0x26, 0x2e, 0x4c, 0x00, 0x01},
-    {0x11, 0x11, 0x7e, 0x01, 0x01},
-    {0x29, 0x2a, 0x7f, 0x00, 0x01},
-    {0x1d, 0x19, 0x80, 0x01, 0x00},
-    {0x18, 0x36, 0x81, 0x01, 0x00},
-    {0x2e, 0x26, 0x82, 0x01, 0x00}
+static const struct TrainerEncounterMusicPairs sTrainerEncounterMusicLUT[105] = {
+    {FACILITY_CLASS_AROMA_LADY,       TRAINER_ENCOUNTER_MUSIC_AQUA},
+    {FACILITY_CLASS_BOARDER_2,        TRAINER_ENCOUNTER_MUSIC_AQUA},
+    {FACILITY_CLASS_TEAM_AQUA_2,      TRAINER_ENCOUNTER_MUSIC_AQUA},
+    {FACILITY_CLASS_GAMER,            TRAINER_ENCOUNTER_MUSIC_FEMALE},
+    {FACILITY_CLASS_RUIN_MANIAC,      TRAINER_ENCOUNTER_MUSIC_FEMALE},
+    {FACILITY_CLASS_YOUNGSTER,        TRAINER_ENCOUNTER_MUSIC_INTENSE},
+    {FACILITY_CLASS_YOUNG_COUPLE,     TRAINER_ENCOUNTER_MUSIC_FEMALE},
+    {FACILITY_CLASS_FISHERMAN,        TRAINER_ENCOUNTER_MUSIC_FEMALE},
+    {FACILITY_CLASS_TRIATHLETE_4,     TRAINER_ENCOUNTER_MUSIC_MALE},
+    {FACILITY_CLASS_PKMN_RANGER,      TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS},
+    {FACILITY_CLASS_LEADER_2,         TRAINER_ENCOUNTER_MUSIC_TWINS},
+    {FACILITY_CLASS_SIS_AND_BRO,      TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS},
+    {FACILITY_CLASS_MAGMA_LEADER,     TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS},
+    {FACILITY_CLASS_POKEFAN_2,        TRAINER_ENCOUNTER_MUSIC_INTENSE},
+    {FACILITY_CLASS_PKMN_RANGER_2,    TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS},
+    {FACILITY_CLASS_PSYCHIC_3,        TRAINER_ENCOUNTER_MUSIC_FEMALE},
+    {FACILITY_CLASS_PICNICKER_2,      TRAINER_ENCOUNTER_MUSIC_COOL},
+    {FACILITY_CLASS_ELITE_FOUR_3,     TRAINER_ENCOUNTER_MUSIC_COOL},
+    {FACILITY_CLASS_COOLTRAINER_2,    TRAINER_ENCOUNTER_MUSIC_COOL},
+    {FACILITY_CLASS_GUITARIST,        TRAINER_ENCOUNTER_MUSIC_INTENSE},
+    {FACILITY_CLASS_BUG_CATCHER,      TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS},
+    {FACILITY_CLASS_PKMN_TRAINER_4,   TRAINER_ENCOUNTER_MUSIC_MALE},
+    {FACILITY_CLASS_TRIATHLETE_3,     TRAINER_ENCOUNTER_MUSIC_MALE},
+    {FACILITY_CLASS_CAMPER_2,         TRAINER_ENCOUNTER_MUSIC_TWINS},
+    {FACILITY_CLASS_TRIATHLETE_2,     TRAINER_ENCOUNTER_MUSIC_TWINS},
+    {FACILITY_CLASS_TUBER,            TRAINER_ENCOUNTER_MUSIC_INTERVIEWER},
+    {FACILITY_CLASS_BEAUTY_2,         TRAINER_ENCOUNTER_MUSIC_HIKER},
+    {FACILITY_CLASS_INTERVIEWER,      TRAINER_ENCOUNTER_MUSIC_HIKER},
+    {FACILITY_CLASS_YOUNGSTER_2,      TRAINER_ENCOUNTER_MUSIC_RICH},
+    {FACILITY_CLASS_PSYCHIC_2,        TRAINER_ENCOUNTER_MUSIC_RICH},
+    {FACILITY_CLASS_TEAM_MAGMA_2,     TRAINER_ENCOUNTER_MUSIC_SWIMMER},
+    {FACILITY_CLASS_SWIMMER_MALE,     TRAINER_ENCOUNTER_MUSIC_FEMALE},
+    {FACILITY_CLASS_PKMN_TRAINER_7,   TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS},
+    {FACILITY_CLASS_POKEMANIAC,       TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS},
+    {FACILITY_CLASS_SUPER_NERD,       TRAINER_ENCOUNTER_MUSIC_INTENSE},
+    {FACILITY_CLASS_ENGINEER,         TRAINER_ENCOUNTER_MUSIC_INTENSE},
+    {FACILITY_CLASS_MAGMA_ADMIN_2,    TRAINER_ENCOUNTER_MUSIC_INTENSE},
+    {FACILITY_CLASS_BLACK_BELT,       TRAINER_ENCOUNTER_MUSIC_INTENSE},
+    {FACILITY_CLASS_LEADER_5,         TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS},
+    {FACILITY_CLASS_SAILOR,           TRAINER_ENCOUNTER_MUSIC_INTENSE},
+    {FACILITY_CLASS_SAILOR_2,         TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS},
+    {FACILITY_CLASS_BUG_MANIAC,       TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS},
+    {FACILITY_CLASS_PKMN_TRAINER_5,   TRAINER_ENCOUNTER_MUSIC_MALE},
+    {FACILITY_CLASS_CAMPER,           TRAINER_ENCOUNTER_MUSIC_MALE},
+    {FACILITY_CLASS_KINDLER,          TRAINER_ENCOUNTER_MUSIC_HIKER},
+    {FACILITY_CLASS_BATTLE_GIRL,      TRAINER_ENCOUNTER_MUSIC_MAGMA},
+    {FACILITY_CLASS_COLLECTOR,        TRAINER_ENCOUNTER_MUSIC_MAGMA},
+    {FACILITY_CLASS_NINJA_BOY,        TRAINER_ENCOUNTER_MUSIC_MAGMA},
+    {FACILITY_CLASS_PKMN_TRAINER_3,   TRAINER_ENCOUNTER_MUSIC_FEMALE},
+    {FACILITY_CLASS_PARASOL_LADY,     TRAINER_ENCOUNTER_MUSIC_FEMALE},
+    {FACILITY_CLASS_AQUA_ADMIN_2,     TRAINER_ENCOUNTER_MUSIC_HIKER},
+    {FACILITY_CLASS_PKMN_TRAINER_2,   TRAINER_ENCOUNTER_MUSIC_MALE},
+    {FACILITY_CLASS_SWIMMER_FEMALE,   TRAINER_ENCOUNTER_MUSIC_MALE},
+    {FACILITY_CLASS_EXPERT_2,         TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS},
+    {FACILITY_CLASS_RICH_BOY,         TRAINER_ENCOUNTER_MUSIC_RICH},
+    {FACILITY_CLASS_HEX_MANIAC,       TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS},
+    {FACILITY_CLASS_HIKER,            TRAINER_ENCOUNTER_MUSIC_FEMALE},
+    {FACILITY_CLASS_BEAUTY,           TRAINER_ENCOUNTER_MUSIC_FEMALE},
+    {FACILITY_CLASS_SWIMMER_FEMALE_2, TRAINER_ENCOUNTER_MUSIC_FEMALE},
+    {FACILITY_CLASS_LADY,             TRAINER_ENCOUNTER_MUSIC_FEMALE},
+    {FACILITY_CLASS_CHAMPION,         TRAINER_ENCOUNTER_MUSIC_FEMALE},
+    {FACILITY_CLASS_PKMN_TRAINER_6,   TRAINER_ENCOUNTER_MUSIC_GIRL},
+    {FACILITY_CLASS_TRIATHLETE,       TRAINER_ENCOUNTER_MUSIC_GIRL},
+    {FACILITY_CLASS_SWIMMER_MALE_2,   TRAINER_ENCOUNTER_MUSIC_FEMALE},
+    {FACILITY_CLASS_DRAGON_TAMER,     TRAINER_ENCOUNTER_MUSIC_FEMALE},
+    {FACILITY_CLASS_BIKER,            TRAINER_ENCOUNTER_MUSIC_FEMALE},
+    {FACILITY_CLASS_TRIATHLETE_5,     TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS},
+    {FACILITY_CLASS_CUE_BALL,         TRAINER_ENCOUNTER_MUSIC_COOL},
+    {FACILITY_CLASS_BIRD_KEEPER,      TRAINER_ENCOUNTER_MUSIC_COOL},
+    {FACILITY_CLASS_TRIATHLETE_6,     TRAINER_ENCOUNTER_MUSIC_MALE},
+    {FACILITY_CLASS_POKEMANIAC_2,     TRAINER_ENCOUNTER_MUSIC_GIRL},
+    {FACILITY_CLASS_TWINS,            TRAINER_ENCOUNTER_MUSIC_GIRL},
+    {FACILITY_CLASS_LEADER_4,         TRAINER_ENCOUNTER_MUSIC_MALE},
+    {FACILITY_CLASS_BUG_CATCHER_2,    TRAINER_ENCOUNTER_MUSIC_MALE},
+    {FACILITY_CLASS_PKMN_BREEDER,     TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS},
+    {FACILITY_CLASS_LEADER_8,         TRAINER_ENCOUNTER_MUSIC_AQUA},
+    {FACILITY_CLASS_LEADER_6,         TRAINER_ENCOUNTER_MUSIC_AQUA},
+    {FACILITY_CLASS_OLD_COUPLE,       TRAINER_ENCOUNTER_MUSIC_INTENSE},
+    {FACILITY_CLASS_PSYCHIC,          TRAINER_ENCOUNTER_MUSIC_INTENSE},
+    {FACILITY_CLASS_LEADER,           TRAINER_ENCOUNTER_MUSIC_TWINS},
+    {FACILITY_CLASS_ELITE_FOUR_4,     TRAINER_ENCOUNTER_MUSIC_ELITE_FOUR},
+    {FACILITY_CLASS_GENTLEMAN,        TRAINER_ENCOUNTER_MUSIC_FEMALE},
+    {FACILITY_CLASS_LASS,             TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS},
+    {FACILITY_CLASS_BURGLAR,          TRAINER_ENCOUNTER_MUSIC_FEMALE},
+    {FACILITY_CLASS_PKMN_TRAINER,     TRAINER_ENCOUNTER_MUSIC_MALE},
+    {FACILITY_CLASS_SCHOOL_KID,       TRAINER_ENCOUNTER_MUSIC_MALE},
+    {FACILITY_CLASS_LEADER_3,         TRAINER_ENCOUNTER_MUSIC_INTENSE},
+    {FACILITY_CLASS_POKEFAN,          TRAINER_ENCOUNTER_MUSIC_MALE},
+    {FACILITY_CLASS_MAGMA_ADMIN,      TRAINER_ENCOUNTER_MUSIC_COOL},
+    {FACILITY_CLASS_EXPERT,           TRAINER_ENCOUNTER_MUSIC_COOL},
+    {FACILITY_CLASS_TEAM_MAGMA,       TRAINER_ENCOUNTER_MUSIC_HIKER},
+    {FACILITY_CLASS_SR_AND_JR,        TRAINER_ENCOUNTER_MUSIC_HIKER},
+    {FACILITY_CLASS_LASS_2,           TRAINER_ENCOUNTER_MUSIC_MALE},
+    {FACILITY_CLASS_SCHOOL_KID_2,     TRAINER_ENCOUNTER_MUSIC_MALE},
+    {FACILITY_CLASS_COOLTRAINER,      TRAINER_ENCOUNTER_MUSIC_MALE},
+    {FACILITY_CLASS_FISHERMAN_2,      TRAINER_ENCOUNTER_MUSIC_GIRL},
+    {FACILITY_CLASS_TUBER_2,          TRAINER_ENCOUNTER_MUSIC_GIRL},
+    {FACILITY_CLASS_HIKER_2,          TRAINER_ENCOUNTER_MUSIC_SWIMMER},
+    {FACILITY_CLASS_BOARDER,          TRAINER_ENCOUNTER_MUSIC_SWIMMER},
+    {FACILITY_CLASS_PKMN_BREEDER_2,   TRAINER_ENCOUNTER_MUSIC_HIKER},
+    {FACILITY_CLASS_PICNICKER,        TRAINER_ENCOUNTER_MUSIC_HIKER},
+    {FACILITY_CLASS_LEADER_7,         TRAINER_ENCOUNTER_MUSIC_MALE},
+    {FACILITY_CLASS_ELITE_FOUR,       TRAINER_ENCOUNTER_MUSIC_FEMALE},
+    {FACILITY_CLASS_AQUA_ADMIN,       TRAINER_ENCOUNTER_MUSIC_HIKER},
+    {FACILITY_CLASS_ELITE_FOUR_2,     TRAINER_ENCOUNTER_MUSIC_MALE}
 };
 
-const struct UnkStruct_847A074 gUnknown_847A074[105] = {
-    {0x03, 0x06},
-    {0x37, 0x06},
-    {0x02, 0x06},
-    {0x67, 0x01},
-    {0x04, 0x01},
-    {0x24, 0x04},
-    {0x4a, 0x01},
-    {0x26, 0x01},
-    {0x2a, 0x00},
-    {0x42, 0x03},
-    {0x1b, 0x09},
-    {0x4c, 0x03},
-    {0x44, 0x03},
-    {0x21, 0x04},
-    {0x43, 0x03},
-    {0x6a, 0x01},
-    {0x5d, 0x05},
-    {0x56, 0x05},
-    {0x09, 0x05},
-    {0x11, 0x04},
-    {0x48, 0x03},
-    {0x3c, 0x00},
-    {0x29, 0x00},
-    {0x5c, 0x09},
-    {0x28, 0x09},
-    {0x06, 0x0c},
-    {0x68, 0x0b},
-    {0x05, 0x0b},
-    {0x58, 0x0d},
-    {0x16, 0x0d},
-    {0x46, 0x08},
-    {0x0f, 0x01},
-    {0x3f, 0x03},
-    {0x0e, 0x03},
-    {0x5f, 0x04},
-    {0x63, 0x04},
-    {0x50, 0x04},
-    {0x10, 0x04},
-    {0x52, 0x03},
-    {0x35, 0x04},
-    {0x5b, 0x03},
-    {0x14, 0x03},
-    {0x3d, 0x00},
-    {0x13, 0x00},
-    {0x12, 0x0b},
-    {0x30, 0x07},
-    {0x38, 0x07},
-    {0x2f, 0x07},
-    {0x3b, 0x01},
-    {0x31, 0x01},
-    {0x4e, 0x0b},
-    {0x3a, 0x00},
-    {0x32, 0x00},
-    {0x23, 0x03},
-    {0x0d, 0x0d},
-    {0x0a, 0x03},
-    {0x49, 0x01},
-    {0x0c, 0x01},
-    {0x69, 0x01},
-    {0x0b, 0x01},
-    {0x25, 0x01},
-    {0x3e, 0x02},
-    {0x27, 0x02},
-    {0x65, 0x01},
-    {0x2d, 0x01},
-    {0x61, 0x01},
-    {0x2b, 0x03},
-    {0x66, 0x05},
-    {0x2e, 0x05},
-    {0x2c, 0x00},
-    {0x5e, 0x02},
-    {0x34, 0x02},
-    {0x51, 0x00},
-    {0x59, 0x00},
-    {0x40, 0x03},
-    {0x55, 0x06},
-    {0x53, 0x06},
-    {0x4b, 0x04},
-    {0x15, 0x04},
-    {0x1a, 0x09},
-    {0x57, 0x0a},
-    {0x17, 0x01},
-    {0x47, 0x03},
-    {0x62, 0x01},
-    {0x39, 0x00},
-    {0x1d, 0x00},
-    {0x1c, 0x04},
-    {0x20, 0x00},
-    {0x4f, 0x05},
-    {0x22, 0x05},
-    {0x45, 0x0b},
-    {0x1f, 0x0b},
-    {0x5a, 0x00},
-    {0x1e, 0x00},
-    {0x08, 0x00},
-    {0x64, 0x02},
-    {0x07, 0x02},
-    {0x60, 0x08},
-    {0x36, 0x08},
-    {0x41, 0x0b},
-    {0x33, 0x0b},
-    {0x54, 0x00},
-    {0x18, 0x01},
-    {0x4d, 0x0b},
-    {0x19, 0x00}
-};
-
-const struct WindowTemplate gUnknown_847A218[] = {
+static const struct WindowTemplate gUnknown_847A218[] = {
     {0, 3, 1, 27, 18, 15, 0x001},
     DUMMY_WIN_TEMPLATE
 };
 
-const u32 gUnknown_847A228 = 0x70;  // unused
+static const u32 gUnknown_847A228 = 0x70;  // unused
 
-const u8 gUnknown_847A22C[3] = {0, 2, 3};
+static const u8 gUnknown_847A22C[3] = {0, 2, 3};
 
-void (*const gUnknown_847A230[])(void) = {
+static void (*const gUnknown_847A230[])(void) = {
     sub_815DD44,
     sub_815DF54,
     sub_815E160,
     sub_815E1C0,
     sub_815E1F0,
-    sub_815E218,
+    TTSpecial_HasReachedTheRoof,
     sub_815E28C,
     sub_815E394,
     sub_815E408,
     sub_815E4B0,
-    sub_815E56C,
+    TTSpecial_StartTimer,
     sub_815E5C4,
     sub_815E5F0,
     sub_815E658,
@@ -449,18 +352,18 @@ void (*const gUnknown_847A230[])(void) = {
     sub_815E9C8
 };
 
-const u16 gUnknown_847A284[8][3] = {
-    {0x012a, 0x016e, 0x0176},
-    {0x012b, 0x016f, 0x0177},
-    {0x012c, 0x0170, 0x0178},
-    {0x012d, 0x0171, 0x0179},
-    {0x012e, 0x0172, 0x017a},
-    {0x012f, 0x0173, 0x017b},
-    {0x0130, 0x0174, 0x017c},
-    {0x0131, 0x0175, 0x017d}
+static const u16 sFloorLayouts[8][3] = {
+    {LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_1F, LAYOUT_UNUSED_LAYOUT_834BC2C, LAYOUT_UNUSED_LAYOUT_834D06C},
+    {LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_2F, LAYOUT_UNUSED_LAYOUT_834BEB4, LAYOUT_UNUSED_LAYOUT_834D2F4},
+    {LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_3F, LAYOUT_UNUSED_LAYOUT_834C13C, LAYOUT_UNUSED_LAYOUT_834D57C},
+    {LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_4F, LAYOUT_UNUSED_LAYOUT_834C3C4, LAYOUT_UNUSED_LAYOUT_834D804},
+    {LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_5F, LAYOUT_UNUSED_LAYOUT_834C64C, LAYOUT_UNUSED_LAYOUT_834DA8C},
+    {LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_6F, LAYOUT_UNUSED_LAYOUT_834C8D4, LAYOUT_UNUSED_LAYOUT_834DD14},
+    {LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_7F, LAYOUT_UNUSED_LAYOUT_834CB5C, LAYOUT_UNUSED_LAYOUT_834DF9C},
+    {LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_8F, LAYOUT_UNUSED_LAYOUT_834CDE4, LAYOUT_UNUSED_LAYOUT_834E224}
 };
 
-const u16 gUnknown_847A2B4[] = {
+static const u16 gUnknown_847A2B4[] = {
     ITEM_HP_UP,
     ITEM_PROTEIN,
     ITEM_IRON,
@@ -478,24 +381,24 @@ const u16 gUnknown_847A2B4[] = {
     ITEM_UP_GRADE
 };
 
-const u16 gUnknown_847A2D2[] = {
-    0x011d,
-    0x011c,
-    0x011c,
-    0x011b,
-    0x011d,
-    0x011d,
-    0x011b,
-    0x011b,
-    0x011d,
-    0x011c,
-    0x011d,
-    0x011d,
-    0x011d,
-    0x011d
+static const u16 gUnknown_847A2D2[] = {
+    MUS_SHOUNEN,
+    MUS_SHOUJO,
+    MUS_SHOUJO,
+    MUS_ROCKET,
+    MUS_SHOUNEN,
+    MUS_SHOUNEN,
+    MUS_ROCKET,
+    MUS_ROCKET,
+    MUS_SHOUNEN,
+    MUS_SHOUJO,
+    MUS_SHOUNEN,
+    MUS_SHOUNEN,
+    MUS_SHOUNEN,
+    MUS_SHOUNEN
 };
 
-const u8 gUnknown_847A2EE[][2] = {
+static const u8 sSingleBattleChallengeMonIdxs[][2] = {
     {0x00, 0x02},
     {0x01, 0x03},
     {0x02, 0x04},
@@ -506,7 +409,7 @@ const u8 gUnknown_847A2EE[][2] = {
     {0x01, 0x04}
 };
 
-const u8 gUnknown_847A2FE[][2] = {
+static const u8 sDoubleBattleChallengeMonIdxs[][2] = {
     {0x00, 0x01},
     {0x01, 0x03},
     {0x02, 0x00},
@@ -517,7 +420,7 @@ const u8 gUnknown_847A2FE[][2] = {
     {0x01, 0x05}
 };
 
-const u8 gUnknown_847A30E[][3] = {
+static const u8 sKnockoutChallengeMonIdxs[][3] = {
     {0x00, 0x02, 0x04},
     {0x01, 0x03, 0x05},
     {0x02, 0x03, 0x01},
@@ -529,85 +432,7 @@ const u8 gUnknown_847A30E[][3] = {
 };
 
 extern const struct Unk_203F458_Header gUnknown_84827AC;
-extern const struct TrainerTowerTrainer *const gUnknown_84827B4[][8];
-
-bool32 sub_815D834(void)
-{
-    // Stubbed out?
-    return FALSE;
-}
-
-void sub_815D838(void)
-{
-    u8 i, j;
-
-    for (i = 0; i < 15; i++)
-    {
-        const u8 * flags1 = gUnknown_8479D34[i].flags1;
-        const u8 * flags2 = gUnknown_8479D34[i].flags2;
-        const u8 * flags3 = gUnknown_8479D34[i].flags3;
-        for (j = 0; j < 8; j++)
-        {
-            if (flags1[j] != 0xFF)
-                FlagSet(FLAG_TRAINER_TOWER_START + flags1[j]);
-            if (flags2[j] != 0xFF)
-                FlagSet(FLAG_TRAINER_TOWER_START + flags2[j]);
-            if (flags3[j] != 0xFF)
-                FlagSet(FLAG_TRAINER_TOWER_START + flags3[j]);
-        }
-    }
-}
-
-void sub_815D8C8(void)
-{
-    u16 var = VarGet(VAR_0x4023);
-    if (var < 1500) {
-        VarSet(VAR_0x4023, var + 1);
-    }
-}
-
-void sub_815D8F8(void)
-{
-    u8 i;
-    u8 found_map = 0xFF;
-    for (i = 0; i < 15; i++)
-    {
-        if (gUnknown_8479D34[i].mapGroup == gSaveBlock1Ptr->location.mapGroup && gUnknown_8479D34[i].mapNum == gSaveBlock1Ptr->location.mapNum)
-            found_map = i;
-    }
-
-    if (found_map == 0xFF)
-        return;
-    if (VarGet(VAR_0x4023) >= 1500)
-    {
-        VarSet(VAR_0x4023, 0);
-        sub_815D838();
-        sub_815D96C();
-    }
-}
-
-void sub_815D96C(void)
-{
-    u8 i, j;
-    const u8 * flags;
-    u16 rval;
-
-    for (i = 0; i < 15; i++)
-    {
-        rval = Random() % 100;
-        if (rval >= 90)
-            flags = gUnknown_8479D34[i].flags1;
-        else if (rval >= 60)
-            flags = gUnknown_8479D34[i].flags2;
-        else
-            flags = gUnknown_8479D34[i].flags3;
-        for (j = 0; j < 8; j++)
-        {
-            if (flags[j] != 0xFF)
-                FlagClear(FLAG_TRAINER_TOWER_START + flags[j]);
-        }
-    }
-}
+extern const struct TrainerTowerFloor *const gUnknown_84827B4[][8];
 
 void sub_815D9E8(void)
 {
@@ -618,17 +443,17 @@ void sub_815D9E8(void)
 
 u8 sub_815DA10(void)
 {
-    return gFacilityClassToTrainerClass[gUnknown_203F45C->unk_3D];
+    return gFacilityClassToTrainerClass[sTrainerTowerOpponent->facilityClass];
 }
 
-void sub_815DA28(u8 * dest)
+void sub_815DA28(u8 *dest)
 {
-    StringCopyN(dest, gUnknown_203F45C->unk_00, 11);
+    StringCopyN(dest, sTrainerTowerOpponent->name, 11);
 }
 
 u8 GetTrainerTowerTrainerFrontSpriteId(void)
 {
-    return gFacilityClassToPicIndex[gUnknown_203F45C->unk_3D];
+    return gFacilityClassToPicIndex[sTrainerTowerOpponent->facilityClass];
 }
 
 void InitTrainerTowerBattleStruct(void)
@@ -637,91 +462,91 @@ void InitTrainerTowerBattleStruct(void)
     s32 r9;
 
     sub_815DC8C();
-    gUnknown_203F45C = AllocZeroed(sizeof(*gUnknown_203F45C));
+    sTrainerTowerOpponent = AllocZeroed(sizeof(*sTrainerTowerOpponent));
     r10 = VarGet(VAR_0x4001);
-    StringCopyN(gUnknown_203F45C->unk_00, gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r10].unk_000, 11);
+    StringCopyN(sTrainerTowerOpponent->name, sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[r10].name, 11);
 
     for (r9 = 0; r9 < 6; r9++)
     {
-        gUnknown_203F45C->unk_0C[r9] = gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r10].unk_01A[r9];
-        gUnknown_203F45C->unk_18[r9] = gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r10].unk_026[r9];
+        sTrainerTowerOpponent->speechWin[r9] = sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[r10].speechWin[r9];
+        sTrainerTowerOpponent->speechLose[r9] = sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[r10].speechLose[r9];
 
-        if (gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_002 == 1)
+        if (sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].challengeType == 1)
         {
-            gUnknown_203F45C->unk_24[r9] = gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r10 + 1].unk_01A[r9];
-            gUnknown_203F45C->unk_30[r9] = gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r10 + 1].unk_026[r9];
+            sTrainerTowerOpponent->speechWin2[r9] = sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[r10 + 1].speechWin[r9];
+            sTrainerTowerOpponent->speechLose2[r9] = sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[r10 + 1].speechLose[r9];
         }
     }
 
-    gUnknown_203F45C->unk_3C = gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_002;
-    gUnknown_203F45C->unk_3D = gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r10].unk_00B;
-    gUnknown_203F45C->unk_3E = gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r10].unk_00C;
+    sTrainerTowerOpponent->battleType = sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].challengeType;
+    sTrainerTowerOpponent->facilityClass = sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[r10].facilityClass;
+    sTrainerTowerOpponent->gender = sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[r10].gender;
     SetVBlankCounter1Ptr(&gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk0);
     sub_815DD2C();
 }
 
 void FreeTrainerTowerBattleStruct(void)
 {
-    Free(gUnknown_203F45C);
-    gUnknown_203F45C = NULL;
+    Free(sTrainerTowerOpponent);
+    sTrainerTowerOpponent = NULL;
 }
 
-void sub_815DBF4(u8 * dest, u8 opponentIdx)
+void sub_815DBF4(u8 *dest, u8 opponentIdx)
 // TTower_GetBeforeBattleMessage?
 {
     VarSet(VAR_0x4003, opponentIdx);
-    sub_815E068(gUnknown_203F45C->unk_3C, gUnknown_203F45C->unk_3D);
+    TrainerTowerGetOpponentTextColor(sTrainerTowerOpponent->battleType, sTrainerTowerOpponent->facilityClass);
     if (opponentIdx == 0)
-        sub_815DEFC(gUnknown_203F45C->unk_0C, dest);
+        TT_ConvertEasyChatMessageToString(sTrainerTowerOpponent->speechWin, dest);
     else
-        sub_815DEFC(gUnknown_203F45C->unk_24, dest);
+        TT_ConvertEasyChatMessageToString(sTrainerTowerOpponent->speechWin2, dest);
 }
 
-void sub_815DC40(u8 * dest, u8 opponentIdx)
+void sub_815DC40(u8 *dest, u8 opponentIdx)
 // TTower_GetAfterBattleMessage?
 {
     VarSet(VAR_0x4003, opponentIdx);
-    sub_815E068(gUnknown_203F45C->unk_3C, gUnknown_203F45C->unk_3D);
+    TrainerTowerGetOpponentTextColor(sTrainerTowerOpponent->battleType, sTrainerTowerOpponent->facilityClass);
     if (opponentIdx == 0)
-        sub_815DEFC(gUnknown_203F45C->unk_18, dest);
+        TT_ConvertEasyChatMessageToString(sTrainerTowerOpponent->speechLose, dest);
     else
-        sub_815DEFC(gUnknown_203F45C->unk_30, dest);
+        TT_ConvertEasyChatMessageToString(sTrainerTowerOpponent->speechLose2, dest);
 }
 
 #ifdef NONMATCHING
-void sub_815DC8C(void) // fakematching
+static void sub_815DC8C(void) // fakematching
 {
     u32 whichTimer = gSaveBlock1Ptr->unkArrayIdx;
     s32 r4;
-    const struct TrainerTowerTrainer *const * r7;
+    const struct TrainerTowerFloor *const * r7;
 
-    gUnknown_203F458 = AllocZeroed(sizeof(*gUnknown_203F458));
-    gUnknown_203F458->unk_0000 = gMapHeader.mapDataId - 0x2A;
+    sTrainerTowerState = AllocZeroed(sizeof(*sTrainerTowerState));
+    sTrainerTowerState->floorIdx = gMapHeader.mapDataId - 42;
     if (sub_815D834() == TRUE)
-        CEReaderTool_LoadTrainerTower(&gUnknown_203F458->unk_0004);
+        CEReaderTool_LoadTrainerTower(&sTrainerTowerState->unk_0004);
     else
     {
-        struct UnkStruct_203F458 * r0_ = gUnknown_203F458;
+        struct UnkStruct_203F458 * r0_ = sTrainerTowerState;
         const struct Unk_203F458_Header * r1 = &gUnknown_84827AC;
 //        *r0_ = *r1;
-        memcpy(&r0_->unk_0004.unk_0000, r1, sizeof(struct Unk_203F458_Header));
-//        gUnknown_203F458->unk_0004.unk_0000 = gUnknown_84827AC;
+        memcpy(&r0_->unk_0004.floorIdx, r1, sizeof(struct Unk_203F458_Header));
+//        sTrainerTowerState->unk_0004.floorIdx = gUnknown_84827AC;
         r7 = gUnknown_84827B4[whichTimer];
         for (r4 = 0; r4 < 8; r4++)
         {
-            void * r0 = gUnknown_203F458;
-            r0 = r4 * sizeof(struct TrainerTowerTrainer) + r0;
-            r0 += offsetof(struct UnkStruct_203F458, unk_0004.trainers);
-            memcpy(r0, r7[r4], sizeof(struct TrainerTowerTrainer));
+            void * r0 = sTrainerTowerState;
+            r0 = r4 * sizeof(struct TrainerTowerFloor) + r0;
+            r0 += offsetof(struct UnkStruct_203F458, unk_0004.floors);
+            memcpy(r0, r7[r4], sizeof(struct TrainerTowerFloor));
 //            r0[r4] = *r7[r4];
         }
-        gUnknown_203F458->unk_0004.unk4 = CalcByteArraySum((void *)gUnknown_203F458->unk_0004.trainers, sizeof(gUnknown_203F458->unk_0004.trainers));
-        sub_815EC0C();
+        sTrainerTowerState->unk_0004.unk4 = CalcByteArraySum((void *)sTrainerTowerState->unk_0004.floors, sizeof(sTrainerTowerState->unk_0004.floors));
+        ValidateOrResetCurTrainerTowerRecord();
     }
 }
 #else
 NAKED
-void sub_815DC8C(void)
+static void sub_815DC8C(void)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                 "\tldr r0, _0815DCBC @ =gSaveBlock1Ptr\n"
@@ -729,7 +554,7 @@ void sub_815DC8C(void)
                 "\tldr r1, _0815DCC0 @ =0x00003d34\n"
                 "\tadds r0, r1\n"
                 "\tldr r5, [r0]\n"
-                "\tldr r4, _0815DCC4 @ =gUnknown_203F458\n"
+                "\tldr r4, _0815DCC4 @ =sTrainerTowerState\n"
                 "\tldr r0, _0815DCC8 @ =0x00001f0c\n"
                 "\tbl AllocZeroed\n"
                 "\tstr r0, [r4]\n"
@@ -747,7 +572,7 @@ void sub_815DC8C(void)
                 "\t.align 2, 0\n"
                 "_0815DCBC: .4byte gSaveBlock1Ptr\n"
                 "_0815DCC0: .4byte 0x00003d34\n"
-                "_0815DCC4: .4byte gUnknown_203F458\n"
+                "_0815DCC4: .4byte sTrainerTowerState\n"
                 "_0815DCC8: .4byte 0x00001f0c\n"
                 "_0815DCCC: .4byte gMapHeader\n"
                 "_0815DCD0:\n"
@@ -762,7 +587,7 @@ void sub_815DC8C(void)
                 "\tmovs r5, 0\n"
                 "\tmovs r4, 0x7\n"
                 "_0815DCE6:\n"
-                "\tldr r6, _0815DD28 @ =gUnknown_203F458\n"
+                "\tldr r6, _0815DD28 @ =sTrainerTowerState\n"
                 "\tldr r0, [r6]\n"
                 "\tadds r0, r5, r0\n"
                 "\tadds r0, 0xC\n"
@@ -783,7 +608,7 @@ void sub_815DC8C(void)
                 "\tbl CalcByteArraySum\n"
                 "\tldr r1, [r6]\n"
                 "\tstr r0, [r1, 0x8]\n"
-                "\tbl sub_815EC0C\n"
+                "\tbl ValidateOrResetCurTrainerTowerRecord\n"
                 "_0815DD18:\n"
                 "\tpop {r4-r7}\n"
                 "\tpop {r0}\n"
@@ -791,100 +616,100 @@ void sub_815DC8C(void)
                 "\t.align 2, 0\n"
                 "_0815DD20: .4byte gUnknown_84827AC\n"
                 "_0815DD24: .4byte gUnknown_84827B4\n"
-                "_0815DD28: .4byte gUnknown_203F458");
+                "_0815DD28: .4byte sTrainerTowerState");
 }
 #endif // NONMATCHING
 
-void sub_815DD2C(void)
+static void sub_815DD2C(void)
 {
-    Free(gUnknown_203F458);
-    gUnknown_203F458 = NULL;
+    Free(sTrainerTowerState);
+    sTrainerTowerState = NULL;
 }
 
-void sub_815DD44(void)
+static void sub_815DD44(void)
 {
-    if (gMapHeader.mapDataId - 0x129 > gUnknown_203F458->unk_0004.count)
+    if (gMapHeader.mapDataId - LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_LOBBY > sTrainerTowerState->unk_0004.count)
     {
         gSpecialVar_Result = 3;
-        SetCurrentMapLayout(0x132);
+        SetCurrentMapLayout(LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_ROOF);
     }
     else
     {
-        gSpecialVar_Result = gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_002;
-        SetCurrentMapLayout(gUnknown_847A284[gUnknown_203F458->unk_0000][gSpecialVar_Result]);
-        sub_815DDB0();
+        gSpecialVar_Result = sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].challengeType;
+        SetCurrentMapLayout(sFloorLayouts[sTrainerTowerState->floorIdx][gSpecialVar_Result]);
+        SetTrainerTowerNPCGraphics();
     }
 }
 
-void sub_815DDB0(void)
+static void SetTrainerTowerNPCGraphics(void)
 {
     s32 r3, r4;
     u8 r1, r2, r4_;
-    switch (gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_002)
+    switch (sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].challengeType)
     {
-        case 0:
-            r2 = gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[0].unk_00B;
-            for (r3 = 0; r3 < NELEMS(gUnknown_8479ED8); r3++)
+    case 0:
+        r2 = sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[0].facilityClass;
+        for (r3 = 0; r3 < NELEMS(sSingleBattleTrainerInfo); r3++)
+        {
+            if (sSingleBattleTrainerInfo[r3].facilityClass == r2)
+                break;
+        }
+        if (r3 != NELEMS(sSingleBattleTrainerInfo))
+            r1 = sSingleBattleTrainerInfo[r3].mapObjGfx;
+        else
+            r1 = 18;
+        VarSet(VAR_OBJ_GFX_ID_1, r1);
+        break;
+    case 1:
+        r2 = sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[0].facilityClass;
+        for (r3 = 0; r3 < NELEMS(sDoubleBattleTrainerInfo); r3++)
+        {
+            if (sDoubleBattleTrainerInfo[r3].facilityClass == r2)
+                break;
+        }
+        if (r3 != NELEMS(sDoubleBattleTrainerInfo))
+        {
+            r1  = sDoubleBattleTrainerInfo[r3].mapObjGfx1;
+            r4_ = sDoubleBattleTrainerInfo[r3].mapObjGfx2;
+        }
+        else
+        {
+            r1  = MAP_OBJ_GFX_YOUNGSTER;
+            r4_ = MAP_OBJ_GFX_YOUNGSTER;
+        }
+        VarSet(VAR_OBJ_GFX_ID_0, r1);
+        VarSet(VAR_OBJ_GFX_ID_3, r4_);
+        break;
+    case 2:
+        for (r4 = 0; r4 < 3; r4++)
+        {
+            r2 = sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[r4].facilityClass;
+            for (r3 = 0; r3 < NELEMS(sSingleBattleTrainerInfo); r3++)
             {
-                if (gUnknown_8479ED8[r3].unk1 == r2)
+                if (sSingleBattleTrainerInfo[r3].facilityClass == r2)
                     break;
             }
-            if (r3 != NELEMS(gUnknown_8479ED8))
-                r1 = gUnknown_8479ED8[r3].unk0;
+            if (r3 != NELEMS(sSingleBattleTrainerInfo))
+                r1 = sSingleBattleTrainerInfo[r3].mapObjGfx;
             else
-                r1 = 18;
-            VarSet(VAR_0x4011, r1);
-            break;
-        case 1:
-            r2 = gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[0].unk_00B;
-            for (r3 = 0; r3 < NELEMS(gUnknown_847A024); r3++)
+                r1 = MAP_OBJ_GFX_YOUNGSTER;
+            switch (r4)
             {
-                if (gUnknown_847A024[r3].unk2 == r2)
-                    break;
+            case 0:
+                VarSet(VAR_OBJ_GFX_ID_2, r1);
+                break;
+            case 1:
+                VarSet(VAR_OBJ_GFX_ID_0, r1);
+                break;
+            case 2:
+                VarSet(VAR_OBJ_GFX_ID_1, r1);
+                break;
             }
-            if (r3 != NELEMS(gUnknown_847A024))
-            {
-                r1  = gUnknown_847A024[r3].unk0;
-                r4_ = gUnknown_847A024[r3].unk1;
-            }
-            else
-            {
-                r1  = 18;
-                r4_ = 18;
-            }
-            VarSet(VAR_0x4010, r1);
-            VarSet(VAR_0x4013, r4_);
-            break;
-        case 2:
-            for (r4 = 0; r4 < 3; r4++)
-            {
-                r2 = gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r4].unk_00B;
-                for (r3 = 0; r3 < NELEMS(gUnknown_8479ED8); r3++)
-                {
-                    if (gUnknown_8479ED8[r3].unk1 == r2)
-                        break;
-                }
-                if (r3 != NELEMS(gUnknown_8479ED8))
-                    r1 = gUnknown_8479ED8[r3].unk0;
-                else
-                    r1 = 18;
-                switch (r4)
-                {
-                    case 0:
-                        VarSet(VAR_0x4012, r1);
-                        break;
-                    case 1:
-                        VarSet(VAR_0x4010, r1);
-                        break;
-                    case 2:
-                        VarSet(VAR_0x4011, r1);
-                        break;
-                }
-            }
+        }
     }
 }
 
-void sub_815DEFC(u16 * ecWords, u8 * dest)
+static void TT_ConvertEasyChatMessageToString(u16 *ecWords, u8 *dest)
 {
     s32 r1;
     ConvertEasyChatWordsToString(dest, ecWords, 3, 2);
@@ -901,40 +726,40 @@ void sub_815DEFC(u16 * ecWords, u8 * dest)
 }
 
 #ifdef NONMATCHING
-void sub_815DF54(void)
+static void sub_815DF54(void)
 {
     u16 r4 = gSpecialVar_0x8006;
     u8 r1;
-    u8 r5 = gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_002;
+    u8 r5 = sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].challengeType;
     // HOW DO I MATCH THIS CONTROL FLOW?!?!
-    r1 = gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r5 == 1 ? 0 : r4].unk_00B;
+    r1 = sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[r5 == 1 ? 0 : r4].facilityClass;
     switch (gSpecialVar_0x8005)
     {
-        case 2:
-            sub_815E068(r5, r1);
-            sub_815DEFC(gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r4].unk_00E, gStringVar4);
-            break;
-        case 3:
-            sub_815E068(r5, r1);
-            sub_815DEFC(gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r4].unk_01A, gStringVar4);
-            break;
-        case 4:
-            sub_815E068(r5, r1);
-            sub_815DEFC(gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r4].unk_026, gStringVar4);
-            break;
-        case 5:
-            sub_815DEFC(gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r4].unk_032, gStringVar4);
-            break;
+    case 2:
+        TrainerTowerGetOpponentTextColor(r5, r1);
+        TT_ConvertEasyChatMessageToString(sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[r4].speechBefore, gStringVar4);
+        break;
+    case 3:
+        TrainerTowerGetOpponentTextColor(r5, r1);
+        TT_ConvertEasyChatMessageToString(sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[r4].speechWin, gStringVar4);
+        break;
+    case 4:
+        TrainerTowerGetOpponentTextColor(r5, r1);
+        TT_ConvertEasyChatMessageToString(sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[r4].speechLose, gStringVar4);
+        break;
+    case 5:
+        TT_ConvertEasyChatMessageToString(sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[r4].speechAfter, gStringVar4);
+        break;
     }
 }
 #else
 NAKED
-void sub_815DF54(void)
+static void sub_815DF54(void)
 {
     asm_unified("\tpush {r4,r5,lr}\n"
                 "\tldr r0, _0815DF90 @ =gSpecialVar_0x8006\n"
                 "\tldrh r4, [r0]\n"
-                "\tldr r2, _0815DF94 @ =gUnknown_203F458\n"
+                "\tldr r2, _0815DF94 @ =sTrainerTowerState\n"
                 "\tldr r3, [r2]\n"
                 "\tldrb r1, [r3]\n"
                 "\tlsls r0, r1, 5\n"
@@ -964,7 +789,7 @@ void sub_815DF54(void)
                 "\tb _0815E05C\n"
                 "\t.align 2, 0\n"
                 "_0815DF90: .4byte gSpecialVar_0x8006\n"
-                "_0815DF94: .4byte gUnknown_203F458\n"
+                "_0815DF94: .4byte sTrainerTowerState\n"
                 "_0815DF98: .4byte gSpecialVar_0x8005\n"
                 "_0815DF9C:\n"
                 "\tcmp r0, 0x4\n"
@@ -974,8 +799,8 @@ void sub_815DF54(void)
                 "\tb _0815E05C\n"
                 "_0815DFA6:\n"
                 "\tadds r0, r5, 0\n"
-                "\tbl sub_815E068\n"
-                "\tldr r0, _0815DFD0 @ =gUnknown_203F458\n"
+                "\tbl TrainerTowerGetOpponentTextColor\n"
+                "\tldr r0, _0815DFD0 @ =sTrainerTowerState\n"
                 "\tldr r0, [r0]\n"
                 "\tldrb r2, [r0]\n"
                 "\tlsls r1, r2, 5\n"
@@ -993,11 +818,11 @@ void sub_815DF54(void)
                 "\tadds r0, 0xE\n"
                 "\tb _0815E026\n"
                 "\t.align 2, 0\n"
-                "_0815DFD0: .4byte gUnknown_203F458\n"
+                "_0815DFD0: .4byte sTrainerTowerState\n"
                 "_0815DFD4:\n"
                 "\tadds r0, r5, 0\n"
-                "\tbl sub_815E068\n"
-                "\tldr r0, _0815DFFC @ =gUnknown_203F458\n"
+                "\tbl TrainerTowerGetOpponentTextColor\n"
+                "\tldr r0, _0815DFFC @ =sTrainerTowerState\n"
                 "\tldr r0, [r0]\n"
                 "\tldrb r2, [r0]\n"
                 "\tlsls r1, r2, 5\n"
@@ -1015,11 +840,11 @@ void sub_815DF54(void)
                 "\tadds r0, 0x1A\n"
                 "\tb _0815E026\n"
                 "\t.align 2, 0\n"
-                "_0815DFFC: .4byte gUnknown_203F458\n"
+                "_0815DFFC: .4byte sTrainerTowerState\n"
                 "_0815E000:\n"
                 "\tadds r0, r5, 0\n"
-                "\tbl sub_815E068\n"
-                "\tldr r0, _0815E030 @ =gUnknown_203F458\n"
+                "\tbl TrainerTowerGetOpponentTextColor\n"
+                "\tldr r0, _0815E030 @ =sTrainerTowerState\n"
                 "\tldr r0, [r0]\n"
                 "\tldrb r2, [r0]\n"
                 "\tlsls r1, r2, 5\n"
@@ -1037,10 +862,10 @@ void sub_815DF54(void)
                 "\tadds r0, 0x26\n"
                 "_0815E026:\n"
                 "\tldr r1, _0815E034 @ =gStringVar4\n"
-                "\tbl sub_815DEFC\n"
+                "\tbl TT_ConvertEasyChatMessageToString\n"
                 "\tb _0815E05C\n"
                 "\t.align 2, 0\n"
-                "_0815E030: .4byte gUnknown_203F458\n"
+                "_0815E030: .4byte sTrainerTowerState\n"
                 "_0815E034: .4byte gStringVar4\n"
                 "_0815E038:\n"
                 "\tldr r0, [r2]\n"
@@ -1059,7 +884,7 @@ void sub_815DF54(void)
                 "\tadds r0, r1\n"
                 "\tadds r0, 0x32\n"
                 "\tldr r1, _0815E064 @ =gStringVar4\n"
-                "\tbl sub_815DEFC\n"
+                "\tbl TT_ConvertEasyChatMessageToString\n"
                 "_0815E05C:\n"
                 "\tpop {r4,r5}\n"
                 "\tpop {r0}\n"
@@ -1069,95 +894,95 @@ void sub_815DF54(void)
 }
 #endif // NONMATCHING
 
-void sub_815E068(u8 battleType, u8 facilityClass)
+static void TrainerTowerGetOpponentTextColor(u8 battleType, u8 facilityClass)
 {
     u16 r5 = FALSE;
     s32 r4;
     switch (battleType)
     {
-        case 0:
-        case 2:
-            for (r4 = 0; r4 < NELEMS(gUnknown_8479ED8); r4++)
-            {
-                if (gUnknown_8479ED8[r4].unk1 == facilityClass)
-                    break;
-            }
-            if (r4 != NELEMS(gUnknown_8479ED8))
-                r5 = gUnknown_8479ED8[r4].unk2;
-            break;
-        case 1:
-            for (r4 = 0; r4 < NELEMS(gUnknown_847A024); r4++)
-            {
-                if (gUnknown_847A024[r4].unk2 == facilityClass)
-                    break;
-            }
-            if (r4 != NELEMS(gUnknown_847A024))
-            {
-                if (VarGet(VAR_0x4003))
-                    r5 = gUnknown_847A024[r4].unk4;
-                else
-                    r5 = gUnknown_847A024[r4].unk3;
-            }
-            break;
+    case 0:
+    case 2:
+        for (r4 = 0; r4 < NELEMS(sSingleBattleTrainerInfo); r4++)
+        {
+            if (sSingleBattleTrainerInfo[r4].facilityClass == facilityClass)
+                break;
+        }
+        if (r4 != NELEMS(sSingleBattleTrainerInfo))
+            r5 = sSingleBattleTrainerInfo[r4].gender;
+        break;
+    case 1:
+        for (r4 = 0; r4 < NELEMS(sDoubleBattleTrainerInfo); r4++)
+        {
+            if (sDoubleBattleTrainerInfo[r4].facilityClass == facilityClass)
+                break;
+        }
+        if (r4 != NELEMS(sDoubleBattleTrainerInfo))
+        {
+            if (VarGet(VAR_0x4003))
+                r5 = sDoubleBattleTrainerInfo[r4].gender2;
+            else
+                r5 = sDoubleBattleTrainerInfo[r4].gender1;
+        }
+        break;
     }
-    gUnknown_20370DC = gUnknown_20370DA;
-    gUnknown_20370DA = r5;
+    gSpecialVar_PrevTextColor = gSpecialVar_TextColor;
+    gSpecialVar_TextColor = r5;
 }
 
-void sub_815E114(void)
+static void sub_815E114(void)
 {
     SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
-void sub_815E124(u8 taskId)
+static void sub_815E124(u8 taskId)
 {
     if (BT_IsDone() == TRUE)
     {
         gMain.savedCallback = sub_815E114;
         CleanupOverworldWindowsAndTilemaps();
-        SetMainCallback2(sub_800FD9C);
+        SetMainCallback2(CB2_InitBattle);
         DestroyTask(taskId);
     }
 }
 
-void sub_815E160(void)
+static void sub_815E160(void)
 {
     gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_TRAINER_TOWER;
-    if (gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_002 == 1)
+    if (sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].challengeType == 1)
         gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
     gTrainerBattleOpponent_A = 0;
-    sub_815E9FC();
+    BuildEnemyParty();
     CreateTask(sub_815E124, 1);
     PlayMapChosenOrBattleBGM(0);
     BT_StartOnField(sub_8080060());
 }
 
-void sub_815E1C0(void)
+static void sub_815E1C0(void)
 {
     if (!gSpecialVar_0x8005)
-        gSpecialVar_Result = gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_002;
+        gSpecialVar_Result = sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].challengeType;
 }
 
-void sub_815E1F0(void)
+static void sub_815E1F0(void)
 {
     gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk8++;
 }
 
-void sub_815E218(void)
+static void TTSpecial_HasReachedTheRoof(void)
 {
     u16 mapDataId = gMapHeader.mapDataId;
-    if (mapDataId - 0x12A == gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk8 && mapDataId - 0x129 <= gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_001)
+    if (mapDataId - LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_1F == gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk8 && mapDataId - LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_LOBBY <= sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].floorIdx)
         gSpecialVar_Result = FALSE;
     else
         gSpecialVar_Result = TRUE;
 }
 
-void sub_815E28C(void)
+static void sub_815E28C(void)
 {
     gSaveBlock1Ptr->unkArrayIdx = gSpecialVar_0x8005;
     if (gSaveBlock1Ptr->unkArrayIdx >= NELEMS(gSaveBlock1Ptr->unkArray))
         gSaveBlock1Ptr->unkArrayIdx = 0;
-    sub_815EC0C();
+    ValidateOrResetCurTrainerTowerRecord();
     if (!sub_815D834())
         gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_5 = TRUE;
     else
@@ -1169,7 +994,7 @@ void sub_815E28C(void)
     gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_1 = FALSE;
 }
 
-void sub_815E394(void)
+static void sub_815E394(void)
 {
     DisableVBlankCounter1();
     gSpecialVar_Result = 0;
@@ -1180,9 +1005,9 @@ void sub_815E394(void)
     gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_2 = TRUE;
 }
 
-void sub_815E408(void)
+static void sub_815E408(void)
 {
-    u16 itemId = gUnknown_847A2B4[gUnknown_203F458->unk_0004.trainers->unk_003];
+    u16 itemId = gUnknown_847A2B4[sTrainerTowerState->unk_0004.floors->prize];
     if (gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_0)
         gSpecialVar_Result = 2;
     else if (AddBagItem(itemId, 1) == 1)
@@ -1195,13 +1020,13 @@ void sub_815E408(void)
         gSpecialVar_Result = 1;
 }
 
-void sub_815E4B0(void)
+static void sub_815E4B0(void)
 {
     if (gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_1)
         gSpecialVar_Result = 2;
-    else if (sub_815EDDC(&gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk4) > gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk0)
+    else if (GetTrainerTowerRecordTime(&gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk4) > gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk0)
     {
-        sub_815EDF4(&gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk4, gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk0);
+        SetTrainerTowerRecordTime(&gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk4, gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk0);
         gSpecialVar_Result = 0;
     }
     else
@@ -1209,7 +1034,7 @@ void sub_815E4B0(void)
     gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_1 = TRUE;
 }
 
-void sub_815E56C(void)
+static void TTSpecial_StartTimer(void)
 {
     if (!gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_2)
     {
@@ -1220,12 +1045,12 @@ void sub_815E56C(void)
     }
 }
 
-void sub_815E5C4(void)
+static void sub_815E5C4(void)
 {
     gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_3 = 1;
 }
 
-void sub_815E5F0(void)
+static void sub_815E5F0(void)
 {
     if (gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_3)
     {
@@ -1259,7 +1084,7 @@ void sub_815E5F0(void)
     ConvertIntToDecimalStringN(gStringVar3, centiseconds, STR_CONV_MODE_LEADING_ZEROS, 2); \
 })
 
-void sub_815E658(void)
+static void sub_815E658(void)
 {
     if (gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk0 >= 215999)
     {
@@ -1270,13 +1095,12 @@ void sub_815E658(void)
     PRINT_TOWER_TIME(gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk0);
 }
 
-void sub_815E720(void)
+static void sub_815E720(void)
 {
     u8 windowId;
     s32 i;
-    s32 minutes, seconds, centiseconds;
 
-    sub_815EC0C();
+    ValidateOrResetCurTrainerTowerRecord();
     windowId = AddWindow(gUnknown_847A218);
     LoadStdWindowFrameGfx();
     DrawStdWindowFrame(windowId, FALSE);
@@ -1284,7 +1108,7 @@ void sub_815E720(void)
 
     for (i = 0; i < 4; i++)
     {
-        PRINT_TOWER_TIME(sub_815EDDC(&gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk4));
+        PRINT_TOWER_TIME(GetTrainerTowerRecordTime(&gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk4));
 
         StringExpandPlaceholders(gStringVar4, gUnknown_83FE998);
         AddTextPrinterParameterized(windowId, 2, gUnknown_83FE9C4[i - 1], 0x18, 0x24 + 0x14 * i, 0xFF, NULL);
@@ -1296,23 +1120,23 @@ void sub_815E720(void)
     VarSet(VAR_0x4001, windowId);
 }
 
-void sub_815E88C(void)
+static void sub_815E88C(void)
 {
     u8 windowId = VarGet(VAR_0x4001);
     ClearStdWindowAndFrameToTransparent(windowId, TRUE);
     RemoveWindow(windowId);
 }
 
-void sub_815E8B4(void)
+static void sub_815E8B4(void)
 {
     gSpecialVar_Result = GetMonsStateToDoubles();
 }
 
-void sub_815E8CC(void)
+static void sub_815E8CC(void)
 {
-    if (gUnknown_203F458->unk_0004.count != gUnknown_203F458->unk_0004.trainers[0].unk_001)
+    if (sTrainerTowerState->unk_0004.count != sTrainerTowerState->unk_0004.floors[0].floorIdx)
     {
-        ConvertIntToDecimalStringN(gStringVar1, gUnknown_203F458->unk_0004.count, STR_CONV_MODE_LEFT_ALIGN, 1);
+        ConvertIntToDecimalStringN(gStringVar1, sTrainerTowerState->unk_0004.count, STR_CONV_MODE_LEFT_ALIGN, 1);
         gSpecialVar_Result = TRUE;
     }
     else
@@ -1321,9 +1145,9 @@ void sub_815E8CC(void)
     }
 }
 
-void sub_815E908(void)
+static void sub_815E908(void)
 {
-    if (gMapHeader.mapDataId == 0x0129 && VarGet(VAR_0x4082) == 0)
+    if (gMapHeader.mapDataId == LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_LOBBY && VarGet(VAR_MAP_SCENE_TRAINER_TOWER) == 0)
     {
         gSpecialVar_Result = FALSE;
     }
@@ -1333,20 +1157,20 @@ void sub_815E908(void)
     }
 }
 
-void sub_815E948(void)
+static void sub_815E948(void)
 {
     s32 i;
     u16 var_4001 = VarGet(VAR_0x4001);
-    u8 r1 = gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[var_4001].unk_00B;
+    u8 r1 = sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[var_4001].facilityClass;
 
-    for (i = 0; i < NELEMS(gUnknown_847A074); i++)
+    for (i = 0; i < NELEMS(sTrainerEncounterMusicLUT); i++)
     {
-        if (gUnknown_847A074[i].unk0 == gFacilityClassToTrainerClass[r1])
+        if (sTrainerEncounterMusicLUT[i].unk0 == gFacilityClassToTrainerClass[r1])
             break;
     }
-    if (i != NELEMS(gUnknown_847A074))
+    if (i != NELEMS(sTrainerEncounterMusicLUT))
     {
-        var_4001 = gUnknown_847A074[i].unk1;
+        var_4001 = sTrainerEncounterMusicLUT[i].unk1;
     }
     else
     {
@@ -1355,45 +1179,46 @@ void sub_815E948(void)
     PlayNewMapMusic(gUnknown_847A2D2[var_4001]);
 }
 
-void sub_815E9C8(void)
+static void sub_815E9C8(void)
 {
     gSpecialVar_Result = gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_2;
 }
 
-void sub_815E9FC(void)
+static void BuildEnemyParty(void)
 {
-    u16 r4 = VarGet(VAR_0x4001);
-    s32 r9 = GetPartyMaxLevel();
-    u8 r5 = gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk8;
-    s32 r6;
-    u8 r2;
+    u16 trainerIdx = VarGet(VAR_0x4001);
+    s32 level = GetPartyMaxLevel();
+    u8 floorIdx = gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk8;
+    s32 i;
+    u8 monIdx;
 
     ZeroEnemyPartyMons();
 
-    switch (gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_002)
+    switch (sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].challengeType)
     {
-        case 0:
-        default:
-            for (r6 = 0; r6 < 2; r6++)
-            {
-                r2 = gUnknown_847A2EE[r5][r6];
-                gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r4].unk_040[r2].level = r9;
-                CreateBattleTowerMon(&gEnemyParty[r6], &gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r4].unk_040[r2]);
-            }
-            break;
-        case 1:
-            r2 = gUnknown_847A2FE[r5][0];
-            gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[0].unk_040[r2].level = r9;
-            CreateBattleTowerMon(&gEnemyParty[0], &gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[0].unk_040[r2]);
-            r2 = gUnknown_847A2FE[r5][1];
-            gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[1].unk_040[r2].level = r9;
-            CreateBattleTowerMon(&gEnemyParty[1], &gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[1].unk_040[r2]);
-            break;
-        case 2:
-            r2 = gUnknown_847A30E[r5][r4];
-            gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r4].unk_040[r2].level = r9;
-            CreateBattleTowerMon(&gEnemyParty[0], &gUnknown_203F458->unk_0004.trainers[gUnknown_203F458->unk_0000].unk_004[r4].unk_040[r2]);
-            break;
+    case 0:
+    default:
+        for (i = 0; i < 2; i++)
+        {
+            monIdx = sSingleBattleChallengeMonIdxs[floorIdx][i];
+            sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[trainerIdx].mons[monIdx].level = level;
+            CreateBattleTowerMon(&gEnemyParty[i], &sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[trainerIdx].mons[monIdx]);
+        }
+        break;
+    case 1:
+        monIdx = sDoubleBattleChallengeMonIdxs[floorIdx][0];
+        sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[0].mons[monIdx].level = level;
+        CreateBattleTowerMon(&gEnemyParty[0], &sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[0].mons[monIdx]);
+
+        monIdx = sDoubleBattleChallengeMonIdxs[floorIdx][1];
+        sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[1].mons[monIdx].level = level;
+        CreateBattleTowerMon(&gEnemyParty[1], &sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[1].mons[monIdx]);
+        break;
+    case 2:
+        monIdx = sKnockoutChallengeMonIdxs[floorIdx][trainerIdx];
+        sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[trainerIdx].mons[monIdx].level = level;
+        CreateBattleTowerMon(&gEnemyParty[0], &sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[trainerIdx].mons[monIdx]);
+        break;
     }
 }
 
@@ -1415,12 +1240,12 @@ static s32 GetPartyMaxLevel(void)
     return topLevel;
 }
 
-void sub_815EC0C(void)
+static void ValidateOrResetCurTrainerTowerRecord(void)
 {
-    if (gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk9 != gUnknown_203F458->unk_0004.id)
+    if (gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk9 != sTrainerTowerState->unk_0004.id)
     {
-        gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk9 = gUnknown_203F458->unk_0004.id;
-        sub_815EDF4(&gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk4, 215999);
+        gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk9 = sTrainerTowerState->unk_0004.id;
+        SetTrainerTowerRecordTime(&gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk4, 215999);
         gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_0 = FALSE;
     }
 }
@@ -1432,12 +1257,12 @@ void PrintTrainerTowerRecords(void)
 
     sub_815DC8C();
     FillWindowPixelRect(0, 0, 0, 0, 0xd8, 0x90);
-    sub_815EC0C();
+    ValidateOrResetCurTrainerTowerRecord();
     AddTextPrinterParameterized3(0, 2, 0x4a, 0, gUnknown_847A22C, 0, gUnknown_83FE982);
 
     for (i = 0; i < 4; i++)
     {
-        PRINT_TOWER_TIME(sub_815EDDC(&gSaveBlock1Ptr->unkArray[i].unk4));
+        PRINT_TOWER_TIME(GetTrainerTowerRecordTime(&gSaveBlock1Ptr->unkArray[i].unk4));
         StringExpandPlaceholders(gStringVar4, gUnknown_83FE998);
         AddTextPrinterParameterized3(windowId, 2, 0x18, 0x24 + 0x14 * i, gUnknown_847A22C, 0, gUnknown_83FE9C4[i]);
         AddTextPrinterParameterized3(windowId, 2, 0x60, 0x24 + 0x14 * i, gUnknown_847A22C, 0, gStringVar4);
@@ -1448,12 +1273,12 @@ void PrintTrainerTowerRecords(void)
     sub_815DD2C();
 }
 
-u32 sub_815EDDC(u32 * counter)
+static u32 GetTrainerTowerRecordTime(u32 *counter)
 {
     return *counter ^ gSaveBlock2Ptr->encryptionKey;
 }
 
-void sub_815EDF4(u32 * counter, u32 value)
+static void SetTrainerTowerRecordTime(u32 *counter, u32 value)
 {
     *counter = value ^ gSaveBlock2Ptr->encryptionKey;
 }
@@ -1464,6 +1289,6 @@ void ResetTrainerTowerResults(void)
 
     for (i = 0; i < 4; i++)
     {
-        sub_815EDF4(&gSaveBlock1Ptr->unkArray[i].unk4, 215999);
+        SetTrainerTowerRecordTime(&gSaveBlock1Ptr->unkArray[i].unk4, 215999);
     }
 }

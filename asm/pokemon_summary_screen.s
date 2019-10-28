@@ -4033,13 +4033,13 @@ _081366B8:
 	adds r0, r1
 	movs r1, 0xD
 	muls r1, r4
-	ldr r2, _081367A0 @ =gUnknown_824FC40
+	ldr r2, _081367A0 @ =gAbilityNames
 	adds r1, r2
 	bl StringCopy
 	ldr r0, [r6]
 	ldr r2, _081367A4 @ =0x000031cc
 	adds r0, r2
-	ldr r1, _081367A8 @ =gUnknown_824FB08
+	ldr r1, _081367A8 @ =gAbilityDescriptionPointers
 	lsls r4, 2
 	adds r4, r1
 	ldr r1, [r4]
@@ -4088,9 +4088,9 @@ _08136790: .4byte gExperienceTables
 _08136794: .4byte gBaseStats
 _08136798: .4byte 0x000031b0
 _0813679C: .4byte 0x000031bc
-_081367A0: .4byte gUnknown_824FC40
+_081367A0: .4byte gAbilityNames
 _081367A4: .4byte 0x000031cc
-_081367A8: .4byte gUnknown_824FB08
+_081367A8: .4byte gAbilityDescriptionPointers
 _081367AC: .4byte 0x0000326c
 	thumb_func_end sub_8136350
 
@@ -6470,7 +6470,7 @@ _08137B1C:
 	str r1, [sp, 0x4]
 	str r6, [sp, 0x8]
 	str r5, [sp, 0xC]
-	ldr r3, _08137BC8 @ =gUnknown_84886E8
+	ldr r3, _08137BC8 @ =gMoveDescriptionPointers
 	mov r4, r8
 	ldrb r1, [r4]
 	lsls r1, 1
@@ -6502,7 +6502,7 @@ _08137BB8: .4byte 0x00003004
 _08137BBC: .4byte gUnknown_8463FA4
 _08137BC0: .4byte 0x0000316c
 _08137BC4: .4byte 0x00003188
-_08137BC8: .4byte gUnknown_84886E8
+_08137BC8: .4byte gMoveDescriptionPointers
 _08137BCC: .4byte 0x00003258
 	thumb_func_end sub_8137AF8
 
@@ -7652,7 +7652,7 @@ _081384C4: .4byte gEnemyParty
 _081384C8: .4byte gLinkPlayers
 _081384CC: .4byte 0x0000304c
 _081384D0:
-	bl sub_80CC1E4
+	bl GetPlayerTrainerId
 	adds r4, r0, 0
 	ldr r0, _0813851C @ =0x0000ffff
 	ands r4, r0
@@ -10916,7 +10916,7 @@ sub_8139F20: @ 8139F20
 	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8097138
+	bl SafeFreeMonIconPalette
 	ldr r0, [r4]
 	ldr r1, _08139F5C @ =0x00003014
 	adds r0, r1
@@ -10926,7 +10926,7 @@ sub_8139F20: @ 8139F20
 	lsls r0, 2
 	ldr r1, _08139F60 @ =gSprites
 	adds r0, r1
-	bl sub_8097070
+	bl DestroyMonIcon
 	pop {r4}
 	pop {r0}
 	bx r0

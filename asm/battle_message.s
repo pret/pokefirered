@@ -20,7 +20,7 @@ BufferStringBattle: @ 80D7274
 	mov r8, r0
 	ldrb r1, [r0]
 	lsls r1, 9
-	ldr r0, _080D7338 @ =gUnknown_2022BC8
+	ldr r0, _080D7338 @ =gBattleBufferA + 4
 	adds r1, r0
 	str r1, [r4]
 	ldr r2, _080D733C @ =gLastUsedItem
@@ -107,7 +107,7 @@ _080D7326:
 	.align 2, 0
 _080D7330: .4byte gUnknown_2039A34
 _080D7334: .4byte gActiveBattler
-_080D7338: .4byte gUnknown_2022BC8
+_080D7338: .4byte gBattleBufferA + 4
 _080D733C: .4byte gLastUsedItem
 _080D7340: .4byte gLastUsedAbility
 _080D7344: .4byte gBattleScripting
@@ -744,7 +744,7 @@ _080D7834:
 	ldr r5, [sp]
 	ldr r4, [sp, 0x4]
 	movs r3, 0
-	ldr r2, _080D7850 @ =gUnknown_82500CC
+	ldr r2, _080D7850 @ =gStatusConditionStringsTable
 _080D783C:
 	ldr r1, [r2]
 	ldr r0, [r1]
@@ -756,7 +756,7 @@ _080D783C:
 	ldr r0, [r2, 0x4]
 	b _080D785E
 	.align 2, 0
-_080D7850: .4byte gUnknown_82500CC
+_080D7850: .4byte gStatusConditionStringsTable
 _080D7854:
 	adds r2, 0x8
 	adds r3, 0x1
@@ -1647,13 +1647,13 @@ _080D7FF0:
 	ldrb r1, [r0]
 	movs r0, 0xD
 	muls r1, r0
-	ldr r0, _080D8004 @ =gUnknown_824FC40
+	ldr r0, _080D8004 @ =gAbilityNames
 	adds r4, r1, r0
 	b _080D8382
 	.align 2, 0
 _080D7FFC: .4byte gUnknown_2039A30
 _080D8000: .4byte gEffectBattler
-_080D8004: .4byte gUnknown_824FC40
+_080D8004: .4byte gAbilityNames
 _080D8008:
 	ldr r3, _080D8020 @ =gTrainerBattleOpponent_A
 	ldrh r1, [r3]
@@ -1802,7 +1802,7 @@ _080D8120:
 	cmp r1, 0
 	beq _080D8134
 	mov r0, sp
-	bl sub_80E7460
+	bl CopyEReaderTrainerName5
 	mov r4, sp
 	b _080D8382
 _080D8134:
@@ -1917,7 +1917,7 @@ _080D81E8:
 _080D8204: .4byte gBattleTypeFlags
 _080D8208: .4byte gStringVar4
 _080D820C:
-	bl sub_80806EC
+	bl GetTrainerALoseText
 	adds r4, r0, 0
 	b _080D8382
 _080D8214:
@@ -1937,7 +1937,7 @@ _080D8214:
 _080D8230: .4byte gBattleTypeFlags
 _080D8234: .4byte gStringVar4
 _080D8238:
-	bl sub_8080710
+	bl GetTrainerWonSpeech
 	adds r4, r0, 0
 	b _080D8382
 _080D8240:
@@ -2430,7 +2430,7 @@ _080D860C:
 	ldrb r1, [r0, 0x1]
 	movs r0, 0xD
 	muls r1, r0
-	ldr r0, _080D8624 @ =gUnknown_824FC40
+	ldr r0, _080D8624 @ =gAbilityNames
 _080D8616:
 	adds r1, r0
 _080D8618:
@@ -2439,7 +2439,7 @@ _080D8618:
 	adds r5, 0x2
 	b _080D86B0
 	.align 2, 0
-_080D8624: .4byte gUnknown_824FC40
+_080D8624: .4byte gAbilityNames
 _080D8628:
 	adds r0, r5, r7
 	ldrb r2, [r0, 0x1]
@@ -2943,7 +2943,7 @@ SetPpNumbersPaletteInMoveSelection: @ 80D89DC
 	ldr r0, _080D8A38 @ =gActiveBattler
 	ldrb r2, [r0]
 	lsls r1, r2, 9
-	ldr r0, _080D8A3C @ =gUnknown_2022BC8
+	ldr r0, _080D8A3C @ =gBattleBufferA + 4
 	adds r1, r0
 	ldr r4, _080D8A40 @ =gUnknown_8D2FBB4
 	ldr r0, _080D8A44 @ =gMoveSelectionCursor
@@ -2983,7 +2983,7 @@ SetPpNumbersPaletteInMoveSelection: @ 80D89DC
 	bx r0
 	.align 2, 0
 _080D8A38: .4byte gActiveBattler
-_080D8A3C: .4byte gUnknown_2022BC8
+_080D8A3C: .4byte gBattleBufferA + 4
 _080D8A40: .4byte gUnknown_8D2FBB4
 _080D8A44: .4byte gMoveSelectionCursor
 _080D8A48: .4byte gPlttBufferUnfaded

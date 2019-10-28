@@ -38,7 +38,7 @@ bool8 sub_8069590(void)
 
 void ScriptFreezeMapObjects(void)
 {
-    player_bitmagic();
+    FreezeEventObjects();
     CreateTask(sub_8069570, 80);
 }
 

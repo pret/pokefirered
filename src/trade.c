@@ -22,6 +22,7 @@
 #include "overworld.h"
 #include "battle_anim.h"
 #include "party_menu.h"
+#include "util.h"
 #include "daycare.h"
 #include "event_data.h"
 #include "battle_interface.h"
@@ -74,6 +75,52 @@ struct TradeResources
     /*0x08F0*/ u16 tilemapBuffer[BG_SCREEN_SIZE / 2];
 };
 
+struct TradeResources2 {
+    /*0x00*/ struct Pokemon mon;
+    /*0x64*/ u32 timer;
+    /*0x68*/ u32 unk_68[2];
+    /*0x70*/ u8 filler_70[2];
+    /*0x72*/ u8 unk_72;
+    /*0x73*/ u8 unk_73;
+    /*0x74*/ u16 linkData[10];
+    /*0x88*/ u8 unk_88;
+    /*0x89*/ u8 unk_89;
+    /*0x8A*/ u16 unk_8A;
+    /*0x8C*/ u16 unk_8C;
+    /*0x8E*/ u8 pokePicSpriteIdxs[2];
+    /*0x90*/ u8 unk_90;
+    /*0x91*/ u8 unk_91;
+    /*0x92*/ u8 unk_92;
+    /*0x93*/ u8 unk_93;
+    /*0x94*/ u16 state;
+    /*0x96*/ u8 filler_96[0xD2 - 0x96];
+    /*0xD2*/ u8 unk_D2;
+    /*0xD3*/ u8 unk_D3;
+    /*0xD4*/ u16 unk_D4;
+    /*0xD6*/ u16 unk_D6;
+    /*0xD8*/ u16 unk_D8;
+    /*0xDA*/ u16 unk_DA;
+    /*0xDC*/ u16 unk_DC;
+    /*0xDE*/ u16 unk_DE;
+    /*0xE0*/ s16 bg1vofs;
+    /*0xE2*/ s16 bg1hofs;
+    /*0xE4*/ s16 bg2vofs;
+    /*0xE6*/ s16 bg2hofs;
+    /*0xE8*/ u16 unk_E8;
+    /*0xEA*/ u16 unk_EA;
+    /*0xEC*/ u16 unk_EC;
+    /*0xEE*/ bool8 isLinkTrade;
+    /*0xF0*/ u16 tradeSpecies[2];
+    /*0xF4*/ u16 cachedMapMusic;
+    /*0xF6*/ u8 unk_F6[3];
+    /*0xF9*/ u8 filler_F9;
+    /*0xFA*/ u8 unk_FA;
+    /*0xFB*/ u8 unk_FB;
+    /*0xFC*/ u8 unk_FC;
+    /*0xFD*/ u8 unk_FD;
+    /*0xFE*/ u8 unk_FE;
+};
+
 IWRAM_DATA vu16 gUnknown_3000E78;
 
 EWRAM_DATA u8 *gUnknown_2031C90 = NULL;
@@ -81,7 +128,7 @@ EWRAM_DATA u8 *gUnknown_2031C94[14] = {};
 EWRAM_DATA u8 gUnknown_2031CCC[216] = {};
 EWRAM_DATA u8 gUnknown_2031DA4[2] = {0};
 EWRAM_DATA struct TradeResources * gUnknown_2031DA8 = NULL;
-EWRAM_DATA void * gUnknown_2031DAC = NULL;
+EWRAM_DATA struct TradeResources2 * gUnknown_2031DAC = NULL;
 
 void sub_804C728(void);
 void sub_804D4F8(void);
@@ -137,7 +184,7 @@ extern const u8 *const gUnknown_8261EF4[];
 extern const struct SpritePalette gUnknown_8261D00;
 extern const struct SpritePalette gUnknown_8261C60;
 extern const struct SpriteSheet gUnknown_8261C58;
-extern const u16 gUnknown_826CF60[];
+extern const u16 gTradeGlow2PaletteAnimTable[];
 
 void sub_804C600(void)
 {
@@ -3959,7 +4006,7 @@ int sub_804FCE0(struct UnkLinkRfuStruct_02022B14Substruct a0, u16 species, u16 a
     return 0;
 }
 
-// Sprite callback for link cable transfer glow
+// Sprite callback for link cable trade glow
 void sub_804FD24(struct Sprite * sprite)
 {
     sprite->data[0]++;
@@ -3970,7 +4017,7 @@ void sub_804FD24(struct Sprite * sprite)
     }
 }
 
-// Sprite callback for wireless transfer glow
+// Sprite callback for wireless trade glow
 void sub_804FD48(struct Sprite * sprite)
 {
     if (!sprite->invisible)
@@ -3984,7 +4031,7 @@ void sub_804FD48(struct Sprite * sprite)
     }
 }
 
-// Palette flash for transfer glow core
+// Palette flash for trade glow core
 void sub_804FD78(struct Sprite * sprite)
 {
     if (sprite->data[1] == 0)
@@ -3992,7 +4039,7 @@ void sub_804FD78(struct Sprite * sprite)
         sprite->data[0]++;
         if (sprite->data[0] == 12)
             sprite->data[0] = 0;
-        LoadPalette(&gUnknown_826CF60[sprite->data[0]], 16 * (sprite->oam.paletteNum + 16) + 4, 2);
+        LoadPalette(&gTradeGlow2PaletteAnimTable[sprite->data[0]], 16 * (sprite->oam.paletteNum + 16) + 4, 2);
     }
 }
 
@@ -4019,5 +4066,120 @@ void sub_804FE00(struct Sprite * sprite)
     {
         PlaySE(SE_W107);
         sprite->data[0] = 0;
+    }
+}
+
+void sub_804FE24(void)
+{
+    struct BgAffineDstData affine;
+    DoBgAffineSet(&affine, gUnknown_2031DAC->unk_D4 * 0x100, gUnknown_2031DAC->unk_D6 * 0x100, gUnknown_2031DAC->unk_DC, gUnknown_2031DAC->unk_DE, gUnknown_2031DAC->unk_E8, gUnknown_2031DAC->unk_E8, gUnknown_2031DAC->unk_EC);
+    SetGpuReg(REG_OFFSET_BG2PA, affine.pa);
+    SetGpuReg(REG_OFFSET_BG2PB, affine.pb);
+    SetGpuReg(REG_OFFSET_BG2PC, affine.pc);
+    SetGpuReg(REG_OFFSET_BG2PD, affine.pd);
+    SetGpuReg(REG_OFFSET_BG2X, affine.dx);
+    SetGpuReg(REG_OFFSET_BG2Y, affine.dy);
+}
+
+void sub_804FEB4(void)
+{
+    u16 dispcnt;
+
+    SetGpuReg(REG_OFFSET_BG1VOFS, gUnknown_2031DAC->bg1vofs);
+    SetGpuReg(REG_OFFSET_BG1HOFS, gUnknown_2031DAC->bg1hofs);
+
+    dispcnt = GetGpuReg(REG_OFFSET_DISPCNT);
+    if ((dispcnt & 7) == DISPCNT_MODE_0)
+    {
+        SetGpuReg(REG_OFFSET_BG2VOFS, gUnknown_2031DAC->bg2vofs);
+        SetGpuReg(REG_OFFSET_BG2HOFS, gUnknown_2031DAC->bg2hofs);
+    }
+    else
+    {
+        sub_804FE24();
+    }
+}
+
+void sub_804FF0C(void)
+{
+    sub_804FEB4();
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+}
+
+void sub_804FF24(void)
+{
+    gUnknown_2031DAC->unk_8A = 0;
+    gUnknown_2031DAC->unk_88 = 0;
+    gUnknown_2031DAC->unk_89 = 0;
+}
+
+void sub_804FF4C(void)
+{
+    if (gUnknown_2031DAC->unk_88 == gUnknown_2031DAC->unk_89)
+        gUnknown_2031DAC->unk_8A++;
+    else
+        gUnknown_2031DAC->unk_8A = 0;
+
+    if (gUnknown_2031DAC->unk_8A > 300)
+    {
+        CloseLink();
+        SetMainCallback2(CB2_LinkError);
+        gUnknown_2031DAC->unk_8A = 0;
+        gUnknown_2031DAC->unk_89 = 0;
+        gUnknown_2031DAC->unk_88 = 0;
+    }
+
+    gUnknown_2031DAC->unk_89 = gUnknown_2031DAC->unk_88;
+}
+
+u32 sub_804FFC4(void)
+{
+    if (gReceivedRemoteLinkPlayers)
+        return GetMultiplayerId();
+    return 0;
+}
+
+void sub_804FFE4(u8 whichParty, u8 a1)
+{
+    int pos = 0;
+    struct Pokemon *mon = NULL;
+    u16 species;
+    u32 personality;
+
+    if (whichParty == 0)
+    {
+        mon = &gPlayerParty[gUnknown_2031DA4[0]];
+        pos = 1;
+    }
+
+    if (whichParty == 1)
+    {
+        mon = &gEnemyParty[gUnknown_2031DA4[1] % PARTY_SIZE];
+        pos = 3;
+    }
+
+    switch (a1)
+    {
+    case 0:
+        species = GetMonData(mon, MON_DATA_SPECIES2);
+        personality = GetMonData(mon, MON_DATA_PERSONALITY);
+
+        if (whichParty == 0)
+            HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites[1], species, personality);
+        else
+            HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites[whichParty * 2 + 1], species, personality);
+
+        LoadCompressedSpritePalette(GetMonSpritePalStruct(mon));
+        gUnknown_2031DAC->tradeSpecies[whichParty] = species;
+        gUnknown_2031DAC->unk_68[whichParty] = personality;
+        break;
+    case 1:
+        SetMultiuseSpriteTemplateToPokemon(GetMonSpritePalStruct(mon)->tag, pos);
+        gUnknown_2031DAC->pokePicSpriteIdxs[whichParty] = CreateSprite(&gMultiuseSpriteTemplate, 120, 60, 6);
+        gSprites[gUnknown_2031DAC->pokePicSpriteIdxs[whichParty]].invisible = TRUE;
+        gSprites[gUnknown_2031DAC->pokePicSpriteIdxs[whichParty]].callback = SpriteCallbackDummy;
+        break;
     }
 }

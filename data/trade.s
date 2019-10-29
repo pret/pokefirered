@@ -809,7 +809,7 @@ gUnknown_826CF30:: @ 826CF30
 gUnknown_826CF48:: @ 826CF48
 	spr_template 5556, 5555, gOamData_826CED0, gSpriteAnimTable_826CF24, NULL, gDummySpriteAffineAnimTable, sub_804FE00
 
-gUnknown_826CF60:: @ 826CF60
+gTradeGlow2PaletteAnimTable:: @ 826CF60
 	.2byte RGB(18, 24, 31)
 	.2byte RGB(18, 24, 31)
 	.2byte RGB(18, 24, 31)

@@ -7,6 +7,7 @@
 #include "bg.h"
 #include "text.h"
 #include "window.h"
+#include "librfu.h"
 #include "text_window.h"
 #include "pokemon_icon.h"
 #include "graphics.h"
@@ -136,6 +137,7 @@ extern const u8 *const gUnknown_8261EF4[];
 extern const struct SpritePalette gUnknown_8261D00;
 extern const struct SpritePalette gUnknown_8261C60;
 extern const struct SpriteSheet gUnknown_8261C58;
+extern const u16 gUnknown_826CF60[];
 
 void sub_804C600(void)
 {
@@ -3788,5 +3790,234 @@ u32 sub_804FA14(struct Pokemon *party, int partyCount, int cursorPos)
     else
     {
         return 1;
+    }
+}
+
+s32 sub_804FB34(void)
+{
+    s32 val;
+    u16 version;
+
+    if (gReceivedRemoteLinkPlayers != 0)
+    {
+        val = 0;
+        version = (gLinkPlayers[GetMultiplayerId() ^ 1].version & 0xFF);
+
+        if (version == VERSION_FIRE_RED || version == VERSION_LEAF_GREEN)
+        {
+            // this value could actually be anything 0 or less
+            val = 0;
+        }
+        else if (version == VERSION_RUBY || version == VERSION_SAPPHIRE)
+        {
+            val = 1;
+        }
+        else
+        {
+            val = 2;
+        }
+
+        if (val > 0)
+        {
+            if (gLinkPlayers[GetMultiplayerId()].name[10] & 0xF0)
+            {
+                if (val == 2)
+                {
+                    if (gLinkPlayers[GetMultiplayerId() ^ 1].name[10] & 0xF0)
+                    {
+                        return 0;
+                    }
+                    else
+                    {
+                        return 2;
+                    }
+                }
+            }
+            else
+            {
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
+bool32 IsDeoxysOrMewUntradable(u16 species, bool8 isObedientBitSet)
+{
+    if (species == SPECIES_DEOXYS || species == SPECIES_MEW)
+    {
+        if (!isObedientBitSet)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+int sub_804FBEC(struct UnkLinkRfuStruct_02022B14Substruct a0, struct UnkLinkRfuStruct_02022B14Substruct a1, u16 species1, u16 species2, u8 type, u16 species3, u8 isObedientBitSet)
+{
+    u8 r9 = a0.unk_01_0;
+    u8 r4 = a0.unk_00_7;
+    u8 r10 = a1.unk_01_0;
+    u8 r0 = a1.unk_00_7;
+    u8 r1 = a1.unk_01_2;
+    u8 r2;
+
+    if (r1 == VERSION_FIRE_RED || r1 == VERSION_LEAF_GREEN)
+    {
+        r2 = 0;
+    }
+    else
+    {
+        r2 = 1;
+    }
+    if (r2)
+    {
+        if (!r4)
+        {
+            return 8;
+        }
+        else if (!r0)
+        {
+            return 9;
+        }
+    }
+
+    if (IsDeoxysOrMewUntradable(species3, isObedientBitSet))
+    {
+        return 4;
+    }
+
+    if (species2 == SPECIES_EGG)
+    {
+        if (species1 != species2)
+        {
+            return 2;
+        }
+    }
+    else
+    {
+        if (gBaseStats[species1].type1 != type && gBaseStats[species1].type2 != type)
+        {
+            return 1;
+        }
+    }
+
+    if (species1 == SPECIES_EGG && species1 != species2)
+    {
+        return 3;
+    }
+
+    if (!r9)
+    {
+        if (species1 == SPECIES_EGG)
+        {
+            return 6;
+        }
+
+        if (species1 > SPECIES_MEW)
+        {
+            return 4;
+        }
+
+        if (species2 > SPECIES_MEW)
+        {
+            return 5;
+        }
+    }
+
+    if (!r10 && species1 > SPECIES_MEW)
+    {
+        return 7;
+    }
+
+    return 0;
+}
+
+int sub_804FCE0(struct UnkLinkRfuStruct_02022B14Substruct a0, u16 species, u16 a2, u8 a3)
+{
+    u8 unk = a0.unk_01_0;
+
+    if (IsDeoxysOrMewUntradable(a2, a3))
+    {
+        return 1;
+    }
+
+    if (unk)
+    {
+        return 0;
+    }
+
+    if (species == SPECIES_EGG)
+    {
+        return 2;
+    }
+
+    if (species > SPECIES_MEW && species != SPECIES_EGG)
+    {
+        return 1;
+    }
+
+    return 0;
+}
+
+// Sprite callback for link cable transfer glow
+void sub_804FD24(struct Sprite * sprite)
+{
+    sprite->data[0]++;
+    if (sprite->data[0] == 10)
+    {
+        PlaySE(SE_BOWA);
+        sprite->data[0] = 0;
+    }
+}
+
+// Sprite callback for wireless transfer glow
+void sub_804FD48(struct Sprite * sprite)
+{
+    if (!sprite->invisible)
+    {
+        sprite->data[0]++;
+        if (sprite->data[0] == 10)
+        {
+            PlaySE(SE_W207B);
+            sprite->data[0] = 0;
+        }
+    }
+}
+
+// Palette flash for transfer glow core
+void sub_804FD78(struct Sprite * sprite)
+{
+    if (sprite->data[1] == 0)
+    {
+        sprite->data[0]++;
+        if (sprite->data[0] == 12)
+            sprite->data[0] = 0;
+        LoadPalette(&gUnknown_826CF60[sprite->data[0]], 16 * (sprite->oam.paletteNum + 16) + 4, 2);
+    }
+}
+
+void sub_804FDB8(struct Sprite * sprite)
+{
+    sprite->data[0]++;
+    sprite->pos2.y++;
+    if (sprite->data[0] == 10)
+        DestroySprite(sprite);
+}
+
+void sub_804FDDC(struct Sprite * sprite)
+{
+    sprite->data[0]++;
+    sprite->pos2.y--;
+    if (sprite->data[0] == 10)
+        DestroySprite(sprite);
+}
+
+void sub_804FE00(struct Sprite * sprite)
+{
+    sprite->data[0]++;
+    if (sprite->data[0] == 15)
+    {
+        PlaySE(SE_W107);
+        sprite->data[0] = 0;
     }
 }

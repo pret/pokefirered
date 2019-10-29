@@ -5,937 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8050138
-sub_8050138: @ 8050138
-	push {r4-r6,lr}
-	sub sp, 0x4
-	ldr r1, _08050158 @ =gMain
-	movs r2, 0x87
-	lsls r2, 3
-	adds r0, r1, r2
-	ldrb r0, [r0]
-	adds r2, r1, 0
-	cmp r0, 0xC
-	bls _0805014E
-	b _08050472
-_0805014E:
-	lsls r0, 2
-	ldr r1, _0805015C @ =_08050160
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_08050158: .4byte gMain
-_0805015C: .4byte _08050160
-	.align 2, 0
-_08050160:
-	.4byte _08050194
-	.4byte _08050240
-	.4byte _08050288
-	.4byte _080502A8
-	.4byte _080502F2
-	.4byte _08050320
-	.4byte _08050344
-	.4byte _0805035C
-	.4byte _08050366
-	.4byte _08050380
-	.4byte _0805039C
-	.4byte _08050430
-	.4byte _0805044C
-_08050194:
-	ldr r0, _08050228 @ =gReceivedRemoteLinkPlayers
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _080501A8
-	ldr r1, _0805022C @ =gLinkType
-	ldr r2, _08050230 @ =0x00001144
-	adds r0, r2, 0
-	strh r0, [r1]
-	bl CloseLink
-_080501A8:
-	ldr r4, _08050234 @ =gUnknown_2031DAC
-	movs r0, 0x88
-	lsls r0, 1
-	bl AllocZeroed
-	str r0, [r4]
-	bl AllocateMonSpritesGfx
-	bl ResetTasks
-	bl ResetSpriteData
-	bl FreeAllSpritePalettes
-	ldr r0, _08050238 @ =sub_804FF0C
-	bl SetVBlankCallback
-	bl sub_80504CC
-	bl sub_804FF24
-	ldr r1, _0805023C @ =gMain
-	movs r0, 0x87
-	lsls r0, 3
-	adds r1, r0
-	ldrb r0, [r1]
-	adds r0, 0x1
-	movs r2, 0
-	strb r0, [r1]
-	ldr r1, [r4]
-	adds r0, r1, 0
-	adds r0, 0x8C
-	strh r2, [r0]
-	adds r0, 0x8
-	strh r2, [r0]
-	adds r1, 0xEE
-	movs r0, 0x1
-	strb r0, [r1]
-	ldr r3, [r4]
-	adds r0, r3, 0
-	adds r0, 0xD4
-	movs r1, 0x40
-	strh r1, [r0]
-	adds r0, 0x2
-	strh r1, [r0]
-	adds r0, 0x2
-	strh r2, [r0]
-	adds r0, 0x2
-	strh r2, [r0]
-	adds r1, r3, 0
-	adds r1, 0xDC
-	movs r0, 0x78
-	strh r0, [r1]
-	adds r1, 0x2
-	movs r0, 0x50
-	strh r0, [r1]
-	adds r1, 0xA
-	adds r0, 0xB0
-	strh r0, [r1]
-	adds r0, r3, 0
-	adds r0, 0xEC
-	strh r2, [r0]
-	b _08050472
-	.align 2, 0
-_08050228: .4byte gReceivedRemoteLinkPlayers
-_0805022C: .4byte gLinkType
-_08050230: .4byte 0x00001144
-_08050234: .4byte gUnknown_2031DAC
-_08050238: .4byte sub_804FF0C
-_0805023C: .4byte gMain
-_08050240:
-	ldr r0, _08050270 @ =gReceivedRemoteLinkPlayers
-	ldrb r5, [r0]
-	cmp r5, 0
-	bne _0805027C
-	ldr r4, _08050274 @ =gUnknown_2031DAC
-	ldr r0, [r4]
-	movs r1, 0x84
-	lsls r1, 1
-	adds r0, r1
-	movs r1, 0x1
-	strb r1, [r0]
-	bl OpenLink
-	ldr r1, _08050278 @ =gMain
-	movs r2, 0x87
-	lsls r2, 3
-	adds r1, r2
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	ldr r0, [r4]
-	str r5, [r0, 0x64]
-	b _08050472
-	.align 2, 0
-_08050270: .4byte gReceivedRemoteLinkPlayers
-_08050274: .4byte gUnknown_2031DAC
-_08050278: .4byte gMain
-_0805027C:
-	movs r0, 0x87
-	lsls r0, 3
-	adds r1, r2, r0
-	movs r0, 0x4
-	strb r0, [r1]
-	b _08050472
-_08050288:
-	ldr r0, _080502A4 @ =gUnknown_2031DAC
-	ldr r1, [r0]
-	ldr r0, [r1, 0x64]
-	adds r0, 0x1
-	str r0, [r1, 0x64]
-	cmp r0, 0x3C
-	bhi _08050298
-	b _08050472
-_08050298:
-	movs r0, 0
-	str r0, [r1, 0x64]
-	movs r0, 0x87
-	lsls r0, 3
-	adds r1, r2, r0
-	b _08050440
-	.align 2, 0
-_080502A4: .4byte gUnknown_2031DAC
-_080502A8:
-	bl IsLinkMaster
-	lsls r0, 24
-	cmp r0, 0
-	bne _080502B4
-	b _08050438
-_080502B4:
-	bl GetLinkPlayerCount_2
-	adds r4, r0, 0
-	bl GetSavedPlayerCount
-	lsls r4, 24
-	lsls r0, 24
-	cmp r4, r0
-	bcc _080502EC
-	ldr r0, _080502E4 @ =gUnknown_2031DAC
-	ldr r1, [r0]
-	ldr r0, [r1, 0x64]
-	adds r0, 0x1
-	str r0, [r1, 0x64]
-	cmp r0, 0x1E
-	bhi _080502D6
-	b _08050472
-_080502D6:
-	bl CheckShouldAdvanceLinkState
-	ldr r1, _080502E8 @ =gMain
-	movs r2, 0x87
-	lsls r2, 3
-	adds r1, r2
-	b _08050440
-	.align 2, 0
-_080502E4: .4byte gUnknown_2031DAC
-_080502E8: .4byte gMain
-_080502EC:
-	bl sub_804FF4C
-	b _08050472
-_080502F2:
-	bl sub_804FF4C
-	ldr r0, _08050318 @ =gReceivedRemoteLinkPlayers
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	beq _08050300
-	b _08050472
-_08050300:
-	bl IsLinkPlayerDataExchangeComplete
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _0805030E
-	b _08050472
-_0805030E:
-	ldr r1, _0805031C @ =gMain
-	movs r2, 0x87
-	lsls r2, 3
-	adds r1, r2
-	b _08050440
-	.align 2, 0
-_08050318: .4byte gReceivedRemoteLinkPlayers
-_0805031C: .4byte gMain
-_08050320:
-	ldr r2, _08050340 @ =gUnknown_2031DAC
-	ldr r0, [r2]
-	adds r0, 0x72
-	movs r1, 0
-	strb r1, [r0]
-	ldr r0, [r2]
-	adds r0, 0x73
-	strb r1, [r0]
-	ldr r0, [r2]
-	adds r0, 0x93
-	strb r1, [r0]
-	movs r0, 0
-	bl sub_804FFE4
-	b _08050438
-	.align 2, 0
-_08050340: .4byte gUnknown_2031DAC
-_08050344:
-	movs r0, 0
-	movs r1, 0x1
-	bl sub_804FFE4
-	ldr r1, _08050358 @ =gMain
-	movs r2, 0x87
-	lsls r2, 3
-	adds r1, r2
-	b _08050440
-	.align 2, 0
-_08050358: .4byte gMain
-_0805035C:
-	movs r0, 0x1
-	movs r1, 0
-	bl sub_804FFE4
-	b _08050438
-_08050366:
-	movs r0, 0x1
-	movs r1, 0x1
-	bl sub_804FFE4
-	bl sub_80504B0
-	ldr r1, _0805037C @ =gMain
-	movs r2, 0x87
-	lsls r2, 3
-	adds r1, r2
-	b _08050440
-	.align 2, 0
-_0805037C: .4byte gMain
-_08050380:
-	bl sub_8050DE0
-	ldr r0, _08050394 @ =gUnknown_826CDD4
-	bl LoadSpriteSheet
-	ldr r0, _08050398 @ =gUnknown_826CDDC
-	bl LoadSpritePalette
-	b _08050438
-	.align 2, 0
-_08050394: .4byte gUnknown_826CDD4
-_08050398: .4byte gUnknown_826CDDC
-_0805039C:
-	movs r0, 0x1
-	negs r0, r0
-	movs r1, 0
-	str r1, [sp]
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	movs r0, 0
-	bl ShowBg
-	ldr r4, _08050418 @ =gUnknown_2031DA4
-	ldrb r0, [r4]
-	movs r6, 0x64
-	muls r0, r6
-	ldr r1, _0805041C @ =gPlayerParty
-	adds r0, r1
-	movs r1, 0x41
-	bl GetMonData
-	ldr r5, _08050420 @ =gUnknown_2031DAC
-	ldr r1, [r5]
-	adds r1, 0xF8
-	strh r0, [r1]
-	ldrb r0, [r4, 0x1]
-	movs r1, 0x6
-	bl __umodsi3
-	lsls r0, 24
-	lsrs r0, 24
-	muls r0, r6
-	ldr r1, _08050424 @ =gEnemyParty
-	adds r0, r1
-	movs r1, 0x41
-	bl GetMonData
-	ldr r4, [r5]
-	adds r1, r4, 0
-	adds r1, 0xFA
-	strh r0, [r1]
-	adds r4, 0xFC
-	bl GetMultiplayerId
-	movs r1, 0x1
-	eors r0, r1
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, r0, 3
-	subs r1, r0
-	lsls r1, 2
-	ldr r0, _08050428 @ =gLinkPlayers + 8
-	adds r1, r0
-	adds r0, r4, 0
-	movs r2, 0x7
-	bl memcpy
-	ldr r1, _0805042C @ =gMain
-	movs r2, 0x87
-	lsls r2, 3
-	adds r1, r2
-	b _08050440
-	.align 2, 0
-_08050418: .4byte gUnknown_2031DA4
-_0805041C: .4byte gPlayerParty
-_08050420: .4byte gUnknown_2031DAC
-_08050424: .4byte gEnemyParty
-_08050428: .4byte gLinkPlayers + 8
-_0805042C: .4byte gMain
-_08050430:
-	bl sub_805049C
-	bl sub_8050E24
-_08050438:
-	ldr r1, _08050448 @ =gMain
-	movs r0, 0x87
-	lsls r0, 3
-	adds r1, r0
-_08050440:
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	b _08050472
-	.align 2, 0
-_08050448: .4byte gMain
-_0805044C:
-	ldr r0, _08050490 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _08050472
-	ldr r0, _08050494 @ =gWirelessCommType
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _0805046C
-	bl LoadWirelessStatusIndicatorSpriteGfx
-	movs r0, 0
-	movs r1, 0
-	bl CreateWirelessStatusIndicatorSprite
-_0805046C:
-	ldr r0, _08050498 @ =sub_8053D84
-	bl SetMainCallback2
-_08050472:
-	bl RunTasks
-	bl RunTextPrinters
-	bl AnimateSprites
-	bl BuildOamBuffer
-	bl UpdatePaletteFade
-	add sp, 0x4
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08050490: .4byte gPaletteFade
-_08050494: .4byte gWirelessCommType
-_08050498: .4byte sub_8053D84
-	thumb_func_end sub_8050138
-
-	thumb_func_start sub_805049C
-sub_805049C: @ 805049C
-	push {lr}
-	movs r0, 0x5
-	bl sub_8050968
-	movs r0, 0
-	bl sub_8050968
-	pop {r0}
-	bx r0
-	thumb_func_end sub_805049C
-
-	thumb_func_start sub_80504B0
-sub_80504B0: @ 80504B0
-	push {lr}
-	movs r0, 0
-	movs r1, 0xFF
-	bl FillWindowPixelBuffer
-	movs r0, 0
-	bl PutWindowTilemap
-	movs r0, 0
-	movs r1, 0x3
-	bl CopyWindowToVram
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80504B0
-
-	thumb_func_start sub_80504CC
-sub_80504CC: @ 80504CC
-	push {r4-r6,lr}
-	mov r6, r10
-	mov r5, r9
-	mov r4, r8
-	push {r4-r6}
-	sub sp, 0x4
-	movs r0, 0
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0
-	bl ResetBgsAndClearDma3BusyFlags
-	ldr r1, _080505B4 @ =gUnknown_826D1D4
-	movs r0, 0
-	movs r2, 0x4
-	bl InitBgsFromTemplates
-	movs r0, 0
-	movs r1, 0
-	movs r2, 0
-	bl ChangeBgX
-	movs r0, 0
-	movs r1, 0
-	movs r2, 0
-	bl ChangeBgY
-	movs r5, 0x80
-	lsls r5, 4
-	adds r0, r5, 0
-	bl Alloc
-	adds r1, r0, 0
-	movs r0, 0
-	bl SetBgTilemapBuffer
-	adds r0, r5, 0
-	bl Alloc
-	adds r1, r0, 0
-	movs r0, 0x1
-	bl SetBgTilemapBuffer
-	adds r0, r5, 0
-	bl Alloc
-	adds r1, r0, 0
-	movs r0, 0x3
-	bl SetBgTilemapBuffer
-	bl DeactivateAllTextPrinters
-	ldr r0, _080505B8 @ =gBattleTextboxTiles
-	mov r10, r0
-	movs r0, 0
-	mov r9, r0
-	str r0, [sp]
-	mov r1, r10
-	movs r2, 0
-	movs r3, 0
-	bl DecompressAndLoadBgGfxUsingHeap
-	ldr r0, _080505BC @ =gFile_graphics_interface_menu_map_tilemap
-	mov r8, r0
-	ldr r4, _080505C0 @ =gDecompressionBuffer
-	adds r1, r4, 0
-	bl LZDecompressWram
-	movs r0, 0
-	adds r1, r4, 0
-	adds r2, r5, 0
-	movs r3, 0
-	bl CopyToBgTilemapBuffer
-	ldr r6, _080505C4 @ =gBattleTextboxPalette
-	adds r0, r6, 0
-	movs r1, 0
-	movs r2, 0x20
-	bl LoadCompressedPalette
-	ldr r0, _080505C8 @ =gUnknown_826D1BC
-	bl InitWindows
-	mov r0, r9
-	str r0, [sp]
-	movs r0, 0
-	mov r1, r10
-	movs r2, 0
-	movs r3, 0
-	bl DecompressAndLoadBgGfxUsingHeap
-	mov r0, r8
-	adds r1, r4, 0
-	bl LZDecompressWram
-	movs r0, 0
-	adds r1, r4, 0
-	adds r2, r5, 0
-	movs r3, 0
-	bl CopyToBgTilemapBuffer
-	adds r0, r6, 0
-	movs r1, 0
-	movs r2, 0x20
-	bl LoadCompressedPalette
-	add sp, 0x4
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080505B4: .4byte gUnknown_826D1D4
-_080505B8: .4byte gBattleTextboxTiles
-_080505BC: .4byte gFile_graphics_interface_menu_map_tilemap
-_080505C0: .4byte gDecompressionBuffer
-_080505C4: .4byte gBattleTextboxPalette
-_080505C8: .4byte gUnknown_826D1BC
-	thumb_func_end sub_80504CC
-
-	thumb_func_start sub_80505CC
-sub_80505CC: @ 80505CC
-	push {r4,r5,lr}
-	sub sp, 0xC
-	ldr r0, _080505EC @ =gMain
-	movs r1, 0x87
-	lsls r1, 3
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r0, 0xC
-	bls _080505E0
-	b _0805077E
-_080505E0:
-	lsls r0, 2
-	ldr r1, _080505F0 @ =_080505F4
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_080505EC: .4byte gMain
-_080505F0: .4byte _080505F4
-	.align 2, 0
-_080505F4:
-	.4byte _08050628
-	.4byte _0805077E
-	.4byte _0805077E
-	.4byte _0805077E
-	.4byte _0805077E
-	.4byte _080506EC
-	.4byte _080506F6
-	.4byte _08050700
-	.4byte _08050710
-	.4byte _08050730
-	.4byte _0805074C
-	.4byte _08050754
-	.4byte _08050778
-_08050628:
-	ldr r1, _080506CC @ =gUnknown_2031DA4
-	ldr r0, _080506D0 @ =gSpecialVar_0x8005
-	ldrh r0, [r0]
-	movs r5, 0
-	strb r0, [r1]
-	movs r0, 0x6
-	strb r0, [r1, 0x1]
-	ldr r4, _080506D4 @ =gLinkPlayers + 8
-	ldr r0, _080506D8 @ =gSaveBlock2Ptr
-	ldr r1, [r0]
-	adds r0, r4, 0
-	bl StringCopy
-	ldr r0, _080506DC @ =gEnemyParty
-	movs r1, 0x7
-	mov r2, sp
-	bl GetMonData
-	adds r4, 0x1C
-	adds r0, r4, 0
-	mov r1, sp
-	bl StringCopy
-	ldr r4, _080506E0 @ =gUnknown_2031DAC
-	movs r0, 0x88
-	lsls r0, 1
-	bl AllocZeroed
-	str r0, [r4]
-	bl AllocateMonSpritesGfx
-	bl ResetTasks
-	bl ResetSpriteData
-	bl FreeAllSpritePalettes
-	ldr r0, _080506E4 @ =sub_804FF0C
-	bl SetVBlankCallback
-	bl sub_80504CC
-	ldr r0, [r4]
-	adds r0, 0xEE
-	strb r5, [r0]
-	ldr r2, [r4]
-	adds r0, r2, 0
-	adds r0, 0x8C
-	strh r5, [r0]
-	adds r0, 0x8
-	strh r5, [r0]
-	adds r0, 0x40
-	movs r1, 0x40
-	strh r1, [r0]
-	adds r0, 0x2
-	strh r1, [r0]
-	adds r0, 0x2
-	strh r5, [r0]
-	adds r0, 0x2
-	strh r5, [r0]
-	adds r1, r2, 0
-	adds r1, 0xDC
-	movs r0, 0x78
-	strh r0, [r1]
-	adds r1, 0x2
-	movs r0, 0x50
-	strh r0, [r1]
-	adds r1, 0xA
-	adds r0, 0xB0
-	strh r0, [r1]
-	adds r0, r2, 0
-	adds r0, 0xEC
-	strh r5, [r0]
-	str r5, [r2, 0x64]
-	ldr r0, _080506E8 @ =gMain
-	movs r1, 0x87
-	lsls r1, 3
-	adds r0, r1
-	movs r1, 0x5
-	strb r1, [r0]
-	b _0805077E
-	.align 2, 0
-_080506CC: .4byte gUnknown_2031DA4
-_080506D0: .4byte gSpecialVar_0x8005
-_080506D4: .4byte gLinkPlayers + 8
-_080506D8: .4byte gSaveBlock2Ptr
-_080506DC: .4byte gEnemyParty
-_080506E0: .4byte gUnknown_2031DAC
-_080506E4: .4byte sub_804FF0C
-_080506E8: .4byte gMain
-_080506EC:
-	movs r0, 0
-	movs r1, 0
-	bl sub_804FFE4
-	b _08050764
-_080506F6:
-	movs r0, 0
-	movs r1, 0x1
-	bl sub_804FFE4
-	b _08050764
-_08050700:
-	movs r0, 0x1
-	movs r1, 0
-	bl sub_804FFE4
-	movs r0, 0
-	bl ShowBg
-	b _08050764
-_08050710:
-	movs r0, 0x1
-	movs r1, 0x1
-	bl sub_804FFE4
-	movs r0, 0
-	movs r1, 0xFF
-	bl FillWindowPixelBuffer
-	movs r0, 0
-	bl PutWindowTilemap
-	movs r0, 0
-	movs r1, 0x3
-	bl CopyWindowToVram
-	b _08050764
-_08050730:
-	bl sub_8050DE0
-	ldr r0, _08050744 @ =gUnknown_826CDD4
-	bl LoadSpriteSheet
-	ldr r0, _08050748 @ =gUnknown_826CDDC
-	bl LoadSpritePalette
-	b _08050764
-	.align 2, 0
-_08050744: .4byte gUnknown_826CDD4
-_08050748: .4byte gUnknown_826CDDC
-_0805074C:
-	movs r0, 0
-	bl ShowBg
-	b _08050764
-_08050754:
-	movs r0, 0x5
-	bl sub_8050968
-	movs r0, 0
-	bl sub_8050968
-	bl sub_8050E24
-_08050764:
-	ldr r1, _08050774 @ =gMain
-	movs r0, 0x87
-	lsls r0, 3
-	adds r1, r0
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	b _0805077E
-	.align 2, 0
-_08050774: .4byte gMain
-_08050778:
-	ldr r0, _0805079C @ =sub_8050948
-	bl SetMainCallback2
-_0805077E:
-	bl RunTasks
-	bl RunTextPrinters
-	bl AnimateSprites
-	bl BuildOamBuffer
-	bl UpdatePaletteFade
-	add sp, 0xC
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0805079C: .4byte sub_8050948
-	thumb_func_end sub_80505CC
-
-	thumb_func_start sub_80507A0
-sub_80507A0: @ 80507A0
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	movs r1, 0x64
-	muls r1, r0
-	ldr r0, _080507FC @ =gPlayerParty
-	adds r5, r1, r0
-	adds r0, r5, 0
-	movs r1, 0x2D
-	bl GetMonData
-	cmp r0, 0
-	bne _080507F4
-	adds r0, r5, 0
-	movs r1, 0xB
-	movs r2, 0
-	bl GetMonData
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	adds r0, r5, 0
-	movs r1, 0
-	movs r2, 0
-	bl GetMonData
-	adds r5, r0, 0
-	adds r0, r4, 0
-	bl SpeciesToNationalPokedexNum
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	adds r0, r4, 0
-	movs r1, 0x2
-	bl GetSetPokedexFlag
-	adds r0, r4, 0
-	movs r1, 0x3
-	adds r2, r5, 0
-	bl HandleSetPokedexFlag
-_080507F4:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080507FC: .4byte gPlayerParty
-	thumb_func_end sub_80507A0
-
-	thumb_func_start sub_8050800
-sub_8050800: @ 8050800
-	push {lr}
-	bl GetMultiplayerId
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8050800
-
-	thumb_func_start sub_805080C
-sub_805080C: @ 805080C
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	sub sp, 0x4
-	adds r4, r1, 0
-	lsls r0, 24
-	lsrs r0, 24
-	mov r9, r0
-	lsls r4, 24
-	lsrs r4, 24
-	movs r5, 0x64
-	mov r1, r9
-	muls r1, r5
-	ldr r0, _080508D8 @ =gPlayerParty
-	adds r7, r1, r0
-	adds r0, r7, 0
-	movs r1, 0x40
-	bl GetMonData
-	lsls r0, 16
-	lsrs r6, r0, 16
-	adds r1, r4, 0
-	muls r1, r5
-	ldr r0, _080508DC @ =gEnemyParty
-	adds r5, r1, r0
-	adds r0, r5, 0
-	movs r1, 0x40
-	bl GetMonData
-	lsls r0, 16
-	lsrs r0, 16
-	mov r8, r0
-	cmp r6, 0xFF
-	beq _08050866
-	ldr r0, _080508E0 @ =gSaveBlock1Ptr
-	lsls r1, r6, 3
-	adds r1, r6
-	lsls r1, 2
-	ldr r2, _080508E4 @ =0x00002cd0
-	adds r1, r2
-	ldr r0, [r0]
-	adds r0, r1
-	bl ClearMailStruct
-_08050866:
-	ldr r4, _080508E8 @ =gUnknown_2031DAC
-	ldr r0, [r4]
-	adds r1, r7, 0
-	movs r2, 0x64
-	bl memcpy
-	adds r0, r7, 0
-	adds r1, r5, 0
-	movs r2, 0x64
-	bl memcpy
-	ldr r1, [r4]
-	adds r0, r5, 0
-	movs r2, 0x64
-	bl memcpy
-	movs r1, 0x46
-	mov r0, sp
-	strb r1, [r0]
-	adds r0, r7, 0
-	movs r1, 0x2D
-	bl GetMonData
-	cmp r0, 0
-	bne _080508A2
-	adds r0, r7, 0
-	movs r1, 0x20
-	mov r2, sp
-	bl SetMonData
-_080508A2:
-	mov r0, r8
-	cmp r0, 0xFF
-	beq _080508B8
-	lsls r1, r0, 3
-	add r1, r8
-	lsls r1, 2
-	ldr r0, _080508EC @ =gUnknown_2031CCC
-	adds r1, r0
-	adds r0, r7, 0
-	bl GiveMailToMon2
-_080508B8:
-	mov r0, r9
-	bl sub_80507A0
-	ldr r0, _080508F0 @ =gReceivedRemoteLinkPlayers
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _080508CA
-	bl sub_8050800
-_080508CA:
-	add sp, 0x4
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080508D8: .4byte gPlayerParty
-_080508DC: .4byte gEnemyParty
-_080508E0: .4byte gSaveBlock1Ptr
-_080508E4: .4byte 0x00002cd0
-_080508E8: .4byte gUnknown_2031DAC
-_080508EC: .4byte gUnknown_2031CCC
-_080508F0: .4byte gReceivedRemoteLinkPlayers
-	thumb_func_end sub_805080C
-
-	thumb_func_start sub_80508F4
-sub_80508F4: @ 80508F4
-	push {r4,lr}
-	ldr r4, _08050908 @ =gUnknown_2031DAC
-	ldr r0, [r4]
-	adds r0, 0x93
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	beq _0805090C
-	cmp r0, 0x2
-	beq _08050932
-	b _0805093C
-	.align 2, 0
-_08050908: .4byte gUnknown_2031DAC
-_0805090C:
-	bl IsLinkTaskFinished
-	lsls r0, 24
-	cmp r0, 0
-	beq _08050932
-	bl bitmask_all_link_players_but_self
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, [r4]
-	adds r1, 0x74
-	movs r2, 0x14
-	bl SendBlock
-	ldr r1, [r4]
-	adds r1, 0x93
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-_08050932:
-	ldr r0, _08050944 @ =gUnknown_2031DAC
-	ldr r0, [r0]
-	adds r0, 0x93
-	movs r1, 0
-	strb r1, [r0]
-_0805093C:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08050944: .4byte gUnknown_2031DAC
-	thumb_func_end sub_80508F4
-
-	thumb_func_start sub_8050948
-sub_8050948: @ 8050948
-	push {lr}
-	bl sub_8050F14
-	bl RunTasks
-	bl RunTextPrinters
-	bl AnimateSprites
-	bl BuildOamBuffer
-	bl UpdatePaletteFade
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8050948
-
 	thumb_func_start sub_8050968
 sub_8050968: @ 8050968
 	push {r4-r7,lr}
@@ -963,7 +32,7 @@ _08050984:
 	.4byte _08050C6C
 	.4byte _08050D48
 _080509A4:
-	ldr r0, _080509FC @ =gUnknown_2031DAC
+	ldr r0, _080509FC @ =sTradeAnimationResourcesPtr
 	ldr r1, [r0]
 	adds r2, r1, 0
 	adds r2, 0xE4
@@ -1005,7 +74,7 @@ _080509E6:
 	bhi _080509E6
 	b _08050D98
 	.align 2, 0
-_080509FC: .4byte gUnknown_2031DAC
+_080509FC: .4byte sTradeAnimationResourcesPtr
 _08050A00: .4byte 0x00005206
 _08050A04: .4byte gTradeGba2_Pal
 _08050A08: .4byte gTradeGba_Gfx
@@ -1013,7 +82,7 @@ _08050A0C: .4byte 0x06004000
 _08050A10: .4byte 0x040000d4
 _08050A14: .4byte 0x80000800
 _08050A18:
-	ldr r4, _08050A54 @ =gUnknown_2031DAC
+	ldr r4, _08050A54 @ =sTradeAnimationResourcesPtr
 	ldr r2, [r4]
 	adds r1, r2, 0
 	adds r1, 0xE2
@@ -1041,7 +110,7 @@ _08050A18:
 	ldr r1, _08050A60 @ =gUnknown_826AA5C
 	b _08050A66
 	.align 2, 0
-_08050A54: .4byte gUnknown_2031DAC
+_08050A54: .4byte sTradeAnimationResourcesPtr
 _08050A58: .4byte 0x00008502
 _08050A5C: .4byte 0x00009206
 _08050A60: .4byte gUnknown_826AA5C
@@ -1092,7 +161,7 @@ _08050AB8: .4byte 0x040000d4
 _08050ABC: .4byte 0x80000800
 _08050AC0: .4byte gTradeGba_Gfx
 _08050AC4:
-	ldr r0, _08050AF4 @ =gUnknown_2031DAC
+	ldr r0, _08050AF4 @ =sTradeAnimationResourcesPtr
 	ldr r2, [r0]
 	adds r0, r2, 0
 	adds r0, 0xE0
@@ -1115,7 +184,7 @@ _08050AC4:
 	movs r0, 0x8
 	b _08050B1E
 	.align 2, 0
-_08050AF4: .4byte gUnknown_2031DAC
+_08050AF4: .4byte sTradeAnimationResourcesPtr
 _08050AF8: .4byte 0x00001241
 _08050AFC: .4byte gUnknown_3379A0Bin
 _08050B00: .4byte 0x06002800
@@ -1154,7 +223,7 @@ _08050B3C:
 	ldr r0, _08050B78 @ =gUnknown_826C60C
 	ldr r1, _08050B7C @ =0x06009000
 	bl LZ77UnCompVram
-	ldr r0, _08050B80 @ =gUnknown_2031DAC
+	ldr r0, _08050B80 @ =sTradeAnimationResourcesPtr
 	ldr r0, [r0]
 	adds r0, 0xE4
 	movs r1, 0x50
@@ -1171,7 +240,7 @@ _08050B70: .4byte gWirelessSignal4bpp
 _08050B74: .4byte 0x06004000
 _08050B78: .4byte gUnknown_826C60C
 _08050B7C: .4byte 0x06009000
-_08050B80: .4byte gUnknown_2031DAC
+_08050B80: .4byte sTradeAnimationResourcesPtr
 _08050B84:
 	ldr r1, _08050C0C @ =0x00001441
 	movs r0, 0
@@ -1179,7 +248,7 @@ _08050B84:
 	ldr r1, _08050C10 @ =0x00001287
 	movs r0, 0xC
 	bl SetGpuReg
-	ldr r0, _08050C14 @ =gUnknown_2031DAC
+	ldr r0, _08050C14 @ =sTradeAnimationResourcesPtr
 	ldr r3, [r0]
 	adds r1, r3, 0
 	adds r1, 0xD4
@@ -1225,7 +294,7 @@ _08050BD0:
 	orrs r0, r7
 	str r0, [r1, 0x8]
 	ldr r0, [r1, 0x8]
-	ldr r0, _08050C14 @ =gUnknown_2031DAC
+	ldr r0, _08050C14 @ =sTradeAnimationResourcesPtr
 	ldr r0, [r0]
 	movs r1, 0x84
 	lsls r1, 1
@@ -1243,7 +312,7 @@ _08050BD0:
 	.align 2, 0
 _08050C0C: .4byte 0x00001441
 _08050C10: .4byte 0x00001287
-_08050C14: .4byte gUnknown_2031DAC
+_08050C14: .4byte sTradeAnimationResourcesPtr
 _08050C18: .4byte gUnknown_826701C
 _08050C1C: .4byte 0x06004000
 _08050C20: .4byte 0x040000d4
@@ -1265,7 +334,7 @@ _08050C48: .4byte 0x06009000
 _08050C4C: .4byte 0x040000d4
 _08050C50: .4byte 0x80000080
 _08050C54:
-	ldr r0, _08050C68 @ =gUnknown_2031DAC
+	ldr r0, _08050C68 @ =sTradeAnimationResourcesPtr
 	ldr r0, [r0]
 	adds r1, r0, 0
 	adds r1, 0xE0
@@ -1275,7 +344,7 @@ _08050C54:
 	strh r2, [r0]
 	b _08050DB4
 	.align 2, 0
-_08050C68: .4byte gUnknown_2031DAC
+_08050C68: .4byte sTradeAnimationResourcesPtr
 _08050C6C:
 	ldr r1, _08050D00 @ =0x00001441
 	movs r0, 0
@@ -1283,7 +352,7 @@ _08050C6C:
 	ldr r1, _08050D04 @ =0x00001287
 	movs r0, 0xC
 	bl SetGpuReg
-	ldr r0, _08050D08 @ =gUnknown_2031DAC
+	ldr r0, _08050D08 @ =sTradeAnimationResourcesPtr
 	ldr r3, [r0]
 	adds r1, r3, 0
 	adds r1, 0xD4
@@ -1334,7 +403,7 @@ _08050CC2:
 	orrs r0, r7
 	str r0, [r1, 0x8]
 	ldr r0, [r1, 0x8]
-	ldr r0, _08050D08 @ =gUnknown_2031DAC
+	ldr r0, _08050D08 @ =sTradeAnimationResourcesPtr
 	ldr r0, [r0]
 	movs r1, 0x84
 	lsls r1, 1
@@ -1352,7 +421,7 @@ _08050CC2:
 	.align 2, 0
 _08050D00: .4byte 0x00001441
 _08050D04: .4byte 0x00001287
-_08050D08: .4byte gUnknown_2031DAC
+_08050D08: .4byte sTradeAnimationResourcesPtr
 _08050D0C: .4byte gUnknown_826701C
 _08050D10: .4byte 0x06004000
 _08050D14: .4byte 0x040000d4
@@ -1374,7 +443,7 @@ _08050D3C: .4byte 0x06009000
 _08050D40: .4byte 0x040000d4
 _08050D44: .4byte 0x80000080
 _08050D48:
-	ldr r0, _08050DBC @ =gUnknown_2031DAC
+	ldr r0, _08050DBC @ =sTradeAnimationResourcesPtr
 	ldr r0, [r0]
 	adds r1, r0, 0
 	adds r1, 0xE4
@@ -1433,7 +502,7 @@ _08050DB4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08050DBC: .4byte gUnknown_2031DAC
+_08050DBC: .4byte sTradeAnimationResourcesPtr
 _08050DC0: .4byte 0x00005206
 _08050DC4: .4byte gTradeGba2_Pal
 _08050DC8: .4byte gTradeGba_Gfx
@@ -1474,7 +543,7 @@ _08050E20: .4byte gUnknown_826CE3C
 sub_8050E24: @ 8050E24
 	push {r4,r5,lr}
 	sub sp, 0x14
-	ldr r0, _08050E94 @ =gUnknown_2031DAC
+	ldr r0, _08050E94 @ =sTradeAnimationResourcesPtr
 	ldr r0, [r0]
 	adds r0, 0xEE
 	ldrb r0, [r0]
@@ -1522,7 +591,7 @@ sub_8050E24: @ 8050E24
 	bl StringCopy10
 	b _08050EF0
 	.align 2, 0
-_08050E94: .4byte gUnknown_2031DAC
+_08050E94: .4byte sTradeAnimationResourcesPtr
 _08050E98: .4byte gStringVar1
 _08050E9C: .4byte gLinkPlayers + 8
 _08050EA0: .4byte gUnknown_2031DA4
@@ -1575,7 +644,7 @@ _08050F10: .4byte gStringVar2
 	thumb_func_start sub_8050F14
 sub_8050F14: @ 8050F14
 	push {lr}
-	ldr r0, _08050F2C @ =gUnknown_2031DAC
+	ldr r0, _08050F2C @ =sTradeAnimationResourcesPtr
 	ldr r0, [r0]
 	movs r1, 0x84
 	lsls r1, 1
@@ -1586,7 +655,7 @@ sub_8050F14: @ 8050F14
 	bl sub_805232C
 	b _08050F34
 	.align 2, 0
-_08050F2C: .4byte gUnknown_2031DAC
+_08050F2C: .4byte sTradeAnimationResourcesPtr
 _08050F30:
 	bl sub_8050F3C
 _08050F34:
@@ -1600,7 +669,7 @@ _08050F34:
 sub_8050F3C: @ 8050F3C
 	push {r4-r7,lr}
 	sub sp, 0x10
-	ldr r0, _08050F60 @ =gUnknown_2031DAC
+	ldr r0, _08050F60 @ =sTradeAnimationResourcesPtr
 	ldr r1, [r0]
 	adds r1, 0x94
 	ldrh r5, [r1]
@@ -1616,7 +685,7 @@ _08050F54:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08050F60: .4byte gUnknown_2031DAC
+_08050F60: .4byte sTradeAnimationResourcesPtr
 _08050F64: .4byte 0x0000010b
 _08050F68: .4byte _08050F6C
 	.align 2, 0
@@ -1997,7 +1066,7 @@ _08051470:
 	adds r1, r4, 0
 	movs r2, 0
 	bl sub_8054508
-	ldr r4, _080514B4 @ =gUnknown_2031DAC
+	ldr r4, _080514B4 @ =sTradeAnimationResourcesPtr
 	ldr r0, [r4]
 	adds r2, r0, 0
 	adds r2, 0xF0
@@ -2019,7 +1088,7 @@ _0805149E:
 	.align 2, 0
 _080514AC: .4byte gStringVar4
 _080514B0: .4byte gUnknown_841E1E9
-_080514B4: .4byte gUnknown_2031DAC
+_080514B4: .4byte sTradeAnimationResourcesPtr
 _080514B8:
 	ldr r1, [r7]
 	ldr r0, [r1, 0x64]
@@ -2089,7 +1158,7 @@ _0805152C:
 	beq _0805154C
 	bl _08052318
 _0805154C:
-	ldr r0, _08051590 @ =gUnknown_826CDE4
+	ldr r0, _08051590 @ =sTradePokeballSpriteTemplate
 	movs r1, 0x78
 	movs r2, 0x20
 	movs r3, 0
@@ -2105,7 +1174,7 @@ _0805154C:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	ldr r1, _08051594 @ =sub_8053938
+	ldr r1, _08051594 @ =SpriteCB_TradePokeball_Outbound
 	str r1, [r0]
 	adds r2, 0xD2
 	ldrb r1, [r2]
@@ -2119,8 +1188,8 @@ _0805154C:
 	.align 2, 0
 _08051588: .4byte gSprites
 _0805158C: .4byte SpriteCallbackDummy
-_08051590: .4byte gUnknown_826CDE4
-_08051594: .4byte sub_8053938
+_08051590: .4byte sTradePokeballSpriteTemplate
+_08051594: .4byte SpriteCB_TradePokeball_Outbound
 _08051598:
 	movs r0, 0x1
 	negs r0, r0
@@ -2129,14 +1198,14 @@ _08051598:
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r0, _080515B8 @ =gUnknown_2031DAC
+	ldr r0, _080515B8 @ =sTradeAnimationResourcesPtr
 	ldr r0, [r0]
 	adds r0, 0x94
 	movs r1, 0x14
 	strh r1, [r0]
 	bl _08052318
 	.align 2, 0
-_080515B8: .4byte gUnknown_2031DAC
+_080515B8: .4byte sTradeAnimationResourcesPtr
 _080515BC:
 	ldr r0, _080515E8 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
@@ -2183,7 +1252,7 @@ _0805160E:
 	.align 2, 0
 _0805161C: .4byte gPaletteFade
 _08051620:
-	ldr r4, _0805163C @ =gUnknown_2031DAC
+	ldr r4, _0805163C @ =sTradeAnimationResourcesPtr
 	ldr r0, [r4]
 	adds r2, r0, 0
 	adds r2, 0xEA
@@ -2197,7 +1266,7 @@ _08051620:
 	strh r0, [r2]
 	b _0805165C
 	.align 2, 0
-_0805163C: .4byte gUnknown_2031DAC
+_0805163C: .4byte sTradeAnimationResourcesPtr
 _08051640:
 	movs r0, 0x1
 	bl sub_8050968
@@ -2213,11 +1282,11 @@ _08051640:
 	strh r0, [r1]
 	str r2, [r3, 0x64]
 _0805165C:
-	ldr r0, _08051664 @ =gUnknown_2031DAC
+	ldr r0, _08051664 @ =sTradeAnimationResourcesPtr
 	ldr r4, [r0]
 	bl _08051EB0
 	.align 2, 0
-_08051664: .4byte gUnknown_2031DAC
+_08051664: .4byte sTradeAnimationResourcesPtr
 _08051668:
 	ldr r1, [r7]
 	ldr r0, [r1, 0x64]
@@ -2227,7 +1296,7 @@ _08051668:
 	bhi _08051678
 	bl _08052318
 _08051678:
-	bl sub_804FE24
+	bl TradeAnim_UpdateBgAffine
 	ldr r0, _08051694 @ =gUnknown_826CF30
 	movs r1, 0x78
 	movs r2, 0x50
@@ -2299,7 +1368,7 @@ _08051700:
 	beq _08051714
 	bl _08052318
 _08051714:
-	ldr r0, _0805172C @ =gUnknown_826CEB8
+	ldr r0, _0805172C @ =sGameLinkCableEndSpriteTemplate
 	movs r1, 0x80
 	movs r2, 0x41
 	movs r3, 0
@@ -2309,14 +1378,14 @@ _08051714:
 	strb r0, [r1]
 	bl _08052318
 	.align 2, 0
-_0805172C: .4byte gUnknown_826CEB8
+_0805172C: .4byte sGameLinkCableEndSpriteTemplate
 _08051730:
 	ldr r0, _08051774 @ =gUnknown_826CE44
 	movs r1, 0x80
 	movs r2, 0x50
 	movs r3, 0x3
 	bl CreateSprite
-	ldr r4, _08051778 @ =gUnknown_2031DAC
+	ldr r4, _08051778 @ =sTradeAnimationResourcesPtr
 	ldr r1, [r4]
 	adds r1, 0x90
 	strb r0, [r1]
@@ -2342,7 +1411,7 @@ _08051730:
 	bl _080522AC
 	.align 2, 0
 _08051774: .4byte gUnknown_826CE44
-_08051778: .4byte gUnknown_2031DAC
+_08051778: .4byte sTradeAnimationResourcesPtr
 _0805177C: .4byte gUnknown_826CE84
 _08051780: .4byte gSprites
 _08051784:
@@ -2418,14 +1487,14 @@ _08051808:
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r0, _08051828 @ =gUnknown_2031DAC
+	ldr r0, _08051828 @ =sTradeAnimationResourcesPtr
 	ldr r0, [r0]
 	adds r0, 0x94
 	movs r1, 0x1E
 	strh r1, [r0]
 	bl _08052318
 	.align 2, 0
-_08051828: .4byte gUnknown_2031DAC
+_08051828: .4byte sTradeAnimationResourcesPtr
 _0805182C:
 	ldr r0, _08051870 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
@@ -2474,7 +1543,7 @@ _08051878:
 	movs r2, 0xAA
 	movs r3, 0
 	bl CreateSprite
-	ldr r4, _080518C0 @ =gUnknown_2031DAC
+	ldr r4, _080518C0 @ =sTradeAnimationResourcesPtr
 	ldr r1, [r4]
 	adds r1, 0x90
 	strb r0, [r1]
@@ -2491,7 +1560,7 @@ _08051878:
 	bl _080522AC
 	.align 2, 0
 _080518BC: .4byte gUnknown_826CE84
-_080518C0: .4byte gUnknown_2031DAC
+_080518C0: .4byte sTradeAnimationResourcesPtr
 _080518C4:
 	ldr r0, _08051914 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
@@ -2501,7 +1570,7 @@ _080518C4:
 	bne _080518E2
 	movs r0, 0x28
 	bl PlaySE
-	ldr r0, _08051918 @ =gUnknown_2031DAC
+	ldr r0, _08051918 @ =sTradeAnimationResourcesPtr
 	ldr r1, [r0]
 	adds r1, 0x94
 	ldrh r0, [r1]
@@ -2509,7 +1578,7 @@ _080518C4:
 	strh r0, [r1]
 _080518E2:
 	ldr r3, _0805191C @ =gSprites
-	ldr r0, _08051918 @ =gUnknown_2031DAC
+	ldr r0, _08051918 @ =sTradeAnimationResourcesPtr
 	ldr r2, [r0]
 	adds r0, r2, 0
 	adds r0, 0x90
@@ -2533,7 +1602,7 @@ _080518E2:
 	bl _08052318
 	.align 2, 0
 _08051914: .4byte gPaletteFade
-_08051918: .4byte gUnknown_2031DAC
+_08051918: .4byte sTradeAnimationResourcesPtr
 _0805191C: .4byte gSprites
 _08051920:
 	ldr r5, _0805197C @ =gSprites
@@ -2608,7 +1677,7 @@ _080519A8:
 	.align 2, 0
 _080519B8: .4byte 0x0000ffff
 _080519BC:
-	ldr r5, _08051A28 @ =gUnknown_2031DAC
+	ldr r5, _08051A28 @ =sTradeAnimationResourcesPtr
 	ldr r0, [r5]
 	adds r0, 0xF0
 	ldrh r0, [r0]
@@ -2659,7 +1728,7 @@ _080519BC:
 	bl StartSpriteAffineAnim
 	b _08051A4A
 	.align 2, 0
-_08051A28: .4byte gUnknown_2031DAC
+_08051A28: .4byte sTradeAnimationResourcesPtr
 _08051A2C: .4byte gSprites
 _08051A30: .4byte gUnknown_826CF88
 _08051A34:
@@ -2674,7 +1743,7 @@ _08051A34:
 	movs r1, 0
 	bl StartSpriteAffineAnim
 _08051A4A:
-	ldr r5, _08051ADC @ =gUnknown_2031DAC
+	ldr r5, _08051ADC @ =sTradeAnimationResourcesPtr
 	ldr r0, [r5]
 	adds r0, 0x8F
 	ldrb r1, [r0]
@@ -2744,7 +1813,7 @@ _08051A4A:
 	bl _080522AC
 	.align 2, 0
 _08051AD8: .4byte gSprites
-_08051ADC: .4byte gUnknown_2031DAC
+_08051ADC: .4byte sTradeAnimationResourcesPtr
 _08051AE0: .4byte 0x0000ffe0
 _08051AE4:
 	ldr r4, _08051BAC @ =gSprites
@@ -3130,7 +2199,7 @@ _08051DD6:
 	bne _08051DE4
 	b _08052318
 _08051DE4:
-	ldr r0, _08051E10 @ =gUnknown_826CEB8
+	ldr r0, _08051E10 @ =sGameLinkCableEndSpriteTemplate
 	movs r1, 0x80
 	movs r2, 0x41
 	movs r3, 0
@@ -3147,20 +2216,20 @@ _08051DE4:
 	lsls r0, 2
 	adds r2, 0x1C
 	adds r0, r2
-	ldr r1, _08051E18 @ =sub_804FDDC
+	ldr r1, _08051E18 @ =SpriteCB_GameLinkCableEnd_Inbound
 	str r1, [r0]
 	b _08052318
 	.align 2, 0
-_08051E10: .4byte gUnknown_826CEB8
+_08051E10: .4byte sGameLinkCableEndSpriteTemplate
 _08051E14: .4byte gSprites
-_08051E18: .4byte sub_804FDDC
+_08051E18: .4byte SpriteCB_GameLinkCableEnd_Inbound
 _08051E1C:
 	ldr r0, _08051E3C @ =gUnknown_826CF30
 	movs r1, 0x78
 	movs r2, 0x50
 	movs r3, 0
 	bl CreateSprite
-	ldr r2, _08051E40 @ =gUnknown_2031DAC
+	ldr r2, _08051E40 @ =sTradeAnimationResourcesPtr
 	ldr r1, [r2]
 	adds r1, 0x91
 	strb r0, [r1]
@@ -3171,7 +2240,7 @@ _08051E1C:
 	b _08052318
 	.align 2, 0
 _08051E3C: .4byte gUnknown_826CF30
-_08051E40: .4byte gUnknown_2031DAC
+_08051E40: .4byte sTradeAnimationResourcesPtr
 _08051E44:
 	ldr r2, _08051E80 @ =gSprites
 	ldr r0, [r7]
@@ -3245,14 +2314,14 @@ _08051EC4:
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r0, _08051EE0 @ =gUnknown_2031DAC
+	ldr r0, _08051EE0 @ =sTradeAnimationResourcesPtr
 	ldr r0, [r0]
 	adds r0, 0x94
 	movs r1, 0x3C
 	strh r1, [r0]
 	b _08052318
 	.align 2, 0
-_08051EE0: .4byte gUnknown_2031DAC
+_08051EE0: .4byte sTradeAnimationResourcesPtr
 _08051EE4:
 	ldr r4, _08051F08 @ =gPaletteFade
 	ldrb r1, [r4, 0x7]
@@ -3305,13 +2374,13 @@ _08051F40:
 	.align 2, 0
 _08051F44: .4byte gPaletteFade
 _08051F48:
-	ldr r0, _08051FDC @ =gUnknown_826CDE4
+	ldr r0, _08051FDC @ =sTradePokeballSpriteTemplate
 	movs r2, 0x8
 	negs r2, r2
 	movs r1, 0x78
 	movs r3, 0
 	bl CreateSprite
-	ldr r5, _08051FE0 @ =gUnknown_2031DAC
+	ldr r5, _08051FE0 @ =sTradeAnimationResourcesPtr
 	ldr r1, [r5]
 	adds r1, 0xD3
 	movs r6, 0
@@ -3333,7 +2402,7 @@ _08051F48:
 	adds r1, r4, 0
 	adds r1, 0x1C
 	adds r0, r1
-	ldr r1, _08051FE8 @ =sub_8053A0C
+	ldr r1, _08051FE8 @ =SpriteCB_TradePokeball_Inbound
 	str r1, [r0]
 	ldrb r1, [r2]
 	lsls r0, r1, 4
@@ -3375,10 +2444,10 @@ _08051F48:
 	str r6, [r2, 0x64]
 	b _08052318
 	.align 2, 0
-_08051FDC: .4byte gUnknown_826CDE4
-_08051FE0: .4byte gUnknown_2031DAC
+_08051FDC: .4byte sTradePokeballSpriteTemplate
+_08051FE0: .4byte sTradeAnimationResourcesPtr
 _08051FE4: .4byte gSprites
-_08051FE8: .4byte sub_8053A0C
+_08051FE8: .4byte SpriteCB_TradePokeball_Inbound
 _08051FEC: .4byte 0x0000ffff
 _08051FF0:
 	ldr r2, _0805201C @ =gSprites
@@ -3540,7 +2609,7 @@ _08052128:
 	adds r1, r4, 0
 	movs r2, 0
 	bl sub_8054508
-	ldr r0, _0805215C @ =gUnknown_2031DAC
+	ldr r0, _0805215C @ =sTradeAnimationResourcesPtr
 	ldr r3, [r0]
 	adds r1, r3, 0
 	adds r1, 0x94
@@ -3550,7 +2619,7 @@ _08052128:
 	.align 2, 0
 _08052154: .4byte gStringVar4
 _08052158: .4byte gUnknown_841E20D
-_0805215C: .4byte gUnknown_2031DAC
+_0805215C: .4byte sTradeAnimationResourcesPtr
 _08052160:
 	ldr r1, [r7]
 	ldr r0, [r1, 0x64]
@@ -3589,14 +2658,14 @@ _08052198:
 	bne _080521A4
 	b _08052318
 _080521A4:
-	ldr r0, _080521B0 @ =gUnknown_2031DAC
+	ldr r0, _080521B0 @ =sTradeAnimationResourcesPtr
 	ldr r0, [r0]
 	adds r0, 0x94
 	movs r1, 0x44
 	strh r1, [r0]
 	b _08052318
 	.align 2, 0
-_080521B0: .4byte gUnknown_2031DAC
+_080521B0: .4byte sTradeAnimationResourcesPtr
 _080521B4:
 	ldr r1, [r7]
 	ldr r0, [r1, 0x64]
@@ -3670,9 +2739,9 @@ _0805223C:
 	ldr r0, _08052280 @ =gSpecialVar_0x8005
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_805080C
+	bl Trade_SwapPlayerAndParterMonData
 	ldr r1, _08052284 @ =gCB2_AfterEvolution
-	ldr r0, _08052288 @ =sub_8050948
+	ldr r0, _08052288 @ =CB2_RunTradeAnim_InGameTrade
 	str r0, [r1]
 	ldr r7, _0805228C @ =gUnknown_2031DA4
 	ldrb r0, [r7]
@@ -3691,7 +2760,7 @@ _0805223C:
 	adds r0, r3, 0
 	muls r0, r6
 	adds r0, r5
-	ldr r1, _08052294 @ =gUnknown_2031DAC
+	ldr r1, _08052294 @ =sTradeAnimationResourcesPtr
 	ldr r1, [r1]
 	adds r1, 0x8F
 	ldrb r2, [r1]
@@ -3701,10 +2770,10 @@ _0805223C:
 	.align 2, 0
 _08052280: .4byte gSpecialVar_0x8005
 _08052284: .4byte gCB2_AfterEvolution
-_08052288: .4byte sub_8050948
+_08052288: .4byte CB2_RunTradeAnim_InGameTrade
 _0805228C: .4byte gUnknown_2031DA4
 _08052290: .4byte gPlayerParty
-_08052294: .4byte gUnknown_2031DAC
+_08052294: .4byte sTradeAnimationResourcesPtr
 _08052298:
 	movs r0, 0x1
 	negs r0, r0
@@ -3715,7 +2784,7 @@ _08052298:
 _080522A4:
 	bl BeginNormalPaletteFade
 _080522A8:
-	ldr r0, _080522B8 @ =gUnknown_2031DAC
+	ldr r0, _080522B8 @ =sTradeAnimationResourcesPtr
 	ldr r1, [r0]
 _080522AC:
 	adds r1, 0x94
@@ -3724,7 +2793,7 @@ _080522AC:
 	strh r0, [r1]
 	b _08052318
 	.align 2, 0
-_080522B8: .4byte gUnknown_2031DAC
+_080522B8: .4byte sTradeAnimationResourcesPtr
 _080522BC:
 	ldr r0, _08052324 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
@@ -3776,7 +2845,7 @@ _08052328: .4byte CB2_ReturnToField
 sub_805232C: @ 805232C
 	push {r4-r7,lr}
 	sub sp, 0x10
-	ldr r0, _08052350 @ =gUnknown_2031DAC
+	ldr r0, _08052350 @ =sTradeAnimationResourcesPtr
 	ldr r1, [r0]
 	adds r1, 0x94
 	ldrh r5, [r1]
@@ -3792,7 +2861,7 @@ _08052344:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08052350: .4byte gUnknown_2031DAC
+_08052350: .4byte sTradeAnimationResourcesPtr
 _08052354: .4byte 0x0000010b
 _08052358: .4byte _0805235C
 	.align 2, 0
@@ -4173,7 +3242,7 @@ _08052860:
 	adds r1, r4, 0
 	movs r2, 0
 	bl sub_8054508
-	ldr r4, _080528A4 @ =gUnknown_2031DAC
+	ldr r4, _080528A4 @ =sTradeAnimationResourcesPtr
 	ldr r0, [r4]
 	adds r2, r0, 0
 	adds r2, 0xF0
@@ -4195,7 +3264,7 @@ _0805288E:
 	.align 2, 0
 _0805289C: .4byte gStringVar4
 _080528A0: .4byte gUnknown_841E1E9
-_080528A4: .4byte gUnknown_2031DAC
+_080528A4: .4byte sTradeAnimationResourcesPtr
 _080528A8:
 	ldr r1, [r7]
 	ldr r0, [r1, 0x64]
@@ -4265,7 +3334,7 @@ _0805291C:
 	beq _0805293C
 	bl _08053774
 _0805293C:
-	ldr r0, _08052980 @ =gUnknown_826CDE4
+	ldr r0, _08052980 @ =sTradePokeballSpriteTemplate
 	movs r1, 0x78
 	movs r2, 0x20
 	movs r3, 0
@@ -4281,7 +3350,7 @@ _0805293C:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	ldr r1, _08052984 @ =sub_8053938
+	ldr r1, _08052984 @ =SpriteCB_TradePokeball_Outbound
 	str r1, [r0]
 	adds r2, 0xD2
 	ldrb r1, [r2]
@@ -4295,8 +3364,8 @@ _0805293C:
 	.align 2, 0
 _08052978: .4byte gSprites
 _0805297C: .4byte SpriteCallbackDummy
-_08052980: .4byte gUnknown_826CDE4
-_08052984: .4byte sub_8053938
+_08052980: .4byte sTradePokeballSpriteTemplate
+_08052984: .4byte SpriteCB_TradePokeball_Outbound
 _08052988:
 	movs r0, 0x1
 	negs r0, r0
@@ -4305,14 +3374,14 @@ _08052988:
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r0, _080529A8 @ =gUnknown_2031DAC
+	ldr r0, _080529A8 @ =sTradeAnimationResourcesPtr
 	ldr r0, [r0]
 	adds r0, 0x94
 	movs r1, 0x14
 	strh r1, [r0]
 	bl _08053774
 	.align 2, 0
-_080529A8: .4byte gUnknown_2031DAC
+_080529A8: .4byte sTradeAnimationResourcesPtr
 _080529AC:
 	ldr r0, _080529D8 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
@@ -4359,7 +3428,7 @@ _080529FE:
 	.align 2, 0
 _08052A0C: .4byte gPaletteFade
 _08052A10:
-	ldr r4, _08052A2C @ =gUnknown_2031DAC
+	ldr r4, _08052A2C @ =sTradeAnimationResourcesPtr
 	ldr r0, [r4]
 	adds r2, r0, 0
 	adds r2, 0xEA
@@ -4373,7 +3442,7 @@ _08052A10:
 	strh r0, [r2]
 	b _08052A4A
 	.align 2, 0
-_08052A2C: .4byte gUnknown_2031DAC
+_08052A2C: .4byte sTradeAnimationResourcesPtr
 _08052A30:
 	movs r0, 0x1
 	bl sub_8050968
@@ -4388,11 +3457,11 @@ _08052A30:
 	strh r0, [r1]
 	str r2, [r3, 0x64]
 _08052A4A:
-	ldr r0, _08052A54 @ =gUnknown_2031DAC
+	ldr r0, _08052A54 @ =sTradeAnimationResourcesPtr
 	ldr r4, [r0]
 	bl _0805330C
 	.align 2, 0
-_08052A54: .4byte gUnknown_2031DAC
+_08052A54: .4byte sTradeAnimationResourcesPtr
 _08052A58:
 	ldr r1, [r7]
 	ldr r0, [r1, 0x64]
@@ -4459,7 +3528,7 @@ _08052AE0:
 	beq _08052AF0
 	bl _08053774
 _08052AF0:
-	ldr r0, _08052B04 @ =gUnknown_2031DAC
+	ldr r0, _08052B04 @ =sTradeAnimationResourcesPtr
 	ldr r0, [r0]
 	adds r0, 0x94
 	movs r1, 0x1A
@@ -4467,7 +3536,7 @@ _08052AF0:
 	bl _08053774
 	.align 2, 0
 _08052B00: .4byte c3_08054588
-_08052B04: .4byte gUnknown_2031DAC
+_08052B04: .4byte sTradeAnimationResourcesPtr
 _08052B08:
 	ldr r2, [r7]
 	adds r0, r2, 0
@@ -4490,7 +3559,7 @@ _08052B28:
 	movs r2, 0x50
 	movs r3, 0x3
 	bl CreateSprite
-	ldr r4, _08052B84 @ =gUnknown_2031DAC
+	ldr r4, _08052B84 @ =sTradeAnimationResourcesPtr
 	ldr r1, [r4]
 	adds r1, 0x90
 	strb r0, [r1]
@@ -4504,7 +3573,7 @@ _08052B28:
 	adds r1, r5, 0
 	adds r1, 0x1C
 	adds r0, r1
-	ldr r1, _08052B8C @ =sub_804FD48
+	ldr r1, _08052B8C @ =SpriteCB_TradeGlowWireless
 	str r1, [r0]
 	ldr r0, _08052B90 @ =gUnknown_826CE84
 	movs r1, 0x78
@@ -4527,9 +3596,9 @@ _08052B28:
 	bl _08053708
 	.align 2, 0
 _08052B80: .4byte gUnknown_826CE44
-_08052B84: .4byte gUnknown_2031DAC
+_08052B84: .4byte sTradeAnimationResourcesPtr
 _08052B88: .4byte gSprites
-_08052B8C: .4byte sub_804FD48
+_08052B8C: .4byte SpriteCB_TradeGlowWireless
 _08052B90: .4byte gUnknown_826CE84
 _08052B94:
 	ldr r2, [r7]
@@ -4604,14 +3673,14 @@ _08052C18:
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r0, _08052C38 @ =gUnknown_2031DAC
+	ldr r0, _08052C38 @ =sTradeAnimationResourcesPtr
 	ldr r0, [r0]
 	adds r0, 0x94
 	movs r1, 0x1E
 	strh r1, [r0]
 	bl _08053774
 	.align 2, 0
-_08052C38: .4byte gUnknown_2031DAC
+_08052C38: .4byte sTradeAnimationResourcesPtr
 _08052C3C:
 	ldr r0, _08052C80 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
@@ -4660,7 +3729,7 @@ _08052C88:
 	movs r2, 0xAA
 	movs r3, 0
 	bl CreateSprite
-	ldr r4, _08052CD0 @ =gUnknown_2031DAC
+	ldr r4, _08052CD0 @ =sTradeAnimationResourcesPtr
 	ldr r1, [r4]
 	adds r1, 0x90
 	strb r0, [r1]
@@ -4677,7 +3746,7 @@ _08052C88:
 	bl _08053708
 	.align 2, 0
 _08052CCC: .4byte gUnknown_826CE84
-_08052CD0: .4byte gUnknown_2031DAC
+_08052CD0: .4byte sTradeAnimationResourcesPtr
 _08052CD4:
 	ldr r0, _08052D24 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
@@ -4687,7 +3756,7 @@ _08052CD4:
 	bne _08052CF2
 	movs r0, 0x28
 	bl PlaySE
-	ldr r0, _08052D28 @ =gUnknown_2031DAC
+	ldr r0, _08052D28 @ =sTradeAnimationResourcesPtr
 	ldr r1, [r0]
 	adds r1, 0x94
 	ldrh r0, [r1]
@@ -4695,7 +3764,7 @@ _08052CD4:
 	strh r0, [r1]
 _08052CF2:
 	ldr r3, _08052D2C @ =gSprites
-	ldr r0, _08052D28 @ =gUnknown_2031DAC
+	ldr r0, _08052D28 @ =sTradeAnimationResourcesPtr
 	ldr r2, [r0]
 	adds r0, r2, 0
 	adds r0, 0x90
@@ -4719,7 +3788,7 @@ _08052CF2:
 	bl _08053774
 	.align 2, 0
 _08052D24: .4byte gPaletteFade
-_08052D28: .4byte gUnknown_2031DAC
+_08052D28: .4byte sTradeAnimationResourcesPtr
 _08052D2C: .4byte gSprites
 _08052D30:
 	ldr r5, _08052D94 @ =gSprites
@@ -4800,7 +3869,7 @@ _08052DC4:
 	.align 2, 0
 _08052DD4: .4byte 0x0000ffff
 _08052DD8:
-	ldr r5, _08052E44 @ =gUnknown_2031DAC
+	ldr r5, _08052E44 @ =sTradeAnimationResourcesPtr
 	ldr r0, [r5]
 	adds r0, 0xF0
 	ldrh r0, [r0]
@@ -4851,7 +3920,7 @@ _08052DD8:
 	bl StartSpriteAffineAnim
 	b _08052E66
 	.align 2, 0
-_08052E44: .4byte gUnknown_2031DAC
+_08052E44: .4byte sTradeAnimationResourcesPtr
 _08052E48: .4byte gSprites
 _08052E4C: .4byte gUnknown_826CF88
 _08052E50:
@@ -4866,7 +3935,7 @@ _08052E50:
 	movs r1, 0
 	bl StartSpriteAffineAnim
 _08052E66:
-	ldr r5, _08052EF8 @ =gUnknown_2031DAC
+	ldr r5, _08052EF8 @ =sTradeAnimationResourcesPtr
 	ldr r0, [r5]
 	adds r0, 0x8F
 	ldrb r1, [r0]
@@ -4936,7 +4005,7 @@ _08052E66:
 	bl _08053708
 	.align 2, 0
 _08052EF4: .4byte gSprites
-_08052EF8: .4byte gUnknown_2031DAC
+_08052EF8: .4byte sTradeAnimationResourcesPtr
 _08052EFC: .4byte 0x0000ffe0
 _08052F00:
 	ldr r4, _08052FC8 @ =gSprites
@@ -5155,7 +4224,7 @@ _08053066:
 	adds r1, r5, 0
 	adds r1, 0x1C
 	adds r0, r1
-	ldr r1, _080530F0 @ =sub_804FD48
+	ldr r1, _080530F0 @ =SpriteCB_TradeGlowWireless
 	str r1, [r0]
 	ldr r0, _080530F4 @ =gUnknown_826CE84
 	movs r1, 0x78
@@ -5179,7 +4248,7 @@ _08053066:
 _080530E4: .4byte gPaletteFade
 _080530E8: .4byte gUnknown_826CE44
 _080530EC: .4byte gSprites
-_080530F0: .4byte sub_804FD48
+_080530F0: .4byte SpriteCB_TradeGlowWireless
 _080530F4: .4byte gUnknown_826CE84
 _080530F8:
 	movs r1, 0x1
@@ -5257,7 +4326,7 @@ _08053180:
 	lsls r1, 5
 	movs r0, 0
 	bl SetGpuReg
-	ldr r4, _080531DC @ =gUnknown_2031DAC
+	ldr r4, _080531DC @ =sTradeAnimationResourcesPtr
 	ldr r2, [r4]
 	adds r1, r2, 0
 	adds r1, 0xE0
@@ -5300,7 +4369,7 @@ _080531D8:
 	strh r2, [r3]
 	b _08053708
 	.align 2, 0
-_080531DC: .4byte gUnknown_2031DAC
+_080531DC: .4byte sTradeAnimationResourcesPtr
 _080531E0: .4byte c3_08054588
 _080531E4: .4byte gTasks
 _080531E8:
@@ -5341,7 +4410,7 @@ _08053224:
 	beq _08053234
 	b _08053774
 _08053234:
-	ldr r0, _08053248 @ =gUnknown_2031DAC
+	ldr r0, _08053248 @ =sTradeAnimationResourcesPtr
 	ldr r2, [r0]
 	adds r1, r2, 0
 	adds r1, 0x94
@@ -5351,7 +4420,7 @@ _08053234:
 	b _08053774
 	.align 2, 0
 _08053244: .4byte c3_08054588
-_08053248: .4byte gUnknown_2031DAC
+_08053248: .4byte sTradeAnimationResourcesPtr
 _0805324C:
 	ldr r1, [r7]
 	ldr r0, [r1, 0x64]
@@ -5385,7 +4454,7 @@ _0805327A:
 	movs r2, 0x50
 	movs r3, 0
 	bl CreateSprite
-	ldr r2, _0805329C @ =gUnknown_2031DAC
+	ldr r2, _0805329C @ =sTradeAnimationResourcesPtr
 	ldr r1, [r2]
 	adds r1, 0x91
 	strb r0, [r1]
@@ -5396,7 +4465,7 @@ _0805327A:
 	b _08053774
 	.align 2, 0
 _08053298: .4byte gUnknown_826CF30
-_0805329C: .4byte gUnknown_2031DAC
+_0805329C: .4byte sTradeAnimationResourcesPtr
 _080532A0:
 	ldr r2, _080532DC @ =gSprites
 	ldr r0, [r7]
@@ -5470,14 +4539,14 @@ _08053320:
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r0, _0805333C @ =gUnknown_2031DAC
+	ldr r0, _0805333C @ =sTradeAnimationResourcesPtr
 	ldr r0, [r0]
 	adds r0, 0x94
 	movs r1, 0x3C
 	strh r1, [r0]
 	b _08053774
 	.align 2, 0
-_0805333C: .4byte gUnknown_2031DAC
+_0805333C: .4byte sTradeAnimationResourcesPtr
 _08053340:
 	ldr r4, _08053364 @ =gPaletteFade
 	ldrb r1, [r4, 0x7]
@@ -5530,13 +4599,13 @@ _0805339C:
 	.align 2, 0
 _080533A0: .4byte gPaletteFade
 _080533A4:
-	ldr r0, _08053438 @ =gUnknown_826CDE4
+	ldr r0, _08053438 @ =sTradePokeballSpriteTemplate
 	movs r2, 0x8
 	negs r2, r2
 	movs r1, 0x78
 	movs r3, 0
 	bl CreateSprite
-	ldr r5, _0805343C @ =gUnknown_2031DAC
+	ldr r5, _0805343C @ =sTradeAnimationResourcesPtr
 	ldr r1, [r5]
 	adds r1, 0xD3
 	movs r6, 0
@@ -5558,7 +4627,7 @@ _080533A4:
 	adds r1, r4, 0
 	adds r1, 0x1C
 	adds r0, r1
-	ldr r1, _08053444 @ =sub_8053A0C
+	ldr r1, _08053444 @ =SpriteCB_TradePokeball_Inbound
 	str r1, [r0]
 	ldrb r1, [r2]
 	lsls r0, r1, 4
@@ -5600,10 +4669,10 @@ _080533A4:
 	str r6, [r2, 0x64]
 	b _08053774
 	.align 2, 0
-_08053438: .4byte gUnknown_826CDE4
-_0805343C: .4byte gUnknown_2031DAC
+_08053438: .4byte sTradePokeballSpriteTemplate
+_0805343C: .4byte sTradeAnimationResourcesPtr
 _08053440: .4byte gSprites
-_08053444: .4byte sub_8053A0C
+_08053444: .4byte SpriteCB_TradePokeball_Inbound
 _08053448: .4byte 0x0000ffff
 _0805344C:
 	ldr r2, _08053478 @ =gSprites
@@ -5765,7 +4834,7 @@ _08053584:
 	adds r1, r4, 0
 	movs r2, 0
 	bl sub_8054508
-	ldr r0, _080535B8 @ =gUnknown_2031DAC
+	ldr r0, _080535B8 @ =sTradeAnimationResourcesPtr
 	ldr r3, [r0]
 	adds r1, r3, 0
 	adds r1, 0x94
@@ -5775,7 +4844,7 @@ _08053584:
 	.align 2, 0
 _080535B0: .4byte gStringVar4
 _080535B4: .4byte gUnknown_841E20D
-_080535B8: .4byte gUnknown_2031DAC
+_080535B8: .4byte sTradeAnimationResourcesPtr
 _080535BC:
 	ldr r1, [r7]
 	ldr r0, [r1, 0x64]
@@ -5814,14 +4883,14 @@ _080535F4:
 	bne _08053600
 	b _08053774
 _08053600:
-	ldr r0, _0805360C @ =gUnknown_2031DAC
+	ldr r0, _0805360C @ =sTradeAnimationResourcesPtr
 	ldr r0, [r0]
 	adds r0, 0x94
 	movs r1, 0x44
 	strh r1, [r0]
 	b _08053774
 	.align 2, 0
-_0805360C: .4byte gUnknown_2031DAC
+_0805360C: .4byte sTradeAnimationResourcesPtr
 _08053610:
 	ldr r1, [r7]
 	ldr r0, [r1, 0x64]
@@ -5895,9 +4964,9 @@ _08053698:
 	ldr r0, _080536DC @ =gSpecialVar_0x8005
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_805080C
+	bl Trade_SwapPlayerAndParterMonData
 	ldr r1, _080536E0 @ =gCB2_AfterEvolution
-	ldr r0, _080536E4 @ =sub_8050948
+	ldr r0, _080536E4 @ =CB2_RunTradeAnim_InGameTrade
 	str r0, [r1]
 	ldr r7, _080536E8 @ =gUnknown_2031DA4
 	ldrb r0, [r7]
@@ -5916,7 +4985,7 @@ _08053698:
 	adds r0, r3, 0
 	muls r0, r6
 	adds r0, r5
-	ldr r1, _080536F0 @ =gUnknown_2031DAC
+	ldr r1, _080536F0 @ =sTradeAnimationResourcesPtr
 	ldr r1, [r1]
 	adds r1, 0x8F
 	ldrb r2, [r1]
@@ -5926,10 +4995,10 @@ _08053698:
 	.align 2, 0
 _080536DC: .4byte gSpecialVar_0x8005
 _080536E0: .4byte gCB2_AfterEvolution
-_080536E4: .4byte sub_8050948
+_080536E4: .4byte CB2_RunTradeAnim_InGameTrade
 _080536E8: .4byte gUnknown_2031DA4
 _080536EC: .4byte gPlayerParty
-_080536F0: .4byte gUnknown_2031DAC
+_080536F0: .4byte sTradeAnimationResourcesPtr
 _080536F4:
 	movs r0, 0x1
 	negs r0, r0
@@ -5940,7 +5009,7 @@ _080536F4:
 _08053700:
 	bl BeginNormalPaletteFade
 _08053704:
-	ldr r0, _08053714 @ =gUnknown_2031DAC
+	ldr r0, _08053714 @ =sTradeAnimationResourcesPtr
 	ldr r1, [r0]
 _08053708:
 	adds r1, 0x94
@@ -5949,7 +5018,7 @@ _08053708:
 	strh r0, [r1]
 	b _08053774
 	.align 2, 0
-_08053714: .4byte gUnknown_2031DAC
+_08053714: .4byte sTradeAnimationResourcesPtr
 _08053718:
 	ldr r0, _08053780 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
@@ -6044,7 +5113,7 @@ _080537B8:
 	adds r0, r3, 0
 	muls r0, r6
 	adds r0, r5
-	ldr r1, _08053804 @ =gUnknown_2031DAC
+	ldr r1, _08053804 @ =sTradeAnimationResourcesPtr
 	ldr r1, [r1]
 	adds r1, 0x8F
 	ldrb r2, [r1]
@@ -6056,7 +5125,7 @@ _080537F4: .4byte gCB2_AfterEvolution
 _080537F8: .4byte sub_8053E8C
 _080537FC: .4byte gUnknown_2031DA4
 _08053800: .4byte gPlayerParty
-_08053804: .4byte gUnknown_2031DAC
+_08053804: .4byte sTradeAnimationResourcesPtr
 _08053808:
 	mov r0, r8
 	bl SetMainCallback2
@@ -6108,7 +5177,7 @@ _08053864:
 	ldr r0, _080538B4 @ =0x0000abcd
 	cmp r1, r0
 	bne _08053874
-	ldr r0, _080538B8 @ =gUnknown_2031DAC
+	ldr r0, _080538B8 @ =sTradeAnimationResourcesPtr
 	ldr r0, [r0]
 	adds r0, 0x72
 	strb r6, [r0]
@@ -6128,7 +5197,7 @@ _0805387A:
 	ldr r0, _080538B4 @ =0x0000abcd
 	cmp r1, r0
 	bne _0805389C
-	ldr r0, _080538B8 @ =gUnknown_2031DAC
+	ldr r0, _080538B8 @ =sTradeAnimationResourcesPtr
 	ldr r0, [r0]
 	adds r0, 0x73
 	movs r1, 0x1
@@ -6145,11 +5214,11 @@ _080538A8: .4byte gBlockRecvBuffer
 _080538AC: .4byte 0x0000dcba
 _080538B0: .4byte sub_8053788
 _080538B4: .4byte 0x0000abcd
-_080538B8: .4byte gUnknown_2031DAC
+_080538B8: .4byte sTradeAnimationResourcesPtr
 	thumb_func_end sub_805383C
 
-	thumb_func_start sub_80538BC
-sub_80538BC: @ 80538BC
+	thumb_func_start SpriteCB_TradePokeball_Default
+SpriteCB_TradePokeball_Default: @ 80538BC
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	movs r1, 0x2E
@@ -6212,10 +5281,10 @@ _0805392E:
 	bx r0
 	.align 2, 0
 _08053934: .4byte SpriteCallbackDummy
-	thumb_func_end sub_80538BC
+	thumb_func_end SpriteCB_TradePokeball_Default
 
-	thumb_func_start sub_8053938
-sub_8053938: @ 8053938
+	thumb_func_start SpriteCB_TradePokeball_Outbound
+SpriteCB_TradePokeball_Outbound: @ 8053938
 	push {r4,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -6245,7 +5314,7 @@ _08053960:
 	bne _08053996
 	movs r0, 0x85
 	bl PlaySE
-	ldr r0, _080539A4 @ =sub_80539AC
+	ldr r0, _080539A4 @ =SpriteCB_TradePokeball_Outbound2
 	str r0, [r4, 0x1C]
 	movs r0, 0
 	strh r0, [r4, 0x2E]
@@ -6268,12 +5337,12 @@ _08053996:
 	bx r0
 	.align 2, 0
 _080539A0: .4byte gUnknown_826D1E4
-_080539A4: .4byte sub_80539AC
+_080539A4: .4byte SpriteCB_TradePokeball_Outbound2
 _080539A8: .4byte 0x0000ffff
-	thumb_func_end sub_8053938
+	thumb_func_end SpriteCB_TradePokeball_Outbound
 
-	thumb_func_start sub_80539AC
-sub_80539AC: @ 80539AC
+	thumb_func_start SpriteCB_TradePokeball_Outbound2
+SpriteCB_TradePokeball_Outbound2: @ 80539AC
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r1, 0x30
@@ -6309,7 +5378,7 @@ _080539C0:
 	bne _080539FE
 	adds r0, r4, 0
 	bl DestroySprite
-	ldr r0, _08053A08 @ =gUnknown_2031DAC
+	ldr r0, _08053A08 @ =sTradeAnimationResourcesPtr
 	ldr r0, [r0]
 	adds r0, 0x94
 	movs r1, 0xE
@@ -6320,11 +5389,11 @@ _080539FE:
 	bx r0
 	.align 2, 0
 _08053A04: .4byte gUnknown_826D1E4
-_08053A08: .4byte gUnknown_2031DAC
-	thumb_func_end sub_80539AC
+_08053A08: .4byte sTradeAnimationResourcesPtr
+	thumb_func_end SpriteCB_TradePokeball_Outbound2
 
-	thumb_func_start sub_8053A0C
-sub_8053A0C: @ 8053A0C
+	thumb_func_start SpriteCB_TradePokeball_Inbound
+SpriteCB_TradePokeball_Inbound: @ 8053A0C
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrh r2, [r4, 0x32]
@@ -6396,7 +5465,7 @@ _08053A8C:
 	.align 2, 0
 _08053A94: .4byte gUnknown_826D1E4
 _08053A98: .4byte SpriteCallbackDummy
-	thumb_func_end sub_8053A0C
+	thumb_func_end SpriteCB_TradePokeball_Inbound
 
 	thumb_func_start GetInGameTradeSpeciesInfo
 GetInGameTradeSpeciesInfo: @ 8053A9C
@@ -6610,7 +5679,7 @@ sub_8053B48: @ 8053B48
 	add r0, sp, 0x10
 	adds r1, r5, 0
 	bl sub_8053CD4
-	ldr r0, _08053CB0 @ =gUnknown_2031CCC
+	ldr r0, _08053CB0 @ =gLinkPartnerMail
 	add r1, sp, 0x10
 	ldm r1!, {r2,r3,r7}
 	stm r0!, {r2,r3,r7}
@@ -6632,7 +5701,7 @@ sub_8053B48: @ 8053B48
 _08053CA4: .4byte gIngameTrades
 _08053CA8: .4byte gPlayerParty
 _08053CAC: .4byte gEnemyParty
-_08053CB0: .4byte gUnknown_2031CCC
+_08053CB0: .4byte gLinkPartnerMail
 _08053CB4:
 	adds r2, r5, 0
 	adds r2, 0x28
@@ -6744,15 +5813,15 @@ _08053D7C: .4byte gSpecialVar_0x8005
 _08053D80: .4byte gSpecialVar_0x8004
 	thumb_func_end CreateInGameTradePokemon
 
-	thumb_func_start sub_8053D84
-sub_8053D84: @ 8053D84
+	thumb_func_start CB2_RunTradeAnim_LinkTrade
+CB2_RunTradeAnim_LinkTrade: @ 8053D84
 	push {r4-r6,lr}
 	bl sub_8050F14
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0x1
 	bne _08053DE6
-	ldr r5, _08053E08 @ =gUnknown_2031DAC
+	ldr r5, _08053E08 @ =sTradeAnimationResourcesPtr
 	ldr r0, [r5]
 	adds r0, 0x8E
 	ldrb r1, [r0]
@@ -6779,7 +5848,7 @@ sub_8053D84: @ 8053D84
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_805080C
+	bl Trade_SwapPlayerAndParterMonData
 	ldr r0, [r5]
 	adds r2, r0, 0
 	adds r2, 0x74
@@ -6801,12 +5870,12 @@ _08053DE6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08053E08: .4byte gUnknown_2031DAC
+_08053E08: .4byte sTradeAnimationResourcesPtr
 _08053E0C: .4byte gSprites
 _08053E10: .4byte gUnknown_2031DA4
 _08053E14: .4byte 0x0000abcd
 _08053E18: .4byte sub_8053E1C
-	thumb_func_end sub_8053D84
+	thumb_func_end CB2_RunTradeAnim_LinkTrade
 
 	thumb_func_start sub_8053E1C
 sub_8053E1C: @ 8053E1C
@@ -6818,7 +5887,7 @@ sub_8053E1C: @ 8053E1C
 	bl sub_805383C
 	cmp r4, 0
 	bne _08053E68
-	ldr r4, _08053E80 @ =gUnknown_2031DAC
+	ldr r4, _08053E80 @ =sTradeAnimationResourcesPtr
 	ldr r2, [r4]
 	adds r0, r2, 0
 	adds r0, 0x72
@@ -6853,7 +5922,7 @@ _08053E68:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08053E80: .4byte gUnknown_2031DAC
+_08053E80: .4byte sTradeAnimationResourcesPtr
 _08053E84: .4byte 0x00000101
 _08053E88: .4byte 0x0000dcba
 	thumb_func_end sub_8053E1C
@@ -7009,7 +6078,7 @@ _08054068:
 	.align 2, 0
 _0805407C: .4byte gMain
 _08054080:
-	ldr r0, _080540B4 @ =gUnknown_2031DAC
+	ldr r0, _080540B4 @ =sTradeAnimationResourcesPtr
 	ldr r3, [r0]
 	ldr r0, [r3, 0x64]
 	adds r0, 0x1
@@ -7036,7 +6105,7 @@ _080540A8:
 	adds r0, r2
 	b _080540D0
 	.align 2, 0
-_080540B4: .4byte gUnknown_2031DAC
+_080540B4: .4byte sTradeAnimationResourcesPtr
 _080540B8: .4byte gMain
 _080540BC:
 	bl IsLinkTaskFinished
@@ -7078,16 +6147,16 @@ _08054104:
 	bl InUnionRoom
 	cmp r0, 0
 	beq _08054120
-	ldr r0, _0805411C @ =gUnknown_2031DAC
+	ldr r0, _0805411C @ =sTradeAnimationResourcesPtr
 	ldr r1, [r0]
 	adds r1, 0xF8
 	movs r0, 0x12
 	bl sub_8113550
 	b _08054132
 	.align 2, 0
-_0805411C: .4byte gUnknown_2031DAC
+_0805411C: .4byte sTradeAnimationResourcesPtr
 _08054120:
-	ldr r0, _08054174 @ =gUnknown_2031DAC
+	ldr r0, _08054174 @ =sTradeAnimationResourcesPtr
 	ldr r1, [r0]
 	adds r1, 0xF8
 	movs r0, 0xC
@@ -7126,12 +6195,12 @@ _0805415A:
 	strb r0, [r1]
 	b _080541F2
 	.align 2, 0
-_08054174: .4byte gUnknown_2031DAC
+_08054174: .4byte sTradeAnimationResourcesPtr
 _08054178: .4byte gWirelessCommType
 _0805417C: .4byte gLinkPlayers
 _08054180: .4byte gMain
 _08054184:
-	ldr r0, _0805419C @ =gUnknown_2031DAC
+	ldr r0, _0805419C @ =sTradeAnimationResourcesPtr
 	ldr r1, [r0]
 	ldr r0, [r1, 0x64]
 	adds r0, 0x1
@@ -7145,7 +6214,7 @@ _08054194:
 	adds r1, r2, r0
 	b _08054340
 	.align 2, 0
-_0805419C: .4byte gUnknown_2031DAC
+_0805419C: .4byte sTradeAnimationResourcesPtr
 _080541A0:
 	bl sub_80DA3D8
 	lsls r0, 24
@@ -7163,7 +6232,7 @@ _080541A0:
 	.align 2, 0
 _080541C0: .4byte gMain
 _080541C4:
-	ldr r0, _080541D8 @ =gUnknown_2031DAC
+	ldr r0, _080541D8 @ =sTradeAnimationResourcesPtr
 	ldr r0, [r0]
 	str r1, [r0, 0x64]
 	ldr r0, _080541DC @ =gMain
@@ -7174,7 +6243,7 @@ _080541C4:
 	strb r1, [r0]
 	b _08054396
 	.align 2, 0
-_080541D8: .4byte gUnknown_2031DAC
+_080541D8: .4byte sTradeAnimationResourcesPtr
 _080541DC: .4byte gMain
 _080541E0:
 	bl sub_80DA40C
@@ -7187,15 +6256,15 @@ _080541E0:
 _080541F0:
 	strb r1, [r0]
 _080541F2:
-	ldr r0, _08054200 @ =gUnknown_2031DAC
+	ldr r0, _08054200 @ =sTradeAnimationResourcesPtr
 	ldr r0, [r0]
 	str r2, [r0, 0x64]
 	b _08054396
 	.align 2, 0
 _080541FC: .4byte gMain
-_08054200: .4byte gUnknown_2031DAC
+_08054200: .4byte sTradeAnimationResourcesPtr
 _08054204:
-	ldr r4, _08054238 @ =gUnknown_2031DAC
+	ldr r4, _08054238 @ =sTradeAnimationResourcesPtr
 	ldr r1, [r4]
 	ldr r0, [r1, 0x64]
 	adds r0, 0x1
@@ -7219,7 +6288,7 @@ _08054214:
 	str r0, [r4, 0x64]
 	b _08054242
 	.align 2, 0
-_08054238: .4byte gUnknown_2031DAC
+_08054238: .4byte sTradeAnimationResourcesPtr
 _0805423C:
 	ldr r1, [r4]
 	movs r0, 0
@@ -7235,7 +6304,7 @@ _08054242:
 	.align 2, 0
 _08054250: .4byte gMain
 _08054254:
-	ldr r0, _08054270 @ =gUnknown_2031DAC
+	ldr r0, _08054270 @ =sTradeAnimationResourcesPtr
 	ldr r1, [r0]
 	ldr r0, [r1, 0x64]
 	cmp r0, 0
@@ -7249,7 +6318,7 @@ _08054254:
 	strb r1, [r0]
 	b _08054396
 	.align 2, 0
-_08054270: .4byte gUnknown_2031DAC
+_08054270: .4byte sTradeAnimationResourcesPtr
 _08054274: .4byte gMain
 _08054278:
 	subs r0, 0x1
@@ -7273,7 +6342,7 @@ _0805428A:
 	.align 2, 0
 _0805429C: .4byte gMain
 _080542A0:
-	ldr r0, _080542C0 @ =gUnknown_2031DAC
+	ldr r0, _080542C0 @ =sTradeAnimationResourcesPtr
 	ldr r1, [r0]
 	ldr r0, [r1, 0x64]
 	adds r0, 0x1
@@ -7289,7 +6358,7 @@ _080542A0:
 	bl sub_800AB9C
 	b _08054396
 	.align 2, 0
-_080542C0: .4byte gUnknown_2031DAC
+_080542C0: .4byte sTradeAnimationResourcesPtr
 _080542C4:
 	bl IsLinkTaskFinished
 	lsls r0, 24
@@ -7430,7 +6499,7 @@ sub_80543C4: @ 80543C4
 	bl GetBgTilemapBuffer
 	bl Free
 	bl FreeMonSpritesGfx
-	ldr r4, _08054434 @ =gUnknown_2031DAC
+	ldr r4, _08054434 @ =sTradeAnimationResourcesPtr
 	ldr r0, [r4]
 	bl Free
 	str r5, [r4]
@@ -7453,7 +6522,7 @@ _0805441A:
 	bx r0
 	.align 2, 0
 _08054430: .4byte gPaletteFade
-_08054434: .4byte gUnknown_2031DAC
+_08054434: .4byte sTradeAnimationResourcesPtr
 _08054438: .4byte gWirelessCommType
 _0805443C: .4byte gMain
 	thumb_func_end sub_80543C4
@@ -7492,7 +6561,7 @@ sub_8054470: @ 8054470
 	ands r0, r1
 	cmp r0, 0
 	bne _08054494
-	ldr r0, _080544A0 @ =sub_80505CC
+	ldr r0, _080544A0 @ =CB2_InitTradeAnim_InGameTrade
 	bl SetMainCallback2
 	ldr r1, _080544A4 @ =gFieldCallback
 	ldr r0, _080544A8 @ =FieldCallback_ReturnToEventScript2
@@ -7505,7 +6574,7 @@ _08054494:
 	bx r0
 	.align 2, 0
 _0805449C: .4byte gPaletteFade
-_080544A0: .4byte sub_80505CC
+_080544A0: .4byte CB2_InitTradeAnim_InGameTrade
 _080544A4: .4byte gFieldCallback
 _080544A8: .4byte FieldCallback_ReturnToEventScript2
 	thumb_func_end sub_8054470
@@ -7554,7 +6623,7 @@ _080544F8: .4byte 0x0000083b
 	thumb_func_start sub_80544FC
 sub_80544FC: @ 80544FC
 	push {lr}
-	bl sub_80504CC
+	bl TradeAnimInit_LoadGfx
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80544FC
@@ -7575,7 +6644,7 @@ sub_8054508: @ 8054508
 	adds r0, r5, 0
 	movs r1, 0xFF
 	bl FillWindowPixelBuffer
-	ldr r2, _08054580 @ =gUnknown_2031DAC
+	ldr r2, _08054580 @ =sTradeAnimationResourcesPtr
 	ldr r1, [r2]
 	movs r6, 0x82
 	lsls r6, 1
@@ -7619,7 +6688,7 @@ sub_8054508: @ 8054508
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08054580: .4byte gUnknown_2031DAC
+_08054580: .4byte sTradeAnimationResourcesPtr
 _08054584: .4byte 0x00000105
 	thumb_func_end sub_8054508
 
@@ -7750,7 +6819,7 @@ c3_0805465C: @ 805465C
 	ldrsh r4, [r7, r0]
 	cmp r4, 0
 	bne _080546BC
-	ldr r1, _0805472C @ =gUnknown_2031DAC
+	ldr r1, _0805472C @ =sTradeAnimationResourcesPtr
 	ldr r3, [r1]
 	ldr r5, _08054730 @ =0x0000010b
 	adds r2, r3, r5
@@ -7781,7 +6850,7 @@ c3_0805465C: @ 805465C
 	movs r1, 0x13
 	bl SetGpuReg
 _080546BC:
-	ldr r4, _0805472C @ =gUnknown_2031DAC
+	ldr r4, _0805472C @ =sTradeAnimationResourcesPtr
 	ldr r2, [r4]
 	ldr r5, _08054730 @ =0x0000010b
 	mov r8, r5
@@ -7835,7 +6904,7 @@ _0805471E:
 	bx r0
 	.align 2, 0
 _08054728: .4byte gTasks+0x8
-_0805472C: .4byte gUnknown_2031DAC
+_0805472C: .4byte sTradeAnimationResourcesPtr
 _08054730: .4byte 0x0000010b
 	thumb_func_end c3_0805465C
 
@@ -7854,7 +6923,7 @@ sub_8054734: @ 8054734
 	ldrsh r0, [r6, r1]
 	cmp r0, 0
 	bne _08054774
-	ldr r1, _080547EC @ =gUnknown_2031DAC
+	ldr r1, _080547EC @ =sTradeAnimationResourcesPtr
 	ldr r0, [r1]
 	ldr r3, _080547F0 @ =0x00000109
 	adds r2, r0, r3
@@ -7872,7 +6941,7 @@ sub_8054734: @ 8054734
 	movs r1, 0x13
 	bl SetGpuReg
 _08054774:
-	ldr r5, _080547EC @ =gUnknown_2031DAC
+	ldr r5, _080547EC @ =sTradeAnimationResourcesPtr
 	ldr r0, [r5]
 	ldr r3, _080547F4 @ =0x0000010b
 	adds r1, r0, r3
@@ -7928,7 +6997,7 @@ _08054774:
 	b _0805480C
 	.align 2, 0
 _080547E8: .4byte gTasks+0x8
-_080547EC: .4byte gUnknown_2031DAC
+_080547EC: .4byte sTradeAnimationResourcesPtr
 _080547F0: .4byte 0x00000109
 _080547F4: .4byte 0x0000010b
 _080547F8: .4byte 0x0000ffff

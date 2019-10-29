@@ -11407,7 +11407,7 @@ sub_8124384: @ 8124384
 	adds r1, r6, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_804FCE0
+	bl Trade_CanTradeSelectedMon
 	cmp r0, 0x1
 	beq _08124418
 	cmp r0, 0x2

@@ -261,16 +261,16 @@ gUnknown_8261EE4:: @ 8261EE4
 	.4byte gUnknown_841E10A, sub_804F440
 	.4byte gUnknown_841E112, sub_804F464
 
-gUnknown_8261EF4:: @ 8261EF4
-	.4byte gUnknown_841E118
-	.4byte gUnknown_841E145
-	.4byte gUnknown_841E16B
-	.4byte gUnknown_8417094
-	.4byte gUnknown_841E199
-	.4byte gUnknown_841E1C5
-	.4byte gUnknown_84170BC
-	.4byte gUnknown_84170E0
-	.4byte gUnknown_84170FC
+sTradeErrorOrStatusMessagePtrs:: @ 8261EF4
+	.4byte gUnknown_841E118 @ Communication standby
+	.4byte gUnknown_841E145 @ The trade has been canceled.
+	.4byte gUnknown_841E16B @ That's your only POKéMON for battle
+	.4byte gUnknown_8417094 @ That's your only POKéMON for battle
+	.4byte gUnknown_841E199 @ Waiting for your friend to finish
+	.4byte gUnknown_841E1C5 @ Your friend wants to trade POKéMON
+	.4byte gUnknown_84170BC @ That POKéMON can't be traded now
+	.4byte gUnknown_84170E0 @ An EGG can't be traded now
+	.4byte gUnknown_84170FC @ The other TRAINER's POKéMON can't be traded now
 
 gUnknown_8261F18:: @ 8261F18
 	.byte 0, 1, 2
@@ -699,8 +699,8 @@ gUnknown_826CDD4:: @ 826CDD4
 gUnknown_826CDDC:: @ 826CDDC
 	obj_pal gUnknown_826205C, 5558
 
-gUnknown_826CDE4:: @ 826CDE4
-	spr_template 5557, 5558, gOamData_826CD00, gSpriteAnimTable_826CD80, NULL, gSpriteAffineAnimTable_826CDC8, sub_80538BC
+sTradePokeballSpriteTemplate:: @ 826CDE4
+	spr_template 5557, 5558, gOamData_826CD00, gSpriteAnimTable_826CD80, NULL, gSpriteAffineAnimTable_826CDC8, SpriteCB_TradePokeball_Default
 
 gOamData_826CDFC::
 	.4byte 0x80000500, 0x00000400
@@ -730,7 +730,7 @@ gUnknown_826CE3C:: @ 826CE3C
 	obj_pal gUnknown_826499C, 5555
 
 gUnknown_826CE44:: @ 826CE44
-	spr_template 5550, 5551, gOamData_826CDFC, gSpriteAnimTable_826CE0C, NULL, gSpriteAffineAnimTable_826CE28, sub_804FD24
+	spr_template 5550, 5551, gOamData_826CDFC, gSpriteAnimTable_826CE0C, NULL, gSpriteAffineAnimTable_826CE28, SpriteCB_TradeGlowCable
 
 gOamData_826CE5C::
 	.4byte 0x80008000, 0x00000400
@@ -751,7 +751,7 @@ gUnknown_826CE7C:: @ 826CE7C
 	obj_tiles gUnknown_8264C1C, 0x0300, 5552
 
 gUnknown_826CE84:: @ 826CE84
-	spr_template 5552, 5551, gOamData_826CE5C, gSpriteAnimTable_826CE74, NULL, gDummySpriteAffineAnimTable, sub_804FD78
+	spr_template 5552, 5551, gOamData_826CE5C, gSpriteAnimTable_826CE74, NULL, gDummySpriteAffineAnimTable, SpriteCB_TradeGlowCore
 
 gOamData_826CE9C::
 	.4byte 0x80008000, 0x00000400
@@ -766,8 +766,8 @@ gSpriteAnimTable_826CEAC::
 gUnknown_826CEB0:: @ 826CEB0
 	obj_tiles gUnknown_8264E1C, 0x0100, 5554
 
-gUnknown_826CEB8:: @ 826CEB8
-	spr_template 5554, 5555, gOamData_826CE9C, gSpriteAnimTable_826CEAC, NULL, gDummySpriteAffineAnimTable, sub_804FDB8
+sGameLinkCableEndSpriteTemplate:: @ 826CEB8
+	spr_template 5554, 5555, gOamData_826CE9C, gSpriteAnimTable_826CEAC, NULL, gDummySpriteAffineAnimTable, SpriteCB_GameLinkCableEnd_Outbound
 
 gOamData_826CED0::
 	.4byte 0xc0004000, 0x00000400

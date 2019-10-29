@@ -3070,7 +3070,7 @@ _08117210:
 	lsrs r0, 24
 	cmp r0, 0x3
 	bne _0811725C
-	ldr r4, _08117268 @ =gUnknown_2031CCC
+	ldr r4, _08117268 @ =gLinkPartnerMail
 	bl GetMultiplayerId
 	adds r1, r0, 0
 	movs r0, 0x1
@@ -3090,7 +3090,7 @@ _08117210:
 	ldr r1, _08117274 @ =gMain
 	ldr r0, _08117278 @ =CB2_ReturnToField
 	str r0, [r1, 0x8]
-	ldr r0, _0811727C @ =sub_8050138
+	ldr r0, _0811727C @ =CB2_InitTradeAnim_LinkTrade
 	bl SetMainCallback2
 	mov r0, r8
 	bl sub_811B148
@@ -3103,12 +3103,12 @@ _0811725C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08117268: .4byte gUnknown_2031CCC
+_08117268: .4byte gLinkPartnerMail
 _0811726C: .4byte gBlockRecvBuffer
 _08117270: .4byte gUnknown_2031DA4
 _08117274: .4byte gMain
 _08117278: .4byte CB2_ReturnToField
-_0811727C: .4byte sub_8050138
+_0811727C: .4byte CB2_InitTradeAnim_LinkTrade
 	thumb_func_end sub_8117130
 
 	thumb_func_start sub_8117280

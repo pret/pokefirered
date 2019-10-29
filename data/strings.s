@@ -1052,24 +1052,29 @@ gUnknown_84170BC:: @ 84170BC
 gUnknown_84170E0:: @ 84170E0
 	.string "An EGG can't be traded now.$"
 
+	.align 2
 gUnknown_84170FC:: @ 0x84170FC
 	.string "The other TRAINER's POKéMON\n"
 	.string "can't be traded now.$"
 
-gUnknown_841712D:: @ 0x841712D
-	.string "   The other TRAINER can't accept\n"
+	.align 2
+gUnknown_8417130:: @ 0x8417130
+	.string "The other TRAINER can't accept\n"
 	.string "that POKéMON now.$"
 
-gUnknown_8417161:: @ 0x8417161
-	.string "   You can't trade with that\n"
+	.align 2
+gUnknown_8417164:: @ 0x8417164
+	.string "You can't trade with that\n"
 	.string "TRAINER now.$"
 
-gUnknown_841718B:: @ 0x841718B
-	.string " That isn't the type of POKéMON\n"
+	.align 2
+gUnknown_841718C:: @ 0x841718C
+	.string "That isn't the type of POKéMON\n"
 	.string "that the other TRAINER wants.$"
 
-gUnknown_84171C9:: @ 0x84171C9
-	.string "   That isn't an EGG.$"
+	.align 2
+gUnknown_84171CC:: @ 0x84171CC
+	.string "That isn't an EGG.$"
 
 gUnknown_84171DF:: @ 0x84171DF
 	.string "Choose a POKéMON.$"

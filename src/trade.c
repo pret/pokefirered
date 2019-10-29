@@ -21,6 +21,9 @@
 #include "overworld.h"
 #include "battle_anim.h"
 #include "party_menu.h"
+#include "daycare.h"
+#include "event_data.h"
+#include "battle_interface.h"
 #include "pokemon_summary_screen.h"
 #include "pokemon_storage_system.h"
 #include "new_menu_helpers.h"
@@ -67,7 +70,7 @@ struct TradeResources
         u16 unk_2;
         u8 unk_4;
     } unk_8D0[4];
-    /*0x08F0*/ u8 bg1TilemapBuffer[BG_SCREEN_SIZE];
+    /*0x08F0*/ u16 tilemapBuffer[BG_SCREEN_SIZE / 2];
 };
 
 IWRAM_DATA vu16 gUnknown_3000E78;
@@ -105,7 +108,7 @@ void sub_804F748(u8 side);
 void sub_804F890(u8 side);
 void sub_804F964(void);
 void sub_804F9D8(void);
-u32 sub_804FA14(struct Pokemon * party, u8 partyCount, u8 cursorPos);
+u32 sub_804FA14(struct Pokemon * party, int partyCount, int cursorPos);
 void LoadHeldItemIcons(void);
 void sub_8050138(void);
 
@@ -123,10 +126,16 @@ extern const u8 gUnknown_8261D08[][4][6];
 extern const u16 gTradePartyBoxTilemap[];
 extern const u16 gTradeMovesBoxTilemap[];
 extern const u8 gUnknown_8262055[][2];
+extern const u8 gUnknown_8261E5A[][12];
+extern const u8 gUnknown_8261E72[][12];
 extern const u8 gUnknown_8261F18[];
 extern const u8 gUnknown_8261EB6[];
 extern const u8 gUnknown_8261EC7[];
 extern const u8 gUnknown_841E09F[];
+extern const u8 *const gUnknown_8261EF4[];
+extern const struct SpritePalette gUnknown_8261D00;
+extern const struct SpritePalette gUnknown_8261C60;
+extern const struct SpriteSheet gUnknown_8261C58;
 
 void sub_804C600(void)
 {
@@ -142,7 +151,7 @@ void sub_804C600(void)
     LoadPalette(gTMCaseMainWindowPalette, 0xD0, 0x14);
     ResetBgsAndClearDma3BusyFlags(FALSE);
     InitBgsFromTemplates(0, gUnknown_8261F1C, NELEMS(gUnknown_8261F1C));
-    SetBgTilemapBuffer(1, gUnknown_2031DA8->bg1TilemapBuffer);
+    SetBgTilemapBuffer(1, gUnknown_2031DA8->tilemapBuffer);
     if (InitWindows(gUnknown_8261F2C))
     {
         DeactivateAllTextPrinters();
@@ -3286,5 +3295,498 @@ void sub_804EED4(u8 *a0, u8 a1, u8 a2)
     {
         StringCopy(a0, gUnknown_8261EB6);
         StringAppend(a0, gUnknown_841E09F);
+    }
+}
+
+void sub_804EFB4(u8 whichParty, u8 windowId, const u8 *str)
+{
+    u8 xPos;
+    s8 speed;
+    windowId += (whichParty * PARTY_SIZE) + 2;
+    speed = 0;
+    xPos = (64u - GetStringWidth(0, str, GetFontAttribute(0, FONTATTR_LETTER_SPACING))) / 2;
+    AddTextPrinterParameterized3(windowId, 0, xPos, 4, gUnknown_8261F18, speed, str);
+    PutWindowTilemap(windowId);
+    CopyWindowToVram(windowId, 3);
+}
+
+void sub_804F020(u8 whichParty)
+{
+    u8 buff[20];
+    u8 nickname[30];
+    struct Pokemon * party = whichParty == 0 ? gPlayerParty : gEnemyParty;
+    u8 i;
+    for (i = 0; i < gUnknown_2031DA8->partyCounts[whichParty]; i++)
+    {
+        GetMonData(&party[i], MON_DATA_NICKNAME, buff);
+        StringCopy10(nickname, buff);
+        sub_804EFB4(whichParty, i, nickname);
+    }
+}
+
+void sub_804F08C(u8 whichParty, u8 monIdx, u8 a2, u8 a3, u8 a4, u8 a5)
+{
+    u8 level;
+    u32 r2;
+    u8 gender;
+    u8 nickname[12];
+
+    CopyToBgTilemapBufferRect_ChangePalette(1, gUnknown_8E9F1FC, a4, a5, 6, 3, 0);
+    CopyBgTilemapBufferToVram(1);
+
+    if (whichParty == 0)
+        level = GetMonData(&gPlayerParty[monIdx], MON_DATA_LEVEL, NULL);
+    else
+        level = GetMonData(&gEnemyParty[monIdx], MON_DATA_LEVEL, NULL);
+
+    if (gUnknown_2031DA8->unk_51[whichParty][monIdx] == 0)
+    {
+        if (level / 10 != 0)
+            gUnknown_2031DA8->tilemapBuffer[a2 + (a3 * 32)] = (level / 10) + 0x60;
+
+        gUnknown_2031DA8->tilemapBuffer[a2 + (a3 * 32) + 1] = (level % 10) + 0x70;
+    }
+    else
+    {
+        gUnknown_2031DA8->tilemapBuffer[a2 + (a3 * 32) - 32] = gUnknown_2031DA8->tilemapBuffer[a2 + (a3 * 32) - 33];
+        gUnknown_2031DA8->tilemapBuffer[a2 + (a3 * 32) - 31] = gUnknown_2031DA8->tilemapBuffer[a2 + (a3 * 32) - 36] | 0x400;
+    }
+
+    if (gUnknown_2031DA8->unk_51[whichParty][monIdx] != 0)
+    {
+        r2 = 0x480;
+    }
+    else
+    {
+        if (whichParty == 0)
+        {
+            gender = GetMonGender(&gPlayerParty[monIdx]);
+            GetMonData(&gPlayerParty[monIdx], MON_DATA_NICKNAME, nickname);
+        }
+        else
+        {
+            gender = GetMonGender(&gEnemyParty[monIdx]);
+            GetMonData(&gEnemyParty[monIdx], MON_DATA_NICKNAME, nickname);
+        }
+
+        switch (gender)
+        {
+        case MON_MALE:
+            r2 = !NameHasGenderSymbol(nickname, MON_MALE) ? 0x84 : 0x83;
+            break;
+        case MON_FEMALE:
+            r2 = !NameHasGenderSymbol(nickname, MON_FEMALE) ? 0x85 : 0x83;
+            break;
+        default:
+            r2 = 0x83;
+            break;
+        }
+    }
+    gUnknown_2031DA8->tilemapBuffer[(a3 - 1) * 32 + a2 + 1] = r2;
+}
+
+#ifdef NONMATCHING
+// Instruction swap when setting r5 and r4
+void sub_804F284(u8 whichParty)
+{
+    s32 i;
+    const u8 *r5;
+    const u8 *r4;
+    for (i = 0; i < gUnknown_2031DA8->partyCounts[whichParty]; i++)
+    {
+        r5 = gUnknown_8261E5A[whichParty];
+        r4 = gUnknown_8261E72[whichParty];
+        sub_804F08C(whichParty, i, r5[2 * i + 0], r5[2 * i + 1], r4[2 * i + 0], r4[2 * i + 1]);
+    }
+}
+#else
+NAKED
+void sub_804F284(u8 whichParty)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                "\tsub sp, 0x8\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r6, r0, 24\n"
+                "\tmovs r7, 0\n"
+                "\tldr r0, _0804F2DC @ =gUnknown_2031DA8\n"
+                "\tldr r0, [r0]\n"
+                "\tadds r0, 0x36\n"
+                "\tadds r0, r6\n"
+                "\tldrb r0, [r0]\n"
+                "\tcmp r7, r0\n"
+                "\tbge _0804F2D4\n"
+                "\tlsls r0, r6, 1\n"
+                "\tadds r0, r6\n"
+                "\tldr r1, _0804F2E0 @ =gUnknown_8261E5A\n"
+                "\tlsls r0, 2\n"
+                "\tadds r5, r0, r1\n"
+                "\tldr r1, _0804F2E4 @ =gUnknown_8261E72\n"
+                "\tadds r4, r0, r1\n"
+                "_0804F2AA:\n"
+                "\tlsls r1, r7, 24\n"
+                "\tlsrs r1, 24\n"
+                "\tldrb r2, [r5]\n"
+                "\tldrb r3, [r5, 0x1]\n"
+                "\tldrb r0, [r4]\n"
+                "\tstr r0, [sp]\n"
+                "\tldrb r0, [r4, 0x1]\n"
+                "\tstr r0, [sp, 0x4]\n"
+                "\tadds r0, r6, 0\n"
+                "\tbl sub_804F08C\n"
+                "\tadds r5, 0x2\n"
+                "\tadds r4, 0x2\n"
+                "\tadds r7, 0x1\n"
+                "\tldr r0, _0804F2DC @ =gUnknown_2031DA8\n"
+                "\tldr r0, [r0]\n"
+                "\tadds r0, 0x36\n"
+                "\tadds r0, r6\n"
+                "\tldrb r0, [r0]\n"
+                "\tcmp r7, r0\n"
+                "\tblt _0804F2AA\n"
+                "_0804F2D4:\n"
+                "\tadd sp, 0x8\n"
+                "\tpop {r4-r7}\n"
+                "\tpop {r0}\n"
+                "\tbx r0\n"
+                "\t.align 2, 0\n"
+                "_0804F2DC: .4byte gUnknown_2031DA8\n"
+                "_0804F2E0: .4byte gUnknown_8261E5A\n"
+                "_0804F2E4: .4byte gUnknown_8261E72");
+}
+#endif //NONMATCHING
+
+void sub_804F2E8(u8 whichParty)
+{
+    int i;
+
+    for (i = 0; i < gUnknown_2031DA8->partyCounts[whichParty]; i++)
+    {
+        gSprites[gUnknown_2031DA8->partyIcons[whichParty][i]].invisible = FALSE;
+        gSprites[gUnknown_2031DA8->partyIcons[whichParty][i]].pos1.x = gTradeMonSpriteCoords[(whichParty * PARTY_SIZE) + i][0] * 8 + 14;
+        gSprites[gUnknown_2031DA8->partyIcons[whichParty][i]].pos1.y = gTradeMonSpriteCoords[(whichParty * PARTY_SIZE) + i][1] * 8 - 12;
+        gSprites[gUnknown_2031DA8->partyIcons[whichParty][i]].pos2.x = 0;
+        gSprites[gUnknown_2031DA8->partyIcons[whichParty][i]].pos2.y = 0;
+    }
+}
+
+void sub_804F3B4(void)
+{
+    rbox_fill_rectangle(1);
+    sub_804F020(1);
+}
+
+void sub_804F3C8(u8 whichParty)
+{
+    CopyToBgTilemapBufferRect_ChangePalette(1, gTradePartyBoxTilemap, 15 * whichParty, 0, 15, 17, 0);
+    CopyBgTilemapBufferToVram(1);
+    sub_804F284(whichParty);
+    sub_804F020(whichParty);
+    sub_804F2E8(whichParty);
+    sub_804F728(gUnknown_8261ECC[1], (void *)OBJ_VRAM0 + 32 * gUnknown_2031DA8->unk_72, 24);
+    gUnknown_2031DA8->unk_74[whichParty] = 0;
+}
+
+void sub_804F440(void)
+{
+    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
+    CopyBgTilemapBufferToVram(0);
+}
+
+void sub_804F464(void)
+{
+    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
+    CopyBgTilemapBufferToVram(0);
+}
+
+void sub_804F488(u16 a0, u8 a1)
+{
+    int i;
+    for (i = 0; i < 4; i++)
+    {
+        if (!gUnknown_2031DA8->unk_8D0[i].unk_0)
+        {
+            gUnknown_2031DA8->unk_8D0[i].unk_2 = a0;
+            gUnknown_2031DA8->unk_8D0[i].unk_4 = a1;
+            gUnknown_2031DA8->unk_8D0[i].unk_0 = TRUE;
+            break;
+        }
+    }
+}
+
+void sub_804F4DC(void)
+{
+    int i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (gUnknown_2031DA8->unk_8D0[i].unk_0)
+        {
+            if (gUnknown_2031DA8->unk_8D0[i].unk_2)
+            {
+                gUnknown_2031DA8->unk_8D0[i].unk_2--;
+            }
+            else
+            {
+                switch (gUnknown_2031DA8->unk_8D0[i].unk_4)
+                {
+                case 0:
+                    SendBlock(bitmask_all_link_players_but_self(), gUnknown_2031DA8->linkData, 20);
+                    break;
+                case 1:
+                    sub_804F5BC(0);
+                    break;
+                case 2:
+                    sub_804F5BC(2);
+                    break;
+                case 3:
+                case 4:
+                case 5:
+                    sub_804F5BC(3);
+                    break;
+                case 6:
+                    sub_804F5BC(6);
+                    break;
+                case 7:
+                    sub_804F5BC(7);
+                    break;
+                case 8:
+                    sub_804F5BC(8);
+                    break;
+                }
+                gUnknown_2031DA8->unk_8D0[i].unk_0 = FALSE;
+            }
+        }
+    }
+}
+
+void sub_804F5BC(u8 idx)
+{
+    FillWindowPixelBuffer(0, PIXEL_FILL(1));
+    AddTextPrinterParameterized(0, 3, gUnknown_8261EF4[idx], 0, 2, 0xFF, NULL);
+    DrawTextBorderOuter(0, 0x014, 12);
+    PutWindowTilemap(0);
+    CopyWindowToVram(0, 3);
+}
+
+bool8 sub_804F610(void)
+{
+    struct SpriteSheet sheet;
+
+    if (gUnknown_2031DA8->unk_A8 < 14)
+    {
+        sheet.data = gUnknown_2031C94[gUnknown_2031DA8->unk_A8];
+        sheet.size = 0x100;
+        sheet.tag = 200 + gUnknown_2031DA8->unk_A8;
+    }
+
+    switch (gUnknown_2031DA8->unk_A8)
+    {
+    case 0 ... 7:
+        LoadSpriteSheet(&sheet);
+        gUnknown_2031DA8->unk_A8++;
+        break;
+    case 8:
+        gUnknown_2031DA8->unk_72 = LoadSpriteSheet(&sheet);
+        gUnknown_2031DA8->unk_A8++;
+        break;
+    case 9 ... 13:
+        LoadSpriteSheet(&sheet);
+        gUnknown_2031DA8->unk_A8++;
+        break;
+    case 14:
+        LoadSpritePalette(&gUnknown_8261D00);
+        gUnknown_2031DA8->unk_A8++;
+        break;
+    case 15:
+        LoadSpritePalette(&gUnknown_8261C60);
+        gUnknown_2031DA8->unk_A8++;
+        break;
+    case 16:
+        LoadSpriteSheet(&gUnknown_8261C58);
+        gUnknown_2031DA8->unk_A8++;
+        break;
+    case 17:
+        gUnknown_2031DA8->unk_A8 = 0;
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+void sub_804F728(const u8 *name, u8 *dest, u8 unused)
+{
+    sub_808BEB4(name, dest, 0, 0, gDecompressionBuffer, 6);
+}
+
+void sub_804F748(u8 who)
+{
+    int i;
+
+    switch (who)
+    {
+    case 0:
+        for (i = 0; i < gUnknown_2031DA8->partyCounts[who]; i++)
+        {
+            if (GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) == TRUE)
+            {
+                gUnknown_2031DA8->unk_45[who][i] = 0;
+                gUnknown_2031DA8->unk_51[who][i] = 1;
+            }
+            else if (GetMonData(&gPlayerParty[i], MON_DATA_HP) == 0)
+            {
+                gUnknown_2031DA8->unk_45[who][i] = 0;
+                gUnknown_2031DA8->unk_51[who][i] = 0;
+            }
+            else
+            {
+                gUnknown_2031DA8->unk_45[who][i] = 1;
+                gUnknown_2031DA8->unk_51[who][i] = 0;
+            }
+        }
+        break;
+    case 1:
+        for (i = 0; i < gUnknown_2031DA8->partyCounts[who]; i++)
+        {
+            if (GetMonData(&gEnemyParty[i], MON_DATA_IS_EGG) == TRUE)
+            {
+                gUnknown_2031DA8->unk_45[who][i] = 0;
+                gUnknown_2031DA8->unk_51[who][i] = 1;
+            }
+            else if (GetMonData(&gEnemyParty[i], MON_DATA_HP) == 0)
+            {
+                gUnknown_2031DA8->unk_45[who][i] = 0;
+                gUnknown_2031DA8->unk_51[who][i] = 0;
+            }
+            else
+            {
+                gUnknown_2031DA8->unk_45[who][i] = 1;
+                gUnknown_2031DA8->unk_51[who][i] = 0;
+            }
+        }
+        break;
+    }
+}
+
+void sub_804F890(u8 who)
+{
+    u16 i, curHp, maxHp;
+
+    switch (who)
+    {
+    case 0:
+        for (i = 0; i < gUnknown_2031DA8->partyCounts[0]; i++)
+        {
+            curHp = GetMonData(&gPlayerParty[i], MON_DATA_HP);
+            maxHp = GetMonData(&gPlayerParty[i], MON_DATA_MAX_HP);
+            gUnknown_2031DA8->unk_5D[0][i] = GetHPBarLevel(curHp, maxHp);
+        }
+        break;
+    case 1:
+        for (i = 0; i < gUnknown_2031DA8->partyCounts[1]; i++)
+        {
+            curHp = GetMonData(&gEnemyParty[i], MON_DATA_HP);
+            maxHp = GetMonData(&gEnemyParty[i], MON_DATA_MAX_HP);
+            gUnknown_2031DA8->unk_5D[1][i] = GetHPBarLevel(curHp, maxHp);
+        }
+        break;
+    }
+}
+
+void sub_804F964(void)
+{
+    int i, j;
+    for (i = 0; i < 2; i++)
+    {
+        for (j = 0; j < gUnknown_2031DA8->partyCounts[i]; j++)
+        {
+            MonIcon_SetAnim(&gSprites[gUnknown_2031DA8->partyIcons[i][j]], 4 - gUnknown_2031DA8->unk_5D[i][j]);
+        }
+    }
+}
+
+void sub_804F9D8(void)
+{
+    int i;
+    for (i = 0; i < 11; i++)
+    {
+        if (gSaveBlock1Ptr->giftRibbons[i] == 0 && gUnknown_2031DA8->unk_A9[i] != 0)
+            gSaveBlock1Ptr->giftRibbons[i] = gUnknown_2031DA8->unk_A9[i];
+    }
+}
+
+u32 sub_804FA14(struct Pokemon *party, int partyCount, int cursorPos)
+{
+    int i, sum;
+    struct LinkPlayer *player;
+    int species[6];
+    int species2[6];
+
+    for (i = 0; i < partyCount; i++)
+    {
+        species2[i] = GetMonData(&party[i], MON_DATA_SPECIES2);
+        species[i] = GetMonData(&party[i], MON_DATA_SPECIES);
+    }
+
+    if (!IsNationalPokedexEnabled())
+    {
+        if (species2[cursorPos] > SPECIES_MEW)
+        {
+            return 2;
+        }
+        if (species2[cursorPos] == SPECIES_NONE)
+        {
+            return 3;
+        }
+    }
+
+    player = &gLinkPlayers[GetMultiplayerId() ^ 1];
+    if ((player->version & 0xFF) != VERSION_RUBY &&
+        (player->version & 0xFF) != VERSION_SAPPHIRE)
+    {
+        if ((player->name[10] & 0xF) == 0)
+        {
+            if (species2[cursorPos] == SPECIES_EGG)
+            {
+                return 5;
+            }
+
+            if (species2[cursorPos] > SPECIES_MEW)
+            {
+                return 4;
+            }
+        }
+    }
+
+    if (species[cursorPos] == SPECIES_DEOXYS || species[cursorPos] == SPECIES_MEW)
+    {
+        if (!GetMonData(&party[cursorPos], MON_DATA_OBEDIENCE))
+        {
+            return 4;
+        }
+    }
+
+    for (i = 0; i < partyCount; i++)
+    {
+        if (species2[i] == SPECIES_EGG)
+        {
+            species2[i] = SPECIES_NONE;
+        }
+    }
+
+    for (sum = 0, i = 0; i < partyCount; i++)
+    {
+        if (i != cursorPos)
+        {
+            sum += species2[i];
+        }
+    }
+
+    if (sum != 0)
+    {
+        return 0;
+    }
+    else
+    {
+        return 1;
     }
 }

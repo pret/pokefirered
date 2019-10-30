@@ -105,41 +105,41 @@ enum TradeStatusMsg
 
 IWRAM_DATA vu16 gUnknown_3000E78;
 
-EWRAM_DATA u8 *gUnknown_2031C90 = NULL;
-EWRAM_DATA u8 *gUnknown_2031C94[14] = {};
+static EWRAM_DATA u8 *gUnknown_2031C90 = NULL;
+static EWRAM_DATA u8 *gUnknown_2031C94[14] = {};
 EWRAM_DATA struct MailStruct gLinkPartnerMail[6] = {};
 EWRAM_DATA u8 gSelectedTradeMonPositions[2] = {0};
-EWRAM_DATA struct TradeMenuResources * sTradeMenuResourcesPtr = NULL;
+static EWRAM_DATA struct TradeMenuResources * sTradeMenuResourcesPtr = NULL;
 
-void sub_804C728(void);
-void sub_804D4F8(void);
-void sub_804D638(void);
-void sub_804D694(u8 state);
-void sub_804D764(void);
-u8 shedinja_maker_maybe(void);
-void sub_804DFF0(void);
+static void sub_804C728(void);
+static void sub_804D4F8(void);
+static void sub_804D638(void);
+static void sub_804D694(u8 state);
+static void sub_804D764(void);
+static u8 shedinja_maker_maybe(void);
+static void sub_804DFF0(void);
 static void RunTradeMenuCallback(void);
-void sub_804EAAC(u8 a0);
-void sub_804EAE4(u8 side);
-u8 sub_804EE6C(u8 *str, u8 whichParty, u8 partyIdx);
-void sub_804EED4(u8 *str, u8 whichParty, u8 partyIdx);
-void sub_804F020(u8 side);
-void sub_804F08C(u8 a0, u8 partyIdx, u8 a2, u8 a3, u8 a4, u8 a5);
-void sub_804F284(u8 side);
-void sub_804F3B4(void);
-void sub_804F3C8(u8 a0);
-void TradeMenuAction_Summary(u8 taskId);
-void TradeMenuAction_Trade(u8 taskId);
-void sub_804F488(u16 a0, u8 a1);
+static void sub_804EAAC(u8 a0);
+static void sub_804EAE4(u8 side);
+static u8 sub_804EE6C(u8 *str, u8 whichParty, u8 partyIdx);
+static void sub_804EED4(u8 *str, u8 whichParty, u8 partyIdx);
+static void sub_804F020(u8 side);
+static void sub_804F08C(u8 a0, u8 partyIdx, u8 a2, u8 a3, u8 a4, u8 a5);
+static void sub_804F284(u8 side);
+static void sub_804F3B4(void);
+static void sub_804F3C8(u8 a0);
+static void TradeMenuAction_Summary(u8 taskId);
+static void TradeMenuAction_Trade(u8 taskId);
+static void sub_804F488(u16 a0, u8 a1);
 static void sub_804F4DC(void);
-void PrintTradeErrorOrStatusMessage(u8 str_idx);
-bool8 sub_804F610(void);
-void sub_804F728(const u8 *name, u8 *a1, u8 unused);
-void sub_804F748(u8 side);
-void sub_804F890(u8 side);
-void sub_804F964(void);
-void sub_804F9D8(void);
-u32 sub_804FA14(struct Pokemon * party, int partyCount, int cursorPos);
+static void PrintTradeErrorOrStatusMessage(u8 str_idx);
+static bool8 sub_804F610(void);
+static void sub_804F728(const u8 *name, u8 *a1, u8 unused);
+static void sub_804F748(u8 side);
+static void sub_804F890(u8 side);
+static void sub_804F964(void);
+static void sub_804F9D8(void);
+static u32 sub_804FA14(struct Pokemon * party, int partyCount, int cursorPos);
 
 static const size_t gUnknown_8260814[] = {
     sizeof(struct SaveBlock2),
@@ -152,81 +152,81 @@ static const size_t gUnknown_8260814[] = {
     0x528 // unk
 };
 
-const u16 gTradeMovesBoxTilemap[] = INCBIN_U16("data/trade/unk_8260834.bin");
-const u16 gTradePartyBoxTilemap[] = INCBIN_U16("data/trade/unk_8260A32.bin");
-const u16 gUnknown_8260C30[] = INCBIN_U16("data/trade/unk_8260C30.bin");
-const u16 gUnknown_8261430[] = INCBIN_U16("data/trade/unk_8261430.bin");
+static const u16 gTradeMovesBoxTilemap[] = INCBIN_U16("data/trade/unk_8260834.bin");
+static const u16 gTradePartyBoxTilemap[] = INCBIN_U16("data/trade/unk_8260A32.bin");
+static const u16 gUnknown_8260C30[] = INCBIN_U16("data/trade/unk_8260C30.bin");
+static const u16 gUnknown_8261430[] = INCBIN_U16("data/trade/unk_8261430.bin");
 
-const struct OamData gOamData_8261C30 = {
+static const struct OamData gOamData_8261C30 = {
     .shape = SPRITE_SHAPE(32x16),
     .size = SPRITE_SIZE(32x16),
     .priority = 1
 };
 
-const struct OamData gOamData_8261C38 = {
+static const struct OamData gOamData_8261C38 = {
     .shape = SPRITE_SHAPE(64x32),
     .size = SPRITE_SIZE(64x32),
     .priority = 1
 };
 
-const union AnimCmd gSpriteAnim_8261C40[] = {
+static const union AnimCmd gSpriteAnim_8261C40[] = {
     ANIMCMD_FRAME(0x00, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gSpriteAnim_8261C48[] = {
+static const union AnimCmd gSpriteAnim_8261C48[] = {
     ANIMCMD_FRAME(0x20, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd *const gSpriteAnimTable_8261C50[] = {
+static const union AnimCmd *const gSpriteAnimTable_8261C50[] = {
     gSpriteAnim_8261C40,
     gSpriteAnim_8261C48
 };
 
-const struct SpriteSheet gUnknown_8261C58 = {
+static const struct SpriteSheet gUnknown_8261C58 = {
     gUnknown_8E9E1DC,
     0x800,
     300
 };
 
-const struct SpritePalette gUnknown_8261C60 = {
+static const struct SpritePalette gUnknown_8261C60 = {
     gUnknown_8E9CF3C,
     2345
 };
 
 
-const union AnimCmd gSpriteAnim_8261C68[] = {
+static const union AnimCmd gSpriteAnim_8261C68[] = {
     ANIMCMD_FRAME(0x00, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gSpriteAnim_8261C70[] = {
+static const union AnimCmd gSpriteAnim_8261C70[] = {
     ANIMCMD_FRAME(0x08, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gSpriteAnim_8261C78[] = {
+static const union AnimCmd gSpriteAnim_8261C78[] = {
     ANIMCMD_FRAME(0x10, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gSpriteAnim_8261C80[] = {
+static const union AnimCmd gSpriteAnim_8261C80[] = {
     ANIMCMD_FRAME(0x18, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gSpriteAnim_8261C88[] = {
+static const union AnimCmd gSpriteAnim_8261C88[] = {
     ANIMCMD_FRAME(0x20, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gSpriteAnim_8261C90[] = {
+static const union AnimCmd gSpriteAnim_8261C90[] = {
     ANIMCMD_FRAME(0x28, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd *const gSpriteAnimTable_8261C98[] = {
+static const union AnimCmd *const gSpriteAnimTable_8261C98[] = {
     gSpriteAnim_8261C68,
     gSpriteAnim_8261C70,
     gSpriteAnim_8261C78,
@@ -235,7 +235,7 @@ const union AnimCmd *const gSpriteAnimTable_8261C98[] = {
     gSpriteAnim_8261C90
 };
 
-const struct SpriteTemplate gUnknown_8261CB0 = {
+static const struct SpriteTemplate gUnknown_8261CB0 = {
     .tileTag = 300,
     .paletteTag = 2345,
     .oam = &gOamData_8261C38,
@@ -244,7 +244,7 @@ const struct SpriteTemplate gUnknown_8261CB0 = {
     .callback = SpriteCallbackDummy
 };
 
-const struct SpriteTemplate gUnknown_8261CC8 = {
+static const struct SpriteTemplate gUnknown_8261CC8 = {
     .tileTag = 200,
     .paletteTag = 4925,
     .oam = &gOamData_8261C30,
@@ -253,9 +253,9 @@ const struct SpriteTemplate gUnknown_8261CC8 = {
     .callback = SpriteCallbackDummy
 };
 
-const u16 gUnknown_8261CE0[] = INCBIN_U16("data/trade/unk_8261CE0.gbapal");
+static const u16 gUnknown_8261CE0[] = INCBIN_U16("data/trade/unk_8261CE0.gbapal");
 
-const struct SpritePalette gUnknown_8261D00 = {
+static const struct SpritePalette gUnknown_8261D00 = {
     gUnknown_8261CE0,
     4925
 };
@@ -265,7 +265,7 @@ const struct SpritePalette gUnknown_8261D00 = {
 #define DIR_LEFT  2
 #define DIR_RIGHT 3
 
-const u8 sCursorMoveDestinations[][4][6] = {
+static const u8 sCursorMoveDestinations[][4][6] = {
     // Player's party
     [0] = {
         [DIR_UP]    = { 4,  2, 12, 12,  0,  0},
@@ -349,7 +349,7 @@ const u8 sCursorMoveDestinations[][4][6] = {
     }
 };
 
-const u8 gTradeMonSpriteCoords[][2] = {
+static const u8 gTradeMonSpriteCoords[][2] = {
     {0x01, 0x05},
     {0x08, 0x05},
     {0x01, 0x0a},
@@ -367,7 +367,7 @@ const u8 gTradeMonSpriteCoords[][2] = {
     {0x17, 0x12},
 };
 
-const u8 gUnknown_8261E5A[][2][6][2] = {
+static const u8 gUnknown_8261E5A[][2][6][2] = {
     {
         {
             {0x05, 0x04},
@@ -403,12 +403,12 @@ const u8 gUnknown_8261E5A[][2][6][2] = {
     }
 };
 
-const u8 gTradeUnknownSpriteCoords[][4] = {
+static const u8 gTradeUnknownSpriteCoords[][4] = {
     {0x3c, 0x09, 0xb4, 0x09},
     {0x30, 0x09, 0xa8, 0x09}
 };
 
-const u8 gUnknown_8261E92[] = {
+static const u8 gUnknown_8261E92[] = {
     0x00, 0x0e, 0x0f, 0x1d,
     0x03, 0x05, 0x03, 0x07,
     0x12, 0x05, 0x12, 0x07,
@@ -429,7 +429,7 @@ const u8 gUnknown_8261EC6[] = _("");
 const u8 gUnknown_8261EC7[] = _("\n");
 const u8 gUnknown_8261EC9[] = _("/");
 
-const u8 *const gUnknown_8261ECC[] = {
+static const u8 *const gUnknown_8261ECC[] = {
     gUnknown_841E0B9,
     gUnknown_841E0C0,
     gUnknown_841E0D2,
@@ -438,12 +438,12 @@ const u8 *const gUnknown_8261ECC[] = {
     gUnknown_841E0EE
 };
 
-const struct MenuAction gUnknown_8261EE4[] = {
+static const struct MenuAction gUnknown_8261EE4[] = {
     {gUnknown_841E10A, { .void_u8 = TradeMenuAction_Summary }},
     {gUnknown_841E112, { .void_u8 = TradeMenuAction_Trade }}
 };
 
-const u8 *const sTradeErrorOrStatusMessagePtrs[] = {
+static const u8 *const sTradeErrorOrStatusMessagePtrs[] = {
     gUnknown_841E118, // Communication standby
     gUnknown_841E145, // The trade has been canceled.
     gUnknown_841E16B, // That's your only POKéMON for battle
@@ -455,9 +455,9 @@ const u8 *const sTradeErrorOrStatusMessagePtrs[] = {
     gUnknown_84170FC  // The other TRAINER's POKéMON can't be traded now
 };
 
-const u8 gUnknown_8261F18[] = { 0, 1, 2 };
+static const u8 gUnknown_8261F18[] = { 0, 1, 2 };
 
-const struct BgTemplate gUnknown_8261F1C[] = {
+static const struct BgTemplate gUnknown_8261F1C[] = {
     {
         .bg = 0,
         .charBaseIndex = 2,
@@ -493,7 +493,7 @@ const struct BgTemplate gUnknown_8261F1C[] = {
     }
 };
 
-const struct WindowTemplate gUnknown_8261F2C[] = {
+static const struct WindowTemplate gUnknown_8261F2C[] = {
     {
         .bg = 0,
         .tilemapLeft = 4,
@@ -641,7 +641,7 @@ const struct WindowTemplate gUnknown_8261F2C[] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-const struct WindowTemplate gUnknown_8261FC4 = {
+static const struct WindowTemplate gUnknown_8261FC4 = {
     .bg = 0,
     .tilemapLeft = 21,
     .tilemapTop = 13,
@@ -651,7 +651,7 @@ const struct WindowTemplate gUnknown_8261FC4 = {
     .baseBlock = 0x24e
 };
 
-const u8 gUnknown_8261FCC[][13] = {
+static const u8 gUnknown_8261FCC[][13] = {
     _("かいめの そうしん"),
     _("かいめの じゅしん"),
     _("ポケモンアイコンセット"),
@@ -662,16 +662,16 @@ const u8 gUnknown_8261FCC[][13] = {
     _("はいけいセット")
 };
 
-const u8 gJPText_Shedinja[] = _("ヌケニン");
-const u8 gUnknown_8262039[] = _("こうかんせいりつ     ");
-const u8 gUnknown_8262047[] = _("だめだたらしいよ     ");
+static const u8 gJPText_Shedinja[] = _("ヌケニン");
+static const u8 gUnknown_8262039[] = _("こうかんせいりつ     ");
+static const u8 gUnknown_8262047[] = _("だめだたらしいよ     ");
 
-const u8 gUnknown_8262055[][2] = {
+static const u8 gUnknown_8262055[][2] = {
     { 4,  3},
     {19,  3}
 };
 
-void sub_804C600(void)
+static void sub_804C600(void)
 {
     int i;
 
@@ -717,7 +717,7 @@ void sub_804C718(void)
 
 #ifdef NONMATCHING
 // See note on case 12 below
-void sub_804C728(void)
+static void sub_804C728(void)
 {
     int i;
     struct SpriteTemplate temp;
@@ -992,7 +992,7 @@ void sub_804C728(void)
 }
 #else
 NAKED
-void sub_804C728(void)
+static void sub_804C728(void)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                 "\tmov r7, r8\n"
@@ -2779,14 +2779,14 @@ void sub_804CF14(void)
 }
 #endif //NONMATCHING
 
-void sub_804D4F8(void)
+static void sub_804D4F8(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-void sub_804D50C(void)
+static void sub_804D50C(void)
 {
     if (++sTradeMenuResourcesPtr->unk_A8 >= 16)
     {
@@ -2795,7 +2795,7 @@ void sub_804D50C(void)
     }
 }
 
-void sub_804D548(void)
+static void sub_804D548(void)
 {
     if (!gPaletteFade.active)
     {
@@ -2813,7 +2813,7 @@ void sub_804D548(void)
     }
 }
 
-void sub_804D5A4(void)
+static void sub_804D5A4(void)
 {
     gMain.savedCallback = sub_804C718;
     if (gWirelessCommType != 0)
@@ -2841,7 +2841,7 @@ void sub_804D5A4(void)
     }
 }
 
-void sub_804D638(void)
+static void sub_804D638(void)
 {
     RunTradeMenuCallback();
     sub_804F4DC();
@@ -2856,7 +2856,7 @@ void sub_804D638(void)
     UpdatePaletteFade();
 }
 
-void sub_804D694(u8 state)
+static void sub_804D694(u8 state)
 {
     int i;
 
@@ -2888,7 +2888,7 @@ void sub_804D694(u8 state)
     }
 }
 
-void sub_804D764(void)
+static void sub_804D764(void)
 {
     int i;
     for (i = 0; i < PARTY_SIZE; i++)
@@ -2924,7 +2924,7 @@ static void Trade_Memcpy(void *dest, const void *src, size_t size)
         _dest[i] = _src[i];
 }
 
-bool8 shedinja_maker_maybe(void)
+static bool8 shedinja_maker_maybe(void)
 {
     u8 id = GetMultiplayerId();
     int i;
@@ -3078,12 +3078,12 @@ bool8 shedinja_maker_maybe(void)
     return FALSE;
 }
 
-void sub_804DBAC(void)
+static void sub_804DBAC(void)
 {
     sub_804F728(gUnknown_841E0A5, (u8 *)OBJ_VRAM0 + sTradeMenuResourcesPtr->unk_72 * 32, 0x18);
 }
 
-void sub_804DBD4(u8 a0, u8 a1)
+static void sub_804DBD4(u8 a0, u8 a1)
 {
     if (a1 & 1)
     {
@@ -3127,7 +3127,7 @@ void sub_804DBD4(u8 a0, u8 a1)
     }
 }
 
-void sub_804DCF4(u8 a0, u8 a1)
+static void sub_804DCF4(u8 a0, u8 a1)
 {
     if (a1 & 1)
     {
@@ -3164,7 +3164,7 @@ void sub_804DCF4(u8 a0, u8 a1)
         ResetBlockReceivedFlag(1);
 }
 
-void sub_804DDF0(void)
+static void sub_804DDF0(void)
 {
     if (sTradeMenuResourcesPtr->unk_78 && sTradeMenuResourcesPtr->unk_79)
     {
@@ -3232,7 +3232,7 @@ void sub_804DDF0(void)
     }
 }
 
-void sub_804DFF0(void)
+static void sub_804DFF0(void)
 {
     u8 mpId = GetMultiplayerId();
     u8 status;
@@ -3247,7 +3247,7 @@ void sub_804DFF0(void)
         sub_804DDF0();
 }
 
-u8 sub_804E028(u8 oldPosition, u8 direction)
+static u8 sub_804E028(u8 oldPosition, u8 direction)
 {
     int i;
     u8 newPosition = 0;
@@ -3265,7 +3265,7 @@ u8 sub_804E028(u8 oldPosition, u8 direction)
 }
 
 
-void TradeMenuMoveCursor(u8 *tradeMenuCursorPosition, u8 direction)
+static void TradeMenuMoveCursor(u8 *tradeMenuCursorPosition, u8 direction)
 {
     u8 newPosition = sub_804E028(*tradeMenuCursorPosition, direction);
 
@@ -3290,7 +3290,7 @@ void TradeMenuMoveCursor(u8 *tradeMenuCursorPosition, u8 direction)
     *tradeMenuCursorPosition = newPosition;
 }
 
-void sub_804E134(void)
+static void sub_804E134(void)
 {
     PrintTradeErrorOrStatusMessage(TRADESTATMSG_COMMSTANDBY);
     sTradeMenuResourcesPtr->unk_6F = 5;
@@ -3307,7 +3307,7 @@ void sub_804E134(void)
     }
 }
 
-void sub_804E194(void)
+static void sub_804E194(void)
 {
     int i;
 
@@ -3362,7 +3362,7 @@ void sub_804E194(void)
     }
 }
 
-void sub_804E330(void)
+static void sub_804E330(void)
 {
     sub_804F3B4();
     sTradeMenuResourcesPtr->unk_6F = 0;
@@ -3370,7 +3370,7 @@ void sub_804E330(void)
     sub_804F728(gUnknown_8261ECC[1], (void *)OBJ_VRAM0 + sTradeMenuResourcesPtr->unk_72 * 32, 24);
 }
 
-void sub_804E388(void)
+static void sub_804E388(void)
 {
     switch (Menu_ProcessInputNoWrapAround())
     {
@@ -3410,7 +3410,7 @@ void sub_804E388(void)
     }
 }
 
-void sub_804E46C(void)
+static void sub_804E46C(void)
 {
     if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
@@ -3419,7 +3419,7 @@ void sub_804E46C(void)
     }
 }
 
-void sub_804E494(void)
+static void sub_804E494(void)
 {
     if (!gPaletteFade.active)
     {
@@ -3431,7 +3431,7 @@ void sub_804E494(void)
     }
 }
 
-u8 sub_804E50C(u8 *a0, u8 a1, u8 a2)
+static u8 sub_804E50C(u8 *a0, u8 a1, u8 a2)
 {
     s32 i;
     u16 species;
@@ -3449,7 +3449,7 @@ u8 sub_804E50C(u8 *a0, u8 a1, u8 a2)
     return r4;
 }
 
-void sub_804E5A0(void)
+static void sub_804E5A0(void)
 {
     int i;
     u8 arr[12];
@@ -3482,7 +3482,7 @@ void sub_804E5A0(void)
     }
 }
 
-void sub_804E674(void)
+static void sub_804E674(void)
 {
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
@@ -3505,7 +3505,7 @@ void sub_804E674(void)
     }
 }
 
-void sub_804E6FC(void)
+static void sub_804E6FC(void)
 {
     int i;
 
@@ -3516,7 +3516,7 @@ void sub_804E6FC(void)
     }
 }
 
-void sub_804E744(void)
+static void sub_804E744(void)
 {
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
@@ -3537,7 +3537,7 @@ void sub_804E744(void)
     }
 }
 
-void sub_804E7C8(void)
+static void sub_804E7C8(void)
 {
     if (GetMultiplayerId() == 0)
     {
@@ -3548,7 +3548,7 @@ void sub_804E7C8(void)
     sTradeMenuResourcesPtr->unk_6F = 7;
 }
 
-void sub_804E804(void)
+static void sub_804E804(void)
 {
     if (sTradeMenuResourcesPtr->unk_74[0] == 5 && sTradeMenuResourcesPtr->unk_74[1] == 5)
     {
@@ -3557,7 +3557,7 @@ void sub_804E804(void)
     }
 }
 
-void sub_804E830(void)
+static void sub_804E830(void)
 {
     sTradeMenuResourcesPtr->unk_A8++;
 
@@ -3569,7 +3569,7 @@ void sub_804E830(void)
     }
 }
 
-void sub_804E880(void)
+static void sub_804E880(void)
 {
     int i;
 
@@ -3592,7 +3592,7 @@ void sub_804E880(void)
     }
 }
 
-void sub_804E908(void)
+static void sub_804E908(void)
 {
     if (!gPaletteFade.active)
     {
@@ -3609,7 +3609,7 @@ void sub_804E908(void)
     }
 }
 
-void sub_804E944(void)
+static void sub_804E944(void)
 {
     if (gWirelessCommType)
     {
@@ -3634,7 +3634,7 @@ void sub_804E944(void)
     }
 }
 
-void sub_804E9C0(void)
+static void sub_804E9C0(void)
 {
     if (!sub_80FA484(FALSE))
     {
@@ -3698,7 +3698,7 @@ static void RunTradeMenuCallback(void)
     }
 }
 
-void sub_804EAAC(u8 a0)
+static void sub_804EAAC(u8 a0)
 {
     u8 whichParty = a0 / PARTY_SIZE;
 
@@ -3709,7 +3709,7 @@ void sub_804EAAC(u8 a0)
     }
 }
 
-void sub_804EAE4(u8 a0)
+static void sub_804EAE4(u8 a0)
 {
     s8 nameStringWidth;
     u8 nickname[20];
@@ -3780,7 +3780,7 @@ void sub_804EAE4(u8 a0)
     }
 }
 
-u8 sub_804EE6C(u8 *dest, u8 whichParty, u8 partyIdx)
+static u8 sub_804EE6C(u8 *dest, u8 whichParty, u8 partyIdx)
 {
     u8 nickname[11];
     if (whichParty == 0)
@@ -3791,7 +3791,7 @@ u8 sub_804EE6C(u8 *dest, u8 whichParty, u8 partyIdx)
     return GetStringWidth(0, dest, GetFontAttribute(0, FONTATTR_LETTER_SPACING));
 }
 
-void sub_804EED4(u8 *a0, u8 a1, u8 a2)
+static void sub_804EED4(u8 *a0, u8 a1, u8 a2)
 {
     u16 moves[MAX_MON_MOVES];
     u16 i;
@@ -3829,7 +3829,7 @@ void sub_804EED4(u8 *a0, u8 a1, u8 a2)
     }
 }
 
-void sub_804EFB4(u8 whichParty, u8 windowId, const u8 *str)
+static void sub_804EFB4(u8 whichParty, u8 windowId, const u8 *str)
 {
     u8 xPos;
     s8 speed;
@@ -3841,7 +3841,7 @@ void sub_804EFB4(u8 whichParty, u8 windowId, const u8 *str)
     CopyWindowToVram(windowId, 3);
 }
 
-void sub_804F020(u8 whichParty)
+static void sub_804F020(u8 whichParty)
 {
     u8 buff[20];
     u8 nickname[30];
@@ -3855,7 +3855,7 @@ void sub_804F020(u8 whichParty)
     }
 }
 
-void sub_804F08C(u8 whichParty, u8 monIdx, u8 a2, u8 a3, u8 a4, u8 a5)
+static void sub_804F08C(u8 whichParty, u8 monIdx, u8 a2, u8 a3, u8 a4, u8 a5)
 {
     u8 level;
     u32 r2;
@@ -3918,7 +3918,7 @@ void sub_804F08C(u8 whichParty, u8 monIdx, u8 a2, u8 a3, u8 a4, u8 a5)
 
 #ifdef NONMATCHING
 // Instruction swap when setting r5 and r4
-void sub_804F284(u8 whichParty)
+static void sub_804F284(u8 whichParty)
 {
     s32 i;
     for (i = 0; i < sTradeMenuResourcesPtr->partyCounts[whichParty]; i++)
@@ -3935,7 +3935,7 @@ void sub_804F284(u8 whichParty)
 }
 #else
 NAKED
-void sub_804F284(u8 whichParty)
+static void sub_804F284(u8 whichParty)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                 "\tsub sp, 0x8\n"
@@ -3989,7 +3989,7 @@ void sub_804F284(u8 whichParty)
 }
 #endif //NONMATCHING
 
-void sub_804F2E8(u8 whichParty)
+static void sub_804F2E8(u8 whichParty)
 {
     int i;
 
@@ -4003,13 +4003,13 @@ void sub_804F2E8(u8 whichParty)
     }
 }
 
-void sub_804F3B4(void)
+static void sub_804F3B4(void)
 {
     rbox_fill_rectangle(1);
     sub_804F020(1);
 }
 
-void sub_804F3C8(u8 whichParty)
+static void sub_804F3C8(u8 whichParty)
 {
     CopyToBgTilemapBufferRect_ChangePalette(1, gTradePartyBoxTilemap, 15 * whichParty, 0, 15, 17, 0);
     CopyBgTilemapBufferToVram(1);
@@ -4020,19 +4020,19 @@ void sub_804F3C8(u8 whichParty)
     sTradeMenuResourcesPtr->unk_74[whichParty] = 0;
 }
 
-void TradeMenuAction_Summary(u8 taskId)
+static void TradeMenuAction_Summary(u8 taskId)
 {
     FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
     CopyBgTilemapBufferToVram(0);
 }
 
-void TradeMenuAction_Trade(u8 taskId)
+static void TradeMenuAction_Trade(u8 taskId)
 {
     FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
     CopyBgTilemapBufferToVram(0);
 }
 
-void sub_804F488(u16 a0, u8 a1)
+static void sub_804F488(u16 a0, u8 a1)
 {
     int i;
     for (i = 0; i < 4; i++)
@@ -4093,7 +4093,7 @@ static void sub_804F4DC(void)
     }
 }
 
-void PrintTradeErrorOrStatusMessage(u8 idx)
+static void PrintTradeErrorOrStatusMessage(u8 idx)
 {
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
     AddTextPrinterParameterized(0, 3, sTradeErrorOrStatusMessagePtrs[idx], 0, 2, 0xFF, NULL);
@@ -4102,7 +4102,7 @@ void PrintTradeErrorOrStatusMessage(u8 idx)
     CopyWindowToVram(0, 3);
 }
 
-bool8 sub_804F610(void)
+static bool8 sub_804F610(void)
 {
     struct SpriteSheet sheet;
 
@@ -4147,12 +4147,12 @@ bool8 sub_804F610(void)
     return FALSE;
 }
 
-void sub_804F728(const u8 *name, u8 *dest, u8 unused)
+static void sub_804F728(const u8 *name, u8 *dest, u8 unused)
 {
     sub_808BEB4(name, dest, 0, 0, gDecompressionBuffer, 6);
 }
 
-void sub_804F748(u8 who)
+static void sub_804F748(u8 who)
 {
     int i;
 
@@ -4201,7 +4201,7 @@ void sub_804F748(u8 who)
     }
 }
 
-void sub_804F890(u8 who)
+static void sub_804F890(u8 who)
 {
     u16 i, curHp, maxHp;
 
@@ -4226,7 +4226,7 @@ void sub_804F890(u8 who)
     }
 }
 
-void sub_804F964(void)
+static void sub_804F964(void)
 {
     int i, j;
     for (i = 0; i < 2; i++)
@@ -4238,7 +4238,7 @@ void sub_804F964(void)
     }
 }
 
-void sub_804F9D8(void)
+static void sub_804F9D8(void)
 {
     int i;
     for (i = 0; i < 11; i++)
@@ -4248,7 +4248,7 @@ void sub_804F9D8(void)
     }
 }
 
-u32 sub_804FA14(struct Pokemon *party, int partyCount, int cursorPos)
+static u32 sub_804FA14(struct Pokemon *party, int partyCount, int cursorPos)
 {
     int i, sum;
     struct LinkPlayer *player;
@@ -4374,7 +4374,7 @@ s32 sub_804FB34(void)
     return 0;
 }
 
-bool32 IsDeoxysOrMewUntradable(u16 species, bool8 isObedientBitSet)
+static bool32 IsDeoxysOrMewUntradable(u16 species, bool8 isObedientBitSet)
 {
     if (species == SPECIES_DEOXYS || species == SPECIES_MEW)
     {

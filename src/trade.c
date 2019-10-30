@@ -217,6 +217,13 @@ extern const u16 gUnknown_826AA5C[];
 extern const u16 gUnknown_8269A5C[];
 extern const u32 gUnknown_3379A0Bin[];
 extern const u16 gUnknown_826407C[];
+extern const u16 gUnknown_826601C[];
+extern const u16 gUnknown_826BF5C[];
+extern const u16 gUnknown_826701C[];
+extern const u16 gUnknown_826985C[];
+extern const u16 gUnknown_826995C[];
+extern const u32 gWirelessSignal4bpp[];
+extern const u32 gUnknown_826C60C[];
 
 void sub_804C600(void)
 {
@@ -4554,39 +4561,40 @@ void CB2_RunTradeAnim_InGameTrade(void)
     BuildOamBuffer();
     UpdatePaletteFade();
 }
-/*
 
 void sub_8050968(u8 state)
 {
     switch (state)
     {
     case 0:
-        sTradeAnimationResourcesPtr->bg2hofs = 0;
-        sTradeAnimationResourcesPtr->bg2vofs = 0xB4;
+        sTradeAnimationResourcesPtr->bg2vofs = 0;
+        sTradeAnimationResourcesPtr->bg2hofs = 0xB4;
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_ON);
-        SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(2) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(18) | BGCNT_AFF256x256);
+        SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(2) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(18) | BGCNT_TXT512x256);
         LoadPalette(gTradeGba2_Pal, 0x10, 0x60);
         DmaCopyLarge16(3, gTradeGba_Gfx, (void *)BG_CHAR_ADDR(1), 0x1420, 0x1000);
+        DmaCopy16Defvars(3, gUnknown_826601C, (void *)BG_SCREEN_ADDR(18), 0x1000);
         break;
     case 1:
         sTradeAnimationResourcesPtr->bg1hofs = 0;
         sTradeAnimationResourcesPtr->bg1vofs = 0x15C;
         SetGpuReg(REG_OFFSET_BG1VOFS, 0x15C);
         SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(2) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(5) | BGCNT_TXT256x512);
-        SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(2) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(18) | BGCNT_AFF512x512);
+        SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(2) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(18) | BGCNT_TXT256x512);
         if (sTradeAnimationResourcesPtr->unk_108)
         {
-            DmaCopy16(3, gUnknown_826AA5C, (void *)BG_SCREEN_ADDR(5), 0x1000);
+            DmaCopy16Defvars(3, gUnknown_826AA5C, (void *)BG_SCREEN_ADDR(5), 0x1000);
         }
         else
         {
-            DmaCopy16(3, gUnknown_8269A5C, (void *)BG_SCREEN_ADDR(5), 0x1000);
+            DmaCopy16Defvars(3, gUnknown_8269A5C, (void *)BG_SCREEN_ADDR(5), 0x1000);
         }
         DmaCopyLarge16(3, gTradeGba_Gfx, (void *)BG_CHAR_ADDR(0), 0x1420, 0x1000);
+        SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG1_ON | DISPCNT_OBJ_ON);
         break;
     case 2:
-        sTradeAnimationResourcesPtr->bg1hofs = 0;
         sTradeAnimationResourcesPtr->bg1vofs = 0;
+        sTradeAnimationResourcesPtr->bg1hofs = 0;
         if (sTradeAnimationResourcesPtr->unk_108 == FALSE)
         {
             SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_1 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG1_ON | DISPCNT_OBJ_ON);
@@ -4596,7 +4604,7 @@ void sub_8050968(u8 state)
         else
         {
             SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_1 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG1_ON | DISPCNT_OBJ_ON);
-            DmaCopy16(3, gUnknown_826407C, (void *)BG_SCREEN_ADDR(5), 0x800);
+            DmaCopy16Defvars(3, gUnknown_826407C, (void *)BG_SCREEN_ADDR(5), 0x800);
             BlendPalettes(0x00000001, 0x10, RGB_BLACK);
         }
         break;
@@ -4604,11 +4612,59 @@ void sub_8050968(u8 state)
         LoadPalette(gUnknown_826BF5C, 0x30, 0x20);
         LZ77UnCompVram(gWirelessSignal4bpp, BG_CHAR_ADDR(1));
         LZ77UnCompVram(gUnknown_826C60C, BG_SCREEN_ADDR(18));
-        sTradeAnimationResourcesPtr->bg2hofs = 0x50;
+        sTradeAnimationResourcesPtr->bg2vofs = 0x50;
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG1_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_ON);
         break;
     case 4:
-
+        SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_1 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG2_ON | DISPCNT_OBJ_ON);
+        SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(3) | BGCNT_CHARBASE(1) | BGCNT_256COLOR | BGCNT_SCREENBASE(18) | BGCNT_AFF128x128);
+        sTradeAnimationResourcesPtr->unk_D4 = 0x40;
+        sTradeAnimationResourcesPtr->unk_D6 = 0x5C;
+        sTradeAnimationResourcesPtr->unk_E8 = 0x20;
+        sTradeAnimationResourcesPtr->unk_EA = 0x400;
+        sTradeAnimationResourcesPtr->unk_EC = 0;
+        DmaCopyLarge16(3, gUnknown_826701C, (void *)BG_CHAR_ADDR(1), 0x2840, 0x1000);
+        if (sTradeAnimationResourcesPtr->unk_108)
+        {
+            DmaCopy16Defvars(3, gUnknown_826985C, (void *)BG_SCREEN_ADDR(18), 0x100);
+        }
+        else
+        {
+            DmaCopy16Defvars(3, gUnknown_826995C, (void *)BG_SCREEN_ADDR(18), 0x100);
+        }
+        break;
+    case 5:
+        sTradeAnimationResourcesPtr->bg1vofs = 0;
+        sTradeAnimationResourcesPtr->bg1hofs = 0;
+        break;
+    case 6:
+        SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_1 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG2_ON | DISPCNT_OBJ_ON);
+        SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(3) | BGCNT_CHARBASE(1) | BGCNT_256COLOR | BGCNT_SCREENBASE(18) | BGCNT_TXT256x256);
+        sTradeAnimationResourcesPtr->unk_D4 = 0x40;
+        sTradeAnimationResourcesPtr->unk_D6 = 0x5C;
+        sTradeAnimationResourcesPtr->unk_E8 = 0x100;
+        sTradeAnimationResourcesPtr->unk_EA = 0x80;
+        sTradeAnimationResourcesPtr->unk_DC = 0x78;
+        sTradeAnimationResourcesPtr->unk_DE = 0x50;
+        sTradeAnimationResourcesPtr->unk_EC = 0;
+        DmaCopyLarge16(3, gUnknown_826701C, BG_CHAR_ADDR(1), 0x2840, 0x1000);
+        if (sTradeAnimationResourcesPtr->unk_108)
+        {
+            DmaCopy16Defvars(3, gUnknown_826985C, (void *)BG_SCREEN_ADDR(18), 0x100);
+        }
+        else
+        {
+            DmaCopy16Defvars(3, gUnknown_826995C, (void *)BG_SCREEN_ADDR(18), 0x100);
+        }
+        break;
+    case 7:
+        sTradeAnimationResourcesPtr->bg2vofs = 0;
+        sTradeAnimationResourcesPtr->bg2hofs = 0;
+        SetGpuReg(REG_OFFSET_BLDCNT, 0);
+        SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(2) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(18) | BGCNT_TXT512x256);
+        LoadPalette(gTradeGba2_Pal, 0x10, 0x60);
+        DmaCopyLarge16(3, gTradeGba_Gfx, (void *)BG_CHAR_ADDR(1), 0x1420, 0x1000);
+        DmaCopy16Defvars(3, gUnknown_826601C, (void *)BG_SCREEN_ADDR(18), 0x1000);
+        break;
     }
 }
-*/

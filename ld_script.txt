@@ -86,7 +86,6 @@ SECTIONS {
         asm/pokeball.o(.text);
         src/load_save.o(.text);
         src/trade.o(.text);
-        asm/trade.o(.text);
         src/play_time.o(.text);
         src/new_game.o(.text);
         asm/overworld.o(.text);
@@ -400,6 +399,7 @@ SECTIONS {
         src/battle_gfx_sfx_util.o(.rodata);
         data/battle_interface.o(.rodata);
         data/pokeball.o(.rodata);
+        src/trade.o(.rodata);
         data/trade.o(.rodata);
         data/overworld.o(.rodata);
         data/tilesets.o(.rodata);

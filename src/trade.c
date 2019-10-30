@@ -15,6 +15,12 @@
 #include "mail_data.h"
 #include "graphics.h"
 #include "link.h"
+#include "random.h"
+#include "save.h"
+#include "load_save.h"
+#include "quest_log.h"
+#include "field_fadetransition.h"
+#include "mevent.h"
 #include "help_system.h"
 #include "link_rfu.h"
 #include "cable_club.h"
@@ -29,6 +35,7 @@
 #include "party_menu.h"
 #include "util.h"
 #include "daycare.h"
+#include "script.h"
 #include "event_data.h"
 #include "battle_interface.h"
 #include "pokemon_summary_screen.h"
@@ -137,9 +144,14 @@ struct TradeAnimationResources {
     /*0xF6*/ u8 unk_F6;
     /*0xF8*/ u16 monSpecies[2];
     /*0xFC*/ u8 unk_FC[7];
-    /*0x103*/ u8 filler_103[5];
+    /*0x103*/ u8 filler_103[1];
+    /*0x104*/ u8 textColor[3];
+    /*0x107*/ u8 filler_107[1];
     /*0x108*/ u8 isCableTrade;
-    /*0x109*/ u8 filler_109[7];
+    /*0x109*/ u8 win0left;
+    /*0x10A*/ u8 win0top;
+    /*0x10B*/ u8 win0right;
+    /*0x10C*/ u8 win0bottom;
 };
 
 enum TradeStatusMsg
@@ -210,12 +222,24 @@ static void GetInGameTradeMail(struct MailStruct * mail, const struct InGameTrad
 void CB2_RunTradeAnim_LinkTrade(void);
 void sub_8053E1C(void);
 void sub_8053E8C(void);
-void LoadHeldItemIcons(void);
-void DrawTextOnTradeWindow(u8 windowId, const u8 *str, s8 speed);
+void sub_80543C4(void);
+void sub_8054470(u8 taskId);
 void CheckPartnersMonForRibbons(void);
+void DrawTextOnTradeWindow(u8 windowId, const u8 *str, s8 speed);
 void Task_AnimateWirelessSignal(u8 taskId);
 void c3_0805465C(u8 taskId);
 void sub_8054734(u8 taskId);
+
+static const size_t gUnknown_8260814[] = {
+    sizeof(struct SaveBlock2),
+    sizeof(struct SaveBlock1),
+    sizeof(struct MapData),
+    0x530, // unk
+    0x34, // unk
+    sizeof(struct MailStruct),
+    sizeof(struct Pokemon),
+    0x528 // unk
+};
 
 extern const u16 gUnknown_8260C30[];
 extern const u16 gUnknown_8261430[];
@@ -251,6 +275,8 @@ extern const u16 gUnknown_8269A5C[];
 extern const u32 gUnknown_3379A0Bin[];
 extern const u16 gUnknown_826407C[];
 extern const u16 gUnknown_826601C[];
+extern const u16 gUnknown_826BB5C[];
+extern const u16 gUnknown_826BD5C[];
 extern const u16 gUnknown_826BF5C[];
 extern const u16 gUnknown_826701C[];
 extern const u16 gUnknown_826985C[];
@@ -273,6 +299,7 @@ extern const union AffineAnimCmd *const gUnknown_826CF88[];
 extern const struct SpriteTemplate gUnknown_826CF48;
 extern const s8 gUnknown_826D1E4[];
 extern const u16 sInGameTradeMailMessages[][10];
+extern const u8 gUnknown_826D250[][2];
 
 void sub_804C600(void)
 {
@@ -6033,4 +6060,332 @@ void sub_8053E1C(void)
     AnimateSprites();
     BuildOamBuffer();
     UpdatePaletteFade();
+}
+
+void sub_8053E8C(void)
+{
+    switch (gMain.state)
+    {
+    case 0:
+        gMain.state++;
+        StringExpandPlaceholders(gStringVar4, gUnknown_841E325);
+        DrawTextOnTradeWindow(0, gStringVar4, 0);
+        break;
+    case 1:
+        sub_800AB9C();
+        gMain.state = 100;
+        sTradeData->timer = 0;
+        break;
+    case 100:
+        if (++sTradeData->timer > 180)
+        {
+            gMain.state = 101;
+            sTradeData->timer = 0;
+        }
+        if (IsLinkTaskFinished())
+        {
+            gMain.state = 2;
+        }
+        break;
+    case 101:
+        if (IsLinkTaskFinished())
+        {
+            gMain.state = 2;
+        }
+        break;
+    case 2:
+        gMain.state = 50;
+        StringExpandPlaceholders(gStringVar4, gText_SavingDontTurnOffThePower2);
+        DrawTextOnTradeWindow(0, gStringVar4, 0);
+        break;
+    case 50:
+        if (InUnionRoom())
+        {
+            sub_8113550(18, sTradeData->monSpecies);
+        }
+        else
+        {
+            sub_8113550(12, sTradeData->monSpecies);
+            IncrementGameStat(GAME_STAT_POKEMON_TRADES);
+        }
+        if (gWirelessCommType)
+        {
+            sub_8144714(2, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
+        }
+        SetContinueGameWarpStatusToDynamicWarp();
+        sub_80DA3AC();
+        gMain.state++;
+        sTradeData->timer = 0;
+        break;
+    case 51:
+        if (++sTradeData->timer == 5)
+        {
+            gMain.state++;
+        }
+        break;
+    case 52:
+        if (sub_80DA3D8())
+        {
+            ClearContinueGameWarpStatus2();
+            gMain.state = 4;
+        }
+        else
+        {
+            sTradeData->timer = 0;
+            gMain.state = 51;
+        }
+        break;
+    case 4:
+        sub_80DA40C();
+        gMain.state = 40;
+        sTradeData->timer = 0;
+        break;
+    case 40:
+        if (++sTradeData->timer > 50)
+        {
+            if (GetMultiplayerId() == 0)
+            {
+                sTradeData->timer = Random() % 30;
+            }
+            else
+            {
+                sTradeData->timer = 0;
+            }
+            gMain.state = 41;
+        }
+        break;
+    case 41:
+        if (sTradeData->timer == 0)
+        {
+            sub_800AB9C();
+            gMain.state = 42;
+        }
+        else
+        {
+            sTradeData->timer--;
+        }
+        break;
+    case 42:
+        if (IsLinkTaskFinished())
+        {
+            sub_80DA434();
+            gMain.state = 5;
+        }
+        break;
+    case 5:
+        if (++sTradeData->timer > 60)
+        {
+            gMain.state++;
+            sub_800AB9C();
+        }
+        break;
+    case 6:
+        if (IsLinkTaskFinished())
+        {
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            gMain.state ++;
+        }
+        break;
+    case 7:
+        if (!gPaletteFade.active)
+        {
+            FadeOutBGM(3);
+            gMain.state++;
+        }
+        break;
+    case 8:
+        if (IsBGMStopped() == TRUE)
+        {
+            if (gWirelessCommType && gMain.savedCallback == sub_804C718)
+            {
+                sub_800AB9C();
+            }
+            else
+            {
+                sub_800AAC0();
+            }
+            gMain.state++;
+        }
+        break;
+    case 9:
+        if (gWirelessCommType && gMain.savedCallback == sub_804C718)
+        {
+            if (IsLinkRfuTaskFinished())
+            {
+                gSoftResetDisabled = FALSE;
+                SetMainCallback2(sub_80543C4);
+            }
+        }
+        else if (!gReceivedRemoteLinkPlayers)
+        {
+            gSoftResetDisabled = FALSE;
+            SetMainCallback2(sub_80543C4);
+        }
+        break;
+    }
+    if (!HasLinkErrorOccurred())
+    {
+        RunTasks();
+    }
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
+
+void sub_80543C4(void)
+{
+    if (!gPaletteFade.active)
+    {
+        FreeAllWindowBuffers();
+        Free(GetBgTilemapBuffer(3));
+        Free(GetBgTilemapBuffer(1));
+        Free(GetBgTilemapBuffer(0));
+        FreeMonSpritesGfx();
+        FREE_AND_SET_NULL(sTradeData);
+        if (gWirelessCommType != 0)
+            DestroyWirelessStatusIndicatorSprite();
+        SetMainCallback2(gMain.savedCallback);
+    }
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
+
+void DoInGameTradeScene(void)
+{
+    ScriptContext2_Enable();
+    CreateTask(sub_8054470, 10);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    HelpSystem_Disable();
+}
+
+void sub_8054470(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        SetMainCallback2(CB2_InitTradeAnim_InGameTrade);
+        gFieldCallback = FieldCallback_ReturnToEventScript2;
+        DestroyTask(taskId);
+    }
+}
+
+void CheckPartnersMonForRibbons(void)
+{
+    u8 nRibbons = 0;
+    u8 i;
+    for (i = 0; i < 12; i++)
+    {
+        nRibbons += GetMonData(&gEnemyParty[gSelectedTradeMonPositions[1] % 6], MON_DATA_CHAMPION_RIBBON + i);
+    }
+    if (nRibbons != 0)
+        FlagSet(FLAG_SYS_RIBBON_GET);
+}
+
+void sub_80544FC(void)
+{
+    TradeAnimInit_LoadGfx();
+}
+
+void DrawTextOnTradeWindow(u8 windowId, const u8 *str, s8 speed)
+{
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(15));
+    sTradeData->textColor[0] = 15;
+    sTradeData->textColor[1] = 1;
+    sTradeData->textColor[2] = 6;
+    AddTextPrinterParameterized4(windowId, 2, 0, 2, 0, 2, sTradeData->textColor, speed, str);
+    CopyWindowToVram(windowId, 3);
+}
+
+void Task_AnimateWirelessSignal(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    u16 r2 = 16 * gUnknown_826D250[data[0]][0];
+    if (data[2] == 0)
+    {
+        if (r2 == 0x100)
+            LoadPalette(gUnknown_826BF5C, 0x30, 0x20);
+        else
+            LoadPalette(&gUnknown_826BB5C[r2], 0x30, 0x20);
+    }
+    else
+    {
+        if (r2 == 0x100)
+            LoadPalette(gUnknown_826BF5C, 0x30, 0x20);
+        else
+            LoadPalette(&gUnknown_826BD5C[r2], 0x30, 0x20);
+    }
+    if (gUnknown_826D250[data[0]][0] == 0 && data[1] == 0)
+        PlaySE(SE_W215);
+    if (data[1] == gUnknown_826D250[data[0]][1])
+    {
+        data[0]++;
+        data[1] = 0;
+        if (gUnknown_826D250[data[0]][1] == 0xFF)
+            DestroyTask(taskId);
+    }
+    else
+        data[1]++;
+}
+
+void c3_0805465C(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+
+    if (data[0] == 0)
+    {
+        sTradeData->win0left = sTradeData->win0right = 120;
+        sTradeData->win0top = 0;
+        sTradeData->win0bottom = 160;
+        SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
+        SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_OBJ);
+        SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG0 |
+                                    WININ_WIN0_BG1 |
+                                    WININ_WIN0_OBJ);
+    }
+
+    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE2(sTradeData->win0left, sTradeData->win0right));
+    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE2(sTradeData->win0top, sTradeData->win0bottom));
+
+    data[0]++;
+    sTradeData->win0left -= 5;
+    sTradeData->win0right += 5;
+
+    if (sTradeData->win0left < 80)
+    {
+        DestroyTask(taskId);
+    }
+}
+
+void sub_8054734(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+
+    if (data[0] == 0)
+    {
+        sTradeData->win0left = 80;
+        sTradeData->win0right = 160;
+        SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_OBJ);
+        SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG0 |
+                                    WININ_WIN0_BG1 |
+                                    WININ_WIN0_OBJ);
+    }
+
+    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE2(sTradeData->win0left, sTradeData->win0right));
+    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE2(sTradeData->win0top, sTradeData->win0bottom));
+
+    if (sTradeData->win0left != 120)
+    {
+        data[0]++;
+        sTradeData->win0left += 5;
+        sTradeData->win0right -= 5;
+
+        if (sTradeData->win0left >= 116)
+            BlendPalettes(0x8, 0, RGB_WHITEALPHA);
+    }
+    else
+    {
+        ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
+        DestroyTask(taskId);
+    }
 }

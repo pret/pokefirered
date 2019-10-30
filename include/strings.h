@@ -666,5 +666,6 @@ extern const u8 gText_XWillBeSentToY[];
 extern const u8 gText_ByeByeVar1[];
 extern const u8 gText_XSentOverY[];
 extern const u8 gText_TakeGoodCareOfX[];
+extern const u8 gUnknown_841E325[];
 
 #endif //GUARD_STRINGS_H

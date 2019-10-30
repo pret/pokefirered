@@ -923,14 +923,14 @@ static void task50_after_link_battle_save(u8 taskId)
                 data[0] = 1;
             break;
         case 1:
-            sub_804C1C0();
+            SetContinueGameWarpStatusToDynamicWarp();
             sub_80DA45C();
             data[0] = 2;
             break;
         case 2:
             if (sub_80DA4A0())
             {
-                sav2_gender2_inplace_and_xFE();
+                ClearContinueGameWarpStatus2();
                 data[0] = 3;
             }
             break;

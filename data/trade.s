@@ -8,17 +8,6 @@
 	.section .rodata
 	.align 2, 0
 
-	@ unknown
-gUnknown_8260814:: @ 8260814
-	.4byte 0x00000f24 @ sizeof(struct SaveBlock2)
-	.4byte 0x00003d68 @ sizeof(struct SaveBlock1)
-	.4byte 0x0000001c @ sizeof(struct MapData)
-	.4byte 0x00000530 @ unk
-	.4byte 0x00000034 @ unk
-	.4byte 0x00000024 @ sizeof(struct MailStruct)
-	.4byte 0x00000064 @ sizeof(struct Pokemon)
-	.4byte 0x00000528
-
 gTradeMovesBoxTilemap:: @ 8260834
 	.incbin "data/trade/unk_8260834.bin"
 

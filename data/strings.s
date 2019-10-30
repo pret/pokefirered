@@ -4364,22 +4364,22 @@ gUnknown_841E09F:: @ 841E09F
 gUnknown_841E0A5:: @ 841E0A5
 	.string "Is this trade okay?$"
 
-gUnknown_841E0B9::
+gTradeText_Cancel::
 	.string "CANCEL$"
 
-gUnknown_841E0C0::
+gTradeText_ChooseAPokemon::
 	.string "Choose a POKéMON.$"
 
-gUnknown_841E0D2::
+gTradeText_Summary::
 	.string "SUMMARY$"
 
-gUnknown_841E0DA::
+gTradeText_Trade::
 	.string "TRADE$"
 
-gUnknown_841E0E0::
+gTradeText_CancelTrade::
 	.string "Cancel trade?$"
 
-gUnknown_841E0EE::
+gTradeText_PressBButtonToExit::
 	.string "Press the B Button to exit.$"
 
 gUnknown_841E10A::

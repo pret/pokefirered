@@ -16,6 +16,6 @@ u8 * GetBoxNamePtr(u8 boxId);
 void sub_808CE60(void);
 void ResetPokemonStorageSystem(void);
 u8 StorageGetCurrentBox(void);
-void sub_808BEB4(const u8 *name, u8 *a1, u8 a2, u8 a3, u8 *buffer, u8 a5);
+void PSS_RenderTextToVramViaBuffer(const u8 *name, u8 *a1, u8 a2, u8 a3, u8 *buffer, u8 a5);
 
 #endif // GUARD_POKEMON_STORAGE_SYSTEM_H

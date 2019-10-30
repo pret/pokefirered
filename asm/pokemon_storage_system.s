@@ -719,8 +719,8 @@ _0808BEA8:
 	bx r1
 	thumb_func_end sub_808BDE8
 
-	thumb_func_start sub_808BEB4
-sub_808BEB4: @ 808BEB4
+	thumb_func_start PSS_RenderTextToVramViaBuffer
+PSS_RenderTextToVramViaBuffer: @ 808BEB4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -868,7 +868,7 @@ _0808BFC4:
 	bx r0
 	.align 2, 0
 _0808BFDC: .4byte 0x001fffff
-	thumb_func_end sub_808BEB4
+	thumb_func_end PSS_RenderTextToVramViaBuffer
 
 	thumb_func_start sub_808BFE0
 sub_808BFE0: @ 808BFE0
@@ -12353,7 +12353,7 @@ sub_8091A94: @ 8091A94
 	adds r0, r5, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_808BEB4
+	bl PSS_RenderTextToVramViaBuffer
 	ldr r0, [sp, 0x30]
 	bl LoadSpriteSheet
 	mov r0, r8
@@ -12539,7 +12539,7 @@ _08091CFC:
 	adds r0, r5, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_808BEB4
+	bl PSS_RenderTextToVramViaBuffer
 	adds r0, r6, 0
 	bl LoadSpriteSheet
 	ldr r0, [sp, 0x2C]

@@ -83,10 +83,10 @@ struct TradeMenuResources
     /*0x00A9*/ u8 unk_A9[11];
     /*0x00B4*/ u8 filler_B4[0x8D0-0xB4];
     /*0x08D0*/ struct {
-        bool8 unk_0;
-        u16 unk_2;
-        u8 unk_4;
-    } unk_8D0[4];
+        bool8 active;
+        u16 delay;
+        u8 kind;
+    } cron[4];
     /*0x08F0*/ u16 tilemapBuffer[BG_SCREEN_SIZE / 2];
 };
 
@@ -103,10 +103,8 @@ enum TradeStatusMsg
     TRADESTATMSG_PARTNERMONCANTBETRADED
 };
 
-IWRAM_DATA vu16 gUnknown_3000E78;
-
-static EWRAM_DATA u8 *gUnknown_2031C90 = NULL;
-static EWRAM_DATA u8 *gUnknown_2031C94[14] = {};
+static EWRAM_DATA u8 *sSpriteTextTileBuffer = NULL;
+static EWRAM_DATA u8 *sSpriteTextTilePtrs[14] = {};
 EWRAM_DATA struct MailStruct gLinkPartnerMail[6] = {};
 EWRAM_DATA u8 gSelectedTradeMonPositions[2] = {0};
 static EWRAM_DATA struct TradeMenuResources * sTradeMenuResourcesPtr = NULL;
@@ -130,11 +128,11 @@ static void sub_804F3B4(void);
 static void sub_804F3C8(u8 a0);
 static void TradeMenuAction_Summary(u8 taskId);
 static void TradeMenuAction_Trade(u8 taskId);
-static void sub_804F488(u16 a0, u8 a1);
-static void sub_804F4DC(void);
+static void ScheduleLinkTaskWithDelay(u16 delay, u8 kind);
+static void RunScheduledLinkTasks(void);
 static void PrintTradeErrorOrStatusMessage(u8 str_idx);
 static bool8 sub_804F610(void);
-static void sub_804F728(const u8 *name, u8 *a1, u8 unused);
+static void RenderTextToVramViaBuffer(const u8 *name, u8 *a1, u8 unused);
 static void sub_804F748(u8 side);
 static void sub_804F890(u8 side);
 static void sub_804F964(void);
@@ -429,13 +427,23 @@ const u8 gUnknown_8261EC6[] = _("");
 const u8 gUnknown_8261EC7[] = _("\n");
 const u8 gUnknown_8261EC9[] = _("/");
 
-static const u8 *const gUnknown_8261ECC[] = {
-    gUnknown_841E0B9,
-    gUnknown_841E0C0,
-    gUnknown_841E0D2,
-    gUnknown_841E0DA,
-    gUnknown_841E0E0,
-    gUnknown_841E0EE
+enum TradeUIText
+{
+    TRADEUITEXT_CANCEL = 0,
+    TRADEUITEXT_CHOOSE,
+    TRADEUITEXT_SUMMARY,
+    TRADEUITEXT_TRADE,
+    TRADEUITEXT_ASKCANCEL,
+    TRADEUITEXT_PRESSBTOEXIT
+};
+
+static const u8 *const sTradeUITextPtrs[] = {
+    gTradeText_Cancel,
+    gTradeText_ChooseAPokemon,
+    gTradeText_Summary,
+    gTradeText_Trade,
+    gTradeText_CancelTrade,
+    gTradeText_PressBButtonToExit
 };
 
 static const struct MenuAction gUnknown_8261EE4[] = {
@@ -674,6 +682,7 @@ static const u8 gUnknown_8262055[][2] = {
 static void sub_804C600(void)
 {
     int i;
+    static vu16 dummy;
 
     ResetSpriteData();
     FreeAllSpritePalettes();
@@ -689,7 +698,7 @@ static void sub_804C600(void)
     if (InitWindows(gUnknown_8261F2C))
     {
         DeactivateAllTextPrinters();
-        gUnknown_3000E78 = 590; // ?
+        dummy = 590; // ?
         for (i = 0; i < NELEMS(gUnknown_8261F2C) - 1; i++)
         {
             ClearWindowTilemap(i);
@@ -730,11 +739,11 @@ static void sub_804C728(void)
     case 0:
         sTradeMenuResourcesPtr = AllocZeroed(sizeof(*sTradeMenuResourcesPtr));
         sub_804C600();
-        gUnknown_2031C90 = AllocZeroed(0xE00);
+        sSpriteTextTileBuffer = AllocZeroed(0xE00);
 
         for (i = 0; i < 14; i++)
         {
-            gUnknown_2031C94[i] = &gUnknown_2031C90[i * 256];
+            sSpriteTextTilePtrs[i] = &sSpriteTextTileBuffer[i * 256];
         }
 
         gMain.state++;
@@ -877,11 +886,11 @@ static void sub_804C728(void)
         gMain.state++;
         break;
     case 10:
-        sub_808BEB4(gSaveBlock2Ptr->playerName, gUnknown_2031C94[0], 0, 0, gDecompressionBuffer, 3);
+        PSS_RenderTextToVramViaBuffer(gSaveBlock2Ptr->playerName, sSpriteTextTilePtrs[0], 0, 0, gDecompressionBuffer, 3);
         id = GetMultiplayerId();
-        sub_808BEB4(gLinkPlayers[id ^ 1].name, gUnknown_2031C94[3], 0, 0, gDecompressionBuffer, 3);
-        sub_808BEB4(gUnknown_8261ECC[0], gUnknown_2031C94[6], 0, 0, gDecompressionBuffer, 2);
-        sub_804F728(gUnknown_8261ECC[1], gUnknown_2031C94[8], 24);
+        PSS_RenderTextToVramViaBuffer(gLinkPlayers[id ^ 1].name, sSpriteTextTilePtrs[3], 0, 0, gDecompressionBuffer, 3);
+        PSS_RenderTextToVramViaBuffer(sTradeUITextPtrs[TRADEUITEXT_CANCEL], sSpriteTextTilePtrs[6], 0, 0, gDecompressionBuffer, 2);
+        RenderTextToVramViaBuffer(sTradeUITextPtrs[TRADEUITEXT_CHOOSE], sSpriteTextTilePtrs[8], 24);
         gMain.state++;
         sTradeMenuResourcesPtr->unk_A8 = 0;
         break;
@@ -1047,13 +1056,13 @@ static void sub_804C728(void)
                 "\tbl AllocZeroed\n"
                 "\tstr r0, [r4]\n"
                 "\tbl sub_804C600\n"
-                "\tldr r4, _0804C7F0 @ =gUnknown_2031C90\n"
+                "\tldr r4, _0804C7F0 @ =sSpriteTextTileBuffer\n"
                 "\tmovs r0, 0xE0\n"
                 "\tlsls r0, 4\n"
                 "\tbl AllocZeroed\n"
                 "\tstr r0, [r4]\n"
                 "\tmovs r6, 0\n"
-                "\tldr r2, _0804C7F4 @ =gUnknown_2031C94\n"
+                "\tldr r2, _0804C7F4 @ =sSpriteTextTilePtrs\n"
                 "_0804C7CE:\n"
                 "\tlsls r1, r6, 8\n"
                 "\tldr r0, [r4]\n"
@@ -1070,8 +1079,8 @@ static void sub_804C728(void)
                 "\t.align 2, 0\n"
                 "_0804C7E8: .4byte sTradeMenuResourcesPtr\n"
                 "_0804C7EC: .4byte 0x000010f0\n"
-                "_0804C7F0: .4byte gUnknown_2031C90\n"
-                "_0804C7F4: .4byte gUnknown_2031C94\n"
+                "_0804C7F0: .4byte sSpriteTextTileBuffer\n"
+                "_0804C7F4: .4byte sSpriteTextTilePtrs\n"
                 "_0804C7F8: .4byte gMain\n"
                 "_0804C7FC:\n"
                 "\tldr r2, _0804C864 @ =gPaletteFade\n"
@@ -1501,7 +1510,7 @@ static void sub_804C728(void)
                 "_0804CB9C:\n"
                 "\tldr r0, _0804CC14 @ =gSaveBlock2Ptr\n"
                 "\tldr r0, [r0]\n"
-                "\tldr r6, _0804CC18 @ =gUnknown_2031C94\n"
+                "\tldr r6, _0804CC18 @ =sSpriteTextTilePtrs\n"
                 "\tldr r1, [r6]\n"
                 "\tldr r5, _0804CC1C @ =gDecompressionBuffer\n"
                 "\tstr r5, [sp]\n"
@@ -1509,7 +1518,7 @@ static void sub_804C728(void)
                 "\tstr r4, [sp, 0x4]\n"
                 "\tmovs r2, 0\n"
                 "\tmovs r3, 0\n"
-                "\tbl sub_808BEB4\n"
+                "\tbl PSS_RenderTextToVramViaBuffer\n"
                 "\tbl GetMultiplayerId\n"
                 "\tlsls r0, 24\n"
                 "\tmovs r1, 0x80\n"
@@ -1526,8 +1535,8 @@ static void sub_804C728(void)
                 "\tstr r4, [sp, 0x4]\n"
                 "\tmovs r2, 0\n"
                 "\tmovs r3, 0\n"
-                "\tbl sub_808BEB4\n"
-                "\tldr r4, _0804CC24 @ =gUnknown_8261ECC\n"
+                "\tbl PSS_RenderTextToVramViaBuffer\n"
+                "\tldr r4, _0804CC24 @ =sTradeUITextPtrs\n"
                 "\tldr r0, [r4]\n"
                 "\tldr r1, [r6, 0x18]\n"
                 "\tstr r5, [sp]\n"
@@ -1535,11 +1544,11 @@ static void sub_804C728(void)
                 "\tstr r2, [sp, 0x4]\n"
                 "\tmovs r2, 0\n"
                 "\tmovs r3, 0\n"
-                "\tbl sub_808BEB4\n"
+                "\tbl PSS_RenderTextToVramViaBuffer\n"
                 "\tldr r0, [r4, 0x4]\n"
                 "\tldr r1, [r6, 0x20]\n"
                 "\tmovs r2, 0x18\n"
-                "\tbl sub_804F728\n"
+                "\tbl RenderTextToVramViaBuffer\n"
                 "\tldr r1, _0804CC28 @ =gMain\n"
                 "\tmovs r0, 0x87\n"
                 "\tlsls r0, 3\n"
@@ -1555,10 +1564,10 @@ static void sub_804C728(void)
                 "\tb _0804CEE6\n"
                 "\t.align 2, 0\n"
                 "_0804CC14: .4byte gSaveBlock2Ptr\n"
-                "_0804CC18: .4byte gUnknown_2031C94\n"
+                "_0804CC18: .4byte sSpriteTextTilePtrs\n"
                 "_0804CC1C: .4byte gDecompressionBuffer\n"
                 "_0804CC20: .4byte gLinkPlayers + 8\n"
-                "_0804CC24: .4byte gUnknown_8261ECC\n"
+                "_0804CC24: .4byte sTradeUITextPtrs\n"
                 "_0804CC28: .4byte gMain\n"
                 "_0804CC2C: .4byte sTradeMenuResourcesPtr\n"
                 "_0804CC30:\n"
@@ -1987,11 +1996,11 @@ void sub_804CF14(void)
         gMain.state++;
         break;
     case 10:
-        sub_808BEB4(gSaveBlock2Ptr->playerName, gUnknown_2031C94[0], 0, 0, gDecompressionBuffer, 3);
+        PSS_RenderTextToVramViaBuffer(gSaveBlock2Ptr->playerName, sSpriteTextTilePtrs[0], 0, 0, gDecompressionBuffer, 3);
         id = GetMultiplayerId();
-        sub_808BEB4(gLinkPlayers[id ^ 1].name, gUnknown_2031C94[3], 0, 0, gDecompressionBuffer, 3);
-        sub_808BEB4(gUnknown_8261ECC[0], gUnknown_2031C94[6], 0, 0, gDecompressionBuffer, 2);
-        sub_804F728(gUnknown_8261ECC[1], gUnknown_2031C94[8], 24);
+        PSS_RenderTextToVramViaBuffer(gLinkPlayers[id ^ 1].name, sSpriteTextTilePtrs[3], 0, 0, gDecompressionBuffer, 3);
+        PSS_RenderTextToVramViaBuffer(sTradeUITextPtrs[TRADEUITEXT_CANCEL], sSpriteTextTilePtrs[6], 0, 0, gDecompressionBuffer, 2);
+        RenderTextToVramViaBuffer(sTradeUITextPtrs[TRADEUITEXT_CHOOSE], sSpriteTextTilePtrs[8], 24);
         gMain.state++;
         sTradeMenuResourcesPtr->unk_A8 = 0;
         break;
@@ -2383,7 +2392,7 @@ void sub_804CF14(void)
                 "_0804D19C:\n"
                 "\tldr r0, _0804D214 @ =gSaveBlock2Ptr\n"
                 "\tldr r0, [r0]\n"
-                "\tldr r6, _0804D218 @ =gUnknown_2031C94\n"
+                "\tldr r6, _0804D218 @ =sSpriteTextTilePtrs\n"
                 "\tldr r1, [r6]\n"
                 "\tldr r5, _0804D21C @ =gDecompressionBuffer\n"
                 "\tstr r5, [sp]\n"
@@ -2391,7 +2400,7 @@ void sub_804CF14(void)
                 "\tstr r4, [sp, 0x4]\n"
                 "\tmovs r2, 0\n"
                 "\tmovs r3, 0\n"
-                "\tbl sub_808BEB4\n"
+                "\tbl PSS_RenderTextToVramViaBuffer\n"
                 "\tbl GetMultiplayerId\n"
                 "\tlsls r0, 24\n"
                 "\tmovs r1, 0x80\n"
@@ -2408,8 +2417,8 @@ void sub_804CF14(void)
                 "\tstr r4, [sp, 0x4]\n"
                 "\tmovs r2, 0\n"
                 "\tmovs r3, 0\n"
-                "\tbl sub_808BEB4\n"
-                "\tldr r4, _0804D224 @ =gUnknown_8261ECC\n"
+                "\tbl PSS_RenderTextToVramViaBuffer\n"
+                "\tldr r4, _0804D224 @ =sTradeUITextPtrs\n"
                 "\tldr r0, [r4]\n"
                 "\tldr r1, [r6, 0x18]\n"
                 "\tstr r5, [sp]\n"
@@ -2417,11 +2426,11 @@ void sub_804CF14(void)
                 "\tstr r2, [sp, 0x4]\n"
                 "\tmovs r2, 0\n"
                 "\tmovs r3, 0\n"
-                "\tbl sub_808BEB4\n"
+                "\tbl PSS_RenderTextToVramViaBuffer\n"
                 "\tldr r0, [r4, 0x4]\n"
                 "\tldr r1, [r6, 0x20]\n"
                 "\tmovs r2, 0x18\n"
-                "\tbl sub_804F728\n"
+                "\tbl RenderTextToVramViaBuffer\n"
                 "\tldr r1, _0804D228 @ =gMain\n"
                 "\tmovs r0, 0x87\n"
                 "\tlsls r0, 3\n"
@@ -2438,10 +2447,10 @@ void sub_804CF14(void)
                 "\tb _0804D4D2\n"
                 "\t.align 2, 0\n"
                 "_0804D214: .4byte gSaveBlock2Ptr\n"
-                "_0804D218: .4byte gUnknown_2031C94\n"
+                "_0804D218: .4byte sSpriteTextTilePtrs\n"
                 "_0804D21C: .4byte gDecompressionBuffer\n"
                 "_0804D220: .4byte gLinkPlayers + 8\n"
-                "_0804D224: .4byte gUnknown_8261ECC\n"
+                "_0804D224: .4byte sTradeUITextPtrs\n"
                 "_0804D228: .4byte gMain\n"
                 "_0804D22C: .4byte sTradeMenuResourcesPtr\n"
                 "_0804D230:\n"
@@ -2820,7 +2829,7 @@ static void sub_804D5A4(void)
     {
         if (IsLinkRfuTaskFinished())
         {
-            Free(gUnknown_2031C90);
+            Free(sSpriteTextTileBuffer);
             FreeAllWindowBuffers();
             Free(sTradeMenuResourcesPtr);
             gMain.callback1 = NULL;
@@ -2832,7 +2841,7 @@ static void sub_804D5A4(void)
     {
         if (gReceivedRemoteLinkPlayers == 0)
         {
-            Free(gUnknown_2031C90);
+            Free(sSpriteTextTileBuffer);
             FreeAllWindowBuffers();
             Free(sTradeMenuResourcesPtr);
             gMain.callback1 = NULL;
@@ -2844,7 +2853,7 @@ static void sub_804D5A4(void)
 static void sub_804D638(void)
 {
     RunTradeMenuCallback();
-    sub_804F4DC();
+    RunScheduledLinkTasks();
     sub_804EAE4(0);
     sub_804EAE4(1);
     SetGpuReg(REG_OFFSET_BG2HOFS, sTradeMenuResourcesPtr->unk_0++);
@@ -3080,7 +3089,7 @@ static bool8 shedinja_maker_maybe(void)
 
 static void sub_804DBAC(void)
 {
-    sub_804F728(gUnknown_841E0A5, (u8 *)OBJ_VRAM0 + sTradeMenuResourcesPtr->unk_72 * 32, 0x18);
+    RenderTextToVramViaBuffer(gUnknown_841E0A5, (u8 *)OBJ_VRAM0 + sTradeMenuResourcesPtr->unk_72 * 32, 0x18);
 }
 
 static void sub_804DBD4(u8 a0, u8 a1)
@@ -3173,7 +3182,7 @@ static void sub_804DDF0(void)
             sTradeMenuResourcesPtr->unk_6F = 6;
             sTradeMenuResourcesPtr->linkData[0] = 0xDDDD;
             sTradeMenuResourcesPtr->linkData[1] = sTradeMenuResourcesPtr->tradeMenuCursorPosition;
-            sub_804F488(5, 0);
+            ScheduleLinkTaskWithDelay(5, 0);
             sTradeMenuResourcesPtr->unk_78 = sTradeMenuResourcesPtr->unk_79 = 0;
         }
         else if (sTradeMenuResourcesPtr->unk_78 == 1 && sTradeMenuResourcesPtr->unk_79 == 2)
@@ -3181,7 +3190,7 @@ static void sub_804DDF0(void)
             PrintTradeErrorOrStatusMessage(TRADESTATMSG_CANCELED);
             sTradeMenuResourcesPtr->linkData[0] = 0xEECC;
             sTradeMenuResourcesPtr->linkData[1] = 0;
-            sub_804F488(5, 0);
+            ScheduleLinkTaskWithDelay(5, 0);
             sTradeMenuResourcesPtr->unk_7A = sTradeMenuResourcesPtr->unk_7B = 0;
             sTradeMenuResourcesPtr->unk_78 = sTradeMenuResourcesPtr->unk_79 = 0;
             sTradeMenuResourcesPtr->unk_6F = 8;
@@ -3191,7 +3200,7 @@ static void sub_804DDF0(void)
             PrintTradeErrorOrStatusMessage(TRADESTATMSG_FRIENDWANTSTOTRADE);
             sTradeMenuResourcesPtr->linkData[0] = 0xDDEE;
             sTradeMenuResourcesPtr->linkData[1] = 0;
-            sub_804F488(5, 0);
+            ScheduleLinkTaskWithDelay(5, 0);
             sTradeMenuResourcesPtr->unk_7A = sTradeMenuResourcesPtr->unk_7B = 0;
             sTradeMenuResourcesPtr->unk_78 = sTradeMenuResourcesPtr->unk_79 = 0;
             sTradeMenuResourcesPtr->unk_6F = 8;
@@ -3200,7 +3209,7 @@ static void sub_804DDF0(void)
         {
             sTradeMenuResourcesPtr->linkData[0] = 0xEEBB;
             sTradeMenuResourcesPtr->linkData[1] = 0;
-            sub_804F488(5, 0);
+            ScheduleLinkTaskWithDelay(5, 0);
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
             sTradeMenuResourcesPtr->unk_78 = sTradeMenuResourcesPtr->unk_79 = 0;
             sTradeMenuResourcesPtr->unk_6F = 11;
@@ -3213,7 +3222,7 @@ static void sub_804DDF0(void)
         {
             sTradeMenuResourcesPtr->linkData[0] = 0xCCDD;
             sTradeMenuResourcesPtr->linkData[1] = 0;
-            sub_804F488(5, 0);
+            ScheduleLinkTaskWithDelay(5, 0);
             sTradeMenuResourcesPtr->unk_7A = 0;
             sTradeMenuResourcesPtr->unk_7B = 0;
             sTradeMenuResourcesPtr->unk_6F = 9;
@@ -3224,7 +3233,7 @@ static void sub_804DDF0(void)
             PrintTradeErrorOrStatusMessage(TRADESTATMSG_CANCELED);
             sTradeMenuResourcesPtr->linkData[0] = 0xDDEE;
             sTradeMenuResourcesPtr->linkData[1] = 0;
-            sub_804F488(5, 0);
+            ScheduleLinkTaskWithDelay(5, 0);
             sTradeMenuResourcesPtr->unk_7A = 0;
             sTradeMenuResourcesPtr->unk_7B = 0;
             sTradeMenuResourcesPtr->unk_6F = 8;
@@ -3351,7 +3360,7 @@ static void sub_804E194(void)
         {
             CreateYesNoMenu(&gUnknown_8261FC4, 3, 0, 2, 0x001, 14, 0);
             sTradeMenuResourcesPtr->unk_6F = 4;
-            sub_804F728(gUnknown_8261ECC[4], (void *)OBJ_VRAM0 + sTradeMenuResourcesPtr->unk_72 * 32, 24);
+            RenderTextToVramViaBuffer(sTradeUITextPtrs[TRADEUITEXT_ASKCANCEL], (void *)OBJ_VRAM0 + sTradeMenuResourcesPtr->unk_72 * 32, 24);
         }
     }
     if (JOY_NEW(R_BUTTON))
@@ -3367,7 +3376,7 @@ static void sub_804E330(void)
     sub_804F3B4();
     sTradeMenuResourcesPtr->unk_6F = 0;
     gSprites[sTradeMenuResourcesPtr->tradeMenuCursorSpriteIdx].invisible = FALSE;
-    sub_804F728(gUnknown_8261ECC[1], (void *)OBJ_VRAM0 + sTradeMenuResourcesPtr->unk_72 * 32, 24);
+    RenderTextToVramViaBuffer(sTradeUITextPtrs[TRADEUITEXT_CHOOSE], (void *)OBJ_VRAM0 + sTradeMenuResourcesPtr->unk_72 * 32, 24);
 }
 
 static void sub_804E388(void)
@@ -3392,17 +3401,17 @@ static void sub_804E388(void)
             gSprites[sTradeMenuResourcesPtr->tradeMenuCursorSpriteIdx].invisible = TRUE;
             break;
         case 1:
-            sub_804F488(3, 3);
+            ScheduleLinkTaskWithDelay(3, 3);
             sTradeMenuResourcesPtr->unk_6F = 8;
             break;
         case 2:
         case 4:
-            sub_804F488(3, 6);
+            ScheduleLinkTaskWithDelay(3, 6);
             sTradeMenuResourcesPtr->unk_6F = 8;
             break;
         case 3:
         case 5:
-            sub_804F488(3, 7);
+            ScheduleLinkTaskWithDelay(3, 7);
             sTradeMenuResourcesPtr->unk_6F = 8;
             break;
         }
@@ -3431,22 +3440,22 @@ static void sub_804E494(void)
     }
 }
 
-static u8 sub_804E50C(u8 *a0, u8 a1, u8 a2)
+static u8 sub_804E50C(u8 *flags, u8 partyCount, u8 cursorPos)
 {
     s32 i;
     u16 species;
-    u8 r4 = 0;
-    for (i = 0; i < a1; i++)
+    u8 count = 0;
+    for (i = 0; i < partyCount; i++)
     {
-        if (a2 != i)
-            r4 += a0[i];
+        if (cursorPos != i)
+            count += flags[i];
     }
     species = GetMonData(&gEnemyParty[sTradeMenuResourcesPtr->unk_7E % 6], MON_DATA_SPECIES);
     if ((species == SPECIES_DEOXYS || species == SPECIES_MEW) && !GetMonData(&gEnemyParty[sTradeMenuResourcesPtr->unk_7E % 6], MON_DATA_OBEDIENCE))
         return 2;
-    if (r4 != 0)
-        r4 = 1;
-    return r4;
+    if (count != 0)
+        count = 1;
+    return count;
 }
 
 static void sub_804E5A0(void)
@@ -3462,12 +3471,12 @@ static void sub_804E5A0(void)
     switch (sub_804E50C(arr, sTradeMenuResourcesPtr->partyCounts[0], sTradeMenuResourcesPtr->tradeMenuCursorPosition))
     {
     case 0:
-        sub_804F488(3, 3);
+        ScheduleLinkTaskWithDelay(3, 3);
         sTradeMenuResourcesPtr->linkData[0] = 0xBBCC;
-        sub_804F488(0xB4, 0);
+        ScheduleLinkTaskWithDelay(0xB4, 0);
         break;
     case 1:
-        sub_804F488(3, 1);
+        ScheduleLinkTaskWithDelay(3, 1);
         sTradeMenuResourcesPtr->linkData[0] = 0xBBBB;
         if (IsLinkTaskFinished())
         {
@@ -3475,9 +3484,9 @@ static void sub_804E5A0(void)
         }
         break;
     case 2:
-        sub_804F488(3, 8);
+        ScheduleLinkTaskWithDelay(3, 8);
         sTradeMenuResourcesPtr->linkData[0] = 0xBBCC;
-        sub_804F488(0xB4, 0);
+        ScheduleLinkTaskWithDelay(0xB4, 0);
         break;
     }
 }
@@ -3493,7 +3502,7 @@ static void sub_804E674(void)
         break;
     case 1:
     case MENU_B_PRESSED:
-        sub_804F488(3, 1);
+        ScheduleLinkTaskWithDelay(3, 1);
         if (IsLinkTaskFinished())
         {
             sTradeMenuResourcesPtr->linkData[0] = 0xBBCC;
@@ -3524,7 +3533,7 @@ static void sub_804E744(void)
         PrintTradeErrorOrStatusMessage(TRADESTATMSG_WAITINGFORFRIEND);
         sTradeMenuResourcesPtr->linkData[0] = 0xEEAA;
         sTradeMenuResourcesPtr->linkData[1] = 0;
-        sub_804F488(5, 0);
+        ScheduleLinkTaskWithDelay(5, 0);
         gSprites[sTradeMenuResourcesPtr->tradeMenuCursorSpriteIdx].invisible = TRUE;
         sTradeMenuResourcesPtr->unk_6F = 100;
         sub_804E6FC();
@@ -3615,7 +3624,7 @@ static void sub_804E944(void)
     {
         if (IsLinkTaskFinished())
         {
-            Free(gUnknown_2031C90);
+            Free(sSpriteTextTileBuffer);
             Free(sTradeMenuResourcesPtr);
             FreeAllWindowBuffers();
             DestroyWirelessStatusIndicatorSprite();
@@ -3626,7 +3635,7 @@ static void sub_804E944(void)
     {
         if (!gReceivedRemoteLinkPlayers)
         {
-            Free(gUnknown_2031C90);
+            Free(sSpriteTextTileBuffer);
             Free(sTradeMenuResourcesPtr);
             FreeAllWindowBuffers();
             SetMainCallback2(c2_8056854);
@@ -4016,7 +4025,7 @@ static void sub_804F3C8(u8 whichParty)
     sub_804F284(whichParty);
     sub_804F020(whichParty);
     sub_804F2E8(whichParty);
-    sub_804F728(gUnknown_8261ECC[1], (void *)OBJ_VRAM0 + 32 * sTradeMenuResourcesPtr->unk_72, 24);
+    RenderTextToVramViaBuffer(sTradeUITextPtrs[TRADEUITEXT_CHOOSE], (void *)OBJ_VRAM0 + 32 * sTradeMenuResourcesPtr->unk_72, 24);
     sTradeMenuResourcesPtr->unk_74[whichParty] = 0;
 }
 
@@ -4032,36 +4041,36 @@ static void TradeMenuAction_Trade(u8 taskId)
     CopyBgTilemapBufferToVram(0);
 }
 
-static void sub_804F488(u16 a0, u8 a1)
+static void ScheduleLinkTaskWithDelay(u16 delay, u8 kind)
 {
     int i;
     for (i = 0; i < 4; i++)
     {
-        if (!sTradeMenuResourcesPtr->unk_8D0[i].unk_0)
+        if (!sTradeMenuResourcesPtr->cron[i].active)
         {
-            sTradeMenuResourcesPtr->unk_8D0[i].unk_2 = a0;
-            sTradeMenuResourcesPtr->unk_8D0[i].unk_4 = a1;
-            sTradeMenuResourcesPtr->unk_8D0[i].unk_0 = TRUE;
+            sTradeMenuResourcesPtr->cron[i].delay = delay;
+            sTradeMenuResourcesPtr->cron[i].kind = kind;
+            sTradeMenuResourcesPtr->cron[i].active = TRUE;
             break;
         }
     }
 }
 
-static void sub_804F4DC(void)
+static void RunScheduledLinkTasks(void)
 {
     int i;
 
     for (i = 0; i < 4; i++)
     {
-        if (sTradeMenuResourcesPtr->unk_8D0[i].unk_0)
+        if (sTradeMenuResourcesPtr->cron[i].active)
         {
-            if (sTradeMenuResourcesPtr->unk_8D0[i].unk_2)
+            if (sTradeMenuResourcesPtr->cron[i].delay != 0)
             {
-                sTradeMenuResourcesPtr->unk_8D0[i].unk_2--;
+                sTradeMenuResourcesPtr->cron[i].delay--;
             }
             else
             {
-                switch (sTradeMenuResourcesPtr->unk_8D0[i].unk_4)
+                switch (sTradeMenuResourcesPtr->cron[i].kind)
                 {
                 case 0:
                     SendBlock(bitmask_all_link_players_but_self(), sTradeMenuResourcesPtr->linkData, 20);
@@ -4087,7 +4096,7 @@ static void sub_804F4DC(void)
                     PrintTradeErrorOrStatusMessage(TRADESTATMSG_PARTNERMONCANTBETRADED);
                     break;
                 }
-                sTradeMenuResourcesPtr->unk_8D0[i].unk_0 = FALSE;
+                sTradeMenuResourcesPtr->cron[i].active = FALSE;
             }
         }
     }
@@ -4108,7 +4117,7 @@ static bool8 sub_804F610(void)
 
     if (sTradeMenuResourcesPtr->unk_A8 < 14)
     {
-        sheet.data = gUnknown_2031C94[sTradeMenuResourcesPtr->unk_A8];
+        sheet.data = sSpriteTextTilePtrs[sTradeMenuResourcesPtr->unk_A8];
         sheet.size = 0x100;
         sheet.tag = 200 + sTradeMenuResourcesPtr->unk_A8;
     }
@@ -4147,9 +4156,9 @@ static bool8 sub_804F610(void)
     return FALSE;
 }
 
-static void sub_804F728(const u8 *name, u8 *dest, u8 unused)
+static void RenderTextToVramViaBuffer(const u8 *name, u8 *dest, u8 unused)
 {
-    sub_808BEB4(name, dest, 0, 0, gDecompressionBuffer, 6);
+    PSS_RenderTextToVramViaBuffer(name, dest, 0, 0, gDecompressionBuffer, 6);
 }
 
 static void sub_804F748(u8 who)

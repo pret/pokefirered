@@ -98,7 +98,7 @@ struct TradeAnimationResources {
     /*0xF4*/ u16 cachedMapMusic;
     /*0xF6*/ u8 unk_F6;
     /*0xF8*/ u16 monSpecies[2];
-    /*0xFC*/ u8 unk_FC[7];
+    /*0xFC*/ u8 linkPartnerName[7];
     /*0x103*/ u8 filler_103[1];
     /*0x104*/ u8 textColor[3];
     /*0x107*/ u8 filler_107[1];
@@ -879,7 +879,7 @@ void CB2_InitTradeAnim_LinkTrade(void)
         ShowBg(0);
         sTradeData->monSpecies[0] = GetMonData(&gPlayerParty[gSelectedTradeMonPositions[0]], MON_DATA_SPECIES2);
         sTradeData->monSpecies[1] = GetMonData(&gEnemyParty[gSelectedTradeMonPositions[1] % 6], MON_DATA_SPECIES2);
-        memcpy(sTradeData->unk_FC, gLinkPlayers[GetMultiplayerId() ^ 1].name, 7);
+        memcpy(sTradeData->linkPartnerName, gLinkPlayers[GetMultiplayerId() ^ 1].name, 7);
         gMain.state++;
         break;
     case 11:

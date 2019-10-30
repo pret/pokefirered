@@ -20,10 +20,9 @@
 	.include "src/multiboot.o"
 	.align 2
 	.include "src/daycare.o"
-
-gUnknown_3000E78: @ 3000E78
-	.space 0x4
-
+	.align 2
+	.include "src/trade.o"
+	.align 2
 	.include "src/play_time.o"
 	.align 2
 gUnknown_3000E80: @ 3000E80

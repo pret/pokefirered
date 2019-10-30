@@ -402,7 +402,6 @@ SECTIONS {
         data/pokeball.o(.rodata);
         src/trade.o(.rodata);
         src/trade_scene.o(.rodata);
-        data/trade.o(.rodata);
         data/overworld.o(.rodata);
         data/tilesets.o(.rodata);
         data/maps.o(.rodata);

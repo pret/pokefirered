@@ -667,5 +667,23 @@ extern const u8 gText_ByeByeVar1[];
 extern const u8 gText_XSentOverY[];
 extern const u8 gText_TakeGoodCareOfX[];
 extern const u8 gUnknown_841E325[];
+extern const u8 gUnknown_841E0B9[];
+extern const u8 gUnknown_841E0C0[];
+extern const u8 gUnknown_841E0D2[];
+extern const u8 gUnknown_841E0DA[];
+extern const u8 gUnknown_841E0E0[];
+extern const u8 gUnknown_841E0EE[];
+extern const u8 gUnknown_841E10A[];
+extern const u8 gUnknown_841E112[];
+extern const u8 gUnknown_841E118[];
+extern const u8 gUnknown_841E145[];
+extern const u8 gUnknown_841E16B[];
+extern const u8 gUnknown_8417094[];
+extern const u8 gUnknown_841E199[];
+extern const u8 gUnknown_841E1C5[];
+extern const u8 gUnknown_84170BC[];
+extern const u8 gUnknown_84170E0[];
+extern const u8 gUnknown_84170FC[];
+extern const u8 gUnknown_841E09F[];
 
 #endif //GUARD_STRINGS_H

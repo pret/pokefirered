@@ -31,6 +31,8 @@
 	.align 2
 	.include "src/trade.o"
 	.align 2
+	.include "src/trade_scene.o"
+	.align 2
 	.include "src/new_game.o"
 
 	.align 2

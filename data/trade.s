@@ -8,78 +8,6 @@
 	.section .rodata
 	.align 2, 0
 
-gUnknown_826205C::
-	.incbin "data/trade/unk_826207C.gbapal"
-
-gUnknown_826207C::
-	.incbin "data/trade/unk_826207C.4bpp"
-
-	.incbin "baserom.gba", 0x26267C, 0x1A00
-
-gUnknown_826407C:: @ 826407C
-	.incbin "data/trade/unk_826407C.bin"
-
-	.incbin "baserom.gba", 0x26487C, 0x120
-
-gUnknown_826499C::
-	.incbin "data/trade/unk_8264E1C.gbapal"
-
-	.incbin "baserom.gba", 0x2649BC, 0x40
-
-gUnknown_82649FC::
-	.incbin "data/trade/unk_8264A1C.gbapal"
-
-gUnknown_8264A1C::
-	.incbin "data/trade/unk_8264A1C.4bpp"
-
-gUnknown_8264C1C::
-	.incbin "data/trade/unk_8264C1C.4bpp"
-
-gUnknown_8264E1C::
-	.incbin "data/trade/unk_8264E1C.4bpp"
-
-	.incbin "baserom.gba", 0x264F1C, 0x100
-
-gUnknown_826501C::
-	.incbin "data/trade/unk_826501C.4bpp"
-
-gUnknown_826601C:: @ 826601C
-	.incbin "data/trade/unk_826601C.bin"
-
-gUnknown_826701C:: @ 826701C
-	.incbin "data/trade/unk_826701C.8bpp"
-
-gUnknown_826985C:: @ 826985C
-	.incbin "data/trade/unk_826985C.bin"
-
-gUnknown_826995C:: @ 826995C
-	.incbin "data/trade/unk_826995C.bin"
-
-gUnknown_8269A5C:: @ 8269A5C
-	.incbin "data/trade/unk_8269A5C.bin"
-
-gUnknown_826AA5C:: @ 826AA5C
-	.incbin "data/trade/unk_826AA5C.bin"
-
-	.align 2
-gUnknown_3379A0Bin:: @ 826BA5C
-	.incbin "graphics/trade/unknown_3379A0.bin.lz"
-
-gUnknown_826BB5C:: @ 826BB5C
-	.incbin "data/trade/unk_826BB5C.gbapal"
-
-gUnknown_826BD5C:: @ 826BD5C
-	.incbin "data/trade/unk_826BD5C.gbapal"
-
-gUnknown_826BF5C:: @ 826BF5C
-	.incbin "data/trade/unk_826BF5C.gbapal"
-
-gWirelessSignal4bpp:: @ 826BF7C
-	.incbin "graphics/trade/wireless_signal.4bpp.lz"
-
-gUnknown_826C60C:: @ 826C60C
-	.incbin "data/trade/unk_826C60C.bin.lz"
-
 gOamData_826CD00::
 	.4byte 0x40000100, 0x00000000
 
@@ -141,10 +69,10 @@ gSpriteAffineAnimTable_826CDC8::
 	.4byte gAffineAnimCmd_826CDA8
 
 gUnknown_826CDD4:: @ 826CDD4
-	obj_tiles gUnknown_826207C, 0x0600, 5557
+	obj_tiles gTradeBallTiles, 0x0600, 5557
 
 gUnknown_826CDDC:: @ 826CDDC
-	obj_pal gUnknown_826205C, 5558
+	obj_pal gTradeBallPalette, 5558
 
 sTradePokeballSpriteTemplate:: @ 826CDE4
 	spr_template 5557, 5558, gOamData_826CD00, gSpriteAnimTable_826CD80, NULL, gSpriteAffineAnimTable_826CDC8, SpriteCB_TradePokeball_Default
@@ -168,7 +96,7 @@ gSpriteAffineAnimTable_826CE28::
 	.4byte gAffineAnimCmd_826CE10
 
 gUnknown_826CE2C:: @ 826CE2C
-	obj_tiles gUnknown_8264A1C, 0x0200, 5550
+	obj_tiles gTradeGlow1Tiles, 0x0200, 5550
 
 gUnknown_826CE34:: @ 826CE34
 	obj_pal gUnknown_82649FC, 5551
@@ -195,7 +123,7 @@ gSpriteAnimTable_826CE74::
 	.4byte gAnimCmd_826CE6C
 
 gUnknown_826CE7C:: @ 826CE7C
-	obj_tiles gUnknown_8264C1C, 0x0300, 5552
+	obj_tiles gTradeGlow2Tiles, 0x0300, 5552
 
 sGlowBallSpriteTemplate:: @ 826CE84
 	spr_template 5552, 5551, gOamData_826CE5C, gSpriteAnimTable_826CE74, NULL, gDummySpriteAffineAnimTable, SpriteCB_TradeGlowCore
@@ -211,7 +139,7 @@ gSpriteAnimTable_826CEAC::
 	.4byte gAnimCmd_826CEA4
 
 gUnknown_826CEB0:: @ 826CEB0
-	obj_tiles gUnknown_8264E1C, 0x0100, 5554
+	obj_tiles gTradeCableEndTiles, 0x0100, 5554
 
 sGameLinkCableEndSpriteTemplate:: @ 826CEB8
 	spr_template 5554, 5555, gOamData_826CE9C, gSpriteAnimTable_826CEAC, NULL, gDummySpriteAffineAnimTable, SpriteCB_GameLinkCableEnd_Outbound
@@ -248,7 +176,7 @@ gSpriteAnimTable_826CF24::
 	.4byte gAnimCmd_826CEFC
 
 gUnknown_826CF28:: @ 826CF28
-	obj_tiles gUnknown_826501C, 0x1000, 5556
+	obj_tiles gTradeGBAScreenTiles, 0x1000, 5556
 
 gUnknown_826CF30:: @ 826CF30
 	spr_template 5556, 5555, gOamData_826CED0, gSpriteAnimTable_826CF20, NULL, gDummySpriteAffineAnimTable, sub_804FE00

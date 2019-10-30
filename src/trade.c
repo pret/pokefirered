@@ -152,10 +152,10 @@ static const size_t gUnknown_8260814[] = {
     0x528 // unk
 };
 
-static const u16 gTradeMovesBoxTilemap[] = INCBIN_U16("data/trade/unk_8260834.bin");
-static const u16 gTradePartyBoxTilemap[] = INCBIN_U16("data/trade/unk_8260A32.bin");
-static const u16 gUnknown_8260C30[] = INCBIN_U16("data/trade/unk_8260C30.bin");
-static const u16 gUnknown_8261430[] = INCBIN_U16("data/trade/unk_8261430.bin");
+static const u16 gTradeMovesBoxTilemap[] = INCBIN_U16("graphics/trade/moves_box_map.bin");
+static const u16 gTradePartyBoxTilemap[] = INCBIN_U16("graphics/trade/party_box_map.bin");
+static const u8 gTradeStripesBG2Tilemap[] = INCBIN_U8("graphics/trade/stripes_bg2_map.bin");
+static const u8 gTradeStripesBG3Tilemap[] = INCBIN_U8("graphics/trade/stripes_bg3_map.bin");
 
 static const struct OamData gOamData_8261C30 = {
     .shape = SPRITE_SHAPE(32x16),
@@ -253,7 +253,7 @@ static const struct SpriteTemplate gUnknown_8261CC8 = {
     .callback = SpriteCallbackDummy
 };
 
-static const u16 gUnknown_8261CE0[] = INCBIN_U16("data/trade/unk_8261CE0.gbapal");
+static const u16 gUnknown_8261CE0[] = INCBIN_U16("graphics/trade/text.gbapal");
 
 static const struct SpritePalette gUnknown_8261D00 = {
     gUnknown_8261CE0,
@@ -2866,10 +2866,10 @@ static void sub_804D694(u8 state)
         LoadPalette(gUnknown_8E9CEDC, 0x00, 0x60);
         LoadBgTiles(1, gUnknown_8E9CF5C, 0x1280, 0);
         CopyToBgTilemapBufferRect_ChangePalette(1, gUnknown_8E9E9FC, 0, 0, 32, 20, 0);
-        LoadBgTilemap(2, gUnknown_8260C30, 0x800, 0);
+        LoadBgTilemap(2, gTradeStripesBG2Tilemap, 0x800, 0);
         break;
     case 1:
-        LoadBgTilemap(3, gUnknown_8261430, 0x800, 0);
+        LoadBgTilemap(3, gTradeStripesBG3Tilemap, 0x800, 0);
         sub_804F284(0);
         sub_804F284(1);
         CopyBgTilemapBufferToVram(1);

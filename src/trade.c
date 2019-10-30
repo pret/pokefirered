@@ -38,6 +38,7 @@
 #include "constants/items.h"
 #include "constants/easy_chat.h"
 #include "constants/songs.h"
+#include "constants/region_map.h"
 #include "constants/moves.h"
 
 struct InGameTrade {
@@ -201,13 +202,17 @@ void sub_8050E24(void);
 u8 sub_8050F14(void);
 u8 sub_8050F3C(void);
 u8 sub_805232C(void);
+void SpriteCB_TradePokeball_Outbound(struct Sprite * sprite);
+void SpriteCB_TradePokeball_Outbound2(struct Sprite * sprite);
+void SpriteCB_TradePokeball_Inbound(struct Sprite * sprite);
+void BufferInGameTradeMonName(void);
+static void GetInGameTradeMail(struct MailStruct * mail, const struct InGameTrade * inGameTrade);
 void CB2_RunTradeAnim_LinkTrade(void);
+void sub_8053E1C(void);
+void sub_8053E8C(void);
 void LoadHeldItemIcons(void);
 void DrawTextOnTradeWindow(u8 windowId, const u8 *str, s8 speed);
 void CheckPartnersMonForRibbons(void);
-void BufferInGameTradeMonName(void);
-void SpriteCB_TradePokeball_Outbound(struct Sprite * sprite);
-void SpriteCB_TradePokeball_Inbound(struct Sprite * sprite);
 void Task_AnimateWirelessSignal(u8 taskId);
 void c3_0805465C(u8 taskId);
 void sub_8054734(u8 taskId);
@@ -258,7 +263,7 @@ extern const struct SpriteSheet gUnknown_826CEB0;
 extern const struct SpriteSheet gUnknown_826CF28;
 extern const struct SpritePalette gUnknown_826CE34;
 extern const struct SpritePalette gUnknown_826CE3C;
-extern const struct InGameTrade gIngameTrades[];
+extern const struct InGameTrade gInGameTrades[];
 extern const struct SpriteTemplate sTradePokeballSpriteTemplate;
 extern const struct SpriteTemplate gUnknown_826CF30;
 extern const struct SpriteTemplate sGameLinkCableEndSpriteTemplate;
@@ -266,6 +271,8 @@ extern const struct SpriteTemplate gUnknown_826CE44;
 extern const struct SpriteTemplate sGlowBallSpriteTemplate;
 extern const union AffineAnimCmd *const gUnknown_826CF88[];
 extern const struct SpriteTemplate gUnknown_826CF48;
+extern const s8 gUnknown_826D1E4[];
+extern const u16 sInGameTradeMailMessages[][10];
 
 void sub_804C600(void)
 {
@@ -4737,7 +4744,7 @@ void sub_8050E24(void)
     }
     else
     {
-        inGameTrade = &gIngameTrades[gSpecialVar_0x8004];
+        inGameTrade = &gInGameTrades[gSpecialVar_0x8004];
         StringCopy(gStringVar1, inGameTrade->otName);
         StringCopy10(gStringVar3, inGameTrade->nickname);
         GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_NICKNAME, nickname);
@@ -5769,4 +5776,261 @@ bool8 sub_805232C(void)
         break;
     }
     return FALSE;
+}
+
+void sub_8053788(void)
+{
+    u16 evoSpecies;
+    switch (gMain.state)
+    {
+    case 0:
+        gMain.state = 4;
+        gSoftResetDisabled = TRUE;
+        break;
+    case 4:
+        gCB2_AfterEvolution = sub_8053E8C;
+        evoSpecies = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[0]], 1, 0);
+        if (evoSpecies != SPECIES_NONE)
+            TradeEvolutionScene(&gPlayerParty[gSelectedTradeMonPositions[0]], evoSpecies, sTradeData->pokePicSpriteIdxs[1], gSelectedTradeMonPositions[0]);
+        else
+            SetMainCallback2(sub_8053E8C);
+        gSelectedTradeMonPositions[0] = 0xFF;
+        break;
+    }
+    if (!HasLinkErrorOccurred())
+        RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
+
+void sub_805383C(void)
+{
+    u8 recvStatus;
+    sub_804FFC4();
+    recvStatus = GetBlockReceivedStatus();
+    if (recvStatus & (1 << 0))
+    {
+        if (gBlockRecvBuffer[0][0] == 0xDCBA)
+            SetMainCallback2(sub_8053788);
+        if (gBlockRecvBuffer[0][0] == 0xABCD)
+            sTradeData->unk_72 = 1;
+        ResetBlockReceivedFlag(0);
+    }
+    if (recvStatus & (1 << 1))
+    {
+        if (gBlockRecvBuffer[1][0] == 0xABCD)
+            sTradeData->unk_73 = 1;
+        ResetBlockReceivedFlag(1);
+    }
+}
+
+void SpriteCB_TradePokeball_Default(struct Sprite * sprite)
+{
+    sprite->pos1.y += sprite->data[0] / 10;
+    sprite->data[5] += sprite->data[1];
+    sprite->pos1.x = sprite->data[5] / 10;
+    if (sprite->pos1.y > 76)
+    {
+        sprite->pos1.y = 76;
+        sprite->data[0] = -(sprite->data[0] * sprite->data[2]) / 100;
+        sprite->data[3]++;
+    }
+    if (sprite->pos1.x == 120)
+        sprite->data[1] = 0;
+    sprite->data[0] += sprite->data[4];
+    if (sprite->data[3] == 4)
+    {
+        sprite->data[7] = 1;
+        sprite->callback = SpriteCallbackDummy;
+    }
+}
+
+void SpriteCB_TradePokeball_Outbound(struct Sprite * sprite)
+{
+    sprite->pos2.y += gUnknown_826D1E4[sprite->data[0]];
+    if (sprite->data[0] == 22)
+        PlaySE(SE_KON);
+    sprite->data[0]++;
+    if (sprite->data[0] == 44)
+    {
+        PlaySE(SE_W025);
+        sprite->callback = SpriteCB_TradePokeball_Outbound2;
+        sprite->data[0] = 0;
+        BeginNormalPaletteFade(1 << (sprite->oam.paletteNum + 16), -1, 0, 16, RGB_WHITEALPHA);
+    }
+}
+
+void SpriteCB_TradePokeball_Outbound2(struct Sprite * sprite)
+{
+    if (sprite->data[1] == 20)
+        StartSpriteAffineAnim(sprite, 1);
+    sprite->data[1]++;
+    if (sprite->data[1] > 20)
+    {
+        sprite->pos2.y -= gUnknown_826D1E4[sprite->data[0]];
+        sprite->data[0]++;
+        if (sprite->data[0] == 23)
+        {
+            DestroySprite(sprite);
+            sTradeData->state = 14;
+        }
+    }
+}
+
+void SpriteCB_TradePokeball_Inbound(struct Sprite * sprite)
+{
+    if (sprite->data[2] == 0)
+    {
+        sprite->pos1.y += 4;
+        if (sprite->pos1.y > sprite->data[3])
+        {
+            sprite->data[2]++;
+            sprite->data[0] = 22;
+            PlaySE(SE_KON);
+        }
+    }
+    else
+    {
+        if (sprite->data[0] == 66)
+            PlaySE(SE_KON2);
+        if (sprite->data[0] == 92)
+            PlaySE(SE_KON3);
+        if (sprite->data[0] == 107)
+            PlaySE(SE_KON4);
+        sprite->pos2.y += gUnknown_826D1E4[sprite->data[0]];
+        sprite->data[0]++;
+        if (sprite->data[0] == 108)
+            sprite->callback = SpriteCallbackDummy;
+    }
+}
+
+u16 GetInGameTradeSpeciesInfo(void)
+{
+    // Populates gStringVar1 with the name of the requested species and
+    // gStringVar2 with the name of the offered species.
+    // Returns the requested species.
+    const struct InGameTrade * inGameTrade = &gInGameTrades[gSpecialVar_0x8004];
+    StringCopy(gStringVar1, gSpeciesNames[inGameTrade->requestedSpecies]);
+    StringCopy(gStringVar2, gSpeciesNames[inGameTrade->species]);
+    return inGameTrade->requestedSpecies;
+}
+
+void BufferInGameTradeMonName(void)
+{
+    // Populates gStringVar1 with the nickname of the sent Pokemon and
+    // gStringVar2 with the name of the offered species.
+    u8 nickname[30];
+    const struct InGameTrade * inGameTrade = &gInGameTrades[gSpecialVar_0x8004];
+    GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_NICKNAME, nickname);
+    StringCopy10(gStringVar1, nickname);
+    StringCopy(gStringVar2, gSpeciesNames[inGameTrade->species]);
+}
+
+void CreateInGameTradePokemonInternal(u8 playerSlot, u8 inGameTradeIdx)
+{
+    const struct InGameTrade *inGameTrade = &gInGameTrades[inGameTradeIdx];
+    u8 level = GetMonData(&gPlayerParty[playerSlot], MON_DATA_LEVEL);
+    struct MailStruct mail;
+    u8 metLocation = MAPSEC_IN_GAME_TRADE;
+    struct Pokemon * tradeMon = &gEnemyParty[0];
+    u8 mailNum;
+    CreateMon(tradeMon, inGameTrade->species, level, 32, TRUE, inGameTrade->personality, TRUE, inGameTrade->otId);
+    SetMonData(tradeMon, MON_DATA_HP_IV, &inGameTrade->ivs[0]);
+    SetMonData(tradeMon, MON_DATA_ATK_IV, &inGameTrade->ivs[1]);
+    SetMonData(tradeMon, MON_DATA_DEF_IV, &inGameTrade->ivs[2]);
+    SetMonData(tradeMon, MON_DATA_SPEED_IV, &inGameTrade->ivs[3]);
+    SetMonData(tradeMon, MON_DATA_SPATK_IV, &inGameTrade->ivs[4]);
+    SetMonData(tradeMon, MON_DATA_SPDEF_IV, &inGameTrade->ivs[5]);
+    SetMonData(tradeMon, MON_DATA_NICKNAME, inGameTrade->nickname);
+    SetMonData(tradeMon, MON_DATA_OT_NAME, inGameTrade->otName);
+    SetMonData(tradeMon, MON_DATA_OT_GENDER, &inGameTrade->otGender);
+    SetMonData(tradeMon, MON_DATA_ABILITY_NUM, &inGameTrade->abilityNum);
+    SetMonData(tradeMon, MON_DATA_BEAUTY, &inGameTrade->conditions[1]);
+    SetMonData(tradeMon, MON_DATA_CUTE, &inGameTrade->conditions[2]);
+    SetMonData(tradeMon, MON_DATA_COOL, &inGameTrade->conditions[0]);
+    SetMonData(tradeMon, MON_DATA_SMART, &inGameTrade->conditions[3]);
+    SetMonData(tradeMon, MON_DATA_TOUGH, &inGameTrade->conditions[4]);
+    SetMonData(tradeMon, MON_DATA_SHEEN, &inGameTrade->sheen);
+    SetMonData(tradeMon, MON_DATA_MET_LOCATION, &metLocation);
+    mailNum = 0;
+    if (inGameTrade->heldItem != ITEM_NONE)
+    {
+        if (ItemIsMail(inGameTrade->heldItem))
+        {
+            GetInGameTradeMail(&mail, inGameTrade);
+            gLinkPartnerMail[0] = mail;
+            SetMonData(tradeMon, MON_DATA_MAIL, &mailNum);
+            SetMonData(tradeMon, MON_DATA_HELD_ITEM, &inGameTrade->heldItem);
+        }
+        else
+        {
+            SetMonData(tradeMon, MON_DATA_HELD_ITEM, &inGameTrade->heldItem);
+        }
+    }
+    CalculateMonStats(&gEnemyParty[0]);
+}
+
+static void GetInGameTradeMail(struct MailStruct * mail, const struct InGameTrade * inGameTrade)
+{
+    int i;
+    for (i = 0; i < 9; i++)
+        mail->words[i] = sInGameTradeMailMessages[inGameTrade->mailNum][i];
+    StringCopy(mail->playerName, inGameTrade->otName);
+    mail->trainerId[0] = inGameTrade->otId >> 24;
+    mail->trainerId[1] = inGameTrade->otId >> 16;
+    mail->trainerId[2] = inGameTrade->otId >> 8;
+    mail->trainerId[3] = inGameTrade->otId;
+    mail->species = inGameTrade->species;
+    mail->itemId = inGameTrade->heldItem;
+}
+
+u16 GetTradeSpecies(void)
+{
+    if (GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_IS_EGG))
+        return SPECIES_NONE;
+    else
+        return GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_SPECIES);
+}
+
+void CreateInGameTradePokemon(void)
+{
+    CreateInGameTradePokemonInternal(gSpecialVar_0x8005, gSpecialVar_0x8004);
+}
+
+void CB2_RunTradeAnim_LinkTrade(void)
+{
+    if (sub_8050F14() == TRUE)
+    {
+        DestroySprite(&gSprites[sTradeData->pokePicSpriteIdxs[0]]);
+        FreeSpriteOamMatrix(&gSprites[sTradeData->pokePicSpriteIdxs[1]]);
+        TradeMons(gSelectedTradeMonPositions[0], gSelectedTradeMonPositions[1] % 6);
+        sTradeData->linkData[0] = 0xABCD;
+        sTradeData->unk_93 = 1;
+        SetMainCallback2(sub_8053E1C);
+    }
+    sub_80508F4();
+    sub_805383C();
+    RunTasks();
+    RunTextPrinters();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
+
+void sub_8053E1C(void)
+{
+    u8 mpId = sub_804FFC4();
+    sub_805383C();
+    if (mpId == 0 && sTradeData->unk_72 == 1 && sTradeData->unk_73 == 1)
+    {
+        sTradeData->linkData[0] = 0xDCBA;
+        SendBlock(bitmask_all_link_players_but_self(), sTradeData->linkData, 20);
+        sTradeData->unk_72 = 2;
+        sTradeData->unk_73 = 2;
+    }
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
 }

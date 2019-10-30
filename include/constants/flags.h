@@ -1,7 +1,7 @@
 #ifndef GUARD_CONSTANTS_FLAGS_H
 #define GUARD_CONSTANTS_FLAGS_H
 
-// TODO: Get correct names and numbers
+#include "constants/trainers.h"
 
 #define FLAG_TEMP_1              0x001
 #define FLAG_TEMP_2              0x002
@@ -1309,10 +1309,12 @@
 
 #define FLAG_TRAINER_FLAG_START  0x500
 
-#define TRAINERS_FLAG_NO    0x2E7 // 743
-#define TRAINER_FLAGS_WORDS 0x300
-
-#define SYS_FLAGS           (FLAG_TRAINER_FLAG_START + TRAINER_FLAGS_WORDS) // 0x800
+// Vanilla: SYS_FLAGS = 0x800
+#if (NUM_TRAINERS) & 31
+#define SYS_FLAGS (FLAG_TRAINER_FLAG_START + ((NUM_TRAINERS) + 31) / 32 * 32)
+#else
+#define SYS_FLAGS (FLAG_TRAINER_FLAG_START + (NUM_TRAINERS))
+#endif
 
 // SYSTEM FLAGS
 

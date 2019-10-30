@@ -1,4 +1,4 @@
-gIngameTrades:: @ 826CF8C
+gInGameTrades:: @ 826CF8C
 	.string "MIMIEN$", 11
 	.align 1
 	.2byte SPECIES_MR_MIME @ species
@@ -161,7 +161,7 @@ gIngameTrades:: @ 826CF8C
 	.2byte SPECIES_PONYTA @ species requested
 	.align 2
 
-gUnknown_826D1A8:: @ 826D1A8
+sInGameTradeMailMessages:: @ 826D1A8
 	.2byte EC_WORD_THAT_S
 	.2byte EC_WORD_A
 	.2byte EC_WORD_HEALTHY

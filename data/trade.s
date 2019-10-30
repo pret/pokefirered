@@ -750,7 +750,7 @@ gSpriteAnimTable_826CE74::
 gUnknown_826CE7C:: @ 826CE7C
 	obj_tiles gUnknown_8264C1C, 0x0300, 5552
 
-gUnknown_826CE84:: @ 826CE84
+sGlowBallSpriteTemplate:: @ 826CE84
 	spr_template 5552, 5551, gOamData_826CE5C, gSpriteAnimTable_826CE74, NULL, gDummySpriteAffineAnimTable, SpriteCB_TradeGlowCore
 
 gOamData_826CE9C::

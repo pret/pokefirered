@@ -76,6 +76,7 @@
 
 #define RGB_BLACK RGB(0, 0, 0)
 #define RGB_WHITE RGB(31, 31, 31)
+#define RGB_WHITEALPHA (0xFFFF)
 
 #define NAKED __attribute__((naked))
 #define UNUSED __attribute__((unused))

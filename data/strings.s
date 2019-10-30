@@ -4407,17 +4407,17 @@ gUnknown_841E1C5::
 	.string "Your friend wants\n"
 	.string "to trade POKéMON.$"
 
-gUnknown_841E1E9:: @ 841E1E9
+gText_XWillBeSentToY:: @ 841E1E9
 	.string "{STR_VAR_2} will be\n"
 	.string "sent to {STR_VAR_1}.$"
 
-gUnknown_841E200:: @ 841E200
+gText_ByeByeVar1:: @ 841E200
 	.string "Bye-bye, {STR_VAR_2}!$"
 
-gUnknown_841E20D:: @ 841E20D
+gText_XSentOverY:: @ 841E20D
 	.string "{STR_VAR_1} sent over {STR_VAR_3}.$"
 
-gUnknown_841E21E:: @ 841E21E
+gText_TakeGoodCareOfX:: @ 841E21E
 	.string "Take good care of {STR_VAR_3}!$"
 
 gText_From:: @ 841E234

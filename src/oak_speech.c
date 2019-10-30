@@ -977,7 +977,7 @@ static void Task_OakSpeech15(u8 taskId)
     {
         ClearDialogWindowAndFrame(0, 1);
         spriteId = gTasks[taskId].data[4];
-        gTasks[taskId].data[6] = sub_804BB98(spriteId, gSprites[spriteId].oam.paletteNum, 0x64, 0x42, 0, 0, 32, 0xFFFF1F3F);
+        gTasks[taskId].data[6] = CreateTradePokeballSprite(spriteId, gSprites[spriteId].oam.paletteNum, 0x64, 0x42, 0, 0, 32, 0xFFFF1F3F);
         gTasks[taskId].data[3] = 48;
         gTasks[taskId].data[0] = 64;
         gTasks[taskId].func = Task_OakSpeech16;

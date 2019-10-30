@@ -2327,8 +2327,8 @@ _0804BB90:
 	bx r0
 	thumb_func_end sub_804BAA4
 
-	thumb_func_start sub_804BB98
-sub_804BB98: @ 804BB98
+	thumb_func_start CreateTradePokeballSprite
+CreateTradePokeballSprite: @ 804BB98
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2414,7 +2414,7 @@ _0804BC40: .4byte gUnknown_82605CC
 _0804BC44: .4byte gUnknown_82606F4
 _0804BC48: .4byte gSprites
 _0804BC4C: .4byte sub_804BC50
-	thumb_func_end sub_804BB98
+	thumb_func_end CreateTradePokeballSprite
 
 	thumb_func_start sub_804BC50
 sub_804BC50: @ 804BC50

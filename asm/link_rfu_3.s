@@ -3083,7 +3083,7 @@ _08117210:
 	movs r2, 0xD8
 	bl memcpy
 	bl ResetBlockReceivedFlags
-	ldr r1, _08117270 @ =gUnknown_2031DA4
+	ldr r1, _08117270 @ =gSelectedTradeMonPositions
 	strb r7, [r1]
 	movs r0, 0x6
 	strb r0, [r1, 0x1]
@@ -3105,7 +3105,7 @@ _0811725C:
 	.align 2, 0
 _08117268: .4byte gLinkPartnerMail
 _0811726C: .4byte gBlockRecvBuffer
-_08117270: .4byte gUnknown_2031DA4
+_08117270: .4byte gSelectedTradeMonPositions
 _08117274: .4byte gMain
 _08117278: .4byte CB2_ReturnToField
 _0811727C: .4byte CB2_InitTradeAnim_LinkTrade

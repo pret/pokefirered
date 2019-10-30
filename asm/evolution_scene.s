@@ -2817,7 +2817,7 @@ _080CF620:
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0x1
-	bl sub_8054508
+	bl DrawTextOnTradeWindow
 	ldr r0, _080CF648 @ =gTasks
 	adds r1, r7, r6
 	lsls r1, 3
@@ -3110,7 +3110,7 @@ _080CF8A8:
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0x1
-	bl sub_8054508
+	bl DrawTextOnTradeWindow
 	ldr r0, _080CF91C @ =0x00000103
 	bl PlayFanfare
 	ldr r2, _080CF920 @ =gTasks
@@ -3222,7 +3222,7 @@ _080CF9AC:
 	ldr r1, _080CF9C8 @ =gUnknown_841E325
 	movs r0, 0
 	movs r2, 0x1
-	bl sub_8054508
+	bl DrawTextOnTradeWindow
 	ldr r0, _080CF9CC @ =gTasks
 	adds r1, r7, r6
 	lsls r1, 3
@@ -3341,7 +3341,7 @@ _080CFAA8:
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0x1
-	bl sub_8054508
+	bl DrawTextOnTradeWindow
 	ldr r1, _080CFAD4 @ =gTasks
 	adds r0, r7, r6
 	lsls r0, 3
@@ -3376,7 +3376,7 @@ _080CFAF2:
 	ldr r1, _080CFB2C @ =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
-	bl sub_8054508
+	bl DrawTextOnTradeWindow
 	ldr r0, _080CFB30 @ =gTasks
 	adds r1, r7, r6
 	lsls r1, 3
@@ -3477,7 +3477,7 @@ _080CFBDA:
 	ldr r1, _080CFC04 @ =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
-	bl sub_8054508
+	bl DrawTextOnTradeWindow
 	ldr r0, _080CFC08 @ =gTasks
 	adds r1, r7, r6
 	lsls r1, 3
@@ -3509,7 +3509,7 @@ _080CFC26:
 	ldr r1, _080CFC4C @ =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
-	bl sub_8054508
+	bl DrawTextOnTradeWindow
 	ldr r0, _080CFC50 @ =gTasks
 	adds r1, r7, r6
 	lsls r1, 3
@@ -3537,7 +3537,7 @@ _080CFC54:
 	ldr r1, _080CFCEC @ =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
-	bl sub_8054508
+	bl DrawTextOnTradeWindow
 	ldr r0, _080CFCF0 @ =gTasks
 	adds r1, r7, r6
 	lsls r1, 3
@@ -3625,7 +3625,7 @@ _080CFD1C:
 	ldr r1, _080CFD68 @ =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
-	bl sub_8054508
+	bl DrawTextOnTradeWindow
 	ldr r1, _080CFD6C @ =gTasks
 	adds r0, r7, r6
 	lsls r0, 3
@@ -3665,7 +3665,7 @@ _080CFD70:
 	ldr r1, _080CFDA4 @ =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
-	bl sub_8054508
+	bl DrawTextOnTradeWindow
 	ldr r1, _080CFDA8 @ =gTasks
 	adds r0, r7, r6
 	lsls r0, 3
@@ -3782,7 +3782,7 @@ _080CFE74:
 	ldr r1, _080CFEB8 @ =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
-	bl sub_8054508
+	bl DrawTextOnTradeWindow
 	ldr r1, _080CFEBC @ =gTasks
 	adds r0, r7, r6
 	lsls r0, 3
@@ -3825,7 +3825,7 @@ _080CFEC0:
 	ldr r1, _080CFF20 @ =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
-	bl sub_8054508
+	bl DrawTextOnTradeWindow
 	ldr r0, _080CFF24 @ =gTasks
 	adds r1, r7, r6
 	lsls r1, 3
@@ -3859,7 +3859,7 @@ _080CFF42:
 	ldr r1, _080CFF68 @ =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
-	bl sub_8054508
+	bl DrawTextOnTradeWindow
 	ldr r0, _080CFF6C @ =gTasks
 	adds r1, r7, r6
 	lsls r1, 3
@@ -3890,7 +3890,7 @@ _080CFF70:
 	ldr r1, _080CFFB0 @ =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
-	bl sub_8054508
+	bl DrawTextOnTradeWindow
 	ldr r1, _080CFFB4 @ =gTasks
 	adds r0, r7, r6
 	lsls r0, 3
@@ -3909,7 +3909,7 @@ _080CFFB8:
 	ldr r1, _080CFFE4 @ =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
-	bl sub_8054508
+	bl DrawTextOnTradeWindow
 	ldr r1, _080CFFE8 @ =gTasks
 	adds r0, r7, r6
 	lsls r0, 3
@@ -3932,7 +3932,7 @@ _080CFFEC:
 	ldr r1, _080D0010 @ =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
-	bl sub_8054508
+	bl DrawTextOnTradeWindow
 	ldr r1, _080D0014 @ =gTasks
 	adds r0, r7, r6
 	lsls r0, 3

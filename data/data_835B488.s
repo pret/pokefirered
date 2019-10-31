@@ -1,13 +1,12 @@
+#include "constants/maps.h"
+#include "constants/species.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 
 	.section .rodata
 	.align 2
 
-	.incbin "baserom.gba", 0x3C73A0, 0x2918
-
-gWildMonHeaders:: @ 83C9CB8
-	.incbin "baserom.gba", 0x3C9CB8, 0xA64
+	.include "data/wild_encounters.inc"
 
 gUnknown_83CA71C:: @ 83CA71C
 	.incbin "baserom.gba", 0x3CA71C, 0xED4

@@ -426,9 +426,11 @@ SECTIONS {
         data/battle_anim_status_effects.o(.rodata);
         src/title_screen.o(.rodata);
         data/field_weather.o(.rodata);
-        data/data_835B488.o(.rodata);
+        data/field_screen_effect.o(.rodata);
         src/battle_setup.o(.rodata);
-        data/data_835B488.o(.rodata.83C6AB0);
+        data/cable_club.o(.rodata);
+        data/trainer_see.o(.rodata);
+        data/data_835B488.o(.rodata);
         src/pokemon_icon.o(.rodata);
         data/data_835B488.o(.rodata.83D4100);
         src/item_menu_icons.o(.rodata);

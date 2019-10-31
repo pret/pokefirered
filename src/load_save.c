@@ -7,13 +7,10 @@
 #include "malloc.h"
 #include "item.h"
 #include "save_location.h"
-
-extern void SetBagPocketsPointers(void);
-extern void sub_8110840(void *oldSave);
-extern void sub_8055778(int);
-extern void sub_8054F38(u32 newKey);
-extern void ApplyNewEncryptionKeyToBagItems_(u32 newKey);
-extern void sub_815EE6C(u32 newKey);
+#include "berry_powder.h"
+#include "item.h"
+#include "overworld.h"
+#include "quest_log.h"
 
 #define SAVEBLOCK_MOVE_RANGE    128
 

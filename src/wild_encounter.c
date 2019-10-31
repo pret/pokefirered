@@ -2,38 +2,53 @@
 #include "random.h"
 #include "wild_encounter.h"
 #include "event_data.h"
+#include "fieldmap.h"
+#include "roamer.h"
 #include "field_player_avatar.h"
+#include "battle_setup.h"
+#include "overworld.h"
+#include "metatile_behavior.h"
+#include "event_scripts.h"
+#include "script.h"
+#include "link.h"
+#include "quest_log.h"
 #include "constants/species.h"
 #include "constants/maps.h"
 #include "constants/vars.h"
 #include "constants/abilities.h"
+#include "constants/items.h"
 
-struct UnkStruct_20386D0
+struct WildEncounterData
 {
-    u8 filler_0[6];
-    u16 unk_6;
-    u8 unk_8;
-    u8 unk_9;
+    u32 rngState;
+    u16 prevMetaTileBehavior;
+    u16 encounterRateBuff;
+    u8 stepsSinceLastEncounter;
+    u8 abilityEffect;
+    u16 leadMonHeldItem;
 };
 
-EWRAM_DATA struct UnkStruct_20386D0 gUnknown_20386D0 = {};
-EWRAM_DATA bool8 gUnknown_20386DC = FALSE;
+static EWRAM_DATA struct WildEncounterData sWildEncounterData = {};
+static EWRAM_DATA bool8 sWildEncountersDisabled = FALSE;
 
 extern const u8 gUnknown_83CA71C[][12];
 
-bool8 UnlockedTanobyOrAreNotInTanoby(void);
-u32 GenerateUnownPersonalityByLetter(u8 letter);
-bool8 sub_808310C(u8 level);
-u16 sub_808322C(void);
-void ApplyFluteEncounterRateMod(u32 *rate);
-void ApplyCleanseTagEncounterRateMod(u32 *rate);
+static bool8 UnlockedTanobyOrAreNotInTanoby(void);
+static u32 GenerateUnownPersonalityByLetter(u8 letter);
+static bool8 IsWildLevelAllowedByRepel(u8 level);
+static void ApplyFluteEncounterRateMod(u32 *rate);
+static u8 GetFluteEncounterRateModType(void);
+static void ApplyCleanseTagEncounterRateMod(u32 *rate);
+static u8 IsLeadMonHoldingCleanseTag(void);
+static u16 WildEncounterRandom(void);
+static void AddToWildEncounterRateBuff(u8 encouterRate);
 
-void sub_8082740(bool8 state)
+void DisableWildEncounters(bool8 state)
 {
-    gUnknown_20386DC = state;
+    sWildEncountersDisabled = state;
 }
 
-u8 ChooseWildMonIndex_Land(void)
+static u8 ChooseWildMonIndex_Land(void)
 {
     u8 pct = Random() % 100;
     if (pct < 20)
@@ -61,7 +76,7 @@ u8 ChooseWildMonIndex_Land(void)
     return 11;
 }
 
-u8 ChooseWildMonIndex_WaterRock(void)
+static u8 ChooseWildMonIndex_WaterRock(void)
 {
     u8 pct = Random() % 100;
     if (pct < 60)
@@ -75,7 +90,7 @@ u8 ChooseWildMonIndex_WaterRock(void)
     return 4;
 }
 
-u8 ChooseWildMonIndex_Fishing(u8 rod)
+static u8 ChooseWildMonIndex_Fishing(u8 rod)
 {
     u8 slot = 0;
     u8 pct = Random() % 100;
@@ -111,7 +126,7 @@ u8 ChooseWildMonIndex_Fishing(u8 rod)
     return slot;
 }
 
-u8 ChooseWildMonLevel(const struct WildPokemon * info)
+static u8 ChooseWildMonLevel(const struct WildPokemon * info)
 {
     u8 lo;
     u8 hi;
@@ -132,7 +147,7 @@ u8 ChooseWildMonLevel(const struct WildPokemon * info)
     return lo + res;
 }
 
-u16 sub_8082934(void)
+static u16 GetCurrentMapWildMonHeaderId(void)
 {
     u16 i;
 
@@ -164,7 +179,7 @@ u16 sub_8082934(void)
     return -1;
 }
 
-bool8 UnlockedTanobyOrAreNotInTanoby(void)
+static bool8 UnlockedTanobyOrAreNotInTanoby(void)
 {
     if (FlagGet(FLAG_SYS_UNLOCKED_TANOBY_RUINS))
         return TRUE;
@@ -182,7 +197,7 @@ bool8 UnlockedTanobyOrAreNotInTanoby(void)
     return FALSE;
 }
 
-void GenerateWildMon(u16 species, u8 level, u8 slot)
+static void GenerateWildMon(u16 species, u8 level, u8 slot)
 {
     u32 personality;
     s8 chamber;
@@ -199,7 +214,7 @@ void GenerateWildMon(u16 species, u8 level, u8 slot)
     }
 }
 
-u32 GenerateUnownPersonalityByLetter(u8 letter)
+static u32 GenerateUnownPersonalityByLetter(u8 letter)
 {
     u32 personality;
     do
@@ -214,7 +229,7 @@ u8 GetUnownLetterByPersonalityLoByte(u32 personality)
     return (((personality & 0x3000000) >> 18) | ((personality & 0x30000) >> 12) | ((personality & 0x300) >> 6) | (personality & 0x3)) % 0x1C;
 }
 
-bool8 sub_8082AEC(const struct WildPokemonInfo * info, u8 tableIdx, u8 a2)
+static bool8 TryGenerateWildMon(const struct WildPokemonInfo * info, u8 tableIdx, u8 a2)
 {
     u8 slot = 0;
     u8 level;
@@ -231,7 +246,7 @@ bool8 sub_8082AEC(const struct WildPokemonInfo * info, u8 tableIdx, u8 a2)
         break;
     }
     level = ChooseWildMonLevel(&info->wildPokemon[slot]);
-    if (a2 == 1 && !sub_808310C(level))
+    if (a2 == 1 && !IsWildLevelAllowedByRepel(level))
     {
         return FALSE;
     }
@@ -239,7 +254,7 @@ bool8 sub_8082AEC(const struct WildPokemonInfo * info, u8 tableIdx, u8 a2)
     return TRUE;
 }
 
-u16 sub_8082B64(const struct WildPokemonInfo * info, u8 rod)
+static u16 GenerateFishingEncounter(const struct WildPokemonInfo * info, u8 rod)
 {
     u8 slot = ChooseWildMonIndex_Fishing(rod);
     u8 level = ChooseWildMonLevel(&info->wildPokemon[slot]);
@@ -247,24 +262,24 @@ u16 sub_8082B64(const struct WildPokemonInfo * info, u8 rod)
     return info->wildPokemon[slot].species;
 }
 
-bool8 DoWildEncounterRateDiceRoll(u16 a0)
+static bool8 DoWildEncounterRateDiceRoll(u16 a0)
 {
-    if (sub_808322C() % 1600 < a0)
+    if (WildEncounterRandom() % 1600 < a0)
         return TRUE;
     return FALSE;
 }
 
-bool8 sub_8082BCC(u32 encounterRate, bool8 ignoreAbility)
+static bool8 DoWildEncounterRateTest(u32 encounterRate, bool8 ignoreAbility)
 {
     encounterRate *= 16;
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
         encounterRate = encounterRate * 80 / 100;
-    encounterRate += gUnknown_20386D0.unk_6 * 16 / 200;
+    encounterRate += sWildEncounterData.encounterRateBuff * 16 / 200;
     ApplyFluteEncounterRateMod(&encounterRate);
     ApplyCleanseTagEncounterRateMod(&encounterRate);
     if (!ignoreAbility)
     {
-        switch (gUnknown_20386D0.unk_9)
+        switch (sWildEncounterData.abilityEffect)
         {
         case 1:
             encounterRate /= 2;
@@ -279,23 +294,455 @@ bool8 sub_8082BCC(u32 encounterRate, bool8 ignoreAbility)
     return DoWildEncounterRateDiceRoll(encounterRate);
 }
 
-u8 sub_8082C58(void)
+static u8 GetAbilityEncounterRateModType(void)
 {
-    gUnknown_20386D0.unk_9 = 0;
+    sWildEncounterData.abilityEffect = 0;
     if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG))
     {
         u8 ability = GetMonAbility(&gPlayerParty[0]);
         if (ability == ABILITY_STENCH)
-            gUnknown_20386D0.unk_9 = 1;
+            sWildEncounterData.abilityEffect = 1;
         else if (ability == ABILITY_ILLUMINATE)
-            gUnknown_20386D0.unk_9 = 2;
+            sWildEncounterData.abilityEffect = 2;
     }
-    return gUnknown_20386D0.unk_9;
+    return sWildEncounterData.abilityEffect;
 }
 
-bool8 sub_8082C98(void)
+static bool8 DoGlobalWildEncounterDiceRoll(void)
 {
     if ((Random() % 100) >= 60)
         return FALSE;
     return TRUE;
+}
+
+bool8 StandardWildEncounter(u32 currMetaTileBehavior, u16 previousMetaTileBehavior)
+{
+    u16 headerId;
+    struct Roamer *roamer;
+
+    if (sWildEncountersDisabled == TRUE)
+        return FALSE;
+
+    headerId = GetCurrentMapWildMonHeaderId();
+    if (headerId != 0xFFFF)
+    {
+        if (sub_8058F1C(currMetaTileBehavior, 4) == TRUE)
+        {
+            if (gWildMonHeaders[headerId].landMonsInfo == NULL)
+                return FALSE;
+            else if (previousMetaTileBehavior != sub_8058F1C(currMetaTileBehavior, 0) && !DoGlobalWildEncounterDiceRoll())
+                return FALSE;
+            if (DoWildEncounterRateTest(gWildMonHeaders[headerId].landMonsInfo->encounterRate, FALSE) != TRUE)
+            {
+                AddToWildEncounterRateBuff(gWildMonHeaders[headerId].landMonsInfo->encounterRate);
+                return FALSE;
+            }
+
+            else if (TryStartRoamerEncounter() == TRUE)
+            {
+                roamer = &gSaveBlock1Ptr->roamer;
+                if (!IsWildLevelAllowedByRepel(roamer->level))
+                {
+                    return FALSE;
+                }
+
+                BattleSetup_StartRoamerBattle();
+                return TRUE;
+            }
+            else
+            {
+
+                // try a regular wild land encounter
+                if (TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, 0, 1) == TRUE)
+                {
+                    BattleSetup_StartWildBattle();
+                    return TRUE;
+                }
+                else
+                {
+                    AddToWildEncounterRateBuff(gWildMonHeaders[headerId].landMonsInfo->encounterRate);
+                }
+            }
+        }
+        else if (sub_8058F1C(currMetaTileBehavior, 4) == 2
+                 || (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) && MetatileBehavior_IsBridge(sub_8058F1C(currMetaTileBehavior, 0)) == TRUE))
+        {
+            if (gWildMonHeaders[headerId].waterMonsInfo == NULL)
+                return FALSE;
+            else if (previousMetaTileBehavior != sub_8058F1C(currMetaTileBehavior, 0) && !DoGlobalWildEncounterDiceRoll())
+                return FALSE;
+            else if (DoWildEncounterRateTest(gWildMonHeaders[headerId].waterMonsInfo->encounterRate, FALSE) != TRUE)
+            {
+                AddToWildEncounterRateBuff(gWildMonHeaders[headerId].waterMonsInfo->encounterRate);
+                return FALSE;
+            }
+
+            if (TryStartRoamerEncounter() == TRUE)
+            {
+                roamer = &gSaveBlock1Ptr->roamer;
+                if (!IsWildLevelAllowedByRepel(roamer->level))
+                {
+                    return FALSE;
+                }
+
+                BattleSetup_StartRoamerBattle();
+                return TRUE;
+            }
+            else // try a regular surfing encounter
+            {
+                if (TryGenerateWildMon(gWildMonHeaders[headerId].waterMonsInfo, 1, 1) == TRUE)
+                {
+                    BattleSetup_StartWildBattle();
+                    return TRUE;
+                }
+                else
+                {
+                    AddToWildEncounterRateBuff(gWildMonHeaders[headerId].waterMonsInfo->encounterRate);
+                }
+            }
+        }
+    }
+
+    return FALSE;
+}
+
+void ScrSpecial_RockSmashWildEncounter(void)
+{
+    u16 headerIdx = GetCurrentMapWildMonHeaderId();
+    if (headerIdx == 0xFFFF)
+        gSpecialVar_Result = FALSE;
+    else if (gWildMonHeaders[headerIdx].rockSmashMonsInfo == NULL)
+        gSpecialVar_Result = FALSE;
+    else if (DoWildEncounterRateTest(gWildMonHeaders[headerIdx].rockSmashMonsInfo->encounterRate, TRUE) != TRUE)
+        gSpecialVar_Result = FALSE;
+    else if (TryGenerateWildMon(gWildMonHeaders[headerIdx].rockSmashMonsInfo, 2, 1) == TRUE)
+    {
+        BattleSetup_StartWildBattle();
+        gSpecialVar_Result = TRUE;
+    }
+    else
+        gSpecialVar_Result = FALSE;
+}
+
+bool8 SweetScentWildEncounter(void)
+{
+    s16 x, y;
+    u16 headerId;
+
+    PlayerGetDestCoords(&x, &y);
+    headerId = GetCurrentMapWildMonHeaderId();
+    if (headerId != 0xFFFF)
+    {
+        if (sub_8058F48(x, y, 4) == 1)
+        {
+            if (TryStartRoamerEncounter() == TRUE)
+            {
+                BattleSetup_StartRoamerBattle();
+                return TRUE;
+            }
+
+            if (gWildMonHeaders[headerId].landMonsInfo == NULL)
+                return FALSE;
+
+            TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, 0, 0);
+
+            BattleSetup_StartWildBattle();
+            return TRUE;
+        }
+        else if (sub_8058F48(x, y, 4) == 2)
+        {
+            if (TryStartRoamerEncounter() == TRUE)
+            {
+                BattleSetup_StartRoamerBattle();
+                return TRUE;
+            }
+
+            if (gWildMonHeaders[headerId].waterMonsInfo == NULL)
+                return FALSE;
+
+            TryGenerateWildMon(gWildMonHeaders[headerId].waterMonsInfo, 1, 0);
+            BattleSetup_StartWildBattle();
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+bool8 DoesCurrentMapHaveFishingMons(void)
+{
+    u16 headerIdx = GetCurrentMapWildMonHeaderId();
+    if (headerIdx == 0xFFFF)
+        return FALSE;
+    if (gWildMonHeaders[headerIdx].fishingMonsInfo == NULL)
+        return FALSE;
+    return TRUE;
+}
+
+void FishingWildEncounter(u8 rod)
+{
+    GenerateFishingEncounter(gWildMonHeaders[GetCurrentMapWildMonHeaderId()].fishingMonsInfo, rod);
+    IncrementGameStat(GAME_STAT_FISHING_CAPTURES);
+    BattleSetup_StartWildBattle();
+}
+
+u16 GetLocalWildMon(bool8 *isWaterMon)
+{
+    u16 headerId;
+    const struct WildPokemonInfo * landMonsInfo;
+    const struct WildPokemonInfo * waterMonsInfo;
+
+    *isWaterMon = FALSE;
+    headerId = GetCurrentMapWildMonHeaderId();
+    if (headerId == 0xFFFF)
+        return SPECIES_NONE;
+    landMonsInfo = gWildMonHeaders[headerId].landMonsInfo;
+    waterMonsInfo = gWildMonHeaders[headerId].waterMonsInfo;
+    // Neither
+    if (landMonsInfo == NULL && waterMonsInfo == NULL)
+        return SPECIES_NONE;
+        // Land Pokemon
+    else if (landMonsInfo != NULL && waterMonsInfo == NULL)
+        return landMonsInfo->wildPokemon[ChooseWildMonIndex_Land()].species;
+        // Water Pokemon
+    else if (landMonsInfo == NULL && waterMonsInfo != NULL)
+    {
+        *isWaterMon = TRUE;
+        return waterMonsInfo->wildPokemon[ChooseWildMonIndex_WaterRock()].species;
+    }
+    // Either land or water Pokemon
+    if ((Random() % 100) < 80)
+    {
+        return landMonsInfo->wildPokemon[ChooseWildMonIndex_Land()].species;
+    }
+    else
+    {
+        *isWaterMon = TRUE;
+        return waterMonsInfo->wildPokemon[ChooseWildMonIndex_WaterRock()].species;
+    }
+}
+
+u16 GetLocalWaterMon(void)
+{
+    u16 headerId = GetCurrentMapWildMonHeaderId();
+
+    if (headerId != 0xFFFF)
+    {
+        const struct WildPokemonInfo * waterMonsInfo = gWildMonHeaders[headerId].waterMonsInfo;
+
+        if (waterMonsInfo)
+            return waterMonsInfo->wildPokemon[ChooseWildMonIndex_WaterRock()].species;
+    }
+    return SPECIES_NONE;
+}
+
+bool8 UpdateRepelCounter(void)
+{
+    u16 steps;
+
+    if (InUnionRoom() == TRUE)
+        return FALSE;
+
+    if (gUnknown_203ADFA == 2)
+        return FALSE;
+
+    steps = VarGet(VAR_REPEL_STEP_COUNT);
+
+    if (steps != 0)
+    {
+        steps--;
+        VarSet(VAR_REPEL_STEP_COUNT, steps);
+        if (steps == 0)
+        {
+            ScriptContext1_SetupScript(EventScript_RepelWoreOff);
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+static bool8 IsWildLevelAllowedByRepel(u8 wildLevel)
+{
+    u8 i;
+
+    if (!VarGet(VAR_REPEL_STEP_COUNT))
+        return TRUE;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_HP) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+        {
+            u8 ourLevel = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+
+            if (wildLevel < ourLevel)
+                return FALSE;
+            else
+                return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+static void ApplyFluteEncounterRateMod(u32 *encounterRate)
+{
+    switch (GetFluteEncounterRateModType())
+    {
+    case 1:
+        *encounterRate += *encounterRate / 2;
+        break;
+    case 2:
+        *encounterRate = *encounterRate / 2;
+        break;
+    }
+}
+
+static u8 GetFluteEncounterRateModType(void)
+{
+    if (FlagGet(FLAG_SYS_WHITE_FLUTE_ACTIVE) == TRUE)
+        return 1;
+    else if (FlagGet(FLAG_SYS_BLACK_FLUTE_ACTIVE) == TRUE)
+        return 2;
+    else
+        return 0;
+}
+
+static void ApplyCleanseTagEncounterRateMod(u32 *encounterRate)
+{
+    if (IsLeadMonHoldingCleanseTag())
+        *encounterRate = *encounterRate * 2 / 3;
+}
+
+static bool8 IsLeadMonHoldingCleanseTag(void)
+{
+    if (sWildEncounterData.leadMonHeldItem == ITEM_CLEANSE_TAG)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+void SeedWildEncounterRng(u16 seed)
+{
+    sWildEncounterData.rngState = seed;
+    ResetEncounterRateModifiers();
+}
+
+static u16 WildEncounterRandom(void)
+{
+    sWildEncounterData.rngState *= 1103515245;
+    sWildEncounterData.rngState += 12345;
+    return sWildEncounterData.rngState >> 16;
+}
+
+static u8 GetMapBaseEncounterCooldown(u8 a0)
+{
+    u16 headerIdx = GetCurrentMapWildMonHeaderId();
+    if (headerIdx == 0xFFFF)
+        return 0xFF;
+    if (a0 == 1)
+    {
+        if (gWildMonHeaders[headerIdx].landMonsInfo == NULL)
+            return 0xFF;
+        if (gWildMonHeaders[headerIdx].landMonsInfo->encounterRate >= 80)
+            return 0;
+        if (gWildMonHeaders[headerIdx].landMonsInfo->encounterRate < 10)
+            return 8;
+        return 8 - (gWildMonHeaders[headerIdx].landMonsInfo->encounterRate / 10);
+    }
+    if (a0 == 2)
+    {
+        if (gWildMonHeaders[headerIdx].waterMonsInfo == NULL)
+            return 0xFF;
+        if (gWildMonHeaders[headerIdx].waterMonsInfo->encounterRate >= 80)
+            return 0;
+        if (gWildMonHeaders[headerIdx].waterMonsInfo->encounterRate < 10)
+            return 8;
+        return 8 - (gWildMonHeaders[headerIdx].waterMonsInfo->encounterRate / 10);
+    }
+    return 0xFF;
+}
+
+void ResetEncounterRateModifiers(void)
+{
+    sWildEncounterData.encounterRateBuff = 0;
+    sWildEncounterData.stepsSinceLastEncounter = 0;
+}
+
+static bool8 HandleWildEncounterCooldown(u32 currMetaTileBehavior)
+{
+    u8 unk = sub_8058F1C(currMetaTileBehavior, 4);
+    u32 minSteps;
+    u32 encRate;
+    if (unk == 0)
+        return FALSE;
+    minSteps = GetMapBaseEncounterCooldown(unk);
+    if (minSteps == 0xFF)
+        return FALSE;
+    minSteps *= 256;
+    encRate = 5 * 256;
+    switch (GetFluteEncounterRateModType())
+    {
+    case 1:
+        minSteps -= minSteps / 2;
+        encRate += encRate / 2;
+        break;
+    case 2:
+        minSteps *= 2;
+        encRate /= 2;
+        break;
+    }
+    sWildEncounterData.leadMonHeldItem = GetMonData(&gPlayerParty[0], MON_DATA_HELD_ITEM);
+    if (IsLeadMonHoldingCleanseTag() == TRUE)
+    {
+        minSteps += minSteps / 3;
+        encRate -= encRate / 3;
+    }
+    switch (GetAbilityEncounterRateModType())
+    {
+    case 1:
+        minSteps *= 2;
+        encRate /= 2;
+        break;
+    case 2:
+        minSteps /= 2;
+        encRate *= 2;
+        break;
+    }
+    minSteps /= 256;
+    encRate /= 256;
+    if (sWildEncounterData.stepsSinceLastEncounter >= minSteps)
+        return TRUE;
+    sWildEncounterData.stepsSinceLastEncounter++;
+    if ((Random() % 100) < encRate)
+        return TRUE;
+    return FALSE;
+}
+
+bool8 TryStandardWildEncounter(u32 currMetaTileBehavior)
+{
+    if (!HandleWildEncounterCooldown(currMetaTileBehavior))
+    {
+        sWildEncounterData.prevMetaTileBehavior = sub_8058F1C(currMetaTileBehavior, 0);
+        return FALSE;
+    }
+    else if (StandardWildEncounter(currMetaTileBehavior, sWildEncounterData.prevMetaTileBehavior) == TRUE)
+    {
+        sWildEncounterData.encounterRateBuff = 0;
+        sWildEncounterData.stepsSinceLastEncounter = 0;
+        sWildEncounterData.prevMetaTileBehavior = sub_8058F1C(currMetaTileBehavior, 0);
+        return TRUE;
+    }
+    else
+    {
+        sWildEncounterData.prevMetaTileBehavior = sub_8058F1C(currMetaTileBehavior, 0);
+        return FALSE;
+    }
+}
+
+static void AddToWildEncounterRateBuff(u8 encounterRate)
+{
+    if (VarGet(VAR_REPEL_STEP_COUNT) == 0)
+        sWildEncounterData.encounterRateBuff += encounterRate;
+    else
+        sWildEncounterData.encounterRateBuff = 0;
 }

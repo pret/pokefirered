@@ -179,7 +179,7 @@ gSpecials:: @ 815FD60
 	def_special sub_8113510
 	def_special sub_81130A8
 	def_special sub_8113530
-	def_special Special_RockSmashEncounter
+	def_special ScrSpecial_RockSmashWildEncounter
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75

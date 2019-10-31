@@ -26,7 +26,7 @@ void ApplyNewEncryptionKeyToAllEncryptedData(u32 encryptionKey);
 void ApplyNewEncryptionKeyToBagItems(u32 encryptionKey);
 void ApplyNewEncryptionKeyToWord(u32 * word, u32 encryptionKey);
 void ApplyNewEncryptionKeyToHword(u16 * hword, u32 encryptionKey);
-void sav2_gender2_inplace_and_xFE(void);
-void sub_804C1C0(void);
+void ClearContinueGameWarpStatus2(void);
+void SetContinueGameWarpStatusToDynamicWarp(void);
 
 #endif // GUARD_LOAD_SAVE_H

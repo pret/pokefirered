@@ -1739,7 +1739,15 @@ gUnknown_845A788:: @ 845A788
 	.incbin "baserom.gba", 0x45A788, 0x60
 
 gUnknown_845A7E8:: @ 845A7E8
-	.incbin "baserom.gba", 0x45A7E8, 0x24
+	.4byte gUnknown_841718C @ Not what other player wants
+	.4byte gUnknown_84171CC @ Not an egg
+	.4byte gUnknown_84170BC @ Mon can't be traded
+	.4byte gUnknown_84170BC @ Mon can't be traded
+	.4byte gUnknown_84170FC @ Other trainer's mon can't be traded
+	.4byte gUnknown_84170E0 @ Egg can't be traded
+	.4byte gUnknown_8417130 @ Other trainer can't accept
+	.4byte gUnknown_8417164 @ Can't trade with trainer now
+	.4byte gUnknown_8417164 @ Can't trade with trainer now
 
 gUnknown_845A80C:: @ 845A80C
 	.incbin "baserom.gba", 0x45A80C, 0x74

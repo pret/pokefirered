@@ -364,7 +364,7 @@ _0811ED14:
 _0811ED30: .4byte gUnknown_203B0A0
 _0811ED34: .4byte gUnknown_203B09C
 _0811ED38:
-	bl sub_8122550
+	bl LoadHeldItemIcons
 	b _0811EDFC
 _0811ED3E:
 	bl sub_8122860
@@ -3033,7 +3033,7 @@ _081201C0:
 	lsrs r6, r0, 29
 	cmp r6, 0x3
 	bne _081201F0
-	ldr r0, _081201EC @ =gUnknown_20243B0
+	ldr r0, _081201EC @ =gPlayerParty + 300 @ &gPlayerParty[3]
 	movs r1, 0xB
 	bl GetMonData
 	cmp r0, 0
@@ -3042,12 +3042,12 @@ _081201C0:
 	b _08120290
 	.align 2, 0
 _081201E8: .4byte gUnknown_203B09C
-_081201EC: .4byte gUnknown_20243B0
+_081201EC: .4byte gPlayerParty + 300 @ &gPlayerParty[3]
 _081201F0:
-	ldr r0, _081201F4 @ =gUnknown_202434C
+	ldr r0, _081201F4 @ =gPlayerParty + 200 @ &gPlayerParty[2]
 	b _0812020C
 	.align 2, 0
-_081201F4: .4byte gUnknown_202434C
+_081201F4: .4byte gPlayerParty + 200 @ &gPlayerParty[2]
 _081201F8:
 	cmp r0, 0x1
 	bne _08120290
@@ -3058,7 +3058,7 @@ _081201F8:
 	lsrs r5, r0, 29
 	cmp r5, 0x5
 	bne _08120224
-	ldr r0, _08120220 @ =gUnknown_2024478
+	ldr r0, _08120220 @ =gPlayerParty + 500 @ &gPlayerParty[5]
 _0812020C:
 	movs r1, 0xB
 	bl GetMonData
@@ -3068,9 +3068,9 @@ _0812020C:
 	b _08120290
 	.align 2, 0
 _0812021C: .4byte gUnknown_203B09C
-_08120220: .4byte gUnknown_2024478
+_08120220: .4byte gPlayerParty + 500 @ &gPlayerParty[5]
 _08120224:
-	ldr r0, _08120234 @ =gUnknown_2024414
+	ldr r0, _08120234 @ =gPlayerParty + 400 @ &gPlayerParty[4]
 	movs r1, 0xB
 	bl GetMonData
 	cmp r0, 0
@@ -3078,7 +3078,7 @@ _08120224:
 	movs r0, 0x4
 	b _0812028E
 	.align 2, 0
-_08120234: .4byte gUnknown_2024414
+_08120234: .4byte gPlayerParty + 400 @ &gPlayerParty[4]
 _08120238:
 	ldrb r1, [r4]
 	subs r0, r1, 0x2
@@ -7598,8 +7598,8 @@ _08122544:
 _0812254C: .4byte gSprites
 	thumb_func_end sub_81224D0
 
-	thumb_func_start sub_8122550
-sub_8122550: @ 8122550
+	thumb_func_start LoadHeldItemIcons
+LoadHeldItemIcons: @ 8122550
 	push {lr}
 	ldr r0, _08122564 @ =gUnknown_845A42C
 	bl LoadSpriteSheet
@@ -7610,7 +7610,7 @@ sub_8122550: @ 8122550
 	.align 2, 0
 _08122564: .4byte gUnknown_845A42C
 _08122568: .4byte gUnknown_845A434
-	thumb_func_end sub_8122550
+	thumb_func_end LoadHeldItemIcons
 
 	thumb_func_start sub_812256C
 sub_812256C: @ 812256C
@@ -8681,7 +8681,7 @@ _08122D8C:
 	ldr r3, _08122DB8 @ =sub_8122DBC
 	movs r4, 0
 	str r4, [sp]
-	bl sub_81344F8
+	bl ShowPokemonSummaryScreen
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
@@ -11407,7 +11407,7 @@ sub_8124384: @ 8124384
 	adds r1, r6, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_804FCE0
+	bl Trade_CanTradeSelectedMon
 	cmp r0, 0x1
 	beq _08124418
 	cmp r0, 0x2
@@ -18129,7 +18129,7 @@ _08127A80: .4byte sub_811FB28
 sub_8127A84: @ 8127A84
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, _08127AA4 @ =gUnknown_20242E8
+	ldr r0, _08127AA4 @ =gPlayerParty + 100 @ &gPlayerParty[1]
 	movs r1, 0xB
 	bl GetMonData
 	cmp r0, 0
@@ -18143,7 +18143,7 @@ _08127AA0:
 	movs r0, 0x7
 	b _08127ABA
 	.align 2, 0
-_08127AA4: .4byte gUnknown_20242E8
+_08127AA4: .4byte gPlayerParty + 100 @ &gPlayerParty[1]
 _08127AA8:
 	ldr r0, _08127AB4 @ =gUnknown_203B0A0
 	ldrb r0, [r0, 0xB]

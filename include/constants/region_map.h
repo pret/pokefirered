@@ -200,4 +200,6 @@
 #define MAPSEC_SPECIAL_AREA                 0xC4
 #define MAPSEC_NONE                         0xC5
 
+#define MAPSEC_IN_GAME_TRADE                0xFE
+
 #endif //GUARD_CONSTANTS_REGION_MAP_H

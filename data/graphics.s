@@ -16214,26 +16214,26 @@ gUnknown_8E9CB9C:: @ 8E9CB9C
 gUnknown_8E9CBBC:: @ 8E9CBBC
 	.incbin "baserom.gba", 0xE9CBBC, 0x320 @UNKNOWN
 
-gUnknown_8E9CEDC:: @ 8E9CEDC
-	.incbin "baserom.gba", 0xE9CEDC, 0x60 @UNKNOWN
+gTradeMenu_Pal:: @ 8E9CEDC
+	.incbin "graphics/trade/menu.gbapal"
 
-gUnknown_8E9CF3C::
-	.incbin "baserom.gba", 0xE9CF3C, 0x20 @UNKNOWN
+gTradeButtons_Pal:: @ E9CF3C
+	.incbin "graphics/trade/unknown_DDB444.gbapal"
 
-gUnknown_8E9CF5C:: @ 8E9CF5C
-	.incbin "baserom.gba", 0xE9CF5C, 0x1280 @UNKNOWN
+gTradeMenu_Gfx:: @ 8E9CF5C
+	.incbin "graphics/trade/menu.4bpp"
 
-gUnknown_8E9E1DC::
-	.incbin "baserom.gba", 0xE9E1DC, 0x800 @UNKNOWN
+gTradeButtons_Gfx:: @ E9E1DC
+	.incbin "graphics/trade/buttons.4bpp"
 
-gUnknown_8E9E9DC::
-	.incbin "baserom.gba", 0xE9E9DC, 0x20 @UNKNOWN
+gUnknown_8E9E9DC:: @ E9E9DC
+	.incbin "graphics/unused/unused_DDCEE4.bin"
 
 gUnknown_8E9E9FC:: @ 8E9E9FC
-	.incbin "baserom.gba", 0xE9E9FC, 0x800 @UNKNOWN
+	.incbin "graphics/trade/unknown_DDCF04.bin"
 
-gUnknown_8E9F1FC:: @ 8E9F1FC
-	.incbin "baserom.gba", 0xE9F1FC, 0x24 @UNKNOWN
+gTradeMenuMonBox_Tilemap:: @ 8E9F1FC
+	.incbin "graphics/trade/menu_mon_box.bin"
 
 gFameCheckerBgPals:: @ 8E9F220
 	.incbin "data/graphics/fame_checker_bg.gbapal"

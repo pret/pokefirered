@@ -6,6 +6,8 @@
 #include "load_save.h"
 #include "task.h"
 #include "link.h"
+#include "save_failed_screen.h"
+#include "fieldmap.h"
 #include "gba/flash_internal.h"
 
 #define FILE_SIGNATURE 0x08012025  // signature value to determine if a sector is in use
@@ -65,13 +67,6 @@ const struct SaveSectionOffsets gSaveSectionOffsets[] =
     SAVEBLOCK_CHUNK(struct PokemonStorage, 7),
     SAVEBLOCK_CHUNK(struct PokemonStorage, 8)
 };
-
-extern void DoSaveFailedScreen(u8 saveType); // save_failed_screen
-extern void sub_800AB9C(void); // link
-extern bool8 IsLinkTaskFinished(void); // link
-extern void save_serialize_map(void); // fieldmap
-extern void sub_804C1C0(void); // load_save
-extern void sav2_gender2_inplace_and_xFE(void); // load_save
 
 // Sector num to begin writing save data. Sectors are rotated each time the game is saved. (possibly to avoid wear on flash memory?)
 u16 gFirstSaveSector;
@@ -872,7 +867,7 @@ void sub_80DA634(u8 taskId)
         }
         break;
     case 3:
-        sub_804C1C0();
+        SetContinueGameWarpStatusToDynamicWarp();
         sub_80DA3AC();
         gTasks[taskId].data[0] = 4;
         break;
@@ -894,7 +889,7 @@ void sub_80DA634(u8 taskId)
         gTasks[taskId].data[0] = 7;
         break;
     case 7:
-        sav2_gender2_inplace_and_xFE();
+        ClearContinueGameWarpStatus2();
         sub_800AB9C();
         gTasks[taskId].data[0] = 8;
         break;

@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_81344F8
-sub_81344F8: @ 81344F8
+	thumb_func_start ShowPokemonSummaryScreen
+ShowPokemonSummaryScreen: @ 81344F8
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -268,7 +268,7 @@ _08134728: .4byte 0x0000322c
 _0813472C: .4byte 0x00003290
 _08134730: .4byte 0x00003204
 _08134734: .4byte sub_8135C34
-	thumb_func_end sub_81344F8
+	thumb_func_end ShowPokemonSummaryScreen
 
 	thumb_func_start ShowSelectMovePokemonSummaryScreen
 ShowSelectMovePokemonSummaryScreen: @ 8134738
@@ -283,7 +283,7 @@ ShowSelectMovePokemonSummaryScreen: @ 8134738
 	lsrs r5, 16
 	movs r4, 0x2
 	str r4, [sp]
-	bl sub_81344F8
+	bl ShowPokemonSummaryScreen
 	ldr r0, _08134764 @ =gUnknown_203B140
 	ldr r0, [r0]
 	ldr r1, _08134768 @ =0x00003260
@@ -14091,7 +14091,7 @@ sub_813B854: @ 813B854
 	str r0, [sp]
 	movs r1, 0
 	movs r2, 0
-	bl sub_81344F8
+	bl ShowPokemonSummaryScreen
 	add sp, 0x4
 	pop {r0}
 	bx r0

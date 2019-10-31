@@ -1052,24 +1052,29 @@ gUnknown_84170BC:: @ 84170BC
 gUnknown_84170E0:: @ 84170E0
 	.string "An EGG can't be traded now.$"
 
+	.align 2
 gUnknown_84170FC:: @ 0x84170FC
 	.string "The other TRAINER's POKéMON\n"
 	.string "can't be traded now.$"
 
-gUnknown_841712D:: @ 0x841712D
-	.string "   The other TRAINER can't accept\n"
+	.align 2
+gUnknown_8417130:: @ 0x8417130
+	.string "The other TRAINER can't accept\n"
 	.string "that POKéMON now.$"
 
-gUnknown_8417161:: @ 0x8417161
-	.string "   You can't trade with that\n"
+	.align 2
+gUnknown_8417164:: @ 0x8417164
+	.string "You can't trade with that\n"
 	.string "TRAINER now.$"
 
-gUnknown_841718B:: @ 0x841718B
-	.string " That isn't the type of POKéMON\n"
+	.align 2
+gUnknown_841718C:: @ 0x841718C
+	.string "That isn't the type of POKéMON\n"
 	.string "that the other TRAINER wants.$"
 
-gUnknown_84171C9:: @ 0x84171C9
-	.string "   That isn't an EGG.$"
+	.align 2
+gUnknown_84171CC:: @ 0x84171CC
+	.string "That isn't an EGG.$"
 
 gUnknown_84171DF:: @ 0x84171DF
 	.string "Choose a POKéMON.$"
@@ -4359,22 +4364,22 @@ gUnknown_841E09F:: @ 841E09F
 gUnknown_841E0A5:: @ 841E0A5
 	.string "Is this trade okay?$"
 
-gUnknown_841E0B9::
+gTradeText_Cancel::
 	.string "CANCEL$"
 
-gUnknown_841E0C0::
+gTradeText_ChooseAPokemon::
 	.string "Choose a POKéMON.$"
 
-gUnknown_841E0D2::
+gTradeText_Summary::
 	.string "SUMMARY$"
 
-gUnknown_841E0DA::
+gTradeText_Trade::
 	.string "TRADE$"
 
-gUnknown_841E0E0::
+gTradeText_CancelTrade::
 	.string "Cancel trade?$"
 
-gUnknown_841E0EE::
+gTradeText_PressBButtonToExit::
 	.string "Press the B Button to exit.$"
 
 gUnknown_841E10A::
@@ -4402,17 +4407,17 @@ gUnknown_841E1C5::
 	.string "Your friend wants\n"
 	.string "to trade POKéMON.$"
 
-gUnknown_841E1E9:: @ 841E1E9
+gText_XWillBeSentToY:: @ 841E1E9
 	.string "{STR_VAR_2} will be\n"
 	.string "sent to {STR_VAR_1}.$"
 
-gUnknown_841E200:: @ 841E200
+gText_ByeByeVar1:: @ 841E200
 	.string "Bye-bye, {STR_VAR_2}!$"
 
-gUnknown_841E20D:: @ 841E20D
+gText_XSentOverY:: @ 841E20D
 	.string "{STR_VAR_1} sent over {STR_VAR_3}.$"
 
-gUnknown_841E21E:: @ 841E21E
+gText_TakeGoodCareOfX:: @ 841E21E
 	.string "Take good care of {STR_VAR_3}!$"
 
 gText_From:: @ 841E234

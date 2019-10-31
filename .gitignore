@@ -50,3 +50,4 @@ tools/br_ips/ips_patch
 types_*.taghl
 !.travis/calcrom/calcrom.pl
 !sound/programmable_wave_samples/*.pcm
+_Deparsed_XSubs.pm

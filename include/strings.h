@@ -660,4 +660,30 @@ extern const u8 gText_FiveIsland[];
 extern const u8 gText_SixIsland[];
 extern const u8 gText_SevenIsland[];
 
+// trade
+extern const u8 gUnknown_841E0A5[];
+extern const u8 gText_XWillBeSentToY[];
+extern const u8 gText_ByeByeVar1[];
+extern const u8 gText_XSentOverY[];
+extern const u8 gText_TakeGoodCareOfX[];
+extern const u8 gUnknown_841E325[];
+extern const u8 gTradeText_Cancel[];
+extern const u8 gTradeText_ChooseAPokemon[];
+extern const u8 gTradeText_Summary[];
+extern const u8 gTradeText_Trade[];
+extern const u8 gTradeText_CancelTrade[];
+extern const u8 gTradeText_PressBButtonToExit[];
+extern const u8 gUnknown_841E10A[];
+extern const u8 gUnknown_841E112[];
+extern const u8 gUnknown_841E118[];
+extern const u8 gUnknown_841E145[];
+extern const u8 gUnknown_841E16B[];
+extern const u8 gUnknown_8417094[];
+extern const u8 gUnknown_841E199[];
+extern const u8 gUnknown_841E1C5[];
+extern const u8 gUnknown_84170BC[];
+extern const u8 gUnknown_84170E0[];
+extern const u8 gUnknown_84170FC[];
+extern const u8 gUnknown_841E09F[];
+
 #endif //GUARD_STRINGS_H

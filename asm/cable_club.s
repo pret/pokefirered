@@ -2193,7 +2193,7 @@ _08081894:
 	.align 2, 0
 _080818A4: .4byte gPaletteFade
 _080818A8:
-	ldr r1, _080818C0 @ =gUnknown_2031DA4
+	ldr r1, _080818C0 @ =gSelectedTradeMonPositions
 	movs r0, 0
 	strb r0, [r1]
 	strb r0, [r1, 0x1]
@@ -2205,13 +2205,13 @@ _080818B8:
 	strh r0, [r4, 0x8]
 	b _080818D8
 	.align 2, 0
-_080818C0: .4byte gUnknown_2031DA4
+_080818C0: .4byte gSelectedTradeMonPositions
 _080818C4:
 	ldr r0, _080818E0 @ =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080818D8
-	ldr r0, _080818E4 @ =sub_804C718
+	ldr r0, _080818E4 @ =CB2_ReturnFromLinkTrade
 	bl SetMainCallback2
 	adds r0, r5, 0
 	bl DestroyTask
@@ -2221,7 +2221,7 @@ _080818D8:
 	bx r0
 	.align 2, 0
 _080818E0: .4byte gReceivedRemoteLinkPlayers
-_080818E4: .4byte sub_804C718
+_080818E4: .4byte CB2_ReturnFromLinkTrade
 	thumb_func_end sub_8081850
 
 	thumb_func_start sub_80818E8
@@ -2269,7 +2269,7 @@ _0808192C:
 	.align 2, 0
 _0808193C: .4byte gPaletteFade
 _08081940:
-	ldr r1, _08081958 @ =gUnknown_2031DA4
+	ldr r1, _08081958 @ =gSelectedTradeMonPositions
 	movs r0, 0
 	strb r0, [r1]
 	strb r0, [r1, 0x1]
@@ -2281,7 +2281,7 @@ _08081950:
 	strh r0, [r4]
 	b _08081970
 	.align 2, 0
-_08081958: .4byte gUnknown_2031DA4
+_08081958: .4byte gSelectedTradeMonPositions
 _0808195C:
 	bl IsLinkTaskFinished
 	lsls r0, 24

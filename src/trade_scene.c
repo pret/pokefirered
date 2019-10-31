@@ -83,7 +83,7 @@ struct TradeAnimationResources {
     /*0x8C*/ u16 unk_8C;
     /*0x8E*/ u8 pokePicSpriteIdxs[2];
     /*0x90*/ u8 tradeGlow1SpriteId;
-    /*0x91*/ u8 gbaScreenSpriteID;
+    /*0x91*/ u8 gbaScreenSpriteId;
     /*0x92*/ u8 linkCableEndSpriteId;
     /*0x93*/ u8 scheduleLinkTransfer;
     /*0x94*/ u16 state;
@@ -148,8 +148,8 @@ static void LinkTrade_TearDownAssets(void);
 static void Task_WaitFadeAndStartInGameTradeAnim(u8 taskId);
 static void CheckPartnersMonForRibbons(void);
 static void Task_AnimateWirelessSignal(u8 taskId);
-static void Task_OpenCetnerWhiteColumn(u8 taskId);
-static void Task_CloseCetnerWhiteColumn(u8 taskId);
+static void Task_OpenCenterWhiteColumn(u8 taskId);
+static void Task_CloseCenterWhiteColumn(u8 taskId);
 
 static const u16 sTradeBallPalette[] = INCBIN_U16("graphics/trade/ball.gbapal");
 static const u8 sTradeBallTiles[] = INCBIN_U8("graphics/trade/ball.4bpp");
@@ -449,7 +449,7 @@ static const struct SpriteTemplate sTradeGBAScreenSpriteTemplate2 = {
     .callback = SpriteCB_TradeGBAScreen
 };
 
-static const u16 gTradeGlow2PaletteAnimTable[] = {
+static const u16 sTradeGlow2PaletteAnimTable[] = {
     RGB(18, 24, 31),
     RGB(18, 24, 31),
     RGB(18, 24, 31),
@@ -632,7 +632,7 @@ static void SpriteCB_TradeGlowCore(struct Sprite * sprite)
         sprite->data[0]++;
         if (sprite->data[0] == 12)
             sprite->data[0] = 0;
-        LoadPalette(&gTradeGlow2PaletteAnimTable[sprite->data[0]], 16 * (sprite->oam.paletteNum + 16) + 4, 2);
+        LoadPalette(&sTradeGlow2PaletteAnimTable[sprite->data[0]], 16 * (sprite->oam.paletteNum + 16) + 4, 2);
     }
 }
 
@@ -1371,14 +1371,14 @@ static bool8 DoTradeAnim_Cable(void)
         if (++sTradeData->timer > 20)
         {
             SetTradeBGAffine();
-            sTradeData->gbaScreenSpriteID = CreateSprite(&sTradeGBAScreenSpriteTemplate1, 120, 80, 0);
+            sTradeData->gbaScreenSpriteId = CreateSprite(&sTradeGBAScreenSpriteTemplate1, 120, 80, 0);
             sTradeData->state++;
         }
         break;
     case 25:
-        if (gSprites[sTradeData->gbaScreenSpriteID].animEnded)
+        if (gSprites[sTradeData->gbaScreenSpriteId].animEnded)
         {
-            DestroySprite(&gSprites[sTradeData->gbaScreenSpriteID]);
+            DestroySprite(&gSprites[sTradeData->gbaScreenSpriteId]);
             SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND |
                                          BLDCNT_TGT2_BG1 |
                                          BLDCNT_TGT2_BG2);
@@ -1398,8 +1398,8 @@ static bool8 DoTradeAnim_Cable(void)
         break;
     case 27:
         sTradeData->tradeGlow1SpriteId = CreateSprite(&sTradeGlow1SpriteTemplate, 128, 80, 3);
-        sTradeData->gbaScreenSpriteID = CreateSprite(&sGlowBallSpriteTemplate, 128, 80, 0);
-        StartSpriteAnim(&gSprites[sTradeData->gbaScreenSpriteID], 1);
+        sTradeData->gbaScreenSpriteId = CreateSprite(&sGlowBallSpriteTemplate, 128, 80, 0);
+        StartSpriteAnim(&gSprites[sTradeData->gbaScreenSpriteId], 1);
         sTradeData->state++;
         break;
     case 28:
@@ -1414,7 +1414,7 @@ static bool8 DoTradeAnim_Cable(void)
         break;
     case 200:
         gSprites[sTradeData->tradeGlow1SpriteId].pos1.y -= 2;
-        gSprites[sTradeData->gbaScreenSpriteID].pos1.y -= 2;
+        gSprites[sTradeData->gbaScreenSpriteId].pos1.y -= 2;
         if (gSprites[sTradeData->tradeGlow1SpriteId].pos1.y < -8)
         {
             sTradeData->state = 29;
@@ -1428,7 +1428,7 @@ static bool8 DoTradeAnim_Cable(void)
         if (!gPaletteFade.active)
         {
             DestroySprite(&gSprites[sTradeData->tradeGlow1SpriteId]);
-            DestroySprite(&gSprites[sTradeData->gbaScreenSpriteID]);
+            DestroySprite(&gSprites[sTradeData->gbaScreenSpriteId]);
             SetTradeSequenceBgGpuRegs(2);
             sTradeData->state++;
         }
@@ -1436,7 +1436,7 @@ static bool8 DoTradeAnim_Cable(void)
     case 31:
         BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB_BLACK);
         sTradeData->tradeGlow1SpriteId = CreateSprite(&sGlowBallSpriteTemplate, 111, 170, 0);
-        sTradeData->gbaScreenSpriteID = CreateSprite(&sGlowBallSpriteTemplate, 129, -10, 0);
+        sTradeData->gbaScreenSpriteId = CreateSprite(&sGlowBallSpriteTemplate, 129, -10, 0);
         sTradeData->state++;
         break;
     case 32:
@@ -1446,15 +1446,15 @@ static bool8 DoTradeAnim_Cable(void)
             sTradeData->state++;
         }
         gSprites[sTradeData->tradeGlow1SpriteId].pos2.y -= 3;
-        gSprites[sTradeData->gbaScreenSpriteID].pos2.y += 3;
+        gSprites[sTradeData->gbaScreenSpriteId].pos2.y += 3;
         break;
     case 33:
         gSprites[sTradeData->tradeGlow1SpriteId].pos2.y -= 3;
-        gSprites[sTradeData->gbaScreenSpriteID].pos2.y += 3;
+        gSprites[sTradeData->gbaScreenSpriteId].pos2.y += 3;
         if (gSprites[sTradeData->tradeGlow1SpriteId].pos2.y <= -90)
         {
             gSprites[sTradeData->tradeGlow1SpriteId].data[1] = 1;
-            gSprites[sTradeData->gbaScreenSpriteID].data[1] = 1;
+            gSprites[sTradeData->gbaScreenSpriteId].data[1] = 1;
             sTradeData->state++;
         }
         break;
@@ -1501,7 +1501,7 @@ static bool8 DoTradeAnim_Cable(void)
         if (gSprites[sTradeData->pokePicSpriteIdxs[0]].pos2.y < -222)
         {
             gSprites[sTradeData->tradeGlow1SpriteId].data[1] = 0;
-            gSprites[sTradeData->gbaScreenSpriteID].data[1] = 0;
+            gSprites[sTradeData->gbaScreenSpriteId].data[1] = 0;
             sTradeData->state++;
             gSprites[sTradeData->pokePicSpriteIdxs[0]].invisible = TRUE;
             gSprites[sTradeData->pokePicSpriteIdxs[1]].invisible = TRUE;
@@ -1510,13 +1510,13 @@ static bool8 DoTradeAnim_Cable(void)
         break;
     case 39:
         gSprites[sTradeData->tradeGlow1SpriteId].pos2.y -= 3;
-        gSprites[sTradeData->gbaScreenSpriteID].pos2.y += 3;
+        gSprites[sTradeData->gbaScreenSpriteId].pos2.y += 3;
         if (gSprites[sTradeData->tradeGlow1SpriteId].pos2.y <= -222)
         {
             BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 16, RGB_BLACK);
             sTradeData->state++;
             DestroySprite(&gSprites[sTradeData->tradeGlow1SpriteId]);
-            DestroySprite(&gSprites[sTradeData->gbaScreenSpriteID]);
+            DestroySprite(&gSprites[sTradeData->gbaScreenSpriteId]);
         }
         break;
     case 40:
@@ -1526,8 +1526,8 @@ static bool8 DoTradeAnim_Cable(void)
             SetTradeSequenceBgGpuRegs(1);
             sTradeData->bg1vofs = 166;
             sTradeData->tradeGlow1SpriteId = CreateSprite(&sTradeGlow1SpriteTemplate, 128, -20, 3);
-            sTradeData->gbaScreenSpriteID = CreateSprite(&sGlowBallSpriteTemplate, 128, -20, 0);
-            StartSpriteAnim(&gSprites[sTradeData->gbaScreenSpriteID], 1);
+            sTradeData->gbaScreenSpriteId = CreateSprite(&sGlowBallSpriteTemplate, 128, -20, 0);
+            StartSpriteAnim(&gSprites[sTradeData->gbaScreenSpriteId], 1);
         }
         break;
     case 41:
@@ -1546,7 +1546,7 @@ static bool8 DoTradeAnim_Cable(void)
         break;
     case 43:
         gSprites[sTradeData->tradeGlow1SpriteId].pos2.y += 3;
-        gSprites[sTradeData->gbaScreenSpriteID].pos2.y += 3;
+        gSprites[sTradeData->gbaScreenSpriteId].pos2.y += 3;
         if (gSprites[sTradeData->tradeGlow1SpriteId].pos2.y + gSprites[sTradeData->tradeGlow1SpriteId].pos1.y == 64)
         {
             sTradeData->state++;
@@ -1561,7 +1561,7 @@ static bool8 DoTradeAnim_Cable(void)
         break;
     case 45:
         DestroySprite(&gSprites[sTradeData->tradeGlow1SpriteId]);
-        DestroySprite(&gSprites[sTradeData->gbaScreenSpriteID]);
+        DestroySprite(&gSprites[sTradeData->gbaScreenSpriteId]);
         sTradeData->state++;
         sTradeData->timer = 0;
         break;
@@ -1584,13 +1584,13 @@ static bool8 DoTradeAnim_Cable(void)
         }
         break;
     case 48:
-        sTradeData->gbaScreenSpriteID = CreateSprite(&sTradeGBAScreenSpriteTemplate1, 120, 80, 0);
+        sTradeData->gbaScreenSpriteId = CreateSprite(&sTradeGBAScreenSpriteTemplate1, 120, 80, 0);
         sTradeData->state = 50;
         break;
     case 50:
-        if (gSprites[sTradeData->gbaScreenSpriteID].animEnded)
+        if (gSprites[sTradeData->gbaScreenSpriteId].animEnded)
         {
-            DestroySprite(&gSprites[sTradeData->gbaScreenSpriteID]);
+            DestroySprite(&gSprites[sTradeData->gbaScreenSpriteId]);
             SetTradeSequenceBgGpuRegs(6);
             sTradeData->state++;
             PlaySE(SE_W028);
@@ -1868,14 +1868,14 @@ static bool8 DoTradeAnim_Wireless(void)
         if (++sTradeData->timer > 20)
         {
             SetTradeSequenceBgGpuRegs(3);
-            sTradeData->gbaScreenSpriteID = CreateSprite(&sTradeGBAScreenSpriteTemplate2, 120, 80, 0);
+            sTradeData->gbaScreenSpriteId = CreateSprite(&sTradeGBAScreenSpriteTemplate2, 120, 80, 0);
             sTradeData->state++;
         }
         break;
     case 125:
-        if (gSprites[sTradeData->gbaScreenSpriteID].animEnded)
+        if (gSprites[sTradeData->gbaScreenSpriteId].animEnded)
         {
-            DestroySprite(&gSprites[sTradeData->gbaScreenSpriteID]);
+            DestroySprite(&gSprites[sTradeData->gbaScreenSpriteId]);
             SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 |
                                          BLDCNT_TGT1_OBJ |
                                          BLDCNT_EFFECT_BLEND |
@@ -1900,8 +1900,8 @@ static bool8 DoTradeAnim_Wireless(void)
     case 27:
         sTradeData->tradeGlow1SpriteId = CreateSprite(&sTradeGlow1SpriteTemplate, 120, 80, 3);
         gSprites[sTradeData->tradeGlow1SpriteId].callback = SpriteCB_TradeGlowWireless;
-        sTradeData->gbaScreenSpriteID = CreateSprite(&sGlowBallSpriteTemplate, 120, 80, 0);
-        StartSpriteAnim(&gSprites[sTradeData->gbaScreenSpriteID], 1);
+        sTradeData->gbaScreenSpriteId = CreateSprite(&sGlowBallSpriteTemplate, 120, 80, 0);
+        StartSpriteAnim(&gSprites[sTradeData->gbaScreenSpriteId], 1);
         sTradeData->state++;
         break;
     case 28:
@@ -1916,7 +1916,7 @@ static bool8 DoTradeAnim_Wireless(void)
         break;
     case 200:
         gSprites[sTradeData->tradeGlow1SpriteId].pos1.y -= 2;
-        gSprites[sTradeData->gbaScreenSpriteID].pos1.y -= 2;
+        gSprites[sTradeData->gbaScreenSpriteId].pos1.y -= 2;
         if (gSprites[sTradeData->tradeGlow1SpriteId].pos1.y < -8)
         {
             sTradeData->state = 29;
@@ -1930,7 +1930,7 @@ static bool8 DoTradeAnim_Wireless(void)
         if (!gPaletteFade.active)
         {
             DestroySprite(&gSprites[sTradeData->tradeGlow1SpriteId]);
-            DestroySprite(&gSprites[sTradeData->gbaScreenSpriteID]);
+            DestroySprite(&gSprites[sTradeData->gbaScreenSpriteId]);
             SetTradeSequenceBgGpuRegs(2);
             sTradeData->state++;
         }
@@ -1938,7 +1938,7 @@ static bool8 DoTradeAnim_Wireless(void)
     case 31:
         BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB_BLACK);
         sTradeData->tradeGlow1SpriteId = CreateSprite(&sGlowBallSpriteTemplate, 111, 170, 0);
-        sTradeData->gbaScreenSpriteID = CreateSprite(&sGlowBallSpriteTemplate, 129, -10, 0);
+        sTradeData->gbaScreenSpriteId = CreateSprite(&sGlowBallSpriteTemplate, 129, -10, 0);
         sTradeData->state++;
         break;
     case 32:
@@ -1948,17 +1948,17 @@ static bool8 DoTradeAnim_Wireless(void)
             sTradeData->state++;
         }
         gSprites[sTradeData->tradeGlow1SpriteId].pos2.y -= 3;
-        gSprites[sTradeData->gbaScreenSpriteID].pos2.y += 3;
+        gSprites[sTradeData->gbaScreenSpriteId].pos2.y += 3;
         break;
     case 33:
         gSprites[sTradeData->tradeGlow1SpriteId].pos2.y -= 3;
-        gSprites[sTradeData->gbaScreenSpriteID].pos2.y += 3;
+        gSprites[sTradeData->gbaScreenSpriteId].pos2.y += 3;
         if (gSprites[sTradeData->tradeGlow1SpriteId].pos2.y <= -90)
         {
             gSprites[sTradeData->tradeGlow1SpriteId].data[1] = 1;
-            gSprites[sTradeData->gbaScreenSpriteID].data[1] = 1;
+            gSprites[sTradeData->gbaScreenSpriteId].data[1] = 1;
             sTradeData->state++;
-            CreateTask(Task_OpenCetnerWhiteColumn, 5);
+            CreateTask(Task_OpenCenterWhiteColumn, 5);
         }
         break;
     case 34:
@@ -2004,22 +2004,22 @@ static bool8 DoTradeAnim_Wireless(void)
         if (gSprites[sTradeData->pokePicSpriteIdxs[0]].pos2.y < -222)
         {
             gSprites[sTradeData->tradeGlow1SpriteId].data[1] = 0;
-            gSprites[sTradeData->gbaScreenSpriteID].data[1] = 0;
+            gSprites[sTradeData->gbaScreenSpriteId].data[1] = 0;
             sTradeData->state++;
             gSprites[sTradeData->pokePicSpriteIdxs[0]].invisible = TRUE;
             gSprites[sTradeData->pokePicSpriteIdxs[1]].invisible = TRUE;
-            CreateTask(Task_CloseCetnerWhiteColumn, 5);
+            CreateTask(Task_CloseCenterWhiteColumn, 5);
         }
         break;
     case 39:
         gSprites[sTradeData->tradeGlow1SpriteId].pos2.y -= 3;
-        gSprites[sTradeData->gbaScreenSpriteID].pos2.y += 3;
+        gSprites[sTradeData->gbaScreenSpriteId].pos2.y += 3;
         if (gSprites[sTradeData->tradeGlow1SpriteId].pos2.y <= -222)
         {
             BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 16, RGB_BLACK);
             sTradeData->state++;
             DestroySprite(&gSprites[sTradeData->tradeGlow1SpriteId]);
-            DestroySprite(&gSprites[sTradeData->gbaScreenSpriteID]);
+            DestroySprite(&gSprites[sTradeData->gbaScreenSpriteId]);
         }
         break;
     case 40:
@@ -2032,8 +2032,8 @@ static bool8 DoTradeAnim_Wireless(void)
             sTradeData->bg2vofs = 412;
             sTradeData->tradeGlow1SpriteId = CreateSprite(&sTradeGlow1SpriteTemplate, 120, -20, 3);
             gSprites[sTradeData->tradeGlow1SpriteId].callback = SpriteCB_TradeGlowWireless;
-            sTradeData->gbaScreenSpriteID = CreateSprite(&sGlowBallSpriteTemplate, 120, -20, 0);
-            StartSpriteAnim(&gSprites[sTradeData->gbaScreenSpriteID], 1);
+            sTradeData->gbaScreenSpriteId = CreateSprite(&sGlowBallSpriteTemplate, 120, -20, 0);
+            StartSpriteAnim(&gSprites[sTradeData->gbaScreenSpriteId], 1);
         }
         break;
     case 41:
@@ -2052,7 +2052,7 @@ static bool8 DoTradeAnim_Wireless(void)
         break;
     case 43:
         gSprites[sTradeData->tradeGlow1SpriteId].pos2.y += 4;
-        gSprites[sTradeData->gbaScreenSpriteID].pos2.y += 4;
+        gSprites[sTradeData->gbaScreenSpriteId].pos2.y += 4;
         if (gSprites[sTradeData->tradeGlow1SpriteId].pos2.y + gSprites[sTradeData->tradeGlow1SpriteId].pos1.y == 64)
         {
             sTradeData->state = 144;
@@ -2080,7 +2080,7 @@ static bool8 DoTradeAnim_Wireless(void)
         break;
     case 145:
         DestroySprite(&gSprites[sTradeData->tradeGlow1SpriteId]);
-        DestroySprite(&gSprites[sTradeData->gbaScreenSpriteID]);
+        DestroySprite(&gSprites[sTradeData->gbaScreenSpriteId]);
         sTradeData->state++;
         sTradeData->timer = 0;
         break;
@@ -2105,13 +2105,13 @@ static bool8 DoTradeAnim_Wireless(void)
         }
         break;
     case 48:
-        sTradeData->gbaScreenSpriteID = CreateSprite(&sTradeGBAScreenSpriteTemplate1, 120, 80, 0);
+        sTradeData->gbaScreenSpriteId = CreateSprite(&sTradeGBAScreenSpriteTemplate1, 120, 80, 0);
         sTradeData->state = 50;
         break;
     case 50:
-        if (gSprites[sTradeData->gbaScreenSpriteID].animEnded)
+        if (gSprites[sTradeData->gbaScreenSpriteId].animEnded)
         {
-            DestroySprite(&gSprites[sTradeData->gbaScreenSpriteID]);
+            DestroySprite(&gSprites[sTradeData->gbaScreenSpriteId]);
             SetTradeSequenceBgGpuRegs(6);
             sTradeData->state++;
             PlaySE(SE_W028);
@@ -2811,7 +2811,7 @@ static void Task_AnimateWirelessSignal(u8 taskId)
         data[1]++;
 }
 
-static void Task_OpenCetnerWhiteColumn(u8 taskId)
+static void Task_OpenCenterWhiteColumn(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -2840,7 +2840,7 @@ static void Task_OpenCetnerWhiteColumn(u8 taskId)
     }
 }
 
-static void Task_CloseCetnerWhiteColumn(u8 taskId)
+static void Task_CloseCenterWhiteColumn(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 

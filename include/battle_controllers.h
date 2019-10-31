@@ -260,7 +260,7 @@ void SetControllerToPlayerPartner(void);
 void SetControllerToSafari(void);
 
 // pokedude controller
-void SetControllerToPokeDude(void);
+void SetControllerToPokedude(void);
 
 // oak and old man controller
 void SetControllerToOakOrOldMan(void);

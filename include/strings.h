@@ -243,6 +243,28 @@ extern const u8 gUnknown_83FDDEB[];
 extern const u8 gUnknown_83FDCD2[];
 extern const u8 gUnknown_83FE6FA[];
 
+// battle_controller_pokedude
+extern const u8 gUnknown_81C5F69[];
+extern const u8 gUnknown_81C5FA7[];
+extern const u8 gUnknown_81C5FDC[];
+extern const u8 gUnknown_81C601C[];
+extern const u8 gUnknown_81C60FA[];
+extern const u8 gUnknown_81C615A[];
+extern const u8 gUnknown_81C6196[];
+extern const u8 gUnknown_81C61EA[];
+extern const u8 gUnknown_81C6202[];
+extern const u8 gUnknown_81C6301[];
+extern const u8 gUnknown_81C63A9[];
+extern const u8 gUnknown_81C63F9[];
+extern const u8 gUnknown_81C6446[];
+extern const u8 gUnknown_81C657A[];
+extern const u8 gUnknown_81C6637[];
+extern const u8 gUnknown_81C6645[];
+extern const u8 gUnknown_81C66CF[];
+extern const u8 gUnknown_81C6787[];
+extern const u8 gUnknown_81C684B[];
+extern const u8 gUnknown_81C686C[];
+
 // credits
 extern const u8 gString_Dummy[];
 extern const u8 gString_PokemonFireRed_Staff[]; // FR

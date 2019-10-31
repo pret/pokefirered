@@ -10,14 +10,14 @@ nullsub_99: @ 81560A0
 	bx lr
 	thumb_func_end nullsub_99
 
-	thumb_func_start SetControllerToPokeDude
-SetControllerToPokeDude: @ 81560A4
+	thumb_func_start SetControllerToPokedude
+SetControllerToPokedude: @ 81560A4
 	ldr r1, _081560C8 @ =gBattlerControllerFuncs
 	ldr r0, _081560CC @ =gActiveBattler
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _081560D0 @ =sub_81560DC
+	ldr r1, _081560D0 @ =PokedudeBufferRunCommand
 	str r1, [r0]
 	ldr r2, _081560D4 @ =gBattleStruct
 	ldr r0, [r2]
@@ -33,13 +33,13 @@ SetControllerToPokeDude: @ 81560A4
 	.align 2, 0
 _081560C8: .4byte gBattlerControllerFuncs
 _081560CC: .4byte gActiveBattler
-_081560D0: .4byte sub_81560DC
+_081560D0: .4byte PokedudeBufferRunCommand
 _081560D4: .4byte gBattleStruct
 _081560D8: .4byte gSpecialVar_0x8004
-	thumb_func_end SetControllerToPokeDude
+	thumb_func_end SetControllerToPokedude
 
-	thumb_func_start sub_81560DC
-sub_81560DC: @ 81560DC
+	thumb_func_start PokedudeBufferRunCommand
+PokedudeBufferRunCommand: @ 81560DC
 	push {r4,r5,lr}
 	ldr r2, _08156120 @ =gBattleControllerExecFlags
 	ldr r1, _08156124 @ =gBitTable
@@ -62,7 +62,7 @@ sub_81560DC: @ 81560DC
 	lsls r0, 24
 	cmp r0, 0
 	bne _08156138
-	ldr r1, _08156130 @ =gUnknown_8478F1C
+	ldr r1, _08156130 @ =sPokedudeBufferCommands
 	ldrb r0, [r5]
 	lsls r0, 9
 	adds r0, r4
@@ -77,14 +77,14 @@ _08156120: .4byte gBattleControllerExecFlags
 _08156124: .4byte gBitTable
 _08156128: .4byte gActiveBattler
 _0815612C: .4byte gBattleBufferA
-_08156130: .4byte gUnknown_8478F1C
+_08156130: .4byte sPokedudeBufferCommands
 _08156134:
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 _08156138:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81560DC
+	thumb_func_end PokedudeBufferRunCommand
 
 	thumb_func_start sub_8156140
 sub_8156140: @ 8156140
@@ -94,8 +94,8 @@ sub_8156140: @ 8156140
 	bx r0
 	thumb_func_end sub_8156140
 
-	thumb_func_start sub_815614C
-sub_815614C: @ 815614C
+	thumb_func_start CompleteOnBattlerSpriteCallbackDummy_PokedudeTmp
+CompleteOnBattlerSpriteCallbackDummy_PokedudeTmp: @ 815614C
 	push {lr}
 	ldr r2, _08156174 @ =gSprites
 	ldr r1, _08156178 @ =gBattlerSpriteIds
@@ -112,7 +112,7 @@ sub_815614C: @ 815614C
 	ldr r0, _08156180 @ =SpriteCallbackDummy
 	cmp r1, r0
 	bne _08156170
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 _08156170:
 	pop {r0}
 	bx r0
@@ -121,7 +121,7 @@ _08156174: .4byte gSprites
 _08156178: .4byte gBattlerSpriteIds
 _0815617C: .4byte gActiveBattler
 _08156180: .4byte SpriteCallbackDummy
-	thumb_func_end sub_815614C
+	thumb_func_end CompleteOnBattlerSpriteCallbackDummy_PokedudeTmp
 
 	thumb_func_start sub_8156184
 sub_8156184: @ 8156184
@@ -201,7 +201,7 @@ _081561F8:
 	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
 	bl FreeSpritePaletteByTag
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 _08156230:
 	pop {r4-r7}
 	pop {r0}
@@ -210,19 +210,19 @@ _08156230:
 _08156238: .4byte 0x000027f9
 	thumb_func_end sub_8156184
 
-	thumb_func_start sub_815623C
-sub_815623C: @ 815623C
+	thumb_func_start CompleteOnInactiveTextPrinter_PokedudeTmp
+CompleteOnInactiveTextPrinter_PokedudeTmp: @ 815623C
 	push {lr}
 	movs r0, 0
 	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	bne _0815624E
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 _0815624E:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_815623C
+	thumb_func_end CompleteOnInactiveTextPrinter_PokedudeTmp
 
 	thumb_func_start sub_8156254
 sub_8156254: @ 8156254
@@ -286,7 +286,7 @@ sub_8156294: @ 8156294
 	ldr r2, _081562EC @ =gPlayerParty
 	adds r0, r2
 	bl HandleLowHpMusicChange
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 _081562D4:
 	pop {r4}
 	pop {r0}
@@ -486,20 +486,20 @@ _0815647C: .4byte gBattlerControllerFuncs
 _08156480: .4byte sub_81562F0
 	thumb_func_end sub_81563A8
 
-	thumb_func_start sub_8156484
-sub_8156484: @ 8156484
+	thumb_func_start CompleteOnSpecialAnimDone_PokedudeTmp
+CompleteOnSpecialAnimDone_PokedudeTmp: @ 8156484
 	push {lr}
 	ldr r0, _08156498 @ =gDoingBattleAnim
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08156492
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 _08156492:
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08156498: .4byte gDoingBattleAnim
-	thumb_func_end sub_8156484
+	thumb_func_end CompleteOnSpecialAnimDone_PokedudeTmp
 
 	thumb_func_start sub_815649C
 sub_815649C: @ 815649C
@@ -529,7 +529,7 @@ sub_815649C: @ 815649C
 	adds r0, r2
 	movs r1, 0
 	strb r1, [r0, 0x9]
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 _081564D4:
 	pop {r4}
 	pop {r0}
@@ -547,8 +547,8 @@ sub_81564E4: @ 81564E4
 	bx r0
 	thumb_func_end sub_81564E4
 
-	thumb_func_start sub_81564F0
-sub_81564F0: @ 81564F0
+	thumb_func_start OpenPartyMenuToChooseMon_PokedudeTmp
+OpenPartyMenuToChooseMon_PokedudeTmp: @ 81564F0
 	push {lr}
 	ldr r0, _08156524 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
@@ -561,7 +561,7 @@ sub_81564F0: @ 81564F0
 	ldrb r0, [r2]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _08156530 @ =sub_8156538
+	ldr r1, _08156530 @ =WaitForMonSelection_PokedudeTmp
 	str r1, [r0]
 	ldr r1, _08156534 @ =gUnknown_3004FFC
 	ldrb r0, [r2]
@@ -577,12 +577,12 @@ _08156520:
 _08156524: .4byte gPaletteFade
 _08156528: .4byte gBattlerControllerFuncs
 _0815652C: .4byte gActiveBattler
-_08156530: .4byte sub_8156538
+_08156530: .4byte WaitForMonSelection_PokedudeTmp
 _08156534: .4byte gUnknown_3004FFC
-	thumb_func_end sub_81564F0
+	thumb_func_end OpenPartyMenuToChooseMon_PokedudeTmp
 
-	thumb_func_start sub_8156538
-sub_8156538: @ 8156538
+	thumb_func_start WaitForMonSelection_PokedudeTmp
+WaitForMonSelection_PokedudeTmp: @ 8156538
 	push {lr}
 	ldr r0, _08156568 @ =gMain
 	ldr r1, [r0, 0x4]
@@ -618,14 +618,14 @@ _08156580:
 	movs r2, 0
 	bl BtlController_EmitChosenMonReturnValue
 _0815658A:
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 _0815658E:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8156538
+	thumb_func_end WaitForMonSelection_PokedudeTmp
 
-	thumb_func_start sub_8156594
-sub_8156594: @ 8156594
+	thumb_func_start OpenBagAndChooseItem_PokedudeTmp
+OpenBagAndChooseItem_PokedudeTmp: @ 8156594
 	push {lr}
 	ldr r0, _081565C8 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
@@ -638,7 +638,7 @@ sub_8156594: @ 8156594
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _081565D4 @ =sub_81565E8
+	ldr r1, _081565D4 @ =CompleteWhenChoseItem_PokedudeTmp
 	str r1, [r0]
 	bl nullsub_44
 	bl FreeAllWindowBuffers
@@ -655,7 +655,7 @@ _081565C4:
 _081565C8: .4byte gPaletteFade
 _081565CC: .4byte gBattlerControllerFuncs
 _081565D0: .4byte gActiveBattler
-_081565D4: .4byte sub_81565E8
+_081565D4: .4byte CompleteWhenChoseItem_PokedudeTmp
 _081565D8: .4byte gSpecialVar_0x8004
 _081565DC:
 	movs r0, 0x8
@@ -664,10 +664,10 @@ _081565DE:
 _081565E2:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8156594
+	thumb_func_end OpenBagAndChooseItem_PokedudeTmp
 
-	thumb_func_start sub_81565E8
-sub_81565E8: @ 81565E8
+	thumb_func_start CompleteWhenChoseItem_PokedudeTmp
+CompleteWhenChoseItem_PokedudeTmp: @ 81565E8
 	push {lr}
 	ldr r0, _08156614 @ =gMain
 	ldr r1, [r0, 0x4]
@@ -684,7 +684,7 @@ sub_81565E8: @ 81565E8
 	ldrh r1, [r0]
 	movs r0, 0x1
 	bl BtlController_EmitOneReturnValue
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 _0815660E:
 	pop {r0}
 	bx r0
@@ -693,7 +693,7 @@ _08156614: .4byte gMain
 _08156618: .4byte BattleMainCB2
 _0815661C: .4byte gPaletteFade
 _08156620: .4byte gSpecialVar_ItemId
-	thumb_func_end sub_81565E8
+	thumb_func_end CompleteWhenChoseItem_PokedudeTmp
 
 	thumb_func_start sub_8156624
 sub_8156624: @ 8156624
@@ -1022,8 +1022,8 @@ _081568D4: .4byte gBattlerControllerFuncs
 _081568D8: .4byte sub_815649C
 	thumb_func_end sub_81567B0
 
-	thumb_func_start sub_81568DC
-sub_81568DC: @ 81568DC
+	thumb_func_start Task_GiveExpToMon_PokedudeTmp
+Task_GiveExpToMon_PokedudeTmp: @ 81568DC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1143,7 +1143,7 @@ _08156922:
 	cmp r1, r0
 	bne _081569F8
 _081569D6:
-	ldr r0, _081569F4 @ =sub_8156C68
+	ldr r0, _081569F4 @ =Task_LaunchLvlUpAnim_PokedudeTmp
 	b _08156A3A
 	.align 2, 0
 _081569DC: .4byte gTasks
@@ -1152,7 +1152,7 @@ _081569E4: .4byte gPlayerParty
 _081569E8: .4byte gExperienceTables
 _081569EC: .4byte gBaseStats
 _081569F0: .4byte gActiveBattler
-_081569F4: .4byte sub_8156C68
+_081569F4: .4byte Task_LaunchLvlUpAnim_PokedudeTmp
 _081569F8:
 	ldr r0, _08156A08 @ =gTasks
 	mov r2, r9
@@ -1160,11 +1160,11 @@ _081569F8:
 	add r1, r9
 	lsls r1, 3
 	adds r1, r0
-	ldr r0, _08156A0C @ =sub_8156D80
+	ldr r0, _08156A0C @ =DestroyExpTaskAndCompleteOnInactiveTextPrinter_PokedudeTmp
 	b _08156A3C
 	.align 2, 0
 _08156A08: .4byte gTasks
-_08156A0C: .4byte sub_8156D80
+_08156A0C: .4byte DestroyExpTaskAndCompleteOnInactiveTextPrinter_PokedudeTmp
 _08156A10:
 	str r0, [sp, 0x4]
 	add r2, sp, 0x4
@@ -1175,16 +1175,16 @@ _08156A10:
 	ldr r3, [sp, 0x8]
 	lsls r0, r3, 2
 	adds r0, r1
-	ldr r1, _08156A34 @ =sub_8156EE8
+	ldr r1, _08156A34 @ =CompleteOnInactiveTextPrinter2_PokedudeTmp
 	str r1, [r0]
 	mov r0, r9
 	bl DestroyTask
 	b _08156A3E
 	.align 2, 0
 _08156A30: .4byte gBattlerControllerFuncs
-_08156A34: .4byte sub_8156EE8
+_08156A34: .4byte CompleteOnInactiveTextPrinter2_PokedudeTmp
 _08156A38:
-	ldr r0, _08156A50 @ =sub_8156A54
+	ldr r0, _08156A50 @ =Task_PrepareToGiveExpWithExpBar_PokedudeTmp
 _08156A3A:
 	mov r1, r8
 _08156A3C:
@@ -1199,11 +1199,11 @@ _08156A3E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08156A50: .4byte sub_8156A54
-	thumb_func_end sub_81568DC
+_08156A50: .4byte Task_PrepareToGiveExpWithExpBar_PokedudeTmp
+	thumb_func_end Task_GiveExpToMon_PokedudeTmp
 
-	thumb_func_start sub_8156A54
-sub_8156A54: @ 8156A54
+	thumb_func_start Task_PrepareToGiveExpWithExpBar_PokedudeTmp
+Task_PrepareToGiveExpWithExpBar_PokedudeTmp: @ 8156A54
 	push {r4-r6,lr}
 	mov r6, r10
 	mov r5, r9
@@ -1298,7 +1298,7 @@ _08156B14: .4byte gExperienceTables
 _08156B18: .4byte gBaseStats
 _08156B1C: .4byte gHealthboxSpriteIds
 _08156B20: .4byte sub_8156B24
-	thumb_func_end sub_8156A54
+	thumb_func_end Task_PrepareToGiveExpWithExpBar_PokedudeTmp
 
 	thumb_func_start sub_8156B24
 sub_8156B24: @ 8156B24
@@ -1415,7 +1415,7 @@ _08156B54:
 	movs r1, 0xB
 	bl BtlController_EmitTwoReturnValues
 	strb r5, [r4]
-	ldr r0, _08156C30 @ =sub_8156C68
+	ldr r0, _08156C30 @ =Task_LaunchLvlUpAnim_PokedudeTmp
 	str r0, [r6]
 	b _08156C50
 	.align 2, 0
@@ -1424,7 +1424,7 @@ _08156C20: .4byte gPlayerParty
 _08156C24: .4byte gExperienceTables
 _08156C28: .4byte gBaseStats
 _08156C2C: .4byte gActiveBattler
-_08156C30: .4byte sub_8156C68
+_08156C30: .4byte Task_LaunchLvlUpAnim_PokedudeTmp
 _08156C34:
 	str r0, [sp, 0x4]
 	add r2, sp, 0x4
@@ -1434,7 +1434,7 @@ _08156C34:
 	ldr r1, _08156C60 @ =gBattlerControllerFuncs
 	lsls r0, r7, 2
 	adds r0, r1
-	ldr r1, _08156C64 @ =sub_8156EE8
+	ldr r1, _08156C64 @ =CompleteOnInactiveTextPrinter2_PokedudeTmp
 	str r1, [r0]
 	mov r0, r8
 	bl DestroyTask
@@ -1449,11 +1449,11 @@ _08156C50:
 	bx r0
 	.align 2, 0
 _08156C60: .4byte gBattlerControllerFuncs
-_08156C64: .4byte sub_8156EE8
+_08156C64: .4byte CompleteOnInactiveTextPrinter2_PokedudeTmp
 	thumb_func_end sub_8156B24
 
-	thumb_func_start sub_8156C68
-sub_8156C68: @ 8156C68
+	thumb_func_start Task_LaunchLvlUpAnim_PokedudeTmp
+Task_LaunchLvlUpAnim_PokedudeTmp: @ 8156C68
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -1490,7 +1490,7 @@ _08156C9C:
 	adds r1, r5
 	lsls r1, 3
 	adds r1, r0
-	ldr r0, _08156CC4 @ =sub_8156CC8
+	ldr r0, _08156CC4 @ =Task_UpdateLvlInHealthbox_PokedudeTmp
 	str r0, [r1]
 	pop {r4-r6}
 	pop {r0}
@@ -1498,11 +1498,11 @@ _08156C9C:
 	.align 2, 0
 _08156CBC: .4byte gTasks
 _08156CC0: .4byte gBattlerPartyIndexes
-_08156CC4: .4byte sub_8156CC8
-	thumb_func_end sub_8156C68
+_08156CC4: .4byte Task_UpdateLvlInHealthbox_PokedudeTmp
+	thumb_func_end Task_LaunchLvlUpAnim_PokedudeTmp
 
-	thumb_func_start sub_8156CC8
-sub_8156CC8: @ 8156CC8
+	thumb_func_start Task_UpdateLvlInHealthbox_PokedudeTmp
+Task_UpdateLvlInHealthbox_PokedudeTmp: @ 8156CC8
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -1576,7 +1576,7 @@ _08156D5C:
 	adds r1, r6
 	lsls r1, 3
 	adds r1, r0
-	ldr r0, _08156D7C @ =sub_8156D80
+	ldr r0, _08156D7C @ =DestroyExpTaskAndCompleteOnInactiveTextPrinter_PokedudeTmp
 	str r0, [r1]
 _08156D6A:
 	pop {r4-r7}
@@ -1586,11 +1586,11 @@ _08156D6A:
 _08156D70: .4byte gHealthboxSpriteIds
 _08156D74: .4byte gPlayerParty
 _08156D78: .4byte gTasks
-_08156D7C: .4byte sub_8156D80
-	thumb_func_end sub_8156CC8
+_08156D7C: .4byte DestroyExpTaskAndCompleteOnInactiveTextPrinter_PokedudeTmp
+	thumb_func_end Task_UpdateLvlInHealthbox_PokedudeTmp
 
-	thumb_func_start sub_8156D80
-sub_8156D80: @ 8156D80
+	thumb_func_start DestroyExpTaskAndCompleteOnInactiveTextPrinter_PokedudeTmp
+DestroyExpTaskAndCompleteOnInactiveTextPrinter_PokedudeTmp: @ 8156D80
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	lsls r5, 24
@@ -1611,7 +1611,7 @@ sub_8156D80: @ 8156D80
 	ldr r1, _08156DC4 @ =gBattlerControllerFuncs
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _08156DC8 @ =sub_8156EE8
+	ldr r1, _08156DC8 @ =CompleteOnInactiveTextPrinter2_PokedudeTmp
 	str r1, [r0]
 	adds r0, r5, 0
 	bl DestroyTask
@@ -1622,8 +1622,8 @@ sub_8156D80: @ 8156D80
 _08156DBC: .4byte gTasks
 _08156DC0: .4byte gPlayerParty
 _08156DC4: .4byte gBattlerControllerFuncs
-_08156DC8: .4byte sub_8156EE8
-	thumb_func_end sub_8156D80
+_08156DC8: .4byte CompleteOnInactiveTextPrinter2_PokedudeTmp
+	thumb_func_end DestroyExpTaskAndCompleteOnInactiveTextPrinter_PokedudeTmp
 
 	thumb_func_start sub_8156DCC
 sub_8156DCC: @ 8156DCC
@@ -1667,7 +1667,7 @@ sub_8156DCC: @ 8156DCC
 	adds r0, r1
 	ldrb r0, [r0]
 	bl SetHealthboxSpriteInvisible
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	b _08156E66
 	.align 2, 0
 _08156E2C: .4byte gActiveBattler
@@ -1693,7 +1693,7 @@ _08156E3C:
 	adds r0, r3, r0
 	ldrb r0, [r0]
 	bl SetHealthboxSpriteInvisible
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 _08156E66:
 	pop {r4-r6}
 	pop {r0}
@@ -1704,8 +1704,8 @@ _08156E70: .4byte gBattlerSpriteIds
 _08156E74: .4byte gHealthboxSpriteIds
 	thumb_func_end sub_8156DCC
 
-	thumb_func_start sub_8156E78
-sub_8156E78: @ 8156E78
+	thumb_func_start CompleteOnHealthbarDone_PokedudeTmp
+CompleteOnHealthbarDone_PokedudeTmp: @ 8156E78
 	push {r4-r6,lr}
 	ldr r5, _08156EB8 @ =gActiveBattler
 	ldrb r0, [r5]
@@ -1748,7 +1748,7 @@ _08156EC0:
 	ldr r2, _08156EE4 @ =gPlayerParty
 	adds r0, r2
 	bl HandleLowHpMusicChange
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 _08156EDA:
 	pop {r4-r6}
 	pop {r0}
@@ -1756,24 +1756,24 @@ _08156EDA:
 	.align 2, 0
 _08156EE0: .4byte gBattlerPartyIndexes
 _08156EE4: .4byte gPlayerParty
-	thumb_func_end sub_8156E78
+	thumb_func_end CompleteOnHealthbarDone_PokedudeTmp
 
-	thumb_func_start sub_8156EE8
-sub_8156EE8: @ 8156EE8
+	thumb_func_start CompleteOnInactiveTextPrinter2_PokedudeTmp
+CompleteOnInactiveTextPrinter2_PokedudeTmp: @ 8156EE8
 	push {lr}
 	movs r0, 0
 	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	bne _08156EFA
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 _08156EFA:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8156EE8
+	thumb_func_end CompleteOnInactiveTextPrinter2_PokedudeTmp
 
-	thumb_func_start sub_8156F00
-sub_8156F00: @ 8156F00
+	thumb_func_start DoHitAnimBlinkSpriteEffect_PokedudeTmp
+DoHitAnimBlinkSpriteEffect_PokedudeTmp: @ 8156F00
 	push {r4,lr}
 	ldr r1, _08156F3C @ =gBattlerSpriteIds
 	ldr r0, _08156F40 @ =gActiveBattler
@@ -1800,7 +1800,7 @@ sub_8156F00: @ 8156F00
 	strb r0, [r2]
 	ldr r0, _08156F48 @ =gDoingBattleAnim
 	strb r3, [r0]
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	b _08156F76
 	.align 2, 0
 _08156F3C: .4byte gBattlerSpriteIds
@@ -1834,7 +1834,7 @@ _08156F76:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8156F00
+	thumb_func_end DoHitAnimBlinkSpriteEffect_PokedudeTmp
 
 	thumb_func_start sub_8156F7C
 sub_8156F7C: @ 8156F7C
@@ -1875,7 +1875,7 @@ sub_8156F7C: @ 8156F7C
 	adds r0, r1
 	ldrb r0, [r0]
 	bl SetHealthboxSpriteInvisible
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 _08156FD0:
 	pop {r4-r6}
 	pop {r0}
@@ -1888,8 +1888,8 @@ _08156FE4: .4byte gSprites
 _08156FE8: .4byte gHealthboxSpriteIds
 	thumb_func_end sub_8156F7C
 
-	thumb_func_start sub_8156FEC
-sub_8156FEC: @ 8156FEC
+	thumb_func_start CompleteOnBattlerSpriteCallbackDummy2_PokedudeTmp
+CompleteOnBattlerSpriteCallbackDummy2_PokedudeTmp: @ 8156FEC
 	push {lr}
 	ldr r2, _08157014 @ =gSprites
 	ldr r1, _08157018 @ =gBattlerSpriteIds
@@ -1906,7 +1906,7 @@ sub_8156FEC: @ 8156FEC
 	ldr r0, _08157020 @ =SpriteCallbackDummy
 	cmp r1, r0
 	bne _08157010
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 _08157010:
 	pop {r0}
 	bx r0
@@ -1915,10 +1915,10 @@ _08157014: .4byte gSprites
 _08157018: .4byte gBattlerSpriteIds
 _0815701C: .4byte gActiveBattler
 _08157020: .4byte SpriteCallbackDummy
-	thumb_func_end sub_8156FEC
+	thumb_func_end CompleteOnBattlerSpriteCallbackDummy2_PokedudeTmp
 
-	thumb_func_start sub_8157024
-sub_8157024: @ 8157024
+	thumb_func_start CompleteOnFinishedBattleAnimation_PokedudeTmp
+CompleteOnFinishedBattleAnimation_PokedudeTmp: @ 8157024
 	push {lr}
 	ldr r0, _0815704C @ =gBattleSpritesDataPtr
 	ldr r2, [r0]
@@ -1934,17 +1934,17 @@ sub_8157024: @ 8157024
 	ands r0, r1
 	cmp r0, 0
 	bne _08157046
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 _08157046:
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0815704C: .4byte gBattleSpritesDataPtr
 _08157050: .4byte gActiveBattler
-	thumb_func_end sub_8157024
+	thumb_func_end CompleteOnFinishedBattleAnimation_PokedudeTmp
 
-	thumb_func_start sub_8157054
-sub_8157054: @ 8157054
+	thumb_func_start CompleteOnFinishedStatusAnimation_PokedudeTmp
+CompleteOnFinishedStatusAnimation_PokedudeTmp: @ 8157054
 	push {lr}
 	ldr r0, _0815707C @ =gBattleSpritesDataPtr
 	ldr r2, [r0]
@@ -1960,17 +1960,17 @@ sub_8157054: @ 8157054
 	ands r0, r1
 	cmp r0, 0
 	bne _08157076
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 _08157076:
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0815707C: .4byte gBattleSpritesDataPtr
 _08157080: .4byte gActiveBattler
-	thumb_func_end sub_8157054
+	thumb_func_end CompleteOnFinishedStatusAnimation_PokedudeTmp
 
-	thumb_func_start PlayerPartnerBufferExecCompleted
-PlayerPartnerBufferExecCompleted: @ 8157084
+	thumb_func_start PokedudeBufferExecCompleted
+PokedudeBufferExecCompleted: @ 8157084
 	push {r4,lr}
 	sub sp, 0x4
 	ldr r1, _081570C4 @ =gBattlerControllerFuncs
@@ -1978,7 +1978,7 @@ PlayerPartnerBufferExecCompleted: @ 8157084
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _081570CC @ =sub_81560DC
+	ldr r1, _081570CC @ =PokedudeBufferRunCommand
 	str r1, [r0]
 	ldr r0, _081570D0 @ =gBattleTypeFlags
 	ldr r0, [r0]
@@ -2003,7 +2003,7 @@ PlayerPartnerBufferExecCompleted: @ 8157084
 	.align 2, 0
 _081570C4: .4byte gBattlerControllerFuncs
 _081570C8: .4byte gActiveBattler
-_081570CC: .4byte sub_81560DC
+_081570CC: .4byte PokedudeBufferRunCommand
 _081570D0: .4byte gBattleTypeFlags
 _081570D4: .4byte gBattleBufferA
 _081570D8:
@@ -2024,10 +2024,10 @@ _081570EA:
 	.align 2, 0
 _081570F4: .4byte gBattleControllerExecFlags
 _081570F8: .4byte gBitTable
-	thumb_func_end PlayerPartnerBufferExecCompleted
+	thumb_func_end PokedudeBufferExecCompleted
 
-	thumb_func_start CompleteOnFinishedStatusAnimation_7
-CompleteOnFinishedStatusAnimation_7: @ 81570FC
+	thumb_func_start CompleteOnFinishedStatusAnimation2_PokedudeTmp
+CompleteOnFinishedStatusAnimation2_PokedudeTmp: @ 81570FC
 	push {lr}
 	ldr r0, _08157124 @ =gBattleSpritesDataPtr
 	ldr r2, [r0]
@@ -2043,17 +2043,17 @@ CompleteOnFinishedStatusAnimation_7: @ 81570FC
 	ands r0, r1
 	cmp r0, 0
 	bne _0815711E
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 _0815711E:
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08157124: .4byte gBattleSpritesDataPtr
 _08157128: .4byte gActiveBattler
-	thumb_func_end CompleteOnFinishedStatusAnimation_7
+	thumb_func_end CompleteOnFinishedStatusAnimation2_PokedudeTmp
 
-	thumb_func_start sub_815712C
-sub_815712C: @ 815712C
+	thumb_func_start PokedudeHandleGetMonData
+PokedudeHandleGetMonData: @ 815712C
 	push {r4-r6,lr}
 	sub sp, 0x100
 	movs r6, 0
@@ -2071,7 +2071,7 @@ sub_815712C: @ 815712C
 	adds r1, r0
 	ldrb r0, [r1]
 	mov r1, sp
-	bl sub_81571A0
+	bl CopyPokedudeMonData
 	adds r6, r0, 0
 	b _08157186
 	.align 2, 0
@@ -2090,7 +2090,7 @@ _08157168:
 	lsrs r0, 24
 	mov r2, sp
 	adds r1, r2, r6
-	bl sub_81571A0
+	bl CopyPokedudeMonData
 	adds r6, r0
 _0815717E:
 	lsrs r4, 1
@@ -2103,15 +2103,15 @@ _08157186:
 	movs r0, 0x1
 	mov r2, sp
 	bl BtlController_EmitDataTransfer
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	add sp, 0x100
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_815712C
+	thumb_func_end PokedudeHandleGetMonData
 
-	thumb_func_start sub_81571A0
-sub_81571A0: @ 81571A0
+	thumb_func_start CopyPokedudeMonData
+CopyPokedudeMonData: @ 81571A0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2793,18 +2793,18 @@ _0815773C:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_81571A0
+	thumb_func_end CopyPokedudeMonData
 
-	thumb_func_start sub_8157750
-sub_8157750: @ 8157750
+	thumb_func_start PokedudeHandleGetRawMonData
+PokedudeHandleGetRawMonData: @ 8157750
 	push {lr}
 	bl PlayerHandleGetRawMonData
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8157750
+	thumb_func_end PokedudeHandleGetRawMonData
 
-	thumb_func_start sub_815775C
-sub_815775C: @ 815775C
+	thumb_func_start PokedudeHandleSetMonData
+PokedudeHandleSetMonData: @ 815775C
 	push {r4,r5,lr}
 	ldr r1, _08157780 @ =gBattleBufferA
 	ldr r0, _08157784 @ =gActiveBattler
@@ -2819,7 +2819,7 @@ sub_815775C: @ 815775C
 	lsls r1, r2, 1
 	adds r1, r0
 	ldrb r0, [r1]
-	bl sub_81577B4
+	bl SetPokedudeMonData
 	b _081577AA
 	.align 2, 0
 _08157780: .4byte gBattleBufferA
@@ -2834,7 +2834,7 @@ _08157790:
 	cmp r0, 0
 	beq _0815779E
 	adds r0, r5, 0
-	bl sub_81577B4
+	bl SetPokedudeMonData
 _0815779E:
 	lsrs r4, 1
 	adds r0, r5, 0x1
@@ -2843,14 +2843,14 @@ _0815779E:
 	cmp r5, 0x5
 	bls _08157790
 _081577AA:
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_815775C
+	thumb_func_end PokedudeHandleSetMonData
 
-	thumb_func_start sub_81577B4
-sub_81577B4: @ 81577B4
+	thumb_func_start SetPokedudeMonData
+SetPokedudeMonData: @ 81577B4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -3879,18 +3879,18 @@ _081580C4: .4byte gActiveBattler
 _081580C8: .4byte gBattleBufferA + 3
 _081580CC: .4byte gBattlerPartyIndexes
 _081580D0: .4byte gPlayerParty
-	thumb_func_end sub_81577B4
+	thumb_func_end SetPokedudeMonData
 
-	thumb_func_start sub_81580D4
-sub_81580D4: @ 81580D4
+	thumb_func_start PokedudeHandleSetRawMonData
+PokedudeHandleSetRawMonData: @ 81580D4
 	push {lr}
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81580D4
+	thumb_func_end PokedudeHandleSetRawMonData
 
-	thumb_func_start sub_81580E0
-sub_81580E0: @ 81580E0
+	thumb_func_start PokedudeHandleLoadMonSprite
+PokedudeHandleLoadMonSprite: @ 81580E0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -4025,7 +4025,7 @@ sub_81580E0: @ 81580E0
 	adds r0, r1
 	ldr r1, _08158238 @ =sub_8156184
 	str r1, [r0]
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	pop {r3-r5}
 	mov r8, r3
 	mov r9, r4
@@ -4044,10 +4044,10 @@ _0815822C: .4byte 0x0000ff10
 _08158230: .4byte gBattleMonForms
 _08158234: .4byte gBattlerControllerFuncs
 _08158238: .4byte sub_8156184
-	thumb_func_end sub_81580E0
+	thumb_func_end PokedudeHandleLoadMonSprite
 
-	thumb_func_start sub_815823C
-sub_815823C: @ 815823C
+	thumb_func_start PokedudeHandleSwitchInAnim
+PokedudeHandleSwitchInAnim: @ 815823C
 	push {r4,r5,lr}
 	ldr r5, _081582A0 @ =gActiveBattler
 	ldrb r0, [r5]
@@ -4104,10 +4104,10 @@ _081582B0: .4byte gActionSelectionCursor
 _081582B4: .4byte gMoveSelectionCursor
 _081582B8: .4byte gBattlerControllerFuncs
 _081582BC: .4byte sub_81563A8
-	thumb_func_end sub_815823C
+	thumb_func_end PokedudeHandleSwitchInAnim
 
-	thumb_func_start sub_81582C0
-sub_81582C0: @ 81582C0
+	thumb_func_start PokedudeHandleReturnMonToBall
+PokedudeHandleReturnMonToBall: @ 81582C0
 	push {r4-r6,lr}
 	ldr r0, _081582EC @ =gBattleBufferA
 	ldr r6, _081582F0 @ =gActiveBattler
@@ -4157,7 +4157,7 @@ _081582FC:
 	adds r0, r1
 	ldrb r0, [r0]
 	bl SetHealthboxSpriteInvisible
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 _08158332:
 	pop {r4-r6}
 	pop {r0}
@@ -4166,10 +4166,10 @@ _08158332:
 _08158338: .4byte gBattlerSpriteIds
 _0815833C: .4byte gSprites
 _08158340: .4byte gHealthboxSpriteIds
-	thumb_func_end sub_81582C0
+	thumb_func_end PokedudeHandleReturnMonToBall
 
-	thumb_func_start sub_8158344
-sub_8158344: @ 8158344
+	thumb_func_start PokedudeHandleDrawTrainerPic
+PokedudeHandleDrawTrainerPic: @ 8158344
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -4377,7 +4377,7 @@ _081584E2:
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _08158540 @ =sub_815614C
+	ldr r1, _08158540 @ =CompleteOnBattlerSpriteCallbackDummy_PokedudeTmp
 	str r1, [r0]
 	pop {r3}
 	mov r8, r3
@@ -4397,11 +4397,11 @@ _08158530: .4byte 0xfffffc00
 _08158534: .4byte sub_8033EEC
 _08158538: .4byte gBattlerControllerFuncs
 _0815853C: .4byte gActiveBattler
-_08158540: .4byte sub_815614C
-	thumb_func_end sub_8158344
+_08158540: .4byte CompleteOnBattlerSpriteCallbackDummy_PokedudeTmp
+	thumb_func_end PokedudeHandleDrawTrainerPic
 
-	thumb_func_start sub_8158544
-sub_8158544: @ 8158544
+	thumb_func_start PokedudeHandleTrainerSlide
+PokedudeHandleTrainerSlide: @ 8158544
 	push {r4-r6,lr}
 	ldr r4, _081585EC @ =gActiveBattler
 	ldrb r1, [r4]
@@ -4477,7 +4477,7 @@ sub_8158544: @ 8158544
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _0815860C @ =sub_8156FEC
+	ldr r1, _0815860C @ =CompleteOnBattlerSpriteCallbackDummy2_PokedudeTmp
 	str r1, [r0]
 	pop {r4-r6}
 	pop {r0}
@@ -4491,19 +4491,19 @@ _081585FC: .4byte gSprites
 _08158600: .4byte 0x0000ffa0
 _08158604: .4byte sub_8033EEC
 _08158608: .4byte gBattlerControllerFuncs
-_0815860C: .4byte sub_8156FEC
-	thumb_func_end sub_8158544
+_0815860C: .4byte CompleteOnBattlerSpriteCallbackDummy2_PokedudeTmp
+	thumb_func_end PokedudeHandleTrainerSlide
 
-	thumb_func_start sub_8158610
-sub_8158610: @ 8158610
+	thumb_func_start PokedudeHandleTrainerSlideBack
+PokedudeHandleTrainerSlideBack: @ 8158610
 	push {lr}
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8158610
+	thumb_func_end PokedudeHandleTrainerSlideBack
 
-	thumb_func_start sub_815861C
-sub_815861C: @ 815861C
+	thumb_func_start PokedudeHandleFaintAnimation
+PokedudeHandleFaintAnimation: @ 815861C
 	push {r4-r6,lr}
 	ldr r6, _08158668 @ =gBattleSpritesDataPtr
 	ldr r4, [r6]
@@ -4643,18 +4643,18 @@ _08158738: .4byte SpriteCB_FaintOpponentMon
 _0815873C: .4byte gBattlerControllerFuncs
 _08158740: .4byte gActiveBattler
 _08158744: .4byte sub_8156DCC
-	thumb_func_end sub_815861C
+	thumb_func_end PokedudeHandleFaintAnimation
 
-	thumb_func_start sub_8158748
-sub_8158748: @ 8158748
+	thumb_func_start PokedudeHandlePaletteFade
+PokedudeHandlePaletteFade: @ 8158748
 	push {lr}
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8158748
+	thumb_func_end PokedudeHandlePaletteFade
 
-	thumb_func_start sub_8158754
-sub_8158754: @ 8158754
+	thumb_func_start PokedudeHandleSuccessBallThrowAnim
+PokedudeHandleSuccessBallThrowAnim: @ 8158754
 	push {r4,r5,lr}
 	ldr r0, _08158794 @ =gBattleSpritesDataPtr
 	ldr r0, [r0]
@@ -4679,7 +4679,7 @@ sub_8158754: @ 8158754
 	ldrb r0, [r5]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _081587A4 @ =sub_8156484
+	ldr r1, _081587A4 @ =CompleteOnSpecialAnimDone_PokedudeTmp
 	str r1, [r0]
 	pop {r4,r5}
 	pop {r0}
@@ -4689,11 +4689,11 @@ _08158794: .4byte gBattleSpritesDataPtr
 _08158798: .4byte gDoingBattleAnim
 _0815879C: .4byte gActiveBattler
 _081587A0: .4byte gBattlerControllerFuncs
-_081587A4: .4byte sub_8156484
-	thumb_func_end sub_8158754
+_081587A4: .4byte CompleteOnSpecialAnimDone_PokedudeTmp
+	thumb_func_end PokedudeHandleSuccessBallThrowAnim
 
-	thumb_func_start sub_81587A8
-sub_81587A8: @ 81587A8
+	thumb_func_start PokedudeHandleBallThrowAnim
+PokedudeHandleBallThrowAnim: @ 81587A8
 	push {r4,r5,lr}
 	ldr r1, _081587F0 @ =gBattleBufferA
 	ldr r5, _081587F4 @ =gActiveBattler
@@ -4723,7 +4723,7 @@ sub_81587A8: @ 81587A8
 	ldrb r0, [r5]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _08158804 @ =sub_8156484
+	ldr r1, _08158804 @ =CompleteOnSpecialAnimDone_PokedudeTmp
 	str r1, [r0]
 	pop {r4,r5}
 	pop {r0}
@@ -4734,19 +4734,19 @@ _081587F4: .4byte gActiveBattler
 _081587F8: .4byte gBattleSpritesDataPtr
 _081587FC: .4byte gDoingBattleAnim
 _08158800: .4byte gBattlerControllerFuncs
-_08158804: .4byte sub_8156484
-	thumb_func_end sub_81587A8
+_08158804: .4byte CompleteOnSpecialAnimDone_PokedudeTmp
+	thumb_func_end PokedudeHandleBallThrowAnim
 
-	thumb_func_start sub_8158808
-sub_8158808: @ 8158808
+	thumb_func_start PokedudeHandlePause
+PokedudeHandlePause: @ 8158808
 	push {lr}
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8158808
+	thumb_func_end PokedudeHandlePause
 
-	thumb_func_start sub_8158814
-sub_8158814: @ 8158814
+	thumb_func_start PokedudeHandleMoveAnimation
+PokedudeHandleMoveAnimation: @ 8158814
 	push {r4-r6,lr}
 	ldr r0, _081588E8 @ =gBattleBufferA
 	mov r12, r0
@@ -4849,7 +4849,7 @@ sub_8158814: @ 8158814
 	lsrs r3, r0, 24
 	cmp r3, 0
 	beq _0815890C
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	b _0815892A
 	.align 2, 0
 _081588E8: .4byte gBattleBufferA
@@ -4875,7 +4875,7 @@ _0815890C:
 	ldrb r0, [r6]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _08158938 @ =sub_815893C
+	ldr r1, _08158938 @ =PokedudeDoMoveAnimation
 	str r1, [r0]
 _0815892A:
 	pop {r4-r6}
@@ -4884,11 +4884,11 @@ _0815892A:
 	.align 2, 0
 _08158930: .4byte gBattleSpritesDataPtr
 _08158934: .4byte gBattlerControllerFuncs
-_08158938: .4byte sub_815893C
-	thumb_func_end sub_8158814
+_08158938: .4byte PokedudeDoMoveAnimation
+	thumb_func_end PokedudeHandleMoveAnimation
 
-	thumb_func_start sub_815893C
-sub_815893C: @ 815893C
+	thumb_func_start PokedudeDoMoveAnimation
+PokedudeDoMoveAnimation: @ 815893C
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -5042,7 +5042,7 @@ _08158A40:
 	lsls r0, 2
 	adds r0, r2
 	strb r4, [r0, 0x4]
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 _08158A7C:
 	pop {r3,r4}
 	mov r8, r3
@@ -5050,10 +5050,10 @@ _08158A7C:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_815893C
+	thumb_func_end PokedudeDoMoveAnimation
 
-	thumb_func_start sub_8158A88
-sub_8158A88: @ 8158A88
+	thumb_func_start PokedudeHandlePrintString
+PokedudeHandlePrintString: @ 8158A88
 	push {r4,lr}
 	ldr r0, _08158ABC @ =gBattle_BG0_X
 	movs r1, 0
@@ -5092,7 +5092,7 @@ _08158AD8:
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _08158AF8 @ =sub_815623C
+	ldr r1, _08158AF8 @ =CompleteOnInactiveTextPrinter_PokedudeTmp
 	str r1, [r0]
 	pop {r4}
 	pop {r0}
@@ -5101,11 +5101,11 @@ _08158AD8:
 _08158AEC: .4byte gDisplayedStringBattle
 _08158AF0: .4byte gBattlerControllerFuncs
 _08158AF4: .4byte gActiveBattler
-_08158AF8: .4byte sub_815623C
-	thumb_func_end sub_8158A88
+_08158AF8: .4byte CompleteOnInactiveTextPrinter_PokedudeTmp
+	thumb_func_end PokedudeHandlePrintString
 
-	thumb_func_start sub_8158AFC
-sub_8158AFC: @ 8158AFC
+	thumb_func_start PokedudeHandlePrintSelectionString
+PokedudeHandlePrintSelectionString: @ 8158AFC
 	push {lr}
 	ldr r0, _08158B14 @ =gActiveBattler
 	ldrb r0, [r0]
@@ -5113,16 +5113,16 @@ sub_8158AFC: @ 8158AFC
 	lsls r0, 24
 	cmp r0, 0
 	bne _08158B18
-	bl sub_8158A88
+	bl PokedudeHandlePrintString
 	b _08158B1C
 	.align 2, 0
 _08158B14: .4byte gActiveBattler
 _08158B18:
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 _08158B1C:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8158AFC
+	thumb_func_end PokedudeHandlePrintSelectionString
 
 	thumb_func_start sub_8158B20
 sub_8158B20: @ 8158B20
@@ -5155,8 +5155,8 @@ _08158B58: .4byte gActiveBattler
 _08158B5C: .4byte sub_8156140
 	thumb_func_end sub_8158B20
 
-	thumb_func_start sub_8158B60
-sub_8158B60: @ 8158B60
+	thumb_func_start PokedudeHandleChooseAction
+PokedudeHandleChooseAction: @ 8158B60
 	push {r4,lr}
 	ldr r4, _08158BBC @ =gActiveBattler
 	ldrb r0, [r4]
@@ -5220,15 +5220,15 @@ _08158BE8:
 	.align 2, 0
 _08158BF0: .4byte gBattlerControllerFuncs
 _08158BF4: .4byte sub_8156140
-	thumb_func_end sub_8158B60
+	thumb_func_end PokedudeHandleChooseAction
 
-	thumb_func_start sub_8158BF8
-sub_8158BF8: @ 8158BF8
+	thumb_func_start PokedudeHandleUnknownYesNoBox
+PokedudeHandleUnknownYesNoBox: @ 8158BF8
 	push {lr}
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8158BF8
+	thumb_func_end PokedudeHandleUnknownYesNoBox
 
 	thumb_func_start sub_8158C04
 sub_8158C04: @ 8158C04
@@ -5263,8 +5263,8 @@ _08158C40: .4byte gActiveBattler
 _08158C44: .4byte sub_81564E4
 	thumb_func_end sub_8158C04
 
-	thumb_func_start sub_8158C48
-sub_8158C48: @ 8158C48
+	thumb_func_start PokedudeHandleChooseMove
+PokedudeHandleChooseMove: @ 8158C48
 	push {r4,lr}
 	ldr r4, _08158C68 @ =gActiveBattler
 	ldrb r0, [r4]
@@ -5297,10 +5297,10 @@ _08158C7E:
 	.align 2, 0
 _08158C88: .4byte gBattlerControllerFuncs
 _08158C8C: .4byte sub_81564E4
-	thumb_func_end sub_8158C48
+	thumb_func_end PokedudeHandleChooseMove
 
-	thumb_func_start sub_8158C90
-sub_8158C90: @ 8158C90
+	thumb_func_start PokedudeHandleChooseItem
+PokedudeHandleChooseItem: @ 8158C90
 	push {r4,r5,lr}
 	sub sp, 0x4
 	movs r0, 0x1
@@ -5315,7 +5315,7 @@ sub_8158C90: @ 8158C90
 	ldrb r0, [r2]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _08158CE4 @ =sub_8156594
+	ldr r1, _08158CE4 @ =OpenBagAndChooseItem_PokedudeTmp
 	str r1, [r0]
 	ldr r1, _08158CE8 @ =gBattlerInMenuId
 	ldrb r0, [r2]
@@ -5342,14 +5342,14 @@ _08158CBE:
 	.align 2, 0
 _08158CDC: .4byte gBattlerControllerFuncs
 _08158CE0: .4byte gActiveBattler
-_08158CE4: .4byte sub_8156594
+_08158CE4: .4byte OpenBagAndChooseItem_PokedudeTmp
 _08158CE8: .4byte gBattlerInMenuId
 _08158CEC: .4byte gUnknown_203B0DC
 _08158CF0: .4byte gBattleBufferA
-	thumb_func_end sub_8158C90
+	thumb_func_end PokedudeHandleChooseItem
 
-	thumb_func_start sub_8158CF4
-sub_8158CF4: @ 8158CF4
+	thumb_func_start PokedudeHandleChoosePokemon
+PokedudeHandleChoosePokemon: @ 8158CF4
 	push {r4-r6,lr}
 	sub sp, 0x4
 	ldr r0, _08158DA4 @ =TaskDummy
@@ -5427,7 +5427,7 @@ _08158D60:
 	ldrb r0, [r2]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _08158DC4 @ =sub_81564F0
+	ldr r1, _08158DC4 @ =OpenPartyMenuToChooseMon_PokedudeTmp
 	str r1, [r0]
 	ldr r1, _08158DC8 @ =gBattlerInMenuId
 	ldrb r0, [r2]
@@ -5445,20 +5445,20 @@ _08158DB4: .4byte gBattleBufferA
 _08158DB8: .4byte gBattleStruct
 _08158DBC: .4byte gUnknown_203B0DC
 _08158DC0: .4byte gBattlerControllerFuncs
-_08158DC4: .4byte sub_81564F0
+_08158DC4: .4byte OpenPartyMenuToChooseMon_PokedudeTmp
 _08158DC8: .4byte gBattlerInMenuId
-	thumb_func_end sub_8158CF4
+	thumb_func_end PokedudeHandleChoosePokemon
 
-	thumb_func_start sub_8158DCC
-sub_8158DCC: @ 8158DCC
+	thumb_func_start PokedudeHandleCmd23
+PokedudeHandleCmd23: @ 8158DCC
 	push {lr}
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8158DCC
+	thumb_func_end PokedudeHandleCmd23
 
-	thumb_func_start sub_8158DD8
-sub_8158DD8: @ 8158DD8
+	thumb_func_start PokedudeHandleHealthBarUpdate
+PokedudeHandleHealthBarUpdate: @ 8158DD8
 	push {r4-r7,lr}
 	sub sp, 0x4
 	ldr r4, _08158DFC @ =gActiveBattler
@@ -5557,7 +5557,7 @@ _08158EA8:
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _08158ECC @ =sub_8156E78
+	ldr r1, _08158ECC @ =CompleteOnHealthbarDone_PokedudeTmp
 	str r1, [r0]
 	add sp, 0x4
 	pop {r4-r7}
@@ -5567,11 +5567,11 @@ _08158EA8:
 _08158EC0: .4byte gHealthboxSpriteIds
 _08158EC4: .4byte gBattlerControllerFuncs
 _08158EC8: .4byte gActiveBattler
-_08158ECC: .4byte sub_8156E78
-	thumb_func_end sub_8158DD8
+_08158ECC: .4byte CompleteOnHealthbarDone_PokedudeTmp
+	thumb_func_end PokedudeHandleHealthBarUpdate
 
-	thumb_func_start sub_8158ED0
-sub_8158ED0: @ 8158ED0
+	thumb_func_start PokedudeHandleExpUpdate
+PokedudeHandleExpUpdate: @ 8158ED0
 	push {r4-r7,lr}
 	ldr r5, _08158EFC @ =gBattleBufferA
 	ldr r6, _08158F00 @ =gActiveBattler
@@ -5590,7 +5590,7 @@ sub_8158ED0: @ 8158ED0
 	bl GetMonData
 	cmp r0, 0x63
 	bls _08158F08
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	b _08158F54
 	.align 2, 0
 _08158EFC: .4byte gBattleBufferA
@@ -5612,7 +5612,7 @@ _08158F08:
 	ldrb r0, [r1]
 	lsls r0, 8
 	orrs r4, r0
-	ldr r0, _08158F5C @ =sub_81568DC
+	ldr r0, _08158F5C @ =Task_GiveExpToMon_PokedudeTmp
 	movs r1, 0xA
 	bl CreateTask
 	lsls r0, 24
@@ -5637,14 +5637,14 @@ _08158F54:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08158F5C: .4byte sub_81568DC
+_08158F5C: .4byte Task_GiveExpToMon_PokedudeTmp
 _08158F60: .4byte gTasks
 _08158F64: .4byte gBattlerControllerFuncs
 _08158F68: .4byte nullsub_99
-	thumb_func_end sub_8158ED0
+	thumb_func_end PokedudeHandleExpUpdate
 
-	thumb_func_start sub_8158F6C
-sub_8158F6C: @ 8158F6C
+	thumb_func_start PokedudeHandleStatusIconUpdate
+PokedudeHandleStatusIconUpdate: @ 8158F6C
 	push {r4,lr}
 	ldr r4, _08158F9C @ =gActiveBattler
 	ldrb r0, [r4]
@@ -5706,7 +5706,7 @@ _08158FB8:
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _08159010 @ =sub_8157054
+	ldr r1, _08159010 @ =CompleteOnFinishedStatusAnimation_PokedudeTmp
 	str r1, [r0]
 _08158FF2:
 	pop {r4}
@@ -5719,11 +5719,11 @@ _08159000: .4byte gHealthboxSpriteIds
 _08159004: .4byte gActiveBattler
 _08159008: .4byte gBattleSpritesDataPtr
 _0815900C: .4byte gBattlerControllerFuncs
-_08159010: .4byte sub_8157054
-	thumb_func_end sub_8158F6C
+_08159010: .4byte CompleteOnFinishedStatusAnimation_PokedudeTmp
+	thumb_func_end PokedudeHandleStatusIconUpdate
 
-	thumb_func_start sub_8159014
-sub_8159014: @ 8159014
+	thumb_func_start PokedudeHandleStatusAnimation
+PokedudeHandleStatusAnimation: @ 8159014
 	push {r4,r5,lr}
 	ldr r5, _0815906C @ =gActiveBattler
 	ldrb r0, [r5]
@@ -5760,7 +5760,7 @@ sub_8159014: @ 8159014
 	ldrb r0, [r5]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _08159078 @ =sub_8157054
+	ldr r1, _08159078 @ =CompleteOnFinishedStatusAnimation_PokedudeTmp
 	str r1, [r0]
 _08159064:
 	pop {r4,r5}
@@ -5770,11 +5770,11 @@ _08159064:
 _0815906C: .4byte gActiveBattler
 _08159070: .4byte gBattleBufferA
 _08159074: .4byte gBattlerControllerFuncs
-_08159078: .4byte sub_8157054
-	thumb_func_end sub_8159014
+_08159078: .4byte CompleteOnFinishedStatusAnimation_PokedudeTmp
+	thumb_func_end PokedudeHandleStatusAnimation
 
-	thumb_func_start sub_815907C
-sub_815907C: @ 815907C
+	thumb_func_start PokedudeHandleStatusXor
+PokedudeHandleStatusXor: @ 815907C
 	push {r4,lr}
 	sub sp, 0x4
 	ldr r4, _081590A0 @ =gActiveBattler
@@ -5824,7 +5824,7 @@ _081590BC:
 	movs r1, 0x37
 	mov r2, sp
 	bl SetMonData
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
@@ -5834,106 +5834,106 @@ _081590F0: .4byte gBattlerPartyIndexes
 _081590F4: .4byte gEnemyParty
 _081590F8: .4byte gBattleBufferA
 _081590FC: .4byte gActiveBattler
-	thumb_func_end sub_815907C
+	thumb_func_end PokedudeHandleStatusXor
 
-	thumb_func_start sub_8159100
-sub_8159100: @ 8159100
+	thumb_func_start PokedudeHandleDataTransfer
+PokedudeHandleDataTransfer: @ 8159100
 	push {lr}
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8159100
+	thumb_func_end PokedudeHandleDataTransfer
 
-	thumb_func_start sub_815910C
-sub_815910C: @ 815910C
+	thumb_func_start PokedudeHandleDMA3Transfer
+PokedudeHandleDMA3Transfer: @ 815910C
 	push {lr}
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_815910C
+	thumb_func_end PokedudeHandleDMA3Transfer
 
-	thumb_func_start sub_8159118
-sub_8159118: @ 8159118
+	thumb_func_start PokedudeHandlePlayBGM
+PokedudeHandlePlayBGM: @ 8159118
 	push {lr}
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8159118
+	thumb_func_end PokedudeHandlePlayBGM
 
-	thumb_func_start sub_8159124
-sub_8159124: @ 8159124
+	thumb_func_start PokedudeHandleCmd32
+PokedudeHandleCmd32: @ 8159124
 	push {lr}
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8159124
+	thumb_func_end PokedudeHandleCmd32
 
-	thumb_func_start sub_8159130
-sub_8159130: @ 8159130
+	thumb_func_start PokedudeHandleTwoReturnValues
+PokedudeHandleTwoReturnValues: @ 8159130
 	push {lr}
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8159130
+	thumb_func_end PokedudeHandleTwoReturnValues
 
-	thumb_func_start sub_815913C
-sub_815913C: @ 815913C
+	thumb_func_start PokedudeHandleChosenMonReturnValue
+PokedudeHandleChosenMonReturnValue: @ 815913C
 	push {lr}
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_815913C
+	thumb_func_end PokedudeHandleChosenMonReturnValue
 
-	thumb_func_start sub_8159148
-sub_8159148: @ 8159148
+	thumb_func_start PokedudeHandleOneReturnValue
+PokedudeHandleOneReturnValue: @ 8159148
 	push {lr}
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8159148
+	thumb_func_end PokedudeHandleOneReturnValue
 
-	thumb_func_start sub_8159154
-sub_8159154: @ 8159154
+	thumb_func_start PokedudeHandleOneReturnValue_Duplicate
+PokedudeHandleOneReturnValue_Duplicate: @ 8159154
 	push {lr}
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8159154
+	thumb_func_end PokedudeHandleOneReturnValue_Duplicate
 
-	thumb_func_start sub_8159160
-sub_8159160: @ 8159160
+	thumb_func_start PokedudeHandleCmd37
+PokedudeHandleCmd37: @ 8159160
 	push {lr}
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8159160
+	thumb_func_end PokedudeHandleCmd37
 
-	thumb_func_start sub_815916C
-sub_815916C: @ 815916C
+	thumb_func_start PokedudeHandleCmd38
+PokedudeHandleCmd38: @ 815916C
 	push {lr}
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_815916C
+	thumb_func_end PokedudeHandleCmd38
 
-	thumb_func_start sub_8159178
-sub_8159178: @ 8159178
+	thumb_func_start PokedudeHandleCmd39
+PokedudeHandleCmd39: @ 8159178
 	push {lr}
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8159178
+	thumb_func_end PokedudeHandleCmd39
 
-	thumb_func_start sub_8159184
-sub_8159184: @ 8159184
+	thumb_func_start PokedudeHandleCmd40
+PokedudeHandleCmd40: @ 8159184
 	push {lr}
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8159184
+	thumb_func_end PokedudeHandleCmd40
 
-	thumb_func_start sub_8159190
-sub_8159190: @ 8159190
+	thumb_func_start PokedudeHandleHitAnimation
+PokedudeHandleHitAnimation: @ 8159190
 	push {r4,lr}
 	ldr r3, _081591B8 @ =gSprites
 	ldr r2, _081591BC @ =gBattlerSpriteIds
@@ -5950,7 +5950,7 @@ sub_8159190: @ 8159190
 	lsls r0, 29
 	cmp r0, 0
 	bge _081591C4
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	b _081591EE
 	.align 2, 0
 _081591B8: .4byte gSprites
@@ -5975,7 +5975,7 @@ _081591C4:
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _081591FC @ =sub_8156F00
+	ldr r1, _081591FC @ =DoHitAnimBlinkSpriteEffect_PokedudeTmp
 	str r1, [r0]
 _081591EE:
 	pop {r4}
@@ -5984,19 +5984,19 @@ _081591EE:
 	.align 2, 0
 _081591F4: .4byte gDoingBattleAnim
 _081591F8: .4byte gBattlerControllerFuncs
-_081591FC: .4byte sub_8156F00
-	thumb_func_end sub_8159190
+_081591FC: .4byte DoHitAnimBlinkSpriteEffect_PokedudeTmp
+	thumb_func_end PokedudeHandleHitAnimation
 
-	thumb_func_start sub_8159200
-sub_8159200: @ 8159200
+	thumb_func_start PokedudeHandleCmd42
+PokedudeHandleCmd42: @ 8159200
 	push {lr}
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8159200
+	thumb_func_end PokedudeHandleCmd42
 
-	thumb_func_start sub_815920C
-sub_815920C: @ 815920C
+	thumb_func_start PokedudeHandlePlaySE
+PokedudeHandlePlaySE: @ 815920C
 	push {lr}
 	ldr r2, _08159234 @ =gBattleBufferA
 	ldr r0, _08159238 @ =gActiveBattler
@@ -6011,16 +6011,16 @@ sub_815920C: @ 815920C
 	lsls r1, 8
 	orrs r0, r1
 	bl PlaySE
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08159234: .4byte gBattleBufferA
 _08159238: .4byte gActiveBattler
-	thumb_func_end sub_815920C
+	thumb_func_end PokedudeHandlePlaySE
 
-	thumb_func_start sub_815923C
-sub_815923C: @ 815923C
+	thumb_func_start PokedudeHandlePlayFanfare
+PokedudeHandlePlayFanfare: @ 815923C
 	push {lr}
 	ldr r2, _08159264 @ =gBattleBufferA
 	ldr r0, _08159268 @ =gActiveBattler
@@ -6035,16 +6035,16 @@ sub_815923C: @ 815923C
 	lsls r1, 8
 	orrs r0, r1
 	bl PlayFanfare
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08159264: .4byte gBattleBufferA
 _08159268: .4byte gActiveBattler
-	thumb_func_end sub_815923C
+	thumb_func_end PokedudeHandlePlayFanfare
 
-	thumb_func_start sub_815926C
-sub_815926C: @ 815926C
+	thumb_func_start PokedudeHandleFaintingCry
+PokedudeHandleFaintingCry: @ 815926C
 	push {r4,lr}
 	ldr r4, _08159290 @ =gActiveBattler
 	ldrb r0, [r4]
@@ -6082,17 +6082,17 @@ _081592AC:
 	lsrs r0, 16
 	movs r1, 0x19
 	bl PlayCry1
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _081592C8: .4byte gBattlerPartyIndexes
 _081592CC: .4byte gEnemyParty
-	thumb_func_end sub_815926C
+	thumb_func_end PokedudeHandleFaintingCry
 
-	thumb_func_start sub_81592D0
-sub_81592D0: @ 81592D0
+	thumb_func_start PokedudeHandleIntroSlide
+PokedudeHandleIntroSlide: @ 81592D0
 	push {lr}
 	ldr r1, _081592F8 @ =gBattleBufferA
 	ldr r0, _081592FC @ =gActiveBattler
@@ -6107,17 +6107,17 @@ sub_81592D0: @ 81592D0
 	movs r1, 0x1
 	orrs r0, r1
 	strh r0, [r2]
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	pop {r0}
 	bx r0
 	.align 2, 0
 _081592F8: .4byte gBattleBufferA
 _081592FC: .4byte gActiveBattler
 _08159300: .4byte gIntroSlideFlags
-	thumb_func_end sub_81592D0
+	thumb_func_end PokedudeHandleIntroSlide
 
-	thumb_func_start sub_8159304
-sub_8159304: @ 8159304
+	thumb_func_start PokedudeHandleIntroTrainerBallThrow
+PokedudeHandleIntroTrainerBallThrow: @ 8159304
 	push {r4-r7,lr}
 	ldr r6, _0815943C @ =gBattlerSpriteIds
 	ldr r7, _08159440 @ =gActiveBattler
@@ -6284,7 +6284,7 @@ _08159468: .4byte gBattlerStatusSummaryTaskId
 _0815946C: .4byte Task_HidePartyStatusSummary
 _08159470: .4byte gBattlerControllerFuncs
 _08159474: .4byte nullsub_99
-	thumb_func_end sub_8159304
+	thumb_func_end PokedudeHandleIntroTrainerBallThrow
 
 	thumb_func_start sub_8159478
 sub_8159478: @ 8159478
@@ -6514,8 +6514,8 @@ _08159658: .4byte gBattlerControllerFuncs
 _0815965C: .4byte sub_8156624
 	thumb_func_end sub_81595EC
 
-	thumb_func_start sub_8159660
-sub_8159660: @ 8159660
+	thumb_func_start PokedudeHandleDrawPartyStatusSummary
+PokedudeHandleDrawPartyStatusSummary: @ 8159660
 	push {r4,r5,lr}
 	ldr r1, _08159688 @ =gBattleBufferA
 	ldr r0, _0815968C @ =gActiveBattler
@@ -6531,7 +6531,7 @@ sub_8159660: @ 8159660
 	lsls r0, 24
 	cmp r0, 0
 	bne _08159690
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	b _081596CE
 	.align 2, 0
 _08159688: .4byte gBattleBufferA
@@ -6565,7 +6565,7 @@ _08159690:
 	ldrb r1, [r5]
 	adds r1, r2
 	strb r0, [r1]
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 _081596CE:
 	pop {r4,r5}
 	pop {r0}
@@ -6575,18 +6575,18 @@ _081596D4: .4byte gBattleSpritesDataPtr
 _081596D8: .4byte gActiveBattler
 _081596DC: .4byte gBattleBufferA + 4
 _081596E0: .4byte gBattlerStatusSummaryTaskId
-	thumb_func_end sub_8159660
+	thumb_func_end PokedudeHandleDrawPartyStatusSummary
 
-	thumb_func_start sub_81596E4
-sub_81596E4: @ 81596E4
+	thumb_func_start PokedudeHandleHidePartyStatusSummary
+PokedudeHandleHidePartyStatusSummary: @ 81596E4
 	push {lr}
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81596E4
+	thumb_func_end PokedudeHandleHidePartyStatusSummary
 
-	thumb_func_start sub_81596F0
-sub_81596F0: @ 81596F0
+	thumb_func_start PokedudeHandleEndBounceEffect
+PokedudeHandleEndBounceEffect: @ 81596F0
 	push {r4,lr}
 	ldr r4, _08159710 @ =gActiveBattler
 	ldrb r0, [r4]
@@ -6595,24 +6595,24 @@ sub_81596F0: @ 81596F0
 	ldrb r0, [r4]
 	movs r1, 0
 	bl EndBounceEffect
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08159710: .4byte gActiveBattler
-	thumb_func_end sub_81596F0
+	thumb_func_end PokedudeHandleEndBounceEffect
 
-	thumb_func_start sub_8159714
-sub_8159714: @ 8159714
+	thumb_func_start PokedudeHandleSpriteInvisibility
+PokedudeHandleSpriteInvisibility: @ 8159714
 	push {lr}
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8159714
+	thumb_func_end PokedudeHandleSpriteInvisibility
 
-	thumb_func_start sub_8159720
-sub_8159720: @ 8159720
+	thumb_func_start PokedudeHandleBattleAnimation
+PokedudeHandleBattleAnimation: @ 8159720
 	push {r4-r6,lr}
 	sub sp, 0x4
 	ldr r5, _08159758 @ =gBattleBufferA
@@ -6637,7 +6637,7 @@ sub_8159720: @ 8159720
 	lsls r0, 24
 	cmp r0, 0
 	beq _08159760
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	b _0815976C
 	.align 2, 0
 _08159758: .4byte gBattleBufferA
@@ -6647,7 +6647,7 @@ _08159760:
 	ldrb r1, [r6]
 	lsls r1, 2
 	adds r1, r0
-	ldr r0, _08159778 @ =sub_8157024
+	ldr r0, _08159778 @ =CompleteOnFinishedBattleAnimation_PokedudeTmp
 	str r0, [r1]
 _0815976C:
 	add sp, 0x4
@@ -6656,11 +6656,11 @@ _0815976C:
 	bx r0
 	.align 2, 0
 _08159774: .4byte gBattlerControllerFuncs
-_08159778: .4byte sub_8157024
-	thumb_func_end sub_8159720
+_08159778: .4byte CompleteOnFinishedBattleAnimation_PokedudeTmp
+	thumb_func_end PokedudeHandleBattleAnimation
 
-	thumb_func_start sub_815977C
-sub_815977C: @ 815977C
+	thumb_func_start PokedudeHandleLinkStandbyMsg
+PokedudeHandleLinkStandbyMsg: @ 815977C
 	push {r4,lr}
 	ldr r1, _081597B0 @ =gBattleBufferA
 	ldr r4, _081597B4 @ =gActiveBattler
@@ -6680,25 +6680,25 @@ sub_815977C: @ 815977C
 	movs r1, 0
 	bl EndBounceEffect
 _081597A4:
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _081597B0: .4byte gBattleBufferA
 _081597B4: .4byte gActiveBattler
-	thumb_func_end sub_815977C
+	thumb_func_end PokedudeHandleLinkStandbyMsg
 
-	thumb_func_start sub_81597B8
-sub_81597B8: @ 81597B8
+	thumb_func_start PokedudeHandleResetActionMoveSelection
+PokedudeHandleResetActionMoveSelection: @ 81597B8
 	push {lr}
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81597B8
+	thumb_func_end PokedudeHandleResetActionMoveSelection
 
-	thumb_func_start sub_81597C4
-sub_81597C4: @ 81597C4
+	thumb_func_start PokedudeHandleCmd55
+PokedudeHandleCmd55: @ 81597C4
 	push {r4,lr}
 	ldr r2, _08159808 @ =gBattleOutcome
 	ldr r1, _0815980C @ =gBattleBufferA
@@ -6713,7 +6713,7 @@ sub_81597C4: @ 81597C4
 	bl FadeOutMapMusic
 	movs r0, 0x3
 	bl BeginFastPaletteFade
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	ldr r0, _08159814 @ =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x6
@@ -6737,12 +6737,12 @@ _08159810: .4byte gActiveBattler
 _08159814: .4byte gBattleTypeFlags
 _08159818: .4byte gBattlerControllerFuncs
 _0815981C: .4byte sub_8156254
-	thumb_func_end sub_81597C4
+	thumb_func_end PokedudeHandleCmd55
 
-	thumb_func_start nullsub_100
-nullsub_100: @ 8159820
+	thumb_func_start PokedudeCmdEnd
+PokedudeCmdEnd: @ 8159820
 	bx lr
-	thumb_func_end nullsub_100
+	thumb_func_end PokedudeCmdEnd
 
 	thumb_func_start sub_8159824
 sub_8159824: @ 8159824
@@ -6847,7 +6847,7 @@ _081598E6:
 	movs r2, 0
 	bl BtlController_EmitTwoReturnValues
 _081598F0:
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	ldr r3, _08159924 @ =gUnknown_3005EE0
 	ldr r2, _08159928 @ =gActiveBattler
 	ldrb r0, [r2]
@@ -6985,7 +6985,7 @@ _081599DE:
 	movs r0, 0x1
 	movs r1, 0xA
 	bl BtlController_EmitTwoReturnValues
-	bl PlayerPartnerBufferExecCompleted
+	bl PokedudeBufferExecCompleted
 	ldrb r0, [r6]
 	lsls r0, 2
 	add r0, r8
@@ -7178,14 +7178,14 @@ sub_8159B78: @ 8159B78
 	ldrb r0, [r2]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _08159BA4 @ =sub_81560DC
+	ldr r1, _08159BA4 @ =PokedudeBufferRunCommand
 	str r1, [r0]
 	bx lr
 	.align 2, 0
 _08159B98: .4byte gUnknown_3005EE0
 _08159B9C: .4byte gActiveBattler
 _08159BA0: .4byte gBattlerControllerFuncs
-_08159BA4: .4byte sub_81560DC
+_08159BA4: .4byte PokedudeBufferRunCommand
 	thumb_func_end sub_8159B78
 
 	thumb_func_start sub_8159BA8

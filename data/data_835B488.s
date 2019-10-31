@@ -9,7 +9,15 @@
 	.include "data/wild_encounters.inc"
 
 gUnknown_83CA71C:: @ 83CA71C
-	.incbin "baserom.gba", 0x3CA71C, 0xED4
+	.byte  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 27
+	.byte  2,  2,  2,  3,  3,  3,  7,  7,  7, 20, 20, 14
+	.byte 13, 13, 13, 13, 18, 18, 18, 18,  8,  8,  4,  4
+	.byte 15, 15, 11, 11,  9,  9, 17, 17, 17, 16, 16, 16
+	.byte 24, 24, 19, 19,  6,  6,  6,  5,  5,  5, 10, 10
+	.byte 21, 21, 21, 22, 22, 22, 23, 23, 12, 12,  1,  1
+	.byte 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 26
+
+	.incbin "baserom.gba", 0x3CA770, 0xE80
 
 gUnknown_83CB5F0:: @ 83CB5F0
 	.incbin "baserom.gba", 0x3CB5F0, 0x200

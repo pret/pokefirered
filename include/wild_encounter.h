@@ -42,7 +42,7 @@ void FishingWildEncounter(u8 rod);
 u16 GetLocalWildMon(bool8 *isWaterMon);
 u16 GetLocalWaterMon(void);
 bool8 UpdateRepelCounter(void);
-void sub_8082740(u8);
+void sub_8082740(bool8 state);
 u8 GetUnownLetterByPersonalityLoByte(u32 personality);
 bool8 SweetScentWildEncounter(void);
 void sub_8083214(u16 randVal);

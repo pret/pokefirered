@@ -1,4 +1,4 @@
-const struct InGameTrade gInGameTrades[] = {
+static const struct InGameTrade sInGameTrades[] = {
     {
         .nickname = _("MIMIEN"),
         .species = SPECIES_MR_MIME,
@@ -129,7 +129,7 @@ const struct InGameTrade gInGameTrades[] = {
     }
 };
 
-const u16 sInGameTradeMailMessages[][10] = {
+static const u16 sInGameTradeMailMessages[][10] = {
     {
         EC_WORD_THAT_S,
         EC_WORD_A,

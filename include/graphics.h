@@ -4215,11 +4215,11 @@ extern const u8 gMonIcon_Unown_QuestionMark[];
 extern const u8 gMonIcon_QuestionMark[];
 
 // trade
-extern const u16 gUnknown_8E9CEDC[];
-extern const u16 gUnknown_8E9CF3C[];
-extern const u16 gUnknown_8E9CF5C[];
+extern const u16 gTradeMenu_Pal[];
+extern const u16 gTradeButtons_Pal[];
+extern const u16 gTradeMenu_Gfx[];
 extern const u16 gUnknown_8E9E9FC[];
-extern const u16 gUnknown_8E9E1DC[];
-extern const u16 gUnknown_8E9F1FC[];
+extern const u16 gTradeButtons_Gfx[];
+extern const u16 gTradeMenuMonBox_Tilemap[];
 
 #endif //GUARD_GRAPHICS_H

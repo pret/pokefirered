@@ -738,7 +738,7 @@ _080CE3D8: .4byte nullsub_76
 _080CE3DC: .4byte sub_80D00D8
 _080CE3E0: .4byte gMain
 _080CE3E4:
-	bl sub_80544FC
+	bl LoadTradeAnimGfx
 	b _080CE4EC
 _080CE3EA:
 	movs r0, 0x20

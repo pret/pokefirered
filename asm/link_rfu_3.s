@@ -2939,7 +2939,7 @@ sub_8117100: @ 8117100
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_804C718
+	bl CB2_ReturnFromLinkTrade
 	adds r0, r4, 0
 	bl DestroyTask
 	pop {r4}

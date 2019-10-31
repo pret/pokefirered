@@ -130,7 +130,7 @@ static void TradeMenuAction_Summary(u8 taskId);
 static void TradeMenuAction_Trade(u8 taskId);
 static void ScheduleLinkTaskWithDelay(u16 delay, u8 kind);
 static void RunScheduledLinkTasks(void);
-static void PrintTradeErrorOrStatusMessage(u8 str_idx);
+static void PrintTradeErrorOrStatusMessage(u8 strIdx);
 static bool8 sub_804F610(void);
 static void RenderTextToVramViaBuffer(const u8 *name, u8 *a1, u8 unused);
 static void sub_804F748(u8 side);
@@ -150,10 +150,10 @@ static const size_t gUnknown_8260814[] = {
     0x528 // unk
 };
 
-static const u16 gTradeMovesBoxTilemap[] = INCBIN_U16("graphics/trade/moves_box_map.bin");
-static const u16 gTradePartyBoxTilemap[] = INCBIN_U16("graphics/trade/party_box_map.bin");
-static const u8 gTradeStripesBG2Tilemap[] = INCBIN_U8("graphics/trade/stripes_bg2_map.bin");
-static const u8 gTradeStripesBG3Tilemap[] = INCBIN_U8("graphics/trade/stripes_bg3_map.bin");
+static const u16 sTradeMovesBoxTilemap[] = INCBIN_U16("graphics/trade/moves_box_map.bin");
+static const u16 sTradePartyBoxTilemap[] = INCBIN_U16("graphics/trade/party_box_map.bin");
+static const u8 sTradeStripesBG2Tilemap[] = INCBIN_U8("graphics/trade/stripes_bg2_map.bin");
+static const u8 sTradeStripesBG3Tilemap[] = INCBIN_U8("graphics/trade/stripes_bg3_map.bin");
 
 static const struct OamData gOamData_8261C30 = {
     .shape = SPRITE_SHAPE(32x16),
@@ -182,14 +182,14 @@ static const union AnimCmd *const gSpriteAnimTable_8261C50[] = {
     gSpriteAnim_8261C48
 };
 
-static const struct SpriteSheet gUnknown_8261C58 = {
-    gUnknown_8E9E1DC,
+static const struct SpriteSheet sTradeButtons_SpriteSheet = {
+    gTradeButtons_Gfx,
     0x800,
     300
 };
 
-static const struct SpritePalette gUnknown_8261C60 = {
-    gUnknown_8E9CF3C,
+static const struct SpritePalette sTradeButtons_SpritePal = {
+    gTradeButtons_Pal,
     2345
 };
 
@@ -233,7 +233,7 @@ static const union AnimCmd *const gSpriteAnimTable_8261C98[] = {
     gSpriteAnim_8261C90
 };
 
-static const struct SpriteTemplate gUnknown_8261CB0 = {
+static const struct SpriteTemplate sSpriteTemplate_TradeButtons = {
     .tileTag = 300,
     .paletteTag = 2345,
     .oam = &gOamData_8261C38,
@@ -242,7 +242,7 @@ static const struct SpriteTemplate gUnknown_8261CB0 = {
     .callback = SpriteCallbackDummy
 };
 
-static const struct SpriteTemplate gUnknown_8261CC8 = {
+static const struct SpriteTemplate sSpriteTemplate_Text = {
     .tileTag = 200,
     .paletteTag = 4925,
     .oam = &gOamData_8261C30,
@@ -251,10 +251,10 @@ static const struct SpriteTemplate gUnknown_8261CC8 = {
     .callback = SpriteCallbackDummy
 };
 
-static const u16 gUnknown_8261CE0[] = INCBIN_U16("graphics/trade/text.gbapal");
+static const u16 sTradeTextPal[] = INCBIN_U16("graphics/trade/text.gbapal");
 
-static const struct SpritePalette gUnknown_8261D00 = {
-    gUnknown_8261CE0,
+static const struct SpritePalette sSpritePalette_Text = {
+    sTradeTextPal,
     4925
 };
 
@@ -347,7 +347,7 @@ static const u8 sCursorMoveDestinations[][4][6] = {
     }
 };
 
-static const u8 gTradeMonSpriteCoords[][2] = {
+static const u8 sTradeMonSpriteCoords[][2] = {
     {0x01, 0x05},
     {0x08, 0x05},
     {0x01, 0x0a},
@@ -365,6 +365,7 @@ static const u8 gTradeMonSpriteCoords[][2] = {
     {0x17, 0x12},
 };
 
+// No idea if a 4D array is correct
 static const u8 gUnknown_8261E5A[][2][6][2] = {
     {
         {
@@ -401,7 +402,7 @@ static const u8 gUnknown_8261E5A[][2][6][2] = {
     }
 };
 
-static const u8 gTradeUnknownSpriteCoords[][4] = {
+static const u8 sTradeUnknownSpriteCoords[][4] = {
     {0x3c, 0x09, 0xb4, 0x09},
     {0x30, 0x09, 0xa8, 0x09}
 };
@@ -719,7 +720,7 @@ static void sub_804C600(void)
     }
 }
 
-void sub_804C718(void)
+void CB2_ReturnFromLinkTrade(void)
 {
     SetMainCallback2(sub_804C728);
 }
@@ -853,11 +854,11 @@ static void sub_804C728(void)
 
         for (i = 0; i < sTradeMenuResourcesPtr->partyCounts[0]; i++)
         {
-            struct Pokemon *mon = &gPlayerParty[i];
+            struct Pokemon * mon = &gPlayerParty[i];
             sTradeMenuResourcesPtr->partyIcons[0][i] = CreateMonIcon(GetMonData(mon, MON_DATA_SPECIES2),
                                                                 SpriteCB_MonIcon,
-                                                                (gTradeMonSpriteCoords[i][0] * 8) + 14,
-                                                                (gTradeMonSpriteCoords[i][1] * 8) - 12,
+                                                                (sTradeMonSpriteCoords[i][0] * 8) + 14,
+                                                                (sTradeMonSpriteCoords[i][1] * 8) - 12,
                                                                 1,
                                                                 GetMonData(mon, MON_DATA_PERSONALITY),
                                                                 TRUE);
@@ -865,11 +866,11 @@ static void sub_804C728(void)
 
         for (i = 0; i < sTradeMenuResourcesPtr->partyCounts[1]; i++)
         {
-            struct Pokemon *mon = &gEnemyParty[i];
+            struct Pokemon * mon = &gEnemyParty[i];
             sTradeMenuResourcesPtr->partyIcons[1][i] = CreateMonIcon(GetMonData(mon, MON_DATA_SPECIES2, NULL),
                                                                 SpriteCB_MonIcon,
-                                                                (gTradeMonSpriteCoords[i + PARTY_SIZE][0] * 8) + 14,
-                                                                (gTradeMonSpriteCoords[i + PARTY_SIZE][1] * 8) - 12,
+                                                                (sTradeMonSpriteCoords[i + PARTY_SIZE][0] * 8) + 14,
+                                                                (sTradeMonSpriteCoords[i + PARTY_SIZE][1] * 8) - 12,
                                                                 1,
                                                                 GetMonData(mon, MON_DATA_PERSONALITY),
                                                                 FALSE);
@@ -903,9 +904,9 @@ static void sub_804C728(void)
         xPos = (56 - width) / 2;
         for (i = 0; i < 3; i++)
         {
-            temp = gUnknown_8261CC8;
+            temp = sSpriteTemplate_Text;
             temp.tileTag += i;
-            CreateSprite(&temp, xPos + gTradeUnknownSpriteCoords[LANGUAGE_ENGLISH - 1][0] + (i * 32), gTradeUnknownSpriteCoords[LANGUAGE_ENGLISH - 1][1], 1);
+            CreateSprite(&temp, xPos + sTradeUnknownSpriteCoords[LANGUAGE_ENGLISH - 1][0] + (i * 32), sTradeUnknownSpriteCoords[LANGUAGE_ENGLISH - 1][1], 1);
         }
 
         /*
@@ -918,28 +919,28 @@ static void sub_804C728(void)
         xPos = (56 - width) / 2;
         for (i = 0; i < 3; i++)
         {
-            temp = gUnknown_8261CC8;
+            temp = sSpriteTemplate_Text;
             temp.tileTag += i + 3;
-            CreateSprite(&temp, xPos + gTradeUnknownSpriteCoords[LANGUAGE_ENGLISH - 1][2] + (i * 32), gTradeUnknownSpriteCoords[LANGUAGE_ENGLISH - 1][3], 1);
+            CreateSprite(&temp, xPos + sTradeUnknownSpriteCoords[LANGUAGE_ENGLISH - 1][2] + (i * 32), sTradeUnknownSpriteCoords[LANGUAGE_ENGLISH - 1][3], 1);
         }
         gMain.state++;
         break;
     case 13:
-        temp = gUnknown_8261CC8;
+        temp = sSpriteTemplate_Text;
         temp.tileTag += 6;
         CreateSprite(&temp, 215, 151, 1);
-        temp = gUnknown_8261CC8;
+        temp = sSpriteTemplate_Text;
         temp.tileTag += 7;
         CreateSprite(&temp, 247, 151, 1);
 
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            temp = gUnknown_8261CC8;
+            temp = sSpriteTemplate_Text;
             temp.tileTag += i + 8;
             CreateSprite(&temp, (i * 32) + 24, 150, 1);
         }
 
-        sTradeMenuResourcesPtr->tradeMenuCursorSpriteIdx = CreateSprite(&gUnknown_8261CB0, gTradeMonSpriteCoords[0][0] * 8 + 32, gTradeMonSpriteCoords[0][1] * 8, 2);
+        sTradeMenuResourcesPtr->tradeMenuCursorSpriteIdx = CreateSprite(&sSpriteTemplate_TradeButtons, sTradeMonSpriteCoords[0][0] * 8 + 32, sTradeMonSpriteCoords[0][1] * 8, 2);
         sTradeMenuResourcesPtr->tradeMenuCursorPosition = 0;
         gMain.state++;
         rbox_fill_rectangle(0);
@@ -1353,7 +1354,7 @@ static void sub_804C728(void)
                 "\tcmp r6, r0\n"
                 "\tbge _0804CAA8\n"
                 "\tmov r8, r2\n"
-                "\tldr r7, _0804CB38 @ =gTradeMonSpriteCoords\n"
+                "\tldr r7, _0804CB38 @ =sTradeMonSpriteCoords\n"
                 "_0804CA4A:\n"
                 "\tmovs r0, 0x64\n"
                 "\tadds r4, r6, 0\n"
@@ -1407,7 +1408,7 @@ static void sub_804C728(void)
                 "\tldrb r0, [r0]\n"
                 "\tcmp r6, r0\n"
                 "\tbge _0804CB20\n"
-                "\tldr r0, _0804CB38 @ =gTradeMonSpriteCoords\n"
+                "\tldr r0, _0804CB38 @ =sTradeMonSpriteCoords\n"
                 "\tmov r8, r1\n"
                 "\tadds r7, r0, 0\n"
                 "\tadds r7, 0xC\n"
@@ -1468,7 +1469,7 @@ static void sub_804C728(void)
                 "_0804CB2C: .4byte sTradeMenuResourcesPtr\n"
                 "_0804CB30: .4byte gPlayerPartyCount\n"
                 "_0804CB34: .4byte gEnemyPartyCount\n"
-                "_0804CB38: .4byte gTradeMonSpriteCoords\n"
+                "_0804CB38: .4byte sTradeMonSpriteCoords\n"
                 "_0804CB3C: .4byte gPlayerParty\n"
                 "_0804CB40: .4byte 0xfff40000\n"
                 "_0804CB44: .4byte SpriteCB_MonIcon\n"
@@ -1591,14 +1592,14 @@ static void sub_804C728(void)
                 "\tadds r0, r1\n"
                 "\tmovs r6, 0\n"
                 "\tadd r5, sp, 0x10\n"
-                "\tldr r3, _0804CD00 @ =gTradeUnknownSpriteCoords\n"
+                "\tldr r3, _0804CD00 @ =sTradeUnknownSpriteCoords\n"
                 "\tmov r8, r3\n"
                 "\tasrs r0, 1\n"
                 "\tldrb r7, [r3, 0x4]\n"
                 "\tadds r4, r0, r7\n"
                 "_0804CC62:\n"
                 "\tadd r1, sp, 0x10\n"
-                "\tldr r0, _0804CD04 @ =gUnknown_8261CC8\n"
+                "\tldr r0, _0804CD04 @ =sSpriteTemplate_Text\n"
                 "\tldm r0!, {r2,r3,r7}\n"
                 "\tstm r1!, {r2,r3,r7}\n"
                 "\tldm r0!, {r2,r3,r7}\n"
@@ -1638,7 +1639,7 @@ static void sub_804C728(void)
                 "\tadds r0, r1\n"
                 "\tmovs r6, 0\n"
                 "\tadd r5, sp, 0x10\n"
-                "\tldr r7, _0804CD00 @ =gTradeUnknownSpriteCoords\n"
+                "\tldr r7, _0804CD00 @ =sTradeUnknownSpriteCoords\n"
                 "\tmov r8, r7\n"
                 "\tasrs r0, 1\n"
                 "\tmov r1, r8\n"
@@ -1646,7 +1647,7 @@ static void sub_804C728(void)
                 "\tadds r4, r0, r1\n"
                 "_0804CCC6:\n"
                 "\tadd r1, sp, 0x10\n"
-                "\tldr r0, _0804CD04 @ =gUnknown_8261CC8\n"
+                "\tldr r0, _0804CD04 @ =sSpriteTemplate_Text\n"
                 "\tldm r0!, {r2,r3,r7}\n"
                 "\tstm r1!, {r2,r3,r7}\n"
                 "\tldm r0!, {r2,r3,r7}\n"
@@ -1673,12 +1674,12 @@ static void sub_804C728(void)
                 "\tb _0804CEC2\n"
                 "\t.align 2, 0\n"
                 "_0804CCFC: .4byte gSaveBlock2Ptr\n"
-                "_0804CD00: .4byte gTradeUnknownSpriteCoords\n"
-                "_0804CD04: .4byte gUnknown_8261CC8\n"
+                "_0804CD00: .4byte sTradeUnknownSpriteCoords\n"
+                "_0804CD04: .4byte sSpriteTemplate_Text\n"
                 "_0804CD08: .4byte gLinkPlayers + 8\n"
                 "_0804CD0C: .4byte gMain\n"
                 "_0804CD10:\n"
-                "\tldr r4, _0804CDCC @ =gUnknown_8261CC8\n"
+                "\tldr r4, _0804CDCC @ =sSpriteTemplate_Text\n"
                 "\tadd r1, sp, 0x10\n"
                 "\tadds r0, r4, 0\n"
                 "\tldm r0!, {r2,r3,r7}\n"
@@ -1716,7 +1717,7 @@ static void sub_804C728(void)
                 "\tlsls r5, 13\n"
                 "_0804CD5C:\n"
                 "\tadd r1, sp, 0x10\n"
-                "\tldr r0, _0804CDCC @ =gUnknown_8261CC8\n"
+                "\tldr r0, _0804CDCC @ =sSpriteTemplate_Text\n"
                 "\tldm r0!, {r2,r3,r7}\n"
                 "\tstm r1!, {r2,r3,r7}\n"
                 "\tldm r0!, {r2,r3,r7}\n"
@@ -1737,8 +1738,8 @@ static void sub_804C728(void)
                 "\tadds r6, 0x1\n"
                 "\tcmp r6, 0x5\n"
                 "\tble _0804CD5C\n"
-                "\tldr r0, _0804CDD0 @ =gUnknown_8261CB0\n"
-                "\tldr r2, _0804CDD4 @ =gTradeMonSpriteCoords\n"
+                "\tldr r0, _0804CDD0 @ =sSpriteTemplate_TradeButtons\n"
+                "\tldr r2, _0804CDD4 @ =sTradeMonSpriteCoords\n"
                 "\tldrb r1, [r2]\n"
                 "\tlsls r1, 19\n"
                 "\tmovs r3, 0x80\n"
@@ -1768,9 +1769,9 @@ static void sub_804C728(void)
                 "\tbl rbox_fill_rectangle\n"
                 "\tb _0804CEE6\n"
                 "\t.align 2, 0\n"
-                "_0804CDCC: .4byte gUnknown_8261CC8\n"
-                "_0804CDD0: .4byte gUnknown_8261CB0\n"
-                "_0804CDD4: .4byte gTradeMonSpriteCoords\n"
+                "_0804CDCC: .4byte sSpriteTemplate_Text\n"
+                "_0804CDD0: .4byte sSpriteTemplate_TradeButtons\n"
+                "_0804CDD4: .4byte sTradeMonSpriteCoords\n"
                 "_0804CDD8: .4byte sTradeMenuResourcesPtr\n"
                 "_0804CDDC: .4byte gMain\n"
                 "_0804CDE0:\n"
@@ -1965,8 +1966,8 @@ void sub_804CF14(void)
             sTradeMenuResourcesPtr->partyIcons[0][i] = CreateMonIcon(
                 GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL),
                 SpriteCB_MonIcon,
-                gTradeMonSpriteCoords[i][0] * 8 + 14,
-                gTradeMonSpriteCoords[i][1] * 8 - 12,
+                sTradeMonSpriteCoords[i][0] * 8 + 14,
+                sTradeMonSpriteCoords[i][1] * 8 - 12,
                 1,
                 GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY),
                 TRUE
@@ -1977,8 +1978,8 @@ void sub_804CF14(void)
             sTradeMenuResourcesPtr->partyIcons[1][i] = CreateMonIcon(
                 GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2, NULL),
                 SpriteCB_MonIcon,
-                gTradeMonSpriteCoords[i + 6][0] * 8 + 14,
-                gTradeMonSpriteCoords[i + 6][1] * 8 - 12,
+                sTradeMonSpriteCoords[i + 6][0] * 8 + 14,
+                sTradeMonSpriteCoords[i + 6][1] * 8 - 12,
                 1,
                 GetMonData(&gEnemyParty[i], MON_DATA_PERSONALITY),
                 FALSE
@@ -2015,9 +2016,9 @@ void sub_804CF14(void)
         xPos = (56 - width) / 2;
         for (i = 0; i < 3; i++)
         {
-            temp = gUnknown_8261CC8;
+            temp = sSpriteTemplate_Text;
             temp.tileTag += i;
-            CreateSprite(&temp, xPos + gTradeUnknownSpriteCoords[LANGUAGE_ENGLISH - 1][0] + (i * 32), gTradeUnknownSpriteCoords[LANGUAGE_ENGLISH - 1][1], 1);
+            CreateSprite(&temp, xPos + sTradeUnknownSpriteCoords[LANGUAGE_ENGLISH - 1][0] + (i * 32), sTradeUnknownSpriteCoords[LANGUAGE_ENGLISH - 1][1], 1);
         }
 
         /*
@@ -2030,23 +2031,23 @@ void sub_804CF14(void)
         xPos = (56 - width) / 2;
         for (i = 0; i < 3; i++)
         {
-            temp = gUnknown_8261CC8;
+            temp = sSpriteTemplate_Text;
             temp.tileTag += i + 3;
-            CreateSprite(&temp, xPos + gTradeUnknownSpriteCoords[LANGUAGE_ENGLISH - 1][2] + (i * 32), gTradeUnknownSpriteCoords[LANGUAGE_ENGLISH - 1][3], 1);
+            CreateSprite(&temp, xPos + sTradeUnknownSpriteCoords[LANGUAGE_ENGLISH - 1][2] + (i * 32), sTradeUnknownSpriteCoords[LANGUAGE_ENGLISH - 1][3], 1);
         }
         gMain.state++;
         break;
     case 13:
-        temp = gUnknown_8261CC8;
+        temp = sSpriteTemplate_Text;
         temp.tileTag += 6;
         CreateSprite(&temp, 215, 151, 1);
-        temp = gUnknown_8261CC8;
+        temp = sSpriteTemplate_Text;
         temp.tileTag += 7;
         CreateSprite(&temp, 247, 151, 1);
 
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            temp = gUnknown_8261CC8;
+            temp = sSpriteTemplate_Text;
             temp.tileTag += i + 8;
             CreateSprite(&temp, (i * 32) + 24, 150, 1);
         }
@@ -2056,7 +2057,7 @@ void sub_804CF14(void)
         else
             sTradeMenuResourcesPtr->tradeMenuCursorPosition = sub_8138B20() + 6;
 
-        sTradeMenuResourcesPtr->tradeMenuCursorSpriteIdx = CreateSprite(&gUnknown_8261CB0, gTradeMonSpriteCoords[sTradeMenuResourcesPtr->tradeMenuCursorPosition][0] * 8 + 32, gTradeMonSpriteCoords[sTradeMenuResourcesPtr->tradeMenuCursorPosition][1] * 8, 2);
+        sTradeMenuResourcesPtr->tradeMenuCursorSpriteIdx = CreateSprite(&sSpriteTemplate_TradeButtons, sTradeMonSpriteCoords[sTradeMenuResourcesPtr->tradeMenuCursorPosition][0] * 8 + 32, sTradeMonSpriteCoords[sTradeMenuResourcesPtr->tradeMenuCursorPosition][1] * 8, 2);
         gMain.state = 16;
         break;
     case 16:
@@ -2234,7 +2235,7 @@ void sub_804CF14(void)
                 "\tcmp r6, r0\n"
                 "\tbge _0804D0A8\n"
                 "\tmov r8, r4\n"
-                "\tldr r7, _0804D138 @ =gTradeMonSpriteCoords\n"
+                "\tldr r7, _0804D138 @ =sTradeMonSpriteCoords\n"
                 "_0804D048:\n"
                 "\tmovs r0, 0x64\n"
                 "\tadds r4, r6, 0\n"
@@ -2289,7 +2290,7 @@ void sub_804CF14(void)
                 "\tldrb r0, [r0]\n"
                 "\tcmp r6, r0\n"
                 "\tbge _0804D120\n"
-                "\tldr r0, _0804D138 @ =gTradeMonSpriteCoords\n"
+                "\tldr r0, _0804D138 @ =sTradeMonSpriteCoords\n"
                 "\tmov r8, r1\n"
                 "\tadds r7, r0, 0\n"
                 "\tadds r7, 0xC\n"
@@ -2350,7 +2351,7 @@ void sub_804CF14(void)
                 "_0804D12C: .4byte sTradeMenuResourcesPtr\n"
                 "_0804D130: .4byte gPlayerPartyCount\n"
                 "_0804D134: .4byte gEnemyPartyCount\n"
-                "_0804D138: .4byte gTradeMonSpriteCoords\n"
+                "_0804D138: .4byte sTradeMonSpriteCoords\n"
                 "_0804D13C: .4byte gPlayerParty\n"
                 "_0804D140: .4byte 0xfff40000\n"
                 "_0804D144: .4byte SpriteCB_MonIcon\n"
@@ -2480,14 +2481,14 @@ void sub_804CF14(void)
                 "\tadds r0, r1\n"
                 "\tmovs r6, 0\n"
                 "\tadd r5, sp, 0xC\n"
-                "\tldr r3, _0804D310 @ =gTradeUnknownSpriteCoords\n"
+                "\tldr r3, _0804D310 @ =sTradeUnknownSpriteCoords\n"
                 "\tmov r8, r3\n"
                 "\tasrs r0, 1\n"
                 "\tldrb r7, [r3, 0x4]\n"
                 "\tadds r4, r0, r7\n"
                 "_0804D270:\n"
                 "\tadd r1, sp, 0xC\n"
-                "\tldr r0, _0804D314 @ =gUnknown_8261CC8\n"
+                "\tldr r0, _0804D314 @ =sSpriteTemplate_Text\n"
                 "\tldm r0!, {r2,r3,r7}\n"
                 "\tstm r1!, {r2,r3,r7}\n"
                 "\tldm r0!, {r2,r3,r7}\n"
@@ -2527,7 +2528,7 @@ void sub_804CF14(void)
                 "\tadds r0, r1\n"
                 "\tmovs r6, 0\n"
                 "\tadd r5, sp, 0xC\n"
-                "\tldr r7, _0804D310 @ =gTradeUnknownSpriteCoords\n"
+                "\tldr r7, _0804D310 @ =sTradeUnknownSpriteCoords\n"
                 "\tmov r8, r7\n"
                 "\tasrs r0, 1\n"
                 "\tmov r1, r8\n"
@@ -2535,7 +2536,7 @@ void sub_804CF14(void)
                 "\tadds r4, r0, r1\n"
                 "_0804D2D4:\n"
                 "\tadd r1, sp, 0xC\n"
-                "\tldr r0, _0804D314 @ =gUnknown_8261CC8\n"
+                "\tldr r0, _0804D314 @ =sSpriteTemplate_Text\n"
                 "\tldm r0!, {r2,r3,r7}\n"
                 "\tstm r1!, {r2,r3,r7}\n"
                 "\tldm r0!, {r2,r3,r7}\n"
@@ -2562,12 +2563,12 @@ void sub_804CF14(void)
                 "\tb _0804D4B4\n"
                 "\t.align 2, 0\n"
                 "_0804D30C: .4byte gSaveBlock2Ptr\n"
-                "_0804D310: .4byte gTradeUnknownSpriteCoords\n"
-                "_0804D314: .4byte gUnknown_8261CC8\n"
+                "_0804D310: .4byte sTradeUnknownSpriteCoords\n"
+                "_0804D314: .4byte sSpriteTemplate_Text\n"
                 "_0804D318: .4byte gLinkPlayers + 8\n"
                 "_0804D31C: .4byte gMain\n"
                 "_0804D320:\n"
-                "\tldr r4, _0804D3B0 @ =gUnknown_8261CC8\n"
+                "\tldr r4, _0804D3B0 @ =sSpriteTemplate_Text\n"
                 "\tadd r1, sp, 0xC\n"
                 "\tadds r0, r4, 0\n"
                 "\tldm r0!, {r2,r3,r7}\n"
@@ -2605,7 +2606,7 @@ void sub_804CF14(void)
                 "\tlsls r5, 13\n"
                 "_0804D36C:\n"
                 "\tadd r1, sp, 0xC\n"
-                "\tldr r0, _0804D3B0 @ =gUnknown_8261CC8\n"
+                "\tldr r0, _0804D3B0 @ =sSpriteTemplate_Text\n"
                 "\tldm r0!, {r2,r3,r7}\n"
                 "\tstm r1!, {r2,r3,r7}\n"
                 "\tldm r0!, {r2,r3,r7}\n"
@@ -2636,7 +2637,7 @@ void sub_804CF14(void)
                 "\tldr r1, [r4]\n"
                 "\tb _0804D3C0\n"
                 "\t.align 2, 0\n"
-                "_0804D3B0: .4byte gUnknown_8261CC8\n"
+                "_0804D3B0: .4byte sSpriteTemplate_Text\n"
                 "_0804D3B4: .4byte sTradeMenuResourcesPtr\n"
                 "_0804D3B8:\n"
                 "\tbl sub_8138B20\n"
@@ -2645,8 +2646,8 @@ void sub_804CF14(void)
                 "_0804D3C0:\n"
                 "\tadds r1, 0x35\n"
                 "\tstrb r0, [r1]\n"
-                "\tldr r0, _0804D404 @ =gUnknown_8261CB0\n"
-                "\tldr r3, _0804D408 @ =gTradeMonSpriteCoords\n"
+                "\tldr r0, _0804D404 @ =sSpriteTemplate_TradeButtons\n"
+                "\tldr r3, _0804D408 @ =sTradeMonSpriteCoords\n"
                 "\tldr r4, _0804D40C @ =sTradeMenuResourcesPtr\n"
                 "\tldr r1, [r4]\n"
                 "\tadds r1, 0x35\n"
@@ -2676,8 +2677,8 @@ void sub_804CF14(void)
                 "\tstrb r1, [r0]\n"
                 "\tb _0804D4D2\n"
                 "\t.align 2, 0\n"
-                "_0804D404: .4byte gUnknown_8261CB0\n"
-                "_0804D408: .4byte gTradeMonSpriteCoords\n"
+                "_0804D404: .4byte sSpriteTemplate_TradeButtons\n"
+                "_0804D408: .4byte sTradeMonSpriteCoords\n"
                 "_0804D40C: .4byte sTradeMenuResourcesPtr\n"
                 "_0804D410: .4byte gMain\n"
                 "_0804D414:\n"
@@ -2824,7 +2825,7 @@ static void sub_804D548(void)
 
 static void sub_804D5A4(void)
 {
-    gMain.savedCallback = sub_804C718;
+    gMain.savedCallback = CB2_ReturnFromLinkTrade;
     if (gWirelessCommType != 0)
     {
         if (IsLinkRfuTaskFinished())
@@ -2872,13 +2873,13 @@ static void sub_804D694(u8 state)
     switch (state)
     {
     case 0:
-        LoadPalette(gUnknown_8E9CEDC, 0x00, 0x60);
-        LoadBgTiles(1, gUnknown_8E9CF5C, 0x1280, 0);
+        LoadPalette(gTradeMenu_Pal, 0x00, 0x60);
+        LoadBgTiles(1, gTradeMenu_Gfx, 0x1280, 0);
         CopyToBgTilemapBufferRect_ChangePalette(1, gUnknown_8E9E9FC, 0, 0, 32, 20, 0);
-        LoadBgTilemap(2, gTradeStripesBG2Tilemap, 0x800, 0);
+        LoadBgTilemap(2, sTradeStripesBG2Tilemap, 0x800, 0);
         break;
     case 1:
-        LoadBgTilemap(3, gTradeStripesBG3Tilemap, 0x800, 0);
+        LoadBgTilemap(3, sTradeStripesBG3Tilemap, 0x800, 0);
         sub_804F284(0);
         sub_804F284(1);
         CopyBgTilemapBufferToVram(1);
@@ -2937,7 +2938,7 @@ static bool8 shedinja_maker_maybe(void)
 {
     u8 id = GetMultiplayerId();
     int i;
-    struct Pokemon *mon;
+    struct Pokemon * mon;
 
     switch (sTradeMenuResourcesPtr->unk_69)
     {
@@ -3287,8 +3288,8 @@ static void TradeMenuMoveCursor(u8 *tradeMenuCursorPosition, u8 direction)
     else
     {
         StartSpriteAnim(&gSprites[sTradeMenuResourcesPtr->tradeMenuCursorSpriteIdx], 0);
-        gSprites[sTradeMenuResourcesPtr->tradeMenuCursorSpriteIdx].pos1.x = gTradeMonSpriteCoords[newPosition][0] * 8 + 32;
-        gSprites[sTradeMenuResourcesPtr->tradeMenuCursorSpriteIdx].pos1.y = gTradeMonSpriteCoords[newPosition][1] * 8;
+        gSprites[sTradeMenuResourcesPtr->tradeMenuCursorSpriteIdx].pos1.x = sTradeMonSpriteCoords[newPosition][0] * 8 + 32;
+        gSprites[sTradeMenuResourcesPtr->tradeMenuCursorSpriteIdx].pos1.y = sTradeMonSpriteCoords[newPosition][1] * 8;
     }
 
     if (*tradeMenuCursorPosition != newPosition)
@@ -3582,7 +3583,7 @@ static void sub_804E880(void)
 {
     int i;
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         rbox_fill_rectangle(0);
@@ -3749,12 +3750,12 @@ static void sub_804EAE4(u8 a0)
 
         gSprites[sTradeMenuResourcesPtr->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].invisible = FALSE;
         gSprites[sTradeMenuResourcesPtr->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].data[0] = 20;
-        gSprites[sTradeMenuResourcesPtr->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].data[2] = (gTradeMonSpriteCoords[whichParty * PARTY_SIZE][0] + gTradeMonSpriteCoords[whichParty * PARTY_SIZE + 1][0]) / 2 * 8 + 14;
-        gSprites[sTradeMenuResourcesPtr->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].data[4] = (gTradeMonSpriteCoords[whichParty * PARTY_SIZE][1] * 8) - 12;
+        gSprites[sTradeMenuResourcesPtr->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].data[2] = (sTradeMonSpriteCoords[whichParty * PARTY_SIZE][0] + sTradeMonSpriteCoords[whichParty * PARTY_SIZE + 1][0]) / 2 * 8 + 14;
+        gSprites[sTradeMenuResourcesPtr->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].data[4] = (sTradeMonSpriteCoords[whichParty * PARTY_SIZE][1] * 8) - 12;
         StoreSpriteCallbackInData6(&gSprites[sTradeMenuResourcesPtr->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]], SpriteCB_MonIcon);
         sTradeMenuResourcesPtr->unk_74[a0]++;
         sub_8075490(&gSprites[sTradeMenuResourcesPtr->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]]);
-        CopyToBgTilemapBufferRect_ChangePalette(1, gTradePartyBoxTilemap, a0 * 15, 0, 15, 17, 0);
+        CopyToBgTilemapBufferRect_ChangePalette(1, sTradePartyBoxTilemap, a0 * 15, 0, 15, 17, 0);
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(0);
 
@@ -3766,10 +3767,10 @@ static void sub_804EAE4(u8 a0)
             sTradeMenuResourcesPtr->unk_74[a0] = 3;
         break;
     case 3:
-        CopyToBgTilemapBufferRect_ChangePalette(1, gTradeMovesBoxTilemap, whichParty * 15, 0, 15, 17, 0);
+        CopyToBgTilemapBufferRect_ChangePalette(1, sTradeMovesBoxTilemap, whichParty * 15, 0, 15, 17, 0);
         CopyBgTilemapBufferToVram(1);
-        gSprites[sTradeMenuResourcesPtr->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].pos1.x = (gTradeMonSpriteCoords[whichParty * PARTY_SIZE][0] + gTradeMonSpriteCoords[whichParty * PARTY_SIZE + 1][0]) / 2 * 8 + 14;
-        gSprites[sTradeMenuResourcesPtr->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].pos1.y = (gTradeMonSpriteCoords[whichParty * PARTY_SIZE][1] * 8) - 12;
+        gSprites[sTradeMenuResourcesPtr->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].pos1.x = (sTradeMonSpriteCoords[whichParty * PARTY_SIZE][0] + sTradeMonSpriteCoords[whichParty * PARTY_SIZE + 1][0]) / 2 * 8 + 14;
+        gSprites[sTradeMenuResourcesPtr->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].pos1.y = (sTradeMonSpriteCoords[whichParty * PARTY_SIZE][1] * 8) - 12;
         gSprites[sTradeMenuResourcesPtr->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].pos2.x = 0;
         gSprites[sTradeMenuResourcesPtr->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].pos2.y = 0;
         nameStringWidth = sub_804EE6C(nickname, whichParty, partyIdx);
@@ -3871,7 +3872,7 @@ static void sub_804F08C(u8 whichParty, u8 monIdx, u8 a2, u8 a3, u8 a4, u8 a5)
     u8 gender;
     u8 nickname[12];
 
-    CopyToBgTilemapBufferRect_ChangePalette(1, gUnknown_8E9F1FC, a4, a5, 6, 3, 0);
+    CopyToBgTilemapBufferRect_ChangePalette(1, gTradeMenuMonBox_Tilemap, a4, a5, 6, 3, 0);
     CopyBgTilemapBufferToVram(1);
 
     if (whichParty == 0)
@@ -4005,8 +4006,8 @@ static void sub_804F2E8(u8 whichParty)
     for (i = 0; i < sTradeMenuResourcesPtr->partyCounts[whichParty]; i++)
     {
         gSprites[sTradeMenuResourcesPtr->partyIcons[whichParty][i]].invisible = FALSE;
-        gSprites[sTradeMenuResourcesPtr->partyIcons[whichParty][i]].pos1.x = gTradeMonSpriteCoords[(whichParty * PARTY_SIZE) + i][0] * 8 + 14;
-        gSprites[sTradeMenuResourcesPtr->partyIcons[whichParty][i]].pos1.y = gTradeMonSpriteCoords[(whichParty * PARTY_SIZE) + i][1] * 8 - 12;
+        gSprites[sTradeMenuResourcesPtr->partyIcons[whichParty][i]].pos1.x = sTradeMonSpriteCoords[(whichParty * PARTY_SIZE) + i][0] * 8 + 14;
+        gSprites[sTradeMenuResourcesPtr->partyIcons[whichParty][i]].pos1.y = sTradeMonSpriteCoords[(whichParty * PARTY_SIZE) + i][1] * 8 - 12;
         gSprites[sTradeMenuResourcesPtr->partyIcons[whichParty][i]].pos2.x = 0;
         gSprites[sTradeMenuResourcesPtr->partyIcons[whichParty][i]].pos2.y = 0;
     }
@@ -4020,7 +4021,7 @@ static void sub_804F3B4(void)
 
 static void sub_804F3C8(u8 whichParty)
 {
-    CopyToBgTilemapBufferRect_ChangePalette(1, gTradePartyBoxTilemap, 15 * whichParty, 0, 15, 17, 0);
+    CopyToBgTilemapBufferRect_ChangePalette(1, sTradePartyBoxTilemap, 15 * whichParty, 0, 15, 17, 0);
     CopyBgTilemapBufferToVram(1);
     sub_804F284(whichParty);
     sub_804F020(whichParty);
@@ -4137,15 +4138,15 @@ static bool8 sub_804F610(void)
         sTradeMenuResourcesPtr->unk_A8++;
         break;
     case 14:
-        LoadSpritePalette(&gUnknown_8261D00);
+        LoadSpritePalette(&sSpritePalette_Text);
         sTradeMenuResourcesPtr->unk_A8++;
         break;
     case 15:
-        LoadSpritePalette(&gUnknown_8261C60);
+        LoadSpritePalette(&sTradeButtons_SpritePal);
         sTradeMenuResourcesPtr->unk_A8++;
         break;
     case 16:
-        LoadSpriteSheet(&gUnknown_8261C58);
+        LoadSpriteSheet(&sTradeButtons_SpriteSheet);
         sTradeMenuResourcesPtr->unk_A8++;
         break;
     case 17:
@@ -4257,10 +4258,10 @@ static void sub_804F9D8(void)
     }
 }
 
-static u32 sub_804FA14(struct Pokemon *party, int partyCount, int cursorPos)
+static u32 sub_804FA14(struct Pokemon * party, int partyCount, int cursorPos)
 {
     int i, sum;
-    struct LinkPlayer *player;
+    struct LinkPlayer * player;
     int species[6];
     int species2[6];
 

@@ -2211,7 +2211,7 @@ _080818C4:
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080818D8
-	ldr r0, _080818E4 @ =sub_804C718
+	ldr r0, _080818E4 @ =CB2_ReturnFromLinkTrade
 	bl SetMainCallback2
 	adds r0, r5, 0
 	bl DestroyTask
@@ -2221,7 +2221,7 @@ _080818D8:
 	bx r0
 	.align 2, 0
 _080818E0: .4byte gReceivedRemoteLinkPlayers
-_080818E4: .4byte sub_804C718
+_080818E4: .4byte CB2_ReturnFromLinkTrade
 	thumb_func_end sub_8081850
 
 	thumb_func_start sub_80818E8

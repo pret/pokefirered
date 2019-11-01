@@ -460,7 +460,6 @@ SECTIONS {
         src/battle_anim_utility_funcs.o(.rodata);
         src/battle_intro.o(.rodata);
         data/bike.o(.rodata);
-        data/easy_chat.o(.rodata);
         src/easy_chat.o(.rodata);
         data/data_835B488.o(.rodata);
         src/mail.o(.rodata);

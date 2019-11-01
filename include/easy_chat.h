@@ -30,6 +30,32 @@ enum
     EC_GROUP_POKEMON_2,
 };
 
+struct EasyChatWordInfo
+{
+    const u8 *text;
+    int alphabeticalOrder;
+    int enabled;
+};
+
+typedef union
+{
+    const u16 *valueList;
+    const struct EasyChatWordInfo *words;
+} EasyChatGroupWordData;
+
+struct EasyChatGroup
+{
+    EasyChatGroupWordData wordData;
+    u16 numWords;
+    u16 numEnabledWords;
+};
+
+struct EasyChatWordsByLetter
+{
+    const u16 *words;
+    int numWords;
+};
+
 void InitEasyChatPhrases(void);
 void easy_chat_input_maybe(void);
 void CopyEasyChatWord(u8 *dest, u16 word);

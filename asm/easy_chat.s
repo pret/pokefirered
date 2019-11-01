@@ -874,7 +874,7 @@ InitEasyChatPhrases: @ 80BDD34
 	movs r4, 0
 	ldr r5, _080BDE00 @ =gSaveBlock1Ptr
 	ldr r3, _080BDE04 @ =0x00002ca0
-	ldr r2, _080BDE08 @ =gUnknown_83EDFF0
+	ldr r2, _080BDE08 @ =sDefaultProfileWords
 _080BDD3E:
 	ldr r1, [r5]
 	lsls r0, r4, 1
@@ -891,7 +891,7 @@ _080BDD3E:
 	movs r4, 0
 	ldr r5, _080BDE00 @ =gSaveBlock1Ptr
 	ldr r3, _080BDE0C @ =0x00002cac
-	ldr r2, _080BDE10 @ =gUnknown_83EDFF8
+	ldr r2, _080BDE10 @ =sDefaultBattleStartWords
 _080BDD5E:
 	ldr r1, [r5]
 	lsls r0, r4, 1
@@ -980,9 +980,9 @@ _080BDDE6:
 	.align 2, 0
 _080BDE00: .4byte gSaveBlock1Ptr
 _080BDE04: .4byte 0x00002ca0
-_080BDE08: .4byte gUnknown_83EDFF0
+_080BDE08: .4byte sDefaultProfileWords
 _080BDE0C: .4byte 0x00002cac
-_080BDE10: .4byte gUnknown_83EDFF8
+_080BDE10: .4byte sDefaultBattleStartWords
 _080BDE14: .4byte 0x00002cb8
 _080BDE18: .4byte 0x0000ffff
 _080BDE1C: .4byte 0x00002cc4
@@ -1180,7 +1180,7 @@ sub_80BDF6C: @ 80BDF6C
 	lsls r1, 24
 	lsls r2, 16
 	lsrs r5, r2, 16
-	ldr r0, _080BDFAC @ =gEasyChatGroupNames
+	ldr r0, _080BDFAC @ =gEasyChatGroupNamePointers
 	lsrs r1, 22
 	adds r1, r0
 	ldr r1, [r1]
@@ -1209,19 +1209,19 @@ _080BDFA0:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080BDFAC: .4byte gEasyChatGroupNames
+_080BDFAC: .4byte gEasyChatGroupNamePointers
 	thumb_func_end sub_80BDF6C
 
 	thumb_func_start sub_80BDFB0
 sub_80BDFB0: @ 80BDFB0
 	lsls r0, 24
-	ldr r1, _080BDFBC @ =gEasyChatGroupNames
+	ldr r1, _080BDFBC @ =gEasyChatGroupNamePointers
 	lsrs r0, 22
 	adds r0, r1
 	ldr r0, [r0]
 	bx lr
 	.align 2, 0
-_080BDFBC: .4byte gEasyChatGroupNames
+_080BDFBC: .4byte gEasyChatGroupNamePointers
 	thumb_func_end sub_80BDFB0
 
 	thumb_func_start CopyEasyChatWordPadded
@@ -1269,7 +1269,7 @@ sub_80BDFF8: @ 80BDFF8
 	str r0, [r1]
 	mov r10, r0
 _080BE00A:
-	ldr r3, _080BE070 @ =gUnknown_83EDEC0
+	ldr r3, _080BE070 @ =gEasyChatWordsByLetterPointers
 	ldr r2, [r1]
 	lsls r1, r2, 3
 	adds r0, r3, 0x4
@@ -1322,7 +1322,7 @@ _080BE048:
 	b _080BE0EA
 	.align 2, 0
 _080BE06C: .4byte gUnknown_300116C
-_080BE070: .4byte gUnknown_83EDEC0
+_080BE070: .4byte gEasyChatWordsByLetterPointers
 _080BE074: .4byte gUnknown_300117C
 _080BE078: .4byte gUnknown_3001184
 _080BE07C: .4byte gUnknown_20399BC

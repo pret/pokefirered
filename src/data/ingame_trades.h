@@ -134,7 +134,7 @@ static const u16 sInGameTradeMailMessages[][10] = {
         EC_WORD_THAT_S,
         EC_WORD_A,
         EC_WORD_HEALTHY,
-        EC_POKEMON2(JYNX),
+        EC_POKEMON(JYNX),
         EC_WORD_EXCL,
         EC_WORD_BE,
         EC_WORD_KIND,

@@ -461,6 +461,7 @@ SECTIONS {
         src/battle_intro.o(.rodata);
         data/bike.o(.rodata);
         data/easy_chat.o(.rodata);
+        src/easy_chat.o(.rodata);
         data/data_835B488.o(.rodata);
         src/mail.o(.rodata);
         src/heal_location.o(.rodata);

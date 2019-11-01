@@ -63,7 +63,7 @@ _080BD76C:
 	movs r0, 0
 	b _080BD782
 _080BD77A:
-	ldr r0, _080BD788 @ =gUnknown_83ECED4
+	ldr r0, _080BD788 @ =gEasyChatGroups
 	lsls r1, r4, 3
 	adds r1, r0
 	ldrh r0, [r1, 0x6]
@@ -72,7 +72,7 @@ _080BD782:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080BD788: .4byte gUnknown_83ECED4
+_080BD788: .4byte gEasyChatGroups
 	thumb_func_end start_menu_is_selected_item_valid
 
 	thumb_func_start sub_80BD78C
@@ -88,7 +88,7 @@ sub_80BD78C: @ 80BD78C
 	ands r5, r1
 	cmp r3, 0x15
 	bhi _080BD7F0
-	ldr r0, _080BD7C0 @ =gUnknown_83ECED4
+	ldr r0, _080BD7C0 @ =gEasyChatGroups
 	lsls r2, r3, 3
 	adds r1, r2, r0
 	ldrh r4, [r1, 0x4]
@@ -102,7 +102,7 @@ sub_80BD78C: @ 80BD78C
 	.align 2, 0
 _080BD7B8: .4byte 0x0000ffff
 _080BD7BC: .4byte 0x000001ff
-_080BD7C0: .4byte gUnknown_83ECED4
+_080BD7C0: .4byte gEasyChatGroups
 _080BD7C4:
 	cmp r3, 0x15
 	bne _080BD7E8
@@ -172,7 +172,7 @@ _080BD824:
 	.align 2, 0
 _080BD830: .4byte gMoveNames
 _080BD834:
-	ldr r1, _080BD84C @ =gUnknown_83ECED4
+	ldr r1, _080BD84C @ =gEasyChatGroups
 	lsls r0, 3
 	adds r0, r1
 	ldr r1, [r0]
@@ -185,7 +185,7 @@ _080BD846:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080BD84C: .4byte gUnknown_83ECED4
+_080BD84C: .4byte gEasyChatGroups
 	thumb_func_end GetEasyChatWord
 
 	thumb_func_start CopyEasyChatWord
@@ -419,7 +419,7 @@ sub_80BD9E8: @ 80BD9E8
 	lsls r0, 16
 	lsrs r4, r0, 16
 	bl Random
-	ldr r2, _080BDA38 @ =gUnknown_83ECED4
+	ldr r2, _080BDA38 @ =gEasyChatGroups
 	lsls r1, r4, 3
 	adds r1, r2
 	lsls r0, 16
@@ -437,7 +437,7 @@ sub_80BD9E8: @ 80BD9E8
 	cmp r4, 0x13
 	bne _080BDA24
 _080BDA16:
-	ldr r1, _080BDA38 @ =gUnknown_83ECED4
+	ldr r1, _080BDA38 @ =gEasyChatGroups
 	lsls r0, r4, 3
 	adds r0, r1
 	ldr r1, [r0]
@@ -455,7 +455,7 @@ _080BDA24:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080BDA38: .4byte gUnknown_83ECED4
+_080BDA38: .4byte gEasyChatGroups
 _080BDA3C: .4byte 0x000001ff
 	thumb_func_end sub_80BD9E8
 
@@ -829,7 +829,7 @@ _080BDCD8:
 	bl __umodsi3
 	lsls r0, 16
 	lsrs r4, r0, 16
-	ldr r0, _080BDD2C @ =gUnknown_83ECED4
+	ldr r0, _080BDD2C @ =gEasyChatGroups
 	ldr r5, [r0]
 	ldrh r7, [r0, 0x4]
 	movs r6, 0
@@ -864,7 +864,7 @@ _080BDD24:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080BDD2C: .4byte gUnknown_83ECED4
+_080BDD2C: .4byte gEasyChatGroups
 _080BDD30: .4byte 0x0000ffff
 	thumb_func_end sub_80BDCB8
 
@@ -1180,7 +1180,7 @@ sub_80BDF6C: @ 80BDF6C
 	lsls r1, 24
 	lsls r2, 16
 	lsrs r5, r2, 16
-	ldr r0, _080BDFAC @ =gUnknown_83EDF98
+	ldr r0, _080BDFAC @ =gEasyChatGroupNames
 	lsrs r1, 22
 	adds r1, r0
 	ldr r1, [r1]
@@ -1209,19 +1209,19 @@ _080BDFA0:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080BDFAC: .4byte gUnknown_83EDF98
+_080BDFAC: .4byte gEasyChatGroupNames
 	thumb_func_end sub_80BDF6C
 
 	thumb_func_start sub_80BDFB0
 sub_80BDFB0: @ 80BDFB0
 	lsls r0, 24
-	ldr r1, _080BDFBC @ =gUnknown_83EDF98
+	ldr r1, _080BDFBC @ =gEasyChatGroupNames
 	lsrs r0, 22
 	adds r0, r1
 	ldr r0, [r0]
 	bx lr
 	.align 2, 0
-_080BDFBC: .4byte gUnknown_83EDF98
+_080BDFBC: .4byte gEasyChatGroupNames
 	thumb_func_end sub_80BDFB0
 
 	thumb_func_start CopyEasyChatWordPadded
@@ -1519,7 +1519,7 @@ sub_80BE1E8: @ 80BE1E8
 	push {r5-r7}
 	lsls r0, 16
 	lsrs r2, r0, 16
-	ldr r1, _080BE270 @ =gUnknown_83ECED4
+	ldr r1, _080BE270 @ =gEasyChatGroups
 	lsls r0, r2, 3
 	adds r0, r1
 	ldrh r7, [r0, 0x4]
@@ -1582,7 +1582,7 @@ _080BE262:
 	bcc _080BE22A
 	b _080BE2DC
 	.align 2, 0
-_080BE270: .4byte gUnknown_83ECED4
+_080BE270: .4byte gEasyChatGroups
 _080BE274: .4byte gUnknown_20399BC
 _080BE278: .4byte 0x00003984
 _080BE27C: .4byte 0x000001ff
@@ -1791,7 +1791,7 @@ _080BE3F6:
 	movs r0, 0x1
 	b _080BE40C
 _080BE3FA:
-	ldr r1, _080BE414 @ =gUnknown_83ECED4
+	ldr r1, _080BE414 @ =gEasyChatGroups
 	lsls r0, 3
 	adds r0, r1
 	ldr r1, [r0]
@@ -1805,7 +1805,7 @@ _080BE40C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080BE414: .4byte gUnknown_83ECED4
+_080BE414: .4byte gEasyChatGroups
 	thumb_func_end sub_80BE3A4
 
 	thumb_func_start sub_80BE418

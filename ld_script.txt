@@ -447,7 +447,7 @@ SECTIONS {
         data/naming_screen.o(.rodata);
         src/pokemon_size_record.o(.rodata);
         data/item_use.o(.rodata);
-        data/data_835B488.o(.rodata);
+        data/battle_anim_effects_misc.o(.rodata);
         src/flying.o(.rodata);
         src/psychic.o(.rodata);
         src/bug.o(.rodata);
@@ -459,7 +459,9 @@ SECTIONS {
         src/normal.o(.rodata);
         src/battle_anim_utility_funcs.o(.rodata);
         src/battle_intro.o(.rodata);
-        data/data_835B488.o(.rodata.83E7CFC);
+        data/bike.o(.rodata);
+        data/easy_chat.o(.rodata);
+        data/data_835B488.o(.rodata);
         src/mail.o(.rodata);
         src/heal_location.o(.rodata);
         data/data_835B488.o(.rodata.83EEC98);

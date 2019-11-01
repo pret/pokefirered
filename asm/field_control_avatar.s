@@ -1725,7 +1725,7 @@ sub_806D5E8: @ 806D5E8
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806D658
-	bl sub_80830B8
+	bl UpdateRepelCounter
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1956,7 +1956,7 @@ _0806D7E2:
 	thumb_func_start RestartWildEncounterImmunitySteps
 RestartWildEncounterImmunitySteps: @ 806D7E8
 	push {lr}
-	bl sub_80832D4
+	bl ResetEncounterRateModifiers
 	pop {r0}
 	bx r0
 	thumb_func_end RestartWildEncounterImmunitySteps
@@ -1964,7 +1964,7 @@ RestartWildEncounterImmunitySteps: @ 806D7E8
 	thumb_func_start is_it_battle_time_3
 is_it_battle_time_3: @ 806D7F4
 	push {lr}
-	bl sub_80833B0
+	bl TryStandardWildEncounter
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}

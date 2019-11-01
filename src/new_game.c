@@ -102,7 +102,7 @@ void ResetMenuAndMonGlobals(void)
     ResetTMCaseCursorPos();
     BerryPouch_CursorResetToTop();
     sub_811089C();
-    sub_8083214(Random());
+    SeedWildEncounterRng(Random());
     ResetSpecialVars();
 }
 

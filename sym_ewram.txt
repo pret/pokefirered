@@ -213,13 +213,9 @@ gUnknown_20386A8: @ 20386A8
 
 	.include "src/battle_setup.o"
 	.align 2
+	.include "src/wild_encounter.o"
 
-gUnknown_20386D0: @ 20386D0
-	.space 0xC
-
-gUnknown_20386DC: @ 20386DC
-	.space 0x4
-
+	.align 2
 gFieldEffectArguments: @ 20386E0
 	.space 0x20
 

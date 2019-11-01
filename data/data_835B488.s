@@ -1,43 +1,12 @@
+#include "constants/maps.h"
+#include "constants/species.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 
 	.section .rodata
 	.align 2
 
-gUnknown_83C68E0:: @ 83C68E0
-	.incbin "baserom.gba", 0x3C68E0, 0x4
-
-gUnknown_83C68E4:: @ 83C68E4
-	.incbin "baserom.gba", 0x3C68E4, 0x8
-
-gUnknown_83C68EC:: @ 83C68EC
-	.incbin "baserom.gba", 0x3C68EC, 0x4
-
-	.section .rodata.83C6AB0
-
-gUnknown_83C6AB0:: @ 83C6AB0
-	.incbin "baserom.gba", 0x3C6AB0, 0x8
-
-gUnknown_83C6AB8:: @ 83C6AB8
-	.incbin "baserom.gba", 0x3C6AB8, 0x790
-
-gUnknown_83C7248:: @ 83C7248
-	.incbin "baserom.gba", 0x3C7248, 0x10
-
-gUnknown_83C7258:: @ 83C7258
-	.incbin "baserom.gba", 0x3C7258, 0x3C
-
-gUnknown_83C7294:: @ 83C7294
-	.incbin "baserom.gba", 0x3C7294, 0xF4
-
-gUnknown_83C7388:: @ 83C7388
-	.incbin "baserom.gba", 0x3C7388, 0x2930
-
-gWildMonHeaders:: @ 83C9CB8
-	.incbin "baserom.gba", 0x3C9CB8, 0xA64
-
-gUnknown_83CA71C:: @ 83CA71C
-	.incbin "baserom.gba", 0x3CA71C, 0xED4
+	.incbin "baserom.gba", 0x3CA770, 0xE80
 
 gUnknown_83CB5F0:: @ 83CB5F0
 	.incbin "baserom.gba", 0x3CB5F0, 0x200

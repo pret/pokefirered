@@ -4481,7 +4481,7 @@ sub_805D508: @ 805D508
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
-	bl sub_8082F78
+	bl DoesCurrentMapHaveFishingMons
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805D53A
@@ -4791,7 +4791,7 @@ _0805D788:
 	ldrh r0, [r5, 0x26]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8082FB0
+	bl FishingWildEncounter
 	ldr r0, _0805D7BC @ =sub_805D304
 	bl FindTaskIdByFunc
 	lsls r0, 24

@@ -198,8 +198,8 @@ _08081C8C:
 _08081C98: .4byte gUnknown_83C7248
 	thumb_func_end sub_8081BEC
 
-	thumb_func_start sub_8081C9C
-sub_8081C9C: @ 8081C9C
+	thumb_func_start IsTrainerInRangeSouth
+IsTrainerInRangeSouth: @ 8081C9C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	lsls r1, 16
@@ -242,7 +242,7 @@ _08081CE6:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8081C9C
+	thumb_func_end IsTrainerInRangeSouth
 
 	thumb_func_start IsTrainerInRangeNorth
 IsTrainerInRangeNorth: @ 8081CEC

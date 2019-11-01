@@ -870,7 +870,7 @@ static void sub_8110F90(u8 unused)
     gSaveBlock1Ptr->location.warpId = -1;
     gUnknown_203ADF8 = 0;
     gDisableMapMusicChangeOnMapLoad = 1;
-    sub_8082740(1);
+    DisableWildEncounters(TRUE);
     sub_8111368();
 }
 
@@ -1600,7 +1600,7 @@ static void sub_81120AC(u8 taskId)
         ScriptContext2_Disable();
         gTextFlags.autoScroll = FALSE;
         gUnknown_2036E28 = 0;
-        sub_8082740(0);
+        DisableWildEncounters(FALSE);
         gHelpSystemEnabled = TRUE;
         DestroyTask(taskId);
         break;

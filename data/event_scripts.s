@@ -10397,7 +10397,7 @@ EventScript_1BE06F:: @ 81BE06F
 	applymovement VAR_LAST_TALKED, Movement_1BE08F
 	waitmovement 0
 	removeobject VAR_LAST_TALKED
-	special Special_RockSmashEncounter
+	special ScrSpecial_RockSmashWildEncounter
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1BE08D
 	waitstate
@@ -11731,7 +11731,7 @@ EventScript_81BFB5F:: @ 81BFB5F
 	setflashradius 0
 	end
 
-EventScript_1BFB65:: @ 81BFB65
+EventScript_RepelWoreOff:: @ 81BFB65
 	msgbox Text_1BFB6E, 3
 	end
 

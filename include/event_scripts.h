@@ -1186,4 +1186,6 @@ extern const u8 Text_1BCA95[];
 extern const u8 Text_1BCACB[];
 extern const u8 Text_1BCAF2[];
 
+extern const u8 EventScript_RepelWoreOff[];
+
 #endif //GUARD_EVENT_SCRIPTS_H

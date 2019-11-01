@@ -22,6 +22,7 @@
 #include "script.h"
 #include "event_data.h"
 #include "string_util.h"
+#include "mail.h"
 #include "mail_data.h"
 #include "pokeball.h"
 #include "evolution_scene.h"
@@ -2484,7 +2485,7 @@ static void CreateInGameTradePokemonInternal(u8 playerSlot, u8 inGameTradeIdx)
 static void GetInGameTradeMail(struct MailStruct * mail, const struct InGameTrade * inGameTrade)
 {
     int i;
-    for (i = 0; i < 9; i++)
+    for (i = 0; i < MAIL_WORDS_COUNT; i++)
         mail->words[i] = sInGameTradeMailMessages[inGameTrade->mailNum][i];
     StringCopy(mail->playerName, inGameTrade->otName);
     mail->trainerId[0] = inGameTrade->otId >> 24;

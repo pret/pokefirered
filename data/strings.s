@@ -4368,7 +4368,7 @@ gEasyChatGroupName_Pokemon2:: @ 841DFDE
 	.string "POKéMON2$"
 
 	@ trade-related
-gUnknown_841E093:: @ 841E093
+gText_ThreeQuestionMarks:: @ 841E093
 	.string "???$"
 
 	.string "$"

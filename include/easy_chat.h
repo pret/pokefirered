@@ -2,6 +2,7 @@
 #define GUARD_EASYCHAT_H
 
 #include "global.h"
+#include "constants/easy_chat.h"
 
 struct EasyChatWordInfo
 {
@@ -31,13 +32,21 @@ struct EasyChatWordsByLetter
 
 void InitEasyChatPhrases(void);
 void easy_chat_input_maybe(void);
-void CopyEasyChatWord(u8 *dest, u16 word);
+u8 *CopyEasyChatWord(u8 *dest, u16 word);
 bool32 sub_811F8D8(u16 word);
 void InitializeEasyChatWordArray(u16 *words, u16 length);
-void ConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 length1, u16 length2);
+u8 *ConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 length1, u16 length2);
 bool8 ECWord_CheckIfOutsideOfValidRange(u16 word);
 void sub_80BDE28(void);
 void InitEasyChatPhrases(void);
 void EnableRareWord(u8);
+bool8 sub_80BDE44(void);
+void sub_80BDE70(void);
+u8 sub_80BDF44(u8);
+void sub_80BE16C(int, u16);
+u16 sub_80BE1D4(void);
+u16 sub_80BE19C(u16);
+const u8 *GetEasyChatWordGroupName(u8);
+u8 *CopyEasyChatWordPadded(u8 *, u16, u16);
 
 #endif // GUARD_EASYCHAT_H

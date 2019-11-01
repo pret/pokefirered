@@ -754,10 +754,10 @@ struct SaveBlock1
     /*0x1000*/ u16 vars[VARS_COUNT];
     /*0x1200*/ u32 gameStats[NUM_GAME_STATS];
     /*0x1300*/ struct QuestLog questLog[4];
-    /*0x2CA0*/ u16 unk2CA0[6];
-    /*0x2CAC*/ u16 unk2CAC[6];
-    /*0x2CB8*/ u16 unk2CB8[6];
-    /*0x2CC4*/ u16 unk2CC4[6];
+    /*0x2CA0*/ u16 easyChatProfile[6];
+    /*0x2CAC*/ u16 easyChatBattleStart[6];
+    /*0x2CB8*/ u16 easyChatBattleWon[6];
+    /*0x2CC4*/ u16 easyChatBattleLost[6];
     /*0x2CD0*/ struct MailStruct mail[MAIL_COUNT];
     /*0x2F10*/ u8 additionalPhrases[EASY_CHAT_EXTRA_PHRASES_SIZE];
     /*0x2F18*/ OldMan oldMan; // unused

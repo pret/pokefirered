@@ -772,7 +772,7 @@ void sub_81442CC(struct MEventStruct_Unk1442CC * data)
     CopyTrainerId(data->unk_4C, gSaveBlock2Ptr->playerTrainerId);
     StringCopy(data->unk_45, gSaveBlock2Ptr->playerName);
     for (i = 0; i < 6; i++)
-        data->unk_50[i] = gSaveBlock1Ptr->unk2CA0[i];
+        data->unk_50[i] = gSaveBlock1Ptr->easyChatProfile[i];
     memcpy(data->unk_5C, RomHeaderGameCode, 4);
     data->unk_60 = RomHeaderSoftwareVersion;
 }

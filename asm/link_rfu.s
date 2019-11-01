@@ -8497,7 +8497,7 @@ _0810134A:
 	lsrs r0, 24
 	cmp r0, 0x16
 	beq _0810138A
-	bl sub_80BDFB0
+	bl GetEasyChatWordGroupName
 	adds r2, r0, 0
 	movs r0, 0x54
 	adds r3, r4, 0

@@ -69,5 +69,6 @@ u32 MENews_GetInput(u16 input);
 void sub_8143D24(void);
 u16 sub_81445C0(u32 command);
 void sub_8144714(u32 a0, u32 a1);
+u16 *sub_8143DA8(void);
 
 #endif //GUARD_MEVENT_H

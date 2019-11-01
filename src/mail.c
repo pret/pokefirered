@@ -70,8 +70,8 @@ struct MailViewResources {
     u8 monIconSpriteId;
     u8 unused;
     u8 mailArrangementType;
-    void (*copyEasyChatWord)(u8 *dest, u16 word);
-    void (*convertEasyChatWordsToString)(u8 *dest, const u16 *src, u16 length1, u16 length2);
+    u8 *(*copyEasyChatWord)(u8 *dest, u16 word);
+    u8 *(*convertEasyChatWordsToString)(u8 *dest, const u16 *src, u16 length1, u16 length2);
     const struct MailAttrStruct * messageLayout;
     u16 bg1TilemapBuffer[BG_SCREEN_SIZE];
     u16 bg2TilemapBuffer[BG_SCREEN_SIZE];

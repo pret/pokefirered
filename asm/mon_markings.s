@@ -981,4 +981,10 @@ sub_80BEBD0: @ 80BEBD0
 _080BEBE8: .4byte gUnknown_83EE028
 	thumb_func_end sub_80BEBD0
 
+	.section ewram_data
+	.align 2, 0
+gUnknown_20399C0:
+	.4byte 0
+
+	.text
 	.align 2, 0 @ Don't pad with nop.

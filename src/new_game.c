@@ -130,8 +130,8 @@ void NewGameInitData(void)
     SetMoney(&gSaveBlock1Ptr->money, 3000);
     ResetGameStats();
     ClearPlayerLinkBattleRecords();
-    sub_80A0904();
-    sub_80A0958();
+    InitHeracrossSizeRecord();
+    InitMagikarpSizeRecord();
     sub_806E190();
     gPlayerPartyCount = 0;
     ZeroPlayerPartyMons();

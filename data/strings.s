@@ -1822,7 +1822,7 @@ gUnknown_8417FB2:: @ 0x8417FB2
 gUnknown_8417FB6:: @ 0x8417FB6
 	.string "かい$"
 
-gUnknown_8417FB9:: @ 8417FB9
+gText_DecimalPoint:: @ 8417FB9
 	.string ".$"
 
 gText_BigGuy:: @ 8417FBB
@@ -4301,53 +4301,74 @@ gUnknown_841DFBE:: @ 841DFBE
 gUnknown_841DFC9:: @ 841DFC9
 	.string "{KEYGFX_DPAD_UP_DOWN}PICK {KEYGFX_A_BUTTON}OK {KEYGFX_B_BUTTON}CANCEL$"
 
-	@ easy chat categories
+gEasyChatGroupName_Pokemon:: @ 841E08A	@ easy chat categories
 	.string "POKéMON$"
 
+gEasyChatGroupName_Trainer:: @ 841DFE6
 	.string "TRAINER$"
 
+gEasyChatGroupName_Status:: @ 841DFEE
 	.string "STATUS$"
 
+gEasyChatGroupName_Battle:: @ 841DFF5
 	.string "BATTLE$"
 
+gEasyChatGroupName_Greetings:: @ 841DFFC
 	.string "GREETINGS$"
 
+gEasyChatGroupName_People:: @ 841E006
 	.string "PEOPLE$"
 
+gEasyChatGroupName_Voices:: @ 841E00D
 	.string "VOICES$"
 
+gEasyChatGroupName_Speech:: @ 841E014
 	.string "SPEECH$"
 
+gEasyChatGroupName_Endings:: @ 841E01B
 	.string "ENDINGS$"
 
+gEasyChatGroupName_Feelings:: @ 841E023
 	.string "FEELINGS$"
 
+gEasyChatGroupName_Conditions:: @ 841E02C
 	.string "CONDITIONS$"
 
+gEasyChatGroupName_Actions:: @ 841E037
 	.string "ACTIONS$"
 
+gEasyChatGroupName_Lifestyle:: @ 841E03F
 	.string "LIFESTYLE$"
 
+gEasyChatGroupName_Hobbies:: @ 841E049
 	.string "HOBBIES$"
 
+gEasyChatGroupName_Time:: @ 841E051
 	.string "TIME$"
 
+gEasyChatGroupName_Misc:: @ 841E056
 	.string "MISC.$"
 
+gEasyChatGroupName_Adjectives:: @ 841E05C
 	.string "ADJECTIVES$"
 
+gEasyChatGroupName_Events:: @ 841E067
 	.string "EVENTS$"
 
+gEasyChatGroupName_Move1:: @ 841E06E
 	.string "MOVE 1$"
 
+gEasyChatGroupName_Move2:: @ 841E075
 	.string "MOVE 2$"
 
+gEasyChatGroupName_TrendySaying:: @ 841E07C
 	.string "TRENDY SAYING$"
 
+gEasyChatGroupName_Pokemon2:: @ 841DFDE
 	.string "POKéMON2$"
 
 	@ trade-related
-gUnknown_841E093:: @ 841E093
+gText_ThreeQuestionMarks:: @ 841E093
 	.string "???$"
 
 	.string "$"

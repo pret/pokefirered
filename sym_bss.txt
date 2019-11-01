@@ -68,26 +68,8 @@ gUnknown_3000FC8: @ 3000FC8
 gUnknown_3000FE8: @ 3000FE8
 	.space 0x184
 
-gUnknown_300116C: @ 300116C
-	.space 0x4
-
-gUnknown_3001170: @ 3001170
-	.space 0x4
-
-gUnknown_3001174: @ 3001174
-	.space 0x4
-
-gUnknown_3001178: @ 3001178
-	.space 0x4
-
-gUnknown_300117C: @ 300117C
-	.space 0x4
-
-gUnknown_3001180: @ 3001180
-	.space 0x4
-
-gUnknown_3001184: @ 3001184
-	.space 0x4
+	.align 2
+	.include "src/easy_chat.o"
 
 gUnknown_3001188: @ 3001188
 	.space 0x8

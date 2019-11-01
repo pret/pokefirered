@@ -11,8 +11,8 @@ void InitLotadSizeRecord(void);
 void GetLotadSizeRecordInfo(void);
 void CompareLotadSize(void);
 
-void sub_80A0904(void);
-void sub_80A0958(void);
+void InitHeracrossSizeRecord(void);
+void InitMagikarpSizeRecord(void);
 
 void GiveGiftRibbonToParty(u8 index, u8 ribbonId);
 

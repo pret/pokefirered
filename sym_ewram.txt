@@ -362,17 +362,16 @@ gUnknown_203998C: @ 203998C
 gUnknown_203999C: @ 203999C
 	.space 0x8
 
-	.include "src/dragon.o"
-	.include "src/battle_anim_utility_funcs.o"
-	.include "src/battle_intro.o"
-
 	.align 2
-gUnknown_20399BC: @ 20399BC
-	.space 0x4
-
-gUnknown_20399C0: @ 20399C0
-	.space 0x4
-
+	.include "src/dragon.o"
+	.align 2
+	.include "src/battle_anim_utility_funcs.o"
+	.align 2
+	.include "src/battle_intro.o"
+	.align 2
+	.include "src/easy_chat.o"
+	.align 2
+	.include "asm/mon_markings.o" @ TODO: Move to src
 	.align 2
 	.include "src/mail.o"
 	.align 2

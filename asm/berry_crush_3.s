@@ -1537,7 +1537,7 @@ _0814E21A:
 	lsls r1, r2, 3
 	subs r1, r2
 	lsls r1, 2
-	ldr r0, _0814E294 @ =sBerries
+	ldr r0, _0814E294 @ =gBerries
 	adds r1, r0
 	ldr r0, _0814E298 @ =gStringVar1
 	bl StringCopy
@@ -1591,7 +1591,7 @@ _0814E27E:
 	bl StringCopy
 	b _0814E2B8
 	.align 2, 0
-_0814E294: .4byte sBerries
+_0814E294: .4byte gBerries
 _0814E298: .4byte gStringVar1
 _0814E29C: .4byte gUnknown_846F4B8
 _0814E2A0: .4byte gStringVar4

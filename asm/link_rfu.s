@@ -3443,7 +3443,7 @@ _080FEDC0:
 	bl ResetPaletteFade
 	b _080FEE16
 _080FEDD4:
-	bl sub_80BDE44
+	bl InitEasyChatSelection
 	b _080FEDF2
 _080FEDDA:
 	ldrb r4, [r6, 0x2]
@@ -3490,7 +3490,7 @@ _080FEE1E:
 sub_80FEE24: @ 80FEE24
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80BDE70
+	bl DestroyEasyChatSelectionData
 	bl sub_80FF010
 	bl sub_810011C
 	bl FreeAllWindowBuffers
@@ -3701,7 +3701,7 @@ _080FEFE0:
 	ldrb r2, [r0, 0x7]
 	adds r0, r6, 0
 	bl CpuSet
-	bl sub_80BDF38
+	bl GetNumDisplayableGroups
 	ldr r2, [r4]
 	lsls r0, 24
 	lsrs r0, 24
@@ -4565,12 +4565,12 @@ sub_80FF5FC: @ 80FF5FC
 	bl sub_80FFB8C
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80BDF44
+	bl GetSelectedGroupByIndex
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	movs r0, 0
-	bl sub_80BE16C
+	bl GetUnlockedECWords
 	b _080FF638
 	.align 2, 0
 _080FF624: .4byte gUnknown_203ACE8
@@ -4580,9 +4580,9 @@ _080FF628:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x1
-	bl sub_80BE16C
+	bl GetUnlockedECWords
 _080FF638:
-	bl sub_80BE1D4
+	bl GetNumDisplayedWords
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0
@@ -4673,7 +4673,7 @@ sub_80FF6C8: @ 80FF6C8
 	bl sub_80FFBE4
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_80BE19C
+	bl GetDisplayedWordByIndex
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_80FF768
@@ -5506,7 +5506,7 @@ sub_80FFC6C: @ 80FFC6C
 	bne _080FFC9C
 	bl sub_80FFB8C
 	adds r4, r0, 0
-	bl sub_80BDF38
+	bl GetNumDisplayableGroups
 	movs r1, 0
 	lsls r0, 24
 	lsls r4, 16
@@ -5546,7 +5546,7 @@ sub_80FFCC0: @ 80FFCC0
 	push {r4,lr}
 	bl sub_80FFBE4
 	adds r4, r0, 0
-	bl sub_80BE1D4
+	bl GetNumDisplayedWords
 	movs r1, 0
 	lsls r4, 16
 	lsls r0, 16
@@ -8492,12 +8492,12 @@ _0810134A:
 	lsls r0, r5, 24
 	lsrs r0, 24
 	adds r5, 0x1
-	bl sub_80BDF44
+	bl GetSelectedGroupByIndex
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x16
 	beq _0810138A
-	bl sub_80BDFB0
+	bl GetEasyChatWordGroupName
 	adds r2, r0, 0
 	movs r0, 0x54
 	adds r3, r4, 0
@@ -8708,7 +8708,7 @@ _081014E6:
 	lsls r0, r4, 16
 	lsrs r0, 16
 	adds r4, 0x1
-	bl sub_80BE19C
+	bl GetDisplayedWordByIndex
 	lsls r0, 16
 	lsrs r1, r0, 16
 	ldr r0, _08101554 @ =0x0000ffff

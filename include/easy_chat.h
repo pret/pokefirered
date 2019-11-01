@@ -2,43 +2,48 @@
 #define GUARD_EASYCHAT_H
 
 #include "global.h"
+#include "constants/easy_chat.h"
 
-// Taken from Pokeruby, check if it's correct
-enum
+struct EasyChatWordInfo
 {
-    EC_GROUP_POKEMON,
-    EC_GROUP_TRAINER,
-    EC_GROUP_STATUS,
-    EC_GROUP_BATTLE,
-    EC_GROUP_GREETINGS,
-    EC_GROUP_PEOPLE,
-    EC_GROUP_VOICES,
-    EC_GROUP_SPEECH,
-    EC_GROUP_ENDINGS,
-    EC_GROUP_FEELINGS,
-    EC_GROUP_CONDITIONS,
-    EC_GROUP_ACTIONS,
-    EC_GROUP_LIFESTYLE,
-    EC_GROUP_HOBBIES,
-    EC_GROUP_TIME,
-    EC_GROUP_MISC,
-    EC_GROUP_ADJECTIVES,
-    EC_GROUP_EVENTS,
-    EC_GROUP_MOVE_1,
-    EC_GROUP_MOVE_2,
-    EC_GROUP_TRENDY_SAYING,
-    EC_GROUP_POKEMON_2,
+    const u8 *text;
+    int alphabeticalOrder;
+    int enabled;
+};
+
+typedef union
+{
+    const u16 *valueList;
+    const struct EasyChatWordInfo *words;
+} EasyChatGroupWordData;
+
+struct EasyChatGroup
+{
+    EasyChatGroupWordData wordData;
+    u16 numWords;
+    u16 numEnabledWords;
+};
+
+struct EasyChatWordsByLetter
+{
+    const u16 *words;
+    int numWords;
 };
 
 void InitEasyChatPhrases(void);
-void easy_chat_input_maybe(void);
-void CopyEasyChatWord(u8 *dest, u16 word);
-bool32 sub_811F8D8(u16 word);
-void InitializeEasyChatWordArray(u16 *words, u16 length);
-void ConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 length1, u16 length2);
-bool8 ECWord_CheckIfOutsideOfValidRange(u16 word);
-void sub_80BDE28(void);
+u8 *CopyEasyChatWord(u8 *dest, u16 word);
+u8 *ConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 length1, u16 length2);
+bool8 EC_DoesEasyChatStringFitOnLine(const u16 *easyChatWords, u8 columns, u8 rows, u16 maxLength);
+void ResetSomeMEventECBuffer_3120_338(void);
 void InitEasyChatPhrases(void);
 void EnableRareWord(u8);
+bool8 InitEasyChatSelection(void);
+void DestroyEasyChatSelectionData(void);
+u8 GetSelectedGroupByIndex(u8);
+void GetUnlockedECWords(bool32 isAlphabetical, u16 groupId);
+u16 GetDisplayedWordByIndex(u16 index);
+u16 GetNumDisplayedWords(void);
+const u8 *GetEasyChatWordGroupName(u8);
+u8 *CopyEasyChatWordPadded(u8 *, u16, u16);
 
 #endif // GUARD_EASYCHAT_H

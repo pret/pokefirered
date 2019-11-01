@@ -686,4 +686,28 @@ extern const u8 gUnknown_84170E0[];
 extern const u8 gUnknown_84170FC[];
 extern const u8 gUnknown_841E09F[];
 
+extern const u8 gEasyChatGroupName_Pokemon[];
+extern const u8 gEasyChatGroupName_Trainer[];
+extern const u8 gEasyChatGroupName_Status[];
+extern const u8 gEasyChatGroupName_Battle[];
+extern const u8 gEasyChatGroupName_Greetings[];
+extern const u8 gEasyChatGroupName_People[];
+extern const u8 gEasyChatGroupName_Voices[];
+extern const u8 gEasyChatGroupName_Speech[];
+extern const u8 gEasyChatGroupName_Endings[];
+extern const u8 gEasyChatGroupName_Feelings[];
+extern const u8 gEasyChatGroupName_Conditions[];
+extern const u8 gEasyChatGroupName_Actions[];
+extern const u8 gEasyChatGroupName_Lifestyle[];
+extern const u8 gEasyChatGroupName_Hobbies[];
+extern const u8 gEasyChatGroupName_Time[];
+extern const u8 gEasyChatGroupName_Misc[];
+extern const u8 gEasyChatGroupName_Adjectives[];
+extern const u8 gEasyChatGroupName_Events[];
+extern const u8 gEasyChatGroupName_Move1[];
+extern const u8 gEasyChatGroupName_Move2[];
+extern const u8 gEasyChatGroupName_TrendySaying[];
+extern const u8 gEasyChatGroupName_Pokemon2[];
+extern const u8 gText_ThreeQuestionMarks[];
+
 #endif //GUARD_STRINGS_H

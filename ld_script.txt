@@ -147,7 +147,7 @@ SECTIONS {
         src/money.o(.text);
         asm/script_pokemon_util_80A0058.o(.text);
         src/field_poison.o(.text);
-        asm/pokemon_size_record.o(.text);
+        src/pokemon_size_record.o(.text);
         asm/pc_screen_effect.o(.text);
         src/fldeff_poison.o(.text);
         src/fldeff_berrytree.o(.text);
@@ -444,6 +444,9 @@ SECTIONS {
         data/shop.o(.rodata);
         src/berry.o(.rodata);
         src/script_menu.o(.rodata);
+        data/naming_screen.o(.rodata);
+        src/pokemon_size_record.o(.rodata);
+        data/item_use.o(.rodata);
         data/data_835B488.o(.rodata);
         src/flying.o(.rodata);
         src/psychic.o(.rodata);

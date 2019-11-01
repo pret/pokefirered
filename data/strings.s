@@ -1822,7 +1822,7 @@ gUnknown_8417FB2:: @ 0x8417FB2
 gUnknown_8417FB6:: @ 0x8417FB6
 	.string "かい$"
 
-gUnknown_8417FB9:: @ 8417FB9
+gText_DecimalPoint:: @ 8417FB9
 	.string ".$"
 
 gText_BigGuy:: @ 8417FBB

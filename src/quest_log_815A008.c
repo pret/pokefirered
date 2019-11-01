@@ -1,5 +1,4 @@
 #include "global.h"
-#include "battle.h"
 #include "event_data.h"
 #include "quest_log.h"
 #include "fieldmap.h"
@@ -7,59 +6,6 @@
 #include "metatile_behavior.h"
 #include "link.h"
 #include "link_rfu.h"
-#include "constants/species.h"
-#include "constants/moves.h"
-#include "constants/pokemon.h"
-
-// Don't forget to delete these move the function to battle_controller_pokedude.c
-// and headers
-// currently I need these for building
-struct PokedudeBattlePartyInfo
-{
-    u8 side;
-    u8 level;
-    u16 species;
-    u16 moves[4];
-    u8 nature;
-    u8 gender;
-};
-extern const struct PokedudeBattlePartyInfo *const sPokedudeBattlePartyPointers[];
-void InitPokedudePartyAndOpponent(void)
-{
-    s32 i, j;
-    struct Pokemon * mon;
-    s32 myIdx = 0;
-    s32 opIdx = 0;
-    const struct PokedudeBattlePartyInfo * data;
-
-    gBattleTypeFlags = BATTLE_TYPE_POKEDUDE;
-    ZeroPlayerPartyMons();
-    ZeroEnemyPartyMons();
-    data = sPokedudeBattlePartyPointers[gSpecialVar_0x8004];
-
-    i = 0;
-    do
-    {
-        if (data[i].side == 0)
-        {
-            mon = &gPlayerParty[myIdx];
-            myIdx++;
-        }
-        else
-        {
-            mon = &gEnemyParty[opIdx];
-            opIdx++;
-        }
-        CreateMonWithGenderNatureLetter(mon, data[i].species, data[i].level, 0, data[i].gender, data[i].nature, 0);
-        for (j = 0; j < 4; j++)
-        {
-            SetMonMoveSlot(mon, data[i].moves[j], j);
-        }
-        i++;
-    } while (data[i].side != 0xFF);
-}
-
-// file boundary?
 
 void sub_815A008(struct QuestLog * questLog)
 {

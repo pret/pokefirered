@@ -203,7 +203,7 @@ void BtlController_EmitPrintString(u8 bufferId, u16 stringId);
 void BtlController_EmitPrintSelectionString(u8 bufferId, u16 stringId);
 void BtlController_EmitChooseAction(u8 bufferId, u8 arg1, u16 arg2);
 void BtlController_EmitChooseMove(u8 bufferId, bool8 isDoubleBattle, bool8 NoPpNumber, struct ChooseMoveStruct *movePpData);
-void BtlController_EmitChooseItem(u8 bufferId, u8* arg1);
+void BtlController_EmitChooseItem(u8 bufferId, u8 *arg1);
 void BtlController_EmitChoosePokemon(u8 bufferId, u8 caseId, u8 arg2, u8 abilityId, u8* arg4);
 void BtlController_EmitHealthBarUpdate(u8 bufferId, u16 hpValue);
 void BtlController_EmitExpUpdate(u8 bufferId, u8 partyId, u16 expPoints);
@@ -221,7 +221,7 @@ void BtlController_EmitPlayFanfare(u8 bufferId, u16 songId);
 void BtlController_EmitFaintingCry(u8 bufferId);
 void BtlController_EmitIntroSlide(u8 bufferId, u8 terrainId);
 void BtlController_EmitIntroTrainerBallThrow(u8 bufferId);
-void BtlController_EmitDrawPartyStatusSummary(u8 bufferId, struct HpAndStatus* hpAndStatus, u8 arg2);
+void BtlController_EmitDrawPartyStatusSummary(u8 bufferId, struct HpAndStatus *hpAndStatus, u8 arg2);
 void BtlController_EmitHidePartyStatusSummary(u8 bufferId);
 void BtlController_EmitEndBounceEffect(u8 bufferId);
 void BtlController_EmitSpriteInvisibility(u8 bufferId, bool8 isInvisible);
@@ -246,21 +246,16 @@ void MoveSelectionCreateCursorAt(u8 cursorPos, u8 arg1);
 void MoveSelectionDestroyCursorAt(u8 cursorPos);
 void HandleInputChooseMove(void);
 
-// recorded player controller
-void SetControllerToRecordedPlayer(void);
-
 // opponent controller
 void SetControllerToOpponent(void);
 void OpponentBufferExecCompleted(void);
-
-// player partner controller
-void SetControllerToPlayerPartner(void);
 
 // safari controller
 void SetControllerToSafari(void);
 
 // pokedude controller
 void SetControllerToPokedude(void);
+void InitPokedudePartyAndOpponent(void);
 
 // oak and old man controller
 void SetControllerToOakOrOldMan(void);
@@ -273,10 +268,10 @@ void sub_80E7988(void);
 void sub_80EB30C(void);
 void sub_80EB524(void);
 
-// link opponent
+// link opponent controller
 void SetControllerToLinkOpponent(void);
 
-// link partner
+// link partner controller
 void SetControllerToLinkPartner(void);
 
 #endif // GUARD_BATTLE_CONTROLLERS_H

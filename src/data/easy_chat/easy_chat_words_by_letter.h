@@ -1,7 +1,7 @@
 #include "easy_chat.h"
 #include "constants/easy_chat.h"
 
-const u16 gEasyChatWordsByLetter_Others[] = {
+static const u16 sEasyChatWordsByLetter_Others[] = {
     EC_WORD_EXCL,
     EC_WORD_EXCL_EXCL,
     EC_WORD_DASH,
@@ -14,7 +14,7 @@ const u16 gEasyChatWordsByLetter_Others[] = {
     EC_WORD_QUES_EXCL,
 };
 
-const u16 gEasyChatWordsByLetter_A[] = {
+static const u16 sEasyChatWordsByLetter_A[] = {
     EC_WORD_A,
     EC_WORD_A_LITTLE,
     EC_WORD_A_LOT,
@@ -120,7 +120,7 @@ const u16 gEasyChatWordsByLetter_A[] = {
     EC_POKEMON2(AZURILL),
 };
 
-const u16 gEasyChatWordsByLetter_B[] = {
+static const u16 sEasyChatWordsByLetter_B[] = {
     EC_WORD_BABE,
     EC_WORD_BABY,
     EC_WORD_BACK,
@@ -208,7 +208,7 @@ const u16 gEasyChatWordsByLetter_B[] = {
     EC_WORD_BYE_BYE,
 };
 
-const u16 gEasyChatWordsByLetter_C[] = {
+static const u16 sEasyChatWordsByLetter_C[] = {
     EC_POKEMON2(CACNEA),
     EC_POKEMON2(CACTURNE),
     EC_MOVE2(CALM_MIND),
@@ -327,7 +327,7 @@ const u16 gEasyChatWordsByLetter_C[] = {
     EC_POKEMON(CYNDAQUIL),
 };
 
-const u16 gEasyChatWordsByLetter_D[] = {
+static const u16 sEasyChatWordsByLetter_D[] = {
     EC_WORD_DAILY,
     EC_WORD_DAMP,
     EC_WORD_DANCE,
@@ -421,7 +421,7 @@ const u16 gEasyChatWordsByLetter_D[] = {
     EC_MOVE2(DYNAMIC_PUNCH),
 };
 
-const u16 gEasyChatWordsByLetter_E[] = {
+static const u16 sEasyChatWordsByLetter_E[] = {
     EC_WORD_EARLIER,
     EC_WORD_EARLY_BIRD,
     EC_MOVE(EARTHQUAKE),
@@ -481,7 +481,7 @@ const u16 gEasyChatWordsByLetter_E[] = {
     EC_MOVE(EXTREME_SPEED),
 };
 
-const u16 gEasyChatWordsByLetter_F[] = {
+static const u16 sEasyChatWordsByLetter_F[] = {
     EC_WORD_FABULOUS,
     EC_MOVE(FACADE),
     EC_WORD_FAINT,
@@ -563,7 +563,7 @@ const u16 gEasyChatWordsByLetter_F[] = {
     EC_MOVE2(FUTURE_SIGHT),
 };
 
-const u16 gEasyChatWordsByLetter_G[] = {
+static const u16 sEasyChatWordsByLetter_G[] = {
     EC_WORD_GAME,
     EC_POKEMON2(GARDEVOIR),
     EC_POKEMON(GASTLY),
@@ -654,7 +654,7 @@ const u16 gEasyChatWordsByLetter_G[] = {
     EC_POKEMON(GYARADOS),
 };
 
-const u16 gEasyChatWordsByLetter_H[] = {
+static const u16 sEasyChatWordsByLetter_H[] = {
     EC_WORD_HABIT,
     EC_WORD_HAH,
     EC_WORD_HAHAHA,
@@ -756,7 +756,7 @@ const u16 gEasyChatWordsByLetter_H[] = {
     EC_MOVE(HYPNOSIS),
 };
 
-const u16 gEasyChatWordsByLetter_I[] = {
+static const u16 sEasyChatWordsByLetter_I[] = {
     EC_WORD_I,
     EC_WORD_I_AM,
     EC_WORD_I_CHOOSE_YOU,
@@ -806,7 +806,7 @@ const u16 gEasyChatWordsByLetter_I[] = {
     EC_POKEMON(IVYSAUR),
 };
 
-const u16 gEasyChatWordsByLetter_J[] = {
+static const u16 sEasyChatWordsByLetter_J[] = {
     -1, 2, // Doubled pokemon species name
     EC_POKEMON2(JIGGLYPUFF),
     EC_POKEMON(JIGGLYPUFF),
@@ -821,7 +821,7 @@ const u16 gEasyChatWordsByLetter_J[] = {
     EC_POKEMON(JYNX),
 };
 
-const u16 gEasyChatWordsByLetter_K[] = {
+static const u16 sEasyChatWordsByLetter_K[] = {
     EC_POKEMON(KABUTO),
     EC_POKEMON(KABUTOPS),
     -1, 2, // Doubled pokemon species name
@@ -854,7 +854,7 @@ const u16 gEasyChatWordsByLetter_K[] = {
     EC_POKEMON2(KYOGRE),
 };
 
-const u16 gEasyChatWordsByLetter_L[] = {
+static const u16 sEasyChatWordsByLetter_L[] = {
     EC_WORD_LACKING,
     EC_WORD_LACKS,
     EC_WORD_LADY,
@@ -938,7 +938,7 @@ const u16 gEasyChatWordsByLetter_L[] = {
     EC_POKEMON2(LUVDISC),
 };
 
-const u16 gEasyChatWordsByLetter_M[] = {
+static const u16 sEasyChatWordsByLetter_M[] = {
     EC_MOVE2(MACH_PUNCH),
     -1, 2, // Doubled pokemon species name
     EC_POKEMON2(MACHAMP),
@@ -1074,7 +1074,7 @@ const u16 gEasyChatWordsByLetter_M[] = {
     EC_WORD_MYSTERY,
 };
 
-const u16 gEasyChatWordsByLetter_N[] = {
+static const u16 sEasyChatWordsByLetter_N[] = {
     EC_WORD_NAME,
     EC_WORD_NAP,
     -1, 2, // Doubled pokemon species name
@@ -1129,7 +1129,7 @@ const u16 gEasyChatWordsByLetter_N[] = {
     EC_POKEMON2(NUZLEAF),
 };
 
-const u16 gEasyChatWordsByLetter_O[] = {
+static const u16 sEasyChatWordsByLetter_O[] = {
     EC_WORD_OBLIVIOUS,
     EC_MOVE(OCTAZOOKA),
     EC_POKEMON(OCTILLERY),
@@ -1175,7 +1175,7 @@ const u16 gEasyChatWordsByLetter_O[] = {
     EC_WORD_OWN_TEMPO,
 };
 
-const u16 gEasyChatWordsByLetter_P[] = {
+static const u16 sEasyChatWordsByLetter_P[] = {
     EC_MOVE(PAIN_SPLIT),
     EC_POKEMON(PARAS),
     EC_POKEMON(PARASECT),
@@ -1274,7 +1274,7 @@ const u16 gEasyChatWordsByLetter_P[] = {
     EC_WORD_PUSHOVER,
 };
 
-const u16 gEasyChatWordsByLetter_Q[] = {
+static const u16 sEasyChatWordsByLetter_Q[] = {
     EC_POKEMON(QUAGSIRE),
     EC_WORD_QUESTION,
     EC_MOVE2(QUICK_ATTACK),
@@ -1283,7 +1283,7 @@ const u16 gEasyChatWordsByLetter_Q[] = {
     EC_POKEMON(QWILFISH),
 };
 
-const u16 gEasyChatWordsByLetter_R[] = {
+static const u16 sEasyChatWordsByLetter_R[] = {
     EC_WORD_RADIO,
     EC_MOVE(RAGE),
     -1, 2, // Doubled pokemon species name
@@ -1363,7 +1363,7 @@ const u16 gEasyChatWordsByLetter_R[] = {
     EC_WORD_RUNS,
 };
 
-const u16 gEasyChatWordsByLetter_S[] = {
+static const u16 sEasyChatWordsByLetter_S[] = {
     EC_POKEMON2(SABLEYE),
     EC_MOVE(SACRED_FIRE),
     EC_WORD_SAD,
@@ -1620,7 +1620,7 @@ const u16 gEasyChatWordsByLetter_S[] = {
     EC_WORD_SYSTEM,
 };
 
-const u16 gEasyChatWordsByLetter_T[] = {
+static const u16 sEasyChatWordsByLetter_T[] = {
     EC_MOVE2(TACKLE),
     EC_MOVE2(TAIL_GLOW),
     EC_MOVE(TAIL_WHIP),
@@ -1754,7 +1754,7 @@ const u16 gEasyChatWordsByLetter_T[] = {
     EC_POKEMON(TYROGUE),
 };
 
-const u16 gEasyChatWordsByLetter_U[] = {
+static const u16 sEasyChatWordsByLetter_U[] = {
     EC_WORD_UGLY,
     EC_WORD_UH_HUH,
     EC_WORD_UH_OH,
@@ -1781,7 +1781,7 @@ const u16 gEasyChatWordsByLetter_U[] = {
     EC_WORD_USING,
 };
 
-const u16 gEasyChatWordsByLetter_V[] = {
+static const u16 sEasyChatWordsByLetter_V[] = {
     EC_WORD_VACATION,
     EC_POKEMON(VAPOREON),
     EC_POKEMON(VENOMOTH),
@@ -1814,7 +1814,7 @@ const u16 gEasyChatWordsByLetter_V[] = {
     EC_POKEMON(VULPIX),
 };
 
-const u16 gEasyChatWordsByLetter_W[] = {
+static const u16 sEasyChatWordsByLetter_W[] = {
     EC_WORD_WAAAH,
     EC_WORD_WAHAHAHA,
     EC_POKEMON2(WAILMER),
@@ -1925,13 +1925,13 @@ const u16 gEasyChatWordsByLetter_W[] = {
     EC_POKEMON2(WYNAUT),
 };
 
-const u16 gEasyChatWordsByLetter_X[] = {
+static const u16 sEasyChatWordsByLetter_X[] = {
     -1, 2, // Doubled pokemon species name
     EC_POKEMON2(XATU),
     EC_POKEMON(XATU),
 };
 
-const u16 gEasyChatWordsByLetter_Y[] = {
+static const u16 sEasyChatWordsByLetter_Y[] = {
     EC_WORD_YAHOO,
     EC_POKEMON(YANMA),
     EC_MOVE(YAWN),
@@ -1953,7 +1953,7 @@ const u16 gEasyChatWordsByLetter_Y[] = {
     EC_WORD_YUP,
 };
 
-const u16 gEasyChatWordsByLetter_Z[] = {
+static const u16 sEasyChatWordsByLetter_Z[] = {
     EC_POKEMON2(ZANGOOSE),
     EC_MOVE2(ZAP_CANNON),
     EC_POKEMON(ZAPDOS),
@@ -1963,113 +1963,113 @@ const u16 gEasyChatWordsByLetter_Z[] = {
     EC_POKEMON(ZUBAT),
 };
 
-const struct EasyChatWordsByLetter gEasyChatWordsByLetterPointers[] = {
+static const struct EasyChatWordsByLetter sEasyChatWordsByLetterPointers[] = {
     {
-        .words = gEasyChatWordsByLetter_Others,
+        .words = sEasyChatWordsByLetter_Others,
         .numWords = 10,
     },
     {
-        .words = gEasyChatWordsByLetter_A,
+        .words = sEasyChatWordsByLetter_A,
         .numWords = 106,
     },
     {
-        .words = gEasyChatWordsByLetter_B,
+        .words = sEasyChatWordsByLetter_B,
         .numWords = 86,
     },
     {
-        .words = gEasyChatWordsByLetter_C,
+        .words = sEasyChatWordsByLetter_C,
         .numWords = 119,
     },
     {
-        .words = gEasyChatWordsByLetter_D,
+        .words = sEasyChatWordsByLetter_D,
         .numWords = 94,
     },
     {
-        .words = gEasyChatWordsByLetter_E,
+        .words = sEasyChatWordsByLetter_E,
         .numWords = 58,
     },
     {
-        .words = gEasyChatWordsByLetter_F,
+        .words = sEasyChatWordsByLetter_F,
         .numWords = 79,
     },
     {
-        .words = gEasyChatWordsByLetter_G,
+        .words = sEasyChatWordsByLetter_G,
         .numWords = 98,
     },
     {
-        .words = gEasyChatWordsByLetter_H,
+        .words = sEasyChatWordsByLetter_H,
         .numWords = 101,
     },
     {
-        .words = gEasyChatWordsByLetter_I,
+        .words = sEasyChatWordsByLetter_I,
         .numWords = 48,
     },
     {
-        .words = gEasyChatWordsByLetter_J,
+        .words = sEasyChatWordsByLetter_J,
         .numWords = 13,
     },
     {
-        .words = gEasyChatWordsByLetter_K,
+        .words = sEasyChatWordsByLetter_K,
         .numWords = 33,
     },
     {
-        .words = gEasyChatWordsByLetter_L,
+        .words = sEasyChatWordsByLetter_L,
         .numWords = 82,
     },
     {
-        .words = gEasyChatWordsByLetter_M,
+        .words = sEasyChatWordsByLetter_M,
         .numWords = 142,
     },
     {
-        .words = gEasyChatWordsByLetter_N,
+        .words = sEasyChatWordsByLetter_N,
         .numWords = 54,
     },
     {
-        .words = gEasyChatWordsByLetter_O,
+        .words = sEasyChatWordsByLetter_O,
         .numWords = 44,
     },
     {
-        .words = gEasyChatWordsByLetter_P,
+        .words = sEasyChatWordsByLetter_P,
         .numWords = 102,
     },
     {
-        .words = gEasyChatWordsByLetter_Q,
+        .words = sEasyChatWordsByLetter_Q,
         .numWords = 6,
     },
     {
-        .words = gEasyChatWordsByLetter_R,
+        .words = sEasyChatWordsByLetter_R,
         .numWords = 80,
     },
     {
-        .words = gEasyChatWordsByLetter_S,
+        .words = sEasyChatWordsByLetter_S,
         .numWords = 262,
     },
     {
-        .words = gEasyChatWordsByLetter_T,
+        .words = sEasyChatWordsByLetter_T,
         .numWords = 133,
     },
     {
-        .words = gEasyChatWordsByLetter_U,
+        .words = sEasyChatWordsByLetter_U,
         .numWords = 24,
     },
     {
-        .words = gEasyChatWordsByLetter_V,
+        .words = sEasyChatWordsByLetter_V,
         .numWords = 33,
     },
     {
-        .words = gEasyChatWordsByLetter_W,
+        .words = sEasyChatWordsByLetter_W,
         .numWords = 111,
     },
     {
-        .words = gEasyChatWordsByLetter_X,
+        .words = sEasyChatWordsByLetter_X,
         .numWords = 4,
     },
     {
-        .words = gEasyChatWordsByLetter_Y,
+        .words = sEasyChatWordsByLetter_Y,
         .numWords = 19,
     },
     {
-        .words = gEasyChatWordsByLetter_Z,
+        .words = sEasyChatWordsByLetter_Z,
         .numWords = 8,
     },
 };

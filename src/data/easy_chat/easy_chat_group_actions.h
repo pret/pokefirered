@@ -1,471 +1,471 @@
 
-const u8 gEasyChatWord_Meets[] = _("MEETS");
-const u8 gEasyChatWord_Concede[] = _("CONCEDE");
-const u8 gEasyChatWord_Give[] = _("GIVE");
-const u8 gEasyChatWord_Gives[] = _("GIVES");
-const u8 gEasyChatWord_Played[] = _("PLAYED");
-const u8 gEasyChatWord_Plays[] = _("PLAYS");
-const u8 gEasyChatWord_Collect[] = _("COLLECT");
-const u8 gEasyChatWord_Walking[] = _("WALKING");
-const u8 gEasyChatWord_Walks[] = _("WALKS");
-const u8 gEasyChatWord_Says[] = _("SAYS");
-const u8 gEasyChatWord_Went[] = _("WENT");
-const u8 gEasyChatWord_Said[] = _("SAID");
-const u8 gEasyChatWord_WakeUp[] = _("WAKE UP");
-const u8 gEasyChatWord_WakesUp[] = _("WAKES UP");
-const u8 gEasyChatWord_Angers[] = _("ANGERS");
-const u8 gEasyChatWord_Teach[] = _("TEACH");
-const u8 gEasyChatWord_Teaches[] = _("TEACHES");
-const u8 gEasyChatWord_Please[] = _("PLEASE");
-const u8 gEasyChatWord_Learn[] = _("LEARN");
-const u8 gEasyChatWord_Change[] = _("CHANGE");
-const u8 gEasyChatWord_Story[] = _("STORY");
-const u8 gEasyChatWord_Trust[] = _("TRUST");
-const u8 gEasyChatWord_Lavish[] = _("LAVISH");
-const u8 gEasyChatWord_Listens[] = _("LISTENS");
-const u8 gEasyChatWord_Hearing[] = _("HEARING");
-const u8 gEasyChatWord_Trains[] = _("TRAINS");
-const u8 gEasyChatWord_Choose[] = _("CHOOSE");
-const u8 gEasyChatWord_Come[] = _("COME");
-const u8 gEasyChatWord_Came[] = _("CAME");
-const u8 gEasyChatWord_Search[] = _("SEARCH");
-const u8 gEasyChatWord_Make[] = _("MAKE");
-const u8 gEasyChatWord_Cause[] = _("CAUSE");
-const u8 gEasyChatWord_Know[] = _("KNOW");
-const u8 gEasyChatWord_Knows[] = _("KNOWS");
-const u8 gEasyChatWord_Refuse[] = _("REFUSE");
-const u8 gEasyChatWord_Stores[] = _("STORES");
-const u8 gEasyChatWord_Brag[] = _("BRAG");
-const u8 gEasyChatWord_Ignorant[] = _("IGNORANT");
-const u8 gEasyChatWord_Thinks[] = _("THINKS");
-const u8 gEasyChatWord_Believe[] = _("BELIEVE");
-const u8 gEasyChatWord_Slide[] = _("SLIDE");
-const u8 gEasyChatWord_Eats[] = _("EATS");
-const u8 gEasyChatWord_Use[] = _("USE");
-const u8 gEasyChatWord_Uses[] = _("USES");
-const u8 gEasyChatWord_Using[] = _("USING");
-const u8 gEasyChatWord_Couldnt[] = _("COULDN'T");
-const u8 gEasyChatWord_Capable[] = _("CAPABLE");
-const u8 gEasyChatWord_Disappear[] = _("DISAPPEAR");
-const u8 gEasyChatWord_Appear[] = _("APPEAR");
-const u8 gEasyChatWord_Throw[] = _("THROW");
-const u8 gEasyChatWord_Worry[] = _("WORRY");
-const u8 gEasyChatWord_Slept[] = _("SLEPT");
-const u8 gEasyChatWord_Sleep[] = _("SLEEP");
-const u8 gEasyChatWord_Release[] = _("RELEASE");
-const u8 gEasyChatWord_Drinks[] = _("DRINKS");
-const u8 gEasyChatWord_Runs[] = _("RUNS");
-const u8 gEasyChatWord_Run[] = _("RUN");
-const u8 gEasyChatWord_Works[] = _("WORKS");
-const u8 gEasyChatWord_Working[] = _("WORKING");
-const u8 gEasyChatWord_Talking[] = _("TALKING");
-const u8 gEasyChatWord_Talk[] = _("TALK");
-const u8 gEasyChatWord_Sink[] = _("SINK");
-const u8 gEasyChatWord_Smack[] = _("SMACK");
-const u8 gEasyChatWord_Pretend[] = _("PRETEND");
-const u8 gEasyChatWord_Praise[] = _("PRAISE");
-const u8 gEasyChatWord_Overdo[] = _("OVERDO");
-const u8 gEasyChatWord_Show[] = _("SHOW");
-const u8 gEasyChatWord_Looks[] = _("LOOKS");
-const u8 gEasyChatWord_Sees[] = _("SEES");
-const u8 gEasyChatWord_Seek[] = _("SEEK");
-const u8 gEasyChatWord_Own[] = _("OWN");
-const u8 gEasyChatWord_Take[] = _("TAKE");
-const u8 gEasyChatWord_Allow[] = _("ALLOW");
-const u8 gEasyChatWord_Forget[] = _("FORGET");
-const u8 gEasyChatWord_Forgets[] = _("FORGETS");
-const u8 gEasyChatWord_Appears[] = _("APPEARS");
-const u8 gEasyChatWord_Faint[] = _("FAINT");
-const u8 gEasyChatWord_Fainted[] = _("FAINTED");
+static const u8 sEasyChatWord_Meets[] = _("MEETS");
+static const u8 sEasyChatWord_Concede[] = _("CONCEDE");
+static const u8 sEasyChatWord_Give[] = _("GIVE");
+static const u8 sEasyChatWord_Gives[] = _("GIVES");
+static const u8 sEasyChatWord_Played[] = _("PLAYED");
+static const u8 sEasyChatWord_Plays[] = _("PLAYS");
+static const u8 sEasyChatWord_Collect[] = _("COLLECT");
+static const u8 sEasyChatWord_Walking[] = _("WALKING");
+static const u8 sEasyChatWord_Walks[] = _("WALKS");
+static const u8 sEasyChatWord_Says[] = _("SAYS");
+static const u8 sEasyChatWord_Went[] = _("WENT");
+static const u8 sEasyChatWord_Said[] = _("SAID");
+static const u8 sEasyChatWord_WakeUp[] = _("WAKE UP");
+static const u8 sEasyChatWord_WakesUp[] = _("WAKES UP");
+static const u8 sEasyChatWord_Angers[] = _("ANGERS");
+static const u8 sEasyChatWord_Teach[] = _("TEACH");
+static const u8 sEasyChatWord_Teaches[] = _("TEACHES");
+static const u8 sEasyChatWord_Please[] = _("PLEASE");
+static const u8 sEasyChatWord_Learn[] = _("LEARN");
+static const u8 sEasyChatWord_Change[] = _("CHANGE");
+static const u8 sEasyChatWord_Story[] = _("STORY");
+static const u8 sEasyChatWord_Trust[] = _("TRUST");
+static const u8 sEasyChatWord_Lavish[] = _("LAVISH");
+static const u8 sEasyChatWord_Listens[] = _("LISTENS");
+static const u8 sEasyChatWord_Hearing[] = _("HEARING");
+static const u8 sEasyChatWord_Trains[] = _("TRAINS");
+static const u8 sEasyChatWord_Choose[] = _("CHOOSE");
+static const u8 sEasyChatWord_Come[] = _("COME");
+static const u8 sEasyChatWord_Came[] = _("CAME");
+static const u8 sEasyChatWord_Search[] = _("SEARCH");
+static const u8 sEasyChatWord_Make[] = _("MAKE");
+static const u8 sEasyChatWord_Cause[] = _("CAUSE");
+static const u8 sEasyChatWord_Know[] = _("KNOW");
+static const u8 sEasyChatWord_Knows[] = _("KNOWS");
+static const u8 sEasyChatWord_Refuse[] = _("REFUSE");
+static const u8 sEasyChatWord_Stores[] = _("STORES");
+static const u8 sEasyChatWord_Brag[] = _("BRAG");
+static const u8 sEasyChatWord_Ignorant[] = _("IGNORANT");
+static const u8 sEasyChatWord_Thinks[] = _("THINKS");
+static const u8 sEasyChatWord_Believe[] = _("BELIEVE");
+static const u8 sEasyChatWord_Slide[] = _("SLIDE");
+static const u8 sEasyChatWord_Eats[] = _("EATS");
+static const u8 sEasyChatWord_Use[] = _("USE");
+static const u8 sEasyChatWord_Uses[] = _("USES");
+static const u8 sEasyChatWord_Using[] = _("USING");
+static const u8 sEasyChatWord_Couldnt[] = _("COULDN'T");
+static const u8 sEasyChatWord_Capable[] = _("CAPABLE");
+static const u8 sEasyChatWord_Disappear[] = _("DISAPPEAR");
+static const u8 sEasyChatWord_Appear[] = _("APPEAR");
+static const u8 sEasyChatWord_Throw[] = _("THROW");
+static const u8 sEasyChatWord_Worry[] = _("WORRY");
+static const u8 sEasyChatWord_Slept[] = _("SLEPT");
+static const u8 sEasyChatWord_Sleep[] = _("SLEEP");
+static const u8 sEasyChatWord_Release[] = _("RELEASE");
+static const u8 sEasyChatWord_Drinks[] = _("DRINKS");
+static const u8 sEasyChatWord_Runs[] = _("RUNS");
+static const u8 sEasyChatWord_Run[] = _("RUN");
+static const u8 sEasyChatWord_Works[] = _("WORKS");
+static const u8 sEasyChatWord_Working[] = _("WORKING");
+static const u8 sEasyChatWord_Talking[] = _("TALKING");
+static const u8 sEasyChatWord_Talk[] = _("TALK");
+static const u8 sEasyChatWord_Sink[] = _("SINK");
+static const u8 sEasyChatWord_Smack[] = _("SMACK");
+static const u8 sEasyChatWord_Pretend[] = _("PRETEND");
+static const u8 sEasyChatWord_Praise[] = _("PRAISE");
+static const u8 sEasyChatWord_Overdo[] = _("OVERDO");
+static const u8 sEasyChatWord_Show[] = _("SHOW");
+static const u8 sEasyChatWord_Looks[] = _("LOOKS");
+static const u8 sEasyChatWord_Sees[] = _("SEES");
+static const u8 sEasyChatWord_Seek[] = _("SEEK");
+static const u8 sEasyChatWord_Own[] = _("OWN");
+static const u8 sEasyChatWord_Take[] = _("TAKE");
+static const u8 sEasyChatWord_Allow[] = _("ALLOW");
+static const u8 sEasyChatWord_Forget[] = _("FORGET");
+static const u8 sEasyChatWord_Forgets[] = _("FORGETS");
+static const u8 sEasyChatWord_Appears[] = _("APPEARS");
+static const u8 sEasyChatWord_Faint[] = _("FAINT");
+static const u8 sEasyChatWord_Fainted[] = _("FAINTED");
 
-const struct EasyChatWordInfo gEasyChatGroup_Actions[] = {
+static const struct EasyChatWordInfo sEasyChatGroup_Actions[] = {
     {
-        .text = gEasyChatWord_Meets,
+        .text = sEasyChatWord_Meets,
         .alphabeticalOrder = 72,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Concede,
+        .text = sEasyChatWord_Concede,
         .alphabeticalOrder = 14,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Give,
+        .text = sEasyChatWord_Give,
         .alphabeticalOrder = 48,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Gives,
+        .text = sEasyChatWord_Gives,
         .alphabeticalOrder = 75,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Played,
+        .text = sEasyChatWord_Played,
         .alphabeticalOrder = 39,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Plays,
+        .text = sEasyChatWord_Plays,
         .alphabeticalOrder = 36,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Collect,
+        .text = sEasyChatWord_Collect,
         .alphabeticalOrder = 28,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Walking,
+        .text = sEasyChatWord_Walking,
         .alphabeticalOrder = 46,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Walks,
+        .text = sEasyChatWord_Walks,
         .alphabeticalOrder = 31,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Says,
+        .text = sEasyChatWord_Says,
         .alphabeticalOrder = 19,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Went,
+        .text = sEasyChatWord_Went,
         .alphabeticalOrder = 26,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Said,
+        .text = sEasyChatWord_Said,
         .alphabeticalOrder = 6,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_WakeUp,
+        .text = sEasyChatWord_WakeUp,
         .alphabeticalOrder = 27,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_WakesUp,
+        .text = sEasyChatWord_WakesUp,
         .alphabeticalOrder = 1,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Angers,
+        .text = sEasyChatWord_Angers,
         .alphabeticalOrder = 45,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Teach,
+        .text = sEasyChatWord_Teach,
         .alphabeticalOrder = 47,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Teaches,
+        .text = sEasyChatWord_Teaches,
         .alphabeticalOrder = 54,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Please,
+        .text = sEasyChatWord_Please,
         .alphabeticalOrder = 41,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Learn,
+        .text = sEasyChatWord_Learn,
         .alphabeticalOrder = 76,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Change,
+        .text = sEasyChatWord_Change,
         .alphabeticalOrder = 77,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Story,
+        .text = sEasyChatWord_Story,
         .alphabeticalOrder = 73,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Trust,
+        .text = sEasyChatWord_Trust,
         .alphabeticalOrder = 74,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Lavish,
+        .text = sEasyChatWord_Lavish,
         .alphabeticalOrder = 2,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Listens,
+        .text = sEasyChatWord_Listens,
         .alphabeticalOrder = 3,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Hearing,
+        .text = sEasyChatWord_Hearing,
         .alphabeticalOrder = 24,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Trains,
+        .text = sEasyChatWord_Trains,
         .alphabeticalOrder = 37,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Choose,
+        .text = sEasyChatWord_Choose,
         .alphabeticalOrder = 32,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Come,
+        .text = sEasyChatWord_Come,
         .alphabeticalOrder = 33,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Came,
+        .text = sEasyChatWord_Came,
         .alphabeticalOrder = 22,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Search,
+        .text = sEasyChatWord_Search,
         .alphabeticalOrder = 18,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Make,
+        .text = sEasyChatWord_Make,
         .alphabeticalOrder = 23,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Cause,
+        .text = sEasyChatWord_Cause,
         .alphabeticalOrder = 67,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Know,
+        .text = sEasyChatWord_Know,
         .alphabeticalOrder = 30,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Knows,
+        .text = sEasyChatWord_Knows,
         .alphabeticalOrder = 0,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Refuse,
+        .text = sEasyChatWord_Refuse,
         .alphabeticalOrder = 65,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Stores,
+        .text = sEasyChatWord_Stores,
         .alphabeticalOrder = 70,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Brag,
+        .text = sEasyChatWord_Brag,
         .alphabeticalOrder = 4,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Ignorant,
+        .text = sEasyChatWord_Ignorant,
         .alphabeticalOrder = 5,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Thinks,
+        .text = sEasyChatWord_Thinks,
         .alphabeticalOrder = 17,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Believe,
+        .text = sEasyChatWord_Believe,
         .alphabeticalOrder = 64,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Slide,
+        .text = sEasyChatWord_Slide,
         .alphabeticalOrder = 63,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Eats,
+        .text = sEasyChatWord_Eats,
         .alphabeticalOrder = 34,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Use,
+        .text = sEasyChatWord_Use,
         .alphabeticalOrder = 53,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Uses,
+        .text = sEasyChatWord_Uses,
         .alphabeticalOrder = 56,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Using,
+        .text = sEasyChatWord_Using,
         .alphabeticalOrder = 55,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Couldnt,
+        .text = sEasyChatWord_Couldnt,
         .alphabeticalOrder = 11,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Capable,
+        .text = sEasyChatWord_Capable,
         .alphabeticalOrder = 9,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Disappear,
+        .text = sEasyChatWord_Disappear,
         .alphabeticalOrder = 29,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Appear,
+        .text = sEasyChatWord_Appear,
         .alphabeticalOrder = 69,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Throw,
+        .text = sEasyChatWord_Throw,
         .alphabeticalOrder = 68,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Worry,
+        .text = sEasyChatWord_Worry,
         .alphabeticalOrder = 66,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Slept,
+        .text = sEasyChatWord_Slept,
         .alphabeticalOrder = 61,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Sleep,
+        .text = sEasyChatWord_Sleep,
         .alphabeticalOrder = 52,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Release,
+        .text = sEasyChatWord_Release,
         .alphabeticalOrder = 51,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Drinks,
+        .text = sEasyChatWord_Drinks,
         .alphabeticalOrder = 40,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Runs,
+        .text = sEasyChatWord_Runs,
         .alphabeticalOrder = 62,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Run,
+        .text = sEasyChatWord_Run,
         .alphabeticalOrder = 35,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Works,
+        .text = sEasyChatWord_Works,
         .alphabeticalOrder = 20,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Working,
+        .text = sEasyChatWord_Working,
         .alphabeticalOrder = 71,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Talking,
+        .text = sEasyChatWord_Talking,
         .alphabeticalOrder = 60,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Talk,
+        .text = sEasyChatWord_Talk,
         .alphabeticalOrder = 59,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Sink,
+        .text = sEasyChatWord_Sink,
         .alphabeticalOrder = 15,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Smack,
+        .text = sEasyChatWord_Smack,
         .alphabeticalOrder = 16,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Pretend,
+        .text = sEasyChatWord_Pretend,
         .alphabeticalOrder = 38,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Praise,
+        .text = sEasyChatWord_Praise,
         .alphabeticalOrder = 49,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Overdo,
+        .text = sEasyChatWord_Overdo,
         .alphabeticalOrder = 25,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Show,
+        .text = sEasyChatWord_Show,
         .alphabeticalOrder = 21,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Looks,
+        .text = sEasyChatWord_Looks,
         .alphabeticalOrder = 42,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Sees,
+        .text = sEasyChatWord_Sees,
         .alphabeticalOrder = 43,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Seek,
+        .text = sEasyChatWord_Seek,
         .alphabeticalOrder = 44,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Own,
+        .text = sEasyChatWord_Own,
         .alphabeticalOrder = 12,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Take,
+        .text = sEasyChatWord_Take,
         .alphabeticalOrder = 13,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Allow,
+        .text = sEasyChatWord_Allow,
         .alphabeticalOrder = 7,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Forget,
+        .text = sEasyChatWord_Forget,
         .alphabeticalOrder = 8,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Forgets,
+        .text = sEasyChatWord_Forgets,
         .alphabeticalOrder = 10,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Appears,
+        .text = sEasyChatWord_Appears,
         .alphabeticalOrder = 58,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Faint,
+        .text = sEasyChatWord_Faint,
         .alphabeticalOrder = 57,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Fainted,
+        .text = sEasyChatWord_Fainted,
         .alphabeticalOrder = 50,
         .enabled = TRUE
     }

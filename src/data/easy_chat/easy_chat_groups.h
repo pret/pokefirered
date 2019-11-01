@@ -23,114 +23,114 @@
 #include "easy_chat_group_trendy_saying.h"
 #include "easy_chat_group_pokemon2.h"
 
-const struct EasyChatGroup gEasyChatGroups[] = {
+static const struct EasyChatGroup sEasyChatGroups[] = {
     {
-        .wordData = {.valueList = gEasyChatGroup_Pokemon},
+        .wordData = {.valueList = sEasyChatGroup_Pokemon},
         .numWords = 202,
         .numEnabledWords = 202
     },
     {
-        .wordData = {.words = gEasyChatGroup_Trainer},
+        .wordData = {.words = sEasyChatGroup_Trainer},
         .numWords = 26,
         .numEnabledWords = 25
     },
     {
-        .wordData = {.words = gEasyChatGroup_Status},
+        .wordData = {.words = sEasyChatGroup_Status},
         .numWords = 109,
         .numEnabledWords = 109
     },
     {
-        .wordData = {.words = gEasyChatGroup_Battle},
+        .wordData = {.words = sEasyChatGroup_Battle},
         .numWords = 63,
         .numEnabledWords = 63
     },
     {
-        .wordData = {.words = gEasyChatGroup_Greetings},
+        .wordData = {.words = sEasyChatGroup_Greetings},
         .numWords = 42,
         .numEnabledWords = 42
     },
     {
-        .wordData = {.words = gEasyChatGroup_People},
+        .wordData = {.words = sEasyChatGroup_People},
         .numWords = 75,
         .numEnabledWords = 75
     },
     {
-        .wordData = {.words = gEasyChatGroup_Voices},
+        .wordData = {.words = sEasyChatGroup_Voices},
         .numWords = 63,
         .numEnabledWords = 63
     },
     {
-        .wordData = {.words = gEasyChatGroup_Speech},
+        .wordData = {.words = sEasyChatGroup_Speech},
         .numWords = 60,
         .numEnabledWords = 60
     },
     {
-        .wordData = {.words = gEasyChatGroup_Endings},
+        .wordData = {.words = sEasyChatGroup_Endings},
         .numWords = 69,
         .numEnabledWords = 69
     },
     {
-        .wordData = {.words = gEasyChatGroup_Feelings},
+        .wordData = {.words = sEasyChatGroup_Feelings},
         .numWords = 69,
         .numEnabledWords = 69
     },
     {
-        .wordData = {.words = gEasyChatGroup_Conditions},
+        .wordData = {.words = sEasyChatGroup_Conditions},
         .numWords = 69,
         .numEnabledWords = 69
     },
     {
-        .wordData = {.words = gEasyChatGroup_Actions},
+        .wordData = {.words = sEasyChatGroup_Actions},
         .numWords = 78,
         .numEnabledWords = 78
     },
     {
-        .wordData = {.words = gEasyChatGroup_Lifestyle},
+        .wordData = {.words = sEasyChatGroup_Lifestyle},
         .numWords = 45,
         .numEnabledWords = 45
     },
     {
-        .wordData = {.words = gEasyChatGroup_Hobbies},
+        .wordData = {.words = sEasyChatGroup_Hobbies},
         .numWords = 54,
         .numEnabledWords = 54
     },
     {
-        .wordData = {.words = gEasyChatGroup_Time},
+        .wordData = {.words = sEasyChatGroup_Time},
         .numWords = 45,
         .numEnabledWords = 45
     },
     {
-        .wordData = {.words = gEasyChatGroup_Misc},
+        .wordData = {.words = sEasyChatGroup_Misc},
         .numWords = 42,
         .numEnabledWords = 42
     },
     {
-        .wordData = {.words = gEasyChatGroup_Adjectives},
+        .wordData = {.words = sEasyChatGroup_Adjectives},
         .numWords = 36,
         .numEnabledWords = 36
     },
     {
-        .wordData = {.words = gEasyChatGroup_Events},
+        .wordData = {.words = sEasyChatGroup_Events},
         .numWords = 28,
         .numEnabledWords = 19
     },
     {
-        .wordData = {.valueList = gEasyChatGroup_Move1},
+        .wordData = {.valueList = sEasyChatGroup_Move1},
         .numWords = 154,
         .numEnabledWords = 154
     },
     {
-        .wordData = {.valueList = gEasyChatGroup_Move2},
+        .wordData = {.valueList = sEasyChatGroup_Move2},
         .numWords = 200,
         .numEnabledWords = 200
     },
     {
-        .wordData = {.words = gEasyChatGroup_TrendySaying},
+        .wordData = {.words = sEasyChatGroup_TrendySaying},
         .numWords = 33,
         .numEnabledWords = 0
     },
     {
-        .wordData = {.valueList = gEasyChatGroup_Pokemon2},
+        .wordData = {.valueList = sEasyChatGroup_Pokemon2},
         .numWords = 251,
         .numEnabledWords = 251
     },

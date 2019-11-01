@@ -1,6 +1,6 @@
 #include "constants/species.h"
 
-const u16 gEasyChatGroup_Pokemon[] = {
+static const u16 sEasyChatGroup_Pokemon[] = {
     SPECIES_ABRA,
     SPECIES_ABSOL,
     SPECIES_AGGRON,

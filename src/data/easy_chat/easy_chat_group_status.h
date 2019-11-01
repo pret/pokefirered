@@ -1,657 +1,657 @@
 
-const u8 gEasyChatWord_Dark[] = _("DARK");
-const u8 gEasyChatWord_Stench[] = _("STENCH");
-const u8 gEasyChatWord_ThickFat[] = _("THICK FAT");
-const u8 gEasyChatWord_RainDish[] = _("RAIN DISH");
-const u8 gEasyChatWord_Drizzle[] = _("DRIZZLE");
-const u8 gEasyChatWord_ArenaTrap[] = _("ARENA TRAP");
-const u8 gEasyChatWord_Intimidate[] = _("INTIMIDATE");
-const u8 gEasyChatWord_RockHead[] = _("ROCK HEAD");
-const u8 gEasyChatWord_Color[] = _("COLOR");
-const u8 gEasyChatWord_AltColor[] = _("ALT. COLOR");
-const u8 gEasyChatWord_Rock[] = _("ROCK");
-const u8 gEasyChatWord_Beautiful[] = _("BEAUTIFUL");
-const u8 gEasyChatWord_Beauty[] = _("BEAUTY");
-const u8 gEasyChatWord_AirLock[] = _("AIR LOCK");
-const u8 gEasyChatWord_Psychic[] = _("PSYCHIC");
-const u8 gEasyChatWord_HyperCutter[] = _("HYPER CUTTER");
-const u8 gEasyChatWord_Fighting[] = _("FIGHTING");
-const u8 gEasyChatWord_ShadowTag[] = _("SHADOW TAG");
-const u8 gEasyChatWord_Smart[] = _("SMART");
-const u8 gEasyChatWord_Smartness[] = _("SMARTNESS");
-const u8 gEasyChatWord_SpeedBoost[] = _("SPEED BOOST");
-const u8 gEasyChatWord_Cool[] = _("COOL");
-const u8 gEasyChatWord_Coolness[] = _("COOLNESS");
-const u8 gEasyChatWord_BattleArmor[] = _("BATTLE ARMOR");
-const u8 gEasyChatWord_Cute[] = _("CUTE");
-const u8 gEasyChatWord_Cuteness[] = _("CUTENESS");
-const u8 gEasyChatWord_Sturdy[] = _("STURDY");
-const u8 gEasyChatWord_SuctionCups[] = _("SUCTION CUPS");
-const u8 gEasyChatWord_Grass[] = _("GRASS");
-const u8 gEasyChatWord_ClearBody[] = _("CLEAR BODY");
-const u8 gEasyChatWord_Torrent[] = _("TORRENT");
-const u8 gEasyChatWord_Ghost[] = _("GHOST");
-const u8 gEasyChatWord_Ice[] = _("ICE");
-const u8 gEasyChatWord_Guts[] = _("GUTS");
-const u8 gEasyChatWord_RoughSkin[] = _("ROUGH SKIN");
-const u8 gEasyChatWord_ShellArmor[] = _("SHELL ARMOR");
-const u8 gEasyChatWord_NaturalCure[] = _("NATURAL CURE");
-const u8 gEasyChatWord_Damp[] = _("DAMP");
-const u8 gEasyChatWord_Ground[] = _("GROUND");
-const u8 gEasyChatWord_Limber[] = _("LIMBER");
-const u8 gEasyChatWord_MagnetPull[] = _("MAGNET PULL");
-const u8 gEasyChatWord_WhiteSmoke[] = _("WHITE SMOKE");
-const u8 gEasyChatWord_Synchronize[] = _("SYNCHRONIZE");
-const u8 gEasyChatWord_Overgrow[] = _("OVERGROW");
-const u8 gEasyChatWord_SwiftSwim[] = _("SWIFT SWIM");
-const u8 gEasyChatWord_SandStream[] = _("SAND STREAM");
-const u8 gEasyChatWord_SandVeil[] = _("SAND VEIL");
-const u8 gEasyChatWord_KeenEye[] = _("KEEN EYE");
-const u8 gEasyChatWord_InnerFocus[] = _("INNER FOCUS");
-const u8 gEasyChatWord_Static[] = _("STATIC");
-const u8 gEasyChatWord_Type[] = _("TYPE");
-const u8 gEasyChatWord_Tough[] = _("TOUGH");
-const u8 gEasyChatWord_Toughness[] = _("TOUGHNESS");
-const u8 gEasyChatWord_ShedSkin[] = _("SHED SKIN");
-const u8 gEasyChatWord_HugePower[] = _("HUGE POWER");
-const u8 gEasyChatWord_VoltAbsorb[] = _("VOLT ABSORB");
-const u8 gEasyChatWord_WaterAbsorb[] = _("WATER ABSORB");
-const u8 gEasyChatWord_Electric[] = _("ELECTRIC");
-const u8 gEasyChatWord_Forecast[] = _("FORECAST");
-const u8 gEasyChatWord_SereneGrace[] = _("SERENE GRACE");
-const u8 gEasyChatWord_Poison[] = _("POISON");
-const u8 gEasyChatWord_PoisonPoint[] = _("POISON POINT");
-const u8 gEasyChatWord_Dragon[] = _("DRAGON");
-const u8 gEasyChatWord_Trace[] = _("TRACE");
-const u8 gEasyChatWord_Oblivious[] = _("OBLIVIOUS");
-const u8 gEasyChatWord_Truant[] = _("TRUANT");
-const u8 gEasyChatWord_RunAway[] = _("RUN AWAY");
-const u8 gEasyChatWord_StickyHold[] = _("STICKY HOLD");
-const u8 gEasyChatWord_CloudNine[] = _("CLOUD NINE");
-const u8 gEasyChatWord_Normal[] = _("NORMAL");
-const u8 gEasyChatWord_Steel[] = _("STEEL");
-const u8 gEasyChatWord_Illuminate[] = _("ILLUMINATE");
-const u8 gEasyChatWord_EarlyBird[] = _("EARLY BIRD");
-const u8 gEasyChatWord_Hustle[] = _("HUSTLE");
-const u8 gEasyChatWord_Shine[] = _("SHINE");
-const u8 gEasyChatWord_Flying[] = _("FLYING");
-const u8 gEasyChatWord_Drought[] = _("DROUGHT");
-const u8 gEasyChatWord_Lightningrod[] = _("LIGHTNINGROD");
-const u8 gEasyChatWord_Compoundeyes[] = _("COMPOUNDEYES");
-const u8 gEasyChatWord_MarvelScale[] = _("MARVEL SCALE");
-const u8 gEasyChatWord_WonderGuard[] = _("WONDER GUARD");
-const u8 gEasyChatWord_Insomnia[] = _("INSOMNIA");
-const u8 gEasyChatWord_Levitate[] = _("LEVITATE");
-const u8 gEasyChatWord_Plus[] = _("PLUS");
-const u8 gEasyChatWord_Pressure[] = _("PRESSURE");
-const u8 gEasyChatWord_LiquidOoze[] = _("LIQUID OOZE");
-const u8 gEasyChatWord_ColorChange[] = _("COLOR CHANGE");
-const u8 gEasyChatWord_Soundproof[] = _("SOUNDPROOF");
-const u8 gEasyChatWord_EffectSpore[] = _("EFFECT SPORE");
-const u8 gEasyChatWord_Pkrs[] = _("{PK}RS");
-const u8 gEasyChatWord_Fire[] = _("FIRE");
-const u8 gEasyChatWord_FlameBody[] = _("FLAME BODY");
-const u8 gEasyChatWord_Minus[] = _("MINUS");
-const u8 gEasyChatWord_OwnTempo[] = _("OWN TEMPO");
-const u8 gEasyChatWord_MagmaArmor[] = _("MAGMA ARMOR");
-const u8 gEasyChatWord_Water[] = _("WATER");
-const u8 gEasyChatWord_WaterVeil[] = _("WATER VEIL");
-const u8 gEasyChatWord_Bug[] = _("BUG");
-const u8 gEasyChatWord_Swarm[] = _("SWARM");
-const u8 gEasyChatWord_CuteCharm[] = _("CUTE CHARM");
-const u8 gEasyChatWord_Immunity[] = _("IMMUNITY");
-const u8 gEasyChatWord_Blaze[] = _("BLAZE");
-const u8 gEasyChatWord_Pickup[] = _("PICKUP");
-const u8 gEasyChatWord_Pattern[] = _("PATTERN");
-const u8 gEasyChatWord_FlashFire[] = _("FLASH FIRE");
-const u8 gEasyChatWord_VitalSpirit[] = _("VITAL SPIRIT");
-const u8 gEasyChatWord_Chlorophyll[] = _("CHLOROPHYLL");
-const u8 gEasyChatWord_PurePower[] = _("PURE POWER");
-const u8 gEasyChatWord_ShieldDust[] = _("SHIELD DUST");
+static const u8 sEasyChatWord_Dark[] = _("DARK");
+static const u8 sEasyChatWord_Stench[] = _("STENCH");
+static const u8 sEasyChatWord_ThickFat[] = _("THICK FAT");
+static const u8 sEasyChatWord_RainDish[] = _("RAIN DISH");
+static const u8 sEasyChatWord_Drizzle[] = _("DRIZZLE");
+static const u8 sEasyChatWord_ArenaTrap[] = _("ARENA TRAP");
+static const u8 sEasyChatWord_Intimidate[] = _("INTIMIDATE");
+static const u8 sEasyChatWord_RockHead[] = _("ROCK HEAD");
+static const u8 sEasyChatWord_Color[] = _("COLOR");
+static const u8 sEasyChatWord_AltColor[] = _("ALT. COLOR");
+static const u8 sEasyChatWord_Rock[] = _("ROCK");
+static const u8 sEasyChatWord_Beautiful[] = _("BEAUTIFUL");
+static const u8 sEasyChatWord_Beauty[] = _("BEAUTY");
+static const u8 sEasyChatWord_AirLock[] = _("AIR LOCK");
+static const u8 sEasyChatWord_Psychic[] = _("PSYCHIC");
+static const u8 sEasyChatWord_HyperCutter[] = _("HYPER CUTTER");
+static const u8 sEasyChatWord_Fighting[] = _("FIGHTING");
+static const u8 sEasyChatWord_ShadowTag[] = _("SHADOW TAG");
+static const u8 sEasyChatWord_Smart[] = _("SMART");
+static const u8 sEasyChatWord_Smartness[] = _("SMARTNESS");
+static const u8 sEasyChatWord_SpeedBoost[] = _("SPEED BOOST");
+static const u8 sEasyChatWord_Cool[] = _("COOL");
+static const u8 sEasyChatWord_Coolness[] = _("COOLNESS");
+static const u8 sEasyChatWord_BattleArmor[] = _("BATTLE ARMOR");
+static const u8 sEasyChatWord_Cute[] = _("CUTE");
+static const u8 sEasyChatWord_Cuteness[] = _("CUTENESS");
+static const u8 sEasyChatWord_Sturdy[] = _("STURDY");
+static const u8 sEasyChatWord_SuctionCups[] = _("SUCTION CUPS");
+static const u8 sEasyChatWord_Grass[] = _("GRASS");
+static const u8 sEasyChatWord_ClearBody[] = _("CLEAR BODY");
+static const u8 sEasyChatWord_Torrent[] = _("TORRENT");
+static const u8 sEasyChatWord_Ghost[] = _("GHOST");
+static const u8 sEasyChatWord_Ice[] = _("ICE");
+static const u8 sEasyChatWord_Guts[] = _("GUTS");
+static const u8 sEasyChatWord_RoughSkin[] = _("ROUGH SKIN");
+static const u8 sEasyChatWord_ShellArmor[] = _("SHELL ARMOR");
+static const u8 sEasyChatWord_NaturalCure[] = _("NATURAL CURE");
+static const u8 sEasyChatWord_Damp[] = _("DAMP");
+static const u8 sEasyChatWord_Ground[] = _("GROUND");
+static const u8 sEasyChatWord_Limber[] = _("LIMBER");
+static const u8 sEasyChatWord_MagnetPull[] = _("MAGNET PULL");
+static const u8 sEasyChatWord_WhiteSmoke[] = _("WHITE SMOKE");
+static const u8 sEasyChatWord_Synchronize[] = _("SYNCHRONIZE");
+static const u8 sEasyChatWord_Overgrow[] = _("OVERGROW");
+static const u8 sEasyChatWord_SwiftSwim[] = _("SWIFT SWIM");
+static const u8 sEasyChatWord_SandStream[] = _("SAND STREAM");
+static const u8 sEasyChatWord_SandVeil[] = _("SAND VEIL");
+static const u8 sEasyChatWord_KeenEye[] = _("KEEN EYE");
+static const u8 sEasyChatWord_InnerFocus[] = _("INNER FOCUS");
+static const u8 sEasyChatWord_Static[] = _("STATIC");
+static const u8 sEasyChatWord_Type[] = _("TYPE");
+static const u8 sEasyChatWord_Tough[] = _("TOUGH");
+static const u8 sEasyChatWord_Toughness[] = _("TOUGHNESS");
+static const u8 sEasyChatWord_ShedSkin[] = _("SHED SKIN");
+static const u8 sEasyChatWord_HugePower[] = _("HUGE POWER");
+static const u8 sEasyChatWord_VoltAbsorb[] = _("VOLT ABSORB");
+static const u8 sEasyChatWord_WaterAbsorb[] = _("WATER ABSORB");
+static const u8 sEasyChatWord_Electric[] = _("ELECTRIC");
+static const u8 sEasyChatWord_Forecast[] = _("FORECAST");
+static const u8 sEasyChatWord_SereneGrace[] = _("SERENE GRACE");
+static const u8 sEasyChatWord_Poison[] = _("POISON");
+static const u8 sEasyChatWord_PoisonPoint[] = _("POISON POINT");
+static const u8 sEasyChatWord_Dragon[] = _("DRAGON");
+static const u8 sEasyChatWord_Trace[] = _("TRACE");
+static const u8 sEasyChatWord_Oblivious[] = _("OBLIVIOUS");
+static const u8 sEasyChatWord_Truant[] = _("TRUANT");
+static const u8 sEasyChatWord_RunAway[] = _("RUN AWAY");
+static const u8 sEasyChatWord_StickyHold[] = _("STICKY HOLD");
+static const u8 sEasyChatWord_CloudNine[] = _("CLOUD NINE");
+static const u8 sEasyChatWord_Normal[] = _("NORMAL");
+static const u8 sEasyChatWord_Steel[] = _("STEEL");
+static const u8 sEasyChatWord_Illuminate[] = _("ILLUMINATE");
+static const u8 sEasyChatWord_EarlyBird[] = _("EARLY BIRD");
+static const u8 sEasyChatWord_Hustle[] = _("HUSTLE");
+static const u8 sEasyChatWord_Shine[] = _("SHINE");
+static const u8 sEasyChatWord_Flying[] = _("FLYING");
+static const u8 sEasyChatWord_Drought[] = _("DROUGHT");
+static const u8 sEasyChatWord_Lightningrod[] = _("LIGHTNINGROD");
+static const u8 sEasyChatWord_Compoundeyes[] = _("COMPOUNDEYES");
+static const u8 sEasyChatWord_MarvelScale[] = _("MARVEL SCALE");
+static const u8 sEasyChatWord_WonderGuard[] = _("WONDER GUARD");
+static const u8 sEasyChatWord_Insomnia[] = _("INSOMNIA");
+static const u8 sEasyChatWord_Levitate[] = _("LEVITATE");
+static const u8 sEasyChatWord_Plus[] = _("PLUS");
+static const u8 sEasyChatWord_Pressure[] = _("PRESSURE");
+static const u8 sEasyChatWord_LiquidOoze[] = _("LIQUID OOZE");
+static const u8 sEasyChatWord_ColorChange[] = _("COLOR CHANGE");
+static const u8 sEasyChatWord_Soundproof[] = _("SOUNDPROOF");
+static const u8 sEasyChatWord_EffectSpore[] = _("EFFECT SPORE");
+static const u8 sEasyChatWord_Pkrs[] = _("{PK}RS");
+static const u8 sEasyChatWord_Fire[] = _("FIRE");
+static const u8 sEasyChatWord_FlameBody[] = _("FLAME BODY");
+static const u8 sEasyChatWord_Minus[] = _("MINUS");
+static const u8 sEasyChatWord_OwnTempo[] = _("OWN TEMPO");
+static const u8 sEasyChatWord_MagmaArmor[] = _("MAGMA ARMOR");
+static const u8 sEasyChatWord_Water[] = _("WATER");
+static const u8 sEasyChatWord_WaterVeil[] = _("WATER VEIL");
+static const u8 sEasyChatWord_Bug[] = _("BUG");
+static const u8 sEasyChatWord_Swarm[] = _("SWARM");
+static const u8 sEasyChatWord_CuteCharm[] = _("CUTE CHARM");
+static const u8 sEasyChatWord_Immunity[] = _("IMMUNITY");
+static const u8 sEasyChatWord_Blaze[] = _("BLAZE");
+static const u8 sEasyChatWord_Pickup[] = _("PICKUP");
+static const u8 sEasyChatWord_Pattern[] = _("PATTERN");
+static const u8 sEasyChatWord_FlashFire[] = _("FLASH FIRE");
+static const u8 sEasyChatWord_VitalSpirit[] = _("VITAL SPIRIT");
+static const u8 sEasyChatWord_Chlorophyll[] = _("CHLOROPHYLL");
+static const u8 sEasyChatWord_PurePower[] = _("PURE POWER");
+static const u8 sEasyChatWord_ShieldDust[] = _("SHIELD DUST");
 
-const struct EasyChatWordInfo gEasyChatGroup_Status[] = {
+static const struct EasyChatWordInfo sEasyChatGroup_Status[] = {
     {
-        .text = gEasyChatWord_Dark,
+        .text = sEasyChatWord_Dark,
         .alphabeticalOrder = 13,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Stench,
+        .text = sEasyChatWord_Stench,
         .alphabeticalOrder = 9,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_ThickFat,
+        .text = sEasyChatWord_ThickFat,
         .alphabeticalOrder = 5,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_RainDish,
+        .text = sEasyChatWord_RainDish,
         .alphabeticalOrder = 23,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Drizzle,
+        .text = sEasyChatWord_Drizzle,
         .alphabeticalOrder = 11,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_ArenaTrap,
+        .text = sEasyChatWord_ArenaTrap,
         .alphabeticalOrder = 12,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Intimidate,
+        .text = sEasyChatWord_Intimidate,
         .alphabeticalOrder = 101,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_RockHead,
+        .text = sEasyChatWord_RockHead,
         .alphabeticalOrder = 97,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Color,
+        .text = sEasyChatWord_Color,
         .alphabeticalOrder = 106,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_AltColor,
+        .text = sEasyChatWord_AltColor,
         .alphabeticalOrder = 29,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Rock,
+        .text = sEasyChatWord_Rock,
         .alphabeticalOrder = 68,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Beautiful,
+        .text = sEasyChatWord_Beautiful,
         .alphabeticalOrder = 8,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Beauty,
+        .text = sEasyChatWord_Beauty,
         .alphabeticalOrder = 86,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_AirLock,
+        .text = sEasyChatWord_AirLock,
         .alphabeticalOrder = 78,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Psychic,
+        .text = sEasyChatWord_Psychic,
         .alphabeticalOrder = 21,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_HyperCutter,
+        .text = sEasyChatWord_HyperCutter,
         .alphabeticalOrder = 22,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Fighting,
+        .text = sEasyChatWord_Fighting,
         .alphabeticalOrder = 24,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_ShadowTag,
+        .text = sEasyChatWord_ShadowTag,
         .alphabeticalOrder = 99,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Smart,
+        .text = sEasyChatWord_Smart,
         .alphabeticalOrder = 25,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Smartness,
+        .text = sEasyChatWord_Smartness,
         .alphabeticalOrder = 37,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_SpeedBoost,
+        .text = sEasyChatWord_SpeedBoost,
         .alphabeticalOrder = 0,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Cool,
+        .text = sEasyChatWord_Cool,
         .alphabeticalOrder = 62,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Coolness,
+        .text = sEasyChatWord_Coolness,
         .alphabeticalOrder = 4,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_BattleArmor,
+        .text = sEasyChatWord_BattleArmor,
         .alphabeticalOrder = 76,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Cute,
+        .text = sEasyChatWord_Cute,
         .alphabeticalOrder = 72,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Cuteness,
+        .text = sEasyChatWord_Cuteness,
         .alphabeticalOrder = 88,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Sturdy,
+        .text = sEasyChatWord_Sturdy,
         .alphabeticalOrder = 57,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_SuctionCups,
+        .text = sEasyChatWord_SuctionCups,
         .alphabeticalOrder = 16,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Grass,
+        .text = sEasyChatWord_Grass,
         .alphabeticalOrder = 90,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_ClearBody,
+        .text = sEasyChatWord_ClearBody,
         .alphabeticalOrder = 91,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Torrent,
+        .text = sEasyChatWord_Torrent,
         .alphabeticalOrder = 104,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Ghost,
+        .text = sEasyChatWord_Ghost,
         .alphabeticalOrder = 75,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Ice,
+        .text = sEasyChatWord_Ice,
         .alphabeticalOrder = 58,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Guts,
+        .text = sEasyChatWord_Guts,
         .alphabeticalOrder = 31,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_RoughSkin,
+        .text = sEasyChatWord_RoughSkin,
         .alphabeticalOrder = 28,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_ShellArmor,
+        .text = sEasyChatWord_ShellArmor,
         .alphabeticalOrder = 38,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_NaturalCure,
+        .text = sEasyChatWord_NaturalCure,
         .alphabeticalOrder = 33,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Damp,
+        .text = sEasyChatWord_Damp,
         .alphabeticalOrder = 54,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Ground,
+        .text = sEasyChatWord_Ground,
         .alphabeticalOrder = 73,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Limber,
+        .text = sEasyChatWord_Limber,
         .alphabeticalOrder = 15,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_MagnetPull,
+        .text = sEasyChatWord_MagnetPull,
         .alphabeticalOrder = 32,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_WhiteSmoke,
+        .text = sEasyChatWord_WhiteSmoke,
         .alphabeticalOrder = 71,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Synchronize,
+        .text = sEasyChatWord_Synchronize,
         .alphabeticalOrder = 100,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Overgrow,
+        .text = sEasyChatWord_Overgrow,
         .alphabeticalOrder = 48,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_SwiftSwim,
+        .text = sEasyChatWord_SwiftSwim,
         .alphabeticalOrder = 81,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_SandStream,
+        .text = sEasyChatWord_SandStream,
         .alphabeticalOrder = 6,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_SandVeil,
+        .text = sEasyChatWord_SandVeil,
         .alphabeticalOrder = 47,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_KeenEye,
+        .text = sEasyChatWord_KeenEye,
         .alphabeticalOrder = 82,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_InnerFocus,
+        .text = sEasyChatWord_InnerFocus,
         .alphabeticalOrder = 77,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Static,
+        .text = sEasyChatWord_Static,
         .alphabeticalOrder = 39,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Type,
+        .text = sEasyChatWord_Type,
         .alphabeticalOrder = 85,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Tough,
+        .text = sEasyChatWord_Tough,
         .alphabeticalOrder = 94,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Toughness,
+        .text = sEasyChatWord_Toughness,
         .alphabeticalOrder = 40,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_ShedSkin,
+        .text = sEasyChatWord_ShedSkin,
         .alphabeticalOrder = 79,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_HugePower,
+        .text = sEasyChatWord_HugePower,
         .alphabeticalOrder = 92,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_VoltAbsorb,
+        .text = sEasyChatWord_VoltAbsorb,
         .alphabeticalOrder = 36,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_WaterAbsorb,
+        .text = sEasyChatWord_WaterAbsorb,
         .alphabeticalOrder = 69,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Electric,
+        .text = sEasyChatWord_Electric,
         .alphabeticalOrder = 64,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Forecast,
+        .text = sEasyChatWord_Forecast,
         .alphabeticalOrder = 43,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_SereneGrace,
+        .text = sEasyChatWord_SereneGrace,
         .alphabeticalOrder = 93,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Poison,
+        .text = sEasyChatWord_Poison,
         .alphabeticalOrder = 103,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_PoisonPoint,
+        .text = sEasyChatWord_PoisonPoint,
         .alphabeticalOrder = 102,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Dragon,
+        .text = sEasyChatWord_Dragon,
         .alphabeticalOrder = 89,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Trace,
+        .text = sEasyChatWord_Trace,
         .alphabeticalOrder = 83,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Oblivious,
+        .text = sEasyChatWord_Oblivious,
         .alphabeticalOrder = 60,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Truant,
+        .text = sEasyChatWord_Truant,
         .alphabeticalOrder = 61,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_RunAway,
+        .text = sEasyChatWord_RunAway,
         .alphabeticalOrder = 84,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_StickyHold,
+        .text = sEasyChatWord_StickyHold,
         .alphabeticalOrder = 14,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_CloudNine,
+        .text = sEasyChatWord_CloudNine,
         .alphabeticalOrder = 107,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Normal,
+        .text = sEasyChatWord_Normal,
         .alphabeticalOrder = 3,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Steel,
+        .text = sEasyChatWord_Steel,
         .alphabeticalOrder = 10,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Illuminate,
+        .text = sEasyChatWord_Illuminate,
         .alphabeticalOrder = 7,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_EarlyBird,
+        .text = sEasyChatWord_EarlyBird,
         .alphabeticalOrder = 34,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Hustle,
+        .text = sEasyChatWord_Hustle,
         .alphabeticalOrder = 66,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Shine,
+        .text = sEasyChatWord_Shine,
         .alphabeticalOrder = 45,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Flying,
+        .text = sEasyChatWord_Flying,
         .alphabeticalOrder = 46,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Drought,
+        .text = sEasyChatWord_Drought,
         .alphabeticalOrder = 59,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Lightningrod,
+        .text = sEasyChatWord_Lightningrod,
         .alphabeticalOrder = 17,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Compoundeyes,
+        .text = sEasyChatWord_Compoundeyes,
         .alphabeticalOrder = 53,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_MarvelScale,
+        .text = sEasyChatWord_MarvelScale,
         .alphabeticalOrder = 35,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_WonderGuard,
+        .text = sEasyChatWord_WonderGuard,
         .alphabeticalOrder = 108,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Insomnia,
+        .text = sEasyChatWord_Insomnia,
         .alphabeticalOrder = 74,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Levitate,
+        .text = sEasyChatWord_Levitate,
         .alphabeticalOrder = 18,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Plus,
+        .text = sEasyChatWord_Plus,
         .alphabeticalOrder = 19,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Pressure,
+        .text = sEasyChatWord_Pressure,
         .alphabeticalOrder = 87,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_LiquidOoze,
+        .text = sEasyChatWord_LiquidOoze,
         .alphabeticalOrder = 20,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_ColorChange,
+        .text = sEasyChatWord_ColorChange,
         .alphabeticalOrder = 49,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Soundproof,
+        .text = sEasyChatWord_Soundproof,
         .alphabeticalOrder = 70,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_EffectSpore,
+        .text = sEasyChatWord_EffectSpore,
         .alphabeticalOrder = 1,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Pkrs,
+        .text = sEasyChatWord_Pkrs,
         .alphabeticalOrder = 67,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Fire,
+        .text = sEasyChatWord_Fire,
         .alphabeticalOrder = 26,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_FlameBody,
+        .text = sEasyChatWord_FlameBody,
         .alphabeticalOrder = 27,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Minus,
+        .text = sEasyChatWord_Minus,
         .alphabeticalOrder = 98,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_OwnTempo,
+        .text = sEasyChatWord_OwnTempo,
         .alphabeticalOrder = 44,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_MagmaArmor,
+        .text = sEasyChatWord_MagmaArmor,
         .alphabeticalOrder = 42,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Water,
+        .text = sEasyChatWord_Water,
         .alphabeticalOrder = 2,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_WaterVeil,
+        .text = sEasyChatWord_WaterVeil,
         .alphabeticalOrder = 30,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Bug,
+        .text = sEasyChatWord_Bug,
         .alphabeticalOrder = 51,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Swarm,
+        .text = sEasyChatWord_Swarm,
         .alphabeticalOrder = 52,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_CuteCharm,
+        .text = sEasyChatWord_CuteCharm,
         .alphabeticalOrder = 63,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Immunity,
+        .text = sEasyChatWord_Immunity,
         .alphabeticalOrder = 65,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Blaze,
+        .text = sEasyChatWord_Blaze,
         .alphabeticalOrder = 50,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Pickup,
+        .text = sEasyChatWord_Pickup,
         .alphabeticalOrder = 105,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Pattern,
+        .text = sEasyChatWord_Pattern,
         .alphabeticalOrder = 55,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_FlashFire,
+        .text = sEasyChatWord_FlashFire,
         .alphabeticalOrder = 95,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_VitalSpirit,
+        .text = sEasyChatWord_VitalSpirit,
         .alphabeticalOrder = 56,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_Chlorophyll,
+        .text = sEasyChatWord_Chlorophyll,
         .alphabeticalOrder = 96,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_PurePower,
+        .text = sEasyChatWord_PurePower,
         .alphabeticalOrder = 41,
         .enabled = TRUE
     },
     {
-        .text = gEasyChatWord_ShieldDust,
+        .text = sEasyChatWord_ShieldDust,
         .alphabeticalOrder = 80,
         .enabled = TRUE
     }

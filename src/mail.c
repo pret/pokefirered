@@ -62,7 +62,7 @@ struct MailViewResources {
     u8 authorNameBuffer[12];
     void (*savedCallback)(void);
     void (*showMailCallback)(void);
-    struct MailStruct *mail;
+    struct MailStruct * mail;
     bool8 messageExists;
     u8 nameX;
     u8 mailType;

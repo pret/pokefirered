@@ -51,7 +51,7 @@ static u16 GetUnlockedWordsInECGroup(u16);
 static u16 GetUnlockedWordsInAlphabeticalGroup(u16);
 static bool8 UnlockedECMonOrMove(u16, u8);
 static int EC_IsDeoxys(u16 species);
-static u8 IsWordUnlocked(u16 word);
+static bool8 IsWordUnlocked(u16 word);
 
 #include "data/easy_chat/easy_chat_groups.h"
 #include "data/easy_chat/easy_chat_words_by_letter.h"
@@ -496,7 +496,7 @@ void ResetSomeMEventECBuffer_3120_338(void)
 bool8 InitEasyChatSelection(void)
 {
     sEasyChatSelectionData = Alloc(sizeof(*sEasyChatSelectionData));
-    if (!sEasyChatSelectionData)
+    if (sEasyChatSelectionData == NULL)
         return FALSE;
 
     PopulateECGroups();
@@ -731,7 +731,7 @@ static int EC_IsDeoxys(u16 species)
     return FALSE;
 }
 
-static u8 IsWordUnlocked(u16 easyChatWord)
+static bool8 IsWordUnlocked(u16 easyChatWord)
 {
     u8 groupId = EC_GROUP(easyChatWord);
     u32 index = EC_INDEX(easyChatWord);
@@ -740,4 +740,3 @@ static u8 IsWordUnlocked(u16 easyChatWord)
     else
         return UnlockedECMonOrMove(index, groupId);
 }
-

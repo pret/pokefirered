@@ -916,7 +916,10 @@ const struct UnkStruct_0858AB24 gUnknown_83DFC9C[] = {
 // Leftover from R/S
 const struct BerryTree gBlankBerryTree = {};
 
-#define ENIGMA_BERRY_STRUCT ({const struct Berry2 *berries = (const struct Berry2 *)gBerries;berries[ITEM_ENIGMA_BERRY - FIRST_BERRY_INDEX];})
+#define ENIGMA_BERRY_STRUCT ({ \
+    const struct Berry2 * berries = (const struct Berry2 *)gBerries; \
+    berries[ITEM_ENIGMA_BERRY - FIRST_BERRY_INDEX]; \
+})
 
 void sub_809C718(void)
 {

@@ -152,7 +152,7 @@ static const struct Subsprite gUnknown_83E7468[] =
 
 static const struct SubspriteTable gUnknown_83E7470[] =
 {
-    { ARRAY_COUNT(gUnknown_83E7468), gUnknown_83E7468 },
+    { NELEMS(gUnknown_83E7468), gUnknown_83E7468 },
 };
 
 static const union AnimCmd gUnknown_83E7478[] =

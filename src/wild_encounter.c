@@ -31,8 +31,6 @@ struct WildEncounterData
 static EWRAM_DATA struct WildEncounterData sWildEncounterData = {};
 static EWRAM_DATA bool8 sWildEncountersDisabled = FALSE;
 
-extern const u8 gUnknown_83CA71C[][12];
-
 static bool8 UnlockedTanobyOrAreNotInTanoby(void);
 static u32 GenerateUnownPersonalityByLetter(u8 letter);
 static bool8 IsWildLevelAllowedByRepel(u8 level);
@@ -42,6 +40,25 @@ static void ApplyCleanseTagEncounterRateMod(u32 *rate);
 static u8 IsLeadMonHoldingCleanseTag(void);
 static u16 WildEncounterRandom(void);
 static void AddToWildEncounterRateBuff(u8 encouterRate);
+
+#include "data/wild_encounters.h"
+
+static const u8 sUnownLetterSlots[][12] = {
+  //  A   A   A   A   A   A   A   A   A   A   A   ?
+    { 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 27},
+  //  C   C   C   D   D   D   H   H   H   U   U   O
+    { 2,  2,  2,  3,  3,  3,  7,  7,  7, 20, 20, 14},
+  //  N   N   N   N   S   S   S   S   I   I   E   E
+    {13, 13, 13, 13, 18, 18, 18, 18,  8,  8,  4,  4},
+  //  P   P   L   L   J   J   R   R   R   Q   Q   Q
+    {15, 15, 11, 11,  9,  9, 17, 17, 17, 16, 16, 16},
+  //  Y   Y   T   T   G   G   G   F   F   F   K   K
+    {24, 24, 19, 19,  6,  6,  6,  5,  5,  5, 10, 10},
+  //  V   V   V   W   W   W   X   X   M   M   B   B
+    {21, 21, 21, 22, 22, 22, 23, 23, 12, 12,  1,  1},
+  //  Z   Z   Z   Z   Z   Z   Z   Z   Z   Z   Z   !
+    {25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 26},
+};
 
 void DisableWildEncounters(bool8 state)
 {
@@ -209,7 +226,7 @@ static void GenerateWildMon(u16 species, u8 level, u8 slot)
     else
     {
         chamber = gSaveBlock1Ptr->location.mapNum - MAP_NUM(SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER);
-        personality = GenerateUnownPersonalityByLetter(gUnknown_83CA71C[chamber][slot]);
+        personality = GenerateUnownPersonalityByLetter(sUnownLetterSlots[chamber][slot]);
         CreateMon(&gEnemyParty[0], species, level, 32, TRUE, personality, FALSE, 0);
     }
 }

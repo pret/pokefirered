@@ -42,6 +42,7 @@ sound/**/*.bin
 sound/songs/midi/*.s
 src/*.s
 src/data/items.h
+src/data/wild_encounters.h
 tags
 tools/agbcc
 tools/binutils

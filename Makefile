@@ -45,6 +45,7 @@ ELF = $(ROM:.gba=.elf)
 MAP = $(ROM:.gba=.map)
 
 C_SUBDIR = src
+DATA_C_SUBDIR = src/data
 ASM_SUBDIR = asm
 DATA_ASM_SUBDIR = data
 SONG_SUBDIR = sound/songs

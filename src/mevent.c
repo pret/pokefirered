@@ -487,7 +487,7 @@ void sub_8143D24(void)
 {
     CpuFill32(0, &gSaveBlock1Ptr->unk_3120, sizeof(gSaveBlock1Ptr->unk_3120));
     sub_8143ED0();
-    sub_80BDE28();
+    ResetSomeMEventECBuffer_3120_338();
 }
 
 struct MEventBuffer_3120_Sub * GetSavedWonderNews(void)

@@ -1863,7 +1863,7 @@ sub_80E678C: @ 80E678C
 	movs r1, 0x3
 	movs r2, 0x2
 	movs r3, 0x12
-	bl sub_80BD974
+	bl EC_DoesEasyChatStringFitOnLine
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E67E4

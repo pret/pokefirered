@@ -33,15 +33,16 @@ struct EasyChatWordsByLetter
 void InitEasyChatPhrases(void);
 u8 *CopyEasyChatWord(u8 *dest, u16 word);
 u8 *ConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 length1, u16 length2);
-void sub_80BDE28(void);
+bool8 EC_DoesEasyChatStringFitOnLine(const u16 *easyChatWords, u8 columns, u8 rows, u16 maxLength);
+void ResetSomeMEventECBuffer_3120_338(void);
 void InitEasyChatPhrases(void);
 void EnableRareWord(u8);
-bool8 sub_80BDE44(void);
-void sub_80BDE70(void);
-u8 sub_80BDF44(u8);
-void sub_80BE16C(int, u16);
-u16 sub_80BE1D4(void);
-u16 sub_80BE19C(u16);
+bool8 InitEasyChatSelection(void);
+void DestroyEasyChatSelectionData(void);
+u8 GetSelectedGroupByIndex(u8);
+void GetUnlockedECWords(bool32 isAlphabetical, u16 groupId);
+u16 GetDisplayedWordByIndex(u16 index);
+u16 GetNumDisplayedWords(void);
 const u8 *GetEasyChatWordGroupName(u8);
 u8 *CopyEasyChatWordPadded(u8 *, u16, u16);
 

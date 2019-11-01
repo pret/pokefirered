@@ -11329,7 +11329,7 @@ EventScript_1BEE9E:: @ 81BEE9E
 EventScript_1BEEA8:: @ 81BEEA8
 	setvar VAR_0x4001, 1
 	setvar VAR_0x8004, 0
-	special sub_80BDA7C
+	special Special_BufferEasyChatMessage
 	waitmessage
 	delay 80
 	msgbox gUnknown_81BF28E
@@ -11376,7 +11376,7 @@ EventScript_1BEF35:: @ 81BEF35
 EventScript_1BEF3F:: @ 81BEF3F
 	setvar VAR_0x4001, 1
 	setvar VAR_0x8004, 0
-	special sub_80BDA7C
+	special Special_BufferEasyChatMessage
 	waitmessage
 	delay 80
 	msgbox gUnknown_81BF30D

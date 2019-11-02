@@ -6,216 +6,216 @@
 #include "graphics.h"
 #include "constants/songs.h"
 
-EWRAM_DATA struct PokemonMarkMenu * sMenu = NULL;
+static EWRAM_DATA struct PokemonMarkMenu * sMenu = NULL;
 
-void sub_80BE7CC(s16 x, s16 y, u16 tilesTag, u16 paletteTag);
-void nullsub_62(struct Sprite * sprite);
-void sub_80BEA8C(struct Sprite * sprite);
-void sub_80BEAC8(struct Sprite * sprite);
-struct Sprite * sub_80BEB20(u16 tilesTag, u16 paletteTag, const u16 *palette, u16 size);
+static void CreateMonMarkingsMenuSprites(s16 x, s16 y, u16 tilesTag, u16 paletteTag);
+static void nullsub_62(struct Sprite * sprite);
+static void SpriteCB_MarkingIcon(struct Sprite * sprite);
+static void SpriteCB_Cursor(struct Sprite * sprite);
+static struct Sprite * CreateMonMarkingSprite(u16 tilesTag, u16 paletteTag, const u16 *palette, u16 size);
 
-const u16 gUnknown_83EE008[] = INCBIN_U16("graphics/misc/mon_markings.gbapal");
-const u16 gUnknown_83EE028[] = INCBIN_U16("graphics/misc/mon_markings.4bpp");
-const u8 gUnknown_83EE828[] = {0x09, 0x50, 0x13, 0x02, 0xFF};
+static const u16 sMonMarkingsPal[] = INCBIN_U16("graphics/misc/mon_markings.gbapal");
+static const u16 sMonMarkingsTiles[] = INCBIN_U16("graphics/misc/mon_markings.4bpp");
+static const u8 sUnref_83EE828[] = {0x09, 0x50, 0x13, 0x02, 0xFF};
 
-const struct OamData gUnknown_83EE830 = {
+static const struct OamData sOamData_64x64 = {
     .shape = SPRITE_SHAPE(64x64),
     .size = SPRITE_SIZE(64x64)
 };
 
-const struct OamData gUnknown_83EE838 = {
+static const struct OamData sOamData_8x8 = {
     .shape = SPRITE_SHAPE(8x8),
     .size = SPRITE_SIZE(8x8)
 };
 
-const union AnimCmd gAnimCmd_83EE840[] = {
+static const union AnimCmd sAnimCmd_MenuMark_CircleOff[] = {
     ANIMCMD_FRAME(0x0, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_83EE848[] = {
+static const union AnimCmd sAnimCmd_MenuMark_CircleOn[] = {
     ANIMCMD_FRAME(0x1, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_83EE850[] = {
+static const union AnimCmd sAnimCmd_MenuMark_SquareOff[] = {
     ANIMCMD_FRAME(0x2, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_83EE858[] = {
+static const union AnimCmd sAnimCmd_MenuMark_SquareOn[] = {
     ANIMCMD_FRAME(0x3, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_83EE860[] = {
+static const union AnimCmd sAnimCmd_MenuMark_TriangleOff[] = {
     ANIMCMD_FRAME(0x4, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_83EE868[] = {
+static const union AnimCmd sAnimCmd_MenuMark_TriangleOn[] = {
     ANIMCMD_FRAME(0x5, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_83EE870[] = {
+static const union AnimCmd sAnimCmd_MenuMark_HeartOff[] = {
     ANIMCMD_FRAME(0x6, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_83EE878[] = {
+static const union AnimCmd sAnimCmd_MenuMark_HeartOn[] = {
     ANIMCMD_FRAME(0x7, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_83EE880[] = {
+static const union AnimCmd sAnimCmd_MenuMark_Cursor[] = {
     ANIMCMD_FRAME(0x8, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_83EE888[] = {
+static const union AnimCmd sAnimCmd_MenuMark_Blank[] = {
     ANIMCMD_FRAME(0x9, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd *const gUnknown_83EE890[] = {
-    gAnimCmd_83EE840,
-    gAnimCmd_83EE848,
-    gAnimCmd_83EE850,
-    gAnimCmd_83EE858,
-    gAnimCmd_83EE860,
-    gAnimCmd_83EE868,
-    gAnimCmd_83EE870,
-    gAnimCmd_83EE878,
-    gAnimCmd_83EE880,
-    gAnimCmd_83EE888
+static const union AnimCmd *const sSpriteAnimTable_MenuMark[] = {
+    sAnimCmd_MenuMark_CircleOff,
+    sAnimCmd_MenuMark_CircleOn,
+    sAnimCmd_MenuMark_SquareOff,
+    sAnimCmd_MenuMark_SquareOn,
+    sAnimCmd_MenuMark_TriangleOff,
+    sAnimCmd_MenuMark_TriangleOn,
+    sAnimCmd_MenuMark_HeartOff,
+    sAnimCmd_MenuMark_HeartOn,
+    sAnimCmd_MenuMark_Cursor,
+    sAnimCmd_MenuMark_Blank
 };
 
-const union AnimCmd gAnimCmd_83EE8B8[] = {
+static const union AnimCmd sAnimCmd_Frame_0[] = {
     ANIMCMD_FRAME(0x0, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_83EE8C0[] = {
+static const union AnimCmd sAnimCmd_Frame_1[] = {
     ANIMCMD_FRAME(0x40, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd *const gUnknown_83EE8C8[] = {
-    gAnimCmd_83EE8B8,
-    gAnimCmd_83EE8C0
+static const union AnimCmd *const sSpriteAnimTable_Frame[] = {
+    sAnimCmd_Frame_0,
+    sAnimCmd_Frame_1
 };
 
-const struct OamData gUnknown_83EE8D0 = {
+static const struct OamData sOamData_32x8 = {
     .shape = SPRITE_SHAPE(32x8),
     .size = SPRITE_SIZE(32x8)
 };
 
-const union AnimCmd gAnimCmd_83EE8D8[] = {
+static const union AnimCmd sAnimCmd_MonMark_0000[] = {
     ANIMCMD_FRAME(0x0, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_83EE8E0[] = {
+static const union AnimCmd sAnimCmd_MonMark_1000[] = {
     ANIMCMD_FRAME(0x4, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_83EE8E8[] = {
+static const union AnimCmd sAnimCmd_MonMark_0100[] = {
     ANIMCMD_FRAME(0x8, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_83EE8F0[] = {
+static const union AnimCmd sAnimCmd_MonMark_1100[] = {
     ANIMCMD_FRAME(0xc, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_83EE8F8[] = {
+static const union AnimCmd sAnimCmd_MonMark_0010[] = {
     ANIMCMD_FRAME(0x10, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_83EE900[] = {
+static const union AnimCmd sAnimCmd_MonMark_1010[] = {
     ANIMCMD_FRAME(0x14, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_83EE908[] = {
+static const union AnimCmd sAnimCmd_MonMark_0110[] = {
     ANIMCMD_FRAME(0x18, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_83EE910[] = {
+static const union AnimCmd sAnimCmd_MonMark_1110[] = {
     ANIMCMD_FRAME(0x1c, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_83EE918[] = {
+static const union AnimCmd sAnimCmd_MonMark_0001[] = {
     ANIMCMD_FRAME(0x20, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_83EE920[] = {
+static const union AnimCmd sAnimCmd_MonMark_1001[] = {
     ANIMCMD_FRAME(0x24, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_83EE928[] = {
+static const union AnimCmd sAnimCmd_MonMark_0101[] = {
     ANIMCMD_FRAME(0x28, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_83EE930[] = {
+static const union AnimCmd sAnimCmd_MonMark_1101[] = {
     ANIMCMD_FRAME(0x2c, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_83EE938[] = {
+static const union AnimCmd sAnimCmd_MonMark_0011[] = {
     ANIMCMD_FRAME(0x30, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_83EE940[] = {
+static const union AnimCmd sAnimCmd_MonMark_1011[] = {
     ANIMCMD_FRAME(0x34, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_83EE948[] = {
+static const union AnimCmd sAnimCmd_MonMark_0111[] = {
     ANIMCMD_FRAME(0x38, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_83EE950[] = {
+static const union AnimCmd sAnimCmd_MonMark_1111[] = {
     ANIMCMD_FRAME(0x3c, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd *const gUnknown_83EE958[] = {
-    gAnimCmd_83EE8D8,
-    gAnimCmd_83EE8E0,
-    gAnimCmd_83EE8E8,
-    gAnimCmd_83EE8F0,
-    gAnimCmd_83EE8F8,
-    gAnimCmd_83EE900,
-    gAnimCmd_83EE908,
-    gAnimCmd_83EE910,
-    gAnimCmd_83EE918,
-    gAnimCmd_83EE920,
-    gAnimCmd_83EE928,
-    gAnimCmd_83EE930,
-    gAnimCmd_83EE938,
-    gAnimCmd_83EE940,
-    gAnimCmd_83EE948,
-    gAnimCmd_83EE950
+static const union AnimCmd *const sSpriteAnimTable_MonMarkSet[] = {
+    sAnimCmd_MonMark_0000,
+    sAnimCmd_MonMark_1000,
+    sAnimCmd_MonMark_0100,
+    sAnimCmd_MonMark_1100,
+    sAnimCmd_MonMark_0010,
+    sAnimCmd_MonMark_1010,
+    sAnimCmd_MonMark_0110,
+    sAnimCmd_MonMark_1110,
+    sAnimCmd_MonMark_0001,
+    sAnimCmd_MonMark_1001,
+    sAnimCmd_MonMark_0101,
+    sAnimCmd_MonMark_1101,
+    sAnimCmd_MonMark_0011,
+    sAnimCmd_MonMark_1011,
+    sAnimCmd_MonMark_0111,
+    sAnimCmd_MonMark_1111
 };
 
-void sub_80BE46C(struct PokemonMarkMenu * markMenu)
+void SetMonMarkingsMenuPointer(struct PokemonMarkMenu * markMenu)
 {
     sMenu = markMenu;
 }
 
-void sub_80BE478(void)
+static void GetUserFrameForMonMarkings(void)
 {
     const struct TextWindowGraphics * frame = GetUserFrameGraphicsInfo(gSaveBlock2Ptr->optionsWindowFrameType);
     sMenu->frameTiles = frame->tiles;
@@ -224,7 +224,7 @@ void sub_80BE478(void)
     CpuFill16(0, sMenu->menuWindowSpriteTiles, sizeof(sMenu->menuWindowSpriteTiles));
 }
 
-bool8 sub_80BE4C0(void)
+static bool8 DoLoadMonMarkingsFrameGfx(void)
 {
     u16 i;
     u8 *menuWindowSpriteTiles = &sMenu->menuWindowSpriteTiles[256 * sMenu->tileLoadState];
@@ -257,14 +257,14 @@ bool8 sub_80BE4C0(void)
     return TRUE;
 }
 
-void sub_80BE5F0(void)
+void LoadMonMarkingsFrameGfx(void)
 {
-    sub_80BE478();
-    while (sub_80BE4C0())
+    GetUserFrameForMonMarkings();
+    while (DoLoadMonMarkingsFrameGfx())
     {}
 }
 
-void sub_80BE604(u8 markings, s16 x, s16 y)
+void DrawMonMarkingsMenu(u8 markings, s16 x, s16 y)
 {
     u16 i;
     sMenu->cursorPos = 0;
@@ -273,10 +273,10 @@ void sub_80BE604(u8 markings, s16 x, s16 y)
     {
         sMenu->markingsArray[i] = (sMenu->markings >> i) & 1;
     }
-    sub_80BE7CC(x, y, sMenu->baseTileTag, sMenu->basePaletteTag);;
+    CreateMonMarkingsMenuSprites(x, y, sMenu->baseTileTag, sMenu->basePaletteTag);;
 }
 
-void sub_80BE658(void)
+void TeardownMonMarkingsMenu(void)
 {
     u16 i;
     for (i = 0; i < 3; i++)
@@ -301,7 +301,7 @@ void sub_80BE658(void)
         DestroySprite(sMenu->menuTextSprite);
 }
 
-bool8 sub_80BE6F0(void)
+bool8 MonMarkingsHandleInput(void)
 {
     u16 i;
     if (JOY_NEW(DPAD_UP))
@@ -342,7 +342,7 @@ bool8 sub_80BE6F0(void)
     return TRUE;
 }
 
-void sub_80BE7CC(s16 x, s16 y, u16 tilesTag, u16 paletteTag)
+static void CreateMonMarkingsMenuSprites(s16 x, s16 y, u16 tilesTag, u16 paletteTag)
 {
     u16 i;
     u8 spriteId;
@@ -369,8 +369,8 @@ void sub_80BE7CC(s16 x, s16 y, u16 tilesTag, u16 paletteTag)
     struct SpriteTemplate sprTemplate = {
         .tileTag = tilesTag,
         .paletteTag = paletteTag,
-        .oam = &gUnknown_83EE830,
-        .anims = gUnknown_83EE8C8,
+        .oam = &sOamData_64x64,
+        .anims = sSpriteAnimTable_Frame,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
         .callback = nullsub_62
@@ -397,9 +397,9 @@ void sub_80BE7CC(s16 x, s16 y, u16 tilesTag, u16 paletteTag)
 
     sprTemplate.tileTag++;
     sprTemplate.paletteTag++;
-    sprTemplate.anims = gUnknown_83EE890;
-    sprTemplate.callback = sub_80BEA8C;
-    sprTemplate.oam = &gUnknown_83EE838;
+    sprTemplate.anims = sSpriteAnimTable_MenuMark;
+    sprTemplate.callback = SpriteCB_MarkingIcon;
+    sprTemplate.oam = &sOamData_8x8;
 
     for (i = 0; i < 4; i++)
     {
@@ -435,8 +435,10 @@ void sub_80BE7CC(s16 x, s16 y, u16 tilesTag, u16 paletteTag)
         sMenu->menuTextSprite = NULL;
     }
 
-    sprTemplate.callback = sub_80BEAC8;
+    sprTemplate.callback = SpriteCB_Cursor;
+
     spriteId = CreateSprite(&sprTemplate, x + 12, 0, 0);
+
     if (spriteId != MAX_SPRITES)
     {
         sMenu->unkSprite = &gSprites[spriteId];
@@ -449,10 +451,10 @@ void sub_80BE7CC(s16 x, s16 y, u16 tilesTag, u16 paletteTag)
     }
 }
 
-void nullsub_62(struct Sprite * sprite)
+static void nullsub_62(struct Sprite * sprite)
 {}
 
-void sub_80BEA8C(struct Sprite * sprite)
+static void SpriteCB_MarkingIcon(struct Sprite * sprite)
 {
     if (sMenu->markingsArray[sprite->data[0]])
         StartSpriteAnim(sprite, 2 * sprite->data[0] + 1);
@@ -460,36 +462,36 @@ void sub_80BEA8C(struct Sprite * sprite)
         StartSpriteAnim(sprite, 2 * sprite->data[0] + 0);
 }
 
-void sub_80BEAC8(struct Sprite * sprite)
+static void SpriteCB_Cursor(struct Sprite * sprite)
 {
     sprite->pos1.y = 16 * sMenu->cursorPos + sprite->data[0];
 }
 
-struct Sprite * sub_80BEAE0(u16 tileTag, u16 paletteTag, const u16 *palette)
+struct Sprite * CreateMonMarkingSprite_SelectCombo(u16 tileTag, u16 paletteTag, const u16 *palette)
 {
     if (palette == NULL)
-        palette = gUnknown_83EE008;
-    return sub_80BEB20(tileTag, paletteTag, palette, 16);
+        palette = sMonMarkingsPal;
+    return CreateMonMarkingSprite(tileTag, paletteTag, palette, 16);
 }
 
-struct Sprite * sub_80BEB00(u16 tileTag, u16 paletteTag, const u16 *palette)
+struct Sprite * CreateMonMarkingSprite_AllOff(u16 tileTag, u16 paletteTag, const u16 *palette)
 {
     if (palette == NULL)
-        palette = gUnknown_83EE008;
-    return sub_80BEB20(tileTag, paletteTag, palette, 1);
+        palette = sMonMarkingsPal;
+    return CreateMonMarkingSprite(tileTag, paletteTag, palette, 1);
 }
 
-struct Sprite * sub_80BEB20(u16 tileTag, u16 paletteTag, const u16 *palette, u16 size)
+static struct Sprite * CreateMonMarkingSprite(u16 tileTag, u16 paletteTag, const u16 *palette, u16 size)
 {
     u8 spriteId;
     struct SpriteTemplate sprTemplate;
-    struct SpriteSheet sheet = { gUnknown_83EE028, 0x80, tileTag };
+    struct SpriteSheet sheet = { sMonMarkingsTiles, 0x80, tileTag };
     struct SpritePalette sprPalette = { palette, paletteTag };
 
     sprTemplate.tileTag = tileTag;
     sprTemplate.paletteTag = paletteTag;
-    sprTemplate.oam = &gUnknown_83EE8D0;
-    sprTemplate.anims = gUnknown_83EE958;
+    sprTemplate.oam = &sOamData_32x8;
+    sprTemplate.anims = sSpriteAnimTable_MonMarkSet;
     sprTemplate.images = NULL;
     sprTemplate.affineAnims = gDummySpriteAffineAnimTable;
     sprTemplate.callback = nullsub_62;
@@ -508,6 +510,6 @@ struct Sprite * sub_80BEB20(u16 tileTag, u16 paletteTag, const u16 *palette, u16
 
 void sub_80BEBD0(u8 markings, void * dest)
 {
-    RequestDma3Copy(&gUnknown_83EE028[64 * markings], dest, 0x80, 1);
+    RequestDma3Copy(&sMonMarkingsTiles[64 * markings], dest, 0x80, 1);
 }
 

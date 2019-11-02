@@ -80,7 +80,7 @@ _080BFE92:
 sub_80BFEA0: @ 80BFEA0
 	push {r4,lr}
 	sub sp, 0x20
-	ldr r4, _080BFED8 @ =gUnknown_83EF31C
+	ldr r4, _080BFED8 @ =gUnknown_83EF2DC + 0x40
 	adds r0, r4, 0
 	mov r1, sp
 	movs r2, 0x10
@@ -103,7 +103,7 @@ sub_80BFEA0: @ 80BFEA0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080BFED8: .4byte gUnknown_83EF31C
+_080BFED8: .4byte gUnknown_83EF2DC + 0x40
 	thumb_func_end sub_80BFEA0
 
 	thumb_func_start sub_80BFEDC
@@ -567,7 +567,7 @@ _080C0298:
 	bne _080C02B6
 	b _080C03C8
 _080C02B6:
-	ldr r4, _080C02F8 @ =gUnknown_83EF25A
+	ldr r4, _080C02F8 @ =gUnknown_83EF23C + 0x1E
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0x2
@@ -593,7 +593,7 @@ _080C02B6:
 _080C02EC: .4byte gUnknown_83EF2DC
 _080C02F0: .4byte gUnknown_20399D4
 _080C02F4: .4byte 0x00004796
-_080C02F8: .4byte gUnknown_83EF25A
+_080C02F8: .4byte gUnknown_83EF23C + 0x1E
 _080C02FC:
 	bl ResetTempTileDataBuffers
 	b _080C03C8
@@ -5116,7 +5116,7 @@ _080C285C: .4byte gUnknown_8418E8D
 _080C2860: .4byte gUnknown_20399E0
 _080C2864: .4byte 0x00000ccc
 _080C2868:
-	ldr r4, _080C28A0 @ =gUnknown_83EF25A
+	ldr r4, _080C28A0 @ =gUnknown_83EF23C + 0x1E
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0x2
@@ -5139,7 +5139,7 @@ _080C2868:
 	bl LoadPalette
 	b _080C2976
 	.align 2, 0
-_080C28A0: .4byte gUnknown_83EF25A
+_080C28A0: .4byte gUnknown_83EF23C + 0x1E
 _080C28A4:
 	movs r4, 0x1
 	str r4, [sp]

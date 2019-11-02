@@ -1,5 +1,6 @@
 #include "constants/maps.h"
 #include "constants/species.h"
+#include "constants/region_map.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 
@@ -8,195 +9,415 @@
 
 	.include "data/text/map_section_names.inc"
 
-gUnknown_83EF23C:: @ 83EF23C
-	.incbin "baserom.gba", 0x3EF23C, 0x1E
+gUnknown_83EF23C:: @ 83EF23C gbapal
+	.incbin "graphics/region_map/unk_83EF23C.gbapal"
 
-gUnknown_83EF25A:: @ 83EF25A
-	.incbin "baserom.gba", 0x3EF25A, 0x2
+gUnknown_83EF25C:: @ 83EF25C gbapal
+	.incbin "graphics/region_map/unk_83EF25C.gbapal"
 
-gUnknown_83EF25C:: @ 83EF25C
-	.incbin "baserom.gba", 0x3EF25C, 0x20
+gUnknown_83EF27C:: @ 83EF27C gbapal
+	.incbin "graphics/region_map/unk_83EF27C.gbapal"
 
-gUnknown_83EF27C:: @ 83EF27C
-	.incbin "baserom.gba", 0x3EF27C, 0x20
+gUnknown_83EF29C:: @ 83EF29C gbapal
+	.incbin "graphics/region_map/unk_83EF29C.gbapal"
 
-gUnknown_83EF29C:: @ 83EF29C
-	.incbin "baserom.gba", 0x3EF29C, 0x20
+gUnknown_83EF2BC:: @ 83EF2BC gbapal
+	.incbin "graphics/region_map/unk_83EF2BC.gbapal"
 
-gUnknown_83EF2BC:: @ 83EF2BC
-	.incbin "baserom.gba", 0x3EF2BC, 0x20
+gUnknown_83EF2DC:: @ 83EF2DC gbapal
+	.incbin "graphics/region_map/unk_83EF2DC.gbapal"
 
-gUnknown_83EF2DC:: @ 83EF2DC
-	.incbin "baserom.gba", 0x3EF2DC, 0x40
+	.2byte 0x7c00, 0x7d80, 0x7fff, 0x7fff
 
-gUnknown_83EF31C:: @ 83EF31C
-	.incbin "baserom.gba", 0x3EF31C, 0x68
+gUnknown_83EF384:: @ 83EF384 gbapal
+	.incbin "graphics/region_map/unk_83EF384.gbapal"
 
-gUnknown_83EF384:: @ 83EF384
-	.incbin "baserom.gba", 0x3EF384, 0x20
+gUnknown_83EF3A4:: @ 83EF3A4 gbapal
+	.incbin "graphics/region_map/unk_83EF3A4.gbapal"
 
-gUnknown_83EF3A4:: @ 83EF3A4
-	.incbin "baserom.gba", 0x3EF3A4, 0x20
+gUnknown_83EF3C4:: @ 83EF3C4 pal=gUnknown_83EF384
+	.incbin "graphics/region_map/unk_83EF3C4.4bpp.lz"
 
-gUnknown_83EF3C4:: @ 83EF3C4
-	.incbin "baserom.gba", 0x3EF3C4, 0x8C
+gUnknown_83EF450:: @ 83EF450 pal=gUnknown_83EF384
+	.incbin "graphics/region_map/unk_83EF450.4bpp.lz"
 
-gUnknown_83EF450:: @ 83EF450
-	.incbin "baserom.gba", 0x3EF450, 0x90
+gUnknown_83EF4E0:: @ 83EF4E0 pal=gUnknown_83EF25C
+	.incbin "graphics/region_map/unk_83EF4E0.4bpp.lz"
 
-gUnknown_83EF4E0:: @ 83EF4E0
-	.incbin "baserom.gba", 0x3EF4E0, 0x44
+gUnknown_83EF524:: @ 83EF524 pal=gUnknown_83EF27C
+	.incbin "graphics/region_map/unk_83EF524.4bpp.lz"
 
-gUnknown_83EF524:: @ 83EF524
-	.incbin "baserom.gba", 0x3EF524, 0x78
-
-gUnknown_83EF59C:: @ 83EF59C
-	.incbin "baserom.gba", 0x3EF59C, 0x80
+gUnknown_83EF59C:: @ 83EF59C pal=gUnknown_83EF29C
+	.incbin "graphics/region_map/unk_83EF59C.4bpp.lz"
 
 gUnknown_83EF61C:: @ 83EF61C
-	.incbin "baserom.gba", 0x3EF61C, 0xD14
+	.incbin "graphics/region_map/unk_83EF61C.4bpp.lz"
 
 gUnknown_83F0330:: @ 83F0330
-	.incbin "baserom.gba", 0x3F0330, 0x250
+	.incbin "graphics/region_map/unk_83F0330.4bpp.lz"
 
 gUnknown_83F0580:: @ 83F0580
-	.incbin "baserom.gba", 0x3F0580, 0x31C
+	.incbin "graphics/region_map/unk_83F0580.bin.lz"
 
 gUnknown_83F089C:: @ 83F089C
-	.incbin "baserom.gba", 0x3F089C, 0x260
+	.incbin "graphics/region_map/unk_83F089C.bin.lz"
 
 gUnknown_83F0AFC:: @ 83F0AFC
-	.incbin "baserom.gba", 0x3F0AFC, 0x110
+	.incbin "graphics/region_map/unk_83F0AFC.bin.lz"
 
 gUnknown_83F0C0C:: @ 83F0C0C
-	.incbin "baserom.gba", 0x3F0C0C, 0xE4
+	.incbin "graphics/region_map/unk_83F0C0C.bin.lz"
 
 gUnknown_83F0CF0:: @ 83F0CF0
-	.incbin "baserom.gba", 0x3F0CF0, 0x11C
+	.incbin "graphics/region_map/unk_83F0CF0.bin.lz"
 
 gUnknown_83F0E0C:: @ 83F0E0C
-	.incbin "baserom.gba", 0x3F0E0C, 0x110
+	.incbin "graphics/region_map/unk_83F0E0C.bin.lz"
 
 gUnknown_83F0F1C:: @ 83F0F1C
-	.incbin "baserom.gba", 0x3F0F1C, 0x168
+	.incbin "graphics/region_map/unk_83F0F1C.bin.lz"
 
 gUnknown_83F1084:: @ 83F1084
-	.incbin "baserom.gba", 0x3F1084, 0x10C
+	.incbin "graphics/region_map/unk_83F1084.bin.lz"
 
 gUnknown_83F1190:: @ 83F1190
-	.incbin "baserom.gba", 0x3F1190, 0x13C
+	.incbin "graphics/region_map/unk_83F1190.bin.lz"
 
-gUnknown_83F12CC:: @ 83F12CC
-	.incbin "baserom.gba", 0x3F12CC, 0x120
+gUnknown_83F12CC:: @ 83F12CC pal=gUnknown_83EF3A4
+	.incbin "graphics/region_map/unk_83F12CC.4bpp.lz"
 
-gUnknown_83F13EC:: @ 83F13EC
-	.incbin "baserom.gba", 0x3F13EC, 0x164
+gUnknown_83F13EC:: @ 83F13EC pal=gUnknown_83EF3A4
+	.incbin "graphics/region_map/unk_83F13EC.4bpp.lz"
 
-gUnknown_83F1550:: @ 83F1550
-	.incbin "baserom.gba", 0x3F1550, 0xF0
+gUnknown_83F1550:: @ 83F1550 pal=gUnknown_83EF3A4
+	.incbin "graphics/region_map/unk_83F1550.4bpp.lz"
 
-gUnknown_83F1640:: @ 83F1640
-	.incbin "baserom.gba", 0x3F1640, 0xF8
+gUnknown_83F1640:: @ 83F1640 pal=gUnknown_83EF3A4
+	.incbin "graphics/region_map/unk_83F1640.4bpp.lz"
 
-gUnknown_83F1738:: @ 83F1738
-	.incbin "baserom.gba", 0x3F1738, 0xCC
+gUnknown_83F1738:: @ 83F1738 pal=gUnknown_83EF3A4
+	.incbin "graphics/region_map/unk_83F1738.4bpp.lz"
 
-gUnknown_83F1804:: @ 83F1804
-	.incbin "baserom.gba", 0x3F1804, 0xD4
+gUnknown_83F1804:: @ 83F1804 pal=gUnknown_83EF3A4
+	.incbin "graphics/region_map/unk_83F1804.4bpp.lz"
 
-gUnknown_83F18D8:: @ 83F18D8
-	.incbin "baserom.gba", 0x3F18D8, 0x30
+gUnknown_83F18D8:: @ 83F18D8 pal=gUnknown_83EF2BC
+	.incbin "graphics/region_map/unk_83F18D8.4bpp.lz"
 
-gUnknown_83F1908:: @ 83F1908
-	.incbin "baserom.gba", 0x3F1908, 0x70
+gUnknown_83F1908:: @ 83F1908 pal=gUnknown_83EF2BC
+	.incbin "graphics/region_map/unk_83F1908.4bpp.lz"
 
 gUnknown_83F1978:: @ 83F1978
-	.incbin "baserom.gba", 0x3F1978, 0x28
+	.incbin "graphics/region_map/unk_83F1978.4bpp.lz"
 
 gUnknown_83F19A0:: @ 83F19A0
-	.incbin "baserom.gba", 0x3F19A0, 0xB0
+	.incbin "graphics/region_map/unk_83F19A0.bin.lz"
 
 gUnknown_83F1A50:: @ 83F1A50
-	.incbin "baserom.gba", 0x3F1A50, 0x10
+	.4byte 0x000021e0
+	@ {
+	@   .bg = 0,
+	@   .charBaseIndex = 0,
+	@   .mapBaseIndex = 30,
+	@   .screenSize = 0,
+	@   .paletteMode = 0,
+	@   .priority = 2,
+	@   .baseTile = 0x0000
+	@ }
+	.4byte 0x000030f5
+	@ {
+	@   .bg = 1,
+	@   .charBaseIndex = 1,
+	@   .mapBaseIndex = 15,
+	@   .screenSize = 0,
+	@   .paletteMode = 0,
+	@   .priority = 3,
+	@   .baseTile = 0x0000
+	@ }
+	.4byte 0x0000117a
+	@ {
+	@   .bg = 2,
+	@   .charBaseIndex = 2,
+	@   .mapBaseIndex = 23,
+	@   .screenSize = 0,
+	@   .paletteMode = 0,
+	@   .priority = 1,
+	@   .baseTile = 0x0000
+	@ }
+	.4byte 0x000001ff
+	@ {
+	@   .bg = 3,
+	@   .charBaseIndex = 3,
+	@   .mapBaseIndex = 31,
+	@   .screenSize = 0,
+	@   .paletteMode = 0,
+	@   .priority = 0,
+	@   .baseTile = 0x0000
+	@ }
 
 gUnknown_83F1A60:: @ 83F1A60
-	.incbin "baserom.gba", 0x3F1A60, 0x30
+	.byte 3, 3, 2, 15, 2, 12
+	.2byte 0x0001
+	@ {
+	@   .bg = 3,
+	@   .tilemapLeft = 3,
+	@   .tilemapTop = 2,
+	@   .width = 15,
+	@   .height = 2,
+	@   .paletteNum = 12,
+	@   .baseBlock = 0x0001
+	@ }
+	.byte 3, 3, 4, 15, 2, 12
+	.2byte 0x001f
+	@ {
+	@   .bg = 3,
+	@   .tilemapLeft = 3,
+	@   .tilemapTop = 4,
+	@   .width = 15,
+	@   .height = 2,
+	@   .paletteNum = 12,
+	@   .baseBlock = 0x001f
+	@ }
+	.byte 3, 3, 6, 25, 11, 12
+	.2byte 0x003d
+	@ {
+	@   .bg = 3,
+	@   .tilemapLeft = 3,
+	@   .tilemapTop = 6,
+	@   .width = 25,
+	@   .height = 11,
+	@   .paletteNum = 12,
+	@   .baseBlock = 0x003d
+	@ }
+	.byte 3, 18, 0, 5, 2, 12
+	.2byte 0x0150
+	@ {
+	@   .bg = 3,
+	@   .tilemapLeft = 18,
+	@   .tilemapTop = 0,
+	@   .width = 5,
+	@   .height = 2,
+	@   .paletteNum = 12,
+	@   .baseBlock = 0x0150
+	@ }
+	.byte 3, 24, 0, 5, 2, 12
+	.2byte 0x015a
+	@ {
+	@   .bg = 3,
+	@   .tilemapLeft = 24,
+	@   .tilemapTop = 0,
+	@   .width = 5,
+	@   .height = 2,
+	@   .paletteNum = 12,
+	@   .baseBlock = 0x015a
+	@ }
+	.byte 255, 0, 0, 0, 0, 0
+	.2byte 0x0000
+	@ {
+	@   .bg = 255,
+	@   .tilemapLeft = 0,
+	@   .tilemapTop = 0,
+	@   .width = 0,
+	@   .height = 0,
+	@   .paletteNum = 0,
+	@   .baseBlock = 0x0000
+	@ }
 
 gUnknown_83F1A90:: @ 83F1A90
-	.incbin "baserom.gba", 0x3F1A90, 0x4
+	.byte 0, 1, 2
 
+	.align 2
 gUnknown_83F1A94:: @ 83F1A94
-	.incbin "baserom.gba", 0x3F1A94, 0x8
+	.byte 0, 7, 2
 
+	.align 2
+gUnknown_83F1A98:: @ 83F1A98
+	.byte 0, 10, 2
+
+	.align 2
 gUnknown_83F1A9C:: @ 83F1A9C
-	.incbin "baserom.gba", 0x3F1A9C, 0x8
+	.4byte gUnknown_83F1A94
+	.4byte gUnknown_83F1A98
 
 gUnknown_83F1AA4:: @ 83F1AA4
-	.incbin "baserom.gba", 0x3F1AA4, 0x5C
+	.byte 0x8f, 0x90, 0x91, 0x96, 0x97, 0x98, 0x99, 0x9a, 0xaf, 0xb0, 0xb9, 0xc3, 0xc5, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 
+	.byte 0x92, 0x93, 0x9b, 0x9c, 0x9d, 0x9e, 0x9f, 0xa0, 0xa1, 0xa2, 0xae, 0xb1, 0xb2, 0xb5, 0xc5, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+
+	.byte 0x94, 0x95, 0xa3, 0xa4, 0xa5, 0xa6, 0xa7, 0xa8, 0xa9, 0xaa, 0xab, 0xac, 0xad, 0xb3, 0xb4, 0xb6, 0xb7, 0xb8, 0xba, 0xbb, 0xbc, 0xbd, 0xbe, 0xbf, 0xc0, 0xc1, 0xc2, 0xc5, 0x00, 0x00
+
+	.align 2
 gUnknown_83F1B00:: @ 83F1B00
-	.incbin "baserom.gba", 0x3F1B00, 0xC
+	.byte 0x01, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01
 
 gUnknown_83F1B0C:: @ 83F1B0C
-	.incbin "baserom.gba", 0x3F1B0C, 0x8
+	.2byte 0x0018, 0x0010, 0x0090, 0x0020
 
 gUnknown_83F1B14:: @ 83F1B14
-	.incbin "baserom.gba", 0x3F1B14, 0x8
+	.2byte 0x0018, 0x0020, 0x0090, 0x0030
 
 gUnknown_83F1B1C:: @ 83F1B1C
-	.incbin "baserom.gba", 0x3F1B1C, 0x8
+	.2byte 0x0000, 0x0000, 0x0000, 0x0000
 
 gUnknown_83F1B24:: @ 83F1B24
-	.incbin "baserom.gba", 0x3F1B24, 0x14
+	.4byte 0x80000000, 0x00000000
+
+gAnimCmd_83F1B2C::
+	obj_image_anim_frame 0x00, 20
+	obj_image_anim_frame 0x10, 20
+	obj_image_anim_jump 0
 
 gUnknown_83F1B38:: @ 83F1B38
-	.incbin "baserom.gba", 0x3F1B38, 0x4
+	.4byte gAnimCmd_83F1B2C
 
 gUnknown_83F1B3C:: @ 83F1B3C
-	.incbin "baserom.gba", 0x3F1B3C, 0xE4
+	.2byte MAPSEC_VIRIDIAN_FOREST
+	.align 2
+	.4byte gMapSecName_ViridianForest
+	.4byte gUnknown_8418ECB
+	.2byte MAPSEC_MT_MOON
+	.align 2
+	.4byte gMapSecName_MtMoon
+	.4byte gUnknown_8418F3A
+	.2byte MAPSEC_DIGLETTS_CAVE
+	.align 2
+	.4byte gMapSecName_DiglettsCave
+	.4byte gUnknown_8418FB8
+	.2byte MAPSEC_KANTO_VICTORY_ROAD
+	.align 2
+	.4byte gMapSecName_VictoryRoad
+	.4byte gUnknown_841901C
+	.2byte MAPSEC_POKEMON_MANSION
+	.align 2
+	.4byte gMapSecName_PokemonMansion
+	.4byte gUnknown_841908E
+	.2byte MAPSEC_KANTO_SAFARI_ZONE
+	.align 2
+	.4byte gMapSecName_SafariZone
+	.4byte gUnknown_8419103
+	.2byte MAPSEC_ROCK_TUNNEL
+	.align 2
+	.4byte gMapSecName_RockTunnel
+	.4byte gUnknown_841917D
+	.2byte MAPSEC_SEAFOAM_ISLANDS
+	.align 2
+	.4byte gMapSecName_SeafoamIslands
+	.4byte gUnknown_8419201
+	.2byte MAPSEC_POKEMON_TOWER
+	.align 2
+	.4byte gMapSecName_PokemonTower
+	.4byte gUnknown_841926D
+	.2byte MAPSEC_CERULEAN_CAVE
+	.align 2
+	.4byte gMapSecName_CeruleanCave
+	.4byte gUnknown_84192E2
+	.2byte MAPSEC_POWER_PLANT
+	.align 2
+	.4byte gMapSecName_PowerPlant
+	.4byte gUnknown_841935B
+	.2byte MAPSEC_MT_EMBER
+	.align 2
+	.4byte gMapSecName_MtEmber
+	.4byte gUnknown_84193D5
+	.2byte MAPSEC_BERRY_FOREST
+	.align 2
+	.4byte gMapSecName_BerryForest
+	.4byte gUnknown_8419444
+	.2byte MAPSEC_ICEFALL_CAVE
+	.align 2
+	.4byte gMapSecName_IcefallCave
+	.4byte gUnknown_84194C9
+	.2byte MAPSEC_LOST_CAVE
+	.align 2
+	.4byte gMapSecName_LostCave
+	.4byte gUnknown_841953F
+	.2byte MAPSEC_TANOBY_CHAMBERS
+	.align 2
+	.4byte gMapSecName_TanobyChambers
+	.4byte gUnknown_84195AC
+	.2byte MAPSEC_ALTERING_CAVE
+	.align 2
+	.4byte gMapSecName_AlteringCave
+	.4byte gUnknown_8419629
+	.2byte MAPSEC_PATTERN_BUSH
+	.align 2
+	.4byte gMapSecName_PatternBush
+	.4byte gUnknown_841969D
+	.2byte MAPSEC_DOTTED_HOLE
+	.align 2
+	.4byte gMapSecName_DottedHole
+	.4byte gUnknown_841971A
 
 gUnknown_83F1C20:: @ 83F1C20
-	.incbin "baserom.gba", 0x3F1C20, 0x10
+	.4byte 0xc0008000, 0x00000000
+
+gAnimCmd_83f1c28::
+	obj_image_anim_frame 0, 0
+	obj_image_anim_jump 0
 
 gUnknown_83F1C30:: @ 83F1C30
-	.incbin "baserom.gba", 0x3F1C30, 0x4
+	.4byte gAnimCmd_83f1c28
 
 gUnknown_83F1C34:: @ 83F1C34
-	.incbin "baserom.gba", 0x3F1C34, 0x8
+	.2byte 0x0018, 0x0010, 0x00d8, 0x00a0
 
 gUnknown_83F1C3C:: @ 83F1C3C
-	.incbin "baserom.gba", 0x3F1C3C, 0x14
+	.4byte 0x40000000, 0x00000800
+
+gAnimCmd_83F1C44::
+	obj_image_anim_frame 0, 20
+	obj_image_anim_frame 4, 20
+	obj_image_anim_jump 0
 
 gUnknown_83F1C50:: @ 83F1C50
-	.incbin "baserom.gba", 0x3F1C50, 0x4
+	.4byte gAnimCmd_83F1C44
 
 gUnknown_83F1C54:: @ 83F1C54
-	.incbin "baserom.gba", 0x3F1C54, 0x10
+	.4byte 0x40000000, 0x00000800
+
+gAnimCmd_83F1C5C::
+	obj_image_anim_frame 0, 5
+	obj_image_anim_end
 
 gUnknown_83F1C64:: @ 83F1C64
-	.incbin "baserom.gba", 0x3F1C64, 0x4
+	.4byte gAnimCmd_83F1C5C
 
 gUnknown_83F1C68:: @ 83F1C68
-	.incbin "baserom.gba", 0x3F1C68, 0x8
+	.4byte 0x40000000, 0x00000800
 
 gUnknown_83F1C70:: @ 83F1C70
-	.incbin "baserom.gba", 0x3F1C70, 0x24
+	.4byte 0x00000000, 0x00000800
+
+gAnimCmd_83F1C78::
+	obj_image_anim_frame 0, 30
+	obj_image_anim_frame 4, 60
+	obj_image_anim_jump 0
+
+gAnimCmd_83F1C84::
+	obj_image_anim_frame 1, 20
+	obj_image_anim_jump 0
+
+gAnimCmd_83F1C8C::
+	obj_image_anim_frame 0, 20
+	obj_image_anim_jump 0
 
 gUnknown_83F1C94:: @ 83F1C94
-	.incbin "baserom.gba", 0x3F1C94, 0x4
+	.4byte gAnimCmd_83F1C78
 
 gUnknown_83F1C98:: @ 83F1C98
-	.incbin "baserom.gba", 0x3F1C98, 0x8
+	.4byte gAnimCmd_83F1C84
+	.4byte gAnimCmd_83F1C8C
 
 gUnknown_83F1CA0:: @ 83F1CA0
-	.incbin "baserom.gba", 0x3F1CA0, 0x4
+	.2byte 0x2000, 0x4000
 
 gUnknown_83F1CA4:: @ 83F1CA4
-	.incbin "baserom.gba", 0x3F1CA4, 0x4
+	.2byte 0x4044, 0x4246
 
 gUnknown_83F1CA8:: @ 83F1CA8
-	.incbin "baserom.gba", 0x3F1CA8, 0x4
+	.byte 15, 1, 2
 
+	.align 2
 gUnknown_83F1CAC:: @ 83F1CAC
 	.4byte gMapSecName_PalletTown
 	.4byte gMapSecName_ViridianCity

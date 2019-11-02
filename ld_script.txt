@@ -175,7 +175,7 @@ SECTIONS {
         src/battle_intro.o(.text);
         asm/bike.o(.text);
         src/easy_chat.o(.text);
-        asm/mon_markings.o(.text);
+        src/mon_markings.o(.text);
         src/mail.o(.text);
         src/menu_helpers.o(.text);
         asm/script_pokemon_util_80BF8FC.o(.text);
@@ -461,7 +461,7 @@ SECTIONS {
         src/battle_intro.o(.rodata);
         data/bike.o(.rodata);
         src/easy_chat.o(.rodata);
-        data/mon_markings.o(.rodata);
+        src/mon_markings.o(.rodata);
         src/mail.o(.rodata);
         src/heal_location.o(.rodata);
         data/region_map.o(.rodata);

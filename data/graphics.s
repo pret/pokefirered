@@ -16209,10 +16209,10 @@ gUnknown_8E9CAEC:: @ 8E9CAEC
 	.incbin "baserom.gba", 0xE9CAEC, 0xB0
 
 gUnknown_8E9CB9C:: @ 8E9CB9C
-	.incbin "baserom.gba", 0xE9CB9C, 0x20 @UNKNOWN
+	.incbin "graphics/misc/markings2.gbapal"
 
 gUnknown_8E9CBBC:: @ 8E9CBBC
-	.incbin "baserom.gba", 0xE9CBBC, 0x320 @UNKNOWN
+	.incbin "graphics/misc/markings2.4bpp"
 
 gTradeMenu_Pal:: @ 8E9CEDC
 	.incbin "graphics/trade/menu.gbapal"

@@ -102,6 +102,9 @@ graphics/pokenav/region_map.8bpp: %.8bpp: %.png
 $(MISCGFXDIR)/japanese_hof.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 29
 
+$(MISCGFXDIR)/markings2.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 25
+
 $(INTERFACEGFXDIR)/menu.gbapal: $(INTERFACEGFXDIR)/menu_0.gbapal \
 						$(INTERFACEGFXDIR)/menu_1.gbapal
 	@cat $^ >$@

@@ -4222,4 +4222,8 @@ extern const u16 gUnknown_8E9E9FC[];
 extern const u16 gTradeButtons_Gfx[];
 extern const u16 gTradeMenuMonBox_Tilemap[];
 
+// mon_markings
+extern const u16 gUnknown_8E9CBBC[];
+extern const u16 gUnknown_8E9CB9C[];
+
 #endif //GUARD_GRAPHICS_H

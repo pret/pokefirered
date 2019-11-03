@@ -466,13 +466,13 @@ SECTIONS {
         src/heal_location.o(.rodata);
         data/region_map.o(.rodata);
         src/battle_ai_script_commands.o(.rodata);
-        data/data_83F5738.o(.rodata);
+        data/fldeff_flash.o(.rodata);
         src/field_specials.o(.rodata);
         src/battle_records.o(.rodata);
-        data/data_83F5738.o(.rodata.83F6C90);
+        data/evolution_scene.o(.rodata);
         src/battle_transition.o(.rodata);
         src/battle_controller_link_partner.o(.rodata);
-        data/data_83F5738.o(.rodata.83FB218);
+        data/data_83F5738.o(.rodata);
         src/save.o(.rodata);
         data/data_83FECCC.o(.rodata);
         src/battle_controller_safari.o(.rodata);

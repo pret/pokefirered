@@ -472,7 +472,7 @@ SECTIONS {
         data/evolution_scene.o(.rodata);
         src/battle_transition.o(.rodata);
         src/battle_controller_link_partner.o(.rodata);
-        data/data_83F5738.o(.rodata);
+        data/battle_message.o(.rodata);
         src/save.o(.rodata);
         data/data_83FECCC.o(.rodata);
         src/battle_controller_safari.o(.rodata);

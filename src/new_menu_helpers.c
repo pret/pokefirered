@@ -26,6 +26,9 @@ static EWRAM_DATA u16 gUnknown_203AB5C = {0};
 static EWRAM_DATA void *gUnknown_203AB60[0x20] = {NULL};
 static EWRAM_DATA u8 sStartMenuWindowId = {0};
 
+const u16 gUnknown_841F1C8[] = INCBIN_U16("graphics/text_window/unk_841F1C8.4bpp");
+const u16 gTMCaseMainWindowPalette[] = INCBIN_U16("graphics/tm_case/unk_841F408.gbapal");
+
 static const u8 gUnknown_841F428[] = { 8, 4, 1 };
 
 static const struct WindowTemplate sStandardTextBox_WindowTemplates[] = 

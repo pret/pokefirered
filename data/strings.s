@@ -157,27 +157,27 @@ gText_Controls:: @ 8415D2C
 
 	.align 2
 gUnknown_8415D38:: @ 8415D2C
-	.string "{KEYGFX_DPAD_UP_DOWN}えらぶ {KEYGFX_A_BUTTON}けってい$"
+	.string "{DPAD_UPDOWN}えらぶ {A_BUTTON}けってい$"
 
 	.align 2
 gText_ABUTTONNext:: @ 8415D48
-	.string "{KEYGFX_A_BUTTON}NEXT$"
+	.string "{A_BUTTON}NEXT$"
 
 	.align 2
 gText_ABUTTONNext_BBUTTONBack:: @ 8415D50
-	.string "{KEYGFX_A_BUTTON}NEXT {KEYGFX_B_BUTTON}BACK$"
+	.string "{A_BUTTON}NEXT {B_BUTTON}BACK$"
 
 	.align 2
 gText_UPDOWNPick_ABUTTONNext_BBUTTONBack:: @ 8415D60
-	.string "{KEYGFX_DPAD_UP_DOWN}PICK {KEYGFX_A_BUTTON}NEXT {KEYGFX_B_BUTTON}CANCEL$"
+	.string "{DPAD_UPDOWN}PICK {A_BUTTON}NEXT {B_BUTTON}CANCEL$"
 
 	.align 2
 gText_UPDOWNPick_ABUTTONBBUTTONCancel:: @ 8415D78
-	.string "{KEYGFX_DPAD_UP_DOWN}PICK {KEYGFX_A_BUTTON}{KEYGFX_B_BUTTON}CANCEL$"
+	.string "{DPAD_UPDOWN}PICK {A_BUTTON}{B_BUTTON}CANCEL$"
 
 	.align 2
 gText_ABUTTONExit:: @ 8415D8C
-	.string "{KEYGFX_A_BUTTON}EXIT$"
+	.string "{A_BUTTON}EXIT$"
 
 gText_Boy:: @ 8415D93
 	.string "BOY$"
@@ -189,7 +189,7 @@ gUnknown_8415D9C:: @ 8415D9C
 	.string "POKéDEX   TABLE OF CONTENTS$"
 
 gUnknown_8415DB8:: @ 8415DB8
-	.string "{KEYGFX_DPAD_UP_DOWN}PICK {KEYGFX_A_BUTTON}OK$"
+	.string "{DPAD_UPDOWN}PICK {A_BUTTON}OK$"
 
 gUnknown_8415DC4:: @ 8415DC4
 	.string "Seen:$"
@@ -276,13 +276,13 @@ gUnknown_8415F4A:: @ 8415F4A
 	.string "SEARCH$"
 
 gText_PickOKExit:: @ 8415F51
-	.string "{KEYGFX_DPAD_UP_DOWN}PICK {KEYGFX_A_BUTTON}OK {KEYGFX_B_BUTTON}CANCEL$"
+	.string "{DPAD_UPDOWN}PICK {A_BUTTON}OK {B_BUTTON}CANCEL$"
 
 gUnknown_8415F66:: @ 8415F66
 	.string "-----$"
 
 gUnknown_8415F6C:: @ 8415F6C
-	.string "{KEYGFX_DPAD_LEFT_RIGHT}PICK{EXTRA_PLUS}FLIP PAGE {KEYGFX_A_BUTTON}CHECK {KEYGFX_B_BUTTON}CANCEL$"
+	.string "{DPAD_LEFTRIGHT}PICK{PLUS}FLIP PAGE {A_BUTTON}CHECK {B_BUTTON}CANCEL$"
 
 gUnknown_8415F8F:: @ 8415F8F
 	.string " POKéMON$"
@@ -303,16 +303,16 @@ gUnknown_8415FA5:: @ 0x8415FA5
 	.string "ポケモンデ-タ$"
 
 gUnknown_8415FAD:: @ 8415FAD
-	.string "{KEYGFX_START_BUTTON}CRY$"
+	.string "{START_BUTTON}CRY$"
 
 gUnknown_8415FB3:: @ 8415FB3
-	.string "{KEYGFX_A_BUTTON}NEXT DATA {KEYGFX_B_BUTTON}CANCEL$"
+	.string "{A_BUTTON}NEXT DATA {B_BUTTON}CANCEL$"
 
 gUnknown_8415FC8:: @ 8415FC8
-	.string "{KEYGFX_A_BUTTON}NEXT$"
+	.string "{A_BUTTON}NEXT$"
 
 gUnknown_8415FCF:: @ 8415FCF
-	.string "{KEYGFX_A_BUTTON}CANCEL {KEYGFX_B_BUTTON}PREVIOUS DATA$"
+	.string "{A_BUTTON}CANCEL {B_BUTTON}PREVIOUS DATA$"
 
 gUnknown_8415FE8:: @ 8415FE8
 	.string "AREA$"
@@ -324,7 +324,7 @@ gUnknown_8415FF2:: @ 8415FF2
 	.string "AREA UNKNOWN$"
 
 gUnknown_8415FFF:: @ 8415FFF
-	.string "{EXTRA_NO}$"
+	.string "{NO}$"
 
 gUnknown_8416002:: @ 8416002
 	.string "PAGE$"
@@ -485,22 +485,22 @@ gUnknown_8416221:: @ 8416221
 	.string "♀$"
 
 gText_Lv:: @ 8416223
-	.string "{EXTRA_LV}$"
+	.string "{LV_2}$"
 
 gOtherText_UnkF9_08_Clear_01:: @ 8416226
-	.string "{EXTRA_NO}{CLEAR 0x01}$"
+	.string "{NO}{CLEAR 0x01}$"
 
 gUnknown_841622C::
-	.string "{EXTRA_PLUS}$"
+	.string "{PLUS}$"
 
 gUnknown_841622F::
 	.string "{ESCAPE 0x03}$"
 
 gUnknown_8416233::
-	.string "{EXTRA_ID}{EXTRA_NO}$"
+	.string "{ID}{NO}$"
 
 gUnknown_8416238:: @ 8416238
-	.string "{EXTRA_PP}$"
+	.string "{PP}$"
 
 gFameCheckerText_ListMenuCursor:: @ 841623B
 	.string "▶$"
@@ -1992,7 +1992,7 @@ gUnknown_8418248:: @ 0x8418248
 	.string "Pick the wallpaper.$"
 
 gUnknown_841825C:: @ 0x841825C
-	.string "{UNKNOWN_F7 0x00} is selected.$"
+	.string "{DYNAMIC 0x00} is selected.$"
 
 gUnknown_841826C:: @ 0x841826C
 	.string "Jump to which BOX?$"
@@ -2001,7 +2001,7 @@ gUnknown_841827F:: @ 0x841827F
 	.string "Deposit in which BOX?$"
 
 gUnknown_8418295:: @ 0x8418295
-	.string "{UNKNOWN_F7 0x00} was deposited.$"
+	.string "{DYNAMIC 0x00} was deposited.$"
 
 gUnknown_84182A7:: @ 0x84182A7
 	.string "The BOX is full.$"
@@ -2010,10 +2010,10 @@ gUnknown_84182B8:: @ 0x84182B8
 	.string "Release this POKéMON?$"
 
 gUnknown_84182CE:: @ 0x84182CE
-	.string "{UNKNOWN_F7 0x00} was released.$"
+	.string "{DYNAMIC 0x00} was released.$"
 
 gUnknown_84182DF:: @ 0x84182DF
-	.string "Bye-bye, {UNKNOWN_F7 0x00}!$"
+	.string "Bye-bye, {DYNAMIC 0x00}!$"
 
 gUnknown_84182EC:: @ 0x84182EC
 	.string "Mark your POKéMON.$"
@@ -2037,7 +2037,7 @@ gUnknown_8418379:: @ 0x8418379
 	.string "Continue BOX operations?$"
 
 gUnknown_8418392:: @ 0x8418392
-	.string "{UNKNOWN_F7 0x00} came back!$"
+	.string "{DYNAMIC 0x00} came back!$"
 
 gUnknown_84183A0:: @ 0x84183A0
 	.string "Was it worried about you?$"
@@ -2061,10 +2061,10 @@ gUnknown_8418419:: @ 0x8418419
 	.string "Put this item in the BAG?$"
 
 gUnknown_8418433:: @ 0x8418433
-	.string "{UNKNOWN_F7 0x00} is now held.$"
+	.string "{DYNAMIC 0x00} is now held.$"
 
 gUnknown_8418443:: @ 0x8418443
-	.string "Changed to {UNKNOWN_F7 0x00}.$"
+	.string "Changed to {DYNAMIC 0x00}.$"
 
 gUnknown_8418452:: @ 0x8418452
 	.string "MAIL can't be stored!$"
@@ -2517,7 +2517,7 @@ gUnknown_8418E69:: @ 0x8418E69
 	.string "RIVAL's NAME?$"
 
 gUnknown_8418E77:: @ 8418E77
-	.string "{KEYGFX_DPAD_ANY}MOVE {KEYGFX_A_BUTTON}OK {KEYGFX_B_BUTTON}BACK$"
+	.string "{DPAD_ANY}MOVE {A_BUTTON}OK {B_BUTTON}BACK$"
 
 gUnknown_8418E8A:: @ 8418E8A
 	.string "$"
@@ -2526,25 +2526,25 @@ gUnknown_8418E8B:: @ 8418E8B
 	.string " $"
 
 gUnknown_8418E8D:: @ 8418E8D
-	.string "{KEYGFX_A_BUTTON}GUIDE$"
+	.string "{A_BUTTON}GUIDE$"
 
 gUnknown_8418E95:: @ 8418E95
-	.string "{KEYGFX_A_BUTTON}CANCEL$"
+	.string "{A_BUTTON}CANCEL$"
 
 gUnknown_8418E9E:: @ 8418E9E
-	.string "{KEYGFX_A_BUTTON}CANCEL$"
+	.string "{A_BUTTON}CANCEL$"
 
 gUnknown_8418EA7:: @ 8418EA7
-	.string "{KEYGFX_A_BUTTON}SWITCH$"
+	.string "{A_BUTTON}SWITCH$"
 
 gUnknown_8418EB0:: @ 8418EB0
-	.string "{KEYGFX_A_BUTTON}OK$"
+	.string "{A_BUTTON}OK$"
 
 gUnknown_8418EB5:: @ 8418EB5
-	.string "{KEYGFX_DPAD_ANY}MOVE$"
+	.string "{DPAD_ANY}MOVE$"
 
 gUnknown_8418EBC:: @ 8418EBC
-	.string "{KEYGFX_DPAD_UP_DOWN}PICK$"
+	.string "{DPAD_UPDOWN}PICK$"
 
 gUnknown_8418EC3:: @ 8418EC3
 	.string "No data$"
@@ -2683,79 +2683,79 @@ gUnknown_841971A:: @ 841971A
 	.string "on its door.$"
 
 gUnknown_8419782:: @ 8419782
-	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "{DYNAMIC 0x00} nature.\n"
 	.string "Met in a trade.$"
 
 gUnknown_841979D:: @ 841979D
-	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "{DYNAMIC 0x00} nature.\n"
 	.string "Met in a trade.$"
 
 gUnknown_84197B8:: @ 84197B8
-	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "{DYNAMIC 0x00} nature.\n"
 	.string "Met in a fateful encounter when\n"
-	.string "at {EXTRA_LV} {UNKNOWN_F7 0x01}.$"
+	.string "at {LV_2} {DYNAMIC 0x01}.$"
 
 gUnknown_84197ED:: @ 84197ED
-	.string "{UNKNOWN_F7 0x00} nature.\n"
+	.string "{DYNAMIC 0x00} nature.\n"
 	.string "Met in a fateful encounter when\n"
-	.string "at {EXTRA_LV} {UNKNOWN_F7 0x01}.$"
+	.string "at {LV_2} {DYNAMIC 0x01}.$"
 
 gUnknown_8419822:: @ 8419822
-	.string "{UNKNOWN_F7 0x00} nature.\n"
-	.string "Met in {UNKNOWN_F7 0x02} at {EXTRA_LV} {UNKNOWN_F7 0x01}.$"
+	.string "{DYNAMIC 0x00} nature.\n"
+	.string "Met in {DYNAMIC 0x02} at {LV_2} {DYNAMIC 0x01}.$"
 
 gUnknown_8419841:: @ 8419841
-	.string "{UNKNOWN_F7 0x00} nature.\n"
-	.string "Met in {UNKNOWN_F7 0x02} at {EXTRA_LV} {UNKNOWN_F7 0x01}.$"
+	.string "{DYNAMIC 0x00} nature.\n"
+	.string "Met in {DYNAMIC 0x02} at {LV_2} {DYNAMIC 0x01}.$"
 
 gUnknown_8419860:: @ 8419860
-	.string "{UNKNOWN_F7 0x00} nature.\n"
-	.string "Apparently met in {UNKNOWN_F7 0x02}\n"
-	.string "at {EXTRA_LV} {UNKNOWN_F7 0x01}.$"
+	.string "{DYNAMIC 0x00} nature.\n"
+	.string "Apparently met in {DYNAMIC 0x02}\n"
+	.string "at {LV_2} {DYNAMIC 0x01}.$"
 
 gUnknown_841988A:: @ 841988A
-	.string "{UNKNOWN_F7 0x00} nature.\n"
-	.string "Apparently met in {UNKNOWN_F7 0x02}\n"
-	.string "at {EXTRA_LV} {UNKNOWN_F7 0x01}.$"
+	.string "{DYNAMIC 0x00} nature.\n"
+	.string "Apparently met in {DYNAMIC 0x02}\n"
+	.string "at {LV_2} {DYNAMIC 0x01}.$"
 
 gUnknown_84198B4:: @ 84198B4
-	.string "{UNKNOWN_F7 0x00} nature.\n"
-	.string "Hatched: {UNKNOWN_F7 0x02}\n"
-	.string "at {EXTRA_LV} {UNKNOWN_F7 0x01}.$"
+	.string "{DYNAMIC 0x00} nature.\n"
+	.string "Hatched: {DYNAMIC 0x02}\n"
+	.string "at {LV_2} {DYNAMIC 0x01}.$"
 
 gUnknown_84198D5:: @ 84198D5
-	.string "{UNKNOWN_F7 0x00} nature.\n"
-	.string "Hatched: {UNKNOWN_F7 0x02}\n"
-	.string "at {EXTRA_LV} {UNKNOWN_F7 0x01}.$"
+	.string "{DYNAMIC 0x00} nature.\n"
+	.string "Hatched: {DYNAMIC 0x02}\n"
+	.string "at {LV_2} {DYNAMIC 0x01}.$"
 
 @ TODO: Replace this gibberish with the proper Hiragana
 gUnknown_84198F6:: @ 84198F6
-	.string "{UNKNOWN_F7 0x00}ßÓÁÉË {EXTRA_LV}{UNKNOWN_F7 0x01}çÑÊ\n"
-	.string "{UNKNOWN_F7 0x02}で ÉÇっŒ ùÂだ$"
+	.string "{DYNAMIC 0x00}ßÓÁÉË {LV_2}{DYNAMIC 0x01}çÑÊ\n"
+	.string "{DYNAMIC 0x02}で ÉÇっŒ ùÂだ$"
 
 gUnknown_8419913:: @ 8419913
-	.string "{UNKNOWN_F7 0x00}ÓÁÉË {EXTRA_LV}{UNKNOWN_F7 0x01}çÑÊ\n"
-	.string "{UNKNOWN_F7 0x02}で ÉÇっŒ ùÂだ$"
+	.string "{DYNAMIC 0x00}ÓÁÉË {LV_2}{DYNAMIC 0x01}çÑÊ\n"
+	.string "{DYNAMIC 0x02}で ÉÇっŒ ùÂだ$"
 
 gUnknown_841992F:: @ 841992F
-	.string "{UNKNOWN_F7 0x00} nature. Met in a fateful\n"
-	.string "encounter (hatched: {UNKNOWN_F7 0x02}\n"
-	.string "at {EXTRA_LV} {UNKNOWN_F7 0x01}).$"
+	.string "{DYNAMIC 0x00} nature. Met in a fateful\n"
+	.string "encounter (hatched: {DYNAMIC 0x02}\n"
+	.string "at {LV_2} {DYNAMIC 0x01}).$"
 
 gUnknown_841996D:: @ 841996D
-	.string "{UNKNOWN_F7 0x00} nature. Met in a fateful\n"
-	.string "encounter (hatched: {UNKNOWN_F7 0x02}\n"
-	.string "at {EXTRA_LV} {UNKNOWN_F7 0x01}).$"
+	.string "{DYNAMIC 0x00} nature. Met in a fateful\n"
+	.string "encounter (hatched: {DYNAMIC 0x02}\n"
+	.string "at {LV_2} {DYNAMIC 0x01}).$"
 
 gUnknown_84199AB:: @ 84199AB
-	.string "{UNKNOWN_F7 0x00} nature. Apparently met in\n"
+	.string "{DYNAMIC 0x00} nature. Apparently met in\n"
 	.string "a fateful encounter (hatched:\n"
-	.string "{UNKNOWN_F7 0x02} at {EXTRA_LV} {UNKNOWN_F7 0x01}).$"
+	.string "{DYNAMIC 0x02} at {LV_2} {DYNAMIC 0x01}).$"
 
 gUnknown_84199F4:: @ 84199F4
-	.string "{UNKNOWN_F7 0x00} nature. Apparently met in\n"
+	.string "{DYNAMIC 0x00} nature. Apparently met in\n"
 	.string "a fateful encounter シhatched:\n"
-	.string "{UNKNOWN_F7 0x02} at {EXTRA_LV} {UNKNOWN_F7 0x01}ス.$"
+	.string "{DYNAMIC 0x02} at {LV_2} {DYNAMIC 0x01}ス.$"
 
 gUnknown_8419A3D:: @ 0x8419A3D
 	.string "An odd POKéMON EGG found by the\n"
@@ -2822,25 +2822,25 @@ gUnknown_8419C59:: @ 8419C59
 	.string "NEXT LV.$"
 
 gUnknown_8419C62:: @ 8419C62
-	.string "{KEYGFX_DPAD_RIGHT}PAGE {KEYGFX_A_BUTTON}CANCEL$"
+	.string "{DPAD_RIGHT}PAGE {A_BUTTON}CANCEL$"
 
 gUnknown_8419C72:: @ 8419C72
-	.string "{KEYGFX_A_BUTTON}CANCEL$"
+	.string "{A_BUTTON}CANCEL$"
 
 gUnknown_8419C7B:: @ 8419C7B
-	.string "{KEYGFX_DPAD_LEFT_RIGHT}PAGE$"
+	.string "{DPAD_LEFTRIGHT}PAGE$"
 
 gUnknown_8419C82:: @ 8419C82
-	.string "{KEYGFX_DPAD_LEFT}PAGE {KEYGFX_A_BUTTON}DETAIL$"
+	.string "{DPAD_LEFT}PAGE {A_BUTTON}DETAIL$"
 
 gUnknown_8419C92:: @ 8419C92
-	.string "{KEYGFX_DPAD_UP_DOWN}PICK {KEYGFX_A_BUTTON}SWITCH$"
+	.string "{DPAD_UPDOWN}PICK {A_BUTTON}SWITCH$"
 
 gUnknown_8419CA2:: @ 8419CA2
-	.string "{KEYGFX_DPAD_UP_DOWN}PICK$"
+	.string "{DPAD_UPDOWN}PICK$"
 
 gUnknown_8419CA9:: @ 8419CA9
-	.string "{KEYGFX_DPAD_UP_DOWN}PICK {KEYGFX_A_BUTTON}DELETE$"
+	.string "{DPAD_UPDOWN}PICK {A_BUTTON}DELETE$"
 
 gUnknown_8419CB9:: @ 8419CB9
 	.string "HM moves can't be\n"
@@ -2971,7 +2971,7 @@ gUnknown_8419E52:: @ 8419E52
 	.string "TYPE$"
 
 gUnknown_8419E57:: @ 8419E57
-	.string "{KEYGFX_DPAD_UP_DOWN}PICK {KEYGFX_DPAD_LEFT_RIGHT}SWITCH {KEYGFX_A_BUTTON}{KEYGFX_B_BUTTON}CANCEL$"
+	.string "{DPAD_UPDOWN}PICK {DPAD_LEFTRIGHT}SWITCH {A_BUTTON}{B_BUTTON}CANCEL$"
 
 gUnknown_8419E72:: @ 0x8419E72
 	.string "RTCを リセットします\n"
@@ -3075,7 +3075,7 @@ gUnknown_841B2D4:: @ 0x841B2D4
 	.string "SP. DEF$"
 
 gUnknown_841B2DC:: @ 841B2DC
-	.string "{SMALL}{EXTRA_PLUS}{SIZE 0x02}$"
+	.string "{SMALL}{PLUS}{SIZE 0x02}$"
 
 gUnknown_841B2E5:: @ 841B2E5
 	.string "{SMALL}-{SIZE 0x02}$"
@@ -3091,8 +3091,8 @@ gUnknown_841B2FF:: @ 0x841B2FF
 	.string "$"
 
 gUnknown_841B306:: @ 841B306
-	.string "{UNKNOWN_F7 0x00} forgot\n"
-	.string "{UNKNOWN_F7 0x01}.\p"
+	.string "{DYNAMIC 0x00} forgot\n"
+	.string "{DYNAMIC 0x01}.\p"
 	.string "$"
 
 gUnknown_841B315:: @ 841B315
@@ -3107,8 +3107,8 @@ gUnknown_841B329:: @ 841B329
 	.string "Huh?$"
 
 gUnknown_841B32E:: @ 841B32E
-	.string "{UNKNOWN_F7 0x00} learned\n"
-	.string "{UNKNOWN_F7 0x01}!$"
+	.string "{DYNAMIC 0x00} learned\n"
+	.string "{DYNAMIC 0x01}!$"
 
 gUnknown_841B33D:: @ 0x841B33D
 	.string "UPPER$"
@@ -3141,22 +3141,22 @@ gUnknown_841B39E:: @ 0x841B39E
 	.string "Input text.$"
 
 gUnknown_841B3AA:: @ 841B3AA
-	.string "{UNKNOWN_F7 0x00} joined the chat!$"
+	.string "{DYNAMIC 0x00} joined the chat!$"
 
 gUnknown_841B3BE:: @ 841B3BE
-	.string "{UNKNOWN_F7 0x00} left the chat.$"
+	.string "{DYNAMIC 0x00} left the chat.$"
 
 gUnknown_841B3D0:: @ 0x841B3D0
-	.string "{UNKNOWN_F7 0x00}の{UNKNOWN_F7 0x01}ひきめ:$"
+	.string "{DYNAMIC 0x00}の{DYNAMIC 0x01}ひきめ:$"
 
 gUnknown_841B3DA:: @ 0x841B3DA
-	.string "{UNKNOWN_F7 0x00}の{UNKNOWN_F7 0x01}ひきめは いません$"
+	.string "{DYNAMIC 0x00}の{DYNAMIC 0x01}ひきめは いません$"
 
 gUnknown_841B3E9:: @ 0x841B3E9
 	.string "Exiting the chat‥$"
 
 gUnknown_841B3FB:: @ 0x841B3FB
-	.string "The LEADER, {UNKNOWN_F7 0x00}, has\n"
+	.string "The LEADER, {DYNAMIC 0x00}, has\n"
 	.string "left, ending the chat.$"
 
 gUnknown_841B426:: @ 0x841B426
@@ -3172,7 +3172,7 @@ gUnknown_841B4A4:: @ 0x841B4A4
 	.string "DON'T TURN OFF THE POWER.$"
 
 gUnknown_841B4C6:: @ 0x841B4C6
-	.string "{UNKNOWN_F7 0x00} saved the game.$"
+	.string "{DYNAMIC 0x00} saved the game.$"
 
 gUnknown_841B4D9:: @ 0x841B4D9
 	.string "If the LEADER leaves, the chat\n"
@@ -3221,13 +3221,13 @@ gUnknown_841B5B6:: @ 841B5B6
 	.string "$"
 
 gUnknown_841B60E:: @ 841B60E
-	.string "PLAYER: {UNKNOWN_F7 0x00}$"
+	.string "PLAYER: {DYNAMIC 0x00}$"
 
 gUnknown_841B619:: @ 841B619
 	.string "This document is issued in\n"
 	.string "recognition of your magnificent\n"
 	.string "achievement - the completion of\n"
-	.string "the {UNKNOWN_F7 0x01} POKéDEX.$"
+	.string "the {DYNAMIC 0x01} POKéDEX.$"
 
 gUnknown_841B684:: @ 841B684
 	.string "GAME FREAK$"
@@ -3284,7 +3284,7 @@ gString_QuitPlaying:: @ 841B76B
 	.string "Quit playing?$"
 
 gString_SlotMachineControls:: @ 841B779
-	.string "{KEYGFX_DPAD_LEFT_RIGHT}COMBOS {KEYGFX_DPAD_DOWN}WAGER {KEYGFX_A_BUTTON}STOP {KEYGFX_B_BUTTON}EXIT$"
+	.string "{DPAD_LEFTRIGHT}COMBOS {DPAD_DOWN}WAGER {A_BUTTON}STOP {B_BUTTON}EXIT$"
 
 gUnknown_841B798:: @ 0x841B798
 	.string "おしえテレビ$"
@@ -3323,7 +3323,7 @@ gUnknown_841CB63:: @ 841CB63
 
 gUnknown_841CBA9:: @ 841CBA9
 	.string "Awesome score! You've\n"
-	.string "won {UNKNOWN_F7 01} {UNKNOWN_F7 00}!$"
+	.string "won {DYNAMIC 01} {DYNAMIC 00}!$"
 
 gUnknown_841CBCA:: @ 841CBCA
 	.string "There's no room left now.$"
@@ -3381,7 +3381,7 @@ gUnknown_841CD58:: @ 841CD58
 
 gUnknown_841CD7A:: @ 841CD7A
 	.string "The first-place winner gets\n"
-	.string "this {UNKNOWN_F7 00}!$"
+	.string "this {DYNAMIC 00}!$"
 
 gUnknown_841CD9F:: @ 841CD9F
 	.string "You can't hold any more...$"
@@ -3436,10 +3436,10 @@ gUnknown_841CE24:: @ 841CE24
 
 	.align 2
 gUnknown_841D020:: @ 841D020
-	.string "1. {COLOR LIGHT_GRAY}{SHADOW BLACK}{UNKNOWN_F7 0x00}$"
+	.string "1. {COLOR LIGHT_GRAY}{SHADOW BLACK}{DYNAMIC 0x00}$"
 
 gUnknown_841D02C:: @ 841D02C
-	.string "1. {UNKNOWN_F7 0x00}$"
+	.string "1. {DYNAMIC 0x00}$"
 
 gUnknown_841D032:: @ 0x841D032
 	.string "   times$"
@@ -4219,7 +4219,7 @@ gUnknown_841DE54:: @ 841DE54
 	.string "$"
 
 gUnknown_841DE55:: @ 841DE55
-	.string "カ-ドeリ-ダ-{EXTRA_PLUS}の ‘つうしん'を\n"
+	.string "カ-ドeリ-ダ-{PLUS}の ‘つうしん'を\n"
 	.string "えらんで Aボタンを おしてください$"
 
 gUnknown_841DE7C:: @ 841DE7C
@@ -4229,7 +4229,7 @@ gUnknown_841DE7D:: @ 841DE7D
 	.string "$"
 
 gUnknown_841DE7E:: @ 841DE7E
-	.string "カ-ドeリ-ダ-{EXTRA_PLUS}と\n"
+	.string "カ-ドeリ-ダ-{PLUS}と\n"
 	.string "つうしん できません$"
 
 gUnknown_841DE95:: @ 841DE95
@@ -4290,16 +4290,16 @@ gUnknown_841DFA0:: @ 841DFA0
 	.string "GOLD$"
 
 gUnknown_841DFA5:: @ 841DFA5
-	.string "{KEYGFX_A_BUTTON}NEXT$"
+	.string "{A_BUTTON}NEXT$"
 
 gUnknown_841DFAC:: @ 841DFAC
-	.string "{KEYGFX_DPAD_UP_DOWN}PICK {KEYGFX_A_BUTTON}OK {KEYGFX_B_BUTTON}END$"
+	.string "{DPAD_UPDOWN}PICK {A_BUTTON}OK {B_BUTTON}END$"
 
 gUnknown_841DFBE:: @ 841DFBE
-	.string "{KEYGFX_A_BUTTON}{KEYGFX_B_BUTTON}CANCEL$"
+	.string "{A_BUTTON}{B_BUTTON}CANCEL$"
 
 gUnknown_841DFC9:: @ 841DFC9
-	.string "{KEYGFX_DPAD_UP_DOWN}PICK {KEYGFX_A_BUTTON}OK {KEYGFX_B_BUTTON}CANCEL$"
+	.string "{DPAD_UPDOWN}PICK {A_BUTTON}OK {B_BUTTON}CANCEL$"
 
 gEasyChatGroupName_Pokemon:: @ 841E08A	@ easy chat categories
 	.string "POKéMON$"
@@ -4493,29 +4493,29 @@ gUnknown_841E29E:: @ 841E29E
 	.string "People communicating:$"
 
 gUnknown_841E2B4:: @ 841E2B4
-	.string "{UNKNOWN_F7 0x00} players$"
+	.string "{DYNAMIC 0x00} players$"
 
 gUnknown_841E2BF:: @ 841E2BF
-	.string "{UNKNOWN_F7 0x01} player$"
+	.string "{DYNAMIC 0x01} player$"
 
 gUnknown_841E2C9:: @ 841E2C9
-	.string "{UNKNOWN_F7 0x02} players$"
+	.string "{DYNAMIC 0x02} players$"
 
 gUnknown_841E2D4:: @ 841E2D4
-	.string "{UNKNOWN_F7 0x03} players$"
+	.string "{DYNAMIC 0x03} players$"
 
 gUnknown_841E2DF:: @ 841E2DF
-	.string "{KEYGFX_DPAD_ANY}えらぶ:{KEYGFX_A_BUTTON}けってい$"
+	.string "{DPAD_ANY}えらぶ:{A_BUTTON}けってい$"
 
 gUnknown_841E2EC:: @ 841E2EC
-	.string "{KEYGFX_B_BUTTON}CANCEL$"
+	.string "{B_BUTTON}CANCEL$"
 
 gUnknown_841E2F5:: @ 841E2F5
 	.string "{COLOR BLUE}{SHADOW YELLOW}   たいせんの くみあわせ\n"
 	.string "{COLOR RED}{SHADOW GREEN}じぶんの ばしょをきめて ください$"
 
 gUnknown_841E322:: @ 841E322
-	.string "{EXTRA_ID}$"
+	.string "{ID}$"
 
 gUnknown_841E325:: @ 841E325
 	.string "Communication standby…$"
@@ -4588,13 +4588,13 @@ gUnknown_841E58D:: @ 841E58D
 	.string "Refused the battle.{PAUSE 0x3C}$"
 
 gFameCheckerText_MainScreenUI:: @ 841E5A4
-	.string "{KEYGFX_START_BUTTON}PICK {KEYGFX_DPAD_UP_DOWN}SELECT {KEYGFX_A_BUTTON}OK$"
+	.string "{START_BUTTON}PICK {DPAD_UPDOWN}SELECT {A_BUTTON}OK$"
 
 gFameCheckerText_PickScreenUI:: @ 841E5B9
-	.string "{KEYGFX_START_BUTTON}PICK {KEYGFX_DPAD_UP_DOWN}SELECT {KEYGFX_B_BUTTON}CANCEL$"
+	.string "{START_BUTTON}PICK {DPAD_UPDOWN}SELECT {B_BUTTON}CANCEL$"
 
 gFameCheckerText_FlavorTextUI:: @ 841E5D2
-	.string "{KEYGFX_DPAD_ANY}PICK {KEYGFX_A_BUTTON}READ {KEYGFX_B_BUTTON}CANCEL$"
+	.string "{DPAD_ANY}PICK {A_BUTTON}READ {B_BUTTON}CANCEL$"
 
 gFameCheckerOakName:: @ 841E5E9
 	.string "OAK$"
@@ -4793,7 +4793,7 @@ gText_MysteryGift2:: @ 841EDBD
 	.string "MYSTERY GIFT$"
 
 gText_PickOKCancel:: @ 841EDCA
-	.string "{KEYGFX_DPAD_UP_DOWN}PICK {KEYGFX_A_BUTTON}OK {KEYGFX_B_BUTTON}EXIT$"
+	.string "{DPAD_UPDOWN}PICK {A_BUTTON}OK {B_BUTTON}EXIT$"
 
 gText_WonderCards::
 	.string "WONDER CARDS$"

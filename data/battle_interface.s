@@ -129,7 +129,7 @@ gUnknown_82604EC:: @ 82604EC
 	spr_template 55061, 55059, gUnknown_82604B4, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCB_StatusSummaryBallsOnBattleStart
 
 gUnknown_826051C:: @ 826051C
-	.string "{EXTRA_LV}$", 16
+	.string "{LV_2}$", 16
 
 gUnknown_826052C:: @ 826052C
 	.string "{COLOR 01}{HIGHLIGHT 02}", 20

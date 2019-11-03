@@ -208,7 +208,7 @@ gUnknown_81B36EB:: @ 81B36EB
 	.string "On the stairs or the exits of a\n"
 	.string "building is a red mat. Move your\l"
 	.string "character to stand on top of the\l"
-	.string "red mat. Press the {EXTRA_PLUS} Control Pad \l"
+	.string "red mat. Press the {PLUS} Control Pad \l"
 	.string "toward the stairs or the exit to\l"
 	.string "advance.$"
 
@@ -238,7 +238,7 @@ gUnknown_81B3972:: @ 81B3972
 	.string "them and pressing the A Button.\l"
 	.string "Also, try checking things like odd trees\l"
 	.string "and strange rocks with the A Button.\l"
-	.string "Press the {EXTRA_PLUS} Control Pad and try going\l"
+	.string "Press the {PLUS} Control Pad and try going\l"
 	.string "to places that look impassable, too.$"
 
 gUnknown_81B3A51:: @ 81B3A51
@@ -676,48 +676,48 @@ gUnknown_81B5A37:: @ 81B5A37
 	.string " Using “HALL OF FAME”$"
 
 gUnknown_81B5A4D:: @ 81B5A4D
-	.string "{EXTRA_CIRCLE_1} Select “POKéDEX” on the MENU.\n"
-	.string "{EXTRA_CIRCLE_2} Choose POKéMON using commands such\n"
+	.string "{CIRCLE_1} Select “POKéDEX” on the MENU.\n"
+	.string "{CIRCLE_2} Choose POKéMON using commands such\n"
 	.string "   as “POKéMON LIST,”\n"
 	.string "   “HABITATS OF POKéMON,” and\n"
 	.string "   “SEARCH.”\n"
-	.string "{EXTRA_CIRCLE_3} Select a POKéMON to obtain detailed\n"
+	.string "{CIRCLE_3} Select a POKéMON to obtain detailed\n"
 	.string "   information.$"
 
 gUnknown_81B5B0C:: @ 81B5B0C
-	.string "{EXTRA_CIRCLE_1} Select “POKéMON” on the MENU.\n"
-	.string "{EXTRA_CIRCLE_2} Choose a POKéMON in your party.\n"
-	.string "{EXTRA_CIRCLE_3} Select “SUMMARY,” “SWITCH,”\n"
+	.string "{CIRCLE_1} Select “POKéMON” on the MENU.\n"
+	.string "{CIRCLE_2} Choose a POKéMON in your party.\n"
+	.string "{CIRCLE_3} Select “SUMMARY,” “SWITCH,”\n"
 	.string "   or “ITEM.”$"
 
 gUnknown_81B5B7D:: @ 81B5B7D
-	.string "{EXTRA_CIRCLE_1} Select “SUMMARY.”\n"
-	.string "{EXTRA_CIRCLE_2} Press left or right on the {EXTRA_PLUS} Control\n"
+	.string "{CIRCLE_1} Select “SUMMARY.”\n"
+	.string "{CIRCLE_2} Press left or right on the {PLUS} Control\n"
 	.string "   Pad to check the information:\n"
 	.string "   “POKéMON INFO”\n"
 	.string "   “POKéMON SKILLS”\n"
 	.string "   “KNOWN MOVES”$"
 
 gUnknown_81B5C13:: @ 81B5C13
-	.string "{EXTRA_CIRCLE_1} Choose the POKéMON you want to\n"
+	.string "{CIRCLE_1} Choose the POKéMON you want to\n"
 	.string "   switch around.\n"
-	.string "{EXTRA_CIRCLE_2} Select “SWITCH.”\n"
-	.string "{EXTRA_CIRCLE_3} Select the POKéMON to switch with\n"
+	.string "{CIRCLE_2} Select “SWITCH.”\n"
+	.string "{CIRCLE_3} Select the POKéMON to switch with\n"
 	.string "   the first one.\n"
 	.string "The POKéMON at the left of the screen\n"
 	.string "will be the first one out in a battle.$"
 
 gUnknown_81B5CDF:: @ 81B5CDF
-	.string "{EXTRA_CIRCLE_1} Select “ITEM.”\n"
-	.string "{EXTRA_CIRCLE_2} Select whether you want to “GIVE”\n"
+	.string "{CIRCLE_1} Select “ITEM.”\n"
+	.string "{CIRCLE_2} Select whether you want to “GIVE”\n"
 	.string "   an item to the POKéMON to hold,\n"
 	.string "   or “TAKE” an item it is holding.\n"
 	.string "A POKéMON can hold no more than one\n"
 	.string "item!$"
 
 gUnknown_81B5D87:: @ 81B5D87
-	.string "{EXTRA_CIRCLE_1} Select “BAG” on the MENU.\n"
-	.string "{EXTRA_CIRCLE_2} Press left or right on the {EXTRA_PLUS} Control\n"
+	.string "{CIRCLE_1} Select “BAG” on the MENU.\n"
+	.string "{CIRCLE_2} Press left or right on the {PLUS} Control\n"
 	.string "   Pad to check the data headings:\n"
 	.string "   “ITEMS”\n"
 	.string "   “KEY ITEMS”\n"
@@ -725,125 +725,125 @@ gUnknown_81B5D87:: @ 81B5D87
 	.string "   Press up or down to select an item.$"
 
 gUnknown_81B5E41:: @ 81B5E41
-	.string "{EXTRA_CIRCLE_1} Select the “ITEMS” POCKET.\n"
-	.string "{EXTRA_CIRCLE_2} Press up or down on the {EXTRA_PLUS} Control\n"
+	.string "{CIRCLE_1} Select the “ITEMS” POCKET.\n"
+	.string "{CIRCLE_2} Press up or down on the {PLUS} Control\n"
 	.string "   Pad to select an item.\n"
-	.string "{EXTRA_CIRCLE_3} Select “USE” to use the selected\n"
+	.string "{CIRCLE_3} Select “USE” to use the selected\n"
 	.string "   item.\n"
 	.string "Some items may not be used depending\n"
 	.string "on the place and/or situation.$"
 
 gUnknown_81B5F10:: @ 81B5F10
-	.string "{EXTRA_CIRCLE_1} Select the “KEY ITEMS” POCKET.\n"
-	.string "{EXTRA_CIRCLE_2} Press up or down on the {EXTRA_PLUS} Control\n"
+	.string "{CIRCLE_1} Select the “KEY ITEMS” POCKET.\n"
+	.string "{CIRCLE_2} Press up or down on the {PLUS} Control\n"
 	.string "   Pad to select a key item.\n"
-	.string "{EXTRA_CIRCLE_3} Select “USE” to use the selected\n"
+	.string "{CIRCLE_3} Select “USE” to use the selected\n"
 	.string "   key item.$"
 
 gUnknown_81B5FA6:: @ 81B5FA6
-	.string "{EXTRA_CIRCLE_1} While battling a wild POKéMON,\n"
+	.string "{CIRCLE_1} While battling a wild POKéMON,\n"
 	.string "   select the BAG's “POKé BALLS”\n"
 	.string "   POCKET.\n"
-	.string "{EXTRA_CIRCLE_2} Press up or down on the {EXTRA_PLUS} Control\n"
+	.string "{CIRCLE_2} Press up or down on the {PLUS} Control\n"
 	.string "   Pad to select a POKé BALL.\n"
-	.string "{EXTRA_CIRCLE_3} Select “USE” to throw the selected\n"
+	.string "{CIRCLE_3} Select “USE” to throw the selected\n"
 	.string "   POKé BALL.$"
 
 gUnknown_81B606C:: @ 81B606C
-	.string "{EXTRA_CIRCLE_1} Select “{PLAYER}” on the MENU.\n"
-	.string "{EXTRA_CIRCLE_2} Your TRAINER CARD is displayed face\n"
+	.string "{CIRCLE_1} Select “{PLAYER}” on the MENU.\n"
+	.string "{CIRCLE_2} Your TRAINER CARD is displayed face\n"
 	.string "   up with basic information. Press the\n"
 	.string "   A Button to turn the CARD over.\n"
-	.string "{EXTRA_CIRCLE_3} A variety of data can be found on\n"
+	.string "{CIRCLE_3} A variety of data can be found on\n"
 	.string "   the reverse side of the CARD.$"
 
 gUnknown_81B6140:: @ 81B6140
-	.string "{EXTRA_CIRCLE_1} Select “SAVE” on the MENU.\n"
-	.string "{EXTRA_CIRCLE_2} Select “YES” and your progress is\n"
+	.string "{CIRCLE_1} Select “SAVE” on the MENU.\n"
+	.string "{CIRCLE_2} Select “YES” and your progress is\n"
 	.string "   recorded in the save file.\n"
 	.string "Once the game is saved, you may turn\n"
 	.string "off the game. Your game can be resumed\n"
 	.string "from where you saved.$"
 
 gUnknown_81B6203:: @ 81B6203
-	.string "{EXTRA_CIRCLE_1} Select “OPTION” on the MENU.\n"
-	.string "{EXTRA_CIRCLE_2} Press up or down on the {EXTRA_PLUS} Control\n"
+	.string "{CIRCLE_1} Select “OPTION” on the MENU.\n"
+	.string "{CIRCLE_2} Press up or down on the {PLUS} Control\n"
 	.string "   Pad to select an optional item, then\n"
 	.string "   press left or right to alter the\n"
 	.string "   settings.\n"
-	.string "{EXTRA_CIRCLE_3} Select “CANCEL” or press the\n"
+	.string "{CIRCLE_3} Select “CANCEL” or press the\n"
 	.string "   B Button after making changes.$"
 
 gUnknown_81B62E4:: @ 81B62E4
-	.string "{EXTRA_CIRCLE_1} Open the MENU.\n"
-	.string "{EXTRA_CIRCLE_2} Press up or down on the {EXTRA_PLUS} Control\n"
+	.string "{CIRCLE_1} Open the MENU.\n"
+	.string "{CIRCLE_2} Press up or down on the {PLUS} Control\n"
 	.string "   Pad and select “BAG.”\n"
-	.string "{EXTRA_CIRCLE_3} Select “POTION” in the “ITEMS”\n"
+	.string "{CIRCLE_3} Select “POTION” in the “ITEMS”\n"
 	.string "   POCKET.\n"
-	.string "{EXTRA_CIRCLE_4} Select “USE.”\n"
-	.string "{EXTRA_CIRCLE_5} Select the POKéMON to be healed.$"
+	.string "{CIRCLE_4} Select “USE.”\n"
+	.string "{CIRCLE_5} Select the POKéMON to be healed.$"
 
 gUnknown_81B6397:: @ 81B6397
-	.string "{EXTRA_CIRCLE_1} Open the MENU.\n"
-	.string "{EXTRA_CIRCLE_2} Press up or down on the {EXTRA_PLUS} Control\n"
+	.string "{CIRCLE_1} Open the MENU.\n"
+	.string "{CIRCLE_2} Press up or down on the {PLUS} Control\n"
 	.string "   Pad and select “BAG.”\n"
-	.string "{EXTRA_CIRCLE_3} Press left or right to open the\n"
+	.string "{CIRCLE_3} Press left or right to open the\n"
 	.string "   “KEY ITEMS” POCKET, then press\n"
 	.string "   up or down to select “TOWN MAP.” \n"
-	.string "{EXTRA_CIRCLE_4} Select “USE” to open the TOWN MAP.$"
+	.string "{CIRCLE_4} Select “USE” to open the TOWN MAP.$"
 
 gUnknown_81B6478:: @ 81B6478
-	.string "{EXTRA_CIRCLE_1} Open the MENU.\n"
-	.string "{EXTRA_CIRCLE_2} Open the “KEY ITEMS” POCKET in the\n"
+	.string "{CIRCLE_1} Open the MENU.\n"
+	.string "{CIRCLE_2} Open the “KEY ITEMS” POCKET in the\n"
 	.string "   “BAG.”\n"
-	.string "{EXTRA_CIRCLE_3} “OPEN” the TM CASE.\n"
-	.string "{EXTRA_CIRCLE_4} Select and “USE” a TM.\n"
-	.string "{EXTRA_CIRCLE_5} Select a POKéMON that can learn the\n"
+	.string "{CIRCLE_3} “OPEN” the TM CASE.\n"
+	.string "{CIRCLE_4} Select and “USE” a TM.\n"
+	.string "{CIRCLE_5} Select a POKéMON that can learn the\n"
 	.string "   move in the TM.$"
 
 gUnknown_81B6525:: @ 81B6525
-	.string "{EXTRA_CIRCLE_1} Open the MENU.\n"
-	.string "{EXTRA_CIRCLE_2} Open the “KEY ITEMS” POCKET in the\n"
+	.string "{CIRCLE_1} Open the MENU.\n"
+	.string "{CIRCLE_2} Open the “KEY ITEMS” POCKET in the\n"
 	.string "   “BAG.”\n"
-	.string "{EXTRA_CIRCLE_3} “OPEN” the TM CASE.\n"
-	.string "{EXTRA_CIRCLE_4} Select and “USE” an HM.\n"
-	.string "{EXTRA_CIRCLE_5} Select a POKéMON that can learn it.\n"
+	.string "{CIRCLE_3} “OPEN” the TM CASE.\n"
+	.string "{CIRCLE_4} Select and “USE” an HM.\n"
+	.string "{CIRCLE_5} Select a POKéMON that can learn it.\n"
 	.string "HMs are hard to remove, so be careful!$"
 
 gUnknown_81B65E7:: @ 81B65E7
-	.string "{EXTRA_CIRCLE_1} Open the MENU.\n"
-	.string "{EXTRA_CIRCLE_2} Select “POKéMON.”\n"
-	.string "{EXTRA_CIRCLE_3} Select a POKéMON that knows an\n"
+	.string "{CIRCLE_1} Open the MENU.\n"
+	.string "{CIRCLE_2} Select “POKéMON.”\n"
+	.string "{CIRCLE_3} Select a POKéMON that knows an\n"
 	.string "   HM move. The usable HM move(s)\n"
 	.string "   will be shown in blue. Select and\n"
 	.string "   use the desired move to destroy an\n"
 	.string "   obstacle, fly, surf, etc.$"
 
 gUnknown_81B66BA:: @ 81B66BA
-	.string "{EXTRA_CIRCLE_1} Open the MENU. Open the\n"
+	.string "{CIRCLE_1} Open the MENU. Open the\n"
 	.string "   “KEY ITEMS” POCKET in the “BAG”\n"
 	.string "   and select the “BICYCLE.”\n"
-	.string "{EXTRA_CIRCLE_2} The BICYCLE can be ridden by\n"
+	.string "{CIRCLE_2} The BICYCLE can be ridden by\n"
 	.string "   selecting “USE.” You may also\n"
 	.string "   “REGISTER” it for instant use by\n"
 	.string "   pressing SELECT.$"
 
 gUnknown_81B678E:: @ 81B678E
-	.string "{EXTRA_CIRCLE_1} Move the cursor to the letter you\n"
-	.string "   want with the {EXTRA_PLUS} Control Pad, then\n"
+	.string "{CIRCLE_1} Move the cursor to the letter you\n"
+	.string "   want with the {PLUS} Control Pad, then\n"
 	.string "   press the A Button to enter it.\n"
-	.string "{EXTRA_CIRCLE_2} Press the B Button to back up.\n"
-	.string "{EXTRA_CIRCLE_3} Press SELECT to switch between\n"
+	.string "{CIRCLE_2} Press the B Button to back up.\n"
+	.string "{CIRCLE_3} Press SELECT to switch between\n"
 	.string "   uppercase and lowercase letters.\n"
-	.string "{EXTRA_CIRCLE_4} Press the A Button on “OK.”$"
+	.string "{CIRCLE_4} Press the A Button on “OK.”$"
 
 gUnknown_81B6883:: @ 81B6883
-	.string "{EXTRA_CIRCLE_1} Go to any POKéMON CENTER, go up\n"
+	.string "{CIRCLE_1} Go to any POKéMON CENTER, go up\n"
 	.string "   to the PC, then press the A Button.$"
 
 gUnknown_81B68CD:: @ 81B68CD
-	.string "{EXTRA_CIRCLE_1} Select “{STR_VAR_1}'S PC” on the PC.\n"
-	.string "{EXTRA_CIRCLE_2} Select from one of the top three\n"
+	.string "{CIRCLE_1} Select “{STR_VAR_1}'S PC” on the PC.\n"
+	.string "{CIRCLE_2} Select from one of the top three\n"
 	.string "   MENU items to access the POKéMON\n"
 	.string "   Storage System.\n"
 	.string "If you catch a POKéMON when you have\n"
@@ -851,100 +851,100 @@ gUnknown_81B68CD:: @ 81B68CD
 	.string "automatically to a BOX in the System!$"
 
 gUnknown_81B69B9:: @ 81B69B9
-	.string "{EXTRA_CIRCLE_1} Select a POKéMON in the open BOX\n"
-	.string "   with the {EXTRA_PLUS} Control Pad.\n"
-	.string "{EXTRA_CIRCLE_2} Select “WITHDRAW” to remove the\n"
+	.string "{CIRCLE_1} Select a POKéMON in the open BOX\n"
+	.string "   with the {PLUS} Control Pad.\n"
+	.string "{CIRCLE_2} Select “WITHDRAW” to remove the\n"
 	.string "   POKéMON from the BOX and add it to\n"
 	.string "   your party.\n"
 	.string "You may not withdraw a POKéMON if you\n"
 	.string "already have six POKéMON with you!$"
 
 gUnknown_81B6A9A:: @ 81B6A9A
-	.string "{EXTRA_CIRCLE_1} Select a POKéMON in your party with\n"
-	.string "   the {EXTRA_PLUS} Control Pad.\n"
-	.string "{EXTRA_CIRCLE_2} Select “DEPOSIT.”\n"
-	.string "{EXTRA_CIRCLE_3} Select the BOX, then press the\n"
+	.string "{CIRCLE_1} Select a POKéMON in your party with\n"
+	.string "   the {PLUS} Control Pad.\n"
+	.string "{CIRCLE_2} Select “DEPOSIT.”\n"
+	.string "{CIRCLE_3} Select the BOX, then press the\n"
 	.string "   A Button to store the POKéMON.\n"
 	.string "If you have only one POKéMON with you,\n"
 	.string "it may not be stored!$"
 
 gUnknown_81B6B6E:: @ 81B6B6E
-	.string "{EXTRA_CIRCLE_1} Select a POKéMON in the open BOX.\n"
-	.string "{EXTRA_CIRCLE_2} Pick up the POKéMON by selecting\n"
+	.string "{CIRCLE_1} Select a POKéMON in the open BOX.\n"
+	.string "{CIRCLE_2} Pick up the POKéMON by selecting\n"
 	.string "   “MOVE” and move it anywhere with\n"
-	.string "   the {EXTRA_PLUS} Control Pad.\n"
-	.string "{EXTRA_CIRCLE_3} Move the POKéMON to the BOX name\n"
+	.string "   the {PLUS} Control Pad.\n"
+	.string "{CIRCLE_3} Move the POKéMON to the BOX name\n"
 	.string "   and press left or right to move it\n"
 	.string "   to another BOX.$"
 
 gUnknown_81B6C4F:: @ 81B6C4F
-	.string "{EXTRA_CIRCLE_1} Faintly shown POKéMON can be made\n"
+	.string "{CIRCLE_1} Faintly shown POKéMON can be made\n"
 	.string "   to hold an item by selecting it and\n"
 	.string "   pressing the A Button.\n"
-	.string "{EXTRA_CIRCLE_2} Clearly shown POKéMON can be made\n"
+	.string "{CIRCLE_2} Clearly shown POKéMON can be made\n"
 	.string "   to give the item they are holding to\n"
 	.string "   another POKéMON, or return the item\n"
 	.string "   to the BAG with the A Button.$"
 
 gUnknown_81B6D4A:: @ 81B6D4A
-	.string "{EXTRA_CIRCLE_1} Select “{PLAYER}'s PC” on the PC.\n"
-	.string "{EXTRA_CIRCLE_2} Select either “ITEM STORAGE” or\n"
+	.string "{CIRCLE_1} Select “{PLAYER}'s PC” on the PC.\n"
+	.string "{CIRCLE_2} Select either “ITEM STORAGE” or\n"
 	.string "   “MAILBOX.”\n"
 	.string "You may store things in your own PC\n"
 	.string "if your BAG is full. You may also\n"
 	.string "withdraw items stored in your PC.$"
 
 gUnknown_81B6E02:: @ 81B6E02
-	.string "{EXTRA_CIRCLE_1} Select “WITHDRAW ITEM.”\n"
-	.string "{EXTRA_CIRCLE_2} Select the item to be withdrawn.\n"
-	.string "{EXTRA_CIRCLE_3} The item can be withdrawn and\n"
+	.string "{CIRCLE_1} Select “WITHDRAW ITEM.”\n"
+	.string "{CIRCLE_2} Select the item to be withdrawn.\n"
+	.string "{CIRCLE_3} The item can be withdrawn and\n"
 	.string "   placed in the BAG's ITEMS POCKET.\n"
 	.string "   It may also be directly given to a\n"
 	.string "   POKéMON to hold.$"
 
 gUnknown_81B6EC1:: @ 81B6EC1
-	.string "{EXTRA_CIRCLE_1} Select “DEPOSIT ITEM.”\n"
-	.string "{EXTRA_CIRCLE_2} Select the item in the BAG to be\n"
-	.string "   deposited using the {EXTRA_PLUS} Control Pad.\n"
-	.string "{EXTRA_CIRCLE_3} If there is more than one \n"
+	.string "{CIRCLE_1} Select “DEPOSIT ITEM.”\n"
+	.string "{CIRCLE_2} Select the item in the BAG to be\n"
+	.string "   deposited using the {PLUS} Control Pad.\n"
+	.string "{CIRCLE_3} If there is more than one \n"
 	.string "   item to be deposited, enter the\n"
-	.string "   quantity with the {EXTRA_PLUS} Control Pad,\n"
+	.string "   quantity with the {PLUS} Control Pad,\n"
 	.string "   then press the A Button.$"
 
 gUnknown_81B6FA8:: @ 81B6FA8
 	.string "When MAIL is taken from a POKéMON,\n"
 	.string "it is moved to the MAILBOX. If it has\n"
 	.string "no MAIL, the MAILBOX can't be used.\n"
-	.string "{EXTRA_CIRCLE_1} Select “{PLAYER}'S PC” on the PC.\n"
-	.string "{EXTRA_CIRCLE_2} Select “MAILBOX” to read MAIL or\n"
+	.string "{CIRCLE_1} Select “{PLAYER}'S PC” on the PC.\n"
+	.string "{CIRCLE_2} Select “MAILBOX” to read MAIL or\n"
 	.string "   make a POKéMON hold MAIL.$"
 
 gUnknown_81B7075:: @ 81B7075
-	.string "{EXTRA_CIRCLE_1} Select “PROF. OAK'S PC” on the PC.\n"
-	.string "{EXTRA_CIRCLE_2} PROF. OAK will evaluate your\n"
+	.string "{CIRCLE_1} Select “PROF. OAK'S PC” on the PC.\n"
+	.string "{CIRCLE_2} PROF. OAK will evaluate your\n"
 	.string "   POKéDEX.\n"
 	.string "His evaluations should give you hints\n"
 	.string "for catching more POKéMON!$"
 
 gUnknown_81B7108:: @ 81B7108
-	.string "{EXTRA_CIRCLE_1} Press START.\n"
-	.string "{EXTRA_CIRCLE_2} The MENU will open on the right.\n"
-	.string "{EXTRA_CIRCLE_3} Depending on the situation, the MENU\n"
+	.string "{CIRCLE_1} Press START.\n"
+	.string "{CIRCLE_2} The MENU will open on the right.\n"
+	.string "{CIRCLE_3} Depending on the situation, the MENU\n"
 	.string "   may feature different headings.\n"
 	.string "The MENU will not open in certain\n"
 	.string "situations such as when talking, doing\n"
 	.string "something, battling, etc.$"
 
 gUnknown_81B71EA:: @ 81B71EA
-	.string "{EXTRA_CIRCLE_1} Select “FIGHT.”\n"
-	.string "{EXTRA_CIRCLE_2} Select one of the moves shown,\n"
+	.string "{CIRCLE_1} Select “FIGHT.”\n"
+	.string "{CIRCLE_2} Select one of the moves shown,\n"
 	.string "and that move will be used!$"
 
 gUnknown_81B723B:: @ 81B723B
-	.string "{EXTRA_CIRCLE_1} Select “POKéMON.”\n"
-	.string "{EXTRA_CIRCLE_2} Select the POKéMON in your party\n"
+	.string "{CIRCLE_1} Select “POKéMON.”\n"
+	.string "{CIRCLE_2} Select the POKéMON in your party\n"
 	.string "   that you want to use.\n"
-	.string "{EXTRA_CIRCLE_3} If you have two or more POKéMON\n"
+	.string "{CIRCLE_3} If you have two or more POKéMON\n"
 	.string "   with you, they may be switched by\n"
 	.string "   selecting “SHIFT.” Check POKéMON\n"
 	.string "   data by selecting “SUMMARY.”$"
@@ -952,22 +952,22 @@ gUnknown_81B723B:: @ 81B723B
 gUnknown_81B7319:: @ 81B7319
 	.string "This command switches the POKéMON in\n"
 	.string "battle with another one in your party.\n"
-	.string "{EXTRA_CIRCLE_1} Select the POKéMON to be sent out.\n"
-	.string "{EXTRA_CIRCLE_2} Select “SHIFT.”\n"
-	.string "{EXTRA_CIRCLE_3} The selected POKéMON will switch\n"
+	.string "{CIRCLE_1} Select the POKéMON to be sent out.\n"
+	.string "{CIRCLE_2} Select “SHIFT.”\n"
+	.string "{CIRCLE_3} The selected POKéMON will switch\n"
 	.string "   places with the POKéMON in battle!$"
 
 gUnknown_81B73E8:: @ 81B73E8
-	.string "{EXTRA_CIRCLE_1} Select “SUMMARY.”\n"
-	.string "{EXTRA_CIRCLE_2} Press left or right on the {EXTRA_PLUS} Control\n"
+	.string "{CIRCLE_1} Select “SUMMARY.”\n"
+	.string "{CIRCLE_2} Press left or right on the {PLUS} Control\n"
 	.string "   Pad to check the information:\n"
 	.string "   “POKéMON INFO”\n"
 	.string "   “POKéMON SKILLS”\n"
 	.string "   “KNOWN MOVES”$"
 
 gUnknown_81B747E:: @ 81B747E
-	.string "{EXTRA_CIRCLE_1} Select “BAG.”\n"
-	.string "{EXTRA_CIRCLE_2} Press left or right on the {EXTRA_PLUS} Control\n"
+	.string "{CIRCLE_1} Select “BAG.”\n"
+	.string "{CIRCLE_2} Press left or right on the {PLUS} Control\n"
 	.string "   Pad to check the data headings:\n"
 	.string "   “ITEMS”\n"
 	.string "   “KEY ITEMS”\n"
@@ -975,71 +975,71 @@ gUnknown_81B747E:: @ 81B747E
 	.string "   Press up or down to select an item.$"
 
 gUnknown_81B752C:: @ 81B752C
-	.string "{EXTRA_CIRCLE_1} POKéMON that you have caught are\n"
+	.string "{CIRCLE_1} POKéMON that you have caught are\n"
 	.string "   identified by a POKé BALL mark on\n"
 	.string "   the POKéDEX list.\n"
-	.string "{EXTRA_CIRCLE_2} A caught POKéMON will provide a\n"
+	.string "{CIRCLE_2} A caught POKéMON will provide a\n"
 	.string "   large amount of data.\n"
-	.string "{EXTRA_CIRCLE_3} Select “AREA” to display the TOWN\n"
+	.string "{CIRCLE_3} Select “AREA” to display the TOWN\n"
 	.string "   MAP with the POKéMON's habitat(s).$"
 
 gUnknown_81B7611:: @ 81B7611
-	.string "{EXTRA_CIRCLE_1} Go up to the PC at home, then press\n"
+	.string "{CIRCLE_1} Go up to the PC at home, then press\n"
 	.string "   the A Button.\n"
-	.string "{EXTRA_CIRCLE_2} The PC will turn on.\n"
-	.string "{EXTRA_CIRCLE_3} Select either “ITEM STORAGE” or\n"
+	.string "{CIRCLE_2} The PC will turn on.\n"
+	.string "{CIRCLE_3} Select either “ITEM STORAGE” or\n"
 	.string "   “MAILBOX.”$"
 
 gUnknown_81B7692:: @ 81B7692
-	.string "{EXTRA_CIRCLE_1} Select “WITHDRAW ITEM” to withdraw\n"
+	.string "{CIRCLE_1} Select “WITHDRAW ITEM” to withdraw\n"
 	.string "   an item stored on your PC.\n"
-	.string "{EXTRA_CIRCLE_2} Select “DEPOSIT ITEM” to put \n"
+	.string "{CIRCLE_2} Select “DEPOSIT ITEM” to put \n"
 	.string "   an item from your BAG into your PC.$"
 
 gUnknown_81B771E:: @ 81B771E
-	.string "{EXTRA_CIRCLE_1} Select “WITHDRAW ITEM.”\n"
-	.string "{EXTRA_CIRCLE_2} Select the item to be withdrawn.\n"
-	.string "{EXTRA_CIRCLE_3} The item can be withdrawn and\n"
+	.string "{CIRCLE_1} Select “WITHDRAW ITEM.”\n"
+	.string "{CIRCLE_2} Select the item to be withdrawn.\n"
+	.string "{CIRCLE_3} The item can be withdrawn and\n"
 	.string "   placed in the BAG's ITEMS POCKET.\n"
 	.string "   It may also be directly given to a\n"
 	.string "   POKéMON to hold.$"
 
 gUnknown_81B77DD:: @ 81B77DD
-	.string "{EXTRA_CIRCLE_1} Select “DEPOSIT ITEM.”\n"
-	.string "{EXTRA_CIRCLE_2} Select the item in the BAG to be\n"
-	.string "   deposited using the {EXTRA_PLUS} Control Pad.\n"
-	.string "{EXTRA_CIRCLE_3} If there is nothing in the BAG, this\n"
+	.string "{CIRCLE_1} Select “DEPOSIT ITEM.”\n"
+	.string "{CIRCLE_2} Select the item in the BAG to be\n"
+	.string "   deposited using the {PLUS} Control Pad.\n"
+	.string "{CIRCLE_3} If there is nothing in the BAG, this\n"
 	.string "   command can't be used!$"
 
 gUnknown_81B7884:: @ 81B7884
 	.string "When MAIL is taken from a POKéMON,\n"
 	.string "it is moved to the MAILBOX. If it has\n"
 	.string "no MAIL, the MAILBOX can't be used.\n"
-	.string "{EXTRA_CIRCLE_1} Select MAIL by name to read it or\n"
+	.string "{CIRCLE_1} Select MAIL by name to read it or\n"
 	.string "   make a POKéMON hold it.$"
 
 gUnknown_81B7931:: @ 81B7931
 	.string "You may not “RUN” from a TRAINER\n"
 	.string "battle!\n"
-	.string "{EXTRA_CIRCLE_1} You may “RUN” from a wild POKéMON.\n"
-	.string "{EXTRA_CIRCLE_2} Your chance of escape is improved\n"
+	.string "{CIRCLE_1} You may “RUN” from a wild POKéMON.\n"
+	.string "{CIRCLE_2} Your chance of escape is improved\n"
 	.string "   if your POKéMON in battle is fast.$"
 
 gUnknown_81B79CB:: @ 81B79CB
 	.string "You may “REGISTER” a key item for\n"
 	.string "instant use by pressing SELECT!\n"
-	.string "{EXTRA_CIRCLE_1} Open the “KEY ITEMS” POCKET.\n"
-	.string "{EXTRA_CIRCLE_2} Select the key item, then select\n"
+	.string "{CIRCLE_1} Open the “KEY ITEMS” POCKET.\n"
+	.string "{CIRCLE_2} Select the key item, then select\n"
 	.string "   “REGISTER.”$"
 
 gUnknown_81B7A60:: @ 81B7A60
-	.string "{EXTRA_CIRCLE_1} Select to throw the special POKé\n"
+	.string "{CIRCLE_1} Select to throw the special POKé\n"
 	.string "   BALL used only in the SAFARI ZONE.\n"
 	.string "When wild POKéMON appear, throw lots\n"
 	.string "of SAFARI BALLS to catch them!$"
 
 gUnknown_81B7AEE:: @ 81B7AEE
-	.string "{EXTRA_CIRCLE_1} Select to throw the special food\n"
+	.string "{CIRCLE_1} Select to throw the special food\n"
 	.string "   used only in the SAFARI ZONE.\n"
 	.string "It is POKéMON food rolled up into\n"
 	.string "a ball for easy eating. When BAIT is\n"
@@ -1047,22 +1047,22 @@ gUnknown_81B7AEE:: @ 81B7AEE
 	.string "attracted by it, and may not flee!$"
 
 gUnknown_81B7BBE:: @ 81B7BBE
-	.string "{EXTRA_CIRCLE_1} Select to throw a rock lying on\n"
+	.string "{CIRCLE_1} Select to throw a rock lying on\n"
 	.string "   the ground in the SAFARI ZONE.\n"
 	.string "Throwing a rock at a POKéMON may \n"
 	.string "make it run away, but it becomes easier\n"
 	.string "to catch!$"
 
 gUnknown_81B7C57:: @ 81B7C57
-	.string "{EXTRA_CIRCLE_1} Select “HALL OF FAME” on the PC.\n"
-	.string "{EXTRA_CIRCLE_2} The POKéMON that have entered the\n"
+	.string "{CIRCLE_1} Select “HALL OF FAME” on the PC.\n"
+	.string "{CIRCLE_2} The POKéMON that have entered the\n"
 	.string "   HALL OF FAME can be examined.$"
 
 gUnknown_81B7CC1:: @ 81B7CC1
 	.string "HP$"
 
 gUnknown_81B7CC4:: @ 81B7CC4
-	.string "EXP. {EXTRA_LEFT_PAREN}EXP. Points{EXTRA_RIGHT_PAREN}$"
+	.string "EXP. {LEFT_PAREN}EXP. Points{RIGHT_PAREN}$"
 
 gUnknown_81B7CD9:: @ 81B7CD9
 	.string "MOVES$"
@@ -1083,7 +1083,7 @@ gUnknown_81B7CFE:: @ 81B7CFE
 	.string "SPEED$"
 
 gUnknown_81B7D04:: @ 81B7D04
-	.string "Lv. {EXTRA_LEFT_PAREN}Level{EXTRA_RIGHT_PAREN}$"
+	.string "Lv. {LEFT_PAREN}Level{RIGHT_PAREN}$"
 
 gUnknown_81B7D12:: @ 81B7D12
 	.string "TYPE$"
@@ -1685,195 +1685,195 @@ gUnknown_81BA416:: @ 81BA416
 	.string "Depending on the matchup of the\n"
 	.string "move type and the target POKéMON's\l"
 	.string "type, the move's effectiveness varies:\l"
-	.string "{EXTRA_TARGET}: Super effective!\l"
-	.string "{EXTRA_TRIANGLE}: Not very effective\l"
-	.string "{EXTRA_X}: Not effective at all\l"
+	.string "{CIRCLE_DOT}: Super effective!\l"
+	.string "{TRIANGLE}: Not very effective\l"
+	.string "{BIG_MULT_X}: Not effective at all\l"
 	.string "(No changes for other matchups.)$"
 
 gUnknown_81BA4E6:: @ 81BA4E6
 	.string "Effect on the opposing POKéMON:\p"
-	.string "   {EXTRA_TARGET}: PSYCHIC, GHOST\p"
-	.string "   {EXTRA_TRIANGLE}: FIGHTING, DARK, STEEL$"
+	.string "   {CIRCLE_DOT}: PSYCHIC, GHOST\p"
+	.string "   {TRIANGLE}: FIGHTING, DARK, STEEL$"
 
 gUnknown_81BA539:: @ 81BA539
 	.string "Effect of foe's move on own POKéMON:\p"
-	.string "   {EXTRA_TARGET}: FIGHTING, BUG\p"
-	.string "   {EXTRA_TRIANGLE}: GHOST, DARK\p"
-	.string "   {EXTRA_X}: PSYCHIC$"
+	.string "   {CIRCLE_DOT}: FIGHTING, BUG\p"
+	.string "   {TRIANGLE}: GHOST, DARK\p"
+	.string "   {BIG_MULT_X}: PSYCHIC$"
 
 gUnknown_81BA595:: @ 81BA595
 	.string "Effect on the opposing POKéMON:\p"
-	.string "   {EXTRA_TARGET}: FIRE, ICE, FLYING, BUG\p"
-	.string "   {EXTRA_TRIANGLE}: FIGHTING, GROUND, STEEL$"
+	.string "   {CIRCLE_DOT}: FIRE, ICE, FLYING, BUG\p"
+	.string "   {TRIANGLE}: FIGHTING, GROUND, STEEL$"
 
 gUnknown_81BA5F2:: @ 81BA5F2
 	.string "Effect of foe's move on own POKéMON:\p"
-	.string "   {EXTRA_TARGET}: WATER, GRASS, FIGHTING,\n"
+	.string "   {CIRCLE_DOT}: WATER, GRASS, FIGHTING,\n"
 	.string "       GROUND, STEEL\p"
-	.string "   {EXTRA_TRIANGLE}: NORMAL, FIRE, POISON, FLYING$"
+	.string "   {TRIANGLE}: NORMAL, FIRE, POISON, FLYING$"
 
 gUnknown_81BA66F:: @ 81BA66F
 	.string "Effect on the opposing POKéMON:\p"
-	.string "   {EXTRA_TARGET}: FIGHTING, POISON\p"
-	.string "   {EXTRA_TRIANGLE}: PSYCHIC, STEEL\p"
-	.string "   {EXTRA_X}: DARK$"
+	.string "   {CIRCLE_DOT}: FIGHTING, POISON\p"
+	.string "   {TRIANGLE}: PSYCHIC, STEEL\p"
+	.string "   {BIG_MULT_X}: DARK$"
 
 gUnknown_81BA6C9:: @ 81BA6C9
 	.string "Effect of foe's move on own POKéMON:\p"
-	.string "   {EXTRA_TARGET}: BUG, GHOST, DARK\p"
-	.string "   {EXTRA_TRIANGLE}: FIGHTING, PSYCHIC$"
+	.string "   {CIRCLE_DOT}: BUG, GHOST, DARK\p"
+	.string "   {TRIANGLE}: FIGHTING, PSYCHIC$"
 
 gUnknown_81BA71F:: @ 81BA71F
 	.string "Effect on the opposing POKéMON:\p"
-	.string "   {EXTRA_TARGET}: NORMAL, ICE, ROCK, DARK, STEEL\p"
-	.string "   {EXTRA_TRIANGLE}: POISON, FLYING, PSYCHIC, BUG\p"
-	.string "   {EXTRA_X}: GHOST$"
+	.string "   {CIRCLE_DOT}: NORMAL, ICE, ROCK, DARK, STEEL\p"
+	.string "   {TRIANGLE}: POISON, FLYING, PSYCHIC, BUG\p"
+	.string "   {BIG_MULT_X}: GHOST$"
 
 gUnknown_81BA796:: @ 81BA796
 	.string "Effect of foe's move on own POKéMON:\p"
-	.string "   {EXTRA_TARGET}: FLYING, PSYCHIC\p"
-	.string "   {EXTRA_TRIANGLE}: BUG, ROCK, DARK$"
+	.string "   {CIRCLE_DOT}: FLYING, PSYCHIC\p"
+	.string "   {TRIANGLE}: BUG, ROCK, DARK$"
 
 gUnknown_81BA7E9:: @ 81BA7E9
 	.string "Effect on the opposing POKéMON:\p"
-	.string "   {EXTRA_TARGET}: WATER, GROUND, ROCK\p"
-	.string "   {EXTRA_TRIANGLE}: FIRE, GRASS, POISON, FLYING,\n"
+	.string "   {CIRCLE_DOT}: WATER, GROUND, ROCK\p"
+	.string "   {TRIANGLE}: FIRE, GRASS, POISON, FLYING,\n"
 	.string "       BUG, DRAGON, STEEL$"
 
 gUnknown_81BA862:: @ 81BA862
 	.string "Effect of foe's move on own POKéMON:\p"
-	.string "   {EXTRA_TARGET}: FIRE, ICE, POISON, FLYING, BUG\p"
-	.string "   {EXTRA_TRIANGLE}: WATER, ELECTRIC, GRASS, GROUND$"
+	.string "   {CIRCLE_DOT}: FIRE, ICE, POISON, FLYING, BUG\p"
+	.string "   {TRIANGLE}: WATER, ELECTRIC, GRASS, GROUND$"
 
 gUnknown_81BA8D3:: @ 81BA8D3
 	.string "Effect on the opposing POKéMON:\p"
-	.string "   {EXTRA_TARGET}: PSYCHIC, GHOST\p"
-	.string "   {EXTRA_TRIANGLE}: DARK, STEEL\p"
-	.string "   {EXTRA_X}: NORMAL$"
+	.string "   {CIRCLE_DOT}: PSYCHIC, GHOST\p"
+	.string "   {TRIANGLE}: DARK, STEEL\p"
+	.string "   {BIG_MULT_X}: NORMAL$"
 
 gUnknown_81BA92A:: @ 81BA92A
 	.string "Effect of foe's move on own POKéMON:\p"
-	.string "   {EXTRA_TARGET}: GHOST, DARK\p"
-	.string "   {EXTRA_TRIANGLE}: POISON, BUG\p"
-	.string "   {EXTRA_X}: NORMAL, FIGHTING$"
+	.string "   {CIRCLE_DOT}: GHOST, DARK\p"
+	.string "   {TRIANGLE}: POISON, BUG\p"
+	.string "   {BIG_MULT_X}: NORMAL, FIGHTING$"
 
 gUnknown_81BA98D:: @ 81BA98D
 	.string "Effect on the opposing POKéMON:\p"
-	.string "   {EXTRA_TARGET}: GRASS, GROUND, FLYING, DRAGON\p"
-	.string "   {EXTRA_TRIANGLE}: FIRE, WATER, ICE, STEEL$"
+	.string "   {CIRCLE_DOT}: GRASS, GROUND, FLYING, DRAGON\p"
+	.string "   {TRIANGLE}: FIRE, WATER, ICE, STEEL$"
 
 gUnknown_81BA9F1:: @ 81BA9F1
 	.string "Effect of foe's move on own POKéMON:\p"
-	.string "   {EXTRA_TARGET}: FIRE, FIGHTING, ROCK, STEEL\p"
-	.string "   {EXTRA_TRIANGLE}: ICE$"
+	.string "   {CIRCLE_DOT}: FIRE, FIGHTING, ROCK, STEEL\p"
+	.string "   {TRIANGLE}: ICE$"
 
 gUnknown_81BAA44:: @ 81BAA44
 	.string "Effect on the opposing POKéMON:\p"
-	.string "   {EXTRA_TARGET}: FIRE, ELECTRIC, POISON, ROCK,\n"
+	.string "   {CIRCLE_DOT}: FIRE, ELECTRIC, POISON, ROCK,\n"
 	.string "       STEEL\p"
-	.string "   {EXTRA_TRIANGLE}: GRASS, BUG\n"
-	.string "   {EXTRA_X}: FLYING$"
+	.string "   {TRIANGLE}: GRASS, BUG\n"
+	.string "   {BIG_MULT_X}: FLYING$"
 
 gUnknown_81BAAB6:: @ 81BAAB6
 	.string "Effect of foe's move on own POKéMON:\p"
-	.string "   {EXTRA_TARGET}: WATER, GRASS, ICE\p"
-	.string "   {EXTRA_TRIANGLE}: POISON, ROCK\p"
-	.string "   {EXTRA_X}: ELECTRIC$"
+	.string "   {CIRCLE_DOT}: WATER, GRASS, ICE\p"
+	.string "   {TRIANGLE}: POISON, ROCK\p"
+	.string "   {BIG_MULT_X}: ELECTRIC$"
 
 gUnknown_81BAB18:: @ 81BAB18
 	.string "Effect on the opposing POKéMON:\p"
-	.string "   {EXTRA_TARGET}: WATER, FLYING\p"
-	.string "   {EXTRA_TRIANGLE}: ELECTRIC, GRASS, DRAGON\p"
-	.string "   {EXTRA_X}: GROUND$"
+	.string "   {CIRCLE_DOT}: WATER, FLYING\p"
+	.string "   {TRIANGLE}: ELECTRIC, GRASS, DRAGON\p"
+	.string "   {BIG_MULT_X}: GROUND$"
 
 gUnknown_81BAB7A:: @ 81BAB7A
 	.string "Effect of foe's move on own POKéMON:\p"
-	.string "   {EXTRA_TARGET}: GROUND\p"
-	.string "   {EXTRA_TRIANGLE}: ELECTRIC, FLYING, STEEL$"
+	.string "   {CIRCLE_DOT}: GROUND\p"
+	.string "   {TRIANGLE}: ELECTRIC, FLYING, STEEL$"
 
 gUnknown_81BABCC:: @ 81BABCC
 	.string "Effect on the opposing POKéMON:\p"
-	.string "   {EXTRA_TARGET}: GRASS\p"
-	.string "   {EXTRA_TRIANGLE}: POISON, GROUND, ROCK, GHOST\p"
-	.string "   {EXTRA_X}: STEEL$"
+	.string "   {CIRCLE_DOT}: GRASS\p"
+	.string "   {TRIANGLE}: POISON, GROUND, ROCK, GHOST\p"
+	.string "   {BIG_MULT_X}: STEEL$"
 
 gUnknown_81BAC29:: @ 81BAC29
 	.string "Effect of foe's move on own POKéMON:\p"
-	.string "   {EXTRA_TARGET}: GROUND, PSYCHIC\p"
-	.string "   {EXTRA_TRIANGLE}: GRASS, FIGHTING, POISON, BUG$"
+	.string "   {CIRCLE_DOT}: GROUND, PSYCHIC\p"
+	.string "   {TRIANGLE}: GRASS, FIGHTING, POISON, BUG$"
 
 gUnknown_81BAC89:: @ 81BAC89
 	.string "Effect on the opposing POKéMON:\p"
-	.string "   {EXTRA_TARGET}: DRAGON\p"
-	.string "   {EXTRA_TRIANGLE}: STEEL$"
+	.string "   {CIRCLE_DOT}: DRAGON\p"
+	.string "   {TRIANGLE}: STEEL$"
 
 gUnknown_81BACC4:: @ 81BACC4
 	.string "Effect of foe's move on own POKéMON:\p"
-	.string "   {EXTRA_TARGET}: ICE, DRAGON\p"
-	.string "   {EXTRA_TRIANGLE}: FIRE, WATER, ELECTRIC, GRASS$"
+	.string "   {CIRCLE_DOT}: ICE, DRAGON\p"
+	.string "   {TRIANGLE}: FIRE, WATER, ELECTRIC, GRASS$"
 
 gUnknown_81BAD20:: @ 81BAD20
 	.string "Effect on the opposing POKéMON:\p"
-	.string "   {EXTRA_TRIANGLE}: ROCK, STEEL\p"
-	.string "   {EXTRA_X}: GHOST$"
+	.string "   {TRIANGLE}: ROCK, STEEL\p"
+	.string "   {BIG_MULT_X}: GHOST$"
 
 gUnknown_81BAD60:: @ 81BAD60
 	.string "Effect of foe's move on own POKéMON:\p"
-	.string "   {EXTRA_TARGET}: FIGHTING\p"
-	.string "   {EXTRA_X}: GHOST$"
+	.string "   {CIRCLE_DOT}: FIGHTING\p"
+	.string "   {BIG_MULT_X}: GHOST$"
 
 gUnknown_81BADA2:: @ 81BADA2
 	.string "Effect on the opposing POKéMON:\p"
-	.string "   {EXTRA_TARGET}: ICE, ROCK\p"
-	.string "   {EXTRA_TRIANGLE}: FIRE, WATER, ELECTRIC, STEEL$"
+	.string "   {CIRCLE_DOT}: ICE, ROCK\p"
+	.string "   {TRIANGLE}: FIRE, WATER, ELECTRIC, STEEL$"
 
 gUnknown_81BADF7:: @ 81BADF7
 	.string "Effect of foe's move on own POKéMON:\p"
-	.string "   {EXTRA_TARGET}: FIRE, FIGHTING, GROUND\n"
-	.string "   {EXTRA_TRIANGLE}: NORMAL, GRASS, ICE, FLYING,\l"
+	.string "   {CIRCLE_DOT}: FIRE, FIGHTING, GROUND\n"
+	.string "   {TRIANGLE}: NORMAL, GRASS, ICE, FLYING,\l"
 	.string "       PSYCHIC, BUG, ROCK, GHOST,\l"
 	.string "       DRAGON, DARK, STEEL\l"
-	.string "   {EXTRA_X}: POISON$"
+	.string "   {BIG_MULT_X}: POISON$"
 
 gUnknown_81BAEA8:: @ 81BAEA8
 	.string "Effect on the opposing POKéMON:\p"
-	.string "   {EXTRA_TARGET}: GRASS, FIGHTING, BUG\p"
-	.string "   {EXTRA_TRIANGLE}: ELECTRIC, ROCK, STEEL$"
+	.string "   {CIRCLE_DOT}: GRASS, FIGHTING, BUG\p"
+	.string "   {TRIANGLE}: ELECTRIC, ROCK, STEEL$"
 
 gUnknown_81BAF01:: @ 81BAF01
 	.string "Effect of foe's move on own POKéMON:\p"
-	.string "   {EXTRA_TARGET}: ELECTRIC, ICE, ROCK\p"
-	.string "   {EXTRA_TRIANGLE}: GRASS, FIGHTING, BUG\p"
-	.string "   {EXTRA_X}: GROUND$"
+	.string "   {CIRCLE_DOT}: ELECTRIC, ICE, ROCK\p"
+	.string "   {TRIANGLE}: GRASS, FIGHTING, BUG\p"
+	.string "   {BIG_MULT_X}: GROUND$"
 
 gUnknown_81BAF6B:: @ 81BAF6B
 	.string "Effect on the opposing POKéMON:\p"
-	.string "   {EXTRA_TARGET}: GRASS, ICE, BUG, STEEL\p"
-	.string "   {EXTRA_TRIANGLE}: FIRE, WATER, ROCK, DRAGON$"
+	.string "   {CIRCLE_DOT}: GRASS, ICE, BUG, STEEL\p"
+	.string "   {TRIANGLE}: FIRE, WATER, ROCK, DRAGON$"
 
 gUnknown_81BAFCA:: @ 81BAFCA
 	.string "Effect of foe's move on own POKéMON:\p"
-	.string "   {EXTRA_TARGET}: WATER, GROUND, ROCK\p"
-	.string "   {EXTRA_TRIANGLE}: FIRE, GRASS, ICE, BUG, STEEL$"
+	.string "   {CIRCLE_DOT}: WATER, GROUND, ROCK\p"
+	.string "   {TRIANGLE}: FIRE, GRASS, ICE, BUG, STEEL$"
 
 gUnknown_81BB02E:: @ 81BB02E
 	.string "Effect on the opposing POKéMON:\p"
-	.string "   {EXTRA_TARGET}: FIRE, GROUND, ROCK\p"
-	.string "   {EXTRA_TRIANGLE}: WATER, GRASS, DRAGON$"
+	.string "   {CIRCLE_DOT}: FIRE, GROUND, ROCK\p"
+	.string "   {TRIANGLE}: WATER, GRASS, DRAGON$"
 
 gUnknown_81BB084:: @ 81BB084
 	.string "Effect of foe's move on own POKéMON:\p"
-	.string "   {EXTRA_TARGET}: ELECTRIC, GRASS\p"
-	.string "   {EXTRA_TRIANGLE}: FIRE, WATER, ICE, STEEL$"
+	.string "   {CIRCLE_DOT}: ELECTRIC, GRASS\p"
+	.string "   {TRIANGLE}: FIRE, WATER, ICE, STEEL$"
 
 gUnknown_81BB0DF:: @ 81BB0DF
 	.string "Effect on the opposing POKéMON:\p"
-	.string "   {EXTRA_TARGET}: GRASS, PSYCHIC, DARK\p"
-	.string "   {EXTRA_TRIANGLE}: FIRE, FIGHTING, POISON,\n"
+	.string "   {CIRCLE_DOT}: GRASS, PSYCHIC, DARK\p"
+	.string "   {TRIANGLE}: FIRE, FIGHTING, POISON,\n"
 	.string "       FLYING, GHOST, STEEL$"
 
 gUnknown_81BB156:: @ 81BB156
 	.string "Effect of foe's move on own POKéMON:\p"
-	.string "   {EXTRA_TARGET}: FIRE, FLYING, ROCK\p"
-	.string "   {EXTRA_TRIANGLE}: GRASS, FIGHTING, GROUND$"
+	.string "   {CIRCLE_DOT}: FIRE, FLYING, ROCK\p"
+	.string "   {TRIANGLE}: GRASS, FIGHTING, GROUND$"
 

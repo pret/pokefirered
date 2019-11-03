@@ -13051,7 +13051,7 @@ sub_813AFFC: @ 813AFFC
 	ldr r2, _0813B064 @ =gUnknown_84636E0
 	movs r0, 0x8C
 	movs r1, 0x8C
-	bl sub_80BEAE0
+	bl CreateMonMarkingSprite_SelectCombo
 	adds r2, r0, 0
 	ldr r0, [r5]
 	adds r0, r4

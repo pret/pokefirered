@@ -10086,7 +10086,7 @@ gUnknown_81BCE73:: @ 81BCE73
 	.string "Command DODRIO's three heads to\n"
 	.string "catch falling BERRIES.\p"
 	.string "Press right, up, or left on the\n"
-	.string "{EXTRA_PLUS} Control Pad to move the heads.\p"
+	.string "{PLUS} Control Pad to move the heads.\p"
 	.string "To play this game, you must have\n"
 	.string "a DODRIO.$"
 

@@ -371,7 +371,7 @@ gUnknown_203999C: @ 203999C
 	.align 2
 	.include "src/easy_chat.o"
 	.align 2
-	.include "asm/mon_markings.o" @ TODO: Move to src
+	.include "src/mon_markings.o"
 	.align 2
 	.include "src/mail.o"
 	.align 2

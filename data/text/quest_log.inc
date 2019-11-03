@@ -40,17 +40,17 @@ gUnknown_841A2B0:: @ 841A2B0
 	.string "at a POKéMON CENTER.$"
 
 gUnknown_841A2E1:: @ 841A2E1
-	.string "{UNKNOWN_F7 0x00} had a marvelous battle\n"
-	.string "with the CHAMPION, {UNKNOWN_F7 0x01}.$"
+	.string "{DYNAMIC 0x00} had a marvelous battle\n"
+	.string "with the CHAMPION, {DYNAMIC 0x01}.$"
 
 gUnknown_841A312:: @ 841A312
-	.string "In the end, {UNKNOWN_F7 0x00} sent out {UNKNOWN_F7 0x01}\n"
-	.string "while {UNKNOWN_F7 0x02} countered with\n"
-	.string "{UNKNOWN_F7 0x03}.$"
+	.string "In the end, {DYNAMIC 0x00} sent out {DYNAMIC 0x01}\n"
+	.string "while {DYNAMIC 0x02} countered with\n"
+	.string "{DYNAMIC 0x03}.$"
 
 gUnknown_841A349:: @ 841A349
 	.string "And, as a result of battling with every\n"
-	.string "bit of power, {UNKNOWN_F7 0x00} won\n"
+	.string "bit of power, {DYNAMIC 0x00} won\n"
 	.string "the match.$"
 
 gUnknown_841A391:: @ 841A391
@@ -67,19 +67,19 @@ gUnknown_841A3FF:: @ 841A3FF
 	.string "{STR_VAR_1}'s {STR_VAR_2}.$"
 
 gUnknown_841A422:: @ 841A422
-	.string "Took on {UNKNOWN_F7 0x00} in a SINGLE BATTLE.\n"
+	.string "Took on {DYNAMIC 0x00} in a SINGLE BATTLE.\n"
 	.string "It was a hotly contested match that\n"
-	.string "resulted in a {UNKNOWN_F7 0x01}.$"
+	.string "resulted in a {DYNAMIC 0x01}.$"
 
 gUnknown_841A477:: @ 841A477
-	.string "Took on {UNKNOWN_F7 0x00} in a DOUBLE BATTLE.\n"
+	.string "Took on {DYNAMIC 0x00} in a DOUBLE BATTLE.\n"
 	.string "It was an extended match that resulted\n"
-	.string "in a {UNKNOWN_F7 0x01}.$"
+	.string "in a {DYNAMIC 0x01}.$"
 
 gUnknown_841A4C6:: @ 841A4C6
-	.string "{UNKNOWN_F7 0x00} and {UNKNOWN_F7 0x01} took on\n"
-	.string "{UNKNOWN_F7 0x02} and {UNKNOWN_F7 0x03} in a\n"
-	.string "MULTI BATTLE and got a {UNKNOWN_F7 0x04}.$"
+	.string "{DYNAMIC 0x00} and {DYNAMIC 0x01} took on\n"
+	.string "{DYNAMIC 0x02} and {DYNAMIC 0x03} in a\n"
+	.string "MULTI BATTLE and got a {DYNAMIC 0x04}.$"
 
 gUnknown_841A502::
 	.string "win$"
@@ -98,36 +98,36 @@ gUnknown_841A53A::
 
 gUnknown_841A566:: @ 841A566
 	.string "After consideration, switched\n"
-	.string "{UNKNOWN_F7 0x01} in {UNKNOWN_F7 0x00} with\n"
-	.string "{UNKNOWN_F7 0x03} in {UNKNOWN_F7 0x02}.$"
+	.string "{DYNAMIC 0x01} in {DYNAMIC 0x00} with\n"
+	.string "{DYNAMIC 0x03} in {DYNAMIC 0x02}.$"
 
 gUnknown_841A59C:: @ 841A59C
 	.string "After deep thought, switched\n"
-	.string "{UNKNOWN_F7 0x01} in BOX “{UNKNOWN_F7 0x00}” to\n"
-	.string "the BOX “{UNKNOWN_F7 0x02}.”$"
+	.string "{DYNAMIC 0x01} in BOX “{DYNAMIC 0x00}” to\n"
+	.string "the BOX “{DYNAMIC 0x02}.”$"
 
 gUnknown_841A5D9:: @ 841A5D9
-	.string "Switched around {UNKNOWN_F7 0x01} and\n"
-	.string "{UNKNOWN_F7 0x02} in {UNKNOWN_F7 0x00}.$"
+	.string "Switched around {DYNAMIC 0x01} and\n"
+	.string "{DYNAMIC 0x02} in {DYNAMIC 0x00}.$"
 
 gUnknown_841A5FA:: @ 841A5FA
-	.string "Moved {UNKNOWN_F7 0x01} in {UNKNOWN_F7 0x00}.$"
+	.string "Moved {DYNAMIC 0x01} in {DYNAMIC 0x00}.$"
 
 gUnknown_841A60A:: @ 841A60A
-	.string "Switched {UNKNOWN_F7 0x01} in {UNKNOWN_F7 0x00}\n"
-	.string "with {UNKNOWN_F7 0x02} in the party.$"
+	.string "Switched {DYNAMIC 0x01} in {DYNAMIC 0x00}\n"
+	.string "with {DYNAMIC 0x02} in the party.$"
 
 gUnknown_841A632:: @ 841A632
-	.string "Added {UNKNOWN_F7 0x01} in {UNKNOWN_F7 0x00}\n"
+	.string "Added {DYNAMIC 0x01} in {DYNAMIC 0x00}\n"
 	.string "to the party.$"
 
 gUnknown_841A64F:: @ 841A64F
-	.string "Moved {UNKNOWN_F7 0x00} from the party\n"
-	.string "to {UNKNOWN_F7 0x01}.$"
+	.string "Moved {DYNAMIC 0x00} from the party\n"
+	.string "to {DYNAMIC 0x01}.$"
 
 gUnknown_841A66E:: @ 841A66E
 	.string "Moved a group of POKéMON in\n"
-	.string "{UNKNOWN_F7 0x00} to {UNKNOWN_F7 0x01}.$"
+	.string "{DYNAMIC 0x00} to {DYNAMIC 0x01}.$"
 
 gUnknown_841A694:: @ 841A694
 	.string "a different spot$"
@@ -165,29 +165,29 @@ gUnknown_841A7B0:: @ 841A7B0
 
 gUnknown_841A7DD:: @ 841A7DD
 	.string "Went to the POKéMON MART in\n"
-	.string "{UNKNOWN_F7 0x00} and bought one \n"
-	.string "{UNKNOWN_F7 0x01}.$"
+	.string "{DYNAMIC 0x00} and bought one \n"
+	.string "{DYNAMIC 0x01}.$"
 
 gUnknown_841A810:: @ 841A810
 	.string "Went to the POKéMON MART in\n"
-	.string "{UNKNOWN_F7 0x00} and spent ¥{UNKNOWN_F7 0x02} for\n"
-	.string "items including {UNKNOWN_F7 0x01}(s).$"
+	.string "{DYNAMIC 0x00} and spent ¥{DYNAMIC 0x02} for\n"
+	.string "items including {DYNAMIC 0x01}(s).$"
 
 gUnknown_841A858:: @ 841A858
-	.string "{UNKNOWN_F7 0x00} went to the POKéMON MART in\n"
-	.string "{UNKNOWN_F7 0x01} and sold {UNKNOWN_F7 0x03} of\n"
-	.string "the item {UNKNOWN_F7 0x02}.$"
+	.string "{DYNAMIC 0x00} went to the POKéMON MART in\n"
+	.string "{DYNAMIC 0x01} and sold {DYNAMIC 0x03} of\n"
+	.string "the item {DYNAMIC 0x02}.$"
 
 gUnknown_841A896:: @ 841A896
-		.string "Sold items including {UNKNOWN_F7 0x01} at\n"
-	.string "the POKéMON MART in {UNKNOWN_F7 0x00},\n"
-	.string "worth ¥{UNKNOWN_F7 0x02}.$"
+		.string "Sold items including {DYNAMIC 0x01} at\n"
+	.string "the POKéMON MART in {DYNAMIC 0x00},\n"
+	.string "worth ¥{DYNAMIC 0x02}.$"
 
 gUnknown_841A8D4:: @ 841A8D4
 	.string "just one$"
 
 gUnknown_841A8DD:: @ 841A8DD
-	.string "{UNKNOWN_F7 0x04}$"
+	.string "{DYNAMIC 0x04}$"
 
 gUnknown_841A8E0:: @ 841A8E0
 	.string "{STR_VAR_1} shared its HP using the move\n"
@@ -207,41 +207,41 @@ gUnknown_841A965:: @ 841A965
 	.string "the move {STR_VAR_3}.$"
 
 gUnknown_841A9A9:: @ 841A9A9
-	.string "{UNKNOWN_F7 0x05} managed to defeat the POKéMON\n"
-	.string "{UNKNOWN_F7 0x01} in {UNKNOWN_F7 0x00}.$"
+	.string "{DYNAMIC 0x05} managed to defeat the POKéMON\n"
+	.string "{DYNAMIC 0x01} in {DYNAMIC 0x00}.$"
 
 gUnknown_841A9D4:: @ 841A9D4
-	.string "Defeated {UNKNOWN_F7 0x02} wild POKéMON including\n"
-	.string "{UNKNOWN_F7 0x01} in {UNKNOWN_F7 0x00}.$"
+	.string "Defeated {DYNAMIC 0x02} wild POKéMON including\n"
+	.string "{DYNAMIC 0x01} in {DYNAMIC 0x00}.$"
 
 gUnknown_841AA01:: @ 841AA01
-	.string "{UNKNOWN_F7 0x05} managed to catch the POKéMON\n"
-	.string "{UNKNOWN_F7 0x03} in {UNKNOWN_F7 0x00}.$"
+	.string "{DYNAMIC 0x05} managed to catch the POKéMON\n"
+	.string "{DYNAMIC 0x03} in {DYNAMIC 0x00}.$"
 
 gUnknown_841AA2B:: @ 841AA2B
 	.string "Threw POKé BALLS in a frenzy, catching\n"
-	.string "{UNKNOWN_F7 0x04} POKéMON including {UNKNOWN_F7 0x03} here\n"
-	.string "in {UNKNOWN_F7 0x00}.$"
+	.string "{DYNAMIC 0x04} POKéMON including {DYNAMIC 0x03} here\n"
+	.string "in {DYNAMIC 0x00}.$"
 
 gUnknown_841AA76:: @ 841AA76
-	.string "{UNKNOWN_F7 0x05} defeated the POKéMON\n"
-	.string "{UNKNOWN_F7 0x01} and caught one {UNKNOWN_F7 0x03}\n"
-	.string "in {UNKNOWN_F7 0x00}.$"
+	.string "{DYNAMIC 0x05} defeated the POKéMON\n"
+	.string "{DYNAMIC 0x01} and caught one {DYNAMIC 0x03}\n"
+	.string "in {DYNAMIC 0x00}.$"
 
 gUnknown_841AAAA:: @ 841AAAA
-	.string "Defeated the POKéMON {UNKNOWN_F7 0x01}\n"
-	.string "and caught {UNKNOWN_F7 0x04} POKéMON including\n"
-	.string "{UNKNOWN_F7 0x03} in {UNKNOWN_F7 0x00}.$"
+	.string "Defeated the POKéMON {DYNAMIC 0x01}\n"
+	.string "and caught {DYNAMIC 0x04} POKéMON including\n"
+	.string "{DYNAMIC 0x03} in {DYNAMIC 0x00}.$"
 
 gUnknown_841AAEC:: @ 841AAEC
-	.string "{UNKNOWN_F7 0x05} defeated {UNKNOWN_F7 0x02} POKéMON including\n"
-	.string "{UNKNOWN_F7 0x01} and caught one {UNKNOWN_F7 0x03}\n"
-	.string "in {UNKNOWN_F7 0x00}.$"
+	.string "{DYNAMIC 0x05} defeated {DYNAMIC 0x02} POKéMON including\n"
+	.string "{DYNAMIC 0x01} and caught one {DYNAMIC 0x03}\n"
+	.string "in {DYNAMIC 0x00}.$"
 
 gUnknown_841AB29:: @ 841AB29
-	.string "Defeated {UNKNOWN_F7 0x02} POKéMON including\n"
-	.string "{UNKNOWN_F7 0x01} and caught {UNKNOWN_F7 0x04} POKéMON\n"
-	.string "including {UNKNOWN_F7 0x03} in {UNKNOWN_F7 0x00}.$"
+	.string "Defeated {DYNAMIC 0x02} POKéMON including\n"
+	.string "{DYNAMIC 0x01} and caught {DYNAMIC 0x04} POKéMON\n"
+	.string "including {DYNAMIC 0x03} in {DYNAMIC 0x00}.$"
 
 gUnknown_841AB74:: @ 841AB74
 	.string "Made {STR_VAR_1} hold the item\n"
@@ -331,19 +331,19 @@ gUnknown_841AEDC:: @ 841AEDC
 	.string "after wandering about.$"
 
 gUnknown_841AF0C:: @ 841AF0C
-	.string "Took on {UNKNOWN_F7 0x00} GYM LEADER\n"
-	.string "{UNKNOWN_F7 0x01}'s {UNKNOWN_F7 0x02} with {UNKNOWN_F7 0x03}\n"
-	.string "and won {UNKNOWN_F7 0x04}!$"
+	.string "Took on {DYNAMIC 0x00} GYM LEADER\n"
+	.string "{DYNAMIC 0x01}'s {DYNAMIC 0x02} with {DYNAMIC 0x03}\n"
+	.string "and won {DYNAMIC 0x04}!$"
 
 gUnknown_841AF3E:: @ 841AF3E
-	.string "Took on ELITE FOUR {UNKNOWN_F7 0x00}'s\n"
-	.string "{UNKNOWN_F7 0x01} with {UNKNOWN_F7 0x02} and\n"
-	.string "won {UNKNOWN_F7 0x03}!$"
+	.string "Took on ELITE FOUR {DYNAMIC 0x00}'s\n"
+	.string "{DYNAMIC 0x01} with {DYNAMIC 0x02} and\n"
+	.string "won {DYNAMIC 0x03}!$"
 
 gUnknown_841AF6D:: @ 841AF6D
-	.string "In {UNKNOWN_F7 0x00}, took on\n"
-	.string "{UNKNOWN_F7 0x01}'s {UNKNOWN_F7 0x02} with {UNKNOWN_F7 0x03}\n"
-	.string "and won {UNKNOWN_F7 0x04}!$"
+	.string "In {DYNAMIC 0x00}, took on\n"
+	.string "{DYNAMIC 0x01}'s {DYNAMIC 0x02} with {DYNAMIC 0x03}\n"
+	.string "and won {DYNAMIC 0x04}!$"
 
 gUnknown_841AF98:: @ 841AF98
 	.string "coolly$"

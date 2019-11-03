@@ -3112,8 +3112,8 @@ _0808D178:
 	adds r2, r1
 	ldr r1, _0808D1B0 @ =0x0000dace
 	strh r1, [r2]
-	bl sub_80BE46C
-	bl sub_80BE5F0
+	bl SetMonMarkingsMenuPointer
+	bl LoadMonMarkingsFrameGfx
 	b _0808D20C
 	.align 2, 0
 _0808D1A8: .4byte gUnknown_20397B0
@@ -4913,7 +4913,7 @@ _0808E0D4:
 	ldrb r0, [r0]
 	movs r1, 0xB0
 	movs r2, 0x10
-	bl sub_80BE604
+	bl DrawMonMarkingsMenu
 	ldr r1, [r4]
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -4923,11 +4923,11 @@ _0808E0D4:
 _0808E100: .4byte 0x00000ce7
 _0808E104: .4byte 0x00000da4
 _0808E108:
-	bl sub_80BE6F0
+	bl MonMarkingsHandleInput
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808E130
-	bl sub_80BE658
+	bl TeardownMonMarkingsMenu
 	bl sub_808FD20
 	ldr r0, [r4]
 	ldr r1, _0808E138 @ =0x00000da4
@@ -6839,7 +6839,7 @@ sub_808F0F4: @ 808F0F4
 	ldr r1, _0808F154 @ =0x0000dac8
 	movs r0, 0x10
 	movs r2, 0
-	bl sub_80BEB00
+	bl CreateMonMarkingSprite_AllOff
 	ldr r4, _0808F158 @ =gUnknown_20397B0
 	ldr r1, [r4]
 	movs r3, 0xD9

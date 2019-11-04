@@ -710,4 +710,18 @@ extern const u8 gEasyChatGroupName_TrendySaying[];
 extern const u8 gEasyChatGroupName_Pokemon2[];
 extern const u8 gText_ThreeQuestionMarks[];
 
+// hall_of_fame
+extern const u8 gText_LeagueChamp[];
+extern const u8 gText_HOFNumber[];
+extern const u8 gText_UPDOWNPick_ABUTTONBBUTTONCancel[];
+extern const u8 gText_UPDOWNPick_ABUTTONNext_BBUTTONBack[];
+extern const u8 gText_ABUTTONExit[];
+extern const u8 gText_HOFCorrupted[];
+extern const u8 gText_WelcomeToHOF[];
+extern const u8 gText_Number[];
+extern const u8 gText_Level[];
+extern const u8 gText_IDNumber[];
+extern const u8 gText_Name[];
+extern const u8 gText_MainMenuTime[];
+
 #endif //GUARD_STRINGS_H

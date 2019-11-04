@@ -4226,4 +4226,7 @@ extern const u16 gTradeMenuMonBox_Tilemap[];
 extern const u16 gUnknown_8E9CBBC[];
 extern const u16 gUnknown_8E9CB9C[];
 
+extern const u32 gFile_graphics_misc_confetti_sheet[];
+extern const u32 gFile_graphics_misc_confetti_palette[];
+
 #endif //GUARD_GRAPHICS_H

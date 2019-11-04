@@ -62,17 +62,6 @@ enum
     CHECK // unused
 };
 
-// Do save types
-enum
-{
-    NORMAL_SAVE,
-    LINK_SAVE,
-    EREADER_SAVE,
-    HOF_SAVE,
-    DIFFERENT_FILE_SAVE,
-    HOF_DELETE_SAVE // unused
-};
-
 extern u16 gFirstSaveSector;
 extern u32 gPrevSaveCounter;
 extern u16 gLastKnownGoodSector;

@@ -5625,7 +5625,7 @@ u8 GetNumberOfRelearnableMoves(struct Pokemon *mon)
 }
 
 // SpeciesToPokedexNum?
-u16 sub_8043F90(u16 species)
+u16 SpeciesToPokedexNum(u16 species)
 {
     species = SpeciesToNationalPokedexNum(species);
 

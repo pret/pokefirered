@@ -17,14 +17,14 @@ Special_HallOfFame: @ 80CA2E4
 	lsrs r1, r0, 24
 	cmp r1, 0x1
 	bne _080CA30C
-	ldr r0, _080CA308 @ =gUnknown_203AB44
+	ldr r0, _080CA308 @ =gHasHallOfFameRecords
 	strb r1, [r0]
 	b _080CA318
 	.align 2, 0
 _080CA304: .4byte 0x0000082c
-_080CA308: .4byte gUnknown_203AB44
+_080CA308: .4byte gHasHallOfFameRecords
 _080CA30C:
-	ldr r1, _080CA3B0 @ =gUnknown_203AB44
+	ldr r1, _080CA3B0 @ =gHasHallOfFameRecords
 	movs r0, 0
 	strb r0, [r1]
 	adds r0, r4, 0
@@ -99,7 +99,7 @@ _080CA39E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080CA3B0: .4byte gUnknown_203AB44
+_080CA3B0: .4byte gHasHallOfFameRecords
 _080CA3B4: .4byte gSaveBlock2Ptr
 _080CA3B8: .4byte gPlayerParty
 _080CA3BC: .4byte 0x0000083b

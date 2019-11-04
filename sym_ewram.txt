@@ -450,22 +450,13 @@ gUnknown_203AAB8: @ 203AAB8
 	.include "src/intro.o"
 
 	.align 2
-gUnknown_203AB34: @ 203AB34
-	.space 0x4
-
-gUnknown_203AB38: @ 203AB38
-	.space 0x4
-
-gUnknown_203AB3C: @ 203AB3C
-	.space 0x4
-
+	.include "src/hall_of_fame.o"
+	.align 2
 	.include "src/credits.o"
-
-gUnknown_203AB44: @ 203AB44
-	.space 0x4
-
+	.align 2
 	.include "src/diploma.o"
 
+	.align 2
 gUnknown_203AB4C: @ 203AB4C
 	.space 0x4
 

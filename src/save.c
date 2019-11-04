@@ -672,7 +672,7 @@ u8 HandleSavingData(u8 saveType)
         for(i = 0; i < 5; i++)
             save_write_to_flash(i, gRamSaveSectionLocations);
         break;
-    case EREADER_SAVE:
+    case SAVE_EREADER:
         SaveSerializedGame();
         save_write_to_flash(0, gRamSaveSectionLocations);
         break;

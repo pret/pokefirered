@@ -122,7 +122,7 @@ gUnknown_8415CD9:: @ 0x8415CD9
 gUnknown_8415CE0:: @ 0x8415CE0
 	.string "ポケモンずかん$"
 
-gUnknown_8415CE8:: @ 8415CE8
+gText_MainMenuTime:: @ 8415CE8
 	.string "TIME$"
 
 gUnknown_8415CED:: @ 0x8415CED
@@ -330,7 +330,7 @@ gUnknown_8416002:: @ 8416002
 	.string "PAGE$"
 
 	.align 2
-gUnknown_8416008:: @ 8416008
+gText_WelcomeToHOF:: @ 8416008
 	.string "Welcome to the HALL OF FAME!$"
 
 gUnknown_8416025:: @ 0x8416025
@@ -346,31 +346,31 @@ gUnknown_8416067:: @ 0x8416067
 	.string "でんげんを きらないでください$"
 
 	.align 2
-gUnknown_8416090:: @ 8416090
+gText_HOFCorrupted:: @ 8416090
 	.string "The HALL OF FAME data is\n"
 	.string "corrupted.$"
 
-gUnknown_84160B4:: @ 84160B4
+gText_HOFNumber:: @ 84160B4
 	.string "HALL OF FAME No. {STR_VAR_1}$"
 
-gUnknown_84160C8:: @ 84160C8
+gText_LeagueChamp:: @ 84160C8
 	.string "LEAGUE CHAMPION!\n"
 	.string "CONGRATULATIONS!$"
 
 	.align 2
-gUnknown_84160EC:: @ 84160EC
+gText_Number:: @ 84160EC
 	.string "No. $"
 
 	.align 2
-gUnknown_84160F4:: @ 84160F4
+gText_Level:: @ 84160F4
 	.string "Lv. $"
 
 	.align 2
-gUnknown_84160FC:: @ 84160FC
+gText_Name:: @ 84160FC
 	.string "NAME$"
 
 	.align 2
-gUnknown_8416104:: @ 8416104
+gText_IDNumber:: @ 8416104
 	.string "IDNo.$"
 
 gUnknown_841610A:: @ 0x841610A

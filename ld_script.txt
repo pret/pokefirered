@@ -213,7 +213,7 @@ SECTIONS {
         src/player_pc.o(.text);
         src/intro.o(.text);
         asm/battle_anim_special.o(.text);
-        asm/hall_of_fame.o(.text);
+        src/hall_of_fame.o(.text);
         src/credits.o(.text);
         src/diploma.o(.text);
         asm/save_failed_screen.o(.text);
@@ -484,7 +484,7 @@ SECTIONS {
         src/player_pc.o(.rodata);
         src/intro.o(.rodata);
         data/battle_anim_special.o(.rodata);
-        data/hall_of_fame.o(.rodata);
+        src/hall_of_fame.o(.rodata);
         src/credits.o(.rodata);
         src/diploma.o(.rodata);
         data/strings.o(.rodata);

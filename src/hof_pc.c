@@ -19,7 +19,7 @@ static void Task_WaitFadeAndSetCallback(u8 taskId)
         FreeAllWindowBuffers();
         ResetBgsAndClearDma3BusyFlags(0);
         DestroyTask(taskId);
-        SetMainCallback2(sub_80F2978);
+        SetMainCallback2(CB2_InitHofPC);
     }
 }
 

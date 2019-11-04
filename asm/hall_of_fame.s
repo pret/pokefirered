@@ -1788,7 +1788,7 @@ _080F2BF8:
 	adds r0, 0x4
 	adds r0, r1, r0
 	ldrh r3, [r0]
-	ldr r2, _080F2C38 @ =gUnknown_840C26E
+	ldr r2, _080F2C38 @ =gUnknown_840C268 + 6
 	adds r1, r2
 	ldrh r4, [r1]
 	b _080F2C4C
@@ -1798,7 +1798,7 @@ _080F2C28: .4byte gTasks
 _080F2C2C: .4byte gUnknown_203AB34
 _080F2C30: .4byte 0x000001ff
 _080F2C34: .4byte gUnknown_840C268
-_080F2C38: .4byte gUnknown_840C26E
+_080F2C38: .4byte gUnknown_840C268 + 6
 _080F2C3C:
 	ldr r0, _080F2C9C @ =gUnknown_840C298
 	lsls r2, r5, 3

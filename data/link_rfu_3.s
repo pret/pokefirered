@@ -370,7 +370,22 @@ gUnknown_8459580:: @ 8459580
 	.incbin "baserom.gba", 0x459580, 0x8
 
 gUnknown_8459588:: @ 8459588
-	.incbin "baserom.gba", 0x459588, 0x64
+	.incbin "baserom.gba", 0x459588, 0x28
 
-gUnknown_84595EC:: @ 84595EC @ referenced in mevent/script_common.inc
-	.incbin "baserom.gba", 0x4595EC, 0x48
+gUnknown_84595B0::
+	.string "Canceled reading the Card.$"
+
+	.align 2
+gUnknown_84595CC::
+	.4byte 0x02, 0x15 @ RECEIVE ID(0x15)
+	.4byte 0x0c, 0x00 @ READ PACKET AND COMPUTER SOMETHING
+	.4byte 0x14, 0x00 @ SEND ALL
+	.4byte 0x01, 0x0e @ RETURN 0x0e
+
+gMEventSrvScript_OtherTrainerCanceled:: @ 84595EC @ referenced in mevent/script_common.inc
+	.4byte 0x12, 0x20, gUnknown_84595CC @ SEND
+	.4byte 0x01, 0x00, NULL @ WAIT SEND
+	.4byte 0x14, 0x1b, gUnknown_84595B0 @ SEND_STR
+	.4byte 0x01, 0x00, NULL @ WAIT SEND
+	.4byte 0x02, 0x14, NULL @ RECV
+	.4byte 0x00, 0x09, NULL @ RETURN (other trainer canceled)

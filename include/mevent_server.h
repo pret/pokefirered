@@ -66,8 +66,8 @@ struct mevent_srv_common
     u32 cmdidx;
     const struct mevent_cmd * cmdBuffer;
     void * recvBuffer;
-    struct MEventBuffer_32E0_Sub * mevent_32e0;
-    struct MEventBuffer_3120_Sub * mevent_3120;
+    struct MEventBuffer_32E0_Sub * card;
+    struct MEventBuffer_3120_Sub * news;
     struct MEventStruct_Unk1442CC * mevent_unk1442cc;
     void * sendBuffer1;
     u32 sendBuffer1Size;

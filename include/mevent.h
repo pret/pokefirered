@@ -10,15 +10,15 @@ struct MEventStruct_Unk1442CC
     u32 unk_08;
     u16 unk_0C;
     u32 unk_10;
-    u16 unk_14;
+    u16 id;
     u16 unk_16[4];
     struct MEventBuffer_3430_Sub unk_20;
     u8 unk_44;
-    u8 unk_45[7];
-    u8 unk_4C[4];
-    u16 unk_50[6];
-    u8 unk_5C[4];
-    u8 unk_60;
+    u8 playerName[7];
+    u8 playerTrainerId[4];
+    u16 easyChatProfile[6];
+    u8 gameCode[4];
+    u8 version;
 };
 
 struct MEvent_Str_1

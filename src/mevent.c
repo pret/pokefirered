@@ -761,20 +761,20 @@ void sub_81442CC(struct MEventStruct_Unk1442CC * data)
     data->unk_10 = 1;
     if (ValidateReceivedWonderCard())
     {
-        data->unk_14 = GetSavedWonderCard()->unk_00;
+        data->id = GetSavedWonderCard()->unk_00;
         data->unk_20 = *sav1_get_mevent_buffer_2();
         data->unk_44 = GetSavedWonderCard()->unk_09;
     }
     else
-        data->unk_14 = 0;
+        data->id = 0;
     for (i = 0; i < 4; i++)
         data->unk_16[i] = gSaveBlock1Ptr->unk_3120.unk_338[i];
-    CopyTrainerId(data->unk_4C, gSaveBlock2Ptr->playerTrainerId);
-    StringCopy(data->unk_45, gSaveBlock2Ptr->playerName);
+    CopyTrainerId(data->playerTrainerId, gSaveBlock2Ptr->playerTrainerId);
+    StringCopy(data->playerName, gSaveBlock2Ptr->playerName);
     for (i = 0; i < 6; i++)
-        data->unk_50[i] = gSaveBlock1Ptr->easyChatProfile[i];
-    memcpy(data->unk_5C, RomHeaderGameCode, 4);
-    data->unk_60 = RomHeaderSoftwareVersion;
+        data->easyChatProfile[i] = gSaveBlock1Ptr->easyChatProfile[i];
+    memcpy(data->gameCode, RomHeaderGameCode, 4);
+    data->version = RomHeaderSoftwareVersion;
 }
 
 bool32 sub_81443D4(const struct MEventStruct_Unk1442CC * data)
@@ -794,9 +794,9 @@ bool32 sub_81443D4(const struct MEventStruct_Unk1442CC * data)
 
 u32 sub_8144418(const u16 * a0, const struct MEventStruct_Unk1442CC * a1, void * unused)
 {
-    if (a1->unk_14 == 0)
+    if (a1->id == 0)
         return 0;
-    if (*a0 == a1->unk_14)
+    if (*a0 == a1->id)
         return 1;
     return 2;
 }

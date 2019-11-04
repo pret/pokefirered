@@ -1,6 +1,5 @@
 #include "global.h"
 #include "palette.h"
-#include "dma3.h"
 #include "gpu_regs.h"
 #include "bg.h"
 #include "task.h"
@@ -1095,7 +1094,7 @@ const u8 * mevent_message_stamp_card_etc_send_status(u32 * a0, u8 unused, u32 ms
     return result;
 }
 
-bool32 PrintMGSendStatus(u8 * state, u16 * arg1, u8 arg2, u32 msgId)
+static bool32 PrintMGSendStatus(u8 * state, u16 * arg1, u8 arg2, u32 msgId)
 {
     u32 flag;
     const u8 * str = mevent_message_stamp_card_etc_send_status(&flag, arg2, msgId);
@@ -1278,7 +1277,7 @@ void task00_mystery_gift(u8 taskId)
     case  8:
         switch (mevent_client_do_exec(&data->curPromptWindowId))
         {
-        case 6:
+        case 6: // done
             task_add_05_task_del_08FA224_when_no_RfuFunc();
             data->prevPromptWindowId = data->curPromptWindowId;
             data->state = 13;

@@ -1,9 +1,6 @@
 #include "global.h"
 #include "malloc.h"
 #include "decompress.h"
-#include "util.h"
-#include "link.h"
-#include "link_rfu.h"
 #include "overworld.h"
 #include "script.h"
 #include "battle_tower.h"
@@ -21,9 +18,9 @@ static void mevent_srv_init_common(struct mevent_srv_common *, const void *, u32
 static void mevent_srv_free_resources(struct mevent_srv_common *);
 static u32 mevent_srv_exec_common(struct mevent_srv_common *);
 
-extern const u8 gUnknown_84687E0[];
-extern const struct mevent_cmd gUnknown_8468B6C[];
-extern const struct mevent_cmd gUnknown_8468BCC[];
+extern const u8 gMEVentClientScript_IntialListen[];
+extern const struct mevent_cmd gMEventSrvScript_SendNews[];
+extern const struct mevent_cmd gMEventSrvScript_SendCard[];
 
 void mevent_client_do_init(void)
 {
@@ -98,7 +95,7 @@ static void mevent_client_send_word(struct mevent_client * svr, u32 ident, u32 w
 static u32 ish_mainseq_0(struct mevent_client * svr)
 {
     // init
-    memcpy(svr->cmdBuffer, gUnknown_84687E0, ME_SEND_BUF_SIZE);
+    memcpy(svr->cmdBuffer, gMEVentClientScript_IntialListen, ME_SEND_BUF_SIZE);
     svr->cmdidx = 0;
     svr->mainseqno = 4;
     svr->flag = 0;
@@ -300,13 +297,13 @@ static u32 mevent_client_exec(struct mevent_client * svr)
 void mevent_srv_init_wnews(void)
 {
     s_mevent_srv_common_ptr = AllocZeroed(sizeof(struct mevent_srv_common));
-    mevent_srv_init_common(s_mevent_srv_common_ptr, gUnknown_8468B6C, 0, 1);
+    mevent_srv_init_common(s_mevent_srv_common_ptr, gMEventSrvScript_SendNews, 0, 1);
 }
 
 void mevent_srv_new_wcard(void)
 {
     s_mevent_srv_common_ptr = AllocZeroed(sizeof(struct mevent_srv_common));
-    mevent_srv_init_common(s_mevent_srv_common_ptr, gUnknown_8468BCC, 0, 1);
+    mevent_srv_init_common(s_mevent_srv_common_ptr, gMEventSrvScript_SendCard, 0, 1);
 }
 
 u32 mevent_srv_common_do_exec(u16 * a0)
@@ -329,8 +326,8 @@ static void mevent_srv_init_common(struct mevent_srv_common * svr, const void * 
 {
     svr->unk_00 = 0;
     svr->mainseqno = 0;
-    svr->mevent_32e0 = AllocZeroed(sizeof(struct MEventBuffer_32E0_Sub));
-    svr->mevent_3120 = AllocZeroed(sizeof(struct MEventBuffer_3120_Sub));
+    svr->card = AllocZeroed(sizeof(struct MEventBuffer_32E0_Sub));
+    svr->news = AllocZeroed(sizeof(struct MEventBuffer_3120_Sub));
     svr->recvBuffer = AllocZeroed(ME_SEND_BUF_SIZE);
     svr->mevent_unk1442cc = AllocZeroed(sizeof(struct MEventStruct_Unk1442CC));
     svr->cmdBuffer = cmdBuffer;
@@ -340,8 +337,8 @@ static void mevent_srv_init_common(struct mevent_srv_common * svr, const void * 
 
 static void mevent_srv_free_resources(struct mevent_srv_common * svr)
 {
-    Free(svr->mevent_32e0);
-    Free(svr->mevent_3120);
+    Free(svr->card);
+    Free(svr->news);
     Free(svr->recvBuffer);
     Free(svr->mevent_unk1442cc);
 }
@@ -445,7 +442,7 @@ static u32 common_mainseq_4(struct mevent_srv_common * svr)
             break;
         case 7:
             AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 396);
-            ptr = mevent_first_if_not_null_else_second(cmd->parameter, svr->mevent_32e0);
+            ptr = mevent_first_if_not_null_else_second(cmd->parameter, svr->card);
             svr->param = sub_8144418(ptr, svr->mevent_unk1442cc, ptr);
             break;
         case 8:
@@ -472,11 +469,11 @@ static u32 common_mainseq_4(struct mevent_srv_common * svr)
             break;
         case 14:
             AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 432);
-            mevent_srv_common_init_send(svr, 0x17, mevent_first_if_not_null_else_second(cmd->parameter, svr->mevent_3120), sizeof(struct MEventBuffer_3120_Sub));
+            mevent_srv_common_init_send(svr, 0x17, mevent_first_if_not_null_else_second(cmd->parameter, svr->news), sizeof(struct MEventBuffer_3120_Sub));
             break;
         case 13:
             AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 438);
-            mevent_srv_common_init_send(svr, 0x16, mevent_first_if_not_null_else_second(cmd->parameter, svr->mevent_32e0), sizeof(struct MEventBuffer_32E0_Sub));
+            mevent_srv_common_init_send(svr, 0x16, mevent_first_if_not_null_else_second(cmd->parameter, svr->card), sizeof(struct MEventBuffer_32E0_Sub));
             break;
         case 16:
             AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 444);
@@ -506,11 +503,11 @@ static u32 common_mainseq_4(struct mevent_srv_common * svr)
             break;
         case 22:
             AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 481);
-            memcpy(svr->mevent_32e0, cmd->parameter, 332);
+            memcpy(svr->card, cmd->parameter, 332);
             break;
         case 23:
             AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 486);
-            memcpy(svr->mevent_3120, cmd->parameter, 444);
+            memcpy(svr->news, cmd->parameter, 444);
             break;
         case 21:
             AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 491);
@@ -526,12 +523,12 @@ static u32 common_mainseq_4(struct mevent_srv_common * svr)
             break;
         case 26:
             AGB_ASSERT_EX(cmd->flag == FALSE && cmd->parameter == NULL, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 506);
-            memcpy(svr->mevent_32e0, GetSavedWonderCard(), 332);
-            sub_814410C(svr->mevent_32e0);
+            memcpy(svr->card, GetSavedWonderCard(), 332);
+            sub_814410C(svr->card);
             break;
         case 27:
             AGB_ASSERT_EX(cmd->flag == FALSE && cmd->parameter == NULL, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 512);
-            memcpy(svr->mevent_3120, GetSavedWonderNews(), 444);
+            memcpy(svr->news, GetSavedWonderNews(), 444);
             break;
         case 28:
             AGB_ASSERT_EX(cmd->flag == FALSE && cmd->parameter == NULL, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 517);

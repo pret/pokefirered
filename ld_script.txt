@@ -261,6 +261,7 @@ SECTIONS {
         src/mystery_gift_menu.o(.text);
         src/mevent.o(.text);
         src/mevent_server_helpers.o(.text);
+        src/mevent_client.o(.text);
         src/mevent_server.o(.text);
         src/mevent_8145654.o(.text);
         src/menews_jisan.o(.text);
@@ -532,6 +533,7 @@ SECTIONS {
         src/mystery_gift_menu.o(.rodata);
         src/mevent.o(.rodata);
         src/mevent_server_helpers.o(.rodata);
+        src/mevent_client.o(.rodata);
         src/mevent_server.o(.rodata);
         src/mevent_8145654.o(.rodata);
         data/data_8466FB8.o(.rodata);

@@ -728,13 +728,22 @@ sLocationHistory: @ 203F3A8
 sRoamerLocation: @ 203F3AE
 	.space 0x2
 
+	.align 2
 	.include "src/mystery_gift_menu.o"
+	.align 2
 	.include "src/mevent.o"
+	.align 2
 	.include "src/mevent_server_helpers.o"
+	.align 2
+	.include "src/mevent_client.o"
+	.align 2
 	.include "src/mevent_server.o"
+	.align 2
 	.include "src/mevent_8145654.o"
+	.align 2
 	.include "src/seagallop.o"
 
+	.align 2
 gUnknown_203F3D4: @ 203F3D4
 	.space 0x4
 

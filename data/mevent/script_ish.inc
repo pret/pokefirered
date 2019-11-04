@@ -1,4 +1,4 @@
-gMEVentClientScript_IntialListen:: @ 84687E0
+gMEventClientScript_IntialListen:: @ 84687E0
 	.4byte 0x02, 0x10 @ RECEIVE ID(0x10)
 	.4byte 0x04, 0x00 @ JUMP TO RECEIVE BUFFER
 

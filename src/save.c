@@ -719,7 +719,7 @@ bool8 sub_80DA3D8(void)
 {
     u8 retVal = sub_80D9AA4(0xE, gRamSaveSectionLocations);
     if (gDamagedSaveSectors)
-        DoSaveFailedScreen(0);
+        DoSaveFailedScreen(SAVE_NORMAL);
     if (retVal == 0xFF)
         return 1;
     else
@@ -730,7 +730,7 @@ u8 sub_80DA40C(void)
 {
     sub_80D9B04(0xE, gRamSaveSectionLocations);
     if (gDamagedSaveSectors)
-        DoSaveFailedScreen(0);
+        DoSaveFailedScreen(SAVE_NORMAL);
     return 0;
 }
 
@@ -738,7 +738,7 @@ u8 sub_80DA434(void)
 {
     sav12_xor_get(0xE, gRamSaveSectionLocations);
     if (gDamagedSaveSectors)
-        DoSaveFailedScreen(0);
+        DoSaveFailedScreen(SAVE_NORMAL);
     return 0;
 }
 
@@ -769,34 +769,34 @@ bool8 sub_80DA4A0(void)
         retVal = TRUE;
     }
     if (gDamagedSaveSectors)
-        DoSaveFailedScreen(1);
+        DoSaveFailedScreen(SAVE_LINK);
     return retVal;
 }
 
-u8 Save_LoadGameData(u8 a1)
+u8 Save_LoadGameData(u8 saveType)
 {
     u8 result;
 
     if (gFlashMemoryPresent != TRUE)
     {
-        gSaveFileStatus = 4;
-        return 0xFF;
+        gSaveFileStatus = SAVE_STATUS_NO_FLASH;
+        return SAVE_STATUS_ERROR;
     }
 
     UpdateSaveAddresses();
-    switch (a1)
+    switch (saveType)
     {
-    case 0:
+    case SAVE_NORMAL:
     default:
         result = sub_80D9E14(0xFFFF, gRamSaveSectionLocations);
         LoadSerializedGame();
         gSaveFileStatus = result;
         gGameContinueCallback = 0;
         break;
-    case 3:
-        result = sub_80DA120(0x1C, gDecompressionBuffer, 0xF80);
-        if(result == 1)
-            result = sub_80DA120(0x1D, gDecompressionBuffer + 0xF80, 0xF80);
+    case SAVE_HALL_OF_FAME:
+        result = sub_80DA120(SECTOR_HOF(0), gDecompressionBuffer, 0xF80);
+        if (result == SAVE_STATUS_OK)
+            result = sub_80DA120(SECTOR_HOF(1), gDecompressionBuffer + 0xF80, 0xF80);
         break;
     }
 
@@ -809,7 +809,7 @@ u32 TryCopySpecialSaveSection(u8 sector, u8* dst)
     s32 size;
     u8* savData;
 
-    if (sector != 30 && sector != 31)
+    if (sector != SECTOR_TTOWER(0) && sector != SECTOR_TTOWER(1))
         return 0xFF;
     ReadFlash(sector, 0, (u8 *)&gSaveDataBuffer, sizeof(struct SaveSection));
     if (*(u32*)(&gSaveDataBuffer.data[0]) != 0xB39D)
@@ -830,7 +830,7 @@ u32 TryWriteSpecialSaveSection(u8 sector, u8* src)
     u8* savData;
     void* savDataBuffer;
 
-    if (sector != 30 && sector != 31)
+    if (sector != SECTOR_TTOWER(0) && sector != SECTOR_TTOWER(1))
         return 0xFF;
 
     savDataBuffer = &gSaveDataBuffer;

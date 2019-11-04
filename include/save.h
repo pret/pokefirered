@@ -54,6 +54,11 @@ struct SaveSectionOffsets
 
 #define UNKNOWN_CHECK_VALUE 0x8012025
 
+#define SECTOR_SAVE1(n)  (n)
+#define SECTOR_SAVE2(n)  ((n) + NUM_SECTORS_PER_SAVE_SLOT)
+#define SECTOR_HOF(n)    ((n) + 2 * NUM_SECTORS_PER_SAVE_SLOT)
+#define SECTOR_TTOWER(n) ((n) + 2 * NUM_SECTORS_PER_SAVE_SLOT + 2)
+
 // SetSectorDamagedStatus states
 enum
 {
@@ -106,7 +111,7 @@ u8 sub_80DA40C(void);
 u8 sub_80DA434(void);
 u8 sub_80DA45C(void);
 bool8 sub_80DA4A0(void);
-u8 Save_LoadGameData(u8 a1);
+u8 Save_LoadGameData(u8 saveType);
 u32 TryCopySpecialSaveSection(u8 sector, u8* dst);
 u32 sub_8153634(u8 sector, u8* src);
 void sub_8153688(u8 taskId);

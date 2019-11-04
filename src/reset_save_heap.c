@@ -8,7 +8,7 @@
 #include "overworld.h"
 #include "malloc.h"
 
-void sub_8079B7C(void)
+void ResetSaveHeap(void)
 {
     u16 imeBackup = REG_IME;
     
@@ -20,8 +20,8 @@ void sub_8079B7C(void)
     SetSaveBlocksPointers();
     ResetMenuAndMonGlobals();
     Save_ResetSaveCounters();
-    Save_LoadGameData(0);
-    if (gSaveFileStatus == 0 || gSaveFileStatus == 2)
+    Save_LoadGameData(SAVE_NORMAL);
+    if (gSaveFileStatus == SAVE_STATUS_EMPTY || gSaveFileStatus == SAVE_STATUS_INVALID)
         Sav2_ClearSetDefault();
     SetPokemonCryStereo(gSaveBlock2Ptr->optionsSound);
     InitHeap(gHeap, HEAP_SIZE);

@@ -464,7 +464,7 @@ void LinkTestProcessKeyInput(void)
     }
     if (JOY_NEW(R_BUTTON))
     {
-        TrySavingData(1);
+        TrySavingData(SAVE_LINK);
     }
     if (JOY_NEW(SELECT_BUTTON))
     {
@@ -1581,7 +1581,7 @@ static void CB2_PrintErrorMessage(void)
                 PlaySE(SE_PIN);
                 gWirelessCommType = 0;
                 sLinkErrorBuffer.unk_06 = 0;
-                sub_8079B7C();
+                ResetSaveHeap();
             }
         }
         else if (gWirelessCommType == 2)

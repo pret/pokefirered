@@ -80,7 +80,7 @@ static void Task_Hof_WaitAndPrintPlayerInfo(u8 taskId);
 static void Task_Hof_ExitOnKeyPressed(u8 taskId);
 static void Task_Hof_HandlePaletteOnExit(u8 taskId);
 static void Task_Hof_HandleExit(u8 taskId);
-static void SetCallback2AfterHallOfFameDisplay(void);
+static void SetWarpsToRollCredits(void);
 static void Task_HofPC_CopySaveData(u8 taskId);
 static void Task_HofPC_DrawSpritesPrintText(u8 taskId);
 static void Task_HofPC_PrintMonInfo(u8 taskId);
@@ -699,11 +699,11 @@ static void Task_Hof_HandleExit(u8 taskId)
         if (sHofMonPtr != NULL)
         FREE_AND_SET_NULL(sHofMonPtr);
 
-        SetCallback2AfterHallOfFameDisplay();
+        SetWarpsToRollCredits();
     }
 }
 
-static void SetCallback2AfterHallOfFameDisplay(void)
+static void SetWarpsToRollCredits(void)
 {
     VarSet(VAR_MAP_SCENE_INDIGO_PLATEAU_EXTERIOR, 1);
     FlagSet(FLAG_SPECIAL_FLAG_0x4000);

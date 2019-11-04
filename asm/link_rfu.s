@@ -3570,7 +3570,7 @@ _080FEED8:
 _080FEEE4: .4byte gSaveBlock1Ptr
 _080FEEE8: .4byte 0x00002cc4
 _080FEEEC:
-	bl sub_8143DA8
+	bl GetMEventProfileECWordsMaybe
 	adds r1, r0, 0
 	b _080FEF08
 _080FEEF4:

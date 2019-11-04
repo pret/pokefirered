@@ -188,8 +188,8 @@ static u32 client_mainseq_4(struct mevent_client * svr)
         svr->flag = 0;
         return 4;
     case 8:
-        sub_81442CC(svr->sendBuffer);
-        mevent_srv_sub_init_send(&svr->manager, 0x11, svr->sendBuffer, sizeof(struct MEventStruct_Unk1442CC));
+        BuildMEventClientHeader(svr->sendBuffer);
+        mevent_srv_sub_init_send(&svr->manager, 0x11, svr->sendBuffer, sizeof(struct MEventClientHeaderStruct));
         break;
     case 14:
         mevent_client_send_word(svr, 0x13, svr->param);
@@ -214,7 +214,7 @@ static u32 client_mainseq_4(struct mevent_client * svr)
         sub_8144254(svr->recvBuffer);
         break;
     case 17:
-        sub_8069EA4(svr->recvBuffer, 1000);
+        MEventSetRamScript(svr->recvBuffer, 1000);
         break;
     case 18:
         memcpy(&gSaveBlock2Ptr->unk_B0.field_3F0, svr->recvBuffer, sizeof(struct BattleTowerEReaderTrainer));
@@ -243,15 +243,15 @@ static u32 client_mainseq_5(struct mevent_client * svr)
 
 static u32 client_mainseq_6(struct mevent_client * svr)
 {
-    // ???
+    // Run mevent buffer script
     switch (svr->flag)
     {
     case 0:
-        sub_80DA89C(svr->recvBuffer);
+        MEventScript_InitContext(svr->recvBuffer);
         ++svr->flag;
         break;
     case 1:
-        if (!sub_80DA8B0(&svr->param))
+        if (!MEventScript_Run(&svr->param))
         {
             svr->mainseqno = 4;
             svr->flag = 0;

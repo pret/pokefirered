@@ -49,10 +49,10 @@ static void mevent_srv_init_common(struct mevent_srv_common * svr, const void * 
 {
     svr->unk_00 = 0;
     svr->mainseqno = 0;
-    svr->card = AllocZeroed(sizeof(struct MEventBuffer_32E0_Sub));
-    svr->news = AllocZeroed(sizeof(struct MEventBuffer_3120_Sub));
+    svr->card = AllocZeroed(sizeof(struct MEWonderCardData));
+    svr->news = AllocZeroed(sizeof(struct MEWonderNewsData));
     svr->recvBuffer = AllocZeroed(ME_SEND_BUF_SIZE);
-    svr->mevent_unk1442cc = AllocZeroed(sizeof(struct MEventStruct_Unk1442CC));
+    svr->mevent_unk1442cc = AllocZeroed(sizeof(struct MEventClientHeaderStruct));
     svr->cmdBuffer = cmdBuffer;
     svr->cmdidx = 0;
     mevent_srv_sub_init(&svr->manager, sendPlayerNo, recvPlayerNo);
@@ -149,12 +149,12 @@ static u32 common_mainseq_4(struct mevent_srv_common * svr)
         case 5:
             AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 376);
             AGB_ASSERT_EX(cmd->parameter == NULL, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 377);
-            memcpy(svr->mevent_unk1442cc, svr->recvBuffer, sizeof(struct MEventStruct_Unk1442CC));
+            memcpy(svr->mevent_unk1442cc, svr->recvBuffer, sizeof(struct MEventClientHeaderStruct));
             break;
         case 6:
             AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 382);
             AGB_ASSERT_EX(cmd->parameter == NULL, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 383);
-            svr->param = sub_81443D4(svr->mevent_unk1442cc);
+            svr->param = ValidateMEventClientHeader(svr->mevent_unk1442cc);
             break;
         case 4:
             if (svr->param == cmd->flag)
@@ -192,11 +192,11 @@ static u32 common_mainseq_4(struct mevent_srv_common * svr)
             break;
         case 14:
             AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 432);
-            mevent_srv_common_init_send(svr, 0x17, mevent_first_if_not_null_else_second(cmd->parameter, svr->news), sizeof(struct MEventBuffer_3120_Sub));
+            mevent_srv_common_init_send(svr, 0x17, mevent_first_if_not_null_else_second(cmd->parameter, svr->news), sizeof(struct MEWonderNewsData));
             break;
         case 13:
             AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 438);
-            mevent_srv_common_init_send(svr, 0x16, mevent_first_if_not_null_else_second(cmd->parameter, svr->card), sizeof(struct MEventBuffer_32E0_Sub));
+            mevent_srv_common_init_send(svr, 0x16, mevent_first_if_not_null_else_second(cmd->parameter, svr->card), sizeof(struct MEWonderCardData));
             break;
         case 16:
             AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 444);

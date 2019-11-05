@@ -476,7 +476,7 @@
 
 	.macro atk55 int
 	.byte 0x55
-	.4byte \int
+	.2byte \int
 	.endm
 
 	.macro atk56 bank_or_side

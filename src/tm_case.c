@@ -105,7 +105,7 @@ static void Task_SelectTMAction_Type3(u8 taskId);
 static void Task_SelectTMAction_FromSellMenu(u8 taskId);
 static void Task_AskConfirmSaleWithAmount(u8 taskId);
 static void Task_PlaceYesNoBox(u8 taskId);
-static void Task_SaleOfTMsCancelled(u8 taskId);
+static void Task_SaleOfTMsCanceled(u8 taskId);
 static void Task_InitQuantitySelectUI(u8 taskId);
 static void SellTM_PrintQuantityAndSalePrice(s16 quantity, s32 value);
 static void Task_QuantitySelect_HandleInput(u8 taskId);
@@ -178,7 +178,7 @@ static const struct MenuAction sMenuActions_UseGiveExit[] = {
 
 static const u8 sMenuActionIndices_Field[] = {0, 1, 2};
 static const u8 sMenuActionIndices_UnionRoom[] = {1, 2};
-static const struct YesNoFuncTable sYesNoFuncTable = {Task_PrintSaleConfirmedText, Task_SaleOfTMsCancelled};
+static const struct YesNoFuncTable sYesNoFuncTable = {Task_PrintSaleConfirmedText, Task_SaleOfTMsCanceled};
 
 static const u8 sText_ClearTo18[] = _("{CLEAR_TO 18}");
 static const u8 sText_SingleSpace[] = _(" ");
@@ -1012,7 +1012,7 @@ static void Task_PlaceYesNoBox(u8 taskId)
     HandleCreateYesNoMenu(taskId, &sYesNoFuncTable);
 }
 
-static void Task_SaleOfTMsCancelled(u8 taskId)
+static void Task_SaleOfTMsCanceled(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 

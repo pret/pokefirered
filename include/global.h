@@ -694,7 +694,7 @@ struct MEventBuffers
     /*0x1c0 0x32e0*/ struct MEWonderCardStruct mecard;
     /*0x310 0x3430*/ struct MEventBuffer_3430 buffer_310;
     /*0x338 0x3458*/ u16 ec_profile_maybe[4];
-    /*0x340 0x3460*/ struct MENewsJisanStruct mejisan;
+    /*0x340 0x3460*/ struct MENewsJisanStruct me_jisan;
     /*0x344 0x3464*/ u32 unk_344[2][5];
 }; // 0x36C 0x348C
 

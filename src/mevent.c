@@ -507,7 +507,7 @@ struct MEventBuffer_3430_Sub * sav1_get_mevent_buffer_2(void)
 
 struct MENewsJisanStruct * GetMENewsJisanStructPtr(void)
 {
-    return &gSaveBlock1Ptr->mysteryEventBuffers.mejisan;
+    return &gSaveBlock1Ptr->mysteryEventBuffers.me_jisan;
 }
 
 u16 * GetMEventProfileECWordsMaybe(void)

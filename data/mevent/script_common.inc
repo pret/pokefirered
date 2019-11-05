@@ -15,7 +15,7 @@ gMEventSrvScript_UnableToSend::
 	.4byte 0x00, 0x09, NULL @ RETURN (other trn canceled)
 
 gMEventSrvScript_OtherTrnHasNews::
-	.4byte 0x12, 0x10, gMEventClientScript_AlredyHadNews @ SEND
+	.4byte 0x12, 0x10, gMEventClientScript_AlreadyHadNews @ SEND
 	.4byte 0x01, 0x00, NULL @ WAIT SEND
 	.4byte 0x02, 0x14, NULL @ RECV
 	.4byte 0x00, 0x07, NULL @ RETURN (other trn has news)

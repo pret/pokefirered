@@ -1,4 +1,4 @@
-gMEventClientScript_IntialListen:: @ 84687E0
+gMEventClientScript_InotialListen:: @ 84687E0
 	.4byte 0x02, 0x10 @ RECEIVE ID(0x10)
 	.4byte 0x04, 0x00 @ JUMP TO RECEIVE BUFFER
 
@@ -35,7 +35,7 @@ gMEventClientScript_ReceiveNewsAndValidate::
 	.4byte 0x02, 0x10 @ RECEIVE ID(0x10)
 	.4byte 0x04, 0x00 @ JUMP TO RECEIVE BUFFER
 
-gMEventClientScript_AlredyHadNews:: @ already had news
+gMEventClientScript_AlreadyHadNews:: @ already had news
 	.4byte 0x14, 0x00 @ SEND ALL
 	.4byte 0x01, 0x07 @ RETURN 0x07
 
@@ -50,7 +50,7 @@ gMEventClientScript_AskWouldLikeToTossCard::
 	.4byte 0x02, 0x10 @ RECEIVE ID(0x10)
 	.4byte 0x04, 0x00 @ JUMP TO RECEIVE BUFFER
 
-gMEventClientScript_OtherTrainerCanceled:: @ comm cancelled
+gMEventClientScript_OtherTrainerCanceled:: @ comm canceled
 	.4byte 0x14, 0x00 @ SEND ALL
 	.4byte 0x01, 0x09 @ RETURN 0x09
 

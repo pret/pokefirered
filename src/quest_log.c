@@ -170,14 +170,14 @@ static void sub_81134CC(struct Var4038Struct *);
 static bool8 sub_8113508(struct Var4038Struct * );
 static void sub_8113524(struct Var4038Struct *);
 static bool8 sub_81136D4(void);
-static bool8 sub_8113778(u16, u16 *);
-static bool8 sub_81137E4(u16, u16 *);
-static u16 *sub_8113828(u16, u16 *);
-static bool8 sub_81138A0(u16, u16 *);
-static bool8 sub_8113954(u16, u16 *);
+static bool8 sub_8113778(u16, const u16 *);
+static bool8 sub_81137E4(u16, const u16 *);
+static u16 *sub_8113828(u16, const u16 *);
+static bool8 sub_81138A0(u16, const u16 *);
+static bool8 sub_8113954(u16, const u16 *);
 static void sub_8113A1C(u16);
 static void sub_811381C(void);
-static bool8 sub_8113A44(u16, u16 *);
+static bool8 sub_8113A44(u16, const u16 *);
 static u16 *QuestLog_SkipCommand(u16 *, u16 **);
 static void sub_8113ABC(u16 *);
 static bool8 sub_8113AE8(u16 *);
@@ -260,8 +260,8 @@ static u16 *sub_81151C0(u16 *, const u16 *);
 static const u16 *sub_81151DC(const u16 *);
 static u16 *sub_8115280(u16 *, const u16 *);
 static const u16 *sub_81152BC(const u16 *);
-static bool8 sub_81153A8(u16, u16 *);
-static bool8 sub_81153E4(u16, u16 *);
+static bool8 sub_81153A8(u16, const u16 *);
+static bool8 sub_81153E4(u16, const u16 *);
 static u16 *sub_8115410(u16 *, const u16 *);
 static const u16 *sub_8115460(const u16 *);
 static u16 *sub_81154DC(u16 *, const u16 *);
@@ -2651,7 +2651,6 @@ static u16 *(*const sQuestLogStorageCBs[])(u16 *, const u16 *) = {
     sub_81157DC
 };
 
-#ifdef NONMATCHING
 void sub_8113550(u16 a0, const u16 *a1)
 {
     u16 *r1;
@@ -2665,7 +2664,7 @@ void sub_8113550(u16 a0, const u16 *a1)
     if (gUnknown_203ADFA == 2)
         return;
 
-    if (a0 < 3 || a0 > 26)
+    if (a0 < 3 || a0 > 42)
         return;
 
     if (sub_81136D4() == TRUE)
@@ -2677,7 +2676,6 @@ void sub_8113550(u16 a0, const u16 *a1)
     if (MenuHelpers_LinkSomething() == TRUE)
         return;
 
-    // NONMATCHING: branch logic here
     if (InUnionRoom() == TRUE)
         return;
 
@@ -2727,6 +2725,7 @@ void sub_8113550(u16 a0, const u16 *a1)
 
     if (r1 == NULL)
     {
+        sub_811231C();
         r1 = sub_8113828(a0, a1);
         if (r1 == NULL)
             return;
@@ -2737,191 +2736,6 @@ void sub_8113550(u16 a0, const u16 *a1)
         return;
     sub_811231C();
 }
-#else
-NAKED
-void sub_8113550(u16 a0, const u16 *a1)
-{
-    asm_unified("\tpush {r4,r5,lr}\n"
-                "\tadds r5, r1, 0\n"
-                "\tlsls r0, 16\n"
-                "\tlsrs r4, r0, 16\n"
-                "\tcmp r4, 0x23\n"
-                "\tbne _08113570\n"
-                "\tldr r0, _0811356C @ =gUnknown_203B048\n"
-                "\tldrb r0, [r0]\n"
-                "\tcmp r0, 0x2\n"
-                "\tbne _08113570\n"
-                "\tbl sub_811381C\n"
-                "\tb ._return\n"
-                "\t.align 2, 0\n"
-                "_0811356C: .4byte gUnknown_203B048\n"
-                "_08113570:\n"
-                "\tbl sub_811381C\n"
-                "\tldr r0, _0811362C @ =gUnknown_203ADFA\n"
-                "\tldrb r0, [r0]\n"
-                "\tcmp r0, 0x2\n"
-                "\tbne _0811357E\n"
-                "\tb ._return\n"
-                "_0811357E:\n"
-                "\tsubs r0, r4, 0x3\n"
-                "\tlsls r0, 16\n"
-                "\tlsrs r0, 16\n"
-                "\tcmp r0, 0x27\n"
-                "\tbls _0811358A\n"
-                "\tb ._return\n"
-                "_0811358A:\n"
-                "\tbl sub_81136D4\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tcmp r0, 0x1\n"
-                "\tbne _08113598\n"
-                "\tb ._return\n"
-                "_08113598:\n"
-                "\tadds r0, r4, 0\n"
-                "\tadds r1, r5, 0\n"
-                "\tbl sub_81138A0\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tcmp r0, 0x1\n"
-                "\tbne _081135AA\n"
-                "\tb ._return\n"
-                "_081135AA:\n"
-                "\tbl MenuHelpers_LinkSomething\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tcmp r0, 0x1\n"
-                "\tbne _081135B8\n"
-                "\tb ._return\n"
-                "_081135B8:\n"
-                "\tbl InUnionRoom\n"
-                "\tcmp r0, 0x1\n"
-                "\tbne _081135C2\n"
-                "\tb ._return\n"
-                "_081135C2:\n"
-                "\tadds r0, r4, 0\n"
-                "\tadds r1, r5, 0\n"
-                "\tbl sub_8113954\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tcmp r0, 0x1\n"
-                "\tbeq ._return\n"
-                "\tadds r0, r4, 0\n"
-                "\tadds r1, r5, 0\n"
-                "\tbl sub_8113A44\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tcmp r0, 0x1\n"
-                "\tbeq ._return\n"
-                "\tadds r0, r4, 0\n"
-                "\tadds r1, r5, 0\n"
-                "\tbl sub_81153E4\n"
-                "\tlsls r0, 24\n"
-                "\tcmp r0, 0\n"
-                "\tbeq ._return\n"
-                "\tldr r0, _08113630 @ =gUnknown_3005E88\n"
-                "\tldrb r0, [r0]\n"
-                "\tcmp r0, 0\n"
-                "\tbne _08113638\n"
-                "\tadds r0, r4, 0\n"
-                "\tadds r1, r5, 0\n"
-                "\tbl sub_8113778\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tcmp r0, 0x1\n"
-                "\tbeq ._return\n"
-                "\tcmp r4, 0x1F\n"
-                "\tbne _08113614\n"
-                "\tldr r0, _08113634 @ =gUnknown_203AE04\n"
-                "\tldr r0, [r0]\n"
-                "\tcmp r0, 0\n"
-                "\tbne _0811363C\n"
-                "_08113614:\n"
-                "\tadds r0, r4, 0\n"
-                "\tadds r1, r5, 0\n"
-                "\tbl sub_81153A8\n"
-                "\tlsls r0, 24\n"
-                "\tcmp r0, 0\n"
-                "\tbeq ._return\n"
-                "\tadds r0, r4, 0\n"
-                "\tbl sub_8110AEC\n"
-                "\tb _0811363C\n"
-                "\t.align 2, 0\n"
-                "_0811362C: .4byte gUnknown_203ADFA\n"
-                "_08113630: .4byte gUnknown_3005E88\n"
-                "_08113634: .4byte gUnknown_203AE04\n"
-                "_08113638:\n"
-                "\tcmp r4, 0x28\n"
-                "\tbeq ._return\n"
-                "_0811363C:\n"
-                "\tadds r0, r4, 0\n"
-                "\tbl sub_8113B94\n"
-                "\tcmp r4, 0x1F\n"
-                "\tbne _0811367C\n"
-                "\tldr r2, _0811365C @ =gUnknown_203AE04\n"
-                "\tldr r1, [r2]\n"
-                "\tcmp r1, 0\n"
-                "\tbne _08113668\n"
-                "\tldr r0, _08113660 @ =gUnknown_203AE08\n"
-                "\tldr r0, [r0]\n"
-                "\tstr r0, [r2]\n"
-                "\tldr r1, _08113664 @ =sQuestLogStorageCBs\n"
-                "\tldr r2, [r1, 0x7C]\n"
-                "\tb _0811368E\n"
-                "\t.align 2, 0\n"
-                "_0811365C: .4byte gUnknown_203AE04\n"
-                "_08113660: .4byte gUnknown_203AE08\n"
-                "_08113664: .4byte sQuestLogStorageCBs\n"
-                "_08113668:\n"
-                "\tldr r0, _08113678 @ =sQuestLogStorageCBs\n"
-                "\tldr r2, [r0, 0x7C]\n"
-                "\tadds r0, r1, 0\n"
-                "\tadds r1, r5, 0\n"
-                "\tbl _call_via_r2\n"
-                "\tb ._return\n"
-                "\t.align 2, 0\n"
-                "_08113678: .4byte sQuestLogStorageCBs\n"
-                "_0811367C:\n"
-                "\tldr r1, _081136C4 @ =gUnknown_203AE04\n"
-                "\tmovs r0, 0\n"
-                "\tstr r0, [r1]\n"
-                "\tldr r0, _081136C8 @ =sQuestLogStorageCBs\n"
-                "\tlsls r1, r4, 2\n"
-                "\tadds r1, r0\n"
-                "\tldr r0, _081136CC @ =gUnknown_203AE08\n"
-                "\tldr r0, [r0]\n"
-                "\tldr r2, [r1]\n"
-                "_0811368E:\n"
-                "\tadds r1, r5, 0\n"
-                "\tbl _call_via_r2\n"
-                "\tadds r1, r0, 0\n"
-                "\tcmp r1, 0\n"
-                "\tbne _081136AC\n"
-                "\tbl sub_811231C\n"
-                "\tadds r0, r4, 0\n"
-                "\tadds r1, r5, 0\n"
-                "\tbl sub_8113828\n"
-                "\tadds r1, r0, 0\n"
-                "\tcmp r1, 0\n"
-                "\tbeq ._return\n"
-                "_081136AC:\n"
-                "\tldr r0, _081136CC @ =gUnknown_203AE08\n"
-                "\tstr r1, [r0]\n"
-                "\tldr r0, _081136D0 @ =gUnknown_203B048\n"
-                "\tldrb r0, [r0]\n"
-                "\tcmp r0, 0\n"
-                "\tbeq ._return\n"
-                "\tbl sub_811231C\n"
-                "._return:\n"
-                "\tpop {r4,r5}\n"
-                "\tpop {r0}\n"
-                "\tbx r0\n"
-                "\t.align 2, 0\n"
-                "_081136C4: .4byte gUnknown_203AE04\n"
-                "_081136C8: .4byte sQuestLogStorageCBs\n"
-                "_081136CC: .4byte gUnknown_203AE08\n"
-                "_081136D0: .4byte gUnknown_203B048");
-}
-#endif // NONMATCHING
 
 static bool8 sub_81136D4(void)
 {
@@ -2954,7 +2768,7 @@ bool8 sub_8113748(void)
     return FALSE;
 }
 
-static bool8 sub_8113778(u16 a0, u16 *a1)
+static bool8 sub_8113778(u16 a0, const u16 *a1)
 {
     if (a0 == 36 || a0 == 11)
         return TRUE;
@@ -2974,7 +2788,7 @@ static bool8 sub_8113778(u16 a0, u16 *a1)
     return FALSE;
 }
 
-static bool8 sub_81137E4(u16 a0, u16 *a1)
+static bool8 sub_81137E4(u16 a0, const u16 *a1)
 {
     if (a0 == 34)
     {
@@ -2994,7 +2808,7 @@ static void sub_811381C(void)
     gUnknown_203B048 = 0;
 }
 
-static u16 *sub_8113828(u16 a0, u16 *a1)
+static u16 *sub_8113828(u16 a0, const u16 *a1)
 {
     if (sub_8113778(a0, a1) == TRUE)
         return NULL;
@@ -3013,7 +2827,7 @@ static u16 *sub_8113828(u16 a0, u16 *a1)
     return sQuestLogStorageCBs[a0](gUnknown_203AE08, a1);
 }
 
-static bool8 sub_81138A0(u16 a0, u16 *a1)
+static bool8 sub_81138A0(u16 a0, const u16 *a1)
 {
     if (a0 < 12 || a0 > 19)
         return FALSE;
@@ -3049,7 +2863,7 @@ void sub_811390C(void)
     }
 }
 
-static bool8 sub_8113954(u16 a0, u16 *a1)
+static bool8 sub_8113954(u16 a0, const u16 *a1)
 {
     if (a0 != 34 && a0 != 30 && a0 != 32 && a0 != 33)
         return FALSE;
@@ -3087,7 +2901,7 @@ static void sub_8113A1C(u16 a0)
     sQuestLogIdx++;
 }
 
-static bool8 sub_8113A44(u16 a0, u16 *a1)
+static bool8 sub_8113A44(u16 a0, const u16 *a1)
 {
     if (a0 != 31)
         return FALSE;
@@ -4566,7 +4380,7 @@ void sub_811539C(void)
     gUnknown_203B04B = TRUE;
 }
 
-static bool8 sub_81153A8(u16 a0, u16 *a1)
+static bool8 sub_81153A8(u16 a0, const u16 *a1)
 {
     if (a0 != 35)
     {
@@ -4579,7 +4393,7 @@ static bool8 sub_81153A8(u16 a0, u16 *a1)
     return TRUE;
 }
 
-static bool8 sub_81153E4(u16 a0, u16 *a1)
+static bool8 sub_81153E4(u16 a0, const u16 *a1)
 {
     if (a0 != 35)
         return TRUE;

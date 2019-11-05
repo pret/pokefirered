@@ -3339,7 +3339,7 @@ sub_81360D4: @ 81360D4
 	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8043F90
+	bl SpeciesToPokedexNum
 	lsls r0, 16
 	lsrs r4, r0, 16
 	ldr r0, _08136110 @ =0x0000ffff

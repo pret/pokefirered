@@ -485,10 +485,10 @@ void InitEasyChatPhrases(void)
         gSaveBlock1Ptr->additionalPhrases[i] = 0;
 }
 
-void ResetSomeMEventECBuffer_3120_338(void)
+void EC_ResetMEventProfileMaybe(void)
 {
     s32 i;
-    u16 *ptr = sub_8143DA8();
+    u16 *ptr = GetMEventProfileECWordsMaybe();
     for (i = 0; i < 4; i++)
         ptr[i] = EC_WORD_UNDEFINED;
 }

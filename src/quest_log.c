@@ -1067,7 +1067,7 @@ static void QuestLog_EndPlayback(void)
 {
     ResetSpecialVars();
     Save_ResetSaveCounters();
-    Save_LoadGameData(0);
+    Save_LoadGameData(SAVE_NORMAL);
     SetMainCallback2(sub_8057430);
     gFieldCallback2 = sub_8111F60;
     FreeAllWindowBuffers();

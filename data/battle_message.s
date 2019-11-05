@@ -9,30 +9,30 @@ gUnknown_83FB218:: @ 83FB218
 	.string "$"
 
 gUnknown_83FB219:: @ 83FB219
-	.string "{STRING 36}$"
+	.string "{B_TRAINER1_LOSE_TEXT}$"
 
 gUnknown_83FB21C:: @ 83FB21C
-	.string "{STRING 46}$"
+	.string "{B_TRAINER2_CLASS}$"
 
 gUnknown_83FB21F:: @ 83FB21F
-	.string "{STRING 29}: {STRING 06}, come back!$"
+	.string "{B_TRAINER1_NAME}: {B_OPPONENT_MON1_NAME}, come back!$"
 
 gUnknown_83FB232:: @ 83FB232
-	.string "{STRING 37}$"
+	.string "{B_TRAINER1_WIN_TEXT}$"
 
 gUnknown_83FB235:: @ 83FB235
-	.string "{STRING 29}: {STRING 08}, come back!$"
+	.string "{B_TRAINER1_NAME}: {B_OPPONENT_MON2_NAME}, come back!$"
 
 gUnknown_83FB248:: @ 83FB248
-	.string "{STRING 29}: {STRING 06} and\n"
-	.string "{STRING 08}, come back!$"
+	.string "{B_TRAINER1_NAME}: {B_OPPONENT_MON1_NAME} and\n"
+	.string "{B_OPPONENT_MON2_NAME}, come back!$"
 
 gUnknown_83FB262:: @ 83FB262
-	.string "{STRING 47}$"
+	.string "{B_TRAINER2_NAME}$"
 
 gUnknown_83FB265:: @ 83FB265
-	.string "{STRING 00} gained{STRING 01}\n"
-	.string "{STRING 48} EXP. Points!\p"
+	.string "{B_BUFF1} gained{B_BUFF2}\n"
+	.string "{B_TRAINER2_LOSE_TEXT} EXP. Points!\p"
 	.string "$"
 
 gUnknown_83FB282:: @ 83FB282
@@ -42,113 +42,113 @@ gUnknown_83FB283:: @ 83FB283
 	.string " a boosted$"
 
 gUnknown_83FB28E:: @ 83FB28E
-	.string "{STRING 00} grew to\n"
-	.string "LV. {STRING 01}!{WAIT_SE}\p"
+	.string "{B_BUFF1} grew to\n"
+	.string "LV. {B_BUFF2}!{WAIT_SE}\p"
 	.string "$"
 
 gUnknown_83FB2A4:: @ 83FB2A4
-	.string "{STRING 00} learned\n"
-	.string "{STRING 01}!{WAIT_SE}\p"
+	.string "{B_BUFF1} learned\n"
+	.string "{B_BUFF2}!{WAIT_SE}\p"
 	.string "$"
 
 gUnknown_83FB2B6:: @ 83FB2B6
-	.string "{STRING 00} is trying to\n"
-	.string "learn {STRING 01}.\p"
+	.string "{B_BUFF1} is trying to\n"
+	.string "learn {B_BUFF2}.\p"
 	.string "$"
 
 gUnknown_83FB2D1:: @ 83FB2D1
-	.string "But, {STRING 00} can't learn\n"
+	.string "But, {B_BUFF1} can't learn\n"
 	.string "more than four moves.\p"
 	.string "$"
 
 gUnknown_83FB2FC:: @ 83FB2FC
 	.string "Delete a move to make\n"
-	.string "room for {STRING 01}?$"
+	.string "room for {B_BUFF2}?$"
 
 gUnknown_83FB31F:: @ 83FB31F
-	.string "{STRING 00} forgot\n"
-	.string "{STRING 01}.\p"
+	.string "{B_BUFF1} forgot\n"
+	.string "{B_BUFF2}.\p"
 	.string "$"
 
 gUnknown_83FB32E:: @ 83FB32E
 	.string "{PAUSE 32}Stop learning\n"
-	.string "{STRING 01}?$"
+	.string "{B_BUFF2}?$"
 
 gUnknown_83FB343:: @ 83FB343
-	.string "{STRING 00} did not learn\n"
-	.string "{STRING 01}.\p"
+	.string "{B_BUFF1} did not learn\n"
+	.string "{B_BUFF2}.\p"
 	.string "$"
 
 gUnknown_83FB359:: @ 83FB359
 	.string "Use next POKéMON?$"
 
 gUnknown_83FB36B:: @ 83FB36B
-	.string "{STRING 15}'s\n"
+	.string "{B_ATK_NAME_WITH_PREFIX}'s\n"
 	.string "attack missed!$"
 
 gUnknown_83FB37F:: @ 83FB37F
-	.string "{STRING 16}\n"
+	.string "{B_DEF_NAME_WITH_PREFIX}\n"
 	.string "protected itself!$"
 
 gUnknown_83FB394:: @ 83FB394
-	.string "{STRING 16} avoided\n"
-	.string "damage with {STRING 25}!$"
+	.string "{B_DEF_NAME_WITH_PREFIX} avoided\n"
+	.string "damage with {B_DEF_ABILITY}!$"
 
 gUnknown_83FB3AF:: @ 83FB3AF
-	.string "{STRING 16} makes GROUND\n"
-	.string "moves miss with {STRING 25}!$"
+	.string "{B_DEF_NAME_WITH_PREFIX} makes GROUND\n"
+	.string "moves miss with {B_DEF_ABILITY}!$"
 
 gUnknown_83FB3D3:: @ 83FB3D3
-	.string "{STRING 16} avoided\n"
+	.string "{B_DEF_NAME_WITH_PREFIX} avoided\n"
 	.string "the attack!$"
 
 gUnknown_83FB3EA:: @ 83FB3EA
 	.string "It doesn't affect\n"
-	.string "{STRING 16}…$"
+	.string "{B_DEF_NAME_WITH_PREFIX}…$"
 
 gUnknown_83FB400:: @ 83FB400
-	.string "{STRING 15}\n"
+	.string "{B_ATK_NAME_WITH_PREFIX}\n"
 	.string "fainted!\p"
 	.string "$"
 
 gUnknown_83FB40D:: @ 83FB40D
-	.string "{STRING 16}\n"
+	.string "{B_DEF_NAME_WITH_PREFIX}\n"
 	.string "fainted!\p"
 	.string "$"
 
 gUnknown_83FB41A:: @ 83FB41A
-	.string "{STRING 35} got ¥{STRING 00}\n"
+	.string "{B_PLAYER_NAME} got ¥{B_BUFF1}\n"
 	.string "for winning!\p"
 	.string "$"
 
 gUnknown_83FB433:: @ 83FB433
-	.string "{STRING 35} is out of\n"
+	.string "{B_PLAYER_NAME} is out of\n"
 	.string "usable POKéMON!\p"
 	.string "$"
 
 gUnknown_83FB451:: @ 83FB451
-	.string "{STRING 35} panicked and lost ¥{STRING 00}…\p"
+	.string "{B_PLAYER_NAME} panicked and lost ¥{B_BUFF1}…\p"
 	.string "… … … …\p"
-	.string "{STRING 35} whited out!{PAUSE_UNTIL_PRESS}$"
+	.string "{B_PLAYER_NAME} whited out!{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_83FB484:: @ 83FB484
-	.string "{STRING 35} is out of\n"
+	.string "{B_PLAYER_NAME} is out of\n"
 	.string "usable POKéMON!\p"
 	.string "Player lost against\n"
-	.string "{STRING 28} {STRING 29}!{PAUSE_UNTIL_PRESS}$"
+	.string "{B_TRAINER1_CLASS} {B_TRAINER1_NAME}!{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_83FB4BE:: @ 83FB4BE
-	.string "{STRING 35} paid ¥{STRING 00} as the prize\n"
+	.string "{B_PLAYER_NAME} paid ¥{B_BUFF1} as the prize\n"
 	.string "money…\p"
 	.string "… … … …\p"
-	.string "{STRING 35} whited out!{PAUSE_UNTIL_PRESS}$"
+	.string "{B_PLAYER_NAME} whited out!{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_83FB4F7:: @ 83FB4F7
-	.string "{STRING 35} whited out!{PAUSE_UNTIL_PRESS}$"
+	.string "{B_PLAYER_NAME} whited out!{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_83FB508:: @ 83FB508
-	.string "{STRING 19} prevents\n"
-	.string "escape with {STRING 26}!\p"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX} prevents\n"
+	.string "escape with {B_SCR_ACTIVE_ABILITY}!\p"
 	.string "$"
 
 gUnknown_83FB525:: @ 83FB525
@@ -156,481 +156,481 @@ gUnknown_83FB525:: @ 83FB525
 	.string "$"
 
 gUnknown_83FB534:: @ 83FB534
-	.string "{STRING 15} can't escape!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} can't escape!$"
 
 gUnknown_83FB545:: @ 83FB545
-	.string "Hit {STRING 00} timeシsス!$"
+	.string "Hit {B_BUFF1} timeシsス!$"
 
 gUnknown_83FB555:: @ 83FB555
-	.string "{STRING 17}\n"
+	.string "{B_EFF_NAME_WITH_PREFIX}\n"
 	.string "fell asleep!$"
 
 gUnknown_83FB565:: @ 83FB565
-	.string "{STRING 19}'s {STRING 26}\n"
-	.string "made {STRING 17} sleep!$"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\n"
+	.string "made {B_EFF_NAME_WITH_PREFIX} sleep!$"
 
 gUnknown_83FB57C:: @ 83FB57C
-	.string "{STRING 16} is\n"
+	.string "{B_DEF_NAME_WITH_PREFIX} is\n"
 	.string "already asleep!$"
 
 gUnknown_83FB592:: @ 83FB592
-	.string "{STRING 15} is\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} is\n"
 	.string "already asleep!$"
 
 gUnknown_83FB5A8:: @ 83FB5A8
-	.string "{STRING 16}\n"
+	.string "{B_DEF_NAME_WITH_PREFIX}\n"
 	.string "wasn't affected!$"
 
 gUnknown_83FB5BC:: @ 83FB5BC
-	.string "{STRING 17}\n"
+	.string "{B_EFF_NAME_WITH_PREFIX}\n"
 	.string "was poisoned!$"
 
 gUnknown_83FB5CD:: @ 83FB5CD
-	.string "{STRING 19}'s {STRING 26}\n"
-	.string "poisoned {STRING 17}!$"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\n"
+	.string "poisoned {B_EFF_NAME_WITH_PREFIX}!$"
 
 gUnknown_83FB5E2:: @ 83FB5E2
-	.string "{STRING 15} is hurt\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} is hurt\n"
 	.string "by poison!$"
 
 gUnknown_83FB5F8:: @ 83FB5F8
-	.string "{STRING 16} is already\n"
+	.string "{B_DEF_NAME_WITH_PREFIX} is already\n"
 	.string "poisoned.$"
 
 gUnknown_83FB610:: @ 83FB610
-	.string "{STRING 17} is badly\n"
+	.string "{B_EFF_NAME_WITH_PREFIX} is badly\n"
 	.string "poisoned!$"
 
 gUnknown_83FB626:: @ 83FB626
-	.string "{STRING 16} had its\n"
+	.string "{B_DEF_NAME_WITH_PREFIX} had its\n"
 	.string "energy drained!$"
 
 gUnknown_83FB641:: @ 83FB641
-	.string "{STRING 17} was burned!$"
+	.string "{B_EFF_NAME_WITH_PREFIX} was burned!$"
 
 gUnknown_83FB650:: @ 83FB650
-	.string "{STRING 19}'s {STRING 26}\n"
-	.string "burned {STRING 17}!$"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\n"
+	.string "burned {B_EFF_NAME_WITH_PREFIX}!$"
 
 gUnknown_83FB663:: @ 83FB663
-	.string "{STRING 15} is hurt\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} is hurt\n"
 	.string "by its burn!$"
 
 gUnknown_83FB67B:: @ 83FB67B
-	.string "{STRING 16} already\n"
+	.string "{B_DEF_NAME_WITH_PREFIX} already\n"
 	.string "has a burn.$"
 
 gUnknown_83FB692:: @ 83FB692
-	.string "{STRING 17} was\n"
+	.string "{B_EFF_NAME_WITH_PREFIX} was\n"
 	.string "frozen solid!$"
 
 gUnknown_83FB6A7:: @ 83FB6A7
-	.string "{STRING 19}'s {STRING 26}\n"
-	.string "froze {STRING 17} solid!$"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\n"
+	.string "froze {B_EFF_NAME_WITH_PREFIX} solid!$"
 
 gUnknown_83FB6BF:: @ 83FB6BF
-	.string "{STRING 15} is\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} is\n"
 	.string "frozen solid!$"
 
 gUnknown_83FB6D3:: @ 83FB6D3
-	.string "{STRING 16} was\n"
+	.string "{B_DEF_NAME_WITH_PREFIX} was\n"
 	.string "defrosted!$"
 
 gUnknown_83FB6E5:: @ 83FB6E5
-	.string "{STRING 15} was\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} was\n"
 	.string "defrosted!$"
 
 gUnknown_83FB6F7:: @ 83FB6F7
-	.string "{STRING 15} was\n"
-	.string "defrosted by {STRING 20}!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} was\n"
+	.string "defrosted by {B_CURRENT_MOVE}!$"
 
 gUnknown_83FB70F:: @ 83FB70F
-	.string "{STRING 17} is paralyzed!\n"
+	.string "{B_EFF_NAME_WITH_PREFIX} is paralyzed!\n"
 	.string "It may be unable to move!$"
 
 gUnknown_83FB73A:: @ 83FB73A
-	.string "{STRING 19}'s {STRING 26}\n"
-	.string "paralyzed {STRING 17}!\l"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\n"
+	.string "paralyzed {B_EFF_NAME_WITH_PREFIX}!\l"
 	.string "It may be unable to move!$"
 
 gUnknown_83FB76A:: @ 83FB76A
-	.string "{STRING 15} is paralyzed!\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} is paralyzed!\n"
 	.string "It can't move!$"
 
 gUnknown_83FB78A:: @ 83FB78A
-	.string "{STRING 16} is\n"
+	.string "{B_DEF_NAME_WITH_PREFIX} is\n"
 	.string "already paralyzed!$"
 
 gUnknown_83FB7A3:: @ 83FB7A3
-	.string "{STRING 16} was\n"
+	.string "{B_DEF_NAME_WITH_PREFIX} was\n"
 	.string "healed of paralysis!$"
 
 gUnknown_83FB7BF:: @ 83FB7BF
-	.string "{STRING 16}'s\n"
+	.string "{B_DEF_NAME_WITH_PREFIX}'s\n"
 	.string "dream was eaten!$"
 
 gUnknown_83FB7D5:: @ 83FB7D5
-	.string "{STRING 15}'s {STRING 00}\n"
+	.string "{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1}\n"
 	.string "won't go higher!$"
 
 gUnknown_83FB7EE:: @ 83FB7EE
-	.string "{STRING 16}'s {STRING 00}\n"
+	.string "{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\n"
 	.string "won't go lower!$"
 
 gUnknown_83FB806:: @ 83FB806
-	.string "Your team's {STRING 00}\n"
+	.string "Your team's {B_BUFF1}\n"
 	.string "stopped working!$"
 
 gUnknown_83FB826:: @ 83FB826
-	.string "The foe's {STRING 00}\n"
+	.string "The foe's {B_BUFF1}\n"
 	.string "stopped working!$"
 
 gUnknown_83FB844:: @ 83FB844
-	.string "{STRING 15} is\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} is\n"
 	.string "confused!$"
 
 gUnknown_83FB854:: @ 83FB854
-	.string "{STRING 15} snapped\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} snapped\n"
 	.string "out of confusion!$"
 
 gUnknown_83FB871:: @ 83FB871
-	.string "{STRING 17} became\n"
+	.string "{B_EFF_NAME_WITH_PREFIX} became\n"
 	.string "confused!$"
 
 gUnknown_83FB885:: @ 83FB885
-	.string "{STRING 16} is\n"
+	.string "{B_DEF_NAME_WITH_PREFIX} is\n"
 	.string "already confused!$"
 
 gUnknown_83FB89D:: @ 83FB89D
-	.string "{STRING 16}\n"
+	.string "{B_DEF_NAME_WITH_PREFIX}\n"
 	.string "fell in love!$"
 
 gUnknown_83FB8AE:: @ 83FB8AE
-	.string "{STRING 15} is in love\n"
-	.string "with {STRING 19}!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} is in love\n"
+	.string "with {B_SCR_ACTIVE_NAME_WITH_PREFIX}!$"
 
 gUnknown_83FB8C5:: @ 83FB8C5
-	.string "{STRING 15} is\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} is\n"
 	.string "immobilized by love!$"
 
 gUnknown_83FB8E0:: @ 83FB8E0
-	.string "{STRING 16} was\n"
+	.string "{B_DEF_NAME_WITH_PREFIX} was\n"
 	.string "blown away!$"
 
 gUnknown_83FB8F3:: @ 83FB8F3
-	.string "{STRING 15} transformed\n"
-	.string "into the {STRING 00} type!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} transformed\n"
+	.string "into the {B_BUFF1} type!$"
 
 gUnknown_83FB914:: @ 83FB914
-	.string "{STRING 15} flinched!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} flinched!$"
 
 gUnknown_83FB921:: @ 83FB921
-	.string "{STRING 16} regained\n"
+	.string "{B_DEF_NAME_WITH_PREFIX} regained\n"
 	.string "health!$"
 
 gUnknown_83FB935:: @ 83FB935
-	.string "{STRING 16}'s\n"
+	.string "{B_DEF_NAME_WITH_PREFIX}'s\n"
 	.string "HP is full!$"
 
 gUnknown_83FB946:: @ 83FB946
-	.string "{STRING 42}'s {STRING 20}\n"
+	.string "{B_ATK_PREFIX2}'s {B_CURRENT_MOVE}\n"
 	.string "raised SP. DEF!$"
 
 gUnknown_83FB95E:: @ 83FB95E
-	.string "{STRING 42}'s {STRING 20}\n"
+	.string "{B_ATK_PREFIX2}'s {B_CURRENT_MOVE}\n"
 	.string "raised SP. DEF a little!$"
 
 gUnknown_83FB97F:: @ 83FB97F
-	.string "{STRING 42}'s {STRING 20}\n"
+	.string "{B_ATK_PREFIX2}'s {B_CURRENT_MOVE}\n"
 	.string "raised DEFENSE!$"
 
 gUnknown_83FB997:: @ 83FB997
-	.string "{STRING 42}'s {STRING 20}\n"
+	.string "{B_ATK_PREFIX2}'s {B_CURRENT_MOVE}\n"
 	.string "raised DEFENSE a little!$"
 
 gUnknown_83FB9B8:: @ 83FB9B8
-	.string "{STRING 42}'s party is covered\n"
+	.string "{B_ATK_PREFIX2}'s party is covered\n"
 	.string "by a veil!$"
 
 gUnknown_83FB9D9:: @ 83FB9D9
-	.string "{STRING 16}'s party is protected\n"
+	.string "{B_DEF_NAME_WITH_PREFIX}'s party is protected\n"
 	.string "by SAFEGUARD!$"
 
 gUnknown_83FB9FF:: @ 83FB9FF
-	.string "{STRING 44}'s party is no longer\n"
+	.string "{B_ATK_PREFIX3}'s party is no longer\n"
 	.string "protected by SAFEGUARD!$"
 
 gUnknown_83FBA2F:: @ 83FBA2F
-	.string "{STRING 15} went\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} went\n"
 	.string "to sleep!$"
 
 gUnknown_83FBA41:: @ 83FBA41
-	.string "{STRING 15} slept and\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} slept and\n"
 	.string "became healthy!$"
 
 gUnknown_83FBA5E:: @ 83FBA5E
-	.string "{STRING 15} whipped\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} whipped\n"
 	.string "up a whirlwind!$"
 
 gUnknown_83FBA79:: @ 83FBA79
-	.string "{STRING 15} took\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} took\n"
 	.string "in sunlight!$"
 
 gUnknown_83FBA8E:: @ 83FBA8E
-	.string "{STRING 15} lowered\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} lowered\n"
 	.string "its head!$"
 
 gUnknown_83FBAA3:: @ 83FBAA3
-	.string "{STRING 15} is glowing!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} is glowing!$"
 
 gUnknown_83FBAB2:: @ 83FBAB2
-	.string "{STRING 15} flew\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} flew\n"
 	.string "up high!$"
 
 gUnknown_83FBAC3:: @ 83FBAC3
-	.string "{STRING 15} dug a hole!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} dug a hole!$"
 
 gUnknown_83FBAD2:: @ 83FBAD2
-	.string "{STRING 15} hid\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} hid\n"
 	.string "underwater!$"
 
 gUnknown_83FBAE5:: @ 83FBAE5
-	.string "{STRING 15} sprang up!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} sprang up!$"
 
 gUnknown_83FBAF3:: @ 83FBAF3
-	.string "{STRING 16} was squeezed by\n"
-	.string "{STRING 15}'s BIND!$"
+	.string "{B_DEF_NAME_WITH_PREFIX} was squeezed by\n"
+	.string "{B_ATK_NAME_WITH_PREFIX}'s BIND!$"
 
 gUnknown_83FBB11:: @ 83FBB11
-	.string "{STRING 16} was trapped\n"
+	.string "{B_DEF_NAME_WITH_PREFIX} was trapped\n"
 	.string "in the vortex!$"
 
 gUnknown_83FBB2F:: @ 83FBB2F
-	.string "{STRING 16} was trapped\n"
+	.string "{B_DEF_NAME_WITH_PREFIX} was trapped\n"
 	.string "by SAND TOMB!$"
 
 gUnknown_83FBB4C:: @ 83FBB4C
-	.string "{STRING 16} was WRAPPED by\n"
-	.string "{STRING 15}!$"
+	.string "{B_DEF_NAME_WITH_PREFIX} was WRAPPED by\n"
+	.string "{B_ATK_NAME_WITH_PREFIX}!$"
 
 gUnknown_83FBB62:: @ 83FBB62
-	.string "{STRING 15} CLAMPED\n"
-	.string "{STRING 16}!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} CLAMPED\n"
+	.string "{B_DEF_NAME_WITH_PREFIX}!$"
 
 gUnknown_83FBB71:: @ 83FBB71
-	.string "{STRING 15} is hurt\n"
-	.string "by {STRING 00}!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} is hurt\n"
+	.string "by {B_BUFF1}!$"
 
 gUnknown_83FBB83:: @ 83FBB83
-	.string "{STRING 15} was freed\n"
-	.string "from {STRING 00}!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} was freed\n"
+	.string "from {B_BUFF1}!$"
 
 gUnknown_83FBB99:: @ 83FBB99
-	.string "{STRING 15} kept going\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} kept going\n"
 	.string "and crashed!$"
 
 BattleText_MistShroud:: @ 83FBBB4
-	.string "{STRING 42} became\n"
+	.string "{B_ATK_PREFIX2} became\n"
 	.string "shrouded in MIST!$"
 
 gUnknown_83FBBD0:: @ 83FBBD0
-	.string "{STRING 19} is protected\n"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX} is protected\n"
 	.string "by MIST!$"
 
 BattleText_GetPumped:: @ 83FBBE9
-	.string "{STRING 15} is getting\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} is getting\n"
 	.string "pumped!$"
 
 gUnknown_83FBBFF:: @ 83FBBFF
-	.string "{STRING 15} is hit\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} is hit\n"
 	.string "with recoil!$"
 
 gUnknown_83FBC16:: @ 83FBC16
-	.string "{STRING 15} protected\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} protected\n"
 	.string "itself!$"
 
 gUnknown_83FBC2B:: @ 83FBC2B
-	.string "{STRING 15} is buffeted\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} is buffeted\n"
 	.string "by the sandstorm!$"
 
 gUnknown_83FBC4C:: @ 83FBC4C
-	.string "{STRING 15} is pelted\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} is pelted\n"
 	.string "by HAIL!$"
 
 gUnknown_83FBC62:: @ 83FBC62
-	.string "{STRING 40}'s {STRING 00}\n"
+	.string "{B_ATK_PREFIX1}'s {B_BUFF1}\n"
 	.string "wore off!$"
 
 gUnknown_83FBC74:: @ 83FBC74
-	.string "{STRING 16} was seeded!$"
+	.string "{B_DEF_NAME_WITH_PREFIX} was seeded!$"
 
 gUnknown_83FBC83:: @ 83FBC83
-	.string "{STRING 16} evaded\n"
+	.string "{B_DEF_NAME_WITH_PREFIX} evaded\n"
 	.string "the attack!$"
 
 gUnknown_83FBC99:: @ 83FBC99
-	.string "{STRING 15}'s health is\n"
+	.string "{B_ATK_NAME_WITH_PREFIX}'s health is\n"
 	.string "sapped by LEECH SEED!$"
 
 gUnknown_83FBCBE:: @ 83FBCBE
-	.string "{STRING 15} is fast\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} is fast\n"
 	.string "asleep.$"
 
 gUnknown_83FBCD1:: @ 83FBCD1
-	.string "{STRING 15} woke up!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} woke up!$"
 
 gUnknown_83FBCDD:: @ 83FBCDD
-	.string "But {STRING 19}'s UPROAR\n"
+	.string "But {B_SCR_ACTIVE_NAME_WITH_PREFIX}'s UPROAR\n"
 	.string "kept it awake!$"
 
 gUnknown_83FBCFC:: @ 83FBCFC
-	.string "{STRING 15} woke up\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} woke up\n"
 	.string "in the UPROAR!$"
 
 gUnknown_83FBD16:: @ 83FBD16
-	.string "{STRING 15} caused\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} caused\n"
 	.string "an UPROAR!$"
 
 gUnknown_83FBD2B:: @ 83FBD2B
-	.string "{STRING 15} is making\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} is making\n"
 	.string "an UPROAR!$"
 
 gUnknown_83FBD43:: @ 83FBD43
-	.string "{STRING 15} calmed down.$"
+	.string "{B_ATK_NAME_WITH_PREFIX} calmed down.$"
 
 gUnknown_83FBD53:: @ 83FBD53
-	.string "But {STRING 16} can't\n"
+	.string "But {B_DEF_NAME_WITH_PREFIX} can't\n"
 	.string "sleep in an UPROAR!$"
 
 gUnknown_83FBD74:: @ 83FBD74
-	.string "{STRING 15} STOCKPILED\n"
-	.string "{STRING 00}!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} STOCKPILED\n"
+	.string "{B_BUFF1}!$"
 
 gUnknown_83FBD86:: @ 83FBD86
-	.string "{STRING 15} can't\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} can't\n"
 	.string "STOCKPILE any more!$"
 
 gUnknown_83FBDA3:: @ 83FBDA3
-	.string "But {STRING 16} can't\n"
+	.string "But {B_DEF_NAME_WITH_PREFIX} can't\n"
 	.string "sleep in an UPROAR!$"
 
 gUnknown_83FBDC4:: @ 83FBDC4
 	.string "But the UPROAR kept\n"
-	.string "{STRING 16} awake!$"
+	.string "{B_DEF_NAME_WITH_PREFIX} awake!$"
 
 gUnknown_83FBDE2:: @ 83FBDE2
-	.string "{STRING 16} stayed awake\n"
-	.string "using its {STRING 25}!$"
+	.string "{B_DEF_NAME_WITH_PREFIX} stayed awake\n"
+	.string "using its {B_DEF_ABILITY}!$"
 
 gUnknown_83FBE00:: @ 83FBE00
-	.string "{STRING 15} is storing\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} is storing\n"
 	.string "energy!$"
 
 gUnknown_83FBE16:: @ 83FBE16
-	.string "{STRING 15} unleashed\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} unleashed\n"
 	.string "energy!$"
 
 gUnknown_83FBE2B:: @ 83FBE2B
-	.string "{STRING 15} became\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} became\n"
 	.string "confused due to fatigue!$"
 
 gUnknown_83FBE4E:: @ 83FBE4E
-	.string "{STRING 35} picked up\n"
-	.string "¥{STRING 00}!\p"
+	.string "{B_PLAYER_NAME} picked up\n"
+	.string "¥{B_BUFF1}!\p"
 	.string "$"
 
 gUnknown_83FBE61:: @ 83FBE61
-	.string "{STRING 16} is\n"
+	.string "{B_DEF_NAME_WITH_PREFIX} is\n"
 	.string "unaffected!$"
 
 gUnknown_83FBE73:: @ 83FBE73
-	.string "{STRING 15} transformed\n"
-	.string "into {STRING 00}!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} transformed\n"
+	.string "into {B_BUFF1}!$"
 
 gUnknown_83FBE8B:: @ 83FBE8B
-	.string "{STRING 15} made\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} made\n"
 	.string "a SUBSTITUTE!$"
 
 gUnknown_83FBEA1:: @ 83FBEA1
-	.string "{STRING 15} already\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} already\n"
 	.string "has a SUBSTITUTE!$"
 
 gUnknown_83FBEBE:: @ 83FBEBE
 	.string "The SUBSTITUTE took damage\n"
-	.string "for {STRING 16}!\p"
+	.string "for {B_DEF_NAME_WITH_PREFIX}!\p"
 	.string "$"
 
 gUnknown_83FBEE2:: @ 83FBEE2
-	.string "{STRING 16}'s\n"
+	.string "{B_DEF_NAME_WITH_PREFIX}'s\n"
 	.string "SUBSTITUTE faded!\p"
 	.string "$"
 
 gUnknown_83FBEFA:: @ 83FBEFA
-	.string "{STRING 15} must\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} must\n"
 	.string "recharge!$"
 
 gUnknown_83FBF0C:: @ 83FBF0C
-	.string "{STRING 16}'s RAGE\n"
+	.string "{B_DEF_NAME_WITH_PREFIX}'s RAGE\n"
 	.string "is building!$"
 
 gUnknown_83FBF23:: @ 83FBF23
-	.string "{STRING 16}'s {STRING 00}\n"
+	.string "{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\n"
 	.string "was disabled!$"
 
 gUnknown_83FBF39:: @ 83FBF39
-	.string "{STRING 15} is disabled\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} is disabled\n"
 	.string "no more!$"
 
 gUnknown_83FBF51:: @ 83FBF51
-	.string "{STRING 16} got\n"
+	.string "{B_DEF_NAME_WITH_PREFIX} got\n"
 	.string "an ENCORE!$"
 
 gUnknown_83FBF63:: @ 83FBF63
-	.string "{STRING 15}'s ENCORE\n"
+	.string "{B_ATK_NAME_WITH_PREFIX}'s ENCORE\n"
 	.string "ended!$"
 
 gUnknown_83FBF76:: @ 83FBF76
-	.string "{STRING 15} took aim\n"
-	.string "at {STRING 16}!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} took aim\n"
+	.string "at {B_DEF_NAME_WITH_PREFIX}!$"
 
 gUnknown_83FBF89:: @ 83FBF89
-	.string "{STRING 15} SKETCHED\n"
-	.string "{STRING 00}!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} SKETCHED\n"
+	.string "{B_BUFF1}!$"
 
 gUnknown_83FBF99:: @ 83FBF99
-	.string "{STRING 15} is trying\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} is trying\n"
 	.string "to take its foe with it!$"
 
 gUnknown_83FBFBF:: @ 83FBFBF
-	.string "{STRING 16} took\n"
-	.string "{STRING 15} with it!$"
+	.string "{B_DEF_NAME_WITH_PREFIX} took\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} with it!$"
 
 gUnknown_83FBFD3:: @ 83FBFD3
-	.string "Reduced {STRING 16}'s\n"
-	.string "{STRING 00} by {STRING 01}!$"
+	.string "Reduced {B_DEF_NAME_WITH_PREFIX}'s\n"
+	.string "{B_BUFF1} by {B_BUFF2}!$"
 
 gUnknown_83FBFEA:: @ 83FBFEA
-	.string "{STRING 15} stole\n"
-	.string "{STRING 16}'s {STRING 22}!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} stole\n"
+	.string "{B_DEF_NAME_WITH_PREFIX}'s {B_LAST_ITEM}!$"
 
 gUnknown_83FBFFC:: @ 83FBFFC
-	.string "{STRING 16} can't\n"
+	.string "{B_DEF_NAME_WITH_PREFIX} can't\n"
 	.string "escape now!$"
 
 gUnknown_83FC011:: @ 83FC011
-	.string "{STRING 16} fell into\n"
+	.string "{B_DEF_NAME_WITH_PREFIX} fell into\n"
 	.string "a NIGHTMARE!$"
 
 gUnknown_83FC02B:: @ 83FC02B
-	.string "{STRING 15} is locked\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} is locked\n"
 	.string "in a NIGHTMARE!$"
 
 gUnknown_83FC048:: @ 83FC048
-	.string "{STRING 15} cut its own HP and\n"
-	.string "laid a CURSE on {STRING 16}!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} cut its own HP and\n"
+	.string "laid a CURSE on {B_DEF_NAME_WITH_PREFIX}!$"
 
 gUnknown_83FC072:: @ 83FC072
-	.string "{STRING 15} is afflicted\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} is afflicted\n"
 	.string "by the CURSE!$"
 
 gUnknown_83FC090:: @ 83FC090
@@ -638,178 +638,178 @@ gUnknown_83FC090:: @ 83FC090
 	.string "the opponent's side!$"
 
 gUnknown_83FC0C6:: @ 83FC0C6
-	.string "{STRING 19} is hurt\n"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX} is hurt\n"
 	.string "by SPIKES!$"
 
 gUnknown_83FC0DC:: @ 83FC0DC
-	.string "{STRING 15} identified\n"
-	.string "{STRING 16}!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} identified\n"
+	.string "{B_DEF_NAME_WITH_PREFIX}!$"
 
 gUnknown_83FC0EE:: @ 83FC0EE
-	.string "{STRING 15}'s PERISH count\n"
-	.string "fell to {STRING 00}!$"
+	.string "{B_ATK_NAME_WITH_PREFIX}'s PERISH count\n"
+	.string "fell to {B_BUFF1}!$"
 
 gUnknown_83FC10C:: @ 83FC10C
-	.string "{STRING 15} braced\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} braced\n"
 	.string "itself!$"
 
 gUnknown_83FC11E:: @ 83FC11E
-	.string "{STRING 16} ENDURED\n"
+	.string "{B_DEF_NAME_WITH_PREFIX} ENDURED\n"
 	.string "the hit!$"
 
 gUnknown_83FC132:: @ 83FC132
-	.string "MAGNITUDE {STRING 00}!$"
+	.string "MAGNITUDE {B_BUFF1}!$"
 
 gUnknown_83FC140:: @ 83FC140
-	.string "{STRING 15} cut its own HP\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} cut its own HP\n"
 	.string "and maximized ATTACK!$"
 
 gUnknown_83FC168:: @ 83FC168
-	.string "{STRING 15} copied\n"
-	.string "{STRING 16}'s stat changes!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} copied\n"
+	.string "{B_DEF_NAME_WITH_PREFIX}'s stat changes!$"
 
 gUnknown_83FC185:: @ 83FC185
-	.string "{STRING 15} got free of\n"
-	.string "{STRING 16}'s {STRING 00}!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} got free of\n"
+	.string "{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}!$"
 
 gUnknown_83FC19D:: @ 83FC19D
-	.string "{STRING 15} shed\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} shed\n"
 	.string "LEECH SEED!$"
 
 gUnknown_83FC1B1:: @ 83FC1B1
-	.string "{STRING 15} blew away\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} blew away\n"
 	.string "SPIKES!$"
 
 gUnknown_83FC1C6:: @ 83FC1C6
-	.string "{STRING 15} fled from\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} fled from\n"
 	.string "battle!$"
 
 gUnknown_83FC1DB:: @ 83FC1DB
-	.string "{STRING 15} foresaw\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} foresaw\n"
 	.string "an attack!$"
 
 gUnknown_83FC1F1:: @ 83FC1F1
-	.string "{STRING 16} took the\n"
-	.string "{STRING 00} attack!$"
+	.string "{B_DEF_NAME_WITH_PREFIX} took the\n"
+	.string "{B_BUFF1} attack!$"
 
 gUnknown_83FC208:: @ 83FC208
-	.string "{STRING 15} chose\n"
-	.string "{STRING 20} as its destiny!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} chose\n"
+	.string "{B_CURRENT_MOVE} as its destiny!$"
 
 gUnknown_83FC224:: @ 83FC224
-	.string "{STRING 00}'s attack!$"
+	.string "{B_BUFF1}'s attack!$"
 
 gUnknown_83FC231:: @ 83FC231
-	.string "{STRING 15} became the\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} became the\n"
 	.string "center of attention!$"
 
 gUnknown_83FC254:: @ 83FC254
-	.string "{STRING 15} began\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} began\n"
 	.string "charging power!$"
 
 gUnknown_83FC26D:: @ 83FC26D
 	.string "NATURE POWER turned into\n"
-	.string "{STRING 20}!$"
+	.string "{B_CURRENT_MOVE}!$"
 
 gUnknown_83FC28A:: @ 83FC28A
-	.string "{STRING 15}'s status\n"
+	.string "{B_ATK_NAME_WITH_PREFIX}'s status\n"
 	.string "returned to normal!$"
 
 gUnknown_83FC2AA:: @ 83FC2AA
-	.string "{STRING 16} was subjected\n"
+	.string "{B_DEF_NAME_WITH_PREFIX} was subjected\n"
 	.string "to TORMENT!$"
 
 gUnknown_83FC2C7:: @ 83FC2C7
-	.string "{STRING 15} is tightening\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} is tightening\n"
 	.string "its focus!$"
 
 gUnknown_83FC2E3:: @ 83FC2E3
-	.string "{STRING 16} fell for\n"
+	.string "{B_DEF_NAME_WITH_PREFIX} fell for\n"
 	.string "the TAUNT!$"
 
 gUnknown_83FC2FA:: @ 83FC2FA
-	.string "{STRING 15} is ready to\n"
-	.string "help {STRING 16}!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} is ready to\n"
+	.string "help {B_DEF_NAME_WITH_PREFIX}!$"
 
 gUnknown_83FC312:: @ 83FC312
-	.string "{STRING 15} switched\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} switched\n"
 	.string "items with its opponent!$"
 
 gUnknown_83FC337:: @ 83FC337
-	.string "{STRING 15} obtained\n"
-	.string "{STRING 00}.$"
+	.string "{B_ATK_NAME_WITH_PREFIX} obtained\n"
+	.string "{B_BUFF1}.$"
 
 gUnknown_83FC347:: @ 83FC347
-	.string "{STRING 16} obtained\n"
-	.string "{STRING 01}.$"
+	.string "{B_DEF_NAME_WITH_PREFIX} obtained\n"
+	.string "{B_BUFF2}.$"
 
 gUnknown_83FC357:: @ 83FC357
-	.string "{STRING 15} obtained\n"
-	.string "{STRING 00}.\p"
-	.string "{STRING 16} obtained\n"
-	.string "{STRING 01}.$"
+	.string "{B_ATK_NAME_WITH_PREFIX} obtained\n"
+	.string "{B_BUFF1}.\p"
+	.string "{B_DEF_NAME_WITH_PREFIX} obtained\n"
+	.string "{B_BUFF2}.$"
 
 gUnknown_83FC377:: @ 83FC377
-	.string "{STRING 15} copied\n"
-	.string "{STRING 16}'s {STRING 25}!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} copied\n"
+	.string "{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}!$"
 
 gUnknown_83FC38A:: @ 83FC38A
-	.string "{STRING 15} made a WISH!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} made a WISH!$"
 
 gUnknown_83FC39A:: @ 83FC39A
-	.string "{STRING 00}'s WISH\n"
+	.string "{B_BUFF1}'s WISH\n"
 	.string "came true!$"
 
 gUnknown_83FC3AF:: @ 83FC3AF
-	.string "{STRING 15} planted its roots!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} planted its roots!$"
 
 gUnknown_83FC3C5:: @ 83FC3C5
-	.string "{STRING 15} absorbed\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} absorbed\n"
 	.string "nutrients with its roots!$"
 
 gUnknown_83FC3EB:: @ 83FC3EB
-	.string "{STRING 16} anchored\n"
+	.string "{B_DEF_NAME_WITH_PREFIX} anchored\n"
 	.string "itself with its roots!$"
 
 gUnknown_83FC40E:: @ 83FC40E
-	.string "{STRING 15} made\n"
-	.string "{STRING 16} drowsy!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} made\n"
+	.string "{B_DEF_NAME_WITH_PREFIX} drowsy!$"
 
 gUnknown_83FC421:: @ 83FC421
-	.string "{STRING 15} knocked off\n"
-	.string "{STRING 16}'s {STRING 22}!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} knocked off\n"
+	.string "{B_DEF_NAME_WITH_PREFIX}'s {B_LAST_ITEM}!$"
 
 gUnknown_83FC439:: @ 83FC439
-	.string "{STRING 15} swapped abilities\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} swapped abilities\n"
 	.string "with its opponent!$"
 
 gUnknown_83FC461:: @ 83FC461
-	.string "{STRING 15} sealed the\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} sealed the\n"
 	.string "opponent's moveシsス!$"
 
 gUnknown_83FC483:: @ 83FC483
-	.string "{STRING 15} wants the\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} wants the\n"
 	.string "opponent to bear a GRUDGE!$"
 
 gUnknown_83FC4AB:: @ 83FC4AB
-	.string "{STRING 15}'s {STRING 00} lost\n"
+	.string "{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1} lost\n"
 	.string "all its PP due to the GRUDGE!$"
 
 gUnknown_83FC4D6:: @ 83FC4D6
-	.string "{STRING 15} shrouded\n"
-	.string "itself in {STRING 20}!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} shrouded\n"
+	.string "itself in {B_CURRENT_MOVE}!$"
 
 gUnknown_83FC4F0:: @ 83FC4F0
-	.string "{STRING 15}'s {STRING 20}\n"
+	.string "{B_ATK_NAME_WITH_PREFIX}'s {B_CURRENT_MOVE}\n"
 	.string "was bounced back by MAGIC COAT!$"
 
 gUnknown_83FC518:: @ 83FC518
-	.string "{STRING 15} waits for its foe\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} waits for its foe\n"
 	.string "to make a move!$"
 
 gUnknown_83FC53D:: @ 83FC53D
-	.string "{STRING 16} SNATCHED\n"
-	.string "{STRING 19}'s move!$"
+	.string "{B_DEF_NAME_WITH_PREFIX} SNATCHED\n"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s move!$"
 
 gUnknown_83FC554:: @ 83FC554
 	.string "Electricity's power was\n"
@@ -820,8 +820,8 @@ gUnknown_83FC576:: @ 83FC576
 	.string "weakened!$"
 
 gUnknown_83FC591:: @ 83FC591
-	.string "{STRING 15} found\n"
-	.string "one {STRING 22}!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} found\n"
+	.string "one {B_LAST_ITEM}!$"
 
 gUnknown_83FC5A2:: @ 83FC5A2
 	.string "A soothing aroma wafted\n"
@@ -831,19 +831,19 @@ gUnknown_83FC5CC:: @ 83FC5CC
 	.string "Items can't be used now.{PAUSE 64}$"
 
 gUnknown_83FC5E8:: @ 83FC5E8
-	.string "For {STRING 19},\n"
-	.string "{STRING 22} {STRING 00}$"
+	.string "For {B_SCR_ACTIVE_NAME_WITH_PREFIX},\n"
+	.string "{B_LAST_ITEM} {B_BUFF1}$"
 
 gUnknown_83FC5F6:: @ 83FC5F6
-	.string "{STRING 19} used\n"
-	.string "{STRING 22} to hustle!$"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX} used\n"
+	.string "{B_LAST_ITEM} to hustle!$"
 
 gUnknown_83FC60C:: @ 83FC60C
-	.string "{STRING 15} lost its\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} lost its\n"
 	.string "focus and couldn't move!$"
 
 gUnknown_83FC631:: @ 83FC631
-	.string "{STRING 16} was\n"
+	.string "{B_DEF_NAME_WITH_PREFIX} was\n"
 	.string "dragged out!\p"
 	.string "$"
 
@@ -854,183 +854,183 @@ gUnknown_83FC65A:: @ 83FC65A
 	.string "But it had no effect!$"
 
 gUnknown_83FC670:: @ 83FC670
-	.string "{STRING 18} has no\n"
+	.string "{B_ACTIVE_NAME_WITH_PREFIX} has no\n"
 	.string "moves left!\p"
 	.string "$"
 
 gUnknown_83FC687:: @ 83FC687
-	.string "{STRING 18}'s {STRING 20}\n"
+	.string "{B_ACTIVE_NAME_WITH_PREFIX}'s {B_CURRENT_MOVE}\n"
 	.string "is disabled!\p"
 	.string "$"
 
 gUnknown_83FC69D:: @ 83FC69D
-	.string "{STRING 18} can't use the same\n"
+	.string "{B_ACTIVE_NAME_WITH_PREFIX} can't use the same\n"
 	.string "move in a row due to the TORMENT!\p"
 	.string "$"
 
 gUnknown_83FC6D6:: @ 83FC6D6
-	.string "{STRING 18} can't use\n"
-	.string "{STRING 20} after the TAUNT!\p"
+	.string "{B_ACTIVE_NAME_WITH_PREFIX} can't use\n"
+	.string "{B_CURRENT_MOVE} after the TAUNT!\p"
 	.string "$"
 
 gUnknown_83FC6F8:: @ 83FC6F8
-	.string "{STRING 18} can't use the\n"
-	.string "sealed {STRING 20}!\p"
+	.string "{B_ACTIVE_NAME_WITH_PREFIX} can't use the\n"
+	.string "sealed {B_CURRENT_MOVE}!\p"
 	.string "$"
 
 gUnknown_83FC715:: @ 83FC715
-	.string "{STRING 19}'s {STRING 26}\n"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\n"
 	.string "made it rain!$"
 
 gUnknown_83FC72B:: @ 83FC72B
-	.string "{STRING 19}'s {STRING 26}\n"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\n"
 	.string "raised its SPEED!$"
 
 gUnknown_83FC745:: @ 83FC745
-	.string "{STRING 16} was protected\n"
-	.string "by {STRING 25}!$"
+	.string "{B_DEF_NAME_WITH_PREFIX} was protected\n"
+	.string "by {B_DEF_ABILITY}!$"
 
 gUnknown_83FC75D:: @ 83FC75D
-	.string "{STRING 16}'s {STRING 25}\n"
-	.string "prevents {STRING 15}\l"
-	.string "from using {STRING 20}!$"
+	.string "{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\n"
+	.string "prevents {B_ATK_NAME_WITH_PREFIX}\l"
+	.string "from using {B_CURRENT_MOVE}!$"
 
 gUnknown_83FC780:: @ 83FC780
-	.string "{STRING 16} restored HP\n"
-	.string "using its {STRING 25}!$"
+	.string "{B_DEF_NAME_WITH_PREFIX} restored HP\n"
+	.string "using its {B_DEF_ABILITY}!$"
 
 gUnknown_83FC79D:: @ 83FC79D
-	.string "{STRING 16}'s {STRING 25}\n"
-	.string "made {STRING 20} useless!$"
+	.string "{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\n"
+	.string "made {B_CURRENT_MOVE} useless!$"
 
 gUnknown_83FC7B6:: @ 83FC7B6
-	.string "{STRING 16}'s {STRING 25}\n"
-	.string "made it the {STRING 00} type!$"
+	.string "{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\n"
+	.string "made it the {B_BUFF1} type!$"
 
 gUnknown_83FC7D3:: @ 83FC7D3
-	.string "{STRING 17}'s {STRING 25}\n"
+	.string "{B_EFF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\n"
 	.string "prevents paralysis!$"
 
 gUnknown_83FC7EF:: @ 83FC7EF
-	.string "{STRING 16}'s {STRING 25}\n"
+	.string "{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\n"
 	.string "prevents romance!$"
 
 gUnknown_83FC809:: @ 83FC809
-	.string "{STRING 17}'s {STRING 25}\n"
+	.string "{B_EFF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\n"
 	.string "prevents poisoning!$"
 
 gUnknown_83FC825:: @ 83FC825
-	.string "{STRING 16}'s {STRING 25}\n"
+	.string "{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\n"
 	.string "prevents confusion!$"
 
 gUnknown_83FC841:: @ 83FC841
-	.string "{STRING 16}'s {STRING 25}\n"
+	.string "{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\n"
 	.string "raised its FIRE power!$"
 
 gUnknown_83FC860:: @ 83FC860
-	.string "{STRING 16} anchors\n"
-	.string "itself with {STRING 25}!$"
+	.string "{B_DEF_NAME_WITH_PREFIX} anchors\n"
+	.string "itself with {B_DEF_ABILITY}!$"
 
 gUnknown_83FC87B:: @ 83FC87B
-	.string "{STRING 19}'s {STRING 26}\n"
-	.string "cuts {STRING 16}'s ATTACK!$"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\n"
+	.string "cuts {B_DEF_NAME_WITH_PREFIX}'s ATTACK!$"
 
 gUnknown_83FC895:: @ 83FC895
-	.string "{STRING 19}'s {STRING 26}\n"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\n"
 	.string "prevents stat loss!$"
 
 gUnknown_83FC8B1:: @ 83FC8B1
-	.string "{STRING 16}'s {STRING 25}\n"
-	.string "hurt {STRING 15}!$"
+	.string "{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\n"
+	.string "hurt {B_ATK_NAME_WITH_PREFIX}!$"
 
 gUnknown_83FC8C2:: @ 83FC8C2
-	.string "{STRING 19} TRACED\n"
-	.string "{STRING 00}'s {STRING 01}!$"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX} TRACED\n"
+	.string "{B_BUFF1}'s {B_BUFF2}!$"
 
 gUnknown_83FC8D5:: @ 83FC8D5
-	.string "{STRING 17}'s {STRING 27}\n"
+	.string "{B_EFF_NAME_WITH_PREFIX}'s {B_EFF_ABILITY}\n"
 	.string "prevents burns!$"
 
 gUnknown_83FC8ED:: @ 83FC8ED
-	.string "{STRING 16}'s {STRING 25}\n"
-	.string "blocks {STRING 20}!$"
+	.string "{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\n"
+	.string "blocks {B_CURRENT_MOVE}!$"
 
 gUnknown_83FC900:: @ 83FC900
-	.string "{STRING 19}'s {STRING 26}\n"
-	.string "blocks {STRING 20}!$"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\n"
+	.string "blocks {B_CURRENT_MOVE}!$"
 
 gUnknown_83FC913:: @ 83FC913
-	.string "{STRING 15}'s {STRING 24}\n"
+	.string "{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}\n"
 	.string "restored its HP a little!$"
 
 gUnknown_83FC935:: @ 83FC935
-	.string "{STRING 19}'s {STRING 26}\n"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\n"
 	.string "whipped up a sandstorm!$"
 
 gUnknown_83FC955:: @ 83FC955
-	.string "{STRING 19}'s {STRING 26}\n"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\n"
 	.string "intensified the sun's rays!$"
 
 gUnknown_83FC979:: @ 83FC979
-	.string "{STRING 19}'s {STRING 26}\n"
-	.string "prevents {STRING 00} loss!$"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\n"
+	.string "prevents {B_BUFF1} loss!$"
 
 gUnknown_83FC993:: @ 83FC993
-	.string "{STRING 16}'s {STRING 25}\n"
-	.string "infatuated {STRING 15}!$"
+	.string "{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\n"
+	.string "infatuated {B_ATK_NAME_WITH_PREFIX}!$"
 
 gUnknown_83FC9AA:: @ 83FC9AA
-	.string "{STRING 16}'s {STRING 25}\n"
-	.string "made {STRING 20} ineffective!$"
+	.string "{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\n"
+	.string "made {B_CURRENT_MOVE} ineffective!$"
 
 gUnknown_83FC9C7:: @ 83FC9C7
-	.string "{STRING 19}'s {STRING 26}\n"
-	.string "cured its {STRING 00} problem!$"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\n"
+	.string "cured its {B_BUFF1} problem!$"
 
 gUnknown_83FC9E5:: @ 83FC9E5
 	.string "It sucked up the\n"
 	.string "LIQUID OOZE!$"
 
 gUnknown_83FCA03:: @ 83FCA03
-	.string "{STRING 19} transformed!$"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX} transformed!$"
 
 gUnknown_83FCA13:: @ 83FCA13
-	.string "{STRING 16}'s {STRING 25}\n"
+	.string "{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\n"
 	.string "took the attack!$"
 
 gText_PkmnsXPreventsSwitching:: @ 83FCA2C
-	.string "{STRING 00}'s {STRING 23}\n"
+	.string "{B_BUFF1}'s {B_LAST_ABILITY}\n"
 	.string "prevents switching!\p"
 	.string "$"
 
 gUnknown_83FCA49:: @ 83FCA49
-	.string "{STRING 16}'s {STRING 25}\n"
-	.string "prevented {STRING 19}'s\l"
-	.string "{STRING 00} from working!$"
+	.string "{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\n"
+	.string "prevented {B_SCR_ACTIVE_NAME_WITH_PREFIX}'s\l"
+	.string "{B_BUFF1} from working!$"
 
 gUnknown_83FCA71:: @ 83FCA71
-	.string "{STRING 19}'s {STRING 26}\n"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\n"
 	.string "made it ineffective!$"
 
 gUnknown_83FCA8E:: @ 83FCA8E
-	.string "{STRING 17}'s {STRING 27}\n"
+	.string "{B_EFF_NAME_WITH_PREFIX}'s {B_EFF_ABILITY}\n"
 	.string "prevents flinching!$"
 
 gUnknown_83FCAAA:: @ 83FCAAA
-	.string "{STRING 15}'s {STRING 24}\n"
-	.string "prevents {STRING 16}'s\l"
-	.string "{STRING 25} from working!$"
+	.string "{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}\n"
+	.string "prevents {B_DEF_NAME_WITH_PREFIX}'s\l"
+	.string "{B_DEF_ABILITY} from working!$"
 
 gUnknown_83FCAD1:: @ 83FCAD1
-	.string "{STRING 19}'s {STRING 26}\n"
-	.string "cured its {STRING 00} problem!$"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\n"
+	.string "cured its {B_BUFF1} problem!$"
 
 gUnknown_83FCAEF:: @ 83FCAEF
-	.string "{STRING 19}'s {STRING 26}\n"
-	.string "had no effect on {STRING 17}!$"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\n"
+	.string "had no effect on {B_EFF_NAME_WITH_PREFIX}!$"
 
 gUnknown_83FCB0C:: @ 83FCB0C
-	.string "{STRING 15} is too scared to move!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} is too scared to move!$"
 
 gUnknown_83FCB26:: @ 83FCB26
 	.string "GHOST: Get out…… Get out……$"
@@ -1048,31 +1048,31 @@ gUnknown_83FCB59:: @ 83FCB59
 	.string "fell!$"
 
 gUnknown_83FCB5F:: @ 83FCB5F
-	.string "{STRING 15}'s {STRING 00}\n"
-	.string "{STRING 01}$"
+	.string "{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1}\n"
+	.string "{B_BUFF2}$"
 
 BattleText_UnknownString3:: @ 83FCB6A
-	.string "{STRING 16}'s {STRING 00}\n"
-	.string "{STRING 01}$"
+	.string "{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\n"
+	.string "{B_BUFF2}$"
 
 gUnknown_83FCB75:: @ 83FCB75
-	.string "Using {STRING 22}, the {STRING 00}\n"
-	.string "of {STRING 19} {STRING 01}$"
+	.string "Using {B_LAST_ITEM}, the {B_BUFF1}\n"
+	.string "of {B_SCR_ACTIVE_NAME_WITH_PREFIX} {B_BUFF2}$"
 
 gUnknown_83FCB8F:: @ 83FCB8F
-	.string "{STRING 15}'s {STRING 00}\n"
-	.string "{STRING 01}$"
+	.string "{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1}\n"
+	.string "{B_BUFF2}$"
 
 gUnknown_83FCB9A:: @ 83FCB9A
-	.string "{STRING 16}'s {STRING 00}\n"
-	.string "{STRING 01}$"
+	.string "{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\n"
+	.string "{B_BUFF2}$"
 
 gUnknown_83FCBA5:: @ 83FCBA5
-	.string "{STRING 15}'s stats won't\n"
+	.string "{B_ATK_NAME_WITH_PREFIX}'s stats won't\n"
 	.string "go any higher!$"
 
 gUnknown_83FCBC5:: @ 83FCBC5
-	.string "{STRING 16}'s stats won't\n"
+	.string "{B_DEF_NAME_WITH_PREFIX}'s stats won't\n"
 	.string "go any lower!$"
 
 gUnknown_83FCBE4:: @ 83FCBE4
@@ -1105,48 +1105,48 @@ gUnknown_83FCC8A:: @ 83FCC8A
 	.string "$"
 
 gUnknown_83FCCA0:: @ 83FCCA0
-	.string "{PLAY_SE SE_NIGERU}{STRING 15} fled\n"
-	.string "using its {STRING 22}!\p"
+	.string "{PLAY_SE SE_NIGERU}{B_ATK_NAME_WITH_PREFIX} fled\n"
+	.string "using its {B_LAST_ITEM}!\p"
 	.string "$"
 
 gUnknown_83FCCBB:: @ 83FCCBB
-	.string "{PLAY_SE SE_NIGERU}{STRING 15} fled\n"
-	.string "using {STRING 24}!\p"
+	.string "{PLAY_SE SE_NIGERU}{B_ATK_NAME_WITH_PREFIX} fled\n"
+	.string "using {B_ATK_ABILITY}!\p"
 	.string "$"
 
 gUnknown_83FCCD2:: @ 83FCCD2
-	.string "{PLAY_SE SE_NIGERU}Wild {STRING 00} fled!$"
+	.string "{PLAY_SE SE_NIGERU}Wild {B_BUFF1} fled!$"
 
 gUnknown_83FCCE4:: @ 83FCCE4
 	.string "Player defeated\n"
-	.string "{STRING 32}!$"
+	.string "{B_LINK_OPPONENT1_NAME}!$"
 
 gUnknown_83FCCF8:: @ 83FCCF8
-	.string "Player beat {STRING 32}\n"
-	.string "and {STRING 33}!$"
+	.string "Player beat {B_LINK_OPPONENT1_NAME}\n"
+	.string "and {B_LINK_OPPONENT2_NAME}!$"
 
 gUnknown_83FCD0F:: @ 83FCD0F
 	.string "Player lost against\n"
-	.string "{STRING 32}!$"
+	.string "{B_LINK_OPPONENT1_NAME}!$"
 
 gUnknown_83FCD27:: @ 83FCD27
-	.string "Player lost to {STRING 32}\n"
-	.string "and {STRING 33}!$"
+	.string "Player lost to {B_LINK_OPPONENT1_NAME}\n"
+	.string "and {B_LINK_OPPONENT2_NAME}!$"
 
 gUnknown_83FCD41:: @ 83FCD41
 	.string "Player battled to a draw against\n"
-	.string "{STRING 32}!$"
+	.string "{B_LINK_OPPONENT1_NAME}!$"
 
 gUnknown_83FCD66:: @ 83FCD66
 	.string "Player battled to a draw against\n"
-	.string "{STRING 32} and {STRING 33}!$"
+	.string "{B_LINK_OPPONENT1_NAME} and {B_LINK_OPPONENT2_NAME}!$"
 
 gUnknown_83FCD92:: @ 83FCD92
-	.string "{PLAY_SE SE_NIGERU}{STRING 32} fled!$"
+	.string "{PLAY_SE SE_NIGERU}{B_LINK_OPPONENT1_NAME} fled!$"
 
 gUnknown_83FCD9F:: @ 83FCD9F
-	.string "{PLAY_SE SE_NIGERU}{STRING 32} and\n"
-	.string "{STRING 33} fled!$"
+	.string "{PLAY_SE SE_NIGERU}{B_LINK_OPPONENT1_NAME} and\n"
+	.string "{B_LINK_OPPONENT2_NAME} fled!$"
 
 gUnknown_83FCDB3:: @ 83FCDB3
 	.string "No! There's no running\n"
@@ -1259,63 +1259,63 @@ gUnknown_83FD0CA:: @ 83FD0CA
 	.string "for the move!$"
 
 gUnknown_83FD0F1:: @ 83FD0F1
-	.string "{STRING 15} ignored\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} ignored\n"
 	.string "orders while asleep!$"
 
 gUnknown_83FD111:: @ 83FD111
-	.string "{STRING 15} ignored\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} ignored\n"
 	.string "orders!$"
 
 gUnknown_83FD124:: @ 83FD124
-	.string "{STRING 15} began to nap!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} began to nap!$"
 
 gUnknown_83FD135:: @ 83FD135
-	.string "{STRING 15} is\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} is\n"
 	.string "loafing around!$"
 
 gUnknown_83FD14B:: @ 83FD14B
-	.string "{STRING 15} won't\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} won't\n"
 	.string "obey!$"
 
 gUnknown_83FD15A:: @ 83FD15A
-	.string "{STRING 15} turned away!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} turned away!$"
 
 gUnknown_83FD16A:: @ 83FD16A
-	.string "{STRING 15} pretended\n"
+	.string "{B_ATK_NAME_WITH_PREFIX} pretended\n"
 	.string "not to notice!$"
 
 gUnknown_83FD186:: @ 83FD186
-	.string "{STRING 28} {STRING 29} is\n"
-	.string "about to use {STRING 01}.\p"
-	.string "Will {STRING 35} change\n"
+	.string "{B_TRAINER1_CLASS} {B_TRAINER1_NAME} is\n"
+	.string "about to use {B_BUFF2}.\p"
+	.string "Will {B_PLAYER_NAME} change\n"
 	.string "POKéMON?$"
 
 gUnknown_83FD1B8:: @ 83FD1B8
-	.string "{STRING 15} learned\n"
-	.string "{STRING 00}!$"
+	.string "{B_ATK_NAME_WITH_PREFIX} learned\n"
+	.string "{B_BUFF1}!$"
 
 gUnknown_83FD1C7:: @ 83FD1C7
 	.string "Player defeated\n"
-	.string "{STRING 28} {STRING 29}!\p"
+	.string "{B_TRAINER1_CLASS} {B_TRAINER1_NAME}!\p"
 	.string "$"
 
 gUnknown_83FD1DF:: @ 83FD1DF
-	.string "{STRING 35} threw a ROCK\n"
-	.string "at the {STRING 06}!$"
+	.string "{B_PLAYER_NAME} threw a ROCK\n"
+	.string "at the {B_OPPONENT_MON1_NAME}!$"
 
 gUnknown_83FD1FA:: @ 83FD1FA
-	.string "{STRING 35} threw some BAIT\n"
-	.string "at the {STRING 06}!$"
+	.string "{B_PLAYER_NAME} threw some BAIT\n"
+	.string "at the {B_OPPONENT_MON1_NAME}!$"
 
 gUnknown_83FD218:: @ 83FD218
-	.string "{STRING 06} is watching\n"
+	.string "{B_OPPONENT_MON1_NAME} is watching\n"
 	.string "carefully!$"
 
 gUnknown_83FD232:: @ 83FD232
-	.string "{STRING 06} is angry!$"
+	.string "{B_OPPONENT_MON1_NAME} is angry!$"
 
 gUnknown_83FD23F:: @ 83FD23F
-	.string "{STRING 06} is eating!$"
+	.string "{B_OPPONENT_MON1_NAME} is eating!$"
 
 gUnknown_83FD24D:: @ 83FD24D
 	.string "{PLAY_SE SE_PINPON}ANNOUNCER: You're out of\n"
@@ -1323,19 +1323,19 @@ gUnknown_83FD24D:: @ 83FD24D
 	.string "$"
 
 gUnknown_83FD284:: @ 83FD284
-	.string "Wild {STRING 06} appeared!\p"
+	.string "Wild {B_OPPONENT_MON1_NAME} appeared!\p"
 	.string "$"
 
 gUnknown_83FD297:: @ 83FD297
-	.string "Wild {STRING 06} appeared!\p"
+	.string "Wild {B_OPPONENT_MON1_NAME} appeared!\p"
 	.string "$"
 
 gUnknown_83FD2AA:: @ 83FD2AA
-	.string "Wild {STRING 06} appeared!{PAUSE 127}$"
+	.string "Wild {B_OPPONENT_MON1_NAME} appeared!{PAUSE 127}$"
 
 gUnknown_83FD2BF:: @ 83FD2BF
-	.string "Wild {STRING 06} and\n"
-	.string "{STRING 08} appeared!\p"
+	.string "Wild {B_OPPONENT_MON1_NAME} and\n"
+	.string "{B_OPPONENT_MON2_NAME} appeared!\p"
 	.string "$"
 
 gUnknown_83FD2D9:: @ 83FD2D9
@@ -1358,100 +1358,100 @@ gUnknown_83FD34D:: @ 83FD34D
 	.string "$"
 
 gUnknown_83FD366:: @ 83FD366
-	.string "{STRING 28} {STRING 29}\n"
+	.string "{B_TRAINER1_CLASS} {B_TRAINER1_NAME}\n"
 	.string "would like to battle!\p"
 	.string "$"
 
 gUnknown_83FD383:: @ 83FD383
-	.string "{STRING 32}\n"
+	.string "{B_LINK_OPPONENT1_NAME}\n"
 	.string "wants to battle!$"
 
 gUnknown_83FD397:: @ 83FD397
-	.string "{STRING 32} and {STRING 33}\n"
+	.string "{B_LINK_OPPONENT1_NAME} and {B_LINK_OPPONENT2_NAME}\n"
 	.string "want to battle!$"
 
 gUnknown_83FD3B1:: @ 83FD3B1
-	.string "{STRING 28} {STRING 29} sent\n"
-	.string "out {STRING 06}!{PAUSE 60}$"
+	.string "{B_TRAINER1_CLASS} {B_TRAINER1_NAME} sent\n"
+	.string "out {B_OPPONENT_MON1_NAME}!{PAUSE 60}$"
 
 gUnknown_83FD3C7:: @ 83FD3C7
-	.string "{STRING 28} {STRING 29} sent\n"
-	.string "out {STRING 06} and {STRING 08}!{PAUSE 60}$"
+	.string "{B_TRAINER1_CLASS} {B_TRAINER1_NAME} sent\n"
+	.string "out {B_OPPONENT_MON1_NAME} and {B_OPPONENT_MON2_NAME}!{PAUSE 60}$"
 
 gUnknown_83FD3E4:: @ 83FD3E4
-	.string "{STRING 28} {STRING 29} sent\n"
-	.string "out {STRING 00}!$"
+	.string "{B_TRAINER1_CLASS} {B_TRAINER1_NAME} sent\n"
+	.string "out {B_BUFF1}!$"
 
 gUnknown_83FD3F7:: @ 83FD3F7
-	.string "{STRING 32} sent out\n"
-	.string "{STRING 06}!$"
+	.string "{B_LINK_OPPONENT1_NAME} sent out\n"
+	.string "{B_OPPONENT_MON1_NAME}!$"
 
 gUnknown_83FD407:: @ 83FD407
-	.string "{STRING 32} sent out\n"
-	.string "{STRING 06} and {STRING 08}!$"
+	.string "{B_LINK_OPPONENT1_NAME} sent out\n"
+	.string "{B_OPPONENT_MON1_NAME} and {B_OPPONENT_MON2_NAME}!$"
 
 gUnknown_83FD41E:: @ 83FD41E
-	.string "{STRING 32} sent out {STRING 10}!\n"
-	.string "{STRING 33} sent out {STRING 12}!$"
+	.string "{B_LINK_OPPONENT1_NAME} sent out {B_LINK_OPPONENT_MON1_NAME}!\n"
+	.string "{B_LINK_OPPONENT2_NAME} sent out {B_LINK_OPPONENT_MON2_NAME}!$"
 
 gUnknown_83FD43E:: @ 83FD43E
-	.string "{STRING 32} sent out\n"
-	.string "{STRING 00}!$"
+	.string "{B_LINK_OPPONENT1_NAME} sent out\n"
+	.string "{B_BUFF1}!$"
 
 gUnknown_83FD44E:: @ 83FD44E
-	.string "{STRING 34} sent out\n"
-	.string "{STRING 00}!$"
+	.string "{B_LINK_SCR_TRAINER_NAME} sent out\n"
+	.string "{B_BUFF1}!$"
 
 gUnknown_83FD45E:: @ 83FD45E
-	.string "Go! {STRING 05}!$"
+	.string "Go! {B_PLAYER_MON1_NAME}!$"
 
 gUnknown_83FD466:: @ 83FD466
-	.string "Go! {STRING 05} and\n"
-	.string "{STRING 07}!$"
+	.string "Go! {B_PLAYER_MON1_NAME} and\n"
+	.string "{B_PLAYER_MON2_NAME}!$"
 
 gUnknown_83FD475:: @ 83FD475
-	.string "Go! {STRING 00}!$"
+	.string "Go! {B_BUFF1}!$"
 
 gUnknown_83FD47D:: @ 83FD47D
-	.string "Do it! {STRING 00}!$"
+	.string "Do it! {B_BUFF1}!$"
 
 gUnknown_83FD488:: @ 83FD488
-	.string "Go for it, {STRING 00}!$"
+	.string "Go for it, {B_BUFF1}!$"
 
 gUnknown_83FD497:: @ 83FD497
 	.string "Your foe's weak!\n"
-	.string "Get 'em, {STRING 00}!$"
+	.string "Get 'em, {B_BUFF1}!$"
 
 gUnknown_83FD4B5:: @ 83FD4B5
-	.string "{STRING 31} sent out {STRING 11}!\n"
+	.string "{B_LINK_PARTNER_NAME} sent out {B_LINK_PLAYER_MON2_NAME}!\n"
 	.string "Go! {GOOD_TEAM}!$"
 
 gUnknown_83FD4CD:: @ 83FD4CD
-	.string "{STRING 00}, that's enough!\n"
+	.string "{B_BUFF1}, that's enough!\n"
 	.string "Come back!$"
 
 gUnknown_83FD4EB:: @ 83FD4EB
-	.string "{STRING 00}, come back!$"
+	.string "{B_BUFF1}, come back!$"
 
 gUnknown_83FD4FA:: @ 83FD4FA
-	.string "{STRING 00}, OK!\n"
+	.string "{B_BUFF1}, OK!\n"
 	.string "Come back!$"
 
 gUnknown_83FD50D:: @ 83FD50D
-	.string "{STRING 00}, good!\n"
+	.string "{B_BUFF1}, good!\n"
 	.string "Come back!$"
 
 gUnknown_83FD522:: @ 83FD522
-	.string "{STRING 28} {STRING 29}\n"
-	.string "withdrew {STRING 00}!$"
+	.string "{B_TRAINER1_CLASS} {B_TRAINER1_NAME}\n"
+	.string "withdrew {B_BUFF1}!$"
 
 gUnknown_83FD535:: @ 83FD535
-	.string "{STRING 32} withdrew\n"
-	.string "{STRING 00}!$"
+	.string "{B_LINK_OPPONENT1_NAME} withdrew\n"
+	.string "{B_BUFF1}!$"
 
 gUnknown_83FD545:: @ 83FD545
-	.string "{STRING 34} withdrew\n"
-	.string "{STRING 00}!$"
+	.string "{B_LINK_SCR_TRAINER_NAME} withdrew\n"
+	.string "{B_BUFF1}!$"
 
 gUnknown_83FD555:: @ 83FD555
 	.string "Wild $"
@@ -1478,8 +1478,8 @@ gUnknown_83FD576:: @ 83FD576
 	.string "Ally$"
 
 gUnknown_83FD57B:: @ 83FD57B
-	.string "{STRING 15} used\n"
-	.string "{STRING 01}$"
+	.string "{B_ATK_NAME_WITH_PREFIX} used\n"
+	.string "{B_BUFF2}$"
 
 gUnknown_83FD586:: @ 83FD586
 	.string "!$"
@@ -1555,20 +1555,20 @@ gUnknown_83FD63C:: @ 83FD63C
     .4byte gUnknown_83FD62B
 
 gUnknown_83FD650:: @ 83FD650
-	.string "{STRING 35} used\n"
-	.string "{STRING 22}!$"
+	.string "{B_PLAYER_NAME} used\n"
+	.string "{B_LAST_ITEM}!$"
 
 gUnknown_83FD65C:: @ 83FD65C
 	.string "The old man used\n"
-	.string "{STRING 22}!$"
+	.string "{B_LAST_ITEM}!$"
 
 gUnknown_83FD671:: @ 83FD671
 	.string "The POKé DUDE used\n"
-	.string "{STRING 22}!$"
+	.string "{B_LAST_ITEM}!$"
 
 gUnknown_83FD688:: @ 83FD688
-	.string "{STRING 28} {STRING 29}\n"
-	.string "used {STRING 22}!$"
+	.string "{B_TRAINER1_CLASS} {B_TRAINER1_NAME}\n"
+	.string "used {B_LAST_ITEM}!$"
 
 gUnknown_83FD697:: @ 83FD697
 	.string "The TRAINER blocked the BALL!$"
@@ -1605,20 +1605,20 @@ gUnknown_83FD78A:: @ 83FD78A
 
 gUnknown_83FD7A2:: @ 83FD7A2
 	.string "Gotcha!\n"
-	.string "{STRING 06} was caught!{WAIT_SE}{PLAY_BGM MUS_GET_YASEI}\p"
+	.string "{B_OPPONENT_MON1_NAME} was caught!{WAIT_SE}{PLAY_BGM MUS_GET_YASEI}\p"
 	.string "$"
 
 gUnknown_83FD7C0:: @ 83FD7C0
 	.string "Gotcha!\n"
-	.string "{STRING 06} was caught!{WAIT_SE}{PLAY_BGM MUS_GET_YASEI}{PAUSE 127}$"
+	.string "{B_OPPONENT_MON1_NAME} was caught!{WAIT_SE}{PLAY_BGM MUS_GET_YASEI}{PAUSE 127}$"
 
 gUnknown_83FD7E0:: @ 83FD7E0
 	.string "Give a nickname to the\n"
-	.string "captured {STRING 06}?$"
+	.string "captured {B_OPPONENT_MON1_NAME}?$"
 
 gUnknown_83FD804:: @ 83FD804
-	.string "{STRING 06} was sent to\n"
-	.string "{STRING 39} PC.$"
+	.string "{B_OPPONENT_MON1_NAME} was sent to\n"
+	.string "{B_PC_CREATOR_NAME} PC.$"
 
 gUnknown_83FD81A:: @ 83FD81A
 	.string "someone's$"
@@ -1627,7 +1627,7 @@ gUnknown_83FD824:: @ 83FD824
 	.string "BILL's$"
 
 gUnknown_83FD82B:: @ 83FD82B
-	.string "{STRING 06}'s data was\n"
+	.string "{B_OPPONENT_MON1_NAME}'s data was\n"
 	.string "added to the POKéDEX.\p"
 	.string "$"
 
@@ -1652,72 +1652,72 @@ gUnknown_83FD8B6:: @ 83FD8B6
 	.string "ナゾ$"
 
 gUnknown_83FD8B9:: @ 83FD8B9
-	.string "{STRING 19}'s {STRING 22}\n"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\n"
 	.string "cured paralysis!$"
 
 gUnknown_83FD8D2:: @ 83FD8D2
-	.string "{STRING 19}'s {STRING 22}\n"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\n"
 	.string "cured poison!$"
 
 gUnknown_83FD8E8:: @ 83FD8E8
-	.string "{STRING 19}'s {STRING 22}\n"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\n"
 	.string "healed its burn!$"
 
 gUnknown_83FD901:: @ 83FD901
-	.string "{STRING 19}'s {STRING 22}\n"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\n"
 	.string "defrosted it!$"
 
 gUnknown_83FD917:: @ 83FD917
-	.string "{STRING 19}'s {STRING 22}\n"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\n"
 	.string "woke it from its sleep!$"
 
 gUnknown_83FD937:: @ 83FD937
-	.string "{STRING 19}'s {STRING 22}\n"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\n"
 	.string "snapped it out of confusion!$"
 
 gUnknown_83FD95C:: @ 83FD95C
-	.string "{STRING 19}'s {STRING 22}\n"
-	.string "cured its {STRING 00} problem!$"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\n"
+	.string "cured its {B_BUFF1} problem!$"
 
 gUnknown_83FD97A:: @ 83FD97A
-	.string "{STRING 19}'s {STRING 22}\n"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\n"
 	.string "normalized its status!$"
 
 gUnknown_83FD999:: @ 83FD999
-	.string "{STRING 19}'s {STRING 22}\n"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\n"
 	.string "restored health!$"
 
 gUnknown_83FD9B2:: @ 83FD9B2
-	.string "{STRING 19}'s {STRING 22}\n"
-	.string "restored {STRING 00}'s PP!$"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\n"
+	.string "restored {B_BUFF1}'s PP!$"
 
 gUnknown_83FD9CC:: @ 83FD9CC
-	.string "{STRING 19}'s {STRING 22}\n"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\n"
 	.string "restored its status!$"
 
 gUnknown_83FD9E9:: @ 83FD9E9
-	.string "{STRING 19}'s {STRING 22}\n"
+	.string "{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\n"
 	.string "restored its HP a little!$"
 
 gUnknown_83FDA0B:: @ 83FDA0B
-	.string "{STRING 22}'s effect allows only\n"
-	.string "{STRING 20} to be used!\p"
+	.string "{B_LAST_ITEM}'s effect allows only\n"
+	.string "{B_CURRENT_MOVE} to be used!\p"
 	.string "$"
 
 gUnknown_83FDA33:: @ 83FDA33
-	.string "{STRING 16} hung on\n"
-	.string "using its {STRING 22}!$"
+	.string "{B_DEF_NAME_WITH_PREFIX} hung on\n"
+	.string "using its {B_LAST_ITEM}!$"
 
 gUnknown_83FDA4C:: @ 83FDA4C
 	.string "$"
 
 gUnknown_83FDA4D:: @ 83FDA4D
-	.string "{STRING 35} played the {STRING 22}.\p"
+	.string "{B_PLAYER_NAME} played the {B_LAST_ITEM}.\p"
 	.string "Now, that's a catchy tune!$"
 
 gUnknown_83FDA7A:: @ 83FDA7A
-	.string "{STRING 35} played the\n"
-	.string "{STRING 22}.$"
+	.string "{B_PLAYER_NAME} played the\n"
+	.string "{B_LAST_ITEM}.$"
 
 gUnknown_83FDA8C:: @ 83FDA8C
 	.string "The POKéMON hearing the FLUTE\n"
@@ -1730,7 +1730,7 @@ gUnknown_83FDAB1:: @ 83FDAB1
 gUnknown_83FDAE2:: @ 83FDAE2
 	.string "OAK: Oh, for Pete's sake…\n"
 	.string "So pushy, as always.\p"
-	.string "{STRING 35}.\p"
+	.string "{B_PLAYER_NAME}.\p"
 	.string "You've never had a POKéMON battle\n"
 	.string "before, have you?\p"
 	.string "A POKéMON battle is when TRAINERS\n"
@@ -1785,7 +1785,7 @@ gUnknown_83FDDEB:: @ 83FDDEB
 	.string "How disappointing…\p"
 	.string "If you win, you earn prize money,\n"
 	.string "and your POKéMON grow.\p"
-	.string "But if you lose, {STRING 35}, you end\n"
+	.string "But if you lose, {B_PLAYER_NAME}, you end\n"
 	.string "up paying prize money…\p"
 	.string "However, since you had no warning\n"
 	.string "this time, I'll pay for you.\p"
@@ -2245,10 +2245,10 @@ gUnknown_83FE6D0:: @ 83FE6D0
 
 gText_WhatWillPkmnDo:: @ 83FE6D5
 	.string "What will\n"
-	.string "{STRING 18} do?$"
+	.string "{B_ACTIVE_NAME_WITH_PREFIX} do?$"
 
 gUnknown_83FE6E6:: @ 83FE6E6
-	.string "What will {STRING 35}\n"
+	.string "What will {B_PLAYER_NAME}\n"
 	.string "throw?$"
 
 gUnknown_83FE6FA:: @ 83FE6FA
@@ -2485,15 +2485,15 @@ gUnknown_83FE9C4:: @ 83FE9C4
 	.4byte gOtherText_Mixed
 
 gUnknown_83FE9D4::
-	.string "{PLAY_SE SE_NIGERU}{STRING 28} {STRING 29} fled!$"
+	.string "{PLAY_SE SE_NIGERU}{B_TRAINER1_CLASS} {B_TRAINER1_NAME} fled!$"
 
 gUnknown_83FE9E4:: @ 83FE9E4
 	.string "Player lost against\n"
-	.string "{STRING 28} {STRING 29}!$"
+	.string "{B_TRAINER1_CLASS} {B_TRAINER1_NAME}!$"
 
 gUnknown_83FE9FF:: @ 83FE9FF
 	.string "Player battled to a draw against\n"
-	.string "{STRING 28} {STRING 29}!$"
+	.string "{B_TRAINER1_CLASS} {B_TRAINER1_NAME}!$"
 
 	.align 2
 gUnknown_83FEA28:: @ 83FEA28

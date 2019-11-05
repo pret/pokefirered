@@ -546,7 +546,7 @@ u8 *sub_8069E48(void)
     }
 }
 
-void sub_8069EA4(u8 *script, u16 scriptSize)
+void MEventSetRamScript(u8 *script, u16 scriptSize)
 {
     if (scriptSize > sizeof(gSaveBlock1Ptr->ramScript.data.script))
         scriptSize = sizeof(gSaveBlock1Ptr->ramScript.data.script);

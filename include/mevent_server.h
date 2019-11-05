@@ -31,7 +31,7 @@ struct send_recv_header
     u16 size;
 };
 
-struct mevent_cmd_ish
+struct mevent_client_cmd
 {
     u32 instr;
     u32 parameter;
@@ -46,12 +46,12 @@ struct mevent_client
     u32 cmdidx;
     void * sendBuffer;
     void * recvBuffer;
-    struct mevent_cmd_ish * cmdBuffer;
+    struct mevent_client_cmd * cmdBuffer;
     void * buffer;
     struct mevent_srv_sub manager;
 };
 
-struct mevent_cmd
+struct mevent_server_cmd
 {
     u32 instr;
     bool32 flag;
@@ -64,11 +64,11 @@ struct mevent_srv_common
     u32 param;
     u32 mainseqno;
     u32 cmdidx;
-    const struct mevent_cmd * cmdBuffer;
+    const struct mevent_server_cmd * cmdBuffer;
     void * recvBuffer;
-    struct MEventBuffer_32E0_Sub * mevent_32e0;
-    struct MEventBuffer_3120_Sub * mevent_3120;
-    struct MEventStruct_Unk1442CC * mevent_unk1442cc;
+    struct MEWonderCardData * card;
+    struct MEWonderNewsData * news;
+    struct MEventClientHeaderStruct * mevent_unk1442cc;
     void * sendBuffer1;
     u32 sendBuffer1Size;
     void * sendBuffer2;

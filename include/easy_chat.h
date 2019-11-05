@@ -34,7 +34,7 @@ void InitEasyChatPhrases(void);
 u8 *CopyEasyChatWord(u8 *dest, u16 word);
 u8 *ConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 length1, u16 length2);
 bool8 EC_DoesEasyChatStringFitOnLine(const u16 *easyChatWords, u8 columns, u8 rows, u16 maxLength);
-void ResetSomeMEventECBuffer_3120_338(void);
+void EC_ResetMEventProfileMaybe(void);
 void InitEasyChatPhrases(void);
 void EnableRareWord(u8);
 bool8 InitEasyChatSelection(void);

@@ -67,12 +67,12 @@ static bool32 RunMysteryEventScriptCommand(struct ScriptContext *ctx)
         return FALSE;
 }
 
-void sub_80DA89C(u8 *script)
+void MEventScript_InitContext(u8 *script)
 {
     InitMysteryEventScript(&sMysteryEventScriptContext, script);
 }
 
-bool32 sub_80DA8B0(u32 *a0)
+bool32 MEventScript_Run(u32 *a0)
 {
     bool32 ret = RunMysteryEventScriptCommand(&sMysteryEventScriptContext);
     *a0 = sMysteryEventScriptContext.data[2];
@@ -83,8 +83,8 @@ bool32 sub_80DA8B0(u32 *a0)
 u32 RunMysteryEventScript(u8 *script)
 {
     u32 ret;
-    sub_80DA89C(script);
-    while (sub_80DA8B0(&ret));
+    MEventScript_InitContext(script);
+    while (MEventScript_Run(&ret));
 
     return ret;
 }

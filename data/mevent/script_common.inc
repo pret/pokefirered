@@ -1,84 +1,87 @@
-gUnknown_8468920::
-	.4byte 0x12, 0x10, gUnknown_8468810
-	.4byte 0x01, 0x00, NULL
-	.4byte 0x02, 0x14, NULL
-	.4byte 0x00, 0x0a, NULL
-	.4byte 0x12, 0x10, gUnknown_8468820
-	.4byte 0x01, 0x00, NULL
-	.4byte 0x02, 0x14, NULL
-	.4byte 0x00, 0x0b, NULL
-	.4byte 0x12, 0x10, gUnknown_84688E0
-	.4byte 0x01, 0x00, NULL
-	.4byte 0x02, 0x14, NULL
-	.4byte 0x00, 0x09, NULL
+gMEventSrvScript_UnableToSend::
+	.4byte 0x12, 0x10, gMEventClientScript_UnableToRecv @ SEND
+	.4byte 0x01, 0x00, NULL @ WAIT SEND
+	.4byte 0x02, 0x14, NULL @ RECV
+	.4byte 0x00, 0x0a, NULL @ RETURN (can't send)
 
-gUnknown_84689B0::
-	.4byte 0x12, 0x10, gUnknown_8468898
-	.4byte 0x01, 0x00, NULL
-	.4byte 0x02, 0x14, NULL
-	.4byte 0x00, 0x07, NULL
+	.4byte 0x12, 0x10, gMEventClientScript_CommError @ SEND
+	.4byte 0x01, 0x00, NULL @ WAIT SEND
+	.4byte 0x02, 0x14, NULL @ RECV
+	.4byte 0x00, 0x0b, NULL @ RETURN (comm error)
 
-gUnknown_84689E0::
-	.4byte 0x12, 0x28, gUnknown_8468870
-	.4byte 0x01, 0x00, NULL
-	.4byte 0x0e, 0x00, NULL
-	.4byte 0x01, 0x00, NULL
-	.4byte 0x02, 0x13, NULL
-	.4byte 0x08, 0x00, NULL
-	.4byte 0x04, 0x01, gUnknown_84689B0
-	.4byte 0x12, 0x10, gUnknown_84688A8
-	.4byte 0x01, 0x00, NULL
-	.4byte 0x02, 0x14, NULL
-	.4byte 0x00, 0x03, NULL
+	.4byte 0x12, 0x10, gMEventClientScript_OtherTrainerCanceled @ SEND
+	.4byte 0x01, 0x00, NULL @ WAIT SEND
+	.4byte 0x02, 0x14, NULL @ RECV
+	.4byte 0x00, 0x09, NULL @ RETURN (other trn canceled)
 
-gUnknown_8468A64::
-	.4byte 0x12, 0x30, gUnknown_8468840
-	.4byte 0x01, 0x00, NULL
-	.4byte 0x0d, 0x00, NULL
-	.4byte 0x01, 0x00, NULL
-	.4byte 0x0f, 0x00, NULL
-	.4byte 0x01, 0x00, NULL
-	.4byte 0x02, 0x14, NULL
-	.4byte 0x00, 0x02, NULL
+gMEventSrvScript_OtherTrnHasNews::
+	.4byte 0x12, 0x10, gMEventClientScript_AlreadyHadNews @ SEND
+	.4byte 0x01, 0x00, NULL @ WAIT SEND
+	.4byte 0x02, 0x14, NULL @ RECV
+	.4byte 0x00, 0x07, NULL @ RETURN (other trn has news)
 
-gUnknown_8468AC4::
-	.4byte 0x12, 0x28, gUnknown_84688B8
-	.4byte 0x01, 0x00, NULL
-	.4byte 0x02, 0x13, NULL
-	.4byte 0x08, 0x00, NULL
-	.4byte 0x04, 0x00, gUnknown_8468A64
-	.4byte 0x03, 0x00, gUnknown_84595EC
+gMEventSrvScript_SentNewsSuccess::
+	.4byte 0x12, 0x28, gMEventClientScript_ReceiveNewsAndValidate @ SEND
+	.4byte 0x01, 0x00, NULL @ WAIT SEND
+	.4byte 0x0e, 0x00, NULL @ SEND_NEWS
+	.4byte 0x01, 0x00, NULL @ WAIT SEND
+	.4byte 0x02, 0x13, NULL @ RECV
+	.4byte 0x08, 0x00, NULL @ READWORD
+	.4byte 0x04, 0x01, gMEventSrvScript_OtherTrnHasNews @ BRANCH_EQ
+	.4byte 0x12, 0x10, gMEventClientScript_RecvNewsSuccess @ SEND
+	.4byte 0x01, 0x00, NULL @ WAIT SEND
+	.4byte 0x02, 0x14, NULL @ RECV
+	.4byte 0x00, 0x03, NULL @ RETURN (news sent to)
 
-gUnknown_8468B0C::
-	.4byte 0x12, 0x10, gUnknown_84688F0
-	.4byte 0x01, 0x00, NULL
-	.4byte 0x02, 0x14, NULL
-	.4byte 0x00, 0x05, NULL
-	.4byte 0x12, 0x10, gUnknown_8468830
-	.4byte 0x01, 0x00, NULL
-	.4byte 0x02, 0x14, NULL
-	.4byte 0x00, 0x00, NULL
+gMEventSrvScript_SendCardSuccess::
+	.4byte 0x12, 0x30, gMEventClientScript_ReceiveCardAndReturnSuccess @ SEND
+	.4byte 0x01, 0x00, NULL @ WAIT SEND
+	.4byte 0x0d, 0x00, NULL @ SEND_CARD
+	.4byte 0x01, 0x00, NULL @ WAIT SEND
+	.4byte 0x0f, 0x00, NULL @ BUFFER_SEND
+	.4byte 0x01, 0x00, NULL @ WAIT SEND
+	.4byte 0x02, 0x14, NULL @ RECV
+	.4byte 0x00, 0x02, NULL @ RETURN (card sent to)
 
-gUnknown_8468B6C:: @ 8468B6C
-	.4byte 0x1b, 0x00, NULL
-	.4byte 0x12, 0x20, gUnknown_84687F0
-	.4byte 0x01, 0x00, NULL
-	.4byte 0x02, 0x11, NULL
-	.4byte 0x05, 0x00, NULL
-	.4byte 0x06, 0x00, NULL
-	.4byte 0x04, 0x00, gUnknown_8468920
-	.4byte 0x03, 0x00, gUnknown_84689E0
+gMEventSrvScript_AskClientToOverwriteCard::
+	.4byte 0x12, 0x28, gMEventClientScript_AskWouldLikeToTossCard @ SEND
+	.4byte 0x01, 0x00, NULL @ WAIT SEND
+	.4byte 0x02, 0x13, NULL @ RECV
+	.4byte 0x08, 0x00, NULL @ READWORD
+	.4byte 0x04, 0x00, gMEventSrvScript_SendCardSuccess @ BRANCH_EQ
+	.4byte 0x03, 0x00, gMEventSrvScript_OtherTrainerCanceled @ BRANCH
 
-gUnknown_8468BCC:: @ 8468BCC
-	.4byte 0x1a, 0x00, NULL
-	.4byte 0x1c, 0x00, NULL
-	.4byte 0x12, 0x20, gUnknown_84687F0
-	.4byte 0x01, 0x00, NULL
-	.4byte 0x02, 0x11, NULL
-	.4byte 0x05, 0x00, NULL
-	.4byte 0x06, 0x00, NULL
-	.4byte 0x04, 0x00, gUnknown_8468920
-	.4byte 0x07, 0x00, NULL
-	.4byte 0x04, 0x02, gUnknown_8468AC4
-	.4byte 0x04, 0x00, gUnknown_8468A64
-	.4byte 0x03, 0x00, gUnknown_8468B0C
+gMEventSrvScript_OtherTrnHasCard::
+	.4byte 0x12, 0x10, gMEventClientScript_AlreadyHadCard @ SEND
+	.4byte 0x01, 0x00, NULL @ WAIT SEND
+	.4byte 0x02, 0x14, NULL @ RECV
+	.4byte 0x00, 0x05, NULL @ RETURN (other trn has card)
+
+	.4byte 0x12, 0x10, gMEventClientScript_NothingSentOver @ SEND
+	.4byte 0x01, 0x00, NULL @ WAIT SEND
+	.4byte 0x02, 0x14, NULL @ RECV
+	.4byte 0x00, 0x00, NULL @ RETURN (nothing sent over)
+
+gMEventSrvScript_SendNews:: @ 8468B6C
+	.4byte 0x1b, 0x00, NULL @ BUFFER_SAVED_NEWS
+	.4byte 0x12, 0x20, gMEventClientScript_Send1442CC @ SEND
+	.4byte 0x01, 0x00, NULL @ WAIT SEND
+	.4byte 0x02, 0x11, NULL @ RECV
+	.4byte 0x05, 0x00, NULL @ READ_1442CC
+	.4byte 0x06, 0x00, NULL @ VALID_1442CC
+	.4byte 0x04, 0x00, gMEventSrvScript_UnableToSend @ BRANCH_EQ
+	.4byte 0x03, 0x00, gMEventSrvScript_SentNewsSuccess @ BRANCH
+
+gMEventSrvScript_SendCard:: @ 8468BCC
+	.4byte 0x1a, 0x00, NULL @ BUFFER_SAVED_CARD
+	.4byte 0x1c, 0x00, NULL @ RAM_SCRIPT_IF_VALID
+	.4byte 0x12, 0x20, gMEventClientScript_Send1442CC @ SEND
+	.4byte 0x01, 0x00, NULL @ WAIT SEND
+	.4byte 0x02, 0x11, NULL @ RECV
+	.4byte 0x05, 0x00, NULL @ READ_1442CC
+	.4byte 0x06, 0x00, NULL @ VALID_1442CC
+	.4byte 0x04, 0x00, gMEventSrvScript_UnableToSend @ BRANCH_EQ
+	.4byte 0x07, 0x00, NULL @ CHECK_1442CC_14
+	.4byte 0x04, 0x02, gMEventSrvScript_AskClientToOverwriteCard @ BRANCH_EQ
+	.4byte 0x04, 0x00, gMEventSrvScript_SendCardSuccess @ BRANCH_EQ
+	.4byte 0x03, 0x00, gMEventSrvScript_OtherTrnHasCard @ BRANCH

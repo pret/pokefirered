@@ -7,7 +7,7 @@
 
 // Exported ROM declarations
 
-void sub_8079B7C(void);
+void ResetSaveHeap(void);
 
 #endif //GUARD_RESET_SAVE_HEAP_H
 

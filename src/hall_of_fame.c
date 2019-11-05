@@ -1273,14 +1273,14 @@ static void SpriteCB_Confetti(struct Sprite* sprite)
 
 static bool8 Hof_SpawnConfetti(void)
 {
-    u8 spriteID;
+    u8 spriteId;
     struct Sprite* sprite;
 
     s16 posX = Random() % 240;
     s16 posY = -(Random() % 8);
 
-    spriteID = CreateSprite(&sSpriteTemplate_Confetti, posX, posY, 0);
-    sprite = &gSprites[spriteID];
+    spriteId = CreateSprite(&sSpriteTemplate_Confetti, posX, posY, 0);
+    sprite = &gSprites[spriteId];
 
     StartSpriteAnim(sprite, Random() % 17);
 

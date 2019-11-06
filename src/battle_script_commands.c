@@ -6183,7 +6183,7 @@ static void atk76_various(void)
             }
         }
         break;
-    case VARIOUS_CASE_11:
+    case VARIOUS_CHECK_POKEFLUTE:
         gBattleCommunication[MULTISTRING_CHOOSER] = 0;
         monToCheck = 0;
         for (i = 0; i < gBattlersCount; ++i)

@@ -18,7 +18,6 @@
 	.section script_data, "aw", %progbits
 	.align 2
 
-
 gBattlescriptsForBallThrow:: @ 81D99B4
 	.4byte BattleScript_81D9A14
 	.4byte BattleScript_81D9A14
@@ -53,13 +52,13 @@ gBattlescriptsForSafariActions:: @ 81D9A08
 	.4byte BattleScript_81D9BE1
 
 BattleScript_81D9A14:: @ 81D9A14
-	jumpifword CMP_COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_OLD_MAN_TUTORIAL, BattleScript_81D9A34
-	jumpifword CMP_COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_POKEDUDE, BattleScript_81D9A38
+	jumpifbattletype BATTLE_TYPE_OLD_MAN_TUTORIAL, BattleScript_81D9A34
+	jumpifbattletype BATTLE_TYPE_POKEDUDE, BattleScript_81D9A38
 	printstring STRINGID_PLAYERUSEDITEM
 	handleballthrow
 
 BattleScript_81D9A34:: @ 81D9A34
-	printstring STRINGID_WALLYUSEDITEM
+	printstring STRINGID_OLDMANUSEDITEM
 	handleballthrow
 
 BattleScript_81D9A38:: @ 81D9A38
@@ -106,7 +105,7 @@ gUnknown_81D9A88:: @ 81D9A88
 BattleScript_ShakeBallThrow:: @ 81D9A93
 	printfromtable gBallEscapeStringIds
 	waitmessage 64
-	jumpifword CMP_NO_COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_SAFARI, BattleScript_81D9AC0
+	jumpifnotbattletype BATTLE_TYPE_SAFARI, BattleScript_81D9AC0
 	jumpifbyte CMP_NOT_EQUAL, gNumSafariBalls, 0, BattleScript_81D9AC0
 	printstring STRINGID_OUTOFSAFARIBALLS
 	waitmessage 64
@@ -191,7 +190,7 @@ BattleScript_81D9B7C:: @ 81D9B7C
 	finishturn
 
 BattleScript_81D9B86:: @ 81D9B86
-	various11 BS_ATTACKER
+	checkpokeflute BS_ATTACKER
 	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 1, BattleScript_81D9B9F
 	printstring STRINGID_POKEFLUTECATCHY
 	waitmessage 64

@@ -74,7 +74,7 @@
 #define VARIOUS_CASE_8                          8
 #define VARIOUS_RETURN_OPPONENT_MON1            9
 #define VARIOUS_RETURN_OPPONENT_MON2            10
-#define VARIOUS_CASE_11                         11
+#define VARIOUS_CHECK_POKEFLUTE                 11
 #define VARIOUS_WAIT_FANFARE                    12
 
 // atk80, dmg manipulation

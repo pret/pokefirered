@@ -1292,7 +1292,7 @@
 	various \battler, VARIOUS_RETURN_OPPONENT_MON2
 	.endm
 
-	.macro various11 battler:req
+	.macro checkpokeflute battler:req
 	various \battler, 11
 	.endm
 

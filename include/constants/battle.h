@@ -215,6 +215,7 @@
 #define WEATHER_ANY                 (WEATHER_RAIN_ANY | WEATHER_SANDSTORM_ANY | WEATHER_SUN_ANY | WEATHER_HAIL_ANY)
 
 // Move Effects
+#define MOVE_EFFECT_NOTHING_0           0x0
 #define MOVE_EFFECT_SLEEP               0x1
 #define MOVE_EFFECT_POISON              0x2
 #define MOVE_EFFECT_BURN                0x3

@@ -3816,18 +3816,18 @@ BattleScript_TargetPRLZHeal::
 	updatestatusicon BS_TARGET
 	return
 
-gUnknown_81D9180::
+BattleScript_TooScaredToMove::
 	printstring STRINGID_MONTOOSCAREDTOMOVE
 	waitmessage 0x40
 	playanimation BS_ATTACKER, B_ANIM_MON_SCARED, NULL
 	goto BattleScript_MoveEnd
 
-gUnknown_81D9192::
+BattleScript_GhostGetOutGetOut::
 	printstring STRINGID_GHOSTGETOUTGETOUT
 	playanimation BS_ATTACKER, B_ANIM_GHOST_GET_OUT, NULL
 	goto BattleScript_MoveEnd
 
-gUnknown_81D91A1::
+BattleScript_SilphScopeUnveiled::
 	pause 0x20
 	printstring STRINGID_SILPHSCOPEUNVEILED
 	waitstate

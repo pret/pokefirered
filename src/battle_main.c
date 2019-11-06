@@ -2677,7 +2677,7 @@ static void BattleIntroPrintWildMonAttacked(void)
         if ((gBattleTypeFlags & (BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_GHOST)) == (BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_GHOST))
         {
             gBattleScripting.battler = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-            BattleScriptExecute(gUnknown_81D91A1);
+            BattleScriptExecute(BattleScript_SilphScopeUnveiled);
         }
     }
 }

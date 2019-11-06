@@ -216,8 +216,8 @@ extern const u8 BattleScript_RunByUsingItem[];
 extern const u8 BattleScript_ActionWatchesCarefully[];
 extern const u8 BattleScript_ActionGetNear[];
 extern const u8 BattleScript_ActionThrowPokeblock[];
-extern const u8 gUnknown_81D9192[];
-extern const u8 gUnknown_81D9180[];
+extern const u8 BattleScript_GhostGetOutGetOut[];
+extern const u8 BattleScript_TooScaredToMove[];
 extern const u8 BattleScript_IntimidateActivates[];
 extern const u8 BattleScript_IntimidateActivatesEnd3[];
 extern const u8 BattleScript_IgnoresWhileAsleep[];
@@ -227,7 +227,7 @@ extern const u8 BattleScript_FlushMessageBox[];
 extern const u8 BattleScript_SpikesOnFaintedBattler[];
 extern const u8 BattleScript_GhostBallDodge[];
 extern const u8 BattleScript_OldMan_Pokedude_CaughtMessage[];
-extern const u8 gUnknown_81D91A1[]; // knizz: silph scope unveil
+extern const u8 BattleScript_SilphScopeUnveiled[]; // knizz: silph scope unveil
 extern const u8 BattleScript_BattleTowerTrainerBattleWon[];
 
 extern const u8 *const gBattleScriptsForMoveEffects[];

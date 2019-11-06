@@ -2863,7 +2863,7 @@ BattleScript_81D86E6:: @ 81D86E6
 	switchhandleorder BS_ATTACKER, 2
 	jumpifbyte CMP_EQUAL, gBattleCommunication, 6, BattleScript_81D8792
 	atknameinbuff1
-	resetintrimidatetracebits BS_ATTACKER
+	resetintimidatetracebits BS_ATTACKER
 	hpthresholds2 BS_ATTACKER
 	printstring STRINGID_RETURNMON
 	switchoutabilities BS_ATTACKER

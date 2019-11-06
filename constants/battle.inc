@@ -71,7 +71,7 @@
 .equiv B_ANIM_STATS_CHANGE,            0x1
 .equiv B_ANIM_SUBSTITUTE_FADE,         0x2
 .equiv B_ANIM_SUBSTITUTE_APPEAR,       0x3
-.equiv B_ANIM_POKEBLOCK_THROW,         0x4
+.equiv B_ANIM_BAIT_THROW,         0x4
 .equiv B_ANIM_ITEM_KNOCKOFF,           0x5
 .equiv B_ANIM_TURN_TRAP,               0x6
 .equiv B_ANIM_ITEM_EFFECT,             0x7

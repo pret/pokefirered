@@ -3047,9 +3047,11 @@ BattleScript_PrintFailedToRunString:: @ 81D893A
 BattleScript_PrintCantEscapeFromBattle:: @ 81D8943
 	printselectionstringfromtable gNoEscapeStringIds
 	endselectionscript
+
 BattleScript_PrintFullBox:: @ 81D8949
 	printselectionstring STRINGID_BOXISFULL
 	endselectionscript
+
 BattleScript_ActionSwitch:: @ 81D894D
 	hpthresholds2 BS_ATTACKER
 	printstring STRINGID_RETURNMON
@@ -3328,6 +3330,7 @@ BattleScript_MoveUsedIsDisabled:: @ 81D8C4F
 BattleScript_SelectingDisabledMove:: @ 81D8C5A
 	printselectionstring STRINGID_PKMNMOVEISDISABLED
 	endselectionscript
+
 BattleScript_DisabledNoMore:: @ 81D8C5E
 	printstring STRINGID_PKMNMOVEDISABLEDNOMORE
 	waitmessage 64
@@ -3512,9 +3515,11 @@ BattleScript_81D8E86:: @ 81D8E86
 BattleScript_NoMovesLeft:: @ 81D8EA0
 	printselectionstring STRINGID_PKMNHASNOMOVESLEFT
 	endselectionscript
+
 BattleScript_SelectingMoveWithNoPP:: @ 81D8EA4
 	printselectionstring STRINGID_NOPPLEFT
 	endselectionscript
+
 BattleScript_NoPPForMove:: @ 81D8EA8
 	attackstring
 	pause 32
@@ -3525,6 +3530,7 @@ BattleScript_NoPPForMove:: @ 81D8EA8
 BattleScript_SelectingTormentedMove:: @ 81D8EB7
 	printselectionstring STRINGID_PKMNCANTUSEMOVETORMENT
 	endselectionscript
+
 	printstring STRINGID_PKMNCANTUSEMOVETORMENT
 	waitmessage 64
 	goto BattleScript_MoveEnd
@@ -3532,6 +3538,7 @@ BattleScript_SelectingTormentedMove:: @ 81D8EB7
 BattleScript_SelectingNotAllowedMoveTaunt:: @ 81D8EC6
 	printselectionstring STRINGID_PKMNCANTUSEMOVETAUNT
 	endselectionscript
+
 BattleScript_MoveUsedIsTaunted:: @ 81D8ECA
 	printstring STRINGID_PKMNCANTUSEMOVETAUNT
 	waitmessage 64
@@ -3605,6 +3612,7 @@ BattleScript_MoveUsedIsImprisoned:: @ 81D8F94
 BattleScript_SelectingImprisonedMove:: @ 81D8F9F
 	printselectionstring STRINGID_PKMNCANTUSEMOVESEALED
 	endselectionscript
+
 BattleScript_GrudgeTakesPp:: @ 81D8FA3
 	printstring STRINGID_PKMNLOSTPPGRUDGE
 	waitmessage 64
@@ -4343,6 +4351,7 @@ BattleScript_ItemHealHP_Ret:: @ 81D9622
 BattleScript_SelectingNotAllowedMoveChoiceItem:: @ 81D963D
 	printselectionstring STRINGID_ITEMALLOWSONLYYMOVE
 	endselectionscript
+
 BattleScript_HangedOnMsg:: @ 81D9641
 	playanimation BS_TARGET, B_ANIM_HANGED_ON, NULL
 	printstring STRINGID_PKMNHUNGONWITHX
@@ -4382,6 +4391,7 @@ BattleScript_BerryFocusEnergyEnd2:: @ 81D9694
 BattleScript_ActionSelectionItemsCantBeUsed:: @ 81D96A4
 	printselectionstring STRINGID_ITEMSCANTBEUSEDNOW
 	endselectionscript
+
 BattleScript_FlushMessageBox:: @ 81D96A8
 	printstring STRINGID_EMPTYSTRING3
 	return

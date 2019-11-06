@@ -66,8 +66,8 @@ static void HandleAction_UseItem(void);
 static void HandleAction_Run(void);
 static void HandleAction_WatchesCarefully(void);
 static void HandleAction_SafariZoneBallThrow(void);
-static void HandleAction_ThrowPokeblock(void);
-static void HandleAction_GoNear(void);
+static void HandleAction_ThrowBait(void);
+static void HandleAction_ThrowRock(void);
 static void HandleAction_SafariZoneRun(void);
 static void HandleAction_OldManBallThrow(void);
 static void HandleAction_TryFinish(void);
@@ -582,8 +582,8 @@ static void (*const sTurnActionsFuncsTable[])(void) =
     [B_ACTION_RUN] = HandleAction_Run,
     [B_ACTION_SAFARI_WATCH_CAREFULLY] = HandleAction_WatchesCarefully,
     [B_ACTION_SAFARI_BALL] = HandleAction_SafariZoneBallThrow,
-    [B_ACTION_SAFARI_POKEBLOCK] = HandleAction_ThrowPokeblock,
-    [B_ACTION_SAFARI_GO_NEAR] = HandleAction_GoNear,
+    [B_ACTION_SAFARI_POKEBLOCK] = HandleAction_ThrowBait,
+    [B_ACTION_SAFARI_GO_NEAR] = HandleAction_ThrowRock,
     [B_ACTION_SAFARI_RUN] = HandleAction_SafariZoneRun,
     [B_ACTION_OLDMAN_THROW] = HandleAction_OldManBallThrow,
     [B_ACTION_EXEC_SCRIPT] = HandleAction_RunBattleScript,
@@ -4313,7 +4313,7 @@ static void HandleAction_SafariZoneBallThrow(void)
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
 
-static void HandleAction_ThrowPokeblock(void)
+static void HandleAction_ThrowBait(void)
 {
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     gBattle_BG0_X = 0;
@@ -4329,7 +4329,7 @@ static void HandleAction_ThrowPokeblock(void)
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
 
-static void HandleAction_GoNear(void)
+static void HandleAction_ThrowRock(void)
 {
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     gBattle_BG0_X = 0;

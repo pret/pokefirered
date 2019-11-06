@@ -9441,7 +9441,7 @@ static void atkEF_handleballthrow(void)
         {
             BtlController_EmitBallThrowAnim(0, BALL_3_SHAKES_SUCCESS);
             MarkBattlerForControllerExec(gActiveBattler);
-            gBattlescriptCurrInstr = gUnknown_81D9A88;
+            gBattlescriptCurrInstr = BattleScript_OldMan_Pokedude_CaughtMessage;
         }
         else
         {

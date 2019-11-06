@@ -18,102 +18,102 @@
 	.section script_data, "aw", %progbits
 	.align 2
 
-gBattlescriptsForBallThrow:: @ 81D99B4
-	.4byte BattleScript_81D9A14
-	.4byte BattleScript_81D9A14
-	.4byte BattleScript_81D9A14
-	.4byte BattleScript_81D9A14
-	.4byte BattleScript_81D9A14
-	.4byte BattleScript_81D9A3C
-	.4byte BattleScript_81D9A14
-	.4byte BattleScript_81D9A14
-	.4byte BattleScript_81D9A14
-	.4byte BattleScript_81D9A14
-	.4byte BattleScript_81D9A14
-	.4byte BattleScript_81D9A14
-	.4byte BattleScript_81D9A14
+gBattlescriptsForBallThrow::
+	.4byte BattleScript_ThrowBall
+	.4byte BattleScript_ThrowBall
+	.4byte BattleScript_ThrowBall
+	.4byte BattleScript_ThrowBall
+	.4byte BattleScript_ThrowBall
+	.4byte BattleScript_ThrowSafariBall
+	.4byte BattleScript_ThrowBall
+	.4byte BattleScript_ThrowBall
+	.4byte BattleScript_ThrowBall
+	.4byte BattleScript_ThrowBall
+	.4byte BattleScript_ThrowBall
+	.4byte BattleScript_ThrowBall
+	.4byte BattleScript_ThrowBall
 
-gBattlescriptsForUsingItem:: @ 81D99E8
-	.4byte BattleScript_81D9ADB
-	.4byte BattleScript_81D9AE5
-	.4byte BattleScript_81D9AE5
-	.4byte BattleScript_81D9B14
-	.4byte BattleScript_81D9B38
-	.4byte BattleScript_81D9B5A
+gBattlescriptsForUsingItem::
+	.4byte BattleScript_PlayerUseItem
+	.4byte BattleScript_AIuseFullRestoreOrHpHeal
+	.4byte BattleScript_AIuseFullRestoreOrHpHeal
+	.4byte BattleScript_AIuseStatRestore
+	.4byte BattleScript_AIuseXstat
+	.4byte BattleScript_AIuseGuardSpec
 
-gBattlescriptsForRunningByItem:: @ 81D9A00
-	.4byte BattleScript_81D9B7C
-	.4byte BattleScript_81D9B86
+gBattlescriptsForRunningByItem::
+	.4byte BattleScript_UseFluffyTail
+	.4byte BattleScript_UsePokeFlute
 
-gBattlescriptsForSafariActions:: @ 81D9A08
-	.4byte BattleScript_81D9BB5
-	.4byte BattleScript_81D9BC5
-	.4byte BattleScript_81D9BD3
-	.4byte BattleScript_81D9BE1
+gBattlescriptsForSafariActions::
+	.4byte BattleScript_WatchesCarefully
+	.4byte BattleScript_ThrowRock
+	.4byte BattleScript_ThrowBait
+	.4byte BattleScript_LeftoverWallyPrepToThrow
 
-BattleScript_81D9A14:: @ 81D9A14
-	jumpifbattletype BATTLE_TYPE_OLD_MAN_TUTORIAL, BattleScript_81D9A34
-	jumpifbattletype BATTLE_TYPE_POKEDUDE, BattleScript_81D9A38
+BattleScript_ThrowBall::
+	jumpifbattletype BATTLE_TYPE_OLD_MAN_TUTORIAL, BattleScript_OldManThrowBall
+	jumpifbattletype BATTLE_TYPE_POKEDUDE, BattleScript_PokeDudeThrowBall
 	printstring STRINGID_PLAYERUSEDITEM
 	handleballthrow
 
-BattleScript_81D9A34:: @ 81D9A34
+BattleScript_OldManThrowBall::
 	printstring STRINGID_OLDMANUSEDITEM
 	handleballthrow
 
-BattleScript_81D9A38:: @ 81D9A38
+BattleScript_PokeDudeThrowBall::
 	printstring STRINGID_POKEDUDEUSED
 	handleballthrow
 
-BattleScript_81D9A3C:: @ 81D9A3C
+BattleScript_ThrowSafariBall::
 	printstring STRINGID_PLAYERUSEDITEM
 	updatestatusicon BS_ATTACKER
 	handleballthrow
 
-BattleScript_SuccessBallThrow:: @ 81D9A42
-	jumpifhalfword CMP_EQUAL, gLastUsedItem, ITEM_SAFARI_BALL, BattleScript_81D9A50
+BattleScript_SuccessBallThrow::
+	jumpifhalfword CMP_EQUAL, gLastUsedItem, ITEM_SAFARI_BALL, BattleScript_SafariNoIncGameStat
 	incrementgamestat GAME_STAT_POKEMON_CAPTURES
-BattleScript_81D9A50:: @ 81D9A50
+BattleScript_SafariNoIncGameStat::
 	printstring STRINGID_GOTCHAPKMNCAUGHT
-	trysetcaughtmondexflags BattleScript_81D9A63
+	trysetcaughtmondexflags BattleScript_CaughtPokemonSkipNewDex
 	printstring STRINGID_PKMNDATAADDEDTODEX
 	waitstate
 	setbyte gBattleCommunication, 0
 	displaydexinfo
-BattleScript_81D9A63:: @ 81D9A63
+BattleScript_CaughtPokemonSkipNewDex::
 	printstring STRINGID_GIVENICKNAMECAPTURED
 	waitstate
 	setbyte gBattleCommunication, 0
-	trygivecaughtmonnick BattleScript_81D9A80
+	trygivecaughtmonnick BattleScript_CaughtPokemonSkipNickname
 	givecaughtmon
 	printfromtable gCaughtMonStringIds
 	waitmessage 64
-	goto BattleScript_81D9A81
+	goto BattleScript_CaughtPokemonDone
 
-BattleScript_81D9A80:: @ 81D9A80
+BattleScript_CaughtPokemonSkipNickname::
 	givecaughtmon
-BattleScript_81D9A81:: @ 81D9A81
+BattleScript_CaughtPokemonDone::
 	setbyte gBattleOutcome, B_OUTCOME_CAUGHT
 	finishturn
 
-gUnknown_81D9A88:: @ 81D9A88
+BattleScript_OldMan_Pokedude_CaughtMessage::
 	printstring STRINGID_GOTCHAPKMNCAUGHT2
 	setbyte gBattleOutcome, B_OUTCOME_CAUGHT
 	atk57
 	finishturn
 
-BattleScript_ShakeBallThrow:: @ 81D9A93
+BattleScript_ShakeBallThrow::
 	printfromtable gBallEscapeStringIds
 	waitmessage 64
-	jumpifnotbattletype BATTLE_TYPE_SAFARI, BattleScript_81D9AC0
-	jumpifbyte CMP_NOT_EQUAL, gNumSafariBalls, 0, BattleScript_81D9AC0
+	jumpifnotbattletype BATTLE_TYPE_SAFARI, BattleScript_CatchFailEnd
+	jumpifbyte CMP_NOT_EQUAL, gNumSafariBalls, 0, BattleScript_CatchFailEnd
 	printstring STRINGID_OUTOFSAFARIBALLS
 	waitmessage 64
 	setbyte gBattleOutcome, B_OUTCOME_NO_SAFARI_BALLS
-BattleScript_81D9AC0:: @ 81D9AC0
+BattleScript_CatchFailEnd::
 	finishaction
 
-BattleScript_TrainerBallBlock:: @ 81D9AC1
+BattleScript_TrainerBallBlock::
 	waitmessage 64
 	printstring STRINGID_TRAINERBLOCKEDBALL
 	waitmessage 64
@@ -121,17 +121,17 @@ BattleScript_TrainerBallBlock:: @ 81D9AC1
 	waitmessage 64
 	finishaction
 
-BattleScript_GhostBallDodge:: @ 81D9AD1
+BattleScript_GhostBallDodge::
 	waitmessage 64
 	printstring STRINGID_ITDODGEDBALL
 	waitmessage 64
 	finishaction
 
-BattleScript_81D9ADB:: @ 81D9ADB
+BattleScript_PlayerUseItem::
 	moveendcase 15
 	end
 
-BattleScript_81D9AE5:: @ 81D9AE5
+BattleScript_AIuseFullRestoreOrHpHeal::
 	printstring STRINGID_EMPTYSTRING3
 	pause 48
 	playse SE_KAIFUKU
@@ -147,7 +147,7 @@ BattleScript_81D9AE5:: @ 81D9AE5
 	moveendcase 15
 	finishaction
 
-BattleScript_81D9B14:: @ 81D9B14
+BattleScript_AIuseStatRestore::
 	printstring STRINGID_EMPTYSTRING3
 	pause 48
 	playse SE_KAIFUKU
@@ -160,7 +160,7 @@ BattleScript_81D9B14:: @ 81D9B14
 	moveendcase 15
 	finishaction
 
-BattleScript_81D9B38:: @ 81D9B38
+BattleScript_AIuseXstat::
 	printstring STRINGID_EMPTYSTRING3
 	pause 48
 	playse SE_KAIFUKU
@@ -172,7 +172,7 @@ BattleScript_81D9B38:: @ 81D9B38
 	moveendcase 15
 	finishaction
 
-BattleScript_81D9B5A:: @ 81D9B5A
+BattleScript_AIuseGuardSpec::
 	printstring STRINGID_EMPTYSTRING3
 	pause 48
 	playse SE_KAIFUKU
@@ -184,19 +184,19 @@ BattleScript_81D9B5A:: @ 81D9B5A
 	moveendcase 15
 	finishaction
 
-BattleScript_81D9B7C:: @ 81D9B7C
+BattleScript_UseFluffyTail::
 	playse SE_NIGERU
 	setbyte gBattleOutcome, B_OUTCOME_RAN
 	finishturn
 
-BattleScript_81D9B86:: @ 81D9B86
+BattleScript_UsePokeFlute::
 	checkpokeflute BS_ATTACKER
-	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 1, BattleScript_81D9B9F
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 1, BattleScript_PokeFluteWakeUp
 	printstring STRINGID_POKEFLUTECATCHY
 	waitmessage 64
-	goto BattleScript_81D9BB4
+	goto BattleScript_PokeFluteEnd
 
-BattleScript_81D9B9F:: @ 81D9B9F
+BattleScript_PokeFluteWakeUp::
 	printstring STRINGID_POKEFLUTE
 	waitmessage 64
 	fanfare MUS_POKEFUE
@@ -205,28 +205,28 @@ BattleScript_81D9B9F:: @ 81D9B9F
 	waitmessage 64
 	updatestatusicon BS_PLAYER2
 	waitstate
-BattleScript_81D9BB4:: @ 81D9BB4
+BattleScript_PokeFluteEnd::
 	finishaction
 
-BattleScript_81D9BB5:: @ 81D9BB5
+BattleScript_WatchesCarefully::
 	printfromtable gSafariPokeblockResultStringIds
 	waitmessage 64
 	playanimation BS_OPPONENT1, B_ANIM_SAFARI_REACTION, NULL
 	end2
 
-BattleScript_81D9BC5:: @ 81D9BC5
+BattleScript_ThrowRock::
 	printstring STRINGID_THREWROCK
 	waitmessage 64
 	playanimation BS_ATTACKER, B_ANIM_ROCK_THROW, NULL
 	end2
 
-BattleScript_81D9BD3:: @ 81D9BD3
+BattleScript_ThrowBait::
 	printstring STRINGID_THREWBAIT
 	waitmessage 64
 	playanimation BS_ATTACKER, B_ANIM_BAIT_THROW, NULL
 	end2
 
-BattleScript_81D9BE1:: @ 81D9BE1
+BattleScript_LeftoverWallyPrepToThrow::
 	printstring STRINGID_RETURNMON
 	waitmessage 64
 	returnatktoball

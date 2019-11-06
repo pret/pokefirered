@@ -515,8 +515,9 @@
 	.byte \bank
 	.endm
 
-	.macro atk5d
+	.macro atk5d addr
 	.byte 0x5d
+	.4byte \addr
 	.endm
 
 	.macro atk5e bank

@@ -3773,7 +3773,7 @@ static void atk45_playanimation(void)
     if (gBattlescriptCurrInstr[2] == B_ANIM_STATS_CHANGE
      || gBattlescriptCurrInstr[2] == B_ANIM_SNATCH_MOVE
      || gBattlescriptCurrInstr[2] == B_ANIM_SUBSTITUTE_FADE
-     || gBattlescriptCurrInstr[2] == B_ANIM_x19)
+     || gBattlescriptCurrInstr[2] == B_ANIM_SILPH_SCOPED)
     {
         BtlController_EmitBattleAnimation(0, gBattlescriptCurrInstr[2], *argumentPtr);
         MarkBattlerForControllerExec(gActiveBattler);
@@ -6236,7 +6236,7 @@ static void atk76_various(void)
             gBattleCommunication[5] = 1;
         }
         break;
-    case VARIOUS_CASE_12:
+    case VARIOUS_WAIT_FANFARE:
         if (!IsFanfareTaskInactive())
             return;
         break;

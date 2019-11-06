@@ -1284,46 +1284,6 @@
 	various \battler, 8
 	.endm
 
-	.macro arenajudgmentwindow
-	various BS_ATTACKER, VARIOUS_ARENA_JUDGMENT_WINDOW
-	.endm
-
-	.macro arenaopponentmonlost
-	various BS_ATTACKER, VARIOUS_ARENA_OPPONENT_MON_LOST
-	.endm
-
-	.macro arenaplayermonlost
-	various BS_ATTACKER, VARIOUS_ARENA_PLAYER_MON_LOST
-	.endm
-
-	.macro arenabothmonlost
-	various BS_ATTACKER, VARIOUS_ARENA_BOTH_MONS_LOST
-	.endm
-
-	.macro forfeityesnobox battler:req
-	various \battler, VARIOUS_EMIT_YESNOBOX
-	.endm
-
-	.macro various14 battler:req
-	various \battler, 14
-	.endm
-
-	.macro various15 battler:req
-	various \battler, 15
-	.endm
-
-	.macro arenajudmengtstring id:req
-	various \id, VARIOUS_ARENA_JUDGMENT_STRING
-	.endm
-
-	.macro arenawaitmessage id:req
-	various \id, VARIOUS_ARENA_WAIT_STRING
-	.endm
-
-	.macro waitcry battler:req
-	various \battler, VARIOUS_WAIT_CRY
-	.endm
-
 	.macro returnopponentmon1toball battler:req
 	various \battler, VARIOUS_RETURN_OPPONENT_MON1
 	.endm
@@ -1332,28 +1292,12 @@
 	various \battler, VARIOUS_RETURN_OPPONENT_MON2
 	.endm
 
-	.macro volumedown
-	various BS_ATTACKER, VARIOUS_VOLUME_DOWN
+	.macro various11 battler:req
+	various \battler, 11
 	.endm
 
-	.macro volumeup
-	various BS_ATTACKER, VARIOUS_VOLUME_UP
-	.endm
-
-	.macro setalreadystatusedmoveattempt battler:req
-	various \battler, 23
-	.endm
-
-	.macro various24 battler:req
-	various \battler, 24
-	.endm
-
-	.macro setoutcomeonteleport battler:req
-	various \battler, VARIOUS_SET_TELEPORT_OUTCOME
-	.endm
-
-	.macro playtrainerdefeatbgm battler:req
-	various \battler, VARIOUS_PLAY_TRAINER_DEFEATED_MUSIC
+	.macro waitfanfare battler:req
+	various \battler, 12
 	.endm
 
 @ helpful macros

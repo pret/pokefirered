@@ -75,7 +75,7 @@
 #define VARIOUS_RETURN_OPPONENT_MON1            9
 #define VARIOUS_RETURN_OPPONENT_MON2            10
 #define VARIOUS_CASE_11                         11
-#define VARIOUS_CASE_12                         12
+#define VARIOUS_WAIT_FANFARE                    12
 
 // atk80, dmg manipulation
 #define ATK80_DMG_CHANGE_SIGN                               0

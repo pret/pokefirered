@@ -1,7 +1,10 @@
 	.section script_data, "aw", %progbits
 
 gBattleScriptsForMoveEffects:: @ 81D65A8
-	.incbin "baserom.gba", 0x1D65A8, 0x388
+	.incbin "baserom.gba", 0x1D65A8, 0x37C
+
+BattleScript_81D6924::
+	.incbin "baserom.gba", 0x1D6924, 0xC
 
 BattleScript_HitFromCritCalc:: @ 81D6930
 	.incbin "baserom.gba", 0x1D6930, 0x1E

@@ -29,7 +29,7 @@ extern const u8 BattleScript_LocalBattleLostPrintWhiteOut[];
 extern const u8 BattleScript_LocalBattleLostEnd[];
 extern const u8 BattleScript_CheckDomeDrew[];
 extern const u8 BattleScript_LinkBattleWonOrLost[];
-extern const u8 BattleScript_FrontierTrainerBattleWon[];
+extern const u8 BattleScript_BattleTowerTrainerBattleWon[];
 extern const u8 BattleScript_SmokeBallEscape[];
 extern const u8 BattleScript_RanAwayUsingMonAbility[];
 extern const u8 BattleScript_GotAwaySafely[];
@@ -228,7 +228,7 @@ extern const u8 BattleScript_SpikesOnFaintedBattler[];
 extern const u8 BattleScript_GhostBallDodge[];
 extern const u8 gUnknown_81D9A88[];
 extern const u8 gUnknown_81D91A1[]; // knizz: silph scope unveil
-extern const u8 gUnknown_81D88D7[];
+extern const u8 BattleScript_BattleTowerTrainerBattleWon[];
 
 extern const u8 *const gBattleScriptsForMoveEffects[];
 extern const u8 *const gBattlescriptsForBallThrow[];

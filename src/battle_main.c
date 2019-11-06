@@ -3675,7 +3675,7 @@ static void HandleEndTurn_BattleWon(void)
     {
         BattleStopLowHpSound();
         PlayBGM(MUS_WIN_TRE);
-        gBattlescriptCurrInstr = gUnknown_81D88D7;
+        gBattlescriptCurrInstr = BattleScript_BattleTowerTrainerBattleWon;
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & BATTLE_TYPE_LINK))
     {

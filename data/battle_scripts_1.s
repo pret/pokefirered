@@ -291,7 +291,7 @@ BattleScript_EffectSleep:: @ 81D696D
 	jumpifcantmakeasleep BattleScript_81D69CC
 	jumpifstatus BS_TARGET, STATUS1_FREEZE | STATUS1_SLEEP | STATUS1_POISON | STATUS1_TOXIC_POISON | STATUS1_PARALYSIS | STATUS1_BURN, BattleScript_ButItFailed
 	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
-	jumpifsideaffecting BS_TARGET, 32, BattleScript_81D8B39
+	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_81D8B39
 	attackanimation
 	waitanimation
 	setmoveeffect MOVE_EFFECT_SLEEP
@@ -699,7 +699,7 @@ BattleScript_EffectToxic:: @ 81D6DE0
 	jumpiftype BS_TARGET, TYPE_POISON, BattleScript_81D7E04
 	jumpiftype BS_TARGET, TYPE_STEEL, BattleScript_81D7E04
 	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
-	jumpifsideaffecting BS_TARGET, 32, BattleScript_81D8B39
+	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_81D8B39
 	attackanimation
 	waitanimation
 	setmoveeffect MOVE_EFFECT_TOXIC
@@ -912,7 +912,7 @@ BattleScript_EffectConfuse:: @ 81D70AB
 	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
 	jumpifstatus2 BS_TARGET, STATUS2_CONFUSION, BattleScript_81D70EA
 	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
-	jumpifsideaffecting BS_TARGET, 32, BattleScript_81D8B39
+	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_81D8B39
 	attackanimation
 	waitanimation
 	setmoveeffect MOVE_EFFECT_CONFUSION
@@ -998,7 +998,7 @@ BattleScript_EffectPoison:: @ 81D7181
 	jumpiftype BS_TARGET, TYPE_STEEL, BattleScript_81D7E04
 	jumpifstatus BS_TARGET, STATUS1_FREEZE | STATUS1_SLEEP | STATUS1_POISON | STATUS1_TOXIC_POISON | STATUS1_PARALYSIS | STATUS1_BURN, BattleScript_ButItFailed
 	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
-	jumpifsideaffecting BS_TARGET, 32, BattleScript_81D8B39
+	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_81D8B39
 	attackanimation
 	waitanimation
 	setmoveeffect MOVE_EFFECT_POISON
@@ -1018,7 +1018,7 @@ BattleScript_EffectParalyze:: @ 81D71E2
 	jumpifstatus BS_TARGET, STATUS1_PARALYSIS, BattleScript_81D7237
 	jumpifstatus BS_TARGET, STATUS1_FREEZE | STATUS1_SLEEP | STATUS1_POISON | STATUS1_TOXIC_POISON | STATUS1_PARALYSIS | STATUS1_BURN, BattleScript_ButItFailed
 	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
-	jumpifsideaffecting BS_TARGET, 32, BattleScript_81D8B39
+	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_81D8B39
 	attackanimation
 	waitanimation
 	setmoveeffect MOVE_EFFECT_PARALYSIS
@@ -1631,7 +1631,7 @@ BattleScript_EffectSwagger:: @ 81D78BB
 	waitmessage 64
 BattleScript_81D78FE:: @ 81D78FE
 	jumpifability BS_TARGET, ABILITY_OWN_TEMPO, BattleScript_81D9460
-	jumpifsideaffecting BS_TARGET, 32, BattleScript_81D8B39
+	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_81D8B39
 	setmoveeffect MOVE_EFFECT_CONFUSION
 	seteffectprimary
 	goto BattleScript_MoveEnd
@@ -2175,7 +2175,7 @@ BattleScript_EffectFlatter:: @ 81D7ECD
 	waitmessage 64
 BattleScript_81D7F10:: @ 81D7F10
 	jumpifability BS_TARGET, ABILITY_OWN_TEMPO, BattleScript_81D9460
-	jumpifsideaffecting BS_TARGET, 32, BattleScript_81D8B39
+	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_81D8B39
 	setmoveeffect MOVE_EFFECT_CONFUSION
 	seteffectprimary
 	goto BattleScript_MoveEnd
@@ -2190,7 +2190,7 @@ BattleScript_EffectWillOWisp:: @ 81D7F2B
 	jumpifability BS_TARGET, ABILITY_WATER_VEIL, BattleScript_81D7F77
 	jumpifstatus BS_TARGET, STATUS1_FREEZE | STATUS1_SLEEP | STATUS1_POISON | STATUS1_TOXIC_POISON | STATUS1_PARALYSIS | STATUS1_BURN, BattleScript_ButItFailed
 	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
-	jumpifsideaffecting BS_TARGET, 32, BattleScript_81D8B39
+	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_81D8B39
 	attackanimation
 	waitanimation
 	setmoveeffect MOVE_EFFECT_BURN
@@ -2462,7 +2462,7 @@ BattleScript_EffectYawn:: @ 81D820A
 	jumpifability BS_TARGET, ABILITY_VITAL_SPIRIT, BattleScript_81D824B
 	jumpifability BS_TARGET, ABILITY_INSOMNIA, BattleScript_81D824B
 	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
-	jumpifsideaffecting BS_TARGET, 32, BattleScript_81D8B39
+	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_81D8B39
 	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
 	jumpifcantmakeasleep BattleScript_ButItFailed
 	setyawn BattleScript_ButItFailed
@@ -2589,7 +2589,7 @@ BattleScript_81D834E:: @ 81D834E
 	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_81D83CE
 	jumpifstatus2 BS_TARGET, STATUS2_CONFUSION, BattleScript_81D83DC
 	accuracycheck BattleScript_81D83EA, ACC_CURR_MOVE
-	jumpifsideaffecting BS_TARGET, 32, BattleScript_81D83C0
+	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_81D83C0
 	attackanimation
 	waitanimation
 	seteffectprimary

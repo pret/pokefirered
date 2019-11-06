@@ -2910,7 +2910,7 @@ void BattleTurnPassed(void)
     TurnValuesCleanUp(FALSE);
     gHitMarker &= ~(HITMARKER_NO_ATTACKSTRING);
     gHitMarker &= ~(HITMARKER_UNABLE_TO_USE_MOVE);
-    gHitMarker &= ~(HITMARKER_x400000);
+    gHitMarker &= ~(HITMARKER_PLAYER_FAINTED);
     gHitMarker &= ~(HITMARKER_x100000);
     gBattleScripting.animTurn = 0;
     gBattleScripting.animTargetsHit = 0;

@@ -2833,7 +2833,7 @@ static void atk19_tryfaintmon(void)
             gBattlescriptCurrInstr = BS_ptr;
             if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
             {
-                gHitMarker |= HITMARKER_x400000;
+                gHitMarker |= HITMARKER_PLAYER_FAINTED;
                 if (gBattleResults.playerFaintCounter < 0xFF)
                     ++gBattleResults.playerFaintCounter;
                 AdjustFriendshipOnBattleFaint(gActiveBattler);
@@ -4738,11 +4738,11 @@ static void atk50_openpartyscreen(void)
     }
     else
     {
-        if (gBattlescriptCurrInstr[1] & 0x80)
+        if (gBattlescriptCurrInstr[1] & OPEN_PARTY_ALLOW_CANCEL)
             hitmarkerFaintBits = PARTY_CHOOSE_MON; // Used here as the caseId for the EmitChoose function.
         else
             hitmarkerFaintBits = PARTY_MUST_CHOOSE_MON;
-        battlerId = GetBattlerForBattleScript(gBattlescriptCurrInstr[1] & ~(0x80));
+        battlerId = GetBattlerForBattleScript(gBattlescriptCurrInstr[1] & ~(OPEN_PARTY_ALLOW_CANCEL));
         if (gSpecialStatuses[battlerId].flag40)
         {
             gBattlescriptCurrInstr += 6;
@@ -6146,12 +6146,12 @@ static void atk76_various(void)
                 *choicedMove = MOVE_NONE;
         }
         break;
-    case VARIOUS_CASE_7:
+    case VARIOUS_RESET_PLAYER_FAINTED_FLAG:
         if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_DOUBLE))
          && gBattleTypeFlags & BATTLE_TYPE_TRAINER
          && gBattleMons[0].hp != 0
          && gBattleMons[1].hp != 0)
-            gHitMarker &= ~(HITMARKER_x400000);
+            gHitMarker &= ~(HITMARKER_PLAYER_FAINTED);
         break;
     case VARIOUS_CASE_8:
         i = 0; // redundant

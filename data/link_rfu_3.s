@@ -208,23 +208,39 @@ gUnknown_8457C20:: @ 8457C20
 	.incbin "baserom.gba", 0x457C20, 0x28
 
 gUnknown_8457C48:: @ 8457C48
-	.string "The other TRAINER showed\nyou their TRAINER CARD.\pWould you like to show your\nTRAINER CARD?$"
+	.string "The other TRAINER showed\n"
+	.string "you their TRAINER CARD.\p"
+	.string "Would you like to show your\n"
+	.string "TRAINER CARD?$"
 
 	.align 2
 gUnknown_8457CA4:: @ 8457CA4
-	.string "The other TRAINER challenges you\nto battle.\pWill you accept the battle\nchallenge?$"
+	.string "The other TRAINER challenges you\n"
+	.string "to battle.\p"
+	.string "Will you accept the battle\n"
+	.string "challenge?$"
 
 	.align 2
 gUnknown_8457CF8:: @ 8457CF8
-	.string "The other TRAINER invites you\nto chat.\pWill you accept the chat\ninvitation?$"
+	.string "The other TRAINER invites you\n"
+	.string "to chat.\p"
+	.string "Will you accept the chat\n"
+	.string "invitation?$"
 
 	.align 2
 gUnknown_8457D44:: @ 8457D44
-	.string "There is an offer to trade your\nregistered Lv. {DYNAMIC 0} {DYNAMIC 1}\pin exchange for a\nLv. {DYNAMIC 2} {DYNAMIC 3}.\pWill you accept this trade\noffer?$"
+	.string "There is an offer to trade your\n"
+	.string "registered Lv. {DYNAMIC 0} {DYNAMIC 1}\p"
+	.string "in exchange for a\n"
+	.string "Lv. {DYNAMIC 2} {DYNAMIC 3}.\p"
+	.string "Will you accept this trade\n"
+	.string "offer?$"
 
 	.align 2
 gUnknown_8457DB8:: @ 8457DB8
-	.string "There is an offer to trade your\nregistered EGG.\lWill you accept this trade offer?$"
+	.string "There is an offer to trade your\n"
+	.string "registered EGG.\l"
+	.string "Will you accept this trade offer?$"
 
 	.align 2
 gUnknown_8457E0C:: @ 8457E0C
@@ -250,19 +266,25 @@ gUnknown_8457E78::
 
 	.align 2
 gUnknown_8457E88::
-	.string "Oh, hey! We're in a chat right now.\nWant to join us?$"
+	.string "Oh, hey! We're in a chat right now.\n"
+	.string "Want to join us?$"
 
 	.align 2
 gUnknown_8457EC0::
-	.string "{STR_VAR_1}: Hey, {PLAYER}!\nWe're having a chat right now.\lWant to join us?$"
+	.string "{STR_VAR_1}: Hey, {PLAYER}!\n"
+	.string "We're having a chat right now.\l"
+	.string "Want to join us?$"
 
 	.align 2
 gUnknown_8457F00::
-	.string "Oh, hi! We're having a chat now.\nWould you like to join us?$"
+	.string "Oh, hi! We're having a chat now.\n"
+	.string "Would you like to join us?$"
 
 	.align 2
 gUnknown_8457F3C::
-	.string "{STR_VAR_1}: Oh, hi, {PLAYER}!\nWe're having a chat now.\lWould you like to join us?$"
+	.string "{STR_VAR_1}: Oh, hi, {PLAYER}!\n"
+	.string "We're having a chat now.\l"
+	.string "Would you like to join us?$"
 
 	.align 2
 gUnknown_8457F80:: @ 8457F80
@@ -272,31 +294,38 @@ gUnknown_8457F80:: @ 8457F80
 	.4byte gUnknown_8457F3C
 
 gUnknown_8457F90:: @ 8457F90
-	.string "……\nThe TRAINER appears to be busy…\p$"
+	.string "……\n"
+	.string "The TRAINER appears to be busy…\p$"
 
 	.align 2
 gUnknown_8457FB4::
-	.string "A battle, huh?\nAll right, just give me some time.$"
+	.string "A battle, huh?\n"
+	.string "All right, just give me some time.$"
 
 	.align 2
 gUnknown_8457FE8::
-	.string "You want to chat, huh?\nSure, just wait a little.$"
+	.string "You want to chat, huh?\n"
+	.string "Sure, just wait a little.$"
 
 	.align 2
 gUnknown_845801C::
-	.string "Sure thing! As my “Greetings,”\nhere's my TRAINER CARD.$"
+	.string "Sure thing! As my “Greetings,”\n"
+	.string "here's my TRAINER CARD.$"
 
 	.align 2
 gUnknown_8458054::
-	.string "A battle? Of course, but I need\ntime to get ready.$"
+	.string "A battle? Of course, but I need\n"
+	.string "time to get ready.$"
 
 	.align 2
 gUnknown_8458088::
-	.string "Did you want to chat?\nOkay, but please wait a moment.$"
+	.string "Did you want to chat?\n"
+	.string "Okay, but please wait a moment.$"
 
 	.align 2
 gUnknown_84580C0::
-	.string "As my introduction, I'll show you\nmy TRAINER CARD.$"
+	.string "As my introduction, I'll show you\n"
+	.string "my TRAINER CARD.$"
 
 	.align 2
 gUnknown_84580F4:: @ 84580F4
@@ -314,19 +343,23 @@ gUnknown_84580F4:: @ 84580F4
 
 	.align 2
 gUnknown_845812C::
-	.string "Thanks for waiting!\nLet's get our battle started!{PAUSE 60}$"
+	.string "Thanks for waiting!\n"
+	.string "Let's get our battle started!{PAUSE 60}$"
 
 	.align 2
 gUnknown_8458164::
-	.string "All right!\nLet's chat!{PAUSE 60}$"
+	.string "All right!\n"
+	.string "Let's chat!{PAUSE 60}$"
 
 	.align 2
 gUnknown_8458180::
-	.string "Sorry I made you wait!\nLet's get started!{PAUSE 60}$"
+	.string "Sorry I made you wait!\n"
+	.string "Let's get started!{PAUSE 60}$"
 
 	.align 2
 gUnknown_84581B0::
-	.string "Sorry I made you wait!\nLet's chat.{PAUSE 60}$"
+	.string "Sorry I made you wait!\n"
+	.string "Let's chat.{PAUSE 60}$"
 
 	.align 2
 gUnknown_84581D8::
@@ -356,10 +389,14 @@ gUnknown_8458230:: @ 8458230
 	.4byte gUnknown_84581D8
 
 gUnknown_8458260::
-	.string "Sorry! My POKéMON don't seem to\nbe feeling too well right now.\lLet me battle you another time.\p$"
+	.string "Sorry! My POKéMON don't seem to\n"
+	.string "be feeling too well right now.\l"
+	.string "Let me battle you another time.\p$"
 
 gUnknown_84582C0::
-	.string "I'm terribly sorry, but my POKéMON\naren't feeling well…\pLet's battle another time.\p$"
+	.string "I'm terribly sorry, but my POKéMON\n"
+	.string "aren't feeling well…\p"
+	.string "Let's battle another time.\p$"
 
 gUnknown_8458314:: @ 8458314
 	.4byte gUnknown_8458260
@@ -367,11 +404,15 @@ gUnknown_8458314:: @ 8458314
 
 	.align 2
 gUnknown_845831C::
-	.string "Huh? My TRAINER CARD…\nWhere'd it go now?\lSorry! I'll show you another time!\p$"
+	.string "Huh? My TRAINER CARD…\n"
+	.string "Where'd it go now?\l"
+	.string "Sorry! I'll show you another time!\p$"
 
 	.align 2
 gUnknown_845836C::
-	.string "Oh? Now where did I put my\nTRAINER CARD?…\lSorry! I'll show you later!\p$"
+	.string "Oh? Now where did I put my\n"
+	.string "TRAINER CARD?…\l"
+	.string "Sorry! I'll show you later!\p$"
 
 	.align 2
 gUnknown_84583B4:: @ 84583B4
@@ -380,10 +421,12 @@ gUnknown_84583B4:: @ 84583B4
 
 	.align 2
 gUnknown_84583BC::
-	.string "If you want to do something with\nme, just give me a shout!\p$"
+	.string "If you want to do something with\n"
+	.string "me, just give me a shout!\p$"
 	.align 2
 gUnknown_84583F8::
-	.string "If you want to do something with\nme, don't be shy.\p$"
+	.string "If you want to do something with\n"
+	.string "me, don't be shy.\p$"
 
 	.align 2
 gUnknown_845842C:: @ 845842C
@@ -391,22 +434,29 @@ gUnknown_845842C:: @ 845842C
 	.4byte gUnknown_84583F8
 
 gUnknown_8458434:: @ 8458434
-	.string "Whoops! Sorry, but I have to do\nsomething else.\lAnother time, okay?\p$"
+	.string "Whoops! Sorry, but I have to do\n"
+	.string "something else.\l"
+	.string "Another time, okay?\p$"
 
 	.align 2
 gUnknown_845847C:: @ 845847C
-	.string "If you want to battle, you need\ntwo POKéMON that are below\lLv. 30.\p$"
+	.string "If you want to battle, you need\n"
+	.string "two POKéMON that are below\l"
+	.string "Lv. 30.\p$"
 
 gUnknown_84584C0:: @ 84584C0
-	.string "For a battle, you need two\nPOKéMON that are below Lv. 30.\p$"
+	.string "For a battle, you need two\n"
+	.string "POKéMON that are below Lv. 30.\p$"
 
 	.align 2
 gUnknown_84584FC::
-	.string "Oh, all right.\nCome see me anytime, okay?\p$"
+	.string "Oh, all right.\n"
+	.string "Come see me anytime, okay?\p$"
 
 	.align 2
 gUnknown_8458528::
-	.string "Oh…\nPlease come by anytime.\p$"
+	.string "Oh…\n"
+	.string "Please come by anytime.\p$"
 
 	.align 2
 gUnknown_8458548:: @ 8458548
@@ -415,11 +465,15 @@ gUnknown_8458548:: @ 8458548
 
 	.align 2
 gUnknown_8458550::
-	.string "Oh, sorry!\nI just can't right this instant.\lLet's chat another time.\p$"
+	.string "Oh, sorry!\n"
+	.string "I just can't right this instant.\l"
+	.string "Let's chat another time.\p$"
 
 	.align 2
 gUnknown_8458598::
-	.string "Oh, I'm sorry.\nI have too much to do right now.\lLet's chat some other time.\p$"
+	.string "Oh, I'm sorry.\n"
+	.string "I have too much to do right now.\l"
+	.string "Let's chat some other time.\p$"
 
 	.align 2
 gUnknown_84585E8:: @ 84585E8
@@ -428,35 +482,43 @@ gUnknown_84585E8:: @ 84585E8
 
 	.align 2
 gUnknown_84585F0::
-	.string "Whoa!\nI can tell you're pretty tough!\p$"
+	.string "Whoa!\n"
+	.string "I can tell you're pretty tough!\p$"
 
 	.align 2
 gUnknown_8458618::
-	.string "You used that move?\nThat's good strategy!\p$"
+	.string "You used that move?\n"
+	.string "That's good strategy!\p$"
 
 	.align 2
 gUnknown_8458644::
-	.string "Way to go!\nThat was an eye-opener!\p$"
+	.string "Way to go!\n"
+	.string "That was an eye-opener!\p$"
 
 	.align 2
 gUnknown_8458668::
-	.string "Oh! How could you use that\nPOKéMON in that situation?\p$"
+	.string "Oh! How could you use that\n"
+	.string "POKéMON in that situation?\p$"
 
 	.align 2
 gUnknown_84586A0::
-	.string "That POKéMON…\nIt's been raised really well!\p$"
+	.string "That POKéMON…\n"
+	.string "It's been raised really well!\p$"
 
 	.align 2
 gUnknown_84586D0::
-	.string "That's it!\nThis is the right move now!\p$"
+	.string "That's it!\n"
+	.string "This is the right move now!\p$"
 
 	.align 2
 gUnknown_84586F8::
-	.string "That's awesome!\nYou can battle that way?\p$"
+	.string "That's awesome!\n"
+	.string "You can battle that way?\p$"
 
 	.align 2
 gUnknown_8458724::
-	.string "You have exquisite timing for\nswitching POKéMON!\p$"
+	.string "You have exquisite timing for\n"
+	.string "switching POKéMON!\p$"
 
 	.align 2
 gUnknown_8458758:: @ 8458758
@@ -471,35 +533,43 @@ gUnknown_8458758:: @ 8458758
 
 	.align 2
 gUnknown_8458778::
-	.string "Oh, I see!\nThis is educational!\p$"
+	.string "Oh, I see!\n"
+	.string "This is educational!\p$"
 
 	.align 2
 gUnknown_845879C::
-	.string "Don't say anything funny anymore!\nI'm sore from laughing!\p$"
+	.string "Don't say anything funny anymore!\n"
+	.string "I'm sore from laughing!\p$"
 
 	.align 2
 gUnknown_84587D8::
-	.string "Oh?\nSomething like that happened.\p$"
+	.string "Oh?\n"
+	.string "Something like that happened.\p$"
 
 	.align 2
 gUnknown_84587FC::
-	.string "Hmhm… What?\nSo is this what you're saying?\p$"
+	.string "Hmhm… What?\n"
+	.string "So is this what you're saying?\p$"
 
 	.align 2
 gUnknown_8458828::
-	.string "Is that right?\nI didn't know that.\p$"
+	.string "Is that right?\n"
+	.string "I didn't know that.\p$"
 
 	.align 2
 gUnknown_845884C::
-	.string "Ahaha!\nWhat is that about?\p$"
+	.string "Ahaha!\n"
+	.string "What is that about?\p$"
 
 	.align 2
 gUnknown_8458868::
-	.string "Yes, that's exactly it!\nThat's what I meant.\p$"
+	.string "Yes, that's exactly it!\n"
+	.string "That's what I meant.\p$"
 
 	.align 2
 gUnknown_8458898::
-	.string "In other words…\nYes! That's right!\p$"
+	.string "In other words…\n"
+	.string "Yes! That's right!\p$"
 
 	.align 2
 gUnknown_84588BC:: @ 84588BC
@@ -514,7 +584,8 @@ gUnknown_84588BC:: @ 84588BC
 
 	.align 2
 gUnknown_84588DC::
-	.string "I'm just showing my TRAINER CARD\nas my way of greeting.\p$"
+	.string "I'm just showing my TRAINER CARD\n"
+	.string "as my way of greeting.\p$"
 
 	.align 2
 gUnknown_8458918::
@@ -522,11 +593,13 @@ gUnknown_8458918::
 
 	.align 2
 gUnknown_845893C::
-	.string "We're showing each other our\nTRAINER CARDS to get acquainted.\p$"
+	.string "We're showing each other our\n"
+	.string "TRAINER CARDS to get acquainted.\p$"
 
 	.align 2
 gUnknown_845897C::
-	.string "Glad to meet you.\nPlease don't be a stranger!\p$"
+	.string "Glad to meet you.\n"
+	.string "Please don't be a stranger!\p$"
 
 	.align 2
 gUnknown_84589AC:: @ 84589AC
@@ -537,11 +610,13 @@ gUnknown_84589AC:: @ 84589AC
 
 	.align 2
 gUnknown_84589BC::
-	.string "Yeahah!\nI really wanted this POKéMON!\p$"
+	.string "Yeahah!\n"
+	.string "I really wanted this POKéMON!\p$"
 
 	.align 2
 gUnknown_84589E4::
-	.string "Finally, a trade got me that\nPOKéMON I'd wanted a long time.\p$"
+	.string "Finally, a trade got me that\n"
+	.string "POKéMON I'd wanted a long time.\p$"
 
 	.align 2
 gUnknown_8458A24::
@@ -549,7 +624,8 @@ gUnknown_8458A24::
 
 	.align 2
 gUnknown_8458A44::
-	.string "I finally got that POKéMON I\nwanted in a trade!\p$"
+	.string "I finally got that POKéMON I\n"
+	.string "wanted in a trade!\p$"
 
 	.align 2
 gUnknown_8458A78:: @ 8458A78
@@ -563,15 +639,30 @@ gUnknown_8458A78:: @ 8458A78
 	.4byte NULL
 
 gUnknown_8458A98:: @ 8458A98
-	.string "{STR_VAR_1} checked the\nTRADING BOARD.\p$"
+	.string "{STR_VAR_1} checked the\n"
+	.string "TRADING BOARD.\p$"
 
 	.align 2
 gUnknown_8458AB8:: @ 8458AB8
-	.string "Welcome to the TRADING BOARD.\pYou may register your POKéMON\nand offer it up for a trade.\pWould you like to register one of\nyour POKéMON?$"
+	.string "Welcome to the TRADING BOARD.\p"
+	.string "You may register your POKéMON\n"
+	.string "and offer it up for a trade.\p"
+	.string "Would you like to register one of\n"
+	.string "your POKéMON?$"
 
 	.align 2
 gUnknown_8458B44:: @ 8458B44
-	.string "This TRADING BOARD is used for\noffering a POKéMON for a trade.\pAll you need to do is register a\nPOKéMON for a trade.\pAnother TRAINER may offer a party\nPOKéMON in return for the trade.\pWe hope you will register POKéMON\nand trade them with many, many\lother TRAINERS.\pWould you like to register one of\nyour POKéMON?$"
+	.string "This TRADING BOARD is used for\n"
+	.string "offering a POKéMON for a trade.\p"
+	.string "All you need to do is register a\n"
+	.string "POKéMON for a trade.\p"
+	.string "Another TRAINER may offer a party\n"
+	.string "POKéMON in return for the trade.\p"
+	.string "We hope you will register POKéMON\n"
+	.string "and trade them with many, many\l"
+	.string "other TRAINERS.\p"
+	.string "Would you like to register one of\n"
+	.string "your POKéMON?$"
 
 	.align 2
 	.incbin "baserom.gba", 0x00458c80, 0x31
@@ -581,11 +672,13 @@ gUnknown_8458B44:: @ 8458B44
 
 	.align 2
 gUnknown_8458CD4:: @ 8458CD4
-	.string "Please choose the type of POKéMON\nthat you would like in the trade.\n$"
+	.string "Please choose the type of POKéMON\n"
+	.string "that you would like in the trade.\n$"
 
 	.align 2
 gUnknown_8458D1C:: @ 8458D1C
-	.string "Which of your party POKéMON will\nyou offer in trade?\p$"
+	.string "Which of your party POKéMON will\n"
+	.string "you offer in trade?\p$"
 
 	.align 2
 gUnknown_8458D54:: @ 8458D54
@@ -601,11 +694,13 @@ gUnknown_8458D9C:: @ 8458D9C
 
 	.align 2
 gUnknown_8458DBC:: @ 8458DBC
-	.string "Cancel the registration of your\nLv. {STR_VAR_2} {STR_VAR_1}?$"
+	.string "Cancel the registration of your\n"
+	.string "Lv. {STR_VAR_2} {STR_VAR_1}?$"
 
 	.align 2
 gUnknown_8458DE8:: @ 8458DE8
-	.string "Cancel the registration of your\nEGG?$"
+	.string "Cancel the registration of your\n"
+	.string "EGG?$"
 
 	.align 2
 gUnknown_8458E10:: @ 8458E10
@@ -615,21 +710,26 @@ gUnknown_8458E10:: @ 8458E10
 	.incbin "baserom.gba", 0x00458e38, 0x38
 
 gUnknown_8458E70:: @ 8458E70
-	.string "Would you like to ask {STR_VAR_1} to\nmake a trade?$"
+	.string "Would you like to ask {STR_VAR_1} to\n"
+	.string "make a trade?$"
 
 	.align 2
 	.incbin "baserom.gba", 0x00458e9c, 0x34
 
 gUnknown_8458ED0:: @ 8458ED0
-	.string "You don't have a {STR_VAR_2}-type\nPOKéMON that {STR_VAR_1} wants.\p$"
+	.string "You don't have a {STR_VAR_2}-type\n"
+	.string "POKéMON that {STR_VAR_1} wants.\p$"
 
 	.align 2
 gUnknown_8458F04:: @ 8458F04
-	.string "You don't have an EGG that\n{STR_VAR_1} wants.\p$"
+	.string "You don't have an EGG that\n"
+	.string "{STR_VAR_1} wants.\p$"
 	.align 2
-	.string "{STR_VAR_1} can't make a trade for\nyour POKéMON right now.\p$"
+	.string "{STR_VAR_1} can't make a trade for\n"
+	.string "your POKéMON right now.\p$"
 	.align 2
-	.string "You can't make a trade for\n{STR_VAR_1}'s POKéMON right now.\p$"
+	.string "You can't make a trade for\n"
+	.string "{STR_VAR_1}'s POKéMON right now.\p$"
 	.incbin "baserom.gba", 0x00458f94, 0x8
 
 gUnknown_8458F9C:: @ 8458F9C
@@ -648,39 +748,48 @@ gUnknown_8458FE4:: @ 8458FE4
 
 	.align 2
 gUnknown_8459000::
-	.string "Please choose a TRAINER for\na SINGLE BATTLE.$"
+	.string "Please choose a TRAINER for\n"
+	.string "a SINGLE BATTLE.$"
 
 	.align 2
 gUnknown_8459030::
-	.string "Please choose a TRAINER for\na DOUBLE BATTLE.$"
+	.string "Please choose a TRAINER for\n"
+	.string "a DOUBLE BATTLE.$"
 
 	.align 2
 gUnknown_8459060::
-	.string "Please choose the LEADER\nfor a MULTI BATTLE.$"
+	.string "Please choose the LEADER\n"
+	.string "for a MULTI BATTLE.$"
 
 	.align 2
 gUnknown_8459090::
-	.string "Please choose the TRAINER to\ntrade with.$"
+	.string "Please choose the TRAINER to\n"
+	.string "trade with.$"
 
 	.align 2
 gUnknown_84590BC::
-	.string "Please choose the TRAINER who is\nsharing WONDER CARDS.$"
+	.string "Please choose the TRAINER who is\n"
+	.string "sharing WONDER CARDS.$"
 
 	.align 2
 gUnknown_84590F4::
-	.string "Please choose the TRAINER who is\nsharing WONDER NEWS.$"
+	.string "Please choose the TRAINER who is\n"
+	.string "sharing WONDER NEWS.$"
 
 	.align 2
 gUnknown_845912C::
-	.string "Jump with mini POKéMON!\nPlease choose the LEADER.$"
+	.string "Jump with mini POKéMON!\n"
+	.string "Please choose the LEADER.$"
 
 	.align 2
 gUnknown_8459160::
-	.string "BERRY CRUSH!\nPlease choose the LEADER.$"
+	.string "BERRY CRUSH!\n"
+	.string "Please choose the LEADER.$"
 
 	.align 2
 gUnknown_8459188::
-	.string "DODRIO BERRY-PICKING!\nPlease choose the LEADER.$"
+	.string "DODRIO BERRY-PICKING!\n"
+	.string "Please choose the LEADER.$"
 
 	.align 2
 gUnknown_84591B8:: @ 84591B8
@@ -696,7 +805,8 @@ gUnknown_84591B8:: @ 84591B8
 
 	.align 2
 gUnknown_84591DC:: @ 84591DC
-	.string "Searching for a WIRELESS\nCOMMUNICATION SYSTEM. Wait...$"
+	.string "Searching for a WIRELESS\n"
+	.string "COMMUNICATION SYSTEM. Wait...$"
 
 	.align 2
 	.incbin "baserom.gba", 0x00459214, 0x24
@@ -705,14 +815,18 @@ gUnknown_8459238:: @ 8459238
 	.string "Awaiting {STR_VAR_1}'s response…$"
 
 gUnknown_8459250:: @ 8459250
-	.string "{STR_VAR_1} has been asked to register\nyou as a member. Please wait.$"
+	.string "{STR_VAR_1} has been asked to register\n"
+	.string "you as a member. Please wait.$"
 
 gUnknown_845928C:: @ 845928C
-	.string "Awaiting a response from the\nWIRELESS COMMUNICATION SYSTEM.$"
+	.string "Awaiting a response from the\n"
+	.string "WIRELESS COMMUNICATION SYSTEM.$"
 	.incbin "baserom.gba", 0x004592c8, 0x20
-	.string "No CARDS appear to be shared \nright now.$"
+	.string "No CARDS appear to be shared \n"
+	.string "right now.$"
 	.align 2
-	.string "No NEWS appears to be shared\nright now.$"
+	.string "No NEWS appears to be shared\n"
+	.string "right now.$"
 
 gUnknown_845933C:: @ 845933C
 	.incbin "baserom.gba", 0x45933C, 0x3C

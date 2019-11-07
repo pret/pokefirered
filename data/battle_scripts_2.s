@@ -35,11 +35,11 @@ gBattlescriptsForBallThrow::
 
 gBattlescriptsForUsingItem::
 	.4byte BattleScript_PlayerUseItem
-	.4byte BattleScript_AIuseFullRestoreOrHpHeal
-	.4byte BattleScript_AIuseFullRestoreOrHpHeal
-	.4byte BattleScript_AIuseStatRestore
-	.4byte BattleScript_AIuseXstat
-	.4byte BattleScript_AIuseGuardSpec
+	.4byte BattleScript_AIUseFullRestoreOrHpHeal
+	.4byte BattleScript_AIUseFullRestoreOrHpHeal
+	.4byte BattleScript_AIUseStatRestore
+	.4byte BattleScript_AIUseXstat
+	.4byte BattleScript_AIUseGuardSpec
 
 gBattlescriptsForRunningByItem::
 	.4byte BattleScript_UseFluffyTail
@@ -53,7 +53,7 @@ gBattlescriptsForSafariActions::
 
 BattleScript_ThrowBall::
 	jumpifbattletype BATTLE_TYPE_OLD_MAN_TUTORIAL, BattleScript_OldManThrowBall
-	jumpifbattletype BATTLE_TYPE_POKEDUDE, BattleScript_PokeDudeThrowBall
+	jumpifbattletype BATTLE_TYPE_POKEDUDE, BattleScript_PokedudeThrowBall
 	printstring STRINGID_PLAYERUSEDITEM
 	handleballthrow
 
@@ -61,7 +61,7 @@ BattleScript_OldManThrowBall::
 	printstring STRINGID_OLDMANUSEDITEM
 	handleballthrow
 
-BattleScript_PokeDudeThrowBall::
+BattleScript_PokedudeThrowBall::
 	printstring STRINGID_POKEDUDEUSED
 	handleballthrow
 
@@ -131,7 +131,7 @@ BattleScript_PlayerUseItem::
 	moveendcase 15
 	end
 
-BattleScript_AIuseFullRestoreOrHpHeal::
+BattleScript_AIUseFullRestoreOrHpHeal::
 	printstring STRINGID_EMPTYSTRING3
 	pause 48
 	playse SE_KAIFUKU
@@ -147,7 +147,7 @@ BattleScript_AIuseFullRestoreOrHpHeal::
 	moveendcase 15
 	finishaction
 
-BattleScript_AIuseStatRestore::
+BattleScript_AIUseStatRestore::
 	printstring STRINGID_EMPTYSTRING3
 	pause 48
 	playse SE_KAIFUKU
@@ -160,7 +160,7 @@ BattleScript_AIuseStatRestore::
 	moveendcase 15
 	finishaction
 
-BattleScript_AIuseXstat::
+BattleScript_AIUseXstat::
 	printstring STRINGID_EMPTYSTRING3
 	pause 48
 	playse SE_KAIFUKU
@@ -172,7 +172,7 @@ BattleScript_AIuseXstat::
 	moveendcase 15
 	finishaction
 
-BattleScript_AIuseGuardSpec::
+BattleScript_AIUseGuardSpec::
 	printstring STRINGID_EMPTYSTRING3
 	pause 48
 	playse SE_KAIFUKU

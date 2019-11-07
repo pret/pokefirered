@@ -8,6 +8,7 @@
 #include "constants/species.h"
 #include "constants/pokemon.h"
 #include "constants/songs.h"
+#include "constants/trainers.h"
 #include "constants/game_stat.h"
 #include "battle_string_ids.h"
 	.include "asm/macros/battle_script.inc"
@@ -2931,7 +2932,7 @@ BattleScript_PayDayMoneyAndPickUpItems::
 BattleScript_LocalBattleLost::
 	jumpifbattletype BATTLE_TYPE_TRAINER_TOWER, BattleScript_BattleTowerLost
 	jumpifbattletype BATTLE_TYPE_EREADER_TRAINER, BattleScript_EReaderOrSecretBaseTrainerEnd
-	jumpifhalfword CMP_EQUAL, gTrainerBattleOpponent_A, 1024, BattleScript_EReaderOrSecretBaseTrainerEnd
+	jumpifhalfword CMP_EQUAL, gTrainerBattleOpponent_A, TRAINER_SECRET_BASE, BattleScript_EReaderOrSecretBaseTrainerEnd
 	jumpifbyte CMP_NOT_EQUAL, cMULTISTRING_CHOOSER, 0, BattleScript_RivalBattleLost
 BattleScript_LocalBattleLostPrintWhiteOut::
 	jumpifbattletype BATTLE_TYPE_TRAINER, BattleScript_LocalBattleLostEnd

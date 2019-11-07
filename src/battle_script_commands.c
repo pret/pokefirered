@@ -5176,7 +5176,7 @@ static void atk5D_getmoneyreward(void)
     // The whole function is using wrong registers. 
     if (gBattleOutcome == B_OUTCOME_WON)
     {
-        if (gTrainerBattleOpponent_A == 0x400)
+        if (gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
         {
             moneyReward = 20 * gBattleResources->secretBase->party.levels[0] * gBattleStruct->moneyMultiplier;
         }
@@ -8810,7 +8810,7 @@ static void atkD2_tryswapitems(void) // trick
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER
      || (GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT
          && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER))
-         && gTrainerBattleOpponent_A != 0x400))
+         && gTrainerBattleOpponent_A != TRAINER_SECRET_BASE))
     {
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     }
@@ -8821,7 +8821,7 @@ static void atkD2_tryswapitems(void) // trick
 
         // you can't swap items if they were knocked off in regular battles
         if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER))
-         && gTrainerBattleOpponent_A != 0x400
+         && gTrainerBattleOpponent_A != TRAINER_SECRET_BASE
          && (gWishFutureKnock.knockedOffMons[sideAttacker] & gBitTable[gBattlerPartyIndexes[gBattlerAttacker]]
             || gWishFutureKnock.knockedOffMons[sideTarget] & gBitTable[gBattlerPartyIndexes[gBattlerTarget]]))
         {

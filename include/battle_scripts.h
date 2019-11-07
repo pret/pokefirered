@@ -227,7 +227,7 @@ extern const u8 BattleScript_FlushMessageBox[];
 extern const u8 BattleScript_SpikesOnFaintedBattler[];
 extern const u8 BattleScript_GhostBallDodge[];
 extern const u8 BattleScript_OldMan_Pokedude_CaughtMessage[];
-extern const u8 BattleScript_SilphScopeUnveiled[]; // knizz: silph scope unveil
+extern const u8 BattleScript_SilphScopeUnveiled[];
 extern const u8 BattleScript_BattleTowerTrainerBattleWon[];
 
 extern const u8 *const gBattleScriptsForMoveEffects[];

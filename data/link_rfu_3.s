@@ -208,148 +208,625 @@ gUnknown_8457C20:: @ 8457C20
 	.incbin "baserom.gba", 0x457C20, 0x28
 
 gUnknown_8457C48:: @ 8457C48
-	.incbin "baserom.gba", 0x457C48, 0x5C
+	.string "The other TRAINER showed\n"
+	.string "you their TRAINER CARD.\p"
+	.string "Would you like to show your\n"
+	.string "TRAINER CARD?$"
 
+	.align 2
 gUnknown_8457CA4:: @ 8457CA4
-	.incbin "baserom.gba", 0x457CA4, 0x54
+	.string "The other TRAINER challenges you\n"
+	.string "to battle.\p"
+	.string "Will you accept the battle\n"
+	.string "challenge?$"
 
+	.align 2
 gUnknown_8457CF8:: @ 8457CF8
-	.incbin "baserom.gba", 0x457CF8, 0x4C
+	.string "The other TRAINER invites you\n"
+	.string "to chat.\p"
+	.string "Will you accept the chat\n"
+	.string "invitation?$"
 
+	.align 2
 gUnknown_8457D44:: @ 8457D44
-	.incbin "baserom.gba", 0x457D44, 0x74
+	.string "There is an offer to trade your\n"
+	.string "registered Lv. {DYNAMIC 0} {DYNAMIC 1}\p"
+	.string "in exchange for a\n"
+	.string "Lv. {DYNAMIC 2} {DYNAMIC 3}.\p"
+	.string "Will you accept this trade\n"
+	.string "offer?$"
 
+	.align 2
 gUnknown_8457DB8:: @ 8457DB8
-	.incbin "baserom.gba", 0x457DB8, 0x54
+	.string "There is an offer to trade your\n"
+	.string "registered EGG.\l"
+	.string "Will you accept this trade offer?$"
 
+	.align 2
 gUnknown_8457E0C:: @ 8457E0C
-	.incbin "baserom.gba", 0x457E0C, 0x1C
+	.string "The chat has been dropped.\p$"
 
 gUnknown_8457E28:: @ 8457E28
-	.incbin "baserom.gba", 0x457E28, 0x1C
+	.string "You declined the offer.\p$"
 
+	.align 2
 gUnknown_8457E44:: @ 8457E44
-	.incbin "baserom.gba", 0x457E44, 0x1C
+	.string "You declined the offer.\p$"
 
+	.align 2
 gUnknown_8457E60:: @ 8457E60
-	.incbin "baserom.gba", 0x457E60, 0x120
+	.string "The chat was ended.\p$"
+	.align 2
 
+gUnknown_8457E78::
+	.4byte gUnknown_8457C48
+	.4byte gUnknown_8457CA4
+	.4byte gUnknown_8457CF8
+	.4byte gUnknown_8457D44
+
+	.align 2
+gUnknown_8457E88::
+	.string "Oh, hey! We're in a chat right now.\n"
+	.string "Want to join us?$"
+
+	.align 2
+gUnknown_8457EC0::
+	.string "{STR_VAR_1}: Hey, {PLAYER}!\n"
+	.string "We're having a chat right now.\l"
+	.string "Want to join us?$"
+
+	.align 2
+gUnknown_8457F00::
+	.string "Oh, hi! We're having a chat now.\n"
+	.string "Would you like to join us?$"
+
+	.align 2
+gUnknown_8457F3C::
+	.string "{STR_VAR_1}: Oh, hi, {PLAYER}!\n"
+	.string "We're having a chat now.\l"
+	.string "Would you like to join us?$"
+
+	.align 2
 gUnknown_8457F80:: @ 8457F80
-	.incbin "baserom.gba", 0x457F80, 0x10
+	.4byte gUnknown_8457E88
+	.4byte gUnknown_8457F00
+	.4byte gUnknown_8457EC0
+	.4byte gUnknown_8457F3C
 
 gUnknown_8457F90:: @ 8457F90
-	.incbin "baserom.gba", 0x457F90, 0x164
+	.string "……\n"
+	.string "The TRAINER appears to be busy…\p$"
 
+	.align 2
+gUnknown_8457FB4::
+	.string "A battle, huh?\n"
+	.string "All right, just give me some time.$"
+
+	.align 2
+gUnknown_8457FE8::
+	.string "You want to chat, huh?\n"
+	.string "Sure, just wait a little.$"
+
+	.align 2
+gUnknown_845801C::
+	.string "Sure thing! As my “Greetings,”\n"
+	.string "here's my TRAINER CARD.$"
+
+	.align 2
+gUnknown_8458054::
+	.string "A battle? Of course, but I need\n"
+	.string "time to get ready.$"
+
+	.align 2
+gUnknown_8458088::
+	.string "Did you want to chat?\n"
+	.string "Okay, but please wait a moment.$"
+
+	.align 2
+gUnknown_84580C0::
+	.string "As my introduction, I'll show you\n"
+	.string "my TRAINER CARD.$"
+
+	.align 2
 gUnknown_84580F4:: @ 84580F4
-	.incbin "baserom.gba", 0x4580F4, 0x13C
+	.4byte gUnknown_8457FB4
+	.4byte gUnknown_8457FE8
+	.4byte 0
+	.4byte gUnknown_845801C
+	.4byte gUnknown_8458054
+	.4byte gUnknown_8458088
+	.4byte 0
+	.4byte gUnknown_84580C0
 
+	.align 2
+	.incbin "baserom.gba", 0x458114, 0x18
+
+	.align 2
+gUnknown_845812C::
+	.string "Thanks for waiting!\n"
+	.string "Let's get our battle started!{PAUSE 60}$"
+
+	.align 2
+gUnknown_8458164::
+	.string "All right!\n"
+	.string "Let's chat!{PAUSE 60}$"
+
+	.align 2
+gUnknown_8458180::
+	.string "Sorry I made you wait!\n"
+	.string "Let's get started!{PAUSE 60}$"
+
+	.align 2
+gUnknown_84581B0::
+	.string "Sorry I made you wait!\n"
+	.string "Let's chat.{PAUSE 60}$"
+
+	.align 2
+gUnknown_84581D8::
+	.string "The trade will be started.{PAUSE 60}$"
+
+	.align 2
+gUnknown_84581F8::
+	.string "The battle will be started.{PAUSE 60}$"
+
+	.align 2
+gUnknown_8458218::
+	.string "Entering the chat…{PAUSE 60}$"
+
+	.align 2
 gUnknown_8458230:: @ 8458230
-	.incbin "baserom.gba", 0x458230, 0xE4
+	.4byte gUnknown_84581F8
+	.4byte gUnknown_8458218
+	.4byte gUnknown_84581D8
+	.4byte gUnknown_84581F8
+	.4byte gUnknown_8458218
+	.4byte gUnknown_84581D8
+	.4byte gUnknown_845812C
+	.4byte gUnknown_8458164
+	.4byte gUnknown_84581D8
+	.4byte gUnknown_8458180
+	.4byte gUnknown_84581B0
+	.4byte gUnknown_84581D8
+
+gUnknown_8458260::
+	.string "Sorry! My POKéMON don't seem to\n"
+	.string "be feeling too well right now.\l"
+	.string "Let me battle you another time.\p$"
+
+gUnknown_84582C0::
+	.string "I'm terribly sorry, but my POKéMON\n"
+	.string "aren't feeling well…\p"
+	.string "Let's battle another time.\p$"
 
 gUnknown_8458314:: @ 8458314
-	.incbin "baserom.gba", 0x458314, 0xA0
+	.4byte gUnknown_8458260
+	.4byte gUnknown_84582C0
 
+	.align 2
+gUnknown_845831C::
+	.string "Huh? My TRAINER CARD…\n"
+	.string "Where'd it go now?\l"
+	.string "Sorry! I'll show you another time!\p$"
+
+	.align 2
+gUnknown_845836C::
+	.string "Oh? Now where did I put my\n"
+	.string "TRAINER CARD?…\l"
+	.string "Sorry! I'll show you later!\p$"
+
+	.align 2
 gUnknown_84583B4:: @ 84583B4
-	.incbin "baserom.gba", 0x4583B4, 0x78
+	.4byte gUnknown_845831C
+	.4byte gUnknown_845836C
 
+	.align 2
+gUnknown_84583BC::
+	.string "If you want to do something with\n"
+	.string "me, just give me a shout!\p$"
+	.align 2
+gUnknown_84583F8::
+	.string "If you want to do something with\n"
+	.string "me, don't be shy.\p$"
+
+	.align 2
 gUnknown_845842C:: @ 845842C
-	.incbin "baserom.gba", 0x45842C, 0x8
+	.4byte gUnknown_84583BC
+	.4byte gUnknown_84583F8
 
 gUnknown_8458434:: @ 8458434
-	.incbin "baserom.gba", 0x458434, 0x48
+	.string "Whoops! Sorry, but I have to do\n"
+	.string "something else.\l"
+	.string "Another time, okay?\p$"
 
+	.align 2
 gUnknown_845847C:: @ 845847C
-	.incbin "baserom.gba", 0x45847C, 0x44
+	.string "If you want to battle, you need\n"
+	.string "two POKéMON that are below\l"
+	.string "Lv. 30.\p$"
 
 gUnknown_84584C0:: @ 84584C0
-	.incbin "baserom.gba", 0x4584C0, 0x88
+	.string "For a battle, you need two\n"
+	.string "POKéMON that are below Lv. 30.\p$"
 
+	.align 2
+gUnknown_84584FC::
+	.string "Oh, all right.\n"
+	.string "Come see me anytime, okay?\p$"
+
+	.align 2
+gUnknown_8458528::
+	.string "Oh…\n"
+	.string "Please come by anytime.\p$"
+
+	.align 2
 gUnknown_8458548:: @ 8458548
-	.incbin "baserom.gba", 0x458548, 0xA0
+	.4byte gUnknown_84584FC
+	.4byte gUnknown_8458528
 
+	.align 2
+gUnknown_8458550::
+	.string "Oh, sorry!\n"
+	.string "I just can't right this instant.\l"
+	.string "Let's chat another time.\p$"
+
+	.align 2
+gUnknown_8458598::
+	.string "Oh, I'm sorry.\n"
+	.string "I have too much to do right now.\l"
+	.string "Let's chat some other time.\p$"
+
+	.align 2
 gUnknown_84585E8:: @ 84585E8
-	.incbin "baserom.gba", 0x4585E8, 0x170
+	.4byte gUnknown_8458550
+	.4byte gUnknown_8458598
 
+	.align 2
+gUnknown_84585F0::
+	.string "Whoa!\n"
+	.string "I can tell you're pretty tough!\p$"
+
+	.align 2
+gUnknown_8458618::
+	.string "You used that move?\n"
+	.string "That's good strategy!\p$"
+
+	.align 2
+gUnknown_8458644::
+	.string "Way to go!\n"
+	.string "That was an eye-opener!\p$"
+
+	.align 2
+gUnknown_8458668::
+	.string "Oh! How could you use that\n"
+	.string "POKéMON in that situation?\p$"
+
+	.align 2
+gUnknown_84586A0::
+	.string "That POKéMON…\n"
+	.string "It's been raised really well!\p$"
+
+	.align 2
+gUnknown_84586D0::
+	.string "That's it!\n"
+	.string "This is the right move now!\p$"
+
+	.align 2
+gUnknown_84586F8::
+	.string "That's awesome!\n"
+	.string "You can battle that way?\p$"
+
+	.align 2
+gUnknown_8458724::
+	.string "You have exquisite timing for\n"
+	.string "switching POKéMON!\p$"
+
+	.align 2
 gUnknown_8458758:: @ 8458758
-	.incbin "baserom.gba", 0x458758, 0x164
+	.4byte gUnknown_84585F0
+	.4byte gUnknown_8458618
+	.4byte gUnknown_8458644
+	.4byte gUnknown_8458668
+	.4byte gUnknown_84586A0
+	.4byte gUnknown_84586D0
+	.4byte gUnknown_84586F8
+	.4byte gUnknown_8458724
 
+	.align 2
+gUnknown_8458778::
+	.string "Oh, I see!\n"
+	.string "This is educational!\p$"
+
+	.align 2
+gUnknown_845879C::
+	.string "Don't say anything funny anymore!\n"
+	.string "I'm sore from laughing!\p$"
+
+	.align 2
+gUnknown_84587D8::
+	.string "Oh?\n"
+	.string "Something like that happened.\p$"
+
+	.align 2
+gUnknown_84587FC::
+	.string "Hmhm… What?\n"
+	.string "So is this what you're saying?\p$"
+
+	.align 2
+gUnknown_8458828::
+	.string "Is that right?\n"
+	.string "I didn't know that.\p$"
+
+	.align 2
+gUnknown_845884C::
+	.string "Ahaha!\n"
+	.string "What is that about?\p$"
+
+	.align 2
+gUnknown_8458868::
+	.string "Yes, that's exactly it!\n"
+	.string "That's what I meant.\p$"
+
+	.align 2
+gUnknown_8458898::
+	.string "In other words…\n"
+	.string "Yes! That's right!\p$"
+
+	.align 2
 gUnknown_84588BC:: @ 84588BC
-	.incbin "baserom.gba", 0x4588BC, 0xF0
+	.4byte gUnknown_8458778
+	.4byte gUnknown_845879C
+	.4byte gUnknown_84587D8
+	.4byte gUnknown_84587FC
+	.4byte gUnknown_8458828
+	.4byte gUnknown_845884C
+	.4byte gUnknown_8458868
+	.4byte gUnknown_8458898
 
+	.align 2
+gUnknown_84588DC::
+	.string "I'm just showing my TRAINER CARD\n"
+	.string "as my way of greeting.\p$"
+
+	.align 2
+gUnknown_8458918::
+	.string "I hope I get to know you better!\p$"
+
+	.align 2
+gUnknown_845893C::
+	.string "We're showing each other our\n"
+	.string "TRAINER CARDS to get acquainted.\p$"
+
+	.align 2
+gUnknown_845897C::
+	.string "Glad to meet you.\n"
+	.string "Please don't be a stranger!\p$"
+
+	.align 2
 gUnknown_84589AC:: @ 84589AC
-	.incbin "baserom.gba", 0x4589AC, 0xCC
+	.4byte gUnknown_84588DC
+	.4byte gUnknown_8458918
+	.4byte gUnknown_845893C
+	.4byte gUnknown_845897C
 
+	.align 2
+gUnknown_84589BC::
+	.string "Yeahah!\n"
+	.string "I really wanted this POKéMON!\p$"
+
+	.align 2
+gUnknown_84589E4::
+	.string "Finally, a trade got me that\n"
+	.string "POKéMON I'd wanted a long time.\p$"
+
+	.align 2
+gUnknown_8458A24::
+	.string "I'm trading POKéMON right now.\p$"
+
+	.align 2
+gUnknown_8458A44::
+	.string "I finally got that POKéMON I\n"
+	.string "wanted in a trade!\p$"
+
+	.align 2
 gUnknown_8458A78:: @ 8458A78
-	.incbin "baserom.gba", 0x458A78, 0x20
+	.4byte gUnknown_84589BC
+	.4byte gUnknown_84589E4
+	.4byte NULL
+	.4byte NULL
+	.4byte gUnknown_8458A24
+	.4byte gUnknown_8458A44
+	.4byte NULL
+	.4byte NULL
 
 gUnknown_8458A98:: @ 8458A98
-	.incbin "baserom.gba", 0x458A98, 0x20
+	.string "{STR_VAR_1} checked the\n"
+	.string "TRADING BOARD.\p$"
 
+	.align 2
 gUnknown_8458AB8:: @ 8458AB8
-	.incbin "baserom.gba", 0x458AB8, 0x8C
+	.string "Welcome to the TRADING BOARD.\p"
+	.string "You may register your POKéMON\n"
+	.string "and offer it up for a trade.\p"
+	.string "Would you like to register one of\n"
+	.string "your POKéMON?$"
 
+	.align 2
 gUnknown_8458B44:: @ 8458B44
-	.incbin "baserom.gba", 0x458B44, 0x190
+	.string "This TRADING BOARD is used for\n"
+	.string "offering a POKéMON for a trade.\p"
+	.string "All you need to do is register a\n"
+	.string "POKéMON for a trade.\p"
+	.string "Another TRAINER may offer a party\n"
+	.string "POKéMON in return for the trade.\p"
+	.string "We hope you will register POKéMON\n"
+	.string "and trade them with many, many\l"
+	.string "other TRAINERS.\p"
+	.string "Would you like to register one of\n"
+	.string "your POKéMON?$"
 
+	.align 2
+	.incbin "baserom.gba", 0x00458c80, 0x31
+
+	.align 2
+	.incbin "baserom.gba", 0x00458cb4, 0x20
+
+	.align 2
 gUnknown_8458CD4:: @ 8458CD4
-	.incbin "baserom.gba", 0x458CD4, 0x48
+	.string "Please choose the type of POKéMON\n"
+	.string "that you would like in the trade.\n$"
 
+	.align 2
 gUnknown_8458D1C:: @ 8458D1C
-	.incbin "baserom.gba", 0x458D1C, 0x38
+	.string "Which of your party POKéMON will\n"
+	.string "you offer in trade?\p$"
 
+	.align 2
 gUnknown_8458D54:: @ 8458D54
-	.incbin "baserom.gba", 0x458D54, 0x24
+	.string "Registration has been canceled.\p$"
 
+	.align 2
 gUnknown_8458D78:: @ 8458D78
-	.incbin "baserom.gba", 0x458D78, 0x24
+	.string "Registration has been completed.\p$"
 
+	.align 2
 gUnknown_8458D9C:: @ 8458D9C
-	.incbin "baserom.gba", 0x458D9C, 0x20
+	.string "The trade has been canceled.\p$"
 
+	.align 2
 gUnknown_8458DBC:: @ 8458DBC
-	.incbin "baserom.gba", 0x458DBC, 0x2C
+	.string "Cancel the registration of your\n"
+	.string "Lv. {STR_VAR_2} {STR_VAR_1}?$"
 
+	.align 2
 gUnknown_8458DE8:: @ 8458DE8
-	.incbin "baserom.gba", 0x458DE8, 0x28
+	.string "Cancel the registration of your\n"
+	.string "EGG?$"
 
+	.align 2
 gUnknown_8458E10:: @ 8458E10
-	.incbin "baserom.gba", 0x458E10, 0x60
+	.string "The registration has been canceled.\p$"
+
+	.align 2
+	.incbin "baserom.gba", 0x00458e38, 0x38
 
 gUnknown_8458E70:: @ 8458E70
-	.incbin "baserom.gba", 0x458E70, 0x60
+	.string "Would you like to ask {STR_VAR_1} to\n"
+	.string "make a trade?$"
+
+	.align 2
+	.incbin "baserom.gba", 0x00458e9c, 0x34
 
 gUnknown_8458ED0:: @ 8458ED0
-	.incbin "baserom.gba", 0x458ED0, 0x34
+	.string "You don't have a {STR_VAR_2}-type\n"
+	.string "POKéMON that {STR_VAR_1} wants.\p$"
 
+	.align 2
 gUnknown_8458F04:: @ 8458F04
-	.incbin "baserom.gba", 0x458F04, 0x98
+	.string "You don't have an EGG that\n"
+	.string "{STR_VAR_1} wants.\p$"
+	.align 2
+	.string "{STR_VAR_1} can't make a trade for\n"
+	.string "your POKéMON right now.\p$"
+	.align 2
+	.string "You can't make a trade for\n"
+	.string "{STR_VAR_1}'s POKéMON right now.\p$"
+	.incbin "baserom.gba", 0x00458f94, 0x8
 
 gUnknown_8458F9C:: @ 8458F9C
-	.incbin "baserom.gba", 0x458F9C, 0x20
+	.string "Your trade offer was rejected.\p$"
 
 gUnknown_8458FBC:: @ 8458FBC
-	.incbin "baserom.gba", 0x458FBC, 0xC
+	.string "EGG TRADE$"
 
+	.align 2
 gUnknown_8458FC8:: @ 8458FC8
-	.incbin "baserom.gba", 0x458FC8, 0x1C
+	.string "{DPAD_UPDOWN}CHOOSE  {A_BUTTON}JOIN  {B_BUTTON}CANCEL$"
 
+	.align 2
 gUnknown_8458FE4:: @ 8458FE4
-	.incbin "baserom.gba", 0x458FE4, 0x1D4
+	.string "Please choose a TRAINER.$"
 
+	.align 2
+gUnknown_8459000::
+	.string "Please choose a TRAINER for\n"
+	.string "a SINGLE BATTLE.$"
+
+	.align 2
+gUnknown_8459030::
+	.string "Please choose a TRAINER for\n"
+	.string "a DOUBLE BATTLE.$"
+
+	.align 2
+gUnknown_8459060::
+	.string "Please choose the LEADER\n"
+	.string "for a MULTI BATTLE.$"
+
+	.align 2
+gUnknown_8459090::
+	.string "Please choose the TRAINER to\n"
+	.string "trade with.$"
+
+	.align 2
+gUnknown_84590BC::
+	.string "Please choose the TRAINER who is\n"
+	.string "sharing WONDER CARDS.$"
+
+	.align 2
+gUnknown_84590F4::
+	.string "Please choose the TRAINER who is\n"
+	.string "sharing WONDER NEWS.$"
+
+	.align 2
+gUnknown_845912C::
+	.string "Jump with mini POKéMON!\n"
+	.string "Please choose the LEADER.$"
+
+	.align 2
+gUnknown_8459160::
+	.string "BERRY CRUSH!\n"
+	.string "Please choose the LEADER.$"
+
+	.align 2
+gUnknown_8459188::
+	.string "DODRIO BERRY-PICKING!\n"
+	.string "Please choose the LEADER.$"
+
+	.align 2
 gUnknown_84591B8:: @ 84591B8
-	.incbin "baserom.gba", 0x4591B8, 0x24
+	.4byte gUnknown_8459000
+	.4byte gUnknown_8459030
+	.4byte gUnknown_8459060
+	.4byte gUnknown_8459090
+	.4byte gUnknown_845912C
+	.4byte gUnknown_8459160
+	.4byte gUnknown_8459188
+	.4byte gUnknown_84590BC
+	.4byte gUnknown_84590F4
 
+	.align 2
 gUnknown_84591DC:: @ 84591DC
-	.incbin "baserom.gba", 0x4591DC, 0x5C
+	.string "Searching for a WIRELESS\n"
+	.string "COMMUNICATION SYSTEM. Wait...$"
+
+	.align 2
+	.incbin "baserom.gba", 0x00459214, 0x24
 
 gUnknown_8459238:: @ 8459238
-	.incbin "baserom.gba", 0x459238, 0x18
+	.string "Awaiting {STR_VAR_1}'s response…$"
 
 gUnknown_8459250:: @ 8459250
-	.incbin "baserom.gba", 0x459250, 0x3C
+	.string "{STR_VAR_1} has been asked to register\n"
+	.string "you as a member. Please wait.$"
 
 gUnknown_845928C:: @ 845928C
-	.incbin "baserom.gba", 0x45928C, 0xB0
+	.string "Awaiting a response from the\n"
+	.string "WIRELESS COMMUNICATION SYSTEM.$"
+	.incbin "baserom.gba", 0x004592c8, 0x20
+	.string "No CARDS appear to be shared \n"
+	.string "right now.$"
+	.align 2
+	.string "No NEWS appears to be shared\n"
+	.string "right now.$"
 
 gUnknown_845933C:: @ 845933C
 	.incbin "baserom.gba", 0x45933C, 0x3C

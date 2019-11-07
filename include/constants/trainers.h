@@ -165,6 +165,7 @@
 #define TRAINER_PIC_LADY                  146
 #define TRAINER_PIC_PAINTER               147
 
+// Leftover from R/S
 #define TRAINER_SECRET_BASE                 1024
 
 #define F_TRAINER_FEMALE (1 << 7)

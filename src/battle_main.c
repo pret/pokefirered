@@ -66,8 +66,8 @@ static void HandleAction_UseItem(void);
 static void HandleAction_Run(void);
 static void HandleAction_WatchesCarefully(void);
 static void HandleAction_SafariZoneBallThrow(void);
-static void HandleAction_ThrowPokeblock(void);
-static void HandleAction_GoNear(void);
+static void HandleAction_ThrowBait(void);
+static void HandleAction_ThrowRock(void);
 static void HandleAction_SafariZoneRun(void);
 static void HandleAction_OldManBallThrow(void);
 static void HandleAction_TryFinish(void);
@@ -582,8 +582,8 @@ static void (*const sTurnActionsFuncsTable[])(void) =
     [B_ACTION_RUN] = HandleAction_Run,
     [B_ACTION_SAFARI_WATCH_CAREFULLY] = HandleAction_WatchesCarefully,
     [B_ACTION_SAFARI_BALL] = HandleAction_SafariZoneBallThrow,
-    [B_ACTION_SAFARI_POKEBLOCK] = HandleAction_ThrowPokeblock,
-    [B_ACTION_SAFARI_GO_NEAR] = HandleAction_GoNear,
+    [B_ACTION_SAFARI_POKEBLOCK] = HandleAction_ThrowBait,
+    [B_ACTION_SAFARI_GO_NEAR] = HandleAction_ThrowRock,
     [B_ACTION_SAFARI_RUN] = HandleAction_SafariZoneRun,
     [B_ACTION_OLDMAN_THROW] = HandleAction_OldManBallThrow,
     [B_ACTION_EXEC_SCRIPT] = HandleAction_RunBattleScript,
@@ -2677,7 +2677,7 @@ static void BattleIntroPrintWildMonAttacked(void)
         if ((gBattleTypeFlags & (BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_GHOST)) == (BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_GHOST))
         {
             gBattleScripting.battler = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-            BattleScriptExecute(gUnknown_81D91A1);
+            BattleScriptExecute(BattleScript_SilphScopeUnveiled);
         }
     }
 }
@@ -2910,7 +2910,7 @@ void BattleTurnPassed(void)
     TurnValuesCleanUp(FALSE);
     gHitMarker &= ~(HITMARKER_NO_ATTACKSTRING);
     gHitMarker &= ~(HITMARKER_UNABLE_TO_USE_MOVE);
-    gHitMarker &= ~(HITMARKER_x400000);
+    gHitMarker &= ~(HITMARKER_PLAYER_FAINTED);
     gHitMarker &= ~(HITMARKER_x100000);
     gBattleScripting.animTurn = 0;
     gBattleScripting.animTargetsHit = 0;
@@ -3675,7 +3675,7 @@ static void HandleEndTurn_BattleWon(void)
     {
         BattleStopLowHpSound();
         PlayBGM(MUS_WIN_TRE);
-        gBattlescriptCurrInstr = gUnknown_81D88D7;
+        gBattlescriptCurrInstr = BattleScript_BattleTowerTrainerBattleWon;
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & BATTLE_TYPE_LINK))
     {
@@ -4313,7 +4313,7 @@ static void HandleAction_SafariZoneBallThrow(void)
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
 
-static void HandleAction_ThrowPokeblock(void)
+static void HandleAction_ThrowBait(void)
 {
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     gBattle_BG0_X = 0;
@@ -4329,7 +4329,7 @@ static void HandleAction_ThrowPokeblock(void)
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
 
-static void HandleAction_GoNear(void)
+static void HandleAction_ThrowRock(void)
 {
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     gBattle_BG0_X = 0;

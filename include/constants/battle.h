@@ -169,14 +169,14 @@
 #define HITMARKER_UNABLE_TO_USE_MOVE    0x00080000
 #define HITMARKER_x100000               0x00100000
 #define HITMARKER_x200000               0x00200000
-#define HITMARKER_x400000               0x00400000
+#define HITMARKER_PLAYER_FAINTED        0x00400000
 #define HITMARKER_x800000               0x00800000
 #define HITMARKER_GRUDGE                0x01000000
 #define HITMARKER_OBEYS                 0x02000000
 #define HITMARKER_x4000000              0x04000000
 #define HITMARKER_CHARGING              0x08000000
 #define HITMARKER_FAINTED(battler)      (gBitTable[battler] << 0x1C)
-#define HITMARKER_UNK(battler)          (0x10000000 << battler)
+#define HITMARKER_FAINTED2(battler)     (0x10000000 << battler)
 
 // Per-side statuses that affect an entire party
 #define SIDE_STATUS_REFLECT          (1 << 0)
@@ -215,6 +215,7 @@
 #define WEATHER_ANY                 (WEATHER_RAIN_ANY | WEATHER_SANDSTORM_ANY | WEATHER_SUN_ANY | WEATHER_HAIL_ANY)
 
 // Move Effects
+#define MOVE_EFFECT_NOTHING_0           0x0
 #define MOVE_EFFECT_SLEEP               0x1
 #define MOVE_EFFECT_POISON              0x2
 #define MOVE_EFFECT_BURN                0x3

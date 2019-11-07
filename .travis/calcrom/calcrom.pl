@@ -18,6 +18,10 @@ while (my $line = <$file>)
         my $section = $1;
         my $size = hex($2);
         my $dir = $3;
+        if ($size & 3)
+        {
+            $size += 4 - ($size % 3);
+        }
 
         if ($section =~ /text/)
         {

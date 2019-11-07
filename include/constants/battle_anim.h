@@ -351,7 +351,7 @@
 #define B_ANIM_STATS_CHANGE             0x1
 #define B_ANIM_SUBSTITUTE_FADE          0x2
 #define B_ANIM_SUBSTITUTE_APPEAR        0x3
-#define B_ANIM_POKEBLOCK_THROW          0x4
+#define B_ANIM_BAIT_THROW               0x4
 #define B_ANIM_ITEM_KNOCKOFF            0x5
 #define B_ANIM_TURN_TRAP                0x6
 #define B_ANIM_ITEM_EFFECT              0x7
@@ -370,7 +370,11 @@
 #define B_ANIM_FOCUS_PUNCH_SETUP        0x14
 #define B_ANIM_INGRAIN_HEAL             0x15
 #define B_ANIM_WISH_HEAL                0x16
-#define B_ANIM_x19                      0x19
+#define B_ANIM_MON_SCARED               0x17
+#define B_ANIM_GHOST_GET_OUT            0x18
+#define B_ANIM_SILPH_SCOPED             0x19
+#define B_ANIM_ROCK_THROW               0x1A
+#define B_ANIM_SAFARI_REACTION          0x1B
 
 // special animations table
 #define B_ANIM_LVL_UP                   0x0

@@ -1385,9 +1385,9 @@ u8 AtkCanceller_UnableToUseMove(void)
             if ((gBattleTypeFlags & (BATTLE_TYPE_GHOST | BATTLE_TYPE_LEGENDARY)) == BATTLE_TYPE_GHOST)
             {
                 if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
-                    gBattlescriptCurrInstr = gUnknown_81D9180;
+                    gBattlescriptCurrInstr = BattleScript_TooScaredToMove;
                 else
-                    gBattlescriptCurrInstr = gUnknown_81D9192;
+                    gBattlescriptCurrInstr = BattleScript_GhostGetOutGetOut;
                 gBattleCommunication[MULTISTRING_CHOOSER] = 0;
                 effect = 1;
             }

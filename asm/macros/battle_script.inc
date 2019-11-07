@@ -1,346 +1,333 @@
-@ 0 ==
-@ 1 !=
-@ 2 <
-@ 3 >
-@ 4 &=
-
-	.macro calculatedamage
-	critical
-	atk5
-	atk6
-	atk7
-	.endm
-
-
+@ commands
 	.macro attackcanceler
-	.byte 0x00
+	.byte 0x0
 	.endm
 
-	.macro accuracycheck address, param1
-	.byte 0x01
-	.4byte \address
+	.macro accuracycheck param0:req, param1:req
+	.byte 0x1
+	.4byte \param0
 	.2byte \param1
 	.endm
 
 	.macro attackstring
-	.byte 0x02
+	.byte 0x2
 	.endm
 
 	.macro ppreduce
-	.byte 0x03
+	.byte 0x3
 	.endm
 
 	.macro critcalc
-	.byte 0x04
+	.byte 0x4
 	.endm
 
-	.macro atk5
-	.byte 0x05
+	.macro damagecalc
+	.byte 0x5
 	.endm
 
-	.macro atk6
-	.byte 0x06
+	.macro typecalc
+	.byte 0x6
 	.endm
 
-	.macro atk7
-	.byte 0x07
+	.macro adjustnormaldamage
+	.byte 0x7
 	.endm
 
-	.macro atk8
-	.byte 0x08
+	.macro adjustnormaldamage2
+	.byte 0x8
 	.endm
 
 	.macro attackanimation
-	.byte 0x09
+	.byte 0x9
 	.endm
 
 	.macro waitanimation
-	.byte 0x0a
+	.byte 0xa
 	.endm
 
-	.macro graphicalhpupdate bank
-	.byte 0x0b
-	.byte \bank
+	.macro healthbarupdate battler:req
+	.byte 0xb
+	.byte \battler
 	.endm
 
-	.macro datahpupdate bank
-	.byte 0x0c
-	.byte \bank
+	.macro datahpupdate battler:req
+	.byte 0xc
+	.byte \battler
 	.endm
 
 	.macro critmessage
-	.byte 0x0d
+	.byte 0xd
 	.endm
 
-	.macro missmessage
-	.byte 0x0e
+	.macro effectivenesssound
+	.byte 0xe
 	.endm
 
 	.macro resultmessage
-	.byte 0x0f
+	.byte 0xf
 	.endm
 
-	.macro printstring string
+	.macro printstring id:req
 	.byte 0x10
-	.2byte \string
+	.2byte \id
 	.endm
 
-	.macro printstring2 string
+	.macro printselectionstring id:req
 	.byte 0x11
-	.2byte \string
+	.2byte \id
 	.endm
 
-	.macro waitmessage delay
+	.macro waitmessage param0:req
 	.byte 0x12
-	.2byte \delay
+	.2byte \param0
 	.endm
 
-	.macro printfromtable table
+	.macro printfromtable ptr:req
 	.byte 0x13
-	.4byte \table
+	.4byte \ptr
 	.endm
 
-	.macro printfromtable2 table
+	.macro printselectionstringfromtable ptr:req
 	.byte 0x14
-	.4byte \table
+	.4byte \ptr
 	.endm
 
-	.macro seteffectwithchancetarget
+	.macro seteffectwithchance
 	.byte 0x15
 	.endm
 
-	.macro seteffecttarget
+	.macro seteffectprimary
 	.byte 0x16
 	.endm
 
-	.macro seteffectuser
+	.macro seteffectsecondary
 	.byte 0x17
 	.endm
 
-	.macro clearstatus bank
+	.macro clearstatusfromeffect battler:req
 	.byte 0x18
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro faintpokemon bank, param2, param3
+	.macro tryfaintmon battler:req, fromMove:req, ptr:req
 	.byte 0x19
-	.byte \bank
+	.byte \battler
+	.byte \fromMove
+	.4byte \ptr
+	.endm
+
+	.macro dofaintanimation battler:req
+	.byte 0x1a
+	.byte \battler
+	.endm
+
+	.macro cleareffectsonfaint battler:req
+	.byte 0x1b
+	.byte \battler
+	.endm
+
+	.macro jumpifstatus battler:req, status1:req, ptr:req
+	.byte 0x1c
+	.byte \battler
+	.4byte \status1
+	.4byte \ptr
+	.endm
+
+	.macro jumpifstatus2 battler:req, status2:req, ptr:req
+	.byte 0x1d
+	.byte \battler
+	.4byte \status2
+	.4byte \ptr
+	.endm
+
+	.macro jumpifability param0:req, ability:req, ptr:req
+	.byte 0x1e
+	.byte \param0
+	.byte \ability
+	.4byte \ptr
+	.endm
+
+	.macro jumpifsideaffecting battler:req, sidestatus:req, ptr:req
+	.byte 0x1f
+	.byte \battler
+	.2byte \sidestatus
+	.4byte \ptr
+	.endm
+
+	.macro jumpifstat battler:req, ifflag:req, stat:req, value:req, ptr
+	.byte 0x20
+	.byte \battler
+	.byte \ifflag
+	.byte \stat
+	.byte \value
+	.4byte \ptr
+	.endm
+
+	.macro jumpifstatus3condition battler:req, status3:req, param2:req, ptr:req
+	.byte 0x21
+	.byte \battler
+	.4byte \status3
+	.byte \param2
+	.4byte \ptr
+	.endm
+
+	.macro jumpiftype battler:req, type:req, ptr:req
+	.byte 0x22
+	.byte \battler
+	.byte \type
+	.4byte \ptr
+	.endm
+
+	.macro getexp battler:req
+	.byte 0x23
+	.byte \battler
+	.endm
+
+	.macro atk24 ptr:req
+	.byte 0x24
+	.4byte \ptr
+	.endm
+
+	.macro movevaluescleanup
+	.byte 0x25
+	.endm
+
+	.macro setmultihit value:req
+	.byte 0x26
+	.byte \value
+	.endm
+
+	.macro decrementmultihit value:req
+	.byte 0x27
+	.4byte \value
+	.endm
+
+	.macro goto ptr:req
+	.byte 0x28
+	.4byte \ptr
+	.endm
+
+	.macro jumpifbyte ifflag:req, param1:req, param2:req, param3:req
+	.byte 0x29
+	.byte \ifflag
+	.4byte \param1
 	.byte \param2
 	.4byte \param3
 	.endm
 
-	.macro atk1a param1
-	.byte 0x1a
-	.byte \param1
-	.endm
-
-	.macro atk1b bank
-	.byte 0x1b
-	.byte \bank
-	.endm
-
-	.macro jumpifstatus bank, status, address
-	.byte 0x1c
-	.byte \bank
-	.4byte \status
-	.4byte \address
-	.endm
-
-	.macro jumpifsecondarytstatus bank, status, address
-	.byte 0x1d
-	.byte \bank
-	.4byte \status
-	.4byte \address
-	.endm
-
-	.macro jumpifability bank, ability, address
-	.byte 0x1e
-	.byte \bank
-	.byte \ability
-	.4byte \address
-	.endm
-
-	.macro jumpifhalverset bank, status, address
-	.byte 0x1f
-	.byte \bank
-	.2byte \status
-	.4byte \address
-	.endm
-
-	.macro jumpifstat bank, flag, quantity, statid, address
-	.byte 0x20
-	.byte \bank
-	.byte \flag
-	.byte \quantity
-	.byte \statid
-	.4byte \address
-	.endm
-
-	.macro jumpifspecialstatusflag bank, mask, status, address
-	.byte 0x21
-	.byte \bank
-	.4byte \mask
-	.byte \status
-	.4byte \address
-	.endm
-
-	.macro jumpiftype bank, type, address
-	.byte 0x22
-	.byte \bank
-	.byte \type
-	.4byte \address
-	.endm
-
-	.macro atk23 bank
-	.byte 0x23
-	.byte \bank
-	.endm
-
-	.macro atk24 address
-	.byte 0x24
-	.4byte \address
-	.endm
-
-	.macro atk25
-	.byte 0x25
-	.endm
-
-	.macro atk26 param1
-	.byte 0x26
-	.byte \param1
-	.endm
-
-	.macro atk27 address
-	.byte 0x27
-	.4byte \address
-	.endm
-
-	.macro jump address
-	.byte 0x28
-	.4byte \address
-	.endm
-
-	.macro jumpifbyte ifflag, checkaddr, compare, address
-	.byte 0x29
-	.byte \ifflag
-	.4byte \checkaddr
-	.byte \compare
-	.4byte \address
-	.endm
-
-	.macro jumpifhalfword ifflag, checkaddr, compare, address
+	.macro jumpifhalfword ifflag:req, param1:req, param2:req, param3:req
 	.byte 0x2a
 	.byte \ifflag
-	.4byte \checkaddr
-	.2byte \compare
-	.4byte \address
+	.4byte \param1
+	.2byte \param2
+	.4byte \param3
 	.endm
 
-	.macro jumpifword ifflag, checkaddr, compare, address
+	.macro jumpifword ifflag:req, param1:req, param2:req, param3:req
 	.byte 0x2b
 	.byte \ifflag
-	.4byte \checkaddr
-	.4byte \compare
-	.4byte \address
-	.endm
-
-	.macro jumpifarrayequal mem1, mem2, size, address
-	.byte 0x2c
-	.4byte \mem1
-	.4byte \mem2
-	.byte \size
-	.4byte \address
-	.endm
-
-	.macro jumpifarraynotequal mem1, mem2, size, address
-	.byte 0x2d
-	.4byte \mem1
-	.4byte \mem2
-	.byte \size
-	.4byte \address
-	.endm
-
-	.macro setbyte pointer, value
-	.byte 0x2e
-	.4byte \pointer
-	.byte \value
-	.endm
-
-	.macro addbyte pointer, value
-	.byte 0x2f
-	.4byte \pointer
-	.byte \value
-	.endm
-
-	.macro subtractbyte pointer, value
-	.byte 0x30
-	.4byte \pointer
-	.byte \value
-	.endm
-
-	.macro copyarray destination, source, size
-	.byte 0x31
-	.4byte \destination
-	.4byte \source
-	.byte \size
-	.endm
-
-	.macro atk32 param1, param2, param3, byte
-	.byte 0x32
 	.4byte \param1
 	.4byte \param2
 	.4byte \param3
-	.byte \byte
 	.endm
 
-	.macro orbyte pointer, value
+	.macro jumpifarrayequal param0:req, param1:req, param2:req, param3:req
+	.byte 0x2c
+	.4byte \param0
+	.4byte \param1
+	.byte \param2
+	.4byte \param3
+	.endm
+
+	.macro jumpifarraynotequal param0:req, param1:req, param2:req, param3:req
+	.byte 0x2d
+	.4byte \param0
+	.4byte \param1
+	.byte \param2
+	.4byte \param3
+	.endm
+
+	.macro setbyte ptr:req, param1:req
+	.byte 0x2e
+	.4byte \ptr
+	.byte \param1
+	.endm
+
+	.macro addbyte ptr:req, param1:req
+	.byte 0x2f
+	.4byte \ptr
+	.byte \param1
+	.endm
+
+	.macro subbyte ptr:req, param1:req
+	.byte 0x30
+	.4byte \ptr
+	.byte \param1
+	.endm
+
+	.macro copyarray param0:req, param1:req, param2:req
+	.byte 0x31
+	.4byte \param0
+	.4byte \param1
+	.byte \param2
+	.endm
+
+	.macro copyarraywithindex param0:req, param1:req, param2:req, param3:req
+	.byte 0x32
+	.4byte \param0
+	.4byte \param1
+	.4byte \param2
+	.byte \param3
+	.endm
+
+	.macro orbyte ptr:req, param1:req
 	.byte 0x33
-	.4byte \pointer
-	.byte \value
+	.4byte \ptr
+	.byte \param1
 	.endm
 
-	.macro orhalfword pointer, value
+	.macro orhalfword ptr:req, param1:req
 	.byte 0x34
-	.4byte \pointer
-	.2byte \value
+	.4byte \ptr
+	.2byte \param1
 	.endm
 
-	.macro orword pointer, value
+	.macro orword ptr:req, param1:req
 	.byte 0x35
-	.4byte \pointer
-	.4byte \value
+	.4byte \ptr
+	.4byte \param1
 	.endm
 
-	.macro bicbyte pointer, value
+	.macro bicbyte ptr:req, param1:req
 	.byte 0x36
-	.4byte \pointer
-	.byte \value
+	.4byte \ptr
+	.byte \param1
 	.endm
 
-	.macro bichalfword pointer, value
+	.macro bichalfword ptr:req, param1:req
 	.byte 0x37
-	.4byte \pointer
-	.2byte \value
+	.4byte \ptr
+	.2byte \param1
 	.endm
 
-	.macro bicword pointer, value
+	.macro bicword ptr:req, param1:req
 	.byte 0x38
-	.4byte \pointer
-	.4byte \value
+	.4byte \ptr
+	.4byte \param1
 	.endm
 
-	.macro pause pause_duration
+	.macro pause param0:req
 	.byte 0x39
-	.2byte \pause_duration
+	.2byte \param0
 	.endm
 
-	.macro waitstateatk
+	.macro waitstate
 	.byte 0x3a
 	.endm
 
-	.macro somethinghealatk3b bank
+	.macro healthbar_update battler:req
 	.byte 0x3b
-	.byte \bank
+	.byte \battler
 	.endm
 
 	.macro return
@@ -359,286 +346,319 @@
 	.byte 0x3f
 	.endm
 
-	.macro atk40 address
+	.macro jumpifaffectedbyprotect ptr:req
 	.byte 0x40
-	.4byte \address
+	.4byte \ptr
 	.endm
 
-	.macro callatk address
+	.macro call ptr:req
 	.byte 0x41
-	.4byte \address
+	.4byte \ptr
 	.endm
 
-	.macro jumpiftype2 bank, type, address
+	.macro jumpiftype2 battler:req, type:req, ptr:req
 	.byte 0x42
-	.byte \bank
+	.byte \battler
 	.byte \type
-	.4byte \address
+	.4byte \ptr
 	.endm
 
-	.macro jumpifabilitypresent ability, address
+	.macro jumpifabilitypresent ability:req, ptr:req
 	.byte 0x43
 	.byte \ability
-	.4byte \address
+	.4byte \ptr
 	.endm
 
-	.macro atk44
+	.macro endselectionscript
 	.byte 0x44
 	.endm
 
-	.macro playanimation bank, animation, var_address
+	.macro playanimation battler:req, param1:req, param2:req
 	.byte 0x45
-	.byte \bank
-	.byte \animation
-	.4byte \var_address
+	.byte \battler
+	.byte \param1
+	.4byte \param2
 	.endm
 
-	.macro atk46 bank, address, int
+	.macro playanimation2 battler:req, param1:req, param2:req
 	.byte 0x46
-	.byte \bank
-	.4byte \address
-	.4byte \int
+	.byte \battler
+	.4byte \param1
+	.4byte \param2
 	.endm
 
-	.macro atk47
+	.macro setgraphicalstatchangevalues
 	.byte 0x47
 	.endm
 
-	.macro playstatchangeanimation bank, color, byte
+	.macro playstatchangeanimation battler:req, param1:req, param2:req
 	.byte 0x48
-	.byte \bank
-	.byte \color
-	.byte \byte
-	.endm
-
-	.macro atk49 byte1, byte2
-	.byte 0x49
-	.byte \byte1
-	.byte \byte2
-	.endm
-
-	.macro damagecalc2
-	.byte 0x4a
-	.endm
-
-	.macro atk4b
-	.byte 0x4b
-	.endm
-
-	.macro switch1 bank
-	.byte 0x4c
-	.byte \bank
-	.endm
-
-	.macro switch2 bank
-	.byte 0x4d
-	.byte \bank
-	.endm
-
-	.macro switch3 bank, byte
-	.byte 0x4e
-	.byte \bank
-	.byte \byte
-	.endm
-
-	.macro jumpifcannotswitch bank, address
-	.byte 0x4f
-	.byte \bank
-	.4byte \address
-	.endm
-
-	.macro openpartyscreen bank, address
-	.byte 0x50
-	.byte \bank
-	.4byte \address
-	.endm
-
-	.macro atk51 bank, param2
-	.byte 0x51
-	.byte \bank
+	.byte \battler
+	.byte \param1
 	.byte \param2
 	.endm
 
-	.macro atk52 bank
+	.macro moveend param0:req, param1:req
+	.byte 0x49
+	.byte \param0
+	.byte \param1
+	.endm
+
+	@ Help macros for 5 uses of moveend command
+
+	@ All cases
+	.macro moveendall
+	setbyte sMOVEEND_STATE, 0
+	moveend 0, 0
+	.endm
+
+	@ Chosen case
+	.macro moveendcase case:req
+	setbyte sMOVEEND_STATE, \case
+	moveend 1, 0
+	.endm
+
+	@ All cases from (inclusive)
+	.macro moveendfrom from:req
+	setbyte sMOVEEND_STATE, \from
+	moveend 0, 0
+	.endm
+
+	@ All cases from 0 to (not inclusive)
+	.macro moveendto to:req
+	setbyte sMOVEEND_STATE, 0
+	moveend 2, \to
+	.endm
+
+	@ Cases from (inclusive) to (not inclusive)
+	.macro moveendfromto from:req, to:req
+	setbyte sMOVEEND_STATE, \from
+	moveend 2, \to
+	.endm
+
+	.macro typecalc2
+	.byte 0x4a
+	.endm
+
+	.macro returnatktoball
+	.byte 0x4b
+	.endm
+
+	.macro getswitchedmondata battler:req
+	.byte 0x4c
+	.byte \battler
+	.endm
+
+	.macro switchindataupdate battler:req
+	.byte 0x4d
+	.byte \battler
+	.endm
+
+	.macro switchinanim battler:req, dontclearsubstitutebit:req
+	.byte 0x4e
+	.byte \battler
+	.byte \dontclearsubstitutebit
+	.endm
+
+	.macro jumpifcantswitch battler:req, ptr:req
+	.byte 0x4f
+	.byte \battler
+	.4byte \ptr
+	.endm
+
+	.macro openpartyscreen param0:req, param1:req
+	.byte 0x50
+	.byte \param0
+	.4byte \param1
+	.endm
+
+	.macro switchhandleorder battler:req, param1:req
+	.byte 0x51
+	.byte \battler
+	.byte \param1
+	.endm
+
+	.macro switchineffects battler:req
 	.byte 0x52
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro atk53 bank
+	.macro trainerslidein battler:req
 	.byte 0x53
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro atk54 word
+	.macro playse song:req
 	.byte 0x54
-	.2byte \word
+	.2byte \song
 	.endm
 
-	.macro atk55 int
+	.macro fanfare song:req
 	.byte 0x55
-	.4byte \int
+	.2byte \song
 	.endm
 
-	.macro atk56 bank_or_side
+	.macro playfaintcry battler:req
 	.byte 0x56
-	.byte \bank_or_side
+	.byte \battler
 	.endm
 
 	.macro atk57
 	.byte 0x57
 	.endm
 
-	.macro atk58 bank
+	.macro returntoball battler:req
 	.byte 0x58
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro checkiflearnmoveinbattle param1, param2, bank_maybe
+	.macro handlelearnnewmove param0:req, param1:req, param2:req
 	.byte 0x59
+	.4byte \param0
 	.4byte \param1
-	.4byte \param2
-	.byte \bank_maybe
+	.byte \param2
 	.endm
 
-	.macro atk5a address
+	.macro yesnoboxlearnmove param0:req
 	.byte 0x5a
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro atk5b address
+	.macro yesnoboxstoplearningmove param0:req
 	.byte 0x5b
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro atk5c bank
+	.macro hitanimation battler:req
 	.byte 0x5c
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro atk5d
+	.macro getmoneyreward addr
 	.byte 0x5d
+	.4byte \addr
 	.endm
 
-	.macro atk5e bank
+	.macro atk5E battler:req
 	.byte 0x5e
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro atk5f
+	.macro swapattackerwithtarget
 	.byte 0x5f
 	.endm
 
-	.macro atk60 byte
+	.macro incrementgamestat param0:req
 	.byte 0x60
-	.byte \byte
+	.byte \param0
 	.endm
 
-	.macro atk61 bank_or_side
+	.macro drawpartystatussummary battler:req
 	.byte 0x61
-	.byte \bank_or_side
+	.byte \battler
 	.endm
 
-	.macro atk62_hidepartystatussummary bank_or_side
+	.macro hidepartystatussummary battler:req
 	.byte 0x62
-	.byte \bank_or_side
+	.byte \battler
 	.endm
 
-	.macro jumptoattack bank
+	.macro jumptocalledmove param0:req
 	.byte 0x63
-	.byte \bank
+	.byte \param0
 	.endm
 
-	.macro statusanimation bank
+	.macro statusanimation battler:req
 	.byte 0x64
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro atk65 bank_or_side, address
+	.macro status2animation battler:req, status2:req
 	.byte 0x65
-	.byte \bank_or_side
-	.4byte \address
+	.byte \battler
+	.4byte \status2
 	.endm
 
-	.macro atk66 bank_or_side, bank_or_side2, address
+	.macro chosenstatusanimation battler:req, param1:req, param2:req
 	.byte 0x66
-	.byte \bank_or_side
-	.byte \bank_or_side2
-	.4byte \address
+	.byte \battler
+	.byte \param1
+	.4byte \param2
 	.endm
 
-	.macro atk67
+	.macro yesnobox
 	.byte 0x67
 	.endm
 
-	.macro atk68
+	.macro cancelallactions
 	.byte 0x68
 	.endm
 
-	.macro atk69
+	.macro adjustsetdamage
 	.byte 0x69
 	.endm
 
-	.macro removeitem bank
+	.macro removeitem battler:req
 	.byte 0x6a
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro atk6b
+	.macro atknameinbuff1
 	.byte 0x6b
 	.endm
 
-	.macro atk6c
+	.macro drawlvlupbox
 	.byte 0x6c
 	.endm
 
-	.macro atk6d
+	.macro resetsentmonsvalue
 	.byte 0x6d
 	.endm
 
-	.macro atk6e
+	.macro setatktoplayer0
 	.byte 0x6e
 	.endm
 
-	.macro atk6f bank
+	.macro makevisible battler:req
 	.byte 0x6f
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro atk70 bank
+	.macro recordlastability battler:req
 	.byte 0x70
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro atk71
+	.macro buffermovetolearn
 	.byte 0x71
 	.endm
 
-	.macro atk72 address
+	.macro jumpifplayerran ptr:req
 	.byte 0x72
-	.4byte \address
+	.4byte \ptr
 	.endm
 
-	.macro atk73 bank
+	.macro hpthresholds battler:req
 	.byte 0x73
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro atk74 bank
+	.macro hpthresholds2 battler:req
 	.byte 0x74
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro atk75
+	.macro useitemonopponent
 	.byte 0x75
 	.endm
 
-	.macro atk76 bank, byte
+	.macro various battler:req, param1:req
 	.byte 0x76
-	.byte \bank
-	.byte \byte
+	.byte \battler
+	.byte \param1
 	.endm
 
-	.macro setprotect
+	.macro setprotectlike
 	.byte 0x77
 	.endm
 
@@ -646,22 +666,22 @@
 	.byte 0x78
 	.endm
 
-	.macro setuserhptozero
+	.macro setatkhptozero
 	.byte 0x79
 	.endm
 
-	.macro jumpwhiletargetvalid address
+	.macro jumpifnexttargetvalid ptr:req
 	.byte 0x7a
-	.4byte \address
+	.4byte \ptr
 	.endm
 
-	.macro setdamageasrestorehalfmaxhp address, byte
+	.macro tryhealhalfhealth param0:req, battler:req
 	.byte 0x7b
-	.4byte \address
-	.byte \byte
+	.4byte \param0
+	.byte \battler
 	.endm
 
-	.macro jumptolastusedattack
+	.macro trymirrormove
 	.byte 0x7c
 	.endm
 
@@ -673,56 +693,56 @@
 	.byte 0x7e
 	.endm
 
-	.macro setleechseed
+	.macro setseeded
 	.byte 0x7f
 	.endm
 
-	.macro manipulatedamage id
+	.macro manipulatedamage param0:req
 	.byte 0x80
-	.byte \id
+	.byte \param0
 	.endm
 
-	.macro setrest address
+	.macro trysetrest param0:req
 	.byte 0x81
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro jumpifnotfirstturn address
+	.macro jumpifnotfirstturn ptr:req
 	.byte 0x82
-	.4byte \address
+	.4byte \ptr
 	.endm
 
-	.macro nop3
+	.macro nop
 	.byte 0x83
 	.endm
 
-	.macro jumpifcannotsleep address
+	.macro jumpifcantmakeasleep param0:req
 	.byte 0x84
-	.4byte \address
+	.4byte \param0
 	.endm
 
 	.macro stockpile
 	.byte 0x85
 	.endm
 
-	.macro stockpiletobasedamage address
+	.macro stockpiletobasedamage param0:req
 	.byte 0x86
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro stockpiletohprecovery address
+	.macro stockpiletohpheal param0:req
 	.byte 0x87
-	.4byte \address
+	.4byte \param0
 	.endm
 
 	.macro negativedamage
 	.byte 0x88
 	.endm
 
-	.macro statbuffchange target, address
+	.macro statbuffchange param0:req, param1:req
 	.byte 0x89
-	.byte \target
-	.4byte \address
+	.byte \param0
+	.4byte \param1
 	.endm
 
 	.macro normalisebuffs
@@ -737,26 +757,26 @@
 	.byte 0x8c
 	.endm
 
-	.macro setloopcounter count
+	.macro setmultihitcounter param0:req
 	.byte 0x8d
-	.byte \count
+	.byte \param0
 	.endm
 
-	.macro atk8e
+	.macro initmultihitstring
 	.byte 0x8e
 	.endm
 
-	.macro forcerandomswitch address
+	.macro forcerandomswitch param0:req
 	.byte 0x8f
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro changetypestoenemyattacktype address
+	.macro tryconversiontypechange param0:req
 	.byte 0x90
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro givemoney
+	.macro givepaydaymoney
 	.byte 0x91
 	.endm
 
@@ -764,12 +784,12 @@
 	.byte 0x92
 	.endm
 
-	.macro koplussomethings address
+	.macro tryKO param0:req
 	.byte 0x93
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro gethalfcurrentenemyhp
+	.macro damagetohalftargethp
 	.byte 0x94
 	.endm
 
@@ -781,21 +801,21 @@
 	.byte 0x96
 	.endm
 
-	.macro tryinfatuatetarget address
+	.macro tryinfatuating param0:req
 	.byte 0x97
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro atk98 byte
+	.macro updatestatusicon battler:req
 	.byte 0x98
-	.byte \byte
+	.byte \battler
 	.endm
 
-	.macro setmisteffect
+	.macro setmist
 	.byte 0x99
 	.endm
 
-	.macro setincreasedcriticalchance
+	.macro setfocusenergy
 	.byte 0x9a
 	.endm
 
@@ -803,20 +823,20 @@
 	.byte 0x9b
 	.endm
 
-	.macro setsubstituteeffect
+	.macro setsubstitute
 	.byte 0x9c
 	.endm
 
-	.macro copyattack address
+	.macro mimicattackcopy param0:req
 	.byte 0x9d
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro metronomeeffect
+	.macro metronome
 	.byte 0x9e
 	.endm
 
-	.macro nightshadedamageeffect
+	.macro dmgtolevel
 	.byte 0x9f
 	.endm
 
@@ -824,55 +844,55 @@
 	.byte 0xa0
 	.endm
 
-	.macro counterdamagecalculator address
+	.macro counterdamagecalculator param0:req
 	.byte 0xa1
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro mirrorcoatdamagecalculator address
+	.macro mirrorcoatdamagecalculator param0:req
 	.byte 0xa2
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro disablelastusedattack address
+	.macro disablelastusedattack param0:req
 	.byte 0xa3
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro setencore address
+	.macro trysetencore param0:req
 	.byte 0xa4
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro painsplitdamagecalculator address
+	.macro painsplitdmgcalc param0:req
 	.byte 0xa5
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro settypetorandomresistance address
+	.macro settypetorandomresistance param0:req
 	.byte 0xa6
-	.4byte \address
+	.4byte \param0
 	.endm
 
 	.macro setalwayshitflag
 	.byte 0xa7
 	.endm
 
-	.macro copymovepermanently address
+	.macro copymovepermanently param0:req
 	.byte 0xa8
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro selectrandommovefromusermoves address
+	.macro trychoosesleeptalkmove param0:req
 	.byte 0xa9
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro destinybondeffect
+	.macro setdestinybond
 	.byte 0xaa
 	.endm
 
-	.macro atkab
+	.macro trysetdestinybondtohappen
 	.byte 0xab
 	.endm
 
@@ -880,45 +900,45 @@
 	.byte 0xac
 	.endm
 
-	.macro reducepprandom address
+	.macro tryspiteppreduce param0:req
 	.byte 0xad
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro clearstatusifnotsoundproofed
+	.macro healpartystatus
 	.byte 0xae
 	.endm
 
-	.macro cursetarget address
+	.macro cursetarget param0:req
 	.byte 0xaf
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro setspikes address
+	.macro trysetspikes param0:req
 	.byte 0xb0
-	.4byte \address
+	.4byte \param0
 	.endm
 
 	.macro setforesight
 	.byte 0xb1
 	.endm
 
-	.macro setperishsong address
+	.macro trysetperishsong param0:req
 	.byte 0xb2
-	.4byte \address
+	.4byte \param0
 	.endm
 
 	.macro rolloutdamagecalculation
 	.byte 0xb3
 	.endm
 
-	.macro jumpifconfusedandattackmaxed bank, address
+	.macro jumpifconfusedandstatmaxed stat:req, ptr:req
 	.byte 0xb4
-	.byte \bank
-	.4byte \address
+	.byte \stat
+	.4byte \ptr
 	.endm
 
-	.macro furycutterdamagecalculation
+	.macro furycuttercalc
 	.byte 0xb5
 	.endm
 
@@ -938,62 +958,62 @@
 	.byte 0xb9
 	.endm
 
-	.macro atkba address
+	.macro jumpifnopursuitswitchdmg param0:req
 	.byte 0xba
-	.4byte \address
+	.4byte \param0
 	.endm
 
 	.macro setsunny
 	.byte 0xbb
 	.endm
 
-	.macro maxattackhalvehp address
+	.macro maxattackhalvehp param0:req
 	.byte 0xbc
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro copyfoestats address
+	.macro copyfoestats param0:req
 	.byte 0xbd
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro breakfree
+	.macro rapidspinfree
 	.byte 0xbe
 	.endm
 
-	.macro setcurled
+	.macro setdefensecurlbit
 	.byte 0xbf
 	.endm
 
-	.macro recoverbasedonsunlight address
+	.macro recoverbasedonsunlight param0:req
 	.byte 0xc0
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro hiddenpowerdamagecalculation
+	.macro hiddenpowercalc
 	.byte 0xc1
 	.endm
 
-	.macro selectnexttarget
+	.macro selectfirstvalidtarget
 	.byte 0xc2
 	.endm
 
-	.macro setfutureattack address
+	.macro trysetfutureattack param0:req
 	.byte 0xc3
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro beatupcalculation address1, address2
+	.macro trydobeatup param0:req, param1:req
 	.byte 0xc4
-	.4byte \address1
-	.4byte \address2
+	.4byte \param0
+	.4byte \param1
 	.endm
 
-	.macro hidepreattack
+	.macro setsemiinvulnerablebit
 	.byte 0xc5
 	.endm
 
-	.macro unhidepostattack
+	.macro clearsemiinvulnerablebit
 	.byte 0xc6
 	.endm
 
@@ -1005,9 +1025,9 @@
 	.byte 0xc8
 	.endm
 
-	.macro jumpifattackandspecialattackcannotfall address
+	.macro jumpifattackandspecialattackcannotfall ptr:req
 	.byte 0xc9
-	.4byte \address
+	.4byte \ptr
 	.endm
 
 	.macro setforcedtarget
@@ -1022,207 +1042,332 @@
 	.byte 0xcc
 	.endm
 
-	.macro cureifburnedparalysedorpoisoned address
+	.macro cureifburnedparalysedorpoisoned param0:req
 	.byte 0xcd
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro settorment address
+	.macro settorment param0:req
 	.byte 0xce
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro jumpifnodamage address
+	.macro jumpifnodamage param0:req
 	.byte 0xcf
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro settaunt address
+	.macro settaunt param0:req
 	.byte 0xd0
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro sethelpinghand address
+	.macro trysethelpinghand param0:req
 	.byte 0xd1
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro itemswap address
+	.macro tryswapitems param0:req
 	.byte 0xd2
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro copyability address
+	.macro trycopyability param0:req
 	.byte 0xd3
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro atkd4 byte, address
+	.macro trywish param0:req, param1:req
 	.byte 0xd4
-	.byte \byte
-	.4byte \address
+	.byte \param0
+	.4byte \param1
 	.endm
 
-	.macro setroots address
+	.macro trysetroots param0:req
 	.byte 0xd5
-	.4byte \address
+	.4byte \param0
 	.endm
 
 	.macro doubledamagedealtifdamaged
 	.byte 0xd6
 	.endm
 
-	.macro setyawn address
+	.macro setyawn param0:req
 	.byte 0xd7
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro setdamagetohealthdifference address
+	.macro setdamagetohealthdifference param0:req
 	.byte 0xd8
-	.4byte \address
+	.4byte \param0
 	.endm
 
 	.macro scaledamagebyhealthratio
 	.byte 0xd9
 	.endm
 
-	.macro abilityswap address
+	.macro tryswapabilities param0:req
 	.byte 0xda
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro imprisoneffect address
+	.macro tryimprison param0:req
 	.byte 0xdb
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro setgrudge address
+	.macro trysetgrudge param0:req
 	.byte 0xdc
-	.4byte \address
+	.4byte \param0
 	.endm
 
 	.macro weightdamagecalculation
 	.byte 0xdd
 	.endm
 
-	.macro assistattackselect address
+	.macro assistattackselect param0:req
 	.byte 0xde
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro setmagiccoat address
+	.macro trysetmagiccoat param0:req
 	.byte 0xdf
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro setstealstatchange address
+	.macro trysetsnatch param0:req
 	.byte 0xe0
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro atke1 address
+	.macro trygetintimidatetarget param0:req
 	.byte 0xe1
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro atke2 bank
+	.macro switchoutabilities battler:req
 	.byte 0xe2
-	.byte \bank
+	.byte \battler
 	.endm
 
-	.macro jumpiffainted bank, address
+	.macro jumpifhasnohp battler:req, param1:req
 	.byte 0xe3
-	.byte \bank
-	.4byte \address
+	.byte \battler
+	.4byte \param1
 	.endm
 
-	.macro naturepowereffect
+	.macro getsecretpowereffect
 	.byte 0xe4
 	.endm
 
-	.macro pickupitemcalculation
+	.macro pickup
 	.byte 0xe5
 	.endm
 
-	.macro actualcastformswitch
+	.macro docastformchangeanimation
 	.byte 0xe6
 	.endm
 
-	.macro castformswitch
+	.macro trycastformdatachange
 	.byte 0xe7
 	.endm
 
-	.macro settypebasedhalvers address
+	.macro settypebasedhalvers param0:req
 	.byte 0xe8
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro seteffectbyweather
+	.macro setweatherballtype
 	.byte 0xe9
 	.endm
 
-	.macro recycleitem address
+	.macro tryrecycleitem param0:req
 	.byte 0xea
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro settypetoterrain address
+	.macro settypetoterrain param0:req
 	.byte 0xeb
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro pursuitwhenswitched address
+	.macro pursuitrelated param0:req
 	.byte 0xec
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro snatchmove
+	.macro snatchsetbattlers
 	.byte 0xed
 	.endm
 
-	.macro removereflectlightscreen
+	.macro removelightscreenreflect
 	.byte 0xee
 	.endm
 
-	.macro pokemoncatchfunction
+	.macro handleballthrow
 	.byte 0xef
 	.endm
 
-	.macro catchpoke
+	.macro givecaughtmon
 	.byte 0xf0
 	.endm
 
-	.macro capturesomethingf1 address
+	.macro trysetcaughtmondexflags param0:req
 	.byte 0xf1
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro capturesomethingf2
+	.macro displaydexinfo
 	.byte 0xf2
 	.endm
 
-	.macro capturesomethingf3 address
+	.macro trygivecaughtmonnick param0:req
 	.byte 0xf3
-	.4byte \address
+	.4byte \param0
 	.endm
 
-	.macro removehp
+	.macro subattackerhpbydmg
 	.byte 0xf4
 	.endm
 
-	.macro curestatusfirstword
+	.macro removeattackerstatus1
 	.byte 0xf5
 	.endm
 
-	.macro atkf6
+	.macro finishaction
 	.byte 0xf6
 	.endm
 
-	.macro activesidesomething
+	.macro finishturn
 	.byte 0xf7
 	.endm
 
-	.macro atkf8 bank
-	.byte 0xf8
-	.byte \bank
+@ various command changed to more readable macros
+	.macro cancelmultiturnmoves battler:req
+	various \battler, VARIOUS_CANCEL_MULTI_TURN_MOVES
+	.endm
+
+	.macro setmagiccoattarget battler:req
+	various \battler, VARIOUS_SET_MAGIC_COAT_TARGET
+	.endm
+
+	.macro getifcantrunfrombattle battler:req
+	various \battler, VARIOUS_IS_RUNNING_IMPOSSIBLE
+	.endm
+
+	.macro getmovetarget battler:req
+	various \battler, VARIOUS_GET_MOVE_TARGET
+	.endm
+
+	.macro various4 battler:req
+	various \battler, 4
+	.endm
+
+	.macro resetintimidatetracebits battler:req
+	various \battler, VARIOUS_RESET_INTIMIDATE_TRACE_BITS
+	.endm
+
+	.macro updatechoicemoveonlvlup battler:req
+	various \battler, VARIOUS_UPDATE_CHOICE_MOVE_ON_LVL_UP
+	.endm
+
+	.macro various7 battler:req
+	various \battler, 7
+	.endm
+
+	.macro various8 battler:req
+	various \battler, 8
+	.endm
+
+	.macro returnopponentmon1toball battler:req
+	various \battler, VARIOUS_RETURN_OPPONENT_MON1
+	.endm
+
+	.macro returnopponentmon2toball battler:req
+	various \battler, VARIOUS_RETURN_OPPONENT_MON2
+	.endm
+
+	.macro checkpokeflute battler:req
+	various \battler, 11
+	.endm
+
+	.macro waitfanfare battler:req
+	various \battler, 12
+	.endm
+
+@ helpful macros
+	.macro setstatchanger stat:req, stages:req, down:req
+	setbyte sSTATCHANGER \stat | \stages << 4 | \down << 7
+	.endm
+
+	.macro setmoveeffect effect:req
+	setbyte cEFFECT_CHOOSER \effect
+	.endm
+
+	.macro chosenstatus1animation battler:req, status:req
+	chosenstatusanimation \battler 0x0 \status
+	.endm
+
+	.macro chosenstatus2animation battler:req, status:req
+	chosenstatusanimation \battler 0x1 \status
+	.endm
+
+	.macro sethword dst:req, value:req
+	setbyte \dst, (\value) & 0xFF
+	setbyte \dst + 1, ((\value) >> 8) & 0xFF
+	.endm
+
+	.macro setword dst:req, value:req
+	setbyte \dst, (\value) & 0xFF
+	setbyte \dst + 1, ((\value) >> 8) & 0xFF
+	setbyte \dst + 2, ((\value) >> 16) & 0xFF
+	setbyte \dst + 3, ((\value) >> 24) & 0xFF
+	.endm
+
+	.macro copybyte dst:req, src:req
+	copyarray \dst, \src, 0x1
+	.endm
+
+	.macro copyhword dst:req, src:req
+	copyarray \dst, \src, 0x2
+	.endm
+
+	.macro copyword dst:req, src:req
+	copyarray \dst, \src, 0x4
+	.endm
+
+	.macro jumpifbytenotequal byte1:req, byte2:req, jumpptr:req
+	jumpifarraynotequal \byte1, \byte2, 0x1, \jumpptr
+	.endm
+
+	.macro jumpifbyteequal byte1:req, byte2:req, jumpptr:req
+	jumpifarrayequal \byte1, \byte2, 0x1, \jumpptr
+	.endm
+
+	.macro jumpifmove move:req, jumpptr:req
+	jumpifhalfword CMP_EQUAL, gCurrentMove, \move, \jumpptr
+	.endm
+
+	.macro jumpifnotmove move:req, jumpptr:req
+	jumpifhalfword CMP_NOT_EQUAL, gCurrentMove, \move, \jumpptr
+	.endm
+
+	.macro jumpifstatus3 battler:req, status:req, jumpptr:req
+	jumpifstatus3condition \battler, \status, 0x0, \jumpptr
+	.endm
+
+	.macro jumpifnostatus3 battler:req, status:req, jumpptr:req
+	jumpifstatus3condition \battler, \status, 0x1, \jumpptr
+	.endm
+
+	.macro jumpifmovehadnoeffect jumpptr:req
+	jumpifbyte CMP_COMMON_BITS, gMoveResultFlags, MOVE_RESULT_NO_EFFECT, \jumpptr
+	.endm
+
+	.macro jumpifbattletype flags:req, jumpptr:req
+	jumpifword CMP_COMMON_BITS, gBattleTypeFlags, \flags, \jumpptr
+	.endm
+
+	.macro jumpifnotbattletype flags:req, jumpptr:req
+	jumpifword CMP_NO_COMMON_BITS, gBattleTypeFlags, \flags, \jumpptr
 	.endm

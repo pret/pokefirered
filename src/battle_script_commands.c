@@ -2833,7 +2833,7 @@ static void atk19_tryfaintmon(void)
             gBattlescriptCurrInstr = BS_ptr;
             if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
             {
-                gHitMarker |= HITMARKER_x400000;
+                gHitMarker |= HITMARKER_PLAYER_FAINTED;
                 if (gBattleResults.playerFaintCounter < 0xFF)
                     ++gBattleResults.playerFaintCounter;
                 AdjustFriendshipOnBattleFaint(gActiveBattler);
@@ -3773,7 +3773,7 @@ static void atk45_playanimation(void)
     if (gBattlescriptCurrInstr[2] == B_ANIM_STATS_CHANGE
      || gBattlescriptCurrInstr[2] == B_ANIM_SNATCH_MOVE
      || gBattlescriptCurrInstr[2] == B_ANIM_SUBSTITUTE_FADE
-     || gBattlescriptCurrInstr[2] == B_ANIM_x19)
+     || gBattlescriptCurrInstr[2] == B_ANIM_SILPH_SCOPED)
     {
         BtlController_EmitBattleAnimation(0, gBattlescriptCurrInstr[2], *argumentPtr);
         MarkBattlerForControllerExec(gActiveBattler);
@@ -4738,11 +4738,11 @@ static void atk50_openpartyscreen(void)
     }
     else
     {
-        if (gBattlescriptCurrInstr[1] & 0x80)
+        if (gBattlescriptCurrInstr[1] & OPEN_PARTY_ALLOW_CANCEL)
             hitmarkerFaintBits = PARTY_CHOOSE_MON; // Used here as the caseId for the EmitChoose function.
         else
             hitmarkerFaintBits = PARTY_MUST_CHOOSE_MON;
-        battlerId = GetBattlerForBattleScript(gBattlescriptCurrInstr[1] & ~(0x80));
+        battlerId = GetBattlerForBattleScript(gBattlescriptCurrInstr[1] & ~(OPEN_PARTY_ALLOW_CANCEL));
         if (gSpecialStatuses[battlerId].flag40)
         {
             gBattlescriptCurrInstr += 6;
@@ -5176,7 +5176,7 @@ static void atk5D_getmoneyreward(void)
     // The whole function is using wrong registers. 
     if (gBattleOutcome == B_OUTCOME_WON)
     {
-        if (gTrainerBattleOpponent_A == 0x400)
+        if (gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
         {
             moneyReward = 20 * gBattleResources->secretBase->party.levels[0] * gBattleStruct->moneyMultiplier;
         }
@@ -6146,12 +6146,12 @@ static void atk76_various(void)
                 *choicedMove = MOVE_NONE;
         }
         break;
-    case VARIOUS_CASE_7:
+    case VARIOUS_RESET_PLAYER_FAINTED_FLAG:
         if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_DOUBLE))
          && gBattleTypeFlags & BATTLE_TYPE_TRAINER
          && gBattleMons[0].hp != 0
          && gBattleMons[1].hp != 0)
-            gHitMarker &= ~(HITMARKER_x400000);
+            gHitMarker &= ~(HITMARKER_PLAYER_FAINTED);
         break;
     case VARIOUS_CASE_8:
         i = 0; // redundant
@@ -6183,7 +6183,7 @@ static void atk76_various(void)
             }
         }
         break;
-    case VARIOUS_CASE_11:
+    case VARIOUS_CHECK_POKEFLUTE:
         gBattleCommunication[MULTISTRING_CHOOSER] = 0;
         monToCheck = 0;
         for (i = 0; i < gBattlersCount; ++i)
@@ -6236,7 +6236,7 @@ static void atk76_various(void)
             gBattleCommunication[5] = 1;
         }
         break;
-    case VARIOUS_CASE_12:
+    case VARIOUS_WAIT_FANFARE:
         if (!IsFanfareTaskInactive())
             return;
         break;
@@ -8810,7 +8810,7 @@ static void atkD2_tryswapitems(void) // trick
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER
      || (GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT
          && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER))
-         && gTrainerBattleOpponent_A != 0x400))
+         && gTrainerBattleOpponent_A != TRAINER_SECRET_BASE))
     {
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     }
@@ -8821,7 +8821,7 @@ static void atkD2_tryswapitems(void) // trick
 
         // you can't swap items if they were knocked off in regular battles
         if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER))
-         && gTrainerBattleOpponent_A != 0x400
+         && gTrainerBattleOpponent_A != TRAINER_SECRET_BASE
          && (gWishFutureKnock.knockedOffMons[sideAttacker] & gBitTable[gBattlerPartyIndexes[gBattlerAttacker]]
             || gWishFutureKnock.knockedOffMons[sideTarget] & gBitTable[gBattlerPartyIndexes[gBattlerTarget]]))
         {
@@ -9441,7 +9441,7 @@ static void atkEF_handleballthrow(void)
         {
             BtlController_EmitBallThrowAnim(0, BALL_3_SHAKES_SUCCESS);
             MarkBattlerForControllerExec(gActiveBattler);
-            gBattlescriptCurrInstr = gUnknown_81D9A88;
+            gBattlescriptCurrInstr = BattleScript_OldMan_Pokedude_CaughtMessage;
         }
         else
         {

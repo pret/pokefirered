@@ -38,8 +38,10 @@
 #define BS_ATTACKER                 1
 #define BS_EFFECT_BATTLER           2
 #define BS_FAINTED                  3
-#define BS_BATTLER_0                7
 #define BS_ATTACKER_WITH_PARTNER    4 // for atk98_updatestatusicon
+#define BS_UNKNOWN_5                5 // for openpartyscreen
+#define BS_UNKNOWN_6                6 // for openpartyscreen
+#define BS_BATTLER_0                7
 #define BS_ATTACKER_SIDE            8 // for atk1E_jumpifability
 #define BS_NOT_ATTACKER_SIDE        9 // for atk1E_jumpifability
 #define BS_SCRIPTING                10
@@ -47,6 +49,9 @@
 #define BS_OPPONENT1                12
 #define BS_PLAYER2                  13 // for atk98_updatestatusicon
 #define BS_OPPONENT2                14
+
+// used for openpartyscreen
+#define OPEN_PARTY_ALLOW_CANCEL     0x80
 
 // atk 01, accuracy calc
 #define NO_ACC_CALC 0xFFFE
@@ -70,12 +75,12 @@
 #define VARIOUS_CASE_4                          4
 #define VARIOUS_RESET_INTIMIDATE_TRACE_BITS     5
 #define VARIOUS_UPDATE_CHOICE_MOVE_ON_LVL_UP    6
-#define VARIOUS_CASE_7                          7
+#define VARIOUS_RESET_PLAYER_FAINTED_FLAG                          7
 #define VARIOUS_CASE_8                          8
 #define VARIOUS_RETURN_OPPONENT_MON1            9
 #define VARIOUS_RETURN_OPPONENT_MON2            10
-#define VARIOUS_CASE_11                         11
-#define VARIOUS_CASE_12                         12
+#define VARIOUS_CHECK_POKEFLUTE                 11
+#define VARIOUS_WAIT_FANFARE                    12
 
 // atk80, dmg manipulation
 #define ATK80_DMG_CHANGE_SIGN                               0

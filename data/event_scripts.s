@@ -7922,18 +7922,18 @@ EventScript_1B2907:: @ 81B2907
 	delay 60
 	special Special_UpdateTrainerCardPhotoIcons
 	msgbox gUnknown_81B1E7D
-	hidemoneybox
+	hidemoneybox 0, 0
 	releaseall
 	end
 
 EventScript_1B2926:: @ 81B2926
-	hidemoneybox
+	hidemoneybox 0, 0
 	releaseall
 	end
 
 EventScript_1B292B:: @ 81B292B
 	msgbox gUnknown_81B1E07
-	hidemoneybox
+	hidemoneybox 0, 0
 	releaseall
 	end
 
@@ -11481,7 +11481,7 @@ EventScript_1BF3DD:: @ 81BF3DD
 	goto_if eq, EventScript_1BF452
 	msgbox Text_19DDBE
 	fadescreen 1
-	hidemoneybox
+	hidemoneybox 0, 0
 	special ChooseSendDaycareMon
 	waitstate
 	showmoneybox 0, 0, 0
@@ -11575,7 +11575,7 @@ EventScript_1BF533:: @ 81BF533
 	end
 
 EventScript_1BF541:: @ 81BF541
-	hidemoneybox
+	hidemoneybox 0, 0
 	release
 	end
 

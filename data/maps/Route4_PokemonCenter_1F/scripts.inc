@@ -65,7 +65,7 @@ EventScript_16F7F6:: @ 816F7F6
 	goto_if eq, EventScript_16F861
 	call EventScript_1A8C27
 	fadescreen 1
-	hidemoneybox
+	hidemoneybox 0, 0
 	special ChangePokemonNickname
 	waitstate
 	goto EventScript_16F86A
@@ -77,7 +77,7 @@ EventScript_16F822:: @ 816F822
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_16F84B
 	fadescreen 1
-	hidemoneybox
+	hidemoneybox 0, 0
 	special ChangeBoxPokemonNickname
 	waitstate
 	lock
@@ -96,7 +96,7 @@ EventScript_16F856:: @ 816F856
 	end
 
 EventScript_16F861:: @ 816F861
-	hidemoneybox
+	hidemoneybox 0, 0
 	goto EventScript_16F86A
 	end
 
@@ -117,13 +117,13 @@ EventScript_16F86F:: @ 816F86F
 
 EventScript_16F888:: @ 816F888
 	msgbox gUnknown_819DC07
-	hidemoneybox
+	hidemoneybox 0, 0
 	release
 	end
 
 EventScript_16F895:: @ 816F895
 	msgbox gUnknown_819DC78
-	hidemoneybox
+	hidemoneybox 0, 0
 	release
 	end
 
@@ -135,7 +135,7 @@ EventScript_16F8A2:: @ 816F8A2
 EventScript_16F8AC:: @ 816F8AC
 	textcolor 0
 	msgbox gUnknown_819DC3E
-	hidemoneybox
+	hidemoneybox 0, 0
 	release
 	end
 

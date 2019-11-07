@@ -355,6 +355,7 @@ void sub_80B2868(u8 taskId);
 
 // water.s
 extern const union AnimCmd *const gUnknown_83E5958[];
+extern const union AnimCmd *const gUnknown_83E5A78[];
 
 // fire.s
 extern const union AnimCmd *const gUnknown_83E5D48[];

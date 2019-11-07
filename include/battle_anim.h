@@ -245,7 +245,7 @@ u8 sub_8075D80(u8 a1);
 void AnimSpriteOnMonPos(struct Sprite *sprite);
 void TranslateAnimSpriteToTargetMonLocation(struct Sprite *sprite);
 void AnimThrowProjectile(struct Sprite *sprite);
-void sub_8075F0C(struct Sprite *sprite);
+void AnimSnoreZ(struct Sprite *sprite);
 s16 CloneBattlerSpriteWithBlend(u8 animBattler);
 void obj_delete_but_dont_free_vram(struct Sprite *sprite);
 void sub_8076048(u8 taskId);
@@ -293,6 +293,7 @@ void sub_8099BD4(u8 taskId);
 
 // normal.c
 extern const struct SpriteTemplate gUnknown_83E7C98;
+extern const struct SpriteTemplate gBasicHitSplatSpriteTemplate;
 
 u32 UnpackSelectedBattleAnimPalettes(s16 selector);
 void sub_80B9BDC(u8 taskId);
@@ -352,6 +353,9 @@ void sub_80B8B38(u8 taskId);
 void sub_80B194C(u8 taskId);
 void sub_80B1D3C(struct Sprite *sprite);
 void sub_80B2868(u8 taskId);
+
+// fighting.c
+void sub_80B1530(u8 taskId);
 
 // water.s
 extern const union AnimCmd *const gUnknown_83E5958[];

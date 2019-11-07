@@ -413,7 +413,7 @@ _080ACC1A:
 	negs r0, r0
 	strh r0, [r1, 0x4]
 _080ACC22:
-	ldr r1, _080ACC40 @ =sub_8075F0C
+	ldr r1, _080ACC40 @ =AnimSnoreZ
 	str r1, [r6, 0x1C]
 	adds r0, r6, 0
 	bl _call_via_r1
@@ -424,7 +424,7 @@ _080ACC22:
 _080ACC34: .4byte gBattleAnimAttacker
 _080ACC38: .4byte gBattleAnimTarget
 _080ACC3C: .4byte gBattleAnimArgs
-_080ACC40: .4byte sub_8075F0C
+_080ACC40: .4byte AnimSnoreZ
 	thumb_func_end sub_80ACBDC
 
 	thumb_func_start sub_80ACC44
@@ -436,12 +436,12 @@ sub_80ACC44: @ 80ACC44
 	ldrh r1, [r2, 0x4]
 	negs r1, r1
 	strh r1, [r2, 0x4]
-	ldr r1, _080ACC5C @ =sub_8075F0C
+	ldr r1, _080ACC5C @ =AnimSnoreZ
 	str r1, [r0, 0x1C]
 	bx lr
 	.align 2, 0
 _080ACC58: .4byte gBattleAnimArgs
-_080ACC5C: .4byte sub_8075F0C
+_080ACC5C: .4byte AnimSnoreZ
 	thumb_func_end sub_80ACC44
 
 	thumb_func_start sub_80ACC60

@@ -1409,7 +1409,7 @@ static void AnimThrowProjectile_Step(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-void sub_8075F0C(struct Sprite *sprite)
+void AnimSnoreZ(struct Sprite *sprite)
 {
     bool8 r4;
     u8 battlerId, coordType;

@@ -160,7 +160,7 @@ SECTIONS {
         asm/fire.o(.text);
         asm/electric.o(.text);
         asm/ice.o(.text);
-        asm/fighting.o(.text);
+        src/fighting.o(.text);
         src/poison.o(.text);
         src/flying.o(.text);
         src/psychic.o(.text);
@@ -450,6 +450,7 @@ SECTIONS {
         src/pokemon_size_record.o(.rodata);
         data/item_use.o(.rodata);
         data/battle_anim_effects_misc.o(.rodata);
+        src/fighting.o(.rodata);
         src/poison.o(.rodata);
         src/flying.o(.rodata);
         src/psychic.o(.rodata);

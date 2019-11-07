@@ -68,9 +68,7 @@ EventScript_16A3D1:: @ 816A3D1
 	goto_if eq, EventScript_16A402
 	msgbox gUnknown_81904F9
 	closemessage
-	hidemoneybox
-	.byte 0
-	.byte 0
+	hidemoneybox 0, 0
 	applymovement 255, Movement_16A48E
 	waitmovement 0
 	releaseall
@@ -93,9 +91,7 @@ EventScript_16A402:: @ 816A402
 	waitse
 	msgbox gUnknown_8190505
 	setvar VAR_MAP_SCENE_PEWTER_CITY_MUSEUM_1F, 1
-	hidemoneybox
-	.byte 0
-	.byte 0
+	hidemoneybox 0, 0
 	releaseall
 	end
 
@@ -117,9 +113,7 @@ EventScript_16A46B:: @ 816A46B
 EventScript_16A476:: @ 816A476
 	msgbox gUnknown_819051C
 	closemessage
-	hidemoneybox
-	.byte 0
-	.byte 0
+	hidemoneybox 0, 0
 	applymovement 255, Movement_16A48E
 	waitmovement 0
 	releaseall

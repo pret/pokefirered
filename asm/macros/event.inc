@@ -1014,8 +1014,12 @@
 	.endm
 
 	@ Hides the secondary box spawned by showmoney.
-	.macro hidemoneybox
+	@ The two arguments are unused.
+	@ They are retained here for backwards compatibility with Ruby/Sapphire.
+	.macro hidemoneybox x, y
 	.byte 0x94
+	.byte \x
+	.byte \y
 	.endm
 
 	@ Updates the secondary box spawned by showmoney. Consumes but does not use arguments.

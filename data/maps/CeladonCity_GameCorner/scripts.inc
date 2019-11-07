@@ -80,9 +80,7 @@ EventScript_16C762:: @ 816C762
 	end
 
 EventScript_16C77A:: @ 816C77A
-	hidemoneybox
-	.byte 0
-	.byte 0
+	hidemoneybox 0, 0
 	hidecoinsbox 0, 5
 	release
 	end

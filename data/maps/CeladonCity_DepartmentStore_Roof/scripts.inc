@@ -297,8 +297,6 @@ EventScript_16C13F:: @ 816C13F
 	end
 
 EventScript_16C14D:: @ 816C14D
-	hidemoneybox
-	.byte 0
-	.byte 0
+	hidemoneybox 0, 0
 	releaseall
 	end

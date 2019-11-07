@@ -124,8 +124,6 @@ EventScript_16D3CA:: @ 816D3CA
 	msgbox gUnknown_8197D80
 	closemessage
 	hidemoneybox
-	.byte 0
-	.byte 0
 	compare_var_to_value VAR_0x4002, 0
 	call_if eq, EventScript_16D44C
 	compare_var_to_value VAR_0x4002, 1
@@ -172,8 +170,6 @@ EventScript_16D48C:: @ 816D48C
 EventScript_16D49A:: @ 816D49A
 	closemessage
 	hidemoneybox
-	.byte 0
-	.byte 0
 	applymovement 255, Movement_16D4AA
 	waitmovement 0
 	releaseall

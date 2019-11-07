@@ -26,8 +26,6 @@ EventScript_16AC07:: @ 816AC07
 EventScript_16AC15:: @ 816AC15
 	msgbox gUnknown_819280E
 	hidemoneybox
-	.byte 0
-	.byte 0
 	release
 	end
 

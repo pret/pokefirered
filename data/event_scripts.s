@@ -7923,23 +7923,17 @@ EventScript_1B2907:: @ 81B2907
 	special Special_UpdateTrainerCardPhotoIcons
 	msgbox gUnknown_81B1E7D
 	hidemoneybox
-	nop
-	nop
 	releaseall
 	end
 
 EventScript_1B2926:: @ 81B2926
 	hidemoneybox
-	nop
-	nop
 	releaseall
 	end
 
 EventScript_1B292B:: @ 81B292B
 	msgbox gUnknown_81B1E07
 	hidemoneybox
-	nop
-	nop
 	releaseall
 	end
 
@@ -11488,8 +11482,6 @@ EventScript_1BF3DD:: @ 81BF3DD
 	msgbox Text_19DDBE
 	fadescreen 1
 	hidemoneybox
-	nop
-	nop
 	special ChooseSendDaycareMon
 	waitstate
 	showmoneybox 0, 0, 0
@@ -11584,8 +11576,6 @@ EventScript_1BF533:: @ 81BF533
 
 EventScript_1BF541:: @ 81BF541
 	hidemoneybox
-	nop
-	nop
 	release
 	end
 

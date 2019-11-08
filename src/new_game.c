@@ -78,7 +78,7 @@ static void ClearPokedexFlags(void)
 
 static void sub_80549D4(void)
 {
-    CpuFill32(0, &gSaveBlock2Ptr->unk_B0, sizeof(gSaveBlock2Ptr->unk_B0));
+    CpuFill32(0, &gSaveBlock2Ptr->battleTower, sizeof(gSaveBlock2Ptr->battleTower));
 }
 
 static void WarpToPlayersRoom(void)

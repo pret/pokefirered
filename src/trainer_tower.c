@@ -954,7 +954,7 @@ static void sub_815E160(void)
     BuildEnemyParty();
     CreateTask(sub_815E124, 1);
     PlayMapChosenOrBattleBGM(0);
-    BT_StartOnField(sub_8080060());
+    BT_StartOnField(BattleSetup_GetBattleTowerBattleTransition());
 }
 
 static void sub_815E1C0(void)

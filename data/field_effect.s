@@ -37,7 +37,12 @@ gUnknown_83CBE70:: @ 83CBE70
 
 gUnknown_83CBE84:: @ 83CBE84
 	.incbin "baserom.gba", 0x3CBE84, 0x18
-	.incbin "baserom.gba", 0x3CBE9C, 0xEC
+
+gUnknown_83CBE9C::
+	.incbin "baserom.gba", 0x3CBE9C, 0x8
+
+gUnknown_83CBEA4::
+	.incbin "baserom.gba", 0x3CBEA4, 0xE4
 
 gUnknown_83CBF88:: @ 83CBF88
 	.incbin "baserom.gba", 0x3CBF88, 0x18

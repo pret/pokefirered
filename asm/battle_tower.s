@@ -968,7 +968,7 @@ _080E60A4:
 _080E60C0: .4byte gFacilityClassToPicIndex
 _080E60C4:
 	ldr r3, _080E60DC @ =gFacilityClassToPicIndex
-	ldr r2, _080E60E0 @ =gUnknown_83FFAC4
+	ldr r2, _080E60E0 @ =gBattleTowerTrainers
 	ldrb r1, [r1]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -982,7 +982,7 @@ _080E60D6:
 	bx r1
 	.align 2, 0
 _080E60DC: .4byte gFacilityClassToPicIndex
-_080E60E0: .4byte gUnknown_83FFAC4
+_080E60E0: .4byte gBattleTowerTrainers
 	thumb_func_end GetBattleTowerTrainerFrontSpriteId
 
 	thumb_func_start sub_80E60E4
@@ -1010,7 +1010,7 @@ _080E6110:
 	cmp r0, 0x63
 	bhi _080E6130
 	ldr r3, _080E6128 @ =gFacilityClassToTrainerClass
-	ldr r2, _080E612C @ =gUnknown_83FFAC4
+	ldr r2, _080E612C @ =gBattleTowerTrainers
 	ldrb r1, [r1]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -1021,7 +1021,7 @@ _080E6110:
 	b _080E6144
 	.align 2, 0
 _080E6128: .4byte gFacilityClassToTrainerClass
-_080E612C: .4byte gUnknown_83FFAC4
+_080E612C: .4byte gBattleTowerTrainers
 _080E6130:
 	ldr r2, _080E614C @ =gFacilityClassToTrainerClass
 	ldrb r0, [r1]
@@ -1073,7 +1073,7 @@ _080E6184:
 	bhi _080E61AC
 	movs r3, 0
 	adds r5, r0, 0
-	ldr r6, _080E61A8 @ =gUnknown_83FFAC5
+	ldr r6, _080E61A8 @ =gBattleTowerTrainers + 1
 _080E618E:
 	adds r2, r4, r3
 	ldrb r1, [r5]
@@ -1089,7 +1089,7 @@ _080E618E:
 	ble _080E618E
 	b _080E61CE
 	.align 2, 0
-_080E61A8: .4byte gUnknown_83FFAC5
+_080E61A8: .4byte gBattleTowerTrainers + 1
 _080E61AC:
 	movs r3, 0
 	adds r5, r0, 0
@@ -1272,7 +1272,7 @@ _080E62F4:
 	adds r1, r2, 0
 	cmp r0, 0
 	beq _080E6320
-	ldr r2, _080E631C @ =gUnknown_8400E04
+	ldr r2, _080E631C @ =gBattleTowerLevel100Mons
 	mov r10, r2
 	movs r3, 0x64
 	str r3, [sp, 0x10]
@@ -1280,14 +1280,14 @@ _080E62F4:
 	.align 2, 0
 _080E6314: .4byte gSaveBlock2Ptr
 _080E6318: .4byte 0x0000055c
-_080E631C: .4byte gUnknown_8400E04
+_080E631C: .4byte gBattleTowerLevel100Mons
 _080E6320:
-	ldr r0, _080E6378 @ =gUnknown_83FFB44
+	ldr r0, _080E6378 @ =gBattleTowerLevel50Mons
 	mov r10, r0
 	movs r2, 0x32
 	str r2, [sp, 0x10]
 _080E6328:
-	ldr r2, _080E637C @ =gUnknown_83FFAC4
+	ldr r2, _080E637C @ =gBattleTowerTrainers
 	ldr r0, [r1]
 	ldr r3, _080E6380 @ =0x0000056c
 	adds r0, r3
@@ -1328,8 +1328,8 @@ _080E636A:
 	movs r4, 0
 	b _080E6388
 	.align 2, 0
-_080E6378: .4byte gUnknown_83FFB44
-_080E637C: .4byte gUnknown_83FFAC4
+_080E6378: .4byte gBattleTowerLevel50Mons
+_080E637C: .4byte gBattleTowerTrainers
 _080E6380: .4byte 0x0000056c
 _080E6384:
 	adds r4, 0x64
@@ -1353,7 +1353,7 @@ _080E63A2:
 	movs r5, 0
 	cmp r5, r6
 	bge _080E63F0
-	ldr r3, _080E64BC @ =gUnknown_83FFAC4
+	ldr r3, _080E64BC @ =sBattleTowerHeldItems
 	mov r9, r3
 	lsls r0, r7, 4
 	add r0, r10
@@ -1470,7 +1470,7 @@ _080E646E:
 	add r0, r10
 	ldrb r2, [r0, 0x2]
 	lsls r2, 1
-	ldr r0, _080E64BC @ =gUnknown_83FFAC4
+	ldr r0, _080E64BC @ =sBattleTowerHeldItems
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0xC
@@ -1491,7 +1491,7 @@ _080E64A6:
 	bx r0
 	.align 2, 0
 _080E64B8: .4byte gEnemyParty
-_080E64BC: .4byte gUnknown_83FFAC4
+_080E64BC: .4byte sBattleTowerHeldItems
 	thumb_func_end sub_80E61DC
 
 	thumb_func_start sub_80E64C0
@@ -1603,7 +1603,7 @@ sub_80E6564: @ 80E6564
 	beq _080E6632
 	cmp r4, 0
 	beq _080E6632
-	ldr r0, _080E6640 @ =gUnknown_84020C4
+	ldr r0, _080E6640 @ =gBattleTowerBannedSpecies
 	ldrh r1, [r0]
 	ldr r5, _080E6644 @ =0x0000ffff
 	adds r3, r0, 0
@@ -1696,7 +1696,7 @@ _080E6632:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E6640: .4byte gUnknown_84020C4
+_080E6640: .4byte gBattleTowerBannedSpecies
 _080E6644: .4byte 0x0000ffff
 	thumb_func_end sub_80E6564
 
@@ -1775,7 +1775,7 @@ _080E6662:
 	movs r0, 0
 	mov r1, r9
 	strb r0, [r1]
-	ldr r2, _080E6734 @ =gUnknown_84020C4
+	ldr r2, _080E6734 @ =gBattleTowerBannedSpecies
 	ldrh r0, [r2]
 	ldr r1, _080E6738 @ =0x0000ffff
 	cmp r0, r1
@@ -1813,7 +1813,7 @@ _080E6724: .4byte gPlayerParty
 _080E6728: .4byte gSpecialVar_Result
 _080E672C: .4byte gStringVar1
 _080E6730: .4byte gSpecialVar_0x8004
-_080E6734: .4byte gUnknown_84020C4
+_080E6734: .4byte gBattleTowerBannedSpecies
 _080E6738: .4byte 0x0000ffff
 _080E673C: .4byte gUnknown_83FE860
 _080E6740:
@@ -1943,12 +1943,12 @@ _080E6820:
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080E6838 @ =gUnknown_83FFACA
+	ldr r1, _080E6838 @ =gBattleTowerTrainers + 6
 	adds r0, r1
 	bl sub_80E678C
 	b _080E684C
 	.align 2, 0
-_080E6838: .4byte gUnknown_83FFACA
+_080E6838: .4byte gBattleTowerTrainers + 6
 _080E683C:
 	ldrb r1, [r0]
 	movs r0, 0xA4
@@ -2111,7 +2111,7 @@ _080E6970:
 	bl CreateTask
 	movs r0, 0
 	bl PlayMapChosenOrBattleBGM
-	bl sub_8080060
+	bl BattleSetup_GetBattleTowerBattleTransition
 	lsls r0, 24
 	lsrs r0, 24
 	bl BT_StartOnField
@@ -2151,7 +2151,7 @@ _080E69A0:
 	bl CreateTask
 	movs r0, 0
 	bl PlayMapChosenOrBattleBGM
-	bl sub_8080060
+	bl BattleSetup_GetBattleTowerBattleTransition
 	lsls r0, 24
 	lsrs r0, 24
 	bl BT_StartOnField
@@ -2772,14 +2772,14 @@ sub_80E6EE0: @ 80E6EE0
 	ldrb r0, [r2, 0x8]
 	cmp r0, 0
 	beq _080E6F0C
-	ldr r4, _080E6F08 @ =gUnknown_84020C4
+	ldr r4, _080E6F08 @ =sFemaleTrainerClasses
 	b _080E6F0E
 	.align 2, 0
 _080E6F00: .4byte gSaveBlock2Ptr
 _080E6F04: .4byte 0x0000055c
-_080E6F08: .4byte gUnknown_84020C4
+_080E6F08: .4byte sFemaleTrainerClasses
 _080E6F0C:
-	ldr r4, _080E6FA0 @ =gUnknown_84020C4
+	ldr r4, _080E6FA0 @ =sMaleTrainerClasses
 _080E6F0E:
 	ldrb r0, [r2, 0xA]
 	ldrb r1, [r2, 0xB]
@@ -2850,7 +2850,7 @@ _080E6F68:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E6FA0: .4byte gUnknown_84020C4
+_080E6FA0: .4byte sMaleTrainerClasses
 _080E6FA4: .4byte gSaveBlock2Ptr
 _080E6FA8: .4byte gSaveBlock1Ptr
 _080E6FAC: .4byte 0x00002cac
@@ -3162,7 +3162,7 @@ DetermineBattleTowerPrize: @ 80E71D0
 	ble _080E7220
 	bl Random
 	ldr r4, [r4]
-	ldr r5, _080E721C @ =gUnknown_84020E6
+	ldr r5, _080E721C @ =sLongStreakPrizes
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x9
@@ -3178,11 +3178,11 @@ DetermineBattleTowerPrize: @ 80E71D0
 	.align 2, 0
 _080E7214: .4byte gSaveBlock2Ptr
 _080E7218: .4byte 0x0000055c
-_080E721C: .4byte gUnknown_84020E6
+_080E721C: .4byte sLongStreakPrizes
 _080E7220:
 	bl Random
 	ldr r4, [r4]
-	ldr r5, _080E7248 @ =gUnknown_84020DA
+	ldr r5, _080E7248 @ =sShortStreakPrizes
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x6
@@ -3200,7 +3200,7 @@ _080E7240:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E7248: .4byte gUnknown_84020DA
+_080E7248: .4byte sShortStreakPrizes
 	thumb_func_end DetermineBattleTowerPrize
 
 	thumb_func_start GiveBattleTowerPrize
@@ -3345,13 +3345,13 @@ sub_80E7348: @ 80E7348
 	adds r5, r1, 0
 	cmp r0, 0
 	beq _080E7370
-	ldr r4, _080E736C @ =gUnknown_84020C4
+	ldr r4, _080E736C @ =sFemaleTrainerClasses
 	b _080E7372
 	.align 2, 0
 _080E7368: .4byte gSaveBlock2Ptr
-_080E736C: .4byte gUnknown_84020C4
+_080E736C: .4byte sFemaleTrainerClasses
 _080E7370:
-	ldr r4, _080E7410 @ =gUnknown_84020C4
+	ldr r4, _080E7410 @ =sMaleTrainerClasses
 _080E7372:
 	ldrb r0, [r2, 0xA]
 	ldrb r1, [r2, 0xB]
@@ -3429,7 +3429,7 @@ _080E73E2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E7410: .4byte gUnknown_84020C4
+_080E7410: .4byte sMaleTrainerClasses
 _080E7414: .4byte gSaveBlock1Ptr
 _080E7418: .4byte 0x00002cac
 _080E741C: .4byte gPlayerParty

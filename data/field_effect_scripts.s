@@ -2,345 +2,345 @@
 	.section script_data, "aw", %progbits
 	.align 2
 gUnknown_81D96AC:: @ 81D96AC
-	.4byte gFldEffScript_81D97C4
-	.4byte gFldEffScript_81D97CA
-	.4byte gFldEffScript_81D97D0
-	.4byte gFldEffScript_81D97D6
-	.4byte gFldEffScript_81D97DC
-	.4byte gFldEffScript_81D97E6
-	.4byte gFldEffScript_81D97F0
-	.4byte gFldEffScript_81D97F6
-	.4byte gFldEffScript_81D9800
-	.4byte gFldEffScript_81D9806
-	.4byte gFldEffScript_81D980C
-	.4byte gFldEffScript_81D9816
-	.4byte gFldEffScript_81D9817
-	.4byte gFldEffScript_81D9821
-	.4byte gFldEffScript_81D982B
-	.4byte gFldEffScript_81D9835
-	.4byte gFldEffScript_81D983F
-	.4byte gFldEffScript_81D9849
-	.4byte gFldEffScript_81D9853
-	.4byte gFldEffScript_81D985D
-	.4byte gFldEffScript_81D9867
-	.4byte gFldEffScript_81D9871
-	.4byte gFldEffScript_81D987B
-	.4byte gFldEffScript_81D9885
-	.4byte gFldEffScript_81D988B
-	.4byte gFldEffScript_81D9895
-	.4byte gFldEffScript_81D98A4
-	.4byte gFldEffScript_81D98A5
-	.4byte gFldEffScript_81D98A6
-	.4byte gFldEffScript_81D98AC
-	.4byte gFldEffScript_81D98B2
-	.4byte gFldEffScript_81D98B8
-	.4byte gFldEffScript_81D98BE
-	.4byte gFldEffScript_81D98C4
-	.4byte gFldEffScript_81D98CA
-	.4byte gFldEffScript_81D98D4
-	.4byte gFldEffScript_81D98DE
-	.4byte gFldEffScript_81D98E4
-	.4byte gFldEffScript_81D98F0
-	.4byte gFldEffScript_81D98F6
-	.4byte gFldEffScript_81D98EA
-	.4byte gFldEffScript_81D9900
-	.4byte gFldEffScript_81D990A
-	.4byte gFldEffScript_81D9914
-	.4byte gFldEffScript_81D991A
-	.4byte gFldEffScript_81D9920
-	.4byte gFldEffScript_81D992B
-	.4byte gFldEffScript_81D9931
-	.4byte gFldEffScript_81D9932
-	.4byte gFldEffScript_81D9933
-	.4byte gFldEffScript_81D993D
-	.4byte gFldEffScript_81D9947
-	.4byte gFldEffScript_81D994D
-	.4byte gFldEffScript_81D994E
-	.4byte gFldEffScript_81D9958
-	.4byte gFldEffScript_81D9962
-	.4byte gFldEffScript_81D9963
-	.4byte gFldEffScript_81D9964
-	.4byte gFldEffScript_81D9965
-	.4byte gFldEffScript_81D996F
-	.4byte gFldEffScript_81D9975
-	.4byte gFldEffScript_81D9976
-	.4byte gFldEffScript_81D9977
-	.4byte gFldEffScript_81D9986
-	.4byte gFldEffScript_81D998C
-	.4byte gFldEffScript_81D9992
-	.4byte gFldEffScript_81D9998
-	.4byte gFldEffScript_81D999E
-	.4byte gFldEffScript_81D99A4
-	.4byte gFldEffScript_81D99AA
+	.4byte gFldEffScript_ExclamationMarkIcon1
+	.4byte gFldEffScript_UseCutOnGrass
+	.4byte gFldEffScript_UseCutOnTree
+	.4byte gFldEffScript_Shadow
+	.4byte gFldEffScript_TallGrass
+	.4byte gFldEffScript_Ripple
+	.4byte gFldEffScript_FieldMoveShowMon
+	.4byte gFldEffScript_Ash
+	.4byte gFldEffScript_SurfBlob
+	.4byte gFldEffScript_UseSurf
+	.4byte gFldEffScript_Dust
+	.4byte gFldEffScript_UseSecretPowerCave
+	.4byte gFldEffScript_JumpTallGrass
+	.4byte gFldEffScript_SandFootprints
+	.4byte gFldEffScript_JumpBigSplash
+	.4byte gFldEffScript_Splash
+	.4byte gFldEffScript_JumpSmallSplash
+	.4byte gFldEffScript_LongGrass
+	.4byte gFldEffScript_JumpLongGrass
+	.4byte gFldEffScript_Unknown19
+	.4byte gFldEffScript_Unknown20
+	.4byte gFldEffScript_Unknown21
+	.4byte gFldEffScript_Unknown22
+	.4byte gFldEffScript_BerryTreeGrowthSparkle
+	.4byte gFldEffScript_DeepSandFootprints
+	.4byte gFldEffScript_PokecenterHeal
+	.4byte gFldEffScript_UseSecretPowerTree
+	.4byte gFldEffScript_UseSecretPowerShrub
+	.4byte gFldEffScript_TreeDisguise
+	.4byte gFldEffScript_MountainDisguise
+	.4byte gFldEffScript_NpcflyOut
+	.4byte gFldEffScript_UseFly
+	.4byte gFldEffScript_FlyIn
+	.4byte gFldEffScript_ExclamationMarkIcon2
+	.4byte gFldEffScript_FeetInFlowingWater
+	.4byte gFldEffScript_BikeTireTracks
+	.4byte gFldEffScript_SandDisguise
+	.4byte gFldEffScript_UseRockSmash
+	.4byte gFldEffScript_UseDig
+	.4byte gFldEffScript_SandPile
+	.4byte gFldEffScript_UseStrength
+	.4byte gFldEffScript_ShortGrass
+	.4byte gFldEffScript_HotSpringsWater
+	.4byte gFldEffScript_UseWaterfall
+	.4byte gFldEffScript_UseDive
+	.4byte gFldEffScript_Pokeball
+	.4byte gFldEffScript_HeartIcon
+	.4byte gFldEffScript_Nop47
+	.4byte gFldEffScript_Nop48
+	.4byte gFldEffScript_PopOutOfAsh
+	.4byte gFldEffScript_LavaridgeGymWarp
+	.4byte gFldEffScript_SweetScent
+	.4byte gFldEffScript_SandPillar
+	.4byte gFldEffScript_Bubbles
+	.4byte gFldEffScript_Sparkle
+	.4byte gFldEffScript_SecretPowerCave
+	.4byte gFldEffScript_SecretPowerTree
+	.4byte gFldEffScript_SecretPowerShrub
+	.4byte gFldEffScript_CutGrass
+	.4byte gFldEffScript_FieldMoveShowMonInit
+	.4byte gFldEffScript_UseFlyAncientTomb
+	.4byte gFldEffScript_PcturnOn
+	.4byte gFldEffScript_HallOfFameRecord
+	.4byte gFldEffScript_UseTeleport
+	.4byte gFldEffScript_Unk40
+	.4byte gFldEffScript_Unk41
+	.4byte gFldEffScript_Unk42
+	.4byte gFldEffScript_Unk43
+	.4byte gFldEffScript_Unk44
+	.4byte gFldEffScript_Unk45
 
-gFldEffScript_81D97C4:: @ 81D97C4
+gFldEffScript_ExclamationMarkIcon1:: @ 81D97C4
 	callnative FldEff_ExclamationMarkIcon1
 	end 
 
-gFldEffScript_81D97CA:: @ 81D97CA
+gFldEffScript_UseCutOnGrass:: @ 81D97CA
 	callnative sub_80979A0
 	end 
 
-gFldEffScript_81D97D0:: @ 81D97D0
+gFldEffScript_UseCutOnTree:: @ 81D97D0
 	callnative sub_80979F0
 	end 
 
-gFldEffScript_81D97D6:: @ 81D97D6
+gFldEffScript_Shadow:: @ 81D97D6
 	callnative oei_shadow
 	end 
 
-gFldEffScript_81D97DC:: @ 81D97DC
+gFldEffScript_TallGrass:: @ 81D97DC
 	loadfadedpal_callnative gUnknown_83A5348, oei_grass_normal
 	end 
 
-gFldEffScript_81D97E6:: @ 81D97E6
+gFldEffScript_Ripple:: @ 81D97E6
 	loadfadedpal_callnative gUnknown_83A5348, oei_ripples
 	end 
 
-gFldEffScript_81D97F0:: @ 81D97F0
+gFldEffScript_FieldMoveShowMon:: @ 81D97F0
 	callnative FldEff_FieldMoveShowMon
 	end 
 
-gFldEffScript_81D97F6:: @ 81D97F6
+gFldEffScript_Ash:: @ 81D97F6
 	loadfadedpal_callnative gUnknown_83A5348, oei_ash
 	end 
 
-gFldEffScript_81D9800:: @ 81D9800
+gFldEffScript_SurfBlob:: @ 81D9800
 	callnative sub_80DC3D0
 	end 
 
-gFldEffScript_81D9806:: @ 81D9806
+gFldEffScript_UseSurf:: @ 81D9806
 	callnative sub_8086944
 	end 
 
-gFldEffScript_81D980C:: @ 81D980C
+gFldEffScript_Dust:: @ 81D980C
 	loadfadedpal_callnative gUnknown_83A5340, FldEff_Dust
 	end 
 
-gFldEffScript_81D9816:: @ 81D9816
+gFldEffScript_UseSecretPowerCave:: @ 81D9816
 	end 
 
-gFldEffScript_81D9817:: @ 81D9817
+gFldEffScript_JumpTallGrass:: @ 81D9817
 	loadfadedpal_callnative gUnknown_83A5348, FldEff_JumpTallGrass
 	end 
 
-gFldEffScript_81D9821:: @ 81D9821
+gFldEffScript_SandFootprints:: @ 81D9821
 	loadfadedpal_callnative gUnknown_83A5340, FldEff_SandFootprints
 	end 
 
-gFldEffScript_81D982B:: @ 81D982B
+gFldEffScript_JumpBigSplash:: @ 81D982B
 	loadfadedpal_callnative gUnknown_83A5340, oei_water_drop_tall
 	end 
 
-gFldEffScript_81D9835:: @ 81D9835
+gFldEffScript_Splash:: @ 81D9835
 	loadfadedpal_callnative gUnknown_83A5340, FldEff_Splash
 	end 
 
-gFldEffScript_81D983F:: @ 81D983F
+gFldEffScript_JumpSmallSplash:: @ 81D983F
 	loadfadedpal_callnative gUnknown_83A5340, FldEff_JumpSmallSplash
 	end 
 
-gFldEffScript_81D9849:: @ 81D9849
+gFldEffScript_LongGrass:: @ 81D9849
 	loadfadedpal_callnative gUnknown_83A5348, FldEff_LongGrass
 	end 
 
-gFldEffScript_81D9853:: @ 81D9853
+gFldEffScript_JumpLongGrass:: @ 81D9853
 	loadfadedpal_callnative gUnknown_83A5348, FldEff_JumpLongGrass
 	end 
 
-gFldEffScript_81D985D:: @ 81D985D
+gFldEffScript_Unknown19:: @ 81D985D
 	loadfadedpal_callnative gUnknown_83A5348, FldEff_Unknown19
 	end 
 
-gFldEffScript_81D9867:: @ 81D9867
+gFldEffScript_Unknown20:: @ 81D9867
 	loadfadedpal_callnative gUnknown_83A5348, FldEff_Unknown20
 	end 
 
-gFldEffScript_81D9871:: @ 81D9871
+gFldEffScript_Unknown21:: @ 81D9871
 	loadfadedpal_callnative gUnknown_83A5340, FldEff_Unknown21
 	end 
 
-gFldEffScript_81D987B:: @ 81D987B
+gFldEffScript_Unknown22:: @ 81D987B
 	loadfadedpal_callnative gUnknown_83A5340, FldEff_Unknown22
 	end 
 
-gFldEffScript_81D9885:: @ 81D9885
+gFldEffScript_BerryTreeGrowthSparkle:: @ 81D9885
 	callnative sub_80DC9DC
 	end 
 
-gFldEffScript_81D988B:: @ 81D988B
+gFldEffScript_DeepSandFootprints:: @ 81D988B
 	loadfadedpal_callnative gUnknown_83A5340, FldEff_DeepSandFootprints
 	end 
 
-gFldEffScript_81D9895:: @ 81D9895
+gFldEffScript_PokecenterHeal:: @ 81D9895
 	loadfadedpal gUnknown_83CBE9C
 	loadfadedpal_callnative gUnknown_83A5340, sub_8083B8C
 	end 
 
-gFldEffScript_81D98A4:: @ 81D98A4
+gFldEffScript_UseSecretPowerTree:: @ 81D98A4
 	end 
 
-gFldEffScript_81D98A5:: @ 81D98A5
+gFldEffScript_UseSecretPowerShrub:: @ 81D98A5
 	end 
 
-gFldEffScript_81D98A6:: @ 81D98A6
+gFldEffScript_TreeDisguise:: @ 81D98A6
 	callnative ShowTreeDisguiseFieldEffect
 	end 
 
-gFldEffScript_81D98AC:: @ 81D98AC
+gFldEffScript_MountainDisguise:: @ 81D98AC
 	callnative ShowMountainDisguiseFieldEffect
 	end 
 
-gFldEffScript_81D98B2:: @ 81D98B2
+gFldEffScript_NpcflyOut:: @ 81D98B2
 	callnative sub_8086D38
 	end 
 
-gFldEffScript_81D98B8:: @ 81D98B8
+gFldEffScript_UseFly:: @ 81D98B8
 	callnative FldEff_UseFly
 	end 
 
-gFldEffScript_81D98BE:: @ 81D98BE
+gFldEffScript_FlyIn:: @ 81D98BE
 	callnative FldEff_FlyIn
 	end 
 
-gFldEffScript_81D98C4:: @ 81D98C4
+gFldEffScript_ExclamationMarkIcon2:: @ 81D98C4
 	callnative sub_8082624
 	end 
 
-gFldEffScript_81D98CA:: @ 81D98CA
+gFldEffScript_FeetInFlowingWater:: @ 81D98CA
 	loadfadedpal_callnative gUnknown_83A5340, FldEff_FeetInFlowingWater
 	end 
 
-gFldEffScript_81D98D4:: @ 81D98D4
+gFldEffScript_BikeTireTracks:: @ 81D98D4
 	loadfadedpal_callnative gUnknown_83A5340, FldEff_BikeTireTracks
 	end 
 
-gFldEffScript_81D98DE:: @ 81D98DE
+gFldEffScript_SandDisguise:: @ 81D98DE
 	callnative ShowSandDisguiseFieldEffect
 	end 
 
-gFldEffScript_81D98E4:: @ 81D98E4
+gFldEffScript_UseRockSmash:: @ 81D98E4
 	callnative FldEff_UseRockSmash
 	end 
 
-gFldEffScript_81D98EA:: @ 81D98EA
+gFldEffScript_UseStrength:: @ 81D98EA
 	callnative sub_80D0860
 	end 
 
-gFldEffScript_81D98F0:: @ 81D98F0
+gFldEffScript_UseDig:: @ 81D98F0
 	callnative FldEff_UseDig
 	end 
 
-gFldEffScript_81D98F6:: @ 81D98F6
+gFldEffScript_SandPile:: @ 81D98F6
 	loadfadedpal_callnative gUnknown_83A5340, FldEff_SandPile
 	end 
 
-gFldEffScript_81D9900:: @ 81D9900
+gFldEffScript_ShortGrass:: @ 81D9900
 	loadfadedpal_callnative gUnknown_83A5348, sub_80DB808
 	end 
 
-gFldEffScript_81D990A:: @ 81D990A
+gFldEffScript_HotSpringsWater:: @ 81D990A
 	loadfadedpal_callnative gUnknown_83A5348, sub_80DBF50
 	end 
 
-gFldEffScript_81D9914:: @ 81D9914
+gFldEffScript_UseWaterfall:: @ 81D9914
 	callnative oei_waterfall
 	end 
 
-gFldEffScript_81D991A:: @ 81D991A
+gFldEffScript_UseDive:: @ 81D991A
 	callnative FldEff_UseDive
 	end 
 
-gFldEffScript_81D9920:: @ 81D9920
+gFldEffScript_Pokeball:: @ 81D9920
 	loadpal sSpritePalette_SlidingPokeball
 	callnative FldEff_Pokeball
 	end 
 
-gFldEffScript_81D992B:: @ 81D992B
+gFldEffScript_HeartIcon:: @ 81D992B
 	callnative sub_80825B4
 	end 
 
-gFldEffScript_81D9931:: @ 81D9931
+gFldEffScript_Nop47:: @ 81D9931
 	end 
 
-gFldEffScript_81D9932:: @ 81D9932
+gFldEffScript_Nop48:: @ 81D9932
 	end 
 
-gFldEffScript_81D9933:: @ 81D9933
+gFldEffScript_PopOutOfAsh:: @ 81D9933
 	loadfadedpal_callnative gUnknown_83A5ED8, FldEff_PopOutOfAsh
 	end 
 
-gFldEffScript_81D993D:: @ 81D993D
+gFldEffScript_LavaridgeGymWarp:: @ 81D993D
 	loadfadedpal_callnative gUnknown_83A5ED8, FldEff_LavaridgeGymWarp
 	end 
 
-gFldEffScript_81D9947:: @ 81D9947
+gFldEffScript_SweetScent:: @ 81D9947
 	callnative FldEff_SweetScent
 	end 
 
-gFldEffScript_81D994D:: @ 81D994D
+gFldEffScript_SandPillar:: @ 81D994D
 	end 
 
-gFldEffScript_81D994E:: @ 81D994E
+gFldEffScript_Bubbles:: @ 81D994E
 	loadfadedpal_callnative gUnknown_83A5340, FldEff_Bubbles
 	end 
 
-gFldEffScript_81D9958:: @ 81D9958
+gFldEffScript_Sparkle:: @ 81D9958
 	loadfadedpal_callnative gUnknown_83A5FF8, FldEff_Sparkle
 	end 
 
-gFldEffScript_81D9962:: @ 81D9962
+gFldEffScript_SecretPowerCave:: @ 81D9962
 	end 
 
-gFldEffScript_81D9963:: @ 81D9963
+gFldEffScript_SecretPowerTree:: @ 81D9963
 	end 
 
-gFldEffScript_81D9964:: @ 81D9964
+gFldEffScript_SecretPowerShrub:: @ 81D9964
 	end 
 
-gFldEffScript_81D9965:: @ 81D9965
+gFldEffScript_CutGrass:: @ 81D9965
 	loadfadedpal_callnative gUnknown_83D4144, sub_8097A48
 	end 
 
-gFldEffScript_81D996F:: @ 81D996F
+gFldEffScript_FieldMoveShowMonInit:: @ 81D996F
 	callnative FldEff_FieldMoveShowMonInit
 	end 
 
-gFldEffScript_81D9975:: @ 81D9975
+gFldEffScript_UseFlyAncientTomb:: @ 81D9975
 	end 
 
-gFldEffScript_81D9976:: @ 81D9976
+gFldEffScript_PcturnOn:: @ 81D9976
 	end 
 
-gFldEffScript_81D9977:: @ 81D9977
+gFldEffScript_HallOfFameRecord:: @ 81D9977
 	loadfadedpal gUnknown_83CBE9C
 	loadfadedpal_callnative gUnknown_83CBEA4, sub_8083CE0
 	end 
 
-gFldEffScript_81D9986:: @ 81D9986
+gFldEffScript_UseTeleport:: @ 81D9986
 	callnative FldEff_UseTeleport
 	end 
 
-gFldEffScript_81D998C:: @ 81D998C
+gFldEffScript_Unk40:: @ 81D998C
 	callnative sub_80825EC
 	end 
 
-gFldEffScript_81D9992:: @ 81D9992
+gFldEffScript_Unk41:: @ 81D9992
 	callnative sub_8086BA8
 	end 
 
-gFldEffScript_81D9998:: @ 81D9998
+gFldEffScript_Unk42:: @ 81D9998
 	callnative sub_808257C
 	end 
 
-gFldEffScript_81D999E:: @ 81D999E
+gFldEffScript_Unk43:: @ 81D999E
 	callnative sub_8087924
 	end 
 
-gFldEffScript_81D99A4:: @ 81D99A4
+gFldEffScript_Unk44:: @ 81D99A4
 	callnative sub_8087AB4
 	end 
 
-gFldEffScript_81D99AA:: @ 81D99AA
+gFldEffScript_Unk45:: @ 81D99AA
 	callnative sub_8087E28
 	end 

@@ -543,7 +543,7 @@ static const struct SpriteTemplate sSpriteTemplateTable_Unused[] =
 // this palette is shared by big pokeball and sliding pokeball
 static const u16 sSlidingPokeballBigPokeballPalette[] = INCBIN_U16("graphics/battle_transitions/sliding_pokeball.gbapal");
 
-static const struct SpritePalette sSpritePalette_SlidingPokeball =
+const struct SpritePalette sSpritePalette_SlidingPokeball =
 {
     .data = sSlidingPokeballBigPokeballPalette,
     .tag = 0x1009,

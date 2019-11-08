@@ -61,7 +61,7 @@ static const union AnimCmd *const gUnknown_83E62CC[] =
     gUnknown_83E62C0,
 };
 
-// unused
+// not used
 static const struct SpriteTemplate gUnknown_83E62D0 =
 {
     .tileTag = ANIM_TAG_ICE_CRYSTALS,

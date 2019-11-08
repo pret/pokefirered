@@ -2111,7 +2111,7 @@ _080E6970:
 	bl CreateTask
 	movs r0, 0
 	bl PlayMapChosenOrBattleBGM
-	bl sub_8080060
+	bl BattleSetup_GetBattleTowerBattleTransition
 	lsls r0, 24
 	lsrs r0, 24
 	bl BT_StartOnField
@@ -2151,7 +2151,7 @@ _080E69A0:
 	bl CreateTask
 	movs r0, 0
 	bl PlayMapChosenOrBattleBGM
-	bl sub_8080060
+	bl BattleSetup_GetBattleTowerBattleTransition
 	lsls r0, 24
 	lsrs r0, 24
 	bl BT_StartOnField

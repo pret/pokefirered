@@ -645,7 +645,7 @@ static u8 GetTrainerBattleTransition(void)
         return sBattleTransitionTable_Trainer[transitionType][1];
 }
 
-u8 sub_8080060(void)
+u8 BattleSetup_GetBattleTowerBattleTransition(void)
 {
     u8 enemyLevel = GetMonData(&gEnemyParty[0], MON_DATA_LEVEL);
     u8 playerLevel = GetSumOfPlayerPartyLevel(1);

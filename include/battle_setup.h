@@ -13,7 +13,7 @@ void Special_StartLegendaryBattle(void);
 void Special_StartGroudonKyogreBattle(void);
 void Special_StartRegiBattle(void);
 u8 BattleSetup_GetTerrainId(void);
-u8 sub_8080060(void);
+u8 BattleSetup_GetBattleTowerBattleTransition(void);
 const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data);
 void ConfigureAndSetUpOneTrainerBattle(u8 trainerEventObjId, const u8 *trainerScript);
 bool32 GetTrainerFlagFromScriptPointer(const u8 *data);

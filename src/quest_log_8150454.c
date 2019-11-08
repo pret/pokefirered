@@ -60,7 +60,7 @@ static void sub_81504A8(void)
     struct MapObject *mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
     sub_81507BC(mapObject, sub_805C808(0));
     FieldObjectTurn(mapObject, mapObject->placeholder18);
-    SetPlayerAvatarStateMask(0x01);
+    SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_ON_FOOT);
 }
 
 static void sub_81504E8(void)
@@ -68,7 +68,7 @@ static void sub_81504E8(void)
     struct MapObject *mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
     sub_81507BC(mapObject, sub_805C808(1));
     FieldObjectTurn(mapObject, mapObject->placeholder18);
-    SetPlayerAvatarStateMask(0x02);
+    SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_MACH_BIKE);
     sub_80BD620(0, 0);
 }
 
@@ -122,7 +122,7 @@ static void sub_81505C4(u8 taskId)
             sub_805D9C4(sprite);
             if (sprite->animEnded)
             {
-                if (!(gPlayerAvatar.flags & 8))
+                if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING))
                     sub_81507BC(mapObject, sub_805C808(0));
                 else
                     sub_81507BC(mapObject, sub_805C808(2));
@@ -141,11 +141,11 @@ static void sub_8150708(void)
     struct MapObject *mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
     u8 fieldEffectId;
 
-    if (!(gPlayerAvatar.flags & 0x08))
+    if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING))
     {
         sub_81507BC(mapObject, sub_805C808(2));
         FieldObjectTurn(mapObject, mapObject->placeholder18);
-        SetPlayerAvatarStateMask(0x08);
+        SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_SURFING);
         gFieldEffectArguments[0] = mapObject->coords2.x;
         gFieldEffectArguments[1] = mapObject->coords2.y;
         gFieldEffectArguments[2] = gPlayerAvatar.mapObjectId;

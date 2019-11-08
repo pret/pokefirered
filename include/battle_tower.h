@@ -2,6 +2,7 @@
 #define GUARD_BATTLE_TOWER_H
 
 #include "global.h"
+#include "constants/battle_tower.h"
 
 u16 sub_8164FCC(u8, u8);
 void sub_80E7524(struct BattleTowerEReaderTrainer *);

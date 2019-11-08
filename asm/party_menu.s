@@ -17510,7 +17510,7 @@ _081275AE:
 	bl GetMonData
 	lsls r0, 16
 	lsrs r4, r0, 16
-	ldr r3, _081275F0 @ =gUnknown_84020C4
+	ldr r3, _081275F0 @ =gBattleTowerBannedSpecies
 	lsls r1, r5, 1
 	adds r0, r1, r3
 	ldrh r0, [r0]
@@ -17539,7 +17539,7 @@ _081275E2:
 	.align 2, 0
 _081275E8: .4byte gSaveBlock2Ptr
 _081275EC: .4byte 0x0000055c
-_081275F0: .4byte gUnknown_84020C4
+_081275F0: .4byte gBattleTowerBannedSpecies
 _081275F4: .4byte 0x0000ffff
 	thumb_func_end sub_8127550
 

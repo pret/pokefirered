@@ -2915,7 +2915,6 @@ extern const u8 gBerryFixWindow_Tilemap[];
 extern const u8 gBerryFixWindow_Pal[];
 
 // item_pc
-
 extern const u8 gItemPcTiles[];
 extern const u32 gItemPcBgPals[];
 extern const u8 gItemPcTilemap[];
@@ -3735,6 +3734,11 @@ extern const u32 gGhostPalette[];
 extern const u32 gSubstituteDollGfx[];
 extern const u32 gSubstituteDollTilemap[];
 extern const u32 gSubstituteDollPal[];
+
+// ice
+extern const u8 gWeatherFog1Tiles[];
+extern const u32 gBattleAnimFogTilemap[];
+extern const u16 gUnknown_83C2CE0[];
 
 // credits
 extern const u32 gCreditsPokeballBgGfxTiles[];

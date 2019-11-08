@@ -84,6 +84,11 @@ extern struct OamData gOamData_83AC9E0;
 extern struct OamData gOamData_83ACA20;
 extern struct OamData gOamData_83ACA80;
 extern struct OamData gOamData_83ACAA0;
+extern struct OamData gOamData_83ACBE8;
+extern struct OamData gOamData_83ACAE8;
+extern struct OamData gOamData_83ACB88;
+extern struct OamData gOamData_83ACB48;
+extern struct OamData gOamData_83ACB28;
 
 void ClearBattleAnimationVars(void);
 void DoMoveAnim(u16 move);
@@ -356,6 +361,12 @@ void sub_80B2868(u8 taskId);
 
 // fighting.c
 void sub_80B1530(u8 taskId);
+
+// ice.c
+void AnimTask_Haze1(u8 taskId);
+void AnimTask_LoadMistTiles(u8 taskId);
+void AnimTask_Hail1(u8 taskId);
+void AnimTask_GetRolloutCounter(u8 taskId);
 
 // water.s
 extern const union AnimCmd *const gUnknown_83E5958[];

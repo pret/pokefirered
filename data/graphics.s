@@ -13760,7 +13760,7 @@ gFile_graphics_battle_anims_sprites_277_sheet:: @ 8E7EE00
 	.incbin "graphics/battle_anims/sprites/277.4bpp.lz"
 
 	.align 2
-gFile_graphics_battle_anims_backgrounds_fog_tilemap:: @ 8E7F1F4
+gBattleAnimFogTilemap:: @ 8E7F1F4
 	.incbin "graphics/battle_anims/backgrounds/fog.bin.lz"
 
 	.align 2

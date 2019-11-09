@@ -1,0 +1,4 @@
+const struct BattleTowerTrainer gBattleTowerTrainers[] =
+{
+
+};

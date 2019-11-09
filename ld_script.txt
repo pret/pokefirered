@@ -208,6 +208,7 @@ SECTIONS {
         asm/battle_anim_effects_3.o(.text);
         asm/learn_move.o(.text);
         src/fldeff_softboiled.o(.text);
+        src/battle_tower.o(.text);
         asm/battle_tower.o(.text);
         src/battle_controller_oak_old_man.o(.text);
         src/player_pc.o(.text);
@@ -479,7 +480,7 @@ SECTIONS {
         src/battle_controller_safari.o(.rodata);
         data/battle_anim_effects_3.o(.rodata);
         data/learn_move.o(.rodata);
-        data/battle_tower.o(.rodata);
+        src/battle_tower.o(.rodata);
         src/battle_controller_oak_old_man.o(.rodata);
         src/player_pc.o(.rodata);
         src/intro.o(.rodata);

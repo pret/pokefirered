@@ -342,7 +342,7 @@ void sub_80B54E8(u8 taskId)
 
     SetGpuReg(REG_OFFSET_BLDCNT, (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL));
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 0x10));
-    spriteId = GetAnimBattlerSpriteId(0);
+    spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     PrepareBattlerSpriteForRotScale(spriteId, ST_OAM_OBJ_BLEND);
     SetSpriteRotScale(spriteId, 128, 128, 0);
     gSprites[spriteId].invisible = FALSE;
@@ -377,7 +377,7 @@ static void sub_80B55C8(u8 taskId)
         gTasks[taskId].data[1] -= 1;
         return;
     }
-    spriteId = GetAnimBattlerSpriteId(0);
+    spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     gTasks[taskId].data[0] += 8;
     if (gTasks[taskId].data[0] <= 0xFF)
     {
@@ -626,7 +626,7 @@ static void sub_80B5AD4(u8 taskId)
                 task->data[1] = 0;
                 task->data[2] = 0;
                 task->data[3] = 16;
-                task->data[13] = GetAnimBattlerSpriteId(1);
+                task->data[13] = GetAnimBattlerSpriteId(ANIM_TARGET);
                 task->data[4] = (gSprites[task->data[13]].oam.paletteNum + 16) * 16;
                 if (position == 1)
                 {
@@ -711,7 +711,7 @@ static void sub_80B5DCC(u8 taskId)
     {
     case 0:
         gScanlineEffect.state = 3;
-        task->data[14] = GetAnimBattlerSpriteId(1);
+        task->data[14] = GetAnimBattlerSpriteId(ANIM_TARGET);
         if (rank == 1)
             ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG1_ON);
         else
@@ -1288,7 +1288,7 @@ static void sub_80B6BE4(u8 taskId)
         task->data[1] = 0;
         task->data[2] = 0;
         task->data[3] = 16;
-        task->data[4] = GetAnimBattlerSpriteId(0);
+        task->data[4] = GetAnimBattlerSpriteId(ANIM_ATTACKER);
         task->data[5] = gSprites[task->data[4]].oam.priority;
         task->data[6] = (gSprites[task->data[4]].oam.paletteNum + 16) << 4;
         gSprites[task->data[4]].oam.objMode = ST_OAM_OBJ_BLEND;

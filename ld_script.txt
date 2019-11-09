@@ -157,7 +157,7 @@ SECTIONS {
         asm/battle_anim_effects_1.o(.text);
         asm/battle_anim_effects_2.o(.text);
         asm/water.o(.text);
-        asm/fire.o(.text);
+        src/fire.o(.text);
         src/electric.o(.text);
         src/ice.o(.text);
         src/fighting.o(.text);
@@ -450,6 +450,7 @@ SECTIONS {
         src/pokemon_size_record.o(.rodata);
         data/item_use.o(.rodata);
         data/battle_anim_effects_misc.o(.rodata);
+        src/fire.o(.rodata);
         src/electric.o(.rodata);
         src/ice.o(.rodata);
         src/fighting.o(.rodata);

@@ -377,12 +377,17 @@ void sub_80AEA10(u8 taskId);
 void sub_80AECE0(u8 taskId);
 void sub_80AEFA0(u8 taskId);
 
+// fire.c
+extern const union AnimCmd *const gUnknown_83E5D48[];
+
+void sub_80ACEA4(u8 taskId);
+void sub_80ADAD8(u8 taskId);
+void AnimTask_BlendBackground(u8 taskId);
+void sub_80AD800(u8 taskId);
+
 // water.s
 extern const union AnimCmd *const gUnknown_83E5958[];
 extern const union AnimCmd *const gUnknown_83E5A78[];
-
-// fire.s
-extern const union AnimCmd *const gUnknown_83E5D48[];
 
 // battle_anim_utility_funcs.c
 void sub_80BA7F8(u8 taskId);

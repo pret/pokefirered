@@ -298,7 +298,7 @@ static void sub_80B8ED4(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        task->data[10] = GetAnimBattlerSpriteId(0);
+        task->data[10] = GetAnimBattlerSpriteId(ANIM_ATTACKER);
         task->data[11] = GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker);
         if (task->data[11] == 1)
         {
@@ -360,7 +360,7 @@ static void sub_80B8ED4(u8 taskId)
 
 static void sub_80B908C(u8 taskId)
 {
-    u8 spriteId = GetAnimBattlerSpriteId(0);
+    u8 spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
 
     gSprites[spriteId].invisible = TRUE;
     gSprites[spriteId].pos2.x = 0;
@@ -391,7 +391,7 @@ static void sub_80B912C(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        task->data[10] = GetAnimBattlerSpriteId(0);
+        task->data[10] = GetAnimBattlerSpriteId(ANIM_ATTACKER);
         gSprites[task->data[10]].invisible = FALSE;
         gSprites[task->data[10]].pos2.x = 0;
         gSprites[task->data[10]].pos2.y = 160 - gSprites[task->data[10]].pos1.y;
@@ -410,7 +410,7 @@ static void sub_80B91B0(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        task->data[10] = GetAnimBattlerSpriteId(0);
+        task->data[10] = GetAnimBattlerSpriteId(ANIM_ATTACKER);
         task->data[11] = GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker);
         if (task->data[11] == 1)
             task->data[12] = gBattle_BG1_X;

@@ -588,7 +588,7 @@ void sub_80B4BD0(u8 taskId)
     task->data[13] = pan1;
     task->data[14] = (pan2 - pan1) / task->data[8];
     task->data[1] = var4;
-    task->data[15] = GetAnimBattlerSpriteId(0);
+    task->data[15] = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     task->func = sub_80B4D00;
 }
 

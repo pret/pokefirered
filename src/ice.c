@@ -418,7 +418,7 @@ static const union AffineAnimCmd *const gUnknown_83E65A0[] =
     gUnknown_83E6584,
 };
 
-const struct SpriteTemplate gUnknown_83E65A4 =
+static const struct SpriteTemplate gUnknown_83E65A4 =
 {
     .tileTag = ANIM_TAG_HAIL,
     .paletteTag = ANIM_TAG_HAIL,

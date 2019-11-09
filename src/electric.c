@@ -34,7 +34,6 @@ static bool8 sub_80AEE74(struct Task *task, u8 taskId);
 static bool8 sub_80AF058(struct Task *task, u8 taskId);
 static void sub_80AF0C8(struct Sprite *sprite);
 
-
 static const union AnimCmd gUnknown_83E5F1C[] =
 {
     ANIMCMD_FRAME(0, 5),
@@ -215,7 +214,7 @@ const struct SpriteTemplate gElectricitySpriteTemplate =
     .callback = sub_80AE1A0,
 };
 
-const struct SpriteTemplate gUnknown_83E60A0 =
+static const struct SpriteTemplate gUnknown_83E60A0 =
 {
     .tileTag = ANIM_TAG_SPARK,
     .paletteTag = ANIM_TAG_SPARK,
@@ -281,7 +280,7 @@ static const union AnimCmd *const gUnknown_83E6118[] =
     gUnknown_83E6104,
 };
 
-const struct SpriteTemplate gUnknown_83E6120 =
+static const struct SpriteTemplate gUnknown_83E6120 =
 {
     .tileTag = ANIM_TAG_ELECTRIC_ORBS,
     .paletteTag = ANIM_TAG_ELECTRIC_ORBS,
@@ -419,7 +418,7 @@ static const union AffineAnimCmd *const gUnknown_83E6274[] =
     gUnknown_83E6264,
 };
 
-const struct SpriteTemplate gUnknown_83E6278 =
+static const struct SpriteTemplate gUnknown_83E6278 =
 {
     .tileTag = ANIM_TAG_SPARK,
     .paletteTag = ANIM_TAG_SPARK,
@@ -441,7 +440,7 @@ const struct SpriteTemplate gUnknown_83E6290 =
     .callback = sub_80AEC80,
 };
 
-const struct SpriteTemplate gUnknown_83E62A8 =
+static const struct SpriteTemplate gUnknown_83E62A8 =
 {
     .tileTag = ANIM_TAG_SPARK,
     .paletteTag = ANIM_TAG_SPARK,
@@ -737,12 +736,12 @@ static void sub_80AE420(struct Sprite *sprite)
     if (!sprite->data[0])
     {
         sprite->oam.shape = ST_OAM_V_RECTANGLE;
-        sprite->oam.size = SPRITE_SIZE_8x8;
+        sprite->oam.size = ST_OAM_SIZE_0;
     }
     else
     {
         sprite->oam.shape = ST_OAM_SQUARE;
-        sprite->oam.size = SPRITE_SIZE_16x8;
+        sprite->oam.size = ST_OAM_SIZE_1;
     }
     if (++sprite->data[1] == 15)
         DestroySprite(sprite);
@@ -897,7 +896,7 @@ static void sub_80AE7DC(struct Sprite *sprite)
     StartSpriteAffineAnim(sprite, 1);
     sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
     sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
-    sprite->data[6] = GetAnimBattlerSpriteId(0);
+    sprite->data[6] = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     sprite->data[7] = 16;
     if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_OPPONENT)
         sprite->data[7] *= -1;
@@ -928,7 +927,7 @@ void sub_80AE8A0(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        task->data[15] = GetAnimBattlerSpriteId(0);
+        task->data[15] = GetAnimBattlerSpriteId(ANIM_ATTACKER);
         task->data[14] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
         if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
         {

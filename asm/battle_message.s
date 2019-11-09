@@ -1781,7 +1781,7 @@ _080D80F0:
 	cmp r0, 0
 	beq _080D810C
 	mov r0, sp
-	bl sub_80E6150
+	bl get_trainer_name
 	b _080D8382
 	.align 2, 0
 _080D8108: .4byte gBattleTypeFlags

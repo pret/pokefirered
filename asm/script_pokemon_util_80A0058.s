@@ -396,7 +396,7 @@ _080A034C: .4byte sub_80A0350
 	thumb_func_start sub_80A0350
 sub_80A0350: @ 80A0350
 	push {lr}
-	ldr r0, _080A0360 @ =gUnknown_203B0D4
+	ldr r0, _080A0360 @ =gSelectedOrderFromParty
 	ldrb r1, [r0]
 	cmp r1, 0
 	bne _080A0368
@@ -404,7 +404,7 @@ sub_80A0350: @ 80A0350
 	strh r1, [r0]
 	b _080A036E
 	.align 2, 0
-_080A0360: .4byte gUnknown_203B0D4
+_080A0360: .4byte gSelectedOrderFromParty
 _080A0364: .4byte gSpecialVar_Result
 _080A0368:
 	ldr r1, _080A0378 @ =gSpecialVar_Result
@@ -438,7 +438,7 @@ _080A0398: .4byte sub_80A039C
 	thumb_func_start sub_80A039C
 sub_80A039C: @ 80A039C
 	push {r4,lr}
-	ldr r0, _080A03B0 @ =gUnknown_203B0D4
+	ldr r0, _080A03B0 @ =gSelectedOrderFromParty
 	ldrb r4, [r0]
 	cmp r4, 0
 	bne _080A03B8
@@ -447,7 +447,7 @@ sub_80A039C: @ 80A039C
 	strh r4, [r0]
 	b _080A03C2
 	.align 2, 0
-_080A03B0: .4byte gUnknown_203B0D4
+_080A03B0: .4byte gSelectedOrderFromParty
 _080A03B4: .4byte gSpecialVar_Result
 _080A03B8:
 	bl ReducePlayerPartyToThree
@@ -481,7 +481,7 @@ ReducePlayerPartyToThree: @ 80A03D8
 	ldr r6, _080A0454 @ =gPlayerParty
 	adds r4, r7, 0
 _080A03F4:
-	ldr r0, _080A0458 @ =gUnknown_203B0D4
+	ldr r0, _080A0458 @ =gSelectedOrderFromParty
 	adds r1, r5, r0
 	ldrb r0, [r1]
 	cmp r0, 0
@@ -528,7 +528,7 @@ _080A042C:
 	bx r0
 	.align 2, 0
 _080A0454: .4byte gPlayerParty
-_080A0458: .4byte gUnknown_203B0D4
+_080A0458: .4byte gSelectedOrderFromParty
 _080A045C: .4byte 0x05000096
 	thumb_func_end ReducePlayerPartyToThree
 

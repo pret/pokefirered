@@ -75,6 +75,7 @@ gUnknown_2031DEA: @ 2031DEA
 gUnknown_2031DEC: @ 2031DEC
 	.space 0x10
 
+	.align 2
 	.include "src/fieldmap.o"
 
 gUnknown_2036E28: @ 2036E28
@@ -189,7 +190,9 @@ gAnimBattlerSpecies: @ 2037F1C
 gUnknown_2037F24: @ 2037F24
 	.space 0x4
 
+	.align 2
 	.include "src/battle_anim_mons.o"
+	.align 2
 	.include "src/title_screen.o"
 
 	.align 2
@@ -219,6 +222,7 @@ gUnknown_20386A8: @ 20386A8
 gFieldEffectArguments: @ 20386E0
 	.space 0x20
 
+	.align 2
 	.include "src/scanline_effect.o"
 
 	.align 2
@@ -352,10 +356,12 @@ gUnknown_2039984: @ 2039984
 gUnknown_203998C: @ 203998C
 	.space 0x4
 
+	.align 2
 	.include "src/money.o"
 
 	.align 2
 	.include "src/safari_zone.o"
+	.align 2
 	.include "src/item_use.o"
 
 	.align 2
@@ -413,7 +419,6 @@ gPlayerFacingPosition: @ 2039A04
 
 	.align 2
 	.include "src/field_specials.o"
-
 	.align 2
 	.include "src/battle_records.o"
 
@@ -423,7 +428,9 @@ gUnknown_2039A20: @ 2039A20
 gUnknown_2039A24: @ 2039A24
 	.space 0x4
 
+	.align 2
 	.include "src/coins.o"
+	.align 2
 	.include "src/battle_transition.o"
 
 gUnknown_2039A30: @ 2039A30
@@ -432,7 +439,9 @@ gUnknown_2039A30: @ 2039A30
 gUnknown_2039A34: @ 2039A34
 	.space 0x4
 
+	.align 2
 	.include "src/save.o"
+	.align 2
 	.include "src/mystery_event_script.o"
 
 gUnknown_203AAB0: @ 203AAB0
@@ -441,14 +450,12 @@ gUnknown_203AAB0: @ 203AAB0
 gUnknown_203AAB4: @ 203AAB4
 	.space 0x4
 
-gUnknown_203AAB8: @ 203AAB8
-	.space 0x4
-
+	.align 2
+	.include "src/battle_tower.o"
 	.align 2
 	.include "src/player_pc.o"
 	.align 2
 	.include "src/intro.o"
-
 	.align 2
 	.include "src/hall_of_fame.o"
 	.align 2
@@ -496,6 +503,7 @@ gUnknown_203ACEC: @ 203ACEC
 gUnknown_203ACF0: @ 203ACF0
 	.space 0x4
 
+	.align 2
 	.include "src/list_menu.o"
 	.align 2
 gUnknown_203ACFC: @ 203ACFC
@@ -539,22 +547,16 @@ gSpecialVar_ItemId: @ 203AD30
 
 	.align 2
 	.include "src/bag.o"
-
 	.align 2
 	.include "src/trainer_pokemon_sprites.o"
-
 	.align 2
 	.include "src/vs_seeker.o"
-
 	.align 2
 	.include "src/item_pc.o"
-
 	.align 2
 	.include "src/mailbox_pc.o"
-
 	.align 2
 	.include "src/menu.o"
-
 	.align 2
 	.include "src/quest_log.o"
 
@@ -640,7 +642,7 @@ gUnknown_203B0CC: @ 203B0CC
 gUnknown_203B0D0: @ 203B0D0
 	.space 0x4
 
-gUnknown_203B0D4: @ 203B0D4
+gSelectedOrderFromParty: @ 203B0D4
 	.space 0x4
 
 gUnknown_203B0D8: @ 203B0D8

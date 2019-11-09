@@ -1686,7 +1686,7 @@ _080D8038:
 	ands r0, r1
 	cmp r0, 0
 	beq _080D8058
-	bl sub_80E60E4
+	bl GetBattleTowerTrainerClassNameId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0xD
@@ -1781,7 +1781,7 @@ _080D80F0:
 	cmp r0, 0
 	beq _080D810C
 	mov r0, sp
-	bl sub_80E6150
+	bl GetBattleTowerTrainerName
 	b _080D8382
 	.align 2, 0
 _080D8108: .4byte gBattleTypeFlags

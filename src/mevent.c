@@ -588,7 +588,7 @@ void DestroyWonderCard(void)
     ClearRamScript();
     sub_806E2D0();
     sub_806E370();
-    sub_80E7524(&gSaveBlock2Ptr->battleTower.ereaderTrainer);
+    ClearEReaderTrainer(&gSaveBlock2Ptr->battleTower.ereaderTrainer);
 }
 
 bool32 sub_8143F68(const struct MEWonderCardData * data)

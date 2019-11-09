@@ -12,7 +12,7 @@ struct BattleTowerTrainer
     u8 trainerClass;
     u8 name[3];
     u8 teamFlags;
-    u16 speech[6];
+    u16 greeting[6];
 };
 
 struct BattleTowerPokemonTemplate
@@ -26,7 +26,7 @@ struct BattleTowerPokemonTemplate
 };
 
 u16 sub_8164FCC(u8, u8);
-void sub_80E7524(struct BattleTowerEReaderTrainer *);
+void ClearEReaderTrainer(struct BattleTowerEReaderTrainer *);
 void ValidateEReaderTrainer(void);
 u8 GetBattleTowerTrainerFrontSpriteId(void);
 u8 GetEreaderTrainerFrontSpriteId(void);

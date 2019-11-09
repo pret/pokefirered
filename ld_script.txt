@@ -209,7 +209,6 @@ SECTIONS {
         asm/learn_move.o(.text);
         src/fldeff_softboiled.o(.text);
         src/battle_tower.o(.text);
-        asm/battle_tower.o(.text);
         src/battle_controller_oak_old_man.o(.text);
         src/player_pc.o(.text);
         src/intro.o(.text);

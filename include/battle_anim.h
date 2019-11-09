@@ -91,18 +91,19 @@ extern const struct OamData gOamData_83ACB48;
 extern const struct OamData gOamData_83ACB28;
 extern const struct OamData gOamData_83ACAC8;
 
+// battle_anim.s
+void MoveBattlerSpriteToBG(u8 battlerId, u8);
+void sub_8073128(u8);
 void ClearBattleAnimationVars(void);
 void DoMoveAnim(u16 move);
 void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMoveAnim);
 void DestroyAnimSprite(struct Sprite *sprite);
 void DestroyAnimVisualTask(u8 taskId);
 void DestroyAnimSoundTask(u8 taskId);
-bool8 IsAnimBankSpriteVisible(u8 bank);
-void sub_80A438C(u8 bank, bool8 toBG_2, bool8 setSpriteInvisible);
+bool8 IsAnimBankSpriteVisible(u8 battlerId);
 bool8 IsContest(void);
 s8 BattleAnimAdjustPanning(s8 pan);
 s8 BattleAnimAdjustPanning2(s8 pan);
-s16 sub_80A52EC(s16 a);
 s16 CalculatePanIncrement(s16 sourcePan, s16 targetPan, s16 incrementPan);
 bool8 IsBattlerSpriteVisible(u8 battlerId);
 s16 KeepPanInRange(s16 a, s32 oldPan);
@@ -140,23 +141,6 @@ enum
     BATTLER_COORD_ATTR_RIGHT,
     BATTLER_COORD_ATTR_RAW_BOTTOM,
 };
-
-u8 GetBattlerSpriteCoord(u8 battlerId, u8 attributeId);
-
-bool8 IsBankSpritePresent(u8 battlerId);
-void sub_80A6C68(u8 arg0);
-u8 GetAnimBattlerSpriteId(u8 wantedBank);
-bool8 IsDoubleBattle(void);
-u8 sub_80A6D94(void);
-u8 sub_80A8364(u8);
-void StoreSpriteCallbackInData6(struct Sprite *sprite, void (*spriteCallback)(struct Sprite *));
-void SetSpritePrimaryCoordsFromSecondaryCoords(struct Sprite *sprite);
-u8 GetBattlerSpriteDefault_Y(u8 battlerId);
-u8 sub_80A82E4(u8 battlerId);
-u8 GetSubstituteSpriteDefault_Y(u8 battlerId);
-u8 GetGhostSpriteDefault_Y(u8 battlerId);
-void MoveBattlerSpriteToBG(u8 battlerId, u8);
-void sub_8073128(u8);
 
 // battle_anim_status_effects.s
 #define STAT_ANIM_PLUS1  15

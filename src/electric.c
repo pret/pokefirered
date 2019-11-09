@@ -548,8 +548,8 @@ static void sub_80ADD4C(struct Sprite *sprite)
         sprite->oam.priority = GetBattlerSpriteBGPriority(battler) + 1;
     matrixNum = sprite->oam.matrixNum;
     sineVal = gSineTable[gBattleAnimArgs[2]];
-    gOamMatrices[matrixNum].a = gOamMatrices[matrixNum].d =  gSineTable[gBattleAnimArgs[2] + 64];
-    gOamMatrices[matrixNum].b =  sineVal;
+    gOamMatrices[matrixNum].a = gOamMatrices[matrixNum].d = gSineTable[gBattleAnimArgs[2] + 64];
+    gOamMatrices[matrixNum].b = sineVal;
     gOamMatrices[matrixNum].c = -sineVal;
     sprite->data[0] = gBattleAnimArgs[3];
     sprite->callback = sub_80B1D3C;

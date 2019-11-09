@@ -432,7 +432,7 @@ struct BattleStruct
     u16 changedItems[MAX_BATTLERS_COUNT];
     u8 intimidateBattler;
     u8 switchInItemsCounter;
-    u8 arenaTurnCounter; // not used in FR? 
+    u8 field_DA; // not used in FR? 
     u8 turnSideTracker;
     u8 fillerDC[0xDF-0xDC];
     u8 givenExpMons;

@@ -724,4 +724,15 @@ extern const u8 gText_IDNumber[];
 extern const u8 gText_Name[];
 extern const u8 gText_MainMenuTime[];
 
+// learn_move
+extern const u8 gUnknown_841E3E3[];
+extern const u8 gUnknown_841E405[];
+extern const u8 gUnknown_841E414[];
+extern const u8 gUnknown_841E481[];
+extern const u8 gUnknown_841E493[];
+extern const u8 gUnknown_841E4C0[];
+extern const u8 gUnknown_841E50C[];
+extern const u8 gUnknown_841E3FB[];
+extern const u8 gUnknown_841E4E2[];
+
 #endif //GUARD_STRINGS_H

@@ -67,4 +67,4 @@ gUnknown_83FF65C:: @ 83FF65C
 	.incbin "baserom.gba", 0x3FF65C, 0x14C
 
 gUnknown_83FF7A8:: @ 83FF7A8
-	.incbin "baserom.gba", 0x3FF7A8, 0x24C
+	.incbin "baserom.gba", 0x3FF7A8, 0x30

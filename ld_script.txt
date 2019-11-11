@@ -541,7 +541,8 @@ SECTIONS {
         src/menews_jisan.o(.rodata.str1.4);
         . = ALIGN(4);
         src/seagallop.o(.rodata);
-        data/data_8468C98.o(.rodata);
+        data/pokemon_jump.o(.rodata);
+        data/berry_crush.o(.rodata);
         src/wireless_communication_status_screen.o(.rodata);
         src/braille_text.o(.rodata);
         src/text_window_graphics.o(.rodata);

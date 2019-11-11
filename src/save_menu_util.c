@@ -1,0 +1,57 @@
+#include "global.h"
+#include "string_util.h"
+#include "text.h"
+#include "event_data.h"
+#include "pokedex.h"
+#include "region_map.h"
+#include "constants/flags.h"
+
+void SaveStatToString(u8 gameStatId, u8 *dest0, u8 color)
+{
+    int nBadges;
+    int flagId;
+
+    u8 *dest = dest0;
+    *dest++ = EXT_CTRL_CODE_BEGIN;
+    *dest++ = EXT_CTRL_CODE_COLOR;
+    *dest++ = color;
+    *dest++ = EXT_CTRL_CODE_BEGIN;
+    *dest++ = EXT_CTRL_CODE_SHADOW;
+    *dest++ = color + 1;
+    switch (gameStatId)
+    {
+    case 0:
+        dest = StringCopy(dest, gSaveBlock2Ptr->playerName);
+        break;
+    case 1:
+        if (IsNationalPokedexEnabled())
+            dest = ConvertIntToDecimalStringN(dest, GetNationalPokedexCount(1), STR_CONV_MODE_LEFT_ALIGN, 3);
+        else
+            dest = ConvertIntToDecimalStringN(dest, GetKantoPokedexCount(1), STR_CONV_MODE_LEFT_ALIGN, 3);
+        break;
+    case 2:
+        dest = ConvertIntToDecimalStringN(dest, gSaveBlock2Ptr->playTimeHours, STR_CONV_MODE_LEFT_ALIGN, 3);
+        *dest++ = CHAR_COLON;
+        dest = ConvertIntToDecimalStringN(dest, gSaveBlock2Ptr->playTimeMinutes, STR_CONV_MODE_LEADING_ZEROS, 2);
+        break;
+    case 5:
+        dest = ConvertIntToDecimalStringN(dest, gSaveBlock2Ptr->playTimeHours, STR_CONV_MODE_RIGHT_ALIGN, 3);
+        *dest++ = CHAR_COLON;
+        dest = ConvertIntToDecimalStringN(dest, gSaveBlock2Ptr->playTimeMinutes, STR_CONV_MODE_LEADING_ZEROS, 2);
+        break;
+    case 3:
+        sub_80C4DF8(dest, gMapHeader.regionMapSectionId);
+        break;
+    case 4:
+        for (flagId = FLAG_BADGE01_GET, nBadges = 0; flagId < FLAG_BADGE01_GET + 8; flagId++)
+        {
+            if (FlagGet(flagId))
+                nBadges++;
+        }
+        *dest++ = nBadges + CHAR_0;
+        *dest++ = 10; // 'こ'
+        *dest++ = EOS;
+        break;
+    }
+}
+

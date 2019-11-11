@@ -222,7 +222,7 @@ SECTIONS {
         src/fldeff_teleport.o(.text);
         src/new_menu_helpers.o(.text);
         asm/box_party_pokemon_dropdown.o(.text);
-        asm/save_menu_util.o(.text);
+        src/save_menu_util.o(.text);
         src/map_preview_screen.o(.text);
         asm/link_rfu_2.o(.text);
         asm/link_rfu.o(.text);

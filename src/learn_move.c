@@ -83,7 +83,7 @@ static void PrintTextOnWindow(u8 windowId, const u8 *str, u8 x, u8 y, s32 speed,
 static const u16 sLearnMoveInterfaceSpritesPalette[] = INCBIN_U16("graphics/learn_move/interface_sprites.gbapal");
 static const u16 sLearnMoveInterfaceSpritesTiles[] = INCBIN_U16("graphics/learn_move/interface_sprites.4bpp");
 
-static const u8 gMoveTutorMenuWindowFrameDimensions[][4] =
+static const u8 sMoveTutorMenuWindowFrameDimensions[][4] =
 {
     { 0,  0, 19, 13},
     {20,  0, 29, 13},
@@ -96,7 +96,7 @@ static const u8 sJPText_PP[] = _("PP/");
 static const u8 sJPText_Iryoku[] = _("いりょく/");
 static const u8 sJPText_Meichuu[] = _("めいちゅう/");
 
-static const struct MoveTutorMoveInfoHeaders gMoveTutorMoveInfoHeaders[][5] =
+static const struct MoveTutorMoveInfoHeaders sMoveTutorMoveInfoHeaders[][5] =
 {
     {
         {sJPText_TatakauWaza,  7, 1, 0},
@@ -469,7 +469,7 @@ static void MoveRelearnerStateMachine(void)
         switch (YesNoMenuProcessInput())
         {
         case 0:
-            StringExpandPlaceholdersAndPrintTextOnWindow7Color2(WhichMoveShouldBeForgotten);
+            StringExpandPlaceholdersAndPrintTextOnWindow7Color2(gText_WhichMoveShouldBeForgotten);
             sMoveRelearner->state = 19;
             break;
         case 1:

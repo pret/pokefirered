@@ -4570,7 +4570,7 @@ gText_GiveUpTryingToTeachNewMove:: @ 841E4E2
 	.string "Give up trying to teach a new\n"
 	.string "move to {STR_VAR_1}?$"
 
-WhichMoveShouldBeForgotten:: @ 841E50C
+gText_WhichMoveShouldBeForgotten:: @ 841E50C
 	.string "Which move should be forgotten?\p"
 	.string "$"
 

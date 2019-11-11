@@ -534,10 +534,12 @@ gUnknown_8398028:: @ 8398028
 	.incbin "baserom.gba", 0x398048, 0x600
 
 gUnknown_8398648::
-	.incbin "baserom.gba", 0x398648, 0x40
+	.incbin "graphics/map_objects/fldeff_cut.4bpp"
+	.incbin "graphics/map_objects/fldeff_cut.4bpp"
 
 gUnknown_8398688::
-	.incbin "baserom.gba", 0x398688, 0xD00
+	.incbin "graphics/map_objects/fldeff_cut.gbapal"
+	.incbin "baserom.gba", 0x3986A8, 0xCE0
 
 gUnknown_8399388:: @ 8399388
 	.incbin "baserom.gba", 0x399388, 0x908

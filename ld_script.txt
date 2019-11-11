@@ -536,7 +536,7 @@ SECTIONS {
         src/mevent_client.o(.rodata);
         src/mevent_server.o(.rodata);
         src/mevent_8145654.o(.rodata);
-        data/data_8466FB8.o(.rodata);
+        src/mevent_scripts.o(.rodata);
         src/menews_jisan.o(.rodata);
         src/menews_jisan.o(.rodata.str1.4);
         . = ALIGN(4);

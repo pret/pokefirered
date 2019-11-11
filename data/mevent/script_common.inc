@@ -1,87 +1,98 @@
-gMEventSrvScript_UnableToSend::
-	.4byte 0x12, 0x10, gMEventClientScript_UnableToRecv @ SEND
-	.4byte 0x01, 0x00, NULL @ WAIT SEND
-	.4byte 0x02, 0x14, NULL @ RECV
-	.4byte 0x00, 0x0a, NULL @ RETURN (can't send)
+const struct mevent_server_cmd gMEventSrvScript_UnableToSend[] = {
+	SRV_SEND(0x10, gMEventClientScript_UnableToRecv),
+	SRV_WAITSND,
+	SRV_RECV(0x14),
+	SRV_RETURN(0x0a)
+};
 
-	.4byte 0x12, 0x10, gMEventClientScript_CommError @ SEND
-	.4byte 0x01, 0x00, NULL @ WAIT SEND
-	.4byte 0x02, 0x14, NULL @ RECV
-	.4byte 0x00, 0x0b, NULL @ RETURN (comm error)
+	SRV_SEND(0x10, gMEventClientScript_CommError),
+	SRV_WAITSND,
+	SRV_RECV(0x14),
+	SRV_RETURN(0x0b)
+};
 
-	.4byte 0x12, 0x10, gMEventClientScript_OtherTrainerCanceled @ SEND
-	.4byte 0x01, 0x00, NULL @ WAIT SEND
-	.4byte 0x02, 0x14, NULL @ RECV
-	.4byte 0x00, 0x09, NULL @ RETURN (other trn canceled)
+	SRV_SEND(0x10, gMEventClientScript_OtherTrainerCanceled),
+	SRV_WAITSND,
+	SRV_RECV(0x14),
+	SRV_RETURN(0x09)
+};
 
-gMEventSrvScript_OtherTrnHasNews::
-	.4byte 0x12, 0x10, gMEventClientScript_AlreadyHadNews @ SEND
-	.4byte 0x01, 0x00, NULL @ WAIT SEND
-	.4byte 0x02, 0x14, NULL @ RECV
-	.4byte 0x00, 0x07, NULL @ RETURN (other trn has news)
+const struct mevent_server_cmd gMEventSrvScript_OtherTrnHasNews[] = {
+	SRV_SEND(0x10, gMEventClientScript_AlreadyHadNews),
+	SRV_WAITSND,
+	SRV_RECV(0x14),
+	SRV_RETURN(0x07)
+};
 
-gMEventSrvScript_SentNewsSuccess::
-	.4byte 0x12, 0x28, gMEventClientScript_ReceiveNewsAndValidate @ SEND
-	.4byte 0x01, 0x00, NULL @ WAIT SEND
-	.4byte 0x0e, 0x00, NULL @ SEND_NEWS
-	.4byte 0x01, 0x00, NULL @ WAIT SEND
-	.4byte 0x02, 0x13, NULL @ RECV
-	.4byte 0x08, 0x00, NULL @ READWORD
-	.4byte 0x04, 0x01, gMEventSrvScript_OtherTrnHasNews @ BRANCH_EQ
-	.4byte 0x12, 0x10, gMEventClientScript_RecvNewsSuccess @ SEND
-	.4byte 0x01, 0x00, NULL @ WAIT SEND
-	.4byte 0x02, 0x14, NULL @ RECV
-	.4byte 0x00, 0x03, NULL @ RETURN (news sent to)
+const struct mevent_server_cmd gMEventSrvScript_SentNewsSuccess[] = {
+	SRV_SEND(0x28, gMEventClientScript_ReceiveNewsAndValidate),
+	SRV_WAITSND,
+	SRV_SEND_NEWS,
+	SRV_WAITSND,
+	SRV_RECV(0x13),
+	SRV_READWORD,
+	SRV_BRANCHIF(0x01, gMEventSrvScript_OtherTrnHasNews),
+	SRV_SEND(0x10, gMEventClientScript_RecvNewsSuccess),
+	SRV_WAITSND,
+	SRV_RECV(0x14),
+	SRV_RETURN(0x03)
+};
 
-gMEventSrvScript_SendCardSuccess::
-	.4byte 0x12, 0x30, gMEventClientScript_ReceiveCardAndReturnSuccess @ SEND
-	.4byte 0x01, 0x00, NULL @ WAIT SEND
-	.4byte 0x0d, 0x00, NULL @ SEND_CARD
-	.4byte 0x01, 0x00, NULL @ WAIT SEND
-	.4byte 0x0f, 0x00, NULL @ BUFFER_SEND
-	.4byte 0x01, 0x00, NULL @ WAIT SEND
-	.4byte 0x02, 0x14, NULL @ RECV
-	.4byte 0x00, 0x02, NULL @ RETURN (card sent to)
+const struct mevent_server_cmd gMEventSrvScript_SendCardSuccess[] = {
+	SRV_SEND(0x30, gMEventClientScript_ReceiveCardAndReturnSuccess),
+	SRV_WAITSND,
+	SRV_SEND_CARD,
+	SRV_WAITSND,
+	SRV_BUFFER_SEND,
+	SRV_WAITSND,
+	SRV_RECV(0x14),
+	SRV_RETURN(0x02)
+};
 
-gMEventSrvScript_AskClientToOverwriteCard::
-	.4byte 0x12, 0x28, gMEventClientScript_AskWouldLikeToTossCard @ SEND
-	.4byte 0x01, 0x00, NULL @ WAIT SEND
-	.4byte 0x02, 0x13, NULL @ RECV
-	.4byte 0x08, 0x00, NULL @ READWORD
-	.4byte 0x04, 0x00, gMEventSrvScript_SendCardSuccess @ BRANCH_EQ
-	.4byte 0x03, 0x00, gMEventSrvScript_OtherTrainerCanceled @ BRANCH
+const struct mevent_server_cmd gMEventSrvScript_AskClientToOverwriteCard[] = {
+	SRV_SEND(0x28, gMEventClientScript_AskWouldLikeToTossCard),
+	SRV_WAITSND,
+	SRV_RECV(0x13),
+	SRV_READWORD,
+	SRV_BRANCHIF(0x00, gMEventSrvScript_SendCardSuccess),
+	SRV_BRANCH(gMEventSrvScript_OtherTrainerCanceled)
+};
 
-gMEventSrvScript_OtherTrnHasCard::
-	.4byte 0x12, 0x10, gMEventClientScript_AlreadyHadCard @ SEND
-	.4byte 0x01, 0x00, NULL @ WAIT SEND
-	.4byte 0x02, 0x14, NULL @ RECV
-	.4byte 0x00, 0x05, NULL @ RETURN (other trn has card)
+const struct mevent_server_cmd gMEventSrvScript_OtherTrnHasCard[] = {
+	SRV_SEND(0x10, gMEventClientScript_AlreadyHadCard),
+	SRV_WAITSND,
+	SRV_RECV(0x14),
+	SRV_RETURN(0x05)
+};
 
-	.4byte 0x12, 0x10, gMEventClientScript_NothingSentOver @ SEND
-	.4byte 0x01, 0x00, NULL @ WAIT SEND
-	.4byte 0x02, 0x14, NULL @ RECV
-	.4byte 0x00, 0x00, NULL @ RETURN (nothing sent over)
+	SRV_SEND(0x10, gMEventClientScript_NothingSentOver),
+	SRV_WAITSND,
+	SRV_RECV(0x14),
+	SRV_RETURN(0x00)
+};
 
-gMEventSrvScript_SendNews:: @ 8468B6C
-	.4byte 0x1b, 0x00, NULL @ BUFFER_SAVED_NEWS
-	.4byte 0x12, 0x20, gMEventClientScript_Send1442CC @ SEND
-	.4byte 0x01, 0x00, NULL @ WAIT SEND
-	.4byte 0x02, 0x11, NULL @ RECV
-	.4byte 0x05, 0x00, NULL @ READ_1442CC
-	.4byte 0x06, 0x00, NULL @ VALID_1442CC
-	.4byte 0x04, 0x00, gMEventSrvScript_UnableToSend @ BRANCH_EQ
-	.4byte 0x03, 0x00, gMEventSrvScript_SentNewsSuccess @ BRANCH
+const struct mevent_server_cmd gMEventSrvScript_SendNews[] = {
+	SRV_BUFFER_NEWS,
+	SRV_SEND(0x20, gMEventClientScript_Send1442CC),
+	SRV_WAITSND,
+	SRV_RECV(0x11),
+	SRV_READ_1442CC,
+	SRV_VALID_1442CC,
+	SRV_BRANCHIF(0x00, gMEventSrvScript_UnableToSend),
+	SRV_BRANCH(gMEventSrvScript_SentNewsSuccess)
+};
 
-gMEventSrvScript_SendCard:: @ 8468BCC
-	.4byte 0x1a, 0x00, NULL @ BUFFER_SAVED_CARD
-	.4byte 0x1c, 0x00, NULL @ RAM_SCRIPT_IF_VALID
-	.4byte 0x12, 0x20, gMEventClientScript_Send1442CC @ SEND
-	.4byte 0x01, 0x00, NULL @ WAIT SEND
-	.4byte 0x02, 0x11, NULL @ RECV
-	.4byte 0x05, 0x00, NULL @ READ_1442CC
-	.4byte 0x06, 0x00, NULL @ VALID_1442CC
-	.4byte 0x04, 0x00, gMEventSrvScript_UnableToSend @ BRANCH_EQ
-	.4byte 0x07, 0x00, NULL @ CHECK_1442CC_14
-	.4byte 0x04, 0x02, gMEventSrvScript_AskClientToOverwriteCard @ BRANCH_EQ
-	.4byte 0x04, 0x00, gMEventSrvScript_SendCardSuccess @ BRANCH_EQ
-	.4byte 0x03, 0x00, gMEventSrvScript_OtherTrnHasCard @ BRANCH
+const struct mevent_server_cmd gMEventSrvScript_SendCard[] = {
+	SRV_BUFFER_CARD,
+	SRV_RAM_SCRIPT_IF_VALID,
+	SRV_SEND(0x20, gMEventClientScript_Send1442CC),
+	SRV_WAITSND,
+	SRV_RECV(0x11),
+	SRV_READ_1442CC,
+	SRV_VALID_1442CC,
+	SRV_BRANCHIF(0x00, gMEventSrvScript_UnableToSend),
+	SRV_CHECK_1442CC_14,
+	SRV_BRANCHIF(0x02, gMEventSrvScript_AskClientToOverwriteCard),
+	SRV_BRANCHIF(0x00, gMEventSrvScript_SendCardSuccess),
+	SRV_BRANCH(gMEventSrvScript_OtherTrnHasCard)
+};

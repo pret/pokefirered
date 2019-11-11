@@ -1,65 +1,77 @@
-gMEventClientScript_InotialListen:: @ 84687E0
-	.4byte 0x02, 0x10 @ RECEIVE ID(0x10)
-	.4byte 0x04, 0x00 @ JUMP TO RECEIVE BUFFER
+const struct mevent_client_cmd gMEventClientScript_InitialListen[] = { // 84687E0
+	CLI_RECEIVE(0x10),
+	CLI_JUMPBUF
+};
 
-gMEventClientScript_Send1442CC::
-	.4byte 0x08, 0x00 @ SEND HEADER MAYBE
-	.4byte 0x03, 0x00 @ WAIT SEND
-	.4byte 0x02, 0x10 @ RECEIVE ID(0x10)
-	.4byte 0x04, 0x00 @ JUMP TO RECEIVE BUFFER
+const struct mevent_client_cmd gMEventClientScript_Send1442CC[] = {
+	CLI_SNDHEAD,
+	CLI_WAITSND,
+	CLI_RECEIVE(0x10),
+	CLI_JUMPBUF
+};
 
-gMEventClientScript_UnableToRecv:: @ can't accept card or news
-	.4byte 0x14, 0x00 @ SEND ALL
-	.4byte 0x01, 0x0a @ RETURN 0x0a
+const struct mevent_client_cmd gMEventClientScript_UnableToRecv[] = { // can't accept card or news
+	CLI_SENDALL,
+	CLI_RETURN(0x0a)
+};
 
-gMEventClientScript_CommError:: @ comm error
-	.4byte 0x14, 0x00 @ SEND ALL
-	.4byte 0x01, 0x0b @ RETURN 0x0b
+const struct mevent_client_cmd gMEventClientScript_CommError[] = { // comm error
+	CLI_SENDALL,
+	CLI_RETURN(0x0b)
+};
 
-gMEventClientScript_NothingSentOver:: @ nothing sent
-	.4byte 0x14, 0x00 @ SEND ALL
-	.4byte 0x01, 0x00 @ RETURN 0x00
+const struct mevent_client_cmd gMEventClientScript_NothingSentOver[] = { // nothing sent
+	CLI_SENDALL,
+	CLI_RETURN(0x00)
+};
 
-gMEventClientScript_ReceiveCardAndReturnSuccess:: @ card success
-	.4byte 0x02, 0x16 @ RECEIVE ID(0x16)
-	.4byte 0x0a, 0x00 @ RECEIVE_TO_SAVE_FILE
-	.4byte 0x02, 0x19 @ RECEIVE ID(0x19)
-	.4byte 0x11, 0x00 @ RECEIVE_TO_RAM_SCRIPT
-	.4byte 0x14, 0x00 @ SEND ALL
-	.4byte 0x01, 0x02 @ RETURN 0x02
+const struct mevent_client_cmd gMEventClientScript_ReceiveCardAndReturnSuccess[] = { // card success
+	CLI_RECEIVE(0x16),
+	CLI_RECVSAV,
+	CLI_RECEIVE(0x19),
+	CLI_RECVRAM,
+	CLI_SENDALL,
+	CLI_RETURN(0x02)
+};
 
-gMEventClientScript_ReceiveNewsAndValidate::
-	.4byte 0x02, 0x17 @ RECEIVE ID(0x17)
-	.4byte 0x09, 0x00 @ VALIDATE NEWS
-	.4byte 0x03, 0x00 @ WAIT SEND
-	.4byte 0x02, 0x10 @ RECEIVE ID(0x10)
-	.4byte 0x04, 0x00 @ JUMP TO RECEIVE BUFFER
+const struct mevent_client_cmd gMEventClientScript_ReceiveNewsAndValidate[] = {
+	CLI_RECEIVE(0x17),
+	CLI_VLDNEWS,
+	CLI_WAITSND,
+	CLI_RECEIVE(0x10),
+	CLI_JUMPBUF
+};
 
-gMEventClientScript_AlreadyHadNews:: @ already had news
-	.4byte 0x14, 0x00 @ SEND ALL
-	.4byte 0x01, 0x07 @ RETURN 0x07
+const struct mevent_client_cmd gMEventClientScript_AlreadyHadNews[] = { // already had news
+	CLI_SENDALL,
+	CLI_RETURN(0x07)
+};
 
-gMEventClientScript_RecvNewsSuccess:: @ news success
-	.4byte 0x14, 0x00 @ SEND ALL
-	.4byte 0x01, 0x03 @ RETURN 0x03
+const struct mevent_client_cmd gMEventClientScript_RecvNewsSuccess[] = { // news success
+	CLI_SENDALL,
+	CLI_RETURN(0x03)
+};
 
-gMEventClientScript_AskWouldLikeToTossCard::
-	.4byte 0x0d, 0x00 @ REQUEST PARAMETER
-	.4byte 0x0e, 0x00 @ SEND PARAMETER
-	.4byte 0x03, 0x00 @ WAIT SEND
-	.4byte 0x02, 0x10 @ RECEIVE ID(0x10)
-	.4byte 0x04, 0x00 @ JUMP TO RECEIVE BUFFER
+const struct mevent_client_cmd gMEventClientScript_AskWouldLikeToTossCard[] = {
+	CLI_REQWORD,
+	CLI_SNDWORD,
+	CLI_WAITSND,
+	CLI_RECEIVE(0x10),
+	CLI_JUMPBUF
+};
 
-gMEventClientScript_OtherTrainerCanceled:: @ comm canceled
-	.4byte 0x14, 0x00 @ SEND ALL
-	.4byte 0x01, 0x09 @ RETURN 0x09
+const struct mevent_client_cmd gMEventClientScript_OtherTrainerCanceled[] = { // comm canceled
+	CLI_SENDALL,
+	CLI_RETURN(0x09)
+};
 
-gMEventClientScript_AlreadyHadCard:: @ already had card
-	.4byte 0x14, 0x00 @ SEND ALL
-	.4byte 0x01, 0x05 @ RETURN 0x05
+const struct mevent_client_cmd gMEventClientScript_AlreadyHadCard[] = { // already had card
+	CLI_SENDALL,
+	CLI_RETURN(0x05)
+};
 
-gMEventClientScript_SuccessFromBuffer:: @ success from buffer
-	.4byte 0x02, 0x15 @ RECEIVE ID(0x15)
-	.4byte 0x0c, 0x00 @ READ PACKET AND COMPUTE SOMETHING
-	.4byte 0x14, 0x00 @ SEND ALL
-	.4byte 0x01, 0x0d @ RETURN 0x0d
+const struct mevent_client_cmd gMEventClientScript_SuccessFromBuffer[] = { // success from buffer
+	CLI_RECEIVE(0x15),
+	CLI_RECVBUF,
+	CLI_SENDALL,
+	CLI_RETURN(0x0d)

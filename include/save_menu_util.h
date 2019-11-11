@@ -7,7 +7,8 @@ enum SaveStat
     SAVE_STAT_POKEDEX,
     SAVE_STAT_TIME,
     SAVE_STAT_LOCATION,
-    SAVE_STAT_BADGES
+    SAVE_STAT_BADGES,
+    SAVE_STAT_TIME_HR_RT_ALIGN
 };
 
 void SaveStatToString(u8 a0, u8 *a1, u8 a2);

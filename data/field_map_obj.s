@@ -531,7 +531,13 @@ gUnknown_8398008:: @ 8398008
 gUnknown_8398028:: @ 8398028
 	.incbin "graphics/map_objects/12.gbapal"
 
-	.incbin "baserom.gba", 0x398048, 0x1340
+	.incbin "baserom.gba", 0x398048, 0x600
+
+gUnknown_8398648::
+	.incbin "baserom.gba", 0x398648, 0x40
+
+gUnknown_8398688::
+	.incbin "baserom.gba", 0x398688, 0xD00
 
 gUnknown_8399388:: @ 8399388
 	.incbin "baserom.gba", 0x399388, 0x908

@@ -735,4 +735,7 @@ extern const u8 gText_WhichMoveShouldBeForgotten[];
 extern const u8 gText_TeachMoveQues[];
 extern const u8 gText_GiveUpTryingToTeachNewMove[];
 
+// pokemon_size_record
+extern const u8 gText_DecimalPoint[];
+
 #endif //GUARD_STRINGS_H

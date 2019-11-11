@@ -4535,17 +4535,17 @@ gDaycareText_PlayOther:: @ 841E3A8
 	.string "The two prefer to play with other\n"
 	.string "POKéMON than each other.$"
 
-gUnknown_841E3E3:: @ 841E3E3
+gText_TeachWhichMoveToMon:: @ 841E3E3
 	.string "Teach which move to {STR_VAR_1}?$"
 
-gUnknown_841E3FB:: @ 841E3FB
+gText_TeachMoveQues:: @ 841E3FB
 	.string "Teach {STR_VAR_2}?$"
 
-gUnknown_841E405:: @ 841E405
+gText_MonLearnedMove:: @ 841E405
 	.string "{STR_VAR_1} learned\n"
 	.string "{STR_VAR_2}.$"
 
-gUnknown_841E414:: @ 841E414
+gText_MonIsTryingToLearnMove:: @ 841E414
 	.string "{STR_VAR_1} is trying to learn\n"
 	.string "{STR_VAR_2}.\p"
 	.string "But {STR_VAR_1} can't learn more\n"
@@ -4553,24 +4553,24 @@ gUnknown_841E414:: @ 841E414
 	.string "Delete an older move to make\n"
 	.string "room for {STR_VAR_2}?$"
 
-gUnknown_841E481:: @ 841E481
+gText_StopLearningMove:: @ 841E481
 	.string "Stop learning {STR_VAR_2}?$"
 
-gUnknown_841E493:: @ 841E493
+gText_1_2_and_Poof:: @ 841E493
 	.string "{PAUSE 0x20}1, {PAUSE 0x0F}2, and {PAUSE 0x0F}‥ {PAUSE 0x0F}‥ {PAUSE 0x0F}‥ {PAUSE 0x0F}{PLAY_SE SE_KON}Poof!\p"
 	.string "$"
 
-gUnknown_841E4C0:: @ 841E4C0
+gText_MonForgotOldMoveAndMonLearnedNewMove:: @ 841E4C0
 	.string "{STR_VAR_1} forgot {STR_VAR_3}.\p"
 	.string "And‥\p"
 	.string "{STR_VAR_1}\n"
 	.string "learned {STR_VAR_2}.$"
 
-gUnknown_841E4E2:: @ 841E4E2
+gText_GiveUpTryingToTeachNewMove:: @ 841E4E2
 	.string "Give up trying to teach a new\n"
 	.string "move to {STR_VAR_1}?$"
 
-gUnknown_841E50C:: @ 841E50C
+gText_WhichMoveShouldBeForgotten:: @ 841E50C
 	.string "Which move should be forgotten?\p"
 	.string "$"
 

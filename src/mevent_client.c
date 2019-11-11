@@ -14,7 +14,7 @@ static void mevent_client_init(struct mevent_client *, u32, u32);
 static u32 mevent_client_exec(struct mevent_client *);
 static void mevent_client_free_resources(struct mevent_client *);
 
-extern const struct mevent_client_cmd gMEventClientScript_InotialListen[];
+extern const struct mevent_client_cmd gMEventClientScript_InitialListen[];
 
 void mevent_client_do_init(void)
 {
@@ -89,7 +89,7 @@ static void mevent_client_send_word(struct mevent_client * svr, u32 ident, u32 w
 static u32 client_mainseq_0(struct mevent_client * svr)
 {
     // init
-    memcpy(svr->cmdBuffer, gMEventClientScript_InotialListen, ME_SEND_BUF_SIZE);
+    memcpy(svr->cmdBuffer, gMEventClientScript_InitialListen, ME_SEND_BUF_SIZE);
     svr->cmdidx = 0;
     svr->mainseqno = 4;
     svr->flag = 0;

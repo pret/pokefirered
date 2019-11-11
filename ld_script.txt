@@ -222,7 +222,7 @@ SECTIONS {
         src/fldeff_teleport.o(.text);
         src/new_menu_helpers.o(.text);
         asm/box_party_pokemon_dropdown.o(.text);
-        asm/save_menu_util.o(.text);
+        src/save_menu_util.o(.text);
         src/map_preview_screen.o(.text);
         asm/link_rfu_2.o(.text);
         asm/link_rfu.o(.text);
@@ -536,12 +536,13 @@ SECTIONS {
         src/mevent_client.o(.rodata);
         src/mevent_server.o(.rodata);
         src/mevent_8145654.o(.rodata);
-        data/data_8466FB8.o(.rodata);
+        src/mevent_scripts.o(.rodata);
         src/menews_jisan.o(.rodata);
         src/menews_jisan.o(.rodata.str1.4);
         . = ALIGN(4);
         src/seagallop.o(.rodata);
-        data/data_8468C98.o(.rodata);
+        data/pokemon_jump.o(.rodata);
+        data/berry_crush.o(.rodata);
         src/wireless_communication_status_screen.o(.rodata);
         src/braille_text.o(.rodata);
         src/text_window_graphics.o(.rodata);

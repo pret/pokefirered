@@ -23,6 +23,14 @@
 #include "constants/songs.h"
 #include "constants/moves.h"
 
+struct MoveTutorMoveInfoHeaders
+{
+    const u8 *text;
+    u8 left;
+    u8 right;
+    u8 index; // unused
+};
+
 struct LearnMoveGfxResources
 {
     u8 state;
@@ -54,26 +62,26 @@ struct LearnMoveGfxResources
 
 static EWRAM_DATA struct LearnMoveGfxResources * sMoveRelearner = NULL;
 
-static void sub_80E4660(u8 taskId);
-static void CB2_SelectMonToRelearnMove(void);
+static void Task_InitMoveRelearnerMenu(u8 taskId);
+static void CB2_MoveRelearner_Init(void);
 static void CB2_MoveRelearner(void);
 static void MoveRelearnerStateMachine(void);
 static void DrawTextBorderOnWindows6and7(void);
 static void PrintTeachWhichMoveToStrVar1(bool8 onInit);
 static void InitMoveRelearnerStateVariables(void);
-static void sub_80E4FAC(struct Sprite * sprite);
-static void sub_80E5004(void);
-static void sub_80E50CC(void);
-static void sub_80E5204(void);
-static void sub_80E5300(void);
+static void SpriteCB_ListMenuScrollIndicators(struct Sprite * sprite);
+static void SpawnListMenuScrollIndicatorSprites(void);
+static void MoveRelearnerInitListMenuBuffersEtc(void);
+static void MoveRelearnerMenuHandleInput(void);
+static void MoveLearnerInitListMenu(void);
 static void LoadMoveInfoUI(void);
 static void PrintMoveInfoHandleCancel_CopyToVram(void);
 static void MoveRelearnerMenu_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *list);
 static s8 YesNoMenuProcessInput(void);
 static void PrintTextOnWindow(u8 windowId, const u8 *str, u8 x, u8 y, s32 speed, s32 colorIdx);
 
-static const u16 gUnknown_83FF7D8[] = INCBIN_U16("graphics/learn_move/interface_sprites.gbapal");
-static const u16 gUnknown_83FF7F8[] = INCBIN_U16("graphics/learn_move/interface_sprites.4bpp");
+static const u16 sLearnMoveInterfaceSpritesPalette[] = INCBIN_U16("graphics/learn_move/interface_sprites.gbapal");
+static const u16 sLearnMoveInterfaceSpritesTiles[] = INCBIN_U16("graphics/learn_move/interface_sprites.4bpp");
 
 static const u8 gMoveTutorMenuWindowFrameDimensions[][4] =
 {
@@ -82,28 +90,20 @@ static const u8 gMoveTutorMenuWindowFrameDimensions[][4] =
     { 2, 14, 27, 19}
 };
 
-static const u8 gUnknown_83FF984[] = _("たたかうわざ");
-static const u8 gUnknown_83FF98B[] = _("タイプ/");
-static const u8 gUnknown_83FF990[] = _("PP/");
-static const u8 gUnknown_83FF994[] = _("いりょく/");
-static const u8 gUnknown_83FF99A[] = _("めいちゅう/");
-
-struct MoveTutorMoveInfoHeaders
-{
-    const u8 *text;
-    u8 left;
-    u8 right;
-    u8 index; // unused
-};
+static const u8 sJPText_TatakauWaza[] = _("たたかうわざ");
+static const u8 sJPText_Taipu[] = _("タイプ/");
+static const u8 sJPText_PP[] = _("PP/");
+static const u8 sJPText_Iryoku[] = _("いりょく/");
+static const u8 sJPText_Meichuu[] = _("めいちゅう/");
 
 static const struct MoveTutorMoveInfoHeaders gMoveTutorMoveInfoHeaders[][5] =
 {
     {
-        {gUnknown_83FF984,  7, 1, 0},
-        {gUnknown_83FF98B,  1, 4, 1},
-        {gUnknown_83FF994, 11, 4, 2},
-        {gUnknown_83FF990,  2, 6, 3},
-        {gUnknown_83FF99A, 10, 6, 4},
+        {sJPText_TatakauWaza,  7, 1, 0},
+        {sJPText_Taipu,        1, 4, 1},
+        {sJPText_Iryoku,      11, 4, 2},
+        {sJPText_PP,           2, 6, 3},
+        {sJPText_Meichuu,     10, 6, 4},
     },
     {
         {NULL,        0, 0, 0},
@@ -114,39 +114,39 @@ static const struct MoveTutorMoveInfoHeaders gMoveTutorMoveInfoHeaders[][5] =
     },
 };
 
-static const struct SpriteSheet gUnknown_83FF9F4 = {
-    gUnknown_83FF7F8, 0x180, 5525
+static const struct SpriteSheet sSpriteSheet_ListMenuScrollIndicators = {
+    sLearnMoveInterfaceSpritesTiles, 0x180, 5525
 };
 
-static const struct SpritePalette gUnknown_83FF9FC = {
-    gUnknown_83FF7D8, 5526
+static const struct SpritePalette sSpritePalette_ListMenuScrollIndicators = {
+    sLearnMoveInterfaceSpritesPalette, 5526
 };
 
-static const struct OamData gOamData_83FFA04 = {
+static const struct OamData sOamdata_MoveRelearnerListMenuScrollIndicators = {
     .shape = SPRITE_SHAPE(16x8),
     .size = SPRITE_SIZE(16x8)
 };
 
-static const union AnimCmd gAnimCmd_83FFA0C[] = {
+static const union AnimCmd sAnimCmd_ScrollIndicatorDown[] = {
     ANIMCMD_FRAME(4, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd gAnimCmd_83FFA14[] = {
+static const union AnimCmd sAnimCmd_ScrollIndicatorUp[] = {
     ANIMCMD_FRAME(6, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const gSpriteAnimTable_83FFA1C[] = {
-    gAnimCmd_83FFA0C,
-    gAnimCmd_83FFA14
+static const union AnimCmd *const sSpriteAnimTable_MoveRelearnerListMenuScrollIndicators[] = {
+    sAnimCmd_ScrollIndicatorDown,
+    sAnimCmd_ScrollIndicatorUp
 };
 
-static const struct SpriteTemplate gUnknown_83FFA24 = {
-    5525, 5526, &gOamData_83FFA04, gSpriteAnimTable_83FFA1C, NULL, gDummySpriteAffineAnimTable, sub_80E4FAC
+static const struct SpriteTemplate sSpriteTemplate_MoveRelearnerListMenuScrollIndicators = {
+    5525, 5526, &sOamdata_MoveRelearnerListMenuScrollIndicators, sSpriteAnimTable_MoveRelearnerListMenuScrollIndicators, NULL, gDummySpriteAffineAnimTable, SpriteCB_ListMenuScrollIndicators
 };
 
-static const struct BgTemplate gUnknown_83FFA3C[2] = {
+static const struct BgTemplate sBgTemplates[2] = {
     {
         .bg = 0,
         .charBaseIndex = 2,
@@ -161,7 +161,7 @@ static const struct BgTemplate gUnknown_83FFA3C[2] = {
     }
 };
 
-static const struct WindowTemplate gUnknown_83FFA44[9] = {
+static const struct WindowTemplate sWindowTemplates[9] = {
     {
         .bg = 0,
         .tilemapLeft = 0,
@@ -246,7 +246,7 @@ static const struct WindowTemplate gUnknown_83FFA8C = {
     .baseBlock = 0x1d1
 };
 
-static const struct ListMenuTemplate gUnknown_83FFA94 = {
+static const struct ListMenuTemplate sMoveRelearnerListMenuTemplate = {
     .items = NULL,
     .moveCursorFunc = MoveRelearnerMenu_MoveCursorFunc,
     .itemPrintFunc = NULL,
@@ -267,8 +267,7 @@ static const struct ListMenuTemplate gUnknown_83FFA94 = {
     .cursorKind = 0,
 };
 
-
-static void sub_80E4620(void)
+static void VBlankCB_MoveRelearner(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
@@ -278,30 +277,30 @@ static void sub_80E4620(void)
 void DisplayMoveTutorMenu(void)
 {
     ScriptContext2_Enable();
-    CreateTask(sub_80E4660, 10);
+    CreateTask(Task_InitMoveRelearnerMenu, 10);
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
 }
 
-static void sub_80E4660(u8 taskId)
+static void Task_InitMoveRelearnerMenu(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        SetMainCallback2(CB2_SelectMonToRelearnMove);
+        SetMainCallback2(CB2_MoveRelearner_Init);
         gFieldCallback = FieldCallback_ReturnToEventScript2;
         DestroyTask(taskId);
     }
 }
 
-static void sub_80E469C(void)
+static void MoveRelearnerLoadBgGfx(void)
 {
     int i;
     ResetBgsAndClearDma3BusyFlags(FALSE);
-    InitBgsFromTemplates(0, gUnknown_83FFA3C, NELEMS(gUnknown_83FFA3C));
+    InitBgsFromTemplates(0, sBgTemplates, NELEMS(sBgTemplates));
     ResetTempTileDataBuffers();
-    if (InitWindows(gUnknown_83FFA44))
+    if (InitWindows(sWindowTemplates))
     {
         DeactivateAllTextPrinters();
-        for (i = 0; i < NELEMS(gUnknown_83FFA44); i++)
+        for (i = 0; i < NELEMS(sWindowTemplates); i++)
         {
             ClearWindowTilemap(i);
             FillWindowPixelBuffer(i, PIXEL_FILL(0));
@@ -322,7 +321,7 @@ static void sub_80E469C(void)
     }
 }
 
-static void CB2_SelectMonToRelearnMove(void)
+static void CB2_MoveRelearner_Init(void)
 {
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     ResetSpriteData();
@@ -331,10 +330,10 @@ static void CB2_SelectMonToRelearnMove(void)
     sMoveRelearner = AllocZeroed(sizeof(struct LearnMoveGfxResources));
     InitMoveRelearnerStateVariables();
     sMoveRelearner->selectedPartyMember = gSpecialVar_0x8004;
-    sub_80E50CC();
-    SetVBlankCallback(sub_80E4620);
-    sub_80E469C();
-    sub_80E5004();
+    MoveRelearnerInitListMenuBuffersEtc();
+    SetVBlankCallback(VBlankCB_MoveRelearner);
+    MoveRelearnerLoadBgGfx();
+    SpawnListMenuScrollIndicatorSprites();
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
@@ -342,17 +341,17 @@ static void CB2_SelectMonToRelearnMove(void)
     SetMainCallback2(CB2_MoveRelearner);
 }
 
-static void CB2_SelectMoveToOverwrite(void)
+static void CB2_MoveRelearner_Resume(void)
 {
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     ResetSpriteData();
     FreeAllSpritePalettes();
     ResetTasks();
-    sub_80E50CC();
+    MoveRelearnerInitListMenuBuffersEtc();
     sMoveRelearner->selectedMoveSlot = gSpecialVar_0x8005;
-    SetVBlankCallback(sub_80E4620);
-    sub_80E469C();
-    sub_80E5004();
+    SetVBlankCallback(VBlankCB_MoveRelearner);
+    MoveRelearnerLoadBgGfx();
+    SpawnListMenuScrollIndicatorSprites();
     FillPalette(RGB_BLACK, 0, 2);
 
     RunTasks();
@@ -378,7 +377,7 @@ static void CB2_MoveRelearner(void)
     UpdatePaletteFade();
 }
 
-static void sub_80E48C0(const u8 *str)
+static void StringExpandPlaceholdersAndPrintTextOnWindow7Color2(const u8 *str)
 {
     StringExpandPlaceholders(gStringVar4, str);
     PrintTextOnWindow(7, gStringVar4, 0, 2, GetTextSpeedSetting(), 2);
@@ -398,7 +397,7 @@ static void MoveRelearnerStateMachine(void)
         sMoveRelearner->state++;
         DrawTextBorderOnWindows6and7();
         PrintTeachWhichMoveToStrVar1(FALSE);
-        sub_80E5300();
+        MoveLearnerInitListMenu();
         sMoveRelearner->scheduleMoveInfoUpdate = TRUE;
         break;
     case 1:
@@ -414,7 +413,7 @@ static void MoveRelearnerStateMachine(void)
         sMoveRelearner->state++;
         break;
     case 4:
-        sub_80E5204();
+        MoveRelearnerMenuHandleInput();
         break;
     case 8:
         CreateYesNoMenu(&gUnknown_83FFA8C, 3, 0, 2, 0x001, 0xE, 0);
@@ -426,7 +425,7 @@ static void MoveRelearnerStateMachine(void)
         case 0:
             if (GiveMoveToMon(&gPlayerParty[sMoveRelearner->selectedPartyMember], sMoveRelearner->learnableMoves[sMoveRelearner->selectedIndex]) != 0xFFFF)
             {
-                sub_80E48C0(gUnknown_841E405);
+                StringExpandPlaceholdersAndPrintTextOnWindow7Color2(gText_MonLearnedMove);
                 gSpecialVar_0x8004 = TRUE;
                 sMoveRelearner->state = 31;
             }
@@ -459,7 +458,7 @@ static void MoveRelearnerStateMachine(void)
         }
         break;
     case 16:
-        sub_80E48C0(gUnknown_841E414);
+        StringExpandPlaceholdersAndPrintTextOnWindow7Color2(gText_MonIsTryingToLearnMove);
         sMoveRelearner->state++;
         break;
     case 17:
@@ -470,7 +469,7 @@ static void MoveRelearnerStateMachine(void)
         switch (YesNoMenuProcessInput())
         {
         case 0:
-            sub_80E48C0(gUnknown_841E50C);
+            StringExpandPlaceholdersAndPrintTextOnWindow7Color2(WhichMoveShouldBeForgotten);
             sMoveRelearner->state = 19;
             break;
         case 1:
@@ -480,7 +479,7 @@ static void MoveRelearnerStateMachine(void)
         }
         break;
     case 24:
-        sub_80E48C0(gUnknown_841E481);
+        StringExpandPlaceholdersAndPrintTextOnWindow7Color2(gText_StopLearningMove);
         sMoveRelearner->state++;
         break;
     case 25:
@@ -511,7 +510,7 @@ static void MoveRelearnerStateMachine(void)
         {
             ListMenuGetScrollAndRow(sMoveRelearner->listMenuTaskId, &sMoveRelearner->listMenuScrollPos, &sMoveRelearner->listMenuScrollRow);
             FreeAllWindowBuffers();
-            ShowSelectMovePokemonSummaryScreen(gPlayerParty, sMoveRelearner->selectedPartyMember, gPlayerPartyCount - 1, CB2_SelectMoveToOverwrite, sMoveRelearner->learnableMoves[sMoveRelearner->selectedIndex]);
+            ShowSelectMovePokemonSummaryScreen(gPlayerParty, sMoveRelearner->selectedPartyMember, gPlayerPartyCount - 1, CB2_MoveRelearner_Resume, sMoveRelearner->learnableMoves[sMoveRelearner->selectedIndex]);
             sMoveRelearner->state = 28;
         }
         break;
@@ -540,7 +539,7 @@ static void MoveRelearnerStateMachine(void)
         sMoveRelearner->state++;
         LoadMoveInfoUI();
         DrawTextBorderOnWindows6and7();
-        sub_80E5300();
+        MoveLearnerInitListMenu();
         PrintTeachWhichMoveToStrVar1(TRUE);
         PrintMoveInfoHandleCancel_CopyToVram();
         break;
@@ -558,14 +557,14 @@ static void MoveRelearnerStateMachine(void)
                 RemoveMonPPBonus(&gPlayerParty[sMoveRelearner->selectedPartyMember], sMoveRelearner->selectedMoveSlot);
                 SetMonMoveSlot(&gPlayerParty[sMoveRelearner->selectedPartyMember], sMoveRelearner->learnableMoves[sMoveRelearner->selectedIndex], sMoveRelearner->selectedMoveSlot);
                 StringCopy(gStringVar2, gMoveNames[sMoveRelearner->learnableMoves[sMoveRelearner->selectedIndex]]);
-                sub_80E48C0(gUnknown_841E493);
+                StringExpandPlaceholdersAndPrintTextOnWindow7Color2(gText_1_2_and_Poof);
                 sMoveRelearner->state = 30;
                 gSpecialVar_0x8004 = TRUE;
             }
         }
         break;
     case 30:
-        sub_80E48C0(gUnknown_841E4C0);
+        StringExpandPlaceholdersAndPrintTextOnWindow7Color2(gText_MonForgotOldMoveAndMonLearnedNewMove);
         sMoveRelearner->state = 31;
         PlayFanfare(MUS_FANFA1);
         break;
@@ -598,7 +597,7 @@ static void PrintTeachWhichMoveToStrVar1(bool8 onInit)
 {
     if (!onInit)
     {
-        StringExpandPlaceholders(gStringVar4, gUnknown_841E3E3);
+        StringExpandPlaceholders(gStringVar4, gText_TeachWhichMoveToMon);
         PrintTextOnWindow(7, gStringVar4, 0, 2, 0, 2);
         PutWindowTilemap(7);
         CopyWindowToVram(7, 3);
@@ -622,7 +621,7 @@ static void InitMoveRelearnerStateVariables(void)
         sMoveRelearner->learnableMoves[i] = MOVE_NONE;
 }
 
-static void sub_80E4FAC(struct Sprite * sprite)
+static void SpriteCB_ListMenuScrollIndicators(struct Sprite * sprite)
 {
     s16 abcissa = (sprite->data[1] * 10) & 0xFF;
     switch (sprite->data[0])
@@ -639,25 +638,25 @@ static void sub_80E4FAC(struct Sprite * sprite)
     sprite->data[1]++;
 }
 
-static void sub_80E5004(void)
+static void SpawnListMenuScrollIndicatorSprites(void)
 {
     int i;
-    LoadSpriteSheet(&gUnknown_83FF9F4);
-    LoadSpritePalette(&gUnknown_83FF9FC);
-    sMoveRelearner->spriteIds[0] = CreateSprite(&gUnknown_83FFA24, 200, 4, 0);
+    LoadSpriteSheet(&sSpriteSheet_ListMenuScrollIndicators);
+    LoadSpritePalette(&sSpritePalette_ListMenuScrollIndicators);
+    sMoveRelearner->spriteIds[0] = CreateSprite(&sSpriteTemplate_MoveRelearnerListMenuScrollIndicators, 200, 4, 0);
     StartSpriteAnim(&gSprites[sMoveRelearner->spriteIds[0]], 1);
     gSprites[sMoveRelearner->spriteIds[0]].data[0] = 2;
     gSprites[sMoveRelearner->spriteIds[0]].data[2] = -1;
 
     // Bug: This should be using the second element of spriteIds.
-    sMoveRelearner->spriteIds[0] = CreateSprite(&gUnknown_83FFA24, 200, 108, 0);
+    sMoveRelearner->spriteIds[0] = CreateSprite(&sSpriteTemplate_MoveRelearnerListMenuScrollIndicators, 200, 108, 0);
     gSprites[sMoveRelearner->spriteIds[0]].data[0] = 2;
     gSprites[sMoveRelearner->spriteIds[0]].data[2] = 1;
     for (i = 0; i < 2; i++)
         gSprites[sMoveRelearner->spriteIds[i]].invisible = TRUE;
 }
 
-static void sub_80E50CC(void)
+static void MoveRelearnerInitListMenuBuffersEtc(void)
 {
     int i;
     s32 count;
@@ -678,12 +677,12 @@ static void sub_80E50CC(void)
     }
     sMoveRelearner->listMenuItems[i].label = gFameCheckerText_Cancel;
     sMoveRelearner->listMenuItems[i].index = 0xFE;
-    gMultiuseListMenuTemplate = gUnknown_83FFA94;
+    gMultiuseListMenuTemplate = sMoveRelearnerListMenuTemplate;
     gMultiuseListMenuTemplate.items = sMoveRelearner->listMenuItems;
     gMultiuseListMenuTemplate.totalItems = count + 1;
 }
 
-static void sub_80E5204(void)
+static void MoveRelearnerMenuHandleInput(void)
 {
     ListMenu_ProcessInput(sMoveRelearner->listMenuTaskId);
     if (JOY_NEW(A_BUTTON))
@@ -693,11 +692,11 @@ static void sub_80E5204(void)
         {
             sMoveRelearner->state = 8;
             StringCopy(gStringVar2, sMoveRelearner->listMenuStrbufs[sMoveRelearner->selectedIndex]);
-            sub_80E48C0(gUnknown_841E3FB);
+            StringExpandPlaceholdersAndPrintTextOnWindow7Color2(gText_TeachMoveQues);
         }
         else
         {
-            sub_80E48C0(gUnknown_841E4E2);
+            StringExpandPlaceholdersAndPrintTextOnWindow7Color2(gText_GiveUpTryingToTeachNewMove);
             sMoveRelearner->state = 12;
         }
     }
@@ -705,7 +704,7 @@ static void sub_80E5204(void)
     {
         PlaySE(SE_SELECT);
         sMoveRelearner->state = 12;
-        sub_80E48C0(gUnknown_841E4E2);
+        StringExpandPlaceholdersAndPrintTextOnWindow7Color2(gText_GiveUpTryingToTeachNewMove);
     }
     if (sMoveRelearner->numLearnableMoves > 6)
     {
@@ -718,7 +717,7 @@ static void sub_80E5204(void)
     }
 }
 
-static void sub_80E5300(void)
+static void MoveLearnerInitListMenu(void)
 {
     sMoveRelearner->listMenuTaskId = ListMenuInit(&gMultiuseListMenuTemplate, sMoveRelearner->listMenuScrollPos, sMoveRelearner->listMenuScrollRow);
     CopyWindowToVram(6, 1);

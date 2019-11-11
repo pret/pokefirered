@@ -725,14 +725,14 @@ extern const u8 gText_Name[];
 extern const u8 gText_MainMenuTime[];
 
 // learn_move
-extern const u8 gUnknown_841E3E3[];
-extern const u8 gUnknown_841E405[];
-extern const u8 gUnknown_841E414[];
-extern const u8 gUnknown_841E481[];
-extern const u8 gUnknown_841E493[];
-extern const u8 gUnknown_841E4C0[];
-extern const u8 gUnknown_841E50C[];
-extern const u8 gUnknown_841E3FB[];
-extern const u8 gUnknown_841E4E2[];
+extern const u8 gText_TeachWhichMoveToMon[];
+extern const u8 gText_MonLearnedMove[];
+extern const u8 gText_MonIsTryingToLearnMove[];
+extern const u8 gText_StopLearningMove[];
+extern const u8 gText_1_2_and_Poof[];
+extern const u8 gText_MonForgotOldMoveAndMonLearnedNewMove[];
+extern const u8 WhichMoveShouldBeForgotten[];
+extern const u8 gText_TeachMoveQues[];
+extern const u8 gText_GiveUpTryingToTeachNewMove[];
 
 #endif //GUARD_STRINGS_H

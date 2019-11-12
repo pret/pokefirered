@@ -93,6 +93,7 @@ SECTIONS {
         src/fieldmap.o(.text);
         src/metatile_behavior.o(.text);
         asm/field_camera.o(.text);
+        src/field_door.o(.text);
         asm/field_door.o(.text);
         asm/field_player_avatar.o(.text);
         asm/field_map_obj.o(.text);
@@ -408,7 +409,7 @@ SECTIONS {
         data/maps.o(.rodata);
         src/fieldmap.o(.rodata);
         src/metatile_behavior.o(.rodata);
-        data/metatile_behavior.o(.rodata);
+        src/field_door.o(.rodata);
         data/field_door.o(.rodata);
         data/field_player_avatar.o(.rodata);
         data/field_map_obj.o(.rodata);

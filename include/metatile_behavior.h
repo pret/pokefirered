@@ -151,6 +151,5 @@ bool8 MetatileBehavior_IsImpressiveMachine(u8 metatileBehavior);
 bool8 MetatileBehavior_IsVideoGame(u8 metatileBehavior);
 bool8 MetatileBehavior_IsBurglary(u8 metatileBehavior);
 bool8 MetatileBehavior_IsMBA3(u8 metatileBehavior);
-extern u8 gUnknown_8353068[];
 
 #endif // GUARD_METATILE_BEHAVIOR

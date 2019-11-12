@@ -6,6 +6,7 @@
 #include "pokemon_size_record.h"
 #include "string_util.h"
 #include "text.h"
+#include "strings.h"
 #include "constants/species.h"
 
 #define DEFAULT_MAX_SIZE 0 // was 0x8100 in Ruby/Sapphire, 0x8000 in Emerald
@@ -28,13 +29,13 @@ static const struct UnknownStruct sBigMonSizeTable[] =
     {  800, 100,   7710 },
     {  900, 150,  17710 },
     { 1000, 150,  32710 },
-    { 1100, 100, -17826 },
-    { 1200,  50,  -7826 },
-    { 1300,  20,  -2826 },
-    { 1400,   5,   -826 },
-    { 1500,   2,   -326 },
-    { 1600,   1,   -126 },
-    { 1700,   1,   -26 },
+    { 1100, 100,  47710 },
+    { 1200,  50,  57710 },
+    { 1300,  20,  62710 },
+    { 1400,   5,  64710 },
+    { 1500,   2,  65210 },
+    { 1600,   1,  65410 },
+    { 1700,   1,  65510 },
 };
 
 static const u8 sGiftRibbonsMonDataIds[] =
@@ -43,8 +44,6 @@ static const u8 sGiftRibbonsMonDataIds[] =
     MON_DATA_GIFT_RIBBON_4, MON_DATA_GIFT_RIBBON_5, MON_DATA_GIFT_RIBBON_6,
     MON_DATA_GIFT_RIBBON_7
 };
-
-extern const u8 gText_DecimalPoint[];
 
 #define CM_PER_INCH 2.54
 

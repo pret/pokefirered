@@ -490,8 +490,8 @@ _0805A914: .4byte gUnknown_3000E90
 _0805A918: .4byte gMapHeader
 	thumb_func_end CurrentMapDrawMetatileAt
 
-	thumb_func_start sub_805A91C
-sub_805A91C: @ 805A91C
+	thumb_func_start DrawDoorMetatileAt
+DrawDoorMetatileAt: @ 805A91C
 	push {r4,r5,lr}
 	adds r3, r0, 0
 	adds r4, r1, 0
@@ -513,7 +513,7 @@ _0805A93E:
 	bx r0
 	.align 2, 0
 _0805A944: .4byte gUnknown_3000E90
-	thumb_func_end sub_805A91C
+	thumb_func_end DrawDoorMetatileAt
 
 	thumb_func_start sub_805A948
 sub_805A948: @ 805A948

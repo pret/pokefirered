@@ -5826,7 +5826,7 @@ UseRegisteredKeyItemOnField: @ 810AD10
 	movs r0, 0
 	b _0810ADA0
 _0810AD1E:
-	bl sub_80982EC
+	bl DismissMapNamePopup
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0

@@ -1747,7 +1747,7 @@ _080558D4:
 	cmp r0, r1
 	beq _08055914
 	movs r0, 0x1
-	bl sub_8098110
+	bl CreateMapNamePopupIfNotAlreadyRunning
 _08055914:
 	add sp, 0x4
 	pop {r4,r5}
@@ -3282,7 +3282,7 @@ sub_805644C: @ 805644C
 	bl sub_81127F8
 _0805649E:
 	bl ScriptContext2_Enable
-	bl sub_80982EC
+	bl DismissMapNamePopup
 	b _080564BA
 	.align 2, 0
 _080564A8: .4byte gUnknown_3005E88
@@ -3323,7 +3323,7 @@ sub_80564C8: @ 80564C8
 	cmp r0, 0x1
 	bne _0805650C
 	bl ScriptContext2_Enable
-	bl sub_80982EC
+	bl DismissMapNamePopup
 	b _08056522
 	.align 2, 0
 _08056508: .4byte gUnknown_3005E90
@@ -3824,7 +3824,7 @@ sub_8056918: @ 8056918
 	cmp r0, 0x4
 	bne _0805692C
 	movs r0, 0
-	bl sub_8098110
+	bl CreateMapNamePopupIfNotAlreadyRunning
 _0805692C:
 	bl sub_807DF7C
 	pop {r0}
@@ -4223,7 +4223,7 @@ _08056CA8:
 	cmp r0, 0x4
 	bne _08056CCA
 	movs r0, 0
-	bl sub_8098110
+	bl CreateMapNamePopupIfNotAlreadyRunning
 	b _08056CCA
 	.align 2, 0
 _08056CBC: .4byte gMapHeader

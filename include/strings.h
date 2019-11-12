@@ -738,4 +738,7 @@ extern const u8 gText_GiveUpTryingToTeachNewMove[];
 // pokemon_size_record
 extern const u8 gText_DecimalPoint[];
 
+// map_name_popup
+extern const u8 gUnknown_841D18D[];
+
 #endif //GUARD_STRINGS_H

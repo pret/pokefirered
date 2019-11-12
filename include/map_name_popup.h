@@ -9,6 +9,6 @@
 
 // Exported ROM declarations
 void HideMapNamePopUpWindow(void);
-void CreateMapNamePopupIfNotAlreadyRunning(u8);
+void CreateMapNamePopupIfNotAlreadyRunning(bool32 palIntoFadedBuffer);
 
 #endif //GUARD_MAP_NAME_POPUP_H

@@ -14,11 +14,11 @@
 #include "constants/flags.h"
 
 static void Task_MapNamePopup(u8 taskId);
-static u16 MapNamePopupCreateWindow(int a0);
-static void MapNamePopupPrintMapNameOnWindow(u16 a0);
+static u16 MapNamePopupCreateWindow(bool32 palIntoFadedBuffer);
+static void MapNamePopupPrintMapNameOnWindow(u16 windowId);
 static u8 *MapNamePopupAppendFloorNum(u8 *dest, s8 flags);
 
-void CreateMapNamePopupIfNotAlreadyRunning(int a0)
+void CreateMapNamePopupIfNotAlreadyRunning(bool32 palIntoFadedBuffer)
 {
     u8 taskId;
     if (FlagGet(FLAG_SPECIAL_FLAG_0x4000) != TRUE && !(gUnknown_203ADFA == 2 || gUnknown_203ADFA == 3))
@@ -31,7 +31,7 @@ void CreateMapNamePopupIfNotAlreadyRunning(int a0)
             ChangeBgY(0, 0xFFFFEF7F, 0);
             gTasks[taskId].data[0] = 0;
             gTasks[taskId].data[2] = 0;
-            gTasks[taskId].data[8] = a0;
+            gTasks[taskId].data[8] = palIntoFadedBuffer;
         }
         else
         {
@@ -138,7 +138,7 @@ bool32 IsMapNamePopupTaskActive(void)
     return FindTaskIdByFunc(Task_MapNamePopup) != 0xFF ? TRUE : FALSE;
 }
 
-static u16 MapNamePopupCreateWindow(int a0)
+static u16 MapNamePopupCreateWindow(bool32 palintoFadedBuffer)
 {
     struct WindowTemplate windowTemplate = {
         .bg = 0,
@@ -151,7 +151,7 @@ static u16 MapNamePopupCreateWindow(int a0)
     };
     u16 windowId;
     u16 r6 = 0x01D;
-    if (gMapHeader.flags)
+    if (gMapHeader.flags != 0)
     {
         if (gMapHeader.flags != 0x7F)
         {
@@ -165,7 +165,7 @@ static u16 MapNamePopupCreateWindow(int a0)
         }
     }
     windowId = AddWindow(&windowTemplate);
-    if (a0)
+    if (palintoFadedBuffer)
     {
         LoadPalette(stdpal_get(3), 0xd0, 0x20);
     }
@@ -187,7 +187,7 @@ static void MapNamePopupPrintMapNameOnWindow(u16 windowId)
     u32 maxWidth = 112;
     u32 xpos;
     u8 *ptr = GetMapName(mapName, gMapHeader.regionMapSectionId, 0);
-    if (gMapHeader.flags)
+    if (gMapHeader.flags != 0)
     {
         ptr = MapNamePopupAppendFloorNum(ptr, gMapHeader.flags);
         maxWidth = gMapHeader.flags != 0x7F ? 152 : 176;

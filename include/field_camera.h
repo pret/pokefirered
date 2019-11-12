@@ -30,6 +30,6 @@ void sub_805A658(s16 *x, s16 *y);
 void SetCameraPanningCallback(void (*cb)(void));
 void SetCameraPanning(s16 x, s16 y);
 void InstallCameraPanAheadCallback(void);
-void sub_805A91C(int x, int y, const u16 *data);
+void DrawDoorMetatileAt(int x, int y, const u16 *data);
 
 #endif //GUARD_FIELD_CAMERA_H

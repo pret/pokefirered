@@ -247,7 +247,7 @@ gUnknown_835B168:: @ 835B168
 	.space 32
 
 	.align 2
-gUnknown_835B488:: @ 835B488
+sDoorAnimFrames_OpenSmall:: @ 835B488
 	.byte 0x04
 	.align 1
 	.2byte 0xffff
@@ -264,7 +264,7 @@ gUnknown_835B488:: @ 835B488
 	.align 1
 	.2byte 0x0000
 
-gUnknown_835B49C:: @ 835B49C
+sDoorAnimFrames_OpenLarge:: @ 835B49C
 	.byte 0x04
 	.align 1
 	.2byte 0xffff
@@ -281,7 +281,7 @@ gUnknown_835B49C:: @ 835B49C
 	.align 1
 	.2byte 0x0000
 
-gUnknown_835B4B0:: @ 835B4B0
+sDoorAnimFrames_CloseSmall:: @ 835B4B0
 	.byte 0x04
 	.align 1
 	.2byte 0x0100
@@ -298,7 +298,7 @@ gUnknown_835B4B0:: @ 835B4B0
 	.align 1
 	.2byte 0x0000
 
-gUnknown_835B4C4:: @ 835B4C4
+sDoorAnimFrames_CloseLarge:: @ 835B4C4
 	.byte 0x04
 	.align 1
 	.2byte 0x0200
@@ -411,7 +411,7 @@ gUnknown_835B5C8:: @ 835B5C8
 gUnknown_835B5D0:: @ 835B5D0
 	.byte 0xb, 0xb, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2
 
-gUnknown_835B5D8:: @ 835B5D8
+sDoorGraphics:: @ 835B5D8
 	.2byte 0x003d
 	.byte 0x00, 0x00
 	.4byte gUnknown_8353088

@@ -126,15 +126,13 @@ gUnknown_840C1C4:: @ 840C1C4
 	.2byte RGB(29, 30, 30)
 	.2byte RGB(31, 17, 10)
 	.2byte RGB(31, 9, 10)
-	.2byte RGB(0, 0, 0)
-	.2byte RGB(1, 16, 0)
-	.2byte RGB(3, 0, 1)
-	.2byte RGB(1, 8, 0)
-	.2byte RGB(0, 8, 0)
-	.2byte RGB(3, 8, 1)
-	.2byte RGB(6, 8, 1)
-	.2byte RGB(4, 0, 0)
 
+gUnknown_840C1DC:: @ 840C1DC
+	.byte 0x00, 0x00, 0x01, 0x02, 0x03
+	.byte 0x04, 0x01, 0x01, 0x00, 0x01
+	.byte 0x03, 0x05, 0x06, 0x05, 0x04
+
+	.align 2
 gUnknown_840C1EC::
 	spr_template 10269, 10269, gOamData_83AC9D0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80F1B3C
 

@@ -1773,7 +1773,6 @@ static void sub_8112940(u8 a0, struct UnkStruct_203AE98 *a1, u16 a2)
     }
 }
 
-#ifdef NONMATCHING
 void sub_8112B3C(void)
 {
     switch (gUnknown_3005E88)
@@ -1781,13 +1780,13 @@ void sub_8112B3C(void)
     case 0:
         break;
     case 1:
-        if (sub_8112CEC())
+        if (!sub_8112CEC())
         {
             if (gUnknown_203B01A != 0)
                 gUnknown_203B01A--;
             else
             {
-                while (1)
+                do
                 {
                     switch (gUnknown_3005E94[sQuestLogIdx].unk_6)
                     {
@@ -1808,32 +1807,31 @@ void sub_8112B3C(void)
                     case 0xFF:
                         gUnknown_3005E88 = 0;
                         break;
-                }
-                if (gUnknown_3005E88 == 0)
-                    break;
-                if (++sQuestLogIdx >= sNumQuestLogs)
-                {
-                    gUnknown_3005E88 = 0;
-                    break;
-                }
-                gUnknown_203B01A = gUnknown_3005E94[sQuestLogIdx].unk_4;
-                if (gUnknown_3005E88 == 3)
-                    break;
-                if (gUnknown_203B01A == 0)
-                    continue;
-                if (gUnknown_203B01A == 0xFFFF)
-                    break;
-                }
+                    }
+                    if (gUnknown_3005E88 == 0)
+                        break;
+                    if (++sQuestLogIdx >= sNumQuestLogs)
+                    {
+                        gUnknown_3005E88 = 0;
+                        break;
+                    }
+                    gUnknown_203B01A = gUnknown_3005E94[sQuestLogIdx].unk_4;
+                } while (gUnknown_3005E88 != 3
+                      && (gUnknown_203B01A == 0 || gUnknown_203B01A == 0xFFFF));
             }
         }
         else if (sQuestLogIdx >= sNumQuestLogs)
+        {
             gUnknown_3005E88 = 0;
+        }
         break;
     case 2:
-        if (ScriptContext2_IsEnabled() != 1)
+        if (ScriptContext2_IsEnabled() != TRUE)
+        {
             gUnknown_203B01A++;
-        if (sQuestLogIdx >= sNumQuestLogs)
-            gUnknown_3005E88 = 0;
+            if (sQuestLogIdx >= sNumQuestLogs)
+                gUnknown_3005E88 = 0;
+        }
         break;
     case 3:
         break;
@@ -1841,192 +1839,6 @@ void sub_8112B3C(void)
         break;
     }
 }
-#else
-NAKED
-void sub_8112B3C(void)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                "\tldr r0, _08112B54 @ =gUnknown_3005E88\n"
-                "\tldrb r0, [r0]\n"
-                "\tcmp r0, 0x4\n"
-                "\tbls _08112B48\n"
-                "\tb _08112C84\n"
-                "_08112B48:\n"
-                "\tlsls r0, 2\n"
-                "\tldr r1, _08112B58 @ =_08112B5C\n"
-                "\tadds r0, r1\n"
-                "\tldr r0, [r0]\n"
-                "\tmov pc, r0\n"
-                "\t.align 2, 0\n"
-                "_08112B54: .4byte gUnknown_3005E88\n"
-                "_08112B58: .4byte _08112B5C\n"
-                "\t.align 2, 0\n"
-                "_08112B5C:\n"
-                "\t.4byte _08112C84\n"
-                "\t.4byte _08112B70\n"
-                "\t.4byte _08112C5E\n"
-                "\t.4byte _08112C84\n"
-                "\t.4byte _08112C84\n"
-                "_08112B70:\n"
-                "\tbl sub_8112CEC\n"
-                "\tlsls r0, 24\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _08112B7C\n"
-                "\tb _08112C72\n"
-                "_08112B7C:\n"
-                "\tldr r0, _08112B8C @ =gUnknown_203B01A\n"
-                "\tldrh r1, [r0]\n"
-                "\tadds r7, r0, 0\n"
-                "\tcmp r1, 0\n"
-                "\tbeq _08112B90\n"
-                "\tsubs r0, r1, 0x1\n"
-                "\tstrh r0, [r7]\n"
-                "\tb _08112C84\n"
-                "\t.align 2, 0\n"
-                "_08112B8C: .4byte gUnknown_203B01A\n"
-                "_08112B90:\n"
-                "\tldr r5, _08112B98 @ =gUnknown_3005E88\n"
-                "\tldr r4, _08112B9C @ =sQuestLogIdx\n"
-                "\tldr r6, _08112BA0 @ =gUnknown_3005E94\n"
-                "\tb _08112BD4\n"
-                "\t.align 2, 0\n"
-                "_08112B98: .4byte gUnknown_3005E88\n"
-                "_08112B9C: .4byte sQuestLogIdx\n"
-                "_08112BA0: .4byte gUnknown_3005E94\n"
-                "_08112BA4:\n"
-                "\tldrh r0, [r4]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r4]\n"
-                "\tldr r1, _08112BF0 @ =sNumQuestLogs\n"
-                "\tlsls r0, 16\n"
-                "\tlsrs r0, 16\n"
-                "\tldrh r1, [r1]\n"
-                "\tcmp r0, r1\n"
-                "\tbcs _08112C58\n"
-                "\tldrh r0, [r4]\n"
-                "\tldr r1, [r6]\n"
-                "\tlsls r0, 3\n"
-                "\tadds r0, r1\n"
-                "\tldrh r0, [r0, 0x4]\n"
-                "\tstrh r0, [r7]\n"
-                "\tcmp r2, 0x3\n"
-                "\tbeq _08112C84\n"
-                "\tlsls r0, 16\n"
-                "\tlsrs r1, r0, 16\n"
-                "\tcmp r1, 0\n"
-                "\tbeq _08112BD4\n"
-                "\tldr r0, _08112BF4 @ =0x0000ffff\n"
-                "\tcmp r1, r0\n"
-                "\tbne _08112C84\n"
-                "_08112BD4:\n"
-                "\tldrh r0, [r4]\n"
-                "\tldr r1, [r6]\n"
-                "\tlsls r0, 3\n"
-                "\tadds r3, r0, r1\n"
-                "\tldrb r0, [r3, 0x6]\n"
-                "\tcmp r0, 0x2\n"
-                "\tbeq _08112C2C\n"
-                "\tcmp r0, 0x2\n"
-                "\tbgt _08112BF8\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _08112C0C\n"
-                "\tcmp r0, 0x1\n"
-                "\tbeq _08112C18\n"
-                "\tb _08112C50\n"
-                "\t.align 2, 0\n"
-                "_08112BF0: .4byte sNumQuestLogs\n"
-                "_08112BF4: .4byte 0x0000ffff\n"
-                "_08112BF8:\n"
-                "\tcmp r0, 0xFE\n"
-                "\tbeq _08112C50\n"
-                "\tcmp r0, 0xFE\n"
-                "\tbgt _08112C06\n"
-                "\tcmp r0, 0x3\n"
-                "\tbeq _08112C4E\n"
-                "\tb _08112C50\n"
-                "_08112C06:\n"
-                "\tcmp r0, 0xFF\n"
-                "\tbeq _08112C4C\n"
-                "\tb _08112C50\n"
-                "_08112C0C:\n"
-                "\tldr r0, _08112C14 @ =gUnknown_203AF9A\n"
-                "\tldrb r1, [r3]\n"
-                "\tlsls r1, 1\n"
-                "\tb _08112C20\n"
-                "\t.align 2, 0\n"
-                "_08112C14: .4byte gUnknown_203AF9A\n"
-                "_08112C18:\n"
-                "\tldr r0, _08112C28 @ =gUnknown_203AF9A\n"
-                "\tldrb r1, [r3]\n"
-                "\tlsls r1, 1\n"
-                "\tadds r0, 0x1\n"
-                "_08112C20:\n"
-                "\tadds r1, r0\n"
-                "\tldrb r0, [r3, 0x3]\n"
-                "\tstrb r0, [r1]\n"
-                "\tb _08112C50\n"
-                "\t.align 2, 0\n"
-                "_08112C28: .4byte gUnknown_203AF9A\n"
-                "_08112C2C:\n"
-                "\tldr r2, _08112C48 @ =gUnknown_3005E90\n"
-                "\tldrb r1, [r3, 0x3]\n"
-                "\tlsls r1, 24\n"
-                "\tldrb r0, [r3, 0x2]\n"
-                "\tlsls r0, 16\n"
-                "\torrs r1, r0\n"
-                "\tldrb r0, [r3, 0x1]\n"
-                "\tlsls r0, 8\n"
-                "\torrs r1, r0\n"
-                "\tldrb r0, [r3]\n"
-                "\torrs r1, r0\n"
-                "\tstr r1, [r2]\n"
-                "\tb _08112C50\n"
-                "\t.align 2, 0\n"
-                "_08112C48: .4byte gUnknown_3005E90\n"
-                "_08112C4C:\n"
-                "\tmovs r0, 0\n"
-                "_08112C4E:\n"
-                "\tstrb r0, [r5]\n"
-                "_08112C50:\n"
-                "\tldrb r2, [r5]\n"
-                "\tcmp r2, 0\n"
-                "\tbne _08112BA4\n"
-                "\tb _08112C84\n"
-                "_08112C58:\n"
-                "\tmovs r0, 0\n"
-                "\tstrb r0, [r5]\n"
-                "\tb _08112C84\n"
-                "_08112C5E:\n"
-                "\tbl ScriptContext2_IsEnabled\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tcmp r0, 0x1\n"
-                "\tbeq _08112C84\n"
-                "\tldr r1, _08112C8C @ =gUnknown_203B01A\n"
-                "\tldrh r0, [r1]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r1]\n"
-                "_08112C72:\n"
-                "\tldr r0, _08112C90 @ =sQuestLogIdx\n"
-                "\tldr r1, _08112C94 @ =sNumQuestLogs\n"
-                "\tldrh r0, [r0]\n"
-                "\tldrh r1, [r1]\n"
-                "\tcmp r0, r1\n"
-                "\tbcc _08112C84\n"
-                "\tldr r1, _08112C98 @ =gUnknown_3005E88\n"
-                "\tmovs r0, 0\n"
-                "\tstrb r0, [r1]\n"
-                "_08112C84:\n"
-                "\tpop {r4-r7}\n"
-                "\tpop {r0}\n"
-                "\tbx r0\n"
-                "\t.align 2, 0\n"
-                "_08112C8C: .4byte gUnknown_203B01A\n"
-                "_08112C90: .4byte sQuestLogIdx\n"
-                "_08112C94: .4byte sNumQuestLogs\n"
-                "_08112C98: .4byte gUnknown_3005E88");
-}
-#endif
 
 void sub_8112C9C(void)
 {

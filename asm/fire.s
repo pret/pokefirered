@@ -1281,7 +1281,7 @@ _080AD2C2:
 	muls r1, r3
 	lsls r1, 16
 	asrs r1, 16
-	ldr r0, _080AD328 @ =gUnknown_83E5E46
+	ldr r0, _080AD328 @ =gUnknown_83E5E44 + 2
 	adds r2, r0
 	movs r3, 0
 	ldrsh r2, [r2, r3]
@@ -1319,7 +1319,7 @@ _080AD318: .4byte gUnknown_83E5E2C
 _080AD31C: .4byte gSprites
 _080AD320: .4byte 0x000003ff
 _080AD324: .4byte 0xfffffc00
-_080AD328: .4byte gUnknown_83E5E46
+_080AD328: .4byte gUnknown_83E5E44 + 2
 _080AD32C: .4byte gTasks+0x8
 	thumb_func_end sub_80AD1F8
 

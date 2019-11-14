@@ -118,7 +118,7 @@ DoMoveAnim: @ 807259C
 	ldr r0, _080725CC @ =gBattlerTarget
 	ldrb r0, [r0]
 	strb r0, [r2]
-	ldr r0, _080725D0 @ =gUnknown_81C68F4
+	ldr r0, _080725D0 @ =gBattleAnims_Moves
 	movs r2, 0x1
 	bl LaunchBattleAnimation
 	pop {r0}
@@ -128,7 +128,7 @@ _080725C0: .4byte gBattleAnimAttacker
 _080725C4: .4byte gBattlerAttacker
 _080725C8: .4byte gBattleAnimTarget
 _080725CC: .4byte gBattlerTarget
-_080725D0: .4byte gUnknown_81C68F4
+_080725D0: .4byte gBattleAnims_Moves
 	thumb_func_end DoMoveAnim
 
 	thumb_func_start LaunchBattleAnimation
@@ -247,7 +247,7 @@ _080726A6:
 	cmp r0, 0
 	beq _08072706
 	movs r4, 0
-	ldr r2, _080726E8 @ =gUnknown_81C68EC
+	ldr r2, _080726E8 @ =gMovesWithQuietBGM
 	b _080726EE
 	.align 2, 0
 _080726C0: .4byte gUnknown_2037F18
@@ -260,7 +260,7 @@ _080726D8: .4byte RunAnimScriptCommand
 _080726DC: .4byte gBattleAnimArgs
 _080726E0: .4byte 0x0000ffff
 _080726E4: .4byte gUnknown_2037EEE
-_080726E8: .4byte gUnknown_81C68EC
+_080726E8: .4byte gMovesWithQuietBGM
 _080726EC:
 	adds r4, 0x1
 _080726EE:

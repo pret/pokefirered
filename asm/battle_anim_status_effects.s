@@ -905,7 +905,7 @@ LaunchStatusAnimation: @ 807886C
 	strb r4, [r0]
 	ldr r0, _080788AC @ =gBattleAnimTarget
 	strb r4, [r0]
-	ldr r0, _080788B0 @ =gUnknown_81C6E84
+	ldr r0, _080788B0 @ =gBattleAnims_StatusConditions
 	movs r2, 0
 	bl LaunchBattleAnimation
 	ldr r0, _080788B4 @ =task0A_80788BC
@@ -925,7 +925,7 @@ LaunchStatusAnimation: @ 807886C
 	.align 2, 0
 _080788A8: .4byte gBattleAnimAttacker
 _080788AC: .4byte gBattleAnimTarget
-_080788B0: .4byte gUnknown_81C6E84
+_080788B0: .4byte gBattleAnims_StatusConditions
 _080788B4: .4byte task0A_80788BC
 _080788B8: .4byte gTasks
 	thumb_func_end LaunchStatusAnimation

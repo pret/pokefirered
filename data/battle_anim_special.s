@@ -28,4 +28,10 @@ gUnknown_840C104:: @ 840C104
 	.incbin "baserom.gba", 0x40C104, 0xC0
 
 gUnknown_840C1C4:: @ 840C1C4
-	.incbin "baserom.gba", 0x40C1C4, 0x64
+	.incbin "baserom.gba", 0x40C1C4, 0x28
+
+gUnknown_840C1EC::
+	.incbin "baserom.gba", 0x40C1EC, 0x24
+
+gUnknown_840C210::
+	.incbin "baserom.gba", 0x40C210, 0x18

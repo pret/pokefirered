@@ -7,4 +7,4 @@
 	.align 2
 
 gUnknown_841EE44:: @ 841EE44
-	.incbin "baserom.gba", 0x41EE44, 0x20
+	.incbin "graphics/interface/save_failed_screen.gbapal"

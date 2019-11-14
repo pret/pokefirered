@@ -43,4 +43,7 @@ void sub_80FBB20(void);
 bool8 sub_80FA484(bool32 a0);
 void var_800D_set_xB(void);
 
+#include "mevent_server.h"
+extern const struct mevent_server_cmd gMEventSrvScript_OtherTrainerCanceled[];
+
 #endif //GUARD_LINK_RFU_H

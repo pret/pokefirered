@@ -45,6 +45,7 @@ extern u8 gUnknown_203B0C0;
 extern u8 gUnknown_203B0C1;
 extern u8 gUnknown_203B0DC[3];
 extern void (*gUnknown_3005E98)(u8 taskId, TaskFunc func);
+extern u8 gSelectedOrderFromParty[3];
 
 bool8 FieldCallback_PrepareFadeInFromMenu(void);
 bool8 MonKnowsMove(struct Pokemon *, u16);

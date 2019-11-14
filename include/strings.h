@@ -746,4 +746,21 @@ extern const u8 gText_IDNumber[];
 extern const u8 gText_Name[];
 extern const u8 gText_MainMenuTime[];
 
+// learn_move
+extern const u8 gText_TeachWhichMoveToMon[];
+extern const u8 gText_MonLearnedMove[];
+extern const u8 gText_MonIsTryingToLearnMove[];
+extern const u8 gText_StopLearningMove[];
+extern const u8 gText_1_2_and_Poof[];
+extern const u8 gText_MonForgotOldMoveAndMonLearnedNewMove[];
+extern const u8 gText_WhichMoveShouldBeForgotten[];
+extern const u8 gText_TeachMoveQues[];
+extern const u8 gText_GiveUpTryingToTeachNewMove[];
+
+// pokemon_size_record
+extern const u8 gText_DecimalPoint[];
+
+// map_name_popup
+extern const u8 gUnknown_841D18D[];
+
 #endif //GUARD_STRINGS_H

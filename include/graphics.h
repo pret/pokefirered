@@ -4230,7 +4230,13 @@ extern const u16 gTradeMenuMonBox_Tilemap[];
 extern const u16 gUnknown_8E9CBBC[];
 extern const u16 gUnknown_8E9CB9C[];
 
+// hall_of_fame
 extern const u32 gFile_graphics_misc_confetti_sheet[];
 extern const u32 gFile_graphics_misc_confetti_palette[];
+
+// learn_move
+extern const u16 gUnknown_8E97DDC[];
+extern const u32 gUnknown_8E97DFC[];
+extern const u32 gUnknown_8E97EC4[];
 
 #endif //GUARD_GRAPHICS_H

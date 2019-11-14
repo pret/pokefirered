@@ -93,7 +93,7 @@ SECTIONS {
         src/fieldmap.o(.text);
         src/metatile_behavior.o(.text);
         asm/field_camera.o(.text);
-        asm/field_door.o(.text);
+        src/field_door.o(.text);
         asm/field_player_avatar.o(.text);
         asm/field_map_obj.o(.text);
         asm/field_ground_effect.o(.text);
@@ -136,7 +136,7 @@ SECTIONS {
         asm/script_movement.o(.text);
         asm/fldeff_cut.o(.text);
         src/mail_data.o(.text);
-        asm/map_name_popup.o(.text);
+        src/map_name_popup.o(.text);
         src/item_menu_icons.o(.text);
         src/battle_anim_mon_movement.o(.text);
         src/item.o(.text);
@@ -206,10 +206,9 @@ SECTIONS {
         src/battle_controller_safari.o(.text);
         src/fldeff_sweetscent.o(.text);
         asm/battle_anim_effects_3.o(.text);
-        asm/learn_move.o(.text);
+        src/learn_move.o(.text);
         src/fldeff_softboiled.o(.text);
         src/battle_tower.o(.text);
-        asm/battle_tower.o(.text);
         src/battle_controller_oak_old_man.o(.text);
         src/player_pc.o(.text);
         src/intro.o(.text);
@@ -223,7 +222,7 @@ SECTIONS {
         src/fldeff_teleport.o(.text);
         src/new_menu_helpers.o(.text);
         asm/box_party_pokemon_dropdown.o(.text);
-        asm/save_menu_util.o(.text);
+        src/save_menu_util.o(.text);
         src/map_preview_screen.o(.text);
         asm/link_rfu_2.o(.text);
         asm/link_rfu.o(.text);
@@ -409,8 +408,7 @@ SECTIONS {
         data/maps.o(.rodata);
         src/fieldmap.o(.rodata);
         src/metatile_behavior.o(.rodata);
-        data/metatile_behavior.o(.rodata);
-        data/field_door.o(.rodata);
+        src/field_door.o(.rodata);
         data/field_player_avatar.o(.rodata);
         data/field_map_obj.o(.rodata);
         data/field_ground_effect.o(.rodata);
@@ -439,7 +437,7 @@ SECTIONS {
         data/pokemon_storage_system.o(.rodata);
         src/pokemon_icon.o(.rodata);
         data/fldeff_cut.o(.rodata);
-        data/map_name_popup.o(.rodata);
+        src/map_name_popup.o(.rodata);
         src/item_menu_icons.o(.rodata);
         src/battle_anim_mon_movement.o(.rodata);
         src/item.o(.rodata);
@@ -448,7 +446,7 @@ SECTIONS {
         src/script_menu.o(.rodata);
         data/naming_screen.o(.rodata);
         src/pokemon_size_record.o(.rodata);
-        data/item_use.o(.rodata);
+        src/item_use.o(.rodata);
         data/battle_anim_effects_misc.o(.rodata);
         src/fire.o(.rodata);
         src/electric.o(.rodata);
@@ -484,7 +482,7 @@ SECTIONS {
         data/field_effect_helpers.o(.rodata);
         src/battle_controller_safari.o(.rodata);
         data/battle_anim_effects_3.o(.rodata);
-        data/learn_move.o(.rodata);
+        src/learn_move.o(.rodata);
         src/battle_tower.o(.rodata);
         src/battle_controller_oak_old_man.o(.rodata);
         src/player_pc.o(.rodata);
@@ -542,12 +540,13 @@ SECTIONS {
         src/mevent_client.o(.rodata);
         src/mevent_server.o(.rodata);
         src/mevent_8145654.o(.rodata);
-        data/data_8466FB8.o(.rodata);
+        src/mevent_scripts.o(.rodata);
         src/menews_jisan.o(.rodata);
         src/menews_jisan.o(.rodata.str1.4);
         . = ALIGN(4);
         src/seagallop.o(.rodata);
-        data/data_8468C98.o(.rodata);
+        data/pokemon_jump.o(.rodata);
+        data/berry_crush.o(.rodata);
         src/wireless_communication_status_screen.o(.rodata);
         src/braille_text.o(.rodata);
         src/text_window_graphics.o(.rodata);

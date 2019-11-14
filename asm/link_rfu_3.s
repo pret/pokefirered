@@ -12663,7 +12663,7 @@ sub_811C04C: @ 811C04C
 	ldr r6, _0811C0CC @ =gPlayerParty
 	ldr r5, _0811C0D0 @ =gEnemyParty
 _0811C05C:
-	ldr r0, _0811C0D4 @ =gUnknown_203B0D4
+	ldr r0, _0811C0D4 @ =gSelectedOrderFromParty
 	adds r0, r4, r0
 	ldrb r0, [r0]
 	subs r0, 0x1
@@ -12717,7 +12717,7 @@ _0811C096:
 	.align 2, 0
 _0811C0CC: .4byte gPlayerParty
 _0811C0D0: .4byte gEnemyParty
-_0811C0D4: .4byte gUnknown_203B0D4
+_0811C0D4: .4byte gSelectedOrderFromParty
 _0811C0D8: .4byte gTrainerBattleOpponent_A
 _0811C0DC: .4byte CB2_InitBattle
 	thumb_func_end sub_811C04C
@@ -13029,7 +13029,7 @@ _0811C3BC:
 	movs r1, 0
 	movs r2, 0x20
 	bl memset
-	ldr r0, _0811C3DC @ =gUnknown_203B0D4
+	ldr r0, _0811C3DC @ =gSelectedOrderFromParty
 	ldrb r1, [r0]
 	ldrb r0, [r0, 0x1]
 	cmn r1, r0
@@ -13038,7 +13038,7 @@ _0811C3BC:
 	b _0811C3E2
 	.align 2, 0
 _0811C3D8: .4byte gBlockSendBuffer
-_0811C3DC: .4byte gUnknown_203B0D4
+_0811C3DC: .4byte gSelectedOrderFromParty
 _0811C3E0:
 	movs r0, 0x51
 _0811C3E2:

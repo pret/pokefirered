@@ -1152,7 +1152,7 @@ sub_811F388: @ 811F388
 	muls r0, r4
 	ldr r1, _0811F3AC @ =gPlayerParty
 	adds r0, r1
-	ldr r5, _0811F3B0 @ =gUnknown_203B0D4
+	ldr r5, _0811F3B0 @ =gSelectedOrderFromParty
 	bl sub_8127550
 	lsls r0, 24
 	cmp r0, 0
@@ -1163,7 +1163,7 @@ sub_811F388: @ 811F388
 	b _0811F3F8
 	.align 2, 0
 _0811F3AC: .4byte gPlayerParty
-_0811F3B0: .4byte gUnknown_203B0D4
+_0811F3B0: .4byte gSelectedOrderFromParty
 _0811F3B4:
 	adds r1, 0x2
 	lsls r1, 24
@@ -11131,7 +11131,7 @@ _0812418C:
 	adds r0, r1
 	mov r10, r0
 _081241B6:
-	ldr r0, _0812420C @ =gUnknown_203B0D4
+	ldr r0, _0812420C @ =gSelectedOrderFromParty
 	adds r4, r5, r0
 	ldrb r0, [r4]
 	cmp r0, 0
@@ -11168,7 +11168,7 @@ _081241FC: .4byte gUnknown_8416B16
 _08124200: .4byte gUnknown_203B09C
 _08124204: .4byte gUnknown_203B0A0
 _08124208: .4byte gTasks
-_0812420C: .4byte gUnknown_203B0D4
+_0812420C: .4byte gSelectedOrderFromParty
 _08124210: .4byte gUnknown_203B0B4
 _08124214: .4byte sub_811FB28
 _08124218:
@@ -11237,7 +11237,7 @@ sub_8124278: @ 8124278
 	adds r0, 0xD
 	bl sub_8121CE4
 	movs r4, 0
-	ldr r3, _081242C0 @ =gUnknown_203B0D4
+	ldr r3, _081242C0 @ =gSelectedOrderFromParty
 	ldr r6, _081242C4 @ =gUnknown_203B0A0
 	adds r5, r6, 0
 _0812429E:
@@ -11257,7 +11257,7 @@ _0812429E:
 	b _081242E6
 	.align 2, 0
 _081242BC: .4byte gUnknown_203B09C
-_081242C0: .4byte gUnknown_203B0D4
+_081242C0: .4byte gSelectedOrderFromParty
 _081242C4: .4byte gUnknown_203B0A0
 _081242C8:
 	ldrb r0, [r3, 0x1]
@@ -11287,7 +11287,7 @@ _081242E6:
 	movs r0, 0x1
 	movs r2, 0x1
 	bl sub_8121C70
-	ldr r4, _08124348 @ =gUnknown_203B0D4
+	ldr r4, _08124348 @ =gSelectedOrderFromParty
 	ldrb r0, [r4]
 	cmp r0, 0
 	beq _08124312
@@ -11324,7 +11324,7 @@ _08124328:
 	bx r0
 	.align 2, 0
 _08124344: .4byte gUnknown_203B0B4
-_08124348: .4byte gUnknown_203B0D4
+_08124348: .4byte gSelectedOrderFromParty
 _0812434C: .4byte gTasks
 _08124350: .4byte sub_811FB28
 	thumb_func_end sub_8124278
@@ -17411,14 +17411,14 @@ _081274F8: .4byte sub_812773C
 	thumb_func_start sub_81274FC
 sub_81274FC: @ 81274FC
 	push {lr}
-	ldr r0, _0812750C @ =gUnknown_203B0D4
+	ldr r0, _0812750C @ =gSelectedOrderFromParty
 	movs r1, 0
 	movs r2, 0x3
 	bl memset
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0812750C: .4byte gUnknown_203B0D4
+_0812750C: .4byte gSelectedOrderFromParty
 	thumb_func_end sub_81274FC
 
 	thumb_func_start sub_8127510
@@ -17564,18 +17564,18 @@ sub_81275F8: @ 81275F8
 _08127618: .4byte gPlayerParty
 _0812761C: .4byte gUnknown_203B0A0
 _08127620:
-	ldr r1, _0812762C @ =gUnknown_203B0D4
+	ldr r1, _0812762C @ =gSelectedOrderFromParty
 	ldrb r0, [r1, 0x2]
 	cmp r0, 0
 	bne _08127630
 	movs r0, 0x11
 	b _08127702
 	.align 2, 0
-_0812762C: .4byte gUnknown_203B0D4
+_0812762C: .4byte gSelectedOrderFromParty
 _08127630:
 	movs r5, 0
 _08127632:
-	ldr r2, _081276DC @ =gUnknown_203B0D4
+	ldr r2, _081276DC @ =gSelectedOrderFromParty
 	adds r4, r2, r5
 	ldrb r0, [r4]
 	movs r1, 0x64
@@ -17618,7 +17618,7 @@ _0812767E:
 	adds r0, r2
 	movs r1, 0
 	ldrsh r4, [r0, r1]
-	ldr r2, _081276DC @ =gUnknown_203B0D4
+	ldr r2, _081276DC @ =gSelectedOrderFromParty
 	adds r6, r2, r5
 	ldrb r0, [r6]
 	muls r0, r7
@@ -17660,18 +17660,18 @@ _081276D0:
 	bls _08127632
 	b _08127700
 	.align 2, 0
-_081276DC: .4byte gUnknown_203B0D4
+_081276DC: .4byte gSelectedOrderFromParty
 _081276E0: .4byte gUnknown_203B09C
 _081276E4: .4byte 0x00000236
 _081276E8:
-	ldr r2, _081276F4 @ =gUnknown_203B0D4
+	ldr r2, _081276F4 @ =gSelectedOrderFromParty
 	ldrb r0, [r2, 0x1]
 	cmp r0, 0
 	bne _08127700
 	movs r0, 0x12
 	b _08127702
 	.align 2, 0
-_081276F4: .4byte gUnknown_203B0D4
+_081276F4: .4byte gSelectedOrderFromParty
 _081276F8:
 	movs r0, 0x13
 	b _08127702
@@ -17696,7 +17696,7 @@ sub_8127710: @ 8127710
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r1, 0
-	ldr r3, _08127728 @ =gUnknown_203B0D4
+	ldr r3, _08127728 @ =gSelectedOrderFromParty
 _0812771A:
 	adds r0, r1, r3
 	ldrb r0, [r0]
@@ -17705,7 +17705,7 @@ _0812771A:
 	movs r0, 0x1
 	b _08127738
 	.align 2, 0
-_08127728: .4byte gUnknown_203B0D4
+_08127728: .4byte gSelectedOrderFromParty
 _0812772C:
 	adds r0, r1, 0x1
 	lsls r0, 24
@@ -17740,7 +17740,7 @@ sub_812773C: @ 812773C
 	.align 2, 0
 _08127764: .4byte gTasks
 _08127768:
-	ldr r0, _08127780 @ =gUnknown_203B0D4
+	ldr r0, _08127780 @ =gSelectedOrderFromParty
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08127784
@@ -17750,7 +17750,7 @@ _08127768:
 	bl sub_811FA78
 	b _0812779E
 	.align 2, 0
-_08127780: .4byte gUnknown_203B0D4
+_08127780: .4byte gSelectedOrderFromParty
 _08127784:
 	movs r0, 0x1A
 	bl PlaySE

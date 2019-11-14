@@ -163,7 +163,7 @@ struct MapHeader
     /* 0x17 */ u8 mapType;
     /* 0x18 */ u8 filler_18;
     /* 0x19 */ u8 escapeRope;
-    /* 0x1A */ u8 flags;
+    /* 0x1A */ s8 flags;
     /* 0x1B */ u8 battleType;
 };
 

@@ -521,7 +521,66 @@ gUnknown_83E3160:: @ 83E3160
 	spr_template 10287, 10287, gOamData_83AC9D8, gUnknown_83E3140, NULL, gDummySpriteAffineAnimTable, sub_80A4450
 
 gUnknown_83E3178:: @ 83E3178
-	.incbin "baserom.gba", 0x3E3178, 0x104
+	obj_image_anim_frame 0x0000, 4
+	obj_image_anim_frame 0x0010, 4
+	obj_image_anim_frame 0x0020, 4
+	obj_image_anim_frame 0x0030, 4
+	obj_image_anim_frame 0x0040, 5
+	obj_image_anim_end
+
+gUnknown_83E3190:: @ 83E3190
+	.4byte gUnknown_83E3178
+
+gUnknown_83E3194:: @ 83E3194
+	spr_template 10021, 10021, gOamData_83AC9D8, gUnknown_83E3190, NULL, gDummySpriteAffineAnimTable, sub_80A43F8
+
+gUnknown_83E31AC:: @ 83E31AC
+	spr_template 10022, 10022, gOamData_83AC9D8, gUnknown_83E3190, NULL, gDummySpriteAffineAnimTable, sub_80A43F8
+
+gUnknown_83E31C4:: @ 83E31C4
+	obj_rot_scal_anim_frame 256, 256, 0, 0
+	obj_rot_scal_anim_end
+
+gUnknown_83E31D4::
+	obj_rot_scal_anim_frame 256, 256, 32, 0
+	obj_rot_scal_anim_end
+
+gUnknown_83E31E4::
+	obj_rot_scal_anim_frame 256, 256, 64, 0
+	obj_rot_scal_anim_end
+
+gUnknown_83E31F4::
+	obj_rot_scal_anim_frame 256, 256, 96, 0
+	obj_rot_scal_anim_end
+
+gUnknown_83E3204::
+	obj_rot_scal_anim_frame 256, 256, 128, 0
+	obj_rot_scal_anim_end
+
+gUnknown_83E3214::
+	obj_rot_scal_anim_frame 256, 256, 160, 0
+	obj_rot_scal_anim_end
+
+gUnknown_83E3224::
+	obj_rot_scal_anim_frame 256, 256, 192, 0
+	obj_rot_scal_anim_end
+
+gUnknown_83E3234::
+	obj_rot_scal_anim_frame 256, 256, 224, 0
+	obj_rot_scal_anim_end
+
+gUnknown_83E3244::
+	.4byte gUnknown_83E31C4
+	.4byte gUnknown_83E31D4
+	.4byte gUnknown_83E31E4
+	.4byte gUnknown_83E31F4
+	.4byte gUnknown_83E3204
+	.4byte gUnknown_83E3214
+	.4byte gUnknown_83E3224
+	.4byte gUnknown_83E3234
+
+gUnknown_83E3264::
+	spr_template 10143, 10143, gOamData_83ACA38, gDummySpriteAnimTable, NULL, gUnknown_83E3244, sub_80A4494
 
 gUnknown_83E327C:: @ 83E327C
 	obj_image_anim_frame 0, 5
@@ -540,7 +599,59 @@ gUnknown_83E32AC:: @ 83E32AC
 	spr_template 10138, 10138, gOamData_83ACAF8, gUnknown_83E3290, NULL, gDummySpriteAffineAnimTable, sub_80A4588
 
 gUnknown_83E32C4:: @ 83E32C4
-	.incbin "baserom.gba", 0x3E32C4, 0x90
+	obj_image_anim_frame 0x0000, 1
+	obj_image_anim_end
+
+gUnknown_83E32CC::
+	obj_image_anim_frame 0x0004, 1
+	obj_image_anim_end
+
+gUnknown_83E32D4::
+	obj_image_anim_frame 0x0008, 1
+	obj_image_anim_end
+
+gUnknown_83E32DC::
+	obj_image_anim_frame 0x000c, 1
+	obj_image_anim_end
+
+gUnknown_83E32E4::
+	obj_image_anim_frame 0x0010, 1
+	obj_image_anim_end
+
+gUnknown_83E32EC::
+	obj_image_anim_frame 0x0014, 1
+	obj_image_anim_end
+
+gUnknown_83E32F4::
+	obj_image_anim_frame 0x0000, 1, OBJ_IMAGE_ANIM_V_FLIP
+	obj_image_anim_end
+
+gUnknown_83E32FC::
+	obj_image_anim_frame 0x0004, 1, OBJ_IMAGE_ANIM_V_FLIP
+	obj_image_anim_end
+
+gUnknown_83E3304::
+	obj_image_anim_frame 0x0008, 1, OBJ_IMAGE_ANIM_V_FLIP
+	obj_image_anim_end
+
+gUnknown_83E330C::
+	obj_image_anim_frame 0x000c, 1, OBJ_IMAGE_ANIM_V_FLIP
+	obj_image_anim_end
+
+gUnknown_83E3314::
+	.4byte gUnknown_83E32C4
+	.4byte gUnknown_83E32CC
+	.4byte gUnknown_83E32D4
+	.4byte gUnknown_83E32DC
+	.4byte gUnknown_83E32E4
+	.4byte gUnknown_83E32EC
+	.4byte gUnknown_83E32F4
+	.4byte gUnknown_83E32FC
+	.4byte gUnknown_83E3304
+	.4byte gUnknown_83E330C
+
+gUnknown_83E333C::
+	spr_template 10072, 10072, gOamData_83AC9D0, gUnknown_83E3314, NULL, gDummySpriteAffineAnimTable, sub_80A481C
 
 gUnknown_83E3354:: @ 83E3354
 	spr_template 10280, 10280, gOamData_83ACB00, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80A48F0
@@ -585,7 +696,33 @@ gUnknown_83E340C:: @ 83E340C
 	spr_template 10049, 10049, gOamData_83AC9D8, gUnknown_83E33F0, NULL, gDummySpriteAffineAnimTable, sub_80A4D5C
 
 gUnknown_83E3424:: @ 83E3424
-	.incbin "baserom.gba", 0x3E3424, 0x68
+	obj_image_anim_frame 0x0000, 10
+	obj_image_anim_frame 0x0004, 10
+	obj_image_anim_frame 0x0008, 10
+	obj_image_anim_frame 0x000c, 10
+	obj_image_anim_frame 0x0010, 26
+	obj_image_anim_frame 0x0010, 5
+	obj_image_anim_frame 0x0014, 5
+	obj_image_anim_frame 0x0018, 15
+	obj_image_anim_end
+
+gUnknown_83E3448::
+	obj_image_anim_frame 0x0000, 10, OBJ_IMAGE_ANIM_H_FLIP
+	obj_image_anim_frame 0x0004, 10, OBJ_IMAGE_ANIM_H_FLIP
+	obj_image_anim_frame 0x0008, 10, OBJ_IMAGE_ANIM_H_FLIP
+	obj_image_anim_frame 0x000c, 10, OBJ_IMAGE_ANIM_H_FLIP
+	obj_image_anim_frame 0x0010, 26, OBJ_IMAGE_ANIM_H_FLIP
+	obj_image_anim_frame 0x0010, 5, OBJ_IMAGE_ANIM_H_FLIP
+	obj_image_anim_frame 0x0014, 5, OBJ_IMAGE_ANIM_H_FLIP
+	obj_image_anim_frame 0x0018, 15, OBJ_IMAGE_ANIM_H_FLIP
+	obj_image_anim_end
+
+gUnknown_83E346C::
+	.4byte gUnknown_83E3424
+	.4byte gUnknown_83E3448
+
+gUnknown_83E3474::
+	spr_template 10032, 10032, gOamData_83AC9D0, gUnknown_83E346C, NULL, gDummySpriteAffineAnimTable, sub_80A4E40
 
 gUnknown_83E348C:: @ 83E348C
 	obj_image_anim_frame 0, 40
@@ -600,7 +737,9 @@ gUnknown_83E3498:: @ 83E3498
 	obj_rot_scal_anim_end
 
 gUnknown_83E34B0:: @ 83E34B0
-	.incbin "baserom.gba", 0x3E34B0, 0x18
+	obj_rot_scal_anim_loop 0
+	obj_rot_scal_anim_frame 0, 0, 1, 24
+	obj_rot_scal_anim_loop 10
 
 gUnknown_83E34C8:: @ 83E34C8
 	obj_rot_scal_anim_frame 20, 20, 30, 0
@@ -608,7 +747,9 @@ gUnknown_83E34C8:: @ 83E34C8
 	obj_rot_scal_anim_end
 
 gUnknown_83E34E0:: @ 83E34E0
-	.incbin "baserom.gba", 0x3E34E0, 0x18
+	obj_rot_scal_anim_loop 0
+	obj_rot_scal_anim_frame 0, 0, 255, 24
+	obj_rot_scal_anim_loop 10
 
 gUnknown_83E34F8:: @ 83E34F8
 	.4byte gUnknown_83E3498
@@ -790,22 +931,32 @@ gUnknown_83E37EC:: @ 83E37EC
 	spr_template 10192, 10192, gOamData_83AC9D8, gUnknown_83E37E8, NULL, gDummySpriteAffineAnimTable, sub_80A65CC
 
 gUnknown_83E3804:: @ 83E3804
-	.incbin "baserom.gba", 0x3E3804, 0x8
+	obj_image_anim_frame 0x0000, 10
+	obj_image_anim_end
 
 gOamData_83E380C::
-	.incbin "baserom.gba", 0x3E380C, 0x8
+	obj_image_anim_frame 0x0004, 10
+	obj_image_anim_end
 
 gUnknown_83E3814:: @ 83E3814
-	.incbin "baserom.gba", 0x3E3814, 0x8
+	obj_image_anim_frame 0x0008, 41
+	obj_image_anim_end
 
 gUnknown_83E381C:: @ 83E381C
-	.incbin "baserom.gba", 0x3E381C, 0x8
+	obj_image_anim_frame 0x000c, 10
+	obj_image_anim_end
 
 gUnknown_83E3824:: @ 83E3824
-	.incbin "baserom.gba", 0x3E3824, 0x8
+	obj_image_anim_frame 0x0010, 10
+	obj_image_anim_end
 
 gUnknown_83E382C:: @ 83E382C
-	.incbin "baserom.gba", 0x3E382C, 0x18
+	obj_image_anim_frame 0x0014, 10
+	obj_image_anim_end
+	obj_image_anim_frame 0x0000, 10, OBJ_IMAGE_ANIM_V_FLIP
+	obj_image_anim_end
+	obj_image_anim_frame 0x0004, 10, OBJ_IMAGE_ANIM_V_FLIP
+	obj_image_anim_end
 
 gUnknown_83E3844:: @ 83E3844
 	spr_template 14340, 2110, gOamData_83E380C, gUnknown_83E3814, gUnknown_83E381C, gUnknown_83E3824, gUnknown_83E382C
@@ -896,7 +1047,15 @@ gUnknown_83E39BC:: @ 83E39BC
 	obj_rot_scal_anim_end
 
 gUnknown_83E39E4:: @ 83E39E4
-	.incbin "baserom.gba", 0x3E39E4, 0x48
+	obj_rot_scal_anim_frame 16, 16, 0, 0
+	obj_rot_scal_anim_frame 30, 30, 0, 8
+	obj_rot_scal_anim_frame 0, 0, 0, 16
+	obj_rot_scal_anim_loop 0
+	obj_rot_scal_anim_frame 0, 0, 4, 11
+	obj_rot_scal_anim_frame 0, 0, 252, 11
+	obj_rot_scal_anim_loop 2
+	obj_rot_scal_anim_frame -30, -30, 0, 8
+	obj_rot_scal_anim_end
 
 gUnknown_83E3A2C:: @ 83E3A2C
 	.4byte gUnknown_83E39A4
@@ -944,10 +1103,46 @@ gUnknown_83E3AB4:: @ 83E3AB4
 
 gUnknown_83E3AC4:: @ 83E3AC4
 	spr_template 10214, 10214, gOamData_83AC9D8, gUnknown_83E3AB4, NULL, gDummySpriteAffineAnimTable, sub_80A6D90
+
+gUnknown_83E3ADC::
 	spr_template 10064, 10064, gOamData_83AC9D8, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80A6E48
 
 gUnknown_83E3AF4:: @ 83E3AF4
-	.incbin "baserom.gba", 0x3E3AF4, 0xA0
+	obj_image_anim_frame 0x0004, 1
+	obj_image_anim_end
+
+gUnknown_83E3AFC::
+	.4byte gUnknown_83E3AF4
+
+gUnknown_83E3B00::
+	spr_template 10072, 10072, gOamData_83AC9D0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80A6E98
+
+gUnknown_83E3B18::
+	spr_template 0, 0, gDummyOamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80A6F8C
+
+gUnknown_83E3B30::
+	spr_template 10145, 10145, gOamData_83ACB60, gDummySpriteAnimTable, NULL, gUnknown_83E7910, sub_80A7020
+
+gUnknown_83E3B48::
+	obj_image_anim_frame 0x0000, 9
+	obj_image_anim_frame 0x0010, 3
+	obj_image_anim_frame 0x0020, 3
+	obj_image_anim_frame 0x0030, 3
+	obj_image_anim_end
+
+gUnknown_83E3B5C::
+	.4byte gUnknown_83E3B48
+
+gUnknown_83E3B60::
+	obj_rot_scal_anim_frame 80, 80, 0, 0
+	obj_rot_scal_anim_frame 9, 9, 0, 18
+	obj_rot_scal_anim_end
+
+gUnknown_83E3B78::
+	.4byte gUnknown_83E3B60
+
+gUnknown_83E3B7C::
+	spr_template 10007, 10007, gOamData_83ACA38, gUnknown_83E3B5C, NULL, gUnknown_83E3B78, AnimSpriteOnMonPos
 
 gUnknown_83E3B94:: @ 83E3B94
 	obj_image_anim_frame 0, 3, OBJ_IMAGE_ANIM_H_FLIP
@@ -1103,10 +1298,16 @@ gUnknown_83E3E48:: @ 83E3E48
 	spr_template 10138, 10138, gOamData_83ACAF8, gUnknown_83E3E40, NULL, gDummySpriteAffineAnimTable, sub_80A7E14
 
 gUnknown_83E3E60:: @ 83E3E60
-	.incbin "baserom.gba", 0x3E3E60, 0x20
+	obj_rot_scal_anim_frame -6, 4, 0, 8
+	obj_rot_scal_anim_frame 10, -10, 0, 8
+	obj_rot_scal_anim_frame -4, 6, 0, 8
+	obj_rot_scal_anim_end
 
 gUnknown_83E3E80:: @ 83E3E80
-	.incbin "baserom.gba", 0x3E3E80, 0x20
+	obj_rot_scal_anim_frame -4, -5, 0, 12
+	obj_rot_scal_anim_frame 0, 0, 0, 24
+	obj_rot_scal_anim_frame 4, 5, 0, 12
+	obj_rot_scal_anim_end
 
 gUnknown_83E3EA0:: @ 83E3EA0
 	obj_image_anim_frame 0, 4, OBJ_IMAGE_ANIM_H_FLIP
@@ -1141,7 +1342,12 @@ gUnknown_83E3F04:: @ 83E3F04
 	spr_template 10087, 10087, gOamData_83ACA30, gDummySpriteAnimTable, NULL, gUnknown_83E3F00, sub_80A85AC
 
 gUnknown_83E3F1C:: @ 83E3F1C
-	.incbin "baserom.gba", 0x3E3F1C, 0x30
+	obj_rot_scal_anim_frame -10, 9, 0, 7
+	obj_rot_scal_anim_frame 20, -20, 0, 7
+	obj_rot_scal_anim_frame -20, 20, 0, 7
+	obj_rot_scal_anim_frame 10, -9, 0, 7
+	obj_rot_scal_anim_loop 2
+	obj_rot_scal_anim_end
 
 gUnknown_83E3F4C:: @ 83E3F4C
 	spr_template 10002, 10002, gOamData_83AC9D8, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80A8A1C
@@ -1236,7 +1442,8 @@ gUnknown_83E4110:: @ 83E4110
 	spr_template 10203, 10203, gOamData_83ACBC0, gDummySpriteAnimTable, NULL, gUnknown_83E4088, sub_80A8EE8
 
 gUnknown_83E4128:: @ 83E4128
-	.incbin "baserom.gba", 0x3E4128, 0x10
+	obj_rot_scal_anim_frame 96, -13, 0, 8
+	obj_rot_scal_anim_end
 
 gUnknown_83E4138:: @ 83E4138
 	obj_image_anim_frame 0, 3
@@ -1253,7 +1460,7 @@ gUnknown_83E4154:: @ 83E4154
 	spr_template 10207, 10207, gOamData_83AC9D0, gUnknown_83E4150, NULL, gDummySpriteAffineAnimTable, sub_80A9648
 
 gUnknown_83E416C:: @ 83E416C
-	.incbin "baserom.gba", 0x3E416C, 0x8
+	.byte 0x1e, 0x1c, 0xec, 0x18, 0x10, 0x1a, 0xf6, 0x1c
 
 gUnknown_83E4174:: @ 83E4174
 	obj_image_anim_frame 0, 6
@@ -1278,8 +1485,9 @@ gUnknown_83E41B0:: @ 83E41B0
 	spr_template 10205, 10205, gOamData_83AC9D8, gUnknown_83E41AC, NULL, gDummySpriteAffineAnimTable, AnimSpriteOnMonPos
 
 gUnknown_83E41C8:: @ 83E41C8
-	.incbin "baserom.gba", 0x3E41C8, 0x8
+	.2byte 10206, 9999, 9998
 
+	.align 2
 gUnknown_83E41D0:: @ 83E41D0
 	spr_template 10206, 10206, gOamData_83AC9D0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80A97E8
 
@@ -1287,7 +1495,9 @@ gUnknown_83E41E8:: @ 83E41E8
 	spr_template 10210, 10210, gOamData_83AC9D0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80A9860
 
 gUnknown_83E4200:: @ 83E4200
-	.incbin "baserom.gba", 0x3E4200, 0x18
+	obj_rot_scal_anim_frame 10, -13, 0, 10
+	obj_rot_scal_anim_frame -10, 13, 0, 10
+	obj_rot_scal_anim_end
 
 gUnknown_83E4218:: @ 83E4218
 	spr_template 10216, 10216, gOamData_83AC9D0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80A9B40
@@ -1408,7 +1618,10 @@ gUnknown_83E43F8:: @ 83E43F8
 	spr_template 10215, 10215, gOamData_83AC9D8, gUnknown_83E43F0, NULL, gDummySpriteAffineAnimTable, sub_80AA708
 
 gUnknown_83E4410:: @ 83E4410
-	.incbin "baserom.gba", 0x3E4410, 0x20
+	obj_rot_scal_anim_frame -12, 8, 0, 4
+	obj_rot_scal_anim_frame 20, -20, 0, 4
+	obj_rot_scal_anim_frame -8, 12, 0, 4
+	obj_rot_scal_anim_end
 
 gUnknown_83E4430:: @ 83E4430
 	spr_template 10225, 10225, gOamData_83AC9D8, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80AA838
@@ -1452,7 +1665,10 @@ gUnknown_83E44DC:: @ 83E44DC
 	spr_template 10244, 10244, gOamData_83ACBE0, gDummySpriteAnimTable, NULL, gUnknown_83E44D4, sub_80AAAE4
 
 gUnknown_83E44F4:: @ 83E44F4
-	.incbin "baserom.gba", 0x3E44F4, 0x1380
+	.incbin "graphics/battle_anims/unk_83E4874.4bpp"
+
+gUnknown_83E4874::
+	.incbin "graphics/battle_anims/unk_83E4874.bin"
 
 gUnknown_83E5874:: @ 83E5874
 	obj_image_anim_frame 0, 2
@@ -1717,7 +1933,16 @@ gUnknown_83E5CA0:: @ 83E5CA0
 	spr_template 10029, 10029, gOamData_83AC9D8, gUnknown_83E5C50, NULL, gDummySpriteAffineAnimTable, sub_80AC990
 
 gUnknown_83E5CD0:: @ 83E5CD0
-	.incbin "baserom.gba", 0x3E5CD0, 0x2C
+	obj_image_anim_frame 0x0010, 6
+	obj_image_anim_frame 0x0020, 6
+	obj_image_anim_frame 0x0030, 6
+	obj_image_anim_jump 0
+
+gUnknown_83E5CE0::
+	.4byte gUnknown_83E5CD0
+
+gUnknown_83E5CE4::
+	spr_template 10029, 10029, gOamData_83AC9D8, gUnknown_83E5CE0, NULL, gDummySpriteAffineAnimTable, sub_80ACAA8
 
 gUnknown_83E5CFC:: @ 83E5CFC
 	obj_rot_scal_anim_frame 80, 80, 0, 0
@@ -1762,7 +1987,16 @@ gUnknown_83E5DB8:: @ 83E5DB8
 	.4byte gUnknown_83E5DAC
 
 gUnknown_83E5DBC:: @ 83E5DBC
-	.incbin "baserom.gba", 0x3E5DBC, 0x28
+	obj_rot_scal_anim_frame 0, 0, 0, 1
+	obj_rot_scal_anim_end
+
+gUnknown_83E5DCC::
+	obj_rot_scal_anim_frame 160, 160, 0, 0
+	obj_rot_scal_anim_end
+
+gUnknown_83E55DC::
+	.4byte gUnknown_83E5DBC
+    .4byte gUnknown_83E5DCC
 
 gUnknown_83E5DE4:: @ 83E5DE4
 	spr_template 10029, 10029, gOamData_83AC9D8, gUnknown_83E5DB8, NULL, gDummySpriteAffineAnimTable, sub_80ACDA8
@@ -1777,7 +2011,7 @@ gUnknown_83E5E2C:: @ 83E5E2C
 	spr_template 10201, 10201, gOamData_83AC9D0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80AD330
 
 gUnknown_83E5E44:: @ 83E5E44
-	.incbin "baserom.gba", 0x3E5E44, 0x1C
+	.2byte 0xfffe, 0xfffb, 0xffff, 0xffff, 0x0003, 0xfffa, 0x0004, 0xfffe, 0x0002, 0xfff8, 0xfffb, 0xfffb, 0x0004, 0xfff9
 
 gUnknown_83E5E60:: @ 83E5E60
 	spr_template 10201, 10201, gOamData_83AC9D8, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80AD454
@@ -1824,10 +2058,10 @@ gUnknown_83E5EE4:: @ 83E5EE4
 	spr_template 10232, 10232, gOamData_83AC9D8, gUnknown_83E5EE0, NULL, gDummySpriteAffineAnimTable, sub_80AD6F4
 
 gUnknown_83E5EFC:: @ 83E5EFC
-	.incbin "baserom.gba", 0x3E5EFC, 0x10
+	.byte 0xff, 0xff, 0x00, 0x01, 0x01, 0x00, 0x00, 0xff, 0xff, 0x01, 0x01, 0x00, 0x00, 0xff, 0x00, 0x01
 
 gUnknown_83E5F0C:: @ 83E5F0C
-	.incbin "baserom.gba", 0x3E5F0C, 0x10
+	.byte 0xff, 0x00, 0x01, 0x00, 0xff, 0x01, 0x00, 0xff, 0x00, 0x01, 0x00, 0xff, 0x00, 0x01, 0x00, 0x01
 
 gUnknown_83E5F1C:: @ 83E5F1C
 	obj_image_anim_frame 0, 5
@@ -1844,7 +2078,31 @@ gUnknown_83E5F38:: @ 83E5F38
 	spr_template 10037, 10037, gOamData_83AC9D8, gUnknown_83E5F34, NULL, gDummySpriteAffineAnimTable, sub_80ADBEC
 
 gUnknown_83E5F50:: @ 83E5F50
-	.incbin "baserom.gba", 0x3E5F50, 0x74
+	obj_rot_scal_anim_frame 256, 256, 0, 0
+	obj_rot_scal_anim_frame 0, 0, 0, 20
+	obj_rot_scal_anim_frame 0, 0, 240, 60
+	obj_rot_scal_anim_end
+
+gUnknown_83E5F70::
+	.4byte gUnknown_83E5F50
+
+gUnknown_83E5F74::
+	spr_template 10143, 10143, gOamData_83ACA38, gDummySpriteAnimTable, NULL, gUnknown_83E5F70, sub_80ADC58
+
+gUnknown_83E5F8C::
+	obj_image_anim_frame 0x0000, 5
+	obj_image_anim_frame 0x0010, 5
+	obj_image_anim_frame 0x0020, 5
+	obj_image_anim_frame 0x0030, 5
+	obj_image_anim_frame 0x0040, 5
+	obj_image_anim_frame 0x0050, 5
+	obj_image_anim_jump 0
+
+gUnknown_83E5FA8::
+	.4byte gUnknown_83E5F8C
+
+gUnknown_83E5FAC::
+	spr_template 10079, 10079, gOamData_83AC9D8, gUnknown_83E5FA8, NULL, gDummySpriteAffineAnimTable, sub_80ADCB8
 
 gUnknown_83E5FC4:: @ 83E5FC4
 	spr_template 10011, 10011, gOamData_83ACA30, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80ADD4C
@@ -1896,7 +2154,22 @@ gUnknown_83E60B8:: @ 83E60B8
 	spr_template 10173, 10173, gOamData_83AC9F8, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80AE470
 
 gUnknown_83E60D0:: @ 83E60D0
-	.incbin "baserom.gba", 0x3E60D0, 0x20
+	.byte 0x3a, 0xc4
+	.byte 0xc8, 0xdc
+	.byte 0x08, 0xc8
+	.byte 0xf0, 0x38
+	.byte 0x3a, 0xf6
+	.byte 0xc6, 0x0a
+	.byte 0x30, 0xee
+	.byte 0xf8, 0x38
+	.byte 0x10, 0xc8
+	.byte 0xc6, 0xd6
+	.byte 0x3a, 0x1e
+	.byte 0xd0, 0x28
+	.byte 0x0c, 0xd0
+	.byte 0x30, 0xf4
+	.byte 0xc8, 0x12
+	.byte 0x30, 0x30
 
 gUnknown_83E60F0:: @ 83E60F0
 	obj_image_anim_frame 3, 1
@@ -2006,7 +2279,19 @@ gUnknown_83E62A8:: @ 83E62A8
 	spr_template 10001, 10001, gOamData_83AC9C8, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80AEF60
 
 gUnknown_83E62C0:: @ 83E62C0
-	.incbin "baserom.gba", 0x3E62C0, 0x30
+	obj_image_anim_frame 0x0000, 5, OBJ_IMAGE_ANIM_H_FLIP
+	obj_image_anim_frame 0x0001, 5, OBJ_IMAGE_ANIM_H_FLIP
+	obj_image_anim_jump 0
+
+gUnknown_83E62CC::
+	.4byte gUnknown_83E62C0
+
+gUnknown_83E62D0::
+	spr_template 10141, 10141, gOamData_83AC9C8, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80AF108
+
+gUnknown_83E62E8::
+	obj_image_anim_frame 0, 1
+	obj_image_anim_end
 
 gUnknown_83E62F0:: @ 83E62F0
 	obj_image_anim_frame 4, 1
@@ -2030,7 +2315,7 @@ gUnknown_83E6310:: @ 83E6310
 	obj_image_anim_jump 0
 
 gUnknown_83E631C:: @ 83E631C
-	.incbin "baserom.gba", 0x3E631C, 0x4
+	.4byte gUnknown_83E62E8
 
 gUnknown_83E6320:: @ 83E6320
 	.4byte gUnknown_83E62F0
@@ -2128,19 +2413,28 @@ gUnknown_83E64BC:: @ 83E64BC
 	spr_template 10172, 10172, gOamData_83ACB18, gUnknown_83E64A0, NULL, gDummySpriteAffineAnimTable, sub_80AF914
 
 gUnknown_83E64D4:: @ 83E64D4
-	.incbin "baserom.gba", 0x3E64D4, 0x14
+	.byte 0x00, 0x01, 0x02, 0x02, 0x02, 0x02, 0x03, 0x04, 0x04, 0x04, 0x05, 0x06, 0x06, 0x06, 0x06, 0x07, 0x08, 0x08, 0x08, 0x09
 
 gUnknown_83E64E8:: @ 83E64E8
 	spr_template 10155, 10155, gOamData_83AC9D0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80AFD4C
 
 gUnknown_83E6500:: @ 83E6500
-	.incbin "baserom.gba", 0x3E6500, 0x14
+	.byte 0x00, 0x01, 0x01, 0x01, 0x01, 0x02, 0x02, 0x02, 0x02, 0x03, 0x03, 0x03, 0x03, 0x03, 0x04, 0x04, 0x04, 0x04, 0x04, 0x05
 
 gUnknown_83E6514:: @ 83E6514
 	spr_template 10172, 10172, gOamData_83ACB18, gUnknown_83E64A0, NULL, gDummySpriteAffineAnimTable, sub_80AFFD4
 
 gUnknown_83E652C:: @ 83E652C
-	.incbin "baserom.gba", 0x3E652C, 0x28
+	.2byte 0xe064, 0x2001
+	.2byte 0xe055, 0x0001
+	.2byte 0xe0f2, 0x1011
+	.2byte 0xe042, 0x1021
+	.2byte 0xe0b6, 0x0031
+	.2byte 0xe03c, 0x2001
+	.2byte 0xe0d6, 0x0011
+	.2byte 0xe071, 0x1001
+	.2byte 0xe0d2, 0x1031
+	.2byte 0xe026, 0x0021
 
 gUnknown_83E6554:: @ 83E6554
 	obj_rot_scal_anim_frame 256, 256, 0, 0
@@ -2469,4 +2763,3 @@ gUnknown_83E6AB8:: @ 83E6AB8
 
 gUnknown_83E6AD0:: @ 83E6AD0
 	spr_template 10155, 10155, gOamData_83ACB50, gUnknown_83E5A78, NULL, gUnknown_83E6AB4, sub_80B1838
-

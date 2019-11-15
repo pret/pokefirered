@@ -82,7 +82,7 @@ static const union AffineAnimCmd gUnknown_83E7900[] =
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd *const gUnknown_83E7910[] =
+const union AffineAnimCmd *const gUnknown_83E7910[] =
 {
     gUnknown_83E7890,
     gUnknown_83E78A0,

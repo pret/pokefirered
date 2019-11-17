@@ -2907,25 +2907,25 @@ gUnknown_8419D89:: @ 8419D89
 gUnknown_8419DCC:: @ 8419DCC
 	.string "OPTION$"
 
-gUnknown_8419DD3:: @ 0x8419DD3
+gText_TextSpeed:: @ 0x8419DD3
 	.string "TEXT SPEED$"
 
-gUnknown_8419DDE:: @ 0x8419DDE
+gText_BattleScene:: @ 0x8419DDE
 	.string "BATTLE SCENE$"
 
-gUnknown_8419DEB:: @ 0x8419DEB
+gText_BattleStyle:: @ 0x8419DEB
 	.string "BATTLE STYLE$"
 
-gUnknown_8419DF8:: @ 0x8419DF8
+gText_Sound:: @ 0x8419DF8
 	.string "SOUND$"
 
-gUnknown_8419DFE:: @ 0x8419DFE
+gText_ButtonMode:: @ 0x8419DFE
 	.string "BUTTON MODE$"
 
-gUnknown_8419E0A:: @ 0x8419E0A
+gText_Frame:: @ 0x8419E0A
 	.string "FRAME$"
 
-gUnknown_8419E10:: @ 0x8419E10
+gText_OptionMenuCancel:: @ 0x8419E10
 	.string "CANCEL$"
 
 gUnknown_8419E17:: @ 0x8419E17

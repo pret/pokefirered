@@ -741,4 +741,15 @@ extern const u8 gText_DecimalPoint[];
 // map_name_popup
 extern const u8 gUnknown_841D18D[];
 
+// options menu
+extern const u8 gText_TextSpeed[];
+extern const u8 gText_BattleScene[];
+extern const u8 gText_BattleStyle[];
+extern const u8 gText_Sound[];
+extern const u8 gText_ButtonMode[];
+extern const u8 gText_Frame[];
+extern const u8 gText_OptionMenuCancel[];
+extern const u8 gText_PickSwitchCancel[];
+
+
 #endif //GUARD_STRINGS_H

@@ -45,6 +45,3 @@ gUnknown_841EF28:: @ 841EF28
 	.2byte  2, 0x50
 	.2byte  3, 0x30
 	.2byte  4, 0x10
-
-gUnknown_841EF48::
-	.incbin "graphics/unknown/unk_841EF48.4bpp"

@@ -39,6 +39,65 @@ enum
     WIN_OPTIONS
 };
 
+/*
+static const struct WindowTemplate gUnknown_83CC2B8[] =    //sOptionMenuWinTemplates
+{
+    {
+        .bg = 1,
+        .tilemapLeft = 2,
+        .tilemapTop = 3,
+        .width = 26,
+        .height = 2,
+        .paletteNum = 1,
+        .baseBlock = 2
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 2,
+        .tilemapTop =7,
+        .width = 26,
+        .height = 12,
+        .paletteNum = 1,
+        .baseBlock = 0x36
+    },
+    DUMMY_WIN_TEMPLATE
+};
+static const struct BgTemplate gUnknown_83CC2D8[] =    //sOptionMenuBgTemplates
+{
+   {
+       .bg = 1,
+       .charBaseIndex = 1,
+       .mapBaseIndex = 30,
+       .screenSize = 0,
+       .paletteMode = 0,
+       .priority = 0,
+       .baseTile = 0
+   },
+   {
+       .bg = 0,
+       .charBaseIndex = 1,
+       .mapBaseIndex = 31,
+       .screenSize = 0,
+       .paletteMode = 0,
+       .priority = 1,
+       .baseTile = 0
+   }
+};
+
+
+static const u16 gUnknown_83CC304[MENUITEM_COUNT] = {3, 2, 2, 2, 3, 10, 0};    //sOptionsMenuItemCounts
+static const u8* gUnknown_83CC314[MENUITEM_COUNT] =     //sOptionMenuItemsNames
+{
+    [MENUITEM_TEXTSPEED]   = gText_TextSpeed,
+    [MENUITEM_BATTLESCENE] = gText_BattleScene,
+    [MENUITEM_BATTLESTYLE] = gText_BattleStyle,
+    [MENUITEM_SOUND]       = gText_Sound,
+    [MENUITEM_BUTTONMODE]  = gText_ButtonMode,
+    [MENUITEM_FRAMETYPE]   = gText_Frame,
+    [MENUITEM_CANCEL]      = gText_OptionMenuCancel,
+};
+*/
+
 //This file's functions
 static void sub_808835C(void);
 static void sub_8088374(void);
@@ -57,27 +116,27 @@ static void sub_8088B00(u8 taskId);
 static void sub_8088BD0(void);
 static void sub_8088C0C(void);
 static void sub_8088D8C(void);
-static void sub_8088DE0(u8 selection);
+static void sub_8088DE0(u16 selection);
 
-extern const u16 gUnknown_83CC304[];		//sOptionsMenuItemCounts
-extern const struct BgTemplate gUnknown_83CC2D8[];
-extern const u8 gUnknown_83CC360[];
-extern const u16 gUnknown_83CC2E4[];
-extern const struct WindowTemplate gUnknown_83CC2B8[];
-extern const u8 gUnknown_83CC363[];
-extern const u8 gUnknown_83CC330[];
-extern const u8 gUnknown_83CC33C[];
-extern const u8 gUnknown_83CC344[];
-extern const u8 gUnknown_83CC34C[];
-extern const u8 gUnknown_83CC354[];
-extern const u8 gUnknown_8419E52[];
-extern const u8 gUnknown_8419DCC[];
+extern const struct WindowTemplate gUnknown_83CC2B8[3];
+extern const struct BgTemplate gUnknown_83CC2D8[2];
+extern const u16 gUnknown_83CC2E4[0x20];
+extern const u16 gUnknown_83CC304[MENUITEM_COUNT];        //sOptionsMenuItemCounts
 extern const u8* gUnknown_83CC314[MENUITEM_COUNT];
+extern const u8 gUnknown_83CC330[0xC];
+extern const u8 gUnknown_83CC33C[0x8];
+extern const u8 gUnknown_83CC344[0x8];
+extern const u8 gUnknown_83CC34C[0x8];
+extern const u8 gUnknown_83CC354[0xC];
+extern const u8 gUnknown_83CC360[0x3];
+extern const u8 gUnknown_83CC363[0x3];
+extern const u8 gUnknown_8419DCC[];
+extern const u8 gUnknown_8419E52[];
 extern const u8 gUnknown_8419E57[];
 
 struct OptionsMenu
 {
-    /*0x00*/ u16 option[7];
+    /*0x00*/ u16 option[7];    //0,2,4,6,8,a,c
     /*0x0E*/ u16 unkE;
     /*0x10*/ u8 state3;
     /*0x11*/ u8 state;
@@ -110,7 +169,7 @@ static void sub_8088374(void)
 //sub_8088388
 void CB2_OptionsMenuFromStartMenu(void)
 {
-    int i;
+    u8 i;
     
     if (gMain.savedCallback == NULL)
         gMain.savedCallback = CB2_ReturnToStartMenu;
@@ -126,10 +185,10 @@ void CB2_OptionsMenuFromStartMenu(void)
     sOptionsMenu->option[MENUITEM_BUTTONMODE] = gSaveBlock2Ptr->optionsButtonMode;
     sOptionsMenu->option[MENUITEM_FRAMETYPE] = gSaveBlock2Ptr->optionsWindowFrameType;
     
-    for (i = 0; i < MENUITEM_COUNT-2; i++)
+    for (i = 0; i < MENUITEM_COUNT-1; i++)
     {
-        if (sOptionsMenu->option[i] > gUnknown_83CC304[i]-1)
-            sOptionsMenu->option[i] = 0;        
+        if (sOptionsMenu->option[i] > (gUnknown_83CC304[i])-1)
+            sOptionsMenu->option[i] = 0;
     }
     HelpSystem_SetSomeVariable2(0xD);
     SetMainCallback2(sub_8088454);
@@ -153,55 +212,46 @@ static void sub_8088444(void)
 //sub_8088454
 static void sub_8088454(void)
 {
-    int i;
-    switch (sOptionsMenu->state)
+    u8 i, state;
+    state = sOptionsMenu->state;
+    switch (state)
     {
     case 0:
         sub_8088430();
-        sOptionsMenu->state++;
         break;
     case 1:
         sub_8088530();
-        sOptionsMenu->state++;
         break;
     case 2:
         sub_80886D4();
-        sOptionsMenu->state++;
         break;
     case 3:
-        if (!(sub_80886F0()));
+        if (sub_80886F0() != TRUE)    //silly matching quirk
             return;
-        sOptionsMenu->state++;
         break;
     case 4:
         sub_8088BD0();
-        sOptionsMenu->state++;
         break;
     case 5:
         sub_8088C0C();
-        sOptionsMenu->state++;
         break;
     case 6:
         sub_8088D8C();
-        sOptionsMenu->state++;
         break;
     case 7:
         for (i = 0; i < MENUITEM_COUNT; i++)
             sub_80889A8(i);
-        sOptionsMenu->state++;
         break;
     case 8:
         sub_8088DE0(sOptionsMenu->unkE);
-        sOptionsMenu->state++;
         break;
     case 9:
         sub_8088680();
-        sOptionsMenu->state++;
         break;
     default:
         sub_8088514();
-        return;
     }
+    sOptionsMenu->state++;
 }
 
 //sub_8088514
@@ -217,12 +267,12 @@ static void sub_8088530(void)
 {
     void * dest = (void *) VRAM;
     DmaClearLarge16(3, dest, VRAM_SIZE, 0x1000);
-	
+    
     DmaClear32(3, (void *)OAM, OAM_SIZE);
     DmaClear16(3, (void *)PLTT, PLTT_SIZE);    
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, gUnknown_83CC2D8, 3);	//3 -> ARRAY_COUNT(gUnknown_83CC2D8)
+    InitBgsFromTemplates(0, gUnknown_83CC2D8, 3);    //3 -> ARRAY_COUNT(gUnknown_83CC2D8)
     ChangeBgX(0, 0, 0);
     ChangeBgY(0, 0, 0);
     ChangeBgX(1, 0, 0);
@@ -233,10 +283,10 @@ static void sub_8088530(void)
     ChangeBgY(3, 0, 0);
     InitWindows(gUnknown_83CC2B8);
     DeactivateAllTextPrinters();
-    SetGpuReg(REG_OFFSET_BLDCNT, 193);
+    SetGpuReg(REG_OFFSET_BLDCNT, 0xC1);
     SetGpuReg(REG_OFFSET_BLDY, 2);
     SetGpuReg(REG_OFFSET_WININ, 1);
-    SetGpuReg(REG_OFFSET_WINOUT, 27);
+    SetGpuReg(REG_OFFSET_WINOUT, 0x27);
     SetGpuReg(0, 0x3040);
     ShowBg(0);
     ShowBg(1);
@@ -248,7 +298,7 @@ static void sub_8088680(void)
 {
     s32 x;
     x = 0xE4 - GetStringWidth(0, gUnknown_8419E57, 0);
-    FillWindowPixelBuffer(WIN_OPTIONS, 0xFF); 
+    FillWindowPixelBuffer(2, 0xFF); 
     AddTextPrinterParameterized3(2, 0, x, 0, gUnknown_83CC360, 0, gUnknown_8419E57);
     PutWindowTilemap(2);
     CopyWindowToVram(2, 3);
@@ -271,10 +321,10 @@ static bool8 sub_80886F0(void)
     switch (sOptionsMenu->state2)
     {
     case 0:
-        LoadBgTiles(1, GetUserFrameGraphicsInfo(sOptionsMenu->option[6])->tiles, 0x120, 0x1AA);
+        LoadBgTiles(1, GetUserFrameGraphicsInfo(sOptionsMenu->option[MENUITEM_FRAMETYPE])->tiles, 0x120, 0x1AA);
         break;
     case 1:
-        LoadPalette(GetUserFrameGraphicsInfo(sOptionsMenu->option[6])->palette, 0x20, 0x20);
+        LoadPalette(GetUserFrameGraphicsInfo(sOptionsMenu->option[MENUITEM_FRAMETYPE])->palette, 0x20, 0x20);
         break;
     case 2:
         LoadPalette(gUnknown_83CC2E4, 0x10, 0x20);
@@ -291,72 +341,228 @@ static bool8 sub_80886F0(void)
 }
 
 
-//sub_8088780
+
+// I could not get this function to match. GOTO statements weren't even compiling correctly.
+#ifdef NONMATCHING
 static void sub_8088780(u8 taskId)
 {
+    u8 v2, v5;
+    struct OptionsMenu v4;
+    
     switch (sOptionsMenu->state3)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
+        BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
         sub_8088444();
         sOptionsMenu->state3++;
         break;
     case 2:
-        if (sub_80BF72C)
+        if (sub_80BF72C() == TRUE)
             return;
         switch (sub_80888C0())
         {
-        case 0:
-            return;
         case 1:
             sOptionsMenu->state3++;
             break;
         case 2:
-            LoadBgTiles(1, GetUserFrameGraphicsInfo(sOptionsMenu->option[6])->tiles, 0x120, 0x1AA);
-            LoadPalette(GetUserFrameGraphicsInfo(sOptionsMenu->option[6])->palette, 0x20, 0x20);
+            LoadBgTiles(1, GetUserFrameGraphicsInfo(sOptionsMenu->option[MENUITEM_FRAMETYPE])->tiles, 0x120, 0x1AA);
+            LoadPalette(GetUserFrameGraphicsInfo(sOptionsMenu->option[MENUITEM_FRAMETYPE])->palette, 0x20, 0x20);
             sub_80889A8(sOptionsMenu->unkE);
-            return;
+            sOptionsMenu->state3++;
+            break;
         case 3:
             sub_8088DE0(sOptionsMenu->unkE);
-            return;
+            break;
         case 4:
             sub_80889A8(sOptionsMenu->unkE);
-            return;
+            sOptionsMenu->state3++;
+            break;
         default:
             return;
         }
     case 3:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
+        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
         sOptionsMenu->state3++;
-        break;
     case 1:
     case 4:
         if (gPaletteFade.active)
             return;
         sOptionsMenu->state3++;
-        return;
     case 5:
         sub_8088B00(taskId);
-        return;
+        break;
     default:
         return;
     }
 }
-
-
+#else
+NAKED
+static void sub_8088780(u8 taskId)
+{
+    asm_unified("\tpush {r4,lr}\n"
+                "\tsub sp, 0x4\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r2, r0, 24\n"
+                "\tldr r1, _080887A0 @ =sOptionsMenu\n"
+                "\tldr r0, [r1]\n"
+                "\tldrb r0, [r0, 0x10]\n"
+                "\tadds r3, r1, 0\n"
+                "\tcmp r0, 0x5\n"
+                "\tbls _08088796\n"
+                "\tb _080888B6\n"
+                "_08088796:\n"
+                "\tlsls r0, 2\n"
+                "\tldr r1, _080887A4 @ =_080887A8\n"
+                "\tadds r0, r1\n"
+                "\tldr r0, [r0]\n"
+                "\tmov pc, r0\n"
+                "\t.align 2, 0\n"
+                "_080887A0: .4byte sOptionsMenu\n"
+                "_080887A4: .4byte _080887A8\n"
+                "\t.align 2, 0\n"
+                "_080887A8:\n"
+                "\t.4byte _080887C0\n"
+                "\t.4byte _08088894\n"
+                "\t.4byte _080887E0\n"
+                "\t.4byte _08088878\n"
+                "\t.4byte _08088894\n"
+                "\t.4byte _080888B0\n"
+                "_080887C0:\n"
+                "\tmovs r0, 0x1\n"
+                "\tnegs r0, r0\n"
+                "\tmovs r1, 0\n"
+                "\tstr r1, [sp]\n"
+                "\tmovs r2, 0x10\n"
+                "\tmovs r3, 0\n"
+                "\tbl BeginNormalPaletteFade\n"
+                "\tbl sub_8088444\n"
+                "\tldr r0, _080887DC @ =sOptionsMenu\n"
+                "\tldr r1, [r0]\n"
+                "\tb _080888A2\n"
+                "\t.align 2, 0\n"
+                "_080887DC: .4byte sOptionsMenu\n"
+                "_080887E0:\n"
+                "\tbl sub_80BF72C\n"
+                "\tcmp r0, 0x1\n"
+                "\tbeq _080888B6\n"
+                "\tbl sub_80888C0\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r0, 24\n"
+                "\tcmp r0, 0x4\n"
+                "\tbhi _080888B6\n"
+                "\tlsls r0, 2\n"
+                "\tldr r1, _08088800 @ =_08088804\n"
+                "\tadds r0, r1\n"
+                "\tldr r0, [r0]\n"
+                "\tmov pc, r0\n"
+                "\t.align 2, 0\n"
+                "_08088800: .4byte _08088804\n"
+                "\t.align 2, 0\n"
+                "_08088804:\n"
+                "\t.4byte _080888B6\n"
+                "\t.4byte _08088818\n"
+                "\t.4byte _08088824\n"
+                "\t.4byte _08088858\n"
+                "\t.4byte _08088868\n"
+                "_08088818:\n"
+                "\tldr r0, _08088820 @ =sOptionsMenu\n"
+                "\tldr r1, [r0]\n"
+                "\tb _080888A2\n"
+                "\t.align 2, 0\n"
+                "_08088820: .4byte sOptionsMenu\n"
+                "_08088824:\n"
+                "\tldr r4, _08088854 @ =sOptionsMenu\n"
+                "\tldr r0, [r4]\n"
+                "\tldrb r0, [r0, 0xA]\n"
+                "\tbl GetUserFrameGraphicsInfo\n"
+                "\tldr r1, [r0]\n"
+                "\tmovs r2, 0x90\n"
+                "\tlsls r2, 1\n"
+                "\tmovs r3, 0xD5\n"
+                "\tlsls r3, 1\n"
+                "\tmovs r0, 0x1\n"
+                "\tbl LoadBgTiles\n"
+                "\tldr r0, [r4]\n"
+                "\tldrb r0, [r0, 0xA]\n"
+                "\tbl GetUserFrameGraphicsInfo\n"
+                "\tldr r0, [r0, 0x4]\n"
+                "\tmovs r1, 0x20\n"
+                "\tmovs r2, 0x20\n"
+                "\tbl LoadPalette\n"
+                "\tldr r0, [r4]\n"
+                "\tb _0808886C\n"
+                "\t.align 2, 0\n"
+                "_08088854: .4byte sOptionsMenu\n"
+                "_08088858:\n"
+                "\tldr r0, _08088864 @ =sOptionsMenu\n"
+                "\tldr r0, [r0]\n"
+                "\tldrh r0, [r0, 0xE]\n"
+                "\tbl sub_8088DE0\n"
+                "\tb _080888B6\n"
+                "\t.align 2, 0\n"
+                "_08088864: .4byte sOptionsMenu\n"
+                "_08088868:\n"
+                "\tldr r0, _08088874 @ =sOptionsMenu\n"
+                "\tldr r0, [r0]\n"
+                "_0808886C:\n"
+                "\tldrb r0, [r0, 0xE]\n"
+                "\tbl sub_80889A8\n"
+                "\tb _080888B6\n"
+                "\t.align 2, 0\n"
+                "_08088874: .4byte sOptionsMenu\n"
+                "_08088878:\n"
+                "\tmovs r0, 0x1\n"
+                "\tnegs r0, r0\n"
+                "\tmovs r1, 0\n"
+                "\tstr r1, [sp]\n"
+                "\tmovs r2, 0\n"
+                "\tmovs r3, 0x10\n"
+                "\tbl BeginNormalPaletteFade\n"
+                "\tldr r0, _08088890 @ =sOptionsMenu\n"
+                "\tldr r1, [r0]\n"
+                "\tb _080888A2\n"
+                "\t.align 2, 0\n"
+                "_08088890: .4byte sOptionsMenu\n"
+                "_08088894:\n"
+                "\tldr r0, _080888AC @ =gPaletteFade\n"
+                "\tldrb r1, [r0, 0x7]\n"
+                "\tmovs r0, 0x80\n"
+                "\tands r0, r1\n"
+                "\tcmp r0, 0\n"
+                "\tbne _080888B6\n"
+                "\tldr r1, [r3]\n"
+                "_080888A2:\n"
+                "\tldrb r0, [r1, 0x10]\n"
+                "\tadds r0, 0x1\n"
+                "\tstrb r0, [r1, 0x10]\n"
+                "\tb _080888B6\n"
+                "\t.align 2, 0\n"
+                "_080888AC: .4byte gPaletteFade\n"
+                "_080888B0:\n"
+                "\tadds r0, r2, 0\n"
+                "\tbl sub_8088B00\n"
+                "_080888B6:\n"
+                "\tadd sp, 0x4\n"
+                "\tpop {r4}\n"
+                "\tpop {r0}\n"
+                "\tbx r0\n");
+}
+#endif
+    
+    
+    
 //OptionsMenu_ProcessInput
 static u8 sub_80888C0(void)
 { 
-    u16 current, selection;
+    u16 current;
+    u16* curr;
     if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
     {
-		selection = 2 * sOptionsMenu->unkE;
-		current = sOptionsMenu->option[selection];
-		
-		if (current == gUnknown_83CC304[selection] - 1)
-            sOptionsMenu->option[selection] = 0;
+        current = sOptionsMenu->option[(sOptionsMenu->unkE)];
+        if (current == (gUnknown_83CC304[sOptionsMenu->unkE] - 1))
+            sOptionsMenu->option[sOptionsMenu->unkE] = 0;
         else
-            sOptionsMenu->option[selection] = current + 1;
+            sOptionsMenu->option[sOptionsMenu->unkE] = current + 1;
         if (sOptionsMenu->unkE == MENUITEM_FRAMETYPE)
             return 2;
         else
@@ -364,12 +570,12 @@ static u8 sub_80888C0(void)
     }
     else if (gMain.newAndRepeatedKeys & DPAD_LEFT)
     {
-        selection = 2*sOptionsMenu->unkE;
-		current = sOptionsMenu->option[selection];
-		if (current == 0)
-            sOptionsMenu->option[selection] = gUnknown_83CC304[selection] - 1;
+        curr = &sOptionsMenu->option[sOptionsMenu->unkE];
+        if (*curr == 0)
+            *curr = gUnknown_83CC304[sOptionsMenu->unkE] - 1;
         else
-            sOptionsMenu->option[selection] = current - 1;
+            --*(curr);
+        
         if (sOptionsMenu->unkE == MENUITEM_FRAMETYPE)
             return 2;
         else
@@ -377,20 +583,18 @@ static u8 sub_80888C0(void)
     }
     else if (gMain.newAndRepeatedKeys & DPAD_UP)
     {
-        selection = sOptionsMenu->unkE;
-		if (selection == MENUITEM_TEXTSPEED)
+        if (sOptionsMenu->unkE == MENUITEM_TEXTSPEED)
             sOptionsMenu->unkE = MENUITEM_CANCEL;
         else
-            sOptionsMenu->unkE = selection - 1;
+            sOptionsMenu->unkE = sOptionsMenu->unkE - 1;
         return 3;        
     }
     else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
     {
-        selection = sOptionsMenu->unkE;
-		if (selection == MENUITEM_CANCEL)
+        if (sOptionsMenu->unkE == MENUITEM_CANCEL)
             sOptionsMenu->unkE = MENUITEM_TEXTSPEED;
         else
-            sOptionsMenu->unkE = selection + 1;
+            sOptionsMenu->unkE = sOptionsMenu->unkE + 1;
         return 3;
     }
     else if ((gMain.newKeys & B_BUTTON) || (gMain.newKeys & A_BUTTON))
@@ -403,85 +607,22 @@ static u8 sub_80888C0(void)
     }
 }
 
-/*
-// must match with goto :( 
-bool sub_80888C0()
-{
-    int v0; // r0@2
-    _WORD *v1; // r3@2
-    int v2; // r4@2
-    __int16 v3; // r0@3
-    int v4; // r3@8
-    __int16 v5; // r0@8
-    int v7; // r1@14
-    signed __int16 v8; // r0@15
-    int v9; // r0@18
-
-    if (gMain.buttons4_new_and_keyrepeat & DPAD_RIGHT)
-    {
-        v0 = 2 * *(_WORD *)(sOptionsMenu + 14);
-        v1 = (_WORD *)(sOptionsMenu + v0);
-        v2 = *(_WORD *)(sOptionsMenu + v0);
-        if ( v2 == *(_WORD *)((char *)&sOptionsMenuItemCounts + v0) - 1 )
-            v3 = 0;
-        else
-            v3 = v2 + 1;
-        *v1 = v3;
-        if ( *(_WORD *)(sOptionsMenu + 14) != 5 )
-            return 4;
-        return 2;
-    }
-    if ( gMain.buttons4_new_and_keyrepeat & DPAD_LEFT )
-    {
-        v4 = 2 * *(_WORD *)(sOptionsMenu + 14);
-        v5 = *(_WORD *)(sOptionsMenu + v4);
-        if ( !*(_WORD *)(sOptionsMenu + v4) )
-            v5 = *(_WORD *)((char *)&sOptionsMenuItemCounts + v4);
-        *(_WORD *)(sOptionsMenu + v4) = v5 - 1;
-        if ( *(_WORD *)(sOptionsMenu + 14) != 5 )
-            return 4;
-        return 2;
-    }
-    if ( gMain.buttons4_new_and_keyrepeat & 0x40 )
-    {
-        v7 = sOptionsMenu;
-        if ( *(_WORD *)(sOptionsMenu + 14) )
-            v8 = *(_WORD *)(sOptionsMenu + 14) - 1;
-        else
-            v8 = 6;
-        goto LABEL_21;
-    }
-    if ( gMain.buttons4_new_and_keyrepeat & 0x80 )
-    {
-        v7 = sOptionsMenu;
-        v9 = *(_WORD *)(sOptionsMenu + 14);
-        if ( v9 == 6 )
-        {
-            *(_WORD *)(sOptionsMenu + 14) = 0;
-            return 3;
-        }
-        v8 = v9 + 1;
-LABEL_21:
-        *(_WORD *)(v7 + 14) = v8;
-        return 3;
-    }
-    return gMain.buttons3_new_remapped & 2 || gMain.buttons3_new_remapped & 1;
-}
-*/
-
 
 //sub_80889A8
+#ifdef NONMATCHING    // could not get it to match perfectly, no idea how they put so many vars on the stack
 static void sub_80889A8(u8 selection)
 {
     u8* dst;
     u8* str;
-	u8* v8;
+    u8* v8;
     u8 x, y;
+    u8** col;
     
-    x = 0x82;
-    memcpy(dst, gUnknown_83CC363, 3);
+    memcpy(&dst, gUnknown_83CC363, 3);
     y = ((GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) - 1) * selection) + 2;
+    x = 0x82;
     FillWindowPixelRect(1, 1, x, y, 0x46, GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT));
+
     switch (selection)
     {
     case MENUITEM_TEXTSPEED:
@@ -501,7 +642,7 @@ static void sub_80889A8(u8 selection)
         break;
     case MENUITEM_FRAMETYPE:
         StringCopy(str, gUnknown_8419E52);
-		ConvertIntToDecimalStringN(v8, sOptionsMenu->option[2*selection] + 1, 1, 2);
+        ConvertIntToDecimalStringN(v8, sOptionsMenu->option[2*selection] + 1, 1, 2);
         StringAppendN(str, v8, 3);
         AddTextPrinterParameterized3(1, 2, x, y, dst, -1, str);
         break;
@@ -511,6 +652,173 @@ static void sub_80889A8(u8 selection)
     PutWindowTilemap(1);
     CopyWindowToVram(1, 3);
 }
+#else
+NAKED
+static void sub_80889A8(u8 selection)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                "\tmov r7, r8\n"
+                "\tpush {r7}\n"
+                "\tsub sp, 0x30\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r5, r0, 24\n"
+                "\tadd r4, sp, 0x2C\n"
+                "\tldr r1, _08088A08 @ =gUnknown_83CC363\n"
+                "\tadds r0, r4, 0\n"
+                "\tmovs r2, 0x3\n"
+                "\tbl memcpy\n"
+                "\tmovs r0, 0x82\n"
+                "\tmov r8, r0\n"
+                "\tmovs r0, 0x2\n"
+                "\tmovs r1, 0x1\n"
+                "\tbl GetFontAttribute\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r0, 24\n"
+                "\tsubs r0, 0x1\n"
+                "\tmuls r0, r5\n"
+                "\tadds r0, 0x2\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r7, r0, 24\n"
+                "\tmovs r0, 0x2\n"
+                "\tmovs r1, 0x1\n"
+                "\tbl GetFontAttribute\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r0, 24\n"
+                "\tmovs r1, 0x46\n"
+                "\tstr r1, [sp]\n"
+                "\tstr r0, [sp, 0x4]\n"
+                "\tmovs r0, 0x1\n"
+                "\tmovs r1, 0x1\n"
+                "\tmovs r2, 0x82\n"
+                "\tadds r3, r7, 0\n"
+                "\tbl FillWindowPixelRect\n"
+                "\tadds r6, r4, 0\n"
+                "\tcmp r5, 0x5\n"
+                "\tbhi _08088ADE\n"
+                "\tlsls r0, r5, 2\n"
+                "\tldr r1, _08088A0C @ =_08088A10\n"
+                "\tadds r0, r1\n"
+                "\tldr r0, [r0]\n"
+                "\tmov pc, r0\n"
+                "\t.align 2, 0\n"
+                "_08088A08: .4byte gUnknown_83CC363\n"
+                "_08088A0C: .4byte _08088A10\n"
+                "\t.align 2, 0\n"
+                "_08088A10:\n"
+                "\t.4byte _08088A28\n"
+                "\t.4byte _08088A38\n"
+                "\t.4byte _08088A48\n"
+                "\t.4byte _08088A58\n"
+                "\t.4byte _08088A68\n"
+                "\t.4byte _08088A9C\n"
+                "_08088A28:\n"
+                "\tstr r6, [sp]\n"
+                "\tmovs r0, 0x1\n"
+                "\tnegs r0, r0\n"
+                "\tstr r0, [sp, 0x4]\n"
+                "\tldr r2, _08088A34 @ =gUnknown_83CC330\n"
+                "\tb _08088A72\n"
+                "\t.align 2, 0\n"
+                "_08088A34: .4byte gUnknown_83CC330\n"
+                "_08088A38:\n"
+                "\tstr r6, [sp]\n"
+                "\tmovs r0, 0x1\n"
+                "\tnegs r0, r0\n"
+                "\tstr r0, [sp, 0x4]\n"
+                "\tldr r2, _08088A44 @ =gUnknown_83CC33C\n"
+                "\tb _08088A72\n"
+                "\t.align 2, 0\n"
+                "_08088A44: .4byte gUnknown_83CC33C\n"
+                "_08088A48:\n"
+                "\tstr r6, [sp]\n"
+                "\tmovs r0, 0x1\n"
+                "\tnegs r0, r0\n"
+                "\tstr r0, [sp, 0x4]\n"
+                "\tldr r2, _08088A54 @ =gUnknown_83CC344\n"
+                "\tb _08088A72\n"
+                "\t.align 2, 0\n"
+                "_08088A54: .4byte gUnknown_83CC344\n"
+                "_08088A58:\n"
+                "\tstr r6, [sp]\n"
+                "\tmovs r0, 0x1\n"
+                "\tnegs r0, r0\n"
+                "\tstr r0, [sp, 0x4]\n"
+                "\tldr r2, _08088A64 @ =gUnknown_83CC34C\n"
+                "\tb _08088A72\n"
+                "\t.align 2, 0\n"
+                "_08088A64: .4byte gUnknown_83CC34C\n"
+                "_08088A68:\n"
+                "\tstr r6, [sp]\n"
+                "\tmovs r0, 0x1\n"
+                "\tnegs r0, r0\n"
+                "\tstr r0, [sp, 0x4]\n"
+                "\tldr r2, _08088A94 @ =gUnknown_83CC354\n"
+                "_08088A72:\n"
+                "\tldr r0, _08088A98 @ =sOptionsMenu\n"
+                "\tldr r0, [r0]\n"
+                "\tlsls r1, r5, 1\n"
+                "\tadds r0, r1\n"
+                "\tldrh r0, [r0]\n"
+                "\tlsls r0, 2\n"
+                "\tadds r0, r2\n"
+                "\tldr r0, [r0]\n"
+                "\tstr r0, [sp, 0x8]\n"
+                "\tmovs r0, 0x1\n"
+                "\tmovs r1, 0x2\n"
+                "\tmov r2, r8\n"
+                "\tadds r3, r7, 0\n"
+                "\tbl AddTextPrinterParameterized3\n"
+                "\tb _08088ADE\n"
+                "\t.align 2, 0\n"
+                "_08088A94: .4byte gUnknown_83CC354\n"
+                "_08088A98: .4byte sOptionsMenu\n"
+                "_08088A9C:\n"
+                "\tldr r1, _08088AF8 @ =gUnknown_8419E52\n"
+                "\tadd r0, sp, 0xC\n"
+                "\tbl StringCopy\n"
+                "\tadd r4, sp, 0x20\n"
+                "\tldr r0, _08088AFC @ =sOptionsMenu\n"
+                "\tldr r0, [r0]\n"
+                "\tlsls r1, r5, 1\n"
+                "\tadds r0, r1\n"
+                "\tldrh r1, [r0]\n"
+                "\tadds r1, 0x1\n"
+                "\tadds r0, r4, 0\n"
+                "\tmovs r2, 0x1\n"
+                "\tmovs r3, 0x2\n"
+                "\tbl ConvertIntToDecimalStringN\n"
+                "\tadd r0, sp, 0xC\n"
+                "\tadds r1, r4, 0\n"
+                "\tmovs r2, 0x3\n"
+                "\tbl StringAppendN\n"
+                "\tstr r6, [sp]\n"
+                "\tmovs r0, 0x1\n"
+                "\tnegs r0, r0\n"
+                "\tstr r0, [sp, 0x4]\n"
+                "\tadd r0, sp, 0xC\n"
+                "\tstr r0, [sp, 0x8]\n"
+                "\tmovs r0, 0x1\n"
+                "\tmovs r1, 0x2\n"
+                "\tmov r2, r8\n"
+                "\tadds r3, r7, 0\n"
+                "\tbl AddTextPrinterParameterized3\n"
+                "_08088ADE:\n"
+                "\tmovs r0, 0x1\n"
+                "\tbl PutWindowTilemap\n"
+                "\tmovs r0, 0x1\n"
+                "\tmovs r1, 0x3\n"
+                "\tbl CopyWindowToVram\n"
+                "\tadd sp, 0x30\n"
+                "\tpop {r3}\n"
+                "\tmov r8, r3\n"
+                "\tpop {r4-r7}\n"
+                "\tpop {r0}\n"
+                "\tbx r0\n"
+                "\t.align 2, 0\n"
+                "_08088AF8: .4byte gUnknown_8419E52\n"
+                "_08088AFC: .4byte sOptionsMenu\n");
+}
+#endif
 
 
 //sub_8088B00
@@ -520,20 +828,20 @@ static void sub_8088B00(u8 taskId)
     SetMainCallback2(gMain.savedCallback);
     FreeAllWindowBuffers();
     
-    gSaveBlock2Ptr->optionsTextSpeed = sOptionsMenu->option[MENUITEM_TEXTSPEED] & 0x7;
-    gSaveBlock2Ptr->optionsBattleSceneOff = sOptionsMenu->option[MENUITEM_BATTLESCENE] & 0x1;
-    gSaveBlock2Ptr->optionsBattleStyle = sOptionsMenu->option[MENUITEM_BATTLESTYLE] & 0x1;
-    gSaveBlock2Ptr->optionsSound = sOptionsMenu->option[MENUITEM_SOUND] & 0x1;
-    gSaveBlock2Ptr->optionsButtonMode = sOptionsMenu->option[MENUITEM_BUTTONMODE];
-    gSaveBlock2Ptr->optionsWindowFrameType = sOptionsMenu->option[MENUITEM_FRAMETYPE];
-    
+    gSaveBlock2Ptr->optionsTextSpeed = (u8) sOptionsMenu->option[MENUITEM_TEXTSPEED];
+    gSaveBlock2Ptr->optionsBattleSceneOff = (u8) sOptionsMenu->option[MENUITEM_BATTLESCENE];
+    gSaveBlock2Ptr->optionsBattleStyle = (u8) sOptionsMenu->option[MENUITEM_BATTLESTYLE];
+    gSaveBlock2Ptr->optionsSound = sOptionsMenu->option[MENUITEM_SOUND];
+    gSaveBlock2Ptr->optionsButtonMode = (u8) sOptionsMenu->option[MENUITEM_BUTTONMODE];
+    gSaveBlock2Ptr->optionsWindowFrameType = (u8) sOptionsMenu->option[MENUITEM_FRAMETYPE];
     SetPokemonCryStereo(gSaveBlock2Ptr->optionsSound);
-	Free(sOptionsMenu);
+    Free(sOptionsMenu);
     sOptionsMenu = NULL;
-	DestroyTask(taskId);
+    DestroyTask(taskId);
 }
 
-
+    
+    
 //sub_8088BD0
 static void sub_8088BD0(void)
 {
@@ -545,24 +853,28 @@ static void sub_8088BD0(void)
 
 
 //sub_8088C0C
+//double check
 static void sub_8088C0C(void)
 {
+    u8 h;
+    h = 2;
+    
     FillBgTilemapBufferRect(1, 0x1B3, 1, 2, 1, 1, 3);
     FillBgTilemapBufferRect(1, 0x1B4, 2, 2, 0x1B, 1, 3);
     FillBgTilemapBufferRect(1, 0x1B5, 0x1C, 2, 1, 1, 3);
-    FillBgTilemapBufferRect(1, 0x1B6, 1, 3, 1, 2, 3);
-    FillBgTilemapBufferRect(1, 0x1B8, 1, 0x1C, 1, 2, 3);
-	FillBgTilemapBufferRect(1, 0x1B9, 1, 5, 1, 1, 3);
+    FillBgTilemapBufferRect(1, 0x1B6, 1, 3, 1, h, 3);
+    FillBgTilemapBufferRect(1, 0x1B8, 1, 0x1C, 1, h, 3);
+    FillBgTilemapBufferRect(1, 0x1B9, 1, 5, 1, 1, 3);
     FillBgTilemapBufferRect(1, 0x1BA, 2, 5, 0x1B, 1, 3);
     FillBgTilemapBufferRect(1, 0x1BB, 0x1C, 5, 1, 1, 3);
-    FillBgTilemapBufferRect(1, 0x1AA, 1, 6, 1, 1, 2);
-    FillBgTilemapBufferRect(1, 0x1AB, 2, 6, 0x1A, 1, 2);
-    FillBgTilemapBufferRect(1, 0x1AC, 0x1C, 6, 1, 1, 2);
-    FillBgTilemapBufferRect(1, 0x1AD, 1, 7, 1, 0x10, 2);
-	FillBgTilemapBufferRect(1, 0x1AF, 0x1C, 7, 1, 0x10, 2);
-    FillBgTilemapBufferRect(1, 0x1B0, 1, 0x13, 1, 1, 2);
-    FillBgTilemapBufferRect(1, 0x1B1, 2, 0x13, 0x1A, 1, 2);
-    FillBgTilemapBufferRect(1, 0x1B2, 0x1C, 0x13, 1, 1, 2);
+    FillBgTilemapBufferRect(1, 0x1AA, 1, 6, 1, 1, h);
+    FillBgTilemapBufferRect(1, 0x1AB, 2, 6, 0x1A, 1, h);
+    FillBgTilemapBufferRect(1, 0x1AC, 0x1C, 6, 1, 1, h);
+    FillBgTilemapBufferRect(1, 0x1AD, 1, 7, 1, 0x10, h);
+    FillBgTilemapBufferRect(1, 0x1AF, 0x1C, 7, 1, 0x10, h);
+    FillBgTilemapBufferRect(1, 0x1B0, 1, 0x13, 1, 1, h);
+    FillBgTilemapBufferRect(1, 0x1B1, 2, 0x13, 0x1A, 1, h);
+    FillBgTilemapBufferRect(1, 0x1B2, 0x1C, 0x13, 1, 1, h);
     CopyBgTilemapBufferToVram(1);
 }
 
@@ -571,20 +883,25 @@ static void sub_8088C0C(void)
 static void sub_8088D8C(void)
 {
     int i;
-    u8 attr;
+    u8 y;
     
     FillWindowPixelBuffer(1, 0x11);
     
     for (i = 0; i < MENUITEM_COUNT; i++)
     {
-        attr = (((GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT))*i) + 2) - i;
-        AddTextPrinterParameterized(1, 2, gUnknown_83CC314[i], 8, attr, 0xFF, 0);
+        //AddTextPrinterParameterized(1, 2, gUnknown_83CC314[i], 8, (u8) ((i*(GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT))) + 2) - i, 0xFF, 0);	
+			//gets registers right, but an lsl/lsr 0x18 after GetFontAttribute that shouldn't be there
+		y = i*(GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT));
+		y += 2;
+		y -= i;
+        AddTextPrinterParameterized(1, 2, gUnknown_83CC314[i], 8, y, 0xFF, 0);
+        
     }
 }
 
 
 //sub_8088DE0
-static void sub_8088DE0(u8 selection)
+static void sub_8088DE0(u16 selection)
 {
     u8 attr;
     attr = GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT);

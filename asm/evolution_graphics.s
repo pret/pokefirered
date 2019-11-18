@@ -5,6 +5,11 @@
 
 	.text
 
+	thumb_func_start nullsub_85
+nullsub_85: @ 80F594C
+	bx lr
+	thumb_func_end nullsub_85
+
 	thumb_func_start SetEvoSparklesMatrices
 SetEvoSparklesMatrices: @ 80F5950
 	push {r4,r5,lr}

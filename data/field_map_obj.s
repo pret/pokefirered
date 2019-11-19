@@ -3,19 +3,24 @@
 	.section .rodata
 	.align 2
 gUnknown_835B934:: @ 835B934
-	.incbin "baserom.gba", 0x35B934, 0x10
+	.byte 0x01, 0x01, 0x06, 0x07, 0x08, 0x09, 0x06, 0x07, 0x08, 0x09, 0x0b, 0x0b, 0x00, 0x00, 0x00, 0x00
 
 gUnknown_835B944:: @ 835B944
-	.incbin "baserom.gba", 0x35B944, 0x18
+	spr_template 0, 65535, gDummyOamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, ObjectCB_CameraObject
 
 gUnknown_835B95C:: @ 835B95C
-	.incbin "baserom.gba", 0x35B95C, 0xC
+	.4byte CameraObject_0
+	.4byte CameraObject_1
+	.4byte CameraObject_2
 
 gUnknown_835B968:: @ 835B968
 	.incbin "graphics/map_objects/0.gbapal"
 
 gUnknown_835B988::
-	.incbin "baserom.gba", 0x35B988, 0x1E0
+	.incbin "graphics/map_objects/unk_835B988.gbapal"
+
+gUnknown_835B9A0::
+	.space 0x1C0
 
 gUnknown_835BB68:: @ 835BB68
 	.incbin "graphics/map_objects/000.4bpp"

@@ -157,11 +157,11 @@ SECTIONS {
         asm/battle_anim_effects_1.o(.text);
         asm/battle_anim_effects_2.o(.text);
         asm/water.o(.text);
-        asm/fire.o(.text);
-        asm/electric.o(.text);
-        asm/ice.o(.text);
-        asm/fighting.o(.text);
-        asm/poison.o(.text);
+        src/fire.o(.text);
+        src/electric.o(.text);
+        src/ice.o(.text);
+        src/fighting.o(.text);
+        src/poison.o(.text);
         src/flying.o(.text);
         src/psychic.o(.text);
         src/bug.o(.text);
@@ -276,8 +276,8 @@ SECTIONS {
         src/text_window.o(.text);
         src/quest_log_8150454.o(.text);
         asm/dodrio_berry_picking.o(.text);
-        asm/battle_controller_pokedude.o(.text);
-        src/unk_8159F40.o(.text);
+        src/battle_controller_pokedude.o(.text);
+        src/quest_log_815A008.o(.text);
         src/dodrio_berry_picking_2.o(.text);
         asm/dodrio_berry_picking_2.o(.text);
         src/teachy_tv.o(.text);
@@ -448,6 +448,11 @@ SECTIONS {
         src/pokemon_size_record.o(.rodata);
         src/item_use.o(.rodata);
         data/battle_anim_effects_misc.o(.rodata);
+        src/fire.o(.rodata);
+        src/electric.o(.rodata);
+        src/ice.o(.rodata);
+        src/fighting.o(.rodata);
+        src/poison.o(.rodata);
         src/flying.o(.rodata);
         src/psychic.o(.rodata);
         src/bug.o(.rodata);
@@ -547,7 +552,7 @@ SECTIONS {
         src/text_window_graphics.o(.rodata);
         src/quest_log_8150454.o(.rodata);
         data/data_8471F00.o(.rodata);
-        src/unk_8159F40.o(.rodata);
+        src/battle_controller_pokedude.o(.rodata);
         src/teachy_tv.o(.rodata);
         src/unk_815C980.o(.rodata);
         data/data_8471F00.o(.rodata.8479668);

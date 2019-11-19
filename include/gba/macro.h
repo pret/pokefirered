@@ -110,12 +110,12 @@
     u32 _size = size;                                     \
     while (1)                                             \
     {                                                     \
-        DmaFill##bit(dmaNum, 0, dest, (block));       \
-        dest += (block);                                 \
+        DmaFill##bit(dmaNum, 0, dest, (block));           \
+        dest += (block);                                  \
         _size -= (block);                                 \
         if (_size <= (block))                             \
         {                                                 \
-            DmaFill##bit(dmaNum, 0, dest, _size);     \
+            DmaFill##bit(dmaNum, 0, dest, _size);         \
             break;                                        \
         }                                                 \
     }                                                     \
@@ -123,16 +123,16 @@
 
 #define DmaFillLarge(dmaNum, value, dest, size, block, bit) \
 {                                                           \
-    void *_dest = (void *)dest;                                     \
+    void *_dest = (void *)dest;                             \
     u32 _size = size;                                       \
     while (1)                                               \
     {                                                       \
-        DmaFill##bit(dmaNum, value, _dest, (block));       \
+        DmaFill##bit(dmaNum, value, _dest, (block));        \
         _dest += (block);                                   \
         _size -= (block);                                   \
         if (_size <= (block))                               \
         {                                                   \
-            DmaFill##bit(dmaNum, value, _dest, _size);     \
+            DmaFill##bit(dmaNum, value, _dest, _size);      \
             break;                                          \
         }                                                   \
     }                                                       \
@@ -162,7 +162,7 @@
 
 #define DmaFillDefvars(dmaNum, value, dest, size, bit) \
 {                                                      \
-    void *_dest = (void *)dest;                                \
+    void *_dest = (void *)dest;                        \
     u32 _size = size;                                  \
     DmaFill##bit(dmaNum, value, _dest, _size);         \
 }

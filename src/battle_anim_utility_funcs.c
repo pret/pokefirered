@@ -309,7 +309,7 @@ void sub_80BACEC(u8 taskId)
         species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
     else
         species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
-    spriteId = GetAnimBattlerSpriteId(0);
+    spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     newSpriteId = sub_8076E34(gBattleAnimAttacker, spriteId, species);
     sub_80752A0(&animBgData);
     AnimLoadCompressedBgTilemap(animBgData.bgId, gFile_graphics_battle_anims_masks_curse_tilemap);
@@ -354,7 +354,7 @@ static void sub_80BAF38(u8 taskId)
             SetGpuReg(REG_OFFSET_DISPCNT, GetGpuReg(REG_OFFSET_DISPCNT) ^ DISPCNT_OBJWIN_ON);
             SetGpuReg(REG_OFFSET_BLDCNT, 0);
             SetGpuReg(REG_OFFSET_BLDALPHA, 0);
-            sprite = &gSprites[GetAnimBattlerSpriteId(0)]; // unused
+            sprite = &gSprites[GetAnimBattlerSpriteId(ANIM_ATTACKER)]; // unused
             sprite = &gSprites[gTasks[taskId].data[0]];
             DestroySprite(sprite);
             sub_80752A0(&animBgData);

@@ -25,7 +25,7 @@ gUnknown_83C2D00:: @ 83C2D00
 gUnknown_83C2D20:: @ 83C2D20
 	.incbin "baserom.gba", 0x3C2D20, 0x820
 
-gUnknown_83C3540:: @ 83C3540
+gWeatherFog1Tiles:: @ 83C3540
 	.incbin "baserom.gba", 0x3C3540, 0x3080
 
 gUnknown_83C65C0:: @ 83C65C0

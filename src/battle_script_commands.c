@@ -7064,7 +7064,7 @@ static void atk8F_forcerandomswitch(void)
         u8 valid;
         u8 val;
 
-        if (!GetBattlerSide(gBattlerTarget))
+        if (GetBattlerSide(gBattlerTarget) == B_SIDE_PLAYER)
             party = gPlayerParty;
         else
             party = gEnemyParty;

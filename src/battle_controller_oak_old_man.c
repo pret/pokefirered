@@ -181,7 +181,7 @@ static void OakOldManBufferRunCommand(void)
 {
     if (gBattleControllerExecFlags & gBitTable[gActiveBattler])
     {
-        if (gBattleBufferA[gActiveBattler][0] < ARRAY_COUNT(sOakOldManBufferCommands))
+        if (gBattleBufferA[gActiveBattler][0] < NELEMS(sOakOldManBufferCommands))
             sOakOldManBufferCommands[gBattleBufferA[gActiveBattler][0]]();
         else
             OakOldManBufferExecCompleted();
@@ -463,7 +463,7 @@ static void sub_80E7CD8(void)
 
 static void Task_GiveExpToMon(u8 taskId)
 {
-    u32 monId = (u8)(gTasks[taskId].tExpTask_monId);
+    u32 monId = (u8)gTasks[taskId].tExpTask_monId;
     u8 battlerId = gTasks[taskId].tExpTask_battler;
     s16 gainedExp = gTasks[taskId].tExpTask_gainedExp;
 
@@ -487,7 +487,7 @@ static void Task_GiveExpToMon(u8 taskId)
             BtlController_EmitTwoReturnValues(1, RET_VALUE_LEVELED_UP, gainedExp);
             gActiveBattler = savedActiveBattler;
             if (IsDoubleBattle() == TRUE
-             && ((u16)(monId) == gBattlerPartyIndexes[battlerId] || (u16)(monId) == gBattlerPartyIndexes[battlerId ^ BIT_FLANK]))
+             && ((u16)monId == gBattlerPartyIndexes[battlerId] || (u16)monId == gBattlerPartyIndexes[battlerId ^ BIT_FLANK]))
                 gTasks[taskId].func = Task_LaunchLvlUpAnim;
             else
                 gTasks[taskId].func = DestroyExpTaskAndCompleteOnInactiveTextPrinter;

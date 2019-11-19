@@ -98,8 +98,8 @@ static const union AffineAnimCmd gUnknown_83E6B64[] =
 {
     AFFINEANIMCMD_FRAME(0x10, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0x28, 0x0, 0, 6),
-    AFFINEANIMCMD_FRAME(0x0, 0xFFE0, 0, 5),
-    AFFINEANIMCMD_FRAME(0xFFF0, 0x20, 0, 10),
+    AFFINEANIMCMD_FRAME(0x0, -0x20, 0, 5),
+    AFFINEANIMCMD_FRAME(-0x10, 0x20, 0, 10),
     AFFINEANIMCMD_END,
 };
 
@@ -232,9 +232,9 @@ static const union AffineAnimCmd gUnknown_83E6C9C[] =
 {
     AFFINEANIMCMD_FRAME(0x10, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0x28, 0x0, 0, 6),
-    AFFINEANIMCMD_FRAME(0x0, 0xFFE0, 0, 5),
-    AFFINEANIMCMD_FRAME(0xFFEC, 0x0, 0, 7),
-    AFFINEANIMCMD_FRAME(0xFFEC, 0xFFEC, 0, 5),
+    AFFINEANIMCMD_FRAME(0x0, -0x20, 0, 5),
+    AFFINEANIMCMD_FRAME(-0x14, 0x0, 0, 7),
+    AFFINEANIMCMD_FRAME(-0x14, -0x14, 0, 5),
     AFFINEANIMCMD_END,
 };
 
@@ -280,8 +280,8 @@ static const union AffineAnimCmd gUnknown_83E6D14[] =
 {
     AFFINEANIMCMD_FRAME(0x10, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0x28, 0x0, 0, 6),
-    AFFINEANIMCMD_FRAME(0x0, 0xFFE0, 0, 5),
-    AFFINEANIMCMD_FRAME(0xFFF0, 0x20, 0, 10),
+    AFFINEANIMCMD_FRAME(0x0, -0x20, 0, 5),
+    AFFINEANIMCMD_FRAME(-0x10, 0x20, 0, 10),
     AFFINEANIMCMD_END,
 };
 
@@ -306,7 +306,7 @@ static const union AffineAnimCmd gUnknown_83E6D58[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x0, 0, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x20, 0, 12),
-    AFFINEANIMCMD_FRAME(0x0, 0xFFE0, 0, 11),
+    AFFINEANIMCMD_FRAME(0x0, -0x20, 0, 11),
     AFFINEANIMCMD_END,
 };
 
@@ -995,8 +995,8 @@ static void sub_80B2780(struct Sprite *sprite)
         InitSpritePosToAnimAttacker(sprite, 0);
     else
         InitSpritePosToAnimTarget(sprite, FALSE);
-    if ((!gBattleAnimArgs[2] && !GetBattlerSide(gBattleAnimAttacker))
-     || (gBattleAnimArgs[2] == 1 && !GetBattlerSide(gBattleAnimTarget)))
+    if ((!gBattleAnimArgs[2] && GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
+     || (gBattleAnimArgs[2] == 1 && GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER))
         sprite->pos1.x += 8;
     SeekSpriteAnim(sprite, gBattleAnimArgs[4]);
     sprite->pos1.x -= 32;
@@ -1048,7 +1048,7 @@ static void sub_80B2914(struct Sprite *sprite)
     {
     case 0:
         InitSpritePosToAnimAttacker(sprite, 1);
-        gSprites[GetAnimBattlerSpriteId(0)].invisible = TRUE;
+        gSprites[GetAnimBattlerSpriteId(ANIM_ATTACKER)].invisible = TRUE;
         ++sprite->data[0];
         break;
     case 1:
@@ -1076,7 +1076,7 @@ static void sub_80B2974(struct Sprite *sprite)
         sprite->pos2.y -= 10;
         if (sprite->pos1.y + sprite->pos2.y < -32)
         {
-            gSprites[GetAnimBattlerSpriteId(0)].invisible = FALSE;
+            gSprites[GetAnimBattlerSpriteId(ANIM_ATTACKER)].invisible = FALSE;
             DestroyAnimSprite(sprite);
         }
         break;
@@ -1089,7 +1089,7 @@ static void sub_80B2A08(struct Sprite *sprite)
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[1] = gBattleAnimArgs[3];
     sprite->callback = sub_80B2A50;
-    gSprites[GetAnimBattlerSpriteId(0)].invisible = TRUE;
+    gSprites[GetAnimBattlerSpriteId(ANIM_ATTACKER)].invisible = TRUE;
 }
 
 static void sub_80B2A50(struct Sprite *sprite)
@@ -1275,13 +1275,13 @@ static void sub_80B2E64(u8 taskId)
 {
     if (gBattleAnimArgs[0] == 0)
     {
-        u8 spriteId = GetAnimBattlerSpriteId(0);
+        u8 spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
 
         gSprites[spriteId].invisible = TRUE;
     }
     else
     {
-        u8 spriteId = GetAnimBattlerSpriteId(0);
+        u8 spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
 
         gSprites[spriteId].invisible = FALSE;
     }

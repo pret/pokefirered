@@ -58,15 +58,15 @@ static const struct WindowTemplate sOptionMenuWinTemplates[] =    //3CC2B8
         .paletteNum = 1,
         .baseBlock = 0x36,
     },
-	{
-		.bg = 2,
-		.tilemapLeft = 0,
-		.tilemapTop = 0,
-		.width = 30,
-		.height = 2,
-		.paletteNum = 0xF,
-		.baseBlock = 0x16e,
-	},
+    {
+        .bg = 2,
+        .tilemapLeft = 0,
+        .tilemapTop = 0,
+        .width = 30,
+        .height = 2,
+        .paletteNum = 0xF,
+        .baseBlock = 0x16e,
+    },
     DUMMY_WIN_TEMPLATE,
 };
 static const struct BgTemplate sOptionMenuBgTemplates[] =    //3CC2D8
@@ -90,16 +90,16 @@ static const struct BgTemplate sOptionMenuBgTemplates[] =    //3CC2D8
        .baseTile = 0,
    },
    {
-	   .bg = 2,
-	   .charBaseIndex = 1,
-	   .mapBaseIndex = 29,
-	   .screenSize = 0,
-	   .paletteMode = 0,
-	   .priority = 2,
-	   .baseTile = 0,
+       .bg = 2,
+       .charBaseIndex = 1,
+       .mapBaseIndex = 29,
+       .screenSize = 0,
+       .paletteMode = 0,
+       .priority = 2,
+       .baseTile = 0,
    },
 };
-static const u16 sOptionsMenuPalette[] = INCBIN_U16("graphics/misc/unk_83cc2e4.gbapal");	//3CC2E4
+static const u16 sOptionsMenuPalette[] = INCBIN_U16("graphics/misc/unk_83cc2e4.gbapal");    //3CC2E4
 static const u16 sOptionsMenuItemCounts[MENUITEM_COUNT] = {3, 2, 2, 2, 3, 10, 0};    //3CC304
 static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =     //3CC314
 {
@@ -111,35 +111,35 @@ static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =     //3CC314
     [MENUITEM_FRAMETYPE]   = gText_Frame,
     [MENUITEM_CANCEL]      = gText_OptionMenuCancel,
 };
-static const u8 *const sTextSpeedOptions[] =	//3CC330
+static const u8 *const sTextSpeedOptions[] =    //3CC330
 {
-	gText_TextSpeedSlow, 
-	gText_TextSpeedMid, 
-	gText_TextSpeedFast
+    gText_TextSpeedSlow, 
+    gText_TextSpeedMid, 
+    gText_TextSpeedFast
 };
-static const u8 *const sBattleSceneOptions[] = 	//3CC33C
+static const u8 *const sBattleSceneOptions[] =     //3CC33C
 {
-	gText_BattleSceneOn, 
-	gText_BattleSceneOff
+    gText_BattleSceneOn, 
+    gText_BattleSceneOff
 };
 static const u8 *const sBattleStyleOptions[] = //3CC344
 {
-	gText_BattleStyleShift,
-	gText_BattleStyleSet
+    gText_BattleStyleShift,
+    gText_BattleStyleSet
 };
-static const u8 *const sSoundOptions[] = 		//3CC34C
+static const u8 *const sSoundOptions[] =         //3CC34C
 {
-	gText_SoundMono, 
-	gText_SoundStereo
+    gText_SoundMono, 
+    gText_SoundStereo
 };
-static const u8 *const sButtonTypeOptions[] = 	//3CC354
+static const u8 *const sButtonTypeOptions[] =     //3CC354
 {
-	gText_ButtonTypeNormal, 
-	gText_ButtonTypeLEqualsA,
-	gText_ButtonTypeLR,
+    gText_ButtonTypeNormal, 
+    gText_ButtonTypeLEqualsA,
+    gText_ButtonTypeLR,
 };
-static const u8 sOptionsMenuPickSwitchCancelTextColor[] = {TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY};	//3CC360
-static const u8 sOptionsMenuTextColor[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_RED, TEXT_COLOR_RED};	//3CC363
+static const u8 sOptionsMenuPickSwitchCancelTextColor[] = {TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY};    //3CC360
+static const u8 sOptionsMenuTextColor[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_RED, TEXT_COLOR_RED};    //3CC363
 
 
 //This file's functions

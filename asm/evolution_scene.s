@@ -3045,7 +3045,7 @@ _080CF820:
 	lsls r4, 3
 	adds r4, r5
 	ldrh r0, [r4, 0xC]
-	bl LaunchTask_PostEvoSparklesSet2Alt
+	bl LaunchTask_PostEvoSparklesSet2AndFlash_Trade
 	mov r1, r8
 	strb r0, [r1, 0x2]
 	b _080CFA90

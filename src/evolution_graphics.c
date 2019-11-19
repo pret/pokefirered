@@ -22,8 +22,8 @@ static void EvoTask_PostEvoSparklesSet1Teardown(u8 taskId);
 static void EvoTask_PostEvoSparklesSet2Init(u8 taskId);
 static void EvoTask_CreatePostEvoSparklesSet2(u8 taskId);
 static void EvoTask_PostEvoSparklesSet2Teardown(u8 taskId);
-static void EvoTask_PostEvoSparklesSet2AltInit(u8 taskId);
-static void EvoTask_CreatePostEvoSparklesSet2Alt(u8 taskId);
+static void EvoTask_PostEvoSparklesSet2TradeInit(u8 taskId);
+static void EvoTask_CreatePostEvoSparklesSet2Trade(u8 taskId);
 static void EvoTask_PrePostEvoMonSpritesInit(u8 taskId);
 static void EvoTask_ChooseNextEvoSpriteAnim(u8 taskId);
 static void EvoTask_ShrinkOrExpandEvoSprites(u8 taskId);
@@ -386,10 +386,10 @@ static void EvoTask_PostEvoSparklesSet1Teardown(u8 taskId)
     DestroyTask(taskId);
 }
 
-u8 LaunchTask_PostEvoSparklesSet2AndFlash(u16 a0)
+u8 LaunchTask_PostEvoSparklesSet2AndFlash(u16 species)
 {
     u8 taskId = CreateTask(EvoTask_PostEvoSparklesSet2Init, 0);
-    gTasks[taskId].data[2] = a0;
+    gTasks[taskId].data[2] = species;
     return taskId;
 }
 
@@ -437,25 +437,25 @@ static void EvoTask_PostEvoSparklesSet2Teardown(u8 taskId)
         DestroyTask(taskId);
 }
 
-u8 LaunchTask_PostEvoSparklesSet2Alt(u16 a0)
+u8 LaunchTask_PostEvoSparklesSet2AndFlash_Trade(u16 species)
 {
-    u8 taskId = CreateTask(EvoTask_PostEvoSparklesSet2AltInit, 0);
-    gTasks[taskId].data[2] = a0;
+    u8 taskId = CreateTask(EvoTask_PostEvoSparklesSet2TradeInit, 0);
+    gTasks[taskId].data[2] = species;
     return taskId;
 }
 
-static void EvoTask_PostEvoSparklesSet2AltInit(u8 taskId)
+static void EvoTask_PostEvoSparklesSet2TradeInit(u8 taskId)
 {
     SetEvoSparklesMatrices();
     gTasks[taskId].data[15] = 0;
     sub_80D0474();
     CpuCopy16(&gPlttBufferFaded[32], &gPlttBufferUnfaded[32], 96);
     BeginNormalPaletteFade(0xFFF90F00, 0, 0, 16, RGB_WHITE);
-    gTasks[taskId].func = EvoTask_CreatePostEvoSparklesSet2Alt;
+    gTasks[taskId].func = EvoTask_CreatePostEvoSparklesSet2Trade;
     PlaySE(SE_W080);
 }
 
-static void EvoTask_CreatePostEvoSparklesSet2Alt(u8 taskId)
+static void EvoTask_CreatePostEvoSparklesSet2Trade(u8 taskId)
 {
     u8 i;
     if (gTasks[taskId].data[15] < 128)

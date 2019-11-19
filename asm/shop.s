@@ -5,98 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_809AAB0
-sub_809AAB0: @ 809AAB0
-	push {r4-r6,lr}
-	sub sp, 0xC
-	lsls r0, 24
-	lsrs r0, 24
-	bl sub_809AB7C
-	ldr r4, _0809AAE8 @ =gUnknown_2039934
-	movs r1, 0xF
-	ands r1, r0
-	ldrb r2, [r4, 0x16]
-	movs r0, 0x10
-	negs r0, r0
-	ands r0, r2
-	orrs r0, r1
-	strb r0, [r4, 0x16]
-	movs r0, 0
-	strh r0, [r4, 0xC]
-	bl ContextNpcGetTextColor
-	lsls r0, 24
-	cmp r0, 0
-	bne _0809AAF0
-	ldrh r0, [r4, 0x16]
-	ldr r1, _0809AAEC @ =0xfffffe0f
-	ands r1, r0
-	movs r0, 0x40
-	b _0809AAF8
-	.align 2, 0
-_0809AAE8: .4byte gUnknown_2039934
-_0809AAEC: .4byte 0xfffffe0f
-_0809AAF0:
-	ldrh r0, [r4, 0x16]
-	ldr r1, _0809AB68 @ =0xfffffe0f
-	ands r1, r0
-	movs r0, 0x50
-_0809AAF8:
-	orrs r1, r0
-	strh r1, [r4, 0x16]
-	ldr r4, _0809AB6C @ =gUnknown_2039950
-	ldr r0, _0809AB70 @ =gUnknown_83DF0BC
-	bl AddWindow
-	strb r0, [r4]
-	ldrb r0, [r4]
-	movs r1, 0
-	bl SetStdWindowBorderStyle
-	movs r0, 0x2
-	movs r1, 0
-	bl GetMenuCursorDimensionByFont
-	adds r2, r0, 0
-	lsls r2, 24
-	lsrs r2, 24
-	ldrb r0, [r4]
-	movs r6, 0x10
-	str r6, [sp]
-	movs r5, 0x3
-	str r5, [sp, 0x4]
-	ldr r1, _0809AB74 @ =gUnknown_83DF09C
-	str r1, [sp, 0x8]
-	movs r1, 0x2
-	movs r3, 0x2
-	bl PrintTextArray
-	ldrb r0, [r4]
-	str r6, [sp]
-	str r5, [sp, 0x4]
-	movs r1, 0
-	str r1, [sp, 0x8]
-	movs r1, 0x2
-	movs r2, 0
-	movs r3, 0x2
-	bl Menu_InitCursor
-	ldrb r0, [r4]
-	bl PutWindowTilemap
-	ldrb r0, [r4]
-	movs r1, 0x1
-	bl CopyWindowToVram
-	ldr r0, _0809AB78 @ =sub_809AC10
-	movs r1, 0x8
-	bl CreateTask
-	lsls r0, 24
-	lsrs r0, 24
-	add sp, 0xC
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0809AB68: .4byte 0xfffffe0f
-_0809AB6C: .4byte gUnknown_2039950
-_0809AB70: .4byte gUnknown_83DF0BC
-_0809AB74: .4byte gUnknown_83DF09C
-_0809AB78: .4byte sub_809AC10
-	thumb_func_end sub_809AAB0
-
 	thumb_func_start sub_809AB7C
 sub_809AB7C: @ 809AB7C
 	push {r4,r5,lr}
@@ -110,7 +18,7 @@ _0809AB88:
 	b _0809ABCE
 _0809AB8C:
 	movs r4, 0
-	ldr r1, _0809ABD4 @ =gUnknown_2039934
+	ldr r1, _0809ABD4 @ =gShopData
 	ldrh r0, [r1, 0x10]
 	cmp r4, r0
 	bcs _0809ABCC
@@ -148,14 +56,14 @@ _0809ABCE:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0809ABD4: .4byte gUnknown_2039934
+_0809ABD4: .4byte gShopData
 	thumb_func_end sub_809AB7C
 
 	thumb_func_start sub_809ABD8
 sub_809ABD8: @ 809ABD8
 	push {lr}
 	adds r1, r0, 0
-	ldr r2, _0809AC00 @ =gUnknown_2039934
+	ldr r2, _0809AC00 @ =gShopData
 	str r1, [r2, 0x4]
 	movs r0, 0
 	strh r0, [r2, 0x10]
@@ -176,16 +84,16 @@ _0809ABFC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809AC00: .4byte gUnknown_2039934
+_0809AC00: .4byte gShopData
 	thumb_func_end sub_809ABD8
 
 	thumb_func_start sub_809AC04
 sub_809AC04: @ 809AC04
-	ldr r1, _0809AC0C @ =gUnknown_2039934
+	ldr r1, _0809AC0C @ =gShopData
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_0809AC0C: .4byte gUnknown_2039934
+_0809AC0C: .4byte gShopData
 	thumb_func_end sub_809AC04
 
 	thumb_func_start sub_809AC10
@@ -313,7 +221,7 @@ sub_809ACF8: @ 809ACF8
 	bl sub_809C138
 	adds r0, r4, 0
 	bl DestroyTask
-	ldr r0, _0809AD20 @ =gUnknown_2039934
+	ldr r0, _0809AD20 @ =gShopData
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _0809AD1A
@@ -323,7 +231,7 @@ _0809AD1A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809AD20: .4byte gUnknown_2039934
+_0809AD20: .4byte gShopData
 	thumb_func_end sub_809ACF8
 
 	thumb_func_start sub_809AD24
@@ -414,7 +322,7 @@ sub_809ADC0: @ 809ADC0
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _0809ADE0 @ =gUnknown_2039934
+	ldr r0, _0809ADE0 @ =gShopData
 	ldrb r0, [r0, 0x16]
 	lsls r0, 28
 	lsrs r0, 28
@@ -425,7 +333,7 @@ sub_809ADC0: @ 809ADC0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809ADE0: .4byte gUnknown_2039934
+_0809ADE0: .4byte gShopData
 	thumb_func_end sub_809ADC0
 
 	thumb_func_start sub_809ADE4
@@ -465,7 +373,7 @@ sub_809AE14: @ 809AE14
 	bne _0809AE2C
 	b _0809AF54
 _0809AE2C:
-	ldr r0, _0809AE94 @ =gUnknown_2039934
+	ldr r0, _0809AE94 @ =gShopData
 	movs r5, 0
 	strh r5, [r0, 0xC]
 	strh r5, [r0, 0xE]
@@ -508,7 +416,7 @@ _0809AE2C:
 	b _0809AF64
 	.align 2, 0
 _0809AE90: .4byte gMain
-_0809AE94: .4byte gUnknown_2039934
+_0809AE94: .4byte gShopData
 _0809AE98: .4byte sub_809BBC0
 _0809AE9C: .4byte gMultiuseListMenuTemplate
 _0809AEA0: .4byte gTasks
@@ -568,7 +476,7 @@ _0809AEAC:
 	movs r2, 0
 	movs r3, 0
 	bl FillBgTilemapBufferRect_Palette0
-	ldr r0, _0809AF50 @ =gUnknown_2039934
+	ldr r0, _0809AF50 @ =gShopData
 	ldrb r0, [r0, 0x16]
 	lsls r0, 28
 	lsrs r0, 28
@@ -577,7 +485,7 @@ _0809AEAC:
 	b _0809AF5E
 	.align 2, 0
 _0809AF4C: .4byte 0x01000100
-_0809AF50: .4byte gUnknown_2039934
+_0809AF50: .4byte gShopData
 _0809AF54:
 	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24
@@ -722,7 +630,7 @@ sub_809B080: @ 809B080
 	str r0, [sp]
 	movs r0, 0x1
 	bl DecompressAndCopyTileDataToVram
-	ldr r0, _0809B0B4 @ =gUnknown_2039934
+	ldr r0, _0809B0B4 @ =gShopData
 	ldrb r1, [r0, 0x16]
 	movs r0, 0xF
 	ands r0, r1
@@ -735,7 +643,7 @@ sub_809B080: @ 809B080
 	b _0809B0CA
 	.align 2, 0
 _0809B0B0: .4byte gUnknown_8E85DC8
-_0809B0B4: .4byte gUnknown_2039934
+_0809B0B4: .4byte gShopData
 _0809B0B8: .4byte gUnknown_8E85EFC
 _0809B0BC: .4byte gUnknown_2039954
 _0809B0C0:
@@ -780,7 +688,7 @@ sub_809B10C: @ 809B10C
 	bne _0809B118
 	movs r2, 0xB
 _0809B118:
-	ldr r0, _0809B138 @ =gUnknown_2039934
+	ldr r0, _0809B138 @ =gShopData
 	ldrb r1, [r0, 0x16]
 	movs r0, 0xF
 	ands r0, r1
@@ -796,7 +704,7 @@ _0809B118:
 	bl SetBgRectPal
 	b _0809B14E
 	.align 2, 0
-_0809B138: .4byte gUnknown_2039934
+_0809B138: .4byte gShopData
 _0809B13C:
 	movs r0, 0x8
 	str r0, [sp]
@@ -836,7 +744,7 @@ sub_809B15C: @ 809B15C
 sub_809B188: @ 809B188
 	push {r4-r7,lr}
 	ldr r7, _0809B1C0 @ =gUnknown_2039964
-	ldr r4, _0809B1C4 @ =gUnknown_2039934
+	ldr r4, _0809B1C4 @ =gShopData
 	ldrh r0, [r4, 0x10]
 	adds r0, 0x1
 	lsls r0, 3
@@ -860,7 +768,7 @@ _0809B1B2:
 	b _0809B2F0
 	.align 2, 0
 _0809B1C0: .4byte gUnknown_2039964
-_0809B1C4: .4byte gUnknown_2039934
+_0809B1C4: .4byte gShopData
 _0809B1C8: .4byte gUnknown_2039968
 _0809B1CC:
 	movs r6, 0
@@ -906,7 +814,7 @@ _0809B1F2:
 	str r0, [r1, 0x4]
 	ldr r5, _0809B2D4 @ =gMultiuseListMenuTemplate
 	str r2, [r5]
-	ldr r6, _0809B2D8 @ =gUnknown_2039934
+	ldr r6, _0809B2D8 @ =gShopData
 	ldrh r0, [r6, 0x10]
 	adds r0, 0x1
 	movs r1, 0
@@ -993,13 +901,13 @@ _0809B2C8: .4byte gUnknown_2039968
 _0809B2CC: .4byte gFameCheckerText_Cancel
 _0809B2D0: .4byte gUnknown_2039964
 _0809B2D4: .4byte gMultiuseListMenuTemplate
-_0809B2D8: .4byte gUnknown_2039934
+_0809B2D8: .4byte gShopData
 _0809B2DC: .4byte sub_809B320
 _0809B2E0: .4byte sub_809B408
 _0809B2E4:
 	strh r0, [r5, 0xE]
 _0809B2E6:
-	ldr r0, _0809B2F8 @ =gUnknown_2039934
+	ldr r0, _0809B2F8 @ =gShopData
 	ldr r1, _0809B2FC @ =gMultiuseListMenuTemplate
 	ldrh r1, [r1, 0xE]
 	strh r1, [r0, 0x12]
@@ -1009,7 +917,7 @@ _0809B2F0:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0809B2F8: .4byte gUnknown_2039934
+_0809B2F8: .4byte gShopData
 _0809B2FC: .4byte gMultiuseListMenuTemplate
 	thumb_func_end sub_809B188
 
@@ -1058,7 +966,7 @@ _0809B34A:
 	movs r0, 0x5
 	movs r1, 0
 	bl FillWindowPixelBuffer
-	ldr r6, _0809B388 @ =gUnknown_2039934
+	ldr r6, _0809B388 @ =gShopData
 	ldrb r0, [r6, 0x16]
 	movs r4, 0xF
 	ands r4, r0
@@ -1083,7 +991,7 @@ _0809B34A:
 	b _0809B398
 	.align 2, 0
 _0809B384: .4byte gUnknown_8416757
-_0809B388: .4byte gUnknown_2039934
+_0809B388: .4byte gShopData
 _0809B38C:
 	ldr r0, _0809B3D0 @ =0x00000177
 	ldrb r1, [r6, 0x17]
@@ -1091,7 +999,7 @@ _0809B38C:
 	lsrs r1, 30
 	bl CreateItemMenuIcon
 _0809B398:
-	ldr r3, _0809B3D4 @ =gUnknown_2039934
+	ldr r3, _0809B3D4 @ =gShopData
 	ldrb r2, [r3, 0x17]
 	lsls r0, r2, 29
 	lsrs r0, 30
@@ -1120,7 +1028,7 @@ _0809B398:
 	b _0809B400
 	.align 2, 0
 _0809B3D0: .4byte 0x00000177
-_0809B3D4: .4byte gUnknown_2039934
+_0809B3D4: .4byte gShopData
 _0809B3D8:
 	movs r0, 0x6
 	movs r1, 0
@@ -1318,13 +1226,13 @@ _0809B568: .4byte gUnknown_8416217
 
 	thumb_func_start sub_809B56C
 sub_809B56C: @ 809B56C
-	ldr r0, _0809B578 @ =gUnknown_2039934
+	ldr r0, _0809B578 @ =gShopData
 	ldrh r0, [r0, 0x16]
 	lsls r0, 23
 	lsrs r0, 27
 	bx lr
 	.align 2, 0
-_0809B578: .4byte gUnknown_2039934
+_0809B578: .4byte gShopData
 	thumb_func_end sub_809B56C
 
 	thumb_func_start sub_809B57C
@@ -1469,7 +1377,7 @@ _0809B68C: .4byte CB2_ReturnToField
 sub_809B690: @ 809B690
 	push {r4,lr}
 	sub sp, 0x10
-	ldr r4, _0809B6C0 @ =gUnknown_2039934
+	ldr r4, _0809B6C0 @ =gShopData
 	ldrb r1, [r4, 0x16]
 	movs r0, 0xF
 	ands r0, r1
@@ -1492,7 +1400,7 @@ sub_809B690: @ 809B690
 	movs r3, 0x68
 	b _0809B6E2
 	.align 2, 0
-_0809B6C0: .4byte gUnknown_2039934
+_0809B6C0: .4byte gShopData
 _0809B6C4:
 	ldrh r0, [r4, 0x10]
 	ldrh r1, [r4, 0x12]
@@ -1527,7 +1435,7 @@ _0809B6E2:
 sub_809B6FC: @ 809B6FC
 	push {r4,lr}
 	sub sp, 0x10
-	ldr r4, _0809B738 @ =gUnknown_2039934
+	ldr r4, _0809B738 @ =gShopData
 	movs r0, 0x1
 	strh r0, [r4, 0x18]
 	movs r0, 0x2
@@ -1554,13 +1462,13 @@ sub_809B6FC: @ 809B6FC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809B738: .4byte gUnknown_2039934
+_0809B738: .4byte gShopData
 	thumb_func_end sub_809B6FC
 
 	thumb_func_start sub_809B73C
 sub_809B73C: @ 809B73C
 	push {r4,lr}
-	ldr r4, _0809B760 @ =gUnknown_2039934
+	ldr r4, _0809B760 @ =gShopData
 	ldrb r1, [r4, 0x17]
 	movs r0, 0xF8
 	ands r0, r1
@@ -1577,7 +1485,7 @@ _0809B758:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809B760: .4byte gUnknown_2039934
+_0809B760: .4byte gShopData
 	thumb_func_end sub_809B73C
 
 	thumb_func_start sub_809B764
@@ -2104,7 +2012,7 @@ sub_809BB44: @ 809BB44
 	movs r0, 0x3
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r0, _0809BBB0 @ =gUnknown_2039934
+	ldr r0, _0809BBB0 @ =gShopData
 	ldr r3, [r0, 0x8]
 	movs r0, 0xFF
 	str r0, [sp]
@@ -2141,7 +2049,7 @@ sub_809BB44: @ 809BB44
 	bx r0
 	.align 2, 0
 _0809BBAC: .4byte gTasks+0x8
-_0809BBB0: .4byte gUnknown_2039934
+_0809BBB0: .4byte gShopData
 _0809BBB4: .4byte gStringVar1
 _0809BBB8: .4byte gStringVar4
 _0809BBBC: .4byte gText_TimesStrVar1
@@ -2314,7 +2222,7 @@ sub_809BCA0: @ 809BCA0
 	lsrs r2, r0, 16
 	cmp r2, 0x63
 	bls _0809BD58
-	ldr r1, _0809BD54 @ =gUnknown_2039934
+	ldr r1, _0809BD54 @ =gShopData
 	movs r0, 0x63
 	b _0809BD5E
 	.align 2, 0
@@ -2323,9 +2231,9 @@ _0809BD44: .4byte gStringVar1
 _0809BD48: .4byte gStringVar4
 _0809BD4C: .4byte gUnknown_8416749
 _0809BD50: .4byte gSaveBlock1Ptr
-_0809BD54: .4byte gUnknown_2039934
+_0809BD54: .4byte gShopData
 _0809BD58:
-	ldr r1, _0809BD80 @ =gUnknown_2039934
+	ldr r1, _0809BD80 @ =gShopData
 	lsls r0, r2, 24
 	lsrs r0, 24
 _0809BD5E:
@@ -2346,7 +2254,7 @@ _0809BD68:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809BD80: .4byte gUnknown_2039934
+_0809BD80: .4byte gShopData
 _0809BD84: .4byte gTasks
 _0809BD88: .4byte sub_809BD8C
 	thumb_func_end sub_809BCA0
@@ -2363,7 +2271,7 @@ sub_809BD8C: @ 809BD8C
 	ldr r1, _0809BDCC @ =gTasks+0x8
 	adds r4, r0, r1
 	adds r0, r4, 0x2
-	ldr r6, _0809BDD0 @ =gUnknown_2039934
+	ldr r6, _0809BDD0 @ =gShopData
 	ldrh r1, [r6, 0x14]
 	bl AdjustQuantityAccordingToDPadInput
 	lsls r0, 24
@@ -2383,7 +2291,7 @@ sub_809BD8C: @ 809BD8C
 	b _0809BE88
 	.align 2, 0
 _0809BDCC: .4byte gTasks+0x8
-_0809BDD0: .4byte gUnknown_2039934
+_0809BDD0: .4byte gShopData
 _0809BDD4:
 	ldr r0, _0809BE3C @ =gMain
 	ldrh r1, [r0, 0x2E]
@@ -2532,7 +2440,7 @@ sub_809BF0C: @ 809BF0C
 	movs r5, 0xA4
 	lsls r5, 2
 	adds r0, r5
-	ldr r1, _0809BF5C @ =gUnknown_2039934
+	ldr r1, _0809BF5C @ =gShopData
 	ldr r1, [r1, 0x8]
 	bl RemoveMoney
 	movs r0, 0xF8
@@ -2556,7 +2464,7 @@ sub_809BF0C: @ 809BF0C
 	bx r0
 	.align 2, 0
 _0809BF58: .4byte gSaveBlock1Ptr
-_0809BF5C: .4byte gUnknown_2039934
+_0809BF5C: .4byte gShopData
 _0809BF60: .4byte gTasks
 _0809BF64: .4byte sub_809BF68
 	thumb_func_end sub_809BF0C
@@ -2611,7 +2519,7 @@ sub_809BF98: @ 809BF98
 	bl PutWindowTilemap
 	movs r0, 0x5
 	bl PutWindowTilemap
-	ldr r0, _0809BFFC @ =gUnknown_2039934
+	ldr r0, _0809BFFC @ =gShopData
 	ldrb r1, [r0, 0x16]
 	movs r0, 0xF
 	ands r0, r1
@@ -2633,7 +2541,7 @@ _0809BFDC:
 	bx r0
 	.align 2, 0
 _0809BFF8: .4byte gTasks+0x8
-_0809BFFC: .4byte gUnknown_2039934
+_0809BFFC: .4byte gShopData
 _0809C000: .4byte sub_809BBC0
 	thumb_func_end sub_809BF98
 

@@ -140,6 +140,7 @@ SECTIONS {
         src/item_menu_icons.o(.text);
         src/battle_anim_mon_movement.o(.text);
         src/item.o(.text);
+		src/shop.o(.text);
         asm/shop.o(.text);
         src/berry.o(.text);
         src/script_menu.o(.text);
@@ -441,6 +442,7 @@ SECTIONS {
         src/item_menu_icons.o(.rodata);
         src/battle_anim_mon_movement.o(.rodata);
         src/item.o(.rodata);
+		src/shop.o(.rodata);
         data/shop.o(.rodata);
         src/berry.o(.rodata);
         src/script_menu.o(.rodata);

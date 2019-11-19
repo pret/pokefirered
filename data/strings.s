@@ -2904,7 +2904,7 @@ gUnknown_8419D89:: @ 8419D89
 	.string "Waiting for the other TRAINER to\n"
 	.string "finish reading your TRAINER CARD.$"
 
-gText_MenuOptionOption:: @ 8419DCC
+gText_MenuOption:: @ 8419DCC
 	.string "OPTION$"
 
 gText_TextSpeed:: @ 0x8419DD3
@@ -2955,16 +2955,16 @@ gText_SoundMono:: @ 0x8419E36
 gText_SoundStereo:: @ 0x8419E3B
 	.string "STEREO$"
 
-gUnknown_8419E42:: @ 0x8419E42
+gTextJP_Type:: @ 0x8419E42
 	.string "タイプ$"
 
 gText_ButtonTypeNormal:: @ 0x8419E46
 	.string "HELP$"
 
-gText_ButtonTypeLR:: @ 0x8419E4B
+gText_ButtonTypeLEqualsA:: @ 0x8419E4B
 	.string "LゅA$"
 
-gText_ButtonTypeLEqualsA:: @ 0x8419E4F
+gText_ButtonTypeLR:: @ 0x8419E4F
 	.string "LR$"
 
 gText_FrameType:: @ 8419E52

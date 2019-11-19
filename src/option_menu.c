@@ -19,7 +19,6 @@
 #include "field_fadetransition.h"
 #include "gba/m4a_internal.h"
 
-
 // Menu items
 enum
 {
@@ -39,7 +38,7 @@ enum
     WIN_OPTIONS,
 };
 
-static const struct WindowTemplate gUnknown_83CC2B8[4] =    //3CC2B8 -> sOptionMenuWinTemplates
+static const struct WindowTemplate sOptionMenuWinTemplates[] =    //3CC2B8
 {
     {
         .bg = 1,
@@ -70,7 +69,7 @@ static const struct WindowTemplate gUnknown_83CC2B8[4] =    //3CC2B8 -> sOptionM
 	},
     DUMMY_WIN_TEMPLATE,
 };
-static const struct BgTemplate gUnknown_83CC2D8[3] =    //3CC2D8 -> sOptionMenuBgTemplates
+static const struct BgTemplate sOptionMenuBgTemplates[] =    //3CC2D8
 {
    {
        .bg = 1,
@@ -100,9 +99,9 @@ static const struct BgTemplate gUnknown_83CC2D8[3] =    //3CC2D8 -> sOptionMenuB
 	   .baseTile = 0,
    },
 };
-static const u16 gUnknown_83CC2E4[] = INCBIN_U16("graphics/misc/unk_83cc2e4.gbapal");	//3CC2E4
-static const u16 gUnknown_83CC304[MENUITEM_COUNT] = {3, 2, 2, 2, 3, 10, 0};    //3CC304 -> sOptionsMenuItemCounts
-static const u8* gUnknown_83CC314[MENUITEM_COUNT] =     //3CC314 -> sOptionMenuItemsNames
+static const u16 sOptionsMenuPalette[] = INCBIN_U16("graphics/misc/unk_83cc2e4.gbapal");	//3CC2E4
+static const u16 sOptionsMenuItemCounts[MENUITEM_COUNT] = {3, 2, 2, 2, 3, 10, 0};    //3CC304
+static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =     //3CC314
 {
     [MENUITEM_TEXTSPEED]   = gText_TextSpeed,
     [MENUITEM_BATTLESCENE] = gText_BattleScene,
@@ -112,29 +111,36 @@ static const u8* gUnknown_83CC314[MENUITEM_COUNT] =     //3CC314 -> sOptionMenuI
     [MENUITEM_FRAMETYPE]   = gText_Frame,
     [MENUITEM_CANCEL]      = gText_OptionMenuCancel,
 };
-static const u8* gUnknown_83CC330[] = {gText_TextSpeedSlow, gText_TextSpeedMid, gText_TextSpeedFast};	//3CC330
-static const u8* gUnknown_83CC33C[] = {gText_BattleSceneOn, gText_BattleSceneOff};		//3CC33C
-static const u8* gUnknown_83CC344[] = {gText_BattleStyleShift, gText_BattleStyleSet};	//3CC344
-static const u8* gUnknown_83CC34C[] = {gText_SoundMono, gText_SoundStereo};		//3CC34C
-static const u8* gUnknown_83CC354[] = {gText_ButtonTypeNormal, gText_ButtonTypeLR, gText_ButtonTypeLEqualsA};	//3CC354
-static const u8 gUnknown_83CC360[] = {0xF, 0x1, 0x2};	//3CC360
-static const u8 gUnknown_83CC363[] = {0, 5, 4, 0, 0};	//3CC363
+static const u8 *const sTextSpeedOptions[] =	//3CC330
+{
+	gText_TextSpeedSlow, 
+	gText_TextSpeedMid, 
+	gText_TextSpeedFast
+};
+static const u8 *const sBattleSceneOptions[] = 	//3CC33C
+{
+	gText_BattleSceneOn, 
+	gText_BattleSceneOff
+};
+static const u8 *const sBattleStyleOptions[] = //3CC344
+{
+	gText_BattleStyleShift,
+	gText_BattleStyleSet
+};
+static const u8 *const sSoundOptions[] = 		//3CC34C
+{
+	gText_SoundMono, 
+	gText_SoundStereo
+};
+static const u8 *const sButtonTypeOptions[] = 	//3CC354
+{
+	gText_ButtonTypeNormal, 
+	gText_ButtonTypeLEqualsA,
+	gText_ButtonTypeLR,
+};
+static const u8 sOptionsMenuPickSwitchCancelTextColor[] = {TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY};	//3CC360
+static const u8 sOptionsMenuTextColor[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_RED, TEXT_COLOR_RED};	//3CC363
 
-
-/*
-extern const struct WindowTemplate gUnknown_83CC2B8[4];
-extern const struct BgTemplate gUnknown_83CC2D8[3];
-extern const u16 gUnknown_83CC2E4[0x20];
-extern const u16 gUnknown_83CC304[MENUITEM_COUNT];
-extern const u8* gUnknown_83CC314[MENUITEM_COUNT];
-extern const u8* gUnknown_83CC330[12];
-extern const u8* gUnknown_83CC33C[8];
-extern const u8* gUnknown_83CC344[8];
-extern const u8* gUnknown_83CC34C[8];
-extern const u8* gUnknown_83CC354[12];
-extern const u8 gUnknown_83CC360[3];
-extern const u8 gUnknown_83CC363[3];
-*/
 
 //This file's functions
 static void sub_808835C(void);
@@ -166,7 +172,7 @@ struct OptionsMenu
     /*0x13*/ u8 unk13;
 };
 
-EWRAM_DATA struct OptionsMenu *sOptionsMenu = {0};
+EWRAM_DATA struct OptionsMenu *sOptionsMenuPtr = {0};
 
 
 
@@ -196,22 +202,22 @@ void CB2_OptionsMenuFromStartMenu(void)
     
     if (gMain.savedCallback == NULL)
         gMain.savedCallback = CB2_ReturnToStartMenu;
-    sOptionsMenu = AllocZeroed(sizeof(struct OptionsMenu));
-    sOptionsMenu->state3 = 0;
-    sOptionsMenu->state2 = 0;
-    sOptionsMenu->state = 0;
-    sOptionsMenu->unkE = 0;
-    sOptionsMenu->option[MENUITEM_TEXTSPEED] = gSaveBlock2Ptr->optionsTextSpeed;
-    sOptionsMenu->option[MENUITEM_BATTLESCENE] = gSaveBlock2Ptr->optionsBattleSceneOff;
-    sOptionsMenu->option[MENUITEM_BATTLESTYLE] = gSaveBlock2Ptr->optionsBattleStyle;
-    sOptionsMenu->option[MENUITEM_SOUND] = gSaveBlock2Ptr->optionsSound;
-    sOptionsMenu->option[MENUITEM_BUTTONMODE] = gSaveBlock2Ptr->optionsButtonMode;
-    sOptionsMenu->option[MENUITEM_FRAMETYPE] = gSaveBlock2Ptr->optionsWindowFrameType;
+    sOptionsMenuPtr = AllocZeroed(sizeof(struct OptionsMenu));
+    sOptionsMenuPtr->state3 = 0;
+    sOptionsMenuPtr->state2 = 0;
+    sOptionsMenuPtr->state = 0;
+    sOptionsMenuPtr->unkE = 0;
+    sOptionsMenuPtr->option[MENUITEM_TEXTSPEED] = gSaveBlock2Ptr->optionsTextSpeed;
+    sOptionsMenuPtr->option[MENUITEM_BATTLESCENE] = gSaveBlock2Ptr->optionsBattleSceneOff;
+    sOptionsMenuPtr->option[MENUITEM_BATTLESTYLE] = gSaveBlock2Ptr->optionsBattleStyle;
+    sOptionsMenuPtr->option[MENUITEM_SOUND] = gSaveBlock2Ptr->optionsSound;
+    sOptionsMenuPtr->option[MENUITEM_BUTTONMODE] = gSaveBlock2Ptr->optionsButtonMode;
+    sOptionsMenuPtr->option[MENUITEM_FRAMETYPE] = gSaveBlock2Ptr->optionsWindowFrameType;
     
     for (i = 0; i < MENUITEM_COUNT-1; i++)
     {
-        if (sOptionsMenu->option[i] > (gUnknown_83CC304[i])-1)
-            sOptionsMenu->option[i] = 0;
+        if (sOptionsMenuPtr->option[i] > (sOptionsMenuItemCounts[i])-1)
+            sOptionsMenuPtr->option[i] = 0;
     }
     HelpSystem_SetSomeVariable2(0xD);
     SetMainCallback2(sub_8088454);
@@ -236,7 +242,7 @@ static void sub_8088444(void)
 static void sub_8088454(void)
 {
     u8 i, state;
-    state = sOptionsMenu->state;
+    state = sOptionsMenuPtr->state;
     switch (state)
     {
     case 0:
@@ -266,7 +272,7 @@ static void sub_8088454(void)
             sub_80889A8(i);
         break;
     case 8:
-        sub_8088DE0(sOptionsMenu->unkE);
+        sub_8088DE0(sOptionsMenuPtr->unkE);
         break;
     case 9:
         sub_8088680();
@@ -274,7 +280,7 @@ static void sub_8088454(void)
     default:
         sub_8088514();
     }
-    sOptionsMenu->state++;
+    sOptionsMenuPtr->state++;
 }
 
 //sub_8088514
@@ -295,7 +301,7 @@ static void sub_8088530(void)
     DmaClear16(3, (void *)PLTT, PLTT_SIZE);    
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, gUnknown_83CC2D8, ARRAY_COUNT(gUnknown_83CC2D8));
+    InitBgsFromTemplates(0, sOptionMenuBgTemplates, ARRAY_COUNT(sOptionMenuBgTemplates));
     ChangeBgX(0, 0, 0);
     ChangeBgY(0, 0, 0);
     ChangeBgX(1, 0, 0);
@@ -304,7 +310,7 @@ static void sub_8088530(void)
     ChangeBgY(2, 0, 0);
     ChangeBgX(3, 0, 0);
     ChangeBgY(3, 0, 0);
-    InitWindows(gUnknown_83CC2B8);
+    InitWindows(sOptionMenuWinTemplates);
     DeactivateAllTextPrinters();
     SetGpuReg(REG_OFFSET_BLDCNT, 0xC1);
     SetGpuReg(REG_OFFSET_BLDY, 2);
@@ -322,7 +328,7 @@ static void sub_8088680(void)
     s32 x;
     x = 0xE4 - GetStringWidth(0, gText_PickSwitchCancel, 0);
     FillWindowPixelBuffer(2, 0xFF); 
-    AddTextPrinterParameterized3(2, 0, x, 0, gUnknown_83CC360, 0, gText_PickSwitchCancel);
+    AddTextPrinterParameterized3(2, 0, x, 0, sOptionsMenuPickSwitchCancelTextColor, 0, gText_PickSwitchCancel);
     PutWindowTilemap(2);
     CopyWindowToVram(2, 3);
 }
@@ -341,16 +347,16 @@ static void sub_80886D4(void)
 //sub_80886F0
 static bool8 sub_80886F0(void)
 {
-    switch (sOptionsMenu->state2)
+    switch (sOptionsMenuPtr->state2)
     {
     case 0:
-        LoadBgTiles(1, GetUserFrameGraphicsInfo(sOptionsMenu->option[MENUITEM_FRAMETYPE])->tiles, 0x120, 0x1AA);
+        LoadBgTiles(1, GetUserFrameGraphicsInfo(sOptionsMenuPtr->option[MENUITEM_FRAMETYPE])->tiles, 0x120, 0x1AA);
         break;
     case 1:
-        LoadPalette(GetUserFrameGraphicsInfo(sOptionsMenu->option[MENUITEM_FRAMETYPE])->palette, 0x20, 0x20);
+        LoadPalette(GetUserFrameGraphicsInfo(sOptionsMenuPtr->option[MENUITEM_FRAMETYPE])->palette, 0x20, 0x20);
         break;
     case 2:
-        LoadPalette(gUnknown_83CC2E4, 0x10, 0x20);
+        LoadPalette(sOptionsMenuPalette, 0x10, 0x20);
         LoadPalette(stdpal_get(2), 0xF0, 0x20);
         break;
     case 3:
@@ -359,7 +365,7 @@ static bool8 sub_80886F0(void)
     default:
         return TRUE;
     }
-    sOptionsMenu->state2++;
+    sOptionsMenuPtr->state2++;
     return FALSE;
 }
 
@@ -372,12 +378,12 @@ static void sub_8088780(u8 taskId)
     u8 v2, v5;
     struct OptionsMenu v4;
     
-    switch (sOptionsMenu->state3)
+    switch (sOptionsMenuPtr->state3)
     {
     case 0:
         BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
         sub_8088444();
-        sOptionsMenu->state3++;
+        sOptionsMenuPtr->state3++;
         break;
     case 2:
         if ((bool32) sub_80BF72C() == TRUE)    //cast to bool32 to remove the lsl/lsr 0x18 after func call
@@ -385,32 +391,32 @@ static void sub_8088780(u8 taskId)
         switch (sub_80888C0())
         {
         case 1:
-            sOptionsMenu->state3++;
+            sOptionsMenuPtr->state3++;
             break;
         case 2:
-            LoadBgTiles(1, GetUserFrameGraphicsInfo(sOptionsMenu->option[MENUITEM_FRAMETYPE])->tiles, 0x120, 0x1AA);
-            LoadPalette(GetUserFrameGraphicsInfo(sOptionsMenu->option[MENUITEM_FRAMETYPE])->palette, 0x20, 0x20);
-            sub_80889A8(sOptionsMenu->unkE);
-            sOptionsMenu->state3++;
+            LoadBgTiles(1, GetUserFrameGraphicsInfo(sOptionsMenuPtr->option[MENUITEM_FRAMETYPE])->tiles, 0x120, 0x1AA);
+            LoadPalette(GetUserFrameGraphicsInfo(sOptionsMenuPtr->option[MENUITEM_FRAMETYPE])->palette, 0x20, 0x20);
+            sub_80889A8(sOptionsMenuPtr->unkE);
+            sOptionsMenuPtr->state3++;
             break;
         case 3:
-            sub_8088DE0(sOptionsMenu->unkE);
+            sub_8088DE0(sOptionsMenuPtr->unkE);
             break;
         case 4:
-            sub_80889A8(sOptionsMenu->unkE);
-            sOptionsMenu->state3++;
+            sub_80889A8(sOptionsMenuPtr->unkE);
+            sOptionsMenuPtr->state3++;
             break;
         default:
             return;
         }
     case 3:
         BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
-        sOptionsMenu->state3++;
+        sOptionsMenuPtr->state3++;
     case 1:
     case 4:
         if (gPaletteFade.active)
             return;
-        sOptionsMenu->state3++;
+        sOptionsMenuPtr->state3++;
     case 5:
         sub_8088B00(taskId);
         break;
@@ -426,7 +432,7 @@ static void sub_8088780(u8 taskId)
                 "\tsub sp, 0x4\n"
                 "\tlsls r0, 24\n"
                 "\tlsrs r2, r0, 24\n"
-                "\tldr r1, _080887A0 @ =sOptionsMenu\n"
+                "\tldr r1, _080887A0 @ =sOptionsMenuPtr\n"
                 "\tldr r0, [r1]\n"
                 "\tldrb r0, [r0, 0x10]\n"
                 "\tadds r3, r1, 0\n"
@@ -440,7 +446,7 @@ static void sub_8088780(u8 taskId)
                 "\tldr r0, [r0]\n"
                 "\tmov pc, r0\n"
                 "\t.align 2, 0\n"
-                "_080887A0: .4byte sOptionsMenu\n"
+                "_080887A0: .4byte sOptionsMenuPtr\n"
                 "_080887A4: .4byte _080887A8\n"
                 "\t.align 2, 0\n"
                 "_080887A8:\n"
@@ -459,11 +465,11 @@ static void sub_8088780(u8 taskId)
                 "\tmovs r3, 0\n"
                 "\tbl BeginNormalPaletteFade\n"
                 "\tbl sub_8088444\n"
-                "\tldr r0, _080887DC @ =sOptionsMenu\n"
+                "\tldr r0, _080887DC @ =sOptionsMenuPtr\n"
                 "\tldr r1, [r0]\n"
                 "\tb _080888A2\n"
                 "\t.align 2, 0\n"
-                "_080887DC: .4byte sOptionsMenu\n"
+                "_080887DC: .4byte sOptionsMenuPtr\n"
                 "_080887E0:\n"
                 "\tbl sub_80BF72C\n"
                 "\tcmp r0, 0x1\n"
@@ -488,13 +494,13 @@ static void sub_8088780(u8 taskId)
                 "\t.4byte _08088858\n"
                 "\t.4byte _08088868\n"
                 "_08088818:\n"
-                "\tldr r0, _08088820 @ =sOptionsMenu\n"
+                "\tldr r0, _08088820 @ =sOptionsMenuPtr\n"
                 "\tldr r1, [r0]\n"
                 "\tb _080888A2\n"
                 "\t.align 2, 0\n"
-                "_08088820: .4byte sOptionsMenu\n"
+                "_08088820: .4byte sOptionsMenuPtr\n"
                 "_08088824:\n"
-                "\tldr r4, _08088854 @ =sOptionsMenu\n"
+                "\tldr r4, _08088854 @ =sOptionsMenuPtr\n"
                 "\tldr r0, [r4]\n"
                 "\tldrb r0, [r0, 0xA]\n"
                 "\tbl GetUserFrameGraphicsInfo\n"
@@ -515,24 +521,24 @@ static void sub_8088780(u8 taskId)
                 "\tldr r0, [r4]\n"
                 "\tb _0808886C\n"
                 "\t.align 2, 0\n"
-                "_08088854: .4byte sOptionsMenu\n"
+                "_08088854: .4byte sOptionsMenuPtr\n"
                 "_08088858:\n"
-                "\tldr r0, _08088864 @ =sOptionsMenu\n"
+                "\tldr r0, _08088864 @ =sOptionsMenuPtr\n"
                 "\tldr r0, [r0]\n"
                 "\tldrh r0, [r0, 0xE]\n"
                 "\tbl sub_8088DE0\n"
                 "\tb _080888B6\n"
                 "\t.align 2, 0\n"
-                "_08088864: .4byte sOptionsMenu\n"
+                "_08088864: .4byte sOptionsMenuPtr\n"
                 "_08088868:\n"
-                "\tldr r0, _08088874 @ =sOptionsMenu\n"
+                "\tldr r0, _08088874 @ =sOptionsMenuPtr\n"
                 "\tldr r0, [r0]\n"
                 "_0808886C:\n"
                 "\tldrb r0, [r0, 0xE]\n"
                 "\tbl sub_80889A8\n"
                 "\tb _080888B6\n"
                 "\t.align 2, 0\n"
-                "_08088874: .4byte sOptionsMenu\n"
+                "_08088874: .4byte sOptionsMenuPtr\n"
                 "_08088878:\n"
                 "\tmovs r0, 0x1\n"
                 "\tnegs r0, r0\n"
@@ -541,11 +547,11 @@ static void sub_8088780(u8 taskId)
                 "\tmovs r2, 0\n"
                 "\tmovs r3, 0x10\n"
                 "\tbl BeginNormalPaletteFade\n"
-                "\tldr r0, _08088890 @ =sOptionsMenu\n"
+                "\tldr r0, _08088890 @ =sOptionsMenuPtr\n"
                 "\tldr r1, [r0]\n"
                 "\tb _080888A2\n"
                 "\t.align 2, 0\n"
-                "_08088890: .4byte sOptionsMenu\n"
+                "_08088890: .4byte sOptionsMenuPtr\n"
                 "_08088894:\n"
                 "\tldr r0, _080888AC @ =gPaletteFade\n"
                 "\tldrb r1, [r0, 0x7]\n"
@@ -579,43 +585,43 @@ static u8 sub_80888C0(void)
     u16* curr;
     if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
     {
-        current = sOptionsMenu->option[(sOptionsMenu->unkE)];
-        if (current == (gUnknown_83CC304[sOptionsMenu->unkE] - 1))
-            sOptionsMenu->option[sOptionsMenu->unkE] = 0;
+        current = sOptionsMenuPtr->option[(sOptionsMenuPtr->unkE)];
+        if (current == (sOptionsMenuItemCounts[sOptionsMenuPtr->unkE] - 1))
+            sOptionsMenuPtr->option[sOptionsMenuPtr->unkE] = 0;
         else
-            sOptionsMenu->option[sOptionsMenu->unkE] = current + 1;
-        if (sOptionsMenu->unkE == MENUITEM_FRAMETYPE)
+            sOptionsMenuPtr->option[sOptionsMenuPtr->unkE] = current + 1;
+        if (sOptionsMenuPtr->unkE == MENUITEM_FRAMETYPE)
             return 2;
         else
             return 4;
     }
     else if (gMain.newAndRepeatedKeys & DPAD_LEFT)
     {
-        curr = &sOptionsMenu->option[sOptionsMenu->unkE];
+        curr = &sOptionsMenuPtr->option[sOptionsMenuPtr->unkE];
         if (*curr == 0)
-            *curr = gUnknown_83CC304[sOptionsMenu->unkE] - 1;
+            *curr = sOptionsMenuItemCounts[sOptionsMenuPtr->unkE] - 1;
         else
             --*(curr);
         
-        if (sOptionsMenu->unkE == MENUITEM_FRAMETYPE)
+        if (sOptionsMenuPtr->unkE == MENUITEM_FRAMETYPE)
             return 2;
         else
             return 4;
     }
     else if (gMain.newAndRepeatedKeys & DPAD_UP)
     {
-        if (sOptionsMenu->unkE == MENUITEM_TEXTSPEED)
-            sOptionsMenu->unkE = MENUITEM_CANCEL;
+        if (sOptionsMenuPtr->unkE == MENUITEM_TEXTSPEED)
+            sOptionsMenuPtr->unkE = MENUITEM_CANCEL;
         else
-            sOptionsMenu->unkE = sOptionsMenu->unkE - 1;
+            sOptionsMenuPtr->unkE = sOptionsMenuPtr->unkE - 1;
         return 3;        
     }
     else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
     {
-        if (sOptionsMenu->unkE == MENUITEM_CANCEL)
-            sOptionsMenu->unkE = MENUITEM_TEXTSPEED;
+        if (sOptionsMenuPtr->unkE == MENUITEM_CANCEL)
+            sOptionsMenuPtr->unkE = MENUITEM_TEXTSPEED;
         else
-            sOptionsMenu->unkE = sOptionsMenu->unkE + 1;
+            sOptionsMenuPtr->unkE = sOptionsMenuPtr->unkE + 1;
         return 3;
     }
     else if ((gMain.newKeys & B_BUTTON) || (gMain.newKeys & A_BUTTON))
@@ -638,7 +644,7 @@ static void sub_80889A8(u8 selection)
     u8* v8;
     u8 x, y;
     
-    memcpy(&dst, gUnknown_83CC363, 3);
+    memcpy(&dst, sOptionsMenuTextColor, 3);
     y = ((GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) - 1) * selection) + 2;
     x = 0x82;
     FillWindowPixelRect(1, 1, x, y, 0x46, GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT));
@@ -646,23 +652,23 @@ static void sub_80889A8(u8 selection)
     switch (selection)
     {
     case MENUITEM_TEXTSPEED:
-        AddTextPrinterParameterized3(1, 2, x, y, dst, -1, gUnknown_83CC330);
+        AddTextPrinterParameterized3(1, 2, x, y, dst, -1, sTextSpeedOptions);
         break;
     case MENUITEM_BATTLESCENE:
-        AddTextPrinterParameterized3(1, 2, x, y, dst, -1, gUnknown_83CC33C);
+        AddTextPrinterParameterized3(1, 2, x, y, dst, -1, sBattleSceneOptions);
         break;
     case MENUITEM_BATTLESTYLE:
-        AddTextPrinterParameterized3(1, 2, x, y, dst, -1, gUnknown_83CC344);
+        AddTextPrinterParameterized3(1, 2, x, y, dst, -1, sBattleStyleOptions);
         break;
     case MENUITEM_SOUND:
-        AddTextPrinterParameterized3(1, 2, x, y, dst, -1, gUnknown_83CC34C);
+        AddTextPrinterParameterized3(1, 2, x, y, dst, -1, sSoundOptions);
         break;
     case MENUITEM_BUTTONMODE:
-        AddTextPrinterParameterized3(1, 2, x, y, dst, -1, gUnknown_83CC354);
+        AddTextPrinterParameterized3(1, 2, x, y, dst, -1, sButtonTypeOptions);
         break;
     case MENUITEM_FRAMETYPE:
         StringCopy(str, gText_FrameType);
-        ConvertIntToDecimalStringN(v8, sOptionsMenu->option[2*selection] + 1, 1, 2);
+        ConvertIntToDecimalStringN(v8, sOptionsMenuPtr->option[2*selection] + 1, 1, 2);
         StringAppendN(str, v8, 3);
         AddTextPrinterParameterized3(1, 2, x, y, dst, -1, str);
         break;
@@ -683,7 +689,7 @@ static void sub_80889A8(u8 selection)
                 "\tlsls r0, 24\n"
                 "\tlsrs r5, r0, 24\n"
                 "\tadd r4, sp, 0x2C\n"
-                "\tldr r1, _08088A08 @ =gUnknown_83CC363\n"
+                "\tldr r1, _08088A08 @ =sOptionsMenuTextColor\n"
                 "\tadds r0, r4, 0\n"
                 "\tmovs r2, 0x3\n"
                 "\tbl memcpy\n"
@@ -721,7 +727,7 @@ static void sub_80889A8(u8 selection)
                 "\tldr r0, [r0]\n"
                 "\tmov pc, r0\n"
                 "\t.align 2, 0\n"
-                "_08088A08: .4byte gUnknown_83CC363\n"
+                "_08088A08: .4byte sOptionsMenuTextColor\n"
                 "_08088A0C: .4byte _08088A10\n"
                 "\t.align 2, 0\n"
                 "_08088A10:\n"
@@ -736,45 +742,45 @@ static void sub_80889A8(u8 selection)
                 "\tmovs r0, 0x1\n"
                 "\tnegs r0, r0\n"
                 "\tstr r0, [sp, 0x4]\n"
-                "\tldr r2, _08088A34 @ =gUnknown_83CC330\n"
+                "\tldr r2, _08088A34 @ =sTextSpeedOptions\n"
                 "\tb _08088A72\n"
                 "\t.align 2, 0\n"
-                "_08088A34: .4byte gUnknown_83CC330\n"
+                "_08088A34: .4byte sTextSpeedOptions\n"
                 "_08088A38:\n"
                 "\tstr r6, [sp]\n"
                 "\tmovs r0, 0x1\n"
                 "\tnegs r0, r0\n"
                 "\tstr r0, [sp, 0x4]\n"
-                "\tldr r2, _08088A44 @ =gUnknown_83CC33C\n"
+                "\tldr r2, _08088A44 @ =sBattleSceneOptions\n"
                 "\tb _08088A72\n"
                 "\t.align 2, 0\n"
-                "_08088A44: .4byte gUnknown_83CC33C\n"
+                "_08088A44: .4byte sBattleSceneOptions\n"
                 "_08088A48:\n"
                 "\tstr r6, [sp]\n"
                 "\tmovs r0, 0x1\n"
                 "\tnegs r0, r0\n"
                 "\tstr r0, [sp, 0x4]\n"
-                "\tldr r2, _08088A54 @ =gUnknown_83CC344\n"
+                "\tldr r2, _08088A54 @ =sBattleStyleOptions\n"
                 "\tb _08088A72\n"
                 "\t.align 2, 0\n"
-                "_08088A54: .4byte gUnknown_83CC344\n"
+                "_08088A54: .4byte sBattleStyleOptions\n"
                 "_08088A58:\n"
                 "\tstr r6, [sp]\n"
                 "\tmovs r0, 0x1\n"
                 "\tnegs r0, r0\n"
                 "\tstr r0, [sp, 0x4]\n"
-                "\tldr r2, _08088A64 @ =gUnknown_83CC34C\n"
+                "\tldr r2, _08088A64 @ =sSoundOptions\n"
                 "\tb _08088A72\n"
                 "\t.align 2, 0\n"
-                "_08088A64: .4byte gUnknown_83CC34C\n"
+                "_08088A64: .4byte sSoundOptions\n"
                 "_08088A68:\n"
                 "\tstr r6, [sp]\n"
                 "\tmovs r0, 0x1\n"
                 "\tnegs r0, r0\n"
                 "\tstr r0, [sp, 0x4]\n"
-                "\tldr r2, _08088A94 @ =gUnknown_83CC354\n"
+                "\tldr r2, _08088A94 @ =sButtonTypeOptions\n"
                 "_08088A72:\n"
-                "\tldr r0, _08088A98 @ =sOptionsMenu\n"
+                "\tldr r0, _08088A98 @ =sOptionsMenuPtr\n"
                 "\tldr r0, [r0]\n"
                 "\tlsls r1, r5, 1\n"
                 "\tadds r0, r1\n"
@@ -790,14 +796,14 @@ static void sub_80889A8(u8 selection)
                 "\tbl AddTextPrinterParameterized3\n"
                 "\tb _08088ADE\n"
                 "\t.align 2, 0\n"
-                "_08088A94: .4byte gUnknown_83CC354\n"
-                "_08088A98: .4byte sOptionsMenu\n"
+                "_08088A94: .4byte sButtonTypeOptions\n"
+                "_08088A98: .4byte sOptionsMenuPtr\n"
                 "_08088A9C:\n"
                 "\tldr r1, _08088AF8 @ =gText_FrameType\n"
                 "\tadd r0, sp, 0xC\n"
                 "\tbl StringCopy\n"
                 "\tadd r4, sp, 0x20\n"
-                "\tldr r0, _08088AFC @ =sOptionsMenu\n"
+                "\tldr r0, _08088AFC @ =sOptionsMenuPtr\n"
                 "\tldr r0, [r0]\n"
                 "\tlsls r1, r5, 1\n"
                 "\tadds r0, r1\n"
@@ -836,7 +842,7 @@ static void sub_80889A8(u8 selection)
                 "\tbx r0\n"
                 "\t.align 2, 0\n"
                 "_08088AF8: .4byte gText_FrameType\n"
-                "_08088AFC: .4byte sOptionsMenu\n");
+                "_08088AFC: .4byte sOptionsMenuPtr\n");
 }
 #endif
 
@@ -848,15 +854,15 @@ static void sub_8088B00(u8 taskId)
     SetMainCallback2(gMain.savedCallback);
     FreeAllWindowBuffers();
     
-    gSaveBlock2Ptr->optionsTextSpeed = (u8) sOptionsMenu->option[MENUITEM_TEXTSPEED];
-    gSaveBlock2Ptr->optionsBattleSceneOff = (u8) sOptionsMenu->option[MENUITEM_BATTLESCENE];
-    gSaveBlock2Ptr->optionsBattleStyle = (u8) sOptionsMenu->option[MENUITEM_BATTLESTYLE];
-    gSaveBlock2Ptr->optionsSound = sOptionsMenu->option[MENUITEM_SOUND];
-    gSaveBlock2Ptr->optionsButtonMode = (u8) sOptionsMenu->option[MENUITEM_BUTTONMODE];
-    gSaveBlock2Ptr->optionsWindowFrameType = (u8) sOptionsMenu->option[MENUITEM_FRAMETYPE];
+    gSaveBlock2Ptr->optionsTextSpeed = (u8) sOptionsMenuPtr->option[MENUITEM_TEXTSPEED];
+    gSaveBlock2Ptr->optionsBattleSceneOff = (u8) sOptionsMenuPtr->option[MENUITEM_BATTLESCENE];
+    gSaveBlock2Ptr->optionsBattleStyle = (u8) sOptionsMenuPtr->option[MENUITEM_BATTLESTYLE];
+    gSaveBlock2Ptr->optionsSound = sOptionsMenuPtr->option[MENUITEM_SOUND];
+    gSaveBlock2Ptr->optionsButtonMode = (u8) sOptionsMenuPtr->option[MENUITEM_BUTTONMODE];
+    gSaveBlock2Ptr->optionsWindowFrameType = (u8) sOptionsMenuPtr->option[MENUITEM_FRAMETYPE];
     SetPokemonCryStereo(gSaveBlock2Ptr->optionsSound);
-    Free(sOptionsMenu);
-    sOptionsMenu = NULL;
+    Free(sOptionsMenuPtr);
+    sOptionsMenuPtr = NULL;
     DestroyTask(taskId);
 }
 
@@ -905,7 +911,7 @@ static void sub_8088D8C(void)
     FillWindowPixelBuffer(1, 0x11);
     for (i = 0; i < MENUITEM_COUNT; i++)
     {
-        AddTextPrinterParameterized(1, 2, gUnknown_83CC314[i], 8, (u8) ((i*(GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT))) + 2) - i, 0xFF, 0);    
+        AddTextPrinterParameterized(1, 2, sOptionMenuItemsNames[i], 8, (u8) ((i*(GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT))) + 2) - i, 0xFF, 0);    
     }
 }
 

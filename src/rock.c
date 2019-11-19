@@ -87,8 +87,8 @@ const struct SpriteTemplate gUnknown_83E73E4 =
 static const union AffineAnimCmd gUnknown_83E73FC[] =
 {
     AFFINEANIMCMD_FRAME(0xC0, 0xC0, 0, 0),
-    AFFINEANIMCMD_FRAME(0x2, 0xFFFD, 0, 5),
-    AFFINEANIMCMD_FRAME(0xFFFE, 0x3, 0, 5),
+    AFFINEANIMCMD_FRAME(0x2, -0x3, 0, 5),
+    AFFINEANIMCMD_FRAME(-0x2, 0x3, 0, 5),
     AFFINEANIMCMD_JUMP(1),
 };
 
@@ -152,7 +152,7 @@ static const struct Subsprite gUnknown_83E7468[] =
 
 static const struct SubspriteTable gUnknown_83E7470[] =
 {
-    { ARRAY_COUNT(gUnknown_83E7468), gUnknown_83E7468 },
+    { NELEMS(gUnknown_83E7468), gUnknown_83E7468 },
 };
 
 static const union AnimCmd gUnknown_83E7478[] =
@@ -588,7 +588,7 @@ void sub_80B4BD0(u8 taskId)
     task->data[13] = pan1;
     task->data[14] = (pan2 - pan1) / task->data[8];
     task->data[1] = var4;
-    task->data[15] = GetAnimBattlerSpriteId(0);
+    task->data[15] = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     task->func = sub_80B4D00;
 }
 

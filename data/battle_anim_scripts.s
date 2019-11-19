@@ -924,11 +924,11 @@ Move_LEECH_SEED:: @ 81C7C23
 Move_EMBER:: @ 81C7C79
 	loadspritegfx 10029
 	loopsewithpan SE_W052, 192, 5, 2
-	createsprite gUnknown_83E5D4C, ANIM_TARGET, 2, 20, 0, -16, 24, 20, 1
+	createsprite gEmberSpriteTemplate, ANIM_TARGET, 2, 20, 0, -16, 24, 20, 1
 	delay 4
-	createsprite gUnknown_83E5D4C, ANIM_TARGET, 2, 20, 0, 0, 24, 20, 1
+	createsprite gEmberSpriteTemplate, ANIM_TARGET, 2, 20, 0, 0, 24, 20, 1
 	delay 4
-	createsprite gUnknown_83E5D4C, ANIM_TARGET, 2, 20, 0, 16, 24, 20, 1
+	createsprite gEmberSpriteTemplate, ANIM_TARGET, 2, 20, 0, 16, 24, 20, 1
 	delay 16
 	playsewithpan SE_W172, 63
 	call gUnknown_81C7CD5
@@ -937,7 +937,7 @@ Move_EMBER:: @ 81C7C79
 	end
 
 gUnknown_81C7CD5:: @ 81C7CD5
-	createsprite gUnknown_83E5D64, ANIM_TARGET, 2, -24, 24, 24, 24, 20, 1, 1
+	createsprite gEmberFlareSpriteTemplate, ANIM_TARGET, 2, -24, 24, 24, 24, 20, 1, 1
 	delay 4
 	return
 
@@ -949,7 +949,7 @@ Move_MEGA_PUNCH:: @ 81C7CED
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 0, 0, 16, 0
 	setalpha 12, 8
 	playsewithpan SE_W025, 63
-	createsprite gUnknown_83E67C0, ANIM_ATTACKER, 3, 0, 0, 0, 50
+	createsprite gMegaPunchKickSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 50
 	createvisualtask sub_80BA7F8, 10, 4, 2, 0, 7, 32767
 	delay 50
 	call gUnknown_81C7D89
@@ -997,7 +997,7 @@ Move_MEGA_KICK:: @ 81C7DC7
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 0, 0, 16, 0
 	setalpha 12, 8
 	playsewithpan SE_W025, 63
-	createsprite gUnknown_83E67C0, ANIM_ATTACKER, 3, 0, 0, 1, 50
+	createsprite gMegaPunchKickSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 1, 50
 	createvisualtask sub_80BA7F8, 10, 4, 2, 0, 7, 32767
 	delay 50
 	playsewithpan SE_W025B, 63
@@ -1031,12 +1031,12 @@ gUnknown_81C7E77:: @ 81C7E77
 
 gUnknown_81C7E91:: @ 81C7E91
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 2, -8, -8, 1, 2
-	createsprite gUnknown_83E6710, ANIM_ATTACKER, 3, -8, 0, 8, 1, 0
+	createsprite gFistFootSpriteTemplate, ANIM_ATTACKER, 3, -8, 0, 8, 1, 0
 	goto gUnknown_81C7E77
 
 gUnknown_81C7EB6:: @ 81C7EB6
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 2, 8, -8, 1, 2
-	createsprite gUnknown_83E6710, ANIM_ATTACKER, 3, 8, 0, 8, 1, 0
+	createsprite gFistFootSpriteTemplate, ANIM_ATTACKER, 3, 8, 0, 8, 1, 0
 	goto gUnknown_81C7E77
 
 Move_SONIC_BOOM:: @ 81C7EDB
@@ -1172,24 +1172,24 @@ gUnknown_81C81E3:: @ 81C81E3
 
 gUnknown_81C81E8:: @ 81C81E8
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 2, -20, -20, 1, 2
-	createsprite gUnknown_83E6710, ANIM_TARGET, 3, -20, -12, 8, 1, 0
+	createsprite gFistFootSpriteTemplate, ANIM_TARGET, 3, -20, -12, 8, 1, 0
 	createvisualtask AnimTask_ShakeMon, 2, 1, 3, 0, 6, 1
 	playsewithpan SE_W233B, 63
 	delay 8
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 2, 8, 0, 1, 2
-	createsprite gUnknown_83E6710, ANIM_TARGET, 3, 8, 8, 8, 1, 0
+	createsprite gFistFootSpriteTemplate, ANIM_TARGET, 3, 8, 8, 8, 1, 0
 	createvisualtask AnimTask_ShakeMon, 2, 1, 3, 0, 6, 1
 	playsewithpan SE_W233B, 63
 	goto gUnknown_81C81E3
 
 gUnknown_81C8259:: @ 81C8259
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 2, 12, -20, 1, 2
-	createsprite gUnknown_83E6710, ANIM_TARGET, 3, 12, -12, 8, 1, 0
+	createsprite gFistFootSpriteTemplate, ANIM_TARGET, 3, 12, -12, 8, 1, 0
 	createvisualtask AnimTask_ShakeMon, 2, 1, 3, 0, 6, 1
 	playsewithpan SE_W233B, 63
 	delay 8
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 2, -12, 0, 1, 2
-	createsprite gUnknown_83E6710, ANIM_TARGET, 3, -12, 8, 8, 1, 0
+	createsprite gFistFootSpriteTemplate, ANIM_TARGET, 3, -12, 8, 8, 1, 0
 	createvisualtask AnimTask_ShakeMon, 2, 1, 3, 0, 6, 1
 	playsewithpan SE_W233B, 63
 	goto gUnknown_81C81E3
@@ -1283,7 +1283,7 @@ Move_REVERSAL:: @ 81C8445
 	delay 8
 	playsewithpan SE_W233B, 63
 	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 31, 3, 1, 32767, 8, 0, 0
-	createsprite gUnknown_83E6710, ANIM_TARGET, 4, 0, 0, 10, 1, 0
+	createsprite gFistFootSpriteTemplate, ANIM_TARGET, 4, 0, 0, 10, 1, 0
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, 0, 0, 1, 1
 	createvisualtask sub_8099BD4, 5, 0, 1, 8, 1, 0
 	end
@@ -1383,7 +1383,7 @@ Move_DIZZY_PUNCH:: @ 81C86FC
 	monbg 1
 	setalpha 12, 8
 	call gUnknown_81C8817
-	createsprite gUnknown_83E6710, ANIM_TARGET, 5, 16, 8, 20, 1, 0
+	createsprite gFistFootSpriteTemplate, ANIM_TARGET, 5, 16, 8, 20, 1, 0
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 4, 16, 0, 1, 1
 	playsewithpan SE_W004, 63
 	createsprite gUnknown_83E67F0, ANIM_TARGET, 3, 16, 8, 160, -32
@@ -1394,7 +1394,7 @@ Move_DIZZY_PUNCH:: @ 81C86FC
 	createsprite gUnknown_83E67F0, ANIM_TARGET, 3, 16, 8, -384, -31
 	delay 10
 	call gUnknown_81C8817
-	createsprite gUnknown_83E6710, ANIM_TARGET, 5, -16, -8, 20, 1, 0
+	createsprite gFistFootSpriteTemplate, ANIM_TARGET, 5, -16, -8, 20, 1, 0
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 4, -16, -16, 1, 1
 	playsewithpan SE_W233B, 63
 	createsprite gUnknown_83E67F0, ANIM_TARGET, 3, -16, -8, 160, -32
@@ -3196,7 +3196,7 @@ gUnknown_81CB11E:: @ 81CB11E
 	playsewithpan SE_W026, 192
 	delay 6
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, 0, 0, 1, 1
-	createsprite gUnknown_83E6710, ANIM_TARGET, 4, 0, 0, 8, 1, 0
+	createsprite gFistFootSpriteTemplate, ANIM_TARGET, 4, 0, 0, 8, 1, 0
 	playsewithpan SE_W004, 63
 	createvisualtask AnimTask_ShakeMon, 2, 1, 3, 0, 6, 1
 	waitforvisualfinish
@@ -3523,7 +3523,7 @@ Move_HEAT_WAVE:: @ 81CB766
 	loadspritegfx 10261
 	createvisualtask AnimTask_BlendParticle, 5, 10261, 0, 6, 6, 31
 	createvisualtask AnimTask_LoadSandstormBackground, 5, 1
-	createvisualtask sub_80ADAA4, 6, 6, 31
+	createvisualtask AnimTask_BlendBackground, 6, 6, 31
 	panse_1B SE_W257, 192, 63, 2, 0
 	delay 4
 	createvisualtask sub_80AD800, 5, 
@@ -3548,7 +3548,7 @@ Move_HAIL:: @ 81CB816
 	loadspritegfx 10141
 	createvisualtask sub_80BA7F8, 10, 1, 3, 0, 6, 0
 	waitforvisualfinish
-	createvisualtask sub_80B038C, 5, 
+	createvisualtask AnimTask_Hail1, 5, 
 	loopsewithpan SE_W258, 0, 8, 10
 	waitforvisualfinish
 	createvisualtask sub_80BA7F8, 10, 1, 3, 6, 0, 0
@@ -3776,20 +3776,20 @@ gUnknown_81CBC47:: @ 81CBC47
 	delay 4
 	delay 1
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 3, -18, -18, 1, 1
-	createsprite gUnknown_83E6710, ANIM_ATTACKER, 2, -18, -18, 10, 1, 0
+	createsprite gFistFootSpriteTemplate, ANIM_ATTACKER, 2, -18, -18, 10, 1, 0
 	playsewithpan SE_W233, 63
 	delay 20
 	createsprite gHorizontalLungeSpriteTemplate, ANIM_ATTACKER, 2, 3, 8
 	delay 5
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 3, 18, 18, 1, 1
-	createsprite gUnknown_83E6710, ANIM_ATTACKER, 2, 18, 18, 10, 1, 0
+	createsprite gFistFootSpriteTemplate, ANIM_ATTACKER, 2, 18, 18, 10, 1, 0
 	playsewithpan SE_W233, 63
 	delay 20
 	createvisualtask AnimTask_WindUpLunge, 2, 0, -24, 0, 24, 10, 24, 3
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 2, 0, 6, 0
 	delay 37
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 1, 1
-	createsprite gUnknown_83E6710, ANIM_ATTACKER, 2, 0, 0, 10, 1, 0
+	createsprite gFistFootSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 10, 1, 0
 	playsewithpan SE_W233B, 63
 	waitforvisualfinish
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 2, 6, 0, 0
@@ -3805,20 +3805,20 @@ gUnknown_81CBD16:: @ 81CBD16
 	createsprite gUnknown_83E6808, ANIM_ATTACKER, 3, 1, 0, 0, 90, 10
 	delay 1
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 3, -18, -18, 1, 1
-	createsprite gUnknown_83E6710, ANIM_ATTACKER, 2, -18, -18, 10, 1, 0
+	createsprite gFistFootSpriteTemplate, ANIM_ATTACKER, 2, -18, -18, 10, 1, 0
 	playsewithpan SE_W233, 63
 	delay 20
 	createsprite gHorizontalLungeSpriteTemplate, ANIM_ATTACKER, 2, 3, 8
 	delay 5
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 3, 18, 18, 1, 1
-	createsprite gUnknown_83E6710, ANIM_ATTACKER, 2, 18, 18, 10, 1, 0
+	createsprite gFistFootSpriteTemplate, ANIM_ATTACKER, 2, 18, 18, 10, 1, 0
 	playsewithpan SE_W233, 63
 	delay 20
 	createvisualtask AnimTask_WindUpLunge, 2, 0, -24, 0, 24, 10, 24, 3
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 2, 0, 6, 0
 	delay 37
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 1, 1
-	createsprite gUnknown_83E6710, ANIM_ATTACKER, 2, 0, 0, 10, 1, 0
+	createsprite gFistFootSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 10, 1, 0
 	playsewithpan SE_W233B, 63
 	waitforvisualfinish
 	createsprite gUnknown_83E6820, ANIM_ATTACKER, 2, 1, 0, -8, -12
@@ -4026,7 +4026,7 @@ Move_MIST_BALL:: @ 81CC212
 	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, 1, 1, 1, 32279, 16, 32767, 16
 	delay 0
 	playsewithpan SE_W114, 0
-	createvisualtask sub_80AFD80, 5, 
+	createvisualtask AnimTask_LoadMistTiles, 5, 
 	createvisualtask sub_80BA7F8, 10, 4, 3, 0, 16, 32767
 	delay 8
 	createvisualtask AnimTask_ShakeMon, 2, 1, 4, 0, 70, 0
@@ -4154,7 +4154,7 @@ Move_NEEDLE_ARM:: @ 81CC513
 	waitforvisualfinish
 	createvisualtask AnimTask_ShakeMon2, 2, 1, 4, 0, 18, 1
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, 0, 0, 1, 1
-	createsprite gUnknown_83E6710, ANIM_TARGET, 4, 0, 0, 8, 1, 0
+	createsprite gFistFootSpriteTemplate, ANIM_TARGET, 4, 0, 0, 8, 1, 0
 	playsewithpan SE_W233B, 63
 	createsprite gUnknown_83E3100, ANIM_TARGET, 2, 1, 1, 0, -24, 10
 	createsprite gUnknown_83E3100, ANIM_TARGET, 2, 1, 1, 17, -17, 10
@@ -4379,7 +4379,7 @@ Move_SHADOW_PUNCH:: @ 81CCB76
 	playsewithpan SE_W026, 192
 	delay 6
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, 0, 0, 1, 1
-	createsprite gUnknown_83E6710, ANIM_TARGET, 4, 0, 0, 8, 1, 0
+	createsprite gFistFootSpriteTemplate, ANIM_TARGET, 4, 0, 0, 8, 1, 0
 	playsewithpan SE_W004, 63
 	createvisualtask AnimTask_ShakeMon, 2, 1, 3, 0, 6, 1
 	waitforvisualfinish
@@ -4749,7 +4749,7 @@ Move_ICE_PUNCH:: @ 81CD2E0
 	createsprite gUnknown_83E6348, ANIM_ATTACKER, 2, 160
 	createsprite gUnknown_83E6348, ANIM_ATTACKER, 2, 224
 	delay 17
-	createsprite gUnknown_83E6710, ANIM_ATTACKER, 4, 0, -10, 8, 1, 0
+	createsprite gFistFootSpriteTemplate, ANIM_ATTACKER, 4, 0, -10, 8, 1, 0
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 3, 0, -10, 1, 1
 	playsewithpan SE_W004, 63
 	delay 2
@@ -4914,7 +4914,7 @@ Move_THUNDER_PUNCH:: @ 81CD6CA
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 2, 0, 16, 0
 	waitforvisualfinish
 	playsewithpan SE_W004, 63
-	createsprite gUnknown_83E6710, ANIM_TARGET, 4, 0, 0, 8, 1, 0
+	createsprite gFistFootSpriteTemplate, ANIM_TARGET, 4, 0, 0, 8, 1, 0
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, 0, 0, 1, 1
 	delay 1
 	createvisualtask sub_80BA0E8, 2, 257, 257, 257
@@ -6661,19 +6661,19 @@ gUnknown_81CFEEB:: @ 81CFEEB
 	end
 
 gUnknown_81CFEF0:: @ 81CFEF0
-	createsprite gUnknown_83E6710, ANIM_TARGET, 4, -16, -8, 20, 1, 1
+	createsprite gFistFootSpriteTemplate, ANIM_TARGET, 4, -16, -8, 20, 1, 1
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, -16, -16, 1, 2
 	createvisualtask AnimTask_ShakeMon, 5, 1, 4, 0, 6, 1
 	goto gUnknown_81CFEEB
 
 gUnknown_81CFF26:: @ 81CFF26
-	createsprite gUnknown_83E6710, ANIM_TARGET, 4, 8, 8, 20, 1, 1
+	createsprite gFistFootSpriteTemplate, ANIM_TARGET, 4, 8, 8, 20, 1, 1
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, 8, 0, 1, 2
 	createvisualtask AnimTask_ShakeMon, 5, 1, 4, 0, 6, 1
 	goto gUnknown_81CFEEB
 
 gUnknown_81CFF5C:: @ 81CFF5C
-	createsprite gUnknown_83E6710, ANIM_TARGET, 4, 0, 0, 20, 1, 1
+	createsprite gFistFootSpriteTemplate, ANIM_TARGET, 4, 0, 0, 20, 1, 1
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, 0, -8, 1, 1
 	createvisualtask AnimTask_ShakeMon, 5, 1, 6, 0, 8, 1
 	goto gUnknown_81CFEEB
@@ -6687,7 +6687,7 @@ Move_DYNAMIC_PUNCH:: @ 81CFF92
 	monbg 3
 	setalpha 12, 8
 	playsewithpan SE_W233B, 63
-	createsprite gUnknown_83E6710, ANIM_TARGET, 3, 0, 0, 20, 1, 0
+	createsprite gFistFootSpriteTemplate, ANIM_TARGET, 3, 0, 0, 20, 1, 0
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 2, 0, 0, 1, 0
 	createvisualtask AnimTask_ShakeMon, 5, 1, 5, 0, 7, 1
 	delay 1
@@ -6726,17 +6726,17 @@ Move_COUNTER:: @ 81D005A
 	playsewithpan SE_W233B, 63
 	delay 1
 	createvisualtask AnimTask_ShakeMon, 2, 1, 5, 0, 25, 1
-	createsprite gUnknown_83E6710, ANIM_ATTACKER, 3, -15, 18, 8, 1, 0
+	createsprite gFistFootSpriteTemplate, ANIM_ATTACKER, 3, -15, 18, 8, 1, 0
 	delay 3
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 2, 0, -4, 1, 0
 	playsewithpan SE_W233B, 63
 	delay 1
-	createsprite gUnknown_83E6710, ANIM_ATTACKER, 3, 0, -4, 8, 1, 0
+	createsprite gFistFootSpriteTemplate, ANIM_ATTACKER, 3, 0, -4, 8, 1, 0
 	delay 3
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 2, 15, 9, 1, 0
 	playsewithpan SE_W233B, 63
 	delay 1
-	createsprite gUnknown_83E6710, ANIM_ATTACKER, 3, 15, 9, 8, 1, 0
+	createsprite gFistFootSpriteTemplate, ANIM_ATTACKER, 3, 15, 9, 8, 1, 0
 	delay 5
 	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 5
 	waitforvisualfinish
@@ -6775,7 +6775,7 @@ Move_ROCK_SMASH:: @ 81D01A4
 	setalpha 12, 8
 	delay 1
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 1, 1
-	createsprite gUnknown_83E6710, ANIM_ATTACKER, 2, 0, 0, 8, 1, 0
+	createsprite gFistFootSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 8, 1, 0
 	playsewithpan SE_W233B, 63
 	createvisualtask AnimTask_ShakeMon, 2, 1, 3, 0, 5, 1
 	waitforvisualfinish
@@ -7050,7 +7050,7 @@ gUnknown_81D086C:: @ 81D086C
 Move_HAZE:: @ 81D0882
 	waitforvisualfinish
 	playsewithpan SE_W114, 0
-	createvisualtask sub_80AFAE4, 5, 
+	createvisualtask AnimTask_Haze1, 5, 
 	delay 30
 	createvisualtask sub_80BA7F8, 10, 1920, 2, 0, 16, 0
 	delay 90
@@ -7070,7 +7070,7 @@ Move_FIRE_PUNCH:: @ 81D08B5
 	createsprite gUnknown_83E5BE0, ANIM_TARGET, 1, 196
 	playsewithpan SE_W172, 63
 	waitforvisualfinish
-	createsprite gUnknown_83E6710, ANIM_TARGET, 3, 0, 0, 8, 1, 0
+	createsprite gFistFootSpriteTemplate, ANIM_TARGET, 3, 0, 0, 8, 1, 0
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 2, 0, 0, 1, 1
 	createvisualtask AnimTask_ShakeMon, 2, 1, 0, 3, 15, 1
 	call gUnknown_81D0950
@@ -9935,7 +9935,7 @@ Move_MAGICAL_LEAF:: @ 81D4E6D
 Move_ICE_BALL:: @ 81D4F8E
 	loadspritegfx 10043
 	loadspritegfx 10141
-	createvisualtask sub_80B0870, 5, 0
+	createvisualtask AnimTask_GetRolloutCounter, 5, 0
 	jumpargeq 0, 4, gUnknown_81D5005
 
 gUnknown_81D4FA5:: @ 81D4FA5
@@ -9943,7 +9943,7 @@ gUnknown_81D4FA5:: @ 81D4FA5
 	createsprite gUnknown_83E665C, ANIM_TARGET, 2, 15, 0, -12, -16, 30, -40
 	delay 28
 	playsewithpan SE_W280, 63
-	createvisualtask sub_80B0870, 5, 0
+	createvisualtask AnimTask_GetRolloutCounter, 5, 0
 	jumpargeq 0, 0, gUnknown_81D5016
 	jumpargeq 0, 1, gUnknown_81D5045
 	jumpargeq 0, 2, gUnknown_81D507E
@@ -9951,7 +9951,7 @@ gUnknown_81D4FA5:: @ 81D4FA5
 	jumpargeq 0, 4, gUnknown_81D5109
 
 gUnknown_81D4FF3:: @ 81D4FF3
-	createvisualtask sub_80B0870, 5, 0
+	createvisualtask AnimTask_GetRolloutCounter, 5, 0
 	jumpargeq 0, 4, gUnknown_81D500C
 
 gUnknown_81D5004:: @ 81D5004
@@ -10272,88 +10272,88 @@ gUnknown_81D5712:: @ 81D5712
 	return
 
 gUnknown_81D575B:: @ 81D575B
-	createsprite gUnknown_83E6AB8, ANIM_TARGET, 2, 10, 10, 0
+	createsprite gPoisonBubbleSpriteTemplate, ANIM_TARGET, 2, 10, 10, 0
 	playsewithpan SE_W092, 63
 	delay 6
-	createsprite gUnknown_83E6AB8, ANIM_TARGET, 2, 20, -20, 0
+	createsprite gPoisonBubbleSpriteTemplate, ANIM_TARGET, 2, 20, -20, 0
 	playsewithpan SE_W092, 63
 	delay 6
-	createsprite gUnknown_83E6AB8, ANIM_TARGET, 2, -20, 15, 0
+	createsprite gPoisonBubbleSpriteTemplate, ANIM_TARGET, 2, -20, 15, 0
 	playsewithpan SE_W092, 63
 	delay 6
-	createsprite gUnknown_83E6AB8, ANIM_TARGET, 2, 0, 0, 0
+	createsprite gPoisonBubbleSpriteTemplate, ANIM_TARGET, 2, 0, 0, 0
 	playsewithpan SE_W092, 63
 	delay 6
-	createsprite gUnknown_83E6AB8, ANIM_TARGET, 2, -20, -20, 0
+	createsprite gPoisonBubbleSpriteTemplate, ANIM_TARGET, 2, -20, -20, 0
 	playsewithpan SE_W092, 63
 	delay 6
-	createsprite gUnknown_83E6AB8, ANIM_TARGET, 2, 16, -8, 0
+	createsprite gPoisonBubbleSpriteTemplate, ANIM_TARGET, 2, 16, -8, 0
 	playsewithpan SE_W092, 63
 	return
 
 gUnknown_81D57CC:: @ 81D57CC
-	createsprite gUnknown_83E6AD0, ANIM_ATTACKER, 2, 10, 10, 0
+	createsprite gWaterBubbleSpriteTemplate, ANIM_ATTACKER, 2, 10, 10, 0
 	playsewithpan SE_W145C, 63
 	delay 6
-	createsprite gUnknown_83E6AD0, ANIM_ATTACKER, 2, 20, -20, 0
+	createsprite gWaterBubbleSpriteTemplate, ANIM_ATTACKER, 2, 20, -20, 0
 	playsewithpan SE_W145C, 63
 	delay 6
-	createsprite gUnknown_83E6AD0, ANIM_ATTACKER, 2, -20, 15, 0
+	createsprite gWaterBubbleSpriteTemplate, ANIM_ATTACKER, 2, -20, 15, 0
 	playsewithpan SE_W145C, 63
 	delay 6
-	createsprite gUnknown_83E6AD0, ANIM_ATTACKER, 2, 0, 0, 0
+	createsprite gWaterBubbleSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 0
 	playsewithpan SE_W145C, 63
 	delay 6
-	createsprite gUnknown_83E6AD0, ANIM_ATTACKER, 2, -20, -20, 0
+	createsprite gWaterBubbleSpriteTemplate, ANIM_ATTACKER, 2, -20, -20, 0
 	playsewithpan SE_W145C, 63
 	delay 6
-	createsprite gUnknown_83E6AD0, ANIM_ATTACKER, 2, 16, -8, 0
+	createsprite gWaterBubbleSpriteTemplate, ANIM_ATTACKER, 2, 16, -8, 0
 	playsewithpan SE_W145C, 63
 	return
 
 gUnknown_81D583D:: @ 81D583D
-	createsprite gUnknown_83E6AD0, ANIM_ATTACKER, 2, 10, 10, 1
+	createsprite gWaterBubbleSpriteTemplate, ANIM_ATTACKER, 2, 10, 10, 1
 	playsewithpan SE_W145C, 63
 	delay 6
-	createsprite gUnknown_83E6AD0, ANIM_ATTACKER, 2, -28, -10, 1
+	createsprite gWaterBubbleSpriteTemplate, ANIM_ATTACKER, 2, -28, -10, 1
 	playsewithpan SE_W145C, 63
 	delay 6
-	createsprite gUnknown_83E6AD0, ANIM_ATTACKER, 2, 20, -20, 1
+	createsprite gWaterBubbleSpriteTemplate, ANIM_ATTACKER, 2, 20, -20, 1
 	playsewithpan SE_W145C, 63
 	delay 6
-	createsprite gUnknown_83E6AD0, ANIM_ATTACKER, 2, -20, 15, 1
+	createsprite gWaterBubbleSpriteTemplate, ANIM_ATTACKER, 2, -20, 15, 1
 	playsewithpan SE_W145C, 63
 	delay 6
-	createsprite gUnknown_83E6AD0, ANIM_ATTACKER, 2, 0, 0, 1
+	createsprite gWaterBubbleSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 1
 	playsewithpan SE_W145C, 63
 	delay 6
-	createsprite gUnknown_83E6AD0, ANIM_ATTACKER, 2, 27, 8, 1
+	createsprite gWaterBubbleSpriteTemplate, ANIM_ATTACKER, 2, 27, 8, 1
 	playsewithpan SE_W145C, 63
 	delay 6
-	createsprite gUnknown_83E6AD0, ANIM_ATTACKER, 2, -20, -20, 1
+	createsprite gWaterBubbleSpriteTemplate, ANIM_ATTACKER, 2, -20, -20, 1
 	playsewithpan SE_W145C, 63
 	delay 6
-	createsprite gUnknown_83E6AD0, ANIM_ATTACKER, 2, 16, -8, 1
+	createsprite gWaterBubbleSpriteTemplate, ANIM_ATTACKER, 2, 16, -8, 1
 	playsewithpan SE_W145C, 63
 	return
 
 gUnknown_81D58D4:: @ 81D58D4
 	playsewithpan SE_W085B, 63
-	createsprite gUnknown_83E6088, ANIM_TARGET, 2, 5, 0, 5, 0
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, 5, 0, 5, 0
 	delay 2
-	createsprite gUnknown_83E6088, ANIM_TARGET, 2, -5, 10, 5, 1
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, -5, 10, 5, 1
 	delay 2
-	createsprite gUnknown_83E6088, ANIM_TARGET, 2, 15, 20, 5, 2
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, 15, 20, 5, 2
 	delay 2
-	createsprite gUnknown_83E6088, ANIM_TARGET, 2, -15, -10, 5, 0
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, -15, -10, 5, 0
 	delay 2
-	createsprite gUnknown_83E6088, ANIM_TARGET, 2, 25, 0, 5, 1
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, 25, 0, 5, 1
 	delay 2
-	createsprite gUnknown_83E6088, ANIM_TARGET, 2, -8, 8, 5, 2
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, -8, 8, 5, 2
 	delay 2
-	createsprite gUnknown_83E6088, ANIM_TARGET, 2, 2, -8, 5, 0
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, 2, -8, 5, 0
 	delay 2
-	createsprite gUnknown_83E6088, ANIM_TARGET, 2, -20, 15, 5, 1
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, -20, 15, 5, 1
 	return
 
 gUnknown_81D595F:: @ 81D595F

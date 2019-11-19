@@ -30,7 +30,7 @@ static void sub_80B3D78(u8 taskId);
 static const union AffineAnimCmd gUnknown_83E6DDC[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
-    AFFINEANIMCMD_FRAME(0xFFFE, 0xFFFE, -10, 120),
+    AFFINEANIMCMD_FRAME(-0x2, -0x2, -10, 120),
     AFFINEANIMCMD_END,
 };
 
@@ -305,7 +305,7 @@ const struct SpriteTemplate gUnknown_83E705C =
 
 static const union AffineAnimCmd gUnknown_83E7074[] =
 {
-    AFFINEANIMCMD_FRAME(0xFFF8, 0xFFF8, 0, 8),
+    AFFINEANIMCMD_FRAME(-0x8, -0x8, 0, 8),
     AFFINEANIMCMD_FRAME(0x8, 0x8, 0, 8),
     AFFINEANIMCMD_JUMP(0),
 };
@@ -313,27 +313,27 @@ static const union AffineAnimCmd gUnknown_83E7074[] =
 static const union AffineAnimCmd gUnknown_83E708C[] =
 {
     AFFINEANIMCMD_FRAME(0xF0, 0xF0, 0, 0),
-    AFFINEANIMCMD_FRAME(0xFFF8, 0xFFF8, 0, 6),
+    AFFINEANIMCMD_FRAME(-0x8, -0x8, 0, 6),
     AFFINEANIMCMD_FRAME(0x8, 0x8, 0, 8),
-    AFFINEANIMCMD_FRAME(0xFFF8, 0xFFF8, 0, 2),
+    AFFINEANIMCMD_FRAME(-0x8, -0x8, 0, 2),
     AFFINEANIMCMD_JUMP(1),
 };
 
 static const union AffineAnimCmd gUnknown_83E70B4[] =
 {
     AFFINEANIMCMD_FRAME(0xD0, 0xD0, 0, 0),
-    AFFINEANIMCMD_FRAME(0xFFF8, 0xFFF8, 0, 4),
+    AFFINEANIMCMD_FRAME(-0x8, -0x8, 0, 4),
     AFFINEANIMCMD_FRAME(0x8, 0x8, 0, 8),
-    AFFINEANIMCMD_FRAME(0xFFF8, 0xFFF8, 0, 4),
+    AFFINEANIMCMD_FRAME(-0x8, -0x8, 0, 4),
     AFFINEANIMCMD_JUMP(1),
 };
 
 static const union AffineAnimCmd gUnknown_83E70DC[] =
 {
     AFFINEANIMCMD_FRAME(0xB0, 0xB0, 0, 0),
-    AFFINEANIMCMD_FRAME(0xFFF8, 0xFFF8, 0, 2),
+    AFFINEANIMCMD_FRAME(-0x8, -0x8, 0, 2),
     AFFINEANIMCMD_FRAME(0x8, 0x8, 0, 8),
-    AFFINEANIMCMD_FRAME(0xFFF8, 0xFFF8, 0, 6),
+    AFFINEANIMCMD_FRAME(-0x8, -0x8, 0, 6),
     AFFINEANIMCMD_JUMP(1),
 };
 
@@ -384,11 +384,11 @@ static const union AffineAnimCmd gUnknown_83E7160[] =
     AFFINEANIMCMD_FRAME(0x20, 0x20, 0, 0),
     AFFINEANIMCMD_FRAME(0x10, 0x10, 0, 17),
     AFFINEANIMCMD_LOOP(0),
-    AFFINEANIMCMD_FRAME(0xFFF8, 0xFFF8, 0, 10),
+    AFFINEANIMCMD_FRAME(-0x8, -0x8, 0, 10),
     AFFINEANIMCMD_FRAME(0x8, 0x8, 0, 10),
     AFFINEANIMCMD_LOOP(4),
     AFFINEANIMCMD_LOOP(0),
-    AFFINEANIMCMD_FRAME(0xFFF0, 0xFFF0, 0, 5),
+    AFFINEANIMCMD_FRAME(-0x10, -0x10, 0, 5),
     AFFINEANIMCMD_FRAME(0x10, 0x10, 0, 5),
     AFFINEANIMCMD_LOOP(7),
     AFFINEANIMCMD_END,
@@ -396,7 +396,7 @@ static const union AffineAnimCmd gUnknown_83E7160[] =
 
 static const union AffineAnimCmd gUnknown_83E71B8[] =
 {
-    AFFINEANIMCMD_FRAME(0xFFEC, 0x18, 0, 15),
+    AFFINEANIMCMD_FRAME(-0x14, 0x18, 0, 15),
     AFFINEANIMCMD_END,
 };
 

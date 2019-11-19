@@ -888,7 +888,7 @@ void sub_8099BD4(u8 taskId)
     gTasks[taskId].data[12] = 0;
     gTasks[taskId].data[10] = gBattleAnimArgs[3];
     gTasks[taskId].data[11] = gBattleAnimArgs[4];
-    gTasks[taskId].data[7] = GetAnimBattlerSpriteId(1);
+    gTasks[taskId].data[7] = GetAnimBattlerSpriteId(ANIM_TARGET);
     gTasks[taskId].data[8] = gSprites[gTasks[taskId].data[7]].pos2.x;
     gTasks[taskId].data[9] = gSprites[gTasks[taskId].data[7]].pos2.y;
     gTasks[taskId].data[0] = 0;

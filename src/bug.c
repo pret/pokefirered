@@ -172,7 +172,7 @@ static const union AffineAnimCmd gUnknown_83E733C[] =
     AFFINEANIMCMD_FRAME(0x10, 0x10, 0, 0),
     AFFINEANIMCMD_FRAME(0x8, 0x8, 0, 18),
     AFFINEANIMCMD_LOOP(0),
-    AFFINEANIMCMD_FRAME(0xFFFB, 0xFFFB, 0, 8),
+    AFFINEANIMCMD_FRAME(-0x5, -0x5, 0, 8),
     AFFINEANIMCMD_FRAME(0x5, 0x5, 0, 8),
     AFFINEANIMCMD_LOOP(5),
     AFFINEANIMCMD_END,
@@ -202,7 +202,7 @@ static void sub_80B3FAC(struct Sprite *sprite)
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
         gBattleAnimArgs[0] = -gBattleAnimArgs[0];
     }
-    else if (!GetBattlerSide(gBattleAnimTarget))
+    else if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
     {
         StartSpriteAffineAnim(sprite, 1);
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
@@ -226,7 +226,7 @@ static void sub_80B407C(struct Sprite *sprite)
         gBattleAnimArgs[0] = -gBattleAnimArgs[0];
         StartSpriteAffineAnim(sprite, 2);
     }
-    else if (!GetBattlerSide(gBattleAnimTarget))
+    else if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
         gBattleAnimArgs[0] = -gBattleAnimArgs[0];
@@ -283,12 +283,12 @@ static void sub_80B41C0(struct Sprite *sprite)
 static void sub_80B41F8(struct Sprite *sprite)
 {
     SetAverageBattlerPositions(gBattleAnimTarget, 0, &sprite->pos1.x, &sprite->pos1.y);
-    if (GetBattlerSide(gBattleAnimAttacker))
+    if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         sprite->pos1.x -= gBattleAnimArgs[0];
     else
         sprite->pos1.x += gBattleAnimArgs[0];
     sprite->pos1.y += gBattleAnimArgs[1];
-    if (!GetBattlerSide(gBattleAnimTarget))
+    if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
         sprite->pos1.y += 8;
     sprite->callback = sub_80B4274;
 }
@@ -356,7 +356,7 @@ static void AnimTranslateStinger(struct Sprite *sprite)
     {
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     }
-    else if (GetBattlerSide(gBattleAnimAttacker))
+    else if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
@@ -399,7 +399,7 @@ static void AnimTranslateStinger(struct Sprite *sprite)
 static void AnimMissileArc(struct Sprite *sprite)
 {
     InitSpritePosToAnimAttacker(sprite, 1);
-    if (GetBattlerSide(gBattleAnimAttacker))
+    if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2) + gBattleAnimArgs[2];

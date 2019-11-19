@@ -664,7 +664,7 @@ extern u8 gBattleBufferB[MAX_BATTLERS_COUNT][0x200];
 extern u8 gActionSelectionCursor[MAX_BATTLERS_COUNT];
 extern void (*gPreBattleCallback1)(void);
 extern bool8 gDoingBattleAnim;
-extern void *gUnknown_3005EE0[];
+extern u8 *gUnknown_3005EE0[MAX_BATTLERS_COUNT];
 extern u8 *gUnknown_2022BB8;
 extern u8 *gUnknown_2022BBC;
 extern void (*gBattleMainFunc)(void);

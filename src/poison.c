@@ -73,7 +73,7 @@ static const union AnimCmd *const gUnknown_83E69E4[] =
 static const union AffineAnimCmd gUnknown_83E69E8[] =
 {
     AFFINEANIMCMD_FRAME(0x160, 0x160, 0, 0),
-    AFFINEANIMCMD_FRAME(0xFFF6, 0xFFF6, 0, 10),
+    AFFINEANIMCMD_FRAME(-0xA, -0xA, 0, 10),
     AFFINEANIMCMD_FRAME(0xA, 0xA, 0, 10),
     AFFINEANIMCMD_JUMP(0),
 };
@@ -129,8 +129,8 @@ const struct SpriteTemplate gUnknown_83E6A50 =
 
 static const union AffineAnimCmd gUnknown_83E6A68[] =
 {
-    AFFINEANIMCMD_FRAME(0xFFF0, 0x10, 0, 6),
-    AFFINEANIMCMD_FRAME(0x10, 0xFFF0, 0, 6),
+    AFFINEANIMCMD_FRAME(-0x10, 0x10, 0, 6),
+    AFFINEANIMCMD_FRAME(0x10, -0x10, 0, 6),
     AFFINEANIMCMD_JUMP(0),
 };
 

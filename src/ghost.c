@@ -50,7 +50,7 @@ static void sub_80B71B0(struct Sprite *sprite);
 static const union AffineAnimCmd gUnknown_83E75A8[] =
 {
     AFFINEANIMCMD_FRAME(0x1E, 0x1E, 10, 5),
-    AFFINEANIMCMD_FRAME(0xFFE2, 0xFFE2, 10, 5),
+    AFFINEANIMCMD_FRAME(-0x1E, -0x1E, 10, 5),
     AFFINEANIMCMD_JUMP(0),
 };
 

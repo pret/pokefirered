@@ -1619,7 +1619,7 @@ _080CEBA6:
 	ldr r1, [r0]
 	movs r0, 0x1
 	strb r0, [r1, 0x3]
-	bl sub_80F5EC0
+	bl LaunchTask_PreEvoSparklesSet2
 	strb r0, [r4, 0x2]
 	bl _080CF528
 	.align 2, 0
@@ -1641,7 +1641,7 @@ _080CEBE6:
 	ldr r1, [r0]
 	ldrb r0, [r1]
 	ldrb r1, [r1, 0x1]
-	bl sub_80F62B4
+	bl LaunchTask_PrePostEvoMonSprites
 	strb r0, [r4, 0x2]
 	mov r0, r8
 	adds r1, r0, r7
@@ -1685,7 +1685,7 @@ _080CEC38:
 _080CEC44: .4byte gUnknown_2039A20
 _080CEC48: .4byte gBattleCommunication
 _080CEC4C:
-	bl sub_80F5F74
+	bl LaunchTask_PostEvoSparklesSet1
 	ldr r1, _080CEC60 @ =gBattleCommunication
 	strb r0, [r1, 0x2]
 	ldr r0, _080CEC64 @ =gTasks
@@ -2953,7 +2953,7 @@ _080CF752:
 	ldr r1, [r0]
 	movs r0, 0x1
 	strb r0, [r1, 0x3]
-	bl sub_80F5EC0
+	bl LaunchTask_PreEvoSparklesSet2
 	strb r0, [r4, 0x2]
 	bl _080D003A
 	.align 2, 0
@@ -2975,7 +2975,7 @@ _080CF78E:
 	ldr r1, [r0]
 	ldrb r0, [r1]
 	ldrb r1, [r1, 0x1]
-	bl sub_80F62B4
+	bl LaunchTask_PrePostEvoMonSprites
 	strb r0, [r4, 0x2]
 	adds r1, r7, r6
 	lsls r1, 3
@@ -3017,7 +3017,7 @@ _080CF7DC:
 _080CF7E4: .4byte gUnknown_2039A20
 _080CF7E8: .4byte gBattleCommunication
 _080CF7EC:
-	bl sub_80F5F74
+	bl LaunchTask_PostEvoSparklesSet1
 	ldr r1, _080CF800 @ =gBattleCommunication
 	strb r0, [r1, 0x2]
 	ldr r0, _080CF804 @ =gTasks
@@ -3045,7 +3045,7 @@ _080CF820:
 	lsls r4, 3
 	adds r4, r5
 	ldrh r0, [r4, 0xC]
-	bl sub_80F6190
+	bl LaunchTask_PostEvoSparklesSet2AndFlash_Trade
 	mov r1, r8
 	strb r0, [r1, 0x2]
 	b _080CFA90

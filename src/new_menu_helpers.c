@@ -21,10 +21,12 @@
 #define STD_WINDOW_PALETTE_NUM 14
 #define STD_WINDOW_BASE_TILE_NUM 0x214
 
-static EWRAM_DATA bool8 gUnknown_203AB58[4] = {FALSE}; // knizz: bgmaps_that_need_syncing
-static EWRAM_DATA u16 gUnknown_203AB5C = {0};
-static EWRAM_DATA void *gUnknown_203AB60[0x20] = {NULL};
+static EWRAM_DATA bool8 sScheduledBgCopiesToVram[4] = {FALSE};
+static EWRAM_DATA u16 sTempTileDataBufferCursor = {0};
+static EWRAM_DATA void *sTempTileDataBuffers[0x20] = {NULL};
 static EWRAM_DATA u8 sStartMenuWindowId = {0};
+
+static const u16 gUnknown_841EF48[] = INCBIN_U16("graphics/unknown/unk_841EF48.4bpp");
 
 const u16 gUnknown_841F1C8[] = INCBIN_U16("graphics/text_window/unk_841F1C8.4bpp");
 const u16 gTMCaseMainWindowPalette[] = INCBIN_U16("graphics/tm_case/unk_841F408.gbapal");
@@ -169,35 +171,35 @@ static void TaskFreeBufAfterCopyingTileDataToVram(u8 taskId);
 
 void ClearScheduledBgCopiesToVram(void)
 {
-    memset(gUnknown_203AB58, 0, sizeof(gUnknown_203AB58));
+    memset(sScheduledBgCopiesToVram, 0, sizeof(sScheduledBgCopiesToVram));
 }
 
 void ScheduleBgCopyTilemapToVram(u8 bgId)
 {
-    gUnknown_203AB58[bgId] = TRUE;
+    sScheduledBgCopiesToVram[bgId] = TRUE;
 }
 
 void DoScheduledBgTilemapCopiesToVram(void)
 {
-    if (gUnknown_203AB58[0] == TRUE)
+    if (sScheduledBgCopiesToVram[0] == TRUE)
     {
         CopyBgTilemapBufferToVram(0);
-        gUnknown_203AB58[0] = FALSE;
+        sScheduledBgCopiesToVram[0] = FALSE;
     }
-    if (gUnknown_203AB58[1] == TRUE)
+    if (sScheduledBgCopiesToVram[1] == TRUE)
     {
         CopyBgTilemapBufferToVram(1);
-        gUnknown_203AB58[1] = FALSE;
+        sScheduledBgCopiesToVram[1] = FALSE;
     }
-    if (gUnknown_203AB58[2] == TRUE)
+    if (sScheduledBgCopiesToVram[2] == TRUE)
     {
         CopyBgTilemapBufferToVram(2);
-        gUnknown_203AB58[2] = FALSE;
+        sScheduledBgCopiesToVram[2] = FALSE;
     }
-    if (gUnknown_203AB58[3] == TRUE)
+    if (sScheduledBgCopiesToVram[3] == TRUE)
     {
         CopyBgTilemapBufferToVram(3);
-        gUnknown_203AB58[3] = FALSE;
+        sScheduledBgCopiesToVram[3] = FALSE;
     }
 }
 
@@ -205,11 +207,11 @@ void ResetTempTileDataBuffers(void)
 {
     int i;
 
-    for (i = 0; i < (s32)NELEMS(gUnknown_203AB60); i++)
+    for (i = 0; i < (s32)NELEMS(sTempTileDataBuffers); i++)
     {
-        gUnknown_203AB60[i] = NULL;
+        sTempTileDataBuffers[i] = NULL;
     }
-    gUnknown_203AB5C = 0;
+    sTempTileDataBufferCursor = 0;
 }
 
 bool8 FreeTempTileDataBuffersIfPossible(void)
@@ -218,13 +220,13 @@ bool8 FreeTempTileDataBuffersIfPossible(void)
 
     if (!IsDma3ManagerBusyWithBgCopy())
     {
-        if (gUnknown_203AB5C)
+        if (sTempTileDataBufferCursor)
         {
-            for (i = 0; i < gUnknown_203AB5C; i++)
+            for (i = 0; i < sTempTileDataBufferCursor; i++)
             {
-                FREE_AND_SET_NULL(gUnknown_203AB60[i]);
+                FREE_AND_SET_NULL(sTempTileDataBuffers[i]);
             }
-            gUnknown_203AB5C = 0;
+            sTempTileDataBufferCursor = 0;
         }
         return FALSE;
     }
@@ -238,7 +240,7 @@ void *DecompressAndCopyTileDataToVram(u8 bgId, const void *src, u32 size, u16 of
 {
     u32 sizeOut;
 
-    if (gUnknown_203AB5C < NELEMS(gUnknown_203AB60))
+    if (sTempTileDataBufferCursor < NELEMS(sTempTileDataBuffers))
     {
         void *ptr = MallocAndDecompress(src, &sizeOut);
         if (!size)
@@ -246,7 +248,7 @@ void *DecompressAndCopyTileDataToVram(u8 bgId, const void *src, u32 size, u16 of
         if (ptr)
         {
             CopyDecompressedTileDataToVram(bgId, ptr, size, offset, mode);
-            gUnknown_203AB60[gUnknown_203AB5C++] = ptr;
+            sTempTileDataBuffers[sTempTileDataBufferCursor++] = ptr;
         }
         return ptr;
     }
@@ -257,7 +259,7 @@ void *DecompressAndCopyTileDataToVram2(u8 bgId, const void *src, u32 size, u16 o
 {
     u32 sizeOut;
 
-    if (gUnknown_203AB5C < NELEMS(gUnknown_203AB60))
+    if (sTempTileDataBufferCursor < NELEMS(sTempTileDataBuffers))
     {
         void *ptr = MallocAndDecompress(src, &sizeOut);
         if (sizeOut > size)
@@ -265,7 +267,7 @@ void *DecompressAndCopyTileDataToVram2(u8 bgId, const void *src, u32 size, u16 o
         if (ptr)
         {
             CopyDecompressedTileDataToVram(bgId, ptr, sizeOut, offset, mode);
-            gUnknown_203AB60[gUnknown_203AB5C++] = ptr;
+            sTempTileDataBuffers[sTempTileDataBufferCursor++] = ptr;
         }
         return ptr;
     }

@@ -493,7 +493,6 @@ static void SpriteCallbackDummy_MonSprites(struct Sprite * sprite)
 #define tPostEvoScale    data[4]
 #define tDirection       data[5]
 #define tSpeed           data[6]
-#define tBButtonCancel   data[8]
 
 u8 LaunchTask_PrePostEvoMonSprites(u8 preEvoSpriteId, u8 postEvoSpriteId)
 {
@@ -519,7 +518,7 @@ u8 LaunchTask_PrePostEvoMonSprites(u8 preEvoSpriteId, u8 postEvoSpriteId)
     gSprites[postEvoSpriteId].oam.matrixNum = 31;
     gSprites[postEvoSpriteId].invisible = FALSE;
     CpuCopy16(palette, &gPlttBufferFaded[256 + 16 * gSprites[postEvoSpriteId].oam.paletteNum], 32);
-    gTasks[taskId].tBButtonCancel = FALSE;
+    gTasks[taskId].EvoGraphicsTaskEvoStop = FALSE;
     return taskId;
 }
 
@@ -532,7 +531,7 @@ static void EvoTask_PrePostEvoMonSpritesInit(u8 taskId)
 
 static void EvoTask_ChooseNextEvoSpriteAnim(u8 taskId)
 {
-    if (gTasks[taskId].tBButtonCancel)
+    if (gTasks[taskId].EvoGraphicsTaskEvoStop)
     {
         PreEvoVisible_PostEvoInvisible_KillTask(taskId);
     }
@@ -551,7 +550,7 @@ static void EvoTask_ChooseNextEvoSpriteAnim(u8 taskId)
 static void EvoTask_ShrinkOrExpandEvoSprites(u8 taskId)
 {
     u8 r6;
-    if (gTasks[taskId].tBButtonCancel)
+    if (gTasks[taskId].EvoGraphicsTaskEvoStop)
     {
         gTasks[taskId].func = PreEvoVisible_PostEvoInvisible_KillTask;
     }
@@ -637,4 +636,3 @@ static void PreEvoVisible_PostEvoInvisible_KillTask(u8 taskId)
 #undef tPostEvoScale
 #undef tDirection
 #undef tSpeed
-#undef tBButtonCancel

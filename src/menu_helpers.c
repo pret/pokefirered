@@ -125,7 +125,7 @@ bool8 MenuHelpers_LinkSomething(void)
         return FALSE;
 }
 
-bool32 sub_80BF72C(void)
+bool8 sub_80BF72C(void)
 {
     if (!MenuHelpers_LinkSomething())
         return FALSE;

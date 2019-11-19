@@ -40,6 +40,16 @@ enum
 };
 
 // RAM sumbols
+struct OptionMenu
+{
+    /*0x00*/ u16 option[MENUITEM_COUNT];
+    /*0x0E*/ u16 unkE;
+    /*0x10*/ u8 state3;
+    /*0x11*/ u8 state;
+    /*0x12*/ u8 state2;
+    /*0x13*/ u8 unk13;
+};
+
 EWRAM_DATA struct OptionMenu *sOptionMenuPtr = NULL;
 
 //Function Declarataions
@@ -158,6 +168,7 @@ static const u8 *const sBattleStyleOptions[] =
     gText_BattleStyleShift,
     gText_BattleStyleSet
 };
+
 static const u8 *const sSoundOptions[] =
 {
     gText_SoundMono, 
@@ -174,16 +185,7 @@ static const u8 *const sButtonTypeOptions[] =
 static const u8 sOptionMenuPickSwitchCancelTextColor[] = {TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY};
 static const u8 sOptionMenuTextColor[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_RED, TEXT_COLOR_RED};
 
-struct OptionMenu
-{
-    /*0x00*/ u16 option[MENUITEM_COUNT];
-    /*0x0E*/ u16 unkE;
-    /*0x10*/ u8 state3;
-    /*0x11*/ u8 state;
-    /*0x12*/ u8 state2;
-    /*0x13*/ u8 unk13;
-};
-
+// Functions
 static void CB2_InitOptionMenu(void)
 {
     RunTasks();
@@ -836,7 +838,6 @@ static void CloseAndSaveOptionMenu(u8 taskId)
     gFieldCallback = sub_807DF64;
     SetMainCallback2(gMain.savedCallback);
     FreeAllWindowBuffers();
-    
     gSaveBlock2Ptr->optionsTextSpeed = (u8) sOptionMenuPtr->option[MENUITEM_TEXTSPEED];
     gSaveBlock2Ptr->optionsBattleSceneOff = (u8) sOptionMenuPtr->option[MENUITEM_BATTLESCENE];
     gSaveBlock2Ptr->optionsBattleStyle = (u8) sOptionMenuPtr->option[MENUITEM_BATTLESTYLE];

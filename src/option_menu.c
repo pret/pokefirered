@@ -36,11 +36,10 @@ enum
 enum
 {
     WIN_TEXT_OPTION,
-    WIN_OPTIONS
+    WIN_OPTIONS,
 };
-
 /*
-static const struct WindowTemplate gUnknown_83CC2B8[] =    //sOptionMenuWinTemplates
+static const struct WindowTemplate gUnknown_83CC2B8[] =    //3CC2B8 -> sOptionMenuWinTemplates
 {
     {
         .bg = 1,
@@ -49,20 +48,29 @@ static const struct WindowTemplate gUnknown_83CC2B8[] =    //sOptionMenuWinTempl
         .width = 26,
         .height = 2,
         .paletteNum = 1,
-        .baseBlock = 2
+        .baseBlock = 2,
     },
     {
         .bg = 0,
         .tilemapLeft = 2,
-        .tilemapTop =7,
+        .tilemapTop = 7,
         .width = 26,
         .height = 12,
         .paletteNum = 1,
-        .baseBlock = 0x36
+        .baseBlock = 0x36,
     },
-    DUMMY_WIN_TEMPLATE
+	{
+		.bg = 2,
+		.tilemapLeft = 0,
+		.tilemapTop = 0,
+		.width = 30,
+		.height = 2,
+		.paletteNum = 0xF,
+		.baseBlock = 0x16e,
+	},
+    DUMMY_WIN_TEMPLATE,
 };
-static const struct BgTemplate gUnknown_83CC2D8[] =    //sOptionMenuBgTemplates
+static const struct BgTemplate gUnknown_83CC2D8[] =    //3CC2D8 -> sOptionMenuBgTemplates
 {
    {
        .bg = 1,
@@ -81,12 +89,20 @@ static const struct BgTemplate gUnknown_83CC2D8[] =    //sOptionMenuBgTemplates
        .paletteMode = 0,
        .priority = 1,
        .baseTile = 0
-   }
+   },
+   {
+	   .bg = 2,
+	   .charBaseIndex = 1,
+	   .mapBaseIndex = 29,
+	   .screenSize = 0,
+	   .paletteMode = 0,
+	   .priority = 2,
+	   .baseTile = 0,
+   },
 };
-
-
-static const u16 gUnknown_83CC304[MENUITEM_COUNT] = {3, 2, 2, 2, 3, 10, 0};    //sOptionsMenuItemCounts
-static const u8* gUnknown_83CC314[MENUITEM_COUNT] =     //sOptionMenuItemsNames
+static const u16 gUnknown_83CC2E4[] = INCBIN_U16("graphics/misc/unk_83cc2e4.gbapal");	//3CC2E4
+static const u16 gUnknown_83CC304[MENUITEM_COUNT] = {3, 2, 2, 2, 3, 10, 0};    //3CC304 -> sOptionsMenuItemCounts
+static const u8* gUnknown_83CC314[MENUITEM_COUNT] =     //3CC314 -> sOptionMenuItemsNames
 {
     [MENUITEM_TEXTSPEED]   = gText_TextSpeed,
     [MENUITEM_BATTLESCENE] = gText_BattleScene,
@@ -96,7 +112,27 @@ static const u8* gUnknown_83CC314[MENUITEM_COUNT] =     //sOptionMenuItemsNames
     [MENUITEM_FRAMETYPE]   = gText_Frame,
     [MENUITEM_CANCEL]      = gText_OptionMenuCancel,
 };
+static const u8* gUnknown_83CC330[] = {gText_TextSpeedSlow, gText_TextSpeedMid, gText_TextSpeedFast};	//3CC330
+static const u8* gUnknown_83CC33C[] = {gText_BattleSceneOn, gText_BattleSceneOff};		//3CC33C
+static const u8* gUnknown_83CC344[] = {gText_BattleStyleShift, gText_BattleStyleSet};	//3CC344
+static const u8* gUnknown_83CC34C[] = {gText_SoundMono, gText_SoundStereo};		//3CC34C
+static const u8* gUnknown_83CC354[] = {gText_ButtonTypeNormal, gText_ButtonTypeLR, gText_ButtonTypeLEqualsA};	//3CC354
+static const u8 gUnknown_83CC360[] = {0xF, 0x1, 0x2};	//3CC360
+static const u8 gUnknown_83CC363[] = {0, 5, 4, 0, 0};	//3CC363
 */
+
+extern const struct WindowTemplate gUnknown_83CC2B8[3];
+extern const struct BgTemplate gUnknown_83CC2D8[3];
+extern const u16 gUnknown_83CC2E4[0x20];
+extern const u16 gUnknown_83CC304[MENUITEM_COUNT];
+extern const u8* gUnknown_83CC314[MENUITEM_COUNT];
+extern const u8* gUnknown_83CC330[12];
+extern const u8* gUnknown_83CC33C[8];
+extern const u8* gUnknown_83CC344[8];
+extern const u8* gUnknown_83CC34C[8];
+extern const u8* gUnknown_83CC354[12];
+extern const u8 gUnknown_83CC360[3];
+extern const u8 gUnknown_83CC363[3];
 
 //This file's functions
 static void sub_808835C(void);
@@ -118,25 +154,9 @@ static void sub_8088C0C(void);
 static void sub_8088D8C(void);
 static void sub_8088DE0(u16 selection);
 
-extern const struct WindowTemplate gUnknown_83CC2B8[3];
-extern const struct BgTemplate gUnknown_83CC2D8[2];
-extern const u16 gUnknown_83CC2E4[0x20];
-extern const u16 gUnknown_83CC304[MENUITEM_COUNT];        //sOptionsMenuItemCounts
-extern const u8* gUnknown_83CC314[MENUITEM_COUNT];
-extern const u8 gUnknown_83CC330[0xC];
-extern const u8 gUnknown_83CC33C[0x8];
-extern const u8 gUnknown_83CC344[0x8];
-extern const u8 gUnknown_83CC34C[0x8];
-extern const u8 gUnknown_83CC354[0xC];
-extern const u8 gUnknown_83CC360[0x3];
-extern const u8 gUnknown_83CC363[0x3];
-extern const u8 gUnknown_8419DCC[];
-extern const u8 gUnknown_8419E52[];
-extern const u8 gUnknown_8419E57[];
-
 struct OptionsMenu
 {
-    /*0x00*/ u16 option[7];    //0,2,4,6,8,a,c
+    /*0x00*/ u16 option[MENUITEM_COUNT];    //0,2,4,6,8,a,c
     /*0x0E*/ u16 unkE;
     /*0x10*/ u8 state3;
     /*0x11*/ u8 state;
@@ -145,6 +165,7 @@ struct OptionsMenu
 };
 
 EWRAM_DATA struct OptionsMenu *sOptionsMenu = {0};
+
 
 
 //CB2_InitOptionsMenu
@@ -272,7 +293,7 @@ static void sub_8088530(void)
     DmaClear16(3, (void *)PLTT, PLTT_SIZE);    
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, gUnknown_83CC2D8, 3);    //3 -> ARRAY_COUNT(gUnknown_83CC2D8)
+    InitBgsFromTemplates(0, gUnknown_83CC2D8, ARRAY_COUNT(gUnknown_83CC2D8));
     ChangeBgX(0, 0, 0);
     ChangeBgY(0, 0, 0);
     ChangeBgX(1, 0, 0);
@@ -297,9 +318,9 @@ static void sub_8088530(void)
 static void sub_8088680(void)
 {
     s32 x;
-    x = 0xE4 - GetStringWidth(0, gUnknown_8419E57, 0);
+    x = 0xE4 - GetStringWidth(0, gText_PickSwitchCancel, 0);
     FillWindowPixelBuffer(2, 0xFF); 
-    AddTextPrinterParameterized3(2, 0, x, 0, gUnknown_83CC360, 0, gUnknown_8419E57);
+    AddTextPrinterParameterized3(2, 0, x, 0, gUnknown_83CC360, 0, gText_PickSwitchCancel);
     PutWindowTilemap(2);
     CopyWindowToVram(2, 3);
 }
@@ -357,7 +378,7 @@ static void sub_8088780(u8 taskId)
         sOptionsMenu->state3++;
         break;
     case 2:
-        if (sub_80BF72C() == TRUE)
+        if ((bool32) sub_80BF72C() == TRUE)    //cast to bool32 to remove the lsl/lsr 0x18 after func call
             return;
         switch (sub_80888C0())
         {
@@ -547,10 +568,8 @@ static void sub_8088780(u8 taskId)
                 "\tpop {r0}\n"
                 "\tbx r0\n");
 }
-#endif
-    
-    
-    
+#endif   
+
 //OptionsMenu_ProcessInput
 static u8 sub_80888C0(void)
 { 
@@ -616,7 +635,6 @@ static void sub_80889A8(u8 selection)
     u8* str;
     u8* v8;
     u8 x, y;
-    u8** col;
     
     memcpy(&dst, gUnknown_83CC363, 3);
     y = ((GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) - 1) * selection) + 2;
@@ -641,7 +659,7 @@ static void sub_80889A8(u8 selection)
         AddTextPrinterParameterized3(1, 2, x, y, dst, -1, gUnknown_83CC354);
         break;
     case MENUITEM_FRAMETYPE:
-        StringCopy(str, gUnknown_8419E52);
+        StringCopy(str, gText_FrameType);
         ConvertIntToDecimalStringN(v8, sOptionsMenu->option[2*selection] + 1, 1, 2);
         StringAppendN(str, v8, 3);
         AddTextPrinterParameterized3(1, 2, x, y, dst, -1, str);
@@ -773,7 +791,7 @@ static void sub_80889A8(u8 selection)
                 "_08088A94: .4byte gUnknown_83CC354\n"
                 "_08088A98: .4byte sOptionsMenu\n"
                 "_08088A9C:\n"
-                "\tldr r1, _08088AF8 @ =gUnknown_8419E52\n"
+                "\tldr r1, _08088AF8 @ =gText_FrameType\n"
                 "\tadd r0, sp, 0xC\n"
                 "\tbl StringCopy\n"
                 "\tadd r4, sp, 0x20\n"
@@ -815,7 +833,7 @@ static void sub_80889A8(u8 selection)
                 "\tpop {r0}\n"
                 "\tbx r0\n"
                 "\t.align 2, 0\n"
-                "_08088AF8: .4byte gUnknown_8419E52\n"
+                "_08088AF8: .4byte gText_FrameType\n"
                 "_08088AFC: .4byte sOptionsMenu\n");
 }
 #endif
@@ -846,14 +864,13 @@ static void sub_8088B00(u8 taskId)
 static void sub_8088BD0(void)
 {
     FillWindowPixelBuffer(0, 0x11);
-    AddTextPrinterParameterized(WIN_TEXT_OPTION, 2, gUnknown_8419DCC, 8, 1, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(WIN_TEXT_OPTION, 2, gText_MenuOptionOption, 8, 1, TEXT_SPEED_FF, NULL);
     PutWindowTilemap(0);
     CopyWindowToVram(0, 3);
 }
 
 
 //sub_8088C0C
-//double check
 static void sub_8088C0C(void)
 {
     u8 h;
@@ -863,7 +880,7 @@ static void sub_8088C0C(void)
     FillBgTilemapBufferRect(1, 0x1B4, 2, 2, 0x1B, 1, 3);
     FillBgTilemapBufferRect(1, 0x1B5, 0x1C, 2, 1, 1, 3);
     FillBgTilemapBufferRect(1, 0x1B6, 1, 3, 1, h, 3);
-    FillBgTilemapBufferRect(1, 0x1B8, 1, 0x1C, 1, h, 3);
+    FillBgTilemapBufferRect(1, 0x1B8, 0x1C, 3, 1, h, 3);
     FillBgTilemapBufferRect(1, 0x1B9, 1, 5, 1, 1, 3);
     FillBgTilemapBufferRect(1, 0x1BA, 2, 5, 0x1B, 1, 3);
     FillBgTilemapBufferRect(1, 0x1BB, 0x1C, 5, 1, 1, 3);
@@ -878,24 +895,15 @@ static void sub_8088C0C(void)
     CopyBgTilemapBufferToVram(1);
 }
 
-
 //sub_8088D8C
 static void sub_8088D8C(void)
 {
-    int i;
-    u8 y;
+    u8 i;
     
     FillWindowPixelBuffer(1, 0x11);
-    
     for (i = 0; i < MENUITEM_COUNT; i++)
     {
-        //AddTextPrinterParameterized(1, 2, gUnknown_83CC314[i], 8, (u8) ((i*(GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT))) + 2) - i, 0xFF, 0);	
-			//gets registers right, but an lsl/lsr 0x18 after GetFontAttribute that shouldn't be there
-		y = i*(GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT));
-		y += 2;
-		y -= i;
-        AddTextPrinterParameterized(1, 2, gUnknown_83CC314[i], 8, y, 0xFF, 0);
-        
+        AddTextPrinterParameterized(1, 2, gUnknown_83CC314[i], 8, (u8) ((i*(GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT))) + 2) - i, 0xFF, 0);    
     }
 }
 
@@ -903,9 +911,11 @@ static void sub_8088D8C(void)
 //sub_8088DE0
 static void sub_8088DE0(u16 selection)
 {
-    u8 attr;
-    attr = GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT);
-    SetGpuReg(0x44, ((selection * (attr - 1) + 58) << 8) | (selection * (attr - 1) + 58 + attr));
-    SetGpuReg(0x40, 4320);
+    u16 v1, v2;
+    
+    v1 = GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT);
+    v2 = selection * (v1 - 1) + 0x3A;
+    SetGpuReg(0x44, (v2 << 8) | (v2 + v1));
+    SetGpuReg(0x40, 0x10E0);
 }
 

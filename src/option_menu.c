@@ -38,8 +38,8 @@ enum
     WIN_TEXT_OPTION,
     WIN_OPTIONS,
 };
-/*
-static const struct WindowTemplate gUnknown_83CC2B8[] =    //3CC2B8 -> sOptionMenuWinTemplates
+
+static const struct WindowTemplate gUnknown_83CC2B8[4] =    //3CC2B8 -> sOptionMenuWinTemplates
 {
     {
         .bg = 1,
@@ -70,7 +70,7 @@ static const struct WindowTemplate gUnknown_83CC2B8[] =    //3CC2B8 -> sOptionMe
 	},
     DUMMY_WIN_TEMPLATE,
 };
-static const struct BgTemplate gUnknown_83CC2D8[] =    //3CC2D8 -> sOptionMenuBgTemplates
+static const struct BgTemplate gUnknown_83CC2D8[3] =    //3CC2D8 -> sOptionMenuBgTemplates
 {
    {
        .bg = 1,
@@ -79,7 +79,7 @@ static const struct BgTemplate gUnknown_83CC2D8[] =    //3CC2D8 -> sOptionMenuBg
        .screenSize = 0,
        .paletteMode = 0,
        .priority = 0,
-       .baseTile = 0
+       .baseTile = 0,
    },
    {
        .bg = 0,
@@ -88,7 +88,7 @@ static const struct BgTemplate gUnknown_83CC2D8[] =    //3CC2D8 -> sOptionMenuBg
        .screenSize = 0,
        .paletteMode = 0,
        .priority = 1,
-       .baseTile = 0
+       .baseTile = 0,
    },
    {
 	   .bg = 2,
@@ -119,9 +119,10 @@ static const u8* gUnknown_83CC34C[] = {gText_SoundMono, gText_SoundStereo};		//3
 static const u8* gUnknown_83CC354[] = {gText_ButtonTypeNormal, gText_ButtonTypeLR, gText_ButtonTypeLEqualsA};	//3CC354
 static const u8 gUnknown_83CC360[] = {0xF, 0x1, 0x2};	//3CC360
 static const u8 gUnknown_83CC363[] = {0, 5, 4, 0, 0};	//3CC363
-*/
 
-extern const struct WindowTemplate gUnknown_83CC2B8[3];
+
+/*
+extern const struct WindowTemplate gUnknown_83CC2B8[4];
 extern const struct BgTemplate gUnknown_83CC2D8[3];
 extern const u16 gUnknown_83CC2E4[0x20];
 extern const u16 gUnknown_83CC304[MENUITEM_COUNT];
@@ -133,6 +134,7 @@ extern const u8* gUnknown_83CC34C[8];
 extern const u8* gUnknown_83CC354[12];
 extern const u8 gUnknown_83CC360[3];
 extern const u8 gUnknown_83CC363[3];
+*/
 
 //This file's functions
 static void sub_808835C(void);

@@ -39,7 +39,7 @@ enum
     WIN_OPTIONS
 };
 
-// RAM sumbols
+// RAM symbols
 struct OptionMenu
 {
     /*0x00*/ u16 option[MENUITEM_COUNT];
@@ -177,9 +177,9 @@ static const u8 *const sSoundOptions[] =
 
 static const u8 *const sButtonTypeOptions[] =
 {
-    gText_ButtonTypeNormal, 
+    gText_ButtonTypeHelp,
 	gText_ButtonTypeLR,
-    gText_ButtonTypeLEqualsA
+	gText_ButtonTypeLEqualsA
 };
 
 static const u8 sOptionMenuPickSwitchCancelTextColor[] = {TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY};
@@ -362,13 +362,10 @@ static bool8 LoadOptionMenuPalette(void)
     return FALSE;
 }
 
-// I could not get this function to match. GOTO statements weren't even compiling correctly.
-#ifdef NONMATCHING
+
+//#ifdef NONMATCHING
 static void Task_OptionMenu(u8 taskId)
 {
-    u8 v2, v5;
-    struct OptionMenu v4;
-    
     switch (sOptionMenuPtr->state3)
     {
     case 0:
@@ -377,10 +374,12 @@ static void Task_OptionMenu(u8 taskId)
         sOptionMenuPtr->state3++;
         break;
     case 2:
-        if ((bool32) sub_80BF72C() == TRUE)    //cast to bool32 to remove the lsl/lsr 0x18 after func call
-            return;
+        if (sub_80BF72C() == TRUE)
+            break;
         switch (OptionMenu_ProcessInput())
         {
+        case 0:
+            break;
         case 1:
             sOptionMenuPtr->state3++;
             break;
@@ -388,186 +387,30 @@ static void Task_OptionMenu(u8 taskId)
             LoadBgTiles(1, GetUserFrameGraphicsInfo(sOptionMenuPtr->option[MENUITEM_FRAMETYPE])->tiles, 0x120, 0x1AA);
             LoadPalette(GetUserFrameGraphicsInfo(sOptionMenuPtr->option[MENUITEM_FRAMETYPE])->palette, 0x20, 0x20);
             BufferOptionMenuString(sOptionMenuPtr->unkE);
-            sOptionMenuPtr->state3++;
             break;
         case 3:
             sub_8088DE0(sOptionMenuPtr->unkE);
             break;
         case 4:
             BufferOptionMenuString(sOptionMenuPtr->unkE);
-            sOptionMenuPtr->state3++;
             break;
-        default:
-            return;
         }
+        break;
     case 3:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
         sOptionMenuPtr->state3++;
+        break;
     case 1:
     case 4:
         if (gPaletteFade.active)
             return;
         sOptionMenuPtr->state3++;
+        break;
     case 5:
         CloseAndSaveOptionMenu(taskId);
         break;
-    default:
-        return;
     }
 }
-#else
-NAKED
-static void Task_OptionMenu(u8 taskId)
-{
-    asm_unified("\tpush {r4,lr}\n"
-                "\tsub sp, 0x4\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r2, r0, 24\n"
-                "\tldr r1, _080887A0 @ =sOptionMenuPtr\n"
-                "\tldr r0, [r1]\n"
-                "\tldrb r0, [r0, 0x10]\n"
-                "\tadds r3, r1, 0\n"
-                "\tcmp r0, 0x5\n"
-                "\tbls _08088796\n"
-                "\tb _080888B6\n"
-                "_08088796:\n"
-                "\tlsls r0, 2\n"
-                "\tldr r1, _080887A4 @ =_080887A8\n"
-                "\tadds r0, r1\n"
-                "\tldr r0, [r0]\n"
-                "\tmov pc, r0\n"
-                "\t.align 2, 0\n"
-                "_080887A0: .4byte sOptionMenuPtr\n"
-                "_080887A4: .4byte _080887A8\n"
-                "\t.align 2, 0\n"
-                "_080887A8:\n"
-                "\t.4byte _080887C0\n"
-                "\t.4byte _08088894\n"
-                "\t.4byte _080887E0\n"
-                "\t.4byte _08088878\n"
-                "\t.4byte _08088894\n"
-                "\t.4byte _080888B0\n"
-                "_080887C0:\n"
-                "\tmovs r0, 0x1\n"
-                "\tnegs r0, r0\n"
-                "\tmovs r1, 0\n"
-                "\tstr r1, [sp]\n"
-                "\tmovs r2, 0x10\n"
-                "\tmovs r3, 0\n"
-                "\tbl BeginNormalPaletteFade\n"
-                "\tbl OptionMenu_SetVBlankCallback\n"
-                "\tldr r0, _080887DC @ =sOptionMenuPtr\n"
-                "\tldr r1, [r0]\n"
-                "\tb _080888A2\n"
-                "\t.align 2, 0\n"
-                "_080887DC: .4byte sOptionMenuPtr\n"
-                "_080887E0:\n"
-                "\tbl sub_80BF72C\n"
-                "\tcmp r0, 0x1\n"
-                "\tbeq _080888B6\n"
-                "\tbl OptionMenu_ProcessInput\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tcmp r0, 0x4\n"
-                "\tbhi _080888B6\n"
-                "\tlsls r0, 2\n"
-                "\tldr r1, _08088800 @ =_08088804\n"
-                "\tadds r0, r1\n"
-                "\tldr r0, [r0]\n"
-                "\tmov pc, r0\n"
-                "\t.align 2, 0\n"
-                "_08088800: .4byte _08088804\n"
-                "\t.align 2, 0\n"
-                "_08088804:\n"
-                "\t.4byte _080888B6\n"
-                "\t.4byte _08088818\n"
-                "\t.4byte _08088824\n"
-                "\t.4byte _08088858\n"
-                "\t.4byte _08088868\n"
-                "_08088818:\n"
-                "\tldr r0, _08088820 @ =sOptionMenuPtr\n"
-                "\tldr r1, [r0]\n"
-                "\tb _080888A2\n"
-                "\t.align 2, 0\n"
-                "_08088820: .4byte sOptionMenuPtr\n"
-                "_08088824:\n"
-                "\tldr r4, _08088854 @ =sOptionMenuPtr\n"
-                "\tldr r0, [r4]\n"
-                "\tldrb r0, [r0, 0xA]\n"
-                "\tbl GetUserFrameGraphicsInfo\n"
-                "\tldr r1, [r0]\n"
-                "\tmovs r2, 0x90\n"
-                "\tlsls r2, 1\n"
-                "\tmovs r3, 0xD5\n"
-                "\tlsls r3, 1\n"
-                "\tmovs r0, 0x1\n"
-                "\tbl LoadBgTiles\n"
-                "\tldr r0, [r4]\n"
-                "\tldrb r0, [r0, 0xA]\n"
-                "\tbl GetUserFrameGraphicsInfo\n"
-                "\tldr r0, [r0, 0x4]\n"
-                "\tmovs r1, 0x20\n"
-                "\tmovs r2, 0x20\n"
-                "\tbl LoadPalette\n"
-                "\tldr r0, [r4]\n"
-                "\tb _0808886C\n"
-                "\t.align 2, 0\n"
-                "_08088854: .4byte sOptionMenuPtr\n"
-                "_08088858:\n"
-                "\tldr r0, _08088864 @ =sOptionMenuPtr\n"
-                "\tldr r0, [r0]\n"
-                "\tldrh r0, [r0, 0xE]\n"
-                "\tbl sub_8088DE0\n"
-                "\tb _080888B6\n"
-                "\t.align 2, 0\n"
-                "_08088864: .4byte sOptionMenuPtr\n"
-                "_08088868:\n"
-                "\tldr r0, _08088874 @ =sOptionMenuPtr\n"
-                "\tldr r0, [r0]\n"
-                "_0808886C:\n"
-                "\tldrb r0, [r0, 0xE]\n"
-                "\tbl BufferOptionMenuString\n"
-                "\tb _080888B6\n"
-                "\t.align 2, 0\n"
-                "_08088874: .4byte sOptionMenuPtr\n"
-                "_08088878:\n"
-                "\tmovs r0, 0x1\n"
-                "\tnegs r0, r0\n"
-                "\tmovs r1, 0\n"
-                "\tstr r1, [sp]\n"
-                "\tmovs r2, 0\n"
-                "\tmovs r3, 0x10\n"
-                "\tbl BeginNormalPaletteFade\n"
-                "\tldr r0, _08088890 @ =sOptionMenuPtr\n"
-                "\tldr r1, [r0]\n"
-                "\tb _080888A2\n"
-                "\t.align 2, 0\n"
-                "_08088890: .4byte sOptionMenuPtr\n"
-                "_08088894:\n"
-                "\tldr r0, _080888AC @ =gPaletteFade\n"
-                "\tldrb r1, [r0, 0x7]\n"
-                "\tmovs r0, 0x80\n"
-                "\tands r0, r1\n"
-                "\tcmp r0, 0\n"
-                "\tbne _080888B6\n"
-                "\tldr r1, [r3]\n"
-                "_080888A2:\n"
-                "\tldrb r0, [r1, 0x10]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrb r0, [r1, 0x10]\n"
-                "\tb _080888B6\n"
-                "\t.align 2, 0\n"
-                "_080888AC: .4byte gPaletteFade\n"
-                "_080888B0:\n"
-                "\tadds r0, r2, 0\n"
-                "\tbl CloseAndSaveOptionMenu\n"
-                "_080888B6:\n"
-                "\tadd sp, 0x4\n"
-                "\tpop {r4}\n"
-                "\tpop {r0}\n"
-                "\tbx r0\n");
-}
-#endif   
 
 static u8 OptionMenu_ProcessInput(void)
 { 
@@ -624,40 +467,39 @@ static u8 OptionMenu_ProcessInput(void)
     }
 }
 
-#ifdef NONMATCHING    // could not get it to match perfectly, no idea how they put so many vars on the stack
 static void BufferOptionMenuString(u8 selection)
 {
+    u8 str[20];
+    u8 buf[12];
     u8 dst[3];
-    u8* str;
-    u8* v8;
     u8 x, y;
     
-    memcpy(&dst, sOptionMenuTextColor, 3);
-    y = ((GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) - 1) * selection) + 2;
+    memcpy(dst, sOptionMenuTextColor, 3);
     x = 0x82;
+    y = ((GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) - 1) * selection) + 2;
     FillWindowPixelRect(1, 1, x, y, 0x46, GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT));
 
     switch (selection)
     {
     case MENUITEM_TEXTSPEED:
-        AddTextPrinterParameterized3(1, 2, x, y, dst, -1, sTextSpeedOptions);
+        AddTextPrinterParameterized3(1, 2, x, y, dst, -1, sTextSpeedOptions[sOptionMenuPtr->option[selection]]);
         break;
     case MENUITEM_BATTLESCENE:
-        AddTextPrinterParameterized3(1, 2, x, y, dst, -1, sBattleSceneOptions);
+        AddTextPrinterParameterized3(1, 2, x, y, dst, -1, sBattleSceneOptions[sOptionMenuPtr->option[selection]]);
         break;
     case MENUITEM_BATTLESTYLE:
-        AddTextPrinterParameterized3(1, 2, x, y, dst, -1, sBattleStyleOptions);
+        AddTextPrinterParameterized3(1, 2, x, y, dst, -1, sBattleStyleOptions[sOptionMenuPtr->option[selection]]);
         break;
     case MENUITEM_SOUND:
-        AddTextPrinterParameterized3(1, 2, x, y, dst, -1, sSoundOptions);
+        AddTextPrinterParameterized3(1, 2, x, y, dst, -1, sSoundOptions[sOptionMenuPtr->option[selection]]);
         break;
     case MENUITEM_BUTTONMODE:
-        AddTextPrinterParameterized3(1, 2, x, y, dst, -1, sButtonTypeOptions);
+        AddTextPrinterParameterized3(1, 2, x, y, dst, -1, sButtonTypeOptions[sOptionMenuPtr->option[selection]]);
         break;
     case MENUITEM_FRAMETYPE:
         StringCopy(str, gText_FrameType);
-        ConvertIntToDecimalStringN(v8, sOptionMenuPtr->option[2 * selection] + 1, 1, 2);
-        StringAppendN(str, v8, 3);
+        ConvertIntToDecimalStringN(buf, sOptionMenuPtr->option[selection] + 1, 1, 2);
+        StringAppendN(str, buf, 3);
         AddTextPrinterParameterized3(1, 2, x, y, dst, -1, str);
         break;
     default:
@@ -666,173 +508,6 @@ static void BufferOptionMenuString(u8 selection)
     PutWindowTilemap(1);
     CopyWindowToVram(1, 3);
 }
-#else
-NAKED
-static void BufferOptionMenuString(u8 selection)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                "\tmov r7, r8\n"
-                "\tpush {r7}\n"
-                "\tsub sp, 0x30\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r5, r0, 24\n"
-                "\tadd r4, sp, 0x2C\n"
-                "\tldr r1, _08088A08 @ =sOptionMenuTextColor\n"
-                "\tadds r0, r4, 0\n"
-                "\tmovs r2, 0x3\n"
-                "\tbl memcpy\n"
-                "\tmovs r0, 0x82\n"
-                "\tmov r8, r0\n"
-                "\tmovs r0, 0x2\n"
-                "\tmovs r1, 0x1\n"
-                "\tbl GetFontAttribute\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tsubs r0, 0x1\n"
-                "\tmuls r0, r5\n"
-                "\tadds r0, 0x2\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r7, r0, 24\n"
-                "\tmovs r0, 0x2\n"
-                "\tmovs r1, 0x1\n"
-                "\tbl GetFontAttribute\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tmovs r1, 0x46\n"
-                "\tstr r1, [sp]\n"
-                "\tstr r0, [sp, 0x4]\n"
-                "\tmovs r0, 0x1\n"
-                "\tmovs r1, 0x1\n"
-                "\tmovs r2, 0x82\n"
-                "\tadds r3, r7, 0\n"
-                "\tbl FillWindowPixelRect\n"
-                "\tadds r6, r4, 0\n"
-                "\tcmp r5, 0x5\n"
-                "\tbhi _08088ADE\n"
-                "\tlsls r0, r5, 2\n"
-                "\tldr r1, _08088A0C @ =_08088A10\n"
-                "\tadds r0, r1\n"
-                "\tldr r0, [r0]\n"
-                "\tmov pc, r0\n"
-                "\t.align 2, 0\n"
-                "_08088A08: .4byte sOptionMenuTextColor\n"
-                "_08088A0C: .4byte _08088A10\n"
-                "\t.align 2, 0\n"
-                "_08088A10:\n"
-                "\t.4byte _08088A28\n"
-                "\t.4byte _08088A38\n"
-                "\t.4byte _08088A48\n"
-                "\t.4byte _08088A58\n"
-                "\t.4byte _08088A68\n"
-                "\t.4byte _08088A9C\n"
-                "_08088A28:\n"
-                "\tstr r6, [sp]\n"
-                "\tmovs r0, 0x1\n"
-                "\tnegs r0, r0\n"
-                "\tstr r0, [sp, 0x4]\n"
-                "\tldr r2, _08088A34 @ =sTextSpeedOptions\n"
-                "\tb _08088A72\n"
-                "\t.align 2, 0\n"
-                "_08088A34: .4byte sTextSpeedOptions\n"
-                "_08088A38:\n"
-                "\tstr r6, [sp]\n"
-                "\tmovs r0, 0x1\n"
-                "\tnegs r0, r0\n"
-                "\tstr r0, [sp, 0x4]\n"
-                "\tldr r2, _08088A44 @ =sBattleSceneOptions\n"
-                "\tb _08088A72\n"
-                "\t.align 2, 0\n"
-                "_08088A44: .4byte sBattleSceneOptions\n"
-                "_08088A48:\n"
-                "\tstr r6, [sp]\n"
-                "\tmovs r0, 0x1\n"
-                "\tnegs r0, r0\n"
-                "\tstr r0, [sp, 0x4]\n"
-                "\tldr r2, _08088A54 @ =sBattleStyleOptions\n"
-                "\tb _08088A72\n"
-                "\t.align 2, 0\n"
-                "_08088A54: .4byte sBattleStyleOptions\n"
-                "_08088A58:\n"
-                "\tstr r6, [sp]\n"
-                "\tmovs r0, 0x1\n"
-                "\tnegs r0, r0\n"
-                "\tstr r0, [sp, 0x4]\n"
-                "\tldr r2, _08088A64 @ =sSoundOptions\n"
-                "\tb _08088A72\n"
-                "\t.align 2, 0\n"
-                "_08088A64: .4byte sSoundOptions\n"
-                "_08088A68:\n"
-                "\tstr r6, [sp]\n"
-                "\tmovs r0, 0x1\n"
-                "\tnegs r0, r0\n"
-                "\tstr r0, [sp, 0x4]\n"
-                "\tldr r2, _08088A94 @ =sButtonTypeOptions\n"
-                "_08088A72:\n"
-                "\tldr r0, _08088A98 @ =sOptionMenuPtr\n"
-                "\tldr r0, [r0]\n"
-                "\tlsls r1, r5, 1\n"
-                "\tadds r0, r1\n"
-                "\tldrh r0, [r0]\n"
-                "\tlsls r0, 2\n"
-                "\tadds r0, r2\n"
-                "\tldr r0, [r0]\n"
-                "\tstr r0, [sp, 0x8]\n"
-                "\tmovs r0, 0x1\n"
-                "\tmovs r1, 0x2\n"
-                "\tmov r2, r8\n"
-                "\tadds r3, r7, 0\n"
-                "\tbl AddTextPrinterParameterized3\n"
-                "\tb _08088ADE\n"
-                "\t.align 2, 0\n"
-                "_08088A94: .4byte sButtonTypeOptions\n"
-                "_08088A98: .4byte sOptionMenuPtr\n"
-                "_08088A9C:\n"
-                "\tldr r1, _08088AF8 @ =gText_FrameType\n"
-                "\tadd r0, sp, 0xC\n"
-                "\tbl StringCopy\n"
-                "\tadd r4, sp, 0x20\n"
-                "\tldr r0, _08088AFC @ =sOptionMenuPtr\n"
-                "\tldr r0, [r0]\n"
-                "\tlsls r1, r5, 1\n"
-                "\tadds r0, r1\n"
-                "\tldrh r1, [r0]\n"
-                "\tadds r1, 0x1\n"
-                "\tadds r0, r4, 0\n"
-                "\tmovs r2, 0x1\n"
-                "\tmovs r3, 0x2\n"
-                "\tbl ConvertIntToDecimalStringN\n"
-                "\tadd r0, sp, 0xC\n"
-                "\tadds r1, r4, 0\n"
-                "\tmovs r2, 0x3\n"
-                "\tbl StringAppendN\n"
-                "\tstr r6, [sp]\n"
-                "\tmovs r0, 0x1\n"
-                "\tnegs r0, r0\n"
-                "\tstr r0, [sp, 0x4]\n"
-                "\tadd r0, sp, 0xC\n"
-                "\tstr r0, [sp, 0x8]\n"
-                "\tmovs r0, 0x1\n"
-                "\tmovs r1, 0x2\n"
-                "\tmov r2, r8\n"
-                "\tadds r3, r7, 0\n"
-                "\tbl AddTextPrinterParameterized3\n"
-                "_08088ADE:\n"
-                "\tmovs r0, 0x1\n"
-                "\tbl PutWindowTilemap\n"
-                "\tmovs r0, 0x1\n"
-                "\tmovs r1, 0x3\n"
-                "\tbl CopyWindowToVram\n"
-                "\tadd sp, 0x30\n"
-                "\tpop {r3}\n"
-                "\tmov r8, r3\n"
-                "\tpop {r4-r7}\n"
-                "\tpop {r0}\n"
-                "\tbx r0\n"
-                "\t.align 2, 0\n"
-                "_08088AF8: .4byte gText_FrameType\n"
-                "_08088AFC: .4byte sOptionMenuPtr\n");
-}
-#endif
 
 static void CloseAndSaveOptionMenu(u8 taskId)
 {

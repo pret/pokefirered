@@ -88,7 +88,7 @@ sub_80BF97C: @ 80BF97C
 	lsls r0, 3
 	adds r0, r1
 	ldrb r0, [r0, 0x8]
-	bl sub_81283A8
+	bl ChoosePartyMonByMenuType
 	adds r0, r4, 0
 	bl DestroyTask
 _080BF9AC:

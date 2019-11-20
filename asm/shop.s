@@ -291,7 +291,7 @@ sub_809ACD4: @ 809ACD4
 	ldr r2, _0809ACEC @ =CB2_ReturnToField
 	movs r0, 0x2
 	movs r1, 0x3
-	bl sub_8107DB4
+	bl GoToBagMenu
 	ldr r1, _0809ACF0 @ =gFieldCallback
 	ldr r0, _0809ACF4 @ =sub_809AD74
 	str r0, [r1]
@@ -386,7 +386,7 @@ sub_809AD8C: @ 809AD8C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl field_weather_is_fade_finished
+	bl IsWeatherNotFadingIn
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

@@ -23,7 +23,7 @@ gMoveTutorMoves:: @ 8459B60
 	.2byte MOVE_ROCK_SLIDE
 	.2byte MOVE_SUBSTITUTE
 
-gMoveTutorMoveCompatibilityTable:: @ 8459B7E
+sTutorLearnsets:: @ 8459B7E
 	.2byte 0x0000
 	.2byte 0x409a
 	.2byte 0x409a
@@ -438,16 +438,13 @@ gMoveTutorMoveCompatibilityTable:: @ 8459B7E
 	.2byte 0x4490
 
 	.align 2
-gUnknown_8459EB8:: @ 8459EB8
+sPartyMenuBgTemplates:: @ 8459EB8
 	.incbin "baserom.gba", 0x459EB8, 0xC
 
-gUnknown_8459EC4:: @ 8459EC4
-	.incbin "baserom.gba", 0x459EC4, 0x20
+sPartyBoxInfoRects:: @ 8459EC4
+	.incbin "baserom.gba", 0x459EC4, 0x40
 
-gUnknown_8459EE4:: @ 8459EE4
-	.incbin "baserom.gba", 0x459EE4, 0x20
-
-gUnknown_8459F04:: @ 8459F04
+sPartyMenuSpriteCoords:: @ 8459F04
 	.incbin "baserom.gba", 0x459F04, 0xC0
 
 gUnknown_8459FC4:: @ 8459FC4
@@ -456,31 +453,31 @@ gUnknown_8459FC4:: @ 8459FC4
 gUnknown_8459FE0:: @ 8459FE0
 	.incbin "baserom.gba", 0x459FE0, 0x1C
 
-gUnknown_8459FFC:: @ 8459FFC
+sFontColorTable:: @ 8459FFC
 	.incbin "baserom.gba", 0x459FFC, 0xF
 
 gUnknown_845A00B:: @ 845A00B
 	.incbin "baserom.gba", 0x45A00B, 0x5
 
-gUnknown_845A010:: @ 845A010
+sSinglePartyMenuWindowTemplate:: @ 845A010
 	.incbin "baserom.gba", 0x45A010, 0x40
 
-gUnknown_845A050:: @ 845A050
+sDoublePartyMenuWindowTemplate:: @ 845A050
 	.incbin "baserom.gba", 0x45A050, 0x40
 
-gUnknown_845A090:: @ 845A090
+sMultiPartyMenuWindowTemplate:: @ 845A090
 	.incbin "baserom.gba", 0x45A090, 0x40
 
-gUnknown_845A0D0:: @ 845A0D0
+sShowcaseMultiPartyMenuWindowTemplate:: @ 845A0D0
 	.incbin "baserom.gba", 0x45A0D0, 0x38
 
-gUnknown_845A108:: @ 845A108
+sCancelButtonWindowTemplate:: @ 845A108
 	.incbin "baserom.gba", 0x45A108, 0x8
 
-gUnknown_845A110:: @ 845A110
+sMultiCancelButtonWindowTemplate:: @ 845A110
 	.incbin "baserom.gba", 0x45A110, 0x8
 
-gUnknown_845A118:: @ 845A118
+sConfirmButtonWindowTemplate:: @ 845A118
 	.incbin "baserom.gba", 0x45A118, 0x8
 
 gUnknown_845A120:: @ 845A120
@@ -498,19 +495,19 @@ gUnknown_845A138:: @ 845A138
 gUnknown_845A140:: @ 845A140
 	.incbin "baserom.gba", 0x45A140, 0x8
 
-gUnknown_845A148:: @ 845A148
+sItemGiveTakeWindowTemplate:: @ 845A148
 	.incbin "baserom.gba", 0x45A148, 0x8
 
-gUnknown_845A150:: @ 845A150
+sMailReadTakeWindowTemplate:: @ 845A150
 	.incbin "baserom.gba", 0x45A150, 0x8
 
-gUnknown_845A158:: @ 845A158
+sMoveSelectWindowTemplate:: @ 845A158
 	.incbin "baserom.gba", 0x45A158, 0x8
 
-gUnknown_845A160:: @ 845A160
+sPartyMenuYesNoWindowTemplate:: @ 845A160
 	.incbin "baserom.gba", 0x45A160, 0x8
 
-gUnknown_845A168:: @ 845A168
+sLevelUpStatsWindowTemplate:: @ 845A168
 	.incbin "baserom.gba", 0x45A168, 0x8
 
 gUnknown_845A170:: @ 845A170
@@ -519,22 +516,22 @@ gUnknown_845A170:: @ 845A170
 gUnknown_845A178:: @ 845A178
 	.incbin "baserom.gba", 0x45A178, 0x8
 
-gUnknown_845A180:: @ 845A180
+sMainSlotTileNums:: @ 845A180
 	.incbin "baserom.gba", 0x45A180, 0x46
 
-gUnknown_845A1C6:: @ 845A1C6
+sMainSlotTileNums_Egg:: @ 845A1C6
 	.incbin "baserom.gba", 0x45A1C6, 0x46
 
-gUnknown_845A20C:: @ 845A20C
+sOtherSlotTileNums:: @ 845A20C
 	.incbin "baserom.gba", 0x45A20C, 0x36
 
-gUnknown_845A242:: @ 845A242
+sOtherSlotTileNums_Egg:: @ 845A242
 	.incbin "baserom.gba", 0x45A242, 0x36
 
 gUnknown_845A278:: @ 845A278
 	.incbin "baserom.gba", 0x45A278, 0x36
 
-gUnknown_845A2AE:: @ 845A2AE
+sGenderPalOffsets:: @ 845A2AE
 	.incbin "baserom.gba", 0x45A2AE, 0x2
 
 gUnknown_845A2B0:: @ 845A2B0
@@ -546,10 +543,10 @@ gUnknown_845A2B2:: @ 845A2B2
 gUnknown_845A2B5:: @ 845A2B5
 	.incbin "baserom.gba", 0x45A2B5, 0x3
 
-gUnknown_845A2B8:: @ 845A2B8
+sGenderMalePalIds:: @ 845A2B8
 	.incbin "baserom.gba", 0x45A2B8, 0x2
 
-gUnknown_845A2BA:: @ 845A2BA
+sGenderFemalePalIds:: @ 845A2BA
 	.incbin "baserom.gba", 0x45A2BA, 0x2
 
 gUnknown_845A2BC:: @ 845A2BC
@@ -597,67 +594,67 @@ gUnknown_845A2E0:: @ 845A2E0
 gUnknown_845A2E3:: @ 845A2E3
 	.incbin "baserom.gba", 0x45A2E3, 0x5
 
-gUnknown_845A2E8:: @ 845A2E8
+sActionStringTable:: @ 845A2E8
 	.incbin "baserom.gba", 0x45A2E8, 0x6C
 
-gUnknown_845A354:: @ 845A354
+sDescriptionStringTable:: @ 845A354
 	.incbin "baserom.gba", 0x45A354, 0x28
 
 gUnknown_845A37C:: @ 845A37C
 	.incbin "baserom.gba", 0x45A37C, 0xB0
 
-gUnknown_845A42C:: @ 845A42C
+sSpriteSheet_HeldItem:: @ 845A42C
 	.incbin "baserom.gba", 0x45A42C, 0x8
 
-gUnknown_845A434:: @ 845A434
+sSpritePalette_HeldItem:: @ 845A434
 	.incbin "baserom.gba", 0x45A434, 0x8
 
-gUnknown_845A43C:: @ 845A43C
+sSpriteTemplate_HeldItem:: @ 845A43C
 	.incbin "baserom.gba", 0x45A43C, 0x38
 
-gUnknown_845A474:: @ 845A474
+sSpriteSheet_MenuPokeball:: @ 845A474
 	.incbin "baserom.gba", 0x45A474, 0x8
 
-gUnknown_845A47C:: @ 845A47C
+sSpritePalette_MenuPokeball:: @ 845A47C
 	.incbin "baserom.gba", 0x45A47C, 0x8
 
-gUnknown_845A484:: @ 845A484
+sSpriteTemplate_MenuPokeball:: @ 845A484
 	.incbin "baserom.gba", 0x45A484, 0x68
 
-gUnknown_845A4EC:: @ 845A4EC
+sSpriteSheet_MenuPokeballSmall:: @ 845A4EC
 	.incbin "baserom.gba", 0x45A4EC, 0x8
 
-gUnknown_845A4F4:: @ 845A4F4
+sSpriteTemplate_MenuPokeballSmall:: @ 845A4F4
 	.incbin "baserom.gba", 0x45A4F4, 0x80
 
-gUnknown_845A574:: @ 845A574
+sSpriteSheet_StatusIcons:: @ 845A574
 	.incbin "baserom.gba", 0x45A574, 0x8
 
-gUnknown_845A57C:: @ 845A57C
+sSpritePalette_StatusIcons:: @ 845A57C
 	.incbin "baserom.gba", 0x45A57C, 0x8
 
-gUnknown_845A584:: @ 845A584
+sSpriteTemplate_StatusIcons:: @ 845A584
 	.incbin "baserom.gba", 0x45A584, 0x18
 
-gUnknown_845A59C:: @ 845A59C
+sMultiBattlePartnersPartyMask:: @ 845A59C
 	.incbin "baserom.gba", 0x45A59C, 0x7C
 
-gUnknown_845A618:: @ 845A618
+sCursorOptions:: @ 845A618
 	.incbin "baserom.gba", 0x45A618, 0x114
 
-gUnknown_845A72C:: @ 845A72C
+sPartyMenuActions:: @ 845A72C
 	.incbin "baserom.gba", 0x45A72C, 0x34
 
-gUnknown_845A760:: @ 845A760
+sPartyMenuActionCounts:: @ 845A760
 	.incbin "baserom.gba", 0x45A760, 0xE
 
-gUnknown_845A76E:: @ 845A76E
+sFieldMoves:: @ 845A76E
 	.incbin "baserom.gba", 0x45A76E, 0x1A
 
-gUnknown_845A788:: @ 845A788
+sFieldMoveCursorCallbacks:: @ 845A788
 	.incbin "baserom.gba", 0x45A788, 0x60
 
-gUnknown_845A7E8:: @ 845A7E8
+sUnionRoomTradeMessages:: @ 845A7E8
 	.4byte gUnknown_841718C @ Not what other player wants
 	.4byte gUnknown_84171CC @ Not an egg
 	.4byte gUnknown_84170BC @ Mon can't be traded
@@ -668,5 +665,5 @@ gUnknown_845A7E8:: @ 845A7E8
 	.4byte gUnknown_8417164 @ Can't trade with trainer now
 	.4byte gUnknown_8417164 @ Can't trade with trainer now
 
-gUnknown_845A80C:: @ 845A80C
+sTMHMMoves:: @ 845A80C
 	.incbin "baserom.gba", 0x45A80C, 0x74

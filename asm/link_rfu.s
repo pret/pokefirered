@@ -3172,8 +3172,8 @@ _080FEBA6:
 	bx r0
 	thumb_func_end sub_80FEB3C
 
-	thumb_func_start sub_80FEBAC
-sub_80FEBAC: @ 80FEBAC
+	thumb_func_start DoEasyChatScreen
+DoEasyChatScreen: @ 80FEBAC
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -3214,7 +3214,7 @@ sub_80FEBAC: @ 80FEBAC
 _080FEC00: .4byte sub_80FEC54
 _080FEC04: .4byte gTasks
 _080FEC08: .4byte sub_80FEC0C
-	thumb_func_end sub_80FEBAC
+	thumb_func_end DoEasyChatScreen
 
 	thumb_func_start sub_80FEC0C
 sub_80FEC0C: @ 80FEC0C
@@ -3588,7 +3588,7 @@ _080FEF08:
 	ldr r0, _080FEF24 @ =gSpecialVar_0x8004
 	ldrb r0, [r0]
 	ldr r2, _080FEF28 @ =sub_80568C4
-	bl sub_80FEBAC
+	bl DoEasyChatScreen
 _080FEF12:
 	pop {r0}
 	bx r0

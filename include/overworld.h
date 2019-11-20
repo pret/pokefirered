@@ -72,7 +72,7 @@ void Overworld_ChangeMusicTo(u16);
 bool32 IsUpdateLinkStateCBActive(void);
 
 void strange_npc_table_clear(void);
-const struct MapHeader *get_mapheader_by_bank_and_number(u16, u16);
+const struct MapHeader *Overworld_GetMapHeaderByGroupAndId(u16, u16);
 void FieldObjectMoveDestCoords(struct MapObject *, u32, s16 *, s16 *);
 void sub_8086230(void);
 void CB2_ReturnToField(void);

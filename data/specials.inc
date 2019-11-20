@@ -406,7 +406,7 @@ gSpecials:: @ 815FD60
 	def_special Special_OpenMuseumFossilPic
 	def_special Special_CloseMuseumFossilPic
 	def_special sub_812781C
-	def_special sub_8127888
+	def_special ChooseMonForWirelessMinigame
 	def_special SetBattledTrainerFlag
 	def_special sub_812B35C
 	def_special Special_SSAnneDepartureCutscene

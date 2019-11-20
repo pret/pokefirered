@@ -712,7 +712,7 @@ extern u16 gLastPrintedMoves[MAX_BATTLERS_COUNT];
 extern u8 gActionsByTurnOrder[MAX_BATTLERS_COUNT];
 extern u8 gChosenActionByBattler[MAX_BATTLERS_COUNT];
 extern u8 gBattleTerrain;
-extern struct UnknownPokemonStruct4 gUnknown_2022B58[3];
+extern struct UnknownPokemonStruct4 gMultiPartnerParty[3];
 extern u16 *gUnknown_2022BC0;
 extern u16 gRandomTurnNumber;
 

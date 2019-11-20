@@ -473,7 +473,7 @@ _08054F8A:
 	str r2, [sp, 0x4]
 	adds r0, r2, 0
 	adds r1, r5, 0
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	mov r6, r10
 	ldr r1, [r6]
 	mov r2, r8
@@ -821,8 +821,8 @@ _08055232:
 	bx r1
 	thumb_func_end warp_data_is_not_neg_1
 
-	thumb_func_start get_mapheader_by_bank_and_number
-get_mapheader_by_bank_and_number: @ 8055238
+	thumb_func_start Overworld_GetMapHeaderByGroupAndId
+Overworld_GetMapHeaderByGroupAndId: @ 8055238
 	lsls r0, 16
 	lsls r1, 16
 	ldr r2, _0805524C @ =gMapGroups
@@ -835,7 +835,7 @@ get_mapheader_by_bank_and_number: @ 8055238
 	bx lr
 	.align 2, 0
 _0805524C: .4byte gMapGroups
-	thumb_func_end get_mapheader_by_bank_and_number
+	thumb_func_end Overworld_GetMapHeaderByGroupAndId
 
 	thumb_func_start warp1_get_mapheader
 warp1_get_mapheader: @ 8055250
@@ -850,7 +850,7 @@ warp1_get_mapheader: @ 8055250
 	asrs r1, 24
 	lsls r1, 16
 	lsrs r1, 16
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	pop {r1}
 	bx r1
 	.align 2, 0
@@ -872,7 +872,7 @@ set_current_map_header_from_sav1_save_old_name: @ 8055274
 	asrs r1, 24
 	lsls r1, 16
 	lsrs r1, 16
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	adds r1, r4, 0
 	ldm r0!, {r2,r3,r6}
 	stm r1!, {r2,r3,r6}
@@ -908,7 +908,7 @@ set_current_map_header_from_sav1: @ 80552BC
 	asrs r1, 24
 	lsls r1, 16
 	lsrs r1, 16
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	adds r1, r4, 0
 	ldm r0!, {r2,r3,r5}
 	stm r1!, {r2,r3,r5}
@@ -2336,7 +2336,7 @@ sub_8055D6C: @ 8055D6C
 	asrs r1, 24
 	lsls r1, 16
 	lsrs r1, 16
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	ldrh r0, [r0, 0x10]
 	pop {r1}
 	bx r1
@@ -2863,7 +2863,7 @@ get_map_light_level_by_bank_and_number: @ 8056158
 	lsls r1, 24
 	asrs r1, 8
 	lsrs r1, 16
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	ldrb r0, [r0, 0x17]
 	pop {r1}
 	bx r1
@@ -2925,7 +2925,7 @@ sub_80561B4: @ 80561B4
 	asrs r1, 24
 	lsls r1, 16
 	lsrs r1, 16
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	ldrb r0, [r0, 0x14]
 	pop {r1}
 	bx r1
@@ -3014,7 +3014,7 @@ sav1_saved_warp2_map_get_name: @ 8056238
 	asrs r1, 24
 	lsls r1, 16
 	lsrs r1, 16
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	ldrb r0, [r0, 0x14]
 	pop {r1}
 	bx r1
@@ -3036,7 +3036,7 @@ GetCurrentRegionMapSectionId: @ 8056260
 	asrs r1, 24
 	lsls r1, 16
 	lsrs r1, 16
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	ldrb r0, [r0, 0x14]
 	pop {r1}
 	bx r1
@@ -3058,7 +3058,7 @@ sav1_map_get_battletype: @ 8056288
 	asrs r1, 24
 	lsls r1, 16
 	lsrs r1, 16
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	ldrb r0, [r0, 0x1B]
 	pop {r1}
 	bx r1

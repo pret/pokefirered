@@ -133,7 +133,7 @@ static const u8 sUnref_83E27B4[] = {
 };
 
 void (*const gUnknown_83E2954[])(void) = {
-    sub_8124C8C,
+    CB2_ShowPartyMenuForItemUse,
     CB2_ReturnToField,
     NULL,
     NULL
@@ -179,7 +179,7 @@ void sub_80A1084(void)
 
 void sub_80A109C(u8 taskId)
 {
-    if (field_weather_is_fade_finished() == TRUE)
+    if (IsWeatherNotFadingIn() == TRUE)
     {
         sItemUseOnFieldCB(taskId);
     }
@@ -234,7 +234,7 @@ bool8 sub_80A1194(void)
 
 void sub_80A11C0(u8 taskId)
 {
-    if (field_weather_is_fade_finished() == TRUE)
+    if (IsWeatherNotFadingIn() == TRUE)
     {
         UnfreezeMapObjects();
         ScriptContext2_Disable();
@@ -415,37 +415,37 @@ void sub_80A16D0(u8 taskId)
 
 void FieldUseFunc_Medicine(u8 taskId)
 {
-    gUnknown_3005E98 = sub_81252D0;
+    gItemUseCB = sub_81252D0;
     sub_80A16D0(taskId);
 }
 
 void FieldUseFunc_Ether(u8 taskId)
 {
-    gUnknown_3005E98 = ItemUseCB_PpRestore;
+    gItemUseCB = ItemUseCB_PPRecovery;
     sub_80A16D0(taskId);
 }
 
 void FieldUseFunc_PpUp(u8 taskId)
 {
-    gUnknown_3005E98 = dp05_pp_up;
+    gItemUseCB = ItemUseCB_PPUp;
     sub_80A16D0(taskId);
 }
 
 void FieldUseFunc_RareCandy(u8 taskId)
 {
-    gUnknown_3005E98 = dp05_rare_candy;
+    gItemUseCB = dp05_rare_candy;
     sub_80A16D0(taskId);
 }
 
 void FieldUseFunc_EvoItem(u8 taskId)
 {
-    gUnknown_3005E98 = sub_8126B60;
+    gItemUseCB = sub_8126B60;
     sub_80A16D0(taskId);
 }
 
 void FieldUseFunc_SacredAsh(u8 taskId)
 {
-    gUnknown_3005E98 = sub_8126894;
+    gItemUseCB = ItemUseCB_SacredAsh;
     sub_80A0FBC(taskId);
 }
 
@@ -765,7 +765,7 @@ void BattleUseFunc_GuardSpec(u8 taskId)
 {
     if (ExecuteTableBasedItemEffect(&gPlayerParty[gBattlerPartyIndexes[gBattlerInMenuId]], gSpecialVar_ItemId, gBattlerPartyIndexes[gBattlerInMenuId], 0))
     {
-        DisplayItemMessageInBag(taskId, 2, gUnknown_84169DC, sub_810A1F8);
+        DisplayItemMessageInBag(taskId, 2, gText_WontHaveEffect, sub_810A1F8);
     }
     else
     {
@@ -812,19 +812,19 @@ void ItemUse_SwitchToPartyMenuInBattle(u8 taskId)
 
 void BattleUseFunc_Medicine(u8 taskId)
 {
-    gUnknown_3005E98 = ItemUseCB_Medicine;
+    gItemUseCB = ItemUseCB_Medicine;
     ItemUse_SwitchToPartyMenuInBattle(taskId);
 }
 
 void sub_80A1FD8(u8 taskId)
 {
-    gUnknown_3005E98 = sub_8126894;
+    gItemUseCB = ItemUseCB_SacredAsh;
     ItemUse_SwitchToPartyMenuInBattle(taskId);
 }
 
 void BattleUseFunc_Ether(u8 taskId)
 {
-    gUnknown_3005E98 = ItemUseCB_PpRestore;
+    gItemUseCB = ItemUseCB_PPRecovery;
     ItemUse_SwitchToPartyMenuInBattle(taskId);
 }
 

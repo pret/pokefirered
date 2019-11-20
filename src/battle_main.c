@@ -696,7 +696,7 @@ static void CB2_InitBattleInternal(void)
     gBattle_BG3_X = 0;
     gBattle_BG3_Y = 0;
     gBattleTerrain = BattleSetup_GetTerrainId();
-    sub_800F34C();
+    InitBattleBgsVideo();
     LoadBattleTextboxAndBackground();
     ResetSpriteData();
     ResetTasks();
@@ -1774,7 +1774,7 @@ void sub_8011A1C(void)
     gBattle_BG2_Y = 0;
     gBattle_BG3_X = 0;
     gBattle_BG3_Y = 0;
-    sub_800F34C();
+    InitBattleBgsVideo();
     LoadCompressedPalette(gBattleTextboxPalette, 0, 64);
     LoadBattleMenuWindowGfx();
     ResetSpriteData();

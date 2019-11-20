@@ -193,8 +193,8 @@ _0800F344: .4byte gBattleBgTemplates
 _0800F348: .4byte gUnknown_8248330
 	thumb_func_end sub_800F324
 
-	thumb_func_start sub_800F34C
-sub_800F34C: @ 800F34C
+	thumb_func_start InitBattleBgsVideo
+InitBattleBgsVideo: @ 800F34C
 	push {lr}
 	movs r0, 0xC5
 	bl EnableInterrupts
@@ -215,7 +215,7 @@ sub_800F34C: @ 800F34C
 	bx r0
 	.align 2, 0
 _0800F37C: .4byte 0x0000b040
-	thumb_func_end sub_800F34C
+	thumb_func_end InitBattleBgsVideo
 
 	thumb_func_start LoadBattleMenuWindowGfx
 LoadBattleMenuWindowGfx: @ 800F380

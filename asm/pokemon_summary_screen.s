@@ -8406,14 +8406,14 @@ sub_8138B20: @ 8138B20
 _08138B28: .4byte gUnknown_203B16C
 	thumb_func_end sub_8138B20
 
-	thumb_func_start sub_8138B2C
-sub_8138B2C: @ 8138B2C
+	thumb_func_start GetMoveSlotToReplace
+GetMoveSlotToReplace: @ 8138B2C
 	ldr r0, _08138B34 @ =gUnknown_203B16E
 	ldrb r0, [r0]
 	bx lr
 	.align 2, 0
 _08138B34: .4byte gUnknown_203B16E
-	thumb_func_end sub_8138B2C
+	thumb_func_end GetMoveSlotToReplace
 
 	thumb_func_start sub_8138B38
 sub_8138B38: @ 8138B38

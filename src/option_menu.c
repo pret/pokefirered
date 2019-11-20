@@ -363,69 +363,49 @@ static bool8 LoadOptionMenuPalette(void)
 
 static void Task_OptionMenu(u8 taskId)
 {
-    u8 v2, v5;
-    struct OptionMenu *vPtr;
-	struct OptionMenu *v4;
-    
     switch (sOptionMenuPtr->state3)
     {
     case 0:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
         OptionMenu_SetVBlankCallback();
-        vPtr = sOptionMenuPtr;
-		v4 = vPtr;
-		goto STATE_PLUS;
-		v2 = 1;
+        sOptionMenuPtr->state3++;
         break;
     case 2:
-        if ((bool32) sub_80BF72C() == TRUE)    //cast to bool32 to remove the lsl/lsr 0x18 after func call
-            return;
+        if (sub_80BF72C() == TRUE)    //cast to bool32 to remove the lsl/lsr 0x18 after func call
+            break;
         switch (OptionMenu_ProcessInput())
         {
+        case 0:
+            break;
         case 1:
-			vPtr = sOptionMenuPtr;
-            goto STATE_PLUS;
-			v2 = 1;
+            sOptionMenuPtr->state3++;
             break;
         case 2:
             LoadBgTiles(1, GetUserFrameGraphicsInfo(sOptionMenuPtr->option[MENUITEM_FRAMETYPE])->tiles, 0x120, 0x1AA);
             LoadPalette(GetUserFrameGraphicsInfo(sOptionMenuPtr->option[MENUITEM_FRAMETYPE])->palette, 0x20, 0x20);
             BufferOptionMenuString(sOptionMenuPtr->unkE);
-            
-			vPtr = sOptionMenuPtr;
-			goto GET_STRING;
-			v2 = 1;
             break;
         case 3:
             sub_8088DE0(sOptionMenuPtr->unkE);
             break;
         case 4:
-			vPtr = sOptionMenuPtr;
-			
-			GET_STRING:
-            BufferOptionMenuString(vPtr->unkE);
+            BufferOptionMenuString(sOptionMenuPtr->unkE);
             break;
-        default:
-            return;
         }
+        break;
     case 3:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
         sOptionMenuPtr->state3++;
+        break;
     case 1:
     case 4:
-        if (!(gPaletteFade.active))
-		{
-			STATE_PLUS:
-			v2 = vPtr->state3;
-			v2++;
-			vPtr->state3 = v2;
-		}
-		break;
+        if (gPaletteFade.active)
+            return;
+        sOptionMenuPtr->state3++;
+        break;
     case 5:
         CloseAndSaveOptionMenu(taskId);
         break;
-    default:
-        return;
     }
 }
 

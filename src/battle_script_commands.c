@@ -7140,8 +7140,8 @@ static void atk8F_forcerandomswitch(void)
             *(gBattleStruct->monToSwitchIntoId + gBattlerTarget) = i;
             if (!IsMultiBattle())
                 sub_8013F6C(gBattlerTarget);
-            sub_8127EC4(gBattlerTarget, i, 0);
-            sub_8127EC4(gBattlerTarget ^ 2, i, 1);
+            SwitchPartyOrderLinkMulti(gBattlerTarget, i, 0);
+            SwitchPartyOrderLinkMulti(gBattlerTarget ^ 2, i, 1);
         }
     }
     else

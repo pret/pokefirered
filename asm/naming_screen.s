@@ -3623,7 +3623,7 @@ sub_809F5C4: @ 809F5C4
 	push {r4,r5,lr}
 	sub sp, 0x10
 	movs r4, 0
-	ldr r1, _0809F61C @ =gUnknown_841621F
+	ldr r1, _0809F61C @ =gText_MaleSymbol
 	add r0, sp, 0xC
 	bl StringCopy
 	ldr r5, _0809F620 @ =gUnknown_203998C
@@ -3635,7 +3635,7 @@ sub_809F5C4: @ 809F5C4
 	beq _0809F614
 	cmp r0, 0xFE
 	bne _0809F5EE
-	ldr r1, _0809F628 @ =gUnknown_8416221
+	ldr r1, _0809F628 @ =gText_FemaleSymbol
 	add r0, sp, 0xC
 	bl StringCopy
 	movs r4, 0x1
@@ -3664,10 +3664,10 @@ _0809F614:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809F61C: .4byte gUnknown_841621F
+_0809F61C: .4byte gText_MaleSymbol
 _0809F620: .4byte gUnknown_203998C
 _0809F624: .4byte 0x00001e36
-_0809F628: .4byte gUnknown_8416221
+_0809F628: .4byte gText_FemaleSymbol
 _0809F62C: .4byte 0x00001e13
 _0809F630: .4byte gUnknown_83E2428
 	thumb_func_end sub_809F5C4

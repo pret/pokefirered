@@ -2572,7 +2572,7 @@ _0806DC78:
 	bl sub_805550C
 	ldrb r0, [r4, 0x7]
 	ldrb r1, [r4, 0x6]
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	ldr r1, [r0, 0x4]
 	ldrb r0, [r4, 0x5]
 	ldr r1, [r1, 0x8]

@@ -385,7 +385,7 @@ sub_80A0334: @ 80A0334
 	ldr r0, _080A034C @ =sub_80A0350
 	str r0, [r1, 0x8]
 	movs r0, 0
-	bl sub_81274A8
+	bl InitChooseHalfPartyForBattle
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -427,7 +427,7 @@ ChooseBattleTowerPlayerParty: @ 80A0380
 	ldr r0, _080A0398 @ =sub_80A039C
 	str r0, [r1, 0x8]
 	movs r0, 0x1
-	bl sub_81274A8
+	bl InitChooseHalfPartyForBattle
 	pop {r0}
 	bx r0
 	.align 2, 0

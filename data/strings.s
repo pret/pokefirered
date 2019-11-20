@@ -463,7 +463,7 @@ gUnknown_8416202:: @ 8416202
 gUnknown_8416206::
 	.string "?????$"
 
-gUnknown_841620C:: @ 841620C
+gText_Slash:: @ 841620C
 	.string "/$"
 
 gUnknown_841620E:: @ 841620E
@@ -478,10 +478,10 @@ gText_ThreeHyphens:: @ 8416213
 gUnknown_8416217:: @ 8416217
 	.string "-------$"
 
-gUnknown_841621F:: @ 841621F
+gText_MaleSymbol:: @ 841621F
 	.string "♂$"
 
-gUnknown_8416221:: @ 8416221
+gText_FemaleSymbol:: @ 8416221
 	.string "♀$"
 
 gText_Lv:: @ 8416223
@@ -834,25 +834,25 @@ gUnknown_84169B7:: @ 0x84169B7
 gUnknown_84169BC:: @ 0x84169BC
 	.string "TRADE$"
 
-gUnknown_84169C2:: @ 84169C2
+gText_HP3:: @ 84169C2
 	.string "HP$"
 
-gUnknown_84169C5:: @ 84169C5
+gText_SpAtk3:: @ 84169C5
 	.string "SP. ATK$"
 
-gUnknown_84169CD:: @ 84169CD
+gText_SpDef3:: @ 84169CD
 	.string "SP. DEF$"
 
-gUnknown_84169D5:: @ 84169D5
+gMenuText_Confirm:: @ 84169D5
 	.string "OK$"
 
 gUnknown_84169D8:: @ 0x84169D8
 	.string "$"
 
-gUnknown_84169D9:: @ 84169D9
+gText_PauseUntilPress:: @ 84169D9
 	.string "{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_84169DC:: @ 84169DC
+gText_WontHaveEffect:: @ 84169DC
 	.string "It won't have any effect.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_84169F8:: @ 84169F8
@@ -882,7 +882,7 @@ gUnknown_8416A98:: @ 8416A98
 gUnknown_8416ACB:: @ 8416ACB
 	.string "An EGG can't battle!{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416AE2:: @ 8416AE2
+gText_CantUseUntilNewBadge:: @ 8416AE2
 	.string "This can't be used until a new\n"
 	.string "BADGE is obtained.{PAUSE_UNTIL_PRESS}$"
 
@@ -894,17 +894,17 @@ gUnknown_8416B3E:: @ 8416B3E
 	.string "No more than two POKéMON\n"
 	.string "may enter.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416B64:: @ 8416B64
+gText_SendMailToPC:: @ 8416B64
 	.string "Send the removed MAIL to\n"
 	.string "your PC?$"
 
-gUnknown_8416B86:: @ 8416B86
+gText_MailSentToPC:: @ 8416B86
 	.string "The MAIL was sent to your PC.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416BA6:: @ 8416BA6
+gText_PCMailboxFull:: @ 8416BA6
 	.string "Your PC's MAILBOX is full.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416BC3:: @ 8416BC3
+gText_MailMessageWillBeLost:: @ 8416BC3
 	.string "If the MAIL is removed, the\n"
 	.string "message will be lost. Okay?$"
 
@@ -912,11 +912,11 @@ gUnknown_8416BFB:: @ 8416BFB
 	.string "MAIL must be removed before\n"
 	.string "holding an item.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416C2A:: @ 8416C2A
+gText_PkmnWasGivenItem:: @ 8416C2A
 	.string "{STR_VAR_1} was given the\n"
 	.string "{STR_VAR_2} to hold.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416C49:: @ 8416C49
+gText_PkmnAlreadyHoldingItemSwitch:: @ 8416C49
 	.string "{STR_VAR_1} is already holding\n"
 	.string "one {STR_VAR_2}.\p"
 	.string "Would you like to switch the\n"
@@ -926,41 +926,41 @@ gUnknown_8416C8F:: @ 8416C8F
 	.string "{STR_VAR_1} isn't holding\n"
 	.string "anything.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416CAC:: @ 8416CAC
+gText_ReceivedItemFromPkmn:: @ 8416CAC
 	.string "Received the {STR_VAR_2}\n"
 	.string "from {STR_VAR_1}.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416CC7:: @ 8416CC7
+gText_MailTakenFromPkmn:: @ 8416CC7
 	.string "MAIL was taken from the\n"
 	.string "POKéMON.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416CEA:: @ 8416CEA
+gText_SwitchedPkmnItem:: @ 8416CEA
 	.string "The {STR_VAR_2} was taken and\n"
 	.string "replaced with the {STR_VAR_1}.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416D17:: @ 8416D17
+gText_PkmnHoldingItemCantHoldMail:: @ 8416D17
 	.string "This POKéMON is holding an\n"
 	.string "item. It cannot hold MAIL.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416D4F:: @ 8416D4F
+gText_MailTransferredFromMailbox:: @ 8416D4F
 	.string "MAIL was transferred from\n"
 	.string "the MAILBOX.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416D78:: @ 8416D78
+gText_BagFullCouldNotRemoveItem:: @ 8416D78
 	.string "The {STR_VAR_1} is full. The POKéMON's\n"
 	.string "item could not be removed.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416DB3:: @ 8416DB3
+gText_PkmnLearnedMove3:: @ 8416DB3
 	.string "{STR_VAR_1} learned\n"
 	.string "{STR_VAR_2}!$"
 
-gUnknown_8416DC2:: @ 8416DC2
+gText_PkmnCantLearnMove:: @ 8416DC2
 	.string "{STR_VAR_1} and {STR_VAR_2}\n"
 	.string "are not compatible.\p"
 	.string "{STR_VAR_2} can't be\n"
 	.string "learned.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416DF7:: @ 8416DF7
+gText_PkmnNeedsToReplaceMove:: @ 8416DF7
 	.string "{STR_VAR_1} wants to learn the\n"
 	.string "move {STR_VAR_2}.\p"
 	.string "However, {STR_VAR_1} already\n"
@@ -968,15 +968,15 @@ gUnknown_8416DF7:: @ 8416DF7
 	.string "Should a move be deleted and\n"
 	.string "replaced with {STR_VAR_2}?$"
 
-gUnknown_8416E6B:: @ 8416E6B
+gText_StopLearningMove2:: @ 8416E6B
 	.string "Stop trying to teach\n"
 	.string "{STR_VAR_2}?$"
 
-gUnknown_8416E84:: @ 8416E84
+gText_MoveNotLearned:: @ 8416E84
 	.string "{STR_VAR_1} did not learn the\n"
 	.string "move {STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416EA4:: @ 8416EA4
+gText_WhichMoveToForget:: @ 8416EA4
 	.string "Which move should be forgotten?{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416EC6:: @ 8416EC6
@@ -985,57 +985,57 @@ gUnknown_8416EC6:: @ 8416EC6
 	.string "use {STR_VAR_2}.\p"
 	.string "And...{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416F10:: @ 8416F10
+gText_PkmnAlreadyKnows:: @ 8416F10
 	.string "{STR_VAR_1} already knows\n"
 	.string "{STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416F27:: @ 8416F27
+gText_PkmnHPRestoredByVar2:: @ 8416F27
 	.string "{STR_VAR_1}'s HP was restored\n"
 	.string "by {STR_VAR_2} point(s).{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416F4E:: @ 8416F4E
+gText_PkmnCuredOfPoison:: @ 8416F4E
 	.string "{STR_VAR_1} was cured of its\n"
 	.string "poisoning.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416F6F:: @ 8416F6F
+gText_PkmnCuredOfParalysis:: @ 8416F6F
 	.string "{STR_VAR_1} was cured of\n"
 	.string "paralysis.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416F8C:: @ 8416F8C
+gText_PkmnWokeUp2:: @ 8416F8C
 	.string "{STR_VAR_1} woke up.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416F9A:: @ 8416F9A
+gText_PkmnBurnHealed:: @ 8416F9A
 	.string "{STR_VAR_1}'s burn was healed.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416FB2:: @ 8416FB2
+gText_PkmnThawedOut:: @ 8416FB2
 	.string "{STR_VAR_1} was thawed out.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416FC7:: @ 8416FC7
+gText_PPWasRestored:: @ 8416FC7
 	.string "PP was restored.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416FDA:: @ 0x8416FDA
 	.string "{STR_VAR_1}は\n"
 	.string "げんきを とりもどした!{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416FED:: @ 8416FED
+gText_PkmnBecameHealthy:: @ 8416FED
 	.string "{STR_VAR_1} became healthy.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8417002:: @ 8417002
+gText_MovesPPIncreased:: @ 8417002
 	.string "{STR_VAR_1}'s PP increased.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8417017:: @ 8417017
+gText_PkmnElevatedToLvVar2:: @ 8417017
 	.string "{STR_VAR_1} was elevated to\n"
 	.string "Lv. {STR_VAR_2}.$"
 
-gUnknown_8417032:: @ 8417032
+gText_PkmnBaseVar2StatIncreased:: @ 8417032
 	.string "{STR_VAR_1}'s base {STR_VAR_2}\n"
 	.string "stat was raised.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8417052:: @ 8417052
+gText_PkmnSnappedOutOfConfusion:: @ 8417052
 	.string "{STR_VAR_1} snapped out of its\n"
 	.string "confusion.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8417075:: @ 8417075
+gText_PkmnGotOverInfatuation:: @ 8417075
 	.string "{STR_VAR_1} got over its\n"
 	.string "infatuation.{PAUSE_UNTIL_PRESS}$"
 
@@ -1241,10 +1241,10 @@ gUnknown_8417640:: @ 8417640
 	.string "Want to return to the healing spot\n"
 	.string "used last in {STR_VAR_1}?$"
 
-gUnknown_8417674:: @ 8417674
+gText_Attack3:: @ 8417674
 	.string "ATTACK$"
 
-gUnknown_841767B:: @ 841767B
+gText_Defense3:: @ 841767B
 	.string "DEFENSE$"
 
 gUnknown_8417683:: @ 0x8417683
@@ -1253,7 +1253,7 @@ gUnknown_8417683:: @ 0x8417683
 gUnknown_8417688:: @ 0x8417688
 	.string "とくぼう$"
 
-gUnknown_841768D:: @ 841768D
+gText_Speed2:: @ 841768D
 	.string "SPEED$"
 
 gUnknown_8417693:: @ 0x8417693

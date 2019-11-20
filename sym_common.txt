@@ -180,7 +180,7 @@ gUnknown_3005E90: @ 3005E90
 gUnknown_3005E94: @ 3005E94
 	.space 0x4
 
-gUnknown_3005E98: @ 3005E98
+gItemUseCB: @ 3005E98
 	.space 0x4
 
 	.include "help_system_812B1E0.o"

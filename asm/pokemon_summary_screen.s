@@ -3448,7 +3448,7 @@ _08136168:
 	ldr r0, [r6]
 	ldr r3, _08136208 @ =0x00003084
 	adds r0, r3
-	ldr r1, _0813620C @ =gUnknown_8416221
+	ldr r1, _0813620C @ =gText_FemaleSymbol
 	bl StringCopy
 	b _08136238
 	.align 2, 0
@@ -3459,19 +3459,19 @@ _081361FC: .4byte 0x00003220
 _08136200: .4byte 0x00003221
 _08136204: .4byte 0x00003034
 _08136208: .4byte 0x00003084
-_0813620C: .4byte gUnknown_8416221
+_0813620C: .4byte gText_FemaleSymbol
 _08136210:
 	cmp r7, 0
 	bne _0813622C
 	ldr r0, [r6]
 	ldr r1, _08136224 @ =0x00003084
 	adds r0, r1
-	ldr r1, _08136228 @ =gUnknown_841621F
+	ldr r1, _08136228 @ =gText_MaleSymbol
 	bl StringCopy
 	b _08136238
 	.align 2, 0
 _08136224: .4byte 0x00003084
-_08136228: .4byte gUnknown_841621F
+_08136228: .4byte gText_MaleSymbol
 _0813622C:
 	ldr r0, [r6]
 	ldr r2, _08136308 @ =0x00003084
@@ -3622,7 +3622,7 @@ sub_8136350: @ 8136350
 	bl ConvertIntToDecimalStringN
 	ldr r0, [r6]
 	adds r0, r4
-	ldr r1, _08136504 @ =gUnknown_841620C
+	ldr r1, _08136504 @ =gText_Slash
 	bl StringAppend
 	ldr r0, [r6]
 	adds r0, r7
@@ -3794,7 +3794,7 @@ _081363E6:
 _081364F8: .4byte gUnknown_203B140
 _081364FC: .4byte 0x00003290
 _08136500: .4byte 0x00003090
-_08136504: .4byte gUnknown_841620C
+_08136504: .4byte gText_Slash
 _08136508: .4byte gUnknown_203B144
 _0813650C: .4byte 0x000032f8
 _08136510: .4byte sub_804CF14
@@ -5618,7 +5618,7 @@ _081373EA:
 	str r6, [sp]
 	mov r7, r9
 	str r7, [sp, 0x4]
-	ldr r1, _081374E0 @ =gUnknown_841620C
+	ldr r1, _081374E0 @ =gText_Slash
 	str r1, [sp, 0x8]
 	movs r1, 0x2
 	movs r2, 0x3A
@@ -5663,7 +5663,7 @@ _081374D0: .4byte gUnknown_8416238
 _081374D4: .4byte gUnknown_203B144
 _081374D8: .4byte 0x000030b8
 _081374DC: .4byte 0x00003258
-_081374E0: .4byte gUnknown_841620C
+_081374E0: .4byte gText_Slash
 _081374E4: .4byte 0x000030f0
 	thumb_func_end sub_81372E4
 
@@ -9489,7 +9489,7 @@ sub_8139388: @ 8139388
 	bl sub_8138BEC
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8125A90
+	bl IsMoveHm
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

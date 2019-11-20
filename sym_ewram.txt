@@ -569,10 +569,10 @@ gUnknown_203B05C: @ 203B05C
 gUnknown_203B064: @ 203B064
 	.space 0x4
 
-gUnknown_203B068: @ 203B068
+gUnionRoomOfferedSpecies: @ 203B068
 	.space 0x2
 
-gUnknown_203B06A: @ 203B06A
+gUnionRoomRequestedMonType: @ 203B06A
 	.space 0x2
 
 gUnknown_203B06C: @ 203B06C
@@ -596,10 +596,10 @@ gUnknown_203B094: @ 203B094
 gUnknown_203B098: @ 203B098
 	.space 0x4
 
-gUnknown_203B09C: @ 203B09C
+sPartyMenuInternal: @ 203B09C
 	.space 0x4
 
-gUnknown_203B0A0: @ 203B0A0
+gPartyMenu: @ 203B0A0
 	.space 0x9
 
 gUnknown_203B0A9: @ 203B0A9
@@ -608,16 +608,16 @@ gUnknown_203B0A9: @ 203B0A9
 gUnknown_203B0AE: @ 203B0AE
 	.space 0x6
 
-gUnknown_203B0B4: @ 203B0B4
+sPartyMenuBoxes: @ 203B0B4
 	.space 0x4
 
-gUnknown_203B0B8: @ 203B0B8
+sPartyBgGfxTilemap: @ 203B0B8
 	.space 0x4
 
-gUnknown_203B0BC: @ 203B0BC
+sPartyBgTilemapBuffer: @ 203B0BC
 	.space 0x4
 
-gUnknown_203B0C0: @ 203B0C0
+gPartyMenuUseExitCallback: @ 203B0C0
 	.space 0x1
 
 gUnknown_203B0C1: @ 203B0C1
@@ -626,10 +626,10 @@ gUnknown_203B0C1: @ 203B0C1
 gPostMenuFieldCallback: @ 203B0C4
 	.space 0x4
 
-gUnknown_203B0C8: @ 203B0C8
+sSlot1TilemapBuffer: @ 203B0C8
 	.space 0x4
 
-gUnknown_203B0CC: @ 203B0CC
+sSlot2TilemapBuffer: @ 203B0CC
 	.space 0x4
 
 gUnknown_203B0D0: @ 203B0D0
@@ -638,10 +638,10 @@ gUnknown_203B0D0: @ 203B0D0
 gSelectedOrderFromParty: @ 203B0D4
 	.space 0x4
 
-gUnknown_203B0D8: @ 203B0D8
+sPartyMenuItemId: @ 203B0D8
 	.space 0x4
 
-gUnknown_203B0DC: @ 203B0DC
+gBattlePartyCurrentOrder: @ 203B0DC
 	.space 0x4
 
 gUnknown_203B0E0: @ 203B0E0

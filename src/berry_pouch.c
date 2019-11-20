@@ -1194,7 +1194,7 @@ static void Task_BerryPouch_Give(u8 taskId)
         Task_Give_PrintThereIsNoPokemon(taskId);
     else
     {
-        sResources->exitCallback = sub_8126EDC;
+        sResources->exitCallback = CB2_ChooseMonToGiveItem;
         gTasks[taskId].func = BerryPouch_StartFadeToExitCallback;
     }
 }
@@ -1251,7 +1251,7 @@ static void Task_ContextMenu_FromPartyGiveMenu(u8 taskId)
     }
     else
     {
-        sResources->exitCallback = c2_8123744;
+        sResources->exitCallback = CB2_GiveHoldItem;
         gTasks[taskId].func = BerryPouch_StartFadeToExitCallback;
     }
 }

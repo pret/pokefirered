@@ -13892,15 +13892,15 @@ gFile_graphics_battle_anims_sprites_188_palette:: @ 8E826E8
 	.incbin "graphics/battle_anims/sprites/188.gbapal.lz"
 
 	.align 2
-gFile_graphics_interface_party_menu_misc_sheet:: @ 8E82700
+gPartyMenuBg_Gfx:: @ 8E82700
 	.incbin "graphics/interface/party_menu_misc.4bpp.lz"
 
 	.align 2
-gUnknown_8E829C8:: @ 8E829C8
+gPartyMenuBg_Pal:: @ 8E829C8
 	.incbin "baserom.gba", 0xE829C8, 0xE8
 
 	.align 2
-gFile_graphics_interface_party_menu_misc_tilemap:: @ 8E82AB0
+gPartyMenuBg_Tilemap:: @ 8E82AB0
 	.incbin "graphics/interface/party_menu_misc.bin.lz"
 
 	.align 2

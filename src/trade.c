@@ -879,11 +879,11 @@ static void sub_804C728(void)
         break;
     case 8:
         LoadHeldItemIcons();
-        sub_812256C(sTradeMenuResourcesPtr->partyCounts, sTradeMenuResourcesPtr->partyIcons, 0);
+        DrawHeldItemIconsForTrade(sTradeMenuResourcesPtr->partyCounts, sTradeMenuResourcesPtr->partyIcons, 0);
         gMain.state++;
         break;
     case 9:
-        sub_812256C(sTradeMenuResourcesPtr->partyCounts, sTradeMenuResourcesPtr->partyIcons, 1);
+        DrawHeldItemIconsForTrade(sTradeMenuResourcesPtr->partyCounts, sTradeMenuResourcesPtr->partyIcons, 1);
         gMain.state++;
         break;
     case 10:
@@ -1483,7 +1483,7 @@ static void sub_804C728(void)
                 "\tadds r0, 0x36\n"
                 "\tadds r1, 0x28\n"
                 "\tmovs r2, 0\n"
-                "\tbl sub_812256C\n"
+                "\tbl DrawHeldItemIconsForTrade\n"
                 "\tldr r1, _0804CB74 @ =gMain\n"
                 "\tmovs r5, 0x87\n"
                 "\tlsls r5, 3\n"
@@ -1499,7 +1499,7 @@ static void sub_804C728(void)
                 "\tadds r0, 0x36\n"
                 "\tadds r1, 0x28\n"
                 "\tmovs r2, 0x1\n"
-                "\tbl sub_812256C\n"
+                "\tbl DrawHeldItemIconsForTrade\n"
                 "\tldr r1, _0804CB98 @ =gMain\n"
                 "\tmovs r7, 0x87\n"
                 "\tlsls r7, 3\n"
@@ -1989,11 +1989,11 @@ void sub_804CF14(void)
         break;
     case 8:
         LoadHeldItemIcons();
-        sub_812256C(sTradeMenuResourcesPtr->partyCounts, sTradeMenuResourcesPtr->partyIcons, 0);
+        DrawHeldItemIconsForTrade(sTradeMenuResourcesPtr->partyCounts, sTradeMenuResourcesPtr->partyIcons, 0);
         gMain.state++;
         break;
     case 9:
-        sub_812256C(sTradeMenuResourcesPtr->partyCounts, sTradeMenuResourcesPtr->partyIcons, 1);
+        DrawHeldItemIconsForTrade(sTradeMenuResourcesPtr->partyCounts, sTradeMenuResourcesPtr->partyIcons, 1);
         gMain.state++;
         break;
     case 10:
@@ -2365,7 +2365,7 @@ void sub_804CF14(void)
                 "\tadds r0, 0x36\n"
                 "\tadds r1, 0x28\n"
                 "\tmovs r2, 0\n"
-                "\tbl sub_812256C\n"
+                "\tbl DrawHeldItemIconsForTrade\n"
                 "\tldr r1, _0804D174 @ =gMain\n"
                 "\tmovs r5, 0x87\n"
                 "\tlsls r5, 3\n"
@@ -2381,7 +2381,7 @@ void sub_804CF14(void)
                 "\tadds r0, 0x36\n"
                 "\tadds r1, 0x28\n"
                 "\tmovs r2, 0x1\n"
-                "\tbl sub_812256C\n"
+                "\tbl DrawHeldItemIconsForTrade\n"
                 "\tldr r1, _0804D198 @ =gMain\n"
                 "\tmovs r7, 0x87\n"
                 "\tlsls r7, 3\n"
@@ -4394,7 +4394,7 @@ static bool32 IsDeoxysOrMewUntradable(u16 species, bool8 isObedientBitSet)
     return FALSE;
 }
 
-int sub_804FBEC(struct UnkLinkRfuStruct_02022B14Substruct a0, struct UnkLinkRfuStruct_02022B14Substruct a1, u16 species1, u16 species2, u8 type, u16 species3, u8 isObedientBitSet)
+int GetUnionRoomTradeMessageId(struct UnkLinkRfuStruct_02022B14Substruct a0, struct UnkLinkRfuStruct_02022B14Substruct a1, u16 species1, u16 species2, u8 type, u16 species3, u8 isObedientBitSet)
 {
     u8 r9 = a0.unk_01_0;
     u8 r4 = a0.unk_00_7;

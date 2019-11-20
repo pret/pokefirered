@@ -44,7 +44,7 @@ bool8 FldEff_UseTeleport(void);
 
 // softboiled
 bool8 hm_prepare_dive_probably(void);
-void sub_80E56DC(u8 taskId);
+void ChooseMonForSoftboiled(u8 taskId);
 void sub_80E5724(u8 taskId);
 
 // sweetscent

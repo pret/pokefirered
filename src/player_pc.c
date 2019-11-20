@@ -322,7 +322,7 @@ static void Task_DepositItem_WaitFadeAndGoToBag(u8 taskId)
     if (!gPaletteFade.active)
     {
         CleanupOverworldWindowsAndTilemaps();
-        sub_8107DB4(3, POCKET_ITEMS - 1, CB2_ReturnToField);
+        GoToBagMenu(3, POCKET_ITEMS - 1, CB2_ReturnToField);
         gFieldCallback = CB2_ReturnFromDepositMenu;
         DestroyTask(taskId);
     }
@@ -336,7 +336,7 @@ static void Task_PlayerPcDepositItem(u8 taskId)
 
 static void Task_ReturnToItemStorageSubmenu(u8 taskId)
 {
-    if (field_weather_is_fade_finished() == TRUE)
+    if (IsWeatherNotFadingIn() == TRUE)
         gTasks[taskId].func = Task_TopMenu_ItemStorageSubmenu_HandleInput;
 }
 
@@ -573,7 +573,7 @@ static void Task_WaitFadeAndReadSelectedMail(u8 taskId)
 
 static void Task_WaitFadeAndReturnToMailboxPcInputHandler(u8 taskId)
 {
-    if (field_weather_is_fade_finished() == TRUE)
+    if (IsWeatherNotFadingIn() == TRUE)
         gTasks[taskId].func = Task_MailboxPcHandleInput;
 }
 
@@ -674,7 +674,7 @@ static void Task_WaitFadeAndGoToPartyMenu(u8 taskId)
     {
         MailboxPC_DestroyListMenuBuffer();
         CleanupOverworldWindowsAndTilemaps();
-        PartyMenuInit_FromPlayerPc();
+        ChooseMonToGiveMailFromMailbox();
         DestroyTask(taskId);
     }
 }

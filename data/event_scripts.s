@@ -9706,7 +9706,7 @@ EventScript_1BC13A:: @ 81BC13A
 	goto_if eq, EventScript_1BC2A6
 	msgbox gUnknown_81BD059
 	setvar VAR_0x8005, 0
-	special sub_8127888
+	special ChooseMonForWirelessMinigame
 	waitstate
 	compare_var_to_value VAR_0x8004, 6
 	goto_if ge, EventScript_1BB83F
@@ -9726,7 +9726,7 @@ EventScript_1BC184:: @ 81BC184
 	goto_if eq, EventScript_1BC2A6
 	msgbox gUnknown_81BD059
 	setvar VAR_0x8005, 1
-	special sub_8127888
+	special ChooseMonForWirelessMinigame
 	waitstate
 	compare_var_to_value VAR_0x8004, 6
 	goto_if ge, EventScript_1BB83F

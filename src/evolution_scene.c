@@ -79,22 +79,23 @@ static const u16 sBlackPalette[] = INCBIN_U16("graphics/evolution_scene/gray_tra
 static const u16 unref_83F7D80[] = INCBIN_U16("graphics/evolution_scene/unref_83F7D80.bin");
 static const u16 sMovingBgPals[] = INCBIN_U16("graphics/evolution_scene/transition.gbapal");
 
-static const u8 Text_ShedinjaJapaneseName[] = _("ヌケニン");
+static const u8 sText_ShedinjaJapaneseName[] = _("ヌケニン");
 
-static const u8 gUnknown_83F8445[] = _("{COLOR RED}{HIGHLIGHT DARK_GREY}{SHADOW GREEN}");
+static const u8 unref_83F8445[] = _("{COLOR RED}{HIGHLIGHT DARK_GREY}{SHADOW GREEN}");
 
-static const u8 gUnknown_83F844F[][10] = {
+static const u8 unref_83F844F[][10] = {
     _("▶\n "),
     _(" \n▶"),
     _(" \n ")
 };
 
-static const u8 gUnknown_83F846D[][4] =
+// start frame, stop frame, loop count, delay
+static const u8 sMovingBackgroundTimers[][4] =
 {
-    { 0x00, 0x0C, 0x01, 0x06 },
-    { 0x0D, 0x24, 0x05, 0x02 },
-    { 0x0D, 0x18, 0x01, 0x02 },
-    { 0x25, 0x31, 0x01, 0x06 },
+    {  0, 12, 1, 6 },
+    { 13, 36, 5, 2 },
+    { 13, 24, 1, 2 },
+    { 37, 49, 1, 6 },
 };
 
 static const u8 sMovingBgPalIndices[][16] = {
@@ -455,7 +456,7 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
             LoadWirelessStatusIndicatorSpriteGfx();
             CreateWirelessStatusIndicatorSprite(0, 0);
         }
-        BlendPalettes(-1,0x10, 0);
+        BlendPalettes(0xFFFFFFFF, 0x10, RGB_BLACK);
         gMain.state++;
         break;
     case 7:
@@ -525,7 +526,7 @@ void TradeEvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, u8 preEvoSpri
     gBattle_BG3_X = 256;
     gBattle_BG3_Y = 0;
 
-    gTextFlags.useAlternateDownArrow = 1;
+    gTextFlags.useAlternateDownArrow = TRUE;
 
     SetVBlankCallback(VBlankCB_TradeEvolutionScene);
     SetMainCallback2(CB2_TradeEvolutionSceneUpdate);
@@ -588,7 +589,7 @@ static void CreateShedinja(u16 preEvoSpecies, struct Pokemon* mon)
         if (GetMonData(shedinja, MON_DATA_SPECIES) == SPECIES_SHEDINJA
             && GetMonData(shedinja, MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE
             && GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NINJASK)
-                SetMonData(shedinja, MON_DATA_NICKNAME, Text_ShedinjaJapaneseName);
+                SetMonData(shedinja, MON_DATA_NICKNAME, sText_ShedinjaJapaneseName);
     }
 }
 
@@ -597,7 +598,8 @@ static void Task_EvolutionScene(u8 taskId)
     u32 var;
     struct Pokemon* mon = &gPlayerParty[gTasks[taskId].tPartyId];
 
-    // National dex check
+    // Automatically cancel if the Pokemon would evolve into a species you have not
+    // yet unlocked, such as Crobat.
     if (!IsNationalPokedexEnabled()
         && gTasks[taskId].tState == 8
         && gTasks[taskId].tPostEvoSpecies > SPECIES_MEW)
@@ -998,7 +1000,8 @@ static void Task_TradeEvolutionScene(u8 taskId)
     u32 var = 0;
     struct Pokemon* mon = &gPlayerParty[gTasks[taskId].tPartyId];
 
-    // National dex check
+    // Automatically cancel if the Pokemon would evolve into a species you have not
+    // yet unlocked, such as Crobat.
     if (!IsNationalPokedexEnabled()
         && gTasks[taskId].tState == 7
         && gTasks[taskId].tPostEvoSpecies > SPECIES_MEW)
@@ -1049,7 +1052,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
             var = gSprites[sEvoStructPtr->preEvoSpriteId].oam.paletteNum + 16;
             sEvoGraphicsTaskId = LaunchTask_PreEvoSparklesSet1(var);
             gTasks[taskId].tState++;
-            SetGpuReg(REG_OFFSET_BG3CNT, 0x603);
+            SetGpuReg(REG_OFFSET_BG3CNT, BGCNT_PRIORITY(3) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(6));
         }
         break;
     case 5:
@@ -1156,7 +1159,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
             DestroyTask(taskId);
             Free(sEvoStructPtr);
             sEvoStructPtr = NULL;
-            gTextFlags.useAlternateDownArrow = 0;
+            gTextFlags.useAlternateDownArrow = FALSE;
             SetMainCallback2(gCB2_AfterEvolution);
         }
         break;
@@ -1180,7 +1183,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
         {
             StringExpandPlaceholders(gStringVar4, gText_EllipsisQuestionMark);
             DrawTextOnTradeWindow(0, gStringVar4, 1);
-            gTasks[taskId].tEvoWasStopped = 1;
+            gTasks[taskId].tEvoWasStopped = TRUE;
             gTasks[taskId].tState = 13;
         }
         break;
@@ -1401,17 +1404,17 @@ static void Task_MovingBackgroundPalettes(u8 taskId)
     if (data[5]++ < 20)
         return;
 
-    if (data[0]++ > gUnknown_83F846D[data[2]][3])
+    if (data[0]++ > sMovingBackgroundTimers[data[2]][3])
     {
-        if (gUnknown_83F846D[data[2]][1] == data[1])
+        if (sMovingBackgroundTimers[data[2]][1] == data[1])
         {
             data[3]++;
-            if (data[3] == gUnknown_83F846D[data[2]][2])
+            if (data[3] == sMovingBackgroundTimers[data[2]][2])
             {
                 data[3] = 0;
                 data[2]++;
             }
-            data[1] = gUnknown_83F846D[data[2]][0];
+            data[1] = sMovingBackgroundTimers[data[2]][0];
         }
         else
         {
@@ -1537,7 +1540,7 @@ void IsMovingBackgroundTaskRunning(void) // unused
     if (taskId != 0xFF)
         gTasks[taskId].data[6] = 1;
 
-    FillPalette(0, 0xA0, 0x20);
+    FillPalette(RGB_BLACK, 0xA0, 0x20);
 }
 
 static void DestroyMovingBackgroundTasks(void)

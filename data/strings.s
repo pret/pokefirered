@@ -2958,11 +2958,11 @@ gText_SoundStereo:: @ 0x8419E3B
 gTextJP_Type:: @ 0x8419E42
 	.string "タイプ$"
 
-gText_ButtonTypeNormal:: @ 0x8419E46
+gText_ButtonTypeHelp:: @ 0x8419E46
 	.string "HELP$"
 
 gText_ButtonTypeLEqualsA:: @ 0x8419E4B
-	.string "LゅA$"
+	.string "L=A$"
 
 gText_ButtonTypeLR:: @ 0x8419E4F
 	.string "LR$"

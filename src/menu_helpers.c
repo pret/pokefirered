@@ -130,12 +130,12 @@ bool32 sub_80BF72C(void)
     if (!MenuHelpers_LinkSomething())
         return FALSE;
     else
-        return sub_8058244();
+        return (u8) sub_8058244();
 }
 
 bool8 sub_80BF748(void)
 {
-    if (sub_80BF72C() == TRUE)
+    if ((u8) sub_80BF72C() == TRUE)
         return TRUE;
     else if (sub_800B270() != TRUE)
         return FALSE;

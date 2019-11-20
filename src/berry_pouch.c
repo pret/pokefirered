@@ -457,7 +457,7 @@ static void CB2_InitBerryPouch(void)
 {
     while (1)
     {
-        if (sub_80BF72C() == TRUE)
+        if ((u8) sub_80BF72C() == TRUE)
             break;
         if (RunBerryPouchInit() == TRUE)
             break;
@@ -934,7 +934,7 @@ static void Task_BerryPouchMain(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     s32 menuInput;
-    if (!gPaletteFade.active && sub_80BF72C() != TRUE)
+    if (!gPaletteFade.active && (u8) sub_80BF72C() != TRUE)
     {
         menuInput = ListMenu_ProcessInput(data[0]);
         ListMenuGetScrollAndRow(data[0], &sStaticCnt.listMenuScrollOffset, &sStaticCnt.listMenuSelectedRow);
@@ -1040,7 +1040,7 @@ static void Task_NormalContextMenu(u8 taskId)
 static void Task_NormalContextMenu_HandleInput(u8 taskId)
 {
     s8 input;
-    if (sub_80BF72C() != TRUE)
+    if ((u8) sub_80BF72C() != TRUE)
     {
         input = Menu_ProcessInputNoWrapAround();
         switch (input)

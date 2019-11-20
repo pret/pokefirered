@@ -780,7 +780,7 @@ extern const u8 gText_BattleStyleShift[];
 extern const u8 gText_BattleStyleSet[];
 extern const u8 gText_SoundMono[];
 extern const u8 gText_SoundStereo[];
-extern const u8 gText_ButtonTypeNormal[];
+extern const u8 gText_ButtonTypeHelp[];
 extern const u8 gText_ButtonTypeLR[];
 extern const u8 gText_ButtonTypeLEqualsA[];
 extern const u8 gText_MenuOption[];

@@ -50,7 +50,7 @@ struct OptionMenu
     /*0x13*/ u8 unk13;
 };
 
-EWRAM_DATA struct OptionMenu *sOptionMenuPtr = NULL;
+static EWRAM_DATA struct OptionMenu *sOptionMenuPtr = NULL;
 
 //Function Declarataions
 static void CB2_InitOptionMenu(void);
@@ -219,9 +219,9 @@ void CB2_OptionsMenuFromStartMenu(void)
     sOptionMenuPtr->option[MENUITEM_BUTTONMODE] = gSaveBlock2Ptr->optionsButtonMode;
     sOptionMenuPtr->option[MENUITEM_FRAMETYPE] = gSaveBlock2Ptr->optionsWindowFrameType;
     
-    for (i = 0; i < MENUITEM_COUNT-1; i++)
+    for (i = 0; i < MENUITEM_COUNT - 1; i++)
     {
-        if (sOptionMenuPtr->option[i] > (sOptionMenuItemCounts[i])-1)
+        if (sOptionMenuPtr->option[i] > (sOptionMenuItemCounts[i]) - 1)
             sOptionMenuPtr->option[i] = 0;
     }
     HelpSystem_SetSomeVariable2(0xD);
@@ -230,8 +230,8 @@ void CB2_OptionsMenuFromStartMenu(void)
 
 static void OptionMenu_InitCallbacks(void)
 {
-    SetVBlankCallback(0);
-    SetHBlankCallback(0);
+    SetVBlankCallback(NULL);
+    SetHBlankCallback(NULL);
 }
 
 static void OptionMenu_SetVBlankCallback(void)
@@ -279,6 +279,7 @@ static void CB2_OptionMenu(void)
         break;
     default:
         SetOptionMenuTask();
+		break;
     }
     sOptionMenuPtr->state++;
 }
@@ -898,6 +899,6 @@ static void sub_8088DE0(u16 selection)
     
     v1 = GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT);
     v2 = selection * (v1 - 1) + 0x3A;
-    SetGpuReg(REG_OFFSET_WIN0V, (v2 << 8) | (v2 + v1));
-    SetGpuReg(REG_OFFSET_WIN0H, WINOUT_WINOBJ_OBJ | WIN_RANGE(0, 0xE0));
+    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(v2, v2 + v1));
+    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0x10, 0xE0));
 }

@@ -1835,7 +1835,7 @@ static void sub_8011BB0(void)
     }
 }
 
-u32 sub_8011C44(u8 arrayId, u8 caseId)
+u32 GetBattleBgAttribute(u8 arrayId, u8 caseId)
 {
     u32 ret = 0;
 

@@ -65,19 +65,19 @@ static void CB2_TradeEvolutionSceneUpdate(void);
 static void EvoDummyFunc(void);
 static void VBlankCB_EvolutionScene(void);
 static void VBlankCB_TradeEvolutionScene(void);
-static void sub_80D04A8(void);
+static void DestroyMovingBackgroundTasks(void);
 static void InitMovingBackgroundTask(bool8 isLink);
-static void sub_80D025C(u8 taskId);
-static void sub_80D04E8(void);
+static void Task_MovingBackgroundPos(u8 taskId);
+static void ResetBgRegsAfterMovingBackgroundCancel(void);
 
 // const data
-static const u16 gUnknown_83F6C90[] = INCBIN_U16("graphics/evolution_scene/unknown_5B4114.gbapal");
-static const u32 gUnknown_83F6CB0[] = INCBIN_U32("graphics/evolution_scene/bg.4bpp.lz");
-static const u32 gUnknown_83F73A8[] = INCBIN_U32("graphics/evolution_scene/bg.bin.lz");
-static const u32 gUnknown_83F788C[] = INCBIN_U32("graphics/evolution_scene/bg2.bin.lz");
-static const u16 gUnknown_83F7D60[] = INCBIN_U16("graphics/evolution_scene/gray_transition_intro.gbapal");
+static const u16 sUnrefPal_83F6C90[] = INCBIN_U16("graphics/evolution_scene/unknown_5B4114.gbapal");
+static const u32 sMovingBackgroundTiles[] = INCBIN_U32("graphics/evolution_scene/bg.4bpp.lz");
+static const u32 sMovingBackgroundMap1[] = INCBIN_U32("graphics/evolution_scene/bg.bin.lz");
+static const u32 sMovingBackgroundMap2[] = INCBIN_U32("graphics/evolution_scene/bg2.bin.lz");
+static const u16 sBlackPalette[] = INCBIN_U16("graphics/evolution_scene/gray_transition_intro.gbapal");
 static const u16 unref_83F7D80[] = INCBIN_U16("graphics/evolution_scene/unref_83F7D80.bin");
-static const u16 gUnknown_83F8400[] = INCBIN_U16("graphics/evolution_scene/transition.gbapal");
+static const u16 sMovingBgPals[] = INCBIN_U16("graphics/evolution_scene/transition.gbapal");
 
 static const u8 Text_ShedinjaJapaneseName[] = _("ヌケニン");
 
@@ -97,7 +97,7 @@ static const u8 gUnknown_83F846D[][4] =
     { 0x25, 0x31, 0x01, 0x06 },
 };
 
-static const u8 gUnknown_83F847D[][16] = {
+static const u8 sMovingBgPalIndices[][16] = {
     {  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0 },
     {  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  2,  0,  0 },
     {  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  2,  3,  0,  0 },
@@ -605,7 +605,7 @@ static void Task_EvolutionScene(u8 taskId)
         gTasks[taskId].tState = 17;
         gTasks[taskId].tEvoWasStopped = TRUE;
         gTasks[sEvoGraphicsTaskId].EvoGraphicsTaskEvoStop = TRUE;
-        sub_80D04A8();
+        DestroyMovingBackgroundTasks();
         return;
     }
 
@@ -617,7 +617,7 @@ static void Task_EvolutionScene(u8 taskId)
     {
         gTasks[taskId].tState = 17;
         gTasks[sEvoGraphicsTaskId].EvoGraphicsTaskEvoStop = TRUE;
-        sub_80D04A8();
+        DestroyMovingBackgroundTasks();
         return;
     }
 
@@ -716,7 +716,7 @@ static void Task_EvolutionScene(u8 taskId)
         {
             m4aMPlayAllStop();
             memcpy(&gPlttBufferUnfaded[0x20], sEvoStructPtr->savedPalette, 0x60);
-            sub_80D04E8();
+            ResetBgRegsAfterMovingBackgroundCancel();
             BeginNormalPaletteFade(0x1C, 0, 0x10, 0, RGB_BLACK);
             gTasks[taskId].tState++;
         }
@@ -1008,7 +1008,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
         if (gTasks[sEvoGraphicsTaskId].isActive)
         {
             gTasks[sEvoGraphicsTaskId].EvoGraphicsTaskEvoStop = TRUE;
-            sub_80D04A8();
+            DestroyMovingBackgroundTasks();
         }
     }
 
@@ -1392,7 +1392,7 @@ static void VBlankCB_TradeEvolutionScene(void)
     ScanlineEffect_InitHBlankDmaTransfer();
 }
 
-static void sub_80D0160(u8 taskId)
+static void Task_MovingBackgroundPalettes(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -1425,9 +1425,9 @@ static void sub_80D0160(u8 taskId)
         DestroyTask(taskId);
 }
 
-static void sub_80D0218(bool8 isLink)
+static void LaunchTask_MovingBackgroundPos(bool8 isLink)
 {
-    u8 taskId = CreateTask(sub_80D025C, 7);
+    u8 taskId = CreateTask(Task_MovingBackgroundPos, 7);
 
     if (!isLink)
         gTasks[taskId].data[2] = 0;
@@ -1435,7 +1435,7 @@ static void sub_80D0218(bool8 isLink)
         gTasks[taskId].data[2] = 1;
 }
 
-static void sub_80D025C(u8 taskId)
+static void Task_MovingBackgroundPos(u8 taskId)
 {
     u16 *outer_X, *outer_Y;
 
@@ -1462,7 +1462,7 @@ static void sub_80D025C(u8 taskId)
     *outer_X = Cos(gTasks[taskId].data[1], 4) + 8;
     *outer_Y = Sin(gTasks[taskId].data[1], 4) + 16;
 
-    if (!FuncIsActiveTask(sub_80D0160))
+    if (!FuncIsActiveTask(Task_MovingBackgroundPalettes))
     {
         DestroyTask(taskId);
 
@@ -1482,7 +1482,7 @@ static void InitMovingBgValues(u16 *movingBgs)
     {
         for (j = 0; j < 16; j++)
         {
-            movingBgs[i * 16 + j] = gUnknown_83F8400[gUnknown_83F847D[i][j]];
+            movingBgs[i * 16 + j] = sMovingBgPals[sMovingBgPalIndices[i][j]];
         }
     }
 }
@@ -1499,11 +1499,11 @@ static void InitMovingBackgroundTask(bool8 isLink)
     else
         innerBgId = 1, outerBgId = 3;
 
-    LoadPalette(gUnknown_83F7D60, 0xA0, 0x20);
+    LoadPalette(sBlackPalette, 0xA0, 0x20);
 
-    DecompressAndLoadBgGfxUsingHeap(1, gUnknown_83F6CB0, FALSE, 0, 0);
-    CopyToBgTilemapBuffer(1, gUnknown_83F73A8, 0, 0);
-    CopyToBgTilemapBuffer(outerBgId, gUnknown_83F788C, 0, 0);
+    DecompressAndLoadBgGfxUsingHeap(1, sMovingBackgroundTiles, FALSE, 0, 0);
+    CopyToBgTilemapBuffer(1, sMovingBackgroundMap1, 0, 0);
+    CopyToBgTilemapBuffer(outerBgId, sMovingBackgroundMap2, 0, 0);
     CopyBgTilemapBufferToVram(1);
     CopyBgTilemapBufferToVram(outerBgId);
 
@@ -1526,13 +1526,13 @@ static void InitMovingBackgroundTask(bool8 isLink)
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG3_ON | DISPCNT_BG1_ON | DISPCNT_BG0_ON | DISPCNT_OBJ_1D_MAP);
     }
 
-    CreateTask(sub_80D0160, 5);
-    sub_80D0218(isLink);
+    CreateTask(Task_MovingBackgroundPalettes, 5);
+    LaunchTask_MovingBackgroundPos(isLink);
 }
 
-void sub_80D0474(void) // unused
+void IsMovingBackgroundTaskRunning(void) // unused
 {
-    u8 taskId = FindTaskIdByFunc(sub_80D0160);
+    u8 taskId = FindTaskIdByFunc(Task_MovingBackgroundPalettes);
 
     if (taskId != 0xFF)
         gTasks[taskId].data[6] = 1;
@@ -1540,27 +1540,27 @@ void sub_80D0474(void) // unused
     FillPalette(0, 0xA0, 0x20);
 }
 
-static void sub_80D04A8(void)
+static void DestroyMovingBackgroundTasks(void)
 {
     u8 taskId;
 
-    if ((taskId = FindTaskIdByFunc(sub_80D0160)) != 0xFF)
+    if ((taskId = FindTaskIdByFunc(Task_MovingBackgroundPalettes)) != 0xFF)
         DestroyTask(taskId);
-    if ((taskId = FindTaskIdByFunc(sub_80D025C)) != 0xFF)
+    if ((taskId = FindTaskIdByFunc(Task_MovingBackgroundPos)) != 0xFF)
         DestroyTask(taskId);
 
-    FillPalette(0, 0xA0, 0x20);
-    sub_80D04E8();
+    FillPalette(RGB_BLACK, 0xA0, 0x20);
+    ResetBgRegsAfterMovingBackgroundCancel();
 }
 
-static void sub_80D04E8(void)
+static void ResetBgRegsAfterMovingBackgroundCancel(void)
 {
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     gBattle_BG1_X = 0;
     gBattle_BG1_Y = 0;
     gBattle_BG2_X = 0;
-    SetBgAttribute(1, BG_ATTR_PRIORITY, sub_8011C44(1, 5));
-    SetBgAttribute(2, BG_ATTR_PRIORITY, sub_8011C44(2, 5));
+    SetBgAttribute(1, BG_ATTR_PRIORITY, GetBattleBgAttribute(1, 5));
+    SetBgAttribute(2, BG_ATTR_PRIORITY, GetBattleBgAttribute(2, 5));
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG3_ON | DISPCNT_BG0_ON | DISPCNT_OBJ_1D_MAP);
     Free(sEvoMovingBgPtr);
 }

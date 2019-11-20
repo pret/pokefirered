@@ -8,6 +8,6 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, u8, u8 partyID);
 void TradeEvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, u8 preEvoSpriteID, u8 partyID);
 
 extern void (*gCB2_AfterEvolution)(void);
-void sub_80D0474(void);
+void IsMovingBackgroundTaskRunning(void);
 
 #endif // GUARD_EVOLUTION_SCENE_H

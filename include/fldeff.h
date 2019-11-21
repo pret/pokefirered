@@ -47,7 +47,7 @@ bool8 FldEff_UseTeleport(void);
 // softboiled
 bool8 SetUpFieldMove_SoftBoiled(void);
 void ChooseMonForSoftboiled(u8 taskId);
-void sub_80E5724(u8 taskId);
+void Task_TryUseSoftboiledOnPartyMon(u8 taskId);
 
 // sweetscent
 bool8 SetUpFieldMove_SweetScent(void);

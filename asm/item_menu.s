@@ -2514,7 +2514,7 @@ sub_8109140: @ 8109140
 	movs r1, 0
 	movs r2, 0xE
 	movs r3, 0x1E
-	bl SetBgRectPal
+	bl SetBgTilemapPalette
 	movs r0, 0x1
 	bl ScheduleBgCopyTilemapToVram
 	add sp, 0x8

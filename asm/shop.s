@@ -793,7 +793,7 @@ _0809B118:
 	movs r1, 0
 	movs r2, 0xE
 	movs r3, 0x1E
-	bl SetBgRectPal
+	bl SetBgTilemapPalette
 	b _0809B14E
 	.align 2, 0
 _0809B138: .4byte gUnknown_2039934
@@ -805,7 +805,7 @@ _0809B13C:
 	movs r1, 0
 	movs r2, 0xC
 	movs r3, 0x1E
-	bl SetBgRectPal
+	bl SetBgTilemapPalette
 _0809B14E:
 	movs r0, 0x1
 	bl ScheduleBgCopyTilemapToVram

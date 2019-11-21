@@ -765,7 +765,7 @@ static void PrintSelectedBerryDescription(s32 itemIdx)
 
 static void SetDescriptionWindowBorderPalette(s32 pal)
 {
-    SetBgRectPal(1, 0, 16, 30, 4, pal + 1);
+    SetBgTilemapPalette(1, 0, 16, 30, 4, pal + 1);
     ScheduleBgCopyTilemapToVram(1);
 }
 

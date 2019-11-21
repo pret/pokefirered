@@ -709,7 +709,7 @@ static void ItemPc_SetScrollPosition(void)
 
 static void ItemPc_SetMessageWindowPalette(int a0)
 {
-    SetBgRectPal(1, 0, 14, 30, 6, a0 + 1);
+    SetBgTilemapPalette(1, 0, 14, 30, 6, a0 + 1);
     ScheduleBgCopyTilemapToVram(1);
 }
 

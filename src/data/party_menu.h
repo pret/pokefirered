@@ -110,24 +110,6 @@ const u8 sPartyMenuSpriteCoords[PARTY_LAYOUT_COUNT][PARTY_SIZE][4 * 2] =
 const u32 sConfirmButton_Tilemap[] = INCBIN_U32("graphics/interface/party_menu_confirm_button.bin");
 const u32 sCancelButton_Tilemap[] = INCBIN_U32("graphics/interface/party_menu_cancel_button.bin");
 
-// NOTE TO MYSELF: remove these after #159 gets merged
-#define TEXT_COLOR_TRANSPARENT  0x0
-#define TEXT_COLOR_WHITE        0x1
-#define TEXT_COLOR_DARK_GREY    0x2
-#define TEXT_COLOR_LIGHT_GREY   0x3
-#define TEXT_COLOR_RED          0x4
-#define TEXT_COLOR_LIGHT_RED    0x5
-#define TEXT_COLOR_GREEN        0x6
-#define TEXT_COLOR_LIGHT_GREEN  0x7
-#define TEXT_COLOR_BLUE         0x8
-#define TEXT_COLOR_LIGHT_BLUE   0x9
-#define TEXT_DYNAMIC_COLOR_1    0xA // Usually white
-#define TEXT_DYNAMIC_COLOR_2    0xB // Usually white w/ tinge of green
-#define TEXT_DYNAMIC_COLOR_3    0xC // Usually white
-#define TEXT_DYNAMIC_COLOR_4    0xD // Usually aquamarine
-#define TEXT_DYNAMIC_COLOR_5    0xE // Usually blue-green
-#define TEXT_DYNAMIC_COLOR_6    0xF // Usually cerulean
-
 const u8 sFontColorTable[][3] =
 {
     {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_GREY, TEXT_COLOR_DARK_GREY},  // Default

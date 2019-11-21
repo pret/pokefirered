@@ -35,7 +35,7 @@ void ChooseMonForSoftboiled(u8 taskId)
     gTasks[taskId].func = Task_HandleChooseMonInput;
 }
 
-void sub_80E5724(u8 taskId)
+void Task_TryUseSoftboiledOnPartyMon(u8 taskId)
 {
     u8 r8 = gPartyMenu.slotId;
     u8 r5 = gPartyMenu.slotId2;

@@ -3746,6 +3746,9 @@ extern const u32 gPartyMenuPokeball_Pal[];
 extern const u32 gPartyMenuPokeballSmall_Gfx[];
 extern const u32 gStatusGfx_Icons[];
 extern const u32 gStatusPal_Icons[];
+extern const u32 gPartyMenuBg_Gfx[];
+extern const u32 gPartyMenuBg_Tilemap[];
+extern const u32 gPartyMenuBg_Pal[];
 
 // credits
 extern const u32 gCreditsPokeballBgGfxTiles[];

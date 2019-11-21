@@ -558,7 +558,7 @@ _0811C9AA:
 	adds r0, r4, 0
 	adds r0, 0x96
 	ldrh r0, [r0]
-	bl GetItemCompatibilityRule
+	bl CheckIfItemIsTMHMOrEvolutionStone
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2

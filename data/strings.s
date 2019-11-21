@@ -4517,7 +4517,7 @@ gUnknown_841E2F5:: @ 841E2F5
 gUnknown_841E322:: @ 841E322
 	.string "{ID}$"
 
-gUnknown_841E325:: @ 841E325
+gText_CommunicationStandby5:: @ 841E325
 	.string "Communication standby…$"
 
 gDaycareText_GetAlongVeryWell:: @ 841E33C

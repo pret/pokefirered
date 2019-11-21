@@ -94,10 +94,9 @@ gUnknown_3005354: @ 3005354
 
 	.align 2
 	.include "field_specials.o"
-
-gCB2_AfterEvolution: @ 300537C
-	.space 0x4
-
+	.align 2
+	.include "evolution_scene.o"
+	.align 2
 	.include "save.o"
 
 	.align 2

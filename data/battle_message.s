@@ -1797,7 +1797,7 @@ gUnknown_83FDDEB:: @ 83FDDEB
 	.string "$"
 
 	.align 2
-gUnknown_83FDF3C:: @ 83FDF3C
+gBattleStringsTable:: @ 83FDF3C
 	.4byte gUnknown_83FB219
 	.4byte gUnknown_83FB265
 	.4byte gUnknown_83FB28E
@@ -2448,21 +2448,21 @@ gTrappingMoves:: @ 83FE664
 	.2byte MOVE_SAND_TOMB
 	.2byte 0xFFFF
 
-gUnknown_83FE672:: @ 83FE672
+gText_PkmnIsEvolving:: @ 83FE672
 	.string "What?\n"
 	.string "{STR_VAR_1} is evolving!$"
 
-gUnknown_83FE688:: @ 83FE688
+gText_CongratsPkmnEvolved:: @ 83FE688
 	.string "Congratulations! Your {STR_VAR_1}\n"
 	.string "evolved into {STR_VAR_2}!{WAIT_SE}\p"
 	.string "$"
 
-gUnknown_83FE6B5:: @ 83FE6B5
+gText_PkmnStoppedEvolving:: @ 83FE6B5
 	.string "Huh? {STR_VAR_1}\n"
 	.string "stopped evolving!\p"
 	.string "$"
 
-gUnknown_83FE6D0:: @ 83FE6D0
+gText_EllipsisQuestionMark:: @ 83FE6D0
 	.string "……?\p"
 	.string "$"
 

@@ -488,7 +488,7 @@ static const struct WindowTemplate gUnknown_826D1BC[] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-const struct WindowTemplate gUnknown_826D1CC = {
+const struct WindowTemplate gTradeEvolutionSceneYesNoWindowTemplate = {
     .bg = 0,
     .tilemapLeft = 21,
     .tilemapTop = 9,
@@ -881,7 +881,7 @@ void CB2_InitTradeAnim_LinkTrade(void)
         break;
     case 8:
         LoadTradeMonPic(1, 1);
-        sub_80504B0();
+        LinkTradeDrawWindow();
         gMain.state++;
         break;
     case 9:
@@ -899,7 +899,7 @@ void CB2_InitTradeAnim_LinkTrade(void)
         gMain.state++;
         break;
     case 11:
-        sub_805049C();
+        InitTradeSequenceBgGpuRegs();
         TradeBufferOTnameAndNicknames();
         gMain.state++;
         break;
@@ -922,13 +922,13 @@ void CB2_InitTradeAnim_LinkTrade(void)
     UpdatePaletteFade();
 }
 
-void sub_805049C(void)
+void InitTradeSequenceBgGpuRegs(void)
 {
     SetTradeSequenceBgGpuRegs(5);
     SetTradeSequenceBgGpuRegs(0);
 }
 
-void sub_80504B0(void)
+void LinkTradeDrawWindow(void)
 {
     FillWindowPixelBuffer(0, PIXEL_FILL(15));
     PutWindowTilemap(0);
@@ -2552,7 +2552,7 @@ static void sub_8053E8C(void)
     {
     case 0:
         gMain.state++;
-        StringExpandPlaceholders(gStringVar4, gUnknown_841E325);
+        StringExpandPlaceholders(gStringVar4, gText_CommunicationStandby5);
         DrawTextOnTradeWindow(0, gStringVar4, 0);
         break;
     case 1:

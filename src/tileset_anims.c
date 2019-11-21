@@ -23,14 +23,118 @@ static void (*sSecondaryTilesetAnimCallback)(u16);
 static void _InitPrimaryTilesetAnimation(void);
 static void _InitSecondaryTilesetAnimation(void);
 
-extern const u16 *const gUnknown_83A7660[];
-extern const u16 *const gUnknown_83AA654[];
-extern const u16 *const gUnknown_83AB874[];
-extern const u16 *const gUnknown_83ABDB4[];
-extern const u16 *const gUnknown_83AC1E8[];
-extern const u16 *const gUnknown_83AC5F8[];
-extern const u16 *const gUnknown_83AC7C8[];
-extern const u16 *const gUnknown_83AC950[];
+static const u16 gUnknown_83A73E0[] = INCBIN_U16("graphics/tileset_anims/anim_0_0.bin");
+static const u16 gUnknown_83A7460[] = INCBIN_U16("graphics/tileset_anims/anim_0_1.bin");
+static const u16 gUnknown_83A74E0[] = INCBIN_U16("graphics/tileset_anims/anim_0_2.bin");
+static const u16 gUnknown_83A7560[] = INCBIN_U16("graphics/tileset_anims/anim_0_3.bin");
+static const u16 gUnknown_83A75E0[] = INCBIN_U16("graphics/tileset_anims/anim_0_4.bin");
+
+static const u16 *const gUnknown_83A7660[] = {
+    gUnknown_83A73E0,
+    gUnknown_83A7460,
+    gUnknown_83A74E0,
+    gUnknown_83A7560,
+    gUnknown_83A75E0
+};
+
+static const u16 gUnknown_83A7674[] = INCBIN_U16("graphics/tileset_anims/anim_1_0.bin");
+static const u16 gUnknown_83A7C74[] = INCBIN_U16("graphics/tileset_anims/anim_1_1.bin");
+static const u16 gUnknown_83A8274[] = INCBIN_U16("graphics/tileset_anims/anim_1_2.bin");
+static const u16 gUnknown_83A8874[] = INCBIN_U16("graphics/tileset_anims/anim_1_3.bin");
+static const u16 gUnknown_83A8E74[] = INCBIN_U16("graphics/tileset_anims/anim_1_4.bin");
+static const u16 gUnknown_83A9474[] = INCBIN_U16("graphics/tileset_anims/anim_1_5.bin");
+static const u16 gUnknown_83A9A74[] = INCBIN_U16("graphics/tileset_anims/anim_1_6.bin");
+static const u16 gUnknown_83AA074[] = INCBIN_U16("graphics/tileset_anims/anim_1_7.bin");
+
+static const u16 *const gUnknown_83AA654[] = {
+    gUnknown_83A7674,
+    gUnknown_83A7C74,
+    gUnknown_83A8274,
+    gUnknown_83A8874,
+    gUnknown_83A8E74,
+    gUnknown_83A9474,
+    gUnknown_83A9A74,
+    gUnknown_83AA074
+};
+
+static const u16 gUnknown_83AA674[] = INCBIN_U16("graphics/tileset_anims/anim_2_0.bin");
+static const u16 gUnknown_83AA8B4[] = INCBIN_U16("graphics/tileset_anims/anim_2_1.bin");
+static const u16 gUnknown_83AAAF4[] = INCBIN_U16("graphics/tileset_anims/anim_2_2.bin");
+static const u16 gUnknown_83AAD34[] = INCBIN_U16("graphics/tileset_anims/anim_2_3.bin");
+static const u16 gUnknown_83AAF74[] = INCBIN_U16("graphics/tileset_anims/anim_2_4.bin");
+static const u16 gUnknown_83AB1B4[] = INCBIN_U16("graphics/tileset_anims/anim_2_5.bin");
+static const u16 gUnknown_83AB3F4[] = INCBIN_U16("graphics/tileset_anims/anim_2_6.bin");
+static const u16 gUnknown_83AB634[] = INCBIN_U16("graphics/tileset_anims/anim_2_7.bin");
+
+static const u16 *const gUnknown_83AB874[] = {
+    gUnknown_83AA674,
+    gUnknown_83AA8B4,
+    gUnknown_83AAAF4,
+    gUnknown_83AAD34,
+    gUnknown_83AAF74,
+    gUnknown_83AB1B4,
+    gUnknown_83AB3F4,
+    gUnknown_83AB634
+};
+
+static const u16 gUnknown_83AB894[] = INCBIN_U16("graphics/tileset_anims/anim_3_0.bin");
+static const u16 gUnknown_83AB994[] = INCBIN_U16("graphics/tileset_anims/anim_3_1.bin");
+static const u16 gUnknown_83ABA94[] = INCBIN_U16("graphics/tileset_anims/anim_3_2.bin");
+static const u16 gUnknown_83ABB94[] = INCBIN_U16("graphics/tileset_anims/anim_3_3.bin");
+static const u16 gUnknown_83ABC94[] = INCBIN_U16("graphics/tileset_anims/anim_3_4.bin");
+static const u16 gUnknown_83ABD94[16] = {};
+
+static const u16 *const gUnknown_83ABDB4[] = {
+    gUnknown_83AB894,
+    gUnknown_83AB994,
+    gUnknown_83ABA94,
+    gUnknown_83ABB94,
+    gUnknown_83ABC94
+};
+
+static const u16 gUnknown_83ABDC8[] = INCBIN_U16("graphics/tileset_anims/anim_4_0.bin");
+static const u16 gUnknown_83ABEC8[] = INCBIN_U16("graphics/tileset_anims/anim_4_1.bin");
+static const u16 gUnknown_83ABFC8[] = INCBIN_U16("graphics/tileset_anims/anim_4_2.bin");
+static const u16 gUnknown_83AC0C8[] = INCBIN_U16("graphics/tileset_anims/anim_4_3.bin");
+static const u16 gUnknown_83AC1C8[0x10] = {};
+
+static const u16 *const gUnknown_83AC1E8[] = {
+    gUnknown_83ABDC8,
+    gUnknown_83ABEC8,
+    gUnknown_83ABFC8,
+    gUnknown_83AC0C8
+};
+
+static const u16 gUnknown_83AC1F8[] = INCBIN_U16("graphics/tileset_anims/anim_5_0.bin");
+static const u16 gUnknown_83AC2F8[] = INCBIN_U16("graphics/tileset_anims/anim_5_1.bin");
+static const u16 gUnknown_83AC3F8[] = INCBIN_U16("graphics/tileset_anims/anim_5_2.bin");
+static const u16 gUnknown_83AC4F8[] = INCBIN_U16("graphics/tileset_anims/anim_5_3.bin");
+
+static const u16 *const gUnknown_83AC5F8[] = {
+    gUnknown_83AC1F8,
+    gUnknown_83AC2F8,
+    gUnknown_83AC3F8,
+    gUnknown_83AC4F8
+};
+
+static const u16 gUnknown_83AC608[] = INCBIN_U16("graphics/tileset_anims/anim_6_0.bin");
+static const u16 gUnknown_83AC6E8[] = INCBIN_U16("graphics/tileset_anims/anim_6_1.bin");
+
+static const u16 *const gUnknown_83AC7C8[] = {
+    gUnknown_83AC608,
+    gUnknown_83AC6E8
+};
+
+static const u16 gUnknown_83AC7D0[] = INCBIN_U16("graphics/tileset_anims/anim_7_0.bin");
+static const u16 gUnknown_83AC850[] = INCBIN_U16("graphics/tileset_anims/anim_7_1.bin");
+static const u16 gUnknown_83AC8D0[] = INCBIN_U16("graphics/tileset_anims/anim_7_2.bin");
+
+static const u16 *const gUnknown_83AC950[] = {
+    gUnknown_83AC7D0,
+    gUnknown_83AC850,
+    gUnknown_83AC8D0,
+    gUnknown_83AC850
+};
 
 static void ResetTilesetAnimBuffer(void)
 {
@@ -105,26 +209,17 @@ static void _InitSecondaryTilesetAnimation(void)
 
 static void sub_80700A4(u16 timer)
 {
-    const u16 *const *ptr = gUnknown_83A7660;
-    u16 i = timer % 5;
-    
-    AppendTilesetAnimToBuffer(ptr[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(508)), 0x80);
+    AppendTilesetAnimToBuffer(gUnknown_83A7660[timer % NELEMS(gUnknown_83A7660)], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(508)), 0x80);
 }
 
 static void sub_80700D0(u16 timer)
 {
-    const u16 *const *ptr = gUnknown_83AA654;
-    u16 i = timer % 8;
-    
-    AppendTilesetAnimToBuffer(ptr[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(416)), 0x600);
+    AppendTilesetAnimToBuffer(gUnknown_83AA654[timer % NELEMS(gUnknown_83AA654)], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(416)), 0x600);
 }
 
 static void sub_80700F8(u16 timer)
 {
-    const u16 *const *ptr = gUnknown_83AB874;
-    u16 i = timer % 8;
-    
-    AppendTilesetAnimToBuffer(ptr[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(464)), 0x240);
+    AppendTilesetAnimToBuffer(gUnknown_83AB874[timer % NELEMS(gUnknown_83AB874)], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(464)), 0x240);
 }
 
 static void sub_8070120(u16 timer)
@@ -146,10 +241,7 @@ void sub_8070154(void)
 
 static void sub_807017C(u16 timer)
 {
-    const u16 *const *ptr = gUnknown_83ABDB4;
-    u16 i = timer % 5;
-    
-    AppendTilesetAnimToBuffer(ptr[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(744)), 0x100);
+    AppendTilesetAnimToBuffer(gUnknown_83ABDB4[timer % NELEMS(gUnknown_83ABDB4)], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(744)), 0x100);
 }
 
 static void sub_80701AC(u16 timer)
@@ -167,10 +259,7 @@ void sub_80701D8(void)
 
 static void sub_80701FC(u16 timer)
 {
-    const u16 *const *ptr = gUnknown_83AC1E8;
-    u16 i = timer % 4;
-    
-    AppendTilesetAnimToBuffer(ptr[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(976)), 0x100);
+    AppendTilesetAnimToBuffer(gUnknown_83AC1E8[timer % NELEMS(gUnknown_83AC1E8)], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(976)), 0x100);
 }
 
 static void sub_8070224(u16 timer)
@@ -188,10 +277,7 @@ void sub_8070250(void)
 
 static void sub_8070274(u16 timer)
 {
-    const u16 *const *ptr = gUnknown_83AC5F8;
-    u16 i = timer % 4;
-    
-    AppendTilesetAnimToBuffer(ptr[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(896)), 0x100);
+    AppendTilesetAnimToBuffer(gUnknown_83AC5F8[timer % NELEMS(gUnknown_83AC5F8)], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(896)), 0x100);
 }
 
 static void sub_807029C(u16 timer)
@@ -209,8 +295,8 @@ void sub_80702B4(void)
 
 static void sub_80702DC(u16 timer)
 {
-    u16 i = timer % 2;
-    
+    u16 i = timer % NELEMS(gUnknown_83AC7C8);
+
     AppendTilesetAnimToBuffer(gUnknown_83AC7C8[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(880)), 0xE0);
 }
 
@@ -229,7 +315,7 @@ void sub_807031C(void)
 
 static void sub_8070340(u16 timer)
 {
-    u16 i = timer % 4;
+    u16 i = timer % NELEMS(gUnknown_83AC950);
     
     AppendTilesetAnimToBuffer(gUnknown_83AC950[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(739)), 0x80);
 }

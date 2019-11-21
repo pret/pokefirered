@@ -1980,7 +1980,7 @@ _0811F9D8: .4byte gPartyMenu
 DrawCancelConfirmButtons: @ 811F9DC
 	push {r4-r6,lr}
 	sub sp, 0xC
-	ldr r1, _0811FA18 @ =gUnknown_8459FC4
+	ldr r1, _0811FA18 @ =sConfirmButton_Tilemap
 	movs r6, 0x7
 	str r6, [sp]
 	movs r5, 0x2
@@ -1991,7 +1991,7 @@ DrawCancelConfirmButtons: @ 811F9DC
 	movs r2, 0x17
 	movs r3, 0x10
 	bl CopyToBgTilemapBufferRect_ChangePalette
-	ldr r1, _0811FA1C @ =gUnknown_8459FE0
+	ldr r1, _0811FA1C @ =sCancelButton_Tilemap
 	str r6, [sp]
 	str r5, [sp, 0x4]
 	str r4, [sp, 0x8]
@@ -2006,8 +2006,8 @@ DrawCancelConfirmButtons: @ 811F9DC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0811FA18: .4byte gUnknown_8459FC4
-_0811FA1C: .4byte gUnknown_8459FE0
+_0811FA18: .4byte sConfirmButton_Tilemap
+_0811FA1C: .4byte sCancelButton_Tilemap
 	thumb_func_end DrawCancelConfirmButtons
 
 	thumb_func_start IsMultiBattle
@@ -4293,7 +4293,7 @@ _08120B7C:
 	b _08120B9E
 _08120B80:
 	mov r0, r8
-	bl GetMoveTutorMove
+	bl GetTutorMove
 _08120B86:
 	lsls r0, 16
 	lsrs r1, r0, 16
@@ -4315,8 +4315,8 @@ _08120B9E:
 	bx r1
 	thumb_func_end CanMonLearnTMTutor
 
-	thumb_func_start GetMoveTutorMove
-GetMoveTutorMove: @ 8120BA8
+	thumb_func_start GetTutorMove
+GetTutorMove: @ 8120BA8
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -4345,7 +4345,7 @@ _08120BD0:
 	lsls r0, 1 @ MOVE_HYDRO_CANNON
 	b _08120BDE
 _08120BD6:
-	ldr r0, _08120BE4 @ =gMoveTutorMoves
+	ldr r0, _08120BE4 @ =sTutorMoves
 	lsls r1, 1
 	adds r1, r0
 	ldrh r0, [r1]
@@ -4353,8 +4353,8 @@ _08120BDE:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08120BE4: .4byte gMoveTutorMoves
-	thumb_func_end GetMoveTutorMove
+_08120BE4: .4byte sTutorMoves
+	thumb_func_end GetTutorMove
 
 	thumb_func_start CanLearnTutorMove
 CanLearnTutorMove: @ 8120BE8
@@ -4804,12 +4804,12 @@ _08120F24:
 	beq _08120F44
 	b _08120F62
 _08120F2A:
-	ldr r0, _08120F34 @ =gUnknown_203B0A9
+	ldr r0, _08120F34 @ =gPartyMenu + 9
 	movs r1, 0x2
 	bl UpdateCurrentPartySelection
 	b _08120F62
 	.align 2, 0
-_08120F34: .4byte gUnknown_203B0A9
+_08120F34: .4byte gPartyMenu + 9
 _08120F38:
 	movs r0, 0x5
 	bl PlaySE
@@ -5401,7 +5401,7 @@ BlitBitmapToPartyWindow_RightColumn: @ 81213A0
 _081213CC:
 	cmp r5, 0
 	bne _081213E8
-	ldr r1, _081213E4 @ =sOtherSlotTileNums
+	ldr r1, _081213E4 @ =sOtherSlotsTileNums
 	str r2, [sp]
 	str r3, [sp, 0x4]
 	str r4, [sp, 0x8]
@@ -5410,9 +5410,9 @@ _081213CC:
 	bl BlitBitmapToPartyWindow
 	b _081213F8
 	.align 2, 0
-_081213E4: .4byte sOtherSlotTileNums
+_081213E4: .4byte sOtherSlotsTileNums
 _081213E8:
-	ldr r1, _08121400 @ =sOtherSlotTileNums_Egg
+	ldr r1, _08121400 @ =sOtherSlotsTileNums_Egg
 	str r2, [sp]
 	str r3, [sp, 0x4]
 	str r4, [sp, 0x8]
@@ -5425,7 +5425,7 @@ _081213F8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08121400: .4byte sOtherSlotTileNums_Egg
+_08121400: .4byte sOtherSlotsTileNums_Egg
 	thumb_func_end BlitBitmapToPartyWindow_RightColumn
 
 	thumb_func_start DrawEmptySlot
@@ -5434,7 +5434,7 @@ DrawEmptySlot: @ 8121404
 	sub sp, 0xC
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _08121428 @ =gUnknown_845A278
+	ldr r1, _08121428 @ =sEmptySlotTileNums
 	movs r2, 0
 	str r2, [sp]
 	movs r2, 0x12
@@ -5448,7 +5448,7 @@ DrawEmptySlot: @ 8121404
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08121428: .4byte gUnknown_845A278
+_08121428: .4byte sEmptySlotTileNums
 	thumb_func_end DrawEmptySlot
 
 	thumb_func_start LoadPartyBoxPalette
@@ -5471,15 +5471,15 @@ LoadPartyBoxPalette: @ 812142C
 	ands r0, r4
 	cmp r0, 0
 	beq _0812145C
-	ldr r5, _08121458 @ =gUnknown_845A2D4
+	ldr r5, _08121458 @ =sPartyBoxSelectedForActionPalIds1
 	b _0812160A
 	.align 2, 0
-_08121458: .4byte gUnknown_845A2D4
+_08121458: .4byte sPartyBoxSelectedForActionPalIds1
 _0812145C:
-	ldr r5, _08121494 @ =gUnknown_845A2D4
+	ldr r5, _08121494 @ =sPartyBoxSelectedForActionPalIds1
 	ldrb r0, [r5]
 	bl GetPartyMenuPalBufferPtr
-	ldr r4, _08121498 @ =gUnknown_845A2B2
+	ldr r4, _08121498 @ =sPartyBoxPalOffsets1
 	ldrb r1, [r4]
 	adds r1, r6
 	movs r2, 0x2
@@ -5496,21 +5496,21 @@ _0812145C:
 	adds r1, r6
 	movs r2, 0x2
 	bl LoadPalette
-	ldr r5, _0812149C @ =gUnknown_845A2E3
+	ldr r5, _0812149C @ =sPartyBoxSelectedForActionPalIds2
 	b _0812163E
 	.align 2, 0
-_08121494: .4byte gUnknown_845A2D4
-_08121498: .4byte gUnknown_845A2B2
-_0812149C: .4byte gUnknown_845A2E3
+_08121494: .4byte sPartyBoxSelectedForActionPalIds1
+_08121498: .4byte sPartyBoxPalOffsets1
+_0812149C: .4byte sPartyBoxSelectedForActionPalIds2
 _081214A0:
 	movs r0, 0x10
 	ands r0, r4
 	cmp r0, 0
 	beq _081214EC
-	ldr r5, _081214E0 @ =gUnknown_845A2D4
+	ldr r5, _081214E0 @ =sPartyBoxSelectedForActionPalIds1
 	ldrb r0, [r5]
 	bl GetPartyMenuPalBufferPtr
-	ldr r4, _081214E4 @ =gUnknown_845A2B2
+	ldr r4, _081214E4 @ =sPartyBoxPalOffsets1
 	ldrb r1, [r4]
 	adds r1, r6
 	movs r2, 0x2
@@ -5527,12 +5527,12 @@ _081214A0:
 	adds r1, r6
 	movs r2, 0x2
 	bl LoadPalette
-	ldr r5, _081214E8 @ =gUnknown_845A2E3
+	ldr r5, _081214E8 @ =sPartyBoxSelectedForActionPalIds2
 	b _0812163E
 	.align 2, 0
-_081214E0: .4byte gUnknown_845A2D4
-_081214E4: .4byte gUnknown_845A2B2
-_081214E8: .4byte gUnknown_845A2E3
+_081214E0: .4byte sPartyBoxSelectedForActionPalIds1
+_081214E4: .4byte sPartyBoxPalOffsets1
+_081214E8: .4byte sPartyBoxSelectedForActionPalIds2
 _081214EC:
 	movs r0, 0x4
 	ands r0, r4
@@ -5542,15 +5542,15 @@ _081214EC:
 	ands r0, r4
 	cmp r0, 0
 	beq _08121504
-	ldr r5, _08121500 @ =gUnknown_845A2D4
+	ldr r5, _08121500 @ =sPartyBoxSelectedForActionPalIds1
 	b _0812160A
 	.align 2, 0
-_08121500: .4byte gUnknown_845A2D4
+_08121500: .4byte sPartyBoxSelectedForActionPalIds1
 _08121504:
-	ldr r5, _0812153C @ =gUnknown_845A2D4
+	ldr r5, _0812153C @ =sPartyBoxSelectedForActionPalIds1
 	ldrb r0, [r5]
 	bl GetPartyMenuPalBufferPtr
-	ldr r4, _08121540 @ =gUnknown_845A2B2
+	ldr r4, _08121540 @ =sPartyBoxPalOffsets1
 	ldrb r1, [r4]
 	adds r1, r6
 	movs r2, 0x2
@@ -5567,12 +5567,12 @@ _08121504:
 	adds r1, r6
 	movs r2, 0x2
 	bl LoadPalette
-	ldr r5, _08121544 @ =gUnknown_845A2E3
+	ldr r5, _08121544 @ =sPartyBoxSelectedForActionPalIds2
 	b _0812163E
 	.align 2, 0
-_0812153C: .4byte gUnknown_845A2D4
-_08121540: .4byte gUnknown_845A2B2
-_08121544: .4byte gUnknown_845A2E3
+_0812153C: .4byte sPartyBoxSelectedForActionPalIds1
+_08121540: .4byte sPartyBoxPalOffsets1
+_08121544: .4byte sPartyBoxSelectedForActionPalIds2
 _08121548:
 	movs r0, 0x2
 	ands r0, r4
@@ -5582,15 +5582,15 @@ _08121548:
 	ands r0, r4
 	cmp r0, 0
 	beq _08121560
-	ldr r5, _0812155C @ =gUnknown_845A2D1
+	ldr r5, _0812155C @ =sPartyBoxCurrSelectionFaintedPalIds
 	b _0812160A
 	.align 2, 0
-_0812155C: .4byte gUnknown_845A2D1
+_0812155C: .4byte sPartyBoxCurrSelectionFaintedPalIds
 _08121560:
-	ldr r5, _08121598 @ =gUnknown_845A2C8
+	ldr r5, _08121598 @ =sPartyBoxFaintedPalIds1
 	ldrb r0, [r5]
 	bl GetPartyMenuPalBufferPtr
-	ldr r4, _0812159C @ =gUnknown_845A2B2
+	ldr r4, _0812159C @ =sPartyBoxPalOffsets1
 	ldrb r1, [r4]
 	adds r1, r6
 	movs r2, 0x2
@@ -5607,12 +5607,12 @@ _08121560:
 	adds r1, r6
 	movs r2, 0x2
 	bl LoadPalette
-	ldr r5, _081215A0 @ =gUnknown_845A2DD
+	ldr r5, _081215A0 @ =sPartyBoxFaintedPalIds2
 	b _0812163E
 	.align 2, 0
-_08121598: .4byte gUnknown_845A2C8
-_0812159C: .4byte gUnknown_845A2B2
-_081215A0: .4byte gUnknown_845A2DD
+_08121598: .4byte sPartyBoxFaintedPalIds1
+_0812159C: .4byte sPartyBoxPalOffsets1
+_081215A0: .4byte sPartyBoxFaintedPalIds2
 _081215A4:
 	movs r0, 0x8
 	ands r0, r4
@@ -5622,15 +5622,15 @@ _081215A4:
 	ands r0, r4
 	cmp r0, 0
 	beq _081215BC
-	ldr r5, _081215B8 @ =gUnknown_845A2CE
+	ldr r5, _081215B8 @ =sPartyBoxCurrSelectionMultiPalIds
 	b _0812160A
 	.align 2, 0
-_081215B8: .4byte gUnknown_845A2CE
+_081215B8: .4byte sPartyBoxCurrSelectionMultiPalIds
 _081215BC:
-	ldr r5, _081215F4 @ =gUnknown_845A2C5
+	ldr r5, _081215F4 @ =sPartyBoxMultiPalIds1
 	ldrb r0, [r5]
 	bl GetPartyMenuPalBufferPtr
-	ldr r4, _081215F8 @ =gUnknown_845A2B2
+	ldr r4, _081215F8 @ =sPartyBoxPalOffsets1
 	ldrb r1, [r4]
 	adds r1, r6
 	movs r2, 0x2
@@ -5647,22 +5647,22 @@ _081215BC:
 	adds r1, r6
 	movs r2, 0x2
 	bl LoadPalette
-	ldr r5, _081215FC @ =gUnknown_845A2DA
+	ldr r5, _081215FC @ =sPartyBoxMultiPalIds2
 	b _0812163E
 	.align 2, 0
-_081215F4: .4byte gUnknown_845A2C5
-_081215F8: .4byte gUnknown_845A2B2
-_081215FC: .4byte gUnknown_845A2DA
+_081215F4: .4byte sPartyBoxMultiPalIds1
+_081215F8: .4byte sPartyBoxPalOffsets1
+_081215FC: .4byte sPartyBoxMultiPalIds2
 _08121600:
 	movs r0, 0x1
 	ands r5, r0
 	cmp r5, 0
 	beq _08121684
-	ldr r5, _08121674 @ =gUnknown_845A2CB
+	ldr r5, _08121674 @ =sPartyBoxCurrSelectionPalIds1
 _0812160A:
 	ldrb r0, [r5]
 	bl GetPartyMenuPalBufferPtr
-	ldr r4, _08121678 @ =gUnknown_845A2B2
+	ldr r4, _08121678 @ =sPartyBoxPalOffsets1
 	ldrb r1, [r4]
 	adds r1, r6
 	movs r2, 0x2
@@ -5679,11 +5679,11 @@ _0812160A:
 	adds r1, r6
 	movs r2, 0x2
 	bl LoadPalette
-	ldr r5, _0812167C @ =gUnknown_845A2E0
+	ldr r5, _0812167C @ =sPartyBoxCurrSelectionPalIds2
 _0812163E:
 	ldrb r0, [r5]
 	bl GetPartyMenuPalBufferPtr
-	ldr r4, _08121680 @ =gUnknown_845A2B5
+	ldr r4, _08121680 @ =sPartyBoxPalOffsets2
 	ldrb r1, [r4]
 	adds r1, r6
 	movs r2, 0x2
@@ -5702,15 +5702,15 @@ _0812163E:
 	bl LoadPalette
 	b _081216EC
 	.align 2, 0
-_08121674: .4byte gUnknown_845A2CB
-_08121678: .4byte gUnknown_845A2B2
-_0812167C: .4byte gUnknown_845A2E0
-_08121680: .4byte gUnknown_845A2B5
+_08121674: .4byte sPartyBoxCurrSelectionPalIds1
+_08121678: .4byte sPartyBoxPalOffsets1
+_0812167C: .4byte sPartyBoxCurrSelectionPalIds2
+_08121680: .4byte sPartyBoxPalOffsets2
 _08121684:
-	ldr r5, _081216F4 @ =gUnknown_845A2C2
+	ldr r5, _081216F4 @ =sPartyBoxEmptySlotPalIds1
 	ldrb r0, [r5]
 	bl GetPartyMenuPalBufferPtr
-	ldr r4, _081216F8 @ =gUnknown_845A2B2
+	ldr r4, _081216F8 @ =sPartyBoxPalOffsets1
 	ldrb r1, [r4]
 	adds r1, r7
 	movs r2, 0x2
@@ -5727,10 +5727,10 @@ _08121684:
 	adds r1, r7
 	movs r2, 0x2
 	bl LoadPalette
-	ldr r5, _081216FC @ =gUnknown_845A2D7
+	ldr r5, _081216FC @ =sPartyBoxEmptySlotPalIds2
 	ldrb r0, [r5]
 	bl GetPartyMenuPalBufferPtr
-	ldr r4, _08121700 @ =gUnknown_845A2B5
+	ldr r4, _08121700 @ =sPartyBoxPalOffsets2
 	ldrb r1, [r4]
 	adds r1, r7
 	movs r2, 0x2
@@ -5752,10 +5752,10 @@ _081216EC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081216F4: .4byte gUnknown_845A2C2
-_081216F8: .4byte gUnknown_845A2B2
-_081216FC: .4byte gUnknown_845A2D7
-_08121700: .4byte gUnknown_845A2B5
+_081216F4: .4byte sPartyBoxEmptySlotPalIds1
+_081216F8: .4byte sPartyBoxPalOffsets1
+_081216FC: .4byte sPartyBoxEmptySlotPalIds2
+_08121700: .4byte sPartyBoxPalOffsets2
 	thumb_func_end LoadPartyBoxPalette
 
 	thumb_func_start DisplayPartyPokemonBarDetail
@@ -6321,16 +6321,16 @@ DisplayPartyPokemonHPBar: @ 8121B2C
 	blt _08121BA8
 	cmp r0, 0x4
 	bgt _08121BA8
-	ldr r5, _08121B74 @ =gUnknown_845A2BC
+	ldr r5, _08121B74 @ =sHPBarGreenPalIds
 	b _08121B7A
 	.align 2, 0
-_08121B74: .4byte gUnknown_845A2BC
+_08121B74: .4byte sHPBarGreenPalIds
 _08121B78:
-	ldr r5, _08121BA0 @ =gUnknown_845A2BE
+	ldr r5, _08121BA0 @ =sHPBarYellowPalIds
 _08121B7A:
 	ldrb r0, [r5]
 	bl GetPartyMenuPalBufferPtr
-	ldr r4, _08121BA4 @ =gUnknown_845A2B0
+	ldr r4, _08121BA4 @ =sHPBarPalOffsets
 	ldrb r1, [r4]
 	adds r1, r7
 	movs r2, 0x2
@@ -6343,13 +6343,13 @@ _08121B7A:
 	bl LoadPalette
 	b _08121BCC
 	.align 2, 0
-_08121BA0: .4byte gUnknown_845A2BE
-_08121BA4: .4byte gUnknown_845A2B0
+_08121BA0: .4byte sHPBarYellowPalIds
+_08121BA4: .4byte sHPBarPalOffsets
 _08121BA8:
-	ldr r5, _08121C68 @ =gUnknown_845A2C0
+	ldr r5, _08121C68 @ =sHPBarRedPalIds
 	ldrb r0, [r5]
 	bl GetPartyMenuPalBufferPtr
-	ldr r4, _08121C6C @ =gUnknown_845A2B0
+	ldr r4, _08121C6C @ =sHPBarPalOffsets
 	ldrb r1, [r4]
 	adds r1, r7
 	movs r2, 0x2
@@ -6373,7 +6373,7 @@ _08121BCC:
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldrb r0, [r6, 0x8]
-	ldr r4, _08121C6C @ =gUnknown_845A2B0
+	ldr r4, _08121C6C @ =sHPBarPalOffsets
 	ldrb r1, [r4, 0x1]
 	ldr r3, [r6]
 	ldrb r2, [r3, 0x18]
@@ -6434,8 +6434,8 @@ _08121C50:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08121C68: .4byte gUnknown_845A2C0
-_08121C6C: .4byte gUnknown_845A2B0
+_08121C68: .4byte sHPBarRedPalIds
+_08121C6C: .4byte sHPBarPalOffsets
 	thumb_func_end DisplayPartyPokemonHPBar
 
 	thumb_func_start DisplayPartyPokemonDescriptionText
@@ -6557,30 +6557,30 @@ _08121D44:
 	.4byte _08121D60
 	.4byte _08121D68
 _08121D58:
-	ldr r0, _08121D5C @ =gUnknown_845A128
+	ldr r0, _08121D5C @ =sDoWhatWithMonMsgWindowTemplate
 	b _08121D72
 	.align 2, 0
-_08121D5C: .4byte gUnknown_845A128
+_08121D5C: .4byte sDoWhatWithMonMsgWindowTemplate
 _08121D60:
-	ldr r0, _08121D64 @ =gUnknown_845A130
+	ldr r0, _08121D64 @ =sDoWhatWithItemMsgWindowTemplate
 	b _08121D72
 	.align 2, 0
-_08121D64: .4byte gUnknown_845A130
+_08121D64: .4byte sDoWhatWithItemMsgWindowTemplate
 _08121D68:
-	ldr r0, _08121D6C @ =gUnknown_845A138
+	ldr r0, _08121D6C @ =sDoWhatWithMailMsgWindowTemplate
 	b _08121D72
 	.align 2, 0
-_08121D6C: .4byte gUnknown_845A138
+_08121D6C: .4byte sDoWhatWithMailMsgWindowTemplate
 _08121D70:
-	ldr r0, _08121D7C @ =gUnknown_845A140
+	ldr r0, _08121D7C @ =sWhichMoveMsgWindowTemplate
 _08121D72:
 	bl AddWindow
 	strb r0, [r5]
 	b _08121D88
 	.align 2, 0
-_08121D7C: .4byte gUnknown_845A140
+_08121D7C: .4byte sWhichMoveMsgWindowTemplate
 _08121D80:
-	ldr r0, _08121D9C @ =gUnknown_845A120
+	ldr r0, _08121D9C @ =sDefaultPartyMsgWindowTemplate
 	bl AddWindow
 	strb r0, [r4, 0xD]
 _08121D88:
@@ -6595,7 +6595,7 @@ _08121D88:
 	movs r6, 0x2
 	b _08121DB0
 	.align 2, 0
-_08121D9C: .4byte gUnknown_845A120
+_08121D9C: .4byte sDefaultPartyMsgWindowTemplate
 _08121DA0: .4byte sPartyMenuInternal
 _08121DA4:
 	bl ShouldUseChooseMonText
@@ -7107,10 +7107,10 @@ _0812217A:
 	str r0, [sp]
 	movs r1, 0
 	str r1, [sp, 0x4]
-	ldr r0, _081221CC @ =gUnknown_845A00B
+	ldr r0, _081221CC @ =sFontColorTable + 15
 	str r0, [sp, 0x8]
 	str r1, [sp, 0xC]
-	ldr r1, _081221D0 @ =gUnknown_845A37C
+	ldr r1, _081221D0 @ =sHMDescriptionTable
 	adds r0, r5, 0
 	subs r0, 0x12
 	lsls r0, 2
@@ -7133,8 +7133,8 @@ _081221C0:
 	bx r0
 	.align 2, 0
 _081221C8: .4byte gUnknown_845A178
-_081221CC: .4byte gUnknown_845A00B
-_081221D0: .4byte gUnknown_845A37C
+_081221CC: .4byte sFontColorTable + 15
+_081221D0: .4byte sHMDescriptionTable
 	thumb_func_end sub_8122138
 
 	thumb_func_start CreatePartyMonIconSprite
@@ -11422,15 +11422,15 @@ _08124410: .4byte gPartyMenu
 _08124414: .4byte gPlayerParty
 _08124418:
 	ldr r0, _08124424 @ =gStringVar4
-	ldr r1, _08124428 @ =gUnknown_84170BC
+	ldr r1, _08124428 @ =gText_PkmnCantBeTradedNow
 	bl StringExpandPlaceholders
 	b _08124434
 	.align 2, 0
 _08124424: .4byte gStringVar4
-_08124428: .4byte gUnknown_84170BC
+_08124428: .4byte gText_PkmnCantBeTradedNow
 _0812442C:
 	ldr r0, _08124478 @ =gStringVar4
-	ldr r1, _0812447C @ =gUnknown_84170E0
+	ldr r1, _0812447C @ =gText_EggCantBeTradedNow
 	bl StringExpandPlaceholders
 _08124434:
 	movs r0, 0x1A
@@ -11465,7 +11465,7 @@ _0812446C:
 	bx r0
 	.align 2, 0
 _08124478: .4byte gStringVar4
-_0812447C: .4byte gUnknown_84170E0
+_0812447C: .4byte gText_EggCantBeTradedNow
 _08124480: .4byte sPartyMenuInternal
 _08124484: .4byte gText_PauseUntilPress
 _08124488: .4byte gTasks
@@ -11590,10 +11590,10 @@ _08124590:
 	bx r0
 	thumb_func_end CursorCB_Trade1
 
-	thumb_func_start nullsub_93
-nullsub_93: @ 81245A0
+	thumb_func_start CursorCB_Trade2
+CursorCB_Trade2: @ 81245A0
 	bx lr
-	thumb_func_end nullsub_93
+	thumb_func_end CursorCB_Trade2
 
 	thumb_func_start CursorCB_FieldMove
 CursorCB_FieldMove: @ 81245A4
@@ -14019,7 +14019,7 @@ TryUsePPItem: @ 8125958
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r4, 0
-	ldr r7, _08125990 @ =gUnknown_203B0AE
+	ldr r7, _08125990 @ =gPartyMenu + 14
 	ldr r0, _08125994 @ =gSpecialVar_ItemId
 	ldrh r5, [r0]
 	movs r0, 0xE
@@ -14040,7 +14040,7 @@ TryUsePPItem: @ 8125958
 	ldr r0, _0812599C @ =gText_WontHaveEffect
 	b _081259F6
 	.align 2, 0
-_08125990: .4byte gUnknown_203B0AE
+_08125990: .4byte gPartyMenu + 14
 _08125994: .4byte gSpecialVar_ItemId
 _08125998: .4byte gPartyMenuUseExitCallback
 _0812599C: .4byte gText_WontHaveEffect
@@ -16549,7 +16549,7 @@ TryTutorSelectedMon: @ 8126DC8
 	bl GetMonNickname
 	ldr r4, _08126E5C @ =gSpecialVar_0x8005
 	ldrb r0, [r4]
-	bl GetMoveTutorMove
+	bl GetTutorMove
 	strh r0, [r7, 0xE]
 	ldr r0, _08126E60 @ =gStringVar2
 	movs r1, 0xE
@@ -18299,7 +18299,7 @@ _08127BEC:
 	beq _08127C64
 	adds r0, r5, 0
 	bl GetPartyIdFromBattleSlot
-	ldr r1, _08127C30 @ =gUnknown_203B0C1
+	ldr r1, _08127C30 @ =gSelectedMonPartyId
 	strb r0, [r1]
 	ldr r1, _08127C34 @ =gPartyMenuUseExitCallback
 	movs r0, 0x1
@@ -18325,7 +18325,7 @@ _08127BEC:
 	movs r0, 0x1
 	b _08127C8C
 	.align 2, 0
-_08127C30: .4byte gUnknown_203B0C1
+_08127C30: .4byte gSelectedMonPartyId
 _08127C34: .4byte gPartyMenuUseExitCallback
 _08127C38: .4byte gBattlerPartyIndexes
 _08127C3C: .4byte gBattlerInMenuId

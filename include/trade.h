@@ -1,6 +1,9 @@
 #ifndef GUARD_TRADE_H
 #define GUARD_TRADE_H
 
+#include "global.h"
+#include "constants/trade.h"
+
 extern struct MailStruct gLinkPartnerMail[6];
 extern u8 gSelectedTradeMonPositions[2];
 

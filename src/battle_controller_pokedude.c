@@ -715,7 +715,7 @@ static void WaitForMonSelection(void)
     if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
     {
         if (gPartyMenuUseExitCallback == 1)
-            BtlController_EmitChosenMonReturnValue(1, gUnknown_203B0C1, gBattlePartyCurrentOrder);
+            BtlController_EmitChosenMonReturnValue(1, gSelectedMonPartyId, gBattlePartyCurrentOrder);
         else
             BtlController_EmitChosenMonReturnValue(1, 6, NULL);
         PokedudeBufferExecCompleted();

@@ -20,7 +20,7 @@ static void FailSweetScentEncounter(u8 taskId);
 
 static void Unused_StartSweetscentFldeff(void)
 {
-	gPartyMenu.unk9 = 0;
+	gPartyMenu.slotId = 0;
 	FieldCallback_SweetScent();
 }
 

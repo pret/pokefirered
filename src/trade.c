@@ -459,9 +459,9 @@ static const u8 *const sTradeErrorOrStatusMessagePtrs[] = {
     gUnknown_8417094, // That's your only POKéMON for battle
     gUnknown_841E199, // Waiting for your friend to finish
     gUnknown_841E1C5, // Your friend wants to trade POKéMON
-    gUnknown_84170BC, // That POKéMON can't be traded now
-    gUnknown_84170E0, // An EGG can't be traded now
-    gUnknown_84170FC  // The other TRAINER's POKéMON can't be traded now
+    gText_PkmnCantBeTradedNow, // That POKéMON can't be traded now
+    gText_EggCantBeTradedNow, // An EGG can't be traded now
+    gText_OtherTrainersPkmnCantBeTraded  // The other TRAINER's POKéMON can't be traded now
 };
 
 static const u8 gUnknown_8261F18[] = { 0, 1, 2 };

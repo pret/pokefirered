@@ -13904,23 +13904,23 @@ gPartyMenuBg_Tilemap:: @ 8E82AB0
 	.incbin "graphics/interface/party_menu_misc.bin.lz"
 
 	.align 2
-gFile_graphics_interface_party_menu_pokeball_sheet:: @ 8E82BE8
+gPartyMenuPokeball_Gfx:: @ 8E82BE8
 	.incbin "graphics/interface/party_menu_pokeball.4bpp.lz"
 
 	.align 2
-gFile_graphics_interface_party_menu_pokeball_small_sheet:: @ 8E82D68
+gPartyMenuPokeballSmall_Gfx:: @ 8E82D68
 	.incbin "graphics/interface/party_menu_pokeball_small.4bpp.lz"
 
 	.align 2
-gFile_graphics_interface_party_menu_pokeball_palette:: @ 8E82E7C
+gPartyMenuPokeball_Pal:: @ 8E82E7C
 	.incbin "graphics/interface/party_menu_pokeball.gbapal.lz"
 
 	.align 2
-gUnknown_8E82EA0:: @ 8E82EA0
+gStatusGfx_Icons:: @ 8E82EA0
 	.incbin "baserom.gba", 0xE82EA0, 0x204
 
 	.align 2
-gFile_graphics_interface_status_icons_palette:: @ 8E830A4
+gStatusPal_Icons:: @ 8E830A4
 	.incbin "graphics/interface/status_icons.gbapal.lz"
 
 	.align 2

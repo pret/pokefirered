@@ -16,8 +16,10 @@ u8 oei_task_add(void);
 // flash
 u8 sub_80C9DCC(u8 lightLevel, u8 mapType);
 u8 sub_80C9D7C(u8 mapType1, u8 mapType2);
+bool8 SetUpFieldMove_Flash(void);
 
 // cut
+bool8 SetUpFieldMove_Cut(void);
 
 // dig
 bool8 SetUpFieldMove_Dig(void);
@@ -43,7 +45,7 @@ bool8 SetUpFieldMove_Teleport(void);
 bool8 FldEff_UseTeleport(void);
 
 // softboiled
-bool8 hm_prepare_dive_probably(void);
+bool8 SetUpFieldMove_SoftBoiled(void);
 void ChooseMonForSoftboiled(u8 taskId);
 void sub_80E5724(u8 taskId);
 

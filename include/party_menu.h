@@ -3,49 +3,28 @@
 
 #include "main.h"
 #include "task.h"
+#include "constants/party_menu.h"
 
-enum {
-    AILMENT_NONE,
-    AILMENT_PSN,
-    AILMENT_PRZ,
-    AILMENT_SLP,
-    AILMENT_FRZ,
-    AILMENT_BRN,
-    AILMENT_PKRS,
-    AILMENT_FNT
-};
-
-enum
-{
-    PARTY_CHOOSE_MON,
-    PARTY_MUST_CHOOSE_MON,
-    PARTY_CANT_SWITCH,
-    PARTY_USE_ITEM_ON,
-    PARTY_ABILITY_PREVENTS,
-    PARTY_GIVE_ITEM,
-};
-
-struct Struct203B0A0
+struct PartyMenu
 {
     MainCallback exitCallback;
-    TaskFunc unk4;
-    u8 unk8_0:4;
-    u8 mode:2;
-    u8 unk8_2:2;
-    s8 unk9;
-    s8 unkA;
-    u8 unkB;
-    u16 unkC;
-    s16 unkE;
-    s16 unk10;
+    TaskFunc task;
+    u8 menuType:4;
+    u8 layout:2;
+    s8 slotId;
+    s8 slotId2;
+    u8 action;
+    u16 bagItem;
+    s16 data1;           // used variously as a moveId, counter, moveSlotId, or cursorPos
+    s16 learnMoveState;  // data2, used only as a learn move state
 };
 
-extern struct Struct203B0A0 gPartyMenu;
+extern struct PartyMenu gPartyMenu;
 extern u8 gPartyMenuUseExitCallback;
-extern u8 gUnknown_203B0C1;
-extern u8 gBattlePartyCurrentOrder[3];
+extern u8 gSelectedMonPartyId;
+extern u8 gBattlePartyCurrentOrder[PARTY_SIZE / 2];
 extern void (*gItemUseCB)(u8 taskId, TaskFunc func);
-extern u8 gSelectedOrderFromParty[3];
+extern u8 gSelectedOrderFromParty[4];
 
 bool8 FieldCallback_PrepareFadeInFromMenu(void);
 bool8 MonKnowsMove(struct Pokemon *, u16);

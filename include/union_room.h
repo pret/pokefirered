@@ -1,6 +1,9 @@
 #ifndef GUARD_UNION_ROOM_H
 #define GUARD_UNION_ROOM_H
 
+#include "global.h"
+#include "librfu.h"
+
 struct UnkStruct_Shared
 {
     struct UnkLinkRfuStruct_02022B14 field_0;

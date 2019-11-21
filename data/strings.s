@@ -433,16 +433,16 @@ gString_Dummy:: @ 84161CD
 gUnknown_84161CE::
 	.string "キャンセル$"
 
-gUnknown_84161D4::
+gText_Item::
 	.string "ITEM$"
 
-gUnknown_84161D9::
+gText_Mail::
 	.string "MAIL$"
 
-gUnknown_84161DE::
+gText_Take::
 	.string "TAKE$"
 
-gUnknown_84161E3::
+gText_Store::
 	.string "STORE$"
 
 gUnknown_84161E9::
@@ -804,34 +804,34 @@ gText_TurnedOverItemsWorthYen:: @ 8416959
 gText_PokedollarVar1:: @ 841697A
 	.string "¥{STR_VAR_1}$"
 
-gUnknown_841697E:: @ 0x841697E
+gText_Shift:: @ 0x841697E
 	.string "SHIFT$"
 
-gUnknown_8416984:: @ 0x8416984
+gText_SendOut:: @ 0x8416984
 	.string "SEND OUT$"
 
-gUnknown_841698D:: @ 0x841698D
+gText_Switch2:: @ 0x841698D
 	.string "SWITCH$"
 
-gUnknown_8416994:: @ 0x8416994
+gText_Summary5:: @ 0x8416994
 	.string "SUMMARY$"
 
 gUnknown_841699C:: @ 0x841699C
 	.string "つかえるわざ$"
 
-gUnknown_84169A3:: @ 0x84169A3
+gText_Enter:: @ 0x84169A3
 	.string "ENTER$"
 
-gUnknown_84169A9:: @ 0x84169A9
+gText_NoEntry:: @ 0x84169A9
 	.string "NO ENTRY$"
 
-gUnknown_84169B2:: @ 0x84169B2
+gText_Take2:: @ 0x84169B2
 	.string "TAKE$"
 
-gUnknown_84169B7:: @ 0x84169B7
+gText_Read2:: @ 0x84169B7
 	.string "READ$"
 
-gUnknown_84169BC:: @ 0x84169BC
+gText_Trade4:: @ 0x84169BC
 	.string "TRADE$"
 
 gText_HP3:: @ 84169C2
@@ -1044,144 +1044,144 @@ gUnknown_8417094:: @ 0x8417094
 	.string "POKéMON for battle.$"
 
 	.align 2
-gUnknown_84170BC:: @ 84170BC
+gText_PkmnCantBeTradedNow:: @ 84170BC
 	.string "That POKéMON can't be traded\n"
 	.string "now.$"
 
 	.align 2
-gUnknown_84170E0:: @ 84170E0
+gText_EggCantBeTradedNow:: @ 84170E0
 	.string "An EGG can't be traded now.$"
 
 	.align 2
-gUnknown_84170FC:: @ 0x84170FC
+gText_OtherTrainersPkmnCantBeTraded:: @ 0x84170FC
 	.string "The other TRAINER's POKéMON\n"
 	.string "can't be traded now.$"
 
 	.align 2
-gUnknown_8417130:: @ 0x8417130
+gText_OtherTrainerCantAcceptPkmn:: @ 0x8417130
 	.string "The other TRAINER can't accept\n"
 	.string "that POKéMON now.$"
 
 	.align 2
-gUnknown_8417164:: @ 0x8417164
+gText_CantTradeWithTrainer:: @ 0x8417164
 	.string "You can't trade with that\n"
 	.string "TRAINER now.$"
 
 	.align 2
-gUnknown_841718C:: @ 0x841718C
+gText_NotPkmnOtherTrainerWants:: @ 0x841718C
 	.string "That isn't the type of POKéMON\n"
 	.string "that the other TRAINER wants.$"
 
 	.align 2
-gUnknown_84171CC:: @ 0x84171CC
+gText_ThatIsntAnEgg:: @ 0x84171CC
 	.string "That isn't an EGG.$"
 
-gUnknown_84171DF:: @ 0x84171DF
+gText_ChoosePokemon:: @ 0x84171DF
 	.string "Choose a POKéMON.$"
 
-gUnknown_84171F1:: @ 0x84171F1
+gText_MoveToWhere:: @ 0x84171F1
 	.string "Move to where?$"
 
-gUnknown_8417200:: @ 0x8417200
+gText_TeachWhichPokemon:: @ 0x8417200
 	.string "Teach which POKéMON?$"
 
-gUnknown_8417215:: @ 0x8417215
+gText_UseOnWhichPokemon:: @ 0x8417215
 	.string "Use on which POKéMON?$"
 
-gUnknown_841722B:: @ 0x841722B
+gText_GiveToWhichPokemon:: @ 0x841722B
 	.string "Give to which POKéMON?$"
 
-gUnknown_8417242:: @ 0x8417242
+gText_DoWhatWithPokemon:: @ 0x8417242
 	.string "Do what with this {PKMN}?$"
 
-gUnknown_8417258:: @ 0x8417258
+gText_NothingToCut:: @ 0x8417258
 	.string "There's nothing to CUT.$"
 
-gUnknown_8417270:: @ 0x8417270
+gText_CantSurfHere:: @ 0x8417270
 	.string "No SURFING here!$"
 
-gUnknown_8417281:: @ 0x8417281
+gText_AlreadySurfing:: @ 0x8417281
 	.string "You're already SURFING.$"
 
-gUnknown_8417299:: @ 0x8417299
+gText_CantUseHere:: @ 0x8417299
 	.string "Can't use that here.$"
 
-gUnknown_84172AE:: @ 0x84172AE
+gText_RestoreWhichMove:: @ 0x84172AE
 	.string "Restore which move?$"
 
-gUnknown_84172C2:: @ 0x84172C2
+gText_BoostPp:: @ 0x84172C2
 	.string "Boost PP of which?$"
 
-gUnknown_84172D5:: @ 0x84172D5
+gText_DoWhatWithItem:: @ 0x84172D5
 	.string "Do what with an item?$"
 
-gUnknown_84172EB:: @ 0x84172EB
+gText_NoPokemonForBattle:: @ 0x84172EB
 	.string "No battling this way!$"
 
-gUnknown_8417301:: @ 0x8417301
+gText_ChoosePokemon2:: @ 0x8417301
 	.string "Choose a POKéMON.$"
 
-gUnknown_8417313:: @ 0x8417313
+gText_NotEnoughHp:: @ 0x8417313
 	.string "Not enough HP‥$"
 
-gUnknown_8417322:: @ 0x8417322
+gText_ThreePkmnAreNeeded:: @ 0x8417322
 	.string "Three {PKMN} are needed.$"
 
-gUnknown_8417337:: @ 0x8417337
+gText_PokemonCantBeSame:: @ 0x8417337
 	.string "{PKMN} can't be the same.$"
 
-gUnknown_841734D:: @ 0x841734D
+gText_NoIdenticalHoldItems:: @ 0x841734D
 	.string "No same hold items!$"
 
-gUnknown_8417361:: @ 0x8417361
+gText_CurrentIsTooFast:: @ 0x8417361
 	.string "The current is much too fast!$"
 
-gUnknown_841737F:: @ 0x841737F
+gText_DoWhatWithMail:: @ 0x841737F
 	.string "Do what with the MAIL?$"
 
-gUnknown_8417396:: @ 0x8417396
+gText_ChoosePokemonCancel:: @ 0x8417396
 	.string "Choose POKéMON or CANCEL.$"
 
-gUnknown_84173B0:: @ 0x84173B0
+gText_ChoosePokemonConfirm:: @ 0x84173B0
 	.string "Choose POKéMON and confirm.$"
 
-gUnknown_84173CC:: @ 0x84173CC
+gText_TwoPokemonAreNeeded:: @ 0x84173CC
 	.string "Two POKéMON are needed.$"
 
-gUnknown_84173E4:: @ 0x84173E4
+gText_EnjoyCycling:: @ 0x84173E4
 	.string "Let's enjoy cycling!$"
 
-gUnknown_84173F9:: @ 0x84173F9
+gText_InUseAlready_PM:: @ 0x84173F9
 	.string "This is in use already.$"
 
-gUnknown_8417411:: @ 0x8417411
+gText_NoUse:: @ 0x8417411
 	.string "No use.$"
 
-gUnknown_8417419:: @ 0x8417419
+gText_Able:: @ 0x8417419
 	.string "ABLE$"
 
-gUnknown_841741E:: @ 0x841741E
+gText_First_PM:: @ 0x841741E
 	.string "FIRST$"
 
-gUnknown_8417424:: @ 0x8417424
+gText_Second_PM:: @ 0x8417424
 	.string "SECOND$"
 
-gUnknown_841742B:: @ 0x841742B
+gText_Third_PM:: @ 0x841742B
 	.string "THIRD$"
 
-gUnknown_8417431:: @ 0x8417431
+gText_Able2:: @ 0x8417431
 	.string "ABLE$"
 
-gUnknown_8417436:: @ 0x8417436
+gText_NotAble:: @ 0x8417436
 	.string "NOT ABLE$"
 
-gUnknown_841743F:: @ 0x841743F
+gText_Able3:: @ 0x841743F
 	.string "ABLE!$"
 
-gUnknown_8417445:: @ 0x8417445
+gText_NotAble2:: @ 0x8417445
 	.string "NOT ABLE!$"
 
-gUnknown_841744F:: @ 0x841744F
+gText_Learned:: @ 0x841744F
 	.string "LEARNED$"
 
 gUnknown_8417457:: @ 8417457
@@ -1197,40 +1197,40 @@ gUnknown_8417494:: @ 8417494
 	.string "You also choose POKéMON here if\n"
 	.string "you want to use an item on one.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8417533:: @ 0x8417533
+gText_CutATreeOrGrass:: @ 0x8417533
 	.string "Cut a tree or grass.$"
 
-gUnknown_8417548:: @ 0x8417548
+gText_FlyToAKnownTown:: @ 0x8417548
 	.string "Fly to a known town.$"
 
-gUnknown_841755D:: @ 0x841755D
+gText_TravelOnWater:: @ 0x841755D
 	.string "Travel on water.$"
 
-gUnknown_841756E:: @ 0x841756E
+gText_MoveHeavyBoulders:: @ 0x841756E
 	.string "Move heavy boulders.$"
 
-gUnknown_8417583:: @ 0x8417583
+gText_LightUpDarkness:: @ 0x8417583
 	.string "Light up darkness.$"
 
-gUnknown_8417596:: @ 0x8417596
+gText_ShatterACrackedRock:: @ 0x8417596
 	.string "Shatter a cracked rock.$"
 
-gUnknown_84175AE:: @ 0x84175AE
+gText_ClimbAWaterfall:: @ 0x84175AE
 	.string "Climb a waterfall.$"
 
 gUnknown_84175C1:: @ 0x84175C1
 	.string "すいちゅうに もぐる$"
 
-gUnknown_84175CC:: @ 0x84175CC
+gText_EscapeFromHere:: @ 0x84175CC
 	.string "Escape from here.$"
 
-gUnknown_84175DE:: @ 0x84175DE
+gText_LureWildPokemon:: @ 0x84175DE
 	.string "Lure wild POKéMON.$"
 
-gUnknown_84175F1:: @ 0x84175F1
+gText_ShareHp:: @ 0x84175F1
 	.string "Share HP.$"
 
-gUnknown_84175FB:: @ 0x84175FB
+gText_ReturnToAHealingSpot:: @ 0x84175FB
 	.string "Return to a healing spot.$"
 
 gUnknown_8417615:: @ 8417615
@@ -3266,7 +3266,7 @@ gText_Badges:: @ 841B6EC
 gTextJPDummy_Ko:: @ 841B6F3
 	.string "$"
 
-gUnknown_841B6F4:: @ 0x841B6F4
+gText_Register:: @ 0x841B6F4
 	.string "REGISTER$"
 
 gText_HatchedFromEgg:: @ 841B6FD

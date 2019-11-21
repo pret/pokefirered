@@ -1030,7 +1030,7 @@ static void Task_ItemPcGive(u8 taskId)
 static void ItemPc_CB2_SwitchToPartyMenu(void)
 {
     InitPartyMenu(0, 0, 6, 0, 6, Task_HandleChooseMonInput, ItemPc_CB2_ReturnFromPartyMenu);
-    gPartyMenu.unkC = ItemPc_GetItemIdBySlotId(ItemPc_GetCursorPosition());
+    gPartyMenu.bagItem = ItemPc_GetItemIdBySlotId(ItemPc_GetCursorPosition());
 }
 
 static void ItemPc_CB2_ReturnFromPartyMenu(void)

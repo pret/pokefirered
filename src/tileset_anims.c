@@ -209,26 +209,17 @@ static void _InitSecondaryTilesetAnimation(void)
 
 static void sub_80700A4(u16 timer)
 {
-    const u16 *const *ptr = gUnknown_83A7660;
-    u16 i = timer % 5;
-    
-    AppendTilesetAnimToBuffer(ptr[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(508)), 0x80);
+    AppendTilesetAnimToBuffer(gUnknown_83A7660[timer % NELEMS(gUnknown_83A7660)], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(508)), 0x80);
 }
 
 static void sub_80700D0(u16 timer)
 {
-    const u16 *const *ptr = gUnknown_83AA654;
-    u16 i = timer % 8;
-    
-    AppendTilesetAnimToBuffer(ptr[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(416)), 0x600);
+    AppendTilesetAnimToBuffer(gUnknown_83AA654[timer % NELEMS(gUnknown_83AA654)], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(416)), 0x600);
 }
 
 static void sub_80700F8(u16 timer)
 {
-    const u16 *const *ptr = gUnknown_83AB874;
-    u16 i = timer % 8;
-    
-    AppendTilesetAnimToBuffer(ptr[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(464)), 0x240);
+    AppendTilesetAnimToBuffer(gUnknown_83AB874[timer % NELEMS(gUnknown_83AB874)], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(464)), 0x240);
 }
 
 static void sub_8070120(u16 timer)
@@ -250,10 +241,7 @@ void sub_8070154(void)
 
 static void sub_807017C(u16 timer)
 {
-    const u16 *const *ptr = gUnknown_83ABDB4;
-    u16 i = timer % 5;
-    
-    AppendTilesetAnimToBuffer(ptr[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(744)), 0x100);
+    AppendTilesetAnimToBuffer(gUnknown_83ABDB4[timer % NELEMS(gUnknown_83ABDB4)], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(744)), 0x100);
 }
 
 static void sub_80701AC(u16 timer)
@@ -271,10 +259,7 @@ void sub_80701D8(void)
 
 static void sub_80701FC(u16 timer)
 {
-    const u16 *const *ptr = gUnknown_83AC1E8;
-    u16 i = timer % 4;
-    
-    AppendTilesetAnimToBuffer(ptr[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(976)), 0x100);
+    AppendTilesetAnimToBuffer(gUnknown_83AC1E8[timer % NELEMS(gUnknown_83AC1E8)], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(976)), 0x100);
 }
 
 static void sub_8070224(u16 timer)
@@ -292,10 +277,7 @@ void sub_8070250(void)
 
 static void sub_8070274(u16 timer)
 {
-    const u16 *const *ptr = gUnknown_83AC5F8;
-    u16 i = timer % 4;
-    
-    AppendTilesetAnimToBuffer(ptr[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(896)), 0x100);
+    AppendTilesetAnimToBuffer(gUnknown_83AC5F8[timer % NELEMS(gUnknown_83AC5F8)], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(896)), 0x100);
 }
 
 static void sub_807029C(u16 timer)
@@ -313,8 +295,8 @@ void sub_80702B4(void)
 
 static void sub_80702DC(u16 timer)
 {
-    u16 i = timer % 2;
-    
+    u16 i = timer % NELEMS(gUnknown_83AC7C8);
+
     AppendTilesetAnimToBuffer(gUnknown_83AC7C8[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(880)), 0xE0);
 }
 
@@ -333,7 +315,7 @@ void sub_807031C(void)
 
 static void sub_8070340(u16 timer)
 {
-    u16 i = timer % 4;
+    u16 i = timer % NELEMS(gUnknown_83AC950);
     
     AppendTilesetAnimToBuffer(gUnknown_83AC950[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(739)), 0x80);
 }

@@ -466,9 +466,4 @@ _080F5944: .4byte gUnknown_841EE64
 _080F5948: .4byte gUnknown_841EE68
 	thumb_func_end sub_80F5820
 
-	thumb_func_start nullsub_85
-nullsub_85: @ 80F594C
-	bx lr
-	thumb_func_end nullsub_85
-
 	.align 2, 0 @ Don't pad with nop.

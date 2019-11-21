@@ -253,6 +253,7 @@ extern s16 gSpriteCoordOffsetY;
 extern const struct SpriteTemplate gDummySpriteTemplate;
 extern struct Sprite gSprites[];
 extern struct OamMatrix gOamMatrices[];
+extern bool8 gAffineAnimsDisabled;
 
 void ResetSpriteData(void);
 void AnimateSprites(void);

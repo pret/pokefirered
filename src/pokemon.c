@@ -2899,7 +2899,7 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     struct PokemonSubstruct2 *substruct2 = NULL;
     struct PokemonSubstruct3 *substruct3 = NULL;
 
-    if (field > MON_DATA_10)
+    if (field > MON_DATA_ENCRYPT_SEPARATOR)
     {
         substruct0 = &(GetSubstruct(boxMon, boxMon->personality, 0)->type0);
         substruct1 = &(GetSubstruct(boxMon, boxMon->personality, 1)->type1);
@@ -2995,7 +2995,7 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_CHECKSUM:
         retVal = boxMon->checksum;
         break;
-    case MON_DATA_10:
+    case MON_DATA_ENCRYPT_SEPARATOR:
         retVal = boxMon->unknown;
         break;
     case MON_DATA_SPECIES:
@@ -3236,7 +3236,7 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
         break;
     }
 
-    if (field > MON_DATA_10)
+    if (field > MON_DATA_ENCRYPT_SEPARATOR)
         EncryptBoxMon(boxMon);
 
     return retVal;
@@ -3323,7 +3323,7 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
     struct PokemonSubstruct2 *substruct2 = NULL;
     struct PokemonSubstruct3 *substruct3 = NULL;
 
-    if (field > MON_DATA_10)
+    if (field > MON_DATA_ENCRYPT_SEPARATOR)
     {
         substruct0 = &(GetSubstruct(boxMon, boxMon->personality, 0)->type0);
         substruct1 = &(GetSubstruct(boxMon, boxMon->personality, 1)->type1);
@@ -3382,7 +3382,7 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
     case MON_DATA_CHECKSUM:
         SET16(boxMon->checksum);
         break;
-    case MON_DATA_10:
+    case MON_DATA_ENCRYPT_SEPARATOR:
         SET16(boxMon->unknown);
         break;
     case MON_DATA_SPECIES:
@@ -3582,7 +3582,7 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         break;
     }
 
-    if (field > MON_DATA_10)
+    if (field > MON_DATA_ENCRYPT_SEPARATOR)
     {
         boxMon->checksum = CalculateBoxMonChecksum(boxMon);
         EncryptBoxMon(boxMon);
@@ -6094,7 +6094,6 @@ static void OakSpeechNidoranFSetupTemplateDummy(struct OakSpeechNidoranFStruct *
     }
 }
 
-#ifdef NONMATCHING
 struct OakSpeechNidoranFStruct *OakSpeechNidoranFSetup(u8 battlePosition, bool8 enable)
 {
     s32 size;
@@ -6134,8 +6133,7 @@ struct OakSpeechNidoranFStruct *OakSpeechNidoranFSetup(u8 battlePosition, bool8 
             battlePosition = 1;
         if (battlePosition > 8)
             battlePosition = 8;
-        // The following two statements refused to cooperate. 
-        sOakSpeechNidoranResources->spriteCount = battlePosition;
+        sOakSpeechNidoranResources->spriteCount = (battlePosition << 16) >> 16;
         sOakSpeechNidoranResources->battlePosition = battlePosition;
         sOakSpeechNidoranResources->frameCount = 4;
         sOakSpeechNidoranResources->enable2 = FALSE;
@@ -6151,8 +6149,11 @@ struct OakSpeechNidoranFStruct *OakSpeechNidoranFSetup(u8 battlePosition, bool8 
     }
     else
     {
-        for (i = 0; i < (s8)sOakSpeechNidoranResources->spriteCount; ++i)
-            sOakSpeechNidoranResources->bufferPtrs[i] = &sOakSpeechNidoranResources->dataBuffer[sOakSpeechNidoranResources->sizePerSprite * i];
+        do
+        {
+            for (i = 0; i < (s8)sOakSpeechNidoranResources->spriteCount; ++i)
+                sOakSpeechNidoranResources->bufferPtrs[i] = &sOakSpeechNidoranResources->dataBuffer[sOakSpeechNidoranResources->sizePerSprite * i];
+        } while (0);
     }
     sOakSpeechNidoranResources->templates = AllocZeroed(sizeof(struct SpriteTemplate) * sOakSpeechNidoranResources->spriteCount);
     sOakSpeechNidoranResources->frameImages = AllocZeroed(sOakSpeechNidoranResources->spriteCount * sizeof(struct SpriteFrameImage) * sOakSpeechNidoranResources->frameCount);
@@ -6200,351 +6201,6 @@ struct OakSpeechNidoranFStruct *OakSpeechNidoranFSetup(u8 battlePosition, bool8 
     }
     return sOakSpeechNidoranResources;
 }
-#else
-NAKED
-struct OakSpeechNidoranFStruct *OakSpeechNidoranFSetup(u8 battlePosition, bool8 enable)
-{
-    asm_unified("\n\
-        push {r4-r7,lr}\n\
-        mov r7, r8\n\
-        push {r7}\n\
-        lsls r0, 24\n\
-        lsrs r6, r0, 24\n\
-        lsls r1, 24\n\
-        lsrs r5, r1, 24\n\
-        movs r0, 0\n\
-        mov r8, r0\n\
-        ldr r4, _08044B34 @ =sOakSpeechNidoranResources\n\
-        ldr r1, [r4]\n\
-        cmp r1, 0\n\
-        beq _08044B1E\n\
-        ldrb r0, [r1, 0x2]\n\
-        cmp r0, 0xA3\n\
-        beq _08044B2E\n\
-        adds r0, r1, 0\n\
-        movs r1, 0\n\
-        movs r2, 0x18\n\
-        bl memset\n\
-        mov r1, r8\n\
-        str r1, [r4]\n\
-    _08044B1E:\n\
-        ldr r4, _08044B34 @ =sOakSpeechNidoranResources\n\
-        movs r0, 0x18\n\
-        bl AllocZeroed\n\
-        adds r2, r0, 0\n\
-        str r2, [r4]\n\
-        cmp r2, 0\n\
-        bne _08044B38\n\
-    _08044B2E:\n\
-        movs r0, 0\n\
-        b _08044D70\n\
-        .align 2, 0\n\
-    _08044B34: .4byte sOakSpeechNidoranResources\n\
-    _08044B38:\n\
-        cmp r5, 0\n\
-        beq _08044B94\n\
-        cmp r5, 0x1\n\
-        bne _08044B94\n\
-        cmp r6, 0x4\n\
-        bne _08044B5E\n\
-        ldrb r1, [r2]\n\
-        movs r0, 0x10\n\
-        negs r0, r0\n\
-        ands r0, r1\n\
-        movs r1, 0x4\n\
-        orrs r0, r1\n\
-        strb r0, [r2]\n\
-        ldr r2, [r4]\n\
-        ldrb r1, [r2]\n\
-        movs r0, 0xF\n\
-        ands r0, r1\n\
-        movs r1, 0x40\n\
-        b _08044B7C\n\
-    _08044B5E:\n\
-        cmp r6, 0x4\n\
-        bls _08044B64\n\
-        movs r6, 0\n\
-    _08044B64:\n\
-        ldrb r1, [r2]\n\
-        movs r0, 0x10\n\
-        negs r0, r0\n\
-        ands r0, r1\n\
-        movs r1, 0x1\n\
-        orrs r0, r1\n\
-        strb r0, [r2]\n\
-        ldr r2, [r4]\n\
-        ldrb r1, [r2]\n\
-        movs r0, 0xF\n\
-        ands r0, r1\n\
-        movs r1, 0x10\n\
-    _08044B7C:\n\
-        orrs r0, r1\n\
-        strb r0, [r2]\n\
-        ldr r2, _08044B90 @ =sOakSpeechNidoranResources\n\
-        ldr r1, [r2]\n\
-        movs r0, 0x4\n\
-        strb r0, [r1, 0x1]\n\
-        ldr r1, [r2]\n\
-        movs r0, 0x1\n\
-        strb r0, [r1, 0x3]\n\
-        b _08044BD0\n\
-        .align 2, 0\n\
-    _08044B90: .4byte sOakSpeechNidoranResources\n\
-    _08044B94:\n\
-        cmp r6, 0\n\
-        bne _08044B9A\n\
-        movs r6, 0x1\n\
-    _08044B9A:\n\
-        cmp r6, 0x8\n\
-        bls _08044BA0\n\
-        movs r6, 0x8\n\
-    _08044BA0:\n\
-        ldr r4, _08044C10 @ =sOakSpeechNidoranResources\n\
-        ldr r3, [r4]\n\
-        movs r0, 0xF\n\
-        adds r1, r6, 0\n\
-        ands r1, r0\n\
-        ldrb r2, [r3]\n\
-        movs r0, 0x10\n\
-        negs r0, r0\n\
-        ands r0, r2\n\
-        orrs r0, r1\n\
-        strb r0, [r3]\n\
-        ldr r2, [r4]\n\
-        lsls r3, r6, 4\n\
-        ldrb r1, [r2]\n\
-        movs r0, 0xF\n\
-        ands r0, r1\n\
-        orrs r0, r3\n\
-        strb r0, [r2]\n\
-        ldr r1, [r4]\n\
-        movs r2, 0\n\
-        movs r0, 0x4\n\
-        strb r0, [r1, 0x1]\n\
-        ldr r0, [r4]\n\
-        strb r2, [r0, 0x3]\n\
-    _08044BD0:\n\
-        ldr r5, _08044C10 @ =sOakSpeechNidoranResources\n\
-        ldr r0, [r5]\n\
-        ldrb r1, [r0, 0x1]\n\
-        lsls r1, 11\n\
-        str r1, [r0, 0x4]\n\
-        ldrb r0, [r0]\n\
-        lsls r0, 28\n\
-        lsrs r0, 28\n\
-        muls r0, r1\n\
-        bl AllocZeroed\n\
-        ldr r1, [r5]\n\
-        str r0, [r1, 0x8]\n\
-        ldrb r0, [r1]\n\
-        lsls r0, 28\n\
-        lsrs r0, 23\n\
-        bl AllocZeroed\n\
-        adds r2, r0, 0\n\
-        ldr r1, [r5]\n\
-        str r2, [r1, 0xC]\n\
-        ldr r0, [r1, 0x8]\n\
-        cmp r0, 0\n\
-        beq _08044C04\n\
-        cmp r2, 0\n\
-        bne _08044C14\n\
-    _08044C04:\n\
-        movs r0, 0x1\n\
-        mov r1, r8\n\
-        orrs r1, r0\n\
-        mov r8, r1\n\
-        b _08044C44\n\
-        .align 2, 0\n\
-    _08044C10: .4byte sOakSpeechNidoranResources\n\
-    _08044C14:\n\
-        ldrb r0, [r1]\n\
-        lsls r0, 28\n\
-        movs r4, 0\n\
-        adds r3, r5, 0\n\
-        cmp r0, 0\n\
-        beq _08044C44\n\
-    _08044C20:\n\
-        ldr r3, [r5]\n\
-        ldr r0, [r3, 0xC]\n\
-        lsls r1, r4, 2\n\
-        adds r1, r0\n\
-        ldr r0, [r3, 0x4]\n\
-        adds r2, r0, 0\n\
-        muls r2, r4\n\
-        ldr r0, [r3, 0x8]\n\
-        adds r0, r2\n\
-        str r0, [r1]\n\
-        adds r0, r4, 0x1\n\
-        lsls r0, 24\n\
-        lsrs r4, r0, 24\n\
-        ldrb r0, [r3]\n\
-        lsls r0, 28\n\
-        lsrs r0, 28\n\
-        cmp r4, r0\n\
-        blt _08044C20\n\
-    _08044C44:\n\
-        ldr r5, _08044C8C @ =sOakSpeechNidoranResources\n\
-        ldr r0, [r5]\n\
-        ldrb r1, [r0]\n\
-        lsls r1, 28\n\
-        lsrs r1, 28\n\
-        lsls r0, r1, 1\n\
-        adds r0, r1\n\
-        lsls r0, 3\n\
-        bl AllocZeroed\n\
-        ldr r2, [r5]\n\
-        str r0, [r2, 0x10]\n\
-        ldrb r1, [r2]\n\
-        lsls r1, 28\n\
-        lsrs r1, 28\n\
-        ldrb r0, [r2, 0x1]\n\
-        lsls r0, 3\n\
-        muls r0, r1\n\
-        bl AllocZeroed\n\
-        adds r2, r0, 0\n\
-        ldr r1, [r5]\n\
-        str r2, [r1, 0x14]\n\
-        ldr r0, [r1, 0x10]\n\
-        cmp r0, 0\n\
-        beq _08044C7C\n\
-        cmp r2, 0\n\
-        bne _08044C90\n\
-    _08044C7C:\n\
-        movs r0, 0x2\n\
-        mov r1, r8\n\
-        orrs r1, r0\n\
-        lsls r0, r1, 24\n\
-        lsrs r0, 24\n\
-        mov r8, r0\n\
-        b _08044CE2\n\
-        .align 2, 0\n\
-    _08044C8C: .4byte sOakSpeechNidoranResources\n\
-    _08044C90:\n\
-        movs r4, 0\n\
-        ldrb r0, [r1, 0x1]\n\
-        ldrb r1, [r1]\n\
-        lsls r1, 28\n\
-        lsrs r1, 28\n\
-        muls r0, r1\n\
-        adds r3, r5, 0\n\
-        cmp r4, r0\n\
-        bge _08044CC6\n\
-        adds r7, r3, 0\n\
-        movs r5, 0x80\n\
-        lsls r5, 4\n\
-    _08044CA8:\n\
-        ldr r2, [r7]\n\
-        ldr r1, [r2, 0x14]\n\
-        lsls r0, r4, 3\n\
-        adds r0, r1\n\
-        strh r5, [r0, 0x4]\n\
-        adds r0, r4, 0x1\n\
-        lsls r0, 24\n\
-        lsrs r4, r0, 24\n\
-        ldrb r1, [r2, 0x1]\n\
-        ldrb r0, [r2]\n\
-        lsls r0, 28\n\
-        lsrs r0, 28\n\
-        muls r0, r1\n\
-        cmp r4, r0\n\
-        blt _08044CA8\n\
-    _08044CC6:\n\
-        ldr r0, [r3]\n\
-        ldrb r4, [r0, 0x3]\n\
-        cmp r4, 0\n\
-        beq _08044CDA\n\
-        cmp r4, 0x1\n\
-        bne _08044CDA\n\
-        adds r1, r6, 0\n\
-        bl OakSpeechNidoranFSetupTemplate\n\
-        b _08044CE2\n\
-    _08044CDA:\n\
-        ldr r0, _08044D60 @ =sOakSpeechNidoranResources\n\
-        ldr r0, [r0]\n\
-        bl OakSpeechNidoranFSetupTemplateDummy\n\
-    _08044CE2:\n\
-        movs r0, 0x2\n\
-        mov r1, r8\n\
-        ands r0, r1\n\
-        cmp r0, 0\n\
-        beq _08044D12\n\
-        ldr r4, _08044D60 @ =sOakSpeechNidoranResources\n\
-        ldr r0, [r4]\n\
-        ldr r0, [r0, 0x14]\n\
-        cmp r0, 0\n\
-        beq _08044D00\n\
-        bl Free\n\
-        ldr r1, [r4]\n\
-        movs r0, 0\n\
-        str r0, [r1, 0x14]\n\
-    _08044D00:\n\
-        ldr r0, [r4]\n\
-        ldr r0, [r0, 0x10]\n\
-        cmp r0, 0\n\
-        beq _08044D12\n\
-        bl Free\n\
-        ldr r1, [r4]\n\
-        movs r0, 0\n\
-        str r0, [r1, 0x10]\n\
-    _08044D12:\n\
-        movs r0, 0x1\n\
-        mov r1, r8\n\
-        ands r0, r1\n\
-        cmp r0, 0\n\
-        beq _08044D42\n\
-        ldr r4, _08044D60 @ =sOakSpeechNidoranResources\n\
-        ldr r0, [r4]\n\
-        ldr r0, [r0, 0xC]\n\
-        cmp r0, 0\n\
-        beq _08044D30\n\
-        bl Free\n\
-        ldr r1, [r4]\n\
-        movs r0, 0\n\
-        str r0, [r1, 0xC]\n\
-    _08044D30:\n\
-        ldr r0, [r4]\n\
-        ldr r0, [r0, 0x8]\n\
-        cmp r0, 0\n\
-        beq _08044D42\n\
-        bl Free\n\
-        ldr r1, [r4]\n\
-        movs r0, 0\n\
-        str r0, [r1, 0x8]\n\
-    _08044D42:\n\
-        mov r0, r8\n\
-        cmp r0, 0\n\
-        beq _08044D64\n\
-        ldr r4, _08044D60 @ =sOakSpeechNidoranResources\n\
-        ldr r0, [r4]\n\
-        movs r1, 0\n\
-        movs r2, 0x18\n\
-        bl memset\n\
-        ldr r0, [r4]\n\
-        bl Free\n\
-        movs r0, 0\n\
-        str r0, [r4]\n\
-        b _08044D6C\n\
-        .align 2, 0\n\
-    _08044D60: .4byte sOakSpeechNidoranResources\n\
-    _08044D64:\n\
-        ldr r0, _08044D7C @ =sOakSpeechNidoranResources\n\
-        ldr r1, [r0]\n\
-        movs r0, 0xA3\n\
-        strb r0, [r1, 0x2]\n\
-    _08044D6C:\n\
-        ldr r0, _08044D7C @ =sOakSpeechNidoranResources\n\
-        ldr r0, [r0]\n\
-    _08044D70:\n\
-        pop {r3}\n\
-        mov r8, r3\n\
-        pop {r4-r7}\n\
-        pop {r1}\n\
-        bx r1\n\
-        .align 2, 0\n\
-    _08044D7C: .4byte sOakSpeechNidoranResources\n\
-        ");
-}
-#endif
 
 void OakSpeechNidoranFFreeResources(void)
 {

@@ -135,7 +135,7 @@ static const union AnimCmd *const gUnknown_83E632C[] =
     gUnknown_83E6308,
 };
 
-static const union AnimCmd *const gUnknown_83E6330[] =
+const union AnimCmd *const gUnknown_83E6330[] =
 {
     gUnknown_83E6310,
 };

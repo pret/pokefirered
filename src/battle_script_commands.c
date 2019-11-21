@@ -5045,7 +5045,7 @@ static void atk5A_yesnoboxlearnmove(void)
     case 3:
         if (!gPaletteFade.active && gMain.callback2 == BattleMainCB2)
         {
-            u8 movePosition = sub_8138B2C();
+            u8 movePosition = GetMoveSlotToReplace();
 
             if (movePosition == 4)
             {
@@ -9629,7 +9629,7 @@ static void atkF2_displaydexinfo(void)
         }
         break;
     case 3:
-        sub_800F34C();
+        InitBattleBgsVideo();
         LoadBattleTextboxAndBackground();
         gBattle_BG3_X = 0x100;
         ++gBattleCommunication[0];

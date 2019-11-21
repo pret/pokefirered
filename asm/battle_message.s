@@ -682,7 +682,7 @@ _080D77B8:
 _080D77C8: .4byte 0x00000181
 _080D77CC: .4byte gDisplayedStringBattle
 _080D77D0:
-	ldr r1, _080D77F0 @ =gUnknown_83FDF3C
+	ldr r1, _080D77F0 @ =gBattleStringsTable
 	adds r0, r6, 0
 	subs r0, 0xC
 	lsls r0, 2
@@ -700,7 +700,7 @@ _080D77E2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D77F0: .4byte gUnknown_83FDF3C
+_080D77F0: .4byte gBattleStringsTable
 	thumb_func_end BufferStringBattle
 
 	thumb_func_start BattleStringExpandPlaceholdersToDisplayedString
@@ -2230,14 +2230,14 @@ _080D847C:
 	ldrb r0, [r0, 0x2]
 	lsls r0, 8
 	orrs r1, r0
-	ldr r0, _080D8494 @ =gUnknown_83FDF3C
+	ldr r0, _080D8494 @ =gBattleStringsTable
 	subs r1, 0xC
 	lsls r1, 2
 	adds r1, r0
 	ldr r1, [r1]
 	b _080D868E
 	.align 2, 0
-_080D8494: .4byte gUnknown_83FDF3C
+_080D8494: .4byte gBattleStringsTable
 _080D8498:
 	ldrb r0, [r4, 0x1]
 	cmp r0, 0x2

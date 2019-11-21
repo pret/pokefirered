@@ -191,7 +191,7 @@ SECTIONS {
         src/hof_pc.o(.text);
         src/field_specials.o(.text);
         src/battle_records.o(.text);
-        asm/evolution_scene.o(.text);
+        src/evolution_scene.o(.text);
         src/coins.o(.text);
         src/fldeff_strength.o(.text);
         src/battle_transition.o(.text);
@@ -219,7 +219,7 @@ SECTIONS {
         src/diploma.o(.text);
         asm/save_failed_screen.o(.text);
         asm/clear_save_data_screen.o(.text);
-        asm/evolution_graphics.o(.text);
+        src/evolution_graphics.o(.text);
         src/fldeff_teleport.o(.text);
         src/new_menu_helpers.o(.text);
         asm/box_party_pokemon_dropdown.o(.text);
@@ -418,7 +418,7 @@ SECTIONS {
         src/coord_event_weather.o(.rodata);
         data/field_tasks.o(.rodata);
         src/start_menu.o(.rodata);
-        data/tileset_anims.o(.rodata);
+        src/tileset_anims.o(.rodata);
         src/palette.o(.rodata);
         src/sound.o(.rodata);
         data/battle_anim.o(.rodata);
@@ -476,7 +476,7 @@ SECTIONS {
         data/fldeff_flash.o(.rodata);
         src/field_specials.o(.rodata);
         src/battle_records.o(.rodata);
-        data/evolution_scene.o(.rodata);
+        src/evolution_scene.o(.rodata);
         src/battle_transition.o(.rodata);
         src/battle_controller_link_partner.o(.rodata);
         data/battle_message.o(.rodata);
@@ -496,7 +496,7 @@ SECTIONS {
         data/strings.o(.rodata);
         data/save_failed_screen.o(.rodata);
         data/clear_save_data_screen.o(.rodata);
-        data/evolution_graphics.o(.rodata);
+        src/evolution_graphics.o(.rodata);
         src/new_menu_helpers.o(.rodata);
         data/box_party_pokemon_dropdown.o(.rodata);
         src/map_preview_screen.o(.rodata);

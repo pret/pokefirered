@@ -69,7 +69,7 @@ void VBlankCB_Battle(void);
 void nullsub_9(struct Sprite *sprite);
 void sub_801182C(struct Sprite *sprite);
 void sub_8011A1C(void);
-u32 sub_8011C44(u8 arrayId, u8 caseId);
+u32 GetBattleBgAttribute(u8 arrayId, u8 caseId);
 void SpriteCB_WildMon(struct Sprite *sprite);
 void SpriteCallbackDummy2(struct Sprite *sprite);
 void SpriteCB_FaintOpponentMon(struct Sprite *sprite);

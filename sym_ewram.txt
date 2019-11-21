@@ -226,8 +226,7 @@ gFieldEffectArguments: @ 20386E0
 	.include "src/scanline_effect.o"
 
 	.align 2
-sOptionsMenuPtr: @ 2039620
-	.space 0x4
+	.include "src/option_menu.o"
 
 gTrainerCards: @ 2039624
 	.space 0x180
@@ -316,7 +315,7 @@ gUnknown_20398B8: @ 20398B8
 gUnknown_20398BA: @ 20398BA
 	.space 0x7A
 
-gShopData: @ 2039934
+gUnknown_2039934: @ 2039934
 	.space 0xE
 
 gUnknown_2039942: @ 2039942
@@ -421,13 +420,8 @@ gPlayerFacingPosition: @ 2039A04
 	.include "src/field_specials.o"
 	.align 2
 	.include "src/battle_records.o"
-
-gUnknown_2039A20: @ 2039A20
-	.space 0x4
-
-gUnknown_2039A24: @ 2039A24
-	.space 0x4
-
+	.align 2
+	.include "src/evolution_scene.o"
 	.align 2
 	.include "src/coins.o"
 	.align 2

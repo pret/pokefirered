@@ -688,7 +688,7 @@ extern const u8 gText_XWillBeSentToY[];
 extern const u8 gText_ByeByeVar1[];
 extern const u8 gText_XSentOverY[];
 extern const u8 gText_TakeGoodCareOfX[];
-extern const u8 gUnknown_841E325[];
+extern const u8 gText_CommunicationStandby5[];
 extern const u8 gTradeText_Cancel[];
 extern const u8 gTradeText_ChooseAPokemon[];
 extern const u8 gTradeText_Summary[];
@@ -780,11 +780,18 @@ extern const u8 gText_BattleStyleShift[];
 extern const u8 gText_BattleStyleSet[];
 extern const u8 gText_SoundMono[];
 extern const u8 gText_SoundStereo[];
-extern const u8 gText_ButtonTypeNormal[];
+extern const u8 gText_ButtonTypeHelp[];
 extern const u8 gText_ButtonTypeLR[];
 extern const u8 gText_ButtonTypeLEqualsA[];
-extern const u8 gText_MenuOptionOption[];
+extern const u8 gText_MenuOption[];
 extern const u8 gText_FrameType[];
+extern const u8 gTextJP_Type[];
 extern const u8 gText_PickSwitchCancel[];
+
+// evolution_scene
+extern const u8 gText_PkmnIsEvolving[];
+extern const u8 gText_CongratsPkmnEvolved[];
+extern const u8 gText_EllipsisQuestionMark[];
+extern const u8 gText_PkmnStoppedEvolving[];
 
 #endif //GUARD_STRINGS_H

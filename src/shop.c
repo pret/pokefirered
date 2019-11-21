@@ -105,46 +105,26 @@ static u8 sub_809AB7C(u32 a0)
     return 0;
 }
 
-/*
-void (const u16 *list)	//SetShopItemsForSale
-{
-	u16 i;
-	gShopData.itemList = list;
-	gShopData.itemCount = 0;
-	if (list[0] == 0)
-		return;
-	
-	i = 0;
-	while (list[i] != 0)
-	{
-		gShopData.itemCount++;
-		if (list[i] == 0)
-			return;
-		i++;
-	}
-}
-*/
-
-//#ifdef NONMATCHING
-// WHAT THE FUCK IS UP WITH THIS FUNCTION
-void sub_809ABD8(const u16 *items)
+//SetShopItemsForSale
+void sub_809ABD8(const u16 *items) //I really don't know what GameFreak was thinking here..
 {    
-    //const u16* mart = items;
-    u16 item;
-    gShopData.itemList = items;
-    gShopData.itemCount = 0;
-	
-	while (1)
-	{
-		item = items[++gShopData.itemCount];
-	}
+    struct ShopData *mart;
+    //u16 i;
+
+    mart = &gShopData;
+    mart->itemList = items;
+    mart->itemCount = 0;
+
+    //i = 0;
+    if (mart->itemList[0] == 0)
+        return;
+
+    do {
+        ++gShopData.itemCount;
+        //i = gShopData.itemCount;
+    //} while (mart->itemList[i]);
+	} while (mart->itemList[gShopData.itemCount]);
 }
-/*
-#else
-NAKED
-void sub_809ABD8(const u16 *items)
-	asm_unified("\t
-*/
 
 //SetShopMenuCallback
 void sub_809AC04(MainCallback callback)
@@ -165,6 +145,6 @@ static void sub_809AC10(u8 taskId)
 		sub_809ACF8(taskId);
 		return;
 	}
-	gUnknown_83DF09C.func.void_u8(Menu_GetCursorPos());
+	//gUnknown_83DF09C.func.void_u8(Menu_GetCursorPos());
 }
 

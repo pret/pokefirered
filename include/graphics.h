@@ -3740,6 +3740,13 @@ extern const u8 gWeatherFog1Tiles[];
 extern const u32 gBattleAnimFogTilemap[];
 extern const u16 gUnknown_83C2CE0[];
 
+// party_menu
+extern const u32 gPartyMenuPokeball_Gfx[];
+extern const u32 gPartyMenuPokeball_Pal[];
+extern const u32 gPartyMenuPokeballSmall_Gfx[];
+extern const u32 gStatusGfx_Icons[];
+extern const u32 gStatusPal_Icons[];
+
 // credits
 extern const u32 gCreditsPokeballBgGfxTiles[];
 extern const u32 gCreditsPokeballBgGfxMap[];

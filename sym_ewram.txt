@@ -596,54 +596,10 @@ gUnknown_203B094: @ 203B094
 gUnknown_203B098: @ 203B098
 	.space 0x4
 
-sPartyMenuInternal: @ 203B09C
-	.space 0x4
+	.align 2
+	.include "src/party_menu.o"
 
-gPartyMenu: @ 203B0A0
-	.space 0x9
-
-gUnknown_203B0A9: @ 203B0A9
-	.space 0x5
-
-gUnknown_203B0AE: @ 203B0AE
-	.space 0x6
-
-sPartyMenuBoxes: @ 203B0B4
-	.space 0x4
-
-sPartyBgGfxTilemap: @ 203B0B8
-	.space 0x4
-
-sPartyBgTilemapBuffer: @ 203B0BC
-	.space 0x4
-
-gPartyMenuUseExitCallback: @ 203B0C0
-	.space 0x1
-
-gUnknown_203B0C1: @ 203B0C1
-	.space 0x3
-
-gPostMenuFieldCallback: @ 203B0C4
-	.space 0x4
-
-sSlot1TilemapBuffer: @ 203B0C8
-	.space 0x4
-
-sSlot2TilemapBuffer: @ 203B0CC
-	.space 0x4
-
-gUnknown_203B0D0: @ 203B0D0
-	.space 0x4
-
-gSelectedOrderFromParty: @ 203B0D4
-	.space 0x4
-
-sPartyMenuItemId: @ 203B0D8
-	.space 0x4
-
-gBattlePartyCurrentOrder: @ 203B0DC
-	.space 0x4
-
+	.align 2
 gUnknown_203B0E0: @ 203B0E0
 	.space 0x4
 

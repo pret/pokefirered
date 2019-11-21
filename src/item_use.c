@@ -44,37 +44,36 @@
 #include "constants/songs.h"
 #include "constants/map_types.h"
 
-EWRAM_DATA void (*sItemUseOnFieldCB)(u8 taskId) = NULL;
+static EWRAM_DATA void (*sItemUseOnFieldCB)(u8 taskId) = NULL;
 
-void sub_80A1084(void);
-void sub_80A109C(u8 taskId);
-void sub_80A112C(u8 taskId);
-void sub_80A11C0(u8 taskId);
-bool8 sub_80A1194(void);
-void sub_80A1208(void);
-void ItemUseOnFieldCB_Bicycle(u8 taskId);
-bool8 ItemUseCheckFunc_Rod(void);
-void ItemUseOnFieldCB_Rod(u8 taskId);
-void FieldUseFunc_EvoItem(u8 taskId);
-void sub_80A1648(u8 taskId);
-void sub_80A1674(u8 taskId);
-void InitTMCaseFromBag(void);
-void Task_InitTMCaseFromField(u8 taskId);
-void InitBerryPouchFromBag(void);
-void Task_InitBerryPouchFromField(u8 taskId);
-void InitBerryPouchFromBattle(void);
-void InitTeachyTvFromBag(void);
-void Task_InitTeachyTvFromField(u8 taskId);
-void sub_80A19E8(u8 taskId);
-void sub_80A1A44(void);
-void sub_80A1B48(u8 taskId);
-void sub_80A1C08(u8 taskId);
-void sub_80A1CAC(void);
-void sub_80A1CC0(u8 taskId);
-void sub_80A1D58(void);
-void sub_80A1D68(u8 taskId);
-void Task_BattleUse_StatBooster_DelayAndPrint(u8 taskId);
-void Task_BattleUse_StatBooster_WaitButton_ReturnToBattle(u8 taskId);
+static void sub_80A1084(void);
+static void sub_80A109C(u8 taskId);
+static void sub_80A112C(u8 taskId);
+static void sub_80A11C0(u8 taskId);
+static bool8 sub_80A1194(void);
+static void sub_80A1208(void);
+static void ItemUseOnFieldCB_Bicycle(u8 taskId);
+static bool8 ItemUseCheckFunc_Rod(void);
+static void ItemUseOnFieldCB_Rod(u8 taskId);
+static void sub_80A1648(u8 taskId);
+static void sub_80A1674(u8 taskId);
+static void InitTMCaseFromBag(void);
+static void Task_InitTMCaseFromField(u8 taskId);
+static void InitBerryPouchFromBag(void);
+static void Task_InitBerryPouchFromField(u8 taskId);
+static void InitBerryPouchFromBattle(void);
+static void InitTeachyTvFromBag(void);
+static void Task_InitTeachyTvFromField(u8 taskId);
+static void sub_80A19E8(u8 taskId);
+static void sub_80A1A44(void);
+static void sub_80A1B48(u8 taskId);
+static void sub_80A1C08(u8 taskId);
+static void sub_80A1CAC(void);
+static void sub_80A1CC0(u8 taskId);
+static void sub_80A1D58(void);
+static void sub_80A1D68(u8 taskId);
+static void Task_BattleUse_StatBooster_DelayAndPrint(u8 taskId);
+static void Task_BattleUse_StatBooster_WaitButton_ReturnToBattle(u8 taskId);
 
 // No clue what this is
 static const u8 sUnref_83E27B4[] = {
@@ -132,14 +131,14 @@ static const u8 sUnref_83E27B4[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 };
 
-void (*const gUnknown_83E2954[])(void) = {
+static void (*const gUnknown_83E2954[])(void) = {
     CB2_ShowPartyMenuForItemUse,
     CB2_ReturnToField,
     NULL,
     NULL
 };
 
-void sub_80A0FBC(u8 taskId)
+static void sub_80A0FBC(u8 taskId)
 {
     u8 itemType;
     if (gSpecialVar_ItemId == ITEM_ENIGMA_BERRY)
@@ -160,7 +159,7 @@ void sub_80A0FBC(u8 taskId)
     }
 }
 
-void sub_80A103C(u8 taskId)
+static void sub_80A103C(u8 taskId)
 {
     if (gTasks[taskId].data[3] != 1)
     {
@@ -171,13 +170,13 @@ void sub_80A103C(u8 taskId)
         sItemUseOnFieldCB(taskId);
 }
 
-void sub_80A1084(void)
+static void sub_80A1084(void)
 {
     sub_807DC00();
     CreateTask(sub_80A109C, 8);
 }
 
-void sub_80A109C(u8 taskId)
+static void sub_80A109C(u8 taskId)
 {
     if (IsWeatherNotFadingIn() == TRUE)
     {
@@ -185,7 +184,7 @@ void sub_80A109C(u8 taskId)
     }
 }
 
-void sub_80A10C4(u8 taskId, bool8 a1, u8 a2, const u8 * str)
+static void sub_80A10C4(u8 taskId, bool8 a1, u8 a2, const u8 * str)
 {
     StringExpandPlaceholders(gStringVar4, str);
     if (a1 == FALSE)
@@ -194,12 +193,12 @@ void sub_80A10C4(u8 taskId, bool8 a1, u8 a2, const u8 * str)
         DisplayItemMessageOnField(taskId, a2, gStringVar4, sub_80A112C);
 }
 
-void sub_80A1110(u8 taskId, bool8 a1)
+static void sub_80A1110(u8 taskId, bool8 a1)
 {
     sub_80A10C4(taskId, a1, 4, gUnknown_8416425);
 }
 
-void sub_80A112C(u8 taskId)
+static void sub_80A112C(u8 taskId)
 {
     ClearDialogWindowAndFrame(0, 1);
     DestroyTask(taskId);
@@ -207,7 +206,7 @@ void sub_80A112C(u8 taskId)
     ScriptContext2_Disable();
 }
 
-u8 GetItemCompatibilityRule(u16 itemId)
+u8 CheckIfItemIsTMHMOrEvolutionStone(u16 itemId)
 {
     if (ItemId_GetPocket(itemId) == POCKET_TM_CASE)
         return 1;
@@ -217,12 +216,12 @@ u8 GetItemCompatibilityRule(u16 itemId)
         return 0;
 }
 
-void sub_80A1184(void)
+static void sub_80A1184(void)
 {
     gFieldCallback2 = sub_80A1194;
 }
 
-bool8 sub_80A1194(void)
+static bool8 sub_80A1194(void)
 {
     FreezeEventObjects();
     ScriptContext2_Enable();
@@ -232,7 +231,7 @@ bool8 sub_80A1194(void)
     return TRUE;
 }
 
-void sub_80A11C0(u8 taskId)
+static void sub_80A11C0(u8 taskId)
 {
     if (IsWeatherNotFadingIn() == TRUE)
     {
@@ -248,7 +247,7 @@ void FieldUseFunc_OrangeMail(u8 taskId)
     ItemMenu_StartFadeToExitCallback(taskId);
 }
 
-void sub_80A1208(void)
+static void sub_80A1208(void)
 {
     struct MailStruct mail;
 
@@ -279,7 +278,7 @@ void FieldUseFunc_MachBike(u8 taskId)
         sub_80A1110(taskId, gTasks[taskId].data[3]);
 }
 
-void ItemUseOnFieldCB_Bicycle(u8 taskId)
+static void ItemUseOnFieldCB_Bicycle(u8 taskId)
 {
     if (!TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
         PlaySE(SE_JITENSYA);
@@ -300,7 +299,7 @@ void FieldUseFunc_OldRod(u8 taskId)
         sub_80A1110(taskId, gTasks[taskId].data[3]);
 }
 
-bool8 ItemUseCheckFunc_Rod(void)
+static bool8 ItemUseCheckFunc_Rod(void)
 {
     s16 x, y;
     u16 behavior;
@@ -327,7 +326,7 @@ bool8 ItemUseCheckFunc_Rod(void)
     return FALSE;
 }
 
-void ItemUseOnFieldCB_Rod(u8 taskId)
+static void ItemUseOnFieldCB_Rod(u8 taskId)
 {
     sub_805D2C0(ItemId_GetSecondaryId(gSpecialVar_ItemId));
     DestroyTask(taskId);
@@ -391,13 +390,13 @@ void FieldUseFunc_PokeFlute(u8 taskId)
     }
 }
 
-void sub_80A1648(u8 taskId)
+static void sub_80A1648(u8 taskId)
 {
     PlayFanfareByFanfareNum(FANFARE_POKEFLUTE);
     gTasks[taskId].func = sub_80A1674;
 }
 
-void sub_80A1674(u8 taskId)
+static void sub_80A1674(u8 taskId)
 {
     if (WaitFanfare(FALSE))
     {
@@ -408,7 +407,7 @@ void sub_80A1674(u8 taskId)
     }
 }
 
-void sub_80A16D0(u8 taskId)
+static void sub_80A16D0(u8 taskId)
 {
     sub_80A0FBC(taskId);
 }
@@ -464,12 +463,12 @@ void FieldUseFunc_TmCase(u8 taskId)
     }
 }
 
-void InitTMCaseFromBag(void)
+static void InitTMCaseFromBag(void)
 {
     InitTMCase(0, CB2_BagMenuFromStartMenu, 0);
 }
 
-void Task_InitTMCaseFromField(u8 taskId)
+static void Task_InitTMCaseFromField(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -495,12 +494,12 @@ void FieldUseFunc_BerryPouch(u8 taskId)
     }
 }
 
-void InitBerryPouchFromBag(void)
+static void InitBerryPouchFromBag(void)
 {
     InitBerryPouch(BERRYPOUCH_FROMFIELD, CB2_BagMenuFromStartMenu, 0);
 }
 
-void Task_InitBerryPouchFromField(u8 taskId)
+static void Task_InitBerryPouchFromField(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -517,7 +516,7 @@ void BattleUseFunc_BerryPouch(u8 taskId)
     ItemMenu_StartFadeToExitCallback(taskId);
 }
 
-void InitBerryPouchFromBattle(void)
+static void InitBerryPouchFromBattle(void)
 {
     InitBerryPouch(BERRYPOUCH_FROMBATTLE, sub_8107ECC, 0);
 }
@@ -538,12 +537,12 @@ void FieldUseFunc_TeachyTv(u8 taskId)
     }
 }
 
-void InitTeachyTvFromBag(void)
+static void InitTeachyTvFromBag(void)
 {
     InitTeachyTvController(0, CB2_BagMenuFromStartMenu);
 }
 
-void Task_InitTeachyTvFromField(u8 taskId)
+static void Task_InitTeachyTvFromField(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -566,7 +565,7 @@ void FieldUseFunc_SuperRepel(u8 taskId)
         DisplayItemMessageInBag(taskId, 2, gUnknown_841659E, sub_810A1F8);
 }
 
-void sub_80A19E8(u8 taskId)
+static void sub_80A19E8(u8 taskId)
 {
     if (!IsSEPlaying())
     {
@@ -577,7 +576,7 @@ void sub_80A19E8(u8 taskId)
     }
 }
 
-void sub_80A1A44(void)
+static void sub_80A1A44(void)
 {
     RemoveBagItem(gSpecialVar_ItemId, 1);
     sub_8108DC8(ItemId_GetPocket(gSpecialVar_ItemId));
@@ -609,7 +608,7 @@ void FieldUseFunc_BlackFlute(u8 taskId)
     }
 }
 
-void sub_80A1B48(u8 taskId)
+static void sub_80A1B48(u8 taskId)
 {
     if (++gTasks[taskId].data[8] > 7)
     {
@@ -638,7 +637,7 @@ void ItemUseOutOfBattle_EscapeRope(u8 taskId)
         sub_80A1110(taskId, gTasks[taskId].data[3]);
 }
 
-void sub_80A1C08(u8 taskId)
+static void sub_80A1C08(u8 taskId)
 {
     Overworld_ResetStateAfterDigEscRope();
     sub_80A1A44();
@@ -668,12 +667,12 @@ void FieldUseFunc_TownMap(u8 taskId)
     }
 }
 
-void sub_80A1CAC(void)
+static void sub_80A1CAC(void)
 {
     sub_80BFF50(0, CB2_BagMenuFromStartMenu);
 }
 
-void sub_80A1CC0(u8 taskId)
+static void sub_80A1CC0(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -700,12 +699,12 @@ void FieldUseFunc_FameChecker(u8 taskId)
     }
 }
 
-void sub_80A1D58(void)
+static void sub_80A1D58(void)
 {
     UseFameChecker(CB2_BagMenuFromStartMenu);
 }
 
-void sub_80A1D68(u8 taskId)
+static void sub_80A1D68(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -774,7 +773,7 @@ void BattleUseFunc_GuardSpec(u8 taskId)
     }
 }
 
-void Task_BattleUse_StatBooster_DelayAndPrint(u8 taskId)
+static void Task_BattleUse_StatBooster_DelayAndPrint(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -787,7 +786,7 @@ void Task_BattleUse_StatBooster_DelayAndPrint(u8 taskId)
     }
 }
 
-void Task_BattleUse_StatBooster_WaitButton_ReturnToBattle(u8 taskId)
+static void Task_BattleUse_StatBooster_WaitButton_ReturnToBattle(u8 taskId)
 {
     if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
@@ -796,7 +795,7 @@ void Task_BattleUse_StatBooster_WaitButton_ReturnToBattle(u8 taskId)
     }
 }
 
-void ItemUse_SwitchToPartyMenuInBattle(u8 taskId)
+static void ItemUse_SwitchToPartyMenuInBattle(u8 taskId)
 {
     if (GetPocketByItemId(gSpecialVar_ItemId) == POCKET_BERRY_POUCH)
     {
@@ -816,7 +815,7 @@ void BattleUseFunc_Medicine(u8 taskId)
     ItemUse_SwitchToPartyMenuInBattle(taskId);
 }
 
-void sub_80A1FD8(u8 taskId)
+static void sub_80A1FD8(u8 taskId)
 {
     gItemUseCB = ItemUseCB_SacredAsh;
     ItemUse_SwitchToPartyMenuInBattle(taskId);

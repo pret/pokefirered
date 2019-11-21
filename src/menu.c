@@ -815,13 +815,13 @@ static s8 sub_81106F4(void)
         MultichoiceGrid_MoveCursor(0, 1);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (JOY_REPT(DPAD_ANY) == DPAD_LEFT || sub_80BF66C() == 1)
+    else if (JOY_REPT(DPAD_ANY) == DPAD_LEFT || GetLRKeysPressedAndHeld() == 1)
     {
         PlaySE(SE_SELECT);
         MultichoiceGrid_MoveCursor(-1, 0);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (JOY_REPT(DPAD_ANY) == DPAD_RIGHT || sub_80BF66C() == 2)
+    else if (JOY_REPT(DPAD_ANY) == DPAD_RIGHT || GetLRKeysPressedAndHeld() == 2)
     {
         PlaySE(SE_SELECT);
         MultichoiceGrid_MoveCursor(1, 0);
@@ -857,13 +857,13 @@ static s8 sub_81107A0(void)
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (JOY_REPT(DPAD_ANY) == DPAD_LEFT || sub_80BF66C() == 1)
+    else if (JOY_REPT(DPAD_ANY) == DPAD_LEFT || GetLRKeysPressedAndHeld() == 1)
     {
         if (oldPos != MultichoiceGrid_MoveCursorIfValid(-1, 0))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (JOY_REPT(DPAD_ANY) == DPAD_RIGHT || sub_80BF66C() == 2)
+    else if (JOY_REPT(DPAD_ANY) == DPAD_RIGHT || GetLRKeysPressedAndHeld() == 2)
     {
         if (oldPos != MultichoiceGrid_MoveCursorIfValid(1, 0))
             PlaySE(SE_SELECT);

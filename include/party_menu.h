@@ -11,6 +11,7 @@ struct PartyMenu
     TaskFunc task;
     u8 menuType:4;
     u8 layout:2;
+    u8 unk_8_6:2;
     s8 slotId;
     s8 slotId2;
     u8 action;
@@ -39,11 +40,11 @@ void CB2_GiveHoldItem(void);
 u8 GetCursorSelectionMonId(void);
 void ChooseMonForDaycare(void);
 void AnimatePartySlot(u8 monId, u8 a1);
-void DisplayPartyMenuStdMessage(u8);
+void DisplayPartyMenuStdMessage(u32);
 void Task_HandleChooseMonInput(u8 taskId);
 void PartyMenuModifyHP(u8 taskId, u8 a1, s8 a2, s16 amount, TaskFunc followupFunc);
-void GetMonNickname(const struct Pokemon * mon, u8 * dest);
-void DisplayPartyMenuMessage(const u8 * src, u8 a1);
+u8 *GetMonNickname(struct Pokemon *mon, u8 *dest);
+u8 DisplayPartyMenuMessage(const u8 * src, u8 a1);
 bool8 IsPartyMenuTextPrinterActive(void);
 void InitPartyMenu(u8 a, u8 b, u8 c, u8 d, u8 messageId, TaskFunc task, MainCallback callback);
 void sub_81252D0(u8 taskId, TaskFunc followUpFunc);
@@ -69,5 +70,6 @@ void ShowPartyMenuToShowcaseMultiBattleParty(void);
 void SwitchPartyMonSlots(u8 slot, u8 slot2);
 void LoadHeldItemIcons(void);
 void OpenPartyMenuInTutorialBattle(u8 partyAction);
+void ClearSelectedPartyOrder(void);
 
 #endif // GUARD_PARTY_MENU_H

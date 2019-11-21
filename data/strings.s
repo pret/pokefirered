@@ -1259,10 +1259,10 @@ gText_Speed2:: @ 841768D
 gUnknown_8417693:: @ 0x8417693
 	.string "HP$"
 
-gUnknown_8417696:: @ 8417696
+gText_PkmnCantParticipate:: @ 8417696
 	.string "That POKéMON can't participate.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_84176B8:: @ 84176B8
+gText_CancelParticipation:: @ 84176B8
 	.string "Cancel participation?$"
 
 gUnknown_84176CE:: @ 0x84176CE

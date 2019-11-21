@@ -335,6 +335,15 @@ extern const u8 gText_OtherTrainersPkmnCantBeTraded[];
 extern const u8 gText_EggCantBeTradedNow[];
 extern const u8 gText_OtherTrainerCantAcceptPkmn[];
 extern const u8 gText_CantTradeWithTrainer[];
+extern const u8 gUnknown_84176CF[];
+extern const u8 gText_PkmnWasGivenItem[];
+extern const u8 gText_ReceivedItemFromPkmn[];
+extern const u8 gText_PkmnAlreadyHoldingItemSwitch[];
+extern const u8 gText_SwitchedPkmnItem[];
+extern const u8 gText_BagFullCouldNotRemoveItem[];
+extern const u8 gText_PkmnCantParticipate[];
+extern const u8 gText_CancelParticipation[];
+extern const u8 gUnknown_8417494[];
 
 // credits
 extern const u8 gString_Dummy[];

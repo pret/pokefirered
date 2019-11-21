@@ -595,7 +595,7 @@ static void TMCase_MoveCursor_UpdatePrintedDescription(s32 itemIndex)
 
 static void FillBG2RowWithPalette_2timesNplus1(s32 a0)
 {
-    SetBgRectPal(2, 0, 12, 30, 8, 2 * a0 + 1);
+    SetBgTilemapPalette(2, 0, 12, 30, 8, 2 * a0 + 1);
     ScheduleBgCopyTilemapToVram(2);
 }
 

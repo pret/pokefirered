@@ -23,11 +23,11 @@ static void (*sSecondaryTilesetAnimCallback)(u16);
 static void _InitPrimaryTilesetAnimation(void);
 static void _InitSecondaryTilesetAnimation(void);
 
-static const u16 gUnknown_83A73E0[] = INCBIN_U16("graphics/tileset_anims/aim_0_0.bin");
-static const u16 gUnknown_83A7460[] = INCBIN_U16("graphics/tileset_anims/aim_0_1.bin");
-static const u16 gUnknown_83A74E0[] = INCBIN_U16("graphics/tileset_anims/aim_0_2.bin");
-static const u16 gUnknown_83A7560[] = INCBIN_U16("graphics/tileset_anims/aim_0_3.bin");
-static const u16 gUnknown_83A75E0[] = INCBIN_U16("graphics/tileset_anims/aim_0_4.bin");
+static const u16 gUnknown_83A73E0[] = INCBIN_U16("graphics/tileset_anims/anim_0_0.bin");
+static const u16 gUnknown_83A7460[] = INCBIN_U16("graphics/tileset_anims/anim_0_1.bin");
+static const u16 gUnknown_83A74E0[] = INCBIN_U16("graphics/tileset_anims/anim_0_2.bin");
+static const u16 gUnknown_83A7560[] = INCBIN_U16("graphics/tileset_anims/anim_0_3.bin");
+static const u16 gUnknown_83A75E0[] = INCBIN_U16("graphics/tileset_anims/anim_0_4.bin");
 
 static const u16 *const gUnknown_83A7660[] = {
     gUnknown_83A73E0,
@@ -37,14 +37,14 @@ static const u16 *const gUnknown_83A7660[] = {
     gUnknown_83A75E0
 };
 
-static const u16 gUnknown_83A7674[] = INCBIN_U16("graphics/tileset_anims/aim_1_0.bin");
-static const u16 gUnknown_83A7C74[] = INCBIN_U16("graphics/tileset_anims/aim_1_1.bin");
-static const u16 gUnknown_83A8274[] = INCBIN_U16("graphics/tileset_anims/aim_1_2.bin");
-static const u16 gUnknown_83A8874[] = INCBIN_U16("graphics/tileset_anims/aim_1_3.bin");
-static const u16 gUnknown_83A8E74[] = INCBIN_U16("graphics/tileset_anims/aim_1_4.bin");
-static const u16 gUnknown_83A9474[] = INCBIN_U16("graphics/tileset_anims/aim_1_5.bin");
-static const u16 gUnknown_83A9A74[] = INCBIN_U16("graphics/tileset_anims/aim_1_6.bin");
-static const u16 gUnknown_83AA074[] = INCBIN_U16("graphics/tileset_anims/aim_1_7.bin");
+static const u16 gUnknown_83A7674[] = INCBIN_U16("graphics/tileset_anims/anim_1_0.bin");
+static const u16 gUnknown_83A7C74[] = INCBIN_U16("graphics/tileset_anims/anim_1_1.bin");
+static const u16 gUnknown_83A8274[] = INCBIN_U16("graphics/tileset_anims/anim_1_2.bin");
+static const u16 gUnknown_83A8874[] = INCBIN_U16("graphics/tileset_anims/anim_1_3.bin");
+static const u16 gUnknown_83A8E74[] = INCBIN_U16("graphics/tileset_anims/anim_1_4.bin");
+static const u16 gUnknown_83A9474[] = INCBIN_U16("graphics/tileset_anims/anim_1_5.bin");
+static const u16 gUnknown_83A9A74[] = INCBIN_U16("graphics/tileset_anims/anim_1_6.bin");
+static const u16 gUnknown_83AA074[] = INCBIN_U16("graphics/tileset_anims/anim_1_7.bin");
 
 static const u16 *const gUnknown_83AA654[] = {
     gUnknown_83A7674,
@@ -57,14 +57,14 @@ static const u16 *const gUnknown_83AA654[] = {
     gUnknown_83AA074
 };
 
-static const u16 gUnknown_83AA674[] = INCBIN_U16("graphics/tileset_anims/aim_2_0.bin");
-static const u16 gUnknown_83AA8B4[] = INCBIN_U16("graphics/tileset_anims/aim_2_1.bin");
-static const u16 gUnknown_83AAAF4[] = INCBIN_U16("graphics/tileset_anims/aim_2_2.bin");
-static const u16 gUnknown_83AAD34[] = INCBIN_U16("graphics/tileset_anims/aim_2_3.bin");
-static const u16 gUnknown_83AAF74[] = INCBIN_U16("graphics/tileset_anims/aim_2_4.bin");
-static const u16 gUnknown_83AB1B4[] = INCBIN_U16("graphics/tileset_anims/aim_2_5.bin");
-static const u16 gUnknown_83AB3F4[] = INCBIN_U16("graphics/tileset_anims/aim_2_6.bin");
-static const u16 gUnknown_83AB634[] = INCBIN_U16("graphics/tileset_anims/aim_2_7.bin");
+static const u16 gUnknown_83AA674[] = INCBIN_U16("graphics/tileset_anims/anim_2_0.bin");
+static const u16 gUnknown_83AA8B4[] = INCBIN_U16("graphics/tileset_anims/anim_2_1.bin");
+static const u16 gUnknown_83AAAF4[] = INCBIN_U16("graphics/tileset_anims/anim_2_2.bin");
+static const u16 gUnknown_83AAD34[] = INCBIN_U16("graphics/tileset_anims/anim_2_3.bin");
+static const u16 gUnknown_83AAF74[] = INCBIN_U16("graphics/tileset_anims/anim_2_4.bin");
+static const u16 gUnknown_83AB1B4[] = INCBIN_U16("graphics/tileset_anims/anim_2_5.bin");
+static const u16 gUnknown_83AB3F4[] = INCBIN_U16("graphics/tileset_anims/anim_2_6.bin");
+static const u16 gUnknown_83AB634[] = INCBIN_U16("graphics/tileset_anims/anim_2_7.bin");
 
 static const u16 *const gUnknown_83AB874[] = {
     gUnknown_83AA674,
@@ -77,11 +77,11 @@ static const u16 *const gUnknown_83AB874[] = {
     gUnknown_83AB634
 };
 
-static const u16 gUnknown_83AB894[] = INCBIN_U16("graphics/tileset_anims/aim_3_0.bin");
-static const u16 gUnknown_83AB994[] = INCBIN_U16("graphics/tileset_anims/aim_3_1.bin");
-static const u16 gUnknown_83ABA94[] = INCBIN_U16("graphics/tileset_anims/aim_3_2.bin");
-static const u16 gUnknown_83ABB94[] = INCBIN_U16("graphics/tileset_anims/aim_3_3.bin");
-static const u16 gUnknown_83ABC94[] = INCBIN_U16("graphics/tileset_anims/aim_3_4.bin");
+static const u16 gUnknown_83AB894[] = INCBIN_U16("graphics/tileset_anims/anim_3_0.bin");
+static const u16 gUnknown_83AB994[] = INCBIN_U16("graphics/tileset_anims/anim_3_1.bin");
+static const u16 gUnknown_83ABA94[] = INCBIN_U16("graphics/tileset_anims/anim_3_2.bin");
+static const u16 gUnknown_83ABB94[] = INCBIN_U16("graphics/tileset_anims/anim_3_3.bin");
+static const u16 gUnknown_83ABC94[] = INCBIN_U16("graphics/tileset_anims/anim_3_4.bin");
 static const u16 gUnknown_83ABD94[16] = {};
 
 static const u16 *const gUnknown_83ABDB4[] = {
@@ -92,10 +92,10 @@ static const u16 *const gUnknown_83ABDB4[] = {
     gUnknown_83ABC94
 };
 
-static const u16 gUnknown_83ABDC8[] = INCBIN_U16("graphics/tileset_anims/aim_4_0.bin");
-static const u16 gUnknown_83ABEC8[] = INCBIN_U16("graphics/tileset_anims/aim_4_1.bin");
-static const u16 gUnknown_83ABFC8[] = INCBIN_U16("graphics/tileset_anims/aim_4_2.bin");
-static const u16 gUnknown_83AC0C8[] = INCBIN_U16("graphics/tileset_anims/aim_4_3.bin");
+static const u16 gUnknown_83ABDC8[] = INCBIN_U16("graphics/tileset_anims/anim_4_0.bin");
+static const u16 gUnknown_83ABEC8[] = INCBIN_U16("graphics/tileset_anims/anim_4_1.bin");
+static const u16 gUnknown_83ABFC8[] = INCBIN_U16("graphics/tileset_anims/anim_4_2.bin");
+static const u16 gUnknown_83AC0C8[] = INCBIN_U16("graphics/tileset_anims/anim_4_3.bin");
 static const u16 gUnknown_83AC1C8[0x10] = {};
 
 static const u16 *const gUnknown_83AC1E8[] = {
@@ -105,10 +105,10 @@ static const u16 *const gUnknown_83AC1E8[] = {
     gUnknown_83AC0C8
 };
 
-static const u16 gUnknown_83AC1F8[] = INCBIN_U16("graphics/tileset_anims/aim_5_0.bin");
-static const u16 gUnknown_83AC2F8[] = INCBIN_U16("graphics/tileset_anims/aim_5_1.bin");
-static const u16 gUnknown_83AC3F8[] = INCBIN_U16("graphics/tileset_anims/aim_5_2.bin");
-static const u16 gUnknown_83AC4F8[] = INCBIN_U16("graphics/tileset_anims/aim_5_3.bin");
+static const u16 gUnknown_83AC1F8[] = INCBIN_U16("graphics/tileset_anims/anim_5_0.bin");
+static const u16 gUnknown_83AC2F8[] = INCBIN_U16("graphics/tileset_anims/anim_5_1.bin");
+static const u16 gUnknown_83AC3F8[] = INCBIN_U16("graphics/tileset_anims/anim_5_2.bin");
+static const u16 gUnknown_83AC4F8[] = INCBIN_U16("graphics/tileset_anims/anim_5_3.bin");
 
 static const u16 *const gUnknown_83AC5F8[] = {
     gUnknown_83AC1F8,
@@ -117,17 +117,17 @@ static const u16 *const gUnknown_83AC5F8[] = {
     gUnknown_83AC4F8
 };
 
-static const u16 gUnknown_83AC608[] = INCBIN_U16("graphics/tileset_anims/aim_6_0.bin");
-static const u16 gUnknown_83AC6E8[] = INCBIN_U16("graphics/tileset_anims/aim_6_1.bin");
+static const u16 gUnknown_83AC608[] = INCBIN_U16("graphics/tileset_anims/anim_6_0.bin");
+static const u16 gUnknown_83AC6E8[] = INCBIN_U16("graphics/tileset_anims/anim_6_1.bin");
 
 static const u16 *const gUnknown_83AC7C8[] = {
     gUnknown_83AC608,
     gUnknown_83AC6E8
 };
 
-static const u16 gUnknown_83AC7D0[] = INCBIN_U16("graphics/tileset_anims/aim_7_0.bin");
-static const u16 gUnknown_83AC850[] = INCBIN_U16("graphics/tileset_anims/aim_7_1.bin");
-static const u16 gUnknown_83AC8D0[] = INCBIN_U16("graphics/tileset_anims/aim_7_2.bin");
+static const u16 gUnknown_83AC7D0[] = INCBIN_U16("graphics/tileset_anims/anim_7_0.bin");
+static const u16 gUnknown_83AC850[] = INCBIN_U16("graphics/tileset_anims/anim_7_1.bin");
+static const u16 gUnknown_83AC8D0[] = INCBIN_U16("graphics/tileset_anims/anim_7_2.bin");
 
 static const u16 *const gUnknown_83AC950[] = {
     gUnknown_83AC7D0,

@@ -40,17 +40,20 @@ static void sub_809AC10(u8 taskId);
 extern const struct WindowTemplate gUnknown_83DF0BC[];	//sShopMenuWindowTemplates
 extern const struct MenuAction gUnknown_83DF09C[];	//sShopMenuActions_BuySellQuit
 
+extern void sub_809AC5C(u8 taskId);
+extern void sub_809AC98(u8 taskId);
 extern void sub_809ACF8(u8 taskId);
 
 //Data Definitions
-/*
 static const struct MenuAction sShopMenuActions_BuySellQuit[] =
 {
-    { gText_ShopBuy, {.void_u8=Task_HandleShopMenuBuy} },
-    { gText_ShopSell, {.void_u8=Task_HandleShopMenuSell} },
-    { gText_ShopQuit, {.void_u8=Task_HandleShopMenuQuit} }
+	{gUnknown_8416738, {.void_u8 = sub_809AC5C}},
+	{gUnknown_841673C, {.void_u8 = sub_809AC98}},
+	{gUnknown_8416741, {.void_u8 = sub_809ACF8}}
+    //{ gText_ShopBuy, {.void_u8=Task_HandleShopMenuBuy} },
+    //{ gText_ShopSell, {.void_u8=Task_HandleShopMenuSell} },
+    //{ gText_ShopQuit, {.void_u8=Task_HandleShopMenuQuit} }
 };
-*/
 
 
 // Functions
@@ -130,14 +133,11 @@ void sub_809ABD8(const u16 *items)
     u16 item;
     gShopData.itemList = items;
     gShopData.itemCount = 0;
-
-    //item = items[0];
-    if (items[0] == 0)
-        return;
-    do {
-        gShopData.itemCount++;
-        item = items[gShopData.itemCount];
-    } while (item);
+	
+	while (1)
+	{
+		item = items[++gShopData.itemCount];
+	}
 }
 /*
 #else
@@ -165,6 +165,6 @@ static void sub_809AC10(u8 taskId)
 		sub_809ACF8(taskId);
 		return;
 	}
-	//gUnknown_83DF09C.func.u8_void(Menu_GetCursorPos());
+	gUnknown_83DF09C.func.void_u8(Menu_GetCursorPos());
 }
 

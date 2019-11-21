@@ -763,6 +763,31 @@ extern const u8 gText_DecimalPoint[];
 // map_name_popup
 extern const u8 gUnknown_841D18D[];
 
+// option menu
+extern const u8 gText_TextSpeed[];
+extern const u8 gText_BattleScene[];
+extern const u8 gText_BattleStyle[];
+extern const u8 gText_Sound[];
+extern const u8 gText_ButtonMode[];
+extern const u8 gText_Frame[];
+extern const u8 gText_OptionMenuCancel[];
+extern const u8 gText_TextSpeedSlow[];
+extern const u8 gText_TextSpeedMid[];
+extern const u8 gText_TextSpeedFast[];
+extern const u8 gText_BattleSceneOn[];
+extern const u8 gText_BattleSceneOff[];
+extern const u8 gText_BattleStyleShift[];
+extern const u8 gText_BattleStyleSet[];
+extern const u8 gText_SoundMono[];
+extern const u8 gText_SoundStereo[];
+extern const u8 gText_ButtonTypeHelp[];
+extern const u8 gText_ButtonTypeLR[];
+extern const u8 gText_ButtonTypeLEqualsA[];
+extern const u8 gText_MenuOption[];
+extern const u8 gText_FrameType[];
+extern const u8 gTextJP_Type[];
+extern const u8 gText_PickSwitchCancel[];
+
 // evolution_scene
 extern const u8 gText_PkmnIsEvolving[];
 extern const u8 gText_CongratsPkmnEvolved[];

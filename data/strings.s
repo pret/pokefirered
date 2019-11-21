@@ -2904,73 +2904,73 @@ gUnknown_8419D89:: @ 8419D89
 	.string "Waiting for the other TRAINER to\n"
 	.string "finish reading your TRAINER CARD.$"
 
-gUnknown_8419DCC:: @ 8419DCC
+gText_MenuOption:: @ 8419DCC
 	.string "OPTION$"
 
-gUnknown_8419DD3:: @ 0x8419DD3
+gText_TextSpeed:: @ 0x8419DD3
 	.string "TEXT SPEED$"
 
-gUnknown_8419DDE:: @ 0x8419DDE
+gText_BattleScene:: @ 0x8419DDE
 	.string "BATTLE SCENE$"
 
-gUnknown_8419DEB:: @ 0x8419DEB
+gText_BattleStyle:: @ 0x8419DEB
 	.string "BATTLE STYLE$"
 
-gUnknown_8419DF8:: @ 0x8419DF8
+gText_Sound:: @ 0x8419DF8
 	.string "SOUND$"
 
-gUnknown_8419DFE:: @ 0x8419DFE
+gText_ButtonMode:: @ 0x8419DFE
 	.string "BUTTON MODE$"
 
-gUnknown_8419E0A:: @ 0x8419E0A
+gText_Frame:: @ 0x8419E0A
 	.string "FRAME$"
 
-gUnknown_8419E10:: @ 0x8419E10
+gText_OptionMenuCancel:: @ 0x8419E10
 	.string "CANCEL$"
 
-gUnknown_8419E17:: @ 0x8419E17
+gText_TextSpeedSlow:: @ 0x8419E17
 	.string "SLOW$"
 
-gUnknown_8419E1C:: @ 0x8419E1C
+gText_TextSpeedMid:: @ 0x8419E1C
 	.string "MID$"
 
-gUnknown_8419E20:: @ 0x8419E20
+gText_TextSpeedFast:: @ 0x8419E20
 	.string "FAST$"
 
-gUnknown_8419E25:: @ 0x8419E25
+gText_BattleSceneOn:: @ 0x8419E25
 	.string "ON$"
 
-gUnknown_8419E28:: @ 0x8419E28
+gText_BattleSceneOff:: @ 0x8419E28
 	.string "OFF$"
 
-gUnknown_8419E2C:: @ 0x8419E2C
+gText_BattleStyleShift:: @ 0x8419E2C
 	.string "SHIFT$"
 
-gUnknown_8419E32:: @ 0x8419E32
+gText_BattleStyleSet:: @ 0x8419E32
 	.string "SET$"
 
-gUnknown_8419E36:: @ 0x8419E36
+gText_SoundMono:: @ 0x8419E36
 	.string "MONO$"
 
-gUnknown_8419E3B:: @ 0x8419E3B
+gText_SoundStereo:: @ 0x8419E3B
 	.string "STEREO$"
 
-gUnknown_8419E42:: @ 0x8419E42
+gTextJP_Type:: @ 0x8419E42
 	.string "タイプ$"
 
-gUnknown_8419E46:: @ 0x8419E46
+gText_ButtonTypeHelp:: @ 0x8419E46
 	.string "HELP$"
 
-gUnknown_8419E4B:: @ 0x8419E4B
-	.string "LゅA$"
+gText_ButtonTypeLEqualsA:: @ 0x8419E4B
+	.string "L=A$"
 
-gUnknown_8419E4F:: @ 0x8419E4F
+gText_ButtonTypeLR:: @ 0x8419E4F
 	.string "LR$"
 
-gUnknown_8419E52:: @ 8419E52
+gText_FrameType:: @ 8419E52
 	.string "TYPE$"
 
-gUnknown_8419E57:: @ 8419E57
+gText_PickSwitchCancel:: @ 8419E57
 	.string "{DPAD_UPDOWN}PICK {DPAD_LEFTRIGHT}SWITCH {A_BUTTON}{B_BUTTON}CANCEL$"
 
 gUnknown_8419E72:: @ 0x8419E72

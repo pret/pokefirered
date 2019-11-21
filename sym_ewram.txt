@@ -226,8 +226,7 @@ gFieldEffectArguments: @ 20386E0
 	.include "src/scanline_effect.o"
 
 	.align 2
-gUnknown_2039620: @ 2039620
-	.space 0x4
+	.include "src/option_menu.o"
 
 gTrainerCards: @ 2039624
 	.space 0x180

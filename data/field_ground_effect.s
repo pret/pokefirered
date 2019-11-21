@@ -31,4 +31,4 @@ gUnknown_83A70AC:: @ 83A70AC
 	.incbin "baserom.gba", 0x3A70AC, 0x10
 
 gUnknown_83A70BC:: @ 83A70BC
-	.incbin "baserom.gba", 0x3A70BC, 0xE0
+	.incbin "baserom.gba", 0x3A70BC, 0x50

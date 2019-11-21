@@ -397,7 +397,7 @@ static void EvoTask_PostEvoSparklesSet2Init(u8 taskId)
 {
     SetEvoSparklesMatrices();
     gTasks[taskId].data[15] = 0;
-    sub_80D0474();
+    IsMovingBackgroundTaskRunning();
     CpuCopy16(&gPlttBufferFaded[32], &gPlttBufferUnfaded[32], 96);
     BeginNormalPaletteFade(0xFFF90F1C, 0, 0, 16, RGB_WHITE);
     gTasks[taskId].func = EvoTask_CreatePostEvoSparklesSet2;
@@ -448,7 +448,7 @@ static void EvoTask_PostEvoSparklesSet2TradeInit(u8 taskId)
 {
     SetEvoSparklesMatrices();
     gTasks[taskId].data[15] = 0;
-    sub_80D0474();
+    IsMovingBackgroundTaskRunning();
     CpuCopy16(&gPlttBufferFaded[32], &gPlttBufferUnfaded[32], 96);
     BeginNormalPaletteFade(0xFFF90F00, 0, 0, 16, RGB_WHITE);
     gTasks[taskId].func = EvoTask_CreatePostEvoSparklesSet2Trade;

@@ -83,4 +83,8 @@
 // Shiny odds
 #define SHINY_ODDS 8 // Actual probability is SHINY_ODDS/65536
 
+// Learning moves
+#define MON_ALREADY_KNOWS_MOVE 0xFFFE
+#define MON_HAS_MAX_MOVES      0xFFFF
+
 #endif // GUARD_CONSTANTS_POKEMON_H

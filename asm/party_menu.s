@@ -12790,7 +12790,7 @@ sub_8124EFC: @ 8124EFC
 	muls r5, r0
 	ldr r0, _08124F8C @ =gPlayerParty
 	adds r5, r0
-	bl sub_8138B2C
+	bl GetMoveSlotToReplace
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -14661,7 +14661,7 @@ _08125E80: .4byte sub_8125E84
 sub_8125E84: @ 8125E84
 	push {r4,r5,lr}
 	sub sp, 0xC
-	bl sub_8138B2C
+	bl GetMoveSlotToReplace
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldr r4, _08125ED0 @ =gUnknown_203B0A0
@@ -14735,7 +14735,7 @@ sub_8125F14: @ 8125F14
 	ands r0, r1
 	cmp r0, 0
 	bne _08125F46
-	bl sub_8138B2C
+	bl GetMoveSlotToReplace
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4
@@ -14783,7 +14783,7 @@ sub_8125F5C: @ 8125F5C
 	muls r6, r0
 	ldr r0, _08125FE8 @ =gPlayerParty
 	adds r6, r0
-	bl sub_8138B2C
+	bl GetMoveSlotToReplace
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
@@ -14848,7 +14848,7 @@ sub_8125FFC: @ 8125FFC
 	muls r5, r0
 	ldr r0, _08126060 @ =gPlayerParty
 	adds r5, r0
-	bl sub_8138B2C
+	bl GetMoveSlotToReplace
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -14908,14 +14908,14 @@ sub_812607C: @ 812607C
 	muls r4, r0
 	ldr r0, _081260D4 @ =gPlayerParty
 	adds r4, r0
-	bl sub_8138B2C
+	bl GetMoveSlotToReplace
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
 	bl RemoveMonPPBonus
 	ldrh r5, [r5, 0xE]
-	bl sub_8138B2C
+	bl GetMoveSlotToReplace
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24

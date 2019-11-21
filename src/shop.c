@@ -4,6 +4,9 @@
 #include "window.h"
 #include "field_specials.h"
 #include "task.h"
+#include "item.h"
+#include "main.h"
+#include "sound.h"
 
 // enums
 // RAM symbols
@@ -30,15 +33,24 @@ EWRAM_DATA struct ShopData gShopData = {0};
 EWRAM_DATA u8 gUnknown_2039950 = 0;
 
 //Function Declarations
-//static u8 sub_809AB7C(u8 a0);
-
+static u8 sub_809AB7C(bool32 a0);
+static void sub_809AC10(u8 taskId);
 
 // external defines
 extern const struct WindowTemplate gUnknown_83DF0BC[];	//sShopMenuWindowTemplates
 extern const struct MenuAction gUnknown_83DF09C[];	//sShopMenuActions_BuySellQuit
 
-extern u8 sub_809AB7C(u8 a);
-extern void sub_809AC10(u8 taskId);
+extern void sub_809ACF8(u8 taskId);
+
+//Data Definitions
+/*
+static const struct MenuAction sShopMenuActions_BuySellQuit[] =
+{
+    { gText_ShopBuy, {.void_u8=Task_HandleShopMenuBuy} },
+    { gText_ShopSell, {.void_u8=Task_HandleShopMenuSell} },
+    { gText_ShopQuit, {.void_u8=Task_HandleShopMenuQuit} }
+};
+*/
 
 
 // Functions
@@ -60,32 +72,99 @@ u8 sub_809AAB0(u8 a0)
 	return CreateTask(sub_809AC10, 8);
 }
 
+static u8 sub_809AB7C(u32 a0)
+{	
+	u16 retVal, i;
+	if (a0)
+        return (u8)a0;
+    goto MAIN;
+    RETURN_1:
+    return 1;
+
+	MAIN:
+    i = 0;
+    if (i >= gShopData.itemCount)
+        goto RETURN_0;
+    else if (gShopData.itemList[0] == 0)
+        goto RETURN_0;
+
+    while (gShopData.itemList[i] != 0)
+    {
+        if (ItemId_GetPocket(gShopData.itemList[i]) == POCKET_TM_CASE)
+            goto RETURN_1;
+        ++i;
+        if (i >= gShopData.itemCount)
+            goto RETURN_0;
+        else if (gShopData.itemList[i] == 0)
+            goto RETURN_0;
+    }
+    RETURN_0:
+    return 0;
+}
+
 /*
-static u8 sub_809AB7C(u8 a0)
+void (const u16 *list)	//SetShopItemsForSale
 {
-	u16 pocket;
+	u16 i;
+	gShopData.itemList = list;
+	gShopData.itemCount = 0;
+	if (list[0] == 0)
+		return;
 	
-	if (a0 != 0)
-		return a0;
-	else if (a0 >= gShopData.itemCount)
-		return FALSE;
-	else if (gShopData.itemList[0] == 0)
-		return FALSE;
-	else
+	i = 0;
+	while (list[i] != 0)
 	{
-		while (ItemId_GetPocket(gShopData.itemCount[i]) != 0)
-		{
-			if (ItemId_GetPocket(gShopData.itemCount[i] == POCKET_TM_CASE)
-				return 1;
-			
-		}
+		gShopData.itemCount++;
+		if (list[i] == 0)
+			return;
+		i++;
 	}
 }
 */
 
+//#ifdef NONMATCHING
+// WHAT THE FUCK IS UP WITH THIS FUNCTION
+void sub_809ABD8(const u16 *items)
+{    
+    //const u16* mart = items;
+    u16 item;
+    gShopData.itemList = items;
+    gShopData.itemCount = 0;
 
+    //item = items[0];
+    if (items[0] == 0)
+        return;
+    do {
+        gShopData.itemCount++;
+        item = items[gShopData.itemCount];
+    } while (item);
+}
+/*
+#else
+NAKED
+void sub_809ABD8(const u16 *items)
+	asm_unified("\t
+*/
 
+//SetShopMenuCallback
+void sub_809AC04(MainCallback callback)
+{
+	gShopData.callback = callback;
+}
 
-
-
+//Task_ShopMenu
+static void sub_809AC10(u8 taskId)
+{
+	s8 a0 = Menu_ProcessInputNoWrapAround();
+	if (a0 == -2)
+		return;
+	
+	if (a0 == -1)
+	{
+		PlaySE(5);
+		sub_809ACF8(taskId);
+		return;
+	}
+	//gUnknown_83DF09C.func.u8_void(Menu_GetCursorPos());
+}
 

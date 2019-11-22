@@ -643,7 +643,7 @@ gUnknown_203B164: @ 203B164
 gUnknown_203B168: @ 203B168
 	.space 0x4
 
-gUnknown_203B16C: @ 203B16C
+gLastViewedMonIndex: @ 203B16C
 	.space 0x1
 
 gUnknown_203B16D: @ 203B16D

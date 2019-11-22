@@ -2053,9 +2053,9 @@ void sub_804CF14(void)
         }
 
         if (sTradeMenuResourcesPtr->tradeMenuCursorPosition < 6)
-            sTradeMenuResourcesPtr->tradeMenuCursorPosition = sub_8138B20();
+            sTradeMenuResourcesPtr->tradeMenuCursorPosition = GetLastViewedMonIndex();
         else
-            sTradeMenuResourcesPtr->tradeMenuCursorPosition = sub_8138B20() + 6;
+            sTradeMenuResourcesPtr->tradeMenuCursorPosition = GetLastViewedMonIndex() + 6;
 
         sTradeMenuResourcesPtr->tradeMenuCursorSpriteIdx = CreateSprite(&sSpriteTemplate_TradeButtons, sTradeMonSpriteCoords[sTradeMenuResourcesPtr->tradeMenuCursorPosition][0] * 8 + 32, sTradeMonSpriteCoords[sTradeMenuResourcesPtr->tradeMenuCursorPosition][1] * 8, 2);
         gMain.state = 16;
@@ -2633,14 +2633,14 @@ void sub_804CF14(void)
                 "\tldrb r0, [r0]\n"
                 "\tcmp r0, 0x5\n"
                 "\tbhi _0804D3B8\n"
-                "\tbl sub_8138B20\n"
+                "\tbl GetLastViewedMonIndex\n"
                 "\tldr r1, [r4]\n"
                 "\tb _0804D3C0\n"
                 "\t.align 2, 0\n"
                 "_0804D3B0: .4byte sSpriteTemplate_Text\n"
                 "_0804D3B4: .4byte sTradeMenuResourcesPtr\n"
                 "_0804D3B8:\n"
-                "\tbl sub_8138B20\n"
+                "\tbl GetLastViewedMonIndex\n"
                 "\tldr r1, [r4]\n"
                 "\tadds r0, 0x6\n"
                 "_0804D3C0:\n"
@@ -4243,7 +4243,7 @@ static void sub_804F964(void)
     {
         for (j = 0; j < sTradeMenuResourcesPtr->partyCounts[i]; j++)
         {
-            MonIcon_SetAnim(&gSprites[sTradeMenuResourcesPtr->partyIcons[i][j]], 4 - sTradeMenuResourcesPtr->unk_5D[i][j]);
+            SetPartyHPBarSprite(&gSprites[sTradeMenuResourcesPtr->partyIcons[i][j]], 4 - sTradeMenuResourcesPtr->unk_5D[i][j]);
         }
     }
 }

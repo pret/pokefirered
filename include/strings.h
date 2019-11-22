@@ -344,6 +344,12 @@ extern const u8 gText_BagFullCouldNotRemoveItem[];
 extern const u8 gText_PkmnCantParticipate[];
 extern const u8 gText_CancelParticipation[];
 extern const u8 gUnknown_8417494[];
+extern const u8 gMenuText_Confirm[];
+extern const u8 gText_Lv[];
+extern const u8 gText_MaleSymbol[];
+extern const u8 gText_FemaleSymbol[];
+extern const u8 gText_Slash[];
+extern const u8 gUnknown_8417457[];
 
 // credits
 extern const u8 gString_Dummy[];

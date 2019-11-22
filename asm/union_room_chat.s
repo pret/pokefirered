@@ -5660,7 +5660,7 @@ sub_812AF8C: @ 812AF8C
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 2
-	ldr r0, _0812AFB8 @ =gUnknown_845AC16
+	ldr r0, _0812AFB8 @ =gUnknown_845AC14 + 2
 	adds r4, r0
 	movs r0, 0
 	bl IndexOfSpritePaletteTag
@@ -5677,7 +5677,7 @@ sub_812AF8C: @ 812AF8C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0812AFB8: .4byte gUnknown_845AC16
+_0812AFB8: .4byte gUnknown_845AC14 + 2
 _0812AFBC: .4byte 0x01010000
 	thumb_func_end sub_812AF8C
 

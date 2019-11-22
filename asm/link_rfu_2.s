@@ -2308,7 +2308,7 @@ sub_80F9828: @ 80F9828
 	cmp r0, 0
 	beq _080F983E
 	ldr r0, _080F984C @ =gUnknown_843ED94	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/rfu.c"
-	ldr r1, _080F9850 @ =0x000005c1
+	ldr r1, _080F9850 @ =0x000005c1 // 1473
 	ldr r2, _080F9854 @ =gUnknown_843EDC4	"Rfu.RfuFunc == NULL"
 	movs r3, 0x1
 	bl AGBAssert
@@ -3137,7 +3137,7 @@ Rfu_InitBlockSend: @ 80F9E60
 	cmp r6, 0xFC
 	bls _080F9E7C
 	ldr r0, _080F9EA8 @ =gUnknown_843ED94	"C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/rfu.c"
-	ldr r1, _080F9EAC @ =0x00000701
+	ldr r1, _080F9EAC @ =0x00000701 // 1793
 	ldr r2, _080F9EB0 @ =gUnknown_843EDD8	"size<=252"
 	movs r3, 0x1
 	bl AGBAssert

@@ -218,38 +218,103 @@ gUnknown_847A913::
 
 gUnknown_847A934::
 	.string "{CLEAR 11}T{CLEAR 6}U{CLEAR 6}V{CLEAR 26}W{CLEAR 6}X{CLEAR 6}Y{CLEAR 6}Z{CLEAR 26} $"
+
+gUnknown_847A955::
 	.string "{CLEAR 11}a{CLEAR 6}b{CLEAR 6}c{CLEAR 26}d{CLEAR 6}e{CLEAR 6}f{CLEAR 6} {CLEAR 26}.$"
+
+gUnknown_847A976::
 	.string "{CLEAR 11}g{CLEAR 6}h{CLEAR 7}i{CLEAR 27}j{CLEAR 6}k{CLEAR 6}l{CLEAR 7} {CLEAR 26},$"
+
+gUnknown_847A997::
 	.string "{CLEAR 11}m{CLEAR 6}n{CLEAR 7}o{CLEAR 26}p{CLEAR 6}q{CLEAR 7}r{CLEAR 6}s{CLEAR 27} $"
+
+gUnknown_847A9B8::
 	.string "{CLEAR 12}t{CLEAR 6}u{CLEAR 6}v{CLEAR 26}w{CLEAR 6}x{CLEAR 6}y{CLEAR 6}z{CLEAR 26} $"
+
+gUnknown_847A9D9::
 	.string "{CLEAR 11}A{CLEAR 6}B{CLEAR 6}C{CLEAR 26}D{CLEAR 6}E{CLEAR 6}F{CLEAR 6} {CLEAR 26}.$"
+
+gUnknown_847A9FA::
 	.string "{CLEAR 11}G{CLEAR 6}H{CLEAR 6}I{CLEAR 26}J{CLEAR 6}K{CLEAR 6}L{CLEAR 6} {CLEAR 26},$"
+
+gUnknown_847AA1B::
 	.string "{CLEAR 11}M{CLEAR 6}N{CLEAR 6}O{CLEAR 26}P{CLEAR 6}Q{CLEAR 6}R{CLEAR 6}S{CLEAR 26} $"
+
+gUnknown_847AA3C::
 	.string "{CLEAR 11}T{CLEAR 6}U{CLEAR 6}V{CLEAR 26}W{CLEAR 6}X{CLEAR 6}Y{CLEAR 6}Z{CLEAR 26} $"
+
+gUnknown_847AA5D::
 	.string "{CLEAR 11}0{CLEAR 16}1{CLEAR 16}2{CLEAR 16}3{CLEAR 16}4{CLEAR 16} $"
+
+gUnknown_847AA76::
 	.string "{CLEAR 11}5{CLEAR 16}6{CLEAR 16}7{CLEAR 16}8{CLEAR 16}9{CLEAR 16} $"
+
+gUnknown_847AA8F::
 	.string "{CLEAR 11}!{CLEAR 16}?{CLEAR 16}♂{CLEAR 16}♀{CLEAR 16}/{CLEAR 16}-$"
+
+gUnknown_847AAA8::
 	.string "{CLEAR 11}…{CLEAR 16}“{CLEAR 16}”{CLEAR 18}‘{CLEAR 18}'{CLEAR 18} $"
+
+gUnknown_847AAC1::
 	.string "ABCDE$"
+
+gUnknown_847AAC7::
 	.string "FGHIJ$"
+
+gUnknown_847AACD::
 	.string "KLMNO$"
+
+gUnknown_847AAD3::
 	.string "PQRST$"
+
+gUnknown_847AAD9::
 	.string "UVWXY$"
+
+gUnknown_847AADF::
 	.string "Z    $"
+
+gUnknown_847AAE5::
 	.string "01234$"
+
+gUnknown_847AAEB::
 	.string "56789$"
+
+gUnknown_847AAF1::
 	.string ".,!? $"
+
+gUnknown_847AAF7::
 	.string "-/&… $"
+
+gUnknown_847AAFD::
 	.string "abcde$"
+
+gUnknown_847AB03::
 	.string "fghij$"
+
+gUnknown_847AB09::
 	.string "klmno$"
+
+gUnknown_847AB0F::
 	.string "pqrst$"
+
+gUnknown_847AB15::
 	.string "uvwxy$"
+
+gUnknown_847AB1B::
 	.string "z    $"
+
+gUnknown_847AB21::
 	.string "01234$"
+
+gUnknown_847AB27::
 	.string "56789$"
+
+gUnknown_847AB2D::
 	.string ".,!? $"
+
+gUnknown_847AB33::
 	.string "-/&… $"
+
 	.string "$"
 	.string "$"
 	.string "$"
@@ -258,15 +323,35 @@ gUnknown_847A934::
 	.string "$"
 	.string "$"
 	.string "$"
+
+gUnknown_847AB41::
 	.string "{EXTRA 245}{EXTRA 246}{EXTRA 247}{EXTRA 248}{EXTRA 254}$"
+
+gUnknown_847AB4C::
 	.string "{EXTRA 249}{EXTRA 250}{EXTRA 252}{EXTRA 251}{EXTRA 253}$"
+
+gUnknown_847AB57::
 	.string "{EXTRA 236}{EXTRA 237}{EXTRA 238}{EXTRA 235}{EXTRA 234}$"
+
+gUnknown_847AB62::
 	.string "♂♀{EXTRA 212}{EXTRA 213}{EXTRA 211}$"
+
+gUnknown_847AB6B::
 	.string "{EXTRA 216}{EXTRA 217}{EXTRA 242}{EXTRA 243}{EXTRA 244}$"
+
+gUnknown_847AB76::
 	.string "{EXTRA 218}{EXTRA 241}{EXTRA 224}{EXTRA 226}{EXTRA 227}$"
+
+gUnknown_847AB81::
 	.string "{EXTRA 240}{EXTRA 239}{EXTRA 225}{EXTRA 214}{EXTRA 215}$"
+
+gUnknown_847AB8C::
 	.string "{EXTRA 228}{EXTRA 229}{EXTRA 230}{EXTRA 231}{EXTRA 232}$"
+
+gUnknown_847AB97::
 	.string "{EXTRA 233}{EXTRA 220}{EXTRA 221}{EXTRA 222}{EXTRA 209}$"
+
+gUnknown_847ABA2::
 	.string "{EXTRA 210}{EXTRA 208}ょ: $"
 
 	// trainer_tower (again?)

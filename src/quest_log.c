@@ -1972,15 +1972,15 @@ void DestroyHelpMessageWindow(u8 a0)
 }
 
 #ifdef NONMATCHING
-void sub_8112F18(u8 a0)
+void sub_8112F18(u8 windowId)
 {
-    u8 width = GetWindowAttribute(a0, WINDOW_WIDTH);
-    u8 height = GetWindowAttribute(a0, WINDOW_HEIGHT);
+    u8 width = GetWindowAttribute(windowId, WINDOW_WIDTH);
+    u8 height = GetWindowAttribute(windowId, WINDOW_HEIGHT);
     u8 *buffer = Alloc(32 * width * height);
     u8 i, j;
     u8 k;
 
-    if (buffer)
+    if (buffer != NULL)
     {
         for (i = 0; i < height; i++)
         {
@@ -1999,13 +1999,13 @@ void sub_8112F18(u8 a0)
                 );
             }
         }
-        CopyToWindowPixelBuffer(a0, buffer, width * height * 32, 0);
+        CopyToWindowPixelBuffer(windowId, buffer, width * height * 32, 0);
         Free(buffer);
     }
 }
 #else
 NAKED
-void sub_8112F18(u8 a0)
+void sub_8112F18(u8 windowId)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                 "\tmov r7, r10\n"

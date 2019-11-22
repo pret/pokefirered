@@ -63,7 +63,7 @@ void OpenPartyMenuInBattle(void);
 void SwitchPartyOrderLinkMulti(u8 battlerId, u8 unk, u8 arrayIndex);
 bool8 IsMultiBattle(void);
 void CB2_ChooseMonToGiveItem(void);
-void DrawHeldItemIconsForTrade(u8 *partyCount, u8 (*icons)[6], u8 side);
+void DrawHeldItemIconsForTrade(u8 *partyCounts, u8 *partySpriteIds, u8 whichParty);
 void ChooseMonToGiveMailFromMailbox(void);
 void CB2_PartyMenuFromStartMenu(void);
 void ShowPartyMenuToShowcaseMultiBattleParty(void);
@@ -71,5 +71,6 @@ void SwitchPartyMonSlots(u8 slot, u8 slot2);
 void LoadHeldItemIcons(void);
 void OpenPartyMenuInTutorialBattle(u8 partyAction);
 void ClearSelectedPartyOrder(void);
+void CB2_SelectBagItemToGive(void);
 
 #endif // GUARD_PARTY_MENU_H

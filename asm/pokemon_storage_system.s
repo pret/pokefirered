@@ -15947,7 +15947,7 @@ sub_80937B4: @ 80937B4
 _080937C4: .4byte gUnknown_2039822
 _080937C8:
 	ldr r4, _080937D8 @ =gUnknown_2039821
-	bl sub_8138B20
+	bl GetLastViewedMonIndex
 	strb r0, [r4]
 _080937D0:
 	pop {r4}

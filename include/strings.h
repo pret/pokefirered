@@ -193,7 +193,7 @@ extern const u8 BattleText_GetPumped[];
 extern const u8 BattleText_MistShroud[];
 extern const u8 gText_BadEgg[];
 extern const u8 gText_PkmnsXPreventsSwitching[];
-extern u8 *gUnknown_83FD5D0[];
+extern const u8 *const gUnknown_83FD5D0[];
 
 // diploma
 extern const u8 gUnknown_841B60E[];

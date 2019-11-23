@@ -31,5 +31,10 @@ void ValidateEReaderTrainer(void);
 u8 GetBattleTowerTrainerFrontSpriteId(void);
 u8 GetEreaderTrainerFrontSpriteId(void);
 void CopyEReaderTrainerName5(u8 *dest);
+void sub_815DC40(u8 *dest, u8 opponentIdx);
+void sub_815DBF4(u8 *dest, u8 opponentIdx);
+void GetBattleTowerTrainerName(u8 *text);
+u8 GetEreaderTrainerClassId(void);
+u8 GetBattleTowerTrainerClassNameId(void);
 
 #endif //GUARD_BATTLE_TOWER_H

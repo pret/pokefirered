@@ -195,6 +195,7 @@ SECTIONS {
         src/fldeff_strength.o(.text);
         src/battle_transition.o(.text);
         src/battle_controller_link_partner.o(.text);
+        src/battle_message.o(.text);
         asm/battle_message.o(.text);
         src/math_util.o(.text);
         src/roulette_util.o(.text);
@@ -477,7 +478,7 @@ SECTIONS {
         src/evolution_scene.o(.rodata);
         src/battle_transition.o(.rodata);
         src/battle_controller_link_partner.o(.rodata);
-        data/battle_message.o(.rodata);
+        src/battle_message.o(.rodata);
         src/save.o(.rodata);
         data/field_effect_helpers.o(.rodata);
         src/battle_controller_safari.o(.rodata);

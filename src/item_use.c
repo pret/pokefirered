@@ -414,7 +414,7 @@ static void sub_80A16D0(u8 taskId)
 
 void FieldUseFunc_Medicine(u8 taskId)
 {
-    gItemUseCB = sub_81252D0;
+    gItemUseCB = ItemUseCB_Medicine;
     sub_80A16D0(taskId);
 }
 
@@ -432,13 +432,13 @@ void FieldUseFunc_PpUp(u8 taskId)
 
 void FieldUseFunc_RareCandy(u8 taskId)
 {
-    gItemUseCB = dp05_rare_candy;
+    gItemUseCB = ItemUseCB_RareCandy;
     sub_80A16D0(taskId);
 }
 
 void FieldUseFunc_EvoItem(u8 taskId)
 {
-    gItemUseCB = sub_8126B60;
+    gItemUseCB = ItemUseCB_EvolutionStone;
     sub_80A16D0(taskId);
 }
 
@@ -811,7 +811,7 @@ static void ItemUse_SwitchToPartyMenuInBattle(u8 taskId)
 
 void BattleUseFunc_Medicine(u8 taskId)
 {
-    gItemUseCB = ItemUseCB_Medicine;
+    gItemUseCB = ItemUseCB_MedicineStep;
     ItemUse_SwitchToPartyMenuInBattle(taskId);
 }
 

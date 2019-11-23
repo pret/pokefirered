@@ -5,7 +5,7 @@
 
 void sub_811E5B8(u16, u16, u16, u16, u16, u16);
 bool8 sub_811E680(void);
-void GetMonLevelUpWindowStats(struct Pokemon *mon, u16 *currStats);
+void BufferMonStatsToTaskData(struct Pokemon *mon, u16 *currStats);
 void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u8 bgClr, u8 fgClr, u8 shadowClr);
 void DrawLevelUpWindowPg2(u16 windowId, u16 *currStats, u8 bgClr, u8 fgClr, u8 shadowClr);
 void sub_811C540(u8 slotId, u16 itemId, MainCallback callback);

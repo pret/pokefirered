@@ -7006,7 +7006,7 @@ _08119512:
 	str r0, [r1]
 	ldr r1, _08119538 @ =CB2_ReturnToField
 	movs r0, 0x8
-	bl ChooseMonForMoveTutor
+	bl sub_81277F4
 	b _081198DC
 	.align 2, 0
 _08119528: .4byte gPaletteFade
@@ -7359,7 +7359,7 @@ _081197CA:
 	str r0, [r1]
 	ldr r1, _0811983C @ =CB2_ReturnToField
 	movs r0, 0x9
-	bl ChooseMonForMoveTutor
+	bl sub_81277F4
 	adds r0, r6, 0
 	bl sub_81186B0
 	ldrh r0, [r7, 0x2]

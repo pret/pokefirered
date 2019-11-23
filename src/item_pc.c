@@ -926,7 +926,7 @@ static void Task_ItemPcWaitButtonAndFinishWithdrawMultiple(u8 taskId)
     {
         PlaySE(SE_SELECT);
         itemId = ItemPc_GetItemIdBySlotId(data[1]);
-        RemoveItemFromPC(itemId, data[8]);
+        RemovePCItem(itemId, data[8]);
         ItemPcCompaction();
         Task_ItemPcCleanUpWithdraw(taskId);
     }

@@ -22,6 +22,8 @@ extern const u16 gUnknown_8251FEE[];
 extern const u16 gUnknown_8252324[];
 extern const u16 gUnknown_82539D4[];
 
+extern const u8 gTrainerClassNames[][13];
+
 extern const struct MonCoords gMonFrontPicCoords[];
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 extern const struct MonCoords gMonBackPicCoords[];

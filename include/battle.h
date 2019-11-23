@@ -24,8 +24,7 @@
 
 #define TRAINER_OPPONENT_3FE        0x3FE
 #define TRAINER_OPPONENT_C00        0xC00
-#define TRAINER_OPPONENT_800        0x800
-#define STEVEN_PARTNER_ID           0xC03
+#define TRAINER_LINK_OPPONENT       0x800
 #define SECRET_BASE_OPPONENT        0x400
 
 #define B_ACTION_USE_MOVE                  0

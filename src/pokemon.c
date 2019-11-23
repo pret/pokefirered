@@ -4796,7 +4796,7 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
 static void sub_8042D50(int stat)
 {
     gBattlerTarget = gBattlerInMenuId;
-    StringCopy(gBattleTextBuff1, gUnknown_83FD5D0[gUnknown_825DFF0[stat]]);
+    StringCopy(gBattleTextBuff1, gStatNamesTable[gUnknown_825DFF0[stat]]);
     StringCopy(gBattleTextBuff2, BattleText_Rose);
     BattleStringExpandPlaceholdersToDisplayedString(BattleText_UnknownString3);
 }

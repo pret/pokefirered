@@ -196,7 +196,6 @@ SECTIONS {
         src/battle_transition.o(.text);
         src/battle_controller_link_partner.o(.text);
         src/battle_message.o(.text);
-        asm/battle_message.o(.text);
         src/math_util.o(.text);
         src/roulette_util.o(.text);
         src/cable_car_util.o(.text);

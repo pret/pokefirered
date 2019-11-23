@@ -4249,4 +4249,7 @@ extern const u16 gUnknown_8E97DDC[];
 extern const u32 gUnknown_8E97DFC[];
 extern const u32 gUnknown_8E97EC4[];
 
+// battle_message
+extern const u16 gUnknown_8D2FBB4[];
+
 #endif //GUARD_GRAPHICS_H

@@ -922,7 +922,7 @@ gText_PkmnAlreadyHoldingItemSwitch:: @ 8416C49
 	.string "Would you like to switch the\n"
 	.string "two items?$"
 
-gUnknown_8416C8F:: @ 8416C8F
+gText_PkmnNotHolding:: @ 8416C8F
 	.string "{STR_VAR_1} isn't holding\n"
 	.string "anything.{PAUSE_UNTIL_PRESS}$"
 
@@ -979,7 +979,7 @@ gText_MoveNotLearned:: @ 8416E84
 gText_WhichMoveToForget:: @ 8416EA4
 	.string "Which move should be forgotten?{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416EC6:: @ 8416EC6
+gText_12PoofForgotMove:: @ 8416EC6
 	.string "1, {PAUSE 0x0F}2, and{PAUSE 0x0F}‥ {PAUSE 0x0F}‥ {PAUSE 0x0F}‥ {PAUSE 0x0F}{PLAY_SE SE_KON}Poof!\p"
 	.string "{STR_VAR_1} forgot how to\n"
 	.string "use {STR_VAR_2}.\p"
@@ -1233,11 +1233,11 @@ gText_ShareHp:: @ 0x84175F1
 gText_ReturnToAHealingSpot:: @ 0x84175FB
 	.string "Return to a healing spot.$"
 
-gUnknown_8417615:: @ 8417615
+gText_EscapeFromHereAndReturnTo:: @ 8417615
 	.string "Want to escape from here and return\n"
 	.string "to {STR_VAR_1}?$"
 
-gUnknown_8417640:: @ 8417640
+gText_ReturnToHealingSpot:: @ 8417640
 	.string "Want to return to the healing spot\n"
 	.string "used last in {STR_VAR_1}?$"
 

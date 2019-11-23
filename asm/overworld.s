@@ -3754,8 +3754,8 @@ _080568A0: .4byte gFieldCallback
 _080568A4: .4byte sub_807DDD0
 	thumb_func_end c2_8056854
 
-	thumb_func_start CB2_ReturnToStartMenu
-CB2_ReturnToStartMenu: @ 80568A8
+	thumb_func_start CB2_ReturnToFieldWithOpenMenu
+CB2_ReturnToFieldWithOpenMenu: @ 80568A8
 	push {lr}
 	bl sub_80569BC
 	ldr r1, _080568BC @ =gFieldCallback2
@@ -3767,7 +3767,7 @@ CB2_ReturnToStartMenu: @ 80568A8
 	.align 2, 0
 _080568BC: .4byte gFieldCallback2
 _080568C0: .4byte FieldCB2_ReturnToStartMenuInit
-	thumb_func_end CB2_ReturnToStartMenu
+	thumb_func_end CB2_ReturnToFieldWithOpenMenu
 
 	thumb_func_start sub_80568C4
 sub_80568C4: @ 80568C4

@@ -141,14 +141,14 @@ _08107EB4: .4byte gUnknown_203ACFC
 	thumb_func_start CB2_BagMenuFromStartMenu
 CB2_BagMenuFromStartMenu: @ 8107EB8
 	push {lr}
-	ldr r2, _08107EC8 @ =CB2_ReturnToStartMenu
+	ldr r2, _08107EC8 @ =CB2_ReturnToFieldWithOpenMenu
 	movs r0, 0
 	movs r1, 0x3
 	bl GoToBagMenu
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08107EC8: .4byte CB2_ReturnToStartMenu
+_08107EC8: .4byte CB2_ReturnToFieldWithOpenMenu
 	thumb_func_end CB2_BagMenuFromStartMenu
 
 	thumb_func_start sub_8107ECC

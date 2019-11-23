@@ -149,4 +149,8 @@ struct TradeUnkStruct
     u32 personality;
 };
 
+extern struct UnkLinkRfuStruct_02022B14Substruct gUnknown_203B064;
+extern u16 gUnionRoomOfferedSpecies;
+extern u8 gUnionRoomRequestedMonType;
+
 #endif //GUARD_UNION_ROOM_H

@@ -9893,15 +9893,15 @@ _080C4EF2:
 	bx r0
 	thumb_func_end sub_80C4ED0
 
-	thumb_func_start sub_80C4EF8
-sub_80C4EF8: @ 80C4EF8
+	thumb_func_start MCB2_FlyMap
+MCB2_FlyMap: @ 80C4EF8
 	push {lr}
 	bl sub_80C51E8
 	movs r0, 0x2
 	bl sub_80BFEDC
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80C4EF8
+	thumb_func_end MCB2_FlyMap
 
 	thumb_func_start sub_80C4F08
 sub_80C4F08: @ 80C4F08

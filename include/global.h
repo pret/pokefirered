@@ -742,7 +742,7 @@ struct SaveBlock1
     /*0x000C*/ struct WarpData warp1;
     /*0x0014*/ struct WarpData warp2;
     /*0x001C*/ struct WarpData lastHealLocation;
-    /*0x0024*/ struct WarpData warp4;
+    /*0x0024*/ struct WarpData escapeWarp;
     /*0x002C*/ u16 savedMusic;
     /*0x002E*/ u8 weather;
     /*0x002F*/ u8 filler_2F;

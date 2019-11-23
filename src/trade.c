@@ -4474,7 +4474,7 @@ int GetUnionRoomTradeMessageId(struct UnkLinkRfuStruct_02022B14Substruct a0, str
     return 0;
 }
 
-int Trade_CanTradeSelectedMon(struct UnkLinkRfuStruct_02022B14Substruct a0, u16 species, u16 a2, u8 a3)
+int CanRegisterMonForTradingBoard(struct UnkLinkRfuStruct_02022B14Substruct a0, u16 species, u16 a2, u8 a3)
 {
     u8 canTradeEggAndNational = a0.unk_01_0;
 

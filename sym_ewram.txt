@@ -427,6 +427,7 @@ gPlayerFacingPosition: @ 2039A04
 	.align 2
 	.include "src/battle_transition.o"
 
+	.align 2
 gUnknown_2039A30: @ 2039A30
 	.space 0x4
 
@@ -437,10 +438,8 @@ gUnknown_2039A34: @ 2039A34
 	.include "src/save.o"
 	.align 2
 	.include "src/mystery_event_script.o"
-
-gUnknown_203AAB0: @ 203AAB0
-	.space 0x4
-
+	.align 2
+	.include "src/fldeff_sweetscent.o"
 	.align 2
 	.include "src/learn_move.o"
 	.align 2

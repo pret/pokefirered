@@ -13,6 +13,8 @@
 #include "wild_encounter.h"
 #include "constants/songs.h"
 
+static EWRAM_DATA u8 *gUnknown_203AAB0 = NULL;
+
 static void FieldCallback_SweetScent(void);
 static void StartSweetScentFieldEffect(void);
 static void TrySweetScentEncounter(u8 taskId);

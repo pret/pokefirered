@@ -1,4 +1,4 @@
-const struct BgTemplate sPartyMenuBgTemplates[] =
+static const struct BgTemplate sPartyMenuBgTemplates[] =
 {
     {
         .bg = 0,
@@ -35,7 +35,7 @@ enum
     PARTY_BOX_RIGHT_COLUMN,
 };
 
-const struct PartyMenuBoxInfoRects sPartyBoxInfoRects[] =
+static const struct PartyMenuBoxInfoRects sPartyBoxInfoRects[] =
 {
     [PARTY_BOX_LEFT_COLUMN] = 
     {
@@ -67,7 +67,7 @@ const struct PartyMenuBoxInfoRects sPartyBoxInfoRects[] =
     },
 };
 
-const u8 sPartyMenuSpriteCoords[PARTY_LAYOUT_COUNT][PARTY_SIZE][4 * 2] =
+static const u8 sPartyMenuSpriteCoords[PARTY_LAYOUT_COUNT][PARTY_SIZE][4 * 2] =
 {
     [PARTY_LAYOUT_SINGLE] = 
     {
@@ -107,10 +107,10 @@ const u8 sPartyMenuSpriteCoords[PARTY_LAYOUT_COUNT][PARTY_SIZE][4 * 2] =
     },
 };
 
-const u32 sConfirmButton_Tilemap[] = INCBIN_U32("graphics/interface/party_menu_confirm_button.bin");
-const u32 sCancelButton_Tilemap[] = INCBIN_U32("graphics/interface/party_menu_cancel_button.bin");
+static const u32 sConfirmButton_Tilemap[] = INCBIN_U32("graphics/interface/party_menu_confirm_button.bin");
+static const u32 sCancelButton_Tilemap[] = INCBIN_U32("graphics/interface/party_menu_cancel_button.bin");
 
-const u8 sFontColorTable[][3] =
+static const u8 sFontColorTable[][3] =
 {
     {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_GREY, TEXT_COLOR_DARK_GREY},  // Default
     {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,      TEXT_COLOR_GREEN},      // Unused
@@ -120,7 +120,7 @@ const u8 sFontColorTable[][3] =
     {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,      TEXT_COLOR_DARK_GREY},  // Unused
 };
 
-const struct WindowTemplate sSinglePartyMenuWindowTemplate[] =
+static const struct WindowTemplate sSinglePartyMenuWindowTemplate[] =
 {
     {
         .bg = 0,
@@ -185,10 +185,10 @@ const struct WindowTemplate sSinglePartyMenuWindowTemplate[] =
         .paletteNum = 14,
         .baseBlock = 0x1DF,
     },
-    DUMMY_WIN_TEMPLATE
+    DUMMY_WIN_TEMPLATE,
 };
 
-const struct WindowTemplate sDoublePartyMenuWindowTemplate[] =
+static const struct WindowTemplate sDoublePartyMenuWindowTemplate[] =
 {
     {
         .bg = 0,
@@ -253,10 +253,10 @@ const struct WindowTemplate sDoublePartyMenuWindowTemplate[] =
         .paletteNum = 14,
         .baseBlock = 0x1DF,
     },
-    DUMMY_WIN_TEMPLATE
+    DUMMY_WIN_TEMPLATE,
 };
 
-const struct WindowTemplate sMultiPartyMenuWindowTemplate[] =
+static const struct WindowTemplate sMultiPartyMenuWindowTemplate[] =
 {
     {
         .bg = 0,
@@ -324,7 +324,7 @@ const struct WindowTemplate sMultiPartyMenuWindowTemplate[] =
     DUMMY_WIN_TEMPLATE
 };
 
-const struct WindowTemplate sShowcaseMultiPartyMenuWindowTemplate[] =
+static const struct WindowTemplate sShowcaseMultiPartyMenuWindowTemplate[] =
 {
     {
         .bg = 0,
@@ -383,7 +383,7 @@ const struct WindowTemplate sShowcaseMultiPartyMenuWindowTemplate[] =
     DUMMY_WIN_TEMPLATE
 };
 
-const struct WindowTemplate sCancelButtonWindowTemplate =
+static const struct WindowTemplate sCancelButtonWindowTemplate =
 {
     .bg = 0,
     .tilemapLeft = 24,
@@ -394,7 +394,7 @@ const struct WindowTemplate sCancelButtonWindowTemplate =
     .baseBlock = 0x1C7,
 };
 
-const struct WindowTemplate sMultiCancelButtonWindowTemplate =
+static const struct WindowTemplate sMultiCancelButtonWindowTemplate =
 {
     .bg = 0,
     .tilemapLeft = 24,
@@ -405,7 +405,7 @@ const struct WindowTemplate sMultiCancelButtonWindowTemplate =
     .baseBlock = 0x1C7,
 };
 
-const struct WindowTemplate sConfirmButtonWindowTemplate =
+static const struct WindowTemplate sConfirmButtonWindowTemplate =
 {
     .bg = 0,
     .tilemapLeft = 24,
@@ -416,7 +416,7 @@ const struct WindowTemplate sConfirmButtonWindowTemplate =
     .baseBlock = 0x1D3,
 };
 
-const struct WindowTemplate sDefaultPartyMsgWindowTemplate =
+static const struct WindowTemplate sDefaultPartyMsgWindowTemplate =
 {
     .bg = 2,
     .tilemapLeft = 1,
@@ -427,7 +427,7 @@ const struct WindowTemplate sDefaultPartyMsgWindowTemplate =
     .baseBlock = 0x24F,
 };
 
-const struct WindowTemplate sDoWhatWithMonMsgWindowTemplate =
+static const struct WindowTemplate sDoWhatWithMonMsgWindowTemplate =
 {
     .bg = 2,
     .tilemapLeft = 1,
@@ -438,7 +438,7 @@ const struct WindowTemplate sDoWhatWithMonMsgWindowTemplate =
     .baseBlock = 0x279,
 };
 
-const struct WindowTemplate sDoWhatWithItemMsgWindowTemplate =
+static const struct WindowTemplate sDoWhatWithItemMsgWindowTemplate =
 {
     .bg = 2,
     .tilemapLeft = 1,
@@ -449,7 +449,7 @@ const struct WindowTemplate sDoWhatWithItemMsgWindowTemplate =
     .baseBlock = 0x299,
 };
 
-const struct WindowTemplate sDoWhatWithMailMsgWindowTemplate =
+static const struct WindowTemplate sDoWhatWithMailMsgWindowTemplate =
 {
     .bg = 2,
     .tilemapLeft = 1,
@@ -460,7 +460,7 @@ const struct WindowTemplate sDoWhatWithMailMsgWindowTemplate =
     .baseBlock = 0x299,
 };
 
-const struct WindowTemplate sWhichMoveMsgWindowTemplate =
+static const struct WindowTemplate sWhichMoveMsgWindowTemplate =
 {
     .bg = 2,
     .tilemapLeft = 1,
@@ -471,7 +471,7 @@ const struct WindowTemplate sWhichMoveMsgWindowTemplate =
     .baseBlock = 0x299,
 };
 
-const struct WindowTemplate sItemGiveTakeWindowTemplate =
+static const struct WindowTemplate sItemGiveTakeWindowTemplate =
 {
     .bg = 2,
     .tilemapLeft = 22,
@@ -482,7 +482,7 @@ const struct WindowTemplate sItemGiveTakeWindowTemplate =
     .baseBlock = 0x373,
 };
 
-const struct WindowTemplate sMailReadTakeWindowTemplate =
+static const struct WindowTemplate sMailReadTakeWindowTemplate =
 {
     .bg = 2,
     .tilemapLeft = 19,
@@ -493,7 +493,7 @@ const struct WindowTemplate sMailReadTakeWindowTemplate =
     .baseBlock = 0x373,
 };
 
-const struct WindowTemplate sMoveSelectWindowTemplate =
+static const struct WindowTemplate sMoveSelectWindowTemplate =
 {
     .bg = 2,
     .tilemapLeft = 18,
@@ -504,7 +504,7 @@ const struct WindowTemplate sMoveSelectWindowTemplate =
     .baseBlock = 0x2BF,
 };
 
-const struct WindowTemplate sPartyMenuYesNoWindowTemplate =
+static const struct WindowTemplate sPartyMenuYesNoWindowTemplate =
 {
     .bg = 2,
     .tilemapLeft = 21,
@@ -515,7 +515,7 @@ const struct WindowTemplate sPartyMenuYesNoWindowTemplate =
     .baseBlock = 0x2BF,
 };
 
-const struct WindowTemplate sLevelUpStatsWindowTemplate =
+static const struct WindowTemplate sLevelUpStatsWindowTemplate =
 {
     .bg = 2,
     .tilemapLeft = 19,
@@ -526,7 +526,7 @@ const struct WindowTemplate sLevelUpStatsWindowTemplate =
     .baseBlock = 0x2BF,
 };
 
-const struct WindowTemplate gUnknown_845A170 =
+static const struct WindowTemplate gUnknown_845A170 =
 {
     .bg = 2,
     .tilemapLeft = 2,
@@ -537,7 +537,7 @@ const struct WindowTemplate gUnknown_845A170 =
     .baseBlock = 0x1DF,
 };
 
-const struct WindowTemplate gUnknown_845A178 =
+static const struct WindowTemplate gUnknown_845A178 =
 {
     .bg = 2,
     .tilemapLeft = 0,
@@ -548,7 +548,7 @@ const struct WindowTemplate gUnknown_845A178 =
     .baseBlock = 0x373,
 };
 
-const u8 sMainSlotTileNums[] =
+static const u8 sMainSlotTileNums[] =
 {
     24, 25, 25, 25, 25, 25, 25, 25, 25, 26,
     32, 33, 33, 33, 33, 33, 33, 33, 33, 34,
@@ -559,7 +559,7 @@ const u8 sMainSlotTileNums[] =
     46, 47, 47, 47, 47, 47, 47, 47, 47, 48,
 };
 
-const u8 sMainSlotTileNums_Egg[] =
+static const u8 sMainSlotTileNums_Egg[] =
 {
     24, 25, 25, 25, 25, 25, 25, 25, 25, 26,
     32, 33, 33, 33, 33, 33, 33, 33, 33, 34,
@@ -570,7 +570,7 @@ const u8 sMainSlotTileNums_Egg[] =
     46, 47, 47, 47, 47, 47, 47, 47, 47, 48,
 };
 
-const u8 sOtherSlotsTileNums[] =
+static const u8 sOtherSlotsTileNums[] =
 {
     43, 44, 44, 44, 44, 44, 44, 44, 44, 44,
     44, 44, 44, 44, 44, 44, 44, 45, 49, 33,
@@ -580,7 +580,7 @@ const u8 sOtherSlotsTileNums[] =
     56, 56, 56, 57,
 };
 
-const u8 sOtherSlotsTileNums_Egg[] =
+static const u8 sOtherSlotsTileNums_Egg[] =
 {
     43, 44, 44, 44, 44, 44, 44, 44, 44, 44,
     44, 44, 44, 44, 44, 44, 44, 45, 49, 33,
@@ -590,7 +590,7 @@ const u8 sOtherSlotsTileNums_Egg[] =
     56, 56, 56, 57,
 };
 
-const u8 sEmptySlotTileNums[] = 
+static const u8 sEmptySlotTileNums[] = 
 {
     21, 22, 22, 22, 22, 22, 22, 22, 22, 22,
     22, 22, 22, 22, 22, 22, 22, 23, 30,  0,
@@ -600,49 +600,49 @@ const u8 sEmptySlotTileNums[] =
     38, 38, 38, 39,
 };
 
-const u8 sGenderPalOffsets[] = {11, 12};
+static const u8 sGenderPalOffsets[] = {11, 12};
 
-const u8 sHPBarPalOffsets[] = {9, 10};
+static const u8 sHPBarPalOffsets[] = {9, 10};
 
-const u8 sPartyBoxPalOffsets1[] = {4, 5, 6};
+static const u8 sPartyBoxPalOffsets1[] = {4, 5, 6};
 
-const u8 sPartyBoxPalOffsets2[] = {1, 7, 8};
+static const u8 sPartyBoxPalOffsets2[] = {1, 7, 8};
 
-const u8 sGenderMalePalIds[] = {59, 60};
+static const u8 sGenderMalePalIds[] = {59, 60};
 
-const u8 sGenderFemalePalIds[] = {75, 76};
+static const u8 sGenderFemalePalIds[] = {75, 76};
 
-const u8 sHPBarGreenPalIds[] = {57, 58};
+static const u8 sHPBarGreenPalIds[] = {57, 58};
 
-const u8 sHPBarYellowPalIds[] = {73, 74};
+static const u8 sHPBarYellowPalIds[] = {73, 74};
 
-const u8 sHPBarRedPalIds[] = {89, 90};
+static const u8 sHPBarRedPalIds[] = {89, 90};
 
-const u8 sPartyBoxEmptySlotPalIds1[] = {52, 53, 54};
+static const u8 sPartyBoxEmptySlotPalIds1[] = {52, 53, 54};
 
-const u8 sPartyBoxMultiPalIds1[] = {68, 69, 70};
+static const u8 sPartyBoxMultiPalIds1[] = {68, 69, 70};
 
-const u8 sPartyBoxFaintedPalIds1[] = {84, 85, 86};
+static const u8 sPartyBoxFaintedPalIds1[] = {84, 85, 86};
 
-const u8 sPartyBoxCurrSelectionPalIds1[] = {116, 117, 118};
+static const u8 sPartyBoxCurrSelectionPalIds1[] = {116, 117, 118};
 
-const u8 sPartyBoxCurrSelectionMultiPalIds[] = {132, 133, 134};
+static const u8 sPartyBoxCurrSelectionMultiPalIds[] = {132, 133, 134};
 
-const u8 sPartyBoxCurrSelectionFaintedPalIds[] = {148, 149, 150};
+static const u8 sPartyBoxCurrSelectionFaintedPalIds[] = {148, 149, 150};
 
-const u8 sPartyBoxSelectedForActionPalIds1[] = {100, 101, 102};
+static const u8 sPartyBoxSelectedForActionPalIds1[] = {100, 101, 102};
 
-const u8 sPartyBoxEmptySlotPalIds2[] = {49, 55, 56};
+static const u8 sPartyBoxEmptySlotPalIds2[] = {49, 55, 56};
 
-const u8 sPartyBoxMultiPalIds2[] = {65, 71, 72};
+static const u8 sPartyBoxMultiPalIds2[] = {65, 71, 72};
 
-const u8 sPartyBoxFaintedPalIds2[] = {81, 87, 88};
+static const u8 sPartyBoxFaintedPalIds2[] = {81, 87, 88};
 
-const u8 sPartyBoxCurrSelectionPalIds2[] = {97, 103, 104};
+static const u8 sPartyBoxCurrSelectionPalIds2[] = {97, 103, 104};
 
-const u8 sPartyBoxSelectedForActionPalIds2[] = {161, 167, 168};
+static const u8 sPartyBoxSelectedForActionPalIds2[] = {161, 167, 168};
 
-const u8 *const sActionStringTable[] =
+static const u8 *const sActionStringTable[] =
 {
     [PARTY_MSG_CHOOSE_MON]             = gText_ChoosePokemon,
     [PARTY_MSG_CHOOSE_MON_OR_CANCEL]   = gText_ChoosePokemonCancel,
@@ -673,7 +673,7 @@ const u8 *const sActionStringTable[] =
     [PARTY_MSG_DO_WHAT_WITH_MAIL]      = gText_DoWhatWithMail,
 };
 
-const u8 *const sDescriptionStringTable[] =
+static const u8 *const sDescriptionStringTable[] =
 {
     [PARTYBOX_DESC_NO_USE]     = gText_NoUse,
     [PARTYBOX_DESC_ABLE_3]     = gText_Able,
@@ -687,7 +687,7 @@ const u8 *const sDescriptionStringTable[] =
     [PARTYBOX_DESC_LEARNED]    = gText_Learned,
 };
 
-const u8 *const sHMDescriptionTable[] =
+static const u8 *const sHMDescriptionTable[] =
 {
     gText_LightUpDarkness,
     gText_CutATreeOrGrass,
@@ -703,10 +703,10 @@ const u8 *const sHMDescriptionTable[] =
     gText_LureWildPokemon,
 };
 
-const u32 sHeldItemGfx[] = INCBIN_U32("graphics/interface/hold_icons.4bpp");
-const u16 sHeldItemPalette[] = INCBIN_U16("graphics/interface/hold_icons.gbapal");
+static const u32 sHeldItemGfx[] = INCBIN_U32("graphics/interface/hold_icons.4bpp");
+static const u16 sHeldItemPalette[] = INCBIN_U16("graphics/interface/hold_icons.gbapal");
 
-const struct OamData sOamData_HeldItem =
+static const struct OamData sOamData_HeldItem =
 {
     .y = 0,
     .affineMode = 0,
@@ -723,38 +723,38 @@ const struct OamData sOamData_HeldItem =
     .affineParam = 0,
 };
 
-const union AnimCmd sSpriteAnim_HeldItem[] =
+static const union AnimCmd sSpriteAnim_HeldItem[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END
 };
 
-const union AnimCmd sSpriteAnim_HeldMail[] =
+static const union AnimCmd sSpriteAnim_HeldMail[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END
 };
 
-const union AnimCmd *const sSpriteAnimTable_HeldItem[] =
+static const union AnimCmd *const sSpriteAnimTable_HeldItem[] =
 {
     sSpriteAnim_HeldItem,
     sSpriteAnim_HeldMail,
 };
 
-const struct SpriteSheet sSpriteSheet_HeldItem =
+static const struct SpriteSheet sSpriteSheet_HeldItem =
 {
-    sHeldItemGfx, sizeof(sHeldItemGfx), 0xd750
+    sHeldItemGfx, sizeof(sHeldItemGfx), 0xD750
 };
 
-const struct SpritePalette sSpritePalette_HeldItem =
+static const struct SpritePalette sSpritePalette_HeldItem =
 {
-    sHeldItemPalette, 0xd750
+    sHeldItemPalette, 0xD750
 };
 
-const struct SpriteTemplate sSpriteTemplate_HeldItem =
+static const struct SpriteTemplate sSpriteTemplate_HeldItem =
 {
-    0xd750,
-    0xd750,
+    0xD750,
+    0xD750,
     &sOamData_HeldItem,
     sSpriteAnimTable_HeldItem,
     NULL,
@@ -762,7 +762,7 @@ const struct SpriteTemplate sSpriteTemplate_HeldItem =
     SpriteCallbackDummy,
 };
 
-const struct OamData sOamData_MenuPokeball =
+static const struct OamData sOamData_MenuPokeball =
 {
     .y = 0,
     .affineMode = 0,
@@ -779,36 +779,36 @@ const struct OamData sOamData_MenuPokeball =
     .affineParam = 0,
 };
 
-const union AnimCmd sPokeballAnim_Closed[] =
+static const union AnimCmd sPokeballAnim_Closed[] =
 {
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_END
 };
 
-const union AnimCmd sPokeballAnim_Open[] =
+static const union AnimCmd sPokeballAnim_Open[] =
 {
     ANIMCMD_FRAME(16, 0),
     ANIMCMD_END
 };
 
-const union AnimCmd *const sSpriteAnimTable_MenuPokeball[] =
+static const union AnimCmd *const sSpriteAnimTable_MenuPokeball[] =
 {
     sPokeballAnim_Closed,
     sPokeballAnim_Open,
 };
 
-const struct CompressedSpriteSheet sSpriteSheet_MenuPokeball =
+static const struct CompressedSpriteSheet sSpriteSheet_MenuPokeball =
 {
     gPartyMenuPokeball_Gfx, 0x400, 0x04b0
 };
 
-const struct CompressedSpritePalette sSpritePalette_MenuPokeball =
+static const struct CompressedSpritePalette sSpritePalette_MenuPokeball =
 {
     gPartyMenuPokeball_Pal, 0x04b0
 };
 
 // Used for the pokeball sprite on each party slot / Cancel button
-const struct SpriteTemplate sSpriteTemplate_MenuPokeball =
+static const struct SpriteTemplate sSpriteTemplate_MenuPokeball =
 {
     .tileTag = 0x04b0,
     .paletteTag = 0x04b0,
@@ -819,7 +819,7 @@ const struct SpriteTemplate sSpriteTemplate_MenuPokeball =
     .callback = SpriteCallbackDummy,
 };
 
-const struct OamData sOamData_MenuPokeballSmall =
+static const struct OamData sOamData_MenuPokeballSmall =
 {
     .y = 0,
     .affineMode = 0,
@@ -836,44 +836,44 @@ const struct OamData sOamData_MenuPokeballSmall =
     .affineParam = 0,
 };
 
-const union AnimCmd sSmallPokeballAnim_Closed[] =
+static const union AnimCmd sSmallPokeballAnim_Closed[] =
 {
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_END
 };
 
-const union AnimCmd sSmallPokeballAnim_Open[] =
+static const union AnimCmd sSmallPokeballAnim_Open[] =
 {
     ANIMCMD_FRAME(4, 0),
     ANIMCMD_END
 };
 
-const union AnimCmd sSmallPokeballAnim_Blank1[] =
+static const union AnimCmd sSmallPokeballAnim_Blank1[] =
 {
     ANIMCMD_FRAME(8, 0),
     ANIMCMD_END
 };
 
-const union AnimCmd sSmallPokeballAnim_Blank2[] =
+static const union AnimCmd sSmallPokeballAnim_Blank2[] =
 {
     ANIMCMD_FRAME(12, 0),
     ANIMCMD_END
 };
 
-const union AnimCmd sSmallPokeballAnim_Blank3[] =
+static const union AnimCmd sSmallPokeballAnim_Blank3[] =
 {
     ANIMCMD_FRAME(16, 0),
     ANIMCMD_END
 };
 
-const union AnimCmd sSmallPokeballAnim_Blank4[] =
+static const union AnimCmd sSmallPokeballAnim_Blank4[] =
 {
     ANIMCMD_FRAME(20, 0),
     ANIMCMD_END
 };
 
 // The blanks below are never used. See SpriteCB_BounceConfirmCancelButton, where they were intended to be used
-const union AnimCmd *const sSpriteAnimTable_MenuPokeballSmall[] =
+static const union AnimCmd *const sSpriteAnimTable_MenuPokeballSmall[] =
 {
     sSmallPokeballAnim_Closed,
     sSmallPokeballAnim_Open,
@@ -883,13 +883,13 @@ const union AnimCmd *const sSpriteAnimTable_MenuPokeballSmall[] =
     sSmallPokeballAnim_Blank4,
 };
 
-const struct CompressedSpriteSheet sSpriteSheet_MenuPokeballSmall =
+static const struct CompressedSpriteSheet sSpriteSheet_MenuPokeballSmall =
 {
     gPartyMenuPokeballSmall_Gfx, 0x0300, 0x04b1
 };
 
 // Used for the pokeball sprite next to Cancel and Confirm when both are present, otherwise sSpriteTemplate_MenuPokeball is used
-const struct SpriteTemplate sSpriteTemplate_MenuPokeballSmall =
+static const struct SpriteTemplate sSpriteTemplate_MenuPokeballSmall =
 {
     .tileTag = 1201,
     .paletteTag = 1200,
@@ -900,7 +900,7 @@ const struct SpriteTemplate sSpriteTemplate_MenuPokeballSmall =
     .callback = SpriteCallbackDummy,
 };
 
-const struct OamData sOamData_StatusCondition =
+static const struct OamData sOamData_StatusCondition =
 {
     .y = 0,
     .affineMode = 0,
@@ -917,55 +917,55 @@ const struct OamData sOamData_StatusCondition =
     .affineParam = 0,
 };
 
-const union AnimCmd sSpriteAnim_StatusPoison[] =
+static const union AnimCmd sSpriteAnim_StatusPoison[] =
 {
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_END
 };
 
-const union AnimCmd sSpriteAnim_StatusParalyzed[] =
+static const union AnimCmd sSpriteAnim_StatusParalyzed[] =
 {
     ANIMCMD_FRAME(4, 0),
     ANIMCMD_END
 };
 
-const union AnimCmd sSpriteAnim_StatusSleep[] =
+static const union AnimCmd sSpriteAnim_StatusSleep[] =
 {
     ANIMCMD_FRAME(8, 0),
     ANIMCMD_END
 };
 
-const union AnimCmd sSpriteAnim_StatusFrozen[] =
+static const union AnimCmd sSpriteAnim_StatusFrozen[] =
 {
     ANIMCMD_FRAME(12, 0),
     ANIMCMD_END
 };
 
-const union AnimCmd sSpriteAnim_StatusBurn[] =
+static const union AnimCmd sSpriteAnim_StatusBurn[] =
 {
     ANIMCMD_FRAME(16, 0),
     ANIMCMD_END
 };
 
-const union AnimCmd sSpriteAnim_StatusPokerus[] =
+static const union AnimCmd sSpriteAnim_StatusPokerus[] =
 {
     ANIMCMD_FRAME(20, 0),
     ANIMCMD_END
 };
 
-const union AnimCmd sSpriteAnim_StatusFaint[] =
+static const union AnimCmd sSpriteAnim_StatusFaint[] =
 {
     ANIMCMD_FRAME(24, 0),
     ANIMCMD_END
 };
 
-const union AnimCmd sSpriteAnim_Blank[] =
+static const union AnimCmd sSpriteAnim_Blank[] =
 {
     ANIMCMD_FRAME(28, 0),
     ANIMCMD_END
 };
 
-const union AnimCmd *const sSpriteTemplate_StatusCondition[] =
+static const union AnimCmd *const sSpriteTemplate_StatusCondition[] =
 {
     sSpriteAnim_StatusPoison,
     sSpriteAnim_StatusParalyzed,
@@ -977,17 +977,17 @@ const union AnimCmd *const sSpriteTemplate_StatusCondition[] =
     sSpriteAnim_Blank,
 };
 
-const struct CompressedSpriteSheet sSpriteSheet_StatusIcons =
+static const struct CompressedSpriteSheet sSpriteSheet_StatusIcons =
 {
     gStatusGfx_Icons, 0x400, 1202
 };
 
-const struct CompressedSpritePalette sSpritePalette_StatusIcons =
+static const struct CompressedSpritePalette sSpritePalette_StatusIcons =
 {
     gStatusPal_Icons, 1202
 };
 
-const struct SpriteTemplate sSpriteTemplate_StatusIcons =
+static const struct SpriteTemplate sSpriteTemplate_StatusIcons =
 {
     .tileTag = 1202,
     .paletteTag = 1202,
@@ -998,7 +998,7 @@ const struct SpriteTemplate sSpriteTemplate_StatusIcons =
     .callback = SpriteCallbackDummy,
 };
 
-const bool8 sMultiBattlePartnersPartyMask[PARTY_SIZE + 2] = 
+static const bool8 sMultiBattlePartnersPartyMask[PARTY_SIZE + 2] = 
 {
     FALSE, 
     TRUE, 
@@ -1009,7 +1009,7 @@ const bool8 sMultiBattlePartnersPartyMask[PARTY_SIZE + 2] =
     FALSE,
 };
 
-const u16 sTMHMMoves_Duplicate[] =
+static const u16 sTMHMMoves_Duplicate[] =
 {
     MOVE_FOCUS_PUNCH,
     MOVE_DRAGON_CLAW,
@@ -1111,7 +1111,7 @@ enum
     FIELD_MOVE_END,
 };
 
-struct
+static struct
 {
     const u8 *text;
     TaskFunc func;
@@ -1149,18 +1149,18 @@ struct
     [MENU_FIELD_MOVES + FIELD_MOVE_SWEET_SCENT] = {gMoveNames[MOVE_SWEET_SCENT], CursorCB_FieldMove},
 };
 
-const u8 sPartyMenuAction_SummarySwitchCancel[] = {MENU_SUMMARY, MENU_SWITCH, MENU_CANCEL1};
-const u8 sPartyMenuAction_ShiftSummaryCancel[] = {MENU_SHIFT, MENU_SUMMARY, MENU_CANCEL1};
-const u8 sPartyMenuAction_SendOutSummaryCancel[] = {MENU_SEND_OUT, MENU_SUMMARY, MENU_CANCEL1};
-const u8 sPartyMenuAction_SummaryCancel[] = {MENU_SUMMARY, MENU_CANCEL1};
-const u8 sPartyMenuAction_EnterSummaryCancel[] = {MENU_ENTER, MENU_SUMMARY, MENU_CANCEL1};
-const u8 sPartyMenuAction_NoEntrySummaryCancel[] = {MENU_NO_ENTRY, MENU_SUMMARY, MENU_CANCEL1};
-const u8 sPartyMenuAction_StoreSummaryCancel[] = {MENU_STORE, MENU_SUMMARY, MENU_CANCEL1};
-const u8 sPartyMenuAction_GiveTakeItemCancel[] = {MENU_GIVE, MENU_TAKE_ITEM, MENU_CANCEL2};
-const u8 sPartyMenuAction_ReadTakeMailCancel[] = {MENU_READ, MENU_TAKE_MAIL, MENU_CANCEL2};
-const u8 sPartyMenuAction_RegisterSummaryCancel[] = {MENU_REGISTER, MENU_SUMMARY, MENU_CANCEL1};
-const u8 sPartyMenuAction_TradeSummaryCancel1[] = {MENU_TRADE1, MENU_SUMMARY, MENU_CANCEL1};
-const u8 sPartyMenuAction_TradeSummaryCancel2[] = {MENU_TRADE2, MENU_SUMMARY, MENU_CANCEL1};
+static const u8 sPartyMenuAction_SummarySwitchCancel[] = {MENU_SUMMARY, MENU_SWITCH, MENU_CANCEL1};
+static const u8 sPartyMenuAction_ShiftSummaryCancel[] = {MENU_SHIFT, MENU_SUMMARY, MENU_CANCEL1};
+static const u8 sPartyMenuAction_SendOutSummaryCancel[] = {MENU_SEND_OUT, MENU_SUMMARY, MENU_CANCEL1};
+static const u8 sPartyMenuAction_SummaryCancel[] = {MENU_SUMMARY, MENU_CANCEL1};
+static const u8 sPartyMenuAction_EnterSummaryCancel[] = {MENU_ENTER, MENU_SUMMARY, MENU_CANCEL1};
+static const u8 sPartyMenuAction_NoEntrySummaryCancel[] = {MENU_NO_ENTRY, MENU_SUMMARY, MENU_CANCEL1};
+static const u8 sPartyMenuAction_StoreSummaryCancel[] = {MENU_STORE, MENU_SUMMARY, MENU_CANCEL1};
+static const u8 sPartyMenuAction_GiveTakeItemCancel[] = {MENU_GIVE, MENU_TAKE_ITEM, MENU_CANCEL2};
+static const u8 sPartyMenuAction_ReadTakeMailCancel[] = {MENU_READ, MENU_TAKE_MAIL, MENU_CANCEL2};
+static const u8 sPartyMenuAction_RegisterSummaryCancel[] = {MENU_REGISTER, MENU_SUMMARY, MENU_CANCEL1};
+static const u8 sPartyMenuAction_TradeSummaryCancel1[] = {MENU_TRADE1, MENU_SUMMARY, MENU_CANCEL1};
+static const u8 sPartyMenuAction_TradeSummaryCancel2[] = {MENU_TRADE2, MENU_SUMMARY, MENU_CANCEL1};
 
 // IDs for the action lists that appear when a party mon is selected
 enum
@@ -1180,7 +1180,7 @@ enum
     ACTIONS_SPIN_TRADE,
 };
 
-const u8 *const sPartyMenuActions[] =
+static const u8 *const sPartyMenuActions[] =
 {
     [ACTIONS_NONE]          = NULL,
     [ACTIONS_SWITCH]        = sPartyMenuAction_SummarySwitchCancel,
@@ -1197,7 +1197,7 @@ const u8 *const sPartyMenuActions[] =
     [ACTIONS_SPIN_TRADE]    = sPartyMenuAction_TradeSummaryCancel2,
 };
 
-const u8 sPartyMenuActionCounts[] =
+static const u8 sPartyMenuActionCounts[] =
 {
     [ACTIONS_NONE]          = 0,
     [ACTIONS_SWITCH]        = NELEMS(sPartyMenuAction_SummarySwitchCancel),
@@ -1214,13 +1214,13 @@ const u8 sPartyMenuActionCounts[] =
     [ACTIONS_SPIN_TRADE]    = NELEMS(sPartyMenuAction_TradeSummaryCancel2),
 };
 
-const u16 sFieldMoves[] =
+static const u16 sFieldMoves[] =
 {
     MOVE_FLASH, MOVE_CUT, MOVE_FLY, MOVE_STRENGTH, MOVE_SURF, MOVE_ROCK_SMASH, MOVE_WATERFALL, MOVE_TELEPORT,
     MOVE_DIG, MOVE_MILK_DRINK, MOVE_SOFT_BOILED, MOVE_SWEET_SCENT, FIELD_MOVE_END // this may be misuse of enum. same in emerald
 };
 
-struct
+static struct
 {
     bool8 (*fieldMoveFunc)(void);
     u8 msgId;
@@ -1240,7 +1240,7 @@ struct
     [FIELD_MOVE_SWEET_SCENT]  = {SetUpFieldMove_SweetScent,  PARTY_MSG_CANT_USE_HERE},
 };
 
-const u8 *const sUnionRoomTradeMessages[] =
+static const u8 *const sUnionRoomTradeMessages[] =
 {
     [UR_TRADE_MSG_NOT_MON_PARTNER_WANTS - 1]       = gText_NotPkmnOtherTrainerWants,
     [UR_TRADE_MSG_NOT_EGG - 1]                     = gText_ThatIsntAnEgg,
@@ -1253,7 +1253,7 @@ const u8 *const sUnionRoomTradeMessages[] =
     [UR_TRADE_MSG_CANT_TRADE_WITH_PARTNER_2 - 1]   = gText_CantTradeWithTrainer,
 };
 
-const u16 sTMHMMoves[] =
+static const u16 sTMHMMoves[] =
 {
     MOVE_FOCUS_PUNCH,
     MOVE_DRAGON_CLAW,

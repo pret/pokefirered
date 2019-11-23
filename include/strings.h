@@ -388,6 +388,16 @@ extern const u8 gText_WhichMoveToForget[];
 extern const u8 gText_12PoofForgotMove[];
 extern const u8 gText_StopLearningMove2[];
 extern const u8 gText_MoveNotLearned[];
+extern const u8 gText_PkmnElevatedToLvVar2[];
+extern const u8 gText_PkmnHoldingItemCantHoldMail[];
+extern const u8 gText_MailTransferredFromMailbox[];
+extern const u8 gText_RemoveMailBeforeItem[];
+extern const u8 gText_CantSwitchWithAlly[];
+extern const u8 gText_PkmnHasNoEnergy[];
+extern const u8 gText_PkmnAlreadyInBattle[];
+extern const u8 gText_EggCantBattle[];
+extern const u8 gText_PkmnAlreadySelected[];
+extern const u8 gText_PkmnCantSwitchOut[];
 
 // credits
 extern const u8 gString_Dummy[];

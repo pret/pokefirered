@@ -43,7 +43,6 @@ void ClearItemSlots(struct ItemSlot *itemSlots, u8 b);
 u8 CountUsedPCItemSlots(void);
 bool8 CheckPCHasItem(u16 itemId, u16 count);
 bool8 AddPCItem(u16 itemId, u16 count);
-void RemovePCItem(u8 index, u16 count);
 void SwapRegisteredBike(void);
 const u8 *ItemId_GetName(u16 itemId);
 u16 ItemId_GetId(u16 itemId);
@@ -75,7 +74,7 @@ u16 GetPcItemQuantity(u16 *);
 void SetBagPocketsPointers(void);
 
 void ItemPcCompaction(void);
-void RemoveItemFromPC(u16 itemId, u16 quantity);
+void RemovePCItem(u16 itemId, u16 quantity);
 void SortAndCompactBagPocket(struct BagPocket * pocket);
 u8 CountItemsInPC(void);
 void ApplyNewEncryptionKeyToBagItems_(u32 newKey);

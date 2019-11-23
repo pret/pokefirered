@@ -859,27 +859,27 @@ gUnknown_84169F8:: @ 84169F8
 	.string "This can't be used on\n"
 	.string "that POKéMON.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416A1E:: @ 8416A1E
+gText_PkmnCantSwitchOut:: @ 8416A1E
 	.string "{STR_VAR_1} can't be switched\n"
 	.string "out!{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416A3A:: @ 8416A3A
+gText_PkmnAlreadyInBattle:: @ 8416A3A
 	.string "{STR_VAR_1} is already\n"
 	.string "in battle!{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416A55:: @ 8416A55
+gText_PkmnAlreadySelected:: @ 8416A55
 	.string "{STR_VAR_1} has already been\n"
 	.string "selected.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416A75:: @ 8416A75
+gText_PkmnHasNoEnergy:: @ 8416A75
 	.string "{STR_VAR_1} has no energy\n"
 	.string "left to battle!{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416A98:: @ 8416A98
+gText_CantSwitchWithAlly:: @ 8416A98
 	.string "You can't switch {STR_VAR_1}'s\n"
 	.string "POKéMON with one of yours!{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416ACB:: @ 8416ACB
+gText_EggCantBattle:: @ 8416ACB
 	.string "An EGG can't battle!{PAUSE_UNTIL_PRESS}$"
 
 gText_CantUseUntilNewBadge:: @ 8416AE2
@@ -908,7 +908,7 @@ gText_MailMessageWillBeLost:: @ 8416BC3
 	.string "If the MAIL is removed, the\n"
 	.string "message will be lost. Okay?$"
 
-gUnknown_8416BFB:: @ 8416BFB
+gText_RemoveMailBeforeItem:: @ 8416BFB
 	.string "MAIL must be removed before\n"
 	.string "holding an item.{PAUSE_UNTIL_PRESS}$"
 

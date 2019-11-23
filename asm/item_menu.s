@@ -6857,7 +6857,7 @@ _0810B564:
 	bl DestroyListMenuTask
 	bl sub_810AECC
 	ldr r1, _0810B5B0 @ =gItemUseCB
-	ldr r0, _0810B5B4 @ =ItemUseCB_Medicine
+	ldr r0, _0810B5B4 @ =ItemUseCB_MedicineStep
 	str r0, [r1]
 	ldr r0, _0810B5B8 @ =ChooseMonForInBattleItem
 	bl ItemMenu_SetExitCallback
@@ -6869,7 +6869,7 @@ _0810B564:
 	b _0810B5C6
 	.align 2, 0
 _0810B5B0: .4byte gItemUseCB
-_0810B5B4: .4byte ItemUseCB_Medicine
+_0810B5B4: .4byte ItemUseCB_MedicineStep
 _0810B5B8: .4byte ChooseMonForInBattleItem
 _0810B5BC: .4byte sub_810B070
 _0810B5C0:

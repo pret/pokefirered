@@ -405,7 +405,7 @@ gSpecials:: @ 815FD60
 	def_special get_unknown_box_id
 	def_special Special_OpenMuseumFossilPic
 	def_special Special_CloseMuseumFossilPic
-	def_special sub_812781C
+	def_special ChooseMonForMoveTutor
 	def_special ChooseMonForWirelessMinigame
 	def_special SetBattledTrainerFlag
 	def_special sub_812B35C

@@ -412,7 +412,7 @@ bool8 AddPCItem(u16 itemId, u16 count)
     return TRUE;
 }
 
-void RemoveItemFromPC(u16 itemId, u16 count)
+void RemovePCItem(u16 itemId, u16 count)
 {
     u32 i;
     u16 quantity;

@@ -13968,7 +13968,7 @@ EventScript_1C4F26:: @ 81C4F26
 	end
 
 EventScript_1C4F30:: @ 81C4F30
-	special sub_812781C
+	special ChooseMonForMoveTutor
 	waitstate
 	lock
 	faceplayer

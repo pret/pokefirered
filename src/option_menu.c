@@ -206,7 +206,7 @@ void CB2_OptionsMenuFromStartMenu(void)
     u8 i;
     
     if (gMain.savedCallback == NULL)
-        gMain.savedCallback = CB2_ReturnToStartMenu;
+        gMain.savedCallback = CB2_ReturnToFieldWithOpenMenu;
     sOptionMenuPtr = AllocZeroed(sizeof(struct OptionMenu));
     sOptionMenuPtr->state3 = 0;
     sOptionMenuPtr->state2 = 0;

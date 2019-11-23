@@ -140,7 +140,7 @@ bool32 Overworld_DoScrollSceneForCredits(u8 *, const struct CreditsOverworldCmd 
 
 bool32 sub_8058318(void);
 
-void CB2_ReturnToStartMenu(void);
+void CB2_ReturnToFieldWithOpenMenu(void);
 void CB2_WhiteOut(void);
 void c2_8056854(void);
 void sub_8054F38(u32 newKey);

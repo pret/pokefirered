@@ -96,5 +96,6 @@ u8 *GetMapName(u8 *, u16, u16);
 bool32 sub_8124668(u8 mapSecId);
 void GetMapNameGeneric(u8 *, u8);
 void sub_80BFF50(u8 a0, void (*a1)(void));
+void MCB2_FlyMap(void);
 
 #endif //GUARD_REGION_MAP_H

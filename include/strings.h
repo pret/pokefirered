@@ -187,13 +187,13 @@ extern const u8 gUnknown_84162BD[];
 extern const u8 gUnknown_841D148[];
 
 // pokemon
-extern const u8 BattleText_Rose[];
-extern const u8 BattleText_UnknownString3[];
-extern const u8 BattleText_GetPumped[];
-extern const u8 BattleText_MistShroud[];
+extern const u8 gBattleText_Rose[];
+extern const u8 gBattleText_UnknownString3[];
+extern const u8 gBattleText_GetPumped[];
+extern const u8 gBattleText_MistShroud[];
 extern const u8 gText_BadEgg[];
 extern const u8 gText_PkmnsXPreventsSwitching[];
-extern u8 *gUnknown_83FD5D0[];
+extern const u8 *const gStatNamesTable[];
 
 // diploma
 extern const u8 gUnknown_841B60E[];

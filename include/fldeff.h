@@ -7,7 +7,6 @@
 gTasks[taskId].data[8] = (u32)func >> 16;                 \
 gTasks[taskId].data[9] = (u32)func;
 
-extern u8 *gUnknown_203AAB0;
 extern struct MapPosition gPlayerFacingPosition;
 
 bool8 CheckObjectGraphicsInFrontOfPlayer(u8 graphicsId);

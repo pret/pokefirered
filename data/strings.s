@@ -475,7 +475,7 @@ gUnknown_8416210:: @ 8416210
 gText_ThreeHyphens:: @ 8416213
 	.string "---$"
 
-gUnknown_8416217:: @ 8416217
+gText_SevenHyphens:: @ 8416217
 	.string "-------$"
 
 gUnknown_841621F:: @ 841621F
@@ -720,26 +720,26 @@ gText_TheBerryPouchWillBePutAway:: @ 8416716
 	.string "The BERRY POUCH will be\n"
 	.string "put away.$"
 
-gUnknown_8416738:: @ 0x8416738
+gText_ShopBuy:: @ 0x8416738
 	.string "BUY$"
 
-gUnknown_841673C:: @ 0x841673C
+gText_ShopSell:: @ 0x841673C
 	.string "SELL$"
 
-gUnknown_8416741:: @ 0x8416741
+gText_ShopQuit:: @ 0x8416741
 	.string "SEE YA!$"
 
-gUnknown_8416749:: @ 8416749
+gText_InBagVar1:: @ 8416749
 	.string "IN BAG:{SMALL} {STR_VAR_1}$"
 
-gUnknown_8416757:: @ 8416757
+gText_QuitShopping:: @ 8416757
 	.string "Quit shopping.$"
 
-gUnknown_8416766:: @ 8416766
+gText_Var1CertainlyHowMany:: @ 8416766
 	.string "{STR_VAR_1}? Certainly.\n"
 	.string "How many would you like?$"
 
-gUnknown_841678E:: @ 841678E
+gText_Var1AndYouWantedVar2:: @ 841678E
 	.string "{STR_VAR_1}, and you want {STR_VAR_2}.\n"
 	.string "That will be ¥{STR_VAR_3}. Okay?$"
 
@@ -751,7 +751,7 @@ gUnknown_84167D0:: @ 0x84167D0
 	.string "{STR_VAR_1} ですね!\n"
 	.string "{STR_VAR_2}¥ だけど かいますか?$"
 
-gUnknown_84167E7:: @ 84167E7
+gText_HereYouGoThankYou:: @ 84167E7
 	.string "Here you are!\n"
 	.string "Thank you!$"
 
@@ -763,10 +763,10 @@ gUnknown_8416822:: @ 0x8416822
 	.string "どうも ありがとう!\n"
 	.string "じたくの パソコンに おくって おくね!$"
 
-gUnknown_8416842:: @ 8416842
+gText_YouDontHaveMoney:: @ 8416842
 	.string "You don't have enough money.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416861:: @ 8416861
+gText_NoMoreRoomForThis:: @ 8416861
 	.string "You have no more room for this\n"
 	.string "item.{PAUSE_UNTIL_PRESS}$"
 
@@ -774,7 +774,7 @@ gUnknown_8416888:: @ 0x8416888
 	.string "{STR_VAR_1}を\n"
 	.string "いれる ばしょが いっぱいです{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_841689E:: @ 841689E
+gText_CanIHelpWithAnythingElse:: @ 841689E
 	.string "Is there anything else I can do?$"
 
 gUnknown_84168BF:: @ 0x84168BF

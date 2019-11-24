@@ -315,7 +315,7 @@ gUnknown_20398B8: @ 20398B8
 gUnknown_20398BA: @ 20398BA
 	.space 0x7A
 
-gUnknown_2039934: @ 2039934
+gShopData: @ 2039934
 	.space 0xE
 
 gUnknown_2039942: @ 2039942

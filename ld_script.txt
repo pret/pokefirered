@@ -141,7 +141,6 @@ SECTIONS {
         src/battle_anim_mon_movement.o(.text);
         src/item.o(.text);
 		src/shop.o(.text);
-        asm/shop.o(.text);
         src/berry.o(.text);
         src/script_menu.o(.text);
         asm/naming_screen.o(.text);
@@ -443,7 +442,6 @@ SECTIONS {
         src/battle_anim_mon_movement.o(.rodata);
         src/item.o(.rodata);
 		src/shop.o(.rodata);
-        data/shop.o(.rodata);
         src/berry.o(.rodata);
         src/script_menu.o(.rodata);
         data/naming_screen.o(.rodata);

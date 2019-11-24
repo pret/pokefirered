@@ -4797,8 +4797,8 @@ static void sub_8042D50(int stat)
 {
     gBattlerTarget = gBattlerInMenuId;
     StringCopy(gBattleTextBuff1, gStatNamesTable[gUnknown_825DFF0[stat]]);
-    StringCopy(gBattleTextBuff2, BattleText_Rose);
-    BattleStringExpandPlaceholdersToDisplayedString(BattleText_UnknownString3);
+    StringCopy(gBattleTextBuff2, gBattleText_Rose);
+    BattleStringExpandPlaceholdersToDisplayedString(gBattleText_UnknownString3);
 }
 
 const u8 *Battle_PrintStatBoosterEffectMessage(u16 itemId)
@@ -4837,7 +4837,7 @@ const u8 *Battle_PrintStatBoosterEffectMessage(u16 itemId)
             else
             {
                 gBattlerAttacker = gBattlerInMenuId;
-                BattleStringExpandPlaceholdersToDisplayedString(BattleText_GetPumped);
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleText_GetPumped);
             }
         }
     }
@@ -4845,7 +4845,7 @@ const u8 *Battle_PrintStatBoosterEffectMessage(u16 itemId)
     if (itemEffect[3] & 0x80)
     {
         gBattlerAttacker = gBattlerInMenuId;
-        BattleStringExpandPlaceholdersToDisplayedString(BattleText_MistShroud);
+        BattleStringExpandPlaceholdersToDisplayedString(gBattleText_MistShroud);
     }
 
     return gDisplayedStringBattle;

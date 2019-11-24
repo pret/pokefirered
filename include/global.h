@@ -206,26 +206,6 @@ struct LinkBattleRecords
 #include "global.berry.h"
 #include "pokemon.h"
 
-struct UnknownSaveBlock2Struct
-{
-    u8 field_0;
-    u8 field_1;
-    u8 field_2[2];
-    u8 field_4[8];
-    u8 field_C[16];
-    u16 field_1C[6];
-    u16 field_28[6];
-    u8 field_34[176];
-    u8 field_E4;
-    u8 field_E5;
-    u8 field_E6;
-    u8 field_E7;
-    u8 field_E8;
-    u8 field_E9;
-    u8 field_EA;
-    u8 field_EB;
-}; // sizeof = 0xEC
-
 struct BattleTowerRecord // record mixing
 {
     /*0x00*/ u8 battleTowerLevelType; // 0 = level 50, 1 = level 100

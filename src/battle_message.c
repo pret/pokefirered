@@ -38,403 +38,403 @@ struct BattleWindowText
 };
 
 static EWRAM_DATA u8 sBattlerAbilities[MAX_BATTLERS_COUNT] = {};
-static EWRAM_DATA struct BattleMsgData *gBattleMsgDataPtr = NULL;
+static EWRAM_DATA struct BattleMsgData *sBattleMsgDataPtr = NULL;
 
 static void ChooseMoveUsedParticle(u8 *textPtr);
 static void ChooseTypeOfMoveUsedString(u8 *textPtr);
 static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst);
 
-const u8 gUnknown_83FB218[] = _(""); //  @ 83FB218
-const u8 gUnknown_83FB219[] = _("{B_TRAINER1_LOSE_TEXT}"); //  @ 83FB219
-const u8 gUnknown_83FB21C[] = _("{B_TRAINER2_CLASS}"); //  @ 83FB21C
-const u8 gUnknown_83FB21F[] = _("{B_TRAINER1_NAME}: {B_OPPONENT_MON1_NAME}, come back!"); //  @ 83FB21F
-const u8 gUnknown_83FB232[] = _("{B_TRAINER1_WIN_TEXT}"); //  @ 83FB232
-const u8 gUnknown_83FB235[] = _("{B_TRAINER1_NAME}: {B_OPPONENT_MON2_NAME}, come back!"); //  @ 83FB235
-const u8 gUnknown_83FB248[] = _("{B_TRAINER1_NAME}: {B_OPPONENT_MON1_NAME} and\n{B_OPPONENT_MON2_NAME}, come back!"); //  @ 83FB248
-const u8 gUnknown_83FB262[] = _("{B_TRAINER2_NAME}"); //  @ 83FB262
-const u8 gUnknown_83FB265[] = _("{B_BUFF1} gained{B_BUFF2}\n{B_TRAINER2_LOSE_TEXT} EXP. Points!\p"); //  @ 83FB265
-const u8 gUnknown_83FB282[] = _(""); //  @ 83FB282
-const u8 gUnknown_83FB283[] = _(" a boosted"); //  @ 83FB283
-const u8 gUnknown_83FB28E[] = _("{B_BUFF1} grew to\nLV. {B_BUFF2}!{WAIT_SE}\p"); //  @ 83FB28E
-const u8 gUnknown_83FB2A4[] = _("{B_BUFF1} learned\n{B_BUFF2}!{WAIT_SE}\p"); //  @ 83FB2A4
-const u8 gUnknown_83FB2B6[] = _("{B_BUFF1} is trying to\nlearn {B_BUFF2}.\p"); //  @ 83FB2B6
-const u8 gUnknown_83FB2D1[] = _("But, {B_BUFF1} can't learn\nmore than four moves.\p"); //  @ 83FB2D1
-const u8 gUnknown_83FB2FC[] = _("Delete a move to make\nroom for {B_BUFF2}?"); //  @ 83FB2FC
-const u8 gUnknown_83FB31F[] = _("{B_BUFF1} forgot\n{B_BUFF2}.\p"); //  @ 83FB31F
-const u8 gUnknown_83FB32E[] = _("{PAUSE 32}Stop learning\n{B_BUFF2}?"); //  @ 83FB32E
-const u8 gUnknown_83FB343[] = _("{B_BUFF1} did not learn\n{B_BUFF2}.\p"); //  @ 83FB343
-const u8 gUnknown_83FB359[] = _("Use next POKéMON?"); //  @ 83FB359
-const u8 gUnknown_83FB36B[] = _("{B_ATK_NAME_WITH_PREFIX}'s\nattack missed!"); //  @ 83FB36B
-const u8 gUnknown_83FB37F[] = _("{B_DEF_NAME_WITH_PREFIX}\nprotected itself!"); //  @ 83FB37F
-const u8 gUnknown_83FB394[] = _("{B_DEF_NAME_WITH_PREFIX} avoided\ndamage with {B_DEF_ABILITY}!"); //  @ 83FB394
-const u8 gUnknown_83FB3AF[] = _("{B_DEF_NAME_WITH_PREFIX} makes GROUND\nmoves miss with {B_DEF_ABILITY}!"); //  @ 83FB3AF
-const u8 gUnknown_83FB3D3[] = _("{B_DEF_NAME_WITH_PREFIX} avoided\nthe attack!"); //  @ 83FB3D3
-const u8 gUnknown_83FB3EA[] = _("It doesn't affect\n{B_DEF_NAME_WITH_PREFIX}…"); //  @ 83FB3EA
-const u8 gUnknown_83FB400[] = _("{B_ATK_NAME_WITH_PREFIX}\nfainted!\p"); //  @ 83FB400
-const u8 gUnknown_83FB40D[] = _("{B_DEF_NAME_WITH_PREFIX}\nfainted!\p"); //  @ 83FB40D
-const u8 gUnknown_83FB41A[] = _("{B_PLAYER_NAME} got ¥{B_BUFF1}\nfor winning!\p"); //  @ 83FB41A
-const u8 gUnknown_83FB433[] = _("{B_PLAYER_NAME} is out of\nusable POKéMON!\p"); //  @ 83FB433
-const u8 gUnknown_83FB451[] = _("{B_PLAYER_NAME} panicked and lost ¥{B_BUFF1}…\p… … … …\p{B_PLAYER_NAME} whited out!{PAUSE_UNTIL_PRESS}"); //  @ 83FB451
-const u8 gUnknown_83FB484[] = _("{B_PLAYER_NAME} is out of\nusable POKéMON!\pPlayer lost against\n{B_TRAINER1_CLASS} {B_TRAINER1_NAME}!{PAUSE_UNTIL_PRESS}"); //  @ 83FB484
-const u8 gUnknown_83FB4BE[] = _("{B_PLAYER_NAME} paid ¥{B_BUFF1} as the prize\nmoney…\p… … … …\p{B_PLAYER_NAME} whited out!{PAUSE_UNTIL_PRESS}"); //  @ 83FB4BE
-const u8 gUnknown_83FB4F7[] = _("{B_PLAYER_NAME} whited out!{PAUSE_UNTIL_PRESS}"); //  @ 83FB4F7
-const u8 gUnknown_83FB508[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} prevents\nescape with {B_SCR_ACTIVE_ABILITY}!\p"); //  @ 83FB508
-const u8 gUnknown_83FB525[] = _("Can't escape!\p"); //  @ 83FB525
-const u8 gUnknown_83FB534[] = _("{B_ATK_NAME_WITH_PREFIX} can't escape!"); //  @ 83FB534
-const u8 gUnknown_83FB545[] = _("Hit {B_BUFF1} time(s)!"); //  @ 83FB545
-const u8 gUnknown_83FB555[] = _("{B_EFF_NAME_WITH_PREFIX}\nfell asleep!"); //  @ 83FB555
-const u8 gUnknown_83FB565[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nmade {B_EFF_NAME_WITH_PREFIX} sleep!"); //  @ 83FB565
-const u8 gUnknown_83FB57C[] = _("{B_DEF_NAME_WITH_PREFIX} is\nalready asleep!"); //  @ 83FB57C
-const u8 gUnknown_83FB592[] = _("{B_ATK_NAME_WITH_PREFIX} is\nalready asleep!"); //  @ 83FB592
-const u8 gUnknown_83FB5A8[] = _("{B_DEF_NAME_WITH_PREFIX}\nwasn't affected!"); //  @ 83FB5A8
-const u8 gUnknown_83FB5BC[] = _("{B_EFF_NAME_WITH_PREFIX}\nwas poisoned!"); //  @ 83FB5BC
-const u8 gUnknown_83FB5CD[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\npoisoned {B_EFF_NAME_WITH_PREFIX}!"); //  @ 83FB5CD
-const u8 gUnknown_83FB5E2[] = _("{B_ATK_NAME_WITH_PREFIX} is hurt\nby poison!"); //  @ 83FB5E2
-const u8 gUnknown_83FB5F8[] = _("{B_DEF_NAME_WITH_PREFIX} is already\npoisoned."); //  @ 83FB5F8
-const u8 gUnknown_83FB610[] = _("{B_EFF_NAME_WITH_PREFIX} is badly\npoisoned!"); //  @ 83FB610
-const u8 gUnknown_83FB626[] = _("{B_DEF_NAME_WITH_PREFIX} had its\nenergy drained!"); //  @ 83FB626
-const u8 gUnknown_83FB641[] = _("{B_EFF_NAME_WITH_PREFIX} was burned!"); //  @ 83FB641
-const u8 gUnknown_83FB650[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nburned {B_EFF_NAME_WITH_PREFIX}!"); //  @ 83FB650
-const u8 gUnknown_83FB663[] = _("{B_ATK_NAME_WITH_PREFIX} is hurt\nby its burn!"); //  @ 83FB663
-const u8 gUnknown_83FB67B[] = _("{B_DEF_NAME_WITH_PREFIX} already\nhas a burn."); //  @ 83FB67B
-const u8 gUnknown_83FB692[] = _("{B_EFF_NAME_WITH_PREFIX} was\nfrozen solid!"); //  @ 83FB692
-const u8 gUnknown_83FB6A7[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nfroze {B_EFF_NAME_WITH_PREFIX} solid!"); //  @ 83FB6A7
-const u8 gUnknown_83FB6BF[] = _("{B_ATK_NAME_WITH_PREFIX} is\nfrozen solid!"); //  @ 83FB6BF
-const u8 gUnknown_83FB6D3[] = _("{B_DEF_NAME_WITH_PREFIX} was\ndefrosted!"); //  @ 83FB6D3
-const u8 gUnknown_83FB6E5[] = _("{B_ATK_NAME_WITH_PREFIX} was\ndefrosted!"); //  @ 83FB6E5
-const u8 gUnknown_83FB6F7[] = _("{B_ATK_NAME_WITH_PREFIX} was\ndefrosted by {B_CURRENT_MOVE}!"); //  @ 83FB6F7
-const u8 gUnknown_83FB70F[] = _("{B_EFF_NAME_WITH_PREFIX} is paralyzed!\nIt may be unable to move!"); //  @ 83FB70F
-const u8 gUnknown_83FB73A[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nparalyzed {B_EFF_NAME_WITH_PREFIX}!\lIt may be unable to move!"); //  @ 83FB73A
-const u8 gUnknown_83FB76A[] = _("{B_ATK_NAME_WITH_PREFIX} is paralyzed!\nIt can't move!"); //  @ 83FB76A
-const u8 gUnknown_83FB78A[] = _("{B_DEF_NAME_WITH_PREFIX} is\nalready paralyzed!"); //  @ 83FB78A
-const u8 gUnknown_83FB7A3[] = _("{B_DEF_NAME_WITH_PREFIX} was\nhealed of paralysis!"); //  @ 83FB7A3
-const u8 gUnknown_83FB7BF[] = _("{B_DEF_NAME_WITH_PREFIX}'s\ndream was eaten!"); //  @ 83FB7BF
-const u8 gUnknown_83FB7D5[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1}\nwon't go higher!"); //  @ 83FB7D5
-const u8 gUnknown_83FB7EE[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\nwon't go lower!"); //  @ 83FB7EE
-const u8 gUnknown_83FB806[] = _("Your team's {B_BUFF1}\nstopped working!"); //  @ 83FB806
-const u8 gUnknown_83FB826[] = _("The foe's {B_BUFF1}\nstopped working!"); //  @ 83FB826
-const u8 gUnknown_83FB844[] = _("{B_ATK_NAME_WITH_PREFIX} is\nconfused!"); //  @ 83FB844
-const u8 gUnknown_83FB854[] = _("{B_ATK_NAME_WITH_PREFIX} snapped\nout of confusion!"); //  @ 83FB854
-const u8 gUnknown_83FB871[] = _("{B_EFF_NAME_WITH_PREFIX} became\nconfused!"); //  @ 83FB871
-const u8 gUnknown_83FB885[] = _("{B_DEF_NAME_WITH_PREFIX} is\nalready confused!"); //  @ 83FB885
-const u8 gUnknown_83FB89D[] = _("{B_DEF_NAME_WITH_PREFIX}\nfell in love!"); //  @ 83FB89D
-const u8 gUnknown_83FB8AE[] = _("{B_ATK_NAME_WITH_PREFIX} is in love\nwith {B_SCR_ACTIVE_NAME_WITH_PREFIX}!"); //  @ 83FB8AE
-const u8 gUnknown_83FB8C5[] = _("{B_ATK_NAME_WITH_PREFIX} is\nimmobilized by love!"); //  @ 83FB8C5
-const u8 gUnknown_83FB8E0[] = _("{B_DEF_NAME_WITH_PREFIX} was\nblown away!"); //  @ 83FB8E0
-const u8 gUnknown_83FB8F3[] = _("{B_ATK_NAME_WITH_PREFIX} transformed\ninto the {B_BUFF1} type!"); //  @ 83FB8F3
-const u8 gUnknown_83FB914[] = _("{B_ATK_NAME_WITH_PREFIX} flinched!"); //  @ 83FB914
-const u8 gUnknown_83FB921[] = _("{B_DEF_NAME_WITH_PREFIX} regained\nhealth!"); //  @ 83FB921
-const u8 gUnknown_83FB935[] = _("{B_DEF_NAME_WITH_PREFIX}'s\nHP is full!"); //  @ 83FB935
-const u8 gUnknown_83FB946[] = _("{B_ATK_PREFIX2}'s {B_CURRENT_MOVE}\nraised SP. DEF!"); //  @ 83FB946
-const u8 gUnknown_83FB95E[] = _("{B_ATK_PREFIX2}'s {B_CURRENT_MOVE}\nraised SP. DEF a little!"); //  @ 83FB95E
-const u8 gUnknown_83FB97F[] = _("{B_ATK_PREFIX2}'s {B_CURRENT_MOVE}\nraised DEFENSE!"); //  @ 83FB97F
-const u8 gUnknown_83FB997[] = _("{B_ATK_PREFIX2}'s {B_CURRENT_MOVE}\nraised DEFENSE a little!"); //  @ 83FB997
-const u8 gUnknown_83FB9B8[] = _("{B_ATK_PREFIX2}'s party is covered\nby a veil!"); //  @ 83FB9B8
-const u8 gUnknown_83FB9D9[] = _("{B_DEF_NAME_WITH_PREFIX}'s party is protected\nby SAFEGUARD!"); //  @ 83FB9D9
-const u8 gUnknown_83FB9FF[] = _("{B_ATK_PREFIX3}'s party is no longer\nprotected by SAFEGUARD!"); //  @ 83FB9FF
-const u8 gUnknown_83FBA2F[] = _("{B_ATK_NAME_WITH_PREFIX} went\nto sleep!"); //  @ 83FBA2F
-const u8 gUnknown_83FBA41[] = _("{B_ATK_NAME_WITH_PREFIX} slept and\nbecame healthy!"); //  @ 83FBA41
-const u8 gUnknown_83FBA5E[] = _("{B_ATK_NAME_WITH_PREFIX} whipped\nup a whirlwind!"); //  @ 83FBA5E
-const u8 gUnknown_83FBA79[] = _("{B_ATK_NAME_WITH_PREFIX} took\nin sunlight!"); //  @ 83FBA79
-const u8 gUnknown_83FBA8E[] = _("{B_ATK_NAME_WITH_PREFIX} lowered\nits head!"); //  @ 83FBA8E
-const u8 gUnknown_83FBAA3[] = _("{B_ATK_NAME_WITH_PREFIX} is glowing!"); //  @ 83FBAA3
-const u8 gUnknown_83FBAB2[] = _("{B_ATK_NAME_WITH_PREFIX} flew\nup high!"); //  @ 83FBAB2
-const u8 gUnknown_83FBAC3[] = _("{B_ATK_NAME_WITH_PREFIX} dug a hole!"); //  @ 83FBAC3
-const u8 gUnknown_83FBAD2[] = _("{B_ATK_NAME_WITH_PREFIX} hid\nunderwater!"); //  @ 83FBAD2
-const u8 gUnknown_83FBAE5[] = _("{B_ATK_NAME_WITH_PREFIX} sprang up!"); //  @ 83FBAE5
-const u8 gUnknown_83FBAF3[] = _("{B_DEF_NAME_WITH_PREFIX} was squeezed by\n{B_ATK_NAME_WITH_PREFIX}'s BIND!"); //  @ 83FBAF3
-const u8 gUnknown_83FBB11[] = _("{B_DEF_NAME_WITH_PREFIX} was trapped\nin the vortex!"); //  @ 83FBB11
-const u8 gUnknown_83FBB2F[] = _("{B_DEF_NAME_WITH_PREFIX} was trapped\nby SAND TOMB!"); //  @ 83FBB2F
-const u8 gUnknown_83FBB4C[] = _("{B_DEF_NAME_WITH_PREFIX} was WRAPPED by\n{B_ATK_NAME_WITH_PREFIX}!"); //  @ 83FBB4C
-const u8 gUnknown_83FBB62[] = _("{B_ATK_NAME_WITH_PREFIX} CLAMPED\n{B_DEF_NAME_WITH_PREFIX}!"); //  @ 83FBB62
-const u8 gUnknown_83FBB71[] = _("{B_ATK_NAME_WITH_PREFIX} is hurt\nby {B_BUFF1}!"); //  @ 83FBB71
-const u8 gUnknown_83FBB83[] = _("{B_ATK_NAME_WITH_PREFIX} was freed\nfrom {B_BUFF1}!"); //  @ 83FBB83
-const u8 gUnknown_83FBB99[] = _("{B_ATK_NAME_WITH_PREFIX} kept going\nand crashed!"); //  @ 83FBB99
-const u8 BattleText_MistShroud[] = _("{B_ATK_PREFIX2} became\nshrouded in MIST!"); //  @ 83FBBB4
-const u8 gUnknown_83FBBD0[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} is protected\nby MIST!"); //  @ 83FBBD0
-const u8 BattleText_GetPumped[] = _("{B_ATK_NAME_WITH_PREFIX} is getting\npumped!"); //  @ 83FBBE9
-const u8 gUnknown_83FBBFF[] = _("{B_ATK_NAME_WITH_PREFIX} is hit\nwith recoil!"); //  @ 83FBBFF
-const u8 gUnknown_83FBC16[] = _("{B_ATK_NAME_WITH_PREFIX} protected\nitself!"); //  @ 83FBC16
-const u8 gUnknown_83FBC2B[] = _("{B_ATK_NAME_WITH_PREFIX} is buffeted\nby the sandstorm!"); //  @ 83FBC2B
-const u8 gUnknown_83FBC4C[] = _("{B_ATK_NAME_WITH_PREFIX} is pelted\nby HAIL!"); //  @ 83FBC4C
-const u8 gUnknown_83FBC62[] = _("{B_ATK_PREFIX1}'s {B_BUFF1}\nwore off!"); //  @ 83FBC62
-const u8 gUnknown_83FBC74[] = _("{B_DEF_NAME_WITH_PREFIX} was seeded!"); //  @ 83FBC74
-const u8 gUnknown_83FBC83[] = _("{B_DEF_NAME_WITH_PREFIX} evaded\nthe attack!"); //  @ 83FBC83
-const u8 gUnknown_83FBC99[] = _("{B_ATK_NAME_WITH_PREFIX}'s health is\nsapped by LEECH SEED!"); //  @ 83FBC99
-const u8 gUnknown_83FBCBE[] = _("{B_ATK_NAME_WITH_PREFIX} is fast\nasleep."); //  @ 83FBCBE
-const u8 gUnknown_83FBCD1[] = _("{B_ATK_NAME_WITH_PREFIX} woke up!"); //  @ 83FBCD1
-const u8 gUnknown_83FBCDD[] = _("But {B_SCR_ACTIVE_NAME_WITH_PREFIX}'s UPROAR\nkept it awake!"); //  @ 83FBCDD
-const u8 gUnknown_83FBCFC[] = _("{B_ATK_NAME_WITH_PREFIX} woke up\nin the UPROAR!"); //  @ 83FBCFC
-const u8 gUnknown_83FBD16[] = _("{B_ATK_NAME_WITH_PREFIX} caused\nan UPROAR!"); //  @ 83FBD16
-const u8 gUnknown_83FBD2B[] = _("{B_ATK_NAME_WITH_PREFIX} is making\nan UPROAR!"); //  @ 83FBD2B
-const u8 gUnknown_83FBD43[] = _("{B_ATK_NAME_WITH_PREFIX} calmed down."); //  @ 83FBD43
-const u8 gUnknown_83FBD53[] = _("But {B_DEF_NAME_WITH_PREFIX} can't\nsleep in an UPROAR!"); //  @ 83FBD53
-const u8 gUnknown_83FBD74[] = _("{B_ATK_NAME_WITH_PREFIX} STOCKPILED\n{B_BUFF1}!"); //  @ 83FBD74
-const u8 gUnknown_83FBD86[] = _("{B_ATK_NAME_WITH_PREFIX} can't\nSTOCKPILE any more!"); //  @ 83FBD86
-const u8 gUnknown_83FBDA3[] = _("But {B_DEF_NAME_WITH_PREFIX} can't\nsleep in an UPROAR!"); //  @ 83FBDA3
-const u8 gUnknown_83FBDC4[] = _("But the UPROAR kept\n{B_DEF_NAME_WITH_PREFIX} awake!"); //  @ 83FBDC4
-const u8 gUnknown_83FBDE2[] = _("{B_DEF_NAME_WITH_PREFIX} stayed awake\nusing its {B_DEF_ABILITY}!"); //  @ 83FBDE2
-const u8 gUnknown_83FBE00[] = _("{B_ATK_NAME_WITH_PREFIX} is storing\nenergy!"); //  @ 83FBE00
-const u8 gUnknown_83FBE16[] = _("{B_ATK_NAME_WITH_PREFIX} unleashed\nenergy!"); //  @ 83FBE16
-const u8 gUnknown_83FBE2B[] = _("{B_ATK_NAME_WITH_PREFIX} became\nconfused due to fatigue!"); //  @ 83FBE2B
-const u8 gUnknown_83FBE4E[] = _("{B_PLAYER_NAME} picked up\n¥{B_BUFF1}!\p"); //  @ 83FBE4E
-const u8 gUnknown_83FBE61[] = _("{B_DEF_NAME_WITH_PREFIX} is\nunaffected!"); //  @ 83FBE61
-const u8 gUnknown_83FBE73[] = _("{B_ATK_NAME_WITH_PREFIX} transformed\ninto {B_BUFF1}!"); //  @ 83FBE73
-const u8 gUnknown_83FBE8B[] = _("{B_ATK_NAME_WITH_PREFIX} made\na SUBSTITUTE!"); //  @ 83FBE8B
-const u8 gUnknown_83FBEA1[] = _("{B_ATK_NAME_WITH_PREFIX} already\nhas a SUBSTITUTE!"); //  @ 83FBEA1
-const u8 gUnknown_83FBEBE[] = _("The SUBSTITUTE took damage\nfor {B_DEF_NAME_WITH_PREFIX}!\p"); //  @ 83FBEBE
-const u8 gUnknown_83FBEE2[] = _("{B_DEF_NAME_WITH_PREFIX}'s\nSUBSTITUTE faded!\p"); //  @ 83FBEE2
-const u8 gUnknown_83FBEFA[] = _("{B_ATK_NAME_WITH_PREFIX} must\nrecharge!"); //  @ 83FBEFA
-const u8 gUnknown_83FBF0C[] = _("{B_DEF_NAME_WITH_PREFIX}'s RAGE\nis building!"); //  @ 83FBF0C
-const u8 gUnknown_83FBF23[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\nwas disabled!"); //  @ 83FBF23
-const u8 gUnknown_83FBF39[] = _("{B_ATK_NAME_WITH_PREFIX} is disabled\nno more!"); //  @ 83FBF39
-const u8 gUnknown_83FBF51[] = _("{B_DEF_NAME_WITH_PREFIX} got\nan ENCORE!"); //  @ 83FBF51
-const u8 gUnknown_83FBF63[] = _("{B_ATK_NAME_WITH_PREFIX}'s ENCORE\nended!"); //  @ 83FBF63
-const u8 gUnknown_83FBF76[] = _("{B_ATK_NAME_WITH_PREFIX} took aim\nat {B_DEF_NAME_WITH_PREFIX}!"); //  @ 83FBF76
-const u8 gUnknown_83FBF89[] = _("{B_ATK_NAME_WITH_PREFIX} SKETCHED\n{B_BUFF1}!"); //  @ 83FBF89
-const u8 gUnknown_83FBF99[] = _("{B_ATK_NAME_WITH_PREFIX} is trying\nto take its foe with it!"); //  @ 83FBF99
-const u8 gUnknown_83FBFBF[] = _("{B_DEF_NAME_WITH_PREFIX} took\n{B_ATK_NAME_WITH_PREFIX} with it!"); //  @ 83FBFBF
-const u8 gUnknown_83FBFD3[] = _("Reduced {B_DEF_NAME_WITH_PREFIX}'s\n{B_BUFF1} by {B_BUFF2}!"); //  @ 83FBFD3
-const u8 gUnknown_83FBFEA[] = _("{B_ATK_NAME_WITH_PREFIX} stole\n{B_DEF_NAME_WITH_PREFIX}'s {B_LAST_ITEM}!"); //  @ 83FBFEA
-const u8 gUnknown_83FBFFC[] = _("{B_DEF_NAME_WITH_PREFIX} can't\nescape now!"); //  @ 83FBFFC
-const u8 gUnknown_83FC011[] = _("{B_DEF_NAME_WITH_PREFIX} fell into\na NIGHTMARE!"); //  @ 83FC011
-const u8 gUnknown_83FC02B[] = _("{B_ATK_NAME_WITH_PREFIX} is locked\nin a NIGHTMARE!"); //  @ 83FC02B
-const u8 gUnknown_83FC048[] = _("{B_ATK_NAME_WITH_PREFIX} cut its own HP and\nlaid a CURSE on {B_DEF_NAME_WITH_PREFIX}!"); //  @ 83FC048
-const u8 gUnknown_83FC072[] = _("{B_ATK_NAME_WITH_PREFIX} is afflicted\nby the CURSE!"); //  @ 83FC072
-const u8 gUnknown_83FC090[] = _("SPIKES were scattered all around\nthe opponent's side!"); //  @ 83FC090
-const u8 gUnknown_83FC0C6[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} is hurt\nby SPIKES!"); //  @ 83FC0C6
-const u8 gUnknown_83FC0DC[] = _("{B_ATK_NAME_WITH_PREFIX} identified\n{B_DEF_NAME_WITH_PREFIX}!"); //  @ 83FC0DC
-const u8 gUnknown_83FC0EE[] = _("{B_ATK_NAME_WITH_PREFIX}'s PERISH count\nfell to {B_BUFF1}!"); //  @ 83FC0EE
-const u8 gUnknown_83FC10C[] = _("{B_ATK_NAME_WITH_PREFIX} braced\nitself!"); //  @ 83FC10C
-const u8 gUnknown_83FC11E[] = _("{B_DEF_NAME_WITH_PREFIX} ENDURED\nthe hit!"); //  @ 83FC11E
-const u8 gUnknown_83FC132[] = _("MAGNITUDE {B_BUFF1}!"); //  @ 83FC132
-const u8 gUnknown_83FC140[] = _("{B_ATK_NAME_WITH_PREFIX} cut its own HP\nand maximized ATTACK!"); //  @ 83FC140
-const u8 gUnknown_83FC168[] = _("{B_ATK_NAME_WITH_PREFIX} copied\n{B_DEF_NAME_WITH_PREFIX}'s stat changes!"); //  @ 83FC168
-const u8 gUnknown_83FC185[] = _("{B_ATK_NAME_WITH_PREFIX} got free of\n{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}!"); //  @ 83FC185
-const u8 gUnknown_83FC19D[] = _("{B_ATK_NAME_WITH_PREFIX} shed\nLEECH SEED!"); //  @ 83FC19D
-const u8 gUnknown_83FC1B1[] = _("{B_ATK_NAME_WITH_PREFIX} blew away\nSPIKES!"); //  @ 83FC1B1
-const u8 gUnknown_83FC1C6[] = _("{B_ATK_NAME_WITH_PREFIX} fled from\nbattle!"); //  @ 83FC1C6
-const u8 gUnknown_83FC1DB[] = _("{B_ATK_NAME_WITH_PREFIX} foresaw\nan attack!"); //  @ 83FC1DB
-const u8 gUnknown_83FC1F1[] = _("{B_DEF_NAME_WITH_PREFIX} took the\n{B_BUFF1} attack!"); //  @ 83FC1F1
-const u8 gUnknown_83FC208[] = _("{B_ATK_NAME_WITH_PREFIX} chose\n{B_CURRENT_MOVE} as its destiny!"); //  @ 83FC208
-const u8 gUnknown_83FC224[] = _("{B_BUFF1}'s attack!"); //  @ 83FC224
-const u8 gUnknown_83FC231[] = _("{B_ATK_NAME_WITH_PREFIX} became the\ncenter of attention!"); //  @ 83FC231
-const u8 gUnknown_83FC254[] = _("{B_ATK_NAME_WITH_PREFIX} began\ncharging power!"); //  @ 83FC254
-const u8 gUnknown_83FC26D[] = _("NATURE POWER turned into\n{B_CURRENT_MOVE}!"); //  @ 83FC26D
-const u8 gUnknown_83FC28A[] = _("{B_ATK_NAME_WITH_PREFIX}'s status\nreturned to normal!"); //  @ 83FC28A
-const u8 gUnknown_83FC2AA[] = _("{B_DEF_NAME_WITH_PREFIX} was subjected\nto TORMENT!"); //  @ 83FC2AA
-const u8 gUnknown_83FC2C7[] = _("{B_ATK_NAME_WITH_PREFIX} is tightening\nits focus!"); //  @ 83FC2C7
-const u8 gUnknown_83FC2E3[] = _("{B_DEF_NAME_WITH_PREFIX} fell for\nthe TAUNT!"); //  @ 83FC2E3
-const u8 gUnknown_83FC2FA[] = _("{B_ATK_NAME_WITH_PREFIX} is ready to\nhelp {B_DEF_NAME_WITH_PREFIX}!"); //  @ 83FC2FA
-const u8 gUnknown_83FC312[] = _("{B_ATK_NAME_WITH_PREFIX} switched\nitems with its opponent!"); //  @ 83FC312
-const u8 gUnknown_83FC337[] = _("{B_ATK_NAME_WITH_PREFIX} obtained\n{B_BUFF1}."); //  @ 83FC337
-const u8 gUnknown_83FC347[] = _("{B_DEF_NAME_WITH_PREFIX} obtained\n{B_BUFF2}."); //  @ 83FC347
-const u8 gUnknown_83FC357[] = _("{B_ATK_NAME_WITH_PREFIX} obtained\n{B_BUFF1}.\p{B_DEF_NAME_WITH_PREFIX} obtained\n{B_BUFF2}."); //  @ 83FC357
-const u8 gUnknown_83FC377[] = _("{B_ATK_NAME_WITH_PREFIX} copied\n{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}!"); //  @ 83FC377
-const u8 gUnknown_83FC38A[] = _("{B_ATK_NAME_WITH_PREFIX} made a WISH!"); //  @ 83FC38A
-const u8 gUnknown_83FC39A[] = _("{B_BUFF1}'s WISH\ncame true!"); //  @ 83FC39A
-const u8 gUnknown_83FC3AF[] = _("{B_ATK_NAME_WITH_PREFIX} planted its roots!"); //  @ 83FC3AF
-const u8 gUnknown_83FC3C5[] = _("{B_ATK_NAME_WITH_PREFIX} absorbed\nnutrients with its roots!"); //  @ 83FC3C5
-const u8 gUnknown_83FC3EB[] = _("{B_DEF_NAME_WITH_PREFIX} anchored\nitself with its roots!"); //  @ 83FC3EB
-const u8 gUnknown_83FC40E[] = _("{B_ATK_NAME_WITH_PREFIX} made\n{B_DEF_NAME_WITH_PREFIX} drowsy!"); //  @ 83FC40E
-const u8 gUnknown_83FC421[] = _("{B_ATK_NAME_WITH_PREFIX} knocked off\n{B_DEF_NAME_WITH_PREFIX}'s {B_LAST_ITEM}!"); //  @ 83FC421
-const u8 gUnknown_83FC439[] = _("{B_ATK_NAME_WITH_PREFIX} swapped abilities\nwith its opponent!"); //  @ 83FC439
-const u8 gUnknown_83FC461[] = _("{B_ATK_NAME_WITH_PREFIX} sealed the\nopponent's moveシsス!"); //  @ 83FC461
-const u8 gUnknown_83FC483[] = _("{B_ATK_NAME_WITH_PREFIX} wants the\nopponent to bear a GRUDGE!"); //  @ 83FC483
-const u8 gUnknown_83FC4AB[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1} lost\nall its PP due to the GRUDGE!"); //  @ 83FC4AB
-const u8 gUnknown_83FC4D6[] = _("{B_ATK_NAME_WITH_PREFIX} shrouded\nitself in {B_CURRENT_MOVE}!"); //  @ 83FC4D6
-const u8 gUnknown_83FC4F0[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_CURRENT_MOVE}\nwas bounced back by MAGIC COAT!"); //  @ 83FC4F0
-const u8 gUnknown_83FC518[] = _("{B_ATK_NAME_WITH_PREFIX} waits for its foe\nto make a move!"); //  @ 83FC518
-const u8 gUnknown_83FC53D[] = _("{B_DEF_NAME_WITH_PREFIX} SNATCHED\n{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s move!"); //  @ 83FC53D
-const u8 gUnknown_83FC554[] = _("Electricity's power was\nweakened!"); //  @ 83FC554
-const u8 gUnknown_83FC576[] = _("Fire's power was\nweakened!"); //  @ 83FC576
-const u8 gUnknown_83FC591[] = _("{B_ATK_NAME_WITH_PREFIX} found\none {B_LAST_ITEM}!"); //  @ 83FC591
-const u8 gUnknown_83FC5A2[] = _("A soothing aroma wafted\nthrough the area!"); //  @ 83FC5A2
-const u8 gUnknown_83FC5CC[] = _("Items can't be used now.{PAUSE 64}"); //  @ 83FC5CC
-const u8 gUnknown_83FC5E8[] = _("For {B_SCR_ACTIVE_NAME_WITH_PREFIX},\n{B_LAST_ITEM} {B_BUFF1}"); //  @ 83FC5E8
-const u8 gUnknown_83FC5F6[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} used\n{B_LAST_ITEM} to hustle!"); //  @ 83FC5F6
-const u8 gUnknown_83FC60C[] = _("{B_ATK_NAME_WITH_PREFIX} lost its\nfocus and couldn't move!"); //  @ 83FC60C
-const u8 gUnknown_83FC631[] = _("{B_DEF_NAME_WITH_PREFIX} was\ndragged out!\p"); //  @ 83FC631
-const u8 gUnknown_83FC646[] = _("The wall shattered!"); //  @ 83FC646
-const u8 gUnknown_83FC65A[] = _("But it had no effect!"); //  @ 83FC65A
-const u8 gUnknown_83FC670[] = _("{B_ACTIVE_NAME_WITH_PREFIX} has no\nmoves left!\p"); //  @ 83FC670
-const u8 gUnknown_83FC687[] = _("{B_ACTIVE_NAME_WITH_PREFIX}'s {B_CURRENT_MOVE}\nis disabled!\p"); //  @ 83FC687
-const u8 gUnknown_83FC69D[] = _("{B_ACTIVE_NAME_WITH_PREFIX} can't use the same\nmove in a row due to the TORMENT!\p"); //  @ 83FC69D
-const u8 gUnknown_83FC6D6[] = _("{B_ACTIVE_NAME_WITH_PREFIX} can't use\n{B_CURRENT_MOVE} after the TAUNT!\p"); //  @ 83FC6D6
-const u8 gUnknown_83FC6F8[] = _("{B_ACTIVE_NAME_WITH_PREFIX} can't use the\nsealed {B_CURRENT_MOVE}!\p"); //  @ 83FC6F8
-const u8 gUnknown_83FC715[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nmade it rain!"); //  @ 83FC715
-const u8 gUnknown_83FC72B[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nraised its SPEED!"); //  @ 83FC72B
-const u8 gUnknown_83FC745[] = _("{B_DEF_NAME_WITH_PREFIX} was protected\nby {B_DEF_ABILITY}!"); //  @ 83FC745
-const u8 gUnknown_83FC75D[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nprevents {B_ATK_NAME_WITH_PREFIX}\lfrom using {B_CURRENT_MOVE}!"); //  @ 83FC75D
-const u8 gUnknown_83FC780[] = _("{B_DEF_NAME_WITH_PREFIX} restored HP\nusing its {B_DEF_ABILITY}!"); //  @ 83FC780
-const u8 gUnknown_83FC79D[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nmade {B_CURRENT_MOVE} useless!"); //  @ 83FC79D
-const u8 gUnknown_83FC7B6[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nmade it the {B_BUFF1} type!"); //  @ 83FC7B6
-const u8 gUnknown_83FC7D3[] = _("{B_EFF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nprevents paralysis!"); //  @ 83FC7D3
-const u8 gUnknown_83FC7EF[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nprevents romance!"); //  @ 83FC7EF
-const u8 gUnknown_83FC809[] = _("{B_EFF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nprevents poisoning!"); //  @ 83FC809
-const u8 gUnknown_83FC825[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nprevents confusion!"); //  @ 83FC825
-const u8 gUnknown_83FC841[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nraised its FIRE power!"); //  @ 83FC841
-const u8 gUnknown_83FC860[] = _("{B_DEF_NAME_WITH_PREFIX} anchors\nitself with {B_DEF_ABILITY}!"); //  @ 83FC860
-const u8 gUnknown_83FC87B[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\ncuts {B_DEF_NAME_WITH_PREFIX}'s ATTACK!"); //  @ 83FC87B
-const u8 gUnknown_83FC895[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nprevents stat loss!"); //  @ 83FC895
-const u8 gUnknown_83FC8B1[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nhurt {B_ATK_NAME_WITH_PREFIX}!"); //  @ 83FC8B1
-const u8 gUnknown_83FC8C2[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} TRACED\n{B_BUFF1}'s {B_BUFF2}!"); //  @ 83FC8C2
-const u8 gUnknown_83FC8D5[] = _("{B_EFF_NAME_WITH_PREFIX}'s {B_EFF_ABILITY}\nprevents burns!"); //  @ 83FC8D5
-const u8 gUnknown_83FC8ED[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nblocks {B_CURRENT_MOVE}!"); //  @ 83FC8ED
-const u8 gUnknown_83FC900[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nblocks {B_CURRENT_MOVE}!"); //  @ 83FC900
-const u8 gUnknown_83FC913[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}\nrestored its HP a little!"); //  @ 83FC913
-const u8 gUnknown_83FC935[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nwhipped up a sandstorm!"); //  @ 83FC935
-const u8 gUnknown_83FC955[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nintensified the sun's rays!"); //  @ 83FC955
-const u8 gUnknown_83FC979[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nprevents {B_BUFF1} loss!"); //  @ 83FC979
-const u8 gUnknown_83FC993[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\ninfatuated {B_ATK_NAME_WITH_PREFIX}!"); //  @ 83FC993
-const u8 gUnknown_83FC9AA[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nmade {B_CURRENT_MOVE} ineffective!"); //  @ 83FC9AA
-const u8 gUnknown_83FC9C7[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\ncured its {B_BUFF1} problem!"); //  @ 83FC9C7
-const u8 gUnknown_83FC9E5[] = _("It sucked up the\nLIQUID OOZE!"); //  @ 83FC9E5
-const u8 gUnknown_83FCA03[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} transformed!"); //  @ 83FCA03
-const u8 gUnknown_83FCA13[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\ntook the attack!"); //  @ 83FCA13
-const u8 gText_PkmnsXPreventsSwitching[] = _("{B_BUFF1}'s {B_LAST_ABILITY}\nprevents switching!\p"); //  @ 83FCA2C
-const u8 gUnknown_83FCA49[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nprevented {B_SCR_ACTIVE_NAME_WITH_PREFIX}'s\l{B_BUFF1} from working!"); //  @ 83FCA49
-const u8 gUnknown_83FCA71[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nmade it ineffective!"); //  @ 83FCA71
-const u8 gUnknown_83FCA8E[] = _("{B_EFF_NAME_WITH_PREFIX}'s {B_EFF_ABILITY}\nprevents flinching!"); //  @ 83FCA8E
-const u8 gUnknown_83FCAAA[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}\nprevents {B_DEF_NAME_WITH_PREFIX}'s\l{B_DEF_ABILITY} from working!"); //  @ 83FCAAA
-const u8 gUnknown_83FCAD1[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\ncured its {B_BUFF1} problem!"); //  @ 83FCAD1
-const u8 gUnknown_83FCAEF[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nhad no effect on {B_EFF_NAME_WITH_PREFIX}!"); //  @ 83FCAEF
-const u8 gUnknown_83FCB0C[] = _("{B_ATK_NAME_WITH_PREFIX} is too scared to move!"); //  @ 83FCB0C
-const u8 gUnknown_83FCB26[] = _("GHOST: Get out…… Get out……"); //  @ 83FCB26
-const u8 gUnknown_83FCB41[] = _("sharply "); //  @ 83FCB41
-const u8 BattleText_Rose[] = _("rose!"); //  @ 83FCB4A
-const u8 gUnknown_83FCB50[] = _("harshly "); //  @ 83FCB50
-const u8 gUnknown_83FCB59[] = _("fell!"); //  @ 83FCB59
-const u8 gUnknown_83FCB5F[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}"); //  @ 83FCB5F
-const u8 BattleText_UnknownString3[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}"); //  @ 83FCB6A
-const u8 gUnknown_83FCB75[] = _("Using {B_LAST_ITEM}, the {B_BUFF1}\nof {B_SCR_ACTIVE_NAME_WITH_PREFIX} {B_BUFF2}"); //  @ 83FCB75
-const u8 gUnknown_83FCB8F[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}"); //  @ 83FCB8F
-const u8 gUnknown_83FCB9A[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}"); //  @ 83FCB9A
-const u8 gUnknown_83FCBA5[] = _("{B_ATK_NAME_WITH_PREFIX}'s stats won't\ngo any higher!"); //  @ 83FCBA5
-const u8 gUnknown_83FCBC5[] = _("{B_DEF_NAME_WITH_PREFIX}'s stats won't\ngo any lower!"); //  @ 83FCBC5
-const u8 gUnknown_83FCBE4[] = _("A critical hit!"); //  @ 83FCBE4
-const u8 gUnknown_83FCBF4[] = _("It's a one-hit KO!"); //  @ 83FCBF4
-const u8 gUnknown_83FCC07[] = _("{PAUSE 32}1, {PAUSE 15}2, and{PAUSE 15}… {PAUSE 15}… {PAUSE 15}… {PAUSE 15}{PLAY_SE SE_KON}Poof!\p"); //  @ 83FCC07
-const u8 gUnknown_83FCC33[] = _("And…\p"); //  @ 83FCC33
-const u8 gUnknown_83FCC39[] = _("HM moves can't be\nforgotten now.\p"); //  @ 83FCC39
-const u8 gUnknown_83FCC5B[] = _("It's not very effective…"); //  @ 83FCC5B
-const u8 gUnknown_83FCC74[] = _("It's super effective!"); //  @ 83FCC74
-static const u8 sText_GotAwaySafely[] = _("{PLAY_SE SE_NIGERU}Got away safely!\p"); //  @ 83FCC8A
-const u8 gUnknown_83FCCA0[] = _("{PLAY_SE SE_NIGERU}{B_ATK_NAME_WITH_PREFIX} fled\nusing its {B_LAST_ITEM}!\p"); //  @ 83FCCA0
-const u8 gUnknown_83FCCBB[] = _("{PLAY_SE SE_NIGERU}{B_ATK_NAME_WITH_PREFIX} fled\nusing {B_ATK_ABILITY}!\p"); //  @ 83FCCBB
-const u8 gUnknown_83FCCD2[] = _("{PLAY_SE SE_NIGERU}Wild {B_BUFF1} fled!"); //  @ 83FCCD2
-static const u8 sText_PlayerDefeatedLinkTrainer[] = _("Player defeated\n{B_LINK_OPPONENT1_NAME}!"); //  @ 83FCCE4
-static const u8 sText_TwoLinkTrainersDefeated[] = _("Player beat {B_LINK_OPPONENT1_NAME}\nand {B_LINK_OPPONENT2_NAME}!"); //  @ 83FCCF8
-static const u8 sText_PlayerLostAgainstLinkTrainer[] = _("Player lost against\n{B_LINK_OPPONENT1_NAME}!"); //  @ 83FCD0F
-static const u8 sText_PlayerLostToTwo[] = _("Player lost to {B_LINK_OPPONENT1_NAME}\nand {B_LINK_OPPONENT2_NAME}!"); //  @ 83FCD27
-static const u8 sText_PlayerBattledToDrawLinkTrainer[] = _("Player battled to a draw against\n{B_LINK_OPPONENT1_NAME}!"); //  @ 83FCD41
-static const u8 sText_PlayerBattledToDrawVsTwo[] = _("Player battled to a draw against\n{B_LINK_OPPONENT1_NAME} and {B_LINK_OPPONENT2_NAME}!"); //  @ 83FCD66
-const u8 gUnknown_83FCD92[] = _("{PLAY_SE SE_NIGERU}{B_LINK_OPPONENT1_NAME} fled!"); //  @ 83FCD92
-static const u8 sText_TwoWildFled[] = _("{PLAY_SE SE_NIGERU}{B_LINK_OPPONENT1_NAME} and\n{B_LINK_OPPONENT2_NAME} fled!"); //  @ 83FCD9F
-const u8 gUnknown_83FCDB3[] = _("No! There's no running\nfrom a TRAINER battle!\p"); //  @ 83FCDB3
-const u8 gUnknown_83FCDE2[] = _("Can't escape!\p"); //  @ 83FCDE2
-const u8 gUnknown_83FCDF1[] = _(""); //  @ 83FCDF1
-const u8 gUnknown_83FCDF2[] = _("But nothing happened!"); //  @ 83FCDF2
-const u8 gUnknown_83FCE08[] = _("But it failed!"); //  @ 83FCE08
-const u8 gUnknown_83FCE17[] = _("It hurt itself in its\nconfusion!"); //  @ 83FCE17
-const u8 gUnknown_83FCE38[] = _("The MIRROR MOVE failed!"); //  @ 83FCE38
-const u8 gUnknown_83FCE50[] = _("It started to rain!"); //  @ 83FCE50
-const u8 gUnknown_83FCE64[] = _("A downpour started!"); //  @ 83FCE64
-const u8 gUnknown_83FCE78[] = _("Rain continues to fall."); //  @ 83FCE78
-const u8 gUnknown_83FCE90[] = _("The downpour continues."); //  @ 83FCE90
-const u8 gUnknown_83FCEA8[] = _("The rain stopped."); //  @ 83FCEA8
-const u8 gUnknown_83FCEBA[] = _("A sandstorm brewed!"); //  @ 83FCEBA
-const u8 gUnknown_83FCECE[] = _("The sandstorm rages."); //  @ 83FCECE
-const u8 gUnknown_83FCEE3[] = _("The sandstorm subsided."); //  @ 83FCEE3
-const u8 gUnknown_83FCEFB[] = _("The sunlight got bright!"); //  @ 83FCEFB
-const u8 gUnknown_83FCF14[] = _("The sunlight is strong."); //  @ 83FCF14
-const u8 gUnknown_83FCF2C[] = _("The sunlight faded."); //  @ 83FCF2C
-const u8 gUnknown_83FCF40[] = _("It started to hail!"); //  @ 83FCF40
-const u8 gUnknown_83FCF54[] = _("Hail continues to fall."); //  @ 83FCF54
-const u8 gUnknown_83FCF6C[] = _("The hail stopped."); //  @ 83FCF6C
-const u8 gUnknown_83FCF7E[] = _("But it failed to SPIT UP\na thing!"); //  @ 83FCF7E
-const u8 gUnknown_83FCFA0[] = _("But it failed to SWALLOW\na thing!"); //  @ 83FCFA0
-const u8 gUnknown_83FCFC2[] = _("The wind turned into a\nHEAT WAVE!"); //  @ 83FCFC2
-const u8 gUnknown_83FCFE4[] = _("All stat changes were\neliminated!"); //  @ 83FCFE4
-const u8 gUnknown_83FD006[] = _("Coins scattered everywhere!"); //  @ 83FD006
-const u8 gUnknown_83FD022[] = _("It was too weak to make\na SUBSTITUTE!"); //  @ 83FD022
-const u8 gUnknown_83FD048[] = _("The battlers shared\ntheir pain!"); //  @ 83FD048
-const u8 gUnknown_83FD068[] = _("A bell chimed!"); //  @ 83FD068
-const u8 gUnknown_83FD077[] = _("All affected POKéMON will\nfaint in three turns!"); //  @ 83FD077
-const u8 gUnknown_83FD0A7[] = _("There's no PP left for\nthis move!\p"); //  @ 83FD0A7
-const u8 gUnknown_83FD0CA[] = _("But there was no PP left\nfor the move!"); //  @ 83FD0CA
-const u8 gUnknown_83FD0F1[] = _("{B_ATK_NAME_WITH_PREFIX} ignored\norders while asleep!"); //  @ 83FD0F1
-const u8 gUnknown_83FD111[] = _("{B_ATK_NAME_WITH_PREFIX} ignored\norders!"); //  @ 83FD111
-const u8 gUnknown_83FD124[] = _("{B_ATK_NAME_WITH_PREFIX} began to nap!"); //  @ 83FD124
-const u8 gUnknown_83FD135[] = _("{B_ATK_NAME_WITH_PREFIX} is\nloafing around!"); //  @ 83FD135
-const u8 gUnknown_83FD14B[] = _("{B_ATK_NAME_WITH_PREFIX} won't\nobey!"); //  @ 83FD14B
-const u8 gUnknown_83FD15A[] = _("{B_ATK_NAME_WITH_PREFIX} turned away!"); //  @ 83FD15A
-const u8 gUnknown_83FD16A[] = _("{B_ATK_NAME_WITH_PREFIX} pretended\nnot to notice!"); //  @ 83FD16A
-const u8 gUnknown_83FD186[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME} is\nabout to use {B_BUFF2}.\pWill {B_PLAYER_NAME} change\nPOKéMON?"); //  @ 83FD186
-const u8 gUnknown_83FD1B8[] = _("{B_ATK_NAME_WITH_PREFIX} learned\n{B_BUFF1}!"); //  @ 83FD1B8
-static const u8 sText_PlayerDefeatedLinkTrainerTrainer1[] = _("Player defeated\n{B_TRAINER1_CLASS} {B_TRAINER1_NAME}!\p"); //  @ 83FD1C7
-const u8 gUnknown_83FD1DF[] = _("{B_PLAYER_NAME} threw a ROCK\nat the {B_OPPONENT_MON1_NAME}!"); //  @ 83FD1DF
-const u8 gUnknown_83FD1FA[] = _("{B_PLAYER_NAME} threw some BAIT\nat the {B_OPPONENT_MON1_NAME}!"); //  @ 83FD1FA
-const u8 gUnknown_83FD218[] = _("{B_OPPONENT_MON1_NAME} is watching\ncarefully!"); //  @ 83FD218
-const u8 gUnknown_83FD232[] = _("{B_OPPONENT_MON1_NAME} is angry!"); //  @ 83FD232
-const u8 gUnknown_83FD23F[] = _("{B_OPPONENT_MON1_NAME} is eating!"); //  @ 83FD23F
-const u8 gUnknown_83FD24D[] = _("{PLAY_SE SE_PINPON}ANNOUNCER: You're out of\nSAFARI BALLS! Game over!\p"); //  @ 83FD24D
-static const u8 sText_WildPkmnAppeared[] = _("Wild {B_OPPONENT_MON1_NAME} appeared!\p"); //  @ 83FD284
-static const u8 sText_WildPkmnAppeared2[] = _("Wild {B_OPPONENT_MON1_NAME} appeared!\p"); //  @ 83FD297
-static const u8 sText_WildPkmnAppearedPause[] = _("Wild {B_OPPONENT_MON1_NAME} appeared!{PAUSE 127}"); //  @ 83FD2AA
-static const u8 sText_TwoWildPkmnAppeared[] = _("Wild {B_OPPONENT_MON1_NAME} and\n{B_OPPONENT_MON2_NAME} appeared!\p"); //  @ 83FD2BF
-const u8 gUnknown_83FD2D9[] = _("The GHOST appeared!\pDarn!\nThe GHOST can't be ID'd!\p"); //  @ 83FD2D9
-const u8 gUnknown_83FD30D[] = _("The GHOST appeared!\p"); //  @ 83FD30D
-const u8 gUnknown_83FD322[] = _("SILPH SCOPE unveiled the GHOST's\nidentity!"); //  @ 83FD322
-const u8 gUnknown_83FD34D[] = _("The GHOST was MAROWAK!\p\n"); //  @ 83FD34D
-static const u8 sText_Trainer1WantsToBattle[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME}\nwould like to battle!\p"); //  @ 83FD366
-static const u8 sText_LinkTrainerWantsToBattle[] = _("{B_LINK_OPPONENT1_NAME}\nwants to battle!"); //  @ 83FD383
-static const u8 sText_TwoLinkTrainersWantToBattle[] = _("{B_LINK_OPPONENT1_NAME} and {B_LINK_OPPONENT2_NAME}\nwant to battle!"); //  @ 83FD397
-static const u8 sText_Trainer1SentOutPkmn[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME} sent\nout {B_OPPONENT_MON1_NAME}!{PAUSE 60}"); //  @ 83FD3B1
-static const u8 sText_Trainer1SentOutTwoPkmn[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME} sent\nout {B_OPPONENT_MON1_NAME} and {B_OPPONENT_MON2_NAME}!{PAUSE 60}"); //  @ 83FD3C7
-static const u8 sText_Trainer1SentOutPkmn2[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME} sent\nout {B_BUFF1}!"); //  @ 83FD3E4
-static const u8 sText_LinkTrainerSentOutPkmn[] = _("{B_LINK_OPPONENT1_NAME} sent out\n{B_OPPONENT_MON1_NAME}!"); //  @ 83FD3F7
-static const u8 sText_LinkTrainerSentOutTwoPkmn[] = _("{B_LINK_OPPONENT1_NAME} sent out\n{B_OPPONENT_MON1_NAME} and {B_OPPONENT_MON2_NAME}!"); //  @ 83FD407
-static const u8 sText_TwoLinkTrainersSentOutPkmn[] = _("{B_LINK_OPPONENT1_NAME} sent out {B_LINK_OPPONENT_MON1_NAME}!\n{B_LINK_OPPONENT2_NAME} sent out {B_LINK_OPPONENT_MON2_NAME}!"); //  @ 83FD41E
-static const u8 sText_LinkTrainerSentOutPkmn2[] = _("{B_LINK_OPPONENT1_NAME} sent out\n{B_BUFF1}!"); //  @ 83FD43E
-static const u8 sText_LinkTrainerMultiSentOutPkmn[] = _("{B_LINK_SCR_TRAINER_NAME} sent out\n{B_BUFF1}!"); //  @ 83FD44E
-static const u8 sText_GoPkmn[] = _("Go! {B_PLAYER_MON1_NAME}!"); //  @ 83FD45E
-static const u8 sText_GoTwoPkmn[] = _("Go! {B_PLAYER_MON1_NAME} and\n{B_PLAYER_MON2_NAME}!"); //  @ 83FD466
-static const u8 sText_GoPkmn2[] = _("Go! {B_BUFF1}!"); //  @ 83FD475
-static const u8 sText_DoItPkmn[] = _("Do it! {B_BUFF1}!"); //  @ 83FD47D
-static const u8 sText_GoForItPkmn[] = _("Go for it, {B_BUFF1}!"); //  @ 83FD488
-static const u8 sText_YourFoesWeakGetEmPkmn[] = _("Your foe's weak!\nGet 'em, {B_BUFF1}!"); //  @ 83FD497
-static const u8 sText_LinkPartnerSentOutPkmnGoPkmn[] = _("{B_LINK_PARTNER_NAME} sent out {B_LINK_PLAYER_MON2_NAME}!\nGo! {B_LINK_PLAYER_MON1_NAME}!"); //  @ 83FD4B5
-static const u8 sText_PkmnThatsEnough[] = _("{B_BUFF1}, that's enough!\nCome back!"); //  @ 83FD4CD
-static const u8 sText_PkmnComeBack[] = _("{B_BUFF1}, come back!"); //  @ 83FD4EB
-static const u8 sText_PkmnOkComeBack[] = _("{B_BUFF1}, OK!\nCome back!"); //  @ 83FD4FA
-const u8 sText_PkmnGoodComeBack[] = _("{B_BUFF1}, good!\nCome back!"); //  @ 83FD50D
-static const u8 sText_Trainer1WithdrewPkmn[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME}\nwithdrew {B_BUFF1}!"); //  @ 83FD522
-static const u8 sText_LinkTrainer1WithdrewPkmn[] = _("{B_LINK_OPPONENT1_NAME} withdrew\n{B_BUFF1}!"); //  @ 83FD535
-static const u8 sText_LinkTrainer2WithdrewPkmn[] = _("{B_LINK_SCR_TRAINER_NAME} withdrew\n{B_BUFF1}!"); //  @ 83FD545
-static const u8 sText_WildPkmnPrefix[] = _("Wild "); //  @ 83FD555
-static const u8 sText_FoePkmnPrefix[] = _("Foe "); //  @ 83FD55B
-static const u8 sText_FoePkmnPrefix2[] = _("Foe"); //  @ 83FD560
-static const u8 sText_AllyPkmnPrefix[] = _("Ally"); //  @ 83FD564
-static const u8 sText_FoePkmnPrefix3[] = _("Foe"); //  @ 83FD569
-static const u8 sText_AllyPkmnPrefix2[] = _("Ally"); //  @ 83FD56D
-static const u8 sText_FoePkmnPrefix4[] = _("Foe"); //  @ 83FD572
-static const u8 sText_AllyPkmnPrefix3[] = _("Ally"); //  @ 83FD576
-static const u8 sText_AttackerUsedX[] = _("{B_ATK_NAME_WITH_PREFIX} used\n{B_BUFF2}"); //  @ 83FD57B
-static const u8 sText_ExclamationMark[] = _("!"); //  @ 83FD586
-static const u8 sText_ExclamationMark2[] = _("!"); //  @ 83FD588
-static const u8 sText_ExclamationMark3[] = _("!"); //  @ 83FD58A
-static const u8 sText_ExclamationMark4[] = _("!"); //  @ 83FD58C
-static const u8 sText_ExclamationMark5[] = _("!"); //  @ 83FD58E
+const u8 gUnknown_83FB218[] = _("");
+const u8 gUnknown_83FB219[] = _("{B_TRAINER1_LOSE_TEXT}");
+const u8 gUnknown_83FB21C[] = _("{B_TRAINER2_CLASS}");
+const u8 gUnknown_83FB21F[] = _("{B_TRAINER1_NAME}: {B_OPPONENT_MON1_NAME}, come back!");
+const u8 gUnknown_83FB232[] = _("{B_TRAINER1_WIN_TEXT}");
+const u8 gUnknown_83FB235[] = _("{B_TRAINER1_NAME}: {B_OPPONENT_MON2_NAME}, come back!");
+const u8 gUnknown_83FB248[] = _("{B_TRAINER1_NAME}: {B_OPPONENT_MON1_NAME} and\n{B_OPPONENT_MON2_NAME}, come back!");
+const u8 gUnknown_83FB262[] = _("{B_TRAINER2_NAME}");
+const u8 gUnknown_83FB265[] = _("{B_BUFF1} gained{B_BUFF2}\n{B_TRAINER2_LOSE_TEXT} EXP. Points!\p");
+const u8 gUnknown_83FB282[] = _("");
+const u8 gUnknown_83FB283[] = _(" a boosted");
+const u8 gUnknown_83FB28E[] = _("{B_BUFF1} grew to\nLV. {B_BUFF2}!{WAIT_SE}\p");
+const u8 gUnknown_83FB2A4[] = _("{B_BUFF1} learned\n{B_BUFF2}!{WAIT_SE}\p");
+const u8 gUnknown_83FB2B6[] = _("{B_BUFF1} is trying to\nlearn {B_BUFF2}.\p");
+const u8 gUnknown_83FB2D1[] = _("But, {B_BUFF1} can't learn\nmore than four moves.\p");
+const u8 gUnknown_83FB2FC[] = _("Delete a move to make\nroom for {B_BUFF2}?");
+const u8 gUnknown_83FB31F[] = _("{B_BUFF1} forgot\n{B_BUFF2}.\p");
+const u8 gUnknown_83FB32E[] = _("{PAUSE 32}Stop learning\n{B_BUFF2}?");
+const u8 gUnknown_83FB343[] = _("{B_BUFF1} did not learn\n{B_BUFF2}.\p");
+const u8 gUnknown_83FB359[] = _("Use next POKéMON?");
+const u8 gUnknown_83FB36B[] = _("{B_ATK_NAME_WITH_PREFIX}'s\nattack missed!");
+const u8 gUnknown_83FB37F[] = _("{B_DEF_NAME_WITH_PREFIX}\nprotected itself!");
+const u8 gUnknown_83FB394[] = _("{B_DEF_NAME_WITH_PREFIX} avoided\ndamage with {B_DEF_ABILITY}!");
+const u8 gUnknown_83FB3AF[] = _("{B_DEF_NAME_WITH_PREFIX} makes GROUND\nmoves miss with {B_DEF_ABILITY}!");
+const u8 gUnknown_83FB3D3[] = _("{B_DEF_NAME_WITH_PREFIX} avoided\nthe attack!");
+const u8 gUnknown_83FB3EA[] = _("It doesn't affect\n{B_DEF_NAME_WITH_PREFIX}…");
+const u8 gUnknown_83FB400[] = _("{B_ATK_NAME_WITH_PREFIX}\nfainted!\p");
+const u8 gUnknown_83FB40D[] = _("{B_DEF_NAME_WITH_PREFIX}\nfainted!\p");
+const u8 gUnknown_83FB41A[] = _("{B_PLAYER_NAME} got ¥{B_BUFF1}\nfor winning!\p");
+const u8 gUnknown_83FB433[] = _("{B_PLAYER_NAME} is out of\nusable POKéMON!\p");
+const u8 gUnknown_83FB451[] = _("{B_PLAYER_NAME} panicked and lost ¥{B_BUFF1}…\p… … … …\p{B_PLAYER_NAME} whited out!{PAUSE_UNTIL_PRESS}");
+const u8 gUnknown_83FB484[] = _("{B_PLAYER_NAME} is out of\nusable POKéMON!\pPlayer lost against\n{B_TRAINER1_CLASS} {B_TRAINER1_NAME}!{PAUSE_UNTIL_PRESS}");
+const u8 gUnknown_83FB4BE[] = _("{B_PLAYER_NAME} paid ¥{B_BUFF1} as the prize\nmoney…\p… … … …\p{B_PLAYER_NAME} whited out!{PAUSE_UNTIL_PRESS}");
+const u8 gUnknown_83FB4F7[] = _("{B_PLAYER_NAME} whited out!{PAUSE_UNTIL_PRESS}");
+const u8 gUnknown_83FB508[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} prevents\nescape with {B_SCR_ACTIVE_ABILITY}!\p");
+const u8 gUnknown_83FB525[] = _("Can't escape!\p");
+const u8 gUnknown_83FB534[] = _("{B_ATK_NAME_WITH_PREFIX} can't escape!");
+const u8 gUnknown_83FB545[] = _("Hit {B_BUFF1} time(s)!");
+const u8 gUnknown_83FB555[] = _("{B_EFF_NAME_WITH_PREFIX}\nfell asleep!");
+const u8 gUnknown_83FB565[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nmade {B_EFF_NAME_WITH_PREFIX} sleep!");
+const u8 gUnknown_83FB57C[] = _("{B_DEF_NAME_WITH_PREFIX} is\nalready asleep!");
+const u8 gUnknown_83FB592[] = _("{B_ATK_NAME_WITH_PREFIX} is\nalready asleep!");
+const u8 gUnknown_83FB5A8[] = _("{B_DEF_NAME_WITH_PREFIX}\nwasn't affected!");
+const u8 gUnknown_83FB5BC[] = _("{B_EFF_NAME_WITH_PREFIX}\nwas poisoned!");
+const u8 gUnknown_83FB5CD[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\npoisoned {B_EFF_NAME_WITH_PREFIX}!");
+const u8 gUnknown_83FB5E2[] = _("{B_ATK_NAME_WITH_PREFIX} is hurt\nby poison!");
+const u8 gUnknown_83FB5F8[] = _("{B_DEF_NAME_WITH_PREFIX} is already\npoisoned.");
+const u8 gUnknown_83FB610[] = _("{B_EFF_NAME_WITH_PREFIX} is badly\npoisoned!");
+const u8 gUnknown_83FB626[] = _("{B_DEF_NAME_WITH_PREFIX} had its\nenergy drained!");
+const u8 gUnknown_83FB641[] = _("{B_EFF_NAME_WITH_PREFIX} was burned!");
+const u8 gUnknown_83FB650[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nburned {B_EFF_NAME_WITH_PREFIX}!");
+const u8 gUnknown_83FB663[] = _("{B_ATK_NAME_WITH_PREFIX} is hurt\nby its burn!");
+const u8 gUnknown_83FB67B[] = _("{B_DEF_NAME_WITH_PREFIX} already\nhas a burn.");
+const u8 gUnknown_83FB692[] = _("{B_EFF_NAME_WITH_PREFIX} was\nfrozen solid!");
+const u8 gUnknown_83FB6A7[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nfroze {B_EFF_NAME_WITH_PREFIX} solid!");
+const u8 gUnknown_83FB6BF[] = _("{B_ATK_NAME_WITH_PREFIX} is\nfrozen solid!");
+const u8 gUnknown_83FB6D3[] = _("{B_DEF_NAME_WITH_PREFIX} was\ndefrosted!");
+const u8 gUnknown_83FB6E5[] = _("{B_ATK_NAME_WITH_PREFIX} was\ndefrosted!");
+const u8 gUnknown_83FB6F7[] = _("{B_ATK_NAME_WITH_PREFIX} was\ndefrosted by {B_CURRENT_MOVE}!");
+const u8 gUnknown_83FB70F[] = _("{B_EFF_NAME_WITH_PREFIX} is paralyzed!\nIt may be unable to move!");
+const u8 gUnknown_83FB73A[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nparalyzed {B_EFF_NAME_WITH_PREFIX}!\lIt may be unable to move!");
+const u8 gUnknown_83FB76A[] = _("{B_ATK_NAME_WITH_PREFIX} is paralyzed!\nIt can't move!");
+const u8 gUnknown_83FB78A[] = _("{B_DEF_NAME_WITH_PREFIX} is\nalready paralyzed!");
+const u8 gUnknown_83FB7A3[] = _("{B_DEF_NAME_WITH_PREFIX} was\nhealed of paralysis!");
+const u8 gUnknown_83FB7BF[] = _("{B_DEF_NAME_WITH_PREFIX}'s\ndream was eaten!");
+const u8 gUnknown_83FB7D5[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1}\nwon't go higher!");
+const u8 gUnknown_83FB7EE[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\nwon't go lower!");
+const u8 gUnknown_83FB806[] = _("Your team's {B_BUFF1}\nstopped working!");
+const u8 gUnknown_83FB826[] = _("The foe's {B_BUFF1}\nstopped working!");
+const u8 gUnknown_83FB844[] = _("{B_ATK_NAME_WITH_PREFIX} is\nconfused!");
+const u8 gUnknown_83FB854[] = _("{B_ATK_NAME_WITH_PREFIX} snapped\nout of confusion!");
+const u8 gUnknown_83FB871[] = _("{B_EFF_NAME_WITH_PREFIX} became\nconfused!");
+const u8 gUnknown_83FB885[] = _("{B_DEF_NAME_WITH_PREFIX} is\nalready confused!");
+const u8 gUnknown_83FB89D[] = _("{B_DEF_NAME_WITH_PREFIX}\nfell in love!");
+const u8 gUnknown_83FB8AE[] = _("{B_ATK_NAME_WITH_PREFIX} is in love\nwith {B_SCR_ACTIVE_NAME_WITH_PREFIX}!");
+const u8 gUnknown_83FB8C5[] = _("{B_ATK_NAME_WITH_PREFIX} is\nimmobilized by love!");
+const u8 gUnknown_83FB8E0[] = _("{B_DEF_NAME_WITH_PREFIX} was\nblown away!");
+const u8 gUnknown_83FB8F3[] = _("{B_ATK_NAME_WITH_PREFIX} transformed\ninto the {B_BUFF1} type!");
+const u8 gUnknown_83FB914[] = _("{B_ATK_NAME_WITH_PREFIX} flinched!");
+const u8 gUnknown_83FB921[] = _("{B_DEF_NAME_WITH_PREFIX} regained\nhealth!");
+const u8 gUnknown_83FB935[] = _("{B_DEF_NAME_WITH_PREFIX}'s\nHP is full!");
+const u8 gUnknown_83FB946[] = _("{B_ATK_PREFIX2}'s {B_CURRENT_MOVE}\nraised SP. DEF!");
+const u8 gUnknown_83FB95E[] = _("{B_ATK_PREFIX2}'s {B_CURRENT_MOVE}\nraised SP. DEF a little!");
+const u8 gUnknown_83FB97F[] = _("{B_ATK_PREFIX2}'s {B_CURRENT_MOVE}\nraised DEFENSE!");
+const u8 gUnknown_83FB997[] = _("{B_ATK_PREFIX2}'s {B_CURRENT_MOVE}\nraised DEFENSE a little!");
+const u8 gUnknown_83FB9B8[] = _("{B_ATK_PREFIX2}'s party is covered\nby a veil!");
+const u8 gUnknown_83FB9D9[] = _("{B_DEF_NAME_WITH_PREFIX}'s party is protected\nby SAFEGUARD!");
+const u8 gUnknown_83FB9FF[] = _("{B_ATK_PREFIX3}'s party is no longer\nprotected by SAFEGUARD!");
+const u8 gUnknown_83FBA2F[] = _("{B_ATK_NAME_WITH_PREFIX} went\nto sleep!");
+const u8 gUnknown_83FBA41[] = _("{B_ATK_NAME_WITH_PREFIX} slept and\nbecame healthy!");
+const u8 gUnknown_83FBA5E[] = _("{B_ATK_NAME_WITH_PREFIX} whipped\nup a whirlwind!");
+const u8 gUnknown_83FBA79[] = _("{B_ATK_NAME_WITH_PREFIX} took\nin sunlight!");
+const u8 gUnknown_83FBA8E[] = _("{B_ATK_NAME_WITH_PREFIX} lowered\nits head!");
+const u8 gUnknown_83FBAA3[] = _("{B_ATK_NAME_WITH_PREFIX} is glowing!");
+const u8 gUnknown_83FBAB2[] = _("{B_ATK_NAME_WITH_PREFIX} flew\nup high!");
+const u8 gUnknown_83FBAC3[] = _("{B_ATK_NAME_WITH_PREFIX} dug a hole!");
+const u8 gUnknown_83FBAD2[] = _("{B_ATK_NAME_WITH_PREFIX} hid\nunderwater!");
+const u8 gUnknown_83FBAE5[] = _("{B_ATK_NAME_WITH_PREFIX} sprang up!");
+const u8 gUnknown_83FBAF3[] = _("{B_DEF_NAME_WITH_PREFIX} was squeezed by\n{B_ATK_NAME_WITH_PREFIX}'s BIND!");
+const u8 gUnknown_83FBB11[] = _("{B_DEF_NAME_WITH_PREFIX} was trapped\nin the vortex!");
+const u8 gUnknown_83FBB2F[] = _("{B_DEF_NAME_WITH_PREFIX} was trapped\nby SAND TOMB!");
+const u8 gUnknown_83FBB4C[] = _("{B_DEF_NAME_WITH_PREFIX} was WRAPPED by\n{B_ATK_NAME_WITH_PREFIX}!");
+const u8 gUnknown_83FBB62[] = _("{B_ATK_NAME_WITH_PREFIX} CLAMPED\n{B_DEF_NAME_WITH_PREFIX}!");
+const u8 gUnknown_83FBB71[] = _("{B_ATK_NAME_WITH_PREFIX} is hurt\nby {B_BUFF1}!");
+const u8 gUnknown_83FBB83[] = _("{B_ATK_NAME_WITH_PREFIX} was freed\nfrom {B_BUFF1}!");
+const u8 gUnknown_83FBB99[] = _("{B_ATK_NAME_WITH_PREFIX} kept going\nand crashed!");
+const u8 gBattleText_MistShroud[] = _("{B_ATK_PREFIX2} became\nshrouded in MIST!");
+const u8 gUnknown_83FBBD0[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} is protected\nby MIST!");
+const u8 gBattleText_GetPumped[] = _("{B_ATK_NAME_WITH_PREFIX} is getting\npumped!");
+const u8 gUnknown_83FBBFF[] = _("{B_ATK_NAME_WITH_PREFIX} is hit\nwith recoil!");
+const u8 gUnknown_83FBC16[] = _("{B_ATK_NAME_WITH_PREFIX} protected\nitself!");
+const u8 gUnknown_83FBC2B[] = _("{B_ATK_NAME_WITH_PREFIX} is buffeted\nby the sandstorm!");
+const u8 gUnknown_83FBC4C[] = _("{B_ATK_NAME_WITH_PREFIX} is pelted\nby HAIL!");
+const u8 gUnknown_83FBC62[] = _("{B_ATK_PREFIX1}'s {B_BUFF1}\nwore off!");
+const u8 gUnknown_83FBC74[] = _("{B_DEF_NAME_WITH_PREFIX} was seeded!");
+const u8 gUnknown_83FBC83[] = _("{B_DEF_NAME_WITH_PREFIX} evaded\nthe attack!");
+const u8 gUnknown_83FBC99[] = _("{B_ATK_NAME_WITH_PREFIX}'s health is\nsapped by LEECH SEED!");
+const u8 gUnknown_83FBCBE[] = _("{B_ATK_NAME_WITH_PREFIX} is fast\nasleep.");
+const u8 gUnknown_83FBCD1[] = _("{B_ATK_NAME_WITH_PREFIX} woke up!");
+const u8 gUnknown_83FBCDD[] = _("But {B_SCR_ACTIVE_NAME_WITH_PREFIX}'s UPROAR\nkept it awake!");
+const u8 gUnknown_83FBCFC[] = _("{B_ATK_NAME_WITH_PREFIX} woke up\nin the UPROAR!");
+const u8 gUnknown_83FBD16[] = _("{B_ATK_NAME_WITH_PREFIX} caused\nan UPROAR!");
+const u8 gUnknown_83FBD2B[] = _("{B_ATK_NAME_WITH_PREFIX} is making\nan UPROAR!");
+const u8 gUnknown_83FBD43[] = _("{B_ATK_NAME_WITH_PREFIX} calmed down.");
+const u8 gUnknown_83FBD53[] = _("But {B_DEF_NAME_WITH_PREFIX} can't\nsleep in an UPROAR!");
+const u8 gUnknown_83FBD74[] = _("{B_ATK_NAME_WITH_PREFIX} STOCKPILED\n{B_BUFF1}!");
+const u8 gUnknown_83FBD86[] = _("{B_ATK_NAME_WITH_PREFIX} can't\nSTOCKPILE any more!");
+const u8 gUnknown_83FBDA3[] = _("But {B_DEF_NAME_WITH_PREFIX} can't\nsleep in an UPROAR!");
+const u8 gUnknown_83FBDC4[] = _("But the UPROAR kept\n{B_DEF_NAME_WITH_PREFIX} awake!");
+const u8 gUnknown_83FBDE2[] = _("{B_DEF_NAME_WITH_PREFIX} stayed awake\nusing its {B_DEF_ABILITY}!");
+const u8 gUnknown_83FBE00[] = _("{B_ATK_NAME_WITH_PREFIX} is storing\nenergy!");
+const u8 gUnknown_83FBE16[] = _("{B_ATK_NAME_WITH_PREFIX} unleashed\nenergy!");
+const u8 gUnknown_83FBE2B[] = _("{B_ATK_NAME_WITH_PREFIX} became\nconfused due to fatigue!");
+const u8 gUnknown_83FBE4E[] = _("{B_PLAYER_NAME} picked up\n¥{B_BUFF1}!\p");
+const u8 gUnknown_83FBE61[] = _("{B_DEF_NAME_WITH_PREFIX} is\nunaffected!");
+const u8 gUnknown_83FBE73[] = _("{B_ATK_NAME_WITH_PREFIX} transformed\ninto {B_BUFF1}!");
+const u8 gUnknown_83FBE8B[] = _("{B_ATK_NAME_WITH_PREFIX} made\na SUBSTITUTE!");
+const u8 gUnknown_83FBEA1[] = _("{B_ATK_NAME_WITH_PREFIX} already\nhas a SUBSTITUTE!");
+const u8 gUnknown_83FBEBE[] = _("The SUBSTITUTE took damage\nfor {B_DEF_NAME_WITH_PREFIX}!\p");
+const u8 gUnknown_83FBEE2[] = _("{B_DEF_NAME_WITH_PREFIX}'s\nSUBSTITUTE faded!\p");
+const u8 gUnknown_83FBEFA[] = _("{B_ATK_NAME_WITH_PREFIX} must\nrecharge!");
+const u8 gUnknown_83FBF0C[] = _("{B_DEF_NAME_WITH_PREFIX}'s RAGE\nis building!");
+const u8 gUnknown_83FBF23[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\nwas disabled!");
+const u8 gUnknown_83FBF39[] = _("{B_ATK_NAME_WITH_PREFIX} is disabled\nno more!");
+const u8 gUnknown_83FBF51[] = _("{B_DEF_NAME_WITH_PREFIX} got\nan ENCORE!");
+const u8 gUnknown_83FBF63[] = _("{B_ATK_NAME_WITH_PREFIX}'s ENCORE\nended!");
+const u8 gUnknown_83FBF76[] = _("{B_ATK_NAME_WITH_PREFIX} took aim\nat {B_DEF_NAME_WITH_PREFIX}!");
+const u8 gUnknown_83FBF89[] = _("{B_ATK_NAME_WITH_PREFIX} SKETCHED\n{B_BUFF1}!");
+const u8 gUnknown_83FBF99[] = _("{B_ATK_NAME_WITH_PREFIX} is trying\nto take its foe with it!");
+const u8 gUnknown_83FBFBF[] = _("{B_DEF_NAME_WITH_PREFIX} took\n{B_ATK_NAME_WITH_PREFIX} with it!");
+const u8 gUnknown_83FBFD3[] = _("Reduced {B_DEF_NAME_WITH_PREFIX}'s\n{B_BUFF1} by {B_BUFF2}!");
+const u8 gUnknown_83FBFEA[] = _("{B_ATK_NAME_WITH_PREFIX} stole\n{B_DEF_NAME_WITH_PREFIX}'s {B_LAST_ITEM}!");
+const u8 gUnknown_83FBFFC[] = _("{B_DEF_NAME_WITH_PREFIX} can't\nescape now!");
+const u8 gUnknown_83FC011[] = _("{B_DEF_NAME_WITH_PREFIX} fell into\na NIGHTMARE!");
+const u8 gUnknown_83FC02B[] = _("{B_ATK_NAME_WITH_PREFIX} is locked\nin a NIGHTMARE!");
+const u8 gUnknown_83FC048[] = _("{B_ATK_NAME_WITH_PREFIX} cut its own HP and\nlaid a CURSE on {B_DEF_NAME_WITH_PREFIX}!");
+const u8 gUnknown_83FC072[] = _("{B_ATK_NAME_WITH_PREFIX} is afflicted\nby the CURSE!");
+const u8 gUnknown_83FC090[] = _("SPIKES were scattered all around\nthe opponent's side!");
+const u8 gUnknown_83FC0C6[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} is hurt\nby SPIKES!");
+const u8 gUnknown_83FC0DC[] = _("{B_ATK_NAME_WITH_PREFIX} identified\n{B_DEF_NAME_WITH_PREFIX}!");
+const u8 gUnknown_83FC0EE[] = _("{B_ATK_NAME_WITH_PREFIX}'s PERISH count\nfell to {B_BUFF1}!");
+const u8 gUnknown_83FC10C[] = _("{B_ATK_NAME_WITH_PREFIX} braced\nitself!");
+const u8 gUnknown_83FC11E[] = _("{B_DEF_NAME_WITH_PREFIX} ENDURED\nthe hit!");
+const u8 gUnknown_83FC132[] = _("MAGNITUDE {B_BUFF1}!");
+const u8 gUnknown_83FC140[] = _("{B_ATK_NAME_WITH_PREFIX} cut its own HP\nand maximized ATTACK!");
+const u8 gUnknown_83FC168[] = _("{B_ATK_NAME_WITH_PREFIX} copied\n{B_DEF_NAME_WITH_PREFIX}'s stat changes!");
+const u8 gUnknown_83FC185[] = _("{B_ATK_NAME_WITH_PREFIX} got free of\n{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}!");
+const u8 gUnknown_83FC19D[] = _("{B_ATK_NAME_WITH_PREFIX} shed\nLEECH SEED!");
+const u8 gUnknown_83FC1B1[] = _("{B_ATK_NAME_WITH_PREFIX} blew away\nSPIKES!");
+const u8 gUnknown_83FC1C6[] = _("{B_ATK_NAME_WITH_PREFIX} fled from\nbattle!");
+const u8 gUnknown_83FC1DB[] = _("{B_ATK_NAME_WITH_PREFIX} foresaw\nan attack!");
+const u8 gUnknown_83FC1F1[] = _("{B_DEF_NAME_WITH_PREFIX} took the\n{B_BUFF1} attack!");
+const u8 gUnknown_83FC208[] = _("{B_ATK_NAME_WITH_PREFIX} chose\n{B_CURRENT_MOVE} as its destiny!");
+const u8 gUnknown_83FC224[] = _("{B_BUFF1}'s attack!");
+const u8 gUnknown_83FC231[] = _("{B_ATK_NAME_WITH_PREFIX} became the\ncenter of attention!");
+const u8 gUnknown_83FC254[] = _("{B_ATK_NAME_WITH_PREFIX} began\ncharging power!");
+const u8 gUnknown_83FC26D[] = _("NATURE POWER turned into\n{B_CURRENT_MOVE}!");
+const u8 gUnknown_83FC28A[] = _("{B_ATK_NAME_WITH_PREFIX}'s status\nreturned to normal!");
+const u8 gUnknown_83FC2AA[] = _("{B_DEF_NAME_WITH_PREFIX} was subjected\nto TORMENT!");
+const u8 gUnknown_83FC2C7[] = _("{B_ATK_NAME_WITH_PREFIX} is tightening\nits focus!");
+const u8 gUnknown_83FC2E3[] = _("{B_DEF_NAME_WITH_PREFIX} fell for\nthe TAUNT!");
+const u8 gUnknown_83FC2FA[] = _("{B_ATK_NAME_WITH_PREFIX} is ready to\nhelp {B_DEF_NAME_WITH_PREFIX}!");
+const u8 gUnknown_83FC312[] = _("{B_ATK_NAME_WITH_PREFIX} switched\nitems with its opponent!");
+const u8 gUnknown_83FC337[] = _("{B_ATK_NAME_WITH_PREFIX} obtained\n{B_BUFF1}.");
+const u8 gUnknown_83FC347[] = _("{B_DEF_NAME_WITH_PREFIX} obtained\n{B_BUFF2}.");
+const u8 gUnknown_83FC357[] = _("{B_ATK_NAME_WITH_PREFIX} obtained\n{B_BUFF1}.\p{B_DEF_NAME_WITH_PREFIX} obtained\n{B_BUFF2}.");
+const u8 gUnknown_83FC377[] = _("{B_ATK_NAME_WITH_PREFIX} copied\n{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}!");
+const u8 gUnknown_83FC38A[] = _("{B_ATK_NAME_WITH_PREFIX} made a WISH!");
+const u8 gUnknown_83FC39A[] = _("{B_BUFF1}'s WISH\ncame true!");
+const u8 gUnknown_83FC3AF[] = _("{B_ATK_NAME_WITH_PREFIX} planted its roots!");
+const u8 gUnknown_83FC3C5[] = _("{B_ATK_NAME_WITH_PREFIX} absorbed\nnutrients with its roots!");
+const u8 gUnknown_83FC3EB[] = _("{B_DEF_NAME_WITH_PREFIX} anchored\nitself with its roots!");
+const u8 gUnknown_83FC40E[] = _("{B_ATK_NAME_WITH_PREFIX} made\n{B_DEF_NAME_WITH_PREFIX} drowsy!");
+const u8 gUnknown_83FC421[] = _("{B_ATK_NAME_WITH_PREFIX} knocked off\n{B_DEF_NAME_WITH_PREFIX}'s {B_LAST_ITEM}!");
+const u8 gUnknown_83FC439[] = _("{B_ATK_NAME_WITH_PREFIX} swapped abilities\nwith its opponent!");
+const u8 gUnknown_83FC461[] = _("{B_ATK_NAME_WITH_PREFIX} sealed the\nopponent's moveシsス!");
+const u8 gUnknown_83FC483[] = _("{B_ATK_NAME_WITH_PREFIX} wants the\nopponent to bear a GRUDGE!");
+const u8 gUnknown_83FC4AB[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1} lost\nall its PP due to the GRUDGE!");
+const u8 gUnknown_83FC4D6[] = _("{B_ATK_NAME_WITH_PREFIX} shrouded\nitself in {B_CURRENT_MOVE}!");
+const u8 gUnknown_83FC4F0[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_CURRENT_MOVE}\nwas bounced back by MAGIC COAT!");
+const u8 gUnknown_83FC518[] = _("{B_ATK_NAME_WITH_PREFIX} waits for its foe\nto make a move!");
+const u8 gUnknown_83FC53D[] = _("{B_DEF_NAME_WITH_PREFIX} SNATCHED\n{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s move!");
+const u8 gUnknown_83FC554[] = _("Electricity's power was\nweakened!");
+const u8 gUnknown_83FC576[] = _("Fire's power was\nweakened!");
+const u8 gUnknown_83FC591[] = _("{B_ATK_NAME_WITH_PREFIX} found\none {B_LAST_ITEM}!");
+const u8 gUnknown_83FC5A2[] = _("A soothing aroma wafted\nthrough the area!");
+const u8 gUnknown_83FC5CC[] = _("Items can't be used now.{PAUSE 64}");
+const u8 gUnknown_83FC5E8[] = _("For {B_SCR_ACTIVE_NAME_WITH_PREFIX},\n{B_LAST_ITEM} {B_BUFF1}");
+const u8 gUnknown_83FC5F6[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} used\n{B_LAST_ITEM} to hustle!");
+const u8 gUnknown_83FC60C[] = _("{B_ATK_NAME_WITH_PREFIX} lost its\nfocus and couldn't move!");
+const u8 gUnknown_83FC631[] = _("{B_DEF_NAME_WITH_PREFIX} was\ndragged out!\p");
+const u8 gUnknown_83FC646[] = _("The wall shattered!");
+const u8 gUnknown_83FC65A[] = _("But it had no effect!");
+const u8 gUnknown_83FC670[] = _("{B_ACTIVE_NAME_WITH_PREFIX} has no\nmoves left!\p");
+const u8 gUnknown_83FC687[] = _("{B_ACTIVE_NAME_WITH_PREFIX}'s {B_CURRENT_MOVE}\nis disabled!\p");
+const u8 gUnknown_83FC69D[] = _("{B_ACTIVE_NAME_WITH_PREFIX} can't use the same\nmove in a row due to the TORMENT!\p");
+const u8 gUnknown_83FC6D6[] = _("{B_ACTIVE_NAME_WITH_PREFIX} can't use\n{B_CURRENT_MOVE} after the TAUNT!\p");
+const u8 gUnknown_83FC6F8[] = _("{B_ACTIVE_NAME_WITH_PREFIX} can't use the\nsealed {B_CURRENT_MOVE}!\p");
+const u8 gUnknown_83FC715[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nmade it rain!");
+const u8 gUnknown_83FC72B[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nraised its SPEED!");
+const u8 gUnknown_83FC745[] = _("{B_DEF_NAME_WITH_PREFIX} was protected\nby {B_DEF_ABILITY}!");
+const u8 gUnknown_83FC75D[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nprevents {B_ATK_NAME_WITH_PREFIX}\lfrom using {B_CURRENT_MOVE}!");
+const u8 gUnknown_83FC780[] = _("{B_DEF_NAME_WITH_PREFIX} restored HP\nusing its {B_DEF_ABILITY}!");
+const u8 gUnknown_83FC79D[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nmade {B_CURRENT_MOVE} useless!");
+const u8 gUnknown_83FC7B6[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nmade it the {B_BUFF1} type!");
+const u8 gUnknown_83FC7D3[] = _("{B_EFF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nprevents paralysis!");
+const u8 gUnknown_83FC7EF[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nprevents romance!");
+const u8 gUnknown_83FC809[] = _("{B_EFF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nprevents poisoning!");
+const u8 gUnknown_83FC825[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nprevents confusion!");
+const u8 gUnknown_83FC841[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nraised its FIRE power!");
+const u8 gUnknown_83FC860[] = _("{B_DEF_NAME_WITH_PREFIX} anchors\nitself with {B_DEF_ABILITY}!");
+const u8 gUnknown_83FC87B[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\ncuts {B_DEF_NAME_WITH_PREFIX}'s ATTACK!");
+const u8 gUnknown_83FC895[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nprevents stat loss!");
+const u8 gUnknown_83FC8B1[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nhurt {B_ATK_NAME_WITH_PREFIX}!");
+const u8 gUnknown_83FC8C2[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} TRACED\n{B_BUFF1}'s {B_BUFF2}!");
+const u8 gUnknown_83FC8D5[] = _("{B_EFF_NAME_WITH_PREFIX}'s {B_EFF_ABILITY}\nprevents burns!");
+const u8 gUnknown_83FC8ED[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nblocks {B_CURRENT_MOVE}!");
+const u8 gUnknown_83FC900[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nblocks {B_CURRENT_MOVE}!");
+const u8 gUnknown_83FC913[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}\nrestored its HP a little!");
+const u8 gUnknown_83FC935[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nwhipped up a sandstorm!");
+const u8 gUnknown_83FC955[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nintensified the sun's rays!");
+const u8 gUnknown_83FC979[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nprevents {B_BUFF1} loss!");
+const u8 gUnknown_83FC993[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\ninfatuated {B_ATK_NAME_WITH_PREFIX}!");
+const u8 gUnknown_83FC9AA[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nmade {B_CURRENT_MOVE} ineffective!");
+const u8 gUnknown_83FC9C7[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\ncured its {B_BUFF1} problem!");
+const u8 gUnknown_83FC9E5[] = _("It sucked up the\nLIQUID OOZE!");
+const u8 gUnknown_83FCA03[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} transformed!");
+const u8 gUnknown_83FCA13[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\ntook the attack!");
+const u8 gText_PkmnsXPreventsSwitching[] = _("{B_BUFF1}'s {B_LAST_ABILITY}\nprevents switching!\p");
+const u8 gUnknown_83FCA49[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nprevented {B_SCR_ACTIVE_NAME_WITH_PREFIX}'s\l{B_BUFF1} from working!");
+const u8 gUnknown_83FCA71[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nmade it ineffective!");
+const u8 gUnknown_83FCA8E[] = _("{B_EFF_NAME_WITH_PREFIX}'s {B_EFF_ABILITY}\nprevents flinching!");
+const u8 gUnknown_83FCAAA[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}\nprevents {B_DEF_NAME_WITH_PREFIX}'s\l{B_DEF_ABILITY} from working!");
+const u8 gUnknown_83FCAD1[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\ncured its {B_BUFF1} problem!");
+const u8 gUnknown_83FCAEF[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nhad no effect on {B_EFF_NAME_WITH_PREFIX}!");
+const u8 gUnknown_83FCB0C[] = _("{B_ATK_NAME_WITH_PREFIX} is too scared to move!");
+const u8 gUnknown_83FCB26[] = _("GHOST: Get out…… Get out……");
+const u8 gUnknown_83FCB41[] = _("sharply ");
+const u8 gBattleText_Rose[] = _("rose!");
+const u8 gUnknown_83FCB50[] = _("harshly ");
+const u8 gUnknown_83FCB59[] = _("fell!");
+const u8 gUnknown_83FCB5F[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}");
+const u8 gBattleText_UnknownString3[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}");
+const u8 gUnknown_83FCB75[] = _("Using {B_LAST_ITEM}, the {B_BUFF1}\nof {B_SCR_ACTIVE_NAME_WITH_PREFIX} {B_BUFF2}");
+const u8 gUnknown_83FCB8F[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}");
+const u8 gUnknown_83FCB9A[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}");
+const u8 gUnknown_83FCBA5[] = _("{B_ATK_NAME_WITH_PREFIX}'s stats won't\ngo any higher!");
+const u8 gUnknown_83FCBC5[] = _("{B_DEF_NAME_WITH_PREFIX}'s stats won't\ngo any lower!");
+const u8 gUnknown_83FCBE4[] = _("A critical hit!");
+const u8 gUnknown_83FCBF4[] = _("It's a one-hit KO!");
+const u8 gUnknown_83FCC07[] = _("{PAUSE 32}1, {PAUSE 15}2, and{PAUSE 15}… {PAUSE 15}… {PAUSE 15}… {PAUSE 15}{PLAY_SE SE_KON}Poof!\p");
+const u8 gUnknown_83FCC33[] = _("And…\p");
+const u8 gUnknown_83FCC39[] = _("HM moves can't be\nforgotten now.\p");
+const u8 gUnknown_83FCC5B[] = _("It's not very effective…");
+const u8 gUnknown_83FCC74[] = _("It's super effective!");
+static const u8 sText_GotAwaySafely[] = _("{PLAY_SE SE_NIGERU}Got away safely!\p");
+const u8 gUnknown_83FCCA0[] = _("{PLAY_SE SE_NIGERU}{B_ATK_NAME_WITH_PREFIX} fled\nusing its {B_LAST_ITEM}!\p");
+const u8 gUnknown_83FCCBB[] = _("{PLAY_SE SE_NIGERU}{B_ATK_NAME_WITH_PREFIX} fled\nusing {B_ATK_ABILITY}!\p");
+const u8 gUnknown_83FCCD2[] = _("{PLAY_SE SE_NIGERU}Wild {B_BUFF1} fled!");
+static const u8 sText_PlayerDefeatedLinkTrainer[] = _("Player defeated\n{B_LINK_OPPONENT1_NAME}!");
+static const u8 sText_TwoLinkTrainersDefeated[] = _("Player beat {B_LINK_OPPONENT1_NAME}\nand {B_LINK_OPPONENT2_NAME}!");
+static const u8 sText_PlayerLostAgainstLinkTrainer[] = _("Player lost against\n{B_LINK_OPPONENT1_NAME}!");
+static const u8 sText_PlayerLostToTwo[] = _("Player lost to {B_LINK_OPPONENT1_NAME}\nand {B_LINK_OPPONENT2_NAME}!");
+static const u8 sText_PlayerBattledToDrawLinkTrainer[] = _("Player battled to a draw against\n{B_LINK_OPPONENT1_NAME}!");
+static const u8 sText_PlayerBattledToDrawVsTwo[] = _("Player battled to a draw against\n{B_LINK_OPPONENT1_NAME} and {B_LINK_OPPONENT2_NAME}!");
+const u8 gUnknown_83FCD92[] = _("{PLAY_SE SE_NIGERU}{B_LINK_OPPONENT1_NAME} fled!");
+static const u8 sText_TwoWildFled[] = _("{PLAY_SE SE_NIGERU}{B_LINK_OPPONENT1_NAME} and\n{B_LINK_OPPONENT2_NAME} fled!");
+const u8 gUnknown_83FCDB3[] = _("No! There's no running\nfrom a TRAINER battle!\p");
+const u8 gUnknown_83FCDE2[] = _("Can't escape!\p");
+const u8 gUnknown_83FCDF1[] = _("");
+const u8 gUnknown_83FCDF2[] = _("But nothing happened!");
+const u8 gUnknown_83FCE08[] = _("But it failed!");
+const u8 gUnknown_83FCE17[] = _("It hurt itself in its\nconfusion!");
+const u8 gUnknown_83FCE38[] = _("The MIRROR MOVE failed!");
+const u8 gUnknown_83FCE50[] = _("It started to rain!");
+const u8 gUnknown_83FCE64[] = _("A downpour started!");
+const u8 gUnknown_83FCE78[] = _("Rain continues to fall.");
+const u8 gUnknown_83FCE90[] = _("The downpour continues.");
+const u8 gUnknown_83FCEA8[] = _("The rain stopped.");
+const u8 gUnknown_83FCEBA[] = _("A sandstorm brewed!");
+const u8 gUnknown_83FCECE[] = _("The sandstorm rages.");
+const u8 gUnknown_83FCEE3[] = _("The sandstorm subsided.");
+const u8 gUnknown_83FCEFB[] = _("The sunlight got bright!");
+const u8 gUnknown_83FCF14[] = _("The sunlight is strong.");
+const u8 gUnknown_83FCF2C[] = _("The sunlight faded.");
+const u8 gUnknown_83FCF40[] = _("It started to hail!");
+const u8 gUnknown_83FCF54[] = _("Hail continues to fall.");
+const u8 gUnknown_83FCF6C[] = _("The hail stopped.");
+const u8 gUnknown_83FCF7E[] = _("But it failed to SPIT UP\na thing!");
+const u8 gUnknown_83FCFA0[] = _("But it failed to SWALLOW\na thing!");
+const u8 gUnknown_83FCFC2[] = _("The wind turned into a\nHEAT WAVE!");
+const u8 gUnknown_83FCFE4[] = _("All stat changes were\neliminated!");
+const u8 gUnknown_83FD006[] = _("Coins scattered everywhere!");
+const u8 gUnknown_83FD022[] = _("It was too weak to make\na SUBSTITUTE!");
+const u8 gUnknown_83FD048[] = _("The battlers shared\ntheir pain!");
+const u8 gUnknown_83FD068[] = _("A bell chimed!");
+const u8 gUnknown_83FD077[] = _("All affected POKéMON will\nfaint in three turns!");
+const u8 gUnknown_83FD0A7[] = _("There's no PP left for\nthis move!\p");
+const u8 gUnknown_83FD0CA[] = _("But there was no PP left\nfor the move!");
+const u8 gUnknown_83FD0F1[] = _("{B_ATK_NAME_WITH_PREFIX} ignored\norders while asleep!");
+const u8 gUnknown_83FD111[] = _("{B_ATK_NAME_WITH_PREFIX} ignored\norders!");
+const u8 gUnknown_83FD124[] = _("{B_ATK_NAME_WITH_PREFIX} began to nap!");
+const u8 gUnknown_83FD135[] = _("{B_ATK_NAME_WITH_PREFIX} is\nloafing around!");
+const u8 gUnknown_83FD14B[] = _("{B_ATK_NAME_WITH_PREFIX} won't\nobey!");
+const u8 gUnknown_83FD15A[] = _("{B_ATK_NAME_WITH_PREFIX} turned away!");
+const u8 gUnknown_83FD16A[] = _("{B_ATK_NAME_WITH_PREFIX} pretended\nnot to notice!");
+const u8 gUnknown_83FD186[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME} is\nabout to use {B_BUFF2}.\pWill {B_PLAYER_NAME} change\nPOKéMON?");
+const u8 gUnknown_83FD1B8[] = _("{B_ATK_NAME_WITH_PREFIX} learned\n{B_BUFF1}!");
+static const u8 sText_PlayerDefeatedLinkTrainerTrainer1[] = _("Player defeated\n{B_TRAINER1_CLASS} {B_TRAINER1_NAME}!\p");
+const u8 gUnknown_83FD1DF[] = _("{B_PLAYER_NAME} threw a ROCK\nat the {B_OPPONENT_MON1_NAME}!");
+const u8 gUnknown_83FD1FA[] = _("{B_PLAYER_NAME} threw some BAIT\nat the {B_OPPONENT_MON1_NAME}!");
+const u8 gUnknown_83FD218[] = _("{B_OPPONENT_MON1_NAME} is watching\ncarefully!");
+const u8 gUnknown_83FD232[] = _("{B_OPPONENT_MON1_NAME} is angry!");
+const u8 gUnknown_83FD23F[] = _("{B_OPPONENT_MON1_NAME} is eating!");
+const u8 gUnknown_83FD24D[] = _("{PLAY_SE SE_PINPON}ANNOUNCER: You're out of\nSAFARI BALLS! Game over!\p");
+static const u8 sText_WildPkmnAppeared[] = _("Wild {B_OPPONENT_MON1_NAME} appeared!\p");
+static const u8 sText_WildPkmnAppeared2[] = _("Wild {B_OPPONENT_MON1_NAME} appeared!\p");
+static const u8 sText_WildPkmnAppearedPause[] = _("Wild {B_OPPONENT_MON1_NAME} appeared!{PAUSE 127}");
+static const u8 sText_TwoWildPkmnAppeared[] = _("Wild {B_OPPONENT_MON1_NAME} and\n{B_OPPONENT_MON2_NAME} appeared!\p");
+const u8 gUnknown_83FD2D9[] = _("The GHOST appeared!\pDarn!\nThe GHOST can't be ID'd!\p");
+const u8 gUnknown_83FD30D[] = _("The GHOST appeared!\p");
+const u8 gUnknown_83FD322[] = _("SILPH SCOPE unveiled the GHOST's\nidentity!");
+const u8 gUnknown_83FD34D[] = _("The GHOST was MAROWAK!\p\n");
+static const u8 sText_Trainer1WantsToBattle[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME}\nwould like to battle!\p");
+static const u8 sText_LinkTrainerWantsToBattle[] = _("{B_LINK_OPPONENT1_NAME}\nwants to battle!");
+static const u8 sText_TwoLinkTrainersWantToBattle[] = _("{B_LINK_OPPONENT1_NAME} and {B_LINK_OPPONENT2_NAME}\nwant to battle!");
+static const u8 sText_Trainer1SentOutPkmn[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME} sent\nout {B_OPPONENT_MON1_NAME}!{PAUSE 60}");
+static const u8 sText_Trainer1SentOutTwoPkmn[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME} sent\nout {B_OPPONENT_MON1_NAME} and {B_OPPONENT_MON2_NAME}!{PAUSE 60}");
+static const u8 sText_Trainer1SentOutPkmn2[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME} sent\nout {B_BUFF1}!");
+static const u8 sText_LinkTrainerSentOutPkmn[] = _("{B_LINK_OPPONENT1_NAME} sent out\n{B_OPPONENT_MON1_NAME}!");
+static const u8 sText_LinkTrainerSentOutTwoPkmn[] = _("{B_LINK_OPPONENT1_NAME} sent out\n{B_OPPONENT_MON1_NAME} and {B_OPPONENT_MON2_NAME}!");
+static const u8 sText_TwoLinkTrainersSentOutPkmn[] = _("{B_LINK_OPPONENT1_NAME} sent out {B_LINK_OPPONENT_MON1_NAME}!\n{B_LINK_OPPONENT2_NAME} sent out {B_LINK_OPPONENT_MON2_NAME}!");
+static const u8 sText_LinkTrainerSentOutPkmn2[] = _("{B_LINK_OPPONENT1_NAME} sent out\n{B_BUFF1}!");
+static const u8 sText_LinkTrainerMultiSentOutPkmn[] = _("{B_LINK_SCR_TRAINER_NAME} sent out\n{B_BUFF1}!");
+static const u8 sText_GoPkmn[] = _("Go! {B_PLAYER_MON1_NAME}!");
+static const u8 sText_GoTwoPkmn[] = _("Go! {B_PLAYER_MON1_NAME} and\n{B_PLAYER_MON2_NAME}!");
+static const u8 sText_GoPkmn2[] = _("Go! {B_BUFF1}!");
+static const u8 sText_DoItPkmn[] = _("Do it! {B_BUFF1}!");
+static const u8 sText_GoForItPkmn[] = _("Go for it, {B_BUFF1}!");
+static const u8 sText_YourFoesWeakGetEmPkmn[] = _("Your foe's weak!\nGet 'em, {B_BUFF1}!");
+static const u8 sText_LinkPartnerSentOutPkmnGoPkmn[] = _("{B_LINK_PARTNER_NAME} sent out {B_LINK_PLAYER_MON2_NAME}!\nGo! {B_LINK_PLAYER_MON1_NAME}!");
+static const u8 sText_PkmnThatsEnough[] = _("{B_BUFF1}, that's enough!\nCome back!");
+static const u8 sText_PkmnComeBack[] = _("{B_BUFF1}, come back!");
+static const u8 sText_PkmnOkComeBack[] = _("{B_BUFF1}, OK!\nCome back!");
+const u8 sText_PkmnGoodComeBack[] = _("{B_BUFF1}, good!\nCome back!");
+static const u8 sText_Trainer1WithdrewPkmn[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME}\nwithdrew {B_BUFF1}!");
+static const u8 sText_LinkTrainer1WithdrewPkmn[] = _("{B_LINK_OPPONENT1_NAME} withdrew\n{B_BUFF1}!");
+static const u8 sText_LinkTrainer2WithdrewPkmn[] = _("{B_LINK_SCR_TRAINER_NAME} withdrew\n{B_BUFF1}!");
+static const u8 sText_WildPkmnPrefix[] = _("Wild ");
+static const u8 sText_FoePkmnPrefix[] = _("Foe ");
+static const u8 sText_FoePkmnPrefix2[] = _("Foe");
+static const u8 sText_AllyPkmnPrefix[] = _("Ally");
+static const u8 sText_FoePkmnPrefix3[] = _("Foe");
+static const u8 sText_AllyPkmnPrefix2[] = _("Ally");
+static const u8 sText_FoePkmnPrefix4[] = _("Foe");
+static const u8 sText_AllyPkmnPrefix3[] = _("Ally");
+static const u8 sText_AttackerUsedX[] = _("{B_ATK_NAME_WITH_PREFIX} used\n{B_BUFF2}");
+static const u8 sText_ExclamationMark[] = _("!");
+static const u8 sText_ExclamationMark2[] = _("!");
+static const u8 sText_ExclamationMark3[] = _("!");
+static const u8 sText_ExclamationMark4[] = _("!");
+static const u8 sText_ExclamationMark5[] = _("!");
 
-static const u8 sText_HP2[] = _("HP"); //  @ 83FD590
-static const u8 sText_Attack2[] = _("ATTACK"); //  @ 83FD593
-static const u8 sText_Defense2[] = _("DEFENSE"); //  @ 83FD59A
-static const u8 sText_Speed[] = _("SPEED"); //  @ 83FD5A2
-static const u8 sText_SpAtk2[] = _("SP. ATK"); //  @ 83FD5A8
-static const u8 sText_SpDef2[] = _("SP. DEF"); //  @ 83FD5B0
-static const u8 sText_Accuracy[] = _("accuracy"); //  @ 83FD5B8
-static const u8 sText_Evasiveness[] = _("evasiveness"); //  @ 83FD5C1
+static const u8 sText_HP2[] = _("HP");
+static const u8 sText_Attack2[] = _("ATTACK");
+static const u8 sText_Defense2[] = _("DEFENSE");
+static const u8 sText_Speed[] = _("SPEED");
+static const u8 sText_SpAtk2[] = _("SP. ATK");
+static const u8 sText_SpDef2[] = _("SP. DEF");
+static const u8 sText_Accuracy[] = _("accuracy");
+static const u8 sText_Evasiveness[] = _("evasiveness");
 
 const u8 *const gStatNamesTable[] = {
     sText_HP2,
@@ -448,10 +448,10 @@ const u8 *const gStatNamesTable[] = {
 };
 
 static const u8 sText_PokeblockWasTooSpicy[] = _("was too spicy!"); //
-static const u8 sText_PokeblockWasTooDry[] = _("was too dry!"); //  @ 83FD5FF
-static const u8 sText_PokeblockWasTooSweet[] = _("was too sweet!"); //  @ 83FD60C
-static const u8 sText_PokeblockWasTooBitter[] = _("was too bitter!"); //  @ 83FD61B
-static const u8 sText_PokeblockWasTooSour[] = _("was too sour!"); //  @ 83FD62B
+static const u8 sText_PokeblockWasTooDry[] = _("was too dry!");
+static const u8 sText_PokeblockWasTooSweet[] = _("was too sweet!");
+static const u8 sText_PokeblockWasTooBitter[] = _("was too bitter!");
+static const u8 sText_PokeblockWasTooSour[] = _("was too sour!");
 
 const u8 *const gPokeblockWasTooXStringTable[] = {
     sText_PokeblockWasTooSpicy,
@@ -461,60 +461,60 @@ const u8 *const gPokeblockWasTooXStringTable[] = {
     sText_PokeblockWasTooSour
 };
 
-static const u8 sText_PlayerUsedItem[] = _("{B_PLAYER_NAME} used\n{B_LAST_ITEM}!"); //  @ 83FD650
-static const u8 sText_OldManUsedItem[] = _("The old man used\n{B_LAST_ITEM}!"); //  @ 83FD65C
-static const u8 sText_PokeDudeUsedItem[] = _("The POKé DUDE used\n{B_LAST_ITEM}!"); //  @ 83FD671
-static const u8 sText_Trainer1UsedItem[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME}\nused {B_LAST_ITEM}!"); //  @ 83FD688
-static const u8 sText_TrainerBlockedBall[] = _("The TRAINER blocked the BALL!"); //  @ 83FD697
-static const u8 sText_DontBeAThief[] = _("Don't be a thief!"); //  @ 83FD6B5
-static const u8 sText_ItDodgedBall[] = _("It dodged the thrown BALL!\nThis POKéMON can't be caught!"); //  @ 83FD6C7
-static const u8 sText_YouMissedPkmn[] = _("You missed the POKéMON!"); //  @ 83FD700
-static const u8 sText_PkmnBrokeFree[] = _("Oh, no!\nThe POKéMON broke free!"); //  @ 83FD718
-static const u8 sText_ItAppearedCaught[] = _("Aww!\nIt appeared to be caught!"); //  @ 83FD738
-static const u8 sText_AarghAlmostHadIt[] = _("Aargh!\nAlmost had it!"); //  @ 83FD757
-static const u8 sText_ShootSoClose[] = _("Shoot!\nIt was so close, too!"); //  @ 83FD76D
-const u8 gUnknown_83FD78A[] = _("よけられた!\nこいつは つかまりそうにないぞ!"); //  @ 83FD78A
-static const u8 sText_GotchaPkmnCaught[] = _("Gotcha!\n{B_OPPONENT_MON1_NAME} was caught!{WAIT_SE}{PLAY_BGM MUS_GET_YASEI}\p"); //  @ 83FD7A2
-static const u8 sText_GotchaPkmnCaught2[] = _("Gotcha!\n{B_OPPONENT_MON1_NAME} was caught!{WAIT_SE}{PLAY_BGM MUS_GET_YASEI}{PAUSE 127}"); //  @ 83FD7C0
-static const u8 sText_GiveNicknameCaptured[] = _("Give a nickname to the\ncaptured {B_OPPONENT_MON1_NAME}?"); //  @ 83FD7E0
-static const u8 sText_PkmnSentToPC[] = _("{B_OPPONENT_MON1_NAME} was sent to\n{B_PC_CREATOR_NAME} PC."); //  @ 83FD804
-static const u8 sText_Someones[] = _("someone's"); //  @ 83FD81A
-static const u8 sText_Bills[] = _("BILL's"); //  @ 83FD824
-const u8 gUnknown_83FD82B[] = _("{B_OPPONENT_MON1_NAME}'s data was\nadded to the POKéDEX.\p"); //  @ 83FD82B
-const u8 gUnknown_83FD850[] = _("It is raining."); //  @ 83FD850
-const u8 gUnknown_83FD85F[] = _("A sandstorm is raging."); //  @ 83FD85F
-const u8 gUnknown_83FD876[] = _("The BOX is full!\nYou can't catch any more!\p"); //  @ 83FD876
-static const u8 sText_EnigmaBerry[] = _("ENIGMA BERRY"); //  @ 83FD8A2
-static const u8 sText_BerrySuffix[] = _(" BERRY"); //  @ 83FD8AF
-const u8 gUnknown_83FD8B6[] = _("ナゾ"); //  @ 83FD8B6
-const u8 gUnknown_83FD8B9[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\ncured paralysis!"); //  @ 83FD8B9
-const u8 gUnknown_83FD8D2[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\ncured poison!"); //  @ 83FD8D2
-const u8 gUnknown_83FD8E8[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nhealed its burn!"); //  @ 83FD8E8
-const u8 gUnknown_83FD901[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\ndefrosted it!"); //  @ 83FD901
-const u8 gUnknown_83FD917[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nwoke it from its sleep!"); //  @ 83FD917
-const u8 gUnknown_83FD937[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nsnapped it out of confusion!"); //  @ 83FD937
-const u8 gUnknown_83FD95C[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\ncured its {B_BUFF1} problem!"); //  @ 83FD95C
-const u8 gUnknown_83FD97A[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nnormalized its status!"); //  @ 83FD97A
-const u8 gUnknown_83FD999[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nrestored health!"); //  @ 83FD999
-const u8 gUnknown_83FD9B2[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nrestored {B_BUFF1}'s PP!"); //  @ 83FD9B2
-const u8 gUnknown_83FD9CC[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nrestored its status!"); //  @ 83FD9CC
-const u8 gUnknown_83FD9E9[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nrestored its HP a little!"); //  @ 83FD9E9
-const u8 gUnknown_83FDA0B[] = _("{B_LAST_ITEM}'s effect allows only\n{B_CURRENT_MOVE} to be used!\p"); //  @ 83FDA0B
-const u8 gUnknown_83FDA33[] = _("{B_DEF_NAME_WITH_PREFIX} hung on\nusing its {B_LAST_ITEM}!"); //  @ 83FDA33
-const u8 gUnknown_83FDA4C[] = _(""); //  @ 83FDA4C
-const u8 gUnknown_83FDA4D[] = _("{B_PLAYER_NAME} played the {B_LAST_ITEM}.\pNow, that's a catchy tune!"); //  @ 83FDA4D
-const u8 gUnknown_83FDA7A[] = _("{B_PLAYER_NAME} played the\n{B_LAST_ITEM}."); //  @ 83FDA7A
-const u8 gUnknown_83FDA8C[] = _("The POKéMON hearing the FLUTE\nawoke!"); //  @ 83FDA8C
-const u8 gUnknown_83FDAB1[] = _("You throw a BALL now, right?\nI… I'll do my best!"); //  @ 83FDAB1
-const u8 gUnknown_83FDAE2[] = _("OAK: Oh, for Pete's sake…\nSo pushy, as always.\p{B_PLAYER_NAME}.\pYou've never had a POKéMON battle\nbefore, have you?\pA POKéMON battle is when TRAINERS\npit their POKéMON against each\lother.\p"); //  @ 83FDAE2
-const u8 gUnknown_83FDB92[] = _("The TRAINER that makes the other\nTRAINER's POKéMON faint by lowering\ltheir HP to “0,” wins.\p"); //  @ 83FDB92
-const u8 gUnknown_83FDBEF[] = _("But rather than talking about it,\nyou'll learn more from experience.\pTry battling and see for yourself.\p"); //  @ 83FDBEF
-const u8 gUnknown_83FDC58[] = _("OAK: Inflicting damage on the foe\nis the key to any battle.\p"); //  @ 83FDC58
-const u8 gUnknown_83FDC95[] = _("OAK: Lowering the foe's stats\nwill put you at an advantage.\p"); //  @ 83FDC95
-const u8 gUnknown_83FDCD2[] = _("OAK: Keep your eyes on your\nPOKéMON's HP.\pIt will faint if the HP drops to\n“0.”\p"); //  @ 83FDCD2
-const u8 gUnknown_83FDD23[] = _("OAK: No! There's no running away\nfrom a TRAINER POKéMON battle!\p"); //  @ 83FDD23
-const u8 gUnknown_83FDD64[] = _("OAK: Hm! Excellent!\pIf you win, you earn prize money,\nand your POKéMON will grow!\pBattle other TRAINERS and make\nyour POKéMON strong!\p"); //  @ 83FDD64
-const u8 gUnknown_83FDDEB[] = _("OAK: Hm…\nHow disappointing…\pIf you win, you earn prize money,\nand your POKéMON grow.\pBut if you lose, {B_PLAYER_NAME}, you end\nup paying prize money…\pHowever, since you had no warning\nthis time, I'll pay for you.\pBut things won't be this way once\nyou step outside these doors.\pThat's why you must strengthen your\nPOKéMON by battling wild POKéMON.\p"); //  @ 83FDDEB
+static const u8 sText_PlayerUsedItem[] = _("{B_PLAYER_NAME} used\n{B_LAST_ITEM}!");
+static const u8 sText_OldManUsedItem[] = _("The old man used\n{B_LAST_ITEM}!");
+static const u8 sText_PokeDudeUsedItem[] = _("The POKé DUDE used\n{B_LAST_ITEM}!");
+static const u8 sText_Trainer1UsedItem[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME}\nused {B_LAST_ITEM}!");
+static const u8 sText_TrainerBlockedBall[] = _("The TRAINER blocked the BALL!");
+static const u8 sText_DontBeAThief[] = _("Don't be a thief!");
+static const u8 sText_ItDodgedBall[] = _("It dodged the thrown BALL!\nThis POKéMON can't be caught!");
+static const u8 sText_YouMissedPkmn[] = _("You missed the POKéMON!");
+static const u8 sText_PkmnBrokeFree[] = _("Oh, no!\nThe POKéMON broke free!");
+static const u8 sText_ItAppearedCaught[] = _("Aww!\nIt appeared to be caught!");
+static const u8 sText_AarghAlmostHadIt[] = _("Aargh!\nAlmost had it!");
+static const u8 sText_ShootSoClose[] = _("Shoot!\nIt was so close, too!");
+const u8 gUnknown_83FD78A[] = _("よけられた!\nこいつは つかまりそうにないぞ!");
+static const u8 sText_GotchaPkmnCaught[] = _("Gotcha!\n{B_OPPONENT_MON1_NAME} was caught!{WAIT_SE}{PLAY_BGM MUS_GET_YASEI}\p");
+static const u8 sText_GotchaPkmnCaught2[] = _("Gotcha!\n{B_OPPONENT_MON1_NAME} was caught!{WAIT_SE}{PLAY_BGM MUS_GET_YASEI}{PAUSE 127}");
+static const u8 sText_GiveNicknameCaptured[] = _("Give a nickname to the\ncaptured {B_OPPONENT_MON1_NAME}?");
+static const u8 sText_PkmnSentToPC[] = _("{B_OPPONENT_MON1_NAME} was sent to\n{B_PC_CREATOR_NAME} PC.");
+static const u8 sText_Someones[] = _("someone's");
+static const u8 sText_Bills[] = _("BILL's");
+const u8 gUnknown_83FD82B[] = _("{B_OPPONENT_MON1_NAME}'s data was\nadded to the POKéDEX.\p");
+const u8 gUnknown_83FD850[] = _("It is raining.");
+const u8 gUnknown_83FD85F[] = _("A sandstorm is raging.");
+const u8 gUnknown_83FD876[] = _("The BOX is full!\nYou can't catch any more!\p");
+static const u8 sText_EnigmaBerry[] = _("ENIGMA BERRY");
+static const u8 sText_BerrySuffix[] = _(" BERRY");
+const u8 gUnknown_83FD8B6[] = _("ナゾ");
+const u8 gUnknown_83FD8B9[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\ncured paralysis!");
+const u8 gUnknown_83FD8D2[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\ncured poison!");
+const u8 gUnknown_83FD8E8[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nhealed its burn!");
+const u8 gUnknown_83FD901[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\ndefrosted it!");
+const u8 gUnknown_83FD917[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nwoke it from its sleep!");
+const u8 gUnknown_83FD937[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nsnapped it out of confusion!");
+const u8 gUnknown_83FD95C[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\ncured its {B_BUFF1} problem!");
+const u8 gUnknown_83FD97A[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nnormalized its status!");
+const u8 gUnknown_83FD999[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nrestored health!");
+const u8 gUnknown_83FD9B2[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nrestored {B_BUFF1}'s PP!");
+const u8 gUnknown_83FD9CC[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nrestored its status!");
+const u8 gUnknown_83FD9E9[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nrestored its HP a little!");
+const u8 gUnknown_83FDA0B[] = _("{B_LAST_ITEM}'s effect allows only\n{B_CURRENT_MOVE} to be used!\p");
+const u8 gUnknown_83FDA33[] = _("{B_DEF_NAME_WITH_PREFIX} hung on\nusing its {B_LAST_ITEM}!");
+const u8 gUnknown_83FDA4C[] = _("");
+const u8 gUnknown_83FDA4D[] = _("{B_PLAYER_NAME} played the {B_LAST_ITEM}.\pNow, that's a catchy tune!");
+const u8 gUnknown_83FDA7A[] = _("{B_PLAYER_NAME} played the\n{B_LAST_ITEM}.");
+const u8 gUnknown_83FDA8C[] = _("The POKéMON hearing the FLUTE\nawoke!");
+const u8 gUnknown_83FDAB1[] = _("You throw a BALL now, right?\nI… I'll do my best!");
+const u8 gUnknown_83FDAE2[] = _("OAK: Oh, for Pete's sake…\nSo pushy, as always.\p{B_PLAYER_NAME}.\pYou've never had a POKéMON battle\nbefore, have you?\pA POKéMON battle is when TRAINERS\npit their POKéMON against each\lother.\p");
+const u8 gUnknown_83FDB92[] = _("The TRAINER that makes the other\nTRAINER's POKéMON faint by lowering\ltheir HP to “0,” wins.\p");
+const u8 gUnknown_83FDBEF[] = _("But rather than talking about it,\nyou'll learn more from experience.\pTry battling and see for yourself.\p");
+const u8 gUnknown_83FDC58[] = _("OAK: Inflicting damage on the foe\nis the key to any battle.\p");
+const u8 gUnknown_83FDC95[] = _("OAK: Lowering the foe's stats\nwill put you at an advantage.\p");
+const u8 gUnknown_83FDCD2[] = _("OAK: Keep your eyes on your\nPOKéMON's HP.\pIt will faint if the HP drops to\n“0.”\p");
+const u8 gUnknown_83FDD23[] = _("OAK: No! There's no running away\nfrom a TRAINER POKéMON battle!\p");
+const u8 gUnknown_83FDD64[] = _("OAK: Hm! Excellent!\pIf you win, you earn prize money,\nand your POKéMON will grow!\pBattle other TRAINERS and make\nyour POKéMON strong!\p");
+const u8 gUnknown_83FDDEB[] = _("OAK: Hm…\nHow disappointing…\pIf you win, you earn prize money,\nand your POKéMON grow.\pBut if you lose, {B_PLAYER_NAME}, you end\nup paying prize money…\pHowever, since you had no warning\nthis time, I'll pay for you.\pBut things won't be this way once\nyou step outside these doors.\pThat's why you must strengthen your\nPOKéMON by battling wild POKéMON.\p");
 
 const u8 *const gBattleStringsTable[] = {
     gUnknown_83FB219,
@@ -602,9 +602,9 @@ const u8 *const gBattleStringsTable[] = {
     gUnknown_83FBB71,
     gUnknown_83FBB83,
     gUnknown_83FBB99,
-    BattleText_MistShroud,
+    gBattleText_MistShroud,
     gUnknown_83FBBD0,
-    BattleText_GetPumped,
+    gBattleText_GetPumped,
     gUnknown_83FBBFF,
     gUnknown_83FBC16,
     gUnknown_83FBC2B,
@@ -715,11 +715,11 @@ const u8 *const gBattleStringsTable[] = {
     gUnknown_83FC8B1,
     gUnknown_83FC8C2,
     gUnknown_83FCB41,
-    BattleText_Rose,
+    gBattleText_Rose,
     gUnknown_83FCB50,
     gUnknown_83FCB59,
     gUnknown_83FCB5F,
-    BattleText_UnknownString3,
+    gBattleText_UnknownString3,
     gUnknown_83FCB8F,
     gUnknown_83FCB9A,
     gUnknown_83FCBE4,
@@ -918,17 +918,17 @@ const u16 gMoveWeatherChangeStringIds[] = {
     STRINGID_STARTEDHAIL
 };
 
-const u16 gSandStormHailContinuesStringIds[] = {
+const u16 gSandstormHailContinuesStringIds[] = {
     STRINGID_SANDSTORMRAGES,
     STRINGID_HAILCONTINUES
 };
 
-const u16 gSandStormHailDmgStringIds[] = {
+const u16 gSandstormHailDmgStringIds[] = {
     STRINGID_PKMNBUFFETEDBYSANDSTORM,
     STRINGID_PKMNPELTEDBYHAIL
 };
 
-const u16 gSandStormHailEndStringIds[] = {
+const u16 gSandstormHailEndStringIds[] = {
     STRINGID_SANDSTORMSUBSIDED,
     STRINGID_HAILSTOPPED
 };
@@ -1218,32 +1218,32 @@ const u16 gTrappingMoves[] = {
     0xFFFF
 };
 
-const u8 gText_PkmnIsEvolving[] = _("What?\n{STR_VAR_1} is evolving!"); //  @ 83FE672
-const u8 gText_CongratsPkmnEvolved[] = _("Congratulations! Your {STR_VAR_1}\nevolved into {STR_VAR_2}!{WAIT_SE}\p"); //  @ 83FE688
-const u8 gText_PkmnStoppedEvolving[] = _("Huh? {STR_VAR_1}\nstopped evolving!\p"); //  @ 83FE6B5
-const u8 gText_EllipsisQuestionMark[] = _("……?\p"); //  @ 83FE6D0
-const u8 gText_WhatWillPkmnDo[] = _("What will\n{B_ACTIVE_NAME_WITH_PREFIX} do?"); //  @ 83FE6D5
-const u8 gUnknown_83FE6E6[] = _("What will {B_PLAYER_NAME}\nthrow?"); //  @ 83FE6E6
-const u8 gUnknown_83FE6FA[] = _("What will the\nold man do?"); //  @ 83FE6FA
-const u8 gText_LinkStandby[] = _("{PAUSE 16}Link standby…"); //  @ 83FE714
-const u8 gUnknown_83FE725[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW 13 14 15}FIGHT{CLEAR_TO 56}BAG\nPOKéMON{CLEAR_TO 56}RUN"); //  @ 83FE725
-const u8 gUnknown_83FE747[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW 13 14 15}BALL{CLEAR_TO 56}BAIT\nROCK{CLEAR_TO 56}RUN"); //  @ 83FE747
-const u8 gText_MoveInterfacePP[] = _("PP "); //  @ 83FE766
-const u8 gText_MoveInterfaceType[] = _("TYPE/"); //  @ 83FE76A
-const u8 gUnknown_83FE770[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW 13 14 15}"); //  @ 83FE770
-const u8 gUnknown_83FE779[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW 13 14 15}どの わざを\nわすれさせたい?"); //  @ 83FE779
-const u8 gText_BattleYesNoChoice[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW 13 14 15}Yes\nNo"); //  @ 83FE791
-const u8 gText_BattleSwitchWhich[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW 13 14 15}Switch\nwhich?"); //  @ 83FE7A0
-const u8 gUnknown_83FE7B6[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW 13 14 15}"); //  @ 83FE7B6
-const u8 gUnknown_83FE7BF[] = _("{RIGHT_ARROW_2}"); //  @ 83FE7BF
-const u8 gUnknown_83FE7C2[] = _("{PLUS}"); //  @ 83FE7C2
-const u8 gUnknown_83FE7C5[] = _("-"); //  @ 83FE7C5
+const u8 gText_PkmnIsEvolving[] = _("What?\n{STR_VAR_1} is evolving!");
+const u8 gText_CongratsPkmnEvolved[] = _("Congratulations! Your {STR_VAR_1}\nevolved into {STR_VAR_2}!{WAIT_SE}\p");
+const u8 gText_PkmnStoppedEvolving[] = _("Huh? {STR_VAR_1}\nstopped evolving!\p");
+const u8 gText_EllipsisQuestionMark[] = _("……?\p");
+const u8 gText_WhatWillPkmnDo[] = _("What will\n{B_ACTIVE_NAME_WITH_PREFIX} do?");
+const u8 gUnknown_83FE6E6[] = _("What will {B_PLAYER_NAME}\nthrow?");
+const u8 gUnknown_83FE6FA[] = _("What will the\nold man do?");
+const u8 gText_LinkStandby[] = _("{PAUSE 16}Link standby…");
+const u8 gUnknown_83FE725[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW 13 14 15}FIGHT{CLEAR_TO 56}BAG\nPOKéMON{CLEAR_TO 56}RUN");
+const u8 gUnknown_83FE747[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW 13 14 15}BALL{CLEAR_TO 56}BAIT\nROCK{CLEAR_TO 56}RUN");
+const u8 gText_MoveInterfacePP[] = _("PP ");
+const u8 gText_MoveInterfaceType[] = _("TYPE/");
+const u8 gUnknown_83FE770[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW 13 14 15}");
+const u8 gUnknown_83FE779[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW 13 14 15}どの わざを\nわすれさせたい?");
+const u8 gText_BattleYesNoChoice[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW 13 14 15}Yes\nNo");
+const u8 gText_BattleSwitchWhich[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW 13 14 15}Switch\nwhich?");
+const u8 gUnknown_83FE7B6[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW 13 14 15}");
+const u8 gUnknown_83FE7BF[] = _("{RIGHT_ARROW_2}");
+const u8 gUnknown_83FE7C2[] = _("{PLUS}");
+const u8 gUnknown_83FE7C5[] = _("-");
 
-const u8 gUnknown_83FE7C7[] = _("{SIZE 0}Max{SIZE 2} HP"); //  @ 83FE7C7
-const u8 gUnknown_83FE7D4[] = _("ATTACK "); //  @ 83FE7D4
-const u8 gUnknown_83FE7DC[] = _("DEFENSE"); //  @ 83FE7DC
-const u8 gUnknown_83FE7E4[] = _("SP. ATK"); //  @ 83FE7E4
-const u8 gUnknown_83FE7EC[] = _("SP. DEF"); //  @ 83FE7EC
+const u8 gUnknown_83FE7C7[] = _("{SIZE 0}Max{SIZE 2} HP");
+const u8 gUnknown_83FE7D4[] = _("ATTACK ");
+const u8 gUnknown_83FE7DC[] = _("DEFENSE");
+const u8 gUnknown_83FE7E4[] = _("SP. ATK");
+const u8 gUnknown_83FE7EC[] = _("SP. DEF");
 
 const u8 *const gUnknown_83FE7F4[] = {
     gUnknown_83FE7C7,
@@ -1255,56 +1255,56 @@ const u8 *const gUnknown_83FE7F4[] = {
 };
 
 const u8 gUnknown_83FE80C[] = _("{HIGHLIGHT 2}SAFARI BALLS"); //
-const u8 gText_HighlightRed_Left[] = _("{HIGHLIGHT 2}Left: "); //  @ 83FE81C
-const u8 gText_HighlightRed[] = _("{HIGHLIGHT 2}"); //  @ 83FE826
-const u8 gText_Sleep[] = _("sleep"); //  @ 83FE82A
-const u8 gText_Poison[] = _("poison"); //  @ 83FE830
-const u8 gText_Burn[] = _("burn"); //  @ 83FE837
-const u8 gText_Paralysis[] = _("paralysis"); //  @ 83FE83C
-const u8 gText_Ice[] = _("ice"); //  @ 83FE846
-const u8 gText_Confusion[] = _("confusion"); //  @ 83FE84A
-const u8 gText_Love[] = _("love"); //  @ 83FE854
-const u8 gUnknown_83FE859[] = _("  "); //  @ 83FE859
-const u8 gUnknown_83FE85C[] = _("\n"); //  @ 83FE85C
-const u8 gUnknown_83FE85E[] = _("\n"); //  @ 83FE85E
-const u8 gUnknown_83FE860[] = _(" is"); //  @ 83FE860
-const u8 gUnknown_83FE864[] = _(" is"); //  @ 83FE864
-const u8 gText_BadEgg[] = _("Bad EGG"); //  @ 83FE868
-const u8 gUnknown_83FE870[] = _("ミツル"); //  @ 83FE870
-const u8 gUnknown_83FE874[] = _("{HIGHLIGHT 0}Win"); //  @ 83FE874
-const u8 gUnknown_83FE87B[] = _("{HIGHLIGHT 0}Loss"); //  @ 83FE87B
-const u8 gUnknown_83FE883[] = _("{HIGHLIGHT 0}Draw"); //  @ 83FE883
-static const u8 sText_SpaceIs[] = _(" is"); //  @ 83FE88B
-static const u8 sText_ApostropheS[] = _("'s"); //  @ 83FE88F
-const u8 gUnknown_83FE892[] = _("a NORMAL move"); //  @ 83FE892
-const u8 gUnknown_83FE8A0[] = _("a FIGHTING move"); //  @ 83FE8A0
-const u8 gUnknown_83FE8B0[] = _("a FLYING move"); //  @ 83FE8B0
-const u8 gUnknown_83FE8BE[] = _("a POISON move"); //  @ 83FE8BE
-const u8 gUnknown_83FE8CC[] = _("a GROUND move"); //  @ 83FE8CC
-const u8 gUnknown_83FE8DA[] = _("a ROCK move"); //  @ 83FE8DA
-const u8 gUnknown_83FE8E6[] = _("a BUG move"); //  @ 83FE8E6
-const u8 gUnknown_83FE8F1[] = _("a GHOST move"); //  @ 83FE8F1
-const u8 gUnknown_83FE8FE[] = _("a STEEL move"); //  @ 83FE8FE
-const u8 gUnknown_83FE90B[] = _("a ??? move"); //  @ 83FE90B
-const u8 gUnknown_83FE916[] = _("a FIRE move"); //  @ 83FE916
-const u8 gUnknown_83FE922[] = _("a WATER move"); //  @ 83FE922
-const u8 gUnknown_83FE92F[] = _("a GRASS move"); //  @ 83FE92F
-const u8 gUnknown_83FE93C[] = _("an ELECTRIC move"); //  @ 83FE93C
-const u8 gUnknown_83FE94D[] = _("a PSYCHIC move"); //  @ 83FE94D
-const u8 gUnknown_83FE95C[] = _("an ICE move"); //  @ 83FE95C
-const u8 gUnknown_83FE968[] = _("a DRAGON move"); //  @ 83FE968
-const u8 gUnknown_83FE976[] = _("a DARK move"); //  @ 83FE976
-const u8 gUnknown_83FE982[] = _("TIME BOARD"); //  @ 83FE982
-const u8 gUnknown_83FE98D[] = _("CLEAR TIME"); //  @ 83FE98D
-const u8 gUnknown_83FE998[] = _("{STR_VAR_1}MIN. {STR_VAR_2}.{STR_VAR_3}SEC."); //  @ 83FE998
-const u8 gUnknown_83FE9A9[] = _("1F"); //  @ 83FE9A9
-const u8 gUnknown_83FE9AC[] = _("2F"); //  @ 83FE9AC
-const u8 gUnknown_83FE9AF[] = _("3F"); //  @ 83FE9AF
-const u8 gUnknown_83FE9B2[] = _("4F"); //  @ 83FE9B2
-const u8 gUnknown_83FE9B5[] = _("5F"); //  @ 83FE9B5
-const u8 gUnknown_83FE9B8[] = _("6F"); //  @ 83FE9B8
-const u8 gUnknown_83FE9BB[] = _("7F"); //  @ 83FE9BB
-const u8 gUnknown_83FE9BE[] = _("8F"); //  @ 83FE9BE
+const u8 gText_HighlightRed_Left[] = _("{HIGHLIGHT 2}Left: ");
+const u8 gText_HighlightRed[] = _("{HIGHLIGHT 2}");
+const u8 gText_Sleep[] = _("sleep");
+const u8 gText_Poison[] = _("poison");
+const u8 gText_Burn[] = _("burn");
+const u8 gText_Paralysis[] = _("paralysis");
+const u8 gText_Ice[] = _("ice");
+const u8 gText_Confusion[] = _("confusion");
+const u8 gText_Love[] = _("love");
+const u8 gUnknown_83FE859[] = _("  ");
+const u8 gUnknown_83FE85C[] = _("\n");
+const u8 gUnknown_83FE85E[] = _("\n");
+const u8 gUnknown_83FE860[] = _(" is");
+const u8 gUnknown_83FE864[] = _(" is");
+const u8 gText_BadEgg[] = _("Bad EGG");
+const u8 gUnknown_83FE870[] = _("ミツル");
+const u8 gUnknown_83FE874[] = _("{HIGHLIGHT 0}Win");
+const u8 gUnknown_83FE87B[] = _("{HIGHLIGHT 0}Loss");
+const u8 gUnknown_83FE883[] = _("{HIGHLIGHT 0}Draw");
+static const u8 sText_SpaceIs[] = _(" is");
+static const u8 sText_ApostropheS[] = _("'s");
+const u8 gUnknown_83FE892[] = _("a NORMAL move");
+const u8 gUnknown_83FE8A0[] = _("a FIGHTING move");
+const u8 gUnknown_83FE8B0[] = _("a FLYING move");
+const u8 gUnknown_83FE8BE[] = _("a POISON move");
+const u8 gUnknown_83FE8CC[] = _("a GROUND move");
+const u8 gUnknown_83FE8DA[] = _("a ROCK move");
+const u8 gUnknown_83FE8E6[] = _("a BUG move");
+const u8 gUnknown_83FE8F1[] = _("a GHOST move");
+const u8 gUnknown_83FE8FE[] = _("a STEEL move");
+const u8 gUnknown_83FE90B[] = _("a ??? move");
+const u8 gUnknown_83FE916[] = _("a FIRE move");
+const u8 gUnknown_83FE922[] = _("a WATER move");
+const u8 gUnknown_83FE92F[] = _("a GRASS move");
+const u8 gUnknown_83FE93C[] = _("an ELECTRIC move");
+const u8 gUnknown_83FE94D[] = _("a PSYCHIC move");
+const u8 gUnknown_83FE95C[] = _("an ICE move");
+const u8 gUnknown_83FE968[] = _("a DRAGON move");
+const u8 gUnknown_83FE976[] = _("a DARK move");
+const u8 gUnknown_83FE982[] = _("TIME BOARD");
+const u8 gUnknown_83FE98D[] = _("CLEAR TIME");
+const u8 gUnknown_83FE998[] = _("{STR_VAR_1}MIN. {STR_VAR_2}.{STR_VAR_3}SEC.");
+const u8 gUnknown_83FE9A9[] = _("1F");
+const u8 gUnknown_83FE9AC[] = _("2F");
+const u8 gUnknown_83FE9AF[] = _("3F");
+const u8 gUnknown_83FE9B2[] = _("4F");
+const u8 gUnknown_83FE9B5[] = _("5F");
+const u8 gUnknown_83FE9B8[] = _("6F");
+const u8 gUnknown_83FE9BB[] = _("7F");
+const u8 gUnknown_83FE9BE[] = _("8F");
 
 const u8 *const gUnknown_83FE9C4[] = {
     gOtherText_Single,
@@ -1314,8 +1314,8 @@ const u8 *const gUnknown_83FE9C4[] = {
 };
 
 const u8 gUnknown_83FE9D4[] = _("{PLAY_SE SE_NIGERU}{B_TRAINER1_CLASS} {B_TRAINER1_NAME} fled!"); //
-static const u8 sText_PlayerLostAgainstTrainer1[] = _("Player lost against\n{B_TRAINER1_CLASS} {B_TRAINER1_NAME}!"); //  @ 83FE9E4
-static const u8 sText_PlayerBattledToDrawTrainer1[] = _("Player battled to a draw against\n{B_TRAINER1_CLASS} {B_TRAINER1_NAME}!"); //  @ 83FE9FF
+static const u8 sText_PlayerLostAgainstTrainer1[] = _("Player lost against\n{B_TRAINER1_CLASS} {B_TRAINER1_NAME}!");
+static const u8 sText_PlayerBattledToDrawTrainer1[] = _("Player battled to a draw against\n{B_TRAINER1_CLASS} {B_TRAINER1_NAME}!");
 
 static const u8 *const sATypeMove_Table[] = {
     gUnknown_83FE892,
@@ -1463,32 +1463,32 @@ static const u16 sGrammarMoveUsedTable[] = {
 };
 
 // code
-void BufferStringBattle(u16 stringID)
+void BufferStringBattle(u16 stringId)
 {
     s32 i;
     const u8 *stringPtr = NULL;
 
-    gBattleMsgDataPtr = (struct BattleMsgData*)(&gBattleBufferA[gActiveBattler][4]);
-    gLastUsedItem = gBattleMsgDataPtr->lastItem;
-    gLastUsedAbility = gBattleMsgDataPtr->lastAbility;
-    gBattleScripting.battler = gBattleMsgDataPtr->scrActive;
-    *(&gBattleStruct->field_52) = gBattleMsgDataPtr->unk1605E;
-    *(&gBattleStruct->hpScale) = gBattleMsgDataPtr->hpScale;
-    gPotentialItemEffectBattler = gBattleMsgDataPtr->itemEffectBattler;
-    *(&gBattleStruct->stringMoveType) = gBattleMsgDataPtr->moveType;
+    sBattleMsgDataPtr = (struct BattleMsgData*)(&gBattleBufferA[gActiveBattler][4]);
+    gLastUsedItem = sBattleMsgDataPtr->lastItem;
+    gLastUsedAbility = sBattleMsgDataPtr->lastAbility;
+    gBattleScripting.battler = sBattleMsgDataPtr->scrActive;
+    *(&gBattleStruct->field_52) = sBattleMsgDataPtr->unk1605E;
+    *(&gBattleStruct->hpScale) = sBattleMsgDataPtr->hpScale;
+    gPotentialItemEffectBattler = sBattleMsgDataPtr->itemEffectBattler;
+    *(&gBattleStruct->stringMoveType) = sBattleMsgDataPtr->moveType;
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
-        sBattlerAbilities[i] = gBattleMsgDataPtr->abilities[i];
+        sBattlerAbilities[i] = sBattleMsgDataPtr->abilities[i];
     }
     for (i = 0; i < TEXT_BUFF_ARRAY_COUNT; i++)
     {
-        gBattleTextBuff1[i] = gBattleMsgDataPtr->textBuffs[0][i];
-        gBattleTextBuff2[i] = gBattleMsgDataPtr->textBuffs[1][i];
-        gBattleTextBuff3[i] = gBattleMsgDataPtr->textBuffs[2][i];
+        gBattleTextBuff1[i] = sBattleMsgDataPtr->textBuffs[0][i];
+        gBattleTextBuff2[i] = sBattleMsgDataPtr->textBuffs[1][i];
+        gBattleTextBuff3[i] = sBattleMsgDataPtr->textBuffs[2][i];
     }
 
-    switch (stringID)
+    switch (stringId)
     {
     case STRINGID_INTROMSG: // first battle msg
         if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
@@ -1627,10 +1627,10 @@ void BufferStringBattle(u16 stringID)
     case STRINGID_USEDMOVE: // pokemon used a move msg
         ChooseMoveUsedParticle(gBattleTextBuff1); // buff1 doesn't appear in the string, leftover from japanese move names
 
-        if (gBattleMsgDataPtr->currentMove >= MOVES_COUNT)
+        if (sBattleMsgDataPtr->currentMove >= MOVES_COUNT)
             StringCopy(gBattleTextBuff2, sATypeMove_Table[*(&gBattleStruct->stringMoveType)]);
         else
-            StringCopy(gBattleTextBuff2, gMoveNames[gBattleMsgDataPtr->currentMove]);
+            StringCopy(gBattleTextBuff2, gMoveNames[sBattleMsgDataPtr->currentMove]);
 
         ChooseTypeOfMoveUsedString(gBattleTextBuff2);
         stringPtr = sText_AttackerUsedX;
@@ -1704,14 +1704,14 @@ void BufferStringBattle(u16 stringID)
         }
         break;
     default: // load a string from the table
-        if (stringID >= BATTLESTRINGS_COUNT + BATTLESTRINGS_ID_ADDER)
+        if (stringId >= BATTLESTRINGS_COUNT + BATTLESTRINGS_ID_ADDER)
         {
             gDisplayedStringBattle[0] = EOS;
             return;
         }
         else
         {
-            stringPtr = gBattleStringsTable[stringID - BATTLESTRINGS_ID_ADDER];
+            stringPtr = gBattleStringsTable[stringId - BATTLESTRINGS_ID_ADDER];
         }
         break;
     }
@@ -1744,7 +1744,7 @@ static const u8* TryGetStatusString(u8 *src)
     chars1 = *(u32*)(&status[0]);
     chars2 = *(u32*)(&status[4]);
 
-    for (i = 0; i < ARRAY_COUNT(gStatusConditionStringsTable); i++)
+    for (i = 0; i < NELEMS(gStatusConditionStringsTable); i++)
     {
         if (chars1 == *(u32*)(&gStatusConditionStringsTable[i][0][0])
             && chars2 == *(u32*)(&gStatusConditionStringsTable[i][0][4]))
@@ -1762,8 +1762,8 @@ static const u8* TryGetStatusString(u8 *src)
             toCpy = sText_WildPkmnPrefix;                               \
         while (*toCpy != EOS)                                           \
         {                                                               \
-            dst[dstID] = *toCpy;                                        \
-            dstID++;                                                    \
+            dst[dstId] = *toCpy;                                        \
+            dstId++;                                                    \
             toCpy++;                                                    \
         }                                                               \
         GetMonData(&gEnemyParty[monIndex], MON_DATA_NICKNAME, text);    \
@@ -1777,7 +1777,7 @@ static const u8* TryGetStatusString(u8 *src)
 
 u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
 {
-    u32 dstID = 0; // if they used dstID, why not use srcID as well?
+    u32 dstId = 0; // if they used dstId, why not use srcId as well?
     const u8 *toCpy = NULL;
     u8 text[30];
     u8 multiplayerId;
@@ -1913,16 +1913,16 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 HANDLE_NICKNAME_STRING_CASE(gBattleScripting.battler, gBattlerPartyIndexes[gBattleScripting.battler])
                 break;
             case B_TXT_CURRENT_MOVE: // current move name
-                if (gBattleMsgDataPtr->currentMove >= MOVES_COUNT)
+                if (sBattleMsgDataPtr->currentMove >= MOVES_COUNT)
                     toCpy = (const u8 *)&sATypeMove_Table[gBattleStruct->stringMoveType];
                 else
-                    toCpy = gMoveNames[gBattleMsgDataPtr->currentMove];
+                    toCpy = gMoveNames[sBattleMsgDataPtr->currentMove];
                 break;
             case B_TXT_LAST_MOVE: // originally used move name
-                if (gBattleMsgDataPtr->originallyUsedMove >= MOVES_COUNT)
+                if (sBattleMsgDataPtr->originallyUsedMove >= MOVES_COUNT)
                     toCpy = (const u8 *)&sATypeMove_Table[gBattleStruct->stringMoveType];
                 else
-                    toCpy = gMoveNames[gBattleMsgDataPtr->originallyUsedMove];
+                    toCpy = gMoveNames[sBattleMsgDataPtr->originallyUsedMove];
                 break;
             case B_TXT_LAST_ITEM: // last used item
                 if (gBattleTypeFlags & BATTLE_TYPE_LINK)
@@ -1999,7 +1999,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
             case B_TXT_TRAINER1_NAME: // trainer1 name
                 if (gTrainerBattleOpponent_A == SECRET_BASE_OPPONENT)
                 {
-                    for (i = 0; i < (s32) ARRAY_COUNT(gBattleResources->secretBase->trainerName); i++)
+                    for (i = 0; i < (s32)NELEMS(gBattleResources->secretBase->trainerName); i++)
                         text[i] = gBattleResources->secretBase->trainerName[i];
                     text[i] = EOS;
                     toCpy = text;
@@ -2131,78 +2131,78 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
             // missing if (toCpy != NULL) check
             while (*toCpy != EOS)
             {
-                dst[dstID] = *toCpy;
-                dstID++;
+                dst[dstId] = *toCpy;
+                dstId++;
                 toCpy++;
             }
             if (*src == B_TXT_TRAINER1_LOSE_TEXT || *src == B_TXT_TRAINER1_WIN_TEXT
              || *src == B_TXT_TRAINER2_LOSE_TEXT || *src == B_TXT_TRAINER2_WIN_TEXT)
             {
-                dst[dstID] = EXT_CTRL_CODE_BEGIN;
-                dstID++;
-                dst[dstID] = 9;
-                dstID++;
+                dst[dstId] = EXT_CTRL_CODE_BEGIN;
+                dstId++;
+                dst[dstId] = 9;
+                dstId++;
             }
         }
         else
         {
-            dst[dstID] = *src;
-            dstID++;
+            dst[dstId] = *src;
+            dstId++;
         }
         src++;
     }
 
-    dst[dstID] = *src;
-    dstID++;
+    dst[dstId] = *src;
+    dstId++;
 
-    return dstID;
+    return dstId;
 }
 
 static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
 {
-    u32 srcID = 1;
+    u32 srcId = 1;
     u32 value = 0;
     u8 text[12];
     u16 hword;
 
     *dst = EOS;
-    while (src[srcID] != B_BUFF_EOS)
+    while (src[srcId] != B_BUFF_EOS)
     {
-        switch (src[srcID])
+        switch (src[srcId])
         {
         case B_BUFF_STRING: // battle string
-            hword = T1_READ_16(&src[srcID + 1]);
+            hword = T1_READ_16(&src[srcId + 1]);
             StringAppend(dst, gBattleStringsTable[hword - BATTLESTRINGS_ID_ADDER]);
-            srcID += 3;
+            srcId += 3;
             break;
         case B_BUFF_NUMBER: // int to string
-            switch (src[srcID + 1])
+            switch (src[srcId + 1])
             {
             case 1:
-                value = src[srcID + 3];
+                value = src[srcId + 3];
                 break;
             case 2:
-                value = T1_READ_16(&src[srcID + 3]);
+                value = T1_READ_16(&src[srcId + 3]);
                 break;
             case 4:
-                value = T1_READ_32(&src[srcID + 3]);
+                value = T1_READ_32(&src[srcId + 3]);
                 break;
             }
-            ConvertIntToDecimalStringN(dst, value, STR_CONV_MODE_LEFT_ALIGN, src[srcID + 2]);
-            srcID += src[srcID + 1] + 3;
+            ConvertIntToDecimalStringN(dst, value, STR_CONV_MODE_LEFT_ALIGN, src[srcId + 2]);
+            srcId += src[srcId + 1] + 3;
             break;
         case B_BUFF_MOVE: // move name
-            StringAppend(dst, gMoveNames[T1_READ_16(&src[srcID + 1])]);
-            srcID += 3;
+            StringAppend(dst, gMoveNames[T1_READ_16(&src[srcId + 1])]);
+            srcId += 3;
             break;
         case B_BUFF_TYPE: // type name
-            StringAppend(dst, gTypeNames[src[srcID + 1]]);
-            srcID += 2;
+            StringAppend(dst, gTypeNames[src[srcId + 1]]);
+            srcId += 2;
             break;
         case B_BUFF_MON_NICK_WITH_PREFIX: // poke nick with prefix
-            if (GetBattlerSide(src[srcID + 1]) == B_SIDE_PLAYER)
+            if (GetBattlerSide(src[srcId + 1]) == B_SIDE_PLAYER)
             {
-                GetMonData(&gPlayerParty[src[srcID + 2]], MON_DATA_NICKNAME, text);
+                GetMonData(&gPlayerParty[src[srcId + 2]], MON_DATA_NICKNAME, text);
             }
             else
             {
@@ -2211,38 +2211,38 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
                 else
                     StringAppend(dst, sText_WildPkmnPrefix);
 
-                GetMonData(&gEnemyParty[src[srcID + 2]], MON_DATA_NICKNAME, text);
+                GetMonData(&gEnemyParty[src[srcId + 2]], MON_DATA_NICKNAME, text);
             }
             StringGetEnd10(text);
             StringAppend(dst, text);
-            srcID += 3;
+            srcId += 3;
             break;
         case B_BUFF_STAT: // stats
-            StringAppend(dst, gStatNamesTable[src[srcID + 1]]);
-            srcID += 2;
+            StringAppend(dst, gStatNamesTable[src[srcId + 1]]);
+            srcId += 2;
             break;
         case B_BUFF_SPECIES: // species name
-            GetSpeciesName(dst, T1_READ_16(&src[srcID + 1]));
-            srcID += 3;
+            GetSpeciesName(dst, T1_READ_16(&src[srcId + 1]));
+            srcId += 3;
             break;
         case B_BUFF_MON_NICK: // poke nick without prefix
-            if (GetBattlerSide(src[srcID + 1]) == B_SIDE_PLAYER)
-                GetMonData(&gPlayerParty[src[srcID + 2]], MON_DATA_NICKNAME, dst);
+            if (GetBattlerSide(src[srcId + 1]) == B_SIDE_PLAYER)
+                GetMonData(&gPlayerParty[src[srcId + 2]], MON_DATA_NICKNAME, dst);
             else
-                GetMonData(&gEnemyParty[src[srcID + 2]], MON_DATA_NICKNAME, dst);
+                GetMonData(&gEnemyParty[src[srcId + 2]], MON_DATA_NICKNAME, dst);
             StringGetEnd10(dst);
-            srcID += 3;
+            srcId += 3;
             break;
         case B_BUFF_NEGATIVE_FLAVOR: // flavor table
-            StringAppend(dst, gPokeblockWasTooXStringTable[src[srcID + 1]]);
-            srcID += 2;
+            StringAppend(dst, gPokeblockWasTooXStringTable[src[srcId + 1]]);
+            srcId += 2;
             break;
         case B_BUFF_ABILITY: // ability names
-            StringAppend(dst, gAbilityNames[src[srcID + 1]]);
-            srcID += 2;
+            StringAppend(dst, gAbilityNames[src[srcId + 1]]);
+            srcId += 2;
             break;
         case B_BUFF_ITEM: // item name
-            hword = T1_READ_16(&src[srcID + 1]);
+            hword = T1_READ_16(&src[srcId + 1]);
             if (gBattleTypeFlags & BATTLE_TYPE_LINK)
             {
                 if (hword == ITEM_ENIGMA_BERRY)
@@ -2266,7 +2266,7 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
             {
                 CopyItemName(hword, dst);
             }
-            srcID += 3;
+            srcId += 3;
             break;
         }
     }
@@ -2285,7 +2285,7 @@ static void ChooseMoveUsedParticle(u8* textBuff)
     {
         if (sGrammarMoveUsedTable[i] == 0)
             counter++;
-        if (sGrammarMoveUsedTable[i++] == gBattleMsgDataPtr->currentMove)
+        if (sGrammarMoveUsedTable[i++] == sBattleMsgDataPtr->currentMove)
             break;
     }
 
@@ -2328,7 +2328,7 @@ static void ChooseTypeOfMoveUsedString(u8* dst)
     {
         if (sGrammarMoveUsedTable[i] == MOVE_NONE)
             counter++;
-        if (sGrammarMoveUsedTable[i++] == gBattleMsgDataPtr->currentMove)
+        if (sGrammarMoveUsedTable[i++] == sBattleMsgDataPtr->currentMove)
             break;
     }
 

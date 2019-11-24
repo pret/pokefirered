@@ -5710,7 +5710,6 @@ static u8 GetPartySlotEntryStatus(s8 slot)
     return 0;
 }
 
-#ifdef NONMATCHING
 static bool8 GetBattleEntryEligibility(struct Pokemon *mon)
 {
     u16 species;
@@ -5721,118 +5720,25 @@ static bool8 GetBattleEntryEligibility(struct Pokemon *mon)
     switch (gPartyMenu.unk_8_6)
     {
     default:
-        if (GetMonData(mon, MON_DATA_LEVEL) <= 30)
-            return TRUE;
-        return FALSE;
+        if (GetMonData(mon, MON_DATA_LEVEL) > 30)
+            return FALSE;
+        break;
     case 0:
-        if (GetMonData(mon, MON_DATA_HP) != 0)
-            return TRUE;
-        return FALSE;
+        if (GetMonData(mon, MON_DATA_HP) == 0)
+            return FALSE;
+        break;
     case 1:
-        if (gSaveBlock2Ptr->battleTower.battleTowerLevelType != 0 // level 100
-         || GetMonData(mon, MON_DATA_LEVEL) <= 50)
-        {
-            species = GetMonData(mon, MON_DATA_SPECIES);
-            // Although i is always 0, the compiler still computes the offset of
-            // gBattleTowerBannedSpecies[i] by shifting i. 
-            // It's also in emerald, but for whatever reason it's generated. 
-            for (; gBattleTowerBannedSpecies[i] != 0xFFFF; ++i)
-                if (gBattleTowerBannedSpecies[i] == species)
-                    return FALSE;
-            return TRUE;
-        }
-        return FALSE;
+        if (gSaveBlock2Ptr->battleTower.battleTowerLevelType == 0 // level 50
+         && GetMonData(mon, MON_DATA_LEVEL) > 50)
+            return FALSE;
+        species = GetMonData(mon, MON_DATA_SPECIES);
+        for (; gBattleTowerBannedSpecies[i] != 0xFFFF; ++i)
+            if (gBattleTowerBannedSpecies[i] == species)
+                return FALSE;
+        break;
     }
+    return TRUE;
 }
-#else
-NAKED
-static bool8 GetBattleEntryEligibility(struct Pokemon *mon)
-{
-    asm_unified("push {r4,r5,lr}\n\
-        adds r4, r0, 0\n\
-        movs r5, 0\n\
-        movs r1, 0x2D\n\
-        bl GetMonData\n\
-        cmp r0, 0\n\
-        bne _0812757A\n\
-        ldr r0, _08127580 @ =gPartyMenu\n\
-        ldrb r0, [r0, 0x8]\n\
-        lsrs r1, r0, 6\n\
-        cmp r1, 0\n\
-        beq _08127584\n\
-        cmp r1, 0x1\n\
-        beq _08127592\n\
-        adds r0, r4, 0\n\
-        movs r1, 0x38\n\
-        bl GetMonData\n\
-        cmp r0, 0x1E\n\
-        bls _081275E0\n\
-    _0812757A:\n\
-        movs r0, 0\n\
-        b _081275E2\n\
-        .align 2, 0\n\
-    _08127580: .4byte gPartyMenu\n\
-    _08127584:\n\
-        adds r0, r4, 0\n\
-        movs r1, 0x39\n\
-        bl GetMonData\n\
-        cmp r0, 0\n\
-        bne _081275E0\n\
-        b _0812757A\n\
-    _08127592:\n\
-        ldr r0, _081275E8 @ =gSaveBlock2Ptr\n\
-        ldr r0, [r0]\n\
-        ldr r2, _081275EC @ =0x0000055c\n\
-        adds r0, r2\n\
-        ldrb r0, [r0]\n\
-        ands r1, r0\n\
-        cmp r1, 0\n\
-        bne _081275AE\n\
-        adds r0, r4, 0\n\
-        movs r1, 0x38\n\
-        bl GetMonData\n\
-        cmp r0, 0x32\n\
-        bhi _0812757A\n\
-    _081275AE:\n\
-        adds r0, r4, 0\n\
-        movs r1, 0xB\n\
-        bl GetMonData\n\
-        lsls r0, 16\n\
-        lsrs r4, r0, 16\n\
-        ldr r3, _081275F0 @ =gBattleTowerBannedSpecies\n\
-        lsls r1, r5, 1\n\
-        adds r0, r1, r3\n\
-        ldrh r0, [r0]\n\
-        ldr r2, _081275F4 @ =0x0000ffff\n\
-        cmp r0, r2\n\
-        beq _081275E0\n\
-    _081275C8:\n\
-        adds r0, r1, r3\n\
-        ldrh r0, [r0]\n\
-        cmp r0, r4\n\
-        beq _0812757A\n\
-        adds r0, r5, 0x1\n\
-        lsls r0, 16\n\
-        lsrs r5, r0, 16\n\
-        lsls r1, r5, 1\n\
-        adds r0, r1, r3\n\
-        ldrh r0, [r0]\n\
-        cmp r0, r2\n\
-        bne _081275C8\n\
-    _081275E0:\n\
-        movs r0, 0x1\n\
-    _081275E2:\n\
-        pop {r4,r5}\n\
-        pop {r1}\n\
-        bx r1\n\
-        .align 2, 0\n\
-    _081275E8: .4byte gSaveBlock2Ptr\n\
-    _081275EC: .4byte 0x0000055c\n\
-    _081275F0: .4byte gBattleTowerBannedSpecies\n\
-    _081275F4: .4byte 0x0000ffff\n\
-        ");
-}
-#endif
 
 static u8 CheckBattleEntriesAndGetMessage(void)
 {

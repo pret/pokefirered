@@ -1512,7 +1512,7 @@ static void nullsub_53(void)
 #ifdef NONMATCHING
 void sub_809C09C(u16 item, u16 quantity, u8 a2)
 {
-    struct Purchase *tmp;
+    struct MartHistory *tmp;
     
     if (gUnknown_203996C.unkA == a2)
     {

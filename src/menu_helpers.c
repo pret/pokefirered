@@ -83,7 +83,7 @@ u8 GetLRKeysState(void)
     return 0;
 }
 
-u8 sub_80BF66C(void)
+u8 GetLRKeysPressedAndHeld(void)
 {
     if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
     {
@@ -149,7 +149,7 @@ void SetVBlankHBlankCallbacksToNull(void)
     SetHBlankCallback(NULL);
 }
 
-void ClearVramOamPltt(void)
+void ResetVramOamAndBgCntRegs(void)
 {
     ResetAllBgsCoordinatesAndBgCntRegs();
     CpuFill16(0, (void*) VRAM, VRAM_SIZE);

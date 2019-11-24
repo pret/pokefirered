@@ -504,7 +504,7 @@ static bool8 StartMenuPlayerCallback(void)
         PlayRainStoppingSoundEffect();
         DestroySafariZoneStatsWindow();
         CleanupOverworldWindowsAndTilemaps();
-        InitTrainerCard(CB2_ReturnToStartMenu);
+        InitTrainerCard(CB2_ReturnToFieldWithOpenMenu);
         return TRUE;
     }
     return FALSE;
@@ -524,7 +524,7 @@ static bool8 StartMenuOptionCallback(void)
         DestroySafariZoneStatsWindow();
         CleanupOverworldWindowsAndTilemaps();
         SetMainCallback2(CB2_OptionsMenuFromStartMenu);
-        gMain.savedCallback = CB2_ReturnToStartMenu;
+        gMain.savedCallback = CB2_ReturnToFieldWithOpenMenu;
         return TRUE;
     }
     return FALSE;
@@ -554,7 +554,7 @@ static bool8 StartMenuLinkPlayerCallback(void)
     {
         PlayRainStoppingSoundEffect();
         CleanupOverworldWindowsAndTilemaps();
-        InitLinkPartnerTrainerCard(gUnknown_300502C, CB2_ReturnToStartMenu);
+        InitLinkPartnerTrainerCard(gUnknown_300502C, CB2_ReturnToFieldWithOpenMenu);
         return TRUE;
     }
     return FALSE;

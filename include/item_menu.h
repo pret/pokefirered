@@ -25,7 +25,7 @@ extern u16 gSpecialVar_ItemId;
 // Exported ROM declarations
 void sub_81AAC50(void);
 void sub_81AAC70(void);
-void sub_8108CF0(void);
+void CB2_SetUpReshowBattleScreenAfterMenu(void);
 void sub_81089BC(void);
 void sub_810B108(u8);
 void CB2_BagMenuFromStartMenu(void);
@@ -39,6 +39,6 @@ void sub_8107ECC(void);
 void sub_810AF74(void);
 void sub_8108DC8(u8 pocketId);
 void sub_81089F4(u8 pocketId);
-void sub_8107DB4(u8 menuType, u8 pocket, MainCallback callback);
+void GoToBagMenu(u8 menuType, u8 pocket, MainCallback callback);
 
 #endif //GUARD_ITEM_MENU_H

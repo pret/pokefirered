@@ -4504,7 +4504,7 @@ static void atk4F_jumpifcantswitch(void)
 static void sub_8024398(u8 arg0)
 {
     *(gBattleStruct->field_58 + gActiveBattler) = gBattlerPartyIndexes[gActiveBattler];
-    BtlController_EmitChoosePokemon(0, PARTY_MUST_CHOOSE_MON, arg0, 0, gBattleStruct->field_60[gActiveBattler]);
+    BtlController_EmitChoosePokemon(0, PARTY_ACTION_SEND_OUT, arg0, 0, gBattleStruct->field_60[gActiveBattler]);
     MarkBattlerForControllerExec(gActiveBattler);
 }
 
@@ -4739,9 +4739,9 @@ static void atk50_openpartyscreen(void)
     else
     {
         if (gBattlescriptCurrInstr[1] & OPEN_PARTY_ALLOW_CANCEL)
-            hitmarkerFaintBits = PARTY_CHOOSE_MON; // Used here as the caseId for the EmitChoose function.
+            hitmarkerFaintBits = PARTY_ACTION_CHOOSE_MON; // Used here as the caseId for the EmitChoose function.
         else
-            hitmarkerFaintBits = PARTY_MUST_CHOOSE_MON;
+            hitmarkerFaintBits = PARTY_ACTION_SEND_OUT;
         battlerId = GetBattlerForBattleScript(gBattlescriptCurrInstr[1] & ~(OPEN_PARTY_ALLOW_CANCEL));
         if (gSpecialStatuses[battlerId].flag40)
         {
@@ -5831,7 +5831,7 @@ static void DrawLevelUpWindow1(void)
 {
     u16 currStats[NUM_STATS];
 
-    GetMonLevelUpWindowStats(&gPlayerParty[gBattleStruct->expGetterMonId], currStats);
+    BufferMonStatsToTaskData(&gPlayerParty[gBattleStruct->expGetterMonId], currStats);
     DrawLevelUpWindowPg1(12, gBattleResources->beforeLvlUp->stats, currStats, 0xE, 0xD, 0xF);
 }
 
@@ -5839,7 +5839,7 @@ static void DrawLevelUpWindow2(void)
 {
     u16 currStats[NUM_STATS];
 
-    GetMonLevelUpWindowStats(&gPlayerParty[gBattleStruct->expGetterMonId], currStats);
+    BufferMonStatsToTaskData(&gPlayerParty[gBattleStruct->expGetterMonId], currStats);
     DrawLevelUpWindowPg2(12, currStats, 0xE, 0xD, 0xF);
 }
 
@@ -7140,8 +7140,8 @@ static void atk8F_forcerandomswitch(void)
             *(gBattleStruct->monToSwitchIntoId + gBattlerTarget) = i;
             if (!IsMultiBattle())
                 sub_8013F6C(gBattlerTarget);
-            sub_8127EC4(gBattlerTarget, i, 0);
-            sub_8127EC4(gBattlerTarget ^ 2, i, 1);
+            SwitchPartyOrderLinkMulti(gBattlerTarget, i, 0);
+            SwitchPartyOrderLinkMulti(gBattlerTarget ^ 2, i, 1);
         }
     }
     else

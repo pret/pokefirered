@@ -45,5 +45,6 @@ u16 GetDisplayedWordByIndex(u16 index);
 u16 GetNumDisplayedWords(void);
 const u8 *GetEasyChatWordGroupName(u8);
 u8 *CopyEasyChatWordPadded(u8 *, u16, u16);
+void DoEasyChatScreen(u8 type, u16 *words, MainCallback callback); // TODO: currently in link_rfu.s. further file split needed? 
 
 #endif // GUARD_EASYCHAT_H

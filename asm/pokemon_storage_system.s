@@ -1455,7 +1455,7 @@ _0808C3E0:
 	.align 2, 0
 _0808C444: .4byte gUnknown_83CDA20
 _0808C448:
-	bl field_weather_is_fade_finished
+	bl IsWeatherNotFadingIn
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808C454
@@ -6591,7 +6591,7 @@ _0808EEE8:
 	ldr r2, _0808EF08 @ =sub_808CE60
 	movs r0, 0x4
 	movs r1, 0
-	bl sub_8107DB4
+	bl GoToBagMenu
 _0808EEF6:
 	adds r0, r7, 0
 	bl DestroyTask
@@ -15947,7 +15947,7 @@ sub_80937B4: @ 80937B4
 _080937C4: .4byte gUnknown_2039822
 _080937C8:
 	ldr r4, _080937D8 @ =gUnknown_2039821
-	bl sub_8138B20
+	bl GetLastViewedMonIndex
 	strb r0, [r4]
 _080937D0:
 	pop {r4}

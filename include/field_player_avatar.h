@@ -33,5 +33,7 @@ void sub_805DC04(void);
 void sub_805DAB0(void);
 bool32 sub_805DAD0(void);
 bool32 sub_805DC24(void);
+bool8 PartyHasMonWithSurf(void);
+bool8 IsPlayerSurfingNorth(void);
 
 #endif //GUARD_FIELD_PLAYER_AVATAR_H

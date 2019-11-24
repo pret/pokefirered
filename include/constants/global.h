@@ -80,4 +80,6 @@ enum
 
 #define NUM_BAG_POCKETS 5
 
+#define MULTI_PARTY_SIZE PARTY_SIZE / 2
+
 #endif //GUARD_CONSTANTS_GLOBAL_H

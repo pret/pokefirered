@@ -376,7 +376,7 @@ sub_805E080: @ 805E080
 	str r0, [sp, 0x8]
 	adds r0, r6, 0
 	adds r1, r7, 0
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	ldr r1, [r0, 0x4]
 	lsls r0, r4, 1
 	adds r0, r4
@@ -4294,7 +4294,7 @@ _0805FD90: .4byte gMapHeader
 _0805FD94:
 	adds r0, r2, 0
 	adds r1, r3, 0
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	ldr r0, [r0, 0x4]
 	ldr r1, [r0, 0x4]
 _0805FDA0:

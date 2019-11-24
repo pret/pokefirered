@@ -1863,7 +1863,7 @@ void sub_80CC59C(void)
         {
             if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE22) && (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE22) || gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE23)))
             {
-                sp0.unk0 = get_mapheader_by_bank_and_number(sInsideOutsidePairs[r5].grp, sInsideOutsidePairs[r5].num)->regionMapSectionId;
+                sp0.unk0 = Overworld_GetMapHeaderByGroupAndId(sInsideOutsidePairs[r5].grp, sInsideOutsidePairs[r5].num)->regionMapSectionId;
                 if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE22))
                     sp0.unk1 = r5;
                 else
@@ -1875,7 +1875,7 @@ void sub_80CC59C(void)
         }
         if (gSaveBlock1Ptr->location.mapGroup == sInsideOutsidePairs[r5].grp2 && gSaveBlock1Ptr->location.mapNum == sInsideOutsidePairs[r5].num2)
         {
-            sp0.unk0 = get_mapheader_by_bank_and_number(sInsideOutsidePairs[r5].grp, sInsideOutsidePairs[r5].num)->regionMapSectionId;
+            sp0.unk0 = Overworld_GetMapHeaderByGroupAndId(sInsideOutsidePairs[r5].grp, sInsideOutsidePairs[r5].num)->regionMapSectionId;
             sp0.unk1 = r5;
             if (r5 == 22)
             {

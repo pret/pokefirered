@@ -72,7 +72,7 @@ void Overworld_ChangeMusicTo(u16);
 bool32 IsUpdateLinkStateCBActive(void);
 
 void strange_npc_table_clear(void);
-const struct MapHeader *get_mapheader_by_bank_and_number(u16, u16);
+const struct MapHeader *Overworld_GetMapHeaderByGroupAndId(u16, u16);
 void FieldObjectMoveDestCoords(struct MapObject *, u32, s16 *, s16 *);
 void sub_8086230(void);
 void CB2_ReturnToField(void);
@@ -140,7 +140,7 @@ bool32 Overworld_DoScrollSceneForCredits(u8 *, const struct CreditsOverworldCmd 
 
 bool32 sub_8058318(void);
 
-void CB2_ReturnToStartMenu(void);
+void CB2_ReturnToFieldWithOpenMenu(void);
 void CB2_WhiteOut(void);
 void c2_8056854(void);
 void sub_8054F38(u32 newKey);

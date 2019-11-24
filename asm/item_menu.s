@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8107DB4
-sub_8107DB4: @ 8107DB4
+	thumb_func_start GoToBagMenu
+GoToBagMenu: @ 8107DB4
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -136,19 +136,19 @@ _08107EA8: .4byte gSpecialVar_ItemId
 _08107EAC: .4byte sub_8107F10
 _08107EB0: .4byte gUnknown_203AD10
 _08107EB4: .4byte gUnknown_203ACFC
-	thumb_func_end sub_8107DB4
+	thumb_func_end GoToBagMenu
 
 	thumb_func_start CB2_BagMenuFromStartMenu
 CB2_BagMenuFromStartMenu: @ 8107EB8
 	push {lr}
-	ldr r2, _08107EC8 @ =CB2_ReturnToStartMenu
+	ldr r2, _08107EC8 @ =CB2_ReturnToFieldWithOpenMenu
 	movs r0, 0
 	movs r1, 0x3
-	bl sub_8107DB4
+	bl GoToBagMenu
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08107EC8: .4byte CB2_ReturnToStartMenu
+_08107EC8: .4byte CB2_ReturnToFieldWithOpenMenu
 	thumb_func_end CB2_BagMenuFromStartMenu
 
 	thumb_func_start sub_8107ECC
@@ -157,7 +157,7 @@ sub_8107ECC: @ 8107ECC
 	ldr r2, _08107EDC @ =SetCB2ToReshowScreenAfterMenu2
 	movs r0, 0x5
 	movs r1, 0x3
-	bl sub_8107DB4
+	bl GoToBagMenu
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1934,15 +1934,15 @@ _08108CE8: .4byte 0x0000fff0
 _08108CEC: .4byte gUnknown_203ACFC
 	thumb_func_end sub_8108CB4
 
-	thumb_func_start sub_8108CF0
-sub_8108CF0: @ 8108CF0
+	thumb_func_start CB2_SetUpReshowBattleScreenAfterMenu
+CB2_SetUpReshowBattleScreenAfterMenu: @ 8108CF0
 	ldr r1, _08108CF8 @ =gUnknown_203ACFC
 	movs r0, 0
 	strb r0, [r1, 0x5]
 	bx lr
 	.align 2, 0
 _08108CF8: .4byte gUnknown_203ACFC
-	thumb_func_end sub_8108CF0
+	thumb_func_end CB2_SetUpReshowBattleScreenAfterMenu
 
 	thumb_func_start sub_8108CFC
 sub_8108CFC: @ 8108CFC
@@ -2514,7 +2514,7 @@ sub_8109140: @ 8109140
 	movs r1, 0
 	movs r2, 0xE
 	movs r3, 0x1E
-	bl SetBgRectPal
+	bl SetBgTilemapPalette
 	movs r0, 0x1
 	bl ScheduleBgCopyTilemapToVram
 	add sp, 0x8
@@ -4399,7 +4399,7 @@ _0810A120:
 _0810A13E:
 	ldr r0, _0810A154 @ =gUnknown_203AD10
 	ldr r1, [r0]
-	ldr r0, _0810A158 @ =sub_8126EDC
+	ldr r0, _0810A158 @ =CB2_ChooseMonToGiveItem
 	str r0, [r1]
 	mov r0, r8
 	subs r0, 0x8
@@ -4409,7 +4409,7 @@ _0810A13E:
 	b _0810A166
 	.align 2, 0
 _0810A154: .4byte gUnknown_203AD10
-_0810A158: .4byte sub_8126EDC
+_0810A158: .4byte CB2_ChooseMonToGiveItem
 _0810A15C: .4byte ItemMenu_StartFadeToExitCallback
 _0810A160:
 	adds r0, r7, 0
@@ -4786,7 +4786,7 @@ _0810A458: .4byte sub_810A45C
 	thumb_func_start sub_810A45C
 sub_810A45C: @ 810A45C
 	push {lr}
-	bl sub_8123730
+	bl CB2_SelectBagItemToGive
 	pop {r0}
 	bx r0
 	thumb_func_end sub_810A45C
@@ -4918,7 +4918,7 @@ sub_810A554: @ 810A554
 	ldr r2, _0810A564 @ =sub_808CE60
 	movs r0, 0x4
 	movs r1, 0x3
-	bl sub_8107DB4
+	bl GoToBagMenu
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -5063,7 +5063,7 @@ sub_810A67C: @ 810A67C
 	ldr r2, _0810A68C @ =CB2_ReturnToField
 	movs r0, 0x2
 	movs r1, 0x3
-	bl sub_8107DB4
+	bl GoToBagMenu
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -6127,7 +6127,7 @@ sub_810AF74: @ 810AF74
 	ldr r2, _0810AF98 @ =SetCB2ToReshowScreenAfterMenu2
 	movs r0, 0x6
 	movs r1, 0
-	bl sub_8107DB4
+	bl GoToBagMenu
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -6358,7 +6358,7 @@ _0810B16C:
 	movs r0, 0x8
 _0810B170:
 	movs r1, 0
-	bl sub_8107DB4
+	bl GoToBagMenu
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -6856,10 +6856,10 @@ _0810B564:
 	movs r2, 0
 	bl DestroyListMenuTask
 	bl sub_810AECC
-	ldr r1, _0810B5B0 @ =gUnknown_3005E98
-	ldr r0, _0810B5B4 @ =ItemUseCB_Medicine
+	ldr r1, _0810B5B0 @ =gItemUseCB
+	ldr r0, _0810B5B4 @ =ItemUseCB_MedicineStep
 	str r0, [r1]
-	ldr r0, _0810B5B8 @ =sub_81279A4
+	ldr r0, _0810B5B8 @ =ChooseMonForInBattleItem
 	bl ItemMenu_SetExitCallback
 	mov r0, r9
 	subs r0, 0x8
@@ -6868,9 +6868,9 @@ _0810B564:
 	str r1, [r0]
 	b _0810B5C6
 	.align 2, 0
-_0810B5B0: .4byte gUnknown_3005E98
-_0810B5B4: .4byte ItemUseCB_Medicine
-_0810B5B8: .4byte sub_81279A4
+_0810B5B0: .4byte gItemUseCB
+_0810B5B4: .4byte ItemUseCB_MedicineStep
+_0810B5B8: .4byte ChooseMonForInBattleItem
 _0810B5BC: .4byte sub_810B070
 _0810B5C0:
 	ldrh r0, [r5, 0x10]

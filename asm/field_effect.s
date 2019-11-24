@@ -2014,7 +2014,7 @@ task00_8084310: @ 8084310
 	ldrsh r6, [r4, r0]
 	cmp r6, 0
 	bne _08084350
-	bl field_weather_is_fade_finished
+	bl IsWeatherNotFadingIn
 	lsls r0, 24
 	cmp r0, 0
 	beq _08084376
@@ -2287,7 +2287,7 @@ _08084560: .4byte gSprites
 sub_8084564: @ 8084564
 	push {r4,lr}
 	adds r4, r0, 0
-	bl field_weather_is_fade_finished
+	bl IsWeatherNotFadingIn
 	lsls r0, 24
 	cmp r0, 0
 	beq _08084578
@@ -4002,7 +4002,7 @@ sub_8085274: @ 8085274
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r6, r2, 0
-	bl field_weather_is_fade_finished
+	bl IsWeatherNotFadingIn
 	lsls r0, 24
 	cmp r0, 0
 	beq _080852B4
@@ -5025,7 +5025,7 @@ _08085A50: .4byte gTasks
 sub_8085A54: @ 8085A54
 	push {r4,lr}
 	adds r4, r0, 0
-	bl field_weather_is_fade_finished
+	bl IsWeatherNotFadingIn
 	lsls r0, 24
 	cmp r0, 0
 	beq _08085A78
@@ -5492,7 +5492,7 @@ _08085E08: .4byte gTasks
 sub_8085E0C: @ 8085E0C
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	bl field_weather_is_fade_finished
+	bl IsWeatherNotFadingIn
 	lsls r0, 24
 	cmp r0, 0
 	beq _08085E82

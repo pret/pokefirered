@@ -38,7 +38,7 @@ static EWRAM_DATA const u8 *sItemOrder = NULL;
 static EWRAM_DATA u8 sTopMenuItemCount = 0;
 EWRAM_DATA struct PlayerPCItemPageStruct gPlayerPcMenuManager = {};
 
-#define SELECTED_MAIL (gSaveBlock1Ptr->mail[PC_MAIL_NUM(gPlayerPcMenuManager.scrollOffset) + gPlayerPcMenuManager.selectedRow])
+#define SELECTED_MAIL (gSaveBlock1Ptr->mail[PC_MAIL_NUM(gPlayerPcMenuManager.itemsAbove) + gPlayerPcMenuManager.cursorPos])
 
 static void Task_DrawPlayerPcTopMenu(u8 taskId);
 static void Task_TopMenuHandleInput(u8 taskId);
@@ -234,8 +234,8 @@ static void Task_PlayerPcMailbox(u8 taskId)
     }
     else
     {
-        gPlayerPcMenuManager.selectedRow = 0;
-        gPlayerPcMenuManager.scrollOffset = 0;
+        gPlayerPcMenuManager.cursorPos = 0;
+        gPlayerPcMenuManager.itemsAbove = 0;
         PCMailCompaction();
         Task_SetPageItemVars(taskId);
         if (gPlayerPcMenuManager.unk_9 == 0)
@@ -322,7 +322,7 @@ static void Task_DepositItem_WaitFadeAndGoToBag(u8 taskId)
     if (!gPaletteFade.active)
     {
         CleanupOverworldWindowsAndTilemaps();
-        sub_8107DB4(3, POCKET_ITEMS - 1, CB2_ReturnToField);
+        GoToBagMenu(3, POCKET_ITEMS - 1, CB2_ReturnToField);
         gFieldCallback = CB2_ReturnFromDepositMenu;
         DestroyTask(taskId);
     }
@@ -336,7 +336,7 @@ static void Task_PlayerPcDepositItem(u8 taskId)
 
 static void Task_ReturnToItemStorageSubmenu(u8 taskId)
 {
-    if (field_weather_is_fade_finished() == TRUE)
+    if (IsWeatherNotFadingIn() == TRUE)
         gTasks[taskId].func = Task_TopMenu_ItemStorageSubmenu_HandleInput;
 }
 
@@ -469,7 +469,7 @@ static void Task_MailboxPcHandleInput(u8 taskId)
     if (!gPaletteFade.active)
     {
         input = ListMenu_ProcessInput(tListMenuTaskId);
-        ListMenuGetScrollAndRow(tListMenuTaskId, &gPlayerPcMenuManager.scrollOffset, &gPlayerPcMenuManager.selectedRow);
+        ListMenuGetScrollAndRow(tListMenuTaskId, &gPlayerPcMenuManager.itemsAbove, &gPlayerPcMenuManager.cursorPos);
         switch (input)
         {
         case -1:
@@ -483,7 +483,7 @@ static void Task_MailboxPcHandleInput(u8 taskId)
             PlaySE(SE_SELECT);
             MailboxPC_RemoveWindow(0);
             MailboxPC_RemoveWindow(1);
-            DestroyListMenuTask(tListMenuTaskId, &gPlayerPcMenuManager.scrollOffset, &gPlayerPcMenuManager.selectedRow);
+            DestroyListMenuTask(tListMenuTaskId, &gPlayerPcMenuManager.itemsAbove, &gPlayerPcMenuManager.cursorPos);
             ScheduleBgCopyTilemapToVram(0);
             RemoveScrollIndicatorArrowPair(gPlayerPcMenuManager.scrollIndicatorId);
             gTasks[taskId].func = Task_PrintWhatToDoWithSelectedMail;
@@ -573,7 +573,7 @@ static void Task_WaitFadeAndReadSelectedMail(u8 taskId)
 
 static void Task_WaitFadeAndReturnToMailboxPcInputHandler(u8 taskId)
 {
-    if (field_weather_is_fade_finished() == TRUE)
+    if (IsWeatherNotFadingIn() == TRUE)
         gTasks[taskId].func = Task_MailboxPcHandleInput;
 }
 
@@ -641,10 +641,10 @@ static void Task_TryPutMailInBag_DestroyMsgIfSuccessful(u8 taskId)
         ClearMailStruct(mail);
         PCMailCompaction();
         gPlayerPcMenuManager.count--;
-        if (gPlayerPcMenuManager.count < gPlayerPcMenuManager.pageItems + gPlayerPcMenuManager.scrollOffset)
+        if (gPlayerPcMenuManager.count < gPlayerPcMenuManager.pageItems + gPlayerPcMenuManager.itemsAbove)
         {
-            if (gPlayerPcMenuManager.scrollOffset != 0)
-                gPlayerPcMenuManager.scrollOffset--;
+            if (gPlayerPcMenuManager.itemsAbove != 0)
+                gPlayerPcMenuManager.itemsAbove--;
         }
         Task_SetPageItemVars(taskId);
     }
@@ -674,7 +674,7 @@ static void Task_WaitFadeAndGoToPartyMenu(u8 taskId)
     {
         MailboxPC_DestroyListMenuBuffer();
         CleanupOverworldWindowsAndTilemaps();
-        PartyMenuInit_FromPlayerPc();
+        ChooseMonToGiveMailFromMailbox();
         DestroyTask(taskId);
     }
 }
@@ -693,10 +693,10 @@ static void CB2_ReturnToMailboxPc_UpdateScrollVariables(void)
     PCMailCompaction();
     if (count != gPlayerPcMenuManager.count)
     {
-        if (gPlayerPcMenuManager.count < gPlayerPcMenuManager.pageItems + gPlayerPcMenuManager.scrollOffset)
+        if (gPlayerPcMenuManager.count < gPlayerPcMenuManager.pageItems + gPlayerPcMenuManager.itemsAbove)
         {
-            if (gPlayerPcMenuManager.scrollOffset != 0)
-                gPlayerPcMenuManager.scrollOffset--;
+            if (gPlayerPcMenuManager.itemsAbove != 0)
+                gPlayerPcMenuManager.itemsAbove--;
         }
     }
     Task_SetPageItemVars(taskId);
@@ -708,7 +708,7 @@ static void CB2_ReturnToMailboxPc_UpdateScrollVariables(void)
     sub_807DC00();
 }
 
-void CB2_PlayerPC_ReturnFromPartyMenu(void)
+void Mailbox_ReturnToMailListAfterDeposit(void)
 {
     gFieldCallback = CB2_ReturnToMailboxPc_UpdateScrollVariables;
     SetMainCallback2(CB2_ReturnToField);

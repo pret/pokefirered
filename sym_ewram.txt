@@ -562,10 +562,10 @@ gUnknown_203B05C: @ 203B05C
 gUnknown_203B064: @ 203B064
 	.space 0x4
 
-gUnknown_203B068: @ 203B068
+gUnionRoomOfferedSpecies: @ 203B068
 	.space 0x2
 
-gUnknown_203B06A: @ 203B06A
+gUnionRoomRequestedMonType: @ 203B06A
 	.space 0x2
 
 gUnknown_203B06C: @ 203B06C
@@ -589,54 +589,10 @@ gUnknown_203B094: @ 203B094
 gUnknown_203B098: @ 203B098
 	.space 0x4
 
-gUnknown_203B09C: @ 203B09C
-	.space 0x4
+	.align 2
+	.include "src/party_menu.o"
 
-gUnknown_203B0A0: @ 203B0A0
-	.space 0x9
-
-gUnknown_203B0A9: @ 203B0A9
-	.space 0x5
-
-gUnknown_203B0AE: @ 203B0AE
-	.space 0x6
-
-gUnknown_203B0B4: @ 203B0B4
-	.space 0x4
-
-gUnknown_203B0B8: @ 203B0B8
-	.space 0x4
-
-gUnknown_203B0BC: @ 203B0BC
-	.space 0x4
-
-gUnknown_203B0C0: @ 203B0C0
-	.space 0x1
-
-gUnknown_203B0C1: @ 203B0C1
-	.space 0x3
-
-gPostMenuFieldCallback: @ 203B0C4
-	.space 0x4
-
-gUnknown_203B0C8: @ 203B0C8
-	.space 0x4
-
-gUnknown_203B0CC: @ 203B0CC
-	.space 0x4
-
-gUnknown_203B0D0: @ 203B0D0
-	.space 0x4
-
-gSelectedOrderFromParty: @ 203B0D4
-	.space 0x4
-
-gUnknown_203B0D8: @ 203B0D8
-	.space 0x4
-
-gUnknown_203B0DC: @ 203B0DC
-	.space 0x4
-
+	.align 2
 gUnknown_203B0E0: @ 203B0E0
 	.space 0x4
 
@@ -680,7 +636,7 @@ gUnknown_203B164: @ 203B164
 gUnknown_203B168: @ 203B168
 	.space 0x4
 
-gUnknown_203B16C: @ 203B16C
+gLastViewedMonIndex: @ 203B16C
 	.space 0x1
 
 gUnknown_203B16D: @ 203B16D

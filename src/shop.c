@@ -213,7 +213,7 @@ static const struct WindowTemplate gUnknown_83DF0BC[] =     //sShopMenuWindowTem
     }
 };    
 
-static const struct BgTemplate gUnknown_83DF0C4[] =     //sShopBuyMenuBgTemplates
+static const struct BgTemplate gUnknown_83DF0C4[4] =     //sShopBuyMenuBgTemplates
 {
     {
         .bg = 0,
@@ -510,13 +510,11 @@ static bool8 sub_809AF6C(void)
     return FALSE;
 }
 
-#ifdef NONMATCHING
 //BuyMenuInitBgs
-// this matches but adjusts offsets const for some reason...
 static void sub_809AFD0(void)
 {
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, gUnknown_83DF0C4, 4);    //NELEMS(gUnknown_83DF0C4));
+    InitBgsFromTemplates(0, gUnknown_83DF0C4, NELEMS(gUnknown_83DF0C4));
     SetBgTilemapBuffer(1, gUnknown_2039958);
     SetBgTilemapBuffer(2, gUnknown_2039960);
     SetBgTilemapBuffer(3, gUnknown_203995C);
@@ -532,79 +530,9 @@ static void sub_809AFD0(void)
     SetGpuReg(0, 0x1040);
     ShowBg(0);
     ShowBg(1);
-    ShowBg(2);    
+    ShowBg(2);
+	ShowBg(3);
 }
-#else
-NAKED
-static void sub_809AFD0(void)
-{
-    asm_unified("\tpush {lr}\n"
-                "\tmovs r0, 0\n"
-                "\tbl ResetBgsAndClearDma3BusyFlags\n"
-                "\tldr r1, _0809B070 @ =gUnknown_83DF0C4\n"
-                "\tmovs r0, 0\n"
-                "\tmovs r2, 0x4\n"
-                "\tbl InitBgsFromTemplates\n"
-                "\tldr r0, _0809B074 @ =gUnknown_2039958\n"
-                "\tldr r1, [r0]\n"
-                "\tmovs r0, 0x1\n"
-                "\tbl SetBgTilemapBuffer\n"
-                "\tldr r0, _0809B078 @ =gUnknown_2039960\n"
-                "\tldr r1, [r0]\n"
-                "\tmovs r0, 0x2\n"
-                "\tbl SetBgTilemapBuffer\n"
-                "\tldr r0, _0809B07C @ =gUnknown_203995C\n"
-                "\tldr r1, [r0]\n"
-                "\tmovs r0, 0x3\n"
-                "\tbl SetBgTilemapBuffer\n"
-                "\tmovs r0, 0x10\n"
-                "\tmovs r1, 0\n"
-                "\tbl SetGpuReg\n"
-                "\tmovs r0, 0x12\n"
-                "\tmovs r1, 0\n"
-                "\tbl SetGpuReg\n"
-                "\tmovs r0, 0x14\n"
-                "\tmovs r1, 0\n"
-                "\tbl SetGpuReg\n"
-                "\tmovs r0, 0x16\n"
-                "\tmovs r1, 0\n"
-                "\tbl SetGpuReg\n"
-                "\tmovs r0, 0x18\n"
-                "\tmovs r1, 0\n"
-                "\tbl SetGpuReg\n"
-                "\tmovs r0, 0x1A\n"
-                "\tmovs r1, 0\n"
-                "\tbl SetGpuReg\n"
-                "\tmovs r0, 0x1C\n"
-                "\tmovs r1, 0\n"
-                "\tbl SetGpuReg\n"
-                "\tmovs r0, 0x1E\n"
-                "\tmovs r1, 0\n"
-                "\tbl SetGpuReg\n"
-                "\tmovs r0, 0x50\n"
-                "\tmovs r1, 0\n"
-                "\tbl SetGpuReg\n"
-                "\tmovs r1, 0x82\n"
-                "\tlsls r1, 5\n"
-                "\tmovs r0, 0\n"
-                "\tbl SetGpuReg\n"
-                "\tmovs r0, 0\n"
-                "\tbl ShowBg\n"
-                "\tmovs r0, 0x1\n"
-                "\tbl ShowBg\n"
-                "\tmovs r0, 0x2\n"
-                "\tbl ShowBg\n"
-                "\tmovs r0, 0x3\n"
-                "\tbl ShowBg\n"
-                "\tpop {r0}\n"
-                "\tbx r0\n"
-                "\t.align 2, 0\n"
-                "_0809B070: .4byte gUnknown_83DF0C4\n"
-                "_0809B074: .4byte gUnknown_2039958\n"
-                "_0809B078: .4byte gUnknown_2039960\n"
-                "_0809B07C: .4byte gUnknown_203995C\n");
-}
-#endif
 
 //BuyMenuDecompressBgGraphics
 static void sub_809B080(void)
@@ -757,23 +685,23 @@ static void sub_809B320(s32 item, bool8 onInit, struct ListMenu *list)
 #ifdef NONMATCHING    //this function was written very strangely..
 static void sub_809B408(u8 windowId, s32 item, u8 y)
 {
-    u32 len;
-    u8* loc;
+    u32 len, x;
+    u8 *loc;
 
     if (item != INDEX_CANCEL)
     {
-        ConvertIntToDecimalStringN(gStringVar1, itemid_get_market_price(item), 0, NUM_CHARS_PRICE);
-        
-        //len = StringLength(gStringVar1);
+        ConvertIntToDecimalStringN(gStringVar1, itemid_get_market_price(item), 0, 4);
         len = 4 - StringLength(gStringVar1);
-        //len = NUM_CHARS_PRICE - len;
         loc = gStringVar4;
-        
-        while (len != 0)
+        x = len - 1;
+        if (x > 0)
         {
-            loc[4-len] = 0;
-            *loc++; 
-            len--;
+            while (len != 0)
+            {    
+                *loc = 0;
+                loc++;
+                len--;
+            }
         }
         StringExpandPlaceholders(loc, gText_PokedollarVar1);
         BuyMenuPrint(windowId, 1, gStringVar4, 0x69, y, 0, 0, TEXT_SPEED_FF, 1);
@@ -1040,8 +968,7 @@ static void sub_809B904(u16 *dest, s16 offset1, s16 offset2, const u16 *src)
 }
 
 
-// BuyMenuCollectEventObjectData(void)
-#ifdef NONMATCHING
+// BuyMenuCollectEventObjectData
 static void sub_809B92C(void)
 {
     s16 facingX;
@@ -1055,34 +982,33 @@ static void sub_809B92C(void)
     z = PlayerGetZCoord();
     
     for (y = 0; y < MAP_OBJECTS_COUNT; y++)
-        gUnknown_20398B4[y].eventObjId = MAP_OBJECTS_COUNT;
+        gUnknown_20398B4[y][EVENT_OBJ_ID] = MAP_OBJECTS_COUNT;
     
     for (y = 0; y < 5; y++)
     {
         for (x = 0; x < 7; x++)
         {
-            u8 eventObjId = GetFieldObjectIdByXYZ(facingX - 4 + x, facingY - 2 + y, z);
+            u8 eventObjId = GetFieldObjectIdByXYZ(facingX - 3 + x, facingY - 2 + y, z);
             if (eventObjId != MAP_OBJECTS_COUNT)
             {
-                gUnknown_20398B4[num].eventObjId = eventObjId;
-                gUnknown_20398B4[num].x = x;
-                gUnknown_20398B4[num].y = y;
-                //gUnknown_20398B4[num].layerType = MapGridGetMetatileLayerTypeAt(facingX - 4 + x, facingY - 2 + y);
+                gUnknown_20398B4[num][EVENT_OBJ_ID] = eventObjId;
+                gUnknown_20398B4[num][X_COORD] = x;
+                gUnknown_20398B4[num][Y_COORD] = y;
 
                 switch (gMapObjects[eventObjId].facingDirection)
                 {
                     case DIR_SOUTH:
-                        gUnknown_20398B4[num].animNum = 0;
+                        gUnknown_20398B4[num][ANIM_NUM] = 0;
                         break;
                     case DIR_NORTH:
-                        gUnknown_20398B4[num].animNum = 1;
+                        gUnknown_20398B4[num][ANIM_NUM] = 1;
                         break;
                     case DIR_WEST:
-                        gUnknown_20398B4[num].animNum = 2;
+                        gUnknown_20398B4[num][ANIM_NUM] = 2;
                         break;
                     case DIR_EAST:
                     default:
-                        gUnknown_20398B4[num].animNum = 3;
+                        gUnknown_20398B4[num][ANIM_NUM] = 3;
                         break;
                 }
                 num++;
@@ -1090,153 +1016,6 @@ static void sub_809B92C(void)
         }
     }
 }
-#else
-NAKED
-static void sub_809B92C(void)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                "\tmov r7, r10\n"
-                "\tmov r6, r9\n"
-                "\tmov r5, r8\n"
-                "\tpush {r5-r7}\n"
-                "\tsub sp, 0x8\n"
-                "\tmovs r0, 0\n"
-                "\tmov r9, r0\n"
-                "\tmov r4, sp\n"
-                "\tadds r4, 0x2\n"
-                "\tmov r0, sp\n"
-                "\tadds r1, r4, 0\n"
-                "\tbl GetXYCoordsOneStepInFrontOfPlayer\n"
-                "\tbl PlayerGetZCoord\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tstr r0, [sp, 0x4]\n"
-                "\tmovs r5, 0\n"
-                "\tldr r2, _0809B9DC @ =gUnknown_20398B4\n"
-                "\tmovs r1, 0x10\n"
-                "_0809B958:\n"
-                "\tlsls r0, r5, 3\n"
-                "\tadds r0, r2\n"
-                "\tstrh r1, [r0]\n"
-                "\tadds r0, r5, 0x1\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r5, r0, 24\n"
-                "\tcmp r5, 0xF\n"
-                "\tbls _0809B958\n"
-                "\tmovs r5, 0\n"
-                "\tldr r6, _0809B9E0 @ =gUnknown_20398BA\n"
-                "\tsubs r1, r6, 0x6\n"
-                "\tmov r8, r1\n"
-                "_0809B970:\n"
-                "\tmovs r4, 0\n"
-                "\tadds r2, r5, 0x1\n"
-                "\tmov r10, r2\n"
-                "_0809B976:\n"
-                "\tmov r1, sp\n"
-                "\tldr r3, _0809B9E4 @ =0x0000fffd\n"
-                "\tadds r0, r3, 0\n"
-                "\tldrh r1, [r1]\n"
-                "\tadds r0, r1\n"
-                "\tadds r0, r4\n"
-                "\tlsls r0, 16\n"
-                "\tlsrs r0, 16\n"
-                "\tldr r2, _0809B9E8 @ =0x0000fffe\n"
-                "\tadds r1, r2, 0\n"
-                "\tmov r3, sp\n"
-                "\tldrh r3, [r3, 0x2]\n"
-                "\tadds r1, r3\n"
-                "\tadds r1, r5\n"
-                "\tlsls r1, 16\n"
-                "\tlsrs r1, 16\n"
-                "\tldr r2, [sp, 0x4]\n"
-                "\tbl GetFieldObjectIdByXYZ\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r3, r0, 24\n"
-                "\tcmp r3, 0x10\n"
-                "\tbeq _0809BA1C\n"
-                "\tmov r0, r9\n"
-                "\tlsls r2, r0, 3\n"
-                "\tmov r1, r8\n"
-                "\tadds r0, r2, r1\n"
-                "\tmovs r7, 0\n"
-                "\tstrh r3, [r0]\n"
-                "\tmov r0, r8\n"
-                "\tadds r0, 0x2\n"
-                "\tadds r0, r2, r0\n"
-                "\tstrh r4, [r0]\n"
-                "\tldr r1, _0809B9EC @ =gUnknown_20398B8\n"
-                "\tadds r0, r2, r1\n"
-                "\tstrh r5, [r0]\n"
-                "\tldr r1, _0809B9F0 @ =gMapObjects\n"
-                "\tlsls r0, r3, 3\n"
-                "\tadds r0, r3\n"
-                "\tlsls r0, 2\n"
-                "\tadds r0, r1\n"
-                "\tldrb r0, [r0, 0x18]\n"
-                "\tlsls r0, 28\n"
-                "\tlsrs r0, 28\n"
-                "\tcmp r0, 0x2\n"
-                "\tbeq _0809BA00\n"
-                "\tcmp r0, 0x2\n"
-                "\tbgt _0809B9F4\n"
-                "\tcmp r0, 0x1\n"
-                "\tbeq _0809B9FA\n"
-                "\tb _0809BA0C\n"
-                "\t.align 2, 0\n"
-                "_0809B9DC: .4byte gUnknown_20398B4\n"
-                "_0809B9E0: .4byte gUnknown_20398BA\n"
-                "_0809B9E4: .4byte 0x0000fffd\n"
-                "_0809B9E8: .4byte 0x0000fffe\n"
-                "_0809B9EC: .4byte gUnknown_20398B8\n"
-                "_0809B9F0: .4byte gMapObjects\n"
-                "_0809B9F4:\n"
-                "\tcmp r0, 0x3\n"
-                "\tbeq _0809BA06\n"
-                "\tb _0809BA0C\n"
-                "_0809B9FA:\n"
-                "\tadds r0, r2, r6\n"
-                "\tstrh r7, [r0]\n"
-                "\tb _0809BA12\n"
-                "_0809BA00:\n"
-                "\tadds r1, r2, r6\n"
-                "\tmovs r0, 0x1\n"
-                "\tb _0809BA10\n"
-                "_0809BA06:\n"
-                "\tadds r1, r2, r6\n"
-                "\tmovs r0, 0x2\n"
-                "\tb _0809BA10\n"
-                "_0809BA0C:\n"
-                "\tadds r1, r2, r6\n"
-                "\tmovs r0, 0x3\n"
-                "_0809BA10:\n"
-                "\tstrh r0, [r1]\n"
-                "_0809BA12:\n"
-                "\tmov r0, r9\n"
-                "\tadds r0, 0x1\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tmov r9, r0\n"
-                "_0809BA1C:\n"
-                "\tadds r0, r4, 0x1\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r4, r0, 24\n"
-                "\tcmp r4, 0x6\n"
-                "\tbls _0809B976\n"
-                "\tmov r2, r10\n"
-                "\tlsls r0, r2, 24\n"
-                "\tlsrs r5, r0, 24\n"
-                "\tcmp r5, 0x4\n"
-                "\tbls _0809B970\n"
-                "\tadd sp, 0x8\n"
-                "\tpop {r3-r5}\n"
-                "\tmov r8, r3\n"
-                "\tmov r9, r4\n"
-                "\tmov r10, r5\n"
-                "\tpop {r4-r7}\n"
-                "\tpop {r0}\n"
-                "\tbx r0\n");
-}
-#endif
 
 //BuyMenuDrawEventObjects
 static void sub_809BA40(void)

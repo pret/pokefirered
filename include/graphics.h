@@ -3740,6 +3740,16 @@ extern const u8 gWeatherFog1Tiles[];
 extern const u32 gBattleAnimFogTilemap[];
 extern const u16 gUnknown_83C2CE0[];
 
+// party_menu
+extern const u32 gPartyMenuPokeball_Gfx[];
+extern const u32 gPartyMenuPokeball_Pal[];
+extern const u32 gPartyMenuPokeballSmall_Gfx[];
+extern const u32 gStatusGfx_Icons[];
+extern const u32 gStatusPal_Icons[];
+extern const u32 gPartyMenuBg_Gfx[];
+extern const u32 gPartyMenuBg_Tilemap[];
+extern const u32 gPartyMenuBg_Pal[];
+
 // credits
 extern const u32 gCreditsPokeballBgGfxTiles[];
 extern const u32 gCreditsPokeballBgGfxMap[];
@@ -4238,5 +4248,8 @@ extern const u32 gFile_graphics_misc_confetti_palette[];
 extern const u16 gUnknown_8E97DDC[];
 extern const u32 gUnknown_8E97DFC[];
 extern const u32 gUnknown_8E97EC4[];
+
+// battle_message
+extern const u16 gUnknown_8D2FBB4[];
 
 #endif //GUARD_GRAPHICS_H

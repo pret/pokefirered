@@ -595,7 +595,7 @@ static void TMCase_MoveCursor_UpdatePrintedDescription(s32 itemIndex)
 
 static void FillBG2RowWithPalette_2timesNplus1(s32 a0)
 {
-    SetBgRectPal(2, 0, 12, 30, 8, 2 * a0 + 1);
+    SetBgTilemapPalette(2, 0, 12, 30, 8, 2 * a0 + 1);
     ScheduleBgCopyTilemapToVram(2);
 }
 
@@ -848,8 +848,8 @@ static void TMHMContextMenuAction_Use(u8 taskId)
     }
     else
     {
-        gUnknown_3005E98 = sub_8125B40;
-        sTMCaseDynamicResources->savedCallback = sub_8124C8C;
+        gItemUseCB = ItemUseCB_TMHM;
+        sTMCaseDynamicResources->savedCallback = CB2_ShowPartyMenuForItemUse;
         Task_BeginFadeOutFromTMCase(taskId);
     }
 }
@@ -874,7 +874,7 @@ static void TMHMContextMenuAction_Give(u8 taskId)
         }
         else
         {
-            sTMCaseDynamicResources->savedCallback = sub_8126EDC;
+            sTMCaseDynamicResources->savedCallback = CB2_ChooseMonToGiveItem;
             Task_BeginFadeOutFromTMCase(taskId);
         }
     }
@@ -945,7 +945,7 @@ static void Task_SelectTMAction_Type1(u8 taskId)
 
     if (!itemid_is_unique(BagGetItemIdByPocketPosition(POCKET_TM_CASE, data[1])))
     {
-        sTMCaseDynamicResources->savedCallback = c2_8123744;
+        sTMCaseDynamicResources->savedCallback = CB2_GiveHoldItem;
         Task_BeginFadeOutFromTMCase(taskId);
     }
     else
@@ -1274,7 +1274,7 @@ static void Task_TMCaseDude_Playback(u8 taskId)
             sTMCaseStaticResources.scrollOffset = sPokeDudePackBackup->unk_162;
             Free(sPokeDudePackBackup);
             CpuFastCopy(gPlttBufferFaded, gPlttBufferUnfaded, 0x400);
-            sub_8108CF0();
+            CB2_SetUpReshowBattleScreenAfterMenu();
             BeginNormalPaletteFade(0xFFFFFFFF, -2, 0, 16, 0);
             data[8]++;
         }

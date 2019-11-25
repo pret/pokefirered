@@ -3650,7 +3650,7 @@ _08117784:
 	ldr r0, _0811779C @ =sub_811C1C8
 	str r0, [r1, 0x8]
 	movs r0, 0x2
-	bl sub_81274A8
+	bl InitChooseHalfPartyForBattle
 	b _081178E0
 	.align 2, 0
 _08117798: .4byte gMain
@@ -5602,12 +5602,12 @@ _0811887C:
 _081188C4: .4byte gUnknown_203B06C
 _081188C8: .4byte gSpecialVar_Result
 _081188CC:
-	bl sub_811FB18
+	bl GetPartyMenuType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x8
 	beq _081188E4
-	bl sub_811FB18
+	bl GetPartyMenuType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x9
@@ -7335,7 +7335,7 @@ _081197CA:
 	adds r0, r1
 	ldr r0, [r0]
 	str r0, [r2]
-	ldr r2, _0811982C @ =gUnknown_203B06A
+	ldr r2, _0811982C @ =gUnionRoomRequestedMonType
 	ldr r1, [r6]
 	movs r3, 0x2
 	ldrsh r0, [r7, r3]
@@ -7344,7 +7344,7 @@ _081197CA:
 	ldrb r0, [r1, 0x9]
 	lsrs r0, 2
 	strb r0, [r2]
-	ldr r2, _08119830 @ =gUnknown_203B068
+	ldr r2, _08119830 @ =gUnionRoomOfferedSpecies
 	ldr r1, [r6]
 	movs r3, 0x2
 	ldrsh r0, [r7, r3]
@@ -7369,8 +7369,8 @@ _081197CA:
 _08119820: .4byte gUnknown_8458D1C
 _08119824: .4byte gUnknown_203B06C
 _08119828: .4byte gUnknown_203B064
-_0811982C: .4byte gUnknown_203B06A
-_08119830: .4byte gUnknown_203B068
+_0811982C: .4byte gUnionRoomRequestedMonType
+_08119830: .4byte gUnionRoomOfferedSpecies
 _08119834: .4byte gFieldCallback
 _08119838: .4byte sub_807DCE4
 _0811983C: .4byte CB2_ReturnToField

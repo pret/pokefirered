@@ -3167,7 +3167,7 @@ BattleScript_RainContinuesOrEndsEnd::
 	end2
 
 BattleScript_DamagingWeatherContinues::
-	printfromtable gSandStormHailContinuesStringIds
+	printfromtable gSandstormHailContinuesStringIds
 	waitmessage 0x40
 	playanimation2 BS_ATTACKER, sB_ANIM_ARG1, NULL
 	setbyte gBattleCommunication, 0
@@ -3175,7 +3175,7 @@ BattleScript_DamagingWeatherLoop::
 	copyarraywithindex gBattlerAttacker, gBattlerByTurnOrder, gBattleCommunication, 1
 	weatherdamage
 	jumpifword CMP_EQUAL, gBattleMoveDamage, NULL, BattleScript_DamagingWeatherContinuesEnd
-	printfromtable gSandStormHailDmgStringIds
+	printfromtable gSandstormHailDmgStringIds
 	waitmessage 0x40
 	orword gHitMarker, HITMARKER_x20 | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000 | HITMARKER_GRUDGE
 	effectivenesssound
@@ -3193,7 +3193,7 @@ BattleScript_WeatherDamageEndedBattle::
 	end2
 
 BattleScript_SandStormHailEnds::
-	printfromtable gSandStormHailEndStringIds
+	printfromtable gSandstormHailEndStringIds
 	waitmessage 0x40
 	end2
 

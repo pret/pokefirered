@@ -1305,7 +1305,7 @@ static void OpenPartyMenuToChooseMon(void)
         caseId = gTasks[gUnknown_3004FFC[gActiveBattler]].data[0];
         DestroyTask(gUnknown_3004FFC[gActiveBattler]);
         FreeAllWindowBuffers();
-        OpenPartyMenuInBattle(caseId);
+        OpenPartyMenuInTutorialBattle(caseId);
     }
 }
 
@@ -1313,8 +1313,8 @@ static void WaitForMonSelection(void)
 {
     if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
     {
-        if (gUnknown_203B0C0 == 1)
-            BtlController_EmitChosenMonReturnValue(1, gUnknown_203B0C1, gUnknown_203B0DC);
+        if (gPartyMenuUseExitCallback == 1)
+            BtlController_EmitChosenMonReturnValue(1, gSelectedMonPartyId, gBattlePartyCurrentOrder);
         else
             BtlController_EmitChosenMonReturnValue(1, 6, NULL);
         if ((gBattleBufferA[gActiveBattler][1] & 0xF) == 1)
@@ -2462,7 +2462,7 @@ static void PlayerHandleChooseItem(void)
     gBattlerControllerFuncs[gActiveBattler] = OpenBagAndChooseItem;
     gBattlerInMenuId = gActiveBattler;
     for (i = 0; i < 3; ++i)
-        gUnknown_203B0DC[i] = gBattleBufferA[gActiveBattler][1 + i];
+        gBattlePartyCurrentOrder[i] = gBattleBufferA[gActiveBattler][1 + i];
 }
 
 static void PlayerHandleChoosePokemon(void)
@@ -2475,7 +2475,7 @@ static void PlayerHandleChoosePokemon(void)
     *(&gBattleStruct->field_8B) = gBattleBufferA[gActiveBattler][2];
     *(&gBattleStruct->abilityPreventingSwitchout) = gBattleBufferA[gActiveBattler][3];
     for (i = 0; i < 3; ++i)
-        gUnknown_203B0DC[i] = gBattleBufferA[gActiveBattler][4 + i];
+        gBattlePartyCurrentOrder[i] = gBattleBufferA[gActiveBattler][4 + i];
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
     gBattlerControllerFuncs[gActiveBattler] = OpenPartyMenuToChooseMon;
     gBattlerInMenuId = gActiveBattler;

@@ -1,6 +1,9 @@
 #ifndef GUARD_LINK_RFU_H
 #define GUARD_LINK_RFU_H
 
+#include "global.h"
+#include "librfu.h"
+
 struct Padded_U8
 {
     u8 value;
@@ -42,6 +45,7 @@ void sub_80F8DC0(void);
 void sub_80FBB20(void);
 bool8 sub_80FA484(bool32 a0);
 void var_800D_set_xB(void);
+struct UnkLinkRfuStruct_02022B14 *sub_80F9800(void);
 
 #include "mevent_server.h"
 extern const struct mevent_server_cmd gMEventSrvScript_OtherTrainerCanceled[];

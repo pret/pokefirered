@@ -24,8 +24,8 @@ sub_8097874: @ 8097874
 	bx r1
 	thumb_func_end sub_8097874
 
-	thumb_func_start sub_8097898
-sub_8097898: @ 8097898
+	thumb_func_start SetUpFieldMove_Cut
+SetUpFieldMove_Cut: @ 8097898
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -138,7 +138,7 @@ _08097970:
 	.align 2, 0
 _0809797C: .4byte gPlayerFacingPosition
 _08097980: .4byte 0x0000ffff
-	thumb_func_end sub_8097898
+	thumb_func_end SetUpFieldMove_Cut
 
 	thumb_func_start sub_8097984
 sub_8097984: @ 8097984

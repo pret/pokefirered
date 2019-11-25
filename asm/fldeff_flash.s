@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80C9B2C
-sub_80C9B2C: @ 80C9B2C
+	thumb_func_start SetUpFieldMove_Flash
+SetUpFieldMove_Flash: @ 80C9B2C
 	push {lr}
 	ldr r0, _080C9B54 @ =gMapHeader
 	ldrb r0, [r0, 0x15]
@@ -37,7 +37,7 @@ _080C9B6C:
 _080C9B6E:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80C9B2C
+	thumb_func_end SetUpFieldMove_Flash
 
 	thumb_func_start sub_80C9B74
 sub_80C9B74: @ 80C9B74

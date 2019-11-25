@@ -558,7 +558,7 @@ _0811C9AA:
 	adds r0, r4, 0
 	adds r0, 0x96
 	ldrh r0, [r0]
-	bl GetItemCompatibilityRule
+	bl CheckIfItemIsTMHMOrEvolutionStone
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -1508,8 +1508,8 @@ sub_811D120: @ 811D120
 	bx r1
 	thumb_func_end sub_811D120
 
-	thumb_func_start GetMonLevelUpWindowStats
-GetMonLevelUpWindowStats: @ 811D130
+	thumb_func_start BufferMonStatsToTaskData
+BufferMonStatsToTaskData: @ 811D130
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -1539,7 +1539,7 @@ GetMonLevelUpWindowStats: @ 811D130
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end GetMonLevelUpWindowStats
+	thumb_func_end BufferMonStatsToTaskData
 
 	thumb_func_start sub_811D178
 sub_811D178: @ 811D178

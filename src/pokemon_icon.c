@@ -1276,7 +1276,7 @@ static void DestroyMonIconInternal(struct Sprite * sprite)
     DestroySprite(sprite);
 }
 
-void MonIcon_SetAnim(struct Sprite * sprite, u8 animNum)
+void SetPartyHPBarSprite(struct Sprite * sprite, u8 animNum)
 {
     sprite->animNum = animNum;
     sprite->animDelayCounter = 0;

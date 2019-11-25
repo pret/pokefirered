@@ -428,13 +428,13 @@ sub_8102858: @ 8102858
 	lsls r1, 7
 	movs r0, 0
 	bl SetGpuRegBits
-	ldr r0, _08102878 @ =CB2_ReturnToStartMenu
+	ldr r0, _08102878 @ =CB2_ReturnToFieldWithOpenMenu
 	bl SetMainCallback2
 _08102874:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08102878: .4byte CB2_ReturnToStartMenu
+_08102878: .4byte CB2_ReturnToFieldWithOpenMenu
 	thumb_func_end sub_8102858
 
 	thumb_func_start sub_810287C

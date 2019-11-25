@@ -4230,8 +4230,8 @@ sub_81499E0: @ 81499E0
 _081499FC: .4byte gUnknown_203F3D4
 	thumb_func_end sub_81499E0
 
-	thumb_func_start sub_8149A00
-sub_8149A00: @ 8149A00
+	thumb_func_start IsSpeciesAllowedInPokemonJump
+IsSpeciesAllowedInPokemonJump: @ 8149A00
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -4242,7 +4242,7 @@ sub_8149A00: @ 8149A00
 	lsrs r0, 31
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8149A00
+	thumb_func_end IsSpeciesAllowedInPokemonJump
 
 	thumb_func_start sub_8149A18
 sub_8149A18: @ 8149A18
@@ -4264,7 +4264,7 @@ _08149A1C:
 	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8149A00
+	bl IsSpeciesAllowedInPokemonJump
 	cmp r0, 0
 	beq _08149A54
 	ldr r1, _08149A50 @ =gSpecialVar_Result

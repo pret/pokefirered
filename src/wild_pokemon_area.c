@@ -289,7 +289,7 @@ static bool32 PokemonInEncounterTable(const struct WildPokemonInfo * info, s32 s
 
 static u16 GetMapSecIdFromWildMonHeader(const struct WildPokemonHeader * header)
 {
-    return get_mapheader_by_bank_and_number(header->mapGroup, header->mapNum)->regionMapSectionId;
+    return Overworld_GetMapHeaderByGroupAndId(header->mapGroup, header->mapNum)->regionMapSectionId;
 }
 
 static bool32 TryGetMapSecPokedexAreaEntry(u16 mapSecId, const u16 (*lut)[2], s32 count, s32 * lutIdx_p, u16 * tableIdx_p)

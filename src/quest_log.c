@@ -987,7 +987,7 @@ void sub_8111708(void)
     gSaveBlock1Ptr->mapDataId = VarGet(VAR_0x40AE);
     if (gSaveBlock1Ptr->mapDataId == 0)
     {
-        sp0 = *get_mapheader_by_bank_and_number(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
+        sp0 = *Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
         gSaveBlock1Ptr->mapDataId = sp0.mapDataId;
     }
 }
@@ -1363,7 +1363,7 @@ static void sub_8111FCC(u8 taskId)
     {
         if (gUnknown_203AE94.unk_0_6 != 1)
         {
-            sub_80C4DF8(gStringVar1, gMapHeader.regionMapSectionId);
+            GetMapNameGeneric(gStringVar1, gMapHeader.regionMapSectionId);
             StringExpandPlaceholders(gStringVar4, gUnknown_841B073);
             sub_8111D10();
         }
@@ -1972,15 +1972,15 @@ void DestroyHelpMessageWindow(u8 a0)
 }
 
 #ifdef NONMATCHING
-void sub_8112F18(u8 a0)
+void sub_8112F18(u8 windowId)
 {
-    u8 width = GetWindowAttribute(a0, WINDOW_WIDTH);
-    u8 height = GetWindowAttribute(a0, WINDOW_HEIGHT);
+    u8 width = GetWindowAttribute(windowId, WINDOW_WIDTH);
+    u8 height = GetWindowAttribute(windowId, WINDOW_HEIGHT);
     u8 *buffer = Alloc(32 * width * height);
     u8 i, j;
     u8 k;
 
-    if (buffer)
+    if (buffer != NULL)
     {
         for (i = 0; i < height; i++)
         {
@@ -1999,13 +1999,13 @@ void sub_8112F18(u8 a0)
                 );
             }
         }
-        CopyToWindowPixelBuffer(a0, buffer, width * height * 32, 0);
+        CopyToWindowPixelBuffer(windowId, buffer, width * height * 32, 0);
         Free(buffer);
     }
 }
 #else
 NAKED
-void sub_8112F18(u8 a0)
+void sub_8112F18(u8 windowId)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                 "\tmov r7, r10\n"
@@ -3166,7 +3166,7 @@ static const u16 *sub_8113FBC(const u16 *a0)
         StringCopy(gStringVar1, ItemId_GetName(r5[0]));
         if (r5[0] == ITEM_ESCAPE_ROPE)
         {
-            sub_80C4DF8(gStringVar2, r5[2]);
+            GetMapNameGeneric(gStringVar2, r5[2]);
             StringExpandPlaceholders(gStringVar4, gUnknown_841AFA6);
         }
         else if (r5[1] != 0xFFFF)
@@ -3814,7 +3814,7 @@ static const u16 *sub_8114D68(const u16 *a0)
     a0 = sub_8113E88(30, a0);
     r6 = (const u8 *)a0 + 6;
     DynamicPlaceholderTextUtil_Reset();
-    sub_80C4DF8(gStringVar1, r6[0]);
+    GetMapNameGeneric(gStringVar1, r6[0]);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gTrainers[a0[2]].trainerName);
     QuestLog_AutoGetSpeciesName(a0[0], 0, 2);
@@ -3855,7 +3855,7 @@ static const u16 *sub_8114E68(const u16 *a0)
 
     r6 = (const u8 *)a0 + 8;
     DynamicPlaceholderTextUtil_Reset();
-    sub_80C4DF8(gStringVar1, r6[2]);
+    GetMapNameGeneric(gStringVar1, r6[2]);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
     QuestLog_AutoGetSpeciesName(a0[2], NULL, 1);
     ConvertIntToDecimalStringN(gStringVar2, r6[0], STR_CONV_MODE_LEFT_ALIGN, 3);
@@ -3983,7 +3983,7 @@ static const u16 *sub_81151DC(const u16 *a0)
     const u16 *r5 = sub_8113E88(34, a0);
     const u8 *r6 = (const u8 *)r5 + 6;
     DynamicPlaceholderTextUtil_Reset();
-    sub_80C4DF8(gStringVar1, r6[0]);
+    GetMapNameGeneric(gStringVar1, r6[0]);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
     if (
             gTrainers[r5[2]].trainerClass == 0x51
@@ -4164,7 +4164,7 @@ static const u16 *sub_81152BC(const u16 *a0)
     const u16 *r5 = sub_8113E88(35, a0);
     const u8 *r5_2 = (const u8 *)r5 + 0;
     r6 = r5_2[1];
-    sub_80C4DF8(gStringVar1, r5_2[0]);
+    GetMapNameGeneric(gStringVar1, r5_2[0]);
     StringCopy(gStringVar2, gUnknown_8456AF0[r6]);
     if (gUnknown_8456BE4[r6] == 5)
     {
@@ -4238,7 +4238,7 @@ static const u16 *sub_8115460(const u16 *a0)
     const u8 *r5 = (const u8 *)r4 + 2;
     QuestLog_AutoGetSpeciesName(r4[0], gStringVar1, 0);
     if (r5[1] != 0xFF)
-        sub_80C4DF8(gStringVar2, r5[1]);
+        GetMapNameGeneric(gStringVar2, r5[1]);
     if (r5[0] == 7)
     {
         if (r5[1] == 0x58)
@@ -4270,7 +4270,7 @@ static const u16 *sub_8115518(const u16 *a0)
     const u8 *r7 = (const u8 *)r4 + 8;
     u32 r6 = (r4[2] << 16) + r4[3];
     DynamicPlaceholderTextUtil_Reset();
-    sub_80C4DF8(gStringVar1, r7[0]);
+    GetMapNameGeneric(gStringVar1, r7[0]);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, ItemId_GetName(r4[0]));
     if (r4[1] < 2)
@@ -4303,7 +4303,7 @@ static const u16 *sub_81155E0(const u16 *a0) {
     const u8 *r7 = (const u8 *) r5 + 8;
     u32 r6 = (r5[2] << 16) + r5[3];
     DynamicPlaceholderTextUtil_Reset();
-    sub_80C4DF8(gStringVar1, r7[0]);
+    GetMapNameGeneric(gStringVar1, r7[0]);
     if (r7[1] == 0) {
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gSaveBlock2Ptr->playerName);
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gStringVar1);
@@ -4344,7 +4344,7 @@ static const u16 *sub_8115700(const u16 *a0)
 {
     const u16 *r4 = sub_8113E88(40, a0);
     const u8 *r5 = (const u8 *)r4 + 2;
-    sub_80C4DF8(gStringVar1, r5[0]);
+    GetMapNameGeneric(gStringVar1, r5[0]);
     StringCopy(gStringVar2, ItemId_GetName(r4[0]));
     StringExpandPlaceholders(gStringVar4, gUnknown_841B03F);
     return (const u16 *)(r5 + 2);
@@ -4420,7 +4420,7 @@ static u16 *sub_81157DC(u16 *a0, const u16 *a1)
 static const u16 *sub_8115800(const u16 *a0)
 {
     const u16 *r4 = sub_8113E88(42, a0);
-    sub_80C4DF8(gStringVar1, r4[0]);
+    GetMapNameGeneric(gStringVar1, r4[0]);
     StringExpandPlaceholders(gStringVar4, gUnknown_841B064);
     return r4 + 1;
 }

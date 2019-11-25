@@ -7395,7 +7395,7 @@ sub_80C3B00: @ 80C3B00
 	asrs r1, 24
 	lsls r1, 16
 	lsrs r1, 16
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	ldrb r0, [r0, 0x14]
 	pop {r1}
 	bx r1
@@ -7477,7 +7477,7 @@ _080C3BAC:
 	asrs r1, 24
 	lsls r1, 16
 	lsrs r1, 16
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	adds r2, r0, 0
 	ldr r0, _080C3BEC @ =gUnknown_20399E4
 	ldr r1, [r0]
@@ -7506,7 +7506,7 @@ _080C3BF0:
 	asrs r1, 24
 	lsls r1, 16
 	lsrs r1, 16
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	adds r2, r0, 0
 	ldr r0, _080C3C28 @ =gUnknown_20399E4
 	ldr r1, [r0]
@@ -7543,7 +7543,7 @@ _080C3C2C:
 	ldrsb r1, [r5, r1]
 	lsls r1, 16
 	lsrs r1, 16
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	adds r2, r0, 0
 	b _080C3C8E
 	.align 2, 0
@@ -7564,7 +7564,7 @@ _080C3C68:
 	ldrsb r1, [r5, r1]
 	lsls r1, 16
 	lsrs r1, 16
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	adds r2, r0, 0
 	ldr r1, [r4]
 	ldrb r0, [r2, 0x14]
@@ -9761,8 +9761,8 @@ _080C4DF2:
 	bx r1
 	thumb_func_end GetMapName
 
-	thumb_func_start sub_80C4DF8
-sub_80C4DF8: @ 80C4DF8
+	thumb_func_start GetMapNameGeneric
+GetMapNameGeneric: @ 80C4DF8
 	push {lr}
 	lsls r1, 16
 	lsrs r1, 16
@@ -9770,14 +9770,14 @@ sub_80C4DF8: @ 80C4DF8
 	bl GetMapName
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80C4DF8
+	thumb_func_end GetMapNameGeneric
 
 	thumb_func_start sub_80C4E08
 sub_80C4E08: @ 80C4E08
 	push {lr}
 	lsls r1, 16
 	lsrs r1, 16
-	bl sub_80C4DF8
+	bl GetMapNameGeneric
 	pop {r1}
 	bx r1
 	thumb_func_end sub_80C4E08
@@ -9893,15 +9893,15 @@ _080C4EF2:
 	bx r0
 	thumb_func_end sub_80C4ED0
 
-	thumb_func_start sub_80C4EF8
-sub_80C4EF8: @ 80C4EF8
+	thumb_func_start MCB2_FlyMap
+MCB2_FlyMap: @ 80C4EF8
 	push {lr}
 	bl sub_80C51E8
 	movs r0, 0x2
 	bl sub_80BFEDC
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80C4EF8
+	thumb_func_end MCB2_FlyMap
 
 	thumb_func_start sub_80C4F08
 sub_80C4F08: @ 80C4F08
@@ -10283,7 +10283,7 @@ _080C5220:
 _080C5250: .4byte gUnknown_20399FC
 _080C5254: .4byte CB2_ReturnToField
 _080C5258:
-	ldr r0, _080C5274 @ =sub_8124AB0
+	ldr r0, _080C5274 @ =CB2_ReturnToPartyMenuFromFlyMap
 	bl SetMainCallback2
 _080C525E:
 	ldr r4, _080C5278 @ =gUnknown_20399FC
@@ -10298,7 +10298,7 @@ _080C526E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C5274: .4byte sub_8124AB0
+_080C5274: .4byte CB2_ReturnToPartyMenuFromFlyMap
 _080C5278: .4byte gUnknown_20399FC
 	thumb_func_end sub_80C5208
 

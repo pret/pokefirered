@@ -709,7 +709,7 @@ static void ItemPc_SetScrollPosition(void)
 
 static void ItemPc_SetMessageWindowPalette(int a0)
 {
-    SetBgRectPal(1, 0, 14, 30, 6, a0 + 1);
+    SetBgTilemapPalette(1, 0, 14, 30, 6, a0 + 1);
     ScheduleBgCopyTilemapToVram(1);
 }
 
@@ -926,7 +926,7 @@ static void Task_ItemPcWaitButtonAndFinishWithdrawMultiple(u8 taskId)
     {
         PlaySE(SE_SELECT);
         itemId = ItemPc_GetItemIdBySlotId(data[1]);
-        RemoveItemFromPC(itemId, data[8]);
+        RemovePCItem(itemId, data[8]);
         ItemPcCompaction();
         Task_ItemPcCleanUpWithdraw(taskId);
     }
@@ -1029,8 +1029,8 @@ static void Task_ItemPcGive(u8 taskId)
 
 static void ItemPc_CB2_SwitchToPartyMenu(void)
 {
-    PartyMenuInit(0, 0, 6, 0, 6, sub_811FB28, ItemPc_CB2_ReturnFromPartyMenu);
-    gUnknown_203B0A0.unkC = ItemPc_GetItemIdBySlotId(ItemPc_GetCursorPosition());
+    InitPartyMenu(0, 0, 6, 0, 6, Task_HandleChooseMonInput, ItemPc_CB2_ReturnFromPartyMenu);
+    gPartyMenu.bagItem = ItemPc_GetItemIdBySlotId(ItemPc_GetCursorPosition());
 }
 
 static void ItemPc_CB2_ReturnFromPartyMenu(void)

@@ -4117,7 +4117,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                                 if (sp34 != 4)
                                 {
                                     gAbsentBattlerFlags &= ~gBitTable[sp34];
-                                    CopyPlayerPartyMonToBattleData(sp34, pokemon_order_func(gBattlerPartyIndexes[sp34]));
+                                    CopyPlayerPartyMonToBattleData(sp34, GetPartyIdFromBattlePartyId(gBattlerPartyIndexes[sp34]));
                                     if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER && gBattleResults.numRevivesUsed < 255)
                                         gBattleResults.numRevivesUsed++;
                                 }
@@ -4405,7 +4405,7 @@ static bool8 HealStatusConditions(struct Pokemon *mon, u32 unused, u32 healMask,
     }
 }
 
-bool8 PokemonUseItemEffects2(struct Pokemon *mon, u16 item, u8 partyIndex, u8 moveIndex)
+bool8 PokemonItemUseNoEffect(struct Pokemon *mon, u16 item, u8 partyIndex, u8 moveIndex)
 {
     u32 data;
     s32 tmp;
@@ -4796,9 +4796,9 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
 static void sub_8042D50(int stat)
 {
     gBattlerTarget = gBattlerInMenuId;
-    StringCopy(gBattleTextBuff1, gUnknown_83FD5D0[gUnknown_825DFF0[stat]]);
-    StringCopy(gBattleTextBuff2, BattleText_Rose);
-    BattleStringExpandPlaceholdersToDisplayedString(BattleText_UnknownString3);
+    StringCopy(gBattleTextBuff1, gStatNamesTable[gUnknown_825DFF0[stat]]);
+    StringCopy(gBattleTextBuff2, gBattleText_Rose);
+    BattleStringExpandPlaceholdersToDisplayedString(gBattleText_UnknownString3);
 }
 
 const u8 *Battle_PrintStatBoosterEffectMessage(u16 itemId)
@@ -4837,7 +4837,7 @@ const u8 *Battle_PrintStatBoosterEffectMessage(u16 itemId)
             else
             {
                 gBattlerAttacker = gBattlerInMenuId;
-                BattleStringExpandPlaceholdersToDisplayedString(BattleText_GetPumped);
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleText_GetPumped);
             }
         }
     }
@@ -4845,7 +4845,7 @@ const u8 *Battle_PrintStatBoosterEffectMessage(u16 itemId)
     if (itemEffect[3] & 0x80)
     {
         gBattlerAttacker = gBattlerInMenuId;
-        BattleStringExpandPlaceholdersToDisplayedString(BattleText_MistShroud);
+        BattleStringExpandPlaceholdersToDisplayedString(gBattleText_MistShroud);
     }
 
     return gDisplayedStringBattle;
@@ -5179,7 +5179,7 @@ void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies)
         SetMonData(mon, MON_DATA_NICKNAME, gSpeciesNames[newSpecies]);
 }
 
-bool8 sub_80435E0(void)
+bool8 GetPlayerFlankId(void)
 {
     bool8 retVal = FALSE;
     switch (gLinkPlayers[GetMultiplayerId()].id)
@@ -5813,11 +5813,11 @@ void SetMonPreventsSwitchingString(void)
     gBattleTextBuff1[4] = B_BUFF_EOS;
 
     if (GetBattlerSide(gBattleStruct->battlerPreventingSwitchout) == B_SIDE_PLAYER)
-        gBattleTextBuff1[3] = pokemon_order_func(gBattlerPartyIndexes[gBattleStruct->battlerPreventingSwitchout]);
+        gBattleTextBuff1[3] = GetPartyIdFromBattlePartyId(gBattlerPartyIndexes[gBattleStruct->battlerPreventingSwitchout]);
     else
         gBattleTextBuff1[3] = gBattlerPartyIndexes[gBattleStruct->battlerPreventingSwitchout];
 
-    PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff2, gBattlerInMenuId, pokemon_order_func(gBattlerPartyIndexes[gBattlerInMenuId]))
+    PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff2, gBattlerInMenuId, GetPartyIdFromBattlePartyId(gBattlerPartyIndexes[gBattlerInMenuId]))
 
     BattleStringExpandPlaceholders(gText_PkmnsXPreventsSwitching, gStringVar4);
 }

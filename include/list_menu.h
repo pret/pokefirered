@@ -53,8 +53,8 @@ struct ListMenuTemplate
 struct ListMenu
 {
     struct ListMenuTemplate template;
-    u16 scrollOffset;
-    u16 selectedRow;
+    u16 cursorPos;
+    u16 itemsAbove;
     u8 unk_1C;
     u8 unk_1D;
     u8 taskId;
@@ -73,12 +73,12 @@ struct ListMenuWindowRect
 extern struct ListMenuTemplate gMultiuseListMenuTemplate;
 
 s32 DoMysteryGiftListMenu(const struct WindowTemplate *windowTemplate, const struct ListMenuTemplate *listMenuTemplate, u8 arg2, u16 tileNum, u16 palNum);
-u8 ListMenuInit(struct ListMenuTemplate *listMenuTemplate, u16 scrollOffset, u16 selectedRow);
-u8 ListMenuInitInRect(struct ListMenuTemplate *listMenuTemplate, struct ListMenuWindowRect *rect, u16 scrollOffset, u16 selectedRow);
+u8 ListMenuInit(struct ListMenuTemplate *listMenuTemplate, u16 cursorPos, u16 itemsAbove);
+u8 ListMenuInitInRect(struct ListMenuTemplate *listMenuTemplate, struct ListMenuWindowRect *rect, u16 cursorPos, u16 itemsAbove);
 s32 ListMenu_ProcessInput(u8 listTaskId);
-void DestroyListMenuTask(u8 listTaskId, u16 *scrollOffset, u16 *selectedRow);
+void DestroyListMenuTask(u8 listTaskId, u16 *cursorPos, u16 *itemsAbove);
 void RedrawListMenu(u8 listTaskId);
-void ListMenuGetScrollAndRow(u8 listTaskId, u16 *scrollOffset, u16 *selectedRow);
+void ListMenuGetScrollAndRow(u8 listTaskId, u16 *cursorPos, u16 *itemsAbove);
 u16 ListMenuGetYCoordForPrintingArrowCursor(u8 listTaskId);
 void ListMenuOverrideSetColors(u8 cursorPal, u8 fillValue, u8 cursorShadowPal);
 void ListMenuDefaultCursorMoveFunc(s32 itemIndex, bool8 onInit, struct ListMenu *list);

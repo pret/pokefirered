@@ -7,82 +7,259 @@
 	.align 2
 
 gUnknown_843F29C:: @ 843F29C
-	.incbin "baserom.gba", 0x43F29C, 0x8
+	.2byte 0x143a, 0x1817, 0x100b, 0x200f
 
 gUnknown_843F2A4:: @ 843F2A4
-	.incbin "baserom.gba", 0x43F2A4, 0x8
+	.2byte 0x0209, 0x140b, 0x1030, 0x102a
 
 gUnknown_843F2AC:: @ 843F2AC
-	.incbin "baserom.gba", 0x43F2AC, 0xF0
+	.byte 0, 2, 2, 0
+	.4byte gUnknown_8418A2B
+	.4byte gUnknown_84186D1
+	.4byte gUnknown_84186EF
+	.4byte gUnknown_841880E
+	.4byte gUnknown_8418902
+	.byte 1, 2, 3, 1
+	.4byte gUnknown_8418A33
+	.4byte gUnknown_8418706
+	.4byte gUnknown_8418725
+	.4byte gUnknown_841881B
+	.4byte gUnknown_8418902
+	.byte 2, 2, 3, 1
+	.4byte gUnknown_8418A4A
+	.4byte gUnknown_8418706
+	.4byte gUnknown_8418725
+	.4byte gUnknown_841883E
+	.4byte gUnknown_8418902
+	.byte 3, 2, 3, 1
+	.4byte gUnknown_8418A61
+	.4byte gUnknown_8418706
+	.4byte gUnknown_8418725
+	.4byte gUnknown_841885F
+	.4byte gUnknown_8418902
+	.byte 4, 2, 5, 2
+	.4byte NULL
+	.4byte gUnknown_8418780
+	.4byte gUnknown_841879E
+	.4byte gUnknown_841888C
+	.4byte gUnknown_8418902
+	.byte 5, 2, 2, 0
+	.4byte NULL
+	.4byte gUnknown_8418780
+	.4byte gUnknown_841879E
+	.4byte NULL
+	.4byte NULL
+	.byte 6, 2, 3, 1
+	.4byte gUnknown_8418A77
+	.4byte gUnknown_84187B2
+	.4byte gUnknown_84187D1
+	.4byte gUnknown_84188AC
+	.4byte gUnknown_8418902
+	.byte 7, 2, 3, 1
+	.4byte gUnknown_8418AA1
+	.4byte gUnknown_8418745
+	.4byte gUnknown_8418763
+	.4byte gUnknown_8418881
+	.4byte gUnknown_8418902
+	.byte 9, 2, 1, 3
+	.4byte gUnknown_8418A87
+	.4byte gUnknown_84188B9
+	.4byte gUnknown_84188D6
+	.4byte gUnknown_84188F0
+	.4byte gUnknown_8418902
+	.byte 14, 2, 2, 0
+	.4byte gUnknown_8418AB2
+	.4byte gUnknown_84186D1
+	.4byte gUnknown_84187EE
+	.4byte gUnknown_8418881
+	.4byte gUnknown_8418902
 
-gUnknown_843F39C:: @ 843F39C
-	.incbin "baserom.gba", 0x43F39C, 0x3D0
+gUnknown_843F39C:: @ 843F39C data8 4x7
+	.byte 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x00, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x00, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a
 
-gUnknown_843F76C:: @ 843F76C
+gUnknown_843F3B8:: @ 843F3B8
+	.incbin "baserom.gba", 0x43F3B8, 0x20
+
+gUnknown_843F3D8:: @ 843F3D8
+	.incbin "baserom.gba", 0x43F3D8, 0x20
+
+gUnknown_843F3F8:: @ 843F3F8
+	.incbin "baserom.gba", 0x43F3F8, 0x20
+
+gUnknown_843F418:: @ 843F418
+	.incbin "baserom.gba", 0x43F418, 0x100
+
+gUnknown_843F518:: @ 843F518
+	.incbin "baserom.gba", 0x43F518, 0x100
+
+gUnknown_843F618:: @ 843F618
+	.incbin "baserom.gba", 0x43F618, 0x20
+
+gUnknown_843F638:: @ 843F638
+	.incbin "baserom.gba", 0x43F638, 0x134
+
+gUnknown_843F76C:: @ 843F76C gbapal
 	.incbin "baserom.gba", 0x43F76C, 0x20
 
-gUnknown_843F78C:: @ 843F78C
+gUnknown_843F78C:: @ 843F78C gbapal
 	.incbin "baserom.gba", 0x43F78C, 0x20
 
-gUnknown_843F7AC:: @ 843F7AC
+gUnknown_843F7AC:: @ 843F7AC 4bpp.lz
 	.incbin "baserom.gba", 0x43F7AC, 0xC8
 
-gUnknown_843F874:: @ 843F874
+gUnknown_843F874:: @ 843F874 gbapal
 	.incbin "baserom.gba", 0x43F874, 0x8
 
-gUnknown_843F87C:: @ 843F87C
+gUnknown_843F87C:: @ 843F87C gbapal
 	.incbin "baserom.gba", 0x43F87C, 0xC
 
-gUnknown_843F888:: @ 843F888
-	.incbin "baserom.gba", 0x43F888, 0x18
+gUnknown_843F888:: @ 843F888 data8 6x4
+	.byte 0x03, 0x04, 0x18, 0x04, 0x01, 0x04, 0x1b, 0x04, 0x03, 0x00, 0x18, 0x0a, 0x06, 0x06, 0x12, 0x04, 0x10, 0x04, 0x09, 0x02, 0x0e, 0x04, 0x12, 0x04
 
-gUnknown_843F8A0:: @ 843F8A0
-	.incbin "baserom.gba", 0x43F8A0, 0x10
+gUnknown_843F8A0:: @ 843F8A0 bg_template
+	.4byte 0x000001c0, 0x000011dd, 0x002021e2, 0x000031fb
 
-gUnknown_843F8B0:: @ 843F8B0
-	.incbin "baserom.gba", 0x43F8B0, 0x20
+gUnknown_843F8B0:: @ 843F8B0 window_template
+	.align 2
+	.byte 0x01, 0x07, 0x00, 0x10, 0x02, 0x0a
+	.2byte 0x0010
+	@ {0x01, 0x07, 0x00, 0x10, 0x02, 0x0a, 0x0010}
+	.align 2
+	.byte 0x00, 0x04, 0x0f, 0x16, 0x04, 0x0f
+	.2byte 0x000a
+	@ {0x00, 0x04, 0x0f, 0x16, 0x04, 0x0f, 0x000a}
+	.align 2
+	.byte 0x02, 0x01, 0x00, 0x1c, 0x20, 0x03
+	.2byte 0x0000
+	@ {0x02, 0x01, 0x00, 0x1c, 0x20, 0x03, 0x0000}
+	.align 2
+	.byte 0xff, 0x00, 0x00, 0x00, 0x00, 0x00
+	.2byte 0x0000
+	@ {0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0000}
 
-gUnknown_843F8D0:: @ 843F8D0
-	.incbin "baserom.gba", 0x43F8D0, 0x8
+gUnknown_843F8D0:: @ 843F8D0 window_template
+	.align 2
+	.byte 0x00, 0x16, 0x09, 0x05, 0x04, 0x0f
+	.2byte 0x0062
+	@ {0x00, 0x16, 0x09, 0x05, 0x04, 0x0f, 0x0062}
 
-gUnknown_843F8D8:: @ 843F8D8
-	.incbin "baserom.gba", 0x43F8D8, 0x3
+gUnknown_843F8D8:: @ 843F8D8 text
+	.string "{UNDERSCORE}$"
 
-gUnknown_843F8DB:: @ 843F8DB
-	.incbin "baserom.gba", 0x43F8DB, 0x5
+gUnknown_843F8DB:: @ 843F8DB text
+	.string "{CLEAR 17}$"
 
+	.align 2
 gUnknown_843F8E0:: @ 843F8E0
 	.4byte gUnknown_847A8D8
 	.4byte gUnknown_847A8FA
 	.4byte gUnknown_847A913
 	.4byte gUnknown_847A934
 
-gUnknown_843F8F0:: @ 843F8F0
-	.incbin "baserom.gba", 0x43F8F0, 0x20
+gUnknown_843F8F0:: @ 843F8F0 sprite_sheet
+	obj_tiles gUnknown_843F3F8, 0x0020, 0
+	obj_tiles gUnknown_843F418, 0x0100, 2
+	obj_tiles gUnknown_843F518, 0x0100, 3
+	obj_tiles NULL, 0x0000, 0
 
-gUnknown_843F910:: @ 843F910
-	.incbin "baserom.gba", 0x43F910, 0x28
+gUnknown_843F910:: @ 843F910 sprite_palette
+	obj_pal gUnknown_843F3B8, 0
+	obj_pal gUnknown_843F3D8, 1
+	obj_pal gUnknown_8E99F24, 2
+	obj_pal gUnknown_843F618, 3
+	null_obj_pal
 
-gUnknown_843F938:: @ 843F938
-	.incbin "baserom.gba", 0x43F938, 0x20
+gUnknown_843F938:: @ 843F938 sprite_sheet
+	obj_tiles gUnknown_843F638, 0x0800, 5
+	obj_tiles gUnknown_8E9BD28, 0x1000, 1
+	obj_tiles gUnknown_8E99F44, 0x0800, 6
+	obj_tiles gUnknown_8E9A168, 0x1000, 4
 
-gUnknown_843F958:: @ 843F958
-	.incbin "baserom.gba", 0x43F958, 0x10
+gUnknown_843F958:: @ 843F958 data8
+	.byte 0x00, 0x0c, 0x18, 0x38, 0x44, 0x50, 0x5c, 0x00
 
-gUnknown_843F968:: @ 843F968
-	.incbin "baserom.gba", 0x43F968, 0x50
+gUnknown_843F960::
+	.4byte 0x00000000, 0x00000c00
 
-gUnknown_843F9B8:: @ 843F9B8
-	.incbin "baserom.gba", 0x43F9B8, 0x68
+gUnknown_843F968:: @ 843F968 sprite_template
+	spr_template 0, 0, gUnknown_843F960, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_8101B20
 
-gUnknown_843FA20:: @ 843FA20
-	.incbin "baserom.gba", 0x43FA20, 0x20
+gUnknown_843F980::
+	.4byte 0xc0004000, 0x00000400
 
-gUnknown_843FA40:: @ 843FA40
-	.incbin "baserom.gba", 0x43FA40, 0x40
+gUnknown_843F988::
+	.incbin "baserom.gba", 0x43F988, 0x8
 
-gUnknown_843FA80:: @ 843FA80
-	.incbin "baserom.gba", 0x43FA80, 0x18
+gUnknown_843F990::
+	.incbin "baserom.gba", 0x43F990, 0x8
 
-gUnknown_843FA98:: @ 843FA98
-	.incbin "baserom.gba", 0x43FA98, 0x18
+gUnknown_843F998::
+	.incbin "baserom.gba", 0x43F998, 0x8
+
+gUnknown_843F9A0::
+	.incbin "baserom.gba", 0x43F9A0, 0x8
+
+gUnknown_843F9A8::
+	.4byte 0x843f988
+	.4byte 0x843f990
+	.4byte 0x843f998
+	.4byte 0x843f9a0
+
+gUnknown_843F9B8:: @ 843F9B8 sprite_template
+	spr_template 1, 1, gUnknown_843F980, gUnknown_843F9A8, NULL, gDummySpriteAffineAnimTable, sub_8101B20
+
+gUnknown_843F9D0::
+	.4byte 0xc0004000, 0x00000400
+
+gUnknown_843F9D8::
+	.incbin "baserom.gba", 0x43F9D8, 0x8
+
+gUnknown_843F9E0::
+	.incbin "baserom.gba", 0x43F9E0, 0xC
+
+gUnknown_843F9EC::
+	.incbin "baserom.gba", 0x43F9EC, 0xC
+
+gUnknown_843F9F8::
+	.incbin "baserom.gba", 0x43F9F8, 0xC
+
+gUnknown_843FA04::
+	.incbin "baserom.gba", 0x43FA04, 0x8
+
+gUnknown_843FA0C::
+	.4byte gUnknown_843F9D8
+	.4byte gUnknown_843F9E0
+	.4byte gUnknown_843F9EC
+	.4byte gUnknown_843F9F8
+	.4byte gUnknown_843FA04
+
+gUnknown_843FA20:: @ 843FA20 sprite_template
+	spr_template 4, 2, gUnknown_843F9D0, gUnknown_843FA0C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+
+gUnknown_843FA38::
+	.4byte 0xc0000000, 0x00000c00
+
+gUnknown_843FA40:: @ 843FA40 sprite_template
+	spr_template 6, 2, gUnknown_843FA38, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+
+gUnknown_843FA58::
+	.4byte 0x40004000, 0x00000400
+
+gUnknown_843FA60::
+	.4byte 0x40000000, 0x00000400
+
+gUnknown_843FA68::
+	.incbin "baserom.gba", 0x43FA68, 0x8
+
+gUnknown_843FA70::
+	.incbin "baserom.gba", 0x43FA70, 0x8
+
+gUnknown_843FA78::
+	.4byte gUnknown_843FA68
+	.4byte gUnknown_843FA70
+
+gUnknown_843FA80:: @ 843FA80 sprite_template
+	spr_template 3, 2, gUnknown_843FA58, gUnknown_843FA78, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+
+gUnknown_843FA98:: @ 843FA98 sprite_template
+	spr_template 2, 2, gUnknown_843FA60, gUnknown_843FA78, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy

@@ -144,7 +144,7 @@ static EWRAM_DATA u32 gUnknown_2022AE8[25] = {0};
 EWRAM_DATA u32 gBattleTypeFlags = 0;
 EWRAM_DATA u8 gBattleTerrain = 0;
 EWRAM_DATA u32 gUnknown_2022B54 = 0;
-EWRAM_DATA struct UnknownPokemonStruct4 gUnknown_2022B58[3] = {0};
+EWRAM_DATA struct UnknownPokemonStruct4 gMultiPartnerParty[3] = {0};
 EWRAM_DATA u8 *gUnknown_2022BB8 = NULL;
 EWRAM_DATA u8 *gUnknown_2022BBC = NULL;
 EWRAM_DATA u16 *gUnknown_2022BC0 = NULL;
@@ -1078,16 +1078,16 @@ static void sub_80108C4(void)
 
     for (i = 0; i < 3; ++i)
     {
-        gUnknown_2022B58[i].species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
-        gUnknown_2022B58[i].heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
-        nick = gUnknown_2022B58[i].nickname;
+        gMultiPartnerParty[i].species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
+        gMultiPartnerParty[i].heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+        nick = gMultiPartnerParty[i].nickname;
         GetMonData(&gPlayerParty[i], MON_DATA_NICKNAME, nick);
-        gUnknown_2022B58[i].level = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
-        gUnknown_2022B58[i].hp = GetMonData(&gPlayerParty[i], MON_DATA_HP);
-        gUnknown_2022B58[i].maxhp = GetMonData(&gPlayerParty[i], MON_DATA_MAX_HP);
-        gUnknown_2022B58[i].status = GetMonData(&gPlayerParty[i], MON_DATA_STATUS);
-        gUnknown_2022B58[i].personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
-        gUnknown_2022B58[i].gender = GetMonGender(&gPlayerParty[i]);
+        gMultiPartnerParty[i].level = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+        gMultiPartnerParty[i].hp = GetMonData(&gPlayerParty[i], MON_DATA_HP);
+        gMultiPartnerParty[i].maxhp = GetMonData(&gPlayerParty[i], MON_DATA_MAX_HP);
+        gMultiPartnerParty[i].status = GetMonData(&gPlayerParty[i], MON_DATA_STATUS);
+        gMultiPartnerParty[i].personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
+        gMultiPartnerParty[i].gender = GetMonGender(&gPlayerParty[i]);
         StripExtCtrlCodes(nick);
         if (GetMonData(&gPlayerParty[i], MON_DATA_LANGUAGE) != LANGUAGE_JAPANESE)
         {
@@ -1098,7 +1098,7 @@ static void sub_80108C4(void)
             cur[j] = EOS;
         }
     }
-    memcpy(&gBattleStruct->field_184, gUnknown_2022B58, sizeof(gUnknown_2022B58));
+    memcpy(&gBattleStruct->field_184, gMultiPartnerParty, sizeof(gMultiPartnerParty));
 }
 
 static void CB2_PreInitMultiBattle(void)
@@ -1123,7 +1123,7 @@ static void CB2_PreInitMultiBattle(void)
         if (gReceivedRemoteLinkPlayers != 0 && IsLinkTaskFinished())
         {
             sub_80108C4();
-            SendBlock(bitmask_all_link_players_but_self(), &gBattleStruct->field_184, sizeof(gUnknown_2022B58));
+            SendBlock(bitmask_all_link_players_but_self(), &gBattleStruct->field_184, sizeof(gMultiPartnerParty));
             ++gBattleCommunication[MULTIUSE_STATE];
         }
         break;
@@ -1137,13 +1137,13 @@ static void CB2_PreInitMultiBattle(void)
                     continue;
                 if ((!(gLinkPlayers[i].id & 1) && !(gLinkPlayers[playerMultiplierId].id & 1))
                  || (gLinkPlayers[i].id & 1 && gLinkPlayers[playerMultiplierId].id & 1))
-                    memcpy(gUnknown_2022B58, gBlockRecvBuffer[i], sizeof(gUnknown_2022B58));
+                    memcpy(gMultiPartnerParty, gBlockRecvBuffer[i], sizeof(gMultiPartnerParty));
             }
             ++gBattleCommunication[MULTIUSE_STATE];
             *savedCallback = gMain.savedCallback;
             *savedBattleTypeFlags = gBattleTypeFlags;
             gMain.savedCallback = CB2_PreInitMultiBattle;
-            sub_8128198();
+            ShowPartyMenuToShowcaseMultiBattleParty();
         }
         break;
     case 2:
@@ -3004,22 +3004,22 @@ void sub_8013F6C(u8 battler)
     u8 r4, r1;
 
     for (i = 0; i < 3; ++i)
-        gUnknown_203B0DC[i] = *(battler * 3 + i + (u8 *)(gBattleStruct->field_60));
-    r4 = pokemon_order_func(gBattlerPartyIndexes[battler]);
-    r1 = pokemon_order_func(*(gBattleStruct->monToSwitchIntoId + battler));
-    sub_8127FF4(r4, r1);
+        gBattlePartyCurrentOrder[i] = *(battler * 3 + i + (u8 *)(gBattleStruct->field_60));
+    r4 = GetPartyIdFromBattlePartyId(gBattlerPartyIndexes[battler]);
+    r1 = GetPartyIdFromBattlePartyId(*(gBattleStruct->monToSwitchIntoId + battler));
+    SwitchPartyMonSlots(r4, r1);
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
         for (i = 0; i < 3; ++i)
         {
-            *(battler * 3 + i + (u8 *)(gBattleStruct->field_60)) = gUnknown_203B0DC[i];
-            *(BATTLE_PARTNER(battler) * 3 + i + (u8 *)(gBattleStruct->field_60)) = gUnknown_203B0DC[i];
+            *(battler * 3 + i + (u8 *)(gBattleStruct->field_60)) = gBattlePartyCurrentOrder[i];
+            *(BATTLE_PARTNER(battler) * 3 + i + (u8 *)(gBattleStruct->field_60)) = gBattlePartyCurrentOrder[i];
         }
     }
     else
     {
         for (i = 0; i < 3; ++i)
-            *(battler * 3 + i + (u8 *)(gBattleStruct->field_60)) = gUnknown_203B0DC[i];
+            *(battler * 3 + i + (u8 *)(gBattleStruct->field_60)) = gBattlePartyCurrentOrder[i];
     }
 }
 
@@ -3137,7 +3137,7 @@ static void HandleTurnActionSelectionState(void)
                     *(gBattleStruct->field_58 + gActiveBattler) = gBattlerPartyIndexes[gActiveBattler];
                     if (gBattleMons[gActiveBattler].status2 & (STATUS2_WRAPPED | STATUS2_ESCAPE_PREVENTION) || gStatuses3[gActiveBattler] & STATUS3_ROOTED)
                     {
-                        BtlController_EmitChoosePokemon(0, PARTY_CANT_SWITCH, 6, ABILITY_NONE, gBattleStruct->field_60[gActiveBattler]);
+                        BtlController_EmitChoosePokemon(0, PARTY_ACTION_CANT_SWITCH, 6, ABILITY_NONE, gBattleStruct->field_60[gActiveBattler]);
                     }
                     else if ((i = ABILITY_ON_OPPOSING_FIELD(gActiveBattler, ABILITY_SHADOW_TAG))
                           || ((i = ABILITY_ON_OPPOSING_FIELD(gActiveBattler, ABILITY_ARENA_TRAP))
@@ -3146,16 +3146,16 @@ static void HandleTurnActionSelectionState(void)
                           || ((i = AbilityBattleEffects(ABILITYEFFECT_CHECK_FIELD_EXCEPT_BATTLER, gActiveBattler, ABILITY_MAGNET_PULL, 0, 0))
                               && IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_STEEL)))
                     {
-                        BtlController_EmitChoosePokemon(0, ((i - 1) << 4) | PARTY_ABILITY_PREVENTS, 6, gLastUsedAbility, gBattleStruct->field_60[gActiveBattler]);
+                        BtlController_EmitChoosePokemon(0, ((i - 1) << 4) | PARTY_ACTION_ABILITY_PREVENTS, 6, gLastUsedAbility, gBattleStruct->field_60[gActiveBattler]);
                     }
                     else
                     {
                         if (gActiveBattler == 2 && gChosenActionByBattler[0] == B_ACTION_SWITCH)
-                            BtlController_EmitChoosePokemon(0, PARTY_CHOOSE_MON, *(gBattleStruct->monToSwitchIntoId + 0), ABILITY_NONE, gBattleStruct->field_60[gActiveBattler]);
+                            BtlController_EmitChoosePokemon(0, PARTY_ACTION_CHOOSE_MON, *(gBattleStruct->monToSwitchIntoId + 0), ABILITY_NONE, gBattleStruct->field_60[gActiveBattler]);
                         else if (gActiveBattler == 3 && gChosenActionByBattler[1] == B_ACTION_SWITCH)
-                            BtlController_EmitChoosePokemon(0, PARTY_CHOOSE_MON, *(gBattleStruct->monToSwitchIntoId + 1), ABILITY_NONE, gBattleStruct->field_60[gActiveBattler]);
+                            BtlController_EmitChoosePokemon(0, PARTY_ACTION_CHOOSE_MON, *(gBattleStruct->monToSwitchIntoId + 1), ABILITY_NONE, gBattleStruct->field_60[gActiveBattler]);
                         else
-                            BtlController_EmitChoosePokemon(0, PARTY_CHOOSE_MON, 6, ABILITY_NONE, gBattleStruct->field_60[gActiveBattler]);
+                            BtlController_EmitChoosePokemon(0, PARTY_ACTION_CHOOSE_MON, 6, ABILITY_NONE, gBattleStruct->field_60[gActiveBattler]);
                     }
                     MarkBattlerForControllerExec(gActiveBattler);
                     break;

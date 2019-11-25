@@ -343,7 +343,7 @@ static u16 CopyDecompressedTileDataToVram(u8 bgId, const void *src, u16 size, u1
     return LoadBgTilemap(bgId, src, size, offset);
 }
 
-void SetBgRectPal(u8 bgId, u8 left, u8 top, u8 width, u8 height, u8 palette)
+void SetBgTilemapPalette(u8 bgId, u8 left, u8 top, u8 width, u8 height, u8 palette)
 {
     u8 i, j;
     u16 *ptr = GetBgTilemapBuffer(bgId);
@@ -357,7 +357,7 @@ void SetBgRectPal(u8 bgId, u8 left, u8 top, u8 width, u8 height, u8 palette)
     }
 }
 
-void CopyRectIntoAltRect(u8 bgId, u16 *dest, u8 left, u8 top, u8 width, u8 height)
+void CopyToBufferFromBgTilemap(u8 bgId, u16 *dest, u8 left, u8 top, u8 width, u8 height)
 {
     u8 i,j;
     const u16 *src = GetBgTilemapBuffer(bgId);

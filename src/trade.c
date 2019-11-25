@@ -459,9 +459,9 @@ static const u8 *const sTradeErrorOrStatusMessagePtrs[] = {
     gUnknown_8417094, // That's your only POKéMON for battle
     gUnknown_841E199, // Waiting for your friend to finish
     gUnknown_841E1C5, // Your friend wants to trade POKéMON
-    gUnknown_84170BC, // That POKéMON can't be traded now
-    gUnknown_84170E0, // An EGG can't be traded now
-    gUnknown_84170FC  // The other TRAINER's POKéMON can't be traded now
+    gText_PkmnCantBeTradedNow, // That POKéMON can't be traded now
+    gText_EggCantBeTradedNow, // An EGG can't be traded now
+    gText_OtherTrainersPkmnCantBeTraded  // The other TRAINER's POKéMON can't be traded now
 };
 
 static const u8 gUnknown_8261F18[] = { 0, 1, 2 };
@@ -879,11 +879,11 @@ static void sub_804C728(void)
         break;
     case 8:
         LoadHeldItemIcons();
-        sub_812256C(sTradeMenuResourcesPtr->partyCounts, sTradeMenuResourcesPtr->partyIcons, 0);
+        DrawHeldItemIconsForTrade(sTradeMenuResourcesPtr->partyCounts, sTradeMenuResourcesPtr->partyIcons, 0);
         gMain.state++;
         break;
     case 9:
-        sub_812256C(sTradeMenuResourcesPtr->partyCounts, sTradeMenuResourcesPtr->partyIcons, 1);
+        DrawHeldItemIconsForTrade(sTradeMenuResourcesPtr->partyCounts, sTradeMenuResourcesPtr->partyIcons, 1);
         gMain.state++;
         break;
     case 10:
@@ -1483,7 +1483,7 @@ static void sub_804C728(void)
                 "\tadds r0, 0x36\n"
                 "\tadds r1, 0x28\n"
                 "\tmovs r2, 0\n"
-                "\tbl sub_812256C\n"
+                "\tbl DrawHeldItemIconsForTrade\n"
                 "\tldr r1, _0804CB74 @ =gMain\n"
                 "\tmovs r5, 0x87\n"
                 "\tlsls r5, 3\n"
@@ -1499,7 +1499,7 @@ static void sub_804C728(void)
                 "\tadds r0, 0x36\n"
                 "\tadds r1, 0x28\n"
                 "\tmovs r2, 0x1\n"
-                "\tbl sub_812256C\n"
+                "\tbl DrawHeldItemIconsForTrade\n"
                 "\tldr r1, _0804CB98 @ =gMain\n"
                 "\tmovs r7, 0x87\n"
                 "\tlsls r7, 3\n"
@@ -1989,11 +1989,11 @@ void sub_804CF14(void)
         break;
     case 8:
         LoadHeldItemIcons();
-        sub_812256C(sTradeMenuResourcesPtr->partyCounts, sTradeMenuResourcesPtr->partyIcons, 0);
+        DrawHeldItemIconsForTrade(sTradeMenuResourcesPtr->partyCounts, sTradeMenuResourcesPtr->partyIcons, 0);
         gMain.state++;
         break;
     case 9:
-        sub_812256C(sTradeMenuResourcesPtr->partyCounts, sTradeMenuResourcesPtr->partyIcons, 1);
+        DrawHeldItemIconsForTrade(sTradeMenuResourcesPtr->partyCounts, sTradeMenuResourcesPtr->partyIcons, 1);
         gMain.state++;
         break;
     case 10:
@@ -2053,9 +2053,9 @@ void sub_804CF14(void)
         }
 
         if (sTradeMenuResourcesPtr->tradeMenuCursorPosition < 6)
-            sTradeMenuResourcesPtr->tradeMenuCursorPosition = sub_8138B20();
+            sTradeMenuResourcesPtr->tradeMenuCursorPosition = GetLastViewedMonIndex();
         else
-            sTradeMenuResourcesPtr->tradeMenuCursorPosition = sub_8138B20() + 6;
+            sTradeMenuResourcesPtr->tradeMenuCursorPosition = GetLastViewedMonIndex() + 6;
 
         sTradeMenuResourcesPtr->tradeMenuCursorSpriteIdx = CreateSprite(&sSpriteTemplate_TradeButtons, sTradeMonSpriteCoords[sTradeMenuResourcesPtr->tradeMenuCursorPosition][0] * 8 + 32, sTradeMonSpriteCoords[sTradeMenuResourcesPtr->tradeMenuCursorPosition][1] * 8, 2);
         gMain.state = 16;
@@ -2365,7 +2365,7 @@ void sub_804CF14(void)
                 "\tadds r0, 0x36\n"
                 "\tadds r1, 0x28\n"
                 "\tmovs r2, 0\n"
-                "\tbl sub_812256C\n"
+                "\tbl DrawHeldItemIconsForTrade\n"
                 "\tldr r1, _0804D174 @ =gMain\n"
                 "\tmovs r5, 0x87\n"
                 "\tlsls r5, 3\n"
@@ -2381,7 +2381,7 @@ void sub_804CF14(void)
                 "\tadds r0, 0x36\n"
                 "\tadds r1, 0x28\n"
                 "\tmovs r2, 0x1\n"
-                "\tbl sub_812256C\n"
+                "\tbl DrawHeldItemIconsForTrade\n"
                 "\tldr r1, _0804D198 @ =gMain\n"
                 "\tmovs r7, 0x87\n"
                 "\tlsls r7, 3\n"
@@ -2633,14 +2633,14 @@ void sub_804CF14(void)
                 "\tldrb r0, [r0]\n"
                 "\tcmp r0, 0x5\n"
                 "\tbhi _0804D3B8\n"
-                "\tbl sub_8138B20\n"
+                "\tbl GetLastViewedMonIndex\n"
                 "\tldr r1, [r4]\n"
                 "\tb _0804D3C0\n"
                 "\t.align 2, 0\n"
                 "_0804D3B0: .4byte sSpriteTemplate_Text\n"
                 "_0804D3B4: .4byte sTradeMenuResourcesPtr\n"
                 "_0804D3B8:\n"
-                "\tbl sub_8138B20\n"
+                "\tbl GetLastViewedMonIndex\n"
                 "\tldr r1, [r4]\n"
                 "\tadds r0, 0x6\n"
                 "_0804D3C0:\n"
@@ -4243,7 +4243,7 @@ static void sub_804F964(void)
     {
         for (j = 0; j < sTradeMenuResourcesPtr->partyCounts[i]; j++)
         {
-            MonIcon_SetAnim(&gSprites[sTradeMenuResourcesPtr->partyIcons[i][j]], 4 - sTradeMenuResourcesPtr->unk_5D[i][j]);
+            SetPartyHPBarSprite(&gSprites[sTradeMenuResourcesPtr->partyIcons[i][j]], 4 - sTradeMenuResourcesPtr->unk_5D[i][j]);
         }
     }
 }
@@ -4394,7 +4394,7 @@ static bool32 IsDeoxysOrMewUntradable(u16 species, bool8 isObedientBitSet)
     return FALSE;
 }
 
-int sub_804FBEC(struct UnkLinkRfuStruct_02022B14Substruct a0, struct UnkLinkRfuStruct_02022B14Substruct a1, u16 species1, u16 species2, u8 type, u16 species3, u8 isObedientBitSet)
+int GetUnionRoomTradeMessageId(struct UnkLinkRfuStruct_02022B14Substruct a0, struct UnkLinkRfuStruct_02022B14Substruct a1, u16 species1, u16 species2, u8 type, u16 species3, u8 isObedientBitSet)
 {
     u8 r9 = a0.unk_01_0;
     u8 r4 = a0.unk_00_7;
@@ -4474,7 +4474,7 @@ int sub_804FBEC(struct UnkLinkRfuStruct_02022B14Substruct a0, struct UnkLinkRfuS
     return 0;
 }
 
-int Trade_CanTradeSelectedMon(struct UnkLinkRfuStruct_02022B14Substruct a0, u16 species, u16 a2, u8 a3)
+int CanRegisterMonForTradingBoard(struct UnkLinkRfuStruct_02022B14Substruct a0, u16 species, u16 a2, u8 a3)
 {
     u8 canTradeEggAndNational = a0.unk_01_0;
 

@@ -34,7 +34,6 @@
 #include "money.h"
 #include "quest_log.h"
 #include "script.h"
-#include "event_data.h"
 #include "constants/songs.h"
 #include "constants/items.h"
 #include "constants/game_stat.h"
@@ -112,8 +111,6 @@ EWRAM_DATA u8 (*gUnknown_2039968)[13] = {0};    //item strings
 EWRAM_DATA s16 gUnknown_20398B4[MAP_OBJECTS_COUNT][4] = {0};    //sViewportMapObjects
 EWRAM_DATA struct MartHistory gUnknown_203996C = {0};
 
-EWRAM_DATA u8 gUnknown_2039984 = 0;
-
 //Function Declarations
 static u8 sub_809AAB0(u8 a0);
 static u8 sub_809AB7C(bool32 a0);
@@ -171,11 +168,6 @@ static void nullsub_52(u8 taskId);
 static void nullsub_53(void);
 static void sub_809C138(void);
 
-// new file?
-static void sub_809C334(u8 taskId);
-static void sub_809C500(u8 taskId);
-static void sub_809C640(u8 taskId);
-
 // external defines
 extern u8 MapGridGetMetatileLayerTypeAt(s16 x, s16 y);
 extern u16 BagGetQuantityByItemId(u16 item);
@@ -186,13 +178,6 @@ extern const struct MenuAction gUnknown_83DF09C[];
 extern const struct YesNoFuncTable gUnknown_83DF0B4[];
 extern const struct WindowTemplate gUnknown_83DF0BC[];
 extern const struct BgTemplate gUnknown_83DF0C4[];
-extern const u16 gUnknown_83DF0D4[];
-extern const u16 gUnknown_83DF0DA[];
-extern const u16 gUnknown_83DF0E0[];
-extern const u16 gUnknown_83DF0E6[];
-extern const u16 gUnknown_83DF0EC[];
-extern const u16 gUnknown_83DF0F2[];
-extern const u16 gUnknown_83DF0F8[];
 */
 
 //graphics
@@ -267,14 +252,6 @@ static const struct BgTemplate gUnknown_83DF0C4[] =     //sShopBuyMenuBgTemplate
         .baseTile = 0
     }
 };
-
-static const u16 gUnknown_83DF0D4[] = {0x0308, 0x030a, 0x02d0};
-static const u16 gUnknown_83DF0DA[] = {0x0309, 0x030b, 0x02d1};
-static const u16 gUnknown_83DF0E0[] = {0x0310, 0x0312, 0x02d8};
-static const u16 gUnknown_83DF0E6[] = {0x0311, 0x0313, 0x02d9};
-static const u16 gUnknown_83DF0EC[] = {0x02e3, 0x0316, 0x0314};
-static const u16 gUnknown_83DF0F2[] = {0x02e4, 0x0317, 0x0315};
-static const u16 gUnknown_83DF0F8[] = {0x02eb, 0x031e, 0x031c};
 
 
 // Functions
@@ -1680,3 +1657,4 @@ void CreateDecorationShop2Menu(const u16 *itemsForSale)
     sub_809AAB0(MART_TYPE_DECOR2);
     sub_809AC04(EnableBothScriptContexts);
 }
+

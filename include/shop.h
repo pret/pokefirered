@@ -28,15 +28,6 @@ void CreateDecorationShop2Menu(const u16 *);
 u8 sub_809B56C(void);
 void sub_809C09C(u16 a0, u16 a1, u8 a2);
 
-// wrong file
-void sub_809C1D8(u8 taskId, const u16* a1, u16 a2);
-void sub_809C448(u8 a0);
-void sub_809C460(void);
-bool8 sub_809C474(void);
-void sub_809C4A8(void);
-void sub_809C5FC(void);
-
-
 // buy_menu_helper
 void BuyMenuInitWindows(bool32 isSellingTM);
 void BuyMenuDrawMoneyBox(void);

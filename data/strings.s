@@ -3315,10 +3315,13 @@ gUnknown_841CB5A:: @ 841CB5A
 gUnknown_841CB63:: @ 841CB63
 	.string "POKéMON JUMP RECORDS$"
 
+gUnknown_841CB78::
 	.string "Jumps in a row:$"
 
+gUnknown_841CB88::
 	.string "Best score:$"
 
+gUnknown_841CB94::
 	.string "EXCELLENTS in a row:$"
 
 gUnknown_841CBA9:: @ 841CBA9

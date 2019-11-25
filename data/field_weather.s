@@ -393,4 +393,3 @@ gUnknown_83C68BC:: @ 83C68BC
 
 gUnknown_83C68D4:: @ 83C68D4
 	.2byte 0x00c8, 0x0048, 0x0038, 0x0028, 0x0018, 0x0000
-

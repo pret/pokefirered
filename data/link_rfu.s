@@ -1,6 +1,7 @@
 #include "constants/region_map.h"
 #include "constants/flags.h"
 #include "constants/moves.h"
+#define RGB(r, g, b) ((r) | ((g) << 5) | ((b) << 10))
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 	.section .rodata
@@ -75,46 +76,62 @@ gUnknown_843F2AC:: @ 843F2AC
 	.4byte gUnknown_8418902
 
 gUnknown_843F39C:: @ 843F39C data8 4x7
-	.byte 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x00, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x00, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a
+	.byte 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x00
+	.byte 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x00
+	.byte 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13
+	.byte 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a
 
-gUnknown_843F3B8:: @ 843F3B8
-	.incbin "baserom.gba", 0x43F3B8, 0x20
+gUnknown_843F3B8:: @ 843F3B8 gbapal
+	.incbin "graphics/link_rfu/unk_843F3F8.gbapal"
 
-gUnknown_843F3D8:: @ 843F3D8
-	.incbin "baserom.gba", 0x43F3D8, 0x20
+gUnknown_843F3D8:: @ 843F3D8 gbapal
+	.incbin "graphics/link_rfu/unk_8E9BD28.gbapal"
 
-gUnknown_843F3F8:: @ 843F3F8
-	.incbin "baserom.gba", 0x43F3F8, 0x20
+gUnknown_843F3F8:: @ 843F3F8 4bpp
+	.incbin "graphics/link_rfu/unk_843F3F8.4bpp"
 
-gUnknown_843F418:: @ 843F418
-	.incbin "baserom.gba", 0x43F418, 0x100
+gUnknown_843F418:: @ 843F418 4bpp
+	.incbin "graphics/link_rfu/unk_843F418.4bpp"
 
-gUnknown_843F518:: @ 843F518
-	.incbin "baserom.gba", 0x43F518, 0x100
+gUnknown_843F518:: @ 843F518 4bpp
+	.incbin "graphics/link_rfu/unk_843F518.4bpp"
 
-gUnknown_843F618:: @ 843F618
-	.incbin "baserom.gba", 0x43F618, 0x20
+gUnknown_843F618:: @ 843F618 gbapal
+	.incbin "graphics/link_rfu/unk_843F638.gbapal"
 
-gUnknown_843F638:: @ 843F638
-	.incbin "baserom.gba", 0x43F638, 0x134
+gUnknown_843F638:: @ 843F638 4bpp.lz
+	.incbin "graphics/link_rfu/unk_843F638.4bpp.lz"
 
 gUnknown_843F76C:: @ 843F76C gbapal
-	.incbin "baserom.gba", 0x43F76C, 0x20
+	.incbin "graphics/link_rfu/unk_843F76C.gbapal"
 
 gUnknown_843F78C:: @ 843F78C gbapal
-	.incbin "baserom.gba", 0x43F78C, 0x20
+	.incbin "graphics/link_rfu/unk_843F78C.gbapal"
 
 gUnknown_843F7AC:: @ 843F7AC 4bpp.lz
-	.incbin "baserom.gba", 0x43F7AC, 0xC8
+	.incbin "graphics/link_rfu/unk_843F7AC.4bpp.lz"
 
 gUnknown_843F874:: @ 843F874 gbapal
-	.incbin "baserom.gba", 0x43F874, 0x8
+	.2byte RGB(0, 0, 0)
+	.2byte RGB(0, 0, 0)
+	.2byte RGB(7, 25, 31)
+	.2byte RGB(21, 21, 29)
 
 gUnknown_843F87C:: @ 843F87C gbapal
-	.incbin "baserom.gba", 0x43F87C, 0xC
+	.2byte RGB(0, 0, 0)
+	.2byte RGB(31, 31, 31)
+	.2byte RGB(12, 12, 12)
+	.2byte RGB(27, 26, 27)
+	.2byte RGB(8, 17, 9)
 
+	.align 2
 gUnknown_843F888:: @ 843F888 data8 6x4
-	.byte 0x03, 0x04, 0x18, 0x04, 0x01, 0x04, 0x1b, 0x04, 0x03, 0x00, 0x18, 0x0a, 0x06, 0x06, 0x12, 0x04, 0x10, 0x04, 0x09, 0x02, 0x0e, 0x04, 0x12, 0x04
+	.byte 0x03, 0x04, 0x18, 0x04
+	.byte 0x01, 0x04, 0x1b, 0x04
+	.byte 0x03, 0x00, 0x18, 0x0a
+	.byte 0x06, 0x06, 0x12, 0x04
+	.byte 0x10, 0x04, 0x09, 0x02
+	.byte 0x0e, 0x04, 0x12, 0x04
 
 gUnknown_843F8A0:: @ 843F8A0 bg_template
 	.4byte 0x000001c0, 0x000011dd, 0x002021e2, 0x000031fb
@@ -160,7 +177,7 @@ gUnknown_843F8F0:: @ 843F8F0 sprite_sheet
 	obj_tiles gUnknown_843F3F8, 0x0020, 0
 	obj_tiles gUnknown_843F418, 0x0100, 2
 	obj_tiles gUnknown_843F518, 0x0100, 3
-	obj_tiles NULL, 0x0000, 0
+	null_obj_tiles
 
 gUnknown_843F910:: @ 843F910 sprite_palette
 	obj_pal gUnknown_843F3B8, 0
@@ -188,16 +205,20 @@ gUnknown_843F980::
 	.4byte 0xc0004000, 0x00000400
 
 gUnknown_843F988::
-	.incbin "baserom.gba", 0x43F988, 0x8
+	obj_image_anim_frame 0x0000, 0
+	obj_image_anim_end
 
 gUnknown_843F990::
-	.incbin "baserom.gba", 0x43F990, 0x8
+	obj_image_anim_frame 0x0020, 0
+	obj_image_anim_end
 
 gUnknown_843F998::
-	.incbin "baserom.gba", 0x43F998, 0x8
+	obj_image_anim_frame 0x0040, 0
+	obj_image_anim_end
 
 gUnknown_843F9A0::
-	.incbin "baserom.gba", 0x43F9A0, 0x8
+	obj_image_anim_frame 0x0060, 0
+	obj_image_anim_end
 
 gUnknown_843F9A8::
 	.4byte 0x843f988
@@ -212,19 +233,27 @@ gUnknown_843F9D0::
 	.4byte 0xc0004000, 0x00000400
 
 gUnknown_843F9D8::
-	.incbin "baserom.gba", 0x43F9D8, 0x8
+	obj_image_anim_frame 0x0060, 0
+	obj_image_anim_end
 
 gUnknown_843F9E0::
-	.incbin "baserom.gba", 0x43F9E0, 0xC
+	obj_image_anim_frame 0x0040, 4
+	obj_image_anim_frame 0x0020, 4
+	obj_image_anim_end
 
 gUnknown_843F9EC::
-	.incbin "baserom.gba", 0x43F9EC, 0xC
+	obj_image_anim_frame 0x0040, 4
+	obj_image_anim_frame 0x0000, 4
+	obj_image_anim_end
 
 gUnknown_843F9F8::
-	.incbin "baserom.gba", 0x43F9F8, 0xC
+	obj_image_anim_frame 0x0040, 4
+	obj_image_anim_frame 0x0060, 0
+	obj_image_anim_end
 
 gUnknown_843FA04::
-	.incbin "baserom.gba", 0x43FA04, 0x8
+	obj_image_anim_frame 0x0040, 4
+	obj_image_anim_end
 
 gUnknown_843FA0C::
 	.4byte gUnknown_843F9D8
@@ -249,10 +278,12 @@ gUnknown_843FA60::
 	.4byte 0x40000000, 0x00000400
 
 gUnknown_843FA68::
-	.incbin "baserom.gba", 0x43FA68, 0x8
+	obj_image_anim_frame 0x0000, 0
+	obj_image_anim_end
 
 gUnknown_843FA70::
-	.incbin "baserom.gba", 0x43FA70, 0x8
+	obj_image_anim_frame 0x0004, 0
+	obj_image_anim_end
 
 gUnknown_843FA78::
 	.4byte gUnknown_843FA68

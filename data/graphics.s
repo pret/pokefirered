@@ -16125,22 +16125,22 @@ gUnknown_8E998CC:: @ 8E998CC
 	.incbin "baserom.gba", 0xE998CC, 0x4C0
 
 gUnknown_8E99D8C:: @ 8E99D8C
-	.incbin "baserom.gba", 0xE99D8C, 0x20 @UNKNOWN
+	.incbin "graphics/link_rfu/unk_8E99DAC.gbapal"
 
 gUnknown_8E99DAC:: @ 8E99DAC
-	.incbin "baserom.gba", 0xE99DAC, 0xC8 @UNKNOWN
+	.incbin "graphics/link_rfu/unk_8E99DAC.4bpp.lz"
 
 gUnknown_8E99E74:: @ 8E99E74
-	.incbin "baserom.gba", 0xE99E74, 0xB0
+	.incbin "graphics/link_rfu/unk_8E99E74.bin.lz"
 
 gUnknown_8E99F24:: @ 8E99F24
-	.incbin "baserom.gba", 0xE99F24, 0x20 @UNKNOWN
+	.incbin "graphics/link_rfu/unk_8E9A168.gbapal"
 
 gUnknown_8E99F44:: @ 8E99F44
-	.incbin "baserom.gba", 0xE99F44, 0x224
+	.incbin "graphics/link_rfu/unk_8E99F44.4bpp.lz"
 
 gUnknown_8E9A168:: @ 8E9A168
-	.incbin "baserom.gba", 0xE9A168, 0x2F8
+	.incbin "graphics/link_rfu/unk_8E9A168.4bpp.lz"
 
 gUnknown_8E9A460:: @ 8E9A460
 	.incbin "baserom.gba", 0xE9A460, 0xEB0

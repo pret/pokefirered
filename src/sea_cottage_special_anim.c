@@ -35,7 +35,29 @@ static const u16 gUnknown_83DF0F8[] = {0x02eb, 0x031e, 0x031c};
 #ifdef NONMATCHING
 void sub_809C1D8(u8 taskId, const u16* a1, u16 a2)
 {
-    
+    s16 v1, v2, v3;
+	s16 i, j;
+	
+	v1 = gTasks[taskId].data[5] - 1;
+	v2 = gTasks[taskId].data[6] - 1;
+	v3 = gTasks[taskId].data[2];
+	
+	if (gTasks[taskId].data[3] == 0)
+	{
+		for (i = 0; i < 3; i++)
+		{
+			for (j = 0; j < 3; j++)
+			{
+				MapGridGetMetatileIdAt(v1 + j, v2 + i);
+				if ()
+				{
+					
+				}
+				
+				MapGridSetMetatileIdAt
+			}
+		}
+	}
 }
 #else
 NAKED

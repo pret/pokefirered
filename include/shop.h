@@ -11,22 +11,13 @@
 
 #define NUM_CHARS_PRICE 4
 
-// shop view window NPC info enum
-enum
-{
-    EVENT_OBJ_ID,
-    X_COORD,
-    Y_COORD,
-    ANIM_NUM
-};
-
 extern EWRAM_DATA struct ItemSlot gUnknown_02039F80[3];
 
 void CreatePokemartMenu(const u16 *itemsForSale);
 void CreateDecorationShop1Menu(const u16 *);
 void CreateDecorationShop2Menu(const u16 *);
-u8 sub_809B56C(void);
-void sub_809C09C(u16 a0, u16 a1, u8 a2);
+u8 GetMartUnk16_4(void);
+void RecordItemPurchase(u16 a0, u16 a1, u8 a2);
 
 // buy_menu_helper
 void BuyMenuInitWindows(bool32 isSellingTM);

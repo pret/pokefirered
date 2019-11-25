@@ -5484,7 +5484,7 @@ sub_810A9D4: @ 810A9D4
 	mov r2, r8
 	ldrh r1, [r2, 0x10]
 	movs r2, 0x2
-	bl sub_809C09C
+	bl RecordItemPurchase
 	mov r3, r8
 	ldrb r0, [r3]
 	ldr r4, _0810AAE4 @ =gUnknown_203ACFC

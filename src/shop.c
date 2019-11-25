@@ -44,6 +44,7 @@
 #define tItemId data[5]
 #define tListTaskId data[7]
 
+// mart types
 enum
 {
     MART_TYPE_REGULAR = 0,
@@ -52,9 +53,14 @@ enum
     MART_TYPE_DECOR2,
 };
 
-// RAM symbols
-// Function Declarations
-// Data Definitions
+// shop view window NPC info enum
+enum
+{
+    EVENT_OBJ_ID,
+    X_COORD,
+    Y_COORD,
+    ANIM_NUM
+};
 
 struct ShopData
 {
@@ -71,7 +77,6 @@ struct ShopData
              u16 itemSlot:2;
              u16 unk16_11:5;
     /*0x18*/ u16 unk18;
-    //INCOMPLETE
 };
 
 struct MartHistory
@@ -92,81 +97,73 @@ struct MartHistory
 }; /* size = 0x18 */
 
 
+EWRAM_DATA s16 sViewportMapObjects[MAP_OBJECTS_COUNT][4] = {0};
 EWRAM_DATA struct ShopData gShopData = {0};
-EWRAM_DATA u8 gUnknown_2039950 = 0;    //sShopMenuWindowId
-
-EWRAM_DATA u16 (*gUnknown_2039954)[0x400] = {0};    //gShopTilemapBuffers
-EWRAM_DATA u16 (*gUnknown_2039958)[0x400] = {0};
-EWRAM_DATA u16 (*gUnknown_203995C)[0x400] = {0};
-EWRAM_DATA u16 (*gUnknown_2039960)[0x400] = {0};
-/*
-EWRAM_DATA struct ShopTilemapBuffers *gUnknown_2039954 = 0;    //gShopTilemapBuffers
-EWRAM_DATA struct ShopTilemapBuffers *gUnknown_2039958 = 0;
-EWRAM_DATA struct ShopTilemapBuffers *gUnknown_203995C = 0;
-EWRAM_DATA struct ShopTilemapBuffers *gUnknown_2039960 = 0;
-*/
-EWRAM_DATA struct ListMenuItem *gUnknown_2039964 = {0};
-EWRAM_DATA u8 (*gUnknown_2039968)[13] = {0};    //item strings
-
-EWRAM_DATA s16 gUnknown_20398B4[MAP_OBJECTS_COUNT][4] = {0};    //sViewportMapObjects
-EWRAM_DATA struct MartHistory gUnknown_203996C = {0};
+EWRAM_DATA u8 sShopMenuWindowId = 0;
+EWRAM_DATA u16 (*gShopTilemapBuffer1)[0x400] = {0};
+EWRAM_DATA u16 (*gShopTilemapBuffer2)[0x400] = {0};
+EWRAM_DATA u16 (*gShopTilemapBuffer3)[0x400] = {0};
+EWRAM_DATA u16 (*gShopTilemapBuffer4)[0x400] = {0};
+EWRAM_DATA struct ListMenuItem *sShopMenuListMenu = {0};
+EWRAM_DATA u8 (*sShopMenuItemStrings)[13] = {0};
+EWRAM_DATA struct MartHistory gShopMenuHistory = {0};
 
 //Function Declarations
-static u8 sub_809AAB0(u8 a0);
-static u8 sub_809AB7C(bool32 a0);
-static void sub_809ABD8(const u16 *items);
-static void sub_809AC04(MainCallback callback);
-static void sub_809AC10(u8 taskId);
-static void sub_809AC5C(u8 taskId);
-static void sub_809AC98(u8 taskId);
-static void sub_809ACD4(void);
-static void sub_809ACF8(u8 taskId);
-static void sub_809AD24(void);
-static void sub_809AD40(u8 taskId);
-static void sub_809AD74(void);
-static void sub_809AD8C(u8 taskId);
-static void sub_809ADC0(u8 taskId);    //ShowShopMenuAfterExitingBuyOrSellMenu
-static void sub_809ADE4(void);
-static void sub_809AE00(void);
-static void sub_809AE14(void);
-static bool8 sub_809AF6C(void);
-static void sub_809AFD0(void);    //BuyMenuInitBgs
-static void sub_809B080(void);
+static u8 CreateShopMenu(u8 a0);
+static u8 GetMartTypeFromItemList(bool32 a0);
+static void SetShopItemsForSale(const u16 *items);
+static void SetShopMenuCallback(MainCallback callback);
+static void Task_ShopMenu(u8 taskId);
+static void Task_HandleShopMenuBuy(u8 taskId);
+static void Task_HandleShopMenuSell(u8 taskId);
+static void CB2_GoToSellMenu(void);
+static void Task_HandleShopMenuQuit(u8 taskId);
+static void ClearShopMenuWindow(void);
+static void Task_GoToBuyOrSellMenu(u8 taskId);
+static void MapPostLoadHook_ReturnToShopMenu(void);
+static void Task_ReturnToShopMenu(u8 taskId);
+static void ShowShopMenuAfterExitingBuyOrSellMenu(u8 taskId);
+static void CB2_BuyMenu(void);
+static void VBlankCB_BuyMenu(void);
+static void CB2_InitBuyMenu(void);
+static bool8 InitShopData(void);
+static void BuyMenuInitBgs(void);
+static void BuyMenuDecompressBgGraphics(void);
 static void sub_809B10C(bool32 a0);
-static void sub_809B15C(void);    //BuyMenuDrawGraphics();
-static bool8 sub_809B188(void);    //BuyMenuBuildListMenuTemplate
-static void sub_809B300(struct ListMenuItem *list, u16 index, u8* dst);
-static void sub_809B320(s32 item, bool8 onInit, struct ListMenu *list);
-static void sub_809B408(u8 windowId, s32 itemId, u8 y);
-static void sub_809B494(s32 item);
-static void sub_809B57C(u8 listTaskId, u8 a1);
-static void sub_809B59C(u8 y, u8 a1);
-static void sub_809B604(void);
-static void sub_809B670(void);
-static void sub_809B690(void);
-static void sub_809B6FC(void);
-static void sub_809B73C(void);
+static void BuyMenuDrawGraphics(void);
+static bool8 BuyMenuBuildListMenuTemplate(void);
+static void PokeMartWriteNameAndIdAt(struct ListMenuItem *list, u16 index, u8* dst);
+static void BuyMenuPrintItemDescriptionAndShowItemIcon(s32 item, bool8 onInit, struct ListMenu *list);
+static void BuyMenuPrintPriceInList(u8 windowId, s32 itemId, u8 y);
+static void LoadTmHmNameInMart(s32 item);
+static void BuyMenuPrintCursor(u8 listTaskId, u8 a1);
+static void BuyMenuPrintCursorAtYPosition(u8 y, u8 a1);
+static void BuyMenuFreeMemory(void);
+static void SetShopExitCallback(void);
+static void BuyMenuAddScrollIndicatorArrows(void);
+static void BuyQuantityAddScrollIndicatorArrows(void);
+static void BuyMenuRemoveScrollIndicatorArrows(void);
 static void sub_809B764(void);
-static void sub_809B778(void);
-static void sub_809B850(s16 x, s16 y, const u16 *src, u8 metatileLayerType);
-static void sub_809B904(u16 *dest, s16 offset1, s16 offset2, const u16 *src);
-static void sub_809B92C(void);
-static void sub_809BA40(void);
-static void sub_809BAFC(void);
-static void sub_809BB44(u8 taskId);
-static void sub_809BBC0(u8 taskId);
-static void sub_809BCA0(u8 taskId);
-static void sub_809BD8C(u8 taskId);
-static void sub_809BE90(u8 taskId);
-static void sub_809BEA4(u8 taskId);
-static void sub_809BF0C(u8 taskId);
-static void sub_809BF68(u8 taskId);
-static void sub_809BF98(u8 taskId);
-static void sub_809C004(u8 taskId);
-static void sub_809C04C(u8 taskId);
+static void BuyMenuDrawMapBg(void);
+static void BuyMenuDrawMapMetatile(s16 x, s16 y, const u16 *src, u8 metatileLayerType);
+static void BuyMenuDrawMapMetatileLayer(u16 *dest, s16 offset1, s16 offset2, const u16 *src);
+static void BuyMenuCollectEventObjectData(void);
+static void BuyMenuDrawEventObjects(void);
+static void BuyMenuCopyTilemapData(void);
+static void BuyMenuPrintItemQuantityAndPrice(u8 taskId);
+static void Task_BuyMenu(u8 taskId);
+static void Task_BuyHowManyDialogueInit(u8 taskId);
+static void Task_BuyHowManyDialogueHandleInput(u8 taskId);
+static void CreateBuyMenuConfirmPurchaseWindow(u8 taskId);
+static void BuyMenuTryMakePurchase(u8 taskId);
+static void BuyMenuSubtractMoney(u8 taskId);
+static void Task_ReturnToItemListAfterItemPurchase(u8 taskId);
+static void BuyMenuReturnToItemList(u8 taskId);
+static void ExitBuyMenu(u8 taskId);
+static void Task_ExitBuyMenu(u8 taskId);
 static void nullsub_52(u8 taskId);
 static void nullsub_53(void);
-static void sub_809C138(void);
+static void RecordQuestLogItemPurchase(void);
 
 // external defines
 extern u8 MapGridGetMetatileLayerTypeAt(s16 x, s16 y);
@@ -189,15 +186,15 @@ extern const u32 gUnknown_8E86170[];    //gBuyMenuFrame_Pal
 
 static const struct MenuAction gUnknown_83DF09C[] =    // sShopMenuActions_BuySellQuit
 {
-    {gText_ShopBuy, {.void_u8 = sub_809AC5C}},
-    {gText_ShopSell, {.void_u8 = sub_809AC98}},
-    {gText_ShopQuit, {.void_u8 = sub_809ACF8}}
+    {gText_ShopBuy, {.void_u8 = Task_HandleShopMenuBuy}},
+    {gText_ShopSell, {.void_u8 = Task_HandleShopMenuSell}},
+    {gText_ShopQuit, {.void_u8 = Task_HandleShopMenuQuit}}
 };
 
 static const struct YesNoFuncTable gUnknown_83DF0B4[] =    //sShopMenuActions_BuyQuit
 {
-    sub_809BEA4,         //Task_HandleShopMenuBuy,
-    sub_809BF98            //Task_HandleShopMenuQuit
+    BuyMenuTryMakePurchase,         //Task_HandleShopMenuBuy,
+    BuyMenuReturnToItemList            //Task_HandleShopMenuQuit
 };
 
 static const struct WindowTemplate gUnknown_83DF0BC[] =     //sShopMenuWindowTemplates
@@ -255,26 +252,25 @@ static const struct BgTemplate gUnknown_83DF0C4[4] =     //sShopBuyMenuBgTemplat
 
 
 // Functions
-// CreateShopMenu
-static u8 sub_809AAB0(u8 a0)
+static u8 CreateShopMenu(u8 a0)
 {
-    gShopData.martType = sub_809AB7C(a0) & 0xF;
+    gShopData.martType = GetMartTypeFromItemList(a0) & 0xF;
     gShopData.selectedRow = 0;
     if (!(ContextNpcGetTextColor()))
         gShopData.unk16_4 = 4;
     else
         gShopData.unk16_4 = 5;
     
-    gUnknown_2039950 = AddWindow(gUnknown_83DF0BC);        //sShopMenuWindowTemplates
-    SetStdWindowBorderStyle(gUnknown_2039950, 0);
-    PrintTextArray(gUnknown_2039950, 2, GetMenuCursorDimensionByFont(2, 0), 2, 16, 3, gUnknown_83DF09C);
-    Menu_InitCursor(gUnknown_2039950, 2, 0, 2, 16, 3, 0);
-    PutWindowTilemap(gUnknown_2039950);
-    CopyWindowToVram(gUnknown_2039950, 1);
-    return CreateTask(sub_809AC10, 8);
+    sShopMenuWindowId = AddWindow(gUnknown_83DF0BC);        //sShopMenuWindowTemplates
+    SetStdWindowBorderStyle(sShopMenuWindowId, 0);
+    PrintTextArray(sShopMenuWindowId, 2, GetMenuCursorDimensionByFont(2, 0), 2, 16, 3, gUnknown_83DF09C);
+    Menu_InitCursor(sShopMenuWindowId, 2, 0, 2, 16, 3, 0);
+    PutWindowTilemap(sShopMenuWindowId);
+    CopyWindowToVram(sShopMenuWindowId, 1);
+    return CreateTask(Task_ShopMenu, 8);
 }
 
-static u8 sub_809AB7C(u32 a0)
+static u8 GetMartTypeFromItemList(u32 a0)
 {    
     u16 retVal, i;
     if (a0)
@@ -304,35 +300,27 @@ static u8 sub_809AB7C(u32 a0)
     return 0;
 }
 
-//SetShopItemsForSale
-static void sub_809ABD8(const u16 *items) //I really don't know what GameFreak was thinking here..
+static void SetShopItemsForSale(const u16 *items)
 {    
     struct ShopData *mart;
-    //u16 i;
 
     mart = &gShopData;
     mart->itemList = items;
     mart->itemCount = 0;
-
-    //i = 0;
     if (mart->itemList[0] == 0)
         return;
 
     do {
         ++gShopData.itemCount;
-        //i = gShopData.itemCount;
-    //} while (mart->itemList[i]);
     } while (mart->itemList[gShopData.itemCount]);
 }
 
-//SetShopMenuCallback
-static void sub_809AC04(MainCallback callback)
+static void SetShopMenuCallback(MainCallback callback)
 {
     gShopData.callback = callback;
 }
 
-//Task_ShopMenu
-static void sub_809AC10(u8 taskId)
+static void Task_ShopMenu(u8 taskId)
 {
     s8 input = Menu_ProcessInputNoWrapAround();
     
@@ -342,7 +330,7 @@ static void sub_809AC10(u8 taskId)
         break;
     case MENU_B_PRESSED:
         PlaySE(SE_SELECT);
-        sub_809ACF8(taskId);
+        Task_HandleShopMenuQuit(taskId);
         break;
     default:
         gUnknown_83DF09C[Menu_GetCursorPos()].func.void_u8(taskId);
@@ -350,47 +338,42 @@ static void sub_809AC10(u8 taskId)
     }
 }
 
-//Task_HandleShopMenuBuy
-static void sub_809AC5C(u8 taskId)
+static void Task_HandleShopMenuBuy(u8 taskId)
 {
-    SetWordTaskArg(taskId, 0xE, (u32)sub_809AE14);
+    SetWordTaskArg(taskId, 0xE, (u32)CB2_InitBuyMenu);
     fade_screen(1, 0);
-    gTasks[taskId].func = sub_809AD40;
+    gTasks[taskId].func = Task_GoToBuyOrSellMenu;
 }
 
-//Task_HandleShopMenuSell
-static void sub_809AC98(u8 taskId)
+static void Task_HandleShopMenuSell(u8 taskId)
 {
-    SetWordTaskArg(taskId, 0xE, (u32)sub_809ACD4);
+    SetWordTaskArg(taskId, 0xE, (u32)CB2_GoToSellMenu);
     fade_screen(1, 0);
-    gTasks[taskId].func = sub_809AD40;    
+    gTasks[taskId].func = Task_GoToBuyOrSellMenu;    
 }
 
-//CB2_GoToSellMenu
-static void sub_809ACD4(void)
+static void CB2_GoToSellMenu(void)
 {
     sub_8107DB4(2, POCKET_POKE_BALLS, CB2_ReturnToField);
-    gFieldCallback = sub_809AD74;
+    gFieldCallback = MapPostLoadHook_ReturnToShopMenu;
 }
 
-//Task_HandleShopMenuQuit
-static void sub_809ACF8(u8 taskId)
+static void Task_HandleShopMenuQuit(u8 taskId)
 {
-    sub_809AD24();
-    sub_809C138();
+    ClearShopMenuWindow();
+    RecordQuestLogItemPurchase();
     DestroyTask(taskId);
     if (gShopData.callback != 0)
         gShopData.callback();
 }
 
-static void sub_809AD24(void)
+static void ClearShopMenuWindow(void)
 {
-    ClearStdWindowAndFrameToTransparent(gUnknown_2039950, 2);
-    RemoveWindow(gUnknown_2039950);
+    ClearStdWindowAndFrameToTransparent(sShopMenuWindowId, 2);
+    RemoveWindow(sShopMenuWindowId);
 }
 
-//Task_GoToBuyOrSellMenu
-static void sub_809AD40(u8 taskId)
+static void Task_GoToBuyOrSellMenu(u8 taskId)
 {
     if (gPaletteFade.active)
         return;
@@ -399,30 +382,26 @@ static void sub_809AD40(u8 taskId)
     DestroyTask(taskId);
 }
 
-//MapPostLoadHook_ReturnToShopMenu
-static void sub_809AD74(void)
+static void MapPostLoadHook_ReturnToShopMenu(void)
 {
     sub_807DC00();
-    CreateTask(sub_809AD8C, 8);
+    CreateTask(Task_ReturnToShopMenu, 8);
 }
 
-//Task_ReturnToShopMenu
-static void sub_809AD8C(u8 taskId)
+static void Task_ReturnToShopMenu(u8 taskId)
 {
     if (field_weather_is_fade_finished() != TRUE)
         return;
-    DisplayItemMessageOnField(taskId, sub_809B56C(), gText_CanIHelpWithAnythingElse, sub_809ADC0);
+    DisplayItemMessageOnField(taskId, GetMartUnk16_4(), gText_CanIHelpWithAnythingElse, ShowShopMenuAfterExitingBuyOrSellMenu);
 }
 
-//ShowShopMenuAfterExitingBuyOrSellMenu
-static void sub_809ADC0(u8 taskId)
+static void ShowShopMenuAfterExitingBuyOrSellMenu(u8 taskId)
 {
-    sub_809AAB0(gShopData.martType);
+    CreateShopMenu(gShopData.martType);
     DestroyTask(taskId);
 }
 
-//CB2_BuyMenu
-static void sub_809ADE4(void)
+static void CB2_BuyMenu(void)
 {
     RunTasks();
     AnimateSprites();
@@ -431,16 +410,14 @@ static void sub_809ADE4(void)
     DoScheduledBgTilemapCopiesToVram();
 }
 
-//VBlankCB_BuyMenu
-static void sub_809AE00(void)
+static void VBlankCB_BuyMenu(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-//CB2_InitBuyMenu
-static void sub_809AE14(void)
+static void CB2_InitBuyMenu(void)
 {
     u8 taskId;
     switch (gMain.state)
@@ -456,15 +433,15 @@ static void sub_809AE14(void)
         ResetTasks();
         ClearScheduledBgCopiesToVram();
         ResetItemMenuIconState();
-        if ((!(sub_809AF6C())) || (!(sub_809B188())))
+        if ((!(InitShopData())) || (!(BuyMenuBuildListMenuTemplate())))
             return;
-        sub_809AFD0();
+        BuyMenuInitBgs();
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);
         FillBgTilemapBufferRect_Palette0(1, 0, 0, 0, 0x20, 0x20);
         FillBgTilemapBufferRect_Palette0(2, 0, 0, 0, 0x20, 0x20);
         FillBgTilemapBufferRect_Palette0(3, 0, 0, 0, 0x20, 0x20);
         BuyMenuInitWindows(gShopData.martType);
-        sub_809B080();
+        BuyMenuDecompressBgGraphics();
         gMain.state++;
         break;
     case 1:
@@ -475,49 +452,47 @@ static void sub_809AE14(void)
     default:
         gShopData.selectedRow = 0;
         gShopData.scrollOffset = 0;
-        sub_809B15C();    //BuyMenuDrawGraphics();
-        sub_809B690();    //BuyMenuAddScrollIndicatorArrows();
-        taskId = CreateTask(sub_809BBC0, 8);
+        BuyMenuDrawGraphics();
+        BuyMenuAddScrollIndicatorArrows();
+        taskId = CreateTask(Task_BuyMenu, 8);
         gTasks[taskId].tListTaskId = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
         BlendPalettes(0xFFFFFFFF, 0x10, RGB_BLACK);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
-        SetVBlankCallback(sub_809AE00);
-        SetMainCallback2(sub_809ADE4);
+        SetVBlankCallback(VBlankCB_BuyMenu);
+        SetMainCallback2(CB2_BuyMenu);
         break;
     }
 }
 
-//InitShopData
-static bool8 sub_809AF6C(void)
+static bool8 InitShopData(void)
 {
-    gUnknown_2039954 = Alloc(sizeof(*gUnknown_2039954));
-    if (gUnknown_2039954 == 0)
+    gShopTilemapBuffer1 = Alloc(sizeof(*gShopTilemapBuffer1));
+    if (gShopTilemapBuffer1 == 0)
         goto CANCEL;
-    gUnknown_2039958 = Alloc(sizeof(*gUnknown_2039958));
-    if (gUnknown_2039958 == 0)
+    gShopTilemapBuffer2 = Alloc(sizeof(*gShopTilemapBuffer2));
+    if (gShopTilemapBuffer2 == 0)
         goto CANCEL;
-    gUnknown_203995C = Alloc(sizeof(*gUnknown_203995C));
-    if (gUnknown_203995C == 0)
+    gShopTilemapBuffer3 = Alloc(sizeof(*gShopTilemapBuffer3));
+    if (gShopTilemapBuffer3 == 0)
         goto CANCEL;
-    gUnknown_2039960 = Alloc(sizeof(*gUnknown_2039960));
-    if (gUnknown_2039960 == 0)
+    gShopTilemapBuffer4 = Alloc(sizeof(*gShopTilemapBuffer4));
+    if (gShopTilemapBuffer4 == 0)
         goto CANCEL;
     return TRUE;
     
     CANCEL:
-    sub_809B604();
-    sub_809B670();
+    BuyMenuFreeMemory();
+    SetShopExitCallback();
     return FALSE;
 }
 
-//BuyMenuInitBgs
-static void sub_809AFD0(void)
+static void BuyMenuInitBgs(void)
 {
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, gUnknown_83DF0C4, NELEMS(gUnknown_83DF0C4));
-    SetBgTilemapBuffer(1, gUnknown_2039958);
-    SetBgTilemapBuffer(2, gUnknown_2039960);
-    SetBgTilemapBuffer(3, gUnknown_203995C);
+    SetBgTilemapBuffer(1, gShopTilemapBuffer2);
+    SetBgTilemapBuffer(2, gShopTilemapBuffer4);
+    SetBgTilemapBuffer(3, gShopTilemapBuffer3);
     SetGpuReg(0x10, 0);
     SetGpuReg(0x12, 0);
     SetGpuReg(0x14, 0);
@@ -531,18 +506,17 @@ static void sub_809AFD0(void)
     ShowBg(0);
     ShowBg(1);
     ShowBg(2);
-	ShowBg(3);
+    ShowBg(3);
 }
 
-//BuyMenuDecompressBgGraphics
-static void sub_809B080(void)
+static void BuyMenuDecompressBgGraphics(void)
 {
     void* pal;
     DecompressAndCopyTileDataToVram(1, gUnknown_8E85DC8, 0x480, 0x3DC, 0);
     if ((gShopData.martType) != MART_TYPE_TMHM)
-        LZDecompressWram(gUnknown_8E85EFC, gUnknown_2039954);    //gBuyMenuFrame_Tilemap
+        LZDecompressWram(gUnknown_8E85EFC, gShopTilemapBuffer1);    //gBuyMenuFrame_Tilemap
     else
-        LZDecompressWram(gUnknown_8E86038, gUnknown_2039954);    //gBuyMenuFrame_TmHmTilemap
+        LZDecompressWram(gUnknown_8E86038, gShopTilemapBuffer1);    //gBuyMenuFrame_TmHmTilemap
     pal = Alloc(0x40);
     LZDecompressWram(gUnknown_8E86170, pal);
     LoadPalette(pal, 0xB0, 0x20);
@@ -564,11 +538,10 @@ static void sub_809B10C(bool32 a0)
     ScheduleBgCopyTilemapToVram(1);
 }
 
-//BuyMenuDrawGraphics
-static void sub_809B15C(void)
+static void BuyMenuDrawGraphics(void)
 {
     sub_809B764();
-    sub_809BAFC();
+    BuyMenuCopyTilemapData();
     BuyMenuDrawMoneyBox();
     ScheduleBgCopyTilemapToVram(0);
     ScheduleBgCopyTilemapToVram(1);
@@ -576,23 +549,22 @@ static void sub_809B15C(void)
     ScheduleBgCopyTilemapToVram(3);
 }
 
-//BuyMenuBuildListMenuTemplate
-static bool8 sub_809B188(void)
+static bool8 BuyMenuBuildListMenuTemplate(void)
 {
     u16 i;
     u16 v;
-    struct ListMenuItem **list = &gUnknown_2039964;
+    struct ListMenuItem **list = &sShopMenuListMenu;
     struct ShopData *mart = &gShopData;
-    *list = Alloc((gShopData.itemCount + 1) * sizeof(*gUnknown_2039964));
-    if (gUnknown_2039964 == 0)
+    *list = Alloc((gShopData.itemCount + 1) * sizeof(*sShopMenuListMenu));
+    if (sShopMenuListMenu == 0)
         goto FREE_MEMORY;
     
-    gUnknown_2039968 = Alloc((gShopData.itemCount + 1) * sizeof(*gUnknown_2039968));
-    if (gUnknown_2039968 == 0)
+    sShopMenuItemStrings = Alloc((gShopData.itemCount + 1) * sizeof(*sShopMenuItemStrings));
+    if (sShopMenuItemStrings == 0)
     {
         FREE_MEMORY:
-        sub_809B604();
-        sub_809B670();
+        BuyMenuFreeMemory();
+        SetShopExitCallback();
         return FALSE;
     }
     
@@ -602,14 +574,14 @@ static bool8 sub_809B188(void)
     
     for (i = 0; i < mart->itemCount; i++)
     {
-        sub_809B300(&gUnknown_2039964[i], mart->itemList[i], gUnknown_2039968[i]);    //PokeMartWriteNameAndIdAt(u16 a0, u16 a1, u8* a2)
+        PokeMartWriteNameAndIdAt(&sShopMenuListMenu[i], mart->itemList[i], sShopMenuItemStrings[i]);    //PokeMartWriteNameAndIdAt(u16 a0, u16 a1, u8* a2)
     }
     
     ADD_CANCEL:
-    StringCopy(gUnknown_2039968[i], gFameCheckerText_Cancel);
-    gUnknown_2039964[i].label = gUnknown_2039968[i];    
-    gUnknown_2039964[i].index = -2;
-    gMultiuseListMenuTemplate.items = gUnknown_2039964;
+    StringCopy(sShopMenuItemStrings[i], gFameCheckerText_Cancel);
+    sShopMenuListMenu[i].label = sShopMenuItemStrings[i];    
+    sShopMenuListMenu[i].index = -2;
+    gMultiuseListMenuTemplate.items = sShopMenuListMenu;
     gMultiuseListMenuTemplate.totalItems = gShopData.itemCount + 1;
     gMultiuseListMenuTemplate.windowId = 4;
     gMultiuseListMenuTemplate.header_X = 0;
@@ -622,8 +594,8 @@ static bool8 sub_809B188(void)
     gMultiuseListMenuTemplate.fillValue = 0;
     gMultiuseListMenuTemplate.cursorPal = GetFontAttribute(2, 5);
     gMultiuseListMenuTemplate.cursorShadowPal = GetFontAttribute(2, 7);
-    gMultiuseListMenuTemplate.moveCursorFunc = sub_809B320;
-    gMultiuseListMenuTemplate.itemPrintFunc = sub_809B408;
+    gMultiuseListMenuTemplate.moveCursorFunc = BuyMenuPrintItemDescriptionAndShowItemIcon;
+    gMultiuseListMenuTemplate.itemPrintFunc = BuyMenuPrintPriceInList;
     gMultiuseListMenuTemplate.scrollMultiple = 0;
     gMultiuseListMenuTemplate.cursorKind = 0;
     
@@ -641,16 +613,14 @@ static bool8 sub_809B188(void)
     return TRUE;
 }
 
-//PokeMartWriteNameAndIdAt
-static void sub_809B300(struct ListMenuItem *list, u16 index, u8* dst)
+static void PokeMartWriteNameAndIdAt(struct ListMenuItem *list, u16 index, u8* dst)
 {
     CopyItemName(index, dst);
     list->label = dst;
     list->index = index;
 }
 
-//BuyMenuPrintItemDescriptionAndShowItemIcon
-static void sub_809B320(s32 item, bool8 onInit, struct ListMenu *list)
+static void BuyMenuPrintItemDescriptionAndShowItemIcon(s32 item, bool8 onInit, struct ListMenu *list)
 {
     const u8 *description;
     
@@ -676,14 +646,13 @@ static void sub_809B320(s32 item, bool8 onInit, struct ListMenu *list)
     else //TM Mart
     {
         FillWindowPixelBuffer(6, PIXEL_FILL(0));
-        sub_809B494(item);
+        LoadTmHmNameInMart(item);
         BuyMenuPrint(5, 2, description, 2, 3, 1, 0, 0, 0);
     }
 }
 
-//BuyMenuPrintPriceInList
-#ifdef NONMATCHING    //this function was written very strangely..
-static void sub_809B408(u8 windowId, s32 item, u8 y)
+#ifdef NONMATCHING
+static void BuyMenuPrintPriceInList(u8 windowId, s32 item, u8 y)
 {
     u32 len, x;
     u8 *loc;
@@ -709,7 +678,7 @@ static void sub_809B408(u8 windowId, s32 item, u8 y)
 }
 #else
 NAKED
-static void sub_809B408(u8 windowId, s32 item, u8 y)
+static void BuyMenuPrintPriceInList(u8 windowId, s32 item, u8 y)
 {
     asm_unified("\tpush {r4-r6,lr}\n"
                 "\tsub sp, 0x14\n"
@@ -779,13 +748,7 @@ static void sub_809B408(u8 windowId, s32 item, u8 y)
 }
 #endif
 
-
-/*===================================
-MATCHED/TESTED UP UNTIL HERE
-===================================*/
-
-//LoadTmHmNameInMart
-static void sub_809B494(s32 item)
+static void LoadTmHmNameInMart(s32 item)
 {
     if (item != INDEX_CANCEL)
     {
@@ -803,19 +766,17 @@ static void sub_809B494(s32 item)
     }
 }
 
-//GetMartUnk16_4
-u8 sub_809B56C(void)
+u8 GetMartUnk16_4(void)
 {
     return gShopData.unk16_4;
 }
 
-//BuyMenuPrintCursor
-static void sub_809B57C(u8 listTaskId, u8 a1)
+static void BuyMenuPrintCursor(u8 listTaskId, u8 a1)
 {
-    sub_809B59C(ListMenuGetYCoordForPrintingArrowCursor(listTaskId), a1);
+    BuyMenuPrintCursorAtYPosition(ListMenuGetYCoordForPrintingArrowCursor(listTaskId), a1);
 }
 
-static void sub_809B59C(u8 y, u8 a1)
+static void BuyMenuPrintCursorAtYPosition(u8 y, u8 a1)
 {
     if (a1 == 0xFF)
     {
@@ -828,40 +789,37 @@ static void sub_809B59C(u8 y, u8 a1)
     }
 }
 
-//BuyMenuFreeMemory
-static void sub_809B604(void)
+static void BuyMenuFreeMemory(void)
 {
-    if (gUnknown_2039954 != 0)
-        Free(gUnknown_2039954);
+    if (gShopTilemapBuffer1 != 0)
+        Free(gShopTilemapBuffer1);
     
-    if (gUnknown_2039958 != 0)
-        Free(gUnknown_2039958);
+    if (gShopTilemapBuffer2 != 0)
+        Free(gShopTilemapBuffer2);
     
-    if (gUnknown_203995C != 0)
-        Free(gUnknown_203995C);
+    if (gShopTilemapBuffer3 != 0)
+        Free(gShopTilemapBuffer3);
     
-    if (gUnknown_2039960 != 0)
-        Free(gUnknown_2039960);
+    if (gShopTilemapBuffer4 != 0)
+        Free(gShopTilemapBuffer4);
     
-    if (gUnknown_2039964 != 0)
-        Free(gUnknown_2039964);
+    if (sShopMenuListMenu != 0)
+        Free(sShopMenuListMenu);
     
-    if (gUnknown_2039968 != 0)
-        Free(gUnknown_2039968);
+    if (sShopMenuItemStrings != 0)
+        Free(sShopMenuItemStrings);
     
     FreeAllWindowBuffers();        
 }
 
-//SetShopExitCallback
-static void sub_809B670(void)
+static void SetShopExitCallback(void)
 {
-    gFieldCallback = sub_809AD74;
+    gFieldCallback = MapPostLoadHook_ReturnToShopMenu;
     SetMainCallback2(CB2_ReturnToField);
 }
 
 
-//BuyMenuAddScrollIndicatorArrows
-static void sub_809B690(void)
+static void BuyMenuAddScrollIndicatorArrows(void)
 {
     if (gShopData.martType != MART_TYPE_TMHM)
     {
@@ -875,15 +833,13 @@ static void sub_809B690(void)
     }
 }
 
-//BuyQuantityAddScrollIndicatorArrows
-static void sub_809B6FC(void)
+static void BuyQuantityAddScrollIndicatorArrows(void)
 {
     gShopData.unk18 = 1;
     gShopData.unk16_11 = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 0x98, 0x48, 0x68, 2, 0x6E, 0x6E, &gShopData.unk18);
 }
 
-//BuyMenuRemoveScrollIndicatorArrows
-static void sub_809B73C(void)
+static void BuyMenuRemoveScrollIndicatorArrows(void)
 {
     if ((gShopData.unk16_11) == 0x1F)
         return;
@@ -894,13 +850,12 @@ static void sub_809B73C(void)
 
 static void sub_809B764(void)
 {
-    sub_809B92C();
-    sub_809BA40();
-    sub_809B778();
+    BuyMenuCollectEventObjectData();
+    BuyMenuDrawEventObjects();
+    BuyMenuDrawMapBg();
 }
 
-//BuyMenuDrawMapBg
-static void sub_809B778(void)
+static void BuyMenuDrawMapBg(void)
 {    
     s16 i;
     s16 j;
@@ -924,18 +879,17 @@ static void sub_809B778(void)
 
             if (metatile < NUM_METATILES_IN_PRIMARY)
             {
-                sub_809B850(i, j, (u16*)mapData->primaryTileset->metatiles + metatile * 8, metatileLayerType);
+                BuyMenuDrawMapMetatile(i, j, (u16*)mapData->primaryTileset->metatiles + metatile * 8, metatileLayerType);
             }
             else
             {
-                sub_809B850(i, j, (u16*)mapData->secondaryTileset->metatiles + ((metatile - NUM_METATILES_IN_PRIMARY) * 8), metatileLayerType);
+                BuyMenuDrawMapMetatile(i, j, (u16*)mapData->secondaryTileset->metatiles + ((metatile - NUM_METATILES_IN_PRIMARY) * 8), metatileLayerType);
             }
         }
     }
 }
 
-//BuyMenuDrawMapMetatile
-static void sub_809B850(s16 x, s16 y, const u16 *src, u8 metatileLayerType)
+static void BuyMenuDrawMapMetatile(s16 x, s16 y, const u16 *src, u8 metatileLayerType)
 {
     u16 offset1 = x * 2;
     u16 offset2 = ((y << 0x16) + 0x400000) >> 0x10;
@@ -943,22 +897,21 @@ static void sub_809B850(s16 x, s16 y, const u16 *src, u8 metatileLayerType)
     switch (metatileLayerType)
     {
     case 0:
-        sub_809B904(*gUnknown_2039960, offset1, offset2, src);
-        sub_809B904(*gUnknown_2039958, offset1, offset2, src + 4);
+        BuyMenuDrawMapMetatileLayer(*gShopTilemapBuffer4, offset1, offset2, src);
+        BuyMenuDrawMapMetatileLayer(*gShopTilemapBuffer2, offset1, offset2, src + 4);
         break;
     case 1:
-        sub_809B904(*gUnknown_203995C, offset1, offset2, src);
-        sub_809B904(*gUnknown_2039960, offset1, offset2, src + 4);
+        BuyMenuDrawMapMetatileLayer(*gShopTilemapBuffer3, offset1, offset2, src);
+        BuyMenuDrawMapMetatileLayer(*gShopTilemapBuffer4, offset1, offset2, src + 4);
         break;
     case 2:
-        sub_809B904(*gUnknown_203995C, offset1, offset2, src);
-        sub_809B904(*gUnknown_2039958, offset1, offset2, src + 4);
+        BuyMenuDrawMapMetatileLayer(*gShopTilemapBuffer3, offset1, offset2, src);
+        BuyMenuDrawMapMetatileLayer(*gShopTilemapBuffer2, offset1, offset2, src + 4);
         break;
     }
 }
 
-//BuyMenuDrawMapMetatileLayer
-static void sub_809B904(u16 *dest, s16 offset1, s16 offset2, const u16 *src)
+static void BuyMenuDrawMapMetatileLayer(u16 *dest, s16 offset1, s16 offset2, const u16 *src)
 {
     // This function draws a whole 2x2 metatile.
     dest[offset1 + offset2] = src[0]; // top left
@@ -967,9 +920,7 @@ static void sub_809B904(u16 *dest, s16 offset1, s16 offset2, const u16 *src)
     dest[offset1 + offset2 + 33] = src[3]; // bottom right
 }
 
-
-// BuyMenuCollectEventObjectData
-static void sub_809B92C(void)
+static void BuyMenuCollectEventObjectData(void)
 {
     s16 facingX;
     s16 facingY;
@@ -982,7 +933,7 @@ static void sub_809B92C(void)
     z = PlayerGetZCoord();
     
     for (y = 0; y < MAP_OBJECTS_COUNT; y++)
-        gUnknown_20398B4[y][EVENT_OBJ_ID] = MAP_OBJECTS_COUNT;
+        sViewportMapObjects[y][EVENT_OBJ_ID] = MAP_OBJECTS_COUNT;
     
     for (y = 0; y < 5; y++)
     {
@@ -991,24 +942,24 @@ static void sub_809B92C(void)
             u8 eventObjId = GetFieldObjectIdByXYZ(facingX - 3 + x, facingY - 2 + y, z);
             if (eventObjId != MAP_OBJECTS_COUNT)
             {
-                gUnknown_20398B4[num][EVENT_OBJ_ID] = eventObjId;
-                gUnknown_20398B4[num][X_COORD] = x;
-                gUnknown_20398B4[num][Y_COORD] = y;
+                sViewportMapObjects[num][EVENT_OBJ_ID] = eventObjId;
+                sViewportMapObjects[num][X_COORD] = x;
+                sViewportMapObjects[num][Y_COORD] = y;
 
                 switch (gMapObjects[eventObjId].facingDirection)
                 {
                     case DIR_SOUTH:
-                        gUnknown_20398B4[num][ANIM_NUM] = 0;
+                        sViewportMapObjects[num][ANIM_NUM] = 0;
                         break;
                     case DIR_NORTH:
-                        gUnknown_20398B4[num][ANIM_NUM] = 1;
+                        sViewportMapObjects[num][ANIM_NUM] = 1;
                         break;
                     case DIR_WEST:
-                        gUnknown_20398B4[num][ANIM_NUM] = 2;
+                        sViewportMapObjects[num][ANIM_NUM] = 2;
                         break;
                     case DIR_EAST:
                     default:
-                        gUnknown_20398B4[num][ANIM_NUM] = 3;
+                        sViewportMapObjects[num][ANIM_NUM] = 3;
                         break;
                 }
                 num++;
@@ -1017,8 +968,7 @@ static void sub_809B92C(void)
     }
 }
 
-//BuyMenuDrawEventObjects
-static void sub_809BA40(void)
+static void BuyMenuDrawEventObjects(void)
 {
     u8 i;
     u8 spriteId;
@@ -1026,26 +976,26 @@ static void sub_809BA40(void)
 
     for (i = 0; i < MAP_OBJECTS_COUNT; i++)
     {
-        if (gUnknown_20398B4[i][EVENT_OBJ_ID] == MAP_OBJECTS_COUNT)
+        if (sViewportMapObjects[i][EVENT_OBJ_ID] == MAP_OBJECTS_COUNT)
             continue;
 
-        graphicsInfo = GetFieldObjectGraphicsInfo(gMapObjects[gUnknown_20398B4[i][EVENT_OBJ_ID]].graphicsId);        
+        graphicsInfo = GetFieldObjectGraphicsInfo(gMapObjects[sViewportMapObjects[i][EVENT_OBJ_ID]].graphicsId);        
         spriteId = AddPseudoEventObject(
-            gMapObjects[gUnknown_20398B4[i][EVENT_OBJ_ID]].graphicsId,
+            gMapObjects[sViewportMapObjects[i][EVENT_OBJ_ID]].graphicsId,
             SpriteCallbackDummy,
-            (((u16)gUnknown_20398B4[i][X_COORD] << 0x14) + 0xFFF80000) >> 0x10,
-            (u16)gUnknown_20398B4[i][Y_COORD] * 16 + 48 - graphicsInfo->height / 2,
+            (((u16)sViewportMapObjects[i][X_COORD] << 0x14) + 0xFFF80000) >> 0x10,
+            (u16)sViewportMapObjects[i][Y_COORD] * 16 + 48 - graphicsInfo->height / 2,
             2);
-        StartSpriteAnim(&gSprites[spriteId], gUnknown_20398B4[i][ANIM_NUM]);
+        StartSpriteAnim(&gSprites[spriteId], sViewportMapObjects[i][ANIM_NUM]);
     }
 }
 
-static void sub_809BAFC(void)
+static void BuyMenuCopyTilemapData(void)
 {
     s16 i;
 
-    u16 *dst = *gUnknown_2039958;
-    u16 *src = *gUnknown_2039954;
+    u16 *dst = *gShopTilemapBuffer2;
+    u16 *src = *gShopTilemapBuffer1;
 
     for (i = 0; i < 0x400; i++)
     {
@@ -1055,8 +1005,7 @@ static void sub_809BAFC(void)
     }
 }
 
-//BuyMenuPrintItemQuantityAndPrice
-static void sub_809BB44(u8 taskId)
+static void BuyMenuPrintItemQuantityAndPrice(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     
@@ -1067,8 +1016,7 @@ static void sub_809BB44(u8 taskId)
     BuyMenuPrint(3, 0, gStringVar4, 2, 0xA, 0, 0, 0, 1);
 }
 
-//Task_BuyMenu
-static void sub_809BBC0(u8 taskId)
+static void Task_BuyMenu(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -1082,31 +1030,30 @@ static void sub_809BBC0(u8 taskId)
             break;
         case LIST_CANCEL:
             PlaySE(SE_SELECT);
-            sub_809C004(taskId);
+            ExitBuyMenu(taskId);
             break;
         default:
             PlaySE(SE_SELECT);
             tItemId = itemId;
             ClearWindowTilemap(5);
-            sub_809B73C();
-            sub_809B57C(tListTaskId, 2);
+            BuyMenuRemoveScrollIndicatorArrows();
+            BuyMenuPrintCursor(tListTaskId, 2);
             sub_809B10C(1);
             gShopData.itemPrice = itemid_get_market_price(itemId);
             if (!IsEnoughMoney(&gSaveBlock1Ptr->money, gShopData.itemPrice))
             {
-                BuyMenuDisplayMessage(taskId, gText_YouDontHaveMoney, sub_809BF98);
+                BuyMenuDisplayMessage(taskId, gText_YouDontHaveMoney, BuyMenuReturnToItemList);
             }
             else
             {
                 CopyItemName(itemId, gStringVar1);
-                BuyMenuDisplayMessage(taskId, gText_Var1CertainlyHowMany, sub_809BCA0);
+                BuyMenuDisplayMessage(taskId, gText_Var1CertainlyHowMany, Task_BuyHowManyDialogueInit);
             }
         }
     }
 }
 
-//Task_BuyHowManyDialogueInit
-static void sub_809BCA0(u8 taskId)
+static void Task_BuyHowManyDialogueInit(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -1119,7 +1066,7 @@ static void sub_809BCA0(u8 taskId)
     BuyMenuPrint(1, 2, gStringVar4, 0, 2, 0, 0, 0, 1);
     tItemCount = 1;
     BuyMenuQuantityBoxNormalBorder(3, 0);
-    sub_809BB44(taskId);
+    BuyMenuPrintItemQuantityAndPrice(taskId);
     ScheduleBgCopyTilemapToVram(0);
     maxQuantity = GetMoney(&gSaveBlock1Ptr->money) / itemid_get_market_price(tItemId);
     if (maxQuantity > 99)
@@ -1128,28 +1075,26 @@ static void sub_809BCA0(u8 taskId)
         gShopData.maxQuantity = (u8)maxQuantity;
     
     if (maxQuantity != 1)
-        sub_809B6FC();
+        BuyQuantityAddScrollIndicatorArrows();
     
-    gTasks[taskId].func = sub_809BD8C;    
+    gTasks[taskId].func = Task_BuyHowManyDialogueHandleInput;    
 }
 
-//Task_BuyHowManyDialogueHandleInput
-static void sub_809BD8C(u8 taskId)
+static void Task_BuyHowManyDialogueHandleInput(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-
 
     if (AdjustQuantityAccordingToDPadInput(&tItemCount, gShopData.maxQuantity) == TRUE)
     {
         gShopData.itemPrice = itemid_get_market_price(tItemId) * tItemCount;
-        sub_809BB44(taskId);
+        BuyMenuPrintItemQuantityAndPrice(taskId);
     }
     else
     {
         if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
-            sub_809B73C();
+            BuyMenuRemoveScrollIndicatorArrows();
             ClearStdWindowAndFrameToTransparent(3, 0);
             ClearStdWindowAndFrameToTransparent(1, 0);
             ClearWindowTilemap(3);
@@ -1158,72 +1103,67 @@ static void sub_809BD8C(u8 taskId)
             CopyItemName(tItemId, gStringVar1);
             ConvertIntToDecimalStringN(gStringVar2, tItemCount, STR_CONV_MODE_LEFT_ALIGN, 2);
             ConvertIntToDecimalStringN(gStringVar3, gShopData.itemPrice, STR_CONV_MODE_LEFT_ALIGN, 8);
-            BuyMenuDisplayMessage(taskId, gText_Var1AndYouWantedVar2, sub_809BE90);
+            BuyMenuDisplayMessage(taskId, gText_Var1AndYouWantedVar2, CreateBuyMenuConfirmPurchaseWindow);
         }
         else if (JOY_NEW(B_BUTTON))
         {            
             PlaySE(SE_SELECT);
-            sub_809B73C();
+            BuyMenuRemoveScrollIndicatorArrows();
             ClearStdWindowAndFrameToTransparent(3, 0);
             ClearStdWindowAndFrameToTransparent(1, 0);
             ClearWindowTilemap(3);
             ClearWindowTilemap(1);
-            sub_809BF98(taskId);
+            BuyMenuReturnToItemList(taskId);
         }
     }
 }
 
-//CreateBuyMenuConfirmPurchaseWindow
-static void sub_809BE90(u8 taskId)
+static void CreateBuyMenuConfirmPurchaseWindow(u8 taskId)
 {
-    BuyMenuConfirmPurchase(taskId, gUnknown_83DF0B4);    //sShopBuyMenuYesNoWindowTemplates
+    BuyMenuConfirmPurchase(taskId, gUnknown_83DF0B4);
 }
 
-//BuyMenuTryMakePurchase
-static void sub_809BEA4(u8 taskId)
+static void BuyMenuTryMakePurchase(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
     PutWindowTilemap(4);
     if (AddBagItem(tItemId, tItemCount) == TRUE)
     {
-        BuyMenuDisplayMessage(taskId, gText_HereYouGoThankYou, sub_809BF0C);
+        BuyMenuDisplayMessage(taskId, gText_HereYouGoThankYou, BuyMenuSubtractMoney);
         nullsub_52(taskId);
-        sub_809C09C(tItemId, tItemCount, 1);
+        RecordItemPurchase(tItemId, tItemCount, 1);
     }
     else
     {
-        BuyMenuDisplayMessage(taskId, gText_NoMoreRoomForThis, sub_809BF98);
+        BuyMenuDisplayMessage(taskId, gText_NoMoreRoomForThis, BuyMenuReturnToItemList);
     }
 }
 
-//BuyMenuSubtractMoney
-static void sub_809BF0C(u8 taskId)
+static void BuyMenuSubtractMoney(u8 taskId)
 {
     IncrementGameStat(GAME_STAT_SHOPPED);
     RemoveMoney(&gSaveBlock1Ptr->money, gShopData.itemPrice);
     PlaySE(SE_SHOP);
     PrintMoneyAmountInMoneyBox(0, GetMoney(&gSaveBlock1Ptr->money), 0);
-    gTasks[taskId].func = sub_809BF68;
+    gTasks[taskId].func = Task_ReturnToItemListAfterItemPurchase;
 }
 
-//Task_ReturnToItemListAfterItemPurchase
-static void sub_809BF68(u8 taskId)
+static void Task_ReturnToItemListAfterItemPurchase(u8 taskId)
 {
     if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
-        sub_809BF98(taskId);
+        BuyMenuReturnToItemList(taskId);
     }
 }
 
-//BuyMenuReturnToItemList
-static void sub_809BF98(u8 taskId)
+static void BuyMenuReturnToItemList(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
     ClearDialogWindowAndFrameToTransparent(2, 0);
-    sub_809B57C(tListTaskId, 1);
+    BuyMenuPrintCursor(tListTaskId, 1);
     sub_809B10C(0);
     PutWindowTilemap(4);
     PutWindowTilemap(5);
@@ -1231,27 +1171,25 @@ static void sub_809BF98(u8 taskId)
         PutWindowTilemap(6);
     
     ScheduleBgCopyTilemapToVram(0);
-    sub_809B690();
-    gTasks[taskId].func = sub_809BBC0;
+    BuyMenuAddScrollIndicatorArrows();
+    gTasks[taskId].func = Task_BuyMenu;
 }
 
-//ExitBuyMenu
-static void sub_809C004(u8 taskId)
+static void ExitBuyMenu(u8 taskId)
 {
-    gFieldCallback = sub_809AD74;
+    gFieldCallback = MapPostLoadHook_ReturnToShopMenu;
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-    gTasks[taskId].func = sub_809C04C;
+    gTasks[taskId].func = Task_ExitBuyMenu;
 }
 
-//Task_ExitBuyMenu
-static void sub_809C04C(u8 taskId)
+static void Task_ExitBuyMenu(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     
     if (!gPaletteFade.active)
     {
         DestroyListMenuTask(tListTaskId, 0, 0);
-        sub_809B604();
+        BuyMenuFreeMemory();
         SetMainCallback2(CB2_ReturnToField);
         DestroyTask(taskId);
     }
@@ -1266,52 +1204,54 @@ static void nullsub_53(void)
 }
 
 #ifdef NONMATCHING
-void sub_809C09C(u16 item, u16 quantity, u8 a2)
+void RecordItemPurchase(u16 item, u16 quantity, u8 a2)
 {
     struct MartHistory *tmp;
     
-    if (gUnknown_203996C.unkA == a2)
+    if (gShopMenuHistory.unkA == a2)
     {
-        tmp = &gUnknown_203996C;
+        tmp = &gShopMenuHistory;
     }
     else
     {
-        if (gUnknown_203996C.unk16 == a2)
+        if (gShopMenuHistory.unk16 == a2)
         {
-            tmp = &gUnknown_203996C + 12;
+            tmp = &gShopMenuHistory + 12;
         }
         else
         {
-            tmp = &gUnknown_203996C + 12;
-            if (gUnknown_203996C.unkA == 0)
+            tmp = &gShopMenuHistory + 12;
+            if (gShopMenuHistory.unkA == 0)
             {
-                tmp = &gUnknown_203996C;
-                gUnknown_203996C.unkA = a2;
+                tmp = &gShopMenuHistory;
+                gShopMenuHistory.unkA = a2;
             }
         }
     }
+    
     if (tmp->unk4 != 0)
     {
-        gUnknown_203996C.unk9 = 1;
+        gShopMenuHistory.unk9 = 1;
     }
     
-    gUnknown_203996C.unk4 = item;
-    if (gUnknown_203996C.unk6 <= 998)
+    gShopMenuHistory.unk4 = item;
+    if (gShopMenuHistory.unk6 <= 998)
     {
-        gUnknown_203996C.unk6 += item;
+        gShopMenuHistory.unk6 += item;
         if (item > 999)
-            gUnknown_203996C.unk6 = 999;
+            gShopMenuHistory.unk6 = 999;
     }
-    if (gUnknown_203996C.unk0 < 999998)
+    
+    if (gShopMenuHistory.unk0 < 999998)
     {
-        gUnknown_203996C.unk0 += ((s16)itemid_get_market_price(item) >> (quantity-1))*quantity;
-        if (gUnknown_203996C.unk0 > 999999)
-            gUnknown_203996C.unk0 = 999999;
+        gShopMenuHistory.unk0 += ((s16)itemid_get_market_price(item) >> (quantity-1))*quantity;
+        if (gShopMenuHistory.unk0 > 999999)
+            gShopMenuHistory.unk0 = 999999;
     }    
 }
 #else
 NAKED
-void sub_809C09C(u16 item, u16 quantity, u8 a2)
+void RecordItemPurchase(u16 item, u16 quantity, u8 a2)
 {
     asm_unified("\tpush {r4-r6,lr}\n"
                 "\tlsls r0, 16\n"
@@ -1320,14 +1260,14 @@ void sub_809C09C(u16 item, u16 quantity, u8 a2)
                 "\tlsrs r6, r1, 16\n"
                 "\tlsls r2, 24\n"
                 "\tlsrs r5, r2, 24\n"
-                "\tldr r1, _0809C0B8 @ =gUnknown_203996C\n"
+                "\tldr r1, _0809C0B8 @ =gShopMenuHistory\n"
                 "\tldrb r2, [r1, 0xA]\n"
                 "\tcmp r2, r5\n"
                 "\tbne _0809C0BC\n"
                 "\tadds r4, r1, 0\n"
                 "\tb _0809C0D4\n"
                 "\t.align 2, 0\n"
-                "_0809C0B8: .4byte gUnknown_203996C\n"
+                "_0809C0B8: .4byte gShopMenuHistory\n"
                 "_0809C0BC:\n"
                 "\tldrb r0, [r1, 0x16]\n"
                 "\tcmp r0, r5\n"
@@ -1395,10 +1335,9 @@ void sub_809C09C(u16 item, u16 quantity, u8 a2)
 }
 #endif
 
-//RecordQuestLogItemPurchase
-static void sub_809C138(void)
+static void RecordQuestLogItemPurchase(void)
 {
-    struct MartHistory *history = &gUnknown_203996C;
+    struct MartHistory *history = &gShopMenuHistory;
     u16 v;
 
     v = history->unkA;
@@ -1414,26 +1353,26 @@ static void sub_809C138(void)
 
 void CreatePokemartMenu(const u16 *itemsForSale)
 {    
-    sub_809ABD8(itemsForSale);
-    sub_809AAB0(MART_TYPE_REGULAR);
-    sub_809AC04(EnableBothScriptContexts);
+    SetShopItemsForSale(itemsForSale);
+    CreateShopMenu(MART_TYPE_REGULAR);
+    SetShopMenuCallback(EnableBothScriptContexts);
     nullsub_53();
-    memset(&gUnknown_203996C, 0, sizeof(struct MartHistory));
-    gUnknown_203996C.unk8 = gMapHeader.regionMapSectionId;
-    gUnknown_203996C.unk14 = gMapHeader.regionMapSectionId;
+    memset(&gShopMenuHistory, 0, sizeof(struct MartHistory));
+    gShopMenuHistory.unk8 = gMapHeader.regionMapSectionId;
+    gShopMenuHistory.unk14 = gMapHeader.regionMapSectionId;
 }
 
 void CreateDecorationShop1Menu(const u16 *itemsForSale)
 {
-    sub_809ABD8(itemsForSale);
-    sub_809AAB0(MART_TYPE_DECOR);
-    sub_809AC04(EnableBothScriptContexts);
+    SetShopItemsForSale(itemsForSale);
+    CreateShopMenu(MART_TYPE_DECOR);
+    SetShopMenuCallback(EnableBothScriptContexts);
 }
 
 void CreateDecorationShop2Menu(const u16 *itemsForSale)
 {
-    sub_809ABD8(itemsForSale);
-    sub_809AAB0(MART_TYPE_DECOR2);
-    sub_809AC04(EnableBothScriptContexts);
+    SetShopItemsForSale(itemsForSale);
+    CreateShopMenu(MART_TYPE_DECOR2);
+    SetShopMenuCallback(EnableBothScriptContexts);
 }
 

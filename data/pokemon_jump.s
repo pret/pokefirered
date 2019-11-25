@@ -126,34 +126,34 @@ gUnknown_846B76C:: @ 846B76C
 	.4byte 20000, 5
 
 gUnknown_846B794:: @ 846B794 gbapal
-	.incbin "graphics/misc/unk_846B794.gbapal"
+	.incbin "graphics/link_games/unk_846B794.gbapal"
 
 gUnknown_846B7B4:: @ 846B7B4 gbapal
-	.incbin "graphics/misc/unk_846B7B4.gbapal"
+	.incbin "graphics/link_games/unk_846B7B4.gbapal"
 
 gUnknown_846B7D4:: @ 846B7D4 4bpp.lz
-	.incbin "graphics/misc/unk_846B7D4.4bpp.lz"
+	.incbin "graphics/link_games/unk_846B7D4.4bpp.lz"
 
 gUnknown_846BA00:: @ 846BA00 bin.lz
-	.incbin "graphics/misc/unk_846BA00.bin.lz"
+	.incbin "graphics/link_games/unk_846BA00.bin.lz"
 
 gUnknown_846BBB0:: @ 846BBB0 gbapal
-	.incbin "graphics/misc/unk_846BBB0.gbapal"
+	.incbin "graphics/link_games/unk_846BBB0.gbapal"
 
 gUnknown_846BBD0:: @ 846BBD0 4bpp.lz
-	.incbin "graphics/misc/unk_846BBD0.4bpp.lz"
+	.incbin "graphics/link_games/unk_846BBD0.4bpp.lz"
 
 gUnknown_846C520:: @ 846C520 bin.lz
-	.incbin "graphics/misc/unk_846C520.bin.lz"
+	.incbin "graphics/link_games/unk_846C520.bin.lz"
 
 gUnknown_846C8D8:: @ 846C8D8 gbapal
-	.incbin "graphics/misc/unk_846C8D8.gbapal"
+	.incbin "graphics/link_games/unk_846C8D8.gbapal"
 
 gUnknown_846C8F8:: @ 846C8F8 4bpp.lz
-	.incbin "graphics/misc/unk_846C8F8.4bpp.lz"
+	.incbin "graphics/link_games/unk_846C8F8.4bpp.lz"
 
 gUnknown_846D3A8:: @ 846D3A8 bin.lz
-	.incbin "graphics/misc/unk_846D3A8.bin.lz"
+	.incbin "graphics/link_games/unk_846D3A8.bin.lz"
 
 gUnknown_846D8D4:: @ 846D8D4
 	.4byte 0x000001b0
@@ -269,25 +269,25 @@ gUnknown_846D9D4:: @ 846D9D4
 	.4byte gUnknown_846D9CA
 
 gUnknown_846D9E4:: @ gbapal
-	.incbin "graphics/misc/unk_846D9E4.gbapal"
+	.incbin "graphics/link_games/unk_846D9E4.gbapal"
 
 gUnknown_846DA04:: @ gbapal
-	.incbin "graphics/misc/unk_846DA04.gbapal"
+	.incbin "graphics/link_games/unk_846DA04.gbapal"
 
 gUnknown_846DA24:: @ 4bpp.lz
-	.incbin "graphics/misc/unk_846DA24.4bpp.lz"
+	.incbin "graphics/link_games/unk_846DA24.4bpp.lz"
 
 gUnknown_846DB44:: @ 4bpp.lz
-	.incbin "graphics/misc/unk_846DB44.4bpp.lz"
+	.incbin "graphics/link_games/unk_846DB44.4bpp.lz"
 
 gUnknown_846DD18:: @ 4bpp.lz
-	.incbin "graphics/misc/unk_846DD18.4bpp.lz"
+	.incbin "graphics/link_games/unk_846DD18.4bpp.lz"
 
 gUnknown_846DE48:: @ 4bpp.lz
-	.incbin "graphics/misc/unk_846DE48.4bpp.lz"
+	.incbin "graphics/link_games/unk_846DE48.4bpp.lz"
 
 gUnknown_846DF44:: @ 4bpp.lz
-	.incbin "graphics/misc/unk_846DF44.4bpp.lz"
+	.incbin "graphics/link_games/unk_846DF44.4bpp.lz"
 
 gUnknown_846E0B0:: @ 846E0B0
 	obj_tiles gUnknown_846DA24, 0x0600, 5

@@ -2,6 +2,8 @@
 #include "shop.h"
 #include "menu.h"
 #include "data.h"
+#include "graphics.h"
+#include "strings.h"
 #include "list_menu.h"
 #include "new_menu_helpers.h"
 #include "party_menu.h"
@@ -15,7 +17,6 @@
 #include "item_menu.h"
 #include "main.h"
 #include "sound.h"
-#include "strings.h"
 #include "string_util.h"
 #include "overworld.h"
 #include "window.h"
@@ -38,9 +39,7 @@
 #include "constants/items.h"
 #include "constants/game_stat.h"
 
-#define t0 data[0]
 #define tItemCount data[1]
-#define tX data[4]
 #define tItemId data[5]
 #define tListTaskId data[7]
 
@@ -95,7 +94,6 @@ struct MartHistory
     /*0x16*/ u8 unk16;
     /*0x17*/ u8 unk17;
 }; /* size = 0x18 */
-
 
 EWRAM_DATA s16 sViewportMapObjects[MAP_OBJECTS_COUNT][4] = {0};
 EWRAM_DATA struct ShopData gShopData = {0};
@@ -165,39 +163,23 @@ static void nullsub_52(u8 taskId);
 static void nullsub_53(void);
 static void RecordQuestLogItemPurchase(void);
 
-// external defines
 extern u8 MapGridGetMetatileLayerTypeAt(s16 x, s16 y);
 extern u16 BagGetQuantityByItemId(u16 item);
 
-//Data Definitions
-/*
-extern const struct MenuAction gUnknown_83DF09C[];
-extern const struct YesNoFuncTable gUnknown_83DF0B4[];
-extern const struct WindowTemplate gUnknown_83DF0BC[];
-extern const struct BgTemplate gUnknown_83DF0C4[];
-*/
-
-//graphics
-extern const u32 gUnknown_8E85DC8[];    //gBuyMenuFrame_Gfx[];
-extern const u32 gUnknown_8E85EFC[];    //gBuyMenuFrame_Tilemap
-extern const u32 gUnknown_8E86038[];    //gBuyMenuFrame_TmHmTilemap
-extern const u32 gUnknown_8E86170[];    //gBuyMenuFrame_Pal
-
-
-static const struct MenuAction gUnknown_83DF09C[] =    // sShopMenuActions_BuySellQuit
+static const struct MenuAction sShopMenuActions_BuySellQuit[] =
 {
     {gText_ShopBuy, {.void_u8 = Task_HandleShopMenuBuy}},
     {gText_ShopSell, {.void_u8 = Task_HandleShopMenuSell}},
     {gText_ShopQuit, {.void_u8 = Task_HandleShopMenuQuit}}
 };
 
-static const struct YesNoFuncTable gUnknown_83DF0B4[] =    //sShopMenuActions_BuyQuit
+static const struct YesNoFuncTable sShopMenuActions_BuyQuit[] =
 {
-    BuyMenuTryMakePurchase,         //Task_HandleShopMenuBuy,
-    BuyMenuReturnToItemList            //Task_HandleShopMenuQuit
+    BuyMenuTryMakePurchase,
+    BuyMenuReturnToItemList
 };
 
-static const struct WindowTemplate gUnknown_83DF0BC[] =     //sShopMenuWindowTemplates
+static const struct WindowTemplate sShopMenuWindowTemplates[] =
 {
     {
         .bg = 0,
@@ -210,7 +192,7 @@ static const struct WindowTemplate gUnknown_83DF0BC[] =     //sShopMenuWindowTem
     }
 };    
 
-static const struct BgTemplate gUnknown_83DF0C4[4] =     //sShopBuyMenuBgTemplates
+static const struct BgTemplate sShopBuyMenuBgTemplates[4] =
 {
     {
         .bg = 0,
@@ -250,7 +232,6 @@ static const struct BgTemplate gUnknown_83DF0C4[4] =     //sShopBuyMenuBgTemplat
     }
 };
 
-
 // Functions
 static u8 CreateShopMenu(u8 a0)
 {
@@ -261,9 +242,9 @@ static u8 CreateShopMenu(u8 a0)
     else
         gShopData.unk16_4 = 5;
     
-    sShopMenuWindowId = AddWindow(gUnknown_83DF0BC);        //sShopMenuWindowTemplates
+    sShopMenuWindowId = AddWindow(sShopMenuWindowTemplates);
     SetStdWindowBorderStyle(sShopMenuWindowId, 0);
-    PrintTextArray(sShopMenuWindowId, 2, GetMenuCursorDimensionByFont(2, 0), 2, 16, 3, gUnknown_83DF09C);
+    PrintTextArray(sShopMenuWindowId, 2, GetMenuCursorDimensionByFont(2, 0), 2, 16, 3, sShopMenuActions_BuySellQuit);
     Menu_InitCursor(sShopMenuWindowId, 2, 0, 2, 16, 3, 0);
     PutWindowTilemap(sShopMenuWindowId);
     CopyWindowToVram(sShopMenuWindowId, 1);
@@ -272,10 +253,12 @@ static u8 CreateShopMenu(u8 a0)
 
 static u8 GetMartTypeFromItemList(u32 a0)
 {    
-    u16 retVal, i;
+    u16 i;
+    
     if (a0)
         return (u8)a0;
     goto MAIN;
+    
     RETURN_1:
     return 1;
 
@@ -296,6 +279,7 @@ static u8 GetMartTypeFromItemList(u32 a0)
         else if (gShopData.itemList[i] == 0)
             goto RETURN_0;
     }
+    
     RETURN_0:
     return 0;
 }
@@ -333,7 +317,7 @@ static void Task_ShopMenu(u8 taskId)
         Task_HandleShopMenuQuit(taskId);
         break;
     default:
-        gUnknown_83DF09C[Menu_GetCursorPos()].func.void_u8(taskId);
+        sShopMenuActions_BuySellQuit[Menu_GetCursorPos()].func.void_u8(taskId);
         break;
     }
 }
@@ -377,6 +361,7 @@ static void Task_GoToBuyOrSellMenu(u8 taskId)
 {
     if (gPaletteFade.active)
         return;
+    
     SetMainCallback2((void *)GetWordTaskArg(taskId, 0xE));
     FreeAllWindowBuffers();
     DestroyTask(taskId);
@@ -392,6 +377,7 @@ static void Task_ReturnToShopMenu(u8 taskId)
 {
     if (field_weather_is_fade_finished() != TRUE)
         return;
+    
     DisplayItemMessageOnField(taskId, GetMartUnk16_4(), gText_CanIHelpWithAnythingElse, ShowShopMenuAfterExitingBuyOrSellMenu);
 }
 
@@ -420,6 +406,7 @@ static void VBlankCB_BuyMenu(void)
 static void CB2_InitBuyMenu(void)
 {
     u8 taskId;
+    
     switch (gMain.state)
     {
     case 0:
@@ -469,12 +456,15 @@ static bool8 InitShopData(void)
     gShopTilemapBuffer1 = Alloc(sizeof(*gShopTilemapBuffer1));
     if (gShopTilemapBuffer1 == 0)
         goto CANCEL;
+    
     gShopTilemapBuffer2 = Alloc(sizeof(*gShopTilemapBuffer2));
     if (gShopTilemapBuffer2 == 0)
         goto CANCEL;
+    
     gShopTilemapBuffer3 = Alloc(sizeof(*gShopTilemapBuffer3));
     if (gShopTilemapBuffer3 == 0)
         goto CANCEL;
+    
     gShopTilemapBuffer4 = Alloc(sizeof(*gShopTilemapBuffer4));
     if (gShopTilemapBuffer4 == 0)
         goto CANCEL;
@@ -489,7 +479,7 @@ static bool8 InitShopData(void)
 static void BuyMenuInitBgs(void)
 {
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, gUnknown_83DF0C4, NELEMS(gUnknown_83DF0C4));
+    InitBgsFromTemplates(0, sShopBuyMenuBgTemplates, NELEMS(sShopBuyMenuBgTemplates));
     SetBgTilemapBuffer(1, gShopTilemapBuffer2);
     SetBgTilemapBuffer(2, gShopTilemapBuffer4);
     SetBgTilemapBuffer(3, gShopTilemapBuffer3);
@@ -512,13 +502,15 @@ static void BuyMenuInitBgs(void)
 static void BuyMenuDecompressBgGraphics(void)
 {
     void* pal;
-    DecompressAndCopyTileDataToVram(1, gUnknown_8E85DC8, 0x480, 0x3DC, 0);
+    
+    DecompressAndCopyTileDataToVram(1, gBuyMenuFrame_Gfx, 0x480, 0x3DC, 0);
     if ((gShopData.martType) != MART_TYPE_TMHM)
-        LZDecompressWram(gUnknown_8E85EFC, gShopTilemapBuffer1);    //gBuyMenuFrame_Tilemap
+        LZDecompressWram(gBuyMenuFrame_Tilemap, gShopTilemapBuffer1);
     else
-        LZDecompressWram(gUnknown_8E86038, gShopTilemapBuffer1);    //gBuyMenuFrame_TmHmTilemap
+        LZDecompressWram(gBuyMenuFrame_TmHmTilemap, gShopTilemapBuffer1);
+    
     pal = Alloc(0x40);
-    LZDecompressWram(gUnknown_8E86170, pal);
+    LZDecompressWram(gBuyMenuFrame_Pal, pal);
     LoadPalette(pal, 0xB0, 0x20);
     LoadPalette(pal + 0x20, 0x60, 0x20);
     Free(pal);
@@ -527,14 +519,17 @@ static void BuyMenuDecompressBgGraphics(void)
 static void sub_809B10C(bool32 a0)
 {
     u8 v;
+    
     if (a0 == FALSE)
         v = 0xB;
     else 
         v = 6;
+    
     if ((gShopData.martType) != MART_TYPE_TMHM)
         SetBgRectPal(1, 0, 0xE, 0x1E, 6, v);
     else
         SetBgRectPal(1, 0, 0xC, 0x1E, 8, v);
+    
     ScheduleBgCopyTilemapToVram(1);
 }
 
@@ -551,10 +546,10 @@ static void BuyMenuDrawGraphics(void)
 
 static bool8 BuyMenuBuildListMenuTemplate(void)
 {
-    u16 i;
-    u16 v;
+    u16 i, v;
     struct ListMenuItem **list = &sShopMenuListMenu;
     struct ShopData *mart = &gShopData;
+    
     *list = Alloc((gShopData.itemCount + 1) * sizeof(*sShopMenuListMenu));
     if (sShopMenuListMenu == 0)
         goto FREE_MEMORY;
@@ -574,7 +569,7 @@ static bool8 BuyMenuBuildListMenuTemplate(void)
     
     for (i = 0; i < mart->itemCount; i++)
     {
-        PokeMartWriteNameAndIdAt(&sShopMenuListMenu[i], mart->itemList[i], sShopMenuItemStrings[i]);    //PokeMartWriteNameAndIdAt(u16 a0, u16 a1, u8* a2)
+        PokeMartWriteNameAndIdAt(&sShopMenuListMenu[i], mart->itemList[i], sShopMenuItemStrings[i]);
     }
     
     ADD_CANCEL:
@@ -640,6 +635,7 @@ static void BuyMenuPrintItemDescriptionAndShowItemIcon(s32 item, bool8 onInit, s
             CreateItemMenuIcon(item, gShopData.itemSlot);
         else
             CreateItemMenuIcon(ITEM_N_A, gShopData.itemSlot);
+        
         gShopData.itemSlot ^= 1;
         BuyMenuPrint(5, 2, description, 0, 3, 2, 1, 0, 0);
     }
@@ -652,6 +648,7 @@ static void BuyMenuPrintItemDescriptionAndShowItemIcon(s32 item, bool8 onInit, s
 }
 
 #ifdef NONMATCHING
+// As simple as this seems, I could not get the while loop to use the correct registers. It should pad the front of gStringVar4 with 0 based on the length of gStringVar1.
 static void BuyMenuPrintPriceInList(u8 windowId, s32 item, u8 y)
 {
     u32 len, x;
@@ -857,10 +854,7 @@ static void sub_809B764(void)
 
 static void BuyMenuDrawMapBg(void)
 {    
-    s16 i;
-    s16 j;
-    s16 x;
-    s16 y;
+    s16 i, j, x, y;
     const struct MapData *mapData;
     u16 metatile;
     u8 metatileLayerType;
@@ -913,7 +907,6 @@ static void BuyMenuDrawMapMetatile(s16 x, s16 y, const u16 *src, u8 metatileLaye
 
 static void BuyMenuDrawMapMetatileLayer(u16 *dest, s16 offset1, s16 offset2, const u16 *src)
 {
-    // This function draws a whole 2x2 metatile.
     dest[offset1 + offset2] = src[0]; // top left
     dest[offset1 + offset2 + 1] = src[1]; // top right
     dest[offset1 + offset2 + 32] = src[2]; // bottom left
@@ -922,12 +915,9 @@ static void BuyMenuDrawMapMetatileLayer(u16 *dest, s16 offset1, s16 offset2, con
 
 static void BuyMenuCollectEventObjectData(void)
 {
-    s16 facingX;
-    s16 facingY;
-    u8 y;
-    u8 x;
+    s16 facingX, facingY;
+    u8 x, y, z;
     u8 num = 0;
-    u8 z;
 
     GetXYCoordsOneStepInFrontOfPlayer(&facingX, &facingY);
     z = PlayerGetZCoord();
@@ -970,8 +960,7 @@ static void BuyMenuCollectEventObjectData(void)
 
 static void BuyMenuDrawEventObjects(void)
 {
-    u8 i;
-    u8 spriteId;
+    u8 i, spriteId;
     const struct MapObjectGraphicsInfo *graphicsInfo;
 
     for (i = 0; i < MAP_OBJECTS_COUNT; i++)
@@ -993,7 +982,6 @@ static void BuyMenuDrawEventObjects(void)
 static void BuyMenuCopyTilemapData(void)
 {
     s16 i;
-
     u16 *dst = *gShopTilemapBuffer2;
     u16 *src = *gShopTilemapBuffer1;
 
@@ -1049,6 +1037,7 @@ static void Task_BuyMenu(u8 taskId)
                 CopyItemName(itemId, gStringVar1);
                 BuyMenuDisplayMessage(taskId, gText_Var1CertainlyHowMany, Task_BuyHowManyDialogueInit);
             }
+            break;
         }
     }
 }
@@ -1056,7 +1045,6 @@ static void Task_BuyMenu(u8 taskId)
 static void Task_BuyHowManyDialogueInit(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-
     u16 quantityInBag = BagGetQuantityByItemId(tItemId);
     u16 maxQuantity;
     
@@ -1120,7 +1108,7 @@ static void Task_BuyHowManyDialogueHandleInput(u8 taskId)
 
 static void CreateBuyMenuConfirmPurchaseWindow(u8 taskId)
 {
-    BuyMenuConfirmPurchase(taskId, gUnknown_83DF0B4);
+    BuyMenuConfirmPurchase(taskId, sShopMenuActions_BuyQuit);
 }
 
 static void BuyMenuTryMakePurchase(u8 taskId)
@@ -1204,6 +1192,7 @@ static void nullsub_53(void)
 }
 
 #ifdef NONMATCHING
+// couldn't get registers to match. It should store an address into r4 (what tmp wants to be), and load/store from there, eg. ldrh r0, [r4,#4]. Which indicates an array inside the MartHistory struct, except data sizes are not consistent.
 void RecordItemPurchase(u16 item, u16 quantity, u8 a2)
 {
     struct MartHistory *tmp;
@@ -1343,6 +1332,7 @@ static void RecordQuestLogItemPurchase(void)
     v = history->unkA;
     if (v != 0)
         sub_8113550(v + 0x24, (const u16*)history);
+    
     v = history->unk16;
     if (v != 0)
     {

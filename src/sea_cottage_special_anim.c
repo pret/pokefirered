@@ -7,21 +7,18 @@
 #include "field_map_obj.h"
 #include "field_camera.h"
 
-// Defines
 #define t0 data[0]
 #define tX data[4]
+#define tY data[5]
 #define tListTaskId data[7]
 
-// RAM
 EWRAM_DATA u8 gUnknown_2039984 = 0;
 
-
-// Function Declarations
+static void sub_809C1D8(u8 taskId, const u16* a1, u16 a2);
 static void sub_809C334(u8 taskId);
 static void sub_809C500(u8 taskId);
 static void sub_809C640(u8 taskId);
 
-// Data Definitions
 static const u16 gUnknown_83DF0D4[] = {0x0308, 0x030a, 0x02d0};
 static const u16 gUnknown_83DF0DA[] = {0x0309, 0x030b, 0x02d1};
 static const u16 gUnknown_83DF0E0[] = {0x0310, 0x0312, 0x02d8};
@@ -30,34 +27,52 @@ static const u16 gUnknown_83DF0EC[] = {0x02e3, 0x0316, 0x0314};
 static const u16 gUnknown_83DF0F2[] = {0x02e4, 0x0317, 0x0315};
 static const u16 gUnknown_83DF0F8[] = {0x02eb, 0x031e, 0x031c};
 
-
 // Functions
 #ifdef NONMATCHING
-void sub_809C1D8(u8 taskId, const u16* a1, u16 a2)
+// Couldn't get the registers to match. Hard to know where to fix since I'm unsure what the variables are for.
+static void sub_809C1D8(u8 taskId, const u16* a1, u16 a2)
 {
     s16 v1, v2, v3;
-	s16 i, j;
-	
-	v1 = gTasks[taskId].data[5] - 1;
-	v2 = gTasks[taskId].data[6] - 1;
-	v3 = gTasks[taskId].data[2];
-	
-	if (gTasks[taskId].data[3] == 0)
-	{
-		for (i = 0; i < 3; i++)
-		{
-			for (j = 0; j < 3; j++)
-			{
-				MapGridGetMetatileIdAt(v1 + j, v2 + i);
-				if ()
-				{
-					
-				}
-				
-				MapGridSetMetatileIdAt
-			}
-		}
-	}
+    s16 i, j;
+    const s16* v4;
+    
+    v1 = gTasks[taskId].data[4] - 1;
+    v2 = gTasks[taskId].data[5] - 1;
+    v3 = gTasks[taskId].data[1];
+    
+    if (gTasks[taskId].data[2] == 0)
+    {
+        for (i = 0; i < 3; i++)
+        {
+            for (j = 0; j < 3; j++)
+            {
+                v4 = &a1[v3];
+                if (MapGridGetMetatileIdAt(v1 + j, v2 + i) == v4[0])
+                {
+                    if (v3 != 2)
+                        MapGridSetMetatileIdAt(v1 + j, v2 + i, a2 | v4[1]);
+                    else
+                        MapGridSetMetatileIdAt(v1 + j, v2 + i, a2 | v4[0]);
+                }
+            }
+        }
+    }
+    else
+    {
+        for (i = 0; i < 3; i++)
+        {
+            for (j = 0; j < 3; j++)
+            {
+                if (a1[2 - v3] == MapGridGetMetatileIdAt(v1 + j, v2 + i))
+                {
+                    if (v3 != 2)
+                        MapGridSetMetatileIdAt(v1 + j, v2 + i, a2 | a1[1 - v3]);
+                    else
+                        MapGridSetMetatileIdAt(v1 + j, v2 + i, a2 | a1[2]);
+                }
+            }
+        }
+    }
 }
 #else
 NAKED
@@ -275,9 +290,9 @@ static void sub_809C334(u8 taskId)
     default:
         break;
     }
+    
     data[0] = (data[0] + 1) & 7;
     v1 = data[0] & 7;
-    //ldrh r5, [r4] instead mov r5, r0 somehow 
     if (v1 == 0)
     {
         DrawWholeMapView();
@@ -293,7 +308,7 @@ static u8 sub_809C3FC(u16 a0)
 
     taskId = CreateTask(sub_809C334, 0);
     data = gTasks[taskId].data;
-    PlayerGetDestCoords(&tX, &data[5]);
+    PlayerGetDestCoords(&tX, &tY);
     t0 = 0;
     data[1] = 0;
     data[2] = a0;
@@ -335,10 +350,8 @@ void sub_809C4A8(void)
     s16 *data;
     
     taskId = CreateTask(sub_809C500, 0);
-
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].data[1] = 0;
-
     data = gTasks[taskId].data;
     PlayerGetDestCoords(&data[2], &data[3]);
     if (gSpecialVar_0x8004 == 0)
@@ -376,9 +389,8 @@ static void sub_809C500(u8 taskId)
     data[0]++;
     if (data[0] != 0x10)
         return;
-    data[0] = 0;
     
-    data[0] == 0;
+    data[0] = 0;
     data[1]++;
     if (data[1] != 0xD)
         return;
@@ -399,7 +411,6 @@ void sub_809C5FC(void)
     taskId = CreateTask(sub_809C640, 0);
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].data[1] = 0;
-
     data = gTasks[taskId].data;
     PlayerGetDestCoords(&data[2], &data[3]);
     gTasks[taskId].data[2] += 4;
@@ -423,6 +434,7 @@ static void sub_809C640(u8 taskId)
                 DestroyTask(taskId);
                 return;
             }
+            
             data[2]--;
         }
         MapGridSetMetatileIdAt(data[2], data[3], 0xEB9);
@@ -430,6 +442,7 @@ static void sub_809C640(u8 taskId)
         CurrentMapDrawMetatileAt(data[2], data[3]);
         CurrentMapDrawMetatileAt(data[2], data[3] + 1);
     }
+    
     data[0]++;
     if (data[0] == 4)
     {
@@ -437,3 +450,4 @@ static void sub_809C640(u8 taskId)
         data[1]++;
     }
 }
+

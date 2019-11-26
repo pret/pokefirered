@@ -9,8 +9,6 @@
 
 #define INDEX_CANCEL -2
 
-#define NUM_CHARS_PRICE 4
-
 extern EWRAM_DATA struct ItemSlot gUnknown_02039F80[3];
 
 void CreatePokemartMenu(const u16 *itemsForSale);

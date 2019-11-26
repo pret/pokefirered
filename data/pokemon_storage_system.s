@@ -50,13 +50,13 @@ gUnknown_83CDA94:: @ 83CDA94
 	.string "/30$"
 
 gUnknown_83CDA98:: @ 83CDA98 gbapal
-	.incbin "graphics/interface/pss_unk_3CDA98.gbapal"
+	.incbin "graphics/interface/pss_unk_83CDA98.gbapal"
 
 gUnknown_83CDAB8:: @ 83CDAB8 4bpp
-	.incbin "graphics/interface/pss_unk_3CDAB8.4bpp"
+	.incbin "graphics/interface/pss_unk_83CDAB8.4bpp"
 
 gUnknown_83CE2B8:: @ 83CE2B8 4bpp
-	.incbin "graphics/interface/pss_unk_3CE2B8.4bpp"
+	.incbin "graphics/interface/pss_unk_83CE2B8.4bpp"
 
 gUnknown_83CE438:: @ 83CE438 4bpp.lz
 	.incbin "graphics/interface/pss_unk_83CE438.4bpp.lz"

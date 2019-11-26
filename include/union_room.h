@@ -1,6 +1,9 @@
 #ifndef GUARD_UNION_ROOM_H
 #define GUARD_UNION_ROOM_H
 
+#include "global.h"
+#include "librfu.h"
+
 struct UnkStruct_Shared
 {
     struct UnkLinkRfuStruct_02022B14 field_0;
@@ -145,5 +148,9 @@ struct TradeUnkStruct
     u16 field_12;
     u32 personality;
 };
+
+extern struct UnkLinkRfuStruct_02022B14Substruct gUnknown_203B064;
+extern u16 gUnionRoomOfferedSpecies;
+extern u8 gUnionRoomRequestedMonType;
 
 #endif //GUARD_UNION_ROOM_H

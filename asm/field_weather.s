@@ -1889,8 +1889,8 @@ _0807AA68: .4byte 0x000006ca
 _0807AA6C: .4byte 0x000006cb
 	thumb_func_end FieldWeather_StartFadingOutCreditsMap
 
-	thumb_func_start field_weather_is_fade_finished
-field_weather_is_fade_finished: @ 807AA70
+	thumb_func_start IsWeatherNotFadingIn
+IsWeatherNotFadingIn: @ 807AA70
 	ldr r0, _0807AA84 @ =gUnknown_2037F34
 	ldr r1, _0807AA88 @ =0x000006c6
 	adds r0, r1
@@ -1904,7 +1904,7 @@ field_weather_is_fade_finished: @ 807AA70
 	.align 2, 0
 _0807AA84: .4byte gUnknown_2037F34
 _0807AA88: .4byte 0x000006c6
-	thumb_func_end field_weather_is_fade_finished
+	thumb_func_end IsWeatherNotFadingIn
 
 	thumb_func_start sub_807AA8C
 sub_807AA8C: @ 807AA8C

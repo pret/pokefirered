@@ -3623,7 +3623,7 @@ sub_809F5C4: @ 809F5C4
 	push {r4,r5,lr}
 	sub sp, 0x10
 	movs r4, 0
-	ldr r1, _0809F61C @ =gUnknown_841621F
+	ldr r1, _0809F61C @ =gText_MaleSymbol
 	add r0, sp, 0xC
 	bl StringCopy
 	ldr r5, _0809F620 @ =gUnknown_203998C
@@ -3635,7 +3635,7 @@ sub_809F5C4: @ 809F5C4
 	beq _0809F614
 	cmp r0, 0xFE
 	bne _0809F5EE
-	ldr r1, _0809F628 @ =gUnknown_8416221
+	ldr r1, _0809F628 @ =gText_FemaleSymbol
 	add r0, sp, 0xC
 	bl StringCopy
 	movs r4, 0x1
@@ -3664,10 +3664,10 @@ _0809F614:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809F61C: .4byte gUnknown_841621F
+_0809F61C: .4byte gText_MaleSymbol
 _0809F620: .4byte gUnknown_203998C
 _0809F624: .4byte 0x00001e36
-_0809F628: .4byte gUnknown_8416221
+_0809F628: .4byte gText_FemaleSymbol
 _0809F62C: .4byte 0x00001e13
 _0809F630: .4byte gUnknown_83E2428
 	thumb_func_end sub_809F5C4
@@ -4490,7 +4490,7 @@ sub_809FC90: @ 809FC90
 	ldrb r2, [r1, 0x8]
 	movs r0, 0
 	str r0, [sp]
-	ldr r0, _0809FCB4 @ =CB2_ReturnToStartMenu
+	ldr r0, _0809FCB4 @ =CB2_ReturnToFieldWithOpenMenu
 	str r0, [sp, 0x4]
 	movs r0, 0
 	movs r3, 0
@@ -4500,7 +4500,7 @@ sub_809FC90: @ 809FC90
 	bx r0
 	.align 2, 0
 _0809FCB0: .4byte gSaveBlock2Ptr
-_0809FCB4: .4byte CB2_ReturnToStartMenu
+_0809FCB4: .4byte CB2_ReturnToFieldWithOpenMenu
 	thumb_func_end sub_809FC90
 
 	thumb_func_start sub_809FCB8
@@ -4512,7 +4512,7 @@ sub_809FCB8: @ 809FCB8
 	ldrb r2, [r1, 0x8]
 	movs r0, 0
 	str r0, [sp]
-	ldr r0, _0809FCDC @ =CB2_ReturnToStartMenu
+	ldr r0, _0809FCDC @ =CB2_ReturnToFieldWithOpenMenu
 	str r0, [sp, 0x4]
 	movs r0, 0x1
 	movs r3, 0
@@ -4522,7 +4522,7 @@ sub_809FCB8: @ 809FCB8
 	bx r0
 	.align 2, 0
 _0809FCD8: .4byte gSaveBlock2Ptr
-_0809FCDC: .4byte CB2_ReturnToStartMenu
+_0809FCDC: .4byte CB2_ReturnToFieldWithOpenMenu
 	thumb_func_end sub_809FCB8
 
 	thumb_func_start sub_809FCE0
@@ -4534,7 +4534,7 @@ sub_809FCE0: @ 809FCE0
 	ldrb r2, [r1, 0x8]
 	movs r0, 0
 	str r0, [sp]
-	ldr r0, _0809FD04 @ =CB2_ReturnToStartMenu
+	ldr r0, _0809FD04 @ =CB2_ReturnToFieldWithOpenMenu
 	str r0, [sp, 0x4]
 	movs r0, 0x2
 	movs r3, 0
@@ -4544,7 +4544,7 @@ sub_809FCE0: @ 809FCE0
 	bx r0
 	.align 2, 0
 _0809FD00: .4byte gSaveBlock2Ptr
-_0809FD04: .4byte CB2_ReturnToStartMenu
+_0809FD04: .4byte CB2_ReturnToFieldWithOpenMenu
 	thumb_func_end sub_809FCE0
 
 	thumb_func_start sub_809FD08
@@ -4556,7 +4556,7 @@ sub_809FD08: @ 809FD08
 	ldrb r2, [r1, 0x8]
 	movs r0, 0
 	str r0, [sp]
-	ldr r0, _0809FD2C @ =CB2_ReturnToStartMenu
+	ldr r0, _0809FD2C @ =CB2_ReturnToFieldWithOpenMenu
 	str r0, [sp, 0x4]
 	movs r0, 0x3
 	movs r3, 0
@@ -4566,7 +4566,7 @@ sub_809FD08: @ 809FD08
 	bx r0
 	.align 2, 0
 _0809FD28: .4byte gSaveBlock2Ptr
-_0809FD2C: .4byte CB2_ReturnToStartMenu
+_0809FD2C: .4byte CB2_ReturnToFieldWithOpenMenu
 	thumb_func_end sub_809FD08
 
 	thumb_func_start sub_809FD30
@@ -4578,7 +4578,7 @@ sub_809FD30: @ 809FD30
 	ldrb r2, [r1, 0x8]
 	movs r0, 0
 	str r0, [sp]
-	ldr r0, _0809FD54 @ =CB2_ReturnToStartMenu
+	ldr r0, _0809FD54 @ =CB2_ReturnToFieldWithOpenMenu
 	str r0, [sp, 0x4]
 	movs r0, 0x4
 	movs r3, 0
@@ -4588,7 +4588,7 @@ sub_809FD30: @ 809FD30
 	bx r0
 	.align 2, 0
 _0809FD50: .4byte gSaveBlock2Ptr
-_0809FD54: .4byte CB2_ReturnToStartMenu
+_0809FD54: .4byte CB2_ReturnToFieldWithOpenMenu
 	thumb_func_end sub_809FD30
 
 	.align 2, 0 @ Don't pad with nop.

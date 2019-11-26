@@ -60,7 +60,7 @@ const u8 gUnknown_8352F10[] = {
 
 const struct MapHeader * mapconnection_get_mapheader(struct MapConnection * connection)
 {
-    return get_mapheader_by_bank_and_number(connection->mapGroup, connection->mapNum);
+    return Overworld_GetMapHeaderByGroupAndId(connection->mapGroup, connection->mapNum);
 }
 
 void not_trainer_hill_battle_pyramid(void)
@@ -463,7 +463,7 @@ u32 MapGridGetMetatileBehaviorAt(s32 x, s32 y)
     return sub_8058F48(x, y, 0);
 }
 
-u8 MapGridGetMetatileLayerTypeAt(s32 x, s32 y)
+u8 MapGridGetMetatileLayerTypeAt(s16 x, s16 y)
 {
     return sub_8058F48(x, y, 6);
 }

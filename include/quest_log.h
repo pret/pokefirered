@@ -47,7 +47,6 @@ void sub_81139BC(void);
 void *QuestLogGetFlagOrVarPtr(bool8 isFlag, u16 idx);
 void QuestLogSetFlagOrVar(bool8 isFlag, u16 idx, u16 value);
 void sub_8110840(void *oldSave);
-
-extern u8 gUnknown_203ADFA;
+void sub_8112F18(u8 windowId);
 
 #endif //GUARD_QUEST_LOG_H

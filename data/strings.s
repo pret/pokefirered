@@ -433,16 +433,16 @@ gString_Dummy:: @ 84161CD
 gUnknown_84161CE::
 	.string "キャンセル$"
 
-gUnknown_84161D4::
+gText_Item::
 	.string "ITEM$"
 
-gUnknown_84161D9::
+gText_Mail::
 	.string "MAIL$"
 
-gUnknown_84161DE::
+gText_Take::
 	.string "TAKE$"
 
-gUnknown_84161E3::
+gText_Store::
 	.string "STORE$"
 
 gUnknown_84161E9::
@@ -463,7 +463,7 @@ gUnknown_8416202:: @ 8416202
 gUnknown_8416206::
 	.string "?????$"
 
-gUnknown_841620C:: @ 841620C
+gText_Slash:: @ 841620C
 	.string "/$"
 
 gUnknown_841620E:: @ 841620E
@@ -478,10 +478,10 @@ gText_ThreeHyphens:: @ 8416213
 gText_SevenHyphens:: @ 8416217
 	.string "-------$"
 
-gUnknown_841621F:: @ 841621F
+gText_MaleSymbol:: @ 841621F
 	.string "♂$"
 
-gUnknown_8416221:: @ 8416221
+gText_FemaleSymbol:: @ 8416221
 	.string "♀$"
 
 gText_Lv:: @ 8416223
@@ -804,85 +804,85 @@ gText_TurnedOverItemsWorthYen:: @ 8416959
 gText_PokedollarVar1:: @ 841697A
 	.string "¥{STR_VAR_1}$"
 
-gUnknown_841697E:: @ 0x841697E
+gText_Shift:: @ 0x841697E
 	.string "SHIFT$"
 
-gUnknown_8416984:: @ 0x8416984
+gText_SendOut:: @ 0x8416984
 	.string "SEND OUT$"
 
-gUnknown_841698D:: @ 0x841698D
+gText_Switch2:: @ 0x841698D
 	.string "SWITCH$"
 
-gUnknown_8416994:: @ 0x8416994
+gText_Summary5:: @ 0x8416994
 	.string "SUMMARY$"
 
 gUnknown_841699C:: @ 0x841699C
 	.string "つかえるわざ$"
 
-gUnknown_84169A3:: @ 0x84169A3
+gText_Enter:: @ 0x84169A3
 	.string "ENTER$"
 
-gUnknown_84169A9:: @ 0x84169A9
+gText_NoEntry:: @ 0x84169A9
 	.string "NO ENTRY$"
 
-gUnknown_84169B2:: @ 0x84169B2
+gText_Take2:: @ 0x84169B2
 	.string "TAKE$"
 
-gUnknown_84169B7:: @ 0x84169B7
+gText_Read2:: @ 0x84169B7
 	.string "READ$"
 
-gUnknown_84169BC:: @ 0x84169BC
+gText_Trade4:: @ 0x84169BC
 	.string "TRADE$"
 
-gUnknown_84169C2:: @ 84169C2
+gText_HP3:: @ 84169C2
 	.string "HP$"
 
-gUnknown_84169C5:: @ 84169C5
+gText_SpAtk3:: @ 84169C5
 	.string "SP. ATK$"
 
-gUnknown_84169CD:: @ 84169CD
+gText_SpDef3:: @ 84169CD
 	.string "SP. DEF$"
 
-gUnknown_84169D5:: @ 84169D5
+gMenuText_Confirm:: @ 84169D5
 	.string "OK$"
 
 gUnknown_84169D8:: @ 0x84169D8
 	.string "$"
 
-gUnknown_84169D9:: @ 84169D9
+gText_PauseUntilPress:: @ 84169D9
 	.string "{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_84169DC:: @ 84169DC
+gText_WontHaveEffect:: @ 84169DC
 	.string "It won't have any effect.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_84169F8:: @ 84169F8
 	.string "This can't be used on\n"
 	.string "that POKéMON.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416A1E:: @ 8416A1E
+gText_PkmnCantSwitchOut:: @ 8416A1E
 	.string "{STR_VAR_1} can't be switched\n"
 	.string "out!{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416A3A:: @ 8416A3A
+gText_PkmnAlreadyInBattle:: @ 8416A3A
 	.string "{STR_VAR_1} is already\n"
 	.string "in battle!{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416A55:: @ 8416A55
+gText_PkmnAlreadySelected:: @ 8416A55
 	.string "{STR_VAR_1} has already been\n"
 	.string "selected.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416A75:: @ 8416A75
+gText_PkmnHasNoEnergy:: @ 8416A75
 	.string "{STR_VAR_1} has no energy\n"
 	.string "left to battle!{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416A98:: @ 8416A98
+gText_CantSwitchWithAlly:: @ 8416A98
 	.string "You can't switch {STR_VAR_1}'s\n"
 	.string "POKéMON with one of yours!{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416ACB:: @ 8416ACB
+gText_EggCantBattle:: @ 8416ACB
 	.string "An EGG can't battle!{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416AE2:: @ 8416AE2
+gText_CantUseUntilNewBadge:: @ 8416AE2
 	.string "This can't be used until a new\n"
 	.string "BADGE is obtained.{PAUSE_UNTIL_PRESS}$"
 
@@ -894,73 +894,73 @@ gUnknown_8416B3E:: @ 8416B3E
 	.string "No more than two POKéMON\n"
 	.string "may enter.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416B64:: @ 8416B64
+gText_SendMailToPC:: @ 8416B64
 	.string "Send the removed MAIL to\n"
 	.string "your PC?$"
 
-gUnknown_8416B86:: @ 8416B86
+gText_MailSentToPC:: @ 8416B86
 	.string "The MAIL was sent to your PC.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416BA6:: @ 8416BA6
+gText_PCMailboxFull:: @ 8416BA6
 	.string "Your PC's MAILBOX is full.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416BC3:: @ 8416BC3
+gText_MailMessageWillBeLost:: @ 8416BC3
 	.string "If the MAIL is removed, the\n"
 	.string "message will be lost. Okay?$"
 
-gUnknown_8416BFB:: @ 8416BFB
+gText_RemoveMailBeforeItem:: @ 8416BFB
 	.string "MAIL must be removed before\n"
 	.string "holding an item.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416C2A:: @ 8416C2A
+gText_PkmnWasGivenItem:: @ 8416C2A
 	.string "{STR_VAR_1} was given the\n"
 	.string "{STR_VAR_2} to hold.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416C49:: @ 8416C49
+gText_PkmnAlreadyHoldingItemSwitch:: @ 8416C49
 	.string "{STR_VAR_1} is already holding\n"
 	.string "one {STR_VAR_2}.\p"
 	.string "Would you like to switch the\n"
 	.string "two items?$"
 
-gUnknown_8416C8F:: @ 8416C8F
+gText_PkmnNotHolding:: @ 8416C8F
 	.string "{STR_VAR_1} isn't holding\n"
 	.string "anything.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416CAC:: @ 8416CAC
+gText_ReceivedItemFromPkmn:: @ 8416CAC
 	.string "Received the {STR_VAR_2}\n"
 	.string "from {STR_VAR_1}.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416CC7:: @ 8416CC7
+gText_MailTakenFromPkmn:: @ 8416CC7
 	.string "MAIL was taken from the\n"
 	.string "POKéMON.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416CEA:: @ 8416CEA
+gText_SwitchedPkmnItem:: @ 8416CEA
 	.string "The {STR_VAR_2} was taken and\n"
 	.string "replaced with the {STR_VAR_1}.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416D17:: @ 8416D17
+gText_PkmnHoldingItemCantHoldMail:: @ 8416D17
 	.string "This POKéMON is holding an\n"
 	.string "item. It cannot hold MAIL.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416D4F:: @ 8416D4F
+gText_MailTransferredFromMailbox:: @ 8416D4F
 	.string "MAIL was transferred from\n"
 	.string "the MAILBOX.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416D78:: @ 8416D78
+gText_BagFullCouldNotRemoveItem:: @ 8416D78
 	.string "The {STR_VAR_1} is full. The POKéMON's\n"
 	.string "item could not be removed.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416DB3:: @ 8416DB3
+gText_PkmnLearnedMove3:: @ 8416DB3
 	.string "{STR_VAR_1} learned\n"
 	.string "{STR_VAR_2}!$"
 
-gUnknown_8416DC2:: @ 8416DC2
+gText_PkmnCantLearnMove:: @ 8416DC2
 	.string "{STR_VAR_1} and {STR_VAR_2}\n"
 	.string "are not compatible.\p"
 	.string "{STR_VAR_2} can't be\n"
 	.string "learned.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416DF7:: @ 8416DF7
+gText_PkmnNeedsToReplaceMove:: @ 8416DF7
 	.string "{STR_VAR_1} wants to learn the\n"
 	.string "move {STR_VAR_2}.\p"
 	.string "However, {STR_VAR_1} already\n"
@@ -968,74 +968,74 @@ gUnknown_8416DF7:: @ 8416DF7
 	.string "Should a move be deleted and\n"
 	.string "replaced with {STR_VAR_2}?$"
 
-gUnknown_8416E6B:: @ 8416E6B
+gText_StopLearningMove2:: @ 8416E6B
 	.string "Stop trying to teach\n"
 	.string "{STR_VAR_2}?$"
 
-gUnknown_8416E84:: @ 8416E84
+gText_MoveNotLearned:: @ 8416E84
 	.string "{STR_VAR_1} did not learn the\n"
 	.string "move {STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416EA4:: @ 8416EA4
+gText_WhichMoveToForget:: @ 8416EA4
 	.string "Which move should be forgotten?{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416EC6:: @ 8416EC6
+gText_12PoofForgotMove:: @ 8416EC6
 	.string "1, {PAUSE 0x0F}2, and{PAUSE 0x0F}‥ {PAUSE 0x0F}‥ {PAUSE 0x0F}‥ {PAUSE 0x0F}{PLAY_SE SE_KON}Poof!\p"
 	.string "{STR_VAR_1} forgot how to\n"
 	.string "use {STR_VAR_2}.\p"
 	.string "And...{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416F10:: @ 8416F10
+gText_PkmnAlreadyKnows:: @ 8416F10
 	.string "{STR_VAR_1} already knows\n"
 	.string "{STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416F27:: @ 8416F27
+gText_PkmnHPRestoredByVar2:: @ 8416F27
 	.string "{STR_VAR_1}'s HP was restored\n"
 	.string "by {STR_VAR_2} point(s).{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416F4E:: @ 8416F4E
+gText_PkmnCuredOfPoison:: @ 8416F4E
 	.string "{STR_VAR_1} was cured of its\n"
 	.string "poisoning.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416F6F:: @ 8416F6F
+gText_PkmnCuredOfParalysis:: @ 8416F6F
 	.string "{STR_VAR_1} was cured of\n"
 	.string "paralysis.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416F8C:: @ 8416F8C
+gText_PkmnWokeUp2:: @ 8416F8C
 	.string "{STR_VAR_1} woke up.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416F9A:: @ 8416F9A
+gText_PkmnBurnHealed:: @ 8416F9A
 	.string "{STR_VAR_1}'s burn was healed.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416FB2:: @ 8416FB2
+gText_PkmnThawedOut:: @ 8416FB2
 	.string "{STR_VAR_1} was thawed out.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416FC7:: @ 8416FC7
+gText_PPWasRestored:: @ 8416FC7
 	.string "PP was restored.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_8416FDA:: @ 0x8416FDA
 	.string "{STR_VAR_1}は\n"
 	.string "げんきを とりもどした!{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8416FED:: @ 8416FED
+gText_PkmnBecameHealthy:: @ 8416FED
 	.string "{STR_VAR_1} became healthy.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8417002:: @ 8417002
+gText_MovesPPIncreased:: @ 8417002
 	.string "{STR_VAR_1}'s PP increased.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8417017:: @ 8417017
+gText_PkmnElevatedToLvVar2:: @ 8417017
 	.string "{STR_VAR_1} was elevated to\n"
 	.string "Lv. {STR_VAR_2}.$"
 
-gUnknown_8417032:: @ 8417032
+gText_PkmnBaseVar2StatIncreased:: @ 8417032
 	.string "{STR_VAR_1}'s base {STR_VAR_2}\n"
 	.string "stat was raised.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8417052:: @ 8417052
+gText_PkmnSnappedOutOfConfusion:: @ 8417052
 	.string "{STR_VAR_1} snapped out of its\n"
 	.string "confusion.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8417075:: @ 8417075
+gText_PkmnGotOverInfatuation:: @ 8417075
 	.string "{STR_VAR_1} got over its\n"
 	.string "infatuation.{PAUSE_UNTIL_PRESS}$"
 
@@ -1044,144 +1044,144 @@ gUnknown_8417094:: @ 0x8417094
 	.string "POKéMON for battle.$"
 
 	.align 2
-gUnknown_84170BC:: @ 84170BC
+gText_PkmnCantBeTradedNow:: @ 84170BC
 	.string "That POKéMON can't be traded\n"
 	.string "now.$"
 
 	.align 2
-gUnknown_84170E0:: @ 84170E0
+gText_EggCantBeTradedNow:: @ 84170E0
 	.string "An EGG can't be traded now.$"
 
 	.align 2
-gUnknown_84170FC:: @ 0x84170FC
+gText_OtherTrainersPkmnCantBeTraded:: @ 0x84170FC
 	.string "The other TRAINER's POKéMON\n"
 	.string "can't be traded now.$"
 
 	.align 2
-gUnknown_8417130:: @ 0x8417130
+gText_OtherTrainerCantAcceptPkmn:: @ 0x8417130
 	.string "The other TRAINER can't accept\n"
 	.string "that POKéMON now.$"
 
 	.align 2
-gUnknown_8417164:: @ 0x8417164
+gText_CantTradeWithTrainer:: @ 0x8417164
 	.string "You can't trade with that\n"
 	.string "TRAINER now.$"
 
 	.align 2
-gUnknown_841718C:: @ 0x841718C
+gText_NotPkmnOtherTrainerWants:: @ 0x841718C
 	.string "That isn't the type of POKéMON\n"
 	.string "that the other TRAINER wants.$"
 
 	.align 2
-gUnknown_84171CC:: @ 0x84171CC
+gText_ThatIsntAnEgg:: @ 0x84171CC
 	.string "That isn't an EGG.$"
 
-gUnknown_84171DF:: @ 0x84171DF
+gText_ChoosePokemon:: @ 0x84171DF
 	.string "Choose a POKéMON.$"
 
-gUnknown_84171F1:: @ 0x84171F1
+gText_MoveToWhere:: @ 0x84171F1
 	.string "Move to where?$"
 
-gUnknown_8417200:: @ 0x8417200
+gText_TeachWhichPokemon:: @ 0x8417200
 	.string "Teach which POKéMON?$"
 
-gUnknown_8417215:: @ 0x8417215
+gText_UseOnWhichPokemon:: @ 0x8417215
 	.string "Use on which POKéMON?$"
 
-gUnknown_841722B:: @ 0x841722B
+gText_GiveToWhichPokemon:: @ 0x841722B
 	.string "Give to which POKéMON?$"
 
-gUnknown_8417242:: @ 0x8417242
+gText_DoWhatWithPokemon:: @ 0x8417242
 	.string "Do what with this {PKMN}?$"
 
-gUnknown_8417258:: @ 0x8417258
+gText_NothingToCut:: @ 0x8417258
 	.string "There's nothing to CUT.$"
 
-gUnknown_8417270:: @ 0x8417270
+gText_CantSurfHere:: @ 0x8417270
 	.string "No SURFING here!$"
 
-gUnknown_8417281:: @ 0x8417281
+gText_AlreadySurfing:: @ 0x8417281
 	.string "You're already SURFING.$"
 
-gUnknown_8417299:: @ 0x8417299
+gText_CantUseHere:: @ 0x8417299
 	.string "Can't use that here.$"
 
-gUnknown_84172AE:: @ 0x84172AE
+gText_RestoreWhichMove:: @ 0x84172AE
 	.string "Restore which move?$"
 
-gUnknown_84172C2:: @ 0x84172C2
+gText_BoostPp:: @ 0x84172C2
 	.string "Boost PP of which?$"
 
-gUnknown_84172D5:: @ 0x84172D5
+gText_DoWhatWithItem:: @ 0x84172D5
 	.string "Do what with an item?$"
 
-gUnknown_84172EB:: @ 0x84172EB
+gText_NoPokemonForBattle:: @ 0x84172EB
 	.string "No battling this way!$"
 
-gUnknown_8417301:: @ 0x8417301
+gText_ChoosePokemon2:: @ 0x8417301
 	.string "Choose a POKéMON.$"
 
-gUnknown_8417313:: @ 0x8417313
+gText_NotEnoughHp:: @ 0x8417313
 	.string "Not enough HP‥$"
 
-gUnknown_8417322:: @ 0x8417322
+gText_ThreePkmnAreNeeded:: @ 0x8417322
 	.string "Three {PKMN} are needed.$"
 
-gUnknown_8417337:: @ 0x8417337
+gText_PokemonCantBeSame:: @ 0x8417337
 	.string "{PKMN} can't be the same.$"
 
-gUnknown_841734D:: @ 0x841734D
+gText_NoIdenticalHoldItems:: @ 0x841734D
 	.string "No same hold items!$"
 
-gUnknown_8417361:: @ 0x8417361
+gText_CurrentIsTooFast:: @ 0x8417361
 	.string "The current is much too fast!$"
 
-gUnknown_841737F:: @ 0x841737F
+gText_DoWhatWithMail:: @ 0x841737F
 	.string "Do what with the MAIL?$"
 
-gUnknown_8417396:: @ 0x8417396
+gText_ChoosePokemonCancel:: @ 0x8417396
 	.string "Choose POKéMON or CANCEL.$"
 
-gUnknown_84173B0:: @ 0x84173B0
+gText_ChoosePokemonConfirm:: @ 0x84173B0
 	.string "Choose POKéMON and confirm.$"
 
-gUnknown_84173CC:: @ 0x84173CC
+gText_TwoPokemonAreNeeded:: @ 0x84173CC
 	.string "Two POKéMON are needed.$"
 
-gUnknown_84173E4:: @ 0x84173E4
+gText_EnjoyCycling:: @ 0x84173E4
 	.string "Let's enjoy cycling!$"
 
-gUnknown_84173F9:: @ 0x84173F9
+gText_InUseAlready_PM:: @ 0x84173F9
 	.string "This is in use already.$"
 
-gUnknown_8417411:: @ 0x8417411
+gText_NoUse:: @ 0x8417411
 	.string "No use.$"
 
-gUnknown_8417419:: @ 0x8417419
+gText_Able:: @ 0x8417419
 	.string "ABLE$"
 
-gUnknown_841741E:: @ 0x841741E
+gText_First_PM:: @ 0x841741E
 	.string "FIRST$"
 
-gUnknown_8417424:: @ 0x8417424
+gText_Second_PM:: @ 0x8417424
 	.string "SECOND$"
 
-gUnknown_841742B:: @ 0x841742B
+gText_Third_PM:: @ 0x841742B
 	.string "THIRD$"
 
-gUnknown_8417431:: @ 0x8417431
+gText_Able2:: @ 0x8417431
 	.string "ABLE$"
 
-gUnknown_8417436:: @ 0x8417436
+gText_NotAble:: @ 0x8417436
 	.string "NOT ABLE$"
 
-gUnknown_841743F:: @ 0x841743F
+gText_Able3:: @ 0x841743F
 	.string "ABLE!$"
 
-gUnknown_8417445:: @ 0x8417445
+gText_NotAble2:: @ 0x8417445
 	.string "NOT ABLE!$"
 
-gUnknown_841744F:: @ 0x841744F
+gText_Learned:: @ 0x841744F
 	.string "LEARNED$"
 
 gUnknown_8417457:: @ 8417457
@@ -1197,54 +1197,54 @@ gUnknown_8417494:: @ 8417494
 	.string "You also choose POKéMON here if\n"
 	.string "you want to use an item on one.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_8417533:: @ 0x8417533
+gText_CutATreeOrGrass:: @ 0x8417533
 	.string "Cut a tree or grass.$"
 
-gUnknown_8417548:: @ 0x8417548
+gText_FlyToAKnownTown:: @ 0x8417548
 	.string "Fly to a known town.$"
 
-gUnknown_841755D:: @ 0x841755D
+gText_TravelOnWater:: @ 0x841755D
 	.string "Travel on water.$"
 
-gUnknown_841756E:: @ 0x841756E
+gText_MoveHeavyBoulders:: @ 0x841756E
 	.string "Move heavy boulders.$"
 
-gUnknown_8417583:: @ 0x8417583
+gText_LightUpDarkness:: @ 0x8417583
 	.string "Light up darkness.$"
 
-gUnknown_8417596:: @ 0x8417596
+gText_ShatterACrackedRock:: @ 0x8417596
 	.string "Shatter a cracked rock.$"
 
-gUnknown_84175AE:: @ 0x84175AE
+gText_ClimbAWaterfall:: @ 0x84175AE
 	.string "Climb a waterfall.$"
 
 gUnknown_84175C1:: @ 0x84175C1
 	.string "すいちゅうに もぐる$"
 
-gUnknown_84175CC:: @ 0x84175CC
+gText_EscapeFromHere:: @ 0x84175CC
 	.string "Escape from here.$"
 
-gUnknown_84175DE:: @ 0x84175DE
+gText_LureWildPokemon:: @ 0x84175DE
 	.string "Lure wild POKéMON.$"
 
-gUnknown_84175F1:: @ 0x84175F1
+gText_ShareHp:: @ 0x84175F1
 	.string "Share HP.$"
 
-gUnknown_84175FB:: @ 0x84175FB
+gText_ReturnToAHealingSpot:: @ 0x84175FB
 	.string "Return to a healing spot.$"
 
-gUnknown_8417615:: @ 8417615
+gText_EscapeFromHereAndReturnTo:: @ 8417615
 	.string "Want to escape from here and return\n"
 	.string "to {STR_VAR_1}?$"
 
-gUnknown_8417640:: @ 8417640
+gText_ReturnToHealingSpot:: @ 8417640
 	.string "Want to return to the healing spot\n"
 	.string "used last in {STR_VAR_1}?$"
 
-gUnknown_8417674:: @ 8417674
+gText_Attack3:: @ 8417674
 	.string "ATTACK$"
 
-gUnknown_841767B:: @ 841767B
+gText_Defense3:: @ 841767B
 	.string "DEFENSE$"
 
 gUnknown_8417683:: @ 0x8417683
@@ -1253,16 +1253,16 @@ gUnknown_8417683:: @ 0x8417683
 gUnknown_8417688:: @ 0x8417688
 	.string "とくぼう$"
 
-gUnknown_841768D:: @ 841768D
+gText_Speed2:: @ 841768D
 	.string "SPEED$"
 
 gUnknown_8417693:: @ 0x8417693
 	.string "HP$"
 
-gUnknown_8417696:: @ 8417696
+gText_PkmnCantParticipate:: @ 8417696
 	.string "That POKéMON can't participate.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_84176B8:: @ 84176B8
+gText_CancelParticipation:: @ 84176B8
 	.string "Cancel participation?$"
 
 gUnknown_84176CE:: @ 0x84176CE
@@ -3266,7 +3266,7 @@ gText_Badges:: @ 841B6EC
 gTextJPDummy_Ko:: @ 841B6F3
 	.string "$"
 
-gUnknown_841B6F4:: @ 0x841B6F4
+gText_Register:: @ 0x841B6F4
 	.string "REGISTER$"
 
 gText_HatchedFromEgg:: @ 841B6FD
@@ -3315,10 +3315,13 @@ gUnknown_841CB5A:: @ 841CB5A
 gUnknown_841CB63:: @ 841CB63
 	.string "POKéMON JUMP RECORDS$"
 
+gUnknown_841CB78::
 	.string "Jumps in a row:$"
 
+gUnknown_841CB88::
 	.string "Best score:$"
 
+gUnknown_841CB94::
 	.string "EXCELLENTS in a row:$"
 
 gUnknown_841CBA9:: @ 841CBA9
@@ -3402,37 +3405,55 @@ gUnknown_841CE1C:: @ 841CE1C
 gUnknown_841CE24:: @ 841CE24
 	.string "Communication standby…$"
 
-	.string " Are you ready to BERRY-CRUSH?\n"
+	.align 2
+gUnknown_841CE3C:: @ 841CE3C
+	.string "Are you ready to BERRY-CRUSH?\n"
 	.string "Please pick a BERRY for use.\p"
 	.string "$"
 
+	.align 2
+gUnknown_841CE78:: @ 841CE78
 	.string "Please wait while each member\n"
 	.string "chooses a BERRY.$"
 
-	.string " {PAUSE_MUSIC}{PLAY_BGM MUS_FANFA1}You ended up with {STR_VAR_1} units of\n"
+	.align 2
+gUnknown_841CEA8:: @ 841CEA8
+	.string "{PAUSE_MUSIC}{PLAY_BGM MUS_FANFA1}You ended up with {STR_VAR_1} units of\n"
 	.string "silky-smooth BERRY POWDER.{RESUME_MUSIC}\p"
 	.string "Your total amount of BERRY POWDER\n"
 	.string "is {STR_VAR_2}.\p"
 	.string "$"
 
-	.string " Recording your game results in the\n"
+	.align 2
+gUnknown_841CF14:: @ 841CF14
+	.string "Recording your game results in the\n"
 	.string "save file.\n"
 	.string "Please wait.$"
 
-	.string " Want to play BERRY CRUSH again?$"
+	.align 2
+gUnknown_841CF50:: @ 841CF50
+	.string "Want to play BERRY CRUSH again?$"
 
+	.align 2
+gUnknown_841CF70:: @ 841CF70
 	.string "You have no BERRIES.\n"
 	.string "The game will be canceled.$"
 
+	.align 2
+gUnknown_841CFA0:: @ 841CFA0
 	.string "A member dropped out.\n"
 	.string "The game will be canceled.$"
 
-	.string "   Time's up.\p"
+	.align 2
+gUnknown_841CFD4:: @ 841CFD4
+	.string "Time's up.\p"
 	.string "Good BERRY POWDER could not be\n"
 	.string "made…\p"
 	.string "$"
 
-	.string "   Communication standby…$"
+	.align 2
+gUnknown_841D008:: @ 841D008
+	.string "Communication standby…$"
 
 	.align 2
 gUnknown_841D020:: @ 841D020
@@ -3441,14 +3462,17 @@ gUnknown_841D020:: @ 841D020
 gUnknown_841D02C:: @ 841D02C
 	.string "1. {DYNAMIC 0x00}$"
 
-gUnknown_841D032:: @ 0x841D032
-	.string "   times$"
+	.align 2
+gUnknown_841D034:: @ 0x841D034
+	.string " times$"
 
-gUnknown_841D03B:: @ 0x841D03B
-	.string " {STR_VAR_1}.{STR_VAR_2}$"
+	.align 2
+gUnknown_841D03C:: @ 0x841D03C
+	.string "{STR_VAR_1}.{STR_VAR_2}$"
 
-gUnknown_841D042:: @ 0x841D042
-	.string "  {STR_VAR_1} BERRY$"
+	.align 2
+gUnknown_841D044:: @ 0x841D044
+	.string "{STR_VAR_1} BERRY$"
 
 	.align 2
 gUnknown_841D050:: @ 841D050
@@ -3489,20 +3513,25 @@ gUnknown_841D098:: @ 841D098
 gUnknown_841D0A4:: @ 841D0A4
 	.string "{STR_VAR_1}サ$"
 
+	.align 2
 gUnknown_841D0A8:: @ 841D0A8
 	.string "No. of Presses Rankings$"
 
+	.align 2
 gUnknown_841D0C0:: @ 841D0C0
 	.string "Crushing Results$"
 
-gUnknown_841D0D1:: @ 0x841D0D1
-	.string "   Neatness Rankings$"
+	.align 2
+gUnknown_841D0D4:: @ 0x841D0D4
+	.string "Neatness Rankings$"
 
-gUnknown_841D0E6:: @ 0x841D0E6
-	.string "  Cooperative Rankings$"
+	.align 2
+gUnknown_841D0E8:: @ 0x841D0E8
+	.string "Cooperative Rankings$"
 
-gUnknown_841D0FD:: @ 0x841D0FD
-	.string "   Pressing-Power Rankings$"
+	.align 2
+gUnknown_841D100:: @ 0x841D100
+	.string "Pressing-Power Rankings$"
 
 gUnknown_841D118:: @ 841D118
 	.string "BERRY CRUSH$"

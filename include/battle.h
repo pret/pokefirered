@@ -24,8 +24,7 @@
 
 #define TRAINER_OPPONENT_3FE        0x3FE
 #define TRAINER_OPPONENT_C00        0xC00
-#define TRAINER_OPPONENT_800        0x800
-#define STEVEN_PARTNER_ID           0xC03
+#define TRAINER_LINK_OPPONENT       0x800
 #define SECRET_BASE_OPPONENT        0x400
 
 #define B_ACTION_USE_MOVE                  0
@@ -712,7 +711,7 @@ extern u16 gLastPrintedMoves[MAX_BATTLERS_COUNT];
 extern u8 gActionsByTurnOrder[MAX_BATTLERS_COUNT];
 extern u8 gChosenActionByBattler[MAX_BATTLERS_COUNT];
 extern u8 gBattleTerrain;
-extern struct UnknownPokemonStruct4 gUnknown_2022B58[3];
+extern struct UnknownPokemonStruct4 gMultiPartnerParty[3];
 extern u16 *gUnknown_2022BC0;
 extern u16 gRandomTurnNumber;
 

@@ -22,6 +22,6 @@ u8 CreateMonIcon(u16 species, SpriteCallback callback, s16 x, s16 y, u8 subprior
 u8 UpdateMonIconFrame(struct Sprite * sprite);
 void LoadMonIconPalette(u16 iconId);
 void FreeMonIconPalette(u16 iconId);
-void MonIcon_SetAnim(struct Sprite * sprite, u8 animNum);
+void SetPartyHPBarSprite(struct Sprite * sprite, u8 animNum);
 
 #endif // GUARD_POKEMON_ICON_H

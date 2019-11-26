@@ -12,7 +12,7 @@
 #define tY data[5]
 #define tListTaskId data[7]
 
-EWRAM_DATA u8 gUnknown_2039984 = 0;
+static EWRAM_DATA u8 gUnknown_2039984 = 0;
 
 static void sub_809C1D8(u8 taskId, const u16* a1, u16 a2);
 static void sub_809C334(u8 taskId);

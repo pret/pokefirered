@@ -4,9 +4,6 @@
 #include "global.h"
 #include "menu_helpers.h"
 
-#define MENU_NOTHING_CHOSEN -2
-#define MENU_B_PRESSED -1
-
 #define INDEX_CANCEL -2
 
 extern EWRAM_DATA struct ItemSlot gUnknown_02039F80[3];

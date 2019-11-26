@@ -236,5 +236,5 @@ u16 GetRoamerLocationMapSectionId(void)
     struct Roamer *roamer = &saveRoamer;
     if (!saveRoamer.active)
         return MAPSEC_NONE;
-    return get_mapheader_by_bank_and_number(sRoamerLocation[MAP_GRP], sRoamerLocation[MAP_NUM])->regionMapSectionId;
+    return Overworld_GetMapHeaderByGroupAndId(sRoamerLocation[MAP_GRP], sRoamerLocation[MAP_NUM])->regionMapSectionId;
 }

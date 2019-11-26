@@ -1,732 +1,681 @@
 
-    .align 2
-    .include "src/main.o"
-    .align 2
-    .include "src/malloc.o"
-    .align 2
-    .include "src/text_printer.o"
-    .align 2
-    .include "src/window.o"
-    .align 2
-    .include "src/window_8bpp.o"
-    .align 2
-    .include "src/sprite.o"
-    .align 2
-    .include "src/string_util.o"
-    .align 2
-    .include "src/link.o"
-    .space 8
+	.align 2
+	.include "src/main.o"
+	.align 2
+	.include "src/malloc.o"
+	.align 2
+	.include "src/text_printer.o"
+	.align 2
+	.include "src/window.o"
+	.align 2
+	.include "src/window_8bpp.o"
+	.align 2
+	.include "src/sprite.o"
+	.align 2
+	.include "src/string_util.o"
+	.align 2
+	.include "src/link.o"
+	.space 8
 
-    @ .include "src/link_rfu.o"
-    .align 2
-    .include "src/battle_controllers.o"
-    .align 2
-    .include "src/battle_main.o"
-    .align 2
-    .include "src/pokemon.o"
-    .align 2
-    .include "src/daycare.o"
-    .align 2
-    .include "src/load_save.o"
-    .align 2
-    .include "src/trade.o"
-    .align 2
-    .include "src/trade_scene.o"
-    .align 2
-    .include "src/new_game.o"
+	@ .include "src/link_rfu.o"
+	.align 2
+	.include "src/battle_controllers.o"
+	.align 2
+	.include "src/battle_main.o"
+	.align 2
+	.include "src/pokemon.o"
+	.align 2
+	.include "src/daycare.o"
+	.align 2
+	.include "src/load_save.o"
+	.align 2
+	.include "src/trade.o"
+	.align 2
+	.include "src/trade_scene.o"
+	.align 2
+	.include "src/new_game.o"
 
-    .align 2
+	.align 2
 gUnknown_2031DB4: @ 2031DB4
-    .space 0x8
+	.space 0x8
 
 gUnknown_2031DBC: @ 2031DBC
-    .space 0x8
+	.space 0x8
 
 gUnknown_2031DC4: @ 2031DC4
-    .space 0x8
+	.space 0x8
 
 gUnknown_2031DCC: @ 2031DCC
-    .space 0x8
+	.space 0x8
 
 gUnknown_2031DD4: @ 2031DD4
-    .space 0x4
+	.space 0x4
 
 gDisableMapMusicChangeOnMapLoad: @ 2031DD8
-    .space 0x2
+	.space 0x2
 
 gUnknown_2031DDA: @ 2031DDA
-    .space 0x2
+	.space 0x2
 
 gUnknown_2031DDC: @ 2031DDC
-    .space 0x4
+	.space 0x4
 
 gUnknown_2031DE0: @ 2031DE0
-    .space 0x4
+	.space 0x4
 
 gUnknown_2031DE4: @ 2031DE4
-    .space 0x4
+	.space 0x4
 
 gUnknown_2031DE8: @ 2031DE8
-    .space 0x2
+	.space 0x2
 
 gUnknown_2031DEA: @ 2031DEA
-    .space 0x2
+	.space 0x2
 
 gUnknown_2031DEC: @ 2031DEC
-    .space 0x10
+	.space 0x10
 
-    .align 2
-    .include "src/fieldmap.o"
+	.align 2
+	.include "src/fieldmap.o"
 
 gUnknown_2036E28: @ 2036E28
-    .space 0x4
+	.space 0x4
 
 gUnknown_2036E2C: @ 2036E2C
-    .space 0x4
+	.space 0x4
 
 gUnknown_2036E30: @ 2036E30
-    .space 0x4
+	.space 0x4
 
 gUnknown_2036E34: @ 2036E34
-    .space 0x4
+	.space 0x4
 
 gMapObjects: @ 2036E38
-    .space 0x240
+	.space 0x240
 
 gPlayerAvatar: @ 2037078
-    .space 0x20
+	.space 0x20
 
 gUnknown_2037098: @ 2037098
-    .space 0x2
+	.space 0x2
 
 gUnknown_203709A: @ 203709A
-    .space 0x2
+	.space 0x2
 
 gUnknown_203709C: @ 203709C
-    .space 0x4
+	.space 0x4
 
-    .align 2
-    .include "src/script.o"
-    .align 2
-    .include "src/scrcmd.o"
-    .align 2
-    .include "src/event_data.o"
-    .align 2
-    .include "src/start_menu.o"
-    .align 2
-    .include "src/tileset_anims.o"
-    .align 2
-    .include "src/palette.o"
-    .align 2
-    .include "src/sound.o"
+	.align 2
+	.include "src/script.o"
+	.align 2
+	.include "src/scrcmd.o"
+	.align 2
+	.include "src/event_data.o"
+	.align 2
+	.include "src/start_menu.o"
+	.align 2
+	.include "src/tileset_anims.o"
+	.align 2
+	.include "src/palette.o"
+	.align 2
+	.include "src/sound.o"
 
-    .align 2
+	.align 2
 gUnknown_2037ED4: @ 2037ED4
-    .space 0x4
+	.space 0x4
 
 gUnknown_2037ED8: @ 2037ED8
-    .space 0x4
+	.space 0x4
 
 gAnimScriptCallback: @ 2037EDC
-    .space 0x4
+	.space 0x4
 
 gUnknown_2037EE0: @ 2037EE0
-    .space 0x1
+	.space 0x1
 
 gAnimScriptActive: @ 2037EE1
-    .space 0x1
+	.space 0x1
 
 gAnimVisualTaskCount: @ 2037EE2
-    .space 0x1
+	.space 0x1
 
 gUnknown_2037EE3: @ 2037EE3
-    .space 0x1
+	.space 0x1
 
 gAnimDisableStructPtr: @ 2037EE4
-    .space 0x4
+	.space 0x4
 
 gAnimMoveDmg: @ 2037EE8
-    .space 0x4
+	.space 0x4
 
 gAnimMovePower: @ 2037EEC
-    .space 0x2
+	.space 0x2
 
 gUnknown_2037EEE: @ 2037EEE
-    .space 0x10
+	.space 0x10
 
 gAnimFriendship: @ 2037EFE
-    .space 0x2
+	.space 0x2
 
 gWeatherMoveAnim: @ 2037F00
-    .space 0x2
+	.space 0x2
 
 gBattleAnimArgs: @ 2037F02
-    .space 0x10
+	.space 0x10
 
 gUnknown_2037F12: @ 2037F12
-    .space 0x2
+	.space 0x2
 
 gUnknown_2037F14: @ 2037F14
-    .space 0x2
+	.space 0x2
 
 gAnimMoveTurn: @ 2037F16
-    .space 0x1
+	.space 0x1
 
 gUnknown_2037F17: @ 2037F17
-    .space 0x1
+	.space 0x1
 
 gUnknown_2037F18: @ 2037F18
-    .space 0x2
+	.space 0x2
 
 gBattleAnimAttacker: @ 2037F1A
-    .space 0x1
+	.space 0x1
 
 gBattleAnimTarget: @ 2037F1B
-    .space 0x1
+	.space 0x1
 
 gAnimBattlerSpecies: @ 2037F1C
-    .space 0x8
+	.space 0x8
 
 gUnknown_2037F24: @ 2037F24
-    .space 0x4
+	.space 0x4
 
-    .align 2
-    .include "src/battle_anim_mons.o"
-    .align 2
-    .include "src/title_screen.o"
+	.align 2
+	.include "src/battle_anim_mons.o"
+	.align 2
+	.include "src/title_screen.o"
 
-    .align 2
+	.align 2
 gUnknown_2037F34: @ 2037F34
-    .space 0x200
+	.space 0x200
 
 gUnknown_2038134: @ 2038134
-    .space 0x260
+	.space 0x260
 
 gUnknown_2038394: @ 2038394
-    .space 0x2F0
+	.space 0x2F0
 
 gUnknown_2038684: @ 2038684
-    .space 0x20
+	.space 0x20
 
 gUnknown_20386A4: @ 20386A4
-    .space 0x4
+	.space 0x4
 
 gUnknown_20386A8: @ 20386A8
-    .space 0x4
+	.space 0x4
 
-    .include "src/battle_setup.o"
-    .align 2
-    .include "src/wild_encounter.o"
+	.include "src/battle_setup.o"
+	.align 2
+	.include "src/wild_encounter.o"
 
-    .align 2
+	.align 2
 gFieldEffectArguments: @ 20386E0
-    .space 0x20
+	.space 0x20
 
-    .align 2
-    .include "src/scanline_effect.o"
+	.align 2
+	.include "src/scanline_effect.o"
 
-    .align 2
-    .include "src/option_menu.o"
+	.align 2
+	.include "src/option_menu.o"
 
 gTrainerCards: @ 2039624
-    .space 0x180
+	.space 0x180
 
 gUnknown_20397A4: @ 20397A4
-    .space 0x4
+	.space 0x4
 
 gUnknown_20397A8: @ 20397A8
-    .space 0x4
+	.space 0x4
 
 gUnknown_20397AC: @ 20397AC
-    .space 0x4
+	.space 0x4
 
 gUnknown_20397B0: @ 20397B0
-    .space 0x4
+	.space 0x4
 
 gUnknown_20397B4: @ 20397B4
-    .space 0x1
+	.space 0x1
 
 gUnknown_20397B5: @ 20397B5
-    .space 0x1
+	.space 0x1
 
 gUnknown_20397B6: @ 20397B6
-    .space 0x1
+	.space 0x1
 
 gUnknown_20397B7: @ 20397B7
-    .space 0x1
+	.space 0x1
 
 gUnknown_20397B8: @ 20397B8
-    .space 0x2
+	.space 0x2
 
 gUnknown_20397BA: @ 20397BA
-    .space 0x2
+	.space 0x2
 
 gUnknown_20397BC: @ 20397BC
-    .space 0x64
+	.space 0x64
 
 gUnknown_2039820: @ 2039820
-    .space 0x1
+	.space 0x1
 
 gUnknown_2039821: @ 2039821
-    .space 0x1
+	.space 0x1
 
 gUnknown_2039822: @ 2039822
-    .space 0x1
+	.space 0x1
 
 gUnknown_2039823: @ 2039823
-    .space 0x1
+	.space 0x1
 
 gUnknown_2039824: @ 2039824
-    .space 0x1
+	.space 0x1
 
 gUnknown_2039825: @ 2039825
-    .space 0x1
+	.space 0x1
 
 gUnknown_2039826: @ 2039826
-    .space 0x2
+	.space 0x2
 
 gUnknown_2039828: @ 2039828
-    .space 0x4
+	.space 0x4
 
 gUnknown_203982C: @ 203982C
-    .space 0x4
+	.space 0x4
 
 gUnknown_2039830: @ 2039830
-    .space 0x40
+	.space 0x40
 
 gUnknown_2039870: @ 2039870
-    .space 0x4
+	.space 0x4
 
 gUnknown_2039874: @ 2039874
-    .space 0x4
+	.space 0x4
 
-    .align 2
-    .include "src/item_menu_icons.o"
+	.align 2
+	.include "src/item_menu_icons.o"
 
 gBagPockets: @ 203988C
-    .space 0x28
+	.space 0x28
 
-    .align 2
-    .include "src/shop.o"
-    .align 2
-    .include "src/sea_cottage_special_anim.o"
-    .align 2
-    .include "src/script_menu.o"
+	.align 2
+	.include "src/shop.o"
+	.align 2
+	.include "src/sea_cottage_special_anim.o"
+	.align 2
+	.include "src/script_menu.o"
 
-    .align 2
+	.align 2
 gUnknown_203998C: @ 203998C
-    .space 0x4
+	.space 0x4
 
-    .align 2
-    .include "src/money.o"
+	.align 2
+	.include "src/money.o"
 
-    .align 2
-    .include "src/safari_zone.o"
-    .align 2
-    .include "src/item_use.o"
+	.align 2
+	.include "src/safari_zone.o"
+	.align 2
+	.include "src/item_use.o"
 
-    .align 2
+	.align 2
 gUnknown_203999C: @ 203999C
-    .space 0x8
+	.space 0x8
 
-    .align 2
-    .include "src/dragon.o"
-    .align 2
-    .include "src/battle_anim_utility_funcs.o"
-    .align 2
-    .include "src/battle_intro.o"
-    .align 2
-    .include "src/easy_chat.o"
-    .align 2
-    .include "src/mon_markings.o"
-    .align 2
-    .include "src/mail.o"
-    .align 2
-    .include "src/menu_helpers.o"
+	.align 2
+	.include "src/dragon.o"
+	.align 2
+	.include "src/battle_anim_utility_funcs.o"
+	.align 2
+	.include "src/battle_intro.o"
+	.align 2
+	.include "src/easy_chat.o"
+	.align 2
+	.include "src/mon_markings.o"
+	.align 2
+	.include "src/mail.o"
+	.align 2
+	.include "src/menu_helpers.o"
 
-    .align 2
+	.align 2
 gUnknown_20399D4: @ 20399D4
-    .space 0x4
+	.space 0x4
 
 gUnknown_20399D8: @ 20399D8
-    .space 0x4
+	.space 0x4
 
 gUnknown_20399DC: @ 20399DC
-    .space 0x4
+	.space 0x4
 
 gUnknown_20399E0: @ 20399E0
-    .space 0x4
+	.space 0x4
 
 gUnknown_20399E4: @ 20399E4
-    .space 0x4
+	.space 0x4
 
 gUnknown_20399E8: @ 20399E8
-    .space 0x4
+	.space 0x4
 
 gUnknown_20399EC: @ 20399EC
-    .space 0x4
+	.space 0x4
 
 gUnknown_20399F0: @ 20399F0
-    .space 0xC
+	.space 0xC
 
 gUnknown_20399FC: @ 20399FC
-    .space 0x4
+	.space 0x4
 
 gAIScriptPtr: @ 2039A00
-    .space 0x4
+	.space 0x4
 
 gPlayerFacingPosition: @ 2039A04
-    .space 0x8
+	.space 0x8
 
-    .align 2
-    .include "src/field_specials.o"
-    .align 2
-    .include "src/battle_records.o"
-    .align 2
-    .include "src/evolution_scene.o"
-    .align 2
-    .include "src/coins.o"
-    .align 2
-    .include "src/battle_transition.o"
+	.align 2
+	.include "src/field_specials.o"
+	.align 2
+	.include "src/battle_records.o"
+	.align 2
+	.include "src/evolution_scene.o"
+	.align 2
+	.include "src/coins.o"
+	.align 2
+	.include "src/battle_transition.o"
+	.align 2
+	.include "src/battle_message.o"
+	.align 2
+	.include "src/save.o"
+	.align 2
+	.include "src/mystery_event_script.o"
+	.align 2
+	.include "src/fldeff_sweetscent.o"
+	.align 2
+	.include "src/learn_move.o"
+	.align 2
+	.include "src/battle_tower.o"
+	.align 2
+	.include "src/player_pc.o"
+	.align 2
+	.include "src/intro.o"
+	.align 2
+	.include "src/hall_of_fame.o"
+	.align 2
+	.include "src/credits.o"
+	.align 2
+	.include "src/diploma.o"
 
-gUnknown_2039A30: @ 2039A30
-    .space 0x4
-
-gUnknown_2039A34: @ 2039A34
-    .space 0x4
-
-    .align 2
-    .include "src/save.o"
-    .align 2
-    .include "src/mystery_event_script.o"
-
-gUnknown_203AAB0: @ 203AAB0
-    .space 0x4
-
-    .align 2
-    .include "src/learn_move.o"
-    .align 2
-    .include "src/battle_tower.o"
-    .align 2
-    .include "src/player_pc.o"
-    .align 2
-    .include "src/intro.o"
-    .align 2
-    .include "src/hall_of_fame.o"
-    .align 2
-    .include "src/credits.o"
-    .align 2
-    .include "src/diploma.o"
-
-    .align 2
+	.align 2
 gUnknown_203AB4C: @ 203AB4C
-    .space 0x4
+	.space 0x4
 
 gUnknown_203AB50: @ 203AB50
-    .space 0x4
+	.space 0x4
 
 gUnknown_203AB54: @ 203AB54
-    .space 0x4
+	.space 0x4
 
-    .include "src/new_menu_helpers.o"
-    .align 2
+	.include "src/new_menu_helpers.o"
+	.align 2
 gUnknown_203ABE4: @ 203ABE4
-    .space 0x4
+	.space 0x4
 
 gUnknown_203ABE8: @ 203ABE8
-    .space 0x4
+	.space 0x4
 
-    .align 2
-    .include "src/map_preview_screen.o"
+	.align 2
+	.include "src/map_preview_screen.o"
 
-    .align 2
+	.align 2
 gUnknown_203ABF0: @ 203ABF0
-    .space 0x18
+	.space 0x18
 
 gUnknown_203AC08: @ 203AC08
-    .space 0xDC
+	.space 0xDC
 
 gUnknown_203ACE4: @ 203ACE4
-    .space 0x4
+	.space 0x4
 
 gUnknown_203ACE8: @ 203ACE8
-    .space 0x4
+	.space 0x4
 
 gUnknown_203ACEC: @ 203ACEC
-    .space 0x4
+	.space 0x4
 
 gUnknown_203ACF0: @ 203ACF0
-    .space 0x4
+	.space 0x4
 
-    .align 2
-    .include "src/list_menu.o"
-    .align 2
+	.align 2
+	.include "src/list_menu.o"
+	.align 2
 gUnknown_203ACFC: @ 203ACFC
-    .space 0x6
+	.space 0x6
 
 gUnknown_203AD02: @ 203AD02
-    .space 0x2
+	.space 0x2
 
 gUnknown_203AD04: @ 203AD04
-    .space 0x6
+	.space 0x6
 
 gUnknown_203AD0A: @ 203AD0A
-    .space 0x6
+	.space 0x6
 
 gUnknown_203AD10: @ 203AD10
-    .space 0x4
+	.space 0x4
 
 gUnknown_203AD14: @ 203AD14
-    .space 0x4
+	.space 0x4
 
 gUnknown_203AD18: @ 203AD18
-    .space 0x4
+	.space 0x4
 
 gUnknown_203AD1C: @ 203AD1C
-    .space 0x4
+	.space 0x4
 
 gUnknown_203AD20: @ 203AD20
-    .space 0x4
+	.space 0x4
 
 gUnknown_203AD24: @ 203AD24
-    .space 0x4
+	.space 0x4
 
 gUnknown_203AD28: @ 203AD28
-    .space 0x4
+	.space 0x4
 
 gUnknown_203AD2C: @ 203AD2C
-    .space 0x4
+	.space 0x4
 
 gSpecialVar_ItemId: @ 203AD30
-    .space 0x4
+	.space 0x4
 
-    .align 2
-    .include "src/bag.o"
-    .align 2
-    .include "src/trainer_pokemon_sprites.o"
-    .align 2
-    .include "src/vs_seeker.o"
-    .align 2
-    .include "src/item_pc.o"
-    .align 2
-    .include "src/mailbox_pc.o"
-    .align 2
-    .include "src/menu.o"
-    .align 2
-    .include "src/quest_log.o"
+	.align 2
+	.include "src/bag.o"
+	.align 2
+	.include "src/trainer_pokemon_sprites.o"
+	.align 2
+	.include "src/vs_seeker.o"
+	.align 2
+	.include "src/item_pc.o"
+	.align 2
+	.include "src/mailbox_pc.o"
+	.align 2
+	.include "src/menu.o"
+	.align 2
+	.include "src/quest_log.o"
 
-    .align 2
+	.align 2
 gUnknown_203B04C: @ 203B04C
-    .space 0xC
+	.space 0xC
 
 gUnknown_203B058: @ 203B058
-    .space 0x1
+	.space 0x1
 
 gUnknown_203B059: @ 203B059
-    .space 0x3
+	.space 0x3
 
 gUnknown_203B05C: @ 203B05C
-    .space 0x8
+	.space 0x8
 
 gUnknown_203B064: @ 203B064
-    .space 0x4
+	.space 0x4
 
-gUnknown_203B068: @ 203B068
-    .space 0x2
+gUnionRoomOfferedSpecies: @ 203B068
+	.space 0x2
 
-gUnknown_203B06A: @ 203B06A
-    .space 0x2
+gUnionRoomRequestedMonType: @ 203B06A
+	.space 0x2
 
 gUnknown_203B06C: @ 203B06C
-    .space 0x18
+	.space 0x18
 
 gUnknown_203B084: @ 203B084
-    .space 0x4
+	.space 0x4
 
 gUnknown_203B088: @ 203B088
-    .space 0x4
+	.space 0x4
 
 gUnknown_203B08C: @ 203B08C
-    .space 0x4
+	.space 0x4
 
 gUnknown_203B090: @ 203B090
-    .space 0x4
+	.space 0x4
 
 gUnknown_203B094: @ 203B094
-    .space 0x4
+	.space 0x4
 
 gUnknown_203B098: @ 203B098
-    .space 0x4
+	.space 0x4
 
-gUnknown_203B09C: @ 203B09C
-    .space 0x4
+	.align 2
+	.include "src/party_menu.o"
 
-gUnknown_203B0A0: @ 203B0A0
-    .space 0x9
-
-gUnknown_203B0A9: @ 203B0A9
-    .space 0x5
-
-gUnknown_203B0AE: @ 203B0AE
-    .space 0x6
-
-gUnknown_203B0B4: @ 203B0B4
-    .space 0x4
-
-gUnknown_203B0B8: @ 203B0B8
-    .space 0x4
-
-gUnknown_203B0BC: @ 203B0BC
-    .space 0x4
-
-gUnknown_203B0C0: @ 203B0C0
-    .space 0x1
-
-gUnknown_203B0C1: @ 203B0C1
-    .space 0x3
-
-gPostMenuFieldCallback: @ 203B0C4
-    .space 0x4
-
-gUnknown_203B0C8: @ 203B0C8
-    .space 0x4
-
-gUnknown_203B0CC: @ 203B0CC
-    .space 0x4
-
-gUnknown_203B0D0: @ 203B0D0
-    .space 0x4
-
-gSelectedOrderFromParty: @ 203B0D4
-    .space 0x4
-
-gUnknown_203B0D8: @ 203B0D8
-    .space 0x4
-
-gUnknown_203B0DC: @ 203B0DC
-    .space 0x4
-
+	.align 2
 gUnknown_203B0E0: @ 203B0E0
-    .space 0x4
+	.space 0x4
 
 gUnknown_203B0E4: @ 203B0E4
-    .space 0x4
+	.space 0x4
 
 gUnknown_203B0E8: @ 203B0E8
-    .space 0x4
+	.space 0x4
 
-    .align 2
-    .include "src/help_system_812B1E0.o"
-    .align 2
-    .include "src/fame_checker.o"
-    .align 2
-    .include "src/oak_speech.o"
-    .align 2
-    .include "src/tm_case.o"
-    .include "src/menu_indicators.o"
+	.align 2
+	.include "src/help_system_812B1E0.o"
+	.align 2
+	.include "src/fame_checker.o"
+	.align 2
+	.include "src/oak_speech.o"
+	.align 2
+	.include "src/tm_case.o"
+	.include "src/menu_indicators.o"
 
 gUnknown_203B140: @ 203B140
-    .space 0x4
+	.space 0x4
 
 gUnknown_203B144: @ 203B144
-    .space 0x4
+	.space 0x4
 
 gUnknown_203B148: @ 203B148
-    .space 0x10
+	.space 0x10
 
 gUnknown_203B158: @ 203B158
-    .space 0x4
+	.space 0x4
 
 gUnknown_203B15C: @ 203B15C
-    .space 0x4
+	.space 0x4
 
 gUnknown_203B160: @ 203B160
-    .space 0x4
+	.space 0x4
 
 gUnknown_203B164: @ 203B164
-    .space 0x4
+	.space 0x4
 
 gUnknown_203B168: @ 203B168
-    .space 0x4
+	.space 0x4
 
-gUnknown_203B16C: @ 203B16C
-    .space 0x1
+gLastViewedMonIndex: @ 203B16C
+	.space 0x1
 
 gUnknown_203B16D: @ 203B16D
-    .space 0x1
+	.space 0x1
 
 gUnknown_203B16E: @ 203B16E
-    .space 0x2
+	.space 0x2
 
 gUnknown_203B170: @ 203B170
-    .space 0x4
+	.space 0x4
 
-    .align 2
-    .include "src/help_system.o"
-    .align 2
-    .include "src/dynamic_placeholder_text_util.o"
-    .align 2
-    .include "src/berry_pouch.o"
-    .align 2
-    .include "src/slot_machine.o"
+	.align 2
+	.include "src/help_system.o"
+	.align 2
+	.include "src/dynamic_placeholder_text_util.o"
+	.align 2
+	.include "src/berry_pouch.o"
+	.align 2
+	.include "src/slot_machine.o"
 
 sLocationHistory: @ 203F3A8
-    .space 0x6
+	.space 0x6
 
 sRoamerLocation: @ 203F3AE
-    .space 0x2
+	.space 0x2
 
-    .align 2
-    .include "src/mystery_gift_menu.o"
-    .align 2
-    .include "src/mevent.o"
-    .align 2
-    .include "src/mevent_server_helpers.o"
-    .align 2
-    .include "src/mevent_client.o"
-    .align 2
-    .include "src/mevent_server.o"
-    .align 2
-    .include "src/mevent_8145654.o"
-    .align 2
-    .include "src/seagallop.o"
+	.align 2
+	.include "src/mystery_gift_menu.o"
+	.align 2
+	.include "src/mevent.o"
+	.align 2
+	.include "src/mevent_server_helpers.o"
+	.align 2
+	.include "src/mevent_client.o"
+	.align 2
+	.include "src/mevent_server.o"
+	.align 2
+	.include "src/mevent_8145654.o"
+	.align 2
+	.include "src/seagallop.o"
 
-    .align 2
+	.align 2
 gUnknown_203F3D4: @ 203F3D4
-    .space 0x4
+	.space 0x4
 
 gUnknown_203F3D8: @ 203F3D8
-    .space 0x4
+	.space 0x4
 
 gUnknown_203F3DC: @ 203F3DC
-    .space 0x4
+	.space 0x4
 
 gUnknown_203F3E0: @ 203F3E0
-    .space 0x4
+	.space 0x4
 
 gUnknown_203F3E4: @ 203F3E4
-    .space 0x14
+	.space 0x14
 
 gUnknown_203F3F8: @ 203F3F8
-    .space 0x8
+	.space 0x8
 
 gUnknown_203F400: @ 203F400
-    .space 0x2C
+	.space 0x2C
 
 gUnknown_203F42C: @ 203F42C
-    .space 0x10
+	.space 0x10
 
 gUnknown_203F43C: @ 203F43C
-    .space 0x4
+	.space 0x4
 
 gUnknown_203F440: @ 203F440
-    .space 0x4
+	.space 0x4
 
-    .align 2
-    .include "src/teachy_tv.o"
-    .align 2
-    .include "src/unk_815C980.o"
-    .align 2
-    .include "src/trainer_tower.o"
-    .align 2
-    .include "src/berry_powder.o"
+	.align 2
+	.include "src/teachy_tv.o"
+	.align 2
+	.include "src/unk_815C980.o"
+	.align 2
+	.include "src/trainer_tower.o"
+	.align 2
+	.include "src/berry_powder.o"

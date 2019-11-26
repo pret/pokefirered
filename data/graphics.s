@@ -13892,35 +13892,35 @@ gFile_graphics_battle_anims_sprites_188_palette:: @ 8E826E8
 	.incbin "graphics/battle_anims/sprites/188.gbapal.lz"
 
 	.align 2
-gFile_graphics_interface_party_menu_misc_sheet:: @ 8E82700
+gPartyMenuBg_Gfx:: @ 8E82700
 	.incbin "graphics/interface/party_menu_misc.4bpp.lz"
 
 	.align 2
-gUnknown_8E829C8:: @ 8E829C8
+gPartyMenuBg_Pal:: @ 8E829C8
 	.incbin "baserom.gba", 0xE829C8, 0xE8
 
 	.align 2
-gFile_graphics_interface_party_menu_misc_tilemap:: @ 8E82AB0
+gPartyMenuBg_Tilemap:: @ 8E82AB0
 	.incbin "graphics/interface/party_menu_misc.bin.lz"
 
 	.align 2
-gFile_graphics_interface_party_menu_pokeball_sheet:: @ 8E82BE8
+gPartyMenuPokeball_Gfx:: @ 8E82BE8
 	.incbin "graphics/interface/party_menu_pokeball.4bpp.lz"
 
 	.align 2
-gFile_graphics_interface_party_menu_pokeball_small_sheet:: @ 8E82D68
+gPartyMenuPokeballSmall_Gfx:: @ 8E82D68
 	.incbin "graphics/interface/party_menu_pokeball_small.4bpp.lz"
 
 	.align 2
-gFile_graphics_interface_party_menu_pokeball_palette:: @ 8E82E7C
+gPartyMenuPokeball_Pal:: @ 8E82E7C
 	.incbin "graphics/interface/party_menu_pokeball.gbapal.lz"
 
 	.align 2
-gUnknown_8E82EA0:: @ 8E82EA0
+gStatusGfx_Icons:: @ 8E82EA0
 	.incbin "baserom.gba", 0xE82EA0, 0x204
 
 	.align 2
-gFile_graphics_interface_status_icons_palette:: @ 8E830A4
+gStatusPal_Icons:: @ 8E830A4
 	.incbin "graphics/interface/status_icons.gbapal.lz"
 
 	.align 2
@@ -14015,7 +14015,7 @@ gBuyMenuFrame_Tilemap:: @ 8E85EFC
 	.incbin "graphics/shop_menu/shop_tilemap.bin"
 
 gBuyMenuFrame_TmHmTilemap:: @ 8E86038
-	.incbin "graphics/shop_menu/shop_tmHmTilemap.bin"
+	.incbin "graphics/shop_menu/shop_tm_hm_tilemap.bin"
 
 gBuyMenuFrame_Pal:: @ 8E86170
 	.incbin "graphics/shop_menu/shop_menu.gbapal.lz"
@@ -16125,22 +16125,22 @@ gUnknown_8E998CC:: @ 8E998CC
 	.incbin "baserom.gba", 0xE998CC, 0x4C0
 
 gUnknown_8E99D8C:: @ 8E99D8C
-	.incbin "baserom.gba", 0xE99D8C, 0x20 @UNKNOWN
+	.incbin "graphics/link_rfu/unk_8E99DAC.gbapal"
 
 gUnknown_8E99DAC:: @ 8E99DAC
-	.incbin "baserom.gba", 0xE99DAC, 0xC8 @UNKNOWN
+	.incbin "graphics/link_rfu/unk_8E99DAC.4bpp.lz"
 
 gUnknown_8E99E74:: @ 8E99E74
-	.incbin "baserom.gba", 0xE99E74, 0xB0
+	.incbin "graphics/link_rfu/unk_8E99E74.bin.lz"
 
 gUnknown_8E99F24:: @ 8E99F24
-	.incbin "baserom.gba", 0xE99F24, 0x20 @UNKNOWN
+	.incbin "graphics/link_rfu/unk_8E9A168.gbapal"
 
 gUnknown_8E99F44:: @ 8E99F44
-	.incbin "baserom.gba", 0xE99F44, 0x224
+	.incbin "graphics/link_rfu/unk_8E99F44.4bpp.lz"
 
 gUnknown_8E9A168:: @ 8E9A168
-	.incbin "baserom.gba", 0xE9A168, 0x2F8
+	.incbin "graphics/link_rfu/unk_8E9A168.4bpp.lz"
 
 gUnknown_8E9A460:: @ 8E9A460
 	.incbin "baserom.gba", 0xE9A460, 0xEB0

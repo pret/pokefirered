@@ -309,17 +309,17 @@ gUnknown_846F470:: @ 846F470
 gUnknown_846F488:: @ 846F488 struct UnkStruct3? perhaps not
 	.byte 9, 2, 8
 	.align 2
-	.4byte 0x9c
+	.2byte 0x9c, 0x00
 	.4byte gUnknown_846F2F8 + 0x18
 	.4byte gUnknown_846F320 + 0x10
 	.byte 8, 2, 8
 	.align 2
-	.4byte 0xb4
+	.2byte 0xb4, 0x00
 	.4byte gUnknown_846F2F8 + 0x18
 	.4byte gUnknown_846F320 + 0x10
 	.byte 8, 2, 8
 	.align 2
-	.4byte 0xcc
+	.2byte 0xcc, 0x00
 	.4byte gUnknown_846F2F8 + 0x18
 	.4byte gUnknown_846F320 + 0x10
 

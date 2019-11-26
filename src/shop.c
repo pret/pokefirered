@@ -108,7 +108,7 @@ EWRAM_DATA struct MartHistory gShopMenuHistory = {0};
 
 //Function Declarations
 static u8 CreateShopMenu(u8 a0);
-static u8 GetMartTypeFromItemList(bool32 a0);
+static bool8 GetMartTypeFromItemList(bool32 a0);
 static void SetShopItemsForSale(const u16 *items);
 static void SetShopMenuCallback(MainCallback callback);
 static void Task_ShopMenu(u8 taskId);

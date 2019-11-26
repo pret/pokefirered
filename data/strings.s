@@ -3405,37 +3405,55 @@ gUnknown_841CE1C:: @ 841CE1C
 gUnknown_841CE24:: @ 841CE24
 	.string "Communication standby…$"
 
-	.string " Are you ready to BERRY-CRUSH?\n"
+	.align 2
+gUnknown_841CE3C:: @ 841CE3C
+	.string "Are you ready to BERRY-CRUSH?\n"
 	.string "Please pick a BERRY for use.\p"
 	.string "$"
 
+	.align 2
+gUnknown_841CE78:: @ 841CE78
 	.string "Please wait while each member\n"
 	.string "chooses a BERRY.$"
 
-	.string " {PAUSE_MUSIC}{PLAY_BGM MUS_FANFA1}You ended up with {STR_VAR_1} units of\n"
+	.align 2
+gUnknown_841CEA8:: @ 841CEA8
+	.string "{PAUSE_MUSIC}{PLAY_BGM MUS_FANFA1}You ended up with {STR_VAR_1} units of\n"
 	.string "silky-smooth BERRY POWDER.{RESUME_MUSIC}\p"
 	.string "Your total amount of BERRY POWDER\n"
 	.string "is {STR_VAR_2}.\p"
 	.string "$"
 
-	.string " Recording your game results in the\n"
+	.align 2
+gUnknown_841CF14:: @ 841CF14
+	.string "Recording your game results in the\n"
 	.string "save file.\n"
 	.string "Please wait.$"
 
-	.string " Want to play BERRY CRUSH again?$"
+	.align 2
+gUnknown_841CF50:: @ 841CF50
+	.string "Want to play BERRY CRUSH again?$"
 
+	.align 2
+gUnknown_841CF70:: @ 841CF70
 	.string "You have no BERRIES.\n"
 	.string "The game will be canceled.$"
 
+	.align 2
+gUnknown_841CFA0:: @ 841CFA0
 	.string "A member dropped out.\n"
 	.string "The game will be canceled.$"
 
-	.string "   Time's up.\p"
+	.align 2
+gUnknown_841CFD4:: @ 841CFD4
+	.string "Time's up.\p"
 	.string "Good BERRY POWDER could not be\n"
 	.string "made…\p"
 	.string "$"
 
-	.string "   Communication standby…$"
+	.align 2
+gUnknown_841D008:: @ 841D008
+	.string "Communication standby…$"
 
 	.align 2
 gUnknown_841D020:: @ 841D020
@@ -3444,14 +3462,17 @@ gUnknown_841D020:: @ 841D020
 gUnknown_841D02C:: @ 841D02C
 	.string "1. {DYNAMIC 0x00}$"
 
-gUnknown_841D032:: @ 0x841D032
-	.string "   times$"
+	.align 2
+gUnknown_841D034:: @ 0x841D034
+	.string " times$"
 
-gUnknown_841D03B:: @ 0x841D03B
-	.string " {STR_VAR_1}.{STR_VAR_2}$"
+	.align 2
+gUnknown_841D03C:: @ 0x841D03C
+	.string "{STR_VAR_1}.{STR_VAR_2}$"
 
-gUnknown_841D042:: @ 0x841D042
-	.string "  {STR_VAR_1} BERRY$"
+	.align 2
+gUnknown_841D044:: @ 0x841D044
+	.string "{STR_VAR_1} BERRY$"
 
 	.align 2
 gUnknown_841D050:: @ 841D050
@@ -3492,20 +3513,25 @@ gUnknown_841D098:: @ 841D098
 gUnknown_841D0A4:: @ 841D0A4
 	.string "{STR_VAR_1}サ$"
 
+	.align 2
 gUnknown_841D0A8:: @ 841D0A8
 	.string "No. of Presses Rankings$"
 
+	.align 2
 gUnknown_841D0C0:: @ 841D0C0
 	.string "Crushing Results$"
 
-gUnknown_841D0D1:: @ 0x841D0D1
-	.string "   Neatness Rankings$"
+	.align 2
+gUnknown_841D0D4:: @ 0x841D0D4
+	.string "Neatness Rankings$"
 
-gUnknown_841D0E6:: @ 0x841D0E6
-	.string "  Cooperative Rankings$"
+	.align 2
+gUnknown_841D0E8:: @ 0x841D0E8
+	.string "Cooperative Rankings$"
 
-gUnknown_841D0FD:: @ 0x841D0FD
-	.string "   Pressing-Power Rankings$"
+	.align 2
+gUnknown_841D100:: @ 0x841D100
+	.string "Pressing-Power Rankings$"
 
 gUnknown_841D118:: @ 841D118
 	.string "BERRY CRUSH$"

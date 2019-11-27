@@ -1701,7 +1701,7 @@ sub_80487F8: @ 80487F8
 	lsls r0, 24
 	mov r4, sp
 	adds r4, 0x16
-	ldr r1, _080488B8 @ =gUnknown_8463E60
+	ldr r1, _080488B8 @ =gNatureNames
 	lsrs r0, 22
 	adds r0, r1
 	ldr r1, [r0]
@@ -1746,7 +1746,7 @@ _080488A8:
 _080488AC: .4byte gUnknown_826052C
 _080488B0: .4byte gSprites
 _080488B4: .4byte gMonSpritesGfxPtr
-_080488B8: .4byte gUnknown_8463E60
+_080488B8: .4byte gNatureNames
 _080488BC:
 	adds r0, r1, 0
 	subs r0, 0x4B

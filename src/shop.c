@@ -643,103 +643,22 @@ static void BuyMenuPrintItemDescriptionAndShowItemIcon(s32 item, bool8 onInit, s
     }
 }
 
-#ifdef NONMATCHING
-// As simple as this seems, I could not get the while loop to use the correct registers. It should pad the front of gStringVar4 with 0 based on the length of gStringVar1.
 static void BuyMenuPrintPriceInList(u8 windowId, s32 item, u8 y)
 {
-    u32 len, x;
+    s32 x;
     u8 *loc;
 
     if (item != INDEX_CANCEL)
     {
         ConvertIntToDecimalStringN(gStringVar1, itemid_get_market_price(item), 0, 4);
-        len = 4 - StringLength(gStringVar1);
+        x = 4 - StringLength(gStringVar1);
         loc = gStringVar4;
-        x = len - 1;
-        if (x > 0)
-        {
-            while (len != 0)
-            {    
-                *loc = 0;
-                loc++;
-                len--;
-            }
-        }
+        while (x-- != 0)
+            *loc++ = 0;
         StringExpandPlaceholders(loc, gText_PokedollarVar1);
-        BuyMenuPrint(windowId, 1, gStringVar4, 0x69, y, 0, 0, TEXT_SPEED_FF, 1);
+        BuyMenuPrint(windowId, 0, gStringVar4, 0x69, y, 0, 0, TEXT_SPEED_FF, 1);
     }
 }
-#else
-NAKED
-static void BuyMenuPrintPriceInList(u8 windowId, s32 item, u8 y)
-{
-    asm_unified("\tpush {r4-r6,lr}\n"
-                "\tsub sp, 0x14\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r6, r0, 24\n"
-                "\tlsls r2, 24\n"
-                "\tlsrs r5, r2, 24\n"
-                "\tmovs r0, 0x2\n"
-                "\tnegs r0, r0\n"
-                "\tcmp r1, r0\n"
-                "\tbeq _0809B480\n"
-                "\tldr r4, _0809B488 @ =gStringVar1\n"
-                "\tlsls r0, r1, 16\n"
-                "\tlsrs r0, 16\n"
-                "\tbl itemid_get_market_price\n"
-                "\tadds r1, r0, 0\n"
-                "\tlsls r1, 16\n"
-                "\tlsrs r1, 16\n"
-                "\tadds r0, r4, 0\n"
-                "\tmovs r2, 0\n"
-                "\tmovs r3, 0x4\n"
-                "\tbl ConvertIntToDecimalStringN\n"
-                "\tadds r0, r4, 0\n"
-                "\tbl StringLength\n"
-                "\tlsls r0, 16\n"
-                "\tlsrs r0, 16\n"
-                "\tmovs r1, 0x4\n"
-                "\tsubs r1, r0\n"
-                "\tldr r2, _0809B48C @ =gStringVar4\n"
-                "\tadds r0, r1, 0\n"
-                "\tsubs r1, 0x1\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _0809B45C\n"
-                "\tmovs r3, 0\n"
-                "_0809B450:\n"
-                "\tstrb r3, [r2]\n"
-                "\tadds r2, 0x1\n"
-                "\tadds r0, r1, 0\n"
-                "\tsubs r1, 0x1\n"
-                "\tcmp r0, 0\n"
-                "\tbne _0809B450\n"
-                "_0809B45C:\n"
-                "\tldr r1, _0809B490 @ =gText_PokedollarVar1\n"
-                "\tadds r0, r2, 0\n"
-                "\tbl StringExpandPlaceholders\n"
-                "\tldr r2, _0809B48C @ =gStringVar4\n"
-                "\tstr r5, [sp]\n"
-                "\tmovs r0, 0\n"
-                "\tstr r0, [sp, 0x4]\n"
-                "\tstr r0, [sp, 0x8]\n"
-                "\tmovs r0, 0xFF\n"
-                "\tstr r0, [sp, 0xC]\n"
-                "\tmovs r0, 0x1\n"
-                "\tstr r0, [sp, 0x10]\n"
-                "\tadds r0, r6, 0\n"
-                "\tmovs r1, 0\n"
-                "\tmovs r3, 0x69\n"
-                "\tbl BuyMenuPrint\n"
-                "_0809B480:\n"
-                "\tadd sp, 0x14\n"
-                "\tpop {r4-r6}\n"
-                "\tpop {r0}\n"
-                "\tbx r0\n"
-                "\t_0809B488: .4byte gStringVar1\n"
-                "\t_0809B48C: .4byte gStringVar4\n"
-                "\t_0809B490: .4byte gText_PokedollarVar1\n");
-}
-#endif
 
 static void LoadTmHmNameInMart(s32 item)
 {

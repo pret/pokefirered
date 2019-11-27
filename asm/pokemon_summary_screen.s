@@ -5755,7 +5755,7 @@ sub_8137578: @ 8137578
 	bl GetNature
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r1, _081375F0 @ =gUnknown_8463E60
+	ldr r1, _081375F0 @ =gNatureNames
 	lsls r0, r6, 2
 	adds r0, r1
 	ldr r1, [r0]
@@ -5796,7 +5796,7 @@ _081375B2:
 	.align 2, 0
 _081375E8: .4byte gUnknown_203B140
 _081375EC: .4byte 0x00003290
-_081375F0: .4byte gUnknown_8463E60
+_081375F0: .4byte gNatureNames
 _081375F4:
 	ldr r0, [r7]
 	ldr r1, _08137614 @ =0x00003024
@@ -5952,7 +5952,7 @@ sub_8137724: @ 8137724
 	bl GetNature
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r1, _081377A8 @ =gUnknown_8463E60
+	ldr r1, _081377A8 @ =gNatureNames
 	lsls r0, r6, 2
 	adds r0, r1
 	ldr r1, [r0]
@@ -5997,7 +5997,7 @@ _08137790:
 	.align 2, 0
 _081377A0: .4byte gUnknown_203B140
 _081377A4: .4byte 0x00003290
-_081377A8: .4byte gUnknown_8463E60
+_081377A8: .4byte gNatureNames
 _081377AC:
 	cmp r5, 0xFF
 	bne _081377D0

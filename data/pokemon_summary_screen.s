@@ -4,26 +4,26 @@
 	.align 2
 
 gUnknown_84636C0:: @ 84636C0 gbapal
-	.incbin "baserom.gba", 0x4636C0, 0x20
+	.incbin "graphics/interface/pokesummary_unk_84636C0.gbapal"
 
 gUnknown_84636E0:: @ 84636E0 gbapal
-	.incbin "baserom.gba", 0x4636E0, 0x20
+	.incbin "graphics/interface/pokesummary_unk_84636E0.gbapal"
 
 gUnknown_8463700:: @ 8463700 gbapal
-	.incbin "baserom.gba", 0x463700, 0x20
+	.incbin "graphics/interface/pokesummary_unk_8463700.gbapal"
 
 gUnknown_8463720:: @ 8463720 gbapal
-	.incbin "baserom.gba", 0x463720, 0x20
+	.incbin "graphics/interface/pokesummary_unk_8463720.gbapal"
 
 gUnknown_8463740:: @ 8463740 something.lz
-	.incbin "baserom.gba", 0x463740, 0x12C
+	.incbin "graphics/interface/pokesummary_unk_8463740.4bpp.lz"
 
 gUnknown_846386C:: @ 846386C something.lz
-	.incbin "baserom.gba", 0x46386C, 0x120
+	.incbin "graphics/interface/pokesummary_unk_846386C.4bpp.lz"
 
 gUnknown_846398C:: @ 846398C oamdata
 	.4byte 0xc0004000, 0x00000000
-	@ animcmd
+
 
 gUnknown_8463994::
 	obj_image_anim_frame 0x0000, 20
@@ -39,7 +39,7 @@ gUnknown_84639A4:: @ 84639A4 dataptr
 
 gUnknown_84639AC:: @ 84639AC oamdata
 	.4byte 0x40004000, 0x00000000
-	@ animcmd
+
 
 gUnknown_84639B4::
 	obj_image_anim_frame 0x0000, 20
@@ -149,88 +149,166 @@ gUnknown_8463A7C:: @ 8463A7C dataptr
 	.4byte gUnknown_8463A74
 
 gUnknown_8463AAC:: @ 8463AAC gbapal
-	.incbin "baserom.gba", 0x463AAC, 0x20
+	.incbin "graphics/interface/pokesummary_unk_8463AAC.gbapal"
 
 gUnknown_8463ACC:: @ 8463ACC gbapal
-	.incbin "baserom.gba", 0x463ACC, 0x20
+	.incbin "graphics/interface/pokesummary_unk_8463ACC.gbapal"
 
 gUnknown_8463AEC:: @ 8463AEC oamdata
 	.4byte 0x00000000, 0x00000000
-	@ animcmd
+
+gUnknown_8463AF4::
 	obj_image_anim_frame 0x0000, 20
 	obj_image_anim_jump 0
 
 gUnknown_8463AFC:: @ 8463AFC dataptr
-	.4byte 0x8463af4
+	.4byte gUnknown_8463AF4
 
 gUnknown_8463B00:: @ 8463B00 gbapal
-	.incbin "baserom.gba", 0x463B00, 0x20
+	.incbin "graphics/interface/pokesummary_unk_8463B00.gbapal"
 
 gUnknown_8463B20:: @ 8463B20 something.lz
-	.incbin "baserom.gba", 0x463B20, 0x10
+	.incbin "graphics/interface/pokesummary_unk_8463B20.4bpp.lz"
 
 gUnknown_8463B30:: @ 8463B30 oamdata
 	.4byte 0x00000000, 0x00000000
-	@ animcmd
+
+gUnknown_8463B38::
 	obj_image_anim_frame 0x0001, 20
 	obj_image_anim_jump 0
 
 gUnknown_8463B40:: @ 8463B40 dataptr
-	.4byte 0x8463b38
+	.4byte gUnknown_8463B38
 
 gUnknown_8463B44:: @ 8463B44 gbapal
-	.incbin "baserom.gba", 0x463B44, 0x20
+	.incbin "graphics/interface/pokesummary_unk_8463B44.gbapal"
 
 gUnknown_8463B64:: @ 8463B64 something.lz
-	.incbin "baserom.gba", 0x463B64, 0x24
+	.incbin "graphics/interface/pokesummary_unk_8463B64.4bpp.lz"
 
 gUnknown_8463B88:: @ 8463B88 bin.lz
-	.incbin "baserom.gba", 0x463B88, 0xF8
+	.incbin "graphics/interface/pokesummary_unk_8463B88.bin.lz"
 
 gUnknown_8463C80:: @ 8463C80 bin.lz
-	.incbin "baserom.gba", 0x463C80, 0x1E0
+	.incbin "graphics/interface/pokesummary_unk_8463C80.bin.lz"
 
-gUnknown_8463E60:: @ 8463E60 dataptr
-	.4byte 0x8463dbc
-	.4byte 0x8463dc2
-	.4byte 0x8463dc9
-	.4byte 0x8463dcf
-	.4byte 0x8463dd7
-	.4byte 0x8463ddf
-	.4byte 0x8463de4
-	.4byte 0x8463deb
-	.4byte 0x8463df3
-	.4byte 0x8463dfa
-	.4byte 0x8463dfe
-	.4byte 0x8463e04
-	.4byte 0x8463e0a
-	.4byte 0x8463e12
-	.4byte 0x8463e18
-	.4byte 0x8463e1e
-	.4byte 0x8463e25
-	.4byte 0x8463e2a
-	.4byte 0x8463e30
-	.4byte 0x8463e38
-	.4byte 0x8463e3d
-	.4byte 0x8463e42
-	.4byte 0x8463e49
-	.4byte 0x8463e4f
-	.4byte 0x8463e57
+gUnknown_8463DBC::
+	.string "HARDY$"
+
+gUnknown_8463DC2::
+	.string "LONELY$"
+
+gUnknown_8463DC9::
+	.string "BRAVE$"
+
+gUnknown_8463DCF::
+	.string "ADAMANT$"
+
+gUnknown_8463DD7::
+	.string "NAUGHTY$"
+
+gUnknown_8463DDF::
+	.string "BOLD$"
+
+gUnknown_8463DE4::
+	.string "DOCILE$"
+
+gUnknown_8463DEB::
+	.string "RELAXED$"
+
+gUnknown_8463DF3::
+	.string "IMPISH$"
+
+gUnknown_8463DFA::
+	.string "LAX$"
+
+gUnknown_8463DFE::
+	.string "TIMID$"
+
+gUnknown_8463E04::
+	.string "HASTY$"
+
+gUnknown_8463E0A::
+	.string "SERIOUS$"
+
+gUnknown_8463E12::
+	.string "JOLLY$"
+
+gUnknown_8463E18::
+	.string "NAIVE$"
+
+gUnknown_8463E1E::
+	.string "MODEST$"
+
+gUnknown_8463E25::
+	.string "MILD$"
+
+gUnknown_8463E2A::
+	.string "QUIET$"
+
+gUnknown_8463E30::
+	.string "BASHFUL$"
+
+gUnknown_8463E38::
+	.string "RASH$"
+
+gUnknown_8463E3D::
+	.string "CALM$"
+
+gUnknown_8463E42::
+	.string "GENTLE$"
+
+gUnknown_8463E49::
+	.string "SASSY$"
+
+gUnknown_8463E4F::
+	.string "CAREFUL$"
+
+gUnknown_8463E57::
+	.string "QUIRKY$"
+
+	.align 2
+gNatureNames:: @ 8463E60 dataptr
+	.4byte gUnknown_8463DBC
+	.4byte gUnknown_8463DC2
+	.4byte gUnknown_8463DC9
+	.4byte gUnknown_8463DCF
+	.4byte gUnknown_8463DD7
+	.4byte gUnknown_8463DDF
+	.4byte gUnknown_8463DE4
+	.4byte gUnknown_8463DEB
+	.4byte gUnknown_8463DF3
+	.4byte gUnknown_8463DFA
+	.4byte gUnknown_8463DFE
+	.4byte gUnknown_8463E04
+	.4byte gUnknown_8463E0A
+	.4byte gUnknown_8463E12
+	.4byte gUnknown_8463E18
+	.4byte gUnknown_8463E1E
+	.4byte gUnknown_8463E25
+	.4byte gUnknown_8463E2A
+	.4byte gUnknown_8463E30
+	.4byte gUnknown_8463E38
+	.4byte gUnknown_8463E3D
+	.4byte gUnknown_8463E42
+	.4byte gUnknown_8463E49
+	.4byte gUnknown_8463E4F
+	.4byte gUnknown_8463E57
 
 gUnknown_8463EC4:: @ 8463EC4 dataptr
-	.4byte 0x8419b44
-	.4byte 0x8419b7b
-	.4byte 0x8419bae
-	.4byte 0x8419bdb
+	.4byte gUnknown_8419B44
+	.4byte gUnknown_8419B7B
+	.4byte gUnknown_8419BAE
+	.4byte gUnknown_8419BDB
 
 gUnknown_8463ED4:: @ 8463ED4 dataptr
-	.4byte 0x8419a3d
-	.4byte 0x8419b18
-	.4byte 0x8419a6e
-	.4byte 0x8419b18
-	.4byte 0x8419aa2
-	.4byte 0x8419ade
-	.4byte 0x8419b18
+	.4byte gUnknown_8419A3D
+	.4byte gUnknown_8419B18
+	.4byte gUnknown_8419A6E
+	.4byte gUnknown_8419B18
+	.4byte gUnknown_8419AA2
+	.4byte gUnknown_8419ADE
+	.4byte gUnknown_8419B18
 
 gUnknown_8463EF0:: @ 8463EF0 data8
 	.byte 0x00, 0x07, 0x08, 0x00, 0x01, 0x02, 0x00, 0x03, 0x04, 0x00, 0x05, 0x06

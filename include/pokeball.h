@@ -24,6 +24,7 @@ enum
 #define POKEBALL_OPPONENT_SENDOUT   0xFE
 
 u8 DoPokeballSendOutAnimation(s16 pan, u8 kindOfThrow);
+//void CreatePokeballSpriteToReleaseMon(u8 monSpriteId, u8 battlerId, u8 x, u8 y, u8 oamPriority, u8 subpriortiy, u8 g, u32 h, u16 species)
 void CreatePokeballSpriteToReleaseMon(u8 monSpriteId, u8 bank, u8 x, u8 y, u8 oamPriority, u8 subpriortiy, u8 g, u32 h);
 u8 CreateTradePokeballSprite(u8 monSpriteId, u8 bank, u8 x, u8 y, u8 oamPriority, u8 subpriortiy, u8 g, u32 h);
 u8 sub_807671C(u8 a, u8 b, u8 x, u8 y, u8 oamPriority, u8 subPriority, u8 g, u32 h);
@@ -32,5 +33,8 @@ void DoHitAnimHealthboxEffect(u8 bank);
 void LoadBallGfx(u8 ballId);
 void FreeBallGfx(u8 ballId);
 void sub_804BD94(u8 battler);
+
+//temp
+void SpriteCB_TestBallThrow(struct Sprite *sprite);
 
 #endif // GUARD_POKEBALL_H

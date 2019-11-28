@@ -248,11 +248,11 @@ static u8 GetMartTypeFromItemList(u32 a0)
         return a0;
     
     for (i = 0; i < gShopData.itemCount && gShopData.itemList[i] != 0; i++)
-	{
+    {
         if (ItemId_GetPocket(gShopData.itemList[i]) == POCKET_TM_CASE)
             return 1;
     }
-	return 0;
+    return 0;
 }
 
 static void SetShopItemsForSale(const u16 *items)
@@ -422,38 +422,38 @@ static void CB2_InitBuyMenu(void)
 
 static bool8 InitShopData(void)
 {
-	gShopTilemapBuffer1 = Alloc(sizeof(*gShopTilemapBuffer1));
+    gShopTilemapBuffer1 = Alloc(sizeof(*gShopTilemapBuffer1));
     if (gShopTilemapBuffer1 == NULL)
-	{
-		BuyMenuFreeMemory();
-		SetShopExitCallback();
-		return FALSE;		
-	}
+    {
+        BuyMenuFreeMemory();
+        SetShopExitCallback();
+        return FALSE;        
+    }
     
     gShopTilemapBuffer2 = Alloc(sizeof(*gShopTilemapBuffer2));
     if (gShopTilemapBuffer2 == NULL)
-	{
-		BuyMenuFreeMemory();
-		SetShopExitCallback();
-		return FALSE;		
-	}
+    {
+        BuyMenuFreeMemory();
+        SetShopExitCallback();
+        return FALSE;        
+    }
     
     gShopTilemapBuffer3 = Alloc(sizeof(*gShopTilemapBuffer3));
     if (gShopTilemapBuffer3 == NULL)
-	{
-		BuyMenuFreeMemory();
-		SetShopExitCallback();
-		return FALSE;
-	}
+    {
+        BuyMenuFreeMemory();
+        SetShopExitCallback();
+        return FALSE;
+    }
     
     gShopTilemapBuffer4 = Alloc(sizeof(*gShopTilemapBuffer4));
     if (gShopTilemapBuffer4 == NULL)
-	{
-		BuyMenuFreeMemory();
-		SetShopExitCallback();
-		return FALSE;		
-	}
-	
+    {
+        BuyMenuFreeMemory();
+        SetShopExitCallback();
+        return FALSE;        
+    }
+    
     return TRUE;
 }
 

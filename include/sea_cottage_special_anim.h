@@ -1,5 +1,5 @@
-#ifdndef GUARD_SEA_COTTAGE_H
-#define GUARD_SEA_COTTAGE_H
+#ifndef GUARD_SEA_COTTAGE_SPECIAL_ANIM_H
+#define GUARD_SEA_COTTAGE_SPECIAL_ANIM_H
 
 #include "global.h"
 
@@ -9,4 +9,4 @@ bool8 sub_809C474(void);
 void sub_809C4A8(void);
 void sub_809C5FC(void);
 
-#endif // GUARD_SEA_COTTAGE_H
+#endif // GUARD_SEA_COTTAGE_SPECIAL_ANIM_H

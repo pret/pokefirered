@@ -87,13 +87,7 @@ struct MartHistory
     /*0x09*/ u8 unk9;
     /*0x0A*/ u8 unkA;
     /*0x0B*/ u8 unkB;
-    /*0x0C*/ u16 unkC;
-    /*0x0E*/ u8 unkE[6];
-    /*0x14*/ u8 unk14;
-    /*0x15*/ u8 unk15;
-    /*0x16*/ u8 unk16;
-    /*0x17*/ u8 unk17;
-}; /* size = 0x18 */
+}; /* size = 12 */
 
 static EWRAM_DATA s16 sViewportMapObjects[MAP_OBJECTS_COUNT][4] = {0};
 EWRAM_DATA struct ShopData gShopData = {0};
@@ -104,11 +98,11 @@ EWRAM_DATA u16 (*gShopTilemapBuffer3)[0x400] = {0};
 EWRAM_DATA u16 (*gShopTilemapBuffer4)[0x400] = {0};
 EWRAM_DATA struct ListMenuItem *sShopMenuListMenu = {0};
 static EWRAM_DATA u8 (*sShopMenuItemStrings)[13] = {0};
-EWRAM_DATA struct MartHistory gShopMenuHistory = {0};
+EWRAM_DATA struct MartHistory gShopMenuHistory[2] = {0};
 
 //Function Declarations
 static u8 CreateShopMenu(u8 a0);
-static bool8 GetMartTypeFromItemList(bool32 a0);
+static u8 GetMartTypeFromItemList(u32 a0);
 static void SetShopItemsForSale(const u16 *items);
 static void SetShopMenuCallback(MainCallback callback);
 static void Task_ShopMenu(u8 taskId);
@@ -230,7 +224,7 @@ static const struct BgTemplate sShopBuyMenuBgTemplates[4] =
 // Functions
 static u8 CreateShopMenu(u8 a0)
 {
-    gShopData.martType = GetMartTypeFromItemList(a0) & 0xF;
+    gShopData.martType = GetMartTypeFromItemList(a0);
     gShopData.selectedRow = 0;
     if (ContextNpcGetTextColor() == 0)
         gShopData.unk16_4 = 4;
@@ -246,56 +240,35 @@ static u8 CreateShopMenu(u8 a0)
     return CreateTask(Task_ShopMenu, 8);
 }
 
-static bool8 GetMartTypeFromItemList(bool32 a0)
+static u8 GetMartTypeFromItemList(u32 a0)
 {    
     u16 i;
     
     if (a0)
-        return (u8)a0;
-    goto MAIN;
+        return a0;
     
-    RETURN_1:
-    return 1;
-
-    MAIN:
-    i = 0;
-    if (i >= gShopData.itemCount)
-        goto RETURN_0;
-    else if (gShopData.itemList[0] == 0)
-        goto RETURN_0;
-
-    while (gShopData.itemList[i] != 0)
-    {
+    for (i = 0; i < gShopData.itemCount && gShopData.itemList[i] != 0; i++)
+	{
         if (ItemId_GetPocket(gShopData.itemList[i]) == POCKET_TM_CASE)
-            goto RETURN_1;
-        ++i;
-        if (i >= gShopData.itemCount)
-            goto RETURN_0;
-        else if (gShopData.itemList[i] == 0)
-            goto RETURN_0;
+            return 1;
     }
-    
-    RETURN_0:
-    return 0;
+	return 0;
 }
 
 static void SetShopItemsForSale(const u16 *items)
 {    
-    struct ShopData *mart;
-
-    mart = &gShopData;
-    mart->itemList = items;
-    mart->itemCount = 0;
-    if (mart->itemList[0] == 0)
+    gShopData.itemList = items;
+    gShopData.itemCount = 0;
+    if (gShopData.itemList[0] == 0)
         return;
 
-    do
+    while (gShopData.itemList[gShopData.itemCount])
     {
         ++gShopData.itemCount;
-    } while (mart->itemList[gShopData.itemCount]);
+    }
 }
 
-static void SetShopMenuCallback(MainCallback callback)
+static void SetShopMenuCallback(void (*callback)(void))
 {
     gShopData.callback = callback;
 }
@@ -416,7 +389,7 @@ static void CB2_InitBuyMenu(void)
         ResetTasks();
         ClearScheduledBgCopiesToVram();
         ResetItemMenuIconState();
-        if ((!(InitShopData())) || (!(BuyMenuBuildListMenuTemplate())))
+        if (!(InitShopData()) || !(BuyMenuBuildListMenuTemplate()))
             return;
         BuyMenuInitBgs();
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);
@@ -449,27 +422,39 @@ static void CB2_InitBuyMenu(void)
 
 static bool8 InitShopData(void)
 {
-    gShopTilemapBuffer1 = Alloc(sizeof(*gShopTilemapBuffer1));
+	gShopTilemapBuffer1 = Alloc(sizeof(*gShopTilemapBuffer1));
     if (gShopTilemapBuffer1 == NULL)
-        goto CANCEL;
+	{
+		BuyMenuFreeMemory();
+		SetShopExitCallback();
+		return FALSE;		
+	}
     
     gShopTilemapBuffer2 = Alloc(sizeof(*gShopTilemapBuffer2));
     if (gShopTilemapBuffer2 == NULL)
-        goto CANCEL;
+	{
+		BuyMenuFreeMemory();
+		SetShopExitCallback();
+		return FALSE;		
+	}
     
     gShopTilemapBuffer3 = Alloc(sizeof(*gShopTilemapBuffer3));
     if (gShopTilemapBuffer3 == NULL)
-        goto CANCEL;
+	{
+		BuyMenuFreeMemory();
+		SetShopExitCallback();
+		return FALSE;
+	}
     
     gShopTilemapBuffer4 = Alloc(sizeof(*gShopTilemapBuffer4));
     if (gShopTilemapBuffer4 == NULL)
-        goto CANCEL;
+	{
+		BuyMenuFreeMemory();
+		SetShopExitCallback();
+		return FALSE;		
+	}
+	
     return TRUE;
-    
-    CANCEL:
-    BuyMenuFreeMemory();
-    SetShopExitCallback();
-    return FALSE;
 }
 
 static void BuyMenuInitBgs(void)
@@ -540,35 +525,25 @@ static void BuyMenuDrawGraphics(void)
     ScheduleBgCopyTilemapToVram(3);
 }
 
-static bool8 BuyMenuBuildListMenuTemplate(void)
+bool8 BuyMenuBuildListMenuTemplate(void)
 {
     u16 i, v;
-    struct ListMenuItem **list = &sShopMenuListMenu;
-    struct ShopData *mart = &gShopData;
     
-    *list = Alloc((gShopData.itemCount + 1) * sizeof(*sShopMenuListMenu));
-    if (sShopMenuListMenu == NULL)
-        goto FREE_MEMORY;
-    
-    sShopMenuItemStrings = Alloc((gShopData.itemCount + 1) * sizeof(*sShopMenuItemStrings));
-    if (sShopMenuItemStrings == NULL)
+    sShopMenuListMenu = Alloc((gShopData.itemCount + 1) * sizeof(*sShopMenuListMenu));
+    if (sShopMenuListMenu == NULL
+     || (sShopMenuItemStrings = Alloc((gShopData.itemCount + 1) * sizeof(*sShopMenuItemStrings))) == NULL)
     {
-        FREE_MEMORY:
         BuyMenuFreeMemory();
         SetShopExitCallback();
         return FALSE;
     }
     
     i = 0;
-    if (i >= mart->itemCount)
-        goto ADD_CANCEL;
     
-    for (i = 0; i < mart->itemCount; i++)
+    for (i = 0; i < gShopData.itemCount; i++)
     {
-        PokeMartWriteNameAndIdAt(&sShopMenuListMenu[i], mart->itemList[i], sShopMenuItemStrings[i]);
+        PokeMartWriteNameAndIdAt(&sShopMenuListMenu[i], gShopData.itemList[i], sShopMenuItemStrings[i]);
     }
-    
-    ADD_CANCEL:
     StringCopy(sShopMenuItemStrings[i], gFameCheckerText_Cancel);
     sShopMenuListMenu[i].label = sShopMenuItemStrings[i];    
     sShopMenuListMenu[i].index = -2;
@@ -801,7 +776,7 @@ static void BuyMenuDrawMapBg(void)
 static void BuyMenuDrawMapMetatile(s16 x, s16 y, const u16 *src, u8 metatileLayerType)
 {
     u16 offset1 = x * 2;
-    u16 offset2 = ((y << 0x16) + 0x400000) >> 0x10;
+    u16 offset2 = (y * 64) + 64;
 
     switch (metatileLayerType)
     {
@@ -1091,7 +1066,7 @@ static void Task_ExitBuyMenu(u8 taskId)
     
     if (!gPaletteFade.active)
     {
-        DestroyListMenuTask(tListTaskId, 0, 0);
+        DestroyListMenuTask(tListTaskId, NULL, NULL);
         BuyMenuFreeMemory();
         SetMainCallback2(CB2_ReturnToField);
         DestroyTask(taskId);
@@ -1106,154 +1081,59 @@ static void nullsub_53(void)
 {
 }
 
-#ifdef NONMATCHING
-// couldn't get registers to match. It should store an address into r4 (what tmp wants to be), and load/store from there, eg. ldrh r0, [r4,#4]. Which indicates an array inside the MartHistory struct, except data sizes are not consistent.
 void RecordItemPurchase(u16 item, u16 quantity, u8 a2)
 {
-    struct MartHistory *tmp;
+    struct MartHistory *history;
     
-    if (gShopMenuHistory.unkA == a2)
+    if (gShopMenuHistory[0].unkA == a2)
     {
-        tmp = &gShopMenuHistory;
+        history = &gShopMenuHistory[0];
+    }
+    else if (gShopMenuHistory[1].unkA == a2)
+    {
+        history = &gShopMenuHistory[1];
     }
     else
     {
-        if (gShopMenuHistory.unk16 == a2)
-        {
-            tmp = &gShopMenuHistory + 12;
-        }
+        if (gShopMenuHistory[0].unkA == 0)
+            history = &gShopMenuHistory[0];
         else
-        {
-            tmp = &gShopMenuHistory + 12;
-            if (gShopMenuHistory.unkA == 0)
-            {
-                tmp = &gShopMenuHistory;
-                gShopMenuHistory.unkA = a2;
-            }
-        }
+            history = &gShopMenuHistory[1];
+        history->unkA = a2;
     }
     
-    if (tmp->unk4 != 0)
+    if (history->unk4 != 0)
     {
-        gShopMenuHistory.unk9 = 1;
+        history->unk9 = 1;
     }
     
-    gShopMenuHistory.unk4 = item;
-    if (gShopMenuHistory.unk6 <= 998)
+    history->unk4 = item;
+    if (history->unk6 < 999)
     {
-        gShopMenuHistory.unk6 += item;
-        if (item > 999)
-            gShopMenuHistory.unk6 = 999;
+        history->unk6 += quantity;
+        if (history->unk6 > 999)
+            history->unk6 = 999;
     }
     
-    if (gShopMenuHistory.unk0 < 999998)
+    if (history->unk0 < 999999)
     {
-        gShopMenuHistory.unk0 += ((s16)itemid_get_market_price(item) >> (quantity-1))*quantity;
-        if (gShopMenuHistory.unk0 > 999999)
-            gShopMenuHistory.unk0 = 999999;
+        history->unk0 += (itemid_get_market_price(item) >> (a2 - 1)) * quantity;
+        if (history->unk0 > 999999)
+            history->unk0 = 999999;
     }    
 }
-#else
-NAKED
-void RecordItemPurchase(u16 item, u16 quantity, u8 a2)
-{
-    asm_unified("\tpush {r4-r6,lr}\n"
-                "\tlsls r0, 16\n"
-                "\tlsrs r3, r0, 16\n"
-                "\tlsls r1, 16\n"
-                "\tlsrs r6, r1, 16\n"
-                "\tlsls r2, 24\n"
-                "\tlsrs r5, r2, 24\n"
-                "\tldr r1, _0809C0B8 @ =gShopMenuHistory\n"
-                "\tldrb r2, [r1, 0xA]\n"
-                "\tcmp r2, r5\n"
-                "\tbne _0809C0BC\n"
-                "\tadds r4, r1, 0\n"
-                "\tb _0809C0D4\n"
-                "\t.align 2, 0\n"
-                "_0809C0B8: .4byte gShopMenuHistory\n"
-                "_0809C0BC:\n"
-                "\tldrb r0, [r1, 0x16]\n"
-                "\tcmp r0, r5\n"
-                "\tbne _0809C0C8\n"
-                "\tadds r4, r1, 0\n"
-                "\tadds r4, 0xC\n"
-                "\tb _0809C0D4\n"
-                "_0809C0C8:\n"
-                "\tadds r4, r1, 0\n"
-                "\tadds r4, 0xC\n"
-                "\tcmp r2, 0\n"
-                "\tbne _0809C0D2\n"
-                "\tadds r4, r1, 0\n"
-                "_0809C0D2:\n"
-                "\tstrb r5, [r4, 0xA]\n"
-                "_0809C0D4:\n"
-                "\tldrh r0, [r4, 0x4]\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _0809C0DE\n"
-                "\tmovs r0, 0x1\n"
-                "\tstrb r0, [r4, 0x9]\n"
-                "_0809C0DE:\n"
-                "\tstrh r3, [r4, 0x4]\n"
-                "\tldrh r1, [r4, 0x6]\n"
-                "\tldr r0, _0809C128 @ =0x000003e6\n"
-                "\tcmp r1, r0\n"
-                "\tbhi _0809C0F8\n"
-                "\tadds r0, r6, r1\n"
-                "\tstrh r0, [r4, 0x6]\n"
-                "\tlsls r0, 16\n"
-                "\tlsrs r0, 16\n"
-                "\tldr r1, _0809C12C @ =0x000003e7\n"
-                "\tcmp r0, r1\n"
-                "\tbls _0809C0F8\n"
-                "\tstrh r1, [r4, 0x6]\n"
-                "_0809C0F8:\n"
-                "\tldr r1, [r4]\n"
-                "\tldr r0, _0809C130 @ =0x000f423e\n"
-                "\tcmp r1, r0\n"
-                "\tbhi _0809C120\n"
-                "\tadds r0, r3, 0\n"
-                "\tbl itemid_get_market_price\n"
-                "\tlsls r0, 16\n"
-                "\tlsrs r0, 16\n"
-                "\tsubs r1, r5, 0x1\n"
-                "\tasrs r0, r1\n"
-                "\tadds r1, r0, 0\n"
-                "\tmuls r1, r6\n"
-                "\tldr r0, [r4]\n"
-                "\tadds r0, r1\n"
-                "\tstr r0, [r4]\n"
-                "\tldr r1, _0809C134 @ =0x000f423f\n"
-                "\tcmp r0, r1\n"
-                "\tbls _0809C120\n"
-                "\tstr r1, [r4]\n"
-                "_0809C120:\n"
-                "\tpop {r4-r6}\n"
-                "\tpop {r0}\n"
-                "\tbx r0\n"
-                "\t.align 2, 0\n"
-                "_0809C128: .4byte 0x000003e6\n"
-                "_0809C12C: .4byte 0x000003e7\n"
-                "_0809C130: .4byte 0x000f423e\n"
-                "_0809C134: .4byte 0x000f423f\n");
-}
-#endif
 
 static void RecordQuestLogItemPurchase(void)
 {
-    struct MartHistory *history = &gShopMenuHistory;
     u16 v;
 
-    v = history->unkA;
+    v = gShopMenuHistory[0].unkA;
     if (v != 0)
-        sub_8113550(v + 0x24, (const u16*)history);
+        sub_8113550(v + 0x24, (const u16 *)&gShopMenuHistory[0]);
     
-    v = history->unk16;
+    v = gShopMenuHistory[1].unkA;
     if (v != 0)
-    {
-        v += 0x24;
-        sub_8113550(v, (const u16*)&history->unkC);
-    }
+        sub_8113550(v + 0x24, (const u16 *)&gShopMenuHistory[1]);
 }
 
 void CreatePokemartMenu(const u16 *itemsForSale)
@@ -1262,9 +1142,9 @@ void CreatePokemartMenu(const u16 *itemsForSale)
     CreateShopMenu(MART_TYPE_REGULAR);
     SetShopMenuCallback(EnableBothScriptContexts);
     nullsub_53();
-    memset(&gShopMenuHistory, 0, sizeof(struct MartHistory));
-    gShopMenuHistory.unk8 = gMapHeader.regionMapSectionId;
-    gShopMenuHistory.unk14 = gMapHeader.regionMapSectionId;
+    memset(&gShopMenuHistory, 0, sizeof(gShopMenuHistory));
+    gShopMenuHistory[0].unk8 = gMapHeader.regionMapSectionId;
+    gShopMenuHistory[1].unk8 = gMapHeader.regionMapSectionId;
 }
 
 void CreateDecorationShop1Menu(const u16 *itemsForSale)

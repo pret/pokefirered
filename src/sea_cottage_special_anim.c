@@ -7,14 +7,9 @@
 #include "field_map_obj.h"
 #include "field_camera.h"
 
-#define t0 data[0]
-#define tX data[4]
-#define tY data[5]
-#define tListTaskId data[7]
-
 static EWRAM_DATA u8 gUnknown_2039984 = 0;
 
-static void sub_809C1D8(u8 taskId, const u16* a1, u16 a2);
+static void sub_809C1D8(u8 taskId, const s16 *a1, u16 a2);
 static void sub_809C334(u8 taskId);
 static void sub_809C500(u8 taskId);
 static void sub_809C640(u8 taskId);
@@ -28,17 +23,14 @@ static const u16 gUnknown_83DF0F2[] = {0x02e4, 0x0317, 0x0315};
 static const u16 gUnknown_83DF0F8[] = {0x02eb, 0x031e, 0x031c};
 
 // Functions
-#ifdef NONMATCHING
-// Couldn't get the registers to match. Hard to know where to fix since I'm unsure what the variables are for.
-static void sub_809C1D8(u8 taskId, const u16* a1, u16 a2)
+static void sub_809C1D8(u8 taskId, const s16 *a1, u16 a2)
 {
-    s16 v1, v2, v3;
+    s16 r5, r3, r4;
     s16 i, j;
-    const s16* v4;
     
-    v1 = gTasks[taskId].data[4] - 1;
-    v2 = gTasks[taskId].data[5] - 1;
-    v3 = gTasks[taskId].data[1];
+    r5 = gTasks[taskId].data[4] - 1;
+    r3 = gTasks[taskId].data[5] - 1;
+    r4 = gTasks[taskId].data[1];
     
     if (gTasks[taskId].data[2] == 0)
     {
@@ -46,13 +38,14 @@ static void sub_809C1D8(u8 taskId, const u16* a1, u16 a2)
         {
             for (j = 0; j < 3; j++)
             {
-                v4 = &a1[v3];
-                if (MapGridGetMetatileIdAt(v1 + j, v2 + i) == v4[0])
+                s32 id = MapGridGetMetatileIdAt(r5 + j, r3 + i);
+                
+                if (a1[r4] == (s16)id)
                 {
-                    if (v3 != 2)
-                        MapGridSetMetatileIdAt(v1 + j, v2 + i, a2 | v4[1]);
+                    if (r4 != 2)
+                        MapGridSetMetatileIdAt(r5 + j, r3 + i, a2 | a1[r4 + 1]);
                     else
-                        MapGridSetMetatileIdAt(v1 + j, v2 + i, a2 | v4[0]);
+                        MapGridSetMetatileIdAt(r5 + j, r3 + i, a2 | a1[0]);
                 }
             }
         }
@@ -63,201 +56,19 @@ static void sub_809C1D8(u8 taskId, const u16* a1, u16 a2)
         {
             for (j = 0; j < 3; j++)
             {
-                if (a1[2 - v3] == MapGridGetMetatileIdAt(v1 + j, v2 + i))
+                s32 id = MapGridGetMetatileIdAt(r5 + j, r3 + i);
+
+                if (a1[2 - r4] == (s16)id)
                 {
-                    if (v3 != 2)
-                        MapGridSetMetatileIdAt(v1 + j, v2 + i, a2 | a1[1 - v3]);
+                    if (r4 != 2)
+                        MapGridSetMetatileIdAt(r5 + j, r3 + i, a2 | a1[1 - r4]);
                     else
-                        MapGridSetMetatileIdAt(v1 + j, v2 + i, a2 | a1[2]);
+                        MapGridSetMetatileIdAt(r5 + j, r3 + i, a2 | a1[2]);
                 }
             }
         }
     }
 }
-#else
-NAKED
-void sub_809C1D8(u8 taskId, const u16* a1, u16 a2)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                "\tmov r7, r10\n"
-                "\tmov r6, r9\n"
-                "\tmov r5, r8\n"
-                "\tpush {r5-r7}\n"
-                "\tsub sp, 0x10\n"
-                "\tmov r9, r1\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tlsls r2, 16\n"
-                "\tlsrs r2, 16\n"
-                "\tmov r10, r2\n"
-                "\tldr r2, _0809C26C @ =gTasks\n"
-                "\tlsls r1, r0, 2\n"
-                "\tadds r1, r0\n"
-                "\tlsls r1, 3\n"
-                "\tadds r1, r2\n"
-                "\tldrh r0, [r1, 0x10]\n"
-                "\tsubs r0, 0x1\n"
-                "\tlsls r0, 16\n"
-                "\tlsrs r5, r0, 16\n"
-                "\tldrh r0, [r1, 0x12]\n"
-                "\tsubs r0, 0x1\n"
-                "\tlsls r0, 16\n"
-                "\tlsrs r3, r0, 16\n"
-                "\tldrh r4, [r1, 0xA]\n"
-                "\tmovs r2, 0xC\n"
-                "\tldrsh r0, [r1, r2]\n"
-                "\tcmp r0, 0\n"
-                "\tbne _0809C29C\n"
-                "\tmovs r2, 0\n"
-                "\tlsls r5, 16\n"
-                "\tstr r5, [sp, 0xC]\n"
-                "\tlsls r0, r3, 16\n"
-                "\tlsls r1, r4, 16\n"
-                "\tasrs r0, 16\n"
-                "\tstr r0, [sp]\n"
-                "\tasrs r1, 16\n"
-                "\tstr r1, [sp, 0x4]\n"
-                "\tlsls r0, r1, 1\n"
-                "\tmov r1, r9\n"
-                "\tadds r7, r0, r1\n"
-                "_0809C22C:\n"
-                "\tmovs r4, 0\n"
-                "\tlsls r2, 16\n"
-                "\tmov r8, r2\n"
-                "\tasrs r0, r2, 16\n"
-                "\tldr r2, [sp]\n"
-                "\tadds r6, r2, r0\n"
-                "_0809C238:\n"
-                "\tldr r0, [sp, 0xC]\n"
-                "\tasrs r1, r0, 16\n"
-                "\tlsls r4, 16\n"
-                "\tasrs r0, r4, 16\n"
-                "\tadds r5, r1, r0\n"
-                "\tadds r0, r5, 0\n"
-                "\tadds r1, r6, 0\n"
-                "\tbl MapGridGetMetatileIdAt\n"
-                "\tmovs r2, 0\n"
-                "\tldrsh r1, [r7, r2]\n"
-                "\tlsls r0, 16\n"
-                "\tasrs r0, 16\n"
-                "\tcmp r1, r0\n"
-                "\tbne _0809C280\n"
-                "\tldr r0, [sp, 0x4]\n"
-                "\tcmp r0, 0x2\n"
-                "\tbeq _0809C270\n"
-                "\tldrh r0, [r7, 0x2]\n"
-                "\tmov r2, r10\n"
-                "\torrs r2, r0\n"
-                "\tadds r0, r5, 0\n"
-                "\tadds r1, r6, 0\n"
-                "\tbl MapGridSetMetatileIdAt\n"
-                "\tb _0809C280\n"
-                "\t.align 2, 0\n"
-                "_0809C26C: .4byte gTasks\n"
-                "_0809C270:\n"
-                "\tmov r1, r9\n"
-                "\tldrh r0, [r1]\n"
-                "\tmov r2, r10\n"
-                "\torrs r2, r0\n"
-                "\tadds r0, r5, 0\n"
-                "\tadds r1, r6, 0\n"
-                "\tbl MapGridSetMetatileIdAt\n"
-                "_0809C280:\n"
-                "\tmovs r2, 0x80\n"
-                "\tlsls r2, 9\n"
-                "\tadds r0, r4, r2\n"
-                "\tlsrs r4, r0, 16\n"
-                "\tasrs r0, 16\n"
-                "\tcmp r0, 0x2\n"
-                "\tble _0809C238\n"
-                "\tadds r0, r2, 0\n"
-                "\tadd r0, r8\n"
-                "\tlsrs r2, r0, 16\n"
-                "\tasrs r0, 16\n"
-                "\tcmp r0, 0x2\n"
-                "\tble _0809C22C\n"
-                "\tb _0809C324\n"
-                "_0809C29C:\n"
-                "\tmovs r2, 0\n"
-                "\tlsls r5, 16\n"
-                "\tstr r5, [sp, 0xC]\n"
-                "\tlsls r0, r3, 16\n"
-                "\tlsls r1, r4, 16\n"
-                "\tasrs r0, 16\n"
-                "\tstr r0, [sp, 0x8]\n"
-                "\tasrs r7, r1, 16\n"
-                "_0809C2AC:\n"
-                "\tmovs r4, 0\n"
-                "\tlsls r2, 16\n"
-                "\tmov r8, r2\n"
-                "\tasrs r0, r2, 16\n"
-                "\tldr r1, [sp, 0x8]\n"
-                "\tadds r6, r1, r0\n"
-                "_0809C2B8:\n"
-                "\tldr r2, [sp, 0xC]\n"
-                "\tasrs r1, r2, 16\n"
-                "\tlsls r4, 16\n"
-                "\tasrs r0, r4, 16\n"
-                "\tadds r5, r1, r0\n"
-                "\tadds r0, r5, 0\n"
-                "\tadds r1, r6, 0\n"
-                "\tbl MapGridGetMetatileIdAt\n"
-                "\tmovs r1, 0x2\n"
-                "\tsubs r1, r7\n"
-                "\tlsls r1, 1\n"
-                "\tadd r1, r9\n"
-                "\tmovs r2, 0\n"
-                "\tldrsh r1, [r1, r2]\n"
-                "\tlsls r0, 16\n"
-                "\tasrs r0, 16\n"
-                "\tcmp r1, r0\n"
-                "\tbne _0809C30A\n"
-                "\tcmp r7, 0x2\n"
-                "\tbeq _0809C2FA\n"
-                "\tmovs r0, 0x1\n"
-                "\tsubs r0, r7\n"
-                "\tlsls r0, 1\n"
-                "\tadd r0, r9\n"
-                "\tldrh r0, [r0]\n"
-                "\tmov r2, r10\n"
-                "\torrs r2, r0\n"
-                "\tadds r0, r5, 0\n"
-                "\tadds r1, r6, 0\n"
-                "\tbl MapGridSetMetatileIdAt\n"
-                "\tb _0809C30A\n"
-                "_0809C2FA:\n"
-                "\tmov r1, r9\n"
-                "\tldrh r0, [r1, 0x4]\n"
-                "\tmov r2, r10\n"
-                "\torrs r2, r0\n"
-                "\tadds r0, r5, 0\n"
-                "\tadds r1, r6, 0\n"
-                "\tbl MapGridSetMetatileIdAt\n"
-                "_0809C30A:\n"
-                "\tmovs r2, 0x80\n"
-                "\tlsls r2, 9\n"
-                "\tadds r0, r4, r2\n"
-                "\tlsrs r4, r0, 16\n"
-                "\tasrs r0, 16\n"
-                "\tcmp r0, 0x2\n"
-                "\tble _0809C2B8\n"
-                "\tadds r0, r2, 0\n"
-                "\tadd r0, r8\n"
-                "\tlsrs r2, r0, 16\n"
-                "\tasrs r0, 16\n"
-                "\tcmp r0, 0x2\n"
-                "\tble _0809C2AC\n"
-                "_0809C324:\n"
-                "\tadd sp, 0x10\n"
-                "\tpop {r3-r5}\n"
-                "\tmov r8, r3\n"
-                "\tmov r9, r4\n"
-                "\tmov r10, r5\n"
-                "\tpop {r4-r7}\n"
-                "\tpop {r0}\n"
-                "\tbx r0\n");
-}
-#endif
 
 static void sub_809C334(u8 taskId)
 {
@@ -308,8 +119,8 @@ static u8 sub_809C3FC(u16 a0)
 
     taskId = CreateTask(sub_809C334, 0);
     data = gTasks[taskId].data;
-    PlayerGetDestCoords(&tX, &tY);
-    t0 = 0;
+    PlayerGetDestCoords(&data[4], &data[5]);
+    data[0] = 0;
     data[1] = 0;
     data[2] = a0;
     sub_809C334(taskId);

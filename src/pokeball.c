@@ -27,7 +27,7 @@
 
 // Function Declarations
 static void Task_DoPokeballSendOutAnim(u8 taskId);
-//static void SpriteCB_TestBallThrow(struct Sprite *sprite);
+static void SpriteCB_TestBallThrow(struct Sprite *sprite);
 static void sub_804AC88(struct Sprite *sprite);
 static void sub_804AC94(struct Sprite *sprite);
 static void sub_804AD00(struct Sprite *sprite);
@@ -62,6 +62,7 @@ extern const struct SpriteTemplate gUnknown_82606F4[];
 
 extern const struct CompressedSpriteSheet gBallSpriteSheets[POKEBALL_COUNT];
 extern const struct CompressedSpritePalette gBallSpritePalettes[POKEBALL_COUNT];
+extern const struct SpriteTemplate gBallSpriteTemplates[POKEBALL_COUNT];
 
 // Functions
 u8 DoPokeballSendOutAnimation(s16 pan, u8 kindOfThrow)
@@ -430,8 +431,7 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
 }
 #endif
 
-//static
-void SpriteCB_TestBallThrow(struct Sprite *sprite)
+static void SpriteCB_TestBallThrow(struct Sprite *sprite)
 {
     if (TranslateAnimHorizontalArc(sprite))
     {
@@ -1112,11 +1112,12 @@ static void sub_804BAA4(struct Sprite *sprite)
     }
     if (sprite->animEnded && r12 && r6)
     {
-        if (gSprites[monSpriteId].data[7] == SPECIES_EGG)
+        /*
+		if (gSprites[monSpriteId].data[7] == SPECIES_EGG)
             DoMonFrontSpriteAnimation(&gSprites[monSpriteId], gSprites[monSpriteId].data[7], TRUE, 0);
         else
             DoMonFrontSpriteAnimation(&gSprites[monSpriteId], gSprites[monSpriteId].data[7], FALSE, 0);
-
+		*/
         DestroySpriteAndFreeResources(sprite);
     }
 }

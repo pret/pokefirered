@@ -34,7 +34,4 @@ void LoadBallGfx(u8 ballId);
 void FreeBallGfx(u8 ballId);
 void sub_804BD94(u8 battler);
 
-//temp
-void SpriteCB_TestBallThrow(struct Sprite *sprite);
-
 #endif // GUARD_POKEBALL_H

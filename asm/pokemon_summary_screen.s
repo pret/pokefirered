@@ -10638,7 +10638,7 @@ _08139CDA:
 	lsls r0, r4, 1
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, _08139D40 @ =gUnknown_82606F4
+	ldr r1, _08139D40 @ =gBallSpriteTemplates
 	adds r0, r1
 	movs r1, 0x6A
 	movs r2, 0x58
@@ -10677,7 +10677,7 @@ _08139CDA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08139D40: .4byte gUnknown_82606F4
+_08139D40: .4byte gBallSpriteTemplates
 _08139D44: .4byte gUnknown_203B140
 _08139D48: .4byte 0x0000300c
 _08139D4C: .4byte gSprites

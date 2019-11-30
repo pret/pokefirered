@@ -15,7 +15,7 @@ struct Task
     /*0x05*/ u8 prev;
     /*0x06*/ u8 next;
     /*0x07*/ u8 priority;
-    /*0x08*/ s16 data[16];	//8, a, c, e, 10, 12, 14, 16, 18, 1a, 1c, 1e, 20, 22, 24, 26
+    /*0x08*/ s16 data[16];
 }; /*size = 0x28*/
 
 extern struct Task gTasks[];

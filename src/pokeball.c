@@ -25,6 +25,19 @@
 
 #define sBattler         data[6]
 
+#define GFX_TAG_POKE_BALL    55000
+#define GFX_TAG_GREAT_BALL   55001
+#define GFX_TAG_SAFARI_BALL  55002
+#define GFX_TAG_ULTRA_BALL   55003
+#define GFX_TAG_MASTER_BALL  55004
+#define GFX_TAG_NET_BALL     55005
+#define GFX_TAG_DIVE_BALL    55006
+#define GFX_TAG_NEST_BALL    55007
+#define GFX_TAG_REPEAT_BALL  55008
+#define GFX_TAG_TIMER_BALL   55009
+#define GFX_TAG_LUXURY_BALL  55010
+#define GFX_TAG_PREMIER_BALL 55011
+
 // Function Declarations
 static void Task_DoPokeballSendOutAnim(u8 taskId);
 static void SpriteCB_TestBallThrow(struct Sprite *sprite);
@@ -51,24 +64,272 @@ static void sub_804BAA4(struct Sprite *sprite);
 static void sub_804BC50(struct Sprite *sprite);
 static void sub_804BCF8(struct Sprite *sprite);
 static void sub_804BD6C(struct Sprite *sprite);
-static void DestroySpriteAndFreeResources2(struct Sprite *sprite);
 static void sub_804BE24(struct Sprite *sprite);
 static void sub_804BE48(struct Sprite *sprite);
 static void SpriteCB_HitAnimHealthoxEffect(struct Sprite *sprite);
 static u16 GetBattlerPokeballItemId(u8 battlerId);
 
 // Data
-extern const struct SpriteTemplate gUnknown_82606F4[];
+const struct CompressedSpriteSheet gBallSpriteSheets[POKEBALL_COUNT] =
+{
+    {gInterfaceGfx_PokeBall,    384, GFX_TAG_POKE_BALL},
+    {gInterfaceGfx_GreatBall,   384, GFX_TAG_GREAT_BALL},
+    {gInterfaceGfx_SafariBall,  384, GFX_TAG_SAFARI_BALL},
+    {gInterfaceGfx_UltraBall,   384, GFX_TAG_ULTRA_BALL},
+    {gInterfaceGfx_MasterBall,  384, GFX_TAG_MASTER_BALL},
+    {gInterfaceGfx_NetBall,     384, GFX_TAG_NET_BALL},
+    {gInterfaceGfx_DiveBall,    384, GFX_TAG_DIVE_BALL},
+    {gInterfaceGfx_NestBall,    384, GFX_TAG_NEST_BALL},
+    {gInterfaceGfx_RepeatBall,  384, GFX_TAG_REPEAT_BALL},
+    {gInterfaceGfx_TimerBall,   384, GFX_TAG_TIMER_BALL},
+    {gInterfaceGfx_LuxuryBall,  384, GFX_TAG_LUXURY_BALL},
+    {gInterfaceGfx_PremierBall, 384, GFX_TAG_PREMIER_BALL},
+};
 
-extern const struct CompressedSpriteSheet gBallSpriteSheets[POKEBALL_COUNT];
-extern const struct CompressedSpritePalette gBallSpritePalettes[POKEBALL_COUNT];
-extern const struct SpriteTemplate gBallSpriteTemplates[POKEBALL_COUNT];
+const struct CompressedSpritePalette gBallSpritePalettes[POKEBALL_COUNT] =
+{
+    {gInterfacePal_PokeBall,    GFX_TAG_POKE_BALL},
+    {gInterfacePal_GreatBall,   GFX_TAG_GREAT_BALL},
+    {gInterfacePal_SafariBall,  GFX_TAG_SAFARI_BALL},
+    {gInterfacePal_UltraBall,   GFX_TAG_ULTRA_BALL},
+    {gInterfacePal_MasterBall,  GFX_TAG_MASTER_BALL},
+    {gInterfacePal_NetBall,     GFX_TAG_NET_BALL},
+    {gInterfacePal_DiveBall,    GFX_TAG_DIVE_BALL},
+    {gInterfacePal_NestBall,    GFX_TAG_NEST_BALL},
+    {gInterfacePal_RepeatBall,  GFX_TAG_REPEAT_BALL},
+    {gInterfacePal_TimerBall,   GFX_TAG_TIMER_BALL},
+    {gInterfacePal_LuxuryBall,  GFX_TAG_LUXURY_BALL},
+    {gInterfacePal_PremierBall, GFX_TAG_PREMIER_BALL},
+};
+
+static const struct OamData sBallOamData =
+{
+    .y = 0,
+    .affineMode = 3,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = SPRITE_SHAPE(16x16),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(16x16),
+    .tileNum = 0,
+    .priority = 2,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sBallAnimSeq3[] =
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sBallAnimSeq5[] =
+{
+    ANIMCMD_FRAME(4, 1),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sBallAnimSeq4[] =
+{
+    ANIMCMD_FRAME(8, 5),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sBallAnimSeq6[] =
+{
+    ANIMCMD_FRAME(12, 1),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sBallAnimSeq0[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sBallAnimSeq1[] =
+{
+    ANIMCMD_FRAME(4, 5),
+    ANIMCMD_FRAME(8, 5),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sBallAnimSeq2[] =
+{
+    ANIMCMD_FRAME(4, 5),
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const sBallAnimSequences[] =
+{
+    sBallAnimSeq0,
+    sBallAnimSeq1,
+    sBallAnimSeq2,
+    sBallAnimSeq3,
+    sBallAnimSeq4,
+    sBallAnimSeq5,
+    sBallAnimSeq6,
+};
+
+static const union AffineAnimCmd sBallAffineAnimSeq0[] =
+{
+    AFFINEANIMCMD_FRAME(0, 0, 0, 1),
+    AFFINEANIMCMD_JUMP(0),
+};
+
+static const union AffineAnimCmd sBallAffineAnimSeq1[] =
+{
+    AFFINEANIMCMD_FRAME(0, 0, -3, 1),
+    AFFINEANIMCMD_JUMP(0),
+};
+
+static const union AffineAnimCmd sBallAffineAnimSeq2[] =
+{
+    AFFINEANIMCMD_FRAME(0, 0, 3, 1),
+    AFFINEANIMCMD_JUMP(0),
+};
+
+static const union AffineAnimCmd sBallAffineAnimSeq3[] =
+{
+    AFFINEANIMCMD_FRAME(256, 256, 0, 0),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd sBallAffineAnimSeq4[] =
+{
+    AFFINEANIMCMD_FRAME(0, 0, 25, 1),
+    AFFINEANIMCMD_JUMP(0),
+};
+
+static const union AffineAnimCmd *const sBallAffineAnimSequences[] =
+{
+    sBallAffineAnimSeq0,
+    sBallAffineAnimSeq1,
+    sBallAffineAnimSeq2,
+    sBallAffineAnimSeq3,
+    sBallAffineAnimSeq4,
+};
+
+const struct SpriteTemplate gBallSpriteTemplates[POKEBALL_COUNT] =
+{
+    {
+        .tileTag = GFX_TAG_POKE_BALL,
+        .paletteTag = GFX_TAG_POKE_BALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sBallAffineAnimSequences,
+        .callback = SpriteCB_TestBallThrow,
+    },
+    {
+        .tileTag = GFX_TAG_GREAT_BALL,
+        .paletteTag = GFX_TAG_GREAT_BALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sBallAffineAnimSequences,
+        .callback = SpriteCB_TestBallThrow,
+    },
+    {
+        .tileTag = GFX_TAG_SAFARI_BALL,
+        .paletteTag = GFX_TAG_SAFARI_BALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sBallAffineAnimSequences,
+        .callback = SpriteCB_TestBallThrow,
+    },
+    {
+        .tileTag = GFX_TAG_ULTRA_BALL,
+        .paletteTag = GFX_TAG_ULTRA_BALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sBallAffineAnimSequences,
+        .callback = SpriteCB_TestBallThrow,
+    },
+    {
+        .tileTag = GFX_TAG_MASTER_BALL,
+        .paletteTag = GFX_TAG_MASTER_BALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sBallAffineAnimSequences,
+        .callback = SpriteCB_TestBallThrow,
+    },
+    {
+        .tileTag = GFX_TAG_NET_BALL,
+        .paletteTag = GFX_TAG_NET_BALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sBallAffineAnimSequences,
+        .callback = SpriteCB_TestBallThrow,
+    },
+    {
+        .tileTag = GFX_TAG_DIVE_BALL,
+        .paletteTag = GFX_TAG_DIVE_BALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sBallAffineAnimSequences,
+        .callback = SpriteCB_TestBallThrow,
+    },
+    {
+        .tileTag = GFX_TAG_NEST_BALL,
+        .paletteTag = GFX_TAG_NEST_BALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sBallAffineAnimSequences,
+        .callback = SpriteCB_TestBallThrow,
+    },
+    {
+        .tileTag = GFX_TAG_REPEAT_BALL,
+        .paletteTag = GFX_TAG_REPEAT_BALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sBallAffineAnimSequences,
+        .callback = SpriteCB_TestBallThrow,
+    },
+    {
+        .tileTag = GFX_TAG_TIMER_BALL,
+        .paletteTag = GFX_TAG_TIMER_BALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sBallAffineAnimSequences,
+        .callback = SpriteCB_TestBallThrow,
+    },
+    {
+        .tileTag = GFX_TAG_LUXURY_BALL,
+        .paletteTag = GFX_TAG_LUXURY_BALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sBallAffineAnimSequences,
+        .callback = SpriteCB_TestBallThrow,
+    },
+    {
+        .tileTag = GFX_TAG_PREMIER_BALL,
+        .paletteTag = GFX_TAG_PREMIER_BALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sBallAffineAnimSequences,
+        .callback = SpriteCB_TestBallThrow,
+    },
+};
 
 // Functions
 u8 DoPokeballSendOutAnimation(s16 pan, u8 kindOfThrow)
 {
     u8 taskId;
-	
+    
     gDoingBattleAnim = TRUE;
     gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive = 1;
     taskId = CreateTask(Task_DoPokeballSendOutAnim, 5);
@@ -79,6 +340,7 @@ u8 DoPokeballSendOutAnimation(s16 pan, u8 kindOfThrow)
 }
 
 #ifdef NONMATCHING
+//gender is an unused variable that still manages to show up in the assembly, can't get temporary variables to make it work.
 static void Task_DoPokeballSendOutAnim(u8 taskId)
 {
     u16 throwCaseId;
@@ -86,7 +348,7 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
     u16 itemId, ballId;
     u8 ballSpriteId;
     bool8 notSendOut = FALSE;
-	u8 gender;
+    u8 gender, temp;
 
     if (gTasks[taskId].tFrames == 0)
     {
@@ -104,12 +366,14 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
 
     ballId = ItemIdToBallId(itemId);
     LoadBallGfx(ballId);
-	if (gBattleTypeFlags & BATTLE_TYPE_LINK)
-		gender = gLinkPlayers[GetBattlerMultiplayerId(battlerId)].gender;
-	else
-		gender = gSaveBlock2Ptr->playerGender;
-	
-    ballSpriteId = CreateSprite(&gUnknown_82606F4[ballId], 32, 80, 29);
+    
+    // r10 is set to gender byte here and loaded into a temporary variable to be immediately overwritten by an unused variable..
+    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
+        gender = gLinkPlayers[GetBattlerMultiplayerId(battlerId)].gender;
+    else
+        gender = gSaveBlock2Ptr->playerGender;
+    
+    ballSpriteId = CreateSprite(&gBallSpriteTemplates[ballId], 32, 80, 29);
     gSprites[ballSpriteId].data[0] = 0x80;
     gSprites[ballSpriteId].data[1] = 0;
     gSprites[ballSpriteId].data[7] = throwCaseId;
@@ -117,19 +381,19 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
     switch (throwCaseId)
     {
     case POKEBALL_PLAYER_SENDOUT:
-		if (gBattleTypeFlags & BATTLE_TYPE_POKEDUDE)
-		{
-			gSprites[ballSpriteId].pos1.x = 32;
-			gSprites[ballSpriteId].pos1.y = 64;
-		}
-		else
-		{
-			gender == gender;
-			gSprites[ballSpriteId].pos1.x = 48;
-			gSprites[ballSpriteId].pos1.y = 70;
-		}
-		
-		gBattlerTarget = battlerId;
+        if (gBattleTypeFlags & BATTLE_TYPE_POKEDUDE)
+        {
+            gSprites[ballSpriteId].pos1.x = 32;
+            gSprites[ballSpriteId].pos1.y = 64;
+        }
+        else
+        {
+            temp = gender;    //mov r0, r10 (r10 = gender), but this is never actually used
+            gSprites[ballSpriteId].pos1.x = 48;
+            gSprites[ballSpriteId].pos1.y = 70;
+        }
+        
+        gBattlerTarget = battlerId;
         gSprites[ballSpriteId].callback = SpriteCB_PlayerMonSendOut_1;
         break;
     case POKEBALL_OPPONENT_SENDOUT:
@@ -153,7 +417,7 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
     }
 
     // this will perform an unused ball throw animation
-    gSprites[ballSpriteId].data[0] = 0x22;
+    gSprites[ballSpriteId].data[0] = 34;
     gSprites[ballSpriteId].data[2] = GetBattlerSpriteCoord(gBattlerTarget, BATTLER_COORD_X);
     gSprites[ballSpriteId].data[4] = GetBattlerSpriteCoord(gBattlerTarget, BATTLER_COORD_Y) - 16;
     gSprites[ballSpriteId].data[5] = -40;
@@ -167,267 +431,267 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
 NAKED
 static void Task_DoPokeballSendOutAnim(u8 taskId)
 {
-	asm_unified("\tpush {r4-r7,lr}\n"
-	"\tmov r7, r10\n"
-	"\tmov r6, r9\n"
-	"\tmov r5, r8\n"
-	"\tpush {r5-r7}\n"
-	"\tsub sp, 0x8\n"
-	"\tlsls r0, 24\n"
-	"\tlsrs r0, 24\n"
-	"\tstr r0, [sp]\n"
-	"\tmovs r0, 0\n"
-	"\tstr r0, [sp, 0x4]\n"
-	"\tldr r1, _0804A9D4 @ =gTasks\n"
-	"\tldr r2, [sp]\n"
-	"\tlsls r0, r2, 2\n"
-	"\tadds r0, r2\n"
-	"\tlsls r0, 3\n"
-	"\tadds r1, r0, r1\n"
-	"\tldrh r2, [r1, 0x8]\n"
-	"\tmovs r3, 0x8\n"
-	"\tldrsh r0, [r1, r3]\n"
-	"\tcmp r0, 0\n"
-	"\tbne _0804A9D8\n"
-	"\tadds r0, r2, 0x1\n"
-	"\tstrh r0, [r1, 0x8]\n"
-	"\tb _0804ABB8\n"
-	"\t.align 2, 0\n"
-	"_0804A9D4: .4byte gTasks\n"
-	"_0804A9D8:\n"
-	"\tldrh r0, [r1, 0xC]\n"
-	"\tmov r9, r0\n"
-	"\tldrb r6, [r1, 0xE]\n"
-	"\tadds r0, r6, 0\n"
-	"\tbl GetBattlerSide\n"
-	"\tlsls r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0804AA04\n"
-	"\tldr r1, _0804A9FC @ =gBattlerPartyIndexes\n"
-	"\tlsls r0, r6, 1\n"
-	"\tadds r0, r1\n"
-	"\tldrh r1, [r0]\n"
-	"\tmovs r0, 0x64\n"
-	"\tmuls r0, r1\n"
-	"\tldr r1, _0804AA00 @ =gEnemyParty\n"
-	"\tb _0804AA12\n"
-	"\t.align 2, 0\n"
-	"_0804A9FC: .4byte gBattlerPartyIndexes\n"
-	"_0804AA00: .4byte gEnemyParty\n"
-	"_0804AA04:\n"
-	"\tldr r1, _0804AA50 @ =gBattlerPartyIndexes\n"
-	"\tlsls r0, r6, 1\n"
-	"\tadds r0, r1\n"
-	"\tldrh r1, [r0]\n"
-	"\tmovs r0, 0x64\n"
-	"\tmuls r0, r1\n"
-	"\tldr r1, _0804AA54 @ =gPlayerParty\n"
-	"_0804AA12:\n"
-	"\tadds r0, r1\n"
-	"\tmovs r1, 0x26\n"
-	"\tbl GetMonData\n"
-	"\tlsls r0, 16\n"
-	"\tlsrs r0, 16\n"
-	"\tbl ItemIdToBallId\n"
-	"\tlsls r0, 24\n"
-	"\tlsrs r5, r0, 24\n"
-	"\tadds r0, r5, 0\n"
-	"\tbl LoadBallGfx\n"
-	"\tldr r0, _0804AA58 @ =gBattleTypeFlags\n"
-	"\tldr r0, [r0]\n"
-	"\tmovs r1, 0x2\n"
-	"\tands r0, r1\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0804AA60\n"
-	"\tldr r4, _0804AA5C @ =gLinkPlayers\n"
-	"\tadds r0, r6, 0\n"
-	"\tbl GetBattlerMultiplayerId\n"
-	"\tlsls r1, r0, 3\n"
-	"\tsubs r1, r0\n"
-	"\tlsls r1, 2\n"
-	"\tadds r1, r4\n"
-	"\tldrb r1, [r1, 0x13]\n"
-	"\tmov r10, r1\n"
-	"\tb _0804AA68\n"
-	"\t.align 2, 0\n"
-	"_0804AA50: .4byte gBattlerPartyIndexes\n"
-	"_0804AA54: .4byte gPlayerParty\n"
-	"_0804AA58: .4byte gBattleTypeFlags\n"
-	"_0804AA5C: .4byte gLinkPlayers\n"
-	"_0804AA60:\n"
-	"\tldr r0, _0804AAB8 @ =gSaveBlock2Ptr\n"
-	"\tldr r0, [r0]\n"
-	"\tldrb r0, [r0, 0x8]\n"
-	"\tmov r10, r0\n"
-	"_0804AA68:\n"
-	"\tlsls r0, r5, 1\n"
-	"\tadds r0, r5\n"
-	"\tlsls r0, 3\n"
-	"\tldr r1, _0804AABC @ =gUnknown_82606F4\n"
-	"\tadds r0, r1\n"
-	"\tmovs r1, 0x20\n"
-	"\tmovs r2, 0x50\n"
-	"\tmovs r3, 0x1D\n"
-	"\tbl CreateSprite\n"
-	"\tlsls r0, 24\n"
-	"\tlsrs r7, r0, 24\n"
-	"\tlsls r5, r7, 4\n"
-	"\tadds r0, r5, r7\n"
-	"\tlsls r0, 2\n"
-	"\tmov r8, r0\n"
-	"\tldr r4, _0804AAC0 @ =gSprites\n"
-	"\tadd r4, r8\n"
-	"\tmovs r0, 0x80\n"
-	"\tstrh r0, [r4, 0x2E]\n"
-	"\tmovs r1, 0\n"
-	"\tstrh r1, [r4, 0x30]\n"
-	"\tmov r2, r9\n"
-	"\tstrh r2, [r4, 0x3C]\n"
-	"\tmov r3, r9\n"
-	"\tcmp r3, 0xFE\n"
-	"\tbeq _0804AAF8\n"
-	"\tcmp r3, 0xFF\n"
-	"\tbne _0804AB38\n"
-	"\tldr r0, _0804AAC4 @ =gBattleTypeFlags\n"
-	"\tldr r0, [r0]\n"
-	"\tmovs r1, 0x80\n"
-	"\tlsls r1, 9\n"
-	"\tands r0, r1\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0804AAC8\n"
-	"\tmovs r5, 0x20\n"
-	"\tmovs r4, 0x40\n"
-	"\tb _0804AACE\n"
-	"\t.align 2, 0\n"
-	"_0804AAB8: .4byte gSaveBlock2Ptr\n"
-	"_0804AABC: .4byte gUnknown_82606F4\n"
-	"_0804AAC0: .4byte gSprites\n"
-	"_0804AAC4: .4byte gBattleTypeFlags\n"
-	"_0804AAC8:\n"
-	"\tmov r0, r10\n"
-	"\tmovs r5, 0x30\n"
-	"\tmovs r4, 0x46\n"
-	"_0804AACE:\n"
-	"\tldr r0, _0804AAEC @ =gBattlerTarget\n"
-	"\tstrb r6, [r0]\n"
-	"\tldr r2, _0804AAF0 @ =gSprites\n"
-	"\tlsls r3, r7, 4\n"
-	"\tadds r1, r3, r7\n"
-	"\tlsls r1, 2\n"
-	"\tadds r0, r1, r2\n"
-	"\tstrh r5, [r0, 0x20]\n"
-	"\tstrh r4, [r0, 0x22]\n"
-	"\tadds r2, 0x1C\n"
-	"\tadds r1, r2\n"
-	"\tldr r0, _0804AAF4 @ =SpriteCB_PlayerMonSendOut_1\n"
-	"\tstr r0, [r1]\n"
-	"\tb _0804AB48\n"
-	"\t.align 2, 0\n"
-	"_0804AAEC: .4byte gBattlerTarget\n"
-	"_0804AAF0: .4byte gSprites\n"
-	"_0804AAF4: .4byte SpriteCB_PlayerMonSendOut_1\n"
-	"_0804AAF8:\n"
-	"\tadds r0, r6, 0\n"
-	"\tmovs r1, 0\n"
-	"\tbl GetBattlerSpriteCoord\n"
-	"\tlsls r0, 24\n"
-	"\tlsrs r0, 24\n"
-	"\tstrh r0, [r4, 0x20]\n"
-	"\tadds r0, r6, 0\n"
-	"\tmovs r1, 0x1\n"
-	"\tbl GetBattlerSpriteCoord\n"
-	"\tlsls r0, 24\n"
-	"\tlsrs r0, 24\n"
-	"\tadds r0, 0x18\n"
-	"\tstrh r0, [r4, 0x22]\n"
-	"\tldr r0, _0804AB2C @ =gBattlerTarget\n"
-	"\tstrb r6, [r0]\n"
-	"\tmovs r1, 0\n"
-	"\tstrh r1, [r4, 0x2E]\n"
-	"\tldr r0, _0804AB30 @ =gSprites\n"
-	"\tadds r0, 0x1C\n"
-	"\tadd r0, r8\n"
-	"\tldr r1, _0804AB34 @ =SpriteCB_OpponentMonSendOut\n"
-	"\tstr r1, [r0]\n"
-	"\tb _0804AB46\n"
-	"\t.align 2, 0\n"
-	"_0804AB2C: .4byte gBattlerTarget\n"
-	"_0804AB30: .4byte gSprites\n"
-	"_0804AB34: .4byte SpriteCB_OpponentMonSendOut\n"
-	"_0804AB38:\n"
-	"\tmovs r0, 0x1\n"
-	"\tbl GetBattlerAtPosition\n"
-	"\tldr r1, _0804AB64 @ =gBattlerTarget\n"
-	"\tstrb r0, [r1]\n"
-	"\tmovs r2, 0x1\n"
-	"\tstr r2, [sp, 0x4]\n"
-	"_0804AB46:\n"
-	"\tadds r3, r5, 0\n"
-	"_0804AB48:\n"
-	"\tldr r0, _0804AB68 @ =gSprites\n"
-	"\tadds r1, r3, r7\n"
-	"\tlsls r1, 2\n"
-	"\tadds r4, r1, r0\n"
-	"\tldr r5, _0804AB64 @ =gBattlerTarget\n"
-	"\tldrb r0, [r5]\n"
-	"\tstrh r0, [r4, 0x3A]\n"
-	"\tldr r3, [sp, 0x4]\n"
-	"\tcmp r3, 0\n"
-	"\tbne _0804AB6C\n"
-	"\tldr r0, [sp]\n"
-	"\tbl DestroyTask\n"
-	"\tb _0804ABB8\n"
-	"\t.align 2, 0\n"
-	"_0804AB64: .4byte gBattlerTarget\n"
-	"_0804AB68: .4byte gSprites\n"
-	"_0804AB6C:\n"
-	"\tmovs r0, 0x22\n"
-	"\tstrh r0, [r4, 0x2E]\n"
-	"\tldrb r0, [r5]\n"
-	"\tmovs r1, 0\n"
-	"\tbl GetBattlerSpriteCoord\n"
-	"\tlsls r0, 24\n"
-	"\tlsrs r0, 24\n"
-	"\tstrh r0, [r4, 0x32]\n"
-	"\tldrb r0, [r5]\n"
-	"\tmovs r1, 0x1\n"
-	"\tbl GetBattlerSpriteCoord\n"
-	"\tlsls r0, 24\n"
-	"\tlsrs r0, 24\n"
-	"\tsubs r0, 0x10\n"
-	"\tstrh r0, [r4, 0x36]\n"
-	"\tldr r0, _0804ABC8 @ =0x0000ffd8\n"
-	"\tstrh r0, [r4, 0x38]\n"
-	"\tadds r0, r4, 0\n"
-	"\tbl InitAnimArcTranslation\n"
-	"\tmov r0, sp\n"
-	"\tldrh r0, [r0]\n"
-	"\tstrh r0, [r4, 0x6]\n"
-	"\tldr r1, _0804ABCC @ =gTasks\n"
-	"\tldr r2, [sp]\n"
-	"\tlsls r0, r2, 2\n"
-	"\tadds r0, r2\n"
-	"\tlsls r0, 3\n"
-	"\tadds r0, r1\n"
-	"\tldrb r1, [r5]\n"
-	"\tstrh r1, [r0, 0x10]\n"
-	"\tldr r1, _0804ABD0 @ =TaskDummy\n"
-	"\tstr r1, [r0]\n"
-	"\tmovs r0, 0x36\n"
-	"\tbl PlaySE\n"
-	"_0804ABB8:\n"
-	"\tadd sp, 0x8\n"
-	"\tpop {r3-r5}\n"
-	"\tmov r8, r3\n"
-	"\tmov r9, r4\n"
-	"\tmov r10, r5\n"
-	"\tpop {r4-r7}\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-	"_0804ABC8: .4byte 0x0000ffd8\n"
-	"_0804ABCC: .4byte gTasks\n"
-	"_0804ABD0: .4byte TaskDummy\n");
+    asm_unified("\tpush {r4-r7,lr}\n"
+    "\tmov r7, r10\n"
+    "\tmov r6, r9\n"
+    "\tmov r5, r8\n"
+    "\tpush {r5-r7}\n"
+    "\tsub sp, 0x8\n"
+    "\tlsls r0, 24\n"
+    "\tlsrs r0, 24\n"
+    "\tstr r0, [sp]\n"
+    "\tmovs r0, 0\n"
+    "\tstr r0, [sp, 0x4]\n"
+    "\tldr r1, _0804A9D4 @ =gTasks\n"
+    "\tldr r2, [sp]\n"
+    "\tlsls r0, r2, 2\n"
+    "\tadds r0, r2\n"
+    "\tlsls r0, 3\n"
+    "\tadds r1, r0, r1\n"
+    "\tldrh r2, [r1, 0x8]\n"
+    "\tmovs r3, 0x8\n"
+    "\tldrsh r0, [r1, r3]\n"
+    "\tcmp r0, 0\n"
+    "\tbne _0804A9D8\n"
+    "\tadds r0, r2, 0x1\n"
+    "\tstrh r0, [r1, 0x8]\n"
+    "\tb _0804ABB8\n"
+    "\t.align 2, 0\n"
+    "_0804A9D4: .4byte gTasks\n"
+    "_0804A9D8:\n"
+    "\tldrh r0, [r1, 0xC]\n"
+    "\tmov r9, r0\n"
+    "\tldrb r6, [r1, 0xE]\n"
+    "\tadds r0, r6, 0\n"
+    "\tbl GetBattlerSide\n"
+    "\tlsls r0, 24\n"
+    "\tcmp r0, 0\n"
+    "\tbeq _0804AA04\n"
+    "\tldr r1, _0804A9FC @ =gBattlerPartyIndexes\n"
+    "\tlsls r0, r6, 1\n"
+    "\tadds r0, r1\n"
+    "\tldrh r1, [r0]\n"
+    "\tmovs r0, 0x64\n"
+    "\tmuls r0, r1\n"
+    "\tldr r1, _0804AA00 @ =gEnemyParty\n"
+    "\tb _0804AA12\n"
+    "\t.align 2, 0\n"
+    "_0804A9FC: .4byte gBattlerPartyIndexes\n"
+    "_0804AA00: .4byte gEnemyParty\n"
+    "_0804AA04:\n"
+    "\tldr r1, _0804AA50 @ =gBattlerPartyIndexes\n"
+    "\tlsls r0, r6, 1\n"
+    "\tadds r0, r1\n"
+    "\tldrh r1, [r0]\n"
+    "\tmovs r0, 0x64\n"
+    "\tmuls r0, r1\n"
+    "\tldr r1, _0804AA54 @ =gPlayerParty\n"
+    "_0804AA12:\n"
+    "\tadds r0, r1\n"
+    "\tmovs r1, 0x26\n"
+    "\tbl GetMonData\n"
+    "\tlsls r0, 16\n"
+    "\tlsrs r0, 16\n"
+    "\tbl ItemIdToBallId\n"
+    "\tlsls r0, 24\n"
+    "\tlsrs r5, r0, 24\n"
+    "\tadds r0, r5, 0\n"
+    "\tbl LoadBallGfx\n"
+    "\tldr r0, _0804AA58 @ =gBattleTypeFlags\n"
+    "\tldr r0, [r0]\n"
+    "\tmovs r1, 0x2\n"
+    "\tands r0, r1\n"
+    "\tcmp r0, 0\n"
+    "\tbeq _0804AA60\n"
+    "\tldr r4, _0804AA5C @ =gLinkPlayers\n"
+    "\tadds r0, r6, 0\n"
+    "\tbl GetBattlerMultiplayerId\n"
+    "\tlsls r1, r0, 3\n"
+    "\tsubs r1, r0\n"
+    "\tlsls r1, 2\n"
+    "\tadds r1, r4\n"
+    "\tldrb r1, [r1, 0x13]\n"
+    "\tmov r10, r1\n"
+    "\tb _0804AA68\n"
+    "\t.align 2, 0\n"
+    "_0804AA50: .4byte gBattlerPartyIndexes\n"
+    "_0804AA54: .4byte gPlayerParty\n"
+    "_0804AA58: .4byte gBattleTypeFlags\n"
+    "_0804AA5C: .4byte gLinkPlayers\n"
+    "_0804AA60:\n"
+    "\tldr r0, _0804AAB8 @ =gSaveBlock2Ptr\n"
+    "\tldr r0, [r0]\n"
+    "\tldrb r0, [r0, 0x8]\n"
+    "\tmov r10, r0\n"
+    "_0804AA68:\n"
+    "\tlsls r0, r5, 1\n"
+    "\tadds r0, r5\n"
+    "\tlsls r0, 3\n"
+    "\tldr r1, _0804AABC @ =gBallSpriteTemplates\n"
+    "\tadds r0, r1\n"
+    "\tmovs r1, 0x20\n"
+    "\tmovs r2, 0x50\n"
+    "\tmovs r3, 0x1D\n"
+    "\tbl CreateSprite\n"
+    "\tlsls r0, 24\n"
+    "\tlsrs r7, r0, 24\n"
+    "\tlsls r5, r7, 4\n"
+    "\tadds r0, r5, r7\n"
+    "\tlsls r0, 2\n"
+    "\tmov r8, r0\n"
+    "\tldr r4, _0804AAC0 @ =gSprites\n"
+    "\tadd r4, r8\n"
+    "\tmovs r0, 0x80\n"
+    "\tstrh r0, [r4, 0x2E]\n"
+    "\tmovs r1, 0\n"
+    "\tstrh r1, [r4, 0x30]\n"
+    "\tmov r2, r9\n"
+    "\tstrh r2, [r4, 0x3C]\n"
+    "\tmov r3, r9\n"
+    "\tcmp r3, 0xFE\n"
+    "\tbeq _0804AAF8\n"
+    "\tcmp r3, 0xFF\n"
+    "\tbne _0804AB38\n"
+    "\tldr r0, _0804AAC4 @ =gBattleTypeFlags\n"
+    "\tldr r0, [r0]\n"
+    "\tmovs r1, 0x80\n"
+    "\tlsls r1, 9\n"
+    "\tands r0, r1\n"
+    "\tcmp r0, 0\n"
+    "\tbeq _0804AAC8\n"
+    "\tmovs r5, 0x20\n"
+    "\tmovs r4, 0x40\n"
+    "\tb _0804AACE\n"
+    "\t.align 2, 0\n"
+    "_0804AAB8: .4byte gSaveBlock2Ptr\n"
+    "_0804AABC: .4byte gBallSpriteTemplates\n"
+    "_0804AAC0: .4byte gSprites\n"
+    "_0804AAC4: .4byte gBattleTypeFlags\n"
+    "_0804AAC8:\n"
+    "\tmov r0, r10\n"
+    "\tmovs r5, 0x30\n"
+    "\tmovs r4, 0x46\n"
+    "_0804AACE:\n"
+    "\tldr r0, _0804AAEC @ =gBattlerTarget\n"
+    "\tstrb r6, [r0]\n"
+    "\tldr r2, _0804AAF0 @ =gSprites\n"
+    "\tlsls r3, r7, 4\n"
+    "\tadds r1, r3, r7\n"
+    "\tlsls r1, 2\n"
+    "\tadds r0, r1, r2\n"
+    "\tstrh r5, [r0, 0x20]\n"
+    "\tstrh r4, [r0, 0x22]\n"
+    "\tadds r2, 0x1C\n"
+    "\tadds r1, r2\n"
+    "\tldr r0, _0804AAF4 @ =SpriteCB_PlayerMonSendOut_1\n"
+    "\tstr r0, [r1]\n"
+    "\tb _0804AB48\n"
+    "\t.align 2, 0\n"
+    "_0804AAEC: .4byte gBattlerTarget\n"
+    "_0804AAF0: .4byte gSprites\n"
+    "_0804AAF4: .4byte SpriteCB_PlayerMonSendOut_1\n"
+    "_0804AAF8:\n"
+    "\tadds r0, r6, 0\n"
+    "\tmovs r1, 0\n"
+    "\tbl GetBattlerSpriteCoord\n"
+    "\tlsls r0, 24\n"
+    "\tlsrs r0, 24\n"
+    "\tstrh r0, [r4, 0x20]\n"
+    "\tadds r0, r6, 0\n"
+    "\tmovs r1, 0x1\n"
+    "\tbl GetBattlerSpriteCoord\n"
+    "\tlsls r0, 24\n"
+    "\tlsrs r0, 24\n"
+    "\tadds r0, 0x18\n"
+    "\tstrh r0, [r4, 0x22]\n"
+    "\tldr r0, _0804AB2C @ =gBattlerTarget\n"
+    "\tstrb r6, [r0]\n"
+    "\tmovs r1, 0\n"
+    "\tstrh r1, [r4, 0x2E]\n"
+    "\tldr r0, _0804AB30 @ =gSprites\n"
+    "\tadds r0, 0x1C\n"
+    "\tadd r0, r8\n"
+    "\tldr r1, _0804AB34 @ =SpriteCB_OpponentMonSendOut\n"
+    "\tstr r1, [r0]\n"
+    "\tb _0804AB46\n"
+    "\t.align 2, 0\n"
+    "_0804AB2C: .4byte gBattlerTarget\n"
+    "_0804AB30: .4byte gSprites\n"
+    "_0804AB34: .4byte SpriteCB_OpponentMonSendOut\n"
+    "_0804AB38:\n"
+    "\tmovs r0, 0x1\n"
+    "\tbl GetBattlerAtPosition\n"
+    "\tldr r1, _0804AB64 @ =gBattlerTarget\n"
+    "\tstrb r0, [r1]\n"
+    "\tmovs r2, 0x1\n"
+    "\tstr r2, [sp, 0x4]\n"
+    "_0804AB46:\n"
+    "\tadds r3, r5, 0\n"
+    "_0804AB48:\n"
+    "\tldr r0, _0804AB68 @ =gSprites\n"
+    "\tadds r1, r3, r7\n"
+    "\tlsls r1, 2\n"
+    "\tadds r4, r1, r0\n"
+    "\tldr r5, _0804AB64 @ =gBattlerTarget\n"
+    "\tldrb r0, [r5]\n"
+    "\tstrh r0, [r4, 0x3A]\n"
+    "\tldr r3, [sp, 0x4]\n"
+    "\tcmp r3, 0\n"
+    "\tbne _0804AB6C\n"
+    "\tldr r0, [sp]\n"
+    "\tbl DestroyTask\n"
+    "\tb _0804ABB8\n"
+    "\t.align 2, 0\n"
+    "_0804AB64: .4byte gBattlerTarget\n"
+    "_0804AB68: .4byte gSprites\n"
+    "_0804AB6C:\n"
+    "\tmovs r0, 0x22\n"
+    "\tstrh r0, [r4, 0x2E]\n"
+    "\tldrb r0, [r5]\n"
+    "\tmovs r1, 0\n"
+    "\tbl GetBattlerSpriteCoord\n"
+    "\tlsls r0, 24\n"
+    "\tlsrs r0, 24\n"
+    "\tstrh r0, [r4, 0x32]\n"
+    "\tldrb r0, [r5]\n"
+    "\tmovs r1, 0x1\n"
+    "\tbl GetBattlerSpriteCoord\n"
+    "\tlsls r0, 24\n"
+    "\tlsrs r0, 24\n"
+    "\tsubs r0, 0x10\n"
+    "\tstrh r0, [r4, 0x36]\n"
+    "\tldr r0, _0804ABC8 @ =0x0000ffd8\n"
+    "\tstrh r0, [r4, 0x38]\n"
+    "\tadds r0, r4, 0\n"
+    "\tbl InitAnimArcTranslation\n"
+    "\tmov r0, sp\n"
+    "\tldrh r0, [r0]\n"
+    "\tstrh r0, [r4, 0x6]\n"
+    "\tldr r1, _0804ABCC @ =gTasks\n"
+    "\tldr r2, [sp]\n"
+    "\tlsls r0, r2, 2\n"
+    "\tadds r0, r2\n"
+    "\tlsls r0, 3\n"
+    "\tadds r0, r1\n"
+    "\tldrb r1, [r5]\n"
+    "\tstrh r1, [r0, 0x10]\n"
+    "\tldr r1, _0804ABD0 @ =TaskDummy\n"
+    "\tstr r1, [r0]\n"
+    "\tmovs r0, 0x36\n"
+    "\tbl PlaySE\n"
+    "_0804ABB8:\n"
+    "\tadd sp, 0x8\n"
+    "\tpop {r3-r5}\n"
+    "\tmov r8, r3\n"
+    "\tmov r9, r4\n"
+    "\tmov r10, r5\n"
+    "\tpop {r4-r7}\n"
+    "\tpop {r0}\n"
+    "\tbx r0\n"
+    "\t.align 2, 0\n"
+    "_0804ABC8: .4byte 0x0000ffd8\n"
+    "_0804ABCC: .4byte gTasks\n"
+    "_0804ABD0: .4byte TaskDummy\n");
 }
 #endif
 
@@ -485,6 +749,7 @@ static void sub_804AD00(struct Sprite *sprite)
     sprite->data[5]++;
     if (sprite->data[5] == 11)
         PlaySE(SE_SUIKOMU);
+    
     if (gSprites[gBattlerSpriteIds[sprite->sBattler]].affineAnimEnded)
     {
         StartSpriteAnim(sprite, 2);
@@ -654,6 +919,7 @@ static void sub_804AF24(struct Sprite *sprite)
                 StartSpriteAffineAnim(sprite, 2);
             else
                 StartSpriteAffineAnim(sprite, 1);
+            
             PlaySE(SE_BOWA);
         }
         break;
@@ -663,35 +929,33 @@ static void sub_804AF24(struct Sprite *sprite)
 #define tCryTaskSpecies         data[0]
 #define tCryTaskPan             data[1]
 #define tCryTaskWantedCry       data[2]
-#define tCryTaskBattler         data[3]
-#define tCryTaskMonSpriteId     data[4]
-#define tCryTaskMonPtr1         data[5]
-#define tCryTaskMonPtr2         data[6]
+#define tCryTaskMonPtr1         data[3]
+#define tCryTaskMonPtr2         data[4]
 #define tCryTaskFrames          data[10]
 #define tCryTaskState           data[15]
 
 static void Task_PlayCryWhenReleasedFromBall(u8 taskId)
 {
-    u8 wantedCry = gTasks[taskId].tCryTaskWantedCry;
+    u8 state2 = gTasks[taskId].data[2];
     s8 pan = gTasks[taskId].tCryTaskPan;
     u16 species = gTasks[taskId].tCryTaskSpecies;
-    u8 battlerId = gTasks[taskId].tCryTaskBattler;
-    u8 monSpriteId = gTasks[taskId].tCryTaskMonSpriteId;
-    struct Pokemon *mon = (void*)(u32)((gTasks[taskId].tCryTaskMonPtr1 << 0x10) | (u16)(gTasks[taskId].tCryTaskMonPtr2));
+    struct Pokemon *mon = (void*)(u32)((u32)(gTasks[taskId].tCryTaskMonPtr1 << 0x10) | ((u16)gTasks[taskId].tCryTaskMonPtr2));
 
     switch (gTasks[taskId].tCryTaskState)
     {
     case 0:
     default:
-        if (gSprites[monSpriteId].affineAnimEnded)
-            gTasks[taskId].tCryTaskState = wantedCry + 1;
+        if (gTasks[taskId].data[8] < 3)
+            gTasks[taskId].data[8]++;
+        else
+            gTasks[taskId].tCryTaskState = state2 + 1;
         break;
     case 1:
         if (ShouldPlayNormalPokeCry(mon) == TRUE)
             PlayCry3(species, pan, 0);
         else
             PlayCry3(species, pan, 11);
-        gBattleSpritesDataPtr->healthBoxesData[battlerId].field_1_x40 = 0;
+        
         DestroyTask(taskId);
         break;
     case 2:
@@ -707,7 +971,6 @@ static void Task_PlayCryWhenReleasedFromBall(u8 taskId)
             else
                 PlayCry4(species, pan, 12);
 
-            gBattleSpritesDataPtr->healthBoxesData[battlerId].field_1_x40 = 0;
             DestroyTask(taskId);
         }
         else
@@ -726,7 +989,6 @@ static void Task_PlayCryWhenReleasedFromBall(u8 taskId)
             break;
         }
         gTasks[taskId].tCryTaskState++;
-        // fall through
     case 31:
         if (!IsCryPlayingOrClearCrySongs())
         {
@@ -741,12 +1003,12 @@ static void Task_PlayCryWhenReleasedFromBall(u8 taskId)
             gTasks[taskId].tCryTaskFrames--;
             break;
         }
+        
         if (ShouldPlayNormalPokeCry(mon) == TRUE)
             PlayCry4(species, pan, 0);
         else
             PlayCry4(species, pan, 11);
 
-        gBattleSpritesDataPtr->healthBoxesData[battlerId].field_1_x40 = 0;
         DestroyTask(taskId);
         break;
     }
@@ -786,7 +1048,7 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
         if ((battlerId == GetBattlerAtPosition(B_POSITION_PLAYER_LEFT) || battlerId == GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
          && IsDoubleBattle() && gBattleSpritesDataPtr->animationData->field_9_x1)
         {
-            if (gBattleTypeFlags & BATTLE_TYPE_MULTI && gBattleTypeFlags & BATTLE_TYPE_LINK)
+            if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
             {
                 if (IsBGMPlaying())
                     m4aMPlayStop(&gMPlayInfo_BGM);
@@ -803,29 +1065,17 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
             wantedCryCase = 1;
         else
             wantedCryCase = 2;
-
-        gBattleSpritesDataPtr->healthBoxesData[battlerId].field_1_x40 = 1;
-
+        
         taskId = CreateTask(Task_PlayCryWhenReleasedFromBall, 3);
         gTasks[taskId].tCryTaskSpecies = species;
         gTasks[taskId].tCryTaskPan = pan;
         gTasks[taskId].tCryTaskWantedCry = wantedCryCase;
-        gTasks[taskId].tCryTaskBattler = battlerId;
-        gTasks[taskId].tCryTaskMonSpriteId = gBattlerSpriteIds[sprite->sBattler];
         gTasks[taskId].tCryTaskMonPtr1 = (u32)(mon) >> 0x10;
         gTasks[taskId].tCryTaskMonPtr2 = (u32)(mon);
         gTasks[taskId].tCryTaskState = 0;
     }
 
     StartSpriteAffineAnim(&gSprites[gBattlerSpriteIds[sprite->sBattler]], 1);
-
-/*
-    if (GetBattlerSide(sprite->sBattler) == B_SIDE_OPPONENT)
-        gSprites[gBattlerSpriteIds[sprite->sBattler]].callback = sub_8039B58;
-    else
-        gSprites[gBattlerSpriteIds[sprite->sBattler]].callback = sub_8039E44;
-*/
-
     AnimateSprite(&gSprites[gBattlerSpriteIds[sprite->sBattler]]);
     gSprites[gBattlerSpriteIds[sprite->sBattler]].data[1] = 0x1000;
 }
@@ -833,8 +1083,6 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
 #undef tCryTaskSpecies
 #undef tCryTaskPan
 #undef tCryTaskWantedCry
-#undef tCryTaskBattler
-#undef tCryTaskMonSpriteId
 #undef tCryTaskMonPtr1
 #undef tCryTaskMonPtr2
 #undef tCryTaskFrames
@@ -903,7 +1151,7 @@ static void sub_804B5C8(struct Sprite *sprite)
     {
         gDoingBattleAnim = FALSE;
         m4aMPlayAllStop();
-        PlaySE(MUS_FANFA5);
+        PlaySE(MUS_FAN6);
     }
     else if (sprite->data[4] == 315)
     {
@@ -1026,22 +1274,17 @@ void CreatePokeballSpriteToReleaseMon(u8 monSpriteId, u8 battlerId, u8 x, u8 y, 
     LoadCompressedSpriteSheetUsingHeap(&gBallSpriteSheets[0]);
     LoadCompressedSpritePaletteUsingHeap(&gBallSpritePalettes[0]);
     spriteId = CreateSprite(&gBallSpriteTemplates[0], x, y, subpriortiy);
-
     gSprites[spriteId].data[0] = monSpriteId;
     gSprites[spriteId].data[5] = gSprites[monSpriteId].pos1.x;
     gSprites[spriteId].data[6] = gSprites[monSpriteId].pos1.y;
-
     gSprites[monSpriteId].pos1.x = x;
     gSprites[monSpriteId].pos1.y = y;
-    //gSprites[monSpriteId].data[7] = species;
-
     gSprites[spriteId].data[1] = g;
     gSprites[spriteId].data[2] = battlerId;
     gSprites[spriteId].data[3] = h;
     gSprites[spriteId].data[4] = h >> 0x10;
     gSprites[spriteId].oam.priority = oamPriority;
     gSprites[spriteId].callback = sub_804B9E8;
-
     gSprites[monSpriteId].invisible = TRUE;
 }
 
@@ -1085,11 +1328,13 @@ static void sub_804BAA4(struct Sprite *sprite)
 
     if (sprite->animEnded)
         sprite->invisible = TRUE;
+    
     if (gSprites[monSpriteId].affineAnimEnded)
     {
         StartSpriteAffineAnim(&gSprites[monSpriteId], 0);
         r12 = TRUE;
     }
+    
     var1 = (sprite->data[5] - sprite->pos1.x) * sprite->data[7] / 128 + sprite->pos1.x;
     var2 = (sprite->data[6] - sprite->pos1.y) * sprite->data[7] / 128 + sprite->pos1.y;
     gSprites[monSpriteId].pos1.x = var1;
@@ -1110,16 +1355,9 @@ static void sub_804BAA4(struct Sprite *sprite)
         gSprites[monSpriteId].pos2.y = 0;
         r6 = TRUE;
     }
+    
     if (sprite->animEnded && r12 && r6)
-    {
-        /*
-		if (gSprites[monSpriteId].data[7] == SPECIES_EGG)
-            DoMonFrontSpriteAnimation(&gSprites[monSpriteId], gSprites[monSpriteId].data[7], TRUE, 0);
-        else
-            DoMonFrontSpriteAnimation(&gSprites[monSpriteId], gSprites[monSpriteId].data[7], FALSE, 0);
-		*/
         DestroySpriteAndFreeResources(sprite);
-    }
 }
 
 u8 CreateTradePokeballSprite(u8 a, u8 b, u8 x, u8 y, u8 oamPriority, u8 subPriority, u8 g, u32 h)
@@ -1174,6 +1412,7 @@ static void sub_804BCF8(struct Sprite *sprite)
     sprite->data[5]++;
     if (sprite->data[5] == 11)
         PlaySE(SE_SUIKOMU);
+    
     r1 = sprite->data[0];
     if (gSprites[r1].affineAnimEnded)
     {
@@ -1195,7 +1434,7 @@ static void sub_804BD6C(struct Sprite *sprite)
         sprite->callback = SpriteCallbackDummy;
 }
 
-static void DestroySpriteAndFreeResources2(struct Sprite *sprite)
+void DestroySpriteAndFreeResources2(struct Sprite *sprite)
 {
     DestroySpriteAndFreeResources(sprite);
 }
@@ -1216,6 +1455,7 @@ void sub_804BD94(u8 battlerId)
         healthboxSprite->pos2.x = -healthboxSprite->pos2.x;
         healthboxSprite->pos2.y = -healthboxSprite->pos2.y;
     }
+    
     gSprites[healthboxSprite->data[5]].callback(&gSprites[healthboxSprite->data[5]]);
     if (GetBattlerPosition(battlerId) == B_POSITION_PLAYER_RIGHT)
         healthboxSprite->callback = sub_804BE24;
@@ -1273,6 +1513,7 @@ void LoadBallGfx(u8 ballId)
         LoadCompressedSpriteSheetUsingHeap(&gBallSpriteSheets[ballId]);
         LoadCompressedSpritePaletteUsingHeap(&gBallSpritePalettes[ballId]);
     }
+    
     switch (ballId)
     {
     case BALL_DIVE:

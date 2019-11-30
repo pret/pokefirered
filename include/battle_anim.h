@@ -91,7 +91,7 @@ extern const struct OamData gOamData_83ACB88;
 extern const struct OamData gOamData_83ACBC0;
 extern const struct OamData gOamData_83ACBE8;
 
-// battle_anim.s
+// battle_anim.c
 void MoveBattlerSpriteToBG(u8 battlerId, u8);
 void sub_8073128(u8);
 void ClearBattleAnimationVars(void);

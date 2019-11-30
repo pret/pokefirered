@@ -421,6 +421,7 @@ SECTIONS {
         src/tileset_anims.o(.rodata);
         src/palette.o(.rodata);
         src/sound.o(.rodata);
+		src/battle_anim.o(.rodata);
         data/battle_anim.o(.rodata);
         src/battle_anim_mons.o(.rodata);
         data/map_events.o(.rodata);

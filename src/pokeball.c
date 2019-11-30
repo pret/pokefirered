@@ -339,8 +339,6 @@ u8 DoPokeballSendOutAnimation(s16 pan, u8 kindOfThrow)
     return 0;
 }
 
-#ifdef NONMATCHING
-//gender is an unused variable that still manages to show up in the assembly, can't get temporary variables to make it work.
 static void Task_DoPokeballSendOutAnim(u8 taskId)
 {
     u16 throwCaseId;
@@ -348,7 +346,8 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
     u16 itemId, ballId;
     u8 ballSpriteId;
     bool8 notSendOut = FALSE;
-    u8 gender, temp;
+    s16 x, y;
+    u32 gender;
 
     if (gTasks[taskId].tFrames == 0)
     {
@@ -367,7 +366,6 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
     ballId = ItemIdToBallId(itemId);
     LoadBallGfx(ballId);
     
-    // r10 is set to gender byte here and loaded into a temporary variable to be immediately overwritten by an unused variable..
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         gender = gLinkPlayers[GetBattlerMultiplayerId(battlerId)].gender;
     else
@@ -383,17 +381,19 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
     case POKEBALL_PLAYER_SENDOUT:
         if (gBattleTypeFlags & BATTLE_TYPE_POKEDUDE)
         {
-            gSprites[ballSpriteId].pos1.x = 32;
-            gSprites[ballSpriteId].pos1.y = 64;
+            x = 32;
+            y = 64;
         }
         else
         {
-            temp = gender;    //mov r0, r10 (r10 = gender), but this is never actually used
-            gSprites[ballSpriteId].pos1.x = 48;
-            gSprites[ballSpriteId].pos1.y = 70;
+            gender = !!gender; // something unknown got optimized out
+            x = 48;
+            y = 70;
         }
         
         gBattlerTarget = battlerId;
+        gSprites[ballSpriteId].pos1.x = x;
+        gSprites[ballSpriteId].pos1.y = y;
         gSprites[ballSpriteId].callback = SpriteCB_PlayerMonSendOut_1;
         break;
     case POKEBALL_OPPONENT_SENDOUT:
@@ -427,273 +427,6 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
     gTasks[taskId].func = TaskDummy;
     PlaySE(SE_NAGERU);
 }
-#else
-NAKED
-static void Task_DoPokeballSendOutAnim(u8 taskId)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-    "\tmov r7, r10\n"
-    "\tmov r6, r9\n"
-    "\tmov r5, r8\n"
-    "\tpush {r5-r7}\n"
-    "\tsub sp, 0x8\n"
-    "\tlsls r0, 24\n"
-    "\tlsrs r0, 24\n"
-    "\tstr r0, [sp]\n"
-    "\tmovs r0, 0\n"
-    "\tstr r0, [sp, 0x4]\n"
-    "\tldr r1, _0804A9D4 @ =gTasks\n"
-    "\tldr r2, [sp]\n"
-    "\tlsls r0, r2, 2\n"
-    "\tadds r0, r2\n"
-    "\tlsls r0, 3\n"
-    "\tadds r1, r0, r1\n"
-    "\tldrh r2, [r1, 0x8]\n"
-    "\tmovs r3, 0x8\n"
-    "\tldrsh r0, [r1, r3]\n"
-    "\tcmp r0, 0\n"
-    "\tbne _0804A9D8\n"
-    "\tadds r0, r2, 0x1\n"
-    "\tstrh r0, [r1, 0x8]\n"
-    "\tb _0804ABB8\n"
-    "\t.align 2, 0\n"
-    "_0804A9D4: .4byte gTasks\n"
-    "_0804A9D8:\n"
-    "\tldrh r0, [r1, 0xC]\n"
-    "\tmov r9, r0\n"
-    "\tldrb r6, [r1, 0xE]\n"
-    "\tadds r0, r6, 0\n"
-    "\tbl GetBattlerSide\n"
-    "\tlsls r0, 24\n"
-    "\tcmp r0, 0\n"
-    "\tbeq _0804AA04\n"
-    "\tldr r1, _0804A9FC @ =gBattlerPartyIndexes\n"
-    "\tlsls r0, r6, 1\n"
-    "\tadds r0, r1\n"
-    "\tldrh r1, [r0]\n"
-    "\tmovs r0, 0x64\n"
-    "\tmuls r0, r1\n"
-    "\tldr r1, _0804AA00 @ =gEnemyParty\n"
-    "\tb _0804AA12\n"
-    "\t.align 2, 0\n"
-    "_0804A9FC: .4byte gBattlerPartyIndexes\n"
-    "_0804AA00: .4byte gEnemyParty\n"
-    "_0804AA04:\n"
-    "\tldr r1, _0804AA50 @ =gBattlerPartyIndexes\n"
-    "\tlsls r0, r6, 1\n"
-    "\tadds r0, r1\n"
-    "\tldrh r1, [r0]\n"
-    "\tmovs r0, 0x64\n"
-    "\tmuls r0, r1\n"
-    "\tldr r1, _0804AA54 @ =gPlayerParty\n"
-    "_0804AA12:\n"
-    "\tadds r0, r1\n"
-    "\tmovs r1, 0x26\n"
-    "\tbl GetMonData\n"
-    "\tlsls r0, 16\n"
-    "\tlsrs r0, 16\n"
-    "\tbl ItemIdToBallId\n"
-    "\tlsls r0, 24\n"
-    "\tlsrs r5, r0, 24\n"
-    "\tadds r0, r5, 0\n"
-    "\tbl LoadBallGfx\n"
-    "\tldr r0, _0804AA58 @ =gBattleTypeFlags\n"
-    "\tldr r0, [r0]\n"
-    "\tmovs r1, 0x2\n"
-    "\tands r0, r1\n"
-    "\tcmp r0, 0\n"
-    "\tbeq _0804AA60\n"
-    "\tldr r4, _0804AA5C @ =gLinkPlayers\n"
-    "\tadds r0, r6, 0\n"
-    "\tbl GetBattlerMultiplayerId\n"
-    "\tlsls r1, r0, 3\n"
-    "\tsubs r1, r0\n"
-    "\tlsls r1, 2\n"
-    "\tadds r1, r4\n"
-    "\tldrb r1, [r1, 0x13]\n"
-    "\tmov r10, r1\n"
-    "\tb _0804AA68\n"
-    "\t.align 2, 0\n"
-    "_0804AA50: .4byte gBattlerPartyIndexes\n"
-    "_0804AA54: .4byte gPlayerParty\n"
-    "_0804AA58: .4byte gBattleTypeFlags\n"
-    "_0804AA5C: .4byte gLinkPlayers\n"
-    "_0804AA60:\n"
-    "\tldr r0, _0804AAB8 @ =gSaveBlock2Ptr\n"
-    "\tldr r0, [r0]\n"
-    "\tldrb r0, [r0, 0x8]\n"
-    "\tmov r10, r0\n"
-    "_0804AA68:\n"
-    "\tlsls r0, r5, 1\n"
-    "\tadds r0, r5\n"
-    "\tlsls r0, 3\n"
-    "\tldr r1, _0804AABC @ =gBallSpriteTemplates\n"
-    "\tadds r0, r1\n"
-    "\tmovs r1, 0x20\n"
-    "\tmovs r2, 0x50\n"
-    "\tmovs r3, 0x1D\n"
-    "\tbl CreateSprite\n"
-    "\tlsls r0, 24\n"
-    "\tlsrs r7, r0, 24\n"
-    "\tlsls r5, r7, 4\n"
-    "\tadds r0, r5, r7\n"
-    "\tlsls r0, 2\n"
-    "\tmov r8, r0\n"
-    "\tldr r4, _0804AAC0 @ =gSprites\n"
-    "\tadd r4, r8\n"
-    "\tmovs r0, 0x80\n"
-    "\tstrh r0, [r4, 0x2E]\n"
-    "\tmovs r1, 0\n"
-    "\tstrh r1, [r4, 0x30]\n"
-    "\tmov r2, r9\n"
-    "\tstrh r2, [r4, 0x3C]\n"
-    "\tmov r3, r9\n"
-    "\tcmp r3, 0xFE\n"
-    "\tbeq _0804AAF8\n"
-    "\tcmp r3, 0xFF\n"
-    "\tbne _0804AB38\n"
-    "\tldr r0, _0804AAC4 @ =gBattleTypeFlags\n"
-    "\tldr r0, [r0]\n"
-    "\tmovs r1, 0x80\n"
-    "\tlsls r1, 9\n"
-    "\tands r0, r1\n"
-    "\tcmp r0, 0\n"
-    "\tbeq _0804AAC8\n"
-    "\tmovs r5, 0x20\n"
-    "\tmovs r4, 0x40\n"
-    "\tb _0804AACE\n"
-    "\t.align 2, 0\n"
-    "_0804AAB8: .4byte gSaveBlock2Ptr\n"
-    "_0804AABC: .4byte gBallSpriteTemplates\n"
-    "_0804AAC0: .4byte gSprites\n"
-    "_0804AAC4: .4byte gBattleTypeFlags\n"
-    "_0804AAC8:\n"
-    "\tmov r0, r10\n"
-    "\tmovs r5, 0x30\n"
-    "\tmovs r4, 0x46\n"
-    "_0804AACE:\n"
-    "\tldr r0, _0804AAEC @ =gBattlerTarget\n"
-    "\tstrb r6, [r0]\n"
-    "\tldr r2, _0804AAF0 @ =gSprites\n"
-    "\tlsls r3, r7, 4\n"
-    "\tadds r1, r3, r7\n"
-    "\tlsls r1, 2\n"
-    "\tadds r0, r1, r2\n"
-    "\tstrh r5, [r0, 0x20]\n"
-    "\tstrh r4, [r0, 0x22]\n"
-    "\tadds r2, 0x1C\n"
-    "\tadds r1, r2\n"
-    "\tldr r0, _0804AAF4 @ =SpriteCB_PlayerMonSendOut_1\n"
-    "\tstr r0, [r1]\n"
-    "\tb _0804AB48\n"
-    "\t.align 2, 0\n"
-    "_0804AAEC: .4byte gBattlerTarget\n"
-    "_0804AAF0: .4byte gSprites\n"
-    "_0804AAF4: .4byte SpriteCB_PlayerMonSendOut_1\n"
-    "_0804AAF8:\n"
-    "\tadds r0, r6, 0\n"
-    "\tmovs r1, 0\n"
-    "\tbl GetBattlerSpriteCoord\n"
-    "\tlsls r0, 24\n"
-    "\tlsrs r0, 24\n"
-    "\tstrh r0, [r4, 0x20]\n"
-    "\tadds r0, r6, 0\n"
-    "\tmovs r1, 0x1\n"
-    "\tbl GetBattlerSpriteCoord\n"
-    "\tlsls r0, 24\n"
-    "\tlsrs r0, 24\n"
-    "\tadds r0, 0x18\n"
-    "\tstrh r0, [r4, 0x22]\n"
-    "\tldr r0, _0804AB2C @ =gBattlerTarget\n"
-    "\tstrb r6, [r0]\n"
-    "\tmovs r1, 0\n"
-    "\tstrh r1, [r4, 0x2E]\n"
-    "\tldr r0, _0804AB30 @ =gSprites\n"
-    "\tadds r0, 0x1C\n"
-    "\tadd r0, r8\n"
-    "\tldr r1, _0804AB34 @ =SpriteCB_OpponentMonSendOut\n"
-    "\tstr r1, [r0]\n"
-    "\tb _0804AB46\n"
-    "\t.align 2, 0\n"
-    "_0804AB2C: .4byte gBattlerTarget\n"
-    "_0804AB30: .4byte gSprites\n"
-    "_0804AB34: .4byte SpriteCB_OpponentMonSendOut\n"
-    "_0804AB38:\n"
-    "\tmovs r0, 0x1\n"
-    "\tbl GetBattlerAtPosition\n"
-    "\tldr r1, _0804AB64 @ =gBattlerTarget\n"
-    "\tstrb r0, [r1]\n"
-    "\tmovs r2, 0x1\n"
-    "\tstr r2, [sp, 0x4]\n"
-    "_0804AB46:\n"
-    "\tadds r3, r5, 0\n"
-    "_0804AB48:\n"
-    "\tldr r0, _0804AB68 @ =gSprites\n"
-    "\tadds r1, r3, r7\n"
-    "\tlsls r1, 2\n"
-    "\tadds r4, r1, r0\n"
-    "\tldr r5, _0804AB64 @ =gBattlerTarget\n"
-    "\tldrb r0, [r5]\n"
-    "\tstrh r0, [r4, 0x3A]\n"
-    "\tldr r3, [sp, 0x4]\n"
-    "\tcmp r3, 0\n"
-    "\tbne _0804AB6C\n"
-    "\tldr r0, [sp]\n"
-    "\tbl DestroyTask\n"
-    "\tb _0804ABB8\n"
-    "\t.align 2, 0\n"
-    "_0804AB64: .4byte gBattlerTarget\n"
-    "_0804AB68: .4byte gSprites\n"
-    "_0804AB6C:\n"
-    "\tmovs r0, 0x22\n"
-    "\tstrh r0, [r4, 0x2E]\n"
-    "\tldrb r0, [r5]\n"
-    "\tmovs r1, 0\n"
-    "\tbl GetBattlerSpriteCoord\n"
-    "\tlsls r0, 24\n"
-    "\tlsrs r0, 24\n"
-    "\tstrh r0, [r4, 0x32]\n"
-    "\tldrb r0, [r5]\n"
-    "\tmovs r1, 0x1\n"
-    "\tbl GetBattlerSpriteCoord\n"
-    "\tlsls r0, 24\n"
-    "\tlsrs r0, 24\n"
-    "\tsubs r0, 0x10\n"
-    "\tstrh r0, [r4, 0x36]\n"
-    "\tldr r0, _0804ABC8 @ =0x0000ffd8\n"
-    "\tstrh r0, [r4, 0x38]\n"
-    "\tadds r0, r4, 0\n"
-    "\tbl InitAnimArcTranslation\n"
-    "\tmov r0, sp\n"
-    "\tldrh r0, [r0]\n"
-    "\tstrh r0, [r4, 0x6]\n"
-    "\tldr r1, _0804ABCC @ =gTasks\n"
-    "\tldr r2, [sp]\n"
-    "\tlsls r0, r2, 2\n"
-    "\tadds r0, r2\n"
-    "\tlsls r0, 3\n"
-    "\tadds r0, r1\n"
-    "\tldrb r1, [r5]\n"
-    "\tstrh r1, [r0, 0x10]\n"
-    "\tldr r1, _0804ABD0 @ =TaskDummy\n"
-    "\tstr r1, [r0]\n"
-    "\tmovs r0, 0x36\n"
-    "\tbl PlaySE\n"
-    "_0804ABB8:\n"
-    "\tadd sp, 0x8\n"
-    "\tpop {r3-r5}\n"
-    "\tmov r8, r3\n"
-    "\tmov r9, r4\n"
-    "\tmov r10, r5\n"
-    "\tpop {r4-r7}\n"
-    "\tpop {r0}\n"
-    "\tbx r0\n"
-    "\t.align 2, 0\n"
-    "_0804ABC8: .4byte 0x0000ffd8\n"
-    "_0804ABCC: .4byte gTasks\n"
-    "_0804ABD0: .4byte TaskDummy\n");
-}
-#endif
 
 static void SpriteCB_TestBallThrow(struct Sprite *sprite)
 {
@@ -1216,7 +949,7 @@ static void SpriteCB_PlayerMonSendOut_2(struct Sprite *sprite)
         {
             sprite->pos1.x += sprite->pos2.x;
             sprite->pos1.y += sprite->pos2.y;
-            sprite->pos2.y = sprite->pos2.x = 0;
+            sprite->pos2.x = sprite->pos2.y = 0;
             sprite->sBattler = sprite->oam.affineParam & 0xFF;
             sprite->data[0] = 0;
 

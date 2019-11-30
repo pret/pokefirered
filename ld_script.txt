@@ -83,7 +83,7 @@ SECTIONS {
         src/daycare.o(.text);
         asm/battle_interface.o(.text);
         asm/smokescreen.o(.text);
-		src/pokeball.o(.text);
+        src/pokeball.o(.text);
         src/load_save.o(.text);
         src/trade.o(.text);
         src/trade_scene.o(.text);

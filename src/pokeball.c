@@ -705,7 +705,7 @@ static void SpriteCB_TestBallThrow(struct Sprite *sprite)
         u8 noOfShakes = gTasks[taskId].tThrowId;
 
         StartSpriteAnim(sprite, 1);
-        sprite->affineAnimPaused = 1;
+        sprite->affineAnimPaused = TRUE;
         sprite->pos1.x += sprite->pos2.x;
         sprite->pos1.y += sprite->pos2.y;
         sprite->pos2.x = 0;
@@ -1216,8 +1216,7 @@ static void SpriteCB_PlayerMonSendOut_2(struct Sprite *sprite)
         {
             sprite->pos1.x += sprite->pos2.x;
             sprite->pos1.y += sprite->pos2.y;
-            sprite->pos2.y = 0;
-            sprite->pos2.x = 0;
+            sprite->pos2.y = sprite->pos2.x = 0;
             sprite->sBattler = sprite->oam.affineParam & 0xFF;
             sprite->data[0] = 0;
 

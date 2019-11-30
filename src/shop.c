@@ -537,9 +537,7 @@ bool8 BuyMenuBuildListMenuTemplate(void)
         SetShopExitCallback();
         return FALSE;
     }
-    
-    i = 0;
-    
+        
     for (i = 0; i < gShopData.itemCount; i++)
     {
         PokeMartWriteNameAndIdAt(&sShopMenuListMenu[i], gShopData.itemList[i], sShopMenuItemStrings[i]);
@@ -776,7 +774,7 @@ static void BuyMenuDrawMapBg(void)
 static void BuyMenuDrawMapMetatile(s16 x, s16 y, const u16 *src, u8 metatileLayerType)
 {
     u16 offset1 = x * 2;
-    u16 offset2 = (y * 64) + 64;
+    u16 offset2 = y * 64 + 64;
 
     switch (metatileLayerType)
     {

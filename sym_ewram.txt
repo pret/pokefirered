@@ -119,77 +119,8 @@ gUnknown_203709C: @ 203709C
 	.include "src/palette.o"
 	.align 2
 	.include "src/sound.o"
-
 	.align 2
-gUnknown_2037ED4: @ 2037ED4
-	.space 0x4
-
-gUnknown_2037ED8: @ 2037ED8
-	.space 0x4
-
-gAnimScriptCallback: @ 2037EDC
-	.space 0x4
-
-gUnknown_2037EE0: @ 2037EE0
-	.space 0x1
-
-gAnimScriptActive: @ 2037EE1
-	.space 0x1
-
-gAnimVisualTaskCount: @ 2037EE2
-	.space 0x1
-
-gUnknown_2037EE3: @ 2037EE3
-	.space 0x1
-
-gAnimDisableStructPtr: @ 2037EE4
-	.space 0x4
-
-gAnimMoveDmg: @ 2037EE8
-	.space 0x4
-
-gAnimMovePower: @ 2037EEC
-	.space 0x2
-
-gUnknown_2037EEE: @ 2037EEE
-	.space 0x10
-
-gAnimFriendship: @ 2037EFE
-	.space 0x2
-
-gWeatherMoveAnim: @ 2037F00
-	.space 0x2
-
-gBattleAnimArgs: @ 2037F02
-	.space 0x10
-
-gUnknown_2037F12: @ 2037F12
-	.space 0x2
-
-gUnknown_2037F14: @ 2037F14
-	.space 0x2
-
-gAnimMoveTurn: @ 2037F16
-	.space 0x1
-
-gUnknown_2037F17: @ 2037F17
-	.space 0x1
-
-gUnknown_2037F18: @ 2037F18
-	.space 0x2
-
-gBattleAnimAttacker: @ 2037F1A
-	.space 0x1
-
-gBattleAnimTarget: @ 2037F1B
-	.space 0x1
-
-gAnimBattlerSpecies: @ 2037F1C
-	.space 0x8
-
-gUnknown_2037F24: @ 2037F24
-	.space 0x4
-
+	.include "src/battle_anim.o"
 	.align 2
 	.include "src/battle_anim_mons.o"
 	.align 2

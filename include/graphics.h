@@ -4090,7 +4090,6 @@ extern const u32 gBattleAnimSpritePal_RainbowRings[];
 extern const u32 gBattleAnimSpritePal_IceCrystals[];
 extern const u32 gBattleAnimSpritePal_HandsAndFeet[];
 extern const u32 gBattleAnimSpritePal_MistCloud[];
-extern const u32 gBattleAnimSpritePal_SharpTeeth[];
 extern const u32 gBattleAnimSpritePal_Orbs[];
 extern const u32 gBattleAnimSpritePal_WaterImpact[];
 extern const u32 gBattleAnimSpritePal_PoisonBubble[];

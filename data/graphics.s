@@ -16086,10 +16086,28 @@ gUnknown_8E97EC4:: @ 8E97EC4
 	.incbin "baserom.gba", 0xE97EC4, 0x120
 
 gUnknown_8E97FE4:: @ 8E97FE4
-	.incbin "baserom.gba", 0xE97FE4, 0x40 @UNKNOWN
+	.incbin "baserom.gba", 0xE97FE4, 0x20 @UNKNOWN
+
+gUnknown_8E98004:: @ 8E98004
+	.incbin "graphics/interface/naming_screen_8E98004.gbapal"
 
 gUnknown_8E98024:: @ 8E98024
-	.incbin "baserom.gba", 0xE98024, 0xC0 @UNKNOWN
+	.incbin "graphics/interface/naming_screen_8E98024.gbapal"
+
+gUnknown_8E98044:: @ 8E98044
+	.incbin "graphics/interface/naming_screen_8E98044.gbapal"
+
+gUnknown_8E98064:: @ 8E98064
+	.incbin "graphics/interface/naming_screen_8E98064.gbapal"
+
+gUnknown_8E98084:: @ 8E98084
+	.incbin "graphics/interface/naming_screen_8E98084.gbapal"
+
+gUnknown_8E980A4:: @ 8E980A4
+	.incbin "graphics/interface/naming_screen_8E980A4.gbapal"
+
+gUnknown_8E980C4:: @ 8E980C4
+	.incbin "graphics/interface/naming_screen_8E980C4.gbapal"
 
 gUnknown_8E980E4:: @ 8E980E4
 	.incbin "baserom.gba", 0xE980E4, 0x1D8
@@ -16107,7 +16125,40 @@ gUnknown_8E98518:: @ 8E98518
 	.incbin "baserom.gba", 0xE98518, 0xC0
 	
 gUnknown_8E985D8:: @ 8E985D8
-	.incbin "baserom.gba", 0xE985D8, 0xB40 @UNKNOWN, FALSEPOSITIVE?
+	.incbin "graphics/interface/naming_screen_8E985D8.4bpp"
+
+gUnknown_8E98858:: @ 8E98858
+	.incbin "graphics/interface/naming_screen_8E98858.4bpp"
+
+gUnknown_8E98A38:: @ 8E98A38
+    .incbin "graphics/interface/naming_screen_8E98A38.4bpp"
+
+gUnknown_8E98C18:: @ 8E98C18
+    .incbin "graphics/interface/naming_screen_8E98C18.4bpp"
+
+gUnknown_8E98CB8:: @ 8E98CB8
+    .incbin "graphics/interface/naming_screen_8E98CB8.4bpp"
+
+gUnknown_8E98D58:: @ 8E98D58
+    .incbin "graphics/interface/naming_screen_8E98D58.4bpp"
+
+gUnknown_8E98DF8:: @ 8E98DF8
+    .incbin "graphics/interface/naming_screen_8E98DF8.4bpp"
+
+gUnknown_8E98E98:: @ 8E98E98
+    .incbin "graphics/interface/naming_screen_8E98E98.4bpp"
+
+gUnknown_8E98F38:: @ 8E98F38
+    .incbin "graphics/interface/naming_screen_8E98F38.4bpp"
+
+gUnknown_8E98FD8:: @ 8E98FD8
+    .incbin "graphics/interface/naming_screen_8E98FD8.4bpp"
+
+gUnknown_8E990D8:: @ 8E990D8
+    .incbin "graphics/interface/naming_screen_8E990D8.4bpp"
+
+gUnknown_8E990F8:: @ 8E990F8
+    .incbin "graphics/interface/naming_screen_8E990F8.4bpp"
 
 gUnknown_8E99118:: @ 8E99118
 	.incbin "graphics/tm_case/unk_8E99118.4bpp"

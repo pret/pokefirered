@@ -111,7 +111,7 @@ SECTIONS {
         src/tileset_anims.o(.text);
         src/palette.o(.text);
         src/sound.o(.text);
-		src/battle_anim.o(.text);
+        src/battle_anim.o(.text);
         src/battle_anim_mons.o(.text);
         src/task.o(.text);
         src/reshow_battle_screen.o(.text);
@@ -154,8 +154,8 @@ SECTIONS {
         src/field_special_scene.o(.text);
         src/safari_zone.o(.text);
         src/item_use.o(.text);
-        asm/battle_anim_effects_1.o(.text);
-        asm/battle_anim_effects_2.o(.text);
+        src/battle_anim_effects_1.o(.text);
+        src/battle_anim_effects_2.o(.text);
         asm/water.o(.text);
         src/fire.o(.text);
         src/electric.o(.text);
@@ -205,7 +205,7 @@ SECTIONS {
         src/battle_anim_sound_tasks.o(.text);
         src/battle_controller_safari.o(.text);
         src/fldeff_sweetscent.o(.text);
-        asm/battle_anim_effects_3.o(.text);
+        src/battle_anim_effects_3.o(.text);
         src/learn_move.o(.text);
         src/fldeff_softboiled.o(.text);
         src/battle_tower.o(.text);
@@ -420,7 +420,7 @@ SECTIONS {
         src/tileset_anims.o(.rodata);
         src/palette.o(.rodata);
         src/sound.o(.rodata);
-		src/battle_anim.o(.rodata);
+        src/battle_anim.o(.rodata);
         src/battle_anim_mons.o(.rodata);
         data/map_events.o(.rodata);
         data/battle_anim_status_effects.o(.rodata);
@@ -447,6 +447,8 @@ SECTIONS {
         data/naming_screen.o(.rodata);
         src/pokemon_size_record.o(.rodata);
         src/item_use.o(.rodata);
+        src/battle_anim_effects_1.o(.rodata);
+        src/battle_anim_effects_2.o(.rodata);
         data/battle_anim_effects_misc.o(.rodata);
         src/fire.o(.rodata);
         src/electric.o(.rodata);

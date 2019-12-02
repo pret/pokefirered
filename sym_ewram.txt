@@ -293,11 +293,8 @@ gUnknown_203998C: @ 203998C
 	.include "src/safari_zone.o"
 	.align 2
 	.include "src/item_use.o"
-
 	.align 2
-gUnknown_203999C: @ 203999C
-	.space 0x8
-
+	.include "src/battle_anim_effects_1.o"
 	.align 2
 	.include "src/dragon.o"
 	.align 2

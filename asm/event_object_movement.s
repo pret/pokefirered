@@ -501,7 +501,7 @@ _0805E14E:
 	strb r0, [r4, 0x7]
 	ldrh r0, [r5, 0xE]
 	strb r0, [r4, 0x1D]
-	ldr r1, _0805E230 @ =gUnknown_839FD5D
+	ldr r1, _0805E230 @ =gInitialMovementTypeFacingDirections
 	ldrb r0, [r5, 0x9]
 	adds r0, r1
 	ldrb r1, [r0]
@@ -513,7 +513,7 @@ _0805E14E:
 	bl ObjectEventSetDirection
 	adds r0, r4, 0
 	bl ObjectEventHandleDynamicGraphicsId
-	ldr r1, _0805E234 @ =gUnknown_839FD0C
+	ldr r1, _0805E234 @ =gRangedMovementTypes
 	ldrb r0, [r4, 0x6]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -559,8 +559,8 @@ _0805E220:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805E230: .4byte gUnknown_839FD5D
-_0805E234: .4byte gUnknown_839FD0C
+_0805E230: .4byte gInitialMovementTypeFacingDirections
+_0805E234: .4byte gRangedMovementTypes
 	thumb_func_end sub_805E080
 
 	thumb_func_start sub_805E238
@@ -8196,7 +8196,7 @@ sub_8061954: @ 8061954
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	ldr r0, _08061988 @ =gUnknown_839FD5D
+	ldr r0, _08061988 @ =gInitialMovementTypeFacingDirections
 	ldrb r1, [r4, 0x6]
 	adds r1, r0
 	ldrb r1, [r1]
@@ -8219,7 +8219,7 @@ _08061976:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08061988: .4byte gUnknown_839FD5D
+_08061988: .4byte gInitialMovementTypeFacingDirections
 	thumb_func_end sub_8061954
 
 	thumb_func_start sub_806198C
@@ -10449,7 +10449,7 @@ sub_8062970: @ 8062970
 	adds r5, r1, 0
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r1, _080629B4 @ =gUnknown_839FD5D
+	ldr r1, _080629B4 @ =gInitialMovementTypeFacingDirections
 	ldrb r0, [r4, 0x6]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -10475,7 +10475,7 @@ sub_8062970: @ 8062970
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080629B4: .4byte gUnknown_839FD5D
+_080629B4: .4byte gInitialMovementTypeFacingDirections
 	thumb_func_end sub_8062970
 
 	thumb_func_start sub_80629B8
@@ -10489,7 +10489,7 @@ sub_80629B8: @ 80629B8
 	mov r8, r3
 	lsls r2, 24
 	lsrs r6, r2, 24
-	ldr r1, _08062A6C @ =gUnknown_839FD5D
+	ldr r1, _08062A6C @ =gInitialMovementTypeFacingDirections
 	ldrb r0, [r4, 0x6]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -10564,7 +10564,7 @@ _08062A52:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08062A6C: .4byte gUnknown_839FD5D
+_08062A6C: .4byte gInitialMovementTypeFacingDirections
 	thumb_func_end sub_80629B8
 
 	thumb_func_start sub_8062A70
@@ -10578,7 +10578,7 @@ sub_8062A70: @ 8062A70
 	mov r8, r3
 	lsls r2, 24
 	lsrs r6, r2, 24
-	ldr r1, _08062B24 @ =gUnknown_839FD5D
+	ldr r1, _08062B24 @ =gInitialMovementTypeFacingDirections
 	ldrb r0, [r4, 0x6]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -10653,7 +10653,7 @@ _08062B0A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08062B24: .4byte gUnknown_839FD5D
+_08062B24: .4byte gInitialMovementTypeFacingDirections
 	thumb_func_end sub_8062A70
 
 	thumb_func_start sub_8062B28
@@ -10667,7 +10667,7 @@ sub_8062B28: @ 8062B28
 	mov r8, r3
 	lsls r2, 24
 	lsrs r6, r2, 24
-	ldr r1, _08062BDC @ =gUnknown_839FD5D
+	ldr r1, _08062BDC @ =gInitialMovementTypeFacingDirections
 	ldrb r0, [r4, 0x6]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -10742,7 +10742,7 @@ _08062BC2:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08062BDC: .4byte gUnknown_839FD5D
+_08062BDC: .4byte gInitialMovementTypeFacingDirections
 	thumb_func_end sub_8062B28
 
 	thumb_func_start sub_8062BE0
@@ -10756,7 +10756,7 @@ sub_8062BE0: @ 8062BE0
 	mov r8, r3
 	lsls r2, 24
 	lsrs r6, r2, 24
-	ldr r1, _08062C94 @ =gUnknown_839FD5D
+	ldr r1, _08062C94 @ =gInitialMovementTypeFacingDirections
 	ldrb r0, [r4, 0x6]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -10831,7 +10831,7 @@ _08062C7A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08062C94: .4byte gUnknown_839FD5D
+_08062C94: .4byte gInitialMovementTypeFacingDirections
 	thumb_func_end sub_8062BE0
 
 	thumb_func_start cph_IM_DIFFERENT
@@ -10841,7 +10841,7 @@ cph_IM_DIFFERENT: @ 8062C98
 	adds r5, r1, 0
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r1, _08062CDC @ =gUnknown_839FD5D
+	ldr r1, _08062CDC @ =gInitialMovementTypeFacingDirections
 	ldrb r0, [r4, 0x6]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -10867,7 +10867,7 @@ cph_IM_DIFFERENT: @ 8062C98
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08062CDC: .4byte gUnknown_839FD5D
+_08062CDC: .4byte gInitialMovementTypeFacingDirections
 	thumb_func_end cph_IM_DIFFERENT
 
 	thumb_func_start sub_8062CE0
@@ -10881,7 +10881,7 @@ sub_8062CE0: @ 8062CE0
 	mov r8, r3
 	lsls r2, 24
 	lsrs r6, r2, 24
-	ldr r1, _08062D94 @ =gUnknown_839FD5D
+	ldr r1, _08062D94 @ =gInitialMovementTypeFacingDirections
 	ldrb r0, [r4, 0x6]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -10956,7 +10956,7 @@ _08062D7A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08062D94: .4byte gUnknown_839FD5D
+_08062D94: .4byte gInitialMovementTypeFacingDirections
 	thumb_func_end sub_8062CE0
 
 	thumb_func_start oac_hopping
@@ -10970,7 +10970,7 @@ oac_hopping: @ 8062D98
 	mov r8, r3
 	lsls r2, 24
 	lsrs r6, r2, 24
-	ldr r1, _08062E5C @ =gUnknown_839FD5D
+	ldr r1, _08062E5C @ =gInitialMovementTypeFacingDirections
 	ldrb r0, [r4, 0x6]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -11052,7 +11052,7 @@ _08062E40:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08062E5C: .4byte gUnknown_839FD5D
+_08062E5C: .4byte gInitialMovementTypeFacingDirections
 	thumb_func_end oac_hopping
 
 	thumb_func_start sub_8062E60
@@ -19354,7 +19354,7 @@ _08066874:
 	thumb_func_start sub_806687C
 sub_806687C: @ 806687C
 	push {lr}
-	ldr r3, _08066890 @ =gUnknown_839FD5D
+	ldr r3, _08066890 @ =gInitialMovementTypeFacingDirections
 	ldrb r2, [r0, 0x6]
 	adds r2, r3
 	ldrb r2, [r2]
@@ -19363,7 +19363,7 @@ sub_806687C: @ 806687C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08066890: .4byte gUnknown_839FD5D
+_08066890: .4byte gInitialMovementTypeFacingDirections
 	thumb_func_end sub_806687C
 
 	thumb_func_start sub_8066894

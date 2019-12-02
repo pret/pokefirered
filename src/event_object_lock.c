@@ -1,12 +1,11 @@
 #include "global.h"
 #include "task.h"
 #include "field_player_avatar.h"
-#include "field_map_obj.h"
-#include "field_map_obj_helpers.h"
+#include "event_object_movement.h"
 #include "script_movement.h"
-#include "map_obj_80688E4.h"
+#include "event_object_80688E4.h"
 #include "event_data.h"
-#include "map_obj_lock.h"
+#include "event_object_lock.h"
 
 bool8 walkrun_is_standing_still(void)
 {

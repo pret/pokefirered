@@ -19,7 +19,7 @@
 #include "battle_tower.h"
 #include "field_camera.h"
 #include "field_effect.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 #include "menu_indicators.h"
 #include "random.h"
 #include "mail_data.h"

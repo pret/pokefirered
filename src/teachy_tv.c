@@ -15,7 +15,7 @@
 #include "item_menu.h"
 #include "item.h"
 #include "menu_indicators.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 #include "random.h"
 #include "text.h"
 #include "constants/songs.h"

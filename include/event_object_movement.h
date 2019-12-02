@@ -1,5 +1,5 @@
-#ifndef GUARD_FIELD_MAP_OBJ_H
-#define GUARD_FIELD_MAP_OBJ_H
+#ifndef GUARD_EVENT_OBJECT_MOVEMENT_H
+#define GUARD_EVENT_OBJECT_MOVEMENT_H
 
 #include "global.h"
 
@@ -96,6 +96,8 @@ u8 ObjectEventCheckHeldMovementStatus(struct ObjectEvent *mapObject);
 u8 sub_8063F84(u8 direction);
 u8 GetTrainerFacingDirectionMovementType(u8 direction);
 void CameraObjectSetFollowedObjectId(u8 spriteId);
+void UnfreezeObjectEvents(void);
+void sub_8069058(u8, u8);
 
 // Exported data declarations
 
@@ -103,4 +105,4 @@ extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
 extern const struct SpritePalette gUnknown_83A5348;
 extern const struct SpriteTemplate * const gUnknown_83A0010[];
 
-#endif //GUARD_FIELD_MAP_OBJ_H
+#endif // GUARD_EVENT_OBJECT_MOVEMENT_H

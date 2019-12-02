@@ -13,7 +13,7 @@
 #include "palette.h"
 #include "overworld.h"
 #include "wild_encounter.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 #include "constants/songs.h"
 #include "constants/map_objects.h"
 #include "constants/map_types.h"

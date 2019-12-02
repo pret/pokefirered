@@ -22,7 +22,7 @@
 #include "text.h"
 #include "window.h"
 #include "string_util.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 #include "menu_indicators.h"
 #include "text_window.h"
 #include "fame_checker.h"

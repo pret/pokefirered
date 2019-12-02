@@ -3,7 +3,7 @@
 #include "new_menu_helpers.h"
 #include "strings.h"
 #include "event_scripts.h"
-#include "map_obj_lock.h"
+#include "event_object_lock.h"
 #include "script.h"
 #include "sound.h"
 #include "event_data.h"

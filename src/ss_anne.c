@@ -1,7 +1,7 @@
 #include "global.h"
 #include "task.h"
 #include "sound.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 #include "script.h"
 #include "constants/songs.h"
 

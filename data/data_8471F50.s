@@ -14,9 +14,6 @@
 	.section .rodata
 
 	.align 2
-gUnknown_8471F00::
-	.incbin "baserom.gba", 0x471F00, 0x50
-
 gUnknown_8471F50:: @ 8471F50
 	.incbin "baserom.gba", 0x471F50, 0x113
 

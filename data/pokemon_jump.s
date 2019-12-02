@@ -51,7 +51,7 @@ gUnknown_846B47C::
 	.4byte gUnknown_846B474
 
 gUnknown_846B494:: @ 846B494
-	spr_template 0x2000, 0x2000, gOamData_83AC9D8, gUnknown_846B47C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 0x2000, 0x2000, gOamData_AffineOff_ObjNormal_32x32, gUnknown_846B47C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_846B4AC:: @ 846B4AC
 	@ This is a 2D array with one row.

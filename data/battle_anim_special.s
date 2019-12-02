@@ -96,22 +96,22 @@ gUnknown_840C074:: @ 840C074
 	.4byte sub_80F103C
 
 gUnknown_840C0A4:: @ 840C0A4
-	spr_template 55020, 55020, gOamData_83AC9C8, gSpriteAnimTable_840C050, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 55020, 55020, gOamData_AffineOff_ObjNormal_8x8, gSpriteAnimTable_840C050, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_840C0BC::
-	spr_template 55021, 55021, gOamData_83AC9C8, gSpriteAnimTable_840C050, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-	spr_template 55022, 55022, gOamData_83AC9C8, gSpriteAnimTable_840C050, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-	spr_template 55023, 55023, gOamData_83AC9C8, gSpriteAnimTable_840C050, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 55021, 55021, gOamData_AffineOff_ObjNormal_8x8, gSpriteAnimTable_840C050, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 55022, 55022, gOamData_AffineOff_ObjNormal_8x8, gSpriteAnimTable_840C050, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 55023, 55023, gOamData_AffineOff_ObjNormal_8x8, gSpriteAnimTable_840C050, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_840C104:: @ 840C104
-	spr_template 55024, 55024, gOamData_83AC9C8, gSpriteAnimTable_840C050, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-	spr_template 55025, 55025, gOamData_83AC9C8, gSpriteAnimTable_840C050, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-	spr_template 55026, 55026, gOamData_83AC9C8, gSpriteAnimTable_840C050, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-	spr_template 55027, 55027, gOamData_83AC9C8, gSpriteAnimTable_840C050, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-	spr_template 55028, 55028, gOamData_83AC9C8, gSpriteAnimTable_840C050, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-	spr_template 55029, 55029, gOamData_83AC9C8, gSpriteAnimTable_840C050, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-	spr_template 55030, 55030, gOamData_83AC9C8, gSpriteAnimTable_840C050, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-	spr_template 55031, 55031, gOamData_83AC9C8, gSpriteAnimTable_840C050, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 55024, 55024, gOamData_AffineOff_ObjNormal_8x8, gSpriteAnimTable_840C050, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 55025, 55025, gOamData_AffineOff_ObjNormal_8x8, gSpriteAnimTable_840C050, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 55026, 55026, gOamData_AffineOff_ObjNormal_8x8, gSpriteAnimTable_840C050, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 55027, 55027, gOamData_AffineOff_ObjNormal_8x8, gSpriteAnimTable_840C050, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 55028, 55028, gOamData_AffineOff_ObjNormal_8x8, gSpriteAnimTable_840C050, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 55029, 55029, gOamData_AffineOff_ObjNormal_8x8, gSpriteAnimTable_840C050, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 55030, 55030, gOamData_AffineOff_ObjNormal_8x8, gSpriteAnimTable_840C050, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 55031, 55031, gOamData_AffineOff_ObjNormal_8x8, gSpriteAnimTable_840C050, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_840C1C4:: @ 840C1C4
 	.2byte RGB(31, 22, 30)
@@ -134,7 +134,7 @@ gUnknown_840C1DC:: @ 840C1DC
 
 	.align 2
 gUnknown_840C1EC::
-	spr_template 10269, 10269, gOamData_83AC9D0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80F1B3C
+	spr_template 10269, 10269, gOamData_AffineOff_ObjNormal_16x16, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80F1B3C
 
 gUnknown_840C204::
 	obj_image_anim_frame 0x0040, 1
@@ -144,5 +144,5 @@ gSpriteAnimTable_840C20C::
 	.4byte gUnknown_840C204
 
 gUnknown_840C210::
-	spr_template 10058, 10058, gOamData_83AC9D8, gSpriteAnimTable_840C20C, NULL, gDummySpriteAffineAnimTable, sub_80F1B3C
+	spr_template 10058, 10058, gOamData_AffineOff_ObjNormal_32x32, gSpriteAnimTable_840C20C, NULL, gDummySpriteAffineAnimTable, sub_80F1B3C
 

@@ -325,19 +325,19 @@ gUnknown_846F408::
 	.4byte gUnknown_846F3D4
 
 gUnknown_846F410:: @ 846F410
-	spr_template 1, 1, gOamData_83AC9E0, gUnknown_846F3EC, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 1, 1, gOamData_AffineOff_ObjNormal_64x64, gUnknown_846F3EC, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_846F428:: @ 846F428
-	spr_template 2, 2, gOamData_83AC9D8, gUnknown_846F3F0, NULL, gDummySpriteAffineAnimTable, sub_814EFD0
+	spr_template 2, 2, gOamData_AffineOff_ObjNormal_32x32, gUnknown_846F3F0, NULL, gDummySpriteAffineAnimTable, sub_814EFD0
 
 gUnknown_846F440:: @ 846F440
-	spr_template 3, 2, gOamData_83AC9D0, gUnknown_846F3F8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 3, 2, gOamData_AffineOff_ObjNormal_16x16, gUnknown_846F3F8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_846F458:: @ 846F458
-	spr_template 4, 4, gOamData_83ACA08, gUnknown_846F400, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 4, 4, gOamData_AffineOff_ObjNormal_8x16, gUnknown_846F400, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_846F470:: @ 846F470
-	spr_template 5, 5, gOamData_83ACA98, gUnknown_846F404, NULL, gUnknown_846F408, SpriteCallbackDummy
+	spr_template 5, 5, gOamData_AffineDouble_ObjNormal_32x32, gUnknown_846F404, NULL, gUnknown_846F408, SpriteCallbackDummy
 
 gUnknown_846F488:: @ 846F488 struct UnkStruct3? perhaps not
 	.byte 9, 2, 8

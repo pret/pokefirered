@@ -303,7 +303,7 @@ sub_80A2500: @ 80A2500
 	movs r0, 0x50
 	strh r0, [r1, 0x4]
 	strh r2, [r1, 0x6]
-	ldr r4, _080A2578 @ =gUnknown_83E2A88
+	ldr r4, _080A2578 @ =gSolarbeamSmallOrbSpriteTemplate
 	ldr r0, _080A257C @ =gBattleAnimTarget
 	ldrb r0, [r0]
 	bl GetBattlerSpriteSubpriority
@@ -329,7 +329,7 @@ _080A2568:
 	.align 2, 0
 _080A2570: .4byte gTasks
 _080A2574: .4byte gBattleAnimArgs
-_080A2578: .4byte gUnknown_83E2A88
+_080A2578: .4byte gSolarbeamSmallOrbSpriteTemplate
 _080A257C: .4byte gBattleAnimTarget
 	thumb_func_end sub_80A2500
 

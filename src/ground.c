@@ -52,7 +52,7 @@ const struct SpriteTemplate gUnknown_83E7A28 =
 {
     .tileTag = ANIM_TAG_BONE,
     .paletteTag = ANIM_TAG_BONE,
-    .oam = &gOamData_83ACA38,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_83E7A20,
@@ -63,7 +63,7 @@ const struct SpriteTemplate gUnknown_83E7A40 =
 {
     .tileTag = ANIM_TAG_BONE,
     .paletteTag = ANIM_TAG_BONE,
-    .oam = &gOamData_83ACA38,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_83E7A24,
@@ -74,7 +74,7 @@ const struct SpriteTemplate gUnknown_83E7A58 =
 {
     .tileTag = ANIM_TAG_MUD_SAND,
     .paletteTag = ANIM_TAG_MUD_SAND,
-    .oam = &gOamData_83AC9C8,
+    .oam = &gOamData_AffineOff_ObjNormal_8x8,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -96,7 +96,7 @@ const struct SpriteTemplate gUnknown_83E7A7C =
 {
     .tileTag = ANIM_TAG_MUD_SAND,
     .paletteTag = ANIM_TAG_MUD_SAND,
-    .oam = &gOamData_83AC9D0,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = gUnknown_83E7A78,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -107,7 +107,7 @@ const struct SpriteTemplate gUnknown_83E7A94 =
 {
     .tileTag = ANIM_TAG_MUD_SAND,
     .paletteTag = ANIM_TAG_MUD_SAND,
-    .oam = &gOamData_83AC9D0,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -118,7 +118,7 @@ const struct SpriteTemplate gUnknown_83E7AAC =
 {
     .tileTag = ANIM_TAG_MUD_SAND,
     .paletteTag = ANIM_TAG_MUD_SAND,
-    .oam = &gOamData_83AC9C8,
+    .oam = &gOamData_AffineOff_ObjNormal_8x8,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -129,7 +129,7 @@ const struct SpriteTemplate gUnknown_83E7AC4 =
 {
     .tileTag = ANIM_TAG_DIRT_MOUND,
     .paletteTag = ANIM_TAG_DIRT_MOUND,
-    .oam = &gOamData_83AC9F8,
+    .oam = &gOamData_AffineOff_ObjNormal_32x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,

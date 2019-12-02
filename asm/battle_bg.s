@@ -280,8 +280,8 @@ _0800F404: .4byte gBattleTypeFlags
 _0800F408: .4byte 0x00010010
 	thumb_func_end LoadBattleMenuWindowGfx
 
-	thumb_func_start sub_800F40C
-sub_800F40C: @ 800F40C
+	thumb_func_start DrawMainBattleBackground
+DrawMainBattleBackground: @ 800F40C
 	push {lr}
 	bl sub_800FC2C
 	lsls r0, 24
@@ -289,7 +289,7 @@ sub_800F40C: @ 800F40C
 	bl sub_800F260
 	pop {r0}
 	bx r0
-	thumb_func_end sub_800F40C
+	thumb_func_end DrawMainBattleBackground
 
 	thumb_func_start LoadBattleTextboxAndBackground
 LoadBattleTextboxAndBackground: @ 800F420
@@ -310,7 +310,7 @@ LoadBattleTextboxAndBackground: @ 800F420
 	movs r2, 0x40
 	bl LoadCompressedPalette
 	bl LoadBattleMenuWindowGfx
-	bl sub_800F40C
+	bl DrawMainBattleBackground
 	pop {r0}
 	bx r0
 	.align 2, 0

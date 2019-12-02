@@ -14,10 +14,10 @@ gSpriteAnimTable_83BF3F4:: @ 83BF3F4
 	.4byte gUnknown_83BF3E0
 
 gSpriteTemplate_83BF3F8:: @ 83BF3F8
-	spr_template 10004, 10004, gOamData_83AC9D0, gSpriteAnimTable_83BF3F4, NULL, gDummySpriteAffineAnimTable, sub_8076F58
+	spr_template 10004, 10004, gOamData_AffineOff_ObjNormal_16x16, gSpriteAnimTable_83BF3F4, NULL, gDummySpriteAffineAnimTable, sub_8076F58
 
 gSpriteTemplate_83BF410:: @ 83BF410
-	spr_template 10004, 10004, gOamData_83AC9D0, gSpriteAnimTable_83BF3F4, NULL, gDummySpriteAffineAnimTable, sub_8076ED8
+	spr_template 10004, 10004, gOamData_AffineOff_ObjNormal_16x16, gSpriteAnimTable_83BF3F4, NULL, gDummySpriteAffineAnimTable, sub_8076ED8
 
 gUnknown_83BF428:: @ 83BF428
 	obj_image_anim_frame 0x0000, 3
@@ -27,10 +27,10 @@ gSpriteAnimTable_83BF430:: @ 83BF430
 	.4byte gUnknown_83BF428
 
 gSpriteTemplate_83BF434:: @ 83BF434
-	spr_template 10283, 10283, gOamData_83AC9D8, gSpriteAnimTable_83BF430, NULL, gDummySpriteAffineAnimTable, sub_807729C
+	spr_template 10283, 10283, gOamData_AffineOff_ObjNormal_32x32, gSpriteAnimTable_83BF430, NULL, gDummySpriteAffineAnimTable, sub_807729C
 
 gSpriteTemplate_83BF44C:: @ 83BF44C
-	spr_template 10283, 10283, gOamData_83AC9D8, gSpriteAnimTable_83BF430, NULL, gDummySpriteAffineAnimTable, sub_8077350
+	spr_template 10283, 10283, gOamData_AffineOff_ObjNormal_32x32, gSpriteAnimTable_83BF430, NULL, gDummySpriteAffineAnimTable, sub_8077350
 
 gUnknown_83BF464:: @ 83BF464
 	obj_image_anim_frame 0x0000, 3
@@ -44,10 +44,10 @@ gSpriteAnimTable_83BF47C:: @ 83BF47C
 	.4byte gUnknown_83BF464
 
 gSpriteTemplate_83BF480:: @ 83BF480
-	spr_template 10071, 10071, gOamData_83AC9D8, gSpriteAnimTable_83BF47C, NULL, gDummySpriteAffineAnimTable, sub_8076FD0
+	spr_template 10071, 10071, gOamData_AffineOff_ObjNormal_32x32, gSpriteAnimTable_83BF47C, NULL, gDummySpriteAffineAnimTable, sub_8076FD0
 
 gSpriteTemplate_83BF498:: @ 83BF498
-	spr_template 10051, 10051, gOamData_83AC9D8, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_8076F58
+	spr_template 10051, 10051, gOamData_AffineOff_ObjNormal_32x32, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_8076F58
 
 gUnknown_83BF4B0:: @ 83BF4B0
 	obj_image_anim_frame 0x0000, 5
@@ -67,7 +67,7 @@ gSpriteAniimTable_83BF4C8:: @ 83BF4C8
 	.4byte gUnknown_83BF4C0
 
 gSpriteTemplate_83BF4D4:: @ 83BF4D4
-	spr_template 10135, 10135, gOamData_83AC9D8, gSpriteAniimTable_83BF4C8, NULL, gDummySpriteAffineAnimTable, sub_8076F58
+	spr_template 10135, 10135, gOamData_AffineOff_ObjNormal_32x32, gSpriteAniimTable_83BF4C8, NULL, gDummySpriteAffineAnimTable, sub_8076F58
 
 gUnknown_83BF4EC:: @ 83BF4EC
 	obj_image_anim_frame 0x0000, 15
@@ -85,7 +85,7 @@ gSpriteAffineAnimTable_83BF510:: @ 83BF510
 	.4byte gUnknown_83BF4F8
 
 gSpriteTemplate_83BF514:: @ 83BF514
-	spr_template 10004, 10004, gOamData_83ACA90, gSpriteAnimTable_83BF4F4, NULL, gSpriteAffineAnimTable_83BF510, sub_8076ED8
+	spr_template 10004, 10004, gOamData_AffineDouble_ObjNormal_16x16, gSpriteAnimTable_83BF4F4, NULL, gSpriteAffineAnimTable_83BF510, sub_8076ED8
 
 gUnknown_83BF52C:: @ 83BF52C
 	.string "TASK OVER\n"
@@ -104,7 +104,7 @@ gUnknown_83BF554:: @ 83BF554
 	.4byte gSubsprites_83BF544
 
 gUnknown_83BF55C:: @ 83BF55C
-	spr_template 10010, 10010, gOamData_83ACB00, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 10010, 10010, gOamData_AffineOff_ObjBlend_64x64, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_83BF574:: @ 83BF574
-	spr_template 10136, 10136, gOamData_83AC9C8, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_807834C
+	spr_template 10136, 10136, gOamData_AffineOff_ObjNormal_8x8, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_807834C

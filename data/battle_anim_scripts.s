@@ -460,72 +460,72 @@ Move_POISON_POWDER:: @ 81C6FB8
 	loadspritegfx 10065
 	loadspritegfx 10150
 	loopsewithpan SE_W077, 63, 10, 6
-	createsprite gUnknown_83E29C0, ANIM_TARGET, 2, -30, -22, 117, 80, 5, 1
-	createsprite gUnknown_83E29C0, ANIM_TARGET, 2, 10, -22, 117, 80, -5, 1
-	createsprite gUnknown_83E29C0, ANIM_TARGET, 2, -25, -22, 117, 112, 5, 3
+	createsprite gPoisonPowderParticleSpriteTemplate, ANIM_TARGET, 2, -30, -22, 117, 80, 5, 1
+	createsprite gPoisonPowderParticleSpriteTemplate, ANIM_TARGET, 2, 10, -22, 117, 80, -5, 1
+	createsprite gPoisonPowderParticleSpriteTemplate, ANIM_TARGET, 2, -25, -22, 117, 112, 5, 3
 	delay 15
-	createsprite gUnknown_83E29C0, ANIM_TARGET, 2, -5, -22, 117, 80, -5, 1
-	createsprite gUnknown_83E29C0, ANIM_TARGET, 2, 5, -22, 117, 96, 5, 1
-	createsprite gUnknown_83E29C0, ANIM_TARGET, 2, 0, -22, 117, 69, -5, 1
-	createsprite gUnknown_83E29C0, ANIM_TARGET, 2, -15, -22, 117, 112, 5, 2
+	createsprite gPoisonPowderParticleSpriteTemplate, ANIM_TARGET, 2, -5, -22, 117, 80, -5, 1
+	createsprite gPoisonPowderParticleSpriteTemplate, ANIM_TARGET, 2, 5, -22, 117, 96, 5, 1
+	createsprite gPoisonPowderParticleSpriteTemplate, ANIM_TARGET, 2, 0, -22, 117, 69, -5, 1
+	createsprite gPoisonPowderParticleSpriteTemplate, ANIM_TARGET, 2, -15, -22, 117, 112, 5, 2
 	delay 30
-	createsprite gUnknown_83E29C0, ANIM_TARGET, 2, -15, -22, 117, 112, 5, 2
-	createsprite gUnknown_83E29C0, ANIM_TARGET, 2, 15, -22, 117, 80, -5, 1
-	createsprite gUnknown_83E29C0, ANIM_TARGET, 2, -10, -22, 117, 96, 7, 2
-	createsprite gUnknown_83E29C0, ANIM_TARGET, 2, -5, -22, 117, 90, -8, 0
+	createsprite gPoisonPowderParticleSpriteTemplate, ANIM_TARGET, 2, -15, -22, 117, 112, 5, 2
+	createsprite gPoisonPowderParticleSpriteTemplate, ANIM_TARGET, 2, 15, -22, 117, 80, -5, 1
+	createsprite gPoisonPowderParticleSpriteTemplate, ANIM_TARGET, 2, -10, -22, 117, 96, 7, 2
+	createsprite gPoisonPowderParticleSpriteTemplate, ANIM_TARGET, 2, -5, -22, 117, 90, -8, 0
 	delay 20
-	createsprite gUnknown_83E29C0, ANIM_TARGET, 2, -10, -22, 117, 80, -5, 1
-	createsprite gUnknown_83E29C0, ANIM_TARGET, 2, 0, -22, 117, 89, 5, 2
-	createsprite gUnknown_83E29C0, ANIM_TARGET, 2, 20, -22, 117, 112, -8, 2
-	createsprite gUnknown_83E29C0, ANIM_TARGET, 2, 5, -22, 117, 80, 5, 1
+	createsprite gPoisonPowderParticleSpriteTemplate, ANIM_TARGET, 2, -10, -22, 117, 80, -5, 1
+	createsprite gPoisonPowderParticleSpriteTemplate, ANIM_TARGET, 2, 0, -22, 117, 89, 5, 2
+	createsprite gPoisonPowderParticleSpriteTemplate, ANIM_TARGET, 2, 20, -22, 117, 112, -8, 2
+	createsprite gPoisonPowderParticleSpriteTemplate, ANIM_TARGET, 2, 5, -22, 117, 80, 5, 1
 	waitforvisualfinish
 	end
 
 Move_STUN_SPORE:: @ 81C70E9
 	loadspritegfx 10068
 	loopsewithpan SE_W077, 63, 10, 6
-	createsprite gUnknown_83E29A8, ANIM_TARGET, 2, -30, -22, 117, 80, 5, 1
-	createsprite gUnknown_83E29A8, ANIM_TARGET, 2, 10, -22, 117, 80, -5, 1
-	createsprite gUnknown_83E29A8, ANIM_TARGET, 2, -25, -22, 117, 112, 5, 3
+	createsprite gStunSporeParticleSpriteTemplate, ANIM_TARGET, 2, -30, -22, 117, 80, 5, 1
+	createsprite gStunSporeParticleSpriteTemplate, ANIM_TARGET, 2, 10, -22, 117, 80, -5, 1
+	createsprite gStunSporeParticleSpriteTemplate, ANIM_TARGET, 2, -25, -22, 117, 112, 5, 3
 	delay 15
-	createsprite gUnknown_83E29A8, ANIM_TARGET, 2, -5, -22, 117, 80, -5, 1
-	createsprite gUnknown_83E29A8, ANIM_TARGET, 2, 5, -22, 117, 96, 5, 1
-	createsprite gUnknown_83E29A8, ANIM_TARGET, 2, 0, -22, 117, 69, -5, 1
-	createsprite gUnknown_83E29A8, ANIM_TARGET, 2, -15, -22, 117, 112, 5, 2
+	createsprite gStunSporeParticleSpriteTemplate, ANIM_TARGET, 2, -5, -22, 117, 80, -5, 1
+	createsprite gStunSporeParticleSpriteTemplate, ANIM_TARGET, 2, 5, -22, 117, 96, 5, 1
+	createsprite gStunSporeParticleSpriteTemplate, ANIM_TARGET, 2, 0, -22, 117, 69, -5, 1
+	createsprite gStunSporeParticleSpriteTemplate, ANIM_TARGET, 2, -15, -22, 117, 112, 5, 2
 	delay 30
-	createsprite gUnknown_83E29A8, ANIM_TARGET, 2, -15, -22, 117, 112, 5, 2
-	createsprite gUnknown_83E29A8, ANIM_TARGET, 2, 15, -22, 117, 80, -5, 1
-	createsprite gUnknown_83E29A8, ANIM_TARGET, 2, -10, -22, 117, 96, 7, 2
-	createsprite gUnknown_83E29A8, ANIM_TARGET, 2, -5, -22, 117, 90, -8, 0
+	createsprite gStunSporeParticleSpriteTemplate, ANIM_TARGET, 2, -15, -22, 117, 112, 5, 2
+	createsprite gStunSporeParticleSpriteTemplate, ANIM_TARGET, 2, 15, -22, 117, 80, -5, 1
+	createsprite gStunSporeParticleSpriteTemplate, ANIM_TARGET, 2, -10, -22, 117, 96, 7, 2
+	createsprite gStunSporeParticleSpriteTemplate, ANIM_TARGET, 2, -5, -22, 117, 90, -8, 0
 	delay 20
-	createsprite gUnknown_83E29A8, ANIM_TARGET, 2, -10, -22, 117, 80, -5, 1
-	createsprite gUnknown_83E29A8, ANIM_TARGET, 2, 0, -22, 117, 89, 5, 2
-	createsprite gUnknown_83E29A8, ANIM_TARGET, 2, 20, -22, 117, 112, -8, 2
-	createsprite gUnknown_83E29A8, ANIM_TARGET, 2, 5, -22, 117, 80, 5, 1
+	createsprite gStunSporeParticleSpriteTemplate, ANIM_TARGET, 2, -10, -22, 117, 80, -5, 1
+	createsprite gStunSporeParticleSpriteTemplate, ANIM_TARGET, 2, 0, -22, 117, 89, 5, 2
+	createsprite gStunSporeParticleSpriteTemplate, ANIM_TARGET, 2, 20, -22, 117, 112, -8, 2
+	createsprite gStunSporeParticleSpriteTemplate, ANIM_TARGET, 2, 5, -22, 117, 80, 5, 1
 	waitforvisualfinish
 	end
 
 Move_SLEEP_POWDER:: @ 81C7217
 	loadspritegfx 10067
 	loopsewithpan SE_W077, 63, 10, 6
-	createsprite gUnknown_83E2990, ANIM_TARGET, 2, -30, -22, 117, 80, 5, 1
-	createsprite gUnknown_83E2990, ANIM_TARGET, 2, 10, -22, 117, 80, -5, 1
-	createsprite gUnknown_83E2990, ANIM_TARGET, 2, -25, -22, 117, 112, 5, 3
+	createsprite gSleepPowderParticleSpriteTemplate, ANIM_TARGET, 2, -30, -22, 117, 80, 5, 1
+	createsprite gSleepPowderParticleSpriteTemplate, ANIM_TARGET, 2, 10, -22, 117, 80, -5, 1
+	createsprite gSleepPowderParticleSpriteTemplate, ANIM_TARGET, 2, -25, -22, 117, 112, 5, 3
 	delay 15
-	createsprite gUnknown_83E2990, ANIM_TARGET, 2, -5, -22, 117, 80, -5, 1
-	createsprite gUnknown_83E2990, ANIM_TARGET, 2, 5, -22, 117, 96, 5, 1
-	createsprite gUnknown_83E2990, ANIM_TARGET, 2, 0, -22, 117, 69, -5, 1
-	createsprite gUnknown_83E2990, ANIM_TARGET, 2, -15, -22, 117, 112, 5, 2
+	createsprite gSleepPowderParticleSpriteTemplate, ANIM_TARGET, 2, -5, -22, 117, 80, -5, 1
+	createsprite gSleepPowderParticleSpriteTemplate, ANIM_TARGET, 2, 5, -22, 117, 96, 5, 1
+	createsprite gSleepPowderParticleSpriteTemplate, ANIM_TARGET, 2, 0, -22, 117, 69, -5, 1
+	createsprite gSleepPowderParticleSpriteTemplate, ANIM_TARGET, 2, -15, -22, 117, 112, 5, 2
 	delay 30
-	createsprite gUnknown_83E2990, ANIM_TARGET, 2, -15, -22, 117, 112, 5, 2
-	createsprite gUnknown_83E2990, ANIM_TARGET, 2, 15, -22, 117, 80, -5, 1
-	createsprite gUnknown_83E2990, ANIM_TARGET, 2, -10, -22, 117, 96, 7, 2
-	createsprite gUnknown_83E2990, ANIM_TARGET, 2, -5, -22, 117, 90, -8, 0
+	createsprite gSleepPowderParticleSpriteTemplate, ANIM_TARGET, 2, -15, -22, 117, 112, 5, 2
+	createsprite gSleepPowderParticleSpriteTemplate, ANIM_TARGET, 2, 15, -22, 117, 80, -5, 1
+	createsprite gSleepPowderParticleSpriteTemplate, ANIM_TARGET, 2, -10, -22, 117, 96, 7, 2
+	createsprite gSleepPowderParticleSpriteTemplate, ANIM_TARGET, 2, -5, -22, 117, 90, -8, 0
 	delay 20
-	createsprite gUnknown_83E2990, ANIM_TARGET, 2, -10, -22, 117, 80, -5, 1
-	createsprite gUnknown_83E2990, ANIM_TARGET, 2, 0, -22, 117, 89, 5, 2
-	createsprite gUnknown_83E2990, ANIM_TARGET, 2, 20, -22, 117, 112, -8, 2
-	createsprite gUnknown_83E2990, ANIM_TARGET, 2, 5, -22, 117, 80, 5, 1
+	createsprite gSleepPowderParticleSpriteTemplate, ANIM_TARGET, 2, -10, -22, 117, 80, -5, 1
+	createsprite gSleepPowderParticleSpriteTemplate, ANIM_TARGET, 2, 0, -22, 117, 89, 5, 2
+	createsprite gSleepPowderParticleSpriteTemplate, ANIM_TARGET, 2, 20, -22, 117, 112, -8, 2
+	createsprite gSleepPowderParticleSpriteTemplate, ANIM_TARGET, 2, 5, -22, 117, 80, 5, 1
 	waitforvisualfinish
 	end
 
@@ -909,13 +909,13 @@ gUnknown_81C7BCD:: @ 81C7BCD
 Move_LEECH_SEED:: @ 81C7C23
 	loadspritegfx 10006
 	playsewithpan SE_W077, 192
-	createsprite gUnknown_83E2B34, ANIM_TARGET, 2, 15, 0, 0, 24, 35, -32
+	createsprite gLeechSeedSpriteTemplate, ANIM_TARGET, 2, 15, 0, 0, 24, 35, -32
 	delay 8
 	playsewithpan SE_W077, 192
-	createsprite gUnknown_83E2B34, ANIM_TARGET, 2, 15, 0, -16, 24, 35, -40
+	createsprite gLeechSeedSpriteTemplate, ANIM_TARGET, 2, 15, 0, -16, 24, 35, -40
 	delay 8
 	playsewithpan SE_W077, 192
-	createsprite gUnknown_83E2B34, ANIM_TARGET, 2, 15, 0, 16, 24, 35, -37
+	createsprite gLeechSeedSpriteTemplate, ANIM_TARGET, 2, 15, 0, 16, 24, 35, -37
 	delay 12
 	loopsewithpan SE_W039, 63, 10, 8
 	waitforvisualfinish
@@ -5540,33 +5540,33 @@ gUnknown_81CE521:: @ 81CE521
 	goto gUnknown_81CE51F
 
 gUnknown_81CE54B:: @ 81CE54B
-	createsprite gUnknown_83E2A58, ANIM_ATTACKER, 2, 40, 40, 16
+	createsprite gPowerAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, 40, 40, 16
 	delay 2
-	createsprite gUnknown_83E2A58, ANIM_ATTACKER, 2, -40, -40, 16
+	createsprite gPowerAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, -40, -40, 16
 	delay 2
-	createsprite gUnknown_83E2A58, ANIM_ATTACKER, 2, 0, 40, 16
+	createsprite gPowerAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, 0, 40, 16
 	delay 2
-	createsprite gUnknown_83E2A58, ANIM_ATTACKER, 2, 0, -40, 16
+	createsprite gPowerAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, 0, -40, 16
 	delay 2
-	createsprite gUnknown_83E2A58, ANIM_ATTACKER, 2, 40, -20, 16
+	createsprite gPowerAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, 40, -20, 16
 	delay 2
-	createsprite gUnknown_83E2A58, ANIM_ATTACKER, 2, 40, 20, 16
+	createsprite gPowerAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, 40, 20, 16
 	delay 2
-	createsprite gUnknown_83E2A58, ANIM_ATTACKER, 2, -40, -20, 16
+	createsprite gPowerAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, -40, -20, 16
 	delay 2
-	createsprite gUnknown_83E2A58, ANIM_ATTACKER, 2, -40, 20, 16
+	createsprite gPowerAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, -40, 20, 16
 	delay 2
-	createsprite gUnknown_83E2A58, ANIM_ATTACKER, 2, -20, 30, 16
+	createsprite gPowerAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, -20, 30, 16
 	delay 2
-	createsprite gUnknown_83E2A58, ANIM_ATTACKER, 2, 20, -30, 16
+	createsprite gPowerAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, 20, -30, 16
 	delay 2
-	createsprite gUnknown_83E2A58, ANIM_ATTACKER, 2, -20, -30, 16
+	createsprite gPowerAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, -20, -30, 16
 	delay 2
-	createsprite gUnknown_83E2A58, ANIM_ATTACKER, 2, 20, 30, 16
+	createsprite gPowerAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, 20, 30, 16
 	delay 2
-	createsprite gUnknown_83E2A58, ANIM_ATTACKER, 2, -40, 0, 16
+	createsprite gPowerAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, -40, 0, 16
 	delay 2
-	createsprite gUnknown_83E2A58, ANIM_ATTACKER, 2, 40, 0, 16
+	createsprite gPowerAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, 40, 0, 16
 	delay 2
 	return
 
@@ -5574,21 +5574,21 @@ gUnknown_81CE61E:: @ 81CE61E
 	call gUnknown_81D5A07
 	panse_1B SE_W076, 192, 63, 2, 0
 	createvisualtask sub_80A2500, 5, 
-	createsprite gUnknown_83E2A70, ANIM_TARGET, 3, 15, 0, 20, 0
+	createsprite gSolarbeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 0
 	delay 4
-	createsprite gUnknown_83E2A70, ANIM_TARGET, 3, 15, 0, 20, 1
+	createsprite gSolarbeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 1
 	delay 4
 	createvisualtask sub_80BA7F8, 10, 4, 1, 0, 10, 1017
-	createsprite gUnknown_83E2A70, ANIM_TARGET, 3, 15, 0, 20, 2
+	createsprite gSolarbeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 2
 	delay 4
 	createvisualtask AnimTask_ShakeMon2, 5, 1, 2, 0, 65, 1
-	createsprite gUnknown_83E2A70, ANIM_TARGET, 3, 15, 0, 20, 3
+	createsprite gSolarbeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 3
 	delay 4
-	createsprite gUnknown_83E2A70, ANIM_TARGET, 3, 15, 0, 20, 4
+	createsprite gSolarbeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 4
 	delay 4
-	createsprite gUnknown_83E2A70, ANIM_TARGET, 3, 15, 0, 20, 5
+	createsprite gSolarbeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 5
 	delay 4
-	createsprite gUnknown_83E2A70, ANIM_TARGET, 3, 15, 0, 20, 6
+	createsprite gSolarbeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 6
 	delay 4
 	call gUnknown_81CE6F0
 	call gUnknown_81CE6F0
@@ -5598,19 +5598,19 @@ gUnknown_81CE61E:: @ 81CE61E
 	goto gUnknown_81CE51F
 
 gUnknown_81CE6F0:: @ 81CE6F0
-	createsprite gUnknown_83E2A70, ANIM_TARGET, 3, 15, 0, 20, 0
+	createsprite gSolarbeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 0
 	delay 4
-	createsprite gUnknown_83E2A70, ANIM_TARGET, 3, 15, 0, 20, 1
+	createsprite gSolarbeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 1
 	delay 4
-	createsprite gUnknown_83E2A70, ANIM_TARGET, 3, 15, 0, 20, 2
+	createsprite gSolarbeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 2
 	delay 4
-	createsprite gUnknown_83E2A70, ANIM_TARGET, 3, 15, 0, 20, 3
+	createsprite gSolarbeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 3
 	delay 4
-	createsprite gUnknown_83E2A70, ANIM_TARGET, 3, 15, 0, 20, 4
+	createsprite gSolarbeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 4
 	delay 4
-	createsprite gUnknown_83E2A70, ANIM_TARGET, 3, 15, 0, 20, 5
+	createsprite gSolarbeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 5
 	delay 4
-	createsprite gUnknown_83E2A70, ANIM_TARGET, 3, 15, 0, 20, 6
+	createsprite gSolarbeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 6
 	delay 4
 	return
 
@@ -5823,28 +5823,28 @@ Move_ABSORB:: @ 81CEBD5
 
 gUnknown_81CEC44:: @ 81CEC44
 	playsewithpan SE_W152, 63
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 0, 5, 8, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 0, 5, 8, 26
 	delay 4
 	playsewithpan SE_W152, 63
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 10, -5, -8, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 10, -5, -8, 26
 	delay 4
 	playsewithpan SE_W152, 63
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, -5, 15, 16, 33
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, -5, 15, 16, 33
 	delay 4
 	playsewithpan SE_W152, 63
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 0, -15, -16, 36
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 0, -15, -16, 36
 	delay 4
 	playsewithpan SE_W152, 63
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 0, 5, 8, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 0, 5, 8, 26
 	delay 4
 	playsewithpan SE_W152, 63
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 10, -5, -8, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 10, -5, -8, 26
 	delay 4
 	playsewithpan SE_W152, 63
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, -10, 20, 20, 39
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, -10, 20, 20, 39
 	delay 4
 	playsewithpan SE_W152, 63
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 5, -18, -20, 35
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 5, -18, -20, 35
 	delay 4
 	return
 
@@ -5876,36 +5876,36 @@ Move_MEGA_DRAIN:: @ 81CECED
 
 gUnknown_81CED5C:: @ 81CED5C
 	playsewithpan SE_W145C, 63
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 0, 5, 8, 26
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 5, -18, -20, 35
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 0, 5, 8, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 5, -18, -20, 35
 	delay 4
 	playsewithpan SE_W145C, 63
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 10, -5, -8, 26
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, -10, 20, 20, 39
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 10, -5, -8, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, -10, 20, 20, 39
 	delay 4
 	playsewithpan SE_W145C, 63
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, -5, 15, 16, 33
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 10, -5, -8, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, -5, 15, 16, 33
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 10, -5, -8, 26
 	delay 4
 	playsewithpan SE_W145C, 63
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 0, -15, -16, 36
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 0, 5, 8, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 0, -15, -16, 36
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 0, 5, 8, 26
 	delay 4
 	playsewithpan SE_W145C, 63
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 0, 5, 8, 26
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 0, -15, -16, 36
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 0, 5, 8, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 0, -15, -16, 36
 	delay 4
 	playsewithpan SE_W145C, 63
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 10, -5, -8, 26
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, -5, 15, 16, 33
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 10, -5, -8, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, -5, 15, 16, 33
 	delay 4
 	playsewithpan SE_W145C, 63
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, -10, 20, 20, 39
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 10, -5, -8, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, -10, 20, 20, 39
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 10, -5, -8, 26
 	delay 4
 	playsewithpan SE_W145C, 63
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 0, 5, 8, 26
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 5, -18, -20, 35
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 0, 5, 8, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 5, -18, -20, 35
 	delay 4
 	return
 
@@ -5937,44 +5937,44 @@ Move_GIGA_DRAIN:: @ 81CEE7D
 
 gUnknown_81CEEEC:: @ 81CEEEC
 	playsewithpan SE_W202, 63
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 0, 5, 8, 26
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 5, -18, -40, 35
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, -10, 20, 20, 39
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 0, 5, 8, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 5, -18, -40, 35
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, -10, 20, 20, 39
 	delay 4
 	playsewithpan SE_W202, 63
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 0, 5, 28, 26
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 10, -5, -8, 26
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, -10, 20, 40, 39
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 0, 5, 28, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 10, -5, -8, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, -10, 20, 40, 39
 	delay 4
 	playsewithpan SE_W202, 63
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 10, -5, -8, 26
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, -5, 15, 16, 33
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 10, -5, -32, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 10, -5, -8, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, -5, 15, 16, 33
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 10, -5, -32, 26
 	delay 4
 	playsewithpan SE_W202, 63
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 0, -15, -16, 36
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 0, 5, 8, 26
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 10, -5, -8, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 0, -15, -16, 36
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 0, 5, 8, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 10, -5, -8, 26
 	delay 4
 	playsewithpan SE_W202, 63
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, -5, 15, 16, 33
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 0, -15, -16, 36
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 0, 5, 8, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, -5, 15, 16, 33
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 0, -15, -16, 36
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 0, 5, 8, 26
 	delay 4
 	playsewithpan SE_W202, 63
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 0, 5, 8, 26
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, -5, 15, 16, 33
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 10, -5, -40, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 0, 5, 8, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, -5, 15, 16, 33
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 10, -5, -40, 26
 	delay 4
 	playsewithpan SE_W202, 63
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, -5, 15, 36, 33
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 10, -5, -8, 26
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, -10, 20, 20, 39
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, -5, 15, 36, 33
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 10, -5, -8, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, -10, 20, 20, 39
 	delay 4
 	playsewithpan SE_W202, 63
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 0, 5, 8, 26
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 0, 5, 8, 26
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 5, -18, -20, 35
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 0, 5, 8, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 0, 5, 8, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 5, -18, -20, 35
 	delay 4
 	return
 
@@ -7139,44 +7139,44 @@ Move_DREAM_EATER:: @ 81D0A1F
 
 gUnknown_81D0A89:: @ 81D0A89
 	playsewithpan SE_W207, 63
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 0, 5, 8, 26
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 5, -18, -40, 35
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, -10, 20, 20, 39
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 0, 5, 8, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 5, -18, -40, 35
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, -10, 20, 20, 39
 	delay 4
 	playsewithpan SE_W207, 63
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 0, 5, 28, 26
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 10, -5, -8, 26
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, -10, 20, 40, 39
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 0, 5, 28, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 10, -5, -8, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, -10, 20, 40, 39
 	delay 4
 	playsewithpan SE_W207, 63
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 10, -5, -8, 26
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, -5, 15, 16, 33
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 10, -5, -32, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 10, -5, -8, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, -5, 15, 16, 33
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 10, -5, -32, 26
 	delay 4
 	playsewithpan SE_W207, 63
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 0, -15, -16, 36
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 0, 5, 8, 26
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 10, -5, -8, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 0, -15, -16, 36
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 0, 5, 8, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 10, -5, -8, 26
 	delay 4
 	playsewithpan SE_W207, 63
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, -5, 15, 16, 33
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 0, -15, -16, 36
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 0, 5, 8, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, -5, 15, 16, 33
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 0, -15, -16, 36
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 0, 5, 8, 26
 	delay 4
 	playsewithpan SE_W207, 63
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 0, 5, 8, 26
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, -5, 15, 16, 33
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 10, -5, -40, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 0, 5, 8, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, -5, 15, 16, 33
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 10, -5, -40, 26
 	delay 4
 	playsewithpan SE_W207, 63
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, -5, 15, 36, 33
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 10, -5, -8, 26
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, -10, 20, 20, 39
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, -5, 15, 36, 33
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 10, -5, -8, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, -10, 20, 20, 39
 	delay 4
 	playsewithpan SE_W207, 63
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 0, 5, 8, 26
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 0, 5, 8, 26
-	createsprite gUnknown_83E2AE8, ANIM_ATTACKER, 3, 5, -18, -20, 35
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 0, 5, 8, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 0, 5, 8, 26
+	createsprite gAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 3, 5, -18, -20, 35
 	delay 4
 	return
 
@@ -7693,19 +7693,19 @@ Move_RECOVER:: @ 81D16CD
 	end
 
 gUnknown_81D170D:: @ 81D170D
-	createsprite gUnknown_83E2A58, ANIM_ATTACKER, 2, 40, -10, 13
+	createsprite gPowerAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, 40, -10, 13
 	delay 3
-	createsprite gUnknown_83E2A58, ANIM_ATTACKER, 2, -35, -10, 13
+	createsprite gPowerAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, -35, -10, 13
 	delay 3
-	createsprite gUnknown_83E2A58, ANIM_ATTACKER, 2, 15, -40, 13
+	createsprite gPowerAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, 15, -40, 13
 	delay 3
-	createsprite gUnknown_83E2A58, ANIM_ATTACKER, 2, -10, -32, 13
+	createsprite gPowerAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, -10, -32, 13
 	delay 3
-	createsprite gUnknown_83E2A58, ANIM_ATTACKER, 2, 25, -20, 13
+	createsprite gPowerAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, 25, -20, 13
 	delay 3
-	createsprite gUnknown_83E2A58, ANIM_ATTACKER, 2, -40, -20, 13
+	createsprite gPowerAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, -40, -20, 13
 	delay 3
-	createsprite gUnknown_83E2A58, ANIM_ATTACKER, 2, 5, -40, 13
+	createsprite gPowerAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, 5, -40, 13
 	delay 3
 	return
 
@@ -8296,21 +8296,21 @@ Move_STOCKPILE:: @ 81D256B
 	end
 
 gUnknown_81D25A9:: @ 81D25A9
-	createsprite gUnknown_83E2ABC, ANIM_ATTACKER, 2, 55, 55, 13
+	createsprite gStockpileAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, 55, 55, 13
 	delay 1
-	createsprite gUnknown_83E2ABC, ANIM_ATTACKER, 2, -55, -55, 13
+	createsprite gStockpileAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, -55, -55, 13
 	delay 1
-	createsprite gUnknown_83E2ABC, ANIM_ATTACKER, 2, 0, 55, 13
+	createsprite gStockpileAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, 0, 55, 13
 	delay 1
-	createsprite gUnknown_83E2ABC, ANIM_ATTACKER, 2, 0, -55, 13
+	createsprite gStockpileAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, 0, -55, 13
 	delay 1
-	createsprite gUnknown_83E2ABC, ANIM_ATTACKER, 2, 55, -34, 13
+	createsprite gStockpileAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, 55, -34, 13
 	delay 1
-	createsprite gUnknown_83E2ABC, ANIM_ATTACKER, 2, 55, 34, 13
+	createsprite gStockpileAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, 55, 34, 13
 	delay 1
-	createsprite gUnknown_83E2ABC, ANIM_ATTACKER, 2, -55, -34, 13
+	createsprite gStockpileAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, -55, -34, 13
 	delay 1
-	createsprite gUnknown_83E2ABC, ANIM_ATTACKER, 2, -55, 34, 13
+	createsprite gStockpileAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, -55, 34, 13
 	delay 1
 	return
 
@@ -8531,8 +8531,8 @@ Move_HYPER_BEAM:: @ 81D29A7
 	end
 
 gUnknown_81D2AD8:: @ 81D2AD8
-	createsprite gUnknown_83E2B00, ANIM_TARGET, 2, 
-	createsprite gUnknown_83E2B00, ANIM_TARGET, 2, 
+	createsprite gHyperBeamOrbSpriteTemplate, ANIM_TARGET, 2, 
+	createsprite gHyperBeamOrbSpriteTemplate, ANIM_TARGET, 2, 
 	delay 1
 	return
 

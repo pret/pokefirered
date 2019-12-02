@@ -55,7 +55,7 @@ const struct SpriteTemplate gUnknown_83E73B4 =
 {
     .tileTag = ANIM_TAG_ROCKS,
     .paletteTag = ANIM_TAG_ROCKS,
-    .oam = &gOamData_83AC9D8,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gUnknown_83E73A8,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -66,7 +66,7 @@ const struct SpriteTemplate gUnknown_83E73CC =
 {
     .tileTag = ANIM_TAG_ROCKS,
     .paletteTag = ANIM_TAG_ROCKS,
-    .oam = &gOamData_83AC9D8,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gUnknown_83E73A8,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -77,7 +77,7 @@ const struct SpriteTemplate gUnknown_83E73E4 =
 {
     .tileTag = ANIM_TAG_MUD_SAND,
     .paletteTag = ANIM_TAG_MUD_SAND,
-    .oam = &gOamData_83AC9C8,
+    .oam = &gOamData_AffineOff_ObjNormal_8x8,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -101,7 +101,7 @@ const struct SpriteTemplate gUnknown_83E7420 =
 {
     .tileTag = ANIM_TAG_WATER_ORB,
     .paletteTag = ANIM_TAG_WATER_ORB,
-    .oam = &gOamData_83ACB50,
+    .oam = &gOamData_AffineNormal_ObjBlend_16x16,
     .anims = gUnknown_83E5958,
     .images = NULL,
     .affineAnims = gUnknown_83E741C,
@@ -112,7 +112,7 @@ const struct SpriteTemplate gUnknown_83E7438 =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
-    .oam = &gOamData_83AC9D8,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gUnknown_83E5D48,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -123,7 +123,7 @@ const struct SpriteTemplate gUnknown_83E7450 =
 {
     .tileTag = ANIM_TAG_FLYING_DIRT,
     .paletteTag = ANIM_TAG_FLYING_DIRT,
-    .oam = &gOamData_83AC9F8,
+    .oam = &gOamData_AffineOff_ObjNormal_32x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -213,7 +213,7 @@ const struct SpriteTemplate gUnknown_83E74C0 =
 {
     .tileTag = ANIM_TAG_ROCKS,
     .paletteTag = ANIM_TAG_ROCKS,
-    .oam = &gOamData_83AC9D8,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gUnknown_83E74A8,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -224,7 +224,7 @@ const struct SpriteTemplate gUnknown_83E74D8 =
 {
     .tileTag = ANIM_TAG_MUD_SAND,
     .paletteTag = ANIM_TAG_MUD_SAND,
-    .oam = &gOamData_83AC9C8,
+    .oam = &gOamData_AffineOff_ObjNormal_8x8,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -235,7 +235,7 @@ const struct SpriteTemplate gUnknown_83E74F0 =
 {
     .tileTag = ANIM_TAG_ROCKS,
     .paletteTag = ANIM_TAG_ROCKS,
-    .oam = &gOamData_83AC9D8,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -246,7 +246,7 @@ const struct SpriteTemplate gUnknown_83E7508 =
 {
     .tileTag = ANIM_TAG_ROCKS,
     .paletteTag = ANIM_TAG_ROCKS,
-    .oam = &gOamData_83AC9D8,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gUnknown_83E74A8,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -275,7 +275,7 @@ const struct SpriteTemplate gUnknown_83E7548 =
 {
     .tileTag = ANIM_TAG_ROCKS,
     .paletteTag = ANIM_TAG_ROCKS,
-    .oam = &gOamData_83ACA38,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = gUnknown_83E74A8,
     .images = NULL,
     .affineAnims = gUnknown_83E7540,
@@ -286,7 +286,7 @@ const struct SpriteTemplate gUnknown_83E7560 =
 {
     .tileTag = ANIM_TAG_ROCKS,
     .paletteTag = ANIM_TAG_ROCKS,
-    .oam = &gOamData_83ACA38,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = gUnknown_83E74A8,
     .images = NULL,
     .affineAnims = gUnknown_83E7540,
@@ -297,7 +297,7 @@ const struct SpriteTemplate gUnknown_83E7578 =
 {
     .tileTag = ANIM_TAG_ROCKS,
     .paletteTag = ANIM_TAG_ROCKS,
-    .oam = &gOamData_83AC9D8,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gUnknown_83E74B8,
     .images = NULL,
     .affineAnims = gUnknown_83E7540,
@@ -308,7 +308,7 @@ const struct SpriteTemplate gUnknown_83E7590 =
 {
     .tileTag = ANIM_TAG_ROCKS,
     .paletteTag = ANIM_TAG_ROCKS,
-    .oam = &gOamData_83ACA38,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = gUnknown_83E74B0,
     .images = NULL,
     .affineAnims = gUnknown_83E7540,

@@ -309,8 +309,8 @@ struct Camera
     s32 y;
 };
 
-extern struct EventObject gMapObjects[];
-extern u8 gSelectedEventObject;
+extern struct EventObject gObjectEvents[];
+extern u8 gSelectedObjectEvent;
 extern struct MapHeader gMapHeader;
 extern struct PlayerAvatar gPlayerAvatar;
 

@@ -768,7 +768,7 @@ static void SetMapVarsToTrainer(void)
     if (sTrainerEventObjectLocalId != 0)
     {
         gSpecialVar_LastTalked = sTrainerEventObjectLocalId;
-        gSelectedEventObject = GetFieldObjectIdByLocalIdAndMap(sTrainerEventObjectLocalId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+        gSelectedObjectEvent = GetObjectEventIdByLocalIdAndMap(sTrainerEventObjectLocalId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
     }
 }
 
@@ -819,8 +819,8 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
 
 void ConfigureAndSetUpOneTrainerBattle(u8 trainerEventObjId, const u8 *trainerScript)
 {
-    gSelectedEventObject = trainerEventObjId;
-    gSpecialVar_LastTalked = gMapObjects[trainerEventObjId].localId;
+    gSelectedObjectEvent = trainerEventObjId;
+    gSpecialVar_LastTalked = gObjectEvents[trainerEventObjId].localId;
     BattleSetup_ConfigureTrainerBattle(trainerScript + 1);
     ScriptContext1_SetupScript(gUnknown_81A4EB4);
     ScriptContext2_Enable();
@@ -835,7 +835,7 @@ bool32 GetTrainerFlagFromScriptPointer(const u8 *data)
 
 void SetUpTrainerMovement(void)
 {
-    struct MapObject *eventObject = &gMapObjects[gSelectedEventObject];
+    struct ObjectEvent *eventObject = &gObjectEvents[gSelectedObjectEvent];
 
     SetTrainerMovementType(eventObject, GetTrainerFacingDirectionMovementType(eventObject->facingDirection));
 }

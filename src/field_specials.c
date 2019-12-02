@@ -314,15 +314,15 @@ void Special_AnimatePcTurnOff()
 
 void SpawnCameraObject(void)
 {
-    u8 mapObjectId = SpawnSpecialFieldObjectParameterized(MAP_OBJ_GFX_YOUNGSTER, 8, 127, gSaveBlock1Ptr->pos.x + 7, gSaveBlock1Ptr->pos.y + 7, 3);
-    gMapObjects[mapObjectId].mapobj_bit_13 = TRUE;
-    CameraObjectSetFollowedObjectId(gMapObjects[mapObjectId].spriteId);
+    u8 mapObjectId = SpawnSpecialObjectEventParameterized(MAP_OBJ_GFX_YOUNGSTER, 8, 127, gSaveBlock1Ptr->pos.x + 7, gSaveBlock1Ptr->pos.y + 7, 3);
+    gObjectEvents[mapObjectId].mapobj_bit_13 = TRUE;
+    CameraObjectSetFollowedObjectId(gObjectEvents[mapObjectId].spriteId);
 }
 
 void RemoveCameraObject(void)
 {
     CameraObjectSetFollowedObjectId(GetPlayerAvatarObjectId());
-    RemoveFieldObjectByLocalIdAndMap(127, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    RemoveObjectEventByLocalIdAndMap(127, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
 }
 
 void Special_BufferEReaderTrainerName5(void)
@@ -1499,7 +1499,7 @@ void Special_SetSeenMon(void)
 
 void sub_80CBDE8(void)
 {
-    gSelectedEventObject = 0;
+    gSelectedObjectEvent = 0;
     gSpecialVar_TextColor = 0xFF;
 }
 
@@ -1508,13 +1508,13 @@ u8 ContextNpcGetTextColor(void)
     u8 gfxId;
     if (gSpecialVar_TextColor != 0xFF)
         return gSpecialVar_TextColor;
-    else if (gSelectedEventObject == 0)
+    else if (gSelectedObjectEvent == 0)
         return 3;
     else
     {
-        gfxId = gMapObjects[gSelectedEventObject].graphicsId;
+        gfxId = gObjectEvents[gSelectedObjectEvent].graphicsId;
         if (gfxId >= MAP_OBJ_GFX_VAR_0)
-            gfxId = VarGetFieldObjectGraphicsId(gfxId - MAP_OBJ_GFX_VAR_0);
+            gfxId = VarGetObjectEventGraphicsId(gfxId - MAP_OBJ_GFX_VAR_0);
         return GetColorFromTextColorTable(gfxId);
     }
 }
@@ -2359,7 +2359,7 @@ static void MoveDeoxysObject(u8 num)
     u8 mapObjId;
     LoadPalette(sDeoxysObjectPals[num], 0x1A0, 0x08);
     sub_8083598(10);
-    TryGetFieldObjectIdByLocalIdAndMap(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &mapObjId);
+    TryGetObjectEventIdByLocalIdAndMap(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &mapObjId);
     if (num == 0)
         PlaySE(SE_W109);
     else

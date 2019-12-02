@@ -20,7 +20,7 @@ static void sub_81507CC(void);
 static void sub_81507D8(void);
 static void sub_81507E4(void);
 static void sub_81507F0(void);
-static void sub_81507BC(struct MapObject *a0, u8 a1);
+static void sub_81507BC(struct ObjectEvent *a0, u8 a1);
 
 static void (*const gUnknown_8471EDC[])(void) = {
     sub_81504A8,
@@ -57,24 +57,24 @@ void sub_8150498(u8 a0)
 
 static void sub_81504A8(void)
 {
-    struct MapObject *mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+    struct ObjectEvent *mapObject = &gObjectEvents[gPlayerAvatar.mapObjectId];
     sub_81507BC(mapObject, sub_805C808(0));
-    FieldObjectTurn(mapObject, mapObject->placeholder18);
+    ObjectEventTurn(mapObject, mapObject->placeholder18);
     SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_ON_FOOT);
 }
 
 static void sub_81504E8(void)
 {
-    struct MapObject *mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+    struct ObjectEvent *mapObject = &gObjectEvents[gPlayerAvatar.mapObjectId];
     sub_81507BC(mapObject, sub_805C808(1));
-    FieldObjectTurn(mapObject, mapObject->placeholder18);
+    ObjectEventTurn(mapObject, mapObject->placeholder18);
     SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_MACH_BIKE);
     sub_80BD620(0, 0);
 }
 
 static void sub_8150530(void)
 {
-    struct MapObject *mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+    struct ObjectEvent *mapObject = &gObjectEvents[gPlayerAvatar.mapObjectId];
     struct Sprite *sprite = &gSprites[mapObject->spriteId];
 
     if (gUnknown_3005E88 == 1 || gUnknown_3005E88 == 3)
@@ -94,13 +94,13 @@ static void sub_8150530(void)
 
 static void sub_81505C4(u8 taskId)
 {
-    struct MapObject *mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+    struct ObjectEvent *mapObject = &gObjectEvents[gPlayerAvatar.mapObjectId];
     struct Sprite *sprite = &gSprites[mapObject->spriteId];
 
     switch (gTasks[taskId].data[0])
     {
         case 0:
-            FieldObjectClearAnimIfSpecialAnimActive(mapObject);
+            ObjectEventClearAnimIfSpecialAnimActive(mapObject);
             mapObject->mapobj_bit_11 = TRUE;
             sub_81507BC(mapObject, sub_805C808(4));
             StartSpriteAnim(sprite, sub_80634F0(mapObject->facingDirection));
@@ -126,7 +126,7 @@ static void sub_81505C4(u8 taskId)
                     sub_81507BC(mapObject, sub_805C808(0));
                 else
                     sub_81507BC(mapObject, sub_805C808(2));
-                FieldObjectTurn(mapObject, mapObject->placeholder18);
+                ObjectEventTurn(mapObject, mapObject->placeholder18);
                 sprite->pos2.x = 0;
                 sprite->pos2.y = 0;
                 ScriptContext2_Disable();
@@ -138,13 +138,13 @@ static void sub_81505C4(u8 taskId)
 
 static void sub_8150708(void)
 {
-    struct MapObject *mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+    struct ObjectEvent *mapObject = &gObjectEvents[gPlayerAvatar.mapObjectId];
     u8 fieldEffectId;
 
     if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING))
     {
         sub_81507BC(mapObject, sub_805C808(2));
-        FieldObjectTurn(mapObject, mapObject->placeholder18);
+        ObjectEventTurn(mapObject, mapObject->placeholder18);
         SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_SURFING);
         gFieldEffectArguments[0] = mapObject->coords2.x;
         gFieldEffectArguments[1] = mapObject->coords2.y;
@@ -165,13 +165,13 @@ static void sub_8150794(u8 taskId)
 {
     if (!FieldEffectActiveListContains(0x41))
     {
-        UnfreezeMapObjects();
+        UnfreezeObjectEvents();
         ScriptContext2_Disable();
         DestroyTask(taskId);
     }
 }
 
-static void sub_81507BC(struct MapObject * a0, u8 a1)
+static void sub_81507BC(struct ObjectEvent * a0, u8 a1)
 {
     EventObjectSetGraphicsId(a0, a1);
 }

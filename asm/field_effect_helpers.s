@@ -105,7 +105,7 @@ _080DAE3C: .4byte gDummySpriteAffineAnimTable
 sub_80DAE40: @ 80DAE40
 	push {lr}
 	ldrb r0, [r0, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetObjectEventGraphicsInfo
 	ldrh r0, [r0, 0xA]
 	subs r0, 0x2
 	lsls r0, 16
@@ -127,7 +127,7 @@ npc_pal_op: @ 80DAE54
 	movs r0, 0
 	strh r0, [r4, 0x32]
 	ldrb r0, [r5, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetObjectEventGraphicsInfo
 	ldrb r1, [r0, 0xC]
 	movs r0, 0x80
 	ands r0, r1
@@ -176,7 +176,7 @@ npc_pal_op_B: @ 80DAEC4
 	lsls r1, 24
 	lsrs r4, r1, 24
 	ldrb r0, [r0, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetObjectEventGraphicsInfo
 	adds r2, r0, 0
 	ldrh r1, [r2, 0x4]
 	ldr r0, _080DAEF0 @ =0x000011ff
@@ -222,7 +222,7 @@ npc_pal_op_A: @ 80DAF20
 	lsls r1, 24
 	lsrs r4, r1, 24
 	ldrb r0, [r0, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetObjectEventGraphicsInfo
 	adds r2, r0, 0
 	ldrh r1, [r2, 0x4]
 	ldr r0, _080DAF4C @ =0x000011ff
@@ -253,7 +253,7 @@ sub_80DAF50: @ 80DAF50
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080DAF98 @ =gMapObjects
+	ldr r1, _080DAF98 @ =gObjectEvents
 	adds r7, r0, r1
 	ldrb r1, [r7, 0x4]
 	lsls r0, r1, 4
@@ -281,7 +281,7 @@ _080DAF88:
 	strb r0, [r2]
 	b _080DB0AE
 	.align 2, 0
-_080DAF98: .4byte gMapObjects
+_080DAF98: .4byte gObjectEvents
 _080DAF9C: .4byte gSprites
 _080DAFA0: .4byte 0x00020001
 _080DAFA4:
@@ -584,16 +584,16 @@ oei_shadow: @ 80DB1DC
 	ldrb r0, [r5]
 	ldrb r1, [r5, 0x4]
 	ldrb r2, [r5, 0x8]
-	bl GetFieldObjectIdByLocalIdAndMap
+	bl GetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080DB26C @ =gMapObjects
+	ldr r2, _080DB26C @ =gObjectEvents
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
 	adds r1, r2
 	ldrb r0, [r1, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetObjectEventGraphicsInfo
 	adds r4, r0, 0
 	ldr r2, _080DB270 @ =gUnknown_83A0010
 	ldr r1, _080DB274 @ =gUnknown_83FECD2
@@ -649,7 +649,7 @@ _080DB260:
 	bx r1
 	.align 2, 0
 _080DB268: .4byte gFieldEffectArguments
-_080DB26C: .4byte gMapObjects
+_080DB26C: .4byte gObjectEvents
 _080DB270: .4byte gUnknown_83A0010
 _080DB274: .4byte gUnknown_83FECD2
 _080DB278: .4byte gSprites
@@ -671,7 +671,7 @@ oamc_shadow: @ 80DB280
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DB2AE
@@ -685,7 +685,7 @@ _080DB2AE:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080DB33C @ =gMapObjects
+	ldr r1, _080DB33C @ =gObjectEvents
 	adds r4, r0, r1
 	ldrb r0, [r4, 0x4]
 	lsls r1, r0, 4
@@ -748,7 +748,7 @@ _080DB334:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DB33C: .4byte gMapObjects
+_080DB33C: .4byte gObjectEvents
 _080DB340: .4byte gSprites
 _080DB344: .4byte 0x00400001
 	thumb_func_end oamc_shadow
@@ -895,7 +895,7 @@ _080DB438:
 	adds r1, r4, 0
 	adds r2, r7, 0
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DB48C
@@ -929,7 +929,7 @@ _080DB4A0:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080DB4F0 @ =gMapObjects
+	ldr r1, _080DB4F0 @ =gObjectEvents
 	adds r2, r0, r1
 	ldr r0, [r2, 0x10]
 	ldr r1, [r5, 0x30]
@@ -966,7 +966,7 @@ _080DB4E4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DB4F0: .4byte gMapObjects
+_080DB4F0: .4byte gObjectEvents
 	thumb_func_end unc_grass_normal
 
 	thumb_func_start FldEff_JumpTallGrass
@@ -1246,7 +1246,7 @@ _080DB6E8:
 	adds r1, r7, 0
 	adds r2, r6, 0
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DB73C
@@ -1280,7 +1280,7 @@ _080DB750:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080DB794 @ =gMapObjects
+	ldr r1, _080DB794 @ =gObjectEvents
 	adds r2, r0, r1
 	ldr r0, [r2, 0x10]
 	ldr r1, [r5, 0x30]
@@ -1309,7 +1309,7 @@ _080DB786:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DB794: .4byte gMapObjects
+_080DB794: .4byte gObjectEvents
 	thumb_func_end unc_grass_tall
 
 	thumb_func_start FldEff_JumpLongGrass
@@ -1376,13 +1376,13 @@ sub_80DB808: @ 80DB808
 	ldrb r0, [r6]
 	ldrb r1, [r6, 0x4]
 	ldrb r2, [r6, 0x8]
-	bl GetFieldObjectIdByLocalIdAndMap
+	bl GetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _080DB8A0 @ =gMapObjects
+	ldr r0, _080DB8A0 @ =gObjectEvents
 	adds r5, r1, r0
 	ldr r0, _080DB8A4 @ =gUnknown_83A0010
 	ldr r0, [r0, 0x78]
@@ -1446,7 +1446,7 @@ _080DB894:
 	bx r1
 	.align 2, 0
 _080DB89C: .4byte gFieldEffectArguments
-_080DB8A0: .4byte gMapObjects
+_080DB8A0: .4byte gObjectEvents
 _080DB8A4: .4byte gUnknown_83A0010
 _080DB8A8: .4byte gSprites
 	thumb_func_end sub_80DB808
@@ -1468,11 +1468,11 @@ sub_80DB8AC: @ 80DB8AC
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DB8EA
-	ldr r5, _080DB8F4 @ =gMapObjects
+	ldr r5, _080DB8F4 @ =gObjectEvents
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -1489,10 +1489,10 @@ _080DB8EA:
 	bl FieldEffectStop
 	b _080DB98E
 	.align 2, 0
-_080DB8F4: .4byte gMapObjects
+_080DB8F4: .4byte gObjectEvents
 _080DB8F8:
 	ldrb r0, [r1, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetObjectEventGraphicsInfo
 	mov r8, r0
 	mov r0, sp
 	ldrb r1, [r0]
@@ -1833,13 +1833,13 @@ FldEff_Splash: @ 80DBB88
 	ldrb r0, [r6]
 	ldrb r1, [r6, 0x4]
 	ldrb r2, [r6, 0x8]
-	bl GetFieldObjectIdByLocalIdAndMap
+	bl GetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _080DBC20 @ =gMapObjects
+	ldr r0, _080DBC20 @ =gObjectEvents
 	adds r5, r1, r0
 	ldr r0, _080DBC24 @ =gUnknown_83A0010
 	ldr r0, [r0, 0x34]
@@ -1852,7 +1852,7 @@ FldEff_Splash: @ 80DBB88
 	cmp r4, 0x40
 	beq _080DBC12
 	ldrb r0, [r5, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetObjectEventGraphicsInfo
 	lsls r3, r4, 4
 	adds r3, r4
 	lsls r3, 2
@@ -1900,7 +1900,7 @@ _080DBC12:
 	bx r1
 	.align 2, 0
 _080DBC1C: .4byte gFieldEffectArguments
-_080DBC20: .4byte gMapObjects
+_080DBC20: .4byte gObjectEvents
 _080DBC24: .4byte gUnknown_83A0010
 _080DBC28: .4byte gSprites
 	thumb_func_end FldEff_Splash
@@ -1926,7 +1926,7 @@ sub_80DBC2C: @ 80DBC2C
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DBC66
@@ -1937,7 +1937,7 @@ _080DBC5C:
 	b _080DBCA6
 _080DBC66:
 	ldr r3, _080DBCB0 @ =gSprites
-	ldr r2, _080DBCB4 @ =gMapObjects
+	ldr r2, _080DBCB4 @ =gObjectEvents
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -1974,7 +1974,7 @@ _080DBCA6:
 	bx r0
 	.align 2, 0
 _080DBCB0: .4byte gSprites
-_080DBCB4: .4byte gMapObjects
+_080DBCB4: .4byte gObjectEvents
 	thumb_func_end sub_80DBC2C
 
 	thumb_func_start FldEff_JumpSmallSplash
@@ -2098,13 +2098,13 @@ FldEff_FeetInFlowingWater: @ 80DBD98
 	ldrb r0, [r7]
 	ldrb r1, [r7, 0x4]
 	ldrb r2, [r7, 0x8]
-	bl GetFieldObjectIdByLocalIdAndMap
+	bl GetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _080DBE3C @ =gMapObjects
+	ldr r0, _080DBE3C @ =gObjectEvents
 	adds r6, r1, r0
 	ldr r0, _080DBE40 @ =gUnknown_83A0010
 	ldr r0, [r0, 0x34]
@@ -2117,7 +2117,7 @@ FldEff_FeetInFlowingWater: @ 80DBD98
 	cmp r5, 0x40
 	beq _080DBE2E
 	ldrb r0, [r6, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetObjectEventGraphicsInfo
 	adds r4, r0, 0
 	lsls r0, r5, 4
 	adds r0, r5
@@ -2171,7 +2171,7 @@ _080DBE2E:
 	bx r1
 	.align 2, 0
 _080DBE38: .4byte gFieldEffectArguments
-_080DBE3C: .4byte gMapObjects
+_080DBE3C: .4byte gObjectEvents
 _080DBE40: .4byte gUnknown_83A0010
 _080DBE44: .4byte gSprites
 _080DBE48: .4byte sub_80DBE50
@@ -2193,11 +2193,11 @@ sub_80DBE50: @ 80DBE50
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DBE8A
-	ldr r2, _080DBE94 @ =gMapObjects
+	ldr r2, _080DBE94 @ =gObjectEvents
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -2214,7 +2214,7 @@ _080DBE8A:
 	bl FieldEffectStop
 	b _080DBEE2
 	.align 2, 0
-_080DBE94: .4byte gMapObjects
+_080DBE94: .4byte gObjectEvents
 _080DBE98:
 	ldrb r1, [r5, 0x4]
 	lsls r0, r1, 4
@@ -2317,13 +2317,13 @@ sub_80DBF50: @ 80DBF50
 	ldrb r0, [r6]
 	ldrb r1, [r6, 0x4]
 	ldrb r2, [r6, 0x8]
-	bl GetFieldObjectIdByLocalIdAndMap
+	bl GetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _080DBFE8 @ =gMapObjects
+	ldr r0, _080DBFE8 @ =gObjectEvents
 	adds r5, r1, r0
 	ldr r0, _080DBFEC @ =gUnknown_83A0010
 	ldr r0, [r0, 0x7C]
@@ -2387,7 +2387,7 @@ _080DBFDC:
 	bx r1
 	.align 2, 0
 _080DBFE4: .4byte gFieldEffectArguments
-_080DBFE8: .4byte gMapObjects
+_080DBFE8: .4byte gObjectEvents
 _080DBFEC: .4byte gUnknown_83A0010
 _080DBFF0: .4byte gSprites
 	thumb_func_end sub_80DBF50
@@ -2407,11 +2407,11 @@ sub_80DBFF4: @ 80DBFF4
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DC02E
-	ldr r5, _080DC038 @ =gMapObjects
+	ldr r5, _080DC038 @ =gObjectEvents
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -2428,10 +2428,10 @@ _080DC02E:
 	bl FieldEffectStop
 	b _080DC080
 	.align 2, 0
-_080DC038: .4byte gMapObjects
+_080DC038: .4byte gObjectEvents
 _080DC03C:
 	ldrb r0, [r1, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetObjectEventGraphicsInfo
 	mov r1, sp
 	ldrb r2, [r1]
 	lsls r1, r2, 3
@@ -2863,7 +2863,7 @@ sub_80DC348: @ 80DC348
 	movs r2, 0x32
 	ldrsh r1, [r4, r2]
 	bl CurrentMapDrawMetatileAt
-	ldr r2, _080DC3A0 @ =gMapObjects
+	ldr r2, _080DC3A0 @ =gObjectEvents
 	ldr r0, _080DC3A4 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -2880,7 +2880,7 @@ sub_80DC348: @ 80DC348
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DC3A0: .4byte gMapObjects
+_080DC3A0: .4byte gObjectEvents
 _080DC3A4: .4byte gPlayerAvatar
 	thumb_func_end sub_80DC348
 
@@ -3081,7 +3081,7 @@ sub_80DC4F8: @ 80DC4F8
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _080DC548 @ =gMapObjects
+	ldr r0, _080DC548 @ =gObjectEvents
 	adds r4, r0
 	ldrb r0, [r4, 0x4]
 	lsls r5, r0, 4
@@ -3112,7 +3112,7 @@ sub_80DC4F8: @ 80DC4F8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DC548: .4byte gMapObjects
+_080DC548: .4byte gObjectEvents
 _080DC54C: .4byte gSprites
 	thumb_func_end sub_80DC4F8
 
@@ -3448,13 +3448,13 @@ FldEff_SandPile: @ 80DC7B0
 	ldrb r0, [r7]
 	ldrb r1, [r7, 0x4]
 	ldrb r2, [r7, 0x8]
-	bl GetFieldObjectIdByLocalIdAndMap
+	bl GetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _080DC860 @ =gMapObjects
+	ldr r0, _080DC860 @ =gObjectEvents
 	adds r6, r1, r0
 	ldr r0, _080DC864 @ =gUnknown_83A0010
 	ldr r0, [r0, 0x74]
@@ -3467,7 +3467,7 @@ FldEff_SandPile: @ 80DC7B0
 	cmp r4, 0x40
 	beq _080DC854
 	ldrb r0, [r6, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetObjectEventGraphicsInfo
 	adds r5, r0, 0
 	lsls r0, r4, 4
 	adds r0, r4
@@ -3528,7 +3528,7 @@ _080DC854:
 	bx r1
 	.align 2, 0
 _080DC85C: .4byte gFieldEffectArguments
-_080DC860: .4byte gMapObjects
+_080DC860: .4byte gObjectEvents
 _080DC864: .4byte gUnknown_83A0010
 _080DC868: .4byte gSprites
 	thumb_func_end FldEff_SandPile
@@ -3548,11 +3548,11 @@ sub_80DC86C: @ 80DC86C
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DC8A6
-	ldr r2, _080DC8B0 @ =gMapObjects
+	ldr r2, _080DC8B0 @ =gObjectEvents
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -3569,7 +3569,7 @@ _080DC8A6:
 	bl FieldEffectStop
 	b _080DC926
 	.align 2, 0
-_080DC8B0: .4byte gMapObjects
+_080DC8B0: .4byte gObjectEvents
 _080DC8B4:
 	ldr r2, _080DC930 @ =gSprites
 	ldrb r1, [r1, 0x4]
@@ -3608,7 +3608,7 @@ _080DC8F6:
 	strh r6, [r4, 0x20]
 	strh r5, [r4, 0x22]
 	ldr r3, _080DC930 @ =gSprites
-	ldr r2, _080DC934 @ =gMapObjects
+	ldr r2, _080DC934 @ =gObjectEvents
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -3635,7 +3635,7 @@ _080DC926:
 	bx r0
 	.align 2, 0
 _080DC930: .4byte gSprites
-_080DC934: .4byte gMapObjects
+_080DC934: .4byte gObjectEvents
 	thumb_func_end sub_80DC86C
 
 	thumb_func_start FldEff_Bubbles
@@ -3780,7 +3780,7 @@ ShowDisguiseFieldEffect: @ 80DCA10
 	ldrb r1, [r5, 0x4]
 	ldrb r2, [r5, 0x8]
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DCA48
@@ -3872,7 +3872,7 @@ sub_80DCAC8: @ 80DCAC8
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DCAF8
@@ -3882,7 +3882,7 @@ sub_80DCAC8: @ 80DCAC8
 	adds r0, r5, 0
 	bl FieldEffectStop
 _080DCAF8:
-	ldr r4, _080DCBB0 @ =gMapObjects
+	ldr r4, _080DCBB0 @ =gObjectEvents
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -3890,7 +3890,7 @@ _080DCAF8:
 	lsls r0, 2
 	adds r0, r4
 	ldrb r0, [r0, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetObjectEventGraphicsInfo
 	mov r1, sp
 	ldrb r2, [r1]
 	lsls r1, r2, 3
@@ -3975,7 +3975,7 @@ _080DCBA8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DCBB0: .4byte gMapObjects
+_080DCBB0: .4byte gObjectEvents
 _080DCBB4: .4byte gSprites
 	thumb_func_end sub_80DCAC8
 
@@ -4217,14 +4217,14 @@ _080DCD5E:
 	lsls r0, r7, 3
 	adds r0, r7
 	lsls r0, 2
-	ldr r1, _080DCDF8 @ =gMapObjects
+	ldr r1, _080DCDF8 @ =gObjectEvents
 	adds r4, r0, r1
 	ldrb r0, [r4]
 	lsls r0, 31
 	cmp r0, 0
 	beq _080DCE00
 	ldrb r0, [r4, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetObjectEventGraphicsInfo
 	ldrb r1, [r4, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -4291,7 +4291,7 @@ _080DCDD8:
 	strb r0, [r2]
 	b _080DCE0A
 	.align 2, 0
-_080DCDF8: .4byte gMapObjects
+_080DCDF8: .4byte gObjectEvents
 _080DCDFC: .4byte gSprites
 _080DCE00:
 	adds r0, r7, 0x1

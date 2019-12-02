@@ -26,7 +26,7 @@ struct Tileset
     /*0x14*/ void *metatileAttributes;
 };
 
-struct MapData
+struct MapLayout
 {
     /*0x00*/ s32 width;
     /*0x04*/ s32 height;
@@ -38,14 +38,14 @@ struct MapData
     /*0x19*/ u8 unk19;
 };
 
-struct BackupMapData
+struct BackupMapLayout
 {
     s32 Xsize;
     s32 Ysize;
     u16 *map;
 };
 
-union __attribute__((packed)) MapObjectRange {
+union __attribute__((packed)) ObjectEventRange {
     u8 as_byte;
     struct __attribute__((packed)) {
         u8 x:4;
@@ -53,7 +53,7 @@ union __attribute__((packed)) MapObjectRange {
     } __attribute__((aligned (1))) as_nybbles;
 } __attribute__((aligned (1)));
 
-struct MapObjectTemplate
+struct ObjectEventTemplate
 {
     /*0x00*/ u8 localId;
     /*0x01*/ u8 graphicsId;
@@ -123,12 +123,12 @@ struct BgEvent
 
 struct MapEvents
 {
-    u8 mapObjectCount;
+    u8 objectEventCount;
     u8 warpCount;
     u8 coordEventCount;
     u8 bgEventCount;
 
-    struct MapObjectTemplate *mapObjects;
+    struct ObjectEventTemplate *objectEvents;
     struct WarpEvent *warps;
     struct CoordEvent *coordEvents;
     struct BgEvent *bgEvents;
@@ -150,12 +150,12 @@ struct MapConnections
 
 struct MapHeader
 {
-    /* 0x00 */ struct MapData *mapData;
+    /* 0x00 */ struct MapLayout *mapLayout;
     /* 0x04 */ struct MapEvents *events;
     /* 0x08 */ u8 *mapScripts;
     /* 0x0C */ struct MapConnections *connections;
     /* 0x10 */ u16 music;
-    /* 0x12 */ u16 mapDataId;
+    /* 0x12 */ u16 mapLayoutId;
     /* 0x14 */ u8 regionMapSectionId;
     /* 0x15 */ u8 cave;
     /* 0x16 */ u8 weather;
@@ -166,7 +166,7 @@ struct MapHeader
     /* 0x1B */ u8 battleType;
 };
 
-struct MapObject
+struct ObjectEvent
 {
     /*0x00*/ u32 active:1;
              u32 mapobj_bit_1:1;
@@ -214,7 +214,7 @@ struct MapObject
     /*0x14*/ struct Coords16 coords3;
     /*0x18*/ u8 facingDirection:4;  //current direction?
     /*0x18*/ u8 placeholder18:4;
-    /*0x19*/ union MapObjectRange range;
+    /*0x19*/ union ObjectEventRange range;
     /*0x1A*/ u8 mapobj_unk_1A;
     /*0x1B*/ u8 mapobj_unk_1B;
     /*0x1C*/ u8 mapobj_unk_1C;
@@ -227,7 +227,7 @@ struct MapObject
     /*size = 0x24*/
 };
 
-struct MapObjectGraphicsInfo
+struct ObjectEventGraphicsInfo
 {
     /*0x00*/ u16 tileTag;
     /*0x02*/ u16 paletteTag1;
@@ -309,8 +309,8 @@ struct Camera
     s32 y;
 };
 
-extern struct MapObject gMapObjects[NUM_FIELD_OBJECTS];
-extern u8 gSelectedEventObject;
+extern struct ObjectEvent gObjectEvents[NUM_FIELD_OBJECTS];
+extern u8 gSelectedObjectEvent;
 extern struct MapHeader gMapHeader;
 extern struct PlayerAvatar gPlayerAvatar;
 extern struct Camera gCamera;

@@ -627,7 +627,7 @@ static void sub_8110D94(void)
 
 static void sub_8110E20(void)
 {
-    VarSet(VAR_0x40AE, gSaveBlock1Ptr->mapDataId);
+    VarSet(VAR_0x40AE, gSaveBlock1Ptr->mapLayoutId);
 }
 
 static void sub_8110E3C(void)
@@ -984,11 +984,11 @@ void sub_8111708(void)
 {
     struct MapHeader sp0;
 
-    gSaveBlock1Ptr->mapDataId = VarGet(VAR_0x40AE);
-    if (gSaveBlock1Ptr->mapDataId == 0)
+    gSaveBlock1Ptr->mapLayoutId = VarGet(VAR_0x40AE);
+    if (gSaveBlock1Ptr->mapLayoutId == 0)
     {
         sp0 = *Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
-        gSaveBlock1Ptr->mapDataId = sp0.mapDataId;
+        gSaveBlock1Ptr->mapLayoutId = sp0.mapLayoutId;
     }
 }
 
@@ -1532,12 +1532,12 @@ void sub_8112450(void)
 
 void sub_811246C(struct Sprite *sprite)
 {
-    struct MapObject *mapObject = &gMapObjects[sprite->data[0]];
+    struct ObjectEvent *mapObject = &gObjectEvents[sprite->data[0]];
     if (mapObject->localId == 0xFF)
     {
         if (gUnknown_203AF9A[0][0] != 0xFF)
         {
-            FieldObjectSetHeldMovement(mapObject, gUnknown_203AF9A[0][0]);
+            ObjectEventSetHeldMovement(mapObject, gUnknown_203AF9A[0][0]);
             gUnknown_203AF9A[0][0] = 0xFF;
         }
         if (gUnknown_203AF9A[0][1] != 0xFF)
@@ -1551,7 +1551,7 @@ void sub_811246C(struct Sprite *sprite)
     {
         if (gUnknown_203AF9A[mapObject->localId][0] != 0xFF)
         {
-            FieldObjectSetHeldMovement(mapObject, gUnknown_203AF9A[mapObject->localId][0]);
+            ObjectEventSetHeldMovement(mapObject, gUnknown_203AF9A[mapObject->localId][0]);
             gUnknown_203AF9A[mapObject->localId][0] = 0xFF;
         }
         sub_8063E28(mapObject, sprite);

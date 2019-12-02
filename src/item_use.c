@@ -235,7 +235,7 @@ static void sub_80A11C0(u8 taskId)
 {
     if (IsWeatherNotFadingIn() == TRUE)
     {
-        UnfreezeMapObjects();
+        UnfreezeObjectEvents();
         ScriptContext2_Disable();
         DestroyTask(taskId);
     }

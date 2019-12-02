@@ -17,7 +17,7 @@ ScriptMovement_StartObjectMovementScript: @ 8097434
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	beq _08097456
@@ -61,7 +61,7 @@ ScriptMovement_IsObjectMovementFinished: @ 809748C
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _080974CE
@@ -480,7 +480,7 @@ _0809777C:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080977A8 @ =gMapObjects
+	ldr r1, _080977A8 @ =gObjectEvents
 	adds r0, r1
 	bl npc_sync_anim_pause_bits
 _08097792:
@@ -495,7 +495,7 @@ _08097792:
 	bx r0
 	.align 2, 0
 _080977A4: .4byte gTasks+0x8
-_080977A8: .4byte gMapObjects
+_080977A8: .4byte gObjectEvents
 	thumb_func_end UnfreezeObjects
 
 	thumb_func_start Task_80A244C
@@ -557,15 +557,15 @@ sub_80977F0: @ 80977F0
 	lsls r0, r4, 3
 	adds r0, r4
 	lsls r0, 2
-	ldr r1, _08097850 @ =gMapObjects
+	ldr r1, _08097850 @ =gObjectEvents
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl FieldObjectIsSpecialAnimActive
+	bl ObjectEventIsSpecialAnimActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _08097838
 	adds r0, r4, 0
-	bl FieldObjectClearHeldMovementIfFinished
+	bl ObjectEventClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809786A
@@ -577,13 +577,13 @@ _08097838:
 	adds r1, r5, 0
 	bl sub_80976A8
 	adds r0, r4, 0
-	bl FreezeMapObject
+	bl FreezeObjectEvent
 	b _0809786A
 	.align 2, 0
-_08097850: .4byte gMapObjects
+_08097850: .4byte gObjectEvents
 _08097854:
 	adds r0, r4, 0
-	bl FieldObjectSetHeldMovement
+	bl ObjectEventSetHeldMovement
 	lsls r0, 24
 	cmp r0, 0
 	bne _0809786A

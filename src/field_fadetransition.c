@@ -350,7 +350,7 @@ static void sub_807DFBC(u8 taskId)
         {
             PlayerGetDestCoords(&task->data[12], &task->data[13]);
             sub_807DCB0(TRUE);
-            FieldObjectSetHeldMovement(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)], 16);
+            ObjectEventSetHeldMovement(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0)], 16);
             task->data[0] = 8;
         }
         break;
@@ -365,7 +365,7 @@ static void sub_807DFBC(u8 taskId)
     case 9:
         if (sub_807E418() && walkrun_is_standing_still() && !FieldIsDoorAnimationRunning() && !FuncIsActiveTask(sub_807F204))
         {
-            FieldObjectClearHeldMovementIfFinished(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]);
+            ObjectEventClearHeldMovementIfFinished(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0)]);
             task->data[0] = 4;
         }
         break;
@@ -374,7 +374,7 @@ static void sub_807DFBC(u8 taskId)
         if (sub_807E418())
         {
             sub_807DCB0(TRUE);
-            FieldObjectSetHeldMovement(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)], 16);
+            ObjectEventSetHeldMovement(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0)], 16);
             task->data[0] = 2;
         }
         break;
@@ -382,7 +382,7 @@ static void sub_807DFBC(u8 taskId)
         if (walkrun_is_standing_still())
         {
             task->data[1] = FieldAnimateDoorClose(*x, *y);
-            FieldObjectClearHeldMovementIfFinished(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]);
+            ObjectEventClearHeldMovementIfFinished(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0)]);
             task->data[0] = 3;
         }
         break;
@@ -391,7 +391,7 @@ static void sub_807DFBC(u8 taskId)
             task->data[0] = 4;
         break;
     case 4:
-        UnfreezeMapObjects();
+        UnfreezeObjectEvents();
         ScriptContext2_Disable();
         DestroyTask(taskId);
         break;
@@ -416,7 +416,7 @@ static void task_map_chg_seq_0807E20C(u8 taskId)
         if (sub_807E418())
         {
             sub_807DCB0(TRUE);
-            FieldObjectSetHeldMovement(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)], sub_8063F84(GetPlayerFacingDirection()));
+            ObjectEventSetHeldMovement(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0)], sub_8063F84(GetPlayerFacingDirection()));
             task->data[0] = 2;
         }
         break;
@@ -427,7 +427,7 @@ static void task_map_chg_seq_0807E20C(u8 taskId)
         }
         break;
     case 3:
-        UnfreezeMapObjects();
+        UnfreezeObjectEvents();
         ScriptContext2_Disable();
         DestroyTask(taskId);
         break;
@@ -446,7 +446,7 @@ static void task_map_chg_seq_0807E2CC(u8 taskId)
     case 1:
         if (sub_807E418())
         {
-            UnfreezeMapObjects();
+            UnfreezeObjectEvents();
             ScriptContext2_Disable();
             DestroyTask(taskId);
         }
@@ -467,7 +467,7 @@ static void sub_807E31C(u8 taskId)
     case 1:
         if (sub_807E418() && sub_805DC24() != TRUE)
         {
-            UnfreezeMapObjects();
+            UnfreezeObjectEvents();
             ScriptContext2_Disable();
             DestroyTask(taskId);
         }
@@ -753,8 +753,8 @@ static void sub_807E80C(u8 taskId)
     case 1:
         if (task->data[1] < 0 || gTasks[task->data[1]].isActive != TRUE)
         {
-            FieldObjectClearAnimIfSpecialAnimActive(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]);
-            FieldObjectSetHeldMovement(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)], 17);
+            ObjectEventClearAnimIfSpecialAnimActive(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0)]);
+            ObjectEventSetHeldMovement(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0)], 17);
             task->data[0] = 2;
         }
         break;
@@ -762,7 +762,7 @@ static void sub_807E80C(u8 taskId)
         if (walkrun_is_standing_still())
         {
             task->data[1] = FieldAnimateDoorClose(*xp, *yp - 1);
-            FieldObjectClearHeldMovementIfFinished(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]);
+            ObjectEventClearHeldMovementIfFinished(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0)]);
             sub_807DCB0(FALSE);
             task->data[0] = 3;
         }
@@ -792,7 +792,7 @@ static void sub_807E80C(u8 taskId)
 static void sub_807E980(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
-    struct MapObject *playerObj = &gMapObjects[gPlayerAvatar.mapObjectId];
+    struct ObjectEvent *playerObj = &gObjectEvents[gPlayerAvatar.mapObjectId];
     struct Sprite *playerSpr = &gSprites[gPlayerAvatar.spriteId];
     switch (data[0])
     {
@@ -803,7 +803,7 @@ static void sub_807E980(u8 taskId)
         data[0]++;
         break;
     case 1:
-        if (!FieldObjectIsMovementOverridden(playerObj) || FieldObjectClearHeldMovementIfFinished(playerObj))
+        if (!ObjectEventIsMovementOverridden(playerObj) || ObjectEventClearHeldMovementIfFinished(playerObj))
         {
             if (data[15] != 0)
                 data[15]--;
@@ -844,7 +844,7 @@ static void sub_807E980(u8 taskId)
 static void sub_807EAC4(s16 a0, s16 a1, s16 *a2, s16 *a3, s16 *a4)
 {
     struct Sprite *playerSpr = &gSprites[gPlayerAvatar.spriteId];
-    struct MapObject *playerObj = &gMapObjects[gPlayerAvatar.mapObjectId];
+    struct ObjectEvent *playerObj = &gObjectEvents[gPlayerAvatar.mapObjectId];
     if (a1 > 0 || *a4 > 6)
         *a3 += a1;
     *a2 += a0;
@@ -853,13 +853,13 @@ static void sub_807EAC4(s16 a0, s16 a1, s16 *a2, s16 *a3, s16 *a4)
     playerSpr->pos2.y = *a3 >> 5;
     if (playerObj->mapobj_bit_7)
     {
-        FieldObjectForceSetSpecialAnim(playerObj, GetStepInPlaceDelay16AnimId(GetPlayerFacingDirection()));
+        ObjectEventForceSetSpecialAnim(playerObj, GetStepInPlaceDelay16AnimId(GetPlayerFacingDirection()));
     }
 }
 
 static void sub_807EB64(u16 a0, s16 *a1, s16 *a2)
 {
-    FieldObjectForceSetSpecialAnim(&gMapObjects[gPlayerAvatar.mapObjectId], GetStepInPlaceDelay16AnimId(GetPlayerFacingDirection()));
+    ObjectEventForceSetSpecialAnim(&gObjectEvents[gPlayerAvatar.mapObjectId], GetStepInPlaceDelay16AnimId(GetPlayerFacingDirection()));
     sub_807EBBC(a0, a1, a2);
 }
 
@@ -931,7 +931,7 @@ static void sub_807ECBC(s16 *a0, s16 *a1, s16 *a2, s16 *a3, s16 *a4)
         r1 = 3;
     else
         r1 = 4;
-    FieldObjectForceSetSpecialAnim(&gMapObjects[gPlayerAvatar.mapObjectId], sub_8064270(r1));
+    ObjectEventForceSetSpecialAnim(&gObjectEvents[gPlayerAvatar.mapObjectId], sub_8064270(r1));
     sub_807EBBC(behavior, a0, a1);
     *a2 = *a0 * 16;
     *a3 = *a1 * 16;

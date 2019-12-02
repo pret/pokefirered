@@ -3,7 +3,7 @@
 
 #include "global.h"
 
-void UnfreezeMapObjects(void);
+void UnfreezeObjectEvents(void);
 void sub_8069058(u8, u8);
 
 #endif

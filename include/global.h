@@ -564,7 +564,7 @@ union QuestLogMovement
     } ident_struct;
 };
 
-struct QuestLogMapObject
+struct QuestLogObjectEvent
 {
     /*0x00*/ u8 active:1;
     /*0x00*/ u8 mapobj_bit_3:1;
@@ -609,7 +609,7 @@ struct QuestLog
     /*0x0003*/ s8 unk_003;
     /*0x0004*/ s16 unk_004;
     /*0x0006*/ s16 unk_006;
-    /*0x0008*/ struct QuestLogMapObject unk_008[MAP_OBJECTS_COUNT];
+    /*0x0008*/ struct QuestLogObjectEvent unk_008[MAP_OBJECTS_COUNT];
 
     // These arrays hold the game state for
     // playing back the quest log
@@ -727,7 +727,7 @@ struct SaveBlock1
     /*0x002E*/ u8 weather;
     /*0x002F*/ u8 filler_2F;
     /*0x0030*/ u8 flashLevel;
-    /*0x0032*/ u16 mapDataId;
+    /*0x0032*/ u16 mapLayoutId;
     /*0x0034*/ u8 playerPartyCount;
     /*0x0038*/ struct Pokemon playerParty[PARTY_SIZE];
     /*0x0290*/ u32 money;
@@ -744,8 +744,8 @@ struct SaveBlock1
     /*0x0632*/ u8 field_632[6]; // unused?
     /*0x0638*/ u16 trainerRematchStepCounter;
     /*0x063A*/ u8 ALIGNED(2) trainerRematches[100];
-    /*0x06A0*/ struct MapObject mapObjects[MAP_OBJECTS_COUNT];
-    /*0x08E0*/ struct MapObjectTemplate mapObjectTemplates[64];
+    /*0x06A0*/ struct ObjectEvent objectEvents[MAP_OBJECTS_COUNT];
+    /*0x08E0*/ struct ObjectEventTemplate mapObjectTemplates[64];
     /*0x0EE0*/ u8 flags[FLAGS_COUNT];
     /*0x1000*/ u16 vars[VARS_COUNT];
     /*0x1200*/ u32 gameStats[NUM_GAME_STATS];

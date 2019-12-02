@@ -2067,7 +2067,7 @@ mapldr_08084390: @ 8084390
 	ldr r0, _080843E8 @ =c3_080843F8
 	movs r1, 0
 	bl CreateTask
-	ldr r4, _080843EC @ =gMapObjects
+	ldr r4, _080843EC @ =gObjectEvents
 	ldr r3, _080843F0 @ =gPlayerAvatar
 	ldrb r1, [r3, 0x5]
 	lsls r0, r1, 3
@@ -2089,7 +2089,7 @@ mapldr_08084390: @ 8084390
 	lsls r0, 2
 	adds r0, r4
 	movs r1, 0x3
-	bl FieldObjectTurn
+	bl ObjectEventTurn
 _080843D2:
 	bl ScriptContext2_Enable
 	bl FreezeEventObjects
@@ -2101,7 +2101,7 @@ _080843D2:
 	bx r0
 	.align 2, 0
 _080843E8: .4byte c3_080843F8
-_080843EC: .4byte gMapObjects
+_080843EC: .4byte gObjectEvents
 _080843F0: .4byte gPlayerAvatar
 _080843F4: .4byte gFieldCallback
 	thumb_func_end mapldr_08084390
@@ -2139,7 +2139,7 @@ _0808442A:
 	cmp r0, 0
 	bne _08084444
 	bl ScriptContext2_Disable
-	bl UnfreezeMapObjects
+	bl UnfreezeObjectEvents
 	adds r0, r5, 0
 	bl DestroyTask
 _08084444:
@@ -2214,7 +2214,7 @@ sub_80844BC: @ 80844BC
 	lsls r5, r0, 3
 	adds r5, r0
 	lsls r5, 2
-	ldr r0, _0808455C @ =gMapObjects
+	ldr r0, _0808455C @ =gObjectEvents
 	mov r8, r0
 	add r5, r8
 	ldrb r0, [r6, 0x4]
@@ -2243,7 +2243,7 @@ sub_80844BC: @ 80844BC
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl FieldObjectSetHeldMovement
+	bl ObjectEventSetHeldMovement
 	adds r3, r4, 0
 	adds r3, 0x42
 	ldrb r0, [r3]
@@ -2279,7 +2279,7 @@ sub_80844BC: @ 80844BC
 	bx r1
 	.align 2, 0
 _08084558: .4byte gPlayerAvatar
-_0808455C: .4byte gMapObjects
+_0808455C: .4byte gObjectEvents
 _08084560: .4byte gSprites
 	thumb_func_end sub_80844BC
 
@@ -2331,7 +2331,7 @@ sub_8084580: @ 8084580
 	movs r0, 0x1
 	strh r0, [r5, 0xA]
 	strh r1, [r5, 0xC]
-	ldr r2, _080845F0 @ =gMapObjects
+	ldr r2, _080845F0 @ =gObjectEvents
 	ldrb r0, [r6, 0x5]
 	lsls r1, r0, 3
 	adds r1, r0
@@ -2355,7 +2355,7 @@ sub_8084580: @ 8084580
 _080845E4: .4byte gPlayerAvatar
 _080845E8: .4byte gSprites
 _080845EC: .4byte gSpriteCoordOffsetY
-_080845F0: .4byte gMapObjects
+_080845F0: .4byte gObjectEvents
 	thumb_func_end sub_8084580
 
 	thumb_func_start sub_80845F4
@@ -2367,7 +2367,7 @@ sub_80845F4: @ 80845F4
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080846A4 @ =gMapObjects
+	ldr r1, _080846A4 @ =gObjectEvents
 	adds r6, r0, r1
 	ldrb r1, [r2, 0x4]
 	lsls r0, r1, 4
@@ -2450,7 +2450,7 @@ _08084698:
 	bx r1
 	.align 2, 0
 _080846A0: .4byte gPlayerAvatar
-_080846A4: .4byte gMapObjects
+_080846A4: .4byte gObjectEvents
 _080846A8: .4byte gSprites
 	thumb_func_end sub_80845F4
 
@@ -2516,7 +2516,7 @@ sub_8084708: @ 8084708
 	strb r0, [r1, 0x6]
 	bl ScriptContext2_Disable
 	bl CameraObjectReset1
-	bl UnfreezeMapObjects
+	bl UnfreezeObjectEvents
 	bl InstallCameraPanAheadCallback
 	mov r4, sp
 	adds r4, 0x2
@@ -2650,15 +2650,15 @@ sub_8084820: @ 8084820
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0808488C @ =gMapObjects
+	ldr r1, _0808488C @ =gObjectEvents
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl FieldObjectIsMovementOverridden
+	bl ObjectEventIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808484A
 	adds r0, r4, 0
-	bl FieldObjectClearHeldMovementIfFinished
+	bl ObjectEventClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808487E
@@ -2671,7 +2671,7 @@ _0808484A:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetHeldMovement
+	bl ObjectEventSetHeldMovement
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	movs r1, 0
@@ -2693,7 +2693,7 @@ _0808487E:
 	bx r1
 	.align 2, 0
 _08084888: .4byte gPlayerAvatar
-_0808488C: .4byte gMapObjects
+_0808488C: .4byte gObjectEvents
 	thumb_func_end sub_8084820
 
 	thumb_func_start sub_8084890
@@ -2944,7 +2944,7 @@ sub_8084A5C: @ 8084A5C
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _08084AC0 @ =gMapObjects
+	ldr r0, _08084AC0 @ =gObjectEvents
 	adds r4, r0
 	movs r0, 0x4
 	bl sub_8063EB8
@@ -2952,7 +2952,7 @@ sub_8084A5C: @ 8084A5C
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetHeldMovement
+	bl ObjectEventSetHeldMovement
 	mov r4, sp
 	adds r4, 0x2
 	mov r0, sp
@@ -2979,7 +2979,7 @@ sub_8084A5C: @ 8084A5C
 	b _08084AC6
 	.align 2, 0
 _08084ABC: .4byte gPlayerAvatar
-_08084AC0: .4byte gMapObjects
+_08084AC0: .4byte gObjectEvents
 _08084AC4:
 	movs r1, 0
 _08084AC6:
@@ -3189,23 +3189,23 @@ sub_8084C3C: @ 8084C3C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08084C98 @ =gMapObjects
+	ldr r1, _08084C98 @ =gObjectEvents
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl FieldObjectClearHeldMovementIfFinished
+	bl ObjectEventClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08084C8A
 	bl CameraObjectReset1
 	bl ScriptContext2_Disable
-	bl UnfreezeMapObjects
+	bl UnfreezeObjectEvents
 	movs r0, 0x4
 	bl sub_8063F84
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetHeldMovement
+	bl ObjectEventSetHeldMovement
 	ldr r0, _08084C9C @ =sub_8084A24
 	bl FindTaskIdByFunc
 	lsls r0, 24
@@ -3220,7 +3220,7 @@ _08084C8A:
 	bx r1
 	.align 2, 0
 _08084C94: .4byte gPlayerAvatar
-_08084C98: .4byte gMapObjects
+_08084C98: .4byte gObjectEvents
 _08084C9C: .4byte sub_8084A24
 	thumb_func_end sub_8084C3C
 
@@ -3273,7 +3273,7 @@ _08084CEA:
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _08084D20 @ =gMapObjects
+	ldr r0, _08084D20 @ =gObjectEvents
 	adds r1, r0
 	ldr r2, [r2]
 	adds r0, r4, 0
@@ -3288,7 +3288,7 @@ _08084CEA:
 _08084D14: .4byte gUnknown_83CC084
 _08084D18: .4byte gTasks
 _08084D1C: .4byte gPlayerAvatar
-_08084D20: .4byte gMapObjects
+_08084D20: .4byte gObjectEvents
 	thumb_func_end sub_8084CD8
 
 	thumb_func_start sub_8084D24
@@ -3317,12 +3317,12 @@ waterfall_1_do_anim_probably: @ 8084D44
 	adds r5, r1, 0
 	bl ScriptContext2_Enable
 	adds r0, r5, 0
-	bl FieldObjectIsMovementOverridden
+	bl ObjectEventIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	bne _08084D74
 	adds r0, r5, 0
-	bl FieldObjectClearHeldMovementIfFinished
+	bl ObjectEventClearHeldMovementIfFinished
 	ldr r1, _08084D7C @ =gFieldEffectArguments
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
@@ -3374,7 +3374,7 @@ sub_8084DA4: @ 8084DA4
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetHeldMovement
+	bl ObjectEventSetHeldMovement
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	strh r0, [r5, 0x8]
@@ -3390,7 +3390,7 @@ sub_8084DCC: @ 8084DCC
 	adds r5, r0, 0
 	adds r4, r1, 0
 	adds r0, r4, 0
-	bl FieldObjectClearHeldMovementIfFinished
+	bl ObjectEventClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _08084DE2
@@ -3537,7 +3537,7 @@ dive_3_unknown: @ 8084ED4
 	lsls r0, 24
 	cmp r0, 0
 	bne _08084F18
-	ldr r2, _08084F20 @ =gMapObjects
+	ldr r2, _08084F20 @ =gObjectEvents
 	ldr r0, _08084F24 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -3560,7 +3560,7 @@ _08084F18:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08084F20: .4byte gMapObjects
+_08084F20: .4byte gObjectEvents
 _08084F24: .4byte gPlayerAvatar
 _08084F28: .4byte sub_8084E60
 	thumb_func_end dive_3_unknown
@@ -3600,7 +3600,7 @@ _08084F58:
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _08084F98 @ =gMapObjects
+	ldr r0, _08084F98 @ =gObjectEvents
 	adds r1, r0
 	ldrb r0, [r5, 0x4]
 	lsls r2, r0, 4
@@ -3621,7 +3621,7 @@ _08084F58:
 _08084F8C: .4byte gUnknown_83CC0A4
 _08084F90: .4byte gTasks
 _08084F94: .4byte gPlayerAvatar
-_08084F98: .4byte gMapObjects
+_08084F98: .4byte gObjectEvents
 _08084F9C: .4byte gSprites
 	thumb_func_end sub_8084F44
 
@@ -3946,7 +3946,7 @@ _080851FC:
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _0808523C @ =gMapObjects
+	ldr r0, _0808523C @ =gObjectEvents
 	adds r1, r0
 	ldrb r0, [r5, 0x4]
 	lsls r2, r0, 4
@@ -3967,7 +3967,7 @@ _080851FC:
 _08085230: .4byte gUnknown_83CC0BC
 _08085234: .4byte gTasks
 _08085238: .4byte gPlayerAvatar
-_0808523C: .4byte gMapObjects
+_0808523C: .4byte gObjectEvents
 _08085240: .4byte gSprites
 	thumb_func_end sub_80851E8
 
@@ -4070,7 +4070,7 @@ sub_80852C0: @ 80852C0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetHeldMovement
+	bl ObjectEventSetHeldMovement
 _08085308:
 	movs r0, 0
 	pop {r4}
@@ -4084,7 +4084,7 @@ _08085310: .4byte gSprites
 sub_8085314: @ 8085314
 	push {lr}
 	adds r0, r1, 0
-	bl FieldObjectClearHeldMovementIfFinished
+	bl ObjectEventClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808533E
@@ -4092,7 +4092,7 @@ sub_8085314: @ 8085314
 	movs r0, 0
 	strb r0, [r1, 0x6]
 	bl ScriptContext2_Disable
-	bl UnfreezeMapObjects
+	bl UnfreezeObjectEvents
 	ldr r0, _08085348 @ =sub_80851E8
 	bl FindTaskIdByFunc
 	lsls r0, 24
@@ -4209,7 +4209,7 @@ _080853F8:
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _08085438 @ =gMapObjects
+	ldr r0, _08085438 @ =gObjectEvents
 	adds r1, r0
 	ldrb r0, [r5, 0x4]
 	lsls r2, r0, 4
@@ -4230,7 +4230,7 @@ _080853F8:
 _0808542C: .4byte gUnknown_83CC0CC
 _08085430: .4byte gTasks
 _08085434: .4byte gPlayerAvatar
-_08085438: .4byte gMapObjects
+_08085438: .4byte gObjectEvents
 _0808543C: .4byte gSprites
 	thumb_func_end sub_80853E4
 
@@ -4266,7 +4266,7 @@ sub_8085470: @ 8085470
 	adds r4, r1, 0
 	adds r6, r2, 0
 	adds r0, r4, 0
-	bl FieldObjectClearHeldMovementIfFinished
+	bl ObjectEventClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080854E4
@@ -4311,7 +4311,7 @@ _080854C4:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetHeldMovement
+	bl ObjectEventSetHeldMovement
 	movs r0, 0x21
 	bl PlaySE
 _080854E4:
@@ -4546,7 +4546,7 @@ sub_8085690: @ 8085690
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080856D8 @ =gMapObjects
+	ldr r1, _080856D8 @ =gObjectEvents
 	adds r6, r0, r1
 	adds r4, r5, 0
 	adds r4, 0x8
@@ -4572,7 +4572,7 @@ sub_8085690: @ 8085690
 	b _08085702
 	.align 2, 0
 _080856D4: .4byte gPlayerAvatar
-_080856D8: .4byte gMapObjects
+_080856D8: .4byte gObjectEvents
 _080856DC:
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
@@ -4610,7 +4610,7 @@ _08085702:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r6, 0
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	bl sub_80555E0
 	bl WarpIntoMap
 	ldr r1, _0808575C @ =gFieldCallback
@@ -4641,12 +4641,12 @@ sub_808576C: @ 808576C
 	adds r4, r0, 0
 	adds r6, r1, 0
 	adds r5, r2, 0
-	bl FieldObjectIsMovementOverridden
+	bl ObjectEventIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808578A
 	adds r0, r4, 0
-	bl FieldObjectClearHeldMovementIfFinished
+	bl ObjectEventClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080857E4
@@ -4673,7 +4673,7 @@ _0808579E:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetHeldMovement
+	bl ObjectEventSetHeldMovement
 	ldrh r1, [r5]
 	movs r2, 0
 	ldrsh r0, [r5, r2]
@@ -4973,7 +4973,7 @@ sub_80859D4: @ 80859D4
 	ldr r1, _08085A14 @ =gFieldCallback
 	movs r0, 0
 	str r0, [r1]
-	ldr r2, _08085A18 @ =gMapObjects
+	ldr r2, _08085A18 @ =gObjectEvents
 	ldr r0, _08085A1C @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -4991,7 +4991,7 @@ sub_80859D4: @ 80859D4
 	bx r0
 	.align 2, 0
 _08085A14: .4byte gFieldCallback
-_08085A18: .4byte gMapObjects
+_08085A18: .4byte gObjectEvents
 _08085A1C: .4byte gPlayerAvatar
 _08085A20: .4byte sub_8085A24
 	thumb_func_end sub_80859D4
@@ -5056,7 +5056,7 @@ sub_8085A80: @ 8085A80
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08085AD8 @ =gMapObjects
+	ldr r1, _08085AD8 @ =gObjectEvents
 	adds r6, r0, r1
 	adds r1, r4, 0
 	adds r1, 0xA
@@ -5088,7 +5088,7 @@ sub_8085A80: @ 8085A80
 	b _08085B10
 	.align 2, 0
 _08085AD4: .4byte gPlayerAvatar
-_08085AD8: .4byte gMapObjects
+_08085AD8: .4byte gObjectEvents
 _08085ADC:
 	movs r2, 0xE
 	ldrsh r0, [r5, r2]
@@ -5125,7 +5125,7 @@ _08085B10:
 	cmp r1, r0
 	bne _08085B58
 	adds r0, r6, 0
-	bl FieldObjectCheckHeldMovementStatus
+	bl ObjectEventCheckHeldMovementStatus
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -5141,7 +5141,7 @@ _08085B10:
 	ands r0, r1
 	strb r0, [r6, 0x3]
 	bl ScriptContext2_Disable
-	bl UnfreezeMapObjects
+	bl UnfreezeObjectEvents
 	ldr r0, _08085B60 @ =sub_8085A24
 	bl FindTaskIdByFunc
 	lsls r0, 24
@@ -5226,7 +5226,7 @@ sub_8085BD0: @ 8085BD0
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08085C5C @ =gMapObjects
+	ldr r1, _08085C5C @ =gObjectEvents
 	adds r5, r0, r1
 	ldrh r1, [r4, 0xA]
 	movs r2, 0xA
@@ -5245,7 +5245,7 @@ _08085C02:
 	add r0, sp
 	ldrb r1, [r0]
 	adds r0, r5, 0
-	bl FieldObjectTurn
+	bl ObjectEventTurn
 	movs r0, 0x8
 	strh r0, [r4, 0xA]
 	ldrh r0, [r4, 0xC]
@@ -5282,7 +5282,7 @@ _08085C4A:
 	.align 2, 0
 _08085C54: .4byte gUnknown_83CC108
 _08085C58: .4byte gPlayerAvatar
-_08085C5C: .4byte gMapObjects
+_08085C5C: .4byte gObjectEvents
 	thumb_func_end sub_8085BD0
 
 	thumb_func_start sub_8085C60
@@ -5299,7 +5299,7 @@ sub_8085C60: @ 8085C60
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08085D2C @ =gMapObjects
+	ldr r1, _08085D2C @ =gObjectEvents
 	adds r3, r0, r1
 	ldrb r1, [r2, 0x4]
 	lsls r0, r1, 4
@@ -5321,7 +5321,7 @@ sub_8085C60: @ 8085C60
 	add r0, sp
 	ldrb r1, [r0]
 	adds r0, r3, 0
-	bl FieldObjectTurn
+	bl ObjectEventTurn
 _08085CAA:
 	ldrh r0, [r5, 0x22]
 	ldrh r1, [r4, 0xE]
@@ -5387,7 +5387,7 @@ _08085D1A:
 	.align 2, 0
 _08085D24: .4byte gUnknown_83CC108
 _08085D28: .4byte gPlayerAvatar
-_08085D2C: .4byte gMapObjects
+_08085D2C: .4byte gObjectEvents
 _08085D30: .4byte gSprites
 	thumb_func_end sub_8085C60
 
@@ -5439,7 +5439,7 @@ mapldr_08085D88: @ 8085D88
 	ldr r1, _08085DCC @ =gFieldCallback
 	movs r0, 0
 	str r0, [r1]
-	ldr r2, _08085DD0 @ =gMapObjects
+	ldr r2, _08085DD0 @ =gObjectEvents
 	ldr r0, _08085DD4 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -5458,7 +5458,7 @@ mapldr_08085D88: @ 8085D88
 	bx r0
 	.align 2, 0
 _08085DCC: .4byte gFieldCallback
-_08085DD0: .4byte gMapObjects
+_08085DD0: .4byte gObjectEvents
 _08085DD4: .4byte gPlayerAvatar
 _08085DD8: .4byte sub_8085DDC
 	thumb_func_end mapldr_08085D88
@@ -5518,7 +5518,7 @@ sub_8085E0C: @ 8085E0C
 	adds r0, r1
 	negs r0, r0
 	strh r0, [r2, 0x26]
-	ldr r3, _08085E94 @ =gMapObjects
+	ldr r3, _08085E94 @ =gObjectEvents
 	ldrb r0, [r5, 0x5]
 	lsls r1, r0, 3
 	adds r1, r0
@@ -5554,7 +5554,7 @@ _08085E82:
 _08085E88: .4byte gPlayerAvatar
 _08085E8C: .4byte gSprites
 _08085E90: .4byte gSpriteCoordOffsetY
-_08085E94: .4byte gMapObjects
+_08085E94: .4byte gObjectEvents
 	thumb_func_end sub_8085E0C
 
 	thumb_func_start sub_8085E98
@@ -5571,7 +5571,7 @@ sub_8085E98: @ 8085E98
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08085F08 @ =gMapObjects
+	ldr r1, _08085F08 @ =gObjectEvents
 	adds r6, r0, r1
 	ldrb r1, [r2, 0x4]
 	lsls r0, r1, 4
@@ -5613,7 +5613,7 @@ sub_8085E98: @ 8085E98
 	.align 2, 0
 _08085F00: .4byte gUnknown_83CC108
 _08085F04: .4byte gPlayerAvatar
-_08085F08: .4byte gMapObjects
+_08085F08: .4byte gObjectEvents
 _08085F0C: .4byte gSprites
 _08085F10:
 	ldrb r1, [r5, 0x5]
@@ -5670,7 +5670,7 @@ _08085F5A:
 	add r0, sp
 	ldrb r1, [r0]
 	adds r0, r6, 0
-	bl FieldObjectTurn
+	bl ObjectEventTurn
 _08085F7C:
 	movs r1, 0x26
 	ldrsh r0, [r5, r1]
@@ -5704,7 +5704,7 @@ sub_8085F9C: @ 8085F9C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08086020 @ =gMapObjects
+	ldr r1, _08086020 @ =gObjectEvents
 	adds r5, r0, r1
 	ldrh r0, [r4, 0xA]
 	subs r0, 0x1
@@ -5718,7 +5718,7 @@ sub_8085F9C: @ 8085F9C
 	add r0, sp
 	ldrb r1, [r0]
 	adds r0, r5, 0
-	bl FieldObjectTurn
+	bl ObjectEventTurn
 	movs r0, 0x8
 	strh r0, [r4, 0xA]
 	ldrh r0, [r4, 0xC]
@@ -5737,7 +5737,7 @@ sub_8085F9C: @ 8085F9C
 	bne _08086010
 	bl ScriptContext2_Disable
 	bl CameraObjectReset1
-	bl UnfreezeMapObjects
+	bl UnfreezeObjectEvents
 	ldr r0, _08086024 @ =sub_8085DDC
 	bl FindTaskIdByFunc
 	lsls r0, 24
@@ -5751,7 +5751,7 @@ _08086010:
 	.align 2, 0
 _08086018: .4byte gUnknown_83CC108
 _0808601C: .4byte gPlayerAvatar
-_08086020: .4byte gMapObjects
+_08086020: .4byte gObjectEvents
 _08086024: .4byte sub_8085DDC
 	thumb_func_end sub_8085F9C
 
@@ -7014,7 +7014,7 @@ sub_80869C0: @ 80869C0
 	adds r0, r6, 0
 	mov r1, r8
 	bl PlayerGetDestCoords
-	ldr r2, _08086A1C @ =gMapObjects
+	ldr r2, _08086A1C @ =gObjectEvents
 	ldrb r1, [r5, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -7035,7 +7035,7 @@ sub_80869C0: @ 80869C0
 	bx r0
 	.align 2, 0
 _08086A18: .4byte gPlayerAvatar
-_08086A1C: .4byte gMapObjects
+_08086A1C: .4byte gObjectEvents
 	thumb_func_end sub_80869C0
 
 	thumb_func_start sub_8086A20
@@ -7047,15 +7047,15 @@ sub_8086A20: @ 8086A20
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08086A68 @ =gMapObjects
+	ldr r1, _08086A68 @ =gObjectEvents
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl FieldObjectIsMovementOverridden
+	bl ObjectEventIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086A4A
 	adds r0, r4, 0
-	bl FieldObjectClearHeldMovementIfFinished
+	bl ObjectEventClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086A5C
@@ -7063,7 +7063,7 @@ _08086A4A:
 	bl sub_805CB70
 	adds r0, r4, 0
 	movs r1, 0x45
-	bl FieldObjectSetHeldMovement
+	bl ObjectEventSetHeldMovement
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	strh r0, [r5, 0x8]
@@ -7073,7 +7073,7 @@ _08086A5C:
 	bx r0
 	.align 2, 0
 _08086A64: .4byte gPlayerAvatar
-_08086A68: .4byte gMapObjects
+_08086A68: .4byte gObjectEvents
 	thumb_func_end sub_8086A20
 
 	thumb_func_start sub_8086A6C
@@ -7085,9 +7085,9 @@ sub_8086A6C: @ 8086A6C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08086AAC @ =gMapObjects
+	ldr r1, _08086AAC @ =gObjectEvents
 	adds r0, r1
-	bl FieldObjectCheckHeldMovementStatus
+	bl ObjectEventCheckHeldMovementStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086AA2
@@ -7109,7 +7109,7 @@ _08086AA2:
 	bx r0
 	.align 2, 0
 _08086AA8: .4byte gPlayerAvatar
-_08086AAC: .4byte gMapObjects
+_08086AAC: .4byte gObjectEvents
 _08086AB0: .4byte gFieldEffectArguments
 	thumb_func_end sub_8086A6C
 
@@ -7127,7 +7127,7 @@ sub_8086AB4: @ 8086AB4
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _08086B28 @ =gMapObjects
+	ldr r0, _08086B28 @ =gObjectEvents
 	adds r4, r0
 	movs r0, 0x2
 	bl sub_805C808
@@ -7137,7 +7137,7 @@ sub_8086AB4: @ 8086AB4
 	adds r0, r4, 0
 	bl EventObjectSetGraphicsId
 	adds r0, r4, 0
-	bl FieldObjectClearHeldMovementIfFinished
+	bl ObjectEventClearHeldMovementIfFinished
 	ldrb r0, [r4, 0x18]
 	lsrs r0, 4
 	bl sub_80641C0
@@ -7145,7 +7145,7 @@ sub_8086AB4: @ 8086AB4
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetHeldMovement
+	bl ObjectEventSetHeldMovement
 	ldr r1, _08086B2C @ =gFieldEffectArguments
 	movs r2, 0xA
 	ldrsh r0, [r6, r2]
@@ -7167,7 +7167,7 @@ _08086B1E:
 	bx r0
 	.align 2, 0
 _08086B24: .4byte gPlayerAvatar
-_08086B28: .4byte gMapObjects
+_08086B28: .4byte gObjectEvents
 _08086B2C: .4byte gFieldEffectArguments
 	thumb_func_end sub_8086AB4
 
@@ -7179,10 +7179,10 @@ sub_8086B30: @ 8086B30
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08086BA0 @ =gMapObjects
+	ldr r1, _08086BA0 @ =gObjectEvents
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl FieldObjectClearHeldMovementIfFinished
+	bl ObjectEventClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086B96
@@ -7199,11 +7199,11 @@ sub_8086B30: @ 8086B30
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetHeldMovement
+	bl ObjectEventSetHeldMovement
 	ldrb r0, [r4, 0x1A]
 	movs r1, 0x1
 	bl sub_80DC44C
-	bl UnfreezeMapObjects
+	bl UnfreezeObjectEvents
 	bl ScriptContext2_Disable
 	movs r0, 0x9
 	bl FieldEffectActiveListRemove
@@ -7220,7 +7220,7 @@ _08086B96:
 	bx r0
 	.align 2, 0
 _08086B9C: .4byte gPlayerAvatar
-_08086BA0: .4byte gMapObjects
+_08086BA0: .4byte gObjectEvents
 _08086BA4: .4byte sub_8086990
 	thumb_func_end sub_8086B30
 
@@ -7299,15 +7299,15 @@ sub_8086C24: @ 8086C24
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08086C6C @ =gMapObjects
+	ldr r1, _08086C6C @ =gObjectEvents
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl FieldObjectIsMovementOverridden
+	bl ObjectEventIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086C4E
 	adds r0, r4, 0
-	bl FieldObjectClearHeldMovementIfFinished
+	bl ObjectEventClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086C60
@@ -7315,7 +7315,7 @@ _08086C4E:
 	bl sub_805CBE8
 	adds r0, r4, 0
 	movs r1, 0x45
-	bl FieldObjectSetHeldMovement
+	bl ObjectEventSetHeldMovement
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	strh r0, [r5, 0x8]
@@ -7325,7 +7325,7 @@ _08086C60:
 	bx r0
 	.align 2, 0
 _08086C68: .4byte gPlayerAvatar
-_08086C6C: .4byte gMapObjects
+_08086C6C: .4byte gObjectEvents
 	thumb_func_end sub_8086C24
 
 	thumb_func_start sub_8086C70
@@ -7337,10 +7337,10 @@ sub_8086C70: @ 8086C70
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08086CA0 @ =gMapObjects
+	ldr r1, _08086CA0 @ =gObjectEvents
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl FieldObjectClearHeldMovementIfFinished
+	bl ObjectEventClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086CEE
@@ -7353,7 +7353,7 @@ sub_8086C70: @ 8086C70
 	b _08086CAE
 	.align 2, 0
 _08086C9C: .4byte gPlayerAvatar
-_08086CA0: .4byte gMapObjects
+_08086CA0: .4byte gObjectEvents
 _08086CA4:
 	movs r0, 0x8
 	ands r0, r1
@@ -7385,7 +7385,7 @@ _08086CD2:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectForceSetSpecialAnim
+	bl ObjectEventForceSetSpecialAnim
 	ldrh r0, [r6, 0x8]
 	adds r0, 0x1
 	strh r0, [r6, 0x8]
@@ -7403,9 +7403,9 @@ sub_8086CF4: @ 8086CF4
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08086D30 @ =gMapObjects
+	ldr r1, _08086D30 @ =gObjectEvents
 	adds r0, r1
-	bl FieldObjectClearHeldMovementIfFinished
+	bl ObjectEventClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086D26
@@ -7424,7 +7424,7 @@ _08086D26:
 	bx r0
 	.align 2, 0
 _08086D2C: .4byte gPlayerAvatar
-_08086D30: .4byte gMapObjects
+_08086D30: .4byte gObjectEvents
 _08086D34: .4byte sub_8086BD0
 	thumb_func_end sub_8086CF4
 
@@ -7596,15 +7596,15 @@ sub_8086E70: @ 8086E70
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08086EC4 @ =gMapObjects
+	ldr r1, _08086EC4 @ =gObjectEvents
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl FieldObjectIsMovementOverridden
+	bl ObjectEventIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086E9A
 	adds r0, r4, 0
-	bl FieldObjectClearHeldMovementIfFinished
+	bl ObjectEventClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086EB8
@@ -7617,7 +7617,7 @@ _08086E9A:
 	bl sub_805CB70
 	adds r0, r4, 0
 	movs r1, 0x45
-	bl FieldObjectSetHeldMovement
+	bl ObjectEventSetHeldMovement
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	strh r0, [r5, 0x8]
@@ -7627,7 +7627,7 @@ _08086EB8:
 	bx r0
 	.align 2, 0
 _08086EC0: .4byte gPlayerAvatar
-_08086EC4: .4byte gMapObjects
+_08086EC4: .4byte gObjectEvents
 	thumb_func_end sub_8086E70
 
 	thumb_func_start sub_8086EC8
@@ -7639,9 +7639,9 @@ sub_8086EC8: @ 8086EC8
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08086F04 @ =gMapObjects
+	ldr r1, _08086F04 @ =gObjectEvents
 	adds r0, r1
-	bl FieldObjectClearHeldMovementIfFinished
+	bl ObjectEventClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086EF8
@@ -7660,7 +7660,7 @@ _08086EF8:
 	bx r0
 	.align 2, 0
 _08086F00: .4byte gPlayerAvatar
-_08086F04: .4byte gMapObjects
+_08086F04: .4byte gObjectEvents
 _08086F08: .4byte gFieldEffectArguments
 	thumb_func_end sub_8086EC8
 
@@ -7678,7 +7678,7 @@ sub_8086F0C: @ 8086F0C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08086F60 @ =gMapObjects
+	ldr r1, _08086F60 @ =gObjectEvents
 	adds r5, r0, r1
 	ldrh r1, [r4, 0x26]
 	movs r0, 0x8
@@ -7705,7 +7705,7 @@ _08086F54:
 	bx r0
 	.align 2, 0
 _08086F5C: .4byte gPlayerAvatar
-_08086F60: .4byte gMapObjects
+_08086F60: .4byte gObjectEvents
 	thumb_func_end sub_8086F0C
 
 	thumb_func_start sub_8086F64
@@ -7729,17 +7729,17 @@ sub_8086F64: @ 8086F64
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08086FA4 @ =gMapObjects
+	ldr r1, _08086FA4 @ =gObjectEvents
 	adds r0, r1
 	movs r1, 0x2
-	bl FieldObjectSetHeldMovement
+	bl ObjectEventSetHeldMovement
 _08086F98:
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08086FA0: .4byte gPlayerAvatar
-_08086FA4: .4byte gMapObjects
+_08086FA4: .4byte gObjectEvents
 	thumb_func_end sub_8086F64
 
 	thumb_func_start sub_8086FA8
@@ -7751,7 +7751,7 @@ sub_8086FA8: @ 8086FA8
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08086FF8 @ =gMapObjects
+	ldr r1, _08086FF8 @ =gObjectEvents
 	adds r2, r0, r1
 	ldrh r1, [r4, 0xC]
 	movs r3, 0xC
@@ -7765,7 +7765,7 @@ sub_8086FA8: @ 8086FA8
 	bne _08086FEC
 _08086FCE:
 	adds r0, r2, 0
-	bl FieldObjectClearHeldMovementIfFinished
+	bl ObjectEventClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086FEC
@@ -7782,7 +7782,7 @@ _08086FEC:
 	bx r0
 	.align 2, 0
 _08086FF4: .4byte gPlayerAvatar
-_08086FF8: .4byte gMapObjects
+_08086FF8: .4byte gObjectEvents
 	thumb_func_end sub_8086FA8
 
 	thumb_func_start sub_8086FFC
@@ -7801,7 +7801,7 @@ sub_8086FFC: @ 8086FFC
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _08087064 @ =gMapObjects
+	ldr r0, _08087064 @ =gObjectEvents
 	adds r4, r0
 	movs r0, 0x2
 	bl sub_805C808
@@ -7824,7 +7824,7 @@ sub_8086FFC: @ 8086FFC
 	strb r0, [r4, 0x1]
 	adds r0, r4, 0
 	movs r1, 0x54
-	bl FieldObjectSetHeldMovement
+	bl ObjectEventSetHeldMovement
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	strh r0, [r5, 0x8]
@@ -7836,7 +7836,7 @@ _0808705A:
 	bx r0
 	.align 2, 0
 _08087060: .4byte gPlayerAvatar
-_08087064: .4byte gMapObjects
+_08087064: .4byte gObjectEvents
 _08087068: .4byte gSprites
 	thumb_func_end sub_8086FFC
 
@@ -7856,10 +7856,10 @@ sub_808706C: @ 808706C
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _08087108 @ =gMapObjects
+	ldr r0, _08087108 @ =gObjectEvents
 	adds r4, r0
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimActive
+	bl ObjectEventClearAnimIfSpecialAnimActive
 	ldrb r1, [r4, 0x1]
 	movs r0, 0x11
 	negs r0, r0
@@ -7915,7 +7915,7 @@ _080870FC:
 	bx r0
 	.align 2, 0
 _08087104: .4byte gPlayerAvatar
-_08087108: .4byte gMapObjects
+_08087108: .4byte gObjectEvents
 _0808710C: .4byte gSprites
 _08087110: .4byte gSaveBlock2Ptr
 _08087114: .4byte sub_8087828
@@ -8430,15 +8430,15 @@ sub_80874C8: @ 80874C8
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080875B8 @ =gMapObjects
+	ldr r1, _080875B8 @ =gObjectEvents
 	adds r5, r0, r1
 	adds r0, r5, 0
-	bl FieldObjectIsMovementOverridden
+	bl ObjectEventIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _080874F2
 	adds r0, r5, 0
-	bl FieldObjectClearHeldMovementIfFinished
+	bl ObjectEventClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080875AE
@@ -8472,7 +8472,7 @@ _0808751A:
 	bl CameraObjectReset2
 	adds r0, r5, 0
 	movs r1, 0x3
-	bl FieldObjectTurn
+	bl ObjectEventTurn
 	ldrb r1, [r5, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -8532,7 +8532,7 @@ _080875AE:
 	bx r0
 	.align 2, 0
 _080875B4: .4byte gPlayerAvatar
-_080875B8: .4byte gMapObjects
+_080875B8: .4byte gObjectEvents
 _080875BC: .4byte gSprites
 _080875C0: .4byte gSaveBlock2Ptr
 _080875C4: .4byte sub_8087828
@@ -8566,7 +8566,7 @@ _080875F2:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08087640 @ =gMapObjects
+	ldr r1, _08087640 @ =gObjectEvents
 	adds r0, r1
 	ldrb r0, [r0, 0x4]
 	lsls r4, r0, 4
@@ -8598,7 +8598,7 @@ _08087630:
 	.align 2, 0
 _08087638: .4byte gSprites
 _0808763C: .4byte gPlayerAvatar
-_08087640: .4byte gMapObjects
+_08087640: .4byte gObjectEvents
 	thumb_func_end sub_80875C8
 
 	thumb_func_start sub_8087644
@@ -8658,7 +8658,7 @@ sub_8087698: @ 8087698
 	lsls r5, r0, 3
 	adds r5, r0
 	lsls r5, 2
-	ldr r0, _08087708 @ =gMapObjects
+	ldr r0, _08087708 @ =gObjectEvents
 	adds r5, r0
 	ldrb r0, [r5, 0x4]
 	lsls r4, r0, 4
@@ -8688,7 +8688,7 @@ sub_8087698: @ 8087698
 	bl sub_805CB70
 	adds r0, r5, 0
 	movs r1, 0x45
-	bl FieldObjectSetHeldMovement
+	bl ObjectEventSetHeldMovement
 	ldrh r0, [r6, 0x8]
 	adds r0, 0x1
 	strh r0, [r6, 0x8]
@@ -8698,7 +8698,7 @@ _080876FC:
 	bx r0
 	.align 2, 0
 _08087704: .4byte gPlayerAvatar
-_08087708: .4byte gMapObjects
+_08087708: .4byte gObjectEvents
 _0808770C: .4byte gSprites
 	thumb_func_end sub_8087698
 
@@ -8711,9 +8711,9 @@ sub_8087710: @ 8087710
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08087744 @ =gMapObjects
+	ldr r1, _08087744 @ =gObjectEvents
 	adds r0, r1
-	bl FieldObjectClearHeldMovementIfFinished
+	bl ObjectEventClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08087738
@@ -8728,7 +8728,7 @@ _08087738:
 	bx r0
 	.align 2, 0
 _08087740: .4byte gPlayerAvatar
-_08087744: .4byte gMapObjects
+_08087744: .4byte gObjectEvents
 	thumb_func_end sub_8087710
 
 	thumb_func_start sub_8087748
@@ -8776,7 +8776,7 @@ fishE: @ 8087780
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080877F4 @ =gMapObjects
+	ldr r1, _080877F4 @ =gObjectEvents
 	adds r4, r0, r1
 	movs r7, 0
 	ldrh r1, [r5, 0x26]
@@ -8798,7 +8798,7 @@ _080877B4:
 	bl EventObjectSetGraphicsId
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl FieldObjectTurn
+	bl ObjectEventTurn
 	ldrh r0, [r5, 0x26]
 	strb r0, [r6]
 	movs r0, 0
@@ -8816,7 +8816,7 @@ _080877EA:
 	bx r0
 	.align 2, 0
 _080877F0: .4byte gPlayerAvatar
-_080877F4: .4byte gMapObjects
+_080877F4: .4byte gObjectEvents
 _080877F8: .4byte sub_8087498
 	thumb_func_end fishE
 
@@ -8982,7 +8982,7 @@ sub_8087924: @ 8087924
 	ldrb r1, [r7, 0x4]
 	ldrb r2, [r7, 0x8]
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _080879BA
@@ -8991,7 +8991,7 @@ sub_8087924: @ 8087924
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _080879C8 @ =gMapObjects
+	ldr r0, _080879C8 @ =gObjectEvents
 	adds r4, r0
 	movs r0, 0x10
 	ldrsh r5, [r4, r0]
@@ -9055,7 +9055,7 @@ _080879BA:
 	bx r1
 	.align 2, 0
 _080879C4: .4byte gFieldEffectArguments
-_080879C8: .4byte gMapObjects
+_080879C8: .4byte gObjectEvents
 _080879CC: .4byte sub_80879D8
 _080879D0: .4byte gTasks
 _080879D4: .4byte gSprites
@@ -9148,7 +9148,7 @@ _08087A78:
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _08087AB0 @ =gMapObjects
+	ldr r0, _08087AB0 @ =gObjectEvents
 	adds r4, r0
 	ldrh r0, [r5, 0x4]
 	strh r0, [r6, 0x20]
@@ -9169,7 +9169,7 @@ _08087AA8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08087AB0: .4byte gMapObjects
+_08087AB0: .4byte gObjectEvents
 	thumb_func_end sub_80879D8
 
 	thumb_func_start sub_8087AB4
@@ -9181,7 +9181,7 @@ sub_8087AB4: @ 8087AB4
 	ldrb r1, [r4, 0x4]
 	ldrb r2, [r4, 0x8]
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _08087B04
@@ -9381,7 +9381,7 @@ sub_8087C2C: @ 8087C2C
 	asrs r0, 16
 	cmp r0, 0x78
 	ble _08087C9A
-	ldr r2, _08087CA4 @ =gMapObjects
+	ldr r2, _08087CA4 @ =gObjectEvents
 	movs r1, 0x4
 	ldrsh r0, [r7, r1]
 	lsls r1, r0, 3
@@ -9427,7 +9427,7 @@ _08087C9A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08087CA4: .4byte gMapObjects
+_08087CA4: .4byte gObjectEvents
 _08087CA8: .4byte gSprites
 _08087CAC: .4byte 0x0000ffff
 _08087CB0: .4byte 0x00007fff
@@ -9454,7 +9454,7 @@ sub_8087CB4: @ 8087CB4
 	ldrb r0, [r4, 0xC]
 	ldrb r1, [r4, 0xE]
 	ldrb r2, [r4, 0x10]
-	bl RemoveFieldObjectByLocalIdAndMap
+	bl RemoveObjectEventByLocalIdAndMap
 	movs r0, 0x44
 	bl FieldEffectActiveListRemove
 	adds r0, r5, 0

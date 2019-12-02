@@ -77,7 +77,7 @@ sub_80BD100: @ 80BD100
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _080BD160 @ =gMapObjects
+	ldr r0, _080BD160 @ =gObjectEvents
 	adds r4, r0
 	bl player_get_direction_upper_nybble
 	lsls r0, 24
@@ -106,7 +106,7 @@ sub_80BD100: @ 80BD100
 	b _080BD1B6
 	.align 2, 0
 _080BD15C: .4byte gPlayerAvatar
-_080BD160: .4byte gMapObjects
+_080BD160: .4byte gObjectEvents
 _080BD164: .4byte gMain
 _080BD168:
 	ldrb r0, [r6]
@@ -204,7 +204,7 @@ sub_80BD1E8: @ 80BD1E8
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080BD244 @ =gMapObjects
+	ldr r1, _080BD244 @ =gObjectEvents
 	adds r0, r1
 	ldrb r0, [r0, 0x1E]
 	bl MetatileBehavior_IsCyclingRoadPullDownTile
@@ -227,7 +227,7 @@ sub_80BD1E8: @ 80BD1E8
 	b _080BD270
 	.align 2, 0
 _080BD240: .4byte gPlayerAvatar
-_080BD244: .4byte gMapObjects
+_080BD244: .4byte gObjectEvents
 _080BD248:
 	movs r0, 0x2
 	strb r0, [r4, 0x2]
@@ -281,7 +281,7 @@ sub_80BD28C: @ 80BD28C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080BD2C4 @ =gMapObjects
+	ldr r1, _080BD2C4 @ =gObjectEvents
 	adds r5, r0, r1
 	ldrb r1, [r5, 0x1E]
 	adds r0, r4, 0
@@ -299,7 +299,7 @@ _080BD2B2:
 	bx r0
 	.align 2, 0
 _080BD2C0: .4byte gPlayerAvatar
-_080BD2C4: .4byte gMapObjects
+_080BD2C4: .4byte gObjectEvents
 	thumb_func_end sub_80BD28C
 
 	thumb_func_start sub_80BD2C8
@@ -313,7 +313,7 @@ sub_80BD2C8: @ 80BD2C8
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080BD2FC @ =gMapObjects
+	ldr r1, _080BD2FC @ =gObjectEvents
 	adds r5, r0, r1
 	ldrb r1, [r5, 0x1E]
 	adds r0, r4, 0
@@ -327,7 +327,7 @@ sub_80BD2C8: @ 80BD2C8
 	b _080BD350
 	.align 2, 0
 _080BD2F8: .4byte gPlayerAvatar
-_080BD2FC: .4byte gMapObjects
+_080BD2FC: .4byte gObjectEvents
 _080BD300:
 	adds r0, r4, 0
 	bl sub_80BD3A0
@@ -425,7 +425,7 @@ sub_80BD3A0: @ 80BD3A0
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _080BD408 @ =gMapObjects
+	ldr r0, _080BD408 @ =gObjectEvents
 	adds r4, r0
 	ldrh r1, [r4, 0x10]
 	add r0, sp, 0x4
@@ -463,7 +463,7 @@ sub_80BD3A0: @ 80BD3A0
 	bx r1
 	.align 2, 0
 _080BD404: .4byte gPlayerAvatar
-_080BD408: .4byte gMapObjects
+_080BD408: .4byte gObjectEvents
 	thumb_func_end sub_80BD3A0
 
 	thumb_func_start sub_80BD40C
@@ -689,7 +689,7 @@ player_should_look_direction_be_enforced_upon_movement: @ 80BD58C
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BD5C0
-	ldr r2, _080BD5B8 @ =gMapObjects
+	ldr r2, _080BD5B8 @ =gObjectEvents
 	ldr r0, _080BD5BC @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -704,7 +704,7 @@ player_should_look_direction_be_enforced_upon_movement: @ 80BD58C
 	movs r0, 0
 	b _080BD5C2
 	.align 2, 0
-_080BD5B8: .4byte gMapObjects
+_080BD5B8: .4byte gObjectEvents
 _080BD5BC: .4byte gPlayerAvatar
 _080BD5C0:
 	movs r0, 0x1

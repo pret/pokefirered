@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start FreezeMapObject
-FreezeMapObject: @ 80688E4
+	thumb_func_start FreezeObjectEvent
+FreezeObjectEvent: @ 80688E4
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	ldrh r1, [r5]
@@ -80,13 +80,13 @@ _0806896E:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end FreezeMapObject
+	thumb_func_end FreezeObjectEvent
 
 	thumb_func_start FreezeEventObjects
 FreezeEventObjects: @ 8068974
 	push {r4,r5,lr}
 	movs r4, 0
-	ldr r5, _080689A8 @ =gMapObjects
+	ldr r5, _080689A8 @ =gObjectEvents
 _0806897A:
 	lsls r0, r4, 3
 	adds r0, r4
@@ -101,7 +101,7 @@ _0806897A:
 	cmp r4, r0
 	beq _08068998
 	adds r0, r1, 0
-	bl FreezeMapObject
+	bl FreezeObjectEvent
 _08068998:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -112,17 +112,17 @@ _08068998:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080689A8: .4byte gMapObjects
+_080689A8: .4byte gObjectEvents
 _080689AC: .4byte gPlayerAvatar
 	thumb_func_end FreezeEventObjects
 
-	thumb_func_start FreezeMapObjectsExceptOne
-FreezeMapObjectsExceptOne: @ 80689B0
+	thumb_func_start FreezeObjectEventsExceptOne
+FreezeObjectEventsExceptOne: @ 80689B0
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r4, 0
-	ldr r6, _080689EC @ =gMapObjects
+	ldr r6, _080689EC @ =gObjectEvents
 _080689BA:
 	cmp r4, r5
 	beq _080689DC
@@ -139,7 +139,7 @@ _080689BA:
 	cmp r4, r0
 	beq _080689DC
 	adds r0, r1, 0
-	bl FreezeMapObject
+	bl FreezeObjectEvent
 _080689DC:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -150,9 +150,9 @@ _080689DC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080689EC: .4byte gMapObjects
+_080689EC: .4byte gObjectEvents
 _080689F0: .4byte gPlayerAvatar
-	thumb_func_end FreezeMapObjectsExceptOne
+	thumb_func_end FreezeObjectEventsExceptOne
 
 	thumb_func_start npc_sync_anim_pause_bits
 npc_sync_anim_pause_bits: @ 80689F4
@@ -209,11 +209,11 @@ _08068A54: .4byte 0x00000101
 _08068A58: .4byte gSprites
 	thumb_func_end npc_sync_anim_pause_bits
 
-	thumb_func_start UnfreezeMapObjects
-UnfreezeMapObjects: @ 8068A5C
+	thumb_func_start UnfreezeObjectEvents
+UnfreezeObjectEvents: @ 8068A5C
 	push {r4,r5,lr}
 	movs r4, 0
-	ldr r5, _08068A88 @ =gMapObjects
+	ldr r5, _08068A88 @ =gObjectEvents
 _08068A62:
 	lsls r0, r4, 3
 	adds r0, r4
@@ -235,8 +235,8 @@ _08068A78:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08068A88: .4byte gMapObjects
-	thumb_func_end UnfreezeMapObjects
+_08068A88: .4byte gObjectEvents
+	thumb_func_end UnfreezeObjectEvents
 
 	thumb_func_start little_step
 little_step: @ 8068A8C
@@ -788,14 +788,14 @@ _08068E50: .4byte gUnknown_83A7202
 _08068E54: .4byte gUnknown_83A7208
 	thumb_func_end sub_8068DC4
 
-	thumb_func_start SetFieldObjectStepTimer
-SetFieldObjectStepTimer: @ 8068E58
+	thumb_func_start SetObjectEventStepTimer
+SetObjectEventStepTimer: @ 8068E58
 	strh r1, [r0, 0x34]
 	bx lr
-	thumb_func_end SetFieldObjectStepTimer
+	thumb_func_end SetObjectEventStepTimer
 
-	thumb_func_start RunFieldObjectStepTimer
-RunFieldObjectStepTimer: @ 8068E5C
+	thumb_func_start RunObjectEventStepTimer
+RunObjectEventStepTimer: @ 8068E5C
 	push {lr}
 	ldrh r1, [r0, 0x34]
 	subs r1, 0x1
@@ -810,7 +810,7 @@ _08068E6E:
 _08068E70:
 	pop {r1}
 	bx r1
-	thumb_func_end RunFieldObjectStepTimer
+	thumb_func_end RunObjectEventStepTimer
 
 	thumb_func_start obj_anim_image_set_and_seek
 obj_anim_image_set_and_seek: @ 8068E74
@@ -1099,7 +1099,7 @@ sub_8069058: @ 8069058
 	ldr r0, _08069090 @ =gSprites
 	adds r4, r0
 	adds r0, r5, 0
-	bl FieldObjectDirectionToImageAnimId
+	bl ObjectEventDirectionToImageAnimId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -1130,7 +1130,7 @@ sub_8069094: @ 8069094
 	ldr r1, _080690F8 @ =gSprites
 	adds r4, r0, r1
 	adds r0, r5, 0
-	bl GetFieldObjectGraphicsInfo
+	bl GetObjectEventGraphicsInfo
 	ldrh r3, [r4, 0x4]
 	lsls r3, 22
 	ldr r1, [r0, 0x10]
@@ -1441,7 +1441,7 @@ oe_exec_and_other_stuff: @ 80692C8
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8
-	bl FieldObjectGetLocalIdAndMap
+	bl ObjectEventGetLocalIdAndMap
 	adds r0, r4, 0
 	bl FieldEffectStart
 	pop {r4}
@@ -1474,7 +1474,7 @@ DoRippleFieldEffect: @ 806930C
 	push {r4,lr}
 	adds r4, r1, 0
 	ldrb r0, [r0, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetObjectEventGraphicsInfo
 	ldr r2, _08069344 @ =gFieldEffectArguments
 	movs r3, 0x20
 	ldrsh r1, [r4, r3]

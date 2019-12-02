@@ -901,12 +901,12 @@ _0806CF60:
 	lsrs r1, 16
 _0806CF7E:
 	ldrb r2, [r4, 0x4]
-	bl GetFieldObjectIdByXYZ
+	bl GetObjectEventIdByXYZ
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0x10
 	beq _0806CF9E
-	ldr r1, _0806CFA8 @ =gMapObjects
+	ldr r1, _0806CFA8 @ =gObjectEvents
 	lsls r2, r3, 3
 	adds r0, r2, r3
 	lsls r0, 2
@@ -920,7 +920,7 @@ _0806CF9E:
 	b _0806CFDE
 	.align 2, 0
 _0806CFA4: .4byte gDirectionToVectors
-_0806CFA8: .4byte gMapObjects
+_0806CFA8: .4byte gObjectEvents
 _0806CFAC:
 	movs r4, 0
 	ldr r1, _0806CFE4 @ =gUnknown_2031DEC
@@ -936,7 +936,7 @@ _0806CFBC:
 	adds r4, 0x1
 	cmp r4, 0x3
 	ble _0806CFB0
-	ldr r0, _0806CFE8 @ =gSelectedEventObject
+	ldr r0, _0806CFE8 @ =gSelectedObjectEvent
 	strb r3, [r0]
 	ldr r1, _0806CFEC @ =gSpecialVar_LastTalked
 	adds r0, r2, r3
@@ -947,14 +947,14 @@ _0806CFBC:
 	ldr r0, _0806CFF0 @ =gSpecialVar_Facing
 	strh r6, [r0]
 	adds r0, r3, 0
-	bl GetFieldObjectScriptPointerByFieldObjectId
+	bl GetObjectEventScriptPointerByObjectEventId
 _0806CFDE:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
 	.align 2, 0
 _0806CFE4: .4byte gUnknown_2031DEC
-_0806CFE8: .4byte gSelectedEventObject
+_0806CFE8: .4byte gSelectedObjectEvent
 _0806CFEC: .4byte gSpecialVar_LastTalked
 _0806CFF0: .4byte gSpecialVar_Facing
 	thumb_func_end sub_806CF38
@@ -973,12 +973,12 @@ sub_806CFF4: @ 806CFF4
 	ldrh r0, [r4]
 	ldrh r1, [r4, 0x2]
 	ldrb r2, [r4, 0x4]
-	bl GetFieldObjectIdByXYZ
+	bl GetObjectEventIdByXYZ
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0x10
 	beq _0806D02A
-	ldr r2, _0806D098 @ =gMapObjects
+	ldr r2, _0806D098 @ =gObjectEvents
 	lsls r1, r5, 3
 	adds r0, r1, r5
 	lsls r0, 2
@@ -1011,12 +1011,12 @@ _0806D02A:
 	lsls r1, 16
 	lsrs r1, 16
 	ldrb r2, [r4, 0x4]
-	bl GetFieldObjectIdByXYZ
+	bl GetObjectEventIdByXYZ
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0x10
 	beq _0806D092
-	ldr r2, _0806D098 @ =gMapObjects
+	ldr r2, _0806D098 @ =gObjectEvents
 	lsls r1, r5, 3
 	adds r0, r1, r5
 	lsls r0, 2
@@ -1031,9 +1031,9 @@ _0806D078:
 	bne _0806D0A0
 	adds r0, r6, r5
 	lsls r0, 2
-	ldr r1, _0806D098 @ =gMapObjects
+	ldr r1, _0806D098 @ =gObjectEvents
 	adds r0, r1
-	bl FieldObjectCheckHeldMovementStatus
+	bl ObjectEventCheckHeldMovementStatus
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806D0A0
@@ -1041,13 +1041,13 @@ _0806D092:
 	movs r0, 0
 	b _0806D0C8
 	.align 2, 0
-_0806D098: .4byte gMapObjects
+_0806D098: .4byte gObjectEvents
 _0806D09C: .4byte gDirectionToVectors
 _0806D0A0:
-	ldr r0, _0806D0D4 @ =gSelectedEventObject
+	ldr r0, _0806D0D4 @ =gSelectedObjectEvent
 	strb r5, [r0]
 	ldr r4, _0806D0D8 @ =gSpecialVar_LastTalked
-	ldr r1, _0806D0DC @ =gMapObjects
+	ldr r1, _0806D0DC @ =gObjectEvents
 	adds r0, r6, r5
 	lsls r0, 2
 	adds r0, r1
@@ -1057,7 +1057,7 @@ _0806D0A0:
 	mov r1, r8
 	strh r1, [r0]
 	adds r0, r5, 0
-	bl GetFieldObjectScriptPointerByFieldObjectId
+	bl GetObjectEventScriptPointerByObjectEventId
 	adds r1, r0, 0
 	ldrb r0, [r4]
 	bl GetRamScript
@@ -1069,9 +1069,9 @@ _0806D0C8:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806D0D4: .4byte gSelectedEventObject
+_0806D0D4: .4byte gSelectedObjectEvent
 _0806D0D8: .4byte gSpecialVar_LastTalked
-_0806D0DC: .4byte gMapObjects
+_0806D0DC: .4byte gObjectEvents
 _0806D0E0: .4byte gSpecialVar_Facing
 	thumb_func_end sub_806CFF4
 
@@ -1093,7 +1093,7 @@ sub_806D0E4: @ 806D0E4
 	lsrs r2, 16
 	ldrb r3, [r0, 0x4]
 	adds r0, r4, 0
-	bl FindInvisibleMapObjectByPosition
+	bl FindInvisibleObjectEventByPosition
 	adds r5, r0, 0
 	cmp r5, 0
 	beq _0806D164
@@ -2139,7 +2139,7 @@ sub_806D928: @ 806D928
 	lsrs r2, 16
 	ldrb r3, [r0, 0x4]
 	adds r0, r4, 0
-	bl FindInvisibleMapObjectByPosition
+	bl FindInvisibleObjectEventByPosition
 	cmp r0, 0
 	bne _0806D950
 	movs r0, 0
@@ -2809,7 +2809,7 @@ sub_806DE28: @ 806DE28
 	ldr r2, [r4]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
-	bl RemoveFieldObjectByLocalIdAndMap
+	bl RemoveObjectEventByLocalIdAndMap
 	ldrb r0, [r5, 0x8]
 	ldr r2, [r4]
 	ldrb r1, [r2, 0x5]
@@ -2892,8 +2892,8 @@ sub_806DEC4: @ 806DEC4
 _0806DEE8: .4byte gMapHeader
 	thumb_func_end sub_806DEC4
 
-	thumb_func_start FindInvisibleMapObjectByPosition
-FindInvisibleMapObjectByPosition: @ 806DEEC
+	thumb_func_start FindInvisibleObjectEventByPosition
+FindInvisibleObjectEventByPosition: @ 806DEEC
 	push {r4-r7,lr}
 	lsls r1, 16
 	lsrs r7, r1, 16
@@ -2938,7 +2938,7 @@ _0806DF34:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end FindInvisibleMapObjectByPosition
+	thumb_func_end FindInvisibleObjectEventByPosition
 
 	thumb_func_start dive_warp
 dive_warp: @ 806DF3C
@@ -3079,8 +3079,8 @@ _0806E046:
 	bx r1
 	thumb_func_end sub_806DFB8
 
-	thumb_func_start GetFieldObjectScriptPointerForComparison
-GetFieldObjectScriptPointerForComparison: @ 806E050
+	thumb_func_start GetObjectEventScriptPointerForComparison
+GetObjectEventScriptPointerForComparison: @ 806E050
 	push {r4,r5,lr}
 	sub sp, 0x8
 	bl player_get_direction_upper_nybble
@@ -3106,7 +3106,7 @@ GetFieldObjectScriptPointerForComparison: @ 806E050
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end GetFieldObjectScriptPointerForComparison
+	thumb_func_end GetObjectEventScriptPointerForComparison
 
 	thumb_func_start SetCableClubWarp
 SetCableClubWarp: @ 806E08C

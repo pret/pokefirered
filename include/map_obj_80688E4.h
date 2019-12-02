@@ -4,7 +4,7 @@
 #include "global.h"
 
 void FreezeEventObjects(void);
-void FreezeMapObject(struct MapObject *);
-void FreezeMapObjectsExceptOne(u8 mapObjectId);
+void FreezeObjectEvent(struct ObjectEvent *);
+void FreezeObjectEventsExceptOne(u8 objEventId);
 
 #endif //GUARD_MAP_OBJ_80688E4_H

@@ -3841,7 +3841,7 @@ CB2_ContinueSavedGame: @ 8056938
 	bl sub_8056420
 	bl set_current_map_header_from_sav1
 	bl sub_80550A8
-	bl UnfreezeMapObjects
+	bl UnfreezeObjectEvents
 	bl sub_8054E40
 	bl sub_80589E8
 	bl PlayTimeCounter_Start
@@ -4734,7 +4734,7 @@ sub_8057100: @ 8057100
 	thumb_func_start sub_8057114
 sub_8057114: @ 8057114
 	push {lr}
-	ldr r2, _08057138 @ =gMapObjects
+	ldr r2, _08057138 @ =gObjectEvents
 	ldr r3, _0805713C @ =gPlayerAvatar
 	ldrb r1, [r3, 0x5]
 	lsls r0, r1, 3
@@ -4750,7 +4750,7 @@ sub_8057114: @ 8057114
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08057138: .4byte gMapObjects
+_08057138: .4byte gObjectEvents
 _0805713C: .4byte gPlayerAvatar
 	thumb_func_end sub_8057114
 
@@ -4852,7 +4852,7 @@ _080571D8:
 	adds r4, r7
 	ldrb r3, [r4, 0x13]
 	adds r0, r5, 0
-	bl SpawnLinkPlayerMapObject
+	bl SpawnLinkPlayerObjectEvent
 	ldrb r1, [r4]
 	adds r0, r5, 0
 	bl sub_8058878
@@ -5126,7 +5126,7 @@ sub_8057430: @ 8057430
 	bl sub_8056420
 	bl set_current_map_header_from_sav1
 	bl sub_80550A8
-	bl UnfreezeMapObjects
+	bl UnfreezeObjectEvents
 	bl sub_8054E40
 	bl sub_80589E8
 	bl PlayTimeCounter_Start
@@ -7136,12 +7136,12 @@ _08058368: .4byte gUnknown_3005450
 _0805836C: .4byte 0x000008d2
 	thumb_func_end sub_805833C
 
-	thumb_func_start ZeroLinkPlayerMapObject
-ZeroLinkPlayerMapObject: @ 8058370
+	thumb_func_start ZeroLinkPlayerObjectEvent
+ZeroLinkPlayerObjectEvent: @ 8058370
 	movs r1, 0
 	str r1, [r0]
 	bx lr
-	thumb_func_end ZeroLinkPlayerMapObject
+	thumb_func_end ZeroLinkPlayerObjectEvent
 
 	thumb_func_start strange_npc_table_clear
 strange_npc_table_clear: @ 8058378
@@ -7156,18 +7156,18 @@ strange_npc_table_clear: @ 8058378
 _08058388: .4byte gUnknown_2031DEC
 	thumb_func_end strange_npc_table_clear
 
-	thumb_func_start ZeroMapObject
-ZeroMapObject: @ 805838C
+	thumb_func_start ZeroObjectEvent
+ZeroObjectEvent: @ 805838C
 	push {lr}
 	movs r1, 0
 	movs r2, 0x24
 	bl memset
 	pop {r0}
 	bx r0
-	thumb_func_end ZeroMapObject
+	thumb_func_end ZeroObjectEvent
 
-	thumb_func_start SpawnLinkPlayerMapObject
-SpawnLinkPlayerMapObject: @ 805839C
+	thumb_func_start SpawnLinkPlayerObjectEvent
+SpawnLinkPlayerObjectEvent: @ 805839C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -7200,12 +7200,12 @@ SpawnLinkPlayerMapObject: @ 805839C
 	lsls r5, r6, 3
 	adds r5, r6
 	lsls r5, 2
-	ldr r0, _08058444 @ =gMapObjects
+	ldr r0, _08058444 @ =gObjectEvents
 	adds r5, r0
 	adds r0, r4, 0
-	bl ZeroLinkPlayerMapObject
+	bl ZeroLinkPlayerObjectEvent
 	adds r0, r5, 0
-	bl ZeroMapObject
+	bl ZeroObjectEvent
 	movs r2, 0
 	movs r1, 0x1
 	movs r0, 0x1
@@ -7238,7 +7238,7 @@ SpawnLinkPlayerMapObject: @ 805839C
 	adds r0, r5, 0
 	mov r1, r9
 	mov r2, r10
-	bl InitLinkPlayerMapObjectPos
+	bl InitLinkPlayerObjectEventPos
 	pop {r3-r5}
 	mov r8, r3
 	mov r9, r4
@@ -7248,11 +7248,11 @@ SpawnLinkPlayerMapObject: @ 805839C
 	bx r0
 	.align 2, 0
 _08058440: .4byte gUnknown_2031DEC
-_08058444: .4byte gMapObjects
-	thumb_func_end SpawnLinkPlayerMapObject
+_08058444: .4byte gObjectEvents
+	thumb_func_end SpawnLinkPlayerObjectEvent
 
-	thumb_func_start InitLinkPlayerMapObjectPos
-InitLinkPlayerMapObjectPos: @ 8058448
+	thumb_func_start InitLinkPlayerObjectEventPos
+InitLinkPlayerObjectEventPos: @ 8058448
 	push {r4,lr}
 	adds r4, r0, 0
 	adds r0, r1, 0
@@ -7278,11 +7278,11 @@ InitLinkPlayerMapObjectPos: @ 8058448
 	adds r0, 0x8
 	strh r0, [r4, 0xC]
 	adds r0, r4, 0
-	bl FieldObjectUpdateZCoord
+	bl ObjectEventUpdateZCoord
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end InitLinkPlayerMapObjectPos
+	thumb_func_end InitLinkPlayerObjectEventPos
 
 	thumb_func_start sub_8058488
 sub_8058488: @ 8058488
@@ -7300,7 +7300,7 @@ sub_8058488: @ 8058488
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _080584B4 @ =gMapObjects
+	ldr r0, _080584B4 @ =gObjectEvents
 	adds r1, r0
 	strb r2, [r1, 0x19]
 _080584AA:
@@ -7308,7 +7308,7 @@ _080584AA:
 	bx r0
 	.align 2, 0
 _080584B0: .4byte gUnknown_2031DEC
-_080584B4: .4byte gMapObjects
+_080584B4: .4byte gObjectEvents
 	thumb_func_end sub_8058488
 
 	thumb_func_start sub_80584B8
@@ -7322,7 +7322,7 @@ sub_80584B8: @ 80584B8
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080584FC @ =gMapObjects
+	ldr r1, _080584FC @ =gObjectEvents
 	adds r4, r0, r1
 	ldrb r0, [r4, 0x4]
 	cmp r0, 0x40
@@ -7346,7 +7346,7 @@ _080584E4:
 	bx r0
 	.align 2, 0
 _080584F8: .4byte gUnknown_2031DEC
-_080584FC: .4byte gMapObjects
+_080584FC: .4byte gObjectEvents
 _08058500: .4byte gSprites
 	thumb_func_end sub_80584B8
 
@@ -7360,13 +7360,13 @@ sub_8058504: @ 8058504
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08058520 @ =gMapObjects
+	ldr r1, _08058520 @ =gObjectEvents
 	adds r0, r1
 	ldrb r0, [r0, 0x4]
 	bx lr
 	.align 2, 0
 _0805851C: .4byte gUnknown_2031DEC
-_08058520: .4byte gMapObjects
+_08058520: .4byte gObjectEvents
 	thumb_func_end sub_8058504
 
 	thumb_func_start sub_8058524
@@ -7379,7 +7379,7 @@ sub_8058524: @ 8058524
 	lsls r0, r3, 3
 	adds r0, r3
 	lsls r0, 2
-	ldr r3, _08058548 @ =gMapObjects
+	ldr r3, _08058548 @ =gObjectEvents
 	adds r0, r3
 	ldrh r3, [r0, 0x10]
 	strh r3, [r1]
@@ -7388,7 +7388,7 @@ sub_8058524: @ 8058524
 	bx lr
 	.align 2, 0
 _08058544: .4byte gUnknown_2031DEC
-_08058548: .4byte gMapObjects
+_08058548: .4byte gObjectEvents
 	thumb_func_end sub_8058524
 
 	thumb_func_start sub_805854C
@@ -7401,13 +7401,13 @@ sub_805854C: @ 805854C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08058568 @ =gMapObjects
+	ldr r1, _08058568 @ =gObjectEvents
 	adds r0, r1
 	ldrb r0, [r0, 0x19]
 	bx lr
 	.align 2, 0
 _08058564: .4byte gUnknown_2031DEC
-_08058568: .4byte gMapObjects
+_08058568: .4byte gObjectEvents
 	thumb_func_end sub_805854C
 
 	thumb_func_start sub_805856C
@@ -7420,7 +7420,7 @@ sub_805856C: @ 805856C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0805858C @ =gMapObjects
+	ldr r1, _0805858C @ =gObjectEvents
 	adds r0, r1
 	ldrb r0, [r0, 0xB]
 	lsls r0, 28
@@ -7428,7 +7428,7 @@ sub_805856C: @ 805856C
 	bx lr
 	.align 2, 0
 _08058588: .4byte gUnknown_2031DEC
-_0805858C: .4byte gMapObjects
+_0805858C: .4byte gObjectEvents
 	thumb_func_end sub_805856C
 
 	thumb_func_start sub_8058590
@@ -7441,7 +7441,7 @@ sub_8058590: @ 8058590
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080585B4 @ =gMapObjects
+	ldr r1, _080585B4 @ =gObjectEvents
 	adds r0, r1
 	adds r0, 0x21
 	movs r1, 0
@@ -7451,7 +7451,7 @@ sub_8058590: @ 8058590
 	bx lr
 	.align 2, 0
 _080585B0: .4byte gUnknown_2031DEC
-_080585B4: .4byte gMapObjects
+_080585B4: .4byte gObjectEvents
 	thumb_func_end sub_8058590
 
 	thumb_func_start GetLinkPlayerIdAt
@@ -7479,7 +7479,7 @@ _080585DA:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08058600 @ =gMapObjects
+	ldr r1, _08058600 @ =gObjectEvents
 	adds r1, r0, r1
 	movs r6, 0x10
 	ldrsh r0, [r1, r6]
@@ -7493,7 +7493,7 @@ _080585DA:
 	b _08058610
 	.align 2, 0
 _080585FC: .4byte gUnknown_2031DEC
-_08058600: .4byte gMapObjects
+_08058600: .4byte gObjectEvents
 _08058604:
 	adds r0, r2, 0x1
 	lsls r0, 24
@@ -7521,7 +7521,7 @@ sub_8058618: @ 8058618
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0805864C @ =gMapObjects
+	ldr r1, _0805864C @ =gObjectEvents
 	adds r6, r0, r1
 	ldrb r0, [r5]
 	cmp r0, 0
@@ -7535,7 +7535,7 @@ sub_8058618: @ 8058618
 	b _08058674
 	.align 2, 0
 _08058648: .4byte gUnknown_2031DEC
-_0805864C: .4byte gMapObjects
+_0805864C: .4byte gObjectEvents
 _08058650:
 	ldr r4, _0805867C @ =gUnknown_826D374
 	ldr r1, _08058680 @ =gUnknown_826D33C
@@ -7629,7 +7629,7 @@ sub_80586CC: @ 80586CC
 	adds r0, r5, 0
 	mov r2, sp
 	adds r3, r6, 0
-	bl FieldObjectMoveDestCoords
+	bl ObjectEventMoveDestCoords
 	ldrb r0, [r4, 0x2]
 	ldrb r1, [r5, 0x19]
 	mov r2, sp
@@ -7653,7 +7653,7 @@ sub_80586CC: @ 80586CC
 	adds r0, r5, 0
 	bl npc_coords_shift
 	adds r0, r5, 0
-	bl FieldObjectUpdateZCoord
+	bl ObjectEventUpdateZCoord
 	movs r0, 0x1
 	b _0805872C
 _0805872A:
@@ -7780,7 +7780,7 @@ npc_080587EC: @ 80587EC
 	mov r12, r2
 	lsls r3, 16
 	movs r4, 0
-	ldr r0, _08058850 @ =gMapObjects
+	ldr r0, _08058850 @ =gObjectEvents
 	mov r9, r0
 	lsrs r2, r3, 16
 	mov r10, r2
@@ -7820,7 +7820,7 @@ _0805884A:
 	movs r0, 0x1
 	b _0805886A
 	.align 2, 0
-_08058850: .4byte gMapObjects
+_08058850: .4byte gObjectEvents
 _08058854:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -7857,7 +7857,7 @@ sub_8058878: @ 8058878
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080588B8 @ =gMapObjects
+	ldr r1, _080588B8 @ =gObjectEvents
 	adds r4, r0, r1
 	ldrb r0, [r2]
 	cmp r0, 0
@@ -7875,7 +7875,7 @@ sub_8058878: @ 8058878
 	b _080588C6
 	.align 2, 0
 _080588B4: .4byte gUnknown_2031DEC
-_080588B8: .4byte gMapObjects
+_080588B8: .4byte gObjectEvents
 _080588BC:
 	ldrb r0, [r4]
 	lsls r0, 30
@@ -7931,7 +7931,7 @@ SpriteCB_LinkPlayer: @ 805890C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08058974 @ =gMapObjects
+	ldr r1, _08058974 @ =gObjectEvents
 	adds r6, r0, r1
 	ldrh r0, [r6, 0xC]
 	strh r0, [r5, 0x20]
@@ -7958,7 +7958,7 @@ SpriteCB_LinkPlayer: @ 805890C
 	cmp r0, 0
 	bne _08058978
 	ldrb r0, [r6, 0x19]
-	bl FieldObjectDirectionToImageAnimId
+	bl ObjectEventDirectionToImageAnimId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -7967,7 +7967,7 @@ SpriteCB_LinkPlayer: @ 805890C
 	b _0805898A
 	.align 2, 0
 _08058970: .4byte gUnknown_2031DEC
-_08058974: .4byte gMapObjects
+_08058974: .4byte gObjectEvents
 _08058978:
 	ldrb r0, [r6, 0x19]
 	bl get_go_image_anim_num

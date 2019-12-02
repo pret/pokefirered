@@ -521,7 +521,7 @@ static void sub_815DC8C(void) // fakematching
     const struct TrainerTowerFloor *const * r7;
 
     sTrainerTowerState = AllocZeroed(sizeof(*sTrainerTowerState));
-    sTrainerTowerState->floorIdx = gMapHeader.mapDataId - 42;
+    sTrainerTowerState->floorIdx = gMapHeader.mapLayoutId - 42;
     if (sub_815D834() == TRUE)
         CEReaderTool_LoadTrainerTower(&sTrainerTowerState->unk_0004);
     else
@@ -628,7 +628,7 @@ static void sub_815DD2C(void)
 
 static void sub_815DD44(void)
 {
-    if (gMapHeader.mapDataId - LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_LOBBY > sTrainerTowerState->unk_0004.count)
+    if (gMapHeader.mapLayoutId - LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_LOBBY > sTrainerTowerState->unk_0004.count)
     {
         gSpecialVar_Result = 3;
         SetCurrentMapLayout(LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_ROOF);
@@ -831,8 +831,8 @@ static void sub_815E1F0(void)
 
 static void TTSpecial_HasReachedTheRoof(void)
 {
-    u16 mapDataId = gMapHeader.mapDataId;
-    if (mapDataId - LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_1F == gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk8 && mapDataId - LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_LOBBY <= sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].floorIdx)
+    u16 mapLayoutId = gMapHeader.mapLayoutId;
+    if (mapLayoutId - LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_1F == gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk8 && mapLayoutId - LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_LOBBY <= sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].floorIdx)
         gSpecialVar_Result = FALSE;
     else
         gSpecialVar_Result = TRUE;
@@ -1008,7 +1008,7 @@ static void sub_815E8CC(void)
 
 static void sub_815E908(void)
 {
-    if (gMapHeader.mapDataId == LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_LOBBY && VarGet(VAR_MAP_SCENE_TRAINER_TOWER) == 0)
+    if (gMapHeader.mapLayoutId == LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_LOBBY && VarGet(VAR_MAP_SCENE_TRAINER_TOWER) == 0)
     {
         gSpecialVar_Result = FALSE;
     }

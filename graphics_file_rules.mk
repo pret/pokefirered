@@ -526,10 +526,10 @@ $(POKEDEXAREAMARKERSDATADIR)/marker.4bpp: $(POKEDEXAREAMARKERFILES)
 graphics/pokemon/heracross/unk_icon.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-graphics/map_objects/151.4bpp: %.4bpp: %.png
+graphics/object_events/151.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 4
 
-graphics/map_objects/emoticons.4bpp: %.4bpp: %.png
+graphics/object_events/emoticons.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
 $(ITEMMENUGFXDIR)/bag_tiles.4bpp: %.4bpp: %.png

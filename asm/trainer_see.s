@@ -19,7 +19,7 @@ _08081B40:
 	b _08081B7A
 _08081B44:
 	movs r4, 0
-	ldr r5, _08081B80 @ =gMapObjects
+	ldr r5, _08081B80 @ =gObjectEvents
 _08081B48:
 	lsls r0, r4, 3
 	adds r0, r4
@@ -53,7 +53,7 @@ _08081B7A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08081B80: .4byte gMapObjects
+_08081B80: .4byte gObjectEvents
 	thumb_func_end CheckForTrainersWantingBattle
 
 	thumb_func_start sub_8081B84
@@ -62,7 +62,7 @@ sub_8081B84: @ 8081B84
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r5, 0
-	bl GetFieldObjectScriptPointerByFieldObjectId
+	bl GetObjectEventScriptPointerByObjectEventId
 	adds r6, r0, 0
 	bl GetTrainerFlagFromScriptPointer
 	cmp r0, 0
@@ -70,7 +70,7 @@ sub_8081B84: @ 8081B84
 	lsls r4, r5, 3
 	adds r0, r4, r5
 	lsls r0, 2
-	ldr r1, _08081BE0 @ =gMapObjects
+	ldr r1, _08081BE0 @ =gObjectEvents
 	adds r0, r1
 	bl sub_8081BEC
 	lsls r0, 24
@@ -90,7 +90,7 @@ _08081BC0:
 	bl ConfigureAndSetUpOneTrainerBattle
 	adds r0, r4, r5
 	lsls r0, 2
-	ldr r1, _08081BE0 @ =gMapObjects
+	ldr r1, _08081BE0 @ =gObjectEvents
 	adds r0, r1
 	subs r1, r7, 0x1
 	lsls r1, 24
@@ -99,7 +99,7 @@ _08081BC0:
 	movs r0, 0x1
 	b _08081BE6
 	.align 2, 0
-_08081BE0: .4byte gMapObjects
+_08081BE0: .4byte gObjectEvents
 _08081BE4:
 	movs r0, 0
 _08081BE6:
@@ -590,7 +590,7 @@ _08081F54:
 	adds r3, r1, 0
 	adds r3, 0x8
 	adds r0, r4, 0
-	bl FieldObjectGetLocalIdAndMap
+	bl ObjectEventGetLocalIdAndMap
 	movs r0, 0
 	bl FieldEffectStart
 	ldrb r0, [r4, 0x18]
@@ -601,7 +601,7 @@ _08081F54:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetHeldMovement
+	bl ObjectEventSetHeldMovement
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 _08081F82:
@@ -658,12 +658,12 @@ sub_8081FD0: @ 8081FD0
 	adds r5, r1, 0
 	adds r4, r2, 0
 	adds r0, r4, 0
-	bl FieldObjectIsMovementOverridden
+	bl ObjectEventIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _08081FEE
 	adds r0, r4, 0
-	bl FieldObjectClearHeldMovementIfFinished
+	bl ObjectEventClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08082022
@@ -680,7 +680,7 @@ _08081FEE:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetHeldMovement
+	bl ObjectEventSetHeldMovement
 	ldrh r0, [r5, 0xE]
 	subs r0, 0x1
 	strh r0, [r5, 0xE]
@@ -688,7 +688,7 @@ _08081FEE:
 _08082014:
 	adds r0, r4, 0
 	movs r1, 0x4A
-	bl FieldObjectSetHeldMovement
+	bl ObjectEventSetHeldMovement
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	strh r0, [r5, 0x8]
@@ -705,12 +705,12 @@ sub_808202C: @ 808202C
 	adds r5, r1, 0
 	adds r4, r2, 0
 	adds r0, r4, 0
-	bl FieldObjectIsMovementOverridden
+	bl ObjectEventIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808204A
 	adds r0, r4, 0
-	bl FieldObjectClearHeldMovementIfFinished
+	bl ObjectEventClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080820AC
@@ -740,15 +740,15 @@ _0808204A:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080820B8 @ =gMapObjects
+	ldr r1, _080820B8 @ =gObjectEvents
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl FieldObjectIsMovementOverridden
+	bl ObjectEventIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _080820A2
 	adds r0, r4, 0
-	bl FieldObjectClearHeldMovementIfFinished
+	bl ObjectEventClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080820AC
@@ -764,7 +764,7 @@ _080820AC:
 	bx r1
 	.align 2, 0
 _080820B4: .4byte gPlayerAvatar
-_080820B8: .4byte gMapObjects
+_080820B8: .4byte gObjectEvents
 	thumb_func_end sub_808202C
 
 	thumb_func_start sub_80820BC
@@ -777,15 +777,15 @@ sub_80820BC: @ 80820BC
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080820FC @ =gMapObjects
+	ldr r1, _080820FC @ =gObjectEvents
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl FieldObjectIsMovementOverridden
+	bl ObjectEventIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _080820E8
 	adds r0, r4, 0
-	bl FieldObjectClearHeldMovementIfFinished
+	bl ObjectEventClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080820EE
@@ -799,7 +799,7 @@ _080820EE:
 	bx r1
 	.align 2, 0
 _080820F8: .4byte gPlayerAvatar
-_080820FC: .4byte gMapObjects
+_080820FC: .4byte gObjectEvents
 	thumb_func_end sub_80820BC
 
 	thumb_func_start sub_8082100
@@ -808,19 +808,19 @@ sub_8082100: @ 8082100
 	adds r5, r1, 0
 	adds r4, r2, 0
 	adds r0, r4, 0
-	bl FieldObjectIsMovementOverridden
+	bl ObjectEventIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808211E
 	adds r0, r4, 0
-	bl FieldObjectClearHeldMovementIfFinished
+	bl ObjectEventClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808212C
 _0808211E:
 	adds r0, r4, 0
 	movs r1, 0x67
-	bl FieldObjectSetHeldMovement
+	bl ObjectEventSetHeldMovement
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	strh r0, [r5, 0x8]
@@ -836,7 +836,7 @@ sub_8082134: @ 8082134
 	push {r4,lr}
 	adds r4, r1, 0
 	adds r0, r2, 0
-	bl FieldObjectClearHeldMovementIfFinished
+	bl ObjectEventClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08082148
@@ -855,19 +855,19 @@ sub_8082150: @ 8082150
 	adds r5, r1, 0
 	adds r4, r2, 0
 	adds r0, r4, 0
-	bl FieldObjectIsMovementOverridden
+	bl ObjectEventIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808216E
 	adds r0, r4, 0
-	bl FieldObjectClearHeldMovementIfFinished
+	bl ObjectEventClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808217C
 _0808216E:
 	adds r0, r4, 0
 	movs r1, 0x4A
-	bl FieldObjectSetHeldMovement
+	bl ObjectEventSetHeldMovement
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	strh r0, [r5, 0x8]
@@ -884,7 +884,7 @@ sub_8082184: @ 8082184
 	adds r5, r1, 0
 	adds r4, r2, 0
 	adds r0, r4, 0
-	bl FieldObjectCheckHeldMovementStatus
+	bl ObjectEventCheckHeldMovementStatus
 	lsls r0, 24
 	cmp r0, 0
 	beq _080821CA
@@ -961,7 +961,7 @@ sub_80821DC: @ 80821DC
 	orrs r1, r2
 	strb r1, [r0, 0x5]
 	adds r0, r4, 0
-	bl FieldObjectClearHeldMovementIfFinished
+	bl ObjectEventClearHeldMovementIfFinished
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
@@ -970,7 +970,7 @@ sub_80821DC: @ 80821DC
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetHeldMovement
+	bl ObjectEventSetHeldMovement
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	strh r0, [r5, 0x8]
@@ -1024,8 +1024,8 @@ sub_808226C: @ 808226C
 	movs r0, 0x12
 	movs r1, 0x7
 	movs r2, 0x7F
-	bl SpawnSpecialFieldObjectParameterized
-	ldr r2, _080822C8 @ =gMapObjects
+	bl SpawnSpecialObjectEventParameterized
+	ldr r2, _080822C8 @ =gObjectEvents
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
@@ -1046,7 +1046,7 @@ sub_808226C: @ 808226C
 	bx r1
 	.align 2, 0
 _080822C4: .4byte gSaveBlock1Ptr
-_080822C8: .4byte gMapObjects
+_080822C8: .4byte gObjectEvents
 	thumb_func_end sub_808226C
 
 	thumb_func_start sub_80822CC
@@ -1061,15 +1061,15 @@ sub_80822CC: @ 80822CC
 	ldrb r2, [r0, 0x4]
 	movs r0, 0x7F
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetObjectEventIdByLocalIdAndMap
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r4, _0808234C @ =gMapObjects
+	ldr r4, _0808234C @ =gObjectEvents
 	adds r0, r4
-	bl FieldObjectIsMovementOverridden
+	bl ObjectEventIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _08082312
@@ -1079,7 +1079,7 @@ sub_80822CC: @ 80822CC
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl FieldObjectClearHeldMovementIfFinished
+	bl ObjectEventClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808236E
@@ -1096,7 +1096,7 @@ _08082312:
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _0808234C @ =gMapObjects
+	ldr r0, _0808234C @ =gObjectEvents
 	adds r4, r0
 	movs r0, 0x2
 	bl sub_8063FB0
@@ -1104,21 +1104,21 @@ _08082312:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetHeldMovement
+	bl ObjectEventSetHeldMovement
 	ldrh r0, [r5, 0x12]
 	adds r0, 0x1
 	strh r0, [r5, 0x12]
 	b _0808236E
 	.align 2, 0
 _08082348: .4byte gSaveBlock1Ptr
-_0808234C: .4byte gMapObjects
+_0808234C: .4byte gObjectEvents
 _08082350:
 	ldr r1, _08082378 @ =gFieldEffectArguments
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8
 	adds r0, r6, 0
-	bl FieldObjectGetLocalIdAndMap
+	bl ObjectEventGetLocalIdAndMap
 	movs r0, 0
 	bl FieldEffectStart
 	movs r0, 0
@@ -1147,7 +1147,7 @@ sub_808237C: @ 808237C
 	ldrb r2, [r0, 0x4]
 	movs r0, 0x7F
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetObjectEventIdByLocalIdAndMap
 	movs r0, 0
 	bl FieldEffectActiveListContains
 	lsls r0, 24
@@ -1158,9 +1158,9 @@ sub_808237C: @ 808237C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r4, _08082408 @ =gMapObjects
+	ldr r4, _08082408 @ =gObjectEvents
 	adds r0, r4
-	bl FieldObjectIsMovementOverridden
+	bl ObjectEventIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _080823CC
@@ -1170,7 +1170,7 @@ sub_808237C: @ 808237C
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl FieldObjectClearHeldMovementIfFinished
+	bl ObjectEventClearHeldMovementIfFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808242E
@@ -1187,7 +1187,7 @@ _080823CC:
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _08082408 @ =gMapObjects
+	ldr r0, _08082408 @ =gObjectEvents
 	adds r4, r0
 	movs r0, 0x1
 	bl sub_8063FB0
@@ -1195,14 +1195,14 @@ _080823CC:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetHeldMovement
+	bl ObjectEventSetHeldMovement
 	ldrh r0, [r5, 0x12]
 	adds r0, 0x1
 	strh r0, [r5, 0x12]
 	b _0808242E
 	.align 2, 0
 _08082404: .4byte gSaveBlock1Ptr
-_08082408: .4byte gMapObjects
+_08082408: .4byte gObjectEvents
 _0808240C:
 	bl GetPlayerAvatarObjectId
 	lsls r0, 24
@@ -1213,7 +1213,7 @@ _0808240C:
 	ldrb r1, [r0, 0x5]
 	ldrb r2, [r0, 0x4]
 	movs r0, 0x7F
-	bl RemoveFieldObjectByLocalIdAndMap
+	bl RemoveObjectEventByLocalIdAndMap
 	movs r0, 0
 	strh r0, [r5, 0x12]
 	movs r0, 0x2
@@ -1249,7 +1249,7 @@ sub_808243C: @ 808243C
 	cmp r0, 0
 	bne _0808246E
 	ldr r0, [sp]
-	bl FieldObjectClearAnim
+	bl ObjectEventClearAnim
 	ldrh r0, [r4, 0x16]
 	adds r0, 0x1
 	strh r0, [r4, 0x16]
@@ -1560,7 +1560,7 @@ objc_exclamation_mark_probably: @ 80826A8
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _080826DA
@@ -1579,7 +1579,7 @@ _080826DA:
 	bl FieldEffectStop
 	b _08082736
 _080826E8:
-	ldr r2, _0808272C @ =gMapObjects
+	ldr r2, _0808272C @ =gObjectEvents
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -1614,7 +1614,7 @@ _080826E8:
 	strh r0, [r4, 0x34]
 	b _08082736
 	.align 2, 0
-_0808272C: .4byte gMapObjects
+_0808272C: .4byte gObjectEvents
 _08082730: .4byte gSprites
 _08082734:
 	strh r2, [r4, 0x34]

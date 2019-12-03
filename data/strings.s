@@ -3351,58 +3351,67 @@ gUnknown_841CC64:: @ 841CC64
 	.string "SAVING...\n"
 	.string "DON'T TURN OFF THE POWER.$"
 
+gText_BerryPickingRecords::
 	.string "DODRIO BERRY-PICKING RECORDS$"
 
+gText_BerriesPicked::
 	.string "BERRIES picked:$"
 
+gText_BestScore::
 	.string "Best score:$"
 
+gText_BerriesInRowFivePlayers::
 	.string "BERRIES picked in a row with\n"
 	.string "five players:$"
 
-gUnknown_841CD03:: @ 841CD03
+gText_BerryPickingResults:: @ 841CD03
 	.string "Announcing BERRY-PICKING results!$"
 
-gUnknown_841CD25:: @ 841CD25
+gText_10P30P50P50P:: @ 841CD25
 	.string "10P     30P     50P     {EXTRA 0xDD}50P$"
 
-gUnknown_841CD43:: @ 841CD43
+gText_AnnouncingRankings:: @ 841CD43
 	.string "Announcing rankings!$"
 
-gUnknown_841CD58:: @ 841CD58
+gText_AnnouncingPrizes:: @ 841CD58
 	.string "Announcing prizes!$"
 
+gText_1Colon::
 	.string "1:$"
 
+gText_2Colon::
 	.string "2:$"
 
+gText_3Colon::
 	.string "3:$"
 
+gText_4Colon::
 	.string "4:$"
 
+gText_5Colon::
 	.string "5:$"
 
-gUnknown_841CD7A:: @ 841CD7A
+gText_FirstPlacePrize:: @ 841CD7A
 	.string "The first-place winner gets\n"
 	.string "this {DYNAMIC 00}!$"
 
-gUnknown_841CD9F:: @ 841CD9F
+gText_CantHoldAnyMore:: @ 841CD9F
 	.string "You can't hold any more...$"
 
-gUnknown_841CDBA:: @ 841CDBA
+gText_FilledStorageSpace:: @ 841CDBA
 	.string "It filled its storage space.$"
 
-gUnknown_841CDD7:: @ 841CDD7
+gText_WantToPlayAgain:: @ 841CDD7
 	.string "Want to play again?$"
 
-gUnknown_841CDEB:: @ 841CDEB
+gText_SomeoneDroppedOut:: @ 841CDEB
 	.string "Somebody dropped out.\n"
 	.string "The link will be canceled.$"
 
-gUnknown_841CE1C:: @ 841CE1C
+gText_SpacePoints:: @ 841CE1C
 	.string " points$"
 
-gUnknown_841CE24:: @ 841CE24
+gText_CommunicationStandby3:: @ 841CE24
 	.string "Communication standby…$"
 
 	.align 2

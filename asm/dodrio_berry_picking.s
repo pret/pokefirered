@@ -6691,7 +6691,7 @@ sub_8153A9C: @ 8153A9C
 	ldr r0, [r0]
 	str r0, [sp, 0x10]
 	str r1, [sp, 0x14]
-	ldr r0, _08153AF8 @ =gUnknown_8477374
+	ldr r0, _08153AF8 @ =gDodrioBerryPkmnGfx
 	adds r1, r4, 0
 	bl LZ77UnCompWram
 	cmp r4, 0
@@ -6714,7 +6714,7 @@ _08153ADC:
 	.align 2, 0
 _08153AF0: .4byte gUnknown_8478D90
 _08153AF4: .4byte gUnknown_8478D98
-_08153AF8: .4byte gUnknown_8477374
+_08153AF8: .4byte gDodrioBerryPkmnGfx
 	thumb_func_end sub_8153A9C
 
 	thumb_func_start sub_8153AFC
@@ -6741,9 +6741,9 @@ sub_8153AFC: @ 8153AFC
 	mov r0, sp
 	adds r0, 0x1A
 	strh r2, [r0]
-	ldr r0, _08153B88 @ =gUnknown_8478C98
+	ldr r0, _08153B88 @ =sOamData_8478C98
 	str r0, [sp, 0x1C]
-	ldr r0, _08153B8C @ =gUnknown_8478CE0
+	ldr r0, _08153B8C @ =sSpriteAnimTable_8478CE0
 	str r0, [sp, 0x20]
 	str r3, [sp, 0x24]
 	ldr r0, _08153B90 @ =gDummySpriteAffineAnimTable
@@ -6784,8 +6784,8 @@ sub_8153AFC: @ 8153AFC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08153B88: .4byte gUnknown_8478C98
-_08153B8C: .4byte gUnknown_8478CE0
+_08153B88: .4byte sOamData_8478C98
+_08153B8C: .4byte sSpriteAnimTable_8478CE0
 _08153B90: .4byte gDummySpriteAffineAnimTable
 _08153B94: .4byte sub_8153B9C
 _08153B98: .4byte gUnknown_203F3E4
@@ -7167,7 +7167,7 @@ sub_8153E28: @ 8153E28
 	ldr r0, [r0]
 	str r0, [sp, 0x20]
 	str r1, [sp, 0x24]
-	ldr r0, _08153ECC @ =gUnknown_8477198
+	ldr r0, _08153ECC @ =gDodrioBerryStatusGfx
 	adds r1, r6, 0
 	bl LZ77UnCompWram
 	cmp r6, 0
@@ -7231,7 +7231,7 @@ _08153EB8:
 	bx r0
 	.align 2, 0
 _08153EC8: .4byte gUnknown_8478DA0
-_08153ECC: .4byte gUnknown_8477198
+_08153ECC: .4byte gDodrioBerryStatusGfx
 _08153ED0: .4byte gUnknown_8478DA8
 _08153ED4: .4byte gUnknown_203F43C
 	thumb_func_end sub_8153E28
@@ -7563,7 +7563,7 @@ sub_8154128: @ 8154128
 	ldr r0, [r0]
 	str r0, [sp, 0x8]
 	str r1, [sp, 0xC]
-	ldr r0, _08154178 @ =gUnknown_8475968
+	ldr r0, _08154178 @ =gDodrioBerrySpritesGfx
 	adds r1, r4, 0
 	bl LZ77UnCompWram
 	cmp r4, 0
@@ -7586,7 +7586,7 @@ _0815415E:
 	bx r0
 	.align 2, 0
 _08154174: .4byte gUnknown_8478DCC
-_08154178: .4byte gUnknown_8475968
+_08154178: .4byte gDodrioBerrySpritesGfx
 	thumb_func_end sub_8154128
 
 	thumb_func_start sub_815417C
@@ -7971,7 +7971,7 @@ sub_8154438: @ 8154438
 	ldr r0, [r0]
 	str r0, [sp, 0x20]
 	str r1, [sp, 0x24]
-	ldr r0, _081544E0 @ =gUnknown_847722C
+	ldr r0, _081544E0 @ =gDodrioBerryPlatformGfx
 	adds r1, r6, 0
 	bl LZ77UnCompWram
 	cmp r6, 0
@@ -8034,7 +8034,7 @@ _081544C6:
 	bx r0
 	.align 2, 0
 _081544DC: .4byte gUnknown_8478E18
-_081544E0: .4byte gUnknown_847722C
+_081544E0: .4byte gDodrioBerryPlatformGfx
 _081544E4: .4byte gUnknown_8478E20
 _081544E8: .4byte gUnknown_8478E0E
 _081544EC: .4byte gUnknown_203F3F8
@@ -8777,17 +8777,17 @@ _08154A6E:
 _08154A80: .4byte gUnknown_203F440
 _08154A84: .4byte 0x00003014
 _08154A88:
-	ldr r1, _08154AC0 @ =gUnknown_8478590
+	ldr r1, _08154AC0 @ =gDodrioBerryBgTilemap1
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
 	bl CopyToBgTilemapBuffer
-	ldr r1, _08154AC4 @ =gUnknown_8478A4C
+	ldr r1, _08154AC4 @ =gDodrioBerryBgTilemap2Left
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
 	bl CopyToBgTilemapBuffer
-	ldr r1, _08154AC8 @ =gUnknown_84787FC
+	ldr r1, _08154AC8 @ =gDodrioBerryBgTilemap2Right
 	movs r0, 0x2
 	movs r2, 0
 	movs r3, 0
@@ -8800,9 +8800,9 @@ _08154A88:
 	bl CopyBgTilemapBufferToVram
 	b _08154B08
 	.align 2, 0
-_08154AC0: .4byte gUnknown_8478590
-_08154AC4: .4byte gUnknown_8478A4C
-_08154AC8: .4byte gUnknown_84787FC
+_08154AC0: .4byte gDodrioBerryBgTilemap1
+_08154AC4: .4byte gDodrioBerryBgTilemap2Left
+_08154AC8: .4byte gDodrioBerryBgTilemap2Right
 _08154ACC:
 	movs r0, 0
 	bl ShowBg
@@ -9215,7 +9215,7 @@ _08154E1C:
 	bcc _08154DF4
 _08154E22:
 	movs r5, 0
-	ldr r4, _08154F68 @ =gUnknown_841CE1C
+	ldr r4, _08154F68 @ =gText_SpacePoints
 	cmp r5, r7
 	bcs _08154E48
 	add r1, sp, 0x34
@@ -9354,7 +9354,7 @@ _08154EC8:
 	str r4, [sp, 0x4]
 	movs r1, 0
 	str r1, [sp, 0x8]
-	ldr r2, _08154F68 @ =gUnknown_841CE1C
+	ldr r2, _08154F68 @ =gText_SpacePoints
 	lsrs r3, 24
 	bl AddTextPrinterParameterized
 	adds r0, r5, 0x1
@@ -9373,7 +9373,7 @@ _08154F52:
 	bx r0
 	.align 2, 0
 _08154F64: .4byte gUnknown_8478F14
-_08154F68: .4byte gUnknown_841CE1C
+_08154F68: .4byte gText_SpacePoints
 _08154F6C: .4byte 0x00003009
 _08154F70: .4byte gUnknown_203F440
 _08154F74: .4byte gUnknown_8478E94
@@ -9488,7 +9488,7 @@ _08155060:
 	ldrb r0, [r0]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r2, _081551B4 @ =gUnknown_841CD03
+	ldr r2, _081551B4 @ =gText_BerryPickingResults
 	mov r8, r2
 	movs r2, 0x1
 	negs r2, r2
@@ -9516,7 +9516,7 @@ _08155060:
 	ldr r0, [r4]
 	add r0, r9
 	ldrb r0, [r0]
-	ldr r2, _081551B8 @ =gUnknown_841CD25
+	ldr r2, _081551B8 @ =gText_10P30P50P50P
 	movs r1, 0x10
 	str r1, [sp]
 	str r6, [sp, 0x4]
@@ -9616,7 +9616,7 @@ _0815512E:
 	lsrs r2, 24
 	mov r1, r8
 	ldrb r3, [r1]
-	ldr r1, _081551CC @ =gUnknown_8478E3B
+	ldr r1, _081551CC @ =gUnknown_8478E38+0x3
 	str r1, [sp]
 	movs r1, 0x1
 	negs r1, r1
@@ -9630,13 +9630,13 @@ _0815512E:
 _081551A8: .4byte gUnknown_203F440
 _081551AC: .4byte 0x00003008
 _081551B0: .4byte 0x00003009
-_081551B4: .4byte gUnknown_841CD03
-_081551B8: .4byte gUnknown_841CD25
+_081551B4: .4byte gText_BerryPickingResults
+_081551B8: .4byte gText_10P30P50P50P
 _081551BC: .4byte gUnknown_8478EB0
 _081551C0: .4byte gUnknown_8478E38
 _081551C4: .4byte gUnknown_8478EA8
 _081551C8: .4byte 0x0000270f
-_081551CC: .4byte gUnknown_8478E3B
+_081551CC: .4byte gUnknown_8478E38+0x3
 _081551D0:
 	ldr r0, _0815523C @ =gUnknown_203F440
 	ldr r0, [r0]
@@ -9773,7 +9773,7 @@ _081552DC:
 	ldrb r0, [r0]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r6, _0815533C @ =gUnknown_841CD43
+	ldr r6, _0815533C @ =gText_AnnouncingRankings
 	movs r2, 0x1
 	negs r2, r2
 	movs r0, 0
@@ -9801,7 +9801,7 @@ _081552DC:
 _08155330: .4byte gUnknown_203F440
 _08155334: .4byte 0x00003008
 _08155338: .4byte 0x00003009
-_0815533C: .4byte gUnknown_841CD43
+_0815533C: .4byte gText_AnnouncingRankings
 _08155340:
 	ldr r0, [sp, 0x84]
 	bl sub_8154D9C
@@ -9957,7 +9957,7 @@ _08155480:
 	ldrb r0, [r0]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r5, _08155568 @ =gUnknown_841CD58
+	ldr r5, _08155568 @ =gText_AnnouncingPrizes
 	movs r2, 0x1
 	negs r2, r2
 	movs r0, 0
@@ -9993,7 +9993,7 @@ _08155480:
 	movs r0, 0
 	adds r1, r5, 0
 	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
-	ldr r1, _0815556C @ =gUnknown_841CD7A
+	ldr r1, _0815556C @ =gText_FirstPlacePrize
 	add r0, sp, 0xC
 	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	ldr r0, [r4]
@@ -10027,7 +10027,7 @@ _08155480:
 	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	cmp r4, 0x2
 	bne _08155574
-	ldr r1, _08155570 @ =gUnknown_841CD9F
+	ldr r1, _08155570 @ =gText_CantHoldAnyMore
 	add r0, sp, 0xC
 	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	b _08155580
@@ -10036,13 +10036,13 @@ _08155558: .4byte 0x00000101
 _0815555C: .4byte gUnknown_203F440
 _08155560: .4byte 0x00003008
 _08155564: .4byte 0x00003009
-_08155568: .4byte gUnknown_841CD58
-_0815556C: .4byte gUnknown_841CD7A
-_08155570: .4byte gUnknown_841CD9F
+_08155568: .4byte gText_AnnouncingPrizes
+_0815556C: .4byte gText_FirstPlacePrize
+_08155570: .4byte gText_CantHoldAnyMore
 _08155574:
 	cmp r6, 0x1
 	bne _08155580
-	ldr r1, _081555C4 @ =gUnknown_841CDBA
+	ldr r1, _081555C4 @ =gText_FilledStorageSpace
 	add r0, sp, 0xC
 	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 _08155580:
@@ -10079,7 +10079,7 @@ _0815559E:
 	adds r1, r0
 	b _0815565E
 	.align 2, 0
-_081555C4: .4byte gUnknown_841CDBA
+_081555C4: .4byte gText_FilledStorageSpace
 _081555C8: .4byte gUnknown_203F440
 _081555CC: .4byte 0x00003009
 _081555D0: .4byte 0x00003008
@@ -10310,7 +10310,7 @@ _0815579C:
 	ldr r0, [r2]
 	add r0, r8
 	ldrb r0, [r0]
-	ldr r2, _08155854 @ =gUnknown_841CDD7
+	ldr r2, _08155854 @ =gText_WantToPlayAgain
 	movs r1, 0x6
 	str r1, [sp]
 	movs r5, 0xFF
@@ -10376,7 +10376,7 @@ _0815579C:
 	.align 2, 0
 _0815584C: .4byte 0x00003008
 _08155850: .4byte 0x00003009
-_08155854: .4byte gUnknown_841CDD7
+_08155854: .4byte gText_WantToPlayAgain
 _08155858: .4byte gText_Yes
 _0815585C: .4byte gText_No
 _08155860: .4byte gFameCheckerText_ListMenuCursor
@@ -10789,7 +10789,7 @@ _08155BA4:
 	ldr r0, [r5]
 	adds r0, r4
 	ldrb r0, [r0]
-	ldr r2, _08155BE4 @ =gUnknown_841CE24
+	ldr r2, _08155BE4 @ =gText_CommunicationStandby3
 	movs r1, 0x6
 	str r1, [sp]
 	movs r1, 0xFF
@@ -10810,7 +10810,7 @@ _08155BA4:
 	b _08155C0C
 	.align 2, 0
 _08155BE0: .4byte 0x00003008
-_08155BE4: .4byte gUnknown_841CE24
+_08155BE4: .4byte gText_CommunicationStandby3
 _08155BE8: .4byte 0x00003014
 _08155BEC:
 	bl IsDma3ManagerBusyWithBgCopy
@@ -10961,7 +10961,7 @@ _08155D08:
 	ldr r0, [r6]
 	adds r0, r4
 	ldrb r0, [r0]
-	ldr r2, _08155D48 @ =gUnknown_841CDEB
+	ldr r2, _08155D48 @ =gText_SomeoneDroppedOut
 	movs r1, 0x6
 	str r1, [sp]
 	movs r1, 0xFF
@@ -10982,7 +10982,7 @@ _08155D08:
 	b _08155D70
 	.align 2, 0
 _08155D44: .4byte 0x00003008
-_08155D48: .4byte gUnknown_841CDEB
+_08155D48: .4byte gText_SomeoneDroppedOut
 _08155D4C: .4byte 0x00003014
 _08155D50:
 	bl IsDma3ManagerBusyWithBgCopy
@@ -11340,26 +11340,26 @@ _08156008:
 	.4byte _0815605C
 	.4byte _0815606A
 _08156020:
-	ldr r0, _0815602C @ =gUnknown_84758A8
+	ldr r0, _0815602C @ =gDodrioBerryBgPal1
 	movs r1, 0
 	movs r2, 0x40
 	bl LoadPalette
 	b _08156082
 	.align 2, 0
-_0815602C: .4byte gUnknown_84758A8
+_0815602C: .4byte gDodrioBerryBgPal1
 _08156030:
 	bl ResetTempTileDataBuffers
 	b _08156082
 _08156036:
-	ldr r1, _08156040 @ =gUnknown_8475B3C
+	ldr r1, _08156040 @ =gDodrioBerryBgGfx1
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x3
 	b _0815604C
 	.align 2, 0
-_08156040: .4byte gUnknown_8475B3C
+_08156040: .4byte gDodrioBerryBgGfx1
 _08156044:
-	ldr r1, _08156058 @ =gUnknown_84763CC
+	ldr r1, _08156058 @ =gDodrioBerryBgGfx2
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x1
@@ -11369,7 +11369,7 @@ _0815604C:
 	bl DecompressAndCopyTileDataToVram
 	b _08156082
 	.align 2, 0
-_08156058: .4byte gUnknown_84763CC
+_08156058: .4byte gDodrioBerryBgGfx2
 _0815605C:
 	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24

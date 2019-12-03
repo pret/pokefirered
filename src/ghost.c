@@ -1319,13 +1319,13 @@ static void sub_80B6BE4(u8 taskId)
         SetGpuReg(REG_OFFSET_BG2HOFS, gBattle_BG2_X);
         SetGpuReg(REG_OFFSET_BG2VOFS, gBattle_BG2_Y);
         sub_80752C8(&animBgData, 2);
-        AnimLoadCompressedBgGfx(animBgData.bgId, gFile_graphics_battle_anims_backgrounds_scary_face_sheet, animBgData.tilesOffset);
-        LoadCompressedPalette(gFile_graphics_battle_anims_backgrounds_scary_face_palette, 16 * animBgData.paletteId, 0x20);
+        AnimLoadCompressedBgGfx(animBgData.bgId, gBattleAnim_ScaryFaceGfx, animBgData.tilesOffset);
+        LoadCompressedPalette(gBattleAnim_ScaryFacePal, 16 * animBgData.paletteId, 0x20);
         break;
     case 3:
         sub_80752C8(&animBgData, 2);
         gMonSpritesGfxPtr->field_17C = AllocZeroed(0x2000);
-        LZDecompressWram(gFile_graphics_battle_anims_backgrounds_scary_face_player_tilemap, gMonSpritesGfxPtr->field_17C);
+        LZDecompressWram(gBattleAnimBgTilemap_ScaryFacePlayer, gMonSpritesGfxPtr->field_17C);
         sub_80730C0(animBgData.paletteId, gMonSpritesGfxPtr->field_17C, 256, 0);
         CopyToBgTilemapBufferRect_ChangePalette(animBgData.bgId, gMonSpritesGfxPtr->field_17C, 0, 0, 0x20, 0x20, 0x11);
         CopyBgTilemapBufferToVram(2);

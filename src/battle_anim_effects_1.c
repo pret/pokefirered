@@ -2375,7 +2375,7 @@ static void AnimAbsorptionOrbStep(struct Sprite* sprite)
 void AnimHyperBeamOrb(struct Sprite* sprite)
 {
     u16 speed;
-    u16 animNum = Random2();
+    u16 animNum = Random();
 
     StartSpriteAnim(sprite, animNum % 8);
     sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
@@ -2385,14 +2385,14 @@ void AnimHyperBeamOrb(struct Sprite* sprite)
     else
         sprite->pos1.x += 20;
 
-    speed = Random2();
+    speed = Random();
     sprite->data[0] = (speed & 31) + 64;
     sprite->data[1] = sprite->pos1.x;
     sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
     sprite->data[3] = sprite->pos1.y;
     sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
     InitAnimFastLinearTranslationWithSpeed(sprite);
-    sprite->data[5] = Random2() & 0xFF;
+    sprite->data[5] = Random() & 0xFF;
     sprite->data[6] = sprite->subpriority;
     sprite->callback = AnimHyperBeamOrbStep;
     sprite->callback(sprite);

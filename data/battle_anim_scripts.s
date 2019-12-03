@@ -970,7 +970,7 @@ gUnknown_81C7D89:: @ 81C7D89
 	delay 2
 	createvisualtask AnimTask_IsContest, 2, 
 	jumpargeq 7, 1, gUnknown_81C7DC0
-	createvisualtask sub_80DEAB4, 2, 
+	createvisualtask AnimTask_IsTargetPlayerSide, 2, 
 	jumpargeq 7, 0, gUnknown_81C7DB2
 	jumpargeq 7, 1, gUnknown_81C7DB9
 
@@ -1444,12 +1444,12 @@ Move_FURY_CUTTER:: @ 81C88EA
 	monbg 1
 	setalpha 12, 8
 	playsewithpan SE_W013, 63
-	createvisualtask sub_80AAB7C, 2, 
+	createvisualtask AnimTask_IsFuryCutterHitRight, 2, 
 	jumpargeq 7, 0, gUnknown_81C8947
 	goto gUnknown_81C8959
 
 gUnknown_81C890A:: @ 81C890A
-	createvisualtask update_fury_cutter_counter_copy, 2, 
+	createvisualtask AnimTask_GetFuryCutterHitCount, 2, 
 	jumpargeq 7, 1, gUnknown_81C892E
 	jumpargeq 7, 2, gUnknown_81C896B
 	jumpargeq 7, 3, gUnknown_81C8985
@@ -1689,7 +1689,7 @@ Move_DEFENSE_CURL:: @ 81C8F1C
 	loadspritegfx 10234
 	loopsewithpan SE_W161, 192, 18, 3
 	createvisualtask AnimTask_SetGreyscaleOrOriginalPal, 5, 0, 0
-	createvisualtask sub_80DF524, 5, 
+	createvisualtask AnimTask_DefenseCurlDeformMon, 5, 
 	waitforvisualfinish
 	createsprite gEclipsingOrbSpriteTemplate, ANIM_ATTACKER, 2, 0, 6, 0, 1
 	waitforvisualfinish
@@ -2041,7 +2041,7 @@ Move_ATTRACT:: @ 81C985A
 	createsprite gRedHeartBurstSpriteTemplate, ANIM_TARGET, 3, -384, -31
 	waitforvisualfinish
 	waitplaysewithpan SE_W213B, 0, 15
-	createvisualtask sub_80A9CE8, 5, 
+	createvisualtask AnimTask_HeartsBackground, 5, 
 	createsprite gRedHeartRisingSpriteTemplate, ANIM_ATTACKER, 40, 16, 256, 0
 	createsprite gRedHeartRisingSpriteTemplate, ANIM_ATTACKER, 40, 224, 240, 15
 	createsprite gRedHeartRisingSpriteTemplate, ANIM_ATTACKER, 40, 126, 272, 30
@@ -2370,7 +2370,7 @@ Move_CONVERSION:: @ 81C9FA9
 	playsewithpan SE_W112, 192
 	createvisualtask sub_80B9F6C, 2, 10018, 1, 1, 14335, 12, 0, 0
 	delay 6
-	createvisualtask sub_80A5CD4, 5, 
+	createvisualtask AnimTask_ConversionAlphaBlend, 5, 
 	waitforvisualfinish
 	delay 1
 	clearmonbg 2
@@ -2400,7 +2400,7 @@ Move_CONVERSION_2:: @ 81CA0BE
 	createsprite gConversion2SpriteTemplate, ANIM_ATTACKER, 2, -8, 24, 125
 	createsprite gConversion2SpriteTemplate, ANIM_ATTACKER, 2, 8, 24, 130
 	createsprite gConversion2SpriteTemplate, ANIM_ATTACKER, 2, 24, 24, 135
-	createvisualtask sub_80A5DE0, 5, 
+	createvisualtask AnimTask_Conversion2AlphaBlend, 5, 
 	delay 60
 	playsewithpan SE_W129, 63
 	delay 10
@@ -2574,8 +2574,8 @@ gUnknown_81CA50A:: @ 81CA50A
 Move_THRASH:: @ 81CA521
 	loadspritegfx 10135
 	loadspritegfx 10143
-	createvisualtask sub_80A8638, 2, 
-	createvisualtask sub_80A86A4, 2, 
+	createvisualtask AnimTask_ThrashMoveMonHorizontal, 2, 
+	createvisualtask AnimTask_ThrashMoveMonVertical, 2, 
 	createsprite gUnknown_83E6728, ANIM_TARGET, 3, 1, 10, 0
 	createvisualtask AnimTask_ShakeMonInPlace, 2, 1, 4, 0, 7, 1
 	playsewithpan SE_W004, 63
@@ -2621,7 +2621,7 @@ Move_SING:: @ 81CA5A0
 	delay 4
 	waitforvisualfinish
 	clearmonbg 3
-	createvisualtask sub_80A66A0, 2, 
+	createvisualtask AnimTask_MusicNotesClearRainbowBlend, 2, 
 	waitforvisualfinish
 	end
 
@@ -2824,7 +2824,7 @@ Move_TELEPORT:: @ 81CAA92
 Move_DOUBLE_TEAM:: @ 81CAAAB
 	monbg 2
 	setalpha 12, 8
-	createvisualtask sub_80A63B4, 2, 
+	createvisualtask AnimTask_DoubleTeam, 2, 
 	playsewithpan SE_W104, 192
 	delay 32
 	playsewithpan SE_W104, 192
@@ -2850,7 +2850,7 @@ Move_DOUBLE_TEAM:: @ 81CAAAB
 
 Move_MINIMIZE:: @ 81CAAF2
 	setalpha 10, 8
-	createvisualtask sub_80A8074, 2, 
+	createvisualtask AnimTask_Minimize, 2, 
 	loopsewithpan SE_W107, 192, 34, 3
 	waitforvisualfinish
 	blendoff
@@ -2892,7 +2892,7 @@ gUnknown_81CAB49:: @ 81CAB49
 
 gUnknown_81CAB86:: @ 81CAB86
 	loadspritegfx 10135
-	createvisualtask sub_80A5694, 2, 0
+	createvisualtask AnimTask_SkullBashPosition, 2, 0
 	playsewithpan SE_W036, 192
 	waitforvisualfinish
 	playse SE_BAN
@@ -2902,7 +2902,7 @@ gUnknown_81CAB86:: @ 81CAB86
 	createsprite gUnknown_83E7C98, ANIM_TARGET, 4, 0, 0, 1, 0
 	loopsewithpan SE_W025B, 63, 8, 3
 	waitforvisualfinish
-	createvisualtask sub_80A5694, 2, 1
+	createvisualtask AnimTask_SkullBashPosition, 2, 1
 	goto gUnknown_81CAB38
 
 Move_AMNESIA:: @ 81CABF5
@@ -3043,7 +3043,7 @@ Move_FLASH:: @ 81CAEB3
 	end
 
 Move_SPLASH:: @ 81CAEC0
-	createvisualtask sub_80A8338, 2, 0, 3
+	createvisualtask AnimTask_Splash, 2, 0, 3
 	delay 8
 	loopsewithpan SE_W039, 192, 38, 3
 	waitforvisualfinish
@@ -3122,7 +3122,7 @@ Move_SKETCH:: @ 81CB01B
 	createsprite gPencilSpriteTemplate, ANIM_TARGET, 2, 
 	waitforvisualfinish
 	clearmonbg 1
-	createvisualtask sub_80A8338, 2, 0, 2
+	createvisualtask AnimTask_Splash, 2, 0, 2
 	loopsewithpan SE_W039, 192, 38, 2
 	end
 
@@ -4078,7 +4078,7 @@ Move_TEETER_DANCE:: @ 81CC371
 
 Move_MUD_SPORT:: @ 81CC3DC
 	loadspritegfx 10074
-	createvisualtask sub_80A8338, 2, 0, 6
+	createvisualtask AnimTask_Splash, 2, 0, 6
 	delay 24
 	createsprite gUnknown_83E7A94, ANIM_TARGET, 2, 0, -4, -16
 	createsprite gUnknown_83E7A94, ANIM_TARGET, 2, 0, 4, -12
@@ -4328,7 +4328,7 @@ Move_GRASS_WHISTLE:: @ 81CC9E9
 	createsprite gWavyMusicNotesSpriteTemplate, ANIM_TARGET, 2, 5, 1, 0
 	delay 4
 	waitforvisualfinish
-	createvisualtask sub_80A66A0, 2, 
+	createvisualtask AnimTask_MusicNotesClearRainbowBlend, 2, 
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 4, 4, 0, 13298
 	waitforvisualfinish
 	end
@@ -4675,7 +4675,7 @@ Move_BELLY_DRUM:: @ 81CD0C0
 	createsprite gSlowFlyingMusicNotesSpriteTemplate, ANIM_ATTACKER, 2, 1, 0, 3, 0
 	playsewithpan SE_W187, 192
 	waitforvisualfinish
-	createvisualtask sub_80A66A0, 2, 
+	createvisualtask AnimTask_MusicNotesClearRainbowBlend, 2, 
 	waitforvisualfinish
 	end
 
@@ -8112,7 +8112,7 @@ Move_HYPER_FANG:: @ 81D2165
 	delay 2
 	createvisualtask AnimTask_IsContest, 2, 
 	jumpargeq 7, 1, gUnknown_81D21C5
-	createvisualtask sub_80DEAB4, 2, 
+	createvisualtask AnimTask_IsTargetPlayerSide, 2, 
 	jumpargeq 7, 0, gUnknown_81D21B7
 	goto gUnknown_81D21BE
 
@@ -9019,7 +9019,7 @@ gUnknown_81D363A:: @ 81D363A
 	delay 1
 	createvisualtask AnimTask_IsContest, 2, 
 	jumpargeq 7, 1, gUnknown_81D36F3
-	createvisualtask sub_80DEAB4, 2, 
+	createvisualtask AnimTask_IsTargetPlayerSide, 2, 
 	jumpargeq 7, 0, gUnknown_81D36E5
 	jumpargeq 7, 1, gUnknown_81D36EC
 
@@ -10405,7 +10405,7 @@ gUnknown_81D59FF:: @ 81D59FF
 gUnknown_81D5A07:: @ 81D5A07
 	createvisualtask AnimTask_IsContest, 2, 
 	jumpargeq 7, 1, gUnknown_81D5A2C
-	createvisualtask sub_80DEAB4, 2, 
+	createvisualtask AnimTask_IsTargetPlayerSide, 2, 
 	jumpargeq 7, 0, gUnknown_81D5A3A
 	goto gUnknown_81D5A33
 

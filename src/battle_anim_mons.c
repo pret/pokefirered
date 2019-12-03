@@ -884,7 +884,7 @@ void AnimLoadCompressedBgTilemap(u32 bgId, const u32 *src)
     CopyBgTilemapBufferToVram(bgId);
 }
 
-u8 sub_8075454(void)
+u8 GetBattleBgPaletteNum(void)
 {
     return 2;
 }

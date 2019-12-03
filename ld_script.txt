@@ -115,7 +115,7 @@ SECTIONS {
         src/battle_anim_mons.o(.text);
         src/task.o(.text);
         src/reshow_battle_screen.o(.text);
-        asm/battle_anim_status_effects.o(.text);
+        src/battle_anim_status_effects.o(.text);
         src/title_screen.o(.text);
         src/reset_save_heap.o(.text);
         asm/field_weather.o(.text);
@@ -423,7 +423,7 @@ SECTIONS {
         src/battle_anim.o(.rodata);
         src/battle_anim_mons.o(.rodata);
         data/map_events.o(.rodata);
-        data/battle_anim_status_effects.o(.rodata);
+        src/battle_anim_status_effects.o(.rodata);
         src/title_screen.o(.rodata);
         data/field_weather.o(.rodata);
         data/field_screen_effect.o(.rodata);
@@ -483,7 +483,7 @@ SECTIONS {
         src/save.o(.rodata);
         data/field_effect_helpers.o(.rodata);
         src/battle_controller_safari.o(.rodata);
-        data/battle_anim_effects_3.o(.rodata);
+        src/battle_anim_effects_3.o(.rodata);
         src/learn_move.o(.rodata);
         src/battle_tower.o(.rodata);
         src/battle_controller_oak_old_man.o(.rodata);

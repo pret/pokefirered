@@ -197,8 +197,12 @@ void sub_80BCEF4(s32 bgId, u8 arg1, u8 arg2, u8 battlerPosition, u8 arg4, u8 *ar
 // battle_anim_special.s
 void sub_80F1720(u8 battler, struct Pokemon *mon);
 
-// battle_anim_effects_1.s
-void AnimMoveTwisterParticle(struct Sprite *sprite);
+// battle_anim_effects_1.c
+void SetSpriteNextToMonHead(u8 battler, struct Sprite* sprite);
+void AnimMoveTwisterParticle(struct Sprite* sprite);
+
+// water.c
+void AnimWaterPulseRing(struct Sprite *sprite);
 
 enum
 {
@@ -284,7 +288,7 @@ void sub_8075358(u32 bgId);
 void AnimLoadCompressedBgGfx(u32 bgId, const u32 *src, u32 tilesOffset);
 void InitAnimBgTilemapBuffer(u32 bgId, const void *src);
 void AnimLoadCompressedBgTilemap(u32 bgId, const u32 *src);
-u8 sub_8075454(void);
+u8 GetBattleBgPaletteNum(void);
 void sub_8075458(bool8 arg0);
 void sub_8075490(struct Sprite *sprite);
 void InitSpriteDataForLinearTranslation(struct Sprite *sprite);
@@ -450,6 +454,9 @@ void sub_80AD800(u8 taskId);
 // water.s
 extern const union AnimCmd *const gUnknown_83E5958[];
 extern const union AnimCmd *const gUnknown_83E5A78[];
+
+// smokescreen.c
+u8 SmokescreenImpact(s16 x, s16 y, u8 a3);
 
 // battle_anim_utility_funcs.c
 void sub_80BA7F8(u8 taskId);

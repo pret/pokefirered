@@ -2464,7 +2464,7 @@ gFile_graphics_battle_anims_masks_cure_bubbles_sheet:: @ 8D2DE3C
 	.incbin "graphics/battle_anims/masks/cure_bubbles.4bpp.lz"
 
 	.align 2
-gFile_graphics_battle_anims_masks_cure_bubbles_palette:: @ 8D2DF78
+gCureBubblesPal:: @ 8D2DF78
 	.incbin "graphics/battle_anims/masks/cure_bubbles.gbapal.lz"
 
 	.align 2

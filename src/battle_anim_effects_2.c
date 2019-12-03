@@ -13,7 +13,6 @@
 #include "sound.h"
 #include "trig.h"
 #include "util.h"
-#include "constants/rgb.h"
 #include "constants/songs.h"
 
 void sub_80A6E48(struct Sprite *);
@@ -344,7 +343,7 @@ const struct SpriteTemplate gWaterPulseRingSpriteTemplate =	//gUnknown_83E3CE8
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gWaterPulseRingAffineAnimTable,
-    .callback = AnimWaterPulseRing,
+    .callback = sub_80AC6D8,
 };
 
 const struct SpriteTemplate gEggThrowSpriteTemplate =	//gUnknown_83E3D00
@@ -3096,7 +3095,7 @@ static void FakeOutStep2(u8 taskId)
     {
         gTasks[taskId].data[11] = 0x88;
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG3 | BLDCNT_EFFECT_LIGHTEN);
-        BlendPalettes(sub_80A75AC(1, 0, 0, 0, 0, 0, 0), 16, RGB(31, 31, 31));
+        BlendPalettes(sub_8075BE8(1, 0, 0, 0, 0, 0, 0), 16, RGB(31, 31, 31));
     }
     else if (gTasks[taskId].data[10] > 4)
     {

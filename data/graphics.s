@@ -14008,17 +14008,17 @@ gBerryPouchSpritePalette:: @ 8E85C1C
 gBerryPouchBg1Tilemap:: @ 8E85C44
 	.incbin "graphics/berry_pouch/unk_8E85C44.bin.lz"
 
-gUnknown_8E85DC8:: @ 8E85DC8
-	.incbin "baserom.gba", 0xE85DC8, 0x134
+gBuyMenuFrame_Gfx:: @ 8E85DC8
+	.incbin "graphics/shop_menu/shop_menu.4bpp.lz"
 
-gUnknown_8E85EFC:: @ 8E85EFC
-	.incbin "baserom.gba", 0xE85EFC, 0x13C
+gBuyMenuFrame_Tilemap:: @ 8E85EFC
+	.incbin "graphics/shop_menu/shop_tilemap.bin"
 
-gUnknown_8E86038:: @ 8E86038
-	.incbin "baserom.gba", 0xE86038, 0x138
+gBuyMenuFrame_TmHmTilemap:: @ 8E86038
+	.incbin "graphics/shop_menu/shop_tm_hm_tilemap.bin"
 
-gUnknown_8E86170:: @ 8E86170
-	.incbin "baserom.gba", 0xE86170, 0x38
+gBuyMenuFrame_Pal:: @ 8E86170
+	.incbin "graphics/shop_menu/shop_menu.gbapal.lz"
 
 gUnknown_8E861A8:: @ 8E861A8
 	.incbin "baserom.gba", 0xE861A8, 0x98

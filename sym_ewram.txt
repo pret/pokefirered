@@ -306,48 +306,10 @@ gUnknown_2039874: @ 2039874
 gBagPockets: @ 203988C
 	.space 0x28
 
-gUnknown_20398B4: @ 20398B4
-	.space 0x4
-
-gUnknown_20398B8: @ 20398B8
-	.space 0x2
-
-gUnknown_20398BA: @ 20398BA
-	.space 0x7A
-
-gUnknown_2039934: @ 2039934
-	.space 0xE
-
-gUnknown_2039942: @ 2039942
-	.space 0xE
-
-gUnknown_2039950: @ 2039950
-	.space 0x4
-
-gUnknown_2039954: @ 2039954
-	.space 0x4
-
-gUnknown_2039958: @ 2039958
-	.space 0x4
-
-gUnknown_203995C: @ 203995C
-	.space 0x4
-
-gUnknown_2039960: @ 2039960
-	.space 0x4
-
-gUnknown_2039964: @ 2039964
-	.space 0x4
-
-gUnknown_2039968: @ 2039968
-	.space 0x4
-
-gUnknown_203996C: @ 203996C
-	.space 0x18
-
-gUnknown_2039984: @ 2039984
-	.space 0x4
-
+	.align 2
+	.include "src/shop.o"
+	.align 2
+	.include "src/sea_cottage_special_anim.o"
 	.align 2
 	.include "src/script_menu.o"
 

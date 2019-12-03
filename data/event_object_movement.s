@@ -547,7 +547,10 @@ gUnknown_8398688::
 	.incbin "graphics/object_events/fldeff_cut.gbapal"
 
 gUnknown_83986A8:: @ 83986A8
-	.incbin "baserom.gba", 0x3986A8, 0xCE0
+	.incbin "baserom.gba", 0x3986A8, 0x900
+
+gUnknown_8398FA8:: @ 8398FA8
+	.incbin "baserom.gba", 0x398FA8, 0x3E0
 
 gUnknown_8399388:: @ 8399388
 	.incbin "baserom.gba", 0x399388, 0x908
@@ -5516,20 +5519,254 @@ gObjectEventGraphicsInfo_83A5134:: @ 83A5134
 	.4byte gSpriteImages_83A1CF0
 	.4byte gDummySpriteAffineAnimTable
 
-gUnknown_83A5158:: @ 83A5158
-	.incbin "baserom.gba", 0x3A5158, 0xB0
+gObjectEventSpritePalettes:: @ 83A5158
+	.4byte gUnknown_836D828
+	.2byte 0x1103
+	.2byte 0x0000
+	.4byte gUnknown_836D848
+	.2byte 0x1104
+	.2byte 0x0000
+	.4byte gUnknown_836D868
+	.2byte 0x1105
+	.2byte 0x0000
+	.4byte gUnknown_836D888
+	.2byte 0x1106
+	.2byte 0x0000
+	.4byte gUnknown_836D8A8
+	.2byte 0x1107
+	.2byte 0x0000
+	.4byte gUnknown_836D8C8
+	.2byte 0x1108
+	.2byte 0x0000
+	.4byte gUnknown_836D8E8
+	.2byte 0x1109
+	.2byte 0x0000
+	.4byte gUnknown_836D908
+	.2byte 0x110a
+	.2byte 0x0000
+	.4byte gUnknown_835B968
+	.2byte 0x1100
+	.2byte 0x0000
+	.4byte gUnknown_835E968
+	.2byte 0x1101
+	.2byte 0x0000
+	.4byte gUnknown_835E988
+	.2byte 0x1102
+	.2byte 0x0000
+	.4byte gUnknown_8398008
+	.2byte 0x110b
+	.2byte 0x0000
+	.4byte gUnknown_8398028
+	.2byte 0x110c
+	.2byte 0x0000
+	.4byte gUnknown_835B968
+	.2byte 0x1110
+	.2byte 0x0000
+	.4byte gUnknown_835E968
+	.2byte 0x1111
+	.2byte 0x0000
+	.4byte gUnknown_8394EA8
+	.2byte 0x1113
+	.2byte 0x0000
+	.4byte gUnknown_8395AE8
+	.2byte 0x1115
+	.2byte 0x0000
+	.4byte gUnknown_83952C8
+	.2byte 0x1114
+	.2byte 0x0000
+	.4byte NULL
+	.2byte 0x0000
+	.2byte 0x0000
+
+gPlayerReflectionPaletteTags:: @ 83A51F0
+	.2byte 0x1101
+	.2byte 0x1101
+	.2byte 0x1101
+	.2byte 0x1101
+	.2byte 0x1111
+	.2byte 0x1111
+	.2byte 0x1111
+	.2byte 0x1111
+
+gUnknownPaletteTags_83A5200:: @ 83A5200
+	.2byte 0x1116
+	.2byte 0x1116
+	.2byte 0x1116
+	.2byte 0x1116
 
 gUnknown_83A5208:: @ 83A5208
-	.incbin "baserom.gba", 0x3A5208, 0x70
+	.2byte 0x1100
+	.2byte 0x0
+	.4byte gPlayerReflectionPaletteTags
+	.2byte 0x1110
+	.2byte 0x0
+	.4byte gPlayerReflectionPaletteTags
+	.2byte 0x1116
+	.2byte 0x0
+	.4byte gUnknownPaletteTags_83A5200
+	.2byte 0x11FF
+	.2byte 0x0
+	.4byte NULL
+
+gUnknownPaletteTags_83A5228:: @ 83A5228
+	.2byte 0x110c
+	.2byte 0x110c
+	.2byte 0x110c
+	.2byte 0x110c
+
+gUnknownPaletteTags_83A5230:: @ 83A5230
+	.2byte 0x110d
+	.2byte 0x110d
+	.2byte 0x110d
+	.2byte 0x110d
+
+gUnknownPaletteTags_83A5238::
+	.2byte 0x110e
+	.2byte 0x110e
+	.2byte 0x110e
+	.2byte 0x110e
+
+gUnknownPaletteTags_83A5240::
+	.2byte 0x1112
+	.2byte 0x1112
+	.2byte 0x1112
+	.2byte 0x1112
+
+gUnknownPaletteTags_83A5248::
+	.2byte 0x1113
+	.2byte 0x1113
+	.2byte 0x1113
+	.2byte 0x1113
+
+gUnknownPaletteTags_83A5250::
+	.2byte 0x1114
+	.2byte 0x1114
+	.2byte 0x1114
+	.2byte 0x1114
+
+gUnknownPaletteTags_83A5258::
+	.2byte 0x111b
+	.2byte 0x111b
+	.2byte 0x111b
+	.2byte 0x111b
+
+gUnknownPaletteTags_83A5260::
+	.2byte 0x1118
+	.2byte 0x1118
+	.2byte 0x1118
+	.2byte 0x1118
+
+gUnknownPaletteTags_83A5268::
+	.2byte 0x111a
+	.2byte 0x111a
+	.2byte 0x111a
+	.2byte 0x111a
+
+gUnknownPaletteTags_83A5270::
+	.2byte 0x1109
+	.2byte 0x1109
+	.2byte 0x1109
+	.2byte 0x1109
 
 gUnknown_83A5278:: @ 83A5278
-	.incbin "baserom.gba", 0x3A5278, 0xB8
+	.2byte 0x1100
+	.2byte 0x0
+	.4byte gPlayerReflectionPaletteTags
+	.2byte 0x1110
+	.2byte 0x0
+	.4byte gPlayerReflectionPaletteTags
+	.2byte 0x110b
+	.2byte 0x0
+	.4byte gUnknownPaletteTags_83A5228
+	.2byte 0x110d
+	.2byte 0x0
+	.4byte gUnknownPaletteTags_83A5230
+	.2byte 0x110e
+	.2byte 0x0
+	.4byte gUnknownPaletteTags_83A5238
+	.2byte 0x1112
+	.2byte 0x0
+	.4byte gUnknownPaletteTags_83A5240
+	.2byte 0x1113
+	.2byte 0x0
+	.4byte gUnknownPaletteTags_83A5248
+	.2byte 0x1114
+	.2byte 0x0
+	.4byte gUnknownPaletteTags_83A5250
+	.2byte 0x1117
+	.2byte 0x0
+	.4byte gUnknownPaletteTags_83A5260
+	.2byte 0x1119
+	.2byte 0x0
+	.4byte gUnknownPaletteTags_83A5268
+	.2byte 0x1105
+	.2byte 0x0
+	.4byte gUnknownPaletteTags_83A5270
+	.2byte 0x111b
+	.2byte 0x0
+	.4byte gUnknownPaletteTags_83A5258
+	.2byte 0x11ff
+	.2byte 0x0
+	.4byte NULL
+
+gUnknownPaletteTags_83A52E0::
+	.2byte 0x1100
+	.2byte 0x1101
+	.2byte 0x1103
+	.2byte 0x1104
+	.2byte 0x1105
+	.2byte 0x1106
+	.2byte 0x1107
+	.2byte 0x1108
+	.2byte 0x1109
+	.2byte 0x110a
+
+gUnknownPaletteTags_83A52F4::
+	.2byte 0x1100
+	.2byte 0x1110
+	.2byte 0x1103
+	.2byte 0x1104
+	.2byte 0x1105
+	.2byte 0x1106
+	.2byte 0x1107
+	.2byte 0x1108
+	.2byte 0x1109
+	.2byte 0x110a
+
+gUnknownPaletteTags_83A5308::
+	.2byte 0x1100
+	.2byte 0x1101
+	.2byte 0x1103
+	.2byte 0x1104
+	.2byte 0x1105
+	.2byte 0x1106
+	.2byte 0x1107
+	.2byte 0x1108
+	.2byte 0x1109
+	.2byte 0x110a
+
+gUnknownPaletteTags_83A531C::
+	.2byte 0x1100
+	.2byte 0x1101
+	.2byte 0x1103
+	.2byte 0x1104
+	.2byte 0x1105
+	.2byte 0x1106
+	.2byte 0x1107
+	.2byte 0x1108
+	.2byte 0x1109
+	.2byte 0x110a
 
 gUnknown_83A5330:: @ 83A5330
-	.incbin "baserom.gba", 0x3A5330, 0x10
+	.4byte gUnknownPaletteTags_83A52E0
+	.4byte gUnknownPaletteTags_83A52F4
+	.4byte gUnknownPaletteTags_83A5308
+	.4byte gUnknownPaletteTags_83A531C
 
 gUnknown_83A5340::
-	.incbin "baserom.gba", 0x3A5340, 0x8
+	.4byte gUnknown_8398FA8
+	.2byte 0x1004
+	.2byte 0x0
 
 gUnknown_83A5348:: @ 83A5348
 	.incbin "baserom.gba", 0x3A5348, 0xB90

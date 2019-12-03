@@ -3042,7 +3042,7 @@ sub_805F4B0: @ 805F4B0
 	cmp r1, r0
 	beq _0805F4CE
 	lsls r0, r1, 3
-	ldr r1, _0805F4D8 @ =gUnknown_83A5158
+	ldr r1, _0805F4D8 @ =gObjectEventSpritePalettes
 	adds r0, r1
 	bl sub_805F510
 _0805F4CE:
@@ -3050,7 +3050,7 @@ _0805F4CE:
 	bx r0
 	.align 2, 0
 _0805F4D4: .4byte 0x000011ff
-_0805F4D8: .4byte gUnknown_83A5158
+_0805F4D8: .4byte gObjectEventSpritePalettes
 	thumb_func_end sub_805F4B0
 
 	thumb_func_start sub_805F4DC
@@ -3117,7 +3117,7 @@ pal_patch_for_npc: @ 805F538
 	lsrs r4, 24
 	bl FindObjectEventPaletteIndexByTag
 	lsls r0, 24
-	ldr r1, _0805F570 @ =gUnknown_83A5158
+	ldr r1, _0805F570 @ =gObjectEventSpritePalettes
 	lsrs r0, 21
 	adds r0, r1
 	ldr r0, [r0]
@@ -3134,7 +3134,7 @@ pal_patch_for_npc: @ 805F538
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805F570: .4byte gUnknown_83A5158
+_0805F570: .4byte gObjectEventSpritePalettes
 	thumb_func_end pal_patch_for_npc
 
 	thumb_func_start pal_patch_for_npc_range
@@ -3169,7 +3169,7 @@ FindObjectEventPaletteIndexByTag: @ 805F5A0
 	lsls r0, 16
 	lsrs r5, r0, 16
 	movs r2, 0
-	ldr r0, _0805F5C8 @ =gUnknown_83A5158
+	ldr r0, _0805F5C8 @ =gObjectEventSpritePalettes
 	ldrh r1, [r0, 0x4]
 	ldr r3, _0805F5CC @ =0x000011ff
 	adds r4, r0, 0
@@ -3186,7 +3186,7 @@ _0805F5B8:
 	adds r0, r2, 0
 	b _0805F5E2
 	.align 2, 0
-_0805F5C8: .4byte gUnknown_83A5158
+_0805F5C8: .4byte gObjectEventSpritePalettes
 _0805F5CC: .4byte 0x000011ff
 _0805F5D0:
 	adds r0, r2, 0x1

@@ -120,10 +120,6 @@ static void AnimRecycleStep(struct Sprite *);
 static void AnimTask_SlackOffSquishStep(u8);
 
 // Data
-extern const u32 gUnknown_8D2A8C0[];
-extern const u32 gUnknown_8D2A808[];
-extern const u32 gUnknown_8D2A8A8[];
-
 const union AnimCmd gScratchAnimCmds[] =	//83FEDE4
 {
     ANIMCMD_FRAME(0, 4),
@@ -2151,13 +2147,13 @@ void AnimMiniTwinklingStar(struct Sprite *sprite)
     u8 rand;
     s8 y;
 
-    rand = Random2() & 3;
+    rand = Random() & 3;
     if (rand == 0)
         sprite->oam.tileNum += 4;
     else
         sprite->oam.tileNum += 5;
 
-    y = Random2() & 7;
+    y = Random() & 7;
     if (y > 3)
         y = -y;
 
@@ -2362,9 +2358,9 @@ void AnimTask_MorningSunLightBeam(u8 taskId)
             SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 1);
 
 		sub_80752A0(&animBg);
-		AnimLoadCompressedBgTilemap(animBg.bgId, gUnknown_8D2A8C0);
-		AnimLoadCompressedBgGfx(animBg.bgId, gUnknown_8D2A808, animBg.tilesOffset);
-		LoadCompressedPalette(gUnknown_8D2A8A8, animBg.paletteId * 16, 32);
+		AnimLoadCompressedBgTilemap(animBg.bgId, gBattleAnim_MorningSunTilemap);
+		AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnim_MorningSunGfx, animBg.tilesOffset);
+		LoadCompressedPalette(gBattleAnim_MorningSunPal, animBg.paletteId * 16, 32);
 		if (IsContest())
 		{
 			sub_80730C0(animBg.paletteId, animBg.bgTilemap, 0, 0);
@@ -2443,7 +2439,7 @@ void AnimGreenStar(struct Sprite *sprite)
     u8 spriteId1;
     u8 spriteId2;
 
-    xOffset = Random2();
+    xOffset = Random();
     xOffset &= 0x3F;
     if (xOffset > 31)
         xOffset = 32 - xOffset;
@@ -2541,9 +2537,9 @@ void AnimTask_DoomDesireLightBeam(u8 taskId)
             SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 1);
 		
 		sub_80752A0(&animBg);
-		AnimLoadCompressedBgTilemap(animBg.bgId, gUnknown_8D2A8C0);
-		AnimLoadCompressedBgGfx(animBg.bgId, gUnknown_8D2A808, animBg.tilesOffset);
-		LoadCompressedPalette(gUnknown_8D2A8A8, animBg.paletteId * 16, 32);
+		AnimLoadCompressedBgTilemap(animBg.bgId, gBattleAnim_MorningSunTilemap);
+		AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnim_MorningSunGfx, animBg.tilesOffset);
+		LoadCompressedPalette(gBattleAnim_MorningSunPal, animBg.paletteId * 16, 32);
 				
         if (IsContest())
         {
@@ -3011,10 +3007,10 @@ void AnimFlatterConfetti(struct Sprite *sprite)
     int rand1;
     int rand2;
 
-    tileOffset = Random2() % 12;
+    tileOffset = Random() % 12;
     sprite->oam.tileNum += tileOffset;
-    rand1 = Random2() & 0x1FF;
-    rand2 = Random2() & 0xFF;
+    rand1 = Random() & 0x1FF;
+    rand2 = Random() & 0xFF;
 
     if (rand1 & 1)
         sprite->data[0] = 0x5E0 + rand1;
@@ -3249,7 +3245,7 @@ static void AnimTask_RolePlaySilhouetteStep2(u8 taskId)
     TrySetSpriteRotScale(&gSprites[spriteId], TRUE, gTasks[taskId].data[10], gTasks[taskId].data[11], 0);
     if (++gTasks[taskId].data[12] == 9)
     {
-        sub_80A749C(&gSprites[spriteId]);
+        sub_8075AD8(&gSprites[spriteId]);
         DestroySpriteAndFreeResources_(&gSprites[spriteId]);
         gTasks[taskId].func = DestroyAnimVisualTaskAndDisableBlend;
     }
@@ -3771,7 +3767,7 @@ static void CreateSweatDroplets(u8 taskId, bool8 arg1)
 
     for (i = 0; i < 4; i++)
     {
-        u8 spriteId = CreateSprite(&gFacadeSweatDrop, xCoords[i], yCoords[i & 1], task->data[6] - 5);
+        u8 spriteId = CreateSprite(&gFacadeSweatDropSpriteTemplate, xCoords[i], yCoords[i & 1], task->data[6] - 5);
         if (spriteId != MAX_SPRITES)
         {
             gSprites[spriteId].data[0] = 0;

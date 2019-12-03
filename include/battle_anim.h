@@ -454,6 +454,7 @@ void sub_80AD800(u8 taskId);
 // water.s
 extern const union AnimCmd *const gUnknown_83E5958[];
 extern const union AnimCmd *const gUnknown_83E5A78[];
+void AnimWaterPulseRing(struct Sprite *sprite);
 
 // smokescreen.c
 u8 SmokescreenImpact(s16 x, s16 y, u8 a3);

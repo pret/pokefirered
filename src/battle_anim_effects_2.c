@@ -343,7 +343,7 @@ const struct SpriteTemplate gWaterPulseRingSpriteTemplate =	//gUnknown_83E3CE8
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gWaterPulseRingAffineAnimTable,
-    .callback = sub_80AC6D8,
+    .callback = AnimWaterPulseRing,	//water.c
 };
 
 const struct SpriteTemplate gEggThrowSpriteTemplate =	//gUnknown_83E3D00
@@ -1828,9 +1828,9 @@ static void AnimBulletSeed_Step1(struct Sprite *sprite)
     for (i = 0; i < 8; i++)
         ptr[i - 7] = 0;
 
-    rand = Random2();
+    rand = Random();
     sprite->data[6] = 0xFFF4 - (rand & 7);
-    rand = Random2();
+    rand = Random();
     sprite->data[7] = (rand % 0xA0) + 0xA0;
     sprite->callback = AnimBulletSeed_Step2;
     sprite->affineAnimPaused = 0;
@@ -3238,9 +3238,9 @@ void AnimTask_HeartsBackground(u8 taskId)
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
     sub_80752A0(&animBg);
-    AnimLoadCompressedBgGfx(animBg.bgId, &gUnknown_08C232E0, animBg.tilesOffset);
-    sub_80A6D60(&animBg, &gUnknown_08C23D78, 0);
-    LoadCompressedPalette(&gUnknown_08C23D50, animBg.paletteId * 16, 32);
+	AnimLoadCompressedBgTilemap(animBg.bgId, gBattleAnimBg_AttractTilemap);
+	AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimBg_AttractGfx, animBg.tilesOffset);
+    LoadCompressedPalette(gBattleAnimBg_AttractPal, animBg.paletteId * 16, 32);
     gTasks[taskId].func = HeartsBackground_Step;
 }
 
@@ -3316,15 +3316,16 @@ void AnimTask_ScaryFace(u8 taskId)
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
     sub_80752A0(&animBg);
+	
     if (IsContest())
-        sub_80A6D60(&animBg, &gBattleAnimBgTilemap_ScaryFaceContest, 0);
+		LZDecompressVram(gBattleAnimBgTilemap_ScaryFaceContest, animBg.bgTilemap);
     else if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_OPPONENT)
-        sub_80A6D60(&animBg, &gBattleAnimBgTilemap_ScaryFacePlayer, 0);
+        AnimLoadCompressedBgTilemap(animBg.bgId, gBattleAnimBgTilemap_ScaryFacePlayer);
     else
-        sub_80A6D60(&animBg, &gBattleAnimBgTilemap_ScaryFaceOpponent, 0);
+        AnimLoadCompressedBgTilemap(animBg.bgId, gBattleAnimBgTilemap_ScaryFaceOpponent);
 
-    AnimLoadCompressedBgGfx(animBg.bgId, gUnknown_08C249F8, animBg.tilesOffset);
-    LoadCompressedPalette(gUnknown_08C249D0, animBg.paletteId * 16, 32);
+    AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnim_ScaryFaceGfx, animBg.tilesOffset);
+    LoadCompressedPalette(gBattleAnim_ScaryFacePal, animBg.paletteId * 16, 32);
     gTasks[taskId].func = ScaryFace_Step;
 }
 
@@ -3546,7 +3547,7 @@ void AnimPinkHeart(struct Sprite *sprite)
             sprite->pos1.y += sprite->pos2.y;
             sprite->pos2.x = 0;
             sprite->pos2.y = 0;
-            sprite->data[3] = Random2() % 180;
+            sprite->data[3] = Random() % 180;
         }
     }
 }

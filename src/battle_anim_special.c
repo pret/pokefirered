@@ -20,6 +20,7 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
+#include "constants/pokemon.h"
 
 // Defines
 #define TAG_PARTICLES_POKEBALL    55020
@@ -39,9 +40,13 @@
 #define LOHALF(n) ((n) & 0xFFFF)
 
 // IWRAM
-EWRAM_DATA int gUnknown_3005424 = 0;
-EWRAM_DATA u16 gUnknown_3005428 = 0;
-EWRAM_DATA u16 gUnknown_300542C = 0;
+//EWRAM_DATA int gUnknown_3005424 = 0;
+//EWRAM_DATA u16 gUnknown_3005428 = 0;
+//EWRAM_DATA u16 gUnknown_300542C = 0;
+
+extern u32 gUnknown_3005424;
+extern u32 gUnknown_3005428;
+extern u32 gUnknown_300542C;
 
 // Function Declarations
 static void sub_80EEDF4(u8);
@@ -99,9 +104,8 @@ static void PremierBallOpenParticleAnimation(u8);
 static void sub_80F1B3C(struct Sprite *);
 
 // Data
-extern const u32 gUnknown_8D2EC24[];
-extern const u32 gUnknown_8D2EC70[];
-extern const struct SpriteTemplate gBallSpriteTemplates[];	//for now
+extern const struct SpriteTemplate gBallSpriteTemplates[POKEBALL_COUNT];	//for now
+extern const u32 gBattleAnimSpriteGfx_Particles[];
 
 struct BallCaptureSuccessStarData
 {
@@ -455,8 +459,8 @@ void sub_80EEC0C(u8 taskId)
     gSprites[spriteId4].callback = SpriteCallbackDummy;
 
     sub_80752A0(&unknownStruct);
-    AnimLoadCompressedBgTilemap(unknownStruct.bgId, gUnknown_8D2EC70);
-    AnimLoadCompressedBgGfx(unknownStruct.bgId, gUnknown_8D2EC24, unknownStruct.tilesOffset);
+    AnimLoadCompressedBgTilemap(unknownStruct.bgId, gUnknown_D2EC24_Tilemap);
+    AnimLoadCompressedBgGfx(unknownStruct.bgId, gUnknown_D2EC24_Gfx, unknownStruct.tilesOffset);
     LoadCompressedPalette(gCureBubblesPal, unknownStruct.paletteId << 4, 32);
 
     gBattle_BG1_X = -gSprites[spriteId3].pos1.x + 32;
@@ -2293,9 +2297,14 @@ void sub_80F1C8C(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_80F1C8C(u8 taskId)
+void sub_80F1CE4(u8 taskId)
 {
-	// to do 
+	if (gBattleCommunication[MULTISTRING_CHOOSER] > 2)
+		gBattleAnimArgs[7] = 0;
+	else
+		gBattleAnimArgs[7] = gBattleCommunication[MULTISTRING_CHOOSER];
+	
+	DestroyAnimVisualTask(taskId);
 }
 
 // 080F1D14

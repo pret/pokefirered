@@ -2008,15 +2008,15 @@ gBattleAnimSpritePal_RedHeart:: @ 8D23494
 	.incbin "graphics/battle_anims/sprites/216.gbapal.lz"
 
 	.align 2
-gFile_graphics_battle_anims_backgrounds_attract_sheet:: @ 8D234B4
+gBattleAnimBg_AttractGfx:: @ 8D234B4
 	.incbin "graphics/battle_anims/backgrounds/attract.4bpp.lz"
 
 	.align 2
-gFile_graphics_battle_anims_backgrounds_attract_palette:: @ 8D23F24
+gBattleAnimBg_AttractPal:: @ 8D23F24
 	.incbin "graphics/battle_anims/backgrounds/attract.gbapal.lz"
 
 	.align 2
-gFile_graphics_battle_anims_backgrounds_attract_tilemap:: @ 8D23F4C
+gBattleAnimBg_AttractTilemap:: @ 8D23F4C
 	.incbin "graphics/battle_anims/backgrounds/attract.bin.lz"
 
 	.align 2
@@ -2056,11 +2056,11 @@ gBattleAnimSpritePal_MovementWaves:: @ 8D24B80
 	.incbin "graphics/battle_anims/sprites/215.gbapal.lz"
 
 	.align 2
-gFile_graphics_battle_anims_backgrounds_scary_face_palette:: @ 8D24BA4
+gBattleAnim_ScaryFacePal:: @ 8D24BA4
 	.incbin "graphics/battle_anims/backgrounds/scary_face.gbapal.lz"
 
 	.align 2
-gFile_graphics_battle_anims_backgrounds_scary_face_sheet:: @ 8D24BCC
+gBattleAnim_ScaryFaceGfx:: @ 8D24BCC
 	.incbin "graphics/battle_anims/backgrounds/scary_face.4bpp.lz"
 
 	.align 2
@@ -2304,15 +2304,15 @@ gBattleAnimBgTilemap_HighspeedPlayer:: @ 8D2A510
 	.incbin "graphics/battle_anims/backgrounds/10.bin.lz"
 
 	.align 2
-gFile_graphics_battle_anims_masks_morning_sun_sheet:: @ 8D2A808
+gBattleAnim_MorningSunGfx:: @ 8D2A808
 	.incbin "graphics/battle_anims/masks/morning_sun.4bpp.lz"
 
 	.align 2
-gFile_graphics_battle_anims_masks_morning_sun_palette:: @ 8D2A8A8
+gBattleAnim_MorningSunPal:: @ 8D2A8A8
 	.incbin "graphics/battle_anims/masks/morning_sun.gbapal.lz"
 
 	.align 2
-gFile_graphics_battle_anims_masks_morning_sun_tilemap:: @ 8D2A8C0
+gBattleAnim_MorningSunTilemap:: @ 8D2A8C0
 	.incbin "graphics/battle_anims/masks/morning_sun.bin.lz"
 
 	.align 2
@@ -2460,7 +2460,7 @@ gBattleStatMask8_Pal:: @ 8D2DE1C
 	.incbin "graphics/battle_anims/masks/stat8.gbapal.lz"
 
 	.align 2
-gFile_graphics_battle_anims_masks_cure_bubbles_sheet:: @ 8D2DE3C
+gCureBubblesGfx:: @ 8D2DE3C
 	.incbin "graphics/battle_anims/masks/cure_bubbles.4bpp.lz"
 
 	.align 2
@@ -2468,7 +2468,7 @@ gCureBubblesPal:: @ 8D2DF78
 	.incbin "graphics/battle_anims/masks/cure_bubbles.gbapal.lz"
 
 	.align 2
-gFile_graphics_battle_anims_masks_cure_bubbles_tilemap:: @ 8D2DF98
+gCureBubblesTilemap:: @ 8D2DF98
 	.incbin "graphics/battle_anims/masks/cure_bubbles.bin.lz"
 
 	.align 2
@@ -2500,11 +2500,11 @@ gBattleAnimSpriteGfx_NoiseLine:: @ 8D2EA04
 	.incbin "graphics/battle_anims/sprites/053.4bpp.lz"
 
 	.align 2
-gFile_graphics_battle_anims_masks_unknown_D2EC24_sheet:: @ 8D2EC24
+gUnknown_D2EC24_Gfx:: @ 8D2EC24
 	.incbin "graphics/battle_anims/masks/unknown_D2EC24.4bpp.lz"
 
 	.align 2
-gFile_graphics_battle_anims_masks_unknown_D2EC24_tilemap:: @ 8D2EC70
+gUnknown_D2EC24_Tilemap:: @ 8D2EC70
 	.incbin "graphics/battle_anims/masks/unknown_D2EC24.bin.lz"
 
 	.align 2
@@ -13772,15 +13772,15 @@ gBattleAnimSpriteGfx_WeatherBall:: @ 8E7F388
 	.incbin "graphics/battle_anims/sprites/283.4bpp.lz"
 
 	.align 2
-gFile_graphics_battle_anims_backgrounds_scary_face_player_tilemap:: @ 8E7F4AC
+gBattleAnimBgTilemap_ScaryFacePlayer:: @ 8E7F4AC
 	.incbin "graphics/battle_anims/backgrounds/scary_face_player.bin.lz"
 
 	.align 2
-gFile_graphics_battle_anims_backgrounds_scary_face_opponent_tilemap:: @ 8E7F690
+gBattleAnimBgTilemap_ScaryFaceOpponent:: @ 8E7F690
 	.incbin "graphics/battle_anims/backgrounds/scary_face_opponent.bin.lz"
 
 	.align 2
-gFile_graphics_battle_anims_backgrounds_scary_face_contest_tilemap:: @ 8E7F874
+gBattleAnimBgTilemap_ScaryFaceContest:: @ 8E7F874
 	.incbin "graphics/battle_anims/backgrounds/scary_face_contest.bin.lz"
 
 	.align 2

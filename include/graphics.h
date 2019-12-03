@@ -3962,6 +3962,8 @@ extern const u32 gBattleAnimSpriteGfx_Protect[];
 extern const u32 gBattleAnimSpriteGfx_DirtMound[];
 extern const u32 gBattleAnimSpriteGfx_Shock3[];
 extern const u32 gBattleAnimSpriteGfx_WeatherBall[];
+extern const u32 gBattleAnim_ScaryFaceGfx[];
+extern const u32 gBattleAnim_ScaryFacePal[];
 extern const u32 gBattleAnimBgTilemap_ScaryFacePlayer[];
 extern const u32 gBattleAnimBgTilemap_ScaryFaceOpponent[];
 extern const u32 gBattleAnimBgTilemap_ScaryFaceContest[];
@@ -4215,7 +4217,19 @@ extern const u32 gBattleAnimSpritePal_CrossImpact[];
 extern const u32 gBattleAnimSpritePal_Slash2[];
 extern const u32 gBattleAnimSpritePal_WhipHit[];
 extern const u32 gBattleAnimSpritePal_BlueRing2[];
+
+// battle anim task
+extern const u32 gUnknown_D2EC24_Gfx[];
+extern const u32 gUnknown_D2EC24_Tilemap[];
+extern const u32 gCureBubblesGfx[];
 extern const u32 gCureBubblesPal[];
+extern const u32 gCureBubblesTilemap[];
+extern const u32 gBattleAnimBg_AttractGfx[];
+extern const u32 gBattleAnimBg_AttractTilemap[];
+extern const u32 gBattleAnimBg_AttractPal[];
+extern const u32 gBattleAnim_MorningSunGfx[];
+extern const u32 gBattleAnim_MorningSunTilemap[];
+extern const u32 gBattleAnim_MorningSunPal[];
 
 // battle bg
 extern const u32 gBattleAnimBgImage_Dark[];

@@ -9,7 +9,7 @@
 #include "trig.h"
 #include "util.h"
 #include "constants/battle_anim.h"
-#include "constants/rgb.h"
+#include "constants/pokemon.h"
 
 // Function Declarations
 static u8 sub_8078178(u8 battlerId, bool8 b);
@@ -51,7 +51,7 @@ const struct SpriteTemplate gSpriteTemplate_83BF3F8 =
     .anims = gSpriteAnimTable_83BF3F4,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80A8AEC,
+    .callback = sub_8076F58,
 };
 
 const struct SpriteTemplate gSpriteTemplate_83BF410 =
@@ -62,7 +62,7 @@ const struct SpriteTemplate gSpriteTemplate_83BF410 =
     .anims = gSpriteAnimTable_83BF3F4,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80A8A6C,
+    .callback = sub_8076ED8,
 };
 
 static const union AnimCmd gUnknown_83BF428[] =
@@ -84,7 +84,7 @@ const struct SpriteTemplate gSpriteTemplate_83BF434 =
     .anims = gSpriteAnimTable_83BF430,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80A8E30,
+    .callback = sub_807729C,
 };
 
 const struct SpriteTemplate gSpriteTemplate_83BF44C =
@@ -95,7 +95,7 @@ const struct SpriteTemplate gSpriteTemplate_83BF44C =
     .anims = gSpriteAnimTable_83BF430,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80A8EE4,
+    .callback = sub_8077350,
 };
 
 static const union AnimCmd gUnknown_83BF464[] =
@@ -121,7 +121,7 @@ const struct SpriteTemplate gSpriteTemplate_83BF480 =
     .anims = gSpriteAnimTable_83BF47C,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80A8B64,
+    .callback = sub_8076FD0,
 };
 
 const struct SpriteTemplate gSpriteTemplate_83BF498 =
@@ -132,7 +132,7 @@ const struct SpriteTemplate gSpriteTemplate_83BF498 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80A8AEC,
+    .callback = sub_8076F58,
 };
 
 static const union AnimCmd gUnknown_83BF4B0[] =
@@ -168,7 +168,7 @@ const struct SpriteTemplate gSpriteTemplate_83BF4D4 =
     .anims = gSpriteAniimTable_83BF4C8,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80A8AEC,
+    .callback = sub_8076F58,
 };
 
 static const union AnimCmd gUnknown_83BF4EC[] =
@@ -202,10 +202,11 @@ const struct SpriteTemplate gSpriteTemplate_83BF514 =
     .anims = gSpriteAnimTable_83BF4F4,
     .images = NULL,
     .affineAnims = gSpriteAffineAnimTable_83BF510,
-    .callback = sub_80A8A6C,
+    .callback = sub_8076ED8,
 };
 
-static const u32 gUnknown_83BF52C = _("TASK OVER\nタスクがオーバーしました$");
+const u8 gUnknown_83BF52C[] = _("TASK OVER\n");
+const u8 gUnknown_83BF536[] = {0x60, 0x5D, 0x58, 0x37, 0x55, 0xAE, 0x96, 0xAE, 0x0C, 0x1F, 0x0C, 0x10, 0xFF};	//
 
 static const struct Subsprite gSubsprites_83BF544[] =
 {
@@ -510,8 +511,8 @@ void AnimTask_StatsChange(u8 taskId)
     gBattleAnimArgs[2] = 0;
     gBattleAnimArgs[3] = 0;
     gBattleAnimArgs[4] = sharply;
-    gTasks[taskId].func = sub_8116EB4;
-    sub_8116EB4(taskId);
+    gTasks[taskId].func = sub_80BB088;
+    sub_80BB088(taskId);
 }
 
 #undef CASE

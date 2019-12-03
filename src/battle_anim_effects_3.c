@@ -1182,7 +1182,6 @@ const union AffineAnimCmd gSlackOffSquishAffineAnimCmds[] =	//83FF7A8
 };
 
 // Functions
-
 // 80DE2C0
 void AnimBlackSmoke(struct Sprite *sprite)
 {

@@ -68,6 +68,7 @@ bool8 AddBagItem(u16 itemId, u16 amount);
 void SortPocketAndPlaceHMsFirst(struct BagPocket * pocket);
 u16 BagGetItemIdByPocketPosition(u8 pocketId, u16 itemId);
 u16 BagGetQuantityByPocketPosition(u8 pocketId, u16 itemId);
+u16 BagGetQuantityByItemId(u16 item);
 bool8 itemid_is_unique(u16 itemId);
 void BagPocketCompaction(struct ItemSlot * slots, u8 capacity);
 u16 GetPcItemQuantity(u16 *);

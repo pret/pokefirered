@@ -14062,17 +14062,17 @@ gBerryPouchSpritePalette:: @ 8E85C1C
 gBerryPouchBg1Tilemap:: @ 8E85C44
 	.incbin "graphics/berry_pouch/unk_8E85C44.bin.lz"
 
-gUnknown_8E85DC8:: @ 8E85DC8
-	.incbin "graphics/interface/shop.4bpp.lz" @ shop tiles
+gBuyMenuFrame_Gfx:: @ 8E85DC8
+	.incbin "graphics/shop_menu/shop_menu.4bpp.lz"
 
-gUnknown_8E85EFC:: @ 8E85EFC
-	.incbin "graphics/interface/shop1.bin.lz" @ shop tilemap regular
+gBuyMenuFrame_Tilemap:: @ 8E85EFC
+	.incbin "graphics/shop_menu/shop_tilemap.bin"
 
-gUnknown_8E86038:: @ 8E86038
-	.incbin "graphics/interface/shop2.bin.lz" @ shop tilemap TMs
+gBuyMenuFrame_TmHmTilemap:: @ 8E86038
+	.incbin "graphics/shop_menu/shop_tm_hm_tilemap.bin"
 
-gUnknown_8E86170:: @ 8E86170
-	.incbin "graphics/interface/shop.gbapal.lz" @ shop tiles palette
+gBuyMenuFrame_Pal:: @ 8E86170
+	.incbin "graphics/shop_menu/shop_menu.gbapal.lz"
 
 gUnknown_8E861A8:: @ 8E861A8
 	.incbin "graphics/unknown/unknown_E861A8.bin.lz" @ hmm what is this.

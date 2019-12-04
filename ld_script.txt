@@ -140,7 +140,8 @@ SECTIONS {
         src/item_menu_icons.o(.text);
         src/battle_anim_mon_movement.o(.text);
         src/item.o(.text);
-        asm/shop.o(.text);
+        src/shop.o(.text);
+        src/sea_cottage_special_anim.o(.text);
         src/berry.o(.text);
         src/script_menu.o(.text);
         asm/naming_screen.o(.text);
@@ -441,7 +442,8 @@ SECTIONS {
         src/item_menu_icons.o(.rodata);
         src/battle_anim_mon_movement.o(.rodata);
         src/item.o(.rodata);
-        data/shop.o(.rodata);
+        src/shop.o(.rodata);
+        src/sea_cottage_special_anim.o(.rodata);
         src/berry.o(.rodata);
         src/script_menu.o(.rodata);
         data/naming_screen.o(.rodata);

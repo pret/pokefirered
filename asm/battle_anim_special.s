@@ -1219,7 +1219,7 @@ sub_80EF5AC: @ 80EF5AC
 	lsls r0, r1, 1
 	adds r0, r1
 	lsls r0, 3
-	ldr r1, _080EF678 @ =gUnknown_82606F4
+	ldr r1, _080EF678 @ =gBallSpriteTemplates
 	adds r0, r1
 	movs r1, 0x20
 	movs r2, 0x50
@@ -1298,7 +1298,7 @@ sub_80EF5AC: @ 80EF5AC
 	bx r0
 	.align 2, 0
 _080EF674: .4byte gLastUsedItem
-_080EF678: .4byte gUnknown_82606F4
+_080EF678: .4byte gBallSpriteTemplates
 _080EF67C: .4byte gSprites
 _080EF680: .4byte gBattleAnimTarget
 _080EF684: .4byte sub_80EF8C0
@@ -1387,7 +1387,7 @@ _080EF708:
 	lsls r0, r4, 1
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, _080EF7CC @ =gUnknown_82606F4
+	ldr r1, _080EF7CC @ =gBallSpriteTemplates
 	adds r0, r1
 	movs r1, 0x20
 	orrs r5, r1
@@ -1458,7 +1458,7 @@ _080EF708:
 	.align 2, 0
 _080EF7C4: .4byte gSaveBlock2Ptr
 _080EF7C8: .4byte gLastUsedItem
-_080EF7CC: .4byte gUnknown_82606F4
+_080EF7CC: .4byte gBallSpriteTemplates
 _080EF7D0: .4byte gSprites
 _080EF7D4: .4byte gBattleAnimTarget
 _080EF7D8: .4byte SpriteCallbackDummy

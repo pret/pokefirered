@@ -49,103 +49,103 @@ gFile_graphics_battle_anims_sprites_smokescreen_impact_palette:: @ 8D0170C
 	.incbin "graphics/battle_anims/sprites/smokescreen_impact.gbapal.lz"
 
 	.align 2
-gFile_graphics_interface_ball_Poke_sheet:: @ 8D01724
+gInterfaceGfx_PokeBall:: @ 8D01724
 	.incbin "graphics/interface/ball/poke.4bpp.lz"
 
 	.align 2
-gFile_graphics_interface_ball_Poke_palette:: @ 8D017E0
+gInterfacePal_PokeBall:: @ 8D017E0
 	.incbin "graphics/interface/ball/poke.gbapal.lz"
 
 	.align 2
-gFile_graphics_interface_ball_Great_sheet:: @ 8D01800
+gInterfaceGfx_GreatBall:: @ 8D01800
 	.incbin "graphics/interface/ball/great.4bpp.lz"
 
 	.align 2
-gFile_graphics_interface_ball_Great_palette:: @ 8D018BC
+gInterfacePal_GreatBall:: @ 8D018BC
 	.incbin "graphics/interface/ball/great.gbapal.lz"
 
 	.align 2
-gFile_graphics_interface_ball_Safari_sheet:: @ 8D018E0
+gInterfaceGfx_SafariBall:: @ 8D018E0
 	.incbin "graphics/interface/ball/safari.4bpp.lz"
 
 	.align 2
-gFile_graphics_interface_ball_Safari_palette:: @ 8D019A4
+gInterfacePal_SafariBall:: @ 8D019A4
 	.incbin "graphics/interface/ball/safari.gbapal.lz"
 
 	.align 2
-gFile_graphics_interface_ball_Ultra_sheet:: @ 8D019C8
+gInterfaceGfx_UltraBall:: @ 8D019C8
 	.incbin "graphics/interface/ball/ultra.4bpp.lz"
 
 	.align 2
-gFile_graphics_interface_ball_Ultra_palette:: @ 8D01A7C
+gInterfacePal_UltraBall:: @ 8D01A7C
 	.incbin "graphics/interface/ball/ultra.gbapal.lz"
 
 	.align 2
-gFile_graphics_interface_ball_Master_sheet:: @ 8D01A9C
+gInterfaceGfx_MasterBall:: @ 8D01A9C
 	.incbin "graphics/interface/ball/master.4bpp.lz"
 
 	.align 2
-gFile_graphics_interface_ball_Master_palette:: @ 8D01B5C
+gInterfacePal_MasterBall:: @ 8D01B5C
 	.incbin "graphics/interface/ball/master.gbapal.lz"
 
 	.align 2
-gFile_graphics_interface_ball_Net_sheet:: @ 8D01B80
+gInterfaceGfx_NetBall:: @ 8D01B80
 	.incbin "graphics/interface/ball/net.4bpp.lz"
 
 	.align 2
-gFile_graphics_interface_ball_Net_palette:: @ 8D01C40
+gInterfacePal_NetBall:: @ 8D01C40
 	.incbin "graphics/interface/ball/net.gbapal.lz"
 
 	.align 2
-gFile_graphics_interface_ball_Dive_sheet:: @ 8D01C60
+gInterfaceGfx_DiveBall:: @ 8D01C60
 	.incbin "graphics/interface/ball/dive.4bpp.lz"
 
 	.align 2
-gFile_graphics_interface_ball_Dive_palette:: @ 8D01D74
+gInterfacePal_DiveBall:: @ 8D01D74
 	.incbin "graphics/interface/ball/dive.gbapal.lz"
 
 	.align 2
-gFile_graphics_interface_ball_Nest_sheet:: @ 8D01D9C
+gInterfaceGfx_NestBall:: @ 8D01D9C
 	.incbin "graphics/interface/ball/nest.4bpp.lz"
 
 	.align 2
-gFile_graphics_interface_ball_Nest_palette:: @ 8D01E60
+gInterfacePal_NestBall:: @ 8D01E60
 	.incbin "graphics/interface/ball/nest.gbapal.lz"
 
 	.align 2
-gFile_graphics_interface_ball_Repeat_sheet:: @ 8D01E84
+gInterfaceGfx_RepeatBall:: @ 8D01E84
 	.incbin "graphics/interface/ball/repeat.4bpp.lz"
 
 	.align 2
-gFile_graphics_interface_ball_Repeat_palette:: @ 8D01F44
+gInterfacePal_RepeatBall:: @ 8D01F44
 	.incbin "graphics/interface/ball/repeat.gbapal.lz"
 
 	.align 2
-gFile_graphics_interface_ball_Timer_sheet:: @ 8D01F68
+gInterfaceGfx_TimerBall:: @ 8D01F68
 	.incbin "graphics/interface/ball/timer.4bpp.lz"
 
 	.align 2
-gFile_graphics_interface_ball_Timer_palette:: @ 8D02060
+gInterfacePal_TimerBall:: @ 8D02060
 	.incbin "graphics/interface/ball/timer.gbapal.lz"
 
 	.align 2
-gFile_graphics_interface_ball_Luxury_sheet:: @ 8D02084
+gInterfaceGfx_LuxuryBall:: @ 8D02084
 	.incbin "graphics/interface/ball/luxury.4bpp.lz"
 
 	.align 2
-gFile_graphics_interface_ball_Luxury_palette:: @ 8D021B0
+gInterfacePal_LuxuryBall:: @ 8D021B0
 	.incbin "graphics/interface/ball/luxury.gbapal.lz"
 
 	.align 2
-gFile_graphics_interface_ball_Premier_sheet:: @ 8D021D8
+gInterfaceGfx_PremierBall:: @ 8D021D8
 	.incbin "graphics/interface/ball/premier.4bpp.lz"
 
 	.align 2
-gFile_graphics_interface_ball_Premier_palette:: @ 8D022C8
+gInterfacePal_PremierBall:: @ 8D022C8
 	.incbin "graphics/interface/ball/premier.gbapal.lz"
 
 	.align 2
-gFile_graphics_interface_ball_Open_sheet:: @ 8D022E8
+gOpenPokeballGfx:: @ 8D022E8
 	.incbin "graphics/interface/ball_open.4bpp.lz"
 
 	.align 2

@@ -10,13 +10,13 @@ typedef void (*TaskFunc)(u8 taskId);
 
 struct Task
 {
-    TaskFunc func;
-    bool8 isActive;
-    u8 prev;
-    u8 next;
-    u8 priority;
-    s16 data[16];
-};
+    /*0x00*/ TaskFunc func;
+    /*0x04*/ bool8 isActive;
+    /*0x05*/ u8 prev;
+    /*0x06*/ u8 next;
+    /*0x07*/ u8 priority;
+    /*0x08*/ s16 data[16];
+}; /*size = 0x28*/
 
 extern struct Task gTasks[];
 

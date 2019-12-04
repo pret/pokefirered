@@ -65,6 +65,7 @@ static void LoadDefaultBg(void);
 static void Task_LoopAndPlaySE(u8 taskId);
 static void Task_WaitAndPlaySE(u8 taskId);
 static void sub_807331C(u8 taskId);
+static bool8 sub_807378C(u16 a);
 
 static void ScriptCmd_loadspritegfx(void);
 static void ScriptCmd_unloadspritegfx(void);
@@ -2316,9 +2317,8 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2)
 
 void sub_80730C0(u16 a, u16 *b, s32 c, u8 d)
 {
-    s32 i, j;
-    s32 var;
-	s32 x;
+    u8 i, j;   
+    u32 var;
 
     if (d == 0)
         var = 32;
@@ -2330,7 +2330,7 @@ void sub_80730C0(u16 a, u16 *b, s32 c, u8 d)
     {
         for (j = 0; j < 32; j++)
 		{
-            b[j + i * 32] = ((b[j + i * 32] & 0xFFF) | a) + c;
+            b[32 * i + j] = ((b[32 * i + j] & 0xFFF) | a) + c;
 		}
     }
 }
@@ -2398,13 +2398,12 @@ static void ScriptCmd_clearmonbg(void)
 
     sBattleAnimScriptPtr++;
     animBattlerId = sBattleAnimScriptPtr[0];
+	if (animBattlerId == 0)
+		animBattlerId = 2;
+	else if (animBattlerId == 1)
+        animBattlerId = 3;
 
-    if (animBattlerId == ANIM_ATTACKER)
-        animBattlerId = ANIM_ATK_PARTNER;
-    else if (animBattlerId == ANIM_TARGET)
-        animBattlerId = ANIM_DEF_PARTNER;
-
-    if (animBattlerId == ANIM_ATTACKER || animBattlerId == ANIM_ATK_PARTNER)
+    if (animBattlerId == 0 || animBattlerId == 2)
         battlerId = gBattleAnimAttacker;
     else
         battlerId = gBattleAnimTarget;
@@ -2425,24 +2424,27 @@ static void ScriptCmd_clearmonbg(void)
 
 static void sub_807331C(u8 taskId)
 {
-    gTasks[taskId].data[1]++;
+	u8 toBG_2;
+	u8 position;
+	
+	gTasks[taskId].data[1]++;
     if (gTasks[taskId].data[1] != 1)
     {
-        u8 to_BG2;
-        u8 position = GetBattlerPosition(gTasks[taskId].data[2]);
-		to_BG2 = TRUE;
-        if (position < B_POSITION_OPPONENT_LEFT)
-            to_BG2 = FALSE;
+        position = ((GetBattlerPosition((u8)gTasks[taskId].data[2]) << 0x18) + 0xFF000000) >> 0x18;	//make human code
+        if (position <= B_POSITION_OPPONENT_LEFT)
+            toBG_2 = FALSE;
+        else
+            toBG_2 = TRUE;
 
         if (sMonAnimTaskIdArray[0] != 0xFF)
         {
-            sub_8073128(to_BG2);
+            sub_8073128(toBG_2);
             DestroyTask(sMonAnimTaskIdArray[0]);
             sMonAnimTaskIdArray[0] = 0xFF;
         }
         if (gTasks[taskId].data[0] > 1)
         {
-            sub_8073128(to_BG2 ^ 1);
+            sub_8073128(toBG_2 ^ 1);
             DestroyTask(sMonAnimTaskIdArray[1]);
             sMonAnimTaskIdArray[1] = 0xFF;
         }
@@ -2455,40 +2457,43 @@ static void ScriptCmd_monbg_22(void)
     bool8 toBG_2;
     u8 battlerId;
     u8 animBattlerId;
+	u8 position;
 
     sBattleAnimScriptPtr++;
-
     animBattlerId = sBattleAnimScriptPtr[0];
+	if (animBattlerId == 0)
+		animBattlerId = 2;
+	else if (animBattlerId == 1)
+        animBattlerId = 3;
 
-    if (animBattlerId == ANIM_ATTACKER)
-        animBattlerId = ANIM_ATK_PARTNER;
-    else if (animBattlerId == ANIM_TARGET)
-        animBattlerId = ANIM_DEF_PARTNER;
-
-    if (animBattlerId == ANIM_ATTACKER || animBattlerId == ANIM_ATK_PARTNER)
+    if (animBattlerId == 0 || animBattlerId == 2)
         battlerId = gBattleAnimAttacker;
     else
         battlerId = gBattleAnimTarget;
 
     if (IsBattlerSpriteVisible(battlerId))
     {
-        u8 position = GetBattlerPosition(battlerId);
-		toBG_2 = TRUE;
-        if (position < B_POSITION_OPPONENT_LEFT)
+        position = ((GetBattlerPosition(battlerId) << 0x18) + 0xFF000000) >> 0x18;	//make human code
+        if (position <= B_POSITION_OPPONENT_LEFT)
             toBG_2 = FALSE;
-
+        else
+            toBG_2 = TRUE;
+		
         MoveBattlerSpriteToBG(battlerId, toBG_2);
+		gSprites[gBattlerSpriteIds[battlerId]].invisible = FALSE;
     }
 
     battlerId ^= BIT_FLANK;
     if (animBattlerId > 1 && IsBattlerSpriteVisible(battlerId))
     {
-        u8 position = GetBattlerPosition(battlerId);
-		toBG_2 = TRUE;
-        if (position < B_POSITION_OPPONENT_LEFT)
+        position = ((GetBattlerPosition(battlerId) << 0x18) + 0xFF000000) >> 0x18;	//make human code
+        if (position <= B_POSITION_OPPONENT_LEFT)
             toBG_2 = FALSE;
+        else
+            toBG_2 = TRUE;
 
         MoveBattlerSpriteToBG(battlerId, toBG_2);
+		gSprites[gBattlerSpriteIds[battlerId]].invisible = FALSE;
     }
 
     sBattleAnimScriptPtr++;
@@ -2530,16 +2535,19 @@ static void ScriptCmd_clearmonbg_23(void)
 static void sub_8073558(u8 taskId)
 {
     bool8 to_BG2;
+    u8 position;
+    u8 battlerId;
 	
 	gTasks[taskId].data[1]++;
     if (gTasks[taskId].data[1] != 1)
     {
         bool8 toBG_2;
-        u8 battlerId = gTasks[taskId].data[2];
-        u8 position = GetBattlerPosition(battlerId);
-		to_BG2 = TRUE;
-        if (position < B_POSITION_OPPONENT_LEFT)
-            to_BG2 = FALSE;
+        battlerId = gTasks[taskId].data[2];
+        position = ((GetBattlerPosition(battlerId) << 0x18) + 0xFF000000) >> 0x18;	//make human code
+        if (position <= B_POSITION_OPPONENT_LEFT)
+            toBG_2 = FALSE;
+        else
+            toBG_2 = TRUE;
 
         if (IsBattlerSpriteVisible(battlerId))
             sub_8073128(toBG_2);
@@ -2625,6 +2633,7 @@ static void ScriptCmd_choosetwoturnanim(void)
 static void ScriptCmd_jumpifmoveturn(void)
 {
     u8 toCheck;
+	
     sBattleAnimScriptPtr++;
     toCheck = sBattleAnimScriptPtr[0];
     sBattleAnimScriptPtr++;
@@ -2641,13 +2650,18 @@ static void ScriptCmd_goto(void)
     sBattleAnimScriptPtr = T2_READ_PTR(sBattleAnimScriptPtr);
 }
 
-//unused
 bool8 IsContest(void)
 {
-    if (!gMain.inBattle)
-        return TRUE;
-    else
+	return FALSE;
+}
+
+// Unused
+static bool8 sub_807378C(u16 a)
+{
+    if (a == 0xC9)
         return FALSE;
+    else
+        return TRUE;
 }
 
 #define tBackgroundId   data[0]
@@ -3192,7 +3206,6 @@ static void ScriptCmd_jumpargeq(void)
 
 static void ScriptCmd_jumpifcontest(void)
 {
-    sBattleAnimScriptPtr++;
 	sBattleAnimScriptPtr += 5;
 }
 

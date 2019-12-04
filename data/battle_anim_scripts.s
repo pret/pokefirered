@@ -11051,7 +11051,7 @@ Special_BallThrow:: @ 81D64F9
 	delay 0
 	playsewithpan SE_NAGERU, 0
 	createvisualtask sub_80EF5AC, 2, 
-	createvisualtask AnimTask_IsBallBlockedByTrainer, 2, 
+	createvisualtask AnimTask_IsBallBlockedByTrainerOrDodged, 2, 
 	jumpargeq 7, 65535, gUnknown_81D652D
 	jumpargeq 7, 65534, gUnknown_81D6555
 

@@ -51,7 +51,7 @@ void AnimAngel(struct Sprite *);
 void AnimPinkHeart(struct Sprite *);
 void AnimDevil(struct Sprite *);
 void AnimFurySwipes(struct Sprite *);
-void AnimMovmentWaves(struct Sprite *);
+void AnimMovementWaves(struct Sprite *);
 void AnimJaggedMusicNote(struct Sprite *);
 void AnimPerishSongMusicNote2(struct Sprite *);
 void AnimPerishSongMusicNote(struct Sprite *);
@@ -98,7 +98,7 @@ static void HeartsBackground_Step(u8);
 static void ScaryFace_Step(u8);
 static void AnimOrbitFastStep(struct Sprite *);
 static void AnimOrbitScatterStep(struct Sprite *);
-static void AnimMovmentWaves_Step(struct Sprite *);
+static void AnimMovementWaves_Step(struct Sprite *);
 static void UproarDistortion_Step(u8);
 static void AnimJaggedMusicNote_Step(struct Sprite *);
 static void AnimPerishSongMusicNote_Step1(struct Sprite *);
@@ -1152,7 +1152,7 @@ const struct SpriteTemplate gMovementWavesSpriteTemplate =	//gUnknown_83E43F8
     .anims = gMovementWavesAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimMovmentWaves,
+    .callback = AnimMovementWaves,
 };
 
 const union AffineAnimCmd gUnknown_08593B98[] =
@@ -3241,6 +3241,9 @@ void AnimTask_HeartsBackground(u8 taskId)
 	AnimLoadCompressedBgTilemap(animBg.bgId, gBattleAnimBg_AttractTilemap);
 	AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimBg_AttractGfx, animBg.tilesOffset);
     LoadCompressedPalette(gBattleAnimBg_AttractPal, animBg.paletteId * 16, 32);
+	if (IsContest())
+		sub_80730C0(animBg.paletteId, animBg.bgTilemap, 0, 0);
+	
     gTasks[taskId].func = HeartsBackground_Step;
 }
 
@@ -3326,6 +3329,9 @@ void AnimTask_ScaryFace(u8 taskId)
 
     AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnim_ScaryFaceGfx, animBg.tilesOffset);
     LoadCompressedPalette(gBattleAnim_ScaryFacePal, animBg.paletteId * 16, 32);
+	if (IsContest())
+		sub_80730C0(animBg.paletteId, animBg.bgTilemap, 0, 0);
+	
     gTasks[taskId].func = ScaryFace_Step;
 }
 
@@ -3596,7 +3602,7 @@ void AnimFurySwipes(struct Sprite *sprite)
     }
 }
 
-void AnimMovmentWaves(struct Sprite *sprite)
+void AnimMovementWaves(struct Sprite *sprite)
 {
     if (!gBattleAnimArgs[2])
     {
@@ -3623,11 +3629,11 @@ void AnimMovmentWaves(struct Sprite *sprite)
         sprite->data[0] = gBattleAnimArgs[2];
         sprite->data[1] = gBattleAnimArgs[1];
         StartSpriteAnim(sprite, sprite->data[1]);
-        sprite->callback = AnimMovmentWaves_Step;
+        sprite->callback = AnimMovementWaves_Step;
     }
 }
 
-static void AnimMovmentWaves_Step(struct Sprite *sprite)
+static void AnimMovementWaves_Step(struct Sprite *sprite)
 {
     if (sprite->animEnded)
     {

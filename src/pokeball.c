@@ -105,9 +105,9 @@ const struct CompressedSpritePalette gBallSpritePalettes[POKEBALL_COUNT] =
 static const struct OamData sBallOamData =
 {
     .y = 0,
-    .affineMode = 3,
-    .objMode = 0,
-    .mosaic = 0,
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = ST_OAM_4BPP,
     .bpp = 0,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,

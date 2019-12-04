@@ -331,7 +331,7 @@ u8 DoPokeballSendOutAnimation(s16 pan, u8 kindOfThrow)
     u8 taskId;
     
     gDoingBattleAnim = TRUE;
-    gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive = 1;
+    gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive = TRUE;
     taskId = CreateTask(Task_DoPokeballSendOutAnim, 5);
     gTasks[taskId].tPan = pan;
     gTasks[taskId].tThrowId = kindOfThrow;
@@ -854,13 +854,13 @@ static void HandleBallAnimEnd(struct Sprite *sprite)
 
         gSprites[gBattlerSpriteIds[battlerId]].pos2.y = 0;
         gDoingBattleAnim = FALSE;
-        gBattleSpritesDataPtr->healthBoxesData[battlerId].ballAnimActive = 0;
+        gBattleSpritesDataPtr->healthBoxesData[battlerId].ballAnimActive = FALSE;
         FreeSpriteOamMatrix(sprite);
         DestroySprite(sprite);
 
         for (doneBattlers = 0, i = 0; i < MAX_BATTLERS_COUNT; i++)
         {
-            if (gBattleSpritesDataPtr->healthBoxesData[i].ballAnimActive == 0)
+            if (!gBattleSpritesDataPtr->healthBoxesData[i].ballAnimActive)
                 doneBattlers++;
         }
         if (doneBattlers == MAX_BATTLERS_COUNT)
@@ -892,7 +892,7 @@ static void sub_804B5C8(struct Sprite *sprite)
         DestroySprite(&gSprites[gBattlerSpriteIds[sprite->sBattler]]);
         DestroySpriteAndFreeResources(sprite);
         if (gMain.inBattle)
-            gBattleSpritesDataPtr->healthBoxesData[battlerId].ballAnimActive = 0;
+            gBattleSpritesDataPtr->healthBoxesData[battlerId].ballAnimActive = FALSE;
     }
 }
 
@@ -1240,7 +1240,7 @@ void LoadBallGfx(u8 ballId)
 {
     u16 var;
 
-    if (GetSpriteTileStartByTag(gBallSpriteSheets[ballId].tag) == 0xFFFF)
+    if (GetSpriteTileStartByTag(gBallSpriteSheets[ballId].tag) == SPRITE_INVALID_TAG)
     {
         LoadCompressedSpriteSheetUsingHeap(&gBallSpriteSheets[ballId]);
         LoadCompressedSpritePaletteUsingHeap(&gBallSpritePalettes[ballId]);

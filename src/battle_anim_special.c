@@ -104,8 +104,7 @@ static void PremierBallOpenParticleAnimation(u8);
 static void sub_80F1B3C(struct Sprite *);
 
 // Data
-extern const struct SpriteTemplate gBallSpriteTemplates[POKEBALL_COUNT];	//for now
-extern const u32 gBattleAnimSpriteGfx_Particles[];
+extern const struct SpriteTemplate gBallSpriteTemplates[];	//for now
 
 struct BallCaptureSuccessStarData
 {

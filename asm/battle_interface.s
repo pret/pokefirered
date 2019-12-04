@@ -709,11 +709,11 @@ _080480A4: .4byte sub_8048128
 GetHealthboxElementGfxPtr: @ 80480A8
 	lsls r0, 24
 	lsrs r0, 19
-	ldr r1, _080480B4 @ =gUnknown_8D11BC4
+	ldr r1, _080480B4 @ =gHealthboxElementsGfxTable
 	adds r0, r1
 	bx lr
 	.align 2, 0
-_080480B4: .4byte gUnknown_8D11BC4
+_080480B4: .4byte gHealthboxElementsGfxTable
 	thumb_func_end GetHealthboxElementGfxPtr
 
 	thumb_func_start sub_80480B8

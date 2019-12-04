@@ -32,5 +32,6 @@ void DoHitAnimHealthboxEffect(u8 bank);
 void LoadBallGfx(u8 ballId);
 void FreeBallGfx(u8 ballId);
 void sub_804BD94(u8 battler);
+void DestroySpriteAndFreeResources2(struct Sprite *sprite);
 
 #endif // GUARD_POKEBALL_H

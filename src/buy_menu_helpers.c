@@ -177,14 +177,14 @@ void BuyMenuDrawMoneyBox(void)
     PrintMoneyAmountInMoneyBoxWithBorder(0, 0xA, 0xF, GetMoney(&gSaveBlock1Ptr->money));
 }
 
-void BuyMenuPrint(u8 windowId, u8 font, const u8 *text, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, s8 speed, u8 color)
+void BuyMenuPrint(u8 windowId, u8 font, const u8 *text, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 color)
 {
     AddTextPrinterParameterized4(windowId, font, x, y, letterSpacing, lineSpacing, sShopBuyMenuTextColors[color], speed, text);
 }
 
 void BuyMenuDisplayMessage(u8 taskId, const u8 *text, TaskFunc callback)
 {
-    DisplayMessageAndContinueTask(taskId, 2, 0x13, 0xE, sub_809B56C(), GetTextSpeedSetting(), text, callback);
+    DisplayMessageAndContinueTask(taskId, 2, 0x13, 0xE, GetMartUnk16_4(), GetTextSpeedSetting(), text, callback);
     ScheduleBgCopyTilemapToVram(0);
 }
 

@@ -31,7 +31,31 @@ gUnknown_83CCE30:: @ 83CCE30
 	.incbin "baserom.gba", 0x3CCE30, 0x98
 
 gUnknown_83CCEC8:: @ 83CCEC8
-	.incbin "baserom.gba", 0x3CCEC8, 0x3B8
+	.incbin "baserom.gba", 0x3CCEC8, 0xB8
+
+gUnknown_83CCF80:: @ 83CCF80
+    .incbin "baserom.gba", 0x3CCF80, 0x60
+    
+gUnknown_83CCFE0:: @ 83CCFE0
+    .incbin "baserom.gba", 0x3CCFE0, 0x60
+
+gUnknown_83CD040:: @ 83CD040
+    .incbin "baserom.gba", 0x3CD040, 0x60
+
+gUnknown_83CD0A0:: @ 83CD0A0
+    .incbin "baserom.gba", 0x3CD0A0, 0x60
+
+gUnknown_83CD100:: @ 83CD100
+    .incbin "baserom.gba", 0x3CD100, 0x60
+
+gUnknown_83CD160:: @ 83CD160  
+    .incbin "baserom.gba", 0x3CD160, 0x60
+
+gUnknown_83CD1C0:: @ 83CD1C0
+    .incbin "baserom.gba", 0x3CD1C0, 0x60
+
+gUnknown_83CD220:: @ 83CD220
+    .incbin "baserom.gba", 0x3CD220, 0x60
 
 gUnknown_83CD280:: @ 83CD280
 	.incbin "baserom.gba", 0x3CD280, 0x20
@@ -70,10 +94,18 @@ gUnknown_83CD898:: @ 83CD898
 	.incbin "baserom.gba", 0x3CD898, 0x20
 
 gUnknown_83CD8B8:: @ 83CD8B8
-	.incbin "baserom.gba", 0x3CD8B8, 0x14
+    .word gUnknown_8E9986C
+    .word gUnknown_83CCF80
+    .word gUnknown_83CD040
+    .word gUnknown_83CD100
+    .word gUnknown_83CD1C0
 
 gUnknown_83CD8CC:: @ 83CD8CC
-	.incbin "baserom.gba", 0x3CD8CC, 0x14
+    .word gUnknown_8E99198
+    .word gUnknown_83CCFE0
+    .word gUnknown_83CD0A0
+    .word gUnknown_83CD160
+    .word gUnknown_83CD220
 
 gUnknown_83CD8E0:: @ 83CD8E0
 	.incbin "baserom.gba", 0x3CD8E0, 0x3

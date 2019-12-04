@@ -25,6 +25,7 @@ SSANNEGFXDIR := graphics/ss_anne
 ITEMPCGFXDIR := graphics/item_pc
 TITLESCREENGFXDIR := graphics/title_screen
 CREDITSGFXDIR := graphics/credits
+ITEMMENUGFXDIR := graphics/item_menu
 
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
 contest_types := cool beauty cute smart tough
@@ -135,7 +136,7 @@ $(UNUSEDGFXDIR)/obi2.4bpp: $(UNUSEDGFXDIR)/old_bulbasaur2.4bpp \
 						   $(UNUSEDGFXDIR)/old_battle_interface_3.4bpp
 	@cat $^ >$@
 
-$(INTERFACEGFXDIR)/hp_numbers.4bpp: $(INTERFACEGFXDIR)/hpbar_anim.4bpp \
+$(INTERFACEGFXDIR)/hp_numbers.4bpp: $(INTERFACEGFXDIR)/hp_bar_anim.4bpp \
 							$(INTERFACEGFXDIR)/numbers1.4bpp \
 							$(INTERFACEGFXDIR)/numbers2.4bpp
 	@cat $^ >$@
@@ -151,6 +152,9 @@ $(UNUSEDGFXDIR)/color_frames.4bpp: %.4bpp: %.png
 
 $(BATINTGFXDIR)/unused_window2bar.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 5
+    
+$(BATINTGFXDIR)/window.gbapal: $(BATINTGFXDIR)/window1.gbapal $(BATINTGFXDIR)/window2.gbapal
+	cat $^ > $@
 
 $(UNUSEDGFXDIR)/old_contest.4bpp: $(UNUSEDGFXDIR)/old_contest_frame_1.4bpp \
 								  $(UNUSEDGFXDIR)/old_contest_floor.4bpp \
@@ -527,3 +531,6 @@ graphics/map_objects/151.4bpp: %.4bpp: %.png
 
 graphics/map_objects/emoticons.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(ITEMMENUGFXDIR)/bag_tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 55

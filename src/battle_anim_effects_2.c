@@ -292,12 +292,12 @@ const union AffineAnimCmd gWaterPulseRingAffineAnimCmds[] =
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gGrowingRingAffineAnimTable[] =
+const union AffineAnimCmd *const gGrowingRingAffineAnimTable[] =	//gUnknown_83E3C98
 {
     gGrowingRingAffineAnimCmds,
 };
 
-const union AffineAnimCmd *const gWaterPulseRingAffineAnimTable[] =
+const union AffineAnimCmd *const gWaterPulseRingAffineAnimTable[] =	//83E3C9C
 {
     gWaterPulseRingAffineAnimCmds,
 };

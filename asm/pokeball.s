@@ -154,7 +154,7 @@ _0804AA68:
 	lsls r0, r5, 1
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _0804AABC @ =gUnknown_82606F4
+	ldr r1, _0804AABC @ =gBallSpriteTemplates
 	adds r0, r1
 	movs r1, 0x20
 	movs r2, 0x50
@@ -191,7 +191,7 @@ _0804AA68:
 	b _0804AACE
 	.align 2, 0
 _0804AAB8: .4byte gSaveBlock2Ptr
-_0804AABC: .4byte gUnknown_82606F4
+_0804AABC: .4byte gBallSpriteTemplates
 _0804AAC0: .4byte gSprites
 _0804AAC4: .4byte gBattleTypeFlags
 _0804AAC8:
@@ -2032,7 +2032,7 @@ CreatePokeballSpriteToReleaseMon: @ 804B908
 	bl LoadCompressedSpriteSheetUsingHeap
 	ldr r0, _0804B9D8 @ =gUnknown_82605CC
 	bl LoadCompressedSpritePaletteUsingHeap
-	ldr r0, _0804B9DC @ =gUnknown_82606F4
+	ldr r0, _0804B9DC @ =gBallSpriteTemplates
 	mov r1, r9
 	mov r2, r10
 	adds r3, r4, 0
@@ -2098,7 +2098,7 @@ CreatePokeballSpriteToReleaseMon: @ 804B908
 	.align 2, 0
 _0804B9D4: .4byte gUnknown_826056C
 _0804B9D8: .4byte gUnknown_82605CC
-_0804B9DC: .4byte gUnknown_82606F4
+_0804B9DC: .4byte gBallSpriteTemplates
 _0804B9E0: .4byte gSprites
 _0804B9E4: .4byte sub_804B9E8
 	thumb_func_end CreatePokeballSpriteToReleaseMon
@@ -2365,7 +2365,7 @@ CreateTradePokeballSprite: @ 804BB98
 	bl LoadCompressedSpriteSheetUsingHeap
 	ldr r0, _0804BC40 @ =gUnknown_82605CC
 	bl LoadCompressedSpritePaletteUsingHeap
-	ldr r0, _0804BC44 @ =gUnknown_82606F4
+	ldr r0, _0804BC44 @ =gBallSpriteTemplates
 	adds r1, r6, 0
 	mov r2, r8
 	adds r3, r4, 0
@@ -2411,7 +2411,7 @@ CreateTradePokeballSprite: @ 804BB98
 	.align 2, 0
 _0804BC3C: .4byte gUnknown_826056C
 _0804BC40: .4byte gUnknown_82605CC
-_0804BC44: .4byte gUnknown_82606F4
+_0804BC44: .4byte gBallSpriteTemplates
 _0804BC48: .4byte gSprites
 _0804BC4C: .4byte sub_804BC50
 	thumb_func_end CreateTradePokeballSprite

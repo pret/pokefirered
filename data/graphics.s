@@ -1344,7 +1344,7 @@ gBattleAnimSpritePal_Impact:: @ 8D1A5F0
 	.incbin "graphics/battle_anims/sprites/135.gbapal.lz"
 
 	.align 2
-gFile_graphics_battle_anims_sprites_particles_sheet:: @ 8D1A608
+gBattleAnimSpriteGfx_Particles:: @ 8D1A608
 	.incbin "graphics/battle_anims/sprites/particles.4bpp.lz"
 
 	.align 2

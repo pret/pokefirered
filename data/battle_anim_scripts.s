@@ -3337,7 +3337,7 @@ Move_FALSE_SWIPE:: @ 81CB33F
 Move_SWAGGER:: @ 81CB3C6
 	loadspritegfx 10086
 	loadspritegfx 10087
-	createvisualtask sub_80A84B4, 2, 
+	createvisualtask AnimTask_GrowAndShrink, 2, 
 	playsewithpan SE_W207, 192
 	waitforvisualfinish
 	createsprite gBreathPuffSpriteTemplate, ANIM_ATTACKER, 2, 
@@ -3403,7 +3403,7 @@ Move_RAPID_SPIN:: @ 81CB4E1
 	loadspritegfx 10229
 	monbg 0
 	createsprite gRapidSpinSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 32, -32, 40, -2
-	createvisualtask sub_80DEF9C, 2, 0, 2, 0
+	createvisualtask AnimTask_RapinSpinMonElevation, 2, 0, 2, 0
 	loopsewithpan SE_W013B, 192, 8, 4
 	waitforvisualfinish
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 2, 0, 0, 1, 2
@@ -3411,7 +3411,7 @@ Move_RAPID_SPIN:: @ 81CB4E1
 	playsewithpan SE_W003, 63
 	waitforvisualfinish
 	delay 8
-	createvisualtask sub_80DEF9C, 2, 0, 2, 1
+	createvisualtask AnimTask_RapinSpinMonElevation, 2, 0, 2, 1
 	loopsewithpan SE_W013B, 192, 8, 4
 	waitforvisualfinish
 	clearmonbg 0
@@ -3438,7 +3438,7 @@ Move_MOONLIGHT:: @ 81CB54E
 	delay 30
 	createsprite gMoonlightSparkleSpriteTemplate, ANIM_ATTACKER, 40, 10, 0
 	delay 20
-	createvisualtask sub_80A5FC0, 2, 
+	createvisualtask AnimTask_FadeScreenBlue, 2, 
 	waitforvisualfinish
 	call gUnknown_81D56C9
 	waitforvisualfinish
@@ -3455,7 +3455,7 @@ gUnknown_81CB5F5:: @ 81CB5F5
 	waitbgfadeout
 	createvisualtask sub_80BB82C, 5, -2304, 0, 1, -1
 	waitbgfadein
-	createvisualtask sub_80A917C, 2, 
+	createvisualtask AnimTask_StretchAttacker, 2, 
 	loopsewithpan SE_W013B, 192, 8, 3
 	waitforvisualfinish
 	delay 1
@@ -3463,7 +3463,7 @@ gUnknown_81CB5F5:: @ 81CB5F5
 	monbg 1
 	setalpha 12, 8
 	delay 18
-	createvisualtask sub_80A9210, 2, 
+	createvisualtask AnimTask_ExtremeSpeedImpact, 2, 
 	delay 2
 	playsewithpan SE_W004, 63
 	createsprite gUnknown_83E7C68, ANIM_TARGET, 2, 1, 0, -12, 3
@@ -3474,9 +3474,9 @@ gUnknown_81CB5F5:: @ 81CB5F5
 	playsewithpan SE_W233B, 63
 	createsprite gUnknown_83E7C68, ANIM_TARGET, 2, 1, 0, 0, 3
 	waitforvisualfinish
-	createvisualtask sub_80A94AC, 2, 
+	createvisualtask AnimTask_SpeedDust, 2, 
 	delay 10
-	createvisualtask sub_80A939C, 2, 
+	createvisualtask AnimTask_ExtremeSpeedMonReappear, 2, 
 	loopsewithpan SE_W104, 192, 8, 4
 	waitforvisualfinish
 	restorebg
@@ -3498,19 +3498,19 @@ Move_UPROAR:: @ 81CB69C
 	loadspritegfx 10225
 	loadspritegfx 10203
 	monbg 3
-	createvisualtask sub_80AA7C8, 2, 0
+	createvisualtask AnimTask_UproarDistortion, 2, 0
 	createsprite gUproarRingSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 0, 31, 8
 	playsewithpan SE_W253, 192
 	createsprite gJaggedMusicNoteSpriteTemplate, ANIM_ATTACKER, 2, 0, 29, -12, 0
 	createsprite gJaggedMusicNoteSpriteTemplate, ANIM_ATTACKER, 2, 0, -12, -29, 1
 	delay 16
-	createvisualtask sub_80AA7C8, 2, 0
+	createvisualtask AnimTask_UproarDistortion, 2, 0
 	createsprite gUproarRingSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 0, 31, 8
 	playsewithpan SE_W253, 192
 	createsprite gJaggedMusicNoteSpriteTemplate, ANIM_ATTACKER, 2, 0, 12, -29, 1
 	createsprite gJaggedMusicNoteSpriteTemplate, ANIM_ATTACKER, 2, 0, -29, -12, 0
 	delay 16
-	createvisualtask sub_80AA7C8, 2, 0
+	createvisualtask AnimTask_UproarDistortion, 2, 0
 	createsprite gUproarRingSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 0, 31, 8
 	playsewithpan SE_W253, 192
 	createsprite gJaggedMusicNoteSpriteTemplate, ANIM_ATTACKER, 2, 0, 24, -24, 1
@@ -3557,7 +3557,7 @@ Move_HAIL:: @ 81CB816
 Move_TORMENT:: @ 81CB84E
 	loadspritegfx 10087
 	loadspritegfx 10209
-	createvisualtask sub_80DF1DC, 2, 
+	createvisualtask AnimTask_TormentAttacker, 2, 
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendMonInAndOut, 2, 1, 31, 10, 1, 1
 	createsprite gAngerMarkSpriteTemplate, ANIM_TARGET, 2, 1, -20, -28
@@ -3976,7 +3976,7 @@ Move_LUSTER_PURGE:: @ 81CC0FB
 	loadspritegfx 10135
 	fadetobg 3
 	waitbgfadeout
-	createvisualtask sub_80DE7B4, 5, 
+	createvisualtask AnimTask_FadeScreenToWhite, 5, 
 	waitbgfadein
 	monbg 0
 	setalpha 12, 8
@@ -4452,7 +4452,7 @@ Move_HOWL:: @ 81CCCDC
 
 Move_BULK_UP:: @ 81CCCFE
 	loadspritegfx 10086
-	createvisualtask sub_80A84B4, 2, 
+	createvisualtask AnimTask_GrowAndShrink, 2, 
 	playsewithpan SE_W207, 192
 	waitforvisualfinish
 	createsprite gBreathPuffSpriteTemplate, ANIM_ATTACKER, 2, 
@@ -5479,7 +5479,7 @@ gUnknown_81CE3FC:: @ 81CE3FC
 
 Move_WITHDRAW:: @ 81CE432
 	playsewithpan SE_W029, 192
-	createvisualtask sub_80A70A0, 5, 
+	createvisualtask AnimTask_Withdraw, 5, 
 	waitforvisualfinish
 	end
 
@@ -5573,7 +5573,7 @@ gUnknown_81CE54B:: @ 81CE54B
 gUnknown_81CE61E:: @ 81CE61E
 	call gUnknown_81D5A07
 	panse_1B SE_W076, 192, 63, 2, 0
-	createvisualtask sub_80A2500, 5, 
+	createvisualtask AnimTask_CreateSmallSolarbeamOrbs, 5, 
 	createsprite gSolarbeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 0
 	delay 4
 	createsprite gSolarbeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 1
@@ -6875,7 +6875,7 @@ Move_SPORE:: @ 81D03EF
 	loadspritegfx 10158
 	monbg 3
 	setalpha 12, 8
-	createvisualtask sub_80A28C4, 2, 
+	createvisualtask AnimTask_SporeDoubleBattle, 2, 
 	loopsewithpan SE_W077, 63, 16, 11
 	call gUnknown_81D041A
 	call gUnknown_81D041A
@@ -7666,7 +7666,7 @@ Move_DISABLE:: @ 81D169F
 	playsewithpan SE_W197, 192
 	createsprite gSpriteTemplate_83BF480, ANIM_ATTACKER, 13, 24, -16
 	waitforvisualfinish
-	createvisualtask sub_80A7FB0, 5, 
+	createvisualtask AnimTask_GrowAndGreyscale, 5, 
 	loopsewithpan SE_W020, 63, 15, 4
 	waitforvisualfinish
 	delay 1
@@ -7871,7 +7871,7 @@ gUnknown_81D1B2F:: @ 81D1B2F
 
 Move_FAKE_OUT:: @ 81D1B65
 	playsewithpan SE_W260, 0
-	createvisualtask sub_80A98B0, 5, 
+	createvisualtask AnimTask_FakeOut, 5, 
 	waitforvisualfinish
 	playsewithpan SE_W166, 63
 	createvisualtask AnimTask_ShakeMon2, 2, 1, 4, 0, 5, 1
@@ -7977,7 +7977,7 @@ Move_INGRAIN:: @ 81D1D17
 
 Move_PRESENT:: @ 81D1DC8
 	loadspritegfx 10224
-	createvisualtask sub_80DEAF0, 2, 
+	createvisualtask AnimTask_IsHealingMove, 2, 
 	createsprite gPresentSpriteTemplate, ANIM_TARGET, 2, 0, -5, 10, 2, -1
 	playsewithpan SE_W039, 192
 	delay 14
@@ -8223,7 +8223,7 @@ Move_WILL_O_WISP:: @ 81D2340
 Move_ENCORE:: @ 81D23FE
 	loadspritegfx 10227
 	loadspritegfx 10247
-	createvisualtask sub_80DEDD8, 2, 
+	createvisualtask AnimTask_CreateSpotlight, 2, 
 	createvisualtask sub_80BAB38, 2, 248, 3, 0, 10, 0
 	waitforvisualfinish
 	createsprite gSpotlightSpriteTemplate, ANIM_TARGET, 2, 0, -8
@@ -8237,7 +8237,7 @@ Move_ENCORE:: @ 81D23FE
 	waitforvisualfinish
 	createvisualtask sub_80BAB38, 2, 248, 3, 10, 0, 1
 	waitforvisualfinish
-	createvisualtask sub_80DEE78, 2, 
+	createvisualtask AnimTask_RemoveSpotlight, 2, 
 	end
 
 Move_TRICK:: @ 81D24A5
@@ -8288,7 +8288,7 @@ Move_STOCKPILE:: @ 81D256B
 	loadspritegfx 10235
 	playsewithpan SE_W025, 192
 	createvisualtask sub_80B9BDC, 2, 2, 8, 1, 0, 12, 32767
-	createvisualtask sub_80DF848, 5, 
+	createvisualtask AnimTask_StockpileDeformMon, 5, 
 	call gUnknown_81D25A9
 	call gUnknown_81D25A9
 	waitforvisualfinish
@@ -8318,7 +8318,7 @@ Move_SPIT_UP:: @ 81D2622
 	loadspritegfx 10237
 	loadspritegfx 10135
 	playsewithpan SE_W036, 192
-	createvisualtask sub_80DF8A0, 5, 
+	createvisualtask AnimTask_SpitUpDeformMon, 5, 
 	createvisualtask AnimTask_ShakeMon2, 2, 0, 1, 0, 8, 2
 	delay 45
 	playsewithpan SE_W255, 192
@@ -8368,7 +8368,7 @@ Move_SWALLOW:: @ 81D2765
 	loadspritegfx 10236
 	loadspritegfx 10031
 	playsewithpan SE_W036, 192
-	createvisualtask sub_80DF964, 5, 
+	createvisualtask AnimTask_SwallowDeformMon, 5, 
 	createvisualtask AnimTask_ShakeMon2, 2, 0, 1, 0, 8, 2
 	delay 38
 	playsewithpan SE_W255, 192
@@ -8408,7 +8408,7 @@ Move_TRANSFORM:: @ 81D2811
 	monbg 0
 	playsewithpan SE_W100, 192
 	waitplaysewithpan SE_W107, 192, 48
-	createvisualtask sub_80DF9BC, 2, 0
+	createvisualtask AnimTask_TransformMon, 2, 0
 	waitforvisualfinish
 	clearmonbg 0
 	end
@@ -8416,7 +8416,7 @@ Move_TRANSFORM:: @ 81D2811
 Move_MORNING_SUN:: @ 81D2829
 	loadspritegfx 10241
 	loadspritegfx 10031
-	createvisualtask sub_80DFC50, 5, 
+	createvisualtask AnimTask_MorningSunLightBeam, 5, 
 	delay 8
 	createvisualtask sub_80BA7F8, 10, 1921, 8, 0, 12, 32767
 	delay 14
@@ -8540,7 +8540,7 @@ Move_FLATTER:: @ 81D2AE9
 	loadspritegfx 10227
 	loadspritegfx 10240
 	createvisualtask sub_80DD410, 5, 216, 63
-	createvisualtask sub_80DEDD8, 2, 
+	createvisualtask AnimTask_CreateSpotlight, 2, 
 	createvisualtask sub_80BAB38, 2, 248, 3, 0, 10, 0
 	waitforvisualfinish
 	createsprite gFlatterSpotlightSpriteTemplate, ANIM_TARGET, 2, 0, -8, 80
@@ -8574,7 +8574,7 @@ Move_FLATTER:: @ 81D2AE9
 	waitforvisualfinish
 	createvisualtask sub_80BAB38, 2, 248, 3, 10, 0, 1
 	waitforvisualfinish
-	createvisualtask sub_80DEE78, 2, 
+	createvisualtask AnimTask_RemoveSpotlight, 2, 
 	end
 
 gUnknown_81D2BD2:: @ 81D2BD2
@@ -9692,7 +9692,7 @@ Move_PSYCHO_BOOST:: @ 81D499B
 	monbg 2
 	fadetobg 3
 	waitbgfadeout
-	createvisualtask sub_80DE7B4, 5, 
+	createvisualtask AnimTask_FadeScreenToWhite, 5, 
 	waitbgfadein
 	delay 6
 	createvisualtask sub_80B9BDC, 2, 1, 2, 8, 0, 10, 0
@@ -10368,7 +10368,7 @@ gUnknown_81D595F:: @ 81D595F
 gUnknown_81D59BB:: @ 81D59BB
 	fadetobg 3
 	waitbgfadeout
-	createvisualtask sub_80DE6F0, 5, 
+	createvisualtask AnimTask_SetPsychicBackground, 5, 
 	waitbgfadein
 	return
 
@@ -10513,7 +10513,7 @@ Status_Nightmare:: @ 81D5B63
 	end
 
 General_CastformChange:: @ 81D5B88
-	createvisualtask c3_80DFBE4, 2, 
+	createvisualtask AnimTask_IsMonInvisible, 2, 
 	jumpargeq 7, 1, gUnknown_81D5BB4
 	goto gUnknown_81D5B9C
 
@@ -10521,17 +10521,17 @@ gUnknown_81D5B9C:: @ 81D5B9C
 	monbg 0
 	playsewithpan SE_W100, 192
 	waitplaysewithpan SE_W107, 192, 48
-	createvisualtask sub_80DF9BC, 2, 1
+	createvisualtask AnimTask_TransformMon, 2, 1
 	waitforvisualfinish
 	clearmonbg 0
 	end
 
 gUnknown_81D5BB4:: @ 81D5BB4
-	createvisualtask sub_80DFC24, 2, 1
+	createvisualtask AnimTask_CastformGfxChange, 2, 1
 	end
 
 General_StatsChange:: @ 81D5BBE
-	createvisualtask sub_8078694, 5, 
+	createvisualtask AnimTask_StatsChange, 5, 
 	waitforvisualfinish
 	end
 
@@ -10554,15 +10554,15 @@ General_SubstituteAppear:: @ 81D5C04
 
 General_PokeblockThrow:: @ 81D5C0C
 	createvisualtask sub_80F1C8C, 2, 0
-	createvisualtask sub_80F1AE0, 2, 
+	createvisualtask AnimTask_LoadPokeblockGfx, 2, 
 	delay 0
 	waitplaysewithpan SE_W026, 192, 22
-	createsprite gUnknown_840C1EC, ANIM_TARGET, 3, -18, 12, 0, 32
+	createsprite gPokeblockSpriteTemplate, ANIM_TARGET, 3, -18, 12, 0, 32
 	delay 50
 	loopsewithpan SE_W039, 63, 19, 2
 	createvisualtask AnimTask_SwayMon, 5, 1, 8, 1536, 2, 1
 	waitforvisualfinish
-	createvisualtask sub_80F1B14, 2, 
+	createvisualtask AnimTask_FreePokeblockGfx, 2, 
 	end
 
 General_ItemKnockoff:: @ 81D5C54
@@ -10571,7 +10571,7 @@ General_ItemKnockoff:: @ 81D5C54
 	end
 
 General_TurnTrap:: @ 81D5C5F
-	createvisualtask sub_80F1D14, 5, 
+	createvisualtask AnimTask_GetTrappedMoveAnimId, 5, 
 	jumpargeq 0, 1, gUnknown_81D5CD3
 	jumpargeq 0, 2, gUnknown_81D5CF8
 	jumpargeq 0, 3, gUnknown_81D5D4C
@@ -10744,7 +10744,7 @@ General_Hail:: @ 81D5FE2
 	goto Move_HAIL
 
 General_LeechSeedDrain:: @ 81D5FE7
-	createvisualtask sub_80F1D7C, 5, 
+	createvisualtask AnimTask_GetBattlersFromArg, 5, 
 	delay 0
 	goto Move_ABSORB
 
@@ -10763,7 +10763,7 @@ General_MonHit:: @ 81D5FF5
 General_ItemSteal:: @ 81D6026
 	loadspritegfx 10224
 	createvisualtask sub_80BC0FC, 2, 
-	createvisualtask sub_80F1700, 2, 
+	createvisualtask AnimTask_TargetToEffectBattler, 2, 
 	delay 1
 	createsprite gItemStealSpriteTemplate, ANIM_ATTACKER, 2, 0, -5, 10, 2, -1
 	end
@@ -10939,7 +10939,7 @@ gUnknown_81D637B:: @ 81D637B
 	monbg 0
 	playsewithpan SE_W100, 192
 	waitplaysewithpan SE_W107, 192, 48
-	createvisualtask sub_80DF9BC, 2, 255
+	createvisualtask AnimTask_TransformMon, 2, 255
 	waitsound
 	waitforvisualfinish
 	clearmonbg 0
@@ -11000,7 +11000,7 @@ gUnknown_81D644E:: @ 81D644E
 	end
 
 gUnknown_81D6476:: @ 81D6476
-	createvisualtask sub_80F16CC, 2, 
+	createvisualtask AnimTask_IsAttackerBehindSubstitute, 2, 
 	jumpargeq 7, 1, gUnknown_81D6487
 
 gUnknown_81D6485:: @ 81D6485
@@ -11013,7 +11013,7 @@ gUnknown_81D6487:: @ 81D6487
 	goto gUnknown_81D6485
 
 gUnknown_81D6496:: @ 81D6496
-	createvisualtask sub_80F16CC, 2, 
+	createvisualtask AnimTask_IsAttackerBehindSubstitute, 2, 
 	jumpargeq 7, 1, gUnknown_81D64A7
 
 gUnknown_81D64A5:: @ 81D64A5
@@ -11051,7 +11051,7 @@ Special_BallThrow:: @ 81D64F9
 	delay 0
 	playsewithpan SE_NAGERU, 0
 	createvisualtask sub_80EF5AC, 2, 
-	createvisualtask sub_80EF4E0, 2, 
+	createvisualtask AnimTask_IsBallBlockedByTrainer, 2, 
 	jumpargeq 7, 65535, gUnknown_81D652D
 	jumpargeq 7, 65534, gUnknown_81D6555
 

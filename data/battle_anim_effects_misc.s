@@ -106,7 +106,7 @@ gUnknown_83E59D0:: @ 83E59D0
 	spr_template 10029, 10029, gOamData_AffineOff_ObjNormal_32x32, gUnknown_83E59CC, NULL, gDummySpriteAffineAnimTable, sub_80AB024
 
 gUnknown_83E59E8:: @ 83E59E8
-	spr_template 10165, 10165, gOamData_AffineDouble_ObjNormal_16x32, gDummySpriteAnimTable, NULL, gUnknown_83E3C98, sub_80AB024
+	spr_template 10165, 10165, gOamData_AffineDouble_ObjNormal_16x32, gDummySpriteAnimTable, NULL, gGrowingRingAffineAnimTable, sub_80AB024
 
 gUnknown_83E5A00:: @ 83E5A00
 	obj_rot_scal_anim_frame 3, 3, 10, 50

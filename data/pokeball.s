@@ -101,7 +101,7 @@ gSpriteAffineAnimTable_82606E0::
 	.4byte gSpriteAffineAnims_82606C0
 	.4byte gSpriteAffineAnims_82606D0
 
-gUnknown_82606F4:: @ 82606F4
+gBallSpriteTemplates:: @ 82606F4
 	spr_template 55000, 55000, gOamData_826062C, gSpriteAnimTable_8260674, NULL, gSpriteAffineAnimTable_82606E0, SpriteCB_TestBallThrow
 	spr_template 55001, 55001, gOamData_826062C, gSpriteAnimTable_8260674, NULL, gSpriteAffineAnimTable_82606E0, SpriteCB_TestBallThrow
 	spr_template 55002, 55002, gOamData_826062C, gSpriteAnimTable_8260674, NULL, gSpriteAffineAnimTable_82606E0, SpriteCB_TestBallThrow

@@ -83,7 +83,7 @@ SECTIONS {
         src/daycare.o(.text);
         asm/battle_interface.o(.text);
         asm/smokescreen.o(.text);
-        asm/pokeball.o(.text);
+        src/pokeball.o(.text);
         src/load_save.o(.text);
         src/trade.o(.text);
         src/trade_scene.o(.text);
@@ -401,7 +401,7 @@ SECTIONS {
         src/daycare.o(.rodata);
         src/battle_gfx_sfx_util.o(.rodata);
         data/battle_interface.o(.rodata);
-        data/pokeball.o(.rodata);
+        src/pokeball.o(.rodata);
         src/trade.o(.rodata);
         src/trade_scene.o(.rodata);
         data/overworld.o(.rodata);

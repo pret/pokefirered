@@ -40,13 +40,13 @@
 #define LOHALF(n) ((n) & 0xFFFF)
 
 // IWRAM
-//EWRAM_DATA int gUnknown_3005424 = 0;
-//EWRAM_DATA u16 gUnknown_3005428 = 0;
-//EWRAM_DATA u16 gUnknown_300542C = 0;
+EWRAM_DATA u16 gUnknown_3005424 = 0;
+EWRAM_DATA u16 gUnknown_3005428 = 0;
+EWRAM_DATA u16 gUnknown_300542C = 0;
 
-extern u32 gUnknown_3005424;
-extern u32 gUnknown_3005428;
-extern u32 gUnknown_300542C;
+//extern u32 gUnknown_3005424;
+//extern u32 gUnknown_3005428;
+//extern u32 gUnknown_300542C;
 
 // Function Declarations
 static void sub_80EEDF4(u8);
@@ -704,12 +704,20 @@ void sub_80EF4B8(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void AnimTask_IsBallBlockedByTrainer(u8 taskId)
+void AnimTask_IsBallBlockedByTrainerOrDodged(u8 taskId)
 {
-    if (gBattleSpritesDataPtr->animationData->ballThrowCaseId == BALL_TRAINER_BLOCK)
-        gBattleAnimArgs[ARG_RET_ID] = -1;
-    else
-        gBattleAnimArgs[ARG_RET_ID] = 0;
+    switch (gBattleSpritesDataPtr->animationData->ballThrowCaseId)
+	{
+	case BALL_TRAINER_BLOCK:
+		gBattleAnimArgs[ARG_RET_ID] = -1;
+		break;
+	case BALL_GHOST_DODGE:
+		gBattleAnimArgs[ARG_RET_ID] = -2;
+		break;
+	default:
+		gBattleAnimArgs[ARG_RET_ID] = 0;
+		break;
+	}
 
     DestroyAnimVisualTask(taskId);
 }
@@ -902,8 +910,8 @@ static void sub_80EFA0C(struct Sprite *sprite)
         PrepareBattlerSpriteForRotScale(spriteId, ST_OAM_OBJ_NORMAL);
         gTasks[taskId].data[10] = 256;
         gUnknown_3005424 = 28;
-        gUnknown_300542C = (gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y) - (sprite->pos1.y + sprite->pos2.y);
-        gUnknown_3005428 = (u32)(gUnknown_300542C * 256) / 28;
+        gUnknown_300542C = (gSprites[spriteId].pos2.y + gSprites[spriteId].pos1.y) - (sprite->pos2.y + sprite->pos1.y);
+        gUnknown_3005428 = (gUnknown_300542C * 256) / 28;
         gTasks[taskId].data[2] = gUnknown_3005428;
         gTasks[taskId].data[0]++;
         break;
@@ -1209,7 +1217,7 @@ static void sub_80EFFC4(struct Sprite *sprite)
     }
     else if (sprite->data[4] == 95)
     {
-        gDoingBattleAnim = 0;
+        gDoingBattleAnim = FALSE;
         UpdateOamPriorityInAllHealthboxes(1);
         m4aMPlayAllStop();
         PlaySE(MUS_FAN6);
@@ -1364,7 +1372,7 @@ static void sub_80F0378(struct Sprite *sprite)
         gSprites[gBattlerSpriteIds[gBattleAnimTarget]].invisible = gBattleSpritesDataPtr->animationData->field_9_x2;
         sprite->data[0] = 0;
         sprite->callback = sub_80F018C;
-        gDoingBattleAnim = 0;
+        gDoingBattleAnim = FALSE;
         UpdateOamPriorityInAllHealthboxes(1);
     }
 }
@@ -1397,7 +1405,7 @@ static void sub_80F04B4(struct Sprite *sprite)
     {
         sprite->data[0] = 0;
         sprite->callback = sub_80F018C;
-        gDoingBattleAnim = 0;
+        gDoingBattleAnim = FALSE;
         UpdateOamPriorityInAllHealthboxes(1);
     }
 }
@@ -1405,18 +1413,13 @@ static void sub_80F04B4(struct Sprite *sprite)
 // GhostBallDodge
 static void sub_80F052C(struct Sprite *sprite)
 {
-	s16 x;
-	s16 y;
-	
-	x = sprite->pos1.x + sprite->pos2.x;
-	sprite->pos1.x = x;
-	y = sprite->pos1.y + sprite->pos2.y;
-	sprite->pos1.y = y;
-	sprite->pos2.x = sprite->pos2.y = 0;
+	sprite->pos1.x += sprite->pos2.x;
+	sprite->pos1.y += sprite->pos2.y;
+    sprite->pos2.x = sprite->pos2.y = 0;
 	sprite->data[0] = 0x22;
-	sprite->data[1] = x;
-	sprite->data[2] = x - 8;
-	sprite->data[3] = y;
+	sprite->data[1] = sprite->pos1.x;
+	sprite->data[2] = sprite->pos1.x - 8;
+	sprite->data[3] = sprite->pos1.y;
 	sprite->data[4] = 0x90;
 	sprite->data[5] = 0x20;
 	InitAnimArcTranslation(sprite);
@@ -1426,7 +1429,16 @@ static void sub_80F052C(struct Sprite *sprite)
 
 static void sub_80F0574(struct Sprite *sprite)
 {
-	//to do
+	if (!TranslateAnimVerticalArc(sprite))
+	{
+		if ((sprite->pos1.y + sprite->pos2.y) < 65)
+			return;
+	}
+	
+	sprite->data[0] = 0;
+	sprite->callback = sub_80F018C;
+	gDoingBattleAnim = FALSE;
+	UpdateOamPriorityInAllHealthboxes(1);
 }
 
 static void sub_80F05B4(u8 ballId)

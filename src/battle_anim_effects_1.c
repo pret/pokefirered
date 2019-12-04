@@ -2215,6 +2215,7 @@ const struct SpriteTemplate gTauntFingerSpriteTemplate =	//gUnknown_83E3AC4
     .callback = AnimTauntFinger,
 };
 
+// Functions
 // Animates the falling particles that horizontally wave back and forth.
 // Used by Sleep Powder, Stun Spore, and Poison Powder.
 // arg 0: initial x pixel offset
@@ -2734,7 +2735,7 @@ static void AnimTranslateLinearSingleSineWaveStep(struct Sprite* sprite)
 // arg 4: speedup frame (particles move faster at the end of the animation)
 void AnimMoveTwisterParticle(struct Sprite* sprite)
 {
-    if (IsDoubleBattle() == TRUE)
+	if (!IsContest() && IsDoubleBattle() == TRUE)
         SetAverageBattlerPositions(gBattleAnimTarget, 1, &sprite->pos1.x, &sprite->pos1.y);
 
     sprite->pos1.y += 32;
@@ -2836,11 +2837,6 @@ void sub_80A2F0C(u8 taskId)
     else
     {
         PrepareBattlerSpriteForRotScale(spriteId, ST_OAM_OBJ_BLEND);
-        gTasks[taskId].data[14] = gSprites[spriteId].oam.priority;
-        gSprites[spriteId].oam.priority = GetBattlerSpriteBGPriority(gBattleAnimTarget);
-        spriteId = GetAnimBattlerSpriteId(ANIM_DEF_PARTNER);
-        gTasks[taskId].data[15] = gSprites[spriteId].oam.priority;
-        gSprites[spriteId].oam.priority = GetBattlerSpriteBGPriority(BATTLE_PARTNER(gBattleAnimTarget));
         gTasks[taskId].data[0] = gBattleAnimArgs[0];
         gTasks[taskId].data[1] = gBattleAnimArgs[1];
         gTasks[taskId].data[11] = 0x100;
@@ -2874,12 +2870,8 @@ static void AnimTask_DuplicateAndShrinkToPosStep2(u8 taskId)
         {
             u8 spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
             ResetSpriteRotScale(spriteId);
-            gSprites[spriteId].pos2.x = 0;
-            gSprites[spriteId].pos2.y = 0;
-            gSprites[spriteId].oam.priority = gTasks[taskId].data[14];
-            spriteId = GetAnimBattlerSpriteId(ANIM_DEF_PARTNER);
-            gSprites[spriteId].oam.priority = gTasks[taskId].data[15];
-            gTasks[taskId].data[0]++;
+            gSprites[spriteId].pos2.y = gSprites[spriteId].pos2.x = 0;
+			gTasks[taskId].data[0]++;
             return;
         }
     }

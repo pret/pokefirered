@@ -210,7 +210,7 @@ struct Sprite
     /*0x2D*/ u8 animLoopCounter;
 
     // general purpose data fields
-    /*0x2E*/ s16 data[8];
+    /*0x2E*/ s16 data[8];	//2e, 30, 32, 34, 36,
 
     /*0x3E*/ u16 inUse:1;               //1
              u16 coordOffsetEnabled:1;  //2

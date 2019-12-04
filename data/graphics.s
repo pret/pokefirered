@@ -1073,10 +1073,10 @@ gBattleInterface_BallDisplayPal:: @ 8D11BA4
 
 @ Originally an array?
 gHealthboxElementsGfxTable:: @ 8D11BC4
-    .incbin "graphics/battle_interface/hpbar.4bpp"
+    .incbin "graphics/battle_interface/hp_bar.4bpp"
     
 gHealthboxElementsGfxTable_ExpBar::
-    .incbin "graphics/battle_interface/expbar.4bpp"    
+    .incbin "graphics/battle_interface/exp_bar.4bpp"
     
 gHealthboxElementsGfxTable_StatusPsn::
     .incbin "graphics/battle_interface/status_psn.4bpp"
@@ -1097,10 +1097,10 @@ gHealthboxElementsGfxTable_Misc::
     .incbin "graphics/battle_interface/misc.4bpp"
 
 gHealthboxElementsGfxTable_HpBarAnim::
-    .incbin "graphics/battle_interface/hpbar_anim.4bpp"
+    .incbin "graphics/battle_interface/hp_bar_anim.4bpp"
 
 gHealthboxElementsGfxTable_MiscFrameEnd::
-    .incbin "graphics/battle_interface/misc_frameend.4bpp"
+    .incbin "graphics/battle_interface/misc_frame_end.4bpp"
 
 gUnknown_8D12404::
 	.incbin "graphics/battle_interface/ball_display.4bpp"
@@ -13639,15 +13639,15 @@ gFile_graphics_battle_anims_sprites_262_palette:: @ 8E7A858
 
 	.align 2
 gContestNextTurnGfx:: @ 8E7A880
-	.incbin "graphics/contest/nextturn.4bpp.lz"
+	.incbin "graphics/contest/next_turn.4bpp.lz"
 
 	.align 2
 gFile_graphics_contest_nextturn_numbers:: @ 8E7A8DC
-	.incbin "graphics/contest/nextturn_numbers.4bpp"
+	.incbin "graphics/contest/next_turn_numbers.4bpp"
 
 	.align 2
 gFile_graphics_contest_nextturn_random:: @ 8E7A95C
-	.incbin "graphics/contest/nextturn_random.4bpp"
+	.incbin "graphics/contest/next_turn_random.4bpp"
 
 	.align 2
 gFile_graphics_battle_anims_sprites_264_sheet:: @ 8E7A97C
@@ -13679,7 +13679,7 @@ gFile_graphics_contest_applause_meter:: @ 8E7AB38
 
 	.align 2
 gFile_graphics_contest_nextturn:: @ 8E7ABB8
-	.incbin "graphics/contest/nextturn.gbapal"
+	.incbin "graphics/contest/next_turn.gbapal"
 
 	.align 2
 gFile_graphics_battle_anims_sprites_272_sheet:: @ 8E7ABD8
@@ -16261,13 +16261,13 @@ gUnknown_8E9B3D0:: @ 8E9B3D0
 	.incbin "graphics/interface/trainer_memo_pal3.gbapal"
 
 gUnknown_8E9B3F0:: @ 8E9B3F0
-	.incbin "graphics/interface/summary_expbar.4bpp.lz"
+	.incbin "graphics/interface/summary_exp_bar.4bpp.lz"
 
 gUnknown_8E9B4B8:: @ 8E9B4B8
-	.incbin "graphics/interface/summary_hpbar.4bpp.lz"
+	.incbin "graphics/interface/summary_hp_bar.4bpp.lz"
 
 gUnknown_8E9B578:: @ 8E9B578
-	.incbin "graphics/interface/summary_expbar.gbapal" @ hp bar uses this too
+	.incbin "graphics/interface/summary_exp_bar.gbapal" @ hp bar uses this too
 
 gUnknown_8E9B598:: @ 8E9B598
 	.incbin "graphics/interface/trainer_memo.bin.lz"

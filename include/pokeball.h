@@ -20,6 +20,8 @@ enum
     POKEBALL_COUNT
 };
 
+extern const struct SpriteTemplate gBallSpriteTemplates[];
+
 #define POKEBALL_PLAYER_SENDOUT     0xFF
 #define POKEBALL_OPPONENT_SENDOUT   0xFE
 

@@ -40,7 +40,7 @@
 #define LOHALF(n) ((n) & 0xFFFF)
 
 // IWRAM
-EWRAM_DATA u16 gUnknown_3005424 = 0;
+EWRAM_DATA int gUnknown_3005424 = 0;
 EWRAM_DATA u16 gUnknown_3005428 = 0;
 EWRAM_DATA u16 gUnknown_300542C = 0;
 
@@ -104,8 +104,6 @@ static void PremierBallOpenParticleAnimation(u8);
 static void sub_80F1B3C(struct Sprite *);
 
 // Data
-extern const struct SpriteTemplate gBallSpriteTemplates[];	//for now
-
 struct BallCaptureSuccessStarData
 {
     s8 xOffset;
@@ -910,8 +908,8 @@ static void sub_80EFA0C(struct Sprite *sprite)
         PrepareBattlerSpriteForRotScale(spriteId, ST_OAM_OBJ_NORMAL);
         gTasks[taskId].data[10] = 256;
         gUnknown_3005424 = 28;
-        gUnknown_300542C = (gSprites[spriteId].pos2.y + gSprites[spriteId].pos1.y) - (sprite->pos2.y + sprite->pos1.y);
-        gUnknown_3005428 = (gUnknown_300542C * 256) / 28;
+        gUnknown_300542C = (gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y) - (sprite->pos1.y + sprite->pos2.y);
+        gUnknown_3005428 = (u32)(gUnknown_300542C * 256) / 28;
         gTasks[taskId].data[2] = gUnknown_3005428;
         gTasks[taskId].data[0]++;
         break;
@@ -1876,20 +1874,11 @@ static void DestroyBallOpenAnimationParticle(struct Sprite *sprite)
         gBattleSpritesDataPtr->animationData->field_A--;
         if (gBattleSpritesDataPtr->animationData->field_A == 0)
         {
-            for (i = 0; i < POKEBALL_COUNT; i++)
-            {
-                if (FuncIsActiveTask(gBallParticleAnimationFuncs[i]) == TRUE)
-                    break;
-            }
-
-            if (i == POKEBALL_COUNT)
-            {
-                for (j = 0; j < POKEBALL_COUNT; j++)
-                {
-                    FreeSpriteTilesByTag(gBallParticleSpritesheets[j].tag);
-                    FreeSpritePaletteByTag(gBallParticlePalettes[j].tag);
-                }
-            }
+            for (j = 0; j < POKEBALL_COUNT; j++)
+			{
+				FreeSpriteTilesByTag(gBallParticleSpritesheets[j].tag);
+				FreeSpritePaletteByTag(gBallParticlePalettes[j].tag);
+			}
 
             DestroySprite(sprite);
         }

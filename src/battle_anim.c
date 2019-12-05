@@ -23,8 +23,8 @@
 
 extern const u16 gMovesWithQuietBGM[];
 extern const u8 *const gBattleAnims_Moves[];
-extern const struct CompressedSpriteSheet gUnknown_8399388[];
-extern const struct CompressedSpritePalette gUnknown_8399C90[];
+//extern const struct CompressedSpriteSheet gUnknown_8399388[];
+//extern const struct CompressedSpritePalette gUnknown_8399C90[];
 
 // RAM
 EWRAM_DATA static const u8 *sBattleAnimScriptPtr = NULL;
@@ -1958,9 +1958,14 @@ static void ScriptCmd_loadspritegfx(void)
 
     sBattleAnimScriptPtr++;
     index = T1_READ_16(sBattleAnimScriptPtr);
-    LoadCompressedSpriteSheetUsingHeap(&gUnknown_8399388[GET_TRUE_SPRITE_INDEX(index)]);
-    LoadCompressedSpritePaletteUsingHeap(&gUnknown_8399C90[GET_TRUE_SPRITE_INDEX(index)]);
-    sBattleAnimScriptPtr += 2;
+    
+	LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[index]);
+	LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[index]);
+	
+	//LoadCompressedSpriteSheetUsingHeap(&gUnknown_8399388[GET_TRUE_SPRITE_INDEX(index)]);
+    //LoadCompressedSpritePaletteUsingHeap(&gUnknown_8399C90[GET_TRUE_SPRITE_INDEX(index)]);
+    
+	sBattleAnimScriptPtr += 2;
     AddSpriteIndex(GET_TRUE_SPRITE_INDEX(index));
     gAnimFramesToWait = 1;
     gAnimScriptCallback = WaitAnimFrameCount;
@@ -2193,8 +2198,8 @@ static void ScriptCmd_monbg(void)
         spriteId = gBattlerSpriteIds[battlerId];
         taskId = CreateTask(task_pA_ma0A_obj_to_bg_pal, 10);
         gTasks[taskId].data[t1_MONBG_BATTLER] = spriteId;
-        gTasks[taskId].data[1] = gSprites[spriteId].pos2.x + gSprites[spriteId].pos1.x;
-        gTasks[taskId].data[2] = gSprites[spriteId].pos2.y + gSprites[spriteId].pos1.y;
+        gTasks[taskId].data[1] = gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x;
+        gTasks[taskId].data[2] = gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y;
         if (!toBG_2)
         {
             gTasks[taskId].data[3] = gBattle_BG1_X;
@@ -2224,8 +2229,8 @@ static void ScriptCmd_monbg(void)
         spriteId = gBattlerSpriteIds[battlerId];
         taskId = CreateTask(task_pA_ma0A_obj_to_bg_pal, 10);
         gTasks[taskId].data[t1_MONBG_BATTLER] = spriteId;
-        gTasks[taskId].data[1] = gSprites[spriteId].pos2.x + gSprites[spriteId].pos1.x;
-        gTasks[taskId].data[2] = gSprites[spriteId].pos2.y + gSprites[spriteId].pos1.y;
+        gTasks[taskId].data[1] = gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x;
+        gTasks[taskId].data[2] = gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y;
         if (!toBG_2)
         {
             gTasks[taskId].data[3] = gBattle_BG1_X;
@@ -2247,10 +2252,12 @@ static void ScriptCmd_monbg(void)
 
 bool8 IsBattlerSpriteVisible(u8 battlerId)
 {
-    if (!IsBattlerSpritePresent(battlerId))
+    u8 battler = battlerId;
+	
+	if (!IsBattlerSpritePresent(battler))
         return FALSE;
 
-    if (!gBattleSpritesDataPtr->battlerData[battlerId].invisible || !gSprites[gBattlerSpriteIds[battlerId]].invisible)
+    if (!gBattleSpritesDataPtr->battlerData[battler].invisible || !gSprites[gBattlerSpriteIds[battler]].invisible)
         return TRUE;
 
     return FALSE;
@@ -2267,7 +2274,7 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2)
     {
 
 		RequestDma3Fill(0, (void*)(BG_SCREEN_ADDR(8)), 0x2000, 1);
-		RequestDma3Fill(0xFF, (void*)(BG_SCREEN_ADDR(28)), 0x1000, 0);
+		RequestDma3Fill(0, (void*)(BG_SCREEN_ADDR(28)), 0x1000, 1);
         sub_80752A0(&animBg);
         CpuFill16(toBG_2, animBg.bgTiles, 0x1000);
         CpuFill16(toBG_2, animBg.bgTilemap, 0x800);
@@ -2295,7 +2302,7 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2)
         RequestDma3Fill(0, (void*)(BG_SCREEN_ADDR(30)), 0x1000, 1);
         sub_80752C8(&animBg, 2);
         CpuFill16(0, animBg.bgTiles + 0x1000, 0x1000);
-        CpuFill16(0, animBg.bgTilemap + 0x400, 0x400);
+        CpuFill16(0, animBg.bgTilemap + 0x400, 0x800);
         SetAnimBgAttribute(2, BG_ANIM_PRIORITY, 2);
         SetAnimBgAttribute(2, BG_ANIM_SCREEN_SIZE, 1);
         SetAnimBgAttribute(2, BG_ANIM_AREA_OVERFLOW_MODE, 0);

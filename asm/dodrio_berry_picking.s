@@ -503,7 +503,7 @@ _08150C04: .4byte sub_81516DC
 sub_8150C08: @ 8150C08
 	push {lr}
 	bl sub_8151B54
-	ldr r1, _08150C34 @ =gUnknown_8475578
+	ldr r1, _08150C34 @ =sUnknown_8475578
 	ldr r0, _08150C38 @ =gUnknown_203F3E0
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x18]
@@ -521,7 +521,7 @@ _08150C2C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08150C34: .4byte gUnknown_8475578
+_08150C34: .4byte sUnknown_8475578
 _08150C38: .4byte gUnknown_203F3E0
 _08150C3C: .4byte gUnknown_3002044
 	thumb_func_end sub_8150C08
@@ -530,7 +530,7 @@ _08150C3C: .4byte gUnknown_3002044
 sub_8150C40: @ 8150C40
 	push {lr}
 	bl sub_8151C5C
-	ldr r1, _08150C6C @ =gUnknown_84755A8
+	ldr r1, _08150C6C @ =sUnknown_84755A8
 	ldr r0, _08150C70 @ =gUnknown_203F3E0
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x18]
@@ -548,7 +548,7 @@ _08150C64:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08150C6C: .4byte gUnknown_84755A8
+_08150C6C: .4byte sUnknown_84755A8
 _08150C70: .4byte gUnknown_203F3E0
 _08150C74: .4byte gUnknown_3002044
 	thumb_func_end sub_8150C40
@@ -3172,7 +3172,7 @@ sub_81520B4: @ 81520B4
 	ands r0, r1
 	cmp r0, 0
 	bne _08152108
-	ldr r1, _081520EC @ =gUnknown_8475548
+	ldr r1, _081520EC @ =sUnknown_8475548
 	adds r0, r3, 0
 	adds r0, 0x24
 	ldrb r0, [r0]
@@ -3185,7 +3185,7 @@ sub_81520B4: @ 81520B4
 	b _0815210A
 	.align 2, 0
 _081520E8: .4byte gUnknown_203F3E0
-_081520EC: .4byte gUnknown_8475548
+_081520EC: .4byte sUnknown_8475548
 _081520F0:
 	lsls r4, r2, 3
 	adds r1, r4, 0
@@ -3321,7 +3321,7 @@ _081521B0:
 	bcs _08152284
 	adds r7, r3, 0
 _081521E6:
-	ldr r0, _08152250 @ =gUnknown_8471F50
+	ldr r0, _08152250 @ =sUnknown_8471F50
 	add r0, r10
 	ldrb r5, [r0]
 	ldr r1, [r7]
@@ -3372,7 +3372,7 @@ _0815221E:
 	.align 2, 0
 _08152248: .4byte gUnknown_203F3E0
 _0815224C: .4byte 0x000031cc
-_08152250: .4byte gUnknown_8471F50
+_08152250: .4byte sUnknown_8471F50
 _08152254:
 	adds r0, r2, 0x1
 	lsls r0, 24
@@ -3418,7 +3418,7 @@ _0815229C:
 	mov r9, r1
 _081522A0:
 	movs r6, 0xFF
-	ldr r0, _0815235C @ =gUnknown_8471F50
+	ldr r0, _0815235C @ =sUnknown_8471F50
 	add r0, r10
 	ldrb r5, [r0]
 	mov r2, r9
@@ -3448,7 +3448,7 @@ _081522B8:
 	bls _081522DE
 	movs r3, 0x2
 _081522DE:
-	ldr r2, _08152360 @ =gUnknown_847553C
+	ldr r2, _08152360 @ =sUnknown_847553C
 	ldr r0, _08152364 @ =0x000031b4
 	adds r1, r4, r0
 	adds r1, r5
@@ -3512,8 +3512,8 @@ _08152350:
 	.align 2, 0
 _08152354: .4byte 0x000031d4
 _08152358: .4byte gUnknown_203F3E0
-_0815235C: .4byte gUnknown_8471F50
-_08152360: .4byte gUnknown_847553C
+_0815235C: .4byte sUnknown_8471F50
+_08152360: .4byte sUnknown_847553C
 _08152364: .4byte 0x000031b4
 _08152368:
 	adds r0, r3, 0
@@ -3704,7 +3704,7 @@ _081524C6:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bhi _08152524
-	ldr r0, _08152518 @ =gUnknown_8472063
+	ldr r0, _08152518 @ =sUnknown_8472063
 	lsls r1, r4, 1
 	adds r1, r4
 	adds r1, r7, r1
@@ -3736,13 +3736,13 @@ _081524C6:
 	strb r1, [r0]
 	b _0815255A
 	.align 2, 0
-_08152518: .4byte gUnknown_8472063
+_08152518: .4byte sUnknown_8472063
 _0815251C: .4byte 0x000031d4
 _08152520:
 	movs r0, 0x1
 	b _0815255C
 _08152524:
-	ldr r0, _08152564 @ =gUnknown_8472063
+	ldr r0, _08152564 @ =sUnknown_8472063
 	lsls r1, r4, 1
 	adds r1, r4
 	adds r1, r7, r1
@@ -3776,7 +3776,7 @@ _0815255C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08152564: .4byte gUnknown_8472063
+_08152564: .4byte sUnknown_8472063
 _08152568: .4byte 0x000031d4
 	thumb_func_end sub_8152484
 
@@ -3914,7 +3914,7 @@ _0815264C:
 	bls _08152672
 	movs r3, 0x2
 _08152672:
-	ldr r2, _081526B4 @ =gUnknown_847553C
+	ldr r2, _081526B4 @ =sUnknown_847553C
 	ldr r0, _081526B8 @ =0x000032e0
 	adds r1, r4, r0
 	adds r1, r5
@@ -3947,7 +3947,7 @@ _081526AC:
 	bl sub_8152174
 	b _081527AC
 	.align 2, 0
-_081526B4: .4byte gUnknown_847553C
+_081526B4: .4byte sUnknown_847553C
 _081526B8: .4byte 0x000032e0
 _081526BC:
 	cmp r0, 0x2
@@ -4101,7 +4101,7 @@ sub_81527D0: @ 81527D0
 	ldrb r6, [r1]
 	cmp r6, r8
 	bcs _081528C2
-	ldr r0, _0815283C @ =gUnknown_8471F50
+	ldr r0, _0815283C @ =sUnknown_8471F50
 	mov r9, r0
 _081527F0:
 	ldr r0, _08152838 @ =gUnknown_203F3E0
@@ -4141,7 +4141,7 @@ _081527F0:
 	b _0815284C
 	.align 2, 0
 _08152838: .4byte gUnknown_203F3E0
-_0815283C: .4byte gUnknown_8471F50
+_0815283C: .4byte sUnknown_8471F50
 _08152840: .4byte 0x000031a0
 _08152844:
 	adds r0, r6, 0
@@ -4548,7 +4548,7 @@ sub_8152AD8: @ 8152AD8
 	lsls r1, r3, 4
 	subs r1, r3
 	lsls r1, 2
-	ldr r6, _08152B54 @ =gUnknown_8471F50
+	ldr r6, _08152B54 @ =sUnknown_8471F50
 	subs r0, 0x4
 	ldrb r2, [r0]
 	subs r2, 0x1
@@ -4580,7 +4580,7 @@ _08152B4C:
 	b _08152B5E
 	.align 2, 0
 _08152B50: .4byte gUnknown_203F3E0
-_08152B54: .4byte gUnknown_8471F50
+_08152B54: .4byte sUnknown_8471F50
 _08152B58: .4byte 0x000031bf
 _08152B5C:
 	movs r0, 0
@@ -4599,7 +4599,7 @@ sub_8152B64: @ 8152B64
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r0, _08152BCC @ =gUnknown_8475550
+	ldr r0, _08152BCC @ =sUnknown_8475550
 	mov r8, r0
 	ldr r0, _08152BD0 @ =gUnknown_203F3E0
 	ldr r6, [r0]
@@ -4643,7 +4643,7 @@ _08152BBE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08152BCC: .4byte gUnknown_8475550
+_08152BCC: .4byte sUnknown_8475550
 _08152BD0: .4byte gUnknown_203F3E0
 	thumb_func_end sub_8152B64
 
@@ -4651,7 +4651,7 @@ _08152BD0: .4byte gUnknown_203F3E0
 sub_8152BD4: @ 8152BD4
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, _08152BF0 @ =gUnknown_84720FC
+	ldr r3, _08152BF0 @ =sUnknown_84720FC
 	ldr r1, _08152BF4 @ =gUnknown_203F3E0
 	ldr r1, [r1]
 	adds r1, 0x24
@@ -4664,7 +4664,7 @@ sub_8152BD4: @ 8152BD4
 	ldrb r0, [r0]
 	bx lr
 	.align 2, 0
-_08152BF0: .4byte gUnknown_84720FC
+_08152BF0: .4byte sUnknown_84720FC
 _08152BF4: .4byte gUnknown_203F3E0
 	thumb_func_end sub_8152BD4
 
@@ -4684,7 +4684,7 @@ sub_8152BF8: @ 8152BF8
 	subs r2, 0x1
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r3, _08152C7C @ =gUnknown_84720AE
+	ldr r3, _08152C7C @ =sUnknown_84720AE
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r0, r2, 4
@@ -4701,7 +4701,7 @@ sub_8152BF8: @ 8152BF8
 	ldrb r1, [r1]
 	mov r8, r1
 	movs r3, 0
-	ldr r1, _08152C80 @ =gUnknown_8472133
+	ldr r1, _08152C80 @ =sUnknown_8472133
 	lsls r0, r2, 2
 	adds r2, r0, r2
 	adds r0, r2, r1
@@ -4737,8 +4737,8 @@ _08152C60:
 	b _08152C90
 	.align 2, 0
 _08152C78: .4byte gUnknown_203F3E0
-_08152C7C: .4byte gUnknown_84720AE
-_08152C80: .4byte gUnknown_8472133
+_08152C7C: .4byte sUnknown_84720AE
+_08152C80: .4byte sUnknown_8472133
 _08152C84:
 	ldr r0, [r4]
 	adds r0, 0x90
@@ -5432,7 +5432,7 @@ _08153172:
 	movs r3, 0
 	lsls r1, r4, 2
 	ldr r5, _081531B4 @ =gUnknown_203F3E0
-	ldr r2, _081531B8 @ =gUnknown_8475558
+	ldr r2, _081531B8 @ =sUnknown_8475558
 	adds r1, r4
 	lsls r1, 1
 	adds r0, r1
@@ -5456,7 +5456,7 @@ _08153196:
 	bx r0
 	.align 2, 0
 _081531B4: .4byte gUnknown_203F3E0
-_081531B8: .4byte gUnknown_8475558
+_081531B8: .4byte sUnknown_8475558
 	thumb_func_end sub_8153150
 
 	thumb_func_start sub_81531BC
@@ -5806,7 +5806,7 @@ sub_8153424: @ 8153424
 	movs r3, 0
 	ldr r0, _08153490 @ =gUnknown_203F3E0
 	mov r9, r0
-	ldr r2, _08153494 @ =gUnknown_84755D8
+	ldr r2, _08153494 @ =sUnknown_84755D8
 	mov r10, r2
 	ldr r2, [r0]
 	lsls r1, r4, 1
@@ -5851,7 +5851,7 @@ _08153452:
 	b _0815349A
 	.align 2, 0
 _08153490: .4byte gUnknown_203F3E0
-_08153494: .4byte gUnknown_84755D8
+_08153494: .4byte sUnknown_84755D8
 _08153498:
 	movs r0, 0
 _0815349A:
@@ -6393,7 +6393,7 @@ _08153858:
 	beq _081538B0
 	b _081538CA
 _08153862:
-	ldr r0, _08153878 @ =gUnknown_84755E0
+	ldr r0, _08153878 @ =sUnknown_84755E0
 	bl AddWindow
 	strh r0, [r4, 0x2]
 	lsls r0, 24
@@ -6403,7 +6403,7 @@ _08153862:
 	movs r1, 0x3
 	b _0815389E
 	.align 2, 0
-_08153878: .4byte gUnknown_84755E0
+_08153878: .4byte sUnknown_84755E0
 _0815387C:
 	bl IsDma3ManagerBusyWithBgCopy
 	lsls r0, 24
@@ -6482,7 +6482,7 @@ sub_81538D0: @ 81538D0
 	adds r0, r7, 0
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r0, _081539DC @ =gUnknown_84755E8
+	ldr r0, _081539DC @ =sUnknown_84755E8
 	ldr r2, [r0]
 	movs r0, 0x1
 	str r0, [sp]
@@ -6507,7 +6507,7 @@ _08153946:
 	ldr r0, [sp, 0x2C]
 	ldm r0!, {r1}
 	str r0, [sp, 0x2C]
-	ldr r0, _081539E0 @ =gUnknown_84755F8
+	ldr r0, _081539E0 @ =sUnknown_84755F8
 	adds r0, r4, r0
 	ldrb r3, [r0]
 	mov r0, r8
@@ -6519,12 +6519,12 @@ _08153946:
 	negs r2, r2
 	bl GetStringWidth
 	adds r5, r0, 0
-	ldr r1, _081539DC @ =gUnknown_84755E8
+	ldr r1, _081539DC @ =sUnknown_84755E8
 	adds r6, r4, 0x1
 	lsls r0, r6, 2
 	adds r0, r1
 	ldr r2, [r0]
-	ldr r0, _081539E4 @ =gUnknown_84755FC
+	ldr r0, _081539E4 @ =sUnknown_84755FC
 	lsls r4, 1
 	adds r0, r4, r0
 	ldrb r0, [r0]
@@ -6541,7 +6541,7 @@ _08153946:
 	subs r3, r5
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r0, _081539E8 @ =gUnknown_8475602
+	ldr r0, _081539E8 @ =sUnknown_8475602
 	adds r4, r0
 	ldrb r0, [r4]
 	str r0, [sp]
@@ -6571,10 +6571,10 @@ _081539CC: .4byte gSaveBlock2Ptr
 _081539D0: .4byte 0x00000b14
 _081539D4: .4byte 0x00000b16
 _081539D8: .4byte 0x0000021d
-_081539DC: .4byte gUnknown_84755E8
-_081539E0: .4byte gUnknown_84755F8
-_081539E4: .4byte gUnknown_84755FC
-_081539E8: .4byte gUnknown_8475602
+_081539DC: .4byte sUnknown_84755E8
+_081539E0: .4byte sUnknown_84755F8
+_081539E4: .4byte sUnknown_84755FC
+_081539E8: .4byte sUnknown_8475602
 	thumb_func_end sub_81538D0
 
 	thumb_func_start sub_81539EC
@@ -6600,7 +6600,7 @@ sub_8153A04: @ 8153A04
 	ldrb r4, [r0]
 	cmp r4, 0x4
 	bhi _08153A32
-	ldr r5, _08153A90 @ =gUnknown_8475648
+	ldr r5, _08153A90 @ =sUnknown_8475648
 _08153A14:
 	lsls r0, r4, 3
 	subs r0, r4
@@ -6635,7 +6635,7 @@ _08153A40:
 	bcs _08153A7E
 	ldr r7, _08153A8C @ =gUnknown_203F3E0
 	lsls r3, r1, 1
-	ldr r6, _08153A98 @ =gUnknown_8475608
+	ldr r6, _08153A98 @ =sUnknown_8475608
 _08153A56:
 	ldr r2, [r7]
 	lsls r0, r4, 1
@@ -6667,9 +6667,9 @@ _08153A7E:
 	bx r0
 	.align 2, 0
 _08153A8C: .4byte gUnknown_203F3E0
-_08153A90: .4byte gUnknown_8475648
+_08153A90: .4byte sUnknown_8475648
 _08153A94: .4byte gLinkPlayers + 8
-_08153A98: .4byte gUnknown_8475608
+_08153A98: .4byte sUnknown_8475608
 	thumb_func_end sub_8153A04
 
 	thumb_func_start sub_8153A9C
@@ -6691,7 +6691,7 @@ sub_8153A9C: @ 8153A9C
 	ldr r0, [r0]
 	str r0, [sp, 0x10]
 	str r1, [sp, 0x14]
-	ldr r0, _08153AF8 @ =gUnknown_8477374
+	ldr r0, _08153AF8 @ =sDodrioBerryPkmnGfx
 	adds r1, r4, 0
 	bl LZ77UnCompWram
 	cmp r4, 0
@@ -6714,7 +6714,7 @@ _08153ADC:
 	.align 2, 0
 _08153AF0: .4byte gUnknown_8478D90
 _08153AF4: .4byte gUnknown_8478D98
-_08153AF8: .4byte gUnknown_8477374
+_08153AF8: .4byte sDodrioBerryPkmnGfx
 	thumb_func_end sub_8153A9C
 
 	thumb_func_start sub_8153AFC
@@ -6741,9 +6741,9 @@ sub_8153AFC: @ 8153AFC
 	mov r0, sp
 	adds r0, 0x1A
 	strh r2, [r0]
-	ldr r0, _08153B88 @ =gUnknown_8478C98
+	ldr r0, _08153B88 @ =sOamData_8478C98
 	str r0, [sp, 0x1C]
-	ldr r0, _08153B8C @ =gUnknown_8478CE0
+	ldr r0, _08153B8C @ =sSpriteAnimTable_8478CE0
 	str r0, [sp, 0x20]
 	str r3, [sp, 0x24]
 	ldr r0, _08153B90 @ =gDummySpriteAffineAnimTable
@@ -6784,8 +6784,8 @@ sub_8153AFC: @ 8153AFC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08153B88: .4byte gUnknown_8478C98
-_08153B8C: .4byte gUnknown_8478CE0
+_08153B88: .4byte sOamData_8478C98
+_08153B8C: .4byte sSpriteAnimTable_8478CE0
 _08153B90: .4byte gDummySpriteAffineAnimTable
 _08153B94: .4byte sub_8153B9C
 _08153B98: .4byte gUnknown_203F3E4
@@ -7167,7 +7167,7 @@ sub_8153E28: @ 8153E28
 	ldr r0, [r0]
 	str r0, [sp, 0x20]
 	str r1, [sp, 0x24]
-	ldr r0, _08153ECC @ =gUnknown_8477198
+	ldr r0, _08153ECC @ =sDodrioBerryStatusGfx
 	adds r1, r6, 0
 	bl LZ77UnCompWram
 	cmp r6, 0
@@ -7231,7 +7231,7 @@ _08153EB8:
 	bx r0
 	.align 2, 0
 _08153EC8: .4byte gUnknown_8478DA0
-_08153ECC: .4byte gUnknown_8477198
+_08153ECC: .4byte sDodrioBerryStatusGfx
 _08153ED0: .4byte gUnknown_8478DA8
 _08153ED4: .4byte gUnknown_203F43C
 	thumb_func_end sub_8153E28
@@ -7563,7 +7563,7 @@ sub_8154128: @ 8154128
 	ldr r0, [r0]
 	str r0, [sp, 0x8]
 	str r1, [sp, 0xC]
-	ldr r0, _08154178 @ =gUnknown_8475968
+	ldr r0, _08154178 @ =sDodrioBerrySpritesGfx
 	adds r1, r4, 0
 	bl LZ77UnCompWram
 	cmp r4, 0
@@ -7586,7 +7586,7 @@ _0815415E:
 	bx r0
 	.align 2, 0
 _08154174: .4byte gUnknown_8478DCC
-_08154178: .4byte gUnknown_8475968
+_08154178: .4byte sDodrioBerrySpritesGfx
 	thumb_func_end sub_8154128
 
 	thumb_func_start sub_815417C
@@ -7639,7 +7639,7 @@ _081541A4:
 	bls _081541A4
 	movs r5, 0
 	ldr r7, _08154218 @ =gUnknown_203F42C
-	ldr r4, _0815421C @ =gUnknown_8478DD4
+	ldr r4, _0815421C @ =sUnknown_8478DD4
 	mov r8, r4
 _081541E4:
 	movs r0, 0x4
@@ -7664,7 +7664,7 @@ _0815420C: .4byte gUnknown_8478DDC
 _08154210: .4byte gUnknown_8478DF4
 _08154214: .4byte gUnknown_203F400
 _08154218: .4byte gUnknown_203F42C
-_0815421C: .4byte gUnknown_8478DD4
+_0815421C: .4byte sUnknown_8478DD4
 _08154220:
 	lsls r0, r5, 1
 	add r0, r8
@@ -7971,7 +7971,7 @@ sub_8154438: @ 8154438
 	ldr r0, [r0]
 	str r0, [sp, 0x20]
 	str r1, [sp, 0x24]
-	ldr r0, _081544E0 @ =gUnknown_847722C
+	ldr r0, _081544E0 @ =sDodrioBerryPlatformGfx
 	adds r1, r6, 0
 	bl LZ77UnCompWram
 	cmp r6, 0
@@ -8034,7 +8034,7 @@ _081544C6:
 	bx r0
 	.align 2, 0
 _081544DC: .4byte gUnknown_8478E18
-_081544E0: .4byte gUnknown_847722C
+_081544E0: .4byte sDodrioBerryPlatformGfx
 _081544E4: .4byte gUnknown_8478E20
 _081544E8: .4byte gUnknown_8478E0E
 _081544EC: .4byte gUnknown_203F3F8
@@ -8777,17 +8777,17 @@ _08154A6E:
 _08154A80: .4byte gUnknown_203F440
 _08154A84: .4byte 0x00003014
 _08154A88:
-	ldr r1, _08154AC0 @ =gUnknown_8478590
+	ldr r1, _08154AC0 @ =sDodrioBerryBgTilemap1
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
 	bl CopyToBgTilemapBuffer
-	ldr r1, _08154AC4 @ =gUnknown_8478A4C
+	ldr r1, _08154AC4 @ =sDodrioBerryBgTilemap2Left
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
 	bl CopyToBgTilemapBuffer
-	ldr r1, _08154AC8 @ =gUnknown_84787FC
+	ldr r1, _08154AC8 @ =sDodrioBerryBgTilemap2Right
 	movs r0, 0x2
 	movs r2, 0
 	movs r3, 0
@@ -8800,9 +8800,9 @@ _08154A88:
 	bl CopyBgTilemapBufferToVram
 	b _08154B08
 	.align 2, 0
-_08154AC0: .4byte gUnknown_8478590
-_08154AC4: .4byte gUnknown_8478A4C
-_08154AC8: .4byte gUnknown_84787FC
+_08154AC0: .4byte sDodrioBerryBgTilemap1
+_08154AC4: .4byte sDodrioBerryBgTilemap2Left
+_08154AC8: .4byte sDodrioBerryBgTilemap2Right
 _08154ACC:
 	movs r0, 0
 	bl ShowBg
@@ -8895,7 +8895,7 @@ _08154B7C:
 	bl sub_81533B4
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r1, _08154CB8 @ =gUnknown_8478E80
+	ldr r1, _08154CB8 @ =sUnknown_8478E80
 	subs r0, r7, 0x1
 	lsls r0, 2
 	adds r0, r1
@@ -9005,7 +9005,7 @@ _08154C4E:
 	mov r3, r8
 	lsls r1, r3, 1
 	add r1, r8
-	ldr r3, _08154CD4 @ =gUnknown_8478E38
+	ldr r3, _08154CD4 @ =sUnknown_8478E38
 	adds r1, r3
 	str r1, [sp]
 	movs r1, 0x1
@@ -9041,14 +9041,14 @@ _08154CAC:
 	adds r1, r0
 	b _08154D1E
 	.align 2, 0
-_08154CB8: .4byte gUnknown_8478E80
+_08154CB8: .4byte sUnknown_8478E80
 _08154CBC: .4byte 0xffffff00
 _08154CC0: .4byte 0x00ffffff
 _08154CC4: .4byte 0xffff00ff
 _08154CC8: .4byte 0x0000ffff
 _08154CCC: .4byte 0x00003008
 _08154CD0: .4byte 0xff00ffff
-_08154CD4: .4byte gUnknown_8478E38
+_08154CD4: .4byte sUnknown_8478E38
 _08154CD8: .4byte gUnknown_203F440
 _08154CDC: .4byte 0x00003014
 _08154CE0:
@@ -9215,7 +9215,7 @@ _08154E1C:
 	bcc _08154DF4
 _08154E22:
 	movs r5, 0
-	ldr r4, _08154F68 @ =gUnknown_841CE1C
+	ldr r4, _08154F68 @ =gText_SpacePoints
 	cmp r5, r7
 	bcs _08154E48
 	add r1, sp, 0x34
@@ -9272,14 +9272,14 @@ _08154E70:
 	ldr r0, [r2]
 	add r0, r10
 	ldrb r0, [r0]
-	ldr r2, _08154F74 @ =gUnknown_8478E94
+	ldr r2, _08154F74 @ =sUnknown_8478E94
 	ldr r3, [sp, 0x68]
 	adds r1, r3, r1
 	ldrb r1, [r1]
 	lsls r1, 2
 	adds r1, r2
 	ldr r2, [r1]
-	ldr r3, _08154F78 @ =gUnknown_8478EBA
+	ldr r3, _08154F78 @ =sUnknown_8478EBA
 	lsls r1, r5, 1
 	adds r1, r3
 	ldrb r6, [r1]
@@ -9309,7 +9309,7 @@ _08154EC8:
 	mov r2, r8
 	lsls r1, r2, 1
 	add r1, r8
-	ldr r2, _08154F7C @ =gUnknown_8478E38
+	ldr r2, _08154F7C @ =sUnknown_8478E38
 	adds r1, r2
 	str r1, [sp]
 	movs r4, 0x1
@@ -9354,7 +9354,7 @@ _08154EC8:
 	str r4, [sp, 0x4]
 	movs r1, 0
 	str r1, [sp, 0x8]
-	ldr r2, _08154F68 @ =gUnknown_841CE1C
+	ldr r2, _08154F68 @ =gText_SpacePoints
 	lsrs r3, 24
 	bl AddTextPrinterParameterized
 	adds r0, r5, 0x1
@@ -9373,12 +9373,12 @@ _08154F52:
 	bx r0
 	.align 2, 0
 _08154F64: .4byte gUnknown_8478F14
-_08154F68: .4byte gUnknown_841CE1C
+_08154F68: .4byte gText_SpacePoints
 _08154F6C: .4byte 0x00003009
 _08154F70: .4byte gUnknown_203F440
-_08154F74: .4byte gUnknown_8478E94
-_08154F78: .4byte gUnknown_8478EBA
-_08154F7C: .4byte gUnknown_8478E38
+_08154F74: .4byte sUnknown_8478E94
+_08154F78: .4byte sUnknown_8478EBA
+_08154F7C: .4byte sUnknown_8478E38
 	thumb_func_end sub_8154D9C
 
 	thumb_func_start sub_8154F80
@@ -9438,7 +9438,7 @@ _08154FEC:
 _08155000: .4byte gUnknown_203F440
 _08155004: .4byte 0x0000301c
 _08155008:
-	ldr r6, _08155050 @ =gUnknown_8475674
+	ldr r6, _08155050 @ =sUnknown_8475674
 	adds r0, r6, 0
 	bl AddWindow
 	ldr r4, _08155054 @ =gUnknown_203F440
@@ -9469,7 +9469,7 @@ _08155008:
 	bl sub_8154868
 	b _08155658
 	.align 2, 0
-_08155050: .4byte gUnknown_8475674
+_08155050: .4byte sUnknown_8475674
 _08155054: .4byte gUnknown_203F440
 _08155058: .4byte 0x00003008
 _0815505C: .4byte 0x00003009
@@ -9488,7 +9488,7 @@ _08155060:
 	ldrb r0, [r0]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r2, _081551B4 @ =gUnknown_841CD03
+	ldr r2, _081551B4 @ =gText_BerryPickingResults
 	mov r8, r2
 	movs r2, 0x1
 	negs r2, r2
@@ -9516,7 +9516,7 @@ _08155060:
 	ldr r0, [r4]
 	add r0, r9
 	ldrb r0, [r0]
-	ldr r2, _081551B8 @ =gUnknown_841CD25
+	ldr r2, _081551B8 @ =gText_10P30P50P50P
 	movs r1, 0x10
 	str r1, [sp]
 	str r6, [sp, 0x4]
@@ -9547,14 +9547,14 @@ _081550EA:
 	ldr r2, _081551B0 @ =0x00003009
 	adds r0, r2
 	ldrb r0, [r0]
-	ldr r1, _081551BC @ =gUnknown_8478EB0
+	ldr r1, _081551BC @ =sUnknown_8478EB0
 	mov r2, r9
 	lsls r4, r2, 1
 	adds r4, r1
 	ldrb r3, [r4]
 	lsls r1, r5, 1
 	adds r1, r5
-	ldr r2, _081551C0 @ =gUnknown_8478E38
+	ldr r2, _081551C0 @ =sUnknown_8478E38
 	adds r1, r2
 	str r1, [sp]
 	movs r5, 0x1
@@ -9569,7 +9569,7 @@ _081550EA:
 	adds r0, 0x1
 	str r0, [sp, 0x88]
 	mov r8, r4
-	ldr r1, _081551C4 @ =gUnknown_8478EA8
+	ldr r1, _081551C4 @ =sUnknown_8478EA8
 	mov r10, r1
 _0815512E:
 	mov r0, r9
@@ -9616,7 +9616,7 @@ _0815512E:
 	lsrs r2, 24
 	mov r1, r8
 	ldrb r3, [r1]
-	ldr r1, _081551CC @ =gUnknown_8478E3B
+	ldr r1, _081551CC @ =sUnknown_8478E38+0x3
 	str r1, [sp]
 	movs r1, 0x1
 	negs r1, r1
@@ -9630,13 +9630,13 @@ _0815512E:
 _081551A8: .4byte gUnknown_203F440
 _081551AC: .4byte 0x00003008
 _081551B0: .4byte 0x00003009
-_081551B4: .4byte gUnknown_841CD03
-_081551B8: .4byte gUnknown_841CD25
-_081551BC: .4byte gUnknown_8478EB0
-_081551C0: .4byte gUnknown_8478E38
-_081551C4: .4byte gUnknown_8478EA8
+_081551B4: .4byte gText_BerryPickingResults
+_081551B8: .4byte gText_10P30P50P50P
+_081551BC: .4byte sUnknown_8478EB0
+_081551C0: .4byte sUnknown_8478E38
+_081551C4: .4byte sUnknown_8478EA8
 _081551C8: .4byte 0x0000270f
-_081551CC: .4byte gUnknown_8478E3B
+_081551CC: .4byte sUnknown_8478E38+0x3
 _081551D0:
 	ldr r0, _0815523C @ =gUnknown_203F440
 	ldr r0, [r0]
@@ -9773,7 +9773,7 @@ _081552DC:
 	ldrb r0, [r0]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r6, _0815533C @ =gUnknown_841CD43
+	ldr r6, _0815533C @ =gText_AnnouncingRankings
 	movs r2, 0x1
 	negs r2, r2
 	movs r0, 0
@@ -9801,7 +9801,7 @@ _081552DC:
 _08155330: .4byte gUnknown_203F440
 _08155334: .4byte 0x00003008
 _08155338: .4byte 0x00003009
-_0815533C: .4byte gUnknown_841CD43
+_0815533C: .4byte gText_AnnouncingRankings
 _08155340:
 	ldr r0, [sp, 0x84]
 	bl sub_8154D9C
@@ -9922,7 +9922,7 @@ _0815542C:
 	adds r0, r4
 	ldrb r0, [r0]
 	bl RemoveWindow
-	ldr r6, _0815547C @ =gUnknown_8475684
+	ldr r6, _0815547C @ =sUnknown_8475684
 	adds r0, r6, 0
 	bl AddWindow
 	ldr r1, [r5]
@@ -9939,7 +9939,7 @@ _0815542C:
 _08155470: .4byte 0x00003014
 _08155474: .4byte gUnknown_203F440
 _08155478: .4byte 0x00003009
-_0815547C: .4byte gUnknown_8475684
+_0815547C: .4byte sUnknown_8475684
 _08155480:
 	ldr r0, _08155558 @ =0x00000101
 	bl PlayNewMapMusic
@@ -9957,7 +9957,7 @@ _08155480:
 	ldrb r0, [r0]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r5, _08155568 @ =gUnknown_841CD58
+	ldr r5, _08155568 @ =gText_AnnouncingPrizes
 	movs r2, 0x1
 	negs r2, r2
 	movs r0, 0
@@ -9993,7 +9993,7 @@ _08155480:
 	movs r0, 0
 	adds r1, r5, 0
 	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
-	ldr r1, _0815556C @ =gUnknown_841CD7A
+	ldr r1, _0815556C @ =gText_FirstPlacePrize
 	add r0, sp, 0xC
 	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	ldr r0, [r4]
@@ -10027,7 +10027,7 @@ _08155480:
 	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
 	cmp r4, 0x2
 	bne _08155574
-	ldr r1, _08155570 @ =gUnknown_841CD9F
+	ldr r1, _08155570 @ =gText_CantHoldAnyMore
 	add r0, sp, 0xC
 	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 	b _08155580
@@ -10036,13 +10036,13 @@ _08155558: .4byte 0x00000101
 _0815555C: .4byte gUnknown_203F440
 _08155560: .4byte 0x00003008
 _08155564: .4byte 0x00003009
-_08155568: .4byte gUnknown_841CD58
-_0815556C: .4byte gUnknown_841CD7A
-_08155570: .4byte gUnknown_841CD9F
+_08155568: .4byte gText_AnnouncingPrizes
+_0815556C: .4byte gText_FirstPlacePrize
+_08155570: .4byte gText_CantHoldAnyMore
 _08155574:
 	cmp r6, 0x1
 	bne _08155580
-	ldr r1, _081555C4 @ =gUnknown_841CDBA
+	ldr r1, _081555C4 @ =gText_FilledStorageSpace
 	add r0, sp, 0xC
 	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 _08155580:
@@ -10079,7 +10079,7 @@ _0815559E:
 	adds r1, r0
 	b _0815565E
 	.align 2, 0
-_081555C4: .4byte gUnknown_841CDBA
+_081555C4: .4byte gText_FilledStorageSpace
 _081555C8: .4byte gUnknown_203F440
 _081555CC: .4byte 0x00003009
 _081555D0: .4byte 0x00003008
@@ -10240,7 +10240,7 @@ _08155716:
 _0815571C:
 	b _081559EC
 _0815571E:
-	ldr r5, _08155788 @ =gUnknown_847568C
+	ldr r5, _08155788 @ =sUnknown_847568C
 	adds r0, r5, 0
 	bl AddWindow
 	mov r2, r10
@@ -10287,7 +10287,7 @@ _0815571E:
 	strb r7, [r0]
 	b _08155A58
 	.align 2, 0
-_08155788: .4byte gUnknown_847568C
+_08155788: .4byte sUnknown_847568C
 _0815578C: .4byte 0x00003008
 _08155790: .4byte 0x00003009
 _08155794: .4byte 0x00003020
@@ -10310,7 +10310,7 @@ _0815579C:
 	ldr r0, [r2]
 	add r0, r8
 	ldrb r0, [r0]
-	ldr r2, _08155854 @ =gUnknown_841CDD7
+	ldr r2, _08155854 @ =gText_WantToPlayAgain
 	movs r1, 0x6
 	str r1, [sp]
 	movs r5, 0xFF
@@ -10376,7 +10376,7 @@ _0815579C:
 	.align 2, 0
 _0815584C: .4byte 0x00003008
 _08155850: .4byte 0x00003009
-_08155854: .4byte gUnknown_841CDD7
+_08155854: .4byte gText_WantToPlayAgain
 _08155858: .4byte gText_Yes
 _0815585C: .4byte gText_No
 _08155860: .4byte gFameCheckerText_ListMenuCursor
@@ -10763,7 +10763,7 @@ _08155B74:
 	beq _08155BEC
 	b _08155C18
 _08155B7A:
-	ldr r4, _08155B9C @ =gUnknown_84756A4
+	ldr r4, _08155B9C @ =sUnknown_84756A4
 	adds r0, r4, 0
 	bl AddWindow
 	ldr r1, [r5]
@@ -10778,7 +10778,7 @@ _08155B7A:
 	bl sub_8154868
 	b _08155C08
 	.align 2, 0
-_08155B9C: .4byte gUnknown_84756A4
+_08155B9C: .4byte sUnknown_84756A4
 _08155BA0: .4byte 0x00003008
 _08155BA4:
 	ldr r4, _08155BE0 @ =0x00003008
@@ -10789,7 +10789,7 @@ _08155BA4:
 	ldr r0, [r5]
 	adds r0, r4
 	ldrb r0, [r0]
-	ldr r2, _08155BE4 @ =gUnknown_841CE24
+	ldr r2, _08155BE4 @ =gText_CommunicationStandby3
 	movs r1, 0x6
 	str r1, [sp]
 	movs r1, 0xFF
@@ -10810,7 +10810,7 @@ _08155BA4:
 	b _08155C0C
 	.align 2, 0
 _08155BE0: .4byte 0x00003008
-_08155BE4: .4byte gUnknown_841CE24
+_08155BE4: .4byte gText_CommunicationStandby3
 _08155BE8: .4byte 0x00003014
 _08155BEC:
 	bl IsDma3ManagerBusyWithBgCopy
@@ -10916,7 +10916,7 @@ _08155CA8:
 	beq _08155D7C
 	b _08155D9C
 _08155CB2:
-	ldr r4, _08155CF8 @ =gUnknown_847569C
+	ldr r4, _08155CF8 @ =sUnknown_847569C
 	adds r0, r4, 0
 	bl AddWindow
 	ldr r1, [r6]
@@ -10948,7 +10948,7 @@ _08155CB2:
 	strb r2, [r0]
 	b _08155DE2
 	.align 2, 0
-_08155CF8: .4byte gUnknown_847569C
+_08155CF8: .4byte sUnknown_847569C
 _08155CFC: .4byte 0x00003008
 _08155D00: .4byte 0x0000301c
 _08155D04: .4byte 0x00003020
@@ -10961,7 +10961,7 @@ _08155D08:
 	ldr r0, [r6]
 	adds r0, r4
 	ldrb r0, [r0]
-	ldr r2, _08155D48 @ =gUnknown_841CDEB
+	ldr r2, _08155D48 @ =gText_SomeoneDroppedOut
 	movs r1, 0x6
 	str r1, [sp]
 	movs r1, 0xFF
@@ -10982,7 +10982,7 @@ _08155D08:
 	b _08155D70
 	.align 2, 0
 _08155D44: .4byte 0x00003008
-_08155D48: .4byte gUnknown_841CDEB
+_08155D48: .4byte gText_SomeoneDroppedOut
 _08155D4C: .4byte 0x00003014
 _08155D50:
 	bl IsDma3ManagerBusyWithBgCopy
@@ -11240,7 +11240,7 @@ _08155EC6:
 	bl SetGpuReg
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
-	ldr r1, _08155FD8 @ =gUnknown_847565C
+	ldr r1, _08155FD8 @ =sUnknown_847565C
 	movs r0, 0
 	movs r2, 0x4
 	bl InitBgsFromTemplates
@@ -11307,7 +11307,7 @@ _08155EC6:
 	.align 2, 0
 _08155FD0: .4byte 0x040000d4
 _08155FD4: .4byte 0x81000800
-_08155FD8: .4byte gUnknown_847565C
+_08155FD8: .4byte sUnknown_847565C
 _08155FDC: .4byte gUnknown_203F440
 	thumb_func_end sub_8155EA0
 
@@ -11340,26 +11340,26 @@ _08156008:
 	.4byte _0815605C
 	.4byte _0815606A
 _08156020:
-	ldr r0, _0815602C @ =gUnknown_84758A8
+	ldr r0, _0815602C @ =sDodrioBerryBgPal1
 	movs r1, 0
 	movs r2, 0x40
 	bl LoadPalette
 	b _08156082
 	.align 2, 0
-_0815602C: .4byte gUnknown_84758A8
+_0815602C: .4byte sDodrioBerryBgPal1
 _08156030:
 	bl ResetTempTileDataBuffers
 	b _08156082
 _08156036:
-	ldr r1, _08156040 @ =gUnknown_8475B3C
+	ldr r1, _08156040 @ =sDodrioBerryBgGfx1
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x3
 	b _0815604C
 	.align 2, 0
-_08156040: .4byte gUnknown_8475B3C
+_08156040: .4byte sDodrioBerryBgGfx1
 _08156044:
-	ldr r1, _08156058 @ =gUnknown_84763CC
+	ldr r1, _08156058 @ =sDodrioBerryBgGfx2
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x1
@@ -11369,7 +11369,7 @@ _0815604C:
 	bl DecompressAndCopyTileDataToVram
 	b _08156082
 	.align 2, 0
-_08156058: .4byte gUnknown_84763CC
+_08156058: .4byte sDodrioBerryBgGfx2
 _0815605C:
 	bl FreeTempTileDataBuffersIfPossible
 	lsls r0, 24

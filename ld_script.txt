@@ -553,18 +553,19 @@ SECTIONS {
         src/braille_text.o(.rodata);
         src/text_window_graphics.o(.rodata);
         src/quest_log_8150454.o(.rodata);
-        data/data_8471F00.o(.rodata);
+        data/berry_powder.o(.rodata);
+        src/dodrio_berry_picking.o(.rodata);
         src/battle_controller_pokedude.o(.rodata);
         src/teachy_tv.o(.rodata);
         src/unk_815C980.o(.rodata);
-        data/data_8471F00.o(.rodata.8479668);
+        data/data_8479668.o(.rodata);
         src/ss_anne.o(.rodata);
         src/cereader_tool.o(.rodata);
         src/renewable_hidden_items.o(.rodata);
         src/trainer_tower.o(.rodata);
         src/unk_815F138.o(.rodata);
         src/berry_fix_program.o(.rodata);
-        data/data_8471F00.o(.rodata.after_trainer_tower);
+        data/data_8479668.o(.rodata.after_trainer_tower);
 
         /* These should not be moved to C files */
         src/mystery_event_msg.o(.rodata);

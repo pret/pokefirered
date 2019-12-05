@@ -2061,7 +2061,7 @@ const union AffineAnimCmd gMetronomeFingerAffineAnimCmds2[] =
     AFFINEANIMCMD_FRAME(0x0, 0x0, 4, 11),
     AFFINEANIMCMD_FRAME(0x0, 0x0, -4, 11),
     AFFINEANIMCMD_LOOP(2),
-    AFFINEANIMCMD_FRAME(-0x1D, -0x1D, 0, 8),
+    AFFINEANIMCMD_FRAME(-0x1E, -0x1E, 0, 8),
     AFFINEANIMCMD_END,
 };
 
